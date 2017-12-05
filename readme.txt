@@ -7,14 +7,12 @@ Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap.
 
 * Simple custom CSS and JS core files
 * 100% Responsive & Mobile Ready
-* Featured Slideshow Support
+* Prepare some generic plug-ins in advance
 * Support Chinese and English
 * Core style sheet compatible with Bootstrap 3.x (Optimized reference to Bootstrap 4.x)
 * Provides a common web page components and layouts
-* 500+ Icons in Font Awesome (Include Social Icon)
 * Standard Code
 * W3C Standard Support
-* The MIT license. :) Use it to make something cool.
 
 
 == Credits ==
