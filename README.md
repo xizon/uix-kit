@@ -22,8 +22,6 @@ Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap.
 * 500+ Icons in Font Awesome (Include Social Icon)
 * Standard Code
 * W3C Standard Support
-* The MIT license. :) Use it to make something cool.
-
 
 
 ### How does it work?
