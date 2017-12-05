@@ -25,39 +25,11 @@ Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap.
 * The MIT license. :) Use it to make something cool.
 
 
-### 1\. Custom Core Files
-
-You can customize these files to meet the different needs of the site you want :-)
-
-The `_demo/` folder can be deleted.
-
-#### CSS:
-
-*   `assets/css/style.css`
-*   `assets/css/rtl/style.rtl.css`
-*   `assets/css/old-ie.css`
-*   `assets/css/flexslider-custom.css`
-*   `assets/css/jquery.sidr.light.css`
-*   `assets/css/rtl/jquery.sidr.light.rtl.css`
-
-#### Javascript:
-
-*   `assets/js/script.js`
-*   `assets/js/min/script.min.js` (if it exists)
-
-#### Images:
-
-*   `assets/images/*`
-
-### 2\. PSD Grid Templates
-
-You can download the corresponding .PSD grid files based on Bootstrap 3.x from the `_grid` folder.
-
-*   `_grid/bootstrap3_1170_grid_web.psd` (Default Container: 1170px)
-*   `_grid/bootstrap3_1278_grid_web.psd` (XL Container: 1278px)
-*   `_grid/bootstrap3_1410_grid_web.psd` (XXL Container: 1410px)
 
 ### How does it work?
+
+#### 1\. HTML Structure
+
 ```html
 
 <!DOCTYPE html>
@@ -190,10 +162,39 @@ You can download the corresponding .PSD grid files based on Bootstrap 3.x from t
 
 
 
-
 ```
 
+#### 2)\. Custom Core Files
 
+You can customize these files to meet the different needs of the site you want :-)
+
+The `_demo/` folder can be deleted.
+
+##### CSS:
+
+*   `assets/css/style.css`
+*   `assets/css/rtl/style.rtl.css`
+*   `assets/css/old-ie.css`
+*   `assets/css/flexslider-custom.css`
+*   `assets/css/jquery.sidr.light.css`
+*   `assets/css/rtl/jquery.sidr.light.rtl.css`
+
+##### Javascript:
+
+*   `assets/js/script.js`
+*   `assets/js/min/script.min.js` (if it exists)
+
+##### Images:
+
+*   `assets/images/*`
+
+#### 3)\. PSD Grid Templates
+
+You can download the corresponding .PSD grid files based on Bootstrap 3.x from the `_grid` folder.
+
+*   `_grid/bootstrap3_1170_grid_web.psd` (Default Container: 1170px)
+*   `_grid/bootstrap3_1278_grid_web.psd` (XL Container: 1278px)
+*   `_grid/bootstrap3_1410_grid_web.psd` (XXL Container: 1410px)
 
 
 ### Credits
