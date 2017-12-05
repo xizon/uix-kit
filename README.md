@@ -26,7 +26,11 @@ Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap.
 
 ### How does it work?
 
+<<<<<<< HEAD
 #### 1)\. HTML Structure
+=======
+#### 1\. HTML Structure
+>>>>>>> e4d8f6687c52ce180432738e0133178f2e09c815
 
 ```html
 
