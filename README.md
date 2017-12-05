@@ -25,7 +25,12 @@ Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap.
 * The MIT license. :) Use it to make something cool.
 
 
-###How does it work?
+### Demo
+
+[Live Demo](http://htmlpreview.github.io/?https://github.com/xizon/uix-kit/blob/master/index.html)
+
+
+### How does it work?
 ```html
 
 <!DOCTYPE html>
