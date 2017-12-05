@@ -224,8 +224,3 @@ All photos uploaded to the site are released under Creative Commons - CC0 and do
 
 * First release.
 
-
-### Donations
-Donations would be more than welcome :)
-
-[![Donate](https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PYZLU7UZNQ6CE)
