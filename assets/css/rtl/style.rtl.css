@@ -1,0 +1,481 @@
+/*
+	Theme Name: ShadowerPro
+	
+	Adding support for language written in a Right To Left (RTL) direction is easy -
+	it's just a matter of overwriting all the horizontal positioning attributes
+	of your CSS stylesheet in a separate stylesheet file named rtl.css.
+	
+	http://codex.wordpress.org/Right_to_Left_Language_Support
+	
+	
+	---------------------------
+	TABLE OF CONTENTS
+	---------------------------
+	
+	1. Basic
+	2. Content & Sidebar           
+	3. Comments
+	4. FlexSlider
+    5. Basic Layout Styles    
+    6. Navigation Area  
+    7. Author Card   
+    8. Comments 
+    9. Search   
+    10. Form Elements
+    11. Portfolio 
+    12. Header Area   
+    13. Filterable Navigation   
+    
+
+*/
+
+
+@import "bootstrap.rtl.min.css";
+@import "jquery.sidr.light.rtl.css";
+
+
+/* ====================================================== 
+   1. Basic                               
+/* ====================================================== */
+body {
+    direction: rtl;
+    unicode-bidi: embed;
+}
+
+caption,
+th,
+td {
+    text-align: right;
+}
+
+ul.list-normal,
+ol.list-normal,
+.list-normal ul,
+.list-normal ol {
+    padding-left: auto;
+    padding-right: 0.875rem;
+	
+}
+
+.table-normal table th,
+table.table-normal th {
+    text-align: right;
+}
+
+
+blockquote {
+	border-left-width: 1px;
+    border-right-width: 5px;
+    border-left-color: #F8F8F8;
+	border-right-color: #EC5E79;
+}
+
+blockquote:before {
+	margin-right: auto;
+    margin-left: 0.21875rem;
+	
+}
+
+
+
+
+/* ====================================================== 
+   2. Content & Sidebar                               
+/* ====================================================== */
+.uix-portfolio-widget .uix-portfolio-recent-item .item-thumb {
+    float: right;
+    margin-right: auto;
+    margin-left: 0.875rem;
+    text-align: right;
+}
+
+.uix-portfolio-widget .uix-portfolio-recent-item .item-info {
+    float: right;
+}
+
+.sidebar-container {
+	padding-left: auto;
+	padding-right: 2.1875rem;
+}
+
+.widget_calendar caption {
+    text-align: right;
+}
+
+.widget_calendar #next {
+    text-align: left;
+}
+
+.sidebar-container .widget-title:after {
+	margin-left: auto;
+	margin-right: 0.4375rem;
+}
+
+.post-img-list-box li .item-thumb {
+    float: right;
+	margin-right: auto;
+    margin-left: 0.875rem;
+}
+
+
+.post-img-list-box li .item-info {
+    float: right;
+}
+
+
+.link-list ul {
+	margin-left: auto;
+	margin-right: 0.875rem;
+}
+
+.link-list li > .cat-item-count {
+	right: auto;
+    left: 0;
+}
+
+
+.link-list li a:before {
+	margin-right: auto;
+    margin-left: 0.7109375rem;
+}
+
+
+
+/* ====================================================== 
+   3. Comments                            
+/* ====================================================== */
+.comment-avatar {
+    float: right;
+    margin: 0 0 0 1.3125rem;
+}
+
+/* ====================================================== 
+   4. FlexSlider                            
+/* ====================================================== */
+.flexslider,
+.custom-theme-flexslider {
+    direction: ltr !important;
+}
+
+
+/* ====================================================== 
+   5. Basic Layout Styles                             
+/* ====================================================== */
+.fl {
+    float: right;
+}
+
+.fr {
+    float: left;
+}
+
+.t-r {
+    text-align: left;
+}
+
+.t-l {
+    text-align: right;
+}
+ 
+/* ====================================================== 
+   6. Navigation Area                         
+/* ====================================================== */
+
+.menu-wrapper {
+	float: left;
+	
+}
+
+ul.menu-main {
+    float: right;
+}
+
+
+ul.menu-main > li {
+	margin-right: auto;
+    margin-left: 27px;
+}
+
+ul.menu-main > li:not(.multi-column) > ul ul {
+	margin-left: auto;
+	margin-right: -3px;
+}
+
+ul.menu-main > li > ul:before {
+	left: auto;
+	right: 0;
+}
+
+ul.menu-main > li > ul:after {
+	left: auto;
+	right: 3.5rem;
+	margin-left: auto;
+	margin-right: -2.5px;
+}
+
+
+ul.menu-main > li li {
+    padding-left: auto;
+	padding-right: 0.875rem;
+}
+
+
+ul.menu-main > li ul li {
+    padding-left: auto;
+	padding-right: 2.034375rem;
+}
+
+/* Dropdown */
+ul.menu-main ul.sub-menu {
+	left: auto;
+	right: 0;
+}
+
+
+ul.menu-main > li:not(.multi-column) > ul ul {
+	left: auto;
+	right: 100%;
+}
+
+
+
+/* Multi-column */
+
+li.multi-column > ul li {
+    padding-left: auto !important;
+	padding-right: 1.159375rem !important;
+	
+}
+
+
+/* Dropdown Arrow */
+.nav-arrow {
+     right: auto;
+	 left: 0.284375rem;
+}
+
+ul.menu-main ul.sub-menu .nav-arrow {
+	right: auto;
+	left: 1.159375rem;
+}
+
+
+/* Mobile */
+.menu-toggle {
+    right: auto;
+	left: 30px;
+}
+
+.menu-toggle span {
+    left: auto;
+	right: 7px;
+}
+
+.menu-toggle.open span {
+    left: auto;
+	right: 2px;
+}
+
+
+
+/* ====================================================== 
+   7. Author Card   
+/* ====================================================== */
+.author-card-final {
+    text-align: left;
+}
+
+/* ====================================================== 
+   8. Comments 
+/* ====================================================== */
+.comment .comment {
+	margin-left: auto;
+    margin-right: 2.625rem;
+}
+
+.comment-meta .comment-avatar {
+    margin: 0 0 0 1.3125rem;
+	float: right;
+}
+.comment-meta .comment-text {
+	float: right;
+}
+
+.comment-content {
+	margin-left: auto;
+	margin-right: calc(45px + 1.3125rem);
+}
+
+
+.comment-content a.respond {
+	right: auto;
+	left: 0;
+}
+
+
+
+/* ====================================================== 
+   9. Search          
+/* ====================================================== */
+
+.search-box .wp-search-submit {
+	right: auto;
+    left: 0.875rem;
+}
+
+
+/* ====================================================== 
+   10. Form Elements                                     
+/* ====================================================== */
+.controls {
+    text-align: right;
+}
+
+.controls .fa-sort {
+	right: auto
+    left: 0.875rem;
+}
+
+
+.controls label {
+	left: auto;
+    right: 0.875rem;
+}
+
+.controls .req-icon {
+	right: auto;
+	left: 0.721875rem;
+}
+
+.form-merge input + button[type="submit"] {
+	margin-left: auto;
+    margin-right: -4px;
+}
+
+
+@media all and (max-width: 768px) {
+   
+    .form-merge input + button[type="submit"] {
+		margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+
+ /* ====================================================== 
+   11. Portfolio                 
+/* ====================================================== */
+.portfolio-container {
+    margin: -2.1875rem -2.1875rem 0 0;
+	
+}
+
+.portfolio-container .portfolio-item {
+   float: right;
+}
+
+
+.portfolio-item .link-to {
+	left: auto;
+	right: 0;
+}
+
+.portfolio-item .cover:before {
+	left: auto;
+    right: 0;
+}
+
+
+.portfolio-item .title {
+	margin-left: auto;
+	margin-right: 0.875rem;
+}
+
+.portfolio-item .title:before {
+	padding-right: auto;
+	padding-left: 0.875rem;
+}
+
+
+
+.portfolio-item .category {
+	right: auto;
+	left: 0;
+	
+}
+
+
+
+@media screen and (max-width: 1280px) {
+	
+    .portfolio-container {
+        margin: -1.09375rem -1.09375rem 0 0;
+    }
+
+    .portfolio-container .portfolio-item {
+        margin: 1.09375rem 1.09375rem 0 0;
+    }
+
+    .portfolio-container.small .portfolio-item {
+        margin: 1.09375rem 1.09375rem 0 0;
+    }
+
+    .portfolio-container.large .portfolio-item {
+        width: calc(49.99999% - 1.09375rem);
+        margin: 1.09375rem 1.09375rem 0 0;
+    }
+}
+
+@media screen and (max-width: 980px) {
+
+    .portfolio-container {
+        margin: -2.1875rem -2.1875rem 0 0;
+    }
+
+    .portfolio-container .portfolio-item ,
+	.portfolio-container.small .portfolio-item,
+	.portfolio-container.large .portfolio-item {
+        margin: 2.1875rem 2.1875rem 0 0;
+    }
+}
+
+@media screen and (max-width: 736px) {
+
+    .portfolio-container {
+        margin: -1.09375rem -1.09375rem 0 0;
+    }
+
+    .portfolio-container .portfolio-item,
+	.portfolio-container.small .portfolio-item,
+	.portfolio-container.large .portfolio-item {
+        margin: 1.09375rem 1.09375rem 0 0;
+    }
+}
+
+
+/* ====================================================== 
+   12. Header Area            
+/* ====================================================== */
+.header-area {
+    left: auto;
+	right: 0;
+}
+
+.brand {
+	float: right;
+	
+}
+
+/* ====================================================== 
+   13. Filterable Navigation                           
+/* ====================================================== */ 
+.nav-filters ul li:not(:last-child) {
+	margin-right: auto;
+    margin-left: 0.7109375rem;
+}
+.nav-filters ul li:not(:last-child):after {
+    margin-left: auto;
+	margin-right: 0.7109375rem;
+}
+
+

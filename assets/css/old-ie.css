@@ -1,0 +1,33 @@
+/*
+
+	---------------------------
+	Load our IE specific stylesheet for a range of older versions
+	---------------------------
+	
+
+	TABLE OF CONTENTS
+	---------------------------
+	
+	1. Loader
+	2. Modal    
+
+	
+*/
+
+
+/* ====================================================== 
+   1. Loader                               
+/* ====================================================== */
+.loader .spinner-container {
+	display: none;
+}
+
+/* ====================================================== 
+   2. Modal                               
+/* ====================================================== */
+.modal-box.active .content img,
+.modal-box.fullscreen.active .content img {
+	filter: alpha(opacity=100);  
+	-moz-opacity: 1;   
+	opacity: 1; 
+}
