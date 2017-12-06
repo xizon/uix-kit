@@ -493,7 +493,7 @@ h6 {
 
 
 .font-normal {
-	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif, STXihei, "PingFang SC", SimHei, "Microsoft Yahei";
+	font-family: 'Helvetica Neue',Helvetica, STXihei, 'PingFang SC','Hiragino Sans GB','Microsoft YaHei',Arial,sans-serif;
 	font-weight: 400 !important;
 }
 
