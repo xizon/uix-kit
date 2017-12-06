@@ -94,16 +94,15 @@
 		22.4. Meta
 		
 	23. Comments
-	24. Browser UI
+	24. Tabs 
 	25. Style of Irregular Shape
 	26. Author Card
 	27. Plugins 
 	28. Modal 
-	29. Tabs 
-    30. Single Page       
-	31. WordPress Core 
-    32. Themes
-        32.1 White 
+    29. Single Page       
+	30. WordPress Core 
+    31. Themes
+        31.1 White 
 
 	
 	
@@ -3168,45 +3167,46 @@ li.multi-column > ul li .nav-arrow {
 }
 
 
-
-
 /* ====================================================== 
-   24. Browser UI              
+   24. Tabs        
 /* ====================================================== */
-.browser-top-bar {
-    height: 15px;
-    background-color: #e1e1e1;
-    width: 100%;
-    border-top-right-radius: 3px;
-    border-top-left-radius: 3px;
-    position: relative;
+.tabs {
+	-webkit-box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.25);
+	-moz-box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.25);
+	box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.25);	
 }
 
-.browser-url-bar {
-    border-radius: 2px;
-    position: absolute;
-    bottom: 3px;
-    height: 8px;
-    width: 85%;
-    left: 30px;
-    background: #fff;
+.tabs .content {
+	display: none;
+	padding: 1.3125rem;
+	text-align: left;
+}
+.tabs .content.active {
+	display: block;
 }
 
-.browser-dots {
-    width: 25px;
-    position: relative;
-    top: 6px;
-    left: 5px;
-    overflow: hidden;
+.tabs li {
+    list-style: none;
+	float: left;
+	-webkit-box-shadow: inset 1px 0px 0px 0px rgba(230,230,230,1);
+	-moz-box-shadow: inset 1px 0px 0px 0px rgba(230,230,230,1);
+	box-shadow: inset 1px 0px 0px 0px rgba(230,230,230,1);
+	background: #f7f7f7;
 }
 
-.browser-dot {
-    float: left;
-    border-radius: 20px;
-    height: 4px;
-    width: 4px;
-    background: #aaa;
-    margin-left: 2px;
+.tabs ul:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+
+.tabs li a {
+	display: block;
+	text-align: center;
+}
+
+.tabs li.active {
+    background: #eeeeee;
 }
 
 
@@ -3510,50 +3510,9 @@ li.multi-column > ul li .nav-arrow {
 }
 
 
-/* ====================================================== 
-   29. Tabs        
-/* ====================================================== */
-.tabs {
-	-webkit-box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.25);
-	-moz-box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.25);
-	box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.25);	
-}
-
-.tabs .content {
-	display: none;
-	padding: 1.3125rem;
-	text-align: left;
-}
-.tabs .content.active {
-	display: block;
-}
-
-.tabs li {
-    list-style: none;
-	float: left;
-	-webkit-box-shadow: inset 1px 0px 0px 0px rgba(230,230,230,1);
-	-moz-box-shadow: inset 1px 0px 0px 0px rgba(230,230,230,1);
-	box-shadow: inset 1px 0px 0px 0px rgba(230,230,230,1);
-	background: #f7f7f7;
-}
-
-.tabs ul:after {
-	content: '';
-	display: block;
-	clear: both;
-}
-
-.tabs li a {
-	display: block;
-	text-align: center;
-}
-
-.tabs li.active {
-    background: #eeeeee;
-}
 
 /* ====================================================== 
-   30. Single Page        
+   29. Single Page        
 /* ====================================================== */
 
 /* Post edit link */
@@ -3571,7 +3530,7 @@ li.multi-column > ul li .nav-arrow {
 
 
 /* ====================================================== 
-   31. WordPress Core            
+   30. WordPress Core            
 /* ====================================================== */
 .edit-link {
     display: block;
@@ -3766,9 +3725,9 @@ a img.aligncenter {
 
 
 /* ====================================================== 
-   32. Themes    
+   13. Themes    
 /* ====================================================== */
-/*------- 32.1 White  --------*/
+/*------- 31.1 White  --------*/
 
 
 /* Navigation Area  */
