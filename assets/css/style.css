@@ -688,22 +688,22 @@ footer.space-lg {
 
 section.space-none,
 .section.space-none {
-	padding: 0;
+	padding: 0 !important;
 }
 
 section.space-none-top,
 .section.space-none-top {
-    padding-top: 0;
+    padding-top: 0 !important;
 }
 
 section.space-none-bottom,
 .section.space-none-bottom {
-    padding-bottom: 0;
+    padding-bottom: 0 !important;
 }
 
 section.site-google-map,
 .section.site-google-map {
-	padding-top: 0;
+	padding-top: 0 !important;
 }
 
 
