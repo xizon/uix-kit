@@ -1,4 +1,4 @@
-# Uix Kit
+# Uix Kit (0.0.3 Beta)
 
 Created by UIUX Lab [@uiux_lab](https://twitter.com/uiux_lab)
 
@@ -222,7 +222,7 @@ All photos uploaded to the site are released under Creative Commons - CC0 and do
 
 ### Changelog
 
-#### = 1.0.0 (December 5, 2017) =
+#### = 0.0.3 Beta (December 5, 2017) =
 
 * First release.
 
