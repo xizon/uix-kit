@@ -1145,7 +1145,6 @@ ul.menu-main li {
 
 ul.menu-main > li {
     display: inline-block;
-	*display: inline;
     margin-right: 1.6875rem;
 	padding-bottom: 1.421875rem;
 	white-space: nowrap; /* Required*/	
@@ -1277,7 +1276,6 @@ li.multi-column > ul .multi-column-title,
 li.multi-column > ul > li > a {
 	color: #B9B9B9;
 	display: inline-block;
-	*display: inline;
 	padding: 0.4375rem 0 0;
 	cursor: default;
 	padding-top: 0.875rem;
@@ -1295,7 +1293,6 @@ li.multi-column > ul li {
     width: 220px;
     overflow: hidden;
     display: inline-block;
-	*display: inline;
     vertical-align: top;
 	padding-left: 0.75rem !important;
 	
@@ -1548,7 +1545,6 @@ li.multi-column > ul li .nav-arrow {
 
 .footer-main-container ul li {
     display: inline-block;
-    *display: inline;
 	margin: 0.175rem 0.4375rem;
 }
 
@@ -1707,7 +1703,6 @@ li.multi-column > ul li .nav-arrow {
 .social-btn li,
 .social-btn-colourful li {
     display: inline-block;
-    *display: inline;
 	margin: 0.175rem 0.4375rem;
 }
 
@@ -2105,7 +2100,6 @@ li.multi-column > ul li .nav-arrow {
 
 .pagination-container li {
     display: inline-block;
-	*display: inline;
 }
 
 
@@ -2191,7 +2185,6 @@ li.multi-column > ul li .nav-arrow {
 .nav-filters ul li {
     font-style: italic;
 	display: inline-block;
-	*display: inline;
 	-moz-transition: 0.2s linear;
 	-o-transition: 0.2s linear;
 	-webkit-transition: 0.2s linear;
@@ -2990,7 +2983,6 @@ li.multi-column > ul li .nav-arrow {
 
 .entry-meta li {
 	display:inline-block;
-	*display: inline;   
 	margin-bottom: 0.62890625rem;
 }
 
