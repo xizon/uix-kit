@@ -1418,25 +1418,25 @@ li.multi-column > ul li .nav-arrow {
     left: 11px;
 }
 
-.menu-toggle .l2 {
+.menu-toggle span:nth-child(2) {
     top: 14px;
 }
 
-.menu-toggle .l3 {
+.menu-toggle span:nth-child(3) {
     top: 19px;
 }
 
-.menu-toggle.open .l1 {
+.menu-toggle.open span:first-child {
     -webkit-transform: rotate(45deg) translate(0px,7px);
     -ms-transform: rotate(45deg) translate(0px,7px);
     transform: rotate(45deg) translate(0px,7px);
 }
 
-.menu-toggle.open .l2 {
+.menu-toggle.open span:nth-child(2) {
     opacity: 0;
 }
 
-.menu-toggle.open .l3 {
+.menu-toggle.open span:nth-child(3) {
     -webkit-transform: rotate(-45deg) translate(0px,-7px);
     -ms-transform: rotate(-45deg) translate(0px,-7px);
     transform: rotate(-45deg) translate(0px,-7px);
@@ -1530,7 +1530,10 @@ li.multi-column > ul li .nav-arrow {
 	.mobile-brand {
 		display:block;
 	}
-	
+	.brand img {
+		margin-bottom: 0.75rem;
+	}
+
 }
 
 
