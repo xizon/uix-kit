@@ -906,11 +906,10 @@ theme = ( function ( theme, $, window, document ) {
 			
 			slider.removeClass( prefix+'-flexslider-loading' );
 	
-			//Fix the height of the slide wrapper
-			if ( curHeight > 0 ) {
-				$( '.'+prefix+'-flex-viewport, .'+prefix+'-flexslider' ).css( 'height', curHeight + 'px' );
+			//Auto-restart player if paused after action
+			if ( !slider.playing ) {
+				slider.play();
 			}
-			
 			
 			//Prevent to <a> of page transitions
 			$( 'a' ).each( function() {
