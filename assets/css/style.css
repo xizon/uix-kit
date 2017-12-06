@@ -1107,7 +1107,7 @@ section.site-google-map,
 /* ====================================================== 
    7. Navigation Area                                    
 /* ====================================================== */
-.menu-wrapper {
+.menu-container {
 	font-size: 0.75rem;
     float: right;
     padding-top: 20px;
@@ -1115,12 +1115,12 @@ section.site-google-map,
 
 }
 
-.menu-wrapper.spy-scroll-fixed {
+.menu-container.spy-scroll-fixed {
 	padding-bottom: 0;
 }
 
 @media all and (max-width: 768px) {
-	.menu-wrapper {
+	.menu-container {
 		display: none;
 	}
 }

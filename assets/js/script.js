@@ -485,7 +485,7 @@ theme = ( function ( theme, $, window, document ) {
 			$toggle.sidr({
 				name: sidrname,
 				side: sidrside,
-				source: '.menu-wrapper',
+				source: '.menu-container',
 				body: $menuToBody,
 				onOpen: function( ev ) {
 				    $toggle.addClass( 'open' );
@@ -568,9 +568,9 @@ theme = ( function ( theme, $, window, document ) {
 				
 				//---
 				if ( $window.scrollTop() > 120 ) {	
-					$( '.menu-wrapper' ).addClass( 'spy-scroll-fixed' );
+					$( '.menu-container' ).addClass( 'spy-scroll-fixed' );
 				}else{
-					$( '.menu-wrapper' ).removeClass( 'spy-scroll-fixed' );
+					$( '.menu-container' ).removeClass( 'spy-scroll-fixed' );
 				};
 				
 				//---

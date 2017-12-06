@@ -181,7 +181,7 @@ blockquote:before {
    6. Navigation Area                         
 /* ====================================================== */
 
-.menu-wrapper {
+.menu-container {
 	float: left;
 	
 }
