@@ -2,10 +2,12 @@
 
 Created by UIUX Lab [@uiux_lab](https://twitter.com/uiux_lab)
 
+[Demo Here](https://uiux.cc/uix-kit).
 
 ### Licensing
 
 Licensed under the [MIT](https://opensource.org/licenses/MIT).
+
 
 
 ### Description
