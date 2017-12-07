@@ -359,6 +359,10 @@ iframe {
 /* ====================================================== 
    2. Helper Classes                                
 /* ====================================================== */
+.relative {
+	position: relative
+}
+
 .clear {
     clear: both;
     display: block;
