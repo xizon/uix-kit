@@ -25,7 +25,8 @@
 	15. Mega Menu
 	16. Dropdown Categories
 	17. Pagination
-	18. AJAX
+	18. Multiple columns full height for Bootstrap 3.x
+	19. AJAX
 
 ************************************* */
 
@@ -691,25 +692,25 @@ theme = ( function ( theme, $, window, document ) {
     var documentReady = function( $ ) {
 		
 	
-		$( '.portfolio-container' ).each( function() {
+		$( '.iso-grid-container' ).each( function() {
 			var type = $( this ).data( 'show-type' );
 			
 			// Masonry
 			if ( type.indexOf( 'masonry' ) >= 0  ) {
 				$( this ).addClass( 'masonry-container' );
-				$( this ).find( '.portfolio-item' ).addClass( 'masonry-item' );
+				$( this ).find( '.iso-grid-item' ).addClass( 'masonry-item' );
 			};
 			
 			// Filterable
 			if ( type.indexOf( 'filter' ) >= 0  ) {
 				$( this ).addClass( 'filter-container' );
-				$( this ).find( '.portfolio-item' ).addClass( 'filter-item' );	
+				$( this ).find( '.iso-grid-item' ).addClass( 'filter-item' );	
 			}	
 		
 		});
 	
 	    /*--  Function of Masonry  --*/
-		var masonryObj = $( '.masonry-container .portfolio-tiles' );
+		var masonryObj = $( '.masonry-container .iso-grid-tiles' );
 		imagesLoaded( masonryObj ).on( 'always', function() {
 			  masonryObj.masonry({
 				itemSelector: '.masonry-item'
@@ -721,9 +722,9 @@ theme = ( function ( theme, $, window, document ) {
 		if ( $( "[data-show-type]" ).length > 0 ) {
 			if ( $( "[data-show-type]" ).data( 'show-type' ).indexOf( 'filter' ) >= 0 ) {
 				
-				$( '.portfolio-container' ).each( function() {
+				$( '.iso-grid-container' ).each( function() {
 					var filterCat      = $( this ).data( 'filter-id' ),
-						$grid          = $( this ).find( '.portfolio-tiles' ),
+						$grid          = $( this ).find( '.iso-grid-tiles' ),
 						$filterOptions = $( filterCat );
 						
 					imagesLoaded( $grid ).on( 'always', function() {
@@ -1549,9 +1550,73 @@ theme = ( function ( theme, $, window, document ) {
 }( theme, jQuery, window, document ) );
 
 
+
+
+
 /*! 
  *************************************
- * 18. AJAX
+ * 18. Multiple columns full height for Bootstrap 3.x
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+    
+    var pageLoaded = function() {
+		
+		
+			var $window      = $( window ),
+				windowWidth  = $window.width(),
+				windowHeight = $window.height();
+	
+	
+			// Close the menu on window change
+			$window.on('resize', function() {
+				windowWidth  = $window.width();
+				if ( windowWidth > 768 ) {
+					rowFull( false ); 
+				} else {
+					rowFull( true ); 
+				}
+			} );
+			
+			if ( windowWidth > 768 ) {
+			    rowFull( false ); 
+			} else {
+				rowFull( true ); 
+			}
+		
+			
+			function rowFull( reset ) {
+	
+				
+				$( '.row.full-height' ).each( function()  {
+					var h = ( !reset ) ? $( this ).height() + 'px' : 'auto';
+					$( this ).find( '> div' ).css( 'height', h );
+				});
+		
+
+			};
+				
+		
+		
+
+    };
+
+    theme.rowFullheight = {
+        pageLoaded : pageLoaded        
+    };
+
+    theme.components.pageLoaded.push( pageLoaded );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
+
+/*! 
+ *************************************
+ * 19. AJAX
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -1586,6 +1651,8 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
+
+
 
 
 		

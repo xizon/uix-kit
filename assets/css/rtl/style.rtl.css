@@ -1,5 +1,4 @@
 /*
-	Theme Name: ShadowerPro
 	
 	Adding support for language written in a Right To Left (RTL) direction is easy -
 	it's just a matter of overwriting all the horizontal positioning attributes
@@ -22,7 +21,7 @@
     8. Comments 
     9. Search   
     10. Form Elements
-    11. Portfolio 
+    11. Isometric Grid 
     12. Header Area   
     13. Filterable Navigation   
     
@@ -82,14 +81,14 @@ blockquote:before {
 /* ====================================================== 
    2. Content & Sidebar                               
 /* ====================================================== */
-.uix-portfolio-widget .uix-portfolio-recent-item .item-thumb {
+.uix-iso-grid-widget .uix-iso-grid-recent-item .item-thumb {
     float: right;
     margin-right: auto;
     margin-left: 0.875rem;
     text-align: right;
 }
 
-.uix-portfolio-widget .uix-portfolio-recent-item .item-info {
+.uix-iso-grid-widget .uix-iso-grid-recent-item .item-info {
     float: right;
 }
 
@@ -363,42 +362,42 @@ ul.menu-main ul.sub-menu .nav-arrow {
 
 
  /* ====================================================== 
-   11. Portfolio                 
+   11. Isometric Grid                 
 /* ====================================================== */
-.portfolio-container {
+.iso-grid-container {
     margin: -2.1875rem -2.1875rem 0 0;
 	
 }
 
-.portfolio-container .portfolio-item {
+.iso-grid-container .iso-grid-item {
    float: right;
 }
 
 
-.portfolio-item .link-to {
+.iso-grid-item .link-to {
 	left: auto;
 	right: 0;
 }
 
-.portfolio-item .cover:before {
+.iso-grid-item .cover:before {
 	left: auto;
     right: 0;
 }
 
 
-.portfolio-item .title {
+.iso-grid-item .title {
 	margin-left: auto;
 	margin-right: 0.875rem;
 }
 
-.portfolio-item .title:before {
+.iso-grid-item .title:before {
 	padding-right: auto;
 	padding-left: 0.875rem;
 }
 
 
 
-.portfolio-item .category {
+.iso-grid-item .category {
 	right: auto;
 	left: 0;
 	
@@ -408,19 +407,19 @@ ul.menu-main ul.sub-menu .nav-arrow {
 
 @media screen and (max-width: 1280px) {
 	
-    .portfolio-container {
+    .iso-grid-container {
         margin: -1.09375rem -1.09375rem 0 0;
     }
 
-    .portfolio-container .portfolio-item {
+    .iso-grid-container .iso-grid-item {
         margin: 1.09375rem 1.09375rem 0 0;
     }
 
-    .portfolio-container.small .portfolio-item {
+    .iso-grid-container.small .iso-grid-item {
         margin: 1.09375rem 1.09375rem 0 0;
     }
 
-    .portfolio-container.large .portfolio-item {
+    .iso-grid-container.large .iso-grid-item {
         width: calc(49.99999% - 1.09375rem);
         margin: 1.09375rem 1.09375rem 0 0;
     }
@@ -428,26 +427,26 @@ ul.menu-main ul.sub-menu .nav-arrow {
 
 @media screen and (max-width: 980px) {
 
-    .portfolio-container {
+    .iso-grid-container {
         margin: -2.1875rem -2.1875rem 0 0;
     }
 
-    .portfolio-container .portfolio-item ,
-	.portfolio-container.small .portfolio-item,
-	.portfolio-container.large .portfolio-item {
+    .iso-grid-container .iso-grid-item ,
+	.iso-grid-container.small .iso-grid-item,
+	.iso-grid-container.large .iso-grid-item {
         margin: 2.1875rem 2.1875rem 0 0;
     }
 }
 
 @media screen and (max-width: 736px) {
 
-    .portfolio-container {
+    .iso-grid-container {
         margin: -1.09375rem -1.09375rem 0 0;
     }
 
-    .portfolio-container .portfolio-item,
-	.portfolio-container.small .portfolio-item,
-	.portfolio-container.large .portfolio-item {
+    .iso-grid-container .iso-grid-item,
+	.iso-grid-container.small .iso-grid-item,
+	.iso-grid-container.large .iso-grid-item {
         margin: 1.09375rem 1.09375rem 0 0;
     }
 }

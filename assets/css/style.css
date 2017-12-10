@@ -1,7 +1,7 @@
 /*
     ## Project Name        :  Uix Kit
     ## Description         :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
-    ## Last Update         :  December 4, 2017
+    ## Last Update         :  December 10, 2017
     ## Created             :  by UIUX Lab (https://uiux.cc)
     ## Contact Us          :  uiuxlab@gmail.com
     ## Compatible With     :  Bootstrap 3.x, Chinese, English
@@ -67,7 +67,7 @@
 	14. Overlay
 	15. Pagination
 	16. Filterable Navigation  
-	17. Portfolio
+	17. Isometric Grid
 	18. Button
 	    18.1. Common button styles
 		18.2. Borders
@@ -99,10 +99,14 @@
 	26. Author Card
 	27. Plugins 
 	28. Modal 
-    29. Single Page       
-	30. WordPress Core 
-    31. Themes
-        31.1 White 
+    29. Single Page  
+    30. List Modules
+        30.1 List of Post
+        30.2 List of Split
+
+	31. WordPress Core 
+    32. Themes
+        21 White 
 
 	
 	
@@ -356,11 +360,12 @@ iframe {
 
 }
 
+
 /* ====================================================== 
    2. Helper Classes                                
 /* ====================================================== */
 .relative {
-	position: relative
+	position: relative;
 }
 
 .clear {
@@ -1019,6 +1024,8 @@ section.site-google-map,
 	z-index:6;
 	width: 100%;
 }
+
+
 .pos-normal-align {
 	top: 0;
 }
@@ -1029,6 +1036,22 @@ section.site-google-map,
 	-ms-transform: translateY(-50%);
 	transform: translateY(-50%);
 }
+
+.pos-vertical-align.relative {
+	position: relative;
+}
+
+
+@media all and (max-width: 768px) {
+	.pos-vertical-align.relative {
+		top: 0;
+		-webkit-transform: none;
+		-ms-transform: none;
+		transform: none;
+	}
+
+}
+
 
 .center-vertically {
     display: table;
@@ -1550,6 +1573,14 @@ li.multi-column > ul li .nav-arrow {
 .footer-main-container ul li {
     display: inline-block;
 	margin: 0.175rem 0.4375rem;
+}
+
+@media all and (max-width: 768px) { 
+    .footer-main-container .pull-left,
+	.footer-main-container .pull-right {
+        float: none !important;
+		text-align: center;
+    }
 }
 
 
@@ -2224,23 +2255,23 @@ li.multi-column > ul li .nav-arrow {
 
 
 /* ====================================================== 
-   17. Portfolio                 
+   17. Isometric Grid               
 /* ====================================================== */
-.portfolio-container {
+.iso-grid-container {
 	position: relative;
     margin: -2.1875rem 0 0 -2.1875rem;
 	
 }
 
-.portfolio-container:after,
-.portfolio-container:before {
+.iso-grid-container:after,
+.iso-grid-container:before {
     content: '';
     display: block;
     clear: both;
     height: 0;
 }
 
-.portfolio-container .portfolio-item {
+.iso-grid-container .iso-grid-item {
 	-moz-transition: none; 
 	-o-transition: none;
 	-webkit-transition: none; 
@@ -2254,15 +2285,15 @@ li.multi-column > ul li .nav-arrow {
 
 
 
-.portfolio-container.small .portfolio-item {
+.iso-grid-container.small .iso-grid-item {
     width: calc(24.99999% - 2.1875rem);
 }
 
-.portfolio-container.large .portfolio-item {
+.iso-grid-container.large .iso-grid-item {
     width: calc(49.99999% - 2.1875rem);
 }
 
-.portfolio-item .link-to {
+.iso-grid-item .link-to {
 	width: 100%;
 	position: absolute;
 	left: 0;
@@ -2270,6 +2301,7 @@ li.multi-column > ul li .nav-arrow {
 	filter:alpha(opacity=0);  
 	-moz-opacity: 0;   
 	opacity: 0; 
+	margin-top: -1rem;
 	/* Vertical Center */
 	top: 50%;
 	-webkit-transform: translateY(-50%);
@@ -2277,19 +2309,19 @@ li.multi-column > ul li .nav-arrow {
 	transform: translateY(-50%);
 }
 
-.portfolio-item:hover .link-to {
+.iso-grid-item:hover .link-to {
 	filter:alpha(opacity=100);  
 	-moz-opacity: 1;   
 	opacity: 1; 
 	
 }
 
-.portfolio-item .cover {
+.iso-grid-item .cover {
 	position: relative;
 }
 
 
-.portfolio-item .cover:before {
+.iso-grid-item .cover:before {
     -webkit-transition: all 0.3s ease 0s;
     -moz-transition: all 0.3s ease 0s;
     -ms-transition: all 0.3s ease 0s;
@@ -2305,39 +2337,39 @@ li.multi-column > ul li .nav-arrow {
 	height: 100%;
 }
 
-.portfolio-item:hover .cover:before {
+.iso-grid-item:hover .cover:before {
 	background: rgba(255,255,255,.95);
 }
 
 
-.portfolio-item h3 {
+.iso-grid-item h3 {
 	position: relative;
     font-size: 1.125rem;
 	padding-top: 0.546875rem;
 	
 }
 
-.portfolio-item .title {
+.iso-grid-item .title {
 	filter:alpha(opacity=75);  
 	-moz-opacity: 0.7;   
 	opacity: 0.7;
 	margin-left: 0.875rem;
 }
 
-.portfolio-item .title:before {
+.iso-grid-item .title:before {
 	content: '|';
 	padding-right: 0.875rem;
 }
 
 
-.portfolio-item .title,
-.portfolio-item .category {
+.iso-grid-item .title,
+.iso-grid-item .category {
 	font-size: 0.625rem;
 	line-height: 1.625;
 	display: inline-block;
 }
 
-.portfolio-item .category {
+.iso-grid-item .category {
 	position: absolute;
 	bottom: 0.875rem;
 	right: 0;
@@ -2350,16 +2382,16 @@ li.multi-column > ul li .nav-arrow {
 	
 }
 
-.portfolio-item .category a {
+.iso-grid-item .category a {
 	color: #fff;
 }
 
-.portfolio-item .category:hover {
+.iso-grid-item .category:hover {
 	background:#C56263;
 }
 
 
-.portfolio-item .image {
+.iso-grid-item .image {
     width: 100%;
     display: block;
     overflow: hidden;
@@ -2370,7 +2402,7 @@ li.multi-column > ul li .nav-arrow {
 }
 
 
-.portfolio-item .cover img {
+.iso-grid-item .cover img {
 	width: 100%;
 	
 }
@@ -2379,21 +2411,21 @@ li.multi-column > ul li .nav-arrow {
 
 @media screen and (max-width: 1280px) {
 	
-    .portfolio-container {
+    .iso-grid-container {
         margin: -1.09375rem 0 0 -1.09375rem;
     }
 
-    .portfolio-container .portfolio-item {
+    .iso-grid-container .iso-grid-item {
         width: calc(33.3% - 1.09375rem);
         margin: 1.09375rem 0 0 1.09375rem;
     }
 
-    .portfolio-container.small .portfolio-item {
+    .iso-grid-container.small .iso-grid-item {
         width: calc(24.99999% - 1.09375rem);
         margin: 1.09375rem 0 0 1.09375rem;
     }
 
-    .portfolio-container.large .portfolio-item {
+    .iso-grid-container.large .iso-grid-item {
         width: calc(49.99999% - 1.09375rem);
         margin: 1.09375rem 0 0 1.09375rem;
     }
@@ -2401,13 +2433,13 @@ li.multi-column > ul li .nav-arrow {
 
 @media screen and (max-width: 980px) {
 
-    .portfolio-container {
+    .iso-grid-container {
         margin: -2.1875rem 0 0 -2.1875rem;
     }
 
-    .portfolio-container .portfolio-item ,
-	.portfolio-container.small .portfolio-item,
-	.portfolio-container.large .portfolio-item {
+    .iso-grid-container .iso-grid-item ,
+	.iso-grid-container.small .iso-grid-item,
+	.iso-grid-container.large .iso-grid-item {
         width: calc(50% - 2.1875rem);
         margin: 2.1875rem 0 0 2.1875rem;
     }
@@ -2415,13 +2447,13 @@ li.multi-column > ul li .nav-arrow {
 
 @media screen and (max-width: 736px) {
 
-    .portfolio-container {
+    .iso-grid-container {
         margin: -1.09375rem 0 0 -1.09375rem;
     }
 
-    .portfolio-container .portfolio-item,
-	.portfolio-container.small .portfolio-item,
-	.portfolio-container.large .portfolio-item {
+    .iso-grid-container .iso-grid-item,
+	.iso-grid-container.small .iso-grid-item,
+	.iso-grid-container.large .iso-grid-item {
         width: calc(50% - 1.09375rem);
         margin: 1.09375rem 0 0 1.09375rem;
     }
@@ -2429,13 +2461,13 @@ li.multi-column > ul li .nav-arrow {
 
 @media screen and (max-width: 480px) {
 
-    .portfolio-container {
+    .iso-grid-container {
         margin: 0;
     }
 
-    .portfolio-container .portfolio-item,
-	.portfolio-container.small .portfolio-item,
-	.portfolio-container.large .portfolio-item {
+    .iso-grid-container .iso-grid-item,
+	.iso-grid-container.small .iso-grid-item,
+	.iso-grid-container.large .iso-grid-item {
         width: 100%;
         margin: 1.09375rem 0 0 0;
     }
@@ -2904,6 +2936,8 @@ li.multi-column > ul li .nav-arrow {
 	margin-bottom: 0.175rem;
     display: inline-block;
 }
+
+
 
 .tags-box > a:after {
     content: '/';
@@ -3528,8 +3562,271 @@ li.multi-column > ul li .nav-arrow {
 }
 
 
+
+
 /* ====================================================== 
-   30. WordPress Core            
+   30. List Modules
+/* ====================================================== */
+/* 30.1 List of Post  */
+
+/* ---- Style 1 ------*/
+.list-topic-container {
+	
+}
+
+.list-topic-item {
+	position: relative;
+	margin-bottom: 4.8125rem;
+}
+
+@media all and (max-width: 768px) {
+
+	.list-topic-item {
+		margin-bottom: 3rem;
+	}
+
+}
+
+.list-topic-item .gallery-caption {
+	display: none;
+}
+
+
+.list-topic-item .list-topic-item-audio {
+	position: relative;
+	z-index: 1;
+}
+
+.list-topic-item .list-topic-item-img iframe {
+	max-width: 100% !important;
+	max-height: 300px !important;
+}
+
+
+.list-topic-item .list-normal ul,
+.list-topic-item .list-normal ol {
+	line-height: inherit !important;
+	
+}
+.list-topic-item:not(.post-blockquote) blockquote{
+	font-size: inherit;
+    padding: 1em;
+	margin: 1em 0;
+	border-left-width: 3px;
+	line-height: inherit;
+    quotes: none;
+}
+
+.list-topic-item:not(.post-blockquote) blockquote:before {
+	display: none;
+}
+
+
+.list-topic-item .list-topic-item-img {
+	margin-top: 1.75rem;
+}
+
+
+.list-topic-item .list-topic-item-info {
+	margin-top: 3.5rem;
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
+	background: #fff;
+	padding: 1rem;
+	position: relative;
+}
+
+
+.list-topic-item:hover .list-topic-item-info {
+	background: #F3F3F3;
+}
+
+
+
+
+@media all and (max-width: 768px) {
+	
+	
+	.list-topic-item .list-topic-item-info {
+		margin-top: 0;
+	}
+
+	
+	
+}
+
+.list-topic-item .list-topic-item-info h1,
+.list-topic-item .list-topic-item-info h2,
+.list-topic-item .list-topic-item-info h3,
+.list-topic-item .list-topic-item-info h4,
+.list-topic-item .list-topic-item-info h5,
+.list-topic-item .list-topic-item-info h6 {
+	font-family: inherit;
+	font-weight: 600;
+}
+.list-topic-item .list-topic-item-info h1 {
+	font-size: 2.4609375rem;
+	line-height: 1.15555556;
+}
+.list-topic-item .list-topic-item-info h2 {
+	font-size: 1.75rem;
+	line-height: 1.421875;
+}
+.list-topic-item .list-topic-item-info h3 {
+	font-size: 1.25rem;
+	line-height: 1.625;
+}
+
+/* Pagination of per post list */
+.list-topic-item .list-topic-item-info .page-link a {
+	display: inline-block;
+	padding: .2625rem;
+}
+
+
+
+.list-topic-item .detail {
+	margin-top: 1rem;
+}
+
+.list-topic-item p {
+	margin: 0;
+	padding: 0;
+	position: relative;
+	z-index: 2;
+	font-size: 0.875rem;
+}
+
+
+.list-topic-item a.more { 
+	font-size: 0.75rem;
+	position: relative;
+	padding-left: 1.5rem;
+	display: inline-block;
+	margin-top: 3.5rem;
+	z-index: 3;
+	text-transform: uppercase;
+}
+
+.list-topic-item:hover a.more {
+	color: #fff;
+}
+
+
+@media all and (max-width: 768px) {
+
+	.list-topic-item a.more { 
+		margin-top: auto;
+	}	
+	
+}
+
+
+.list-topic-item .more-container {
+	overflow: hidden;
+}
+
+.list-topic-item .more-bg {
+	background: #EC5E79;
+	position: absolute;
+	right: -200px;
+	top: 69%;
+	z-index: 1;
+	-moz-transition: .1s ease-in-out; 
+	-o-transition: .1s ease-in-out;
+	-webkit-transition: .1s ease-in-out; 
+	transition: .1s ease-in-out;
+	width: 130px;
+	height: 35px;
+	-webkit-transform: rotate(0) skew(-45deg);
+	-ms-transform: rotate(0) skew(-45deg);
+	transform: rotate(0) skew(-45deg);
+}
+.list-topic-item:hover .more-bg {
+    right: -30px;
+}
+
+
+
+
+
+/* ---- Style 2 ------*/
+.list-topic-item.style-2 .detail p,
+.list-topic-item.style-2 .tags-box {
+	padding-left: 1rem;
+}
+
+
+.list-topic-item.style-2 .detail a {
+	/* Used when "list-normal table-normal" style are used */
+	color: #474747 !important; 
+}
+
+.list-topic-item.style-2 .detail a:hover {
+	/* Used when "list-normal table-normal" style are used */
+	color: #000 !important; 
+	text-decoration: none;
+}
+
+
+   
+/* 30.2 List of Split */
+.list-split-container {
+	
+}
+.list-split-item {
+	position: relative;
+	margin-bottom: 4.8125rem;
+}
+
+
+@media all and (max-width: 768px) {
+
+	.list-split-item {
+		margin-bottom: 3rem;
+	}
+
+}
+
+
+.list-split-item .list-split-item-info p {
+	font-size: 0.875rem;
+}
+
+.list-split-item .list-split-item-info > div {
+	padding: 0 4rem;
+}
+
+.list-split-item.even .row > .col-sm-6 {
+	float: right;
+}
+
+
+@media all and (max-width: 768px) {
+
+	.list-split-item.even .row > .col-sm-6:first-child,
+	.list-split-item.even .row > .col-sm-6:nth-child(2) {
+		-webkit-transform: translateX(0);
+		-ms-transform: translateX(0);
+		transform: translateX(0);
+	}
+
+	.list-split-item .list-split-item-info {
+		margin-top: 1.5rem;
+	}
+	
+	.list-split-item .list-split-item-info > div {
+		padding: 0;
+	}
+	
+}
+
+
+
+
+
+/* ====================================================== 
+   31. WordPress Core            
 /* ====================================================== */
 .edit-link {
     display: block;
@@ -3724,9 +4021,9 @@ a img.aligncenter {
 
 
 /* ====================================================== 
-   13. Themes    
+   32. Themes    
 /* ====================================================== */
-/*------- 31.1 White  --------*/
+/*------- 32.1 White  --------*/
 
 
 /* Navigation Area  */
