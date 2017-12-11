@@ -1614,8 +1614,17 @@ theme = ( function ( theme, $, window, document ) {
 		
 		$window.on( 'scroll', function() {
 
-			var scrollTop = $( window ).scrollTop();
+			var scrollTop = $window.scrollTop();
 			counterInit( scrollTop );
+			
+			//Detecting when user scrolls to bottom of div
+			var arrivedAtBottom = function () { 
+				return scrollTop + $window.height() == $( document ).height(); 
+			} 
+			
+			if( arrivedAtBottom() ) { 
+				counterInit( 'go' );
+			}
 			
 		});	
 		
@@ -1642,8 +1651,10 @@ theme = ( function ( theme, $, window, document ) {
 					}	
 					
 					
-					
-					if ( parseFloat( sn + 50 ) >= parseFloat( $this.offset().top - windowHeight/2 - 50 ) ) {
+					if ( 
+						parseFloat( sn + 50 ) >= parseFloat( $this.offset().top - windowHeight/2 - 50 ) ||
+						sn == 'go'
+					) {
 						
 						
 						$this.jCustomCounter({
@@ -1656,6 +1667,8 @@ theme = ( function ( theme, $, window, document ) {
 						
 						
 					}
+
+
 	
 
 
