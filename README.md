@@ -1,4 +1,4 @@
-# Uix Kit (0.0.3 Beta)
+# Uix Kit
 
 Created by UIUX Lab [@uiux_lab](https://twitter.com/uiux_lab)
 
@@ -145,6 +145,10 @@ Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap.
     <!-- Filterable  -->
     <script src="assets/js/min/jquery.shuffle.min.js?ver=3.1.1"></script> 
     
+	
+	<!-- Your Plugins & Theme Scripts
+	============================================= -->
+	
     <!-- Theme Script -->
 	<script>
         var wp_theme_root_path = {
@@ -152,7 +156,11 @@ Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap.
 			"homeUrl"     :""  //Eg. https://uiux.cc
 		};
     </script>  
-    <script src="assets/js/script.js?ver=1.0.0"></script>
+    <script src="assets/js/uix-kit.js?ver=1.0.0"></script>
+
+
+
+	<!-- Your Plugins & Theme Scripts  end -->
     
  
 
@@ -171,17 +179,23 @@ The `_demo/` folder can be deleted.
 
 ##### CSS:
 
-*   `assets/css/style.css`
-*   `assets/css/rtl/style.rtl.css`
-*   `assets/css/old-ie.css`
-*   `assets/css/flexslider-custom.css`
-*   `assets/css/jquery.sidr.light.css`
-*   `assets/css/rtl/jquery.sidr.light.rtl.css`
+*   `assets/css/uix-kit.css`
+*   `assets/css/uix-kit.IE.css`
+*   `assets/css/uix-kit.mobile.nav.css`
+*   `assets/css/uix-kit.flexslider.css`
+
+
+##### CSS(RTL):
+
+*   `assets/css/rtl/uix-kit.rtl.css`
+*   `assets/css/rtl/uix-kit.mobile.nav.rtl.css`
+
+
 
 ##### Javascript:
 
-*   `assets/js/script.js`
-*   `assets/js/min/script.min.js` (if it exists)
+*   `assets/js/uix-kit.js`
+*   `assets/js/min/uix-kit.min.js` (if it exists)
 
 ##### Images:
 
@@ -222,7 +236,7 @@ All photos uploaded to the site are released under Creative Commons - CC0 and do
 
 ### Changelog
 
-#### = 0.0.3 Beta (December 5, 2017) =
+#### = 0.0.5 Beta (December 11, 2017) =
 
 * First release.
 

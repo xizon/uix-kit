@@ -1,4 +1,4 @@
-=== Uix Kit (0.0.3 Beta) ===
+=== Uix Kit ===
 
 == Description ==
 
@@ -98,6 +98,6 @@ All photos uploaded to the site are released under Creative Commons - CC0 and do
 
 == Changelog ==
 
-= 0.0.3 Beta (December 5, 2017) =
+= 0.0.5 Beta (December 11, 2017) =
 
 * First release.
