@@ -25,8 +25,9 @@
 	15. Mega Menu
 	16. Dropdown Categories
 	17. Pagination
-	18. Multiple columns full height for Bootstrap 3.x
-	19. AJAX
+	18. Counter
+	19. Multiple columns full height for Bootstrap 3.x
+	20. AJAX
 
 ************************************* */
 
@@ -91,19 +92,19 @@ theme = ( function ( theme, $, window, document ) {
     var pageLoaded = function() {
 		
 		
-			var $window      = $( window );
-	
-			$window.on('scroll', function() {
-				
-				//---
-				if ( $window.scrollTop() > 120 ) {	
-					$( '.header-area' ).addClass( 'spy-scroll-fixed' );
-				}else{
-					$( '.header-area' ).removeClass( 'spy-scroll-fixed' );
-				};
-				
-				
-			});	
+		var $window      = $( window );
+
+		$window.on( 'scroll', function() {
+
+			//---
+			if ( $window.scrollTop() > 120 ) {	
+				$( '.header-area' ).addClass( 'spy-scroll-fixed' );
+			}else{
+				$( '.header-area' ).removeClass( 'spy-scroll-fixed' );
+			};
+
+
+		});	
 		
 		
 		//Header initialize
@@ -310,7 +311,7 @@ theme = ( function ( theme, $, window, document ) {
 	
 				$this.bgParallax( "50%", dataSpeed );
 				
-				$window.on('scroll', function() {
+				$window.on( 'scroll', function() {
 					var scrolled = $window.scrollTop();
 					$this.find( '.parallax-element' ).css( 'margin-top', ( scrolled * dataSpeed ) + 'px' );
 				});	
@@ -592,19 +593,19 @@ theme = ( function ( theme, $, window, document ) {
 		
 	
 			// Close the menu on window change
-			$window.on('resize', function() {
+			$window.on( 'resize', function() {
 				windowWidth  = $window.width();
 				$.sidr( 'close', sidrname );
 				$( '.menu-toggle' ).removeClass( 'open' );
-				if ( windowWidth <= 768 ) sidrmenu(); 
+				if ( windowWidth <= 768 ) sidrmenuInit(); 
 			} );
 			
 			if ( windowWidth <= 768 ) {
-			    sidrmenu(); 
+			    sidrmenuInit(); 
 			};
 		
 			
-			function sidrmenu() {
+			function sidrmenuInit() {
 	
 				$( '.sidr-class-menu-main > li' ).each( function() {
 					if ( $( this ).find( 'ul' ).length > 0 ) {
@@ -620,7 +621,7 @@ theme = ( function ( theme, $, window, document ) {
 			var lastScrollTop = 0,
 			    delta         = 5;
     
-			$window.on('scroll', function() {
+			$window.on( 'scroll', function() {
 				
 				// Show Toolbar when viewing site
 				if ( $window.scrollTop() >= 46 ) {	
@@ -1551,11 +1552,138 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
+/*! 
+ *************************************
+ * 18. Counter
+ *************************************
+ */
+//Custom Function
+(function($){
+	$.fn.jCustomCounter=function(options){
+		var settings=$.extend({
+            "animToLastFrameEvent": function () {
+               
+            },
+			'start'    : 0,
+			'end'      : 100,
+			'easing'   : 'swing',
+			'duration' : 400,
+			'complete' : ''
+
+		}
+		,options);
+		this.each(function(){
+			
+		
+			var $this = $( this );
+
+			$( { count: settings.start } ).animate( { count: settings.end }, {
+				duration : settings.duration,
+				easing   : settings.easing,
+				step     : function() {
+					var mathCount = Math.ceil( this.count );
+					if ( mathCount < 10 ) {
+						mathCount = '0' + mathCount;
+					}
+					$this.text( mathCount );
+				},
+				complete : settings.complete
+			});
+
+			
+		})
+	}
+})(jQuery);	
+		
+		
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+    
+    var pageLoaded = function() {
+		
+		
+		var $window      = $( window ),
+			windowWidth  = $window.width(),
+			windowHeight = $window.height();
+
+		//Counter initialize
+		$( 'html, body' ).stop().animate({
+			scrollTop: 2
+		}, 100 );	
+		
+		
+		$window.on( 'scroll', function() {
+
+			var scrollTop = $( window ).scrollTop();
+			counterInit( scrollTop );
+			
+		});	
+		
+
+		function counterInit( sn ) {
+			
+			$( '[data-counter-number]' ).each(function() {
+				
+			
+				var $this       = $( this ),
+					activated   = $this.data( 'activated' ),//In order to avoid duplication of the running script with Uix Page Builder ( required )
+				    dataNum     = $this.data( 'counter-number' ),
+					dataDur     = $this.data( 'counter-duration' );
+				
+
+				if ( typeof activated === typeof undefined || activated === 0 ) {
+
+					if( typeof dataNum === typeof undefined ) { // If there is no data-xxx, save current source to it
+						dataNum = Math.floor( Math.random() * 100 );
+					}	
+
+					if( typeof dataDur === typeof undefined ) {
+						dataDur = 3000;
+					}	
+					
+					
+					
+					if ( parseFloat( sn + 50 ) >= parseFloat( $this.offset().top - windowHeight/2 - 50 ) ) {
+						
+						
+						$this.jCustomCounter({
+							end      : dataNum,
+							duration : dataDur
+						});
+						
+						//Prevents front-end javascripts that are activated in the background to repeat loading.
+						$this.data( 'activated', 1 );		
+						
+						
+					}
+	
+
+
+				}	
+
+				
+	
+			});
+		}
+		
+		
+		
+		
+    };
+
+    theme.counter = {
+        pageLoaded : pageLoaded        
+    };
+
+    theme.components.pageLoaded.push( pageLoaded );
+    return theme;
+
+}( theme, jQuery, window, document ) );
 
 
 /*! 
  *************************************
- * 18. Multiple columns full height for Bootstrap 3.x
+ * 19. Multiple columns full height for Bootstrap 3.x
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -1563,40 +1691,40 @@ theme = ( function ( theme, $, window, document ) {
     
     var pageLoaded = function() {
 		
-		
-			var $window      = $( window ),
-				windowWidth  = $window.width(),
-				windowHeight = $window.height();
-	
-	
-			// Close the menu on window change
-			$window.on('resize', function() {
-				windowWidth  = $window.width();
-				if ( windowWidth > 768 ) {
-					rowFull( false ); 
-				} else {
-					rowFull( true ); 
-				}
-			} );
-			
-			if ( windowWidth > 768 ) {
-			    rowFull( false ); 
-			} else {
-				rowFull( true ); 
-			}
-		
-			
-			function rowFull( reset ) {
-	
-				
-				$( '.row.full-height' ).each( function()  {
-					var h = ( !reset ) ? $( this ).height() + 'px' : 'auto';
-					$( this ).find( '> div' ).css( 'height', h );
-				});
-		
 
-			};
-				
+		var $window      = $( window ),
+			windowWidth  = $window.width(),
+			windowHeight = $window.height();
+
+
+		// Close the menu on window change
+		$window.on( 'resize', function() {
+			windowWidth  = $window.width();
+			if ( windowWidth > 768 ) {
+				rowColInit( false ); 
+			} else {
+				rowColInit( true ); 
+			}
+		} );
+
+		if ( windowWidth > 768 ) {
+			rowColInit( false ); 
+		} else {
+			rowColInit( true ); 
+		}
+
+
+		function rowColInit( reset ) {
+
+
+			$( '.row.full-height' ).each( function()  {
+				var h = ( !reset ) ? $( this ).height() + 'px' : 'auto';
+				$( this ).find( '> div' ).css( 'height', h );
+			});
+
+
+		};
+
 		
 		
 
@@ -1616,7 +1744,7 @@ theme = ( function ( theme, $, window, document ) {
 
 /*! 
  *************************************
- * 19. AJAX
+ * 20. AJAX
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {

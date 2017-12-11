@@ -104,8 +104,9 @@
         30.1 List of Post
         30.2 List of Split
 
-	31. WordPress Core 
-    32. Themes
+    31. Counter 
+	32. WordPress Core 
+    33. Themes
         21 White 
 
 	
@@ -3824,9 +3825,20 @@ li.multi-column > ul li .nav-arrow {
 
 
 
+/* ====================================================== 
+   31. Counter    
+/* ====================================================== */
+
+[data-counter-number] {
+	-webkit-box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.25);
+	-moz-box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.25);
+	box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.25);
+	padding: 2rem;
+}
+
 
 /* ====================================================== 
-   31. WordPress Core            
+   32. WordPress Core            
 /* ====================================================== */
 .edit-link {
     display: block;
@@ -4021,7 +4033,7 @@ a img.aligncenter {
 
 
 /* ====================================================== 
-   32. Themes    
+   33. Themes    
 /* ====================================================== */
 /*------- 32.1 White  --------*/
 
@@ -4059,6 +4071,7 @@ a img.aligncenter {
 .theme-white .header-area .menu-right a {
 	color: #fff;
 }
+
 
 
 
