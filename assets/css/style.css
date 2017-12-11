@@ -103,11 +103,12 @@
     30. List Modules
         30.1 List of Post
         30.2 List of Split
+        30.3 List of Timeline
 
     31. Counter 
 	32. WordPress Core 
     33. Themes
-        21 White 
+        33.1 White 
 
 	
 	
@@ -3205,9 +3206,24 @@ li.multi-column > ul li .nav-arrow {
    24. Tabs        
 /* ====================================================== */
 .tabs {
-	-webkit-box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.25);
-	-moz-box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.25);
-	box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.25);	
+	-webkit-box-shadow: 0 4px  4px  rgba(0, 0, 0, .05),
+               0 1px  6px  rgba(0, 0, 0, .05),
+               0 8px  8px  rgba(0, 0, 0, .05), 
+               0 16px 16px rgba(0, 0, 0, .05), 
+               8px 32px 32px rgba(0, 0, 0, .02), 
+               8px 64px 64px rgba(0, 0, 0, .02);
+	-moz-box-shadow: 0 4px  4px  rgba(0, 0, 0, .05),
+               0 1px  6px  rgba(0, 0, 0, .05),
+               0 8px  8px  rgba(0, 0, 0, .05), 
+               0 16px 16px rgba(0, 0, 0, .05), 
+               8px 32px 32px rgba(0, 0, 0, .02), 
+               8px 64px 64px rgba(0, 0, 0, .02);
+	box-shadow: 0 4px  4px  rgba(0, 0, 0, .05),
+               0 1px  6px  rgba(0, 0, 0, .05),
+               0 8px  8px  rgba(0, 0, 0, .05), 
+               0 16px 16px rgba(0, 0, 0, .05), 
+               8px 32px 32px rgba(0, 0, 0, .02), 
+               8px 64px 64px rgba(0, 0, 0, .02);
 }
 
 .tabs .content {
@@ -3611,8 +3627,8 @@ li.multi-column > ul li .nav-arrow {
 }
 .list-topic-item:not(.post-blockquote) blockquote{
 	font-size: inherit;
-    padding: 1em;
-	margin: 1em 0;
+    padding: 0.75rem;
+	margin: 0.875rem 0;
 	border-left-width: 3px;
 	line-height: inherit;
     quotes: none;
@@ -3823,6 +3839,163 @@ li.multi-column > ul li .nav-arrow {
 }
 
 
+/* 30.3 List of Timeline */
+.list-timeline-container {
+	
+}
+
+.list-timeline-item {
+    position: relative;
+    margin: 3.5rem 0;
+}
+
+.list-timeline-item:after {
+    clear: both;
+    content: "";
+    display: table;
+}
+
+
+.list-timeline-item:first-child {
+	margin-top: 0;
+}
+
+.list-timeline-item:last-child {
+	margin-bottom: 0;
+}
+
+
+.list-timeline-item .line {
+	height: calc( 100% + 5rem );
+	width: 1px;
+	background: #EC5E79;
+	position: absolute;
+	top: 40px;
+	left: 50%;
+}
+
+
+.list-timeline-item-img {
+    position: absolute;
+    top: 0;
+	-webkit-border-radius: 100%; 
+	-moz-border-radius: 100%; 
+	border-radius: 100%;
+	overflow: hidden;
+    width: 40px;
+    height: 40px;
+	left: 50%;
+	margin-left: -20px;
+}
+
+.list-timeline-item-img img {
+    width: 100%;
+    height: 100%;
+}
+
+@media all and (max-width: 768px) {
+	.list-timeline-item .line {
+		left: 20px;
+	}	
+	.list-timeline-item-img {
+		left: 0;
+		margin-left: auto;
+	}	
+	
+}
+
+.list-timeline-item .list-timeline-item-info {
+    position: relative;
+    padding: 0.875rem;
+	padding: 1.4rem;
+	width: 45%;	
+	-webkit-box-shadow: 0 4px  4px  rgba(0, 0, 0, .05),
+               0 1px  6px  rgba(0, 0, 0, .05),
+               0 8px  8px  rgba(0, 0, 0, .05), 
+               0 16px 16px rgba(0, 0, 0, .05), 
+               8px 32px 32px rgba(0, 0, 0, .02), 
+               8px 64px 64px rgba(0, 0, 0, .02);
+	-moz-box-shadow: 0 4px  4px  rgba(0, 0, 0, .05),
+               0 1px  6px  rgba(0, 0, 0, .05),
+               0 8px  8px  rgba(0, 0, 0, .05), 
+               0 16px 16px rgba(0, 0, 0, .05), 
+               8px 32px 32px rgba(0, 0, 0, .02), 
+               8px 64px 64px rgba(0, 0, 0, .02);
+	box-shadow: 0 4px  4px  rgba(0, 0, 0, .05),
+               0 1px  6px  rgba(0, 0, 0, .05),
+               0 8px  8px  rgba(0, 0, 0, .05), 
+               0 16px 16px rgba(0, 0, 0, .05), 
+               8px 32px 32px rgba(0, 0, 0, .02), 
+               8px 64px 64px rgba(0, 0, 0, .02);	
+}
+
+@media all and (max-width: 768px) {
+	.list-timeline-item .list-timeline-item-info {
+		width: 80%;
+		margin-left: 3.5rem;
+	}
+	
+}
+
+.list-timeline-item .list-timeline-item-info:after {
+    clear: both;
+    content: '';
+    display: table;
+}
+
+.list-timeline-item .list-timeline-item-info h3 {
+	font-size: 1.25rem;
+	line-height: 1.625;
+}
+
+.list-timeline-item .list-timeline-item-info p, 
+.list-timeline-item .list-timeline-item-info .date {
+    font-size: 0.875rem;
+}
+
+.list-timeline-item .list-timeline-item-info .date {
+    display: inline-block;
+    float: left;
+    padding: .6875rem 0;
+    opacity: .7;
+	position: absolute;
+	width: 100%;
+	left: 122%;
+	top: 0;
+}
+
+.list-timeline-item .list-timeline-item-info p {
+    margin: 0.875rem 0;
+}
+
+
+.list-timeline-item:nth-child(even) .list-timeline-item-info {
+	float: right;
+}
+
+
+.list-timeline-item:nth-child(even) .list-timeline-item-info .date {
+	left: auto;
+	right: 122%;
+	text-align: right;
+}
+
+@media all and (max-width: 768px) {
+
+	
+	.list-timeline-item .list-timeline-item-info .date {
+		top: 45px;
+		left: -60px; !important;
+		right: auto !important;
+		text-align: left !important;
+	}	
+	
+	
+	.list-timeline-item:nth-child(even) .list-timeline-item-info {
+		float: none;
+	}
+
+}
 
 
 /* ====================================================== 
@@ -3830,11 +4003,30 @@ li.multi-column > ul li .nav-arrow {
 /* ====================================================== */
 
 [data-counter-number] {
-	-webkit-box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.25);
-	-moz-box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.25);
-	box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.25);
+	-webkit-box-shadow: 0 4px  4px  rgba(0, 0, 0, .05),
+               0 1px  6px  rgba(0, 0, 0, .05),
+               0 8px  8px  rgba(0, 0, 0, .05), 
+               0 16px 16px rgba(0, 0, 0, .05), 
+               8px 32px 32px rgba(0, 0, 0, .02), 
+               8px 64px 64px rgba(0, 0, 0, .02);
+	-moz-box-shadow: 0 4px  4px  rgba(0, 0, 0, .05),
+               0 1px  6px  rgba(0, 0, 0, .05),
+               0 8px  8px  rgba(0, 0, 0, .05), 
+               0 16px 16px rgba(0, 0, 0, .05), 
+               8px 32px 32px rgba(0, 0, 0, .02), 
+               8px 64px 64px rgba(0, 0, 0, .02);
+	box-shadow: 0 4px  4px  rgba(0, 0, 0, .05),
+               0 1px  6px  rgba(0, 0, 0, .05),
+               0 8px  8px  rgba(0, 0, 0, .05), 
+               0 16px 16px rgba(0, 0, 0, .05), 
+               8px 32px 32px rgba(0, 0, 0, .02), 
+               8px 64px 64px rgba(0, 0, 0, .02);
 	padding: 2rem;
 }
+
+
+
+
 
 
 /* ====================================================== 
@@ -4035,7 +4227,7 @@ a img.aligncenter {
 /* ====================================================== 
    33. Themes    
 /* ====================================================== */
-/*------- 32.1 White  --------*/
+/*------- 33.1 White  --------*/
 
 
 /* Navigation Area  */
