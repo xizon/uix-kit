@@ -2032,8 +2032,8 @@ li.multi-column > ul li .nav-arrow {
 	width: 100%;
 }
 .parallax-container {
-  height: 300px;/* Required, associated with script.js */
-  width: 100%;/* Required, associated with script.js  */
+  height: 300px;/* Required, associated with uix-kit.js */
+  width: 100%;/* Required, associated with uix-kit.js  */
 }
 
 .parallax-element {
@@ -3021,8 +3021,14 @@ li.multi-column > ul li .nav-arrow {
 	line-height: 1.33333333333;
 }
 
+ul.entry-meta {
+	width: 500px;
+	margin: 0 auto;
+	display: block;
+}
+
 .entry-meta li {
-	display:inline-block;
+	display: inline-block; /*require*/
 	margin-bottom: 0.62890625rem;
 }
 
@@ -3035,10 +3041,10 @@ li.multi-column > ul li .nav-arrow {
 .entry-meta.wrap li strong {
 	padding-right: 0.4375rem;
 	font-size: 0.875rem;
-	color: #474747;
+	color: #C9C9C9;
 	display: inline-block;
 	width: 130px;
-	vertical-align:top;
+	vertical-align: top;
 }
 
 .entry-meta.wrap li span {
