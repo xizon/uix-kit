@@ -3991,7 +3991,7 @@ ul.entry-meta {
 	
 	.list-timeline-item .list-timeline-item-info .date {
 		top: 45px;
-		left: -60px; !important;
+		left: -60px !important;
 		right: auto !important;
 		text-align: left !important;
 	}	
