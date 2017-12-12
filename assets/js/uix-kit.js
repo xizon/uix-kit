@@ -1455,9 +1455,7 @@ theme = ( function ( theme, $, window, document ) {
 					clickDeg = 0;	
 				}
 
-				liWrapper
-					.addClass( 'open' )
-					.css({ 
+				liWrapper.css({ 
 							'-webkit-transform' : 'rotate('+ parseFloat( degWrapper - clickDeg ) +'deg)',
 							'-ms-transform'     : 'rotate('+ parseFloat( degWrapper - clickDeg ) +'deg)',
 							'transform'         : 'rotate('+ parseFloat( degWrapper - clickDeg ) +'deg)'
@@ -1468,13 +1466,33 @@ theme = ( function ( theme, $, window, document ) {
 				for( var i = 0; i < liArr.length; i++ ) {
 
 					var deg = i * parseFloat( pathLen / liArr.length );
+					
+					// Rotate animation
+					$( { deg: angleStart } ).animate( { deg: deg }, {
+						step: function( now ) {
 
-					if ( liWrapper.hasClass( 'open' ) ) {
-						liRotate( liArr[i], deg, angleStart, degWrapper, clickDeg );
 
-					} else {
-						liRotate( liArr[i], angleStart, angleStart, degWrapper, clickDeg );
-					}
+
+							if ( !isNumeric.test( clickDeg ) ) {
+								clickDeg = 0;	
+							}
+
+							$( liArr[i] )
+							   .css({ 
+										'-webkit-transform' : 'rotate('+parseFloat( now )+'deg)',
+										'-ms-transform'     : 'rotate('+parseFloat( now )+'deg)',
+										'transform'         : 'rotate('+parseFloat( now )+'deg)'
+									})
+							   .find( 'a' )
+							   .css({ 
+										'-webkit-transform' : 'rotate('+ -parseFloat( now - clickDeg + degWrapper )+'deg)',
+										'-ms-transform'     : 'rotate('+ -parseFloat( now - clickDeg + degWrapper )+'deg)',
+										'transform'         : 'rotate('+ -parseFloat( now - clickDeg + degWrapper )+'deg)'
+									});
+
+
+
+						}, duration: 0 });
 
 				}
 
@@ -1483,37 +1501,7 @@ theme = ( function ( theme, $, window, document ) {
 				
 			}
 			
-			// Rotate animation
-			function liRotate( obj, deg, angleStart, degWrapper, moveDeg ) {
-				
-				
-				$( { deg: angleStart } ).animate( { deg: deg }, {
-					step: function( now ) {
-
-						
-				
-						if ( !isNumeric.test( moveDeg ) ) {
-							moveDeg = 0;	
-						}
-						
-						$( obj )
-						   .css({ 
-									'-webkit-transform' : 'rotate('+parseFloat( now )+'deg)',
-									'-ms-transform'     : 'rotate('+parseFloat( now )+'deg)',
-									'transform'         : 'rotate('+parseFloat( now )+'deg)'
-								})
-						   .find( 'a' )
-						   .css({ 
-									'-webkit-transform' : 'rotate('+ -parseFloat( now - moveDeg + degWrapper )+'deg)',
-									'-ms-transform'     : 'rotate('+ -parseFloat( now - moveDeg + degWrapper )+'deg)',
-									'transform'         : 'rotate('+ -parseFloat( now - moveDeg + degWrapper )+'deg)'
-								});
-
-						
-						
-					}, duration: 0 });
-			}
-
+			
 
 			
 			
