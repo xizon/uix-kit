@@ -25,6 +25,13 @@ Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap.
 * W3C Standard Support
 
 
+### Browser Support
+
+![Chrome](https://raw.github.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png) | ![Firefox](https://raw.github.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png) | ![Edge](https://raw.github.com/alrra/browser-logos/master/src/edge/edge_48x48.png) | ![IE](https://raw.github.com/alrra/browser-logos/master/src/archive/internet-explorer_9-11/internet-explorer_9-11_48x48.png) | ![Safari](https://raw.github.com/alrra/browser-logos/master/src/safari/safari_48x48.png) | ![Opera](https://raw.github.com/alrra/browser-logos/master/src/opera/opera_48x48.png)
+--- | --- | --- | --- | --- | --- |
+Latest ✔ | Latest ✔ | Latest ✔ | 9+ ✔ | 9.1+ ✔ | Latest ✔ |
+
+
 ### How does it work?
 
 #### 1)\. HTML Structure
@@ -209,34 +216,4 @@ You can download the corresponding .PSD grid files based on Bootstrap 3.x from t
 *   `_grid/bootstrap3_1278_grid_web.psd` (XL Container: 1278px)
 *   `_grid/bootstrap3_1410_grid_web.psd` (XXL Container: 1410px)
 
-
-### Credits
-
-
-Uix Kit bundles the following third-party resources:
-
-- [Font Awesome](http://fontawesome.io)
-- [jQuery Easing](http://gsgd.co.uk/sandbox/jquery/easing/)
-- [jQuery Mousewheel](https://plugins.jquery.com/mousewheel/)
-- [Flexslider](https://github.com/woocommerce/FlexSlider)
-- [Glyphicons](http://glyphicons.com/)
-- [Bootstrap v3.3.7](http://getbootstrap.com)
-- [jQuery Parallax](http://www.ianlunn.co.uk/plugins/jquery-parallax/)
-- [Shuffle.js](https://vestride.github.io/Shuffle/)
-- [UItoTop jQuery Plugin](http://www.mattvarone.com/web-design/uitotop-jquery-plugin)
-- [waitForImages](https://github.com/alexanderdickson/waitForImages)
-- [modernizr](https://modernizr.com/)
-- [Respond.js](https://github.com/scottjehl/Respond)
-- [ScrollReveal](https://github.com/jlmakes/scrollreveal.js)
-
-
-
-All photos uploaded to the site are released under Creative Commons - CC0 and do not require attribution. No more hassle trying to figure out whether you can use photos for commercial use and whether you need to provide attribution. (http://www.gratisography.com, https://stocksnap.io ) Part of the image and videos used in the demo are not distributed with the theme. They are all licensed under Creative Commons and credited to their respective creator/owner.
-
-
-### Changelog
-
-#### = 0.0.5 Beta (December 11, 2017) =
-
-* First release.
 
