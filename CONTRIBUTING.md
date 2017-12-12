@@ -4,7 +4,6 @@ Hi, there!
 
 * [Communication](#communication)
 * [Resources](#res)
-* [Documentation](#documentation)
 * [License](#license)
 
 <a name="communication"></a>
@@ -39,11 +38,6 @@ All photos uploaded to the site are released under Creative Commons - CC0 and do
 
 
 
-
-<a name="documentation"></a>
-## Documentation
-
-Coming soon...
 
 
 <a name="license"></a>
