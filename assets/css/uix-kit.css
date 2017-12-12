@@ -3990,6 +3990,12 @@ ul.entry-meta {
 
 
 /* 30.3 List of Timeline */
+/* Vertical */
+.list-timeline-container-outer {
+	width: 100%;
+	overflow: hidden;
+}
+
 .list-timeline-container {
 	
 }
@@ -4043,20 +4049,9 @@ ul.entry-meta {
     height: 100%;
 }
 
-@media all and (max-width: 768px) {
-	.list-timeline-item .line {
-		left: 20px;
-	}	
-	.list-timeline-item-img {
-		left: 0;
-		margin-left: auto;
-	}	
-	
-}
 
 .list-timeline-item .list-timeline-item-info {
     position: relative;
-    padding: 0.875rem;
 	padding: 1.4rem;
 	width: 45%;	
 	-webkit-box-shadow: 0 4px  4px  rgba(0, 0, 0, .05),
@@ -4079,13 +4074,6 @@ ul.entry-meta {
                8px 64px 64px rgba(0, 0, 0, .02);	
 }
 
-@media all and (max-width: 768px) {
-	.list-timeline-item .list-timeline-item-info {
-		width: 80%;
-		margin-left: 3.5rem;
-	}
-	
-}
 
 .list-timeline-item .list-timeline-item-info:after {
     clear: both;
@@ -4132,6 +4120,19 @@ ul.entry-meta {
 
 @media all and (max-width: 768px) {
 
+	.list-timeline-item .line {
+		left: 20px;
+	}	
+	.list-timeline-item-img {
+		left: 0;
+		margin-left: auto;
+	}	
+	
+	.list-timeline-item .list-timeline-item-info {
+		width: 80%;
+		margin-left: 3.5rem;
+	}
+	
 	
 	.list-timeline-item .list-timeline-item-info .date {
 		top: 45px;
@@ -4146,6 +4147,159 @@ ul.entry-meta {
 	}
 
 }
+
+
+/* Horizontal */
+.list-timeline-container-outer.horizontal {
+	padding: 3.5rem 0;
+	overflow-x: auto;
+}
+
+
+.list-timeline-container-outer.horizontal::-webkit-scrollbar-track {
+	-webkit-border-radius: 0px; 
+	-moz-border-radius: 0px; 
+	border-radius: 0px;
+	background-color: #F1F1F1;
+}
+
+.list-timeline-container-outer.horizontal::-webkit-scrollbar {
+	width: 3px;
+	height: 3px;
+	background-color: #D3D3D3;
+}
+
+.list-timeline-container-outer.horizontal::-webkit-scrollbar-thumb {
+	-webkit-border-radius: 0px; 
+	-moz-border-radius: 0px; 
+	border-radius: 0px;
+	background-color: #BFBEBE;
+}
+
+
+.list-timeline-container-outer.horizontal > .list-timeline-container {
+	width: 9999px;
+}
+
+
+.list-timeline-container-outer.horizontal > .list-timeline-container:after {
+    clear: both;
+    content: "";
+    display: table;
+}
+
+
+.horizontal .list-timeline-item {
+	float: left;
+	width: auto;
+	max-width: 25vw;
+	margin: 0;
+}
+
+
+
+.horizontal .list-timeline-item:after {
+	display: none;
+}
+
+
+.horizontal .list-timeline-item .line {
+	height: 1px;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+}
+
+
+.horizontal .list-timeline-item-img {
+    top: -20px;
+	left: 50%;
+	margin-left: -20px;
+	z-index: 3;
+}
+
+
+.horizontal .list-timeline-item .list-timeline-item-info {
+	min-width: 250px;
+	float: none;
+	top: 25px;
+	/* Vertical Center */
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	-ms-transform: translateX(-50%);
+	transform: translateX(-50%);
+}
+
+
+.horizontal .list-timeline-item .list-timeline-item-info .date {
+	position: absolute;
+	display: inline-block;
+	width: 50px;
+	overflow: hidden;
+    float: none;
+	top: -85px;
+	z-index: 2;
+	/* Vertical Center */
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	-ms-transform: translateX(-50%);
+	transform: translateX(-50%);
+}
+
+
+
+@media all and (max-width: 768px) {
+
+	.list-timeline-container-outer.horizontal {
+		padding: 0;
+		overflow: inherit;
+	}
+	
+	.list-timeline-container-outer.horizontal > .list-timeline-container {
+		width: 100%;
+	}
+	
+	.horizontal .list-timeline-item {
+		float: none;
+		width: 100%;
+		max-width: none;
+		margin: 0 0 3.5rem;
+	}
+	
+	.horizontal .list-timeline-item .line {
+		height: calc( 100% + 5rem );
+		width: 1px;
+		left: 36px;
+		top: 20px;
+	}	
+	.horizontal .list-timeline-item-img {
+		top: 20px;
+		left: 16px;
+		margin-left: auto;
+	}	
+	
+	.horizontal .list-timeline-item .list-timeline-item-info {
+		position: relative;
+		width: calc( 80% - 40px );
+		margin: 0;
+		margin-left: .5rem;
+	}
+	
+	
+	.horizontal .list-timeline-item .list-timeline-item-info .date {
+		float: left;
+		top: 45px;
+		left: -38px !important;
+		right: auto !important;
+	}	
+	
+	
+}
+
+
+
 
 
 /* ====================================================== 

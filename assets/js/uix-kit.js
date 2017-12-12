@@ -26,8 +26,9 @@
 	16. Dropdown Categories
 	17. Pagination
 	18. Counter
-	19. Multiple columns full height for Bootstrap 3.x
-	20. AJAX
+	19. Timeline
+	20. Multiple columns full height for Bootstrap 3.x
+	21. AJAX
 
 ************************************* */
 
@@ -1885,9 +1886,81 @@ theme = ( function ( theme, $, window, document ) {
 }( theme, jQuery, window, document ) );
 
 
+
 /*! 
  *************************************
- * 19. Multiple columns full height for Bootstrap 3.x
+ * 19. Timeline
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+    
+    var pageLoaded = function() {
+		
+		
+		var $window      = $( window ),
+			windowWidth  = $window.width(),
+			windowHeight = $window.height(),
+			$timeline    = $( '.list-timeline-container-outer.horizontal > .list-timeline-container' ),
+			$item        = $timeline.find( '.list-timeline-item' );
+				
+
+		//Timeline initialize
+		if ( windowWidth > 768 ) {
+		    timelineInit();
+		}
+		
+		$window.on('resize', function() {
+			windowWidth  = $window.width();
+			if ( windowWidth > 768 ) {
+				timelineInit();
+			} else {
+				$( '.list-timeline-container-outer.horizontal' ).off( 'mousewheel' );
+				$timeline.css( 'width', 'auto' );
+			}
+			
+
+		});
+		
+		function timelineInit() {
+			// Horizontal
+			var totalWidth = 0;
+
+			$item.each( function( index )  {
+				totalWidth = totalWidth + $( this ).outerWidth();
+
+			});
+
+			$timeline.css( 'width', totalWidth + 'px' );
+			
+			$( '.list-timeline-container-outer.horizontal' ).on( 'mousewheel', function( event, delta) {
+				this.scrollLeft -= (delta * 10);
+				event.preventDefault();
+			});	
+	
+			
+		}
+			
+		
+		
+			
+	
+
+    };
+
+    theme.timeline = {
+        pageLoaded : pageLoaded        
+    };
+
+    theme.components.pageLoaded.push( pageLoaded );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+/*! 
+ *************************************
+ * 20. Multiple columns full height for Bootstrap 3.x
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -1946,9 +2019,12 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
+
+
+
 /*! 
  *************************************
- * 20. AJAX
+ * 21. AJAX
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
