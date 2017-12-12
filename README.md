@@ -3,9 +3,23 @@
 [Demo Here](https://uiux.cc/uix-kit).
 
 
-<img src="https://github.com/xizon/uix-kit/blob/master/_screenshots/cover.jpg" width="300" height="300">
+<a href="https://uiux.cc/uix-kit" target="_blank"><img src="https://github.com/xizon/uix-kit/blob/master/_screenshots/cover.jpg" width="300" height="300"></a>
 
 
+
+### Description
+
+Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap.
+
+
+* Simple custom CSS and JS core files
+* 100% Responsive & Mobile Ready
+* Prepare some generic plug-ins in advance
+* Support Chinese and English
+* Core style sheet compatible with Bootstrap 3.x (Optimized reference to Bootstrap 4.x)
+* Provides a common web page components and layouts
+* Standard Code
+* W3C Standard Support
 
 ### Licensing
 
@@ -27,20 +41,6 @@ Finding bugs, sending pull requests or improving our docs - any contribution is 
 How to use and quickly understand, please [check out the documentation](DOCUMENTATION.md)
 
 
-
-### Description
-
-Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap.
-
-
-* Simple custom CSS and JS core files
-* 100% Responsive & Mobile Ready
-* Prepare some generic plug-ins in advance
-* Support Chinese and English
-* Core style sheet compatible with Bootstrap 3.x (Optimized reference to Bootstrap 4.x)
-* Provides a common web page components and layouts
-* Standard Code
-* W3C Standard Support
 
 
 ### Browser Support
