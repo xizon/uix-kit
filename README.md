@@ -4,7 +4,7 @@
 
 
 
-![](https://github.com/xizon/uix-kit/blob/master/_screenshots/cover.jpg | width=400 )
+![](https://github.com/xizon/uix-kit/blob/master/_screenshots/cover.jpg?v=4&s=400)
 
 
 
