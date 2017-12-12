@@ -1,4 +1,4 @@
-# Contributing to UIkit
+# Contributing to Uix Kit
 
 Hi, there!
 
