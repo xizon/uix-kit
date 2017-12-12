@@ -9,6 +9,15 @@ Created by UIUX Lab [@uiux_lab](https://twitter.com/uiux_lab)
 Licensed under the [MIT](https://opensource.org/licenses/MIT).
 
 
+### Contributing
+
+Finding bugs, sending pull requests or improving our docs - any contribution is welcome and highly appreciated. To get started, head over to our [contribution guidelines](CONTRIBUTING.md). Thanks!
+
+### Changelog
+
+[Check Out Here](CHANGELOG.md)
+
+
 
 ### Description
 
