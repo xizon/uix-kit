@@ -798,7 +798,14 @@ theme = ( function ( theme, $, window, document ) {
     var pageLoaded = function() {
 		
 
-		$( '.custom-theme-flexslider:not(.custom-primary-flexslider):not(.custom-controls)' ).each( function( index )  {
+		var $window      = $( window ),
+			windowWidth  = $window.width(),
+			windowHeight = $window.height();
+
+		
+
+		//-------  Initialize Carousel
+		$( '.custom-theme-flexslider:not(.custom-primary-flexslider):not(.custom-controls):not(.custom-itemgrid)' ).each( function( index )  {
 			var $this        = $( this ),
 				dataSpeed    = $this.data( 'speed' ),
 				dataTiming   = $this.data( 'timing' ),
@@ -839,6 +846,8 @@ theme = ( function ( theme, $, window, document ) {
 			
 		});
 		
+		
+		//-------  Initialize Carousel (custom controls)
 		$( '.custom-theme-flexslider.custom-controls' ).each( function( index )  {
 			var $this        = $( this ),
 				dataSpeed    = $this.data( 'speed' ),
@@ -883,6 +892,68 @@ theme = ( function ( theme, $, window, document ) {
 		});
 		
 		
+		
+		//-------  Initialize Carousel (Carousel with dynamic min/max ranges)
+		
+		//store the slider in a local variable
+		var flexslider  = { vars:{} }
+		
+		// tiny helper function to add breakpoints
+		function getGridSizeL() {
+			return ( window.innerWidth < 600 ) ? 2 : ( window.innerWidth < 900 ) ? 3 : 4;
+		}
+		
+		function getGridSizeS() {
+			return ( window.innerWidth < 600 ) ? 2 : ( window.innerWidth < 900 ) ? 2 : 3;
+		}
+		
+		$( '.custom-theme-flexslider.custom-itemgrid' ).each( function( index )  {
+			var $this        = $( this ),
+				dataSpeed    = $this.data( 'speed' ),
+				dataTiming   = $this.data( 'timing' ),
+				dataLoop     = $this.data( 'loop' ),
+				dataPrev     = $this.data( 'prev' ),
+				dataNext     = $this.data( 'next' ),
+				dataAnim     = $this.data( 'animation' ),
+				dataPaging   = $this.data( 'paging' ),
+				dataArrows   = $this.data( 'arrows' );
+			
+			// If there is no data-xxx, save current source to it
+			if( typeof dataSpeed === typeof undefined ) dataSpeed = 600;
+			if( typeof dataTiming === typeof undefined ) dataTiming = 10000;
+			if( typeof dataLoop === typeof undefined ) dataLoop = true;
+			if( typeof dataPrev === typeof undefined ) dataPrev = "<i class='fa fa-chevron-left'></i>";
+			if( typeof dataNext === typeof undefined ) dataNext = "<i class='fa fa-chevron-right'></i>";
+			if( typeof dataAnim === typeof undefined ) dataAnim = 'slide';
+			if( typeof dataPaging === typeof undefined ) dataPaging = true;
+			if( typeof dataArrows === typeof undefined ) dataArrows = true;
+			
+			$this.flexslider({
+				namespace	      : 'custom-theme-flex-',
+				animation         : dataAnim,
+				selector          : '.custom-theme-slides > div.item',
+				controlNav        : dataPaging,
+				smoothHeight      : true,
+				prevText          : dataPrev,
+				nextText          : dataNext,
+				animationSpeed    : dataSpeed,
+				slideshowSpeed    : dataTiming,
+				slideshow         : true,
+				animationLoop     : dataLoop,
+				directionNav      : dataArrows,
+				start             : initslides, //Fires when the slider loads the first slide
+				after             : initslides, //Fires after each slider animation completes.
+			    itemWidth         : 1,
+				move              : 1, // Number of carousel items that should move on animation.
+			    minItems          : getGridSizeS(), // use function to pull in initial value
+			    maxItems          : getGridSizeS() // use function to pull in initial value
+			});
+
+			
+		});
+		
+		
+		//-------  Initialize Primary Carousel
 		$( '.custom-primary-flexslider' ).flexslider({
 			namespace	      : 'custom-theme-flex-',
 			animation         : 'slide',
@@ -900,6 +971,9 @@ theme = ( function ( theme, $, window, document ) {
 		});
 	
 	
+		
+		
+		//-------  Common initialization function
         function initslides( slider ) {
 
 			var prefix    = 'custom-theme',
