@@ -19,7 +19,7 @@ Finding bugs, sending pull requests or improving our docs - any contribution is 
 [Check Out Here](CHANGELOG.md)
 
 
-### Documentation
+### How To Use?
 
 How to use and quickly understand, please [check out the documentation](DOCUMENTATION.md)
 
