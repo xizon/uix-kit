@@ -1,5 +1,5 @@
 /* ====================================================== 
-   Gallery                               
+   Basic Slideshow                                  
 /* ====================================================== */
 .custom-theme-flexslider,
 .custom-theme-flex-viewport {
@@ -30,6 +30,7 @@
     -webkit-backface-visibility: hidden;
 }
 
+
 .custom-theme-flexslider .custom-theme-slides img {
     max-width: 100%;
     display: block;
@@ -40,6 +41,8 @@
     margin: 0;
     padding: 0;
 }
+
+
 
 html[xmlns] .custom-theme-flexslider .custom-theme-slides {
     display: block;
@@ -149,32 +152,27 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 }
 
 .custom-theme-flex-control-paging li a {
-    width: 6px;
-    height: 6px;
+    width: 12px;
+    height: 12px;
     display: block;
-    background: #666;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(255,255,255,.5);
     cursor: pointer;
     text-indent: -9999px;
-    -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
-    -moz-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
-    -o-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
-    box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
     border-radius: 20px;
+	-webkit-box-shadow: 0px 6px 23px -2px rgba(0,0,0,0.36);
+	-moz-box-shadow: 0px 6px 23px -2px rgba(0,0,0,0.36);
+	box-shadow: 0px 6px 23px -2px rgba(0,0,0,0.36);
 }
 
-.custom-theme-flex-control-paging li a:hover {
-    background: #090909;
-    background: rgba(0, 0, 0, 0.4);
-}
-
+.custom-theme-flex-control-paging li a:hover,
 .custom-theme-flex-control-paging li a.custom-theme-flex-active {
-    background: #000;
-    background: rgba(0, 0, 0, 0.4);
-    cursor: default;
+    background: rgba(255,255,255,1);
+    width: 15px;
+    height: 15px;
 }
+
 
 .custom-theme-flex-control-thumbs {
     margin: 5px 0 0;
@@ -264,33 +262,31 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 }
 
 .custom-controls-container .custom-theme-flex-control-paging li a {
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     display: block;
-    background: #666;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(233,47,22,.5);
     cursor: pointer;
     text-indent: -9999px;
-    -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
-    -moz-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
-    -o-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
-    box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
     border-radius: 20px;
+	-webkit-box-shadow: 0px 6px 23px -2px rgba(0,0,0,0.36);
+	-moz-box-shadow: 0px 6px 23px -2px rgba(0,0,0,0.36);
+	box-shadow: 0px 6px 23px -2px rgba(0,0,0,0.36);
 }
 
-.custom-controls-container .custom-theme-flex-control-paging li a:hover {
-    background: rgba(0, 0, 0, 0.4);
-}
-
+.custom-controls-container .custom-theme-flex-control-paging li a:hover,
 .custom-controls-container .custom-theme-flex-control-paging li a.custom-theme-flex-active {
-    background: #cc171e;
-    cursor: default;
+    background: rgba(233,47,22,1.00);
+    width: 15px;
+    height: 15px;
 }
+
+ 
 
 /* ====================================================== 
-   Slideshow                                
+   Primary Slideshow                                
 /* ====================================================== */
 .custom-theme-flexslider.custom-primary-flexslider {
 	max-height: 100vh;
