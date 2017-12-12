@@ -10,7 +10,7 @@
     font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
     font-size: 15px;
     background: #f8f8f8;
-    color: #333;
+    color: #212121;
 	-webkit-box-shadow: 0px 0px 107px 0px rgba(0,0,0,0.2);
 	-moz-box-shadow: 0px 0px 107px 0px rgba(0,0,0,0.2);
 	box-shadow: 0px 0px 107px 0px rgba(0,0,0,0.2);	
@@ -54,7 +54,7 @@
     font-weight: normal;
     padding: 0 15px;
     margin: 0 0 5px;
-    color: #333;
+    color: #212121;
     line-height: 24px;
     box-shadow: 0 5px 5px 3px rgba(0, 0, 0, 0.2);
 }
@@ -107,7 +107,7 @@
     padding: 0 15px;
     display: block;
     text-decoration: none;
-    color: #333;
+    color: #212121;
 }
 
 .sidr ul li ul {
@@ -186,7 +186,7 @@
 .sidr input[type=button],
 .sidr input[type=submit] {
     color: #f8f8f8;
-    background: #333;
+    background: #212121;
 }
 
 .sidr input[type=button]:hover,

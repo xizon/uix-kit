@@ -1357,19 +1357,45 @@ theme = ( function ( theme, $, window, document ) {
    
     var documentReady = function( $ ){
 		
-		$( '.tabs' ).each(function( id ) {
-			var $this       = $( this ),
-			    $li         = $this.find( '.nav li' ),
-				liNum       = $li.length,
-				$contentbox = $this.find( '.content' ),
-				fullwidth   = $this.data( 'fullwidth' ),
-				tabBoxID       = id;
+		$( '.custom-tabs' ).each(function( id ) {
+			var $this           = $( this ),
+			    $li             = $this.find( 'ul > li' ),
+				liNum           = $li.length,
+				$contentbox     = $this.find( '.content' ),
+				fullwidth       = $this.data( 'fullwidth' ),
+				rotation        = $this.data( 'rotation' ),
+				rotationPathLen = $this.data( 'rotation-path-len' ),
+				rotationWrapper = $this.data( 'rotation-wrapper' ),
+				rotationReverse = $this.data( 'rotation-reverse' ),
+				rotationMove    = $this.data( 'rotation-move' ),
+				tabBoxID        = id,
+				isNumeric       = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
 			
 			if( typeof fullwidth != typeof undefined && fullwidth == 1 ) {
 				$li.css( 'width', ( 100 / liNum ) + '%' );
 			}
 			
-			$( $li ).each( function( index ) {
+			if( typeof rotation === typeof undefined ) {
+				rotation = false;
+			}	
+			
+			if( typeof rotationPathLen === typeof undefined ) {
+				rotationPathLen = 360;
+			}		
+			
+			if( typeof rotationWrapper === typeof undefined ) {
+				rotationWrapper = 0;
+			}		
+			
+			if( typeof rotationReverse === typeof undefined ) {
+				rotationReverse = false;
+			}	
+			if( typeof rotationMove === typeof undefined ) {
+				rotationMove = 0;
+			}		
+			
+			
+			$li.each( function( index ) {
 				index = index + 1;
 				$( this ).attr( 'href', 'javascript:' );
 				$( this ).attr( 'data-tab', tabBoxID + '-tabs-show' + index );
@@ -1379,15 +1405,118 @@ theme = ( function ( theme, $, window, document ) {
 				$( this ).attr( 'id', tabBoxID + '-tabs-show' + index );
 			});
 			
+			
+			// Tab Rotation Effect
+			if ( rotation ) {
+				
+				//reversing the order of child elements
+				if ( rotationReverse ) $this.find( 'ul' ).html( $this.find( 'ul > li' ).get().reverse() );
+				
+				initLiPos( $this.find( 'ul' ), rotationPathLen, rotationWrapper, false );
+
+			}
+			
+			
+			// Tab Fade Effect
 			$this.on( 'click', 'li', function( e ) {
 				
-				var tabID = $( this ).attr( 'data-tab' );
+				var tabID = $( this ).attr( 'data-tab' ),
+					index = parseFloat( $( this ).index() - 1 );
+				
+				
 				$this.find( 'li' ).removeClass( 'active' );
 				$this.find( '.content' ).removeClass( 'active' );
 		
 				$( this ).addClass( 'active' );
 				$( '#' + tabID ).addClass( 'active' );
-			})		
+				
+				
+				// Tab Rotation Effect
+				if ( rotation ) {
+					initLiPos( $this.find( 'ul' ), rotationPathLen, rotationWrapper, index * rotationMove );
+				}
+				
+				return false;
+				
+				
+			});
+			
+			$this.find( 'ul > li.active' ).trigger( 'click' );
+			
+
+			// Initialize li position
+			function initLiPos( liWrapper, pathLen, degWrapper, clickDeg ) {
+				
+				var liArr      = liWrapper.find( 'li' ),
+					angleStart = -360;
+				
+				
+				if ( !isNumeric.test( clickDeg ) ) {
+					clickDeg = 0;	
+				}
+
+				liWrapper
+					.addClass( 'open' )
+					.css({ 
+							'-webkit-transform' : 'rotate('+ parseFloat( degWrapper - clickDeg ) +'deg)',
+							'-ms-transform'     : 'rotate('+ parseFloat( degWrapper - clickDeg ) +'deg)',
+							'transform'         : 'rotate('+ parseFloat( degWrapper - clickDeg ) +'deg)'
+						});
+
+
+
+				for( var i = 0; i < liArr.length; i++ ) {
+
+					var deg = i * parseFloat( pathLen / liArr.length );
+
+					if ( liWrapper.hasClass( 'open' ) ) {
+						liRotate( liArr[i], deg, angleStart, degWrapper, clickDeg );
+
+					} else {
+						liRotate( liArr[i], angleStart, angleStart, degWrapper, clickDeg );
+					}
+
+				}
+
+
+			
+				
+			}
+			
+			// Rotate animation
+			function liRotate( obj, deg, angleStart, degWrapper, moveDeg ) {
+				
+				
+				$( { deg: angleStart } ).animate( { deg: deg }, {
+					step: function( now ) {
+
+						
+				
+						if ( !isNumeric.test( moveDeg ) ) {
+							moveDeg = 0;	
+						}
+						
+						$( obj )
+						   .css({ 
+									'-webkit-transform' : 'rotate('+parseFloat( now )+'deg)',
+									'-ms-transform'     : 'rotate('+parseFloat( now )+'deg)',
+									'transform'         : 'rotate('+parseFloat( now )+'deg)'
+								})
+						   .find( 'a' )
+						   .css({ 
+									'-webkit-transform' : 'rotate('+ -parseFloat( now - moveDeg + degWrapper )+'deg)',
+									'-ms-transform'     : 'rotate('+ -parseFloat( now - moveDeg + degWrapper )+'deg)',
+									'transform'         : 'rotate('+ -parseFloat( now - moveDeg + degWrapper )+'deg)'
+								});
+
+						
+						
+					}, duration: 0 });
+			}
+
+
+			
+			
 				
 			
 		});
@@ -1397,7 +1526,7 @@ theme = ( function ( theme, $, window, document ) {
 	}
 		
       
-    theme.tabs = {
+    theme.customTabs = {
         documentReady : documentReady        
     };  
     theme.components.documentReady.push( documentReady );

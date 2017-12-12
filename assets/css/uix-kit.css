@@ -832,7 +832,7 @@ section.site-google-map,
 .controls select:focus,
 .controls select:hover {
     outline: none;
-    border-color: #333;
+    border-color: #212121;
 }
 
 .controls input[type="text"]:focus + label, .controls input[type="text"]:hover + label,
@@ -852,7 +852,7 @@ section.site-google-map,
 .controls button:hover + label,
 .controls select:focus + label,
 .controls select:hover + label {
-    color: #333;
+    color: #212121;
     cursor: text;
 }
 
@@ -1216,7 +1216,7 @@ ul.menu-main > li > ul {
 
 ul.menu-main > li:not(.multi-column) > ul ul {
 	background: #fff;
-	border: 1.15px solid #333;
+	border: 1.15px solid #212121;
 	margin-left: -1.15px;
 	padding: 1.421875rem 0;
 }
@@ -1230,7 +1230,7 @@ ul.menu-main > li > ul:before {
 	top: 0;
 	left: 0;
 	margin-top: 12px;
-	border: 1.15px solid #333;
+	border: 1.15px solid #212121;
 	background: #fff;
 }
 
@@ -1383,7 +1383,7 @@ li.multi-column > ul li .nav-arrow {
     right: 30px;
     cursor: pointer;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
-	background: #333;
+	background: #212121;
 	-webkit-border-radius: 2px; 
 	-moz-border-radius: 2px; 
 	border-radius: 2px;
@@ -1651,8 +1651,8 @@ li.multi-column > ul li .nav-arrow {
 }
 
 .social-bg-codepen {
-	border-color: #333 !important;
-    background-color: #333 !important;
+	border-color: #212121 !important;
+    background-color: #212121 !important;
 }
 
 .social-bg-behance {
@@ -1707,8 +1707,8 @@ li.multi-column > ul li .nav-arrow {
 }
 
 .social-bg-digg {
-	border-color: #333 !important;
-    background-color: #333 !important;
+	border-color: #212121 !important;
+    background-color: #212121 !important;
 }
 
 .social-bg-tumblr {
@@ -1744,7 +1744,7 @@ li.multi-column > ul li .nav-arrow {
 }
 
 .social-btn-colourful li a {
-	color: #333333;
+	color: #212121;
 }
 
 .social-btn-colourful li a:hover {
@@ -1796,7 +1796,7 @@ li.multi-column > ul li .nav-arrow {
 }
 
 .social-btn-colourful li a[href*="codepen.com"] {
-    color: #333;
+    color: #212121;
 }
 
 .social-btn-colourful li a[href*="behance.net"] {
@@ -1841,11 +1841,11 @@ li.multi-column > ul li .nav-arrow {
 }
 
 .social-btn-colourful li a[href*="mailto"] {
-    color: #333;
+    color: #212121;
 }
 
 .social-btn-colourful li a[href*="digg.com"] {
-    color: #333;
+    color: #212121;
 }
 
 .social-btn-colourful li a[href*="tumblr.com"] {
@@ -2152,7 +2152,7 @@ li.multi-column > ul li .nav-arrow {
     text-align: center;
     background: none;
     border: none;
-    color: #333;
+    color: #212121;
     font-variant-ligatures: common-ligatures; /*Ligatures and contextual forms are ways of combining glyphs to produce more harmonized forms.*/
     margin-bottom: 0;
     font-size: 0.875rem;
@@ -2198,7 +2198,7 @@ li.multi-column > ul li .nav-arrow {
 }
 
 .page-links a > span {
-	color: #333;
+	color: #212121;
 	background: #F9F9F9;
 	padding: 0 0.2625rem;
 	border: 1px solid #DDDDDD;
@@ -2591,8 +2591,8 @@ li.multi-column > ul li .nav-arrow {
     transition: all 0.3s ease 0s;	
 }
 .button-hover:hover {
-	color: #333;
-	border-color: #333;
+	color: #212121;
+	border-color: #212121;
 }
 
 
@@ -2615,8 +2615,8 @@ li.multi-column > ul li .nav-arrow {
 }
 
 .button-bg-black {
-	border-color: #333 !important;
-	background: #333 !important;
+	border-color: #212121 !important;
+	background: #212121 !important;
 	color: #fff !important;
 }
 .button-bg-black:hover {
@@ -2925,7 +2925,7 @@ li.multi-column > ul li .nav-arrow {
 }
 
 .search-box .wp-search-submit:hover {
-    color: #333;
+    color: #212121;
 }
 
 
@@ -3211,7 +3211,7 @@ ul.entry-meta {
 /* ====================================================== 
    24. Tabs        
 /* ====================================================== */
-.tabs {
+.custom-tabs:not(.rotation) {
 	-webkit-box-shadow: 0 4px  4px  rgba(0, 0, 0, .05),
                0 1px  6px  rgba(0, 0, 0, .05),
                0 8px  8px  rgba(0, 0, 0, .05), 
@@ -3230,42 +3230,168 @@ ul.entry-meta {
                0 16px 16px rgba(0, 0, 0, .05), 
                8px 32px 32px rgba(0, 0, 0, .02), 
                8px 64px 64px rgba(0, 0, 0, .02);
+	
+}
+.custom-tabs ul > li {
+    position: relative;
+    display: block;
+    -moz-transition: .1s ease-in-out;
+    -o-transition: .1s ease-in-out;
+    -webkit-transition: .1s ease-in-out;
+    transition: .1s ease-in-out;
 }
 
-.tabs .content {
-	display: none;
-	padding: 1.3125rem;
-	text-align: left;
-}
-.tabs .content.active {
-	display: block;
+.custom-tabs ul > li > a {
+    position: relative;
+    display: block;
+    padding: 0.625rem 1rem;
 }
 
-.tabs li {
+.custom-tabs .content {
+    display: none;
+    padding: 1.3125rem;
+    text-align: left;
+}
+
+.custom-tabs .content.active {
+    display: block;
+}
+
+.custom-tabs ul > li {
     list-style: none;
-	float: left;
-	-webkit-box-shadow: inset 1px 0px 0px 0px rgba(230,230,230,1);
-	-moz-box-shadow: inset 1px 0px 0px 0px rgba(230,230,230,1);
-	box-shadow: inset 1px 0px 0px 0px rgba(230,230,230,1);
-	background: #f7f7f7;
+    float: left;
+    -webkit-box-shadow: inset 1px 0px 0px 0px rgba(230,230,230,1);
+    -moz-box-shadow: inset 1px 0px 0px 0px rgba(230,230,230,1);
+    box-shadow: inset 1px 0px 0px 0px rgba(230,230,230,1);
+    background: #f7f7f7;
 }
 
-.tabs ul:after {
+.custom-tabs ul:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.custom-tabs ul > li a {
+    display: block;
+    text-align: center;
+}
+
+.custom-tabs ul > li.active {
+    background: #212121;
+	
+}
+.custom-tabs ul > li.active a {
+	color: #fff;
+}
+
+
+/* Tab Rotation Effect */
+.custom-tabs.rotation {
+	height: 400px;
+}
+
+.custom-tabs.rotation .content {
+	width: 400px;
+}
+
+.custom-tabs.rotation .custom-tabs-ul-container {
+	width: 300px;
+	height: 300px;
+	position: absolute;
+	margin-left: 400px;
+
+}
+
+.custom-tabs.rotation ul {
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	-moz-transition: .1s ease-in-out; 
+	-o-transition: .1s ease-in-out;
+	-webkit-transition: .1s ease-in-out; 
+	transition: .1s ease-in-out;
+}
+
+.custom-tabs.rotation ul:before {
+	display: block;
 	content: '';
-	display: block;
-	clear: both;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: -10px;
+	left: 10px;
+	border-top: 3px solid #EC5E79;
+	-webkit-border-radius: 100%; 
+	-moz-border-radius: 100%; 
+	border-radius: 100%; 
+	z-index: 0;
+	-webkit-transform: rotate(-240deg) scale(.8);
+	-ms-transform: rotate(-240deg) scale(.8);
+	transform: rotate(-240deg) scale(.8);
 }
 
-.tabs li a {
-	display: block;
-	text-align: center;
+
+.custom-tabs.rotation ul > li {
+	position: absolute;
+	width: 80px;
+	height: 100%;
+	margin: 0 50%;
+	background: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+	
+	
+	-webkit-transform: rotate(-360deg);
+	-ms-transform: rotate(-360deg);
+	transform: rotate(-360deg);
+
+	-moz-transition: .1s ease-in-out; 
+	-o-transition: .1s ease-in-out;
+	-webkit-transition: .1s ease-in-out; 
+	transition: .1s ease-in-out;
+	
+	
 }
 
-.tabs li.active {
-    background: #eeeeee;
+
+.custom-tabs.rotation ul > li > a {
+	width: 80px;
+	height: 80px;
+	line-height: 60px;
+	background: #fff;
+	
+	-webkit-border-radius: 100%; 
+	-moz-border-radius: 100%; 
+	border-radius: 100%; 
+	
+	-webkit-box-shadow: 0 4px  4px  rgba(0, 0, 0, .05),
+               0 1px  6px  rgba(0, 0, 0, .05),
+               0 8px  8px  rgba(0, 0, 0, .05), 
+               0 16px 16px rgba(0, 0, 0, .05), 
+               8px 32px 32px rgba(0, 0, 0, .02), 
+               8px 64px 64px rgba(0, 0, 0, .02);
+	-moz-box-shadow: 0 4px  4px  rgba(0, 0, 0, .05),
+               0 1px  6px  rgba(0, 0, 0, .05),
+               0 8px  8px  rgba(0, 0, 0, .05), 
+               0 16px 16px rgba(0, 0, 0, .05), 
+               8px 32px 32px rgba(0, 0, 0, .02), 
+               8px 64px 64px rgba(0, 0, 0, .02);
+	box-shadow: 0 4px  4px  rgba(0, 0, 0, .05),
+               0 1px  6px  rgba(0, 0, 0, .05),
+               0 8px  8px  rgba(0, 0, 0, .05), 
+               0 16px 16px rgba(0, 0, 0, .05), 
+               8px 32px 32px rgba(0, 0, 0, .02), 
+               8px 64px 64px rgba(0, 0, 0, .02);
+	
 }
 
-
+.custom-tabs.rotation ul > li.active > a {
+	background: #212121;
+}
 
 /* ====================================================== 
    25. Style of Irregular Shape                                        
