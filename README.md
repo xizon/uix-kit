@@ -1,8 +1,13 @@
 # Uix Kit
 
-Created by UIUX Lab [@uiux_lab](https://twitter.com/uiux_lab)
-
 [Demo Here](https://uiux.cc/uix-kit).
+
+
+
+![](https://github.com/xizon/uix-kit/blob/master/_screenshots/cover.jpg)
+
+
+
 
 ### Licensing
 
