@@ -3,9 +3,7 @@
 [Demo Here](https://uiux.cc/uix-kit).
 
 
-
-![](https://github.com/xizon/uix-kit/blob/master/_screenshots/cover.jpg){:height="300px" width="300px"}
-
+<img src="https://github.com/xizon/uix-kit/blob/master/_screenshots/cover.jpg" width="300" height="300">
 
 
 
