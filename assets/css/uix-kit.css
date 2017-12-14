@@ -345,7 +345,7 @@ iframe {
 
 /* 1.2. Bootstrap 3.x */
 /* New XL container for Bootstrap 3.x */
-@media all and (min-width: 1300px) {
+@media all and (min-width: 1430px) {
 		
 	.container {
 		width: 1278px;
@@ -354,7 +354,7 @@ iframe {
 }
 
 /* New XXL container for Bootstrap 3.x */
-@media all and (min-width: 1430px) {
+@media all and (min-width: 1600px) {
 		
 	.container {
 		width: 1410px;
@@ -2486,7 +2486,7 @@ li.multi-column > ul li .nav-arrow {
 	display: inline-block;
 	text-align: center;
 	min-width: 100px;
-	margin: 0.875rem;
+	margin: 0.875rem 1.75rem 0.875rem 0;
 	padding: 0.4375rem 1.09375rem;
 	border: none;
 	background: none;
@@ -2497,6 +2497,13 @@ li.multi-column > ul li .nav-arrow {
 	-webkit-backface-visibility: hidden;
 	-moz-osx-font-smoothing: grayscale;
 }
+
+.button.radius {
+	-webkit-border-radius: 35px; 
+	-moz-border-radius: 35px; 
+	border-radius: 35px; 
+}
+
 
 .button-text-white {
 	color: #fff;
