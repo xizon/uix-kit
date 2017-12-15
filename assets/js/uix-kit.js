@@ -815,7 +815,8 @@ theme = ( function ( theme, $, window, document ) {
 				dataNext     = $this.data( 'next' ),
 				dataAnim     = $this.data( 'animation' ),
 				dataPaging   = $this.data( 'paging' ),
-				dataArrows   = $this.data( 'arrows' );
+				dataArrows   = $this.data( 'arrows' ),
+				dataAuto     = $this.data( 'auto' );
 			
 			// If there is no data-xxx, save current source to it
 			if( typeof dataSpeed === typeof undefined ) dataSpeed = 600;
@@ -826,6 +827,7 @@ theme = ( function ( theme, $, window, document ) {
 			if( typeof dataAnim === typeof undefined ) dataAnim = 'slide';
 			if( typeof dataPaging === typeof undefined ) dataPaging = true;
 			if( typeof dataArrows === typeof undefined ) dataArrows = true;
+			if( typeof dataAuto === typeof undefined ) dataAuto = true;
 			
 			$this.flexslider({
 				namespace	      : 'custom-theme-flex-',
@@ -837,7 +839,7 @@ theme = ( function ( theme, $, window, document ) {
 				nextText          : dataNext,
 				animationSpeed    : dataSpeed,
 				slideshowSpeed    : dataTiming,
-				slideshow         : true,
+				slideshow         : dataAuto,
 				animationLoop     : dataLoop,
 				directionNav      : dataArrows,
 				start             : initslides, //Fires when the slider loads the first slide
@@ -858,7 +860,8 @@ theme = ( function ( theme, $, window, document ) {
 				dataNext     = $this.data( 'next' ),
 				dataAnim     = $this.data( 'animation' ),
 				dataPaging   = $this.data( 'paging' ),
-				dataArrows   = $this.data( 'arrows' );
+				dataArrows   = $this.data( 'arrows' ),
+				dataAuto     = $this.data( 'auto' );
 			
 			// If there is no data-xxx, save current source to it
 			if( typeof dataSpeed === typeof undefined ) dataSpeed = 600;
@@ -869,6 +872,7 @@ theme = ( function ( theme, $, window, document ) {
 			if( typeof dataAnim === typeof undefined ) dataAnim = 'slide';
 			if( typeof dataPaging === typeof undefined ) dataPaging = true;
 			if( typeof dataArrows === typeof undefined ) dataArrows = true;
+			if( typeof dataAuto === typeof undefined ) dataAuto = true;
 			
 			$this.flexslider({
 				namespace	      : 'custom-theme-flex-',
@@ -880,7 +884,7 @@ theme = ( function ( theme, $, window, document ) {
 				nextText          : dataNext,
 				animationSpeed    : dataSpeed,
 				slideshowSpeed    : dataTiming,
-				slideshow         : true,
+				slideshow         : dataAuto,
 				animationLoop     : dataLoop,
 				directionNav      : dataArrows,
 				start             : initslides, //Fires when the slider loads the first slide
@@ -917,7 +921,8 @@ theme = ( function ( theme, $, window, document ) {
 				dataNext     = $this.data( 'next' ),
 				dataAnim     = $this.data( 'animation' ),
 				dataPaging   = $this.data( 'paging' ),
-				dataArrows   = $this.data( 'arrows' );
+				dataArrows   = $this.data( 'arrows' ),
+				dataAuto     = $this.data( 'auto' );
 			
 			// If there is no data-xxx, save current source to it
 			if( typeof dataSpeed === typeof undefined ) dataSpeed = 600;
@@ -928,6 +933,7 @@ theme = ( function ( theme, $, window, document ) {
 			if( typeof dataAnim === typeof undefined ) dataAnim = 'slide';
 			if( typeof dataPaging === typeof undefined ) dataPaging = true;
 			if( typeof dataArrows === typeof undefined ) dataArrows = true;
+			if( typeof dataAuto === typeof undefined ) dataAuto = true;
 			
 			$this.flexslider({
 				namespace	      : 'custom-theme-flex-',
@@ -939,7 +945,7 @@ theme = ( function ( theme, $, window, document ) {
 				nextText          : dataNext,
 				animationSpeed    : dataSpeed,
 				slideshowSpeed    : dataTiming,
-				slideshow         : true,
+				slideshow         : dataAuto,
 				animationLoop     : dataLoop,
 				directionNav      : dataArrows,
 				start             : initslides, //Fires when the slider loads the first slide
@@ -963,7 +969,8 @@ theme = ( function ( theme, $, window, document ) {
 				dataNext     = $this.data( 'next' ),
 				dataAnim     = $this.data( 'animation' ),
 				dataPaging   = $this.data( 'paging' ),
-				dataArrows   = $this.data( 'arrows' );
+				dataArrows   = $this.data( 'arrows' ),
+				dataAuto     = $this.data( 'auto' );
 			
 			// If there is no data-xxx, save current source to it
 			if( typeof dataSpeed === typeof undefined ) dataSpeed = 600;
@@ -974,6 +981,7 @@ theme = ( function ( theme, $, window, document ) {
 			if( typeof dataAnim === typeof undefined ) dataAnim = 'slide';
 			if( typeof dataPaging === typeof undefined ) dataPaging = true;
 			if( typeof dataArrows === typeof undefined ) dataArrows = true;
+			if( typeof dataAuto === typeof undefined ) dataAuto = true;
 			
 			
 			$this.flexslider({
@@ -986,7 +994,7 @@ theme = ( function ( theme, $, window, document ) {
 				nextText          : dataNext,
 				animationSpeed    : dataSpeed,
 				slideshowSpeed    : dataTiming,
-				slideshow         : true,
+				slideshow         : dataAuto,
 				animationLoop     : dataLoop,
 				directionNav      : dataArrows,
 				start: function( slider ) {
@@ -1060,8 +1068,10 @@ theme = ( function ( theme, $, window, document ) {
 			slider.removeClass( prefix+'-flexslider-loading' );
 	
 			//Auto-restart player if paused after action
-			if ( !slider.playing ) {
-				slider.play();
+			if ( slider.vars.slideshow ) {
+				if ( !slider.playing ) {
+					slider.play();
+				}	
 			}
 			
 			//Prevent to <a> of page transitions
