@@ -835,26 +835,28 @@ section.site-google-map,
     border-color: #212121;
 }
 
-.controls input[type="text"]:focus + label, .controls input[type="text"]:hover + label,
-.controls input[type="email"]:focus + label,
-.controls input[type="email"]:hover + label,
-.controls input[type="tel"]:focus + label,
-.controls input[type="tel"]:hover + label,
-.controls input[type="password"]:focus + label,
-.controls input[type="password"]:hover + label,
-.controls input[type="url"]:focus + label,
-.controls input[type="url"]:hover + label,
-.controls input[type="search"]:focus + label,
-.controls input[type="search"]:hover + label,
-.controls textarea:focus + label,
-.controls textarea:hover + label,
-.controls button:focus + label,
-.controls button:hover + label,
-.controls select:focus + label,
-.controls select:hover + label {
+.controls input[type="text"]:focus ~ label, 
+.controls input[type="text"]:hover ~ label,
+.controls input[type="email"]:focus ~ label,
+.controls input[type="email"]:hover ~ label,
+.controls input[type="tel"]:focus ~ label,
+.controls input[type="tel"]:hover ~ label,
+.controls input[type="password"]:focus ~ label,
+.controls input[type="password"]:hover ~ label,
+.controls input[type="url"]:focus ~ label,
+.controls input[type="url"]:hover ~ label,
+.controls input[type="search"]:focus ~ label,
+.controls input[type="search"]:hover ~ label,
+.controls textarea:focus ~ label,
+.controls textarea:hover ~ label,
+.controls button:focus ~ label,
+.controls button:hover ~ label,
+.controls select:focus ~ label,
+.controls select:hover ~ label {
     color: #212121;
     cursor: text;
 }
+
 
 .controls .fa-sort {
     position: absolute;
@@ -884,11 +886,13 @@ section.site-google-map,
     transition: color 0.3s, top 0.3s, background-color 0.2s;
 }
 
+
 .controls label.active {
     top: -1.09375rem;
     color: #555;
     background-color: white;
 }
+
 
 .controls textarea {
     resize: none;
@@ -910,6 +914,67 @@ section.site-google-map,
 	top: 0.721875rem;
 	color: #EC5E79;
 }
+
+/* With Status */
+
+.controls.success input[type="text"],
+.controls.success input[type="email"],
+.controls.success input[type="tel"],
+.controls.success input[type="password"],
+.controls.success input[type="url"],
+.controls.success input[type="search"],
+.controls.success textarea,
+.controls.success button,
+.controls.success select {
+    border-color: #4AB005;
+}
+.controls.success label {
+	color: #4AB005 !important;
+}
+
+
+.controls.error input[type="text"],
+.controls.error input[type="email"],
+.controls.error input[type="tel"],
+.controls.error input[type="password"],
+.controls.error input[type="url"],
+.controls.error input[type="search"],
+.controls.error textarea,
+.controls.error button,
+.controls.error select {
+    border-color: #f00;
+}
+.controls.error label {
+	color: #f00 !important;
+}
+
+
+
+/* With Icons */
+.controls.withicon label {
+	left: 2rem;
+}
+
+.controls.withicon i {
+	position: absolute;
+	left: 1rem;
+	top: 1rem;
+}
+
+.controls.withicon input[type="text"],
+.controls.withicon input[type="email"],
+.controls.withicon input[type="tel"],
+.controls.withicon input[type="password"],
+.controls.withicon input[type="url"],
+.controls.withicon input[type="search"],
+.controls.withicon textarea,
+.controls.withicon button,
+.controls.withicon select {
+	padding-left: 2.5rem;
+	width: calc(100% - 1.09375rem - 2px - 2.5rem );
+}
+
+
 
 /* 5.2. Group */
 
@@ -2493,12 +2558,18 @@ li.multi-column > ul li .nav-arrow {
 	color: inherit;
 	vertical-align: middle;
 	position: relative;
+	background-size: 300% 100%;
+	font-weight: 600;
+	text-transform: uppercase;
 	z-index: 1;
-	-webkit-backface-visibility: hidden;
-	-moz-osx-font-smoothing: grayscale;
+	
 }
 
-.button.radius {
+.button:hover {
+	background-position: 100% 0 !important;
+}
+
+.button.button-radius {
 	-webkit-border-radius: 35px; 
 	-moz-border-radius: 35px; 
 	border-radius: 35px; 
@@ -2583,9 +2654,13 @@ li.multi-column > ul li .nav-arrow {
 }
 .button-size-m {
 	font-size: 1rem;
+	margin: 1rem 0.875rem 1rem 0;
+	padding: 0.4375rem 2rem;
 }
 .button-size-l {
-	font-size: 1.125rem;
+	font-size: 1.375rem;
+	margin: 1.375rem 1rem 1.375rem 0;
+	padding: 0.4375rem 3rem;
 }
 
 
@@ -2610,27 +2685,23 @@ li.multi-column > ul li .nav-arrow {
 	opacity: 0.7; 
 }
 
+/* Your Custom colors for buttons */
+
 .button-bg-primary {
-	border-color: #EC5E79 !important;
-	background: #EC5E79 !important;
-	color: #fff !important;
-}
-.button-bg-primary:hover {
-	border-color: #E8588C !important;
-	background: #E8588C !important;
+	border-color: #ec5e79 !important;
+	background-color: #ec5e79 !important;
+	background-image: -moz-linear-gradient(left, #ec5e79 0%, #f60 20%, #d83ba0 100%) !important;
+	background-image: -webkit-linear-gradient(left, #ec5e79 0%, #f60 20%,#d83ba0 100%) !important;
+	background-image: linear-gradient(to right, #ec5e79 0%, #f60 20%, #d83ba0 100%) !important;
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ec5e79', endColorstr='#d83ba0',GradientType=1 ) !important;
+	
+	-webkit-box-shadow: 0 4px 15px 0 rgba(236,94,121,.75);
+	-moz-box-shadow: 0 4px 15px 0 rgba(236,94,121,.75);
+	box-shadow: 0 4px 15px 0 rgba(236,94,121,.75);
+	
 	color: #fff !important;
 }
 
-.button-bg-black {
-	border-color: #212121 !important;
-	background: #212121 !important;
-	color: #fff !important;
-}
-.button-bg-black:hover {
-	border-color: #000 !important;
-	background: #000 !important;
-	color: #fff !important;
-}
 
 
 
