@@ -670,7 +670,6 @@ a.link:hover {
 section,
 .section {
 	position: relative;
-	z-index: 0;
 }
 
 section,
