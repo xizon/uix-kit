@@ -4343,6 +4343,11 @@ ul.entry-meta {
 	z-index: 3;
 }
 
+.horizontal .list-timeline-item.active .list-timeline-item-img {
+	width: 50px;
+	height: 50px;
+	margin-left: -25px;
+}
 
 .horizontal .list-timeline-item .list-timeline-item-info {
 	min-width: 250px;
@@ -4371,6 +4376,12 @@ ul.entry-meta {
 	-ms-transform: translateX(-50%);
 	transform: translateX(-50%);
 }
+
+.horizontal .list-timeline-item.active .list-timeline-item-info .date {
+	color: #EC5E79;
+}
+
+
 
 
 
