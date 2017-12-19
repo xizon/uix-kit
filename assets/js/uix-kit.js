@@ -28,8 +28,9 @@
 	18. Counter
 	19. Timeline
 	20. Videos
-	21. Multiple columns full height for Bootstrap 3.x
-	22. AJAX
+	21. Accordion
+	22. Multiple columns full height for Bootstrap 3.x
+	23. AJAX
 
 ************************************* */
 
@@ -2117,9 +2118,77 @@ theme = ( function ( theme, $, window, document ) {
 }( theme, jQuery, window, document ) );
 
 
+
+
 /*! 
  *************************************
- * 21. Multiple columns full height for Bootstrap 3.x
+ * 21. Accordion
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ) {
+		
+		
+		$( '.custom-accordion' ).each(function() {
+			var $this           = $( this ),
+				aEvent          = $this.data( 'event' ),
+				firstShow       = $this.data( 'first-show' ),
+				$li             = $this.find( 'dl' ),
+				$titlebox       = $this.find( 'dt' );
+			
+			if( typeof aEvent === typeof undefined ) {
+				aEvent = 'click';
+			}	
+			
+			if( typeof firstShow === typeof undefined ) {
+				firstShow = false;
+			}		
+			
+		
+			if ( firstShow ) {
+				$li.filter( '.active' ).find( 'dd' ).slideDown( 300 );
+			}
+			
+
+			$titlebox.on( aEvent, function() {
+				
+				var $cur = $( this ).closest( 'dl' );
+				
+				if ( !$cur.hasClass( 'active' ) ) {
+					$li.removeClass( 'active' );
+					$li.find( 'dd' ).slideUp( 300 );
+
+					$cur.addClass( 'active' );
+					$cur.find( 'dd' ).slideDown( 300 );	
+				} else {
+					$li.removeClass( 'active' );
+					$li.find( 'dd' ).slideUp( 300 );
+				}
+				
+			}); 
+			
+		});
+		
+	};
+	
+		
+    theme.accordion = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
+/*! 
+ *************************************
+ * 22. Multiple columns full height for Bootstrap 3.x
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -2183,7 +2252,7 @@ theme = ( function ( theme, $, window, document ) {
 
 /*! 
  *************************************
- * 22. AJAX
+ * 23. AJAX
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
