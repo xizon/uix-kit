@@ -4272,7 +4272,6 @@ ul.entry-meta {
 	position: relative;
 }
 
-
 .list-timeline-container-outer.horizontal {
 	padding: 3.5rem 0;
 	overflow-x: auto;
@@ -4384,9 +4383,49 @@ ul.entry-meta {
 
 
 
+.horizontal .timeline-btn {
+	-webkit-box-shadow: 0px 10px 54px 0px rgba(19, 32, 62, 0.21);
+	-moz-box-shadow: 0px 10px 54px 0px rgba(19, 32, 62, 0.21);
+	box-shadow: 0px 10px 54px 0px rgba(19, 32, 62, 0.21);
+	-webkit-border-radius: 100%; 
+	-moz-border-radius: 100%; 
+	border-radius: 100%; 
+	width: 50px;
+	height: 50px;
+	position: absolute;
+	z-index: 3;
+	left: 8%;
+	top: 115px;
+	-moz-transition: .3s ease-in-out; 
+	-o-transition: .3s ease-in-out;
+	-webkit-transition: .3s ease-in-out; 
+	transition: .3s ease-in-out;
+	line-height: 50px;
+	text-align: center;
+	background: #fff;
+}
+
+.horizontal .timeline-btn.timeline-next {
+	left: auto;
+	right: 8%;
+}
+
+.horizontal .timeline-btn.timeline-prev:hover {
+	margin-left: -5px;
+}
+
+.horizontal .timeline-btn.timeline-next:hover {
+	margin-right: -5px;
+}
+
+
 
 @media all and (max-width: 768px) {
 
+	.list-timeline-container-outer-wrapper.horizontal {
+		overflow: inherit;
+	}
+	
 	.list-timeline-container-outer.horizontal {
 		padding: 0;
 		overflow: inherit;
@@ -4430,44 +4469,11 @@ ul.entry-meta {
 		right: auto !important;
 	}	
 	
+	.horizontal .timeline-btn {
+		display: none;
+	}
 	
-}
-
-
-
-.timeline-btn {
-	-webkit-box-shadow: 0px 10px 54px 0px rgba(19, 32, 62, 0.21);
-	-moz-box-shadow: 0px 10px 54px 0px rgba(19, 32, 62, 0.21);
-	box-shadow: 0px 10px 54px 0px rgba(19, 32, 62, 0.21);
-	-webkit-border-radius: 100%; 
-	-moz-border-radius: 100%; 
-	border-radius: 100%; 
-	width: 50px;
-	height: 50px;
-	position: absolute;
-	z-index: 3;
-	left: 8%;
-	top: 115px;
-	-moz-transition: .3s ease-in-out; 
-	-o-transition: .3s ease-in-out;
-	-webkit-transition: .3s ease-in-out; 
-	transition: .3s ease-in-out;
-	line-height: 50px;
-	text-align: center;
-	background: #fff;
-}
-
-.timeline-btn.timeline-next {
-	left: auto;
-	right: 8%;
-}
-
-.timeline-btn.timeline-prev:hover {
-	margin-left: -5px;
-}
-
-.timeline-btn.timeline-next:hover {
-	margin-right: -5px;
+	
 }
 
 
