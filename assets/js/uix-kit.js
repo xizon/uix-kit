@@ -27,8 +27,9 @@
 	17. Pagination
 	18. Counter
 	19. Timeline
-	20. Multiple columns full height for Bootstrap 3.x
-	21. AJAX
+	20. Videos
+	21. Multiple columns full height for Bootstrap 3.x
+	22. AJAX
 
 ************************************* */
 
@@ -2045,7 +2046,80 @@ theme = ( function ( theme, $, window, document ) {
 
 /*! 
  *************************************
- * 20. Multiple columns full height for Bootstrap 3.x
+ * 20. Videos
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+    
+    var pageLoaded = function() {
+		
+
+		var $window      = $( window ),
+			windowWidth  = $window.width(),
+			windowHeight = $window.height();
+
+		//Video initialize
+		//Check out: http://docs.videojs.com/tutorial-player-workflows.html
+		$( 'video.video-js' ).each( function()  {
+			$( this ).css({
+				  'width'      : windowWidth - 80 + 'px',
+				  'height'     : windowHeight - 150 + 'px'
+			});
+		});
+
+		$( '.web-video-btn' ).on( 'click', function() {
+			var vid = $( this ).data( 'video-id' ),
+				myPlayer = videojs( vid, {
+									  controlBar: {
+										  muteToggle : false,
+										  autoplay   : true,
+										  loop       : true,
+										  controls   : true,
+										  controlBar : {
+											muteToggle: false
+										  }
+									  }
+									});		
+			
+			
+			myPlayer.ready(function() {
+				
+				  // set, tell the player it's in fullscreen 
+				  //myPlayer.exitFullscreen();
+				  //myPlayer.requestFullscreen();
+				  myPlayer.play();
+
+			});
+			
+			$( '.modal-box .close-btn' ).on( 'click', function() {
+				
+				myPlayer.ready(function() {
+				    myPlayer.pause();
+				});				
+				
+			});
+			
+			
+		});
+			
+		
+		
+    };
+
+    theme.videos = {
+        pageLoaded : pageLoaded        
+    };
+
+    theme.components.pageLoaded.push( pageLoaded );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+/*! 
+ *************************************
+ * 21. Multiple columns full height for Bootstrap 3.x
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -2109,7 +2183,7 @@ theme = ( function ( theme, $, window, document ) {
 
 /*! 
  *************************************
- * 21. AJAX
+ * 22. AJAX
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
