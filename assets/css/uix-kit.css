@@ -430,7 +430,7 @@ h6,
     font-weight: 700;
     font-variant-ligatures: common-ligatures; /*Ligatures and contextual forms are ways of combining glyphs to produce more harmonized forms.*/
 	margin-top: 0;
-	margin-bottom: 10px;
+	margin-bottom: 0.625rem;
 	padding: 0 0 0.546875rem;
 	-ms-word-wrap: break-word;
 	word-wrap: break-word;
@@ -1010,7 +1010,7 @@ section.site-google-map,
 }
 
 .form-merge input + button[type="submit"] {
-    margin-left: -4px;
+    margin-left: -0.25rem;
 }
 
 .form-merge button[type="submit"] {
@@ -1204,7 +1204,7 @@ section.site-google-map,
 .menu-container {
 	font-size: 0.75rem;
     float: right;
-    padding-top: 20px;
+    padding-top: 1.25rem;
 	line-height: 2.34375;
 
 }
@@ -1282,7 +1282,7 @@ ul.menu-main > li > ul {
 ul.menu-main > li:not(.multi-column) > ul ul {
 	background: #fff;
 	border: 1.15px solid #212121;
-	margin-left: -1.15px;
+	margin-left: -0.071875rem;
 	padding: 1.421875rem 0;
 }
 
@@ -1294,7 +1294,7 @@ ul.menu-main > li > ul:before {
 	position: absolute;
 	top: 0;
 	left: 0;
-	margin-top: 12px;
+	margin-top: 0.75rem;
 	border: 1.15px solid #212121;
 	background: #fff;
 }
@@ -2214,7 +2214,7 @@ li.multi-column > ul li .nav-arrow {
     display: inline-block;
     width: 3.125rem;
     height: 3.125rem;
-    padding-top: 4px;
+    padding-top: 0.25rem;
     text-align: center;
     background: none;
     border: none;
@@ -2753,7 +2753,7 @@ li.multi-column > ul li .nav-arrow {
 
 
 .calendar-box thead th {
-    padding-bottom: 10px;
+    padding-bottom: 0.625rem;
 	text-align: center;
 	
 }
@@ -2762,7 +2762,7 @@ li.multi-column > ul li .nav-arrow {
     background: #f5f5f5;
     border: 1px solid #fff;
     text-align: center;
-    padding: 8px;
+    padding: 0.5rem;
 }
 
 .calendar-box tbody td:hover {
@@ -2813,7 +2813,7 @@ li.multi-column > ul li .nav-arrow {
     width: 39.4%;
     margin-right: 0.875rem;
     margin-bottom: 0.875rem;
-    padding: 2px;
+    padding: 0.125rem;
     display: block;
     text-align: left;
 }
@@ -3241,7 +3241,7 @@ ul.entry-meta {
 .comment-content {
     border-bottom: 1px solid #E6E6E6;
     margin-bottom: 1.75rem;
-	margin-left: calc(45px + 1.3125rem);
+	margin-left: calc(2.8125rem + 1.3125rem);
     clear: both;
     padding-bottom: 1.3125rem;
 	-ms-word-wrap: break-word;
@@ -3252,7 +3252,7 @@ ul.entry-meta {
 	position: relative;
     border-bottom: 1px solid #E6E6E6;
     margin-bottom: 1.75rem;
-	margin-left: calc(45px + 1.3125rem);
+	margin-left: calc(2.8125rem + 1.3125rem);
     clear: both;
     padding-bottom: 1.3125rem;
 	-ms-word-wrap: break-word;
@@ -3586,7 +3586,7 @@ ul.entry-meta {
 .author-card-top .pic img {
 	width: 90px !important;
 	height: 90px !important;
-	margin: 5px 0 0 5px;
+	margin: 0.3125rem 0 0 0.3125rem;
 	border: 1px solid #eaeaea;
 	-webkit-border-radius: 100%; 
 	-moz-border-radius: 100%; 
@@ -4428,11 +4428,11 @@ ul.entry-meta {
 }
 
 .horizontal .timeline-btn.timeline-prev:hover {
-	margin-left: -5px;
+	margin-left: -0.3125rem;
 }
 
 .horizontal .timeline-btn.timeline-next:hover {
-	margin-right: -5px;
+	margin-right: -0.3125rem;
 }
 
 
@@ -4579,7 +4579,7 @@ ul.entry-meta {
 /* Actived status */
 .custom-accordion dl.active {
     height: auto;
-    margin: 16px 0;
+    margin: 1rem 0;
 	-webkit-box-shadow: 0 0 6px rgba(0,0,0,.16),0 6px 12px rgba(0,0,0,.32);
 	-moz-box-shadow: 0 0 6px rgba(0,0,0,.16),0 6px 12px rgba(0,0,0,.32);
 	box-shadow: 0 0 6px rgba(0,0,0,.16),0 6px 12px rgba(0,0,0,.32);

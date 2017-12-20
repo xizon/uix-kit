@@ -192,12 +192,12 @@ ul.menu-main {
 
 ul.menu-main > li {
 	margin-right: auto;
-    margin-left: 27px;
+    margin-left: 1.6875rem;
 }
 
 ul.menu-main > li:not(.multi-column) > ul ul {
 	margin-left: auto;
-	margin-right: -3px;
+	margin-right: -0.1875rem;
 }
 
 ul.menu-main > li > ul:before {
@@ -209,7 +209,7 @@ ul.menu-main > li > ul:after {
 	left: auto;
 	right: 3.5rem;
 	margin-left: auto;
-	margin-right: -2.5px;
+	margin-right: -0.15625rem;
 }
 
 
@@ -302,7 +302,7 @@ ul.menu-main ul.sub-menu .nav-arrow {
 
 .comment-content {
 	margin-left: auto;
-	margin-right: calc(45px + 1.3125rem);
+	margin-right: calc(2.8125rem + 1.3125rem);
 }
 
 
@@ -348,7 +348,7 @@ ul.menu-main ul.sub-menu .nav-arrow {
 
 .form-merge input + button[type="submit"] {
 	margin-left: auto;
-    margin-right: -4px;
+    margin-right: -0.25rem;
 }
 
 
