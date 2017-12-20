@@ -1,0 +1,152 @@
+/* ====================================================== 
+   18. Button                 
+/* ====================================================== */
+/* 18.1. Common button styles */
+
+.button {
+  display: inline-block;
+  text-align: center;
+  min-width: 100px;
+  margin: 0.875rem 1.75rem 0.875rem 0;
+  padding: 0.4375rem 1.09375rem;
+  border: none;
+  background: none;
+  color: inherit;
+  vertical-align: middle;
+  position: relative;
+  background-size: 300% 100%;
+  font-weight: 600;
+  text-transform: uppercase;
+  z-index: 1;
+  &:hover {
+    background-position: 100% 0 !important;
+  }
+  &.button-radius {
+    -webkit-border-radius: 35px;
+    -moz-border-radius: 35px;
+    border-radius: 35px;
+  }
+}
+
+.button-text-white {
+  color: #fff;
+}
+
+.button-box-br {
+  margin-left: -0.875rem;
+}
+
+@media all and (max-width: 768px) {
+  .button {
+    margin: 0.7rem !important;
+    padding: 0.35rem 0.875rem !important;
+  }
+}
+
+.button {
+  &:focus {
+    outline: none;
+  }
+  > span {
+    vertical-align: middle;
+  }
+}
+
+.button-space-none {
+  margin: 0;
+}
+
+@media all and (max-width: 768px) {
+  .button-space-none {
+    margin: 0 !important;
+  }
+}
+
+.button-fullwidth {
+  max-width: none;
+  width: 100%;
+}
+
+@media all and (max-width: 768px) {
+  .button-fullwidth {
+    max-width: none !important;
+    width: calc( 100% - 1.75rem ) !important;
+  }
+}
+
+/* 18.2. Borders */
+
+.button-border-thin {
+  border: 1px solid;
+}
+
+.button-border-medium {
+  border: 2px solid;
+}
+
+.button-border-thick {
+  border: 3px solid;
+}
+
+.button-border-white {
+  border-color: #fff;
+}
+
+/* 18.3. Sizes */
+
+.button-size-tiny {
+  font-size: 0.75rem;
+}
+
+.button-size-s {
+  font-size: 0.875rem;
+}
+
+.button-size-m {
+  font-size: 1rem;
+  margin: 1rem 0.875rem 1rem 0;
+  padding: 0.4375rem 2rem;
+}
+
+.button-size-l {
+  font-size: 1.375rem;
+  margin: 1.375rem 1rem 1.375rem 0;
+  padding: 0.4375rem 3rem;
+}
+
+/* 18.4. Hover */
+
+.button-hover {
+  overflow: hidden;
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -ms-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  &:hover {
+    color: #212121;
+    border-color: #212121;
+  }
+}
+
+/* 18.5. Background */
+
+.button-bg:hover {
+  filter: alpha(opacity = 70);
+  -moz-opacity: 0.7;
+  opacity: 0.7;
+}
+
+/* Your Custom colors for buttons */
+
+.button-bg-primary {
+  border-color: #ec5e79 !important;
+  background-color: #ec5e79 !important;
+  background-image: -moz-linear-gradient(left, #ec5e79 0%, #f60 20%, #d83ba0 100%) !important;
+  background-image: -webkit-linear-gradient(left, #ec5e79 0%, #f60 20%, #d83ba0 100%) !important;
+  background-image: linear-gradient(to right, #ec5e79 0%, #f60 20%, #d83ba0 100%) !important;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ec5e79', endColorstr='#d83ba0',GradientType=1 ) !important;
+  -webkit-box-shadow: 0 4px 15px 0 rgba(236, 94, 121, 0.75);
+  -moz-box-shadow: 0 4px 15px 0 rgba(236, 94, 121, 0.75);
+  box-shadow: 0 4px 15px 0 rgba(236, 94, 121, 0.75);
+  color: #fff !important;
+}

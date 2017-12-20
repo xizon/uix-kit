@@ -1,0 +1,101 @@
+/* ====================================================== 
+   22. Entry      
+/* ====================================================== */
+
+/* 22.1. Spacing */
+
+.entry-section {
+  padding: 2.84375rem 0 1.75rem;
+  &.entry-section-top {
+    padding: 2.84375rem 0 0;
+  }
+  .entry-title {
+    padding-bottom: 1.75rem;
+  }
+}
+
+@media all and (max-width: 768px) {
+  .entry-section .entry-title {
+    padding-bottom: 0.4375rem;
+  }
+}
+
+/* 22.2. Text */
+
+.entry-mark a {
+  color: #EC5E79;
+  &:hover {
+    color: #E8588C;
+  }
+}
+
+/* 22.3. Content */
+
+.entry-content {
+  -ms-word-wrap: break-word;
+  word-wrap: break-word;
+  img {
+    height: auto !important;
+  }
+  iframe {
+    max-width: 100% !important;
+  }
+}
+
+/* 22.4. Meta */
+
+.entry-meta {
+  color: #999;
+  font-style: italic;
+  font-size: 0.75rem;
+  line-height: 1.33333333333;
+}
+
+ul.entry-meta {
+  width: 500px;
+  margin: 0 auto;
+  display: block;
+}
+
+.entry-meta {
+  li {
+    display: inline-block;
+    /*require*/
+    margin-bottom: 0.62890625rem;
+  }
+  &.wrap li {
+    display: block;
+    strong {
+      padding-right: 0.4375rem;
+      font-size: 0.875rem;
+      color: #C9C9C9;
+      display: inline-block;
+      width: 130px;
+      vertical-align: top;
+    }
+    span {
+      display: inline-block;
+      width: calc( 100% - 130px - 0.875rem );
+    }
+  }
+  li:before {
+    content: '/';
+    display: inline-block;
+    margin-right: 0.4375rem;
+  }
+  &.wrap li:before {
+    display: none;
+  }
+  li a {
+    color: #999;
+  }
+  &:not(.wrap) li:first-child:before {
+    display: none;
+  }
+  &.wrap li a {
+    color: #EC5E79;
+    &:hover {
+      color: #E8588C;
+    }
+  }
+}

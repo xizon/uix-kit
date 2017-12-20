@@ -1,0 +1,241 @@
+/* ====================================================== 
+   10. Social Buttons                               
+/* ====================================================== */
+
+/* 10.1. Social Background */
+
+.social-bg {
+  color: #fff !important;
+}
+
+.social-bg-twitter {
+  border-color: #53B9FD !important;
+  background-color: #53B9FD !important;
+}
+
+.social-bg-facebook {
+  border-color: #78A4DD !important;
+  background-color: #78A4DD !important;
+}
+
+.social-bg-google {
+  border-color: #FC5B5B !important;
+  background-color: #FC5B5B !important;
+}
+
+.social-bg-instagram {
+  border-color: #6156C7 !important;
+  background-color: #6156C7 !important;
+}
+
+.social-bg-lastfm {
+  border-color: #B90000 !important;
+  background-color: #B90000 !important;
+}
+
+.social-bg-youtube {
+  border-color: #CC181E !important;
+  background-color: #CC181E !important;
+}
+
+.social-bg-vimeo {
+  border-color: #1ab7ea !important;
+  background-color: #1ab7ea !important;
+}
+
+.social-bg-dribbble {
+  border-color: #FA8BBC !important;
+  background-color: #FA8BBC !important;
+}
+
+.social-bg-github {
+  border-color: #652F51 !important;
+  background-color: #652F51 !important;
+}
+
+.social-bg-flickr {
+  border-color: #fc4ca4 !important;
+  background-color: #fc4ca4 !important;
+}
+
+.social-bg-medium {
+  border-color: #00AB6B !important;
+  background-color: #00AB6B !important;
+}
+
+.social-bg-codepen {
+  border-color: #212121 !important;
+  background-color: #212121 !important;
+}
+
+.social-bg-behance {
+  border-color: #4F8FD6 !important;
+  background-color: #4F8FD6 !important;
+}
+
+.social-bg-dropbox {
+  border-color: #349BE9 !important;
+  background-color: #349BE9 !important;
+}
+
+.social-bg-pinterest {
+  border-color: #F35359 !important;
+  background-color: #F35359 !important;
+}
+
+.social-bg-reddit {
+  border-color: #FF4500 !important;
+  background-color: #FF4500 !important;
+}
+
+.social-bg-soundcloud {
+  border-color: #FF7500 !important;
+  background-color: #FF7500 !important;
+}
+
+.social-bg-producthunt {
+  border-color: #DA552F !important;
+  background-color: #DA552F !important;
+}
+
+.social-bg-weibo {
+  border-color: #E6162D !important;
+  background-color: #E6162D !important;
+}
+
+.social-bg-deviantart {
+  border-color: #05CC47 !important;
+  background-color: #05CC47 !important;
+}
+
+.social-bg-spotify {
+  border-color: #A5CE3F !important;
+  background-color: #A5CE3F !important;
+}
+
+.social-bg-wordpress {
+  border-color: #24A5DD !important;
+  background-color: #24A5DD !important;
+}
+
+.social-bg-digg {
+  border-color: #212121 !important;
+  background-color: #212121 !important;
+}
+
+.social-bg-tumblr {
+  border-color: #529ECC !important;
+  background-color: #529ECC !important;
+}
+
+.social-bg-linkedin {
+  border-color: #24A5DD !important;
+  background-color: #24A5DD !important;
+}
+
+.social-bg-stackoverflow {
+  border-color: #FF7500 !important;
+  background-color: #FF7500 !important;
+}
+
+/* 10.2. Social General */
+
+.social-btn, .social-btn-colourful, .social-btn li, .social-btn-colourful li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.social-btn li {
+  display: inline-block;
+  margin: 0.175rem 0.4375rem;
+}
+
+.social-btn-colourful li {
+  display: inline-block;
+  margin: 0.175rem 0.4375rem;
+  a {
+    color: #212121;
+    &:hover {
+      color: #ee9f24 !important;
+    }
+    &[href*="twitter.com"] {
+      color: #53B9FD;
+    }
+    &[href*="facebook.com"] {
+      color: #78A4DD;
+    }
+    &[href*="google.com"] {
+      color: #FC5B5B;
+    }
+    &[href*="instagram.com"] {
+      color: #6156C7;
+    }
+    &[href*="last.fm"] {
+      color: #B90000;
+    }
+    &[href*="youtube.com"] {
+      color: #CC181E;
+    }
+    &[href*="vimeo.com"] {
+      color: #1ab7ea;
+    }
+    &[href*="dribbble.com"] {
+      color: #FA8BBC;
+    }
+    &[href*="github.com"] {
+      color: #652F51;
+    }
+    &[href*="flickr.com"] {
+      color: #fc4ca4;
+    }
+    &[href*="medium.com"] {
+      color: #00AB6B;
+    }
+    &[href*="codepen.com"] {
+      color: #212121;
+    }
+    &[href*="behance.net"] {
+      color: #4F8FD6;
+    }
+    &[href*="dropbox.com"] {
+      color: #349BE9;
+    }
+    &[href*="pinterest.com"] {
+      color: #F35359;
+    }
+    &[href*="reddit.com"] {
+      color: #FF4500;
+    }
+    &[href*="soundcloud.com"] {
+      color: #FF7500;
+    }
+    &[href*="producthunt.com"] {
+      color: #DA552F;
+    }
+    &[href*="weibo.com"] {
+      color: #E6162D;
+    }
+    &[href*="deviantart.com"] {
+      color: #05CC47;
+    }
+    &[href*="spotify.com"] {
+      color: #A5CE3F;
+    }
+    &[href*="wordpress.com"] {
+      color: #24A5DD;
+    }
+    &[href*="mailto"], &[href*="digg.com"] {
+      color: #212121;
+    }
+    &[href*="tumblr.com"] {
+      color: #529ECC;
+    }
+    &[href*="linkedin.com"] {
+      color: #24A5DD;
+    }
+    &[href*="stackoverflow.com"], &[href*="rss"], &[href*="feed"] {
+      color: #FF7500;
+    }
+  }
+}

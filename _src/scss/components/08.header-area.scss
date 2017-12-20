@@ -1,0 +1,79 @@
+/* ====================================================== 
+   8. Header Area                                        
+/* ====================================================== */
+
+/* 8.1. Header Area */
+/* Don't use "margin" or "padding" to set up ".header-area" */
+
+.header-area {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 90000;
+  background-color: rgba(255, 255, 255, 1);
+  border-bottom: 1.15px solid rgba(51, 51, 51, 0.2);
+  -webkit-box-shadow: 0px 5px 40px 0px rgba(0, 0, 0, 0.08);
+  -moz-box-shadow: 0px 5px 40px 0px rgba(0, 0, 0, 0.08);
+  box-shadow: 0px 5px 40px 0px rgba(0, 0, 0, 0.08);
+  &.spy-scroll-fixed {
+    background-color: rgba(255, 255, 255, 1);
+  }
+}
+
+/* Don't use "margin" or "padding" to set up ".header-container" */
+
+.header-container {
+  /* Floating layer protection for IE */
+  background: url(../images/blank.gif);
+  .menu-right {
+    float: right;
+    a {
+      display: inline-block;
+      margin-right: .75rem;
+    }
+  }
+}
+
+.navbar-fixed-top .header-container {}
+
+.header-inner {
+  height: 185px;
+  background: none;
+  &.auto-height {
+    height: calc( 65px + 0.284375rem );
+  }
+  &.no-height {
+    height: 0 !important;
+  }
+}
+
+/* 8.2. Brand */
+
+.brand {
+  float: left;
+  font-size: 1.3125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  white-space: nowrap;
+  max-width: 95%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  img {
+    max-height: 50px;
+    margin-top: 0.75rem;
+  }
+}
+
+.mobile-brand {
+  display: none;
+}
+
+@media all and (max-width: 768px) {
+  .mobile-brand {
+    display: block;
+  }
+  .brand img {
+    margin-bottom: 0.75rem;
+  }
+}

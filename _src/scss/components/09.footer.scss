@@ -1,0 +1,21 @@
+/* ====================================================== 
+   9. Footer                               
+/* ====================================================== */
+
+.footer-main-container {
+  font-size: 0.75rem;
+  padding: 2.625rem 0;
+  ul li {
+    display: inline-block;
+    margin: 0.175rem 0.4375rem;
+  }
+}
+
+@media all and (max-width: 768px) {
+  .footer-main-container {
+    .pull-left, .pull-right {
+      float: none !important;
+      text-align: center;
+    }
+  }
+}

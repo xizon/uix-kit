@@ -1,0 +1,52 @@
+/* ====================================================== 
+   2. Helper Classes                                
+/* ====================================================== */
+
+.relative {
+  position: relative;
+}
+
+.clear {
+  clear: both;
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+
+.clearfix {
+  *zoom: 1;
+  &:before {
+    display: table;
+    content: "";
+    line-height: 0;
+  }
+  &:after {
+    display: table;
+    content: "";
+    line-height: 0;
+    clear: both;
+  }
+}
+
+.transition {
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -ms-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  div {
+    &.nav-previous, &.nav-next {
+      -webkit-transition: all 0.3s ease 0s;
+      -moz-transition: all 0.3s ease 0s;
+      -ms-transition: all 0.3s ease 0s;
+      transition: all 0.3s ease 0s;
+    }
+  }
+  img, a, i, li, span {
+    -webkit-transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -ms-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+  }
+}

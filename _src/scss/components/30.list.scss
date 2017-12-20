@@ -1,0 +1,500 @@
+/* ====================================================== 
+   30. List Modules
+/* ====================================================== */
+/* 30.1 List of Post  */
+
+/* ---- Style 1 ------*/
+
+.list-topic-container {}
+
+.list-topic-item {
+  position: relative;
+  margin-bottom: 4.8125rem;
+  .gallery-caption {
+    display: none;
+  }
+  .list-topic-item-audio {
+    position: relative;
+    z-index: 1;
+  }
+  .list-topic-item-img iframe {
+    max-width: 100% !important;
+    max-height: 300px !important;
+  }
+  .list-normal {
+    ul, ol {
+      line-height: inherit !important;
+    }
+  }
+  &:not(.post-blockquote) blockquote {
+    font-size: inherit;
+    padding: 0.75rem;
+    margin: 0.875rem 0;
+    border-left-width: 3px;
+    line-height: inherit;
+    quotes: none;
+    &:before {
+      display: none;
+    }
+  }
+  .list-topic-item-img {
+    margin-top: 1.75rem;
+  }
+  .list-topic-item-info {
+    margin-top: 3.5rem;
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
+    background: #fff;
+    padding: 1rem;
+    position: relative;
+  }
+  &:hover .list-topic-item-info {
+    background: #F3F3F3;
+  }
+  .list-topic-item-info {
+    h1, h2, h3, h4, h5, h6 {
+      font-family: inherit;
+      font-weight: 600;
+    }
+    h1 {
+      font-size: 2.4609375rem;
+      line-height: 1.15555556;
+    }
+    h2 {
+      font-size: 1.75rem;
+      line-height: 1.421875;
+    }
+    h3 {
+      font-size: 1.25rem;
+      line-height: 1.625;
+    }
+    .page-link a {
+      display: inline-block;
+      padding: .2625rem;
+    }
+  }
+  .detail {
+    margin-top: 1rem;
+  }
+  p {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 2;
+    font-size: 0.875rem;
+  }
+  a.more {
+    font-size: 0.75rem;
+    position: relative;
+    padding-left: 1.5rem;
+    display: inline-block;
+    margin-top: 3.5rem;
+    z-index: 3;
+    text-transform: uppercase;
+  }
+  &:hover a.more {
+    color: #fff;
+  }
+  .more-container {
+    overflow: hidden;
+  }
+  .more-bg {
+    background: #EC5E79;
+    position: absolute;
+    right: -200px;
+    top: 69%;
+    z-index: 1;
+    -moz-transition: .1s ease-in-out;
+    -o-transition: .1s ease-in-out;
+    -webkit-transition: .1s ease-in-out;
+    transition: .1s ease-in-out;
+    width: 130px;
+    height: 35px;
+    -webkit-transform: rotate(0) skew(-45deg);
+    -ms-transform: rotate(0) skew(-45deg);
+    transform: rotate(0) skew(-45deg);
+  }
+  &:hover .more-bg {
+    right: -30px;
+  }
+  &.style-2 {
+    .detail p, .tags-box {
+      padding-left: 1rem;
+    }
+    .detail a {
+      /* Used when "list-normal table-normal" style are used */
+      color: #474747 !important;
+      &:hover {
+        /* Used when "list-normal table-normal" style are used */
+        color: #000 !important;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+@media all and (max-width: 768px) {
+  .list-topic-item {
+    margin-bottom: 3rem;
+  }
+}
+
+@media all and (max-width: 768px) {
+  .list-topic-item .list-topic-item-info {
+    margin-top: 0;
+  }
+}
+
+/* Pagination of per post list */
+
+@media all and (max-width: 768px) {
+  .list-topic-item a.more {
+    margin-top: auto;
+  }
+}
+
+/* ---- Style 2 ------*/
+
+/* 30.2 List of Split */
+
+.list-split-container {}
+
+.list-split-item {
+  position: relative;
+  margin-bottom: 4.8125rem;
+  .list-split-item-info {
+    p {
+      font-size: 0.875rem;
+    }
+    > div {
+      padding: 0 4rem;
+    }
+  }
+  &.even .row > .col-sm-6 {
+    float: right;
+  }
+}
+
+@media all and (max-width: 768px) {
+  .list-split-item {
+    margin-bottom: 3rem;
+  }
+}
+
+@media all and (max-width: 768px) {
+  .list-split-item {
+    &.even .row > .col-sm-6 {
+      &:first-child, &:nth-child(2) {
+        -webkit-transform: translateX(0);
+        -ms-transform: translateX(0);
+        transform: translateX(0);
+      }
+    }
+    .list-split-item-info {
+      margin-top: 1.5rem;
+      > div {
+        padding: 0;
+      }
+    }
+  }
+}
+
+/* 30.3 List of Timeline */
+/* Vertical */
+
+.list-timeline-container-outer {
+  width: 100%;
+  overflow: hidden;
+}
+
+.list-timeline-container {}
+
+.list-timeline-item {
+  position: relative;
+  margin: 3.5rem 0;
+  &:after {
+    clear: both;
+    content: "";
+    display: table;
+  }
+  &:first-child {
+    margin-top: 0;
+  }
+  &:last-child {
+    margin-bottom: 0;
+  }
+  .line {
+    height: calc( 100% + 5rem );
+    width: 1px;
+    background: #EC5E79;
+    position: absolute;
+    top: 40px;
+    left: 50%;
+  }
+}
+
+.list-timeline-item-img {
+  position: absolute;
+  top: 0;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  border-radius: 100%;
+  overflow: hidden;
+  width: 40px;
+  height: 40px;
+  left: 50%;
+  margin-left: -20px;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.list-timeline-item {
+  .list-timeline-item-info {
+    position: relative;
+    padding: 1.4rem;
+    width: 45%;
+    -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+    -moz-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+    &:after {
+      clear: both;
+      content: '';
+      display: table;
+    }
+    h3 {
+      font-size: 1.25rem;
+      line-height: 1.625;
+    }
+    p {
+      font-size: 0.875rem;
+    }
+    .date {
+      font-size: 0.875rem;
+      display: inline-block;
+      float: left;
+      padding: .6875rem 0;
+      opacity: .7;
+      position: absolute;
+      width: 100%;
+      left: 122%;
+      top: 0;
+    }
+    p {
+      margin: 0.875rem 0;
+    }
+  }
+  &:nth-child(even) .list-timeline-item-info {
+    float: right;
+    .date {
+      left: auto;
+      right: 122%;
+      text-align: right;
+    }
+  }
+}
+
+@media all and (max-width: 768px) {
+  .list-timeline-item .line {
+    left: 20px;
+  }
+  .list-timeline-item-img {
+    left: 0;
+    margin-left: auto;
+  }
+  .list-timeline-item {
+    .list-timeline-item-info {
+      width: 80%;
+      margin-left: 3.5rem;
+      .date {
+        top: 45px;
+        left: -60px !important;
+        right: auto !important;
+        text-align: left !important;
+      }
+    }
+    &:nth-child(even) .list-timeline-item-info {
+      float: none;
+    }
+  }
+}
+
+/* Horizontal */
+
+.list-timeline-container-outer-wrapper.horizontal {
+  height: auto;
+  /*Requires the system automatically calculated*/
+  overflow: hidden;
+  position: relative;
+}
+
+.list-timeline-container-outer.horizontal {
+  padding: 3.5rem 0;
+  overflow-x: auto;
+  &::-webkit-scrollbar-track {
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    background-color: #F1F1F1;
+  }
+  &::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+    background-color: #D3D3D3;
+  }
+  &::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    background-color: #BFBEBE;
+  }
+  > .list-timeline-container {
+    width: 9999px;
+    &:after {
+      clear: both;
+      content: "";
+      display: table;
+    }
+  }
+}
+
+.horizontal {
+  .list-timeline-item {
+    float: left;
+    width: auto;
+    max-width: 25vw;
+    margin: 0;
+    &:after {
+      display: none;
+    }
+    .line {
+      height: 1px;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+  }
+  .list-timeline-item-img {
+    top: -20px;
+    left: 50%;
+    margin-left: -20px;
+    z-index: 3;
+  }
+  .list-timeline-item {
+    &.active .list-timeline-item-img {
+      width: 50px;
+      height: 50px;
+      margin-left: -25px;
+    }
+    .list-timeline-item-info {
+      min-width: 250px;
+      margin-bottom: 17px;
+      /* Scrollbar width is 17px by default */
+      float: none;
+      top: 25px;
+      /* Vertical Center */
+      left: 50%;
+      -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+      transform: translateX(-50%);
+      .date {
+        position: absolute;
+        display: inline-block;
+        width: 50px;
+        overflow: hidden;
+        float: none;
+        top: -85px;
+        z-index: 2;
+        /* Vertical Center */
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        transform: translateX(-50%);
+      }
+    }
+    &.active .list-timeline-item-info .date {
+      color: #EC5E79;
+    }
+  }
+  .timeline-btn {
+    -webkit-box-shadow: 0px 10px 54px 0px rgba(19, 32, 62, 0.21);
+    -moz-box-shadow: 0px 10px 54px 0px rgba(19, 32, 62, 0.21);
+    box-shadow: 0px 10px 54px 0px rgba(19, 32, 62, 0.21);
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    z-index: 3;
+    left: 8%;
+    top: 115px;
+    -moz-transition: .3s ease-in-out;
+    -o-transition: .3s ease-in-out;
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+    line-height: 50px;
+    text-align: center;
+    background: #fff;
+    &.timeline-next {
+      left: auto;
+      right: 8%;
+    }
+    &.timeline-prev:hover {
+      margin-left: -0.3125rem;
+    }
+    &.timeline-next:hover {
+      margin-right: -0.3125rem;
+    }
+  }
+}
+
+@media all and (max-width: 768px) {
+  .list-timeline-container-outer-wrapper.horizontal {
+    overflow: inherit;
+  }
+  .list-timeline-container-outer.horizontal {
+    padding: 0;
+    overflow: inherit;
+    > .list-timeline-container {
+      width: 100%;
+    }
+  }
+  .horizontal {
+    .list-timeline-item {
+      float: none;
+      width: 100%;
+      max-width: none;
+      margin: 0 0 3.5rem;
+      .line {
+        height: calc( 100% + 5rem );
+        width: 1px;
+        left: 36px;
+        top: 20px;
+      }
+    }
+    .list-timeline-item-img {
+      top: 20px;
+      left: 16px;
+      margin-left: auto;
+    }
+    .list-timeline-item .list-timeline-item-info {
+      position: relative;
+      width: calc( 80% - 40px );
+      margin: 0;
+      margin-left: .5rem;
+      .date {
+        float: left;
+        top: 45px;
+        left: -38px !important;
+        right: auto !important;
+      }
+    }
+    .timeline-btn {
+      display: none;
+    }
+  }
+}
