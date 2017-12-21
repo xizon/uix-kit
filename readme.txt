@@ -13,6 +13,7 @@ Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap.
 * Provides a common web page components and layouts
 * Standard Code
 * W3C Standard Support
+* Support JS and CSS component( SCSS ) development with Gulp
 
 
 == Credits ==
@@ -98,6 +99,12 @@ All photos uploaded to the site are released under Creative Commons - CC0 and do
 
 == Changelog ==
 
-= 0.0.5 Beta (December 11, 2017) =
+= 0.0.5 (December 20, 2017) =
+
+* Tweak: Simplified core stylesheet and scripts.
+* Tweak: Support JS and CSS component( SCSS ) development with Gulp.
+
+
+= 0.0.5beta (December 11, 2017) =
 
 * First release.
