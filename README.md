@@ -22,6 +22,53 @@ Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap.
 * W3C Standard Support
 * Support JS and CSS component( SCSS ) development with Gulp
 
+
+### 1\. Custom Core Files
+
+You can customize these files to meet the different needs of the site you want :-)
+
+The `_demo/` folder can be deleted.
+
+> #### Usage with Gulp:
+> 
+> **Javascript Components:** `_src/js-components/*`  
+> **CSS Components(SCSS):** `_src/scss/components/*`
+
+#### CSS:
+
+*   `assets/css/uix-kit.css`
+*   `assets/css/uix-kit.IE.css`
+*   `assets/css/uix-kit.mobile.nav.css`
+*   `assets/css/uix-kit.flexslider.css`
+
+#### CSS(RTL):
+
+*   `assets/css/rtl/uix-kit.rtl.css`
+*   `assets/css/rtl/uix-kit.mobile.nav.rtl.css`
+
+#### Javascript:
+
+*   `assets/js/uix-kit.js`
+*   `assets/js/min/uix-kit.min.js` (if it exists)
+
+#### Images:
+
+*   `assets/images/*`
+
+#### Fonts:
+
+*   `assets/fonts/*`
+
+### 2\. PSD Grid Templates
+
+You can download the corresponding .PSD grid files based on Bootstrap 3.x from the `_grid` folder.
+
+*   `_grid/bootstrap3_1170_grid_web.psd` (Default Container: 1170px)
+*   `_grid/bootstrap3_1278_grid_web.psd` (XL Container: 1278px)
+*   `_grid/bootstrap3_1410_grid_web.psd` (XXL Container: 1410px)
+
+
+
 ### Licensing
 
 Licensed under the [MIT](https://opensource.org/licenses/MIT).
