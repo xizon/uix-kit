@@ -1,0 +1,36 @@
+{
+  "name": "uix-kit",
+  "version": "0.0.5",
+  "description": "[Demo Here](https://uiux.cc/uix-kit).",
+  "main": "gulpfile.js",
+  "dependencies": {},
+  "devDependencies": {
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-cache": "^1.0.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-imagemin": "^4.0.0",
+    "gulp-jshint": "^2.0.4",
+    "gulp-livereload": "^3.8.1",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-notify": "^3.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-uglify": "^3.0.0",
+    "jshint": "^2.9.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xizon/uix-kit.git"
+  },
+  "author": "UIUX Lab",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xizon/uix-kit/issues"
+  },
+  "homepage": "https://github.com/xizon/uix-kit#readme"
+}

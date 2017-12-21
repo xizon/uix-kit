@@ -80,13 +80,17 @@ var theme = (function ( $, window, document ) {
 	theme.pageLoaded         = pageLoaded;
 
     return theme;
-}( jQuery, window, document ) );
+}( jQuery, window, document ) ); 
 
 
+
+
+
+		
 
 /*! 
  *************************************
- * 1. Header
+ * 1. Header 
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -134,6 +138,9 @@ theme = ( function ( theme, $, window, document ) {
 }( theme, jQuery, window, document ) );
 
 
+
+		
+
 /*! 
  *************************************
  * 2. Loader
@@ -159,61 +166,7 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-/*! 
- *************************************
- * 3. Scroll Effect
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-    
-    var documentReady = function( $ ) {
-        
-		// Back to top
-		$( document ).UItoTop( { easingType: 'easeOutQuart', scrollSpeed: 500 } );
 		
-		// Scroll to element
-		$( 'a[href^="#"]' ).on( 'click', function( e ) {
-		
-			var target = $( this ).attr( 'href' );
-		    
-			if ( $( target ).length ) {
-				e.preventDefault();
-				$( 'html, body' ).stop().animate({
-					scrollTop: $( target ).offset().top
-				}, 1000);	
-			}
-	
-		
-		});
-		
-		// Making class active by scrolling past it
-		$( window ).on( 'scroll', function() {
-			var scrollTop = $( window ).scrollTop();
-			
-			$( '[data-section="true"]' ).each(function() {
-			    
-				var curID = $( this ).attr( 'id' );
-				
-				if ( scrollTop > $( this ).offset().top - 20 ) {
-					$( '.menu-main li.active' ).removeClass( 'active' );
-					$( '.menu-main li a[href^="#'+curID+'"]' ).parent().addClass( 'active' );
-				}
-	
-			});
-		});
-		
-		
-    };
-
-    theme.scrolltop = {
-        documentReady : documentReady        
-    };
-
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
 
 /*! 
  *************************************
@@ -684,6 +637,7 @@ theme = ( function ( theme, $, window, document ) {
 }( theme, jQuery, window, document ) );
 
 
+
 /*! 
  *************************************
  * 8. Grid List
@@ -1107,6 +1061,7 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
+
 /*! 
  *************************************
  * 10. Forms
@@ -1218,7 +1173,6 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
-
 
 /*! 
  *************************************
@@ -1535,9 +1489,10 @@ theme = ( function ( theme, $, window, document ) {
 }( theme, jQuery, window, document ) );
 
 
+
 /*! 
  *************************************
- * 15. Mega Menu
+ * 15. `Mega Menu`
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -1694,6 +1649,7 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
+
 
 /*! 
  *************************************
@@ -1895,7 +1851,6 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
-
 
 
 /*! 
@@ -2249,7 +2204,6 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-
 /*! 
  *************************************
  * 23. AJAX
@@ -2289,6 +2243,3 @@ theme = ( function ( theme, $, window, document ) {
 }( theme, jQuery, window, document ) );
 
 
-
-
-		

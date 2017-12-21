@@ -1,0 +1,81 @@
+/* ====================================================== 
+   23. Comments      
+/* ====================================================== */
+/* Highlight Author Comments in WordPress */
+.comment.bypostauthor {
+  background-color: transparent; }
+.comment .comment {
+  margin-left: 2.625rem; }
+  .comment .comment.bypostauthor {
+    background-color: transparent; }
+.comment p {
+  margin-bottom: 1.25rem; }
+
+/* Nested comments */
+@media all and (max-width: 768px) {
+  .comment .comment {
+    margin-left: 0; } }
+.comment-meta {
+  margin-bottom: 0.875rem; }
+  .comment-meta:after {
+    content: '';
+    display: block;
+    clear: both; }
+  .comment-meta .comment-avatar {
+    width: 45px;
+    margin: 0 1.3125rem 0 0;
+    display: block;
+    float: left; }
+    .comment-meta .comment-avatar img {
+      vertical-align: middle;
+      width: 100%;
+      -webkit-border-radius: 100%;
+      -moz-border-radius: 100%;
+      border-radius: 100%; }
+  .comment-meta .comment-text {
+    display: block;
+    float: left; }
+    .comment-meta .comment-text h5 {
+      margin-bottom: 0;
+      padding-bottom: 0; }
+    .comment-meta .comment-text em {
+      filter: alpha(opacity=70);
+      -moz-opacity: 0.7;
+      opacity: 0.7; }
+
+.comment-content {
+  border-bottom: 1px solid #E6E6E6;
+  margin-bottom: 1.75rem;
+  margin-left: calc(2.8125rem + 1.3125rem);
+  clear: both;
+  padding-bottom: 1.3125rem;
+  -ms-word-wrap: break-word;
+  word-wrap: break-word;
+  position: relative;
+  border-bottom: 1px solid #E6E6E6;
+  margin-bottom: 1.75rem;
+  margin-left: calc(2.8125rem + 1.3125rem);
+  clear: both;
+  padding-bottom: 1.3125rem;
+  -ms-word-wrap: break-word;
+  word-wrap: break-word; }
+  .comment-content a:not(.respond) {
+    text-decoration: underline; }
+  .comment-content a.respond {
+    background: #EC5E79;
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 0.75rem;
+    padding: 0.175rem 0.875rem 0;
+    text-transform: uppercase; }
+
+/* WordPress Comment Respond */
+.comment-reply-title {
+  /* Same to .entry-section .entry-title  */
+  padding-bottom: 1.75rem;
+  /* Same to .h4 */
+  font-size: 1.125rem;
+  line-height: 1.33333333333;
+  text-transform: uppercase; }
