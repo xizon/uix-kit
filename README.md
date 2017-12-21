@@ -7,7 +7,7 @@
 
 
 
-### Description
+## Description
 
 Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap.
 
@@ -69,29 +69,29 @@ You can download the corresponding .PSD grid files based on Bootstrap 3.x from t
 
 
 
-### Licensing
+## Licensing
 
 Licensed under the [MIT](https://opensource.org/licenses/MIT).
 
 
-### Contributing
+## Contributing
 
 Finding bugs, sending pull requests or improving our docs - any contribution is welcome and highly appreciated. To get started, head over to our [contribution guidelines](CONTRIBUTING.md). Thanks!
 
 
-### Changelog
+## Changelog
 
 [Check Out Here](CHANGELOG.md)
 
 
-### How To Use?
+## How To Use?
 
 How to use and quickly understand, please [check out the documentation](DOCUMENTATION.md)
 
 
 
 
-### Browser Support
+## Browser Support
 
 ![Chrome](https://raw.github.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png) | ![Firefox](https://raw.github.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png) | ![Edge](https://raw.github.com/alrra/browser-logos/master/src/edge/edge_48x48.png) | ![IE](https://raw.github.com/alrra/browser-logos/master/src/archive/internet-explorer_9-11/internet-explorer_9-11_48x48.png) | ![Safari](https://raw.github.com/alrra/browser-logos/master/src/safari/safari_48x48.png) | ![Opera](https://raw.github.com/alrra/browser-logos/master/src/opera/opera_48x48.png)
 --- | --- | --- | --- | --- | --- |
