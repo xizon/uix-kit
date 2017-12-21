@@ -28,6 +28,11 @@
   }
 }
 
+.t-c .button {
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+}
+
 .button-text-white {
   color: #fff;
 }
@@ -150,3 +155,20 @@
   box-shadow: 0 4px 15px 0 rgba(236, 94, 121, 0.75);
   color: #fff !important;
 }
+
+
+.button-bg-secondary {
+  border-color: #fff !important;
+  background-color: transparent !important;
+  -webkit-box-shadow: 0 4px 15px 0 rgba(255, 255, 255, 0.2);
+  -moz-box-shadow: 0 4px 15px 0 rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 15px 0 rgba(255, 255, 255, 0.2);
+  color: #fff !important;
+	
+	&:hover {
+		background-color: #fff !important;
+		color: #212121 !important;
+		
+	}
+}
+
