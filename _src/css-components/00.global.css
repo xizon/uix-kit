@@ -1,7 +1,8 @@
 /*
     ## Project Name        :  Uix Kit
     ## Description         :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
-    ## Last Update         :  December 20, 2017
+    ## Version             :  0.0.5
+    ## Last Update         :  December 21, 2017
     ## Created             :  by UIUX Lab (https://uiux.cc)
     ## Contact Us          :  uiuxlab@gmail.com
     ## Compatible With     :  Bootstrap 3.x, Chinese, English
@@ -11,7 +12,6 @@
 	
 	---------------------------
 	
-
 
 	---------------------------
 	MAIN TEMPLATE STYLES
@@ -114,37 +114,3 @@
 	
 	
 */
-@import "components/01.basic.scss";
-@import "components/02.helper-classes.scss";
-@import "components/03.typography.scss";
-@import "components/04.spacing.scss";
-@import "components/05.form-elements.scss";
-@import "components/06.basic-layout.scss";
-@import "components/07.navigation-area.scss";
-@import "components/08.header-area.scss";
-@import "components/09.footer.scss";
-@import "components/10.social-buttons.scss";
-@import "components/11.back-to-top.scss";
-@import "components/12.loader.scss";
-@import "components/13.parallax.scss";
-@import "components/14.overlay.scss";
-@import "components/15.pagination.scss";
-@import "components/16.filterable-navigation.scss";
-@import "components/17.isometric-grid.scss";
-@import "components/18.button.scss";
-@import "components/19.sidebar.scss";
-@import "components/20.search.scss";
-@import "components/21.tags.scss";
-@import "components/22.entry.scss";
-@import "components/23.comments.scss";
-@import "components/24.tabs.scss";
-@import "components/25.shape.scss";
-@import "components/26.author-card.scss";
-@import "components/27.plugins.scss";
-@import "components/28.modal.scss";
-@import "components/29.single-page.scss";
-@import "components/30.list.scss";
-@import "components/31.counter.scss";
-@import "components/32.accordion.scss";
-@import "components/33.wp-core.scss";
-@import "components/34.themes.scss";

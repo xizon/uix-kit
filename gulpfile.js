@@ -11,8 +11,7 @@ var globs = {
 	jsTar    : 'assets/js',
 	cssTar   : 'assets/css',
     js       : '_src/js-components/*.js',
-    scssMain : '_src/scss/uix-kit.scss',
-	scssCom  : '_src/scss/**/*.scss'
+    scss     : '_src/css-components/*.scss'
 };
 
 /*! 
@@ -22,7 +21,8 @@ var globs = {
  */
 //Compile SCSS
 gulp.task('sass', function(){
-  return gulp.src( globs.scssMain )
+  return gulp.src( globs.scss )
+    .pipe(concat('uix-kit.scss'))
     .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
     .pipe(gulp.dest( globs.cssTar ))
   
@@ -73,8 +73,7 @@ gulp.task('default', ['jshint'], function() {
 });
 
 gulp.task('watch', function(){
-	gulp.watch( globs.scssMain, ['sass' ]); 
-	gulp.watch( globs.scssCom, ['sass' ]); 
+	gulp.watch( globs.scss, ['sass' ]); 
 	gulp.watch( globs.js, [ 'scripts' ]); 
 })
 

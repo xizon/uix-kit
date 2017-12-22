@@ -32,7 +32,7 @@ The `_demo/` folder can be deleted.
 > #### Usage with Gulp:
 > 
 > **Javascript Components:** `_src/js-components/*`  
-> **CSS Components(SCSS):** `_src/scss/components/*`
+> **CSS Components(SCSS):** `_src/css-components/*`
 
 #### CSS:
 
