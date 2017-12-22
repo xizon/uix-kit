@@ -12,8 +12,4 @@ build
 # misc
 .DS_Store
 .env
-<<<<<<< HEAD
 npm-debug.log
-=======
-npm-debug.log
->>>>>>> 4e2f9c7d1b19e54fd7df3bc88cea3c14a12ab782
