@@ -3871,40 +3871,34 @@ ul.entry-meta {
 }
 
 /* Horizontal */
-.list-timeline-container-outer-wrapper.horizontal {
-  height: auto;
-  /*Requires the system automatically calculated*/
-  overflow: hidden;
-  position: relative;
-}
-
 .list-timeline-container-outer.horizontal {
   padding: 3.5rem 0;
-  overflow-x: auto;
+  width: 1000px;
+  margin: 0 auto;
 }
 
-.list-timeline-container-outer.horizontal::-webkit-scrollbar-track {
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  border-radius: 0px;
-  background-color: #F1F1F1;
-}
-
-.list-timeline-container-outer.horizontal::-webkit-scrollbar {
-  width: 3px;
-  height: 3px;
-  background-color: #D3D3D3;
-}
-
-.list-timeline-container-outer.horizontal::-webkit-scrollbar-thumb {
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  border-radius: 0px;
-  background-color: #BFBEBE;
+.list-timeline-container-outer.horizontal:after {
+  content: '';
+  display: block;
+  position: absolute;
+  z-index: 0;
+  background-color: #ec5e79;
+  background-image: -moz-linear-gradient(left, #ec5e79 0%, #f60 20%, #d83ba0 100%);
+  background-image: -webkit-linear-gradient(left, #ec5e79 0%, #f60 20%, #d83ba0 100%);
+  background-image: linear-gradient(to right, #ec5e79 0%, #f60 20%, #d83ba0 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ec5e79', endColorstr='#d83ba0',GradientType=1 );
+  width: 100%;
+  height: 1px;
+  top: 161px;
+  left: 0;
 }
 
 .list-timeline-container-outer.horizontal > .list-timeline-container {
   width: 9999px;
+  -moz-transition: .5s ease-in-out;
+  -o-transition: .5s ease-in-out;
+  -webkit-transition: .5s ease-in-out;
+  transition: .5s ease-in-out;
 }
 
 .list-timeline-container-outer.horizontal > .list-timeline-container:after {
@@ -3916,7 +3910,7 @@ ul.entry-meta {
 .horizontal .list-timeline-item {
   float: left;
   width: auto;
-  max-width: 25vw;
+  width: 25vw;
   margin: 0;
 }
 
@@ -3990,7 +3984,7 @@ ul.entry-meta {
   position: absolute;
   z-index: 3;
   left: 8%;
-  top: 115px;
+  top: 135px;
   -moz-transition: .3s ease-in-out;
   -o-transition: .3s ease-in-out;
   -webkit-transition: .3s ease-in-out;
@@ -4014,12 +4008,12 @@ ul.entry-meta {
 }
 
 @media all and (max-width: 768px) {
-  .list-timeline-container-outer-wrapper.horizontal {
-    overflow: inherit;
-  }
   .list-timeline-container-outer.horizontal {
     padding: 0;
-    overflow: inherit;
+    width: auto;
+  }
+  .list-timeline-container-outer.horizontal:after {
+    display: none;
   }
   .list-timeline-container-outer.horizontal > .list-timeline-container {
     width: 100%;

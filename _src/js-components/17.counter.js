@@ -14,8 +14,7 @@
 			'start'    : 0,
 			'end'      : 100,
 			'easing'   : 'swing',
-			'duration' : 400,
-			'complete' : ''
+			'duration' : 400
 
 		}
 		,options);
@@ -23,7 +22,42 @@
 			
 		
 			var $this = $( this );
+			
+			
+			//////////////// Random effetct
+			var cid = Math.random() * 1000;
+			$this.attr( 'id', 'counter-' + cid );
+			
+			var word = document.getElementById( 'counter-' + cid );
+			var letters = 
+				['0','1','2','3','4','5','6','7','8','9'];
 
+			var skip = 1;
+			var counter = 0;
+
+			var swap = function() {
+
+			  if(counter++ == skip) {
+				randWord = 
+				  letters[Math.floor(Math.random()*(letters.length-5))]
+				+ letters[Math.floor(Math.random()*(letters.length-1))];
+				word.innerHTML = randWord;
+				word.dataset.text = randWord;
+
+				counter = 0;
+			  }
+			 
+			}
+			
+			var textEff = setInterval( function() {
+				swap();
+			}, 1 );
+
+			
+
+			
+			//////////////// Counter init	
+			
 			$( { count: settings.start } ).animate( { count: settings.end }, {
 				duration : settings.duration,
 				easing   : settings.easing,
@@ -34,7 +68,9 @@
 					}
 					$this.text( mathCount );
 				},
-				complete : settings.complete
+				complete : function() {
+					clearInterval( textEff );
+				}
 			});
 
 			

@@ -1739,8 +1739,7 @@ theme = ( function ( theme, $, window, document ) {
 			'start'    : 0,
 			'end'      : 100,
 			'easing'   : 'swing',
-			'duration' : 400,
-			'complete' : ''
+			'duration' : 400
 
 		}
 		,options);
@@ -1748,7 +1747,42 @@ theme = ( function ( theme, $, window, document ) {
 			
 		
 			var $this = $( this );
+			
+			
+			//////////////// Random effetct
+			var cid = Math.random() * 1000;
+			$this.attr( 'id', 'counter-' + cid );
+			
+			var word = document.getElementById( 'counter-' + cid );
+			var letters = 
+				['0','1','2','3','4','5','6','7','8','9'];
 
+			var skip = 1;
+			var counter = 0;
+
+			var swap = function() {
+
+			  if(counter++ == skip) {
+				randWord = 
+				  letters[Math.floor(Math.random()*(letters.length-5))]
+				+ letters[Math.floor(Math.random()*(letters.length-1))];
+				word.innerHTML = randWord;
+				word.dataset.text = randWord;
+
+				counter = 0;
+			  }
+			 
+			}
+			
+			var textEff = setInterval( function() {
+				swap();
+			}, 1 );
+
+			
+
+			
+			//////////////// Counter init	
+			
 			$( { count: settings.start } ).animate( { count: settings.end }, {
 				duration : settings.duration,
 				easing   : settings.easing,
@@ -1759,7 +1793,9 @@ theme = ( function ( theme, $, window, document ) {
 					}
 					$this.text( mathCount );
 				},
-				complete : settings.complete
+				complete : function() {
+					clearInterval( textEff );
+				}
 			});
 
 			
@@ -1884,45 +1920,6 @@ theme = ( function ( theme, $, window, document ) {
 			$item            = $timeline.find( '.list-timeline-item' );
 				
 
-		//--------  Timeline initialize
-		if ( windowWidth > 768 ) {
-		    timelineInit();
-		}
-		
-		$window.on('resize', function() {
-			windowWidth  = $window.width();
-			if ( windowWidth > 768 ) {
-				timelineInit();
-			} else {
-				$( '.list-timeline-container-outer.horizontal' ).off( 'mousewheel' );
-				$timeline.css( 'width', 'auto' );
-			}
-			
-
-		});
-		
-		function timelineInit() {
-			// Horizontal
-			var totalWidth = 0;
-
-			$item.each( function( index )  {
-				totalWidth = totalWidth + $( this ).outerWidth();
-
-			});
-
-			$timeline.css( 'width', totalWidth + 'px' );
-			
-			//Use the wheel to control the timeline
-			/*
-			$( '.list-timeline-container-outer.horizontal' ).on( 'mousewheel', function( event, delta) {
-				this.scrollLeft -= (delta * 10);
-				event.preventDefault();
-			});	
-			*/
-	
-			
-		}
-		
 		
 		//--------  Timeline Event
 		$( '.list-timeline-container-outer-wrapper.horizontal' ).each( function()  {
@@ -1952,8 +1949,9 @@ theme = ( function ( theme, $, window, document ) {
 		function timelinePrev( obj ) {
 			var	itemTotal = obj.find( '.list-timeline-item' ).length,
 				tNav    = obj.find( '.list-timeline-item' ),
-				tNavW   = tNav.width(),
 				tLoop   = false;
+			
+			
 			
 			var curIndex = obj.find( '.list-timeline-item.active' ).index(),
 				tarIndex = ( curIndex >= 0  ) ? curIndex-1 : 0;
@@ -1970,14 +1968,22 @@ theme = ( function ( theme, $, window, document ) {
 			obj.find( '.list-timeline-item:eq('+tarIndex+')' ).addClass( 'active' );
 
 			//scroll left
-			obj.find( '.list-timeline-container-outer.horizontal' ).animate({scrollLeft: tarIndex * tNavW }, 300 );	
+			var tNavW = 0;
+			for ( var i = 0; i < tarIndex; i++ ) {
+				tNavW += obj.find( '.list-timeline-item:eq('+i+')' ).width();
+			}
+	
+			obj.find( '.list-timeline-container-outer.horizontal > .list-timeline-container' ).css({
+				'margin-left' : -parseFloat( tNavW ) + 'px'
+			});
+			
+			
 		}
 
 
 		function timelineNext( obj ) {
 			var	itemTotal = obj.find( '.list-timeline-item' ).length,
 				tNav    = obj.find( '.list-timeline-item' ),
-				tNavW   = tNav.width(),
 				tLoop   = false;
 			
 			var curIndex = obj.find( '.list-timeline-item.active' ).index(),
@@ -1995,7 +2001,16 @@ theme = ( function ( theme, $, window, document ) {
 			
 
 			//scroll right
-			obj.find( '.list-timeline-container-outer.horizontal' ).animate({scrollLeft: tarIndex * tNavW }, 300 );	
+			var tNavW = 0;
+			for ( var i = 0; i < tarIndex; i++ ) {
+				tNavW += obj.find( '.list-timeline-item:eq('+i+')' ).width();
+			}
+	
+			obj.find( '.list-timeline-container-outer.horizontal > .list-timeline-container' ).css({
+				'margin-left' : -parseFloat( tNavW ) + 'px'
+			});
+			
+			
 		}
 
 
