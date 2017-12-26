@@ -118,6 +118,10 @@
    1. Basic                   
 /* ====================================================== */
 /* 1.1. Reset Stylesheets */
+::placeholder {
+  color: #E6E6E8;
+}
+
 :root {
   --blue: #007007;
   --indigo: #6610f2;
