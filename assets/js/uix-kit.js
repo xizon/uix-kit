@@ -1987,30 +1987,47 @@ theme = ( function ( theme, $, window, document ) {
 
 			$this.find( '.timeline-prev' ).on( 'click', function( e ) {
 				e.preventDefault();
-				timelinePrev( $this );
+				timelinePrev( $this, false );
 				return false;
 			});
 
 			$this.find( '.timeline-next' ).on( 'click', function( e ) {
 				e.preventDefault();
-				timelineNext( $this );
+				timelineNext( $this, false );
 				return false;
 			});
+			
+			$this.find( '.list-timeline-item' ).on( 'click', function( e ) {
+				e.preventDefault();
+				timelineNext( $this, $( this ) );
+				return false;
+			});
+			
 
 			
 		});
 		
 		
-		function timelinePrev( obj ) {
+		function timelinePrev( obj, iscur ) {
 			var	itemTotal = obj.find( '.list-timeline-item' ).length,
 				tNav    = obj.find( '.list-timeline-item' ),
 				tLoop   = false;
 			
 			
-			
 			var curIndex = obj.find( '.list-timeline-item.active' ).index(),
-				tarIndex = ( curIndex >= 0  ) ? curIndex-1 : 0;
+				tarIndex;
 
+			//Check if a value is an object currently
+			if ( iscur && typeof iscur === 'object' ) {
+				curIndex = iscur.index();
+				tarIndex = curIndex;
+			} else {
+				tarIndex = ( curIndex >= 0  ) ? curIndex-1 : 0;
+			}
+			
+			
+			
+			
 			//loop the items
 			if ( tLoop ) {
 				if ( tarIndex < 0 ) tarIndex = itemTotal-1;
@@ -2036,14 +2053,26 @@ theme = ( function ( theme, $, window, document ) {
 		}
 
 
-		function timelineNext( obj ) {
+		function timelineNext( obj, iscur ) {
 			var	itemTotal = obj.find( '.list-timeline-item' ).length,
 				tNav    = obj.find( '.list-timeline-item' ),
 				tLoop   = false;
 			
+			
 			var curIndex = obj.find( '.list-timeline-item.active' ).index(),
-				tarIndex = ( curIndex < itemTotal  ) ? curIndex+1 : itemTotal-1;
+				tarIndex;
 
+			//Check if a value is an object currently
+			if ( iscur && typeof iscur === 'object' ) {
+				curIndex = iscur.index();
+				tarIndex = curIndex;
+			} else {
+				tarIndex = ( curIndex < itemTotal  ) ? curIndex+1 : itemTotal-1;
+			}
+			
+			
+			
+			
 			//loop the items
 			if ( tLoop ) {
 				if ( tarIndex == itemTotal ) tarIndex = 0;

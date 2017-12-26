@@ -376,16 +376,24 @@
     }
   }
   .list-timeline-item-img {
-    top: -20px;
-    left: 50%;
-    margin-left: -20px;
-    z-index: 3;
+		top: -20px;
+		left: 50%;
+		margin-left: -20px;
+		z-index: 3;
+		filter: alpha(opacity=30);  
+		-moz-opacity: .3;   
+		opacity: .3; 
+	    cursor: pointer;
   }
   .list-timeline-item {
     &.active .list-timeline-item-img {
-      width: 50px;
-      height: 50px;
-      margin-left: -25px;
+		width: 50px;
+		height: 50px;
+		margin-left: -25px;
+		filter: alpha(opacity=100);  
+		-moz-opacity: 1;   
+		opacity: 1;
+
     }
     .list-timeline-item-info {
       min-width: 250px;
