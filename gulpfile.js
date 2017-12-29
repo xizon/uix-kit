@@ -68,41 +68,6 @@ gulp.task('sass', function(){
 });
 
 
-//Right to left
-gulp.task('styles', function () {
-	  return gulp.src( globs.scss )
-		.pipe(concat('uix-kit.scss'))
-		.pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
-
-		.pipe(cssbeautify({
-			indent: '    ',
-			openbrace: 'end-of-line',
-			autosemicolon: true
-		}))
-	  
-		.pipe(rtlcss())
-		.pipe(rename({
-			suffix: '-rtl'
-		}))
-	  
-		.pipe(headerComment(`
-			---------------------------
-			MAIN TEMPLATE STYLES ( RTL )
-			---------------------------
-
-			` + customComment + `
-
-		`))
-		.pipe(gulp.dest( globs.cssRTLTar ))
-
-		.pipe(minifyCss())
-		.pipe(rename({
-			suffix: '.min'
-		}))
-		.pipe(gulp.dest( globs.cssRTLTar ));
-
-});
-
 //Merge JS
 gulp.task('jshint', function () {
 	return gulp.src( globs.js )

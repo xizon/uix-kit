@@ -2,8 +2,9 @@
 
 #### = 0.0.7 (December 30, 2017) =
 
-* New: Right-to-Left Language Support with Gulp automatically generated.
-
+* Fix: Fixed an issue with modal windows on your mobile device.
+* Tweak: Optimized timeline script.
+* Tweak: Other styles and scripting optimizations.
 
 
 #### = 0.0.5 (December 20, 2017) =
