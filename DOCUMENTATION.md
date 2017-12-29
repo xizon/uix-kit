@@ -42,6 +42,7 @@
         
         <!-- Basic  -->
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css?ver=3.3.7" media="all"/>
+		<link rel="stylesheet" type="text/css" href="assets/css/video.min.css?ver=5.19" media="all"/>
         <link rel="stylesheet" type="text/css" href="assets/css/flexslider.min.css?ver=2.6.2" media="all" />
 		
         <!-- Icons  -->
