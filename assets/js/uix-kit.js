@@ -1,22 +1,22 @@
-/* *************************************
+/**
+ * ---------------------------
+ * MAIN SCRIPTS
+ * ---------------------------
+ *
+ * 
+ * ## Project Name        :  Uix Kit
+ * ## Description         :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
+ * ## Version             :  0.0.7
+ * ## Last Update         :  December 30, 2017
+ * ## Created             :  by UIUX Lab (https://uiux.cc)
+ * ## Contact Us          :  uiuxlab@gmail.com
+ * ## Compatible With     :  Bootstrap 3.x, Chinese, English
+ * ## Compatible Browsers :  IE9, IE10, IE11, Firefox, Safari, Opera, Chrome, Edge
+ * ## Released under the MIT license.
+ */
 
+/* 
 
-    ## Project Name        :  Uix Kit
-    ## Description         :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
-    ## Version             :  0.0.5
-    ## Last Update         :  December 21, 2017
-    ## Created             :  by UIUX Lab (https://uiux.cc)
-    ## Contact Us          :  uiuxlab@gmail.com
-    ## Compatible With     :  Bootstrap 3.x, Chinese, English
-    ## Compatible Browsers :  IE9, IE10, IE11, Firefox, Safari, Opera, Chrome, Edge
-    ## Released under the MIT license.
-	
-	
-
-	---------------------------
-	MAIN SCRIPTS
-	---------------------------
-	
 	TABLE OF CONTENTS
 	---------------------------
 	
@@ -45,7 +45,7 @@
 	22. Multiple columns full height for Bootstrap 3.x
 	23. AJAX
 
-************************************* */
+*/
 
 var templateUrl = wp_theme_root_path.templateUrl,
 	homeUrl     = wp_theme_root_path.homeUrl;

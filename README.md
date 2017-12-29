@@ -8,7 +8,7 @@
 ### Download
 
 You have the following options to install the library:
-- [Download Uix Kit](https://github.com/xizon/uix-kit/archive/master.zip) from GitHub.
+- [Download Uix Kit 0.0.7](https://github.com/xizon/uix-kit/archive/master.zip) from GitHub.
 - Use NPM `npm install uix-kit`.
 
 
@@ -47,8 +47,8 @@ The `_demo/` folder can be deleted.
 
 #### CSS(RTL):
 
-*   `assets/css/rtl/uix-kit.rtl.css`
-*   `assets/css/rtl/uix-kit.mobile.nav.rtl.css`
+*   `assets/css/rtl/uix-kit-rtl.css`
+*   `assets/css/rtl/uix-kit-rtl.min.css`
 
 #### Javascript:
 

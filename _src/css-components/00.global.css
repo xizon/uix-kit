@@ -104,16 +104,3 @@
 	
 	
 */
-
-$basic-font-size       : 16px;
-$font-stack            : 'Helvetica Neue', Helvetica, 'Microsoft YaHei', STXihei, 'PingFang SC','Hiragino Sans GB', Arial, sans-serif;
-$font-mobile-stack     : "lucida grande", tahoma, verdana, arial, sans-serif;
-$placeholder-text-color: #E6E6E8;
-$highlight-color1      : #EC5E79;
-$highlight-color2      : #E8588C;
-$primary-text-color1   : #212121;
-$primary-text-color2   : #474747;
-$sub-text-color        : #AEAEAE;
-$dividing-line-color   : #F4F4F4;
-$primary-bg-color      : transparent;
-

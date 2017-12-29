@@ -154,8 +154,8 @@ The `_demo/` folder can be deleted.
 
 #### CSS(RTL):
 
-*   `assets/css/rtl/uix-kit.rtl.css`
-*   `assets/css/rtl/uix-kit.mobile.nav.rtl.css`
+*   `assets/css/rtl/uix-kit-rtl.css`
+*   `assets/css/rtl/uix-kit-rtl.min.css`
 
 #### Javascript:
 
