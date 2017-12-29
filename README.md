@@ -5,6 +5,11 @@
 
 <a href="https://uiux.cc/uix-kit" target="_blank"><img src="https://github.com/xizon/uix-kit/blob/master/_screenshots/cover.jpg" width="300" height="300"></a>
 
+### Download
+
+You have the following options to install the library:
+- [Download Uix Kit](https://github.com/xizon/uix-kit/archive/master.zip) from GitHub.
+- Use NPM `npm install uix-kit`.
 
 
 ## Description
