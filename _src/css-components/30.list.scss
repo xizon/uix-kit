@@ -472,6 +472,18 @@
   }
   .horizontal {
     .list-timeline-item {
+		
+    &.active .list-timeline-item-img {
+		width: 40px;
+		height: 40px;
+        left: 16px;
+        margin-left: auto;
+		filter: alpha(opacity=100);  
+		-moz-opacity: 1;   
+		opacity: 1;
+
+    }
+		
       float: none;
       width: 100%;
       max-width: none;
@@ -483,10 +495,16 @@
         top: 20px;
       }
     }
+	  
+	  
+	  
     .list-timeline-item-img {
-      top: 20px;
-      left: 16px;
-      margin-left: auto;
+        top: 20px;
+        left: 16px;
+        margin-left: auto;
+		filter: alpha(opacity=100);  
+		-moz-opacity: 1;   
+		opacity: 1;	
     }
     .list-timeline-item .list-timeline-item-info {
       position: relative;

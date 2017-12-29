@@ -3346,7 +3346,8 @@ ul.entry-meta {
 /* ====================================================== */
 .modal-box {
   position: fixed;
-  top: calc( -100% - 71px);
+  top: calc( -100vh - 71px);
+  /* For compatibility with mobile devices, do not use percentages "%" */
   z-index: 99998;
   pointer-events: none;
   -moz-transition: all .5s ease-out;
@@ -3419,7 +3420,8 @@ ul.entry-meta {
 }
 
 .modal-box.active {
-  top: 50%;
+  top: 50vh;
+  /* For compatibility with mobile devices, do not use percentages "%" */
 }
 
 .modal-box.fullscreen.active {
@@ -4035,6 +4037,15 @@ ul.entry-meta {
     max-width: none;
     margin: 0 0 3.5rem;
   }
+  .horizontal .list-timeline-item.active .list-timeline-item-img {
+    width: 40px;
+    height: 40px;
+    left: 16px;
+    margin-left: auto;
+    filter: alpha(opacity=100);
+    -moz-opacity: 1;
+    opacity: 1;
+  }
   .horizontal .list-timeline-item .line {
     height: calc( 100% + 5rem);
     width: 1px;
@@ -4045,6 +4056,9 @@ ul.entry-meta {
     top: 20px;
     left: 16px;
     margin-left: auto;
+    filter: alpha(opacity=100);
+    -moz-opacity: 1;
+    opacity: 1;
   }
   .horizontal .list-timeline-item .list-timeline-item-info {
     position: relative;

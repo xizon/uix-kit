@@ -11,9 +11,9 @@
     font-size: 15px;
     background: #f8f8f8;
     color: #212121;
-	-webkit-box-shadow: 0px 0px 107px 0px rgba(0,0,0,0.2);
-	-moz-box-shadow: 0px 0px 107px 0px rgba(0,0,0,0.2);
-	box-shadow: 0px 0px 107px 0px rgba(0,0,0,0.2);	
+	-webkit-box-shadow: 0px 0px 37px 0px rgba(0,0,0,0.1);
+	-moz-box-shadow: 0px 0px 37px 0px rgba(0,0,0,0.1);
+	box-shadow: 0px 0px 37px 0px rgba(0,0,0,0.1);	
 }
 
 
@@ -78,14 +78,14 @@
     margin: 0 0 15px;
     padding: 0;
     border-top: 1px solid #dfdfdf;
-    border-bottom: 1px solid white;
+    border-bottom: none;
 }
 
 .sidr ul li {
     display: block;
     margin: 0;
     line-height: 48px;
-    border-top: 1px solid white;
+    border-top: none;
     border-bottom: 1px solid #dfdfdf;
     position: relative;
 }

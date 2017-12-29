@@ -4,7 +4,7 @@
 
 .modal-box {
   position: fixed;
-  top: calc( -100% - 71px );
+  top: calc( -100vh - 71px ); /* For compatibility with mobile devices, do not use percentages "%" */
   z-index: 99998;
   pointer-events: none;
   -moz-transition: all .5s ease-out;
@@ -75,7 +75,7 @@
     pointer-events: auto;
   }
   &.active {
-    top: 50%;
+    top: 50vh; /* For compatibility with mobile devices, do not use percentages "%" */
   }
   &.fullscreen.active {
     top: 0;

@@ -19,35 +19,38 @@ theme = ( function ( theme, $, window, document ) {
 
 		
 		//--------  Timeline Event
-		$( '.list-timeline-container-outer-wrapper.horizontal' ).each( function()  {
-			
-			
-			var $this = $( this );
-			
-			$this.css( 'height', $this.height() - 17 + 'px' ); //Scrollbar width is 17px by default
+		if ( windowWidth > 768 ) {
+			$( '.list-timeline-container-outer-wrapper.horizontal' ).each( function()  {
 
 
-			$this.find( '.timeline-prev' ).on( 'click', function( e ) {
-				e.preventDefault();
-				timelinePrev( $this, false );
-				return false;
-			});
+				var $this = $( this );
 
-			$this.find( '.timeline-next' ).on( 'click', function( e ) {
-				e.preventDefault();
-				timelineNext( $this, false );
-				return false;
-			});
-			
-			$this.find( '.list-timeline-item' ).on( 'click', function( e ) {
-				e.preventDefault();
-				timelineNext( $this, $( this ) );
-				return false;
-			});
-			
+				$this.css( 'height', $this.height() - 17 + 'px' ); //Scrollbar width is 17px by default
 
-			
-		});
+
+				$this.find( '.timeline-prev' ).on( 'click', function( e ) {
+					e.preventDefault();
+					timelinePrev( $this, false );
+					return false;
+				});
+
+				$this.find( '.timeline-next' ).on( 'click', function( e ) {
+					e.preventDefault();
+					timelineNext( $this, false );
+					return false;
+				});
+
+				$this.find( '.list-timeline-item' ).on( 'click', function( e ) {
+					e.preventDefault();
+					timelineNext( $this, $( this ) );
+					return false;
+				});
+
+
+
+			});	
+		}
+
 		
 		
 		function timelinePrev( obj, iscur ) {

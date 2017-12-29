@@ -50,6 +50,8 @@
 var templateUrl = wp_theme_root_path.templateUrl,
 	homeUrl     = wp_theme_root_path.homeUrl;
 
+var is_safari   = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/); /*Test to 9, 10. */
+
 var theme = (function ( $, window, document ) {
     'use strict';
 
