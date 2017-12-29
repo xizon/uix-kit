@@ -42,23 +42,16 @@
         
         <!-- Basic  -->
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css?ver=3.3.7" media="all"/>
-        
+        <link rel="stylesheet" type="text/css" href="assets/css/flexslider.min.css?ver=2.6.2" media="all" />
+		
         <!-- Icons  -->
         <link rel="stylesheet" type="text/css" href="assets/fonts/flaticon/flaticon.min.css?ver=1.0" media="all"/>
         <link rel="stylesheet" type="text/css" href="assets/fonts/fontawesome/font-awesome.min.css?ver=4.5" media="all" />  
         
-        <!-- Slideshow  -->
-        <link rel="stylesheet" type="text/css" href="assets/css/flexslider.min.css?ver=2.6.2" media="all" />
-        <link rel="stylesheet" type="text/css" href="assets/css/flexslider-custom.css" media="all" />
-         
-        
         <!-- Theme  -->
-        <link rel="stylesheet" type="text/css" href="assets/css/style.css?ver=1.0.0" media="all"/>
+        <link rel="stylesheet" type="text/css" href="assets/css/uix-kit.min.css?ver=1.0.0" media="all"/>
         
-        <!-- Theme for Mobile  -->
-        <link rel="stylesheet" type="text/css" href="assets/css/jquery.sidr.light.css" media="all"/>
-        
-        
+     
          <!--[if lt IE 10]>
            <link rel="stylesheet" type="text/css" href="assets/css/old-ie.css" media="all" />
         <![endif]-->
@@ -131,7 +124,7 @@
 			"homeUrl"     :""  //Eg. https://uiux.cc
 		};
     </script>  
-    <script src="assets/js/uix-kit.js?ver=1.0.0"></script>
+    <script src="assets/js/uix-kit.min.js?ver=1.0.0"></script>
 
 
 
