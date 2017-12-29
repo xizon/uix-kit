@@ -68,7 +68,7 @@
         text-align: center;
       }
       &.active {
-        background: #212121;
+        background: $primary-text-color1;
         a {
           color: #fff;
         }
@@ -107,7 +107,7 @@
         position: absolute;
         top: -10px;
         left: 10px;
-        border-top: 3px solid #EC5E79;
+        border-top: 3px solid $highlight-color1;
         -webkit-border-radius: 100%;
         -moz-border-radius: 100%;
         border-radius: 100%;
@@ -145,7 +145,7 @@
           box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
         }
         &.active > a {
-          background: #212121;
+          background: $primary-text-color1;
         }
       }
     }

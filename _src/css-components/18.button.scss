@@ -128,8 +128,8 @@
   -ms-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
   &:hover {
-    color: #212121;
-    border-color: #212121;
+    color: $primary-text-color1;
+    border-color: $primary-text-color1;
   }
 }
 
@@ -144,12 +144,12 @@
 /* Your Custom colors for buttons */
 
 .button-bg-primary {
-  border-color: #ec5e79 !important;
-  background-color: #ec5e79 !important;
-  background-image: -moz-linear-gradient(left, #ec5e79 0%, #f60 20%, #d83ba0 100%) !important;
-  background-image: -webkit-linear-gradient(left, #ec5e79 0%, #f60 20%, #d83ba0 100%) !important;
-  background-image: linear-gradient(to right, #ec5e79 0%, #f60 20%, #d83ba0 100%) !important;
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ec5e79', endColorstr='#d83ba0',GradientType=1 ) !important;
+  border-color: $highlight-color1 !important;
+  background-color: $highlight-color1 !important;
+  background-image: -moz-linear-gradient(left, $highlight-color1 0%, #f60 20%, #d83ba0 100%) !important;
+  background-image: -webkit-linear-gradient(left, $highlight-color1 0%, #f60 20%, #d83ba0 100%) !important;
+  background-image: linear-gradient(to right, $highlight-color1 0%, #f60 20%, #d83ba0 100%) !important;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$highlight-color1', endColorstr='#d83ba0',GradientType=1 ) !important;
   -webkit-box-shadow: 0 4px 15px 0 rgba(236, 94, 121, 0.75);
   -moz-box-shadow: 0 4px 15px 0 rgba(236, 94, 121, 0.75);
   box-shadow: 0 4px 15px 0 rgba(236, 94, 121, 0.75);
@@ -167,7 +167,7 @@
 	
 	&:hover {
 		background-color: #fff !important;
-		color: #212121 !important;
+		color: $primary-text-color1 !important;
 		
 	}
 }

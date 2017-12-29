@@ -11,10 +11,10 @@
   width: 260px;
   overflow-x: hidden;
   overflow-y: auto;
-  font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+  font-family: $font-mobile-stack;
   font-size: 15px;
   background: #f8f8f8;
-  color: #212121;
+  color: $primary-text-color1;
   -webkit-box-shadow: 0px 0px 37px 0px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0px 0px 37px 0px rgba(0, 0, 0, 0.1);
   box-shadow: 0px 0px 37px 0px rgba(0, 0, 0, 0.1);
@@ -44,7 +44,7 @@
     font-weight: normal;
     padding: 0 15px;
     margin: 0 0 5px;
-    color: #212121;
+    color: $primary-text-color1;
     line-height: 24px;
     box-shadow: 0 5px 5px 3px rgba(0, 0, 0, 0.2);
   }
@@ -98,7 +98,7 @@
         padding: 0 15px;
         display: block;
         text-decoration: none;
-        color: #212121;
+        color: $primary-text-color1;
       }
       ul {
         border-bottom: 0;
@@ -185,7 +185,7 @@
     }
     &[type=button], &[type=submit] {
       color: #f8f8f8;
-      background: #212121;
+      background: $primary-text-color1;
     }
     &[type=button]:hover, &[type=submit]:hover {
       background: rgba(51, 51, 51, 0.9);

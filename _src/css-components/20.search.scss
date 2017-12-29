@@ -13,7 +13,7 @@
   .search-field {
     width: 100%;
     background: #fff;
-    border: 1px solid #AEAEAE;
+    border: 1px solid $sub-text-color;
     border-radius: 0;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -42,7 +42,7 @@
     /* Icon */
     color: #CCC;
     &:hover {
-      color: #212121;
+      color: $primary-text-color1;
     }
   }
 }

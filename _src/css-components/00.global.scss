@@ -22,7 +22,8 @@
 	---------------------------
 	
     Default font-size for HTML :    16px
-	Primary Background Color   :    #FFF
+    Placeholder Text Color     :    #E6E6E8
+	Primary Background Color   :    transparent
 	Highlight Color            :    #EC5E79, #E8588C
 	Primary Text Color         :    #212121, #474747
 	Subordinate Text Color     :    #AEAEAE
@@ -121,3 +122,16 @@
 	
 	
 */
+
+$basic-font-size       : 16px;
+$font-stack            : 'Helvetica Neue', Helvetica, 'Microsoft YaHei', STXihei, 'PingFang SC','Hiragino Sans GB', Arial, sans-serif;
+$font-mobile-stack     : "lucida grande", tahoma, verdana, arial, sans-serif;
+$placeholder-text-color: #E6E6E8;
+$highlight-color1      : #EC5E79;
+$highlight-color2      : #E8588C;
+$primary-text-color1   : #212121;
+$primary-text-color2   : #474747;
+$sub-text-color        : #AEAEAE;
+$dividing-line-color   : #F4F4F4;
+$primary-bg-color      : transparent;
+

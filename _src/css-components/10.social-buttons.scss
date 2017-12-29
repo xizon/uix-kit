@@ -64,8 +64,8 @@
 }
 
 .social-bg-codepen {
-  border-color: #212121 !important;
-  background-color: #212121 !important;
+  border-color: $primary-text-color1 !important;
+  background-color: $primary-text-color1 !important;
 }
 
 .social-bg-behance {
@@ -119,8 +119,8 @@
 }
 
 .social-bg-digg {
-  border-color: #212121 !important;
-  background-color: #212121 !important;
+  border-color: $primary-text-color1 !important;
+  background-color: $primary-text-color1 !important;
 }
 
 .social-bg-tumblr {
@@ -155,7 +155,7 @@
   display: inline-block;
   margin: 0.175rem 0.4375rem;
   a {
-    color: #212121;
+    color: $primary-text-color1;
     &:hover {
       color: #ee9f24 !important;
     }
@@ -193,7 +193,7 @@
       color: #00AB6B;
     }
     &[href*="codepen.com"] {
-      color: #212121;
+      color: $primary-text-color1;
     }
     &[href*="behance.net"] {
       color: #4F8FD6;
@@ -226,7 +226,7 @@
       color: #24A5DD;
     }
     &[href*="mailto"], &[href*="digg.com"] {
-      color: #212121;
+      color: $primary-text-color1;
     }
     &[href*="tumblr.com"] {
       color: #529ECC;

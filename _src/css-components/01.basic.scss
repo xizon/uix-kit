@@ -3,7 +3,7 @@
 /* ====================================================== */
 /* 1.1. Reset Stylesheets */
 ::placeholder {
-	color: #E6E6E8;
+	color: $placeholder-text-color;
 }
 
 :root {
@@ -55,7 +55,7 @@ html, body {
 html {
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
-  font-size: 16px;
+  font-size: $basic-font-size;
   /* Required, global font size */
 }
 
@@ -70,8 +70,9 @@ body {
   line-height: 1.71428571429;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: 'Helvetica Neue', Helvetica, 'Microsoft YaHei', STXihei, 'PingFang SC','Hiragino Sans GB', Arial, sans-serif;
-  color: #212121;
+  font-family: $font-stack;
+  color: $primary-text-color1;
+  background-color: $primary-bg-color;
 }
 
 :active, :focus {
@@ -193,13 +194,13 @@ select {
 blockquote {
   background: #fff;
   border: 1px solid #F8F8F8;
-  border-left: 5px solid #EC5E79;
+  border-left: 5px solid $highlight-color1;
   padding: 0 1.75rem 1.25rem;
   margin-top: 1.421875rem;
   line-height: 2;
   font-size: 1rem;
   &:before {
-    color: #EC5E79;
+    color: $highlight-color1;
     content: open-quote;
     font-size: 5.25rem;
     line-height: 0.1;
@@ -217,7 +218,7 @@ strong {
 
 hr {
   margin: 1.421875rem 0;
-  border-color: #F4F4F4;
+  border-color: $dividing-line-color;
 }
 
 a img {

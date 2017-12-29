@@ -23,9 +23,9 @@
 /* 22.2. Text */
 
 .entry-mark a {
-  color: #EC5E79;
+  color: $highlight-color1;
   &:hover {
-    color: #E8588C;
+    color: $highlight-color2;
   }
 }
 
@@ -93,9 +93,9 @@ ul.entry-meta {
     display: none;
   }
   &.wrap li a {
-    color: #EC5E79;
+    color: $highlight-color1;
     &:hover {
-      color: #E8588C;
+      color: $highlight-color2;
     }
   }
 }

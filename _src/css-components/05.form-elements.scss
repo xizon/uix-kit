@@ -71,111 +71,111 @@
     &[type="text"] {
       &:focus, &:hover {
         outline: none;
-        border-color: #212121;
+        border-color: $primary-text-color1;
       }
     }
     &[type="email"] {
       &:focus, &:hover {
         outline: none;
-        border-color: #212121;
+        border-color: $primary-text-color1;
       }
     }
     &[type="tel"] {
       &:focus, &:hover {
         outline: none;
-        border-color: #212121;
+        border-color: $primary-text-color1;
       }
     }
     &[type="password"] {
       &:focus, &:hover {
         outline: none;
-        border-color: #212121;
+        border-color: $primary-text-color1;
       }
     }
     &[type="url"] {
       &:focus, &:hover {
         outline: none;
-        border-color: #212121;
+        border-color: $primary-text-color1;
       }
     }
     &[type="search"] {
       &:focus, &:hover {
         outline: none;
-        border-color: #212121;
+        border-color: $primary-text-color1;
       }
     }
   }
   textarea {
     &:focus, &:hover {
       outline: none;
-      border-color: #212121;
+      border-color: $primary-text-color1;
     }
   }
   button {
     &:focus, &:hover {
       outline: none;
-      border-color: #212121;
+      border-color: $primary-text-color1;
     }
   }
   select {
     &:focus, &:hover {
       outline: none;
-      border-color: #212121;
+      border-color: $primary-text-color1;
     }
   }
   input {
     &[type="text"] {
       &:focus ~ label, &:hover ~ label {
-        color: #212121;
+        color: $primary-text-color1;
         cursor: text;
       }
     }
     &[type="email"] {
       &:focus ~ label, &:hover ~ label {
-        color: #212121;
+        color: $primary-text-color1;
         cursor: text;
       }
     }
     &[type="tel"] {
       &:focus ~ label, &:hover ~ label {
-        color: #212121;
+        color: $primary-text-color1;
         cursor: text;
       }
     }
     &[type="password"] {
       &:focus ~ label, &:hover ~ label {
-        color: #212121;
+        color: $primary-text-color1;
         cursor: text;
       }
     }
     &[type="url"] {
       &:focus ~ label, &:hover ~ label {
-        color: #212121;
+        color: $primary-text-color1;
         cursor: text;
       }
     }
     &[type="search"] {
       &:focus ~ label, &:hover ~ label {
-        color: #212121;
+        color: $primary-text-color1;
         cursor: text;
       }
     }
   }
   textarea {
     &:focus ~ label, &:hover ~ label {
-      color: #212121;
+      color: $primary-text-color1;
       cursor: text;
     }
   }
   button {
     &:focus ~ label, &:hover ~ label {
-      color: #212121;
+      color: $primary-text-color1;
       cursor: text;
     }
   }
   select {
     &:focus ~ label, &:hover ~ label {
-      color: #212121;
+      color: $primary-text-color1;
       cursor: text;
     }
   }
@@ -225,7 +225,7 @@
     position: absolute;
     right: 0.721875rem;
     top: 0.721875rem;
-    color: #EC5E79;
+    color: $highlight-color1;
   }
   &.success {
     input {

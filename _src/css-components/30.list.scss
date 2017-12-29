@@ -99,7 +99,7 @@
     overflow: hidden;
   }
   .more-bg {
-    background: #EC5E79;
+    background: $highlight-color1;
     position: absolute;
     right: -200px;
     top: 69%;
@@ -123,7 +123,7 @@
     }
     .detail a {
       /* Used when "list-normal table-normal" style are used */
-      color: #474747 !important;
+      color: $primary-text-color2 !important;
       &:hover {
         /* Used when "list-normal table-normal" style are used */
         color: #000 !important;
@@ -226,7 +226,7 @@
   .line {
     height: calc( 100% + 5rem );
     width: 1px;
-    background: #EC5E79;
+    background: $highlight-color1;
     position: absolute;
     top: 40px;
     left: 50%;
@@ -331,11 +331,11 @@
 		display: block;
 		position: absolute;
 		z-index: 0;
-		background-color: #ec5e79;
-		background-image: -moz-linear-gradient(left, #ec5e79 0%, #f60 20%, #d83ba0 100%);
-		background-image: -webkit-linear-gradient(left, #ec5e79 0%, #f60 20%, #d83ba0 100%);
-		background-image: linear-gradient(to right, #ec5e79 0%, #f60 20%, #d83ba0 100%);
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ec5e79', endColorstr='#d83ba0',GradientType=1 );
+		background-color: $highlight-color1;
+		background-image: -moz-linear-gradient(left, $highlight-color1 0%, #f60 20%, #d83ba0 100%);
+		background-image: -webkit-linear-gradient(left, $highlight-color1 0%, #f60 20%, #d83ba0 100%);
+		background-image: linear-gradient(to right, $highlight-color1 0%, #f60 20%, #d83ba0 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$highlight-color1', endColorstr='#d83ba0',GradientType=1 );
 		width: 100%;
 		height: 1px;
 		top: 161px;
@@ -422,7 +422,7 @@
       }
     }
     &.active .list-timeline-item-info .date {
-      color: #EC5E79;
+      color: $highlight-color1;
     }
   }
   .timeline-btn {

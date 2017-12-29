@@ -3,7 +3,7 @@
 /* ====================================================== */
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-  color: #212121;
+  color: $primary-text-color1;
   font-weight: 700;
   font-variant-ligatures: common-ligatures;
   /*Ligatures and contextual forms are ways of combining glyphs to produce more harmonized forms.*/
@@ -79,7 +79,7 @@ h6 {
 }
 
 .font-normal {
-  font-family: 'Helvetica Neue', Helvetica, 'Microsoft YaHei', STXihei, 'PingFang SC','Hiragino Sans GB', Arial, sans-serif;
+  font-family: $font-stack;
   font-weight: 400 !important;
 }
 
@@ -165,7 +165,7 @@ a, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 
 a {
-  color: #474747;
+  color: $primary-text-color2;
   &:hover, &:focus, &:active {
     color: #000;
     text-decoration: none;
@@ -174,19 +174,19 @@ a {
   &:hover, &:active, &:focus {}
   &.link {
     text-decoration: underline;
-    color: #EC5E79;
+    color: $highlight-color1;
     &:hover {
-      color: #E8588C;
+      color: $highlight-color2;
     }
   }
 }
 
 .list-normal a:not(.uix-sc-btn), .table-normal a:not(.uix-sc-btn) {
-  color: #EC5E79;
+  color: $highlight-color1;
 }
 
 .list-normal a:not(.uix-sc-btn):hover, .table-normal a:not(.uix-sc-btn):hover {
-  color: #E8588C;
+  color: $highlight-color2;
   text-decoration: underline;
 }
 

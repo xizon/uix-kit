@@ -22,7 +22,8 @@
 	---------------------------
 	
     Default font-size for HTML :    16px
-	Primary Background Color   :    #FFF
+    Placeholder Text Color     :    #E6E6E8
+	Primary Background Color   :    transparent
 	Highlight Color            :    #EC5E79, #E8588C
 	Primary Text Color         :    #212121, #474747
 	Subordinate Text Color     :    #AEAEAE
@@ -193,8 +194,9 @@ body {
   line-height: 1.71428571429;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: 'Helvetica Neue', Helvetica, 'Microsoft YaHei', STXihei, 'PingFang SC','Hiragino Sans GB', Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, "Microsoft YaHei", STXihei, "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
   color: #212121;
+  background-color: transparent;
 }
 
 :active, :focus {
@@ -492,7 +494,7 @@ h6 {
 }
 
 .font-normal {
-  font-family: 'Helvetica Neue', Helvetica, 'Microsoft YaHei', STXihei, 'PingFang SC','Hiragino Sans GB', Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, "Microsoft YaHei", STXihei, "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
   font-weight: 400 !important;
 }
 
@@ -2515,12 +2517,12 @@ li.multi-column > ul li .nav-arrow {
 
 /* Your Custom colors for buttons */
 .button-bg-primary {
-  border-color: #ec5e79 !important;
-  background-color: #ec5e79 !important;
-  background-image: -moz-linear-gradient(left, #ec5e79 0%, #f60 20%, #d83ba0 100%) !important;
-  background-image: -webkit-linear-gradient(left, #ec5e79 0%, #f60 20%, #d83ba0 100%) !important;
-  background-image: linear-gradient(to right, #ec5e79 0%, #f60 20%, #d83ba0 100%) !important;
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ec5e79', endColorstr='#d83ba0',GradientType=1 ) !important;
+  border-color: #EC5E79 !important;
+  background-color: #EC5E79 !important;
+  background-image: -moz-linear-gradient(left, #EC5E79 0%, #f60 20%, #d83ba0 100%) !important;
+  background-image: -webkit-linear-gradient(left, #EC5E79 0%, #f60 20%, #d83ba0 100%) !important;
+  background-image: linear-gradient(to right, #EC5E79 0%, #f60 20%, #d83ba0 100%) !important;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$highlight-color1', endColorstr='#d83ba0',GradientType=1 ) !important;
   -webkit-box-shadow: 0 4px 15px 0 rgba(236, 94, 121, 0.75);
   -moz-box-shadow: 0 4px 15px 0 rgba(236, 94, 121, 0.75);
   box-shadow: 0 4px 15px 0 rgba(236, 94, 121, 0.75);
@@ -3895,11 +3897,11 @@ ul.entry-meta {
   display: block;
   position: absolute;
   z-index: 0;
-  background-color: #ec5e79;
-  background-image: -moz-linear-gradient(left, #ec5e79 0%, #f60 20%, #d83ba0 100%);
-  background-image: -webkit-linear-gradient(left, #ec5e79 0%, #f60 20%, #d83ba0 100%);
-  background-image: linear-gradient(to right, #ec5e79 0%, #f60 20%, #d83ba0 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ec5e79', endColorstr='#d83ba0',GradientType=1 );
+  background-color: #EC5E79;
+  background-image: -moz-linear-gradient(left, #EC5E79 0%, #f60 20%, #d83ba0 100%);
+  background-image: -webkit-linear-gradient(left, #EC5E79 0%, #f60 20%, #d83ba0 100%);
+  background-image: linear-gradient(to right, #EC5E79 0%, #f60 20%, #d83ba0 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$highlight-color1', endColorstr='#d83ba0',GradientType=1 );
   width: 100%;
   height: 1px;
   top: 161px;
