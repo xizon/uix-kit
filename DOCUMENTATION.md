@@ -152,27 +152,24 @@ You can customize these files to meet the different needs of the site you want :
 
 The `_demo/` folder can be deleted.
 
-##### CSS:
+#### CSS:
 
 *   `assets/css/uix-kit.css`
+*   `assets/css/uix-kit.min.css`
 *   `assets/css/uix-kit.IE.css`
-*   `assets/css/uix-kit.mobile.nav.css`
-*   `assets/css/uix-kit.flexslider.css`
 
-
-##### CSS(RTL):
+#### CSS(RTL):
 
 *   `assets/css/rtl/uix-kit.rtl.css`
 *   `assets/css/rtl/uix-kit.mobile.nav.rtl.css`
 
-
-
-##### Javascript:
+#### Javascript:
 
 *   `assets/js/uix-kit.js`
-*   `assets/js/min/uix-kit.min.js` (if it exists)
+*   `assets/js/uix-kit.min.js`
 
-##### Images:
+#### Images:
+
 
 *   `assets/images/*`
 

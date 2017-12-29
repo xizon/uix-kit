@@ -42,9 +42,8 @@ The `_demo/` folder can be deleted.
 #### CSS:
 
 *   `assets/css/uix-kit.css`
+*   `assets/css/uix-kit.min.css`
 *   `assets/css/uix-kit.IE.css`
-*   `assets/css/uix-kit.mobile.nav.css`
-*   `assets/css/uix-kit.flexslider.css`
 
 #### CSS(RTL):
 
@@ -54,7 +53,7 @@ The `_demo/` folder can be deleted.
 #### Javascript:
 
 *   `assets/js/uix-kit.js`
-*   `assets/js/min/uix-kit.min.js` (if it exists)
+*   `assets/js/uix-kit.min.js`
 
 #### Images:
 
