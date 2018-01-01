@@ -197,6 +197,13 @@ ul.menu-main > li {
     margin-left: 1.6875rem;
 }
 
+@media all and (max-width: 1250px) {
+    ul.menu-main > li {
+		margin-right: auto;
+        margin-left: 1.125rem;
+    }
+}
+
 ul.menu-main > li:not(.multi-column) > ul ul {
 	margin-left: auto;
 	margin-right: -0.1875rem;

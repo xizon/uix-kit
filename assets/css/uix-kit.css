@@ -1261,6 +1261,14 @@ ul.menu-main > li:not(.multi-column) > ul ul {
     left: 100%;
 }
 
+@media all and (max-width: 1250px) {
+    ul.menu-main > li {
+        padding-left: 0.875rem;
+        padding-right: 0.875rem;
+        margin-right: 1.125rem;
+    }
+}
+
 /* Dropdown */
 /* Multi-column */
 li.multi-column > ul {
