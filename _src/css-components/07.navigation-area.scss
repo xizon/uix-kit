@@ -236,13 +236,13 @@ li.multi-column > ul li .nav-arrow {
 }
 
 /* Admin bar becomes taller on smaller devices */
-@media screen and (max-width: 782px) {
+@media all and (max-width: 782px) {
   .admin-bar .menu-toggle.spy-scroll-postion {
     top: 66px;
   }
 }
 
-@media screen and (max-width: 600px) {
+@media all and (max-width: 600px) {
   .admin-bar .menu-toggle.spy-scroll-postion {
     top: 20px;
   }

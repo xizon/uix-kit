@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit
  * ## Description         :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Version             :  0.0.7
- * ## Last Update         :  December 30, 2017
+ * ## Last Update         :  January 2, 2018
  * ## Created             :  by UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Compatible With     :  Bootstrap 3.x, Chinese, English
@@ -1390,13 +1390,13 @@ li.multi-column > ul li .nav-arrow {
 }
 
 /* Admin bar becomes taller on smaller devices */
-@media screen and (max-width: 782px) {
+@media all and (max-width: 782px) {
     .admin-bar .menu-toggle.spy-scroll-postion {
         top: 66px;
     }
 }
 
-@media screen and (max-width: 600px) {
+@media all and (max-width: 600px) {
     .admin-bar .menu-toggle.spy-scroll-postion {
         top: 20px;
     }
@@ -2211,7 +2211,7 @@ li.multi-column > ul li .nav-arrow {
 }
 
 /* ====================================================== 
-   17. Isometric Grid               
+   17. Isometric Grid          
 /* ====================================================== */
 .iso-grid-container {
     position: relative;
@@ -2349,7 +2349,7 @@ li.multi-column > ul li .nav-arrow {
     width: 100%;
 }
 
-@media screen and (max-width: 1280px) {
+@media all and (max-width: 1280px) {
     .iso-grid-container {
         margin: -1.09375rem 0 0 -1.09375rem;
     }
@@ -2370,7 +2370,7 @@ li.multi-column > ul li .nav-arrow {
     }
 }
 
-@media screen and (max-width: 980px) {
+@media all and (max-width: 980px) {
     .iso-grid-container {
         margin: -2.1875rem 0 0 -2.1875rem;
     }
@@ -2381,7 +2381,7 @@ li.multi-column > ul li .nav-arrow {
     }
 }
 
-@media screen and (max-width: 736px) {
+@media all and (max-width: 736px) {
     .iso-grid-container {
         margin: -1.09375rem 0 0 -1.09375rem;
     }
@@ -2392,7 +2392,7 @@ li.multi-column > ul li .nav-arrow {
     }
 }
 
-@media screen and (max-width: 480px) {
+@media all and (max-width: 480px) {
     .iso-grid-container {
         margin: 0;
     }
@@ -2718,7 +2718,7 @@ li.multi-column > ul li .nav-arrow {
     }
 }
 
-@media screen and (max-width: 480px) {
+@media all and (max-width: 480px) {
     .post-img-list-box li .item-thumb {
         width: 39.4%;
     }
@@ -2730,7 +2730,7 @@ li.multi-column > ul li .nav-arrow {
     }
 }
 
-@media screen and (max-width: 480px) {
+@media all and (max-width: 480px) {
     .post-img-list-box li .item-info {
         width: 50%;
     }

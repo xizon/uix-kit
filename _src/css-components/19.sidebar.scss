@@ -137,7 +137,7 @@
   }
 }
 
-@media screen and (max-width: 480px) {
+@media all and (max-width: 480px) {
   .post-img-list-box li .item-thumb {
     width: 39.4%;
   }
@@ -149,7 +149,7 @@
   }
 }
 
-@media screen and (max-width: 480px) {
+@media all and (max-width: 480px) {
   .post-img-list-box li .item-info {
     width: 50%;
   }

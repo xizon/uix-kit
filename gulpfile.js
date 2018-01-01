@@ -108,13 +108,12 @@ gulp.task('scripts', function() {
 gulp.watch('files-to-watch', ['tasks_to_run']); 
 gulp.task('default', ['jshint'], function() {
     gulp.start('sass');
-	gulp.start('styles');
 	gulp.start('scripts');
     gulp.start('watch');
 });
 
 gulp.task('watch', function(){
-	gulp.watch( globs.scss, ['sass', 'styles' ] ); 
+	gulp.watch( globs.scss, ['sass' ] ); 
 	gulp.watch( globs.js, [ 'scripts' ] ); 
 })
 
