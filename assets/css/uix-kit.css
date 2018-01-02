@@ -947,7 +947,29 @@ section.site-google-map, .section.site-google-map {
 
 /* With Status */
 /* With Icons */
-/* 5.2. Group */
+/* 5.2 Upload */
+.controls-file-container {
+    position: relative;
+}
+
+.controls-file-trigger {
+    cursor: pointer;
+}
+
+.controls-file-container input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 14.0625rem;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.controls-file-container .controls-file-return {
+    font-style: italic;
+}
+
+/* 5.3. Group */
 .controls-custom-merge {
     background-color: #fff;
     color: #888;

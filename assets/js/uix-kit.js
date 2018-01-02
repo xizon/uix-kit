@@ -1143,7 +1143,22 @@ theme = ( function ( theme, $, window, document ) {
    
     var documentReady = function( $ ) {
 		
-		
+		/*--- Input File ----*/
+		$( '.controls-file-container' ).each( function()  {
+			var fileInput  = $( this ).find( 'input[type="file"]' ),
+				fileBtn    = $( this ).find( '.controls-file-trigger' ),
+				filePath   = $( this ).next( '.controls-file-return' );
+			
+			fileBtn.on( 'click', function() {
+				fileInput.focusin();
+			});	
+			
+			fileInput.on( 'change', function() {
+				filePath.text( $( this ).val() );
+			});	
+			
+		});
+
 		/*--- Hover Effect ----*/
 		$( '.float-label' ).each( function(){
 			
