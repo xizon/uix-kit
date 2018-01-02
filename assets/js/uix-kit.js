@@ -50,7 +50,10 @@
 var templateUrl = wp_theme_root_path.templateUrl,
 	homeUrl     = wp_theme_root_path.homeUrl;
 
-var is_safari   = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/); /*Test to 9, 10. */
+//Determine whether it is a special browser
+var is_safari   = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/), /*Test to 9, 10. */
+	isIE        = !!window.ActiveXObject || "ActiveXObject" in window;     /*Test to 6 ~ 11 (not edge), Is to determine the method of 360 */
+
 
 var theme = (function ( $, window, document ) {
     'use strict';
