@@ -44,7 +44,9 @@ var theme = (function ( $, window, document ) {
     var theme         = {},
         components    = { documentReady: [], pageLoaded: [] };
 
-
+	if ( $( 'img' ).length == 0 ) {
+		$( 'body' ).prepend( '<img src="'+templateUrl+'/assets/images/blank.gif" alt="" style="display:none">' );
+	}
 	$( 'body' ).waitForImages( pageLoaded );
     $( document ).ready( documentReady );
 	

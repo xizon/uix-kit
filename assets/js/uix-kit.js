@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit
  * ## Description         :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Version             :  0.0.7
- * ## Last Update         :  January 2, 2018
+ * ## Last Update         :  January 3, 2018
  * ## Created             :  by UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Compatible With     :  Bootstrap 3.x, Chinese, English
@@ -61,7 +61,9 @@ var theme = (function ( $, window, document ) {
     var theme         = {},
         components    = { documentReady: [], pageLoaded: [] };
 
-
+	if ( $( 'img' ).length == 0 ) {
+		$( 'body' ).prepend( '<img src="'+templateUrl+'/assets/images/blank.gif" alt="" style="display:none">' );
+	}
 	$( 'body' ).waitForImages( pageLoaded );
     $( document ).ready( documentReady );
 	
@@ -115,7 +117,6 @@ theme = ( function ( theme, $, window, document ) {
     'use strict';
     
     var pageLoaded = function() {
-		
 		
 		
 		var $window      = $( window );
