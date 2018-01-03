@@ -117,6 +117,7 @@ theme = ( function ( theme, $, window, document ) {
     var pageLoaded = function() {
 		
 		
+		
 		var $window      = $( window );
 
 		$window.on( 'scroll', function() {
