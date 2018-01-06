@@ -63,6 +63,8 @@ gulp.task('sass', function(){
 	.pipe(rename({
 		suffix: '.min'
 	}))
+	
+	.pipe(headerComment( customComment))
 	.pipe(gulp.dest( globs.cssTar ));
  
 });
@@ -94,6 +96,8 @@ gulp.task('scripts', function() {
         .pipe(rename({
             suffix: '.min'
         }))
+	
+	    .pipe(headerComment( customComment))
 	    .pipe(gulp.dest( globs.jsTar ));
 	
 });
