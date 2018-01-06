@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit
  * ## Description         :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Version             :  0.0.7
- * ## Last Update         :  January 6, 2018
+ * ## Last Update         :  January 7, 2018
  * ## Created             :  by UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Compatible With     :  Bootstrap 3.x, Chinese, English
@@ -3209,6 +3209,9 @@ ul.entry-meta {
 }
 
 .custom-tabs.rotation .content {
+    position: absolute;
+    top: 0;
+    left: 400px;
     width: 300px;
     -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
     -moz-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
@@ -3218,56 +3221,29 @@ ul.entry-meta {
 .custom-tabs.rotation .custom-tabs-ul-container {
     width: 300px;
     height: 300px;
-    position: absolute;
-    margin-left: 400px;
+    position: relative;
+    margin: 0;
 }
 
 .custom-tabs.rotation ul {
     position: relative;
     display: block;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    -moz-transition: .1s ease-in-out;
-    -o-transition: .1s ease-in-out;
-    -webkit-transition: .1s ease-in-out;
-    transition: .1s ease-in-out;
-}
-
-.custom-tabs.rotation ul:before {
-    display: block;
-    content: '';
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: -10px;
-    left: 10px;
-    border-top: 3px solid #EC5E79;
-    -webkit-border-radius: 100%;
-    -moz-border-radius: 100%;
-    border-radius: 100%;
-    z-index: 0;
-    -webkit-transform: rotate(-240deg) scale(0.8);
-    -ms-transform: rotate(-240deg) scale(0.8);
-    transform: rotate(-240deg) scale(0.8);
+    width: 300px;
+    height: 300px;
 }
 
 .custom-tabs.rotation ul > li {
     position: absolute;
     width: 80px;
-    height: 100%;
-    margin: 0 50%;
+    height: 80px;
     background: none;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
-    -webkit-transform: rotate(-360deg);
-    -ms-transform: rotate(-360deg);
-    transform: rotate(-360deg);
-    -moz-transition: .1s ease-in-out;
-    -o-transition: .1s ease-in-out;
-    -webkit-transition: .1s ease-in-out;
-    transition: .1s ease-in-out;
+    -moz-transition: none;
+    -o-transition: none;
+    -webkit-transition: none;
+    transition: none;
 }
 
 .custom-tabs.rotation ul > li > a {

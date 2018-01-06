@@ -78,63 +78,40 @@
   &.rotation {
     height: 400px;
     .content {
+	  position: absolute;
+	  top: 0;
+	  left: 400px;
       width: 300px;
       -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
       -moz-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
       box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
     }
     .custom-tabs-ul-container {
-      width: 300px;
-      height: 300px;
-      position: absolute;
-      margin-left: 400px;
+		width: 300px;
+		height: 300px;
+		position: relative;
+		margin: 0;
     }
     ul {
-      position: relative;
-      display: block;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      -moz-transition: .1s ease-in-out;
-      -o-transition: .1s ease-in-out;
-      -webkit-transition: .1s ease-in-out;
-      transition: .1s ease-in-out;
-      &:before {
-        display: block;
-        content: '';
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: -10px;
-        left: 10px;
-        border-top: 3px solid $highlight-color1;
-        -webkit-border-radius: 100%;
-        -moz-border-radius: 100%;
-        border-radius: 100%;
-        z-index: 0;
-        -webkit-transform: rotate(-240deg) scale(0.8);
-        -ms-transform: rotate(-240deg) scale(0.8);
-        transform: rotate(-240deg) scale(0.8);
-      }
+	  position: relative;
+	  display: block;
+	  width: 300px;
+	  height: 300px;
       > li {
         position: absolute;
         width: 80px;
-        height: 100%;
-        margin: 0 50%;
+        height: 80px;
         background: none;
         -webkit-box-shadow: none;
         -moz-box-shadow: none;
         box-shadow: none;
-        -webkit-transform: rotate(-360deg);
-        -ms-transform: rotate(-360deg);
-        transform: rotate(-360deg);
-        -moz-transition: .1s ease-in-out;
-        -o-transition: .1s ease-in-out;
-        -webkit-transition: .1s ease-in-out;
-        transition: .1s ease-in-out;
+        -moz-transition: none;
+        -o-transition: none;
+        -webkit-transition: none;
+        transition: none;
         > a {
-          width: 80px;
-          height: 80px;
+        width: 80px;
+        height: 80px;
           line-height: 60px;
           background: #fff;
           -webkit-border-radius: 100%;
