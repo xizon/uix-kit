@@ -1,0 +1,29 @@
+/* 8.2. Brand */
+
+.brand {
+  float: left;
+  font-size: 1.3125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  white-space: nowrap;
+  max-width: 95%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  img {
+    max-height: 50px;
+    margin-top: 0.75rem;
+  }
+}
+
+.mobile-brand {
+  display: none;
+}
+
+@media all and (max-width: 768px) {
+  .mobile-brand {
+    display: block;
+  }
+  .brand img {
+    margin-bottom: 0.75rem;
+  }
+}
