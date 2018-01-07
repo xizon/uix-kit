@@ -8,22 +8,17 @@
 	TABLE OF CONTENTS
 	---------------------------
 	
-	1. Loader
-	2. Modal    
+	1. Modal    
 
 	
 */
 
-
-/* ====================================================== 
-   1. Loader                               
-/* ====================================================== */
-.loader .spinner-container {
-	display: none;
+.IE-hide {
+	display: none !important;
 }
 
 /* ====================================================== 
-   2. Modal                               
+   1. Modal                               
 /* ====================================================== */
 .modal-box.active .content img,
 .modal-box.fullscreen.active .content img {
