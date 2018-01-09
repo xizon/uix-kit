@@ -1,7 +1,7 @@
 /* ====================================================== 
-   34. Themes    
+   35. Themes    
 /* ====================================================== */
-/*------- 34.1 White  --------*/
+/*------- 35.1 White  --------*/
 
 /* Navigation Area  */
 
@@ -29,4 +29,25 @@
       color: #fff;
     }
   }
+}
+
+
+@media all and (max-width: 768px) {
+	.theme-white {
+		.header-area {
+		  background-color: transparent;
+		  border-bottom: none;
+		  -webkit-box-shadow: none;
+		  -moz-box-shadow: none;
+		  box-shadow: none;
+		  &.spy-scroll-fixed {
+			background-color: transparent;
+		  }
+		}
+		
+		.brand {
+		  display: none;
+		}
+	}
+
 }
