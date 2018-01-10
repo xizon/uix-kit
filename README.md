@@ -13,8 +13,8 @@
 
 Before doing all dev stuff make sure you have node installed. After that, run `npm install --dev` in the main directory to install the node module dependencies.
 
-Run `gulp --help` to see all build options.
-Run `gulp default` to run development mode.
+* Run `gulp --help` to see all build options.
+* Run `gulp default` to run development mode.
 
 
 
