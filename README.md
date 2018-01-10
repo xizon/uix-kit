@@ -5,11 +5,17 @@
 
 <a href="https://uiux.cc/uix-kit" target="_blank"><img src="https://github.com/xizon/uix-kit/blob/master/_screenshots/cover.jpg" width="300" height="300"></a>
 
-### Download
+### Installation
 
-You have the following options to install the library:
-- [Download Uix Kit 0.0.7](https://github.com/xizon/uix-kit/archive/master.zip) from GitHub.
-- Use NPM `npm install uix-kit`.
+- Use NPM `npm install uix-kit`. For nodejs you have to install some dependencies.
+
+**Dev Environment**
+
+Before doing all dev stuff make sure you have node installed. After that, run `npm install --dev` in the main directory to install the node module dependencies.
+
+Run `gulp --help` to see all build options.
+Run `gulp default` to run development mode.
+
 
 
 ## Description
