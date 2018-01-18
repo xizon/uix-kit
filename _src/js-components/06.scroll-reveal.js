@@ -17,6 +17,7 @@ theme = ( function ( theme, $, window, document ) {
 				waypoints             = $scrollRevealElements.waypoint({
 				handler: function( direction ) {
 
+					//$( this.element ).toggleClass( 'animated fadeInUp', direction === 'down' );
 					$( this.element ).addClass( 'animated fadeInUp' );
 
 				},

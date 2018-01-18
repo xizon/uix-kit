@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit
  * ## Description         :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Version             :  0.0.7
- * ## Last Update         :  January 18, 2018
+ * ## Last Update         :  January 19, 2018
  * ## Created             :  by UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Compatible With     :  Bootstrap 3.x, Chinese, English
@@ -32,7 +32,7 @@
 	8. Grid List
 	9. FlexSlider
 	10. Forms
-	11. Text effect
+	11. Sticky Elements 
 	12. Retina Graphics for Website
 	13. Modal
 	14. Tabs
@@ -44,7 +44,13 @@
 	20. Videos
 	21. Accordion
 	22. Multiple columns full height for Bootstrap 3.x
-	23. AJAX
+	
+    ================
+
+    Plugins:
+
+	P1. AJAX
+	P2. Text effect
 
 */
 
@@ -456,6 +462,7 @@ theme = ( function ( theme, $, window, document ) {
 				waypoints             = $scrollRevealElements.waypoint({
 				handler: function( direction ) {
 
+					//$( this.element ).toggleClass( 'animated fadeInUp', direction === 'down' );
 					$( this.element ).addClass( 'animated fadeInUp' );
 
 				},
@@ -1178,48 +1185,71 @@ theme = ( function ( theme, $, window, document ) {
 
 /*! 
  *************************************
- * 11. Text effect
+ * 11. Sticky Elements 
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
     'use strict';
     
-	//////////////// cipher
-	var cipher = function() {
-	  function e(a, d, b) {
-		var c, f, g, h;
-		b == a.length ? k.animationComplete = !0 : (g = d.innerHTML, h = Math.floor(21 * Math.random() + 5), c = 32 === a[b] ? 32 : a[b] - h, f = setInterval(function() {
-		  d.innerHTML = g + String.fromCharCode(c);
-		  c == a[b] ? (clearInterval(f), c = 32, b++, setTimeout(function() {
-			e(a, d, b);
-		  }, 10)) : c++;
-		}, 5));
-	  }
-	  var k = {};
-	  return k = {animationComplete:!1, text:function(a) {
-		this.animationComplete = !1;
-		a = document.getElementById(a);
-		for (var d = a.innerHTML, b = [], c = 0;c < d.length;c++) {
-		  b.push(d.charCodeAt(c));
-		}
-		a.innerHTML = "";
-		e(b, a, 0);
-	  }};
-	}();
-
-
     var pageLoaded = function() {
+		
+		var $window      = $( window ),
+			windowWidth  = $window.width(),
+			windowHeight = $window.height(),
+			topSpacing   = $( '.header-area' ).outerHeight( true ) + 10;
+		
+		
+		$window.on( 'scroll touchmove', function() {
 
-		setTimeout(function() {
-			if ( $( '#brand-text' ).text().length > 0 ) {
-				cipher.text( 'brand-text' );
+			var scrollTop   = $window.scrollTop(),
+				dynamicTop  = parseFloat( scrollTop + $window.height() ),
+				targetTop   = parseFloat( $( document ).height() - 200 );
+
+			//Detecting when user scrolls to bottom of div
+			if ( dynamicTop >= targetTop ) {
+				
+				
+				$( '.stick-widget.sticky' )
+					  .css( {
+						  'top'  : parseFloat( topSpacing - (dynamicTop - targetTop) ) + 'px'
+					  } );
+				
 			}
+
+
+		});	
+
+		$( '.stick-widget' ).each( function()  {
 			
-		}, 1500 );	
+			var $this      = $( this ),
+				oWIdth     = $this.width();
+			
+			
+			var	waypoints = $this.waypoint({
+
+			  handler: function( direction ) {
+				  
+				  $this
+					  .toggleClass( 'sticky', direction === 'down' )
+					  .css( {
+						  'width': oWIdth + 'px',
+						  'top'  : topSpacing + 'px'
+					  } );
+				  
+				
+
+			  },
+
+			  offset: topSpacing
+
+			});	
+		});
+
+
 		
     };
 
-    theme.textEffect = {
+    theme.stickyElements = {
         pageLoaded : pageLoaded        
     };
 
@@ -1227,6 +1257,10 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
+
+
+
+
 
 /*! 
  *************************************
@@ -1748,84 +1782,7 @@ theme = ( function ( theme, $, window, document ) {
  *************************************
  * 18. Counter
  *************************************
- */
-//Custom Function
-(function($){
-	$.fn.jCustomCounter=function(options){
-		var settings=$.extend({
-            "animToLastFrameEvent": function () {
-               
-            },
-			'start'        : 0,
-			'end'          : 100,
-			'duration'     : 400,
-			'doubleDigits' : false,
-			'dilimiter'    : true
-
-		}
-		,options);
-		this.each(function(){
-			
-		
-			var $this   = $( this );
-	
-
-			function countUp( count ) {
-			  var div_by    = 100,
-				  speed     = Math.round( count / div_by ),
-				  $display  = $this,
-				  run_count = 1,
-				  int_speed = settings.duration/100;  
-				  
-				
-			  // Counter init
-			  var int = setInterval( function() {
-				if( run_count < div_by ){
-					
-					if ( settings.doubleDigits ) {
-						var curr_count_go = speed * run_count;
-						if ( curr_count_go < 10 ) {
-							curr_count_go = '0' + curr_count_go;
-						}	
-					}
-					
-					if ( settings.dilimiter && curr_count > 0 ) {
-						curr_count_go = curr_count_go.toString().replace(/\B(?=(?:\d{3})+\b)/g, ',');
-					}
-					
-					
-				    $display.text( curr_count_go );
-				    run_count++;
-				} else if(parseInt( $display.text().toString().replace(/\,/g, '' ) ) < count) {
-				    var curr_count = parseInt( $display.text().toString().replace(/\,/g, '' )) + 1
-					
-					if ( settings.doubleDigits ) {
-						if ( curr_count < 10 ) {
-							curr_count = '0' + curr_count;
-						}	
-					}
-					
-					
-					if ( settings.dilimiter && curr_count > 0 ) {
-						curr_count = curr_count.toString().replace(/\B(?=(?:\d{3})+\b)/g, ',');
-					}
-					
-				    $display.text( curr_count );
-				} else {
-				    clearInterval( int );
-				}
-			  }, int_speed );
-			}
-
-			countUp( settings.end );
-			
-			
-			
-		})
-	}
-})(jQuery);	
-		
-		
+ */	
 theme = ( function ( theme, $, window, document ) {
     'use strict';
     
@@ -1833,42 +1790,16 @@ theme = ( function ( theme, $, window, document ) {
 	
 		$( '[data-counter-number]' ).each(function() {
 
-
-			var $this          = $( this ),
-				dataNum        = $this.data( 'counter-number' ),
-				dataDur        = $this.data( 'counter-duration' ),
-				dataDouble     = $this.data( 'counter-double-digits' ),
-				dataDilimiter  = $this.data( 'counter-dilimiter' );
-
-
-
-			if( typeof dataNum === typeof undefined ) { // If there is no data-xxx, save current source to it
-				dataNum = Math.floor( Math.random() * 100 );
-			}	
-
-			if( typeof dataDur === typeof undefined ) {
-				dataDur = 3000;
-			}	
-
-			if( typeof dataDouble === typeof undefined ) {
-				dataDouble = true;
-			}	
-
-			if( typeof dataDilimiter === typeof undefined ) {
-				dataDilimiter = true;
-			}	
-
-
-
+			var $this = $( this );
+			
 			var waypoints = $this.waypoint({
 			    handler: function( direction ) {
-					$this.jCustomCounter({
-						end          : dataNum,
-						duration     : dataDur,
-						doubleDigits : dataDouble,
-						dilimiter    : dataDilimiter
+					
+					$this.countTo({
+						dilimiter      : true,
+						doubleDigits   : true
 					});
-
+					
 					//Prevents front-end javascripts that are activated in the background to repeat loading.
 				    this.disable();
 				  
@@ -1876,8 +1807,6 @@ theme = ( function ( theme, $, window, document ) {
 			    },
 			    offset: '100%' //0~100%, bottom-in-view
 			})
-
-
 
 
 		});
@@ -1895,6 +1824,100 @@ theme = ( function ( theme, $, window, document ) {
 
 }( theme, jQuery, window, document ) );
 
+
+
+/* Counter function */
+(function ($) {
+	$.fn.countTo = function (options) {
+		options = options || {};
+		
+		return $(this).each(function () {
+			// set options for current element
+			var settings = $.extend({}, $.fn.countTo.defaults, {
+				from            : $( this ).data( 'counter-start' ),
+				to              : $( this ).data( 'counter-number' ),
+				speed           : $( this ).data( 'counter-duration' ),
+				refreshInterval : $( this ).data( 'counter-refresh-interval' ),
+				dilimiter       : $( this ).data( 'counter-dilimiter' ),
+				doubleDigits    : $( this ).data( 'counter-double-digits' )
+			}, options);
+			
+			// how many times to update the value, and how much to increment the value on each update
+			var loops = Math.ceil(settings.speed / settings.refreshInterval),
+				increment = (settings.to - settings.from) / loops;
+			
+			// references & variables that will change with each update
+			var self      = this,
+				$self     = $( this ),
+				loopCount = 0,
+				value     = settings.from,
+				data      = $self.data('countTo') || {};
+			
+			$self.data('countTo', data);
+			
+			// if an existing interval can be found, clear it first
+			if (data.interval) {
+				clearInterval(data.interval);
+			}
+			data.interval = setInterval(updateTimer, settings.refreshInterval);
+			
+			// initialize the element with the starting value
+			render(value);
+			
+			function updateTimer() {
+				value += increment;
+				loopCount++;
+				
+				render(value);
+				
+				if (typeof(settings.onUpdate) == 'function') {
+					settings.onUpdate.call(self, value);
+				}
+				
+				if (loopCount >= loops) {
+					// remove the interval
+					$self.removeData('countTo');
+					clearInterval(data.interval);
+					value = settings.to;
+					
+					if (typeof(settings.onComplete) == 'function') {
+						settings.onComplete.call(self, value);
+					}
+				}
+			}
+			
+			function render( value ) {
+				var formattedValue = Number( value ).toFixed();
+				
+				if ( settings.dilimiter && formattedValue > 0 ) {
+					formattedValue = formattedValue.toString().replace(/\B(?=(?:\d{3})+\b)/g, ',');
+				}
+				
+				if (settings.doubleDigits) {
+					if ( formattedValue < 10 ) {
+						formattedValue = '0' + formattedValue;
+					}
+				}	
+				
+				
+				$self.html( formattedValue );
+			}
+		});
+	};
+	
+	$.fn.countTo.defaults = {
+		from           : 0,            // the number the element should start at
+		number         : 0,            // the number the element should end at
+		duration       : 500,         // how long it should take to count between the target numbers
+		refreshInterval: 1,           // how often the element should be updated
+		dilimiter      : true,        // the number of decimal places to show
+		onUpdate       : null,        // callback method for every time the element is updated
+		onComplete     : null,       // callback method for when the element finishes updating,
+		doubleDigits   : false       // two digits are used by default
+	};
+	
+	
+}(jQuery));
 
 /*! 
  *************************************
@@ -2260,7 +2283,7 @@ theme = ( function ( theme, $, window, document ) {
 
 /*! 
  *************************************
- * 23. AJAX
+ * P1. AJAX
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -2297,3 +2320,57 @@ theme = ( function ( theme, $, window, document ) {
 }( theme, jQuery, window, document ) );
 
 
+
+
+
+/*! 
+ *************************************
+ * P2. Text effect
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+    
+	//////////////// cipher
+	var cipher = function() {
+	  function e(a, d, b) {
+		var c, f, g, h;
+		b == a.length ? k.animationComplete = !0 : (g = d.innerHTML, h = Math.floor(21 * Math.random() + 5), c = 32 === a[b] ? 32 : a[b] - h, f = setInterval(function() {
+		  d.innerHTML = g + String.fromCharCode(c);
+		  c == a[b] ? (clearInterval(f), c = 32, b++, setTimeout(function() {
+			e(a, d, b);
+		  }, 10)) : c++;
+		}, 5));
+	  }
+	  var k = {};
+	  return k = {animationComplete:!1, text:function(a) {
+		this.animationComplete = !1;
+		a = document.getElementById(a);
+		for (var d = a.innerHTML, b = [], c = 0;c < d.length;c++) {
+		  b.push(d.charCodeAt(c));
+		}
+		a.innerHTML = "";
+		e(b, a, 0);
+	  }};
+	}();
+
+
+    var pageLoaded = function() {
+
+		setTimeout(function() {
+			if ( $( '#brand-text' ).text().length > 0 ) {
+				cipher.text( 'brand-text' );
+			}
+			
+		}, 1500 );	
+		
+    };
+
+    theme.textEffect = {
+        pageLoaded : pageLoaded        
+    };
+
+    theme.components.pageLoaded.push( pageLoaded );
+    return theme;
+
+}( theme, jQuery, window, document ) );

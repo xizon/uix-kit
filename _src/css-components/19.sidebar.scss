@@ -4,6 +4,7 @@
 /* 19.1. Basic */
 
 .sidebar-container {
+  position: relative;
   -ms-word-wrap: break-word;
   word-wrap: break-word;
   padding-left: 2.1875rem;
@@ -11,7 +12,15 @@
   .widget {
     padding-bottom: 2.625rem;
     font-size: 0.875rem;
+	  
+	  &.sticky {
+		  position: fixed;
+		  top: 0;
+		  
+	  }
   }
+	
+	
   .widget-title {
     margin: 0 0 0.875rem;
   }

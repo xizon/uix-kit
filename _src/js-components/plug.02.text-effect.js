@@ -2,7 +2,7 @@
 
 /*! 
  *************************************
- * 11. Text effect
+ * P2. Text effect
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {

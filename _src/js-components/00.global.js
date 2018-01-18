@@ -15,7 +15,7 @@
 	8. Grid List
 	9. FlexSlider
 	10. Forms
-	11. Text effect
+	11. Sticky Elements 
 	12. Retina Graphics for Website
 	13. Modal
 	14. Tabs
@@ -27,7 +27,13 @@
 	20. Videos
 	21. Accordion
 	22. Multiple columns full height for Bootstrap 3.x
-	23. AJAX
+	
+    ================
+
+    Plugins:
+
+	P1. AJAX
+	P2. Text effect
 
 */
 
