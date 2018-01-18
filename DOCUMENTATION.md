@@ -44,6 +44,7 @@
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css?ver=3.3.7" media="all"/>
 		<link rel="stylesheet" type="text/css" href="assets/css/video.min.css?ver=5.19" media="all"/>
         <link rel="stylesheet" type="text/css" href="assets/css/flexslider.min.css?ver=2.6.2" media="all" />
+		<link rel="stylesheet" type="text/css" href="assets/css/animate.min.css?ver=3.5.2" media="all" />
 		
         <!-- Icons  -->
         <link rel="stylesheet" type="text/css" href="assets/fonts/flaticon/flaticon.min.css?ver=1.0" media="all"/>
@@ -90,16 +91,15 @@
   
 
     <!-- Basic Script -->
-	<script src="assets/js/wp-jquery/jquery.min.js?ver=1.12.3"></script>
-    <script src="assets/js/wp-jquery/jquery.migrate.min.js?ver=1.2.1"></script>
+	<script src="assets/js/wp-jquery/jquery.min.js?ver=2.1.3"></script>
+    <script src="assets/js/wp-jquery/jquery.migrate.min.js?ver=1.4.1"></script>
     <script src="assets/js/min/jquery.mousewheel.min.js?ver=3.1.12"></script>
-    <script src="assets/js/min/jquery.easing.min.js?ver=1.3"></script>
-    <script src="assets/js/min/scrollreveal.min.js?ver=2.3.0"></script> 
+    <script src="assets/js/min/jquery.easing.min.js?ver=1.3"></script> 
     <script src="assets/js/min/jquery.bgParallax.min.js?ver=1.1.3"></script> 
-    <script src="assets/js/min/jquery.waitforimages.min.js?ver=1.0"></script> 
-
-    <!-- Back to Top  -->
-    <script src="assets/js/min/jquery.ui.totop.min.js?ver=1.2"></script>
+    <script src="assets/js/min/jquery.waitforimages.min.js?ver=1.0"></script>
+    <script src="assets/js/min/videojs-ie8.min.js?ver=1.1"></script> 
+    <script src="assets/js/min/video.min.js?ver=5.19"></script> 
+	<script src="assets/js/min/jquery.waypoints.min.js?ver=4.0.1"></script> 
     
     <!-- Mobile  -->
     <script src="assets/js/min/jquery.sidr.min.js?ver=2.2.1"></script>
