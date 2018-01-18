@@ -45,7 +45,7 @@
 					}
 					
 					if ( settings.dilimiter && curr_count > 0 ) {
-						curr_count_go = curr_count_go.toLocaleString();
+						curr_count_go = curr_count_go.toString().replace(/\B(?=(?:\d{3})+\b)/g, ',');
 					}
 					
 					
@@ -62,7 +62,7 @@
 					
 					
 					if ( settings.dilimiter && curr_count > 0 ) {
-						curr_count = curr_count.toLocaleString();
+						curr_count = curr_count.toString().replace(/\B(?=(?:\d{3})+\b)/g, ',');
 					}
 					
 				    $display.text( curr_count );

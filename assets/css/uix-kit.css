@@ -108,9 +108,7 @@
     31. Counter 
     32. Accordion 
 	33. Note & Tip 
-	34. WordPress Core 
-    35. Themes
-        35.1 White 
+
 
     ================
 
@@ -118,6 +116,9 @@
 
     P1. Sidr (Mobile Menu)
     P2. Custom Flexslider
+    P3. WordPress Core 
+    P4. Themes
+        P4.1 White 
 
 	
 	
@@ -1865,6 +1866,10 @@ li.multi-column > ul li .nav-arrow {
     text-indent: 100%;
     background: url(../images/back-top.png) no-repeat left top;
     z-index: 1;
+}
+
+#toTop.active {
+    display: block;
 }
 
 #toTopHover {
@@ -4292,237 +4297,6 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   34. WordPress Core            
-/* ====================================================== */
-.edit-link {
-    display: block;
-}
-
-.edit-link:before, .edit-link:after {
-    content: '';
-    display: block;
-    clear: both;
-}
-
-.edit-link a {
-    text-decoration: underline;
-}
-
-.alignnone {
-    margin: 0.4375rem 1.27624999994rem 1.27624999994rem 0;
-}
-
-.aligncenter, div.aligncenter {
-    display: block;
-    margin: 0.4375rem auto 0.4375rem auto;
-}
-
-.alignright {
-    float: right;
-    margin: 0.4375rem 0 1.27624999994rem 1.27624999994rem;
-}
-
-.alignleft {
-    float: left;
-    margin: 0.4375rem 1.27624999994rem 1.27624999994rem 0;
-}
-
-a img.alignright {
-    float: right;
-    margin: 0.4375rem 0 1.27624999994rem 1.27624999994rem;
-}
-
-a img.alignnone {
-    margin: 0.4375rem 1.27624999994rem 1.27624999994rem 0;
-}
-
-a img.alignleft {
-    float: left;
-    margin: 0.4375rem 1.27624999994rem 1.27624999994rem 0;
-}
-
-a img.aligncenter {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.wp-caption {
-    background: #fff;
-    border: 1px solid #f0f0f0;
-    max-width: 96%;
-  /* Image does not overflow the content area */
-    padding: 0.4375rem 0.2625rem 0.625rem;
-    text-align: center;
-}
-
-.wp-caption.alignnone, .wp-caption.alignleft {
-    margin: 0.4375rem 1.27624999994rem 1.27624999994rem 0;
-}
-
-.wp-caption.alignright {
-    margin: 0.4375rem 0 1.27624999994rem 1.27624999994rem;
-}
-
-.wp-caption img {
-    border: 0 none;
-    height: auto;
-    margin: 0;
-    max-width: 98.5%;
-    padding: 0;
-    width: auto;
-}
-
-.wp-caption p.wp-caption-text {
-    font-size: 0.6875rem;
-    line-height: 1.421875;
-    margin: 0;
-    padding: 0 0.35rem 0.4375rem;
-}
-
-/* Text meant only for screen readers. */
-.screen-reader-text {
-    clip: rect(1px, 1px, 1px, 1px);
-    position: absolute !important;
-    height: 1px;
-    width: 1px;
-    overflow: hidden;
-}
-
-.screen-reader-text:focus {
-    background-color: #f1f1f1;
-    border-radius: 3px;
-    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
-    clip: auto !important;
-    color: #21759b;
-    display: block;
-    font-size: 0.875rem;
-    font-weight: bold;
-    height: auto;
-    left: 0.4375rem;
-    line-height: normal;
-    padding: 1.05rem 1.421875rem 0.875rem;
-    text-decoration: none;
-    top: 0.4375rem;
-    width: auto;
-    z-index: 100000;
-}
-
-/* Galleries */
-.gallery {
-    margin-bottom: 1.4rem;
-}
-
-.gallery-item {
-    display: inline-block;
-    padding: 1.79104477%;
-    text-align: center;
-    vertical-align: top;
-    width: 100%;
-}
-
-.gallery-columns-2 .gallery-item {
-    max-width: 50%;
-}
-
-.gallery-columns-3 .gallery-item {
-    max-width: 33.33%;
-}
-
-.gallery-columns-4 .gallery-item {
-    max-width: 25%;
-}
-
-.gallery-columns-5 .gallery-item {
-    max-width: 20%;
-}
-
-.gallery-columns-6 .gallery-item {
-    max-width: 16.66%;
-}
-
-.gallery-columns-7 .gallery-item {
-    max-width: 14.28%;
-}
-
-.gallery-columns-8 .gallery-item {
-    max-width: 12.5%;
-}
-
-.gallery-columns-9 .gallery-item {
-    max-width: 11.11%;
-}
-
-.gallery-icon img {
-    margin: 0 auto;
-}
-
-.gallery-caption {
-    color: #707070;
-    color: rgba(51, 51, 51, 0.7);
-    display: block;
-    font-family: "Noto Sans", sans-serif;
-    font-size: 1.2rem;
-    line-height: 1.5;
-    padding: 0.435rem 0;
-}
-
-.gallery-columns-6 .gallery-caption, .gallery-columns-7 .gallery-caption, .gallery-columns-8 .gallery-caption, .gallery-columns-9 .gallery-caption {
-    display: none;
-}
-
-/* other */
-/* ====================================================== 
-   35. Themes    
-/* ====================================================== */
-/*------- 35.1 White  --------*/
-/* Navigation Area  */
-.theme-white ul.menu-main > li > a {
-    color: #fff;
-}
-
-.theme-white ul.menu-main > li.active, .theme-white ul.menu-main > li.current-menu-item, .theme-white ul.menu-main > li:hover {
-    -webkit-box-shadow: 0 1.15px 0 white;
-    -moz-box-shadow: 0 1.15px 0 white;
-    box-shadow: 0 1.15px 0 white;
-}
-
-.theme-white ul.menu-main > li > .nav-arrow {
-    background-color: #fff;
-}
-
-.theme-white .header-area {
-    background-color: rgba(255, 255, 255, 0.15);
-    border-bottom-color: rgba(255, 255, 255, 0.2);
-}
-
-.theme-white .header-area.spy-scroll-fixed {
-    background-color: #DA304A;
-}
-
-.theme-white .header-area .menu-right a {
-    color: #fff;
-}
-
-@media all and (max-width: 768px) {
-    .theme-white .header-area {
-        background-color: transparent;
-        border-bottom: none;
-        -webkit-box-shadow: none;
-        -moz-box-shadow: none;
-        box-shadow: none;
-    }
-
-    .theme-white .header-area.spy-scroll-fixed {
-        background-color: transparent;
-    }
-
-    .theme-white .brand {
-        display: none;
-    }
-}
-
-/* ====================================================== 
    P1. Sidr (Mobile Menu)
 /* ====================================================== */
 .sidr {
@@ -5202,5 +4976,235 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
         opacity: 0;
         -webkit-transform: translate3d(-100%, 0, 0);
         transform: translate3d(-100%, 0, 0);
+    }
+}
+
+/* ====================================================== 
+   P3. WordPress Core            
+/* ====================================================== */
+.edit-link {
+    display: block;
+}
+
+.edit-link:before, .edit-link:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.edit-link a {
+    text-decoration: underline;
+}
+
+.alignnone {
+    margin: 0.4375rem 1.27624999994rem 1.27624999994rem 0;
+}
+
+.aligncenter, div.aligncenter {
+    display: block;
+    margin: 0.4375rem auto 0.4375rem auto;
+}
+
+.alignright {
+    float: right;
+    margin: 0.4375rem 0 1.27624999994rem 1.27624999994rem;
+}
+
+.alignleft {
+    float: left;
+    margin: 0.4375rem 1.27624999994rem 1.27624999994rem 0;
+}
+
+a img.alignright {
+    float: right;
+    margin: 0.4375rem 0 1.27624999994rem 1.27624999994rem;
+}
+
+a img.alignnone {
+    margin: 0.4375rem 1.27624999994rem 1.27624999994rem 0;
+}
+
+a img.alignleft {
+    float: left;
+    margin: 0.4375rem 1.27624999994rem 1.27624999994rem 0;
+}
+
+a img.aligncenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.wp-caption {
+    background: #fff;
+    border: 1px solid #f0f0f0;
+    max-width: 96%;
+  /* Image does not overflow the content area */
+    padding: 0.4375rem 0.2625rem 0.625rem;
+    text-align: center;
+}
+
+.wp-caption.alignnone, .wp-caption.alignleft {
+    margin: 0.4375rem 1.27624999994rem 1.27624999994rem 0;
+}
+
+.wp-caption.alignright {
+    margin: 0.4375rem 0 1.27624999994rem 1.27624999994rem;
+}
+
+.wp-caption img {
+    border: 0 none;
+    height: auto;
+    margin: 0;
+    max-width: 98.5%;
+    padding: 0;
+    width: auto;
+}
+
+.wp-caption p.wp-caption-text {
+    font-size: 0.6875rem;
+    line-height: 1.421875;
+    margin: 0;
+    padding: 0 0.35rem 0.4375rem;
+}
+
+/* Text meant only for screen readers. */
+.screen-reader-text {
+    clip: rect(1px, 1px, 1px, 1px);
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+}
+
+.screen-reader-text:focus {
+    background-color: #f1f1f1;
+    border-radius: 3px;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+    clip: auto !important;
+    color: #21759b;
+    display: block;
+    font-size: 0.875rem;
+    font-weight: bold;
+    height: auto;
+    left: 0.4375rem;
+    line-height: normal;
+    padding: 1.05rem 1.421875rem 0.875rem;
+    text-decoration: none;
+    top: 0.4375rem;
+    width: auto;
+    z-index: 100000;
+}
+
+/* Galleries */
+.gallery {
+    margin-bottom: 1.4rem;
+}
+
+.gallery-item {
+    display: inline-block;
+    padding: 1.79104477%;
+    text-align: center;
+    vertical-align: top;
+    width: 100%;
+}
+
+.gallery-columns-2 .gallery-item {
+    max-width: 50%;
+}
+
+.gallery-columns-3 .gallery-item {
+    max-width: 33.33%;
+}
+
+.gallery-columns-4 .gallery-item {
+    max-width: 25%;
+}
+
+.gallery-columns-5 .gallery-item {
+    max-width: 20%;
+}
+
+.gallery-columns-6 .gallery-item {
+    max-width: 16.66%;
+}
+
+.gallery-columns-7 .gallery-item {
+    max-width: 14.28%;
+}
+
+.gallery-columns-8 .gallery-item {
+    max-width: 12.5%;
+}
+
+.gallery-columns-9 .gallery-item {
+    max-width: 11.11%;
+}
+
+.gallery-icon img {
+    margin: 0 auto;
+}
+
+.gallery-caption {
+    color: #707070;
+    color: rgba(51, 51, 51, 0.7);
+    display: block;
+    font-family: "Noto Sans", sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    padding: 0.435rem 0;
+}
+
+.gallery-columns-6 .gallery-caption, .gallery-columns-7 .gallery-caption, .gallery-columns-8 .gallery-caption, .gallery-columns-9 .gallery-caption {
+    display: none;
+}
+
+/* other */
+/* ====================================================== 
+   P4. Themes - White
+/* ====================================================== */
+/* Navigation Area  */
+.theme-white ul.menu-main > li > a {
+    color: #fff;
+}
+
+.theme-white ul.menu-main > li.active, .theme-white ul.menu-main > li.current-menu-item, .theme-white ul.menu-main > li:hover {
+    -webkit-box-shadow: 0 1.15px 0 white;
+    -moz-box-shadow: 0 1.15px 0 white;
+    box-shadow: 0 1.15px 0 white;
+}
+
+.theme-white ul.menu-main > li > .nav-arrow {
+    background-color: #fff;
+}
+
+.theme-white .header-area {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+
+.theme-white .header-area.spy-scroll-fixed {
+    background-color: #DA304A;
+}
+
+.theme-white .header-area .menu-right a {
+    color: #fff;
+}
+
+@media all and (max-width: 768px) {
+    .theme-white .header-area {
+        background-color: transparent;
+        border-bottom: none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+    }
+
+    .theme-white .header-area.spy-scroll-fixed {
+        background-color: transparent;
+    }
+
+    .theme-white .brand {
+        display: none;
     }
 }

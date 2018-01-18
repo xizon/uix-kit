@@ -198,8 +198,29 @@ theme = ( function ( theme, $, window, document ) {
     
     var documentReady = function( $ ) {
         
+		var $window      = $( window );
+
 		// Back to top
-		$( document ).UItoTop( { easingType: 'easeOutQuart', scrollSpeed: 500 } );
+		$( 'body' ).prepend( '<a href="#" id="toTop"><span id="toTopHover"></span></a>' );
+		$window.on( 'scroll touchmove', function() {
+
+			//---
+			if ( $window.scrollTop() > 120 ) {	
+				$( '#toTop' ).addClass( 'active' );
+			}else{
+				$( '#toTop' ).removeClass( 'active' );
+			};
+
+
+		});	
+		
+		$( '#toTop' ).on( 'click', function( e ) {
+			e.preventDefault();
+			$( 'html, body' ).stop().animate({
+				scrollTop: 0
+			}, { easing: 'easeOutQuart', duration: 500 } );	
+		
+		});
 		
 		// Scroll to element
 		$( 'a[href^="#"]' ).on( 'click', function( e ) {
@@ -1769,7 +1790,7 @@ theme = ( function ( theme, $, window, document ) {
 					}
 					
 					if ( settings.dilimiter && curr_count > 0 ) {
-						curr_count_go = curr_count_go.toLocaleString();
+						curr_count_go = curr_count_go.toString().replace(/\B(?=(?:\d{3})+\b)/g, ',');
 					}
 					
 					
@@ -1786,7 +1807,7 @@ theme = ( function ( theme, $, window, document ) {
 					
 					
 					if ( settings.dilimiter && curr_count > 0 ) {
-						curr_count = curr_count.toLocaleString();
+						curr_count = curr_count.toString().replace(/\B(?=(?:\d{3})+\b)/g, ',');
 					}
 					
 				    $display.text( curr_count );

@@ -26,7 +26,6 @@ Uix Kit bundles the following third-party resources:
 - [Bootstrap v3.3.7](http://getbootstrap.com)
 - [jQuery Parallax](http://www.ianlunn.co.uk/plugins/jquery-parallax/)
 - [Shuffle.js](https://vestride.github.io/Shuffle/)
-- [UItoTop jQuery Plugin](http://www.mattvarone.com/web-design/uitotop-jquery-plugin)
 - [waitForImages](https://github.com/alexanderdickson/waitForImages)
 - [modernizr](https://modernizr.com/)
 - [Respond.js](https://github.com/scottjehl/Respond)

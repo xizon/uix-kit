@@ -68,11 +68,6 @@ Licenses: MIT
 Source: https://vestride.github.io/Shuffle/
 
 
-UItoTop jQuery Plugin
-Licenses: GPLv2 or later
-Source: http://www.mattvarone.com/web-design/uitotop-jquery-plugin
-
-
 waitForImages
 Licenses: MIT
 Source: https://github.com/alexanderdickson/waitForImages
