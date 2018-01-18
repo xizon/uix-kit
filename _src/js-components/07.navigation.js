@@ -136,7 +136,7 @@ theme = ( function ( theme, $, window, document ) {
 			var lastScrollTop = 0,
 			    delta         = 5;
     
-			$window.on( 'scroll', function() {
+			$window.on( 'scroll touchmove', function() {
 				
 				// Show Toolbar when viewing site
 				if ( $window.scrollTop() >= 46 ) {	

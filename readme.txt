@@ -88,10 +88,13 @@ Licenses: MIT
 Source: https://github.com/scottjehl/Respond
 
 
-ScrollReveal
+Animate.css
 Licenses: MIT
-Source: https://github.com/jlmakes/scrollreveal.js
+Source: https://github.com/daneden/animate.css
 
+waypoints
+Licenses: MIT
+Source: https://github.com/imakewebthings/waypoints
 
 
 All photos uploaded to the site are released under Creative Commons - CC0 and do not require attribution. No more hassle trying to figure out whether you can use photos for commercial use and whether you need to provide attribution. (http://www.gratisography.com, https://stocksnap.io ) Part of the image and videos used in the demo are not distributed with the theme. They are all licensed under Creative Commons and credited to their respective creator/owner.

@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit
  * ## Description         :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Version             :  0.0.7
- * ## Last Update         :  January 16, 2018
+ * ## Last Update         :  January 18, 2018
  * ## Created             :  by UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Compatible With     :  Bootstrap 3.x, Chinese, English
@@ -118,11 +118,11 @@ theme = ( function ( theme, $, window, document ) {
     'use strict';
     
     var pageLoaded = function() {
-		
-		
+	
 		var $window      = $( window );
 
-		$window.on( 'scroll', function() {
+		
+		$window.on( 'scroll touchmove', function() {
 
 			//---
 			if ( $window.scrollTop() > 120 ) {	
@@ -217,7 +217,7 @@ theme = ( function ( theme, $, window, document ) {
 		});
 		
 		// Making class active by scrolling past it
-		$( window ).on( 'scroll', function() {
+		$( window ).on( 'scroll touchmove', function() {
 			var scrollTop = $( window ).scrollTop();
 			
 			$( '[data-section="true"]' ).each(function() {
@@ -343,7 +343,7 @@ theme = ( function ( theme, $, window, document ) {
 	
 				$this.bgParallax( "50%", dataSpeed );
 				
-				$window.on( 'scroll', function() {
+				$window.on( 'scroll touchmove', function() {
 					var scrolled = $window.scrollTop();
 					$this.find( '.parallax-element' ).css( 'margin-top', ( scrolled * dataSpeed ) + 'px' );
 				});	
@@ -428,81 +428,23 @@ theme = ( function ( theme, $, window, document ) {
    
     var documentReady = function( $ ) {
 
-		/*
-		// 'bottom', 'left', 'top', 'right'
-		origin: 'bottom',
-
-		// Can be any valid CSS distance, e.g. '5rem', '10%', '20vw', etc.
-		distance: '20px',
-
-		// Time in milliseconds.
-		duration: 500,
-		delay: 0,
-
-		// Starting angles in degrees, will transition from these values to 0 in all axes.
-		rotate: { x: 0, y: 0, z: 0 },
-
-		// Starting opacity value, before transitioning to the computed opacity.
-		opacity: 0,
-
-		// Starting scale value, will transition from this value to 1
-		scale: 0.9,
-
-		// Accepts any valid CSS easing, e.g. 'ease', 'ease-in-out', 'linear', etc.
-		easing: 'cubic-bezier(0.6, 0.2, 0.1, 1)',
-
-		// `<html>` is the default reveal container. You can pass either:
-		// DOM Node, e.g. document.querySelector('.fooContainer')
-		// Selector, e.g. '.fooContainer'
-		container: window.document.documentElement,
-
-		// true/false to control reveal animations on mobile.
-		mobile: true,
-
-		// true:  reveals occur every time elements become visible
-		// false: reveals occur once as elements become visible
-		reset: false,
-
-		// 'always' — delay for all reveal animations
-		// 'once'   — delay only the first time reveals occur
-		// 'onload' - delay only for animations triggered by first load
-		useDelay: 'always',
-
-		// Change when an element is considered in the viewport. The default value
-		// of 0.20 means 20% of an element must be visible for its reveal to occur.
-		viewFactor: 0.2,
-
-		// Pixel values that alter the container boundaries.
-		// e.g. Set `{ top: 48 }`, if you have a 48px tall fixed toolbar.
-		// --
-		// Visual Aid: https://scrollrevealjs.org/assets/viewoffset.png
-		viewOffset: { top: 0, right: 0, bottom: 0, left: 0 },
-
-		// Callbacks that fire for each triggered element reveal, and reset.
-		beforeReveal: function (domEl) {},
-		beforeReset: function (domEl) {},
-
-		// Callbacks that fire for each completed element reveal, and reset.
-		afterReveal: function (domEl) {},
-		afterReset: function (domEl) {}
-		*/
-		
-		// jQuery.browser is a deprecated method, and you shouldn't really rely on UA testing this way either.
+		//Reversing Scroll Animations in CSS with Waypoints
 		if ( Modernizr.cssanimations ) {
-			window.sr = ScrollReveal();
-			if ( sr.isSupported() ) {
-				sr.reveal( '.scroll-reveal', {
-					delay    : 0,
-					rotate   : { z: 0 },
-					origin   : 'bottom',
-					distance : '105px',
-					duration : 800,
-					scale    : 1
-				} );
-			}
 			
+			var $scrollRevealElements = $( '.scroll-reveal' ),
+				waypoints             = $scrollRevealElements.waypoint({
+				handler: function( direction ) {
+
+					$( this.element ).addClass( 'animated fadeInUp' );
+
+				},
+				offset: '100%' //0~100%, bottom-in-view
+			})
+
+	
 		}
 
+		
 		
 	};
 	
@@ -653,7 +595,7 @@ theme = ( function ( theme, $, window, document ) {
 			var lastScrollTop = 0,
 			    delta         = 5;
     
-			$window.on( 'scroll', function() {
+			$window.on( 'scroll touchmove', function() {
 				
 				// Show Toolbar when viewing site
 				if ( $window.scrollTop() >= 46 ) {	
@@ -1793,68 +1735,70 @@ theme = ( function ( theme, $, window, document ) {
             "animToLastFrameEvent": function () {
                
             },
-			'start'    : 0,
-			'end'      : 100,
-			'easing'   : 'swing',
-			'duration' : 400
+			'start'        : 0,
+			'end'          : 100,
+			'duration'     : 400,
+			'doubleDigits' : false,
+			'dilimiter'    : true
 
 		}
 		,options);
 		this.each(function(){
 			
 		
-			var $this = $( this );
-			
-			
-			//////////////// Random effetct
-			var cid = Math.random() * 1000;
-			$this.attr( 'id', 'counter-' + cid );
-			
-			var word = document.getElementById( 'counter-' + cid );
-			var letters = 
-				['0','1','2','3','4','5','6','7','8','9'];
+			var $this   = $( this );
+	
 
-			var skip = 1;
-			var counter = 0;
-
-			var swap = function() {
-
-			  if(counter++ == skip) {
-				randWord = 
-				  letters[Math.floor(Math.random()*(letters.length-5))]
-				+ letters[Math.floor(Math.random()*(letters.length-1))];
-				word.innerHTML = randWord;
-				word.dataset.text = randWord;
-
-				counter = 0;
-			  }
-			 
-			}
-			
-			var textEff = setInterval( function() {
-				swap();
-			}, 1 );
-
-			
-
-			
-			//////////////// Counter init	
-			
-			$( { count: settings.start } ).animate( { count: settings.end }, {
-				duration : settings.duration,
-				easing   : settings.easing,
-				step     : function() {
-					var mathCount = Math.ceil( this.count );
-					if ( mathCount < 10 ) {
-						mathCount = '0' + mathCount;
+			function countUp( count ) {
+			  var div_by    = 100,
+				  speed     = Math.round( count / div_by ),
+				  $display  = $this,
+				  run_count = 1,
+				  int_speed = settings.duration/100;  
+				  
+				
+			  // Counter init
+			  var int = setInterval( function() {
+				if( run_count < div_by ){
+					
+					if ( settings.doubleDigits ) {
+						var curr_count_go = speed * run_count;
+						if ( curr_count_go < 10 ) {
+							curr_count_go = '0' + curr_count_go;
+						}	
 					}
-					$this.text( mathCount );
-				},
-				complete : function() {
-					clearInterval( textEff );
+					
+					if ( settings.dilimiter && curr_count > 0 ) {
+						curr_count_go = curr_count_go.toLocaleString();
+					}
+					
+					
+				    $display.text( curr_count_go );
+				    run_count++;
+				} else if(parseInt( $display.text().toString().replace(/\,/g, '' ) ) < count) {
+				    var curr_count = parseInt( $display.text().toString().replace(/\,/g, '' )) + 1
+					
+					if ( settings.doubleDigits ) {
+						if ( curr_count < 10 ) {
+							curr_count = '0' + curr_count;
+						}	
+					}
+					
+					
+					if ( settings.dilimiter && curr_count > 0 ) {
+						curr_count = curr_count.toLocaleString();
+					}
+					
+				    $display.text( curr_count );
+				} else {
+				    clearInterval( int );
 				}
-			});
+			  }, int_speed );
+			}
 
+			countUp( settings.end );
+			
+			
 			
 		})
 	}
@@ -1865,86 +1809,58 @@ theme = ( function ( theme, $, window, document ) {
     'use strict';
     
     var pageLoaded = function() {
-		
-		
-		var $window      = $( window ),
-			windowWidth  = $window.width(),
-			windowHeight = $window.height();
-
-		//Counter initialize
-		$( 'html, body' ).stop().animate({
-			scrollTop: 2
-		}, 100 );	
-		
-		
-		$window.on( 'scroll', function() {
-
-			var scrollTop = $window.scrollTop();
-			counterInit( scrollTop );
-			
-			//Detecting when user scrolls to bottom of div
-			var arrivedAtBottom = function () { 
-				return scrollTop + $window.height() == $( document ).height(); 
-			} 
-			
-			if( arrivedAtBottom() ) { 
-				counterInit( 'go' );
-			}
-			
-		});	
-		
-
-		function counterInit( sn ) {
-			
-			$( '[data-counter-number]' ).each(function() {
-				
-			
-				var $this       = $( this ),
-					activated   = $this.data( 'activated' ),//In order to avoid duplication of the running script with Uix Page Builder ( required )
-				    dataNum     = $this.data( 'counter-number' ),
-					dataDur     = $this.data( 'counter-duration' );
-				
-
-				if ( typeof activated === typeof undefined || activated === 0 ) {
-
-					if( typeof dataNum === typeof undefined ) { // If there is no data-xxx, save current source to it
-						dataNum = Math.floor( Math.random() * 100 );
-					}	
-
-					if( typeof dataDur === typeof undefined ) {
-						dataDur = 3000;
-					}	
-					
-					
-					if ( 
-						parseFloat( sn + 50 ) >= parseFloat( $this.offset().top - windowHeight/2 - 50 ) ||
-						sn == 'go'
-					) {
-						
-						
-						$this.jCustomCounter({
-							end      : dataNum,
-							duration : dataDur
-						});
-						
-						//Prevents front-end javascripts that are activated in the background to repeat loading.
-						$this.data( 'activated', 1 );		
-						
-						
-					}
-
-
 	
+		$( '[data-counter-number]' ).each(function() {
 
 
-				}	
+			var $this          = $( this ),
+				dataNum        = $this.data( 'counter-number' ),
+				dataDur        = $this.data( 'counter-duration' ),
+				dataDouble     = $this.data( 'counter-double-digits' ),
+				dataDilimiter  = $this.data( 'counter-dilimiter' );
 
-				
-	
-			});
-		}
-		
-		
+
+
+			if( typeof dataNum === typeof undefined ) { // If there is no data-xxx, save current source to it
+				dataNum = Math.floor( Math.random() * 100 );
+			}	
+
+			if( typeof dataDur === typeof undefined ) {
+				dataDur = 3000;
+			}	
+
+			if( typeof dataDouble === typeof undefined ) {
+				dataDouble = true;
+			}	
+
+			if( typeof dataDilimiter === typeof undefined ) {
+				dataDilimiter = true;
+			}	
+
+
+
+			var waypoints = $this.waypoint({
+			    handler: function( direction ) {
+					$this.jCustomCounter({
+						end          : dataNum,
+						duration     : dataDur,
+						doubleDigits : dataDouble,
+						dilimiter    : dataDilimiter
+					});
+
+					//Prevents front-end javascripts that are activated in the background to repeat loading.
+				    this.disable();
+				  
+
+			    },
+			    offset: '100%' //0~100%, bottom-in-view
+			})
+
+
+
+
+		});
+
 		
 		
     };

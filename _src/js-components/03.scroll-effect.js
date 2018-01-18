@@ -27,7 +27,7 @@ theme = ( function ( theme, $, window, document ) {
 		});
 		
 		// Making class active by scrolling past it
-		$( window ).on( 'scroll', function() {
+		$( window ).on( 'scroll touchmove', function() {
 			var scrollTop = $( window ).scrollTop();
 			
 			$( '[data-section="true"]' ).each(function() {

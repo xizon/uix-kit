@@ -98,7 +98,7 @@ theme = ( function ( theme, $, window, document ) {
 	
 				$this.bgParallax( "50%", dataSpeed );
 				
-				$window.on( 'scroll', function() {
+				$window.on( 'scroll touchmove', function() {
 					var scrolled = $window.scrollTop();
 					$this.find( '.parallax-element' ).css( 'margin-top', ( scrolled * dataSpeed ) + 'px' );
 				});	

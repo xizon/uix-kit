@@ -8,11 +8,11 @@ theme = ( function ( theme, $, window, document ) {
     'use strict';
     
     var pageLoaded = function() {
-		
-		
+	
 		var $window      = $( window );
 
-		$window.on( 'scroll', function() {
+		
+		$window.on( 'scroll touchmove', function() {
 
 			//---
 			if ( $window.scrollTop() > 120 ) {	
