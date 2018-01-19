@@ -31,7 +31,8 @@ Uix Kit bundles the following third-party resources:
 - [Respond.js](https://github.com/scottjehl/Respond)
 - [Animate.css](https://github.com/daneden/animate.css)
 - [waypoints](https://github.com/imakewebthings/waypoints)
-- [videoJs](https://videojs.com/)
+- [Video.js](https://videojs.com/)
+- [Video.js Icon Font](https://github.com/videojs/font)
 - [videoBG](https://github.com/sydlawrence/jquery.videoBG)
 
 

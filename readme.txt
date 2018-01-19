@@ -92,9 +92,13 @@ Licenses: MIT
 Source: https://github.com/imakewebthings/waypoints
 
 
-videoJs
+Video.js
 Licenses: MIT
 Source: https://videojs.com/
+
+Video.js Icon Font
+Licenses: Apache 2.0 (The Apache 2.0 license is GPL-compatible,)
+Source: https://github.com/videojs/font
 
 
 videoBG
