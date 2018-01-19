@@ -11,8 +11,7 @@ theme = ( function ( theme, $, window, document ) {
 	
 		var $window = $( window );
 
-		
-		// Sticky header area
+		//-------- Sticky header area
 		var waypoints = $( '.header-area' ).waypoint({
 			handler: function( direction ) {
 				
@@ -24,7 +23,7 @@ theme = ( function ( theme, $, window, document ) {
 		
 		
 		
-		//Header initialize
+		//-------- Header initialize
 		headerInit();
 		
 		$window.on('resize', function() {
@@ -35,6 +34,7 @@ theme = ( function ( theme, $, window, document ) {
 		function headerInit() {
 			$( '.header-inner.auto-height' ).css( 'height', $( '.header-area' ).outerHeight() + 'px' ); 
 		}
+		
 		
     };
 

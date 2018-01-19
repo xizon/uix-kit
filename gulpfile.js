@@ -7,15 +7,17 @@ var gulp          = require('gulp'),
 	jshint        = require('gulp-jshint'),
 	rtlcss        = require('gulp-rtlcss'),
 	cssbeautify   = require('gulp-cssbeautify'),
-	headerComment = require('gulp-header-comment');
+	headerComment = require('gulp-header-comment'),
+	version       = require('gulp-version-number');
 
 
 var globs = {
-	jsTar    : 'assets/js',
-	cssTar   : 'assets/css',
-	cssRTLTar: 'assets/css/rtl',
-    js       : '_src/js-components/*.js',
-    scss     : '_src/css-components/*.scss'
+	htmlFiles : '*.html',
+	jsTar     : 'assets/js',
+	cssTar    : 'assets/css',
+	cssRTLTar : 'assets/css/rtl',
+    js        : '_src/js-components/*.js',
+    scss      : '_src/css-components/*.scss'
 };
 
 
@@ -30,6 +32,38 @@ var customComment = `
 		## Compatible Browsers :  IE9, IE10, IE11, Firefox, Safari, Opera, Chrome, Edge
 		## Released under the MIT license.
 	`;
+
+
+
+/*! 
+ *************************************
+ * Automatically add version number to request for preventing browser cache
+ *************************************
+ */
+function htmlRev() {
+	const ver = Math.random()*1000000000000000000;
+	const versionConfig = {
+		'value'    : '%MDS%',
+		'replaces' : [  
+			[/assets\/css\/uix-kit.min(.*)\"/ig, 'assets\/css\/uix-kit.min.css?ver=' + ver + '\"' ],
+			[/assets\/css\/uix-kit.IE(.*)\"/ig, 'assets\/css\/uix-kit.IE.css?ver=' + ver + '\"' ],
+			[/assets\/js\/uix-kit.min(.*)\"/ig, 'assets\/js\/uix-kit.min.js?ver=' + ver + '\"' ]
+		],
+	};
+
+
+	gulp.task('html', function() {
+	  return gulp.src( globs.htmlFiles )
+			.pipe(version( versionConfig ))
+			.pipe(gulp.dest( '' ));
+	});	
+	
+	gulp.start('html');
+	
+}
+
+
+
 
 /*! 
  *************************************
@@ -66,6 +100,9 @@ gulp.task('sass', function(){
 	
 	.pipe(headerComment( customComment))
 	.pipe(gulp.dest( globs.cssTar ));
+	
+	
+	htmlRev();
  
 });
 
@@ -100,7 +137,11 @@ gulp.task('scripts', function() {
 	    .pipe(headerComment( customComment))
 	    .pipe(gulp.dest( globs.jsTar ));
 	
+	
+	htmlRev();
+	
 });
+
 
 
 
@@ -117,10 +158,6 @@ gulp.task('default', ['jshint'], function() {
 });
 
 gulp.task('watch', function(){
-	gulp.watch( globs.scss, ['sass' ] ); 
+	gulp.watch( globs.scss, [ 'sass' ] ); 
 	gulp.watch( globs.js, [ 'scripts' ] ); 
 })
-
-
-
-
