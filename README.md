@@ -46,58 +46,28 @@ The `_demo/` folder can be deleted.
 > **CSS Components(SCSS):** `_src/css-components/*`
 
 
-<table>
-  <thead>
-    <tr>
-      <th>Types of Files</th>
-      <th>Directory</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Core CSS</td>
-      <td>
-`assets/css/uix-kit.css`<br>
-`assets/css/uix-kit.min.css`<br>
-`assets/css/uix-kit.IE.css`<br>
-	  </td>
-    </tr>
-	
-    <tr>
-      <td>Core CSS(RTL)</td>
-      <td>
-`assets/css/rtl/uix-kit-rtl.css`<br>
-	  </td>
-    </tr>
+#### CSS:
 
-    <tr>
-      <td>Core Javascript</td>
-      <td>
-`assets/js/uix-kit.js`<br>
-`assets/js/uix-kit.min.js`<br>
-	  </td>
-    </tr>
+*   `assets/css/uix-kit.css`
+*   `assets/css/uix-kit.min.css`
+*   `assets/css/uix-kit.IE.css`
 
-    <tr>
-      <td>Images</td>
-      <td>
-`assets/images/*`<br>
-	  </td>
-    </tr>
+#### CSS(RTL):
 
-    <tr>
-      <td>Fonts</td>
-      <td>
-`assets/fonts/*`<br>
-	  </td>
-    </tr>
-	
-	
-   
-  </tbody>
-</table>
+*   `assets/css/rtl/uix-kit-rtl.css`
 
+#### Javascript:
 
+*   `assets/js/uix-kit.js`
+*   `assets/js/uix-kit.min.js`
+
+#### Images:
+
+*   `assets/images/*`
+
+#### Fonts:
+
+*   `assets/fonts/*`
 
 ### 2\. PSD Grid Templates
 
