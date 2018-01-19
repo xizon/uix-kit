@@ -45,28 +45,59 @@ The `_demo/` folder can be deleted.
 > **Javascript Components:** `_src/js-components/*`  
 > **CSS Components(SCSS):** `_src/css-components/*`
 
-#### CSS:
 
+<table>
+  <thead>
+    <tr>
+      <th>Types of Files</th>
+      <th>Directory</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>**Core CSS**</td>
+      <td>
 *   `assets/css/uix-kit.css`
 *   `assets/css/uix-kit.min.css`
 *   `assets/css/uix-kit.IE.css`
-
-#### CSS(RTL):
-
+	  </td>
+    </tr>
+	
+    <tr>
+      <td>**Core CSS(RTL)**</td>
+      <td>
 *   `assets/css/rtl/uix-kit-rtl.css`
+	  </td>
+    </tr>
 
-#### Javascript:
-
+    <tr>
+      <td>**Core Javascript**</td>
+      <td>
 *   `assets/js/uix-kit.js`
 *   `assets/js/uix-kit.min.js`
+	  </td>
+    </tr>
 
-#### Images:
-
+    <tr>
+      <td>**Images**</td>
+      <td>
 *   `assets/images/*`
+	  </td>
+    </tr>
 
-#### Fonts:
-
+    <tr>
+      <td>**Fonts**</td>
+      <td>
 *   `assets/fonts/*`
+	  </td>
+    </tr>
+	
+	
+   
+  </tbody>
+</table>
+
+
 
 ### 2\. PSD Grid Templates
 
