@@ -7,7 +7,7 @@
 		
 	1. Header
 	2. Loader
-	3. Scroll Effect
+	3. Back to Top
 	4. Parallax
 	5. Overlay
 	6. Scroll Reveal
@@ -27,6 +27,7 @@
 	20. Videos
 	21. Accordion
 	22. Multiple columns full height for Bootstrap 3.x
+	23. Navigation Highlighting
 	
     ================
 
