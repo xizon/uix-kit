@@ -47,7 +47,9 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-/* Counter function */
+/*--------------------------------
+ * Counter function 
+ --------------------------------*/
 (function ($) {
 	$.fn.countTo = function (options) {
 		options = options || {};
