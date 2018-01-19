@@ -55,40 +55,40 @@ The `_demo/` folder can be deleted.
   </thead>
   <tbody>
     <tr>
-      <td>**Core CSS**</td>
+      <td>Core CSS</td>
       <td>
-*   `assets/css/uix-kit.css`
-*   `assets/css/uix-kit.min.css`
-*   `assets/css/uix-kit.IE.css`
+`assets/css/uix-kit.css`<br>
+`assets/css/uix-kit.min.css`<br>
+`assets/css/uix-kit.IE.css`<br>
 	  </td>
     </tr>
 	
     <tr>
-      <td>**Core CSS(RTL)**</td>
+      <td>Core CSS(RTL)</td>
       <td>
-*   `assets/css/rtl/uix-kit-rtl.css`
+`assets/css/rtl/uix-kit-rtl.css`<br>
 	  </td>
     </tr>
 
     <tr>
-      <td>**Core Javascript**</td>
+      <td>Core Javascript</td>
       <td>
-*   `assets/js/uix-kit.js`
-*   `assets/js/uix-kit.min.js`
+`assets/js/uix-kit.js`<br>
+`assets/js/uix-kit.min.js`<br>
 	  </td>
     </tr>
 
     <tr>
-      <td>**Images**</td>
+      <td>Images</td>
       <td>
-*   `assets/images/*`
+`assets/images/*`<br>
 	  </td>
     </tr>
 
     <tr>
-      <td>**Fonts**</td>
+      <td>Fonts</td>
       <td>
-*   `assets/fonts/*`
+`assets/fonts/*`<br>
 	  </td>
     </tr>
 	
