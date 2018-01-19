@@ -27,7 +27,7 @@ theme = ( function ( theme, $, window, document ) {
 
 			    },
 			    offset: '100%' //0~100%, bottom-in-view
-			})
+			});
 
 
 		});

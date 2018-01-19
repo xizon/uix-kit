@@ -7,22 +7,20 @@ theme = ( function ( theme, $, window, document ) {
     'use strict';
     
     var documentReady = function( $ ) {
-        
-		var $window      = $( window );
-
+    
 		// Back to top
 		$( 'body' ).prepend( '<a href="#" id="toTop"><span id="toTopHover"></span></a>' );
-		$window.on( 'scroll touchmove', function() {
+		
+		// Sticky button of back to top 
+		var waypoints = $( '#toTop' ).waypoint({
+			handler: function( direction ) {
+				
+				$( this.element ).toggleClass( 'active', direction === 'down' );
 
-			//---
-			if ( $window.scrollTop() > 120 ) {	
-				$( '#toTop' ).addClass( 'active' );
-			}else{
-				$( '#toTop' ).removeClass( 'active' );
-			};
-
-
-		});	
+			},
+			offset: -120
+		});
+		
 		
 		$( '#toTop' ).on( 'click', function( e ) {
 			e.preventDefault();

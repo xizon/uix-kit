@@ -9,20 +9,19 @@ theme = ( function ( theme, $, window, document ) {
     
     var pageLoaded = function() {
 	
-		var $window      = $( window );
+		var $window = $( window );
 
 		
-		$window.on( 'scroll touchmove', function() {
+		// Sticky header area
+		var waypoints = $( '.header-area' ).waypoint({
+			handler: function( direction ) {
+				
+				$( this.element ).toggleClass( 'spy-scroll-fixed', direction === 'down' );
 
-			//---
-			if ( $window.scrollTop() > 120 ) {	
-				$( '.header-area' ).addClass( 'spy-scroll-fixed' );
-			}else{
-				$( '.header-area' ).removeClass( 'spy-scroll-fixed' );
-			};
-
-
-		});	
+			},
+			offset: -120
+		});
+		
 		
 		
 		//Header initialize

@@ -125,20 +125,19 @@ theme = ( function ( theme, $, window, document ) {
     
     var pageLoaded = function() {
 	
-		var $window      = $( window );
+		var $window = $( window );
 
 		
-		$window.on( 'scroll touchmove', function() {
+		// Sticky header area
+		var waypoints = $( '.header-area' ).waypoint({
+			handler: function( direction ) {
+				
+				$( this.element ).toggleClass( 'spy-scroll-fixed', direction === 'down' );
 
-			//---
-			if ( $window.scrollTop() > 120 ) {	
-				$( '.header-area' ).addClass( 'spy-scroll-fixed' );
-			}else{
-				$( '.header-area' ).removeClass( 'spy-scroll-fixed' );
-			};
-
-
-		});	
+			},
+			offset: -120
+		});
+		
 		
 		
 		//Header initialize
@@ -203,22 +202,20 @@ theme = ( function ( theme, $, window, document ) {
     'use strict';
     
     var documentReady = function( $ ) {
-        
-		var $window      = $( window );
-
+    
 		// Back to top
 		$( 'body' ).prepend( '<a href="#" id="toTop"><span id="toTopHover"></span></a>' );
-		$window.on( 'scroll touchmove', function() {
+		
+		// Sticky button of back to top 
+		var waypoints = $( '#toTop' ).waypoint({
+			handler: function( direction ) {
+				
+				$( this.element ).toggleClass( 'active', direction === 'down' );
 
-			//---
-			if ( $window.scrollTop() > 120 ) {	
-				$( '#toTop' ).addClass( 'active' );
-			}else{
-				$( '#toTop' ).removeClass( 'active' );
-			};
-
-
-		});	
+			},
+			offset: -120
+		});
+		
 		
 		$( '#toTop' ).on( 'click', function( e ) {
 			e.preventDefault();
@@ -619,41 +616,26 @@ theme = ( function ( theme, $, window, document ) {
 
 			};
 			
-			//Detect user scroll down or scroll up		
-			var lastScrollTop = 0,
-			    delta         = 5;
-    
-			$window.on( 'scroll touchmove', function() {
-				
-				// Show Toolbar when viewing site
-				if ( $window.scrollTop() >= 46 ) {	
-					$( '.admin-bar .menu-toggle' ).addClass( 'spy-scroll-postion' );
-				}else{
-					$( '.admin-bar .menu-toggle' ).removeClass( 'spy-scroll-postion' );
-				};
 		
-				
-				//---
-				if ( $window.scrollTop() > 120 ) {	
-					$( '.menu-container' ).addClass( 'spy-scroll-fixed' );
-				}else{
-					$( '.menu-container' ).removeClass( 'spy-scroll-fixed' );
-				};
-				
-				//---
-				var nowScrollTop = $(this).scrollTop();
-				if ( Math.abs(lastScrollTop - nowScrollTop) >= delta ) {
-					if ( nowScrollTop > lastScrollTop ) {
-						// SCROLLING DOWN 
-					} else {
-						// SCROLLING UP 
-						
-					};
-					lastScrollTop = nowScrollTop;
-				};
+			//Show Toolbar when viewing site for WordPress
+			var waypoints = $( '.admin-bar .menu-toggle' ).waypoint({
+				handler: function( direction ) {
 
-				
-			});	
+					$( this.element ).toggleClass( 'spy-scroll-postion', direction === 'down' );
+
+				},
+				offset: -46
+			});
+
+			// Sticky primary navigation
+			var waypoints = $( '.menu-container' ).waypoint({
+				handler: function( direction ) {
+
+					$( this.element ).toggleClass( 'spy-scroll-fixed', direction === 'down' );
+
+				},
+				offset: -120
+			});
 
 
 			//Prevent to <a> of page transitions
@@ -1806,7 +1788,7 @@ theme = ( function ( theme, $, window, document ) {
 
 			    },
 			    offset: '100%' //0~100%, bottom-in-view
-			})
+			});
 
 
 		});
