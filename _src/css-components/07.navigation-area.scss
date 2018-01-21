@@ -287,12 +287,14 @@ li.multi-column > ul li .nav-arrow {
     left: 11px;
   }
   span {
-    &:nth-child(2) {
-      top: 14px;
-    }
-    &:nth-child(3) {
-      top: 19px;
-    }
+      
+    @for $i from 1 to 3 {
+
+      &:nth-child(#{$i+1}) {
+          top: #{9+($i*5)}px;
+      }
+    }	  
+
   }
   &.open span {
     &:first-child {

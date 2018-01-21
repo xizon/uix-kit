@@ -185,7 +185,7 @@ a {
   color: $highlight-color1;
 }
 
-.list-normal a:not(.uix-sc-btn):hover, .table-normal a:not(.uix-sc-btn):hover {
+.list-normal a:not(.uix-sc-btn):not(.button):hover, .table-normal a:not(.uix-sc-btn):not(.button):hover {
   color: $highlight-color2;
   text-decoration: underline;
 }
