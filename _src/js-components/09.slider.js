@@ -113,7 +113,7 @@ theme = ( function ( theme, $, window, document ) {
 		//-------  Initialize Carousel (Carousel with dynamic min/max ranges)
 		
 		//store the slider in a local variable
-		var flexslider  = { vars:{} }
+		var flexslider  = { vars:{} };
 		
 		// tiny helper function to add breakpoints
 		function getGridSizeL() {

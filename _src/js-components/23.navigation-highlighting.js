@@ -8,25 +8,26 @@ theme = ( function ( theme, $, window, document ) {
     
     var documentReady = function( $ ) {
     
+        // Get section or article by href
+        function getRelatedContent( el ) {
+            return $( $( el ).attr( 'href' ) );
+        }
+        // Get link by section or article id
+        function getRelatedNavigation( el ) {
+            return $( '.menu-main li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' );
+        } 
+        
 	    //-------- Navigation highlighting using waypoints
 		if ( $( 'body' ).hasClass( 'highlight-section' ) ) {
-			// Get section or article by href
-			function getRelatedContent( el ) {
-				return $( $( el ).attr( 'href' ) );
-			}
-			// Get link by section or article id
-			function getRelatedNavigation( el ) {
-				return $( '.menu-main li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' );
-			}
+
 
 			// Smooth scroll to content
-			$( '.menu-main li > a' ).on('click',
-			function(e) {
+			$( '.menu-main li > a' ).on('click', function(e) {
 				e.preventDefault();
 
 				$( 'html,body' ).animate({
 					scrollTop: getRelatedContent( this ).offset().top - 20
-				})
+				});
 			});	
 
 			//-------- Default cwaypoint settings

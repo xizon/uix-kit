@@ -48,7 +48,7 @@ theme = ( function ( theme, $, window, document ) {
 				$( '.mobile-brand' ).html( '<img src="'+$( '.brand img' ).attr( 'src' )+'" alt="">' );
 			} else {
 				$( '.mobile-brand' ).html( '<img src=" ' + templateUrl + '/assets/images/blank.gif" alt="">' );
-			};
+			}
 			
 			
 		    var $toggle = $( '.menu-toggle' ),
@@ -117,7 +117,7 @@ theme = ( function ( theme, $, window, document ) {
 			
 			if ( windowWidth <= 768 ) {
 			    sidrmenuInit(); 
-			};
+			}
 		
 			
 			function sidrmenuInit() {
@@ -126,11 +126,11 @@ theme = ( function ( theme, $, window, document ) {
 					if ( $( this ).find( 'ul' ).length > 0 ) {
 						if ( $( this ).find( '.sidr-nav-arrow' ).length < 1 ) $( this ).prepend( '<em class="sidr-nav-arrow">+</em>' );
 						$( this ).find( 'ul ul' ).addClass( 'sidr-class-sub-sub' );
-						$( this ).find( ' > a' ).attr( 'href', 'javascript:void(0)' );
+						$( this ).find( ' > a' ).attr( 'href', 'javascript:void(0);' );
 					}
 				} );		
 
-			};
+			}
 			
 		
 			//Show Toolbar when viewing site for WordPress
@@ -144,7 +144,7 @@ theme = ( function ( theme, $, window, document ) {
 			});
 
 			// Sticky primary navigation
-			var waypoints = $( '.menu-container' ).waypoint({
+			var waypoints2 = $( '.menu-container' ).waypoint({
 				handler: function( direction ) {
 
 					$( this.element ).toggleClass( 'spy-scroll-fixed', direction === 'down' );

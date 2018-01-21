@@ -18,7 +18,7 @@ theme = ( function ( theme, $, window, document ) {
 			if ( type.indexOf( 'masonry' ) >= 0  ) {
 				$( this ).addClass( 'masonry-container' );
 				$( this ).find( '.iso-grid-item' ).addClass( 'masonry-item' );
-			};
+			}
 			
 			// Filterable
 			if ( type.indexOf( 'filter' ) >= 0  ) {

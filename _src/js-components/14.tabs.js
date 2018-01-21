@@ -143,7 +143,7 @@ theme = ( function ( theme, $, window, document ) {
 		
 
 		
-	}
+	};
 		
       
     theme.customTabs = {

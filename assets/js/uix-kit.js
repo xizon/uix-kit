@@ -443,7 +443,7 @@ theme = ( function ( theme, $, window, document ) {
 
 				},
 				offset: '100%' //0~100%, bottom-in-view
-			})
+			});
 
 	
 		}
@@ -511,7 +511,7 @@ theme = ( function ( theme, $, window, document ) {
 				$( '.mobile-brand' ).html( '<img src="'+$( '.brand img' ).attr( 'src' )+'" alt="">' );
 			} else {
 				$( '.mobile-brand' ).html( '<img src=" ' + templateUrl + '/assets/images/blank.gif" alt="">' );
-			};
+			}
 			
 			
 		    var $toggle = $( '.menu-toggle' ),
@@ -580,7 +580,7 @@ theme = ( function ( theme, $, window, document ) {
 			
 			if ( windowWidth <= 768 ) {
 			    sidrmenuInit(); 
-			};
+			}
 		
 			
 			function sidrmenuInit() {
@@ -589,11 +589,11 @@ theme = ( function ( theme, $, window, document ) {
 					if ( $( this ).find( 'ul' ).length > 0 ) {
 						if ( $( this ).find( '.sidr-nav-arrow' ).length < 1 ) $( this ).prepend( '<em class="sidr-nav-arrow">+</em>' );
 						$( this ).find( 'ul ul' ).addClass( 'sidr-class-sub-sub' );
-						$( this ).find( ' > a' ).attr( 'href', 'javascript:void(0)' );
+						$( this ).find( ' > a' ).attr( 'href', 'javascript:void(0);' );
 					}
 				} );		
 
-			};
+			}
 			
 		
 			//Show Toolbar when viewing site for WordPress
@@ -607,7 +607,7 @@ theme = ( function ( theme, $, window, document ) {
 			});
 
 			// Sticky primary navigation
-			var waypoints = $( '.menu-container' ).waypoint({
+			var waypoints2 = $( '.menu-container' ).waypoint({
 				handler: function( direction ) {
 
 					$( this.element ).toggleClass( 'spy-scroll-fixed', direction === 'down' );
@@ -664,7 +664,7 @@ theme = ( function ( theme, $, window, document ) {
 			if ( type.indexOf( 'masonry' ) >= 0  ) {
 				$( this ).addClass( 'masonry-container' );
 				$( this ).find( '.iso-grid-item' ).addClass( 'masonry-item' );
-			};
+			}
 			
 			// Filterable
 			if ( type.indexOf( 'filter' ) >= 0  ) {
@@ -864,7 +864,7 @@ theme = ( function ( theme, $, window, document ) {
 		//-------  Initialize Carousel (Carousel with dynamic min/max ranges)
 		
 		//store the slider in a local variable
-		var flexslider  = { vars:{} }
+		var flexslider  = { vars:{} };
 		
 		// tiny helper function to add breakpoints
 		function getGridSizeL() {
@@ -1295,7 +1295,7 @@ theme = ( function ( theme, $, window, document ) {
 			isMS = durString.indexOf( 'ms' ) >= 0;
 			numberNum = durString.replace( 'ms', '' ).replace( 's', '' );
 			return isMS ? numberNum : numberNum * 1000;
-		};
+		}
 		
 	
 	    $( 'body' ).prepend( '<div class="modal-mask"></div>' );
@@ -1347,7 +1347,7 @@ theme = ( function ( theme, $, window, document ) {
 			
 		});
 		
-	}
+	};
 		
       
     theme.modalbox = {
@@ -1505,7 +1505,7 @@ theme = ( function ( theme, $, window, document ) {
 		
 
 		
-	}
+	};
 		
       
     theme.customTabs = {
@@ -2592,7 +2592,7 @@ theme = ( function ( theme, $, window, document ) {
 			});
 
 
-		};
+		}
 
 		
 		
@@ -2621,25 +2621,26 @@ theme = ( function ( theme, $, window, document ) {
     
     var documentReady = function( $ ) {
     
+        // Get section or article by href
+        function getRelatedContent( el ) {
+            return $( $( el ).attr( 'href' ) );
+        }
+        // Get link by section or article id
+        function getRelatedNavigation( el ) {
+            return $( '.menu-main li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' );
+        } 
+        
 	    //-------- Navigation highlighting using waypoints
 		if ( $( 'body' ).hasClass( 'highlight-section' ) ) {
-			// Get section or article by href
-			function getRelatedContent( el ) {
-				return $( $( el ).attr( 'href' ) );
-			}
-			// Get link by section or article id
-			function getRelatedNavigation( el ) {
-				return $( '.menu-main li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' );
-			}
+
 
 			// Smooth scroll to content
-			$( '.menu-main li > a' ).on('click',
-			function(e) {
+			$( '.menu-main li > a' ).on('click', function(e) {
 				e.preventDefault();
 
 				$( 'html,body' ).animate({
 					scrollTop: getRelatedContent( this ).offset().top - 20
-				})
+				});
 			});	
 
 			//-------- Default cwaypoint settings
@@ -2751,23 +2752,57 @@ theme = ( function ( theme, $, window, document ) {
 	var cipher = function() {
 	  function e(a, d, b) {
 		var c, f, g, h;
-		b == a.length ? k.animationComplete = !0 : (g = d.innerHTML, h = Math.floor(21 * Math.random() + 5), c = 32 === a[b] ? 32 : a[b] - h, f = setInterval(function() {
-		  d.innerHTML = g + String.fromCharCode(c);
-		  c == a[b] ? (clearInterval(f), c = 32, b++, setTimeout(function() {
-			e(a, d, b);
-		  }, 10)) : c++;
-		}, 5));
+          
+        if ( b == a.length ) {
+            k.animationComplete = !0;
+        } else {
+            g = d.innerHTML;
+            h = Math.floor(21 * Math.random() + 5);
+            
+            if ( 32 === a[b] ) {
+               c = 32; 
+            } else {
+               c = a[b] - h; 
+            }
+            
+            f = setInterval(function() {
+                
+              d.innerHTML = g + String.fromCharCode(c);
+
+                if ( c == a[b] ) {
+                    clearInterval( f );
+                    c = 32;
+                    b++;
+
+                    setTimeout( function() {
+                        e(a, d, b);
+                    }, 10 );
+
+                } else {
+                    c++;
+                }
+
+            }, 5 );
+            
+        }
+          
+          
 	  }
 	  var k = {};
-	  return k = {animationComplete:!1, text:function(a) {
-		this.animationComplete = !1;
-		a = document.getElementById(a);
-		for (var d = a.innerHTML, b = [], c = 0;c < d.length;c++) {
-		  b.push(d.charCodeAt(c));
-		}
-		a.innerHTML = "";
-		e(b, a, 0);
-	  }};
+        
+	  return k = {
+          animationComplete : !1, 
+          text              : function(a) {
+                                    this.animationComplete = !1;
+                                    a = document.getElementById(a);
+                                    for ( var d = a.innerHTML, b = [], c = 0; c < d.length; c++ ) {
+                                      b.push( d.charCodeAt( c ) );
+                                    }
+                                    a.innerHTML = "";
+                                    e(b, a, 0);
+	                          }
+      };
+        
 	}();
 
 

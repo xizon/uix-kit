@@ -27,7 +27,7 @@ theme = ( function ( theme, $, window, document ) {
 			isMS = durString.indexOf( 'ms' ) >= 0;
 			numberNum = durString.replace( 'ms', '' ).replace( 's', '' );
 			return isMS ? numberNum : numberNum * 1000;
-		};
+		}
 		
 	
 	    $( 'body' ).prepend( '<div class="modal-mask"></div>' );
@@ -79,7 +79,7 @@ theme = ( function ( theme, $, window, document ) {
 			
 		});
 		
-	}
+	};
 		
       
     theme.modalbox = {
