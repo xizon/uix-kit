@@ -3,6 +3,17 @@
 /* ====================================================== */
 /* 5.1. Controls */
 
+.controls textarea, 
+.controls input[type="text"],
+.controls select {
+	-webkit-border-radius: 0; 
+	-moz-border-radius: 0; 
+	border-radius: 0;
+	
+	/* Remove inner shadow from inputs on mobile iOS */
+    -webkit-appearance: none;
+}
+
 .controls {
   text-align: left;
   position: relative;
@@ -23,6 +34,76 @@
 }
 
 .controls {
+	
+	&.radio {
+	
+
+	  label {
+		padding-left: 1.25rem !important;
+		position: relative !important;
+		left: auto !important;
+		top: auto !important;
+		pointer-events: auto !important;
+		&.active {
+		  top: auto !important;
+		}
+	  }	
+		
+	}
+	
+	&.select {
+
+		> span {
+			display: inline-block;
+			padding-right: 1rem;
+			color: #999;
+			font-weight: 500;
+			
+		}
+		
+		select {
+			padding-right: 1.5rem !important;
+		}
+		
+	  label {
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+		position: relative !important;
+		left: auto !important;
+		top: auto !important;
+		pointer-events: auto !important;
+		padding-right: 1rem !important;
+		
+		&:after {
+		  border: 1px solid #999;
+		  border-right: 0;
+		  border-top: 0;
+		  content: " ";
+		  display: block;
+		  width: .35rem;
+		  height: .35rem;
+		  pointer-events: none;
+		  position: absolute;
+		  -webkit-transform: rotate(-45deg);
+				  transform: rotate(-45deg);
+		  margin-top: -.875rem;
+		  right: 1rem;
+		  top: 50%;;
+		  z-index: 1;
+		}
+
+		  
+		  
+		&.active {
+		  top: auto !important;
+		}
+	  }	
+		
+	}
+	
+	
+	
+	
   input {
     &[type="text"], &[type="email"], &[type="tel"], &[type="password"], &[type="url"], &[type="search"] {
       width: calc(100% - 1.09375rem );
@@ -38,6 +119,7 @@
       transition: all 0.3s ease 0s;
     }
   }
+	
   textarea, button, select {
     width: calc(100% - 1.09375rem );
     font-size: 0.875rem;
@@ -51,6 +133,7 @@
     -ms-transition: all 0.3s ease 0s;
     transition: all 0.3s ease 0s;
   }
+	
   input {
     &[type="text"], &[type="email"], &[type="tel"], &[type="password"], &[type="url"], &[type="search"] {
       background-color: #fff;
@@ -191,6 +274,7 @@
     cursor: pointer;
   }
   label {
+	font-weight: 500;
     position: absolute;
     left: 0.875rem;
     top: 0.721875rem;
