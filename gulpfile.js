@@ -8,16 +8,20 @@ var gulp          = require('gulp'),
 	rtlcss        = require('gulp-rtlcss'),
 	cssbeautify   = require('gulp-cssbeautify'),
 	headerComment = require('gulp-header-comment'),
-	version       = require('gulp-version-number');
+	version       = require('gulp-version-number'),
+	fileinclude   = require('gulp-file-include'),
+	clean         = require('gulp-clean');
 
 
 var globs = {
-	htmlFiles : '*.html',
-	jsTar     : 'assets/js',
-	cssTar    : 'assets/css',
-	cssRTLTar : 'assets/css/rtl',
-    js        : '_src/js-components/*.js',
-    scss      : '_src/css-components/*.scss'
+	jsTar        : 'examples/assets/js',
+	cssTar       : 'examples/assets/css',
+	cssRTLTar    : 'examples/assets/css/rtl',
+	htmlIncTar   : 'examples/include-*.html',
+	htmlFiles    : '_components/**/*.{html, htm}',
+    js           : '_components/**/js/*.js',
+    scss         : '_components/**/scss/*.scss',
+	scssRTL      : '_components/**/scss-rtl/*.scss'
 };
 
 
@@ -40,36 +44,93 @@ var customComment = `
  * Automatically add version number to request for preventing browser cache
  *************************************
  */
-function htmlRev() {
-	const ver = Math.random()*1000000000000000000;
-	const versionConfig = {
+//Delete include files
+gulp.task('clean-scripts', function () {
+  return gulp.src( globs.htmlIncTar, {read: true})
+	.pipe(clean());
+});
+
+
+
+
+gulp.task('html', function() {
+	
+	var ver = new Date().getTime();
+	var versionConfig = {
 		'value'    : '%MDS%',
 		'replaces' : [  
+			[/assets\/css\/rtl\/uix-kit-rtl(.*)\"/ig, 'assets\/css\/rtl\/uix-kit-rtl.css?ver=' + ver + '\"' ],
 			[/assets\/css\/uix-kit.min(.*)\"/ig, 'assets\/css\/uix-kit.min.css?ver=' + ver + '\"' ],
 			[/assets\/css\/uix-kit.IE(.*)\"/ig, 'assets\/css\/uix-kit.IE.css?ver=' + ver + '\"' ],
 			[/assets\/js\/uix-kit.min(.*)\"/ig, 'assets\/js\/uix-kit.min.js?ver=' + ver + '\"' ]
 		],
 	};
 
+	
+  console.log( 'cache:' + ver );
+	
+	setTimeout( function() {
+		gulp.start( 'clean-scripts' );
+	}, 1500 );
+	
+  return gulp.src( globs.htmlFiles )
 
-	gulp.task('html', function() {
-	  return gulp.src( globs.htmlFiles )
-			.pipe(version( versionConfig ))
-			.pipe(gulp.dest( '' ));
-	});	
+		//File include
+		.pipe(fileinclude({
+		  prefix: '@@',
+		  basepath: '@file'
+		}))
+
+		//Add version
+		.pipe(version( versionConfig ))
+
+		//Remove a folder structure when copying files in gulp
+		.pipe(rename({dirname: ''}))
+		.pipe(gulp.dest( 'examples' ));
 	
-	gulp.start('html');
 	
-}
+
+	
+	
+});	
 
 
 
 
 /*! 
  *************************************
- * Javascript & CSS tasks (Include RTL)
+ * Javascript & CSS tasks
  *************************************
  */
+//Compile SCSS (RTL)
+gulp.task('styles', function(){
+  return gulp.src( globs.scssRTL )
+	.pipe(concat('uix-kit-rtl.scss'))
+	.pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
+
+	.pipe(cssbeautify({
+		indent: '    ',
+		openbrace: 'end-of-line',
+		autosemicolon: true
+	}))
+
+
+	.pipe(headerComment(`
+		---------------------------
+		MAIN TEMPLATE STYLES (RTL)
+		---------------------------
+
+		Adding support for language written in a Right To Left (RTL) direction is easy -
+		it's just a matter of overwriting all the horizontal positioning attributes
+		of your CSS stylesheet in a separate stylesheet file named rtl.css.
+
+		` + customComment + `
+
+	`))
+	.pipe(gulp.dest( globs.cssRTLTar ));
+
+});	
+
 //Compile SCSS
 gulp.task('sass', function(){
   return gulp.src( globs.scss )
@@ -102,8 +163,9 @@ gulp.task('sass', function(){
 	.pipe(gulp.dest( globs.cssTar ));
 	
 	
-	htmlRev();
- 
+	setTimeout( function() {
+		gulp.start( 'html' );
+	}, 500 );
 });
 
 
@@ -137,8 +199,13 @@ gulp.task('scripts', function() {
 	    .pipe(headerComment( customComment))
 	    .pipe(gulp.dest( globs.jsTar ));
 	
-	
-	htmlRev();
+
+	setTimeout( function() {
+		gulp.start( 'html' );
+	}, 500 );
+
+
+
 	
 });
 
@@ -154,10 +221,15 @@ gulp.watch('files-to-watch', ['tasks_to_run']);
 gulp.task('default', ['jshint'], function() {
     gulp.start('sass');
 	gulp.start('scripts');
+	gulp.start('styles');
     gulp.start('watch');
 });
 
 gulp.task('watch', function(){
+	gulp.watch( globs.scssRTL, [ 'styles' ] ); 
 	gulp.watch( globs.scss, [ 'sass' ] ); 
 	gulp.watch( globs.js, [ 'scripts' ] ); 
+	gulp.watch( globs.htmlFiles, [ 'html' ] ); 
+	
+	
 })

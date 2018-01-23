@@ -1,0 +1,30 @@
+/* ====================================================== 
+   Form                                     
+/* ====================================================== */
+.controls {
+  text-align: right;
+  .fa-sort {
+    right: auto;
+    left: 0.875rem;
+  }
+  label {
+    left: auto;
+    right: 0.875rem;
+  }
+  .req-icon {
+    right: auto;
+    left: 0.721875rem;
+  }
+}
+
+.form-merge input + button[type="submit"] {
+  margin-left: auto;
+  margin-right: -0.25rem;
+}
+
+@media all and (max-width: 768px) {
+  .form-merge input + button[type="submit"] {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}

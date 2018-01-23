@@ -1,0 +1,121 @@
+@@include('../00.global/include-header.html')
+     
+  <body>
+  
+  
+          
+    @@include('../00.global/include-loader.html')
+    
+    
+
+  
+    <div class="wrapper">
+    
+        <!-- Header Area
+        ============================================= -->      
+        <header class="header-area transition">
+            
+             <div class="header-container transition">
+                 <div class="container">
+                 
+                        @@include('../00.global/include-brand.html')
+                        
+                        @@include('../00.global/include-menu.html')
+                        
+                        
+                        
+                        
+                  </div>
+                  <!-- .container end -->
+                  
+                  <div class="clear"></div>
+             </div>
+        
+        </header>
+        <div class="header-inner"></div>
+      
+    
+        
+        
+       <!-- Content 01  
+        ====================================================== -->
+        <section>
+            <div class="container t-c">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2 t-c">
+                            <a class="button button-hover button-border-thin button-size-s button-bg-primary" href="javascript:void(0)" data-modal-id="modal-open-1">Click Here to Open Modal</a>
+                            <br>
+                            
+                            <a class="button button-hover button-border-thin button-size-s button-bg-primary" href="javascript:void(0)" data-modal-id="modal-open-2">Click Here to Open Modal (Fullscreen)</a>
+                            <br>
+                            
+                            
+                            <a class="button button-hover button-border-thin button-size-s button-bg-primary" href="javascript:void(0)" data-modal-id="modal-open-3" data-modal-height="200px" data-modal-width="300px">Click Here to Open Modal (Custom)</a>
+                            <br>
+                            
+                            <a class="button button-hover button-border-thin button-size-s button-bg-primary web-video-btn" href="javascript:void(0)" data-modal-id="modal-open-4" data-video-id="web-video-1">Click Here to Open Video</a>
+                            <br>
+                            
+                            
+                        </div>
+                    </div>
+                    <!-- .row end -->
+              
+                    
+            </div>
+            <!-- .container end -->
+ 
+        </section>
+        
+        
+        <!-- Modals
+        ============================================= --> 
+        <div class="modal-box" id="modal-open-1">
+            <a href="javascript:void(0)" class="close-btn"></a>
+            <div class="content">
+                <h2>Holy Crap!!!</h2>
+                <p class="fineprint">p.s. Sorry for calling you a dingus earlier.</p>
+
+            </div>
+        </div>
+        <!--  .modal-box  end -->     
+    
+    
+        <div class="modal-box fullscreen" id="modal-open-2">
+            <a href="javascript:void(0)" class="close-btn"></a>
+            <div class="content">
+                <h2>Holy Crap!!!</h2>
+                <p class="fineprint">p.s. Sorry for calling you a dingus earlier.</p>
+
+            </div>
+        </div>
+        <!--  .modal-box  end -->     
+        
+        <div class="modal-box" id="modal-open-3">
+            <a href="javascript:void(0)" class="close-btn"></a>
+            <div class="content">
+                <h2>Holy Crap!!!</h2>
+                <p class="fineprint">p.s. Sorry for calling you a dingus earlier.</p>
+
+            </div>
+        </div>
+        <!--  .modal-box  end -->     
+        
+        
+        <div class="modal-box fullscreen video" id="modal-open-4">
+            <a href="javascript:void(0)" class="close-btn"></a>
+            <div class="content">
+				  <div class="web-video-container">
+					  <video id="web-video-1" class="video-js vjs-default-skin" controls poster="_demo/videos/demo.jpg">
+						<source src="_demo/videos/demo.mp4" type="video/mp4">
+						<source src="_demo/videos/demo.webm" type="video/webm">
+						<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+					  </video>
+				  </div>
+            </div>
+        </div>
+        <!--  .modal-box  end -->        
+        
+        
+        @@include('../00.global/include-footer.html')
+

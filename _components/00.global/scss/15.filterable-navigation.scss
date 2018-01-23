@@ -1,0 +1,38 @@
+/* ====================================================== 
+   15. Filterable Navigation                 
+/* ====================================================== */
+
+.nav-filters {
+  padding: 1.421875rem 0;
+  ul {
+    margin: 0;
+    li {
+      font-style: italic;
+      display: inline-block;
+      -moz-transition: 0.2s linear;
+      -o-transition: 0.2s linear;
+      -webkit-transition: 0.2s linear;
+      transition: 0.2s linear;
+      &:not(:last-child) {
+        margin-right: 0.203125rem;
+        &:after {
+          content: '/';
+          margin-left: 0.203125rem;
+          opacity: 0.1;
+        }
+      }
+      &:not(.active):not(.current-cat) {
+        opacity: .5;
+        &:after {
+          opacity: 0.2;
+        }
+      }
+      &:hover {
+        opacity: 1;
+        &:after {
+          opacity: 0.1;
+        }
+      }
+    }
+  }
+}

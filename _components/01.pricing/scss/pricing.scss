@@ -1,0 +1,148 @@
+/* ====================================================== 
+   Pricing
+/* ====================================================== */
+.custom-price {
+    text-align: center;
+    position: relative;
+	
+	&:before {
+	  padding-top: 2.25rem;
+	}
+	&:after {
+	  padding-bottom: 0;
+	}
+	ul, ol {
+		/*default*/
+		display: block;
+		list-style-type: disc;
+		margin-top: 0.875rem;
+		margin-bottom: 0.875rem;
+		margin-left: 0;
+		margin-right: 0;
+		padding-bottom: 1.7rem;
+		/*custom*/
+		line-height: 2;
+	}
+	li {
+	    /*default*/
+	    list-style: none;
+		
+		&:before {
+		  font-family: 'FontAwesome';
+		  content: "\f00c";
+		  display: inline-block;
+		  margin-right: .4rem;
+		}
+	}
+	
+	
+	.hr {
+	  margin: 1.5rem 0;
+	  border-top: 1px solid rgba(0, 0, 0, 0.05);
+	}
+	
+	.border-hover {
+		margin-bottom: 1.5rem;
+	}
+
+
+	.border {
+	  padding-top: 0.875rem;
+	  position: relative;
+	  -webkit-box-shadow: 0 22px 40px 0 #eef4fc;
+	  -moz-box-shadow: 0 22px 40px 0 #eef4fc;
+	  box-shadow: 0 22px 40px 0 #eef4fc;
+	  -webkit-border-radius: 10px;
+	  -moz-border-radius: 10px;
+	  border-radius: 10px;
+	  background: #fff;
+	  -moz-transition: .1s ease-in-out;
+	  -o-transition: .1s ease-in-out;
+	  -webkit-transition: .1s ease-in-out;
+	  transition: .1s ease-in-out;
+	  &:hover {
+		-webkit-box-shadow: 0 31px 32px 0 #cbdfee;
+		-moz-box-shadow: 0 31px 32px 0 #cbdfee;
+		box-shadow: 0 31px 32px 0 #cbdfee;
+	  }
+
+	}
+	
+	
+	.level {
+	  font-size: 0.7rem;
+	  text-align: center;
+	  text-indent: 0.875rem;
+	  text-transform: uppercase;
+	  position: relative;
+	  z-index: 3;
+	  font-weight: 700;
+	  filter: alpha(opacity = 35);
+	  -moz-opacity: 0.35;
+	  opacity: 0.35;
+	}
+
+	.num {
+	  color: $highlight-color1;
+	  font-weight: 700;
+	  font-size: 3.5rem;
+	  margin-top: 0.875rem;
+	}
+
+	.currency {
+	  font-size: 0.875rem;
+	}
+
+
+	.period {
+	  font-size: 12px;
+	  &:before {
+		content: '/';
+		padding-right: .1rem;
+	  }
+	}
+
+	.detail {
+	  text-align: left;
+	  padding-bottom: 1.125rem;
+	  padding-left: 1rem;
+	  font-size: 0.875rem;
+	}
+
+	.excerpt {
+	  height: auto;
+	  padding: 0 0.875rem;
+	  font-size: 0.875rem;
+	  filter: alpha(opacity = 65);
+	  -moz-opacity: 0.65;
+	  opacity: 0.65;
+		
+	  p {
+		line-height: 1.5;
+	  }
+	}
+
+	.bg {
+	  padding-top: 1.875rem;
+	  height: auto;
+	}
+
+
+	.border.active {
+		
+	    .num, 
+		.excerpt, 
+		.detail, 
+		.level {
+		  color: #fff !important;
+	    }
+	   .excerpt {
+		 filter: alpha(opacity = 65);
+		 -moz-opacity: 0.65;
+		 opacity: 0.65;
+	   }
+
+	}	
+	
+	
+}

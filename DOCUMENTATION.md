@@ -144,27 +144,35 @@
 
 You can customize these files to meet the different needs of the site you want :-)
 
-The `_demo/` folder can be deleted.
+The `examples/_demo/` folder can be deleted.
 
 #### CSS:
 
-*   `assets/css/uix-kit.css`
-*   `assets/css/uix-kit.min.css`
-*   `assets/css/uix-kit.IE.css`
+*   `examples/assets/css/uix-kit.css`
+*   `examples/assets/css/uix-kit.min.css`
+*   `examples/assets/css/uix-kit.IE.css`
 
 #### CSS(RTL):
 
-*   `assets/css/rtl/uix-kit-rtl.css`
+*   `examples/assets/css/rtl/uix-kit-rtl.css`
 
 #### Javascript:
 
-*   `assets/js/uix-kit.js`
-*   `assets/js/uix-kit.min.js`
+*   `examples/assets/js/uix-kit.js`
+*   `examples/assets/js/uix-kit.min.js`
 
 #### Images:
 
 
-*   `assets/images/*`
+*   `examples/assets/images/*`
+
+#### Fonts:
+
+
+*   `examples/assets/fonts/*`
+
+
+
 
 #### 3)\. PSD Grid Templates
 

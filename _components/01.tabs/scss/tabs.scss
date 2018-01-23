@@ -1,0 +1,132 @@
+/* ====================================================== 
+   Tabs        
+/* ====================================================== */
+
+.custom-tabs {
+  &:not(.rotation) {
+    -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+    -moz-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+  }
+  ul > li {
+    position: relative;
+    display: block;
+    -moz-transition: .1s ease-in-out;
+    -o-transition: .1s ease-in-out;
+    -webkit-transition: .1s ease-in-out;
+    transition: .1s ease-in-out;
+    > a {
+      position: relative;
+      display: block;
+      padding: 0.625rem 1rem;
+    }
+  }
+  &.custom-tabs-center {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    ul {
+      display: block;
+      width: 100%;
+      text-align: center;
+      /*require*/
+      -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+      -moz-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+      li {
+        display: inline-block;
+        /*require*/
+        float: none;
+      }
+    }
+  }
+  .content {
+    display: none;
+    padding: 1.3125rem;
+    text-align: left;
+    &.active {
+      display: block;
+    }
+  }
+  ul {
+    > li {
+      list-style: none;
+      float: left;
+      -webkit-box-shadow: inset 1px 0px 0px 0px rgba(230, 230, 230, 1);
+      -moz-box-shadow: inset 1px 0px 0px 0px rgba(230, 230, 230, 1);
+      box-shadow: inset 1px 0px 0px 0px rgba(230, 230, 230, 1);
+      background: #f7f7f7;
+    }
+    &:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+    > li {
+      a {
+        display: block;
+        text-align: center;
+      }
+      &.active {
+        background: $primary-text-color1;
+        a {
+          color: #fff;
+        }
+      }
+    }
+  }
+  &.rotation {
+    height: 400px;
+    .content {
+	  position: absolute;
+	  top: 0;
+	  left: 400px;
+      width: 300px;
+      -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+      -moz-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+    }
+    .custom-tabs-ul-container {
+		width: 300px;
+		height: 300px;
+		position: relative;
+		margin: 0;
+    }
+    ul {
+	  position: relative;
+	  display: block;
+	  width: 300px;
+	  height: 300px;
+      > li {
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        background: none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        -moz-transition: none;
+        -o-transition: none;
+        -webkit-transition: none;
+        transition: none;
+        > a {
+        width: 80px;
+        height: 80px;
+          line-height: 60px;
+          background: #fff;
+          -webkit-border-radius: 100%;
+          -moz-border-radius: 100%;
+          border-radius: 100%;
+          -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+          -moz-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+          box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+        }
+        &.active > a {
+          background: $primary-text-color1;
+        }
+      }
+    }
+  }
+}
+
+/* Tab Rotation Effect */

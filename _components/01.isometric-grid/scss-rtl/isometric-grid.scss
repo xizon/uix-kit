@@ -1,0 +1,59 @@
+/* ====================================================== 
+   17. Isometric Grid          
+/* ====================================================== */
+.iso-grid-container {
+  margin: -2.1875rem -2.1875rem 0 0;
+  .iso-grid-item {
+    float: right;
+  }
+}
+
+.iso-grid-item {
+  .link-to, .cover:before {
+    left: auto;
+    right: 0;
+  }
+  .title {
+    margin-left: auto;
+    margin-right: 0.875rem;
+    &:before {
+      padding-right: auto;
+      padding-left: 0.875rem;
+    }
+  }
+  .category {
+    right: auto;
+    left: 0;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .iso-grid-container {
+    margin: -1.09375rem -1.09375rem 0 0;
+    .iso-grid-item, &.small .iso-grid-item {
+      margin: 1.09375rem 1.09375rem 0 0;
+    }
+    &.large .iso-grid-item {
+      width: calc(49.99999% - 1.09375rem);
+      margin: 1.09375rem 1.09375rem 0 0;
+    }
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .iso-grid-container {
+    margin: -2.1875rem -2.1875rem 0 0;
+    .iso-grid-item, &.small .iso-grid-item, &.large .iso-grid-item {
+      margin: 2.1875rem 2.1875rem 0 0;
+    }
+  }
+}
+
+@media screen and (max-width: 736px) {
+  .iso-grid-container {
+    margin: -1.09375rem -1.09375rem 0 0;
+    .iso-grid-item, &.small .iso-grid-item, &.large .iso-grid-item {
+      margin: 1.09375rem 1.09375rem 0 0;
+    }
+  }
+}

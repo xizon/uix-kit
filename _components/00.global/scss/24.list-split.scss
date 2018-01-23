@@ -1,0 +1,45 @@
+/* ====================================================== 
+   24. List of Split
+/* ====================================================== */
+
+.list-split-container {}
+
+.list-split-item {
+  position: relative;
+  margin-bottom: 4.8125rem;
+  .list-split-item-info {
+    p {
+      font-size: 0.875rem;
+    }
+    > div {
+      padding: 0 4rem;
+    }
+  }
+  &.even .row > .col-sm-6 {
+    float: right;
+  }
+}
+
+@media all and (max-width: 768px) {
+  .list-split-item {
+    margin-bottom: 3rem;
+  }
+}
+
+@media all and (max-width: 768px) {
+  .list-split-item {
+    &.even .row > .col-sm-6 {
+      &:first-child, &:nth-child(2) {
+        -webkit-transform: translateX(0);
+        -ms-transform: translateX(0);
+        transform: translateX(0);
+      }
+    }
+    .list-split-item-info {
+      margin-top: 1.5rem;
+      > div {
+        padding: 0;
+      }
+    }
+  }
+}

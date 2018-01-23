@@ -1,0 +1,12 @@
+/* ====================================================== 
+   15. Filterable Navigation                 
+/* ====================================================== */
+
+.nav-filters ul li:not(:last-child) {
+  margin-right: auto;
+  margin-left: 0.7109375rem;
+  &:after {
+    margin-left: auto;
+    margin-right: 0.7109375rem;
+  }
+}

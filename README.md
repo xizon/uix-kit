@@ -38,36 +38,38 @@ Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap.
 
 You can customize these files to meet the different needs of the site you want :-)
 
-The `_demo/` folder can be deleted.
+The `examples/_demo/` folder can be deleted.
 
 > #### Usage with Gulp:
 > 
-> **Javascript Components:** `_src/js-components/*`  
-> **CSS Components(SCSS):** `_src/css-components/*`
+> **HTML/JS/CSS Components:** `_components/*`  
+> `00.global` is a required component.
+
+
 
 
 #### CSS:
 
-*   `assets/css/uix-kit.css`
-*   `assets/css/uix-kit.min.css`
-*   `assets/css/uix-kit.IE.css`
+*   `examples/assets/css/uix-kit.css`
+*   `examples/assets/css/uix-kit.min.css`
+*   `examples/assets/css/uix-kit.IE.css`
 
 #### CSS(RTL):
 
-*   `assets/css/rtl/uix-kit-rtl.css`
+*   `examples/assets/css/rtl/uix-kit-rtl.css`
 
 #### Javascript:
 
-*   `assets/js/uix-kit.js`
-*   `assets/js/uix-kit.min.js`
+*   `examples/assets/js/uix-kit.js`
+*   `examples/assets/js/uix-kit.min.js`
 
 #### Images:
 
-*   `assets/images/*`
+*   `examples/assets/images/*`
 
 #### Fonts:
 
-*   `assets/fonts/*`
+*   `examples/assets/fonts/*`
 
 ### 2\. PSD Grid Templates
 
