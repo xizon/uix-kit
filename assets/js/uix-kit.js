@@ -46,6 +46,8 @@
 	22. Multiple columns full height for Bootstrap 3.x
 	23. Navigation Highlighting
 	24. Pricing
+	25. Testimonials Carousel
+	26. Progress Bar
 	
     ================
 
@@ -2846,6 +2848,68 @@ theme = ( function ( theme, $, window, document ) {
     };
 
     theme.pricing = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
+
+
+
+
+/*! 
+ *************************************
+ * 25. Testimonials Carousel
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+    
+
+
+
+		
+    };
+
+    theme.testimonials = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
+
+
+
+
+/*! 
+ *************************************
+ * 26. Progress Bar
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+    
+
+
+
+		
+    };
+
+    theme.progressBar = {
         documentReady : documentReady        
     };
 

@@ -29,6 +29,8 @@
 	22. Multiple columns full height for Bootstrap 3.x
 	23. Navigation Highlighting
 	24. Pricing
+	25. Testimonials Carousel
+	26. Progress Bar
 	
     ================
 
