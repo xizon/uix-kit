@@ -4809,15 +4809,15 @@ li.sidr-class-multi-column > ul .sidr-class-multi-column-title {
 /* ====================================================== 
    P2. Custom Flexslider
 /* ====================================================== */
-/* ====================================================== 
-   Basic Slideshow                                  
-/* ====================================================== */
+/* 
+   Default Slideshow                                
+-------------------------- 
+*/
 .custom-theme-flexslider, .custom-theme-flex-viewport {
-    -webkit-transition: all 1s ease;
-    -moz-transition: all 1s ease;
-    -ms-transition: all 1s ease;
-    -o-transition: all 1s ease;
-    transition: all 1s ease;
+    -moz-transition: .1s ease;
+    -o-transition: .1s ease;
+    -webkit-transition: .1s ease;
+    transition: .1s ease;
 }
 
 .custom-theme-flexslider {
@@ -5002,10 +5002,10 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
     display: block;
     opacity: .7;
     cursor: pointer;
-    -webkit-transition: all 1s ease;
-    -moz-transition: all 1s ease;
-    -o-transition: all 1s ease;
-    transition: all 1s ease;
+    -moz-transition: .1s ease;
+    -o-transition: .1s ease;
+    -webkit-transition: .1s ease;
+    transition: .1s ease;
 }
 
 .custom-theme-flex-control-thumbs img:hover {
@@ -5091,9 +5091,30 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
     height: 15px;
 }
 
-/* ====================================================== 
+/* 
+   Primary Slideshow  (with dynamic min/max ranges )                            
+-------------------------- 
+*/
+.custom-theme-flexslider.custom-itemgrid .item {
+    -moz-transition: .1s ease;
+    -o-transition: .1s ease;
+    -webkit-transition: .1s ease;
+    transition: .1s ease;
+    filter: alpha(opacity=20);
+    -moz-opacity: 0.2;
+    opacity: 0.2;
+}
+
+.custom-theme-flexslider.custom-itemgrid .item.custom-theme-flex-active-slide {
+    filter: alpha(opacity=100);
+    -moz-opacity: 1;
+    opacity: 1;
+}
+
+/* 
    Primary Slideshow                                
-/* ====================================================== */
+-------------------------- 
+*/
 .custom-theme-flexslider.custom-primary-flexslider {
     max-height: 100vh;
     overflow: hidden;
