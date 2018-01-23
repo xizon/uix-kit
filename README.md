@@ -42,7 +42,7 @@ The `examples/_demo/` folder can be deleted.
 
 > #### Usage with Gulp:
 > 
-> **HTML/JS/CSS Components:** `_components/*`  
+> HTML/JS/CSS Components: `_components/*`  
 > `00.global` is a required component.
 
 
