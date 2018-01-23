@@ -11,14 +11,84 @@ theme = ( function ( theme, $, window, document ) {
     var pageLoaded = function() {
 		
 
-		var $window      = $( window ),
-			windowWidth  = $window.width(),
-			windowHeight = $window.height();
-
+		var $window            = $( window ),
+			windowWidth        = $window.width(),
+			windowHeight       = $window.height(),
+			specialSliderType  = [ '.custom-primary-flexslider', '.custom-controls', '.custom-itemgrid', '.custom-counter-show' ];
+		
+		
+		// Normal slideshow
+		var $sliderDefault, specialSliderClasses = '';
+		for ( var i = 0; i < specialSliderType.length; i++ ) {
+			specialSliderClasses += ':not('+specialSliderType[i]+')';
+		}
+		$sliderDefault = $( '.custom-theme-flexslider' + specialSliderClasses );
 		
 
-		//-------  Initialize Carousel
-		$( '.custom-theme-flexslider:not(.custom-primary-flexslider):not(.custom-controls):not(.custom-itemgrid)' ).each( function( index )  {
+		// callback function
+        function initslides( slider ) {
+
+			var prefix    = 'custom-theme',
+			    curSlide  = slider.find( '.'+prefix+'-flex-active-slide' ),
+				curHeight = curSlide.height();
+			
+			slider.removeClass( prefix+'-flexslider-loading' );
+			
+	
+			//Auto-restart player if paused after action
+			if ( slider.vars.slideshow ) {
+				if ( !slider.playing ) {
+					slider.play();
+				}	
+			}
+			
+			//Prevent to <a> of page transitions
+			$( 'a' ).each( function() {
+				var attr = $( this ).attr( 'href' );
+				
+				if ( typeof attr === typeof undefined ) {
+					$( this ).attr( 'href', '#' );
+				}
+			});
+			
+			/*
+			slider.slides.find( "a[rel^='theme-slider-prettyPhoto']" ).lightbox();
+			*/
+        }
+	
+		
+        function initslidesItemgrid( slider ) {
+
+			var prefix      = 'custom-theme',
+				activeClass = prefix+'-flex-active-slide';
+			
+			slider.removeClass( prefix+'-flexslider-loading' );
+			
+			$sliderItemgird.find( '.custom-theme-slides > div.item' ).removeClass( activeClass );
+			$sliderItemgird.find( '.custom-theme-slides > div.item:eq('+parseFloat(slider.currentSlide+1)+')' ).addClass( activeClass );
+			
+	
+			//Auto-restart player if paused after action
+			if ( slider.vars.slideshow ) {
+				if ( !slider.playing ) {
+					slider.play();
+				}	
+			}
+			
+			//Prevent to <a> of page transitions
+			$( 'a' ).each( function() {
+				var attr = $( this ).attr( 'href' );
+				
+				if ( typeof attr === typeof undefined ) {
+					$( this ).attr( 'href', '#' );
+				}
+			});
+			
+        }
+		
+		
+		//-------  Initialize slideshow ( default )
+		$sliderDefault.each( function( index )  {
 			var $this        = $( this ),
 				dataSpeed    = $this.data( 'speed' ),
 				dataTiming   = $this.data( 'timing' ),
@@ -62,7 +132,26 @@ theme = ( function ( theme, $, window, document ) {
 		});
 		
 		
-		//-------  Initialize Carousel (custom controls)
+		//-------  Initialize primary slideshow
+		$( '.custom-primary-flexslider' ).flexslider({
+			namespace	      : 'custom-theme-flex-',
+			animation         : 'slide',
+			selector          : '.custom-theme-slides > div.item',
+			controlNav        : true,
+			smoothHeight      : true,
+			prevText          : "<i class='fa fa-chevron-left custom-primary-flexslider-prev'></i>",
+			nextText          : "<i class='fa fa-chevron-right custom-primary-flexslider-next'></i>",
+			animationSpeed    : 600,
+			slideshowSpeed    : 10000,
+			slideshow         : true,
+			animationLoop     : true,
+			start             : initslides, //Fires when the slider loads the first slide
+			after             : initslides //Fires after each slider animation completes.
+		});
+	
+		
+		
+		//-------  Initialize slideshow (custom controls)
 		$( '.custom-theme-flexslider.custom-controls' ).each( function( index )  {
 			var $this        = $( this ),
 				dataSpeed    = $this.data( 'speed' ),
@@ -112,7 +201,7 @@ theme = ( function ( theme, $, window, document ) {
 		
 
 		
-		//-------  Initialize Carousel (display counter)
+		//-------  Initialize slideshow (display counter)
 		$( '.custom-theme-flexslider.custom-counter-show' ).each( function( index )  {
 			var $this        = $( this ),
 				dataSpeed    = $this.data( 'speed' ),
@@ -155,6 +244,8 @@ theme = ( function ( theme, $, window, document ) {
 						count   = slider.count,
 						current = slider.slides.eq( slider.currentSlide );	
 					
+					
+					
 					$( 'p.count em.count' ).text( count );
 					
 					return $( 'p.count em.current' ).text( slide + 1 );
@@ -190,61 +281,11 @@ theme = ( function ( theme, $, window, document ) {
 			
 		});	
 		
-		
-		//-------  Initialize Primary Carousel
-		$( '.custom-primary-flexslider' ).flexslider({
-			namespace	      : 'custom-theme-flex-',
-			animation         : 'slide',
-			selector          : '.custom-theme-slides > div.item',
-			controlNav        : true,
-			smoothHeight      : true,
-			prevText          : "<i class='fa fa-chevron-left custom-primary-flexslider-prev'></i>",
-			nextText          : "<i class='fa fa-chevron-right custom-primary-flexslider-next'></i>",
-			animationSpeed    : 600,
-			slideshowSpeed    : 10000,
-			slideshow         : true,
-			animationLoop     : true,
-			start             : initslides, //Fires when the slider loads the first slide
-			after             : initslides //Fires after each slider animation completes.
-		});
 	
 	
 		
 		
-		//-------  Common initialization function
-        function initslides( slider ) {
-
-			var prefix    = 'custom-theme',
-			    curSlide  = slider.find( '.'+prefix+'-flex-active-slide' ),
-				curHeight = curSlide.height();
-			
-			slider.removeClass( prefix+'-flexslider-loading' );
-			
-	
-			//Auto-restart player if paused after action
-			if ( slider.vars.slideshow ) {
-				if ( !slider.playing ) {
-					slider.play();
-				}	
-			}
-			
-			//Prevent to <a> of page transitions
-			$( 'a' ).each( function() {
-				var attr = $( this ).attr( 'href' );
-				
-				if ( typeof attr === typeof undefined ) {
-					$( this ).attr( 'href', '#' );
-				}
-			});
-			
-			/*
-			slider.slides.find( "a[rel^='theme-slider-prettyPhoto']" ).lightbox();
-			*/
-        }
-	
-		
-		
-		//-------  Initialize Carousel (Carousel with dynamic min/max ranges)
+		//-------  Initialize slideshow (with dynamic min/max ranges)
 		
 		//store the slider in a local variable
 		var flexslider      = { vars:{} },
@@ -313,34 +354,7 @@ theme = ( function ( theme, $, window, document ) {
 		});
 		
 
-        function initslidesItemgrid( slider ) {
 
-			var prefix      = 'custom-theme',
-				activeClass = prefix+'-flex-active-slide';
-			
-			slider.removeClass( prefix+'-flexslider-loading' );
-			
-			$sliderItemgird.find( '.custom-theme-slides > div.item' ).removeClass( activeClass );
-			$sliderItemgird.find( '.custom-theme-slides > div.item:eq('+parseFloat(slider.currentSlide+1)+')' ).addClass( activeClass );
-			
-	
-			//Auto-restart player if paused after action
-			if ( slider.vars.slideshow ) {
-				if ( !slider.playing ) {
-					slider.play();
-				}	
-			}
-			
-			//Prevent to <a> of page transitions
-			$( 'a' ).each( function() {
-				var attr = $( this ).attr( 'href' );
-				
-				if ( typeof attr === typeof undefined ) {
-					$( this ).attr( 'href', '#' );
-				}
-			});
-			
-        }
 		
 	};
 	
