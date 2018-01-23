@@ -9,7 +9,6 @@ theme = ( function ( theme, $, window, document ) {
     
     var pageLoaded = function() {
 	
-		var $window = $( window );
 
 		//-------- Sticky header area
 		var waypoints = $( '.header-area' ).waypoint({
@@ -26,7 +25,7 @@ theme = ( function ( theme, $, window, document ) {
 		//-------- Header initialize
 		headerInit();
 		
-		$window.on('resize', function() {
+		$( window ).on('resize', function() {
 			headerInit();
 
 		});

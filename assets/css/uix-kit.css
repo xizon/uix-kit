@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit
  * ## Description         :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Version             :  0.0.7
- * ## Last Update         :  January 22, 2018
+ * ## Last Update         :  January 23, 2018
  * ## Created             :  by UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Compatible With     :  Bootstrap 3.x, Chinese, English
@@ -109,6 +109,9 @@
     32. Accordion 
 	33. Note & Tip 
     34. Video
+    35. Pricing
+    36. Testimonials Carousel
+    37. Progress Bar
 
 
     ================
@@ -118,8 +121,7 @@
     P1. Sidr (Mobile Menu)
     P2. Custom Flexslider
     P3. WordPress Core 
-    P4. Themes
-        P4.1 White 
+    P4. Theme - White
 
 	
 	
@@ -4406,6 +4408,155 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
+   35. Pricing
+/* ====================================================== */
+.custom-price {
+    text-align: center;
+    position: relative;
+}
+
+.custom-price:before {
+    padding-top: 2.25rem;
+}
+
+.custom-price:after {
+    padding-bottom: 0;
+}
+
+.custom-price ul, .custom-price ol {
+  /*default*/
+    display: block;
+    list-style-type: disc;
+    margin-top: 0.875rem;
+    margin-bottom: 0.875rem;
+    margin-left: 0;
+    margin-right: 0;
+    padding-bottom: 1.7rem;
+  /*custom*/
+    line-height: 2;
+}
+
+.custom-price li {
+  /*default*/
+    list-style: none;
+}
+
+.custom-price li:before {
+    font-family: 'FontAwesome';
+    content: "\f00c";
+    display: inline-block;
+    margin-right: .4rem;
+}
+
+.custom-price .hr {
+    margin: 1.5rem 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.custom-price .border-hover {
+    margin-bottom: 1.5rem;
+}
+
+.custom-price .border {
+    padding-top: 0.875rem;
+    position: relative;
+    -webkit-box-shadow: 0 22px 40px 0 #eef4fc;
+    -moz-box-shadow: 0 22px 40px 0 #eef4fc;
+    box-shadow: 0 22px 40px 0 #eef4fc;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    background: #fff;
+    -moz-transition: .1s ease-in-out;
+    -o-transition: .1s ease-in-out;
+    -webkit-transition: .1s ease-in-out;
+    transition: .1s ease-in-out;
+}
+
+.custom-price .border:hover {
+    -webkit-box-shadow: 0 31px 32px 0 #cbdfee;
+    -moz-box-shadow: 0 31px 32px 0 #cbdfee;
+    box-shadow: 0 31px 32px 0 #cbdfee;
+}
+
+.custom-price .level {
+    font-size: 0.7rem;
+    text-align: center;
+    text-indent: 0.875rem;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 3;
+    font-weight: 700;
+    filter: alpha(opacity=35);
+    -moz-opacity: 0.35;
+    opacity: 0.35;
+}
+
+.custom-price .num {
+    color: #EC5E79;
+    font-weight: 700;
+    font-size: 3.5rem;
+    margin-top: 0.875rem;
+}
+
+.custom-price .currency {
+    font-size: 0.875rem;
+}
+
+.custom-price .period {
+    font-size: 12px;
+}
+
+.custom-price .period:before {
+    content: '/';
+    padding-right: .1rem;
+}
+
+.custom-price .detail {
+    text-align: left;
+    padding-bottom: 1.125rem;
+    padding-left: 1rem;
+    font-size: 0.875rem;
+}
+
+.custom-price .excerpt {
+    height: auto;
+    padding: 0 0.875rem;
+    font-size: 0.875rem;
+    filter: alpha(opacity=65);
+    -moz-opacity: 0.65;
+    opacity: 0.65;
+}
+
+.custom-price .excerpt p {
+    line-height: 1.5;
+}
+
+.custom-price .bg {
+    padding-top: 1.875rem;
+    height: auto;
+}
+
+.custom-price .border.active .num,
+.custom-price .border.active .excerpt,
+.custom-price .border.active .detail,
+.custom-price .border.active .level {
+    color: #fff !important;
+}
+
+.custom-price .border.active .excerpt {
+    filter: alpha(opacity=65);
+    -moz-opacity: 0.65;
+    opacity: 0.65;
+}
+
+/* ====================================================== 
+   36. Testimonials Carousel
+/* ====================================================== */
+/* ====================================================== 
+   37. Progress Bar
+/* ====================================================== */
+/* ====================================================== 
    P1. Sidr (Mobile Menu)
 /* ====================================================== */
 .sidr {
@@ -5270,7 +5421,7 @@ a img.aligncenter {
 
 /* other */
 /* ====================================================== 
-   P4. Themes - White
+   P4. Theme - White
 /* ====================================================== */
 /* Navigation Area  */
 .theme-white ul.menu-main > li > a {
