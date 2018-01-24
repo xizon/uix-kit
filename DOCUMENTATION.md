@@ -1,10 +1,9 @@
 # Documentation
 
 
-
 ## Installation
 
-- Use NPM `npm install uix-kit`. For nodejs you have to install some dependencies.
+Use NPM `npm install uix-kit`. For nodejs you have to install some dependencies.
 
 **Dev Environment**
 
@@ -14,11 +13,12 @@ Before doing all dev stuff make sure you have node installed. After that, run th
 $ npm install --dev
 ```
 
-* Run the following code to enter development mode.
+Run the following code to enter development mode.
 
 ```sh
 $ gulp default
 ```
+
 
 
 ## How does it work?
