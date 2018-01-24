@@ -26,13 +26,12 @@
 	3. Back to Top
 	4. Overlay
 	5. Navigation
-	6. Sticky Elements 
-	7. Retina Graphics for Website
+	6. Videos
+	7. Multiple columns full height for Bootstrap 3.x
 	8. Mega Menu
 	9. Dropdown Categories
 	10. Pagination
-	11. Videos
-	12. Multiple columns full height for Bootstrap 3.x
+
 	
 
 */
@@ -365,10 +364,9 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-
 /*! 
  *************************************
- * 6. Sticky Elements 
+ * 6. Videos
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -376,63 +374,60 @@ theme = ( function ( theme, $, window, document ) {
     
     var pageLoaded = function() {
 		
+
 		var $window      = $( window ),
 			windowWidth  = $window.width(),
-			windowHeight = $window.height(),
-			topSpacing   = $( '.header-area' ).outerHeight( true ) + 10;
-		
-		
-		$window.on( 'scroll touchmove', function() {
+			windowHeight = $window.height();
 
-			var scrollTop   = $window.scrollTop(),
-				dynamicTop  = parseFloat( scrollTop + $window.height() ),
-				targetTop   = parseFloat( $( document ).height() - 200 );
-
-			//Detecting when user scrolls to bottom of div
-			if ( dynamicTop >= targetTop ) {
-				
-				
-				$( '.stick-widget.sticky' )
-					  .css( {
-						  'top'  : parseFloat( topSpacing - (dynamicTop - targetTop) ) + 'px'
-					  } );
-				
-			}
-
-
-		});	
-
-		$( '.stick-widget' ).each( function()  {
-			
-			var $this      = $( this ),
-				oWIdth     = $this.width();
-			
-			
-			var	waypoints = $this.waypoint({
-
-			  handler: function( direction ) {
-				  
-				  $this
-					  .toggleClass( 'sticky', direction === 'down' )
-					  .css( {
-						  'width': oWIdth + 'px',
-						  'top'  : topSpacing + 'px'
-					  } );
-				  
-				
-
-			  },
-
-			  offset: topSpacing
-
-			});	
+		//--------- Video Modal initialize
+		//Check out: http://docs.videojs.com/tutorial-player-workflows.html
+		$( 'video.video-js' ).each( function()  {
+			$( this ).css({
+				  'width'      : windowWidth - 80 + 'px',
+				  'height'     : windowHeight - 150 + 'px'
+			});
 		});
 
+		$( '.web-video-btn' ).on( 'click', function() {
+			var vid = $( this ).data( 'video-id' ),
+				myPlayer = videojs( vid, {
+									  controlBar: {
+										  muteToggle : false,
+										  autoplay   : true,
+										  loop       : true,
+										  controls   : true,
+										  controlBar : {
+											muteToggle: false
+										  }
+									  }
+									});		
+			
+			
+			myPlayer.ready(function() {
+				
+				  // set, tell the player it's in fullscreen 
+				  //myPlayer.exitFullscreen();
+				  //myPlayer.requestFullscreen();
+				  myPlayer.play();
 
+			});
+			
+			$( '.modal-box .close-btn' ).on( 'click', function() {
+				
+				myPlayer.ready(function() {
+				    myPlayer.pause();
+				});				
+				
+			});
+			
+			
+		});
+		
+		
 		
     };
 
-    theme.stickyElements = {
+    theme.videos = {
         pageLoaded : pageLoaded        
     };
 
@@ -444,49 +439,66 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-
 /*! 
  *************************************
- * 7. Retina Graphics for Website
+ * 7. Multiple columns full height for Bootstrap 3.x
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
+    
+    var pageLoaded = function() {
 		
-		//Determine if you have retinal display
-		var hasRetina  = false,
-			rootRetina = (typeof exports === 'undefined' ? window : exports),
-			mediaQuery = '(-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-resolution: 1.5dppx)';
-	
-		if ( rootRetina.devicePixelRatio > 1 || rootRetina.matchMedia && rootRetina.matchMedia( mediaQuery ).matches ) {
-			hasRetina = true;
-		} 
 
-		if ( hasRetina ) {
-			//do something
-			$( '[data-retina]' ).each( function() {
-				$( this ).attr( {
-					'src'     : $( this ).data( 'retina' ),
-				} );
+		var $window      = $( window ),
+			windowWidth  = $window.width(),
+			windowHeight = $window.height();
+
+
+		// Close the menu on window change
+		$window.on( 'resize', function() {
+			windowWidth  = $window.width();
+			if ( windowWidth > 768 ) {
+				rowColInit( false ); 
+			} else {
+				rowColInit( true ); 
+			}
+		} );
+
+		if ( windowWidth > 768 ) {
+			rowColInit( false ); 
+		} else {
+			rowColInit( true ); 
+		}
+
+
+		function rowColInit( reset ) {
+
+
+			$( '.row.full-height' ).each( function()  {
+				var h = ( !reset ) ? $( this ).height() + 'px' : 'auto';
+				$( this ).find( '> div' ).css( 'height', h );
 			});
+
+
+		}
+
 		
-		} 
-	
 		
-	};
-	
-		
-    theme.retina = {
-        documentReady : documentReady        
+
     };
 
-    theme.components.documentReady.push( documentReady );
+    theme.rowFullheight = {
+        pageLoaded : pageLoaded        
+    };
+
+    theme.components.pageLoaded.push( pageLoaded );
     return theme;
 
 }( theme, jQuery, window, document ) );
+
+
+
 
 
 /*! 
@@ -707,143 +719,6 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
-
-
-
-/*! 
- *************************************
- * 11. Videos
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-    
-    var pageLoaded = function() {
-		
-
-		var $window      = $( window ),
-			windowWidth  = $window.width(),
-			windowHeight = $window.height();
-
-		//--------- Video Modal initialize
-		//Check out: http://docs.videojs.com/tutorial-player-workflows.html
-		$( 'video.video-js' ).each( function()  {
-			$( this ).css({
-				  'width'      : windowWidth - 80 + 'px',
-				  'height'     : windowHeight - 150 + 'px'
-			});
-		});
-
-		$( '.web-video-btn' ).on( 'click', function() {
-			var vid = $( this ).data( 'video-id' ),
-				myPlayer = videojs( vid, {
-									  controlBar: {
-										  muteToggle : false,
-										  autoplay   : true,
-										  loop       : true,
-										  controls   : true,
-										  controlBar : {
-											muteToggle: false
-										  }
-									  }
-									});		
-			
-			
-			myPlayer.ready(function() {
-				
-				  // set, tell the player it's in fullscreen 
-				  //myPlayer.exitFullscreen();
-				  //myPlayer.requestFullscreen();
-				  myPlayer.play();
-
-			});
-			
-			$( '.modal-box .close-btn' ).on( 'click', function() {
-				
-				myPlayer.ready(function() {
-				    myPlayer.pause();
-				});				
-				
-			});
-			
-			
-		});
-		
-		
-		
-    };
-
-    theme.videos = {
-        pageLoaded : pageLoaded        
-    };
-
-    theme.components.pageLoaded.push( pageLoaded );
-    return theme;
-
-}( theme, jQuery, window, document ) );
-
-
-
-
-/*! 
- *************************************
- * 12. Multiple columns full height for Bootstrap 3.x
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-    
-    var pageLoaded = function() {
-		
-
-		var $window      = $( window ),
-			windowWidth  = $window.width(),
-			windowHeight = $window.height();
-
-
-		// Close the menu on window change
-		$window.on( 'resize', function() {
-			windowWidth  = $window.width();
-			if ( windowWidth > 768 ) {
-				rowColInit( false ); 
-			} else {
-				rowColInit( true ); 
-			}
-		} );
-
-		if ( windowWidth > 768 ) {
-			rowColInit( false ); 
-		} else {
-			rowColInit( true ); 
-		}
-
-
-		function rowColInit( reset ) {
-
-
-			$( '.row.full-height' ).each( function()  {
-				var h = ( !reset ) ? $( this ).height() + 'px' : 'auto';
-				$( this ).find( '> div' ).css( 'height', h );
-			});
-
-
-		}
-
-		
-		
-
-    };
-
-    theme.rowFullheight = {
-        pageLoaded : pageLoaded        
-    };
-
-    theme.components.pageLoaded.push( pageLoaded );
-    return theme;
-
-}( theme, jQuery, window, document ) );
-
-
 
 
 
@@ -1805,6 +1680,50 @@ theme = ( function ( theme, $, window, document ) {
 
 /*! 
  *************************************
+ * Retina Graphics for Website
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ) {
+		
+		//Determine if you have retinal display
+		var hasRetina  = false,
+			rootRetina = (typeof exports === 'undefined' ? window : exports),
+			mediaQuery = '(-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-resolution: 1.5dppx)';
+	
+		if ( rootRetina.devicePixelRatio > 1 || rootRetina.matchMedia && rootRetina.matchMedia( mediaQuery ).matches ) {
+			hasRetina = true;
+		} 
+
+		if ( hasRetina ) {
+			//do something
+			$( '[data-retina]' ).each( function() {
+				$( this ).attr( {
+					'src'     : $( this ).data( 'retina' ),
+				} );
+			});
+		
+		} 
+	
+		
+	};
+	
+		
+    theme.retina = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+/*! 
+ *************************************
  * Scroll Reveal
  *************************************
  */
@@ -2213,6 +2132,86 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
+
+
+
+
+
+/*! 
+ *************************************
+ * Sticky Elements 
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+    
+    var pageLoaded = function() {
+		
+		var $window      = $( window ),
+			windowWidth  = $window.width(),
+			windowHeight = $window.height(),
+			topSpacing   = $( '.header-area' ).outerHeight( true ) + 10;
+		
+		
+		$window.on( 'scroll touchmove', function() {
+
+			var scrollTop   = $window.scrollTop(),
+				dynamicTop  = parseFloat( scrollTop + $window.height() ),
+				targetTop   = parseFloat( $( document ).height() - 200 );
+
+			//Detecting when user scrolls to bottom of div
+			if ( dynamicTop >= targetTop ) {
+				
+				
+				$( '.stick-widget.sticky' )
+					  .css( {
+						  'top'  : parseFloat( topSpacing - (dynamicTop - targetTop) ) + 'px'
+					  } );
+				
+			}
+
+
+		});	
+
+		$( '.stick-widget' ).each( function()  {
+			
+			var $this      = $( this ),
+				oWIdth     = $this.width();
+			
+			
+			var	waypoints = $this.waypoint({
+
+			  handler: function( direction ) {
+				  
+				  $this
+					  .toggleClass( 'sticky', direction === 'down' )
+					  .css( {
+						  'width': oWIdth + 'px',
+						  'top'  : topSpacing + 'px'
+					  } );
+				  
+				
+
+			  },
+
+			  offset: topSpacing
+
+			});	
+		});
+
+
+		
+    };
+
+    theme.stickyElements = {
+        pageLoaded : pageLoaded        
+    };
+
+    theme.components.pageLoaded.push( pageLoaded );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
 
 
 

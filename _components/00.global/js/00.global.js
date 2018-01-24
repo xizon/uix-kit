@@ -9,13 +9,12 @@
 	3. Back to Top
 	4. Overlay
 	5. Navigation
-	6. Sticky Elements 
-	7. Retina Graphics for Website
+	6. Videos
+	7. Multiple columns full height for Bootstrap 3.x
 	8. Mega Menu
 	9. Dropdown Categories
 	10. Pagination
-	11. Videos
-	12. Multiple columns full height for Bootstrap 3.x
+
 	
 
 */

@@ -2,7 +2,7 @@
 
 /*! 
  *************************************
- * 12. Multiple columns full height for Bootstrap 3.x
+ * 7. Multiple columns full height for Bootstrap 3.x
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
