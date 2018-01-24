@@ -8,6 +8,21 @@
     -moz-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
   }
+	
+	&:not(.rotation) .marker {
+		background: $primary-text-color1;
+		height: 2px;
+		width: 100%;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		z-index: 1;
+		-moz-transition: .1s ease-in-out;
+		-o-transition: .1s ease-in-out;
+		-webkit-transition: .1s ease-in-out;
+		transition: .1s ease-in-out;
+	}	
+	
   ul > li {
     position: relative;
     display: block;
@@ -15,6 +30,8 @@
     -o-transition: .1s ease-in-out;
     -webkit-transition: .1s ease-in-out;
     transition: .1s ease-in-out;
+
+	
     > a {
       position: relative;
       display: block;
@@ -26,6 +43,7 @@
     -moz-box-shadow: none;
     box-shadow: none;
     ul {
+	  font-size: 0; /*Fighting the Space Between Inline Block Elements*/
       display: block;
       width: 100%;
       text-align: center;
@@ -33,10 +51,15 @@
       -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
       -moz-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
       box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+		
+		
       li {
+		font-size: 1rem;/*Fighting the Space Between Inline Block Elements*/
         display: inline-block;
         /*require*/
         float: none;
+		  
+		  
       }
     }
   }
@@ -56,6 +79,7 @@
       -moz-box-shadow: inset 1px 0px 0px 0px rgba(230, 230, 230, 1);
       box-shadow: inset 1px 0px 0px 0px rgba(230, 230, 230, 1);
       background: #f7f7f7;
+      min-width: 7.5rem;
     }
     &:after {
       content: '';
@@ -68,13 +92,14 @@
         text-align: center;
       }
       &.active {
-        background: $primary-text-color1;
-        a {
-          color: #fff;
-        }
+        background: #fff;
+
       }
     }
   }
+	  
+	
+  /* Tab Rotation Effect */
   &.rotation {
     height: 400px;
     .content {
@@ -123,10 +148,11 @@
         }
         &.active > a {
           background: $primary-text-color1;
+		  color: #fff;
         }
+		  
       }
     }
   }
 }
 
-/* Tab Rotation Effect */

@@ -4739,10 +4739,28 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 /* ====================================================== 
    Tabs        
 /* ====================================================== */
+.custom-tabs {
+  /* Tab Rotation Effect */;
+}
+
 .custom-tabs:not(.rotation) {
     -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
     -moz-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+}
+
+.custom-tabs:not(.rotation) .marker {
+    background: #212121;
+    height: 2px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    -moz-transition: .1s ease-in-out;
+    -o-transition: .1s ease-in-out;
+    -webkit-transition: .1s ease-in-out;
+    transition: .1s ease-in-out;
 }
 
 .custom-tabs ul > li {
@@ -4767,6 +4785,8 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 }
 
 .custom-tabs.custom-tabs-center ul {
+    font-size: 0;
+  /*Fighting the Space Between Inline Block Elements*/
     display: block;
     width: 100%;
     text-align: center;
@@ -4777,6 +4797,8 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 }
 
 .custom-tabs.custom-tabs-center ul li {
+    font-size: 1rem;
+  /*Fighting the Space Between Inline Block Elements*/
     display: inline-block;
   /*require*/
     float: none;
@@ -4799,6 +4821,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
     -moz-box-shadow: inset 1px 0px 0px 0px #e6e6e6;
     box-shadow: inset 1px 0px 0px 0px #e6e6e6;
     background: #f7f7f7;
+    min-width: 7.5rem;
 }
 
 .custom-tabs ul:after {
@@ -4813,11 +4836,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 }
 
 .custom-tabs ul > li.active {
-    background: #212121;
-}
-
-.custom-tabs ul > li.active a {
-    color: #fff;
+    background: #fff;
 }
 
 .custom-tabs.rotation {
@@ -4877,12 +4896,112 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 
 .custom-tabs.rotation ul > li.active > a {
     background: #212121;
+    color: #fff;
 }
 
-/* Tab Rotation Effect */
 /* ====================================================== 
    Testimonials Carousel
 /* ====================================================== */
+.custom-testimonials {
+  /* Required */
+    overflow: hidden;
+}
+
+.custom-testimonials .slides {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.custom-testimonials .slides li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    cursor: move;
+}
+
+.custom-testimonials .content {
+    position: relative;
+    margin: 0 auto;
+    max-width: calc(100% - 176px);
+    -webkit-box-shadow: 0 22px 40px 0 #eef4fc;
+    -moz-box-shadow: 0 22px 40px 0 #eef4fc;
+    box-shadow: 0 22px 40px 0 #eef4fc;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    margin-bottom: 100px;
+    padding: 1rem 44px;
+}
+
+.custom-testimonials .signature {
+    font-size: 0.75rem;
+    text-align: center;
+    height: 40px;
+    width: 100%;
+    display: block;
+    font-style: italic;
+}
+
+.custom-testimonials .signature img.avatar,
+.custom-testimonials .signature .avatar img {
+    width: 32px;
+    height: 32px;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
+    margin: .3rem 0 0.875rem 0.875rem;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.custom-testimonials .signature .no-avatar {
+    width: 1px;
+    height: 1px;
+    border: none;
+}
+
+.custom-testimonials .signature strong {
+    font-weight: 700;
+}
+
+.custom-testimonials .signature strong.pure-text {
+    display: inline-block;
+}
+
+/* Custom controls */
+.slides-custom-control {
+    font-size: 0;
+    position: absolute;
+    text-align: center;
+    position: relative;
+    width: 100%;
+    display: block;
+    height: 20px;
+    margin-top: -88px;
+    z-index: 5;
+}
+
+.slides-custom-control li {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: .3rem;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
+    background: #AEAEAE;
+    filter: alpha(opacity=10);
+    -moz-opacity: 0.1;
+    opacity: 0.1;
+}
+
+.slides-custom-control li.flex-active {
+    filter: alpha(opacity=50);
+    -moz-opacity: 0.5;
+    opacity: 0.5;
+}
+
 /* ====================================================== 
    Timeline    
 /* ====================================================== */

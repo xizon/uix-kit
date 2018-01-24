@@ -46,7 +46,7 @@ Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap.
 
 You can customize these files to meet the different needs of the site you want :-)
 
-The `examples/_demo/` folder can be deleted.
+The `examples/assets-demo/` folder can be deleted.
 
 > ### Usage with Gulp:
 > 

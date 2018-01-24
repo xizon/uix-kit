@@ -116,6 +116,11 @@ theme = ( function ( theme, $, window, document ) {
 			}
 			
 			
+			// Tab Sliding Effext
+			$this.find( 'ul li:first' ).prepend( '<div class="marker"></div>' );
+			
+			
+			
 			// Tab Fade Effect
 			$this.on( 'click', 'li', function( e ) {
 				
@@ -129,6 +134,15 @@ theme = ( function ( theme, $, window, document ) {
 				$( this ).addClass( 'active' );
 				$( '#' + tabID ).addClass( 'active' );
 				
+
+				//sliding marker
+				var translateX = $( this ).index() * 100;
+				$this.find( '.marker' ).css({
+					'-webkit-transform'  : 'translateX( '+translateX+'% )',
+					'-ms-transform'      : 'translateX( '+translateX+'% )',
+					'transform'          : 'translateX( '+translateX+'% )'	
+				});
+		
 				
 				return false;
 				

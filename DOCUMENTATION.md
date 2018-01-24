@@ -164,7 +164,7 @@ $ gulp default
 
 You can customize these files to meet the different needs of the site you want :-)
 
-The `examples/_demo/` folder can be deleted.
+The `examples/assets-demo/` folder can be deleted.
 
 #### CSS:
 
