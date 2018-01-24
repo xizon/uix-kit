@@ -40,10 +40,10 @@ You can customize these files to meet the different needs of the site you want :
 
 The `examples/_demo/` folder can be deleted.
 
-> #### Usage with Gulp:
+> ### Usage with Gulp:
 > 
 > HTML/JS/CSS Components: `_components/*`  
-> `00.global` is a required component.
+> `00.global` and `01.index` are required components.
 
 
 

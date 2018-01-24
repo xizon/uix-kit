@@ -47,7 +47,6 @@
 		<link rel="stylesheet" type="text/css" href="assets/css/animate.min.css?ver=3.5.2" media="all" />
 		
         <!-- Icons  -->
-        <link rel="stylesheet" type="text/css" href="assets/fonts/flaticon/flaticon.min.css?ver=1.0" media="all"/>
         <link rel="stylesheet" type="text/css" href="assets/fonts/fontawesome/font-awesome.min.css?ver=4.5" media="all" />  
         
         <!-- Theme  -->
@@ -55,7 +54,7 @@
         
      
          <!--[if lt IE 10]>
-           <link rel="stylesheet" type="text/css" href="assets/css/old-ie.css" media="all" />
+           <link rel="stylesheet" type="text/css" href="assets/css/uix-kit.IE.css?ver=1.0.0" media="all" />
         <![endif]-->
         
         

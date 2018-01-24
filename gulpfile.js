@@ -45,7 +45,7 @@ var customComment = `
  *************************************
  */
 //Delete include files
-gulp.task('clean-scripts', function () {
+gulp.task('clean-scripts', [ 'html' ], function () {
   return gulp.src( globs.htmlIncTar, {read: true})
 	.pipe(clean());
 });
@@ -68,10 +68,6 @@ gulp.task('html', function() {
 
 	
   console.log( 'cache:' + ver );
-	
-	setTimeout( function() {
-		gulp.start( 'clean-scripts' );
-	}, 1500 );
 	
   return gulp.src( globs.htmlFiles )
 
@@ -133,6 +129,8 @@ gulp.task('styles', function(){
 
 //Compile SCSS
 gulp.task('sass', function(){
+	
+  gulp.start( 'clean-scripts' );
   return gulp.src( globs.scss )
     .pipe(concat('uix-kit.scss'))
     .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
@@ -163,9 +161,6 @@ gulp.task('sass', function(){
 	.pipe(gulp.dest( globs.cssTar ));
 	
 	
-	setTimeout( function() {
-		gulp.start( 'html' );
-	}, 500 );
 });
 
 
@@ -177,7 +172,9 @@ gulp.task('jshint', function () {
 });
 
 gulp.task('scripts', function() {
-     gulp.src( globs.js )
+	
+	 gulp.start( 'clean-scripts' );
+     return gulp.src( globs.js )
         .pipe(concat('uix-kit.js'))
 	 
 		.pipe(headerComment(`
@@ -198,14 +195,8 @@ gulp.task('scripts', function() {
 	
 	    .pipe(headerComment( customComment))
 	    .pipe(gulp.dest( globs.jsTar ));
+
 	
-
-	setTimeout( function() {
-		gulp.start( 'html' );
-	}, 500 );
-
-
-
 	
 });
 
@@ -219,17 +210,14 @@ gulp.task('scripts', function() {
  */
 gulp.watch('files-to-watch', ['tasks_to_run']); 
 gulp.task('default', ['jshint'], function() {
-    gulp.start('sass');
-	gulp.start('scripts');
-	gulp.start('styles');
-    gulp.start('watch');
+    gulp.start( [ 'sass', 'scripts', 'styles', 'watch' ] );
 });
 
 gulp.task('watch', function(){
 	gulp.watch( globs.scssRTL, [ 'styles' ] ); 
 	gulp.watch( globs.scss, [ 'sass' ] ); 
 	gulp.watch( globs.js, [ 'scripts' ] ); 
-	gulp.watch( globs.htmlFiles, [ 'html' ] ); 
+	gulp.watch( globs.htmlFiles, [ 'clean-scripts' ] ); 
 	
 	
 })
