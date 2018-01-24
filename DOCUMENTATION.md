@@ -1,6 +1,27 @@
 # Documentation
 
-### How does it work?
+
+
+## Installation
+
+- Use NPM `npm install uix-kit`. For nodejs you have to install some dependencies.
+
+**Dev Environment**
+
+Before doing all dev stuff make sure you have node installed. After that, run the following code in the main directory to install the node module dependencies.
+
+```sh
+$ npm install --dev
+```
+
+* Run the following code to enter development mode.
+
+```sh
+$ gulp default
+```
+
+
+## How does it work?
 
 #### 1)\. HTML Structure
 
