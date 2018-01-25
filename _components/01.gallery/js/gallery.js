@@ -1,7 +1,7 @@
 
 /*! 
  *************************************
- * Isometric Grid
+ * Gallery
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -11,25 +11,25 @@ theme = ( function ( theme, $, window, document ) {
     var documentReady = function( $ ) {
 		
 	
-		$( '.iso-grid-container' ).each( function() {
+		$( '.gallery-custom' ).each( function() {
 			var type = $( this ).data( 'show-type' );
 			
 			// Masonry
 			if ( type.indexOf( 'masonry' ) >= 0  ) {
 				$( this ).addClass( 'masonry-container' );
-				$( this ).find( '.iso-grid-item' ).addClass( 'masonry-item' );
+				$( this ).find( '.custom-gallery-' ).addClass( 'masonry-item' );
 			}
 			
 			// Filterable
 			if ( type.indexOf( 'filter' ) >= 0  ) {
 				$( this ).addClass( 'filter-container' );
-				$( this ).find( '.iso-grid-item' ).addClass( 'filter-item' );	
+				$( this ).find( '.custom-gallery-' ).addClass( 'filter-item' );	
 			}	
 		
 		});
 	
 	    /*--  Function of Masonry  --*/
-		var masonryObj = $( '.masonry-container .iso-grid-tiles' );
+		var masonryObj = $( '.masonry-container .custom-gallery-tiles' );
 		imagesLoaded( masonryObj ).on( 'always', function() {
 			  masonryObj.masonry({
 				itemSelector: '.masonry-item'
@@ -41,9 +41,9 @@ theme = ( function ( theme, $, window, document ) {
 		if ( $( "[data-show-type]" ).length > 0 ) {
 			if ( $( "[data-show-type]" ).data( 'show-type' ).indexOf( 'filter' ) >= 0 ) {
 				
-				$( '.iso-grid-container' ).each( function() {
+				$( '.custom-gallery' ).each( function() {
 					var filterCat      = $( this ).data( 'filter-id' ),
-						$grid          = $( this ).find( '.iso-grid-tiles' ),
+						$grid          = $( this ).find( '.custom-gallery-tiles' ),
 						$filterOptions = $( filterCat );
 						
 					imagesLoaded( $grid ).on( 'always', function() {
@@ -93,7 +93,7 @@ theme = ( function ( theme, $, window, document ) {
 	};
 	
 		
-    theme.isometricGrid = {
+    theme.gallery = {
         documentReady : documentReady        
     };
 

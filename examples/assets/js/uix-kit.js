@@ -1004,7 +1004,7 @@ theme = ( function ( theme, $, window, document ) {
 
 /*! 
  *************************************
- * Isometric Grid
+ * Gallery
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -1014,25 +1014,25 @@ theme = ( function ( theme, $, window, document ) {
     var documentReady = function( $ ) {
 		
 	
-		$( '.iso-grid-container' ).each( function() {
+		$( '.gallery-custom' ).each( function() {
 			var type = $( this ).data( 'show-type' );
 			
 			// Masonry
 			if ( type.indexOf( 'masonry' ) >= 0  ) {
 				$( this ).addClass( 'masonry-container' );
-				$( this ).find( '.iso-grid-item' ).addClass( 'masonry-item' );
+				$( this ).find( '.custom-gallery-' ).addClass( 'masonry-item' );
 			}
 			
 			// Filterable
 			if ( type.indexOf( 'filter' ) >= 0  ) {
 				$( this ).addClass( 'filter-container' );
-				$( this ).find( '.iso-grid-item' ).addClass( 'filter-item' );	
+				$( this ).find( '.custom-gallery-' ).addClass( 'filter-item' );	
 			}	
 		
 		});
 	
 	    /*--  Function of Masonry  --*/
-		var masonryObj = $( '.masonry-container .iso-grid-tiles' );
+		var masonryObj = $( '.masonry-container .custom-gallery-tiles' );
 		imagesLoaded( masonryObj ).on( 'always', function() {
 			  masonryObj.masonry({
 				itemSelector: '.masonry-item'
@@ -1044,9 +1044,9 @@ theme = ( function ( theme, $, window, document ) {
 		if ( $( "[data-show-type]" ).length > 0 ) {
 			if ( $( "[data-show-type]" ).data( 'show-type' ).indexOf( 'filter' ) >= 0 ) {
 				
-				$( '.iso-grid-container' ).each( function() {
+				$( '.custom-gallery' ).each( function() {
 					var filterCat      = $( this ).data( 'filter-id' ),
-						$grid          = $( this ).find( '.iso-grid-tiles' ),
+						$grid          = $( this ).find( '.custom-gallery-tiles' ),
 						$filterOptions = $( filterCat );
 						
 					imagesLoaded( $grid ).on( 'always', function() {
@@ -1096,7 +1096,7 @@ theme = ( function ( theme, $, window, document ) {
 	};
 	
 		
-    theme.isometricGrid = {
+    theme.gallery = {
         documentReady : documentReady        
     };
 
@@ -1226,100 +1226,6 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
-
-
-
-/*! 
- *************************************
- * Modal
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-   
-   
-    var documentReady = function( $ ){
-		
-		function getTransitionDuration( elementOrSelector ){
-			var $el, durString, isMS, numberStr, numberNum;
-			$el = $( elementOrSelector );
-			if( $el.length === 0 ){
-				return false;
-			}
-			$el = $($el[0]); // Force just the first item.  need more?  use .each
-			
-			var dur = $el.css('transition-duration');
-			if( typeof dur === typeof undefined ) { 
-				dur = '0.5s';
-			}
-			
-			durString = dur.toLowerCase();
-			isMS = durString.indexOf( 'ms' ) >= 0;
-			numberNum = durString.replace( 'ms', '' ).replace( 's', '' );
-			return isMS ? numberNum : numberNum * 1000;
-		}
-		
-	
-	    $( 'body' ).prepend( '<div class="modal-mask"></div>' );
-		$( '[data-modal-id]' ).on( 'click', function() {
-			var dataID = $( this ).data( 'modal-id' ),
-			    dataH  = $( this ).data( 'modal-height' ),
-				dataW  = $( this ).data( 'modal-width' ),
-				$obj   = $( '.modal-box#'+dataID );
-			
-			// Initializate modal
-			$( this ).attr( 'href', 'javascript:void(0)' );
-			$obj.find( '.content' ).css( 'overflow-y', 'hidden' );
-			
-			if ( $obj.length > 0 ) {
-				if( typeof dataH != typeof undefined && dataH != '' ) {
-					$obj.css( {'height': dataH } );
-				}
-				
-				if( typeof dataW != typeof undefined && dataW != '' ) {
-					$obj.css( {'width': dataW, 'left': 'calc( (100% - '+dataW+')/2 )' } );
-				}
-				
-				$( '.modal-mask' ).fadeIn( 'fast' );
-				$obj.addClass( 'active' );	
-			}
-			
-			if ( $obj.hasClass( 'fullscreen' ) ) {
-				setTimeout( function() {
-					$( 'html' ).css( 'overflow-y', 'hidden' );
-					$obj.find( '.content' ).css( 'overflow-y', 'scroll' );
-				}, getTransitionDuration( '.modal-box#'+dataID ) );
-				
-			}
-		
-		});
-		
-		$( '.modal-box .close-btn' ).on( 'click', function() {
-			$( this ).parent().removeClass( 'active' );
-		});
-		
-		$( '.modal-box .close-btn, .modal-mask' ).on( 'click', function() {
-			$( '.modal-box' ).removeClass( 'active' );
-			$( '.modal-mask' ).fadeOut( 'fast' );
-			$( '.modal-box' ).find( '.content' ).css( 'overflow-y', 'hidden' );
-			$( 'html' ).css( 'overflow-y', 'auto' );
-			setTimeout( function() {
-	
-			}, getTransitionDuration( '.modal-box:first' ) );
-			
-		});
-		
-	};
-		
-      
-    theme.modalbox = {
-        documentReady : documentReady        
-    };  
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
-
 
 
 /*! 
@@ -1550,6 +1456,100 @@ theme = ( function ( theme, $, window, document ) {
     };
 
     theme.components.pageLoaded.push( pageLoaded );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
+
+/*! 
+ *************************************
+ * Modal
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ){
+		
+		function getTransitionDuration( elementOrSelector ){
+			var $el, durString, isMS, numberStr, numberNum;
+			$el = $( elementOrSelector );
+			if( $el.length === 0 ){
+				return false;
+			}
+			$el = $($el[0]); // Force just the first item.  need more?  use .each
+			
+			var dur = $el.css('transition-duration');
+			if( typeof dur === typeof undefined ) { 
+				dur = '0.5s';
+			}
+			
+			durString = dur.toLowerCase();
+			isMS = durString.indexOf( 'ms' ) >= 0;
+			numberNum = durString.replace( 'ms', '' ).replace( 's', '' );
+			return isMS ? numberNum : numberNum * 1000;
+		}
+		
+	
+	    $( 'body' ).prepend( '<div class="modal-mask"></div>' );
+		$( '[data-modal-id]' ).on( 'click', function() {
+			var dataID = $( this ).data( 'modal-id' ),
+			    dataH  = $( this ).data( 'modal-height' ),
+				dataW  = $( this ).data( 'modal-width' ),
+				$obj   = $( '.modal-box#'+dataID );
+			
+			// Initializate modal
+			$( this ).attr( 'href', 'javascript:void(0)' );
+			$obj.find( '.content' ).css( 'overflow-y', 'hidden' );
+			
+			if ( $obj.length > 0 ) {
+				if( typeof dataH != typeof undefined && dataH != '' ) {
+					$obj.css( {'height': dataH } );
+				}
+				
+				if( typeof dataW != typeof undefined && dataW != '' ) {
+					$obj.css( {'width': dataW, 'left': 'calc( (100% - '+dataW+')/2 )' } );
+				}
+				
+				$( '.modal-mask' ).fadeIn( 'fast' );
+				$obj.addClass( 'active' );	
+			}
+			
+			if ( $obj.hasClass( 'fullscreen' ) ) {
+				setTimeout( function() {
+					$( 'html' ).css( 'overflow-y', 'hidden' );
+					$obj.find( '.content' ).css( 'overflow-y', 'scroll' );
+				}, getTransitionDuration( '.modal-box#'+dataID ) );
+				
+			}
+		
+		});
+		
+		$( '.modal-box .close-btn' ).on( 'click', function() {
+			$( this ).parent().removeClass( 'active' );
+		});
+		
+		$( '.modal-box .close-btn, .modal-mask' ).on( 'click', function() {
+			$( '.modal-box' ).removeClass( 'active' );
+			$( '.modal-mask' ).fadeOut( 'fast' );
+			$( '.modal-box' ).find( '.content' ).css( 'overflow-y', 'hidden' );
+			$( 'html' ).css( 'overflow-y', 'auto' );
+			setTimeout( function() {
+	
+			}, getTransitionDuration( '.modal-box:first' ) );
+			
+		});
+		
+	};
+		
+      
+    theme.modalbox = {
+        documentReady : documentReady        
+    };  
+    theme.components.documentReady.push( documentReady );
     return theme;
 
 }( theme, jQuery, window, document ) );
@@ -2406,6 +2406,87 @@ theme = ( function ( theme, $, window, document ) {
 }( theme, jQuery, window, document ) );
 
 
+/*! 
+ *************************************
+ * Testimonials Carousel
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+    
+		var $obj = $( '.custom-testimonials .flexslider' );
+		$obj.flexslider({
+			animation         : 'slide',
+			slideshow         : true,
+			smoothHeight      : true,
+			controlNav        : true,
+			manualControls    : '.slides-custom-control li',
+			directionNav      : false,
+			animationSpeed    : 600,
+			slideshowSpeed    : 7000,
+			selector          : ".slides > li",
+			drag              : true,
+			start: function(slider){
+				$obj.on( 'mousedown', function( e ) {
+					if ( $obj.data( 'flexslider' ).animating ) {
+						return;
+					}
+						
+					$( this ).addClass('dragging');
+					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
+					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
+					$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
+					$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );
+				} );
+			
+				$obj.on( 'mouseup', function( e ) {
+					if ( $obj.data('flexslider').animating ) {
+						return;
+					}
+						
+					$( this ).removeClass('dragging');
+					var origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
+					    origin_mouse_y = $( this ).data( 'origin_mouse_y' );
+					
+					if ( 'horizontal' === $obj.data('flexslider').vars.direction ) {
+						if ( e.pageX > origin_mouse_x ) {
+							$obj.flexslider('prev');
+						}
+						if ( e.pageX < origin_mouse_x ) {
+							$obj.flexslider('next');
+						}
+					} else {
+						if ( e.pageY > origin_mouse_y ) {
+							$obj.flexslider('prev');
+						}
+						if ( e.pageY < origin_mouse_y ) {
+							$obj.flexslider('next');
+						}
+					}
+				} );
+			}
+		});
+		
+		
+    };
+
+    theme.testimonials = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
+
+
+
+
 
 
 /*! 
@@ -2652,87 +2733,6 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
-
-/*! 
- *************************************
- * Testimonials Carousel
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-    
-    var documentReady = function( $ ) {
-    
-		var $obj = $( '.custom-testimonials .flexslider' );
-		$obj.flexslider({
-			animation         : 'slide',
-			slideshow         : true,
-			smoothHeight      : true,
-			controlNav        : true,
-			manualControls    : '.slides-custom-control li',
-			directionNav      : false,
-			animationSpeed    : 600,
-			slideshowSpeed    : 7000,
-			selector          : ".slides > li",
-			drag              : true,
-			start: function(slider){
-				$obj.on( 'mousedown', function( e ) {
-					if ( $obj.data( 'flexslider' ).animating ) {
-						return;
-					}
-						
-					$( this ).addClass('dragging');
-					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
-					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
-					$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
-					$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );
-				} );
-			
-				$obj.on( 'mouseup', function( e ) {
-					if ( $obj.data('flexslider').animating ) {
-						return;
-					}
-						
-					$( this ).removeClass('dragging');
-					var origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
-					    origin_mouse_y = $( this ).data( 'origin_mouse_y' );
-					
-					if ( 'horizontal' === $obj.data('flexslider').vars.direction ) {
-						if ( e.pageX > origin_mouse_x ) {
-							$obj.flexslider('prev');
-						}
-						if ( e.pageX < origin_mouse_x ) {
-							$obj.flexslider('next');
-						}
-					} else {
-						if ( e.pageY > origin_mouse_y ) {
-							$obj.flexslider('prev');
-						}
-						if ( e.pageY < origin_mouse_y ) {
-							$obj.flexslider('next');
-						}
-					}
-				} );
-			}
-		});
-		
-		
-    };
-
-    theme.testimonials = {
-        documentReady : documentReady        
-    };
-
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
-
-
-
-
-
-
 
 
 /*! 

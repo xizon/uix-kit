@@ -76,6 +76,68 @@ blockquote:before {
     text-align: right;
 }
 
+/* Custom Grid */
+.seamless-grid {
+  /* Opt-in outside padding */;
+}
+
+.seamless-grid.pad {
+    padding: 0 15px 0 0;
+}
+
+.seamless-grid.pad [class*='seamless-col-']:last-of-type {
+    padding-right: auto;
+    padding-left: 15px;
+}
+
+[class*='seamless-col-'] {
+    float: right;
+    padding-right: auto;
+    padding-left: 15px;
+}
+
+.seamless-grid [class*='seamless-col-']:last-of-type {
+    padding-left: 0;
+}
+
+@media all and (max-width: 991px) {
+    .seamless-col-1-4:nth-child(2n+0),
+  .seamless-col-1-8:nth-child(2n+0) {
+        padding-left: 0;
+    }
+
+    .seamless-grid.pad .seamless-col-1-4:nth-child(2n+0),
+  .seamless-grid.pad .seamless-col-1-8:nth-child(2n+0) {
+        padding-left: 15px;
+    }
+}
+
+@media all and (max-width: 768px) {
+    .seamless-grid.pad [class*='seamless-col-'] {
+        padding-left: 15px;
+    }
+
+    .seamless-grid.use-2 .seamless-col-1-4,
+  .seamless-grid.use-2 .seamless-col-1-8 {
+        float: right;
+    }
+
+    .seamless-grid.use-2 .seamless-col-1-4:nth-child(2n+1),
+  .seamless-grid.use-2 .seamless-col-1-8:nth-child(2n+1) {
+        padding-left: 15px;
+    }
+
+    .seamless-grid.use-2 .seamless-col-1-4:nth-child(2n+0),
+  .seamless-grid.use-2 .seamless-col-1-8:nth-child(2n+0) {
+        padding-left: 0;
+    }
+
+    .seamless-grid.pad.use-2 .seamless-col-1-4:nth-child(2n+0),
+  .seamless-grid.pad.use-2 .seamless-col-1-8:nth-child(2n+0) {
+        padding-left: 15px;
+    }
+}
+
 /* ====================================================== 
    6. Navigation Area                                    
 /* ====================================================== */
@@ -201,17 +263,6 @@ ul.menu-main ul.sub-menu .nav-arrow {
 /* ====================================================== 
    16. Sidebar            
 /* ====================================================== */
-.uix-iso-grid-widget .uix-iso-grid-recent-item .item-thumb {
-    float: right;
-    margin-right: auto;
-    margin-left: 0.875rem;
-    text-align: right;
-}
-
-.uix-iso-grid-widget .uix-iso-grid-recent-item .item-info {
-    float: right;
-}
-
 .sidebar-container {
     padding-left: auto;
     padding-right: 2.1875rem;
@@ -237,6 +288,18 @@ ul.menu-main ul.sub-menu .nav-arrow {
 }
 
 .post-img-list-box li .item-info {
+    float: right;
+}
+
+/* With Uix Plugins */
+.uix-iso-grid-widget .uix-iso-grid-recent-item .item-thumb {
+    float: right;
+    margin-right: auto;
+    margin-left: 0.875rem;
+    text-align: right;
+}
+
+.uix-iso-grid-widget .uix-iso-grid-recent-item .item-info {
     float: right;
 }
 
@@ -318,72 +381,6 @@ ul.menu-main ul.sub-menu .nav-arrow {
     .form-merge input + button[type="submit"] {
         margin-left: 0;
         margin-right: 0;
-    }
-}
-
-/* ====================================================== 
-   17. Isometric Grid          
-/* ====================================================== */
-.iso-grid-container {
-    margin: -2.1875rem -2.1875rem 0 0;
-}
-
-.iso-grid-container .iso-grid-item {
-    float: right;
-}
-
-.iso-grid-item .link-to, .iso-grid-item .cover:before {
-    left: auto;
-    right: 0;
-}
-
-.iso-grid-item .title {
-    margin-left: auto;
-    margin-right: 0.875rem;
-}
-
-.iso-grid-item .title:before {
-    padding-right: auto;
-    padding-left: 0.875rem;
-}
-
-.iso-grid-item .category {
-    right: auto;
-    left: 0;
-}
-
-@media screen and (max-width: 1280px) {
-    .iso-grid-container {
-        margin: -1.09375rem -1.09375rem 0 0;
-    }
-
-    .iso-grid-container .iso-grid-item, .iso-grid-container.small .iso-grid-item {
-        margin: 1.09375rem 1.09375rem 0 0;
-    }
-
-    .iso-grid-container.large .iso-grid-item {
-        width: calc(49.99999% - 1.09375rem);
-        margin: 1.09375rem 1.09375rem 0 0;
-    }
-}
-
-@media screen and (max-width: 980px) {
-    .iso-grid-container {
-        margin: -2.1875rem -2.1875rem 0 0;
-    }
-
-    .iso-grid-container .iso-grid-item, .iso-grid-container.small .iso-grid-item, .iso-grid-container.large .iso-grid-item {
-        margin: 2.1875rem 2.1875rem 0 0;
-    }
-}
-
-@media screen and (max-width: 736px) {
-    .iso-grid-container {
-        margin: -1.09375rem -1.09375rem 0 0;
-    }
-
-    .iso-grid-container .iso-grid-item, .iso-grid-container.small .iso-grid-item, .iso-grid-container.large .iso-grid-item {
-        margin: 1.09375rem 1.09375rem 0 0;
     }
 }
 

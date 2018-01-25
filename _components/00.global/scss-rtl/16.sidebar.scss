@@ -1,17 +1,6 @@
 /* ====================================================== 
    16. Sidebar            
 /* ====================================================== */
-.uix-iso-grid-widget .uix-iso-grid-recent-item {
-  .item-thumb {
-    float: right;
-    margin-right: auto;
-    margin-left: 0.875rem;
-    text-align: right;
-  }
-  .item-info {
-    float: right;
-  }
-}
 
 .sidebar-container {
   padding-left: auto;
@@ -37,6 +26,20 @@
     float: right;
     margin-right: auto;
     margin-left: 0.875rem;
+  }
+  .item-info {
+    float: right;
+  }
+}
+
+
+/* With Uix Plugins */
+.uix-iso-grid-widget .uix-iso-grid-recent-item {
+  .item-thumb {
+    float: right;
+    margin-right: auto;
+    margin-left: 0.875rem;
+    text-align: right;
   }
   .item-info {
     float: right;
