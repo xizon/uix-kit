@@ -8,7 +8,7 @@
 theme = ( function ( theme, $, window, document ) {
     'use strict';
     
-    var documentReady = function( $ ) {
+    var pageLoaded = function() {
 		
 		var $window      = $( window ),
 			windowWidth  = $window.width(),
@@ -67,12 +67,13 @@ theme = ( function ( theme, $, window, document ) {
     };
 
     theme.stickyElements = {
-        documentReady : documentReady        
+        pageLoaded : pageLoaded        
     };
 
-    theme.components.documentReady.push( documentReady );
+    theme.components.pageLoaded.push( pageLoaded );
     return theme;
 
 }( theme, jQuery, window, document ) );
+
 
 

@@ -20,7 +20,13 @@ theme = ( function ( theme, $, window, document ) {
 			var pageLoaded    = theme.components.pageLoaded,
 				documentReady = theme.components.documentReady;
 			
-			pageLoaded[0](); //Loader
+			pageLoaded[1](); //Multiple columns full height for Bootstrap 3.x
+			pageLoaded[2](); //Parallax
+			pageLoaded[3](); //Sticky Elements 
+			pageLoaded[4](); //Text effect
+			pageLoaded[5](); //Timeline
+			
+			
 			documentReady[0]($); //Header
 			documentReady[1]($); //Back to Top
 			

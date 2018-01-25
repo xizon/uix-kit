@@ -7,7 +7,7 @@
 theme = ( function ( theme, $, window, document ) {
     'use strict';
     
-    var documentReady = function( $ ) {
+    var pageLoaded = function() {
 		
 		
 		var $window          = $( window ),
@@ -148,10 +148,10 @@ theme = ( function ( theme, $, window, document ) {
     };
 
     theme.timeline = {
-        documentReady : documentReady        
+        pageLoaded : pageLoaded        
     };
 
-    theme.components.documentReady.push( documentReady );
+    theme.components.pageLoaded.push( pageLoaded );
     return theme;
 
 }( theme, jQuery, window, document ) );
