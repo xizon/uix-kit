@@ -1,21 +1,21 @@
 /*
 Error: Undefined variable: "$sub-text-color".
-        on line 91 of /Applications/MAMP/htdocs/uix-kit/_components/01.testimonials/scss/testimonials.scss
+        on line 104 of /Applications/MAMP/htdocs/uix-kit/_components/01.testimonials/scss/testimonials.scss
 
-86: 		height: 10px;
-87: 		margin: .3rem;
-88: 		-webkit-border-radius: 100%; 
-89: 		-moz-border-radius: 100%; 
-90: 		border-radius: 100%; 
-91: 		background: $sub-text-color;
-92: 		filter: alpha(opacity=10);  
-93: 		-moz-opacity: 0.1;   
-94: 		opacity: 0.1;
-95: 		&.flex-active {
-96: 			filter: alpha(opacity=50);  
+99: 		height: 10px;
+100: 		margin: .3rem;
+101: 		-webkit-border-radius: 100%; 
+102: 		-moz-border-radius: 100%; 
+103: 		border-radius: 100%; 
+104: 		background: $sub-text-color;
+105: 		filter: alpha(opacity=10);  
+106: 		-moz-opacity: 0.1;   
+107: 		opacity: 0.1;
+108: 		&.flex-active {
+109: 			filter: alpha(opacity=50);  
 
 Backtrace:
-/Applications/MAMP/htdocs/uix-kit/_components/01.testimonials/scss/testimonials.scss:91
+/Applications/MAMP/htdocs/uix-kit/_components/01.testimonials/scss/testimonials.scss:104
 /Applications/Adobe Dreamweaver CC 2017/Adobe Dreamweaver CC 2017.app/Contents/Resources/gems/rubygems/gems/sass-3.4.19/lib/sass/script/tree/variable.rb:49:in `_perform'
 /Applications/Adobe Dreamweaver CC 2017/Adobe Dreamweaver CC 2017.app/Contents/Resources/gems/rubygems/gems/sass-3.4.19/lib/sass/script/tree/node.rb:50:in `perform'
 /Applications/Adobe Dreamweaver CC 2017/Adobe Dreamweaver CC 2017.app/Contents/Resources/gems/rubygems/gems/sass-3.4.19/lib/sass/tree/visitors/perform.rb:395:in `visit_prop'
@@ -72,4 +72,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined variable: \"$sub-text-color\".\A         on line 91 of /Applications/MAMP/htdocs/uix-kit/_components/01.testimonials/scss/testimonials.scss\A \A 86: 		height: 10px;\A 87: 		margin: .3rem;\A 88: 		-webkit-border-radius: 100%; \A 89: 		-moz-border-radius: 100%; \A 90: 		border-radius: 100%; \A 91: 		background: $sub-text-color;\A 92: 		filter: alpha(opacity=10);  \A 93: 		-moz-opacity: 0.1;   \A 94: 		opacity: 0.1;\A 95: 		&.flex-active {\A 96: 			filter: alpha(opacity=50);  "; }
+  content: "Error: Undefined variable: \"$sub-text-color\".\A         on line 104 of /Applications/MAMP/htdocs/uix-kit/_components/01.testimonials/scss/testimonials.scss\A \A 99: 		height: 10px;\A 100: 		margin: .3rem;\A 101: 		-webkit-border-radius: 100%; \A 102: 		-moz-border-radius: 100%; \A 103: 		border-radius: 100%; \A 104: 		background: $sub-text-color;\A 105: 		filter: alpha(opacity=10);  \A 106: 		-moz-opacity: 0.1;   \A 107: 		opacity: 0.1;\A 108: 		&.flex-active {\A 109: 			filter: alpha(opacity=50);  "; }

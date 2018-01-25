@@ -4974,6 +4974,14 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
     display: inline-block;
 }
 
+@media all and (max-width: 768px) {
+    .custom-testimonials .content {
+        max-width: 100%;
+        margin-bottom: 50px;
+        padding: 1rem 0;
+    }
+}
+
 /* Custom controls */
 .slides-custom-control {
     font-size: 0;
