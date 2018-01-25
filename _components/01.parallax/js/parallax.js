@@ -7,7 +7,7 @@
 theme = ( function ( theme, $, window, document ) {
     'use strict';
     
-    var pageLoaded = function() {
+    var documentReady = function( $ ) {
         
         var $window      = $( window ),
 		    windowWidth  = $window.width(),
@@ -115,10 +115,10 @@ theme = ( function ( theme, $, window, document ) {
 	
 
     theme.parallax = {
-        pageLoaded : pageLoaded
+        documentReady : documentReady        
     };
 
-    theme.components.pageLoaded.push( pageLoaded );
+    theme.components.documentReady.push( documentReady );
     return theme;
 
 }( theme, jQuery, window, document ) );

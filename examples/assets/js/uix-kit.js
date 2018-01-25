@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit
  * ## Description         :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Version             :  0.0.7
- * ## Last Update         :  January 24, 2018
+ * ## Last Update         :  January 25, 2018
  * ## Created             :  by UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Compatible With     :  Bootstrap 3.x, Chinese, English
@@ -101,7 +101,7 @@ var theme = (function ( $, window, document ) {
 theme = ( function ( theme, $, window, document ) {
     'use strict';
     
-    var pageLoaded = function() {
+    var documentReady = function( $ ) {
 	
 
 		//-------- Sticky header area
@@ -132,14 +132,13 @@ theme = ( function ( theme, $, window, document ) {
     };
 
     theme.header = {
-        pageLoaded : pageLoaded        
+        documentReady : documentReady        
     };
 
-    theme.components.pageLoaded.push( pageLoaded );
+    theme.components.documentReady.push( documentReady );
     return theme;
 
 }( theme, jQuery, window, document ) );
-
 
 
 		
@@ -154,7 +153,7 @@ theme = ( function ( theme, $, window, document ) {
     
     var pageLoaded = function() {
 		// Remove loader
-		$( '.loader' ).delay( 1500 ).fadeOut();
+		$( '.loader' ).fadeOut();
 		
     };
 
@@ -279,7 +278,7 @@ theme = ( function ( theme, $, window, document ) {
     'use strict';
    
    
-    var pageLoaded = function() {
+    var documentReady = function( $ ) {
 		
 			var $window      = $( window ),
 				windowWidth  = $window.width(),
@@ -354,10 +353,10 @@ theme = ( function ( theme, $, window, document ) {
 	
 		
     theme.navigation = {
-        pageLoaded : pageLoaded        
+        documentReady : documentReady        
     };
 
-    theme.components.pageLoaded.push( pageLoaded );
+    theme.components.documentReady.push( documentReady );
     return theme;
 
 }( theme, jQuery, window, document ) );
@@ -372,7 +371,7 @@ theme = ( function ( theme, $, window, document ) {
 theme = ( function ( theme, $, window, document ) {
     'use strict';
     
-    var pageLoaded = function() {
+    var documentReady = function( $ ) {
 		
 
 		var $window      = $( window ),
@@ -428,14 +427,13 @@ theme = ( function ( theme, $, window, document ) {
     };
 
     theme.videos = {
-        pageLoaded : pageLoaded        
+        documentReady : documentReady        
     };
 
-    theme.components.pageLoaded.push( pageLoaded );
+    theme.components.documentReady.push( documentReady );
     return theme;
 
 }( theme, jQuery, window, document ) );
-
 
 
 
@@ -447,7 +445,7 @@ theme = ( function ( theme, $, window, document ) {
 theme = ( function ( theme, $, window, document ) {
     'use strict';
     
-    var pageLoaded = function() {
+    var documentReady = function( $ ) {
 		
 
 		var $window      = $( window ),
@@ -489,14 +487,13 @@ theme = ( function ( theme, $, window, document ) {
     };
 
     theme.rowFullheight = {
-        pageLoaded : pageLoaded        
+        documentReady : documentReady        
     };
 
-    theme.components.pageLoaded.push( pageLoaded );
+    theme.components.documentReady.push( documentReady );
     return theme;
 
 }( theme, jQuery, window, document ) );
-
 
 
 
@@ -510,7 +507,7 @@ theme = ( function ( theme, $, window, document ) {
     'use strict';
    
    
-    var pageLoaded = function() {
+    var documentReady = function( $ ) {
 		
 		
 		// Using delay is for more accurate calculation
@@ -653,10 +650,10 @@ theme = ( function ( theme, $, window, document ) {
     };
 
     theme.megamenu = {
-        pageLoaded : pageLoaded        
+        documentReady : documentReady        
     };
 
-    theme.components.pageLoaded.push( pageLoaded );
+    theme.components.documentReady.push( documentReady );
     return theme;
 
 }( theme, jQuery, window, document ) );
@@ -795,7 +792,7 @@ theme = ( function ( theme, $, window, document ) {
 theme = ( function ( theme, $, window, document ) {
     'use strict';
     
-    var pageLoaded = function() {
+    var documentReady = function( $ ) {
 	
 		$( '[data-counter-number]' ).each(function() {
 
@@ -825,10 +822,10 @@ theme = ( function ( theme, $, window, document ) {
     };
 
     theme.counter = {
-        pageLoaded : pageLoaded        
+        documentReady : documentReady        
     };
 
-    theme.components.pageLoaded.push( pageLoaded );
+    theme.components.documentReady.push( documentReady );
     return theme;
 
 }( theme, jQuery, window, document ) );
@@ -1118,7 +1115,7 @@ theme = ( function ( theme, $, window, document ) {
     'use strict';
    
    
-    var pageLoaded = function() {
+    var documentReady = function( $ ) {
 		
 			var $window      = $( window ),
 				windowWidth  = $window.width(),
@@ -1221,10 +1218,10 @@ theme = ( function ( theme, $, window, document ) {
 	
 		
     theme.mobileMenu = {
-        pageLoaded : pageLoaded        
+        documentReady : documentReady        
     };
 
-    theme.components.pageLoaded.push( pageLoaded );
+    theme.components.documentReady.push( documentReady );
     return theme;
 
 }( theme, jQuery, window, document ) );
@@ -1418,7 +1415,7 @@ theme = ( function ( theme, $, window, document ) {
 theme = ( function ( theme, $, window, document ) {
     'use strict';
     
-    var pageLoaded = function() {
+    var documentReady = function( $ ) {
         
         var $window      = $( window ),
 		    windowWidth  = $window.width(),
@@ -1526,10 +1523,10 @@ theme = ( function ( theme, $, window, document ) {
 	
 
     theme.parallax = {
-        pageLoaded : pageLoaded
+        documentReady : documentReady        
     };
 
-    theme.components.pageLoaded.push( pageLoaded );
+    theme.components.documentReady.push( documentReady );
     return theme;
 
 }( theme, jQuery, window, document ) );
@@ -1773,7 +1770,7 @@ theme = ( function ( theme, $, window, document ) {
     'use strict';
    
    
-    var pageLoaded = function() {
+    var documentReady = function( $ ) {
 		
 
 		var $window            = $( window ),
@@ -2125,14 +2122,13 @@ theme = ( function ( theme, $, window, document ) {
 	
 		
     theme.flexSlider = {
-        pageLoaded : pageLoaded        
+        documentReady : documentReady        
     };
 
-    theme.components.pageLoaded.push( pageLoaded );
+    theme.components.documentReady.push( documentReady );
     return theme;
 
 }( theme, jQuery, window, document ) );
-
 
 
 
@@ -2145,7 +2141,7 @@ theme = ( function ( theme, $, window, document ) {
 theme = ( function ( theme, $, window, document ) {
     'use strict';
     
-    var pageLoaded = function() {
+    var documentReady = function( $ ) {
 		
 		var $window      = $( window ),
 			windowWidth  = $window.width(),
@@ -2204,14 +2200,13 @@ theme = ( function ( theme, $, window, document ) {
     };
 
     theme.stickyElements = {
-        pageLoaded : pageLoaded        
+        documentReady : documentReady        
     };
 
-    theme.components.pageLoaded.push( pageLoaded );
+    theme.components.documentReady.push( documentReady );
     return theme;
 
 }( theme, jQuery, window, document ) );
-
 
 
 
@@ -2535,7 +2530,7 @@ theme = ( function ( theme, $, window, document ) {
 	}();
 
 
-    var pageLoaded = function() {
+    var documentReady = function( $ ) {
 
 		setTimeout(function() {
 			if ( $( '#brand-text' ).text().length > 0 ) {
@@ -2547,10 +2542,10 @@ theme = ( function ( theme, $, window, document ) {
     };
 
     theme.textEffect = {
-        pageLoaded : pageLoaded        
+        documentReady : documentReady        
     };
 
-    theme.components.pageLoaded.push( pageLoaded );
+    theme.components.documentReady.push( documentReady );
     return theme;
 
 }( theme, jQuery, window, document ) );
@@ -2563,7 +2558,7 @@ theme = ( function ( theme, $, window, document ) {
 theme = ( function ( theme, $, window, document ) {
     'use strict';
     
-    var pageLoaded = function() {
+    var documentReady = function( $ ) {
 		
 		
 		var $window          = $( window ),
@@ -2704,10 +2699,10 @@ theme = ( function ( theme, $, window, document ) {
     };
 
     theme.timeline = {
-        pageLoaded : pageLoaded        
+        documentReady : documentReady        
     };
 
-    theme.components.pageLoaded.push( pageLoaded );
+    theme.components.documentReady.push( documentReady );
     return theme;
 
 }( theme, jQuery, window, document ) );
@@ -2721,7 +2716,7 @@ theme = ( function ( theme, $, window, document ) {
 theme = ( function ( theme, $, window, document ) {
     'use strict';
     
-    var pageLoaded = function() {
+    var documentReady = function( $ ) {
 		
 
 		
@@ -2746,10 +2741,10 @@ theme = ( function ( theme, $, window, document ) {
     };
 
     theme.videoBackground = {
-        pageLoaded : pageLoaded        
+        documentReady : documentReady        
     };
 
-    theme.components.pageLoaded.push( pageLoaded );
+    theme.components.documentReady.push( documentReady );
     return theme;
 
 }( theme, jQuery, window, document ) );
@@ -3126,9 +3121,9 @@ theme = ( function ( theme, $, window, document ) {
 			var pageLoaded    = theme.components.pageLoaded,
 				documentReady = theme.components.documentReady;
 			
-			pageLoaded[0](); //Header
-			documentReady[0]($); //Back to Top
-			documentReady[1]($); //Overlay
+			pageLoaded[0](); //Loader
+			documentReady[0]($); //Header
+			documentReady[1]($); //Back to Top
 			
 			
 	 

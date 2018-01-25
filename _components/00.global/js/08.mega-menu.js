@@ -8,7 +8,7 @@ theme = ( function ( theme, $, window, document ) {
     'use strict';
    
    
-    var pageLoaded = function() {
+    var documentReady = function( $ ) {
 		
 		
 		// Using delay is for more accurate calculation
@@ -151,10 +151,10 @@ theme = ( function ( theme, $, window, document ) {
     };
 
     theme.megamenu = {
-        pageLoaded : pageLoaded        
+        documentReady : documentReady        
     };
 
-    theme.components.pageLoaded.push( pageLoaded );
+    theme.components.documentReady.push( documentReady );
     return theme;
 
 }( theme, jQuery, window, document ) );

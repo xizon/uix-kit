@@ -66,7 +66,7 @@ theme = ( function ( theme, $, window, document ) {
 	}();
 
 
-    var pageLoaded = function() {
+    var documentReady = function( $ ) {
 
 		setTimeout(function() {
 			if ( $( '#brand-text' ).text().length > 0 ) {
@@ -78,10 +78,10 @@ theme = ( function ( theme, $, window, document ) {
     };
 
     theme.textEffect = {
-        pageLoaded : pageLoaded        
+        documentReady : documentReady        
     };
 
-    theme.components.pageLoaded.push( pageLoaded );
+    theme.components.documentReady.push( documentReady );
     return theme;
 
 }( theme, jQuery, window, document ) );

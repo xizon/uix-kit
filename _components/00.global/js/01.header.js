@@ -7,7 +7,7 @@
 theme = ( function ( theme, $, window, document ) {
     'use strict';
     
-    var pageLoaded = function() {
+    var documentReady = function( $ ) {
 	
 
 		//-------- Sticky header area
@@ -38,14 +38,13 @@ theme = ( function ( theme, $, window, document ) {
     };
 
     theme.header = {
-        pageLoaded : pageLoaded        
+        documentReady : documentReady        
     };
 
-    theme.components.pageLoaded.push( pageLoaded );
+    theme.components.documentReady.push( documentReady );
     return theme;
 
 }( theme, jQuery, window, document ) );
-
 
 
 		

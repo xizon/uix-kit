@@ -7,7 +7,7 @@
 theme = ( function ( theme, $, window, document ) {
     'use strict';
     
-    var pageLoaded = function() {
+    var documentReady = function( $ ) {
 	
 		$( '[data-counter-number]' ).each(function() {
 
@@ -37,10 +37,10 @@ theme = ( function ( theme, $, window, document ) {
     };
 
     theme.counter = {
-        pageLoaded : pageLoaded        
+        documentReady : documentReady        
     };
 
-    theme.components.pageLoaded.push( pageLoaded );
+    theme.components.documentReady.push( documentReady );
     return theme;
 
 }( theme, jQuery, window, document ) );

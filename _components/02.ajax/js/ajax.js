@@ -20,9 +20,9 @@ theme = ( function ( theme, $, window, document ) {
 			var pageLoaded    = theme.components.pageLoaded,
 				documentReady = theme.components.documentReady;
 			
-			pageLoaded[0](); //Header
-			documentReady[0]($); //Back to Top
-			documentReady[1]($); //Overlay
+			pageLoaded[0](); //Loader
+			documentReady[0]($); //Header
+			documentReady[1]($); //Back to Top
 			
 			
 	 

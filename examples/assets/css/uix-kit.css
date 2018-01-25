@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit
  * ## Description         :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Version             :  0.0.7
- * ## Last Update         :  January 24, 2018
+ * ## Last Update         :  January 25, 2018
  * ## Created             :  by UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Compatible With     :  Bootstrap 3.x, Chinese, English
@@ -1563,12 +1563,12 @@ li.multi-column > ul li .nav-arrow {
    12. Loader                                               
 /* ====================================================== */
 .loader {
-    top: 0;
+    bottom: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 65px;
+    height: 65px;
     position: fixed;
-    background-color: #fff;
+    background-color: transparent;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
   /* Chrome all / Safari all */
@@ -1582,6 +1582,11 @@ li.multi-column > ul li .nav-arrow {
     align-items: center;
     justify-content: center;
     z-index: 99999;
+}
+
+.loader svg {
+    width: 65px;
+    height: 65px;
 }
 
 .loader svg path {

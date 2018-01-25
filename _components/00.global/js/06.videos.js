@@ -7,7 +7,7 @@
 theme = ( function ( theme, $, window, document ) {
     'use strict';
     
-    var pageLoaded = function() {
+    var documentReady = function( $ ) {
 		
 
 		var $window      = $( window ),
@@ -63,11 +63,10 @@ theme = ( function ( theme, $, window, document ) {
     };
 
     theme.videos = {
-        pageLoaded : pageLoaded        
+        documentReady : documentReady        
     };
 
-    theme.components.pageLoaded.push( pageLoaded );
+    theme.components.documentReady.push( documentReady );
     return theme;
 
 }( theme, jQuery, window, document ) );
-

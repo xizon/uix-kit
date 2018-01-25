@@ -9,7 +9,7 @@ theme = ( function ( theme, $, window, document ) {
     
     var pageLoaded = function() {
 		// Remove loader
-		$( '.loader' ).delay( 1500 ).fadeOut();
+		$( '.loader' ).fadeOut();
 		
     };
 
