@@ -1407,6 +1407,155 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
+
+/*! 
+ *************************************
+ * Parallax
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+    
+    var pageLoaded = function() {
+        
+        var $window      = $( window ),
+		    windowWidth  = $window.width(),
+		    windowHeight = $window.height();
+
+        
+
+		//  Initialize
+		parallaxInit();
+		$window.on('resize', function() {
+			parallaxInit();
+		} );
+		
+		function parallaxInit() {
+			$( '.parallax' ).each(function() {
+				var $this       = $( this ),
+				    dataAtt     = $this.data( 'parallax' ),
+					dataH       = $this.data( 'height' ),
+					dataW       = $this.data( 'width' ),
+					dataImg     = $this.data( 'image-src' ),
+					dataSkew    = $this.data( 'skew' ),
+					dataSpeed   = $this.data( 'speed' ),
+					dataElSpeed = $this.find( '.parallax-element' ).data( 'el-speed' ),
+					windowWidth = $window.width();
+				
+				
+				if( typeof dataAtt === typeof undefined ) { // If there is no data-xxx, save current source to it
+					dataAtt = 'fixed';
+				}
+				
+				if( typeof dataW != typeof undefined ) {
+					$this.css( {
+						'width': dataW 
+					} );
+	
+				}
+				
+				if( typeof dataH != typeof undefined ) {
+					
+					$this.css( {
+						'height': dataH
+					} );
+					$this.find( '.parallax-img' ).css( {
+						'max-height': dataH
+					} );	
+				}
+				
+				if( typeof dataSpeed === typeof undefined ) { // If there is no data-xxx, save current source to it
+					dataSpeed = 0;
+				}	
+				
+				if( typeof dataElSpeed === typeof undefined ) { // If there is no data-xxx, save current source to it
+					dataElSpeed = 0;
+				}	
+				
+				
+				
+				
+				if ( 
+					$this.hasClass( 'height-10' ) || 
+					$this.hasClass( 'height-20' ) || 
+					$this.hasClass( 'height-30' ) || 
+					$this.hasClass( 'height-40' ) || 
+					$this.hasClass( 'height-50' ) || 
+					$this.hasClass( 'height-60' ) || 
+					$this.hasClass( 'height-70' ) || 
+					$this.hasClass( 'height-80' ) || 
+					$this.hasClass( 'height-90' ) || 
+					$this.hasClass( 'height-100' )
+				 ) {		
+					
+					var newH = $this.height();
+					$this.css( {
+						'height': newH + 'px'
+					} );	
+					$this.find( '.parallax-img' ).css( {
+						'max-height': newH + 'px'
+					} );	
+				 }
+				
+				
+				//If the ".pos-vertical-align" has more content
+				if ( windowWidth <= 768 ) {
+					
+					if ( $this.find( '.pos-vertical-align' ).height() >= $this.find( '.parallax-img' ).height() ) {
+						$this.find( '.pos-vertical-align' ).addClass( 'relative' );
+						$this.find( '.parallax-img' ).hide();	
+					}
+					
+
+				}
+
+				
+				
+				if( typeof dataImg != typeof undefined ) {
+					$this.css( {
+						'background': 'url(' + dataImg + ') 50% 0 no-repeat ' + dataAtt
+					} );
+				}
+				
+				if( typeof dataSkew != typeof undefined ) {
+					$this.css( {
+						'-ms-transform'     : 'skew(0deg, '+dataSkew+'deg)', /* IE 9 */
+						'-webkit-transform' : 'skew(0deg, '+dataSkew+'deg)', /* Chrome, Safari, Opera */
+						'transform'         : 'skew(0deg, '+dataSkew+'deg)'
+					} );
+				}	
+				
+	
+				$this.bgParallax( "50%", dataSpeed );
+				
+				$window.on( 'scroll touchmove', function() {
+					var scrolled = $window.scrollTop();
+					$this.find( '.parallax-element' ).css( 'margin-top', ( scrolled * dataElSpeed ) + 'px' );
+				});	
+		
+			});
+			
+		
+	
+		}
+		
+	
+
+    };
+
+	
+
+    theme.parallax = {
+        pageLoaded : pageLoaded        
+    };
+
+    theme.components.pageLoaded.push( pageLoaded );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
 /*! 
  *************************************
  * Pricing
@@ -1515,133 +1664,6 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-
-
-
-
-/*! 
- *************************************
- * Parallax
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-    
-    var pageLoaded = function() {
-        
-        var $window      = $( window ),
-		    windowWidth  = $window.width(),
-		    windowHeight = $window.height();
-
-        
-
-		//  Initialize
-		parallaxInit();
-		$window.on('resize', function() {
-			parallaxInit();
-		} );
-		
-		function parallaxInit() {
-			$( '.parallax' ).each(function() {
-				var $this       = $( this ),
-				    dataAtt     = $this.data( 'parallax' ),
-					dataH       = $this.data( 'height' ),
-					dataW       = $this.data( 'width' ),
-					dataImg     = $this.data( 'image-src' ),
-					dataSkew    = $this.data( 'skew' ),
-					dataSpeed   = $this.data( 'speed' );
-				
-				
-				if( typeof dataAtt === typeof undefined ) { // If there is no data-xxx, save current source to it
-					dataAtt = 'fixed';
-				}
-				
-				if( typeof dataW != typeof undefined ) {
-					$this.css( {
-						'width': dataW 
-					} );
-	
-				}
-				
-				if( typeof dataH != typeof undefined ) {
-					$this.addClass( 'cover' );
-					$this.css( {
-						'height': dataH
-					} );
-					$this.find( '.parallax-img' ).css( {
-						'max-height': dataH
-					} );	
-				}
-				
-				if( typeof dataSpeed === typeof undefined ) { // If there is no data-xxx, save current source to it
-					dataSpeed = 0;
-				}	
-				
-				
-				if ( 
-					$this.hasClass( 'height-10' ) || 
-					$this.hasClass( 'height-20' ) || 
-					$this.hasClass( 'height-30' ) || 
-					$this.hasClass( 'height-40' ) || 
-					$this.hasClass( 'height-50' ) || 
-					$this.hasClass( 'height-60' ) || 
-					$this.hasClass( 'height-70' ) || 
-					$this.hasClass( 'height-80' ) || 
-					$this.hasClass( 'height-90' ) || 
-					$this.hasClass( 'height-100' )
-				 ) {		
-					
-					var newH = $this.height();
-					$this.css( {
-						'height': newH + 'px'
-					} );	
-					$this.find( '.parallax-img' ).css( {
-						'max-height': newH + 'px'
-					} );	
-				 }
-				
-				
-				if( typeof dataImg != typeof undefined ) {
-					$this.css( {
-						'background': 'url(' + dataImg + ') 50% 0 no-repeat ' + dataAtt
-					} );
-				}
-				
-				if( typeof dataSkew != typeof undefined ) {
-					$this.css( {
-						'-ms-transform'     : 'skew(0deg, '+dataSkew+'deg)', /* IE 9 */
-						'-webkit-transform' : 'skew(0deg, '+dataSkew+'deg)', /* Chrome, Safari, Opera */
-						'transform'         : 'skew(0deg, '+dataSkew+'deg)'
-					} );
-				}	
-				
-	
-				$this.bgParallax( "50%", dataSpeed );
-				
-				$window.on( 'scroll touchmove', function() {
-					var scrolled = $window.scrollTop();
-					$this.find( '.parallax-element' ).css( 'margin-top', ( scrolled * dataSpeed ) + 'px' );
-				});	
-		
-			});
-		
-	
-		}
-		
-	
-
-    };
-
-	
-
-    theme.parallax = {
-        pageLoaded : pageLoaded        
-    };
-
-    theme.components.pageLoaded.push( pageLoaded );
-    return theme;
-
-}( theme, jQuery, window, document ) );
 
 
 
@@ -2213,87 +2235,6 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-/*! 
- *************************************
- * Testimonials Carousel
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-    
-    var documentReady = function( $ ) {
-    
-		var $obj = $( '.custom-testimonials .flexslider' );
-		$obj.flexslider({
-			animation         : 'slide',
-			slideshow         : true,
-			smoothHeight      : true,
-			controlNav        : true,
-			manualControls    : '.slides-custom-control li',
-			directionNav      : false,
-			animationSpeed    : 600,
-			slideshowSpeed    : 7000,
-			selector          : ".slides > li",
-			drag              : true,
-			start: function(slider){
-				$obj.on( 'mousedown', function( e ) {
-					if ( $obj.data( 'flexslider' ).animating ) {
-						return;
-					}
-						
-					$( this ).addClass('dragging');
-					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
-					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
-					$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
-					$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );
-				} );
-			
-				$obj.on( 'mouseup', function( e ) {
-					if ( $obj.data('flexslider').animating ) {
-						return;
-					}
-						
-					$( this ).removeClass('dragging');
-					var origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
-					    origin_mouse_y = $( this ).data( 'origin_mouse_y' );
-					
-					if ( 'horizontal' === $obj.data('flexslider').vars.direction ) {
-						if ( e.pageX > origin_mouse_x ) {
-							$obj.flexslider('prev');
-						}
-						if ( e.pageX < origin_mouse_x ) {
-							$obj.flexslider('next');
-						}
-					} else {
-						if ( e.pageY > origin_mouse_y ) {
-							$obj.flexslider('prev');
-						}
-						if ( e.pageY < origin_mouse_y ) {
-							$obj.flexslider('next');
-						}
-					}
-				} );
-			}
-		});
-		
-		
-    };
-
-    theme.testimonials = {
-        documentReady : documentReady        
-    };
-
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
-
-
-
-
-
-
-
 
 /*! 
  *************************************
@@ -2711,6 +2652,87 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
+
+/*! 
+ *************************************
+ * Testimonials Carousel
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+    
+		var $obj = $( '.custom-testimonials .flexslider' );
+		$obj.flexslider({
+			animation         : 'slide',
+			slideshow         : true,
+			smoothHeight      : true,
+			controlNav        : true,
+			manualControls    : '.slides-custom-control li',
+			directionNav      : false,
+			animationSpeed    : 600,
+			slideshowSpeed    : 7000,
+			selector          : ".slides > li",
+			drag              : true,
+			start: function(slider){
+				$obj.on( 'mousedown', function( e ) {
+					if ( $obj.data( 'flexslider' ).animating ) {
+						return;
+					}
+						
+					$( this ).addClass('dragging');
+					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
+					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
+					$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
+					$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );
+				} );
+			
+				$obj.on( 'mouseup', function( e ) {
+					if ( $obj.data('flexslider').animating ) {
+						return;
+					}
+						
+					$( this ).removeClass('dragging');
+					var origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
+					    origin_mouse_y = $( this ).data( 'origin_mouse_y' );
+					
+					if ( 'horizontal' === $obj.data('flexslider').vars.direction ) {
+						if ( e.pageX > origin_mouse_x ) {
+							$obj.flexslider('prev');
+						}
+						if ( e.pageX < origin_mouse_x ) {
+							$obj.flexslider('next');
+						}
+					} else {
+						if ( e.pageY > origin_mouse_y ) {
+							$obj.flexslider('prev');
+						}
+						if ( e.pageY < origin_mouse_y ) {
+							$obj.flexslider('next');
+						}
+					}
+				} );
+			}
+		});
+		
+		
+    };
+
+    theme.testimonials = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
+
+
+
 
 
 /*! 
@@ -3137,8 +3159,8 @@ theme = ( function ( theme, $, window, document ) {
 			documentReady[1]($); //Back to Top
 			
 			
-	 
 		}
+
 	};
 	
 		

@@ -222,16 +222,16 @@ li.multi-column > ul li .nav-arrow {
 .menu-toggle {
   position: absolute;
   display: none;
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   top: 20px;
   right: 30px;
   cursor: pointer;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  background: $primary-text-color1;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
+  background: #fff;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  border-radius: 100%;
   -moz-transition: .1s ease-in-out;
   -o-transition: .1s ease-in-out;
   -webkit-transition: .1s ease-in-out;
@@ -273,25 +273,25 @@ li.multi-column > ul li .nav-arrow {
   span {
     display: block;
     position: absolute;
-    top: 9px;
-    left: 7px;
+    top: 14px;
+    left: 12px;
     width: 17px;
     height: 1px;
-    background: #fff;
+    background: #000;
     -webkit-transition: 350ms;
     -moz-transition: 350ms;
     -o-transition: 350ms;
     transition: 350ms;
   }
   &.open span {
-    left: 11px;
+    left: 16px;
   }
   span {
       
     @for $i from 1 to 3 {
 
       &:nth-child(#{$i+1}) {
-          top: #{9+($i*5)}px;
+          top: #{14+($i*5)}px;
       }
     }	  
 

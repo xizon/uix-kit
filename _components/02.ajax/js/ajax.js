@@ -31,8 +31,8 @@ theme = ( function ( theme, $, window, document ) {
 			documentReady[1]($); //Back to Top
 			
 			
-	 
 		}
+
 	};
 	
 		

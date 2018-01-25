@@ -718,6 +718,7 @@ section.site-google-map, .section.site-google-map {
         -webkit-transform: none;
         -ms-transform: none;
         transform: none;
+        padding-top: 1.5rem;
     }
 }
 
@@ -1016,16 +1017,16 @@ li.multi-column > ul li .nav-arrow {
 .menu-toggle {
     position: absolute;
     display: none;
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     top: 20px;
     right: 30px;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
-    background: #212121;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    border-radius: 2px;
+    background: #fff;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
     -moz-transition: .1s ease-in-out;
     -o-transition: .1s ease-in-out;
     -webkit-transition: .1s ease-in-out;
@@ -1066,11 +1067,11 @@ li.multi-column > ul li .nav-arrow {
 .menu-toggle span {
     display: block;
     position: absolute;
-    top: 9px;
-    left: 7px;
+    top: 14px;
+    left: 12px;
     width: 17px;
     height: 1px;
-    background: #fff;
+    background: #000;
     -webkit-transition: 350ms;
     -moz-transition: 350ms;
     -o-transition: 350ms;
@@ -1078,15 +1079,15 @@ li.multi-column > ul li .nav-arrow {
 }
 
 .menu-toggle.open span {
-    left: 11px;
+    left: 16px;
 }
 
 .menu-toggle span:nth-child(2) {
-    top: 14px;
+    top: 19px;
 }
 
 .menu-toggle span:nth-child(3) {
-    top: 19px;
+    top: 24px;
 }
 
 .menu-toggle.open span:first-child {
@@ -3056,6 +3057,58 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
+   Features
+/* ====================================================== */
+.custom-feature .icon i {
+    border: 1px #090909 solid;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    -moz-transition: .1s ease-in-out;
+    -o-transition: .1s ease-in-out;
+    -webkit-transition: .1s ease-in-out;
+    transition: .1s ease-in-out;
+    font-size: 32px;
+}
+
+.custom-feature .icon-side i {
+    margin-right: .4em;
+}
+
+.custom-feature .title {
+    font-size: 18px;
+    letter-spacing: 0;
+}
+
+.custom-feature .title i {
+    -moz-transition: .1s ease-in-out;
+    -o-transition: .1s ease-in-out;
+    -webkit-transition: .1s ease-in-out;
+    transition: .1s ease-in-out;
+}
+
+.custom-feature .title:hover i {
+    -webkit-transform: rotate(30deg);
+    -ms-transform: rotate(30deg);
+    transform: rotate(30deg);
+}
+
+.custom-feature .desc {
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    line-height: 1.6;
+    padding: .2em 0 1.5em;
+}
+
+.custom-feature .desc.desc-singlerow {
+    padding-bottom: 1.5em;
+}
+
+/* ====================================================== 
    Form                                     
 /* ====================================================== */
 /* 1) Controls */
@@ -4101,7 +4154,7 @@ li.sidr-class-multi-column > ul .sidr-class-multi-column-title {
     height: 100vh;
     width: 100%;
     background-attachment: fixed;
-    background-position: 50% 0;
+    background-position: center center;
     background-repeat: no-repeat;
     -webkit-background-size: cover !important;
     -moz-background-size: cover !important;
@@ -4113,23 +4166,9 @@ li.sidr-class-multi-column > ul .sidr-class-multi-column-title {
     width: 100%;
 }
 
-.parallax-container {
+.parallax-default-size {
     height: 300px;
-  /* Required, associated with uix-kit.js */
     width: 100%;
-  /* Required, associated with uix-kit.js  */;
-}
-
-.parallax-element {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.parallax-element .pos-vertical-align {
-    height: 100%;
 }
 
 .parallax-auto {

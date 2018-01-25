@@ -17,7 +17,7 @@ var globs = {
 	jsTar        : 'examples/assets/js',
 	cssTar       : 'examples/assets/css',
 	cssRTLTar    : 'examples/assets/css/rtl',
-	htmlIncTar   : 'examples/include-*.html',
+	cleanFilesTar: [ 'examples/include-*.html', '_components/**/scss/*.css', '_components/**/scss-rtl/*.css' ],
 	htmlFiles    : '_components/**/*.{html, htm}',
     js           : '_components/**/js/*.js',
     scss         : '_components/**/scss/*.scss',
@@ -46,7 +46,7 @@ var customComment = `
  */
 //Delete include files
 gulp.task('clean-scripts', [ 'html' ], function () {
-  return gulp.src( globs.htmlIncTar, {read: true})
+  return gulp.src( globs.cleanFilesTar, {read: true})
 	.pipe(clean());
 });
 

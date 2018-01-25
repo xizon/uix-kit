@@ -7,35 +7,24 @@
   height: 100vh;
   width: 100%;
   background-attachment: fixed;
-  background-position: 50% 0;
+  background-position: center center;
   background-repeat: no-repeat;
   -webkit-background-size: cover !important;
   -moz-background-size: cover !important;
   background-size: cover !important;
 }
 
+
 .parallax-window {
   height: 100%;
   width: 100%;
 }
 
-.parallax-container {
+.parallax-default-size {
   height: 300px;
-  /* Required, associated with uix-kit.js */
   width: 100%;
-  /* Required, associated with uix-kit.js  */
 }
 
-.parallax-element {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  .pos-vertical-align {
-    height: 100%;
-  }
-}
 
 .parallax-auto {
   height: auto;
@@ -44,3 +33,4 @@
     visibility: hidden;
   }
 }
+

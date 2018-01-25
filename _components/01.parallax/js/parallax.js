@@ -29,7 +29,9 @@ theme = ( function ( theme, $, window, document ) {
 					dataW       = $this.data( 'width' ),
 					dataImg     = $this.data( 'image-src' ),
 					dataSkew    = $this.data( 'skew' ),
-					dataSpeed   = $this.data( 'speed' );
+					dataSpeed   = $this.data( 'speed' ),
+					dataElSpeed = $this.find( '.parallax-element' ).data( 'el-speed' ),
+					windowWidth = $window.width();
 				
 				
 				if( typeof dataAtt === typeof undefined ) { // If there is no data-xxx, save current source to it
@@ -44,7 +46,7 @@ theme = ( function ( theme, $, window, document ) {
 				}
 				
 				if( typeof dataH != typeof undefined ) {
-					$this.addClass( 'cover' );
+					
 					$this.css( {
 						'height': dataH
 					} );
@@ -56,6 +58,12 @@ theme = ( function ( theme, $, window, document ) {
 				if( typeof dataSpeed === typeof undefined ) { // If there is no data-xxx, save current source to it
 					dataSpeed = 0;
 				}	
+				
+				if( typeof dataElSpeed === typeof undefined ) { // If there is no data-xxx, save current source to it
+					dataElSpeed = 0;
+				}	
+				
+				
 				
 				
 				if ( 
@@ -81,6 +89,19 @@ theme = ( function ( theme, $, window, document ) {
 				 }
 				
 				
+				//If the ".pos-vertical-align" has more content
+				if ( windowWidth <= 768 ) {
+					
+					if ( $this.find( '.pos-vertical-align' ).height() >= $this.find( '.parallax-img' ).height() ) {
+						$this.find( '.pos-vertical-align' ).addClass( 'relative' );
+						$this.find( '.parallax-img' ).hide();	
+					}
+					
+
+				}
+
+				
+				
 				if( typeof dataImg != typeof undefined ) {
 					$this.css( {
 						'background': 'url(' + dataImg + ') 50% 0 no-repeat ' + dataAtt
@@ -100,10 +121,11 @@ theme = ( function ( theme, $, window, document ) {
 				
 				$window.on( 'scroll touchmove', function() {
 					var scrolled = $window.scrollTop();
-					$this.find( '.parallax-element' ).css( 'margin-top', ( scrolled * dataSpeed ) + 'px' );
+					$this.find( '.parallax-element' ).css( 'margin-top', ( scrolled * dataElSpeed ) + 'px' );
 				});	
 		
 			});
+			
 		
 	
 		}
