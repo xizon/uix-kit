@@ -11,19 +11,19 @@ theme = ( function ( theme, $, window, document ) {
     var documentReady = function( $ ) {
 		
 	
-		$( '.gallery-custom' ).each( function() {
+		$( '.custom-gallery' ).each( function() {
 			var type = $( this ).data( 'show-type' );
 			
 			// Masonry
 			if ( type.indexOf( 'masonry' ) >= 0  ) {
 				$( this ).addClass( 'masonry-container' );
-				$( this ).find( '.custom-gallery-' ).addClass( 'masonry-item' );
+				$( this ).find( '.custom-gallery-item' ).addClass( 'masonry-item' );
 			}
 			
 			// Filterable
 			if ( type.indexOf( 'filter' ) >= 0  ) {
 				$( this ).addClass( 'filter-container' );
-				$( this ).find( '.custom-gallery-' ).addClass( 'filter-item' );	
+				$( this ).find( '.custom-gallery-item' ).addClass( 'filter-item' );	
 			}	
 		
 		});

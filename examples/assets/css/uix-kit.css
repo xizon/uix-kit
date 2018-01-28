@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit
  * ## Description         :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Version             :  0.0.7
- * ## Last Update         :  January 26, 2018
+ * ## Last Update         :  January 28, 2018
  * ## Created             :  by UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Compatible With     :  Bootstrap 3.x, Chinese, English
@@ -4247,40 +4247,6 @@ li.sidr-class-multi-column > ul .sidr-class-multi-column-title {
 }
 
 /* ====================================================== 
-   Parallax                                               
-/* ====================================================== */
-.parallax {
-    position: relative;
-    height: 100vh;
-    width: 100%;
-    background-attachment: fixed;
-    background-position: center center;
-    background-repeat: no-repeat;
-    -webkit-background-size: cover !important;
-    -moz-background-size: cover !important;
-    background-size: cover !important;
-}
-
-.parallax-window {
-    height: 100%;
-    width: 100%;
-}
-
-.parallax-default-size {
-    height: 300px;
-    width: 100%;
-}
-
-.parallax-auto {
-    height: auto;
-    width: 100%;
-}
-
-.parallax-auto .parallax-img {
-    visibility: hidden;
-}
-
-/* ====================================================== 
    Pricing
 /* ====================================================== */
 .custom-price {
@@ -4421,6 +4387,40 @@ li.sidr-class-multi-column > ul .sidr-class-multi-column-title {
     filter: alpha(opacity=65);
     -moz-opacity: 0.65;
     opacity: 0.65;
+}
+
+/* ====================================================== 
+   Parallax                                               
+/* ====================================================== */
+.parallax {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    background-attachment: fixed;
+    background-position: center center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover !important;
+    -moz-background-size: cover !important;
+    background-size: cover !important;
+}
+
+.parallax-window {
+    height: 100%;
+    width: 100%;
+}
+
+.parallax-default-size {
+    height: 300px;
+    width: 100%;
+}
+
+.parallax-auto {
+    height: auto;
+    width: 100%;
+}
+
+.parallax-auto .parallax-img {
+    visibility: hidden;
 }
 
 /* ====================================================== 
