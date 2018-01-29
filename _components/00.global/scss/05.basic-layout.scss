@@ -126,6 +126,8 @@
 }
 
 /* Custom Grid */
+$seamless-grid-pad : 15px;
+
 .seamless-grid,
 [class*='seamless-col-'] {
   -moz-box-sizing: border-box;
