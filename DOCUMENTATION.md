@@ -52,7 +52,7 @@ $ gulp default
         <script src="assets/js/min/modernizr.min.js?ver=3.5.0"></script>
         
         <!--[if lt IE 9]>
-            <script type="text/javascript" src="assets/js/min/respond.min.js?ver=1.4.2"></script>
+            <script src="assets/js/min/respond.min.js?ver=1.4.2"></script>
         <![endif]-->
         
         <!-- Compatibility  end -->
@@ -68,20 +68,20 @@ $ gulp default
 		============================================= -->
         
         <!-- Basic  -->
-        <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css?ver=3.3.7" media="all"/>
-		<link rel="stylesheet" type="text/css" href="assets/css/video.min.css?ver=5.19" media="all"/>
-        <link rel="stylesheet" type="text/css" href="assets/css/flexslider.min.css?ver=2.6.2" media="all" />
-		<link rel="stylesheet" type="text/css" href="assets/css/animate.min.css?ver=3.5.2" media="all" />
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css?ver=3.3.7" media="all"/>
+		<link rel="stylesheet" href="assets/css/video.min.css?ver=5.19" media="all"/>
+        <link rel="stylesheet" href="assets/css/flexslider.min.css?ver=2.6.2" media="all" />
+		<link rel="stylesheet" href="assets/css/animate.min.css?ver=3.5.2" media="all" />
 		
         <!-- Icons  -->
-        <link rel="stylesheet" type="text/css" href="assets/fonts/fontawesome/font-awesome.min.css?ver=4.5" media="all" />  
+        <link rel="stylesheet" href="assets/fonts/fontawesome/font-awesome.min.css?ver=4.5" media="all" />  
         
         <!-- Theme  -->
-        <link rel="stylesheet" type="text/css" href="assets/css/uix-kit.min.css?ver=1.0.0" media="all"/>
+        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=1.0.0" media="all"/>
         
      
          <!--[if lt IE 10]>
-           <link rel="stylesheet" type="text/css" href="assets/css/uix-kit.IE.css?ver=1.0.0" media="all" />
+           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=1.0.0" media="all" />
         <![endif]-->
         
         
