@@ -32,20 +32,55 @@ theme = ( function ( theme, $, window, document ) {
 										  loop       : true,
 										  controls   : true,
 										  controlBar : {
-											muteToggle: false
+											  muteToggle: false
 										  }
 									  }
+					
+					
 									});		
 			
 			
 			myPlayer.ready(function() {
 				
-				  // set, tell the player it's in fullscreen 
+				  /* Set, tell the player it's in fullscreen  */
 				  //myPlayer.exitFullscreen();
 				  //myPlayer.requestFullscreen();
 				  myPlayer.play();
+				
+				  /* Disable control bar play button click */
+				  //myPlayer.controls( false );
+				
+				
+				
+				/* Display video playback progress  */
+				myPlayer.on( 'timeupdate', function() {
+					
+					var duration       =  this.duration(),
+						progressAmount = '0%';
+					if ( duration > 0 ) {
+						progressAmount = ((this.currentTime() / duration)*100) + "%";
+					}
+					
+					console.log( progressAmount );
+				});
+				
+
+				
+				
+				  /* Callback for when a video has ended */
+				  myPlayer.on( 'ended', function() {
+						console.log( 'video is done!' );
+				  });
+				
+				
+				  
+				
 
 			});
+			
+
+
+			
 			
 			$( '.modal-box .close-btn' ).on( 'click', function() {
 				
