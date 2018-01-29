@@ -38,7 +38,13 @@ $ gulp default
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <!-- Mobile Settings end -->
         
-        
+		<!-- Core library
+		============================================= -->
+		<script src="assets/js/wp-jquery/jquery.min.js?ver=2.1.3"></script>
+		<script src="assets/js/wp-jquery/jquery.migrate.min.js?ver=1.4.1"></script>
+		<!-- Core library  end -->
+		
+		
 		<!-- Compatibility
 		============================================= -->
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -46,7 +52,7 @@ $ gulp default
         <script src="assets/js/min/modernizr.min.js?ver=3.5.0"></script>
         
         <!--[if lt IE 9]>
-            <script type='text/javascript' src='assets/js/min/respond.min.js?ver=1.4.2'></script>
+            <script type="text/javascript" src="assets/js/min/respond.min.js?ver=1.4.2"></script>
         <![endif]-->
         
         <!-- Compatibility  end -->
@@ -111,8 +117,6 @@ $ gulp default
   
 
     <!-- Basic Script -->
-	<script src="assets/js/wp-jquery/jquery.min.js?ver=2.1.3"></script>
-    <script src="assets/js/wp-jquery/jquery.migrate.min.js?ver=1.4.1"></script>
     <script src="assets/js/min/jquery.mousewheel.min.js?ver=3.1.12"></script>
     <script src="assets/js/min/jquery.easing.min.js?ver=1.3"></script> 
     <script src="assets/js/min/jquery.bgParallax.min.js?ver=1.1.3"></script> 
