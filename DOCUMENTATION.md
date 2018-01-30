@@ -172,7 +172,7 @@ The `examples/assets-demo/` folder can be deleted.
 
 #### File Structures:
 
-```sh
+<pre>
 
     uix-kit/
     ├── README.md
@@ -207,7 +207,7 @@ The `examples/assets-demo/` folder can be deleted.
     │       │   └── videos/
 	└──   
 	
-```
+</pre>
 
 
 #### Core CSS:
