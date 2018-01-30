@@ -380,8 +380,13 @@ theme = ( function ( theme, $, window, document ) {
 
 		//Check out: http://docs.videojs.com/tutorial-player-workflows.html
 		$( '.web-video-btn' ).off( 'click' ).on( 'click', function() {
-			var vid = $( this ).data( 'video-id' ),
+			
+			var newMaxW  = windowWidth - 80,
+				newMaxH  = windowHeight - 80,
+				vid      = $( this ).data( 'video-id' ),
 				myPlayer = videojs( vid, {
+					                  width     : 1,
+					                  height    : 1,
 									  controlBar: {
 										  muteToggle : false,
 										  autoplay   : true,
@@ -393,9 +398,9 @@ theme = ( function ( theme, $, window, document ) {
 									  }
 					
 					
-									});		
-
+									});
 			
+
 			myPlayer.ready(function() {
 				
 
@@ -405,8 +410,6 @@ theme = ( function ( theme, $, window, document ) {
 					//Get Video Dimensions
 					var curW    = this.videoWidth(),
 				    	curH    = this.videoHeight(),
-						newMaxW = windowWidth - 80,
-						newMaxH = windowHeight - 80,
 						newW    = curW,
 						newH    = curH;
 
@@ -1356,7 +1359,10 @@ theme = ( function ( theme, $, window, document ) {
 			if ( $obj.hasClass( 'fullscreen' ) ) {
 				setTimeout( function() {
 					$( 'html' ).css( 'overflow-y', 'hidden' );
-					$obj.find( '.content' ).css( 'overflow-y', 'scroll' );
+					if ( !$obj.hasClass( 'video' ) ) {
+						$obj.find( '.content' ).css( 'overflow-y', 'scroll' );
+					}
+					
 				}, getTransitionDuration( '.modal-box#'+dataID ) );
 				
 			}

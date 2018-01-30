@@ -57,7 +57,10 @@ theme = ( function ( theme, $, window, document ) {
 			if ( $obj.hasClass( 'fullscreen' ) ) {
 				setTimeout( function() {
 					$( 'html' ).css( 'overflow-y', 'hidden' );
-					$obj.find( '.content' ).css( 'overflow-y', 'scroll' );
+					if ( !$obj.hasClass( 'video' ) ) {
+						$obj.find( '.content' ).css( 'overflow-y', 'scroll' );
+					}
+					
 				}, getTransitionDuration( '.modal-box#'+dataID ) );
 				
 			}

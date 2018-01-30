@@ -54,30 +54,69 @@ The `examples/assets-demo/` folder can be deleted.
 > `00.global` and `01.index` are required components.
 
 
+#### File Structures:
+
+```sh
+
+    uix-kit/
+    ├── README.md
+    ├── CHANGELOG.md
+    ├── CONTRIBUTING.md
+	├── DOCUMENTATION.md
+    ├── gulpfile.js
+    ├── LICENSE
+	├── readme.txt
+    ├── package-lock.json
+	├── package.json
+	├── _config.yml
+    ├── _grid/
+    ├── _screenshots/
+    ├── _components/
+    │   ├── 00.global/
+    │   └── 01.*/
+	│   └── 02.*/
+	│   
+    ├── examples/
+    │   ├── assets/
+    │       │   └── css/
+    │       │   │   └── rtl/
+    │       │   └── fonts/
+    │       │   └── images/
+    │       │   └── js/
+    │       │   │   └── min/	 
+    │       │   │   └── wp-jquery/	
+	│       │   │   
+    │   ├── assets-demo/
+    │       │   └── images/
+    │       │   └── videos/
+	│       │   │   
+	└──
+```
 
 
-#### CSS:
+#### Core CSS:
 
 *   `examples/assets/css/uix-kit.css`
 *   `examples/assets/css/uix-kit.min.css`
 *   `examples/assets/css/uix-kit.IE.css`
 
-#### CSS(RTL):
+#### Core CSS(RTL):
 
 *   `examples/assets/css/rtl/uix-kit-rtl.css`
 
-#### Javascript:
+#### Core Javascript:
 
 *   `examples/assets/js/uix-kit.js`
 *   `examples/assets/js/uix-kit.min.js`
 
-#### Images:
+#### Core Images:
 
 *   `examples/assets/images/*`
 
-#### Fonts:
+#### Core Fonts:
 
 *   `examples/assets/fonts/*`
+
 
 ### 2\. PSD Grid Templates
 
