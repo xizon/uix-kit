@@ -17,6 +17,39 @@ theme = ( function ( theme, $, window, document ) {
 			specialSliderType  = [ '.custom-primary-flexslider', '.custom-controls', '.custom-itemgrid', '.custom-counter-show' ];
 		
 		
+		// Video embed 
+		function videoEmbedInit() {
+			$( '.web-video-embed' ).each( function()  {
+				var $this         = $( this ),
+					curVideoID    = $this.find( '.video-js' ).attr( 'id' ),
+					dataAuto      = $this.data( 'embed-video-autoplay' ),
+					dataLoop      = $this.data( 'embed-video-loop' );
+
+
+				if( typeof dataAuto === typeof undefined ) {
+					dataAuto = true;
+				}
+				if( typeof dataLoop === typeof undefined ) {
+					dataLoop = true;
+				}
+				
+
+				var myPlayer = videojs( curVideoID );
+
+
+				myPlayer.ready(function() {
+
+					if ( dataAuto && dataLoop ) {
+						myPlayer.play();
+					}
+
+
+				});
+
+			});	
+		}	
+		
+		
 		// Normal slideshow
 		var $sliderDefault, specialSliderClasses = '';
 		for ( var i = 0; i < specialSliderType.length; i++ ) {
@@ -54,6 +87,11 @@ theme = ( function ( theme, $, window, document ) {
 			/*
 			slider.slides.find( "a[rel^='theme-slider-prettyPhoto']" ).lightbox();
 			*/
+			
+			
+			//Video Embed
+			videoEmbedInit();	
+			
         }
 	
 		
@@ -83,6 +121,9 @@ theme = ( function ( theme, $, window, document ) {
 					$( this ).attr( 'href', '#' );
 				}
 			});
+			
+			//Video Embed
+			videoEmbedInit();
 			
         }
 		

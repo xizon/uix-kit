@@ -5510,30 +5510,10 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
     overflow: hidden;
 }
 
-.web-video-background-container > div {
-    width: 100%;
-    height: 100%;
-}
-
-/* Used to embed other special content */
-.entry-video .web-video-background-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-.entry-video .web-video-background-container .videoBG_wrapper {
-    width: 100% !important;
-    height: 100% !important;
-}
-
-.entry-video .web-video-background-container .videoBG {
-    width: 100% !important;
-    height: 100% !important;
-}
-
-.entry-video .web-video-background-container .videoBG video {
-    max-width: 100% !important;
+@media all and (max-width: 768px) {
+    .web-video-background-container {
+        height: auto;
+    }
 }
 
 /* ====================================================== 

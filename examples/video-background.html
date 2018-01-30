@@ -52,11 +52,11 @@
         
        
         <!-- Theme  -->
-        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTUxNzI5NTUyODMxNw"/>
+        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTUxNzMwODI4OTA4MA"/>
         
         
          <!--[if lt IE 10]>
-           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTUxNzI5NTUyODMxNw" />
+           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTUxNzMwODI4OTA4MA" />
         <![endif]-->
         
         
@@ -245,8 +245,14 @@
       
        <!-- Content 01  
         ====================================================== -->
-		<div class="web-video-background-container"><div data-video-poster-src="assets-demo/videos/demo.jpg" data-video-mp4-src="assets-demo/videos/480x270/demo.mp4" data-video-webm-src="assets-demo/videos/480x270/demo.webm" data-video-ogv-src=""></div></div>
-        
+		<div class="web-video-background-container" data-embed-video-wrapper="true">
+			  <div class="web-video-embed" data-embed-video-width="auto" data-embed-video-height="auto" data-embed-video-controls="false" data-embed-video-autoplay="true" data-embed-video-loop="true">
+				  <video id="video-demo-1" class="video-js vjs-default-skin" controls poster="assets-demo/videos/demo.jpg">
+					  <source src="assets-demo/videos/480x270/demo.mp4" type="video/mp4">
+					  <source src="assets-demo/videos/480x270/demo.webm" type="video/webm">
+				  </video>
+			  </div>
+       </div>
         
     
         
@@ -331,7 +337,7 @@
 			"homeUrl"     :""  //Eg. https://uiux.cc
 		};
     </script>  
-    <script src="assets/js/uix-kit.min.js?ver=MTUxNzI5NTUyODMxNw"></script>
+    <script src="assets/js/uix-kit.min.js?ver=MTUxNzMwODI4OTA4MA"></script>
 
 
 

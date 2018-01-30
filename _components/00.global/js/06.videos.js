@@ -13,7 +13,132 @@ theme = ( function ( theme, $, window, document ) {
 		var $window      = $( window ),
 			windowWidth  = $window.width(),
 			windowHeight = $window.height();
+		
+		
+		/*! 
+		 ------------------
+		 Video Embed
+		 ------------------
+		 */  
+		$( '.web-video-embed' ).each( function()  {
+			var $this         = $( this ),
+			    curVideoID    = $this.find( '.video-js' ).attr( 'id' ),
+				videoWrapperW = $this.closest( '[data-embed-video-wrapper]' ).width(),
+				videoWrapperH = $this.closest( '[data-embed-video-wrapper]' ).height(),
+				dataAuto      = $this.data( 'embed-video-autoplay' ),
+				dataLoop      = $this.data( 'embed-video-loop' ),
+				dataControls  = $this.data( 'embed-video-controls' ),
+				dataW         = $this.data( 'embed-video-width' ),
+				dataH         = $this.data( 'embed-video-height' );
 
+			
+			
+			if ( videoWrapperH == 0 ) videoWrapperH = videoWrapperW/1.77777777777778;
+
+			
+			if( typeof dataAuto === typeof undefined ) {
+				dataAuto = true;
+			}
+			if( typeof dataLoop === typeof undefined ) {
+				dataLoop = true;
+			}
+			if( typeof dataControls === typeof undefined ) {
+				dataControls = false;
+			}	
+			
+			
+			if( typeof dataW === typeof undefined || dataW == 'auto' ) {
+				dataW = videoWrapperW;
+			}	
+			
+			if( typeof dataH === typeof undefined || dataH == 'auto' ) {
+				dataH = videoWrapperH;
+			}
+			
+		
+			
+			//HTML5 video autoplay on mobile revisited
+			if ( dataAuto ) {
+				$this.find( '.video-js' ).attr({
+					'autoplay'    : 'true',
+					'muted'       : 'true',
+					'playsinline' : 'true'
+				});
+			}
+			
+			
+
+
+			var myPlayer = videojs( curVideoID, {
+					                  width     : dataW,
+					                  height    : dataH,
+									  controlBar: {
+										  muteToggle : false,
+										  autoplay   : dataAuto,
+										  loop       : dataLoop,
+										  controls   : true,
+										  controlBar : {
+											  muteToggle: false
+										  }
+									  }
+					
+					
+									});
+			
+
+			myPlayer.ready(function() {
+				
+				/* ---------  Video initialize */
+				myPlayer.on( 'loadedmetadata', function() {
+
+					//Get Video Dimensions
+					var curW    = this.videoWidth(),
+						curH    = this.videoHeight(),
+						newW    = curW,
+						newH    = curH;
+
+					newW = videoWrapperW;
+
+					//Scaled/Proportional Content 
+					newH = curH*(newW/curW);
+
+
+					myPlayer
+						.width( newW )
+						.height( newH );
+
+					//Hide loading effect
+					$this.find( '.vjs-loading-spinner, .vjs-big-play-button' ).hide();
+
+				});		
+			
+
+			
+				
+				
+				/* ---------  Set, tell the player it's in fullscreen  */
+				if ( dataAuto ) {
+					myPlayer.play();
+				}
+				
+
+				/* ---------  Disable control bar play button click */
+				if ( !dataControls ) {
+					myPlayer.controls( false );
+				}
+				
+
+			});
+			
+		});
+		
+		
+		
+		/*! 
+		 ------------------
+		 Video Popup Interaction
+		 ------------------
+		 */  
 		//Check out: http://docs.videojs.com/tutorial-player-workflows.html
 		$( '.web-video-btn' ).off( 'click' ).on( 'click', function() {
 			
