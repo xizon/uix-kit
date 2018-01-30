@@ -193,13 +193,10 @@ uix-kit/
 │   └── 02.*/
 ├── examples/
 │   ├── assets/
-│           ├── css/
-│               └── rtl/
-│           ├── fonts/
-│           ├── images/
-│           └── js/
-│               ├── min/	 
-│               └── wp-jquery/	
+│   │       ├── css/
+│   │       ├── fonts/
+│   │       ├── images/
+│   │       └── js/
 │   └── assets-demo/
 │           ├── images/
 │           └── videos/
