@@ -154,6 +154,10 @@
     color: #929292;
     font-size: 1.875rem;
   }
+	
+  &.video .close-btn:after {
+	  font-size: 2rem;
+  }
 }
 
 @-webkit-keyframes imgshow {

@@ -14,16 +14,8 @@ theme = ( function ( theme, $, window, document ) {
 			windowWidth  = $window.width(),
 			windowHeight = $window.height();
 
-		//--------- Video Modal initialize
 		//Check out: http://docs.videojs.com/tutorial-player-workflows.html
-		$( 'video.video-js' ).each( function()  {
-			$( this ).css({
-				  'width'      : windowWidth - 80 + 'px',
-				  'height'     : windowHeight - 150 + 'px'
-			});
-		});
-
-		$( '.web-video-btn' ).on( 'click', function() {
+		$( '.web-video-btn' ).off( 'click' ).on( 'click', function() {
 			var vid = $( this ).data( 'video-id' ),
 				myPlayer = videojs( vid, {
 									  controlBar: {
@@ -38,42 +30,84 @@ theme = ( function ( theme, $, window, document ) {
 					
 					
 									});		
-			
+
 			
 			myPlayer.ready(function() {
 				
-				  /* Set, tell the player it's in fullscreen  */
-				  //myPlayer.exitFullscreen();
-				  //myPlayer.requestFullscreen();
-				  myPlayer.play();
-				
-				  /* Disable control bar play button click */
-				  //myPlayer.controls( false );
-				
-				
-				
-				/* Display video playback progress  */
-				myPlayer.on( 'timeupdate', function() {
-					
-					var duration       =  this.duration(),
-						progressAmount = '0%';
-					if ( duration > 0 ) {
-						progressAmount = ((this.currentTime() / duration)*100) + "%";
+
+				/* ---------  Video Modal initialize */
+				myPlayer.on( 'loadedmetadata', function() {
+
+					//Get Video Dimensions
+					var curW    = this.videoWidth(),
+				    	curH    = this.videoHeight(),
+						newMaxW = windowWidth - 80,
+						newMaxH = windowHeight - 80,
+						newW    = curW,
+						newH    = curH;
+
+					//Resise modal
+					if ( curH > newMaxH ) {
+						newH = newMaxH;
+						
+						//Scaled/Proportional Content 
+						newW = curW*(newH/curH);
+						
+						
 					}
 					
+					
+					if ( newW > newMaxW ) {
+						newW = newMaxW;
+
+						//Scaled/Proportional Content 
+						newH = curH*(newW/curW);
+					}	
+
+					
+					
+					
+					myPlayer
+						.width( newW )
+						.height( newH );
+					
+					
+					$( '#' + vid ).css({
+						'left' : ( newMaxW - newW )/2 + 'px',
+						'top'  : ( newMaxH - newH )/2 + 'px'
+					});
+					
+					
+	
+					
+				});
+
+				/* ---------  Set, tell the player it's in fullscreen  */
+				//myPlayer.exitFullscreen();
+				//myPlayer.requestFullscreen();
+				myPlayer.play();
+
+				/* ---------  Disable control bar play button click */
+				//myPlayer.controls( false );
+
+				/* ---------  Display video playback progress  */
+				myPlayer.on( 'timeupdate', function() {
+
+					var duration = this.duration(),
+					progressAmount = '0%';
+					if (duration > 0) {
+						progressAmount = ((this.currentTime() / duration) * 100) + "%";
+					}
+
 					console.log( progressAmount );
 				});
-				
 
-				
-				
-				  /* Callback for when a video has ended */
-				  myPlayer.on( 'ended', function() {
-						console.log( 'video is done!' );
-				  });
-				
-				
-				  
+				/* ---------  Callback for when a video has ended */
+				myPlayer.on( 'ended',
+				function() {
+					console.log( 'video is done!' );
+				});
+
 				
 
 			});
@@ -81,7 +115,7 @@ theme = ( function ( theme, $, window, document ) {
 
 
 			
-			
+			/* ---------  Close the modal  */
 			$( '.modal-box .close-btn' ).on( 'click', function() {
 				
 				myPlayer.ready(function() {
