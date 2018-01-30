@@ -205,8 +205,8 @@ The `examples/assets-demo/` folder can be deleted.
     │   ├── assets-demo/
     │       │   └── images/
     │       │   └── videos/
-	│       │   │   
-	└──
+	└──   
+	
 ```
 
 
