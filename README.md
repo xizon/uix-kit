@@ -73,20 +73,20 @@ uix-kit/
 ├── _screenshots/
 ├── _components/
 │   ├── 00.global/
-│   └── 01.*/
+│   ├── 01.*/
 │   └── 02.*/
 ├── examples/
 │   ├── assets/
-│       │   └── css/
-│       │   │   └── rtl/
-│       │   └── fonts/
-│       │   └── images/
-│       │   └── js/
-│       │   │   └── min/	 
-│       │   │   └── wp-jquery/	
-│   ├── assets-demo/
-│       │   └── images/
-│       │   └── videos/
+│           ├── css/
+│               └── rtl/
+│           ├── fonts/
+│           ├── images/
+│           └── js/
+│               ├── min/	 
+│               └── wp-jquery/	
+│   └── assets-demo/
+│           ├── images/
+│           └── videos/
 	
 ```
 
