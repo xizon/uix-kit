@@ -1,6 +1,11 @@
 /* ====================================================== 
-   Video Background
+   Video
 /* ====================================================== */
+.web-video-embed {
+	visibility: hidden;
+}
+
+
 .web-video-background-container {
   position: relative;
   height: 100vh;

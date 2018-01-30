@@ -78,6 +78,7 @@
     23. List of Post
     24. List of Split
 	25. Note & Tip 
+    26. Video
 
 
 	
@@ -2875,6 +2876,26 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
+   Video
+/* ====================================================== */
+.web-video-embed {
+    visibility: hidden;
+}
+
+.web-video-background-container {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+@media all and (max-width: 768px) {
+    .web-video-background-container {
+        height: auto;
+    }
+}
+
+/* ====================================================== 
    Accordion 
 /* ====================================================== */
 .custom-accordion dl {
@@ -5497,22 +5518,6 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 
     .horizontal .timeline-btn {
         display: none;
-    }
-}
-
-/* ====================================================== 
-   Video Background
-/* ====================================================== */
-.web-video-background-container {
-    position: relative;
-    height: 100vh;
-    width: 100%;
-    overflow: hidden;
-}
-
-@media all and (max-width: 768px) {
-    .web-video-background-container {
-        height: auto;
     }
 }
 

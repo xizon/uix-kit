@@ -106,6 +106,9 @@ theme = ( function ( theme, $, window, document ) {
 					myPlayer
 						.width( newW )
 						.height( newH );
+					
+					//Show this video wrapper
+					$this.css( 'visibility', 'visible' );
 
 					//Hide loading effect
 					$this.find( '.vjs-loading-spinner, .vjs-big-play-button' ).hide();
