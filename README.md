@@ -58,35 +58,35 @@ The `examples/assets-demo/` folder can be deleted.
 
 ```sh
 
-    uix-kit/
-    ├── README.md
-    ├── CHANGELOG.md
-    ├── CONTRIBUTING.md
-	├── DOCUMENTATION.md
-    ├── gulpfile.js
-    ├── LICENSE
-	├── readme.txt
-    ├── package-lock.json
-	├── package.json
-	├── _config.yml
-    ├── _grid/
-    ├── _screenshots/
-    ├── _components/
-    │   ├── 00.global/
-    │   └── 01.*/
-	│   └── 02.*/
-    ├── examples/
-    │   ├── assets/
-    │       │   └── css/
-    │       │   │   └── rtl/
-    │       │   └── fonts/
-    │       │   └── images/
-    │       │   └── js/
-    │       │   │   └── min/	 
-    │       │   │   └── wp-jquery/	
-    │   ├── assets-demo/
-    │       │   └── images/
-    │       │   └── videos/
+uix-kit/
+├── README.md
+├── CHANGELOG.md
+├── CONTRIBUTING.md
+├── DOCUMENTATION.md
+├── gulpfile.js
+├── LICENSE
+├── readme.txt
+├── package-lock.json
+├── package.json
+├── _config.yml
+├── _grid/
+├── _screenshots/
+├── _components/
+│   ├── 00.global/
+│   └── 01.*/
+│   └── 02.*/
+├── examples/
+│   ├── assets/
+│       │   └── css/
+│       │   │   └── rtl/
+│       │   └── fonts/
+│       │   └── images/
+│       │   └── js/
+│       │   │   └── min/	 
+│       │   │   └── wp-jquery/	
+│   ├── assets-demo/
+│       │   └── images/
+│       │   └── videos/
 	
 ```
 
