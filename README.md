@@ -56,7 +56,7 @@ The `examples/assets-demo/` folder can be deleted.
 
 #### File Structures:
 
-<pre>
+```sh
 
     uix-kit/
     ├── README.md
@@ -75,7 +75,6 @@ The `examples/assets-demo/` folder can be deleted.
     │   ├── 00.global/
     │   └── 01.*/
 	│   └── 02.*/
-	│   
     ├── examples/
     │   ├── assets/
     │       │   └── css/
@@ -85,13 +84,11 @@ The `examples/assets-demo/` folder can be deleted.
     │       │   └── js/
     │       │   │   └── min/	 
     │       │   │   └── wp-jquery/	
-	│       │   │   
     │   ├── assets-demo/
     │       │   └── images/
     │       │   └── videos/
-	└──     
 	
-</pre>
+```
 
 
 #### Core CSS:
