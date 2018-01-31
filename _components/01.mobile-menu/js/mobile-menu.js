@@ -82,11 +82,21 @@ theme = ( function ( theme, $, window, document ) {
 	
 			// Close the menu on window change
 			$window.on( 'resize', function() {
-				windowWidth  = $window.width();
-				$.sidr( 'close', sidrname );
-				$( '.menu-toggle' ).removeClass( 'open' );
-				if ( windowWidth <= 768 ) sidrmenuInit(); 
-			} );
+				// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+				if ( $window.width() != windowWidth ) {
+
+					// Update the window width for next time
+					windowWidth = $window.width();
+
+					// Do stuff here
+					$.sidr( 'close', sidrname );
+					$( '.menu-toggle' ).removeClass( 'open' );
+					if ( windowWidth <= 768 ) sidrmenuInit(); 
+
+
+				}
+			});
+		
 			
 			if ( windowWidth <= 768 ) {
 			    sidrmenuInit(); 

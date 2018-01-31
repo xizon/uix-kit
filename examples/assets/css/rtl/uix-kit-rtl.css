@@ -166,75 +166,75 @@ blockquote:before {
 /* ====================================================== */
 .menu-container {
     float: left;
+  /* Dropdown */
+  /* Multi-column */
+  /* Dropdown Arrow */;
 }
 
-ul.menu-main {
+.menu-container ul.menu-main {
     float: right;
 }
 
-ul.menu-main > li {
+.menu-container ul.menu-main > li {
     margin-right: auto;
     margin-left: 1.6875rem;
 }
 
-@media all and (max-width: 1250px) {
-    ul.menu-main > li {
-        margin-right: auto;
-        margin-left: 1.125rem;
-    }
-}
-
-ul.menu-main > li:not(.multi-column) > ul ul {
+.menu-container ul.menu-main > li:not(.multi-column) > ul ul {
     margin-left: auto;
-    margin-right: -0.1875rem;
+    margin-right: -0.071875rem;
 }
 
-ul.menu-main > li > ul:before {
+.menu-container ul.menu-main > li > ul:before {
     left: auto;
     right: 0;
 }
 
-ul.menu-main > li > ul:after {
+.menu-container ul.menu-main > li > ul:after {
     left: auto;
     right: 3.5rem;
     margin-left: auto;
     margin-right: -0.15625rem;
 }
 
-ul.menu-main > li li {
+.menu-container ul.menu-main > li li {
     padding-left: auto;
     padding-right: 0.875rem;
 }
 
-ul.menu-main > li ul li {
+.menu-container ul.menu-main > li ul li {
     padding-left: auto;
     padding-right: 2.034375rem;
 }
 
-/* Dropdown */
-ul.menu-main ul.sub-menu {
+.menu-container ul.menu-main ul.sub-menu {
     left: auto;
     right: 0;
 }
 
-ul.menu-main > li:not(.multi-column) > ul ul {
+.menu-container ul.menu-main > li:not(.multi-column) > ul ul {
     left: auto;
     right: 100%;
 }
 
-/* Multi-column */
-li.multi-column > ul li {
+@media all and (max-width: 1250px) {
+    .menu-container ul.menu-main > li {
+        margin-right: auto;
+        margin-left: 1.125rem;
+    }
+}
+
+.menu-container li.multi-column > ul li {
     padding-left: auto !important;
     padding-right: 1.159375rem !important;
 }
 
-/* Dropdown Arrow */
-.nav-arrow {
+.menu-container .nav-arrow {
     right: auto;
     left: 0.284375rem;
 }
 
-ul.menu-main ul.sub-menu .nav-arrow {
+.menu-container ul.menu-main ul.sub-menu .nav-arrow {
     right: auto;
     left: 1.159375rem;
 }

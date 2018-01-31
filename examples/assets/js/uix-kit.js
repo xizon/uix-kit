@@ -104,6 +104,12 @@ theme = ( function ( theme, $, window, document ) {
     var documentReady = function( $ ) {
 	
 
+		var $window      = $( window ),
+			windowWidth  = $window.width(),
+			windowHeight = $window.height();
+
+
+		
 		//-------- Sticky header area
 		var waypoints = $( '.header-area' ).waypoint({
 			handler: function( direction ) {
@@ -119,11 +125,19 @@ theme = ( function ( theme, $, window, document ) {
 		//-------- Header initialize
 		headerInit();
 		
-		$( window ).on('resize', function() {
-			headerInit();
+		$window.on( 'resize', function() {
+			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+			if ( $window.width() != windowWidth ) {
 
-		});
+				// Update the window width for next time
+				windowWidth = $window.width();
+
+				// Do stuff here
+				headerInit();
 		
+
+			}
+		});
 		function headerInit() {
 			$( '.header-inner.auto-height' ).css( 'height', $( '.header-area' ).outerHeight() + 'px' ); 
 		}
@@ -284,13 +298,14 @@ theme = ( function ( theme, $, window, document ) {
 				windowWidth  = $window.width(),
 				windowHeight = $window.height();
 	
+		
 			
 			// Menu Hover
 			var mTop = 15;
-			$( 'ul.menu-main > li.multi-column > ul li ul' ).addClass( 'multi' );
-			$( 'ul.menu-main > li:not(.multi-column) ul, li.multi-column > ul.sub-menu > li > ul, ul.menu-main li.multi-column > ul' ).css( 'margin-top', mTop + 'px' );
+			$( '.menu-container ul.menu-main > li.multi-column > ul li ul' ).addClass( 'multi' );
+			$( '.menu-container ul.menu-main > li:not(.multi-column) ul, .menu-container li.multi-column > ul.sub-menu > li > ul, .menu-container ul.menu-main li.multi-column > ul' ).css( 'margin-top', mTop + 'px' );
 			
-			$( 'ul.menu-main li' ).on( 'mouseenter', function(){
+			$( '.menu-container ul.menu-main li' ).on( 'mouseenter', function(){
 				$( this ).find( ' > ul.sub-menu:not(.multi), .mega-arrow' ).show().animate( { marginTop: 0, opacity: 1 }, { duration: 150 } );
 				
 			}).on( 'mouseleave' , function(){
@@ -305,7 +320,7 @@ theme = ( function ( theme, $, window, document ) {
 	
 		
 			//Add Sub-menu Arrow
-			$( 'ul.menu-main li' ).each( function() {
+			$( '.menu-container ul.menu-main li' ).each( function() {
 				if ( $( this ).find( 'ul' ).length > 0 ) {
 					$( this ).prepend( '<span class="nav-arrow"></span>' );
 				}
@@ -651,16 +666,25 @@ theme = ( function ( theme, $, window, document ) {
 			windowWidth  = $window.width(),
 			windowHeight = $window.height();
 
-
-		// Close the menu on window change
 		$window.on( 'resize', function() {
-			windowWidth  = $window.width();
-			if ( windowWidth > 768 ) {
-				rowColInit( false ); 
-			} else {
-				rowColInit( true ); 
+			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+			if ( $window.width() != windowWidth ) {
+
+				// Update the window width for next time
+				windowWidth = $window.width();
+
+				// Do stuff here
+				if ( windowWidth > 768 ) {
+					rowColInit( false ); 
+				} else {
+					rowColInit( true ); 
+				}
+		
+
 			}
-		} );
+		});
+		
+		
 
 		if ( windowWidth > 768 ) {
 			rowColInit( false ); 
@@ -710,15 +734,30 @@ theme = ( function ( theme, $, window, document ) {
     var documentReady = function( $ ) {
 		
 		
+		var $window      = $( window ),
+			windowWidth  = $window.width(),
+			windowHeight = $window.height();
+
 		// Using delay is for more accurate calculation
 		setTimeout( function() {
-			megaMenuInit();
+			megaMenuInit( windowWidth );
 		}, 500 );
 		
-		$( window ).on('resize', function() {
-			megaMenuInit();
+		
+		$window.on( 'resize', function() {
+			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+			if ( $window.width() != windowWidth ) {
 
+				// Update the window width for next time
+				windowWidth = $window.width();
+
+				// Do stuff here
+				megaMenuInit( windowWidth );
+		
+
+			}
 		});
+		
 		
 	
 		// For the absolute coordinates of any jquery element 
@@ -741,11 +780,8 @@ theme = ( function ( theme, $, window, document ) {
 
 		
 		// Initialize mega menu
-		function megaMenuInit() {
-			var $window      = $( window ),
-				windowWidth  = $window.width(),
-				windowHeight = $window.height(),
-				maxWidth     = 1170, //The maximum width of the mega menu wrapper
+		function megaMenuInit( w ) {
+			var maxWidth     = 1170, //The maximum width of the mega menu wrapper
 			    perDefaultW  = 220; //Default width of each column
 
 			
@@ -758,7 +794,7 @@ theme = ( function ( theme, $, window, document ) {
 			});
 			
 			
-			if ( windowWidth > 768 ){
+			if ( w > 768 ){
 
 				$( 'li.multi-column' ).each( function() {
 					var root_li          = $( this ),
@@ -781,7 +817,7 @@ theme = ( function ( theme, $, window, document ) {
 						
 						
 						//Determine the mega menu wrapper within document width, in order to limit the width of each column for mega menu
-						if ( maxWidth > windowWidth ) maxWidth = windowWidth;
+						if ( maxWidth > w ) maxWidth = w;
 						
 						
 						if ( mega_div_w > maxWidth ) {
@@ -796,11 +832,11 @@ theme = ( function ( theme, $, window, document ) {
 							
 							if ( ! $( 'body' ).hasClass( 'rtl' ) ) {
 								mega_div.css( {
-									'margin-left' : ( - root_li_left ) + ( ( windowWidth - mega_div_w )/2 ) + 'px'
+									'margin-left' : ( - root_li_left ) + ( ( w - mega_div_w )/2 ) + 'px'
 								} );
 							} else {
 								mega_div.css( {
-									'margin-right' : ( - root_li_left ) + ( ( windowWidth - mega_div_w )/2 ) + 'px'
+									'margin-right' : ( - root_li_left ) + ( ( w - mega_div_w )/2 ) + 'px'
 								} );
 							}
 
@@ -816,14 +852,14 @@ theme = ( function ( theme, $, window, document ) {
 							var chkWidth = parseFloat( root_li_left  + mega_div_w );
 
 
-							if ( chkWidth > windowWidth ) {
+							if ( chkWidth > w ) {
 								if ( ! $( 'body' ).hasClass( 'rtl' ) ) {
 									mega_div.css( {
-										'margin-left' : - ( chkWidth - windowWidth ) + 'px'
+										'margin-left' : - ( chkWidth - w ) + 'px'
 									} );
 								} else {
 									mega_div.css( {
-										'margin-right' : - ( chkWidth - windowWidth ) + 'px'
+										'margin-right' : - ( chkWidth - w ) + 'px'
 									} );
 								}	
 
@@ -1389,11 +1425,21 @@ theme = ( function ( theme, $, window, document ) {
 	
 			// Close the menu on window change
 			$window.on( 'resize', function() {
-				windowWidth  = $window.width();
-				$.sidr( 'close', sidrname );
-				$( '.menu-toggle' ).removeClass( 'open' );
-				if ( windowWidth <= 768 ) sidrmenuInit(); 
-			} );
+				// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+				if ( $window.width() != windowWidth ) {
+
+					// Update the window width for next time
+					windowWidth = $window.width();
+
+					// Do stuff here
+					$.sidr( 'close', sidrname );
+					$( '.menu-toggle' ).removeClass( 'open' );
+					if ( windowWidth <= 768 ) sidrmenuInit(); 
+
+
+				}
+			});
+		
 			
 			if ( windowWidth <= 768 ) {
 			    sidrmenuInit(); 
@@ -1628,9 +1674,21 @@ theme = ( function ( theme, $, window, document ) {
 
 		//  Initialize
 		parallaxInit();
-		$window.on('resize', function() {
-			parallaxInit();
-		} );
+		
+		$window.on( 'resize', function() {
+			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+			if ( $window.width() != windowWidth ) {
+
+				// Update the window width for next time
+				windowWidth = $window.width();
+
+				// Do stuff here
+				parallaxInit();
+		
+
+			}
+		});
+		
 		
 		function parallaxInit() {
 			$( '.parallax' ).each(function() {
@@ -1760,6 +1818,37 @@ theme = ( function ( theme, $, window, document ) {
 
 /*! 
  *************************************
+ * Progress Bar
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+    
+
+
+
+		
+    };
+
+    theme.progressBar = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
+
+
+
+
+/*! 
+ *************************************
  * Pricing
  *************************************
  */
@@ -1769,13 +1858,29 @@ theme = ( function ( theme, $, window, document ) {
     var documentReady = function( $ ) {
     
 		
+		var $window      = $( window ),
+			windowWidth  = $window.width(),
+			windowHeight = $window.height();
+
+		
 		//-------- Pricing initialize
 		pricingInit();
 		
-		$( window ).on('resize', function() {
-			pricingInit();
+		$window.on( 'resize', function() {
+			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+			if ( $window.width() != windowWidth ) {
 
+				// Update the window width for next time
+				windowWidth = $window.width();
+
+				// Do stuff here
+				pricingInit();
+		
+
+			}
 		});
+		
+		
 		
 		function pricingInit() {
 			//Initialize the height
@@ -1855,37 +1960,6 @@ theme = ( function ( theme, $, window, document ) {
     };
 
     theme.pricing = {
-        documentReady : documentReady        
-    };
-
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
-
-
-
-
-
-
-
-/*! 
- *************************************
- * Progress Bar
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-    
-    var documentReady = function( $ ) {
-    
-
-
-
-		
-    };
-
-    theme.progressBar = {
         documentReady : documentReady        
     };
 
@@ -2005,7 +2079,13 @@ theme = ( function ( theme, $, window, document ) {
 			specialSliderType  = [ '.custom-primary-flexslider', '.custom-controls', '.custom-itemgrid', '.custom-counter-show' ];
 		
 		
-		// Video embed 
+	
+		/*
+		 * Initialize embedded local video.
+		 *
+		 * @param  {wrapper} element         - The outermost video container, which can contain multiple videos
+		 * @return {void}                    - The constructor.
+		 */
 		function videoEmbedInit( wrapper ) {
 			wrapper.find( '.web-video-embed' ).each( function()  {
 				var $this         = $( this ),
@@ -2056,16 +2136,12 @@ theme = ( function ( theme, $, window, document ) {
 			});	
 		}	
 		
-		
-		// Normal slideshow
-		var $sliderDefault, specialSliderClasses = '';
-		for ( var i = 0; i < specialSliderType.length; i++ ) {
-			specialSliderClasses += ':not('+specialSliderType[i]+')';
-		}
-		$sliderDefault = $( '.custom-theme-flexslider' + specialSliderClasses );
-		
-
-		// callback function
+		/*
+		 * Return an event from callback function to each slider.
+		 *
+		 * @param  {slider} element         - The current slider.
+		 * @return {void}                   - The constructor.
+		 */
         function initslides( slider ) {
 
 			var prefix    = 'custom-theme',
@@ -2098,15 +2174,35 @@ theme = ( function ( theme, $, window, document ) {
         }
 	
 		
+		/*
+		 * Return an event from callback function to each slider with dynamic min/max ranges.
+		 *
+		 * @param  {slider} element         - The current slider.
+		 * @return {void}                   - The constructor.
+		 */
         function initslidesItemgrid( slider ) {
 
 			var prefix      = 'custom-theme',
-				activeClass = prefix+'-flex-active-slide';
+				activeClass = prefix+'-flex-active-slide',
+				prevClass   = activeClass + '-prev',
+				nextClass   = activeClass + '-next',
+				item        = '.custom-theme-slides > div.item';
 			
 			slider.removeClass( prefix+'-flexslider-loading' );
 			
-			$sliderItemgird.find( '.custom-theme-slides > div.item' ).removeClass( activeClass );
-			$sliderItemgird.find( '.custom-theme-slides > div.item:eq('+parseFloat(slider.currentSlide+1)+')' ).addClass( activeClass );
+			$sliderItemgird.find( item ).removeClass( activeClass );
+			$sliderItemgird.find( item ).removeClass( prevClass );
+			$sliderItemgird.find( item ).removeClass( nextClass );
+			
+			//Focus slider
+			$sliderItemgird.find( item + ':eq('+parseFloat(slider.currentSlide+1)+')' ).addClass( activeClass );
+			
+			//Previous slider
+			$sliderItemgird.find( item + ':eq('+parseFloat(slider.currentSlide)+')' ).addClass( prevClass );
+			
+			//Next slider
+			$sliderItemgird.find( item + ':eq('+parseFloat(slider.currentSlide+2)+')' ).addClass( nextClass );
+			
 			
 	
 			//Auto-restart player if paused after action
@@ -2129,8 +2225,36 @@ theme = ( function ( theme, $, window, document ) {
         }
 		
 		
+		
+		//-------  Initialize primary slideshow
+		var $sliderPrimaryEff = $( '.custom-primary-flexslider' );
+		
+		$sliderPrimaryEff.flexslider({
+			namespace	      : 'custom-theme-flex-',
+			animation         : 'slide',
+			selector          : '.custom-theme-slides > div.item',
+			controlNav        : true,
+			smoothHeight      : true,
+			prevText          : "<i class='fa fa-chevron-left custom-primary-flexslider-prev'></i>",
+			nextText          : "<i class='fa fa-chevron-right custom-primary-flexslider-next'></i>",
+			animationSpeed    : 600,
+			slideshowSpeed    : 10000,
+			slideshow         : true,
+			animationLoop     : true,
+			start             : initslides, //Fires when the slider loads the first slide
+			after             : initslides //Fires after each slider animation completes.
+		});
+	
+		
+		
 		//-------  Initialize slideshow ( default )
-		$sliderDefault.each( function( index )  {
+		var $sliderDefault, specialSliderClasses = '';
+		for ( var i = 0; i < specialSliderType.length; i++ ) {
+			specialSliderClasses += ':not('+specialSliderType[i]+')';
+		}
+		$sliderDefault = $( '.custom-theme-flexslider' + specialSliderClasses );
+		
+		$sliderDefault.each( function()  {
 			var $this        = $( this ),
 				dataSpeed    = $this.data( 'speed' ),
 				dataTiming   = $this.data( 'timing' ),
@@ -2180,28 +2304,13 @@ theme = ( function ( theme, $, window, document ) {
 			
 		});
 		
-		
-		//-------  Initialize primary slideshow
-		$( '.custom-primary-flexslider' ).flexslider({
-			namespace	      : 'custom-theme-flex-',
-			animation         : 'slide',
-			selector          : '.custom-theme-slides > div.item',
-			controlNav        : true,
-			smoothHeight      : true,
-			prevText          : "<i class='fa fa-chevron-left custom-primary-flexslider-prev'></i>",
-			nextText          : "<i class='fa fa-chevron-right custom-primary-flexslider-next'></i>",
-			animationSpeed    : 600,
-			slideshowSpeed    : 10000,
-			slideshow         : true,
-			animationLoop     : true,
-			start             : initslides, //Fires when the slider loads the first slide
-			after             : initslides //Fires after each slider animation completes.
-		});
-	
+
 		
 		
 		//-------  Initialize slideshow (custom controls)
-		$( '.custom-theme-flexslider.custom-controls' ).each( function( index )  {
+		var $sliderMyControls = $( '.custom-theme-flexslider.custom-controls' );
+		
+		$sliderMyControls.each( function()  {
 			var $this        = $( this ),
 				dataSpeed    = $this.data( 'speed' ),
 				dataTiming   = $this.data( 'timing' ),
@@ -2257,7 +2366,9 @@ theme = ( function ( theme, $, window, document ) {
 
 		
 		//-------  Initialize slideshow (display counter)
-		$( '.custom-theme-flexslider.custom-counter-show' ).each( function( index )  {
+		var $sliderCounterShow = $( '.custom-theme-flexslider.custom-counter-show' );
+		
+		$sliderCounterShow.each( function()  {
 			var $this        = $( this ),
 				dataSpeed    = $this.data( 'speed' ),
 				dataTiming   = $this.data( 'timing' ),
@@ -2350,8 +2461,7 @@ theme = ( function ( theme, $, window, document ) {
 		//-------  Initialize slideshow (with dynamic min/max ranges)
 		
 		//store the slider in a local variable
-		var flexslider      = { vars:{} },
-			$sliderItemgird = $( '.custom-theme-flexslider.custom-itemgrid' );
+		var $sliderItemgird = $( '.custom-theme-flexslider.custom-itemgrid' );
 		
 		// tiny helper function to add breakpoints
 		function getGridSizeS() {
@@ -2359,7 +2469,7 @@ theme = ( function ( theme, $, window, document ) {
 		}
 		
 
-		$sliderItemgird.each( function( index )  {
+		$sliderItemgird.each( function()  {
 			var $this        = $( this ),
 				dataSpeed    = $this.data( 'speed' ),
 				dataTiming   = $this.data( 'timing' ),
@@ -2414,15 +2524,38 @@ theme = ( function ( theme, $, window, document ) {
 		});
 		
 		
-		// check grid size on resize event
+		
+		//-------  Check grid size on resize event
 		$window.on( 'resize', function() {
-			var gridSize = getGridSizeS();
+			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+			if ( $window.width() != windowWidth ) {
 
-			flexslider.vars.minItems = gridSize;
-			flexslider.vars.maxItems = gridSize;
+				// Update the window width for next time
+				windowWidth = $window.width();
+
+				// Do stuff here
+				$sliderPrimaryEff.data( 'flexslider' ).setup();
+				
+				
+				$sliderDefault.each( function() {
+					$( this ).data( 'flexslider' ).setup();
+				});
+				
+				$sliderMyControls.each( function() {
+					$( this ).data( 'flexslider' ).setup();
+				});
+				
+				$sliderCounterShow.each( function() {
+					$( this ).data( 'flexslider' ).setup();
+				});
+				
+				$sliderItemgird.each( function() {
+					$( this ).data( 'flexslider' ).setup();
+				});
+				
+			}
 		});
 		
-
 
 		
 	};

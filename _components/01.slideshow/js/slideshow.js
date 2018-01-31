@@ -17,7 +17,13 @@ theme = ( function ( theme, $, window, document ) {
 			specialSliderType  = [ '.custom-primary-flexslider', '.custom-controls', '.custom-itemgrid', '.custom-counter-show' ];
 		
 		
-		// Video embed 
+	
+		/*
+		 * Initialize embedded local video.
+		 *
+		 * @param  {wrapper} element         - The outermost video container, which can contain multiple videos
+		 * @return {void}                    - The constructor.
+		 */
 		function videoEmbedInit( wrapper ) {
 			wrapper.find( '.web-video-embed' ).each( function()  {
 				var $this         = $( this ),
@@ -68,16 +74,12 @@ theme = ( function ( theme, $, window, document ) {
 			});	
 		}	
 		
-		
-		// Normal slideshow
-		var $sliderDefault, specialSliderClasses = '';
-		for ( var i = 0; i < specialSliderType.length; i++ ) {
-			specialSliderClasses += ':not('+specialSliderType[i]+')';
-		}
-		$sliderDefault = $( '.custom-theme-flexslider' + specialSliderClasses );
-		
-
-		// callback function
+		/*
+		 * Return an event from callback function to each slider.
+		 *
+		 * @param  {slider} element         - The current slider.
+		 * @return {void}                   - The constructor.
+		 */
         function initslides( slider ) {
 
 			var prefix    = 'custom-theme',
@@ -110,15 +112,35 @@ theme = ( function ( theme, $, window, document ) {
         }
 	
 		
+		/*
+		 * Return an event from callback function to each slider with dynamic min/max ranges.
+		 *
+		 * @param  {slider} element         - The current slider.
+		 * @return {void}                   - The constructor.
+		 */
         function initslidesItemgrid( slider ) {
 
 			var prefix      = 'custom-theme',
-				activeClass = prefix+'-flex-active-slide';
+				activeClass = prefix+'-flex-active-slide',
+				prevClass   = activeClass + '-prev',
+				nextClass   = activeClass + '-next',
+				item        = '.custom-theme-slides > div.item';
 			
 			slider.removeClass( prefix+'-flexslider-loading' );
 			
-			$sliderItemgird.find( '.custom-theme-slides > div.item' ).removeClass( activeClass );
-			$sliderItemgird.find( '.custom-theme-slides > div.item:eq('+parseFloat(slider.currentSlide+1)+')' ).addClass( activeClass );
+			$sliderItemgird.find( item ).removeClass( activeClass );
+			$sliderItemgird.find( item ).removeClass( prevClass );
+			$sliderItemgird.find( item ).removeClass( nextClass );
+			
+			//Focus slider
+			$sliderItemgird.find( item + ':eq('+parseFloat(slider.currentSlide+1)+')' ).addClass( activeClass );
+			
+			//Previous slider
+			$sliderItemgird.find( item + ':eq('+parseFloat(slider.currentSlide)+')' ).addClass( prevClass );
+			
+			//Next slider
+			$sliderItemgird.find( item + ':eq('+parseFloat(slider.currentSlide+2)+')' ).addClass( nextClass );
+			
 			
 	
 			//Auto-restart player if paused after action
@@ -141,8 +163,36 @@ theme = ( function ( theme, $, window, document ) {
         }
 		
 		
+		
+		//-------  Initialize primary slideshow
+		var $sliderPrimaryEff = $( '.custom-primary-flexslider' );
+		
+		$sliderPrimaryEff.flexslider({
+			namespace	      : 'custom-theme-flex-',
+			animation         : 'slide',
+			selector          : '.custom-theme-slides > div.item',
+			controlNav        : true,
+			smoothHeight      : true,
+			prevText          : "<i class='fa fa-chevron-left custom-primary-flexslider-prev'></i>",
+			nextText          : "<i class='fa fa-chevron-right custom-primary-flexslider-next'></i>",
+			animationSpeed    : 600,
+			slideshowSpeed    : 10000,
+			slideshow         : true,
+			animationLoop     : true,
+			start             : initslides, //Fires when the slider loads the first slide
+			after             : initslides //Fires after each slider animation completes.
+		});
+	
+		
+		
 		//-------  Initialize slideshow ( default )
-		$sliderDefault.each( function( index )  {
+		var $sliderDefault, specialSliderClasses = '';
+		for ( var i = 0; i < specialSliderType.length; i++ ) {
+			specialSliderClasses += ':not('+specialSliderType[i]+')';
+		}
+		$sliderDefault = $( '.custom-theme-flexslider' + specialSliderClasses );
+		
+		$sliderDefault.each( function()  {
 			var $this        = $( this ),
 				dataSpeed    = $this.data( 'speed' ),
 				dataTiming   = $this.data( 'timing' ),
@@ -192,28 +242,13 @@ theme = ( function ( theme, $, window, document ) {
 			
 		});
 		
-		
-		//-------  Initialize primary slideshow
-		$( '.custom-primary-flexslider' ).flexslider({
-			namespace	      : 'custom-theme-flex-',
-			animation         : 'slide',
-			selector          : '.custom-theme-slides > div.item',
-			controlNav        : true,
-			smoothHeight      : true,
-			prevText          : "<i class='fa fa-chevron-left custom-primary-flexslider-prev'></i>",
-			nextText          : "<i class='fa fa-chevron-right custom-primary-flexslider-next'></i>",
-			animationSpeed    : 600,
-			slideshowSpeed    : 10000,
-			slideshow         : true,
-			animationLoop     : true,
-			start             : initslides, //Fires when the slider loads the first slide
-			after             : initslides //Fires after each slider animation completes.
-		});
-	
+
 		
 		
 		//-------  Initialize slideshow (custom controls)
-		$( '.custom-theme-flexslider.custom-controls' ).each( function( index )  {
+		var $sliderMyControls = $( '.custom-theme-flexslider.custom-controls' );
+		
+		$sliderMyControls.each( function()  {
 			var $this        = $( this ),
 				dataSpeed    = $this.data( 'speed' ),
 				dataTiming   = $this.data( 'timing' ),
@@ -269,7 +304,9 @@ theme = ( function ( theme, $, window, document ) {
 
 		
 		//-------  Initialize slideshow (display counter)
-		$( '.custom-theme-flexslider.custom-counter-show' ).each( function( index )  {
+		var $sliderCounterShow = $( '.custom-theme-flexslider.custom-counter-show' );
+		
+		$sliderCounterShow.each( function()  {
 			var $this        = $( this ),
 				dataSpeed    = $this.data( 'speed' ),
 				dataTiming   = $this.data( 'timing' ),
@@ -362,8 +399,7 @@ theme = ( function ( theme, $, window, document ) {
 		//-------  Initialize slideshow (with dynamic min/max ranges)
 		
 		//store the slider in a local variable
-		var flexslider      = { vars:{} },
-			$sliderItemgird = $( '.custom-theme-flexslider.custom-itemgrid' );
+		var $sliderItemgird = $( '.custom-theme-flexslider.custom-itemgrid' );
 		
 		// tiny helper function to add breakpoints
 		function getGridSizeS() {
@@ -371,7 +407,7 @@ theme = ( function ( theme, $, window, document ) {
 		}
 		
 
-		$sliderItemgird.each( function( index )  {
+		$sliderItemgird.each( function()  {
 			var $this        = $( this ),
 				dataSpeed    = $this.data( 'speed' ),
 				dataTiming   = $this.data( 'timing' ),
@@ -426,15 +462,38 @@ theme = ( function ( theme, $, window, document ) {
 		});
 		
 		
-		// check grid size on resize event
+		
+		//-------  Check grid size on resize event
 		$window.on( 'resize', function() {
-			var gridSize = getGridSizeS();
+			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+			if ( $window.width() != windowWidth ) {
 
-			flexslider.vars.minItems = gridSize;
-			flexslider.vars.maxItems = gridSize;
+				// Update the window width for next time
+				windowWidth = $window.width();
+
+				// Do stuff here
+				$sliderPrimaryEff.data( 'flexslider' ).setup();
+				
+				
+				$sliderDefault.each( function() {
+					$( this ).data( 'flexslider' ).setup();
+				});
+				
+				$sliderMyControls.each( function() {
+					$( this ).data( 'flexslider' ).setup();
+				});
+				
+				$sliderCounterShow.each( function() {
+					$( this ).data( 'flexslider' ).setup();
+				});
+				
+				$sliderItemgird.each( function() {
+					$( this ).data( 'flexslider' ).setup();
+				});
+				
+			}
 		});
 		
-
 
 		
 	};

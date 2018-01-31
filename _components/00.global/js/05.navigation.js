@@ -14,13 +14,14 @@ theme = ( function ( theme, $, window, document ) {
 				windowWidth  = $window.width(),
 				windowHeight = $window.height();
 	
+		
 			
 			// Menu Hover
 			var mTop = 15;
-			$( 'ul.menu-main > li.multi-column > ul li ul' ).addClass( 'multi' );
-			$( 'ul.menu-main > li:not(.multi-column) ul, li.multi-column > ul.sub-menu > li > ul, ul.menu-main li.multi-column > ul' ).css( 'margin-top', mTop + 'px' );
+			$( '.menu-container ul.menu-main > li.multi-column > ul li ul' ).addClass( 'multi' );
+			$( '.menu-container ul.menu-main > li:not(.multi-column) ul, .menu-container li.multi-column > ul.sub-menu > li > ul, .menu-container ul.menu-main li.multi-column > ul' ).css( 'margin-top', mTop + 'px' );
 			
-			$( 'ul.menu-main li' ).on( 'mouseenter', function(){
+			$( '.menu-container ul.menu-main li' ).on( 'mouseenter', function(){
 				$( this ).find( ' > ul.sub-menu:not(.multi), .mega-arrow' ).show().animate( { marginTop: 0, opacity: 1 }, { duration: 150 } );
 				
 			}).on( 'mouseleave' , function(){
@@ -35,7 +36,7 @@ theme = ( function ( theme, $, window, document ) {
 	
 		
 			//Add Sub-menu Arrow
-			$( 'ul.menu-main li' ).each( function() {
+			$( '.menu-container ul.menu-main li' ).each( function() {
 				if ( $( this ).find( 'ul' ).length > 0 ) {
 					$( this ).prepend( '<span class="nav-arrow"></span>' );
 				}

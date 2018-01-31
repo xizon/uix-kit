@@ -15,16 +15,25 @@ theme = ( function ( theme, $, window, document ) {
 			windowWidth  = $window.width(),
 			windowHeight = $window.height();
 
-
-		// Close the menu on window change
 		$window.on( 'resize', function() {
-			windowWidth  = $window.width();
-			if ( windowWidth > 768 ) {
-				rowColInit( false ); 
-			} else {
-				rowColInit( true ); 
+			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+			if ( $window.width() != windowWidth ) {
+
+				// Update the window width for next time
+				windowWidth = $window.width();
+
+				// Do stuff here
+				if ( windowWidth > 768 ) {
+					rowColInit( false ); 
+				} else {
+					rowColInit( true ); 
+				}
+		
+
 			}
-		} );
+		});
+		
+		
 
 		if ( windowWidth > 768 ) {
 			rowColInit( false ); 

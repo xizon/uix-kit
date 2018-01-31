@@ -17,9 +17,21 @@ theme = ( function ( theme, $, window, document ) {
 
 		//  Initialize
 		parallaxInit();
-		$window.on('resize', function() {
-			parallaxInit();
-		} );
+		
+		$window.on( 'resize', function() {
+			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+			if ( $window.width() != windowWidth ) {
+
+				// Update the window width for next time
+				windowWidth = $window.width();
+
+				// Do stuff here
+				parallaxInit();
+		
+
+			}
+		});
+		
 		
 		function parallaxInit() {
 			$( '.parallax' ).each(function() {

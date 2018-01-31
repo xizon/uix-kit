@@ -976,41 +976,38 @@ section.site-google-map, .section.site-google-map {
     float: right;
     padding-top: 1.25rem;
     line-height: 2.34375;
+  /* Dropdown */
+  /* Multi-column */
+  /* Dropdown Arrow */;
 }
 
 .menu-container.spy-scroll-fixed {
     padding-bottom: 0;
 }
 
-@media all and (max-width: 768px) {
-    .menu-container {
-        display: none;
-    }
-}
-
-ul.menu-main {
+.menu-container ul.menu-main {
     float: left;
     margin: 0;
   /* Required*/;
 }
 
-ul.menu-main ul a:hover {
+.menu-container ul.menu-main ul a:hover {
     color: #000 !important;
     background: #F1F1F1;
 }
 
-ul.menu-main li {
+.menu-container ul.menu-main li {
     position: relative;
     margin-bottom: 0;
     padding: 0 1.159375rem;
 }
 
-ul.menu-main li a {
+.menu-container ul.menu-main li a {
     display: block;
     padding-left: 0.625rem !important;
 }
 
-ul.menu-main > li {
+.menu-container ul.menu-main > li {
     display: inline-block;
     margin-right: 1.6875rem;
     padding-bottom: 1.421875rem;
@@ -1018,39 +1015,39 @@ ul.menu-main > li {
   /* Required*/;
 }
 
-ul.menu-main > li > a {
+.menu-container ul.menu-main > li > a {
     text-transform: uppercase;
     font-weight: 700;
 }
 
-ul.menu-main > li.active, ul.menu-main > li.current-menu-item, ul.menu-main > li:hover {
+.menu-container ul.menu-main > li.active, .menu-container ul.menu-main > li.current-menu-item, .menu-container ul.menu-main > li:hover {
     -webkit-box-shadow: 0 1.15px 0 #333333;
     -moz-box-shadow: 0 1.15px 0 #333333;
     box-shadow: 0 1.15px 0 #333333;
 }
 
-ul.menu-main > li ul {
+.menu-container ul.menu-main > li ul {
     min-width: 220px;
     display: none;
     position: absolute;
     padding: 0.525rem 0;
 }
 
-ul.menu-main > li > ul {
+.menu-container ul.menu-main > li > ul {
     padding-top: 2.625rem;
     filter: alpha(opacity=0);
     -moz-opacity: 0;
     opacity: 0;
 }
 
-ul.menu-main > li:not(.multi-column) > ul ul {
+.menu-container ul.menu-main > li:not(.multi-column) > ul ul {
     background: #fff;
     border: 1.15px solid #212121;
     margin-left: -0.071875rem;
     padding: 1.421875rem 0;
 }
 
-ul.menu-main > li > ul:before {
+.menu-container ul.menu-main > li > ul:before {
     content: '';
     display: block;
     height: 100%;
@@ -1063,20 +1060,20 @@ ul.menu-main > li > ul:before {
     background: #fff;
 }
 
-ul.menu-main > li li {
+.menu-container ul.menu-main > li li {
     padding-left: 0.875rem;
 }
 
-ul.menu-main > li ul li {
+.menu-container ul.menu-main > li ul li {
     padding-left: 1.25rem;
 }
 
-ul.menu-main ul.sub-menu {
+.menu-container ul.menu-main ul.sub-menu {
     top: 100%;
     left: 0;
 }
 
-ul.menu-main ul.sub-menu li a {
+.menu-container ul.menu-main ul.sub-menu li a {
     -ms-word-wrap: break-word;
     word-wrap: break-word;
     white-space: normal;
@@ -1085,29 +1082,27 @@ ul.menu-main ul.sub-menu li a {
     padding: 0.35rem 0;
 }
 
-ul.menu-main > li:not(.multi-column) > ul ul {
+.menu-container ul.menu-main > li:not(.multi-column) > ul ul {
     top: 0;
     left: 100%;
 }
 
 @media all and (max-width: 1250px) {
-    ul.menu-main > li {
+    .menu-container ul.menu-main > li {
         padding-left: 0.875rem;
         padding-right: 0.875rem;
         margin-right: 1.125rem;
     }
 }
 
-/* Dropdown */
-/* Multi-column */
-li.multi-column > ul {
+.menu-container li.multi-column > ul {
     width: auto !important;
     white-space: nowrap;
     display: none;
     padding: 0 !important;
 }
 
-li.multi-column .mega-arrow {
+.menu-container li.multi-column .mega-arrow {
     content: '';
     display: none;
     position: absolute;
@@ -1123,7 +1118,7 @@ li.multi-column .mega-arrow {
     opacity: 0;
 }
 
-li.multi-column > ul .multi-column-title {
+.menu-container li.multi-column > ul .multi-column-title {
     padding-left: 0.625rem !important;
     text-transform: uppercase;
     font-weight: 700;
@@ -1134,7 +1129,7 @@ li.multi-column > ul .multi-column-title {
     padding-top: 0.875rem;
 }
 
-li.multi-column > ul > li > a {
+.menu-container li.multi-column > ul > li > a {
     color: #B9B9B9;
     display: inline-block;
     padding: 0.4375rem 0 0;
@@ -1142,11 +1137,11 @@ li.multi-column > ul > li > a {
     padding-top: 0.875rem;
 }
 
-li.multi-column > ul > li > a:hover {
+.menu-container li.multi-column > ul > li > a:hover {
     color: #B9B9B9 !important;
 }
 
-li.multi-column > ul li {
+.menu-container li.multi-column > ul li {
     width: 220px;
     overflow: hidden;
     display: inline-block;
@@ -1154,24 +1149,23 @@ li.multi-column > ul li {
     padding-left: 0.75rem !important;
 }
 
-li.multi-column > ul li ul {
+.menu-container li.multi-column > ul li ul {
     position: relative !important;
     -webkit-box-shadow: none !important;
     -moz-box-shadow: none !important;
     box-shadow: none !important;
 }
 
-li.multi-column > ul ul {
+.menu-container li.multi-column > ul ul {
     display: block !important;
 }
 
-li.multi-column > ul ul li {
+.menu-container li.multi-column > ul ul li {
     float: none;
     display: block;
 }
 
-/* Dropdown Arrow */
-.nav-arrow {
+.menu-container .nav-arrow {
     display: block;
     position: absolute;
     right: 0.284375rem;
@@ -1184,14 +1178,20 @@ li.multi-column > ul ul li {
     border-radius: 100%;
 }
 
-ul.menu-main ul.sub-menu .nav-arrow {
+.menu-container ul.menu-main ul.sub-menu .nav-arrow {
     background-color: #000;
     right: 2.159375rem;
     margin-top: 0.3125rem;
 }
 
-li.multi-column > ul li .nav-arrow {
+.menu-container li.multi-column > ul li .nav-arrow {
     display: none;
+}
+
+@media all and (max-width: 768px) {
+    .menu-container {
+        display: none;
+    }
 }
 
 /* Mobile */

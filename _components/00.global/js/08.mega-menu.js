@@ -11,15 +11,30 @@ theme = ( function ( theme, $, window, document ) {
     var documentReady = function( $ ) {
 		
 		
+		var $window      = $( window ),
+			windowWidth  = $window.width(),
+			windowHeight = $window.height();
+
 		// Using delay is for more accurate calculation
 		setTimeout( function() {
-			megaMenuInit();
+			megaMenuInit( windowWidth );
 		}, 500 );
 		
-		$( window ).on('resize', function() {
-			megaMenuInit();
+		
+		$window.on( 'resize', function() {
+			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+			if ( $window.width() != windowWidth ) {
 
+				// Update the window width for next time
+				windowWidth = $window.width();
+
+				// Do stuff here
+				megaMenuInit( windowWidth );
+		
+
+			}
 		});
+		
 		
 	
 		// For the absolute coordinates of any jquery element 
@@ -42,11 +57,8 @@ theme = ( function ( theme, $, window, document ) {
 
 		
 		// Initialize mega menu
-		function megaMenuInit() {
-			var $window      = $( window ),
-				windowWidth  = $window.width(),
-				windowHeight = $window.height(),
-				maxWidth     = 1170, //The maximum width of the mega menu wrapper
+		function megaMenuInit( w ) {
+			var maxWidth     = 1170, //The maximum width of the mega menu wrapper
 			    perDefaultW  = 220; //Default width of each column
 
 			
@@ -59,7 +71,7 @@ theme = ( function ( theme, $, window, document ) {
 			});
 			
 			
-			if ( windowWidth > 768 ){
+			if ( w > 768 ){
 
 				$( 'li.multi-column' ).each( function() {
 					var root_li          = $( this ),
@@ -82,7 +94,7 @@ theme = ( function ( theme, $, window, document ) {
 						
 						
 						//Determine the mega menu wrapper within document width, in order to limit the width of each column for mega menu
-						if ( maxWidth > windowWidth ) maxWidth = windowWidth;
+						if ( maxWidth > w ) maxWidth = w;
 						
 						
 						if ( mega_div_w > maxWidth ) {
@@ -97,11 +109,11 @@ theme = ( function ( theme, $, window, document ) {
 							
 							if ( ! $( 'body' ).hasClass( 'rtl' ) ) {
 								mega_div.css( {
-									'margin-left' : ( - root_li_left ) + ( ( windowWidth - mega_div_w )/2 ) + 'px'
+									'margin-left' : ( - root_li_left ) + ( ( w - mega_div_w )/2 ) + 'px'
 								} );
 							} else {
 								mega_div.css( {
-									'margin-right' : ( - root_li_left ) + ( ( windowWidth - mega_div_w )/2 ) + 'px'
+									'margin-right' : ( - root_li_left ) + ( ( w - mega_div_w )/2 ) + 'px'
 								} );
 							}
 
@@ -117,14 +129,14 @@ theme = ( function ( theme, $, window, document ) {
 							var chkWidth = parseFloat( root_li_left  + mega_div_w );
 
 
-							if ( chkWidth > windowWidth ) {
+							if ( chkWidth > w ) {
 								if ( ! $( 'body' ).hasClass( 'rtl' ) ) {
 									mega_div.css( {
-										'margin-left' : - ( chkWidth - windowWidth ) + 'px'
+										'margin-left' : - ( chkWidth - w ) + 'px'
 									} );
 								} else {
 									mega_div.css( {
-										'margin-right' : - ( chkWidth - windowWidth ) + 'px'
+										'margin-right' : - ( chkWidth - w ) + 'px'
 									} );
 								}	
 
