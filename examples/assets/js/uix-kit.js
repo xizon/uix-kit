@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit
  * ## Description         :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Version             :  0.0.7
- * ## Last Update         :  January 31, 2018
+ * ## Last Update         :  February 1, 2018
  * ## Created             :  by UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Compatible With     :  Bootstrap 3.x, Chinese, English
@@ -437,7 +437,7 @@ theme = ( function ( theme, $, window, document ) {
 		
 			
 			//HTML5 video autoplay on mobile revisited
-			if ( dataAuto ) {
+			if ( dataAuto && windowWidth <= 768 ) {
 				$this.find( '.video-js' ).attr({
 					'autoplay'    : 'true',
 					'muted'       : 'true',
@@ -451,6 +451,7 @@ theme = ( function ( theme, $, window, document ) {
 			var myPlayer = videojs( curVideoID, {
 					                  width     : dataW,
 					                  height    : dataH,
+				                      loop      : dataLoop,
 									  controlBar: {
 										  muteToggle : false,
 										  autoplay   : dataAuto,
@@ -1165,80 +1166,6 @@ theme = ( function ( theme, $, window, document ) {
 
 /*! 
  *************************************
- * Form
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
-		/*--- Input File ----*/
-		$( '.controls-file-container' ).each( function()  {
-			var fileInput  = $( this ).find( 'input[type="file"]' ),
-				fileBtn    = $( this ).find( '.controls-file-trigger' ),
-				filePath   = $( this ).next( '.controls-file-return' );
-			
-			fileBtn.on( 'click', function() {
-				fileInput.focusin();
-			});	
-			
-			fileInput.on( 'change', function() {
-				filePath.text( $( this ).val() );
-			});	
-			
-		});
-
-		/*--- Hover Effect ----*/
-		$( '.float-label' ).each( function(){
-			
-			var $this = $( this );
-			
-			// on focus add cladd active to label
-			$this.focus( function() {
-				$this.next().addClass( 'active' );
-			});
-			//on blur check field and remove class if needed
-			$this.blur( function() {
-				if( $this.val() === '' || $this.val() === 'blank') {
-					$this.next().removeClass();
-				}
-			});
-			
-			// if exist cookie value
-			if( $this.val() != '' && $this.val() != 'blank') { 
-			    $this.next().addClass( 'active' );
-			}
-			
-		});
-		
-		$( '.wp-search-submit' ).on( 'click', function() {
-			$( this ).parent().parent( 'form' ).submit();
-		});
-		
-		
-		
-		/*--- Input Validation ----*/
-		//Using the jQuery Validation Plugin to check your form
-		
-		
-	};
-	
-		
-    theme.form = {
-        documentReady : documentReady        
-    };
-
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
-
-
-
-/*! 
- *************************************
  * Gallery
  *************************************
  */
@@ -1332,6 +1259,80 @@ theme = ( function ( theme, $, window, document ) {
 	
 		
     theme.gallery = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
+/*! 
+ *************************************
+ * Form
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ) {
+		
+		/*--- Input File ----*/
+		$( '.controls-file-container' ).each( function()  {
+			var fileInput  = $( this ).find( 'input[type="file"]' ),
+				fileBtn    = $( this ).find( '.controls-file-trigger' ),
+				filePath   = $( this ).next( '.controls-file-return' );
+			
+			fileBtn.on( 'click', function() {
+				fileInput.focusin();
+			});	
+			
+			fileInput.on( 'change', function() {
+				filePath.text( $( this ).val() );
+			});	
+			
+		});
+
+		/*--- Hover Effect ----*/
+		$( '.float-label' ).each( function(){
+			
+			var $this = $( this );
+			
+			// on focus add cladd active to label
+			$this.focus( function() {
+				$this.next().addClass( 'active' );
+			});
+			//on blur check field and remove class if needed
+			$this.blur( function() {
+				if( $this.val() === '' || $this.val() === 'blank') {
+					$this.next().removeClass();
+				}
+			});
+			
+			// if exist cookie value
+			if( $this.val() != '' && $this.val() != 'blank') { 
+			    $this.next().addClass( 'active' );
+			}
+			
+		});
+		
+		$( '.wp-search-submit' ).on( 'click', function() {
+			$( this ).parent().parent( 'form' ).submit();
+		});
+		
+		
+		
+		/*--- Input Validation ----*/
+		//Using the jQuery Validation Plugin to check your form
+		
+		
+	};
+	
+		
+    theme.form = {
         documentReady : documentReady        
     };
 
@@ -1818,37 +1819,6 @@ theme = ( function ( theme, $, window, document ) {
 
 /*! 
  *************************************
- * Progress Bar
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-    
-    var documentReady = function( $ ) {
-    
-
-
-
-		
-    };
-
-    theme.progressBar = {
-        documentReady : documentReady        
-    };
-
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
-
-
-
-
-
-
-
-/*! 
- *************************************
  * Pricing
  *************************************
  */
@@ -1960,6 +1930,37 @@ theme = ( function ( theme, $, window, document ) {
     };
 
     theme.pricing = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
+
+
+
+
+/*! 
+ *************************************
+ * Progress Bar
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+    
+
+
+
+		
+    };
+
+    theme.progressBar = {
         documentReady : documentReady        
     };
 
@@ -2102,7 +2103,7 @@ theme = ( function ( theme, $, window, document ) {
 				}
 				
 				//HTML5 video autoplay on mobile revisited
-				if ( dataAuto ) {
+				if ( dataAuto && windowWidth <= 768 ) {
 					$this.find( '.video-js' ).attr({
 						'autoplay'    : 'true',
 						'muted'       : 'true',

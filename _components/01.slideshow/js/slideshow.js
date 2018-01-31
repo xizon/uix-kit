@@ -40,7 +40,7 @@ theme = ( function ( theme, $, window, document ) {
 				}
 				
 				//HTML5 video autoplay on mobile revisited
-				if ( dataAuto ) {
+				if ( dataAuto && windowWidth <= 768 ) {
 					$this.find( '.video-js' ).attr({
 						'autoplay'    : 'true',
 						'muted'       : 'true',
