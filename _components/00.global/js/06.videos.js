@@ -234,8 +234,7 @@ theme = ( function ( theme, $, window, document ) {
 				});
 
 				/* ---------  Callback for when a video has ended */
-				myPlayer.on( 'ended',
-				function() {
+				myPlayer.on( 'ended', function() {
 					console.log( 'video is done!' );
 				});
 

@@ -27,10 +27,7 @@
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
-  -webkit-transition: all 0.3s ease 0s;
-  -moz-transition: all 0.3s ease 0s;
-  -ms-transition: all 0.3s ease 0s;
-  transition: all 0.3s ease 0s;
+  @include transition-default();
 }
 
 .controls {
@@ -113,10 +110,7 @@
       -webkit-box-sizing: content-box;
       -moz-box-sizing: content-box;
       box-sizing: content-box;
-      -webkit-transition: all 0.3s ease 0s;
-      -moz-transition: all 0.3s ease 0s;
-      -ms-transition: all 0.3s ease 0s;
-      transition: all 0.3s ease 0s;
+      @include transition-default();
     }
   }
 	
@@ -128,10 +122,7 @@
     -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
     box-sizing: content-box;
-    -webkit-transition: all 0.3s ease 0s;
-    -moz-transition: all 0.3s ease 0s;
-    -ms-transition: all 0.3s ease 0s;
-    transition: all 0.3s ease 0s;
+    @include transition-default();
   }
 	
   input {
@@ -389,16 +380,13 @@
 /* 3) Group */
 
 .controls-custom-merge {
+  @include transition-default();
   background-color: #fff;
   color: #888;
   margin-bottom: 1.09375rem;
   border: 1px solid #c6c6c6;
   font-size: 0.875rem;
   padding: 0.546875rem 1.09375rem;
-  -webkit-transition: all 0.3s ease 0s;
-  -moz-transition: all 0.3s ease 0s;
-  -ms-transition: all 0.3s ease 0s;
-  transition: all 0.3s ease 0s;
   font-weight: 600;
 }
 

@@ -123,10 +123,7 @@
 
 .button-hover {
   overflow: hidden;
-  -webkit-transition: all 0.3s ease 0s;
-  -moz-transition: all 0.3s ease 0s;
-  -ms-transition: all 0.3s ease 0s;
-  transition: all 0.3s ease 0s;
+  @include transition-default();
   &:hover {
     color: $primary-text-color1;
     border-color: $primary-text-color1;
@@ -149,7 +146,7 @@
   background-image: -moz-linear-gradient(left, $highlight-color1 0%, #f60 20%, #d83ba0 100%) !important;
   background-image: -webkit-linear-gradient(left, $highlight-color1 0%, #f60 20%, #d83ba0 100%) !important;
   background-image: linear-gradient(to right, $highlight-color1 0%, #f60 20%, #d83ba0 100%) !important;
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$highlight-color1', endColorstr='#d83ba0',GradientType=1 ) !important;
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$highlight-color1}', endColorstr='#d83ba0',GradientType=1 ) !important;
   -webkit-box-shadow: 0 4px 15px 0 rgba(236, 94, 121, 0.75);
   -moz-box-shadow: 0 4px 15px 0 rgba(236, 94, 121, 0.75);
   box-shadow: 0 4px 15px 0 rgba(236, 94, 121, 0.75);

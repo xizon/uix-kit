@@ -598,8 +598,7 @@ theme = ( function ( theme, $, window, document ) {
 				});
 
 				/* ---------  Callback for when a video has ended */
-				myPlayer.on( 'ended',
-				function() {
+				myPlayer.on( 'ended', function() {
 					console.log( 'video is done!' );
 				});
 
@@ -2007,8 +2006,8 @@ theme = ( function ( theme, $, window, document ) {
 		
 		
 		// Video embed 
-		function videoEmbedInit() {
-			$( '.web-video-embed' ).each( function()  {
+		function videoEmbedInit( wrapper ) {
+			wrapper.find( '.web-video-embed' ).each( function()  {
 				var $this         = $( this ),
 					curVideoID    = $this.find( '.video-js' ).attr( 'id' ),
 					dataAuto      = $this.data( 'embed-video-autoplay' ),
@@ -2022,6 +2021,14 @@ theme = ( function ( theme, $, window, document ) {
 					dataLoop = true;
 				}
 				
+				//HTML5 video autoplay on mobile revisited
+				if ( dataAuto ) {
+					$this.find( '.video-js' ).attr({
+						'autoplay'    : 'true',
+						'muted'       : 'true',
+						'playsinline' : 'true'
+					});
+				}
 
 				var myPlayer = videojs( curVideoID );
 
@@ -2029,7 +2036,18 @@ theme = ( function ( theme, $, window, document ) {
 				myPlayer.ready(function() {
 
 					if ( dataAuto && dataLoop ) {
+					
+						myPlayer.currentTime(0);
 						myPlayer.play();
+						
+						//Should the video go to the beginning when it ends
+						
+						myPlayer.on( 'ended', function () { 
+							myPlayer.currentTime(0);
+							myPlayer.play();
+						});		
+						
+						
 					}
 
 
@@ -2077,10 +2095,6 @@ theme = ( function ( theme, $, window, document ) {
 			slider.slides.find( "a[rel^='theme-slider-prettyPhoto']" ).lightbox();
 			*/
 			
-			
-			//Video Embed
-			videoEmbedInit();	
-			
         }
 	
 		
@@ -2111,8 +2125,6 @@ theme = ( function ( theme, $, window, document ) {
 				}
 			});
 			
-			//Video Embed
-			videoEmbedInit();
 			
         }
 		
@@ -2157,6 +2169,13 @@ theme = ( function ( theme, $, window, document ) {
 				start             : initslides, //Fires when the slider loads the first slide
 				after             : initslides //Fires after each slider animation completes.
 			});
+			
+			// Fires local videos asynchronously with slider switch.
+			videoEmbedInit( $this );
+			$this.find( '.custom-theme-flex-nav-prev, .custom-theme-flex-nav-next, .custom-theme-flex-control-nav li' ).on( 'click', function() {
+				videoEmbedInit( $this );
+			});
+					
 
 			
 		});
@@ -2222,6 +2241,12 @@ theme = ( function ( theme, $, window, document ) {
 				after             : initslides, //Fires after each slider animation completes.
 				controlsContainer : $( '.custom-controls-container' ),
 				customDirectionNav: $( '.custom-navigation a' )
+			});
+			
+			// Fires local videos asynchronously with slider switch.
+			videoEmbedInit( $this );
+			$this.find( '.custom-navigation a, .custom-controls-container li' ).on( 'click', function() {
+				videoEmbedInit( $this );
 			});
 
 			
@@ -2307,6 +2332,13 @@ theme = ( function ( theme, $, window, document ) {
 					return first.find( 'img' ).addClass( 'active' );
 				}
 			});
+			
+			// Fires local videos asynchronously with slider switch.
+			videoEmbedInit( $this );
+			$this.find( '.custom-theme-flex-nav-prev, .custom-theme-flex-nav-next, .custom-theme-flex-control-nav li' ).on( 'click', function() {
+				videoEmbedInit( $this );
+			});
+			
 
 			
 		});	
@@ -2369,6 +2401,13 @@ theme = ( function ( theme, $, window, document ) {
 				move              : 1, // Number of carousel items that should move on animation.
 			    minItems          : getGridSizeS(), // use function to pull in initial value
 			    maxItems          : getGridSizeS() // use function to pull in initial value
+			});
+			
+			
+			// Fires local videos asynchronously with slider switch.
+			videoEmbedInit( $this );
+			$this.find( '.custom-theme-flex-nav-prev, .custom-theme-flex-nav-next, .custom-theme-flex-control-nav li' ).on( 'click', function() {
+				videoEmbedInit( $this );
 			});
 
 			
