@@ -2,6 +2,7 @@
    5. Basic Layout Styles                                        
 /* ====================================================== */
 
+/* 5.1 Basic */
 .fl {
   float: left;
 }
@@ -125,7 +126,13 @@
   }
 }
 
-/* Custom Grid */
+/* 5.2 Main Wrapper */
+.wrapper {
+	min-height: 100%;
+}
+
+
+/* 5.3 Seamless Grid */
 $seamless-grid-pad : 15px;
 
 .seamless-grid,

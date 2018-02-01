@@ -146,10 +146,76 @@ theme = ( function ( theme, $, window, document ) {
 		//Check out: http://docs.videojs.com/tutorial-player-workflows.html
 		$( '.web-video-btn' ).off( 'click' ).on( 'click', function() {
 			
-			var newMaxW  = windowWidth - 80,
-				newMaxH  = windowHeight - 80,
-				vid      = $( this ).data( 'video-id' ),
-				myPlayer = videojs( vid, {
+			var vid      = $( this ).data( 'video-id' ),
+				$ifm     = false,
+				newMaxW  = windowWidth - 80,
+				newMaxH  = windowHeight - 80;
+			
+			
+			//----- Embed iframe
+			if ( $( '#' + vid ).find( 'iframe' ).length > 0 ) {
+				$ifm = $( '#' + vid ).find( 'iframe' );
+			}
+			
+			if ( $( 'iframe#' + vid ).length > 0 ) {
+				$ifm = $( 'iframe#' + vid );
+			}
+			
+			
+			if ( $ifm && typeof $ifm === 'object' ) {
+				
+				if ( $ifm.length > 0 ) {
+					
+					var curW    = $ifm.width(),
+				    	curH    = $ifm.height(),
+						newW    = curW,
+						newH    = curH;
+					
+					
+					
+					if ( curH > newMaxH ) {
+						newH = newMaxH;
+						
+						//Scaled/Proportional Content 
+						newW = curW*(newH/curH);
+						
+					}	
+					
+					if ( newW > newMaxW ) {
+						newW = newMaxW;
+
+						//Scaled/Proportional Content 
+						newH = curH*(newW/curW);
+					}	
+	
+					$ifm.css({
+						'left'   : ( newMaxW - newW )/2 + 'px',
+						'top'    : ( newMaxH - newH )/2 + 'px',
+						'height' : newH + 'px',
+						'width'  : newW + 'px'
+					});	
+					
+					if ( windowWidth <= 768 ) {
+						$ifm.css({
+							'top'    : 0
+						}).parent( '.embed-responsive' ).css({
+						    'top'    : ( newMaxH - newH )/2 + 'px'
+						});		
+						
+					}
+					
+					
+					
+					
+				}
+				
+				return false;
+			}
+			
+			
+			
+			//----- Embed local video
+			var myPlayer = videojs( vid, {
 					                  width     : 1,
 					                  height    : 1,
 									  controlBar: {
@@ -196,8 +262,6 @@ theme = ( function ( theme, $, window, document ) {
 						newH = curH*(newW/curW);
 					}	
 
-					
-					
 					
 					myPlayer
 						.width( newW )
