@@ -2599,23 +2599,36 @@ theme = ( function ( theme, $, window, document ) {
 				windowWidth = $window.width();
 
 				// Do stuff here
-				$sliderPrimaryEff.data( 'flexslider' ).setup();
+				if ( $sliderPrimaryEff.length > 0 ) {
+					$sliderPrimaryEff.data( 'flexslider' ).setup();
+				}
+				
 				
 				
 				$sliderDefault.each( function() {
-					$( this ).data( 'flexslider' ).setup();
+					
+					if ( $( this ).length > 0 ) {
+						$( this ).data( 'flexslider' ).setup();
+					}			
+					
 				});
 				
 				$sliderMyControls.each( function() {
-					$( this ).data( 'flexslider' ).setup();
+					if ( $( this ).length > 0 ) {
+						$( this ).data( 'flexslider' ).setup();
+					}
 				});
 				
 				$sliderCounterShow.each( function() {
-					$( this ).data( 'flexslider' ).setup();
+					if ( $( this ).length > 0 ) {
+						$( this ).data( 'flexslider' ).setup();
+					}
 				});
 				
 				$sliderItemgird.each( function() {
-					$( this ).data( 'flexslider' ).setup();
+					if ( $( this ).length > 0 ) {
+						$( this ).data( 'flexslider' ).setup();
+					}
 				});
 				
 			}
