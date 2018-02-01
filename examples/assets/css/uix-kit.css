@@ -2989,6 +2989,10 @@ ul.entry-meta {
     visibility: hidden;
 }
 
+[data-video-iframe] {
+    display: none;
+}
+
 .web-video-background-container {
     position: relative;
     height: 100vh;
@@ -3085,104 +3089,6 @@ ul.entry-meta {
 }
 
 /* Actived status */
-/* ====================================================== 
-   Author Card   
-/* ====================================================== */
-.author-card {
-    margin: 0 auto;
-    border: 1px solid #eaeaea;
-    position: relative;
-    border-top: 3px solid #EC5E79;
-}
-
-.author-card-top {
-    min-height: 2.086538461rem;
-    background: #fff;
-    padding: 0.65625rem 1.75rem 0 1.75rem;
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
-}
-
-.author-card-top h3 {
-    margin: 0;
-    padding: 0;
-    font-size: 1.125rem;
-    line-height: 1.7;
-}
-
-.author-card-top .text {
-    margin-top: 0.4375rem;
-    float: left;
-    width: calc(100% - 105px);
-}
-
-.author-card-top .text a {
-    font-size: 0.625rem;
-}
-
-.author-card-top .pic {
-    position: relative;
-    top: 0.175rem;
-    height: 4.375rem;
-    width: 4.375rem;
-    float: right;
-    width: 100px;
-    height: 100px;
-}
-
-.author-card-top .pic img {
-    width: 90px !important;
-    height: 90px !important;
-    margin: 0.3125rem 0 0 0.3125rem;
-    border: 1px solid #eaeaea;
-    -webkit-border-radius: 100%;
-    -moz-border-radius: 100%;
-    border-radius: 100%;
-}
-
-.author-card-middle {
-    background: #fff;
-    padding: 1.75rem 1.75rem 1.3125rem 1.75rem;
-    line-height: 1.5;
-}
-
-.author-card-middle:after {
-    content: '';
-    position: relative;
-    height: 0;
-    width: 0;
-    border-left: 0.4375rem solid transparent;
-    border-right: 0.4375rem solid transparent;
-    border-top: 0.4375rem solid #fff;
-    position: absolute;
-    bottom: 25px;
-    left: 1.75rem;
-}
-
-.author-card-middle p {
-    margin-top: 0.875rem;
-    padding: 0 0.875rem 0 1.75rem;
-}
-
-.author-card-final {
-    height: 30px;
-    font-size: 0.75rem;
-    display: block;
-    background: #F6F6F6;
-    padding: 0.525rem 2.1875rem;
-    text-align: right;
-    border-bottom-left-radius: 2px;
-    border-bottom-right-radius: 2px;
-    -webkit-transition: all 500ms ease-in-out;
-    transition: all 500ms ease-in-out;
-    color: #BDBDBD;
-}
-
-.author-card-final .text {
-    color: #fff;
-    margin-left: 0.4375rem;
-}
-
 /* ====================================================== 
    Button                 
 /* ====================================================== */
@@ -3350,6 +3256,104 @@ ul.entry-meta {
 .button-bg-secondary:hover {
     background-color: #fff !important;
     color: #212121 !important;
+}
+
+/* ====================================================== 
+   Author Card   
+/* ====================================================== */
+.author-card {
+    margin: 0 auto;
+    border: 1px solid #eaeaea;
+    position: relative;
+    border-top: 3px solid #EC5E79;
+}
+
+.author-card-top {
+    min-height: 2.086538461rem;
+    background: #fff;
+    padding: 0.65625rem 1.75rem 0 1.75rem;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+.author-card-top h3 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.125rem;
+    line-height: 1.7;
+}
+
+.author-card-top .text {
+    margin-top: 0.4375rem;
+    float: left;
+    width: calc(100% - 105px);
+}
+
+.author-card-top .text a {
+    font-size: 0.625rem;
+}
+
+.author-card-top .pic {
+    position: relative;
+    top: 0.175rem;
+    height: 4.375rem;
+    width: 4.375rem;
+    float: right;
+    width: 100px;
+    height: 100px;
+}
+
+.author-card-top .pic img {
+    width: 90px !important;
+    height: 90px !important;
+    margin: 0.3125rem 0 0 0.3125rem;
+    border: 1px solid #eaeaea;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
+}
+
+.author-card-middle {
+    background: #fff;
+    padding: 1.75rem 1.75rem 1.3125rem 1.75rem;
+    line-height: 1.5;
+}
+
+.author-card-middle:after {
+    content: '';
+    position: relative;
+    height: 0;
+    width: 0;
+    border-left: 0.4375rem solid transparent;
+    border-right: 0.4375rem solid transparent;
+    border-top: 0.4375rem solid #fff;
+    position: absolute;
+    bottom: 25px;
+    left: 1.75rem;
+}
+
+.author-card-middle p {
+    margin-top: 0.875rem;
+    padding: 0 0.875rem 0 1.75rem;
+}
+
+.author-card-final {
+    height: 30px;
+    font-size: 0.75rem;
+    display: block;
+    background: #F6F6F6;
+    padding: 0.525rem 2.1875rem;
+    text-align: right;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    -webkit-transition: all 500ms ease-in-out;
+    transition: all 500ms ease-in-out;
+    color: #BDBDBD;
+}
+
+.author-card-final .text {
+    color: #fff;
+    margin-left: 0.4375rem;
 }
 
 /* ====================================================== 

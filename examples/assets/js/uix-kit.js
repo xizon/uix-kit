@@ -522,81 +522,161 @@ theme = ( function ( theme, $, window, document ) {
 		 Video Popup Interaction
 		 ------------------
 		 */  
-		//Check out: http://docs.videojs.com/tutorial-player-workflows.html
-		$( '.web-video-btn' ).off( 'click' ).on( 'click', function() {
+		var $modalDialogTrigger = $( '[data-video-win]' );
+		
+		//Add video container
+		$modalDialogTrigger.each( function()  {
 			
+	
+			var $this             = $( this ),
+				videoSrcIfm       = '',
+				videoSrcMp4       = $this.data( 'video-mp4' ),
+				videoSrcWebm      = $this.data( 'video-webm' ),
+				videoSrcOgv       = $this.data( 'video-ogv' ),
+				videoPoster       = $this.data( 'video-poster' ),
+				videoContainerMid = $this.data( 'modal-id' ),
+				videoContainerVid = $this.data( 'video-id' );
+				
+			
+			if( typeof videoSrcMp4 === typeof undefined ) {
+				videoSrcMp4 = '';
+			}	
+			
+			if( typeof videoSrcWebm === typeof undefined ) {
+				videoSrcWebm = '';
+			}	
+			
+			if( typeof videoSrcOgv === typeof undefined ) {
+				videoSrcOgv = '';
+			}		
+			
+			if ( $this.find( '[data-video-iframe]' ).length > 0 ) {
+				videoSrcIfm = $this.find( '[data-video-iframe]' ).html();
+			}
+				
+		
+				
+			//Add modal dialog
+			if ( $( '#' + videoContainerMid ).length == 0 ) {
+				
+				var v      = '',
+					vmp4   = '',
+					vwebm  = '',
+					vogv   = '';
+				
+				if ( videoSrcMp4 != '' ) {
+					vmp4 = '<source src="'+videoSrcMp4+'" type="video/mp4">';
+				}
+				if ( videoSrcWebm != '' ) {
+					vwebm = '<source src="'+videoSrcWebm+'" type="video/webm">';
+				}
+				if ( videoSrcOgv != '' ) {
+					vogv = '<source src="'+videoSrcOgv+'" type="video/ogv">';
+				}
+				
+				v += '<div class="modal-box fullscreen video" id="'+videoContainerMid+'">';
+				v += '<a href="javascript:void(0)" class="close-btn"></a>';
+				v += '<div class="content">';
+				v += '<div class="web-video-container">';
+				
+				if ( $this.find( '[data-video-iframe]' ).length > 0 && videoSrcIfm != '' ) {
+					//If iframe
+					v += '<div id="'+videoContainerVid+'" class="embed-responsive embed-responsive-16by9">';
+					v += videoSrcIfm;
+					v += '</div>';			
+
+				} else {
+					//If local video
+					v += '<video id="'+videoContainerVid+'" class="video-js vjs-default-skin" controls poster="'+videoPoster+'">';
+					v += vmp4 + vwebm + vogv;
+					v += '</video>';
+				}
+
+				v += '</div>';
+				v += '</div>';
+				v += '</div>';
+
+				
+				//Wait until previous .append() is complete
+				$( v ).appendTo( 'body' );
+	
+			}
+			
+			
+		});
+		
+		
+		//Check out: http://docs.videojs.com/tutorial-player-workflows.html
+		$modalDialogTrigger.off( 'click' ).on( 'click', function() {
+
 			var vid      = $( this ).data( 'video-id' ),
 				$ifm     = false,
 				newMaxW  = windowWidth - 80,
 				newMaxH  = windowHeight - 80;
-			
-			
+
+
 			//----- Embed iframe
 			if ( $( '#' + vid ).find( 'iframe' ).length > 0 ) {
 				$ifm = $( '#' + vid ).find( 'iframe' );
 			}
-			
-			if ( $( 'iframe#' + vid ).length > 0 ) {
-				$ifm = $( 'iframe#' + vid );
-			}
-			
-			
+
+
 			if ( $ifm && typeof $ifm === 'object' ) {
-				
+
 				if ( $ifm.length > 0 ) {
-					
+
 					var curW    = $ifm.width(),
-				    	curH    = $ifm.height(),
+						curH    = $ifm.height(),
 						newW    = curW,
 						newH    = curH;
-					
-					
-					
+
+
+
 					if ( curH > newMaxH ) {
 						newH = newMaxH;
-						
+
 						//Scaled/Proportional Content 
 						newW = curW*(newH/curH);
-						
+
 					}	
-					
+
 					if ( newW > newMaxW ) {
 						newW = newMaxW;
 
 						//Scaled/Proportional Content 
 						newH = curH*(newW/curW);
 					}	
-	
+
 					$ifm.css({
 						'left'   : ( newMaxW - newW )/2 + 'px',
 						'top'    : ( newMaxH - newH )/2 + 'px',
 						'height' : newH + 'px',
 						'width'  : newW + 'px'
 					});	
-					
+
 					if ( windowWidth <= 768 ) {
 						$ifm.css({
 							'top'    : 0
 						}).parent( '.embed-responsive' ).css({
-						    'top'    : ( newMaxH - newH )/2 + 'px'
+							'top'    : ( newMaxH - newH )/2 + 'px'
 						});		
-						
+
 					}
-					
-					
-					
-					
+
+
+
+
 				}
-				
+
 				return false;
 			}
-			
-			
-			
+
+
+
 			//----- Embed local video
 			var myPlayer = videojs( vid, {
-					                  width     : 1,
-					                  height    : 1,
+									  width     : 1,
+									  height    : 1,
 									  controlBar: {
 										  muteToggle : false,
 										  autoplay   : true,
@@ -606,34 +686,34 @@ theme = ( function ( theme, $, window, document ) {
 											  muteToggle: false
 										  }
 									  }
-					
-					
+
+
 									});
-			
+
 
 			myPlayer.ready(function() {
-				
+
 
 				/* ---------  Video Modal initialize */
 				myPlayer.on( 'loadedmetadata', function() {
 
 					//Get Video Dimensions
 					var curW    = this.videoWidth(),
-				    	curH    = this.videoHeight(),
+						curH    = this.videoHeight(),
 						newW    = curW,
 						newH    = curH;
 
 					//Resise modal
 					if ( curH > newMaxH ) {
 						newH = newMaxH;
-						
+
 						//Scaled/Proportional Content 
 						newW = curW*(newH/curH);
-						
-						
+
+
 					}
-					
-					
+
+
 					if ( newW > newMaxW ) {
 						newW = newMaxW;
 
@@ -641,20 +721,20 @@ theme = ( function ( theme, $, window, document ) {
 						newH = curH*(newW/curW);
 					}	
 
-					
+
 					myPlayer
 						.width( newW )
 						.height( newH );
-					
-					
+
+
 					$( '#' + vid ).css({
 						'left' : ( newMaxW - newW )/2 + 'px',
 						'top'  : ( newMaxH - newH )/2 + 'px'
 					});
-					
-					
-	
-					
+
+
+
+
 				});
 
 				/* ---------  Set, tell the player it's in fullscreen  */
@@ -682,24 +762,26 @@ theme = ( function ( theme, $, window, document ) {
 					console.log( 'video is done!' );
 				});
 
-				
+
 
 			});
-			
 
 
-			
+
+
 			/* ---------  Close the modal  */
 			$( '.modal-box .close-btn' ).on( 'click', function() {
-				
+
 				myPlayer.ready(function() {
-				    myPlayer.pause();
+					myPlayer.pause();
 				});				
-				
+
 			});
-			
-			
+
+
 		});
+
+
 		
 		
 		
