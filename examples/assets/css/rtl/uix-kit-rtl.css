@@ -60,6 +60,7 @@ blockquote:before {
 /* ====================================================== 
    5. Basic Layout Styles                                        
 /* ====================================================== */
+/* 5.1 Basic */
 .fl {
     float: right;
 }
@@ -76,7 +77,7 @@ blockquote:before {
     text-align: right;
 }
 
-/* Custom Grid */
+/* 5.3 Seamless Grid */
 [class*='seamless-col-'] {
     float: right;
     padding-right: auto;
@@ -89,13 +90,15 @@ blockquote:before {
 
 .seamless-grid.loop .seamless-col-1-2:nth-child(2n+0),
 .seamless-grid.loop .seamless-col-1-3:nth-child(3n+0),
-.seamless-grid.loop .seamless-col-1-4:nth-child(4n+0) {
+.seamless-grid.loop .seamless-col-1-4:nth-child(4n+0),
+.seamless-grid.loop .seamless-col-1-6:nth-child(6n+0) {
     padding-left: 0;
 }
 
 .seamless-grid.loop .seamless-col-1-2:last-of-type,
 .seamless-grid.loop .seamless-col-1-3:last-of-type,
-.seamless-grid.loop .seamless-col-1-4:last-of-type {
+.seamless-grid.loop .seamless-col-1-4:last-of-type,
+.seamless-grid.loop .seamless-col-1-6:last-of-type {
     padding-left: 15px;
 }
 
@@ -113,17 +116,20 @@ blockquote:before {
         padding-left: 0;
     }
 
-    .seamless-grid.use-2 .seamless-col-1-4,
+    .seamless-grid.use-2 .seamless-col-1-6,
+  .seamless-grid.use-2 .seamless-col-1-4,
   .seamless-grid.use-2 .seamless-col-1-3 {
         float: right;
     }
 
-    .seamless-grid.use-2 .seamless-col-1-4:nth-child(2n+1),
+    .seamless-grid.use-2 .seamless-col-1-6:nth-child(2n+1),
+  .seamless-grid.use-2 .seamless-col-1-4:nth-child(2n+1),
   .seamless-grid.use-2 .seamless-col-1-3:nth-child(2n+1) {
         padding-left: 15px;
     }
 
-    .seamless-grid.use-2 .seamless-col-1-4:nth-child(2n+0),
+    .seamless-grid.use-2 .seamless-col-1-6:nth-child(2n+0),
+  .seamless-grid.use-2 .seamless-col-1-4:nth-child(2n+0),
   .seamless-grid.use-2 .seamless-col-1-3:nth-child(2n+0) {
         padding-left: 0;
     }
@@ -136,26 +142,31 @@ blockquote:before {
 
     .seamless-grid.loop .seamless-col-1-2:last-of-type,
   .seamless-grid.loop .seamless-col-1-3:last-of-type,
-  .seamless-grid.loop .seamless-col-1-4:last-of-type {
+  .seamless-grid.loop .seamless-col-1-4:last-of-type,
+  .seamless-grid.loop .seamless-col-1-6:last-of-type {
         padding-left: 0;
     }
 
-    .seamless-grid.use-2 .seamless-col-1-4,
+    .seamless-grid.use-2 .seamless-col-1-6,
+  .seamless-grid.use-2 .seamless-col-1-4,
   .seamless-grid.use-2 .seamless-col-1-3 {
         float: right;
     }
 
-    .seamless-grid.use-2 .seamless-col-1-4:nth-child(2n+1),
+    .seamless-grid.use-2 .seamless-col-1-6:nth-child(2n+1),
+  .seamless-grid.use-2 .seamless-col-1-4:nth-child(2n+1),
   .seamless-grid.use-2 .seamless-col-1-3:nth-child(2n+1) {
         padding-left: 15px;
     }
 
-    .seamless-grid.use-2 .seamless-col-1-4:nth-child(2n+0),
+    .seamless-grid.use-2 .seamless-col-1-6:nth-child(2n+0),
+  .seamless-grid.use-2 .seamless-col-1-4:nth-child(2n+0),
   .seamless-grid.use-2 .seamless-col-1-3:nth-child(2n+0) {
         padding-left: 0;
     }
 
-    .seamless-grid.loop:not(.use-2) .seamless-col-1-4:nth-child(2n+1),
+    .seamless-grid.loop:not(.use-2) .seamless-col-1-6:nth-child(2n+1),
+  .seamless-grid.loop:not(.use-2) .seamless-col-1-4:nth-child(2n+1),
   .seamless-grid.loop:not(.use-2) .seamless-col-1-3:nth-child(3n+1) {
         padding-left: 0;
     }

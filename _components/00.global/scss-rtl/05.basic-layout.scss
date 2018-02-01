@@ -1,6 +1,7 @@
 /* ====================================================== 
    5. Basic Layout Styles                                        
 /* ====================================================== */
+/* 5.1 Basic */
 .fl {
     float: right;
 }
@@ -18,9 +19,9 @@
 }
 
 
-
-/* Custom Grid */
+/* 5.3 Seamless Grid */
 $seamless-grid-pad : 15px;
+
 
 [class*='seamless-col-'] {
 	float: right;
@@ -30,23 +31,23 @@ $seamless-grid-pad : 15px;
 	.seamless-grid &:last-of-type {
 		padding-left: 0;
 	}
+	
 }
-
-
 
 
 .seamless-grid.loop .seamless-col-1-2:nth-child(2n+0),
 .seamless-grid.loop .seamless-col-1-3:nth-child(3n+0),
-.seamless-grid.loop .seamless-col-1-4:nth-child(4n+0) {
+.seamless-grid.loop .seamless-col-1-4:nth-child(4n+0),
+.seamless-grid.loop .seamless-col-1-6:nth-child(6n+0) {
 	padding-left: 0;
 }
 
 .seamless-grid.loop .seamless-col-1-2:last-of-type,
 .seamless-grid.loop .seamless-col-1-3:last-of-type,
-.seamless-grid.loop .seamless-col-1-4:last-of-type {
+.seamless-grid.loop .seamless-col-1-4:last-of-type,
+.seamless-grid.loop .seamless-col-1-6:last-of-type {
 	padding-left: $seamless-grid-pad;
 }
-
 
 .seamless-grid.one-row [class*='seamless-col-']:last-of-type {
 	padding-left: 0;
@@ -58,58 +59,64 @@ $seamless-grid-pad : 15px;
 		padding-left: $seamless-grid-pad;
 	}
 	
-
 	.seamless-grid.loop .seamless-col-1-4:nth-child(2n+0),
 	.seamless-grid.loop .seamless-col-1-3:nth-child(2n+0) {
 		padding-left: 0;
 	}
 	
+	
+	.seamless-grid.use-2 .seamless-col-1-6,
 	.seamless-grid.use-2 .seamless-col-1-4,
 	.seamless-grid.use-2 .seamless-col-1-3 {
 		float: right;
 	}
+	
+	.seamless-grid.use-2 .seamless-col-1-6:nth-child(2n+1),
 	.seamless-grid.use-2 .seamless-col-1-4:nth-child(2n+1),
 	.seamless-grid.use-2 .seamless-col-1-3:nth-child(2n+1) {
 		padding-left: $seamless-grid-pad;
 	
 	}
 	
+	.seamless-grid.use-2 .seamless-col-1-6:nth-child(2n+0),
 	.seamless-grid.use-2 .seamless-col-1-4:nth-child(2n+0),
 	.seamless-grid.use-2 .seamless-col-1-3:nth-child(2n+0) {
 		padding-left: 0;
 		
 	}
-
-	
 }
 
 
 @media all and (max-width: 768px) {
 
-
+	
 	.seamless-grid.loop .seamless-col-1-3:nth-child(3n+0) {
 		padding-left: 0;
 	}
 	
-
-	
 	.seamless-grid.loop .seamless-col-1-2:last-of-type,
 	.seamless-grid.loop .seamless-col-1-3:last-of-type,
-	.seamless-grid.loop .seamless-col-1-4:last-of-type {
+	.seamless-grid.loop .seamless-col-1-4:last-of-type,
+	.seamless-grid.loop .seamless-col-1-6:last-of-type {
 		padding-left: 0;
 	}
-
 	
+	
+	.seamless-grid.use-2 .seamless-col-1-6,
 	.seamless-grid.use-2 .seamless-col-1-4,
 	.seamless-grid.use-2 .seamless-col-1-3 {
 		float: right;
 	}
+	
+	.seamless-grid.use-2 .seamless-col-1-6:nth-child(2n+1),
 	.seamless-grid.use-2 .seamless-col-1-4:nth-child(2n+1),
 	.seamless-grid.use-2 .seamless-col-1-3:nth-child(2n+1) {
 		padding-left: $seamless-grid-pad;
 	
 	}
 	
+	
+	.seamless-grid.use-2 .seamless-col-1-6:nth-child(2n+0),
 	.seamless-grid.use-2 .seamless-col-1-4:nth-child(2n+0),
 	.seamless-grid.use-2 .seamless-col-1-3:nth-child(2n+0) {
 		padding-left: 0;
@@ -117,6 +124,7 @@ $seamless-grid-pad : 15px;
 	}
 
 	
+	.seamless-grid.loop:not(.use-2) .seamless-col-1-6:nth-child(2n+1),
 	.seamless-grid.loop:not(.use-2) .seamless-col-1-4:nth-child(2n+1),
 	.seamless-grid.loop:not(.use-2) .seamless-col-1-3:nth-child(3n+1) {
 		padding-left: 0;
