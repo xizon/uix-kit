@@ -46,5 +46,15 @@
   "bugs": {
     "url": "https://github.com/xizon/uix-kit/issues"
   },
-  "homepage": "https://github.com/xizon/uix-kit#readme"
+  "homepage": "https://github.com/xizon/uix-kit#readme",
+  "directories": {
+    "example": "uix-kit"
+  },
+  "keywords": [
+    "uix",
+    "kit",
+    "kits",
+	"front-end",
+    "webdesign"
+  ]
 }

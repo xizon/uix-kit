@@ -1488,6 +1488,13 @@ theme = ( function ( theme, $, window, document ) {
 }( theme, jQuery, window, document ) );
 
 
+/*! 
+ *************************************
+ * Custom Core Scripts & Stylesheets
+ *************************************
+ */
+
+
 
 /*! 
  *************************************
@@ -1802,6 +1809,133 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
+/*! 
+ *************************************
+ * Pricing
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+    
+		
+		var $window      = $( window ),
+			windowWidth  = $window.width(),
+			windowHeight = $window.height();
+
+		
+		//-------- Pricing initialize
+		pricingInit();
+		
+		$window.on( 'resize', function() {
+			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+			if ( $window.width() != windowWidth ) {
+
+				// Update the window width for next time
+				windowWidth = $window.width();
+
+				// Do stuff here
+				pricingInit();
+		
+
+			}
+		});
+		
+		
+		
+		function pricingInit() {
+			//Initialize the height
+			$( '.custom-price' ).each( function(){
+
+
+					//returns new id
+					var $this            = $( this ),
+						priceBGH         = Array(),
+						priceBGH_excerpt = Array(),
+						$initHeight      = $this.find( '.init-height' );
+
+					$initHeight.each( function( index ) {
+						//Screen protection of height
+						$( this ).find( '.border,.excerpt' ).css( 'height', 'auto' );
+
+						var tempheight = $( this ).height();
+						var tempheight_excerpt = $( this ).find( '.excerpt' ).height();
+						priceBGH.push( tempheight );
+						priceBGH_excerpt.push( tempheight_excerpt );
+
+
+					} );
+
+					var priceBGH_Max = Math.max.apply( Math, priceBGH );
+
+
+					if ( priceBGH_Max > 0 ) {
+						if ( $( document.body ).width() > 768 ){
+
+							// Initialize the height of all columns
+							$initHeight.find( '.border' ).css( 'height', priceBGH_Max + 'px' );
+
+							// Actived columns
+							$initHeight.find( '.border.active' ).each( function() {
+
+								var ty = Math.abs( parseInt( $( this ).css('transform').split(',')[5]));
+								if ( !isNaN(ty) ) {
+									$( this ).css( 'height', priceBGH_Max + ty*2 + 'px' );
+								}
+
+							});	
+
+
+
+						} else {
+							$initHeight.find( '.border' ).css( 'height', 'auto' );
+
+
+						}
+
+
+						// Actived columns
+						$initHeight.find( '.border.active' ).each( function() {
+
+							var textColor = $( this ).closest( '.border-hover' ).data( 'tcolor' ),
+								btnColor  = $( this ).closest( '.border-hover' ).data( 'bcolor' );
+
+							$( this ).css( 'background-color', btnColor );
+							$( this ).find( '.button' ).removeClass( 'button-bg-primary' ).addClass( 'button-bg-secondary' );
+
+
+						});	
+
+
+
+					}
+
+
+			});
+		}
+		
+		
+
+
+		
+    };
+
+    theme.pricing = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
+
+
+
+
 
 /*! 
  *************************************
@@ -1960,133 +2094,6 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
-
-
-
-/*! 
- *************************************
- * Pricing
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-    
-    var documentReady = function( $ ) {
-    
-		
-		var $window      = $( window ),
-			windowWidth  = $window.width(),
-			windowHeight = $window.height();
-
-		
-		//-------- Pricing initialize
-		pricingInit();
-		
-		$window.on( 'resize', function() {
-			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( $window.width() != windowWidth ) {
-
-				// Update the window width for next time
-				windowWidth = $window.width();
-
-				// Do stuff here
-				pricingInit();
-		
-
-			}
-		});
-		
-		
-		
-		function pricingInit() {
-			//Initialize the height
-			$( '.custom-price' ).each( function(){
-
-
-					//returns new id
-					var $this            = $( this ),
-						priceBGH         = Array(),
-						priceBGH_excerpt = Array(),
-						$initHeight      = $this.find( '.init-height' );
-
-					$initHeight.each( function( index ) {
-						//Screen protection of height
-						$( this ).find( '.border,.excerpt' ).css( 'height', 'auto' );
-
-						var tempheight = $( this ).height();
-						var tempheight_excerpt = $( this ).find( '.excerpt' ).height();
-						priceBGH.push( tempheight );
-						priceBGH_excerpt.push( tempheight_excerpt );
-
-
-					} );
-
-					var priceBGH_Max = Math.max.apply( Math, priceBGH );
-
-
-					if ( priceBGH_Max > 0 ) {
-						if ( $( document.body ).width() > 768 ){
-
-							// Initialize the height of all columns
-							$initHeight.find( '.border' ).css( 'height', priceBGH_Max + 'px' );
-
-							// Actived columns
-							$initHeight.find( '.border.active' ).each( function() {
-
-								var ty = Math.abs( parseInt( $( this ).css('transform').split(',')[5]));
-								if ( !isNaN(ty) ) {
-									$( this ).css( 'height', priceBGH_Max + ty*2 + 'px' );
-								}
-
-							});	
-
-
-
-						} else {
-							$initHeight.find( '.border' ).css( 'height', 'auto' );
-
-
-						}
-
-
-						// Actived columns
-						$initHeight.find( '.border.active' ).each( function() {
-
-							var textColor = $( this ).closest( '.border-hover' ).data( 'tcolor' ),
-								btnColor  = $( this ).closest( '.border-hover' ).data( 'bcolor' );
-
-							$( this ).css( 'background-color', btnColor );
-							$( this ).find( '.button' ).removeClass( 'button-bg-primary' ).addClass( 'button-bg-secondary' );
-
-
-						});	
-
-
-
-					}
-
-
-			});
-		}
-		
-		
-
-
-		
-    };
-
-    theme.pricing = {
-        documentReady : documentReady        
-    };
-
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
-
-
-
-
 
 
 
@@ -2811,6 +2818,87 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
+/*! 
+ *************************************
+ * Testimonials Carousel
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+    
+		var $obj = $( '.custom-testimonials .flexslider' );
+		$obj.flexslider({
+			animation         : 'slide',
+			slideshow         : true,
+			smoothHeight      : true,
+			controlNav        : true,
+			manualControls    : '.slides-custom-control li',
+			directionNav      : false,
+			animationSpeed    : 600,
+			slideshowSpeed    : 7000,
+			selector          : ".slides > li",
+			drag              : true,
+			start: function(slider){
+				$obj.on( 'mousedown', function( e ) {
+					if ( $obj.data( 'flexslider' ).animating ) {
+						return;
+					}
+						
+					$( this ).addClass('dragging');
+					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
+					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
+					$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
+					$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );
+				} );
+			
+				$obj.on( 'mouseup', function( e ) {
+					if ( $obj.data('flexslider').animating ) {
+						return;
+					}
+						
+					$( this ).removeClass('dragging');
+					var origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
+					    origin_mouse_y = $( this ).data( 'origin_mouse_y' );
+					
+					if ( 'horizontal' === $obj.data('flexslider').vars.direction ) {
+						if ( e.pageX > origin_mouse_x ) {
+							$obj.flexslider('prev');
+						}
+						if ( e.pageX < origin_mouse_x ) {
+							$obj.flexslider('next');
+						}
+					} else {
+						if ( e.pageY > origin_mouse_y ) {
+							$obj.flexslider('prev');
+						}
+						if ( e.pageY < origin_mouse_y ) {
+							$obj.flexslider('next');
+						}
+					}
+				} );
+			}
+		});
+		
+		
+    };
+
+    theme.testimonials = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
+
+
+
+
 
 /*! 
  *************************************
@@ -2980,87 +3068,6 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
-
-
-/*! 
- *************************************
- * Testimonials Carousel
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-    
-    var documentReady = function( $ ) {
-    
-		var $obj = $( '.custom-testimonials .flexslider' );
-		$obj.flexslider({
-			animation         : 'slide',
-			slideshow         : true,
-			smoothHeight      : true,
-			controlNav        : true,
-			manualControls    : '.slides-custom-control li',
-			directionNav      : false,
-			animationSpeed    : 600,
-			slideshowSpeed    : 7000,
-			selector          : ".slides > li",
-			drag              : true,
-			start: function(slider){
-				$obj.on( 'mousedown', function( e ) {
-					if ( $obj.data( 'flexslider' ).animating ) {
-						return;
-					}
-						
-					$( this ).addClass('dragging');
-					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
-					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
-					$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
-					$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );
-				} );
-			
-				$obj.on( 'mouseup', function( e ) {
-					if ( $obj.data('flexslider').animating ) {
-						return;
-					}
-						
-					$( this ).removeClass('dragging');
-					var origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
-					    origin_mouse_y = $( this ).data( 'origin_mouse_y' );
-					
-					if ( 'horizontal' === $obj.data('flexslider').vars.direction ) {
-						if ( e.pageX > origin_mouse_x ) {
-							$obj.flexslider('prev');
-						}
-						if ( e.pageX < origin_mouse_x ) {
-							$obj.flexslider('next');
-						}
-					} else {
-						if ( e.pageY > origin_mouse_y ) {
-							$obj.flexslider('prev');
-						}
-						if ( e.pageY < origin_mouse_y ) {
-							$obj.flexslider('next');
-						}
-					}
-				} );
-			}
-		});
-		
-		
-    };
-
-    theme.testimonials = {
-        documentReady : documentReady        
-    };
-
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
-
-
-
-
-
 
 
 
