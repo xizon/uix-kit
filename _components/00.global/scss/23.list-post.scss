@@ -2,150 +2,170 @@
    23. List of Post
 /* ====================================================== */
 
-.list-topic-container {}
+.list-topic-container {
+	
+	.list-topic-item {
 
-.list-topic-item {
-  position: relative;
-  margin-bottom: 4.8125rem;
-  .gallery-caption {
-    display: none;
-  }
-  .list-topic-item-audio {
-    position: relative;
-    z-index: 1;
-  }
-  .list-topic-item-img iframe {
-    max-width: 100% !important;
-    max-height: 300px !important;
-  }
-  .list-normal {
-    ul, ol {
-      line-height: inherit !important;
-    }
-  }
-  &:not(.post-blockquote) blockquote {
-    font-size: inherit;
-    padding: 0.75rem;
-    margin: 0.875rem 0;
-    border-left-width: 3px;
-    line-height: inherit;
-    quotes: none;
-    &:before {
-      display: none;
-    }
-  }
-  .list-topic-item-img {
-    margin-top: 1.75rem;
-  }
-  .list-topic-item-info {
-    margin-top: 3.5rem;
-    -ms-word-wrap: break-word;
-    word-wrap: break-word;
-    background: #fff;
-    padding: 1rem;
-    position: relative;
-  }
-  &:hover .list-topic-item-info {
-    background: #F3F3F3;
-  }
-  .list-topic-item-info {
-    h1, h2, h3, h4, h5, h6 {
-      font-family: inherit;
-      font-weight: 600;
-    }
-    h1 {
-      font-size: 2.4609375rem;
-      line-height: 1.15555556;
-    }
-    h2 {
-      font-size: 1.75rem;
-      line-height: 1.421875;
-    }
-    h3 {
-      font-size: 1.25rem;
-      line-height: 1.625;
-    }
-    .page-link a {
-      display: inline-block;
-      padding: .2625rem;
-    }
-  }
-  .detail {
-    margin-top: 1rem;
-  }
-  p {
-    margin: 0;
-    padding: 0;
-    position: relative;
-    z-index: 2;
-    font-size: 0.875rem;
-  }
-  a.more {
-    font-size: 0.75rem;
-    position: relative;
-    padding-left: 1.5rem;
-    display: inline-block;
-    margin-top: 3.5rem;
-    z-index: 3;
-    text-transform: uppercase;
-  }
-  &:hover a.more {
-    color: #fff;
-  }
-  .more-container {
-    overflow: hidden;
-  }
-  .more-bg {
-    background: $highlight-color1;
-    position: absolute;
-    right: -200px;
-    top: 69%;
-    z-index: 1;
-    -moz-transition: .1s ease-in-out;
-    -o-transition: .1s ease-in-out;
-    -webkit-transition: .1s ease-in-out;
-    transition: .1s ease-in-out;
-    width: 130px;
-    height: 35px;
-    -webkit-transform: rotate(0) skew(-45deg);
-    -ms-transform: rotate(0) skew(-45deg);
-    transform: rotate(0) skew(-45deg);
-  }
-  &:hover .more-bg {
-    right: -30px;
-  }
-  &.style-2 {
-    .detail p, .tags-box {
-      padding-left: 1rem;
-    }
-    .detail a {
-      /* Used when "list-normal table-normal" style are used */
-      color: $primary-text-color2 !important;
-      &:hover {
-        /* Used when "list-normal table-normal" style are used */
-        color: #000 !important;
-        text-decoration: none;
-      }
-    }
-  }
+	  position: relative;
+	  margin-bottom: 4.8125rem;	
+
+
+	  .gallery-caption {
+		  display: none;
+	  }
+	  .list-topic-item-audio {
+		  position: relative;
+		  z-index: 1;
+	  }
+	  .list-topic-item-img iframe {
+		  max-width: 100% !important;
+		  max-height: 300px !important;
+	  }
+	  .list-normal {
+		  ul, ol {
+			line-height: inherit !important;
+		  }
+	  }
+	  &:not(.post-blockquote) blockquote {
+		  font-size: inherit;
+		  padding: 0.75rem;
+		  margin: 0.875rem 0;
+		  border-left-width: 3px;
+		  line-height: inherit;
+		  quotes: none;
+		  &:before {
+			  display: none;
+		  }
+	  }
+	  .list-topic-item-img {
+		margin-top: 1.75rem;
+
+		  a {
+			  display: block;
+			  position: relative;
+			  width: 100%;
+			  height: 100%;
+			  overflow: hidden;
+		  }  
+
+	  }
+	  .list-topic-item-info {
+		  margin-top: 3.5rem;
+		  -ms-word-wrap: break-word;
+		  word-wrap: break-word;
+		  background: #fff;
+		  padding: 1rem;
+		  position: relative;
+	  }
+	  &:hover .list-topic-item-info {
+		  background: #F3F3F3;
+	  }
+	  .list-topic-item-info {
+		  h1, h2, h3, h4, h5, h6 {
+			  font-family: inherit;
+			  font-weight: 600;
+		  }
+		  h1 {
+			  font-size: 2.4609375rem;
+			  line-height: 1.15555556;
+		  }
+		  h2 {
+			  font-size: 1.75rem;
+			  line-height: 1.421875;
+		  }
+		  h3 {
+			  font-size: 1.25rem;
+			  line-height: 1.625;
+		  }
+		  .page-link a {
+			  display: inline-block;
+			  padding: .2625rem;
+		  }
+	  }
+	  .detail {
+		  margin-top: 1rem;
+	  }
+	  p {
+		  margin: 0;
+		  padding: 0;
+		  position: relative;
+		  z-index: 2;
+		  font-size: 0.875rem;
+	  }
+
+	  a.more {
+		  font-size: 0.75rem;
+		  position: relative;
+		  padding-left: 1.5rem;
+		  display: inline-block;
+		  margin-top: 3.5rem;
+		  z-index: 3;
+		  text-transform: uppercase;
+	  }
+	  &:hover a.more {
+		  color: #fff;
+	  }
+	  .more-container {
+		  overflow: hidden;
+	  }
+	  .more-bg {
+		  background: $highlight-color1;
+		  position: absolute;
+		  right: -200px;
+		  top: 69%;
+		  z-index: 1;
+		  -moz-transition: .1s ease-in-out;
+		  -o-transition: .1s ease-in-out;
+		  -webkit-transition: .1s ease-in-out;
+		  transition: .1s ease-in-out;
+		  width: 130px;
+		  height: 35px;
+		  -webkit-transform: rotate(0) skew(-45deg);
+		  -ms-transform: rotate(0) skew(-45deg);
+		  transform: rotate(0) skew(-45deg);
+	  }
+	  &:hover .more-bg {
+		  right: -30px;
+	  }
+	  &.style-2 {
+		  .detail p, 
+		  .tags-box {
+			  padding-left: 1rem;
+		  }
+
+		  .detail a {
+			  /* Used when "list-normal table-normal" style are used */
+			  color: $primary-text-color2 !important;
+			  &:hover {
+				/* Used when "list-normal table-normal" style are used */
+				color: #000 !important;
+				text-decoration: none;
+			  }
+		  }
+	  }
+
+	}
+	
 }
 
-@media all and (max-width: 768px) {
-  .list-topic-item {
-    margin-bottom: 3rem;
-  }
-}
+
 
 @media all and (max-width: 768px) {
-  .list-topic-item .list-topic-item-info {
-    margin-top: 0;
-  }
-}
+	
+	.list-topic-container {
+		
+	      .list-topic-item {
+		    margin-bottom: 3rem;
 
-/* Pagination of per post list */
+		    .list-topic-item-info {
+			    margin-top: 0;
+		    }
 
-@media all and (max-width: 768px) {
-  .list-topic-item a.more {
-    margin-top: auto;
-  }
+		    a.more {
+			    margin-top: auto;
+		    }    
+	    }	
+	}
+
+	
 }

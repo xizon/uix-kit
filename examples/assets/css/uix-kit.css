@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit
  * ## Description         :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Version             :  0.0.7
- * ## Last Update         :  February 1, 2018
+ * ## Last Update         :  February 2, 2018
  * ## Created             :  by UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Compatible With     :  Bootstrap 3.x, Chinese, English
@@ -804,6 +804,8 @@ section.site-google-map, .section.site-google-map {
 /* 5.2 Main Wrapper */
 .wrapper {
     min-height: 100%;
+    width: 100%;
+    overflow: hidden;
 }
 
 /* 5.3 Seamless Grid */
@@ -2715,30 +2717,30 @@ ul.entry-meta {
 /* ====================================================== 
    23. List of Post
 /* ====================================================== */
-.list-topic-item {
+.list-topic-container .list-topic-item {
     position: relative;
     margin-bottom: 4.8125rem;
 }
 
-.list-topic-item .gallery-caption {
+.list-topic-container .list-topic-item .gallery-caption {
     display: none;
 }
 
-.list-topic-item .list-topic-item-audio {
+.list-topic-container .list-topic-item .list-topic-item-audio {
     position: relative;
     z-index: 1;
 }
 
-.list-topic-item .list-topic-item-img iframe {
+.list-topic-container .list-topic-item .list-topic-item-img iframe {
     max-width: 100% !important;
     max-height: 300px !important;
 }
 
-.list-topic-item .list-normal ul, .list-topic-item .list-normal ol {
+.list-topic-container .list-topic-item .list-normal ul, .list-topic-container .list-topic-item .list-normal ol {
     line-height: inherit !important;
 }
 
-.list-topic-item:not(.post-blockquote) blockquote {
+.list-topic-container .list-topic-item:not(.post-blockquote) blockquote {
     font-size: inherit;
     padding: 0.75rem;
     margin: 0.875rem 0;
@@ -2747,15 +2749,23 @@ ul.entry-meta {
     quotes: none;
 }
 
-.list-topic-item:not(.post-blockquote) blockquote:before {
+.list-topic-container .list-topic-item:not(.post-blockquote) blockquote:before {
     display: none;
 }
 
-.list-topic-item .list-topic-item-img {
+.list-topic-container .list-topic-item .list-topic-item-img {
     margin-top: 1.75rem;
 }
 
-.list-topic-item .list-topic-item-info {
+.list-topic-container .list-topic-item .list-topic-item-img a {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.list-topic-container .list-topic-item .list-topic-item-info {
     margin-top: 3.5rem;
     -ms-word-wrap: break-word;
     word-wrap: break-word;
@@ -2764,40 +2774,40 @@ ul.entry-meta {
     position: relative;
 }
 
-.list-topic-item:hover .list-topic-item-info {
+.list-topic-container .list-topic-item:hover .list-topic-item-info {
     background: #F3F3F3;
 }
 
-.list-topic-item .list-topic-item-info h1, .list-topic-item .list-topic-item-info h2, .list-topic-item .list-topic-item-info h3, .list-topic-item .list-topic-item-info h4, .list-topic-item .list-topic-item-info h5, .list-topic-item .list-topic-item-info h6 {
+.list-topic-container .list-topic-item .list-topic-item-info h1, .list-topic-container .list-topic-item .list-topic-item-info h2, .list-topic-container .list-topic-item .list-topic-item-info h3, .list-topic-container .list-topic-item .list-topic-item-info h4, .list-topic-container .list-topic-item .list-topic-item-info h5, .list-topic-container .list-topic-item .list-topic-item-info h6 {
     font-family: inherit;
     font-weight: 600;
 }
 
-.list-topic-item .list-topic-item-info h1 {
+.list-topic-container .list-topic-item .list-topic-item-info h1 {
     font-size: 2.4609375rem;
     line-height: 1.15555556;
 }
 
-.list-topic-item .list-topic-item-info h2 {
+.list-topic-container .list-topic-item .list-topic-item-info h2 {
     font-size: 1.75rem;
     line-height: 1.421875;
 }
 
-.list-topic-item .list-topic-item-info h3 {
+.list-topic-container .list-topic-item .list-topic-item-info h3 {
     font-size: 1.25rem;
     line-height: 1.625;
 }
 
-.list-topic-item .list-topic-item-info .page-link a {
+.list-topic-container .list-topic-item .list-topic-item-info .page-link a {
     display: inline-block;
     padding: .2625rem;
 }
 
-.list-topic-item .detail {
+.list-topic-container .list-topic-item .detail {
     margin-top: 1rem;
 }
 
-.list-topic-item p {
+.list-topic-container .list-topic-item p {
     margin: 0;
     padding: 0;
     position: relative;
@@ -2805,7 +2815,7 @@ ul.entry-meta {
     font-size: 0.875rem;
 }
 
-.list-topic-item a.more {
+.list-topic-container .list-topic-item a.more {
     font-size: 0.75rem;
     position: relative;
     padding-left: 1.5rem;
@@ -2815,15 +2825,15 @@ ul.entry-meta {
     text-transform: uppercase;
 }
 
-.list-topic-item:hover a.more {
+.list-topic-container .list-topic-item:hover a.more {
     color: #fff;
 }
 
-.list-topic-item .more-container {
+.list-topic-container .list-topic-item .more-container {
     overflow: hidden;
 }
 
-.list-topic-item .more-bg {
+.list-topic-container .list-topic-item .more-bg {
     background: #EC5E79;
     position: absolute;
     right: -200px;
@@ -2840,40 +2850,36 @@ ul.entry-meta {
     transform: rotate(0) skew(-45deg);
 }
 
-.list-topic-item:hover .more-bg {
+.list-topic-container .list-topic-item:hover .more-bg {
     right: -30px;
 }
 
-.list-topic-item.style-2 .detail p, .list-topic-item.style-2 .tags-box {
+.list-topic-container .list-topic-item.style-2 .detail p,
+.list-topic-container .list-topic-item.style-2 .tags-box {
     padding-left: 1rem;
 }
 
-.list-topic-item.style-2 .detail a {
+.list-topic-container .list-topic-item.style-2 .detail a {
   /* Used when "list-normal table-normal" style are used */
     color: #474747 !important;
 }
 
-.list-topic-item.style-2 .detail a:hover {
+.list-topic-container .list-topic-item.style-2 .detail a:hover {
   /* Used when "list-normal table-normal" style are used */
     color: #000 !important;
     text-decoration: none;
 }
 
 @media all and (max-width: 768px) {
-    .list-topic-item {
+    .list-topic-container .list-topic-item {
         margin-bottom: 3rem;
     }
-}
 
-@media all and (max-width: 768px) {
-    .list-topic-item .list-topic-item-info {
+    .list-topic-container .list-topic-item .list-topic-item-info {
         margin-top: 0;
     }
-}
 
-/* Pagination of per post list */
-@media all and (max-width: 768px) {
-    .list-topic-item a.more {
+    .list-topic-container .list-topic-item a.more {
         margin-top: auto;
     }
 }
@@ -2881,41 +2887,39 @@ ul.entry-meta {
 /* ====================================================== 
    24. List of Split
 /* ====================================================== */
-.list-split-item {
+.list-split-container .list-split-item {
     position: relative;
     margin-bottom: 4.8125rem;
 }
 
-.list-split-item .list-split-item-info p {
+.list-split-container .list-split-item .list-split-item-info p {
     font-size: 0.875rem;
 }
 
-.list-split-item .list-split-item-info > div {
+.list-split-container .list-split-item .list-split-item-info > div {
     padding: 0 4rem;
 }
 
-.list-split-item.even .row > .col-sm-6 {
+.list-split-container .list-split-item.even .row > .col-sm-6 {
     float: right;
 }
 
 @media all and (max-width: 768px) {
-    .list-split-item {
+    .list-split-container .list-split-item {
         margin-bottom: 3rem;
     }
-}
 
-@media all and (max-width: 768px) {
-    .list-split-item.even .row > .col-sm-6:first-child, .list-split-item.even .row > .col-sm-6:nth-child(2) {
+    .list-split-container .list-split-item.even .row > .col-sm-6:first-child, .list-split-container .list-split-item.even .row > .col-sm-6:nth-child(2) {
         -webkit-transform: translateX(0);
         -ms-transform: translateX(0);
         transform: translateX(0);
     }
 
-    .list-split-item .list-split-item-info {
+    .list-split-container .list-split-item .list-split-item-info {
         margin-top: 1.5rem;
     }
 
-    .list-split-item .list-split-item-info > div {
+    .list-split-container .list-split-item .list-split-item-info > div {
         padding: 0;
     }
 }
@@ -3948,6 +3952,9 @@ ul.entry-meta {
     width: 100%;
 }
 
+/* ====================================================== 
+   Custom Core Scripts & Stylesheets
+/* ====================================================== */
 /* ====================================================== 
    Mobile Menu with Sidr
 /* ====================================================== */
