@@ -18,6 +18,27 @@
   font-weight: 600;
   text-transform: uppercase;
   z-index: 1;
+	
+	&.hide {
+		display: none !important;
+	}
+	
+  /* Waiting state */
+  &.active,
+  &.wait {
+    background-image: -moz-linear-gradient(-45deg,rgba(0,0,0,.15) 25%,transparent 25%,transparent 50%,rgba(0,0,0,.15) 50%,rgba(0,0,0,.15) 75%,transparent 75%,transparent) !important;
+    background-image: -webkit-linear-gradient(-45deg,rgba(0,0,0,.15) 25%,transparent 25%,transparent 50%,rgba(0,0,0,.15) 50%,rgba(0,0,0,.15) 75%,transparent 75%,transparent) !important;
+    background-image: linear-gradient(-45deg,rgba(0,0,0,.15) 25%,transparent 25%,transparent 50%,rgba(0,0,0,.15) 50%,rgba(0,0,0,.15) 75%,transparent 75%,transparent) !important;
+    -webkit-background-size: 30px 30px !important;
+    -moz-background-size: 30px 30px !important;
+    background-size: 30px 30px !important;
+    -webkit-animation: move-waiting-stripes 0.5s linear infinite !important;
+    animation: move-waiting-stripes 0.5s linear infinite !important;
+    cursor: wait !important;
+		
+  }
+
+	
   &:hover {
     background-position: 100% 0 !important;
   }
@@ -27,6 +48,28 @@
     border-radius: 35px;
   }
 }
+
+
+@-webkit-keyframes move-waiting-stripes {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 30px 0px;
+    }
+}
+
+@keyframes move-waiting-stripes {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 30px 0px;
+    }
+}
+
 
 .t-c .button {
 	margin-left: 0 !important;

@@ -1,7 +1,7 @@
 <?php
 
-$page = $_REQUEST[ 'page' ]; //The current page to load.
-$per  = $_REQUEST[ 'per' ];  //The amount to load each time.
+$page = $_POST[ 'page' ]; //The current page to load.
+$per  = $_POST[ 'per' ];  //The amount to load each time.
 
 
 if ( $page == 4 ) {

@@ -1,7 +1,7 @@
 {
   "author": "UIUX Lab",
   "name": "uix-kit",
-  "version": "0.0.7",
+  "version": "0.0.71",
   "description": "[Demo Here](https://uiux.cc/uix-kit).",
   "main": "gulpfile.js",
   "dependencies": {},
@@ -48,13 +48,13 @@
   },
   "homepage": "https://github.com/xizon/uix-kit#readme",
   "directories": {
-    "example": "uix-kit"
+    "example": "examples"
   },
   "keywords": [
     "uix",
     "kit",
     "kits",
-	"front-end",
+    "front-end",
     "webdesign"
   ]
 }

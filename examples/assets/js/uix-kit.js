@@ -1309,78 +1309,11 @@ theme = ( function ( theme, $, window, document ) {
 	
 	
 }(jQuery));
-
 /*! 
  *************************************
- * Form
+ * Custom Core Scripts & Stylesheets
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
-		/*--- Input File ----*/
-		$( '.controls-file-container' ).each( function()  {
-			var fileInput  = $( this ).find( 'input[type="file"]' ),
-				fileBtn    = $( this ).find( '.controls-file-trigger' ),
-				filePath   = $( this ).next( '.controls-file-return' );
-			
-			fileBtn.on( 'click', function() {
-				fileInput.focusin();
-			});	
-			
-			fileInput.on( 'change', function() {
-				filePath.text( $( this ).val() );
-			});	
-			
-		});
-
-		/*--- Hover Effect ----*/
-		$( '.float-label' ).each( function(){
-			
-			var $this = $( this );
-			
-			// on focus add cladd active to label
-			$this.focus( function() {
-				$this.next().addClass( 'active' );
-			});
-			//on blur check field and remove class if needed
-			$this.blur( function() {
-				if( $this.val() === '' || $this.val() === 'blank') {
-					$this.next().removeClass();
-				}
-			});
-			
-			// if exist cookie value
-			if( $this.val() != '' && $this.val() != 'blank') { 
-			    $this.next().addClass( 'active' );
-			}
-			
-		});
-		
-		$( '.wp-search-submit' ).on( 'click', function() {
-			$( this ).parent().parent( 'form' ).submit();
-		});
-		
-		
-		
-		/*--- Input Validation ----*/
-		//Using the jQuery Validation Plugin to check your form
-		
-		
-	};
-	
-		
-    theme.form = {
-        documentReady : documentReady        
-    };
-
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
 
 
 
@@ -1488,11 +1421,175 @@ theme = ( function ( theme, $, window, document ) {
 }( theme, jQuery, window, document ) );
 
 
+
 /*! 
  *************************************
- * Custom Core Scripts & Stylesheets
+ * Form
  *************************************
  */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ) {
+		
+		/*--- Input File ----*/
+		$( '.controls-file-container' ).each( function()  {
+			var fileInput  = $( this ).find( 'input[type="file"]' ),
+				fileBtn    = $( this ).find( '.controls-file-trigger' ),
+				filePath   = $( this ).next( '.controls-file-return' );
+			
+			fileBtn.on( 'click', function() {
+				fileInput.focusin();
+			});	
+			
+			fileInput.on( 'change', function() {
+				filePath.text( $( this ).val() );
+			});	
+			
+		});
+
+		/*--- Hover Effect ----*/
+		$( '.float-label' ).each( function(){
+			
+			var $this = $( this );
+			
+			// on focus add cladd active to label
+			$this.focus( function() {
+				$this.next().addClass( 'active' );
+			});
+			//on blur check field and remove class if needed
+			$this.blur( function() {
+				if( $this.val() === '' || $this.val() === 'blank') {
+					$this.next().removeClass();
+				}
+			});
+			
+			// if exist cookie value
+			if( $this.val() != '' && $this.val() != 'blank') { 
+			    $this.next().addClass( 'active' );
+			}
+			
+		});
+		
+		$( '.wp-search-submit' ).on( 'click', function() {
+			$( this ).parent().parent( 'form' ).submit();
+		});
+		
+		
+		
+		/*--- Input Validation ----*/
+		//Using the jQuery Validation Plugin to check your form
+		
+		
+	};
+	
+		
+    theme.form = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
+/*! 
+ *************************************
+ * Modal Dialog
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ){
+		
+		function getTransitionDuration( elementOrSelector ){
+			var $el, durString, isMS, numberStr, numberNum;
+			$el = $( elementOrSelector );
+			if( $el.length === 0 ){
+				return false;
+			}
+			$el = $($el[0]); // Force just the first item.  need more?  use .each
+			
+			var dur = $el.css('transition-duration');
+			if( typeof dur === typeof undefined ) { 
+				dur = '0.5s';
+			}
+			
+			durString = dur.toLowerCase();
+			isMS = durString.indexOf( 'ms' ) >= 0;
+			numberNum = durString.replace( 'ms', '' ).replace( 's', '' );
+			return isMS ? numberNum : numberNum * 1000;
+		}
+		
+	
+	    $( 'body' ).prepend( '<div class="modal-mask"></div>' );
+		$( '[data-modal-id]' ).on( 'click', function() {
+			var dataID = $( this ).data( 'modal-id' ),
+			    dataH  = $( this ).data( 'modal-height' ),
+				dataW  = $( this ).data( 'modal-width' ),
+				$obj   = $( '.modal-box#'+dataID );
+			
+			// Initializate modal
+			$( this ).attr( 'href', 'javascript:void(0)' );
+			$obj.find( '.content' ).css( 'overflow-y', 'hidden' );
+			
+			if ( $obj.length > 0 ) {
+				if( typeof dataH != typeof undefined && dataH != '' ) {
+					$obj.css( {'height': dataH } );
+				}
+				
+				if( typeof dataW != typeof undefined && dataW != '' ) {
+					$obj.css( {'width': dataW, 'left': 'calc( (100% - '+dataW+')/2 )' } );
+				}
+				
+				$( '.modal-mask' ).fadeIn( 'fast' );
+				$obj.addClass( 'active' );	
+			}
+			
+			if ( $obj.hasClass( 'fullscreen' ) ) {
+				setTimeout( function() {
+					$( 'html' ).css( 'overflow-y', 'hidden' );
+					if ( !$obj.hasClass( 'video' ) ) {
+						$obj.find( '.content' ).css( 'overflow-y', 'scroll' );
+					}
+					
+				}, getTransitionDuration( '.modal-box#'+dataID ) );
+				
+			}
+		
+		});
+		
+		$( '.modal-box .close-btn' ).on( 'click', function() {
+			$( this ).parent().removeClass( 'active' );
+		});
+		
+		$( '.modal-box .close-btn, .modal-mask' ).on( 'click', function() {
+			$( '.modal-box' ).removeClass( 'active' );
+			$( '.modal-mask' ).fadeOut( 'fast' );
+			$( '.modal-box' ).find( '.content' ).css( 'overflow-y', 'hidden' );
+			$( 'html' ).css( 'overflow-y', 'auto' );
+			setTimeout( function() {
+	
+			}, getTransitionDuration( '.modal-box:first' ) );
+			
+		});
+		
+	};
+		
+      
+    theme.modalbox = {
+        documentReady : documentReady        
+    };  
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
 
 
 
@@ -1514,6 +1611,7 @@ theme = ( function ( theme, $, window, document ) {
 			    curPage          = $this.data( 'ajax-list-page-now' ),
 				perShow          = $this.data( 'ajax-list-page-per' ),
 				totalPage        = $this.data( 'ajax-list-page-total' ),
+				method           = $this.data( 'ajax-list-method' ),
 				trigger          = $this.data( 'ajax-list-trigger' ),
 				infinitescroll   = $this.data( 'ajax-list-infinitescroll' ),
 				jsonFile         = $this.data( 'ajax-list-json' ),
@@ -1559,6 +1657,12 @@ theme = ( function ( theme, $, window, document ) {
 				triggerActive = 'active';
 			}		
 			
+			if( typeof method === typeof undefined ) {
+				method = 'POST';
+			}		
+			
+			
+			
 			triggerActive = triggerActive.replace( '.', '' );
 			
 			
@@ -1590,16 +1694,11 @@ theme = ( function ( theme, $, window, document ) {
 								// Active this button
 								$button.addClass( triggerActive );					    
 							
-								//Hidden button
-								if ( curPage == totalPage ) {
-									$button.hide();
-								}
 
-								
 								if ( curPage < totalPage+1 ) {
 
 									//Perform dynamic loading
-									ajaxLoadInit( $this, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer );
+									ajaxLoadInit( $this, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method );
 
 								}
 
@@ -1632,7 +1731,7 @@ theme = ( function ( theme, $, window, document ) {
 
 						if ( curPage < totalPage+1 ) {
 							//Perform dynamic loading
-							ajaxLoadInit( $this, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer );
+							ajaxLoadInit( $this, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method );
 						}
 
 
@@ -1666,18 +1765,20 @@ theme = ( function ( theme, $, window, document ) {
 		 * @param  {string} jsonFile        - JSON file path to docking data
 		 * @param  {string} triggerActive   - The class name of trigger button actived.
 		 * @param  {string} pushContainer   - This container is used to display the loaded dynamic data.
-		 * @return {void}                    - The constructor.
+		 * @param  {string} method          - The type of request to make, which can be either "POST" or "GET".
+		 * @return {void}                   - The constructor.
 		 */
-		function ajaxLoadInit( ajaxWrapper, trigger, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer ) {
+		function ajaxLoadInit( ajaxWrapper, trigger, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method ) {
 
 			var $divRoot         = ajaxWrapper,
 				template         = document.getElementById( template7ID ).innerHTML,
-				compiledTemplate = Template7.compile( template );
+				compiledTemplate = Template7.compile( template ),
+				$button          = $( trigger );
 
-
+			
 			$.ajax({
 				url      : jsonFile, //Be careful about the format of the JSON file
-				method   : 'GET',
+				method   : method,
 				data     : { total: totalPage, per: perShow, page: curPage },
 				dataType : 'json',
 				success: function (data) { 
@@ -1686,6 +1787,7 @@ theme = ( function ( theme, $, window, document ) {
 						html     = compiledTemplate( thisData ),
 						curHtml  = $divRoot.find( pushContainer ).html();
 
+					
 					$divRoot.find( pushContainer ).html( curHtml + html );
 					
 					//Function of Masonry
@@ -1698,7 +1800,13 @@ theme = ( function ( theme, $, window, document ) {
 					
 					
 					// Remove this button
-					$( trigger ).removeClass( triggerActive );					    
+					$button.removeClass( triggerActive );	
+
+					//Hidden button
+					if ( curPage == totalPage ) {
+						$button.addClass( 'hide' );
+					}	
+					
 
 					
 				 }
@@ -1722,6 +1830,91 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
+
+
+/*! 
+ *************************************
+ * Navigation Highlighting
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+    
+        // Get section or article by href
+        function getRelatedContent( el ) {
+            return $( $( el ).attr( 'href' ) );
+        }
+        // Get link by section or article id
+        function getRelatedNavigation( el ) {
+            return $( '.menu-main li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' );
+        } 
+        
+	    //-------- Navigation highlighting using waypoints
+		if ( $( 'body' ).hasClass( 'onepage' ) ) {
+
+
+			// Smooth scroll to content
+			$( '.menu-main li > a' ).on('click', function(e) {
+				e.preventDefault();
+
+				$( 'html,body' ).animate({
+					scrollTop: getRelatedContent( this ).offset().top - 20
+				});
+			});	
+
+			//-------- Default cwaypoint settings
+			var topSectionSpacing = $( '.header-area' ).outerHeight( true );
+			var waypoints1 = $( '[data-highlight-section="true"]' ).waypoint({
+				handler: function( direction ) {
+
+
+					// Highlight element when related content
+					getRelatedNavigation( this.element ).toggleClass( 'active', direction === 'down' );
+					$( this.element ).toggleClass( 'active', direction === 'down' );
+
+				},
+				offset: topSectionSpacing
+			});	
+
+			var waypoints2 = $( '[data-highlight-section="true"]' ).waypoint({
+				handler: function( direction ) {
+
+					// Highlight element when related content
+					getRelatedNavigation( this.element ).toggleClass( 'active', direction === 'up' );
+					$( this.element ).toggleClass( 'active', direction === 'up' );
+
+				},
+				offset: function() {  
+					return -$( this.element ).height() - topSectionSpacing; 
+				}
+			});	
+
+			setTimeout( function() {
+				$( '.menu-main li:first' ).addClass( 'active' );
+			}, 1000 );	
+		}
+
+		
+		
+		
+		
+    };
+
+    theme.navHighlight = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
+
+
 
 
 
@@ -1854,188 +2047,6 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
-
-
-
-/*! 
- *************************************
- * Modal Dialog
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-   
-   
-    var documentReady = function( $ ){
-		
-		function getTransitionDuration( elementOrSelector ){
-			var $el, durString, isMS, numberStr, numberNum;
-			$el = $( elementOrSelector );
-			if( $el.length === 0 ){
-				return false;
-			}
-			$el = $($el[0]); // Force just the first item.  need more?  use .each
-			
-			var dur = $el.css('transition-duration');
-			if( typeof dur === typeof undefined ) { 
-				dur = '0.5s';
-			}
-			
-			durString = dur.toLowerCase();
-			isMS = durString.indexOf( 'ms' ) >= 0;
-			numberNum = durString.replace( 'ms', '' ).replace( 's', '' );
-			return isMS ? numberNum : numberNum * 1000;
-		}
-		
-	
-	    $( 'body' ).prepend( '<div class="modal-mask"></div>' );
-		$( '[data-modal-id]' ).on( 'click', function() {
-			var dataID = $( this ).data( 'modal-id' ),
-			    dataH  = $( this ).data( 'modal-height' ),
-				dataW  = $( this ).data( 'modal-width' ),
-				$obj   = $( '.modal-box#'+dataID );
-			
-			// Initializate modal
-			$( this ).attr( 'href', 'javascript:void(0)' );
-			$obj.find( '.content' ).css( 'overflow-y', 'hidden' );
-			
-			if ( $obj.length > 0 ) {
-				if( typeof dataH != typeof undefined && dataH != '' ) {
-					$obj.css( {'height': dataH } );
-				}
-				
-				if( typeof dataW != typeof undefined && dataW != '' ) {
-					$obj.css( {'width': dataW, 'left': 'calc( (100% - '+dataW+')/2 )' } );
-				}
-				
-				$( '.modal-mask' ).fadeIn( 'fast' );
-				$obj.addClass( 'active' );	
-			}
-			
-			if ( $obj.hasClass( 'fullscreen' ) ) {
-				setTimeout( function() {
-					$( 'html' ).css( 'overflow-y', 'hidden' );
-					if ( !$obj.hasClass( 'video' ) ) {
-						$obj.find( '.content' ).css( 'overflow-y', 'scroll' );
-					}
-					
-				}, getTransitionDuration( '.modal-box#'+dataID ) );
-				
-			}
-		
-		});
-		
-		$( '.modal-box .close-btn' ).on( 'click', function() {
-			$( this ).parent().removeClass( 'active' );
-		});
-		
-		$( '.modal-box .close-btn, .modal-mask' ).on( 'click', function() {
-			$( '.modal-box' ).removeClass( 'active' );
-			$( '.modal-mask' ).fadeOut( 'fast' );
-			$( '.modal-box' ).find( '.content' ).css( 'overflow-y', 'hidden' );
-			$( 'html' ).css( 'overflow-y', 'auto' );
-			setTimeout( function() {
-	
-			}, getTransitionDuration( '.modal-box:first' ) );
-			
-		});
-		
-	};
-		
-      
-    theme.modalbox = {
-        documentReady : documentReady        
-    };  
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
-
-
-
-/*! 
- *************************************
- * Navigation Highlighting
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-    
-    var documentReady = function( $ ) {
-    
-        // Get section or article by href
-        function getRelatedContent( el ) {
-            return $( $( el ).attr( 'href' ) );
-        }
-        // Get link by section or article id
-        function getRelatedNavigation( el ) {
-            return $( '.menu-main li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' );
-        } 
-        
-	    //-------- Navigation highlighting using waypoints
-		if ( $( 'body' ).hasClass( 'onepage' ) ) {
-
-
-			// Smooth scroll to content
-			$( '.menu-main li > a' ).on('click', function(e) {
-				e.preventDefault();
-
-				$( 'html,body' ).animate({
-					scrollTop: getRelatedContent( this ).offset().top - 20
-				});
-			});	
-
-			//-------- Default cwaypoint settings
-			var topSectionSpacing = $( '.header-area' ).outerHeight( true );
-			var waypoints1 = $( '[data-highlight-section="true"]' ).waypoint({
-				handler: function( direction ) {
-
-
-					// Highlight element when related content
-					getRelatedNavigation( this.element ).toggleClass( 'active', direction === 'down' );
-					$( this.element ).toggleClass( 'active', direction === 'down' );
-
-				},
-				offset: topSectionSpacing
-			});	
-
-			var waypoints2 = $( '[data-highlight-section="true"]' ).waypoint({
-				handler: function( direction ) {
-
-					// Highlight element when related content
-					getRelatedNavigation( this.element ).toggleClass( 'active', direction === 'up' );
-					$( this.element ).toggleClass( 'active', direction === 'up' );
-
-				},
-				offset: function() {  
-					return -$( this.element ).height() - topSectionSpacing; 
-				}
-			});	
-
-			setTimeout( function() {
-				$( '.menu-main li:first' ).addClass( 'active' );
-			}, 1000 );	
-		}
-
-		
-		
-		
-		
-    };
-
-    theme.navHighlight = {
-        documentReady : documentReady        
-    };
-
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
-
-
-
-
-
 
 
 
@@ -2199,6 +2210,50 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
+
+/*! 
+ *************************************
+ * Retina Graphics for Website
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ) {
+		
+		//Determine if you have retinal display
+		var hasRetina  = false,
+			rootRetina = (typeof exports === 'undefined' ? window : exports),
+			mediaQuery = '(-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-resolution: 1.5dppx)';
+	
+		if ( rootRetina.devicePixelRatio > 1 || rootRetina.matchMedia && rootRetina.matchMedia( mediaQuery ).matches ) {
+			hasRetina = true;
+		} 
+
+		if ( hasRetina ) {
+			//do something
+			$( '[data-retina]' ).each( function() {
+				$( this ).attr( {
+					'src'     : $( this ).data( 'retina' ),
+				} );
+			});
+		
+		} 
+	
+		
+	};
+	
+		
+    theme.retina = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
 /*! 
  *************************************
  * Pricing
@@ -2356,50 +2411,6 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-
-
-/*! 
- *************************************
- * Retina Graphics for Website
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
-		//Determine if you have retinal display
-		var hasRetina  = false,
-			rootRetina = (typeof exports === 'undefined' ? window : exports),
-			mediaQuery = '(-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-resolution: 1.5dppx)';
-	
-		if ( rootRetina.devicePixelRatio > 1 || rootRetina.matchMedia && rootRetina.matchMedia( mediaQuery ).matches ) {
-			hasRetina = true;
-		} 
-
-		if ( hasRetina ) {
-			//do something
-			$( '[data-retina]' ).each( function() {
-				$( this ).attr( {
-					'src'     : $( this ).data( 'retina' ),
-				} );
-			});
-		
-		} 
-	
-		
-	};
-	
-		
-    theme.retina = {
-        documentReady : documentReady        
-    };
-
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
 
 
 /*! 
@@ -3047,6 +3058,87 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
+/*! 
+ *************************************
+ * Testimonials Carousel
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+    
+		var $obj = $( '.custom-testimonials .flexslider' );
+		$obj.flexslider({
+			animation         : 'slide',
+			slideshow         : true,
+			smoothHeight      : true,
+			controlNav        : true,
+			manualControls    : '.slides-custom-control li',
+			directionNav      : false,
+			animationSpeed    : 600,
+			slideshowSpeed    : 7000,
+			selector          : ".slides > li",
+			drag              : true,
+			start: function(slider){
+				$obj.on( 'mousedown', function( e ) {
+					if ( $obj.data( 'flexslider' ).animating ) {
+						return;
+					}
+						
+					$( this ).addClass('dragging');
+					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
+					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
+					$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
+					$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );
+				} );
+			
+				$obj.on( 'mouseup', function( e ) {
+					if ( $obj.data('flexslider').animating ) {
+						return;
+					}
+						
+					$( this ).removeClass('dragging');
+					var origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
+					    origin_mouse_y = $( this ).data( 'origin_mouse_y' );
+					
+					if ( 'horizontal' === $obj.data('flexslider').vars.direction ) {
+						if ( e.pageX > origin_mouse_x ) {
+							$obj.flexslider('prev');
+						}
+						if ( e.pageX < origin_mouse_x ) {
+							$obj.flexslider('next');
+						}
+					} else {
+						if ( e.pageY > origin_mouse_y ) {
+							$obj.flexslider('prev');
+						}
+						if ( e.pageY < origin_mouse_y ) {
+							$obj.flexslider('next');
+						}
+					}
+				} );
+			}
+		});
+		
+		
+    };
+
+    theme.testimonials = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
+
+
+
+
 
 /*! 
  *************************************
@@ -3216,87 +3308,6 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
-
-
-/*! 
- *************************************
- * Testimonials Carousel
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-    
-    var documentReady = function( $ ) {
-    
-		var $obj = $( '.custom-testimonials .flexslider' );
-		$obj.flexslider({
-			animation         : 'slide',
-			slideshow         : true,
-			smoothHeight      : true,
-			controlNav        : true,
-			manualControls    : '.slides-custom-control li',
-			directionNav      : false,
-			animationSpeed    : 600,
-			slideshowSpeed    : 7000,
-			selector          : ".slides > li",
-			drag              : true,
-			start: function(slider){
-				$obj.on( 'mousedown', function( e ) {
-					if ( $obj.data( 'flexslider' ).animating ) {
-						return;
-					}
-						
-					$( this ).addClass('dragging');
-					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
-					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
-					$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
-					$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );
-				} );
-			
-				$obj.on( 'mouseup', function( e ) {
-					if ( $obj.data('flexslider').animating ) {
-						return;
-					}
-						
-					$( this ).removeClass('dragging');
-					var origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
-					    origin_mouse_y = $( this ).data( 'origin_mouse_y' );
-					
-					if ( 'horizontal' === $obj.data('flexslider').vars.direction ) {
-						if ( e.pageX > origin_mouse_x ) {
-							$obj.flexslider('prev');
-						}
-						if ( e.pageX < origin_mouse_x ) {
-							$obj.flexslider('next');
-						}
-					} else {
-						if ( e.pageY > origin_mouse_y ) {
-							$obj.flexslider('prev');
-						}
-						if ( e.pageY < origin_mouse_y ) {
-							$obj.flexslider('next');
-						}
-					}
-				} );
-			}
-		});
-		
-		
-    };
-
-    theme.testimonials = {
-        documentReady : documentReady        
-    };
-
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
-
-
-
-
-
 
 
 

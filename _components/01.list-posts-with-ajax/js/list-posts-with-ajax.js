@@ -17,6 +17,7 @@ theme = ( function ( theme, $, window, document ) {
 			    curPage          = $this.data( 'ajax-list-page-now' ),
 				perShow          = $this.data( 'ajax-list-page-per' ),
 				totalPage        = $this.data( 'ajax-list-page-total' ),
+				method           = $this.data( 'ajax-list-method' ),
 				trigger          = $this.data( 'ajax-list-trigger' ),
 				infinitescroll   = $this.data( 'ajax-list-infinitescroll' ),
 				jsonFile         = $this.data( 'ajax-list-json' ),
@@ -62,6 +63,12 @@ theme = ( function ( theme, $, window, document ) {
 				triggerActive = 'active';
 			}		
 			
+			if( typeof method === typeof undefined ) {
+				method = 'POST';
+			}		
+			
+			
+			
 			triggerActive = triggerActive.replace( '.', '' );
 			
 			
@@ -93,16 +100,11 @@ theme = ( function ( theme, $, window, document ) {
 								// Active this button
 								$button.addClass( triggerActive );					    
 							
-								//Hidden button
-								if ( curPage == totalPage ) {
-									$button.hide();
-								}
 
-								
 								if ( curPage < totalPage+1 ) {
 
 									//Perform dynamic loading
-									ajaxLoadInit( $this, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer );
+									ajaxLoadInit( $this, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method );
 
 								}
 
@@ -135,7 +137,7 @@ theme = ( function ( theme, $, window, document ) {
 
 						if ( curPage < totalPage+1 ) {
 							//Perform dynamic loading
-							ajaxLoadInit( $this, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer );
+							ajaxLoadInit( $this, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method );
 						}
 
 
@@ -169,18 +171,20 @@ theme = ( function ( theme, $, window, document ) {
 		 * @param  {string} jsonFile        - JSON file path to docking data
 		 * @param  {string} triggerActive   - The class name of trigger button actived.
 		 * @param  {string} pushContainer   - This container is used to display the loaded dynamic data.
-		 * @return {void}                    - The constructor.
+		 * @param  {string} method          - The type of request to make, which can be either "POST" or "GET".
+		 * @return {void}                   - The constructor.
 		 */
-		function ajaxLoadInit( ajaxWrapper, trigger, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer ) {
+		function ajaxLoadInit( ajaxWrapper, trigger, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method ) {
 
 			var $divRoot         = ajaxWrapper,
 				template         = document.getElementById( template7ID ).innerHTML,
-				compiledTemplate = Template7.compile( template );
+				compiledTemplate = Template7.compile( template ),
+				$button          = $( trigger );
 
-
+			
 			$.ajax({
 				url      : jsonFile, //Be careful about the format of the JSON file
-				method   : 'GET',
+				method   : method,
 				data     : { total: totalPage, per: perShow, page: curPage },
 				dataType : 'json',
 				success: function (data) { 
@@ -189,6 +193,7 @@ theme = ( function ( theme, $, window, document ) {
 						html     = compiledTemplate( thisData ),
 						curHtml  = $divRoot.find( pushContainer ).html();
 
+					
 					$divRoot.find( pushContainer ).html( curHtml + html );
 					
 					//Function of Masonry
@@ -201,7 +206,13 @@ theme = ( function ( theme, $, window, document ) {
 					
 					
 					// Remove this button
-					$( trigger ).removeClass( triggerActive );					    
+					$button.removeClass( triggerActive );	
+
+					//Hidden button
+					if ( curPage == totalPage ) {
+						$button.addClass( 'hide' );
+					}	
+					
 
 					
 				 }
