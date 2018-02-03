@@ -1633,6 +1633,11 @@ theme = ( function ( theme, $, window, document ) {
 
 
 						if ( curPage < totalPage+1 ) {
+							
+							// Active this button
+							$button.addClass( triggerActive );		
+
+							
 							//Perform dynamic loading
 							ajaxLoadInit( $this, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method );
 						}
