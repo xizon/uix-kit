@@ -191,6 +191,15 @@ theme = ( function ( theme, $, window, document ) {
 
 					$divRoot.find( pushContainer ).html( curHtml + html );
 					
+					//Function of Masonry
+					var masonryObj = $( '.masonry-container .custom-gallery-tiles' );
+					imagesLoaded( masonryObj ).on( 'always', function() {
+						  masonryObj.masonry({
+							itemSelector: '.masonry-item'
+						  });  
+					});
+					
+					
 					// Remove this button
 					$( trigger ).removeClass( triggerActive );					    
 

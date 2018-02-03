@@ -17,7 +17,8 @@ if ( $page == 4 ) {
 			  "cat"     : "Art, Design",
 			  "comments": 10,
 			  "detail"  : "Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.",
-			  "tags"    : "<a href=\"#\">Tag</a><a href=\"#\">Video</a><a href=\"#\">Web Design</a>"
+			  "tags"    : "<a href=\"#\">Tag</a><a href=\"#\">Video</a><a href=\"#\">Web Design</a>",
+			  "link"    : "#"
 
 			},
 			{
@@ -28,7 +29,8 @@ if ( $page == 4 ) {
 			  "cat"     : "Art, Design",
 			  "comments": 0,
 			  "detail"  : "Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.",
-			  "tags"    : "<a href=\"#\">Tag</a><a href=\"#\">Video</a>"
+			  "tags"    : "<a href=\"#\">Tag</a><a href=\"#\">Video</a>",
+			  "link"    : "#"
 			},
 			{
 			  "img"     : "assets-demo/images/test-img-big-2.jpg",
@@ -38,7 +40,8 @@ if ( $page == 4 ) {
 			  "cat"     : "Art, Design",
 			  "comments": 2,
 			  "detail"  : "Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. porta ac consectetur ac.",
-			  "tags"    : "<a href=\"#\">Design</a><a href=\"#\">UI</a>"
+			  "tags"    : "<a href=\"#\">Design</a><a href=\"#\">UI</a>",
+			  "link"    : "#"
 			}
 
 		]
@@ -60,7 +63,8 @@ if ( $page == 3 ) {
 			  "cat"     : "Art, Design",
 			  "comments": 10,
 			  "detail"  : "Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.",
-			  "tags"    : "<a href=\"#\">Tag</a><a href=\"#\">Video</a><a href=\"#\">Web Design</a>"
+			  "tags"    : "<a href=\"#\">Tag</a><a href=\"#\">Video</a><a href=\"#\">Web Design</a>",
+			  "link"    : "#"
 
 			},
 			{
@@ -71,7 +75,8 @@ if ( $page == 3 ) {
 			  "cat"     : "Art, Design",
 			  "comments": 0,
 			  "detail"  : "Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.",
-			  "tags"    : "<a href=\"#\">Tag</a><a href=\"#\">Video</a>"
+			  "tags"    : "<a href=\"#\">Tag</a><a href=\"#\">Video</a>",
+			  "link"    : "#"
 			},
 			{
 			  "img"     : "assets-demo/images/test-img-big-4.jpg",
@@ -81,7 +86,8 @@ if ( $page == 3 ) {
 			  "cat"     : "Art, Design",
 			  "comments": 2,
 			  "detail"  : "Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. porta ac consectetur ac.",
-			  "tags"    : "<a href=\"#\">Design</a><a href=\"#\">UI</a>"
+			  "tags"    : "<a href=\"#\">Design</a><a href=\"#\">UI</a>",
+			  "link"    : "#"
 			}
 
 		]
@@ -102,7 +108,8 @@ if ( $page == 2 ) {
 			  "cat"     : "Art, Design",
 			  "comments": 10,
 			  "detail"  : "Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.",
-			  "tags"    : "<a href=\"#\">Tag</a><a href=\"#\">Video</a><a href=\"#\">Web Design</a>"
+			  "tags"    : "<a href=\"#\">Tag</a><a href=\"#\">Video</a><a href=\"#\">Web Design</a>",
+			  "link"    : "#"
 
 			},
 			{
@@ -113,7 +120,8 @@ if ( $page == 2 ) {
 			  "cat"     : "Art, Design",
 			  "comments": 0,
 			  "detail"  : "Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.",
-			  "tags"    : "<a href=\"#\">Tag</a><a href=\"#\">Video</a>"
+			  "tags"    : "<a href=\"#\">Tag</a><a href=\"#\">Video</a>",
+			  "link"    : "#"
 			},
 			{
 			  "img"     : "assets-demo/images/test-img-big-2.jpg",
@@ -123,7 +131,8 @@ if ( $page == 2 ) {
 			  "cat"     : "Art, Design",
 			  "comments": 2,
 			  "detail"  : "Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. porta ac consectetur ac.",
-			  "tags"    : "<a href=\"#\">Design</a><a href=\"#\">UI</a>"
+			  "tags"    : "<a href=\"#\">Design</a><a href=\"#\">UI</a>",
+			  "link"    : "#"
 			}
 		
 
@@ -145,7 +154,8 @@ if ( $page == 1 ) {
 			  "cat"     : "Art, Design",
 			  "comments": 10,
 			  "detail"  : "Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.",
-			  "tags"    : "<a href=\"#\">Tag</a><a href=\"#\">Video</a><a href=\"#\">Web Design</a>"
+			  "tags"    : "<a href=\"#\">Tag</a><a href=\"#\">Video</a><a href=\"#\">Web Design</a>",
+			  "link"    : "#"
 
 			},
 			{
@@ -156,7 +166,8 @@ if ( $page == 1 ) {
 			  "cat"     : "Art, Design",
 			  "comments": 0,
 			  "detail"  : "Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.",
-			  "tags"    : "<a href=\"#\">Tag</a><a href=\"#\">Video</a>"
+			  "tags"    : "<a href=\"#\">Tag</a><a href=\"#\">Video</a>",
+			  "link"    : "#"
 			},
 			{
 			  "img"     : "assets-demo/images/test-img-big-3.jpg",
@@ -166,7 +177,8 @@ if ( $page == 1 ) {
 			  "cat"     : "Art, Design",
 			  "comments": 2,
 			  "detail"  : "Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. porta ac consectetur ac.",
-			  "tags"    : "<a href=\"#\">Design</a><a href=\"#\">UI</a>"
+			  "tags"    : "<a href=\"#\">Design</a><a href=\"#\">UI</a>",
+			  "link"    : "#"
 			}
 		
 
