@@ -59,15 +59,11 @@ theme = ( function ( theme, $, window, document ) {
 					angle      = 0;
 				
 				//Initialize button position
-				$this.find( 'ul' ).css({ 
-							'-webkit-transform' : 'rotate('+ parseFloat( rotationWapperDeg ) +'deg)',
-							'-ms-transform'     : 'rotate('+ parseFloat( rotationWapperDeg ) +'deg)',
+				$this.find( 'ul' ).css({
 							'transform'         : 'rotate('+ parseFloat( rotationWapperDeg ) +'deg)'
 						})
 						.find( '> li' )
-						.css({ 
-								'-webkit-transform' : 'rotate('+ -parseFloat( rotationWapperDeg )+'deg)',
-								'-ms-transform'     : 'rotate('+ -parseFloat( rotationWapperDeg )+'deg)',
+						.css({
 								'transform'         : 'rotate('+ -parseFloat( rotationWapperDeg )+'deg)'
 							});
 				
@@ -138,8 +134,6 @@ theme = ( function ( theme, $, window, document ) {
 				//sliding marker
 				var translateX = $( this ).index() * 100;
 				$this.find( '.marker' ).css({
-					'-webkit-transform'  : 'translateX( '+translateX+'% )',
-					'-ms-transform'      : 'translateX( '+translateX+'% )',
 					'transform'          : 'translateX( '+translateX+'% )'	
 				});
 		

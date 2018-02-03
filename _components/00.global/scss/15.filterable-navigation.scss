@@ -9,9 +9,6 @@
     li {
       font-style: italic;
       display: inline-block;
-      -moz-transition: 0.2s linear;
-      -o-transition: 0.2s linear;
-      -webkit-transition: 0.2s linear;
       transition: 0.2s linear;
       &:not(:last-child) {
         margin-right: 0.203125rem;

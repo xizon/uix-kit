@@ -4,8 +4,6 @@
 
 .custom-tabs {
   &:not(.rotation) {
-    -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
-    -moz-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
   }
 	
@@ -17,18 +15,12 @@
 		bottom: 0;
 		left: 0;
 		z-index: 1;
-		-moz-transition: .1s ease-in-out;
-		-o-transition: .1s ease-in-out;
-		-webkit-transition: .1s ease-in-out;
 		transition: .1s ease-in-out;
 	}	
 	
   ul > li {
     position: relative;
     display: block;
-    -moz-transition: .1s ease-in-out;
-    -o-transition: .1s ease-in-out;
-    -webkit-transition: .1s ease-in-out;
     transition: .1s ease-in-out;
 
 	
@@ -39,8 +31,6 @@
     }
   }
   &.custom-tabs-center {
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
     box-shadow: none;
     ul {
 	  font-size: 0; /*Fighting the Space Between Inline Block Elements*/
@@ -48,8 +38,6 @@
       width: 100%;
       text-align: center;
       /*require*/
-      -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
-      -moz-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
       box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
 		
 		
@@ -75,8 +63,6 @@
     > li {
       list-style: none;
       float: left;
-      -webkit-box-shadow: inset 1px 0px 0px 0px rgba(230, 230, 230, 1);
-      -moz-box-shadow: inset 1px 0px 0px 0px rgba(230, 230, 230, 1);
       box-shadow: inset 1px 0px 0px 0px rgba(230, 230, 230, 1);
       background: #f7f7f7;
       min-width: 7.5rem;
@@ -107,8 +93,6 @@
 	  top: 0;
 	  left: 400px;
       width: 300px;
-      -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
-      -moz-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
       box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
     }
     .custom-tabs-ul-container {
@@ -127,23 +111,14 @@
         width: 80px;
         height: 80px;
         background: none;
-        -webkit-box-shadow: none;
-        -moz-box-shadow: none;
         box-shadow: none;
-        -moz-transition: none;
-        -o-transition: none;
-        -webkit-transition: none;
         transition: none;
         > a {
         width: 80px;
         height: 80px;
           line-height: 60px;
           background: #fff;
-          -webkit-border-radius: 100%;
-          -moz-border-radius: 100%;
           border-radius: 100%;
-          -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
-          -moz-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
           box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
         }
         &.active > a {

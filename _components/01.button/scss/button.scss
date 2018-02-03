@@ -26,13 +26,8 @@
   /* Waiting state */
   &.active,
   &.wait {
-    background-image: -moz-linear-gradient(-45deg,rgba(0,0,0,.15) 25%,transparent 25%,transparent 50%,rgba(0,0,0,.15) 50%,rgba(0,0,0,.15) 75%,transparent 75%,transparent) !important;
-    background-image: -webkit-linear-gradient(-45deg,rgba(0,0,0,.15) 25%,transparent 25%,transparent 50%,rgba(0,0,0,.15) 50%,rgba(0,0,0,.15) 75%,transparent 75%,transparent) !important;
     background-image: linear-gradient(-45deg,rgba(0,0,0,.15) 25%,transparent 25%,transparent 50%,rgba(0,0,0,.15) 50%,rgba(0,0,0,.15) 75%,transparent 75%,transparent) !important;
-    -webkit-background-size: 30px 30px !important;
-    -moz-background-size: 30px 30px !important;
     background-size: 30px 30px !important;
-    -webkit-animation: move-waiting-stripes 0.5s linear infinite !important;
     animation: move-waiting-stripes 0.5s linear infinite !important;
     cursor: wait !important;
 		
@@ -43,22 +38,10 @@
     background-position: 100% 0 !important;
   }
   &.button-radius {
-    -webkit-border-radius: 35px;
-    -moz-border-radius: 35px;
     border-radius: 35px;
   }
 }
 
-
-@-webkit-keyframes move-waiting-stripes {
-    0% {
-        background-position: 0 0;
-    }
-
-    100% {
-        background-position: 30px 0px;
-    }
-}
 
 @keyframes move-waiting-stripes {
     0% {
@@ -176,8 +159,6 @@
 /* 5) Background */
 
 .button-bg:hover {
-  filter: alpha(opacity = 70);
-  -moz-opacity: 0.7;
   opacity: 0.7;
 }
 
@@ -186,12 +167,7 @@
 .button-bg-primary {
   border-color: $highlight-color1 !important;
   background-color: $highlight-color1 !important;
-  background-image: -moz-linear-gradient(left, $highlight-color1 0%, #f60 20%, #d83ba0 100%) !important;
-  background-image: -webkit-linear-gradient(left, $highlight-color1 0%, #f60 20%, #d83ba0 100%) !important;
   background-image: linear-gradient(to right, $highlight-color1 0%, #f60 20%, #d83ba0 100%) !important;
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$highlight-color1}', endColorstr='#d83ba0',GradientType=1 ) !important;
-  -webkit-box-shadow: 0 4px 15px 0 rgba(236, 94, 121, 0.75);
-  -moz-box-shadow: 0 4px 15px 0 rgba(236, 94, 121, 0.75);
   box-shadow: 0 4px 15px 0 rgba(236, 94, 121, 0.75);
   color: #fff !important;
 }
@@ -200,8 +176,6 @@
 .button-bg-secondary {
   border-color: #fff !important;
   background-color: transparent !important;
-  -webkit-box-shadow: 0 4px 15px 0 rgba(255, 255, 255, 0.2);
-  -moz-box-shadow: 0 4px 15px 0 rgba(255, 255, 255, 0.2);
   box-shadow: 0 4px 15px 0 rgba(255, 255, 255, 0.2);
   color: #fff !important;
 	

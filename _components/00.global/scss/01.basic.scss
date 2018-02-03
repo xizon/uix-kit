@@ -42,7 +42,9 @@
   --spacing: 1rem;
 }
 
-::selection, ::-moz-selection, ::-webkit-selection {
+::selection, 
+::-moz-selection, 
+::-webkit-selection {
   background: #1f1f1f;
   color: #fff;
 }

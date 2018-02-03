@@ -42,8 +42,6 @@
       height: 90px !important;
       margin: 0.3125rem 0 0 0.3125rem;
       border: 1px solid #eaeaea;
-      -webkit-border-radius: 100%;
-      -moz-border-radius: 100%;
       border-radius: 100%;
     }
   }
@@ -80,7 +78,6 @@
   text-align: right;
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
-  -webkit-transition: all 500ms ease-in-out;
   transition: all 500ms ease-in-out;
   color: #BDBDBD;
   .text {

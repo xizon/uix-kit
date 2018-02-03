@@ -44,8 +44,6 @@
 .pos-vertical-align {
   /* Vertical Center */
   top: 50%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   &.relative {
     position: relative;
@@ -55,8 +53,6 @@
 @media all and (max-width: 768px) {
   .pos-vertical-align.relative {
     top: 0;
-    -webkit-transform: none;
-    -ms-transform: none;
     transform: none;
 	padding-top: 1.5rem;
   }
@@ -139,8 +135,6 @@ $seamless-grid-pad : 15px;
 
 .seamless-grid,
 [class*='seamless-col-'] {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -157,7 +151,6 @@ $seamless-grid-pad : 15px;
     }
 	
 	.content {
-	  -ms-word-wrap: break-word;
 	  word-wrap: break-word;
       position: relative;
 	}

@@ -51,7 +51,6 @@
 	  }
 	  .list-topic-item-info {
 		  margin-top: 3.5rem;
-		  -ms-word-wrap: break-word;
 		  word-wrap: break-word;
 		  background: #fff;
 		  padding: 1rem;
@@ -114,14 +113,9 @@
 		  right: -200px;
 		  top: 69%;
 		  z-index: 1;
-		  -moz-transition: .1s ease-in-out;
-		  -o-transition: .1s ease-in-out;
-		  -webkit-transition: .1s ease-in-out;
 		  transition: .1s ease-in-out;
 		  width: 130px;
 		  height: 35px;
-		  -webkit-transform: rotate(0) skew(-45deg);
-		  -ms-transform: rotate(0) skew(-45deg);
 		  transform: rotate(0) skew(-45deg);
 	  }
 	  &:hover .more-bg {

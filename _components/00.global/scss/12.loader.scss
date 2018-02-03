@@ -9,12 +9,6 @@
   position: fixed;
   background-color: transparent;
   -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  /* Chrome all / Safari all */
-  -moz-user-select: none;
-  /* Firefox all */
-  -ms-user-select: none;
-  /* IE 10+ */
   user-select: none;
   /* Likely future */
   display: flex;
@@ -42,7 +36,6 @@
   }
   .spinner-container {
     animation: rotate .5s linear infinite;
-    -webkit-animation: rotate .5s linear infinite;
     .path {
       stroke-dasharray: 1,150;
       /* 1%, 101% circumference */
@@ -50,10 +43,10 @@
       stroke: $highlight-color1;
       stroke-linecap: round;
       animation: dash 1.5s ease-in-out infinite;
-      -webkit-animation: dash 1.5s ease-in-out infinite;
     }
   }
 }
+
 
 @keyframes rotate {
   100% {
@@ -63,36 +56,6 @@
 
 
 @keyframes dash {
-  0% {
-    stroke-dasharray: 1,150;
-    /* 1%, 101% circumference */
-    stroke-dashoffset: 0;
-  }
-
-  50% {
-    stroke-dasharray: 90,150;
-    /* 70%, 101% circumference */
-    stroke-dashoffset: -35;
-    /* 25% circumference */
-  }
-
-  100% {
-    stroke-dasharray: 90,150;
-    /* 70%, 101% circumference */
-    stroke-dashoffset: -124;
-    /* -99% circumference */
-  }
-}
-
-
-@-webkit-keyframes rotate {
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-
-@-webkit-keyframes dash {
   0% {
     stroke-dasharray: 1,150;
     /* 1%, 101% circumference */

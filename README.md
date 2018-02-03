@@ -5,6 +5,16 @@
 
 <a href="https://uiux.cc/uix-kit" target="_blank"><img src="https://github.com/xizon/uix-kit/blob/master/_screenshots/cover.jpg" width="300" height="300"></a>
 
+
+## How do I enable local testing?
+
+Firefox (and IE?) natively support local XHR, so -prefix-free will work fine locally with them.
+
+To enable local XHR for **Chrome**, you need to run it with the flag `--allow-file-access-from-files`.
+
+To enable local XHR for **Opera**, you have to go to [opera:config#UserPrefs|AllowFileXMLHttpRequest](opera:config#UserPrefs|AllowFileXMLHttpRequest), check that option and Save.
+
+
 ## Installation
 
 Use NPM `npm install uix-kit`. For nodejs you have to install some dependencies.
@@ -83,6 +93,7 @@ uix-kit/
 │   │       └── js/
 │   └── assets-demo/
 │           ├── images/
+│           ├── json/
 │           └── videos/
 	
 ```

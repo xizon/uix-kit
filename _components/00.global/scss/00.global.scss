@@ -87,16 +87,10 @@ $primary-bg-color      : transparent;
 
 @mixin transition-cubic-bezier(){
 	/* @include transition-cubic-bezier(); */
-	  -moz-transition: 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
-	  -o-transition: 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
-	  -webkit-transition: 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
 	  transition: 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
 }
 
 @mixin transition-default(){
 	/* @include transition-default(); */
-	-webkit-transition: all 0.3s ease 0s;
-	-moz-transition: all 0.3s ease 0s;
-	-ms-transition: all 0.3s ease 0s;
 	transition: all 0.3s ease 0s;
 }

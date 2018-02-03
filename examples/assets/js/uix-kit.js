@@ -6,8 +6,8 @@
  * 
  * ## Project Name        :  Uix Kit
  * ## Description         :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
- * ## Version             :  0.0.7
- * ## Last Update         :  February 3, 2018
+ * ## Version             :  0.0.8
+ * ## Last Update         :  February 4, 2018
  * ## Created             :  by UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Compatible With     :  Bootstrap 3.x, Chinese, English
@@ -1309,11 +1309,78 @@ theme = ( function ( theme, $, window, document ) {
 	
 	
 }(jQuery));
+
 /*! 
  *************************************
- * Custom Core Scripts & Stylesheets
+ * Form
  *************************************
  */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ) {
+		
+		/*--- Input File ----*/
+		$( '.controls-file-container' ).each( function()  {
+			var fileInput  = $( this ).find( 'input[type="file"]' ),
+				fileBtn    = $( this ).find( '.controls-file-trigger' ),
+				filePath   = $( this ).next( '.controls-file-return' );
+			
+			fileBtn.on( 'click', function() {
+				fileInput.focusin();
+			});	
+			
+			fileInput.on( 'change', function() {
+				filePath.text( $( this ).val() );
+			});	
+			
+		});
+
+		/*--- Hover Effect ----*/
+		$( '.float-label' ).each( function(){
+			
+			var $this = $( this );
+			
+			// on focus add cladd active to label
+			$this.focus( function() {
+				$this.next().addClass( 'active' );
+			});
+			//on blur check field and remove class if needed
+			$this.blur( function() {
+				if( $this.val() === '' || $this.val() === 'blank') {
+					$this.next().removeClass();
+				}
+			});
+			
+			// if exist cookie value
+			if( $this.val() != '' && $this.val() != 'blank') { 
+			    $this.next().addClass( 'active' );
+			}
+			
+		});
+		
+		$( '.wp-search-submit' ).on( 'click', function() {
+			$( this ).parent().parent( 'form' ).submit();
+		});
+		
+		
+		
+		/*--- Input Validation ----*/
+		//Using the jQuery Validation Plugin to check your form
+		
+		
+	};
+	
+		
+    theme.form = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
 
 
 
@@ -1421,175 +1488,11 @@ theme = ( function ( theme, $, window, document ) {
 }( theme, jQuery, window, document ) );
 
 
-
 /*! 
  *************************************
- * Form
+ * Custom Core Scripts & Stylesheets
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
-		/*--- Input File ----*/
-		$( '.controls-file-container' ).each( function()  {
-			var fileInput  = $( this ).find( 'input[type="file"]' ),
-				fileBtn    = $( this ).find( '.controls-file-trigger' ),
-				filePath   = $( this ).next( '.controls-file-return' );
-			
-			fileBtn.on( 'click', function() {
-				fileInput.focusin();
-			});	
-			
-			fileInput.on( 'change', function() {
-				filePath.text( $( this ).val() );
-			});	
-			
-		});
-
-		/*--- Hover Effect ----*/
-		$( '.float-label' ).each( function(){
-			
-			var $this = $( this );
-			
-			// on focus add cladd active to label
-			$this.focus( function() {
-				$this.next().addClass( 'active' );
-			});
-			//on blur check field and remove class if needed
-			$this.blur( function() {
-				if( $this.val() === '' || $this.val() === 'blank') {
-					$this.next().removeClass();
-				}
-			});
-			
-			// if exist cookie value
-			if( $this.val() != '' && $this.val() != 'blank') { 
-			    $this.next().addClass( 'active' );
-			}
-			
-		});
-		
-		$( '.wp-search-submit' ).on( 'click', function() {
-			$( this ).parent().parent( 'form' ).submit();
-		});
-		
-		
-		
-		/*--- Input Validation ----*/
-		//Using the jQuery Validation Plugin to check your form
-		
-		
-	};
-	
-		
-    theme.form = {
-        documentReady : documentReady        
-    };
-
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
-
-
-
-/*! 
- *************************************
- * Modal Dialog
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-   
-   
-    var documentReady = function( $ ){
-		
-		function getTransitionDuration( elementOrSelector ){
-			var $el, durString, isMS, numberStr, numberNum;
-			$el = $( elementOrSelector );
-			if( $el.length === 0 ){
-				return false;
-			}
-			$el = $($el[0]); // Force just the first item.  need more?  use .each
-			
-			var dur = $el.css('transition-duration');
-			if( typeof dur === typeof undefined ) { 
-				dur = '0.5s';
-			}
-			
-			durString = dur.toLowerCase();
-			isMS = durString.indexOf( 'ms' ) >= 0;
-			numberNum = durString.replace( 'ms', '' ).replace( 's', '' );
-			return isMS ? numberNum : numberNum * 1000;
-		}
-		
-	
-	    $( 'body' ).prepend( '<div class="modal-mask"></div>' );
-		$( '[data-modal-id]' ).on( 'click', function() {
-			var dataID = $( this ).data( 'modal-id' ),
-			    dataH  = $( this ).data( 'modal-height' ),
-				dataW  = $( this ).data( 'modal-width' ),
-				$obj   = $( '.modal-box#'+dataID );
-			
-			// Initializate modal
-			$( this ).attr( 'href', 'javascript:void(0)' );
-			$obj.find( '.content' ).css( 'overflow-y', 'hidden' );
-			
-			if ( $obj.length > 0 ) {
-				if( typeof dataH != typeof undefined && dataH != '' ) {
-					$obj.css( {'height': dataH } );
-				}
-				
-				if( typeof dataW != typeof undefined && dataW != '' ) {
-					$obj.css( {'width': dataW, 'left': 'calc( (100% - '+dataW+')/2 )' } );
-				}
-				
-				$( '.modal-mask' ).fadeIn( 'fast' );
-				$obj.addClass( 'active' );	
-			}
-			
-			if ( $obj.hasClass( 'fullscreen' ) ) {
-				setTimeout( function() {
-					$( 'html' ).css( 'overflow-y', 'hidden' );
-					if ( !$obj.hasClass( 'video' ) ) {
-						$obj.find( '.content' ).css( 'overflow-y', 'scroll' );
-					}
-					
-				}, getTransitionDuration( '.modal-box#'+dataID ) );
-				
-			}
-		
-		});
-		
-		$( '.modal-box .close-btn' ).on( 'click', function() {
-			$( this ).parent().removeClass( 'active' );
-		});
-		
-		$( '.modal-box .close-btn, .modal-mask' ).on( 'click', function() {
-			$( '.modal-box' ).removeClass( 'active' );
-			$( '.modal-mask' ).fadeOut( 'fast' );
-			$( '.modal-box' ).find( '.content' ).css( 'overflow-y', 'hidden' );
-			$( 'html' ).css( 'overflow-y', 'auto' );
-			setTimeout( function() {
-	
-			}, getTransitionDuration( '.modal-box:first' ) );
-			
-		});
-		
-	};
-		
-      
-    theme.modalbox = {
-        documentReady : documentReady        
-    };  
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
-
 
 
 
@@ -1832,91 +1735,6 @@ theme = ( function ( theme, $, window, document ) {
 }( theme, jQuery, window, document ) );
 
 
-/*! 
- *************************************
- * Navigation Highlighting
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-    
-    var documentReady = function( $ ) {
-    
-        // Get section or article by href
-        function getRelatedContent( el ) {
-            return $( $( el ).attr( 'href' ) );
-        }
-        // Get link by section or article id
-        function getRelatedNavigation( el ) {
-            return $( '.menu-main li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' );
-        } 
-        
-	    //-------- Navigation highlighting using waypoints
-		if ( $( 'body' ).hasClass( 'onepage' ) ) {
-
-
-			// Smooth scroll to content
-			$( '.menu-main li > a' ).on('click', function(e) {
-				e.preventDefault();
-
-				$( 'html,body' ).animate({
-					scrollTop: getRelatedContent( this ).offset().top - 20
-				});
-			});	
-
-			//-------- Default cwaypoint settings
-			var topSectionSpacing = $( '.header-area' ).outerHeight( true );
-			var waypoints1 = $( '[data-highlight-section="true"]' ).waypoint({
-				handler: function( direction ) {
-
-
-					// Highlight element when related content
-					getRelatedNavigation( this.element ).toggleClass( 'active', direction === 'down' );
-					$( this.element ).toggleClass( 'active', direction === 'down' );
-
-				},
-				offset: topSectionSpacing
-			});	
-
-			var waypoints2 = $( '[data-highlight-section="true"]' ).waypoint({
-				handler: function( direction ) {
-
-					// Highlight element when related content
-					getRelatedNavigation( this.element ).toggleClass( 'active', direction === 'up' );
-					$( this.element ).toggleClass( 'active', direction === 'up' );
-
-				},
-				offset: function() {  
-					return -$( this.element ).height() - topSectionSpacing; 
-				}
-			});	
-
-			setTimeout( function() {
-				$( '.menu-main li:first' ).addClass( 'active' );
-			}, 1000 );	
-		}
-
-		
-		
-		
-		
-    };
-
-    theme.navHighlight = {
-        documentReady : documentReady        
-    };
-
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
-
-
-
-
-
-
-
 
 /*! 
  *************************************
@@ -2052,6 +1870,354 @@ theme = ( function ( theme, $, window, document ) {
 
 /*! 
  *************************************
+ * Modal Dialog
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ){
+		
+		function getTransitionDuration( elementOrSelector ){
+			var $el, durString, isMS, numberStr, numberNum;
+			$el = $( elementOrSelector );
+			if( $el.length === 0 ){
+				return false;
+			}
+			$el = $($el[0]); // Force just the first item.  need more?  use .each
+			
+			var dur = $el.css('transition-duration');
+			if( typeof dur === typeof undefined ) { 
+				dur = '0.5s';
+			}
+			
+			durString = dur.toLowerCase();
+			isMS = durString.indexOf( 'ms' ) >= 0;
+			numberNum = durString.replace( 'ms', '' ).replace( 's', '' );
+			return isMS ? numberNum : numberNum * 1000;
+		}
+		
+	
+	    $( 'body' ).prepend( '<div class="modal-mask"></div>' );
+		$( '[data-modal-id]' ).on( 'click', function() {
+			var dataID = $( this ).data( 'modal-id' ),
+			    dataH  = $( this ).data( 'modal-height' ),
+				dataW  = $( this ).data( 'modal-width' ),
+				$obj   = $( '.modal-box#'+dataID );
+			
+			// Initializate modal
+			$( this ).attr( 'href', 'javascript:void(0)' );
+			$obj.find( '.content' ).css( 'overflow-y', 'hidden' );
+			
+			if ( $obj.length > 0 ) {
+				if( typeof dataH != typeof undefined && dataH != '' ) {
+					$obj.css( {'height': dataH } );
+				}
+				
+				if( typeof dataW != typeof undefined && dataW != '' ) {
+					$obj.css( {'width': dataW, 'left': 'calc( (100% - '+dataW+')/2 )' } );
+				}
+				
+				$( '.modal-mask' ).fadeIn( 'fast' );
+				$obj.addClass( 'active' );	
+			}
+			
+			if ( $obj.hasClass( 'fullscreen' ) ) {
+				setTimeout( function() {
+					$( 'html' ).css( 'overflow-y', 'hidden' );
+					if ( !$obj.hasClass( 'video' ) ) {
+						$obj.find( '.content' ).css( 'overflow-y', 'scroll' );
+					}
+					
+				}, getTransitionDuration( '.modal-box#'+dataID ) );
+				
+			}
+		
+		});
+		
+		$( '.modal-box .close-btn' ).on( 'click', function() {
+			$( this ).parent().removeClass( 'active' );
+		});
+		
+		$( '.modal-box .close-btn, .modal-mask' ).on( 'click', function() {
+			$( '.modal-box' ).removeClass( 'active' );
+			$( '.modal-mask' ).fadeOut( 'fast' );
+			$( '.modal-box' ).find( '.content' ).css( 'overflow-y', 'hidden' );
+			$( 'html' ).css( 'overflow-y', 'auto' );
+			setTimeout( function() {
+	
+			}, getTransitionDuration( '.modal-box:first' ) );
+			
+		});
+		
+	};
+		
+      
+    theme.modalbox = {
+        documentReady : documentReady        
+    };  
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
+/*! 
+ *************************************
+ * Multiple Items Carousel
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+    
+		$( '.custom-multi-items-carousel' ).each( function()  {
+
+			var $carouselWrapper   = $( this ),
+				$carousel          = $( '.items' ),
+				$carouselItem      = $( '.items > .item' ),
+				carouselItemTotal  = $carouselItem.length,
+				showcarouselItem   = $carouselWrapper.data( 'cus-carousel-show' ),
+				carouselItemWidth  = $carousel.width()/showcarouselItem,
+				carouselLeft       = 0,
+				carouselSpeed      = $carouselWrapper.data( 'cus-carousel-speed' ),
+				carouselNext       = $carouselWrapper.data( 'cus-carousel-next' ),
+				carouselPrev       = $carouselWrapper.data( 'cus-carousel-prev' );
+
+
+			if( typeof showcarouselItem === typeof undefined ) {
+				showcarouselItem = 3;
+			}
+			if( typeof carouselSpeed === typeof undefined ) {
+				carouselSpeed = 250;
+			}
+			if( typeof carouselNext === typeof undefined ) {
+				carouselNext = '.next';
+			}
+			if( typeof carouselPrev === typeof undefined ) {
+				carouselPrev = '.prev';
+			}
+
+
+			/*! 
+			 ------------------
+			 Initialize carousel
+			 ------------------
+			 */  
+			var newWidth = ( $carouselWrapper.width() / showcarouselItem );
+
+			$carousel.css( 'width', carouselItemTotal * carouselItemWidth );
+
+
+			// Re-order all items
+			$carouselItem.each( function() {
+				$( this ).css( 'left', carouselLeft + 'px' );
+				$( this ).width( newWidth + 'px' );
+				carouselLeft += newWidth;
+			});
+
+
+			//default button status
+			if ( parseFloat( $carousel.css( 'marginLeft' ) ).toFixed(0) == 0 ) {
+				$( carouselPrev ).addClass( 'disable' );
+			}	
+
+			/*! 
+			 ------------------
+			 Move left
+			 ------------------
+			 */ 
+			$( carouselNext ).on( 'click', function( e ) {
+				e.preventDefault();
+
+				var $btn    = $( this ),
+					btnLock = $btn.data( 'click' );
+
+				if ( typeof btnLock === typeof undefined || btnLock === 0 ) {
+
+					//Avoid button repeated trigger
+					$btn.data( 'click', 1 );
+
+					var original = parseFloat( $carousel.css( 'marginLeft' ) ).toFixed(0),
+						target   = -parseFloat( (carouselItemTotal - showcarouselItem - 1)*carouselItemWidth ).toFixed(0);
+
+
+					if ( original >= target ) {
+						$carousel.animate({
+							'marginLeft': '-=' + carouselItemWidth
+						}, { duration: carouselSpeed, complete: function() {
+
+							//Reset prevents code from duplicate run
+							$( carouselPrev ).data( 'click', 0 ).removeClass( 'disable' );
+							$btn.data( 'click', 0 );
+						}} );	
+					}
+
+					if ( original == target ) {
+						$btn.addClass( 'disable' );
+
+					}
+				}
+
+
+			});
+
+			
+			/*! 
+			 ------------------
+			 Move right
+			 ------------------
+			 */ 
+			$( carouselPrev ).on( 'click', function( e ) {
+
+				e.preventDefault();
+
+				var $btn    = $( this ),
+					btnLock = $btn.data( 'click' );
+
+				if ( typeof btnLock === typeof undefined || btnLock === 0 ) {
+
+					//Avoid button repeated trigger
+					$btn.data( 'click', 1 );
+
+
+					var original = parseFloat( $carousel.css( 'marginLeft' ) ).toFixed(0),
+						target   = 0;
+
+
+					if ( original < target ) {
+						$carousel.animate({
+							'marginLeft': '+=' + carouselItemWidth
+						}, { duration: carouselSpeed, complete: function() {
+
+							//Reset prevents code from duplicate run
+							$( carouselNext ).data( 'click', 0 ).removeClass( 'disable' );
+							$btn.data( 'click', 0 );
+						}} );	
+					}	
+
+					if ( original == -carouselItemWidth.toFixed(0) ) {
+						$btn.addClass( 'disable' );
+
+					}	
+
+
+				}
+
+			});
+
+
+		});		
+		
+		
+    };
+
+    theme.multiItemsCarousel = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
+
+
+
+
+/*! 
+ *************************************
+ * Navigation Highlighting
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+    
+        // Get section or article by href
+        function getRelatedContent( el ) {
+            return $( $( el ).attr( 'href' ) );
+        }
+        // Get link by section or article id
+        function getRelatedNavigation( el ) {
+            return $( '.menu-main li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' );
+        } 
+        
+	    //-------- Navigation highlighting using waypoints
+		if ( $( 'body' ).hasClass( 'onepage' ) ) {
+
+
+			// Smooth scroll to content
+			$( '.menu-main li > a' ).on('click', function(e) {
+				e.preventDefault();
+
+				$( 'html,body' ).animate({
+					scrollTop: getRelatedContent( this ).offset().top - 20
+				});
+			});	
+
+			//-------- Default cwaypoint settings
+			var topSectionSpacing = $( '.header-area' ).outerHeight( true );
+			var waypoints1 = $( '[data-highlight-section="true"]' ).waypoint({
+				handler: function( direction ) {
+
+
+					// Highlight element when related content
+					getRelatedNavigation( this.element ).toggleClass( 'active', direction === 'down' );
+					$( this.element ).toggleClass( 'active', direction === 'down' );
+
+				},
+				offset: topSectionSpacing
+			});	
+
+			var waypoints2 = $( '[data-highlight-section="true"]' ).waypoint({
+				handler: function( direction ) {
+
+					// Highlight element when related content
+					getRelatedNavigation( this.element ).toggleClass( 'active', direction === 'up' );
+					$( this.element ).toggleClass( 'active', direction === 'up' );
+
+				},
+				offset: function() {  
+					return -$( this.element ).height() - topSectionSpacing; 
+				}
+			});	
+
+			setTimeout( function() {
+				$( '.menu-main li:first' ).addClass( 'active' );
+			}, 1000 );	
+		}
+
+		
+		
+		
+		
+    };
+
+    theme.navHighlight = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
+
+
+
+
+
+/*! 
+ *************************************
  * Parallax
  *************************************
  */
@@ -2173,8 +2339,6 @@ theme = ( function ( theme, $, window, document ) {
 				
 				if( typeof dataSkew != typeof undefined ) {
 					$this.css( {
-						'-ms-transform'     : 'skew(0deg, '+dataSkew+'deg)', /* IE 9 */
-						'-webkit-transform' : 'skew(0deg, '+dataSkew+'deg)', /* Chrome, Safari, Opera */
 						'transform'         : 'skew(0deg, '+dataSkew+'deg)'
 					} );
 				}	
@@ -2209,50 +2373,6 @@ theme = ( function ( theme, $, window, document ) {
 }( theme, jQuery, window, document ) );
 
 
-
-
-/*! 
- *************************************
- * Retina Graphics for Website
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
-		//Determine if you have retinal display
-		var hasRetina  = false,
-			rootRetina = (typeof exports === 'undefined' ? window : exports),
-			mediaQuery = '(-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-resolution: 1.5dppx)';
-	
-		if ( rootRetina.devicePixelRatio > 1 || rootRetina.matchMedia && rootRetina.matchMedia( mediaQuery ).matches ) {
-			hasRetina = true;
-		} 
-
-		if ( hasRetina ) {
-			//do something
-			$( '[data-retina]' ).each( function() {
-				$( this ).attr( {
-					'src'     : $( this ).data( 'retina' ),
-				} );
-			});
-		
-		} 
-	
-		
-	};
-	
-		
-    theme.retina = {
-        documentReady : documentReady        
-    };
-
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
 
 /*! 
  *************************************
@@ -2411,6 +2531,50 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
+
+
+/*! 
+ *************************************
+ * Retina Graphics for Website
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ) {
+		
+		//Determine if you have retinal display
+		var hasRetina  = false,
+			rootRetina = (typeof exports === 'undefined' ? window : exports),
+			mediaQuery = '(-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-resolution: 1.5dppx)';
+	
+		if ( rootRetina.devicePixelRatio > 1 || rootRetina.matchMedia && rootRetina.matchMedia( mediaQuery ).matches ) {
+			hasRetina = true;
+		} 
+
+		if ( hasRetina ) {
+			//do something
+			$( '[data-retina]' ).each( function() {
+				$( this ).attr( {
+					'src'     : $( this ).data( 'retina' ),
+				} );
+			});
+		
+		} 
+	
+		
+	};
+	
+		
+    theme.retina = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
 
 
 /*! 
@@ -3058,6 +3222,171 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
+
+/*! 
+ *************************************
+ * Tabs
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ){
+		
+		$( '.custom-tabs' ).each(function( id ) {
+			var $this             = $( this ),
+			    $li               = $this.find( 'ul > li' ),
+				liNum             = $li.length,
+				$contentbox       = $this.find( '.content' ),
+				ulWidth           = $this.data( 'width' ),
+				fullwidth         = $this.data( 'fullwidth' ),
+				rotation          = $this.data( 'rotation' ),
+				rotationRadius    = $this.data( 'rotation-radius' ),
+				rotationWapperDeg = $this.data( 'rotation-wrapper-angle' ),
+				
+				tabBoxID          = id,
+				isNumeric         = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
+			
+			if( typeof fullwidth != typeof undefined && fullwidth == 1 ) {
+				$li.css( 'width', ( 100 / liNum ) + '%' );
+			}
+			
+					
+			
+			if( typeof rotation === typeof undefined ) {
+				rotation = false;
+			}	
+			
+			
+			if( typeof rotationWapperDeg === typeof undefined ) {
+				rotationWapperDeg = 0;
+			}		
+			
+			
+			$li.each( function( index ) {
+				index = index + 1;
+				$( this ).attr( 'href', 'javascript:' );
+				$( this ).attr( 'data-tab', tabBoxID + '-tabs-show' + index );
+			});
+			$( $contentbox ).each( function( index ) {
+				index = index + 1;
+				$( this ).attr( 'id', tabBoxID + '-tabs-show' + index );
+			});
+			
+			
+			// Tab Rotation Effect
+			if ( rotation ) {
+				
+				var increase   = Math.PI * 2 / liNum,
+					radius     = rotationRadius,
+					angle      = 0;
+				
+				//Initialize button position
+				$this.find( 'ul' ).css({
+							'transform'         : 'rotate('+ parseFloat( rotationWapperDeg ) +'deg)'
+						})
+						.find( '> li' )
+						.css({
+								'transform'         : 'rotate('+ -parseFloat( rotationWapperDeg )+'deg)'
+							});
+				
+				
+				$li.each( function( index ) {
+					$( this ).css( {
+						'left'              : Math.cos( - Math.PI / 2 + index * increase) * radius + 'px',
+						'top'               : Math.sin( - Math.PI / 2 + index * increase) * radius + 'px'
+					} );
+					
+
+					
+					$( this ).on( 'click', function( e ) {
+						
+						var n        = $(this).index(),
+							endAngle = n % liNum * increase; 
+
+
+						( function turn() {
+							if (Math.abs(endAngle - angle) > 1 / 8) {
+								var sign = endAngle > angle ? 1 : -1;
+								angle = angle + sign / 8;
+								setTimeout(turn, 20);
+							} else {
+								angle = endAngle;
+							}
+
+
+							$li.each( function( index ) {
+								$( this ).css( {
+									'left'        : Math.cos( - Math.PI / 2 + index * increase - angle) * radius + 'px',
+									'top'         : Math.sin( - Math.PI / 2 + index * increase - angle) * radius + 'px'
+								} );
+
+							});	
+
+
+						})();	
+						
+					});
+					
+				});	
+				
+
+				
+			}
+			
+			
+			// Tab Sliding Effext
+			$this.find( 'ul li:first' ).prepend( '<div class="marker"></div>' );
+			
+			
+			
+			// Tab Fade Effect
+			$this.on( 'click', 'li', function( e ) {
+				
+				var tabID = $( this ).attr( 'data-tab' ),
+					index = parseFloat( $( this ).index() - 1 );
+				
+				
+				$this.find( 'li' ).removeClass( 'active' );
+				$this.find( '.content' ).removeClass( 'active' );
+		
+				$( this ).addClass( 'active' );
+				$( '#' + tabID ).addClass( 'active' );
+				
+
+				//sliding marker
+				var translateX = $( this ).index() * 100;
+				$this.find( '.marker' ).css({
+					'transform'          : 'translateX( '+translateX+'% )'	
+				});
+		
+				
+				return false;
+				
+				
+			});
+			
+			// Init
+			$this.find( 'ul > li.active' ).trigger( 'click' );
+				
+			
+		});
+		
+
+		
+	};
+		
+      
+    theme.customTabs = {
+        documentReady : documentReady        
+    };  
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
 /*! 
  *************************************
  * Testimonials Carousel
@@ -3137,177 +3466,6 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-
-
-
-/*! 
- *************************************
- * Tabs
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-   
-   
-    var documentReady = function( $ ){
-		
-		$( '.custom-tabs' ).each(function( id ) {
-			var $this             = $( this ),
-			    $li               = $this.find( 'ul > li' ),
-				liNum             = $li.length,
-				$contentbox       = $this.find( '.content' ),
-				ulWidth           = $this.data( 'width' ),
-				fullwidth         = $this.data( 'fullwidth' ),
-				rotation          = $this.data( 'rotation' ),
-				rotationRadius    = $this.data( 'rotation-radius' ),
-				rotationWapperDeg = $this.data( 'rotation-wrapper-angle' ),
-				
-				tabBoxID          = id,
-				isNumeric         = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
-			
-			if( typeof fullwidth != typeof undefined && fullwidth == 1 ) {
-				$li.css( 'width', ( 100 / liNum ) + '%' );
-			}
-			
-					
-			
-			if( typeof rotation === typeof undefined ) {
-				rotation = false;
-			}	
-			
-			
-			if( typeof rotationWapperDeg === typeof undefined ) {
-				rotationWapperDeg = 0;
-			}		
-			
-			
-			$li.each( function( index ) {
-				index = index + 1;
-				$( this ).attr( 'href', 'javascript:' );
-				$( this ).attr( 'data-tab', tabBoxID + '-tabs-show' + index );
-			});
-			$( $contentbox ).each( function( index ) {
-				index = index + 1;
-				$( this ).attr( 'id', tabBoxID + '-tabs-show' + index );
-			});
-			
-			
-			// Tab Rotation Effect
-			if ( rotation ) {
-				
-				var increase   = Math.PI * 2 / liNum,
-					radius     = rotationRadius,
-					angle      = 0;
-				
-				//Initialize button position
-				$this.find( 'ul' ).css({ 
-							'-webkit-transform' : 'rotate('+ parseFloat( rotationWapperDeg ) +'deg)',
-							'-ms-transform'     : 'rotate('+ parseFloat( rotationWapperDeg ) +'deg)',
-							'transform'         : 'rotate('+ parseFloat( rotationWapperDeg ) +'deg)'
-						})
-						.find( '> li' )
-						.css({ 
-								'-webkit-transform' : 'rotate('+ -parseFloat( rotationWapperDeg )+'deg)',
-								'-ms-transform'     : 'rotate('+ -parseFloat( rotationWapperDeg )+'deg)',
-								'transform'         : 'rotate('+ -parseFloat( rotationWapperDeg )+'deg)'
-							});
-				
-				
-				$li.each( function( index ) {
-					$( this ).css( {
-						'left'              : Math.cos( - Math.PI / 2 + index * increase) * radius + 'px',
-						'top'               : Math.sin( - Math.PI / 2 + index * increase) * radius + 'px'
-					} );
-					
-
-					
-					$( this ).on( 'click', function( e ) {
-						
-						var n        = $(this).index(),
-							endAngle = n % liNum * increase; 
-
-
-						( function turn() {
-							if (Math.abs(endAngle - angle) > 1 / 8) {
-								var sign = endAngle > angle ? 1 : -1;
-								angle = angle + sign / 8;
-								setTimeout(turn, 20);
-							} else {
-								angle = endAngle;
-							}
-
-
-							$li.each( function( index ) {
-								$( this ).css( {
-									'left'        : Math.cos( - Math.PI / 2 + index * increase - angle) * radius + 'px',
-									'top'         : Math.sin( - Math.PI / 2 + index * increase - angle) * radius + 'px'
-								} );
-
-							});	
-
-
-						})();	
-						
-					});
-					
-				});	
-				
-
-				
-			}
-			
-			
-			// Tab Sliding Effext
-			$this.find( 'ul li:first' ).prepend( '<div class="marker"></div>' );
-			
-			
-			
-			// Tab Fade Effect
-			$this.on( 'click', 'li', function( e ) {
-				
-				var tabID = $( this ).attr( 'data-tab' ),
-					index = parseFloat( $( this ).index() - 1 );
-				
-				
-				$this.find( 'li' ).removeClass( 'active' );
-				$this.find( '.content' ).removeClass( 'active' );
-		
-				$( this ).addClass( 'active' );
-				$( '#' + tabID ).addClass( 'active' );
-				
-
-				//sliding marker
-				var translateX = $( this ).index() * 100;
-				$this.find( '.marker' ).css({
-					'-webkit-transform'  : 'translateX( '+translateX+'% )',
-					'-ms-transform'      : 'translateX( '+translateX+'% )',
-					'transform'          : 'translateX( '+translateX+'% )'	
-				});
-		
-				
-				return false;
-				
-				
-			});
-			
-			// Init
-			$this.find( 'ul > li.active' ).trigger( 'click' );
-				
-			
-		});
-		
-
-		
-	};
-		
-      
-    theme.customTabs = {
-        documentReady : documentReady        
-    };  
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
 
 
 

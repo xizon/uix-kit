@@ -22,7 +22,5 @@
 /* ====================================================== */
 .modal-box.active .content img,
 .modal-box.fullscreen.active .content img {
-	filter: alpha(opacity=100);  
-	-moz-opacity: 1;   
 	opacity: 1; 
 }

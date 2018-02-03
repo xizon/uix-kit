@@ -9,22 +9,13 @@
     visibility: hidden;
     position: absolute;
     background: #fff;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
     border-radius: 3px;
     font-size: 0.75rem;
     padding: 0.375rem 0.75rem 0.375rem 0.375rem;
-    -moz-transition: .2s ease-in-out !important;
-    -o-transition: .2s ease-in-out !important;
-    -webkit-transition: .2s ease-in-out !important;
     transition: .2s ease-in-out !important;
-    filter: alpha(opacity = 0);
-    -moz-opacity: 0;
     opacity: 0;
     margin-top: 1.0625rem;
     margin-left: 1rem;
-    -webkit-box-shadow: 0px 0px 21px 0px rgba(0, 0, 0, 0.27);
-    -moz-box-shadow: 0px 0px 21px 0px rgba(0, 0, 0, 0.27);
     box-shadow: 0px 0px 21px 0px rgba(0, 0, 0, 0.27);
     &:after {
       display: block;
@@ -40,8 +31,6 @@
     }
   }
   &:hover > div {
-    filter: alpha(opacity = 100);
-    -moz-opacity: 1;
     opacity: 1;
     margin-top: 0;
     visibility: visible;
@@ -54,8 +43,6 @@
 @media all and (max-width: 768px) {
   .sidr-class-custom-tip > div {
     padding-left: .5rem;
-    filter: alpha(opacity = 50);
-    -moz-opacity: 0.5;
     opacity: 0.5;
   }
 }

@@ -42,6 +42,7 @@ $ gulp default
 		============================================= -->
 		<script src="assets/js/wp-jquery/jquery.min.js?ver=2.1.3"></script>
 		<script src="assets/js/wp-jquery/jquery.migrate.min.js?ver=1.4.1"></script>
+		<script src="assets/js/min/prefixfree.min.js?ver=1.0.7"></script>
 		<!-- Core library  end -->
 		
 		
@@ -124,6 +125,7 @@ $ gulp default
     <script src="assets/js/min/videojs-ie8.min.js?ver=1.1"></script> 
     <script src="assets/js/min/video.min.js?ver=5.19"></script> 
 	<script src="assets/js/min/jquery.waypoints.min.js?ver=4.0.1"></script> 
+	<script src="assets/js/min/template7.min.js?ver=1.2.5"></script>
     
     <!-- Mobile  -->
     <script src="assets/js/min/jquery.sidr.min.js?ver=2.2.1"></script>
@@ -199,6 +201,7 @@ uix-kit/
 │   │       └── js/
 │   └── assets-demo/
 │           ├── images/
+│           ├── json/
 │           └── videos/
 	
 ```

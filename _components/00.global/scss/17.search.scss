@@ -15,16 +15,12 @@
     background: #fff;
     border: 1px solid $sub-text-color;
     border-radius: 0;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
     color: #555;
     outline: none;
     padding: 0.4375rem 1.421875rem;
     font-weight: 600;
     font-size: 0.75rem;
-    -webkit-border-radius: 25px;
-    -moz-border-radius: 25px;
     border-radius: 25px;
     &::-webkit-search-cancel-button {
       -webkit-appearance: none;

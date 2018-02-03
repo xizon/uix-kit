@@ -122,8 +122,6 @@ theme = ( function ( theme, $, window, document ) {
 				
 				if( typeof dataSkew != typeof undefined ) {
 					$this.css( {
-						'-ms-transform'     : 'skew(0deg, '+dataSkew+'deg)', /* IE 9 */
-						'-webkit-transform' : 'skew(0deg, '+dataSkew+'deg)', /* Chrome, Safari, Opera */
 						'transform'         : 'skew(0deg, '+dataSkew+'deg)'
 					} );
 				}	

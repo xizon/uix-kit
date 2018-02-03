@@ -3,9 +3,6 @@
 /* ====================================================== */
 
 .custom-gallery-item {
-	-moz-transition: none;
-	-o-transition: none;
-	-webkit-transition: none;
 	transition: none;
 	position: relative;
 	text-align: left;	
@@ -15,19 +12,13 @@
 	position: absolute;
 	left: 0;
 	z-index: 3;
-	filter: alpha(opacity = 0);
-	-moz-opacity: 0;
 	opacity: 0;
 	margin-top: -1rem;
 	/* Vertical Center */
 	top: 50%;
-	-webkit-transform: translateY(-50%);
-	-ms-transform: translateY(-50%);
 	transform: translateY(-50%);
   }
   &:hover .link-to {
-	filter: alpha(opacity = 100);
-	-moz-opacity: 1;
 	opacity: 1;
   }
   .cover {
@@ -54,8 +45,6 @@
 	padding-top: 0.546875rem;
   }
   .title {
-	filter: alpha(opacity = 75);
-	-moz-opacity: 0.7;
 	opacity: 0.7;
 	margin-left: 0.875rem;
 	&:before {
@@ -74,8 +63,6 @@
 	bottom: 0.875rem;
 	right: 0;
 	background: $highlight-color1;
-	-webkit-border-radius: 25px;
-	-moz-border-radius: 25px;
 	border-radius: 25px;
 	padding: 0.0875rem 1.1375rem;
 	color: #fff;

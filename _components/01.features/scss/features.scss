@@ -4,15 +4,10 @@
 .custom-feature {
   .icon i {
     border: 1px #090909 solid;
-    -webkit-border-radius: 100%;
-    -moz-border-radius: 100%;
     border-radius: 100%;
     width: 80px;
     height: 80px;
     line-height: 80px;
-    -moz-transition: .1s ease-in-out;
-    -o-transition: .1s ease-in-out;
-    -webkit-transition: .1s ease-in-out;
     transition: .1s ease-in-out;
     font-size: 32px;
   }
@@ -23,14 +18,9 @@
     font-size: 18px;
     letter-spacing: 0;
     i {
-      -moz-transition: .1s ease-in-out;
-      -o-transition: .1s ease-in-out;
-      -webkit-transition: .1s ease-in-out;
       transition: .1s ease-in-out;
     }
     &:hover i {
-      -webkit-transform: rotate(30deg);
-      -ms-transform: rotate(30deg);
       transform: rotate(30deg);
     }
   }

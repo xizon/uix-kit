@@ -10,7 +10,6 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   margin-top: 0;
   margin-bottom: 0.625rem;
   padding: 0 0 0.546875rem;
-  -ms-word-wrap: break-word;
   word-wrap: break-word;
 }
 
@@ -158,9 +157,6 @@ h6 {
 }
 
 a, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-  -moz-transition: .2s ease-in-out;
-  -o-transition: .2s ease-in-out;
-  -webkit-transition: .2s ease-in-out;
   transition: .2s ease-in-out;
 }
 

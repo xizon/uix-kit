@@ -6,7 +6,52 @@
 	/* Required */
 	overflow: hidden;
 	
-	
-	
-	
+  .items {
+    height: 200px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    background: #333;
+    .item {
+      position: absolute;
+      top: 0;
+      float: left;
+      height: 100%;
+      font-size: 5rem;
+	  padding: 2rem 0;
+      text-align: center;
+      color: #fff;
+      box-shadow: 0 0 1px 0 #fff;
+    }
+  }
+}
+
+.custom-multi-items-carousel-controls {
+  margin-top: 30px;
+  text-align: center;
+  .prev {
+    padding-left: 2px;
+  }
+  .next {
+    padding-right: 2px;
+  }
+  a {
+    margin-left: 10px;
+    margin-right: 10px;
+    outline: 0;
+    border: 0;
+    color: #000;
+    font-weight: bold;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    font-size: 32px;
+    cursor: pointer;
+    opacity: 1;
+    text-decoration: none;
+    font-family: Arial, "sans-serif";
+    &.disable {
+      opacity: .3;
+    }
+  }
 }
