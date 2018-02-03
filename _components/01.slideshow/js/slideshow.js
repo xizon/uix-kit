@@ -21,7 +21,7 @@ theme = ( function ( theme, $, window, document ) {
 		/*
 		 * Initialize embedded local video.
 		 *
-		 * @param  {wrapper} element         - The outermost video container, which can contain multiple videos
+		 * @param  {object} wrapper          - The outermost video container, which can contain multiple videos
 		 * @return {void}                    - The constructor.
 		 */
 		function videoEmbedInit( wrapper ) {
@@ -77,7 +77,7 @@ theme = ( function ( theme, $, window, document ) {
 		/*
 		 * Return an event from callback function to each slider.
 		 *
-		 * @param  {slider} element         - The current slider.
+		 * @param  {object} slider          - The current slider.
 		 * @return {void}                   - The constructor.
 		 */
         function initslides( slider ) {
@@ -115,7 +115,7 @@ theme = ( function ( theme, $, window, document ) {
 		/*
 		 * Return an event from callback function to each slider with dynamic min/max ranges.
 		 *
-		 * @param  {slider} element         - The current slider.
+		 * @param  {object} slider          - The current slider.
 		 * @return {void}                   - The constructor.
 		 */
         function initslidesItemgrid( slider ) {
