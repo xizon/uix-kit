@@ -43,6 +43,10 @@ theme = ( function ( theme, $, window, document ) {
 				totalPage = 3;
 			}
 			
+			if( typeof totalPage != typeof undefined && totalPage == '-1' ) {
+				totalPage = 9999;
+			}
+			
 			
 			if( typeof trigger === typeof undefined ) {
 				trigger = '.load-more';
@@ -131,7 +135,7 @@ theme = ( function ( theme, $, window, document ) {
 
 						//Hidden button
 						if ( curPage == totalPage ) {
-							$button.hide();
+							$button.addClass( 'hide' );
 						}
 
 
@@ -192,34 +196,52 @@ theme = ( function ( theme, $, window, document ) {
 				method   : method,
 				data     : { total: totalPage, per: perShow, page: curPage },
 				dataType : 'json',
-				success: function (data) { 
+				success  : function (data) { 
+					
+					//Check JSON string
+					if ( data && data.hasOwnProperty( 'items' ) && Object.prototype.toString.call( data[ 'items' ] )=='[object Array]' ) {
+						
+						
+						//Data overflow may occur when the total number of pages is not posted
+						try {
 
-					var thisData = data,
-						html     = compiledTemplate( thisData ),
-						curHtml  = $divRoot.find( pushContainer ).html();
+							var thisData = data,
+								html     = compiledTemplate( thisData ),
+								curHtml  = $divRoot.find( pushContainer ).html();
 
-					
-					$divRoot.find( pushContainer ).html( curHtml + html );
-					
-					//Function of Masonry
-					var masonryObj = $( '.masonry-container .custom-gallery-tiles' );
-					imagesLoaded( masonryObj ).on( 'always', function() {
-						  masonryObj.masonry({
-							itemSelector: '.masonry-item'
-						  });  
-					});
-					
-					
-					// Remove this button
-					$button.removeClass( triggerActive );	
 
-					//Hidden button
-					if ( curPage == totalPage ) {
-						$button.addClass( 'hide' );
-					}	
-					
+							$divRoot.find( pushContainer ).html( curHtml + html );
 
-					
+							//Function of Masonry
+							var masonryObj = $( '.masonry-container .custom-gallery-tiles' );
+							imagesLoaded( masonryObj ).on( 'always', function() {
+								  masonryObj.masonry({
+									itemSelector: '.masonry-item'
+								  });  
+							});
+
+
+							// Remove this button
+							$button.removeClass( triggerActive );	
+
+							//Hidden button
+							if ( curPage == totalPage ) {
+								$button.addClass( 'hide' );
+							}		
+
+						} catch ( err ) {
+							console.log( err.message );
+							$button.addClass( 'hide' );
+
+						}
+
+						
+					}
+
+				 },
+				 error  : function() {
+					 $button.addClass( 'hide' );
+					 
 				 }
 			});
 

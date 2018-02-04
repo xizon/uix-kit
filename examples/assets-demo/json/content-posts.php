@@ -1,8 +1,14 @@
 <?php
 
-$page = $_POST[ 'page' ]; //The current page to load.
-$per  = $_POST[ 'per' ];  //The amount to load each time.
 
+$total = $_POST[ 'total' ]; //The total pages.
+$page  = $_POST[ 'page' ]; //The current page to load.
+$per   = $_POST[ 'per' ];  //The amount to load each time.
+
+if ( $page == 5 ) {
+	
+	echo 'not';
+}
 
 if ( $page == 4 ) {
 	

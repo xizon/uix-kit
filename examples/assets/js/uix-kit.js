@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit
  * ## Description         :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Version             :  0.0.8
- * ## Last Update         :  February 4, 2018
+ * ## Last Update         :  February 5, 2018
  * ## Created             :  by UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Compatible With     :  Bootstrap 3.x, Chinese, English
@@ -1540,6 +1540,10 @@ theme = ( function ( theme, $, window, document ) {
 				totalPage = 3;
 			}
 			
+			if( typeof totalPage != typeof undefined && totalPage == '-1' ) {
+				totalPage = 9999;
+			}
+			
 			
 			if( typeof trigger === typeof undefined ) {
 				trigger = '.load-more';
@@ -1628,7 +1632,7 @@ theme = ( function ( theme, $, window, document ) {
 
 						//Hidden button
 						if ( curPage == totalPage ) {
-							$button.hide();
+							$button.addClass( 'hide' );
 						}
 
 
@@ -1689,34 +1693,52 @@ theme = ( function ( theme, $, window, document ) {
 				method   : method,
 				data     : { total: totalPage, per: perShow, page: curPage },
 				dataType : 'json',
-				success: function (data) { 
+				success  : function (data) { 
+					
+					//Check JSON string
+					if ( data && data.hasOwnProperty( 'items' ) && Object.prototype.toString.call( data[ 'items' ] )=='[object Array]' ) {
+						
+						
+						//Data overflow may occur when the total number of pages is not posted
+						try {
 
-					var thisData = data,
-						html     = compiledTemplate( thisData ),
-						curHtml  = $divRoot.find( pushContainer ).html();
+							var thisData = data,
+								html     = compiledTemplate( thisData ),
+								curHtml  = $divRoot.find( pushContainer ).html();
 
-					
-					$divRoot.find( pushContainer ).html( curHtml + html );
-					
-					//Function of Masonry
-					var masonryObj = $( '.masonry-container .custom-gallery-tiles' );
-					imagesLoaded( masonryObj ).on( 'always', function() {
-						  masonryObj.masonry({
-							itemSelector: '.masonry-item'
-						  });  
-					});
-					
-					
-					// Remove this button
-					$button.removeClass( triggerActive );	
 
-					//Hidden button
-					if ( curPage == totalPage ) {
-						$button.addClass( 'hide' );
-					}	
-					
+							$divRoot.find( pushContainer ).html( curHtml + html );
 
-					
+							//Function of Masonry
+							var masonryObj = $( '.masonry-container .custom-gallery-tiles' );
+							imagesLoaded( masonryObj ).on( 'always', function() {
+								  masonryObj.masonry({
+									itemSelector: '.masonry-item'
+								  });  
+							});
+
+
+							// Remove this button
+							$button.removeClass( triggerActive );	
+
+							//Hidden button
+							if ( curPage == totalPage ) {
+								$button.addClass( 'hide' );
+							}		
+
+						} catch ( err ) {
+							console.log( err.message );
+							$button.addClass( 'hide' );
+
+						}
+
+						
+					}
+
+				 },
+				 error  : function() {
+					 $button.addClass( 'hide' );
+					 
 				 }
 			});
 
@@ -1982,17 +2004,20 @@ theme = ( function ( theme, $, window, document ) {
 		$( '.custom-multi-items-carousel' ).each( function()  {
 
 			var $carouselWrapper   = $( this ),
-				$carousel          = $( '.items' ),
-				$carouselItem      = $( '.items > .item' ),
+				$carousel          = $carouselWrapper.find( '.items' ),
+				$carouselItem      = $carouselWrapper.find( '.items > .item' ),
 				carouselItemTotal  = $carouselItem.length,
 				showcarouselItem   = $carouselWrapper.data( 'cus-carousel-show' ),
 				carouselItemWidth  = $carousel.width()/showcarouselItem,
-				carouselLeft       = 0,
+				carouselLoop       = $carouselWrapper.data( 'cus-carousel-loop' ),
 				carouselSpeed      = $carouselWrapper.data( 'cus-carousel-speed' ),
 				carouselNext       = $carouselWrapper.data( 'cus-carousel-next' ),
 				carouselPrev       = $carouselWrapper.data( 'cus-carousel-prev' );
 
 
+			if( typeof carouselLoop === typeof undefined ) {
+				carouselLoop = false;
+			}
 			if( typeof showcarouselItem === typeof undefined ) {
 				showcarouselItem = 3;
 			}
@@ -2018,53 +2043,102 @@ theme = ( function ( theme, $, window, document ) {
 
 
 			// Re-order all items
-			$carouselItem.each( function() {
-				$( this ).css( 'left', carouselLeft + 'px' );
-				$( this ).width( newWidth + 'px' );
-				carouselLeft += newWidth;
-			});
+			carouselReOrder();
+
 
 
 			//default button status
-			if ( parseFloat( $carousel.css( 'marginLeft' ) ).toFixed(0) == 0 ) {
+			if ( $carouselItem.first().data( 'id' ) == 1 && !carouselLoop ) {
 				$( carouselPrev ).addClass( 'disable' );
 			}	
 
 			/*! 
 			 ------------------
+			 Re-order all items
+			 ------------------
+			 */ 
+			
+			function carouselReOrder() {
+				var carouselLeft = 0;
+				$carouselWrapper.find( '.items > .item' ).each( function( index ) {
+					$( this )
+						.width( newWidth + 'px' )
+						.css( 'visibility', 'visible' )
+					    .attr( 'data-id', index+1 );
+
+					carouselLeft += newWidth;
+				});	
+			}
+			
+			
+			/*! 
+			 ------------------
 			 Move left
 			 ------------------
 			 */ 
-			$( carouselNext ).on( 'click', function( e ) {
+			$( carouselNext ).on( 'click', $carouselWrapper, function( e ) {
 				e.preventDefault();
+				
+				
+				var $btn        = $( this ),
+					btnLock     = $btn.data( 'click' ),
+					$curWrapper = $( e.data[0] ),
+					$curItems   = $curWrapper.children().find( '> .item' ),
+					isEnd       = false;
+				
 
-				var $btn    = $( this ),
-					btnLock = $btn.data( 'click' );
-
+				//Move to the end
+				if ( (carouselItemTotal - showcarouselItem + 1) == $curItems.first().data( 'id' ) ) {
+					isEnd = true;
+				}
+				if ( (carouselItemTotal - showcarouselItem) == $curItems.first().data( 'id' ) && !carouselLoop ) {
+					$btn.addClass( 'disable' );
+				}
+				
+				
+				//Loop items
+				if ( carouselLoop ) {
+					isEnd = false;
+				}
+				
+				
 				if ( typeof btnLock === typeof undefined || btnLock === 0 ) {
+					
+					if ( !isEnd ) {
+						
+						//Avoid button repeated trigger
+						$btn.data( 'click', 1 );
 
-					//Avoid button repeated trigger
-					$btn.data( 'click', 1 );
+						$curItems
+							.first()
+							.animate({
+								'marginLeft': -carouselItemWidth
+							}, { duration: carouselSpeed, complete: function() {
 
-					var original = parseFloat( $carousel.css( 'marginLeft' ) ).toFixed(0),
-						target   = -parseFloat( (carouselItemTotal - showcarouselItem - 1)*carouselItemWidth ).toFixed(0);
+								//Initialize each item "margin-left"
+								$curItems.css( 'margin-left', 0 );
+
+								//Clone the first element to the last position
+								$curItems
+									.first()
+									.clone()
+									.appendTo( $carousel );
 
 
-					if ( original >= target ) {
-						$carousel.animate({
-							'marginLeft': '-=' + carouselItemWidth
-						}, { duration: carouselSpeed, complete: function() {
+								$( this ).remove();
 
-							//Reset prevents code from duplicate run
-							$( carouselPrev ).data( 'click', 0 ).removeClass( 'disable' );
-							$btn.data( 'click', 0 );
-						}} );	
+
+
+								//Reset prevents code from duplicate run
+								$( carouselPrev ).data( 'click', 0 ).removeClass( 'disable' );
+								$btn.data( 'click', 0 );
+
+							}} );		
 					}
 
-					if ( original == target ) {
-						$btn.addClass( 'disable' );
 
-					}
+					
+	
 				}
 
 
@@ -2076,43 +2150,78 @@ theme = ( function ( theme, $, window, document ) {
 			 Move right
 			 ------------------
 			 */ 
-			$( carouselPrev ).on( 'click', function( e ) {
-
+			$( carouselPrev ).on( 'click', $carouselWrapper, function( e ) {
 				e.preventDefault();
 
-				var $btn    = $( this ),
-					btnLock = $btn.data( 'click' );
+				
+				var $btn        = $( this ),
+					btnLock     = $btn.data( 'click' ),
+					$curWrapper = $( e.data[0] ),
+					$curItems   = $curWrapper.children().find( '> .item' ),
+					isEnd       = false;
+				
 
-				if ( typeof btnLock === typeof undefined || btnLock === 0 ) {
-
-					//Avoid button repeated trigger
-					$btn.data( 'click', 1 );
-
-
-					var original = parseFloat( $carousel.css( 'marginLeft' ) ).toFixed(0),
-						target   = 0;
-
-
-					if ( original < target ) {
-						$carousel.animate({
-							'marginLeft': '+=' + carouselItemWidth
-						}, { duration: carouselSpeed, complete: function() {
-
-							//Reset prevents code from duplicate run
-							$( carouselNext ).data( 'click', 0 ).removeClass( 'disable' );
-							$btn.data( 'click', 0 );
-						}} );	
-					}	
-
-					if ( original == -carouselItemWidth.toFixed(0) ) {
-						$btn.addClass( 'disable' );
-
-					}	
-
-
+				//Move to the end
+				if ( 1 == $curItems.first().data( 'id' ) ) {
+					isEnd = true;
 				}
+				if ( 2 == $curItems.first().data( 'id' ) && !carouselLoop ) {
+					$btn.addClass( 'disable' );
+				}
+				
+				
+				//Loop items
+				if ( carouselLoop ) {
+					isEnd = false;
+				}
+				
+				
+				if ( typeof btnLock === typeof undefined || btnLock === 0 ) {
+					
+					if ( !isEnd ) {
+						
+						//Avoid button repeated trigger
+						$btn.data( 'click', 1 );
+
+				
+						//Clone the first element to the last position
+						$curItems
+							.last()
+							.clone()
+							.prependTo( $carousel )
+						    .css( 'margin-left', -carouselItemWidth + 'px' )
+							.animate({
+								'marginLeft': 0
+							}, { duration: carouselSpeed, complete: function() {
+
+								//Initialize each item "margin-left"
+								$curItems.css( 'margin-left', 0 );
+
+
+								$curItems
+									.last()
+									.remove();
+
+
+
+								//Reset prevents code from duplicate run
+								$( carouselNext ).data( 'click', 0 ).removeClass( 'disable' );
+								$btn.data( 'click', 0 );
+
+							}} );		
+					}
+
+
+					
+	
+				}
+				
+				
 
 			});
+			
+			
+			
 
 
 		});		

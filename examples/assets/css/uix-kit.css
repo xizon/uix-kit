@@ -4130,19 +4130,21 @@ li.sidr-class-multi-column > ul .sidr-class-multi-column-title {
     width: 100%;
     position: relative;
     overflow: hidden;
-    background: #333;
 }
 
 .custom-multi-items-carousel .items .item {
-    position: absolute;
-    top: 0;
+    position: relative;
     float: left;
     height: 100%;
+    visibility: hidden;
+    box-sizing: border-box;
+  /* Demo Style */
+    box-shadow: 0 0 1px 0 #fff;
     font-size: 5rem;
     padding: 2rem 0;
     text-align: center;
     color: #fff;
-    box-shadow: 0 0 1px 0 #fff;
+    background: #333;
 }
 
 .custom-multi-items-carousel-controls {
