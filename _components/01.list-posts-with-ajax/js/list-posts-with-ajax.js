@@ -198,6 +198,9 @@ theme = ( function ( theme, $, window, document ) {
 				dataType : 'json',
 				success  : function (data) { 
 					
+					//If the data is empty
+					if ( data == null ) $button.addClass( 'hide' );
+					
 					//Check JSON string
 					if ( data && data.hasOwnProperty( 'items' ) && Object.prototype.toString.call( data[ 'items' ] )=='[object Array]' ) {
 						
