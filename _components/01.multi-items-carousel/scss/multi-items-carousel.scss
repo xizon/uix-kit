@@ -7,7 +7,7 @@
 	overflow: hidden;
 	
   .items {
-    height: 200px;
+    height: 150px;
     width: 100%;
     position: relative;
     overflow: hidden;
@@ -18,13 +18,24 @@
 	  visibility: hidden;
 	  box-sizing: border-box;
 		
+		
 	  /* Demo Style */
 	  border-right: 1px solid rgba(255,255,255,.5);
-      font-size: 5rem;
+      font-size: 1.2rem;
 	  padding: 2rem 0;
       text-align: center;
       color: #fff;
 	  background: #333;
+		
+	  &.active {
+		background: #000;
+		font-size: 3rem;
+	  }
+		
+	  &.active-prev,
+      &.active-next {
+		  font-size: 2rem;
+	  }			
 		
     }
   }

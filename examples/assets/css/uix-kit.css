@@ -4126,7 +4126,7 @@ li.sidr-class-multi-column > ul .sidr-class-multi-column-title {
 }
 
 .custom-multi-items-carousel .items {
-    height: 200px;
+    height: 150px;
     width: 100%;
     position: relative;
     overflow: hidden;
@@ -4140,11 +4140,20 @@ li.sidr-class-multi-column > ul .sidr-class-multi-column-title {
     box-sizing: border-box;
   /* Demo Style */
     border-right: 1px solid rgba(255, 255, 255, 0.5);
-    font-size: 5rem;
+    font-size: 1.2rem;
     padding: 2rem 0;
     text-align: center;
     color: #fff;
     background: #333;
+}
+
+.custom-multi-items-carousel .items .item.active {
+    background: #000;
+    font-size: 3rem;
+}
+
+.custom-multi-items-carousel .items .item.active-prev, .custom-multi-items-carousel .items .item.active-next {
+    font-size: 2rem;
 }
 
 .custom-multi-items-carousel-controls {

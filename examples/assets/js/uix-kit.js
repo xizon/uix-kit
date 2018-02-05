@@ -2098,25 +2098,65 @@ theme = ( function ( theme, $, window, document ) {
 			
 			function carouselReOrder() {
 				
-				$carouselWrapper.find( '.items > .item' ).each( function( index ) {
-					
-					if ( carouselDir == 'horizontal' ) {
-						$( this )
-							.width( newWidth + 'px' )
-							.css( 'visibility', 'visible' )
-							.attr( 'data-id', index+1 );
-					} else {
-						$( this )
-							.height( newHeight + 'px' )
-							.css( 'visibility', 'visible' )
-							.attr( 'data-id', index+1 );
-					}
-					
+				//Active the center item
+				carouselActiveCenterItem( $carouselItem, 'default' );
+				
+				$carouselItem.each( function( index ) {
+				
 
+						if ( carouselDir == 'horizontal' ) {
+							$( this )
+								.width( newWidth + 'px' )
+								.css( 'visibility', 'visible' )
+								.attr( 'data-id', index+1 );
+						} else {
+							$( this )
+								.height( newHeight + 'px' )
+								.css( 'visibility', 'visible' )
+								.attr( 'data-id', index+1 );
+						}
 
-					
-				});	
+					});	
 			}
+			
+			/*! 
+			 ------------------
+			 Active the center item
+			 ------------------
+			 */ 
+			
+			function carouselActiveCenterItem( el, dir ) {
+				var curItemIndex    = (showcarouselItem/2).toFixed(0),
+					centerItemIndex = Math.floor(showcarouselItem / 2)-1;		
+				el.removeClass( 'active active-prev active-next' );
+				
+				
+				
+				if ( dir == 'left' ) {
+					el.eq( curItemIndex ).addClass( 'active' );
+					
+				} else if ( dir == 'right' ) {
+					el.eq( centerItemIndex ).addClass( 'active' );	
+					
+				} else if ( dir == 'default' ) {
+					el.eq( curItemIndex - 1 ).addClass( 'active' );		
+				}
+				
+				//Add nearest classes for 3 elements
+				el.each( function() {
+					if ( $( this ).hasClass( 'active' ) ) {
+						$( this ).prev().addClass( 'active-prev' );
+						$( this ).next().addClass( 'active-next' );
+						
+						return false;
+					}
+				});	
+				
+				
+				
+			}	
+			
+
 			
 			
 			/*! 
@@ -2134,7 +2174,8 @@ theme = ( function ( theme, $, window, document ) {
 					$curItems   = $curWrapper.children().find( '> .item' ),
 					isEnd       = false;
 				
-
+				
+				
 				//Move to the end
 				if ( (carouselItemTotal - showcarouselItem + 1) == $curItems.first().data( 'id' ) ) {
 					isEnd = true;
@@ -2179,6 +2220,10 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
+									//Active the center item
+									carouselActiveCenterItem( $curItems, 'left' );
+									
+									
 									//Reset prevents code from duplicate run
 									$( carouselPrev ).data( 'click', 0 ).removeClass( 'disable' );
 									$btn.data( 'click', 0 );
@@ -2205,6 +2250,10 @@ theme = ( function ( theme, $, window, document ) {
 
 									$( this ).remove();
 
+
+
+									//Active the center item
+									carouselActiveCenterItem( $curItems, 'left' );
 
 
 									//Reset prevents code from duplicate run
@@ -2240,8 +2289,9 @@ theme = ( function ( theme, $, window, document ) {
 					$curWrapper = $( e.data[0] ),
 					$curItems   = $curWrapper.children().find( '> .item' ),
 					isEnd       = false;
-				
 
+				
+				
 				//Move to the end
 				if ( 1 == $curItems.first().data( 'id' ) ) {
 					isEnd = true;
@@ -2285,6 +2335,9 @@ theme = ( function ( theme, $, window, document ) {
 										.remove();
 
 
+									//Active the center item
+									carouselActiveCenterItem( $curItems, 'right' );
+									
 
 									//Reset prevents code from duplicate run
 									$( carouselNext ).data( 'click', 0 ).removeClass( 'disable' );
@@ -2310,6 +2363,10 @@ theme = ( function ( theme, $, window, document ) {
 										.last()
 										.remove();
 
+
+
+									//Active the center item
+									carouselActiveCenterItem( $curItems, 'right' );
 
 
 									//Reset prevents code from duplicate run
