@@ -4139,7 +4139,7 @@ li.sidr-class-multi-column > ul .sidr-class-multi-column-title {
     visibility: hidden;
     box-sizing: border-box;
   /* Demo Style */
-    box-shadow: 0 0 1px 0 #fff;
+    border-right: 1px solid rgba(255, 255, 255, 0.5);
     font-size: 5rem;
     padding: 2rem 0;
     text-align: center;
@@ -4179,6 +4179,35 @@ li.sidr-class-multi-column > ul .sidr-class-multi-column-title {
 
 .custom-multi-items-carousel-controls a.disable {
     opacity: .3;
+}
+
+/* Vertical Carousel */
+.custom-multi-items-carousel.vertical {
+  /* Required */
+    overflow: hidden;
+    width: 500px;
+    height: 450px;
+}
+
+.custom-multi-items-carousel.vertical .items {
+    width: 100%;
+  /* Required */
+    height: 100%;
+}
+
+.custom-multi-items-carousel.vertical .items .item {
+    float: none;
+    width: 100%;
+  /* Demo Style */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 0 0;
+}
+
+.custom-multi-items-carousel-controls.vertical {
+    width: 300px;
+    position: absolute;
+    top: 20%;
+    left: 600px;
 }
 
 /* ====================================================== 

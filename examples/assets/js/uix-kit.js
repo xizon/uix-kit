@@ -2012,12 +2012,17 @@ theme = ( function ( theme, $, window, document ) {
 				carouselItemTotal  = $carouselItem.length,
 				showcarouselItem   = $carouselWrapper.data( 'cus-carousel-show' ),
 				carouselItemWidth  = $carousel.width()/showcarouselItem,
+				carouselItemHeight = $carousel.height()/showcarouselItem,
+				carouselDir        = $carouselWrapper.data( 'cus-carousel-dir' ),
 				carouselLoop       = $carouselWrapper.data( 'cus-carousel-loop' ),
 				carouselSpeed      = $carouselWrapper.data( 'cus-carousel-speed' ),
 				carouselNext       = $carouselWrapper.data( 'cus-carousel-next' ),
 				carouselPrev       = $carouselWrapper.data( 'cus-carousel-prev' );
 
-
+			if( typeof carouselDir === typeof undefined ) {
+				carouselDir = 'horizontal';
+			}
+			
 			if( typeof carouselLoop === typeof undefined ) {
 				carouselLoop = false;
 			}
@@ -2040,9 +2045,14 @@ theme = ( function ( theme, $, window, document ) {
 			 Initialize carousel
 			 ------------------
 			 */  
-			var newWidth = ( $carouselWrapper.width() / showcarouselItem );
-
-			$carousel.css( 'width', carouselItemTotal * carouselItemWidth );
+			var newWidth, newHeight;
+			if ( carouselDir == 'horizontal' ) { 
+				newWidth = ( $carouselWrapper.width() / showcarouselItem );
+				$carousel.css( 'width', carouselItemTotal * carouselItemWidth );
+			} else {
+				newHeight = ( $carouselWrapper.height() / showcarouselItem );
+				$carousel.css( 'height', carouselItemTotal * carouselItemHeight );
+			}
 
 
 			// Re-order all items
@@ -2062,14 +2072,24 @@ theme = ( function ( theme, $, window, document ) {
 			 */ 
 			
 			function carouselReOrder() {
-				var carouselLeft = 0;
+				
 				$carouselWrapper.find( '.items > .item' ).each( function( index ) {
-					$( this )
-						.width( newWidth + 'px' )
-						.css( 'visibility', 'visible' )
-					    .attr( 'data-id', index+1 );
+					
+					if ( carouselDir == 'horizontal' ) {
+						$( this )
+							.width( newWidth + 'px' )
+							.css( 'visibility', 'visible' )
+							.attr( 'data-id', index+1 );
+					} else {
+						$( this )
+							.height( newHeight + 'px' )
+							.css( 'visibility', 'visible' )
+							.attr( 'data-id', index+1 );
+					}
+					
 
-					carouselLeft += newWidth;
+
+					
 				});	
 			}
 			
@@ -2111,32 +2131,65 @@ theme = ( function ( theme, $, window, document ) {
 						
 						//Avoid button repeated trigger
 						$btn.data( 'click', 1 );
+						
+						if ( carouselDir == 'horizontal' ) {
+							
+							$curItems
+								.first()
+								.animate({
+									'marginLeft': -carouselItemWidth
+								}, { duration: carouselSpeed, complete: function() {
 
-						$curItems
-							.first()
-							.animate({
-								'marginLeft': -carouselItemWidth
-							}, { duration: carouselSpeed, complete: function() {
+									//Initialize each item "margin-left"
+									$curItems.css( 'margin-left', 0 );
 
-								//Initialize each item "margin-left"
-								$curItems.css( 'margin-left', 0 );
-
-								//Clone the first element to the last position
-								$curItems
-									.first()
-									.clone()
-									.appendTo( $carousel );
-
-
-								$( this ).remove();
-
+									//Clone the first element to the last position
+									$curItems
+										.first()
+										.clone()
+										.appendTo( $carousel );
 
 
-								//Reset prevents code from duplicate run
-								$( carouselPrev ).data( 'click', 0 ).removeClass( 'disable' );
-								$btn.data( 'click', 0 );
+									$( this ).remove();
 
-							}} );		
+
+
+									//Reset prevents code from duplicate run
+									$( carouselPrev ).data( 'click', 0 ).removeClass( 'disable' );
+									$btn.data( 'click', 0 );
+
+								}} );	
+							
+						} else {
+							
+							$curItems
+								.first()
+								.animate({
+									'marginTop': -carouselItemHeight
+								}, { duration: carouselSpeed, complete: function() {
+
+									//Initialize each item "margin-top"
+									$curItems.css( 'margin-top', 0 );
+
+									//Clone the first element to the last position
+									$curItems
+										.first()
+										.clone()
+										.appendTo( $carousel );
+
+
+									$( this ).remove();
+
+
+
+									//Reset prevents code from duplicate run
+									$( carouselPrev ).data( 'click', 0 ).removeClass( 'disable' );
+									$btn.data( 'click', 0 );
+
+								}} );		
+						}
+
+	
 					}
 
 
@@ -2188,30 +2241,61 @@ theme = ( function ( theme, $, window, document ) {
 
 				
 						//Clone the first element to the last position
-						$curItems
-							.last()
-							.clone()
-							.prependTo( $carousel )
-						    .css( 'margin-left', -carouselItemWidth + 'px' )
-							.animate({
-								'marginLeft': 0
-							}, { duration: carouselSpeed, complete: function() {
+						if ( carouselDir == 'horizontal' ) {
+							$curItems
+								.last()
+								.clone()
+								.prependTo( $carousel )
+								.css( 'margin-left', -carouselItemWidth + 'px' )
+								.animate({
+									'marginLeft': 0
+								}, { duration: carouselSpeed, complete: function() {
 
-								//Initialize each item "margin-left"
-								$curItems.css( 'margin-left', 0 );
-
-
-								$curItems
-									.last()
-									.remove();
+									//Initialize each item "margin-left"
+									$curItems.css( 'margin-left', 0 );
 
 
+									$curItems
+										.last()
+										.remove();
 
-								//Reset prevents code from duplicate run
-								$( carouselNext ).data( 'click', 0 ).removeClass( 'disable' );
-								$btn.data( 'click', 0 );
 
-							}} );		
+
+									//Reset prevents code from duplicate run
+									$( carouselNext ).data( 'click', 0 ).removeClass( 'disable' );
+									$btn.data( 'click', 0 );
+
+								}} );			
+							
+						} else {
+							$curItems
+								.last()
+								.clone()
+								.prependTo( $carousel )
+								.css( 'margin-top', -carouselItemHeight + 'px' )
+								.animate({
+									'marginTop': 0
+								}, { duration: carouselSpeed, complete: function() {
+
+									//Initialize each item "margin-top"
+									$curItems.css( 'margin-top', 0 );
+
+
+									$curItems
+										.last()
+										.remove();
+
+
+
+									//Reset prevents code from duplicate run
+									$( carouselNext ).data( 'click', 0 ).removeClass( 'disable' );
+									$btn.data( 'click', 0 );
+
+								}} );		
+						}
+						
+						
+	
 					}
 
 
