@@ -522,10 +522,10 @@ theme = ( function ( theme, $, window, document ) {
 		 Video Popup Interaction
 		 ------------------
 		 */  
-		var $modalDialogTrigger = $( '[data-video-win]' );
+		var modalDialogTrigger = '[data-video-win]';
 		
 		//Add video container
-		$modalDialogTrigger.each( function()  {
+		$( modalDialogTrigger ).each( function()  {
 			
 	
 			var $this             = $( this ),
@@ -607,7 +607,7 @@ theme = ( function ( theme, $, window, document ) {
 		
 		
 		//Check out: http://docs.videojs.com/tutorial-player-workflows.html
-		$modalDialogTrigger.off( 'click' ).on( 'click', function() {
+		$( document ).on( 'click', modalDialogTrigger, function() {
 
 			var vid      = $( this ).data( 'video-id' ),
 				$ifm     = false,
@@ -770,7 +770,7 @@ theme = ( function ( theme, $, window, document ) {
 
 
 			/* ---------  Close the modal  */
-			$( '.modal-box .close-btn' ).on( 'click', function() {
+			$( document ).on( 'click', '.modal-box .close-btn', function() {
 
 				myPlayer.ready(function() {
 					myPlayer.pause();
@@ -1697,6 +1697,7 @@ theme = ( function ( theme, $, window, document ) {
 					
 					//If the data is empty
 					if ( data == null ) $button.addClass( 'hide' );
+				
 					
 					//Check JSON string
 					if ( data && data.hasOwnProperty( 'items' ) && Object.prototype.toString.call( data[ 'items' ] )=='[object Array]' ) {
@@ -1705,26 +1706,50 @@ theme = ( function ( theme, $, window, document ) {
 						//Data overflow may occur when the total number of pages is not posted
 						try {
 
-							var thisData = data,
-								html     = compiledTemplate( thisData ),
-								curHtml  = $divRoot.find( pushContainer ).html();
+							var pageLoaded    = theme.components.pageLoaded,
+								documentReady = theme.components.documentReady,
+								thisData      = data,
+								html          = compiledTemplate( thisData ),
+								curHtml       = $divRoot.find( pushContainer ).html(),
+								result        = curHtml + html,
+								htmlEl        = $( result );
 
 
-							$divRoot.find( pushContainer ).html( curHtml + html );
+							$divRoot.find( pushContainer ).before( htmlEl );
+						
+							
+							//--------- jQuery Masonry and Ajax Append Items
+							$( '.custom-gallery' ).each( function() {
+								var type = $( this ).data( 'show-type' );
 
-							//Function of Masonry
-							var masonryObj = $( '.masonry-container .custom-gallery-tiles' );
-							imagesLoaded( masonryObj ).on( 'always', function() {
-								  masonryObj.masonry({
-									itemSelector: '.masonry-item'
-								  });  
+								if ( type.indexOf( 'masonry' ) >= 0  ) {
+									$( this ).addClass( 'masonry-container' );
+									$( this ).find( '.custom-gallery-item' ).addClass( 'masonry-item' );
+								}
+								
 							});
+							
+							var masonryItemContainer = $( '.masonry-container' );
+							imagesLoaded( masonryItemContainer ).on( 'always', function() {
+								 masonryItemContainer.masonry({
+								    itemSelector: '.masonry-item'
+								 });  
+								
+								$( masonryItemContainer ).masonry( 'reloadItems' );
+								$( masonryItemContainer ).masonry( 'layout' );	
+								
+							});	
+				
+							
+							
+							//--------- Init Videos
+							documentReady[4]($);
 
 
-							// Remove this button
+							//--------- Remove this button
 							$button.removeClass( triggerActive );	
 
-							//Hidden button
+							//--------- Hidden button
 							if ( curPage == totalPage ) {
 								$button.addClass( 'hide' );
 							}		
@@ -1930,7 +1955,7 @@ theme = ( function ( theme, $, window, document ) {
 		
 	
 	    $( 'body' ).prepend( '<div class="modal-mask"></div>' );
-		$( '[data-modal-id]' ).on( 'click', function() {
+		$( document ).on( 'click', '[data-modal-id]', function() {
 			var dataID = $( this ).data( 'modal-id' ),
 			    dataH  = $( this ).data( 'modal-height' ),
 				dataW  = $( this ).data( 'modal-width' ),
@@ -1966,11 +1991,11 @@ theme = ( function ( theme, $, window, document ) {
 		
 		});
 		
-		$( '.modal-box .close-btn' ).on( 'click', function() {
+		$( document ).on( 'click', '.modal-box .close-btn', function() {
 			$( this ).parent().removeClass( 'active' );
 		});
 		
-		$( '.modal-box .close-btn, .modal-mask' ).on( 'click', function() {
+		$( document ).on( 'click', '.modal-box .close-btn, .modal-mask', function() {
 			$( '.modal-box' ).removeClass( 'active' );
 			$( '.modal-mask' ).fadeOut( 'fast' );
 			$( '.modal-box' ).find( '.content' ).css( 'overflow-y', 'hidden' );

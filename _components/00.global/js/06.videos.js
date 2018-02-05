@@ -143,10 +143,10 @@ theme = ( function ( theme, $, window, document ) {
 		 Video Popup Interaction
 		 ------------------
 		 */  
-		var $modalDialogTrigger = $( '[data-video-win]' );
+		var modalDialogTrigger = '[data-video-win]';
 		
 		//Add video container
-		$modalDialogTrigger.each( function()  {
+		$( modalDialogTrigger ).each( function()  {
 			
 	
 			var $this             = $( this ),
@@ -228,7 +228,7 @@ theme = ( function ( theme, $, window, document ) {
 		
 		
 		//Check out: http://docs.videojs.com/tutorial-player-workflows.html
-		$modalDialogTrigger.off( 'click' ).on( 'click', function() {
+		$( document ).on( 'click', modalDialogTrigger, function() {
 
 			var vid      = $( this ).data( 'video-id' ),
 				$ifm     = false,
@@ -391,7 +391,7 @@ theme = ( function ( theme, $, window, document ) {
 
 
 			/* ---------  Close the modal  */
-			$( '.modal-box .close-btn' ).on( 'click', function() {
+			$( document ).on( 'click', '.modal-box .close-btn', function() {
 
 				myPlayer.ready(function() {
 					myPlayer.pause();

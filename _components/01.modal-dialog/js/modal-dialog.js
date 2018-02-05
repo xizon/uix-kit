@@ -31,7 +31,7 @@ theme = ( function ( theme, $, window, document ) {
 		
 	
 	    $( 'body' ).prepend( '<div class="modal-mask"></div>' );
-		$( '[data-modal-id]' ).on( 'click', function() {
+		$( document ).on( 'click', '[data-modal-id]', function() {
 			var dataID = $( this ).data( 'modal-id' ),
 			    dataH  = $( this ).data( 'modal-height' ),
 				dataW  = $( this ).data( 'modal-width' ),
@@ -67,11 +67,11 @@ theme = ( function ( theme, $, window, document ) {
 		
 		});
 		
-		$( '.modal-box .close-btn' ).on( 'click', function() {
+		$( document ).on( 'click', '.modal-box .close-btn', function() {
 			$( this ).parent().removeClass( 'active' );
 		});
 		
-		$( '.modal-box .close-btn, .modal-mask' ).on( 'click', function() {
+		$( document ).on( 'click', '.modal-box .close-btn, .modal-mask', function() {
 			$( '.modal-box' ).removeClass( 'active' );
 			$( '.modal-mask' ).fadeOut( 'fast' );
 			$( '.modal-box' ).find( '.content' ).css( 'overflow-y', 'hidden' );
