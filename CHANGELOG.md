@@ -1,5 +1,15 @@
 # Changelog
 
+
+
+#### = 1.0.0 (February 6, 2018) =
+
+* New: Add a new module "Progress Bar".
+* New: Add a responsive secondary menu.
+* Tweak: Optimized ajax loading and infinite-scroll methods.
+* Tweak: Optimized core style and scripts.
+
+
 #### = 0.0.8 (February 3, 2018) =
 
 * New: Add "-prefix-free" to let the project use only unprefixed CSS properties everywhere. 

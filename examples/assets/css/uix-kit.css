@@ -6,7 +6,7 @@
  * 
  * ## Project Name        :  Uix Kit
  * ## Description         :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
- * ## Version             :  0.0.8
+ * ## Version             :  1.0.0
  * ## Last Update         :  February 6, 2018
  * ## Created             :  by UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -3254,14 +3254,6 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   Counter    
-/* ====================================================== */
-[data-counter-number] {
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
-    padding: 2rem;
-}
-
-/* ====================================================== 
    Features
 /* ====================================================== */
 .custom-feature .icon i {
@@ -3301,6 +3293,14 @@ ul.entry-meta {
 
 .custom-feature .desc.desc-singlerow {
     padding-bottom: 1.5em;
+}
+
+/* ====================================================== 
+   Counter    
+/* ====================================================== */
+[data-counter-number] {
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+    padding: 2rem;
 }
 
 /* ====================================================== 
@@ -4432,6 +4432,1923 @@ li.sidr-class-multi-column > ul .sidr-class-multi-column-title {
 /* ====================================================== 
    Progress Bar
 /* ====================================================== */
+/*--- Radial Progress Bar ---*/
+.custom-radial-progressbar {
+    height: 100px;
+    width: 100px;
+    display: inline-block;
+    margin: 1rem;
+    position: relative;
+}
+
+.custom-radial-progressbar .title {
+    color: #212121;
+    padding-top: 1rem;
+}
+
+.custom-radial-progressbar .pie {
+    height: 100%;
+    width: 100%;
+    clip: rect(0, 100px, 100px, 50px);
+    left: 0;
+    position: absolute;
+    top: 0;
+}
+
+.custom-radial-progressbar .pie .half-circle {
+  /* @include transition-default(); */
+    transition: all 0.3s ease 0s;
+    height: 100%;
+    width: 100%;
+    border: 8px solid;
+    border-radius: 50%;
+    clip: rect(0, 50px, 100px, 0);
+    left: 0;
+    position: absolute;
+    top: 0;
+}
+
+.custom-radial-progressbar .track {
+    border: 8px solid #ececec;
+    background: #212121;
+    border-radius: 100%;
+    display: block;
+    width: 100%;
+    height: 100%;
+    line-height: 100px;
+    font-size: 1rem;
+    position: relative;
+    text-align: center;
+    color: #fff;
+}
+
+.custom-radial-progressbar .track > span {
+    margin-top: -.5rem;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+
+.custom-radial-progressbar .track .unit {
+    color: #AEAEAE;
+    font-size: 0.875rem;
+    display: inline-block;
+    margin-left: .1rem;
+    font-style: normal;
+}
+
+.custom-radial-progressbar.no-c-bg .track {
+    color: #212121;
+    background: none;
+}
+
+.custom-radial-progressbar.progress-1 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-1 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-1 .pie .left-side {
+    transform: rotate(3.5deg);
+}
+
+.custom-radial-progressbar.progress-2 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-2 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-2 .pie .left-side {
+    transform: rotate(7deg);
+}
+
+.custom-radial-progressbar.progress-3 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-3 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-3 .pie .left-side {
+    transform: rotate(10.5deg);
+}
+
+.custom-radial-progressbar.progress-4 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-4 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-4 .pie .left-side {
+    transform: rotate(14deg);
+}
+
+.custom-radial-progressbar.progress-5 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-5 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-5 .pie .left-side {
+    transform: rotate(17.5deg);
+}
+
+.custom-radial-progressbar.progress-6 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-6 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-6 .pie .left-side {
+    transform: rotate(21deg);
+}
+
+.custom-radial-progressbar.progress-7 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-7 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-7 .pie .left-side {
+    transform: rotate(24.5deg);
+}
+
+.custom-radial-progressbar.progress-8 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-8 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-8 .pie .left-side {
+    transform: rotate(28deg);
+}
+
+.custom-radial-progressbar.progress-9 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-9 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-9 .pie .left-side {
+    transform: rotate(31.5deg);
+}
+
+.custom-radial-progressbar.progress-10 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-10 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-10 .pie .left-side {
+    transform: rotate(35deg);
+}
+
+.custom-radial-progressbar.progress-11 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-11 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-11 .pie .left-side {
+    transform: rotate(38.5deg);
+}
+
+.custom-radial-progressbar.progress-12 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-12 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-12 .pie .left-side {
+    transform: rotate(42deg);
+}
+
+.custom-radial-progressbar.progress-13 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-13 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-13 .pie .left-side {
+    transform: rotate(45.5deg);
+}
+
+.custom-radial-progressbar.progress-14 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-14 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-14 .pie .left-side {
+    transform: rotate(49deg);
+}
+
+.custom-radial-progressbar.progress-15 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-15 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-15 .pie .left-side {
+    transform: rotate(52.5deg);
+}
+
+.custom-radial-progressbar.progress-16 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-16 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-16 .pie .left-side {
+    transform: rotate(56deg);
+}
+
+.custom-radial-progressbar.progress-17 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-17 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-17 .pie .left-side {
+    transform: rotate(59.5deg);
+}
+
+.custom-radial-progressbar.progress-18 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-18 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-18 .pie .left-side {
+    transform: rotate(63deg);
+}
+
+.custom-radial-progressbar.progress-19 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-19 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-19 .pie .left-side {
+    transform: rotate(66.5deg);
+}
+
+.custom-radial-progressbar.progress-20 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-20 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-20 .pie .left-side {
+    transform: rotate(70deg);
+}
+
+.custom-radial-progressbar.progress-21 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-21 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-21 .pie .left-side {
+    transform: rotate(73.5deg);
+}
+
+.custom-radial-progressbar.progress-22 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-22 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-22 .pie .left-side {
+    transform: rotate(77deg);
+}
+
+.custom-radial-progressbar.progress-23 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-23 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-23 .pie .left-side {
+    transform: rotate(80.5deg);
+}
+
+.custom-radial-progressbar.progress-24 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-24 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-24 .pie .left-side {
+    transform: rotate(84deg);
+}
+
+.custom-radial-progressbar.progress-25 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-25 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-25 .pie .left-side {
+    transform: rotate(87.5deg);
+}
+
+.custom-radial-progressbar.progress-26 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-26 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-26 .pie .left-side {
+    transform: rotate(91deg);
+}
+
+.custom-radial-progressbar.progress-27 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-27 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-27 .pie .left-side {
+    transform: rotate(94.5deg);
+}
+
+.custom-radial-progressbar.progress-28 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-28 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-28 .pie .left-side {
+    transform: rotate(98deg);
+}
+
+.custom-radial-progressbar.progress-29 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-29 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-29 .pie .left-side {
+    transform: rotate(101.5deg);
+}
+
+.custom-radial-progressbar.progress-30 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-30 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-30 .pie .left-side {
+    transform: rotate(105deg);
+}
+
+.custom-radial-progressbar.progress-31 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-31 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-31 .pie .left-side {
+    transform: rotate(108.5deg);
+}
+
+.custom-radial-progressbar.progress-32 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-32 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-32 .pie .left-side {
+    transform: rotate(112deg);
+}
+
+.custom-radial-progressbar.progress-33 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-33 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-33 .pie .left-side {
+    transform: rotate(115.5deg);
+}
+
+.custom-radial-progressbar.progress-34 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-34 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-34 .pie .left-side {
+    transform: rotate(119deg);
+}
+
+.custom-radial-progressbar.progress-35 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-35 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-35 .pie .left-side {
+    transform: rotate(122.5deg);
+}
+
+.custom-radial-progressbar.progress-36 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-36 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-36 .pie .left-side {
+    transform: rotate(126deg);
+}
+
+.custom-radial-progressbar.progress-37 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-37 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-37 .pie .left-side {
+    transform: rotate(129.5deg);
+}
+
+.custom-radial-progressbar.progress-38 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-38 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-38 .pie .left-side {
+    transform: rotate(133deg);
+}
+
+.custom-radial-progressbar.progress-39 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-39 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-39 .pie .left-side {
+    transform: rotate(136.5deg);
+}
+
+.custom-radial-progressbar.progress-40 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-40 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-40 .pie .left-side {
+    transform: rotate(140deg);
+}
+
+.custom-radial-progressbar.progress-41 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-41 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-41 .pie .left-side {
+    transform: rotate(143.5deg);
+}
+
+.custom-radial-progressbar.progress-42 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-42 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-42 .pie .left-side {
+    transform: rotate(147deg);
+}
+
+.custom-radial-progressbar.progress-43 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-43 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-43 .pie .left-side {
+    transform: rotate(150.5deg);
+}
+
+.custom-radial-progressbar.progress-44 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-44 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-44 .pie .left-side {
+    transform: rotate(154deg);
+}
+
+.custom-radial-progressbar.progress-45 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-45 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-45 .pie .left-side {
+    transform: rotate(157.5deg);
+}
+
+.custom-radial-progressbar.progress-46 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-46 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-46 .pie .left-side {
+    transform: rotate(161deg);
+}
+
+.custom-radial-progressbar.progress-47 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-47 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-47 .pie .left-side {
+    transform: rotate(164.5deg);
+}
+
+.custom-radial-progressbar.progress-48 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-48 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-48 .pie .left-side {
+    transform: rotate(168deg);
+}
+
+.custom-radial-progressbar.progress-49 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-49 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-49 .pie .left-side {
+    transform: rotate(171.5deg);
+}
+
+.custom-radial-progressbar.progress-50 .pie .right-side {
+    display: none;
+}
+
+.custom-radial-progressbar.progress-50 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-50 .pie .left-side {
+    transform: rotate(175deg);
+}
+
+.custom-radial-progressbar.progress-51 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-51 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-51 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-51 .pie .left-side {
+    transform: rotate(178.5deg);
+}
+
+.custom-radial-progressbar.progress-52 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-52 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-52 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-52 .pie .left-side {
+    transform: rotate(182deg);
+}
+
+.custom-radial-progressbar.progress-53 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-53 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-53 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-53 .pie .left-side {
+    transform: rotate(185.5deg);
+}
+
+.custom-radial-progressbar.progress-54 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-54 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-54 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-54 .pie .left-side {
+    transform: rotate(189deg);
+}
+
+.custom-radial-progressbar.progress-55 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-55 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-55 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-55 .pie .left-side {
+    transform: rotate(192.5deg);
+}
+
+.custom-radial-progressbar.progress-56 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-56 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-56 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-56 .pie .left-side {
+    transform: rotate(196deg);
+}
+
+.custom-radial-progressbar.progress-57 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-57 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-57 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-57 .pie .left-side {
+    transform: rotate(199.5deg);
+}
+
+.custom-radial-progressbar.progress-58 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-58 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-58 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-58 .pie .left-side {
+    transform: rotate(203deg);
+}
+
+.custom-radial-progressbar.progress-59 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-59 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-59 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-59 .pie .left-side {
+    transform: rotate(206.5deg);
+}
+
+.custom-radial-progressbar.progress-60 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-60 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-60 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-60 .pie .left-side {
+    transform: rotate(210deg);
+}
+
+.custom-radial-progressbar.progress-61 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-61 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-61 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-61 .pie .left-side {
+    transform: rotate(213.5deg);
+}
+
+.custom-radial-progressbar.progress-62 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-62 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-62 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-62 .pie .left-side {
+    transform: rotate(217deg);
+}
+
+.custom-radial-progressbar.progress-63 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-63 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-63 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-63 .pie .left-side {
+    transform: rotate(220.5deg);
+}
+
+.custom-radial-progressbar.progress-64 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-64 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-64 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-64 .pie .left-side {
+    transform: rotate(224deg);
+}
+
+.custom-radial-progressbar.progress-65 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-65 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-65 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-65 .pie .left-side {
+    transform: rotate(227.5deg);
+}
+
+.custom-radial-progressbar.progress-66 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-66 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-66 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-66 .pie .left-side {
+    transform: rotate(231deg);
+}
+
+.custom-radial-progressbar.progress-67 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-67 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-67 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-67 .pie .left-side {
+    transform: rotate(234.5deg);
+}
+
+.custom-radial-progressbar.progress-68 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-68 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-68 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-68 .pie .left-side {
+    transform: rotate(238deg);
+}
+
+.custom-radial-progressbar.progress-69 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-69 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-69 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-69 .pie .left-side {
+    transform: rotate(241.5deg);
+}
+
+.custom-radial-progressbar.progress-70 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-70 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-70 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-70 .pie .left-side {
+    transform: rotate(245deg);
+}
+
+.custom-radial-progressbar.progress-71 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-71 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-71 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-71 .pie .left-side {
+    transform: rotate(248.5deg);
+}
+
+.custom-radial-progressbar.progress-72 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-72 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-72 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-72 .pie .left-side {
+    transform: rotate(252deg);
+}
+
+.custom-radial-progressbar.progress-73 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-73 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-73 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-73 .pie .left-side {
+    transform: rotate(255.5deg);
+}
+
+.custom-radial-progressbar.progress-74 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-74 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-74 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-74 .pie .left-side {
+    transform: rotate(259deg);
+}
+
+.custom-radial-progressbar.progress-75 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-75 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-75 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-75 .pie .left-side {
+    transform: rotate(262.5deg);
+}
+
+.custom-radial-progressbar.progress-76 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-76 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-76 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-76 .pie .left-side {
+    transform: rotate(266deg);
+}
+
+.custom-radial-progressbar.progress-77 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-77 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-77 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-77 .pie .left-side {
+    transform: rotate(269.5deg);
+}
+
+.custom-radial-progressbar.progress-78 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-78 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-78 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-78 .pie .left-side {
+    transform: rotate(273deg);
+}
+
+.custom-radial-progressbar.progress-79 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-79 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-79 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-79 .pie .left-side {
+    transform: rotate(276.5deg);
+}
+
+.custom-radial-progressbar.progress-80 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-80 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-80 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-80 .pie .left-side {
+    transform: rotate(280deg);
+}
+
+.custom-radial-progressbar.progress-81 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-81 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-81 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-81 .pie .left-side {
+    transform: rotate(283.5deg);
+}
+
+.custom-radial-progressbar.progress-82 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-82 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-82 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-82 .pie .left-side {
+    transform: rotate(287deg);
+}
+
+.custom-radial-progressbar.progress-83 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-83 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-83 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-83 .pie .left-side {
+    transform: rotate(290.5deg);
+}
+
+.custom-radial-progressbar.progress-84 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-84 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-84 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-84 .pie .left-side {
+    transform: rotate(294deg);
+}
+
+.custom-radial-progressbar.progress-85 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-85 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-85 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-85 .pie .left-side {
+    transform: rotate(297.5deg);
+}
+
+.custom-radial-progressbar.progress-86 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-86 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-86 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-86 .pie .left-side {
+    transform: rotate(301deg);
+}
+
+.custom-radial-progressbar.progress-87 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-87 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-87 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-87 .pie .left-side {
+    transform: rotate(304.5deg);
+}
+
+.custom-radial-progressbar.progress-88 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-88 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-88 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-88 .pie .left-side {
+    transform: rotate(308deg);
+}
+
+.custom-radial-progressbar.progress-89 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-89 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-89 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-89 .pie .left-side {
+    transform: rotate(311.5deg);
+}
+
+.custom-radial-progressbar.progress-90 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-90 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-90 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-90 .pie .left-side {
+    transform: rotate(315deg);
+}
+
+.custom-radial-progressbar.progress-91 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-91 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-91 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-91 .pie .left-side {
+    transform: rotate(318.5deg);
+}
+
+.custom-radial-progressbar.progress-92 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-92 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-92 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-92 .pie .left-side {
+    transform: rotate(322deg);
+}
+
+.custom-radial-progressbar.progress-93 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-93 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-93 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-93 .pie .left-side {
+    transform: rotate(325.5deg);
+}
+
+.custom-radial-progressbar.progress-94 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-94 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-94 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-94 .pie .left-side {
+    transform: rotate(329deg);
+}
+
+.custom-radial-progressbar.progress-95 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-95 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-95 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-95 .pie .left-side {
+    transform: rotate(332.5deg);
+}
+
+.custom-radial-progressbar.progress-96 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-96 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-96 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-96 .pie .left-side {
+    transform: rotate(336deg);
+}
+
+.custom-radial-progressbar.progress-97 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-97 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-97 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-97 .pie .left-side {
+    transform: rotate(339.5deg);
+}
+
+.custom-radial-progressbar.progress-98 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-98 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-98 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-98 .pie .left-side {
+    transform: rotate(343deg);
+}
+
+.custom-radial-progressbar.progress-99 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-99 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-99 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-99 .pie .left-side {
+    transform: rotate(346.5deg);
+}
+
+.custom-radial-progressbar.progress-100 .pie {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.custom-radial-progressbar.progress-100 .pie .right-side {
+    transform: rotate(180deg);
+}
+
+.custom-radial-progressbar.progress-100 .pie .half-circle {
+    border-color: #EC5E79;
+}
+
+.custom-radial-progressbar.progress-100 .pie .left-side {
+    transform: rotate(350deg);
+}
+
+.custom-radial-progressbar.progress-100 .pie .right-side {
+    transform: rotate(170deg);
+}
+
+/*--- Rectangle Progress Bar ---*/
+.custom-rectangle-progressbar {
+    display: block;
+    margin: 1rem;
+    position: relative;
+    width: calc(100% - 2rem);
+}
+
+.custom-rectangle-progressbar .title {
+    color: #212121;
+}
+
+.custom-rectangle-progressbar .bar {
+    height: 8px;
+    background-color: #ececec;
+}
+
+.custom-rectangle-progressbar .bar > span {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-weight: bold;
+}
+
+.custom-rectangle-progressbar .bar > span .unit {
+    color: #AEAEAE;
+    font-size: 0.875rem;
+    display: inline-block;
+    margin-left: .1rem;
+    font-style: normal;
+}
+
+.custom-rectangle-progressbar .bar .track {
+  /* @include transition-default(); */
+    transition: all 0.3s ease 0s;
+    position: relative;
+    height: 100%;
+    width: 0;
+    background-color: #EC5E79;
+    color: #212121;
+}
+
+.custom-rectangle-progressbar.progress-1 .track {
+    width: 1%;
+}
+
+.custom-rectangle-progressbar.progress-2 .track {
+    width: 2%;
+}
+
+.custom-rectangle-progressbar.progress-3 .track {
+    width: 3%;
+}
+
+.custom-rectangle-progressbar.progress-4 .track {
+    width: 4%;
+}
+
+.custom-rectangle-progressbar.progress-5 .track {
+    width: 5%;
+}
+
+.custom-rectangle-progressbar.progress-6 .track {
+    width: 6%;
+}
+
+.custom-rectangle-progressbar.progress-7 .track {
+    width: 7%;
+}
+
+.custom-rectangle-progressbar.progress-8 .track {
+    width: 8%;
+}
+
+.custom-rectangle-progressbar.progress-9 .track {
+    width: 9%;
+}
+
+.custom-rectangle-progressbar.progress-10 .track {
+    width: 10%;
+}
+
+.custom-rectangle-progressbar.progress-11 .track {
+    width: 11%;
+}
+
+.custom-rectangle-progressbar.progress-12 .track {
+    width: 12%;
+}
+
+.custom-rectangle-progressbar.progress-13 .track {
+    width: 13%;
+}
+
+.custom-rectangle-progressbar.progress-14 .track {
+    width: 14%;
+}
+
+.custom-rectangle-progressbar.progress-15 .track {
+    width: 15%;
+}
+
+.custom-rectangle-progressbar.progress-16 .track {
+    width: 16%;
+}
+
+.custom-rectangle-progressbar.progress-17 .track {
+    width: 17%;
+}
+
+.custom-rectangle-progressbar.progress-18 .track {
+    width: 18%;
+}
+
+.custom-rectangle-progressbar.progress-19 .track {
+    width: 19%;
+}
+
+.custom-rectangle-progressbar.progress-20 .track {
+    width: 20%;
+}
+
+.custom-rectangle-progressbar.progress-21 .track {
+    width: 21%;
+}
+
+.custom-rectangle-progressbar.progress-22 .track {
+    width: 22%;
+}
+
+.custom-rectangle-progressbar.progress-23 .track {
+    width: 23%;
+}
+
+.custom-rectangle-progressbar.progress-24 .track {
+    width: 24%;
+}
+
+.custom-rectangle-progressbar.progress-25 .track {
+    width: 25%;
+}
+
+.custom-rectangle-progressbar.progress-26 .track {
+    width: 26%;
+}
+
+.custom-rectangle-progressbar.progress-27 .track {
+    width: 27%;
+}
+
+.custom-rectangle-progressbar.progress-28 .track {
+    width: 28%;
+}
+
+.custom-rectangle-progressbar.progress-29 .track {
+    width: 29%;
+}
+
+.custom-rectangle-progressbar.progress-30 .track {
+    width: 30%;
+}
+
+.custom-rectangle-progressbar.progress-31 .track {
+    width: 31%;
+}
+
+.custom-rectangle-progressbar.progress-32 .track {
+    width: 32%;
+}
+
+.custom-rectangle-progressbar.progress-33 .track {
+    width: 33%;
+}
+
+.custom-rectangle-progressbar.progress-34 .track {
+    width: 34%;
+}
+
+.custom-rectangle-progressbar.progress-35 .track {
+    width: 35%;
+}
+
+.custom-rectangle-progressbar.progress-36 .track {
+    width: 36%;
+}
+
+.custom-rectangle-progressbar.progress-37 .track {
+    width: 37%;
+}
+
+.custom-rectangle-progressbar.progress-38 .track {
+    width: 38%;
+}
+
+.custom-rectangle-progressbar.progress-39 .track {
+    width: 39%;
+}
+
+.custom-rectangle-progressbar.progress-40 .track {
+    width: 40%;
+}
+
+.custom-rectangle-progressbar.progress-41 .track {
+    width: 41%;
+}
+
+.custom-rectangle-progressbar.progress-42 .track {
+    width: 42%;
+}
+
+.custom-rectangle-progressbar.progress-43 .track {
+    width: 43%;
+}
+
+.custom-rectangle-progressbar.progress-44 .track {
+    width: 44%;
+}
+
+.custom-rectangle-progressbar.progress-45 .track {
+    width: 45%;
+}
+
+.custom-rectangle-progressbar.progress-46 .track {
+    width: 46%;
+}
+
+.custom-rectangle-progressbar.progress-47 .track {
+    width: 47%;
+}
+
+.custom-rectangle-progressbar.progress-48 .track {
+    width: 48%;
+}
+
+.custom-rectangle-progressbar.progress-49 .track {
+    width: 49%;
+}
+
+.custom-rectangle-progressbar.progress-50 .track {
+    width: 50%;
+}
+
+.custom-rectangle-progressbar.progress-51 .track {
+    width: 51%;
+}
+
+.custom-rectangle-progressbar.progress-52 .track {
+    width: 52%;
+}
+
+.custom-rectangle-progressbar.progress-53 .track {
+    width: 53%;
+}
+
+.custom-rectangle-progressbar.progress-54 .track {
+    width: 54%;
+}
+
+.custom-rectangle-progressbar.progress-55 .track {
+    width: 55%;
+}
+
+.custom-rectangle-progressbar.progress-56 .track {
+    width: 56%;
+}
+
+.custom-rectangle-progressbar.progress-57 .track {
+    width: 57%;
+}
+
+.custom-rectangle-progressbar.progress-58 .track {
+    width: 58%;
+}
+
+.custom-rectangle-progressbar.progress-59 .track {
+    width: 59%;
+}
+
+.custom-rectangle-progressbar.progress-60 .track {
+    width: 60%;
+}
+
+.custom-rectangle-progressbar.progress-61 .track {
+    width: 61%;
+}
+
+.custom-rectangle-progressbar.progress-62 .track {
+    width: 62%;
+}
+
+.custom-rectangle-progressbar.progress-63 .track {
+    width: 63%;
+}
+
+.custom-rectangle-progressbar.progress-64 .track {
+    width: 64%;
+}
+
+.custom-rectangle-progressbar.progress-65 .track {
+    width: 65%;
+}
+
+.custom-rectangle-progressbar.progress-66 .track {
+    width: 66%;
+}
+
+.custom-rectangle-progressbar.progress-67 .track {
+    width: 67%;
+}
+
+.custom-rectangle-progressbar.progress-68 .track {
+    width: 68%;
+}
+
+.custom-rectangle-progressbar.progress-69 .track {
+    width: 69%;
+}
+
+.custom-rectangle-progressbar.progress-70 .track {
+    width: 70%;
+}
+
+.custom-rectangle-progressbar.progress-71 .track {
+    width: 71%;
+}
+
+.custom-rectangle-progressbar.progress-72 .track {
+    width: 72%;
+}
+
+.custom-rectangle-progressbar.progress-73 .track {
+    width: 73%;
+}
+
+.custom-rectangle-progressbar.progress-74 .track {
+    width: 74%;
+}
+
+.custom-rectangle-progressbar.progress-75 .track {
+    width: 75%;
+}
+
+.custom-rectangle-progressbar.progress-76 .track {
+    width: 76%;
+}
+
+.custom-rectangle-progressbar.progress-77 .track {
+    width: 77%;
+}
+
+.custom-rectangle-progressbar.progress-78 .track {
+    width: 78%;
+}
+
+.custom-rectangle-progressbar.progress-79 .track {
+    width: 79%;
+}
+
+.custom-rectangle-progressbar.progress-80 .track {
+    width: 80%;
+}
+
+.custom-rectangle-progressbar.progress-81 .track {
+    width: 81%;
+}
+
+.custom-rectangle-progressbar.progress-82 .track {
+    width: 82%;
+}
+
+.custom-rectangle-progressbar.progress-83 .track {
+    width: 83%;
+}
+
+.custom-rectangle-progressbar.progress-84 .track {
+    width: 84%;
+}
+
+.custom-rectangle-progressbar.progress-85 .track {
+    width: 85%;
+}
+
+.custom-rectangle-progressbar.progress-86 .track {
+    width: 86%;
+}
+
+.custom-rectangle-progressbar.progress-87 .track {
+    width: 87%;
+}
+
+.custom-rectangle-progressbar.progress-88 .track {
+    width: 88%;
+}
+
+.custom-rectangle-progressbar.progress-89 .track {
+    width: 89%;
+}
+
+.custom-rectangle-progressbar.progress-90 .track {
+    width: 90%;
+}
+
+.custom-rectangle-progressbar.progress-91 .track {
+    width: 91%;
+}
+
+.custom-rectangle-progressbar.progress-92 .track {
+    width: 92%;
+}
+
+.custom-rectangle-progressbar.progress-93 .track {
+    width: 93%;
+}
+
+.custom-rectangle-progressbar.progress-94 .track {
+    width: 94%;
+}
+
+.custom-rectangle-progressbar.progress-95 .track {
+    width: 95%;
+}
+
+.custom-rectangle-progressbar.progress-96 .track {
+    width: 96%;
+}
+
+.custom-rectangle-progressbar.progress-97 .track {
+    width: 97%;
+}
+
+.custom-rectangle-progressbar.progress-98 .track {
+    width: 98%;
+}
+
+.custom-rectangle-progressbar.progress-99 .track {
+    width: 99%;
+}
+
+.custom-rectangle-progressbar.progress-100 .track {
+    width: 100%;
+}
+
 /* ====================================================== 
    Slideshow ( with custom flexslider )
 /* ====================================================== */
