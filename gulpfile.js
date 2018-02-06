@@ -10,7 +10,8 @@ var gulp          = require('gulp'),
 	headerComment = require('gulp-header-comment'),
 	version       = require('gulp-version-number'),
 	fileinclude   = require('gulp-file-include'),
-	clean         = require('gulp-clean');
+	clean         = require('gulp-clean'),
+	sourcemaps    = require('gulp-sourcemaps');
 
 
 var globs = {
@@ -201,6 +202,7 @@ gulp.task('html', function() {
 //Compile SCSS (RTL)
 gulp.task('styles', function(){
   return gulp.src( globs.scssRTL )
+    .pipe(sourcemaps.init())
 	.pipe(concat('uix-kit-rtl.scss'))
 	.pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
 
@@ -223,6 +225,7 @@ gulp.task('styles', function(){
 		` + customComment + `
 
 	`))
+    .pipe(sourcemaps.write({includeContent: false}))
 	.pipe(gulp.dest( globs.cssRTLTar ));
 
 });	
@@ -232,6 +235,7 @@ gulp.task('sass', function(){
 	
   gulp.start( 'clean-scripts' );
   return gulp.src( globs.scss )
+    .pipe(sourcemaps.init())
     .pipe(concat('uix-kit.scss'))
     .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
   
@@ -250,6 +254,7 @@ gulp.task('sass', function(){
 		` + customComment + `
 
 	`))
+    .pipe(sourcemaps.write({includeContent: false}))
     .pipe(gulp.dest( globs.cssTar ))
   
     .pipe(minifyCss())
@@ -275,6 +280,7 @@ gulp.task('scripts', function() {
 	
 	 gulp.start( 'clean-scripts' );
      return gulp.src( globs.js )
+	    .pipe(sourcemaps.init())
         .pipe(concat('uix-kit.js'))
 	 
 		.pipe(headerComment(`
@@ -285,6 +291,8 @@ gulp.task('scripts', function() {
 			` + customComment + `
 
 		`))
+	 
+	    .pipe(sourcemaps.write({includeContent: false}))
 	    .pipe(gulp.dest( globs.jsTar ))
 	 
 	    //Compress
