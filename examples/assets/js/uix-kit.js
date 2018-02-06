@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit
  * ## Description         :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Version             :  1.0.0
- * ## Last Update         :  February 6, 2018
+ * ## Last Update         :  February 7, 2018
  * ## Created             :  by UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Compatible With     :  Bootstrap 3.x, Chinese, English
@@ -2970,16 +2970,17 @@ theme = ( function ( theme, $, window, document ) {
 		 * Initialize embedded local video.
 		 *
 		 * @param  {object} wrapper          - The outermost video container, which can contain multiple videos
+		 * @param  {boolean} play            - Forced to trigger pause or play events.
 		 * @return {void}                    - The constructor.
 		 */
-		function videoEmbedInit( wrapper ) {
+		function videoEmbedInit( wrapper, play ) {
 			wrapper.find( '.web-video-embed' ).each( function()  {
 				var $this         = $( this ),
 					curVideoID    = $this.find( '.video-js' ).attr( 'id' ),
 					dataAuto      = $this.data( 'embed-video-autoplay' ),
 					dataLoop      = $this.data( 'embed-video-loop' );
 
-
+			
 				if( typeof dataAuto === typeof undefined ) {
 					dataAuto = true;
 				}
@@ -3001,21 +3002,27 @@ theme = ( function ( theme, $, window, document ) {
 
 				myPlayer.ready(function() {
 
-					if ( dataAuto && dataLoop ) {
-					
+					//Pause the video when it is not current slider
+					if ( !play ) {
+						myPlayer.pause();
 						myPlayer.currentTime(0);
-						myPlayer.play();
-						
-						//Should the video go to the beginning when it ends
-						
-						myPlayer.on( 'ended', function () { 
+					} else {
+						if ( dataAuto && dataLoop ) {
+
 							myPlayer.currentTime(0);
 							myPlayer.play();
-						});		
-						
-						
-					}
 
+							//Should the video go to the beginning when it ends
+
+							myPlayer.on( 'ended', function () { 
+								myPlayer.currentTime(0);
+								myPlayer.play();
+							});		
+
+
+						}	
+					}
+					
 
 				});
 
@@ -3036,7 +3043,10 @@ theme = ( function ( theme, $, window, document ) {
 			
 			slider.removeClass( prefix+'-flexslider-loading' );
 			
-	
+			// Fires local videos asynchronously with slider switch.
+			videoEmbedInit( slider.find( '.item' ), false );
+			videoEmbedInit( curSlide, true );
+
 			//Auto-restart player if paused after action
 			if ( slider.vars.slideshow ) {
 				if ( !slider.playing ) {
@@ -3075,6 +3085,11 @@ theme = ( function ( theme, $, window, document ) {
 				item        = '.custom-theme-slides > div.item';
 			
 			slider.removeClass( prefix+'-flexslider-loading' );
+			
+			// Fires local videos asynchronously with slider switch.
+			videoEmbedInit( slider.find( '.item' ), false );
+			videoEmbedInit( slider.find( '.'+prefix+'-flex-active-slide' ), true );
+			
 			
 			$sliderItemgird.find( item ).removeClass( activeClass );
 			$sliderItemgird.find( item ).removeClass( prevClass );
@@ -3180,12 +3195,6 @@ theme = ( function ( theme, $, window, document ) {
 				after             : initslides //Fires after each slider animation completes.
 			});
 			
-			// Fires local videos asynchronously with slider switch.
-			videoEmbedInit( $this );
-			$this.find( '.custom-theme-flex-nav-prev, .custom-theme-flex-nav-next, .custom-theme-flex-control-nav li' ).on( 'click', function() {
-				videoEmbedInit( $this );
-			});
-					
 
 			
 		});
@@ -3237,12 +3246,7 @@ theme = ( function ( theme, $, window, document ) {
 				controlsContainer : $( '.custom-controls-container' ),
 				customDirectionNav: $( '.custom-navigation a' )
 			});
-			
-			// Fires local videos asynchronously with slider switch.
-			videoEmbedInit( $this );
-			$this.find( '.custom-navigation a, .custom-controls-container li' ).on( 'click', function() {
-				videoEmbedInit( $this );
-			});
+		
 
 			
 		});
@@ -3296,8 +3300,11 @@ theme = ( function ( theme, $, window, document ) {
 						count   = slider.count,
 						current = slider.slides.eq( slider.currentSlide );	
 					
-					
-					
+					// Fires local videos asynchronously with slider switch.
+					videoEmbedInit( slider.find( '.item' ), false );
+					videoEmbedInit( current, true );
+
+
 					$( 'p.count em.count' ).text( count );
 					
 					return $( 'p.count em.current' ).text( slide + 1 );
@@ -3319,6 +3326,11 @@ theme = ( function ( theme, $, window, document ) {
 					var slide   = slider.currentSlide,
 						current = slider.slides.eq( slider.currentSlide );	
 					
+					// Fires local videos asynchronously with slider switch.
+					videoEmbedInit( slider.find( '.item' ), false );
+					videoEmbedInit( current, true );
+					
+					
 					$( 'p.count em.current' ).text( slide + 1 );
 					
 					return current.find( 'img' ).addClass( 'active' );
@@ -3329,13 +3341,7 @@ theme = ( function ( theme, $, window, document ) {
 					return first.find( 'img' ).addClass( 'active' );
 				}
 			});
-			
-			// Fires local videos asynchronously with slider switch.
-			videoEmbedInit( $this );
-			$this.find( '.custom-theme-flex-nav-prev, .custom-theme-flex-nav-next, .custom-theme-flex-control-nav li' ).on( 'click', function() {
-				videoEmbedInit( $this );
-			});
-			
+		
 
 			
 		});	
@@ -3399,12 +3405,7 @@ theme = ( function ( theme, $, window, document ) {
 			    maxItems          : getGridSizeS() // use function to pull in initial value
 			});
 			
-			
-			// Fires local videos asynchronously with slider switch.
-			videoEmbedInit( $this );
-			$this.find( '.custom-theme-flex-nav-prev, .custom-theme-flex-nav-next, .custom-theme-flex-control-nav li' ).on( 'click', function() {
-				videoEmbedInit( $this );
-			});
+
 
 			
 		});

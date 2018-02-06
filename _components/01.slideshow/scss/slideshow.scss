@@ -289,6 +289,8 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
       position: relative;
     }
     > .item {
+	  
+
       .slides-info {
         position: absolute;
         top: 0;
@@ -310,23 +312,28 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
           }
         }
       }
-      &.custom-theme-flex-active-slide .slides-info .container {
-        .level {
-          animation-delay: .4s;
-          animation-duration: .6s;
-          animation-fill-mode: both;
-          animation-name: fadeInLeft;
-        }
-        .level-1 {
-          animation-delay: .4s;
-        }
-        .level-2 {
-          animation-delay: .5s;
-        }
-        .level-3 {
-          animation-delay: .6s;
-        }
-      }
+      &.custom-theme-flex-active-slide {
+	
+		  .slides-info .container {
+
+				.level {
+				  animation-delay: .4s;
+				  animation-duration: .6s;
+				  animation-fill-mode: both;
+				  animation-name: fadeInLeft;
+				}
+				.level-1 {
+				  animation-delay: .4s;
+				}
+				.level-2 {
+				  animation-delay: .5s;
+				}
+				.level-3 {
+				  animation-delay: .6s;
+				}  
+
+		  }
+	  }
     }
   }
 }
