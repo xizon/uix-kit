@@ -225,7 +225,20 @@ gulp.task('styles', function(){
 		` + customComment + `
 
 	`))
-    .pipe(sourcemaps.write({includeContent: false}))
+  
+	 // be careful with the sources returned otherwise contents might not be loaded properly
+	 .pipe(sourcemaps.mapSources(function(sourcePath, file) {
+		// source paths are prefixed with '../src/'
+		 return '_components/' + sourcePath;
+	 }))
+	.pipe(sourcemaps.write( '', {
+		  includeContent   : false,
+		  mapFile: function(mapFilePath) {
+			// source map files are named *.map instead of *.js.map
+			return mapFilePath.replace('.min', '');
+		  }
+	 }))
+  
 	.pipe(gulp.dest( globs.cssRTLTar ));
 
 });	
@@ -254,7 +267,7 @@ gulp.task('sass', function(){
 		` + customComment + `
 
 	`))
-    .pipe(sourcemaps.write({includeContent: false}))
+  
     .pipe(gulp.dest( globs.cssTar ))
   
     .pipe(minifyCss())
@@ -263,6 +276,20 @@ gulp.task('sass', function(){
 	}))
 	
 	.pipe(headerComment( customComment))
+
+	 // be careful with the sources returned otherwise contents might not be loaded properly
+	 .pipe(sourcemaps.mapSources(function(sourcePath, file) {
+		// source paths are prefixed with '../src/'
+		 return '_components/' + sourcePath;
+	 }))
+	.pipe(sourcemaps.write( '', {
+		  includeContent   : false,
+		  mapFile: function(mapFilePath) {
+			// source map files are named *.map instead of *.js.map
+			return mapFilePath.replace('.min', '');
+		  }
+	 }))
+
 	.pipe(gulp.dest( globs.cssTar ));
 	
 	
@@ -292,7 +319,6 @@ gulp.task('scripts', function() {
 
 		`))
 	 
-	    .pipe(sourcemaps.write({includeContent: false}))
 	    .pipe(gulp.dest( globs.jsTar ))
 	 
 	    //Compress
@@ -302,6 +328,20 @@ gulp.task('scripts', function() {
         }))
 	
 	    .pipe(headerComment( customComment))
+	 
+		 // be careful with the sources returned otherwise contents might not be loaded properly
+		 .pipe(sourcemaps.mapSources(function(sourcePath, file) {
+			// source paths are prefixed with '../src/'
+			 return '_components/' + sourcePath;
+		 }))
+	    .pipe(sourcemaps.write( '', {
+			  includeContent   : false,
+			  mapFile: function(mapFilePath) {
+				// source map files are named *.map instead of *.js.map
+				return mapFilePath.replace('.min', '');
+			  }
+		 }))
+	 
 	    .pipe(gulp.dest( globs.jsTar ));
 
 	
