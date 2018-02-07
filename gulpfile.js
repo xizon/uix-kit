@@ -29,12 +29,21 @@ var globs = {
 };
 
 
-var customComment = `
-		## Project Name        :  Uix Kit Demo
+
+var customWebsiteVersion     = '1.0.2',
+	customWebsiteTitle       = 'Uix Kit Demo',
+	customWebsiteDesc        = 'Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap',
+	customWebsiteCanonical   = '<link rel="canonical" href="https://uiux.cc" />',
+	customWebsiteAuthor      = 'UIUX Lab',
+	customWebsiteGenerator   = 'Uix Kit',
+	customComment            = `
+		## Project Name        :  ` + customWebsiteTitle + `
+        ## Project Description :  ` + customWebsiteDesc + `
 		## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
-		## Version             :  1.0.2
+		## Version             :  ` + customWebsiteVersion + `
 		## Last Update         :  <%= moment().format( "MMMM D, YYYY" ) %>
-		## Created             :  by UIUX Lab (https://uiux.cc)
+        ## Powered by          :  ` + customWebsiteAuthor + `
+		## Created by          :  UIUX Lab (https://uiux.cc)
 		## Contact Us          :  uiuxlab@gmail.com
 		## Compatible With     :  Bootstrap 3.x, Chinese, English
 		## Compatible Browsers :  IE9, IE10, IE11, Firefox, Safari, Opera, Chrome, Edge
@@ -220,7 +229,12 @@ gulp.task('html', function() {
 			[/assets\/css\/rtl\/uix-kit-rtl(.*)\"/ig, 'assets\/css\/rtl\/uix-kit-rtl.css?ver=' + ver + '\"' ],
 			[/assets\/css\/uix-kit.min(.*)\"/ig, 'assets\/css\/uix-kit.min.css?ver=' + ver + '\"' ],
 			[/assets\/css\/uix-kit.IE(.*)\"/ig, 'assets\/css\/uix-kit.IE.css?ver=' + ver + '\"' ],
-			[/assets\/js\/uix-kit.min(.*)\"/ig, 'assets\/js\/uix-kit.min.js?ver=' + ver + '\"' ]
+			[/assets\/js\/uix-kit.min(.*)\"/ig, 'assets\/js\/uix-kit.min.js?ver=' + ver + '\"' ],
+			[/\@\@\{website_title\}/ig, customWebsiteTitle ],
+			[/\@\@\{website_desc\}/ig, customWebsiteDesc ],
+			[/\@\@\{website_canonical\}/ig, customWebsiteCanonical ],
+			[/\@\@\{website_author\}/ig, customWebsiteAuthor ],
+			[/\@\@\{website_generator\}/ig, customWebsiteGenerator ]
 		],
 	};
 
