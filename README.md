@@ -6,39 +6,13 @@
 <a href="https://uiux.cc/uix-kit" target="_blank"><img src="https://github.com/xizon/uix-kit/blob/master/_screenshots/cover.jpg" width="300" height="300"></a>
 
 
-## How do I enable local testing?
-
-Firefox (and IE?) natively support local XHR, so -prefix-free will work fine locally with them.
-
-To enable local XHR for **Chrome**, you need to run it with the flag `--allow-file-access-from-files`.
-
-To enable local XHR for **Opera**, you have to go to [opera:config#UserPrefs|AllowFileXMLHttpRequest](opera:config#UserPrefs|AllowFileXMLHttpRequest), check that option and Save.
-
-
-## Installation
-
-Use NPM `npm install uix-kit`. For nodejs you have to install some dependencies.
-
-**Dev Environment**
-
-Before doing all dev stuff make sure you have node installed. After that, run the following code in the main directory to install the node module dependencies.
-
-```sh
-$ npm install --dev
-```
-
-Run the following code to enter development mode.
-
-```sh
-$ gulp default
-```
-
-
-
-
 ## Description
 
 Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap.
+
+**An underlying front-end system that makes it easy to extend and modify core files. This spec is a living document that will be updated as we continue to develop the tenets and specifics of Uix Kit. Support JS and CSS component( SCSS ) development with Gulp & Webpack together. **
+
+Enjoy the fluid grid system based on **12** columns. Uix Kit is built over Bootstrap and has all the benefits that the framework comes with. Regardless of the screen size, the website content will naturally fit the given resolution. Using the Uix Kit will save you large amount of time to build your projects.
 
 
 * Simple custom CSS and JS core files
@@ -49,7 +23,36 @@ Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap.
 * Provides a common web page components and layouts
 * Standard Code
 * W3C Standard Support
-* Support JS and CSS component( SCSS ) development with Gulp
+* Support JS and CSS component( SCSS ) development with Gulp & Webpack together
+
+
+* * *
+
+## - Installation And Test
+
+**Step 1.** Use NPM `npm install uix-kit`. For nodejs you have to install some dependencies.
+
+**Step 2.** Before doing all dev stuff make sure you have node installed. After that, run the following code in the main directory to install the node module dependencies.
+
+```sh
+`$ npm install --dev`
+```
+
+
+**Step 3.** Run the following code to enter development mode.
+
+```sh
+`$ gulp default`
+```
+
+**Step 4.** When you done, please open the browser and enter `http://localhost:8080/examples/` to check out.
+
+
+> ### Entry Components:
+> 
+> HTML/JS/CSS Components: `_components/*`  
+> `00.global` and `01.index` are required components.
+
 
 
 ### 1\. Custom Core Files
@@ -57,11 +60,6 @@ Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap.
 You can customize these files to meet the different needs of the site you want :-)
 
 The `examples/assets-demo/` folder can be deleted.
-
-> ### Usage with Gulp:
-> 
-> HTML/JS/CSS Components: `_components/*`  
-> `00.global` and `01.index` are required components.
 
 
 #### File Structures:
@@ -74,6 +72,7 @@ uix-kit/
 ├── CONTRIBUTING.md
 ├── DOCUMENTATION.md
 ├── gulpfile.js
+├── main.js
 ├── LICENSE
 ├── readme.txt
 ├── package-lock.json

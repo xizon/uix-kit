@@ -1,23 +1,33 @@
 # Documentation
 
 
-## Installation
 
-Use NPM `npm install uix-kit`. For nodejs you have to install some dependencies.
+## - Installation And Test
 
-**Dev Environment**
+**Step 1.** Use NPM `npm install uix-kit`. For nodejs you have to install some dependencies.
 
-Before doing all dev stuff make sure you have node installed. After that, run the following code in the main directory to install the node module dependencies.
-
-```sh
-$ npm install --dev
-```
-
-Run the following code to enter development mode.
+**Step 2.** Before doing all dev stuff make sure you have node installed. After that, run the following code in the main directory to install the node module dependencies.
 
 ```sh
-$ gulp default
+`$ npm install --dev`
 ```
+
+
+**Step 3.** Run the following code to enter development mode.
+
+```sh
+`$ gulp default`
+```
+
+**Step 4.** When you done, please open the browser and enter `http://localhost:8080/examples/` to check out.
+
+
+> ### Entry Components:
+> 
+> HTML/JS/CSS Components: `_components/*`  
+> `00.global` and `01.index` are required components.
+
+
 
 
 
@@ -182,6 +192,7 @@ uix-kit/
 ├── CONTRIBUTING.md
 ├── DOCUMENTATION.md
 ├── gulpfile.js
+├── main.js
 ├── LICENSE
 ├── readme.txt
 ├── package-lock.json

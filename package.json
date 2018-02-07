@@ -1,7 +1,7 @@
 {
   "author": "UIUX Lab",
   "name": "uix-kit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "[Demo Here](https://uiux.cc/uix-kit).",
   "main": "gulpfile.js",
   "dependencies": {},
@@ -33,9 +33,13 @@
     "gulp-version-number": "^0.1.7",
     "gulp-version-replace": "^1.0.9",
     "js-md5": "^0.7.3",
-    "jshint": "^2.9.5"
+    "jshint": "^2.9.5",
+    "path": "^0.12.7",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.11.1"
   },
   "scripts": {
+    "start:dev": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

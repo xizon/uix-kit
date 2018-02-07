@@ -1,17 +1,20 @@
-var gulp          = require('gulp'),
-	sass          = require('gulp-sass'),
-	concat        = require('gulp-concat'),
-	rename        = require('gulp-rename'),
-	uglify        = require('gulp-uglify'),
-	minifyCss     = require('gulp-minify-css'),
-	jshint        = require('gulp-jshint'),
-	rtlcss        = require('gulp-rtlcss'),
-	cssbeautify   = require('gulp-cssbeautify'),
-	headerComment = require('gulp-header-comment'),
-	version       = require('gulp-version-number'),
-	fileinclude   = require('gulp-file-include'),
-	clean         = require('gulp-clean'),
-	sourcemaps    = require('gulp-sourcemaps');
+var gulp              = require('gulp'),
+	sass              = require('gulp-sass'),
+	concat            = require('gulp-concat'),
+	rename            = require('gulp-rename'),
+	uglify            = require('gulp-uglify'),
+	minifyCss         = require('gulp-minify-css'),
+	jshint            = require('gulp-jshint'),
+	rtlcss            = require('gulp-rtlcss'),
+	cssbeautify       = require('gulp-cssbeautify'),
+	headerComment     = require('gulp-header-comment'),
+	version           = require('gulp-version-number'),
+	fileinclude       = require('gulp-file-include'),
+	clean             = require('gulp-clean'),
+	sourcemaps        = require('gulp-sourcemaps'),
+	webpack           = require('webpack'),
+	WebpackDevServer  = require("webpack-dev-server"),
+	path              = require("path");
 
 
 var globs = {
@@ -29,7 +32,7 @@ var globs = {
 var customComment = `
 		## Project Name        :  Uix Kit
 		## Description         :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
-		## Version             :  1.0.0
+		## Version             :  1.0.2
 		## Last Update         :  <%= moment().format( "MMMM D, YYYY" ) %>
 		## Created             :  by UIUX Lab (https://uiux.cc)
 		## Contact Us          :  uiuxlab@gmail.com
@@ -37,6 +40,60 @@ var customComment = `
 		## Compatible Browsers :  IE9, IE10, IE11, Firefox, Safari, Opera, Chrome, Edge
 		## Released under the MIT license.
 	`;
+
+
+
+/*! 
+ *************************************
+ * WebPack configuration
+ *************************************
+ */
+
+gulp.task('webpack', function(done) {
+	
+	// webpack configuration	
+	var compiler = webpack({
+				entry: [
+					'webpack/hot/dev-server',
+					'webpack-dev-server/client?http://localhost:8080'
+				],
+				module: {}
+		}, function(error) {
+			var pluginError;
+
+			if (error) {
+				pluginError = new gulpUtil.PluginError('webpack', error);
+
+				if (done) {
+					done(pluginError);
+				} else {
+					gulpUtil.log('[webpack]', pluginError);
+				}
+
+				return;
+			}
+
+			if (done) {
+				done();
+			}
+	});
+
+	
+	module.exports = {
+	  devServer: {
+		  compress: true,
+		  hot: true,
+		  proxy: {
+			"**": "http://localhost:8080"
+		  } 
+	  }
+	}
+
+	var server = new WebpackDevServer(compiler);
+	server.listen(8080, "localhost", function() {});
+	// server.close();
+
+});
 
 
 
@@ -357,7 +414,9 @@ gulp.task('scripts', function() {
  *************************************
  */
 gulp.watch('files-to-watch', ['tasks_to_run']); 
-gulp.task('default', ['jshint'], function() {
+
+//Running gulp and webpack scripts
+gulp.task('default', ['webpack'], function() {
     gulp.start( [ 'sass', 'scripts', 'styles', 'watch' ] );
 });
 
