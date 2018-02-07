@@ -28,7 +28,7 @@
 > `00.global` and `01.index` are required components.
 
 
-
+* * *
 
 
 ## How does it work?

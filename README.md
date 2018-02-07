@@ -10,7 +10,7 @@
 
 Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap.
 
-**An underlying front-end system that makes it easy to extend and modify core files. This spec is a living document that will be updated as we continue to develop the tenets and specifics of Uix Kit. Support JS and CSS component( SCSS ) development with Gulp & Webpack together. **
+An underlying front-end system that makes it easy to extend and modify core files. This spec is a living document that will be updated as we continue to develop the tenets and specifics of Uix Kit. Support JS and CSS component( SCSS ) development with Gulp & Webpack together.
 
 Enjoy the fluid grid system based on **12** columns. Uix Kit is built over Bootstrap and has all the benefits that the framework comes with. Regardless of the screen size, the website content will naturally fit the given resolution. Using the Uix Kit will save you large amount of time to build your projects.
 
@@ -28,7 +28,7 @@ Enjoy the fluid grid system based on **12** columns. Uix Kit is built over Boots
 
 * * *
 
-## - Installation And Test
+## Installation And Test
 
 **Step 1.** Use NPM `npm install uix-kit`. For nodejs you have to install some dependencies.
 
@@ -53,6 +53,8 @@ Enjoy the fluid grid system based on **12** columns. Uix Kit is built over Boots
 > HTML/JS/CSS Components: `_components/*`  
 > `00.global` and `01.index` are required components.
 
+
+* * *
 
 
 ### 1\. Custom Core Files
