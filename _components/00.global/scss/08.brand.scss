@@ -16,6 +16,11 @@
   }
 }
 
+.menu-open .brand {
+	transform: translateX( -100px );
+}
+
+
 .mobile-brand {
   display: none;
 }

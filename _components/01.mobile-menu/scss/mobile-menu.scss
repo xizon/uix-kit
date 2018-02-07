@@ -1,6 +1,26 @@
 /* ====================================================== 
    Mobile Menu with Sidr
 /* ====================================================== */
+/* Custom toggle effect */
+#sidr-left {
+	@include transition-default();
+	left: -350px;
+	
+	&.menu-open {
+		left: 0;
+	}
+}
+
+#sidr-right {
+	@include transition-default();
+	right: -350px;
+	
+	&.menu-open {
+		right: 0;
+	}
+}
+
+/* Init menu */
 
 .sidr {
   display: block;
@@ -25,10 +45,10 @@
   }
   &.right {
     left: auto;
-    right: -367px;
+    right: auto;
   }
   &.left {
-    left: -367px;
+    left: auto;
     right: auto;
   }
   h1, h2, h3, h4, h5, h6 {

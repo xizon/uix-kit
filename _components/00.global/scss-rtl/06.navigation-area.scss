@@ -84,10 +84,16 @@
   left: 30px;
   span {
     left: auto;
-    right: 7px;
+    right: 12px;
   }
-  &.open span {
-    left: auto;
-    right: 2px;
-  }
+	
+  &.open {
+	  transform: translateX( 0 );
+	  
+	  span {
+		right: 7px;
+	  } 
+	  
+  }	
+	
 }

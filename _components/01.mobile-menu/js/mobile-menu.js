@@ -55,10 +55,14 @@ theme = ( function ( theme, $, window, document ) {
 						
 					});
 					
+					//Custom toggle effect
+					$( 'body, #'+sidrname ).addClass( 'menu-open' );
+					
 					
 				},	
 				onClose: function() {
 				    $toggle.removeClass( 'open' );
+					$( 'body, #'+sidrname ).removeClass( 'menu-open' );
 				}
 			  
 			});

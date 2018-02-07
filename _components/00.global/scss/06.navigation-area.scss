@@ -212,6 +212,7 @@
 /* Mobile */
 
 .menu-toggle {
+  @include transition-default();
   position: absolute;
   display: none;
   width: 40px;
@@ -265,9 +266,16 @@
     background: #000;
     transition: 350ms;
   }
-  &.open span {
-    left: 16px;
+	
+  &.open {
+		
+	  transform: translateX( -100px );
+	  span {
+		left: 16px;
+	  }
+		
   }
+  	
   span {
       
     @for $i from 1 to 3 {

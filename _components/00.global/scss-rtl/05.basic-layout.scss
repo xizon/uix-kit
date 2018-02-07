@@ -18,6 +18,10 @@
     text-align: right;
 }
 
+/* 5.2 Main Wrapper */
+.menu-open .wrapper {
+	transform: translateX( -100px );
+}
 
 /* 5.3 Seamless Grid */
 $seamless-grid-pad : 15px;

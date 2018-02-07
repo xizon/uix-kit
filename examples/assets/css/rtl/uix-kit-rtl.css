@@ -79,6 +79,11 @@ blockquote:before {
     text-align: right;
 }
 
+/* 5.2 Main Wrapper */
+.menu-open .wrapper {
+    transform: translateX(-100px);
+}
+
 /* 5.3 Seamless Grid */
 [class*='seamless-col-'] {
     float: right;
@@ -260,12 +265,15 @@ blockquote:before {
 
 .menu-toggle span {
     left: auto;
-    right: 7px;
+    right: 12px;
+}
+
+.menu-toggle.open {
+    transform: translateX(0);
 }
 
 .menu-toggle.open span {
-    left: auto;
-    right: 2px;
+    right: 7px;
 }
 
 /* ====================================================== 
@@ -281,6 +289,10 @@ blockquote:before {
 /* ====================================================== */
 .brand {
     float: right;
+}
+
+.menu-open .brand {
+    transform: translateX(100px);
 }
 
 /* ====================================================== 
@@ -423,6 +435,16 @@ blockquote:before {
 /* ====================================================== 
    Mobile Menu with Sidr
 /* ====================================================== */
+/* Custom toggle effect */
+#sidr-left.menu-open {
+    transform: translateX(-100px);
+}
+
+#sidr-right.menu-open {
+    transform: translateX(-100px);
+}
+
+/* Init menu */
 .sidr ul li ul li a, .sidr ul li ul li span {
     padding-left: auto;
     padding-right: 30px;

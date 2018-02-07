@@ -127,7 +127,20 @@
 	min-height: 100%;
 	width: 100%;
 	overflow: hidden;
+	@include transition-default();
+	transform: translateX( 0 );
 }
+
+.menu-open .wrapper {
+	transform: translateX( 100px );
+	
+	section,
+	footer {
+	   opacity: .2;
+	}
+	
+}
+
 
 
 /* 5.3 Seamless Grid */

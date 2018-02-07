@@ -5,3 +5,7 @@
 .brand {
 	float: right;
 }
+
+.menu-open .brand {
+	transform: translateX( 100px );
+}

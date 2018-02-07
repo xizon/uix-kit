@@ -793,6 +793,18 @@ section.site-google-map, .section.site-google-map {
     min-height: 100%;
     width: 100%;
     overflow: hidden;
+  /* @include transition-default(); */
+    transition: all 0.3s ease 0s;
+    transform: translateX(0);
+}
+
+.menu-open .wrapper {
+    transform: translateX(100px);
+}
+
+.menu-open .wrapper section,
+.menu-open .wrapper footer {
+    opacity: .2;
 }
 
 /* 5.3 Seamless Grid */
@@ -1275,6 +1287,8 @@ section.site-google-map, .section.site-google-map {
 
 /* Mobile */
 .menu-toggle {
+  /* @include transition-default(); */
+    transition: all 0.3s ease 0s;
     position: absolute;
     display: none;
     width: 40px;
@@ -1326,6 +1340,10 @@ section.site-google-map, .section.site-google-map {
     height: 1px;
     background: #000;
     transition: 350ms;
+}
+
+.menu-toggle.open {
+    transform: translateX(-100px);
 }
 
 .menu-toggle.open span {
@@ -1455,6 +1473,10 @@ section.site-google-map, .section.site-google-map {
 .brand img {
     max-height: 50px;
     margin-top: 0.75rem;
+}
+
+.menu-open .brand {
+    transform: translateX(-100px);
 }
 
 .mobile-brand {
@@ -3797,6 +3819,28 @@ ul.entry-meta {
 /* ====================================================== 
    Mobile Menu with Sidr
 /* ====================================================== */
+/* Custom toggle effect */
+#sidr-left {
+  /* @include transition-default(); */
+    transition: all 0.3s ease 0s;
+    left: -350px;
+}
+
+#sidr-left.menu-open {
+    left: 0;
+}
+
+#sidr-right {
+  /* @include transition-default(); */
+    transition: all 0.3s ease 0s;
+    right: -350px;
+}
+
+#sidr-right.menu-open {
+    right: 0;
+}
+
+/* Init menu */
 .sidr {
     display: block;
     position: fixed;
@@ -3824,11 +3868,11 @@ ul.entry-meta {
 
 .sidr.right {
     left: auto;
-    right: -367px;
+    right: auto;
 }
 
 .sidr.left {
-    left: -367px;
+    left: auto;
     right: auto;
 }
 

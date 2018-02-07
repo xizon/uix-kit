@@ -1,6 +1,21 @@
 /* ====================================================== 
    Mobile Menu with Sidr
 /* ====================================================== */
+/* Custom toggle effect */
+#sidr-left {
+	&.menu-open {
+		transform: translateX( -100px );
+	}
+}
+
+#sidr-right {
+	&.menu-open {
+		transform: translateX( -100px );
+	}
+}
+
+/* Init menu */
+
 .sidr {
   ul li ul li {
     a, span {
