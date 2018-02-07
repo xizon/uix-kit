@@ -2,7 +2,7 @@
 
 
 
-## - Installation And Test
+## Installation And Test
 
 **Step 1.** Use NPM `npm install uix-kit`. For nodejs you have to install some dependencies.
 
