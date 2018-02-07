@@ -94,3 +94,27 @@ $primary-bg-color      : transparent;
 	/* @include transition-default(); */
 	transition: all 0.3s ease 0s;
 }
+
+
+@mixin transition-none(){
+	/* @include transition-none(); */
+	transition: none; 
+}
+
+
+@mixin bg-gradient(){
+	/* @include bg-gradient(); */
+	background: $highlight-color1;
+	background: linear-gradient(to right, $highlight-color1 0%,$highlight-color2 100%);
+}
+
+
+@mixin icontxt-gradient(){
+	/* @include icontxt-gradient(); */
+	background: $highlight-color1;
+	background: linear-gradient(to right, $highlight-color1 0%,$highlight-color2 100%);
+	/* Standard syntax */
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	
+}

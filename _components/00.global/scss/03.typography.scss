@@ -102,6 +102,10 @@ h6 {
   text-decoration: underline !important;
 }
 
+.font-sub-color {
+	color: $sub-text-color !important;
+}
+
 @media all and (max-width: 768px) {
   h1 {
     font-size: 2.5rem;
