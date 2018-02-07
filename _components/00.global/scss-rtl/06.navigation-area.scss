@@ -2,7 +2,7 @@
    6. Navigation Area                                    
 /* ====================================================== */
 
-.menu-container {
+.menu-container:not(.mobile) {
     float: left;
 	
 	ul.menu-main {
@@ -82,14 +82,13 @@
 .menu-toggle {
   right: auto;
   left: 30px;
+	
   span {
     left: auto;
     right: 12px;
   }
 	
   &.open {
-	  transform: translateX( 0 );
-	  
 	  span {
 		right: 7px;
 	  } 

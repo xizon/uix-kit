@@ -19,8 +19,13 @@
 }
 
 /* 5.2 Main Wrapper */
+.wrapper {
+	
+}
+
 .menu-open .wrapper {
-	transform: translateX( -100px );
+	display: inline-block; /* Fix CSS Right Margin Does Not Work Inside a Div With Overflow Scroll */
+	transform: translateX( 0 );
 }
 
 /* 5.3 Seamless Grid */

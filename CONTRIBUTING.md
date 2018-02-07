@@ -22,7 +22,6 @@ Uix Kit bundles the following third-party resources:
 - [jQuery Easing](http://gsgd.co.uk/sandbox/jquery/easing/)
 - [jQuery Mousewheel](https://plugins.jquery.com/mousewheel/)
 - [Flexslider](https://github.com/woocommerce/FlexSlider)
-- [Glyphicons](http://glyphicons.com/)
 - [Bootstrap v3.3.7](http://getbootstrap.com)
 - [jQuery Parallax](http://www.ianlunn.co.uk/plugins/jquery-parallax/)
 - [Shuffle.js](https://vestride.github.io/Shuffle/)
@@ -34,7 +33,8 @@ Uix Kit bundles the following third-party resources:
 - [Video.js](https://videojs.com/)
 - [Video.js Icon Font](https://github.com/videojs/font)
 - [videoBG](https://github.com/sydlawrence/jquery.videoBG)
-
+- [prefixfree](https://github.com/LeaVerou/prefixfree)
+- [template7](http://www.idangero.us/template7/)
 
 
 

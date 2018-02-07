@@ -1,7 +1,7 @@
 
 /*! 
  *************************************
- * Mobile Menu with Sidr
+ * Mobile Menu
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -24,95 +24,92 @@ theme = ( function ( theme, $, window, document ) {
 			}
 			
 			
-		    var $toggle = $( '.menu-toggle' ),
-			    $menuToBody = $( 'body' ),
-				sidrname   = 'sidr-left',
-				sidrside   = 'left';
+		    var $toggle     = $( '.menu-toggle' ),
+				$toggleBody = $( 'body' );
+		
 			
 		
-		    if ( $( 'body' ).hasClass( 'rtl' ) ) {
-				sidrname   = 'sidr-right';
-				sidrside   = 'right';
-			}
+		    //Add mobile menu to your website
+	        $( 'nav.menu-container' ).clone().addClass( 'mobile' ).appendTo( 'body' );
+		    //Wait until previous .appendTo() is complete
+			$.when( $( '.menu-container.mobile' ).length > 0 ).then( function(){
 				
-			$toggle.sidr({
-				name: sidrname,
-				side: sidrside,
-				source: '.menu-container',
-				body: $menuToBody,
-				onOpen: function( ev ) {
-				    $toggle.addClass( 'open' );
+				$( 'nav.menu-container li.custom-tip > a' ).removeAttr( 'href' );
+				
+				
+				$( '.menu-toggle' ).on( 'click', function( e ) {
+					e.preventDefault();
 
-					var logoURL = $( '.sidr-class-mobile-brand img' ).attr( 'src' );
-					if ( typeof logoURL !== typeof undefined && logoURL != '' ) {
-						if ( logoURL.indexOf( 'blank.gif' ) >= 0 ) $( '.sidr-inner' ).css( 'margin-top', '-70px' );
-					}	
-					
-					//Fix the icon class name
-					$( '.sidr-class-fa' ).each( function()  {
-						var liOldClass = $( this ).attr( 'class' );
-						$( this ).addClass( liOldClass.replace(/sidr-class-/g, '' ) );
-						
-					});
-					
-					//Custom toggle effect
-					$( 'body, #'+sidrname ).addClass( 'menu-open' );
-					
-					
-				},	
-				onClose: function() {
-				    $toggle.removeClass( 'open' );
-					$( 'body, #'+sidrname ).removeClass( 'menu-open' );
+					$( this ).toggleClass( 'open' );
+					if ( $( this ).hasClass( 'open' ) ) {
+
+						//Add mobile brand
+						var logoURL = $( '.mobile-brand img' ).attr( 'src' );
+						if ( typeof logoURL !== typeof undefined && logoURL != '' ) {
+							if ( logoURL.indexOf( 'blank.gif' ) >= 0 ) $( '.mobile-inner' ).css( 'margin-top', '-70px' );
+						}	
+
+						//Toggle effect
+						$toggleBody.addClass( 'menu-open' );
+					} else {
+						$toggleBody.removeClass( 'menu-open' );
+					}
+
+				});
+
+
+
+				// Menu click event
+				$( '.menu-container.mobile ul li' ).on( 'click', function( e ) {
+
+					  var arrowText = $( this ).find( '.mobile-nav-arrow' ).text().replace( /(.).*\1/g, "$1" );
+					  $( this ).find( '> .sub-menu:not(.sub-sub)' ).toggle();
+
+					  if ( arrowText != '-' ) {
+						  $( this ).find( '.mobile-nav-arrow' ).text( '-' );
+					  } else {
+						  $( this ).find( '.mobile-nav-arrow' ).text( '+' );
+					  }
+
+
+				} );
+
+
+
+				// Close the menu on window change
+				$window.on( 'resize', function() {
+					// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+					if ( $window.width() != windowWidth ) {
+
+						// Update the window width for next time
+						windowWidth = $window.width();
+
+						// Do stuff here
+						$toggleBody.removeClass( 'menu-open' );
+						$( '.menu-toggle' ).removeClass( 'open' );
+						if ( windowWidth <= 768 ) sidrmenuInit(); 
+
+
+					}
+				});
+
+
+				if ( windowWidth <= 768 ) {
+					sidrmenuInit(); 
 				}
-			  
-			});
-			
-			
-			$( '.sidr li' ).on( 'click', function() {
-				  
-				  var arrowText = $( this ).find( '.sidr-nav-arrow' ).text().replace( /(.).*\1/g, "$1" );
-				  $( this ).find( '> .sidr-class-sub-menu:not(.sidr-class-sub-sub)' ).toggle();
-				
-				  if ( arrowText != '-' ) {
-					  $( this ).find( '.sidr-nav-arrow' ).text( '-' );
-				  } else {
-					  $( this ).find( '.sidr-nav-arrow' ).text( '+' );
-				  }
-				  
-				  
-			} );
-		
-		
 	
-			// Close the menu on window change
-			$window.on( 'resize', function() {
-				// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-				if ( $window.width() != windowWidth ) {
-
-					// Update the window width for next time
-					windowWidth = $window.width();
-
-					// Do stuff here
-					$.sidr( 'close', sidrname );
-					$( '.menu-toggle' ).removeClass( 'open' );
-					if ( windowWidth <= 768 ) sidrmenuInit(); 
-
-
-				}
+				
 			});
 		
-			
-			if ( windowWidth <= 768 ) {
-			    sidrmenuInit(); 
-			}
 		
+
 			
 			function sidrmenuInit() {
 	
-				$( '.sidr-class-menu-main > li' ).each( function() {
+				$( '.menu-container.mobile .menu-main > li' ).each( function() {
 					if ( $( this ).find( 'ul' ).length > 0 ) {
-						if ( $( this ).find( '.sidr-nav-arrow' ).length < 1 ) $( this ).prepend( '<em class="sidr-nav-arrow">+</em>' );
-						$( this ).find( 'ul ul' ).addClass( 'sidr-class-sub-sub' );
+						if ( $( this ).find( '.mobile-nav-arrow' ).length < 1 ) $( this ).prepend( '<em class="mobile-nav-arrow">+</em>' );
+						$( this ).find( 'ul ul' ).addClass( 'sub-sub' );
 						$( this ).find( ' > a' ).attr( 'href', 'javascript:void(0);' );
 					}
 				} );		

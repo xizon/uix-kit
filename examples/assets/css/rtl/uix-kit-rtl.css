@@ -11,7 +11,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.0.2
+ * ## Version             :  1.0.3
  * ## Last Update         :  February 7, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -81,7 +81,9 @@ blockquote:before {
 
 /* 5.2 Main Wrapper */
 .menu-open .wrapper {
-    transform: translateX(-100px);
+    display: inline-block;
+  /* Fix CSS Right Margin Does Not Work Inside a Div With Overflow Scroll */
+    transform: translateX(0);
 }
 
 /* 5.3 Seamless Grid */
@@ -182,77 +184,77 @@ blockquote:before {
 /* ====================================================== 
    6. Navigation Area                                    
 /* ====================================================== */
-.menu-container {
+.menu-container:not(.mobile) {
     float: left;
   /* Dropdown */
   /* Multi-column */
   /* Dropdown Arrow */;
 }
 
-.menu-container ul.menu-main {
+.menu-container:not(.mobile) ul.menu-main {
     float: right;
 }
 
-.menu-container ul.menu-main > li {
+.menu-container:not(.mobile) ul.menu-main > li {
     margin-right: auto;
     margin-left: 1.6875rem;
 }
 
-.menu-container ul.menu-main > li:not(.multi-column) > ul ul {
+.menu-container:not(.mobile) ul.menu-main > li:not(.multi-column) > ul ul {
     margin-left: auto;
     margin-right: -0.071875rem;
 }
 
-.menu-container ul.menu-main > li > ul:before {
+.menu-container:not(.mobile) ul.menu-main > li > ul:before {
     left: auto;
     right: 0;
 }
 
-.menu-container ul.menu-main > li > ul:after {
+.menu-container:not(.mobile) ul.menu-main > li > ul:after {
     left: auto;
     right: 3.5rem;
     margin-left: auto;
     margin-right: -0.15625rem;
 }
 
-.menu-container ul.menu-main > li li {
+.menu-container:not(.mobile) ul.menu-main > li li {
     padding-left: auto;
     padding-right: 0.875rem;
 }
 
-.menu-container ul.menu-main > li ul li {
+.menu-container:not(.mobile) ul.menu-main > li ul li {
     padding-left: auto;
     padding-right: 2.034375rem;
 }
 
-.menu-container ul.menu-main ul.sub-menu {
+.menu-container:not(.mobile) ul.menu-main ul.sub-menu {
     left: auto;
     right: 0;
 }
 
-.menu-container ul.menu-main > li:not(.multi-column) > ul ul {
+.menu-container:not(.mobile) ul.menu-main > li:not(.multi-column) > ul ul {
     left: auto;
     right: 100%;
 }
 
 @media all and (max-width: 1250px) {
-    .menu-container ul.menu-main > li {
+    .menu-container:not(.mobile) ul.menu-main > li {
         margin-right: auto;
         margin-left: 1.125rem;
     }
 }
 
-.menu-container li.multi-column > ul li {
+.menu-container:not(.mobile) li.multi-column > ul li {
     padding-left: auto !important;
     padding-right: 1.159375rem !important;
 }
 
-.menu-container .nav-arrow {
+.menu-container:not(.mobile) .nav-arrow {
     right: auto;
     left: 0.284375rem;
 }
 
-.menu-container ul.menu-main ul.sub-menu .nav-arrow {
+.menu-container:not(.mobile) ul.menu-main ul.sub-menu .nav-arrow {
     right: auto;
     left: 1.159375rem;
 }
@@ -266,10 +268,6 @@ blockquote:before {
 .menu-toggle span {
     left: auto;
     right: 12px;
-}
-
-.menu-toggle.open {
-    transform: translateX(0);
 }
 
 .menu-toggle.open span {
@@ -292,7 +290,7 @@ blockquote:before {
 }
 
 .menu-open .brand {
-    transform: translateX(100px);
+    transform: translateX(0);
 }
 
 /* ====================================================== 
@@ -392,6 +390,15 @@ blockquote:before {
 }
 
 /* ====================================================== 
+   25. Note & Tip 
+/* ====================================================== */
+/* Tip */
+.custom-tip > div {
+    margin-left: auto;
+    margin-right: 1rem;
+}
+
+/* ====================================================== 
    Author Card   
 /* ====================================================== */
 .author-card-final {
@@ -433,31 +440,41 @@ blockquote:before {
 }
 
 /* ====================================================== 
-   Mobile Menu with Sidr
+   Mobile Menu
 /* ====================================================== */
-/* Custom toggle effect */
-#sidr-left.menu-open {
-    transform: translateX(-100px);
+.menu-container.mobile {
+    left: auto;
+    right: 0;
+    transform: translateX(300px);
 }
 
-#sidr-right.menu-open {
-    transform: translateX(-100px);
-}
-
-/* Init menu */
-.sidr ul li ul li a, .sidr ul li ul li span {
+.menu-container.mobile ul li ul li a, .menu-container.mobile ul li ul li span {
     padding-left: auto;
     padding-right: 30px;
 }
 
-.sidr li:not(.sidr-class-multi-column) ul ul {
+.menu-container.mobile li:not(.multi-column) ul ul {
     padding-left: auto;
     padding-right: .825em;
 }
 
-.sidr-nav-arrow {
+.menu-container.mobile > .inner > .menu-right {
+    padding-left: auto;
+    padding-right: .5rem;
+}
+
+.menu-container.mobile > .inner > .menu-right a {
+    margin-right: auto;
+    margin-left: .3rem;
+}
+
+.menu-container.mobile .mobile-nav-arrow {
     right: auto;
     left: 10px;
+}
+
+.menu-open .menu-container.mobile {
+    transform: translateX(0);
 }
 
 /* ====================================================== 

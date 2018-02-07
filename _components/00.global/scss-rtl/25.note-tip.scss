@@ -1,11 +1,13 @@
 /* ====================================================== 
-   8. Brand                         
+   25. Note & Tip 
 /* ====================================================== */
+/* Tip */
 
-.brand {
-	float: right;
-}
-
-.menu-open .brand {
-	transform: translateX( 0 );
+.custom-tip {
+  > div {
+    margin-left: auto;
+	margin-right: 1rem;
+	  
+   }
+  
 }

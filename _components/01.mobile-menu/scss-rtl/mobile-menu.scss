@@ -1,35 +1,45 @@
 /* ====================================================== 
-   Mobile Menu with Sidr
+   Mobile Menu
 /* ====================================================== */
-/* Custom toggle effect */
-#sidr-left {
-	&.menu-open {
-		transform: translateX( -100px );
-	}
-}
+.menu-container.mobile {
+	left: auto;
+	right: 0;
+	transform: translateX(300px);
 
-#sidr-right {
-	&.menu-open {
-		transform: translateX( -100px );
-	}
-}
-
-/* Init menu */
-
-.sidr {
+  
   ul li ul li {
     a, span {
       padding-left: auto;
       padding-right: 30px;
     }
   }
-  li:not(.sidr-class-multi-column) ul ul {
+  li:not(.multi-column) ul ul {
     padding-left: auto;
     padding-right: .825em;
   }
+	
+  > .inner {
+	> .menu-right {
+		padding-left: auto;
+		padding-right: .5rem;
+		
+		a {
+			margin-right: auto;
+			margin-left: .3rem;
+		}
+	}
+  
+	  
+  }
+	
+	.mobile-nav-arrow {
+	  right: auto;
+	  left: 10px;
+	}	
+		
+	
 }
 
-.sidr-nav-arrow {
-  right: auto;
-  left: 10px;
+.menu-open .menu-container.mobile {
+  transform: translateX(0);
 }

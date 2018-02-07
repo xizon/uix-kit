@@ -18,10 +18,10 @@ theme = ( function ( theme, $, window, document ) {
 			
 			// Menu Hover
 			var mTop = 15;
-			$( '.menu-container ul.menu-main > li.multi-column > ul li ul' ).addClass( 'multi' );
-			$( '.menu-container ul.menu-main > li:not(.multi-column) ul, .menu-container li.multi-column > ul.sub-menu > li > ul, .menu-container ul.menu-main li.multi-column > ul' ).css( 'margin-top', mTop + 'px' );
+			$( '.menu-container:not(.mobile) ul.menu-main > li.multi-column > ul li ul' ).addClass( 'multi' );
+			$( '.menu-container:not(.mobile) ul.menu-main > li:not(.multi-column) ul, .menu-container:not(.mobile) li.multi-column > ul.sub-menu > li > ul, .menu-container:not(.mobile) ul.menu-main li.multi-column > ul' ).css( 'margin-top', mTop + 'px' );
 			
-			$( '.menu-container ul.menu-main li' ).on( 'mouseenter', function(){
+			$( '.menu-container:not(.mobile) ul.menu-main li' ).on( 'mouseenter', function(){
 				$( this ).find( ' > ul.sub-menu:not(.multi), .mega-arrow' ).show().animate( { marginTop: 0, opacity: 1 }, { duration: 150 } );
 				
 			}).on( 'mouseleave' , function(){
@@ -36,7 +36,7 @@ theme = ( function ( theme, $, window, document ) {
 	
 		
 			//Add Sub-menu Arrow
-			$( '.menu-container ul.menu-main li' ).each( function() {
+			$( '.menu-container:not(.mobile) ul.menu-main li' ).each( function() {
 				if ( $( this ).find( 'ul' ).length > 0 ) {
 					$( this ).prepend( '<span class="nav-arrow"></span>' );
 				}
@@ -56,7 +56,7 @@ theme = ( function ( theme, $, window, document ) {
 			});
 
 			// Sticky primary navigation
-			var waypoints2 = $( '.menu-container' ).waypoint({
+			var waypoints2 = $( '.menu-container:not(.mobile)' ).waypoint({
 				handler: function( direction ) {
 
 					$( this.element ).toggleClass( 'spy-scroll-fixed', direction === 'down' );

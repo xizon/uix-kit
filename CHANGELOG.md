@@ -1,9 +1,10 @@
 # Changelog
 
-#### = 1.0.2 (February 7, 2018) =
+#### = 1.0.3 (February 7, 2018) =
 
 * New: Compatible with Webpack.
 * Tweak: Optimized core style and scripts.
+* Tweak: Optimized mobile navigation.
 * Fix: Fixed a bug of video API.
 
 

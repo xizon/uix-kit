@@ -63,7 +63,7 @@ theme = ( function ( theme, $, window, document ) {
 
 			
 			// Remove the html tag for mega menu item
-			$( 'li.multi-column  > ul .multi-column-title, li.sidr-class-multi-column > ul .sidr-class-multi-column-title' ).each( function()  {
+			$( 'li.multi-column  > ul .multi-column-title' ).each( function()  {
 				var mega_old_item = $( this ).html();
 				if ( mega_old_item != '' ) {
 					$( this ).html( mega_old_item.replace(/<[^>]+>/g, '' ) );
