@@ -278,19 +278,19 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 .custom-theme-flexslider.custom-primary-flexslider {
   max-height: 100vh;
   overflow: hidden;
+	
   img {
     max-height: 100vh;
   }
 
   .custom-theme-slides {
-    .item {
-      background-size: cover;
-      background-repeat: no-repeat;
-      position: relative;
-    }
-    > .item {
-	  
 
+    > .item {
+		
+       background-size: cover;
+	   background-repeat: no-repeat;
+	   position: relative;
+       
       .slides-info {
         position: absolute;
         top: 0;
@@ -339,21 +339,29 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 }
 
 @media all and (max-width: 991px) {
-  .custom-theme-flexslider.custom-primary-flexslider .custom-theme-slides > .item .slides-info .container {
-    .level-1 {
-      font-size: 4vw !important;
-      line-height: 4vw !important;
-    }
-    .level-2 {
-      font-size: 2vw !important;
-      line-height: 2vw !important;
-    }
-  }
+	.custom-theme-flexslider.custom-primary-flexslider .custom-theme-slides > .item {
+		
+		.slides-info {
+			
+		  .container {
+			.level-1 {
+			  font-size: 4vw !important;
+			  line-height: 4vw !important;
+			  margin-bottom: 0;
+			}
+			.level-2 {
+			  font-size: 2vw !important;
+			  line-height: 2vw !important;
+			}
+		  }	
+		}
+		
+	}
 }
 
 @media all and (max-width: 768px) {
+
   .custom-theme-flexslider.custom-primary-flexslider {
-    margin-top: 1.75rem;
     .custom-theme-slides > .item .button {
       font-size: 2vw !important;
     }
