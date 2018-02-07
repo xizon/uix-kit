@@ -4,7 +4,7 @@
 
 ## Installation And Test
 
-**Step 1.** Use NPM `npm install uix-kit`. For nodejs you have to install some dependencies.
+**Step 1.** Use NPM `npm install uix-kit` or download the latest version from [Github](https://github.com/xizon/uix-kit/archive/master.zip). For nodejs you have to install some dependencies.
 
 **Step 2.** Before doing all dev stuff make sure you have node installed. After that, run the following code in the main directory to install the node module dependencies.
 

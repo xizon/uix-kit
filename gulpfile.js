@@ -30,8 +30,8 @@ var globs = {
 
 
 var customComment = `
-		## Project Name        :  Uix Kit
-		## Description         :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
+		## Project Name        :  Uix Kit Demo
+		## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
 		## Version             :  1.0.2
 		## Last Update         :  <%= moment().format( "MMMM D, YYYY" ) %>
 		## Created             :  by UIUX Lab (https://uiux.cc)
