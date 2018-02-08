@@ -1,11 +1,10 @@
 # Uix Kit
 
-[Demo Here](https://uiux.cc/uix-kit).
+[Demo](https://uiux.cc/uix-kit) | [NPM](https://www.npmjs.com/package/uix-kit)
 
 
-<a href="https://uiux.cc/uix-kit" target="_blank"><img src="https://github.com/xizon/uix-kit/blob/master/_screenshots/cover.jpg" width="300" height="300"></a>
+<a href="https://uiux.cc/uix-kit" target="_blank"><img src="https://uiux.cc/wp-content/uploads/2017/12/cover-600x600.jpg" width="300" height="300"></a>
 
-[![NPM][npm-icon]][npm-link]
 
 
 ## Description
