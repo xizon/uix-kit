@@ -15,8 +15,6 @@
 	9. Dropdown Categories
 	10. Pagination
 
-	
-
 */
 
 var templateUrl = wp_theme_custom_root_path.templateUrl,

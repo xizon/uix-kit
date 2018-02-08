@@ -1,5 +1,13 @@
 # Changelog
 
+
+#### = 1.0.4 (February 8, 2018) =
+
+* New: Add a new module "Periodical Scroll".
+* New: Add a new module "Material Container".
+
+
+
 #### = 1.0.3 (February 7, 2018) =
 
 * New: Compatible with Webpack.
