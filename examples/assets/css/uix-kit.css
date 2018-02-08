@@ -17,70 +17,6 @@
  * ## Released under the MIT license.
  */
 
-/* ====================================================== 
-   Accordion 
-/* ====================================================== */
-.custom-accordion dl {
-    position: relative;
-    background: white;
-    transition: .1s ease-in-out;
-}
-
-.custom-accordion dl::before {
-    content: '';
-    position: absolute;
-    display: block;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    pointer-events: none;
-    box-shadow: 0 -1px 0 #e5e5e5, 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.24);
-}
-
-.custom-accordion dt {
-    padding: 1rem;
-    -webkit-touch-callout: none;
-    user-select: none;
-}
-
-.custom-accordion dt a {
-    display: block;
-}
-
-.custom-accordion dd {
-    width: calc(100% - 2rem);
-    padding: 1rem;
-    font-size: 0.875rem;
-    display: none;
-}
-
-.custom-accordion dl.active {
-    height: auto;
-    margin: 1rem 0;
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.16), 0 6px 12px rgba(0, 0, 0, 0.32);
-}
-
-.custom-accordion dl.active dt {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.18);
-}
-
-.custom-accordion dl dt:before {
-    position: absolute;
-    display: block;
-    content: '\203a';
-    font-size: 18pt;
-    right: 1rem;
-    top: .5rem;
-    transition: .1s ease-in-out;
-    color: rgba(0, 0, 0, 0.54);
-}
-
-.custom-accordion dl.active dt:before {
-    transform: rotate(90deg);
-}
-
-/* Actived status */
 /*
 	
 	COLOR PALETTE
@@ -3012,100 +2948,69 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   Author Card   
+   Accordion 
 /* ====================================================== */
-.author-card {
-    margin: 0 auto;
-    border: 1px solid #eaeaea;
+.custom-accordion dl {
     position: relative;
-    border-top: 3px solid #EC5E79;
+    background: white;
+    transition: .1s ease-in-out;
 }
 
-.author-card-top {
-    min-height: 2.086538461rem;
-    background: #fff;
-    padding: 0.65625rem 1.75rem 0 1.75rem;
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
-}
-
-.author-card-top h3 {
-    margin: 0;
-    padding: 0;
-    font-size: 1.125rem;
-    line-height: 1.7;
-}
-
-.author-card-top .text {
-    margin-top: 0.4375rem;
-    float: left;
-    width: calc(100% - 105px);
-}
-
-.author-card-top .text a {
-    font-size: 0.625rem;
-}
-
-.author-card-top .pic {
-    position: relative;
-    top: 0.175rem;
-    height: 4.375rem;
-    width: 4.375rem;
-    float: right;
-    width: 100px;
-    height: 100px;
-}
-
-.author-card-top .pic img {
-    width: 90px !important;
-    height: 90px !important;
-    margin: 0.3125rem 0 0 0.3125rem;
-    border: 1px solid #eaeaea;
-    border-radius: 100%;
-}
-
-.author-card-middle {
-    background: #fff;
-    padding: 1.75rem 1.75rem 1.3125rem 1.75rem;
-    line-height: 1.5;
-}
-
-.author-card-middle:after {
+.custom-accordion dl::before {
     content: '';
-    position: relative;
-    height: 0;
-    width: 0;
-    border-left: 0.4375rem solid transparent;
-    border-right: 0.4375rem solid transparent;
-    border-top: 0.4375rem solid #fff;
     position: absolute;
-    bottom: 25px;
-    left: 1.75rem;
-}
-
-.author-card-middle p {
-    margin-top: 0.875rem;
-    padding: 0 0.875rem 0 1.75rem;
-}
-
-.author-card-final {
-    height: 30px;
-    font-size: 0.75rem;
     display: block;
-    background: #F6F6F6;
-    padding: 0.525rem 2.1875rem;
-    text-align: right;
-    border-bottom-left-radius: 2px;
-    border-bottom-right-radius: 2px;
-    transition: all 500ms ease-in-out;
-    color: #BDBDBD;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    box-shadow: 0 -1px 0 #e5e5e5, 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.24);
 }
 
-.author-card-final .text {
-    color: #fff;
-    margin-left: 0.4375rem;
+.custom-accordion dt {
+    padding: 1rem;
+    -webkit-touch-callout: none;
+    user-select: none;
 }
 
+.custom-accordion dt a {
+    display: block;
+}
+
+.custom-accordion dd {
+    width: calc(100% - 2rem);
+    padding: 1rem;
+    font-size: 0.875rem;
+    display: none;
+}
+
+.custom-accordion dl.active {
+    height: auto;
+    margin: 1rem 0;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.16), 0 6px 12px rgba(0, 0, 0, 0.32);
+}
+
+.custom-accordion dl.active dt {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.18);
+}
+
+.custom-accordion dl dt:before {
+    position: absolute;
+    display: block;
+    content: '\203a';
+    font-size: 18pt;
+    right: 1rem;
+    top: .5rem;
+    transition: .1s ease-in-out;
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.custom-accordion dl.active dt:before {
+    transform: rotate(90deg);
+}
+
+/* Actived status */
 /* ====================================================== 
    Button                 
 /* ====================================================== */
@@ -3281,6 +3186,101 @@ ul.entry-meta {
 .button-bg-secondary:hover {
     background-color: #fff !important;
     color: #212121 !important;
+}
+
+/* ====================================================== 
+   Author Card   
+/* ====================================================== */
+.author-card {
+    margin: 0 auto;
+    border: 1px solid #eaeaea;
+    position: relative;
+    border-top: 3px solid #EC5E79;
+}
+
+.author-card-top {
+    min-height: 2.086538461rem;
+    background: #fff;
+    padding: 0.65625rem 1.75rem 0 1.75rem;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+.author-card-top h3 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.125rem;
+    line-height: 1.7;
+}
+
+.author-card-top .text {
+    margin-top: 0.4375rem;
+    float: left;
+    width: calc(100% - 105px);
+}
+
+.author-card-top .text a {
+    font-size: 0.625rem;
+}
+
+.author-card-top .pic {
+    position: relative;
+    top: 0.175rem;
+    height: 4.375rem;
+    width: 4.375rem;
+    float: right;
+    width: 100px;
+    height: 100px;
+}
+
+.author-card-top .pic img {
+    width: 90px !important;
+    height: 90px !important;
+    margin: 0.3125rem 0 0 0.3125rem;
+    border: 1px solid #eaeaea;
+    border-radius: 100%;
+}
+
+.author-card-middle {
+    background: #fff;
+    padding: 1.75rem 1.75rem 1.3125rem 1.75rem;
+    line-height: 1.5;
+}
+
+.author-card-middle:after {
+    content: '';
+    position: relative;
+    height: 0;
+    width: 0;
+    border-left: 0.4375rem solid transparent;
+    border-right: 0.4375rem solid transparent;
+    border-top: 0.4375rem solid #fff;
+    position: absolute;
+    bottom: 25px;
+    left: 1.75rem;
+}
+
+.author-card-middle p {
+    margin-top: 0.875rem;
+    padding: 0 0.875rem 0 1.75rem;
+}
+
+.author-card-final {
+    height: 30px;
+    font-size: 0.75rem;
+    display: block;
+    background: #F6F6F6;
+    padding: 0.525rem 2.1875rem;
+    text-align: right;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    transition: all 500ms ease-in-out;
+    color: #BDBDBD;
+}
+
+.author-card-final .text {
+    color: #fff;
+    margin-left: 0.4375rem;
 }
 
 /* ====================================================== 
@@ -4054,108 +4054,6 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   Multiple Items Carousel
-/* ====================================================== */
-.custom-multi-items-carousel {
-  /* Required */
-    overflow: hidden;
-}
-
-.custom-multi-items-carousel .items {
-    height: 150px;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-}
-
-.custom-multi-items-carousel .items .item {
-    position: relative;
-    float: left;
-    height: 100%;
-    visibility: hidden;
-    box-sizing: border-box;
-  /* Demo Style */
-    border-right: 1px solid rgba(255, 255, 255, 0.5);
-    font-size: 1.2rem;
-    padding: 2rem 0;
-    text-align: center;
-    color: #fff;
-    background: #333;
-}
-
-.custom-multi-items-carousel .items .item.active {
-    background: #000;
-    font-size: 3rem;
-}
-
-.custom-multi-items-carousel .items .item.active-prev, .custom-multi-items-carousel .items .item.active-next {
-    font-size: 2rem;
-}
-
-.custom-multi-items-carousel-controls {
-    margin-top: 30px;
-    text-align: center;
-}
-
-.custom-multi-items-carousel-controls .prev {
-    padding-left: 2px;
-}
-
-.custom-multi-items-carousel-controls .next {
-    padding-right: 2px;
-}
-
-.custom-multi-items-carousel-controls a {
-    margin-left: 10px;
-    margin-right: 10px;
-    outline: 0;
-    border: 0;
-    color: #000;
-    font-weight: bold;
-    border-radius: 50%;
-    height: 50px;
-    width: 50px;
-    font-size: 32px;
-    cursor: pointer;
-    opacity: 1;
-    text-decoration: none;
-    font-family: Arial, "sans-serif";
-}
-
-.custom-multi-items-carousel-controls a.disable {
-    opacity: .3;
-}
-
-/* Vertical Carousel */
-.custom-multi-items-carousel.vertical {
-  /* Required */
-    overflow: hidden;
-    width: 500px;
-    height: 450px;
-}
-
-.custom-multi-items-carousel.vertical .items {
-    width: 100%;
-  /* Required */
-    height: 100%;
-}
-
-.custom-multi-items-carousel.vertical .items .item {
-    float: none;
-    width: 100%;
-  /* Demo Style */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-    padding: 0 0;
-}
-
-.custom-multi-items-carousel-controls.vertical {
-    width: 300px;
-    position: absolute;
-    top: 20%;
-    left: 600px;
-}
-
-/* ====================================================== 
    Modal Dialog
 /* ====================================================== */
 .modal-box {
@@ -4306,6 +4204,108 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
+   Multiple Items Carousel
+/* ====================================================== */
+.custom-multi-items-carousel {
+  /* Required */
+    overflow: hidden;
+}
+
+.custom-multi-items-carousel .items {
+    height: 150px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.custom-multi-items-carousel .items .item {
+    position: relative;
+    float: left;
+    height: 100%;
+    visibility: hidden;
+    box-sizing: border-box;
+  /* Demo Style */
+    border-right: 1px solid rgba(255, 255, 255, 0.5);
+    font-size: 1.2rem;
+    padding: 2rem 0;
+    text-align: center;
+    color: #fff;
+    background: #333;
+}
+
+.custom-multi-items-carousel .items .item.active {
+    background: #000;
+    font-size: 3rem;
+}
+
+.custom-multi-items-carousel .items .item.active-prev, .custom-multi-items-carousel .items .item.active-next {
+    font-size: 2rem;
+}
+
+.custom-multi-items-carousel-controls {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.custom-multi-items-carousel-controls .prev {
+    padding-left: 2px;
+}
+
+.custom-multi-items-carousel-controls .next {
+    padding-right: 2px;
+}
+
+.custom-multi-items-carousel-controls a {
+    margin-left: 10px;
+    margin-right: 10px;
+    outline: 0;
+    border: 0;
+    color: #000;
+    font-weight: bold;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    font-size: 32px;
+    cursor: pointer;
+    opacity: 1;
+    text-decoration: none;
+    font-family: Arial, "sans-serif";
+}
+
+.custom-multi-items-carousel-controls a.disable {
+    opacity: .3;
+}
+
+/* Vertical Carousel */
+.custom-multi-items-carousel.vertical {
+  /* Required */
+    overflow: hidden;
+    width: 500px;
+    height: 450px;
+}
+
+.custom-multi-items-carousel.vertical .items {
+    width: 100%;
+  /* Required */
+    height: 100%;
+}
+
+.custom-multi-items-carousel.vertical .items .item {
+    float: none;
+    width: 100%;
+  /* Demo Style */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 0 0;
+}
+
+.custom-multi-items-carousel-controls.vertical {
+    width: 300px;
+    position: absolute;
+    top: 20%;
+    left: 600px;
+}
+
+/* ====================================================== 
    Parallax                                               
 /* ====================================================== */
 .parallax {
@@ -4335,6 +4335,34 @@ ul.entry-meta {
 
 .parallax-auto .parallax-img {
     visibility: hidden;
+}
+
+/* ====================================================== 
+   Periodical Scroll        
+/* ====================================================== */
+.custom-periodical-scroll {
+    position: relative;
+}
+
+.custom-periodical-scroll ul {
+    display: block;
+    overflow: hidden;
+    height: 0;
+}
+
+.custom-periodical-scroll ul li {
+    display: block;
+}
+
+.custom-periodical-scroll ul li span {
+    display: block;
+  /* @include icontxt-gradient(); */
+    background: #EC5E79;
+    background: linear-gradient(to right, #EC5E79 0%, #E8588C 100%);
+  /* Standard syntax */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 2px;
 }
 
 /* ====================================================== 

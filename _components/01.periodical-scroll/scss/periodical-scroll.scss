@@ -1,0 +1,20 @@
+/* ====================================================== 
+   Periodical Scroll        
+/* ====================================================== */
+.custom-periodical-scroll {
+	position: relative;
+	ul {
+		display: block;
+		overflow: hidden;
+		height: 0;
+
+		li {
+			display: block;
+			span {
+				display: block;
+				@include icontxt-gradient();
+				letter-spacing: 2px;
+			}
+		}
+	}
+}
