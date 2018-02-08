@@ -303,14 +303,20 @@ iframe {
 @media all and (max-width: 768px) { 
 	
 	.container-bg {
-		margin-bottom: 0;
-
-		.core-page-content {
-			padding: 3rem;
-		}
+		margin-bottom: 3rem;
 	}
 
 	.container-bg-totop {
-		margin-top: -5rem;
-	}	
+		&.totop-large {
+			margin-top: -7rem;
+		}
+
+		&.totop-medium {
+			margin-top: -4rem;
+		}
+
+		&.totop-small {
+			margin-top: -2rem;
+		}
+	}		
 }
