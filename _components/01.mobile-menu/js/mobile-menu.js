@@ -34,9 +34,7 @@ theme = ( function ( theme, $, window, document ) {
 		    //Wait until previous .appendTo() is complete
 			$.when( $( '.menu-container.mobile' ).length > 0 ).then( function(){
 				
-				$( 'nav.menu-container li.custom-tip > a' ).removeAttr( 'href' );
-				
-				
+		
 				$( '.menu-toggle' ).on( 'click', function( e ) {
 					e.preventDefault();
 
