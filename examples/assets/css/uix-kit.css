@@ -335,6 +335,17 @@ iframe {
     padding-left: 0;
 }
 
+/* Center column in a row,
+ CSS used here will be applied after bootstrap.css */
+.row-center {
+    text-align: center;
+}
+
+.row-center > [class*='col-'] {
+    display: inline-block;
+    float: none;
+}
+
 /* 1.3. Material Container */
 .container-bg {
     position: relative;
@@ -858,7 +869,6 @@ section.site-google-map, .section.site-google-map {
 /* 5.3 Seamless Grid */
 .seamless-grid-container {
     width: 100%;
-    overflow: hidden;
 }
 
 .seamless-grid-container .seamless-grid,
@@ -894,7 +904,6 @@ section.site-google-map, .section.site-google-map {
 
 .seamless-grid .seamless-grid-container [class*='seamless-col-']:last-of-type .content {
     width: calc(100% - 15px);
-  /* When the right padding is 0 */;
 }
 
 .seamless-grid-container .seamless-col-2-3 {
@@ -937,36 +946,6 @@ section.site-google-map, .section.site-google-map {
     width: 16.66666666666667%;
 }
 
-.seamless-grid-container .seamless-grid.loop .seamless-col-1-2:nth-child(2n+0),
-.seamless-grid-container .seamless-grid.loop .seamless-col-1-3:nth-child(3n+0),
-.seamless-grid-container .seamless-grid.loop .seamless-col-1-4:nth-child(4n+0),
-.seamless-grid-container .seamless-grid.loop .seamless-col-1-6:nth-child(6n+0) {
-    padding-right: 0;
-}
-
-.seamless-grid-container .seamless-grid.loop .seamless-col-1-2:nth-child(2n+0) .content,
-.seamless-grid-container .seamless-grid.loop .seamless-col-1-3:nth-child(3n+0) .content,
-.seamless-grid-container .seamless-grid.loop .seamless-col-1-4:nth-child(4n+0) .content,
-.seamless-grid-container .seamless-grid.loop .seamless-col-1-6:nth-child(6n+0) .content {
-    width: calc(100% - 15px);
-  /* When the right padding is 0 */;
-}
-
-.seamless-grid-container .seamless-grid.loop .seamless-col-1-2:last-of-type,
-.seamless-grid-container .seamless-grid.loop .seamless-col-1-3:last-of-type,
-.seamless-grid-container .seamless-grid.loop .seamless-col-1-4:last-of-type,
-.seamless-grid-container .seamless-grid.loop .seamless-col-1-6:last-of-type {
-    padding-right: 15px;
-}
-
-.seamless-grid-container .seamless-grid.loop .seamless-col-1-2:last-of-type .content,
-.seamless-grid-container .seamless-grid.loop .seamless-col-1-3:last-of-type .content,
-.seamless-grid-container .seamless-grid.loop .seamless-col-1-4:last-of-type .content,
-.seamless-grid-container .seamless-grid.loop .seamless-col-1-6:last-of-type .content {
-    width: 100%;
-  /* When the loop item is the last one */;
-}
-
 .seamless-grid-container .seamless-grid.loop .seamless-col-1-2:nth-child(2n+1),
 .seamless-grid-container .seamless-grid.loop .seamless-col-1-3:nth-child(3n+1),
 .seamless-grid-container .seamless-grid.loop .seamless-col-1-4:nth-child(4n+1),
@@ -974,23 +953,10 @@ section.site-google-map, .section.site-google-map {
     clear: both;
 }
 
-.seamless-grid-container .seamless-grid.one-row [class*='seamless-col-']:last-of-type {
-    padding-right: 0;
-}
-
-.seamless-grid-container .seamless-grid.one-row [class*='seamless-col-']:last-of-type .content {
-    width: calc(100% - 15px);
-  /* When the right padding is 0 */;
-}
-
 @media all and (max-width: 991px) {
-    .seamless-grid-container .seamless-grid.loop .seamless-col-1-3:nth-child(3n+0) {
-        padding-right: 15px;
-    }
-
-    .seamless-grid-container .seamless-grid.loop .seamless-col-1-3:nth-child(3n+0) .content {
-        width: 100%;
-    /* When the loop item is the last one */;
+    .seamless-grid-container {
+    /* Loop */
+    /* 2 columns */;
     }
 
     .seamless-grid-container .seamless-grid.loop .seamless-col-1-3:nth-child(3n+1) {
@@ -1007,17 +973,6 @@ section.site-google-map, .section.site-google-map {
         clear: both;
     }
 
-    .seamless-grid-container .seamless-grid.loop .seamless-col-1-4:nth-child(2n+0),
-  .seamless-grid-container .seamless-grid.loop .seamless-col-1-3:nth-child(2n+0) {
-        padding-right: 0;
-    }
-
-    .seamless-grid-container .seamless-grid.loop .seamless-col-1-4:nth-child(2n+0) .content,
-  .seamless-grid-container .seamless-grid.loop .seamless-col-1-3:nth-child(2n+0) .content {
-        width: calc(100% - 15px);
-    /* When the right padding is 0 */;
-    }
-
     .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-6,
   .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-4,
   .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-3 {
@@ -1031,67 +986,49 @@ section.site-google-map, .section.site-google-map {
         padding-right: 15px;
         clear: both;
     }
-
-    .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-6:nth-child(2n+0),
-  .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-4:nth-child(2n+0),
-  .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-3:nth-child(2n+0) {
-        padding-right: 0;
-    }
-
-    .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-6:nth-child(2n+0) .content,
-  .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-4:nth-child(2n+0) .content,
-  .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-3:nth-child(2n+0) .content {
-        width: calc(100% - 15px);
-    /* When the right padding is 0 */;
-    }
-
-    .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-6:nth-child(2n+1) .content,
-  .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-4:nth-child(2n+1) .content,
-  .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-3:nth-child(2n+1) .content {
-        width: 100%;
-    }
 }
 
 @media all and (max-width: 768px) {
+    .seamless-grid-container {
+    /* Loop */
+    /* Loop & 2 columns */
+    /* 2 columns */;
+    }
+
     .seamless-grid-container [class*='seamless-col-'] {
         float: none;
-        width: 100%;
+        width: calc(100% - 15px);
         padding-left: 0;
         padding-right: 0;
-    }
-
-    .seamless-grid-container [class*='seamless-col-'] .content {
-        width: calc(100% - 15px);
-    /* When the right padding is 0 */;
-    }
-
-    .seamless-grid-container .seamless-grid.loop .seamless-col-1-3:nth-child(3n+0) {
-        padding-right: 0;
-    }
-
-    .seamless-grid-container .seamless-grid.loop .seamless-col-1-3:nth-child(3n+0) .content {
-        width: calc(100% - 15px);
-    /* When the right padding is 0 */;
-    }
-
-    .seamless-grid-container .seamless-grid.loop .seamless-col-1-4,
-  .seamless-grid-container .seamless-grid.loop .seamless-col-1-3 {
-        width: 100%;
     }
 
     .seamless-grid-container .seamless-grid.loop .seamless-col-1-2:last-of-type,
   .seamless-grid-container .seamless-grid.loop .seamless-col-1-3:last-of-type,
   .seamless-grid-container .seamless-grid.loop .seamless-col-1-4:last-of-type,
   .seamless-grid-container .seamless-grid.loop .seamless-col-1-6:last-of-type {
-        padding-right: 0;
+        padding-right: 15px;
+        width: 100%;
     }
 
     .seamless-grid-container .seamless-grid.loop .seamless-col-1-2:last-of-type .content,
   .seamless-grid-container .seamless-grid.loop .seamless-col-1-3:last-of-type .content,
   .seamless-grid-container .seamless-grid.loop .seamless-col-1-4:last-of-type .content,
   .seamless-grid-container .seamless-grid.loop .seamless-col-1-6:last-of-type .content {
+        width: 100%;
+    }
+
+    .seamless-grid-container .seamless-grid.loop .seamless-col-1-2,
+  .seamless-grid-container .seamless-grid.loop .seamless-col-1-3,
+  .seamless-grid-container .seamless-grid.loop .seamless-col-1-4,
+  .seamless-grid-container .seamless-grid.loop .seamless-col-1-6 {
         width: calc(100% - 15px);
-    /* When the right padding is 0 */;
+    }
+
+    .seamless-grid-container .seamless-grid.loop.use-2 .seamless-col-1-2:last-of-type,
+  .seamless-grid-container .seamless-grid.loop.use-2 .seamless-col-1-3:last-of-type,
+  .seamless-grid-container .seamless-grid.loop.use-2 .seamless-col-1-4:last-of-type,
+  .seamless-grid-container .seamless-grid.loop.use-2 .seamless-col-1-6:last-of-type {
+        width: 50%;
     }
 
     .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-6,
@@ -1105,33 +1042,13 @@ section.site-google-map, .section.site-google-map {
     .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-6:nth-child(2n+1),
   .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-4:nth-child(2n+1),
   .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-3:nth-child(2n+1) {
-        padding-right: 15px;
         clear: both;
     }
 
     .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-6:nth-child(2n+0),
   .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-4:nth-child(2n+0),
   .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-3:nth-child(2n+0) {
-        padding-right: 0;
-    }
-
-    .seamless-grid-container .seamless-grid.loop:not(.use-2) .seamless-col-1-6:nth-child(2n+1),
-  .seamless-grid-container .seamless-grid.loop:not(.use-2) .seamless-col-1-4:nth-child(2n+1),
-  .seamless-grid-container .seamless-grid.loop:not(.use-2) .seamless-col-1-3:nth-child(3n+1) {
-        padding-right: 0;
-    }
-
-    .seamless-grid-container .seamless-grid.loop:not(.use-2) .seamless-col-1-6:nth-child(2n+1) .content,
-  .seamless-grid-container .seamless-grid.loop:not(.use-2) .seamless-col-1-4:nth-child(2n+1) .content,
-  .seamless-grid-container .seamless-grid.loop:not(.use-2) .seamless-col-1-3:nth-child(3n+1) .content {
-        width: calc(100% - 15px);
-    /* When the right padding is 0 */;
-    }
-
-    .seamless-grid-container .seamless-grid.loop.use-2 .seamless-col-1-6:nth-child(2n+1) .content,
-  .seamless-grid-container .seamless-grid.loop.use-2 .seamless-col-1-4:nth-child(2n+1) .content,
-  .seamless-grid-container .seamless-grid.loop.use-2 .seamless-col-1-3:nth-child(2n+1) .content {
-        width: 100%;
+        padding-right: 15px;
     }
 }
 
@@ -3345,6 +3262,48 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
+   Features
+/* ====================================================== */
+.custom-feature .icon i {
+    border: 1px #090909 solid;
+    border-radius: 100%;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    transition: .1s ease-in-out;
+    font-size: 32px;
+}
+
+.custom-feature .icon-side i {
+    margin-right: .4em;
+}
+
+.custom-feature .title {
+    font-size: 18px;
+    letter-spacing: 0;
+}
+
+.custom-feature .title i {
+    transition: .1s ease-in-out;
+}
+
+.custom-feature .title:hover i {
+    transform: rotate(30deg);
+}
+
+.custom-feature .desc {
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    line-height: 1.6;
+    padding: .2em 0 1.5em;
+}
+
+.custom-feature .desc.desc-singlerow {
+    padding-bottom: 1.5em;
+}
+
+/* ====================================================== 
    Form                                     
 /* ====================================================== */
 /* 1) Controls */
@@ -3824,48 +3783,6 @@ ul.entry-meta {
 
 .custom-gallery .custom-gallery-item .cover img {
     width: 100%;
-}
-
-/* ====================================================== 
-   Features
-/* ====================================================== */
-.custom-feature .icon i {
-    border: 1px #090909 solid;
-    border-radius: 100%;
-    width: 80px;
-    height: 80px;
-    line-height: 80px;
-    transition: .1s ease-in-out;
-    font-size: 32px;
-}
-
-.custom-feature .icon-side i {
-    margin-right: .4em;
-}
-
-.custom-feature .title {
-    font-size: 18px;
-    letter-spacing: 0;
-}
-
-.custom-feature .title i {
-    transition: .1s ease-in-out;
-}
-
-.custom-feature .title:hover i {
-    transform: rotate(30deg);
-}
-
-.custom-feature .desc {
-    margin: 0;
-    padding: 0;
-    font-size: 13px;
-    line-height: 1.6;
-    padding: .2em 0 1.5em;
-}
-
-.custom-feature .desc.desc-singlerow {
-    padding-bottom: 1.5em;
 }
 
 /* ====================================================== 

@@ -257,6 +257,19 @@ iframe {
     padding-left:0;
 }
 
+/* Center column in a row,
+ CSS used here will be applied after bootstrap.css */
+.row-center {
+    text-align: center;
+	
+	> [class*='col-'] {
+		display: inline-block;
+		float: none;
+	}
+}
+
+
+
 
 
 /* 1.3. Material Container */

@@ -1,10 +1,12 @@
 # Changelog
 
-
-#### = 1.0.4 (February 8, 2018) =
+#### = 1.0.5 (February 8, 2018) =
 
 * New: Add a new module "Periodical Scroll".
 * New: Add a new module "Material Container".
+* Tweak: Upgrade the bootstrap grid system extension to support the module center.
+* Tweak: Upgrade the parallax module to support normal element.
+
 
 
 
