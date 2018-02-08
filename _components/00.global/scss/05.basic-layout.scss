@@ -123,19 +123,12 @@
 }
 
 /* 5.2 Main Wrapper */
+/* Note: Do not use the "transform" property, otherwise it may affect the internal elements */
 .wrapper {
 	min-height: 100%;
 	width: 100%;
 	overflow: hidden;
-	@include transition-default();
-	transform: translateX( 0 );
 }
-
-.menu-open .wrapper {
-	transform: translateX( 100px );
-
-}
-
 
 
 /* 5.3 Seamless Grid */

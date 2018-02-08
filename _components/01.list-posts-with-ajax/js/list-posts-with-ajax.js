@@ -203,7 +203,7 @@ theme = ( function ( theme, $, window, document ) {
 				
 					
 					//Check JSON string
-					if ( data && data.hasOwnProperty( 'items' ) && Object.prototype.toString.call( data[ 'items' ] )=='[object Array]' ) {
+					if ( data && data.hasOwnProperty( 'items' ) && Object.prototype.toString.call( data.items )=='[object Array]' ) {
 						
 						
 						//Data overflow may occur when the total number of pages is not posted

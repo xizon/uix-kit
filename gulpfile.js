@@ -30,7 +30,7 @@ var globs = {
 
 
 
-var customWebsiteVersion     = '1.0.6',
+var customWebsiteVersion     = '1.0.7',
 	customWebsiteTitle       = 'Uix Kit Demo',
 	customWebsiteDesc        = 'Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap',
 	customWebsiteCanonical   = '<link rel="canonical" href="https://uiux.cc" />',
@@ -430,7 +430,7 @@ gulp.task('scripts', function() {
 gulp.watch('files-to-watch', ['tasks_to_run']); 
 
 //Running gulp and webpack scripts
-gulp.task('default', ['webpack'], function() {
+gulp.task('default', ['jshint', 'webpack'], function() {
     gulp.start( [ 'sass', 'scripts', 'styles', 'watch' ] );
 });
 

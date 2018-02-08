@@ -14,7 +14,6 @@ theme = ( function ( theme, $, window, document ) {
 		    windowHeight = $window.height();
 
         
-
 		//  Initialize
 		parallaxInit();
 		

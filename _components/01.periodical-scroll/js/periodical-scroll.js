@@ -26,7 +26,6 @@ theme = ( function ( theme, $, window, document ) {
 			
 			var $wrap  = $this.find( ul ),
 				time   = timing,
-				speed  = speed,
 				moveEv = null;
 			
 			//Initialize the container height

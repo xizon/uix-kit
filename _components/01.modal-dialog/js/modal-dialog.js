@@ -47,7 +47,7 @@ theme = ( function ( theme, $, window, document ) {
 				}
 				
 				if( typeof dataW != typeof undefined && dataW != '' ) {
-					$obj.css( {'width': dataW, 'left': 'calc( (100% - '+dataW+')/2 )' } );
+					$obj.css( {'width': dataW } );
 				}
 				
 				$( '.modal-mask' ).fadeIn( 'fast' );

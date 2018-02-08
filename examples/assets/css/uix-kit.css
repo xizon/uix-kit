@@ -8,7 +8,7 @@
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
  * ## Version             :  1.0.6
- * ## Last Update         :  February 8, 2018
+ * ## Last Update         :  February 9, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -17,6 +17,70 @@
  * ## Released under the MIT license.
  */
 
+/* ====================================================== 
+   Accordion 
+/* ====================================================== */
+.custom-accordion dl {
+    position: relative;
+    background: white;
+    transition: .1s ease-in-out;
+}
+
+.custom-accordion dl::before {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    box-shadow: 0 -1px 0 #e5e5e5, 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.24);
+}
+
+.custom-accordion dt {
+    padding: 1rem;
+    -webkit-touch-callout: none;
+    user-select: none;
+}
+
+.custom-accordion dt a {
+    display: block;
+}
+
+.custom-accordion dd {
+    width: calc(100% - 2rem);
+    padding: 1rem;
+    font-size: 0.875rem;
+    display: none;
+}
+
+.custom-accordion dl.active {
+    height: auto;
+    margin: 1rem 0;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.16), 0 6px 12px rgba(0, 0, 0, 0.32);
+}
+
+.custom-accordion dl.active dt {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.18);
+}
+
+.custom-accordion dl dt:before {
+    position: absolute;
+    display: block;
+    content: '\203a';
+    font-size: 18pt;
+    right: 1rem;
+    top: .5rem;
+    transition: .1s ease-in-out;
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.custom-accordion dl.active dt:before {
+    transform: rotate(90deg);
+}
+
+/* Actived status */
 /*
 	
 	COLOR PALETTE
@@ -853,17 +917,11 @@ section.site-google-map, .section.site-google-map {
 }
 
 /* 5.2 Main Wrapper */
+/* Note: Do not use the "transform" property, otherwise it may affect the internal elements */
 .wrapper {
     min-height: 100%;
     width: 100%;
     overflow: hidden;
-  /* @include transition-default(); */
-    transition: all 0.3s ease 0s;
-    transform: translateX(0);
-}
-
-.menu-open .wrapper {
-    transform: translateX(100px);
 }
 
 /* 5.3 Seamless Grid */
@@ -1391,6 +1449,14 @@ section.site-google-map, .section.site-google-map {
     float: right;
 }
 
+.header-container .menu-right i {
+    font-size: 1.2rem;
+}
+
+.header-container .menu-right i:hover {
+    opacity: .5;
+}
+
 .header-container .menu-right a {
     display: inline-block;
     margin-right: .75rem;
@@ -1452,10 +1518,6 @@ section.site-google-map, .section.site-google-map {
 .brand img {
     max-height: 50px;
     margin-top: 0.75rem;
-}
-
-.menu-open .brand {
-    transform: translateX(-100px);
 }
 
 .mobile-brand {
@@ -3027,70 +3089,6 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   Accordion 
-/* ====================================================== */
-.custom-accordion dl {
-    position: relative;
-    background: white;
-    transition: .1s ease-in-out;
-}
-
-.custom-accordion dl::before {
-    content: '';
-    position: absolute;
-    display: block;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    pointer-events: none;
-    box-shadow: 0 -1px 0 #e5e5e5, 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.24);
-}
-
-.custom-accordion dt {
-    padding: 1rem;
-    -webkit-touch-callout: none;
-    user-select: none;
-}
-
-.custom-accordion dt a {
-    display: block;
-}
-
-.custom-accordion dd {
-    width: calc(100% - 2rem);
-    padding: 1rem;
-    font-size: 0.875rem;
-    display: none;
-}
-
-.custom-accordion dl.active {
-    height: auto;
-    margin: 1rem 0;
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.16), 0 6px 12px rgba(0, 0, 0, 0.32);
-}
-
-.custom-accordion dl.active dt {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.18);
-}
-
-.custom-accordion dl dt:before {
-    position: absolute;
-    display: block;
-    content: '\203a';
-    font-size: 18pt;
-    right: 1rem;
-    top: .5rem;
-    transition: .1s ease-in-out;
-    color: rgba(0, 0, 0, 0.54);
-}
-
-.custom-accordion dl.active dt:before {
-    transform: rotate(90deg);
-}
-
-/* Actived status */
-/* ====================================================== 
    Button                 
 /* ====================================================== */
 /* 1) Common button styles */
@@ -3099,7 +3097,7 @@ ul.entry-meta {
     text-align: center;
     min-width: 100px;
     margin: 0.875rem 1.75rem 0.875rem 0;
-    padding: 0.4375rem 1.09375rem;
+    padding: 0.4375rem 1.5rem;
     border: none;
     background: none;
     color: inherit;
@@ -3360,6 +3358,48 @@ ul.entry-meta {
 .author-card-final .text {
     color: #fff;
     margin-left: 0.4375rem;
+}
+
+/* ====================================================== 
+   Features
+/* ====================================================== */
+.custom-feature .icon i {
+    border: 1px #090909 solid;
+    border-radius: 100%;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    transition: .1s ease-in-out;
+    font-size: 32px;
+}
+
+.custom-feature .icon-side i {
+    margin-right: .4em;
+}
+
+.custom-feature .title {
+    font-size: 18px;
+    letter-spacing: 0;
+}
+
+.custom-feature .title i {
+    transition: .1s ease-in-out;
+}
+
+.custom-feature .title:hover i {
+    transform: rotate(30deg);
+}
+
+.custom-feature .desc {
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    line-height: 1.6;
+    padding: .2em 0 1.5em;
+}
+
+.custom-feature .desc.desc-singlerow {
+    padding-bottom: 1.5em;
 }
 
 /* ====================================================== 
@@ -3752,48 +3792,6 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   Features
-/* ====================================================== */
-.custom-feature .icon i {
-    border: 1px #090909 solid;
-    border-radius: 100%;
-    width: 80px;
-    height: 80px;
-    line-height: 80px;
-    transition: .1s ease-in-out;
-    font-size: 32px;
-}
-
-.custom-feature .icon-side i {
-    margin-right: .4em;
-}
-
-.custom-feature .title {
-    font-size: 18px;
-    letter-spacing: 0;
-}
-
-.custom-feature .title i {
-    transition: .1s ease-in-out;
-}
-
-.custom-feature .title:hover i {
-    transform: rotate(30deg);
-}
-
-.custom-feature .desc {
-    margin: 0;
-    padding: 0;
-    font-size: 13px;
-    line-height: 1.6;
-    padding: .2em 0 1.5em;
-}
-
-.custom-feature .desc.desc-singlerow {
-    padding-bottom: 1.5em;
-}
-
-/* ====================================================== 
    Gallery     
 /* ====================================================== */
 .custom-gallery .custom-gallery-item {
@@ -4147,8 +4145,8 @@ ul.entry-meta {
     border-radius: 8px;
     background: #fff;
     box-shadow: 0px 0px 71px 0px rgba(0, 0, 0, 0.47);
-    left: calc( (100% - 850px)/2);
-    transform: translateY(-50%);
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .modal-box.fullscreen {
@@ -4167,14 +4165,12 @@ ul.entry-meta {
 @media all and (max-width: 991px) {
     .modal-box:not(.fullscreen) {
         width: 850px !important;
-        left: calc( (100% - 850px)/2);
     }
 }
 
 @media all and (max-width: 768px) {
     .modal-box:not(.fullscreen) {
         width: 90% !important;
-        left: 5%;
     }
 }
 

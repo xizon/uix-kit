@@ -1,11 +1,12 @@
 # Changelog
 
-#### = 1.0.6 (February 8, 2018) =
+#### = 1.0.7 (February 8, 2018) =
 
 * New: Add a new module "Periodical Scroll".
 * New: Add a new module "Material Container".
 * New: Add a new module "Tooltip".
 * Fix: Fixed and simplify the seamless grid system.
+* Fix: Fixed some bugs for modal dialog and core wrapper.
 * Tweak: Upgrade the bootstrap grid system extension to support the module center.
 * Tweak: Upgrade the parallax module to support normal element.
 

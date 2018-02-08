@@ -13,8 +13,8 @@
   border-radius: 8px;
   background: #fff;
   box-shadow: 0px 0px 71px 0px rgba(0, 0, 0, 0.47);
-  left: calc( (100% - 850px)/2 );
-  transform: translateY(-50%);
+  left: 50%;
+  transform: translate(-50%, -50%);
   &.fullscreen {
     left: 0;
     width: 100% !important;
@@ -31,14 +31,12 @@
 @media all and (max-width: 991px) {
   .modal-box:not(.fullscreen) {
     width: 850px !important;
-    left: calc( (100% - 850px)/2 );
   }
 }
 
 @media all and (max-width: 768px) {
   .modal-box:not(.fullscreen) {
     width: 90% !important;
-    left: 5%;
   }
 }
 

@@ -26,6 +26,12 @@
   background: url(../images/blank.gif);
   .menu-right {
     float: right;
+	i {
+		font-size: 1.2rem;
+		&:hover {
+			opacity: .5;
+		}
+	}
     a {
       display: inline-block;
       margin-right: .75rem;
