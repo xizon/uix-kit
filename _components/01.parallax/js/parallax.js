@@ -34,6 +34,25 @@ theme = ( function ( theme, $, window, document ) {
 		
 		
 		function parallaxInit() {
+			
+			/* Pure parallax scrolling effect without other embedded HTML elements */
+			$( '.pure-bg-parallax' ).each(function() {
+				var $this       = $( this ),
+					dataImg     = $this.data( 'parallax-bg' ),
+					dataSpeed   = $this.data( 'parallax' );
+				
+				if( typeof dataSpeed === typeof undefined ) {
+					dataSpeed = 0;
+				}
+				
+				$this.css( 'background', 'url('+dataImg+')' );
+				
+				$this.bgParallax( "50%", dataSpeed );
+		
+			});
+			
+			
+			/* Parallax scrolling effect with embedded HTML elements */
 			$( '.parallax' ).each(function() {
 				var $this       = $( this ),
 				    dataAtt     = $this.data( 'parallax' ),
