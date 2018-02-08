@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.0.5
+ * ## Version             :  1.0.6
  * ## Last Update         :  February 8, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -3371,149 +3371,6 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   Features
-/* ====================================================== */
-.custom-feature .icon i {
-    border: 1px #090909 solid;
-    border-radius: 100%;
-    width: 80px;
-    height: 80px;
-    line-height: 80px;
-    transition: .1s ease-in-out;
-    font-size: 32px;
-}
-
-.custom-feature .icon-side i {
-    margin-right: .4em;
-}
-
-.custom-feature .title {
-    font-size: 18px;
-    letter-spacing: 0;
-}
-
-.custom-feature .title i {
-    transition: .1s ease-in-out;
-}
-
-.custom-feature .title:hover i {
-    transform: rotate(30deg);
-}
-
-.custom-feature .desc {
-    margin: 0;
-    padding: 0;
-    font-size: 13px;
-    line-height: 1.6;
-    padding: .2em 0 1.5em;
-}
-
-.custom-feature .desc.desc-singlerow {
-    padding-bottom: 1.5em;
-}
-
-/* ====================================================== 
-   Gallery     
-/* ====================================================== */
-.custom-gallery .custom-gallery-item {
-    transition: none;
-    position: relative;
-    text-align: left;
-}
-
-.custom-gallery .custom-gallery-item .link-to {
-    width: 100%;
-    position: absolute;
-    left: 0;
-    z-index: 3;
-    opacity: 0;
-    margin-top: -1rem;
-  /* Vertical Center */
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.custom-gallery .custom-gallery-item:hover .link-to {
-    opacity: 1;
-}
-
-.custom-gallery .custom-gallery-item .cover {
-    position: relative;
-}
-
-.custom-gallery .custom-gallery-item .cover:before {
-  /* @include transition-default(); */
-    transition: all 0.3s ease 0s;
-    background: rgba(255, 255, 255, 0);
-    display: block;
-    content: '';
-    top: 0;
-    left: 0;
-    position: absolute;
-    z-index: 2;
-    width: 100%;
-    height: 100%;
-}
-
-.custom-gallery .custom-gallery-item:hover .cover:before {
-    background: rgba(255, 255, 255, 0.95);
-}
-
-.custom-gallery .custom-gallery-item h3 {
-    position: relative;
-    font-size: 1.125rem;
-    padding-top: 0.546875rem;
-}
-
-.custom-gallery .custom-gallery-item .title {
-    opacity: 0.7;
-    margin-left: 0.875rem;
-    font-size: 0.625rem;
-    line-height: 1.625;
-    display: inline-block;
-}
-
-.custom-gallery .custom-gallery-item .title:before {
-    content: '|';
-    padding-right: 0.875rem;
-}
-
-.custom-gallery .custom-gallery-item .category {
-    font-size: 0.625rem;
-    line-height: 1.625;
-    display: inline-block;
-    position: absolute;
-    bottom: 0.875rem;
-    right: 0;
-    background: #EC5E79;
-    border-radius: 25px;
-    padding: 0.0875rem 1.1375rem;
-    color: #fff;
-}
-
-.custom-gallery .custom-gallery-item .category a {
-    color: #fff;
-}
-
-.custom-gallery .custom-gallery-item .category:hover {
-    background: #C56263;
-}
-
-.custom-gallery .custom-gallery-item .image {
-    width: 100%;
-    display: block;
-    overflow: hidden;
-    position: relative;
-    outline: 0;
-    background: #ddd;
-    border: 1px solid #E7E7E7;
-}
-
-.custom-gallery .custom-gallery-item .cover img {
-    width: 100%;
-}
-
-/* ====================================================== 
    Form                                     
 /* ====================================================== */
 /* 1) Controls */
@@ -3892,6 +3749,149 @@ ul.entry-meta {
         border-radius: 50px;
         width: 100%;
     }
+}
+
+/* ====================================================== 
+   Features
+/* ====================================================== */
+.custom-feature .icon i {
+    border: 1px #090909 solid;
+    border-radius: 100%;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    transition: .1s ease-in-out;
+    font-size: 32px;
+}
+
+.custom-feature .icon-side i {
+    margin-right: .4em;
+}
+
+.custom-feature .title {
+    font-size: 18px;
+    letter-spacing: 0;
+}
+
+.custom-feature .title i {
+    transition: .1s ease-in-out;
+}
+
+.custom-feature .title:hover i {
+    transform: rotate(30deg);
+}
+
+.custom-feature .desc {
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    line-height: 1.6;
+    padding: .2em 0 1.5em;
+}
+
+.custom-feature .desc.desc-singlerow {
+    padding-bottom: 1.5em;
+}
+
+/* ====================================================== 
+   Gallery     
+/* ====================================================== */
+.custom-gallery .custom-gallery-item {
+    transition: none;
+    position: relative;
+    text-align: left;
+}
+
+.custom-gallery .custom-gallery-item .link-to {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    z-index: 3;
+    opacity: 0;
+    margin-top: -1rem;
+  /* Vertical Center */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.custom-gallery .custom-gallery-item:hover .link-to {
+    opacity: 1;
+}
+
+.custom-gallery .custom-gallery-item .cover {
+    position: relative;
+}
+
+.custom-gallery .custom-gallery-item .cover:before {
+  /* @include transition-default(); */
+    transition: all 0.3s ease 0s;
+    background: rgba(255, 255, 255, 0);
+    display: block;
+    content: '';
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+}
+
+.custom-gallery .custom-gallery-item:hover .cover:before {
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.custom-gallery .custom-gallery-item h3 {
+    position: relative;
+    font-size: 1.125rem;
+    padding-top: 0.546875rem;
+}
+
+.custom-gallery .custom-gallery-item .title {
+    opacity: 0.7;
+    margin-left: 0.875rem;
+    font-size: 0.625rem;
+    line-height: 1.625;
+    display: inline-block;
+}
+
+.custom-gallery .custom-gallery-item .title:before {
+    content: '|';
+    padding-right: 0.875rem;
+}
+
+.custom-gallery .custom-gallery-item .category {
+    font-size: 0.625rem;
+    line-height: 1.625;
+    display: inline-block;
+    position: absolute;
+    bottom: 0.875rem;
+    right: 0;
+    background: #EC5E79;
+    border-radius: 25px;
+    padding: 0.0875rem 1.1375rem;
+    color: #fff;
+}
+
+.custom-gallery .custom-gallery-item .category a {
+    color: #fff;
+}
+
+.custom-gallery .custom-gallery-item .category:hover {
+    background: #C56263;
+}
+
+.custom-gallery .custom-gallery-item .image {
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    position: relative;
+    outline: 0;
+    background: #ddd;
+    border: 1px solid #E7E7E7;
+}
+
+.custom-gallery .custom-gallery-item .cover img {
+    width: 100%;
 }
 
 /* ====================================================== 

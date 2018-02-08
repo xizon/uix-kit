@@ -129,16 +129,12 @@
 
     <!-- Basic Script -->
     <script src="assets/js/min/jquery.mousewheel.min.js?ver=3.1.12"></script>
-    <script src="assets/js/min/jquery.easing.min.js?ver=1.3"></script> 
-    <script src="assets/js/min/jquery.bgParallax.min.js?ver=1.1.3"></script> 
+    <script src="assets/js/min/jquery.easing.min.js?ver=1.3"></script>
     <script src="assets/js/min/jquery.waitforimages.min.js?ver=1.0"></script>
-    <script src="assets/js/min/videojs-ie8.min.js?ver=1.1"></script> 
     <script src="assets/js/min/video.min.js?ver=5.19"></script> 
 	<script src="assets/js/min/jquery.waypoints.min.js?ver=4.0.1"></script> 
 	<script src="assets/js/min/template7.min.js?ver=1.2.5"></script>
     
-    <!-- Mobile  -->
-    <script src="assets/js/min/jquery.sidr.min.js?ver=2.2.1"></script>
     
     <!-- Slideshow  -->
     <script src="assets/js/min/jquery.flexslider.min.js?ver=2.6.2"></script>

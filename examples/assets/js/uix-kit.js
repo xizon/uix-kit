@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.0.5
+ * ## Version             :  1.0.6
  * ## Last Update         :  February 8, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -2675,6 +2675,78 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
+/*
+Plugin: jQuery Parallax
+Version 1.1.3
+Author: Ian Lunn
+Twitter: @IanLunn
+Author URL: http://www.ianlunn.co.uk/
+Plugin URL: http://www.ianlunn.co.uk/plugins/jquery-parallax/
+
+Dual licensed under the MIT and GPL licenses:
+http://www.opensource.org/licenses/mit-license.php
+http://www.gnu.org/licenses/gpl.html
+*/
+
+(function( $ ){
+	var $window = $(window);
+	var windowHeight = $window.height();
+
+	$window.resize(function () {
+		windowHeight = $window.height();
+	});
+
+	$.fn.bgParallax = function(xpos, speedFactor, outerHeight) {
+		var $this = $(this);
+		var getHeight;
+		var firstTop;
+		var paddingTop = 0;
+		
+		//get the starting position of each element to have parallax applied to it		
+		$this.each(function(){
+		    firstTop = $this.offset().top;
+		});
+
+		if (outerHeight) {
+			getHeight = function(jqo) {
+				return jqo.outerHeight(true);
+			};
+		} else {
+			getHeight = function(jqo) {
+				return jqo.height();
+			};
+		}
+			
+		// setup defaults if arguments aren't specified
+		if (arguments.length < 1 || xpos === null) xpos = "50%";
+		if (arguments.length < 2 || speedFactor === null) speedFactor = 0.1;
+		if (arguments.length < 3 || outerHeight === null) outerHeight = true;
+		
+		// function to be called whenever the window is scrolled or resized
+		function update(){
+			var pos = $window.scrollTop();				
+
+			$this.each(function(){
+				var $element = $(this);
+				var top = $element.offset().top;
+				var height = getHeight($element);
+
+				// Check if totally above or totally below viewport
+				if (top + height < pos || top > pos + windowHeight) {
+					return;
+				}
+
+				$this.css('backgroundPosition', xpos + " " + Math.round((firstTop - pos) * speedFactor) + "px");
+			});
+		}		
+
+		$window.bind('scroll', update).resize(update);
+		update();
+	};
+})(jQuery);
+
+
+
 /*! 
  *************************************
  * Periodical Scroll
@@ -3643,6 +3715,87 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
+/*! 
+ *************************************
+ * Testimonials Carousel
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+    
+		var $obj = $( '.custom-testimonials .flexslider' );
+		$obj.flexslider({
+			animation         : 'slide',
+			slideshow         : true,
+			smoothHeight      : true,
+			controlNav        : true,
+			manualControls    : '.slides-custom-control li',
+			directionNav      : false,
+			animationSpeed    : 600,
+			slideshowSpeed    : 7000,
+			selector          : ".slides > li",
+			drag              : true,
+			start: function(slider){
+				$obj.on( 'mousedown', function( e ) {
+					if ( $obj.data( 'flexslider' ).animating ) {
+						return;
+					}
+						
+					$( this ).addClass('dragging');
+					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
+					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
+					$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
+					$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );
+				} );
+			
+				$obj.on( 'mouseup', function( e ) {
+					if ( $obj.data('flexslider').animating ) {
+						return;
+					}
+						
+					$( this ).removeClass('dragging');
+					var origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
+					    origin_mouse_y = $( this ).data( 'origin_mouse_y' );
+					
+					if ( 'horizontal' === $obj.data('flexslider').vars.direction ) {
+						if ( e.pageX > origin_mouse_x ) {
+							$obj.flexslider('prev');
+						}
+						if ( e.pageX < origin_mouse_x ) {
+							$obj.flexslider('next');
+						}
+					} else {
+						if ( e.pageY > origin_mouse_y ) {
+							$obj.flexslider('prev');
+						}
+						if ( e.pageY < origin_mouse_y ) {
+							$obj.flexslider('next');
+						}
+					}
+				} );
+			}
+		});
+		
+		
+    };
+
+    theme.testimonials = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
+
+
+
+
 
 /*! 
  *************************************
@@ -3806,87 +3959,6 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
-
-
-/*! 
- *************************************
- * Testimonials Carousel
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-    
-    var documentReady = function( $ ) {
-    
-		var $obj = $( '.custom-testimonials .flexslider' );
-		$obj.flexslider({
-			animation         : 'slide',
-			slideshow         : true,
-			smoothHeight      : true,
-			controlNav        : true,
-			manualControls    : '.slides-custom-control li',
-			directionNav      : false,
-			animationSpeed    : 600,
-			slideshowSpeed    : 7000,
-			selector          : ".slides > li",
-			drag              : true,
-			start: function(slider){
-				$obj.on( 'mousedown', function( e ) {
-					if ( $obj.data( 'flexslider' ).animating ) {
-						return;
-					}
-						
-					$( this ).addClass('dragging');
-					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
-					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
-					$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
-					$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );
-				} );
-			
-				$obj.on( 'mouseup', function( e ) {
-					if ( $obj.data('flexslider').animating ) {
-						return;
-					}
-						
-					$( this ).removeClass('dragging');
-					var origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
-					    origin_mouse_y = $( this ).data( 'origin_mouse_y' );
-					
-					if ( 'horizontal' === $obj.data('flexslider').vars.direction ) {
-						if ( e.pageX > origin_mouse_x ) {
-							$obj.flexslider('prev');
-						}
-						if ( e.pageX < origin_mouse_x ) {
-							$obj.flexslider('next');
-						}
-					} else {
-						if ( e.pageY > origin_mouse_y ) {
-							$obj.flexslider('prev');
-						}
-						if ( e.pageY < origin_mouse_y ) {
-							$obj.flexslider('next');
-						}
-					}
-				} );
-			}
-		});
-		
-		
-    };
-
-    theme.testimonials = {
-        documentReady : documentReady        
-    };
-
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
-
-
-
-
-
 
 
 

@@ -5,6 +5,8 @@
 
 <a href="https://uiux.cc/uix-kit" target="_blank"><img src="https://github.com/xizon/uix-kit/blob/master/_screenshots/cover.jpg" width="300" height="300"></a>
 
+[![NPM][npm-icon]][npm-link]
+
 
 ## Description
 
