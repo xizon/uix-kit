@@ -18,6 +18,7 @@ var gulp              = require('gulp'),
 
 
 var globs = {
+	phpTar       : 'examples/assets/json/*.php',
 	jsTar        : 'examples/assets/js',
 	cssTar       : 'examples/assets/css',
 	cssRTLTar    : 'examples/assets/css/rtl',
@@ -30,7 +31,7 @@ var globs = {
 
 
 
-var customWebsiteVersion     = '1.0.7',
+var customWebsiteVersion     = '1.0.8',
 	customWebsiteTitle       = 'Uix Kit Demo',
 	customWebsiteDesc        = 'Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap',
 	customWebsiteCanonical   = '<link rel="canonical" href="https://uiux.cc" />',
@@ -101,9 +102,10 @@ gulp.task('webpack', function(done) {
 	var server = new WebpackDevServer(compiler);
 	server.listen(8080, "localhost", function() {});
 	// server.close();
+	
+
 
 });
-
 
 
 /*! 

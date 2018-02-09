@@ -1,5 +1,13 @@
 # Changelog
 
+
+#### = 1.0.8 (February 9, 2018) =
+
+
+* Tweak: Added "no gutter" mode for seamless grid systems.
+
+
+
 #### = 1.0.7 (February 8, 2018) =
 
 * New: Add a new module "Periodical Scroll".

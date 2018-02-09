@@ -155,6 +155,10 @@ Finding bugs, sending pull requests or improving our docs - any contribution is 
 How to use and quickly understand, please [check out the documentation](DOCUMENTATION.md)
 
 
+## Buy Me a Coffee
+Donations would be more than welcome :)
+
+[![Donate](https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PYZLU7UZNQ6CE)
 
 
 ## Browser Support
