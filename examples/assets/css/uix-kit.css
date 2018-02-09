@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.0.6
+ * ## Version             :  1.0.7
  * ## Last Update         :  February 9, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -17,70 +17,6 @@
  * ## Released under the MIT license.
  */
 
-/* ====================================================== 
-   Accordion 
-/* ====================================================== */
-.custom-accordion dl {
-    position: relative;
-    background: white;
-    transition: .1s ease-in-out;
-}
-
-.custom-accordion dl::before {
-    content: '';
-    position: absolute;
-    display: block;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    pointer-events: none;
-    box-shadow: 0 -1px 0 #e5e5e5, 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.24);
-}
-
-.custom-accordion dt {
-    padding: 1rem;
-    -webkit-touch-callout: none;
-    user-select: none;
-}
-
-.custom-accordion dt a {
-    display: block;
-}
-
-.custom-accordion dd {
-    width: calc(100% - 2rem);
-    padding: 1rem;
-    font-size: 0.875rem;
-    display: none;
-}
-
-.custom-accordion dl.active {
-    height: auto;
-    margin: 1rem 0;
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.16), 0 6px 12px rgba(0, 0, 0, 0.32);
-}
-
-.custom-accordion dl.active dt {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.18);
-}
-
-.custom-accordion dl dt:before {
-    position: absolute;
-    display: block;
-    content: '\203a';
-    font-size: 18pt;
-    right: 1rem;
-    top: .5rem;
-    transition: .1s ease-in-out;
-    color: rgba(0, 0, 0, 0.54);
-}
-
-.custom-accordion dl.active dt:before {
-    transform: rotate(90deg);
-}
-
-/* Actived status */
 /*
 	
 	COLOR PALETTE
@@ -950,6 +886,14 @@ section.site-google-map, .section.site-google-map {
     position: relative;
 }
 
+.seamless-grid-container .seamless-grid.no-gutter {
+    width: 100%;
+}
+
+.seamless-grid-container .seamless-grid.no-gutter > [class*='seamless-col-'] {
+    padding-right: 0 !important;
+}
+
 .seamless-grid-container [class*='seamless-col-'] {
     float: left;
     padding-right: 15px;
@@ -1053,6 +997,10 @@ section.site-google-map, .section.site-google-map {
     /* 2 columns */;
     }
 
+    .seamless-grid-container .seamless-grid.no-gutter {
+        width: calc(100% + 15px);
+    }
+
     .seamless-grid-container [class*='seamless-col-'] {
         float: none;
         width: calc(100% - 15px);
@@ -1066,6 +1014,13 @@ section.site-google-map, .section.site-google-map {
   .seamless-grid-container .seamless-grid.loop .seamless-col-1-6:last-of-type {
         padding-right: 15px;
         width: 100%;
+    }
+
+    .seamless-grid-container .seamless-grid.loop.no-gutter .seamless-col-1-2:last-of-type,
+  .seamless-grid-container .seamless-grid.loop.no-gutter .seamless-col-1-3:last-of-type,
+  .seamless-grid-container .seamless-grid.loop.no-gutter .seamless-col-1-4:last-of-type,
+  .seamless-grid-container .seamless-grid.loop.no-gutter .seamless-col-1-6:last-of-type {
+        width: calc(100% - 15px);
     }
 
     .seamless-grid-container .seamless-grid.loop .seamless-col-1-2:last-of-type .content,
@@ -1089,12 +1044,25 @@ section.site-google-map, .section.site-google-map {
         width: 50%;
     }
 
+    .seamless-grid-container .seamless-grid.loop.use-2.no-gutter .seamless-col-1-2:last-of-type,
+  .seamless-grid-container .seamless-grid.loop.use-2.no-gutter .seamless-col-1-3:last-of-type,
+  .seamless-grid-container .seamless-grid.loop.use-2.no-gutter .seamless-col-1-4:last-of-type,
+  .seamless-grid-container .seamless-grid.loop.use-2.no-gutter .seamless-col-1-6:last-of-type {
+        width: calc(50% - 7.5px);
+    }
+
     .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-6,
   .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-4,
   .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-3 {
         width: 50%;
         float: left;
         margin-bottom: 0;
+    }
+
+    .seamless-grid-container .seamless-grid.use-2.no-gutter .seamless-col-1-6,
+  .seamless-grid-container .seamless-grid.use-2.no-gutter .seamless-col-1-4,
+  .seamless-grid-container .seamless-grid.use-2.no-gutter .seamless-col-1-3 {
+        width: calc(50% - 7.5px);
     }
 
     .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-6:nth-child(2n+1),
@@ -3089,6 +3057,70 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
+   Accordion 
+/* ====================================================== */
+.custom-accordion dl {
+    position: relative;
+    background: white;
+    transition: .1s ease-in-out;
+}
+
+.custom-accordion dl::before {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    box-shadow: 0 -1px 0 #e5e5e5, 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.24);
+}
+
+.custom-accordion dt {
+    padding: 1rem;
+    -webkit-touch-callout: none;
+    user-select: none;
+}
+
+.custom-accordion dt a {
+    display: block;
+}
+
+.custom-accordion dd {
+    width: calc(100% - 2rem);
+    padding: 1rem;
+    font-size: 0.875rem;
+    display: none;
+}
+
+.custom-accordion dl.active {
+    height: auto;
+    margin: 1rem 0;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.16), 0 6px 12px rgba(0, 0, 0, 0.32);
+}
+
+.custom-accordion dl.active dt {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.18);
+}
+
+.custom-accordion dl dt:before {
+    position: absolute;
+    display: block;
+    content: '\203a';
+    font-size: 18pt;
+    right: 1rem;
+    top: .5rem;
+    transition: .1s ease-in-out;
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.custom-accordion dl.active dt:before {
+    transform: rotate(90deg);
+}
+
+/* Actived status */
+/* ====================================================== 
    Button                 
 /* ====================================================== */
 /* 1) Common button styles */
@@ -3361,6 +3393,14 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
+   Counter    
+/* ====================================================== */
+[data-counter-number] {
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+    padding: 2rem;
+}
+
+/* ====================================================== 
    Features
 /* ====================================================== */
 .custom-feature .icon i {
@@ -3400,14 +3440,6 @@ ul.entry-meta {
 
 .custom-feature .desc.desc-singlerow {
     padding-bottom: 1.5em;
-}
-
-/* ====================================================== 
-   Counter    
-/* ====================================================== */
-[data-counter-number] {
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
-    padding: 2rem;
 }
 
 /* ====================================================== 

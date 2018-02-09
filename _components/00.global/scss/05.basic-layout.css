@@ -1,0 +1,236 @@
+/* ====================================================== 
+   5. Basic Layout Styles                                        
+/* ====================================================== */
+/* 5.1 Basic */
+.fl {
+  float: left; }
+
+.fr {
+  float: right; }
+
+.t-r {
+  text-align: right; }
+
+.t-l {
+  text-align: left; }
+
+.t-c {
+  text-align: center; }
+
+.inline-block {
+  display: inline-block; }
+
+.block {
+  display: block; }
+
+.pos-normal-align, .pos-vertical-align {
+  position: absolute;
+  z-index: 6;
+  width: 100%; }
+
+.pos-normal-align {
+  top: 0; }
+
+.pos-vertical-align {
+  /* Vertical Center */
+  top: 50%;
+  transform: translateY(-50%); }
+  .pos-vertical-align.relative {
+    position: relative; }
+
+@media all and (max-width: 768px) {
+  .pos-vertical-align.relative {
+    top: 0;
+    transform: none;
+    padding-top: 1.5rem; } }
+.center-vertically {
+  display: table;
+  width: 100%;
+  height: 100%; }
+  .center-vertically > div {
+    display: table-cell;
+    vertical-align: middle; }
+
+.overflow-hidden-x {
+  overflow-x: hidden; }
+
+.overflow-hidden {
+  overflow: hidden; }
+
+.height-10 {
+  height: 10vh !important; }
+
+.height-20 {
+  height: 20vh !important; }
+
+.height-30 {
+  height: 30vh !important; }
+
+.height-40 {
+  height: 40vh !important; }
+
+.height-50 {
+  height: 50vh !important; }
+
+.height-60 {
+  height: 60vh !important; }
+
+.height-70 {
+  height: 70vh !important; }
+
+.height-80 {
+  height: 80vh !important; }
+
+.height-90 {
+  height: 90vh !important; }
+
+.height-100 {
+  height: 100vh !important; }
+
+@media all and (max-width: 768px) {
+  .height-100, .height-90, .height-80, .height-70, .height-60, .height-50, .height-40, .height-30, .height-20, .height-10 {
+    height: auto !important; } }
+/* 5.2 Main Wrapper */
+/* Note: Do not use the "transform" property, otherwise it may affect the internal elements */
+.wrapper {
+  min-height: 100%;
+  width: 100%;
+  overflow: hidden; }
+
+/* 5.3 Seamless Grid */
+.seamless-grid-container {
+  width: 100%; }
+  .seamless-grid-container .seamless-grid,
+  .seamless-grid-container [class*='seamless-col-'] {
+    box-sizing: border-box; }
+  .seamless-grid-container .seamless-grid {
+    width: calc( 100% + 15px ); }
+    .seamless-grid-container .seamless-grid:after {
+      /* Or @extend clearfix */
+      content: "";
+      display: table;
+      clear: both; }
+    .seamless-grid-container .seamless-grid .content {
+      word-wrap: break-word;
+      position: relative; }
+    .seamless-grid-container .seamless-grid.no-gutter {
+      width: 100%; }
+      .seamless-grid-container .seamless-grid.no-gutter > [class*='seamless-col-'] {
+        padding-right: 0 !important; }
+  .seamless-grid-container [class*='seamless-col-'] {
+    float: left;
+    padding-right: 15px;
+    margin-bottom: 7.5px; }
+    .seamless-grid .seamless-grid-container [class*='seamless-col-']:last-of-type {
+      padding-right: 0; }
+    .seamless-grid .seamless-grid-container [class*='seamless-col-']:last-of-type .content {
+      width: calc(100% - 15px); }
+  .seamless-grid-container .seamless-col-2-3 {
+    width: 66.666666666667%; }
+  .seamless-grid-container .seamless-col-1-3 {
+    width: 33.333333333333%; }
+  .seamless-grid-container .seamless-col-1-2 {
+    width: 50%; }
+  .seamless-grid-container .seamless-col-1-4 {
+    width: 25%; }
+  .seamless-grid-container .seamless-col-3-4 {
+    width: 75%; }
+  .seamless-grid-container .seamless-col-1-5 {
+    width: 20%; }
+  .seamless-grid-container .seamless-col-2-5 {
+    width: 40%; }
+  .seamless-grid-container .seamless-col-3-5 {
+    width: 60%; }
+  .seamless-grid-container .seamless-col-4-5 {
+    width: 80%; }
+  .seamless-grid-container .seamless-col-1-6 {
+    width: 16.66666666666667%; }
+  .seamless-grid-container .seamless-grid.loop .seamless-col-1-2:nth-child(2n+1),
+  .seamless-grid-container .seamless-grid.loop .seamless-col-1-3:nth-child(3n+1),
+  .seamless-grid-container .seamless-grid.loop .seamless-col-1-4:nth-child(4n+1),
+  .seamless-grid-container .seamless-grid.loop .seamless-col-1-6:nth-child(6n+1) {
+    clear: both; }
+
+@media all and (max-width: 991px) {
+  .seamless-grid-container {
+    /* Loop */
+    /* 2 columns */ }
+    .seamless-grid-container .seamless-grid.loop .seamless-col-1-3:nth-child(3n+1) {
+      clear: none; }
+    .seamless-grid-container .seamless-grid.loop .seamless-col-1-4,
+    .seamless-grid-container .seamless-grid.loop .seamless-col-1-3 {
+      width: 50%; }
+    .seamless-grid-container .seamless-grid.loop .seamless-col-1-4:nth-child(2n+1),
+    .seamless-grid-container .seamless-grid.loop .seamless-col-1-3:nth-child(2n+1) {
+      clear: both; }
+    .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-6,
+    .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-4,
+    .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-3 {
+      width: 50%;
+      float: left; }
+    .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-6:nth-child(2n+1),
+    .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-4:nth-child(2n+1),
+    .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-3:nth-child(2n+1) {
+      padding-right: 15px;
+      clear: both; } }
+@media all and (max-width: 768px) {
+  .seamless-grid-container {
+    /* Loop */
+    /* Loop & 2 columns */
+    /* 2 columns */ }
+    .seamless-grid-container .seamless-grid.no-gutter {
+      width: calc(100% + 15px); }
+    .seamless-grid-container [class*='seamless-col-'] {
+      float: none;
+      width: calc(100% - 15px);
+      padding-left: 0;
+      padding-right: 0; }
+    .seamless-grid-container .seamless-grid.loop .seamless-col-1-2:last-of-type,
+    .seamless-grid-container .seamless-grid.loop .seamless-col-1-3:last-of-type,
+    .seamless-grid-container .seamless-grid.loop .seamless-col-1-4:last-of-type,
+    .seamless-grid-container .seamless-grid.loop .seamless-col-1-6:last-of-type {
+      padding-right: 15px;
+      width: 100%; }
+    .seamless-grid-container .seamless-grid.loop.no-gutter .seamless-col-1-2:last-of-type,
+    .seamless-grid-container .seamless-grid.loop.no-gutter .seamless-col-1-3:last-of-type,
+    .seamless-grid-container .seamless-grid.loop.no-gutter .seamless-col-1-4:last-of-type,
+    .seamless-grid-container .seamless-grid.loop.no-gutter .seamless-col-1-6:last-of-type {
+      width: calc(100% - 15px); }
+    .seamless-grid-container .seamless-grid.loop .seamless-col-1-2:last-of-type .content,
+    .seamless-grid-container .seamless-grid.loop .seamless-col-1-3:last-of-type .content,
+    .seamless-grid-container .seamless-grid.loop .seamless-col-1-4:last-of-type .content,
+    .seamless-grid-container .seamless-grid.loop .seamless-col-1-6:last-of-type .content {
+      width: 100%; }
+    .seamless-grid-container .seamless-grid.loop .seamless-col-1-2,
+    .seamless-grid-container .seamless-grid.loop .seamless-col-1-3,
+    .seamless-grid-container .seamless-grid.loop .seamless-col-1-4,
+    .seamless-grid-container .seamless-grid.loop .seamless-col-1-6 {
+      width: calc(100% - 15px); }
+    .seamless-grid-container .seamless-grid.loop.use-2 .seamless-col-1-2:last-of-type,
+    .seamless-grid-container .seamless-grid.loop.use-2 .seamless-col-1-3:last-of-type,
+    .seamless-grid-container .seamless-grid.loop.use-2 .seamless-col-1-4:last-of-type,
+    .seamless-grid-container .seamless-grid.loop.use-2 .seamless-col-1-6:last-of-type {
+      width: 50%; }
+    .seamless-grid-container .seamless-grid.loop.use-2.no-gutter .seamless-col-1-2:last-of-type,
+    .seamless-grid-container .seamless-grid.loop.use-2.no-gutter .seamless-col-1-3:last-of-type,
+    .seamless-grid-container .seamless-grid.loop.use-2.no-gutter .seamless-col-1-4:last-of-type,
+    .seamless-grid-container .seamless-grid.loop.use-2.no-gutter .seamless-col-1-6:last-of-type {
+      width: calc(50% - 7.5px); }
+    .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-6,
+    .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-4,
+    .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-3 {
+      width: 50%;
+      float: left;
+      margin-bottom: 0; }
+    .seamless-grid-container .seamless-grid.use-2.no-gutter .seamless-col-1-6,
+    .seamless-grid-container .seamless-grid.use-2.no-gutter .seamless-col-1-4,
+    .seamless-grid-container .seamless-grid.use-2.no-gutter .seamless-col-1-3 {
+      width: calc(50% - 7.5px); }
+    .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-6:nth-child(2n+1),
+    .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-4:nth-child(2n+1),
+    .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-3:nth-child(2n+1) {
+      clear: both; }
+    .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-6:nth-child(2n+0),
+    .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-4:nth-child(2n+0),
+    .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-3:nth-child(2n+0) {
+      padding-right: 15px; } }
