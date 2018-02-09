@@ -5,6 +5,14 @@ $total = $_POST[ 'total' ]; //The total pages.
 $page  = $_POST[ 'page' ]; //The current page to load.
 $per   = $_POST[ 'per' ];  //The amount to load each time.
 
+//Custom field
+$title = 'Default Title';
+if ( isset( $_POST[ 'name1' ] ) && $_POST[ 'name1' ] != '' ) {
+	$title = $_POST[ 'name1' ];
+}
+
+
+
 if ( $page == 5 ) {
 	
 	echo 'not';
@@ -108,7 +116,7 @@ if ( $page == 2 ) {
 		
 			{
 			  "img"     : "assets-demo/images/test-img-big-3.jpg",
-			  "title"   : "Project Title - PAGE 2",
+			  "title"   : "'.$title.'  - PAGE 2",
 			  "time"    : "December 10, 2017",
 			  "author"  : "David",
 			  "cat"     : "Art, Design",
@@ -120,7 +128,7 @@ if ( $page == 2 ) {
 			},
 			{
 			  "img"     : "assets-demo/images/test-img-big-5.jpg",
-			  "title"   : "Project Title Here - PAGE 2",
+			  "title"   : "'.$title.'  - PAGE 2",
 			  "time"    : "December 9, 2017",
 			  "author"  : "David",
 			  "cat"     : "Art, Design",
@@ -131,7 +139,7 @@ if ( $page == 2 ) {
 			},
 			{
 			  "img"     : "assets-demo/images/test-img-big-2.jpg",
-			  "title"   : "Project Title Here - PAGE 2",
+			  "title"   : "'.$title.'  - PAGE 2",
 			  "time"    : "December 8, 2017",
 			  "author"  : "David",
 			  "cat"     : "Art, Design",

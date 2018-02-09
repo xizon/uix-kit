@@ -24,8 +24,8 @@ theme = ( function ( theme, $, window, document ) {
 				template7ID      = $this.data( 'ajax-list-temp-id' ),
 				pushContainer    = $this.data( 'ajax-list-push-container-class' ),
 				triggerActive    = $this.data( 'ajax-list-trigger-active-class' );
-			
-			
+	
+
 			$this.attr( 'id', wrapperID );
 			
 			if( typeof curPage === typeof undefined ) {
@@ -82,6 +82,25 @@ theme = ( function ( theme, $, window, document ) {
 				pushContainer = '.portfolio-items-ajax-container';
 			}		
 			
+			
+			
+			//Get all attributes of an element and push the new attributes like "data-*"
+			var curAttrs        = $this.attr(),
+				defaultPostData = '',
+				customPostData  = '';
+			
+			$.each( curAttrs, function( i, val ) {
+				if ( i.indexOf( 'data-ajax-list-field-' ) >= 0 ) {
+					customPostData += '"' + i.replace( 'data-ajax-list-field-', '' ) + '": ' + '"' + val + '", ';	
+				}
+				
+			});
+			customPostData  = customPostData.replace(/,\s*$/, '' );
+			
+
+		
+			
+			//Parse the JSON data
 			if ( jsonFile != '' && template7ID != '' ) {
 				
 				
@@ -108,7 +127,14 @@ theme = ( function ( theme, $, window, document ) {
 								if ( curPage < totalPage+1 ) {
 
 									//Perform dynamic loading
-									ajaxLoadInit( $this, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method );
+									if ( customPostData != '' ) {
+										defaultPostData = JSON.parse( '{ "total": '+totalPage+', "per": '+perShow+', "page": '+curPage+', '+customPostData+' }' );
+									} else {
+										defaultPostData = JSON.parse( '{ "total": '+totalPage+', "per": '+perShow+', "page": '+curPage+' }' );
+									}
+
+									
+									ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method );
 
 								}
 
@@ -146,7 +172,13 @@ theme = ( function ( theme, $, window, document ) {
 
 							
 							//Perform dynamic loading
-							ajaxLoadInit( $this, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method );
+							if ( customPostData != '' ) {
+								defaultPostData = JSON.parse( '{ "total": '+totalPage+', "per": '+perShow+', "page": '+curPage+', '+customPostData+' }' );
+							} else {
+								defaultPostData = JSON.parse( '{ "total": '+totalPage+', "per": '+perShow+', "page": '+curPage+' }' );
+							}
+							
+							ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method );
 						}
 
 
@@ -172,6 +204,7 @@ theme = ( function ( theme, $, window, document ) {
 		 * Ajax with JSON data
 		 *
 		 * @param  {object} ajaxWrapper     - The outermost container of list.
+		 * @param  {object} defaultPostData - Data to be sent to the server which is custom JSON fields.
 		 * @param  {object} trigger         - Trigger ajax loaded button object.
 		 * @param  {number} curPage         - The current page to load.
 		 * @param  {number} perShow         - The amount to load each time.
@@ -183,7 +216,7 @@ theme = ( function ( theme, $, window, document ) {
 		 * @param  {string} method          - The type of request to make, which can be either "POST" or "GET".
 		 * @return {void}                   - The constructor.
 		 */
-		function ajaxLoadInit( ajaxWrapper, trigger, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method ) {
+		function ajaxLoadInit( ajaxWrapper, defaultPostData, trigger, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method ) {
 
 			var $divRoot         = ajaxWrapper,
 				template         = document.getElementById( template7ID ).innerHTML,
@@ -194,7 +227,7 @@ theme = ( function ( theme, $, window, document ) {
 			$.ajax({
 				url      : jsonFile, //Be careful about the format of the JSON file
 				method   : method,
-				data     : { total: totalPage, per: perShow, page: curPage },
+				data     : defaultPostData,
 				dataType : 'json',
 				success  : function (data) { 
 					
@@ -292,3 +325,24 @@ theme = ( function ( theme, $, window, document ) {
 
 }( theme, jQuery, window, document ) );
 
+
+/* Get all attributes of an element using jQuery */
+(function(old) {
+  $.fn.attr = function() {
+    if(arguments.length === 0) {
+      if(this.length === 0) {
+        return null;
+      }
+
+      var obj = {};
+      $.each(this[0].attributes, function() {
+        if(this.specified) {
+          obj[this.name] = this.value;
+        }
+      });
+      return obj;
+    }
+
+    return old.apply(this, arguments);
+  };
+})($.fn.attr);
