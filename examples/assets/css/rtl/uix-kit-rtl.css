@@ -339,19 +339,24 @@ blockquote:before {
 }
 
 /* ====================================================== 
-   25. Note & Tip 
-/* ====================================================== */
-/* Tip */
-.custom-tip > div {
-    margin-left: auto;
-    margin-right: 1rem;
-}
-
-/* ====================================================== 
    Author Card   
 /* ====================================================== */
 .author-card-final {
     text-align: left;
+}
+
+/* ====================================================== 
+   Dropdown Menu
+/* ====================================================== */
+/* Do not use <a> tag */
+.custom-dropdown-trigger > ul {
+    left: auto;
+    right: 0;
+}
+
+.custom-dropdown-trigger > ul:before {
+    left: auto;
+    right: 20px;
 }
 
 /* ====================================================== 
@@ -432,6 +437,14 @@ blockquote:before {
 .flexslider,
 .custom-theme-flexslider {
     direction: ltr !important;
+}
+
+/* ====================================================== 
+   ToolTip
+/* ====================================================== */
+.custom-tip > div {
+    margin-left: auto;
+    margin-right: 1rem;
 }
 
 /*# sourceMappingURL=uix-kit-rtl.css.map */

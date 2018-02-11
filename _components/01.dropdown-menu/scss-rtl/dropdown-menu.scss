@@ -1,0 +1,25 @@
+/* ====================================================== 
+   Dropdown Menu
+/* ====================================================== */
+/* Do not use <a> tag */
+.custom-dropdown-trigger {
+
+	  > ul {
+		left: auto;
+		right: 0;
+		
+		  
+		&:before {
+		  left: auto; 
+		  right: 20px;
+		}
+		
+	  }	
+
+	
+}
+
+
+
+
+
