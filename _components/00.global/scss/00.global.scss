@@ -67,6 +67,7 @@
     24. List of Split
 	25. Note & Tip 
     26. Video
+    27. Dropdown
 
 
 	
@@ -93,7 +94,7 @@ $primary-bg-color      : transparent;
 
 @mixin transition-default(){
 	/* @include transition-default(); */
-	transition: all 0.3s ease 0s;
+	transition: all 0.3s ease;
 }
 
 
@@ -118,4 +119,20 @@ $primary-bg-color      : transparent;
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	
+}
+
+
+/* Ripple Effect */
+@mixin anime-ripple(){
+	/* @include ianime-ripple(); */
+	animation: ripple 0.6s linear infinite;
+}
+
+@keyframes ripple {
+  0% {
+      box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1), 0 0 0 20px rgba(255, 255, 255, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1);
+  }
+  100% {
+      box-shadow: 0 0 0 20px rgba(255, 255, 255, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1), 0 0 0 80px rgba(255, 255, 255, 0);
+  }
 }
