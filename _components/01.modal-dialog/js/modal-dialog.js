@@ -41,6 +41,12 @@ theme = ( function ( theme, $, window, document ) {
 			$( this ).attr( 'href', 'javascript:void(0)' );
 			$obj.find( '.content' ).addClass( 'no-fullscreen' );
 			
+			
+			if ( $( this ).data( 'video-win' ) ) {
+				$obj.find( '.content' ).css( 'overflow-y', 'hidden' );
+			}
+			
+			
 			if ( $obj.length > 0 ) {
 				if( typeof dataH != typeof undefined && dataH != '' ) {
 					$obj.css( {'height': dataH } );
