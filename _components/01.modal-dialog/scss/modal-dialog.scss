@@ -75,7 +75,7 @@
     overflow: hidden;
   }
   &.active .content {
-    overflow-y: scroll;
+    overflow-y: auto;
   }
   .close-btn {
     box-shadow: 2.5px 4.33px 16px 0px rgba(204, 23, 30, 0.31);

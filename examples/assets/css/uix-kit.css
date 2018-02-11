@@ -4184,7 +4184,7 @@ ul.entry-meta {
 }
 
 .modal-box.active .content {
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .modal-box .close-btn {

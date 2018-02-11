@@ -39,7 +39,7 @@ theme = ( function ( theme, $, window, document ) {
 			
 			// Initializate modal
 			$( this ).attr( 'href', 'javascript:void(0)' );
-			$obj.find( '.content' ).css( 'overflow-y', 'hidden' );
+			$obj.find( '.content' ).addClass( 'no-fullscreen' );
 			
 			if ( $obj.length > 0 ) {
 				if( typeof dataH != typeof undefined && dataH != '' ) {
@@ -74,7 +74,7 @@ theme = ( function ( theme, $, window, document ) {
 		$( document ).on( 'click', '.modal-box .close-btn, .modal-mask', function() {
 			$( '.modal-box' ).removeClass( 'active' );
 			$( '.modal-mask' ).fadeOut( 'fast' );
-			$( '.modal-box' ).find( '.content' ).css( 'overflow-y', 'hidden' );
+			$( '.modal-box' ).find( '.content' ).removeClass( 'no-fullscreen' );
 			$( 'html' ).css( 'overflow-y', 'auto' );
 			setTimeout( function() {
 	
