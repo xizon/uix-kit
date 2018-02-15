@@ -131,3 +131,16 @@
   }
 }
 
+
+
+@media all and (max-width: 768px) { 
+	.custom-tabs {
+	 
+	  &:not(.rotation) li {
+		  width: 100% !important;
+
+	  }
+	
+	}	
+
+}

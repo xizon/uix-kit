@@ -132,10 +132,20 @@ theme = ( function ( theme, $, window, document ) {
 				
 
 				//sliding marker
-				var translateX = $( this ).index() * 100;
-				$this.find( '.marker' ).css({
-					'transform'          : 'translateX( '+translateX+'% )'	
-				});
+				var translateX = $( this ).index() * 100,
+					liHeight   = $this.find( 'ul li:first' ).outerHeight(),
+					translateY = $( this ).index() * liHeight;
+				
+				if ( $( window ).width() <= 768 ) {
+					$this.find( '.marker' ).css({
+						'transform'          : 'translateY( '+translateY+'px )'	
+					});	
+				} else {
+					$this.find( '.marker' ).css({
+						'transform'          : 'translateX( '+translateX+'% )'	
+					});	
+				}
+
 		
 				
 				return false;

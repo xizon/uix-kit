@@ -43,17 +43,7 @@ theme = ( function ( theme, $, window, document ) {
 				
 			} );	
 		
-			
-		
-			//Show Toolbar when viewing site for WordPress
-			var waypoints = $( '.admin-bar .menu-toggle' ).waypoint({
-				handler: function( direction ) {
 
-					$( this.element ).toggleClass( 'spy-scroll-postion', direction === 'down' );
-
-				},
-				offset: -46
-			});
 
 			// Sticky primary navigation
 			var waypoints2 = $( '.menu-container:not(.mobile)' ).waypoint({

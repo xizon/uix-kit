@@ -76,23 +76,3 @@
 }
 
 
-
-/* Mobile */
-
-.menu-toggle {
-  right: auto;
-  left: 30px;
-	
-  span {
-    left: auto;
-    right: 12px;
-  }
-	
-  &.open {
-	  span {
-		right: 7px;
-	  } 
-	  
-  }	
-	
-}

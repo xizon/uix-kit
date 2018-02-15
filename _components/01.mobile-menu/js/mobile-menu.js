@@ -16,6 +16,19 @@ theme = ( function ( theme, $, window, document ) {
 	
 			
 			
+		
+			//Show Toolbar when viewing site for WordPress
+			var waypoints = $( '.admin-bar .menu-toggle' ).waypoint({
+				handler: function( direction ) {
+
+					$( this.element ).toggleClass( 'spy-scroll-postion', direction === 'down' );
+
+				},
+				offset: -46
+			});
+		
+		
+			
 			// Mobile Menu
 			if ( $( '.brand img' ).length > 0 ) {
 				$( '.mobile-brand' ).html( '<img src="'+$( '.brand img' ).attr( 'src' )+'" alt="">' );
@@ -35,7 +48,8 @@ theme = ( function ( theme, $, window, document ) {
 			$.when( $( '.menu-container.mobile' ).length > 0 ).then( function(){
 				
 		
-				$( '.menu-toggle' ).on( 'click', function( e ) {
+				$( '.menu-toggle' ).on( 'touchstart click', function( e ) {
+					e.stopPropagation(); 
 					e.preventDefault();
 
 					$( this ).toggleClass( 'open' );

@@ -7,8 +7,17 @@
 	  cursor: pointer;
 	  position: relative;
 
+	  > input{
+		display: none;
+	  }
+	
+	  > label {
+		cursor: pointer;
+		margin: 0;
+		padding: 0;
+	  }
+	
 	  > ul {
-		
 		position: absolute;
 		top: 100%;
 		left: 0;
@@ -53,10 +62,7 @@
 			  text-decoration: none;
 			}
 			
-			
-		  &.active {
-			color: $highlight-color1;
-		  }
+		
 		  &:first-child {
 			border-radius: 4px 4px 0 0;
 		  }
@@ -70,11 +76,14 @@
 
 	  }	
 	
-	  &:focus > ul, 
-	  &:active > ul {
+		
+	  /* wrapping this in media querry to prevent fails while change screen size and checked inputs */
+	  > :checked ~ ul {
 		display: block;
 		opacity: 1;
+	 
 	  }
+	
 	
 }
 

@@ -8,7 +8,7 @@
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
  * ## Version             :  1.0.8
- * ## Last Update         :  February 11, 2018
+ * ## Last Update         :  February 15, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -327,17 +327,7 @@ theme = ( function ( theme, $, window, document ) {
 				
 			} );	
 		
-			
-		
-			//Show Toolbar when viewing site for WordPress
-			var waypoints = $( '.admin-bar .menu-toggle' ).waypoint({
-				handler: function( direction ) {
 
-					$( this.element ).toggleClass( 'spy-scroll-postion', direction === 'down' );
-
-				},
-				offset: -46
-			});
 
 			// Sticky primary navigation
 			var waypoints2 = $( '.menu-container:not(.mobile)' ).waypoint({
@@ -1861,6 +1851,19 @@ theme = ( function ( theme, $, window, document ) {
 	
 			
 			
+		
+			//Show Toolbar when viewing site for WordPress
+			var waypoints = $( '.admin-bar .menu-toggle' ).waypoint({
+				handler: function( direction ) {
+
+					$( this.element ).toggleClass( 'spy-scroll-postion', direction === 'down' );
+
+				},
+				offset: -46
+			});
+		
+		
+			
 			// Mobile Menu
 			if ( $( '.brand img' ).length > 0 ) {
 				$( '.mobile-brand' ).html( '<img src="'+$( '.brand img' ).attr( 'src' )+'" alt="">' );
@@ -1880,7 +1883,8 @@ theme = ( function ( theme, $, window, document ) {
 			$.when( $( '.menu-container.mobile' ).length > 0 ).then( function(){
 				
 		
-				$( '.menu-toggle' ).on( 'click', function( e ) {
+				$( '.menu-toggle' ).on( 'touchstart click', function( e ) {
+					e.stopPropagation(); 
 					e.preventDefault();
 
 					$( this ).toggleClass( 'open' );
@@ -3906,10 +3910,20 @@ theme = ( function ( theme, $, window, document ) {
 				
 
 				//sliding marker
-				var translateX = $( this ).index() * 100;
-				$this.find( '.marker' ).css({
-					'transform'          : 'translateX( '+translateX+'% )'	
-				});
+				var translateX = $( this ).index() * 100,
+					liHeight   = $this.find( 'ul li:first' ).outerHeight(),
+					translateY = $( this ).index() * liHeight;
+				
+				if ( $( window ).width() <= 768 ) {
+					$this.find( '.marker' ).css({
+						'transform'          : 'translateY( '+translateY+'px )'	
+					});	
+				} else {
+					$this.find( '.marker' ).css({
+						'transform'          : 'translateX( '+translateX+'% )'	
+					});	
+				}
+
 		
 				
 				return false;

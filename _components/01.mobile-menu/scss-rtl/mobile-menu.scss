@@ -1,6 +1,31 @@
 /* ====================================================== 
    Mobile Menu
 /* ====================================================== */
+
+/* Mobile Menu Toggle */
+
+.menu-toggle {
+  right: auto;
+  left: 30px;
+	
+  span {
+    left: auto;
+    right: 12px;
+  }
+	
+  &.open {
+	  span {
+		right: 7px;
+	  } 
+	  
+  }	
+	
+}
+
+
+/* Mobile Menu Container */
+
+
 .menu-container.mobile {
 	left: auto;
 	right: 0;
