@@ -7130,105 +7130,6 @@ li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 {
 }
 
 /* ====================================================== 
-   Testimonials Carousel
-/* ====================================================== */
-.custom-testimonials {
-  /* Required */
-    overflow: hidden;
-}
-
-.custom-testimonials .slides {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.custom-testimonials .slides li {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    cursor: move;
-}
-
-.custom-testimonials .content {
-    position: relative;
-    margin: 0 auto;
-    max-width: calc(100% - 176px);
-    box-shadow: 0 22px 40px 0 #eef4fc;
-    border-radius: 10px;
-    margin-bottom: 100px;
-    padding: 1rem 44px;
-}
-
-.custom-testimonials .signature {
-    font-size: 0.75rem;
-    text-align: center;
-    height: 40px;
-    width: 100%;
-    display: block;
-    font-style: italic;
-}
-
-.custom-testimonials .signature img.avatar,
-.custom-testimonials .signature .avatar img {
-    width: 32px;
-    height: 32px;
-    border-radius: 100%;
-    margin: .3rem 0 0.875rem 0.875rem;
-    vertical-align: middle;
-    display: inline-block;
-}
-
-.custom-testimonials .signature .no-avatar {
-    width: 1px;
-    height: 1px;
-    border: none;
-}
-
-.custom-testimonials .signature strong {
-    font-weight: 700;
-}
-
-.custom-testimonials .signature strong.pure-text {
-    display: inline-block;
-}
-
-@media all and (max-width: 768px) {
-    .custom-testimonials .content {
-        max-width: 100%;
-        margin-bottom: 50px;
-        padding: 1rem 0;
-    }
-}
-
-/* Custom controls */
-.slides-custom-control {
-    font-size: 0;
-    position: absolute;
-    text-align: center;
-    position: relative;
-    width: 100%;
-    display: block;
-    height: 20px;
-    margin-top: -88px;
-    z-index: 5;
-}
-
-.slides-custom-control li {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    margin: .3rem;
-    border-radius: 100%;
-    background: #AEAEAE;
-    opacity: 0.1;
-}
-
-.slides-custom-control li.flex-active {
-    opacity: 0.5;
-}
-
-/* ====================================================== 
    Tabs        
 /* ====================================================== */
 .custom-tabs {
@@ -7370,6 +7271,105 @@ li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 {
     .custom-tabs:not(.rotation) li {
         width: 100% !important;
     }
+}
+
+/* ====================================================== 
+   Testimonials Carousel
+/* ====================================================== */
+.custom-testimonials {
+  /* Required */
+    overflow: hidden;
+}
+
+.custom-testimonials .slides {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.custom-testimonials .slides li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    cursor: move;
+}
+
+.custom-testimonials .content {
+    position: relative;
+    margin: 0 auto;
+    max-width: calc(100% - 176px);
+    box-shadow: 0 22px 40px 0 #eef4fc;
+    border-radius: 10px;
+    margin-bottom: 100px;
+    padding: 1rem 44px;
+}
+
+.custom-testimonials .signature {
+    font-size: 0.75rem;
+    text-align: center;
+    height: 40px;
+    width: 100%;
+    display: block;
+    font-style: italic;
+}
+
+.custom-testimonials .signature img.avatar,
+.custom-testimonials .signature .avatar img {
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+    margin: .3rem 0 0.875rem 0.875rem;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.custom-testimonials .signature .no-avatar {
+    width: 1px;
+    height: 1px;
+    border: none;
+}
+
+.custom-testimonials .signature strong {
+    font-weight: 700;
+}
+
+.custom-testimonials .signature strong.pure-text {
+    display: inline-block;
+}
+
+@media all and (max-width: 768px) {
+    .custom-testimonials .content {
+        max-width: 100%;
+        margin-bottom: 50px;
+        padding: 1rem 0;
+    }
+}
+
+/* Custom controls */
+.slides-custom-control {
+    font-size: 0;
+    position: absolute;
+    text-align: center;
+    position: relative;
+    width: 100%;
+    display: block;
+    height: 20px;
+    margin-top: -88px;
+    z-index: 5;
+}
+
+.slides-custom-control li {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: .3rem;
+    border-radius: 100%;
+    background: #AEAEAE;
+    opacity: 0.1;
+}
+
+.slides-custom-control li.flex-active {
+    opacity: 0.5;
 }
 
 /* ====================================================== 

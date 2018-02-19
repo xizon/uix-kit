@@ -3721,9 +3721,9 @@ theme = ( function ( theme, $, window, document ) {
 		$( '#source-code > #close' ).on( 'click', function() {
 			$( 'html' ).css( 'overflow-y', 'auto' );
 			var uri = window.location.toString();
-			if (uri.indexOf("#") > 0) {
-				var clean_uri = uri.substring(0, uri.indexOf("#"));
-				window.history.replaceState({}, document.title, clean_uri);
+			if ( uri.indexOf( '#' ) > 0 ) {
+				var clean_uri = uri.substring(0, uri.indexOf( '#' ) );
+				window.history.replaceState({}, document.title, clean_uri );
 			}
 			$( '#source-code' ).hide();
 			
@@ -3740,30 +3740,27 @@ theme = ( function ( theme, $, window, document ) {
 
 		//Source code init
 		var sourceCodeBodyClass      = $( 'body' ).attr( 'class' ),
-			sourceCodeBodyClassCode  = ( typeof sourceCodeBodyClass != typeof undefined ) ? 'body class="'+sourceCodeBodyClass+'"' : 'body',
-			pageBodyCode             = $( 'body' ).html();
+			sourceCodeBodyClassCode  = ( typeof sourceCodeBodyClass != typeof undefined ) ? 'body class="'+sourceCodeBodyClass+'"' : 'body';
 		
-		pageBodyCode = removeElements( pageBodyCode, '#view-source, #source-code, #toTop, .modal-mask, .modal-box, .menu-container.mobile' );
-		pageBodyCode = pageBodyCode.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '' )
-								   .replace(/<\!--\s+Your\s+Plugins\s+\&\s+Theme\s+Scripts[\s+|\r?\n|\r](.*)-->/gi, '' )
-								   .replace(/<\!--\s+Modals[\s+|\r?\n|\r](.*)-->/gi, '' )
-			                       .replace(/<\!--\s+Basic Script\s+-->/gi, '' )
-			                       .replace(/<\!--\s+Slideshow\s+-->/gi, '' )
-			                       .replace(/<\!--\s+Masonry\s+-->/gi, '' )
-			                       .replace(/<\!--\s+Filterable\s+-->/gi, '' )	
-		                           .replace(/<\!--\s+\.modal-box\s+end\s+-->/gi, '' )	
-			                       .replace(/<\!--\s+Theme\s+Script\s+-->/gi, '' );
+		$.get( window.location.toString(), function( data ) {
+			var pageBodyCode   = data.split("<body")[1].split(">").slice(1).join(">").split("</body>")[0],
+				pageHeaderCode = data.split("</head>")[0];
+			
+			pageBodyCode   = removeElements( pageBodyCode, '#view-source, #source-code' );
+			pageBodyCode   = pageBodyCode.replace(/[<>]/g, function(m) { return {'<':'&lt;','>':'&gt;'}[m]; });
+			pageHeaderCode = pageHeaderCode.replace(/[<>]/g, function(m) { return {'<':'&lt;','>':'&gt;'}[m]; })
+
+
+			$("<pre />", {
+				"html":   pageHeaderCode + '&lt;/head&gt;\n&lt;'+sourceCodeBodyClassCode+'&gt;\n' + pageBodyCode + '\n&lt;/body&gt;\n&lt;/html&gt;',
+				"class": 'prettyprint lang-html'
+			}).appendTo( '#source-code' );	
+			
+		});
 		
 		
 		
-		$("<pre />", {
-			"html":   '&lt;'+sourceCodeBodyClassCode+'>\n' + 
-					pageBodyCode
-						.replace(/[<>]/g, function(m) { return {'<':'&lt;','>':'&gt;'}[m]; })
-						.replace(/((ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?)/gi,'<a href="$1">$1</a>') + 
-					'\n&lt;/body>',
-			"class": 'prettyprint lang-html'
-		}).appendTo( '#source-code' );
+
 
 		
 	};
