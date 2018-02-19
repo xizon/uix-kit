@@ -1,6 +1,14 @@
 # Changelog
 
 
+#### = 1.1.0 (February 19, 2018) =
+
+* New: Added source code mode to facilitate code calls in demo status.
+* Fix: Fixed some bugs for core javascripts.
+
+
+
+
 #### = 1.0.8 (February 9, 2018) =
 
 

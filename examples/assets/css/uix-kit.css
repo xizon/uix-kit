@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.0.8
- * ## Last Update         :  February 15, 2018
+ * ## Version             :  1.1.0
+ * ## Last Update         :  February 20, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -6851,6 +6851,384 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 }
 
 /* ====================================================== 
+   Source Code        
+/* ====================================================== */
+/* Pretty printing styles. Used with prettify.js. */
+/* Vim sunburst theme by David Leibovic */
+pre .str, code .str {
+    color: #65B042;
+}
+
+/* string  - green */
+pre .kwd, code .kwd {
+    color: #E28964;
+}
+
+/* keyword - dark pink */
+pre .com, code .com {
+    color: #AEAEAE;
+    font-style: italic;
+}
+
+/* comment - gray */
+pre .typ, code .typ {
+    color: #89bdff;
+}
+
+/* type - light blue */
+pre .lit, code .lit {
+    color: #3387CC;
+}
+
+/* literal - blue */
+pre .pun, code .pun {
+    color: #fff;
+}
+
+/* punctuation - white */
+pre .pln, code .pln {
+    color: #fff;
+}
+
+/* plaintext - white */
+pre .tag, code .tag {
+    color: #89bdff;
+}
+
+/* html/xml tag    - light blue */
+pre .atn, code .atn {
+    color: #bdb76b;
+}
+
+/* html/xml attribute name  - khaki */
+pre .atv, code .atv {
+    color: #65B042;
+}
+
+/* html/xml attribute value - green */
+pre .dec, code .dec {
+    color: #3387CC;
+}
+
+/* decimal - blue */
+pre.prettyprint, code.prettyprint {
+    background-color: #000;
+    border-radius: 8px;
+}
+
+pre.prettyprint {
+    width: 95%;
+    margin: 1em auto;
+    padding: 1em;
+    white-space: pre-wrap;
+}
+
+/* Specify class=linenums on a pre to get line numbering */
+ol.linenums {
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #AEAEAE;
+}
+
+/* IE indents via margin-left */
+li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 {
+    list-style-type: none;
+}
+
+/* Alternate shading for lines */
+@media print {
+    pre .str, code .str {
+        color: #060;
+    }
+
+    pre .kwd, code .kwd {
+        color: #006;
+        font-weight: bold;
+    }
+
+    pre .com, code .com {
+        color: #600;
+        font-style: italic;
+    }
+
+    pre .typ, code .typ {
+        color: #404;
+        font-weight: bold;
+    }
+
+    pre .lit, code .lit {
+        color: #044;
+    }
+
+    pre .pun, code .pun {
+        color: #440;
+    }
+
+    pre .pln, code .pln {
+        color: #000;
+    }
+
+    pre .tag, code .tag {
+        color: #006;
+        font-weight: bold;
+    }
+
+    pre .atn, code .atn {
+        color: #404;
+    }
+
+    pre .atv, code .atv {
+        color: #060;
+    }
+}
+
+/* Source Code Button */
+#view-source {
+    position: fixed;
+    background: #fff;
+    z-index: 99997;
+    top: calc(50% - 18px);
+    right: 20px;
+    margin: auto;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid #EC5E79;
+    border-radius: 25px;
+    height: 2rem;
+    width: 2rem;
+    font-size: 0.75rem;
+    padding: 0;
+    outline: none;
+    overflow: hidden;
+    color: #EC5E79;
+    transition: .1s ease-in-out;
+    text-align: center;
+    line-height: 250%;
+    box-shadow: 0 4px 15px 0 rgba(236, 94, 121, 0.35);
+}
+
+#view-source i {
+    font-size: 1rem;
+}
+
+#view-source::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    content: '';
+    border-radius: 50%;
+    display: block;
+    width: 4rem;
+    height: 4rem;
+    line-height: 4rem;
+    left: -1rem;
+    text-align: center;
+    transition: box-shadow .3s ease-out;
+    z-index: -1;
+}
+
+#view-source:hover {
+    color: #fff;
+    box-shadow: 0 4px 15px 0 rgba(236, 94, 121, 0.75);
+}
+
+#view-source:hover::before {
+    box-shadow: inset 0 0 0 4rem #EC5E79;
+}
+
+@media all and (max-width: 768px) {
+    #view-source {
+        display: none;
+    }
+}
+
+/* Source Code Area */
+#source-code {
+    display: none;
+    position: fixed;
+    z-index: 99997;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+#source-code:target {
+    display: block;
+}
+
+#source-code pre {
+    padding: 20px;
+    font: 14px/1.6 Monaco, Courier, MonoSpace;
+    margin: 50px auto;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    width: 80%;
+    height: 80%;
+    overflow: auto;
+}
+
+#source-code pre a {
+    text-decoration: none;
+    color: #00ccff !important;
+}
+
+#source-code pre a span {
+    text-decoration: none;
+    color: #00ccff !important;
+}
+
+#source-code #close {
+    position: absolute;
+    top: 30px;
+    left: 10%;
+    margin-left: -18px;
+    box-shadow: 2.5px 4.33px 16px 0px rgba(204, 23, 30, 0.31);
+    border-radius: 50%;
+    background: #cc171e;
+    width: 36px;
+    height: 36px;
+    display: inline-block;
+    text-align: center;
+    line-height: 34px;
+    overflow: hidden;
+    transform: rotate(45deg);
+    text-decoration: none;
+}
+
+#source-code .prettyprint {
+    border-radius: 2px;
+    box-shadow: 0px 0px 28px -4px rgba(0, 0, 0, 0.62);
+}
+
+#source-code .prettyprint::-webkit-scrollbar-track {
+    border-radius: 0px;
+    background-color: #F1F1F1;
+}
+
+#source-code .prettyprint::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    background-color: #F5F5F5;
+}
+
+#source-code .prettyprint::-webkit-scrollbar-thumb {
+    border-radius: 0px;
+    background-color: #000;
+}
+
+#source-code #close:after {
+    font-family: Arial, sans-serif;
+    content: '+';
+    color: #fff;
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+/* ====================================================== 
+   Testimonials Carousel
+/* ====================================================== */
+.custom-testimonials {
+  /* Required */
+    overflow: hidden;
+}
+
+.custom-testimonials .slides {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.custom-testimonials .slides li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    cursor: move;
+}
+
+.custom-testimonials .content {
+    position: relative;
+    margin: 0 auto;
+    max-width: calc(100% - 176px);
+    box-shadow: 0 22px 40px 0 #eef4fc;
+    border-radius: 10px;
+    margin-bottom: 100px;
+    padding: 1rem 44px;
+}
+
+.custom-testimonials .signature {
+    font-size: 0.75rem;
+    text-align: center;
+    height: 40px;
+    width: 100%;
+    display: block;
+    font-style: italic;
+}
+
+.custom-testimonials .signature img.avatar,
+.custom-testimonials .signature .avatar img {
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+    margin: .3rem 0 0.875rem 0.875rem;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.custom-testimonials .signature .no-avatar {
+    width: 1px;
+    height: 1px;
+    border: none;
+}
+
+.custom-testimonials .signature strong {
+    font-weight: 700;
+}
+
+.custom-testimonials .signature strong.pure-text {
+    display: inline-block;
+}
+
+@media all and (max-width: 768px) {
+    .custom-testimonials .content {
+        max-width: 100%;
+        margin-bottom: 50px;
+        padding: 1rem 0;
+    }
+}
+
+/* Custom controls */
+.slides-custom-control {
+    font-size: 0;
+    position: absolute;
+    text-align: center;
+    position: relative;
+    width: 100%;
+    display: block;
+    height: 20px;
+    margin-top: -88px;
+    z-index: 5;
+}
+
+.slides-custom-control li {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: .3rem;
+    border-radius: 100%;
+    background: #AEAEAE;
+    opacity: 0.1;
+}
+
+.slides-custom-control li.flex-active {
+    opacity: 0.5;
+}
+
+/* ====================================================== 
    Tabs        
 /* ====================================================== */
 .custom-tabs {
@@ -6992,105 +7370,6 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
     .custom-tabs:not(.rotation) li {
         width: 100% !important;
     }
-}
-
-/* ====================================================== 
-   Testimonials Carousel
-/* ====================================================== */
-.custom-testimonials {
-  /* Required */
-    overflow: hidden;
-}
-
-.custom-testimonials .slides {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.custom-testimonials .slides li {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    cursor: move;
-}
-
-.custom-testimonials .content {
-    position: relative;
-    margin: 0 auto;
-    max-width: calc(100% - 176px);
-    box-shadow: 0 22px 40px 0 #eef4fc;
-    border-radius: 10px;
-    margin-bottom: 100px;
-    padding: 1rem 44px;
-}
-
-.custom-testimonials .signature {
-    font-size: 0.75rem;
-    text-align: center;
-    height: 40px;
-    width: 100%;
-    display: block;
-    font-style: italic;
-}
-
-.custom-testimonials .signature img.avatar,
-.custom-testimonials .signature .avatar img {
-    width: 32px;
-    height: 32px;
-    border-radius: 100%;
-    margin: .3rem 0 0.875rem 0.875rem;
-    vertical-align: middle;
-    display: inline-block;
-}
-
-.custom-testimonials .signature .no-avatar {
-    width: 1px;
-    height: 1px;
-    border: none;
-}
-
-.custom-testimonials .signature strong {
-    font-weight: 700;
-}
-
-.custom-testimonials .signature strong.pure-text {
-    display: inline-block;
-}
-
-@media all and (max-width: 768px) {
-    .custom-testimonials .content {
-        max-width: 100%;
-        margin-bottom: 50px;
-        padding: 1rem 0;
-    }
-}
-
-/* Custom controls */
-.slides-custom-control {
-    font-size: 0;
-    position: absolute;
-    text-align: center;
-    position: relative;
-    width: 100%;
-    display: block;
-    height: 20px;
-    margin-top: -88px;
-    z-index: 5;
-}
-
-.slides-custom-control li {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    margin: .3rem;
-    border-radius: 100%;
-    background: #AEAEAE;
-    opacity: 0.1;
-}
-
-.slides-custom-control li.flex-active {
-    opacity: 0.5;
 }
 
 /* ====================================================== 
