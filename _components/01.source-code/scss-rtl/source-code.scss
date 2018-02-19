@@ -2,23 +2,15 @@
    Source Code        
 /* ====================================================== */
 
+/* Pretty printing styles. Used with prettify.js. */
+pre.prettyprint {
+	direction: ltr;
+}
+
+
 /* Source Code Button */
 #view-source {
   right: auto;
   left: 20px;
 }
-
-
-/* Source Code Area */
-#source-code {
- 
-  #close {
-    left: auto;
-	right: 10%;
-    margin-left: auto;
-	margin-right: -18px;
-  }
- 
-}
-
 
