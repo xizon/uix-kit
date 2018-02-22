@@ -31,7 +31,7 @@ var globs = {
 
 
 
-var customWebsiteVersion     = '1.1.2',
+var customWebsiteVersion     = '1.1.3',
 	customWebsiteTitle       = 'Uix Kit Demo',
 	customWebsiteDesc        = 'Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap',
 	customWebsiteCanonical   = '<link rel="canonical" href="https://uiux.cc" />',

@@ -111,9 +111,8 @@ $primary-bg-color      : transparent;
 
 @mixin icontxt-gradient(){
 	/* @include icontxt-gradient(); */
-	background: $highlight-color1;
+	/* The font is the default color when the browser is IE */
 	background: linear-gradient(to right, $highlight-color1 0%,$highlight-color2 100%);
-	/* Standard syntax */
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	

@@ -92,10 +92,10 @@ uix-kit/
 │   │       ├── css/
 │   │       ├── fonts/
 │   │       ├── images/
+│   │       ├── json/
 │   │       └── js/
 │   └── assets-demo/
 │           ├── images/
-│           ├── json/
 │           └── videos/
 	
 ```

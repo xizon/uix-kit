@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.2
+ * ## Version             :  1.1.3
  * ## Last Update         :  February 22, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -2898,6 +2898,101 @@ ul.entry-meta {
 
 /* Actived status */
 /* ====================================================== 
+   Author Card   
+/* ====================================================== */
+.author-card {
+    margin: 0 auto;
+    border: 1px solid #eaeaea;
+    position: relative;
+    border-top: 3px solid #EC5E79;
+}
+
+.author-card-top {
+    min-height: 2.086538461rem;
+    background: #fff;
+    padding: 0.65625rem 1.75rem 0 1.75rem;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+.author-card-top h3 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.125rem;
+    line-height: 1.7;
+}
+
+.author-card-top .text {
+    margin-top: 0.4375rem;
+    float: left;
+    width: calc(100% - 105px);
+}
+
+.author-card-top .text a {
+    font-size: 0.625rem;
+}
+
+.author-card-top .pic {
+    position: relative;
+    top: 0.175rem;
+    height: 4.375rem;
+    width: 4.375rem;
+    float: right;
+    width: 100px;
+    height: 100px;
+}
+
+.author-card-top .pic img {
+    width: 90px !important;
+    height: 90px !important;
+    margin: 0.3125rem 0 0 0.3125rem;
+    border: 1px solid #eaeaea;
+    border-radius: 100%;
+}
+
+.author-card-middle {
+    background: #fff;
+    padding: 1.75rem 1.75rem 1.3125rem 1.75rem;
+    line-height: 1.5;
+}
+
+.author-card-middle:after {
+    content: '';
+    position: relative;
+    height: 0;
+    width: 0;
+    border-left: 0.4375rem solid transparent;
+    border-right: 0.4375rem solid transparent;
+    border-top: 0.4375rem solid #fff;
+    position: absolute;
+    bottom: 25px;
+    left: 1.75rem;
+}
+
+.author-card-middle p {
+    margin-top: 0.875rem;
+    padding: 0 0.875rem 0 1.75rem;
+}
+
+.author-card-final {
+    height: 30px;
+    font-size: 0.75rem;
+    display: block;
+    background: #F6F6F6;
+    padding: 0.525rem 2.1875rem;
+    text-align: right;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    transition: all 500ms ease-in-out;
+    color: #BDBDBD;
+}
+
+.author-card-final .text {
+    color: #fff;
+    margin-left: 0.4375rem;
+}
+
+/* ====================================================== 
    Button                 
 /* ====================================================== */
 /* 1) Common button styles */
@@ -3075,101 +3170,6 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   Author Card   
-/* ====================================================== */
-.author-card {
-    margin: 0 auto;
-    border: 1px solid #eaeaea;
-    position: relative;
-    border-top: 3px solid #EC5E79;
-}
-
-.author-card-top {
-    min-height: 2.086538461rem;
-    background: #fff;
-    padding: 0.65625rem 1.75rem 0 1.75rem;
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
-}
-
-.author-card-top h3 {
-    margin: 0;
-    padding: 0;
-    font-size: 1.125rem;
-    line-height: 1.7;
-}
-
-.author-card-top .text {
-    margin-top: 0.4375rem;
-    float: left;
-    width: calc(100% - 105px);
-}
-
-.author-card-top .text a {
-    font-size: 0.625rem;
-}
-
-.author-card-top .pic {
-    position: relative;
-    top: 0.175rem;
-    height: 4.375rem;
-    width: 4.375rem;
-    float: right;
-    width: 100px;
-    height: 100px;
-}
-
-.author-card-top .pic img {
-    width: 90px !important;
-    height: 90px !important;
-    margin: 0.3125rem 0 0 0.3125rem;
-    border: 1px solid #eaeaea;
-    border-radius: 100%;
-}
-
-.author-card-middle {
-    background: #fff;
-    padding: 1.75rem 1.75rem 1.3125rem 1.75rem;
-    line-height: 1.5;
-}
-
-.author-card-middle:after {
-    content: '';
-    position: relative;
-    height: 0;
-    width: 0;
-    border-left: 0.4375rem solid transparent;
-    border-right: 0.4375rem solid transparent;
-    border-top: 0.4375rem solid #fff;
-    position: absolute;
-    bottom: 25px;
-    left: 1.75rem;
-}
-
-.author-card-middle p {
-    margin-top: 0.875rem;
-    padding: 0 0.875rem 0 1.75rem;
-}
-
-.author-card-final {
-    height: 30px;
-    font-size: 0.75rem;
-    display: block;
-    background: #F6F6F6;
-    padding: 0.525rem 2.1875rem;
-    text-align: right;
-    border-bottom-left-radius: 2px;
-    border-bottom-right-radius: 2px;
-    transition: all 500ms ease-in-out;
-    color: #BDBDBD;
-}
-
-.author-card-final .text {
-    color: #fff;
-    margin-left: 0.4375rem;
-}
-
-/* ====================================================== 
    Counter    
 /* ====================================================== */
 [data-counter-number] {
@@ -3260,48 +3260,6 @@ ul.entry-meta {
 .custom-dropdown-trigger > :checked ~ ul {
     display: block;
     opacity: 1;
-}
-
-/* ====================================================== 
-   Features
-/* ====================================================== */
-.custom-feature .icon i {
-    border: 1px #090909 solid;
-    border-radius: 100%;
-    width: 80px;
-    height: 80px;
-    line-height: 80px;
-    transition: .1s ease-in-out;
-    font-size: 32px;
-}
-
-.custom-feature .icon-side i {
-    margin-right: .4em;
-}
-
-.custom-feature .title {
-    font-size: 18px;
-    letter-spacing: 0;
-}
-
-.custom-feature .title i {
-    transition: .1s ease-in-out;
-}
-
-.custom-feature .title:hover i {
-    transform: rotate(30deg);
-}
-
-.custom-feature .desc {
-    margin: 0;
-    padding: 0;
-    font-size: 13px;
-    line-height: 1.6;
-    padding: .2em 0 1.5em;
-}
-
-.custom-feature .desc.desc-singlerow {
-    padding-bottom: 1.5em;
 }
 
 /* ====================================================== 
@@ -3682,6 +3640,173 @@ ul.entry-meta {
         bottom: 0;
         border-radius: 50px;
         width: 100%;
+    }
+}
+
+/* ====================================================== 
+   Features
+/* ====================================================== */
+.custom-feature .icon i {
+    border: 1px #090909 solid;
+    border-radius: 100%;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    transition: .1s ease-in-out;
+    font-size: 32px;
+}
+
+.custom-feature .icon-side i {
+    margin-right: .4em;
+}
+
+.custom-feature .title {
+    font-size: 18px;
+    letter-spacing: 0;
+}
+
+.custom-feature .title i {
+    transition: .1s ease-in-out;
+}
+
+.custom-feature .title:hover i {
+    transform: rotate(30deg);
+}
+
+.custom-feature .desc {
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    line-height: 1.6;
+    padding: .2em 0 1.5em;
+}
+
+.custom-feature .desc.desc-singlerow {
+    padding-bottom: 1.5em;
+}
+
+/* ====================================================== 
+   Form Progress    
+/* ====================================================== */
+.custom-form-progress {
+    position: relative;
+    display: block;
+    margin: 3rem 0;
+    width: calc(100% - 60px);
+}
+
+.custom-form-progress .line {
+    display: block;
+    position: relative;
+    top: 5px;
+    left: 5px;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 5px;
+    background-color: #ddd;
+}
+
+.custom-form-progress .line > span {
+    display: block;
+    width: 0;
+    height: 100%;
+    transition: all 0.5s ease-in-out;
+    background-color: #EC5E79;
+}
+
+.custom-form-progress .indicator {
+    position: absolute;
+    top: -2px;
+    left: 0;
+    z-index: 1;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border: 3px solid #ddd;
+    border-radius: 50%;
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+}
+
+.custom-form-progress .indicator > span {
+    font-size: 0.75rem;
+    color: #AEAEAE;
+    display: inline-block;
+    position: absolute;
+    background: #fff;
+    margin-top: -3px;
+    margin-left: 17px;
+    padding: 0 .5rem;
+    min-width: 60px;
+}
+
+.custom-form-progress .indicator.active {
+    animation: indicator-ok .5s forwards;
+    border-color: #EC5E79;
+}
+
+/* Form animations */
+.custom-form-progress-target {
+    position: relative;
+    width: 100%;
+    height: 0;
+    transition: .3s;
+    overflow: hidden;
+}
+
+.custom-form-progress-target.show {
+    height: auto;
+    min-height: 70vh;
+}
+
+.custom-form-progress-target .button {
+    width: auto;
+}
+
+.custom-form-progress-target .form-step {
+    width: 100%;
+    position: absolute;
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+}
+
+.custom-form-progress-target .form-step:first-child {
+    position: relative;
+}
+
+.custom-form-progress-target .form-step.leaving {
+    animation: step-leaving .5s forwards;
+}
+
+.custom-form-progress-target .form-step.waiting {
+    transform: translateX(110%);
+}
+
+.custom-form-progress-target .form-step.coming {
+    animation: step-coming .5s forwards;
+}
+
+@keyframes step-leaving {
+    100% {
+        transform: translateX(-110%);
+    }
+}
+
+@keyframes step-coming {
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes indicator-ok {
+    50% {
+        transform: scale(1.5);
+    }
+
+    100% {
+        transform: scale(1);
     }
 }
 
@@ -4414,9 +4539,8 @@ ul.entry-meta {
 .custom-periodical-scroll ul li span {
     display: block;
   /* @include icontxt-gradient(); */
-    background: #EC5E79;
+  /* The font is the default color when the browser is IE */
     background: linear-gradient(to right, #EC5E79 0%, #E8588C 100%);
-  /* Standard syntax */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: 2px;
@@ -6468,6 +6592,40 @@ ul.entry-meta {
 
 .custom-rectangle-progressbar.progress-100 .track {
     width: 100%;
+}
+
+/* ====================================================== 
+   Show More Less
+/* ====================================================== */
+.custom-more-text-link > span:nth-child(2) {
+    display: none;
+}
+
+.custom-more-text {
+    position: relative;
+    max-height: 10rem;
+    overflow: hidden;
+    transition: max-height 0.7s;
+}
+
+.custom-more-text:after {
+    display: block;
+    content: "...";
+    text-align: right;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2em;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), white 100%);
+}
+
+.custom-more-text.show {
+    max-height: 100rem;
+}
+
+.custom-more-text.show:after {
+    display: none;
 }
 
 /* ====================================================== 

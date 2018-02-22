@@ -1,11 +1,19 @@
 # Changelog
 
 
+
+#### = 1.1.3 (February 22, 2018) =
+
+* New: Add a new module "Form Progress Bar".
+* New: Add a new module "Show More Less".
+* Fix: Fixed an issue of gradient text.
+
+
+
 #### = 1.1.2 (February 20, 2018) =
 
 * New: Added source code mode to facilitate code calls in demo status.
 * Fix: Fixed some bugs for core javascripts.
-
 
 
 

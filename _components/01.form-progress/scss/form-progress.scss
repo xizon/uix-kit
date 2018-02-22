@@ -1,0 +1,132 @@
+/* ====================================================== 
+   Form Progress    
+/* ====================================================== */
+
+$indicator-desc-w: 60px;
+
+.custom-form-progress {
+	position: relative;
+	display: block;
+	margin: 3rem 0;
+	width: calc(100% - #{$indicator-desc-w});
+
+	.line { 
+		display: block;
+		position: relative;
+		top: 5px;
+		left: 5px;
+		-webkit-appearance: none;
+		appearance: none;
+		width: 100%;
+		height: 5px;
+		background-color: #ddd;
+		
+		> span {
+			display: block;
+			width: 0;
+			height: 100%;
+			transition: all 0.5s ease-in-out;
+			background-color: $highlight-color1;
+		}
+	}
+	
+
+
+	.indicator {
+		position: absolute;
+		top: -2px;
+		left: 0;
+		z-index: 1;
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+		background: #fff;
+		border: 3px solid #ddd;
+		border-radius: 50%;
+		@include transition-default();
+
+		
+		> span {
+			font-size: 0.75rem;
+			color: $sub-text-color;
+			display: inline-block;
+			position: absolute;
+			background: #fff;
+			margin-top: -3px;
+			margin-left: 17px;
+			padding: 0 .5rem;
+			min-width: $indicator-desc-w;
+			
+		}
+
+		&.active {
+			animation: indicator-ok .5s forwards;
+			border-color: $highlight-color1;
+		}
+	}
+	
+}
+
+
+/* Form animations */
+.custom-form-progress-target {
+	position: relative;
+	width: 100%;
+	height: 0;
+	transition: .3s;
+	overflow: hidden;
+	
+	&.show {
+		height: auto;
+		min-height: 70vh;
+	}
+	
+	.button {
+		width: auto;
+	}
+	
+	.form-step {
+		width: 100%;
+		position: absolute;
+		@include transition-default();
+	}
+	
+	.form-step:first-child {
+		position: relative;
+	}
+
+	.form-step.leaving {
+		animation: step-leaving .5s forwards;
+	}
+
+	.form-step.waiting {
+		transform: translateX(110%);
+	}
+
+	.form-step.coming {
+		animation: step-coming .5s forwards;
+	}
+	
+}
+
+
+@keyframes step-leaving {
+	100% {
+		transform: translateX(-110%);
+	}
+}
+
+@keyframes step-coming {
+	100% {
+		transform: translateX(0);
+	}
+}
+
+@keyframes indicator-ok {
+	50% {
+		transform: scale(1.5);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
