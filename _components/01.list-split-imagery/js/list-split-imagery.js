@@ -8,7 +8,7 @@ theme = ( function ( theme, $, window, document ) {
     'use strict';
    
    
-    var documentReady = function( $ ){
+    var pageLoaded = function() {
 		
 		var $window      = $( window ),
 			windowWidth  = $window.width(),
@@ -55,12 +55,13 @@ theme = ( function ( theme, $, window, document ) {
 		
 	};
 		
-      
     theme.fullwidthListSplit = {
-        documentReady : documentReady        
-    };  
-    theme.components.documentReady.push( documentReady );
+        pageLoaded : pageLoaded        
+    };
+
+    theme.components.pageLoaded.push( pageLoaded );
     return theme;
 
 }( theme, jQuery, window, document ) );
+
 
