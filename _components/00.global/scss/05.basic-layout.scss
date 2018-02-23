@@ -1,128 +1,111 @@
 /* ====================================================== 
    5. Basic Layout Styles                                        
 /* ====================================================== */
-
-/* 5.1 Basic */
-.fl {
-  float: left;
+/* 5.1. Bootstrap 3.x */
+/* New XL container for Bootstrap 3.x */
+.container {
+	width: auto;
+	max-width: 1170px;
+	
 }
 
-.fr {
-  float: right;
-}
-
-.t-r {
-  text-align: right;
-}
-
-.t-l {
-  text-align: left;
-}
-
-.t-c {
-  text-align: center;
-}
-
-.inline-block {
-  display: inline-block;
-}
-
-.block {
-  display: block;
-}
-
-.pos-normal-align, .pos-vertical-align {
-  position: absolute;
-  z-index: 6;
-  width: 100%;
-}
-
-.pos-normal-align {
-  top: 0;
-}
-
-.pos-vertical-align {
-  /* Vertical Center */
-  top: 50%;
-  transform: translateY(-50%);
-  &.relative {
-    position: relative;
+@media all and (min-width: 1430px) {
+  .container {
+    max-width: 1278px;
   }
 }
 
-@media all and (max-width: 768px) {
-  .pos-vertical-align.relative {
-    top: 0;
-    transform: none;
-	padding-top: 1.5rem;
+/* New XXL container for Bootstrap 3.x */
+@media all and (min-width: 1600px) {
+  .container {
+    max-width: 1410px;
   }
 }
 
-.center-vertically {
-  display: table;
-  width: 100%;
-  height: 100%;
-  > div {
-    display: table-cell;
-    vertical-align: middle;
-  }
+
+.no-gutter > [class*='col-'] {
+    padding-right:0;
+    padding-left:0;
 }
 
-.overflow-hidden-x {
-  overflow-x: hidden;
+/* Center column in a row,
+ CSS used here will be applied after bootstrap.css */
+.row-center {
+    text-align: center;
+	
+	> [class*='col-'] {
+		display: inline-block;
+		float: none;
+	}
 }
 
-.overflow-hidden {
-  overflow: hidden;
+
+
+
+
+/* 5.2. Material Container */
+.container-bg {
+	position: relative;
+	z-index: 2;
+	background: #fff;
+	box-shadow: 0px 0px 51px -5px rgba(0,0,0,0.1);
+	margin-bottom: 10rem;
+	min-height: 50vh;
+	
+	&.fillet-large {
+		border-radius: 15px;
+	}
+	
+	&.fillet-medium {
+		border-radius: 7px;
+	}
+	
+	&.fillet-small {
+		border-radius: 2px;
+	}
+	
 }
 
-.height-10 {
-  height: 10vh !important;
+
+
+.container-bg-totop {
+	&.totop-large {
+		margin-top: -15rem;
+	}
+	
+	&.totop-medium {
+		margin-top: -10rem;
+	}
+	
+	&.totop-small {
+		margin-top: -5rem;
+	}
+	
 }
 
-.height-20 {
-  height: 20vh !important;
+
+@media all and (max-width: 768px) { 
+	
+	.container-bg {
+		margin-bottom: 3rem;
+	}
+
+	.container-bg-totop {
+		&.totop-large {
+			margin-top: -7rem;
+		}
+
+		&.totop-medium {
+			margin-top: -4rem;
+		}
+
+		&.totop-small {
+			margin-top: -2rem;
+		}
+	}		
 }
 
-.height-30 {
-  height: 30vh !important;
-}
-
-.height-40 {
-  height: 40vh !important;
-}
-
-.height-50 {
-  height: 50vh !important;
-}
-
-.height-60 {
-  height: 60vh !important;
-}
-
-.height-70 {
-  height: 70vh !important;
-}
-
-.height-80 {
-  height: 80vh !important;
-}
-
-.height-90 {
-  height: 90vh !important;
-}
-
-.height-100 {
-  height: 100vh !important;
-}
-
-@media all and (max-width: 768px) {
-  .height-100, .height-90, .height-80, .height-70, .height-60, .height-50, .height-40, .height-30, .height-20, .height-10 {
-    height: auto !important;
-  }
-}
-
-/* 5.2 Main Wrapper */
+/* 5.3 Main Wrapper */
 /* Note: Do not use the "transform" property, otherwise it may affect the internal elements */
 .wrapper {
 	min-height: 100%;
@@ -131,7 +114,7 @@
 }
 
 
-/* 5.3 Seamless Grid */
+/* 5.4 Seamless Grid */
 $seamless-grid-pad : 15px;
 
 .seamless-grid-container {

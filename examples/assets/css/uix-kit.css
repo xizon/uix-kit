@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.3
- * ## Last Update         :  February 22, 2018
+ * ## Version             :  1.1.4
+ * ## Last Update         :  February 23, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -37,16 +37,16 @@
 	
 	1. Basic
 	    1.1. Reset Stylesheets
-		1.2. Bootstrap 3.x
-        1.3. Material Container
+
 
 	2. Helper Classes
 	3. Typography
 	4. Spacing
 	5. Basic Layout Styles
-	    5.1. Basic
-		5.2. Main Wrapper
-		5.3. Seamless Grid
+		5.1. Bootstrap 3.x
+        5.2. Material Container
+		5.3. Main Wrapper
+		5.4. Seamless Grid
 
 	6. Navigation Area	
 	7. Header Area
@@ -325,89 +325,6 @@ iframe {
     border: none !important;
 }
 
-/* 1.2. Bootstrap 3.x */
-/* New XL container for Bootstrap 3.x */
-@media all and (min-width: 1430px) {
-    .container {
-        width: 1278px;
-    }
-}
-
-/* New XXL container for Bootstrap 3.x */
-@media all and (min-width: 1600px) {
-    .container {
-        width: 1410px;
-    }
-}
-
-.no-gutter > [class*='col-'] {
-    padding-right: 0;
-    padding-left: 0;
-}
-
-/* Center column in a row,
- CSS used here will be applied after bootstrap.css */
-.row-center {
-    text-align: center;
-}
-
-.row-center > [class*='col-'] {
-    display: inline-block;
-    float: none;
-}
-
-/* 1.3. Material Container */
-.container-bg {
-    position: relative;
-    z-index: 2;
-    background: #fff;
-    box-shadow: 0px 0px 51px -5px rgba(0, 0, 0, 0.1);
-    margin-bottom: 10rem;
-    min-height: 50vh;
-}
-
-.container-bg.fillet-large {
-    border-radius: 15px;
-}
-
-.container-bg.fillet-medium {
-    border-radius: 7px;
-}
-
-.container-bg.fillet-small {
-    border-radius: 2px;
-}
-
-.container-bg-totop.totop-large {
-    margin-top: -15rem;
-}
-
-.container-bg-totop.totop-medium {
-    margin-top: -10rem;
-}
-
-.container-bg-totop.totop-small {
-    margin-top: -5rem;
-}
-
-@media all and (max-width: 768px) {
-    .container-bg {
-        margin-bottom: 3rem;
-    }
-
-    .container-bg-totop.totop-large {
-        margin-top: -7rem;
-    }
-
-    .container-bg-totop.totop-medium {
-        margin-top: -4rem;
-    }
-
-    .container-bg-totop.totop-small {
-        margin-top: -2rem;
-    }
-}
-
 /* ====================================================== 
    2. Helper Classes                                
 /* ====================================================== */
@@ -454,6 +371,127 @@ iframe {
 .transition img, .transition a, .transition i, .transition li, .transition span {
   /* @include transition-default(); */
     transition: all 0.3s ease;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.t-r {
+    text-align: right;
+}
+
+.t-l {
+    text-align: left;
+}
+
+.t-c {
+    text-align: center;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.block {
+    display: block;
+}
+
+.pos-normal-align, .pos-vertical-align {
+    position: absolute;
+    z-index: 6;
+    width: 100%;
+}
+
+.pos-normal-align {
+    top: 0;
+}
+
+.pos-vertical-align {
+  /* Vertical Center */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.pos-vertical-align.relative {
+    position: relative;
+}
+
+@media all and (max-width: 768px) {
+    .pos-vertical-align.relative {
+        top: 0;
+        transform: none;
+        padding-top: 1.5rem;
+    }
+}
+
+.center-vertically {
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+
+.center-vertically > div {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.overflow-hidden-x {
+    overflow-x: hidden;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.height-10 {
+    height: 10vh !important;
+}
+
+.height-20 {
+    height: 20vh !important;
+}
+
+.height-30 {
+    height: 30vh !important;
+}
+
+.height-40 {
+    height: 40vh !important;
+}
+
+.height-50 {
+    height: 50vh !important;
+}
+
+.height-60 {
+    height: 60vh !important;
+}
+
+.height-70 {
+    height: 70vh !important;
+}
+
+.height-80 {
+    height: 80vh !important;
+}
+
+.height-90 {
+    height: 90vh !important;
+}
+
+.height-100 {
+    height: 100vh !important;
+}
+
+@media all and (max-width: 768px) {
+    .height-100, .height-90, .height-80, .height-70, .height-60, .height-50, .height-40, .height-30, .height-20, .height-10 {
+        height: auto !important;
+    }
 }
 
 /* Style of Irregular Shape */
@@ -740,129 +778,95 @@ section.site-google-map, .section.site-google-map {
 /* ====================================================== 
    5. Basic Layout Styles                                        
 /* ====================================================== */
-/* 5.1 Basic */
-.fl {
-    float: left;
+/* 5.1. Bootstrap 3.x */
+/* New XL container for Bootstrap 3.x */
+.container {
+    width: auto;
+    max-width: 1170px;
 }
 
-.fr {
-    float: right;
+@media all and (min-width: 1430px) {
+    .container {
+        max-width: 1278px;
+    }
 }
 
-.t-r {
-    text-align: right;
+/* New XXL container for Bootstrap 3.x */
+@media all and (min-width: 1600px) {
+    .container {
+        max-width: 1410px;
+    }
 }
 
-.t-l {
-    text-align: left;
+.no-gutter > [class*='col-'] {
+    padding-right: 0;
+    padding-left: 0;
 }
 
-.t-c {
+/* Center column in a row,
+ CSS used here will be applied after bootstrap.css */
+.row-center {
     text-align: center;
 }
 
-.inline-block {
+.row-center > [class*='col-'] {
     display: inline-block;
+    float: none;
 }
 
-.block {
-    display: block;
-}
-
-.pos-normal-align, .pos-vertical-align {
-    position: absolute;
-    z-index: 6;
-    width: 100%;
-}
-
-.pos-normal-align {
-    top: 0;
-}
-
-.pos-vertical-align {
-  /* Vertical Center */
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.pos-vertical-align.relative {
+/* 5.2. Material Container */
+.container-bg {
     position: relative;
+    z-index: 2;
+    background: #fff;
+    box-shadow: 0px 0px 51px -5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10rem;
+    min-height: 50vh;
+}
+
+.container-bg.fillet-large {
+    border-radius: 15px;
+}
+
+.container-bg.fillet-medium {
+    border-radius: 7px;
+}
+
+.container-bg.fillet-small {
+    border-radius: 2px;
+}
+
+.container-bg-totop.totop-large {
+    margin-top: -15rem;
+}
+
+.container-bg-totop.totop-medium {
+    margin-top: -10rem;
+}
+
+.container-bg-totop.totop-small {
+    margin-top: -5rem;
 }
 
 @media all and (max-width: 768px) {
-    .pos-vertical-align.relative {
-        top: 0;
-        transform: none;
-        padding-top: 1.5rem;
+    .container-bg {
+        margin-bottom: 3rem;
+    }
+
+    .container-bg-totop.totop-large {
+        margin-top: -7rem;
+    }
+
+    .container-bg-totop.totop-medium {
+        margin-top: -4rem;
+    }
+
+    .container-bg-totop.totop-small {
+        margin-top: -2rem;
     }
 }
 
-.center-vertically {
-    display: table;
-    width: 100%;
-    height: 100%;
-}
-
-.center-vertically > div {
-    display: table-cell;
-    vertical-align: middle;
-}
-
-.overflow-hidden-x {
-    overflow-x: hidden;
-}
-
-.overflow-hidden {
-    overflow: hidden;
-}
-
-.height-10 {
-    height: 10vh !important;
-}
-
-.height-20 {
-    height: 20vh !important;
-}
-
-.height-30 {
-    height: 30vh !important;
-}
-
-.height-40 {
-    height: 40vh !important;
-}
-
-.height-50 {
-    height: 50vh !important;
-}
-
-.height-60 {
-    height: 60vh !important;
-}
-
-.height-70 {
-    height: 70vh !important;
-}
-
-.height-80 {
-    height: 80vh !important;
-}
-
-.height-90 {
-    height: 90vh !important;
-}
-
-.height-100 {
-    height: 100vh !important;
-}
-
-@media all and (max-width: 768px) {
-    .height-100, .height-90, .height-80, .height-70, .height-60, .height-50, .height-40, .height-30, .height-20, .height-10 {
-        height: auto !important;
-    }
-}
-
-/* 5.2 Main Wrapper */
+/* 5.3 Main Wrapper */
 /* Note: Do not use the "transform" property, otherwise it may affect the internal elements */
 .wrapper {
     min-height: 100%;
@@ -870,7 +874,7 @@ section.site-google-map, .section.site-google-map {
     overflow: hidden;
 }
 
-/* 5.3 Seamless Grid */
+/* 5.4 Seamless Grid */
 .seamless-grid-container {
     width: 100%;
 }
@@ -1789,10 +1793,8 @@ section.site-google-map, .section.site-google-map {
     font-family: Arial, sans-serif;
     position: fixed;
     z-index: 100000;
-    top: 50%;
-    left: 50%;
-    margin-top: -32.5px;
-    margin-left: -32.5px;
+    bottom: 10px;
+    left: 10px;
 }
 
 .loader .spinner-container {
@@ -2787,7 +2789,7 @@ ul.entry-meta {
     padding: 0 4rem;
 }
 
-.list-split-container .list-split-item.even .row > .col-sm-6 {
+.list-split-container .list-split-item.is-reversed .row > .col-sm-6 {
     float: right;
 }
 
@@ -2796,7 +2798,7 @@ ul.entry-meta {
         margin-bottom: 3rem;
     }
 
-    .list-split-container .list-split-item.even .row > .col-sm-6:first-child, .list-split-container .list-split-item.even .row > .col-sm-6:nth-child(2) {
+    .list-split-container .list-split-item.is-reversed .row > .col-sm-6:first-child, .list-split-container .list-split-item.is-reversed .row > .col-sm-6:nth-child(2) {
         transform: translateX(0);
     }
 
@@ -2897,101 +2899,6 @@ ul.entry-meta {
 }
 
 /* Actived status */
-/* ====================================================== 
-   Author Card   
-/* ====================================================== */
-.author-card {
-    margin: 0 auto;
-    border: 1px solid #eaeaea;
-    position: relative;
-    border-top: 3px solid #EC5E79;
-}
-
-.author-card-top {
-    min-height: 2.086538461rem;
-    background: #fff;
-    padding: 0.65625rem 1.75rem 0 1.75rem;
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
-}
-
-.author-card-top h3 {
-    margin: 0;
-    padding: 0;
-    font-size: 1.125rem;
-    line-height: 1.7;
-}
-
-.author-card-top .text {
-    margin-top: 0.4375rem;
-    float: left;
-    width: calc(100% - 105px);
-}
-
-.author-card-top .text a {
-    font-size: 0.625rem;
-}
-
-.author-card-top .pic {
-    position: relative;
-    top: 0.175rem;
-    height: 4.375rem;
-    width: 4.375rem;
-    float: right;
-    width: 100px;
-    height: 100px;
-}
-
-.author-card-top .pic img {
-    width: 90px !important;
-    height: 90px !important;
-    margin: 0.3125rem 0 0 0.3125rem;
-    border: 1px solid #eaeaea;
-    border-radius: 100%;
-}
-
-.author-card-middle {
-    background: #fff;
-    padding: 1.75rem 1.75rem 1.3125rem 1.75rem;
-    line-height: 1.5;
-}
-
-.author-card-middle:after {
-    content: '';
-    position: relative;
-    height: 0;
-    width: 0;
-    border-left: 0.4375rem solid transparent;
-    border-right: 0.4375rem solid transparent;
-    border-top: 0.4375rem solid #fff;
-    position: absolute;
-    bottom: 25px;
-    left: 1.75rem;
-}
-
-.author-card-middle p {
-    margin-top: 0.875rem;
-    padding: 0 0.875rem 0 1.75rem;
-}
-
-.author-card-final {
-    height: 30px;
-    font-size: 0.75rem;
-    display: block;
-    background: #F6F6F6;
-    padding: 0.525rem 2.1875rem;
-    text-align: right;
-    border-bottom-left-radius: 2px;
-    border-bottom-right-radius: 2px;
-    transition: all 500ms ease-in-out;
-    color: #BDBDBD;
-}
-
-.author-card-final .text {
-    color: #fff;
-    margin-left: 0.4375rem;
-}
-
 /* ====================================================== 
    Button                 
 /* ====================================================== */
@@ -3170,6 +3077,101 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
+   Author Card   
+/* ====================================================== */
+.author-card {
+    margin: 0 auto;
+    border: 1px solid #eaeaea;
+    position: relative;
+    border-top: 3px solid #EC5E79;
+}
+
+.author-card-top {
+    min-height: 2.086538461rem;
+    background: #fff;
+    padding: 0.65625rem 1.75rem 0 1.75rem;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+.author-card-top h3 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.125rem;
+    line-height: 1.7;
+}
+
+.author-card-top .text {
+    margin-top: 0.4375rem;
+    float: left;
+    width: calc(100% - 105px);
+}
+
+.author-card-top .text a {
+    font-size: 0.625rem;
+}
+
+.author-card-top .pic {
+    position: relative;
+    top: 0.175rem;
+    height: 4.375rem;
+    width: 4.375rem;
+    float: right;
+    width: 100px;
+    height: 100px;
+}
+
+.author-card-top .pic img {
+    width: 90px !important;
+    height: 90px !important;
+    margin: 0.3125rem 0 0 0.3125rem;
+    border: 1px solid #eaeaea;
+    border-radius: 100%;
+}
+
+.author-card-middle {
+    background: #fff;
+    padding: 1.75rem 1.75rem 1.3125rem 1.75rem;
+    line-height: 1.5;
+}
+
+.author-card-middle:after {
+    content: '';
+    position: relative;
+    height: 0;
+    width: 0;
+    border-left: 0.4375rem solid transparent;
+    border-right: 0.4375rem solid transparent;
+    border-top: 0.4375rem solid #fff;
+    position: absolute;
+    bottom: 25px;
+    left: 1.75rem;
+}
+
+.author-card-middle p {
+    margin-top: 0.875rem;
+    padding: 0 0.875rem 0 1.75rem;
+}
+
+.author-card-final {
+    height: 30px;
+    font-size: 0.75rem;
+    display: block;
+    background: #F6F6F6;
+    padding: 0.525rem 2.1875rem;
+    text-align: right;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    transition: all 500ms ease-in-out;
+    color: #BDBDBD;
+}
+
+.author-card-final .text {
+    color: #fff;
+    margin-left: 0.4375rem;
+}
+
+/* ====================================================== 
    Counter    
 /* ====================================================== */
 [data-counter-number] {
@@ -3260,6 +3262,48 @@ ul.entry-meta {
 .custom-dropdown-trigger > :checked ~ ul {
     display: block;
     opacity: 1;
+}
+
+/* ====================================================== 
+   Features
+/* ====================================================== */
+.custom-feature .icon i {
+    border: 1px #090909 solid;
+    border-radius: 100%;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    transition: .1s ease-in-out;
+    font-size: 32px;
+}
+
+.custom-feature .icon-side i {
+    margin-right: .4em;
+}
+
+.custom-feature .title {
+    font-size: 18px;
+    letter-spacing: 0;
+}
+
+.custom-feature .title i {
+    transition: .1s ease-in-out;
+}
+
+.custom-feature .title:hover i {
+    transform: rotate(30deg);
+}
+
+.custom-feature .desc {
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    line-height: 1.6;
+    padding: .2em 0 1.5em;
+}
+
+.custom-feature .desc.desc-singlerow {
+    padding-bottom: 1.5em;
 }
 
 /* ====================================================== 
@@ -3644,48 +3688,6 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   Features
-/* ====================================================== */
-.custom-feature .icon i {
-    border: 1px #090909 solid;
-    border-radius: 100%;
-    width: 80px;
-    height: 80px;
-    line-height: 80px;
-    transition: .1s ease-in-out;
-    font-size: 32px;
-}
-
-.custom-feature .icon-side i {
-    margin-right: .4em;
-}
-
-.custom-feature .title {
-    font-size: 18px;
-    letter-spacing: 0;
-}
-
-.custom-feature .title i {
-    transition: .1s ease-in-out;
-}
-
-.custom-feature .title:hover i {
-    transform: rotate(30deg);
-}
-
-.custom-feature .desc {
-    margin: 0;
-    padding: 0;
-    font-size: 13px;
-    line-height: 1.6;
-    padding: .2em 0 1.5em;
-}
-
-.custom-feature .desc.desc-singlerow {
-    padding-bottom: 1.5em;
-}
-
-/* ====================================================== 
    Form Progress    
 /* ====================================================== */
 .custom-form-progress {
@@ -3914,6 +3916,112 @@ ul.entry-meta {
 /* ====================================================== 
    Custom Core Scripts & Stylesheets
 /* ====================================================== */
+/* ====================================================== 
+   Fullwidth List of Split
+/* ====================================================== */
+.list-split-imagery-container {
+    position: relative;
+  /* Text Area */;
+}
+
+.list-split-imagery-container::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.list-split-imagery-container .imagery-background {
+    width: 100%;
+}
+
+.list-split-imagery-container .imagery-background img {
+    width: 100%;
+    display: block;
+    height: auto;
+}
+
+.list-split-imagery-container .image-container {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 300ms cubic-bezier(0.694, 0, 0.335, 1);
+}
+
+.list-split-imagery-container .image-container.is-loaded {
+    opacity: 1;
+}
+
+.list-split-imagery-container .feature-imagery {
+    user-select: none;
+    position: relative;
+    width: 50%;
+    float: left;
+}
+
+.list-split-imagery-container.is-reversed .feature-imagery {
+    float: right;
+}
+
+.list-split-imagery-container .has-drop-shadow {
+    box-shadow: 0 1.8vw 4vw -0.7vw rgba(0, 0, 0, 0.2);
+}
+
+.list-split-imagery-container .feature-text {
+    word-wrap: break-word;
+    box-sizing: border-box;
+    width: 50%;
+    padding-left: 5vw;
+    padding-right: calc(6.730769230769% + 15px);
+  /* (1352-1170)/1352/2 * 100 */
+    float: left;
+}
+
+.list-split-imagery-container.is-reversed .feature-text {
+    float: left;
+    padding-right: 5vw;
+    padding-left: calc(6.730769230769% + 15px);
+}
+
+/* New XL container for Bootstrap 3.x */
+@media all and (min-width: 1430px) {
+    .list-split-imagery-container .feature-text {
+        padding-right: calc(5.189340813464% + 15px);
+    /* (1426-1278)/1426/2 * 100 */;
+    }
+
+    .list-split-imagery-container.is-reversed .feature-text {
+        padding-right: auto;
+        padding-left: calc(5.189340813464% + 15px);
+    }
+}
+
+/* New XXL container for Bootstrap 3.x */
+@media all and (min-width: 1600px) {
+    .list-split-imagery-container .feature-text {
+        padding-right: calc(12.992125984252% + 15px);
+    /* (1905-1410)/1905/2 * 100 */;
+    }
+
+    .list-split-imagery-container.is-reversed .feature-text {
+        padding-right: auto;
+        padding-left: calc(12.992125984252% + 15px);
+    }
+}
+
+@media all and (max-width: 768px) {
+    .list-split-imagery-container .feature-imagery {
+        width: 100%;
+    }
+
+    .list-split-imagery-container .feature-text,
+  .list-split-imagery-container.is-reversed .feature-text {
+        text-align: center;
+        width: 100%;
+        padding: 0 15px;
+    }
+}
+
 /* ====================================================== 
    Mobile Menu
 /* ====================================================== */

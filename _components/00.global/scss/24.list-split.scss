@@ -18,7 +18,7 @@
 				padding: 0 4rem;
 			}
 		}
-		&.even .row > .col-sm-6 {
+		&.is-reversed .row > .col-sm-6 {
 			float: right;
 		}
 	}
@@ -35,7 +35,7 @@
 
 			margin-bottom: 3rem;
 
-			&.even .row > .col-sm-6 {
+			&.is-reversed .row > .col-sm-6 {
 				&:first-child, &:nth-child(2) {
 					transform: translateX(0);
 				}

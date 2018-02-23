@@ -1,6 +1,13 @@
 # Changelog
 
 
+#### = 1.1.4 (February 23, 2018) =
+
+* New: Add a new module "List of Split With Full-Width".
+* Tweak: Modify ".container" width as a dynamic percentage.
+* Tweak: Optimized CSS code structure.
+
+
 
 #### = 1.1.3 (February 22, 2018) =
 

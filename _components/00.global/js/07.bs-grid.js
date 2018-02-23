@@ -15,6 +15,10 @@ theme = ( function ( theme, $, window, document ) {
 			windowWidth  = $window.width(),
 			windowHeight = $window.height();
 
+		
+		rowColInit( windowWidth ); 
+		
+		
 		$window.on( 'resize', function() {
 			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
 			if ( $window.width() != windowWidth ) {
@@ -23,30 +27,17 @@ theme = ( function ( theme, $, window, document ) {
 				windowWidth = $window.width();
 
 				// Do stuff here
-				if ( windowWidth > 768 ) {
-					rowColInit( false ); 
-				} else {
-					rowColInit( true ); 
-				}
+				rowColInit( windowWidth ); 
 		
 
 			}
 		});
 		
-		
 
-		if ( windowWidth > 768 ) {
-			rowColInit( false ); 
-		} else {
-			rowColInit( true ); 
-		}
-
-
-		function rowColInit( reset ) {
-
+		function rowColInit( w ) {
 
 			$( '.row.full-height' ).each( function()  {
-				var h = ( !reset ) ? $( this ).height() + 'px' : 'auto';
+				var h = ( w > 768 ) ? $( this ).height() + 'px' : 'auto';
 				$( this ).find( '> div' ).css( 'height', h );
 			});
 

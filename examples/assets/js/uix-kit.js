@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.3
- * ## Last Update         :  February 22, 2018
+ * ## Version             :  1.1.4
+ * ## Last Update         :  February 23, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -803,6 +803,10 @@ theme = ( function ( theme, $, window, document ) {
 			windowWidth  = $window.width(),
 			windowHeight = $window.height();
 
+		
+		rowColInit( windowWidth ); 
+		
+		
 		$window.on( 'resize', function() {
 			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
 			if ( $window.width() != windowWidth ) {
@@ -811,30 +815,17 @@ theme = ( function ( theme, $, window, document ) {
 				windowWidth = $window.width();
 
 				// Do stuff here
-				if ( windowWidth > 768 ) {
-					rowColInit( false ); 
-				} else {
-					rowColInit( true ); 
-				}
+				rowColInit( windowWidth ); 
 		
 
 			}
 		});
 		
-		
 
-		if ( windowWidth > 768 ) {
-			rowColInit( false ); 
-		} else {
-			rowColInit( true ); 
-		}
-
-
-		function rowColInit( reset ) {
-
+		function rowColInit( w ) {
 
 			$( '.row.full-height' ).each( function()  {
-				var h = ( !reset ) ? $( this ).height() + 'px' : 'auto';
+				var h = ( w > 768 ) ? $( this ).height() + 'px' : 'auto';
 				$( this ).find( '> div' ).css( 'height', h );
 			});
 
@@ -1537,6 +1528,13 @@ theme = ( function ( theme, $, window, document ) {
 }( theme, jQuery, window, document ) );
 
 
+/*! 
+ *************************************
+ * Custom Core Scripts & Stylesheets
+ *************************************
+ */
+
+
 
 /*! 
  *************************************
@@ -1640,13 +1638,6 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
-
-
-/*! 
- *************************************
- * Custom Core Scripts & Stylesheets
- *************************************
- */
 
 
 
@@ -2000,6 +1991,73 @@ theme = ( function ( theme, $, window, document ) {
 
 /*! 
  *************************************
+ * Fullwidth List of Split
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ){
+		
+		var $window      = $( window ),
+			windowWidth  = $window.width(),
+			windowHeight = $window.height();
+		
+		
+		fullwidthListSplitInit( windowWidth );
+		
+		$window.on( 'resize', function() {
+			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+			if ( $window.width() != windowWidth ) {
+
+				// Update the window width for next time
+				windowWidth = $window.width();
+
+				// Do stuff here
+				fullwidthListSplitInit( windowWidth );
+		
+
+			}
+		});
+		
+		
+		
+		function fullwidthListSplitInit( w ) {
+			
+			
+			$( '.list-split-imagery-container' ).each(function() {
+				var imgH = $( this ).find( '.imagery-background img' ).height();
+
+				if ( imgH > 0 ) {
+					$( this ).find( '.feature-text, .feature-imagery' ).css( 'height', imgH + 'px' );
+				}
+
+				if ( w <= 768 ) {
+					$( this ).find( '.feature-text, .feature-imagery' ).css( 'height', 'auto' );
+				}
+
+			});	
+		}
+		
+
+		
+		
+	};
+		
+      
+    theme.fullwidthListSplit = {
+        documentReady : documentReady        
+    };  
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
+/*! 
+ *************************************
  * Mobile Menu
  *************************************
  */
@@ -2084,8 +2142,9 @@ theme = ( function ( theme, $, window, document ) {
 
 
 				} );
-
-
+				
+				
+				sidrmenuInit( windowWidth ); 
 
 				// Close the menu on window change
 				$window.on( 'resize', function() {
@@ -2098,32 +2157,30 @@ theme = ( function ( theme, $, window, document ) {
 						// Do stuff here
 						$toggleBody.removeClass( 'menu-open' );
 						$( '.menu-toggle' ).removeClass( 'open' );
-						if ( windowWidth <= 768 ) sidrmenuInit(); 
+						sidrmenuInit( windowWidth );
 
 
 					}
 				});
 
-
-				if ( windowWidth <= 768 ) {
-					sidrmenuInit(); 
-				}
-	
 				
 			});
 		
 		
 
 			
-			function sidrmenuInit() {
+			function sidrmenuInit( w ) {
+				
+				if ( w <= 768 ) {
+					$( '.menu-container.mobile .menu-main > li' ).each( function() {
+						if ( $( this ).find( 'ul' ).length > 0 ) {
+							if ( $( this ).find( '.mobile-nav-arrow' ).length < 1 ) $( this ).prepend( '<em class="mobile-nav-arrow">+</em>' );
+							$( this ).find( 'ul ul' ).addClass( 'sub-sub' );
+							$( this ).find( ' > a' ).attr( 'href', 'javascript:void(0);' );
+						}
+					} );		
+				}
 	
-				$( '.menu-container.mobile .menu-main > li' ).each( function() {
-					if ( $( this ).find( 'ul' ).length > 0 ) {
-						if ( $( this ).find( '.mobile-nav-arrow' ).length < 1 ) $( this ).prepend( '<em class="mobile-nav-arrow">+</em>' );
-						$( this ).find( 'ul ul' ).addClass( 'sub-sub' );
-						$( this ).find( ' > a' ).attr( 'href', 'javascript:void(0);' );
-					}
-				} );		
 
 			}
 			
@@ -2242,340 +2299,6 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
-
-
-
-/*! 
- *************************************
- * Navigation Highlighting
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-    
-    var documentReady = function( $ ) {
-    
-        // Get section or article by href
-        function getRelatedContent( el ) {
-            return $( $( el ).attr( 'href' ) );
-        }
-        // Get link by section or article id
-        function getRelatedNavigation( el ) {
-            return $( '.menu-main li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' );
-        } 
-        
-	    //-------- Navigation highlighting using waypoints
-		if ( $( 'body' ).hasClass( 'onepage' ) ) {
-
-
-			// Smooth scroll to content
-			$( '.menu-main li > a' ).on('click', function(e) {
-				e.preventDefault();
-
-				$( 'html,body' ).animate({
-					scrollTop: getRelatedContent( this ).offset().top - 20
-				});
-			});	
-
-			//-------- Default cwaypoint settings
-			var topSectionSpacing = $( '.header-area' ).outerHeight( true );
-			var waypoints1 = $( '[data-highlight-section="true"]' ).waypoint({
-				handler: function( direction ) {
-
-
-					// Highlight element when related content
-					getRelatedNavigation( this.element ).toggleClass( 'active', direction === 'down' );
-					$( this.element ).toggleClass( 'active', direction === 'down' );
-
-				},
-				offset: topSectionSpacing
-			});	
-
-			var waypoints2 = $( '[data-highlight-section="true"]' ).waypoint({
-				handler: function( direction ) {
-
-					// Highlight element when related content
-					getRelatedNavigation( this.element ).toggleClass( 'active', direction === 'up' );
-					$( this.element ).toggleClass( 'active', direction === 'up' );
-
-				},
-				offset: function() {  
-					return -$( this.element ).height() - topSectionSpacing; 
-				}
-			});	
-
-			setTimeout( function() {
-				$( '.menu-main li:first' ).addClass( 'active' );
-			}, 1000 );	
-		}
-
-		
-		
-		
-		
-    };
-
-    theme.navHighlight = {
-        documentReady : documentReady        
-    };
-
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
-
-
-
-
-
-
-
-
-/*! 
- *************************************
- * Parallax
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-    
-    var pageLoaded = function() {
-        
-        var $window      = $( window ),
-		    windowWidth  = $window.width(),
-		    windowHeight = $window.height();
-
-        
-		//  Initialize
-		parallaxInit();
-		
-		$window.on( 'resize', function() {
-			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( $window.width() != windowWidth ) {
-
-				// Update the window width for next time
-				windowWidth = $window.width();
-
-				// Do stuff here
-				parallaxInit();
-		
-
-			}
-		});
-		
-		
-		function parallaxInit() {
-			
-			/* Pure parallax scrolling effect without other embedded HTML elements */
-			$( '.pure-bg-parallax' ).each(function() {
-				var $this       = $( this ),
-					dataImg     = $this.data( 'parallax-bg' ),
-					dataSpeed   = $this.data( 'parallax' );
-				
-				if( typeof dataSpeed === typeof undefined ) {
-					dataSpeed = 0;
-				}
-				
-				$this.css( 'background', 'url('+dataImg+')' );
-				
-				$this.bgParallax( "50%", dataSpeed );
-		
-			});
-			
-			
-			/* Parallax scrolling effect with embedded HTML elements */
-			$( '.parallax' ).each(function() {
-				var $this       = $( this ),
-				    dataAtt     = $this.data( 'parallax' ),
-					dataH       = $this.data( 'height' ),
-					dataW       = $this.data( 'width' ),
-					dataImg     = $this.data( 'image-src' ),
-					dataSkew    = $this.data( 'skew' ),
-					dataSpeed   = $this.data( 'speed' ),
-					dataElSpeed = $this.find( '.parallax-element' ).data( 'el-speed' ),
-					windowWidth = $window.width();
-				
-				
-				if( typeof dataAtt === typeof undefined ) { // If there is no data-xxx, save current source to it
-					dataAtt = 'fixed';
-				}
-				
-				if( typeof dataW != typeof undefined ) {
-					$this.css( {
-						'width': dataW 
-					} );
-	
-				}
-				
-				if( typeof dataH != typeof undefined ) {
-					
-					$this.css( {
-						'height': dataH
-					} );
-					$this.find( '.parallax-img' ).css( {
-						'max-height': dataH
-					} );	
-				}
-				
-				if( typeof dataSpeed === typeof undefined ) { // If there is no data-xxx, save current source to it
-					dataSpeed = 0;
-				}	
-				
-				if( typeof dataElSpeed === typeof undefined ) { // If there is no data-xxx, save current source to it
-					dataElSpeed = 0;
-				}	
-				
-				
-				
-				
-				if ( 
-					$this.hasClass( 'height-10' ) || 
-					$this.hasClass( 'height-20' ) || 
-					$this.hasClass( 'height-30' ) || 
-					$this.hasClass( 'height-40' ) || 
-					$this.hasClass( 'height-50' ) || 
-					$this.hasClass( 'height-60' ) || 
-					$this.hasClass( 'height-70' ) || 
-					$this.hasClass( 'height-80' ) || 
-					$this.hasClass( 'height-90' ) || 
-					$this.hasClass( 'height-100' )
-				 ) {		
-					
-					var newH = $this.height();
-					$this.css( {
-						'height': newH + 'px'
-					} );	
-					$this.find( '.parallax-img' ).css( {
-						'max-height': newH + 'px'
-					} );	
-				 }
-				
-				
-				//If the ".pos-vertical-align" has more content
-				if ( windowWidth <= 768 ) {
-					
-					if ( $this.find( '.pos-vertical-align' ).height() >= $this.find( '.parallax-img' ).height() ) {
-						$this.find( '.pos-vertical-align' ).addClass( 'relative' );
-						$this.find( '.parallax-img' ).hide();	
-					}
-					
-
-				}
-
-				
-				
-				if( typeof dataImg != typeof undefined ) {
-					$this.css( {
-						'background': 'url(' + dataImg + ') 50% 0 no-repeat ' + dataAtt
-					} );
-				}
-				
-				if( typeof dataSkew != typeof undefined ) {
-					$this.css( {
-						'transform'         : 'skew(0deg, '+dataSkew+'deg)'
-					} );
-				}	
-				
-	
-				$this.bgParallax( "50%", dataSpeed );
-				
-				$window.on( 'scroll touchmove', function() {
-					var scrolled = $window.scrollTop();
-					$this.find( '.parallax-element' ).css( 'margin-top', ( scrolled * dataElSpeed ) + 'px' );
-				});	
-		
-			});
-			
-		
-	
-		}
-		
-	
-
-    };
-
-	
-
-    theme.parallax = {
-        pageLoaded : pageLoaded        
-    };
-
-    theme.components.pageLoaded.push( pageLoaded );
-    return theme;
-
-}( theme, jQuery, window, document ) );
-
-
-
-/*
-Plugin: jQuery Parallax
-Version 1.1.3
-Author: Ian Lunn
-Twitter: @IanLunn
-Author URL: http://www.ianlunn.co.uk/
-Plugin URL: http://www.ianlunn.co.uk/plugins/jquery-parallax/
-
-Dual licensed under the MIT and GPL licenses:
-http://www.opensource.org/licenses/mit-license.php
-http://www.gnu.org/licenses/gpl.html
-*/
-
-(function( $ ){
-	var $window = $(window);
-	var windowHeight = $window.height();
-
-	$window.resize(function () {
-		windowHeight = $window.height();
-	});
-
-	$.fn.bgParallax = function(xpos, speedFactor, outerHeight) {
-		var $this = $(this);
-		var getHeight;
-		var firstTop;
-		var paddingTop = 0;
-		
-		//get the starting position of each element to have parallax applied to it		
-		$this.each(function(){
-		    firstTop = $this.offset().top;
-		});
-
-		if (outerHeight) {
-			getHeight = function(jqo) {
-				return jqo.outerHeight(true);
-			};
-		} else {
-			getHeight = function(jqo) {
-				return jqo.height();
-			};
-		}
-			
-		// setup defaults if arguments aren't specified
-		if (arguments.length < 1 || xpos === null) xpos = "50%";
-		if (arguments.length < 2 || speedFactor === null) speedFactor = 0.1;
-		if (arguments.length < 3 || outerHeight === null) outerHeight = true;
-		
-		// function to be called whenever the window is scrolled or resized
-		function update(){
-			var pos = $window.scrollTop();				
-
-			$this.each(function(){
-				var $element = $(this);
-				var top = $element.offset().top;
-				var height = getHeight($element);
-
-				// Check if totally above or totally below viewport
-				if (top + height < pos || top > pos + windowHeight) {
-					return;
-				}
-
-				$this.css('backgroundPosition', xpos + " " + Math.round((firstTop - pos) * speedFactor) + "px");
-			});
-		}		
-
-		$window.bind('scroll', update).resize(update);
-		update();
-	};
-})(jQuery);
 
 
 
@@ -2975,7 +2698,7 @@ theme = ( function ( theme, $, window, document ) {
 
 /*! 
  *************************************
- * Pricing
+ * Navigation Highlighting
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -2983,109 +2706,67 @@ theme = ( function ( theme, $, window, document ) {
     
     var documentReady = function( $ ) {
     
-		
-		var $window      = $( window ),
-			windowWidth  = $window.width(),
-			windowHeight = $window.height();
-
-		
-		//-------- Pricing initialize
-		pricingInit();
-		
-		$window.on( 'resize', function() {
-			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( $window.width() != windowWidth ) {
-
-				// Update the window width for next time
-				windowWidth = $window.width();
-
-				// Do stuff here
-				pricingInit();
-		
-
-			}
-		});
-		
-		
-		
-		function pricingInit() {
-			//Initialize the height
-			$( '.custom-price' ).each( function(){
+        // Get section or article by href
+        function getRelatedContent( el ) {
+            return $( $( el ).attr( 'href' ) );
+        }
+        // Get link by section or article id
+        function getRelatedNavigation( el ) {
+            return $( '.menu-main li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' );
+        } 
+        
+	    //-------- Navigation highlighting using waypoints
+		if ( $( 'body' ).hasClass( 'onepage' ) ) {
 
 
-					//returns new id
-					var $this            = $( this ),
-						priceBGH         = Array(),
-						priceBGH_excerpt = Array(),
-						$initHeight      = $this.find( '.init-height' );
+			// Smooth scroll to content
+			$( '.menu-main li > a' ).on('click', function(e) {
+				e.preventDefault();
 
-					$initHeight.each( function( index ) {
-						//Screen protection of height
-						$( this ).find( '.border,.excerpt' ).css( 'height', 'auto' );
+				$( 'html,body' ).animate({
+					scrollTop: getRelatedContent( this ).offset().top - 20
+				});
+			});	
 
-						var tempheight = $( this ).height();
-						var tempheight_excerpt = $( this ).find( '.excerpt' ).height();
-						priceBGH.push( tempheight );
-						priceBGH_excerpt.push( tempheight_excerpt );
-
-
-					} );
-
-					var priceBGH_Max = Math.max.apply( Math, priceBGH );
+			//-------- Default cwaypoint settings
+			var topSectionSpacing = $( '.header-area' ).outerHeight( true );
+			var waypoints1 = $( '[data-highlight-section="true"]' ).waypoint({
+				handler: function( direction ) {
 
 
-					if ( priceBGH_Max > 0 ) {
-						if ( $( document.body ).width() > 768 ){
+					// Highlight element when related content
+					getRelatedNavigation( this.element ).toggleClass( 'active', direction === 'down' );
+					$( this.element ).toggleClass( 'active', direction === 'down' );
 
-							// Initialize the height of all columns
-							$initHeight.find( '.border' ).css( 'height', priceBGH_Max + 'px' );
+				},
+				offset: topSectionSpacing
+			});	
 
-							// Actived columns
-							$initHeight.find( '.border.active' ).each( function() {
+			var waypoints2 = $( '[data-highlight-section="true"]' ).waypoint({
+				handler: function( direction ) {
 
-								var ty = Math.abs( parseInt( $( this ).css('transform').split(',')[5]));
-								if ( !isNaN(ty) ) {
-									$( this ).css( 'height', priceBGH_Max + ty*2 + 'px' );
-								}
+					// Highlight element when related content
+					getRelatedNavigation( this.element ).toggleClass( 'active', direction === 'up' );
+					$( this.element ).toggleClass( 'active', direction === 'up' );
 
-							});	
+				},
+				offset: function() {  
+					return -$( this.element ).height() - topSectionSpacing; 
+				}
+			});	
 
-
-
-						} else {
-							$initHeight.find( '.border' ).css( 'height', 'auto' );
-
-
-						}
-
-
-						// Actived columns
-						$initHeight.find( '.border.active' ).each( function() {
-
-							var textColor = $( this ).closest( '.border-hover' ).data( 'tcolor' ),
-								btnColor  = $( this ).closest( '.border-hover' ).data( 'bcolor' );
-
-							$( this ).css( 'background-color', btnColor );
-							$( this ).find( '.button' ).removeClass( 'button-bg-primary' ).addClass( 'button-bg-secondary' );
-
-
-						});	
-
-
-
-					}
-
-
-			});
+			setTimeout( function() {
+				$( '.menu-main li:first' ).addClass( 'active' );
+			}, 1000 );	
 		}
+
 		
 		
-
-
+		
 		
     };
 
-    theme.pricing = {
+    theme.navHighlight = {
         documentReady : documentReady        
     };
 
@@ -3097,6 +2778,254 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
+
+
+
+
+/*! 
+ *************************************
+ * Parallax
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+    
+    var pageLoaded = function() {
+        
+        var $window      = $( window ),
+		    windowWidth  = $window.width(),
+		    windowHeight = $window.height();
+
+        
+		//  Initialize
+		parallaxInit( windowWidth );
+		
+		$window.on( 'resize', function() {
+			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+			if ( $window.width() != windowWidth ) {
+
+				// Update the window width for next time
+				windowWidth = $window.width();
+
+				// Do stuff here
+				parallaxInit( windowWidth );
+		
+
+			}
+		});
+		
+		
+		function parallaxInit( w ) {
+			
+			/* Pure parallax scrolling effect without other embedded HTML elements */
+			$( '.pure-bg-parallax' ).each(function() {
+				var $this       = $( this ),
+					dataImg     = $this.data( 'parallax-bg' ),
+					dataSpeed   = $this.data( 'parallax' );
+				
+				if( typeof dataSpeed === typeof undefined ) {
+					dataSpeed = 0;
+				}
+				
+				$this.css( 'background', 'url('+dataImg+')' );
+				
+				$this.bgParallax( "50%", dataSpeed );
+		
+			});
+			
+			
+			/* Parallax scrolling effect with embedded HTML elements */
+			$( '.parallax' ).each(function() {
+				var $this       = $( this ),
+				    dataAtt     = $this.data( 'parallax' ),
+					dataH       = $this.data( 'height' ),
+					dataW       = $this.data( 'width' ),
+					dataImg     = $this.data( 'image-src' ),
+					dataSkew    = $this.data( 'skew' ),
+					dataSpeed   = $this.data( 'speed' ),
+					dataElSpeed = $this.find( '.parallax-element' ).data( 'el-speed' );
+				
+				
+				if( typeof dataAtt === typeof undefined ) { // If there is no data-xxx, save current source to it
+					dataAtt = 'fixed';
+				}
+				
+				if( typeof dataW != typeof undefined ) {
+					$this.css( {
+						'width': dataW 
+					} );
+	
+				}
+				
+				if( typeof dataH != typeof undefined ) {
+					
+					$this.css( {
+						'height': dataH
+					} );
+					$this.find( '.parallax-img' ).css( {
+						'max-height': dataH
+					} );	
+				}
+				
+				if( typeof dataSpeed === typeof undefined ) { // If there is no data-xxx, save current source to it
+					dataSpeed = 0;
+				}	
+				
+				if( typeof dataElSpeed === typeof undefined ) { // If there is no data-xxx, save current source to it
+					dataElSpeed = 0;
+				}	
+				
+				
+				
+				
+				if ( 
+					$this.hasClass( 'height-10' ) || 
+					$this.hasClass( 'height-20' ) || 
+					$this.hasClass( 'height-30' ) || 
+					$this.hasClass( 'height-40' ) || 
+					$this.hasClass( 'height-50' ) || 
+					$this.hasClass( 'height-60' ) || 
+					$this.hasClass( 'height-70' ) || 
+					$this.hasClass( 'height-80' ) || 
+					$this.hasClass( 'height-90' ) || 
+					$this.hasClass( 'height-100' )
+				 ) {		
+					
+					var newH = $this.height();
+					$this.css( {
+						'height': newH + 'px'
+					} );	
+					$this.find( '.parallax-img' ).css( {
+						'max-height': newH + 'px'
+					} );	
+				 }
+				
+				
+				//If the ".pos-vertical-align" has more content
+				if ( w <= 768 ) {
+					
+					if ( $this.find( '.pos-vertical-align' ).height() >= $this.find( '.parallax-img' ).height() ) {
+						$this.find( '.pos-vertical-align' ).addClass( 'relative' );
+						$this.find( '.parallax-img' ).hide();	
+					}
+					
+
+				}
+
+				
+				
+				if( typeof dataImg != typeof undefined ) {
+					$this.css( {
+						'background': 'url(' + dataImg + ') 50% 0 no-repeat ' + dataAtt
+					} );
+				}
+				
+				if( typeof dataSkew != typeof undefined ) {
+					$this.css( {
+						'transform'         : 'skew(0deg, '+dataSkew+'deg)'
+					} );
+				}	
+				
+	
+				$this.bgParallax( "50%", dataSpeed );
+				
+				$window.on( 'scroll touchmove', function() {
+					var scrolled = $window.scrollTop();
+					$this.find( '.parallax-element' ).css( 'margin-top', ( scrolled * dataElSpeed ) + 'px' );
+				});	
+		
+			});
+			
+		
+	
+		}
+		
+	
+
+    };
+
+	
+
+    theme.parallax = {
+        pageLoaded : pageLoaded        
+    };
+
+    theme.components.pageLoaded.push( pageLoaded );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
+/*
+Plugin: jQuery Parallax
+Version 1.1.3
+Author: Ian Lunn
+Twitter: @IanLunn
+Author URL: http://www.ianlunn.co.uk/
+Plugin URL: http://www.ianlunn.co.uk/plugins/jquery-parallax/
+
+Dual licensed under the MIT and GPL licenses:
+http://www.opensource.org/licenses/mit-license.php
+http://www.gnu.org/licenses/gpl.html
+*/
+
+(function( $ ){
+	var $window = $(window);
+	var windowHeight = $window.height();
+
+	$window.resize(function () {
+		windowHeight = $window.height();
+	});
+
+	$.fn.bgParallax = function(xpos, speedFactor, outerHeight) {
+		var $this = $(this);
+		var getHeight;
+		var firstTop;
+		var paddingTop = 0;
+		
+		//get the starting position of each element to have parallax applied to it		
+		$this.each(function(){
+		    firstTop = $this.offset().top;
+		});
+
+		if (outerHeight) {
+			getHeight = function(jqo) {
+				return jqo.outerHeight(true);
+			};
+		} else {
+			getHeight = function(jqo) {
+				return jqo.height();
+			};
+		}
+			
+		// setup defaults if arguments aren't specified
+		if (arguments.length < 1 || xpos === null) xpos = "50%";
+		if (arguments.length < 2 || speedFactor === null) speedFactor = 0.1;
+		if (arguments.length < 3 || outerHeight === null) outerHeight = true;
+		
+		// function to be called whenever the window is scrolled or resized
+		function update(){
+			var pos = $window.scrollTop();				
+
+			$this.each(function(){
+				var $element = $(this);
+				var top = $element.offset().top;
+				var height = getHeight($element);
+
+				// Check if totally above or totally below viewport
+				if (top + height < pos || top > pos + windowHeight) {
+					return;
+				}
+
+				$this.css('backgroundPosition', xpos + " " + Math.round((firstTop - pos) * speedFactor) + "px");
+			});
+		}		
+
+		$window.bind('scroll', update).resize(update);
+		update();
+	};
+})(jQuery);
 
 
 
@@ -3169,6 +3098,133 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
+
+
+/*! 
+ *************************************
+ * Pricing
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+    
+		
+		var $window      = $( window ),
+			windowWidth  = $window.width(),
+			windowHeight = $window.height();
+
+		
+		//-------- Pricing initialize
+		pricingInit( windowWidth );
+		
+		$window.on( 'resize', function() {
+			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+			if ( $window.width() != windowWidth ) {
+
+				// Update the window width for next time
+				windowWidth = $window.width();
+
+				// Do stuff here
+				pricingInit( windowWidth );
+		
+
+			}
+		});
+		
+		
+		
+		function pricingInit( w ) {
+			//Initialize the height
+			$( '.custom-price' ).each( function(){
+
+
+					//returns new id
+					var $this            = $( this ),
+						priceBGH         = Array(),
+						priceBGH_excerpt = Array(),
+						$initHeight      = $this.find( '.init-height' );
+
+					$initHeight.each( function( index ) {
+						//Screen protection of height
+						$( this ).find( '.border,.excerpt' ).css( 'height', 'auto' );
+
+						var tempheight = $( this ).height();
+						var tempheight_excerpt = $( this ).find( '.excerpt' ).height();
+						priceBGH.push( tempheight );
+						priceBGH_excerpt.push( tempheight_excerpt );
+
+
+					} );
+
+					var priceBGH_Max = Math.max.apply( Math, priceBGH );
+
+
+					if ( priceBGH_Max > 0 ) {
+						if ( w > 768 ){
+
+							// Initialize the height of all columns
+							$initHeight.find( '.border' ).css( 'height', priceBGH_Max + 'px' );
+
+							// Actived columns
+							$initHeight.find( '.border.active' ).each( function() {
+
+								var ty = Math.abs( parseInt( $( this ).css('transform').split(',')[5]));
+								if ( !isNaN(ty) ) {
+									$( this ).css( 'height', priceBGH_Max + ty*2 + 'px' );
+								}
+
+							});	
+
+
+
+						} else {
+							$initHeight.find( '.border' ).css( 'height', 'auto' );
+
+
+						}
+
+
+						// Actived columns
+						$initHeight.find( '.border.active' ).each( function() {
+
+							var textColor = $( this ).closest( '.border-hover' ).data( 'tcolor' ),
+								btnColor  = $( this ).closest( '.border-hover' ).data( 'bcolor' );
+
+							$( this ).css( 'background-color', btnColor );
+							$( this ).find( '.button' ).removeClass( 'button-bg-primary' ).addClass( 'button-bg-secondary' );
+
+
+						});	
+
+
+
+					}
+
+
+			});
+		}
+		
+		
+
+
+		
+    };
+
+    theme.pricing = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
+
+
 
 
 /*! 

@@ -15,7 +15,7 @@ theme = ( function ( theme, $, window, document ) {
 
         
 		//  Initialize
-		parallaxInit();
+		parallaxInit( windowWidth );
 		
 		$window.on( 'resize', function() {
 			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
@@ -25,14 +25,14 @@ theme = ( function ( theme, $, window, document ) {
 				windowWidth = $window.width();
 
 				// Do stuff here
-				parallaxInit();
+				parallaxInit( windowWidth );
 		
 
 			}
 		});
 		
 		
-		function parallaxInit() {
+		function parallaxInit( w ) {
 			
 			/* Pure parallax scrolling effect without other embedded HTML elements */
 			$( '.pure-bg-parallax' ).each(function() {
@@ -60,8 +60,7 @@ theme = ( function ( theme, $, window, document ) {
 					dataImg     = $this.data( 'image-src' ),
 					dataSkew    = $this.data( 'skew' ),
 					dataSpeed   = $this.data( 'speed' ),
-					dataElSpeed = $this.find( '.parallax-element' ).data( 'el-speed' ),
-					windowWidth = $window.width();
+					dataElSpeed = $this.find( '.parallax-element' ).data( 'el-speed' );
 				
 				
 				if( typeof dataAtt === typeof undefined ) { // If there is no data-xxx, save current source to it
@@ -120,7 +119,7 @@ theme = ( function ( theme, $, window, document ) {
 				
 				
 				//If the ".pos-vertical-align" has more content
-				if ( windowWidth <= 768 ) {
+				if ( w <= 768 ) {
 					
 					if ( $this.find( '.pos-vertical-align' ).height() >= $this.find( '.parallax-img' ).height() ) {
 						$this.find( '.pos-vertical-align' ).addClass( 'relative' );

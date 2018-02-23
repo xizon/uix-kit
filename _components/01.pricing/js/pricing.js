@@ -15,7 +15,7 @@ theme = ( function ( theme, $, window, document ) {
 
 		
 		//-------- Pricing initialize
-		pricingInit();
+		pricingInit( windowWidth );
 		
 		$window.on( 'resize', function() {
 			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
@@ -25,7 +25,7 @@ theme = ( function ( theme, $, window, document ) {
 				windowWidth = $window.width();
 
 				// Do stuff here
-				pricingInit();
+				pricingInit( windowWidth );
 		
 
 			}
@@ -33,7 +33,7 @@ theme = ( function ( theme, $, window, document ) {
 		
 		
 		
-		function pricingInit() {
+		function pricingInit( w ) {
 			//Initialize the height
 			$( '.custom-price' ).each( function(){
 
@@ -60,7 +60,7 @@ theme = ( function ( theme, $, window, document ) {
 
 
 					if ( priceBGH_Max > 0 ) {
-						if ( $( document.body ).width() > 768 ){
+						if ( w > 768 ){
 
 							// Initialize the height of all columns
 							$initHeight.find( '.border' ).css( 'height', priceBGH_Max + 'px' );

@@ -85,8 +85,9 @@ theme = ( function ( theme, $, window, document ) {
 
 
 				} );
-
-
+				
+				
+				sidrmenuInit( windowWidth ); 
 
 				// Close the menu on window change
 				$window.on( 'resize', function() {
@@ -99,32 +100,30 @@ theme = ( function ( theme, $, window, document ) {
 						// Do stuff here
 						$toggleBody.removeClass( 'menu-open' );
 						$( '.menu-toggle' ).removeClass( 'open' );
-						if ( windowWidth <= 768 ) sidrmenuInit(); 
+						sidrmenuInit( windowWidth );
 
 
 					}
 				});
 
-
-				if ( windowWidth <= 768 ) {
-					sidrmenuInit(); 
-				}
-	
 				
 			});
 		
 		
 
 			
-			function sidrmenuInit() {
+			function sidrmenuInit( w ) {
+				
+				if ( w <= 768 ) {
+					$( '.menu-container.mobile .menu-main > li' ).each( function() {
+						if ( $( this ).find( 'ul' ).length > 0 ) {
+							if ( $( this ).find( '.mobile-nav-arrow' ).length < 1 ) $( this ).prepend( '<em class="mobile-nav-arrow">+</em>' );
+							$( this ).find( 'ul ul' ).addClass( 'sub-sub' );
+							$( this ).find( ' > a' ).attr( 'href', 'javascript:void(0);' );
+						}
+					} );		
+				}
 	
-				$( '.menu-container.mobile .menu-main > li' ).each( function() {
-					if ( $( this ).find( 'ul' ).length > 0 ) {
-						if ( $( this ).find( '.mobile-nav-arrow' ).length < 1 ) $( this ).prepend( '<em class="mobile-nav-arrow">+</em>' );
-						$( this ).find( 'ul ul' ).addClass( 'sub-sub' );
-						$( this ).find( ' > a' ).attr( 'href', 'javascript:void(0);' );
-					}
-				} );		
 
 			}
 			

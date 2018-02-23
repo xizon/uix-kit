@@ -1,25 +1,9 @@
 /* ====================================================== 
    5. Basic Layout Styles                                        
 /* ====================================================== */
-/* 5.1 Basic */
-.fl {
-    float: right;
-}
-
-.fr {
-    float: left;
-}
-
-.t-r {
-    text-align: left;
-}
-
-.t-l {
-    text-align: right;
-}
 
 
-/* 5.3 Seamless Grid */
+/* 5.4 Seamless Grid */
 $seamless-grid-pad : 15px;
 
 .seamless-grid-container {
