@@ -3,34 +3,163 @@
 /* ====================================================== */
 /* 1) Controls */
 
-.controls textarea, 
-.controls input[type="text"],
-.controls select {
-	border-radius: 0;
-	
-	/* Remove inner shadow from inputs on mobile iOS */
-    -webkit-appearance: none;
+/* Required field marker */
+.controls-im {
+	color: red;
+	display: inline-block;
+	padding: 0 .5rem;
+	font-size: 1.5rem;
+	position: absolute;
 }
 
+
+/* Default Controls */
 .controls {
-  text-align: left;
-  position: relative;
-}
-
-.controls-custom {
-  width: calc(100% - 1.09375rem );
-  font-size: 0.875rem;
-  padding: 0.546875rem;
-  border: none;
-  box-sizing: content-box;
-  @include transition-default();
-}
-
-.controls {
+	text-align: left;
+	position: relative;
 	
+	&.controls-side {
+		margin-left: .2rem;
+	}
+	
+	&.t-c {
+		text-align: center !important;
+	}
+
+	input:not([type="checkbox"]):not([type="radio"]) {
+
+	  border-radius: 0;
+	  /* Remove inner shadow from inputs on mobile iOS */
+	  -webkit-appearance: none;  
+
+	  @include transition-default();
+	  font-size: 0.875rem;
+	  padding: 0.546875rem;
+	  box-sizing: content-box;
+	  background-color: #fff;
+	  color: #888;
+	  margin-bottom: 1.09375rem;
+	  border: 1px solid #dce4e8;
+	  width: calc(100% - 1.09375rem - 2px );	
+
+	
+	  &.text-short {
+		  width: 7.5rem;
+		  margin-right: .5rem;
+	  }  	
+		
+	  &:focus ~ label, &:hover ~ label {
+		color: $primary-text-color1;
+		cursor: text;
+	  }	
+		
+	  &:focus, &:hover {
+		outline: none;
+		border-color: $primary-text-color1;
+	  }	
+
+		
+	}
+
+	textarea, 
+	button, 
+	select {
+
+		border-radius: 0;
+		/* Remove inner shadow from inputs on mobile iOS */
+		-webkit-appearance: none;    
+
+		width: calc(100% - 1.09375rem );
+		font-size: 0.875rem;
+		padding: 0.546875rem;
+		border: none;
+		box-sizing: content-box;
+		@include transition-default();
+
+		background-color: #fff;
+		color: #888;
+		margin-bottom: 1.09375rem;
+		border: 1px solid #dce4e8;
+		width: calc(100% - 1.09375rem - 2px );  
+
+	}
+
+
+	textarea {
+
+		resize: none;
+		height: 20vh; 
+
+		&:focus ~ label, &:hover ~ label {
+		  color: $primary-text-color1;
+		  cursor: text;
+		}
+
+		&:focus, &:hover {
+		  outline: none;
+		  border-color: $primary-text-color1;
+		}  
+
+
+	}
+	
+	
+	button {
+
+		cursor: pointer;
+		padding: 0.75rem 0;
+		width: 100%;
+		border-radius: 0;  
+
+		&:focus ~ label, &:hover ~ label {
+		  color: $primary-text-color1;
+		  cursor: text;
+		}
+
+		&:focus, &:hover {
+		  outline: none;
+		  border-color: $primary-text-color1;
+		}  
+
+	}
+	
+	select {
+		cursor: pointer;
+		&:focus ~ label, &:hover ~ label {
+		  color: $primary-text-color1;
+		  cursor: text;
+		}
+
+		&:focus, &:hover {
+		  outline: none;
+		  border-color: $primary-text-color1;
+		}  
+
+	}
+	
+	
+	label {
+		font-weight: 500;
+		position: absolute;
+		left: 0.875rem;
+		top: 0.721875rem;
+		color: #999;
+		display: inline-block;
+		padding: 0 0.875rem;
+		background-color: rgba(255, 255, 255, 0);
+		pointer-events: none;
+		transition: color 0.3s, top 0.3s, background-color 0.2s;
+		&.active {
+		  top: -1.09375rem;
+		  color: #555;
+		  background-color: white;
+		}
+	}
+	
+	
+	/*-- Radio --*/
 	&.radio {
 	
-
 	  label {
 		padding-left: 1.25rem !important;
 		position: relative !important;
@@ -44,6 +173,7 @@
 		
 	}
 	
+	/*-- Select --*/
 	&.select {
 
 		> span {
@@ -58,284 +188,134 @@
 			padding-right: 1.5rem !important;
 		}
 		
-	  label {
-		padding-left: 0 !important;
-		padding-right: 0 !important;
-		position: relative !important;
-		left: auto !important;
-		top: auto !important;
-		pointer-events: auto !important;
-		padding-right: 1rem !important;
-		
-		&:after {
-		  border: 1px solid #999;
-		  border-right: 0;
-		  border-top: 0;
-		  content: " ";
-		  display: block;
-		  width: .35rem;
-		  height: .35rem;
-		  pointer-events: none;
-		  position: absolute;
-		  transform: rotate(-45deg);
-		  margin-top: -.875rem;
-		  right: 1rem;
-		  top: 50%;;
-		  z-index: 1;
-		}
+		label {
+			padding-left: 0 !important;
+			padding-right: 0 !important;
+			position: relative !important;
+			left: auto !important;
+			top: auto !important;
+			pointer-events: auto !important;
+			padding-right: 1rem !important;
 
-		  
-		  
-		&.active {
-		  top: auto !important;
-		}
-	  }	
+			&:after {
+			  border: 1px solid #dce4e8;
+			  border-right: 0;
+			  border-top: 0;
+			  content: " ";
+			  display: block;
+			  width: .35rem;
+			  height: .35rem;
+			  pointer-events: none;
+			  position: absolute;
+			  transform: rotate(-45deg);
+			  margin-top: -.875rem;
+			  right: 1rem;
+			  top: 50%;;
+			  z-index: 1;
+			}
+
+			&.active {
+			  top: auto !important;
+			}
+		}	
 		
 	}
 	
 	
+
+    /*-- Form With Icon --*/
+	&.withicon {
+		label {
+		  left: 2rem;
+		}
+		
+		i {
+		  position: absolute;
+		  left: 1rem;
+		  top: 1rem;
+		}
+		
+		input:not([type="checkbox"]):not([type="radio"]) {
+			padding-left: 2.5rem;
+			width: calc(100% - 1.09375rem - 2px - 2.5rem );
+
+		}
+		
+		textarea, 
+		button, 
+		select {
+		  padding-left: 2.5rem;
+		  width: calc(100% - 1.09375rem - 2px - 2.5rem );
+		}
+
+	}
 	
 	
-  input {
-    &[type="text"], &[type="email"], &[type="tel"], &[type="password"], &[type="url"], &[type="search"] {
-      width: calc(100% - 1.09375rem );
-      font-size: 0.875rem;
-      padding: 0.546875rem;
-      border: none;
-      box-sizing: content-box;
-      @include transition-default();
-    }
-  }
+	/*-- Form Status: Success --*/
+	&.success {
+		input:not([type="checkbox"]):not([type="radio"]) {
+			border-color: #4AB005;
+			
+		}
+		
+		textarea, 
+		button, 
+		select {
+		  border-color: #4AB005;
+		}
+		
+		label {
+		  color: #4AB005 !important;
+		}
+	}
 	
-  textarea, button, select {
-    width: calc(100% - 1.09375rem );
-    font-size: 0.875rem;
-    padding: 0.546875rem;
-    border: none;
-    box-sizing: content-box;
-    @include transition-default();
-  }
+	/*-- Form Status: Error --*/
+	&.error {
+		input:not([type="checkbox"]):not([type="radio"]) {
+			border-color: #f00;
+		    
+		}
+		textarea, 
+		button, 
+		select {
+		  border-color: #f00;
+		}
+		label {
+		  color: #f00 !important;
+		}
+	}
 	
-  input {
-    &[type="text"], &[type="email"], &[type="tel"], &[type="password"], &[type="url"], &[type="search"] {
-      background-color: #fff;
-      color: #888;
-      margin-bottom: 1.09375rem;
-      border: 1px solid #c6c6c6;
-      width: calc(100% - 1.09375rem - 2px );
-    }
-  }
-  textarea, button, select {
-    background-color: #fff;
-    color: #888;
-    margin-bottom: 1.09375rem;
-    border: 1px solid #c6c6c6;
-    width: calc(100% - 1.09375rem - 2px );
-  }
-  input {
-    &[type="text"] {
-      &:focus, &:hover {
-        outline: none;
-        border-color: $primary-text-color1;
-      }
-    }
-    &[type="email"] {
-      &:focus, &:hover {
-        outline: none;
-        border-color: $primary-text-color1;
-      }
-    }
-    &[type="tel"] {
-      &:focus, &:hover {
-        outline: none;
-        border-color: $primary-text-color1;
-      }
-    }
-    &[type="password"] {
-      &:focus, &:hover {
-        outline: none;
-        border-color: $primary-text-color1;
-      }
-    }
-    &[type="url"] {
-      &:focus, &:hover {
-        outline: none;
-        border-color: $primary-text-color1;
-      }
-    }
-    &[type="search"] {
-      &:focus, &:hover {
-        outline: none;
-        border-color: $primary-text-color1;
-      }
-    }
-  }
-  textarea {
-    &:focus, &:hover {
-      outline: none;
-      border-color: $primary-text-color1;
-    }
-  }
-  button {
-    &:focus, &:hover {
-      outline: none;
-      border-color: $primary-text-color1;
-    }
-  }
-  select {
-    &:focus, &:hover {
-      outline: none;
-      border-color: $primary-text-color1;
-    }
-  }
-  input {
-    &[type="text"] {
-      &:focus ~ label, &:hover ~ label {
-        color: $primary-text-color1;
-        cursor: text;
-      }
-    }
-    &[type="email"] {
-      &:focus ~ label, &:hover ~ label {
-        color: $primary-text-color1;
-        cursor: text;
-      }
-    }
-    &[type="tel"] {
-      &:focus ~ label, &:hover ~ label {
-        color: $primary-text-color1;
-        cursor: text;
-      }
-    }
-    &[type="password"] {
-      &:focus ~ label, &:hover ~ label {
-        color: $primary-text-color1;
-        cursor: text;
-      }
-    }
-    &[type="url"] {
-      &:focus ~ label, &:hover ~ label {
-        color: $primary-text-color1;
-        cursor: text;
-      }
-    }
-    &[type="search"] {
-      &:focus ~ label, &:hover ~ label {
-        color: $primary-text-color1;
-        cursor: text;
-      }
-    }
-  }
-  textarea {
-    &:focus ~ label, &:hover ~ label {
-      color: $primary-text-color1;
-      cursor: text;
-    }
-  }
-  button {
-    &:focus ~ label, &:hover ~ label {
-      color: $primary-text-color1;
-      cursor: text;
-    }
-  }
-  select {
-    &:focus ~ label, &:hover ~ label {
-      color: $primary-text-color1;
-      cursor: text;
-    }
-  }
-  .fa-sort {
-    position: absolute;
-    right: 0.875rem;
-    top: 1.09375rem;
-    color: #999;
-  }
-  select {
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    cursor: pointer;
-  }
-  label {
-	font-weight: 500;
-    position: absolute;
-    left: 0.875rem;
-    top: 0.721875rem;
-    color: #999;
-    display: inline-block;
-    padding: 0 0.875rem;
-    background-color: rgba(255, 255, 255, 0);
-    pointer-events: none;
-    transition: color 0.3s, top 0.3s, background-color 0.2s;
-    &.active {
-      top: -1.09375rem;
-      color: #555;
-      background-color: white;
-    }
-  }
-  textarea {
-    resize: none;
-    height: 20vh;
-  }
-  button {
-    cursor: pointer;
-    padding: 0.75rem 0;
-    width: 100%;
-    border-radius: 0;
-  }
-  .req-icon {
-    position: absolute;
-    right: 0.721875rem;
-    top: 0.721875rem;
-    color: $highlight-color1;
-  }
-  &.success {
-    input {
-      &[type="text"], &[type="email"], &[type="tel"], &[type="password"], &[type="url"], &[type="search"] {
-        border-color: #4AB005;
-      }
-    }
-    textarea, button, select {
-      border-color: #4AB005;
-    }
-    label {
-      color: #4AB005 !important;
-    }
-  }
-  &.error {
-    input {
-      &[type="text"], &[type="email"], &[type="tel"], &[type="password"], &[type="url"], &[type="search"] {
-        border-color: #f00;
-      }
-    }
-    textarea, button, select {
-      border-color: #f00;
-    }
-    label {
-      color: #f00 !important;
-    }
-  }
-  &.withicon {
-    label {
-      left: 2rem;
-    }
-    i {
-      position: absolute;
-      left: 1rem;
-      top: 1rem;
-    }
-    input {
-      &[type="text"], &[type="email"], &[type="tel"], &[type="password"], &[type="url"], &[type="search"] {
-        padding-left: 2.5rem;
-        width: calc(100% - 1.09375rem - 2px - 2.5rem );
-      }
-    }
-    textarea, button, select {
-      padding-left: 2.5rem;
-      width: calc(100% - 1.09375rem - 2px - 2.5rem );
-    }
-  }
+	
+	/*-- Other --*/
+	.fa-sort {
+		position: absolute;
+		right: 0.875rem;
+		top: 1.09375rem;
+		color: #999;
+	}
+
+
+	.req-icon {
+		position: absolute;
+		right: 0.721875rem;
+		top: 0.721875rem;
+		color: $highlight-color1;
+	}
+	
+
+	
 }
 
+
+/* Custom Controls */
+.controls-custom {
+  width: calc(100% - 1.09375rem );
+  font-size: 0.875rem;
+  padding: 0.546875rem;
+  border: none;
+  box-sizing: content-box;
+  @include transition-default();
+}
 
 
 
@@ -370,7 +350,7 @@
   background-color: #fff;
   color: #888;
   margin-bottom: 1.09375rem;
-  border: 1px solid #c6c6c6;
+  border: 1px solid #dce4e8;
   font-size: 0.875rem;
   padding: 0.546875rem 1.09375rem;
   font-weight: 600;
@@ -392,6 +372,7 @@
     border-radius: 0 50px 50px 0;
     position: relative;
     margin: 0;
+	color: #527a8e;
   }
   &.form-square {
     input, button[type="submit"] {

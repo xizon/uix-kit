@@ -8,7 +8,7 @@
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
  * ## Version             :  1.1.4
- * ## Last Update         :  February 23, 2018
+ * ## Last Update         :  February 24, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -3310,20 +3310,72 @@ ul.entry-meta {
    Form                                     
 /* ====================================================== */
 /* 1) Controls */
+/* Required field marker */
+.controls-im {
+    color: red;
+    display: inline-block;
+    padding: 0 .5rem;
+    font-size: 1.5rem;
+    position: absolute;
+}
+
+/* Default Controls */
+.controls {
+    text-align: left;
+    position: relative;
+  /*-- Radio --*/
+  /*-- Select --*/
+  /*-- Form With Icon --*/
+  /*-- Form Status: Success --*/
+  /*-- Form Status: Error --*/
+  /*-- Other --*/;
+}
+
+.controls.controls-side {
+    margin-left: .2rem;
+}
+
+.controls.t-c {
+    text-align: center !important;
+}
+
+.controls input:not([type="checkbox"]):not([type="radio"]) {
+    border-radius: 0;
+  /* Remove inner shadow from inputs on mobile iOS */
+    -webkit-appearance: none;
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+    font-size: 0.875rem;
+    padding: 0.546875rem;
+    box-sizing: content-box;
+    background-color: #fff;
+    color: #888;
+    margin-bottom: 1.09375rem;
+    border: 1px solid #dce4e8;
+    width: calc(100% - 1.09375rem - 2px);
+}
+
+.controls input:not([type="checkbox"]):not([type="radio"]).text-short {
+    width: 7.5rem;
+    margin-right: .5rem;
+}
+
+.controls input:not([type="checkbox"]):not([type="radio"]):focus ~ label, .controls input:not([type="checkbox"]):not([type="radio"]):hover ~ label {
+    color: #212121;
+    cursor: text;
+}
+
+.controls input:not([type="checkbox"]):not([type="radio"]):focus, .controls input:not([type="checkbox"]):not([type="radio"]):hover {
+    outline: none;
+    border-color: #212121;
+}
+
 .controls textarea,
-.controls input[type="text"],
+.controls button,
 .controls select {
     border-radius: 0;
   /* Remove inner shadow from inputs on mobile iOS */
     -webkit-appearance: none;
-}
-
-.controls {
-    text-align: left;
-    position: relative;
-}
-
-.controls-custom {
     width: calc(100% - 1.09375rem);
     font-size: 0.875rem;
     padding: 0.546875rem;
@@ -3331,6 +3383,76 @@ ul.entry-meta {
     box-sizing: content-box;
   /* @include transition-default(); */
     transition: all 0.3s ease;
+    background-color: #fff;
+    color: #888;
+    margin-bottom: 1.09375rem;
+    border: 1px solid #dce4e8;
+    width: calc(100% - 1.09375rem - 2px);
+}
+
+.controls textarea {
+    resize: none;
+    height: 20vh;
+}
+
+.controls textarea:focus ~ label, .controls textarea:hover ~ label {
+    color: #212121;
+    cursor: text;
+}
+
+.controls textarea:focus, .controls textarea:hover {
+    outline: none;
+    border-color: #212121;
+}
+
+.controls button {
+    cursor: pointer;
+    padding: 0.75rem 0;
+    width: 100%;
+    border-radius: 0;
+}
+
+.controls button:focus ~ label, .controls button:hover ~ label {
+    color: #212121;
+    cursor: text;
+}
+
+.controls button:focus, .controls button:hover {
+    outline: none;
+    border-color: #212121;
+}
+
+.controls select {
+    cursor: pointer;
+}
+
+.controls select:focus ~ label, .controls select:hover ~ label {
+    color: #212121;
+    cursor: text;
+}
+
+.controls select:focus, .controls select:hover {
+    outline: none;
+    border-color: #212121;
+}
+
+.controls label {
+    font-weight: 500;
+    position: absolute;
+    left: 0.875rem;
+    top: 0.721875rem;
+    color: #999;
+    display: inline-block;
+    padding: 0 0.875rem;
+    background-color: rgba(255, 255, 255, 0);
+    pointer-events: none;
+    transition: color 0.3s, top 0.3s, background-color 0.2s;
+}
+
+.controls label.active {
+    top: -1.09375rem;
+    color: #555;
+    background-color: white;
 }
 
 .controls.radio label {
@@ -3367,7 +3489,7 @@ ul.entry-meta {
 }
 
 .controls.select label:after {
-    border: 1px solid #999;
+    border: 1px solid #dce4e8;
     border-right: 0;
     border-top: 0;
     content: " ";
@@ -3387,207 +3509,6 @@ ul.entry-meta {
     top: auto !important;
 }
 
-.controls input[type="text"], .controls input[type="email"], .controls input[type="tel"], .controls input[type="password"], .controls input[type="url"], .controls input[type="search"] {
-    width: calc(100% - 1.09375rem);
-    font-size: 0.875rem;
-    padding: 0.546875rem;
-    border: none;
-    box-sizing: content-box;
-  /* @include transition-default(); */
-    transition: all 0.3s ease;
-}
-
-.controls textarea, .controls button, .controls select {
-    width: calc(100% - 1.09375rem);
-    font-size: 0.875rem;
-    padding: 0.546875rem;
-    border: none;
-    box-sizing: content-box;
-  /* @include transition-default(); */
-    transition: all 0.3s ease;
-}
-
-.controls input[type="text"], .controls input[type="email"], .controls input[type="tel"], .controls input[type="password"], .controls input[type="url"], .controls input[type="search"] {
-    background-color: #fff;
-    color: #888;
-    margin-bottom: 1.09375rem;
-    border: 1px solid #c6c6c6;
-    width: calc(100% - 1.09375rem - 2px);
-}
-
-.controls textarea, .controls button, .controls select {
-    background-color: #fff;
-    color: #888;
-    margin-bottom: 1.09375rem;
-    border: 1px solid #c6c6c6;
-    width: calc(100% - 1.09375rem - 2px);
-}
-
-.controls input[type="text"]:focus, .controls input[type="text"]:hover {
-    outline: none;
-    border-color: #212121;
-}
-
-.controls input[type="email"]:focus, .controls input[type="email"]:hover {
-    outline: none;
-    border-color: #212121;
-}
-
-.controls input[type="tel"]:focus, .controls input[type="tel"]:hover {
-    outline: none;
-    border-color: #212121;
-}
-
-.controls input[type="password"]:focus, .controls input[type="password"]:hover {
-    outline: none;
-    border-color: #212121;
-}
-
-.controls input[type="url"]:focus, .controls input[type="url"]:hover {
-    outline: none;
-    border-color: #212121;
-}
-
-.controls input[type="search"]:focus, .controls input[type="search"]:hover {
-    outline: none;
-    border-color: #212121;
-}
-
-.controls textarea:focus, .controls textarea:hover {
-    outline: none;
-    border-color: #212121;
-}
-
-.controls button:focus, .controls button:hover {
-    outline: none;
-    border-color: #212121;
-}
-
-.controls select:focus, .controls select:hover {
-    outline: none;
-    border-color: #212121;
-}
-
-.controls input[type="text"]:focus ~ label, .controls input[type="text"]:hover ~ label {
-    color: #212121;
-    cursor: text;
-}
-
-.controls input[type="email"]:focus ~ label, .controls input[type="email"]:hover ~ label {
-    color: #212121;
-    cursor: text;
-}
-
-.controls input[type="tel"]:focus ~ label, .controls input[type="tel"]:hover ~ label {
-    color: #212121;
-    cursor: text;
-}
-
-.controls input[type="password"]:focus ~ label, .controls input[type="password"]:hover ~ label {
-    color: #212121;
-    cursor: text;
-}
-
-.controls input[type="url"]:focus ~ label, .controls input[type="url"]:hover ~ label {
-    color: #212121;
-    cursor: text;
-}
-
-.controls input[type="search"]:focus ~ label, .controls input[type="search"]:hover ~ label {
-    color: #212121;
-    cursor: text;
-}
-
-.controls textarea:focus ~ label, .controls textarea:hover ~ label {
-    color: #212121;
-    cursor: text;
-}
-
-.controls button:focus ~ label, .controls button:hover ~ label {
-    color: #212121;
-    cursor: text;
-}
-
-.controls select:focus ~ label, .controls select:hover ~ label {
-    color: #212121;
-    cursor: text;
-}
-
-.controls .fa-sort {
-    position: absolute;
-    right: 0.875rem;
-    top: 1.09375rem;
-    color: #999;
-}
-
-.controls select {
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    cursor: pointer;
-}
-
-.controls label {
-    font-weight: 500;
-    position: absolute;
-    left: 0.875rem;
-    top: 0.721875rem;
-    color: #999;
-    display: inline-block;
-    padding: 0 0.875rem;
-    background-color: rgba(255, 255, 255, 0);
-    pointer-events: none;
-    transition: color 0.3s, top 0.3s, background-color 0.2s;
-}
-
-.controls label.active {
-    top: -1.09375rem;
-    color: #555;
-    background-color: white;
-}
-
-.controls textarea {
-    resize: none;
-    height: 20vh;
-}
-
-.controls button {
-    cursor: pointer;
-    padding: 0.75rem 0;
-    width: 100%;
-    border-radius: 0;
-}
-
-.controls .req-icon {
-    position: absolute;
-    right: 0.721875rem;
-    top: 0.721875rem;
-    color: #EC5E79;
-}
-
-.controls.success input[type="text"], .controls.success input[type="email"], .controls.success input[type="tel"], .controls.success input[type="password"], .controls.success input[type="url"], .controls.success input[type="search"] {
-    border-color: #4AB005;
-}
-
-.controls.success textarea, .controls.success button, .controls.success select {
-    border-color: #4AB005;
-}
-
-.controls.success label {
-    color: #4AB005 !important;
-}
-
-.controls.error input[type="text"], .controls.error input[type="email"], .controls.error input[type="tel"], .controls.error input[type="password"], .controls.error input[type="url"], .controls.error input[type="search"] {
-    border-color: #f00;
-}
-
-.controls.error textarea, .controls.error button, .controls.error select {
-    border-color: #f00;
-}
-
-.controls.error label {
-    color: #f00 !important;
-}
-
 .controls.withicon label {
     left: 2rem;
 }
@@ -3598,14 +3519,69 @@ ul.entry-meta {
     top: 1rem;
 }
 
-.controls.withicon input[type="text"], .controls.withicon input[type="email"], .controls.withicon input[type="tel"], .controls.withicon input[type="password"], .controls.withicon input[type="url"], .controls.withicon input[type="search"] {
+.controls.withicon input:not([type="checkbox"]):not([type="radio"]) {
     padding-left: 2.5rem;
     width: calc(100% - 1.09375rem - 2px - 2.5rem);
 }
 
-.controls.withicon textarea, .controls.withicon button, .controls.withicon select {
+.controls.withicon textarea,
+.controls.withicon button,
+.controls.withicon select {
     padding-left: 2.5rem;
     width: calc(100% - 1.09375rem - 2px - 2.5rem);
+}
+
+.controls.success input:not([type="checkbox"]):not([type="radio"]) {
+    border-color: #4AB005;
+}
+
+.controls.success textarea,
+.controls.success button,
+.controls.success select {
+    border-color: #4AB005;
+}
+
+.controls.success label {
+    color: #4AB005 !important;
+}
+
+.controls.error input:not([type="checkbox"]):not([type="radio"]) {
+    border-color: #f00;
+}
+
+.controls.error textarea,
+.controls.error button,
+.controls.error select {
+    border-color: #f00;
+}
+
+.controls.error label {
+    color: #f00 !important;
+}
+
+.controls .fa-sort {
+    position: absolute;
+    right: 0.875rem;
+    top: 1.09375rem;
+    color: #999;
+}
+
+.controls .req-icon {
+    position: absolute;
+    right: 0.721875rem;
+    top: 0.721875rem;
+    color: #EC5E79;
+}
+
+/* Custom Controls */
+.controls-custom {
+    width: calc(100% - 1.09375rem);
+    font-size: 0.875rem;
+    padding: 0.546875rem;
+    border: none;
+    box-sizing: content-box;
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
 }
 
 /* 2) Upload */
@@ -3637,7 +3613,7 @@ ul.entry-meta {
     background-color: #fff;
     color: #888;
     margin-bottom: 1.09375rem;
-    border: 1px solid #c6c6c6;
+    border: 1px solid #dce4e8;
     font-size: 0.875rem;
     padding: 0.546875rem 1.09375rem;
     font-weight: 600;
@@ -3664,6 +3640,7 @@ ul.entry-meta {
     border-radius: 0 50px 50px 0;
     position: relative;
     margin: 0;
+    color: #527a8e;
 }
 
 .form-merge.form-square input, .form-merge.form-square button[type="submit"] {
@@ -3685,6 +3662,107 @@ ul.entry-meta {
         border-radius: 50px;
         width: 100%;
     }
+}
+
+/* ====================================================== 
+   Gallery     
+/* ====================================================== */
+.custom-gallery .custom-gallery-item {
+    transition: none;
+    position: relative;
+    text-align: left;
+}
+
+.custom-gallery .custom-gallery-item .link-to {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    z-index: 3;
+    opacity: 0;
+    margin-top: -1rem;
+  /* Vertical Center */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.custom-gallery .custom-gallery-item:hover .link-to {
+    opacity: 1;
+}
+
+.custom-gallery .custom-gallery-item .cover {
+    position: relative;
+}
+
+.custom-gallery .custom-gallery-item .cover:before {
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0);
+    display: block;
+    content: '';
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+}
+
+.custom-gallery .custom-gallery-item:hover .cover:before {
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.custom-gallery .custom-gallery-item h3 {
+    position: relative;
+    font-size: 1.125rem;
+    padding-top: 0.546875rem;
+}
+
+.custom-gallery .custom-gallery-item .title {
+    opacity: 0.7;
+    margin-left: 0.875rem;
+    font-size: 0.625rem;
+    line-height: 1.625;
+    display: inline-block;
+}
+
+.custom-gallery .custom-gallery-item .title:before {
+    content: '|';
+    padding-right: 0.875rem;
+}
+
+.custom-gallery .custom-gallery-item .category {
+    font-size: 0.625rem;
+    line-height: 1.625;
+    display: inline-block;
+    position: absolute;
+    bottom: 0.875rem;
+    right: 0;
+    background: #EC5E79;
+    border-radius: 25px;
+    padding: 0.0875rem 1.1375rem;
+    color: #fff;
+}
+
+.custom-gallery .custom-gallery-item .category a {
+    color: #fff;
+}
+
+.custom-gallery .custom-gallery-item .category:hover {
+    background: #C56263;
+}
+
+.custom-gallery .custom-gallery-item .image {
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    position: relative;
+    outline: 0;
+    background: #ddd;
+    border: 1px solid #E7E7E7;
+}
+
+.custom-gallery .custom-gallery-item .cover img {
+    width: 100%;
 }
 
 /* ====================================================== 
@@ -3810,107 +3888,6 @@ ul.entry-meta {
     100% {
         transform: scale(1);
     }
-}
-
-/* ====================================================== 
-   Gallery     
-/* ====================================================== */
-.custom-gallery .custom-gallery-item {
-    transition: none;
-    position: relative;
-    text-align: left;
-}
-
-.custom-gallery .custom-gallery-item .link-to {
-    width: 100%;
-    position: absolute;
-    left: 0;
-    z-index: 3;
-    opacity: 0;
-    margin-top: -1rem;
-  /* Vertical Center */
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.custom-gallery .custom-gallery-item:hover .link-to {
-    opacity: 1;
-}
-
-.custom-gallery .custom-gallery-item .cover {
-    position: relative;
-}
-
-.custom-gallery .custom-gallery-item .cover:before {
-  /* @include transition-default(); */
-    transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0);
-    display: block;
-    content: '';
-    top: 0;
-    left: 0;
-    position: absolute;
-    z-index: 2;
-    width: 100%;
-    height: 100%;
-}
-
-.custom-gallery .custom-gallery-item:hover .cover:before {
-    background: rgba(255, 255, 255, 0.95);
-}
-
-.custom-gallery .custom-gallery-item h3 {
-    position: relative;
-    font-size: 1.125rem;
-    padding-top: 0.546875rem;
-}
-
-.custom-gallery .custom-gallery-item .title {
-    opacity: 0.7;
-    margin-left: 0.875rem;
-    font-size: 0.625rem;
-    line-height: 1.625;
-    display: inline-block;
-}
-
-.custom-gallery .custom-gallery-item .title:before {
-    content: '|';
-    padding-right: 0.875rem;
-}
-
-.custom-gallery .custom-gallery-item .category {
-    font-size: 0.625rem;
-    line-height: 1.625;
-    display: inline-block;
-    position: absolute;
-    bottom: 0.875rem;
-    right: 0;
-    background: #EC5E79;
-    border-radius: 25px;
-    padding: 0.0875rem 1.1375rem;
-    color: #fff;
-}
-
-.custom-gallery .custom-gallery-item .category a {
-    color: #fff;
-}
-
-.custom-gallery .custom-gallery-item .category:hover {
-    background: #C56263;
-}
-
-.custom-gallery .custom-gallery-item .image {
-    width: 100%;
-    display: block;
-    overflow: hidden;
-    position: relative;
-    outline: 0;
-    background: #ddd;
-    border: 1px solid #E7E7E7;
-}
-
-.custom-gallery .custom-gallery-item .cover img {
-    width: 100%;
 }
 
 /* ====================================================== 
