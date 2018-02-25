@@ -2305,6 +2305,91 @@ theme = ( function ( theme, $, window, document ) {
 
 /*! 
  *************************************
+ * Navigation Highlighting
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+    
+        // Get section or article by href
+        function getRelatedContent( el ) {
+            return $( $( el ).attr( 'href' ) );
+        }
+        // Get link by section or article id
+        function getRelatedNavigation( el ) {
+            return $( '.menu-main li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' );
+        } 
+        
+	    //-------- Navigation highlighting using waypoints
+		if ( $( 'body' ).hasClass( 'onepage' ) ) {
+
+
+			// Smooth scroll to content
+			$( '.menu-main li > a' ).on('click', function(e) {
+				e.preventDefault();
+
+				$( 'html,body' ).animate({
+					scrollTop: getRelatedContent( this ).offset().top - 20
+				});
+			});	
+
+			//-------- Default cwaypoint settings
+			var topSectionSpacing = $( '.header-area' ).outerHeight( true );
+			var waypoints1 = $( '[data-highlight-section="true"]' ).waypoint({
+				handler: function( direction ) {
+
+
+					// Highlight element when related content
+					getRelatedNavigation( this.element ).toggleClass( 'active', direction === 'down' );
+					$( this.element ).toggleClass( 'active', direction === 'down' );
+
+				},
+				offset: topSectionSpacing
+			});	
+
+			var waypoints2 = $( '[data-highlight-section="true"]' ).waypoint({
+				handler: function( direction ) {
+
+					// Highlight element when related content
+					getRelatedNavigation( this.element ).toggleClass( 'active', direction === 'up' );
+					$( this.element ).toggleClass( 'active', direction === 'up' );
+
+				},
+				offset: function() {  
+					return -$( this.element ).height() - topSectionSpacing; 
+				}
+			});	
+
+			setTimeout( function() {
+				$( '.menu-main li:first' ).addClass( 'active' );
+			}, 1000 );	
+		}
+
+		
+		
+		
+		
+    };
+
+    theme.navHighlight = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
+
+
+
+
+/*! 
+ *************************************
  * Multiple Items Carousel
  *************************************
  */
@@ -2699,75 +2784,66 @@ theme = ( function ( theme, $, window, document ) {
 
 /*! 
  *************************************
- * Navigation Highlighting
+ * Periodical Scroll
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
     'use strict';
     
     var documentReady = function( $ ) {
-    
-        // Get section or article by href
-        function getRelatedContent( el ) {
-            return $( $( el ).attr( 'href' ) );
-        }
-        // Get link by section or article id
-        function getRelatedNavigation( el ) {
-            return $( '.menu-main li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' );
-        } 
-        
-	    //-------- Navigation highlighting using waypoints
-		if ( $( 'body' ).hasClass( 'onepage' ) ) {
+	
+		$( '[data-periodical-scroll-container]' ).each(function() {
+
+			var $this       = $( this ),
+				ul          = $this.data( 'periodical-scroll-container' ),
+				speed       = $this.data( 'periodical-scroll-speed' ),
+				timing      = $this.data( 'periodical-scroll-timing' );
 
 
-			// Smooth scroll to content
-			$( '.menu-main li > a' ).on('click', function(e) {
-				e.preventDefault();
+			if( typeof speed === typeof undefined ) {
+				speed = 600;
+			}
 
-				$( 'html,body' ).animate({
-					scrollTop: getRelatedContent( this ).offset().top - 20
-				});
-			});	
+			if( typeof timing === typeof undefined ) {
+				timing = 2000;
+			}	
+			
+			var $wrap  = $this.find( ul ),
+				time   = timing,
+				moveEv = null;
+			
+			//Initialize the container height
+			$wrap.css({
+				'height'   : $wrap.find( 'li:first' ).height() + 'px',
+				'overflow' : 'hidden'
+			});
+			
+ 
+			//Animation
+			$wrap.on( 'mouseenter', function() {
 
-			//-------- Default cwaypoint settings
-			var topSectionSpacing = $( '.header-area' ).outerHeight( true );
-			var waypoints1 = $( '[data-highlight-section="true"]' ).waypoint({
-				handler: function( direction ) {
+				clearInterval( moveEv );
 
+			} ).on( 'mouseleave' , function() {
+				moveEv=setInterval(function(){
+					var $item     = $wrap.find( 'li:first' ),
+						curHeight = $item.height(); 
 
-					// Highlight element when related content
-					getRelatedNavigation( this.element ).toggleClass( 'active', direction === 'down' );
-					$( this.element ).toggleClass( 'active', direction === 'down' );
+					$item.animate({marginTop: -curHeight + 'px' }, speed, function(){
+						$item.css('marginTop',0).appendTo( $wrap );
+					});
 
-				},
-				offset: topSectionSpacing
-			});	
-
-			var waypoints2 = $( '[data-highlight-section="true"]' ).waypoint({
-				handler: function( direction ) {
-
-					// Highlight element when related content
-					getRelatedNavigation( this.element ).toggleClass( 'active', direction === 'up' );
-					$( this.element ).toggleClass( 'active', direction === 'up' );
-
-				},
-				offset: function() {  
-					return -$( this.element ).height() - topSectionSpacing; 
-				}
-			});	
-
-			setTimeout( function() {
-				$( '.menu-main li:first' ).addClass( 'active' );
-			}, 1000 );	
-		}
-
-		
-		
+				}, time );
+			} ).trigger('mouseleave');
+			
+			
+		});
+	
 		
 		
     };
 
-    theme.navHighlight = {
+    theme.periodicalScroll = {
         documentReady : documentReady        
     };
 
@@ -2775,11 +2851,6 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
-
-
-
-
-
 
 
 
@@ -3028,77 +3099,6 @@ http://www.gnu.org/licenses/gpl.html
 	};
 })(jQuery);
 
-
-
-/*! 
- *************************************
- * Periodical Scroll
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-    
-    var documentReady = function( $ ) {
-	
-		$( '[data-periodical-scroll-container]' ).each(function() {
-
-			var $this       = $( this ),
-				ul          = $this.data( 'periodical-scroll-container' ),
-				speed       = $this.data( 'periodical-scroll-speed' ),
-				timing      = $this.data( 'periodical-scroll-timing' );
-
-
-			if( typeof speed === typeof undefined ) {
-				speed = 600;
-			}
-
-			if( typeof timing === typeof undefined ) {
-				timing = 2000;
-			}	
-			
-			var $wrap  = $this.find( ul ),
-				time   = timing,
-				moveEv = null;
-			
-			//Initialize the container height
-			$wrap.css({
-				'height'   : $wrap.find( 'li:first' ).height() + 'px',
-				'overflow' : 'hidden'
-			});
-			
- 
-			//Animation
-			$wrap.on( 'mouseenter', function() {
-
-				clearInterval( moveEv );
-
-			} ).on( 'mouseleave' , function() {
-				moveEv=setInterval(function(){
-					var $item     = $wrap.find( 'li:first' ),
-						curHeight = $item.height(); 
-
-					$item.animate({marginTop: -curHeight + 'px' }, speed, function(){
-						$item.css('marginTop',0).appendTo( $wrap );
-					});
-
-				}, time );
-			} ).trigger('mouseleave');
-			
-			
-		});
-	
-		
-		
-    };
-
-    theme.periodicalScroll = {
-        documentReady : documentReady        
-    };
-
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
 
 
 /*! 
