@@ -10,24 +10,32 @@
 $ npm install uix-kit
 ```
 
-**Step 2.** Before doing all dev stuff make sure you have node installed. After that, run the following code in the main directory to install the node module dependencies.
+**Step 2.** Clone the repo to get all source files including build scripts: 
+
+```sh
+$ git clone git://github.com/xizon/uix-kit.git
+```
+
+
+**Step 3.** Before doing all dev stuff make sure you have node installed. After that, run the following code in the main directory to install the node module dependencies.
 
 ```sh
 $ npm install --dev
 ```
 
 
-**Step 3.** Run the following code to enter development mode.
+**Step 4.** Run the following code to enter development mode.
 
 ```sh
 $ gulp default
 ```
 
-**Step 4.** When you done, please open the browser and enter the following URL to check out.
+**Step 5.** When you done, please open the browser and enter the following URL to check out.
 
 ```sh
 http://localhost:8080/examples/
 ```
+
 
 > ### Entry Components:
 > 
