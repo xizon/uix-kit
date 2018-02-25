@@ -16,9 +16,9 @@ theme = ( function ( theme, $, window, document ) {
 		
 		
 		/*! 
-		 ------------------
+		 ---------------------------
 		 Video Embed
-		 ------------------
+		 ---------------------------
 		 */  
 		$( '.web-video-embed' ).each( function()  {
 			var $this         = $( this ),
@@ -139,9 +139,9 @@ theme = ( function ( theme, $, window, document ) {
 		
 		
 		/*! 
-		 ------------------
+		 ---------------------------
 		 Video Popup Interaction
-		 ------------------
+		 ---------------------------
 		 */  
 		var modalDialogTrigger = '[data-video-win]';
 		

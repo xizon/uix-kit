@@ -45,9 +45,9 @@ theme = ( function ( theme, $, window, document ) {
 
 
 			/*! 
-			 ------------------
+			 ---------------------------
 			 Initialize carousel
-			 ------------------
+			 ---------------------------
 			 */  
 			var newWidth, newHeight;
 			if ( carouselDir == 'horizontal' ) { 
@@ -70,9 +70,9 @@ theme = ( function ( theme, $, window, document ) {
 			}	
 
 			/*! 
-			 ------------------
+			 ---------------------------
 			 Re-order all items
-			 ------------------
+			 ---------------------------
 			 */ 
 			
 			function carouselReOrder() {
@@ -99,9 +99,9 @@ theme = ( function ( theme, $, window, document ) {
 			}
 			
 			/*! 
-			 ------------------
+			 ---------------------------
 			 Active the center item
-			 ------------------
+			 ---------------------------
 			 */ 
 			
 			function carouselActiveCenterItem( el, dir ) {
@@ -139,9 +139,9 @@ theme = ( function ( theme, $, window, document ) {
 			
 			
 			/*! 
-			 ------------------
+			 ---------------------------
 			 Move left
-			 ------------------
+			 ---------------------------
 			 */ 
 			$( carouselNext ).on( 'click', $carouselWrapper, function( e ) {
 				e.preventDefault();
@@ -255,9 +255,9 @@ theme = ( function ( theme, $, window, document ) {
 
 			
 			/*! 
-			 ------------------
+			 ---------------------------
 			 Move right
-			 ------------------
+			 ---------------------------
 			 */ 
 			$( carouselPrev ).on( 'click', $carouselWrapper, function( e ) {
 				e.preventDefault();

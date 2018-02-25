@@ -1,5 +1,13 @@
 # Changelog
 
+#### = 1.1.5 (February 25, 2018) =
+
+* Tweak: Upgraded FlexSlider to 2.7.0.
+* Tweak: Integration of some module directory structure.
+* Tweak: Enhance the functionality of the Flexslider plug-in.
+* Tweak: Optimized form's style sheet.
+
+
 
 #### = 1.1.4 (February 23, 2018) =
 

@@ -106,9 +106,9 @@ theme = ( function ( theme, $, window, document ) {
 				
 				if ( infinitescroll ) {
 					/*! 
-					 ------------------
+					 ---------------------------
 					 Infinite scroll
-					 ------------------
+					 ---------------------------
 					 */ 	
 					var $button = $( trigger ),
 						btnTop  = $button.offset().top;
@@ -149,9 +149,9 @@ theme = ( function ( theme, $, window, document ) {
 					
 				} else {
 					/*! 
-					 ------------------
+					 ---------------------------
 					 Ajax with JSON data
-					 ------------------
+					 ---------------------------
 					 */ 
 					$( document ).on( 'click', trigger, function( e ) {
 

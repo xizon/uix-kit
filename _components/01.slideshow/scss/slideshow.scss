@@ -148,8 +148,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
       box-shadow: 0px 6px 23px -2px rgba(0, 0, 0, 0.36);
       &:hover, &.custom-theme-flex-active {
         background: rgba(255, 255, 255, 1);
-        width: 15px;
-        height: 15px;
+        width: 25px;
       }
     }
   }
@@ -240,8 +239,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
         box-shadow: 0px 6px 23px -2px rgba(0, 0, 0, 0.36);
         &:hover, &.custom-theme-flex-active {
           background: rgba(233, 47, 22, 1);
-          width: 15px;
-          height: 15px;
+          width: 25px;
         }
       }
     }
@@ -393,3 +391,70 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
     transform: translate3d(-100%, 0, 0);
   }
 }
+
+
+
+
+/* 
+   Parallax Slideshow                                
+-------------------------- 
+*/
+.custom-theme-flexslider.custom-parallax-flexslider {
+  max-height: 100vh;
+  overflow: hidden;
+	
+  img {
+    max-height: 100vh;
+  }
+
+  .custom-theme-slides {
+
+    > .item {
+		
+         background-size: cover;
+	     background-repeat: no-repeat;
+	     position: relative;
+		
+		.level {
+			position: absolute;
+			transition: all 1.5s ease; /* Note: The duration can not be less than 1.5 */
+			width: auto;
+			box-shadow: 0px 0px 34px -6px rgba(0,0,0,0.55);
+			transform: translateY(-50%);
+			top: 50%;
+		}
+
+		.level-1 {
+			left: 55%;
+			z-index: 3;
+		}
+
+		.level-2 {
+			left: 30%;
+			z-index: 2;
+		}
+		
+	  &.left {
+		.level-1 {
+		  transform: translate(-300px,-50%);
+		}
+		.level-2 {
+		  transform: translate(-50px,-50%);
+		}	
+	  }
+
+	  &.right {
+		.level-1 {
+		  transform: translate(300px,-50%);
+		}
+		.level-2 {
+		  transform: translate(50px,-50%);
+		}	
+	  }		
+
+	
+    }
+  }
+}
+
+

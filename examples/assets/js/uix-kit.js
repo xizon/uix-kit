@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.4
- * ## Last Update         :  February 24, 2018
+ * ## Version             :  1.1.5
+ * ## Last Update         :  February 25, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -385,9 +385,9 @@ theme = ( function ( theme, $, window, document ) {
 		
 		
 		/*! 
-		 ------------------
+		 ---------------------------
 		 Video Embed
-		 ------------------
+		 ---------------------------
 		 */  
 		$( '.web-video-embed' ).each( function()  {
 			var $this         = $( this ),
@@ -508,9 +508,9 @@ theme = ( function ( theme, $, window, document ) {
 		
 		
 		/*! 
-		 ------------------
+		 ---------------------------
 		 Video Popup Interaction
-		 ------------------
+		 ---------------------------
 		 */  
 		var modalDialogTrigger = '[data-video-win]';
 		
@@ -1633,13 +1633,6 @@ theme = ( function ( theme, $, window, document ) {
 }( theme, jQuery, window, document ) );
 
 
-/*! 
- *************************************
- * Custom Core Scripts & Stylesheets
- *************************************
- */
-
-
 
 /*! 
  *************************************
@@ -1748,9 +1741,9 @@ theme = ( function ( theme, $, window, document ) {
 				
 				if ( infinitescroll ) {
 					/*! 
-					 ------------------
+					 ---------------------------
 					 Infinite scroll
-					 ------------------
+					 ---------------------------
 					 */ 	
 					var $button = $( trigger ),
 						btnTop  = $button.offset().top;
@@ -1791,9 +1784,9 @@ theme = ( function ( theme, $, window, document ) {
 					
 				} else {
 					/*! 
-					 ------------------
+					 ---------------------------
 					 Ajax with JSON data
-					 ------------------
+					 ---------------------------
 					 */ 
 					$( document ).on( 'click', trigger, function( e ) {
 
@@ -1988,6 +1981,13 @@ theme = ( function ( theme, $, window, document ) {
     return old.apply(this, arguments);
   };
 })($.fn.attr);
+/*! 
+ *************************************
+ * Custom Core Scripts & Stylesheets
+ *************************************
+ */
+
+
 
 /*! 
  *************************************
@@ -2350,9 +2350,9 @@ theme = ( function ( theme, $, window, document ) {
 
 
 			/*! 
-			 ------------------
+			 ---------------------------
 			 Initialize carousel
-			 ------------------
+			 ---------------------------
 			 */  
 			var newWidth, newHeight;
 			if ( carouselDir == 'horizontal' ) { 
@@ -2375,9 +2375,9 @@ theme = ( function ( theme, $, window, document ) {
 			}	
 
 			/*! 
-			 ------------------
+			 ---------------------------
 			 Re-order all items
-			 ------------------
+			 ---------------------------
 			 */ 
 			
 			function carouselReOrder() {
@@ -2404,9 +2404,9 @@ theme = ( function ( theme, $, window, document ) {
 			}
 			
 			/*! 
-			 ------------------
+			 ---------------------------
 			 Active the center item
-			 ------------------
+			 ---------------------------
 			 */ 
 			
 			function carouselActiveCenterItem( el, dir ) {
@@ -2444,9 +2444,9 @@ theme = ( function ( theme, $, window, document ) {
 			
 			
 			/*! 
-			 ------------------
+			 ---------------------------
 			 Move left
-			 ------------------
+			 ---------------------------
 			 */ 
 			$( carouselNext ).on( 'click', $carouselWrapper, function( e ) {
 				e.preventDefault();
@@ -2560,9 +2560,9 @@ theme = ( function ( theme, $, window, document ) {
 
 			
 			/*! 
-			 ------------------
+			 ---------------------------
 			 Move right
-			 ------------------
+			 ---------------------------
 			 */ 
 			$( carouselPrev ).on( 'click', $carouselWrapper, function( e ) {
 				e.preventDefault();
@@ -3441,7 +3441,14 @@ theme = ( function ( theme, $, window, document ) {
 		var $window            = $( window ),
 			windowWidth        = $window.width(),
 			windowHeight       = $window.height(),
-			specialSliderType  = [ '.custom-primary-flexslider', '.custom-controls', '.custom-itemgrid', '.custom-counter-show' ];
+			specialSliderType  = [ 
+				'.custom-primary-flexslider', 
+				'.custom-parallax-flexslider', 
+				'.custom-mousewheel-flexslider', 
+				'.custom-controls', 
+				'.custom-itemgrid', 
+				'.custom-counter-show' 
+			];
 		
 		
 	
@@ -3508,6 +3515,116 @@ theme = ( function ( theme, $, window, document ) {
 			});	
 		}	
 		
+
+		
+		/*
+		 * Make slider image draggable 
+		 *
+		 * @param  {object} $obj             - The current FlexSlider setup using custom selector.
+		 * @return {void}                   - The constructor.
+		 */
+        function slidesExDraggable( $obj ) {
+			
+			//Make the cursor a move icon when a user hovers over an item
+			$obj.find( '.custom-theme-slides > div.item' ).css( 'cursor', 'move' );
+			
+
+			//Mouse event
+			$obj.on( 'mousedown', function( e ) {
+				e.preventDefault();
+				e.stopPropagation();
+				
+				if ( $obj.data( 'flexslider' ).animating ) {
+					return;
+				}
+
+				$( this ).addClass( 'dragging' );
+				$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
+				$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
+				$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
+				$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );
+			} );
+
+			$obj.on( 'mouseup', function( e ) {
+				e.preventDefault();
+				e.stopPropagation();
+				
+				if ( $obj.data('flexslider').animating ) {
+					return;
+				}
+
+				$( this ).removeClass( 'dragging' );
+				var origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
+					origin_mouse_y = $( this ).data( 'origin_mouse_y' );
+				
+				
+				if ( 'horizontal' === $obj.data( 'flexslider' ).vars.direction ) {
+					
+					if ( origin_mouse_x > e.pageX ) {
+						//left
+						$obj.flexslider( 'next' );
+					} else {
+						//right
+						$obj.flexslider( 'prev' );
+					}
+					
+				} else {
+					
+					if ( origin_mouse_y > e.pageY ) {
+						//up
+						$obj.flexslider( 'next' );
+					} else {
+						//down
+						$obj.flexslider( 'prev' );
+					}
+					
+				}
+			} );
+			
+			
+        }
+
+		
+		/*
+		 *  Scroll The Slider With Mousewheel
+		 *
+		 * @param  {object} $obj            - The current FlexSlider setup using custom selector.
+		 * @return {void}                   - The constructor.
+		 */
+        function slidesExMousewheel( $obj ) {
+
+			var timer    = null,
+				wheeling = false;
+
+			$obj.on( 'wheel', function( e ) {
+				var deltaY = e.originalEvent.deltaY;
+
+				if ( timer ) {
+					clearTimeout( timer );
+				}
+
+				if ( !wheeling ) {
+					if ( deltaY < 0 ) {
+						//up
+						$obj.flexslider( 'prev' );
+					} else {
+						//down
+						$obj.flexslider( 'next' );
+						
+					}
+				}
+
+				wheeling = true;
+
+				timer = setTimeout(function() {
+					wheeling = false;
+				}, 60 );
+
+			});
+			
+        }	
+		
+	
 		/*
 		 * Return an event from callback function to each slider.
 		 *
@@ -3547,6 +3664,61 @@ theme = ( function ( theme, $, window, document ) {
 			*/
 			
         }
+	
+		
+		/*
+		 * Return an event from callback function to each slider to make parallax effect.
+		 *
+		 * @param  {object} slider          - The current slider.
+		 * @return {void}                   - The constructor.
+		 */
+        function initslidesSort( slider ) {
+
+			var prefix    = 'custom-theme',
+			    curSlide  = slider.find( '.'+prefix+'-flex-active-slide' ),
+				curHeight = curSlide.height();
+			
+			slider.removeClass( prefix+'-flexslider-loading' );
+			
+			//Make parallax effect
+            var dir = 'left';
+
+            $.each( slider.slides, function( i, item ) {
+                var el = $( item );
+                el.removeClass( 'right left' );
+                if (i >= slider.animatingTo && dir !== 'right') {
+                    dir = 'right';
+                } else {
+                    el.addClass( dir );
+                }
+            })
+			
+			
+			
+			// Fires local videos asynchronously with slider switch.
+			videoEmbedInit( slider.find( '.item' ), false );
+			videoEmbedInit( curSlide, true );
+
+			//Auto-restart player if paused after action
+			if ( slider.vars.slideshow ) {
+				if ( !slider.playing ) {
+					slider.play();
+				}	
+			}
+			
+			//Prevent to <a> of page transitions
+			$( 'a' ).each( function() {
+				var attr = $( this ).attr( 'href' );
+				
+				if ( typeof attr === typeof undefined ) {
+					$( this ).attr( 'href', '#' );
+				}
+			});
+			
+		
+			
+        }		
+		
 	
 		
 		/*
@@ -3605,38 +3777,18 @@ theme = ( function ( theme, $, window, document ) {
         }
 		
 		
-		
-		//-------  Initialize primary slideshow
+		/*! 
+		 ---------------------------
+         Initialize primary slideshow
+		 ---------------------------
+		 */  
 		var $sliderPrimaryEff = $( '.custom-primary-flexslider' );
 		
-		$sliderPrimaryEff.flexslider({
-			namespace	      : 'custom-theme-flex-',
-			animation         : 'slide',
-			selector          : '.custom-theme-slides > div.item',
-			controlNav        : true,
-			smoothHeight      : true,
-			prevText          : "<i class='fa fa-chevron-left custom-primary-flexslider-prev'></i>",
-			nextText          : "<i class='fa fa-chevron-right custom-primary-flexslider-next'></i>",
-			animationSpeed    : 600,
-			slideshowSpeed    : 10000,
-			slideshow         : true,
-			animationLoop     : true,
-			start             : initslides, //Fires when the slider loads the first slide
-			after             : initslides //Fires after each slider animation completes.
-		});
-	
-		
-		
-		//-------  Initialize slideshow ( default )
-		var $sliderDefault, specialSliderClasses = '';
-		for ( var i = 0; i < specialSliderType.length; i++ ) {
-			specialSliderClasses += ':not('+specialSliderType[i]+')';
-		}
-		$sliderDefault = $( '.custom-theme-flexslider' + specialSliderClasses );
-		
-		$sliderDefault.each( function()  {
+		$sliderPrimaryEff.each( function()  {
 			var $this        = $( this ),
 				dataSpeed    = $this.data( 'speed' ),
+				dataDrag     = $this.data( 'draggable' ),
+				dataWheel    = $this.data( 'wheel' ),
 				dataTiming   = $this.data( 'timing' ),
 				dataLoop     = $this.data( 'loop' ),
 				dataPrev     = $this.data( 'prev' ),
@@ -3656,6 +3808,16 @@ theme = ( function ( theme, $, window, document ) {
 			if( typeof dataPaging === typeof undefined ) dataPaging = true;
 			if( typeof dataArrows === typeof undefined ) dataArrows = true;
 			if( typeof dataAuto === typeof undefined ) dataAuto = true;
+			if( typeof dataDrag === typeof undefined ) dataDrag = false;
+			if( typeof dataWheel === typeof undefined ) dataWheel = false;
+			
+			
+			//Make slider image draggable 
+			if ( dataDrag ) slidesExDraggable( $this );
+			
+			//Scroll The Slider With Mousewheel
+			if ( dataWheel ) slidesExMousewheel( $this );	
+
 			
 			$this.flexslider({
 				namespace	      : 'custom-theme-flex-',
@@ -3678,15 +3840,19 @@ theme = ( function ( theme, $, window, document ) {
 			
 		});
 		
-
 		
+		/*! 
+		 ---------------------------
+         Initialize parallax slideshow
+		 ---------------------------
+		 */  
+		var $sliderParallaxEff = $( '.custom-parallax-flexslider' );
 		
-		//-------  Initialize slideshow (custom controls)
-		var $sliderMyControls = $( '.custom-theme-flexslider.custom-controls' );
-		
-		$sliderMyControls.each( function()  {
+		$sliderParallaxEff.each( function()  {
 			var $this        = $( this ),
 				dataSpeed    = $this.data( 'speed' ),
+				dataDrag     = $this.data( 'draggable' ),
+				dataWheel    = $this.data( 'wheel' ),
 				dataTiming   = $this.data( 'timing' ),
 				dataLoop     = $this.data( 'loop' ),
 				dataPrev     = $this.data( 'prev' ),
@@ -3706,6 +3872,143 @@ theme = ( function ( theme, $, window, document ) {
 			if( typeof dataPaging === typeof undefined ) dataPaging = true;
 			if( typeof dataArrows === typeof undefined ) dataArrows = true;
 			if( typeof dataAuto === typeof undefined ) dataAuto = true;
+			if( typeof dataDrag === typeof undefined ) dataDrag = false;
+			if( typeof dataWheel === typeof undefined ) dataWheel = false;
+			
+			
+			//Make slider image draggable 
+			if ( dataDrag ) slidesExDraggable( $this );
+
+			//Scroll The Slider With Mousewheel
+			if ( dataWheel ) slidesExMousewheel( $this );
+			
+			
+			$this.flexslider({
+				namespace	      : 'custom-theme-flex-',
+				animation         : dataAnim,
+				selector          : '.custom-theme-slides > div.item',
+				controlNav        : dataPaging,
+				smoothHeight      : true,
+				prevText          : dataPrev,
+				nextText          : dataNext,
+				animationSpeed    : dataSpeed,
+				slideshowSpeed    : dataTiming,
+				slideshow         : dataAuto,
+				animationLoop     : dataLoop,
+				directionNav      : dataArrows,
+				before            : initslidesSort, //Fires asynchronously with each slider animation.
+				start             : initslidesSort //Fires when the slider loads the first slide
+			});
+
+
+			
+		});
+		
+		
+		
+		/*! 
+		 ---------------------------
+         Initialize the slideshow with mousewheel
+		 ---------------------------
+		 */  
+		var $sliderMousewheelEff = $( '.custom-mousewheel-flexslider' );
+		
+		$sliderMousewheelEff.each( function()  {
+			var $this        = $( this ),
+				dataSpeed    = $this.data( 'speed' ),
+				dataDrag     = $this.data( 'draggable' ),
+				dataWheel    = $this.data( 'wheel' ),
+				dataTiming   = $this.data( 'timing' ),
+				dataLoop     = $this.data( 'loop' ),
+				dataPrev     = $this.data( 'prev' ),
+				dataNext     = $this.data( 'next' ),
+				dataAnim     = $this.data( 'animation' ),
+				dataPaging   = $this.data( 'paging' ),
+				dataArrows   = $this.data( 'arrows' ),
+				dataAuto     = $this.data( 'auto' );
+			
+			// If there is no data-xxx, save current source to it
+			if( typeof dataSpeed === typeof undefined ) dataSpeed = 600;
+			if( typeof dataTiming === typeof undefined ) dataTiming = 10000;
+			if( typeof dataLoop === typeof undefined ) dataLoop = true;
+			if( typeof dataPrev === typeof undefined ) dataPrev = "<i class='fa fa-chevron-left'></i>";
+			if( typeof dataNext === typeof undefined ) dataNext = "<i class='fa fa-chevron-right'></i>";
+			if( typeof dataAnim === typeof undefined ) dataAnim = 'slide';
+			if( typeof dataPaging === typeof undefined ) dataPaging = true;
+			if( typeof dataArrows === typeof undefined ) dataArrows = true;
+			if( typeof dataAuto === typeof undefined ) dataAuto = true;
+			if( typeof dataDrag === typeof undefined ) dataDrag = false;
+			if( typeof dataWheel === typeof undefined ) dataWheel = false;
+			
+			
+			//Make slider image draggable 
+			if ( dataDrag ) slidesExDraggable( $this );
+
+			//Scroll The Slider With Mousewheel
+			if ( dataWheel ) slidesExMousewheel( $this );
+			
+			$this.flexslider({
+				namespace	      : 'custom-theme-flex-',
+				animation         : dataAnim,
+				selector          : '.custom-theme-slides > div.item',
+				controlNav        : dataPaging,
+				smoothHeight      : true,
+				prevText          : dataPrev,
+				nextText          : dataNext,
+				animationSpeed    : dataSpeed,
+				slideshowSpeed    : dataTiming,
+				slideshow         : dataAuto,
+				animationLoop     : dataLoop,
+				directionNav      : dataArrows,
+				start             : initslidesMousewheel //Fires when the slider loads the first slide
+			});
+
+
+			
+		});
+		
+		
+	
+		/*! 
+		 ---------------------------
+         Initialize slideshow (custom controls)
+		 ---------------------------
+		 */ 
+		var $sliderMyControls = $( '.custom-theme-flexslider.custom-controls' );
+		
+		$sliderMyControls.each( function()  {
+			var $this        = $( this ),
+				dataSpeed    = $this.data( 'speed' ),
+				dataDrag     = $this.data( 'draggable' ),
+				dataWheel    = $this.data( 'wheel' ),
+				dataTiming   = $this.data( 'timing' ),
+				dataLoop     = $this.data( 'loop' ),
+				dataPrev     = $this.data( 'prev' ),
+				dataNext     = $this.data( 'next' ),
+				dataAnim     = $this.data( 'animation' ),
+				dataPaging   = $this.data( 'paging' ),
+				dataArrows   = $this.data( 'arrows' ),
+				dataAuto     = $this.data( 'auto' );
+			
+			// If there is no data-xxx, save current source to it
+			if( typeof dataSpeed === typeof undefined ) dataSpeed = 600;
+			if( typeof dataTiming === typeof undefined ) dataTiming = 10000;
+			if( typeof dataLoop === typeof undefined ) dataLoop = true;
+			if( typeof dataPrev === typeof undefined ) dataPrev = "<i class='fa fa-chevron-left'></i>";
+			if( typeof dataNext === typeof undefined ) dataNext = "<i class='fa fa-chevron-right'></i>";
+			if( typeof dataAnim === typeof undefined ) dataAnim = 'slide';
+			if( typeof dataPaging === typeof undefined ) dataPaging = true;
+			if( typeof dataArrows === typeof undefined ) dataArrows = true;
+			if( typeof dataAuto === typeof undefined ) dataAuto = true;
+			if( typeof dataDrag === typeof undefined ) dataDrag = false;
+			if( typeof dataWheel === typeof undefined ) dataWheel = false;
+			
+			
+			//Make slider image draggable 
+			if ( dataDrag ) slidesExDraggable( $this );
+			
+			//Scroll The Slider With Mousewheel
+			if ( dataWheel ) slidesExMousewheel( $this );
 			
 			$this.flexslider({
 				namespace	      : 'custom-theme-flex-',
@@ -3733,13 +4036,18 @@ theme = ( function ( theme, $, window, document ) {
 		
 		
 
-		
-		//-------  Initialize slideshow (display counter)
+		/*! 
+		 ---------------------------
+         Initialize slideshow (display counter)
+		 ---------------------------
+		 */
 		var $sliderCounterShow = $( '.custom-theme-flexslider.custom-counter-show' );
 		
 		$sliderCounterShow.each( function()  {
 			var $this        = $( this ),
 				dataSpeed    = $this.data( 'speed' ),
+				dataDrag     = $this.data( 'draggable' ),
+				dataWheel    = $this.data( 'wheel' ),
 				dataTiming   = $this.data( 'timing' ),
 				dataLoop     = $this.data( 'loop' ),
 				dataPrev     = $this.data( 'prev' ),
@@ -3759,7 +4067,14 @@ theme = ( function ( theme, $, window, document ) {
 			if( typeof dataPaging === typeof undefined ) dataPaging = true;
 			if( typeof dataArrows === typeof undefined ) dataArrows = true;
 			if( typeof dataAuto === typeof undefined ) dataAuto = true;
+			if( typeof dataDrag === typeof undefined ) dataDrag = false;
+			if( typeof dataWheel === typeof undefined ) dataWheel = false;
 			
+			//Make slider image draggable 
+			if ( dataDrag ) slidesExDraggable( $this );
+			
+			//Scroll The Slider With Mousewheel
+			if ( dataWheel ) slidesExMousewheel( $this );
 			
 			$this.flexslider({
 				namespace	      : 'custom-theme-flex-',
@@ -3828,9 +4143,11 @@ theme = ( function ( theme, $, window, document ) {
 	
 	
 		
-		
-		//-------  Initialize slideshow (with dynamic min/max ranges)
-		
+		/*! 
+		 ---------------------------
+         Initialize slideshow (with dynamic min/max ranges)
+		 ---------------------------
+		 */
 		//store the slider in a local variable
 		var $sliderItemgird = $( '.custom-theme-flexslider.custom-itemgrid' );
 		
@@ -3843,6 +4160,8 @@ theme = ( function ( theme, $, window, document ) {
 		$sliderItemgird.each( function()  {
 			var $this        = $( this ),
 				dataSpeed    = $this.data( 'speed' ),
+				dataDrag     = $this.data( 'draggable' ),
+				dataWheel    = $this.data( 'wheel' ),
 				dataTiming   = $this.data( 'timing' ),
 				dataLoop     = $this.data( 'loop' ),
 				dataPrev     = $this.data( 'prev' ),
@@ -3862,6 +4181,14 @@ theme = ( function ( theme, $, window, document ) {
 			if( typeof dataPaging === typeof undefined ) dataPaging = true;
 			if( typeof dataArrows === typeof undefined ) dataArrows = true;
 			if( typeof dataAuto === typeof undefined ) dataAuto = true;
+			if( typeof dataDrag === typeof undefined ) dataDrag = false;
+			if( typeof dataWheel === typeof undefined ) dataWheel = false;
+			
+			//Make slider image draggable 
+			if ( dataDrag ) slidesExDraggable( $this );
+			
+			//Scroll The Slider With Mousewheel
+			if ( dataWheel ) slidesExMousewheel( $this );
 			
 			$this.flexslider({
 				namespace	      : 'custom-theme-flex-',
@@ -3891,7 +4218,81 @@ theme = ( function ( theme, $, window, document ) {
 		
 		
 		
-		//-------  Check grid size on resize event
+		/*! 
+		 ---------------------------
+         Initialize slideshow ( default )
+		 ---------------------------
+		 */
+		var $sliderDefault, specialSliderClasses = '';
+		for ( var i = 0; i < specialSliderType.length; i++ ) {
+			specialSliderClasses += ':not('+specialSliderType[i]+')';
+		}
+		$sliderDefault = $( '.custom-theme-flexslider' + specialSliderClasses );
+		
+		$sliderDefault.each( function()  {
+			var $this        = $( this ),
+				dataSpeed    = $this.data( 'speed' ),
+				dataDrag     = $this.data( 'draggable' ),
+				dataWheel    = $this.data( 'wheel' ),
+				dataTiming   = $this.data( 'timing' ),
+				dataLoop     = $this.data( 'loop' ),
+				dataPrev     = $this.data( 'prev' ),
+				dataNext     = $this.data( 'next' ),
+				dataAnim     = $this.data( 'animation' ),
+				dataPaging   = $this.data( 'paging' ),
+				dataArrows   = $this.data( 'arrows' ),
+				dataAuto     = $this.data( 'auto' );
+			
+			// If there is no data-xxx, save current source to it
+			if( typeof dataSpeed === typeof undefined ) dataSpeed = 600;
+			if( typeof dataTiming === typeof undefined ) dataTiming = 10000;
+			if( typeof dataLoop === typeof undefined ) dataLoop = true;
+			if( typeof dataPrev === typeof undefined ) dataPrev = "<i class='fa fa-chevron-left'></i>";
+			if( typeof dataNext === typeof undefined ) dataNext = "<i class='fa fa-chevron-right'></i>";
+			if( typeof dataAnim === typeof undefined ) dataAnim = 'slide';
+			if( typeof dataPaging === typeof undefined ) dataPaging = true;
+			if( typeof dataArrows === typeof undefined ) dataArrows = true;
+			if( typeof dataAuto === typeof undefined ) dataAuto = true;
+			if( typeof dataDrag === typeof undefined ) dataDrag = false;
+			if( typeof dataWheel === typeof undefined ) dataWheel = false;
+			
+			
+			//Make slider image draggable 
+			if ( dataDrag ) slidesExDraggable( $this );
+
+			//Scroll The Slider With Mousewheel
+			if ( dataWheel ) slidesExMousewheel( $this );
+			
+			$this.flexslider({
+				namespace	      : 'custom-theme-flex-',
+				animation         : dataAnim,
+				selector          : '.custom-theme-slides > div.item',
+				controlNav        : dataPaging,
+				smoothHeight      : true,
+				prevText          : dataPrev,
+				nextText          : dataNext,
+				animationSpeed    : dataSpeed,
+				slideshowSpeed    : dataTiming,
+				slideshow         : dataAuto,
+				animationLoop     : dataLoop,
+				directionNav      : dataArrows,
+				start             : initslides, //Fires when the slider loads the first slide
+				after             : initslides //Fires after each slider animation completes.
+			});
+			
+
+			
+		});
+		
+
+	
+		
+		
+		/*! 
+		 ---------------------------
+         Check grid size on resize event
+		 ---------------------------
+		 */
 		$window.on( 'resize', function() {
 			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
 			if ( $window.width() != windowWidth ) {
@@ -3900,10 +4301,30 @@ theme = ( function ( theme, $, window, document ) {
 				windowWidth = $window.width();
 
 				// Do stuff here
-				if ( $sliderPrimaryEff.length > 0 ) {
-					$sliderPrimaryEff.data( 'flexslider' ).setup();
-				}
+				$sliderPrimaryEff.each( function() {
+					
+					if ( $( this ).length > 0 ) {
+						$( this ).data( 'flexslider' ).setup();
+					}			
+					
+				});
 				
+				
+				$sliderParallaxEff.each( function() {
+					
+					if ( $( this ).length > 0 ) {
+						$( this ).data( 'flexslider' ).setup();
+					}			
+					
+				});
+
+				$sliderMousewheelEff.each( function() {
+					
+					if ( $( this ).length > 0 ) {
+						$( this ).data( 'flexslider' ).setup();
+					}			
+					
+				});		
 				
 				
 				$sliderDefault.each( function() {
@@ -4179,6 +4600,87 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
+/*! 
+ *************************************
+ * Testimonials Carousel
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+    
+		var $obj = $( '.custom-testimonials .flexslider' );
+		$obj.flexslider({
+			animation         : 'slide',
+			slideshow         : true,
+			smoothHeight      : true,
+			controlNav        : true,
+			manualControls    : '.slides-custom-control li',
+			directionNav      : false,
+			animationSpeed    : 600,
+			slideshowSpeed    : 7000,
+			selector          : ".slides > li",
+			drag              : true,
+			start: function(slider){
+				$obj.on( 'mousedown', function( e ) {
+					if ( $obj.data( 'flexslider' ).animating ) {
+						return;
+					}
+						
+					$( this ).addClass('dragging');
+					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
+					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
+					$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
+					$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );
+				} );
+			
+				$obj.on( 'mouseup', function( e ) {
+					if ( $obj.data('flexslider').animating ) {
+						return;
+					}
+						
+					$( this ).removeClass('dragging');
+					var origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
+					    origin_mouse_y = $( this ).data( 'origin_mouse_y' );
+					
+					if ( 'horizontal' === $obj.data('flexslider').vars.direction ) {
+						if ( e.pageX > origin_mouse_x ) {
+							$obj.flexslider('prev');
+						}
+						if ( e.pageX < origin_mouse_x ) {
+							$obj.flexslider('next');
+						}
+					} else {
+						if ( e.pageY > origin_mouse_y ) {
+							$obj.flexslider('prev');
+						}
+						if ( e.pageY < origin_mouse_y ) {
+							$obj.flexslider('next');
+						}
+					}
+				} );
+			}
+		});
+		
+		
+    };
+
+    theme.testimonials = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
+
+
+
+
 
 /*! 
  *************************************
@@ -4352,87 +4854,6 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
-
-
-/*! 
- *************************************
- * Testimonials Carousel
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-    
-    var documentReady = function( $ ) {
-    
-		var $obj = $( '.custom-testimonials .flexslider' );
-		$obj.flexslider({
-			animation         : 'slide',
-			slideshow         : true,
-			smoothHeight      : true,
-			controlNav        : true,
-			manualControls    : '.slides-custom-control li',
-			directionNav      : false,
-			animationSpeed    : 600,
-			slideshowSpeed    : 7000,
-			selector          : ".slides > li",
-			drag              : true,
-			start: function(slider){
-				$obj.on( 'mousedown', function( e ) {
-					if ( $obj.data( 'flexslider' ).animating ) {
-						return;
-					}
-						
-					$( this ).addClass('dragging');
-					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
-					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
-					$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
-					$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );
-				} );
-			
-				$obj.on( 'mouseup', function( e ) {
-					if ( $obj.data('flexslider').animating ) {
-						return;
-					}
-						
-					$( this ).removeClass('dragging');
-					var origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
-					    origin_mouse_y = $( this ).data( 'origin_mouse_y' );
-					
-					if ( 'horizontal' === $obj.data('flexslider').vars.direction ) {
-						if ( e.pageX > origin_mouse_x ) {
-							$obj.flexslider('prev');
-						}
-						if ( e.pageX < origin_mouse_x ) {
-							$obj.flexslider('next');
-						}
-					} else {
-						if ( e.pageY > origin_mouse_y ) {
-							$obj.flexslider('prev');
-						}
-						if ( e.pageY < origin_mouse_y ) {
-							$obj.flexslider('next');
-						}
-					}
-				} );
-			}
-		});
-		
-		
-    };
-
-    theme.testimonials = {
-        documentReady : documentReady        
-    };
-
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
-
-
-
-
-
 
 
 

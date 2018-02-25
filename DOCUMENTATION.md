@@ -4,23 +4,30 @@
 
 ## Installation And Test
 
-**Step 1.** Use NPM `npm install uix-kit` or download the latest version from [Github](https://github.com/xizon/uix-kit/archive/master.zip). For nodejs you have to install some dependencies.
+**Step 1.** Use NPM (Locate your current directory of project, and enter the following command.) or download the latest version from [Github](https://github.com/xizon/uix-kit). For nodejs you have to install some dependencies.
+
+```sh
+$ npm install uix-kit
+```
 
 **Step 2.** Before doing all dev stuff make sure you have node installed. After that, run the following code in the main directory to install the node module dependencies.
 
 ```sh
-`$ npm install --dev`
+$ npm install --dev
 ```
 
 
 **Step 3.** Run the following code to enter development mode.
 
 ```sh
-`$ gulp default`
+$ gulp default
 ```
 
-**Step 4.** When you done, please open the browser and enter `http://localhost:8080/examples/` to check out.
+**Step 4.** When you done, please open the browser and enter the following URL to check out.
 
+```sh
+http://localhost:8080/examples/
+```
 
 > ### Entry Components:
 > 
