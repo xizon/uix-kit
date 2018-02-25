@@ -7,6 +7,21 @@
 
 
 
+## Table of Contents
+
+
+* [Description](#description)
+* [Installation And Test](#installation-and-test)
+* [Structures](#structures)
+* [Licensing](#licensing)
+* [Contributing](#contributing)
+* [Changelog](#changelog)
+* [How To Use](#how-to-use)
+* [Buy Me a Coffee](#buy-me-a-coffee)
+* [Browser Support](#browser-support)
+
+
+
 ## Description
 
 Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap.
@@ -28,6 +43,7 @@ Enjoy the fluid grid system based on **12** columns. Uix Kit is built over Boots
 
 
 * * *
+
 
 ## Installation And Test
 
@@ -71,6 +87,9 @@ http://localhost:8080/examples/
 
 
 * * *
+
+
+## Structures
 
 
 ### 1\. Custom Core Files
@@ -165,7 +184,7 @@ Finding bugs, sending pull requests or improving our docs - any contribution is 
 [Check Out Here](CHANGELOG.md)
 
 
-## How To Use?
+## How To Use
 
 How to use and quickly understand, please [check out the documentation](DOCUMENTATION.md)
 
