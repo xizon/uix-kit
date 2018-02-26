@@ -1,5 +1,11 @@
 # Changelog
 
+#### = 1.1.61 (February 26, 2018) =
+
+* Fix: Fixed an issue of drag and drop slider interaction.
+
+
+
 #### = 1.1.6 (February 26, 2018) =
 
 * New: Added a new form component: custom selection box.

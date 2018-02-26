@@ -3865,6 +3865,74 @@ theme = ( function ( theme, $, window, document ) {
 
 /*! 
  *************************************
+ * Fullwidth List of Split
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+   
+   
+    var pageLoaded = function() {
+		
+		var $window      = $( window ),
+			windowWidth  = $window.width(),
+			windowHeight = $window.height();
+		
+		
+		fullwidthListSplitInit( windowWidth );
+		
+		$window.on( 'resize', function() {
+			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+			if ( $window.width() != windowWidth ) {
+
+				// Update the window width for next time
+				windowWidth = $window.width();
+
+				// Do stuff here
+				fullwidthListSplitInit( windowWidth );
+		
+
+			}
+		});
+		
+		
+		
+		function fullwidthListSplitInit( w ) {
+			
+			
+			$( '.list-split-imagery-container' ).each(function() {
+				var imgH = $( this ).find( '.imagery-background img' ).height();
+
+				if ( imgH > 0 ) {
+					$( this ).find( '.feature-text, .feature-imagery' ).css( 'height', imgH + 'px' );
+				}
+
+				if ( w <= 768 ) {
+					$( this ).find( '.feature-text, .feature-imagery' ).css( 'height', 'auto' );
+				}
+
+			});	
+		}
+		
+
+		
+		
+	};
+		
+    theme.fullwidthListSplit = {
+        pageLoaded : pageLoaded        
+    };
+
+    theme.components.pageLoaded.push( pageLoaded );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
+
+/*! 
+ *************************************
  * Posts List With Ajax
  *************************************
  */
@@ -4210,74 +4278,6 @@ theme = ( function ( theme, $, window, document ) {
     return old.apply(this, arguments);
   };
 })($.fn.attr);
-
-/*! 
- *************************************
- * Fullwidth List of Split
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-   
-   
-    var pageLoaded = function() {
-		
-		var $window      = $( window ),
-			windowWidth  = $window.width(),
-			windowHeight = $window.height();
-		
-		
-		fullwidthListSplitInit( windowWidth );
-		
-		$window.on( 'resize', function() {
-			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( $window.width() != windowWidth ) {
-
-				// Update the window width for next time
-				windowWidth = $window.width();
-
-				// Do stuff here
-				fullwidthListSplitInit( windowWidth );
-		
-
-			}
-		});
-		
-		
-		
-		function fullwidthListSplitInit( w ) {
-			
-			
-			$( '.list-split-imagery-container' ).each(function() {
-				var imgH = $( this ).find( '.imagery-background img' ).height();
-
-				if ( imgH > 0 ) {
-					$( this ).find( '.feature-text, .feature-imagery' ).css( 'height', imgH + 'px' );
-				}
-
-				if ( w <= 768 ) {
-					$( this ).find( '.feature-text, .feature-imagery' ).css( 'height', 'auto' );
-				}
-
-			});	
-		}
-		
-
-		
-		
-	};
-		
-    theme.fullwidthListSplit = {
-        pageLoaded : pageLoaded        
-    };
-
-    theme.components.pageLoaded.push( pageLoaded );
-    return theme;
-
-}( theme, jQuery, window, document ) );
-
-
-
 
 /*! 
  *************************************
@@ -5747,14 +5747,15 @@ theme = ( function ( theme, $, window, document ) {
 		 */
         function slidesExDraggable( $obj ) {
 			
+			var $dragDropTrigger = $obj.find( '.custom-theme-slides > div.item' );
+			
 			//Make the cursor a move icon when a user hovers over an item
-			$obj.find( '.custom-theme-slides > div.item' ).css( 'cursor', 'move' );
+			$dragDropTrigger.css( 'cursor', 'move' );
 			
 
 			//Mouse event
-			$obj.on( 'mousedown', function( e ) {
+			$dragDropTrigger.on( 'mousedown', function( e ) {
 				e.preventDefault();
-				e.stopPropagation();
 				
 				if ( $obj.data( 'flexslider' ).animating ) {
 					return;
@@ -5765,11 +5766,9 @@ theme = ( function ( theme, $, window, document ) {
 				$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
 				$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
 				$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );
-			} );
-
-			$obj.on( 'mouseup', function( e ) {
+				
+			} ).on( 'mouseup', function( e ) {
 				e.preventDefault();
-				e.stopPropagation();
 				
 				if ( $obj.data('flexslider').animating ) {
 					return;
@@ -5782,22 +5781,26 @@ theme = ( function ( theme, $, window, document ) {
 				
 				if ( 'horizontal' === $obj.data( 'flexslider' ).vars.direction ) {
 					
-					if ( origin_mouse_x > e.pageX ) {
-						//left
-						$obj.flexslider( 'next' );
-					} else {
-						//right
+					//right
+					if ( e.pageX > origin_mouse_x ) {
 						$obj.flexslider( 'prev' );
 					}
 					
-				} else {
-					
-					if ( origin_mouse_y > e.pageY ) {
-						//up
+					//left
+					if ( e.pageX < origin_mouse_x ) {
 						$obj.flexslider( 'next' );
-					} else {
-						//down
+					}
+					
+				} else {
+
+					//down
+					if ( e.pageY > origin_mouse_y ) {
 						$obj.flexslider( 'prev' );
+					}
+					
+					//up
+					if ( e.pageY < origin_mouse_y ) {
+						$obj.flexslider( 'next' );
 					}
 					
 				}

@@ -98,14 +98,15 @@ theme = ( function ( theme, $, window, document ) {
 		 */
         function slidesExDraggable( $obj ) {
 			
+			var $dragDropTrigger = $obj.find( '.custom-theme-slides > div.item' );
+			
 			//Make the cursor a move icon when a user hovers over an item
-			$obj.find( '.custom-theme-slides > div.item' ).css( 'cursor', 'move' );
+			$dragDropTrigger.css( 'cursor', 'move' );
 			
 
 			//Mouse event
-			$obj.on( 'mousedown', function( e ) {
+			$dragDropTrigger.on( 'mousedown', function( e ) {
 				e.preventDefault();
-				e.stopPropagation();
 				
 				if ( $obj.data( 'flexslider' ).animating ) {
 					return;
@@ -116,11 +117,9 @@ theme = ( function ( theme, $, window, document ) {
 				$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
 				$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
 				$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );
-			} );
-
-			$obj.on( 'mouseup', function( e ) {
+				
+			} ).on( 'mouseup', function( e ) {
 				e.preventDefault();
-				e.stopPropagation();
 				
 				if ( $obj.data('flexslider').animating ) {
 					return;
@@ -133,22 +132,26 @@ theme = ( function ( theme, $, window, document ) {
 				
 				if ( 'horizontal' === $obj.data( 'flexslider' ).vars.direction ) {
 					
-					if ( origin_mouse_x > e.pageX ) {
-						//left
-						$obj.flexslider( 'next' );
-					} else {
-						//right
+					//right
+					if ( e.pageX > origin_mouse_x ) {
 						$obj.flexslider( 'prev' );
 					}
 					
-				} else {
-					
-					if ( origin_mouse_y > e.pageY ) {
-						//up
+					//left
+					if ( e.pageX < origin_mouse_x ) {
 						$obj.flexslider( 'next' );
-					} else {
-						//down
+					}
+					
+				} else {
+
+					//down
+					if ( e.pageY > origin_mouse_y ) {
 						$obj.flexslider( 'prev' );
+					}
+					
+					//up
+					if ( e.pageY < origin_mouse_y ) {
+						$obj.flexslider( 'next' );
 					}
 					
 				}
