@@ -55,11 +55,11 @@
         
        
         <!-- Theme  -->
-        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTUxOTU2ODkxNDA3OA"/>
+        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTUxOTYzMzU3MTE0NQ"/>
         
         
          <!--[if lt IE 10]>
-           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTUxOTU2ODkxNDA3OA" />
+           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTUxOTYzMzU3MTE0NQ" />
         <![endif]-->
         
         
@@ -337,7 +337,7 @@
 
 											<div class="controls">
 											  <input type="text" class="float-label" name="first-name">
-											  <label>First Name</label>
+											  <label>First Name<span class="controls-im">*</span></label>
 											</div>
 
 										</div>  
@@ -361,7 +361,7 @@
 											<div class="controls withicon">
 										      <i class="fa fa-cogs" aria-hidden="true"></i>
 											  <input type="text" class="float-label" name="first-name">
-											  <label>With Icons</label>
+											  <label>With Icons<span class="controls-im">*</span></label>
 											</div>
 
 										</div>  
@@ -426,9 +426,52 @@
 										</div>  
 
 									</div>
-									<!-- .row end --> 		 
+									<!-- .row end --> 	
+                                  
+                                  	 
+                                  	 	 
+								   <div class="row">
+										<div class="col-sm-12 t-l">
+
+											<div class="controls custom-select">
+												<label>
+													<select name="selectname" placeholder="Options Here">
+													    <option value="Option 1">Option 1</option>
+														<option value="Option 2">Option 2</option>
+														<option value="Option 3">Option 3</option>
+													</select>
+													
+												</label>
+												<span>Custom Select</span>
+												
+											</div>
+
+										</div>  
+
+									</div>
+									<!-- .row end --> 		 	 
+                                  	 	 	 	 	 
                                    
-                                   
+                                    <div class="controls">
+                                      <input type="text" class="float-label text-short-s" name="shortinput1">
+                                      <label>Short Input 1</label>unit
+                                    </div>
+                                    
+                                    <div class="controls">
+                                      <input type="text" class="float-label text-short-l" name="shortinput2">
+                                      <label>Short Input 2</label>unit
+                                    </div>
+                                    
+                                    <div class="controls">
+                                      <input  type="text" class="float-label text-short-l" name="shortinput3"
+											  data-picker="true" 
+											  data-picker-format="MM d, yy" 
+											  data-picker-month='["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]'
+											  data-picker-day='["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]'>
+                                      <label>Date</label>
+                                    </div>
+                                    
+                                                                          
                                     <div class="controls">
                                       <input type="text" class="float-label" name="name">
                                       <label>Name</label>
@@ -450,6 +493,12 @@
 										<label tabindex="0" for="my-file" class="button button-hover button-border-thin button-size-s button-bg-primary controls-file-trigger">Upload File</label>
 									</div>
 									<p class="controls-file-return t-l"></p>
+                                    
+                                    
+									<p class="t-l">
+									  <button type="submit" class="button button-hover button-border-thin button-size-s button-space-none button-bg-primary">Submit Your Info</button>
+									</p> 
+                                    
                                     
                                 </form>
                         
@@ -543,7 +592,7 @@
 			"homeUrl"     :""  //Eg. https://uiux.cc
 		};
     </script>  
-    <script src="assets/js/uix-kit.min.js?ver=MTUxOTU2ODkxNDA3OA"></script>
+    <script src="assets/js/uix-kit.min.js?ver=MTUxOTYzMzU3MTE0NQ"></script>
 
 
 

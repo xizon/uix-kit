@@ -1,5 +1,12 @@
 # Changelog
 
+#### = 1.1.6 (February 26, 2018) =
+
+* New: Added a new form component: custom selection box.
+* Tweak: Provides some more comprehensive modules of form.
+* Tweak: Optimized form's style sheet.
+
+
 #### = 1.1.5 (February 25, 2018) =
 
 * Tweak: Upgraded FlexSlider to 2.7.0.

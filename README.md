@@ -80,7 +80,10 @@ $ gulp default
 http://localhost:8080/examples/
 ```
 
-> ### Entry Components:
+**Step 5.** Directly edit the entries in the components folder in order to modify the core files. (E.g. `examples/assets/css/uix-kit.css`, `examples/assets/css/uix-kit.min.css`, `examples/assets/css/rtl/uix-kit-rtl.css`, `examples/assets/js/uix-kit.js`, `examples/assets/js/uix-kit.min.js` ).
+
+
+> ### Components:
 > 
 > HTML/JS/CSS Components: `_components/*`  
 > `00.global` and `01.index` are required components.

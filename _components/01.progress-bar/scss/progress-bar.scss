@@ -8,8 +8,11 @@ $bar-bg         : $primary-text-color1;
 $bar-track-bg   : rgba(236,236,236,1.00);
 $bar-fill-color : $highlight-color1;
 
-
-/*--- Radial Progress Bar ---*/
+/*! 
+ ---------------------------
+ 1) Radial Progress Bar
+ ---------------------------
+ */ 
 @mixin size($w, $h){
   height: $h;
   width: $w;
@@ -140,8 +143,11 @@ $bar-fill-color : $highlight-color1;
 
 }
 
-
-/*--- Rectangle Progress Bar ---*/
+/*! 
+ ---------------------------
+ 2) Rectangle Progress Bar
+ ---------------------------
+ */ 
 .custom-rectangle-progressbar {
 	display: block;
 	margin: 1rem;

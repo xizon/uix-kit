@@ -37,8 +37,10 @@ $ gulp default
 http://localhost:8080/examples/
 ```
 
+**Step 5.** Directly edit the entries in the components folder in order to modify the core files. (E.g. `examples/assets/css/uix-kit.css`, `examples/assets/css/uix-kit.min.css`, `examples/assets/css/rtl/uix-kit-rtl.css`, `examples/assets/js/uix-kit.js`, `examples/assets/js/uix-kit.min.js` ).
 
-> ### Entry Components:
+
+> ### Components:
 > 
 > HTML/JS/CSS Components: `_components/*`  
 > `00.global` and `01.index` are required components.
@@ -153,7 +155,7 @@ http://localhost:8080/examples/
     
     
     <!-- Slideshow  -->
-    <script src="assets/js/min/jquery.flexslider.min.js?ver=2.6.2"></script>
+    <script src="assets/js/min/jquery.flexslider.min.js?ver=2.7.0"></script>
     
     <!-- Masonry -->
     <script src="assets/js/wp-jquery/masonry.min.js?ver=3.3.2"></script>
