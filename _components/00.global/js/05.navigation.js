@@ -12,16 +12,24 @@ theme = ( function ( theme, $, window, document ) {
 		
 			var $window      = $( window ),
 				windowWidth  = $window.width(),
-				windowHeight = $window.height();
+				windowHeight = $window.height(),
+				ulForDesktop = '.menu-container:not(.mobile) ul.menu-main';
 	
 		
-			
+		    // Menu selected (if it exists "data-current" property in <ul>)
+		    var curMenuIndex = $( ulForDesktop ).data( 'current' );
+		    if ( typeof curMenuIndex !== typeof undefined ) {
+				$( ulForDesktop + ' > li:eq('+curMenuIndex+')' ).addClass( 'active' );
+			}
+		    
+		    
+		
 			// Menu Hover
 			var mTop = 15;
-			$( '.menu-container:not(.mobile) ul.menu-main > li.multi-column > ul li ul' ).addClass( 'multi' );
-			$( '.menu-container:not(.mobile) ul.menu-main > li:not(.multi-column) ul, .menu-container:not(.mobile) li.multi-column > ul.sub-menu > li > ul, .menu-container:not(.mobile) ul.menu-main li.multi-column > ul' ).css( 'margin-top', mTop + 'px' );
+			$( ulForDesktop + ' > li.multi-column > ul li ul' ).addClass( 'multi' );
+			$( ulForDesktop + ' > li:not(.multi-column) ul, .menu-container:not(.mobile) li.multi-column > ul.sub-menu > li > ul, '+ulForDesktop+' li.multi-column > ul' ).css( 'margin-top', mTop + 'px' );
 			
-			$( '.menu-container:not(.mobile) ul.menu-main li' ).on( 'mouseenter', function(){
+			$( ulForDesktop + ' li' ).on( 'mouseenter', function(){
 				$( this ).find( ' > ul.sub-menu:not(.multi), .mega-arrow' ).show().animate( { marginTop: 0, opacity: 1 }, { duration: 150 } );
 				
 			}).on( 'mouseleave' , function(){
@@ -36,7 +44,7 @@ theme = ( function ( theme, $, window, document ) {
 	
 		
 			//Add Sub-menu Arrow
-			$( '.menu-container:not(.mobile) ul.menu-main li' ).each( function() {
+			$( ulForDesktop + ' li' ).each( function() {
 				if ( $( this ).find( 'ul' ).length > 0 ) {
 					$( this ).prepend( '<span class="nav-arrow"></span>' );
 				}

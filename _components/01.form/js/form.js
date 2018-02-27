@@ -144,6 +144,28 @@ theme = ( function ( theme, $, window, document ) {
 		
 		/*! 
 		 ---------------------------
+		 Custom Radio, Toggle And Checkbox
+		 ---------------------------
+		 */ 
+		var customRadio        = '.custom-radio',
+			customToggle       = '.custom-toggle',
+			customCheckbox     = '.custom-checkbox';
+			
+		
+		$( customRadio ).find( 'input[type="radio"]' ).each(function() {
+			$( '<span class="custom-radio-trigger"></span>' ).insertAfter( $( this ) );
+		});
+		
+		$( customToggle ).find( 'input[type="checkbox"]' ).each(function() {
+			$( '<span class="custom-toggle-trigger"></span>' ).insertAfter( $( this ) );
+		});
+		
+		$( customCheckbox ).find( 'input[type="checkbox"]' ).each(function() {
+			$( '<span class="custom-checkbox-trigger"></span>' ).insertAfter( $( this ) );
+		});
+		
+		/*! 
+		 ---------------------------
 		 Date Picker
 		 ---------------------------
 		 */ 

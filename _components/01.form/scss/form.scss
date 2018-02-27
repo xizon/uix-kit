@@ -50,7 +50,7 @@ $control-focus-color: $primary-text-color1;
 
 
 /* Default Controls */
-.controls {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) {
 	text-align: left;
 	position: relative;
 	
@@ -431,6 +431,11 @@ $control-focus-color: $primary-text-color1;
  4) Custom Select
  ---------------------------
  */ 
+.custom-select {
+	position: relative;
+	text-align: left;
+}
+
 .custom-select-wrapper {
 	position: relative;
 	display: inline-block;
@@ -438,8 +443,8 @@ $control-focus-color: $primary-text-color1;
 	select {
 	  display: none;
 	}
-	
-	
+
+
 	.custom-select-trigger {
 	  @include control-label-text();
 	  position: relative;
@@ -450,7 +455,7 @@ $control-focus-color: $primary-text-color1;
 	  background: #fff;
 	  cursor: pointer;
 	  margin-bottom: 1.09375rem;
-		
+
 		&:focus, &:hover {
 		  outline: none;
 		  border-color: $control-focus-color;
@@ -460,13 +465,13 @@ $control-focus-color: $primary-text-color1;
 		  @include select-arrow( -.275rem, 1rem );
 		}
 	}
-	
+
 	.custom-select-label {
 		display: inline-block;
 		margin-left: .5rem;
 		@include control-label-text();
 	}
-	
+
 	.custom-options {
 	  position: absolute;
 	  z-index: 2;
@@ -485,8 +490,8 @@ $control-focus-color: $primary-text-color1;
 	  visibility: hidden;
 	  pointer-events: none;
 	  transform: translateY(-15px);
-		
-		
+
+
 		&:before {
 		  position: absolute;
 		  display: block;
@@ -504,7 +509,7 @@ $control-focus-color: $primary-text-color1;
 		}	
 
 	}
-	
+
 
 	.option-hover:before {
 	  background: #f9f9f9;
@@ -536,7 +541,7 @@ $control-focus-color: $primary-text-color1;
 	.custom-select {
 	  position: relative;
 	  display: inline-block;
-		
+
 		&.opened {
 
 			.custom-select-trigger:after {
@@ -551,17 +556,192 @@ $control-focus-color: $primary-text-color1;
 			}	
 
 		}	
-		
+
 	}
 
 
+}	
+
+/*! 
+ ---------------------------
+ 5) Custom Radio, Toggle And Checkbox
+ ---------------------------
+ */
+.custom-radio {
+  
+	position: relative;
+	text-align: left;
+	
+  label {
+	margin: 0.546875rem .5rem 0.546875rem 0;
+	position: relative;
+	left: auto;
+	top: auto;
+	pointer-events: auto;/* Required */
+	cursor: pointer;
+	@include control-label-text();
+  }	
+	
+  input[type="radio"] {
+    display: none;
+    
+    &:checked + .custom-radio-trigger::before{
+      transform: scale(1);
+    }
+  }
+  
+  .custom-radio-trigger {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1px solid $control-sub-color;
+    margin-right: 5px;
+    display: inline-block;
+    position: relative;
+    
+    &::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      background: $control-focus-color;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      border-radius: 50%;
+      margin-left: -3px;
+      margin-top: -3px;
+      transform: scale(0);
+      @include transition-default();
+    }
+  }
 }
+
+
+
+.custom-toggle {
+	
+	position: relative;
+	text-align: left;
+
+  label {
+	  display: inline-block;
+	  width: 70px;
+	  border: 1px solid $control-sub-color;
+	  border-radius: 18px;
+	  white-space: nowrap;
+	  overflow: hidden;
+	  cursor: pointer;
+	  margin-top: .5rem;
+  }	
+	
+  input[type="checkbox"] {
+    display: none;
+    
+    &:checked + .custom-toggle-trigger {
+      margin-left: 8px;
+      background: $control-focus-color;
+    }
+  }
+  
+  .custom-toggle-trigger {
+    width: 12px;
+    height: 12px;
+    background: $control-sub-color;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    margin: 0.5rem .5rem 0.5rem 0;
+	margin-left: 50px;
+    @include transition-default();
+	
+
+    &::before,
+    &::after {
+      position: absolute;
+      display: inline-block;
+      width: 55px;
+      text-align: center;
+      line-height: 100%;
+	  @include control-label-text();
+	  font-size: 0.75rem;
+    }
+	  
+    &::before {
+      content: "Off";
+      left: -50px;
+    }
+
+    &::after {
+      content: "On";
+      right: -50px;
+    }
+
+  }
+}
+
+.custom-checkbox {
+  
+	position: relative;
+	text-align: left;
+   
+	label {
+		@include control-label-text();
+	}
+	
+	
+  input[type="checkbox"] {
+    display: none;
+    
+    &:checked + .custom-checkbox-trigger::before,
+    &:checked + .custom-checkbox-trigger::after {
+      display: block;
+    }
+  }
+  
+  .custom-checkbox-trigger {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border: 1px solid $control-sub-color;
+    vertical-align: middle;
+    position: relative;
+	margin: 0.546875rem .5rem 0.546875rem 0;
+	@include transition-default();
+	
+    
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      display: none;
+      background: $control-focus-color;
+      height: 3px;
+      left: 4px;
+      bottom: 2px;
+      transform-origin: 1px 1px;
+		
+    }
+
+    &::before {
+      transform: rotate(-45deg);
+      width: 9px;
+    }
+
+    &::after {
+      transform: rotate(-135deg);
+      width: 6px;
+    }
+    
+  }
+}
+
 
 
 
 /*! 
  ---------------------------
- 5) Date Picker (With Jquery UI Widget)
+ 6) Date Picker (With Jquery UI Widget)
  ---------------------------
  */ 
 /*! jQuery UI - v1.12.1 - 2016-09-14

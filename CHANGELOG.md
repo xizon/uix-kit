@@ -1,9 +1,9 @@
 # Changelog
 
-#### = 1.1.61 (February 26, 2018) =
+#### = 1.1.62 (February 27, 2018) =
 
 * Fix: Fixed an issue of drag and drop slider interaction.
-
+* New: Added a new form component: custom radio, toggle and checkbox with CSS3.
 
 
 #### = 1.1.6 (February 26, 2018) =

@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.6
- * ## Last Update         :  February 26, 2018
+ * ## Version             :  1.1.62
+ * ## Last Update         :  February 27, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -296,16 +296,24 @@ theme = ( function ( theme, $, window, document ) {
 		
 			var $window      = $( window ),
 				windowWidth  = $window.width(),
-				windowHeight = $window.height();
+				windowHeight = $window.height(),
+				ulForDesktop = '.menu-container:not(.mobile) ul.menu-main';
 	
 		
-			
+		    // Menu selected (if it exists "data-current" property in <ul>)
+		    var curMenuIndex = $( ulForDesktop ).data( 'current' );
+		    if ( typeof curMenuIndex !== typeof undefined ) {
+				$( ulForDesktop + ' > li:eq('+curMenuIndex+')' ).addClass( 'active' );
+			}
+		    
+		    
+		
 			// Menu Hover
 			var mTop = 15;
-			$( '.menu-container:not(.mobile) ul.menu-main > li.multi-column > ul li ul' ).addClass( 'multi' );
-			$( '.menu-container:not(.mobile) ul.menu-main > li:not(.multi-column) ul, .menu-container:not(.mobile) li.multi-column > ul.sub-menu > li > ul, .menu-container:not(.mobile) ul.menu-main li.multi-column > ul' ).css( 'margin-top', mTop + 'px' );
+			$( ulForDesktop + ' > li.multi-column > ul li ul' ).addClass( 'multi' );
+			$( ulForDesktop + ' > li:not(.multi-column) ul, .menu-container:not(.mobile) li.multi-column > ul.sub-menu > li > ul, '+ulForDesktop+' li.multi-column > ul' ).css( 'margin-top', mTop + 'px' );
 			
-			$( '.menu-container:not(.mobile) ul.menu-main li' ).on( 'mouseenter', function(){
+			$( ulForDesktop + ' li' ).on( 'mouseenter', function(){
 				$( this ).find( ' > ul.sub-menu:not(.multi), .mega-arrow' ).show().animate( { marginTop: 0, opacity: 1 }, { duration: 150 } );
 				
 			}).on( 'mouseleave' , function(){
@@ -320,7 +328,7 @@ theme = ( function ( theme, $, window, document ) {
 	
 		
 			//Add Sub-menu Arrow
-			$( '.menu-container:not(.mobile) ul.menu-main li' ).each( function() {
+			$( ulForDesktop + ' li' ).each( function() {
 				if ( $( this ).find( 'ul' ).length > 0 ) {
 					$( this ).prepend( '<span class="nav-arrow"></span>' );
 				}
@@ -1433,6 +1441,28 @@ theme = ( function ( theme, $, window, document ) {
 			
 		});
 		
+		
+		/*! 
+		 ---------------------------
+		 Custom Radio, Toggle And Checkbox
+		 ---------------------------
+		 */ 
+		var customRadio        = '.custom-radio',
+			customToggle       = '.custom-toggle',
+			customCheckbox     = '.custom-checkbox';
+			
+		
+		$( customRadio ).find( 'input[type="radio"]' ).each(function() {
+			$( '<span class="custom-radio-trigger"></span>' ).insertAfter( $( this ) );
+		});
+		
+		$( customToggle ).find( 'input[type="checkbox"]' ).each(function() {
+			$( '<span class="custom-toggle-trigger"></span>' ).insertAfter( $( this ) );
+		});
+		
+		$( customCheckbox ).find( 'input[type="checkbox"]' ).each(function() {
+			$( '<span class="custom-checkbox-trigger"></span>' ).insertAfter( $( this ) );
+		});
 		
 		/*! 
 		 ---------------------------
@@ -3865,74 +3895,6 @@ theme = ( function ( theme, $, window, document ) {
 
 /*! 
  *************************************
- * Fullwidth List of Split
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-   
-   
-    var pageLoaded = function() {
-		
-		var $window      = $( window ),
-			windowWidth  = $window.width(),
-			windowHeight = $window.height();
-		
-		
-		fullwidthListSplitInit( windowWidth );
-		
-		$window.on( 'resize', function() {
-			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( $window.width() != windowWidth ) {
-
-				// Update the window width for next time
-				windowWidth = $window.width();
-
-				// Do stuff here
-				fullwidthListSplitInit( windowWidth );
-		
-
-			}
-		});
-		
-		
-		
-		function fullwidthListSplitInit( w ) {
-			
-			
-			$( '.list-split-imagery-container' ).each(function() {
-				var imgH = $( this ).find( '.imagery-background img' ).height();
-
-				if ( imgH > 0 ) {
-					$( this ).find( '.feature-text, .feature-imagery' ).css( 'height', imgH + 'px' );
-				}
-
-				if ( w <= 768 ) {
-					$( this ).find( '.feature-text, .feature-imagery' ).css( 'height', 'auto' );
-				}
-
-			});	
-		}
-		
-
-		
-		
-	};
-		
-    theme.fullwidthListSplit = {
-        pageLoaded : pageLoaded        
-    };
-
-    theme.components.pageLoaded.push( pageLoaded );
-    return theme;
-
-}( theme, jQuery, window, document ) );
-
-
-
-
-/*! 
- *************************************
  * Posts List With Ajax
  *************************************
  */
@@ -4278,6 +4240,74 @@ theme = ( function ( theme, $, window, document ) {
     return old.apply(this, arguments);
   };
 })($.fn.attr);
+
+/*! 
+ *************************************
+ * Fullwidth List of Split
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+   
+   
+    var pageLoaded = function() {
+		
+		var $window      = $( window ),
+			windowWidth  = $window.width(),
+			windowHeight = $window.height();
+		
+		
+		fullwidthListSplitInit( windowWidth );
+		
+		$window.on( 'resize', function() {
+			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+			if ( $window.width() != windowWidth ) {
+
+				// Update the window width for next time
+				windowWidth = $window.width();
+
+				// Do stuff here
+				fullwidthListSplitInit( windowWidth );
+		
+
+			}
+		});
+		
+		
+		
+		function fullwidthListSplitInit( w ) {
+			
+			
+			$( '.list-split-imagery-container' ).each(function() {
+				var imgH = $( this ).find( '.imagery-background img' ).height();
+
+				if ( imgH > 0 ) {
+					$( this ).find( '.feature-text, .feature-imagery' ).css( 'height', imgH + 'px' );
+				}
+
+				if ( w <= 768 ) {
+					$( this ).find( '.feature-text, .feature-imagery' ).css( 'height', 'auto' );
+				}
+
+			});	
+		}
+		
+
+		
+		
+	};
+		
+    theme.fullwidthListSplit = {
+        pageLoaded : pageLoaded        
+    };
+
+    theme.components.pageLoaded.push( pageLoaded );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
 
 /*! 
  *************************************

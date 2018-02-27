@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.6
- * ## Last Update         :  February 26, 2018
+ * ## Version             :  1.1.62
+ * ## Last Update         :  February 27, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -3125,7 +3125,7 @@ ul.entry-meta {
 }
 
 /* Default Controls */
-.controls {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) {
     text-align: left;
     position: relative;
   /*-- Radio --*/
@@ -3136,15 +3136,15 @@ ul.entry-meta {
   /*-- Other --*/;
 }
 
-.controls.controls-side {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).controls-side {
     margin-left: .2rem;
 }
 
-.controls.t-c {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).t-c {
     text-align: center !important;
 }
 
-.controls input:not([type="checkbox"]):not([type="radio"]) {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) input:not([type="checkbox"]):not([type="radio"]) {
     border-radius: 0;
   /* Remove inner shadow from inputs on mobile iOS */
     -webkit-appearance: none;
@@ -3160,29 +3160,29 @@ ul.entry-meta {
     width: calc(100% - 1.09375rem - 2px);
 }
 
-.controls input:not([type="checkbox"]):not([type="radio"]).text-short-s {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) input:not([type="checkbox"]):not([type="radio"]).text-short-s {
     width: 7.5rem;
     margin-right: .5rem;
 }
 
-.controls input:not([type="checkbox"]):not([type="radio"]).text-short-l {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) input:not([type="checkbox"]):not([type="radio"]).text-short-l {
     width: 12rem;
     margin-right: .5rem;
 }
 
-.controls input:not([type="checkbox"]):not([type="radio"]):focus ~ label, .controls input:not([type="checkbox"]):not([type="radio"]):hover ~ label {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) input:not([type="checkbox"]):not([type="radio"]):focus ~ label, .controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) input:not([type="checkbox"]):not([type="radio"]):hover ~ label {
     color: #212121;
     cursor: text;
 }
 
-.controls input:not([type="checkbox"]):not([type="radio"]):focus, .controls input:not([type="checkbox"]):not([type="radio"]):hover {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) input:not([type="checkbox"]):not([type="radio"]):focus, .controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) input:not([type="checkbox"]):not([type="radio"]):hover {
     outline: none;
     border-color: #212121;
 }
 
-.controls textarea,
-.controls button,
-.controls select {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) textarea,
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) button,
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) select {
     border-radius: 0;
   /* Remove inner shadow from inputs on mobile iOS */
     -webkit-appearance: none;
@@ -3200,48 +3200,48 @@ ul.entry-meta {
     width: calc(100% - 1.09375rem - 2px);
 }
 
-.controls textarea {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) textarea {
     resize: none;
     height: 20vh;
 }
 
-.controls textarea:focus ~ label, .controls textarea:hover ~ label {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) textarea:focus ~ label, .controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) textarea:hover ~ label {
     color: #212121;
     cursor: text;
 }
 
-.controls textarea:focus, .controls textarea:hover {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) textarea:focus, .controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) textarea:hover {
     outline: none;
     border-color: #212121;
 }
 
-.controls button {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) button {
     cursor: pointer;
     padding: 0.75rem 0;
     width: 100%;
     border-radius: 0;
 }
 
-.controls button:focus ~ label, .controls button:hover ~ label {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) button:focus ~ label, .controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) button:hover ~ label {
     color: #212121;
     cursor: text;
 }
 
-.controls button:focus, .controls button:hover {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) button:focus, .controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) button:hover {
     outline: none;
     border-color: #212121;
 }
 
-.controls select {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) select {
     cursor: pointer;
 }
 
-.controls select:focus, .controls select:hover {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) select:focus, .controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) select:hover {
     outline: none;
     border-color: #212121;
 }
 
-.controls label {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) label {
   /* @include control-label-text(); */
     font-weight: 500;
     color: #999;
@@ -3255,13 +3255,13 @@ ul.entry-meta {
     transition: color 0.3s, top 0.3s, background-color 0.2s;
 }
 
-.controls label.active {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) label.active {
     top: -1.09375rem;
     color: #555;
     background-color: white;
 }
 
-.controls.radio label {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).radio label {
     padding-left: 1.25rem !important;
     position: relative !important;
     left: auto !important;
@@ -3269,11 +3269,11 @@ ul.entry-meta {
     pointer-events: auto !important;
 }
 
-.controls.radio label.active {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).radio label.active {
     top: auto !important;
 }
 
-.controls.select > span {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).select > span {
     display: inline-block;
     padding-right: 1rem;
   /* @include control-label-text(); */
@@ -3281,11 +3281,11 @@ ul.entry-meta {
     color: #999;
 }
 
-.controls.select select {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).select select {
     padding-right: 1.5rem !important;
 }
 
-.controls.select label {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).select label {
     padding-left: 0 !important;
     padding-right: 0 !important;
     position: relative !important;
@@ -3295,7 +3295,7 @@ ul.entry-meta {
     padding-right: 1rem !important;
 }
 
-.controls.select label:after {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).select label:after {
   /* @include select-arrow( -.875rem, 1rem ); */
     border: 1px solid #dce4e8;
     border-right: 0;
@@ -3313,61 +3313,61 @@ ul.entry-meta {
     z-index: 1;
 }
 
-.controls.select label.active {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).select label.active {
     top: auto !important;
 }
 
-.controls.withicon label {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).withicon label {
     left: 2rem;
 }
 
-.controls.withicon i {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).withicon i {
     position: absolute;
     left: 1rem;
     top: 1rem;
 }
 
-.controls.withicon input:not([type="checkbox"]):not([type="radio"]) {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).withicon input:not([type="checkbox"]):not([type="radio"]) {
     padding-left: 2.5rem;
     width: calc(100% - 1.09375rem - 2px - 2.5rem);
 }
 
-.controls.withicon textarea,
-.controls.withicon button,
-.controls.withicon select {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).withicon textarea,
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).withicon button,
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).withicon select {
     padding-left: 2.5rem;
     width: calc(100% - 1.09375rem - 2px - 2.5rem);
 }
 
-.controls.success input:not([type="checkbox"]):not([type="radio"]) {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).success input:not([type="checkbox"]):not([type="radio"]) {
     border-color: #4AB005;
 }
 
-.controls.success textarea,
-.controls.success button,
-.controls.success select {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).success textarea,
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).success button,
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).success select {
     border-color: #4AB005;
 }
 
-.controls.success label {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).success label {
     color: #4AB005 !important;
 }
 
-.controls.error input:not([type="checkbox"]):not([type="radio"]) {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).error input:not([type="checkbox"]):not([type="radio"]) {
     border-color: #f00;
 }
 
-.controls.error textarea,
-.controls.error button,
-.controls.error select {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).error textarea,
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).error button,
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).error select {
     border-color: #f00;
 }
 
-.controls.error label {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).error label {
     color: #f00 !important;
 }
 
-.controls .fa-sort {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) .fa-sort {
     position: absolute;
     right: 0.875rem;
     top: 1.09375rem;
@@ -3376,7 +3376,7 @@ ul.entry-meta {
     color: #999;
 }
 
-.controls .req-icon {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) .req-icon {
     position: absolute;
     right: 0.721875rem;
     top: 0.721875rem;
@@ -3487,6 +3487,11 @@ ul.entry-meta {
  4) Custom Select
  ---------------------------
  */
+.custom-select {
+    position: relative;
+    text-align: left;
+}
+
 .custom-select-wrapper {
     position: relative;
     display: inline-block;
@@ -3628,7 +3633,178 @@ ul.entry-meta {
 
 /*! 
  ---------------------------
- 5) Date Picker (With Jquery UI Widget)
+ 5) Custom Radio, Toggle And Checkbox
+ ---------------------------
+ */
+.custom-radio {
+    position: relative;
+    text-align: left;
+}
+
+.custom-radio label {
+    margin: 0.546875rem .5rem 0.546875rem 0;
+    position: relative;
+    left: auto;
+    top: auto;
+    pointer-events: auto;
+  /* Required */
+    cursor: pointer;
+  /* @include control-label-text(); */
+    font-weight: 500;
+    color: #999;
+}
+
+.custom-radio input[type="radio"] {
+    display: none;
+}
+
+.custom-radio input[type="radio"]:checked + .custom-radio-trigger::before {
+    transform: scale(1);
+}
+
+.custom-radio .custom-radio-trigger {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1px solid #dce4e8;
+    margin-right: 5px;
+    display: inline-block;
+    position: relative;
+}
+
+.custom-radio .custom-radio-trigger::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    background: #212121;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    margin-left: -3px;
+    margin-top: -3px;
+    transform: scale(0);
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+}
+
+.custom-toggle {
+    position: relative;
+    text-align: left;
+}
+
+.custom-toggle label {
+    display: inline-block;
+    width: 70px;
+    border: 1px solid #dce4e8;
+    border-radius: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    cursor: pointer;
+    margin-top: .5rem;
+}
+
+.custom-toggle input[type="checkbox"] {
+    display: none;
+}
+
+.custom-toggle input[type="checkbox"]:checked + .custom-toggle-trigger {
+    margin-left: 8px;
+    background: #212121;
+}
+
+.custom-toggle .custom-toggle-trigger {
+    width: 12px;
+    height: 12px;
+    background: #dce4e8;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    margin: 0.5rem .5rem 0.5rem 0;
+    margin-left: 50px;
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+}
+
+.custom-toggle .custom-toggle-trigger::before, .custom-toggle .custom-toggle-trigger::after {
+    position: absolute;
+    display: inline-block;
+    width: 55px;
+    text-align: center;
+    line-height: 100%;
+  /* @include control-label-text(); */
+    font-weight: 500;
+    color: #999;
+    font-size: 0.75rem;
+}
+
+.custom-toggle .custom-toggle-trigger::before {
+    content: "Off";
+    left: -50px;
+}
+
+.custom-toggle .custom-toggle-trigger::after {
+    content: "On";
+    right: -50px;
+}
+
+.custom-checkbox {
+    position: relative;
+    text-align: left;
+}
+
+.custom-checkbox label {
+  /* @include control-label-text(); */
+    font-weight: 500;
+    color: #999;
+}
+
+.custom-checkbox input[type="checkbox"] {
+    display: none;
+}
+
+.custom-checkbox input[type="checkbox"]:checked + .custom-checkbox-trigger::before,
+.custom-checkbox input[type="checkbox"]:checked + .custom-checkbox-trigger::after {
+    display: block;
+}
+
+.custom-checkbox .custom-checkbox-trigger {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #dce4e8;
+    vertical-align: middle;
+    position: relative;
+    margin: 0.546875rem .5rem 0.546875rem 0;
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+}
+
+.custom-checkbox .custom-checkbox-trigger::before, .custom-checkbox .custom-checkbox-trigger::after {
+    content: "";
+    position: absolute;
+    display: none;
+    background: #212121;
+    height: 3px;
+    left: 4px;
+    bottom: 2px;
+    transform-origin: 1px 1px;
+}
+
+.custom-checkbox .custom-checkbox-trigger::before {
+    transform: rotate(-45deg);
+    width: 9px;
+}
+
+.custom-checkbox .custom-checkbox-trigger::after {
+    transform: rotate(-135deg);
+    width: 6px;
+}
+
+/*! 
+ ---------------------------
+ 6) Date Picker (With Jquery UI Widget)
  ---------------------------
  */
 /*! jQuery UI - v1.12.1 - 2016-09-14
