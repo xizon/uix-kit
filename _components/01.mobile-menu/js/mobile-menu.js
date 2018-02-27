@@ -18,7 +18,7 @@ theme = ( function ( theme, $, window, document ) {
 			
 		
 			//Show Toolbar when viewing site for WordPress
-			var waypoints = $( '.admin-bar .menu-toggle' ).waypoint({
+			var waypoints = $( '.admin-bar .menu-mobile-toggle' ).waypoint({
 				handler: function( direction ) {
 
 					$( this.element ).toggleClass( 'spy-scroll-postion', direction === 'down' );
@@ -37,7 +37,7 @@ theme = ( function ( theme, $, window, document ) {
 			}
 			
 			
-		    var $toggle     = $( '.menu-toggle' ),
+		    var $toggle     = $( '.menu-mobile-toggle' ),
 				$toggleBody = $( 'body' );
 		
 			
@@ -48,7 +48,7 @@ theme = ( function ( theme, $, window, document ) {
 			$.when( $( '.menu-container.mobile' ).length > 0 ).then( function(){
 				
 		
-				$( '.menu-toggle' ).on( 'touchstart click', function( e ) {
+				$toggle.on( 'touchstart click', function( e ) {
 					e.stopPropagation(); 
 					e.preventDefault();
 
@@ -68,6 +68,13 @@ theme = ( function ( theme, $, window, document ) {
 					}
 
 				});
+				
+				//Mobile menu mask event
+				$( '.menu-mobile-mask' ).on( 'click', function() {
+					$toggle.removeClass( 'open' );
+					$toggleBody.removeClass( 'menu-open' );
+				});
+				
 
 
 
@@ -99,7 +106,7 @@ theme = ( function ( theme, $, window, document ) {
 
 						// Do stuff here
 						$toggleBody.removeClass( 'menu-open' );
-						$( '.menu-toggle' ).removeClass( 'open' );
+						$toggle.removeClass( 'open' );
 						sidrmenuInit( windowWidth );
 
 

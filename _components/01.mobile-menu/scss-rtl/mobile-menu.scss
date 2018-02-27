@@ -3,68 +3,63 @@
 /* ====================================================== */
 
 /* Mobile Menu Toggle */
-
-.menu-toggle {
-  right: auto;
-  left: 30px;
+.menu-mobile-toggle {
+    right: auto;
+    left: 30px;
 	
-  span {
-    left: auto;
-    right: 12px;
-  }
+    span {
+        left: auto;
+        right: 12px;
+    }
 	
-  &.open {
-	  span {
-		right: 7px;
-	  } 
+    &.open {
+	    span {
+		    right: 7px;
+	    } 
 	  
-  }	
+    }	
 	
 }
 
 
 /* Mobile Menu Container */
-
-
 .menu-container.mobile {
 	left: auto;
 	right: 0;
 	transform: translateX(300px);
 
   
-  ul li ul li {
-    a, span {
-      padding-left: auto;
-      padding-right: 30px;
+    ul li ul li {
+        a, span {
+            padding-left: auto;
+            padding-right: 30px;
+        }
     }
-  }
-  li:not(.multi-column) ul ul {
-    padding-left: auto;
-    padding-right: .825em;
-  }
 	
-  > .inner {
-	> .menu-right {
-		padding-left: auto;
-		padding-right: .5rem;
+    li:not(.multi-column) ul ul {
+        padding-left: auto;
+        padding-right: .825em;
+    }
+	
+    > .inner {
+	    > .menu-right {
+		    padding-left: auto;
+		    padding-right: .5rem;
 		
-		a {
-			margin-right: auto;
-			margin-left: .3rem;
-		}
-	}
-  
-	  
-  }
+		    a {
+			    margin-right: auto;
+			    margin-left: .3rem;
+		    }
+	    }  
+    }
 	
 	.mobile-nav-arrow {
-	  right: auto;
-	  left: 10px;
+	    right: auto;
+	    left: 10px;
 	}	
-		
-	
+			
 }
 
 .menu-open .menu-container.mobile {
-  transform: translateX(0);
+    transform: translateX(0);
 }

@@ -11,7 +11,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.63
+ * ## Version             :  1.1.64
  * ## Last Update         :  February 27, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -141,13 +141,15 @@ blockquote:before {
 /* ====================================================== */
 .menu-container:not(.mobile) {
     float: left;
-  /* Dropdown */
+  /*---- Primary Menu ----*/
+  /*---- Dropdown Menu ----*/
   /* Multi-column */
-  /* Dropdown Arrow */;
+  /*---- Dropdown Arrow ----*/;
 }
 
 .menu-container:not(.mobile) ul.menu-main {
     float: right;
+  /*---- Sub Menu ----*/;
 }
 
 .menu-container:not(.mobile) ul.menu-main > li {
@@ -192,16 +194,14 @@ blockquote:before {
     right: 100%;
 }
 
-@media all and (max-width: 1250px) {
-    .menu-container:not(.mobile) ul.menu-main > li {
-        margin-right: auto;
-        margin-left: 1.125rem;
-    }
-}
-
 .menu-container:not(.mobile) li.multi-column > ul li {
     padding-left: auto !important;
     padding-right: 1.159375rem !important;
+}
+
+.menu-container:not(.mobile) ul.menu-main ul.sub-menu .nav-arrow {
+    right: auto;
+    left: 1.159375rem;
 }
 
 .menu-container:not(.mobile) .nav-arrow {
@@ -209,9 +209,11 @@ blockquote:before {
     left: 0.284375rem;
 }
 
-.menu-container:not(.mobile) ul.menu-main ul.sub-menu .nav-arrow {
-    right: auto;
-    left: 1.159375rem;
+@media all and (max-width: 1250px) {
+    .menu-container:not(.mobile) ul.menu-main > li {
+        margin-right: auto;
+        margin-left: 1.125rem;
+    }
 }
 
 /* ====================================================== 
@@ -384,17 +386,17 @@ blockquote:before {
    Mobile Menu
 /* ====================================================== */
 /* Mobile Menu Toggle */
-.menu-toggle {
+.menu-mobile-toggle {
     right: auto;
     left: 30px;
 }
 
-.menu-toggle span {
+.menu-mobile-toggle span {
     left: auto;
     right: 12px;
 }
 
-.menu-toggle.open span {
+.menu-mobile-toggle.open span {
     right: 7px;
 }
 

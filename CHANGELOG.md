@@ -1,10 +1,14 @@
 # Changelog
 
-#### = 1.1.63 (February 27, 2018) =
+#### = 1.1.64 (February 27, 2018) =
 
 * Fix: Fixed an issue of drag and drop slider interaction.
 * New: Added a new form component: custom radio, toggle and checkbox with CSS3.
 * New: Added a video demo of the usage.
+* New: Added mobile navigation mask to enhance user experience.
+* Tweak: Optimized primary navigation's style sheet.
+* Tweak: The form controls allows building Right To Left. 
+
 
 
 #### = 1.1.6 (February 26, 2018) =
