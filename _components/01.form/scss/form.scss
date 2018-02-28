@@ -10,20 +10,20 @@ $control-focus-color: $primary-text-color1;
 
 @mixin select-arrow( $top, $right ){
 	/* @include select-arrow( -.875rem, 1rem ); */
-	  border: 1px solid $control-sub-color;
-	  border-right: 0;
-	  border-top: 0;
-	  content: " ";
-	  display: block;
-	  width: .35rem;
-	  height: .35rem;
-	  pointer-events: none;
-	  position: absolute;
-	  transform: rotate(-45deg);
-	  margin-top: $top;
-	  right: $right;
-	  top: 50%;;
-	  z-index: 1;
+	border: 1px solid $control-sub-color;
+	border-right: 0;
+	border-top: 0;
+	content: " ";
+	display: block;
+	width: .35rem;
+	height: .35rem;
+	pointer-events: none;
+	position: absolute;
+	transform: rotate(-45deg);
+	margin-top: $top;
+	right: $right;
+	top: 50%;;
+	z-index: 1;
 }
 
 @mixin control-label-text(){
@@ -65,45 +65,47 @@ $control-focus-color: $primary-text-color1;
 
 	input:not([type="checkbox"]):not([type="radio"]) {
 
-	  border-radius: 0;
-	  /* Remove inner shadow from inputs on mobile iOS */
-	  -webkit-appearance: none;  
+		border-radius: 0;
+		/* Remove inner shadow from inputs on mobile iOS */
+		-webkit-appearance: none;  
 
-	  @include transition-default();
-	  font-size: 0.875rem;
-	  padding: 0.546875rem;
-	  box-sizing: content-box;
-	  background-color: #fff;
-	  color: $control-text-color;
-	  margin-bottom: 1.09375rem;
-	  border: 1px solid $control-sub-color;
-	  width: calc(100% - 1.09375rem - 2px );	
+		@include transition-default();
+		font-size: 0.875rem;
+		padding: 0.546875rem;
+		box-sizing: content-box;
+		background-color: #fff;
+		color: $control-text-color;
+		margin-bottom: 1.09375rem;
+		border: 1px solid $control-sub-color;
+		width: calc(100% - 1.09375rem - 2px );	
 
-	
-	  &.text-short-s {
-		  width: 7.5rem;
-		  margin-right: .5rem;
-	  }  	
-		
-	  &.text-short-l {
-		  width: 12rem;
-		  margin-right: .5rem;
-	  }  	
-		
-	  &:focus ~ label, &:hover ~ label {
-		color: $control-focus-color;
-		cursor: text;
-	  }	
-		
-	  &:focus, &:hover {
-		outline: none;
-		border-color: $control-focus-color;
-	  }	
+
+		&.text-short-s {
+			width: 7.5rem;
+			margin-right: .5rem;
+		}  	
+
+		&.text-short-l {
+			width: 12rem;
+			margin-right: .5rem;
+		}  	
+
+		&:focus ~ label, 
+		&:hover ~ label {
+			color: $control-focus-color;
+			cursor: text;
+		}	
+
+		&:focus, 
+		&:hover {
+			outline: none;
+			border-color: $control-focus-color;
+		}	
 
 		
 	}
 
-	textarea, 
+    textarea, 
 	button, 
 	select {
 
@@ -132,14 +134,16 @@ $control-focus-color: $primary-text-color1;
 		resize: none;
 		height: 20vh; 
 
-		&:focus ~ label, &:hover ~ label {
-		  color: $control-focus-color;
-		  cursor: text;
+		&:focus ~ label, 
+		&:hover ~ label {
+			color: $control-focus-color;
+			cursor: text;
 		}
 
-		&:focus, &:hover {
-		  outline: none;
-		  border-color: $control-focus-color;
+		&:focus, 
+		&:hover {
+			outline: none;
+			border-color: $control-focus-color;
 		}  
 
 
@@ -153,24 +157,27 @@ $control-focus-color: $primary-text-color1;
 		width: 100%;
 		border-radius: 0;  
 
-		&:focus ~ label, &:hover ~ label {
-		  color: $control-focus-color;
-		  cursor: text;
+		&:focus ~ label, 
+		&:hover ~ label {
+			color: $control-focus-color;
+			cursor: text;
 		}
 
-		&:focus, &:hover {
-		  outline: none;
-		  border-color: $control-focus-color;
+		&:focus, 
+		&:hover {
+			outline: none;
+			border-color: $control-focus-color;
 		}  
 
 	}
 	
 	select {
 		cursor: pointer;
-		
-		&:focus, &:hover {
-		  outline: none;
-		  border-color: $control-focus-color;
+
+		&:focus, 
+		&:hover {
+			outline: none;
+			border-color: $control-focus-color;
 		}  
 
 	}
@@ -186,10 +193,11 @@ $control-focus-color: $primary-text-color1;
 		background-color: rgba(255, 255, 255, 0);
 		pointer-events: none;
 		transition: color 0.3s, top 0.3s, background-color 0.2s;
+		
 		&.active {
-		  top: -1.09375rem;
-		  color: #555;
-		  background-color: white;
+			top: -1.09375rem;
+			color: #555;
+			background-color: white;
 		}
 	}
 	
@@ -197,16 +205,17 @@ $control-focus-color: $primary-text-color1;
 	/*-- Radio --*/
 	&.radio {
 	
-	  label {
-		padding-left: 1.25rem !important;
-		position: relative !important;
-		left: auto !important;
-		top: auto !important;
-		pointer-events: auto !important;
-		&.active {
-		  top: auto !important;
-		}
-	  }	
+		label {
+			padding-left: 1.25rem !important;
+			position: relative !important;
+			left: auto !important;
+			top: auto !important;
+			pointer-events: auto !important;
+
+			&.active {
+				top: auto !important;
+			}
+		}	
 		
 	}
 	
@@ -249,26 +258,26 @@ $control-focus-color: $primary-text-color1;
     /*-- Form With Icon --*/
 	&.withicon {
 		label {
-		  left: 2rem;
+		    left: 2rem;
 		}
-		
+
 		i {
-		  position: absolute;
-		  left: 1rem;
-		  top: 1rem;
+			position: absolute;
+			left: 1rem;
+			top: 1rem;
 		}
-		
+
 		input:not([type="checkbox"]):not([type="radio"]) {
 			padding-left: 2.5rem;
 			width: calc(100% - 1.09375rem - 2px - 2.5rem );
 
 		}
-		
+
 		textarea, 
 		button, 
 		select {
-		  padding-left: 2.5rem;
-		  width: calc(100% - 1.09375rem - 2px - 2.5rem );
+			padding-left: 2.5rem;
+			width: calc(100% - 1.09375rem - 2px - 2.5rem );
 		}
 
 	}
@@ -277,34 +286,34 @@ $control-focus-color: $primary-text-color1;
 	/*-- Form Status: Success --*/
 	&.success {
 		input:not([type="checkbox"]):not([type="radio"]) {
-			border-color: #4AB005;
-			
+		    border-color: #4AB005;
+
 		}
-		
+
 		textarea, 
 		button, 
 		select {
-		  border-color: #4AB005;
+		    border-color: #4AB005;
 		}
-		
+
 		label {
-		  color: #4AB005 !important;
+		    color: #4AB005 !important;
 		}
 	}
 	
 	/*-- Form Status: Error --*/
 	&.error {
 		input:not([type="checkbox"]):not([type="radio"]) {
-			border-color: #f00;
-		    
+		    border-color: #f00;
+
 		}
 		textarea, 
 		button, 
 		select {
-		  border-color: #f00;
+		    border-color: #f00;
 		}
 		label {
-		  color: #f00 !important;
+		    color: #f00 !important;
 		}
 	}
 	
@@ -332,12 +341,12 @@ $control-focus-color: $primary-text-color1;
 
 /* Custom Controls */
 .controls-custom {
-  width: calc(100% - 1.09375rem );
-  font-size: 0.875rem;
-  padding: 0.546875rem;
-  border: none;
-  box-sizing: content-box;
-  @include transition-default();
+	width: calc(100% - 1.09375rem );
+	font-size: 0.875rem;
+	padding: 0.546875rem;
+	border: none;
+	box-sizing: content-box;
+	@include transition-default();
 }
 
 
@@ -347,25 +356,25 @@ $control-focus-color: $primary-text-color1;
  ---------------------------
  */ 
 .controls-file-container {
-  position: relative;
+    position: relative;
 }
 
 .controls-file-trigger {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .controls-file-container {
-  input[type="file"] {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 14.0625rem;
-    opacity: 0;
-	cursor: pointer;
-  }
-  .controls-file-return {
-    font-style: italic;
-  }
+	input[type="file"] {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 14.0625rem;
+		opacity: 0;
+		cursor: pointer;
+	}
+	.controls-file-return {
+	    font-style: italic;
+	}
 }
 
 /*! 
@@ -374,56 +383,62 @@ $control-focus-color: $primary-text-color1;
  ---------------------------
  */ 
 .controls-custom-merge {
-  @include transition-default();
-  background-color: #fff;
-  color: $control-text-color;
-  margin-bottom: 1.09375rem;
-  border: 1px solid $control-sub-color;
-  font-size: 0.875rem;
-  padding: 0.546875rem 1.09375rem;
-  font-weight: 600;
+	@include transition-default();
+	background-color: #fff;
+	color: $control-text-color;
+	margin-bottom: 1.09375rem;
+	border: 1px solid $control-sub-color;
+	font-size: 0.875rem;
+	padding: 0.546875rem 1.09375rem;
+	font-weight: 600;
 }
 
 .form-merge {
-  min-width: 100%;
-  overflow: hidden;
-  &.no-labels label {
-    display: none;
-  }
-  input {
-    border-radius: 50px 0 0 50px;
-    + button[type="submit"] {
-      margin-left: -0.25rem;
-    }
-  }
-  button[type="submit"] {
-    border-radius: 0 50px 50px 0;
-    position: relative;
-    margin: 0;
-	color: #527a8e;
-  }
-  &.form-square {
-    input, button[type="submit"] {
-      border-radius: 0;
-    }
-  }
+	min-width: 100%;
+	overflow: hidden;
+	&.no-labels label {
+	    display: none;
+	}
+	input {
+		
+		border-radius: 50px 0 0 50px;
+		
+		+ button[type="submit"] {
+			margin-left: -0.25rem;
+		}
+	}
+	
+	button[type="submit"] {
+		border-radius: 0 50px 50px 0;
+		position: relative;
+		margin: 0;
+		color: #527a8e;
+	}
+	
+	&.form-square {
+		input, 
+		button[type="submit"] {
+			border-radius: 0;
+		}
+	}
 }
 
 @media all and (max-width: 768px) {
-  .form-merge {
-    input {
-      width: 100%;
-      border-radius: 50px;
-      + button[type="submit"] {
-        margin-left: 0;
-      }
-    }
-    button[type="submit"] {
-      bottom: 0;
-      border-radius: 50px;
-      width: 100%;
-    }
-  }
+	.form-merge {
+		input {
+			width: 100%;
+			border-radius: 50px;
+
+			+ button[type="submit"] {
+				margin-left: 0;
+			}
+		}
+		button[type="submit"] {
+			bottom: 0;
+			border-radius: 50px;
+			width: 100%;
+		}
+	}
 }
 
 /*! 
@@ -440,29 +455,31 @@ $control-focus-color: $primary-text-color1;
 	position: relative;
 	display: inline-block;
 	user-select: none;
+	
 	select {
-	  display: none;
+	    display: none;
 	}
 
 
 	.custom-select-trigger {
-	  @include control-label-text();
-	  position: relative;
-	  display: inline-block;
-	  min-width: 150px;
-	  padding: 0.546875rem 2.5rem 0.546875rem 1.5rem;
-	  border: 1px solid $control-sub-color;
-	  background: #fff;
-	  cursor: pointer;
-	  margin-bottom: 1.09375rem;
+		@include control-label-text();
+		position: relative;
+		display: inline-block;
+		min-width: 150px;
+		padding: 0.546875rem 2.5rem 0.546875rem 1.5rem;
+		border: 1px solid $control-sub-color;
+		background: #fff;
+		cursor: pointer;
+		margin-bottom: 1.09375rem;
 
-		&:focus, &:hover {
-		  outline: none;
-		  border-color: $control-focus-color;
+		&:focus, 
+		&:hover {
+			outline: none;
+			border-color: $control-focus-color;
 		} 	
 
 		&:after {
-		  @include select-arrow( -.275rem, 1rem );
+			@include select-arrow( -.275rem, 1rem );
 		}
 	}
 
@@ -473,86 +490,89 @@ $control-focus-color: $primary-text-color1;
 	}
 
 	.custom-options {
-	  position: absolute;
-	  z-index: 2;
-	  display: block;
-	  top: 100%;
-	  left: 0;
-	  right: 0;
-	  min-width: 100%;
-	  border: 1px solid $control-sub-color;
-	  border-radius: 2px;
-	  box-sizing: border-box;
-	  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-	  background: #fff;
-	  @include transition-default();
-	  opacity: 0;
-	  visibility: hidden;
-	  pointer-events: none;
-	  transform: translateY(-15px);
+		position: absolute;
+		z-index: 2;
+		display: block;
+		top: 100%;
+		left: 0;
+		right: 0;
+		min-width: 100%;
+		border: 1px solid $control-sub-color;
+		border-radius: 2px;
+		box-sizing: border-box;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+		background: #fff;
+		@include transition-default();
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+		transform: translateY(-15px);
 
 
 		&:before {
-		  position: absolute;
-		  display: block;
-		  content: '';
-		  bottom: 100%;
-		  right: 25px;
-		  width: 7px;
-		  height: 7px;
-		  margin-bottom: -4px;
-		  border-top: 1px solid $control-sub-color;
-		  border-left: 1px solid $control-sub-color;
-		  background: #fff;
-		  transform: rotate(45deg);
-		  @include transition-default();
+			position: absolute;
+			display: block;
+			content: '';
+			bottom: 100%;
+			right: 25px;
+			width: 7px;
+			height: 7px;
+			margin-bottom: -4px;
+			border-top: 1px solid $control-sub-color;
+			border-left: 1px solid $control-sub-color;
+			background: #fff;
+			transform: rotate(45deg);
+			@include transition-default();
 		}	
 
 	}
 
 
 	.option-hover:before {
-	  background: #f9f9f9;
+	    background: #f9f9f9;
 	}
 
 	.custom-option {
-	  position: relative;
-	  display: block;
-	  padding: 0 1.5rem;
-	  border-bottom: 1px solid $control-sub-color;
-	  font-size: 0.875rem;
-	  color: $control-text-color;
-	  line-height: 47px;
-	  cursor: pointer;
-	  @include transition-default();
-	  &:first-of-type {
-		border-radius: 2px 2px 0 0;
-	  }
-	  &:last-of-type {
-		border-bottom: 0;
-		border-radius: 0 0 2px 2px;
-	  }
-	  &:hover, &.selection {
-		background: #f9f9f9;
-	  }
+		position: relative;
+		display: block;
+		padding: 0 1.5rem;
+		border-bottom: 1px solid $control-sub-color;
+		font-size: 0.875rem;
+		color: $control-text-color;
+		line-height: 47px;
+		cursor: pointer;
+		@include transition-default();
+		
+		&:first-of-type {
+		    border-radius: 2px 2px 0 0;
+		}
+		&:last-of-type {
+			border-bottom: 0;
+			border-radius: 0 0 2px 2px;
+		}
+		
+		&:hover, 
+		&.selection {
+		    background: #f9f9f9;
+		}
 	}
 
 
 	.custom-select {
-	  position: relative;
-	  display: inline-block;
+		position: relative;
+		display: inline-block;
 
 		&.opened {
 
 			.custom-select-trigger:after {
-			  transform: rotate(-135deg);
+				transform: rotate(-135deg);
 			}	
 
 			.custom-options {
-			  opacity: 1;
-			  visibility: visible;
-			  pointer-events: all;
-			  transform: translateY(0);
+				opacity: 1;
+				visibility: visible;
+				pointer-events: all;
+				transform: translateY(0);
 			}	
 
 		}	
@@ -571,49 +591,49 @@ $control-focus-color: $primary-text-color1;
   
 	position: relative;
 	text-align: left;
-	
-  label {
-	margin: 0.546875rem .5rem 0.546875rem 0;
-	position: relative;
-	left: auto;
-	top: auto;
-	pointer-events: auto;/* Required */
-	cursor: pointer;
-	@include control-label-text();
-  }	
-	
-  input[type="radio"] {
-    display: none;
-    
-    &:checked + .custom-radio-trigger::before{
-      transform: scale(1);
-    }
-  }
-  
-  .custom-radio-trigger {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    border: 1px solid $control-sub-color;
-    margin-right: 5px;
-    display: inline-block;
-    position: relative;
-    
-    &::before {
-      content: "";
-      width: 6px;
-      height: 6px;
-      background: $control-focus-color;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      border-radius: 50%;
-      margin-left: -3px;
-      margin-top: -3px;
-      transform: scale(0);
-      @include transition-default();
-    }
-  }
+
+	label {
+		margin: 0.546875rem .5rem 0.546875rem 0;
+		position: relative;
+		left: auto;
+		top: auto;
+		pointer-events: auto;/* Required */
+		cursor: pointer;
+		@include control-label-text();
+	}	
+
+	input[type="radio"] {
+		display: none;
+
+		&:checked + .custom-radio-trigger::before{
+		transform: scale(1);
+		}
+	}
+
+	.custom-radio-trigger {
+		width: 18px;
+		height: 18px;
+		border-radius: 50%;
+		border: 1px solid $control-sub-color;
+		margin-right: 5px;
+		display: inline-block;
+		position: relative;
+
+		&::before {
+			content: "";
+			width: 6px;
+			height: 6px;
+			background: $control-focus-color;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			border-radius: 50%;
+			margin-left: -3px;
+			margin-top: -3px;
+			transform: scale(0);
+			@include transition-default();
+		}
+	}
 }
 
 
@@ -623,117 +643,117 @@ $control-focus-color: $primary-text-color1;
 	position: relative;
 	text-align: left;
 
-  label {
-	  display: inline-block;
-	  width: 70px;
-	  border: 1px solid $control-sub-color;
-	  border-radius: 18px;
-	  white-space: nowrap;
-	  overflow: hidden;
-	  cursor: pointer;
-	  margin-top: .5rem;
-  }	
-	
-  input[type="checkbox"] {
-    display: none;
-    
-    &:checked + .custom-toggle-trigger {
-      margin-left: 8px;
-      background: $control-focus-color;
-    }
-  }
-  
-  .custom-toggle-trigger {
-    width: 12px;
-    height: 12px;
-    background: $control-sub-color;
-    border-radius: 50%;
-    display: inline-block;
-    vertical-align: top;
-    position: relative;
-    margin: 0.5rem .5rem 0.5rem 0;
-	margin-left: 50px;
-    @include transition-default();
-	
+	label {
+		display: inline-block;
+		width: 70px;
+		border: 1px solid $control-sub-color;
+		border-radius: 18px;
+		white-space: nowrap;
+		overflow: hidden;
+		cursor: pointer;
+		margin-top: .5rem;
+	}	
 
-    &::before,
-    &::after {
-      position: absolute;
-      display: inline-block;
-      width: 55px;
-      text-align: center;
-      line-height: 100%;
-	  @include control-label-text();
-	  font-size: 0.75rem;
-    }
-	  
-    &::before {
-      content: "Off";
-      left: -50px;
-    }
+	input[type="checkbox"] {
+		display: none;
 
-    &::after {
-      content: "On";
-      right: -50px;
-    }
+		&:checked + .custom-toggle-trigger {
+			margin-left: 8px;
+			background: $control-focus-color;
+		}
+	}
 
-  }
+	.custom-toggle-trigger {
+		width: 12px;
+		height: 12px;
+		background: $control-sub-color;
+		border-radius: 50%;
+		display: inline-block;
+		vertical-align: top;
+		position: relative;
+		margin: 0.5rem .5rem 0.5rem 0;
+		margin-left: 50px;
+		@include transition-default();
+
+
+		&::before,
+		&::after {
+			position: absolute;
+			display: inline-block;
+			width: 55px;
+			text-align: center;
+			line-height: 100%;
+			@include control-label-text();
+			font-size: 0.75rem;
+		}
+
+		&::before {
+			content: "Off";
+			left: -50px;
+		}
+
+		&::after {
+			content: "On";
+			right: -50px;
+		}
+
+	}
 }
 
 .custom-checkbox {
-  
+
 	position: relative;
 	text-align: left;
-   
+
 	label {
-		@include control-label-text();
+	    @include control-label-text();
 	}
-	
-	
-  input[type="checkbox"] {
-    display: none;
-    
-    &:checked + .custom-checkbox-trigger::before,
-    &:checked + .custom-checkbox-trigger::after {
-      display: block;
-    }
-  }
-  
-  .custom-checkbox-trigger {
-    display: inline-block;
-    width: 15px;
-    height: 15px;
-    border: 1px solid $control-sub-color;
-    vertical-align: middle;
-    position: relative;
-	margin: 0.546875rem .5rem 0.546875rem 0;
-	@include transition-default();
-	
-    
-    &::before,
-    &::after {
-      content: "";
-      position: absolute;
-      display: none;
-      background: $control-focus-color;
-      height: 3px;
-      left: 4px;
-      bottom: 2px;
-      transform-origin: 1px 1px;
-		
-    }
 
-    &::before {
-      transform: rotate(-45deg);
-      width: 9px;
-    }
 
-    &::after {
-      transform: rotate(-135deg);
-      width: 6px;
-    }
-    
-  }
+	input[type="checkbox"] {
+		display: none;
+
+		&:checked + .custom-checkbox-trigger::before,
+		&:checked + .custom-checkbox-trigger::after {
+			display: block;
+		}
+	}
+
+	.custom-checkbox-trigger {
+		display: inline-block;
+		width: 15px;
+		height: 15px;
+		border: 1px solid $control-sub-color;
+		vertical-align: middle;
+		position: relative;
+		margin: 0.546875rem .5rem 0.546875rem 0;
+		@include transition-default();
+
+
+		&::before,
+		&::after {
+			content: "";
+			position: absolute;
+			display: none;
+			background: $control-focus-color;
+			height: 3px;
+			left: 4px;
+			bottom: 2px;
+			transform-origin: 1px 1px;
+
+		}
+
+		&::before {
+			transform: rotate(-45deg);
+			width: 9px;
+		}
+
+		&::after {
+			transform: rotate(-135deg);
+			width: 6px;
+		}
+
+	}
 }
 
 
@@ -749,211 +769,232 @@ $control-focus-color: $primary-text-color1;
 * Copyright (c) 2013 jQuery Foundation and other contributors Licensed MIT */
 
 .ui-datepicker {
-  width: 17em;
-  padding: .7em 1em 0 .7em !important;
-  display: none;
-  background: #FAFAFA !important;
-  border: 1px solid #E5E5E5 !important;
-  box-shadow: 0px 7px 40px 0px rgba(0, 0, 0, 0.27) !important;
-  border-radius: 2px !important;
-  .ui-icon {
-    background: #B5B8BC !important;
-    color: #fff !important;
-    border-radius: 25px !important;
-    width: 60px !important;
-    display: block !important;
-    padding: 2px !important;
-    font-size: 10px !important;
-    text-align: center !important;
-    font-family: sans-serif !important;
-    text-indent: 0 !important;
-    font-weight: 400 !important;
-  }
-  .ui-corner-all {
-    background: none !important;
-    border: none !important;
-  }
-  .ui-icon.ui-icon-circle-triangle-e {
-    margin-left: -45px !important;
-  }
-  .ui-datepicker-header {
-    background: none !important;
-    border: none !important;
-  }
-  .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
-    border: none !important;
-    background: rgba(255, 255, 255, 0) !important;
-    color: #595959 !important;
-  }
-  .ui-state-highlight {
-    color: #D54E21  !important;
-    background: rgba(0, 0, 0, 0) !important;
-    font-weight: bold !important;
-  }
-  .ui-datepicker-header {
-    position: relative;
-    padding: .2em 0;
-  }
-  .ui-datepicker-prev, .ui-datepicker-next {
-    position: absolute;
-    top: 2px;
-    width: 1.8em;
-    height: 1.8em;
-  }
-  .ui-datepicker-prev-hover, .ui-datepicker-next-hover {
-    top: 1px;
-  }
-  .ui-datepicker-prev {
-    left: 2px;
-  }
-  .ui-datepicker-next {
-    right: 2px;
-  }
-  .ui-datepicker-prev-hover {
-    left: 1px;
-  }
-  .ui-datepicker-next-hover {
-    right: 1px;
-  }
-  .ui-datepicker-prev span, .ui-datepicker-next span {
-    display: block;
-    position: absolute;
-    left: 50%;
-    margin-left: -8px;
-    top: 50%;
-    margin-top: -8px;
-  }
-  .ui-datepicker-title {
-    margin: 0 2.3em;
-    line-height: 1.8em;
-    text-align: center;
-    select {
-      font-size: 1em;
-      margin: 1px 0;
-    }
-  }
-  select {
-    &.ui-datepicker-month, &.ui-datepicker-year {
-      width: 45%;
-    }
-  }
-  table {
-    width: 100%;
-    font-size: .9em;
-    border-collapse: collapse;
-    margin: 0 0 .4em;
-  }
-  th {
-    padding: .7em .3em;
-    text-align: center;
-    font-weight: bold;
-    border: 0;
-  }
-  td {
-    border: 0;
-    padding: 1px;
-    span, a {
-      display: block;
-      padding: .2em;
-      text-align: right;
-      text-decoration: none;
-    }
-  }
-  .ui-datepicker-buttonpane {
-    background-image: none;
-    margin: .7em 0 0 0;
-    padding: 0 .2em;
-    border-left: 0;
-    border-right: 0;
-    border-bottom: 0;
-    button {
-      float: right;
-      margin: .5em .2em .4em;
-      cursor: pointer;
-      padding: .2em .6em .3em .6em;
-      width: auto;
-      overflow: visible;
-      &.ui-datepicker-current {
-        float: left;
-      }
-    }
-  }
-  &.ui-datepicker-multi {
-    width: auto;
-  }
+	width: 17em;
+	padding: .7em 1em 0 .7em !important;
+	display: none;
+	background: #FAFAFA !important;
+	border: 1px solid #E5E5E5 !important;
+	box-shadow: 0px 7px 40px 0px rgba(0, 0, 0, 0.27) !important;
+	border-radius: 2px !important;
+	
+	.ui-icon {
+		background: #B5B8BC !important;
+		color: #fff !important;
+		border-radius: 25px !important;
+		width: 60px !important;
+		display: block !important;
+		padding: 2px !important;
+		font-size: 10px !important;
+		text-align: center !important;
+		font-family: sans-serif !important;
+		text-indent: 0 !important;
+		font-weight: 400 !important;
+	}
+	.ui-corner-all {
+		background: none !important;
+		border: none !important;
+	}
+	.ui-icon.ui-icon-circle-triangle-e {
+	    margin-left: -45px !important;
+	}
+	.ui-datepicker-header {
+		background: none !important;
+		border: none !important;
+	}
+	.ui-state-default, 
+	.ui-widget-content .ui-state-default, 
+	.ui-widget-header .ui-state-default {
+		border: none !important;
+		background: rgba(255, 255, 255, 0) !important;
+		color: #595959 !important;
+	}
+	.ui-state-highlight {
+		color: #D54E21  !important;
+		background: rgba(0, 0, 0, 0) !important;
+		font-weight: bold !important;
+	}
+	.ui-datepicker-header {
+		position: relative;
+		padding: .2em 0;
+	}
+	.ui-datepicker-prev, 
+	.ui-datepicker-next {
+		position: absolute;
+		top: 2px;
+		width: 1.8em;
+		height: 1.8em;
+	}
+	.ui-datepicker-prev-hover, 
+	.ui-datepicker-next-hover {
+  	    top: 1px;
+	}
+	.ui-datepicker-prev {
+	    left: 2px;
+	}
+	.ui-datepicker-next {
+	    right: 2px;
+	}
+	.ui-datepicker-prev-hover {
+	    left: 1px;
+	}
+	.ui-datepicker-next-hover {
+	    right: 1px;
+	}
+	.ui-datepicker-prev span, 
+	.ui-datepicker-next span {
+		display: block;
+		position: absolute;
+		left: 50%;
+		margin-left: -8px;
+		top: 50%;
+		margin-top: -8px;
+	}
+	.ui-datepicker-title {
+		margin: 0 2.3em;
+		line-height: 1.8em;
+		text-align: center;
+		
+		select {
+			font-size: 1em;
+			margin: 1px 0;
+		}
+	}
+	
+	select {
+		
+		&.ui-datepicker-month, 
+		&.ui-datepicker-year {
+			width: 45%;
+		}
+	}
+	
+	table {
+		width: 100%;
+		font-size: .9em;
+		border-collapse: collapse;
+		margin: 0 0 .4em;
+	}
+	th {
+		padding: .7em .3em;
+		text-align: center;
+		font-weight: bold;
+		border: 0;
+	}
+	td {
+		border: 0;
+		padding: 1px;
+		
+		span, 
+		a {
+			display: block;
+			padding: .2em;
+			text-align: right;
+			text-decoration: none;
+		}
+	}
+	
+	.ui-datepicker-buttonpane {
+		background-image: none;
+		margin: .7em 0 0 0;
+		padding: 0 .2em;
+		border-left: 0;
+		border-right: 0;
+		border-bottom: 0;
+		button {
+			float: right;
+			margin: .5em .2em .4em;
+			cursor: pointer;
+			padding: .2em .6em .3em .6em;
+			width: auto;
+			overflow: visible;
+
+			&.ui-datepicker-current {
+				float: left;
+			}
+		}
+	}
+	
+	&.ui-datepicker-multi {
+	    width: auto;
+	}
 }
 
 /* with multiple calendars */
 
 .ui-datepicker-multi .ui-datepicker-group {
-  float: left;
-  table {
-    width: 95%;
-    margin: 0 auto .4em;
-  }
+	float: left;
+	table {
+		width: 95%;
+		margin: 0 auto .4em;
+	}
 }
 
 .ui-datepicker-multi-2 .ui-datepicker-group {
-  width: 50%;
+    width: 50%;
 }
 
 .ui-datepicker-multi-3 .ui-datepicker-group {
-  width: 33.3%;
+    width: 33.3%;
 }
 
 .ui-datepicker-multi-4 .ui-datepicker-group {
-  width: 25%;
+    width: 25%;
 }
 
 .ui-datepicker-multi {
-  .ui-datepicker-group-last .ui-datepicker-header, .ui-datepicker-group-middle .ui-datepicker-header {
-    border-left-width: 0;
-  }
-  .ui-datepicker-buttonpane {
-    clear: left;
-  }
+	.ui-datepicker-group-last .ui-datepicker-header, 
+	.ui-datepicker-group-middle .ui-datepicker-header {
+	    border-left-width: 0;
+	}
+	.ui-datepicker-buttonpane {
+	    clear: left;
+	}
 }
 
 .ui-datepicker-row-break {
-  clear: both;
-  width: 100%;
-  font-size: 0;
+	clear: both;
+	width: 100%;
+	font-size: 0;
 }
 
 /* RTL support */
-
 .ui-datepicker-rtl {
-  direction: rtl;
-  .ui-datepicker-prev {
-    right: 2px;
-    left: auto;
-  }
-  .ui-datepicker-next {
-    left: 2px;
-    right: auto;
-  }
-  .ui-datepicker-prev:hover {
-    right: 1px;
-    left: auto;
-  }
-  .ui-datepicker-next:hover {
-    left: 1px;
-    right: auto;
-  }
-  .ui-datepicker-buttonpane {
-    clear: right;
-    button {
-      float: left;
-      &.ui-datepicker-current {
-        float: right;
-      }
-    }
-  }
-  .ui-datepicker-group {
-    float: right;
-  }
-  .ui-datepicker-group-last .ui-datepicker-header, .ui-datepicker-group-middle .ui-datepicker-header {
-    border-right-width: 0;
-    border-left-width: 1px;
-  }
+	direction: rtl;
+	
+	.ui-datepicker-prev {
+		right: 2px;
+		left: auto;
+	}
+	.ui-datepicker-next {
+		left: 2px;
+		right: auto;
+	}
+	.ui-datepicker-prev:hover {
+		right: 1px;
+		left: auto;
+	}
+	.ui-datepicker-next:hover {
+		left: 1px;
+		right: auto;
+	}
+	.ui-datepicker-buttonpane {
+	    clear: right;
+		
+		button {
+			float: left;
+
+			&.ui-datepicker-current {
+				float: right;
+			}
+		}
+	}
+	.ui-datepicker-group {
+	    float: right;
+	}
+	
+	.ui-datepicker-group-last .ui-datepicker-header, 
+	.ui-datepicker-group-middle .ui-datepicker-header {
+		border-right-width: 0;
+		border-left-width: 1px;
+	}
 }

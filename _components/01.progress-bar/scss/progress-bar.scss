@@ -14,132 +14,130 @@ $bar-fill-color : $highlight-color1;
  ---------------------------
  */ 
 @mixin size($w, $h){
-  height: $h;
-  width: $w;
+	height: $h;
+	width: $w;
 }
 
 .custom-radial-progressbar {
-  @include size($bar-size, $bar-size);
-  
-  display: inline-block;
-  margin: 1rem;
-  position: relative;
-  
- 
+	@include size($bar-size, $bar-size);
+
+	display: inline-block;
+	margin: 1rem;
+	position: relative;
+
+
 	.title {
-	    color: $primary-text-color1;
+		color: $primary-text-color1;
 		padding-top: 1rem;
 	}
 
-  .pie {
-    @include size(100%, 100%);
-    clip: rect(0, $bar-size, $bar-size, $bar-size / 2);
-    left: 0;
-    position: absolute;
-    top: 0;
+	.pie {
+		@include size(100%, 100%);
+		clip: rect(0, $bar-size, $bar-size, $bar-size / 2);
+		left: 0;
+		position: absolute;
+		top: 0;
 
-    .half-circle {
-	  @include transition-default();
-      @include size(100%, 100%);
-      border: $bar-line-size solid;
-      border-radius: 50%;
-      clip: rect(0, $bar-size / 2, $bar-size, 0);
-      left: 0;
-      position: absolute;
-      top: 0;
-    }
-  }
+		.half-circle {
+			@include transition-default();
+			@include size(100%, 100%);
+			border: $bar-line-size solid;
+			border-radius: 50%;
+			clip: rect(0, $bar-size / 2, $bar-size, 0);
+			left: 0;
+			position: absolute;
+			top: 0;
+		}
+	}
 
-  .track {
-	border: $bar-line-size solid $bar-track-bg;
-    background: $bar-bg;
-    border-radius: 100%;
-    display: block;
-	width: 100%;
-	height: 100%;
-	line-height: $bar-size;
-    font-size: 1rem;
-    position: relative;
-    text-align: center;
-	color: #fff;
-	  
-	  > span {
-		  margin-top: -.5rem;
-		  position: absolute;
-		  width: 100%;
-		  left: 0;
-		  top: 0;
-	  }
+	.track {
+		border: $bar-line-size solid $bar-track-bg;
+		background: $bar-bg;
+		border-radius: 100%;
+		display: block;
+		width: 100%;
+		height: 100%;
+		line-height: $bar-size;
+		font-size: 1rem;
+		position: relative;
+		text-align: center;
+		color: #fff;
 
-    .unit {
-      color: $sub-text-color;
-	  font-size: 0.875rem;
-	  display: inline-block;
-	  margin-left: .1rem;
-      font-style: normal;
-    }
-  }
+		> span {
+			margin-top: -.5rem;
+			position: absolute;
+			width: 100%;
+			left: 0;
+			top: 0;
+		}
+
+		.unit {
+			color: $sub-text-color;
+			font-size: 0.875rem;
+			display: inline-block;
+			margin-left: .1rem;
+			font-style: normal;
+		}
+	}
 
 
-  &.no-c-bg {
-    .track {
-	  color: $primary-text-color1;
-      background: none;
-    }
-  }
+	&.no-c-bg {
+		
+		.track {
+			color: $primary-text-color1;
+			background: none;
+		}
+	}
 
-    @for $i from 1 to 101 {
+	@for $i from 1 to 101 {
 
-	  &.progress-#{$i} {
-		  
+		&.progress-#{$i} {
+
 			@if $i <= 50 {
-			  .pie {
-				.right-side {
-				  display: none;
+				.pie {
+					.right-side {
+						display: none;
+					}
 				}
-			  }
 			}
 
-			 @if $i > 50 {
-				  .pie {
+			@if $i > 50 {
+				.pie {
 					clip: rect(auto, auto, auto, auto);
 
 					.right-side {
-					  transform: rotate(180deg);
+						transform: rotate(180deg);
 					}
-				  }
+				}
 
-			 }   
-		  
-		  .pie {
-			.half-circle {
-			  border-color: $bar-fill-color;
+			}   
+
+			.pie {
+				.half-circle {
+					border-color: $bar-fill-color;
+				}
+
+				.left-side {
+					transform: rotate(#{$i*3.5}deg);
+				}
+
+			}	
+
+			@if $i == 100 {
+				.pie {
+					.right-side {
+						transform: rotate(170deg);
+					}   
+				}
+
 			}
 
-			.left-side {
-			   transform: rotate(#{$i*3.5}deg);
-			}
 
-		  }	
-		  
-		  
-		  @if $i == 100 {
-			  .pie {
-				.right-side {
-				  transform: rotate(170deg);
-				}   
-			  }
+		}	
 
-		  }
-		
-		  
+	}
+	/* End For */
 
-
-		  
-	  }	
-	
-    }	  
-	
 
 }
 

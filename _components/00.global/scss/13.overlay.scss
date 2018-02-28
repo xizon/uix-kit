@@ -3,31 +3,56 @@
 /* ====================================================== */
 
 .overlay-bg {
-  overflow: hidden;
-  h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-    color: inherit;
-  }
+	overflow: hidden;
+	
+	h1, 
+	h2, 
+	h3, 
+	h4, 
+	h5, 
+	h6, 
+	.h1, 
+	.h2, 
+	.h3, 
+	.h4, 
+	.h5, 
+	.h6 {
+	    color: inherit;
+	}
 }
 
 .overlay-text-white {
-  color: white;
-  h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-    color: white;
-  }
+	color: white;
+	
+	h1, 
+	h2, 
+	h3, 
+	h4, 
+	h5, 
+	h6, 
+	.h1, 
+	.h2, 
+	.h3, 
+	.h4, 
+	.h5, 
+	.h6 {
+	    color: white;
+	}
 }
 
 .overlay-bg-black:after {
-  content: '';
-  display: table;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 150vh;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: 1;
+	content: '';
+	display: table;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 150vh;
+	background-color: rgba(0, 0, 0, 0.6);
+	z-index: 1;
 }
 
 .overlay-bg-black-pure {
-  background: $primary-text-color1 !important;
+    background: $primary-text-color1 !important;
 }
+

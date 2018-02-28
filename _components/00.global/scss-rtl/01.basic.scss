@@ -2,39 +2,45 @@
    1. Basic                   
 /* ====================================================== */
 body {
-  direction: rtl;
-  unicode-bidi: embed;
+	direction: rtl;
+	unicode-bidi: embed;
 }
 
-caption, th, td {
-  text-align: right;
+caption, 
+th, 
+td {
+    text-align: right;
 }
 
-ul.list-normal, ol.list-normal {
-  padding-left: auto;
-  padding-right: 0.875rem;
+ul.list-normal, 
+ol.list-normal {
+	  padding-left: auto;
+	  padding-right: 0.875rem;
 }
 
 .list-normal {
-  ul, ol {
-    padding-left: auto;
-    padding-right: 0.875rem;
-  }
+	ul, 
+	ol {
+		padding-left: auto;
+		padding-right: 0.875rem;
+	}
 }
 
-.table-normal table th, table.table-normal th {
-  text-align: right;
+.table-normal table th, 
+table.table-normal th {
+    text-align: right;
 }
 
 blockquote {
-  border-left-width: 1px;
-  border-right-width: 5px;
-  border-left-color: #F8F8F8;
-  border-right-color: #EC5E79;
-  &:before {
-    margin-right: auto;
-    margin-left: 0.21875rem;
-  }
+	border-left-width: 1px;
+	border-right-width: 5px;
+	border-left-color: #F8F8F8;
+	border-right-color: #EC5E79;
+	
+	&:before {
+		margin-right: auto;
+		margin-left: 0.21875rem;
+	}
 }
 
 

@@ -11,18 +11,17 @@
 }
 
 .web-video-background-container {
-  position: relative;
-  height: 100vh;
-  width: 100%;
-  overflow: hidden;
+	position: relative;
+	height: 100vh;
+	width: 100%;
+	overflow: hidden;
 }
 
 
 @media all and (max-width: 768px) {
 	
 	.web-video-background-container {
-	  height: auto;
+		height: auto;
 	}
-	
 	
 }

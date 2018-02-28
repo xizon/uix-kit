@@ -3,45 +3,46 @@
 /* ====================================================== */
 
 .sidebar-container {
-  padding-left: auto;
-  padding-right: 2.1875rem;
+	padding-left: auto;
+	padding-right: 2.1875rem;
 }
 
 .widget_calendar {
-  caption {
-    text-align: right;
-  }
-  #next {
-    text-align: left;
-  }
+	
+	caption {
+        text-align: right;
+	}
+	#next {
+	    text-align: left;
+	}
 }
 
 .sidebar-container .widget-title:after {
-  margin-left: auto;
-  margin-right: 0.4375rem;
+	margin-left: auto;
+	margin-right: 0.4375rem;
 }
 
 .post-img-list-box li {
-  .item-thumb {
-    float: right;
-    margin-right: auto;
-    margin-left: 0.875rem;
-  }
-  .item-info {
-    float: right;
-  }
+	.item-thumb {
+		float: right;
+		margin-right: auto;
+		margin-left: 0.875rem;
+	}
+	.item-info {
+		float: right;
+	}
 }
 
 
 /* With Uix Plugins */
 .uix-iso-grid-widget .uix-iso-grid-recent-item {
-  .item-thumb {
-    float: right;
-    margin-right: auto;
-    margin-left: 0.875rem;
-    text-align: right;
-  }
-  .item-info {
-    float: right;
-  }
+	.item-thumb {
+		float: right;
+		margin-right: auto;
+		margin-left: 0.875rem;
+		text-align: right;
+	}
+	.item-info {
+	    float: right;
+	}
 }

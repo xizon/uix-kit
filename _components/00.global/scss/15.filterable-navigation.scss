@@ -3,36 +3,43 @@
 /* ====================================================== */
 
 .nav-filters {
-  padding: 1.421875rem 0;
-  ul {
-	@include transition-default();
-    margin: 0;
-    li {
-      font-style: italic;
-      display: inline-block;
-      transition: 0.2s linear;
-      &:not(:last-child) {
-        margin-right: 0.203125rem;
-        &:after {
-          content: '/';
-          margin-left: 0.203125rem;
-          opacity: 0.1;
-        }
-      }
-      &:not(.active):not(.current-cat) {
-        opacity: .5;
-        &:after {
-          opacity: 0.2;
-        }
-      }
-      &:hover {
-        opacity: 1;
-        &:after {
-          opacity: 0.1;
-        }
-      }
-    }
-  }
+	padding: 1.421875rem 0;
+	
+	ul {
+		@include transition-default();
+		margin: 0;
+
+		li {
+			font-style: italic;
+			display: inline-block;
+			transition: 0.2s linear;
+			&:not(:last-child) {
+				margin-right: 0.203125rem;
+
+				&:after {
+					content: '/';
+					margin-left: 0.203125rem;
+					opacity: 0.1;
+				}
+			}
+
+			&:not(.active):not(.current-cat) {
+				opacity: .5;
+
+				&:after {
+					opacity: 0.2;
+				}
+			}
+
+			&:hover {
+				opacity: 1;
+
+				&:after {
+					opacity: 0.1;
+				}
+			}
+		}
+	}
 }
 
 
@@ -53,39 +60,39 @@
 @media all and (max-width: 768px) {
 	
 	.nav-filters.responsive-dropdown {
-		
-	  .nav-filters-toggle-label {
-		  display: block;
-		  cursor: pointer;
-		  user-select: none;
-	  }
-		
+
+		.nav-filters-toggle-label {
+			display: block;
+			cursor: pointer;
+			user-select: none;
+		}
+
 		> ul {
 			box-shadow: 0px 7px 19px 0px rgba(0, 0, 0, 0.21);
 			margin-top: -0.203125rem;
 		}	
-		
-	  /* wrapping this in media querry to prevent fails while change screen size and checked inputs */
-	  > :checked ~ ul {
-		  display: none;
-	 
-	  }
-		
+
+		/* wrapping this in media querry to prevent fails while change screen size and checked inputs */
+		> :checked ~ ul {
+			display: none;
+		}
+
 		li {
-	      padding: .2rem 0;
-		  display: block;
-		  width: 100%;
-		  border-bottom: 1px solid rgba(0,0,0,.1);
-		  &:not(:last-child) {
-			margin-right: 0;
-			&:after {
-			  content: '';
-			  margin-left: 0;
+			padding: .2rem 0;
+			display: block;
+			width: 100%;
+			border-bottom: 1px solid rgba(0,0,0,.1);
+			&:not(:last-child) {
+				margin-right: 0;
+
+				&:after {
+					content: '';
+					margin-left: 0;
+				}
 			}
-		  }
 
 		}	
-		
+
 
 	}
 

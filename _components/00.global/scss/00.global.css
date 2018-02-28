@@ -1,0 +1,75 @@
+/*
+	
+	COLOR PALETTE
+	---------------------------
+	
+    Default font-size for HTML :    16px
+    Placeholder Text Color     :    #E6E6E8
+	Primary Background Color   :    transparent
+	Highlight Color            :    #EC5E79, #E8588C
+	Primary Text Color         :    #212121, #474747
+	Subordinate Text Color     :    #AEAEAE
+	Dividing Line Color        :    #F4F4F4
+	
+
+
+	TABLE OF CONTENTS
+	---------------------------
+	
+	1. Basic
+	    1.1. Reset Stylesheets
+
+
+	2. Helper Classes
+	3. Typography
+	4. Spacing
+	5. Basic Layout Styles
+		5.1. Bootstrap 3.x
+        5.2. Material Container
+		5.3. Main Wrapper
+		5.4. Seamless Grid
+
+	6. Navigation Area	
+	7. Header Area
+    8. Brand	
+	9. Footer
+	10. Social Buttons
+	    10.1. Social Background
+		10.2. Social General
+		
+	11. Back to Top
+	12. Loader
+	13. Overlay
+	14. Pagination
+	15. Filterable Navigation  
+	16. Sidebar
+	    16.1. Basic
+		16.2. Calendar Widget
+		16.3. Post List
+		16.4. Post List with Featured Image
+		16.5. Link List
+
+
+	17. Search 
+		17.1. Search of Widget
+		
+	18. Tags 
+	19. Entry  
+	    19.1. Spacing
+		19.2. Text
+		19.3. Content
+		19.4. Meta
+		
+	20. Comments
+	21. 3rd Party Plugins
+    22. Video
+
+
+	
+*/
+/* Ripple Effect */
+@keyframes ripple {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1), 0 0 0 20px rgba(255, 255, 255, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1); }
+  100% {
+    box-shadow: 0 0 0 20px rgba(255, 255, 255, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1), 0 0 0 80px rgba(255, 255, 255, 0); } }

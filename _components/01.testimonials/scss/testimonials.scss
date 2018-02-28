@@ -3,73 +3,74 @@
 /* ====================================================== */
 
 .custom-testimonials {
-	
+
 	/* Required */
 	overflow: hidden;
-	
+
 	.slides {
-	  margin: 0;
-	  padding: 0;
-	  list-style: none;
-	  li {
 		margin: 0;
 		padding: 0;
 		list-style: none;
-		cursor: move;
-	  }
-	}
-	
-	
-  .content {
-	position: relative;
-	margin: 0 auto;
-    max-width: calc(100% - 176px );
-	box-shadow: 0 22px 40px 0 #eef4fc;
-	border-radius: 10px;
-	margin-bottom: 100px;
-	padding: 1rem 44px;
-  }
 
-  .signature {
-	font-size: 0.75rem;
-	text-align: center;
-	height: 40px;
-	width: 100%;
-	display: block;
-	font-style: italic;
-	
-	  
-    img.avatar,
-	.avatar img {
-      width: 32px;
-      height: 32px;
-      border-radius: 100%;
-      margin: .3rem 0 0.875rem 0.875rem;
-      vertical-align: middle;
-	  display: inline-block;
-    }
-    .no-avatar {
-      width: 1px;
-      height: 1px;
-      border: none;
-    }
-    strong {
-      font-weight: 700;
-      &.pure-text {
-        display: inline-block;
-      }
-    }
-  }
+		li {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			cursor: move;
+		}
+	}
+
+
+	.content {
+		position: relative;
+		margin: 0 auto;
+		max-width: calc(100% - 176px );
+		box-shadow: 0 22px 40px 0 #eef4fc;
+		border-radius: 10px;
+		margin-bottom: 100px;
+		padding: 1rem 44px;
+	}
+
+	.signature {
+		font-size: 0.75rem;
+		text-align: center;
+		height: 40px;
+		width: 100%;
+		display: block;
+		font-style: italic;
+
+		img.avatar,
+		.avatar img {
+			width: 32px;
+			height: 32px;
+			border-radius: 100%;
+			margin: .3rem 0 0.875rem 0.875rem;
+			vertical-align: middle;
+			display: inline-block;
+		}
+		.no-avatar {
+			width: 1px;
+			height: 1px;
+			border: none;
+		}
+		strong {
+			font-weight: 700;
+
+			&.pure-text {
+				display: inline-block;
+			}
+		}
+	}
 }
 
 @media all and (max-width: 768px) {
 	
 	.custom-testimonials {
-	  .content {
-		max-width: 100%;
-		margin-bottom: 50px;
-		padding: 1rem 0;
-	  }
+		.content {
+			max-width: 100%;
+			margin-bottom: 50px;
+			padding: 1rem 0;
+		}
 	}
 
 }
@@ -95,6 +96,7 @@
 		border-radius: 100%; 
 		background: $sub-text-color; 
 		opacity: 0.1;
+		
 		&.flex-active {
 			opacity: 0.5;
 		}

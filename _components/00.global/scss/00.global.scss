@@ -81,32 +81,31 @@ $dividing-line-color   : #F4F4F4;
 $primary-bg-color      : transparent;
 
 
-
-@mixin transition-cubic-bezier(){
+@mixin transition-cubic-bezier() {
 	/* @include transition-cubic-bezier(); */
 	  transition: 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
 }
 
-@mixin transition-default(){
+@mixin transition-default() {
 	/* @include transition-default(); */
 	transition: all 0.3s ease;
 }
 
 
-@mixin transition-none(){
+@mixin transition-none() {
 	/* @include transition-none(); */
 	transition: none; 
 }
 
 
-@mixin bg-gradient(){
+@mixin bg-gradient() {
 	/* @include bg-gradient(); */
 	background: $highlight-color1;
 	background: linear-gradient(to right, $highlight-color1 0%,$highlight-color2 100%);
 }
 
 
-@mixin icontxt-gradient(){
+@mixin icontxt-gradient() {
 	/* @include icontxt-gradient(); */
 	/* The font is the default color when the browser is IE */
 	background: linear-gradient(to right, $highlight-color1 0%,$highlight-color2 100%);
@@ -115,18 +114,30 @@ $primary-bg-color      : transparent;
 	
 }
 
+@mixin outer-shadow() {
+	/* @include outer-shadow(); */
+	box-shadow: 0 4px  4px  rgba(0, 0, 0, .05),
+               0 1px  6px  rgba(0, 0, 0, .05),
+               0 8px  8px  rgba(0, 0, 0, .05), 
+               0 16px 16px rgba(0, 0, 0, .05), 
+               8px 32px 32px rgba(0, 0, 0, .02), 
+               8px 64px 64px rgba(0, 0, 0, .02);
+	
+}
+
 
 /* Ripple Effect */
-@mixin anime-ripple(){
+@mixin anime-ripple() {
 	/* @include ianime-ripple(); */
 	animation: ripple 0.6s linear infinite;
 }
 
 @keyframes ripple {
-  0% {
-      box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1), 0 0 0 20px rgba(255, 255, 255, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1);
-  }
-  100% {
-      box-shadow: 0 0 0 20px rgba(255, 255, 255, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1), 0 0 0 80px rgba(255, 255, 255, 0);
-  }
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1), 0 0 0 20px rgba(255, 255, 255, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1);
+    }
+    100% {
+        box-shadow: 0 0 0 20px rgba(255, 255, 255, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1), 0 0 0 80px rgba(255, 255, 255, 0);
+    }
 }
+

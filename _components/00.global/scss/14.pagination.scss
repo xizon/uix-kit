@@ -3,112 +3,133 @@
 /* ====================================================== */
 
 .pagination-container {
-  margin-top: 2.84375rem;
-  &:before {
-    display: table;
-    content: "";
-    line-height: 0;
-  }
-  &:after {
-    display: table;
-    content: "";
-    line-height: 0;
-    clear: both;
-  }
-  li {
-    display: inline-block;
-  }
-  div {
-    &.nav-previous, &.nav-next {
-      display: inline-block;
-      width: 3.125rem;
-      height: 3.125rem;
-      padding-top: 0.25rem;
-      text-align: center;
-      background: none;
-      border: none;
-      color: $primary-text-color1;
-      font-variant-ligatures: common-ligatures;
-      /*Ligatures and contextual forms are ways of combining glyphs to produce more harmonized forms.*/
-      margin-bottom: 0;
-      font-size: 0.875rem;
-      line-height: 3.25;
-      margin-top: 0;
-      margin-bottom: 2.06818181818rem;
-    }
-  }
-  li {
-    a, &.active > span, > span.current {
-      display: inline-block;
-      width: 3.125rem;
-      height: 3.125rem;
-      padding-top: 0.25rem;
-      text-align: center;
-      background: none;
-      border: none;
-      color: $primary-text-color1;
-      font-variant-ligatures: common-ligatures;
-      /*Ligatures and contextual forms are ways of combining glyphs to produce more harmonized forms.*/
-      margin-bottom: 0;
-      font-size: 0.875rem;
-      line-height: 3.25;
-      margin-top: 0;
-      margin-bottom: 2.06818181818rem;
-    }
-  }
-  div {
-    &.nav-previous a, &.nav-next a {
-      display: block;
-    }
-    &.nav-previous:hover, &.nav-next:hover {
-      background: #efefef;
-      color: #232323;
-    }
-  }
-  li {
-    a:hover {
-      background: #efefef;
-      color: #232323;
-    }
-    &.active {
-      a {
-        color: #989898;
-        font-style: italic;
-        &:hover {
-          background: #e7e7e7;
-          color: #232323;
-        }
-      }
-      > span {
-        color: #989898;
-        font-style: italic;
-      }
-    }
-  }
+	margin-top: 2.84375rem;
+	
+	&:before {
+		display: table;
+		content: "";
+		line-height: 0;
+	}
+	&:after {
+		display: table;
+		content: "";
+		line-height: 0;
+		clear: both;
+	}
+	li {
+		display: inline-block;
+	}
+	
+	div {
+
+		&.nav-previous, 
+		&.nav-next {
+			display: inline-block;
+			width: 3.125rem;
+			height: 3.125rem;
+			padding-top: 0.25rem;
+			text-align: center;
+			background: none;
+			border: none;
+			color: $primary-text-color1;
+			font-variant-ligatures: common-ligatures;
+			/*Ligatures and contextual forms are ways of combining glyphs to produce more harmonized forms.*/
+			margin-bottom: 0;
+			font-size: 0.875rem;
+			line-height: 3.25;
+			margin-top: 0;
+			margin-bottom: 2.06818181818rem;
+		}
+	}
+
+
+	li {
+
+		a, 
+		&.active > span, 
+		> span.current {
+			display: inline-block;
+			width: 3.125rem;
+			height: 3.125rem;
+			padding-top: 0.25rem;
+			text-align: center;
+			background: none;
+			border: none;
+			color: $primary-text-color1;
+			font-variant-ligatures: common-ligatures;
+			/*Ligatures and contextual forms are ways of combining glyphs to produce more harmonized forms.*/
+			margin-bottom: 0;
+			font-size: 0.875rem;
+			line-height: 3.25;
+			margin-top: 0;
+			margin-bottom: 2.06818181818rem;
+		}
+	}
+	div {
+		&.nav-previous a, 
+		&.nav-next a {
+			display: block;
+		}
+
+		&.nav-previous:hover, 
+		&.nav-next:hover {
+			background: #efefef;
+			color: #232323;
+		}
+	}
+
+
+	li {
+		a:hover {
+			background: #efefef;
+			color: #232323;
+		}
+
+		&.active {
+
+			a {
+				color: #989898;
+				font-style: italic;
+				&:hover {
+					background: #e7e7e7;
+					color: #232323;
+				}
+			}
+
+			> span {
+				color: #989898;
+				font-style: italic;
+			}
+		}
+	}
+	
+	
 }
 
 /* Paginate WordPress Posts */
 
 .page-links {
-  margin: 0.875rem 0;
-  font-weight: 600;
-  > span {
-    display: inline-block;
-    margin: 0 0.13125rem;
-    font-weight: normal;
-    font-style: italic;
-  }
-  a {
-    display: inline-block;
-    margin: 0 0.13125rem;
-    font-weight: normal;
-    font-style: italic;
-    > span {
-      color: $primary-text-color1;
-      background: #F9F9F9;
-      padding: 0 0.2625rem;
-      border: 1px solid #DDDDDD;
-      border-radius: 2px;
-    }
-  }
+	margin: 0.875rem 0;
+	font-weight: 600;
+	
+	> span {
+		display: inline-block;
+		margin: 0 0.13125rem;
+		font-weight: normal;
+		font-style: italic;
+	}
+	a {
+		display: inline-block;
+		margin: 0 0.13125rem;
+		font-weight: normal;
+		font-style: italic;
+
+		> span {
+			color: $primary-text-color1;
+			background: #F9F9F9;
+			padding: 0 0.2625rem;
+			border: 1px solid #DDDDDD;
+			border-radius: 2px;
+		}
+	}
 }

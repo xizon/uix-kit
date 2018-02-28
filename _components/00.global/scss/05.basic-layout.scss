@@ -6,20 +6,19 @@
 .container {
 	width: auto;
 	max-width: 1170px;
-	
 }
 
 @media all and (min-width: 1430px) {
-  .container {
-    max-width: 1278px;
-  }
+	.container {
+	    max-width: 1278px;
+	}
 }
 
 /* New XXL container for Bootstrap 3.x */
 @media all and (min-width: 1600px) {
-  .container {
-    max-width: 1410px;
-  }
+	.container {
+	    max-width: 1410px;
+	}
 }
 
 
@@ -122,7 +121,7 @@ $seamless-grid-pad : 15px;
 	
 	.seamless-grid,
 	[class*='seamless-col-'] {
-	  box-sizing: border-box;
+	    box-sizing: border-box;
 	}
 	
 
@@ -131,15 +130,15 @@ $seamless-grid-pad : 15px;
 		width: calc( 100% + #{$seamless-grid-pad} );
 
 		&:after {
-		  /* Or @extend clearfix */
-		  content: "";
-		  display: table;
-		  clear: both;
+			/* Or @extend clearfix */
+			content: "";
+			display: table;
+			clear: both;
 		}
 
 		.content {
-		  word-wrap: break-word;
-		  position: relative;
+			word-wrap: break-word;
+			position: relative;
 		}
 
 		
@@ -148,7 +147,6 @@ $seamless-grid-pad : 15px;
 			width: 100%;
 			
 			> [class*='seamless-col-'] {
-			
 			    padding-right: 0 !important;
 	    	}
 		  

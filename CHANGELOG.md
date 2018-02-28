@@ -1,5 +1,13 @@
 # Changelog
 
+#### = 1.1.65 (February 28, 2018) =
+
+* New: Added a new helper class ".outer-shadower".
+* Tweak: Landscaping the all SCSS files.
+* Tweak: Optimized HTML code structure with new "include-copyright.html" file to "_components / 00.global /".
+
+
+
 #### = 1.1.64 (February 27, 2018) =
 
 * Fix: Fixed an issue of drag and drop slider interaction.

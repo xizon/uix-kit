@@ -3,59 +3,69 @@
 /* ====================================================== */
 
 .custom-accordion {
-  dl {
-    position: relative;
-    background: white;
-    transition: .1s ease-in-out;
-    &::before {
-      content: '';
-      position: absolute;
-      display: block;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      pointer-events: none;
-      box-shadow: 0 -1px 0 #e5e5e5, 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.24);
-    }
-  }
-  dt {
-    padding: 1rem;
-    -webkit-touch-callout: none;
-    user-select: none;
-    a {
-      display: block;
-    }
-  }
-  dd {
-    width: calc(100% - 2rem);
-    padding: 1rem;
-    font-size: 0.875rem;
-    display: none;
-  }
-  dl {
-    &.active {
-      height: auto;
-      margin: 1rem 0;
-      box-shadow: 0 0 6px rgba(0, 0, 0, 0.16), 0 6px 12px rgba(0, 0, 0, 0.32);
-      dt {
-        border-bottom: 1px solid rgba(0, 0, 0, 0.18);
-      }
-    }
-    dt:before {
-      position: absolute;
-      display: block;
-      content: '\203a';
-      font-size: 18pt;
-      right: 1rem;
-      top: .5rem;
-      transition: .1s ease-in-out;
-      color: rgba(0, 0, 0, 0.54);
-    }
-    &.active dt:before {
-      transform: rotate(90deg);
-    }
-  }
+	dl {
+		position: relative;
+		background: white;
+		transition: .1s ease-in-out;
+
+		&::before {
+			content: '';
+			position: absolute;
+			display: block;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			pointer-events: none;
+			box-shadow: 0 -1px 0 #e5e5e5, 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.24);
+		}
+		
+		/* Actived status */
+		&.active {
+			height: auto;
+			margin: 1rem 0;
+			box-shadow: 0 0 6px rgba(0, 0, 0, 0.16), 0 6px 12px rgba(0, 0, 0, 0.32);
+
+			dt {
+				border-bottom: 1px solid rgba(0, 0, 0, 0.18);
+			}
+		}
+
+		dt:before {
+			position: absolute;
+			display: block;
+			font-family: 'FontAwesome';
+			content: "\f105";
+			font-size: 18pt;
+			right: 1rem;
+			top: .5rem;
+			transition: .1s ease-in-out;
+			color: rgba(0, 0, 0, 0.54);
+		}
+
+		&.active dt:before {
+			transform: rotate(90deg);
+		}
+		
+		
+	}
+
+	dt {
+		padding: 1rem;
+		-webkit-touch-callout: none;
+		user-select: none;
+
+		a {
+			display: block;
+		}
+	}
+	
+	dd {
+		width: calc(100% - 2rem);
+		padding: 1rem;
+		font-size: 0.875rem;
+		display: none;
+	}
+
 }
 
-/* Actived status */

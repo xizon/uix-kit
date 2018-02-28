@@ -2,77 +2,79 @@
    12. Loader                                               
 /* ====================================================== */
 .loader {
-  bottom: 0;
-  left: 0;
-  width: 65px;
-  height: 65px;
-  position: fixed;
-  background-color: transparent;
-  -webkit-touch-callout: none;
-  user-select: none;
-  /* Likely future */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 99999;
-	
+	bottom: 0;
+	left: 0;
+	width: 65px;
+	height: 65px;
+	position: fixed;
+	background-color: transparent;
+	-webkit-touch-callout: none;
+	user-select: none;
+	/* Likely future */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 99999;
+
 	svg {
-		width:  65px;
-		height: 65px;
-		
+	    width:  65px;
+	    height: 65px;
+
 		path {
-		  fill: $highlight-color1;
+			fill: $highlight-color1;
 		}
 	}
-  
-  span {
-    font-family: Arial, sans-serif;
-    position: fixed;
-    z-index: 100000;
-	bottom: 10px;
-	left: 10px;
-  }
-  .spinner-container {
-    animation: rotate .5s linear infinite;
-    .path {
-      stroke-dasharray: 1,150;
-      /* 1%, 101% circumference */
-      stroke-dashoffset: 0;
-      stroke: $highlight-color1;
-      stroke-linecap: round;
-      animation: dash 1.5s ease-in-out infinite;
-    }
-  }
+
+	span {
+		font-family: Arial, sans-serif;
+		position: fixed;
+		z-index: 100000;
+		bottom: 10px;
+		left: 10px;
+	}
+	.spinner-container {
+	    animation: rotate .5s linear infinite;
+		
+		.path {
+			stroke-dasharray: 1,150;
+			/* 1%, 101% circumference */
+			stroke-dashoffset: 0;
+			stroke: $highlight-color1;
+			stroke-linecap: round;
+			animation: dash 1.5s ease-in-out infinite;
+		}
+	}
+	
 }
 
 
 @keyframes rotate {
-  100% {
-    transform: rotate(360deg);
-  }
+	100% {
+	    transform: rotate(360deg);
+	}
 }
 
 
 @keyframes dash {
-  0% {
-    stroke-dasharray: 1,150;
-    /* 1%, 101% circumference */
-    stroke-dashoffset: 0;
-  }
+	0% {
+		stroke-dasharray: 1,150;
+		/* 1%, 101% circumference */
+		stroke-dashoffset: 0;
+	}
 
-  50% {
-    stroke-dasharray: 90,150;
-    /* 70%, 101% circumference */
-    stroke-dashoffset: -35;
-    /* 25% circumference */
-  }
+	50% {
+		stroke-dasharray: 90,150;
+		/* 70%, 101% circumference */
+		stroke-dashoffset: -35;
+		/* 25% circumference */
+	}
 
-  100% {
-    stroke-dasharray: 90,150;
-    /* 70%, 101% circumference */
-    stroke-dashoffset: -124;
-    /* -99% circumference */
-  }
+	100% {
+		stroke-dasharray: 90,150;
+		/* 70%, 101% circumference */
+		stroke-dashoffset: -124;
+		/* -99% circumference */
+	}
 }
 
 

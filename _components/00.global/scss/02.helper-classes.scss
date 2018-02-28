@@ -3,163 +3,184 @@
 /* ====================================================== */
 
 .relative {
-  position: relative;
+    position: relative;
 }
 
 .clear {
-  clear: both;
-  display: block;
-  overflow: hidden;
-  visibility: hidden;
-  width: 0;
-  height: 0;
+	clear: both;
+	display: block;
+	overflow: hidden;
+	visibility: hidden;
+	width: 0;
+	height: 0;
 }
 
 .clearfix {
-  *zoom: 1;
-  &:before {
-    display: table;
-    content: "";
-    line-height: 0;
-  }
-  &:after {
-    display: table;
-    content: "";
-    line-height: 0;
-    clear: both;
-  }
+	
+	&:before {
+		display: table;
+		content: "";
+		line-height: 0;
+	}
+	
+	&:after {
+		display: table;
+		content: "";
+		line-height: 0;
+		clear: both;
+	}
+}
+
+.outer-shadower {
+    @include outer-shadow();
 }
 
 .transition {
-  @include transition-default();
-  div {
-    &.nav-previous, &.nav-next {
-      @include transition-default();
-    }
-  }
-  img, a, i, li, span {
     @include transition-default();
-  }
+	
+    div {
+        &.nav-previous, &.nav-next {
+          @include transition-default();
+        }
+    }
+	
+    img, 
+	a, 
+	i, 
+	li, 
+	span {
+        @include transition-default();
+    }
 }
 
 
 .fl {
-  float: left;
+    float: left;
 }
 
 .fr {
-  float: right;
+    float: right;
 }
 
 .t-r {
-  text-align: right;
+    text-align: right;
 }
 
 .t-l {
-  text-align: left;
+    text-align: left;
 }
 
 .t-c {
-  text-align: center;
+    text-align: center;
 }
 
 .inline-block {
-  display: inline-block;
+    display: inline-block;
 }
 
 .block {
-  display: block;
+    display: block;
 }
 
-.pos-normal-align, .pos-vertical-align {
-  position: absolute;
-  z-index: 6;
-  width: 100%;
+.pos-normal-align, 
+.pos-vertical-align {
+    position: absolute;
+    z-index: 6;
+    width: 100%;
 }
 
 .pos-normal-align {
-  top: 0;
+    top: 0;
 }
 
 .pos-vertical-align {
-  /* Vertical Center */
-  top: 50%;
-  transform: translateY(-50%);
-  &.relative {
-    position: relative;
-  }
+	/* Vertical Center */
+	top: 50%;
+	transform: translateY(-50%);
+	&.relative {
+	    position: relative;
+	}
 }
 
 @media all and (max-width: 768px) {
-  .pos-vertical-align.relative {
-    top: 0;
-    transform: none;
-	padding-top: 1.5rem;
-  }
+	.pos-vertical-align.relative {
+		top: 0;
+		transform: none;
+		padding-top: 1.5rem;
+	}
 }
 
 .center-vertically {
-  display: table;
-  width: 100%;
-  height: 100%;
-  > div {
-    display: table-cell;
-    vertical-align: middle;
-  }
+	display: table;
+	width: 100%;
+	height: 100%;
+	> div {
+		display: table-cell;
+		vertical-align: middle;
+	}
 }
 
 .overflow-hidden-x {
-  overflow-x: hidden;
+    overflow-x: hidden;
 }
 
 .overflow-hidden {
-  overflow: hidden;
+    overflow: hidden;
 }
 
 .height-10 {
-  height: 10vh !important;
+    height: 10vh !important;
 }
 
 .height-20 {
-  height: 20vh !important;
+    height: 20vh !important;
 }
 
 .height-30 {
-  height: 30vh !important;
+    height: 30vh !important;
 }
 
 .height-40 {
-  height: 40vh !important;
+    height: 40vh !important;
 }
 
 .height-50 {
-  height: 50vh !important;
+    height: 50vh !important;
 }
 
 .height-60 {
-  height: 60vh !important;
+    height: 60vh !important;
 }
 
 .height-70 {
-  height: 70vh !important;
+    height: 70vh !important;
 }
 
 .height-80 {
-  height: 80vh !important;
+    height: 80vh !important;
 }
 
 .height-90 {
-  height: 90vh !important;
+    height: 90vh !important;
 }
 
 .height-100 {
-  height: 100vh !important;
+    height: 100vh !important;
 }
 
 @media all and (max-width: 768px) {
-  .height-100, .height-90, .height-80, .height-70, .height-60, .height-50, .height-40, .height-30, .height-20, .height-10 {
-    height: auto !important;
-  }
+	.height-100, 
+	.height-90, 
+	.height-80, 
+	.height-70, 
+	.height-60, 
+	.height-50, 
+	.height-40, 
+	.height-30, 
+	.height-20, 
+	.height-10 {
+	    height: auto !important;
+	}
 }
 
 

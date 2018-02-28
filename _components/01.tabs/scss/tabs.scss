@@ -3,144 +3,164 @@
 /* ====================================================== */
 
 .custom-tabs {
-  &:not(.rotation) {
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
-  }
-	
-	&:not(.rotation) .marker {
-		background: $primary-text-color1;
-		height: 2px;
-		width: 100%;
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		z-index: 1;
-		transition: .1s ease-in-out;
-	}	
-	
-  ul > li {
-    position: relative;
-    display: block;
-    transition: .1s ease-in-out;
-
-	
-    > a {
-      position: relative;
-      display: block;
-      padding: 0.625rem 1rem;
-    }
-  }
-  &.custom-tabs-center {
-    box-shadow: none;
-    ul {
-	  font-size: 0; /*Fighting the Space Between Inline Block Elements*/
-      display: block;
-      width: 100%;
-      text-align: center;
-      /*require*/
-      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+	&:not(.rotation) {
+	    @include outer-shadow();
 		
+		.marker {
+			background: $primary-text-color1;
+			height: 2px;
+			width: 100%;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			z-index: 1;
+			transition: .1s ease-in-out;
+		}	
 		
-      li {
-		font-size: 1rem;/*Fighting the Space Between Inline Block Elements*/
-        display: inline-block;
-        /*require*/
-        float: none;
-		  
-		  
-      }
-    }
-  }
-  .content {
-    display: none;
-    padding: 1.3125rem;
-    text-align: left;
-    &.active {
-      display: block;
-    }
-  }
-  ul {
-    > li {
-      list-style: none;
-      float: left;
-      box-shadow: inset 1px 0px 0px 0px rgba(230, 230, 230, 1);
-      background: #f7f7f7;
-      min-width: 7.5rem;
-    }
-    &:after {
-      content: '';
-      display: block;
-      clear: both;
-    }
-    > li {
-      a {
-        display: block;
-        text-align: center;
-      }
-      &.active {
-        background: #fff;
+	}
 
-      }
-    }
-  }
-	  
+	&.custom-tabs-center {
+		box-shadow: none;
+
+		ul {
+			font-size: 0; /*Fighting the Space Between Inline Block Elements*/
+			display: block;
+			width: 100%;
+			text-align: center;
+			/*require*/
+			@include outer-shadow();
+
+			li {
+				font-size: 1rem;/*Fighting the Space Between Inline Block Elements*/
+				display: inline-block;
+				/*require*/
+				float: none;
+
+			}
+		}
+	}
+	.content {
+		
+		display: none;
+		padding: 1.3125rem;
+		text-align: left;
+		
+		&.active {
+			display: block;
+		}
+	}
 	
-  /* Tab Rotation Effect */
-  &.rotation {
-    height: 400px;
-    .content {
-	  position: absolute;
-	  top: 0;
-	  left: 400px;
-      width: 300px;
-      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
-    }
-    .custom-tabs-ul-container {
-		width: 300px;
-		height: 300px;
-		position: relative;
-		margin: 0;
-    }
-    ul {
-	  position: relative;
-	  display: block;
-	  width: 300px;
-	  height: 300px;
-      > li {
-        position: absolute;
-        width: 80px;
-        height: 80px;
-        background: none;
-        box-shadow: none;
-        transition: none;
-        > a {
-        width: 80px;
-        height: 80px;
-          line-height: 60px;
-          background: #fff;
-          border-radius: 100%;
-          box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
-        }
-        &.active > a {
-          background: $primary-text-color1;
-		  color: #fff;
-        }
-		  
-      }
-    }
-  }
+	ul {
+		> li {
+			position: relative;
+			display: block;
+			transition: .1s ease-in-out;
+			list-style: none;
+			float: left;
+			box-shadow: inset 1px 0px 0px 0px rgba(230, 230, 230, 1);
+			background: #f7f7f7;
+			min-width: 7.5rem;
+		
+			> a {
+				position: relative;
+				padding: 0.625rem 1rem;
+				display: block;
+				text-align: center;
+			}
+			&.active {
+				background: #fff;
+
+			}
+		}
+		
+		&:after {
+			content: '';
+			display: block;
+			clear: both;
+		}
+	}
+
+
+	/* Tab Rotation Effect */
+	&.rotation {
+		
+		height: 400px;
+
+		.content {
+			position: absolute;
+			top: 0;
+			left: 400px;
+			width: 300px;
+			@include outer-shadow();
+		}
+		.custom-tabs-ul-container {
+			width: 300px;
+			height: 300px;
+			position: relative;
+			margin: 0;
+		}
+		ul {
+			position: relative;
+			display: block;
+			width: 300px;
+			height: 300px;
+
+			> li {
+				position: absolute;
+				width: 80px;
+				height: 80px;
+				background: none;
+				box-shadow: none;
+				transition: none;
+
+				> a {
+					width: 80px;
+					height: 80px;
+					line-height: 60px;
+					background: #fff;
+					border-radius: 100%;
+					@include outer-shadow();
+				}
+
+				&.active > a {
+					background: $primary-text-color1;
+					color: #fff;
+				}
+
+			}
+		}
+	}
 }
 
 
 
 @media all and (max-width: 768px) { 
 	.custom-tabs {
-	 
-	  &:not(.rotation) li {
-		  width: 100% !important;
 
-	  }
-	
+		&:not(.rotation) li {
+			width: 100% !important;
+		}
+
+		/* Tab Rotation Effect */
+		&.rotation {
+
+			height: 400px;
+
+			.content {
+				position: relative;
+				left: 0;
+				width: 100%;
+			}
+
+			.custom-tabs-ul-container {
+				margin-top: 50px;
+				margin-left: 120px;
+			}
+			
+		}
+
+		
+
 	}	
 
 }

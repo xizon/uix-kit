@@ -4,19 +4,18 @@
 /* Do not use <a> tag */
 .custom-dropdown-trigger {
 
-	  > ul {
+	> ul {
 		left: auto;
 		right: 0;
-		
-		  
-		&:before {
-		  left: auto; 
-		  right: 20px;
-		}
-		
-	  }	
 
-	
+
+		&:before {
+			left: auto; 
+			right: 20px;
+		}
+
+	}	
+
 }
 
 

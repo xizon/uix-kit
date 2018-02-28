@@ -3,13 +3,13 @@
 /* ====================================================== */
 
 .parallax {
-  position: relative;
-  height: 100vh;
-  width: 100%;
-  background-attachment: fixed;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover !important;
+	position: relative;
+	height: 100vh;
+	width: 100%;
+	background-attachment: fixed;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover !important;
 }
 
 .pure-bg-parallax {
@@ -18,28 +18,23 @@
 }
 
 .parallax-window {
-  height: 100%;
-  width: 100%;
+	height: 100%;
+	width: 100%;
 }
 
 .parallax-default-size {
-  height: 300px;
-  width: 100%;
+	height: 300px;
+	width: 100%;
 }
 
 
 .parallax-auto {
-  height: auto;
-  width: 100%;
-  .parallax-img {
-    visibility: hidden;
-  }
-}
-
-@media all and (max-width: 768px) { 
-	.pure-bg-parallax {
-
-	}	
+	height: auto;
+	width: 100%;
+	
+	.parallax-img {
+	    visibility: hidden;
+	}
 }
 
 

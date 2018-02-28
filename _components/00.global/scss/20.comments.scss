@@ -2,102 +2,111 @@
    20. Comments      
 /* ====================================================== */
 
-.comments {}
+.comments {
+	
+}
 
 /* Highlight Author Comments in WordPress */
-
 .comment {
-  &.bypostauthor {
-    background-color: transparent;
-  }
-  .comment {
-    &.bypostauthor {
-      background-color: transparent;
-    }
-    margin-left: 2.625rem;
-  }
-  p {
-    margin-bottom: 1.25rem;
-  }
+	
+	&.bypostauthor {
+		background-color: transparent;
+	}
+	
+	.comment {
+
+		&.bypostauthor {
+			background-color: transparent;
+		}
+		margin-left: 2.625rem;
+	}
+	
+	p {
+		margin-bottom: 1.25rem;
+	}
+	
 }
 
 /* Nested comments */
 
 @media all and (max-width: 768px) {
-  .comment .comment {
-    margin-left: 0;
-  }
+	.comment .comment {
+	    margin-left: 0;
+	}
 }
 
 .comment-meta {
-  margin-bottom: 0.875rem;
-  &:after {
-    content: '';
-    display: block;
-    clear: both;
-  }
-  .comment-avatar {
-    width: 45px;
-    margin: 0 1.3125rem 0 0;
-    display: block;
-    float: left;
-    img {
-      vertical-align: middle;
-      width: 100%;
-      border-radius: 100%;
-    }
-  }
-  .comment-text {
-    display: block;
-    float: left;
-    h5 {
-      margin-bottom: 0;
-      padding-bottom: 0;
-    }
-    em {
-      opacity: 0.7;
-    }
-  }
+	margin-bottom: 0.875rem;
+	
+	&:after {
+		content: '';
+		display: block;
+		clear: both;
+	}
+	.comment-avatar {
+		width: 45px;
+		margin: 0 1.3125rem 0 0;
+		display: block;
+		float: left;
+		img {
+			vertical-align: middle;
+			width: 100%;
+			border-radius: 100%;
+		}
+	}
+	.comment-text {
+		display: block;
+		float: left;
+
+		h5 {
+			margin-bottom: 0;
+			padding-bottom: 0;
+		}
+		em {
+			opacity: 0.7;
+		}
+	}
 }
 
 .comment-content {
-  border-bottom: 1px solid #E6E6E6;
-  margin-bottom: 1.75rem;
-  margin-left: calc(2.8125rem + 1.3125rem);
-  clear: both;
-  padding-bottom: 1.3125rem;
-  word-wrap: break-word;
-  position: relative;
-  border-bottom: 1px solid #E6E6E6;
-  margin-bottom: 1.75rem;
-  margin-left: calc(2.8125rem + 1.3125rem);
-  clear: both;
-  padding-bottom: 1.3125rem;
-  word-wrap: break-word;
-  a {
-    &:not(.respond) {
-      text-decoration: underline;
-    }
-    &.respond {
-      background: $highlight-color1;
-      color: #fff;
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      font-size: 0.75rem;
-      padding: 0.175rem 0.875rem 0;
-      text-transform: uppercase;
-    }
-  }
+	border-bottom: 1px solid #E6E6E6;
+	margin-bottom: 1.75rem;
+	margin-left: calc(2.8125rem + 1.3125rem);
+	clear: both;
+	padding-bottom: 1.3125rem;
+	word-wrap: break-word;
+	position: relative;
+	border-bottom: 1px solid #E6E6E6;
+	margin-bottom: 1.75rem;
+	margin-left: calc(2.8125rem + 1.3125rem);
+	clear: both;
+	padding-bottom: 1.3125rem;
+	word-wrap: break-word;
+	
+	a {
+		&:not(.respond) {
+			text-decoration: underline;
+		}
+
+		&.respond {
+			background: $highlight-color1;
+			color: #fff;
+			position: absolute;
+			bottom: 0;
+			right: 0;
+			font-size: 0.75rem;
+			padding: 0.175rem 0.875rem 0;
+			text-transform: uppercase;
+		}
+	}
 }
 
 /* WordPress Comment Respond */
-
 .comment-reply-title {
-  /* Same to .entry-section .entry-title  */
-  padding-bottom: 1.75rem;
-  /* Same to .h4 */
-  font-size: 1.125rem;
-  line-height: 1.33333333333;
-  text-transform: uppercase;
+	/* Same to .entry-section .entry-title  */
+	padding-bottom: 1.75rem;
+	/* Same to .h4 */
+	font-size: 1.125rem;
+	line-height: 1.33333333333;
+	text-transform: uppercase;
 }

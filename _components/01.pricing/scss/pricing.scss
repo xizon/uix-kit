@@ -2,16 +2,17 @@
    Pricing
 /* ====================================================== */
 .custom-price {
-    text-align: center;
-    position: relative;
-	
+	text-align: center;
+	position: relative;
+
 	&:before {
-	  padding-top: 2.25rem;
+	    padding-top: 2.25rem;
 	}
 	&:after {
-	  padding-bottom: 0;
+	    padding-bottom: 0;
 	}
-	ul, ol {
+	ul, 
+	ol {
 		/*default*/
 		display: block;
 		list-style-type: disc;
@@ -24,110 +25,111 @@
 		line-height: 2;
 	}
 	li {
-	    /*default*/
-	    list-style: none;
-		
+		/*default*/
+		list-style: none;
+
 		&:before {
-		  font-family: 'FontAwesome';
-		  content: "\f00c";
-		  display: inline-block;
-		  margin-right: .4rem;
+			font-family: 'FontAwesome';
+			content: "\f00c";
+			display: inline-block;
+			margin-right: .4rem;
 		}
 	}
-	
-	
+
 	.hr {
-	  margin: 1.5rem 0;
-	  border-top: 1px solid rgba(0, 0, 0, 0.05);
+		margin: 1.5rem 0;
+		border-top: 1px solid rgba(0, 0, 0, 0.05);
 	}
-	
+
 	.border-hover {
-		margin-bottom: 1.5rem;
+	    margin-bottom: 1.5rem;
 	}
 
 
 	.border {
-	  padding-top: 0.875rem;
-	  position: relative;
-	  box-shadow: 0 22px 40px 0 #eef4fc;
-	  border-radius: 10px;
-	  background: #fff;
-	  transition: .1s ease-in-out;
-	  &:hover {
-		box-shadow: 0 31px 32px 0 #cbdfee;
-	  }
+		padding-top: 0.875rem;
+		position: relative;
+		box-shadow: 0 22px 40px 0 #eef4fc;
+		border-radius: 10px;
+		background: #fff;
+		transition: .1s ease-in-out;
+		
+		&:hover {
+			box-shadow: 0 31px 32px 0 #cbdfee;
+		}
 
 	}
-	
-	
+
+
 	.level {
-	  font-size: 0.7rem;
-	  text-align: center;
-	  text-indent: 0.875rem;
-	  text-transform: uppercase;
-	  position: relative;
-	  z-index: 3;
-	  font-weight: 700;
-	  opacity: 0.35;
+		font-size: 0.7rem;
+		text-align: center;
+		text-indent: 0.875rem;
+		text-transform: uppercase;
+		position: relative;
+		z-index: 3;
+		font-weight: 700;
+		opacity: 0.35;
 	}
 
 	.num {
-	  color: $highlight-color1;
-	  font-weight: 700;
-	  font-size: 3.5rem;
-	  margin-top: 0.875rem;
+		color: $highlight-color1;
+		font-weight: 700;
+		font-size: 3.5rem;
+		margin-top: 0.875rem;
 	}
 
 	.currency {
-	  font-size: 0.875rem;
+	    font-size: 0.875rem;
 	}
 
 
 	.period {
-	  font-size: 12px;
-	  &:before {
-		content: '/';
-		padding-right: .1rem;
-	  }
+		font-size: 12px;
+
+		&:before {
+			content: '/';
+			padding-right: .1rem;
+		}
 	}
 
 	.detail {
-	  text-align: left;
-	  padding-bottom: 1.125rem;
-	  padding-left: 1rem;
-	  font-size: 0.875rem;
+		text-align: left;
+		padding-bottom: 1.125rem;
+		padding-left: 1rem;
+		font-size: 0.875rem;
 	}
 
 	.excerpt {
-	  height: auto;
-	  padding: 0 0.875rem;
-	  font-size: 0.875rem;
-	  opacity: 0.65;
-		
-	  p {
-		line-height: 1.5;
-	  }
+		height: auto;
+		padding: 0 0.875rem;
+		font-size: 0.875rem;
+		opacity: 0.65;
+
+		p {
+			line-height: 1.5;
+		}
 	}
 
 	.bg {
-	  padding-top: 1.875rem;
-	  height: auto;
+		padding-top: 1.875rem;
+		height: auto;
 	}
 
 
 	.border.active {
 		
-	    .num, 
+		.num, 
 		.excerpt, 
 		.detail, 
 		.level {
-		  color: #fff !important;
-	    }
-	   .excerpt {
-		 opacity: 0.65;
-	   }
+			color: #fff !important;
+		}
+		
+		.excerpt {
+			opacity: 0.65;
+		}
 
 	}	
-	
-	
+
 }
