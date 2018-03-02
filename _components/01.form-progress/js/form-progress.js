@@ -8,7 +8,7 @@ theme = ( function ( theme, $, window, document ) {
     'use strict';
    
    
-    var documentReady = function( $ ){
+    var pageLoaded = function() {
 		
 
 		var $progressBar   = $( '.custom-form-progress progress' ),
@@ -166,10 +166,12 @@ theme = ( function ( theme, $, window, document ) {
 		
       
     theme.formProgress = {
-        documentReady : documentReady        
-    };  
-    theme.components.documentReady.push( documentReady );
+        pageLoaded : pageLoaded        
+    };
+
+    theme.components.pageLoaded.push( pageLoaded );
     return theme;
 
 }( theme, jQuery, window, document ) );
+
 
