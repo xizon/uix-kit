@@ -1559,7 +1559,10 @@ theme = ( function ( theme, $, window, document ) {
 					"prevText"        : prevText,
 					"dayNames"        : dayNames,
 					"dayNamesShort"   : dayNamesShort,
-					dateFormat        : dateFormat
+					"dateFormat"      : dateFormat,
+					"changeMonth"     : true,
+					"changeYear"      : true,
+					"yearRange"       : "1930:2092"
 				});
 				
 

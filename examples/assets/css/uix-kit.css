@@ -4062,7 +4062,10 @@ ul.entry-meta {
 }
 
 .ui-datepicker select.ui-datepicker-month, .ui-datepicker select.ui-datepicker-year {
-    width: 45%;
+    width: 90px;
+    margin-left: 10px;
+    border-color: #dce4e8;
+    font-size: 12px;
 }
 
 .ui-datepicker table {

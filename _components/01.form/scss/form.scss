@@ -865,7 +865,10 @@ $control-focus-color: $primary-text-color1;
 		
 		&.ui-datepicker-month, 
 		&.ui-datepicker-year {
-			width: 45%;
+			 width: 90px;
+			 margin-left: 10px;
+			 border-color: #dce4e8;
+			 font-size: 12px;
 		}
 	}
 	
