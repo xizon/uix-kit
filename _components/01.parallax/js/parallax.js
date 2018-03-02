@@ -44,9 +44,15 @@ theme = ( function ( theme, $, window, document ) {
 					dataSpeed = 0;
 				}
 				
-				$this.css( 'background', 'url('+dataImg+')' );
+				if( typeof dataImg != typeof undefined && dataImg != '' ) {
+					$this.css( 'background', 'url('+dataImg+')' );
+				}
 				
-				$this.bgParallax( "50%", dataSpeed );
+				$window.on( 'scroll touchmove', function() {
+					var scrolled = $window.scrollTop();
+					$this.css( 'margin-top', ( scrolled * dataSpeed ) + 'px' );
+				});	
+				
 		
 			});
 			

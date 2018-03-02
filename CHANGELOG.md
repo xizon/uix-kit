@@ -1,5 +1,14 @@
 # Changelog
 
+#### = 1.1.66 (March 2, 2018) =
+
+* Fix: Fixed "Form Progress" module height error.
+* New: Add a new module "Mousewheel Interaction".
+* New: Added a new helper class ".ellipsis".
+* Tweak: Optimized parallax module scripts and methods.
+
+
+
 #### = 1.1.65 (February 28, 2018) =
 
 * New: Added a new helper class ".outer-shadower".
@@ -45,7 +54,7 @@
 
 #### = 1.1.3 (February 22, 2018) =
 
-* New: Add a new module "Form Progress Bar".
+* New: Add a new module "Form Progress".
 * New: Add a new module "Show More Less".
 * Fix: Fixed an issue of gradient text.
 

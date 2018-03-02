@@ -18,27 +18,7 @@
 		}	
 		
 	}
-
-	&.custom-tabs-center {
-		box-shadow: none;
-
-		ul {
-			font-size: 0; /*Fighting the Space Between Inline Block Elements*/
-			display: block;
-			width: 100%;
-			text-align: center;
-			/*require*/
-			@include outer-shadow();
-
-			li {
-				font-size: 1rem;/*Fighting the Space Between Inline Block Elements*/
-				display: inline-block;
-				/*require*/
-				float: none;
-
-			}
-		}
-	}
+	
 	.content {
 		
 		display: none;
@@ -50,35 +30,67 @@
 		}
 	}
 	
-	ul {
-		> li {
-			position: relative;
-			display: block;
-			transition: .1s ease-in-out;
-			list-style: none;
-			float: left;
-			box-shadow: inset 1px 0px 0px 0px rgba(230, 230, 230, 1);
-			background: #f7f7f7;
-			min-width: 7.5rem;
-		
-			> a {
+	.custom-tabs-ul-container {
+		> ul {
+			> li {
 				position: relative;
-				padding: 0.625rem 1rem;
 				display: block;
-				text-align: center;
-			}
-			&.active {
-				background: #fff;
+				transition: .1s ease-in-out;
+				list-style: none;
+				float: left;
+				box-shadow: inset 1px 0px 0px 0px rgba(230, 230, 230, 1);
+				background: #f7f7f7;
+				min-width: 7.5rem;
 
+				> a {
+					position: relative;
+					padding: 0.625rem 1rem;
+					display: block;
+					text-align: center;
+				}
+				&.active {
+					background: #fff;
+
+				}
 			}
+
+			&:after {
+				content: '';
+				display: block;
+				clear: both;
+			}
+		}	
+	}
+
+	
+
+	&.custom-tabs-center {
+		box-shadow: none;
+
+		.custom-tabs-ul-container {
+			
+			> ul {
+				font-size: 0; /*Fighting the Space Between Inline Block Elements*/
+				display: block;
+				width: 100%;
+				text-align: center;
+				/*require*/
+				@include outer-shadow();
+
+				li {
+					font-size: 1rem;/*Fighting the Space Between Inline Block Elements*/
+					display: inline-block;
+					/*require*/
+					float: none;
+
+				}
+			}	
+			
 		}
 		
-		&:after {
-			content: '';
-			display: block;
-			clear: both;
-		}
+
 	}
+
 
 
 	/* Tab Rotation Effect */
@@ -98,37 +110,40 @@
 			height: 300px;
 			position: relative;
 			margin: 0;
-		}
-		ul {
-			position: relative;
-			display: block;
-			width: 300px;
-			height: 300px;
+			
+			> ul {
+				position: relative;
+				display: block;
+				width: 300px;
+				height: 300px;
 
-			> li {
-				position: absolute;
-				width: 80px;
-				height: 80px;
-				background: none;
-				box-shadow: none;
-				transition: none;
-
-				> a {
+				> li {
+					position: absolute;
 					width: 80px;
 					height: 80px;
-					line-height: 60px;
-					background: #fff;
-					border-radius: 100%;
-					@include outer-shadow();
-				}
+					background: none;
+					box-shadow: none;
+					transition: none;
 
-				&.active > a {
-					background: $primary-text-color1;
-					color: #fff;
-				}
+					> a {
+						width: 80px;
+						height: 80px;
+						line-height: 60px;
+						background: #fff;
+						border-radius: 100%;
+						@include outer-shadow();
+					}
 
-			}
+					&.active > a {
+						background: $primary-text-color1;
+						color: #fff;
+					}
+
+				}
+			}	
+			
 		}
+
 	}
 }
 

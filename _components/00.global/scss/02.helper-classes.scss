@@ -82,6 +82,10 @@
     display: block;
 }
 
+.ellipsis {
+	@include ellipsis();
+}
+
 .pos-normal-align, 
 .pos-vertical-align {
     position: absolute;

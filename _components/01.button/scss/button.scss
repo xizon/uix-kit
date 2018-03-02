@@ -191,6 +191,11 @@
 	background-image: linear-gradient(to right, $highlight-color1 0%, #f60 20%, #d83ba0 100%) !important;
 	box-shadow: 0 4px 15px 0 rgba(236, 94, 121, 0.75);
 	color: #fff !important;
+	width: auto !important; 
+	
+	&.button-fullwidth {
+		width: 100% !important;
+	}	
 }
 
 
@@ -199,7 +204,12 @@
 	background-color: transparent !important;
 	box-shadow: 0 4px 15px 0 rgba(255, 255, 255, 0.2);
 	color: #fff !important;
-
+	width: auto !important; 
+	
+	&.button-fullwidth {
+		width: 100% !important;
+	}	
+	
 	&:hover {
 		background-color: #fff !important;
 		color: $primary-text-color1 !important;

@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.65
- * ## Last Update         :  February 28, 2018
+ * ## Version             :  1.1.66
+ * ## Last Update         :  March 2, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -33,6 +33,7 @@
 	8. Mega Menu
 	9. Dropdown Categories
 	10. Pagination
+	11. Specify a background image
 
 */
 
@@ -1081,6 +1082,63 @@ theme = ( function ( theme, $, window, document ) {
 	
 		
     theme.Pagination = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
+/*! 
+ *************************************
+ * 11. Specify a background image
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ) {
+		
+		$( '[data-bg]' ).each(function() {
+			var $this         = $( this ),
+				dataImg       = $this.data( 'bg' ),
+				dataPos       = $this.data( 'bg-position' ),
+				dataSize      = $this.data( 'bg-size' ),
+				dataRepeat    = $this.data( 'bg-repeat' );
+
+			if( typeof dataPos === typeof undefined ) {
+				dataPos = 'top left';
+			}
+			
+			if( typeof dataSize === typeof undefined ) {
+				dataSize = 'cover';
+			}
+			
+			if( typeof dataRepeat === typeof undefined ) {
+				dataRepeat = 'no-repeat';
+			}	
+			
+			
+			if ( typeof dataImg != typeof undefined && dataImg != '' ) {
+				$this.css( {
+					'background-image'    : 'url('+dataImg+')',
+					'background-position' : dataPos,
+					'background-size'     : dataSize,
+					'background-repeat'   : dataRepeat
+				} );
+			}
+			
+
+		});
+		
+	};
+	
+		
+    theme.setBG = {
         documentReady : documentReady        
     };
 
@@ -3703,6 +3761,12 @@ theme = ( function ( theme, $, window, document ) {
 				$formTarget.addClass( 'show' );
 			}, animeSpeed );
 			
+			//Set wrapper height
+			var currentContentH  = $formTarget.find( '.form-step:eq(0) > .content' ).height() + 100;
+			$formTarget.css( 'height', currentContentH + 'px' );
+			
+			
+			
 			
 			$formTarget.find( '.form-step' )
 			                                .removeClass( 'left leaving' )
@@ -3749,6 +3813,12 @@ theme = ( function ( theme, $, window, document ) {
 			// Increment value (based on 4 steps 0 - 100)
 			value += stepPerValue;
 
+			//Set wrapper height
+			var currentContentH  = $formTarget.find( '.form-step:eq('+currentFormIndex+') > .content' ).height() + 100;
+			$formTarget.css( 'height', currentContentH + 'px' );
+			
+			
+			
 			// Reset if we've reached the end
 			if (value >= 100) {
 				$formTarget.find( '.form-step' )
@@ -4562,6 +4632,83 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
+
+/*! 
+ *************************************
+ * Mousewheel Interaction
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ){
+		
+	    //Determine the direction of a jQuery scroll event
+		//Fix an issue for mousewheel event is too fast.
+		var oldDate       = new Date(),
+			scrollCount   = 0;
+		
+		$( window ).on( 'mousewheel', function( event ) { 
+			customMouseHandle( event ); 
+		});
+
+		function customMouseHandle( event ) {
+			var newDate       = new Date(),
+				scrollAllowed = true,
+				wheel,
+				scrollPos;
+
+		
+
+			if( wheel < 10 && ( newDate.getTime() - oldDate.getTime() ) < 50 ) {
+				scrollPos -= event.deltaY*(10-wheel);
+				wheel++;
+			} else {
+				if( ( newDate.getTime() - oldDate.getTime() ) > 50 ) {
+					wheel = 0;
+					scrollPos -= event.deltaY*30;
+				}
+				else {
+					scrollAllowed = false;
+				}
+			}
+
+			oldDate = new Date();
+
+			if( scrollAllowed ) {
+				
+				scrollCount++;
+				// do your stuff here
+				if( event.originalEvent.wheelDelta > 0 ) {
+					//Up
+					$( '#demo-mousewheel-interaction-status' ).text( 'Direction: up, Total: ' + scrollCount );
+
+
+				} else {
+					//Down
+					$( '#demo-mousewheel-interaction-status' ).text( 'Direction: down, Total: ' + scrollCount );
+
+				}
+				
+				
+			}
+			
+		}
+
+		
+	};
+		
+      
+    theme.mousewheelInteraction = {
+        documentReady : documentReady        
+    };  
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
 /*! 
  *************************************
  * Multiple Items Carousel
@@ -5087,9 +5234,15 @@ theme = ( function ( theme, $, window, document ) {
 					dataSpeed = 0;
 				}
 				
-				$this.css( 'background', 'url('+dataImg+')' );
+				if( typeof dataImg != typeof undefined && dataImg != '' ) {
+					$this.css( 'background', 'url('+dataImg+')' );
+				}
 				
-				$this.bgParallax( "50%", dataSpeed );
+				$window.on( 'scroll touchmove', function() {
+					var scrolled = $window.scrollTop();
+					$this.css( 'margin-top', ( scrolled * dataSpeed ) + 'px' );
+				});	
+				
 		
 			});
 			
@@ -5362,6 +5515,82 @@ theme = ( function ( theme, $, window, document ) {
 
 /*! 
  *************************************
+ * Progress Bar
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+
+		$( '[data-progressbar-percent]' ).each(function() {
+
+			var $this        = $( this ),
+				percent      = $this.data( 'progressbar-percent' ),
+				unit         = $this.data( 'progressbar-unit' );
+			
+			if( typeof percent === typeof undefined ) {
+				percent = 0;
+			}
+			
+			if( typeof unit === typeof undefined ) {
+				unit = '%';
+			}	
+			
+			
+			var waypoints = $this.waypoint({
+			    handler: function( direction ) {
+					
+					
+					//Radial Progress Bar
+					if ( $this.hasClass( 'custom-radial-progressbar' ) ) {
+						$this.find( '.track' ).html( '<span>'+percent+'<em class="unit">'+unit+'</em></span>' );
+						$this.addClass( 'progress-' + percent );	
+					} 
+
+
+					//Rectangle Progress Bar
+					if ( $this.hasClass( 'custom-rectangle-progressbar' ) ) {
+						$this.find( '.bar > span' ).html( ''+percent+'<em class="unit">'+unit+'</em>' );
+						$this.addClass( 'progress-' + percent );	
+					} 
+		
+					//Prevents front-end javascripts that are activated in the background to repeat loading.
+				    this.disable();
+				  
+					
+
+			    },
+			    offset: '100%' //0~100%, bottom-in-view
+			});
+
+
+		});
+		
+		
+	
+
+		
+		
+    };
+
+    theme.progressBar = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
+
+
+
+
+/*! 
+ *************************************
  * Pricing
  *************************************
  */
@@ -5473,82 +5702,6 @@ theme = ( function ( theme, $, window, document ) {
     };
 
     theme.pricing = {
-        documentReady : documentReady        
-    };
-
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
-
-
-
-
-
-
-
-/*! 
- *************************************
- * Progress Bar
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-    
-    var documentReady = function( $ ) {
-
-		$( '[data-progressbar-percent]' ).each(function() {
-
-			var $this        = $( this ),
-				percent      = $this.data( 'progressbar-percent' ),
-				unit         = $this.data( 'progressbar-unit' );
-			
-			if( typeof percent === typeof undefined ) {
-				percent = 0;
-			}
-			
-			if( typeof unit === typeof undefined ) {
-				unit = '%';
-			}	
-			
-			
-			var waypoints = $this.waypoint({
-			    handler: function( direction ) {
-					
-					
-					//Radial Progress Bar
-					if ( $this.hasClass( 'custom-radial-progressbar' ) ) {
-						$this.find( '.track' ).html( '<span>'+percent+'<em class="unit">'+unit+'</em></span>' );
-						$this.addClass( 'progress-' + percent );	
-					} 
-
-
-					//Rectangle Progress Bar
-					if ( $this.hasClass( 'custom-rectangle-progressbar' ) ) {
-						$this.find( '.bar > span' ).html( ''+percent+'<em class="unit">'+unit+'</em>' );
-						$this.addClass( 'progress-' + percent );	
-					} 
-		
-					//Prevents front-end javascripts that are activated in the background to repeat loading.
-				    this.disable();
-				  
-					
-
-			    },
-			    offset: '100%' //0~100%, bottom-in-view
-			});
-
-
-		});
-		
-		
-	
-
-		
-		
-    };
-
-    theme.progressBar = {
         documentReady : documentReady        
     };
 

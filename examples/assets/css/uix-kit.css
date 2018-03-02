@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.65
- * ## Last Update         :  February 28, 2018
+ * ## Version             :  1.1.66
+ * ## Last Update         :  March 2, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -419,6 +419,15 @@ iframe {
 
 .block {
     display: block;
+}
+
+.ellipsis {
+  /* @include ellipsis(); */
+  /* text with ellipsis */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    white-space: nowrap;
 }
 
 .pos-normal-align,
@@ -2984,6 +2993,11 @@ ul.entry-meta {
     background-image: linear-gradient(to right, #EC5E79 0%, #f60 20%, #d83ba0 100%) !important;
     box-shadow: 0 4px 15px 0 rgba(236, 94, 121, 0.75);
     color: #fff !important;
+    width: auto !important;
+}
+
+.button-bg-primary.button-fullwidth {
+    width: 100% !important;
 }
 
 .button-bg-secondary {
@@ -2991,6 +3005,11 @@ ul.entry-meta {
     background-color: transparent !important;
     box-shadow: 0 4px 15px 0 rgba(255, 255, 255, 0.2);
     color: #fff !important;
+    width: auto !important;
+}
+
+.button-bg-secondary.button-fullwidth {
+    width: 100% !important;
 }
 
 .button-bg-secondary:hover {
@@ -3935,6 +3954,7 @@ ul.entry-meta {
 * http://jqueryui.com
 * Copyright (c) 2013 jQuery Foundation and other contributors Licensed MIT */
 .ui-datepicker {
+    color: #333;
     width: 17em;
     padding: .7em 1em 0 .7em !important;
     display: none;
@@ -4246,6 +4266,8 @@ ul.entry-meta {
 
 /* Form animations */
 .custom-form-progress-target {
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
     position: relative;
     width: 100%;
     height: 0;
@@ -4255,7 +4277,6 @@ ul.entry-meta {
 
 .custom-form-progress-target.show {
     height: auto;
-    min-height: 70vh;
 }
 
 .custom-form-progress-target .button {
@@ -8216,29 +8237,6 @@ li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 {
     transition: .1s ease-in-out;
 }
 
-.custom-tabs.custom-tabs-center {
-    box-shadow: none;
-}
-
-.custom-tabs.custom-tabs-center ul {
-    font-size: 0;
-  /*Fighting the Space Between Inline Block Elements*/
-    display: block;
-    width: 100%;
-    text-align: center;
-  /*require*/
-  /* @include outer-shadow(); */
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
-}
-
-.custom-tabs.custom-tabs-center ul li {
-    font-size: 1rem;
-  /*Fighting the Space Between Inline Block Elements*/
-    display: inline-block;
-  /*require*/
-    float: none;
-}
-
 .custom-tabs .content {
     display: none;
     padding: 1.3125rem;
@@ -8249,7 +8247,7 @@ li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 {
     display: block;
 }
 
-.custom-tabs ul > li {
+.custom-tabs .custom-tabs-ul-container > ul > li {
     position: relative;
     display: block;
     transition: .1s ease-in-out;
@@ -8260,21 +8258,44 @@ li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 {
     min-width: 7.5rem;
 }
 
-.custom-tabs ul > li > a {
+.custom-tabs .custom-tabs-ul-container > ul > li > a {
     position: relative;
     padding: 0.625rem 1rem;
     display: block;
     text-align: center;
 }
 
-.custom-tabs ul > li.active {
+.custom-tabs .custom-tabs-ul-container > ul > li.active {
     background: #fff;
 }
 
-.custom-tabs ul:after {
+.custom-tabs .custom-tabs-ul-container > ul:after {
     content: '';
     display: block;
     clear: both;
+}
+
+.custom-tabs.custom-tabs-center {
+    box-shadow: none;
+}
+
+.custom-tabs.custom-tabs-center .custom-tabs-ul-container > ul {
+    font-size: 0;
+  /*Fighting the Space Between Inline Block Elements*/
+    display: block;
+    width: 100%;
+    text-align: center;
+  /*require*/
+  /* @include outer-shadow(); */
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+}
+
+.custom-tabs.custom-tabs-center .custom-tabs-ul-container > ul li {
+    font-size: 1rem;
+  /*Fighting the Space Between Inline Block Elements*/
+    display: inline-block;
+  /*require*/
+    float: none;
 }
 
 .custom-tabs.rotation {
@@ -8297,14 +8318,14 @@ li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 {
     margin: 0;
 }
 
-.custom-tabs.rotation ul {
+.custom-tabs.rotation .custom-tabs-ul-container > ul {
     position: relative;
     display: block;
     width: 300px;
     height: 300px;
 }
 
-.custom-tabs.rotation ul > li {
+.custom-tabs.rotation .custom-tabs-ul-container > ul > li {
     position: absolute;
     width: 80px;
     height: 80px;
@@ -8313,7 +8334,7 @@ li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 {
     transition: none;
 }
 
-.custom-tabs.rotation ul > li > a {
+.custom-tabs.rotation .custom-tabs-ul-container > ul > li > a {
     width: 80px;
     height: 80px;
     line-height: 60px;
@@ -8323,7 +8344,7 @@ li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 {
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
 }
 
-.custom-tabs.rotation ul > li.active > a {
+.custom-tabs.rotation .custom-tabs-ul-container > ul > li.active > a {
     background: #212121;
     color: #fff;
 }

@@ -70,6 +70,7 @@ $indicator-desc-w: 60px;
 
 /* Form animations */
 .custom-form-progress-target {
+	@include transition-default();
 	position: relative;
 	width: 100%;
 	height: 0;
@@ -78,7 +79,6 @@ $indicator-desc-w: 60px;
 	
 	&.show {
 		height: auto;
-		min-height: 70vh;
 	}
 	
 	.button {

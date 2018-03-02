@@ -14,6 +14,7 @@
 	8. Mega Menu
 	9. Dropdown Categories
 	10. Pagination
+	11. Specify a background image
 
 */
 

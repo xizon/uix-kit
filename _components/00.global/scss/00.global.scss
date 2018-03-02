@@ -125,6 +125,16 @@ $primary-bg-color      : transparent;
 	
 }
 
+@mixin ellipsis(){
+	/* @include ellipsis(); */
+	/* text with ellipsis */
+	overflow: hidden;
+	text-overflow: ellipsis;	
+	width: 100%;
+	white-space: nowrap;
+	
+}
+
 
 /* Ripple Effect */
 @mixin anime-ripple() {

@@ -85,6 +85,12 @@ theme = ( function ( theme, $, window, document ) {
 				$formTarget.addClass( 'show' );
 			}, animeSpeed );
 			
+			//Set wrapper height
+			var currentContentH  = $formTarget.find( '.form-step:eq(0) > .content' ).height() + 100;
+			$formTarget.css( 'height', currentContentH + 'px' );
+			
+			
+			
 			
 			$formTarget.find( '.form-step' )
 			                                .removeClass( 'left leaving' )
@@ -131,6 +137,12 @@ theme = ( function ( theme, $, window, document ) {
 			// Increment value (based on 4 steps 0 - 100)
 			value += stepPerValue;
 
+			//Set wrapper height
+			var currentContentH  = $formTarget.find( '.form-step:eq('+currentFormIndex+') > .content' ).height() + 100;
+			$formTarget.css( 'height', currentContentH + 'px' );
+			
+			
+			
 			// Reset if we've reached the end
 			if (value >= 100) {
 				$formTarget.find( '.form-step' )
