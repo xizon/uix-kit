@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.7
+ * ## Version             :  1.1.71
  * ## Last Update         :  March 6, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -1511,7 +1511,9 @@ theme = ( function ( theme, $, window, document ) {
 			$( this ).parents( customSelect ).removeClass( 'opened' );
 			$( this ).parents( customSelect ).find( customSelectTrigger ).text( $( this ).text() );
 			
-		    //console.log( $( customSelect ).find( 'select option:selected' ).text() );
+			//Set select option 'selected', by value
+			$( this ).parents( customSelectWrapper ).find( 'select option' ).removeAttr( 'selected' );
+			$( this ).parents( customSelectWrapper ).find( 'select option[value="'+$( this ).data( 'value' )+'"]' ).attr( 'selected', 'selected' ).change();
 			
 		});
 		
@@ -3991,74 +3993,6 @@ theme = ( function ( theme, $, window, document ) {
 
 /*! 
  *************************************
- * Fullwidth List of Split
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-   
-   
-    var pageLoaded = function() {
-		
-		var $window      = $( window ),
-			windowWidth  = $window.width(),
-			windowHeight = $window.height();
-		
-		
-		fullwidthListSplitInit( windowWidth );
-		
-		$window.on( 'resize', function() {
-			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( $window.width() != windowWidth ) {
-
-				// Update the window width for next time
-				windowWidth = $window.width();
-
-				// Do stuff here
-				fullwidthListSplitInit( windowWidth );
-		
-
-			}
-		});
-		
-		
-		
-		function fullwidthListSplitInit( w ) {
-			
-			
-			$( '.list-split-imagery-container' ).each(function() {
-				var imgH = $( this ).find( '.imagery-background img' ).height();
-
-				if ( imgH > 0 ) {
-					$( this ).find( '.feature-text, .feature-imagery' ).css( 'height', imgH + 'px' );
-				}
-
-				if ( w <= 768 ) {
-					$( this ).find( '.feature-text, .feature-imagery' ).css( 'height', 'auto' );
-				}
-
-			});	
-		}
-		
-
-		
-		
-	};
-		
-    theme.fullwidthListSplit = {
-        pageLoaded : pageLoaded        
-    };
-
-    theme.components.pageLoaded.push( pageLoaded );
-    return theme;
-
-}( theme, jQuery, window, document ) );
-
-
-
-
-/*! 
- *************************************
  * Posts List With Ajax
  *************************************
  */
@@ -4404,6 +4338,74 @@ theme = ( function ( theme, $, window, document ) {
     return old.apply(this, arguments);
   };
 })($.fn.attr);
+
+/*! 
+ *************************************
+ * Fullwidth List of Split
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+   
+   
+    var pageLoaded = function() {
+		
+		var $window      = $( window ),
+			windowWidth  = $window.width(),
+			windowHeight = $window.height();
+		
+		
+		fullwidthListSplitInit( windowWidth );
+		
+		$window.on( 'resize', function() {
+			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+			if ( $window.width() != windowWidth ) {
+
+				// Update the window width for next time
+				windowWidth = $window.width();
+
+				// Do stuff here
+				fullwidthListSplitInit( windowWidth );
+		
+
+			}
+		});
+		
+		
+		
+		function fullwidthListSplitInit( w ) {
+			
+			
+			$( '.list-split-imagery-container' ).each(function() {
+				var imgH = $( this ).find( '.imagery-background img' ).height();
+
+				if ( imgH > 0 ) {
+					$( this ).find( '.feature-text, .feature-imagery' ).css( 'height', imgH + 'px' );
+				}
+
+				if ( w <= 768 ) {
+					$( this ).find( '.feature-text, .feature-imagery' ).css( 'height', 'auto' );
+				}
+
+			});	
+		}
+		
+
+		
+		
+	};
+		
+    theme.fullwidthListSplit = {
+        pageLoaded : pageLoaded        
+    };
+
+    theme.components.pageLoaded.push( pageLoaded );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
 
 /*! 
  *************************************

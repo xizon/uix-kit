@@ -153,7 +153,9 @@ theme = ( function ( theme, $, window, document ) {
 			$( this ).parents( customSelect ).removeClass( 'opened' );
 			$( this ).parents( customSelect ).find( customSelectTrigger ).text( $( this ).text() );
 			
-		    //console.log( $( customSelect ).find( 'select option:selected' ).text() );
+			//Set select option 'selected', by value
+			$( this ).parents( customSelectWrapper ).find( 'select option' ).removeAttr( 'selected' );
+			$( this ).parents( customSelectWrapper ).find( 'select option[value="'+$( this ).data( 'value' )+'"]' ).attr( 'selected', 'selected' ).change();
 			
 		});
 		

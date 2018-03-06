@@ -1,5 +1,11 @@
 # Changelog
 
+#### = 1.1.71 (March 6, 2018) =
+
+* Fix: Fixed a bug where the custom select box change event could not fire.
+
+
+
 #### = 1.1.7 (March 6, 2018) =
 
 * New: Add a new module "Simple Lightbox".
