@@ -38,14 +38,14 @@ theme = ( function ( theme, $, window, document ) {
 		formReset();
 
 		// Show next form on continue click
-		$( '.custom-form-progress-target .go-step' ).on( 'click', function( e ) {
+		$( document ).on( 'click', '.custom-form-progress-target .go-step:not(.disable)', function( e ) {
 			e.preventDefault();
 			var $currentForm = $( this ).parents( '.form-step' );
 			showNextForm( $currentForm );
 		});
 
 		// Reset form on reset button click
-		$( '.custom-form-progress-target .go-reset' ).on( 'click', function( e ) {
+		$( document ).on( 'click', '.custom-form-progress-target .go-reset', function( e ) {
 			e.preventDefault();
 			formReset();
 		});
@@ -102,6 +102,7 @@ theme = ( function ( theme, $, window, document ) {
 											.addClass( 'waiting' );
 			
 			$indicator.first().addClass( 'active' );
+			$indicator.first().addClass( 'current' );
 	
 
 			return false;
@@ -140,6 +141,10 @@ theme = ( function ( theme, $, window, document ) {
 			//Set wrapper height
 			var currentContentH  = $formTarget.find( '.form-step:eq('+currentFormIndex+') > .content' ).height() + 100;
 			$formTarget.css( 'height', currentContentH + 'px' );
+			
+			//Set the current indicator class
+			$indicator.removeClass( 'current' );
+			$indicator.eq( currentFormIndex ).addClass( 'current' );
 			
 			
 			

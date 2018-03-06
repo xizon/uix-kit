@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.66
- * ## Last Update         :  March 2, 2018
+ * ## Version             :  1.1.7
+ * ## Last Update         :  March 6, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -1371,6 +1371,18 @@ theme = ( function ( theme, $, window, document ) {
 		
 		/*! 
 		 ---------------------------
+		 Disabled Status
+		 ---------------------------
+		 */ 	
+		
+		$( 'input.disable' ).each( function(){
+			$( this ).prop('disabled', true);
+		});
+		
+		
+		
+		/*! 
+		 ---------------------------
 		 Input File
 		 ---------------------------
 		 */ 
@@ -1461,7 +1473,11 @@ theme = ( function ( theme, $, window, document ) {
 				template += '<span class="custom-option ' + $( this ).attr( 'class' ) + '" data-value="' + $( this ).attr( 'value' ) + '">' + $( this ).html() + '</span>';
 			});
 			template += '</div></div>';
-			template += '<span class="custom-select-label">' + labelText + '</span>';
+			
+			if ( typeof labelText != typeof undefined && labelText != '' ) {
+				template += '<span class="custom-select-label">' + labelText + '</span>';
+			}
+			
 			
 
 			$( this ).wrap('<div class="custom-select-wrapper"></div>');
@@ -3717,14 +3733,14 @@ theme = ( function ( theme, $, window, document ) {
 		formReset();
 
 		// Show next form on continue click
-		$( '.custom-form-progress-target .go-step' ).on( 'click', function( e ) {
+		$( document ).on( 'click', '.custom-form-progress-target .go-step:not(.disable)', function( e ) {
 			e.preventDefault();
 			var $currentForm = $( this ).parents( '.form-step' );
 			showNextForm( $currentForm );
 		});
 
 		// Reset form on reset button click
-		$( '.custom-form-progress-target .go-reset' ).on( 'click', function( e ) {
+		$( document ).on( 'click', '.custom-form-progress-target .go-reset', function( e ) {
 			e.preventDefault();
 			formReset();
 		});
@@ -3781,6 +3797,7 @@ theme = ( function ( theme, $, window, document ) {
 											.addClass( 'waiting' );
 			
 			$indicator.first().addClass( 'active' );
+			$indicator.first().addClass( 'current' );
 	
 
 			return false;
@@ -3819,6 +3836,10 @@ theme = ( function ( theme, $, window, document ) {
 			//Set wrapper height
 			var currentContentH  = $formTarget.find( '.form-step:eq('+currentFormIndex+') > .content' ).height() + 100;
 			$formTarget.css( 'height', currentContentH + 'px' );
+			
+			//Set the current indicator class
+			$indicator.removeClass( 'current' );
+			$indicator.eq( currentFormIndex ).addClass( 'current' );
 			
 			
 			
@@ -3965,6 +3986,74 @@ theme = ( function ( theme, $, window, document ) {
  * Custom Core Scripts & Stylesheets
  *************************************
  */
+
+
+
+/*! 
+ *************************************
+ * Fullwidth List of Split
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+   
+   
+    var pageLoaded = function() {
+		
+		var $window      = $( window ),
+			windowWidth  = $window.width(),
+			windowHeight = $window.height();
+		
+		
+		fullwidthListSplitInit( windowWidth );
+		
+		$window.on( 'resize', function() {
+			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+			if ( $window.width() != windowWidth ) {
+
+				// Update the window width for next time
+				windowWidth = $window.width();
+
+				// Do stuff here
+				fullwidthListSplitInit( windowWidth );
+		
+
+			}
+		});
+		
+		
+		
+		function fullwidthListSplitInit( w ) {
+			
+			
+			$( '.list-split-imagery-container' ).each(function() {
+				var imgH = $( this ).find( '.imagery-background img' ).height();
+
+				if ( imgH > 0 ) {
+					$( this ).find( '.feature-text, .feature-imagery' ).css( 'height', imgH + 'px' );
+				}
+
+				if ( w <= 768 ) {
+					$( this ).find( '.feature-text, .feature-imagery' ).css( 'height', 'auto' );
+				}
+
+			});	
+		}
+		
+
+		
+		
+	};
+		
+    theme.fullwidthListSplit = {
+        pageLoaded : pageLoaded        
+    };
+
+    theme.components.pageLoaded.push( pageLoaded );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
 
 
 
@@ -4318,74 +4407,6 @@ theme = ( function ( theme, $, window, document ) {
 
 /*! 
  *************************************
- * Fullwidth List of Split
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-   
-   
-    var pageLoaded = function() {
-		
-		var $window      = $( window ),
-			windowWidth  = $window.width(),
-			windowHeight = $window.height();
-		
-		
-		fullwidthListSplitInit( windowWidth );
-		
-		$window.on( 'resize', function() {
-			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( $window.width() != windowWidth ) {
-
-				// Update the window width for next time
-				windowWidth = $window.width();
-
-				// Do stuff here
-				fullwidthListSplitInit( windowWidth );
-		
-
-			}
-		});
-		
-		
-		
-		function fullwidthListSplitInit( w ) {
-			
-			
-			$( '.list-split-imagery-container' ).each(function() {
-				var imgH = $( this ).find( '.imagery-background img' ).height();
-
-				if ( imgH > 0 ) {
-					$( this ).find( '.feature-text, .feature-imagery' ).css( 'height', imgH + 'px' );
-				}
-
-				if ( w <= 768 ) {
-					$( this ).find( '.feature-text, .feature-imagery' ).css( 'height', 'auto' );
-				}
-
-			});	
-		}
-		
-
-		
-		
-	};
-		
-    theme.fullwidthListSplit = {
-        pageLoaded : pageLoaded        
-    };
-
-    theme.components.pageLoaded.push( pageLoaded );
-    return theme;
-
-}( theme, jQuery, window, document ) );
-
-
-
-
-/*! 
- *************************************
  * Mobile Menu
  *************************************
  */
@@ -4565,9 +4586,19 @@ theme = ( function ( theme, $, window, document ) {
 			return isMS ? numberNum : numberNum * 1000;
 		}
 		
+		
+		/*
+		  * Unbind that one in a safe way that won't accidentally unbind other click handlers.
+		  * In order to trigger other custom Modal Dialog events.
+			
+			$( '#element' ).off( 'click.modalDialog' );
+			$( '#element' ).off( 'click.modalDialogClose' );
+			
+		*/
+		
 	
 	    $( 'body' ).prepend( '<div class="modal-mask"></div>' );
-		$( document ).on( 'click', '[data-modal-id]', function() {
+		$( document ).on( 'click.modalDialog', '[data-modal-id]', function() {
 			var dataID = $( this ).data( 'modal-id' ),
 			    dataH  = $( this ).data( 'modal-height' ),
 				dataW  = $( this ).data( 'modal-width' ),
@@ -4609,11 +4640,11 @@ theme = ( function ( theme, $, window, document ) {
 		
 		});
 		
-		$( document ).on( 'click', '.modal-box .close-btn', function() {
+		$( document ).on( 'click.modalDialogClose', '.modal-box .close-btn', function() {
 			$( this ).parent().removeClass( 'active' );
 		});
 		
-		$( document ).on( 'click', '.modal-box .close-btn, .modal-mask', function() {
+		$( document ).on( 'click.modalDialogClose', '.modal-box .close-btn, .modal-mask', function() {
 			$( '.modal-box' ).removeClass( 'active' );
 			$( '.modal-mask' ).fadeOut( 'fast' );
 			$( '.modal-box' ).find( '.content' ).removeClass( 'no-fullscreen' );
@@ -5840,6 +5871,91 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
+
+
+
+/*! 
+ *************************************
+ * Custom Lightbox
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+    
+    var pageLoaded = function() {
+		
+	
+		$( 'body' ).prepend( '<div class="custom-lightbox-overlay"><div class="lb-container"><div class="html"></div><span class="lb-close"></span><p class="title"></p></div></div>' );
+
+		var	$lbContaner = $( '.lb-container' ),
+			$lbMask     = $( '.custom-lightbox-overlay' ),
+			$lbClose    = $( '.custom-lightbox-overlay .lb-close' ),
+			$lbContent  = $lbContaner.find( '.html' );
+		
+		$( '.custom-lightbox' ).on( 'click', function() { 
+
+			var $this       = $( this ),
+				dataPhoto   = $this.data( 'lb-src' ),
+				dataHtmlID  = $this.data( 'lb-html' );
+			
+		
+
+			if( typeof dataPhoto != typeof undefined && dataPhoto != '' ) {
+				$lbMask.show();
+				$lbClose.show();
+				$lbContaner.show();
+				$lbContent.html( '<img src="'+ dataPhoto +'" alt="">' ).promise().done( function(){
+					//Set container width
+					var img = new Image();
+					img.onload = function() {
+						$lbContaner.css( 'width', this.width + 'px' );
+					}
+					img.src = dataPhoto;
+					$lbContaner.find( '> .html' ).removeClass( 'no-img' );
+					
+				});
+				
+			}	
+			
+			if( typeof dataHtmlID != typeof undefined && dataHtmlID != '' ) {
+				dataHtmlID = dataHtmlID.replace( '#', '' );
+
+				$lbMask.show();
+				$lbClose.show();
+				$lbContaner.show();
+				$lbContent.html( $( '#' + dataHtmlID ).html() ).promise().done( function(){
+					//Set container width
+					if ( $lbContaner.find( '> .html .lb-box' ).length > 0 ) {
+						$lbContaner.css( 'width', $lbContaner.find( '> .html .lb-box' ).width() + 'px' );
+						$lbContaner.find( '> .html' ).addClass( 'no-img' );
+						
+					}
+
+				});
+				
+				
+
+			}	
+			
+
+		});
+
+		$lbClose.on( 'click', function() {
+		      $lbMask.hide();
+		});
+
+		
+    };
+
+    theme.customLightbox = {
+        pageLoaded : pageLoaded        
+    };
+
+    theme.components.pageLoaded.push( pageLoaded );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
 
 
 

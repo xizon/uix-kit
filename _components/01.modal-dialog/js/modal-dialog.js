@@ -29,9 +29,19 @@ theme = ( function ( theme, $, window, document ) {
 			return isMS ? numberNum : numberNum * 1000;
 		}
 		
+		
+		/*
+		  * Unbind that one in a safe way that won't accidentally unbind other click handlers.
+		  * In order to trigger other custom Modal Dialog events.
+			
+			$( '#element' ).off( 'click.modalDialog' );
+			$( '#element' ).off( 'click.modalDialogClose' );
+			
+		*/
+		
 	
 	    $( 'body' ).prepend( '<div class="modal-mask"></div>' );
-		$( document ).on( 'click', '[data-modal-id]', function() {
+		$( document ).on( 'click.modalDialog', '[data-modal-id]', function() {
 			var dataID = $( this ).data( 'modal-id' ),
 			    dataH  = $( this ).data( 'modal-height' ),
 				dataW  = $( this ).data( 'modal-width' ),
@@ -73,11 +83,11 @@ theme = ( function ( theme, $, window, document ) {
 		
 		});
 		
-		$( document ).on( 'click', '.modal-box .close-btn', function() {
+		$( document ).on( 'click.modalDialogClose', '.modal-box .close-btn', function() {
 			$( this ).parent().removeClass( 'active' );
 		});
 		
-		$( document ).on( 'click', '.modal-box .close-btn, .modal-mask', function() {
+		$( document ).on( 'click.modalDialogClose', '.modal-box .close-btn, .modal-mask', function() {
 			$( '.modal-box' ).removeClass( 'active' );
 			$( '.modal-mask' ).fadeOut( 'fast' );
 			$( '.modal-box' ).find( '.content' ).removeClass( 'no-fullscreen' );

@@ -727,6 +727,7 @@ $control-focus-color: $primary-text-color1;
 		vertical-align: middle;
 		position: relative;
 		margin: 0.546875rem .5rem 0.546875rem 0;
+		cursor: pointer;
 		@include transition-default();
 
 

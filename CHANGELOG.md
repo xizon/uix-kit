@@ -1,5 +1,14 @@
 # Changelog
 
+#### = 1.1.7 (March 6, 2018) =
+
+* New: Add a new module "Simple Lightbox".
+* New: Add disable status to buttons.
+* Tweak: Optimized "Modal Dialog" triggering method: Unbind that one in a safe way that won't accidentally unbind other click handlers. In order to trigger other custom Modal Dialog events.
+
+
+
+
 #### = 1.1.66 (March 2, 2018) =
 
 * Fix: Fixed "Form Progress" module height error.

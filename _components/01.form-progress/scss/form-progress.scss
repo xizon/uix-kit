@@ -63,6 +63,11 @@ $indicator-desc-w: 60px;
 			animation: indicator-ok .5s forwards;
 			border-color: $highlight-color1;
 		}
+		&.current {
+			
+		}
+		
+		
 	}
 	
 }

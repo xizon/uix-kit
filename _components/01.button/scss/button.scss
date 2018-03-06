@@ -24,6 +24,14 @@
 	text-transform: uppercase;
 	z-index: 1;
 
+	&.disable {
+		border-color: #e4e7ed !important;
+		background-color: #e4e7ed !important;
+		cursor: not-allowed;
+		
+	}
+	
+	
 	&.hide {
 		display: none !important;
 	}

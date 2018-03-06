@@ -13,6 +13,18 @@ theme = ( function ( theme, $, window, document ) {
 		
 		/*! 
 		 ---------------------------
+		 Disabled Status
+		 ---------------------------
+		 */ 	
+		
+		$( 'input.disable' ).each( function(){
+			$( this ).prop('disabled', true);
+		});
+		
+		
+		
+		/*! 
+		 ---------------------------
 		 Input File
 		 ---------------------------
 		 */ 
@@ -103,7 +115,11 @@ theme = ( function ( theme, $, window, document ) {
 				template += '<span class="custom-option ' + $( this ).attr( 'class' ) + '" data-value="' + $( this ).attr( 'value' ) + '">' + $( this ).html() + '</span>';
 			});
 			template += '</div></div>';
-			template += '<span class="custom-select-label">' + labelText + '</span>';
+			
+			if ( typeof labelText != typeof undefined && labelText != '' ) {
+				template += '<span class="custom-select-label">' + labelText + '</span>';
+			}
+			
 			
 
 			$( this ).wrap('<div class="custom-select-wrapper"></div>');

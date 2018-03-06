@@ -1,0 +1,143 @@
+
+/*! 
+ ---------------------------
+ Cutom Light Box
+ ---------------------------
+ */ 
+$custom-lightbox-radius: 3px;
+
+.custom-lightbox-html {
+	display: none;
+}
+
+.custom-lightbox-overlay {
+	display: none;
+	position: fixed;
+	z-index: 99998;
+	background: rgba(0,0,0,.6);
+	top: 0;
+	width: 100%;
+	height: 100%; 
+	margin: 0;
+
+	.lb-container {
+		
+		display: none;
+		max-width: 1000px;
+		margin: 0 auto;
+		position: relative;
+		top: 50%;
+		transform: translateY(-50%);
+		text-align: center;
+		
+		
+		.html {
+
+
+			@include outer-shadow();
+			
+			&.no-img {
+				background: #fff;
+				border-radius: $custom-lightbox-radius;		
+			}
+			
+			> .lb-box {
+
+				position: relative;
+				/* Required Width */
+				width: 600px;
+				
+				
+				max-height: 60vh;
+				overflow-y: auto;
+				text-align: left;
+				
+				> .content-show {
+					padding: 1.5rem;
+					color: $sub-text-color;
+					font-size: 0.75rem;
+
+				}
+
+
+				&::-webkit-scrollbar-track {
+					border-radius: 0px;
+					background-color: $highlight-color1;
+				}
+
+				&::-webkit-scrollbar {
+					width: 5px;
+					background-color: $highlight-color1;
+				}
+
+				&::-webkit-scrollbar-thumb {
+					border-radius: 0px;
+					background-color: #fff;
+				}
+				
+			
+				
+			
+			}
+		
+			
+		}
+		
+		img {
+			border-radius: $custom-lightbox-radius; 
+			max-width: 100%;
+			width: auto;
+		}
+
+	}
+
+	.lb-close {
+		border-radius: 50%;
+		width: 36px;
+		height: 36px;
+		display: inline-block;
+		text-align: center;
+		line-height: 34px;
+		overflow: hidden;
+		position: absolute;
+		z-index: 99999;
+		top: 0;
+		right: -35px;
+		margin-top: -5px;
+		transform: rotate(45deg);
+		cursor: pointer;
+
+		&:after {
+			font-family: 'FontAwesome';
+			content: "\f067";
+			color: #fff;
+			font-size: 2rem;
+		}	
+	}
+}
+
+@media all and (max-width: 768px) {
+	.custom-lightbox-overlay {
+		
+		.lb-container {
+
+			max-width: calc(100% - 30px);
+			margin: 15px auto;
+			
+			.html {
+				> .lb-box {
+					width: auto;
+				}	
+			}
+			
+
+		}
+		
+		
+		.lb-close {
+			right: -5px;
+			top: -30px;
+		}
+
+	}	
+}
