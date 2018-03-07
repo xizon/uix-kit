@@ -196,6 +196,11 @@ theme = ( function ( theme, $, window, document ) {
  * Associated Functions
  *************************************
  */
+/*! 
+ ---------------------------
+ Custom Select
+ ---------------------------
+ */ 
 $.extend({ 
 	customSelectInit:function ( options ) { 
 
@@ -210,7 +215,7 @@ $.extend({
 
 
 	
-		$( settings.selector ).not( '.new' ).each(function() {
+		$( settings.selector ).not( '.new' ).each( function() {
 			
 			var $this     = $( this ),
 				classes   = $this.attr( 'class' ),
@@ -249,7 +254,6 @@ $.extend({
 				$this.after( template );	
 				
 
-				
 				//Prevent the form from being initialized again
 				$( this ).data( 'exist', 1 );
 			}
@@ -267,6 +271,11 @@ $.extend({
 			$selectCurWrapper.addClass( 'opened' );
 			
 		});
+		
+		$( document.body ).on( 'click', function( e ) {
+			$( settings.selector + '.new' ).removeClass( 'opened' );
+		});		
+		
 		
 		
 				
@@ -301,13 +310,59 @@ $.extend({
 
 		});
 		
+		
+		
+		//Synchronize to the original select change event
+		$( settings.selector ).not( '.new' ).each( function() {
+			
 
+			
+
+			$( settings.selector ).not( '.new' ).find( 'select' ).on( 'change', function( e ) {
+
+				var $this       = $( this ),
+					$cusSelect  = $this.closest( settings.targetWrapper ).find( settings.selector + '.new' ),
+					newOptions  = '';
+				
+				
+				$this.closest( settings.targetWrapper ).find( 'select option' ).each( function( index ) {
+					
+					var selected = '';
+					
+					if ( $( this ).is( ':selected' ) ) {
+						selected = 'active';
+					}
+					
+					newOptions += '<span class="custom-option '+selected+'" data-value="' + $( this ).attr( 'value' ) + '">' + $( this ).html() + '</span>';
+				});
+				
+				
+				$cusSelect.find( settings.itemsWrapper ).html( newOptions );
+				
+				
+				//Set the default selector text
+				$cusSelect.each( function( index ) {
+					$( this ).find( settings.trigger ).text( $( this ).find( settings.item + '.active' ).html() );
+				});
+
+				
+				
+			});	
+		});
+
+		
+		
+
+		
 
 	} 
 }); 
 
-
-
+/*! 
+ ---------------------------
+ Custom Radio, Checkbox and Toggle 
+ ---------------------------
+ */ 
 $.extend({ 
 	customRadioCheckboxInit:function ( options ) { 
 

@@ -1,10 +1,11 @@
 # Changelog
 
 
-#### = 1.1.72 (March 7, 2018) =
+#### = 1.1.73 (March 7, 2018) =
 
 * Fix: Fixed some issues with custom forms' asynchronous events.
 * Tweak: Modify the definition of custom functions from some module.
+* Tweak: Change the push mode of each module script to two-dimensional in order to call name with ajax.
 * New: Add a new module "List of Info".
 
 

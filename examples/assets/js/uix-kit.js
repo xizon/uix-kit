@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.72
+ * ## Version             :  1.1.73
  * ## Last Update         :  March 7, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -843,7 +843,6 @@ theme = ( function ( theme, $, window, document ) {
 
 
 		}
-
 		
 		
 
@@ -1202,6 +1201,7 @@ theme = ( function ( theme, $, window, document ) {
 				
 			}); 
 			
+			
 		});
 		
 	};
@@ -1557,6 +1557,11 @@ theme = ( function ( theme, $, window, document ) {
  * Associated Functions
  *************************************
  */
+/*! 
+ ---------------------------
+ Custom Select
+ ---------------------------
+ */ 
 $.extend({ 
 	customSelectInit:function ( options ) { 
 
@@ -1571,7 +1576,7 @@ $.extend({
 
 
 	
-		$( settings.selector ).not( '.new' ).each(function() {
+		$( settings.selector ).not( '.new' ).each( function() {
 			
 			var $this     = $( this ),
 				classes   = $this.attr( 'class' ),
@@ -1610,7 +1615,6 @@ $.extend({
 				$this.after( template );	
 				
 
-				
 				//Prevent the form from being initialized again
 				$( this ).data( 'exist', 1 );
 			}
@@ -1628,6 +1632,11 @@ $.extend({
 			$selectCurWrapper.addClass( 'opened' );
 			
 		});
+		
+		$( document.body ).on( 'click', function( e ) {
+			$( settings.selector + '.new' ).removeClass( 'opened' );
+		});		
+		
 		
 		
 				
@@ -1662,13 +1671,59 @@ $.extend({
 
 		});
 		
+		
+		
+		//Synchronize to the original select change event
+		$( settings.selector ).not( '.new' ).each( function() {
+			
 
+			
+
+			$( settings.selector ).not( '.new' ).find( 'select' ).on( 'change', function( e ) {
+
+				var $this       = $( this ),
+					$cusSelect  = $this.closest( settings.targetWrapper ).find( settings.selector + '.new' ),
+					newOptions  = '';
+				
+				
+				$this.closest( settings.targetWrapper ).find( 'select option' ).each( function( index ) {
+					
+					var selected = '';
+					
+					if ( $( this ).is( ':selected' ) ) {
+						selected = 'active';
+					}
+					
+					newOptions += '<span class="custom-option '+selected+'" data-value="' + $( this ).attr( 'value' ) + '">' + $( this ).html() + '</span>';
+				});
+				
+				
+				$cusSelect.find( settings.itemsWrapper ).html( newOptions );
+				
+				
+				//Set the default selector text
+				$cusSelect.each( function( index ) {
+					$( this ).find( settings.trigger ).text( $( this ).find( settings.item + '.active' ).html() );
+				});
+
+				
+				
+			});	
+		});
+
+		
+		
+
+		
 
 	} 
 }); 
 
-
-
+/*! 
+ ---------------------------
+ Custom Radio, Checkbox and Toggle 
+ ---------------------------
+ */ 
 $.extend({ 
 	customRadioCheckboxInit:function ( options ) { 
 
@@ -7771,19 +7826,14 @@ theme = ( function ( theme, $, window, document ) {
 		 *
 		 * @return {void}  - The constructor.
 		 */
+		
+		
 		function applyOriginalScripts() {
 			var pageLoaded    = theme.components.pageLoaded,
 				documentReady = theme.components.documentReady;
 			
-			pageLoaded[1](); //Multiple columns full height for Bootstrap 3.x
-			pageLoaded[2](); //Parallax
-			pageLoaded[3](); //Sticky Elements 
-			pageLoaded[4](); //Text effect
-			pageLoaded[5](); //Timeline
-			
-			
-			documentReady[0]($); //Header
-			documentReady[1]($); //Back to Top
+			theme.rowFullheight.pageLoaded(); //Multiple columns full height for Bootstrap 3.x
+			theme.accordion.documentReady($); //Accordion
 			
 			
 		}
