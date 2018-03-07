@@ -315,44 +315,34 @@ $.extend({
 		//Synchronize to the original select change event
 		$( settings.selector ).not( '.new' ).each( function() {
 			
+			var $this       = $( this ).find( 'select' ),
+				$cusSelect  = $this.closest( settings.targetWrapper ).find( settings.selector + '.new' ),
+				newOptions  = '';
 
-			
 
-			$( settings.selector ).not( '.new' ).find( 'select' ).on( 'change', function( e ) {
+			$this.closest( settings.targetWrapper ).find( 'select option' ).each( function( index ) {
 
-				var $this       = $( this ),
-					$cusSelect  = $this.closest( settings.targetWrapper ).find( settings.selector + '.new' ),
-					newOptions  = '';
-				
-				
-				$this.closest( settings.targetWrapper ).find( 'select option' ).each( function( index ) {
-					
-					var selected = '';
-					
-					if ( $( this ).is( ':selected' ) ) {
-						selected = 'active';
-					}
-					
-					newOptions += '<span class="custom-option '+selected+'" data-value="' + $( this ).attr( 'value' ) + '">' + $( this ).html() + '</span>';
-				});
-				
-				
-				$cusSelect.find( settings.itemsWrapper ).html( newOptions );
-				
-				
-				//Set the default selector text
-				$cusSelect.each( function( index ) {
-					$( this ).find( settings.trigger ).text( $( this ).find( settings.item + '.active' ).html() );
-				});
+				var selected = '';
 
-				
-				
-			});	
+				if ( $( this ).is( ':selected' ) ) {
+					selected = 'active';
+				}
+
+				newOptions += '<span class="custom-option '+selected+'" data-value="' + $( this ).attr( 'value' ) + '">' + $( this ).html() + '</span>';
+			});
+
+
+			$cusSelect.find( settings.itemsWrapper ).html( newOptions );
+
+
+			//Set the default selector text
+			$cusSelect.each( function( index ) {
+				$( this ).find( settings.trigger ).text( $( this ).find( settings.item + '.active' ).html() );
+			});
+
 		});
 
 		
-		
-
 		
 
 	} 
