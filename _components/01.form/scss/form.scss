@@ -551,8 +551,8 @@ $control-focus-color: $primary-text-color1;
 			border-radius: 0 0 2px 2px;
 		}
 		
-		&:hover, 
-		&.selection {
+		&:hover,
+		&.active {
 		    background: #f9f9f9;
 		}
 	}

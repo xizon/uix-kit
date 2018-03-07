@@ -113,8 +113,9 @@ theme = ( function ( theme, $, window, document ) {
 			
 			
 			// Tab Sliding Effext
-			$this.find( 'ul li:first' ).prepend( '<div class="marker"></div>' );
-			
+			if ( $this.find( 'ul li:first .marker' ).length == 0 ) {
+				$this.find( 'ul li:first' ).prepend( '<div class="marker"></div>' );
+			}
 			
 			
 			// Tab Fade Effect

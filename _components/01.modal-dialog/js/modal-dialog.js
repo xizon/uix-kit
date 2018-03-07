@@ -40,7 +40,10 @@ theme = ( function ( theme, $, window, document ) {
 		*/
 		
 	
-	    $( 'body' ).prepend( '<div class="modal-mask"></div>' );
+		if ( $( '.modal-mask' ).length == 0 ) {
+			$( 'body' ).prepend( '<div class="modal-mask"></div>' );
+		}
+	    
 		$( document ).on( 'click.modalDialog', '[data-modal-id]', function() {
 			var dataID = $( this ).data( 'modal-id' ),
 			    dataH  = $( this ).data( 'modal-height' ),

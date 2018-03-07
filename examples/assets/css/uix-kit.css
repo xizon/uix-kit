@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.71
- * ## Last Update         :  March 6, 2018
+ * ## Version             :  1.1.72
+ * ## Last Update         :  March 7, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -3760,7 +3760,7 @@ ul.entry-meta {
     border-radius: 0 0 2px 2px;
 }
 
-.custom-select-wrapper .custom-option:hover, .custom-select-wrapper .custom-option.selection {
+.custom-select-wrapper .custom-option:hover, .custom-select-wrapper .custom-option.active {
     background: #f9f9f9;
 }
 
@@ -4442,6 +4442,40 @@ ul.entry-meta {
 /* ====================================================== 
    Custom Core Scripts & Stylesheets
 /* ====================================================== */
+/* ====================================================== 
+   List of Info
+/* ====================================================== */
+dl.list-info {
+    width: 100%;
+  /* adjust the width; make sure the total of both is 100% */
+    font-size: 0.875rem;
+}
+
+dl.list-info dt {
+    float: left;
+    clear: left;
+    width: 100px;
+    padding: 5px 0;
+    margin: 0;
+    font-weight: 600;
+    text-align: right;
+}
+
+dl.list-info dd {
+    float: left;
+    width: calc(100% - 100px);
+    padding: 5px 0;
+    margin: 0;
+    text-align: left;
+    padding-left: 1rem;
+}
+
+dl.list-info:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
 /* ====================================================== 
    List of Posts
 /* ====================================================== */
@@ -8063,6 +8097,166 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 }
 
 /* ====================================================== 
+   Tabs        
+/* ====================================================== */
+.custom-tabs {
+  /* Tab Rotation Effect */;
+}
+
+.custom-tabs:not(.rotation) {
+  /* @include outer-shadow(); */
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+}
+
+.custom-tabs:not(.rotation) .marker {
+    background: #212121;
+    height: 2px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    transition: .1s ease-in-out;
+}
+
+.custom-tabs .content {
+    display: none;
+    padding: 1.3125rem;
+    text-align: left;
+}
+
+.custom-tabs .content.active {
+    display: block;
+}
+
+.custom-tabs .custom-tabs-ul-container > ul > li {
+    position: relative;
+    display: block;
+    transition: .1s ease-in-out;
+    list-style: none;
+    float: left;
+    box-shadow: inset 1px 0px 0px 0px #e6e6e6;
+    background: #f7f7f7;
+    min-width: 7.5rem;
+}
+
+.custom-tabs .custom-tabs-ul-container > ul > li > a {
+    position: relative;
+    padding: 0.625rem 1rem;
+    display: block;
+    text-align: center;
+}
+
+.custom-tabs .custom-tabs-ul-container > ul > li.active {
+    background: #fff;
+}
+
+.custom-tabs .custom-tabs-ul-container > ul:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.custom-tabs.custom-tabs-center {
+    box-shadow: none;
+}
+
+.custom-tabs.custom-tabs-center .custom-tabs-ul-container > ul {
+    font-size: 0;
+  /*Fighting the Space Between Inline Block Elements*/
+    display: block;
+    width: 100%;
+    text-align: center;
+  /*require*/
+  /* @include outer-shadow(); */
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+}
+
+.custom-tabs.custom-tabs-center .custom-tabs-ul-container > ul li {
+    font-size: 1rem;
+  /*Fighting the Space Between Inline Block Elements*/
+    display: inline-block;
+  /*require*/
+    float: none;
+}
+
+.custom-tabs.rotation {
+    height: 400px;
+}
+
+.custom-tabs.rotation .content {
+    position: absolute;
+    top: 0;
+    left: 400px;
+    width: 300px;
+  /* @include outer-shadow(); */
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+}
+
+.custom-tabs.rotation .custom-tabs-ul-container {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    margin: 0;
+}
+
+.custom-tabs.rotation .custom-tabs-ul-container > ul {
+    position: relative;
+    display: block;
+    width: 300px;
+    height: 300px;
+}
+
+.custom-tabs.rotation .custom-tabs-ul-container > ul > li {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: none;
+    box-shadow: none;
+    transition: none;
+}
+
+.custom-tabs.rotation .custom-tabs-ul-container > ul > li > a {
+    width: 80px;
+    height: 80px;
+    line-height: 60px;
+    background: #fff;
+    border-radius: 100%;
+  /* @include outer-shadow(); */
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+}
+
+.custom-tabs.rotation .custom-tabs-ul-container > ul > li.active > a {
+    background: #212121;
+    color: #fff;
+}
+
+@media all and (max-width: 768px) {
+    .custom-tabs {
+    /* Tab Rotation Effect */;
+    }
+
+    .custom-tabs:not(.rotation) li {
+        width: 100% !important;
+    }
+
+    .custom-tabs.rotation {
+        height: 400px;
+    }
+
+    .custom-tabs.rotation .content {
+        position: relative;
+        left: 0;
+        width: 100%;
+    }
+
+    .custom-tabs.rotation .custom-tabs-ul-container {
+        margin-top: 50px;
+        margin-left: 120px;
+    }
+}
+
+/* ====================================================== 
    Source Code        
 /* ====================================================== */
 /* Pretty printing styles. Used with prettify.js. */
@@ -8338,166 +8532,6 @@ li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 {
     content: "\f067";
     color: #fff;
     font-size: 1rem;
-}
-
-/* ====================================================== 
-   Tabs        
-/* ====================================================== */
-.custom-tabs {
-  /* Tab Rotation Effect */;
-}
-
-.custom-tabs:not(.rotation) {
-  /* @include outer-shadow(); */
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
-}
-
-.custom-tabs:not(.rotation) .marker {
-    background: #212121;
-    height: 2px;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-    transition: .1s ease-in-out;
-}
-
-.custom-tabs .content {
-    display: none;
-    padding: 1.3125rem;
-    text-align: left;
-}
-
-.custom-tabs .content.active {
-    display: block;
-}
-
-.custom-tabs .custom-tabs-ul-container > ul > li {
-    position: relative;
-    display: block;
-    transition: .1s ease-in-out;
-    list-style: none;
-    float: left;
-    box-shadow: inset 1px 0px 0px 0px #e6e6e6;
-    background: #f7f7f7;
-    min-width: 7.5rem;
-}
-
-.custom-tabs .custom-tabs-ul-container > ul > li > a {
-    position: relative;
-    padding: 0.625rem 1rem;
-    display: block;
-    text-align: center;
-}
-
-.custom-tabs .custom-tabs-ul-container > ul > li.active {
-    background: #fff;
-}
-
-.custom-tabs .custom-tabs-ul-container > ul:after {
-    content: '';
-    display: block;
-    clear: both;
-}
-
-.custom-tabs.custom-tabs-center {
-    box-shadow: none;
-}
-
-.custom-tabs.custom-tabs-center .custom-tabs-ul-container > ul {
-    font-size: 0;
-  /*Fighting the Space Between Inline Block Elements*/
-    display: block;
-    width: 100%;
-    text-align: center;
-  /*require*/
-  /* @include outer-shadow(); */
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
-}
-
-.custom-tabs.custom-tabs-center .custom-tabs-ul-container > ul li {
-    font-size: 1rem;
-  /*Fighting the Space Between Inline Block Elements*/
-    display: inline-block;
-  /*require*/
-    float: none;
-}
-
-.custom-tabs.rotation {
-    height: 400px;
-}
-
-.custom-tabs.rotation .content {
-    position: absolute;
-    top: 0;
-    left: 400px;
-    width: 300px;
-  /* @include outer-shadow(); */
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
-}
-
-.custom-tabs.rotation .custom-tabs-ul-container {
-    width: 300px;
-    height: 300px;
-    position: relative;
-    margin: 0;
-}
-
-.custom-tabs.rotation .custom-tabs-ul-container > ul {
-    position: relative;
-    display: block;
-    width: 300px;
-    height: 300px;
-}
-
-.custom-tabs.rotation .custom-tabs-ul-container > ul > li {
-    position: absolute;
-    width: 80px;
-    height: 80px;
-    background: none;
-    box-shadow: none;
-    transition: none;
-}
-
-.custom-tabs.rotation .custom-tabs-ul-container > ul > li > a {
-    width: 80px;
-    height: 80px;
-    line-height: 60px;
-    background: #fff;
-    border-radius: 100%;
-  /* @include outer-shadow(); */
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
-}
-
-.custom-tabs.rotation .custom-tabs-ul-container > ul > li.active > a {
-    background: #212121;
-    color: #fff;
-}
-
-@media all and (max-width: 768px) {
-    .custom-tabs {
-    /* Tab Rotation Effect */;
-    }
-
-    .custom-tabs:not(.rotation) li {
-        width: 100% !important;
-    }
-
-    .custom-tabs.rotation {
-        height: 400px;
-    }
-
-    .custom-tabs.rotation .content {
-        position: relative;
-        left: 0;
-        width: 100%;
-    }
-
-    .custom-tabs.rotation .custom-tabs-ul-container {
-        margin-top: 50px;
-        margin-left: 120px;
-    }
 }
 
 /* ====================================================== 

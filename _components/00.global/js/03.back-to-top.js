@@ -9,7 +9,10 @@ theme = ( function ( theme, $, window, document ) {
     var documentReady = function( $ ) {
     
 		// Add button to body for back to top
-		$( 'body' ).prepend( '<a href="#" id="toTop"><span id="toTopHover"></span></a>' );
+		if ( $( '#toTop' ).length == 0 ) {
+			$( 'body' ).prepend( '<a href="#" id="toTop"><span id="toTopHover"></span></a>' );
+		}
+		
 		
 		// Sticky button of back to top 
 		var waypoints = $( '#toTop' ).waypoint({

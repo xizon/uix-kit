@@ -1,5 +1,14 @@
 # Changelog
 
+
+#### = 1.1.72 (March 7, 2018) =
+
+* Fix: Fixed some issues with custom forms' asynchronous events.
+* Tweak: Modify the definition of custom functions from some module.
+* New: Add a new module "List of Info".
+
+
+
 #### = 1.1.71 (March 6, 2018) =
 
 * Fix: Fixed a bug where the custom select box change event could not fire.

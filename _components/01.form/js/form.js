@@ -94,93 +94,17 @@ theme = ( function ( theme, $, window, document ) {
 		 Custom Select
 		 ---------------------------
 		 */ 
-		var customSelect        = '.custom-select',
-			customSelectTrigger = '.custom-select-trigger',
-			customSelectWrapper = '.custom-select-wrapper',
-			customOptions       = '.custom-options',
-			customOptionItem    = '.custom-option';
-			
-		
-		$( customSelect ).each(function() {
-			var classes   = $( this ).attr( 'class' ),
-			    id        = $( this ).attr( 'id' ),
-			    name      = $( this ).attr( 'name' ),
-				template  = '<div class="' + classes + '">',
-				labelText = $( this ).find( '> span' ).html();
-	
-			
-			template += '<span class="custom-select-trigger">' + $( this ).find( 'select' ).attr( 'placeholder' ) + '</span>';
-			template += '<div class="custom-options">';
-			$( this ).find("option").each(function() {
-				template += '<span class="custom-option ' + $( this ).attr( 'class' ) + '" data-value="' + $( this ).attr( 'value' ) + '">' + $( this ).html() + '</span>';
-			});
-			template += '</div></div>';
-			
-			if ( typeof labelText != typeof undefined && labelText != '' ) {
-				template += '<span class="custom-select-label">' + labelText + '</span>';
-			}
-			
-			
+		$.customSelectInit();
 
-			$( this ).wrap('<div class="custom-select-wrapper"></div>');
-			$( this ).hide();
-			$( this ).after( template );
-			
-		
-			
-		});
-		
-		
-		$( customOptionItem ).first().on( 'mouseenter', function() {
-            $( this ).parents( customOptions ).addClass( 'option-hover' );
-		} ).on( 'mouseleave' , function() {
-			$( this ).parents( customOptions ).removeClass( 'option-hover' );
-		} );
-		
-		$( customSelectTrigger ).on( 'click', function( e ) {
-			$( 'html' ).one('click', function() {
-				$( customSelect ).removeClass( 'opened' );
-			});
-			$( this ).parents( customSelect ).toggleClass( 'opened' );
-			
-			e.stopPropagation();
-		});
-		
-		$( customOptionItem ).on( 'click', function() {
-			$( this ).parents( customSelectWrapper ).find( 'select' ).val( $( this ).data( 'value' ) );
-			$( this ).parents( customOptions ).find( customOptionItem ).removeClass( 'selection' );
-			$( this ).addClass( 'selection' );
-			$( this ).parents( customSelect ).removeClass( 'opened' );
-			$( this ).parents( customSelect ).find( customSelectTrigger ).text( $( this ).text() );
-			
-			//Set select option 'selected', by value
-			$( this ).parents( customSelectWrapper ).find( 'select option' ).removeAttr( 'selected' );
-			$( this ).parents( customSelectWrapper ).find( 'select option[value="'+$( this ).data( 'value' )+'"]' ).attr( 'selected', 'selected' ).change();
-			
-		});
-		
-		
+
 		/*! 
 		 ---------------------------
 		 Custom Radio, Toggle And Checkbox
 		 ---------------------------
 		 */ 
-		var customRadio        = '.custom-radio',
-			customToggle       = '.custom-toggle',
-			customCheckbox     = '.custom-checkbox';
-			
+		$.customRadioCheckboxInit();
 		
-		$( customRadio ).find( 'input[type="radio"]' ).each(function() {
-			$( '<span class="custom-radio-trigger"></span>' ).insertAfter( $( this ) );
-		});
 		
-		$( customToggle ).find( 'input[type="checkbox"]' ).each(function() {
-			$( '<span class="custom-toggle-trigger"></span>' ).insertAfter( $( this ) );
-		});
-		
-		$( customCheckbox ).find( 'input[type="checkbox"]' ).each(function() {
-			$( '<span class="custom-checkbox-trigger"></span>' ).insertAfter( $( this ) );
-		});
 		
 		/*! 
 		 ---------------------------
@@ -264,6 +188,179 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
+
+
+
+/*! 
+ *************************************
+ * Associated Functions
+ *************************************
+ */
+$.extend({ 
+	customSelectInit:function ( options ) { 
+
+		var settings = $.extend( {
+			'selector'         : '.custom-select',
+			'targetWrapper'    : '.custom-select-wrapper',
+			'trigger'          : '.custom-select-trigger',	
+			'itemsWrapper'     : '.custom-options',
+			'item'             : '.custom-option'
+		}
+		, options );
+
+
+	
+		$( settings.selector ).not( '.new' ).each(function() {
+			
+			var $this     = $( this ),
+				classes   = $this.attr( 'class' ),
+				id        = $this.attr( 'id' ),
+				name      = $this.attr( 'name' ),
+				template  = '',
+				labelText = $this.find( '> span' ).html(),
+				dataExist = $this.data( 'exist' );
+
+		
+			if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
+				
+				template  = '<div class="' + classes + ' new">';
+				template += '<span class="custom-select-trigger">' + $this.find( 'select' ).attr( 'placeholder' ) + '</span>';
+				template += '<div class="custom-options">';
+				
+				$this.find( 'select option' ).each( function( index ) {
+					
+					var selected = '';
+					
+					if ( $( this ).is( ':selected' ) ) {
+						selected = 'active';
+					}
+					
+					template += '<span class="custom-option '+selected+'" data-value="' + $( this ).attr( 'value' ) + '">' + $( this ).html() + '</span>';
+				});
+				template += '</div></div>';
+
+				if ( typeof labelText != typeof undefined && labelText != '' ) {
+					template += '<span class="custom-select-label">' + labelText + '</span>';
+				}
+
+
+				$this.wrap('<div class="custom-select-wrapper"></div>');
+				$this.hide();
+				$this.after( template );	
+				
+
+				
+				//Prevent the form from being initialized again
+				$( this ).data( 'exist', 1 );
+			}
+
+
+		});
+
+		//Show/Hide Selector
+		$( document ).on( 'click', settings.trigger, function( e ) {
+			e.preventDefault();
+			
+			var $selectWrapper    = $( this ).closest( settings.targetWrapper ),
+				$selectCurWrapper = $selectWrapper.find( settings.selector + '.new' );
+			
+			$selectCurWrapper.addClass( 'opened' );
+			
+		});
+		
+		
+				
+		//Set the default selector text
+		$( settings.selector + '.new' ).each( function( index ) {
+		    $( this ).find( settings.trigger ).text( $( this ).find( settings.item + '.active' ).html() );
+		});
+		
+		
+		//Change Event Here
+		$( document ).on( 'click', settings.item, function( e ) {
+			e.preventDefault();
+			
+			var $selectWrapper    = $( this ).closest( settings.targetWrapper ),
+				$selectCurWrapper = $selectWrapper.find( settings.selector + '.new' ),
+				curVal            = $( this ).data( 'value' );
+		
+			//Close the selector
+			$selectCurWrapper.removeClass( 'opened' );
+			
+			//Set the selector text
+			$selectCurWrapper.find( settings.trigger ).text( $( this ).html() );
+			
+			//Activate this option
+			$selectCurWrapper.find( settings.item ).removeClass( 'active' );
+			$( this ).addClass( 'active' );
+			
+			//Set select option 'selected', by value
+			$selectWrapper.find( 'select' ).val( curVal );
+			$selectWrapper.find( 'select option' ).removeAttr( 'selected' );
+			$selectWrapper.find( 'select option[value="'+curVal+'"]' ).attr( 'selected', 'selected' ).change();
+
+		});
+		
+
+
+	} 
+}); 
+
+
+
+$.extend({ 
+	customRadioCheckboxInit:function ( options ) { 
+
+		var settings = $.extend( {
+			'radioWrapper'    : '.custom-radio',
+			'toggle'          : '.custom-toggle',
+			'checkboxWrapper' : '.custom-checkbox'
+		}
+		, options );
+
+		var customRadio        = settings.radioWrapper,
+			customToggle       = settings.toggle,
+			customCheckbox     = settings.checkboxWrapper;
+
+
+		$( customRadio ).find( 'input[type="radio"]' ).each(function() {
+			var dataExist = $( this ).data( 'exist' );
+			if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
+				$( '<span class="custom-radio-trigger"></span>' ).insertAfter( $( this ) );
+				
+				//Prevent the form from being initialized again
+				$( this ).data( 'exist', 1 );	
+			}
+			
+		});
+
+		$( customToggle ).find( 'input[type="checkbox"]' ).each(function() {
+			var dataExist = $( this ).data( 'exist' );
+			if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
+				$( '<span class="custom-toggle-trigger"></span>' ).insertAfter( $( this ) );
+				
+				//Prevent the form from being initialized again
+				$( this ).data( 'exist', 1 );	
+			}
+			
+			
+		});
+
+		$( customCheckbox ).find( 'input[type="checkbox"]' ).each(function() {
+			var dataExist = $( this ).data( 'exist' );
+			if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
+				$( '<span class="custom-checkbox-trigger"></span>' ).insertAfter( $( this ) );
+				
+				//Prevent the form from being initialized again
+				$( this ).data( 'exist', 1 );	
+			}
+			
+			
+		});
+
+
+	} 
+}); 
 
 
 /*!

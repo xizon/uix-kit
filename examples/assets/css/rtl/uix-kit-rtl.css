@@ -11,8 +11,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.71
- * ## Last Update         :  March 6, 2018
+ * ## Version             :  1.1.72
+ * ## Last Update         :  March 7, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -385,6 +385,22 @@ blockquote:before {
         margin-left: 0;
         margin-right: 0;
     }
+}
+
+/* ====================================================== 
+   List of Info
+/* ====================================================== */
+dl.list-info dt {
+    float: right;
+    clear: right;
+    text-align: left;
+}
+
+dl.list-info dd {
+    float: right;
+    text-align: right;
+    padding-left: auto;
+    padding-right: 1rem;
 }
 
 /* ====================================================== 

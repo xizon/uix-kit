@@ -10,14 +10,17 @@ theme = ( function ( theme, $, window, document ) {
     var pageLoaded = function() {
 		
 	
-		$( 'body' ).prepend( '<div class="custom-lightbox-overlay"><div class="lb-container"><div class="html"></div><span class="lb-close"></span><p class="title"></p></div></div>' );
+		if ( $( '.custom-lightbox-overlay' ).length == 0 ) {
+			$( 'body' ).prepend( '<div class="custom-lightbox-overlay"><div class="lb-container"><div class="html"></div><span class="lb-close"></span><p class="title"></p></div></div>' );
+		}
+		
 
 		var	$lbContaner = $( '.lb-container' ),
 			$lbMask     = $( '.custom-lightbox-overlay' ),
-			$lbClose    = $( '.custom-lightbox-overlay .lb-close' ),
+			lbCloseEl   = '.custom-lightbox-overlay .lb-close',
 			$lbContent  = $lbContaner.find( '.html' );
 		
-		$( '.custom-lightbox' ).on( 'click', function() { 
+		$( document ).on( 'click', '.custom-lightbox', function() { 
 
 			var $this       = $( this ),
 				dataPhoto   = $this.data( 'lb-src' ),
@@ -26,8 +29,8 @@ theme = ( function ( theme, $, window, document ) {
 		
 
 			if( typeof dataPhoto != typeof undefined && dataPhoto != '' ) {
+				$( lbCloseEl ).show();
 				$lbMask.show();
-				$lbClose.show();
 				$lbContaner.show();
 				$lbContent.html( '<img src="'+ dataPhoto +'" alt="">' ).promise().done( function(){
 					//Set container width
@@ -45,8 +48,8 @@ theme = ( function ( theme, $, window, document ) {
 			if( typeof dataHtmlID != typeof undefined && dataHtmlID != '' ) {
 				dataHtmlID = dataHtmlID.replace( '#', '' );
 
+				$( lbCloseEl ).show();
 				$lbMask.show();
-				$lbClose.show();
 				$lbContaner.show();
 				$lbContent.html( $( '#' + dataHtmlID ).html() ).promise().done( function(){
 					//Set container width
@@ -65,10 +68,11 @@ theme = ( function ( theme, $, window, document ) {
 
 		});
 
-		$lbClose.on( 'click', function() {
+		$( document ).on( 'click', lbCloseEl, function() {
 		      $lbMask.hide();
 		});
 
+		
 		
     };
 

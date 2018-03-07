@@ -78,8 +78,12 @@ theme = ( function ( theme, $, window, document ) {
 			
 			
 			if( typeof pushContainer === typeof undefined ) {
-				$( '#' + template7ID ).after( '<div class="portfolio-items-ajax-container"></div>' );
 				pushContainer = '.portfolio-items-ajax-container';
+				
+				if ( $this.find( pushContainer ).length == 0 ) {
+					$( '#' + template7ID ).after( '<div class="portfolio-items-ajax-container"></div>' );
+				}
+				
 			}		
 			
 			
