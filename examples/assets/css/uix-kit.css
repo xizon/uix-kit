@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.73
- * ## Last Update         :  March 8, 2018
+ * ## Version             :  1.1.75
+ * ## Last Update         :  March 9, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -16,6 +16,71 @@
  * ## Compatible Browsers :  IE9, IE10, IE11, Firefox, Safari, Opera, Chrome, Edge
  * ## Released under the MIT license.
  */
+
+/* ====================================================== 
+   Accordion 
+/* ====================================================== */
+.custom-accordion dl {
+    position: relative;
+    background: white;
+    transition: .1s ease-in-out;
+  /* Actived status */;
+}
+
+.custom-accordion dl::before {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    box-shadow: 0 -1px 0 #e5e5e5, 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.24);
+}
+
+.custom-accordion dl.active {
+    height: auto;
+    margin: 1rem 0;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.16), 0 6px 12px rgba(0, 0, 0, 0.32);
+}
+
+.custom-accordion dl.active dt {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.18);
+}
+
+.custom-accordion dl dt:before {
+    position: absolute;
+    display: block;
+    font-family: 'FontAwesome';
+    content: "\f105";
+    font-size: 18pt;
+    right: 1rem;
+    top: .5rem;
+    transition: .1s ease-in-out;
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.custom-accordion dl.active dt:before {
+    transform: rotate(90deg);
+}
+
+.custom-accordion dt {
+    padding: 1rem;
+    -webkit-touch-callout: none;
+    user-select: none;
+}
+
+.custom-accordion dt a {
+    display: block;
+}
+
+.custom-accordion dd {
+    width: calc(100% - 2rem);
+    padding: 1rem;
+    font-size: 0.875rem;
+    display: none;
+}
 
 /*
 	
@@ -2743,71 +2808,6 @@ ul.entry-meta {
     .web-video-background-container {
         height: auto;
     }
-}
-
-/* ====================================================== 
-   Accordion 
-/* ====================================================== */
-.custom-accordion dl {
-    position: relative;
-    background: white;
-    transition: .1s ease-in-out;
-  /* Actived status */;
-}
-
-.custom-accordion dl::before {
-    content: '';
-    position: absolute;
-    display: block;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    pointer-events: none;
-    box-shadow: 0 -1px 0 #e5e5e5, 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.24);
-}
-
-.custom-accordion dl.active {
-    height: auto;
-    margin: 1rem 0;
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.16), 0 6px 12px rgba(0, 0, 0, 0.32);
-}
-
-.custom-accordion dl.active dt {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.18);
-}
-
-.custom-accordion dl dt:before {
-    position: absolute;
-    display: block;
-    font-family: 'FontAwesome';
-    content: "\f105";
-    font-size: 18pt;
-    right: 1rem;
-    top: .5rem;
-    transition: .1s ease-in-out;
-    color: rgba(0, 0, 0, 0.54);
-}
-
-.custom-accordion dl.active dt:before {
-    transform: rotate(90deg);
-}
-
-.custom-accordion dt {
-    padding: 1rem;
-    -webkit-touch-callout: none;
-    user-select: none;
-}
-
-.custom-accordion dt a {
-    display: block;
-}
-
-.custom-accordion dd {
-    width: calc(100% - 2rem);
-    padding: 1rem;
-    font-size: 0.875rem;
-    display: none;
 }
 
 /* ====================================================== 
@@ -7603,6 +7603,29 @@ dl.list-info:after {
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
 }
 
+.custom-lightbox-overlay .lb-container .html::before, .custom-lightbox-overlay .lb-container .html::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 25px;
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    background: #fff;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.custom-lightbox-overlay .lb-container .html::after {
+    top: auto;
+    bottom: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
 .custom-lightbox-overlay .lb-container .html.no-img {
     background: #fff;
     border-radius: 3px;
@@ -7612,6 +7635,7 @@ dl.list-info:after {
     position: relative;
   /* Required Width */
     width: 600px;
+    word-wrap: break-word;
     max-height: 60vh;
     overflow-y: auto;
     text-align: left;
@@ -7638,10 +7662,14 @@ dl.list-info:after {
     background-color: #fff;
 }
 
-.custom-lightbox-overlay .lb-container img {
+.custom-lightbox-overlay .lb-container .html > img {
     border-radius: 3px;
     max-width: 100%;
     width: auto;
+}
+
+.custom-lightbox-overlay .lb-container.pure-image .html::before, .custom-lightbox-overlay .lb-container.pure-image .html::after {
+    display: none;
 }
 
 .custom-lightbox-overlay .lb-close {
@@ -7683,6 +7711,19 @@ dl.list-info:after {
     padding-bottom: 5rem;
 }
 
+.custom-lightbox-overlay.no-fixed .lb-container .html::after {
+    bottom: 5rem;
+}
+
+.custom-lightbox-overlay.no-fixed .lb-container.custom {
+    max-width: 1200px;
+}
+
+.custom-lightbox-overlay.no-fixed .lb-container.custom .html > .lb-box {
+    width: 1000px;
+    max-height: none;
+}
+
 @media all and (max-width: 768px) {
     .custom-lightbox-overlay .lb-container {
         max-width: calc(100% - 30px);
@@ -7696,6 +7737,14 @@ dl.list-info:after {
     .custom-lightbox-overlay .lb-close {
         right: -5px;
         top: -30px;
+    }
+
+    .custom-lightbox-overlay.no-fixed {
+        top: 10px;
+    }
+
+    .custom-lightbox-overlay.no-fixed .lb-container.custom .html > .lb-box {
+        width: auto;
     }
 }
 

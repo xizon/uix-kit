@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.73
- * ## Last Update         :  March 8, 2018
+ * ## Version             :  1.1.75
+ * ## Last Update         :  March 9, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -4420,7 +4420,10 @@ theme = ( function ( theme, $, window, document ) {
 							
 							
 							//--------- Init Videos
-							documentReady[4]($);
+							theme.videos.documentReady($);
+							
+							//--------- Init Custom Lightbox
+							theme.customLightbox.pageLoaded();
 
 
 							//--------- Remove this button
@@ -6065,15 +6068,25 @@ theme = ( function ( theme, $, window, document ) {
 			}
 			if( typeof dataMaskClose === typeof undefined ) {
 				dataMaskClose = false;
-			}		
+			}	
 			
+			//Reset the wrapper position
+			$lbWrapper.css( 'margin-top', 0 );	
+			
+
 			if ( !dataFixed ) {
 				$lbWrapper.addClass( 'no-fixed' );
 				$( lbCloseEl ).addClass( 'no-fixed' );
 				$( lbCloseFixedEl ).addClass( 'active' );
+				
+				//Initialize the wrapper position
+				$lbWrapper.css( 'margin-top', $( window ).scrollTop() + 'px' );	
+				
 			}
 			
 			
+			//Reset current container type
+			$lbCon.removeClass( 'custom pure-image' );
 			
 
 			if( typeof dataPhoto != typeof undefined && dataPhoto != '' ) {
@@ -6082,6 +6095,10 @@ theme = ( function ( theme, $, window, document ) {
 				$lbMask.show();
 				$lbCon.show();
 				$lbContent.html( '<img src="'+ dataPhoto +'" alt="">' ).promise().done( function(){
+					
+					//Set current container type
+					$lbCon.addClass( 'pure-image' );
+					
 					//Set container width
 					var img = new Image();
 					img.onload = function() {
@@ -6102,6 +6119,10 @@ theme = ( function ( theme, $, window, document ) {
 				$lbMask.show();
 				$lbCon.show();
 				$lbContent.html( $( '#' + dataHtmlID ).html() ).promise().done( function(){
+					
+					//Set current container type
+					$lbCon.addClass( 'custom' );
+					
 					//Set container width
 					if ( $lbCon.find( '> .html .lb-box' ).length > 0 ) {
 						$lbCon.css( 'width', $lbCon.find( '> .html .lb-box' ).width() + 'px' );
@@ -6131,6 +6152,10 @@ theme = ( function ( theme, $, window, document ) {
 			$lbWrapper.removeClass( 'no-fixed' );
 			$( lbCloseEl ).removeClass( 'no-fixed' );
 			$( lbCloseFixedEl ).removeClass( 'active' );
+			
+			//Reset current container type
+			$lbCon.removeClass( 'custom pure-image' );
+			
 			
 			//close windows
 			$lbWrapper.hide();
@@ -7855,8 +7880,6 @@ theme = ( function ( theme, $, window, document ) {
 		
 		
 		function applyOriginalScripts() {
-			var pageLoaded    = theme.components.pageLoaded,
-				documentReady = theme.components.documentReady;
 			
 			theme.rowFullheight.pageLoaded(); //Multiple columns full height for Bootstrap 3.x
 			theme.accordion.documentReady($); //Accordion

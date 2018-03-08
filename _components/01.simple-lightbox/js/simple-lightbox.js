@@ -36,15 +36,25 @@ theme = ( function ( theme, $, window, document ) {
 			}
 			if( typeof dataMaskClose === typeof undefined ) {
 				dataMaskClose = false;
-			}		
+			}	
 			
+			//Reset the wrapper position
+			$lbWrapper.css( 'margin-top', 0 );	
+			
+
 			if ( !dataFixed ) {
 				$lbWrapper.addClass( 'no-fixed' );
 				$( lbCloseEl ).addClass( 'no-fixed' );
 				$( lbCloseFixedEl ).addClass( 'active' );
+				
+				//Initialize the wrapper position
+				$lbWrapper.css( 'margin-top', $( window ).scrollTop() + 'px' );	
+				
 			}
 			
 			
+			//Reset current container type
+			$lbCon.removeClass( 'custom pure-image' );
 			
 
 			if( typeof dataPhoto != typeof undefined && dataPhoto != '' ) {
@@ -53,6 +63,10 @@ theme = ( function ( theme, $, window, document ) {
 				$lbMask.show();
 				$lbCon.show();
 				$lbContent.html( '<img src="'+ dataPhoto +'" alt="">' ).promise().done( function(){
+					
+					//Set current container type
+					$lbCon.addClass( 'pure-image' );
+					
 					//Set container width
 					var img = new Image();
 					img.onload = function() {
@@ -73,6 +87,10 @@ theme = ( function ( theme, $, window, document ) {
 				$lbMask.show();
 				$lbCon.show();
 				$lbContent.html( $( '#' + dataHtmlID ).html() ).promise().done( function(){
+					
+					//Set current container type
+					$lbCon.addClass( 'custom' );
+					
 					//Set container width
 					if ( $lbCon.find( '> .html .lb-box' ).length > 0 ) {
 						$lbCon.css( 'width', $lbCon.find( '> .html .lb-box' ).width() + 'px' );
@@ -102,6 +120,10 @@ theme = ( function ( theme, $, window, document ) {
 			$lbWrapper.removeClass( 'no-fixed' );
 			$( lbCloseEl ).removeClass( 'no-fixed' );
 			$( lbCloseFixedEl ).removeClass( 'active' );
+			
+			//Reset current container type
+			$lbCon.removeClass( 'custom pure-image' );
+			
 			
 			//close windows
 			$lbWrapper.hide();

@@ -19,8 +19,6 @@ theme = ( function ( theme, $, window, document ) {
 		
 		
 		function applyOriginalScripts() {
-			var pageLoaded    = theme.components.pageLoaded,
-				documentReady = theme.components.documentReady;
 			
 			theme.rowFullheight.pageLoaded(); //Multiple columns full height for Bootstrap 3.x
 			theme.accordion.documentReady($); //Accordion

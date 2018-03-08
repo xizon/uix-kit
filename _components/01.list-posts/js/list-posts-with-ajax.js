@@ -283,7 +283,10 @@ theme = ( function ( theme, $, window, document ) {
 							
 							
 							//--------- Init Videos
-							documentReady[4]($);
+							theme.videos.documentReady($);
+							
+							//--------- Init Custom Lightbox
+							theme.customLightbox.pageLoaded();
 
 
 							//--------- Remove this button

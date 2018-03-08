@@ -2,9 +2,9 @@
 
 
 
-#### = 1.1.74 (March 8, 2018) =
+#### = 1.1.75 (March 8, 2018) =
 
-* Tweak: Extend the module "Simple Lightbox" events.
+* Tweak: Extend and resolve the module "Simple Lightbox" events.
 
 
 #### = 1.1.73 (March 7, 2018) =
