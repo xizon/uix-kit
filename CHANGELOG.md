@@ -1,6 +1,12 @@
 # Changelog
 
 
+
+#### = 1.1.74 (March 8, 2018) =
+
+* Tweak: Extend the module "Simple Lightbox" events.
+
+
 #### = 1.1.73 (March 7, 2018) =
 
 * Fix: Fixed some issues with custom forms' asynchronous events.

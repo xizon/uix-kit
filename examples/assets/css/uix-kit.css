@@ -8,7 +8,7 @@
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
  * ## Version             :  1.1.73
- * ## Last Update         :  March 7, 2018
+ * ## Last Update         :  March 8, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -7541,15 +7541,51 @@ dl.list-info:after {
     display: none;
 }
 
-.custom-lightbox-overlay {
+.custom-lightbox-overlay-mask {
     display: none;
     position: fixed;
-    z-index: 99998;
+    z-index: 99997;
     background: rgba(0, 0, 0, 0.6);
     top: 0;
     width: 100%;
     height: 100%;
     margin: 0;
+}
+
+.custom-lightbox-close-fixed {
+    display: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    text-align: center;
+    line-height: 34px;
+    overflow: hidden;
+    position: fixed;
+    z-index: 99999;
+    top: 25px;
+    right: 25px;
+    transform: rotate(45deg);
+    cursor: pointer;
+}
+
+.custom-lightbox-close-fixed.active {
+    display: block;
+}
+
+.custom-lightbox-close-fixed:after {
+    font-family: 'FontAwesome';
+    content: "\f067";
+    color: #fff;
+    font-size: 2rem;
+}
+
+.custom-lightbox-overlay {
+    display: none;
+    position: fixed;
+    z-index: 99998;
+    top: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .custom-lightbox-overlay .lb-container {
@@ -7625,11 +7661,26 @@ dl.list-info:after {
     cursor: pointer;
 }
 
+.custom-lightbox-overlay .lb-close.no-fixed {
+    visibility: hidden;
+}
+
 .custom-lightbox-overlay .lb-close:after {
     font-family: 'FontAwesome';
     content: "\f067";
     color: #fff;
     font-size: 2rem;
+}
+
+.custom-lightbox-overlay.no-fixed {
+    position: absolute;
+    top: 100px;
+}
+
+.custom-lightbox-overlay.no-fixed .lb-container {
+    top: 0;
+    transform: translateY(0);
+    padding-bottom: 5rem;
 }
 
 @media all and (max-width: 768px) {

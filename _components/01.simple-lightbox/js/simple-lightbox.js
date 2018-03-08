@@ -11,35 +11,55 @@ theme = ( function ( theme, $, window, document ) {
 		
 	
 		if ( $( '.custom-lightbox-overlay' ).length == 0 ) {
-			$( 'body' ).prepend( '<div class="custom-lightbox-overlay"><div class="lb-container"><div class="html"></div><span class="lb-close"></span><p class="title"></p></div></div>' );
+			$( 'body' ).prepend( '<div class="custom-lightbox-overlay"><div class="lb-container"><div class="html"></div><span class="lb-close"></span><p class="title"></p></div></div><div class="custom-lightbox-overlay-mask"></div><div class="custom-lightbox-close-fixed"></div>' );
 		}
 		
 
-		var	$lbContaner = $( '.lb-container' ),
-			$lbMask     = $( '.custom-lightbox-overlay' ),
-			lbCloseEl   = '.custom-lightbox-overlay .lb-close',
-			$lbContent  = $lbContaner.find( '.html' );
+		var	$lbCon          = $( '.lb-container' ),
+			$lbWrapper      = $( '.custom-lightbox-overlay' ),
+			$lbMask         = $( '.custom-lightbox-overlay-mask' ),
+			lbCloseEl       = '.custom-lightbox-overlay .lb-close',
+			lbCloseFixedEl  = '.custom-lightbox-close-fixed',
+			$lbContent      = $lbCon.find( '.html' );
 		
 		$( document ).on( 'click', '.custom-lightbox', function() { 
 
-			var $this       = $( this ),
-				dataPhoto   = $this.data( 'lb-src' ),
-				dataHtmlID  = $this.data( 'lb-html' );
+			var $this         = $( this ),
+				dataPhoto     = $this.data( 'lb-src' ),
+				dataHtmlID    = $this.data( 'lb-html' ),
+				dataFixed     = $this.data( 'lb-fixed' ),
+				dataMaskClose = $this.data( 'lb-mask-close' );
 			
 		
+			if( typeof dataFixed === typeof undefined ) {
+				dataFixed = true;
+			}
+			if( typeof dataMaskClose === typeof undefined ) {
+				dataMaskClose = false;
+			}		
+			
+			if ( !dataFixed ) {
+				$lbWrapper.addClass( 'no-fixed' );
+				$( lbCloseEl ).addClass( 'no-fixed' );
+				$( lbCloseFixedEl ).addClass( 'active' );
+			}
+			
+			
+			
 
 			if( typeof dataPhoto != typeof undefined && dataPhoto != '' ) {
 				$( lbCloseEl ).show();
+				$lbWrapper.show();
 				$lbMask.show();
-				$lbContaner.show();
+				$lbCon.show();
 				$lbContent.html( '<img src="'+ dataPhoto +'" alt="">' ).promise().done( function(){
 					//Set container width
 					var img = new Image();
 					img.onload = function() {
-						$lbContaner.css( 'width', this.width + 'px' );
+						$lbCon.css( 'width', this.width + 'px' );
 					}
 					img.src = dataPhoto;
-					$lbContaner.find( '> .html' ).removeClass( 'no-img' );
+					$lbCon.find( '> .html' ).removeClass( 'no-img' );
 					
 				});
 				
@@ -49,13 +69,14 @@ theme = ( function ( theme, $, window, document ) {
 				dataHtmlID = dataHtmlID.replace( '#', '' );
 
 				$( lbCloseEl ).show();
+				$lbWrapper.show();
 				$lbMask.show();
-				$lbContaner.show();
+				$lbCon.show();
 				$lbContent.html( $( '#' + dataHtmlID ).html() ).promise().done( function(){
 					//Set container width
-					if ( $lbContaner.find( '> .html .lb-box' ).length > 0 ) {
-						$lbContaner.css( 'width', $lbContaner.find( '> .html .lb-box' ).width() + 'px' );
-						$lbContaner.find( '> .html' ).addClass( 'no-img' );
+					if ( $lbCon.find( '> .html .lb-box' ).length > 0 ) {
+						$lbCon.css( 'width', $lbCon.find( '> .html .lb-box' ).width() + 'px' );
+						$lbCon.find( '> .html' ).addClass( 'no-img' );
 						
 					}
 
@@ -69,9 +90,24 @@ theme = ( function ( theme, $, window, document ) {
 		});
 
 		$( document ).on( 'click', lbCloseEl, function() {
-		      $lbMask.hide();
+			customLBCloseEvent();
 		});
 
+		$( document ).on( 'click', lbCloseFixedEl, function() {
+			customLBCloseEvent();
+		});	
+		
+		function customLBCloseEvent() {
+			//Remove all dynamic classes
+			$lbWrapper.removeClass( 'no-fixed' );
+			$( lbCloseEl ).removeClass( 'no-fixed' );
+			$( lbCloseFixedEl ).removeClass( 'active' );
+			
+			//close windows
+			$lbWrapper.hide();
+			$lbMask.hide();
+		}
+		
 		
 		
     };

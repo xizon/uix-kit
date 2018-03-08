@@ -10,15 +10,53 @@ $custom-lightbox-radius: 3px;
 	display: none;
 }
 
-.custom-lightbox-overlay {
+.custom-lightbox-overlay-mask {
 	display: none;
 	position: fixed;
-	z-index: 99998;
+	z-index: 99997;
 	background: rgba(0,0,0,.6);
 	top: 0;
 	width: 100%;
 	height: 100%; 
 	margin: 0;
+}
+
+.custom-lightbox-close-fixed {
+	display: none;
+	border-radius: 50%;
+	width: 36px;
+	height: 36px;
+	text-align: center;
+	line-height: 34px;
+	overflow: hidden;
+	position: fixed;
+	z-index: 99999;
+	top: 25px;
+	right: 25px;
+	transform: rotate(45deg);
+	cursor: pointer;
+	
+	&.active {
+		display: block;
+	}
+
+
+	&:after {
+		font-family: 'FontAwesome';
+		content: "\f067";
+		color: #fff;
+		font-size: 2rem;
+	}	
+}
+
+.custom-lightbox-overlay {
+	display: none;
+	position: fixed;
+	z-index: 99998;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	
 
 	.lb-container {
 		
@@ -29,6 +67,7 @@ $custom-lightbox-radius: 3px;
 		top: 50%;
 		transform: translateY(-50%);
 		text-align: center;
+		
 		
 		
 		.html {
@@ -107,6 +146,11 @@ $custom-lightbox-radius: 3px;
 		transform: rotate(45deg);
 		cursor: pointer;
 
+		
+		&.no-fixed {
+			visibility: hidden;
+		}
+		
 		&:after {
 			font-family: 'FontAwesome';
 			content: "\f067";
@@ -114,6 +158,20 @@ $custom-lightbox-radius: 3px;
 			font-size: 2rem;
 		}	
 	}
+	
+	
+	&.no-fixed {
+		position: absolute;
+		top: 100px;
+		
+		
+		.lb-container {
+			top: 0;
+			transform: translateY(0);
+			padding-bottom: 5rem;
+		}
+	}
+	
 }
 
 @media all and (max-width: 768px) {
