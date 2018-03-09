@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.75
+ * ## Version             :  1.1.76
  * ## Last Update         :  March 9, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -16,71 +16,6 @@
  * ## Compatible Browsers :  IE9, IE10, IE11, Firefox, Safari, Opera, Chrome, Edge
  * ## Released under the MIT license.
  */
-
-/* ====================================================== 
-   Accordion 
-/* ====================================================== */
-.custom-accordion dl {
-    position: relative;
-    background: white;
-    transition: .1s ease-in-out;
-  /* Actived status */;
-}
-
-.custom-accordion dl::before {
-    content: '';
-    position: absolute;
-    display: block;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    pointer-events: none;
-    box-shadow: 0 -1px 0 #e5e5e5, 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.24);
-}
-
-.custom-accordion dl.active {
-    height: auto;
-    margin: 1rem 0;
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.16), 0 6px 12px rgba(0, 0, 0, 0.32);
-}
-
-.custom-accordion dl.active dt {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.18);
-}
-
-.custom-accordion dl dt:before {
-    position: absolute;
-    display: block;
-    font-family: 'FontAwesome';
-    content: "\f105";
-    font-size: 18pt;
-    right: 1rem;
-    top: .5rem;
-    transition: .1s ease-in-out;
-    color: rgba(0, 0, 0, 0.54);
-}
-
-.custom-accordion dl.active dt:before {
-    transform: rotate(90deg);
-}
-
-.custom-accordion dt {
-    padding: 1rem;
-    -webkit-touch-callout: none;
-    user-select: none;
-}
-
-.custom-accordion dt a {
-    display: block;
-}
-
-.custom-accordion dd {
-    width: calc(100% - 2rem);
-    padding: 1rem;
-    font-size: 0.875rem;
-    display: none;
-}
 
 /*
 	
@@ -2808,6 +2743,71 @@ ul.entry-meta {
     .web-video-background-container {
         height: auto;
     }
+}
+
+/* ====================================================== 
+   Accordion 
+/* ====================================================== */
+.custom-accordion dl {
+    position: relative;
+    background: white;
+    transition: .1s ease-in-out;
+  /* Actived status */;
+}
+
+.custom-accordion dl::before {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    box-shadow: 0 -1px 0 #e5e5e5, 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.24);
+}
+
+.custom-accordion dl.active {
+    height: auto;
+    margin: 1rem 0;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.16), 0 6px 12px rgba(0, 0, 0, 0.32);
+}
+
+.custom-accordion dl.active dt {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.18);
+}
+
+.custom-accordion dl dt:before {
+    position: absolute;
+    display: block;
+    font-family: 'FontAwesome';
+    content: "\f105";
+    font-size: 18pt;
+    right: 1rem;
+    top: .5rem;
+    transition: .1s ease-in-out;
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.custom-accordion dl.active dt:before {
+    transform: rotate(90deg);
+}
+
+.custom-accordion dt {
+    padding: 1rem;
+    -webkit-touch-callout: none;
+    user-select: none;
+}
+
+.custom-accordion dt a {
+    display: block;
+}
+
+.custom-accordion dd {
+    width: calc(100% - 2rem);
+    padding: 1rem;
+    font-size: 0.875rem;
+    display: none;
 }
 
 /* ====================================================== 

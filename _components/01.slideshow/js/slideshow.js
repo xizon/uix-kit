@@ -566,6 +566,13 @@ theme = ( function ( theme, $, window, document ) {
 				dataArrows   = $this.data( 'arrows' ),
 				dataAuto     = $this.data( 'auto' );
 			
+			
+			var customComID  = $this.data( 'mycontrols' );
+			if( typeof customComID === typeof undefined ) customComID = '';
+
+					
+			
+			
 			// If there is no data-xxx, save current source to it
 			if( typeof dataSpeed === typeof undefined ) dataSpeed = 600;
 			if( typeof dataTiming === typeof undefined ) dataTiming = 10000;
@@ -601,8 +608,8 @@ theme = ( function ( theme, $, window, document ) {
 				directionNav      : dataArrows,
 				start             : initslides, //Fires when the slider loads the first slide
 				after             : initslides, //Fires after each slider animation completes.
-				controlsContainer : $( '.custom-controls-container' ),
-				customDirectionNav: $( '.custom-navigation a' )
+				controlsContainer : $( '.custom-controls-container' + customComID ),
+				customDirectionNav: $( '.custom-navigation'+customComID+' a' )
 			});
 		
 

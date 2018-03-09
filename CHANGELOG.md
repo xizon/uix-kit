@@ -1,5 +1,9 @@
 # Changelog
 
+#### = 1.1.76 (March 9, 2018) =
+
+* Tweak: Added flexible selector for custom controls for flexslider.
+
 
 
 #### = 1.1.75 (March 8, 2018) =

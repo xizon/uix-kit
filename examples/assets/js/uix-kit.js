@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.75
+ * ## Version             :  1.1.76
  * ## Last Update         :  March 9, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -6745,6 +6745,13 @@ theme = ( function ( theme, $, window, document ) {
 				dataArrows   = $this.data( 'arrows' ),
 				dataAuto     = $this.data( 'auto' );
 			
+			
+			var customComID  = $this.data( 'mycontrols' );
+			if( typeof customComID === typeof undefined ) customComID = '';
+
+					
+			
+			
 			// If there is no data-xxx, save current source to it
 			if( typeof dataSpeed === typeof undefined ) dataSpeed = 600;
 			if( typeof dataTiming === typeof undefined ) dataTiming = 10000;
@@ -6780,8 +6787,8 @@ theme = ( function ( theme, $, window, document ) {
 				directionNav      : dataArrows,
 				start             : initslides, //Fires when the slider loads the first slide
 				after             : initslides, //Fires after each slider animation completes.
-				controlsContainer : $( '.custom-controls-container' ),
-				customDirectionNav: $( '.custom-navigation a' )
+				controlsContainer : $( '.custom-controls-container' + customComID ),
+				customDirectionNav: $( '.custom-navigation'+customComID+' a' )
 			});
 		
 
