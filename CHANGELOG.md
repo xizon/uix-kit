@@ -1,5 +1,13 @@
 # Changelog
 
+#### = 1.1.77 (March 15, 2018) =
+
+* Tweak: Refactored the "Form Progress" interaction code.
+* Tweak: Other small details optimization.
+
+
+
+
 #### = 1.1.76 (March 9, 2018) =
 
 * Tweak: Added flexible selector for custom controls for flexslider.
