@@ -1,19 +1,10 @@
 /* ====================================================== 
-   List of Info
+   Bulleted List
 /* ====================================================== */
-dl.list-side-by-side {
-
-	dt {
-		float: right;
-		clear: right;
-		text-align: left;
-	}
+.list-bullet {
 	
-	dd {
-		float: right;
-		text-align: right;
-		padding-left: auto;
-		padding-right: 1rem;
+	i {
+		margin-right: auto;
+		margin-left: .5rem;
 	}
-	
 }
