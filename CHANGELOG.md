@@ -1,5 +1,11 @@
 # Changelog
 
+#### = 1.1.78 (March 19, 2018) =
+
+* Tweak: Optimized event of module "Mousewheel Interaction".
+* New: Add a new module "Bulleted List".
+
+
 #### = 1.1.77 (March 15, 2018) =
 
 * Tweak: Refactored the "Form Progress" interaction code.
@@ -24,7 +30,7 @@
 * Fix: Fixed some issues with custom forms' asynchronous events.
 * Tweak: Modify the definition of custom functions from some module.
 * Tweak: Change the push mode of each module script to two-dimensional in order to call name with ajax.
-* New: Add a new module "List of Info".
+* New: Add a new module "Side by Side List".
 
 
 

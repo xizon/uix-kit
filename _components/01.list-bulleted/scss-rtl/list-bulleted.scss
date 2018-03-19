@@ -1,0 +1,19 @@
+/* ====================================================== 
+   List of Info
+/* ====================================================== */
+dl.list-side-by-side {
+
+	dt {
+		float: right;
+		clear: right;
+		text-align: left;
+	}
+	
+	dd {
+		float: right;
+		text-align: right;
+		padding-left: auto;
+		padding-right: 1rem;
+	}
+	
+}

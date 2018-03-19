@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.77
- * ## Last Update         :  March 15, 2018
+ * ## Version             :  1.1.78
+ * ## Last Update         :  March 19, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -4096,10 +4096,7 @@ $.extend({
 		}
 
 		// Set progress bar value
-		$.formProgressReset({
-			'selector' : '.custom-form-progress .line span',
-			'value'    : value,	
-		});
+		$( '.custom-form-progress .line span' ).css( 'width', value + '%' );
 
 
 		//Scroll Top
@@ -4112,27 +4109,6 @@ $.extend({
 	} 
 }); 
 
-/*
- * Set progress bar to the next value
- *
- * @param  {number} val             - The target value.
- * @return {void}                   - The constructor.
- */
-$.extend({ 
-	formProgressReset:function ( options ) { 
-
-		var settings = $.extend( {
-			'selector' : '.custom-form-progress .line span',
-			'value'    : 0,
-			
-		}
-		, options );
-
-
-		$( settings.selector ).css( 'width', settings.value + '%' );
-
-	} 
-}); 
 	
 
 
@@ -4247,6 +4223,40 @@ theme = ( function ( theme, $, window, document ) {
  *************************************
  */
 
+
+
+/*! 
+ *************************************
+ * Bulleted List
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ) {
+		
+
+		// Icon bulleted lists
+		$( '[data-list-bullet]' ).each( function() {
+			var bullet = $( this ).attr( 'data-list-bullet' );
+			$( this ).find( 'li' ).prepend( '<i class="'+bullet+'" aria-hidden="true"></i>' );
+		});
+
+		
+	
+		
+	};
+	
+		
+    theme.bulletedList = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
 
 
 /*! 
@@ -4950,55 +4960,61 @@ theme = ( function ( theme, $, window, document ) {
    
     var documentReady = function( $ ){
 		
+		
+		//Prevent this module from loading in other pages
+		if ( !$( 'body' ).hasClass( 'page-mousewheel-eff' ) ) return false;
+		
+		
 	    //Determine the direction of a jQuery scroll event
 		//Fix an issue for mousewheel event is too fast.
-		var oldDate       = new Date(),
-			scrollCount   = 0;
+		var mousewheelTrigger = true,
+			scrollCount       = 0;
 		
 		$( window ).on( 'mousewheel', function( event ) { 
-			customMouseHandle( event ); 
-		});
 
-		function customMouseHandle( event ) {
-			var newDate       = new Date(),
-				scrollAllowed = true,
-				wheel,
-				scrollPos;
+			if ( mousewheelTrigger ) {
 
-		
-
-			if( wheel < 10 && ( newDate.getTime() - oldDate.getTime() ) < 50 ) {
-				scrollPos -= event.deltaY*(10-wheel);
-				wheel++;
-			} else {
-				if( ( newDate.getTime() - oldDate.getTime() ) > 50 ) {
-					wheel = 0;
-					scrollPos -= event.deltaY*30;
-				}
-				else {
-					scrollAllowed = false;
-				}
-			}
-
-			oldDate = new Date();
-
-			if( scrollAllowed ) {
-				
-				scrollCount++;
-				// do your stuff here
-				if( event.originalEvent.wheelDelta > 0 ) {
-					//Up
-					$( '#demo-mousewheel-interaction-status' ).text( 'Direction: up, Total: ' + scrollCount );
-
-
-				} else {
-					//Down
+				if( event.originalEvent.wheelDelta < 0) {
+					//scroll down
 					$( '#demo-mousewheel-interaction-status' ).text( 'Direction: down, Total: ' + scrollCount );
 
-				}
-				
-				
+					scrollCount++;
+					
+					//Prohibited scrolling trigger
+					mousewheelTrigger = false;
+					
+					//Do something
+					customMouseHandle();		
+					
+
+				} else {
+					//scroll up
+					$( '#demo-mousewheel-interaction-status' ).text( 'Direction: up, Total: ' + scrollCount );
+
+					scrollCount++;
+					
+					//Prohibited scrolling trigger
+					mousewheelTrigger = false;
+					
+					//Do something
+					customMouseHandle();
+
+				}	
+
 			}
+
+		});
+	
+		
+		
+
+		function customMouseHandle() {
+			
+			//Reset scrolling trigger
+			setTimeout( function() {
+				mousewheelTrigger = true;	
+			}, 1500 );
+			
 			
 		}
 

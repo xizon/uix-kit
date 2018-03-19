@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.77
- * ## Last Update         :  March 15, 2018
+ * ## Version             :  1.1.78
+ * ## Last Update         :  March 19, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -4443,37 +4443,10 @@ ul.entry-meta {
    Custom Core Scripts & Stylesheets
 /* ====================================================== */
 /* ====================================================== 
-   List of Info
+   Bulleted List
 /* ====================================================== */
-dl.list-info {
-    width: 100%;
-  /* adjust the width; make sure the total of both is 100% */
-    font-size: 0.875rem;
-}
-
-dl.list-info dt {
-    float: left;
-    clear: left;
-    width: 100px;
-    padding: 5px 0;
-    margin: 0;
-    font-weight: 600;
-    text-align: right;
-}
-
-dl.list-info dd {
-    float: left;
-    width: calc(100% - 100px);
-    padding: 5px 0;
-    margin: 0;
-    text-align: left;
-    padding-left: 1rem;
-}
-
-dl.list-info:after {
-    content: '';
-    display: table;
-    clear: both;
+.list-bullet i {
+    margin-right: .5rem;
 }
 
 /* ====================================================== 
@@ -4676,6 +4649,40 @@ dl.list-info:after {
     .list-split-container .list-split-item .list-split-item-info > div {
         padding: 0;
     }
+}
+
+/* ====================================================== 
+   Side by Side List
+/* ====================================================== */
+dl.list-side-by-side {
+    width: 100%;
+  /* adjust the width; make sure the total of both is 100% */
+    font-size: 0.875rem;
+}
+
+dl.list-side-by-side dt {
+    float: left;
+    clear: left;
+    width: 100px;
+    padding: 5px 0;
+    margin: 0;
+    font-weight: 600;
+    text-align: right;
+}
+
+dl.list-side-by-side dd {
+    float: left;
+    width: calc(100% - 100px);
+    padding: 5px 0;
+    margin: 0;
+    text-align: left;
+    padding-left: 1rem;
+}
+
+dl.list-side-by-side:after {
+    content: '';
+    display: table;
+    clear: both;
 }
 
 /* ====================================================== 

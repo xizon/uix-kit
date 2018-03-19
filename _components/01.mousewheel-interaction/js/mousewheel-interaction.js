@@ -10,55 +10,61 @@ theme = ( function ( theme, $, window, document ) {
    
     var documentReady = function( $ ){
 		
+		
+		//Prevent this module from loading in other pages
+		if ( !$( 'body' ).hasClass( 'page-mousewheel-eff' ) ) return false;
+		
+		
 	    //Determine the direction of a jQuery scroll event
 		//Fix an issue for mousewheel event is too fast.
-		var oldDate       = new Date(),
-			scrollCount   = 0;
+		var mousewheelTrigger = true,
+			scrollCount       = 0;
 		
 		$( window ).on( 'mousewheel', function( event ) { 
-			customMouseHandle( event ); 
-		});
 
-		function customMouseHandle( event ) {
-			var newDate       = new Date(),
-				scrollAllowed = true,
-				wheel,
-				scrollPos;
+			if ( mousewheelTrigger ) {
 
-		
-
-			if( wheel < 10 && ( newDate.getTime() - oldDate.getTime() ) < 50 ) {
-				scrollPos -= event.deltaY*(10-wheel);
-				wheel++;
-			} else {
-				if( ( newDate.getTime() - oldDate.getTime() ) > 50 ) {
-					wheel = 0;
-					scrollPos -= event.deltaY*30;
-				}
-				else {
-					scrollAllowed = false;
-				}
-			}
-
-			oldDate = new Date();
-
-			if( scrollAllowed ) {
-				
-				scrollCount++;
-				// do your stuff here
-				if( event.originalEvent.wheelDelta > 0 ) {
-					//Up
-					$( '#demo-mousewheel-interaction-status' ).text( 'Direction: up, Total: ' + scrollCount );
-
-
-				} else {
-					//Down
+				if( event.originalEvent.wheelDelta < 0) {
+					//scroll down
 					$( '#demo-mousewheel-interaction-status' ).text( 'Direction: down, Total: ' + scrollCount );
 
-				}
-				
-				
+					scrollCount++;
+					
+					//Prohibited scrolling trigger
+					mousewheelTrigger = false;
+					
+					//Do something
+					customMouseHandle();		
+					
+
+				} else {
+					//scroll up
+					$( '#demo-mousewheel-interaction-status' ).text( 'Direction: up, Total: ' + scrollCount );
+
+					scrollCount++;
+					
+					//Prohibited scrolling trigger
+					mousewheelTrigger = false;
+					
+					//Do something
+					customMouseHandle();
+
+				}	
+
 			}
+
+		});
+	
+		
+		
+
+		function customMouseHandle() {
+			
+			//Reset scrolling trigger
+			setTimeout( function() {
+				mousewheelTrigger = true;	
+			}, 1500 );
+			
 			
 		}
 

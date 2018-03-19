@@ -254,10 +254,7 @@ $.extend({
 		}
 
 		// Set progress bar value
-		$.formProgressReset({
-			'selector' : '.custom-form-progress .line span',
-			'value'    : value,	
-		});
+		$( '.custom-form-progress .line span' ).css( 'width', value + '%' );
 
 
 		//Scroll Top
@@ -270,26 +267,5 @@ $.extend({
 	} 
 }); 
 
-/*
- * Set progress bar to the next value
- *
- * @param  {number} val             - The target value.
- * @return {void}                   - The constructor.
- */
-$.extend({ 
-	formProgressReset:function ( options ) { 
-
-		var settings = $.extend( {
-			'selector' : '.custom-form-progress .line span',
-			'value'    : 0,
-			
-		}
-		, options );
-
-
-		$( settings.selector ).css( 'width', settings.value + '%' );
-
-	} 
-}); 
 	
 
