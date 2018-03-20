@@ -27,7 +27,7 @@ theme = ( function ( theme, $, window, document ) {
 
 				$( 'html,body' ).animate({
 					scrollTop: getRelatedContent( this ).offset().top - 20
-				});
+				}, 1200, 'easeOutExpo' );
 			});	
 
 			//-------- Default cwaypoint settings
