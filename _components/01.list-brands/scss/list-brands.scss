@@ -1,0 +1,101 @@
+/* ====================================================== 
+   Brands List
+/* ====================================================== */
+.list-brands {
+	display: block;
+	background: #fff;
+	padding: 1.5rem 0;
+	margin: 3rem 0;
+	overflow:auto; /* CSS background disappears when using float:left */
+	
+	&::after {
+		content: '';
+		display: block;
+		clear: both;
+	}
+	
+
+	li {
+		text-align: center;
+		display: inline-block;
+		padding: 1rem 0;
+		text-align: center;
+		margin: 0;
+		box-sizing: border-box;
+		float: left; /* When using inline-block elements, there will always be an whitespace issue between those elements (that space is about ~ 4px wide). */
+
+		
+		span {
+			font-size: 0.875rem;
+			display: block;
+			padding: 1.5rem;
+		}
+	}
+	
+	
+	&.tiny li {
+		width: 16.66666666666667%;
+		
+		
+		&:nth-child(6n+1) {
+			clear: both;
+		}
+		
+	}
+	
+	&.small li {
+		width: 20%;
+		
+		&:nth-child(5n+1) {
+			clear: both;
+		}	
+		
+	}
+	
+	/* Default */
+	&.medium li {
+		width: 25%;
+		
+		&:nth-child(4n+1) {
+			clear: both;
+		}	
+		
+	}
+	
+	&.large li {
+		width: 33.33333333333333%;
+		
+		
+		&:nth-child(3n+1) {
+			clear: both;
+		}		
+		
+	}
+	
+}
+
+@media all and (max-width: 768px) {
+	.list-brands {
+		margin: 1.5rem 0;
+		min-height: none;
+		
+		li {
+			
+			width: 50%;
+			
+			&:nth-child(2n+1) {
+				clear: both;
+			}
+			
+		}
+		
+		&.tiny li,
+		&.small li,
+		&.medium li,
+		&.large li {
+			width: 50%;
+		}
+		
+	}
+
+}

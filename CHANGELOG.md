@@ -1,5 +1,13 @@
 # Changelog
 
+#### = 1.1.8 (March 20, 2018) =
+
+* New: Add a new module "Brands List".
+* Tweak: Optimized JavaScript code structure.
+* Tweak: Changed the Basic Plugin Methods that each module needs to use separately.
+
+
+
 #### = 1.1.78 (March 19, 2018) =
 
 * Tweak: Optimized event of module "Mousewheel Interaction".

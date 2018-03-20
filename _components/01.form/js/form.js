@@ -94,7 +94,7 @@ theme = ( function ( theme, $, window, document ) {
 		 Custom Select
 		 ---------------------------
 		 */ 
-		$.customSelectInit();
+		$( document ).customSelectInit();
 
 
 		/*! 
@@ -102,7 +102,7 @@ theme = ( function ( theme, $, window, document ) {
 		 Custom Radio, Toggle And Checkbox
 		 ---------------------------
 		 */ 
-		$.customRadioCheckboxInit();
+		$( document ).customRadioCheckboxInit();
 		
 		
 		
@@ -196,216 +196,237 @@ theme = ( function ( theme, $, window, document ) {
  * Associated Functions
  *************************************
  */
-/*! 
- ---------------------------
- Custom Select
- ---------------------------
- */ 
-$.extend({ 
-	customSelectInit:function ( options ) { 
-
-		var settings = $.extend( {
-			'selector'         : '.custom-select',
-			'targetWrapper'    : '.custom-select-wrapper',
-			'trigger'          : '.custom-select-trigger',	
-			'itemsWrapper'     : '.custom-options',
-			'item'             : '.custom-option'
-		}
-		, options );
-
-
-	
-		$( settings.selector ).not( '.new' ).each( function() {
+/*
+ * Custom Select
+ *
+ * @param  {string} selector             - The current selector.
+ * @param  {string} targetWrapper        - Wrapper of the selector.
+ * @param  {string} trigger              - Trigger of the selector.
+ * @param  {string} itemsWrapper         - Selector's options container.
+ * @param  {object} item                 - Each option of the selector.
+ * @return {void}                        - The constructor.
+ */
+( function ( $ ) {
+    $.fn.customSelectInit = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+			selector         : '.custom-select',
+			targetWrapper    : '.custom-select-wrapper',
+			trigger          : '.custom-select-trigger',	
+			itemsWrapper     : '.custom-options',
+			item             : '.custom-option'
+        }, options );
+ 
+        this.each( function() {
 			
-			var $this     = $( this ),
-				classes   = $this.attr( 'class' ),
-				id        = $this.attr( 'id' ),
-				name      = $this.attr( 'name' ),
-				template  = '',
-				labelText = $this.find( '> span' ).html(),
-				dataExist = $this.data( 'exist' );
-
 		
-			if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
-				
-				template  = '<div class="' + classes + ' new">';
-				template += '<span class="custom-select-trigger">' + $this.find( 'select' ).attr( 'placeholder' ) + '</span>';
-				template += '<div class="custom-options">';
-				
-				$this.find( 'select option' ).each( function( index ) {
-					
-					var selected = '';
-					
-					if ( $( this ).is( ':selected' ) ) {
-						selected = 'active';
+			$( settings.selector ).not( '.new' ).each( function() {
+
+				var $this     = $( this ),
+					classes   = $this.attr( 'class' ),
+					id        = $this.attr( 'id' ),
+					name      = $this.attr( 'name' ),
+					template  = '',
+					labelText = $this.find( '> span' ).html(),
+					dataExist = $this.data( 'exist' );
+
+
+				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
+
+					template  = '<div class="' + classes + ' new">';
+					template += '<span class="custom-select-trigger">' + $this.find( 'select' ).attr( 'placeholder' ) + '</span>';
+					template += '<div class="custom-options">';
+
+					$this.find( 'select option' ).each( function( index ) {
+
+						var selected = '';
+
+						if ( $( this ).is( ':selected' ) ) {
+							selected = 'active';
+						}
+
+						template += '<span class="custom-option '+selected+'" data-value="' + $( this ).attr( 'value' ) + '">' + $( this ).html() + '</span>';
+					});
+					template += '</div></div>';
+
+					if ( typeof labelText != typeof undefined && labelText != '' ) {
+						template += '<span class="custom-select-label">' + labelText + '</span>';
 					}
-					
-					template += '<span class="custom-option '+selected+'" data-value="' + $( this ).attr( 'value' ) + '">' + $( this ).html() + '</span>';
-				});
-				template += '</div></div>';
 
-				if ( typeof labelText != typeof undefined && labelText != '' ) {
-					template += '<span class="custom-select-label">' + labelText + '</span>';
+
+					$this.wrap('<div class="custom-select-wrapper"></div>');
+					$this.hide();
+					$this.after( template );	
+
+
+					//Prevent the form from being initialized again
+					$( this ).data( 'exist', 1 );
 				}
 
 
-				$this.wrap('<div class="custom-select-wrapper"></div>');
-				$this.hide();
-				$this.after( template );	
-				
-
-				//Prevent the form from being initialized again
-				$( this ).data( 'exist', 1 );
-			}
-
-
-		});
-
-		//Show/Hide Selector
-		$( document ).on( 'click', settings.trigger, function( e ) {
-			e.preventDefault();
-			
-			var $selectWrapper    = $( this ).closest( settings.targetWrapper ),
-				$selectCurWrapper = $selectWrapper.find( settings.selector + '.new' );
-			
-			$selectCurWrapper.addClass( 'opened' );
-			
-		});
-		
-		$( document.body ).on( 'click', function( e ) {
-			$( settings.selector + '.new' ).removeClass( 'opened' );
-		});		
-		
-		
-		
-				
-		//Set the default selector text
-		$( settings.selector + '.new' ).each( function( index ) {
-		    $( this ).find( settings.trigger ).text( $( this ).find( settings.item + '.active' ).html() );
-		});
-		
-		
-		//Change Event Here
-		$( document ).on( 'click', settings.item, function( e ) {
-			e.preventDefault();
-			
-			var $selectWrapper    = $( this ).closest( settings.targetWrapper ),
-				$selectCurWrapper = $selectWrapper.find( settings.selector + '.new' ),
-				curVal            = $( this ).data( 'value' );
-		
-			//Close the selector
-			$selectCurWrapper.removeClass( 'opened' );
-			
-			//Set the selector text
-			$selectCurWrapper.find( settings.trigger ).text( $( this ).html() );
-			
-			//Activate this option
-			$selectCurWrapper.find( settings.item ).removeClass( 'active' );
-			$( this ).addClass( 'active' );
-			
-			//Set select option 'selected', by value
-			$selectWrapper.find( 'select' ).val( curVal );
-			$selectWrapper.find( 'select option' ).removeAttr( 'selected' );
-			$selectWrapper.find( 'select option[value="'+curVal+'"]' ).attr( 'selected', 'selected' ).change();
-
-		});
-		
-		
-		
-		//Synchronize to the original select change event
-		$( settings.selector ).not( '.new' ).each( function() {
-			
-			var $this       = $( this ).find( 'select' ),
-				$cusSelect  = $this.closest( settings.targetWrapper ).find( settings.selector + '.new' ),
-				newOptions  = '';
-
-
-			$this.closest( settings.targetWrapper ).find( 'select option' ).each( function( index ) {
-
-				var selected = '';
-
-				if ( $( this ).is( ':selected' ) ) {
-					selected = 'active';
-				}
-
-				newOptions += '<span class="custom-option '+selected+'" data-value="' + $( this ).attr( 'value' ) + '">' + $( this ).html() + '</span>';
 			});
 
+			//Show/Hide Selector
+			$( document ).on( 'click', settings.trigger, function( e ) {
+				e.preventDefault();
 
-			$cusSelect.find( settings.itemsWrapper ).html( newOptions );
+				var $selectWrapper    = $( this ).closest( settings.targetWrapper ),
+					$selectCurWrapper = $selectWrapper.find( settings.selector + '.new' );
+
+				$selectCurWrapper.addClass( 'opened' );
+
+			});
+
+			$( document.body ).on( 'click', function( e ) {
+				$( settings.selector + '.new' ).removeClass( 'opened' );
+			});		
+
+
 
 
 			//Set the default selector text
-			$cusSelect.each( function( index ) {
+			$( settings.selector + '.new' ).each( function( index ) {
 				$( this ).find( settings.trigger ).text( $( this ).find( settings.item + '.active' ).html() );
 			});
 
-		});
 
-		
-		
+			//Change Event Here
+			$( document ).on( 'click', settings.item, function( e ) {
+				e.preventDefault();
 
-	} 
-}); 
+				var $selectWrapper    = $( this ).closest( settings.targetWrapper ),
+					$selectCurWrapper = $selectWrapper.find( settings.selector + '.new' ),
+					curVal            = $( this ).data( 'value' );
 
-/*! 
- ---------------------------
- Custom Radio, Checkbox and Toggle 
- ---------------------------
- */ 
-$.extend({ 
-	customRadioCheckboxInit:function ( options ) { 
+				//Close the selector
+				$selectCurWrapper.removeClass( 'opened' );
 
-		var settings = $.extend( {
-			'radioWrapper'    : '.custom-radio',
-			'toggle'          : '.custom-toggle',
-			'checkboxWrapper' : '.custom-checkbox'
-		}
-		, options );
+				//Set the selector text
+				$selectCurWrapper.find( settings.trigger ).text( $( this ).html() );
 
-		var customRadio        = settings.radioWrapper,
-			customToggle       = settings.toggle,
-			customCheckbox     = settings.checkboxWrapper;
+				//Activate this option
+				$selectCurWrapper.find( settings.item ).removeClass( 'active' );
+				$( this ).addClass( 'active' );
+
+				//Set select option 'selected', by value
+				$selectWrapper.find( 'select' ).val( curVal );
+				$selectWrapper.find( 'select option' ).removeAttr( 'selected' );
+				$selectWrapper.find( 'select option[value="'+curVal+'"]' ).attr( 'selected', 'selected' ).change();
+
+			});
 
 
-		$( customRadio ).find( 'input[type="radio"]' ).each(function() {
-			var dataExist = $( this ).data( 'exist' );
-			if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
-				$( '<span class="custom-radio-trigger"></span>' ).insertAfter( $( this ) );
-				
-				//Prevent the form from being initialized again
-				$( this ).data( 'exist', 1 );	
-			}
+
+			//Synchronize to the original select change event
+			$( settings.selector ).not( '.new' ).each( function() {
+
+				var $this       = $( this ).find( 'select' ),
+					$cusSelect  = $this.closest( settings.targetWrapper ).find( settings.selector + '.new' ),
+					newOptions  = '';
+
+
+				$this.closest( settings.targetWrapper ).find( 'select option' ).each( function( index ) {
+
+					var selected = '';
+
+					if ( $( this ).is( ':selected' ) ) {
+						selected = 'active';
+					}
+
+					newOptions += '<span class="custom-option '+selected+'" data-value="' + $( this ).attr( 'value' ) + '">' + $( this ).html() + '</span>';
+				});
+
+
+				$cusSelect.find( settings.itemsWrapper ).html( newOptions );
+
+
+				//Set the default selector text
+				$cusSelect.each( function( index ) {
+					$( this ).find( settings.trigger ).text( $( this ).find( settings.item + '.active' ).html() );
+				});
+
+			});
+
+			
 			
 		});
+ 
+    };
+ 
+}( jQuery ));
 
-		$( customToggle ).find( 'input[type="checkbox"]' ).each(function() {
-			var dataExist = $( this ).data( 'exist' );
-			if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
-				$( '<span class="custom-toggle-trigger"></span>' ).insertAfter( $( this ) );
-				
-				//Prevent the form from being initialized again
-				$( this ).data( 'exist', 1 );	
-			}
+
+
+/*
+ * Custom Radio, Checkbox and Toggle 
+ *
+ * @param  {string} radioWrapper             - Wrapper of the radio.
+ * @param  {string} toggle                   - Toggle of the checkbox.
+ * @param  {string} checkboxWrapper          - Wrapper of the checkbox.
+ * @return {void}                            - The constructor.
+ */
+( function ( $ ) {
+    $.fn.customRadioCheckboxInit = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+			radioWrapper    : '.custom-radio',
+			toggle          : '.custom-toggle',
+			checkboxWrapper : '.custom-checkbox'
+        }, options );
+ 
+        this.each( function() {
+			
+			var $this              = $( this ),
+				customRadio        = settings.radioWrapper,
+				customToggle       = settings.toggle,
+				customCheckbox     = settings.checkboxWrapper;
+
+
+			$( customRadio ).find( 'input[type="radio"]' ).each(function() {
+				var dataExist = $( this ).data( 'exist' );
+				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
+					$( '<span class="custom-radio-trigger"></span>' ).insertAfter( $( this ) );
+
+					//Prevent the form from being initialized again
+					$( this ).data( 'exist', 1 );	
+				}
+
+			});
+
+			$( customToggle ).find( 'input[type="checkbox"]' ).each(function() {
+				var dataExist = $( this ).data( 'exist' );
+				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
+					$( '<span class="custom-toggle-trigger"></span>' ).insertAfter( $( this ) );
+
+					//Prevent the form from being initialized again
+					$( this ).data( 'exist', 1 );	
+				}
+
+
+			});
+
+			$( customCheckbox ).find( 'input[type="checkbox"]' ).each(function() {
+				var dataExist = $( this ).data( 'exist' );
+				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
+					$( '<span class="custom-checkbox-trigger"></span>' ).insertAfter( $( this ) );
+
+					//Prevent the form from being initialized again
+					$( this ).data( 'exist', 1 );	
+				}
+
+
+			});
+
 			
 			
 		});
+ 
+    };
+ 
+}( jQuery ));
 
-		$( customCheckbox ).find( 'input[type="checkbox"]' ).each(function() {
-			var dataExist = $( this ).data( 'exist' );
-			if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
-				$( '<span class="custom-checkbox-trigger"></span>' ).insertAfter( $( this ) );
-				
-				//Prevent the form from being initialized again
-				$( this ).data( 'exist', 1 );	
-			}
-			
-			
-		});
-
-
-	} 
-}); 
 
 
 /*!

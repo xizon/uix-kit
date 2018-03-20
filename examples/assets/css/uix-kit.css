@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.78
+ * ## Version             :  1.1.8
  * ## Last Update         :  March 20, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -191,6 +191,12 @@ body {
 
 p, ul, ol, pre, table, blockquote {
     margin-bottom: 1.421875rem;
+}
+
+@media all and (max-width: 768px) {
+    p {
+        margin-bottom: 1.421875rem;
+    }
 }
 
 ul, ol {
@@ -4443,6 +4449,96 @@ ul.entry-meta {
    Custom Core Scripts & Stylesheets
 /* ====================================================== */
 /* ====================================================== 
+   Brands List
+/* ====================================================== */
+.list-brands {
+    display: block;
+    background: #fff;
+    padding: 1.5rem 0;
+    margin: 3rem 0;
+    overflow: auto;
+  /* CSS background disappears when using float:left */
+  /* Default */;
+}
+
+.list-brands::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.list-brands li {
+    text-align: center;
+    display: inline-block;
+    padding: 1rem 0;
+    text-align: center;
+    margin: 0;
+    box-sizing: border-box;
+    float: left;
+  /* When using inline-block elements, there will always be an whitespace issue between those elements (that space is about ~ 4px wide). */;
+}
+
+.list-brands li span {
+    font-size: 0.875rem;
+    display: block;
+    padding: 1.5rem;
+}
+
+.list-brands.tiny li {
+    width: 16.66666666666667%;
+}
+
+.list-brands.tiny li:nth-child(6n+1) {
+    clear: both;
+}
+
+.list-brands.small li {
+    width: 20%;
+}
+
+.list-brands.small li:nth-child(5n+1) {
+    clear: both;
+}
+
+.list-brands.medium li {
+    width: 25%;
+}
+
+.list-brands.medium li:nth-child(4n+1) {
+    clear: both;
+}
+
+.list-brands.large li {
+    width: 33.33333333333333%;
+}
+
+.list-brands.large li:nth-child(3n+1) {
+    clear: both;
+}
+
+@media all and (max-width: 768px) {
+    .list-brands {
+        margin: 1.5rem 0;
+        min-height: none;
+    }
+
+    .list-brands li {
+        width: 50%;
+    }
+
+    .list-brands li:nth-child(2n+1) {
+        clear: both;
+    }
+
+    .list-brands.tiny li,
+  .list-brands.small li,
+  .list-brands.medium li,
+  .list-brands.large li {
+        width: 50%;
+    }
+}
+
+/* ====================================================== 
    Bulleted List
 /* ====================================================== */
 .list-bullet i {
@@ -5384,6 +5480,33 @@ dl.list-side-by-side:after {
 }
 
 /* ====================================================== 
+   Periodical Scroll        
+/* ====================================================== */
+.custom-periodical-scroll {
+    position: relative;
+}
+
+.custom-periodical-scroll ul {
+    display: block;
+    overflow: hidden;
+    height: 0;
+}
+
+.custom-periodical-scroll ul li {
+    display: block;
+}
+
+.custom-periodical-scroll ul li span {
+    display: block;
+  /* @include icontxt-gradient(); */
+  /* The font is the default color when the browser is IE */
+    background: linear-gradient(to right, #EC5E79 0%, #E8588C 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 2px;
+}
+
+/* ====================================================== 
    Parallax                                               
 /* ====================================================== */
 .parallax {
@@ -5418,33 +5541,6 @@ dl.list-side-by-side:after {
 
 .parallax-auto .parallax-img {
     visibility: hidden;
-}
-
-/* ====================================================== 
-   Periodical Scroll        
-/* ====================================================== */
-.custom-periodical-scroll {
-    position: relative;
-}
-
-.custom-periodical-scroll ul {
-    display: block;
-    overflow: hidden;
-    height: 0;
-}
-
-.custom-periodical-scroll ul li {
-    display: block;
-}
-
-.custom-periodical-scroll ul li span {
-    display: block;
-  /* @include icontxt-gradient(); */
-  /* The font is the default color when the browser is IE */
-    background: linear-gradient(to right, #EC5E79 0%, #E8588C 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    letter-spacing: 2px;
 }
 
 /* ====================================================== 

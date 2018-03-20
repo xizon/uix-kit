@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.78
+ * ## Version             :  1.1.8
  * ## Last Update         :  March 20, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -1455,7 +1455,7 @@ theme = ( function ( theme, $, window, document ) {
 		 Custom Select
 		 ---------------------------
 		 */ 
-		$.customSelectInit();
+		$( document ).customSelectInit();
 
 
 		/*! 
@@ -1463,7 +1463,7 @@ theme = ( function ( theme, $, window, document ) {
 		 Custom Radio, Toggle And Checkbox
 		 ---------------------------
 		 */ 
-		$.customRadioCheckboxInit();
+		$( document ).customRadioCheckboxInit();
 		
 		
 		
@@ -1557,216 +1557,237 @@ theme = ( function ( theme, $, window, document ) {
  * Associated Functions
  *************************************
  */
-/*! 
- ---------------------------
- Custom Select
- ---------------------------
- */ 
-$.extend({ 
-	customSelectInit:function ( options ) { 
-
-		var settings = $.extend( {
-			'selector'         : '.custom-select',
-			'targetWrapper'    : '.custom-select-wrapper',
-			'trigger'          : '.custom-select-trigger',	
-			'itemsWrapper'     : '.custom-options',
-			'item'             : '.custom-option'
-		}
-		, options );
-
-
-	
-		$( settings.selector ).not( '.new' ).each( function() {
+/*
+ * Custom Select
+ *
+ * @param  {string} selector             - The current selector.
+ * @param  {string} targetWrapper        - Wrapper of the selector.
+ * @param  {string} trigger              - Trigger of the selector.
+ * @param  {string} itemsWrapper         - Selector's options container.
+ * @param  {object} item                 - Each option of the selector.
+ * @return {void}                        - The constructor.
+ */
+( function ( $ ) {
+    $.fn.customSelectInit = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+			selector         : '.custom-select',
+			targetWrapper    : '.custom-select-wrapper',
+			trigger          : '.custom-select-trigger',	
+			itemsWrapper     : '.custom-options',
+			item             : '.custom-option'
+        }, options );
+ 
+        this.each( function() {
 			
-			var $this     = $( this ),
-				classes   = $this.attr( 'class' ),
-				id        = $this.attr( 'id' ),
-				name      = $this.attr( 'name' ),
-				template  = '',
-				labelText = $this.find( '> span' ).html(),
-				dataExist = $this.data( 'exist' );
-
 		
-			if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
-				
-				template  = '<div class="' + classes + ' new">';
-				template += '<span class="custom-select-trigger">' + $this.find( 'select' ).attr( 'placeholder' ) + '</span>';
-				template += '<div class="custom-options">';
-				
-				$this.find( 'select option' ).each( function( index ) {
-					
-					var selected = '';
-					
-					if ( $( this ).is( ':selected' ) ) {
-						selected = 'active';
+			$( settings.selector ).not( '.new' ).each( function() {
+
+				var $this     = $( this ),
+					classes   = $this.attr( 'class' ),
+					id        = $this.attr( 'id' ),
+					name      = $this.attr( 'name' ),
+					template  = '',
+					labelText = $this.find( '> span' ).html(),
+					dataExist = $this.data( 'exist' );
+
+
+				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
+
+					template  = '<div class="' + classes + ' new">';
+					template += '<span class="custom-select-trigger">' + $this.find( 'select' ).attr( 'placeholder' ) + '</span>';
+					template += '<div class="custom-options">';
+
+					$this.find( 'select option' ).each( function( index ) {
+
+						var selected = '';
+
+						if ( $( this ).is( ':selected' ) ) {
+							selected = 'active';
+						}
+
+						template += '<span class="custom-option '+selected+'" data-value="' + $( this ).attr( 'value' ) + '">' + $( this ).html() + '</span>';
+					});
+					template += '</div></div>';
+
+					if ( typeof labelText != typeof undefined && labelText != '' ) {
+						template += '<span class="custom-select-label">' + labelText + '</span>';
 					}
-					
-					template += '<span class="custom-option '+selected+'" data-value="' + $( this ).attr( 'value' ) + '">' + $( this ).html() + '</span>';
-				});
-				template += '</div></div>';
 
-				if ( typeof labelText != typeof undefined && labelText != '' ) {
-					template += '<span class="custom-select-label">' + labelText + '</span>';
+
+					$this.wrap('<div class="custom-select-wrapper"></div>');
+					$this.hide();
+					$this.after( template );	
+
+
+					//Prevent the form from being initialized again
+					$( this ).data( 'exist', 1 );
 				}
 
 
-				$this.wrap('<div class="custom-select-wrapper"></div>');
-				$this.hide();
-				$this.after( template );	
-				
-
-				//Prevent the form from being initialized again
-				$( this ).data( 'exist', 1 );
-			}
-
-
-		});
-
-		//Show/Hide Selector
-		$( document ).on( 'click', settings.trigger, function( e ) {
-			e.preventDefault();
-			
-			var $selectWrapper    = $( this ).closest( settings.targetWrapper ),
-				$selectCurWrapper = $selectWrapper.find( settings.selector + '.new' );
-			
-			$selectCurWrapper.addClass( 'opened' );
-			
-		});
-		
-		$( document.body ).on( 'click', function( e ) {
-			$( settings.selector + '.new' ).removeClass( 'opened' );
-		});		
-		
-		
-		
-				
-		//Set the default selector text
-		$( settings.selector + '.new' ).each( function( index ) {
-		    $( this ).find( settings.trigger ).text( $( this ).find( settings.item + '.active' ).html() );
-		});
-		
-		
-		//Change Event Here
-		$( document ).on( 'click', settings.item, function( e ) {
-			e.preventDefault();
-			
-			var $selectWrapper    = $( this ).closest( settings.targetWrapper ),
-				$selectCurWrapper = $selectWrapper.find( settings.selector + '.new' ),
-				curVal            = $( this ).data( 'value' );
-		
-			//Close the selector
-			$selectCurWrapper.removeClass( 'opened' );
-			
-			//Set the selector text
-			$selectCurWrapper.find( settings.trigger ).text( $( this ).html() );
-			
-			//Activate this option
-			$selectCurWrapper.find( settings.item ).removeClass( 'active' );
-			$( this ).addClass( 'active' );
-			
-			//Set select option 'selected', by value
-			$selectWrapper.find( 'select' ).val( curVal );
-			$selectWrapper.find( 'select option' ).removeAttr( 'selected' );
-			$selectWrapper.find( 'select option[value="'+curVal+'"]' ).attr( 'selected', 'selected' ).change();
-
-		});
-		
-		
-		
-		//Synchronize to the original select change event
-		$( settings.selector ).not( '.new' ).each( function() {
-			
-			var $this       = $( this ).find( 'select' ),
-				$cusSelect  = $this.closest( settings.targetWrapper ).find( settings.selector + '.new' ),
-				newOptions  = '';
-
-
-			$this.closest( settings.targetWrapper ).find( 'select option' ).each( function( index ) {
-
-				var selected = '';
-
-				if ( $( this ).is( ':selected' ) ) {
-					selected = 'active';
-				}
-
-				newOptions += '<span class="custom-option '+selected+'" data-value="' + $( this ).attr( 'value' ) + '">' + $( this ).html() + '</span>';
 			});
 
+			//Show/Hide Selector
+			$( document ).on( 'click', settings.trigger, function( e ) {
+				e.preventDefault();
 
-			$cusSelect.find( settings.itemsWrapper ).html( newOptions );
+				var $selectWrapper    = $( this ).closest( settings.targetWrapper ),
+					$selectCurWrapper = $selectWrapper.find( settings.selector + '.new' );
+
+				$selectCurWrapper.addClass( 'opened' );
+
+			});
+
+			$( document.body ).on( 'click', function( e ) {
+				$( settings.selector + '.new' ).removeClass( 'opened' );
+			});		
+
+
 
 
 			//Set the default selector text
-			$cusSelect.each( function( index ) {
+			$( settings.selector + '.new' ).each( function( index ) {
 				$( this ).find( settings.trigger ).text( $( this ).find( settings.item + '.active' ).html() );
 			});
 
-		});
 
-		
-		
+			//Change Event Here
+			$( document ).on( 'click', settings.item, function( e ) {
+				e.preventDefault();
 
-	} 
-}); 
+				var $selectWrapper    = $( this ).closest( settings.targetWrapper ),
+					$selectCurWrapper = $selectWrapper.find( settings.selector + '.new' ),
+					curVal            = $( this ).data( 'value' );
 
-/*! 
- ---------------------------
- Custom Radio, Checkbox and Toggle 
- ---------------------------
- */ 
-$.extend({ 
-	customRadioCheckboxInit:function ( options ) { 
+				//Close the selector
+				$selectCurWrapper.removeClass( 'opened' );
 
-		var settings = $.extend( {
-			'radioWrapper'    : '.custom-radio',
-			'toggle'          : '.custom-toggle',
-			'checkboxWrapper' : '.custom-checkbox'
-		}
-		, options );
+				//Set the selector text
+				$selectCurWrapper.find( settings.trigger ).text( $( this ).html() );
 
-		var customRadio        = settings.radioWrapper,
-			customToggle       = settings.toggle,
-			customCheckbox     = settings.checkboxWrapper;
+				//Activate this option
+				$selectCurWrapper.find( settings.item ).removeClass( 'active' );
+				$( this ).addClass( 'active' );
+
+				//Set select option 'selected', by value
+				$selectWrapper.find( 'select' ).val( curVal );
+				$selectWrapper.find( 'select option' ).removeAttr( 'selected' );
+				$selectWrapper.find( 'select option[value="'+curVal+'"]' ).attr( 'selected', 'selected' ).change();
+
+			});
 
 
-		$( customRadio ).find( 'input[type="radio"]' ).each(function() {
-			var dataExist = $( this ).data( 'exist' );
-			if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
-				$( '<span class="custom-radio-trigger"></span>' ).insertAfter( $( this ) );
-				
-				//Prevent the form from being initialized again
-				$( this ).data( 'exist', 1 );	
-			}
+
+			//Synchronize to the original select change event
+			$( settings.selector ).not( '.new' ).each( function() {
+
+				var $this       = $( this ).find( 'select' ),
+					$cusSelect  = $this.closest( settings.targetWrapper ).find( settings.selector + '.new' ),
+					newOptions  = '';
+
+
+				$this.closest( settings.targetWrapper ).find( 'select option' ).each( function( index ) {
+
+					var selected = '';
+
+					if ( $( this ).is( ':selected' ) ) {
+						selected = 'active';
+					}
+
+					newOptions += '<span class="custom-option '+selected+'" data-value="' + $( this ).attr( 'value' ) + '">' + $( this ).html() + '</span>';
+				});
+
+
+				$cusSelect.find( settings.itemsWrapper ).html( newOptions );
+
+
+				//Set the default selector text
+				$cusSelect.each( function( index ) {
+					$( this ).find( settings.trigger ).text( $( this ).find( settings.item + '.active' ).html() );
+				});
+
+			});
+
+			
 			
 		});
+ 
+    };
+ 
+}( jQuery ));
 
-		$( customToggle ).find( 'input[type="checkbox"]' ).each(function() {
-			var dataExist = $( this ).data( 'exist' );
-			if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
-				$( '<span class="custom-toggle-trigger"></span>' ).insertAfter( $( this ) );
-				
-				//Prevent the form from being initialized again
-				$( this ).data( 'exist', 1 );	
-			}
+
+
+/*
+ * Custom Radio, Checkbox and Toggle 
+ *
+ * @param  {string} radioWrapper             - Wrapper of the radio.
+ * @param  {string} toggle                   - Toggle of the checkbox.
+ * @param  {string} checkboxWrapper          - Wrapper of the checkbox.
+ * @return {void}                            - The constructor.
+ */
+( function ( $ ) {
+    $.fn.customRadioCheckboxInit = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+			radioWrapper    : '.custom-radio',
+			toggle          : '.custom-toggle',
+			checkboxWrapper : '.custom-checkbox'
+        }, options );
+ 
+        this.each( function() {
+			
+			var $this              = $( this ),
+				customRadio        = settings.radioWrapper,
+				customToggle       = settings.toggle,
+				customCheckbox     = settings.checkboxWrapper;
+
+
+			$( customRadio ).find( 'input[type="radio"]' ).each(function() {
+				var dataExist = $( this ).data( 'exist' );
+				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
+					$( '<span class="custom-radio-trigger"></span>' ).insertAfter( $( this ) );
+
+					//Prevent the form from being initialized again
+					$( this ).data( 'exist', 1 );	
+				}
+
+			});
+
+			$( customToggle ).find( 'input[type="checkbox"]' ).each(function() {
+				var dataExist = $( this ).data( 'exist' );
+				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
+					$( '<span class="custom-toggle-trigger"></span>' ).insertAfter( $( this ) );
+
+					//Prevent the form from being initialized again
+					$( this ).data( 'exist', 1 );	
+				}
+
+
+			});
+
+			$( customCheckbox ).find( 'input[type="checkbox"]' ).each(function() {
+				var dataExist = $( this ).data( 'exist' );
+				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
+					$( '<span class="custom-checkbox-trigger"></span>' ).insertAfter( $( this ) );
+
+					//Prevent the form from being initialized again
+					$( this ).data( 'exist', 1 );	
+				}
+
+
+			});
+
 			
 			
 		});
+ 
+    };
+ 
+}( jQuery ));
 
-		$( customCheckbox ).find( 'input[type="checkbox"]' ).each(function() {
-			var dataExist = $( this ).data( 'exist' );
-			if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
-				$( '<span class="custom-checkbox-trigger"></span>' ).insertAfter( $( this ) );
-				
-				//Prevent the form from being initialized again
-				$( this ).data( 'exist', 1 );	
-			}
-			
-			
-		});
-
-
-	} 
-}); 
 
 
 /*!
@@ -3888,7 +3909,7 @@ theme = ( function ( theme, $, window, document ) {
 		$( document ).on( 'click', '.custom-form-progress-target .go-step:not(.disable)', function( e ) {
 			e.preventDefault();
 			var $currentForm = $( this ).parents( '.form-step' );
-			$.formProgressNext({ 
+			$( document ).formProgressNext({ 
 				'selector'   : $( '.custom-form-progress-target .form-step' ),
 				'formTarget' : $formTarget,
 				'indicator'  : '.custom-form-progress .indicator',
@@ -3911,7 +3932,7 @@ theme = ( function ( theme, $, window, document ) {
 		 */
 		function formReset() {
 			
-			$.formProgressNext({ 
+			$( document ).formProgressNext({ 
 				'selector'         : $( '.custom-form-progress-target .form-step' ),
 				'formTarget'       : $( '.custom-form-progress-target' ),
 				'indicator'        : '.custom-form-progress .indicator',
@@ -3944,176 +3965,184 @@ theme = ( function ( theme, $, window, document ) {
  * Associated Functions
  *************************************
  */
+
 /*
  * Shows the next form.
  *
- * @param  {object} currentForm    - Node - The current form.
- * @return {void}                  - The constructor.
+ * @param  {object} selector        - Each target forms selector.
+ * @param  {object} formTarget      - Wrapper of target forms selector.
+ * @param  {string} indicator       - Indicator of timeline.
+ * @param  {number} index           - Default index for initialization.
+ * @return {void}                   - The constructor.
  */
-$.extend({ 
-	formProgressNext:function ( options ) { 
-
-		var settings = $.extend( {
-			'selector'         : $( '.custom-form-progress-target .form-step' ),
-			'formTarget'       : $( '.custom-form-progress-target' ),
-			'indicator'        : '.custom-form-progress .indicator',
-			'index'            : 0
+( function ( $ ) {
+    $.fn.formProgressNext = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+			selector         : $( '.custom-form-progress-target .form-step' ),
+			formTarget       : $( '.custom-form-progress-target' ),
+			indicator        : '.custom-form-progress .indicator',
+			index            : 0
+        }, options );
+ 
+        this.each( function() {
 			
-		}
-		, options );
+			var $this            = $( this ),
+				transitionEnd    = 'webkitTransitionEnd transitionend',
+				currentForm      = settings.selector,
+				$formTarget      = settings.formTarget,	
+				$indicator       = $( settings.indicator ),
+				allStep          = $indicator.length,
+				stepPerValue     = 100/( allStep - 1 ),
+				value            = 0,
+				tarIndex, curIndex;
 
-		var transitionEnd    = 'webkitTransitionEnd transitionend',
-			currentForm      = settings.selector,
-			$formTarget      = settings.formTarget,	
-			$indicator       = $( settings.indicator ),
-			allStep          = $indicator.length,
-			stepPerValue     = 100/( allStep - 1 ),
-			value            = 0,
-			tarIndex, curIndex;
 
-		
-		//Returns current index
-		if ( settings.index > allStep - 1 ) {
-			curIndex = allStep - 1;
-		} else {
-			curIndex = settings.index;
-		}
-		
-		
-		tarIndex = curIndex - 1;
-		
-		
-		// Returns current index
-		if ( tarIndex > ( allStep - 2 ) ) {
-			value = stepPerValue * (allStep - 2);
-			curIndex = allStep - 2;
-		} else {
-			curIndex = tarIndex;
-			
-		}
-		
-		
-		// Increment value (based on 4 steps 0 - 100)
-		value = stepPerValue * curIndex;
-
-		//Get form transition speed
-		var dur = $formTarget.data( 'anime-speed' );
-		if( typeof dur === typeof undefined ) { 
-			dur = '0.5s';
-		}
-
-		var durString  = dur.toLowerCase(),
-			isMS       = durString.indexOf( 'ms' ) >= 0,
-			numberNum  = durString.replace( 'ms', '' ).replace( 's', '' ),
-			animeSpeed = isMS ? numberNum : numberNum * 1000;
-	
-		
-
-		var currentFormStep  = parseInt(currentForm.eq( tarIndex ).attr( 'data-step' ) ) || false,
-			$nextForm        = $formTarget.find( '.form-step[data-step="' + (currentFormStep + 1) + '"]'),
-			currentFormIndex = $nextForm.attr( 'data-step' ) - 1;
-		
-		
-		if ( isNaN( currentFormIndex ) ) currentFormIndex = 0;
-
-		// Activate other unused modules
-		if ( currentFormIndex > 0 ) {
-			for ( var i = 0; i < curIndex; i++ ) {
-				currentForm.eq( i ).addClass( 'leaving' );
-				$indicator.eq( i ).addClass( 'active' );
+			//Returns current index
+			if ( settings.index > allStep - 1 ) {
+				curIndex = allStep - 1;
+			} else {
+				curIndex = settings.index;
 			}
-			$indicator.eq( curIndex ).addClass( 'active' );
-	
-		}
-
-		
-		
-		// Hide current form fields
-		currentForm.eq( tarIndex ).addClass( 'leaving' );
-		setTimeout(function() {
-			$indicator.eq( currentFormIndex ).addClass( 'active' );
-		}, animeSpeed );
 
 
-		// Show next form fields
-		$nextForm.addClass( 'coming' ).one( transitionEnd, function() {
-			$nextForm.removeClass( 'coming waiting' );
-		});
+			tarIndex = curIndex - 1;
 
-		// Increment value (based on 4 steps 0 - 100)
-		value += stepPerValue;
 
-		//console.log( currentFormIndex );
-		
-	
-		
-		//Initialize pointer and form location data
-		if ( currentFormIndex == 0 ) {
-			
-			//Avoid initialization to always cover other same events
-			$( 'body' ).addClass( 'form-progress-initok' );
-			
-			
-			//so something
-			$indicator.removeClass( 'active' );
-			$indicator.each( function( index )  {
-				$( this ).css( 'left', index*stepPerValue + '%' );
-				$formTarget.find( '.form-step:eq('+index+')' ).attr( 'data-step', index+1 );
+			// Returns current index
+			if ( tarIndex > ( allStep - 2 ) ) {
+				value = stepPerValue * (allStep - 2);
+				curIndex = allStep - 2;
+			} else {
+				curIndex = tarIndex;
+
+			}
+
+
+			// Increment value (based on 4 steps 0 - 100)
+			value = stepPerValue * curIndex;
+
+			//Get form transition speed
+			var dur = $formTarget.data( 'anime-speed' );
+			if( typeof dur === typeof undefined ) { 
+				dur = '0.5s';
+			}
+
+			var durString  = dur.toLowerCase(),
+				isMS       = durString.indexOf( 'ms' ) >= 0,
+				numberNum  = durString.replace( 'ms', '' ).replace( 's', '' ),
+				animeSpeed = isMS ? numberNum : numberNum * 1000;
+
+
+
+			var currentFormStep  = parseInt(currentForm.eq( tarIndex ).attr( 'data-step' ) ) || false,
+				$nextForm        = $formTarget.find( '.form-step[data-step="' + (currentFormStep + 1) + '"]'),
+				currentFormIndex = $nextForm.attr( 'data-step' ) - 1;
+
+
+			if ( isNaN( currentFormIndex ) ) currentFormIndex = 0;
+
+			// Activate other unused modules
+			if ( currentFormIndex > 0 ) {
+				for ( var i = 0; i < curIndex; i++ ) {
+					currentForm.eq( i ).addClass( 'leaving' );
+					$indicator.eq( i ).addClass( 'active' );
+				}
+				$indicator.eq( curIndex ).addClass( 'active' );
+
+			}
+
+
+
+			// Hide current form fields
+			currentForm.eq( tarIndex ).addClass( 'leaving' );
+			setTimeout(function() {
+				$indicator.eq( currentFormIndex ).addClass( 'active' );
+			}, animeSpeed );
+
+
+			// Show next form fields
+			$nextForm.addClass( 'coming' ).one( transitionEnd, function() {
+				$nextForm.removeClass( 'coming waiting' );
 			});
 
-			setTimeout(function() {
-				$formTarget.addClass( 'show' );
-			}, animeSpeed );
+			// Increment value (based on 4 steps 0 - 100)
+			value += stepPerValue;
+
+			//console.log( currentFormIndex );
+
+
+
+			//Initialize pointer and form location data
+			if ( currentFormIndex == 0 ) {
+
+				//Avoid initialization to always cover other same events
+				$( 'body' ).addClass( 'form-progress-initok' );
+
+
+				//so something
+				$indicator.removeClass( 'active' );
+				$indicator.each( function( index )  {
+					$( this ).css( 'left', index*stepPerValue + '%' );
+					$formTarget.find( '.form-step:eq('+index+')' ).attr( 'data-step', index+1 );
+				});
+
+				setTimeout(function() {
+					$formTarget.addClass( 'show' );
+				}, animeSpeed );
+
+
+				$formTarget.find( '.form-step' )
+												.removeClass( 'left leaving' )
+												.css( {
+													'position'   : 'absolute'
+												} )
+												.not( ':eq(0)' )
+												.addClass( 'waiting' );
+
+
+			}
+
+
+			//Set wrapper height
+			var currentContentH  = $formTarget.find( '.form-step:eq('+currentFormIndex+') > .content' ).height() + 100;
+			$formTarget.css( 'height', currentContentH + 'px' );
+
+			var curText = $( '.custom-form-progress .indicator:eq('+currentFormIndex+') > span' ).html();
+			$( '#app-form-progress-text' ).text( curText );
+
+			//The current indicator class
+			$indicator.removeClass( 'current' );
+			$indicator.eq( currentFormIndex ).addClass( 'current' );
+
+			// Reset if we've reached the end
+			if (value >= 100) {
+				$formTarget.find( '.form-step' )
+											   .addClass( 'leaving' )
+											   .last()
+											   .removeClass( 'coming waiting leaving' );
+			} else {
+				$( '.custom-form-progress' ).find( 'indicator.active' ).next( '.indicator' ).addClass( 'active' );
+			}
+
+			// Set progress bar value
+			$( '.custom-form-progress .line span' ).css( 'width', value + '%' );
+
+
+			//Scroll Top
+			$( 'html, body' ).stop().animate({
+				scrollTop: 0
+			}, { easing: 'easeOutQuart', duration: 500 } );	
+
+			return false;
 			
 			
-			$formTarget.find( '.form-step' )
-			                                .removeClass( 'left leaving' )
-											.css( {
-												'position'   : 'absolute'
-											} )
-											.not( ':eq(0)' )
-											.addClass( 'waiting' );
-			
-	
-		}
-
-
-		//Set wrapper height
-		var currentContentH  = $formTarget.find( '.form-step:eq('+currentFormIndex+') > .content' ).height() + 100;
-		$formTarget.css( 'height', currentContentH + 'px' );
-
-		var curText = $( '.custom-form-progress .indicator:eq('+currentFormIndex+') > span' ).html();
-		$( '#app-form-progress-text' ).text( curText );
-
-		//The current indicator class
-		$indicator.removeClass( 'current' );
-		$indicator.eq( currentFormIndex ).addClass( 'current' );
-
-		// Reset if we've reached the end
-		if (value >= 100) {
-			$formTarget.find( '.form-step' )
-										   .addClass( 'leaving' )
-										   .last()
-										   .removeClass( 'coming waiting leaving' );
-		} else {
-			$( '.custom-form-progress' ).find( 'indicator.active' ).next( '.indicator' ).addClass( 'active' );
-		}
-
-		// Set progress bar value
-		$( '.custom-form-progress .line span' ).css( 'width', value + '%' );
-
-
-		//Scroll Top
-		$( 'html, body' ).stop().animate({
-			scrollTop: 0
-		}, { easing: 'easeOutQuart', duration: 500 } );	
-		
-		return false;
-
-	} 
-}); 
-
-	
+		});
+ 
+    };
+ 
+}( jQuery ));
 
 
 
@@ -5462,7 +5491,7 @@ theme = ( function ( theme, $, window, document ) {
 
 				$( 'html,body' ).animate({
 					scrollTop: getRelatedContent( this ).offset().top - 20
-				});
+				}, 1200, 'easeOutExpo' );
 			});	
 
 			//-------- Default cwaypoint settings
