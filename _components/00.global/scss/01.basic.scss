@@ -94,6 +94,13 @@ p, ul, ol, pre, table, blockquote {
     margin-bottom: 1.421875rem;
 }
 
+@media all and (max-width: 768px) {
+	p {
+		margin-bottom: 1.421875rem;
+	}
+}
+
+
 ul, ol {
     list-style: none;
 }
