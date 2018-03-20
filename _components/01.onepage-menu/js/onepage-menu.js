@@ -20,7 +20,10 @@ theme = ( function ( theme, $, window, document ) {
 	    //-------- Navigation highlighting using waypoints
 		if ( $( 'body' ).hasClass( 'onepage' ) ) {
 
-
+			//Activate the first item
+			$( '.menu-main li:first' ).addClass( 'active' );
+			
+			
 			// Smooth scroll to content
 			$( '.menu-main li > a' ).on('click', function(e) {
 				e.preventDefault();
@@ -57,9 +60,6 @@ theme = ( function ( theme, $, window, document ) {
 				}
 			});	
 
-			setTimeout( function() {
-				$( '.menu-main li:first' ).addClass( 'active' );
-			}, 1000 );	
 		}
 
 		

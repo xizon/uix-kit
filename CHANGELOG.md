@@ -1,5 +1,11 @@
 # Changelog
 
+
+#### = 1.1.81 (March 22, 2018) =
+
+* Fix: Fixed minor bugs in listening events for one-page navigation.
+
+
 #### = 1.1.8 (March 20, 2018) =
 
 * New: Add a new module "Brands List".
