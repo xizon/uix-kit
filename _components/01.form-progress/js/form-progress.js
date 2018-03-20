@@ -10,6 +10,10 @@ theme = ( function ( theme, $, window, document ) {
    
     var pageLoaded = function() {
 		
+		
+		//Prevent this module from loading in other pages
+		if ( !$( 'body' ).hasClass( 'page-form-progress-eff' ) ) return false;
+		
 
 		var $progressBar   = $( '.custom-form-progress progress' ),
 			$formTarget    = $( '.custom-form-progress-target' ),

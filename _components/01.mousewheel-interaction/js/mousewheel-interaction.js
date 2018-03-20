@@ -52,6 +52,10 @@ theme = ( function ( theme, $, window, document ) {
 				}	
 
 			}
+			
+
+			//prevent page fom scrolling
+			//return false;
 
 		});
 	
