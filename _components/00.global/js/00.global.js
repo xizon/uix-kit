@@ -10,7 +10,7 @@
 	4. Overlay
 	5. Navigation
 	6. Videos
-	7. Multiple columns full height for Bootstrap 3.x
+	7. Initialize the height of each column of the grid system
 	8. Mega Menu
 	9. Dropdown Categories
 	10. Pagination
