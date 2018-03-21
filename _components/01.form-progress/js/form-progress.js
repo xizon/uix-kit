@@ -4,6 +4,21 @@
  * Form Progress
  *************************************
  */
+/*
+    Note:
+	
+	If you want to initialize the indicator to a location when the page is first run,
+	you need to call the following function:
+	
+	$( document ).formProgressNext({ 
+		'selector'         : $( '.custom-form-progress-target .form-step' ),
+		'formTarget'       : $( '.custom-form-progress-target' ),
+		'indicator'        : '.custom-form-progress .indicator',
+		'index'            : 0 // 0 -> step 2,1 -> step 2, 2 -> step 3, 3 -> step 4, 4 -> step 5 
+	});
+	
+*/
+
 theme = ( function ( theme, $, window, document ) {
     'use strict';
    

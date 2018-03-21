@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.8
- * ## Last Update         :  March 20, 2018
+ * ## Version             :  1.1.81
+ * ## Last Update         :  March 21, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -1365,6 +1365,18 @@ theme = ( function ( theme, $, window, document ) {
  * Form
  *************************************
  */
+/*
+    Note:
+	
+	If you use the "change" event to asynchronously change a custom control of select, radio or checkbox, 
+	you need add a callback function that initializes the style:
+	
+	$( document ).customSelectInit();
+	$( document ).customRadioCheckboxInit();
+	
+*/
+
+
 theme = ( function ( theme, $, window, document ) {
     'use strict';
    
@@ -3867,6 +3879,21 @@ var datepicker = $.datepicker;
  * Form Progress
  *************************************
  */
+/*
+    Note:
+	
+	If you want to initialize the indicator to a location when the page is first run,
+	you need to call the following function:
+	
+	$( document ).formProgressNext({ 
+		'selector'         : $( '.custom-form-progress-target .form-step' ),
+		'formTarget'       : $( '.custom-form-progress-target' ),
+		'indicator'        : '.custom-form-progress .indicator',
+		'index'            : 0 // 0 -> step 2,1 -> step 2, 2 -> step 3, 3 -> step 4, 4 -> step 5 
+	});
+	
+*/
+
 theme = ( function ( theme, $, window, document ) {
     'use strict';
    
@@ -5484,14 +5511,17 @@ theme = ( function ( theme, $, window, document ) {
 	    //-------- Navigation highlighting using waypoints
 		if ( $( 'body' ).hasClass( 'onepage' ) ) {
 
-
+			//Activate the first item
+			$( '.menu-main li:first' ).addClass( 'active' );
+			
+			
 			// Smooth scroll to content
 			$( '.menu-main li > a' ).on('click', function(e) {
 				e.preventDefault();
 
 				$( 'html,body' ).animate({
 					scrollTop: getRelatedContent( this ).offset().top - 20
-				}, 1200, 'easeOutExpo' );
+				}, 500, 'easeOutExpo' );
 			});	
 
 			//-------- Default cwaypoint settings
@@ -5521,9 +5551,6 @@ theme = ( function ( theme, $, window, document ) {
 				}
 			});	
 
-			setTimeout( function() {
-				$( '.menu-main li:first' ).addClass( 'active' );
-			}, 1000 );	
 		}
 
 		

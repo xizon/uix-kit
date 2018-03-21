@@ -4,6 +4,18 @@
  * Form
  *************************************
  */
+/*
+    Note:
+	
+	If you use the "change" event to asynchronously change a custom control of select, radio or checkbox, 
+	you need add a callback function that initializes the style:
+	
+	$( document ).customSelectInit();
+	$( document ).customRadioCheckboxInit();
+	
+*/
+
+
 theme = ( function ( theme, $, window, document ) {
     'use strict';
    

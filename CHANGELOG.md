@@ -4,6 +4,12 @@
 #### = 1.1.81 (March 22, 2018) =
 
 * Fix: Fixed minor bugs in listening events for one-page navigation.
+* New: Add a new module "Maintain Aspect Ratio List".
+* New: Add some new callback functions that initializes the custom Controls of select, radio, checkbox and Form Progress style.
+		$( document ).formProgressNext({ ... }); 
+		$( document ).customSelectInit(); 
+		$( document ).customRadioCheckboxInit();
+		
 
 
 #### = 1.1.8 (March 20, 2018) =
