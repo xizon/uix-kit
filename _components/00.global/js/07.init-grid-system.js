@@ -2,7 +2,13 @@
 
 /*! 
  *************************************
- * 7. Multiple columns full height for Bootstrap 3.x
+ * 7. Initialize the height of each column of the grid system
+ *
+ * Note: 
+ *
+ * Automatically sets the div height of the grid system to the height of the 
+ * outer container when ".full-height" class on ".row" or ".seamless-grid-container" div.
+ *
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -36,10 +42,20 @@ theme = ( function ( theme, $, window, document ) {
 
 		function rowColInit( w ) {
 
+			
+			//Bootstrap grid system
 			$( '.row.full-height' ).each( function()  {
 				var h = ( w > 768 ) ? $( this ).height() + 'px' : 'auto';
 				$( this ).find( '> div' ).css( 'height', h );
 			});
+			
+			//Custom seamless grid system
+			$( '.seamless-grid-container.full-height, .seamless-grid.full-height' ).each( function()  {
+				var h = ( w > 768 ) ? $( this ).height() + 'px' : 'auto';
+				$( this ).find( 'div[class*="seamless-col-"]' ).css( 'height', h );
+				
+			});
+						
 
 
 		}

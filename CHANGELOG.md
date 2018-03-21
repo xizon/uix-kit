@@ -1,9 +1,11 @@
 # Changelog
 
 
-#### = 1.1.81 (March 22, 2018) =
+#### = 1.1.82 (March 22, 2018) =
 
 * Fix: Fixed minor bugs in listening events for one-page navigation.
+* Tweak: Optimized method to initialize the height of each column of the grid system.
+* New: Automatically sets the div height of the grid system to the height of the outer container when ".full-height" class on ".row" or ".seamless-grid-container" div.
 * New: Add a new module "Maintain Aspect Ratio List".
 * New: Add some new callback functions that initializes the custom Controls of select, radio, checkbox and Form Progress style.
 		$( document ).formProgressNext({ ... }); 
