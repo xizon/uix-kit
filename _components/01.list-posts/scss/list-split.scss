@@ -38,6 +38,7 @@
 
 			&.is-reversed .row > .col-sm-6,
 			&.is-reversed .seamless-grid-container .seamless-col-1-2 {
+				float: left;
 				&:first-child, &:nth-child(2) {
 					transform: translateX(0);
 				}
