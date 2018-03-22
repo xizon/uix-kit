@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.82
- * ## Last Update         :  March 21, 2018
+ * ## Version             :  1.1.83
+ * ## Last Update         :  March 22, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -34,6 +34,7 @@
 	9. Dropdown Categories
 	10. Pagination
 	11. Specify a background image
+	12. Get all custom attributes of an element like "data-*"
 
 */
 
@@ -1169,6 +1170,73 @@ theme = ( function ( theme, $, window, document ) {
 
 /*! 
  *************************************
+ * 12. Get all custom attributes of an element like "data-*"
+ *************************************
+ */
+
+/* Get all attributes of an element using jQuery */
+(function(old) {
+  $.fn.attr = function() {
+    if(arguments.length === 0) {
+      if(this.length === 0) {
+        return null;
+      }
+
+      var obj = {};
+      $.each(this[0].attributes, function() {
+        if(this.specified) {
+          obj[this.name] = this.value;
+        }
+      });
+      return obj;
+    }
+
+    return old.apply(this, arguments);
+  };
+})($.fn.attr);
+
+
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ) {
+		
+		$( '[data-your-custom-datas]' ).each(function() {
+			var $this         = $( this );
+
+			
+			//Get all attributes of an element and push the new attributes like "data-*"
+			var curAttrs        = $this.attr(),
+				customPostData  = '';
+			
+			$.each( curAttrs, function( i, val ) {
+				if ( i.indexOf( 'data-ajax-list-field-' ) >= 0 ) {
+					customPostData += '"' + i.replace( 'data-ajax-list-field-', '' ) + '": ' + '"' + val + '", ';	
+				}
+				
+			});
+			customPostData  = customPostData.replace(/,\s*$/, '' );
+			
+
+		});
+		
+	};
+	
+		
+    theme.getAllCustomAttrs = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
+/*! 
+ *************************************
  * Accordion
  *************************************
  */
@@ -1375,6 +1443,180 @@ theme = ( function ( theme, $, window, document ) {
 	
 	
 }(jQuery));
+
+/*! 
+ *************************************
+ * Dynamic Drop Down List from JSON
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ) {
+		
+		$( '[data-ajax-dynamic-dd-json]' ).each( function() {
+			var $this            = $( this ),
+			    jsonFile         = $this.data( 'ajax-dynamic-dd-json' ),
+				ranID            = 'dynamic-dd-control-' + Math.random()*1000000000000000000,
+				method           = $this.data( 'ajax-dynamic-dd-method' ),
+				event            = $this.data( 'ajax-dynamic-dd-event' ),
+				associated       = $this.data( 'ajax-dynamic-dd-associated' ),
+				toData           = $this.data( 'ajax-dynamic-dd-data' ),
+				ID               = $this.attr( 'id' ),
+				thisChange       = true,
+				curID;
+	
+
+			if( typeof jsonFile === typeof undefined ) {
+				jsonFile = '';
+			}	
+			
+			if( typeof toData === typeof undefined ) {
+				toData = '';
+			}	
+			
+			if( typeof method === typeof undefined ) {
+				method = 'POST';
+			}		
+			
+			
+			if( typeof associated === typeof undefined ) {
+				associated = '#demo';
+			}		
+			
+			if( typeof ID === typeof undefined ) {
+				$this.attr( 'id', ranID );
+			}	
+			
+			
+			curID = $this.attr( 'id' );
+			
+			
+			//Parse the JSON data
+			if ( jsonFile != '' ) {
+				
+				$( document ).on( 'change', '#' + curID, function( e ) {
+
+					e.preventDefault();
+					
+					if ( thisChange ) {
+						
+						thisChange = false;
+						
+						var curVal = $( this[ this.selectedIndex ] ).val();
+
+						if ( curVal != '' ) {
+
+							//Returns JSON data
+							$.ajax({
+								url      : jsonFile, //Be careful about the format of the JSON file
+								method   : method,
+								data     : toData,
+								dataType : 'json',
+								success  : function ( data ) { 
+
+									//If the data is empty
+									if ( data == null ) {
+										//do something
+									}
+
+
+
+									//Push the options to target select
+									
+									//Check if a key exists inside a json object
+									if ( data && data.hasOwnProperty( curVal ) ) {
+										
+										var optionsHtml   = '',
+											thisVal       = data[ curVal ];
+
+										for ( var i = 0; i < thisVal.length; i++ ) {
+											
+											var name      = thisVal[ i ].name,
+												longitude = thisVal[ i ].longitude,
+												latitude  = thisVal[ i ].latitude;
+												
+											optionsHtml += "<option data-longitude='"+longitude+"' data-latitude='"+latitude+"' value='"+name+"'>"+name+"</option>";
+
+										}
+
+										$( associated ).html( optionsHtml );
+
+										
+
+										//Initialize the custom select
+										$( document ).customSelectInit();
+										$( associated ).attr( 'selected', 'selected' ).change();
+
+									}
+									
+
+									//Avoid duplicate events running
+									thisChange = true;
+
+								 },
+								 error  : function() {
+
+
+								 }
+							});
+
+
+						}	
+					}
+					
+
+					
+					return false;
+
+
+				});	
+				
+				
+				
+				//The target select event
+				$( document ).on( 'change.cusSelectDynamicDD', associated, function( e ) {
+
+					e.preventDefault();
+					
+					var $this        = $( this[ this.selectedIndex ] ),
+						curVal       = $this.val(),
+						curLongitude = $this.data( 'longitude' ),
+						curLatitude  = $this.data( 'latitude' );
+
+					
+					console.log( curVal + ' Longitude: ' + curLongitude + ' | Latitude: ' + curLatitude );
+					
+					return false;
+				
+					
+
+				});				
+				
+				
+			}
+			
+
+
+			
+			
+		});
+			
+		
+	};
+	
+		
+    theme.dynamicDDList = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
 
 /*! 
  *************************************
@@ -1681,7 +1923,9 @@ theme = ( function ( theme, $, window, document ) {
 
 
 			//Change Event Here
-			$( document ).on( 'click', settings.item, function( e ) {
+			//Prevents the triggering of multiple change events
+			$( document ).off( 'click.curCustomSelectItem' );
+			$( document ).on( 'click.curCustomSelectItem', settings.item, function( e ) {
 				e.preventDefault();
 
 				var $selectWrapper    = $( this ).closest( settings.targetWrapper ),
@@ -4575,7 +4819,7 @@ theme = ( function ( theme, $, window, document ) {
 					if ( data == null ) $button.addClass( 'hide' );
 				
 					
-					//Check JSON string
+					//Check if a key exists inside a json object
 					if ( data && data.hasOwnProperty( 'items' ) && Object.prototype.toString.call( data.items )=='[object Array]' ) {
 						
 						
@@ -4669,26 +4913,7 @@ theme = ( function ( theme, $, window, document ) {
 }( theme, jQuery, window, document ) );
 
 
-/* Get all attributes of an element using jQuery */
-(function(old) {
-  $.fn.attr = function() {
-    if(arguments.length === 0) {
-      if(this.length === 0) {
-        return null;
-      }
 
-      var obj = {};
-      $.each(this[0].attributes, function() {
-        if(this.specified) {
-          obj[this.name] = this.value;
-        }
-      });
-      return obj;
-    }
-
-    return old.apply(this, arguments);
-  };
-})($.fn.attr);
 
 /*! 
  *************************************
@@ -7747,87 +7972,6 @@ theme = ( function ( theme, $, window, document ) {
 }( theme, jQuery, window, document ) );
 
 
-/*! 
- *************************************
- * Testimonials Carousel
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-    
-    var documentReady = function( $ ) {
-    
-		var $obj = $( '.custom-testimonials .flexslider' );
-		$obj.flexslider({
-			animation         : 'slide',
-			slideshow         : true,
-			smoothHeight      : true,
-			controlNav        : true,
-			manualControls    : '.slides-custom-control li',
-			directionNav      : false,
-			animationSpeed    : 600,
-			slideshowSpeed    : 7000,
-			selector          : ".slides > li",
-			drag              : true,
-			start: function(slider){
-				$obj.on( 'mousedown', function( e ) {
-					if ( $obj.data( 'flexslider' ).animating ) {
-						return;
-					}
-						
-					$( this ).addClass('dragging');
-					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
-					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
-					$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
-					$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );
-				} );
-			
-				$obj.on( 'mouseup', function( e ) {
-					if ( $obj.data('flexslider').animating ) {
-						return;
-					}
-						
-					$( this ).removeClass('dragging');
-					var origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
-					    origin_mouse_y = $( this ).data( 'origin_mouse_y' );
-					
-					if ( 'horizontal' === $obj.data('flexslider').vars.direction ) {
-						if ( e.pageX > origin_mouse_x ) {
-							$obj.flexslider('prev');
-						}
-						if ( e.pageX < origin_mouse_x ) {
-							$obj.flexslider('next');
-						}
-					} else {
-						if ( e.pageY > origin_mouse_y ) {
-							$obj.flexslider('prev');
-						}
-						if ( e.pageY < origin_mouse_y ) {
-							$obj.flexslider('next');
-						}
-					}
-				} );
-			}
-		});
-		
-		
-    };
-
-    theme.testimonials = {
-        documentReady : documentReady        
-    };
-
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
-
-
-
-
-
-
-
 
 
 /*! 
@@ -7915,6 +8059,87 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
+
+
+/*! 
+ *************************************
+ * Testimonials Carousel
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+    
+		var $obj = $( '.custom-testimonials .flexslider' );
+		$obj.flexslider({
+			animation         : 'slide',
+			slideshow         : true,
+			smoothHeight      : true,
+			controlNav        : true,
+			manualControls    : '.slides-custom-control li',
+			directionNav      : false,
+			animationSpeed    : 600,
+			slideshowSpeed    : 7000,
+			selector          : ".slides > li",
+			drag              : true,
+			start: function(slider){
+				$obj.on( 'mousedown', function( e ) {
+					if ( $obj.data( 'flexslider' ).animating ) {
+						return;
+					}
+						
+					$( this ).addClass('dragging');
+					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
+					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
+					$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
+					$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );
+				} );
+			
+				$obj.on( 'mouseup', function( e ) {
+					if ( $obj.data('flexslider').animating ) {
+						return;
+					}
+						
+					$( this ).removeClass('dragging');
+					var origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
+					    origin_mouse_y = $( this ).data( 'origin_mouse_y' );
+					
+					if ( 'horizontal' === $obj.data('flexslider').vars.direction ) {
+						if ( e.pageX > origin_mouse_x ) {
+							$obj.flexslider('prev');
+						}
+						if ( e.pageX < origin_mouse_x ) {
+							$obj.flexslider('next');
+						}
+					} else {
+						if ( e.pageY > origin_mouse_y ) {
+							$obj.flexslider('prev');
+						}
+						if ( e.pageY < origin_mouse_y ) {
+							$obj.flexslider('next');
+						}
+					}
+				} );
+			}
+		});
+		
+		
+    };
+
+    theme.testimonials = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
+
+
 
 
 

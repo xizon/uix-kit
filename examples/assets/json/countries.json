@@ -1,0 +1,20 @@
+{
+  "Country 1": [
+    { "name": "City 1", "longitude": 86.212172, "latitude": 14.480298 },
+    { "name": "City 2", "longitude": 83.526166, "latitude": 30.910773 },
+    { "name": "City 3", "longitude": 86.212172, "latitude": 14.480298 },
+    { "name": "City 4", "longitude": 83.526166, "latitude": 30.910773 },
+    { "name": "City 5", "longitude": 86.212172, "latitude": 14.480298 }
+  ],
+  "Country 2": [
+    { "name": "City 2_1", "longitude": 86.212172, "latitude": 14.480298 },
+    { "name": "City 2_2", "longitude": 83.526166, "latitude": 30.910773 },
+    { "name": "City 2_3", "longitude": 86.212172, "latitude": 14.480298 }
+  ],
+  "Country 3": [
+    { "name": "City 3_1", "longitude": 86.212172, "latitude": 14.480298 },
+    { "name": "City 3_2", "longitude": 83.526166, "latitude": 30.910773 },
+    { "name": "City 3_3", "longitude": 86.212172, "latitude": 14.480298 }
+  ]
+	
+}

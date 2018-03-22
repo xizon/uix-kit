@@ -304,7 +304,9 @@ theme = ( function ( theme, $, window, document ) {
 
 
 			//Change Event Here
-			$( document ).on( 'click', settings.item, function( e ) {
+			//Prevents the triggering of multiple change events
+			$( document ).off( 'click.curCustomSelectItem' );
+			$( document ).on( 'click.curCustomSelectItem', settings.item, function( e ) {
 				e.preventDefault();
 
 				var $selectWrapper    = $( this ).closest( settings.targetWrapper ),

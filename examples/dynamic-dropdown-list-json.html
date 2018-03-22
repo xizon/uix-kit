@@ -89,10 +89,9 @@
   </head>     
   
      
-  <body class="page page-mousewheel-eff">
+  <body class="page">
   
   
-          
               
     <!-- Loader
     ============================================= -->      
@@ -120,7 +119,8 @@
 
     
     
-
+  
+  
     <div class="wrapper">
     
         <!-- Header Area
@@ -270,8 +270,6 @@
                    
                         
                         
-                        
-                        
                   </div>
                   <!-- .container end -->
                   
@@ -281,17 +279,16 @@
         </header>
         <div class="header-inner"></div>
       
-       
-    
-       
+      
+     
         <!-- Content 01
         ====================================================== -->
         <section class="space-none">
             <div class="container t-c">
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2 t-c">
-                            <h2>Mousewheel Interaction</h2>
-							<p>Scroll your mouse wheel to see the effect</p>
+                            <h2>Dynamic Drop Down List from JSON</h2>
+							<p>Create a dynamic dropdown form that loads its data from a JSON file.</p>
                             
                         </div>
                     </div>
@@ -310,24 +307,107 @@
         <section>
             <div class="container">
                     <div class="row">
-                        <div class="col-md-8 col-md-offset-2">
-                            
-							<div id="demo-mousewheel-interaction-status">Status begin...</div>	
+                        <div class="col-md-8 col-md-offset-2 t-c">
+   
+						       <p><strong>Callback:</strong> <span id="dynamic-callback">City Name Here</span></p>
+         
+							   <div class="row">
+									<div class="col-md-6">
 
-                  
+										<div class="controls custom-select">
+											<label>
+												<select 
+														id="dynamic-dd-country" 
+														name="dynamic-dd-country" 
+														placeholder="Country"
+														data-ajax-dynamic-dd-json="assets/json/countries.json"
+														data-ajax-dynamic-dd-method="POST" 
+														data-ajax-dynamic-dd-event="change" 
+														data-ajax-dynamic-dd-data="" 
+														data-ajax-dynamic-dd-associated="#dynamic-dd-city">
+														
+														
+													<option value="" selected>Select Country</option>
+													<option value="Country 1">Country 1</option>
+													<option value="Country 2">Country 2</option>
+													<option value="Country 3">Country 3</option>
+												</select>
+
+											</label>
+											<span>Country</span>
+
+										</div>
+
+									</div>  
+
+									<div class="col-md-6">
+
+										<div class="controls custom-select">
+											<label>
+												<select id="dynamic-dd-city" name="dynamic-dd-city" placeholder="City">
+													<option value="Option 1">Option 1</option>
+													<option value="Option 2">Option 2</option>
+												</select>
+
+											</label>
+											<span>City</span>
+
+										</div>
+
+									</div>  		
+
+
+								</div>
+								<!-- .row end --> 		   
+
+                        
+                       
                         </div>
+                        <!-- .col-md-12 end -->
                     </div>
                     <!-- .row end -->
-              
+                    
                     
             </div>
             <!-- .container end -->
- 
+            
+            
         </section>
         
-         
-           
-   
+        
+        <script>
+		( function( $ ) {
+		"use strict";
+
+			$( function() {
+
+				//The target select event
+				$( document ).on( 'change.cusSelectDynamicDD', '#dynamic-dd-city', function( e ) {
+
+					e.preventDefault();
+
+					var $this        = $( this[ this.selectedIndex ] ),
+						curVal       = $this.val(),
+						curLongitude = $this.data( 'longitude' ),
+						curLatitude  = $this.data( 'latitude' );
+
+
+					$( '#dynamic-callback').text( '{ Name: '+curVal+', Longitude: ' + curLongitude + ', Latitude: ' + curLatitude + '}'  );
+
+					return false;
+
+
+
+				});			
+			} );
+
+		} ) ( jQuery );
+			
+			
+		</script>
+        
+        
+        
         
         
                 <!-- Footer

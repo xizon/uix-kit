@@ -1,7 +1,13 @@
 # Changelog
 
+#### = 1.1.83 (March 22, 2018) =
 
-#### = 1.1.82 (March 22, 2018) =
+* New: Add a new module "Dynamic Drop Down List". Create a dynamic dropdown form that loads its data from a JSON file.
+* Fix: Prevent custom selectors from triggering multiple change events.
+
+
+
+#### = 1.1.81 (March 21, 2018) =
 
 * Fix: Fixed minor bugs in listening events for one-page navigation.
 * Tweak: Optimized method to initialize the height of each column of the grid system.

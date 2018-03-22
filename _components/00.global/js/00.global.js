@@ -15,6 +15,7 @@
 	9. Dropdown Categories
 	10. Pagination
 	11. Specify a background image
+	12. Get all custom attributes of an element like "data-*"
 
 */
 

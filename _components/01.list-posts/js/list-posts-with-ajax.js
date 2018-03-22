@@ -239,7 +239,7 @@ theme = ( function ( theme, $, window, document ) {
 					if ( data == null ) $button.addClass( 'hide' );
 				
 					
-					//Check JSON string
+					//Check if a key exists inside a json object
 					if ( data && data.hasOwnProperty( 'items' ) && Object.prototype.toString.call( data.items )=='[object Array]' ) {
 						
 						
@@ -333,23 +333,3 @@ theme = ( function ( theme, $, window, document ) {
 }( theme, jQuery, window, document ) );
 
 
-/* Get all attributes of an element using jQuery */
-(function(old) {
-  $.fn.attr = function() {
-    if(arguments.length === 0) {
-      if(this.length === 0) {
-        return null;
-      }
-
-      var obj = {};
-      $.each(this[0].attributes, function() {
-        if(this.specified) {
-          obj[this.name] = this.value;
-        }
-      });
-      return obj;
-    }
-
-    return old.apply(this, arguments);
-  };
-})($.fn.attr);
