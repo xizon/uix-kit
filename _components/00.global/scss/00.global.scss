@@ -33,10 +33,7 @@
 	7. Header Area
     8. Brand	
 	9. Footer
-	10. Social Buttons
-	    10.1. Social Background
-		10.2. Social General
-		
+	10. Video	
 	11. Back to Top
 	12. Loader
 	13. Overlay
@@ -62,7 +59,9 @@
 		
 	20. Comments
 	21. 3rd Party Plugins
-    22. Video
+    22. Social Media Icons
+	    22.1. Social Button
+		22.2. Social Background
 
 
 */
@@ -133,6 +132,35 @@ $primary-bg-color      : transparent;
 	white-space: nowrap;
 	
 }
+
+@mixin scrollbar( $dir ){
+	/* @include scrollbar(); */
+	/* Custom scrollbar */
+	&::-webkit-scrollbar-track {
+		border-radius: 0px;
+		background-color: #E6E3E3;
+	}
+
+	@if $dir == vertical {
+		&::-webkit-scrollbar {
+			height: 5px;
+			background-color: $highlight-color1;
+		}
+	} @else if $dir == horizontal {
+		&::-webkit-scrollbar {
+			width: 5px;
+			background-color: $highlight-color1;
+		}
+	}
+	
+
+	&::-webkit-scrollbar-thumb {
+		border-radius: 0px;
+		background-color: $highlight-color1;
+	}
+	
+}
+
 
 
 /* Ripple Effect */

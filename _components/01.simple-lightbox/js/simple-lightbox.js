@@ -28,7 +28,10 @@ theme = ( function ( theme, $, window, document ) {
 				dataPhoto     = $this.data( 'lb-src' ),
 				dataHtmlID    = $this.data( 'lb-html' ),
 				dataFixed     = $this.data( 'lb-fixed' ),
-				dataMaskClose = $this.data( 'lb-mask-close' );
+				dataMaskClose = $this.data( 'lb-mask-close' ),
+				htmlContent   = '',
+				imgSrcStr     = '',
+				imgSrcStrToW  = '';
 			
 		
 			if( typeof dataFixed === typeof undefined ) {
@@ -56,29 +59,101 @@ theme = ( function ( theme, $, window, document ) {
 			//Reset current container type
 			$lbCon.removeClass( 'custom pure-image' );
 			
+			
 
+			//-------- If it is photo
 			if( typeof dataPhoto != typeof undefined && dataPhoto != '' ) {
+				
+				
 				$( lbCloseEl ).show();
 				$lbWrapper.show();
 				$lbMask.show();
 				$lbCon.show();
-				$lbContent.html( '<img src="'+ dataPhoto +'" alt="">' ).promise().done( function(){
+				
+				if ( dataPhoto.indexOf( '[' ) >= 0 &&  dataPhoto.indexOf( ']' ) >= 0 ) {
+					imgSrcStr = JSON.parse( dataPhoto.replace(/([a-zA-Z0-9]+?):/g, '"$1":').replace(/'/g,'"') );
+				} else {
+					imgSrcStr = dataPhoto;
 					
+				}
+				
+				
+				//Judging whether multiple image sets
+				if ( Object.prototype.toString.call( imgSrcStr ) =='[object Array]' ) {
+					
+					var largePhotos = '',
+						thumbs      = '';
+					
+					imgSrcStrToW = imgSrcStr[0].large;
+					
+					//push the large photos
+					largePhotos += '<div class="lb-large-photos-container"><ul>';
+					for ( var i = 0; i < imgSrcStr.length; i++ ) {
+						largePhotos += '<li><img src="'+ imgSrcStr[i].large +'" alt=""></li>'
+					}
+					largePhotos += '</ul></div>';
+					
+					//push the thumbs
+					thumbs += '<div class="lb-thumbs-container"><ul>';
+					for ( var i = 0; i < imgSrcStr.length; i++ ) {
+						thumbs += '<li><img src="'+ imgSrcStr[i].thumb +'" alt=""></li>'
+					}
+					thumbs += '</ul></div>';
+					
+					htmlContent = largePhotos + thumbs;
+					
+
+					
+				} else {
+					
+					imgSrcStrToW = imgSrcStr;
+					htmlContent = '<img src="'+ imgSrcStr +'" alt="">';
+					
+				}
+						
+				$lbContent.html( htmlContent ).promise().done( function(){
+
 					//Set current container type
 					$lbCon.addClass( 'pure-image' );
-					
+
 					//Set container width
 					var img = new Image();
+					img.src = imgSrcStrToW;
 					img.onload = function() {
-						$lbCon.css( 'width', this.width + 'px' );
-					}
-					img.src = dataPhoto;
-					$lbCon.find( '> .html' ).removeClass( 'no-img' );
+						
+						var sw = $( window ).width() - 30,
+							w  = ( this.width > 1000 ) ? 1000 : this.width,
+							h;
+				
+						if ( w > sw ) w = sw;
+						
+						h = w * ( this.height/this.width )
+						
 					
-				});
+			
+						$lbCon.css( {
+							'width': w + 'px'
+						} );
+						
+						
+						$( '.lb-large-photos-container' ).css( {
+							'height': h + 'px'
+						} );	
+						
+						
+					
+						
+					}
+					
+					$lbCon.find( '> .html' ).removeClass( 'no-img' );
+
+				});		
+
 				
 			}	
 			
+			
+			//-------- If it is not photo
 			if( typeof dataHtmlID != typeof undefined && dataHtmlID != '' ) {
 				dataHtmlID = dataHtmlID.replace( '#', '' );
 
@@ -107,13 +182,45 @@ theme = ( function ( theme, $, window, document ) {
 
 		});
 
+		
+		//Close the window
 		$( document ).on( 'click', lbCloseEl, function() {
 			customLBCloseEvent();
 		});
 
+		
 		$( document ).on( 'click', lbCloseFixedEl, function() {
 			customLBCloseEvent();
 		});	
+		
+
+		//Click thumbnail to switch large photo
+		$( document ).on( 'click', '.lb-thumbs-container li', function() {
+			
+			var $largePhoto = $( this ).closest( '.html' ).find( '.lb-large-photos-container' ),
+				$thumb      = $( '.lb-thumbs-container li' ),
+				curImgH     = 0;
+
+			
+			$thumb.removeClass( 'active' );
+			$( this ).addClass( 'active' );
+			
+			$largePhoto.find( 'li' ).fadeOut( 300 ).removeClass( 'active' );
+			$largePhoto.find( 'li' ).eq( $( this ).index() ).addClass( 'active' ).fadeIn( 300, function() {
+				
+				//Reset the container height
+				curImgH = $largePhoto.find( 'li' ).eq( $( this ).index() ).find( 'img' ).height();
+				
+				$largePhoto.css( {
+					'height': curImgH + 'px'
+				} );
+			});
+
+				
+			
+		});		
+		
+		
 		
 		function customLBCloseEvent() {
 			//Remove all dynamic classes

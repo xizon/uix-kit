@@ -75,6 +75,95 @@ $custom-lightbox-radius: 3px;
 			@include outer-shadow();
 			
 			
+			.lb-large-photos-container {
+				
+				overflow: hidden;
+				background: #000;	
+				position: relative;
+				transition: all 0.1s ease;
+				
+
+				ul {
+					
+					margin: 0;
+					padding: 0;
+					height: 100%;
+
+					li {
+						padding: 0;
+						display: none;
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: 100%;
+						height: 100%;
+						@include transition-default();
+						
+						&.active {
+							
+						}
+
+						&:first-child {
+							display: block;
+						}
+						
+						
+					}
+					
+				}
+				
+			}
+			
+			
+			.lb-thumbs-container {
+				position: absolute;
+				bottom: 0;
+				left: 50%;
+				transform: translateX(-50%);
+				text-align: center;
+				width: 100%;
+				overflow: hidden;
+				overflow-x: auto;
+				white-space: nowrap;
+				@include scrollbar( 'vertical' );
+				
+				
+				
+				ul {
+					
+					margin: 0;
+					padding: 0;
+					
+					
+					li {
+						width: 100px;
+						max-height: 100px;
+						display: inline-block;
+						cursor: pointer;
+						margin-right: 10px;
+						margin-bottom: 10px;
+						padding: 0;
+						transform: scale(.9);
+						@include transition-default();
+						
+						&.active {
+							transform: scale(1);
+						}
+						
+
+						img {
+
+							box-shadow: 0px 6px 21px 1px rgba(0,0,0,0.29);
+						}
+
+					}	
+				}
+				
+
+				
+			}
+			
+			
 			&::before,
 			&::after {
 				content: '';
@@ -115,6 +204,7 @@ $custom-lightbox-radius: 3px;
 				max-height: 60vh;
 				overflow-y: auto;
 				text-align: left;
+				@include scrollbar( 'horizontal' );
 				
 				> .content-show {
 					padding: 1.5rem;
@@ -124,20 +214,6 @@ $custom-lightbox-radius: 3px;
 				}
 
 
-				&::-webkit-scrollbar-track {
-					border-radius: 0px;
-					background-color: $highlight-color1;
-				}
-
-				&::-webkit-scrollbar {
-					width: 5px;
-					background-color: $highlight-color1;
-				}
-
-				&::-webkit-scrollbar-thumb {
-					border-radius: 0px;
-					background-color: #fff;
-				}
 				
 			
 				

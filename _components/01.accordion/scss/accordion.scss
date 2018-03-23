@@ -28,25 +28,15 @@
 
 			dt {
 				border-bottom: 1px solid rgba(0, 0, 0, 0.18);
+				
+				&:before {
+					transform: rotate(90deg);
+				}
+				
 			}
 		}
 
-		dt:before {
-			position: absolute;
-			display: block;
-			font-family: 'FontAwesome';
-			content: "\f105";
-			font-size: 18pt;
-			right: 1rem;
-			top: .5rem;
-			transition: .1s ease-in-out;
-			color: rgba(0, 0, 0, 0.54);
-		}
-
-		&.active dt:before {
-			transform: rotate(90deg);
-		}
-		
+	
 		
 	}
 
@@ -57,6 +47,18 @@
 
 		a {
 			display: block;
+		}
+		
+		&:before {
+			position: absolute;
+			display: block;
+			font-family: 'FontAwesome';
+			content: "\f105";
+			font-size: 18pt;
+			right: 1rem;
+			top: .5rem;
+			transition: .1s ease-in-out;
+			color: rgba(0, 0, 0, 0.54);
 		}
 	}
 	

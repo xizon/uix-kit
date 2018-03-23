@@ -1,10 +1,11 @@
 # Changelog
 
-#### = 1.1.83 (March 22, 2018) =
+#### = 1.1.84 (March 22, 2018) =
 
+* New: Add a new module "Social Media Icons".
 * New: Add a new module "Dynamic Drop Down List". Create a dynamic dropdown form that loads its data from a JSON file.
 * Fix: Prevent custom selectors from triggering multiple change events.
-
+* Tweak: Let the Simple Lightbox effect support multiple picture switching.
 
 
 #### = 1.1.81 (March 21, 2018) =

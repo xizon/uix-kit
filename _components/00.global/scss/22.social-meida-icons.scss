@@ -1,0 +1,387 @@
+/* ====================================================== 
+   22. Social Media Icons
+/* ====================================================== */
+/* 22.1. Social Button */
+.social-btn {
+    position: relative;
+    border: 2px solid $primary-text-color1;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    z-index: 1;
+    color: $primary-text-color1;
+	padding: 0;
+	margin: 0;
+	
+	&.thin {
+		border-width: 1px;
+	}
+	
+	
+	&.fillet {
+		border-radius: 50%;
+		
+		&:after {
+			border-radius: 50%;
+		}
+	}
+
+	&.small {
+		width: 2rem;
+		height: 2rem;
+		line-height: 1.875rem;	
+		margin-right: .5rem;
+		
+		
+		i {
+			font-size: 1rem;
+		}
+	
+		
+	}
+	
+	&.medium {
+		width: 2.875rem;
+		height: 2.875rem;
+		line-height: 2.875rem;	
+		margin-right: .75rem;
+		
+		i {
+			font-size: 1.2rem;
+		}
+	
+		
+	}
+	
+	&.large {
+		width: 3.75rem;
+		height: 3.75rem;
+		line-height: 3.75rem;	
+		margin-right: 1rem;
+		
+		i {
+			font-size: 1.5rem;
+		}
+
+		
+	}
+	
+
+	&:after {
+		@include transition-default();
+		position: absolute;
+		content: '';
+		width: 100%;
+		height: 100%;
+		display: block;
+		left: 0;
+		top: 0;
+		background-color: $primary-text-color1;
+		visibility: hidden;
+		opacity: 0;
+		transform: scale(0.5, 0.5);
+		z-index: -1;
+		
+
+	}
+	
+	
+	&:hover {
+		color: #fff;
+		
+
+		&:after {
+			visibility: visible;
+			opacity: 1;
+			transform: scale(1, 1);
+		}
+	}
+
+}
+
+/* 22.2. Social Background */
+
+.social-bg {
+    color: #fff;
+}
+
+.social-bg-twitter {
+    border-color: #53B9FD;
+    background-color: #53B9FD;
+}
+
+.social-bg-facebook {
+	border-color: #78A4DD;
+	background-color: #78A4DD;
+}
+
+.social-bg-google {
+	border-color: #FC5B5B;
+	background-color: #FC5B5B;
+}
+
+.social-bg-instagram {
+	border-color: #6156C7;
+	background-color: #6156C7;
+}
+
+.social-bg-lastfm {
+	border-color: #B90000;
+	background-color: #B90000;
+}
+
+.social-bg-youtube {
+	border-color: #CC181E;
+	background-color: #CC181E;
+}
+
+.social-bg-vimeo {
+	border-color: #1ab7ea;
+	background-color: #1ab7ea;
+}
+
+.social-bg-dribbble {
+	border-color: #FA8BBC;
+	background-color: #FA8BBC;
+}
+
+.social-bg-github {
+	border-color: #652F51;
+	background-color: #652F51;
+}
+
+.social-bg-flickr {
+	border-color: #fc4ca4;
+	background-color: #fc4ca4;
+}
+
+.social-bg-medium {
+	border-color: #00AB6B;
+	background-color: #00AB6B;
+}
+
+.social-bg-codepen {
+	border-color: #333;
+	background-color: #333;
+}
+
+.social-bg-behance {
+	border-color: #4F8FD6;
+	background-color: #4F8FD6;
+}
+
+.social-bg-dropbox {
+	border-color: #349BE9;
+	background-color: #349BE9;
+}
+
+.social-bg-pinterest {
+	border-color: #F35359;
+	background-color: #F35359;
+}
+
+.social-bg-reddit {
+	border-color: #FF4500;
+	background-color: #FF4500;
+}
+
+.social-bg-soundcloud {
+	border-color: #FF7500;
+	background-color: #FF7500;
+}
+
+.social-bg-producthunt {
+	border-color: #DA552F;
+	background-color: #DA552F;
+}
+
+.social-bg-weibo {
+	border-color: #E6162D;
+	background-color: #E6162D;
+}
+
+.social-bg-deviantart {
+	border-color: #05CC47;
+	background-color: #05CC47;
+}
+
+.social-bg-spotify {
+	border-color: #A5CE3F;
+	background-color: #A5CE3F;
+}
+
+.social-bg-wordpress {
+	border-color: #24A5DD;
+	background-color: #24A5DD;
+}
+
+.social-bg-digg {
+	border-color: #333;
+	background-color: #333;
+}
+
+.social-bg-tumblr {
+	border-color: #529ECC;
+	background-color: #529ECC;
+}
+
+.social-bg-linkedin {
+	border-color: #24A5DD;
+	background-color: #24A5DD;
+}
+
+.social-bg-stackoverflow {
+	border-color: #FF7500;
+	background-color: #FF7500;
+}
+
+
+.social-bg-colourful {
+    display: inline-block;
+    *display: inline;
+	margin: .2em .5em;
+}
+
+.social-bg-colourful {
+	color: #333333;
+}
+
+.social-bg-colourful[href*="twitter.com"] {
+    color: #53B9FD;
+}
+
+.social-bg-colourful[href*="facebook.com"] {
+    color: #78A4DD;
+}
+
+.social-bg-colourful[href*="google.com"] {
+    color: #FC5B5B;
+}
+
+.social-bg-colourful[href*="instagram.com"] {
+    color: #6156C7;
+}
+
+.social-bg-colourful[href*="last.fm"] {
+    color: #B90000;
+}
+
+.social-bg-colourful[href*="youtube.com"] {
+    color: #CC181E;
+}
+
+.social-bg-colourful[href*="vimeo.com"] {
+    color: #1ab7ea;
+}
+
+.social-bg-colourful[href*="dribbble.com"] {
+    color: #FA8BBC;
+}
+
+.social-bg-colourful[href*="github.com"] {
+    color: #652F51;
+}
+
+.social-bg-colourful[href*="flickr.com"] {
+    color: #fc4ca4;
+}
+
+.social-bg-colourful[href*="medium.com"] {
+    color: #00AB6B;
+}
+
+.social-bg-colourful[href*="codepen.com"] {
+    color: #333;
+}
+
+.social-bg-colourful[href*="behance.net"] {
+    color: #4F8FD6;
+}
+
+.social-bg-colourful[href*="dropbox.com"] {
+    color: #349BE9;
+}
+
+.social-bg-colourful[href*="pinterest.com"] {
+    color: #F35359;
+}
+
+.social-bg-colourful[href*="reddit.com"] {
+    color: #FF4500;
+}
+
+.social-bg-colourful[href*="soundcloud.com"] {
+    color: #FF7500;
+}
+
+.social-bg-colourful[href*="producthunt.com"] {
+    color: #DA552F;
+}
+
+.social-bg-colourful[href*="weibo.com"] {
+    color: #E6162D;
+}
+
+
+.social-bg-colourful[href*="deviantart.com"] {
+    color: #05CC47;
+}
+
+.social-bg-colourful[href*="spotify.com"] {
+    color: #A5CE3F;
+}
+
+.social-bg-colourful[href*="wordpress.com"] {
+    color: #24A5DD;
+}
+
+.social-bg-colourful[href*="mailto"] {
+    color: #333;
+}
+
+.social-bg-colourful[href*="digg.com"] {
+    color: #333;
+}
+
+.social-bg-colourful[href*="tumblr.com"] {
+    color: #529ECC;
+}
+
+.social-bg-colourful[href*="linkedin.com"] {
+    color: #24A5DD;
+}
+
+.social-bg-colourful[href*="stackoverflow.com"] {
+    color: #FF7500;
+}
+
+.social-bg-colourful[href*="rss"], 
+.social-bg-colourful[href*="feed"] {
+    color: #FF7500;
+}
+
+
+/*----- Theme - White -----*/
+
+.theme-white {
+	
+	.social-btn {
+		border-color: #fff;
+		
+		&:hover {
+			
+			i {
+				color: $primary-text-color1;
+			}
+			
+			&:after {
+				background-color: #fff;
+			}
+		}
+		
+	}
+	
+}
+
+
+

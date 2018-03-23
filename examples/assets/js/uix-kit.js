@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.83
- * ## Last Update         :  March 22, 2018
+ * ## Version             :  1.1.84
+ * ## Last Update         :  March 23, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -6494,7 +6494,10 @@ theme = ( function ( theme, $, window, document ) {
 				dataPhoto     = $this.data( 'lb-src' ),
 				dataHtmlID    = $this.data( 'lb-html' ),
 				dataFixed     = $this.data( 'lb-fixed' ),
-				dataMaskClose = $this.data( 'lb-mask-close' );
+				dataMaskClose = $this.data( 'lb-mask-close' ),
+				htmlContent   = '',
+				imgSrcStr     = '',
+				imgSrcStrToW  = '';
 			
 		
 			if( typeof dataFixed === typeof undefined ) {
@@ -6522,29 +6525,101 @@ theme = ( function ( theme, $, window, document ) {
 			//Reset current container type
 			$lbCon.removeClass( 'custom pure-image' );
 			
+			
 
+			//-------- If it is photo
 			if( typeof dataPhoto != typeof undefined && dataPhoto != '' ) {
+				
+				
 				$( lbCloseEl ).show();
 				$lbWrapper.show();
 				$lbMask.show();
 				$lbCon.show();
-				$lbContent.html( '<img src="'+ dataPhoto +'" alt="">' ).promise().done( function(){
+				
+				if ( dataPhoto.indexOf( '[' ) >= 0 &&  dataPhoto.indexOf( ']' ) >= 0 ) {
+					imgSrcStr = JSON.parse( dataPhoto.replace(/([a-zA-Z0-9]+?):/g, '"$1":').replace(/'/g,'"') );
+				} else {
+					imgSrcStr = dataPhoto;
 					
+				}
+				
+				
+				//Judging whether multiple image sets
+				if ( Object.prototype.toString.call( imgSrcStr ) =='[object Array]' ) {
+					
+					var largePhotos = '',
+						thumbs      = '';
+					
+					imgSrcStrToW = imgSrcStr[0].large;
+					
+					//push the large photos
+					largePhotos += '<div class="lb-large-photos-container"><ul>';
+					for ( var i = 0; i < imgSrcStr.length; i++ ) {
+						largePhotos += '<li><img src="'+ imgSrcStr[i].large +'" alt=""></li>'
+					}
+					largePhotos += '</ul></div>';
+					
+					//push the thumbs
+					thumbs += '<div class="lb-thumbs-container"><ul>';
+					for ( var i = 0; i < imgSrcStr.length; i++ ) {
+						thumbs += '<li><img src="'+ imgSrcStr[i].thumb +'" alt=""></li>'
+					}
+					thumbs += '</ul></div>';
+					
+					htmlContent = largePhotos + thumbs;
+					
+
+					
+				} else {
+					
+					imgSrcStrToW = imgSrcStr;
+					htmlContent = '<img src="'+ imgSrcStr +'" alt="">';
+					
+				}
+						
+				$lbContent.html( htmlContent ).promise().done( function(){
+
 					//Set current container type
 					$lbCon.addClass( 'pure-image' );
-					
+
 					//Set container width
 					var img = new Image();
+					img.src = imgSrcStrToW;
 					img.onload = function() {
-						$lbCon.css( 'width', this.width + 'px' );
-					}
-					img.src = dataPhoto;
-					$lbCon.find( '> .html' ).removeClass( 'no-img' );
+						
+						var sw = $( window ).width() - 30,
+							w  = ( this.width > 1000 ) ? 1000 : this.width,
+							h;
+				
+						if ( w > sw ) w = sw;
+						
+						h = w * ( this.height/this.width )
+						
 					
-				});
+			
+						$lbCon.css( {
+							'width': w + 'px'
+						} );
+						
+						
+						$( '.lb-large-photos-container' ).css( {
+							'height': h + 'px'
+						} );	
+						
+						
+					
+						
+					}
+					
+					$lbCon.find( '> .html' ).removeClass( 'no-img' );
+
+				});		
+
 				
 			}	
 			
+			
+			//-------- If it is not photo
 			if( typeof dataHtmlID != typeof undefined && dataHtmlID != '' ) {
 				dataHtmlID = dataHtmlID.replace( '#', '' );
 
@@ -6573,13 +6648,45 @@ theme = ( function ( theme, $, window, document ) {
 
 		});
 
+		
+		//Close the window
 		$( document ).on( 'click', lbCloseEl, function() {
 			customLBCloseEvent();
 		});
 
+		
 		$( document ).on( 'click', lbCloseFixedEl, function() {
 			customLBCloseEvent();
 		});	
+		
+
+		//Click thumbnail to switch large photo
+		$( document ).on( 'click', '.lb-thumbs-container li', function() {
+			
+			var $largePhoto = $( this ).closest( '.html' ).find( '.lb-large-photos-container' ),
+				$thumb      = $( '.lb-thumbs-container li' ),
+				curImgH     = 0;
+
+			
+			$thumb.removeClass( 'active' );
+			$( this ).addClass( 'active' );
+			
+			$largePhoto.find( 'li' ).fadeOut( 300 ).removeClass( 'active' );
+			$largePhoto.find( 'li' ).eq( $( this ).index() ).addClass( 'active' ).fadeIn( 300, function() {
+				
+				//Reset the container height
+				curImgH = $largePhoto.find( 'li' ).eq( $( this ).index() ).find( 'img' ).height();
+				
+				$largePhoto.css( {
+					'height': curImgH + 'px'
+				} );
+			});
+
+				
+			
+		});		
+		
+		
 		
 		function customLBCloseEvent() {
 			//Remove all dynamic classes
@@ -7972,6 +8079,87 @@ theme = ( function ( theme, $, window, document ) {
 }( theme, jQuery, window, document ) );
 
 
+/*! 
+ *************************************
+ * Testimonials Carousel
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+    
+		var $obj = $( '.custom-testimonials .flexslider' );
+		$obj.flexslider({
+			animation         : 'slide',
+			slideshow         : true,
+			smoothHeight      : true,
+			controlNav        : true,
+			manualControls    : '.slides-custom-control li',
+			directionNav      : false,
+			animationSpeed    : 600,
+			slideshowSpeed    : 7000,
+			selector          : ".slides > li",
+			drag              : true,
+			start: function(slider){
+				$obj.on( 'mousedown', function( e ) {
+					if ( $obj.data( 'flexslider' ).animating ) {
+						return;
+					}
+						
+					$( this ).addClass('dragging');
+					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
+					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
+					$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
+					$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );
+				} );
+			
+				$obj.on( 'mouseup', function( e ) {
+					if ( $obj.data('flexslider').animating ) {
+						return;
+					}
+						
+					$( this ).removeClass('dragging');
+					var origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
+					    origin_mouse_y = $( this ).data( 'origin_mouse_y' );
+					
+					if ( 'horizontal' === $obj.data('flexslider').vars.direction ) {
+						if ( e.pageX > origin_mouse_x ) {
+							$obj.flexslider('prev');
+						}
+						if ( e.pageX < origin_mouse_x ) {
+							$obj.flexslider('next');
+						}
+					} else {
+						if ( e.pageY > origin_mouse_y ) {
+							$obj.flexslider('prev');
+						}
+						if ( e.pageY < origin_mouse_y ) {
+							$obj.flexslider('next');
+						}
+					}
+				} );
+			}
+		});
+		
+		
+    };
+
+    theme.testimonials = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
+
+
+
+
 
 
 /*! 
@@ -8059,87 +8247,6 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
-
-
-/*! 
- *************************************
- * Testimonials Carousel
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-    
-    var documentReady = function( $ ) {
-    
-		var $obj = $( '.custom-testimonials .flexslider' );
-		$obj.flexslider({
-			animation         : 'slide',
-			slideshow         : true,
-			smoothHeight      : true,
-			controlNav        : true,
-			manualControls    : '.slides-custom-control li',
-			directionNav      : false,
-			animationSpeed    : 600,
-			slideshowSpeed    : 7000,
-			selector          : ".slides > li",
-			drag              : true,
-			start: function(slider){
-				$obj.on( 'mousedown', function( e ) {
-					if ( $obj.data( 'flexslider' ).animating ) {
-						return;
-					}
-						
-					$( this ).addClass('dragging');
-					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
-					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
-					$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
-					$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );
-				} );
-			
-				$obj.on( 'mouseup', function( e ) {
-					if ( $obj.data('flexslider').animating ) {
-						return;
-					}
-						
-					$( this ).removeClass('dragging');
-					var origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
-					    origin_mouse_y = $( this ).data( 'origin_mouse_y' );
-					
-					if ( 'horizontal' === $obj.data('flexslider').vars.direction ) {
-						if ( e.pageX > origin_mouse_x ) {
-							$obj.flexslider('prev');
-						}
-						if ( e.pageX < origin_mouse_x ) {
-							$obj.flexslider('next');
-						}
-					} else {
-						if ( e.pageY > origin_mouse_y ) {
-							$obj.flexslider('prev');
-						}
-						if ( e.pageY < origin_mouse_y ) {
-							$obj.flexslider('next');
-						}
-					}
-				} );
-			}
-		});
-		
-		
-    };
-
-    theme.testimonials = {
-        documentReady : documentReady        
-    };
-
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
-
-
-
-
-
 
 
 

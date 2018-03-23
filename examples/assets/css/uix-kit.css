@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.83
- * ## Last Update         :  March 22, 2018
+ * ## Version             :  1.1.84
+ * ## Last Update         :  March 23, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -52,10 +52,7 @@
 	7. Header Area
     8. Brand	
 	9. Footer
-	10. Social Buttons
-	    10.1. Social Background
-		10.2. Social General
-		
+	10. Video	
 	11. Back to Top
 	12. Loader
 	13. Overlay
@@ -81,7 +78,9 @@
 		
 	20. Comments
 	21. 3rd Party Plugins
-    22. Video
+    22. Social Media Icons
+	    22.1. Social Button
+		22.2. Social Background
 
 
 */
@@ -1437,19 +1436,6 @@ section.site-google-map,
     float: right;
 }
 
-.header-container .menu-right i {
-    font-size: 1.2rem;
-}
-
-.header-container .menu-right i:hover {
-    opacity: .5;
-}
-
-.header-container .menu-right a {
-    display: inline-block;
-    margin-right: .75rem;
-}
-
 .header-inner {
     height: 185px;
     background: none;
@@ -1548,273 +1534,27 @@ section.site-google-map,
 }
 
 /* ====================================================== 
-   10. Social Buttons                               
+   Video
 /* ====================================================== */
-/* 10.1. Social Background */
-.social-bg {
-    color: #fff !important;
+.web-video-embed {
+    visibility: hidden;
 }
 
-.social-bg-twitter {
-    border-color: #53B9FD !important;
-    background-color: #53B9FD !important;
+[data-video-iframe] {
+    display: none;
 }
 
-.social-bg-facebook {
-    border-color: #78A4DD !important;
-    background-color: #78A4DD !important;
+.web-video-background-container {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
 }
 
-.social-bg-google {
-    border-color: #FC5B5B !important;
-    background-color: #FC5B5B !important;
-}
-
-.social-bg-instagram {
-    border-color: #6156C7 !important;
-    background-color: #6156C7 !important;
-}
-
-.social-bg-lastfm {
-    border-color: #B90000 !important;
-    background-color: #B90000 !important;
-}
-
-.social-bg-youtube {
-    border-color: #CC181E !important;
-    background-color: #CC181E !important;
-}
-
-.social-bg-vimeo {
-    border-color: #1ab7ea !important;
-    background-color: #1ab7ea !important;
-}
-
-.social-bg-dribbble {
-    border-color: #FA8BBC !important;
-    background-color: #FA8BBC !important;
-}
-
-.social-bg-github {
-    border-color: #652F51 !important;
-    background-color: #652F51 !important;
-}
-
-.social-bg-flickr {
-    border-color: #fc4ca4 !important;
-    background-color: #fc4ca4 !important;
-}
-
-.social-bg-medium {
-    border-color: #00AB6B !important;
-    background-color: #00AB6B !important;
-}
-
-.social-bg-codepen {
-    border-color: #333 !important;
-    background-color: #333 !important;
-}
-
-.social-bg-behance {
-    border-color: #4F8FD6 !important;
-    background-color: #4F8FD6 !important;
-}
-
-.social-bg-dropbox {
-    border-color: #349BE9 !important;
-    background-color: #349BE9 !important;
-}
-
-.social-bg-pinterest {
-    border-color: #F35359 !important;
-    background-color: #F35359 !important;
-}
-
-.social-bg-reddit {
-    border-color: #FF4500 !important;
-    background-color: #FF4500 !important;
-}
-
-.social-bg-soundcloud {
-    border-color: #FF7500 !important;
-    background-color: #FF7500 !important;
-}
-
-.social-bg-producthunt {
-    border-color: #DA552F !important;
-    background-color: #DA552F !important;
-}
-
-.social-bg-weibo {
-    border-color: #E6162D !important;
-    background-color: #E6162D !important;
-}
-
-.social-bg-deviantart {
-    border-color: #05CC47 !important;
-    background-color: #05CC47 !important;
-}
-
-.social-bg-spotify {
-    border-color: #A5CE3F !important;
-    background-color: #A5CE3F !important;
-}
-
-.social-bg-wordpress {
-    border-color: #24A5DD !important;
-    background-color: #24A5DD !important;
-}
-
-.social-bg-digg {
-    border-color: #333 !important;
-    background-color: #333 !important;
-}
-
-.social-bg-tumblr {
-    border-color: #529ECC !important;
-    background-color: #529ECC !important;
-}
-
-.social-bg-linkedin {
-    border-color: #24A5DD !important;
-    background-color: #24A5DD !important;
-}
-
-.social-bg-stackoverflow {
-    border-color: #FF7500 !important;
-    background-color: #FF7500 !important;
-}
-
-/* 10.2. Social General */
-.social-btn,
-.social-btn-colourful,
-.social-btn li,
-.social-btn-colourful li {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.social-btn li {
-    display: inline-block;
-    margin: 0.175rem 0.4375rem;
-}
-
-.social-btn-colourful li {
-    display: inline-block;
-    margin: 0.175rem 0.4375rem;
-}
-
-.social-btn-colourful li a {
-    color: #212121;
-}
-
-.social-btn-colourful li a:hover {
-    color: #ee9f24 !important;
-}
-
-.social-btn-colourful li a[href*="twitter.com"] {
-    color: #53B9FD;
-}
-
-.social-btn-colourful li a[href*="facebook.com"] {
-    color: #78A4DD;
-}
-
-.social-btn-colourful li a[href*="google.com"] {
-    color: #FC5B5B;
-}
-
-.social-btn-colourful li a[href*="instagram.com"] {
-    color: #6156C7;
-}
-
-.social-btn-colourful li a[href*="last.fm"] {
-    color: #B90000;
-}
-
-.social-btn-colourful li a[href*="youtube.com"] {
-    color: #CC181E;
-}
-
-.social-btn-colourful li a[href*="vimeo.com"] {
-    color: #1ab7ea;
-}
-
-.social-btn-colourful li a[href*="dribbble.com"] {
-    color: #FA8BBC;
-}
-
-.social-btn-colourful li a[href*="github.com"] {
-    color: #652F51;
-}
-
-.social-btn-colourful li a[href*="flickr.com"] {
-    color: #fc4ca4;
-}
-
-.social-btn-colourful li a[href*="medium.com"] {
-    color: #00AB6B;
-}
-
-.social-btn-colourful li a[href*="codepen.com"] {
-    color: #333;
-}
-
-.social-btn-colourful li a[href*="behance.net"] {
-    color: #4F8FD6;
-}
-
-.social-btn-colourful li a[href*="dropbox.com"] {
-    color: #349BE9;
-}
-
-.social-btn-colourful li a[href*="pinterest.com"] {
-    color: #F35359;
-}
-
-.social-btn-colourful li a[href*="reddit.com"] {
-    color: #FF4500;
-}
-
-.social-btn-colourful li a[href*="soundcloud.com"] {
-    color: #FF7500;
-}
-
-.social-btn-colourful li a[href*="producthunt.com"] {
-    color: #DA552F;
-}
-
-.social-btn-colourful li a[href*="weibo.com"] {
-    color: #E6162D;
-}
-
-.social-btn-colourful li a[href*="deviantart.com"] {
-    color: #05CC47;
-}
-
-.social-btn-colourful li a[href*="spotify.com"] {
-    color: #A5CE3F;
-}
-
-.social-btn-colourful li a[href*="wordpress.com"] {
-    color: #24A5DD;
-}
-
-.social-btn-colourful li a[href*="mailto"], .social-btn-colourful li a[href*="digg.com"] {
-    color: #333;
-}
-
-.social-btn-colourful li a[href*="tumblr.com"] {
-    color: #529ECC;
-}
-
-.social-btn-colourful li a[href*="linkedin.com"] {
-    color: #24A5DD;
-}
-
-.social-btn-colourful li a[href*="stackoverflow.com"], .social-btn-colourful li a[href*="rss"], .social-btn-colourful li a[href*="feed"] {
-    color: #FF7500;
+@media all and (max-width: 768px) {
+    .web-video-background-container {
+        height: auto;
+    }
 }
 
 /* ====================================================== 
@@ -2727,27 +2467,362 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   Video
+   22. Social Media Icons
 /* ====================================================== */
-.web-video-embed {
-    visibility: hidden;
-}
-
-[data-video-iframe] {
-    display: none;
-}
-
-.web-video-background-container {
+/* 22.1. Social Button */
+.social-btn {
     position: relative;
-    height: 100vh;
-    width: 100%;
-    overflow: hidden;
+    border: 2px solid #212121;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    z-index: 1;
+    color: #212121;
+    padding: 0;
+    margin: 0;
 }
 
-@media all and (max-width: 768px) {
-    .web-video-background-container {
-        height: auto;
-    }
+.social-btn.thin {
+    border-width: 1px;
+}
+
+.social-btn.fillet {
+    border-radius: 50%;
+}
+
+.social-btn.fillet:after {
+    border-radius: 50%;
+}
+
+.social-btn.small {
+    width: 2rem;
+    height: 2rem;
+    line-height: 1.875rem;
+    margin-right: .5rem;
+}
+
+.social-btn.small i {
+    font-size: 1rem;
+}
+
+.social-btn.medium {
+    width: 2.875rem;
+    height: 2.875rem;
+    line-height: 2.875rem;
+    margin-right: .75rem;
+}
+
+.social-btn.medium i {
+    font-size: 1.2rem;
+}
+
+.social-btn.large {
+    width: 3.75rem;
+    height: 3.75rem;
+    line-height: 3.75rem;
+    margin-right: 1rem;
+}
+
+.social-btn.large i {
+    font-size: 1.5rem;
+}
+
+.social-btn:after {
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    display: block;
+    left: 0;
+    top: 0;
+    background-color: #212121;
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(0.5, 0.5);
+    z-index: -1;
+}
+
+.social-btn:hover {
+    color: #fff;
+}
+
+.social-btn:hover:after {
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1, 1);
+}
+
+/* 22.2. Social Background */
+.social-bg {
+    color: #fff;
+}
+
+.social-bg-twitter {
+    border-color: #53B9FD;
+    background-color: #53B9FD;
+}
+
+.social-bg-facebook {
+    border-color: #78A4DD;
+    background-color: #78A4DD;
+}
+
+.social-bg-google {
+    border-color: #FC5B5B;
+    background-color: #FC5B5B;
+}
+
+.social-bg-instagram {
+    border-color: #6156C7;
+    background-color: #6156C7;
+}
+
+.social-bg-lastfm {
+    border-color: #B90000;
+    background-color: #B90000;
+}
+
+.social-bg-youtube {
+    border-color: #CC181E;
+    background-color: #CC181E;
+}
+
+.social-bg-vimeo {
+    border-color: #1ab7ea;
+    background-color: #1ab7ea;
+}
+
+.social-bg-dribbble {
+    border-color: #FA8BBC;
+    background-color: #FA8BBC;
+}
+
+.social-bg-github {
+    border-color: #652F51;
+    background-color: #652F51;
+}
+
+.social-bg-flickr {
+    border-color: #fc4ca4;
+    background-color: #fc4ca4;
+}
+
+.social-bg-medium {
+    border-color: #00AB6B;
+    background-color: #00AB6B;
+}
+
+.social-bg-codepen {
+    border-color: #333;
+    background-color: #333;
+}
+
+.social-bg-behance {
+    border-color: #4F8FD6;
+    background-color: #4F8FD6;
+}
+
+.social-bg-dropbox {
+    border-color: #349BE9;
+    background-color: #349BE9;
+}
+
+.social-bg-pinterest {
+    border-color: #F35359;
+    background-color: #F35359;
+}
+
+.social-bg-reddit {
+    border-color: #FF4500;
+    background-color: #FF4500;
+}
+
+.social-bg-soundcloud {
+    border-color: #FF7500;
+    background-color: #FF7500;
+}
+
+.social-bg-producthunt {
+    border-color: #DA552F;
+    background-color: #DA552F;
+}
+
+.social-bg-weibo {
+    border-color: #E6162D;
+    background-color: #E6162D;
+}
+
+.social-bg-deviantart {
+    border-color: #05CC47;
+    background-color: #05CC47;
+}
+
+.social-bg-spotify {
+    border-color: #A5CE3F;
+    background-color: #A5CE3F;
+}
+
+.social-bg-wordpress {
+    border-color: #24A5DD;
+    background-color: #24A5DD;
+}
+
+.social-bg-digg {
+    border-color: #333;
+    background-color: #333;
+}
+
+.social-bg-tumblr {
+    border-color: #529ECC;
+    background-color: #529ECC;
+}
+
+.social-bg-linkedin {
+    border-color: #24A5DD;
+    background-color: #24A5DD;
+}
+
+.social-bg-stackoverflow {
+    border-color: #FF7500;
+    background-color: #FF7500;
+}
+
+.social-bg-colourful {
+    display: inline-block;
+    *display: inline;
+    margin: .2em .5em;
+}
+
+.social-bg-colourful {
+    color: #333333;
+}
+
+.social-bg-colourful[href*="twitter.com"] {
+    color: #53B9FD;
+}
+
+.social-bg-colourful[href*="facebook.com"] {
+    color: #78A4DD;
+}
+
+.social-bg-colourful[href*="google.com"] {
+    color: #FC5B5B;
+}
+
+.social-bg-colourful[href*="instagram.com"] {
+    color: #6156C7;
+}
+
+.social-bg-colourful[href*="last.fm"] {
+    color: #B90000;
+}
+
+.social-bg-colourful[href*="youtube.com"] {
+    color: #CC181E;
+}
+
+.social-bg-colourful[href*="vimeo.com"] {
+    color: #1ab7ea;
+}
+
+.social-bg-colourful[href*="dribbble.com"] {
+    color: #FA8BBC;
+}
+
+.social-bg-colourful[href*="github.com"] {
+    color: #652F51;
+}
+
+.social-bg-colourful[href*="flickr.com"] {
+    color: #fc4ca4;
+}
+
+.social-bg-colourful[href*="medium.com"] {
+    color: #00AB6B;
+}
+
+.social-bg-colourful[href*="codepen.com"] {
+    color: #333;
+}
+
+.social-bg-colourful[href*="behance.net"] {
+    color: #4F8FD6;
+}
+
+.social-bg-colourful[href*="dropbox.com"] {
+    color: #349BE9;
+}
+
+.social-bg-colourful[href*="pinterest.com"] {
+    color: #F35359;
+}
+
+.social-bg-colourful[href*="reddit.com"] {
+    color: #FF4500;
+}
+
+.social-bg-colourful[href*="soundcloud.com"] {
+    color: #FF7500;
+}
+
+.social-bg-colourful[href*="producthunt.com"] {
+    color: #DA552F;
+}
+
+.social-bg-colourful[href*="weibo.com"] {
+    color: #E6162D;
+}
+
+.social-bg-colourful[href*="deviantart.com"] {
+    color: #05CC47;
+}
+
+.social-bg-colourful[href*="spotify.com"] {
+    color: #A5CE3F;
+}
+
+.social-bg-colourful[href*="wordpress.com"] {
+    color: #24A5DD;
+}
+
+.social-bg-colourful[href*="mailto"] {
+    color: #333;
+}
+
+.social-bg-colourful[href*="digg.com"] {
+    color: #333;
+}
+
+.social-bg-colourful[href*="tumblr.com"] {
+    color: #529ECC;
+}
+
+.social-bg-colourful[href*="linkedin.com"] {
+    color: #24A5DD;
+}
+
+.social-bg-colourful[href*="stackoverflow.com"] {
+    color: #FF7500;
+}
+
+.social-bg-colourful[href*="rss"],
+.social-bg-colourful[href*="feed"] {
+    color: #FF7500;
+}
+
+/*----- Theme - White -----*/
+.theme-white .social-btn {
+    border-color: #fff;
+}
+
+.theme-white .social-btn:hover i {
+    color: #212121;
+}
+
+.theme-white .social-btn:hover:after {
+    background-color: #fff;
 }
 
 /* ====================================================== 
@@ -2782,18 +2857,6 @@ ul.entry-meta {
     border-bottom: 1px solid rgba(0, 0, 0, 0.18);
 }
 
-.custom-accordion dl dt:before {
-    position: absolute;
-    display: block;
-    font-family: 'FontAwesome';
-    content: "\f105";
-    font-size: 18pt;
-    right: 1rem;
-    top: .5rem;
-    transition: .1s ease-in-out;
-    color: rgba(0, 0, 0, 0.54);
-}
-
 .custom-accordion dl.active dt:before {
     transform: rotate(90deg);
 }
@@ -2806,6 +2869,18 @@ ul.entry-meta {
 
 .custom-accordion dt a {
     display: block;
+}
+
+.custom-accordion dt:before {
+    position: absolute;
+    display: block;
+    font-family: 'FontAwesome';
+    content: "\f105";
+    font-size: 18pt;
+    right: 1rem;
+    top: .5rem;
+    transition: .1s ease-in-out;
+    color: rgba(0, 0, 0, 0.54);
 }
 
 .custom-accordion dd {
@@ -4445,6 +4520,9 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
+   Custom Core Scripts & Stylesheets
+/* ====================================================== */
+/* ====================================================== 
    Brands List
 /* ====================================================== */
 .list-brands {
@@ -4534,9 +4612,6 @@ ul.entry-meta {
     }
 }
 
-/* ====================================================== 
-   Custom Core Scripts & Stylesheets
-/* ====================================================== */
 /* ====================================================== 
    Bulleted List
 /* ====================================================== */
@@ -7795,6 +7870,90 @@ dl.list-side-by-side:after {
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
 }
 
+.custom-lightbox-overlay .lb-container .html .lb-large-photos-container {
+    overflow: hidden;
+    background: #000;
+    position: relative;
+    transition: all 0.1s ease;
+}
+
+.custom-lightbox-overlay .lb-container .html .lb-large-photos-container ul {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.custom-lightbox-overlay .lb-container .html .lb-large-photos-container ul li {
+    padding: 0;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+}
+
+.custom-lightbox-overlay .lb-container .html .lb-large-photos-container ul li:first-child {
+    display: block;
+}
+
+.custom-lightbox-overlay .lb-container .html .lb-thumbs-container {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+    overflow-x: auto;
+    white-space: nowrap;
+  /* @include scrollbar(); */
+  /* Custom scrollbar */;
+}
+
+.custom-lightbox-overlay .lb-container .html .lb-thumbs-container::-webkit-scrollbar-track {
+    border-radius: 0px;
+    background-color: #E6E3E3;
+}
+
+.custom-lightbox-overlay .lb-container .html .lb-thumbs-container::-webkit-scrollbar {
+    height: 5px;
+    background-color: #EC5E79;
+}
+
+.custom-lightbox-overlay .lb-container .html .lb-thumbs-container::-webkit-scrollbar-thumb {
+    border-radius: 0px;
+    background-color: #EC5E79;
+}
+
+.custom-lightbox-overlay .lb-container .html .lb-thumbs-container ul {
+    margin: 0;
+    padding: 0;
+}
+
+.custom-lightbox-overlay .lb-container .html .lb-thumbs-container ul li {
+    width: 100px;
+    max-height: 100px;
+    display: inline-block;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 0;
+    transform: scale(0.9);
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+}
+
+.custom-lightbox-overlay .lb-container .html .lb-thumbs-container ul li.active {
+    transform: scale(1);
+}
+
+.custom-lightbox-overlay .lb-container .html .lb-thumbs-container ul li img {
+    box-shadow: 0px 6px 21px 1px rgba(0, 0, 0, 0.29);
+}
+
 .custom-lightbox-overlay .lb-container .html::before, .custom-lightbox-overlay .lb-container .html::after {
     content: '';
     display: block;
@@ -7831,17 +7990,13 @@ dl.list-side-by-side:after {
     max-height: 60vh;
     overflow-y: auto;
     text-align: left;
-}
-
-.custom-lightbox-overlay .lb-container .html > .lb-box > .content-show {
-    padding: 1.5rem;
-    color: #AEAEAE;
-    font-size: 0.75rem;
+  /* @include scrollbar(); */
+  /* Custom scrollbar */;
 }
 
 .custom-lightbox-overlay .lb-container .html > .lb-box::-webkit-scrollbar-track {
     border-radius: 0px;
-    background-color: #EC5E79;
+    background-color: #E6E3E3;
 }
 
 .custom-lightbox-overlay .lb-container .html > .lb-box::-webkit-scrollbar {
@@ -7851,7 +8006,13 @@ dl.list-side-by-side:after {
 
 .custom-lightbox-overlay .lb-container .html > .lb-box::-webkit-scrollbar-thumb {
     border-radius: 0px;
-    background-color: #fff;
+    background-color: #EC5E79;
+}
+
+.custom-lightbox-overlay .lb-container .html > .lb-box > .content-show {
+    padding: 1.5rem;
+    color: #AEAEAE;
+    font-size: 0.75rem;
 }
 
 .custom-lightbox-overlay .lb-container .html > img {
@@ -8670,7 +8831,16 @@ li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 {
    Tabs        
 /* ====================================================== */
 .custom-tabs {
-  /* Tab Rotation Effect */;
+  /*! 
+	 ---------------------------
+	 Tab Normal Effect
+	 ---------------------------
+	 */
+  /*! 
+	 ---------------------------
+	 Tab Rotation Effect
+	 ---------------------------
+	 */;
 }
 
 .custom-tabs:not(.rotation) {
