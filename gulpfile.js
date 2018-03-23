@@ -13,7 +13,9 @@ var gulp              = require('gulp'),
 	sourcemaps        = require('gulp-sourcemaps'),
 	webpack           = require('webpack'),
 	WebpackDevServer  = require("webpack-dev-server"),
-	path              = require("path");
+	path              = require("path"),
+	fs                = require('fs'),
+	json              = JSON.parse(fs.readFileSync('./package.json'));
 
 
 var globs = {
@@ -30,16 +32,16 @@ var globs = {
 
 
 
-var customWebsiteVersion     = '1.1.84',
+var customWebsiteVersion     = json.version,
 	customWebsiteTitle       = 'Uix Kit Demo',
 	customWebsiteDesc        = 'Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap',
 	customWebsiteCanonical   = '<link rel="canonical" href="https://uiux.cc" />',
-	customWebsiteAuthor      = 'UIUX Lab',
+	customWebsiteAuthor      = json.author,
 	customWebsiteGenerator   = 'Uix Kit',
 	customComment            = `
 		## Project Name        :  ` + customWebsiteTitle + `
         ## Project Description :  ` + customWebsiteDesc + `
-		## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
+		## Based on            :  ` + json.description + `
 		## Version             :  ` + customWebsiteVersion + `
 		## Last Update         :  <%= moment().format( "MMMM D, YYYY" ) %>
         ## Powered by          :  ` + customWebsiteAuthor + `
@@ -239,7 +241,6 @@ gulp.task('html', function() {
 		],
 	};
 
-	
   console.log( 'cache:' + ver );
 	
   return gulp.src( globs.htmlFiles )

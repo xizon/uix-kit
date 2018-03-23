@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.84
+ * ## Version             :  1.1.85
  * ## Last Update         :  March 23, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -6555,14 +6555,14 @@ theme = ( function ( theme, $, window, document ) {
 					//push the large photos
 					largePhotos += '<div class="lb-large-photos-container"><ul>';
 					for ( var i = 0; i < imgSrcStr.length; i++ ) {
-						largePhotos += '<li><img src="'+ imgSrcStr[i].large +'" alt=""></li>'
+						largePhotos += '<li><img src="'+ imgSrcStr[i].large +'" alt=""></li>';
 					}
 					largePhotos += '</ul></div>';
 					
 					//push the thumbs
 					thumbs += '<div class="lb-thumbs-container"><ul>';
-					for ( var i = 0; i < imgSrcStr.length; i++ ) {
-						thumbs += '<li><img src="'+ imgSrcStr[i].thumb +'" alt=""></li>'
+					for ( var k = 0; k < imgSrcStr.length; k++ ) {
+						thumbs += '<li><img src="'+ imgSrcStr[k].thumb +'" alt=""></li>';
 					}
 					thumbs += '</ul></div>';
 					
@@ -6593,10 +6593,9 @@ theme = ( function ( theme, $, window, document ) {
 				
 						if ( w > sw ) w = sw;
 						
-						h = w * ( this.height/this.width )
+						h = w * ( this.height/this.width );
 						
 					
-			
 						$lbCon.css( {
 							'width': w + 'px'
 						} );
@@ -6607,9 +6606,8 @@ theme = ( function ( theme, $, window, document ) {
 						} );	
 						
 						
+					};
 					
-						
-					}
 					
 					$lbCon.find( '> .html' ).removeClass( 'no-img' );
 
@@ -6738,7 +6736,7 @@ theme = ( function ( theme, $, window, document ) {
 				'.custom-primary-flexslider', 
 				'.custom-parallax-flexslider', 
 				'.custom-mousewheel-flexslider', 
-				'.custom-controls', 
+				'.custom-controls',
 				'.custom-itemgrid', 
 				'.custom-counter-show' 
 			];
@@ -6931,7 +6929,8 @@ theme = ( function ( theme, $, window, document ) {
 
 			var prefix    = 'custom-theme',
 			    curSlide  = slider.find( '.'+prefix+'-flex-active-slide' ),
-				curHeight = curSlide.height();
+				curHeight = curSlide.height(),
+				curNhumbs = slider.data( 'mynavthumbs' );
 			
 			slider.removeClass( prefix+'-flexslider-loading' );
 			
@@ -6955,6 +6954,12 @@ theme = ( function ( theme, $, window, document ) {
 				}
 			});
 			
+			
+			//Thumbnail ControlNav Pattern
+			if( typeof curNhumbs != typeof undefined ) {
+				$( '.custom-theme-flexslider-thumbs'+curNhumbs+' > ul > li' ).removeClass( 'active' );
+				$( '.custom-theme-flexslider-thumbs'+curNhumbs+' > ul > li' ).eq( curSlide.index() - 1 ).addClass( 'active' );			
+			}
 			/*
 			slider.slides.find( "a[rel^='theme-slider-prettyPhoto']" ).lightbox();
 			*/
@@ -6972,7 +6977,8 @@ theme = ( function ( theme, $, window, document ) {
 
 			var prefix    = 'custom-theme',
 			    curSlide  = slider.find( '.'+prefix+'-flex-active-slide' ),
-				curHeight = curSlide.height();
+				curHeight = curSlide.height(),
+				curNhumbs = slider.data( 'mynavthumbs' );
 			
 			slider.removeClass( prefix+'-flexslider-loading' );
 			
@@ -6987,7 +6993,7 @@ theme = ( function ( theme, $, window, document ) {
                 } else {
                     el.addClass( dir );
                 }
-            })
+            });
 			
 			
 			
@@ -7011,7 +7017,12 @@ theme = ( function ( theme, $, window, document ) {
 				}
 			});
 			
-		
+			
+			//Thumbnail ControlNav Pattern
+			if( typeof curNhumbs != typeof undefined ) {
+				$( '.custom-theme-flexslider-thumbs'+curNhumbs+' > ul > li' ).removeClass( 'active' );
+				$( '.custom-theme-flexslider-thumbs'+curNhumbs+' > ul > li' ).eq( curSlide.index() - 1 ).addClass( 'active' );			
+			}
 			
         }		
 		
@@ -7073,6 +7084,30 @@ theme = ( function ( theme, $, window, document ) {
         }
 		
 		
+		
+		/*
+		 * Slider With Thumbnail ControlNav Pattern
+		 *
+		 * @param  {object} slider           - The current slider.
+		 * @param  {string} navThumbClass    - Class name of thumbnail controlNav.
+		 * @return {void}                    - The constructor.
+		 */
+        function initslidesWithNavThumb( slider, navThumbClass ) {
+
+				$( '.custom-theme-flexslider-thumbs'+navThumbClass+' > ul > li' ).on( 'click', function() {
+
+					$( '.custom-theme-flexslider-thumbs'+navThumbClass+' > ul > li' ).removeClass( 'active' );
+					$( this ).addClass( 'active' );
+					slider.flexslider( $( this ).index() );
+
+				});	
+			
+        }
+			
+
+	
+		
+		
 		/*! 
 		 ---------------------------
          Initialize primary slideshow
@@ -7083,6 +7118,7 @@ theme = ( function ( theme, $, window, document ) {
 		$sliderPrimaryEff.each( function()  {
 			var $this        = $( this ),
 				dataSpeed    = $this.data( 'speed' ),
+				dataNhumbs   = $this.data( 'mynavthumbs' ),
 				dataDrag     = $this.data( 'draggable' ),
 				dataWheel    = $this.data( 'wheel' ),
 				dataTiming   = $this.data( 'timing' ),
@@ -7106,6 +7142,8 @@ theme = ( function ( theme, $, window, document ) {
 			if( typeof dataAuto === typeof undefined ) dataAuto = true;
 			if( typeof dataDrag === typeof undefined ) dataDrag = false;
 			if( typeof dataWheel === typeof undefined ) dataWheel = false;
+			if( typeof dataNhumbs === typeof undefined ) dataNhumbs = false;
+			
 			
 			
 			//Make slider image draggable 
@@ -7132,6 +7170,12 @@ theme = ( function ( theme, $, window, document ) {
 				after             : initslides //Fires after each slider animation completes.
 			});
 			
+		
+
+			//With Thumbnail ControlNav Pattern
+			if ( dataNhumbs ) {
+				initslidesWithNavThumb( $this, dataNhumbs );
+			}
 
 			
 		});
@@ -7147,6 +7191,7 @@ theme = ( function ( theme, $, window, document ) {
 		$sliderParallaxEff.each( function()  {
 			var $this        = $( this ),
 				dataSpeed    = $this.data( 'speed' ),
+				dataNhumbs   = $this.data( 'mynavthumbs' ),
 				dataDrag     = $this.data( 'draggable' ),
 				dataWheel    = $this.data( 'wheel' ),
 				dataTiming   = $this.data( 'timing' ),
@@ -7170,6 +7215,7 @@ theme = ( function ( theme, $, window, document ) {
 			if( typeof dataAuto === typeof undefined ) dataAuto = true;
 			if( typeof dataDrag === typeof undefined ) dataDrag = false;
 			if( typeof dataWheel === typeof undefined ) dataWheel = false;
+			if( typeof dataNhumbs === typeof undefined ) dataNhumbs = false;
 			
 			
 			//Make slider image draggable 
@@ -7197,6 +7243,13 @@ theme = ( function ( theme, $, window, document ) {
 			});
 
 
+		
+
+			//With Thumbnail ControlNav Pattern
+			if ( dataNhumbs ) {
+				initslidesWithNavThumb( $this, dataNhumbs );
+			}
+			
 			
 		});
 		
@@ -7212,6 +7265,7 @@ theme = ( function ( theme, $, window, document ) {
 		$sliderMousewheelEff.each( function()  {
 			var $this        = $( this ),
 				dataSpeed    = $this.data( 'speed' ),
+				dataNhumbs   = $this.data( 'mynavthumbs' ),
 				dataDrag     = $this.data( 'draggable' ),
 				dataWheel    = $this.data( 'wheel' ),
 				dataTiming   = $this.data( 'timing' ),
@@ -7235,6 +7289,7 @@ theme = ( function ( theme, $, window, document ) {
 			if( typeof dataAuto === typeof undefined ) dataAuto = true;
 			if( typeof dataDrag === typeof undefined ) dataDrag = false;
 			if( typeof dataWheel === typeof undefined ) dataWheel = false;
+			if( typeof dataNhumbs === typeof undefined ) dataNhumbs = false;
 			
 			
 			//Make slider image draggable 
@@ -7260,6 +7315,13 @@ theme = ( function ( theme, $, window, document ) {
 			});
 
 
+		
+
+			//With Thumbnail ControlNav Pattern
+			if ( dataNhumbs ) {
+				initslidesWithNavThumb( $this, dataNhumbs );
+			}
+			
 			
 		});
 		
@@ -7275,6 +7337,7 @@ theme = ( function ( theme, $, window, document ) {
 		$sliderMyControls.each( function()  {
 			var $this        = $( this ),
 				dataSpeed    = $this.data( 'speed' ),
+				dataNhumbs   = $this.data( 'mynavthumbs' ),
 				dataDrag     = $this.data( 'draggable' ),
 				dataWheel    = $this.data( 'wheel' ),
 				dataTiming   = $this.data( 'timing' ),
@@ -7305,6 +7368,7 @@ theme = ( function ( theme, $, window, document ) {
 			if( typeof dataAuto === typeof undefined ) dataAuto = true;
 			if( typeof dataDrag === typeof undefined ) dataDrag = false;
 			if( typeof dataWheel === typeof undefined ) dataWheel = false;
+			if( typeof dataNhumbs === typeof undefined ) dataNhumbs = false;
 			
 			
 			//Make slider image draggable 
@@ -7332,12 +7396,19 @@ theme = ( function ( theme, $, window, document ) {
 				customDirectionNav: $( '.custom-navigation'+customComID+' a' )
 			});
 		
+		
+
+			//With Thumbnail ControlNav Pattern
+			if ( dataNhumbs ) {
+				initslidesWithNavThumb( $this, dataNhumbs );
+			}
+			
 
 			
 		});
 		
-		
-		
+
+			
 
 		/*! 
 		 ---------------------------
@@ -7349,6 +7420,7 @@ theme = ( function ( theme, $, window, document ) {
 		$sliderCounterShow.each( function()  {
 			var $this        = $( this ),
 				dataSpeed    = $this.data( 'speed' ),
+				dataNhumbs   = $this.data( 'mynavthumbs' ),
 				dataDrag     = $this.data( 'draggable' ),
 				dataWheel    = $this.data( 'wheel' ),
 				dataTiming   = $this.data( 'timing' ),
@@ -7372,6 +7444,7 @@ theme = ( function ( theme, $, window, document ) {
 			if( typeof dataAuto === typeof undefined ) dataAuto = true;
 			if( typeof dataDrag === typeof undefined ) dataDrag = false;
 			if( typeof dataWheel === typeof undefined ) dataWheel = false;
+			if( typeof dataNhumbs === typeof undefined ) dataNhumbs = false;
 			
 			//Make slider image draggable 
 			if ( dataDrag ) slidesExDraggable( $this );
@@ -7440,6 +7513,13 @@ theme = ( function ( theme, $, window, document ) {
 			});
 		
 
+		
+
+			//With Thumbnail ControlNav Pattern
+			if ( dataNhumbs ) {
+				initslidesWithNavThumb( $this, dataNhumbs );
+			}
+			
 			
 		});	
 		
@@ -7463,6 +7543,7 @@ theme = ( function ( theme, $, window, document ) {
 		$sliderItemgird.each( function()  {
 			var $this        = $( this ),
 				dataSpeed    = $this.data( 'speed' ),
+				dataNhumbs   = $this.data( 'mynavthumbs' ),
 				dataDrag     = $this.data( 'draggable' ),
 				dataWheel    = $this.data( 'wheel' ),
 				dataTiming   = $this.data( 'timing' ),
@@ -7486,6 +7567,7 @@ theme = ( function ( theme, $, window, document ) {
 			if( typeof dataAuto === typeof undefined ) dataAuto = true;
 			if( typeof dataDrag === typeof undefined ) dataDrag = false;
 			if( typeof dataWheel === typeof undefined ) dataWheel = false;
+			if( typeof dataNhumbs === typeof undefined ) dataNhumbs = false;
 			
 			//Make slider image draggable 
 			if ( dataDrag ) slidesExDraggable( $this );
@@ -7515,7 +7597,6 @@ theme = ( function ( theme, $, window, document ) {
 			});
 			
 
-
 			
 		});
 		
@@ -7535,6 +7616,7 @@ theme = ( function ( theme, $, window, document ) {
 		$sliderDefault.each( function()  {
 			var $this        = $( this ),
 				dataSpeed    = $this.data( 'speed' ),
+				dataNhumbs   = $this.data( 'mynavthumbs' ),
 				dataDrag     = $this.data( 'draggable' ),
 				dataWheel    = $this.data( 'wheel' ),
 				dataTiming   = $this.data( 'timing' ),
@@ -7558,6 +7640,7 @@ theme = ( function ( theme, $, window, document ) {
 			if( typeof dataAuto === typeof undefined ) dataAuto = true;
 			if( typeof dataDrag === typeof undefined ) dataDrag = false;
 			if( typeof dataWheel === typeof undefined ) dataWheel = false;
+			if( typeof dataNhumbs === typeof undefined ) dataNhumbs = false;
 			
 			
 			//Make slider image draggable 
@@ -7583,7 +7666,12 @@ theme = ( function ( theme, $, window, document ) {
 				after             : initslides //Fires after each slider animation completes.
 			});
 			
+		
 
+			//With Thumbnail ControlNav Pattern
+			if ( dataNhumbs ) {
+				initslidesWithNavThumb( $this, dataNhumbs );
+			}
 			
 		});
 		
@@ -7643,6 +7731,7 @@ theme = ( function ( theme, $, window, document ) {
 						$( this ).data( 'flexslider' ).setup();
 					}
 				});
+				
 				
 				$sliderCounterShow.each( function() {
 					if ( $( this ).length > 0 ) {

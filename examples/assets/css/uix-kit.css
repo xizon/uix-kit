@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.84
+ * ## Version             :  1.1.85
  * ## Last Update         :  March 23, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -3104,6 +3104,13 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
+   Counter    
+/* ====================================================== */
+[data-counter-number] {
+    padding: 2rem;
+}
+
+/* ====================================================== 
    Author Card   
 /* ====================================================== */
 .author-card {
@@ -3196,13 +3203,6 @@ ul.entry-meta {
 .author-card-final .text {
     color: #fff;
     margin-left: 0.4375rem;
-}
-
-/* ====================================================== 
-   Counter    
-/* ====================================================== */
-[data-counter-number] {
-    padding: 2rem;
 }
 
 /* ====================================================== 
@@ -4613,13 +4613,6 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   Bulleted List
-/* ====================================================== */
-.list-bullet i {
-    margin-right: .5rem;
-}
-
-/* ====================================================== 
    Maintain Aspect Ratio List
 /* ====================================================== */
 .list-maintain-aspect-ratio {
@@ -4699,6 +4692,13 @@ ul.entry-meta {
     .list-maintain-aspect-ratio .content {
         padding: .5rem;
     }
+}
+
+/* ====================================================== 
+   Bulleted List
+/* ====================================================== */
+.list-bullet i {
+    margin-right: .5rem;
 }
 
 /* ====================================================== 
@@ -7909,7 +7909,7 @@ dl.list-side-by-side:after {
     overflow: hidden;
     overflow-x: auto;
     white-space: nowrap;
-  /* @include scrollbar(); */
+  /* @include customScrollbar( 'vertical' ) ; */
   /* Custom scrollbar */;
 }
 
@@ -7990,7 +7990,7 @@ dl.list-side-by-side:after {
     max-height: 60vh;
     overflow-y: auto;
     text-align: left;
-  /* @include scrollbar(); */
+  /* @include customScrollbar( 'vertical' ) ; */
   /* Custom scrollbar */;
 }
 
@@ -8118,6 +8118,61 @@ dl.list-side-by-side:after {
 /* ====================================================== 
    Slideshow ( with custom flexslider )
 /* ====================================================== */
+/* 
+   Thumbnail ControlNav Pattern                   
+-------------------------- 
+*/
+.custom-theme-flexslider-thumbs {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+    overflow-x: auto;
+    white-space: nowrap;
+    margin-top: 1.5rem;
+}
+
+.custom-theme-flexslider-thumbs::-webkit-scrollbar-track {
+    border-radius: 0px;
+    background-color: #E6E3E3;
+}
+
+.custom-theme-flexslider-thumbs::-webkit-scrollbar {
+    height: 5px;
+    background-color: #EC5E79;
+}
+
+.custom-theme-flexslider-thumbs::-webkit-scrollbar-thumb {
+    border-radius: 0px;
+    background-color: #EC5E79;
+}
+
+.custom-theme-flexslider-thumbs ul {
+    margin: 0;
+    padding: 0;
+}
+
+.custom-theme-flexslider-thumbs ul li {
+    width: 100px;
+    max-height: 100px;
+    display: inline-block;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 0;
+    transform: scale(0.9);
+}
+
+.custom-theme-flexslider-thumbs ul li.active {
+    transform: scale(1);
+}
+
+.custom-theme-flexslider-thumbs ul li img {
+    box-shadow: 0px 6px 11px 1px rgba(0, 0, 0, 0.15);
+}
+
 /* 
    Default Slideshow                                
 -------------------------- 

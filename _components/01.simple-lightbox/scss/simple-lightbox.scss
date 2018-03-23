@@ -125,7 +125,7 @@ $custom-lightbox-radius: 3px;
 				overflow: hidden;
 				overflow-x: auto;
 				white-space: nowrap;
-				@include scrollbar( 'vertical' );
+				@include customScrollbar( 'vertical' );
 				
 				
 				
@@ -204,7 +204,7 @@ $custom-lightbox-radius: 3px;
 				max-height: 60vh;
 				overflow-y: auto;
 				text-align: left;
-				@include scrollbar( 'horizontal' );
+				@include customScrollbar( 'horizontal' );
 				
 				> .content-show {
 					padding: 1.5rem;

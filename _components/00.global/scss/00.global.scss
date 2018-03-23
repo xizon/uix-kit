@@ -133,20 +133,20 @@ $primary-bg-color      : transparent;
 	
 }
 
-@mixin scrollbar( $dir ){
-	/* @include scrollbar(); */
+@mixin customScrollbar( $dir ){
+	/* @include customScrollbar( 'vertical' ) ; */
 	/* Custom scrollbar */
 	&::-webkit-scrollbar-track {
 		border-radius: 0px;
 		background-color: #E6E3E3;
 	}
 
-	@if $dir == vertical {
+	@if ($dir == 'vertical') {
 		&::-webkit-scrollbar {
 			height: 5px;
 			background-color: $highlight-color1;
 		}
-	} @else if $dir == horizontal {
+	} @else {
 		&::-webkit-scrollbar {
 			width: 5px;
 			background-color: $highlight-color1;

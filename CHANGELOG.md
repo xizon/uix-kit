@@ -1,7 +1,8 @@
 # Changelog
 
-#### = 1.1.84 (March 22, 2018) =
+#### = 1.1.85 (March 23, 2018) =
 
+* New: Add a new effect of slider with Thumbnail ControlNav Pattern.
 * New: Add a new module "Social Media Icons".
 * New: Add a new module "Dynamic Drop Down List". Create a dynamic dropdown form that loads its data from a JSON file.
 * Fix: Prevent custom selectors from triggering multiple change events.

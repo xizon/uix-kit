@@ -89,14 +89,14 @@ theme = ( function ( theme, $, window, document ) {
 					//push the large photos
 					largePhotos += '<div class="lb-large-photos-container"><ul>';
 					for ( var i = 0; i < imgSrcStr.length; i++ ) {
-						largePhotos += '<li><img src="'+ imgSrcStr[i].large +'" alt=""></li>'
+						largePhotos += '<li><img src="'+ imgSrcStr[i].large +'" alt=""></li>';
 					}
 					largePhotos += '</ul></div>';
 					
 					//push the thumbs
 					thumbs += '<div class="lb-thumbs-container"><ul>';
-					for ( var i = 0; i < imgSrcStr.length; i++ ) {
-						thumbs += '<li><img src="'+ imgSrcStr[i].thumb +'" alt=""></li>'
+					for ( var k = 0; k < imgSrcStr.length; k++ ) {
+						thumbs += '<li><img src="'+ imgSrcStr[k].thumb +'" alt=""></li>';
 					}
 					thumbs += '</ul></div>';
 					
@@ -127,10 +127,9 @@ theme = ( function ( theme, $, window, document ) {
 				
 						if ( w > sw ) w = sw;
 						
-						h = w * ( this.height/this.width )
+						h = w * ( this.height/this.width );
 						
 					
-			
 						$lbCon.css( {
 							'width': w + 'px'
 						} );
@@ -141,9 +140,8 @@ theme = ( function ( theme, $, window, document ) {
 						} );	
 						
 						
+					};
 					
-						
-					}
 					
 					$lbCon.find( '> .html' ).removeClass( 'no-img' );
 
