@@ -5052,158 +5052,6 @@ dl.list-side-by-side:after {
 }
 
 /* ====================================================== 
-   Modal Dialog
-/* ====================================================== */
-.modal-box {
-    position: fixed;
-    top: calc( -100vh - 71px);
-  /* For compatibility with mobile devices, do not use percentages "%" */
-    z-index: 99998;
-    pointer-events: none;
-    transition: all .5s ease-out;
-    width: 850px;
-    height: 60vh;
-    border-radius: 8px;
-    background: #fff;
-    box-shadow: 0px 0px 71px 0px rgba(0, 0, 0, 0.47);
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.modal-box.fullscreen {
-    left: 0;
-    width: 100% !important;
-    height: 100% !important;
-    transform: translateY(0);
-    border-radius: 0;
-}
-
-.modal-box.fullscreen.video {
-    background: none;
-    box-shadow: none;
-}
-
-@media all and (max-width: 991px) {
-    .modal-box:not(.fullscreen) {
-        width: 850px !important;
-    }
-}
-
-@media all and (max-width: 768px) {
-    .modal-box:not(.fullscreen) {
-        width: 90% !important;
-    }
-}
-
-.modal-mask {
-    background: transparent;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    position: fixed;
-    z-index: 99997;
-    display: none;
-    content: '';
-    background: rgba(0, 0, 0, 0.7);
-}
-
-.modal-box .content {
-    padding: 3.9375rem 2.1875rem 2.1875rem;
-    word-wrap: break-word;
-    height: 100%;
-    overflow: hidden;
-}
-
-.modal-box .close-btn {
-    box-shadow: 2.5px 4.33px 16px 0px rgba(204, 23, 30, 0.31);
-    border-radius: 50%;
-    background: #cc171e;
-    width: 36px;
-    height: 36px;
-    display: inline-block;
-    text-align: center;
-    line-height: 34px;
-    overflow: hidden;
-    position: absolute;
-    right: 12px;
-    top: 12px;
-    transform: rotate(45deg);
-}
-
-.modal-box .close-btn:after {
-    font-family: 'FontAwesome';
-    content: "\f067";
-    color: #fff;
-    font-size: 1.25rem;
-}
-
-.modal-box .close-btn:hover {
-    background: #b50d14;
-}
-
-.modal-box.video .close-btn:after {
-    font-size: 2rem;
-}
-
-.modal-box.active, .modal-box.fullscreen.active {
-    pointer-events: auto;
-}
-
-.modal-box.active {
-    top: 50vh;
-  /* For compatibility with mobile devices, do not use percentages "%" */;
-}
-
-.modal-box.fullscreen.active {
-    top: 0;
-}
-
-.modal-box.active .content img,
-.modal-box.fullscreen.active .content img {
-    animation: imgshow .5s forwards;
-    animation-delay: .5s;
-    opacity: 0;
-}
-
-.modal-box.active .content {
-    overflow-y: auto;
-}
-
-.modal-box.fullscreen .close-btn {
-    right: 26px;
-}
-
-.modal-box.fullscreen .close-btn:after {
-    font-size: 1rem;
-}
-
-.modal-box.fullscreen.video .close-btn {
-    background: none;
-    box-shadow: none;
-}
-
-.modal-box:not(.fullscreen).active .close-btn {
-    background: none;
-    box-shadow: none;
-}
-
-.modal-box:not(.fullscreen) .close-btn:hover {
-    background: none;
-}
-
-.modal-box:not(.fullscreen).active .close-btn:after {
-    color: #929292;
-    font-size: 1.875rem;
-}
-
-@keyframes imgshow {
-    to {
-        opacity: 1;
-    }
-}
-
-/* ====================================================== 
    Mobile Menu
 /* ====================================================== */
 /* Mobile Menu Toggle */
@@ -5539,6 +5387,158 @@ dl.list-side-by-side:after {
 
 .menu-open .menu-container.mobile {
     left: 0;
+}
+
+/* ====================================================== 
+   Modal Dialog
+/* ====================================================== */
+.modal-box {
+    position: fixed;
+    top: calc( -100vh - 71px);
+  /* For compatibility with mobile devices, do not use percentages "%" */
+    z-index: 99998;
+    pointer-events: none;
+    transition: all .5s ease-out;
+    width: 850px;
+    height: 60vh;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0px 0px 71px 0px rgba(0, 0, 0, 0.47);
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.modal-box.fullscreen {
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    transform: translateY(0);
+    border-radius: 0;
+}
+
+.modal-box.fullscreen.video {
+    background: none;
+    box-shadow: none;
+}
+
+@media all and (max-width: 991px) {
+    .modal-box:not(.fullscreen) {
+        width: 850px !important;
+    }
+}
+
+@media all and (max-width: 768px) {
+    .modal-box:not(.fullscreen) {
+        width: 90% !important;
+    }
+}
+
+.modal-mask {
+    background: transparent;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    z-index: 99997;
+    display: none;
+    content: '';
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.modal-box .content {
+    padding: 3.9375rem 2.1875rem 2.1875rem;
+    word-wrap: break-word;
+    height: 100%;
+    overflow: hidden;
+}
+
+.modal-box .close-btn {
+    box-shadow: 2.5px 4.33px 16px 0px rgba(204, 23, 30, 0.31);
+    border-radius: 50%;
+    background: #cc171e;
+    width: 36px;
+    height: 36px;
+    display: inline-block;
+    text-align: center;
+    line-height: 34px;
+    overflow: hidden;
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    transform: rotate(45deg);
+}
+
+.modal-box .close-btn:after {
+    font-family: 'FontAwesome';
+    content: "\f067";
+    color: #fff;
+    font-size: 1.25rem;
+}
+
+.modal-box .close-btn:hover {
+    background: #b50d14;
+}
+
+.modal-box.video .close-btn:after {
+    font-size: 2rem;
+}
+
+.modal-box.active, .modal-box.fullscreen.active {
+    pointer-events: auto;
+}
+
+.modal-box.active {
+    top: 50vh;
+  /* For compatibility with mobile devices, do not use percentages "%" */;
+}
+
+.modal-box.fullscreen.active {
+    top: 0;
+}
+
+.modal-box.active .content img,
+.modal-box.fullscreen.active .content img {
+    animation: imgshow .5s forwards;
+    animation-delay: .5s;
+    opacity: 0;
+}
+
+.modal-box.active .content {
+    overflow-y: auto;
+}
+
+.modal-box.fullscreen .close-btn {
+    right: 26px;
+}
+
+.modal-box.fullscreen .close-btn:after {
+    font-size: 1rem;
+}
+
+.modal-box.fullscreen.video .close-btn {
+    background: none;
+    box-shadow: none;
+}
+
+.modal-box:not(.fullscreen).active .close-btn {
+    background: none;
+    box-shadow: none;
+}
+
+.modal-box:not(.fullscreen) .close-btn:hover {
+    background: none;
+}
+
+.modal-box:not(.fullscreen).active .close-btn:after {
+    color: #929292;
+    font-size: 1.875rem;
+}
+
+@keyframes imgshow {
+    to {
+        opacity: 1;
+    }
 }
 
 /* ====================================================== 
