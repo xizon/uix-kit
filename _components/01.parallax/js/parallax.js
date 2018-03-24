@@ -45,7 +45,7 @@ theme = ( function ( theme, $, window, document ) {
 				}
 				
 				if( typeof dataImg != typeof undefined && dataImg != '' ) {
-					$this.css( 'background', 'url('+dataImg+')' );
+					$this.css( 'background-image', 'url('+dataImg+')' );
 				}
 				
 				$window.on( 'scroll touchmove', function() {

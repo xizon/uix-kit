@@ -1,5 +1,14 @@
 # Changelog
 
+
+
+#### = 1.1.86 (March 24, 2018) =
+
+* New: Add a full-screen slider presentation document.
+* Tweak: Optimized carousel custom control methods.
+
+
+
 #### = 1.1.85 (March 23, 2018) =
 
 * New: Add a new effect of slider with Thumbnail ControlNav Pattern.

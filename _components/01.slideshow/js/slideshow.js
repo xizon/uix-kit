@@ -17,13 +17,27 @@ theme = ( function ( theme, $, window, document ) {
 			specialSliderType  = [ 
 				'.custom-primary-flexslider', 
 				'.custom-parallax-flexslider', 
-				'.custom-mousewheel-flexslider', 
-				'.custom-controls',
+				'.custom-mousewheel-flexslider',
 				'.custom-itemgrid', 
 				'.custom-counter-show' 
 			];
 		
 		
+		/*
+		 * Initialize items background of the slider
+		 *
+		 * @param  {object} slider          - The current slider.
+		 * @return {void}                   - The constructor.
+		 */
+        function initslidesItemBG( slider ) {
+			
+			$( '[data-slider-bg]' ).each( function()  {
+				$( this ).css( 'background-image', 'url('+$( this ).data( 'slider-bg' )+')' );
+			});
+			
+        }
+		
+
 	
 		/*
 		 * Initialize embedded local video.
@@ -240,8 +254,13 @@ theme = ( function ( theme, $, window, document ) {
 			//Thumbnail ControlNav Pattern
 			if( typeof curNhumbs != typeof undefined ) {
 				$( '.custom-theme-flexslider-thumbs'+curNhumbs+' > ul > li' ).removeClass( 'active' );
-				$( '.custom-theme-flexslider-thumbs'+curNhumbs+' > ul > li' ).eq( curSlide.index() - 1 ).addClass( 'active' );			
+				$( '.custom-theme-flexslider-thumbs'+curNhumbs+' > ul > li' ).eq( curSlide.index() ).addClass( 'active' );			
 			}
+			
+			//Initialize items background of the slider
+			initslidesItemBG( slider );
+			
+			
 			/*
 			slider.slides.find( "a[rel^='theme-slider-prettyPhoto']" ).lightbox();
 			*/
@@ -303,8 +322,12 @@ theme = ( function ( theme, $, window, document ) {
 			//Thumbnail ControlNav Pattern
 			if( typeof curNhumbs != typeof undefined ) {
 				$( '.custom-theme-flexslider-thumbs'+curNhumbs+' > ul > li' ).removeClass( 'active' );
-				$( '.custom-theme-flexslider-thumbs'+curNhumbs+' > ul > li' ).eq( curSlide.index() - 1 ).addClass( 'active' );			
+				$( '.custom-theme-flexslider-thumbs'+curNhumbs+' > ul > li' ).eq( curSlide.index() ).addClass( 'active' );			
 			}
+			
+			//Initialize items background of the slider
+			initslidesItemBG( slider );
+			
 			
         }		
 		
@@ -362,6 +385,9 @@ theme = ( function ( theme, $, window, document ) {
 				}
 			});
 			
+			//Initialize items background of the slider
+			initslidesItemBG( slider );
+			
 			
         }
 		
@@ -410,7 +436,19 @@ theme = ( function ( theme, $, window, document ) {
 				dataAnim     = $this.data( 'animation' ),
 				dataPaging   = $this.data( 'paging' ),
 				dataArrows   = $this.data( 'arrows' ),
-				dataAuto     = $this.data( 'auto' );
+				dataAuto     = $this.data( 'auto' ),
+				customConID  = $this.data( 'mycontrols' );
+			
+			// Custom Controls
+			var myControlsContainer, myCustomDirectionNav;
+			if( typeof customConID === typeof undefined || customConID == '' || customConID == false ) {
+				myControlsContainer  = '';
+				myCustomDirectionNav = '';
+			} else {
+				myControlsContainer  = $( '.custom-controls-container' + customConID );
+				myCustomDirectionNav = $( '.custom-navigation'+customConID+' a' );	
+			}
+
 			
 			// If there is no data-xxx, save current source to it
 			if( typeof dataSpeed === typeof undefined ) dataSpeed = 600;
@@ -434,6 +472,13 @@ theme = ( function ( theme, $, window, document ) {
 			//Scroll The Slider With Mousewheel
 			if ( dataWheel ) slidesExMousewheel( $this );	
 
+
+			//With Thumbnail ControlNav Pattern
+			if ( dataNhumbs ) {
+				initslidesWithNavThumb( $this, dataNhumbs );
+				//Prevent index error
+				dataLoop = false;
+			}
 			
 			$this.flexslider({
 				namespace	      : 'custom-theme-flex-',
@@ -449,16 +494,12 @@ theme = ( function ( theme, $, window, document ) {
 				animationLoop     : dataLoop,
 				directionNav      : dataArrows,
 				start             : initslides, //Fires when the slider loads the first slide
-				after             : initslides //Fires after each slider animation completes.
+				after             : initslides, //Fires after each slider animation completes.
+				controlsContainer : myControlsContainer,
+				customDirectionNav: myCustomDirectionNav
 			});
 			
-		
-
-			//With Thumbnail ControlNav Pattern
-			if ( dataNhumbs ) {
-				initslidesWithNavThumb( $this, dataNhumbs );
-			}
-
+	
 			
 		});
 		
@@ -483,7 +524,19 @@ theme = ( function ( theme, $, window, document ) {
 				dataAnim     = $this.data( 'animation' ),
 				dataPaging   = $this.data( 'paging' ),
 				dataArrows   = $this.data( 'arrows' ),
-				dataAuto     = $this.data( 'auto' );
+				dataAuto     = $this.data( 'auto' ),
+				customConID  = $this.data( 'mycontrols' );
+			
+			// Custom Controls
+			var myControlsContainer, myCustomDirectionNav;
+			if( typeof customConID === typeof undefined || customConID == '' || customConID == false ) {
+				myControlsContainer  = '';
+				myCustomDirectionNav = '';
+			} else {
+				myControlsContainer  = $( '.custom-controls-container' + customConID );
+				myCustomDirectionNav = $( '.custom-navigation'+customConID+' a' );	
+			}
+
 			
 			// If there is no data-xxx, save current source to it
 			if( typeof dataSpeed === typeof undefined ) dataSpeed = 600;
@@ -506,6 +559,13 @@ theme = ( function ( theme, $, window, document ) {
 			//Scroll The Slider With Mousewheel
 			if ( dataWheel ) slidesExMousewheel( $this );
 			
+
+			//With Thumbnail ControlNav Pattern
+			if ( dataNhumbs ) {
+				initslidesWithNavThumb( $this, dataNhumbs );
+				//Prevent index error
+				dataLoop = false;
+			}
 			
 			$this.flexslider({
 				namespace	      : 'custom-theme-flex-',
@@ -521,17 +581,12 @@ theme = ( function ( theme, $, window, document ) {
 				animationLoop     : dataLoop,
 				directionNav      : dataArrows,
 				before            : initslidesSort, //Fires asynchronously with each slider animation.
-				start             : initslidesSort //Fires when the slider loads the first slide
+				start             : initslidesSort, //Fires when the slider loads the first slide
+				controlsContainer : myControlsContainer,
+				customDirectionNav: myCustomDirectionNav
 			});
 
 
-		
-
-			//With Thumbnail ControlNav Pattern
-			if ( dataNhumbs ) {
-				initslidesWithNavThumb( $this, dataNhumbs );
-			}
-			
 			
 		});
 		
@@ -557,7 +612,19 @@ theme = ( function ( theme, $, window, document ) {
 				dataAnim     = $this.data( 'animation' ),
 				dataPaging   = $this.data( 'paging' ),
 				dataArrows   = $this.data( 'arrows' ),
-				dataAuto     = $this.data( 'auto' );
+				dataAuto     = $this.data( 'auto' ),
+				customConID  = $this.data( 'mycontrols' );
+			
+			// Custom Controls
+			var myControlsContainer, myCustomDirectionNav;
+			if( typeof customConID === typeof undefined || customConID == '' || customConID == false ) {
+				myControlsContainer  = '';
+				myCustomDirectionNav = '';
+			} else {
+				myControlsContainer  = $( '.custom-controls-container' + customConID );
+				myCustomDirectionNav = $( '.custom-navigation'+customConID+' a' );	
+			}
+
 			
 			// If there is no data-xxx, save current source to it
 			if( typeof dataSpeed === typeof undefined ) dataSpeed = 600;
@@ -580,84 +647,13 @@ theme = ( function ( theme, $, window, document ) {
 			//Scroll The Slider With Mousewheel
 			if ( dataWheel ) slidesExMousewheel( $this );
 			
-			$this.flexslider({
-				namespace	      : 'custom-theme-flex-',
-				animation         : dataAnim,
-				selector          : '.custom-theme-slides > div.item',
-				controlNav        : dataPaging,
-				smoothHeight      : true,
-				prevText          : dataPrev,
-				nextText          : dataNext,
-				animationSpeed    : dataSpeed,
-				slideshowSpeed    : dataTiming,
-				slideshow         : dataAuto,
-				animationLoop     : dataLoop,
-				directionNav      : dataArrows,
-				start             : initslidesMousewheel //Fires when the slider loads the first slide
-			});
-
-
-		
 
 			//With Thumbnail ControlNav Pattern
 			if ( dataNhumbs ) {
 				initslidesWithNavThumb( $this, dataNhumbs );
+				//Prevent index error
+				dataLoop = false;
 			}
-			
-			
-		});
-		
-		
-	
-		/*! 
-		 ---------------------------
-         Initialize slideshow (custom controls)
-		 ---------------------------
-		 */ 
-		var $sliderMyControls = $( '.custom-theme-flexslider.custom-controls' );
-		
-		$sliderMyControls.each( function()  {
-			var $this        = $( this ),
-				dataSpeed    = $this.data( 'speed' ),
-				dataNhumbs   = $this.data( 'mynavthumbs' ),
-				dataDrag     = $this.data( 'draggable' ),
-				dataWheel    = $this.data( 'wheel' ),
-				dataTiming   = $this.data( 'timing' ),
-				dataLoop     = $this.data( 'loop' ),
-				dataPrev     = $this.data( 'prev' ),
-				dataNext     = $this.data( 'next' ),
-				dataAnim     = $this.data( 'animation' ),
-				dataPaging   = $this.data( 'paging' ),
-				dataArrows   = $this.data( 'arrows' ),
-				dataAuto     = $this.data( 'auto' );
-			
-			
-			var customComID  = $this.data( 'mycontrols' );
-			if( typeof customComID === typeof undefined ) customComID = '';
-
-					
-			
-			
-			// If there is no data-xxx, save current source to it
-			if( typeof dataSpeed === typeof undefined ) dataSpeed = 600;
-			if( typeof dataTiming === typeof undefined ) dataTiming = 10000;
-			if( typeof dataLoop === typeof undefined ) dataLoop = true;
-			if( typeof dataPrev === typeof undefined ) dataPrev = "<i class='fa fa-chevron-left'></i>";
-			if( typeof dataNext === typeof undefined ) dataNext = "<i class='fa fa-chevron-right'></i>";
-			if( typeof dataAnim === typeof undefined ) dataAnim = 'slide';
-			if( typeof dataPaging === typeof undefined ) dataPaging = true;
-			if( typeof dataArrows === typeof undefined ) dataArrows = true;
-			if( typeof dataAuto === typeof undefined ) dataAuto = true;
-			if( typeof dataDrag === typeof undefined ) dataDrag = false;
-			if( typeof dataWheel === typeof undefined ) dataWheel = false;
-			if( typeof dataNhumbs === typeof undefined ) dataNhumbs = false;
-			
-			
-			//Make slider image draggable 
-			if ( dataDrag ) slidesExDraggable( $this );
-			
-			//Scroll The Slider With Mousewheel
-			if ( dataWheel ) slidesExMousewheel( $this );
 			
 			$this.flexslider({
 				namespace	      : 'custom-theme-flex-',
@@ -672,22 +668,15 @@ theme = ( function ( theme, $, window, document ) {
 				slideshow         : dataAuto,
 				animationLoop     : dataLoop,
 				directionNav      : dataArrows,
-				start             : initslides, //Fires when the slider loads the first slide
-				after             : initslides, //Fires after each slider animation completes.
-				controlsContainer : $( '.custom-controls-container' + customComID ),
-				customDirectionNav: $( '.custom-navigation'+customComID+' a' )
+				start             : initslidesMousewheel, //Fires when the slider loads the first slide
+				controlsContainer : myControlsContainer,
+				customDirectionNav: myCustomDirectionNav
 			});
-		
-		
 
-			//With Thumbnail ControlNav Pattern
-			if ( dataNhumbs ) {
-				initslidesWithNavThumb( $this, dataNhumbs );
-			}
 			
-
 			
 		});
+		
 		
 
 			
@@ -712,7 +701,19 @@ theme = ( function ( theme, $, window, document ) {
 				dataAnim     = $this.data( 'animation' ),
 				dataPaging   = $this.data( 'paging' ),
 				dataArrows   = $this.data( 'arrows' ),
-				dataAuto     = $this.data( 'auto' );
+				dataAuto     = $this.data( 'auto' ),
+				customConID  = $this.data( 'mycontrols' );
+			
+			// Custom Controls
+			var myControlsContainer, myCustomDirectionNav;
+			if( typeof customConID === typeof undefined || customConID == '' || customConID == false ) {
+				myControlsContainer  = '';
+				myCustomDirectionNav = '';
+			} else {
+				myControlsContainer  = $( '.custom-controls-container' + customConID );
+				myCustomDirectionNav = $( '.custom-navigation'+customConID+' a' );	
+			}
+
 			
 			// If there is no data-xxx, save current source to it
 			if( typeof dataSpeed === typeof undefined ) dataSpeed = 600;
@@ -734,6 +735,14 @@ theme = ( function ( theme, $, window, document ) {
 			//Scroll The Slider With Mousewheel
 			if ( dataWheel ) slidesExMousewheel( $this );
 			
+
+			//With Thumbnail ControlNav Pattern
+			if ( dataNhumbs ) {
+				initslidesWithNavThumb( $this, dataNhumbs );
+				//Prevent index error
+				dataLoop = false;
+			}
+			
 			$this.flexslider({
 				namespace	      : 'custom-theme-flex-',
 				animation         : dataAnim,
@@ -747,6 +756,8 @@ theme = ( function ( theme, $, window, document ) {
 				slideshow         : dataAuto,
 				animationLoop     : dataLoop,
 				directionNav      : dataArrows,
+				controlsContainer : myControlsContainer,
+				customDirectionNav: myCustomDirectionNav,
 				start: function( slider ) {
 					var slide   = slider.currentSlide,
 						count   = slider.count,
@@ -796,12 +807,6 @@ theme = ( function ( theme, $, window, document ) {
 		
 
 		
-
-			//With Thumbnail ControlNav Pattern
-			if ( dataNhumbs ) {
-				initslidesWithNavThumb( $this, dataNhumbs );
-			}
-			
 			
 		});	
 		
@@ -835,7 +840,19 @@ theme = ( function ( theme, $, window, document ) {
 				dataAnim     = $this.data( 'animation' ),
 				dataPaging   = $this.data( 'paging' ),
 				dataArrows   = $this.data( 'arrows' ),
-				dataAuto     = $this.data( 'auto' );
+				dataAuto     = $this.data( 'auto' ),
+				customConID  = $this.data( 'mycontrols' );
+			
+			// Custom Controls
+			var myControlsContainer, myCustomDirectionNav;
+			if( typeof customConID === typeof undefined || customConID == '' || customConID == false ) {
+				myControlsContainer  = '';
+				myCustomDirectionNav = '';
+			} else {
+				myControlsContainer  = $( '.custom-controls-container' + customConID );
+				myCustomDirectionNav = $( '.custom-navigation'+customConID+' a' );	
+			}
+
 			
 			// If there is no data-xxx, save current source to it
 			if( typeof dataSpeed === typeof undefined ) dataSpeed = 600;
@@ -875,7 +892,9 @@ theme = ( function ( theme, $, window, document ) {
 			    itemWidth         : 1,
 				move              : 1, // Number of carousel items that should move on animation.
 			    minItems          : getGridSizeS(), // use function to pull in initial value
-			    maxItems          : getGridSizeS() // use function to pull in initial value
+			    maxItems          : getGridSizeS(), // use function to pull in initial value
+				controlsContainer : myControlsContainer,
+				customDirectionNav: myCustomDirectionNav
 			});
 			
 
@@ -908,7 +927,19 @@ theme = ( function ( theme, $, window, document ) {
 				dataAnim     = $this.data( 'animation' ),
 				dataPaging   = $this.data( 'paging' ),
 				dataArrows   = $this.data( 'arrows' ),
-				dataAuto     = $this.data( 'auto' );
+				dataAuto     = $this.data( 'auto' ),
+				customConID  = $this.data( 'mycontrols' );
+			
+			// Custom Controls
+			var myControlsContainer, myCustomDirectionNav;
+			if( typeof customConID === typeof undefined || customConID == '' || customConID == false ) {
+				myControlsContainer  = '';
+				myCustomDirectionNav = '';
+			} else {
+				myControlsContainer  = $( '.custom-controls-container' + customConID );
+				myCustomDirectionNav = $( '.custom-navigation'+customConID+' a' );	
+			}
+
 			
 			// If there is no data-xxx, save current source to it
 			if( typeof dataSpeed === typeof undefined ) dataSpeed = 600;
@@ -931,6 +962,14 @@ theme = ( function ( theme, $, window, document ) {
 			//Scroll The Slider With Mousewheel
 			if ( dataWheel ) slidesExMousewheel( $this );
 			
+
+			//With Thumbnail ControlNav Pattern
+			if ( dataNhumbs ) {
+				initslidesWithNavThumb( $this, dataNhumbs );
+				//Prevent index error
+				dataLoop = false;
+			}
+			
 			$this.flexslider({
 				namespace	      : 'custom-theme-flex-',
 				animation         : dataAnim,
@@ -945,15 +984,12 @@ theme = ( function ( theme, $, window, document ) {
 				animationLoop     : dataLoop,
 				directionNav      : dataArrows,
 				start             : initslides, //Fires when the slider loads the first slide
-				after             : initslides //Fires after each slider animation completes.
+				after             : initslides, //Fires after each slider animation completes.
+				controlsContainer : myControlsContainer,
+				customDirectionNav: myCustomDirectionNav
 			});
 			
 		
-
-			//With Thumbnail ControlNav Pattern
-			if ( dataNhumbs ) {
-				initslidesWithNavThumb( $this, dataNhumbs );
-			}
 			
 		});
 		
@@ -1008,12 +1044,7 @@ theme = ( function ( theme, $, window, document ) {
 					
 				});
 				
-				$sliderMyControls.each( function() {
-					if ( $( this ).length > 0 ) {
-						$( this ).data( 'flexslider' ).setup();
-					}
-				});
-				
+			
 				
 				$sliderCounterShow.each( function() {
 					if ( $( this ).length > 0 ) {
@@ -1043,4 +1074,5 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
+
 

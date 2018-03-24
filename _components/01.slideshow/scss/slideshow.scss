@@ -275,9 +275,18 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 			width: 50px;
 		}
 	}
-	.next {
-	    text-align: right;
+	
+	.custom-theme-flex-prev {
+		&.custom-theme-flex-disabled {
+			
+		}
 	}
+	.custom-theme-flex-next {
+		&.custom-theme-flex-disabled {
+			
+		}	
+	}
+
 }
 
 .custom-controls-container {
@@ -363,8 +372,15 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 	max-height: 100vh;
 	overflow: hidden;
 
-	img {
-	    max-height: 100vh;
+	
+	/* Full Screen Slider
+	 * You need add an attribute "data-slider-bg" to ".item"
+	*/
+	&.fullscreen {
+		img {
+			height: 100vh;
+			visibility: hidden;
+		}
 	}
 
 	.custom-theme-slides {
