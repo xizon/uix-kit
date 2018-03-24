@@ -13,6 +13,11 @@
 	padding: 0;
 	margin: 0;
 	
+	&.fill-white {
+		background: #fff;
+		color: $primary-text-color1;
+	}
+	
 	&.thin {
 		border-width: 1px;
 	}
