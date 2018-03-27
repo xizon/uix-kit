@@ -7194,8 +7194,6 @@ theme = ( function ( theme, $, window, document ) {
 				slideshow         : dataAuto,
 				animationLoop     : dataLoop,
 				directionNav      : dataArrows,
-				start             : initslides, //Fires when the slider loads the first slide
-				after             : initslides, //Fires after each slider animation completes.
 			    itemWidth         : my_itemWidth,
 				move              : my_move, // Number of carousel items that should move on animation.
 			    minItems          : my_minItems, // use function to pull in initial value
@@ -7204,22 +7202,22 @@ theme = ( function ( theme, $, window, document ) {
 				customDirectionNav: myCustomDirectionNav,
 				
 				//Fires when the slider loads the first slide.
-				start: function( slider ) {
+				start             : function( slider ) {
 					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, 'start' );
 				},
 				
 				//Fires asynchronously with each slider animation.
-				before: function( slider ) {
+				before             : function( slider ) {
 					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, 'before' );
 				},
 				
 				//Fires after each slider animation completes.
-				after: function( slider ) {
+				after              : function( slider ) {
 					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, 'after' );
 				},
 				
 				//Fires when the slider reaches the last slide (asynchronous).
-				end: function( slider ) {
+				end                : function( slider ) {
 					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, 'end' );
 				}
 			});
