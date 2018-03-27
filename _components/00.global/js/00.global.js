@@ -36,7 +36,13 @@ var theme = (function ( $, window, document ) {
 	if ( $( 'img' ).length == 0 ) {
 		$( 'body' ).prepend( '<img src="'+templateUrl+'/assets/images/blank.gif" alt="" style="display:none">' );
 	}
-	$( 'body' ).waitForImages( pageLoaded );
+	
+	if( $.isFunction( $.fn.waitForImages ) ) {
+		$( 'body' ).waitForImages( pageLoaded );
+	} else {
+		$( window ).on( 'load', pageLoaded );
+	}
+	
     $( document ).ready( documentReady );
 	
 	

@@ -55,11 +55,11 @@
         
        
         <!-- Theme  -->
-        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTUyMjExODQ4ODE3OA"/>
+        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTUyMjE0NzAyNDg2MA"/>
         
         
          <!--[if lt IE 10]>
-           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTUyMjExODQ4ODE3OA" />
+           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTUyMjE0NzAyNDg2MA" />
         <![endif]-->
         
         
@@ -313,6 +313,10 @@
              data-draggable="true" 
              data-mynavthumbs="false"
              data-mycontrols="false"
+             data-myshow="false"
+             data-mycounttotal="false"
+             data-mycountcur="false"
+             data-myparallax="false"
              data-wheel="false"
              data-speed="600" 
              data-timing="10000" 
@@ -414,7 +418,7 @@
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2 t-c">
                             <h2>Parallax Effect</h2>
-                            
+                            <p>Set the <code>data-myparallax</code> property to make parallax effect.</p>
                         </div>
                     </div>
                     <!-- .row end -->
@@ -432,6 +436,10 @@
              data-draggable="true" 
              data-mynavthumbs="false"
              data-mycontrols="false"
+             data-myshow="false"
+             data-mycounttotal="false"
+             data-mycountcur="false"
+             data-myparallax="true"
              data-wheel="false"
              data-speed="1500" 
              data-timing="10000" 
@@ -506,6 +514,10 @@
 										 data-draggable="false" 
 										 data-mynavthumbs="false"
 										 data-mycontrols="false"
+										 data-myshow="false"
+										 data-mycounttotal="false"
+										 data-mycountcur="false"
+										 data-myparallax="false"
 										 data-wheel="false"
 										 data-speed="600" 
 										 data-timing="10000" 
@@ -558,6 +570,7 @@
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2 t-c">
                             <h2>Video Slider</h2>
+                            <p>Set the <code>data-embed-video-wrapper</code> property to listen for video play events.</p>
                             
                         </div>
                     </div>
@@ -581,6 +594,10 @@
 										 data-draggable="false" 
 										 data-mynavthumbs="false"
 										 data-mycontrols="false"
+										 data-myshow="false"
+										 data-mycounttotal="false"
+										 data-mycountcur="false"
+										 data-myparallax="false"
 										 data-wheel="false"
 										 data-speed="600" 
 										 data-timing="20000" 
@@ -644,7 +661,7 @@
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2 t-c">
 							<h2>Custom Navigation Buttons</h2>
-                            
+                            <p>Set the <code>data-mycontrols</code> property to be used in lieu of dynamic controlNav.</p>
                         </div>
                     </div>
                     <!-- .row end -->
@@ -668,6 +685,10 @@
 										 data-draggable="false" 
 										 data-mynavthumbs="false"
 										 data-mycontrols=".my-nav-1"
+										 data-myshow="false"
+										 data-mycounttotal="false"
+										 data-mycountcur="false"
+										 data-myparallax="false"
 										 data-wheel="false"
 										 data-speed="600" 
 										 data-timing="10000" 
@@ -726,6 +747,7 @@
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2 t-c">
 							<h2>Multiple Items</h2>
+							<p>Set the <code>data-myshow</code> property to control the number of items displayed.</p>
                             
                         </div>
                     </div>
@@ -749,6 +771,10 @@
 										 data-draggable="false" 
 										 data-mynavthumbs="false"
 										 data-mycontrols="false"
+										 data-myshow="3"
+										 data-mycounttotal="false"
+										 data-mycountcur="false" 
+										 data-myparallax="false"
 										 data-wheel="false"
 										 data-speed="600" 
 										 data-timing="10000" 
@@ -832,6 +858,7 @@
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2 t-c">
 							<h2>Add Counter</h2>
+                            <p>Set the <code>data-mycounttotal</code> and <code>data-mycountcur</code> property to display counter.</p>
                         </div>
                     </div>
                     <!-- .row end -->
@@ -851,10 +878,14 @@
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">
                         
-                                    <div class="custom-theme-flexslider custom-counter-show"
+                                    <div class="custom-theme-flexslider"
 										 data-draggable="false" 
 										 data-mynavthumbs="false"
 										 data-mycontrols="false"
+										 data-myshow="false"
+										 data-mycounttotal="p.count em.count"
+										 data-mycountcur="p.count em.current"
+										 data-myparallax="false"
 										 data-wheel="true"
 										 data-speed="600" 
 										 data-timing="10000" 
@@ -939,7 +970,7 @@
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2 t-c">
 							<h2>Thumbnail ControlNav Pattern</h2>
-                            
+                            <p>Set the <code>data-mynavthumbs</code> property to match a simple pattern.</p>
                         </div>
                     </div>
                     <!-- .row end -->
@@ -962,6 +993,11 @@
                                     <div class="custom-theme-flexslider"
 										 data-draggable="false" 
 										 data-mynavthumbs=".my-navthumbs-1"
+										 data-mycontrols=".my-nav-2"
+										 data-myshow="false"
+										 data-mycounttotal="false"
+										 data-mycountcur="false"
+										 data-myparallax="false"
 										 data-wheel="false"
 										 data-speed="600" 
 										 data-timing="10000" 
@@ -971,8 +1007,7 @@
 										 data-animation="slide" 
 										 data-auto="true" 
 										 data-prev="<i class='fa fa-chevron-left'></i>" 
-										 data-next="<i class='fa fa-chevron-right'></i>"
-                                         data-mycontrols=".my-nav-2"> 
+										 data-next="<i class='fa fa-chevron-right'></i>"> 
                                        
                                        
                                         <div class="custom-theme-slides">
@@ -1093,7 +1128,7 @@
 			"homeUrl"     :""  //Eg. https://uiux.cc
 		};
     </script>  
-    <script src="assets/js/uix-kit.min.js?ver=MTUyMjExODQ4ODE3OA"></script>
+    <script src="assets/js/uix-kit.min.js?ver=MTUyMjE0NzAyNDg2MA"></script>
 
 
 

@@ -1,8 +1,9 @@
 # Changelog
 
 
-#### = 1.1.87 (March 25, 2018) =
+#### = 1.1.9 (March 25, 2018) =
 
+* Tweak: Simplify and enhance the slider's data attribute of HTML.
 * Tweak: Beautify the comments of the SCSS files.
 * Tweak: Remove the jquery extra each method when using the waypoint plugin. Simplified the core script.
 

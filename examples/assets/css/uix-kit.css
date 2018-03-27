@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.87
+ * ## Version             :  1.1.9
  * ## Last Update         :  March 27, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -5408,6 +5408,108 @@ dl.list-side-by-side:after {
 }
 
 /* ====================================================== 
+   Multiple Items Carousel
+/* ====================================================== */
+.custom-multi-items-carousel {
+  /* Required */
+    overflow: hidden;
+}
+
+.custom-multi-items-carousel .items {
+    height: 150px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.custom-multi-items-carousel .items .item {
+    position: relative;
+    float: left;
+    height: 100%;
+    visibility: hidden;
+    box-sizing: border-box;
+  /* Demo Style */
+    border-right: 1px solid rgba(255, 255, 255, 0.5);
+    font-size: 1.2rem;
+    padding: 2rem 0;
+    text-align: center;
+    color: #fff;
+    background: #333;
+}
+
+.custom-multi-items-carousel .items .item.active {
+    background: #000;
+    font-size: 3rem;
+}
+
+.custom-multi-items-carousel .items .item.active-prev, .custom-multi-items-carousel .items .item.active-next {
+    font-size: 2rem;
+}
+
+.custom-multi-items-carousel-controls {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.custom-multi-items-carousel-controls .prev {
+    padding-left: 2px;
+}
+
+.custom-multi-items-carousel-controls .next {
+    padding-right: 2px;
+}
+
+.custom-multi-items-carousel-controls a {
+    margin-left: 10px;
+    margin-right: 10px;
+    outline: 0;
+    border: 0;
+    color: #000;
+    font-weight: bold;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    font-size: 32px;
+    cursor: pointer;
+    opacity: 1;
+    text-decoration: none;
+    font-family: Arial, "sans-serif";
+}
+
+.custom-multi-items-carousel-controls a.disable {
+    opacity: .3;
+}
+
+/* Vertical Carousel */
+.custom-multi-items-carousel.vertical {
+  /* Required */
+    overflow: hidden;
+    width: 500px;
+    height: 450px;
+}
+
+.custom-multi-items-carousel.vertical .items {
+    width: 100%;
+  /* Required */
+    height: 100%;
+}
+
+.custom-multi-items-carousel.vertical .items .item {
+    float: none;
+    width: 100%;
+  /* Demo Style */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 0 0;
+}
+
+.custom-multi-items-carousel-controls.vertical {
+    width: 300px;
+    position: absolute;
+    top: 20%;
+    left: 600px;
+}
+
+/* ====================================================== 
    Modal Dialog
 /* ====================================================== */
 .modal-box {
@@ -5557,108 +5659,6 @@ dl.list-side-by-side:after {
     to {
         opacity: 1;
     }
-}
-
-/* ====================================================== 
-   Multiple Items Carousel
-/* ====================================================== */
-.custom-multi-items-carousel {
-  /* Required */
-    overflow: hidden;
-}
-
-.custom-multi-items-carousel .items {
-    height: 150px;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-}
-
-.custom-multi-items-carousel .items .item {
-    position: relative;
-    float: left;
-    height: 100%;
-    visibility: hidden;
-    box-sizing: border-box;
-  /* Demo Style */
-    border-right: 1px solid rgba(255, 255, 255, 0.5);
-    font-size: 1.2rem;
-    padding: 2rem 0;
-    text-align: center;
-    color: #fff;
-    background: #333;
-}
-
-.custom-multi-items-carousel .items .item.active {
-    background: #000;
-    font-size: 3rem;
-}
-
-.custom-multi-items-carousel .items .item.active-prev, .custom-multi-items-carousel .items .item.active-next {
-    font-size: 2rem;
-}
-
-.custom-multi-items-carousel-controls {
-    margin-top: 30px;
-    text-align: center;
-}
-
-.custom-multi-items-carousel-controls .prev {
-    padding-left: 2px;
-}
-
-.custom-multi-items-carousel-controls .next {
-    padding-right: 2px;
-}
-
-.custom-multi-items-carousel-controls a {
-    margin-left: 10px;
-    margin-right: 10px;
-    outline: 0;
-    border: 0;
-    color: #000;
-    font-weight: bold;
-    border-radius: 50%;
-    height: 50px;
-    width: 50px;
-    font-size: 32px;
-    cursor: pointer;
-    opacity: 1;
-    text-decoration: none;
-    font-family: Arial, "sans-serif";
-}
-
-.custom-multi-items-carousel-controls a.disable {
-    opacity: .3;
-}
-
-/* Vertical Carousel */
-.custom-multi-items-carousel.vertical {
-  /* Required */
-    overflow: hidden;
-    width: 500px;
-    height: 450px;
-}
-
-.custom-multi-items-carousel.vertical .items {
-    width: 100%;
-  /* Required */
-    height: 100%;
-}
-
-.custom-multi-items-carousel.vertical .items .item {
-    float: none;
-    width: 100%;
-  /* Demo Style */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-    padding: 0 0;
-}
-
-.custom-multi-items-carousel-controls.vertical {
-    width: 300px;
-    position: absolute;
-    top: 20%;
-    left: 600px;
 }
 
 /* ====================================================== 
