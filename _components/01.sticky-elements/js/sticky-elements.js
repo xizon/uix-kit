@@ -36,32 +36,29 @@ theme = ( function ( theme, $, window, document ) {
 
 		});	
 
-		$( '.stick-widget' ).each( function()  {
-			
-			var $this      = $( this ),
+		var	waypoints = $( '.stick-widget' ).waypoint({
+
+		  handler: function( direction ) {
+
+
+			var $this      = $( this.element ),
 				oWIdth     = $this.width();
-			
-			
-			var	waypoints = $this.waypoint({
 
-			  handler: function( direction ) {
-				  
-				  $this
-					  .toggleClass( 'sticky', direction === 'down' )
-					  .css( {
-						  'width': oWIdth + 'px',
-						  'top'  : topSpacing + 'px'
-					  } );
-				  
-				
 
-			  },
+			  $this
+				  .toggleClass( 'sticky', direction === 'down' )
+				  .css( {
+					  'width': oWIdth + 'px',
+					  'top'  : topSpacing + 'px'
+				  } );
 
-			  offset: topSpacing
 
-			});	
-		});
 
+		  },
+
+		  offset: topSpacing
+
+		});	
 
 		
     };

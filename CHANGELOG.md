@@ -1,6 +1,12 @@
 # Changelog
 
 
+#### = 1.1.87 (March 25, 2018) =
+
+* Tweak: Beautify the comments of the SCSS files.
+* Tweak: Remove the jquery extra each method when using the waypoint plugin. Simplified the core script.
+
+
 
 #### = 1.1.86 (March 24, 2018) =
 

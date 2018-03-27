@@ -8,31 +8,24 @@ theme = ( function ( theme, $, window, document ) {
     'use strict';
     
     var documentReady = function( $ ) {
-	
-		$( '[data-counter-number]' ).each(function() {
+		
+		var waypoints = $( '[data-counter-number]' ).waypoint({
+			handler: function( direction ) {
 
-			var $this = $( this );
-			
-			var waypoints = $this.waypoint({
-			    handler: function( direction ) {
-					
-					$this.countTo({
-						dilimiter      : true,
-						doubleDigits   : true
-					});
-					
-					//Prevents front-end javascripts that are activated in the background to repeat loading.
-				    this.disable();
-				  
+				$( this.element ).countTo({
+					dilimiter      : true,
+					doubleDigits   : true
+				});
 
-			    },
-			    offset: '100%' //0~100%, bottom-in-view
-			});
+				//Prevents front-end javascripts that are activated in the background to repeat loading.
+				this.disable();
 
 
+			},
+			offset: '100%' //0~100%, bottom-in-view
 		});
 
-		
+
 		
     };
 
