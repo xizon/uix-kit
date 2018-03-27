@@ -8,7 +8,7 @@
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
  * ## Version             :  1.1.86
- * ## Last Update         :  March 24, 2018
+ * ## Last Update         :  March 27, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -5249,93 +5249,6 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-
-/*! 
- *************************************
- * Mousewheel Interaction
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-   
-   
-    var documentReady = function( $ ){
-		
-		
-		//Prevent this module from loading in other pages
-		if ( !$( 'body' ).hasClass( 'page-mousewheel-eff' ) ) return false;
-		
-		
-	    //Determine the direction of a jQuery scroll event
-		//Fix an issue for mousewheel event is too fast.
-		var mousewheelTrigger = true,
-			scrollCount       = 0;
-		
-		$( window ).on( 'mousewheel', function( event ) { 
-
-			if ( mousewheelTrigger ) {
-
-				if( event.originalEvent.wheelDelta < 0) {
-					//scroll down
-					$( '#demo-mousewheel-interaction-status' ).text( 'Direction: down, Total: ' + scrollCount );
-
-					scrollCount++;
-					
-					//Prohibited scrolling trigger
-					mousewheelTrigger = false;
-					
-					//Do something
-					customMouseHandle();		
-					
-
-				} else {
-					//scroll up
-					$( '#demo-mousewheel-interaction-status' ).text( 'Direction: up, Total: ' + scrollCount );
-
-					scrollCount++;
-					
-					//Prohibited scrolling trigger
-					mousewheelTrigger = false;
-					
-					//Do something
-					customMouseHandle();
-
-				}	
-
-			}
-			
-
-			//prevent page fom scrolling
-			//return false;
-
-		});
-	
-		
-		
-
-		function customMouseHandle() {
-			
-			//Reset scrolling trigger
-			setTimeout( function() {
-				mousewheelTrigger = true;	
-			}, 1500 );
-			
-			
-		}
-
-		
-	};
-		
-      
-    theme.mousewheelInteraction = {
-        documentReady : documentReady        
-    };  
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
-
-
 /*! 
  *************************************
  * Multiple Items Carousel
@@ -5730,6 +5643,93 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
+
+/*! 
+ *************************************
+ * Mousewheel Interaction
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ){
+		
+		
+		//Prevent this module from loading in other pages
+		if ( !$( 'body' ).hasClass( 'page-mousewheel-eff' ) ) return false;
+		
+		
+	    //Determine the direction of a jQuery scroll event
+		//Fix an issue for mousewheel event is too fast.
+		var mousewheelTrigger = true,
+			scrollCount       = 0;
+		
+		$( window ).on( 'mousewheel', function( event ) { 
+
+			if ( mousewheelTrigger ) {
+
+				if( event.originalEvent.wheelDelta < 0) {
+					//scroll down
+					$( '#demo-mousewheel-interaction-status' ).text( 'Direction: down, Total: ' + scrollCount );
+
+					scrollCount++;
+					
+					//Prohibited scrolling trigger
+					mousewheelTrigger = false;
+					
+					//Do something
+					customMouseHandle();		
+					
+
+				} else {
+					//scroll up
+					$( '#demo-mousewheel-interaction-status' ).text( 'Direction: up, Total: ' + scrollCount );
+
+					scrollCount++;
+					
+					//Prohibited scrolling trigger
+					mousewheelTrigger = false;
+					
+					//Do something
+					customMouseHandle();
+
+				}	
+
+			}
+			
+
+			//prevent page fom scrolling
+			//return false;
+
+		});
+	
+		
+		
+
+		function customMouseHandle() {
+			
+			//Reset scrolling trigger
+			setTimeout( function() {
+				mousewheelTrigger = true;	
+			}, 1500 );
+			
+			
+		}
+
+		
+	};
+		
+      
+    theme.mousewheelInteraction = {
+        documentReady : documentReady        
+    };  
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
 /*! 
  *************************************
  * Navigation Highlighting
@@ -6071,6 +6071,77 @@ http://www.gnu.org/licenses/gpl.html
 
 /*! 
  *************************************
+ * Periodical Scroll
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+	
+		$( '[data-periodical-scroll-container]' ).each(function() {
+
+			var $this       = $( this ),
+				ul          = $this.data( 'periodical-scroll-container' ),
+				speed       = $this.data( 'periodical-scroll-speed' ),
+				timing      = $this.data( 'periodical-scroll-timing' );
+
+
+			if( typeof speed === typeof undefined ) {
+				speed = 600;
+			}
+
+			if( typeof timing === typeof undefined ) {
+				timing = 2000;
+			}	
+			
+			var $wrap  = $this.find( ul ),
+				time   = timing,
+				moveEv = null;
+			
+			//Initialize the container height
+			$wrap.css({
+				'height'   : $wrap.find( 'li:first' ).height() + 'px',
+				'overflow' : 'hidden'
+			});
+			
+ 
+			//Animation
+			$wrap.on( 'mouseenter', function() {
+
+				clearInterval( moveEv );
+
+			} ).on( 'mouseleave' , function() {
+				moveEv=setInterval(function(){
+					var $item     = $wrap.find( 'li:first' ),
+						curHeight = $item.height(); 
+
+					$item.animate({marginTop: -curHeight + 'px' }, speed, function(){
+						$item.css('marginTop',0).appendTo( $wrap );
+					});
+
+				}, time );
+			} ).trigger('mouseleave');
+			
+			
+		});
+	
+		
+		
+    };
+
+    theme.periodicalScroll = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+/*! 
+ *************************************
  * Pricing
  *************************************
  */
@@ -6194,77 +6265,6 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-
-
-/*! 
- *************************************
- * Periodical Scroll
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-    
-    var documentReady = function( $ ) {
-	
-		$( '[data-periodical-scroll-container]' ).each(function() {
-
-			var $this       = $( this ),
-				ul          = $this.data( 'periodical-scroll-container' ),
-				speed       = $this.data( 'periodical-scroll-speed' ),
-				timing      = $this.data( 'periodical-scroll-timing' );
-
-
-			if( typeof speed === typeof undefined ) {
-				speed = 600;
-			}
-
-			if( typeof timing === typeof undefined ) {
-				timing = 2000;
-			}	
-			
-			var $wrap  = $this.find( ul ),
-				time   = timing,
-				moveEv = null;
-			
-			//Initialize the container height
-			$wrap.css({
-				'height'   : $wrap.find( 'li:first' ).height() + 'px',
-				'overflow' : 'hidden'
-			});
-			
- 
-			//Animation
-			$wrap.on( 'mouseenter', function() {
-
-				clearInterval( moveEv );
-
-			} ).on( 'mouseleave' , function() {
-				moveEv=setInterval(function(){
-					var $item     = $wrap.find( 'li:first' ),
-						curHeight = $item.height(); 
-
-					$item.animate({marginTop: -curHeight + 'px' }, speed, function(){
-						$item.css('marginTop',0).appendTo( $wrap );
-					});
-
-				}, time );
-			} ).trigger('mouseleave');
-			
-			
-		});
-	
-		
-		
-    };
-
-    theme.periodicalScroll = {
-        documentReady : documentReady        
-    };
-
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
 
 
 /*! 

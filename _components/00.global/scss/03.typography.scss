@@ -2,6 +2,52 @@
    3. Typography                                
 /* ====================================================== */
 
+a,
+h1, 
+h2, 
+h3, 
+h4, 
+h5, 
+h6, 
+.h1, 
+.h2, 
+.h3, 
+.h4, 
+.h5, 
+.h6 {
+    @include transition-default();
+}
+
+
+/* 3.1. Hyperlink */
+a {
+	color: $primary-text-color2;
+	
+	&:hover, 
+	&:focus, 
+	&:active {
+		color: #000;
+		text-decoration: none;
+		outline: none;
+	}
+	
+	&:hover, 
+	&:active, 
+	&:focus {
+		
+	}
+	
+	&.link {
+		text-decoration: underline;
+		color: $highlight-color1;
+		&:hover {
+			color: $highlight-color2;
+		}
+	}
+}
+
+
+/* 3.2. Heading (h1,h2,h3,h4,h5,h6) */
 h1, 
 h2, 
 h3, 
@@ -88,35 +134,6 @@ h6 {
 	font-weight: 600 !important;
 }
 
-.font-normal {
-	font-family: $font-stack;
-	font-weight: 400 !important;
-}
-
-.font-uppercase {
-    text-transform: uppercase !important;
-}
-
-.font-bold {
-    font-weight: 800 !important;
-}
-
-.font-italic {
-    font-style: italic !important;
-}
-
-.font-no-italic {
-    font-style: normal !important;
-}
-
-.font-underline {
-    text-decoration: underline !important;
-}
-
-.font-sub-color {
-	color: $sub-text-color !important;
-}
-
 @media all and (max-width: 768px) {
 	h1 {
 		font-size: 2.5rem;
@@ -171,47 +188,43 @@ h6 {
 	}
 }
 
-a,
-h1, 
-h2, 
-h3, 
-h4, 
-h5, 
-h6, 
-.h1, 
-.h2, 
-.h3, 
-.h4, 
-.h5, 
-.h6 {
-    @include transition-default();
+
+/* 3.3. List Normal & Other Text */
+
+
+.font-normal {
+	font-family: $font-stack;
+	font-weight: 400 !important;
 }
 
-a {
-	color: $primary-text-color2;
-	
-	&:hover, 
-	&:focus, 
-	&:active {
-		color: #000;
-		text-decoration: none;
-		outline: none;
-	}
-	
-	&:hover, 
-	&:active, 
-	&:focus {
-		
-	}
-	
-	&.link {
-		text-decoration: underline;
-		color: $highlight-color1;
-		&:hover {
-			color: $highlight-color2;
-		}
-	}
+.font-uppercase {
+    text-transform: uppercase !important;
 }
+
+.font-bold {
+    font-weight: 800 !important;
+}
+
+.font-italic {
+    font-style: italic !important;
+}
+
+.font-no-italic {
+    font-style: normal !important;
+}
+
+.font-underline {
+    text-decoration: underline !important;
+}
+
+.font-primary-color {
+	color: $primary-text-color1 !important;
+}
+
+.font-sub-color {
+	color: $sub-text-color !important;
+}
+
 
 .list-normal a:not(.uix-sc-btn), 
 .table-normal a:not(.uix-sc-btn) {

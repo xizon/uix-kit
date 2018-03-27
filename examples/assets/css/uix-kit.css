@@ -8,7 +8,7 @@
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
  * ## Version             :  1.1.86
- * ## Last Update         :  March 24, 2018
+ * ## Last Update         :  March 27, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -18,18 +18,6 @@
  */
 
 /*
-	
-	COLOR PALETTE
-	---------------------------
-	
-    Default font-size for HTML :    16px
-    Placeholder Text Color     :    #E6E6E8
-	Primary Background Color   :    transparent
-	Highlight Color            :    #EC5E79, #E8588C
-	Primary Text Color         :    #212121, #474747
-	Subordinate Text Color     :    #AEAEAE
-	Dividing Line Color        :    #F4F4F4
-	
 
 
 	TABLE OF CONTENTS
@@ -41,6 +29,10 @@
 
 	2. Helper Classes
 	3. Typography
+        3.1. Hyperlink
+        3.2. Heading (h1,h2,h3,h4,h5,h6)
+        3.3. List Normal & Other Text
+
 	4. Spacing
 	5. Basic Layout Styles
 		5.1. Bootstrap 3.x
@@ -84,7 +76,39 @@
 
 
 */
-/* Ripple Effect */
+/* FONTS
+ ---------------------------
+*/
+/* COLOR PALETTE
+ ---------------------------
+*/
+/* Easing Transition
+ ---------------------------
+*/
+/* Default Transition
+ ---------------------------
+*/
+/* None Of Transition
+ ---------------------------
+*/
+/* Background Gradient
+ ---------------------------
+*/
+/* Icon & Text Gradient
+ ---------------------------
+*/
+/* Outer Shadow Effect
+ ---------------------------
+*/
+/* Text wWith Ellipsis
+ ---------------------------
+*/
+/* Custom Scrollbar
+ ---------------------------
+*/
+/* Ripple Effect
+ ---------------------------
+*/
 @keyframes ripple {
     0% {
         box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1), 0 0 0 20px rgba(255, 255, 255, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1);
@@ -427,7 +451,6 @@ iframe {
 
 .ellipsis {
   /* @include ellipsis(); */
-  /* text with ellipsis */
     overflow: hidden;
     text-overflow: ellipsis;
     width: 100%;
@@ -545,6 +568,44 @@ iframe {
 /* ====================================================== 
    3. Typography                                
 /* ====================================================== */
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+}
+
+/* 3.1. Hyperlink */
+a {
+    color: #474747;
+}
+
+a:hover, a:focus, a:active {
+    color: #000;
+    text-decoration: none;
+    outline: none;
+}
+
+a.link {
+    text-decoration: underline;
+    color: #EC5E79;
+}
+
+a.link:hover {
+    color: #E8588C;
+}
+
+/* 3.2. Heading (h1,h2,h3,h4,h5,h6) */
 h1,
 h2,
 h3,
@@ -631,35 +692,6 @@ h6 {
     font-weight: 600 !important;
 }
 
-.font-normal {
-    font-family: "Helvetica Neue", Helvetica, "Microsoft YaHei", STXihei, "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
-    font-weight: 400 !important;
-}
-
-.font-uppercase {
-    text-transform: uppercase !important;
-}
-
-.font-bold {
-    font-weight: 800 !important;
-}
-
-.font-italic {
-    font-style: italic !important;
-}
-
-.font-no-italic {
-    font-style: normal !important;
-}
-
-.font-underline {
-    text-decoration: underline !important;
-}
-
-.font-sub-color {
-    color: #AEAEAE !important;
-}
-
 @media all and (max-width: 768px) {
     h1 {
         font-size: 2.5rem;
@@ -724,40 +756,38 @@ h6 {
     }
 }
 
-a,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6 {
-  /* @include transition-default(); */
-    transition: all 0.3s ease;
+/* 3.3. List Normal & Other Text */
+.font-normal {
+    font-family: "Helvetica Neue", Helvetica, "Microsoft YaHei", STXihei, "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+    font-weight: 400 !important;
 }
 
-a {
-    color: #474747;
+.font-uppercase {
+    text-transform: uppercase !important;
 }
 
-a:hover, a:focus, a:active {
-    color: #000;
-    text-decoration: none;
-    outline: none;
+.font-bold {
+    font-weight: 800 !important;
 }
 
-a.link {
-    text-decoration: underline;
-    color: #EC5E79;
+.font-italic {
+    font-style: italic !important;
 }
 
-a.link:hover {
-    color: #E8588C;
+.font-no-italic {
+    font-style: normal !important;
+}
+
+.font-underline {
+    text-decoration: underline !important;
+}
+
+.font-primary-color {
+    color: #212121 !important;
+}
+
+.font-sub-color {
+    color: #AEAEAE !important;
 }
 
 .list-normal a:not(.uix-sc-btn),
@@ -2480,6 +2510,11 @@ ul.entry-meta {
     color: #212121;
     padding: 0;
     margin: 0;
+}
+
+.social-btn.fill-white {
+    background: #fff;
+    color: #212121;
 }
 
 .social-btn.thin {
@@ -7909,8 +7944,7 @@ dl.list-side-by-side:after {
     overflow: hidden;
     overflow-x: auto;
     white-space: nowrap;
-  /* @include customScrollbar( 'vertical' ) ; */
-  /* Custom scrollbar */;
+  /* @include customScrollbar( 'vertical' ) ; */;
 }
 
 .custom-lightbox-overlay .lb-container .html .lb-thumbs-container::-webkit-scrollbar-track {
@@ -7990,8 +8024,7 @@ dl.list-side-by-side:after {
     max-height: 60vh;
     overflow-y: auto;
     text-align: left;
-  /* @include customScrollbar( 'vertical' ) ; */
-  /* Custom scrollbar */;
+  /* @include customScrollbar( 'vertical' ) ; */;
 }
 
 .custom-lightbox-overlay .lb-container .html > .lb-box::-webkit-scrollbar-track {

@@ -1,17 +1,4 @@
 /*
-	
-	COLOR PALETTE
-	---------------------------
-	
-    Default font-size for HTML :    16px
-    Placeholder Text Color     :    #E6E6E8
-	Primary Background Color   :    transparent
-	Highlight Color            :    #EC5E79, #E8588C
-	Primary Text Color         :    #212121, #474747
-    Heading Text Color         :    #212121
-	Subordinate Text Color     :    #AEAEAE
-	Dividing Line Color        :    #F4F4F4
-	
 
 
 	TABLE OF CONTENTS
@@ -23,6 +10,10 @@
 
 	2. Helper Classes
 	3. Typography
+        3.1. Hyperlink
+        3.2. Heading (h1,h2,h3,h4,h5,h6)
+        3.3. List Normal & Other Text
+
 	4. Spacing
 	5. Basic Layout Styles
 		5.1. Bootstrap 3.x
@@ -67,37 +58,75 @@
 
 */
 
+
+
+/* FONTS
+ ---------------------------
+*/
+//Default font-size for HTML
 $basic-font-size       : 16px;
 $font-stack            : 'Helvetica Neue', Helvetica, 'Microsoft YaHei', STXihei, 'PingFang SC','Hiragino Sans GB', Arial, sans-serif;
 $font-mobile-stack     : "lucida grande", tahoma, verdana, arial, sans-serif;
+
+/* COLOR PALETTE
+ ---------------------------
+*/
+//Placeholder Text Color
 $placeholder-text-color: #E6E6E8;
+
+//Highlight Colors
 $highlight-color1      : #EC5E79;
 $highlight-color2      : #E8588C;
+
+//Primary Text Colors
 $primary-text-color1   : #212121;
 $primary-text-color2   : #474747;
+
+//Heading Text Color
 $heading-text-color    : #212121;
+
+//Subordinate Text Color
 $sub-text-color        : #AEAEAE;
+
+//Dividing Line Color
 $dividing-line-color   : #F4F4F4;
+
+//Primary Background Color
 $primary-bg-color      : transparent;
 
 
+/* Easing Transition
+ ---------------------------
+*/
 @mixin transition-cubic-bezier() {
 	/* @include transition-cubic-bezier(); */
 	  transition: 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
 }
 
+
+
+/* Default Transition
+ ---------------------------
+*/
 @mixin transition-default() {
 	/* @include transition-default(); */
 	transition: all 0.3s ease;
 }
 
 
+
+/* None Of Transition
+ ---------------------------
+*/
 @mixin transition-none() {
 	/* @include transition-none(); */
 	transition: none; 
 }
 
 
+/* Background Gradient
+ ---------------------------
+*/
 @mixin bg-gradient() {
 	/* @include bg-gradient(); */
 	background: $highlight-color1;
@@ -105,6 +134,9 @@ $primary-bg-color      : transparent;
 }
 
 
+/* Icon & Text Gradient
+ ---------------------------
+*/
 @mixin icontxt-gradient() {
 	/* @include icontxt-gradient(); */
 	/* The font is the default color when the browser is IE */
@@ -114,6 +146,10 @@ $primary-bg-color      : transparent;
 	
 }
 
+
+/* Outer Shadow Effect
+ ---------------------------
+*/
 @mixin outer-shadow() {
 	/* @include outer-shadow(); */
 	box-shadow: 0 4px  4px  rgba(0, 0, 0, .05),
@@ -125,9 +161,13 @@ $primary-bg-color      : transparent;
 	
 }
 
+
+
+/* Text wWith Ellipsis
+ ---------------------------
+*/
 @mixin ellipsis(){
 	/* @include ellipsis(); */
-	/* text with ellipsis */
 	overflow: hidden;
 	text-overflow: ellipsis;	
 	width: 100%;
@@ -135,9 +175,12 @@ $primary-bg-color      : transparent;
 	
 }
 
+
+/* Custom Scrollbar
+ ---------------------------
+*/
 @mixin customScrollbar( $dir ){
 	/* @include customScrollbar( 'vertical' ) ; */
-	/* Custom scrollbar */
 	&::-webkit-scrollbar-track {
 		border-radius: 0px;
 		background-color: #E6E3E3;
@@ -164,8 +207,9 @@ $primary-bg-color      : transparent;
 }
 
 
-
-/* Ripple Effect */
+/* Ripple Effect
+ ---------------------------
+*/
 @mixin anime-ripple() {
 	/* @include ianime-ripple(); */
 	animation: ripple 0.6s linear infinite;
