@@ -465,6 +465,13 @@ theme = ( function ( theme, $, window, document ) {
 				my_move      = 1;
 				my_minItems  = dataShowItems;
 				my_maxItems  = dataShowItems;
+				
+				
+				if ( windowWidth <= 768 ) {
+					my_minItems  = 1;
+					my_maxItems  = 1;	
+				}	
+				
 			} 
 			
 			
