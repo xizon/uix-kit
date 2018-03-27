@@ -1,6 +1,21 @@
 /*
 
 
+	COLOR PALETTE
+	---------------------------
+	
+    Default font-size for HTML :    16px
+    Placeholder Text Color     :    #E6E6E8
+	Primary Background Color   :    transparent
+	Highlight Color            :    #EC5E79, #E8588C
+	Primary Text Color         :    #212121, #474747
+    Heading Text Color         :    #212121
+	Subordinate Text Color     :    #AEAEAE
+	Dividing Line Color        :    #F4F4F4
+
+
+
+
 	TABLE OF CONTENTS
 	---------------------------
 	
@@ -60,17 +75,17 @@
 
 
 
-/* FONTS
- ---------------------------
-*/
+// FONTS
+// ---------------------------
+//
 //Default font-size for HTML
 $basic-font-size       : 16px;
 $font-stack            : 'Helvetica Neue', Helvetica, 'Microsoft YaHei', STXihei, 'PingFang SC','Hiragino Sans GB', Arial, sans-serif;
 $font-mobile-stack     : "lucida grande", tahoma, verdana, arial, sans-serif;
 
-/* COLOR PALETTE
- ---------------------------
-*/
+// COLOR PALETTE
+// ---------------------------
+//
 //Placeholder Text Color
 $placeholder-text-color: #E6E6E8;
 
@@ -95,9 +110,9 @@ $dividing-line-color   : #F4F4F4;
 $primary-bg-color      : transparent;
 
 
-/* Easing Transition
- ---------------------------
-*/
+// Easing Transition
+// ---------------------------
+//
 @mixin transition-cubic-bezier() {
 	/* @include transition-cubic-bezier(); */
 	  transition: 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
@@ -105,9 +120,9 @@ $primary-bg-color      : transparent;
 
 
 
-/* Default Transition
- ---------------------------
-*/
+// Default Transition
+// ---------------------------
+//
 @mixin transition-default() {
 	/* @include transition-default(); */
 	transition: all 0.3s ease;
@@ -115,18 +130,18 @@ $primary-bg-color      : transparent;
 
 
 
-/* None Of Transition
- ---------------------------
-*/
+// None Of Transition
+// ---------------------------
+//
 @mixin transition-none() {
 	/* @include transition-none(); */
 	transition: none; 
 }
 
 
-/* Background Gradient
- ---------------------------
-*/
+// Background Gradient
+// ---------------------------
+//
 @mixin bg-gradient() {
 	/* @include bg-gradient(); */
 	background: $highlight-color1;
@@ -134,9 +149,9 @@ $primary-bg-color      : transparent;
 }
 
 
-/* Icon & Text Gradient
- ---------------------------
-*/
+// Icon & Text Gradient
+// ---------------------------
+//
 @mixin icontxt-gradient() {
 	/* @include icontxt-gradient(); */
 	/* The font is the default color when the browser is IE */
@@ -147,9 +162,9 @@ $primary-bg-color      : transparent;
 }
 
 
-/* Outer Shadow Effect
- ---------------------------
-*/
+// Outer Shadow Effect
+// ---------------------------
+//
 @mixin outer-shadow() {
 	/* @include outer-shadow(); */
 	box-shadow: 0 4px  4px  rgba(0, 0, 0, .05),
@@ -163,9 +178,9 @@ $primary-bg-color      : transparent;
 
 
 
-/* Text wWith Ellipsis
- ---------------------------
-*/
+// Text wWith Ellipsis
+// ---------------------------
+//
 @mixin ellipsis(){
 	/* @include ellipsis(); */
 	overflow: hidden;
@@ -176,9 +191,9 @@ $primary-bg-color      : transparent;
 }
 
 
-/* Custom Scrollbar
- ---------------------------
-*/
+// Custom Scrollbar
+// ---------------------------
+//
 @mixin customScrollbar( $dir ){
 	/* @include customScrollbar( 'vertical' ) ; */
 	&::-webkit-scrollbar-track {
@@ -207,14 +222,16 @@ $primary-bg-color      : transparent;
 }
 
 
-/* Ripple Effect
- ---------------------------
-*/
+// Ripple Effect
+// ---------------------------
+//
 @mixin anime-ripple() {
 	/* @include ianime-ripple(); */
 	animation: ripple 0.6s linear infinite;
 }
 
+
+/* Ripple Effect */
 @keyframes ripple {
     0% {
         box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1), 0 0 0 20px rgba(255, 255, 255, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1);
