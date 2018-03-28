@@ -4856,6 +4856,7 @@ ul.entry-meta {
 @media all and (max-width: 768px) {
     .list-maintain-aspect-ratio {
         padding: 0;
+        padding-right: 15px;
     }
 
     .list-maintain-aspect-ratio .item img,
