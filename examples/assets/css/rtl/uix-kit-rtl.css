@@ -406,6 +406,11 @@ blockquote:before {
    Maintain Aspect Ratio List
 /* ====================================================== */
 @media all and (max-width: 768px) {
+    .list-maintain-aspect-ratio {
+        padding-right: auto;
+        padding-left: 15px;
+    }
+
     .list-maintain-aspect-ratio .seamless-col-1-3 {
         float: right;
     }
