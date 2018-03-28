@@ -8,7 +8,17 @@ theme = ( function ( theme, $, window, document ) {
     
     var documentReady = function( $ ) {
     
-		var $obj = $( '.custom-testimonials .flexslider' );
+		var $obj                 = $( '.custom-testimonials .flexslider' ),
+			testimonialsControls = '';
+		
+		
+		for ( var i = 0; i < $obj.find( '.slides > li' ).length; i++ ) {
+			testimonialsControls += '<li></li>';
+		}
+		$( '.slides-custom-control' ).html( testimonialsControls );
+    	
+		
+		
 		$obj.flexslider({
 			animation         : 'slide',
 			slideshow         : true,
@@ -19,7 +29,6 @@ theme = ( function ( theme, $, window, document ) {
 			animationSpeed    : 600,
 			slideshowSpeed    : 7000,
 			selector          : ".slides > li",
-			drag              : true,
 			start: function(slider){
 				$obj.on( 'mousedown', function( e ) {
 					if ( $obj.data( 'flexslider' ).animating ) {
@@ -58,6 +67,17 @@ theme = ( function ( theme, $, window, document ) {
 						}
 					}
 				} );
+				
+				
+				$( '.custom-testimonials-count .total' ).text( '0' + slider.count );
+				$( '.custom-testimonials-count .cur' ).text( '0' + parseFloat( slider.currentSlide + 1 ) );
+				
+			},
+			after: function(slider){
+				
+				$( '.custom-testimonials-count .total' ).text( '0' + slider.count );
+				$( '.custom-testimonials-count .cur' ).text( '0' + parseFloat( slider.currentSlide + 1 ) );
+				
 			}
 		});
 		

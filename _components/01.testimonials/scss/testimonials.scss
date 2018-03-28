@@ -2,6 +2,12 @@
    Testimonials Carousel
 /* ====================================================== */
 
+.custom-testimonials-count {
+	font-size: 0.75rem;
+	letter-spacing: 1px;
+	text-align: center;
+}
+
 .custom-testimonials {
 
 	/* Required */
@@ -95,10 +101,9 @@
 		margin: .3rem;
 		border-radius: 100%; 
 		background: $sub-text-color; 
-		opacity: 0.1;
 		
 		&.flex-active {
-			opacity: 0.5;
+			background: $highlight-color1;
 		}
 	}
 

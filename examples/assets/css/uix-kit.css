@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.9
- * ## Last Update         :  March 27, 2018
+ * ## Version             :  1.1.91
+ * ## Last Update         :  March 28, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -31,6 +31,7 @@
     Heading Text Color         :    #212121
 	Subordinate Text Color     :    #AEAEAE
 	Dividing Line Color        :    #F4F4F4
+    Button Gradient Color      :    #EC5E79, #f60, #d83ba0
 
 
 
@@ -339,6 +340,10 @@ hr {
     border-color: #F4F4F4;
 }
 
+hr.black {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
 a img {
     border: none;
 }
@@ -568,7 +573,11 @@ h6,
     transition: all 0.3s ease;
 }
 
-/* 3.1. Hyperlink */
+/*! 
+ ---------------------------
+ 3.1. Hyperlink
+ ---------------------------
+ */
 a {
     color: #474747;
 }
@@ -588,7 +597,11 @@ a.link:hover {
     color: #E8588C;
 }
 
-/* 3.2. Heading (h1,h2,h3,h4,h5,h6) */
+/*! 
+ ---------------------------
+ 3.2. Heading (h1,h2,h3,h4,h5,h6)
+ ---------------------------
+ */
 h1,
 h2,
 h3,
@@ -739,7 +752,11 @@ h6 {
     }
 }
 
-/* 3.3. List Normal & Other Text */
+/*! 
+ ---------------------------
+ 3.3. List Normal & Other Text
+ ---------------------------
+ */
 .font-normal {
     font-family: "Helvetica Neue", Helvetica, "Microsoft YaHei", STXihei, "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
     font-weight: 400 !important;
@@ -766,7 +783,7 @@ h6 {
 }
 
 .font-primary-color {
-    color: #212121 !important;
+    color: #EC5E79 !important;
 }
 
 .font-sub-color {
@@ -876,7 +893,11 @@ section.site-google-map,
 /* ====================================================== 
    5. Basic Layout Styles                                        
 /* ====================================================== */
-/* 5.1. Bootstrap 3.x */
+/*! 
+ ---------------------------
+ 5.1. Bootstrap 3.x
+ ---------------------------
+ */
 /* New XL container for Bootstrap 3.x */
 .container {
     width: auto;
@@ -912,7 +933,11 @@ section.site-google-map,
     float: none;
 }
 
-/* 5.2. Material Container */
+/*! 
+ ---------------------------
+ 5.2. Material Container
+ ---------------------------
+ */
 .container-bg {
     position: relative;
     z-index: 2;
@@ -964,7 +989,11 @@ section.site-google-map,
     }
 }
 
-/* 5.3 Main Wrapper */
+/*! 
+ ---------------------------
+ 5.3 Main Wrapper 
+ ---------------------------
+ */
 /* Note: Do not use the "transform" property, otherwise it may affect the internal elements */
 .wrapper {
     min-height: 100%;
@@ -972,7 +1001,11 @@ section.site-google-map,
     overflow: hidden;
 }
 
-/* 5.4 Seamless Grid */
+/*! 
+ ---------------------------
+ 5.4 Seamless Grid
+ ---------------------------
+ */
 .seamless-grid-container {
     width: 100%;
 }
@@ -1956,7 +1989,11 @@ section.site-google-map,
 /* ====================================================== 
    16. Sidebar            
 /* ====================================================== */
-/* 16.1. Basic */
+/*! 
+ ---------------------------
+ 16.1. Basic
+ ---------------------------
+ */
 .sidebar-container {
     position: relative;
     word-wrap: break-word;
@@ -1984,7 +2021,11 @@ section.site-google-map,
     }
 }
 
-/* 16.2. Calendar Widget */
+/*! 
+ ---------------------------
+ 16.2. Calendar Widget
+ ---------------------------
+ */
 .calendar-box {
     padding: 1.3125rem 0;
     width: 100%;
@@ -2027,13 +2068,21 @@ section.site-google-map,
     padding-top: 0.875rem;
 }
 
-/* 16.3. Post List */
+/*! 
+ ---------------------------
+ 16.3. Post List
+ ---------------------------
+ */
 .post-list-box li {
     border-bottom: 1px dashed #E6E6E6;
     margin-bottom: 0.721875rem;
 }
 
-/* 16.4. Post List with Featured Image */
+/*! 
+ ---------------------------
+ 16.4. Post List with Featured Image
+ ---------------------------
+ */
 .post-img-list-box {
     margin: 0;
     padding: 0;
@@ -2121,7 +2170,11 @@ section.site-google-map,
     }
 }
 
-/* 16.5. Link List */
+/*! 
+ ---------------------------
+ 16.5. Link List
+ ---------------------------
+ */
 .widget_categories ul,
 .widget_nav_menu ul,
 .widget_pages ul {
@@ -2163,8 +2216,7 @@ section.site-google-map,
     margin-right: 0.721875rem;
 }
 
-.widget_categories li >
-.cat-item-count {
+.widget_categories li > .cat-item-count {
     position: absolute;
     top: 0.875rem;
     right: 0;
@@ -2182,7 +2234,11 @@ section.site-google-map,
 /* ====================================================== 
    17. Search          
 /* ====================================================== */
-/* 17.1. Search of Widget */
+/*! 
+ ---------------------------
+ 17.1. Search of Widget
+ ---------------------------
+ */
 .search-box {
     position: relative;
     font-size: 0.875rem;
@@ -2256,7 +2312,11 @@ section.site-google-map,
 /* ====================================================== 
    19. Entry      
 /* ====================================================== */
-/* 19.1. Spacing */
+/*! 
+ ---------------------------
+ 19.1. Spacing
+ ---------------------------
+ */
 .entry-section {
     padding: 2.84375rem 0 1.75rem;
 }
@@ -2275,7 +2335,11 @@ section.site-google-map,
     }
 }
 
-/* 19.2. Text */
+/*! 
+ ---------------------------
+ 19.2. Text
+ ---------------------------
+ */
 .entry-mark a {
     color: #EC5E79;
 }
@@ -2284,7 +2348,11 @@ section.site-google-map,
     color: #E8588C;
 }
 
-/* 19.3. Content */
+/*! 
+ ---------------------------
+ 19.3. Content
+ ---------------------------
+ */
 .entry-content {
     word-wrap: break-word;
 }
@@ -2297,7 +2365,11 @@ section.site-google-map,
     max-width: 100% !important;
 }
 
-/* 19.4. Meta */
+/*! 
+ ---------------------------
+ 19.4. Meta
+ ---------------------------
+ */
 .entry-meta {
     color: #999;
     font-style: italic;
@@ -2482,7 +2554,11 @@ ul.entry-meta {
 /* ====================================================== 
    22. Social Media Icons
 /* ====================================================== */
-/* 22.1. Social Button */
+/*! 
+ ---------------------------
+ 22.1. Social Button
+ ---------------------------
+ */
 .social-btn {
     position: relative;
     border: 2px solid #212121;
@@ -2572,7 +2648,11 @@ ul.entry-meta {
     transform: scale(1, 1);
 }
 
-/* 22.2. Social Background */
+/*! 
+ ---------------------------
+ 22.2. Social Background
+ ---------------------------
+ */
 .social-bg {
     color: #fff;
 }
@@ -3104,6 +3184,17 @@ ul.entry-meta {
     width: 100% !important;
 }
 
+.button-bg-primary.bg-none {
+    background: none !important;
+    color: #EC5E79 !important;
+}
+
+.button-bg-primary.bg-none:hover {
+    background-color: #EC5E79 !important;
+    background-image: linear-gradient(to right, #EC5E79 0%, #f60 20%, #d83ba0 100%) !important;
+    color: #fff !important;
+}
+
 .button-bg-secondary {
     border-color: #fff !important;
     background-color: transparent !important;
@@ -3348,6 +3439,66 @@ ul.entry-meta {
 
 .custom-feature .desc.desc-singlerow {
     padding-bottom: 1.5em;
+}
+
+/* ====================================================== 
+   Footer Templates
+/* ====================================================== */
+.custom-footer-wrapper {
+    background: #212121;
+    padding: 3rem 0;
+    margin: 3rem 0;
+}
+
+.custom-footer-wrapper img.logo {
+    max-width: 80%;
+    margin-bottom: 1.5rem;
+}
+
+.custom-footer-list-container:after {
+    content: '';
+    display: block;
+    clear: both;
+    width: 100%;
+}
+
+.custom-footer-list-container > .list {
+    width: 12rem;
+    float: left;
+}
+
+.custom-footer-list-container > .list h3 {
+    margin-bottom: 1rem;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #AEAEAE;
+}
+
+.custom-footer-list-container > .list li {
+    margin: .5rem 0;
+    display: block;
+}
+
+@media all and (max-width: 768px) {
+    .custom-footer-wrapper {
+        in: 3rem 0;
+    }
+
+    .custom-footer-wrapper img.logo {
+        max-width: 100%;
+    }
+
+    .custom-footer-wrapper .pull-left,
+  .custom-footer-wrapper .pull-right,
+  .custom-footer-wrapper .t-l,
+  .custom-footer-wrapper .t-r {
+        float: none;
+        text-align: center;
+    }
+
+    .custom-footer-list-container > .list {
+        width: 33.3%;
+    }
 }
 
 /* ====================================================== 
@@ -3876,6 +4027,11 @@ ul.entry-meta {
     visibility: visible;
     pointer-events: all;
     transform: translateY(0);
+}
+
+.custom-select-wrapper .custom-select.bg-none .custom-select-trigger {
+    background: none;
+    border-color: rgba(255, 255, 255, 0.1);
 }
 
 /*! 
@@ -9070,6 +9226,12 @@ li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 {
 /* ====================================================== 
    Testimonials Carousel
 /* ====================================================== */
+.custom-testimonials-count {
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
 .custom-testimonials {
   /* Required */
     overflow: hidden;
@@ -9159,11 +9321,10 @@ li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 {
     margin: .3rem;
     border-radius: 100%;
     background: #AEAEAE;
-    opacity: 0.1;
 }
 
 .slides-custom-control li.flex-active {
-    opacity: 0.5;
+    background: #EC5E79;
 }
 
 /* ====================================================== 

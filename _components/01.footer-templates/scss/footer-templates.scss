@@ -1,0 +1,72 @@
+/* ====================================================== 
+   Footer Templates
+/* ====================================================== */
+.custom-footer-wrapper {
+	background: $primary-text-color1;
+	padding: 3rem 0;	
+	margin: 3rem 0;
+	
+	img.logo {
+		max-width: 80%;
+		margin-bottom: 1.5rem;
+	}
+}
+
+.custom-footer-list-container {
+	
+
+	
+	&:after {
+		content: '';
+		display: block;
+		clear: both;
+		width: 100%;
+	}
+	> .list {
+		width: 12rem;
+		float: left;
+
+		h3 {
+			margin-bottom: 1rem;
+			font-size: 1.2em;
+			font-weight: 500;
+			color: $sub-text-color;
+			
+		}
+
+		li {
+			margin: .5rem 0;
+			display: block;
+		}		
+
+	}
+} 
+
+
+@media all and (max-width: 768px) {
+
+	
+	.custom-footer-wrapper {in: 3rem 0;
+
+		img.logo {
+			max-width: 100%;
+		}
+		
+		.pull-left, 
+		.pull-right,
+		.t-l,
+		.t-r {
+			float: none;
+			text-align: center;
+		}		
+		
+	}
+
+	.custom-footer-list-container {
+
+		> .list {
+			width: 33.3%;
+		}
+		
+	} 
+}

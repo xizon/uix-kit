@@ -18,8 +18,11 @@ h6,
     @include transition-default();
 }
 
-
-/* 3.1. Hyperlink */
+/*! 
+ ---------------------------
+ 3.1. Hyperlink
+ ---------------------------
+ */ 
 a {
 	color: $primary-text-color2;
 	
@@ -46,8 +49,11 @@ a {
 	}
 }
 
-
-/* 3.2. Heading (h1,h2,h3,h4,h5,h6) */
+/*! 
+ ---------------------------
+ 3.2. Heading (h1,h2,h3,h4,h5,h6)
+ ---------------------------
+ */ 
 h1, 
 h2, 
 h3, 
@@ -189,9 +195,11 @@ h6 {
 }
 
 
-/* 3.3. List Normal & Other Text */
-
-
+/*! 
+ ---------------------------
+ 3.3. List Normal & Other Text
+ ---------------------------
+ */ 
 .font-normal {
 	font-family: $font-stack;
 	font-weight: 400 !important;
@@ -218,7 +226,7 @@ h6 {
 }
 
 .font-primary-color {
-	color: $primary-text-color1 !important;
+	color: $highlight-color1 !important;
 }
 
 .font-sub-color {

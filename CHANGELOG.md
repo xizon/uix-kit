@@ -1,8 +1,10 @@
 # Changelog
 
 
-#### = 1.1.9 (March 25, 2018) =
+#### = 1.1.91 (March 26, 2018) =
 
+* New: Added a variety of "Footer" premade templates.
+* Tweak: Optimized the module "Testimonials".
 * Tweak: Simplify and enhance the slider's data attribute of HTML.
 * Tweak: Beautify the comments of the SCSS files.
 * Tweak: Remove the jquery extra each method when using the waypoint plugin. Simplified the core script.

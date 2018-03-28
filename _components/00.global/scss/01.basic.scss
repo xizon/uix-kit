@@ -247,6 +247,11 @@ strong {
 hr {
 	margin: 1.421875rem 0;
 	border-color: $dividing-line-color;
+	
+	&.black {
+		border-color: rgba(255,255,255,.1);
+	}
+	
 }
 
 a img {

@@ -1,7 +1,12 @@
 /* ====================================================== 
    5. Basic Layout Styles                                        
 /* ====================================================== */
-/* 5.1. Bootstrap 3.x */
+
+/*! 
+ ---------------------------
+ 5.1. Bootstrap 3.x
+ ---------------------------
+ */ 
 /* New XL container for Bootstrap 3.x */
 .container {
 	width: auto;
@@ -40,9 +45,12 @@
 
 
 
+/*! 
+ ---------------------------
+ 5.2. Material Container
+ ---------------------------
+ */ 
 
-
-/* 5.2. Material Container */
 .container-bg {
 	position: relative;
 	z-index: 2;
@@ -104,7 +112,12 @@
 	}		
 }
 
-/* 5.3 Main Wrapper */
+
+/*! 
+ ---------------------------
+ 5.3 Main Wrapper 
+ ---------------------------
+ */ 
 /* Note: Do not use the "transform" property, otherwise it may affect the internal elements */
 .wrapper {
 	min-height: 100%;
@@ -112,8 +125,11 @@
 	overflow: hidden;
 }
 
-
-/* 5.4 Seamless Grid */
+/*! 
+ ---------------------------
+ 5.4 Seamless Grid
+ ---------------------------
+ */ 
 $seamless-grid-pad : 15px;
 
 .seamless-grid-container {

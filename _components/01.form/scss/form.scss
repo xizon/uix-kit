@@ -577,8 +577,19 @@ $control-focus-color: $primary-text-color1;
 			}	
 
 		}	
+		
+
+		&.bg-none {
+			.custom-select-trigger {
+				background: none;
+				border-color: rgba(255,255,255,.1);
+			}
+
+		}
 
 	}
+	
+
 
 
 }	

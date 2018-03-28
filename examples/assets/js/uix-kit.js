@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.9
- * ## Last Update         :  March 27, 2018
+ * ## Version             :  1.1.91
+ * ## Last Update         :  March 28, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -7173,6 +7173,13 @@ theme = ( function ( theme, $, window, document ) {
 				my_move      = 1;
 				my_minItems  = dataShowItems;
 				my_maxItems  = dataShowItems;
+				
+				
+				if ( windowWidth <= 768 ) {
+					my_minItems  = 1;
+					my_maxItems  = 1;	
+				}	
+				
 			} 
 			
 			
@@ -7681,7 +7688,17 @@ theme = ( function ( theme, $, window, document ) {
     
     var documentReady = function( $ ) {
     
-		var $obj = $( '.custom-testimonials .flexslider' );
+		var $obj                 = $( '.custom-testimonials .flexslider' ),
+			testimonialsControls = '';
+		
+		
+		for ( var i = 0; i < $obj.find( '.slides > li' ).length; i++ ) {
+			testimonialsControls += '<li></li>';
+		}
+		$( '.slides-custom-control' ).html( testimonialsControls );
+    	
+		
+		
 		$obj.flexslider({
 			animation         : 'slide',
 			slideshow         : true,
@@ -7692,7 +7709,6 @@ theme = ( function ( theme, $, window, document ) {
 			animationSpeed    : 600,
 			slideshowSpeed    : 7000,
 			selector          : ".slides > li",
-			drag              : true,
 			start: function(slider){
 				$obj.on( 'mousedown', function( e ) {
 					if ( $obj.data( 'flexslider' ).animating ) {
@@ -7731,6 +7747,17 @@ theme = ( function ( theme, $, window, document ) {
 						}
 					}
 				} );
+				
+				
+				$( '.custom-testimonials-count .total' ).text( '0' + slider.count );
+				$( '.custom-testimonials-count .cur' ).text( '0' + parseFloat( slider.currentSlide + 1 ) );
+				
+			},
+			after: function(slider){
+				
+				$( '.custom-testimonials-count .total' ).text( '0' + slider.count );
+				$( '.custom-testimonials-count .cur' ).text( '0' + parseFloat( slider.currentSlide + 1 ) );
+				
 			}
 		});
 		

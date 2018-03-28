@@ -1,8 +1,11 @@
 /* ====================================================== 
    16. Sidebar            
 /* ====================================================== */
-/* 16.1. Basic */
-
+/*! 
+ ---------------------------
+ 16.1. Basic
+ ---------------------------
+ */ 
 .sidebar-container {
 	position: relative;
 	word-wrap: break-word;
@@ -32,8 +35,11 @@
 	}
 }
 
-/* 16.2. Calendar Widget */
-
+/*! 
+ ---------------------------
+ 16.2. Calendar Widget
+ ---------------------------
+ */ 
 .calendar-box {
 	padding: 1.3125rem 0;
 	width: 100%;
@@ -78,15 +84,23 @@
 	
 }
 
-/* 16.3. Post List */
+/*! 
+ ---------------------------
+ 16.3. Post List
+ ---------------------------
+ */ 
 
 .post-list-box li {
 	border-bottom: 1px dashed #E6E6E6;
 	margin-bottom: 0.721875rem;
 }
 
-/* 16.4. Post List with Featured Image */
 
+/*! 
+ ---------------------------
+ 16.4. Post List with Featured Image
+ ---------------------------
+ */ 
 .post-img-list-box {
 	
 	margin: 0;
@@ -181,8 +195,11 @@
 	}
 }
 
-/* 16.5. Link List */
-
+/*! 
+ ---------------------------
+ 16.5. Link List
+ ---------------------------
+ */ 
 .widget_categories ul, 
 .widget_nav_menu ul, 
 .widget_pages ul {
@@ -224,8 +241,7 @@
 	margin-right: 0.721875rem;
 }
 
-.widget_categories li > 
-.cat-item-count {
+.widget_categories li > .cat-item-count {
 	position: absolute;
 	top: 0.875rem;
 	right: 0;
