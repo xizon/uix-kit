@@ -16,35 +16,12 @@
 		line-height: 0;
 		clear: both;
 	}
-	li {
-		display: inline-block;
-	}
 	
+	li,
 	div {
-
-		&.nav-previous, 
-		&.nav-next {
-			display: inline-block;
-			width: 3.125rem;
-			height: 3.125rem;
-			padding-top: 0.25rem;
-			text-align: center;
-			background: none;
-			border: none;
-			color: $primary-text-color1;
-			font-variant-ligatures: common-ligatures;
-			/*Ligatures and contextual forms are ways of combining glyphs to produce more harmonized forms.*/
-			margin-bottom: 0;
-			font-size: 0.875rem;
-			line-height: 3.25;
-			margin-top: 0;
-			margin-bottom: 2.06818181818rem;
-		}
-	}
-
-
-	li {
-
+		
+		display: inline-block;
+		
 		a, 
 		&.active > span, 
 		> span.current {
@@ -63,28 +40,13 @@
 			line-height: 3.25;
 			margin-top: 0;
 			margin-bottom: 2.06818181818rem;
-		}
-	}
-	div {
-		&.nav-previous a, 
-		&.nav-next a {
-			display: block;
-		}
-
-		&.nav-previous:hover, 
-		&.nav-next:hover {
-			background: #efefef;
-			color: #232323;
-		}
-	}
-
-
-	li {
+		}	
+		
 		a:hover {
 			background: #efefef;
-			color: #232323;
+			color: #232323;	
 		}
-
+		
 		&.active {
 
 			a {
@@ -100,10 +62,11 @@
 				color: #989898;
 				font-style: italic;
 			}
-		}
+		}	
+		
 	}
 	
-	
+
 }
 
 /* Paginate WordPress Posts */

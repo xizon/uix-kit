@@ -1793,31 +1793,17 @@ section.site-google-map,
     clear: both;
 }
 
-.pagination-container li {
+.pagination-container li,
+.pagination-container div {
     display: inline-block;
-}
-
-.pagination-container div.nav-previous, .pagination-container div.nav-next {
-    display: inline-block;
-    width: 3.125rem;
-    height: 3.125rem;
-    padding-top: 0.25rem;
-    text-align: center;
-    background: none;
-    border: none;
-    color: #212121;
-    font-variant-ligatures: common-ligatures;
-  /*Ligatures and contextual forms are ways of combining glyphs to produce more harmonized forms.*/
-    margin-bottom: 0;
-    font-size: 0.875rem;
-    line-height: 3.25;
-    margin-top: 0;
-    margin-bottom: 2.06818181818rem;
 }
 
 .pagination-container li a,
 .pagination-container li.active > span,
-.pagination-container li > span.current {
+.pagination-container li > span.current,
+.pagination-container div a,
+.pagination-container div.active > span,
+.pagination-container div > span.current {
     display: inline-block;
     width: 3.125rem;
     height: 3.125rem;
@@ -1835,32 +1821,26 @@ section.site-google-map,
     margin-bottom: 2.06818181818rem;
 }
 
-.pagination-container div.nav-previous a,
-.pagination-container div.nav-next a {
-    display: block;
-}
-
-.pagination-container div.nav-previous:hover, .pagination-container div.nav-next:hover {
+.pagination-container li a:hover,
+.pagination-container div a:hover {
     background: #efefef;
     color: #232323;
 }
 
-.pagination-container li a:hover {
-    background: #efefef;
-    color: #232323;
-}
-
-.pagination-container li.active a {
+.pagination-container li.active a,
+.pagination-container div.active a {
     color: #989898;
     font-style: italic;
 }
 
-.pagination-container li.active a:hover {
+.pagination-container li.active a:hover,
+.pagination-container div.active a:hover {
     background: #e7e7e7;
     color: #232323;
 }
 
-.pagination-container li.active > span {
+.pagination-container li.active > span,
+.pagination-container div.active > span {
     color: #989898;
     font-style: italic;
 }
