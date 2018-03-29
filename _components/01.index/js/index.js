@@ -1,6 +1,6 @@
-/*! 
+/* 
  *************************************
- * Custom Core Scripts & Stylesheets
+ * <!-- Custom Core Scripts & Stylesheets -->
  *************************************
  */
 

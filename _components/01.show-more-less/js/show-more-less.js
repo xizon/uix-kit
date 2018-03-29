@@ -1,7 +1,7 @@
 
-/*! 
+/* 
  *************************************
- * Show More Less
+ * <!-- Show More Less -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {

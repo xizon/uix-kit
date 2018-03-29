@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.91
- * ## Last Update         :  March 28, 2018
+ * ## Version             :  1.1.92
+ * ## Last Update         :  March 29, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -39,56 +39,64 @@
 	TABLE OF CONTENTS
 	---------------------------
 	
-	1. Basic
-	    1.1. Reset Stylesheets
+    1. Basic 
+    2. Helper Classes 
+    3. Typography 
+    4. Spacing 
+    5. Basic Layout Styles 
+    6. Navigation Area 
+    7. Header Area 
+    8. Brand 
+    9. Footer 
+    10. Video 
+    11. Back to Top 
+    12. Loader 
+    13. Overlay 
+    14. Pagination 
+    15. Filterable Navigation 
+    16. Sidebar 
+    17. Search 
+    18. Tags 
+    19. Entry 
+    20. Comments 
+    21. 3rd Party Plugins 
+    22. Social Media Icons 
+    23. Accordion 
+    24. Button 
+    25. Author Card 
+    26. Counter 
+    27. Dropdown Menu 
+    28. Features 
+    29. Footer Templates 
+    30. Form 
+    31. Form Progress 
+    32. Gallery 
+    33. Custom Core Scripts & Stylesheets 
+    34. Brands List 
+    35. Bulleted List 
+    36. Maintain Aspect Ratio List 
+    37. List of Posts 
+    38. List of Split Posts 
+    39. Side by Side List 
+    40. Fullwidth List of Split 
+    41. Mobile Menu 
+    42. Modal Dialog 
+    43. Multiple Items Carousel 
+    44. Parallax 
+    45. Periodical Scroll 
+    46. Pricing 
+    47. Progress Bar 
+    48. Show More Less 
+    49. Cutom Light Box 
+    50. Single Post 
+    51. Slideshow ( with custom flexslider ) 
+    52. Source Code 
+    53. Tabs 
+    54. Testimonials Carousel 
+    55. Timeline 
+    56. ToolTip 
+    57. WordPress Core 
 
-
-	2. Helper Classes
-	3. Typography
-        3.1. Hyperlink
-        3.2. Heading (h1,h2,h3,h4,h5,h6)
-        3.3. List Normal & Other Text
-
-	4. Spacing
-	5. Basic Layout Styles
-		5.1. Bootstrap 3.x
-        5.2. Material Container
-		5.3. Main Wrapper
-		5.4. Seamless Grid
-
-	6. Navigation Area	
-	7. Header Area
-    8. Brand	
-	9. Footer
-	10. Video	
-	11. Back to Top
-	12. Loader
-	13. Overlay
-	14. Pagination
-	15. Filterable Navigation  
-	16. Sidebar
-	    16.1. Basic
-		16.2. Calendar Widget
-		16.3. Post List
-		16.4. Post List with Featured Image
-		16.5. Link List
-
-
-	17. Search 
-		17.1. Search of Widget
-		
-	18. Tags 
-	19. Entry  
-	    19.1. Spacing
-		19.2. Text
-		19.3. Content
-		19.4. Meta
-		
-	20. Comments
-	21. 3rd Party Plugins
-    22. Social Media Icons
-	    22.1. Social Button
-		22.2. Social Background
 
 
 */
@@ -104,9 +112,8 @@
 }
 
 /* ====================================================== 
-   1. Basic                    
+    <!-- Basic -->
 /* ====================================================== */
-/* 1.1. Reset Stylesheets */
 ::placeholder {
     color: #E6E6E8;
 }
@@ -133,18 +140,6 @@
     --danger: #dc3545;
     --light: #f8f9fa;
     --dark: #343a40;
-    --breakpoint-xs: 0;
-    --breakpoint-sm: 480px;
-  /* max-width */
-    --breakpoint-md: 768px;
-  /* max-width */
-    --breakpoint-lg: 991px;
-  /* max-width */
-    --breakpoint-xl: 1300px;
-  /* Only new XL container, min-width */
-    --breakpoint-xxl: 1430px;
-  /* Only new XXL container, min-width */
-    --spacing: 1rem;
 }
 
 ::selection,
@@ -268,6 +263,33 @@ ol.list-normal ol {
     padding-bottom: 0 !important;
 }
 
+.list-numbered {
+    list-style: none;
+    margin-left: 1em;
+    counter-reset: line;
+}
+
+.list-numbered > li {
+    position: relative;
+    margin-bottom: 1.5em;
+}
+
+.list-numbered > li:before {
+    position: absolute;
+    left: -2.25em;
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    margin-right: 0.5em;
+    background-color: #EC5E79;
+    border-radius: 50%;
+    color: #fff;
+    text-align: center;
+    line-height: 1.5;
+    counter-increment: line;
+    content: "0" counter(line);
+}
+
 .table-normal table {
     border: 1px solid black;
 }
@@ -357,7 +379,7 @@ iframe {
 }
 
 /* ====================================================== 
-   2. Helper Classes                                
+    <!-- Helper Classes -->              
 /* ====================================================== */
 .relative {
     position: relative;
@@ -554,7 +576,7 @@ iframe {
 }
 
 /* ====================================================== 
-   3. Typography                                
+   <!-- Typography -->            
 /* ====================================================== */
 a,
 h1,
@@ -573,9 +595,9 @@ h6,
     transition: all 0.3s ease;
 }
 
-/*! 
+/* 
  ---------------------------
- 3.1. Hyperlink
+ Hyperlink
  ---------------------------
  */
 a {
@@ -597,9 +619,9 @@ a.link:hover {
     color: #E8588C;
 }
 
-/*! 
+/* 
  ---------------------------
- 3.2. Heading (h1,h2,h3,h4,h5,h6)
+ Heading (h1,h2,h3,h4,h5,h6)
  ---------------------------
  */
 h1,
@@ -752,9 +774,9 @@ h6 {
     }
 }
 
-/*! 
+/* 
  ---------------------------
- 3.3. List Normal & Other Text
+List Normal & Other Text
  ---------------------------
  */
 .font-normal {
@@ -807,7 +829,7 @@ h6 {
 }
 
 /* ====================================================== 
-   4. Spacing                                
+   <!-- Spacing -->                                
 /* ====================================================== */
 section,
 .section {
@@ -891,11 +913,11 @@ section.site-google-map,
 }
 
 /* ====================================================== 
-   5. Basic Layout Styles                                        
+   <!-- Basic Layout Styles -->                                        
 /* ====================================================== */
-/*! 
+/* 
  ---------------------------
- 5.1. Bootstrap 3.x
+ Bootstrap 3.x
  ---------------------------
  */
 /* New XL container for Bootstrap 3.x */
@@ -933,9 +955,9 @@ section.site-google-map,
     float: none;
 }
 
-/*! 
+/* 
  ---------------------------
- 5.2. Material Container
+ Material Container
  ---------------------------
  */
 .container-bg {
@@ -989,9 +1011,9 @@ section.site-google-map,
     }
 }
 
-/*! 
+/* 
  ---------------------------
- 5.3 Main Wrapper 
+ Main Wrapper 
  ---------------------------
  */
 /* Note: Do not use the "transform" property, otherwise it may affect the internal elements */
@@ -1001,9 +1023,9 @@ section.site-google-map,
     overflow: hidden;
 }
 
-/*! 
+/* 
  ---------------------------
- 5.4 Seamless Grid
+ Seamless Grid
  ---------------------------
  */
 .seamless-grid-container {
@@ -1224,7 +1246,7 @@ section.site-google-map,
 }
 
 /* ====================================================== 
-   6. Navigation Area                                    
+   <!-- Navigation Area -->                                    
 /* ====================================================== */
 .menu-container:not(.mobile) {
     font-size: 0.75rem;
@@ -1454,7 +1476,7 @@ section.site-google-map,
 }
 
 /* ====================================================== 
-   7. Header Area                                        
+   <!-- Header Area -->                                        
 /* ====================================================== */
 /* Don't use "margin" or "padding" to set up ".header-area" */
 .header-area {
@@ -1522,7 +1544,7 @@ section.site-google-map,
 }
 
 /* ====================================================== 
-   8. Brand                         
+   <!-- Brand -->                         
 /* ====================================================== */
 .brand {
     float: left;
@@ -1559,7 +1581,7 @@ section.site-google-map,
 }
 
 /* ====================================================== 
-   9. Footer                               
+   <!-- Footer -->                               
 /* ====================================================== */
 .footer-main-container {
     font-size: 0.75rem;
@@ -1580,7 +1602,7 @@ section.site-google-map,
 }
 
 /* ====================================================== 
-   Video
+   <!-- Video -->
 /* ====================================================== */
 .web-video-embed {
     visibility: hidden;
@@ -1604,7 +1626,7 @@ section.site-google-map,
 }
 
 /* ====================================================== 
-   11. Back to Top                                               
+   <!-- Back to Top -->                                               
 /* ====================================================== */
 #toTop {
     display: none;
@@ -1640,7 +1662,7 @@ section.site-google-map,
 }
 
 /* ====================================================== 
-   12. Loader                                               
+   <!-- Loader -->                                               
 /* ====================================================== */
 .loader {
     bottom: 0;
@@ -1717,7 +1739,7 @@ section.site-google-map,
 }
 
 /* ====================================================== 
-   13. Overlay                                               
+   <!-- Overlay -->                                               
 /* ====================================================== */
 .overlay-bg {
     overflow: hidden;
@@ -1774,7 +1796,7 @@ section.site-google-map,
 }
 
 /* ====================================================== 
-   14. Pagination                         
+   <!-- Pagination -->                         
 /* ====================================================== */
 .pagination-container {
     margin-top: 2.84375rem;
@@ -1874,7 +1896,7 @@ section.site-google-map,
 }
 
 /* ====================================================== 
-   15. Filterable Navigation                 
+   <!-- Filterable Navigation -->                 
 /* ====================================================== */
 .nav-filters {
     padding: 1.421875rem 0;
@@ -1890,32 +1912,26 @@ section.site-google-map,
     font-style: italic;
     display: inline-block;
     transition: 0.2s linear;
-}
-
-.nav-filters ul li:not(:last-child) {
     margin-right: 0.203125rem;
-}
-
-.nav-filters ul li:not(:last-child):after {
-    content: '/';
-    margin-left: 0.203125rem;
-    opacity: 0.1;
-}
-
-.nav-filters ul li:not(.active):not(.current-cat) {
     opacity: .5;
 }
 
-.nav-filters ul li:not(.active):not(.current-cat):after {
-    opacity: 0.2;
+.nav-filters ul li::after {
+    content: '/';
+    margin-left: 0.203125rem;
+    opacity: 0.5;
 }
 
-.nav-filters ul li:hover {
+.nav-filters ul li:last-child {
+    margin-right: 0;
+}
+
+.nav-filters ul li:last-child::after {
+    display: none;
+}
+
+.nav-filters ul li:hover, .nav-filters ul li.active, .nav-filters ul li.current-cat {
     opacity: 1;
-}
-
-.nav-filters ul li:hover:after {
-    opacity: 0.1;
 }
 
 .nav-filters.responsive-dropdown > input {
@@ -1967,11 +1983,11 @@ section.site-google-map,
 }
 
 /* ====================================================== 
-   16. Sidebar            
+   <!-- Sidebar -->            
 /* ====================================================== */
-/*! 
+/* 
  ---------------------------
- 16.1. Basic
+ Basic
  ---------------------------
  */
 .sidebar-container {
@@ -2001,9 +2017,9 @@ section.site-google-map,
     }
 }
 
-/*! 
+/* 
  ---------------------------
- 16.2. Calendar Widget
+ Calendar Widget
  ---------------------------
  */
 .calendar-box {
@@ -2048,9 +2064,9 @@ section.site-google-map,
     padding-top: 0.875rem;
 }
 
-/*! 
+/* 
  ---------------------------
- 16.3. Post List
+ Post List
  ---------------------------
  */
 .post-list-box li {
@@ -2058,9 +2074,9 @@ section.site-google-map,
     margin-bottom: 0.721875rem;
 }
 
-/*! 
+/* 
  ---------------------------
- 16.4. Post List with Featured Image
+ Post List with Featured Image
  ---------------------------
  */
 .post-img-list-box {
@@ -2150,9 +2166,9 @@ section.site-google-map,
     }
 }
 
-/*! 
+/* 
  ---------------------------
- 16.5. Link List
+ Link List
  ---------------------------
  */
 .widget_categories ul,
@@ -2212,11 +2228,11 @@ section.site-google-map,
 }
 
 /* ====================================================== 
-   17. Search          
+   <!-- Search -->          
 /* ====================================================== */
-/*! 
+/* 
  ---------------------------
- 17.1. Search of Widget
+ Search of Widget
  ---------------------------
  */
 .search-box {
@@ -2265,7 +2281,7 @@ section.site-google-map,
 }
 
 /* ====================================================== 
-   18. Tags      
+   <!-- Tags -->      
 /* ====================================================== */
 .tags-box > a {
     font-size: 0.875rem;
@@ -2290,11 +2306,11 @@ section.site-google-map,
 }
 
 /* ====================================================== 
-   19. Entry      
+   <!-- Entry -->      
 /* ====================================================== */
-/*! 
+/* 
  ---------------------------
- 19.1. Spacing
+ Spacing
  ---------------------------
  */
 .entry-section {
@@ -2315,9 +2331,9 @@ section.site-google-map,
     }
 }
 
-/*! 
+/* 
  ---------------------------
- 19.2. Text
+ Text
  ---------------------------
  */
 .entry-mark a {
@@ -2328,9 +2344,9 @@ section.site-google-map,
     color: #E8588C;
 }
 
-/*! 
+/* 
  ---------------------------
- 19.3. Content
+ Content
  ---------------------------
  */
 .entry-content {
@@ -2345,9 +2361,9 @@ section.site-google-map,
     max-width: 100% !important;
 }
 
-/*! 
+/* 
  ---------------------------
- 19.4. Meta
+ Meta
  ---------------------------
  */
 .entry-meta {
@@ -2414,7 +2430,7 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   20. Comments      
+   <!-- Comments -->      
 /* ====================================================== */
 /* Highlight Author Comments in WordPress */
 .comment.bypostauthor {
@@ -2519,7 +2535,7 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   27. 3rd Party Plugins     
+   <!-- 3rd Party Plugins -->     
 /* ====================================================== */
 /* Disqus */
 #disqus_thread {
@@ -2532,11 +2548,11 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   22. Social Media Icons
+   <!-- Social Media Icons -->
 /* ====================================================== */
-/*! 
+/* 
  ---------------------------
- 22.1. Social Button
+ Social Button
  ---------------------------
  */
 .social-btn {
@@ -2628,9 +2644,9 @@ ul.entry-meta {
     transform: scale(1, 1);
 }
 
-/*! 
+/* 
  ---------------------------
- 22.2. Social Background
+ Social Background
  ---------------------------
  */
 .social-bg {
@@ -2904,7 +2920,7 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   Accordion 
+    <!-- Accordion -->  
 /* ====================================================== */
 .custom-accordion dl {
     position: relative;
@@ -2969,9 +2985,104 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   Button                 
+   <!-- Author Card -->    
 /* ====================================================== */
-/*! 
+.author-card {
+    margin: 0 auto;
+    border: 1px solid #eaeaea;
+    position: relative;
+    border-top: 3px solid #EC5E79;
+}
+
+.author-card-top {
+    min-height: 2.086538461rem;
+    background: #fff;
+    padding: 0.65625rem 1.75rem 0 1.75rem;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+.author-card-top h3 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.125rem;
+    line-height: 1.7;
+}
+
+.author-card-top .text {
+    margin-top: 0.4375rem;
+    float: left;
+    width: calc(100% - 105px);
+}
+
+.author-card-top .text a {
+    font-size: 0.625rem;
+}
+
+.author-card-top .pic {
+    position: relative;
+    top: 0.175rem;
+    height: 4.375rem;
+    width: 4.375rem;
+    float: right;
+    width: 100px;
+    height: 100px;
+}
+
+.author-card-top .pic img {
+    width: 90px !important;
+    height: 90px !important;
+    margin: 0.3125rem 0 0 0.3125rem;
+    border: 1px solid #eaeaea;
+    border-radius: 100%;
+}
+
+.author-card-middle {
+    background: #fff;
+    padding: 1.75rem 1.75rem 1.3125rem 1.75rem;
+    line-height: 1.5;
+}
+
+.author-card-middle:after {
+    content: '';
+    position: relative;
+    height: 0;
+    width: 0;
+    border-left: 0.4375rem solid transparent;
+    border-right: 0.4375rem solid transparent;
+    border-top: 0.4375rem solid #fff;
+    position: absolute;
+    bottom: 25px;
+    left: 1.75rem;
+}
+
+.author-card-middle p {
+    margin-top: 0.875rem;
+    padding: 0 0.875rem 0 1.75rem;
+}
+
+.author-card-final {
+    height: 30px;
+    font-size: 0.75rem;
+    display: block;
+    background: #F6F6F6;
+    padding: 0.525rem 2.1875rem;
+    text-align: right;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    transition: all 500ms ease-in-out;
+    color: #BDBDBD;
+}
+
+.author-card-final .text {
+    color: #fff;
+    margin-left: 0.4375rem;
+}
+
+/* ====================================================== 
+   <!-- Button -->                  
+/* ====================================================== */
+/* 
  ---------------------------
  1) Common button styles
  ---------------------------
@@ -3079,7 +3190,7 @@ ul.entry-meta {
     }
 }
 
-/*! 
+/* 
  ---------------------------
  2) Borders
  ---------------------------
@@ -3100,7 +3211,7 @@ ul.entry-meta {
     border-color: #fff;
 }
 
-/*! 
+/* 
  ---------------------------
  3) Sizes
  ---------------------------
@@ -3125,7 +3236,7 @@ ul.entry-meta {
     padding: 0.4375rem 3rem;
 }
 
-/*! 
+/* 
  ---------------------------
  4) Hover
  ---------------------------
@@ -3141,7 +3252,7 @@ ul.entry-meta {
     border-color: #212121;
 }
 
-/*! 
+/* 
  ---------------------------
  5) Background
  ---------------------------
@@ -3193,109 +3304,14 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   Author Card   
-/* ====================================================== */
-.author-card {
-    margin: 0 auto;
-    border: 1px solid #eaeaea;
-    position: relative;
-    border-top: 3px solid #EC5E79;
-}
-
-.author-card-top {
-    min-height: 2.086538461rem;
-    background: #fff;
-    padding: 0.65625rem 1.75rem 0 1.75rem;
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
-}
-
-.author-card-top h3 {
-    margin: 0;
-    padding: 0;
-    font-size: 1.125rem;
-    line-height: 1.7;
-}
-
-.author-card-top .text {
-    margin-top: 0.4375rem;
-    float: left;
-    width: calc(100% - 105px);
-}
-
-.author-card-top .text a {
-    font-size: 0.625rem;
-}
-
-.author-card-top .pic {
-    position: relative;
-    top: 0.175rem;
-    height: 4.375rem;
-    width: 4.375rem;
-    float: right;
-    width: 100px;
-    height: 100px;
-}
-
-.author-card-top .pic img {
-    width: 90px !important;
-    height: 90px !important;
-    margin: 0.3125rem 0 0 0.3125rem;
-    border: 1px solid #eaeaea;
-    border-radius: 100%;
-}
-
-.author-card-middle {
-    background: #fff;
-    padding: 1.75rem 1.75rem 1.3125rem 1.75rem;
-    line-height: 1.5;
-}
-
-.author-card-middle:after {
-    content: '';
-    position: relative;
-    height: 0;
-    width: 0;
-    border-left: 0.4375rem solid transparent;
-    border-right: 0.4375rem solid transparent;
-    border-top: 0.4375rem solid #fff;
-    position: absolute;
-    bottom: 25px;
-    left: 1.75rem;
-}
-
-.author-card-middle p {
-    margin-top: 0.875rem;
-    padding: 0 0.875rem 0 1.75rem;
-}
-
-.author-card-final {
-    height: 30px;
-    font-size: 0.75rem;
-    display: block;
-    background: #F6F6F6;
-    padding: 0.525rem 2.1875rem;
-    text-align: right;
-    border-bottom-left-radius: 2px;
-    border-bottom-right-radius: 2px;
-    transition: all 500ms ease-in-out;
-    color: #BDBDBD;
-}
-
-.author-card-final .text {
-    color: #fff;
-    margin-left: 0.4375rem;
-}
-
-/* ====================================================== 
-   Counter    
+       <!-- Counter --> 
 /* ====================================================== */
 [data-counter-number] {
     padding: 2rem;
 }
 
 /* ====================================================== 
-   Dropdown Menu
+   <!-- Dropdown Menu --> 
 /* ====================================================== */
 /* Do not use <a> tag */
 .custom-dropdown-trigger {
@@ -3380,7 +3396,7 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   Features
+   <!-- Features --> 
 /* ====================================================== */
 .custom-feature .icon i {
     border: 1px #090909 solid;
@@ -3422,7 +3438,7 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   Footer Templates
+   <!-- Footer Templates -->  
 /* ====================================================== */
 .custom-footer-wrapper {
     background: #212121;
@@ -3482,9 +3498,9 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   Form                                     
+    <!-- Form -->                                         
 /* ====================================================== */
-/*! 
+/* 
  ---------------------------
  1) Controls
  ---------------------------
@@ -3771,7 +3787,7 @@ ul.entry-meta {
     transition: all 0.3s ease;
 }
 
-/*! 
+/* 
  ---------------------------
  2) Upload
  ---------------------------
@@ -3797,7 +3813,7 @@ ul.entry-meta {
     font-style: italic;
 }
 
-/*! 
+/* 
  ---------------------------
  3) Group
  ---------------------------
@@ -3860,7 +3876,7 @@ ul.entry-meta {
     }
 }
 
-/*! 
+/* 
  ---------------------------
  4) Custom Select
  ---------------------------
@@ -4014,7 +4030,7 @@ ul.entry-meta {
     border-color: rgba(255, 255, 255, 0.1);
 }
 
-/*! 
+/* 
  ---------------------------
  5) Custom Radio, Toggle And Checkbox
  ---------------------------
@@ -4186,12 +4202,12 @@ ul.entry-meta {
     width: 6px;
 }
 
-/*! 
+/* 
  ---------------------------
  6) Date Picker (With Jquery UI Widget)
  ---------------------------
  */
-/*! jQuery UI - v1.12.1 - 2016-09-14
+/* jQuery UI - v1.12.1 - 2016-09-14
 * http://jqueryui.com
 * Copyright (c) 2013 jQuery Foundation and other contributors Licensed MIT */
 .ui-datepicker {
@@ -4447,7 +4463,7 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   Form Progress    
+   <!-- Form Progress -->     
 /* ====================================================== */
 .custom-form-progress {
     position: relative;
@@ -4573,7 +4589,7 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   Gallery     
+        <!-- Gallery --> 
 /* ====================================================== */
 .custom-gallery .custom-gallery-item {
     transition: none;
@@ -4674,10 +4690,10 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   Custom Core Scripts & Stylesheets
+   <!-- Custom Core Scripts & Stylesheets --> 
 /* ====================================================== */
 /* ====================================================== 
-   Brands List
+    <!-- Brands List --> 
 /* ====================================================== */
 .list-brands {
     display: block;
@@ -4767,14 +4783,14 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   Bulleted List
+   <!-- Bulleted List --> 
 /* ====================================================== */
 .list-bullet i {
     margin-right: .5rem;
 }
 
 /* ====================================================== 
-   Maintain Aspect Ratio List
+   <!-- Maintain Aspect Ratio List --> 
 /* ====================================================== */
 .list-maintain-aspect-ratio {
     padding: 0 3rem;
@@ -4857,7 +4873,7 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   List of Posts
+   <!-- List of Posts --> 
 /* ====================================================== */
 .list-topic-container .list-topic-item {
     position: relative;
@@ -4873,12 +4889,25 @@ ul.entry-meta {
     z-index: 1;
 }
 
+.list-topic-container .list-topic-item .list-topic-item-img {
+    margin-top: 1.75rem;
+}
+
+.list-topic-container .list-topic-item .list-topic-item-img a {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
 .list-topic-container .list-topic-item .list-topic-item-img iframe {
     max-width: 100% !important;
     max-height: 300px !important;
 }
 
-.list-topic-container .list-topic-item .list-normal ul, .list-topic-container .list-topic-item .list-normal ol {
+.list-topic-container .list-topic-item .list-normal ul,
+.list-topic-container .list-topic-item .list-normal ol {
     line-height: inherit !important;
 }
 
@@ -4895,28 +4924,12 @@ ul.entry-meta {
     display: none;
 }
 
-.list-topic-container .list-topic-item .list-topic-item-img {
-    margin-top: 1.75rem;
-}
-
-.list-topic-container .list-topic-item .list-topic-item-img a {
-    display: block;
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
 .list-topic-container .list-topic-item .list-topic-item-info {
     margin-top: 3.5rem;
     word-wrap: break-word;
     background: #fff;
     padding: 1rem;
     position: relative;
-}
-
-.list-topic-container .list-topic-item:hover .list-topic-item-info {
-    background: #F3F3F3;
 }
 
 .list-topic-container .list-topic-item .list-topic-item-info h1, .list-topic-container .list-topic-item .list-topic-item-info h2, .list-topic-container .list-topic-item .list-topic-item-info h3, .list-topic-container .list-topic-item .list-topic-item-info h4, .list-topic-container .list-topic-item .list-topic-item-info h5, .list-topic-container .list-topic-item .list-topic-item-info h6 {
@@ -4966,10 +4979,6 @@ ul.entry-meta {
     text-transform: uppercase;
 }
 
-.list-topic-container .list-topic-item:hover a.more {
-    color: #fff;
-}
-
 .list-topic-container .list-topic-item .more-container {
     overflow: hidden;
 }
@@ -4986,8 +4995,16 @@ ul.entry-meta {
     transform: rotate(0) skew(-45deg);
 }
 
+.list-topic-container .list-topic-item:hover a.more {
+    color: #fff;
+}
+
 .list-topic-container .list-topic-item:hover .more-bg {
     right: -30px;
+}
+
+.list-topic-container .list-topic-item:hover .list-topic-item-info {
+    background: #F3F3F3;
 }
 
 .list-topic-container .list-topic-item.style-2 .detail p,
@@ -5021,7 +5038,7 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   List of Split Posts
+   <!-- List of Split Posts --> 
 /* ====================================================== */
 .list-split-container .list-split-item {
     position: relative;
@@ -5067,7 +5084,7 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   Side by Side List
+   <!-- Side by Side List --> 
 /* ====================================================== */
 dl.list-side-by-side {
     width: 100%;
@@ -5101,7 +5118,7 @@ dl.list-side-by-side:after {
 }
 
 /* ====================================================== 
-   Fullwidth List of Split
+    <!-- Fullwidth List of Split --> 
 /* ====================================================== */
 .list-split-imagery-container {
     position: relative;
@@ -5207,7 +5224,7 @@ dl.list-side-by-side:after {
 }
 
 /* ====================================================== 
-   Mobile Menu
+   <!-- Mobile Menu --> 
 /* ====================================================== */
 /* Mobile Menu Toggle */
 .menu-mobile-toggle {
@@ -5545,7 +5562,7 @@ dl.list-side-by-side:after {
 }
 
 /* ====================================================== 
-   Modal Dialog
+    <!-- Modal Dialog --> 
 /* ====================================================== */
 .modal-box {
     position: fixed;
@@ -5697,7 +5714,7 @@ dl.list-side-by-side:after {
 }
 
 /* ====================================================== 
-   Multiple Items Carousel
+   <!-- Multiple Items Carousel -->   
 /* ====================================================== */
 .custom-multi-items-carousel {
   /* Required */
@@ -5799,7 +5816,7 @@ dl.list-side-by-side:after {
 }
 
 /* ====================================================== 
-   Parallax                                               
+   <!-- Parallax -->                                           
 /* ====================================================== */
 .parallax {
     position: relative;
@@ -5836,7 +5853,7 @@ dl.list-side-by-side:after {
 }
 
 /* ====================================================== 
-   Periodical Scroll        
+       <!-- Periodical Scroll -->      
 /* ====================================================== */
 .custom-periodical-scroll {
     position: relative;
@@ -5863,7 +5880,7 @@ dl.list-side-by-side:after {
 }
 
 /* ====================================================== 
-   Pricing
+   <!-- Pricing --> 
 /* ====================================================== */
 .custom-price {
     text-align: center;
@@ -5992,9 +6009,9 @@ dl.list-side-by-side:after {
 }
 
 /* ====================================================== 
-   Progress Bar
+   <!-- Progress Bar --> 
 /* ====================================================== */
-/*! 
+/* 
  ---------------------------
  1) Radial Progress Bar
  ---------------------------
@@ -7474,7 +7491,7 @@ dl.list-side-by-side:after {
     transform: rotate(170deg);
 }
 
-/*! 
+/* 
  ---------------------------
  2) Rectangle Progress Bar
  ---------------------------
@@ -7921,7 +7938,7 @@ dl.list-side-by-side:after {
 }
 
 /* ====================================================== 
-   Show More Less
+   <!-- Show More Less --> 
 /* ====================================================== */
 .custom-more-text-link > span:nth-child(2) {
     display: none;
@@ -7954,11 +7971,9 @@ dl.list-side-by-side:after {
     display: none;
 }
 
-/*! 
- ---------------------------
- Cutom Light Box
- ---------------------------
- */
+/* ====================================================== 
+   <!-- Cutom Light Box -->   
+/* ====================================================== */
 .custom-lightbox-html {
     display: none;
 }
@@ -8255,7 +8270,7 @@ dl.list-side-by-side:after {
 }
 
 /* ====================================================== 
-   Single Post        
+     <!-- Single Post -->        
 /* ====================================================== */
 /* Post edit link */
 .post-edit-link {
@@ -8269,7 +8284,7 @@ dl.list-side-by-side:after {
 }
 
 /* ====================================================== 
-   Slideshow ( with custom flexslider )
+    <!-- Slideshow ( with custom flexslider ) -->  
 /* ====================================================== */
 /* 
    Thumbnail ControlNav Pattern                   
@@ -8758,7 +8773,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 }
 
 /* ====================================================== 
-   Source Code        
+   <!-- Source Code -->         
 /* ====================================================== */
 /* Pretty printing styles. Used with prettify.js. */
 /* Vim sunburst theme by David Leibovic */
@@ -9036,15 +9051,15 @@ li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 {
 }
 
 /* ====================================================== 
-   Tabs        
+    <!-- Tabs -->      
 /* ====================================================== */
 .custom-tabs {
-  /*! 
+  /* 
 	 ---------------------------
 	 Tab Normal Effect
 	 ---------------------------
 	 */
-  /*! 
+  /* 
 	 ---------------------------
 	 Tab Rotation Effect
 	 ---------------------------
@@ -9205,7 +9220,7 @@ li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 {
 }
 
 /* ====================================================== 
-   Testimonials Carousel
+   <!-- Testimonials Carousel -->  
 /* ====================================================== */
 .custom-testimonials-count {
     font-size: 0.75rem;
@@ -9309,7 +9324,7 @@ li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 {
 }
 
 /* ====================================================== 
-   Timeline    
+   <!-- Timeline -->     
 /* ====================================================== */
 /* Vertical */
 .list-timeline-container-outer {
@@ -9623,7 +9638,7 @@ li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 {
 }
 
 /* ====================================================== 
-   ToolTip
+   <!-- ToolTip --> 
 /* ====================================================== */
 .custom-tooltip {
     position: relative;
@@ -9773,7 +9788,7 @@ li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 {
 }
 
 /* ====================================================== 
-   WordPress Core            
+   <!-- WordPress Core -->              
 /* ====================================================== */
 .edit-link {
     display: block;

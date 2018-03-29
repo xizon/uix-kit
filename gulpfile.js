@@ -11,6 +11,7 @@ var gulp              = require('gulp'),
 	fileinclude       = require('gulp-file-include'),
 	clean             = require('gulp-clean'),
 	sourcemaps        = require('gulp-sourcemaps'),
+	replace           = require('gulp-replace'),
 	webpack           = require('webpack'),
 	WebpackDevServer  = require("webpack-dev-server"),
 	path              = require("path"),
@@ -26,7 +27,7 @@ var globs = {
 	cleanFilesTar: [ 'examples/include-*.html', '_components/**/scss/*.css', '_components/**/scss-rtl/*.css' ],
 	htmlFiles    : '_components/**/*.{html, htm}',
     js           : '_components/**/js/*.js',
-    scss         : '_components/**/scss/*.scss',
+    scss         : '_components/**/scss/*.scss', 
 	scssRTL      : '_components/**/scss-rtl/*.scss'
 };
 
@@ -421,8 +422,109 @@ gulp.task('scripts', function() {
 	
 });
 
+/*! 
+ *************************************
+ * Generate table of contents
+ *************************************
+ */
+gulp.task('compile', [ 'sass', 'scripts' ], function() {
+	
+	var tocCode1 = [],
+		tocCode2 = [];
+	
+    /* reading the file names in the directory */
+	var folderNames = fs.readdir('_components/', (err, list) => {
+								  list = list.filter(item => !(/(^|\/)\.[^\/\.]/g).test(item));
+		                        
+                                    //Read the SCSS and JS Files
+									for ( var k = 0; k < list.length; k++ ) {
+										
+										generateTOC( list[ k ], 'scss', tocCode1 );
+										generateTOC( list[ k ], 'js', tocCode2 );
+										
+									}
+		
+		
+								 
+								});
+	
+
+	
+});
+
+function generateTOC( folderName, folderType, tocCode ) {
+	
+	var curPath = '_components/' + folderName + '/' + folderType;
+	
+	if ( fs.existsSync( curPath ) ) {
+
+		var fileNames = fs.readdirSync( curPath, 'utf8' );
+
+		fileNames.forEach( function( fileName ) {
+
+			if ( fileName != '.DS_Store' ) {
+
+				var filePath = curPath + '/' + fileName,
+					stats    = fs.statSync( filePath );
+
+				//console.log( fileName + ' Size: ' + stats["size"] );
+
+				fs.readFile( filePath, function( err, content ) {
+
+					if ( err ) throw err;
+
+					var curCon  = content.toString(),
+						newtext = curCon.match(/\<\!--(.*)--\>/ );
+
+					//is the matched group if found
+					if ( newtext && newtext.length > 1 ) {  
+						
+						
+						tocCode.push( newtext[1] );
+						
+						//console.log( tocCode );
+
+						var curToc = '';
+						for ( var p = 0; p < tocCode.length; p++ ) {
+
+							var curIndex = p + 1;
+
+							if ( p > 0 ) {
+								curToc += '    ' + curIndex + '.' + tocCode[ p ] + '\n';
+							} else {
+								curToc +=  curIndex + '.' + tocCode[ p ] + '\n';
+							}
 
 
+						}
+
+
+						if ( folderType == 'scss' ) {
+							gulp.src( 'examples/assets/css/uix-kit.css' )
+								.pipe( replace( '${{TOC}}', curToc ) )
+								.pipe( gulp.dest( globs.cssTar ) );		
+						}
+						
+						if ( folderType == 'js' ) {
+							gulp.src( 'examples/assets/js/uix-kit.js' )
+								.pipe( replace( '${{TOC}}', curToc ) )
+								.pipe( gulp.dest( globs.jsTar ) );		
+						}		
+
+					}
+
+
+				});
+
+
+			}
+
+		});	
+
+	}//end if
+
+
+}
 
 /*! 
  *************************************
@@ -433,13 +535,14 @@ gulp.watch('files-to-watch', ['tasks_to_run']);
 
 //Running gulp and webpack scripts
 gulp.task('default', ['jshint', 'webpack'], function() {
-    gulp.start( [ 'sass', 'scripts', 'styles', 'watch' ] );
+    gulp.start( [ 'sass', 'scripts', 'styles', 'watch', 'compile' ] );
+	
 });
 
 gulp.task('watch', function(){
 	gulp.watch( globs.scssRTL, [ 'styles' ] ); 
-	gulp.watch( globs.scss, [ 'sass' ] ); 
-	gulp.watch( globs.js, [ 'scripts' ] ); 
+	gulp.watch( globs.scss, [ 'sass', 'compile' ] ); 
+	gulp.watch( globs.js, [ 'scripts', 'compile' ] ); 
 	gulp.watch( globs.htmlFiles, [ 'clean-scripts' ] ); 
 	
 	

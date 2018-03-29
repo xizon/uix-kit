@@ -1,7 +1,7 @@
 
-/*! 
+/* 
  *************************************
- * Modal Dialog
+ * <!-- Modal Dialog -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {

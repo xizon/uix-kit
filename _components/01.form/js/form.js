@@ -1,7 +1,7 @@
 
-/*! 
+/* 
  *************************************
- * Form
+ * <!-- Form -->
  *************************************
  */
 /*
@@ -23,7 +23,7 @@ theme = ( function ( theme, $, window, document ) {
     var documentReady = function( $ ) {
 		
 		
-		/*! 
+		/* 
 		 ---------------------------
 		 Disabled Status
 		 ---------------------------
@@ -35,7 +35,7 @@ theme = ( function ( theme, $, window, document ) {
 		
 		
 		
-		/*! 
+		/* 
 		 ---------------------------
 		 Input File
 		 ---------------------------
@@ -57,7 +57,7 @@ theme = ( function ( theme, $, window, document ) {
 		});
 
 		
-		/*! 
+		/* 
 		 ---------------------------
 		 Hover Effect
 		 ---------------------------
@@ -93,7 +93,7 @@ theme = ( function ( theme, $, window, document ) {
 		});
 		
 		
-		/*! 
+		/* 
 		 ---------------------------
 		 Input Validation 
 		 ---------------------------
@@ -101,7 +101,7 @@ theme = ( function ( theme, $, window, document ) {
 		//Using the jQuery Validation Plugin to check your form
 		
 		
-		/*! 
+		/* 
 		 ---------------------------
 		 Custom Select
 		 ---------------------------
@@ -109,7 +109,7 @@ theme = ( function ( theme, $, window, document ) {
 		$( document ).customSelectInit();
 
 
-		/*! 
+		/* 
 		 ---------------------------
 		 Custom Radio, Toggle And Checkbox
 		 ---------------------------
@@ -118,7 +118,7 @@ theme = ( function ( theme, $, window, document ) {
 		
 		
 		
-		/*! 
+		/* 
 		 ---------------------------
 		 Date Picker
 		 ---------------------------
@@ -178,7 +178,7 @@ theme = ( function ( theme, $, window, document ) {
 
 		}
 		
-		/*! 
+		/* 
 		 ---------------------------
 		 Input Validation 
 		 ---------------------------
@@ -203,7 +203,7 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-/*! 
+/* 
  *************************************
  * Associated Functions
  *************************************
@@ -443,7 +443,7 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-/*!
+/*
  * jQuery UI Datepicker 1.11.4
  * http://jqueryui.com
  *

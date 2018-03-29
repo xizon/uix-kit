@@ -1,7 +1,7 @@
 
-/*! 
+/* 
  *************************************
- * 6. Videos
+ * <!-- Videos -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -15,7 +15,8 @@ theme = ( function ( theme, $, window, document ) {
 			windowHeight = $window.height();
 		
 		
-		/*! 
+		
+		/* 
 		 ---------------------------
 		 Video Embed
 		 ---------------------------
@@ -138,7 +139,7 @@ theme = ( function ( theme, $, window, document ) {
 		
 		
 		
-		/*! 
+		/* 
 		 ---------------------------
 		 Video Popup Interaction
 		 ---------------------------
@@ -403,8 +404,6 @@ theme = ( function ( theme, $, window, document ) {
 		});
 
 
-		
-		
 		
     };
 

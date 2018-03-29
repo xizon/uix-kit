@@ -1,7 +1,7 @@
 
-/*! 
+/* 
  *************************************
- * 11. Specify a background image
+ * <!-- Specify a background image -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {

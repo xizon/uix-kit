@@ -1,7 +1,7 @@
 
-/*! 
+/* 
  *************************************
- * Mousewheel Interaction
+ * <!-- Mousewheel Interaction -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {

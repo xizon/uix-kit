@@ -1,7 +1,7 @@
 
-/*! 
+/* 
  *************************************
- * 10. Pagination
+ * <!-- Pagination -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {

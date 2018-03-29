@@ -1,7 +1,7 @@
 
-/*! 
+/* 
  *************************************
- * Scroll Reveal
+ * <!-- Scroll Reveal -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {

@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.91
- * ## Last Update         :  March 28, 2018
+ * ## Version             :  1.1.92
+ * ## Last Update         :  March 29, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -23,18 +23,50 @@
 	---------------------------
 	
 	
-	1. Header
-	2. Loader
-	3. Back to Top
-	4. Overlay
-	5. Navigation
-	6. Videos
-	7. Initialize the height of each column of the grid system
-	8. Mega Menu
-	9. Dropdown Categories
-	10. Pagination
-	11. Specify a background image
-	12. Get all custom attributes of an element like "data-*"
+	1. Header 
+    2. Loader 
+    3. Back to Top 
+    4. Overlay 
+    5. Navigation 
+    6. Videos 
+    7. Initialize the height of each column of the grid system 
+    8. Mega Menu 
+    9. Dropdown Categories 
+    10. Pagination 
+    11. Specify a background image 
+    12. Get all custom attributes of an element like "data-*" 
+    13. Accordion 
+    14. Counter 
+    15. Dynamic Drop Down List from JSON 
+    16. Form 
+    17. Form Progress 
+    18. Gallery 
+    19. Custom Core Scripts & Stylesheets 
+    20. Bulleted List 
+    21. Posts List With Ajax 
+    22. Fullwidth List of Split 
+    23. Mobile Menu 
+    24. Modal Dialog 
+    25. Mousewheel Interaction 
+    26. Multiple Items Carousel 
+    27. Navigation Highlighting 
+    28. Parallax 
+    29. Periodical Scroll 
+    30. Pricing 
+    31. Progress Bar 
+    32. Retina Graphics for Website 
+    33. Scroll Reveal 
+    34. Show More Less 
+    35. Custom Lightbox 
+    36. Slideshow ( with custom flexslider ) 
+    37. Source Code 
+    38. Sticky Elements 
+    39. Tabs 
+    40. Testimonials Carousel 
+    41. Text effect 
+    42. Timeline 
+    43. AJAX 
+
 
 */
 
@@ -101,9 +133,9 @@ var theme = (function ( $, window, document ) {
 
 
 
-/*! 
+/* 
  *************************************
- * 1. Header 
+ * <!-- Header -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -165,9 +197,9 @@ theme = ( function ( theme, $, window, document ) {
 
 		
 
-/*! 
+/* 
  *************************************
- * 2. Loader
+ * <!-- Loader -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -191,9 +223,9 @@ theme = ( function ( theme, $, window, document ) {
 
 
 		
-/*! 
+/* 
  *************************************
- * 3. Back to Top
+ * <!-- Back to Top -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -247,9 +279,9 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-/*! 
+/* 
  *************************************
- * 4. Overlay
+ * <!-- Overlay -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -294,9 +326,9 @@ theme = ( function ( theme, $, window, document ) {
 }( theme, jQuery, window, document ) );
 
 
-/*! 
+/* 
  *************************************
- * 5. Navigation
+ * <!-- Navigation -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -387,9 +419,9 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-/*! 
+/* 
  *************************************
- * 6. Videos
+ * <!-- Videos -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -403,7 +435,8 @@ theme = ( function ( theme, $, window, document ) {
 			windowHeight = $window.height();
 		
 		
-		/*! 
+		
+		/* 
 		 ---------------------------
 		 Video Embed
 		 ---------------------------
@@ -526,7 +559,7 @@ theme = ( function ( theme, $, window, document ) {
 		
 		
 		
-		/*! 
+		/* 
 		 ---------------------------
 		 Video Popup Interaction
 		 ---------------------------
@@ -792,8 +825,6 @@ theme = ( function ( theme, $, window, document ) {
 
 
 		
-		
-		
     };
 
     theme.videos = {
@@ -805,11 +836,10 @@ theme = ( function ( theme, $, window, document ) {
 
 }( theme, jQuery, window, document ) );
 
-
-
-/*! 
+/* 
  *************************************
- * 7. Initialize the height of each column of the grid system
+ * <!-- Initialize the height of each column of the grid system -->
+  
  *
  * Note: 
  *
@@ -884,9 +914,9 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-/*! 
+/* 
  *************************************
- * 8. `Mega Menu`
+ * <!-- Mega Menu -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -1057,9 +1087,9 @@ theme = ( function ( theme, $, window, document ) {
 }( theme, jQuery, window, document ) );
 
 
-/*! 
+/* 
  *************************************
- * 9. Dropdown Categories
+ * <!-- Dropdown Categories -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -1089,9 +1119,9 @@ theme = ( function ( theme, $, window, document ) {
 }( theme, jQuery, window, document ) );
 
 
-/*! 
+/* 
  *************************************
- * 10. Pagination
+ * <!-- Pagination -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -1117,9 +1147,9 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-/*! 
+/* 
  *************************************
- * 11. Specify a background image
+ * <!-- Specify a background image -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -1174,9 +1204,9 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-/*! 
+/* 
  *************************************
- * 12. Get all custom attributes of an element like "data-*"
+ * <!-- Get all custom attributes of an element like "data-*" -->
  *************************************
  */
 
@@ -1241,9 +1271,9 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-/*! 
+/* 
  *************************************
- * Accordion
+ * <!-- Accordion -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -1307,9 +1337,9 @@ theme = ( function ( theme, $, window, document ) {
 }( theme, jQuery, window, document ) );
 
 
-/*! 
+/* 
  *************************************
- * Counter
+ * <!-- Counter -->
  *************************************
  */	
 theme = ( function ( theme, $, window, document ) {
@@ -1443,9 +1473,9 @@ theme = ( function ( theme, $, window, document ) {
 	
 }(jQuery));
 
-/*! 
+/* 
  *************************************
- * Dynamic Drop Down List from JSON
+ * <!-- Dynamic Drop Down List from JSON -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -1617,9 +1647,9 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-/*! 
+/* 
  *************************************
- * Form
+ * <!-- Form -->
  *************************************
  */
 /*
@@ -1641,7 +1671,7 @@ theme = ( function ( theme, $, window, document ) {
     var documentReady = function( $ ) {
 		
 		
-		/*! 
+		/* 
 		 ---------------------------
 		 Disabled Status
 		 ---------------------------
@@ -1653,7 +1683,7 @@ theme = ( function ( theme, $, window, document ) {
 		
 		
 		
-		/*! 
+		/* 
 		 ---------------------------
 		 Input File
 		 ---------------------------
@@ -1675,7 +1705,7 @@ theme = ( function ( theme, $, window, document ) {
 		});
 
 		
-		/*! 
+		/* 
 		 ---------------------------
 		 Hover Effect
 		 ---------------------------
@@ -1711,7 +1741,7 @@ theme = ( function ( theme, $, window, document ) {
 		});
 		
 		
-		/*! 
+		/* 
 		 ---------------------------
 		 Input Validation 
 		 ---------------------------
@@ -1719,7 +1749,7 @@ theme = ( function ( theme, $, window, document ) {
 		//Using the jQuery Validation Plugin to check your form
 		
 		
-		/*! 
+		/* 
 		 ---------------------------
 		 Custom Select
 		 ---------------------------
@@ -1727,7 +1757,7 @@ theme = ( function ( theme, $, window, document ) {
 		$( document ).customSelectInit();
 
 
-		/*! 
+		/* 
 		 ---------------------------
 		 Custom Radio, Toggle And Checkbox
 		 ---------------------------
@@ -1736,7 +1766,7 @@ theme = ( function ( theme, $, window, document ) {
 		
 		
 		
-		/*! 
+		/* 
 		 ---------------------------
 		 Date Picker
 		 ---------------------------
@@ -1796,7 +1826,7 @@ theme = ( function ( theme, $, window, document ) {
 
 		}
 		
-		/*! 
+		/* 
 		 ---------------------------
 		 Input Validation 
 		 ---------------------------
@@ -1821,7 +1851,7 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-/*! 
+/* 
  *************************************
  * Associated Functions
  *************************************
@@ -2061,7 +2091,7 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-/*!
+/*
  * jQuery UI Datepicker 1.11.4
  * http://jqueryui.com
  *
@@ -4133,9 +4163,9 @@ var datepicker = $.datepicker;
 
 
 
-/*! 
+/* 
  *************************************
- * Form Progress
+ * <!-- Form Progress -->
  *************************************
  */
 /*
@@ -4246,7 +4276,7 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-/*! 
+/* 
  *************************************
  * Associated Functions
  *************************************
@@ -4432,9 +4462,9 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-/*! 
+/* 
  *************************************
- * Gallery
+ * <!-- Gallery -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -4536,17 +4566,17 @@ theme = ( function ( theme, $, window, document ) {
 }( theme, jQuery, window, document ) );
 
 
-/*! 
+/* 
  *************************************
- * Custom Core Scripts & Stylesheets
+ * <!-- Custom Core Scripts & Stylesheets -->
  *************************************
  */
 
 
 
-/*! 
+/* 
  *************************************
- * Bulleted List
+ * <!-- Bulleted List -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -4578,9 +4608,9 @@ theme = ( function ( theme, $, window, document ) {
 }( theme, jQuery, window, document ) );
 
 
-/*! 
+/* 
  *************************************
- * Posts List With Ajax
+ * <!-- Posts List With Ajax -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -4688,7 +4718,7 @@ theme = ( function ( theme, $, window, document ) {
 				
 				
 				if ( infinitescroll ) {
-					/*! 
+					/* 
 					 ---------------------------
 					 Infinite scroll
 					 ---------------------------
@@ -4731,7 +4761,7 @@ theme = ( function ( theme, $, window, document ) {
 					});	
 					
 				} else {
-					/*! 
+					/* 
 					 ---------------------------
 					 Ajax with JSON data
 					 ---------------------------
@@ -4914,9 +4944,9 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-/*! 
+/* 
  *************************************
- * Fullwidth List of Split
+ * <!-- Fullwidth List of Split -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -4982,9 +5012,9 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-/*! 
+/* 
  *************************************
- * Mobile Menu
+ * <!-- Mobile Menu -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -5133,9 +5163,9 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-/*! 
+/* 
  *************************************
- * Modal Dialog
+ * <!-- Modal Dialog -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -5249,9 +5279,9 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-/*! 
+/* 
  *************************************
- * Mousewheel Interaction
+ * <!-- Mousewheel Interaction -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -5335,9 +5365,9 @@ theme = ( function ( theme, $, window, document ) {
 }( theme, jQuery, window, document ) );
 
 
-/*! 
+/* 
  *************************************
- * Multiple Items Carousel
+ * <!-- Multiple Items Carousel -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -5381,7 +5411,7 @@ theme = ( function ( theme, $, window, document ) {
 			}
 
 
-			/*! 
+			/* 
 			 ---------------------------
 			 Initialize carousel
 			 ---------------------------
@@ -5406,7 +5436,7 @@ theme = ( function ( theme, $, window, document ) {
 				$( carouselPrev ).addClass( 'disable' );
 			}	
 
-			/*! 
+			/* 
 			 ---------------------------
 			 Re-order all items
 			 ---------------------------
@@ -5435,7 +5465,7 @@ theme = ( function ( theme, $, window, document ) {
 					});	
 			}
 			
-			/*! 
+			/* 
 			 ---------------------------
 			 Active the center item
 			 ---------------------------
@@ -5475,7 +5505,7 @@ theme = ( function ( theme, $, window, document ) {
 
 			
 			
-			/*! 
+			/* 
 			 ---------------------------
 			 Move left
 			 ---------------------------
@@ -5591,7 +5621,7 @@ theme = ( function ( theme, $, window, document ) {
 			});
 
 			
-			/*! 
+			/* 
 			 ---------------------------
 			 Move right
 			 ---------------------------
@@ -5729,9 +5759,9 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-/*! 
+/* 
  *************************************
- * Navigation Highlighting
+ * <!-- Navigation Highlighting -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -5815,9 +5845,9 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-/*! 
+/* 
  *************************************
- * Parallax
+ * <!-- Parallax -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -6068,9 +6098,9 @@ http://www.gnu.org/licenses/gpl.html
 
 
 
-/*! 
+/* 
  *************************************
- * Periodical Scroll
+ * <!-- Periodical Scroll -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -6139,9 +6169,9 @@ theme = ( function ( theme, $, window, document ) {
 }( theme, jQuery, window, document ) );
 
 
-/*! 
+/* 
  *************************************
- * Pricing
+ * <!-- Pricing -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -6266,9 +6296,9 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-/*! 
+/* 
  *************************************
- * Progress Bar
+ * <!-- Progress Bar -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -6334,9 +6364,9 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-/*! 
+/* 
  *************************************
- * Retina Graphics for Website
+ * <!-- Retina Graphics for Website -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -6380,9 +6410,9 @@ theme = ( function ( theme, $, window, document ) {
 }( theme, jQuery, window, document ) );
 
 
-/*! 
+/* 
  *************************************
- * Scroll Reveal
+ * <!-- Scroll Reveal -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -6422,9 +6452,9 @@ theme = ( function ( theme, $, window, document ) {
 
 }( theme, jQuery, window, document ) );
 
-/*! 
+/* 
  *************************************
- * Show More Less
+ * <!-- Show More Less -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -6455,9 +6485,9 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-/*! 
+/* 
  *************************************
- * Custom Lightbox
+ * <!-- Custom Lightbox -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -6707,9 +6737,9 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-/*! 
+/* 
  *************************************
- * Slideshow ( with custom flexslider )
+ * <!-- Slideshow ( with custom flexslider ) -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -7091,7 +7121,7 @@ theme = ( function ( theme, $, window, document ) {
         }
 			
 
-		/*! 
+		/* 
 		 ---------------------------
          Initialize slideshow
 		 ---------------------------
@@ -7235,7 +7265,7 @@ theme = ( function ( theme, $, window, document ) {
 		
 
 		
-		/*! 
+		/* 
 		 ---------------------------
          Check grid size on resize event
 		 ---------------------------
@@ -7277,9 +7307,9 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-/*! 
+/* 
  *************************************
- * Source Code
+ * <!-- Source Code -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -7356,7 +7386,7 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-/*! 
+/* 
  *************************************
  * Prettify
  *************************************
@@ -7427,9 +7457,9 @@ l:l,a:null,i:null,c:null,g:null})}}}t<r.length?Q.setTimeout(f,250):"function"===
 h={};f()}},R=Q.define;"function"===typeof R&&R.amd&&R("google-code-prettify",[],function(){return U})})();return g}();S||k.setTimeout(T,0)})();}();
 
 
-/*! 
+/* 
  *************************************
- * Sticky Elements 
+ *  <!-- Sticky Elements -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -7503,9 +7533,9 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-/*! 
+/* 
  *************************************
- * Tabs
+ * <!-- Tabs -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -7678,9 +7708,9 @@ theme = ( function ( theme, $, window, document ) {
 }( theme, jQuery, window, document ) );
 
 
-/*! 
+/* 
  *************************************
- * Testimonials Carousel
+ * <!-- Testimonials Carousel -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -7781,9 +7811,9 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-/*! 
+/* 
  *************************************
- * Text effect
+ * <!-- Text effect -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -7869,9 +7899,9 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-/*! 
+/* 
  *************************************
- * Timeline
+ * <!-- Timeline -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -8028,9 +8058,9 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-/*! 
+/* 
  *************************************
- * AJAX
+ * <!-- AJAX -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {

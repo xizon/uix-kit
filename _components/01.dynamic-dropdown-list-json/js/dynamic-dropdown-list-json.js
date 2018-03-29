@@ -1,7 +1,7 @@
 
-/*! 
+/* 
  *************************************
- * Dynamic Drop Down List from JSON
+ * <!-- Dynamic Drop Down List from JSON -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {

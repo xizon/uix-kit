@@ -11,8 +11,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.91
- * ## Last Update         :  March 28, 2018
+ * ## Version             :  1.1.92
+ * ## Last Update         :  March 29, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -239,14 +239,18 @@ blockquote:before {
 /* ====================================================== 
    15. Filterable Navigation                 
 /* ====================================================== */
-.nav-filters ul li:not(:last-child) {
+.nav-filters ul li {
     margin-right: auto;
-    margin-left: 0.7109375rem;
+    margin-left: 0.203125rem;
 }
 
-.nav-filters ul li:not(:last-child):after {
+.nav-filters ul li::after {
     margin-left: auto;
-    margin-right: 0.7109375rem;
+    margin-right: 0.203125rem;
+}
+
+.nav-filters ul li:last-child {
+    margin-left: 0;
 }
 
 /* ====================================================== 

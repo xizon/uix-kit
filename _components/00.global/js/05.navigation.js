@@ -1,7 +1,7 @@
 
-/*! 
+/* 
  *************************************
- * 5. Navigation
+ * <!-- Navigation -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {

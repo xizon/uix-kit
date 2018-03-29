@@ -4,18 +4,7 @@
 	---------------------------
 	
 	
-	1. Header
-	2. Loader
-	3. Back to Top
-	4. Overlay
-	5. Navigation
-	6. Videos
-	7. Initialize the height of each column of the grid system
-	8. Mega Menu
-	9. Dropdown Categories
-	10. Pagination
-	11. Specify a background image
-	12. Get all custom attributes of an element like "data-*"
+	${{TOC}}
 
 */
 

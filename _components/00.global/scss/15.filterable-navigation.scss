@@ -1,5 +1,5 @@
 /* ====================================================== 
-   15. Filterable Navigation                 
+   <!-- Filterable Navigation -->                 
 /* ====================================================== */
 
 .nav-filters {
@@ -13,31 +13,31 @@
 			font-style: italic;
 			display: inline-block;
 			transition: 0.2s linear;
-			&:not(:last-child) {
-				margin-right: 0.203125rem;
+			margin-right: 0.203125rem;
+			opacity: .5;
 
-				&:after {
-					content: '/';
-					margin-left: 0.203125rem;
-					opacity: 0.1;
+			&::after {
+				content: '/';
+				margin-left: 0.203125rem;
+				opacity: 0.5;
+			}	
+			
+			&:last-child {
+				margin-right: 0;
+				
+				&::after {
+					display: none;
 				}
 			}
+		
 
-			&:not(.active):not(.current-cat) {
-				opacity: .5;
-
-				&:after {
-					opacity: 0.2;
-				}
-			}
-
-			&:hover {
+			&:hover,
+			&.active,
+			&.current-cat {
 				opacity: 1;
-
-				&:after {
-					opacity: 0.1;
-				}
 			}
+
+			
 		}
 	}
 }

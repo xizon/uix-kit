@@ -1,8 +1,8 @@
 
 
-/*! 
+/* 
  *************************************
- * Sticky Elements 
+ *  <!-- Sticky Elements -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {

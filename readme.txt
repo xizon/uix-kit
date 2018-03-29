@@ -5,6 +5,7 @@
 Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap.
 
 
+* Automatically generate table of contents with Gulp for each module comment of name.
 * Simple custom CSS and JS core files
 * 100% Responsive & Mobile Ready
 * Prepare some generic plug-ins in advance

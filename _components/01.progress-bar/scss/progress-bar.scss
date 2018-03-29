@@ -1,5 +1,5 @@
 /* ====================================================== 
-   Progress Bar
+   <!-- Progress Bar --> 
 /* ====================================================== */
 
 $bar-size       : 100px;
@@ -8,7 +8,7 @@ $bar-bg         : $primary-text-color1;
 $bar-track-bg   : rgba(236,236,236,1.00);
 $bar-fill-color : $highlight-color1;
 
-/*! 
+/* 
  ---------------------------
  1) Radial Progress Bar
  ---------------------------
@@ -141,7 +141,7 @@ $bar-fill-color : $highlight-color1;
 
 }
 
-/*! 
+/* 
  ---------------------------
  2) Rectangle Progress Bar
  ---------------------------

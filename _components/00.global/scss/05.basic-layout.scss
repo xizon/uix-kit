@@ -1,10 +1,10 @@
 /* ====================================================== 
-   5. Basic Layout Styles                                        
+   <!-- Basic Layout Styles -->                                        
 /* ====================================================== */
 
-/*! 
+/* 
  ---------------------------
- 5.1. Bootstrap 3.x
+ Bootstrap 3.x
  ---------------------------
  */ 
 /* New XL container for Bootstrap 3.x */
@@ -45,9 +45,9 @@
 
 
 
-/*! 
+/* 
  ---------------------------
- 5.2. Material Container
+ Material Container
  ---------------------------
  */ 
 
@@ -113,9 +113,9 @@
 }
 
 
-/*! 
+/* 
  ---------------------------
- 5.3 Main Wrapper 
+ Main Wrapper 
  ---------------------------
  */ 
 /* Note: Do not use the "transform" property, otherwise it may affect the internal elements */
@@ -125,9 +125,9 @@
 	overflow: hidden;
 }
 
-/*! 
+/* 
  ---------------------------
- 5.4 Seamless Grid
+ Seamless Grid
  ---------------------------
  */ 
 $seamless-grid-pad : 15px;

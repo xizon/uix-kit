@@ -1,6 +1,6 @@
-/*! 
+/* 
  *************************************
- * Periodical Scroll
+ * <!-- Periodical Scroll -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {

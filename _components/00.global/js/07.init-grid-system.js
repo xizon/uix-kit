@@ -1,8 +1,7 @@
-
-
-/*! 
+/* 
  *************************************
- * 7. Initialize the height of each column of the grid system
+ * <!-- Initialize the height of each column of the grid system -->
+  
  *
  * Note: 
  *

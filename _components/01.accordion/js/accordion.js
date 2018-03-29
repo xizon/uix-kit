@@ -1,7 +1,7 @@
 
-/*! 
+/* 
  *************************************
- * Accordion
+ * <!-- Accordion -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {

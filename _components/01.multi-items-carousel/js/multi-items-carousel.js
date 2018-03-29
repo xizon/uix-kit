@@ -1,6 +1,6 @@
-/*! 
+/* 
  *************************************
- * Multiple Items Carousel
+ * <!-- Multiple Items Carousel -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -44,7 +44,7 @@ theme = ( function ( theme, $, window, document ) {
 			}
 
 
-			/*! 
+			/* 
 			 ---------------------------
 			 Initialize carousel
 			 ---------------------------
@@ -69,7 +69,7 @@ theme = ( function ( theme, $, window, document ) {
 				$( carouselPrev ).addClass( 'disable' );
 			}	
 
-			/*! 
+			/* 
 			 ---------------------------
 			 Re-order all items
 			 ---------------------------
@@ -98,7 +98,7 @@ theme = ( function ( theme, $, window, document ) {
 					});	
 			}
 			
-			/*! 
+			/* 
 			 ---------------------------
 			 Active the center item
 			 ---------------------------
@@ -138,7 +138,7 @@ theme = ( function ( theme, $, window, document ) {
 
 			
 			
-			/*! 
+			/* 
 			 ---------------------------
 			 Move left
 			 ---------------------------
@@ -254,7 +254,7 @@ theme = ( function ( theme, $, window, document ) {
 			});
 
 			
-			/*! 
+			/* 
 			 ---------------------------
 			 Move right
 			 ---------------------------

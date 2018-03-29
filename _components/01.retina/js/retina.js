@@ -1,7 +1,7 @@
 
-/*! 
+/* 
  *************************************
- * Retina Graphics for Website
+ * <!-- Retina Graphics for Website -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {

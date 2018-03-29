@@ -1,6 +1,6 @@
-/*! 
+/* 
  *************************************
- * Testimonials Carousel
+ * <!-- Testimonials Carousel -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {

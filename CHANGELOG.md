@@ -1,6 +1,15 @@
 # Changelog
 
 
+#### = 1.1.92 (March 29, 2018) =
+
+* New: Added numeric bulleted list module.
+* New: Automatically generate table of contents with Gulp for each module comment of name.
+* Tweak: Optimized partial SCSS files.
+* Tweak: Separated the "Pagination" module.
+
+
+
 #### = 1.1.91 (March 26, 2018) =
 
 * New: Added a variety of "Footer" premade templates.

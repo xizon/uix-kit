@@ -1,7 +1,7 @@
 /* ====================================================== 
-   1. Basic                    
+    <!-- Basic -->
 /* ====================================================== */
-/* 1.1. Reset Stylesheets */
+
 ::placeholder {
 	color: $placeholder-text-color;
 }
@@ -28,18 +28,6 @@
 	--danger: #dc3545;
 	--light: #f8f9fa;
 	--dark: #343a40;
-	--breakpoint-xs: 0;
-	--breakpoint-sm: 480px;
-	/* max-width */
-	--breakpoint-md: 768px;
-	/* max-width */
-	--breakpoint-lg: 991px;
-	/* max-width */
-	--breakpoint-xl: 1300px;
-	/* Only new XL container, min-width */
-	--breakpoint-xxl: 1430px;
-	/* Only new XXL container, min-width */
-	--spacing: 1rem;
 }
 
 ::selection, 
@@ -174,6 +162,37 @@ ol.list-normal {
 		}
 	}
 }
+
+
+
+.list-numbered {
+    list-style: none;
+    margin-left: 1em;
+    counter-reset: line;
+	
+	> li {
+		position: relative;
+		margin-bottom: 1.5em;
+	}
+
+	> li:before {
+		position: absolute;
+		left: -2.25em;
+		display: inline-block;
+		width: 22px;
+		height: 22px;
+		margin-right: 0.5em;
+		background-color: $highlight-color1;
+		border-radius: 50%;
+		color: #fff;
+		text-align: center;
+		line-height: 1.5;
+		counter-increment: line;
+		content: '0' counter(line);
+	}
+	
+}
+
 
 .table-normal table {
 	border: 1px solid black;

@@ -1,7 +1,7 @@
 
-/*! 
+/* 
  *************************************
- * Posts List With Ajax
+ * <!-- Posts List With Ajax -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -109,7 +109,7 @@ theme = ( function ( theme, $, window, document ) {
 				
 				
 				if ( infinitescroll ) {
-					/*! 
+					/* 
 					 ---------------------------
 					 Infinite scroll
 					 ---------------------------
@@ -152,7 +152,7 @@ theme = ( function ( theme, $, window, document ) {
 					});	
 					
 				} else {
-					/*! 
+					/* 
 					 ---------------------------
 					 Ajax with JSON data
 					 ---------------------------

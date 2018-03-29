@@ -1,7 +1,7 @@
 
-/*! 
+/* 
  *************************************
- * Fullwidth List of Split
+ * <!-- Fullwidth List of Split -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {

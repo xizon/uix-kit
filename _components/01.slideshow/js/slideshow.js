@@ -1,7 +1,7 @@
 
-/*! 
+/* 
  *************************************
- * Slideshow ( with custom flexslider )
+ * <!-- Slideshow ( with custom flexslider ) -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
@@ -383,7 +383,7 @@ theme = ( function ( theme, $, window, document ) {
         }
 			
 
-		/*! 
+		/* 
 		 ---------------------------
          Initialize slideshow
 		 ---------------------------
@@ -527,7 +527,7 @@ theme = ( function ( theme, $, window, document ) {
 		
 
 		
-		/*! 
+		/* 
 		 ---------------------------
          Check grid size on resize event
 		 ---------------------------

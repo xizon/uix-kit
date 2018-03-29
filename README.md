@@ -35,7 +35,7 @@ An underlying front-end system that makes it easy to extend and modify core file
 
 Enjoy the fluid grid system based on **12** columns. Uix Kit is built over Bootstrap and has all the benefits that the framework comes with. Regardless of the screen size, the website content will naturally fit the given resolution. Using the Uix Kit will save you large amount of time to build your projects.
 
-
+* Automatically generate table of contents with Gulp for each module comment of name.
 * Simple custom CSS and JS core files
 * 100% Responsive & Mobile Ready
 * Prepare some generic plug-ins in advance

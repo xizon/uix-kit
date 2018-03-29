@@ -1,7 +1,7 @@
 
-/*! 
+/* 
  *************************************
- * Mobile Menu
+ * <!-- Mobile Menu -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {

@@ -1,7 +1,7 @@
 
-/*! 
+/* 
  *************************************
- * Bulleted List
+ * <!-- Bulleted List -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {

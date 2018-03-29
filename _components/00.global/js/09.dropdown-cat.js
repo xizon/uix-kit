@@ -1,7 +1,7 @@
 
-/*! 
+/* 
  *************************************
- * 9. Dropdown Categories
+ * <!-- Dropdown Categories -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {

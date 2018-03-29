@@ -1,7 +1,7 @@
 
-/*! 
+/* 
  *************************************
- * Custom Lightbox
+ * <!-- Custom Lightbox -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {

@@ -1,8 +1,8 @@
 
 
-/*! 
+/* 
  *************************************
- * Text effect
+ * <!-- Text effect -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {

@@ -1,6 +1,6 @@
-/*! 
+/* 
  *************************************
- * Navigation Highlighting
+ * <!-- Navigation Highlighting -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {

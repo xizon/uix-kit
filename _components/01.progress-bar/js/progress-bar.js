@@ -1,6 +1,6 @@
-/*! 
+/* 
  *************************************
- * Progress Bar
+ * <!-- Progress Bar -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {

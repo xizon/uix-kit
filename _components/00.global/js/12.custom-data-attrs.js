@@ -1,7 +1,7 @@
 
-/*! 
+/* 
  *************************************
- * 12. Get all custom attributes of an element like "data-*"
+ * <!-- Get all custom attributes of an element like "data-*" -->
  *************************************
  */
 
