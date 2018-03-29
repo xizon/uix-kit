@@ -1,8 +1,10 @@
 # Changelog
 
 
-#### = 1.1.92 (March 29, 2018) =
+#### = 1.1.93 (March 29, 2018) =
 
+* Fix: Solved a problem with the ajax loading list.
+* New: Added a new method for ajax posts.
 * New: Added numeric bulleted list module.
 * New: Automatically generate table of contents with Gulp for each module comment of name.
 * Tweak: Optimized partial SCSS files.

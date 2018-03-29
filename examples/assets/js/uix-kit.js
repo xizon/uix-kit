@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.92
+ * ## Version             :  1.1.93
  * ## Last Update         :  March 29, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -38,8 +38,8 @@
     13. Accordion 
     14. Counter 
     15. Dynamic Drop Down List from JSON 
-    16. Form 
-    17. Form Progress 
+    16. Form Progress 
+    17. Form 
     18. Gallery 
     19. Custom Core Scripts & Stylesheets 
     20. Bulleted List 
@@ -4630,6 +4630,7 @@ theme = ( function ( theme, $, window, document ) {
 				trigger          = $this.data( 'ajax-list-trigger' ),
 				infinitescroll   = $this.data( 'ajax-list-infinitescroll' ),
 				jsonFile         = $this.data( 'ajax-list-json' ),
+				addition         = $this.data( 'ajax-list-addition' ),
 				template7ID      = $this.data( 'ajax-list-temp-id' ),
 				pushContainer    = $this.data( 'ajax-list-push-container-class' ),
 				triggerActive    = $this.data( 'ajax-list-trigger-active-class' );
@@ -4640,8 +4641,6 @@ theme = ( function ( theme, $, window, document ) {
 			if( typeof curPage === typeof undefined ) {
 				curPage = 1;
 			}
-			
-			curPage = curPage + 1;
 			
 			
 			if( typeof perShow === typeof undefined ) {
@@ -4664,6 +4663,11 @@ theme = ( function ( theme, $, window, document ) {
 			if( typeof infinitescroll === typeof undefined ) {
 				infinitescroll = false;
 			}	
+			
+			if( typeof addition === typeof undefined ) {
+				addition = true;
+			}			
+			
 			
 			if( typeof jsonFile === typeof undefined ) {
 				jsonFile = '';
@@ -4726,36 +4730,49 @@ theme = ( function ( theme, $, window, document ) {
 					var $button = $( trigger ),
 						btnTop  = $button.offset().top;
 					
-					$( window ).on( 'scroll touchmove', function() {
-						var scrolled = $( window ).scrollTop();
-						
+					//Add default page number to the button
+					$button.attr( 'data-cur-page', 1 );
+
+					
+					//Hide the next button 
+					if ( totalPage == 1 ) {
+						$button.addClass( 'hide' );	
+					}
+					
 				
+						
+					$( window ).on( 'scroll touchmove', function() {
+						
+					
+						
+						var scrolled = $( window ).scrollTop();
 						
 						if ( scrolled >= parseFloat( $button.offset().top - $( window ).height()/2 - $button.outerHeight( true )*2 ) && !$button.hasClass( triggerActive ) ) {
 
 								// Active this button
 								$button.addClass( triggerActive );					    
 							
-
-								if ( curPage < totalPage+1 ) {
-
-									//Perform dynamic loading
-									if ( customPostData != '' ) {
-										defaultPostData = JSON.parse( '{ "total": '+totalPage+', "per": '+perShow+', "page": '+curPage+', '+customPostData+' }' );
-									} else {
-										defaultPostData = JSON.parse( '{ "total": '+totalPage+', "per": '+perShow+', "page": '+curPage+' }' );
-									}
-
-									
-									ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method );
-
+								var curPage = $button.attr( 'data-cur-page' );
+							
+								//Add next page number to the button
+								curPage = parseFloat( curPage ) + 1;
+								$button.attr( 'data-cur-page', curPage );
+							
+							    //Avoid touching the same button multiple times
+							    if ( curPage == totalPage + 1 ) return false;
+							
+								//Perform dynamic loading
+								if ( customPostData != '' ) {
+									defaultPostData = JSON.parse( '{ "total": '+totalPage+', "per": '+perShow+', "page": '+curPage+', '+customPostData+' }' );
+								} else {
+									defaultPostData = JSON.parse( '{ "total": '+totalPage+', "per": '+perShow+', "page": '+curPage+' }' );
 								}
 
-								//Avoid touching the same button multiple times
-					
-								
-								//Calculate the page has been loaded
-								curPage++;	
+
+								ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition );
+
+
+							
 						}
 						
 					});	
@@ -4765,48 +4782,161 @@ theme = ( function ( theme, $, window, document ) {
 					 ---------------------------
 					 Ajax with JSON data
 					 ---------------------------
-					 */ 
-					$( document ).on( 'click', trigger, function( e ) {
+					 */
+					
+					var triggerStr = '';
+					
+					if ( trigger.indexOf( '[' ) >= 0 &&  trigger.indexOf( ']' ) >= 0 ) {
+						triggerStr = JSON.parse( trigger.replace(/([a-zA-Z0-9]+?):/g, '"$1":').replace(/'/g,'"') );
+					} else {
+						triggerStr = trigger;
 
-						e.preventDefault();
+					}
 
-						var $button = $( this );
+					//Whether there are two flip buttons "Previous" and "Next"
+					if ( Object.prototype.toString.call( triggerStr ) =='[object Array]' ) {
 
-						//Hidden button
-						if ( curPage == totalPage ) {
-							$button.addClass( 'hide' );
+						var prevTrigger = triggerStr[0].prev,
+							nextTrigger = triggerStr[1].next;
+						
+						//Add default page number to the button
+						$( nextTrigger ).parent().attr( 'data-cur-page', 1 );
+
+
+						
+						//--------------- Next Button ------------------
+						//Hide the next button 
+						if ( totalPage == 1 ) {
+							$( nextTrigger ).addClass( 'hide' );	
 						}
 
+						$( document ).on( 'click', nextTrigger, function( e ) {
 
-						if ( curPage < totalPage+1 ) {
+							e.preventDefault();
+
+							var $button = $( this ),
+								curPage = $button.parent().attr( 'data-cur-page' );
 							
+							//Add next page number to the button
+							curPage = parseFloat( curPage ) + 1;
+							$button.parent().attr( 'data-cur-page', curPage );
+							
+							//Init button status
+							$( prevTrigger ).removeClass( triggerActive );
+							$( nextTrigger ).removeClass( triggerActive );
+							$( prevTrigger ).removeClass( 'hide' );
+							
+
+
 							// Active this button
 							$button.addClass( triggerActive );		
 
-							
+
 							//Perform dynamic loading
 							if ( customPostData != '' ) {
 								defaultPostData = JSON.parse( '{ "total": '+totalPage+', "per": '+perShow+', "page": '+curPage+', '+customPostData+' }' );
 							} else {
 								defaultPostData = JSON.parse( '{ "total": '+totalPage+', "per": '+perShow+', "page": '+curPage+' }' );
 							}
+
+							ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition );
 							
-							ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method );
+							return false;
+
+
+						});		
+						
+							
+						
+						//----------------- Previous Button ----------------
+						//Hide the prev button 
+						$( prevTrigger ).addClass( 'hide' );
+						
+						$( document ).on( 'click', prevTrigger, function( e ) {
+
+							e.preventDefault();
+
+							var $button = $( this ),
+								curPage = $button.parent().attr( 'data-cur-page' );
+				
+							//Add next page number to the button
+							curPage = parseFloat( curPage ) - 1;
+							$button.parent().attr( 'data-cur-page', curPage );
+							
+							//Init button status
+							$( prevTrigger ).removeClass( triggerActive );
+							$( nextTrigger ).removeClass( triggerActive );
+							$( nextTrigger ).removeClass( 'hide' );
+							
+
+
+							// Active this button
+							$button.addClass( triggerActive );		
+
+
+							//Perform dynamic loading
+							if ( customPostData != '' ) {
+								defaultPostData = JSON.parse( '{ "total": '+totalPage+', "per": '+perShow+', "page": '+curPage+', '+customPostData+' }' );
+							} else {
+								defaultPostData = JSON.parse( '{ "total": '+totalPage+', "per": '+perShow+', "page": '+curPage+' }' );
+							}
+
+							ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition );
+
+							
+							return false;
+
+
+						});						
+
+
+					} else {
+						
+						
+						//Add default page number to the button
+						$( trigger ).attr( 'data-cur-page', 1 );
+
+						//Hide the next button 
+						if ( totalPage == 1 ) {
+							$( trigger ).addClass( 'hide' );	
 						}
 
+						$( document ).on( 'click', trigger, function( e ) {
+
+							e.preventDefault();
+
+							var $button = $( this ),
+								curPage = $button.attr( 'data-cur-page' );
+
+							//Add next page number to the button
+							curPage = parseFloat( curPage ) + 1;
+							$button.attr( 'data-cur-page', curPage );
+
+							
+							// Active this button
+							$button.addClass( triggerActive );		
 
 
+							//Perform dynamic loading
+							if ( customPostData != '' ) {
+								defaultPostData = JSON.parse( '{ "total": '+totalPage+', "per": '+perShow+', "page": '+curPage+', '+customPostData+' }' );
+							} else {
+								defaultPostData = JSON.parse( '{ "total": '+totalPage+', "per": '+perShow+', "page": '+curPage+' }' );
+							}
 
-						//Calculate the page has been loaded
-						curPage++;
+							ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition );
 
-						return false;
+							
+							return false;
 
 
-					});
+						});	
+						
+					}	
 					
+				
 					
-				}
+				}//end if
 				
 			}
 			
@@ -4827,9 +4957,11 @@ theme = ( function ( theme, $, window, document ) {
 		 * @param  {string} triggerActive   - The class name of trigger button actived.
 		 * @param  {string} pushContainer   - This container is used to display the loaded dynamic data.
 		 * @param  {string} method          - The type of request to make, which can be either "POST" or "GET".
+		 * @param  {boolean} addition       - Do or not append to the original content.
 		 * @return {void}                   - The constructor.
 		 */
-		function ajaxLoadInit( ajaxWrapper, defaultPostData, trigger, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method ) {
+		
+		function ajaxLoadInit( ajaxWrapper, defaultPostData, trigger, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition ) {
 
 			var $divRoot         = ajaxWrapper,
 				template         = document.getElementById( template7ID ).innerHTML,
@@ -4860,12 +4992,25 @@ theme = ( function ( theme, $, window, document ) {
 								thisData      = data,
 								html          = compiledTemplate( thisData ),
 								curHtml       = $divRoot.find( pushContainer ).html(),
-								result        = curHtml + html,
-								htmlEl        = $( result );
+								result        = null,
+								htmlEl        = null;
 
 
-							$divRoot.find( pushContainer ).before( htmlEl );
-						
+							
+							
+							//--------- Do or not append to the original content
+							if ( addition ) {
+								result = curHtml + html;
+								htmlEl = $( result );
+								$divRoot.find( pushContainer ).before( htmlEl );
+							} else {
+								result = html;
+								htmlEl = $( result );
+								$divRoot.find( pushContainer ).html( htmlEl );
+							}
+							
+							
+							
 							
 							//--------- jQuery Masonry and Ajax Append Items
 							$( '.custom-gallery' ).each( function() {
@@ -4900,11 +5045,23 @@ theme = ( function ( theme, $, window, document ) {
 
 							//--------- Remove this button
 							$button.removeClass( triggerActive );	
-
-							//--------- Hidden button
-							if ( curPage == totalPage ) {
+	
+							//--------- Hidden button when the page total number is set and does not equal -1 or 9999
+							if ( 
+								curPage == totalPage && 
+								totalPage != 9999 && 
+								totalPage != -1 &&
+								totalPage != 1
+							) {
 								$button.addClass( 'hide' );
 							}		
+							
+							if ( 
+								curPage == 1
+							) {
+								$button.addClass( 'hide' );
+							}			
+							
 
 						} catch ( err ) {
 							console.log( err.message );
