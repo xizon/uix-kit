@@ -1,9 +1,14 @@
 # Uix Kit
 
+<p align = "center">
+    <img src="https://uiux.cc/uix-kit/assets/images/logo.png">
+</p>
+
+---
+
+
 [Demo](https://uiux.cc/uix-kit) | [NPM](https://www.npmjs.com/package/uix-kit)
 
-
-<a href="https://uiux.cc/uix-kit" target="_blank"><img src="https://uiux.cc/wp-content/uploads/2017/12/cover-600x600.jpg" width="300" height="300"></a>
 
 
 ## Table of Contents
