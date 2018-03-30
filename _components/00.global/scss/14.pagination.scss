@@ -17,6 +17,16 @@
 		clear: both;
 	}
 	
+	ul {
+		font-size: 0; /*Fighting the Space Between Inline Block Elements*/
+	}
+	
+	
+	li {
+		display: inline-block;
+		font-size: 1rem;/*Fighting the Space Between Inline Block Elements*/
+	}
+	
 	li,
 	div {
 		

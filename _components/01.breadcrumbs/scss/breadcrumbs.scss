@@ -1,0 +1,96 @@
+/* ====================================================== 
+   <!-- Breadcrumbs --> 
+/* ====================================================== */
+$crumbs-back: #efefef;
+$crumbs-size: 16px;
+
+
+.custom-breadcrumbs {
+
+	ul {
+		list-style: none;
+		display: inline-table;
+		font-size: 0; /*Fighting the Space Between Inline Block Elements*/
+
+		li {
+			display: inline-block;
+			font-size: 1rem;/*Fighting the Space Between Inline Block Elements*/
+
+			a {
+				display: block;
+				background: $crumbs-back;
+				text-align: center;
+				padding: 0 #{$crumbs-size*2} 0 #{$crumbs-size*4};
+				position: relative;
+				text-decoration: none;
+				color: $primary-text-color1;
+				height: #{$crumbs-size*2};
+				line-height: #{$crumbs-size*2};
+				
+				
+				&:hover {
+					background: $highlight-color1;
+					color: #fff;
+					
+					&::after {
+						border-left-color: $highlight-color1;
+					}	
+				}
+
+				&::after {
+					content: "";
+					border-top: $crumbs-size solid transparent;
+					border-bottom: $crumbs-size solid transparent;
+					border-left: $crumbs-size solid $crumbs-back;
+					position: absolute;
+					right: -$crumbs-size;
+					top: 0;
+					z-index: 1;
+					@include transition-default();
+				}
+
+				&::before {
+					content: "";
+					border-top: $crumbs-size solid transparent;
+					border-bottom: $crumbs-size solid transparent;
+					border-left: $crumbs-size solid rgba(0,0,0,.6);
+					position: absolute;
+					left: 0;
+					top: 0;
+					@include transition-default();
+				}
+			}
+
+			&:first-child a {
+				border-top-left-radius: 3px;
+				border-bottom-left-radius: 3px;
+				
+
+				&::before {
+					display: none;
+				}
+				
+			}	
+			
+			&:last-child a {
+				padding-right: #{$crumbs-size*2};
+				border-top-right-radius: 3px;
+				border-bottom-right-radius: 3px;
+				
+
+				&::after {
+					display: none;
+				}
+				
+			}	
+			
+		}
+		
+	}
+	
+}
+
+
+
+		
+		

@@ -427,10 +427,9 @@ gulp.task('scripts', function() {
  * Generate table of contents
  *************************************
  */
-gulp.task('compile', [ 'sass', 'scripts' ], function() {
+gulp.task('compile-scss', [ 'sass' ], function() {
 	
-	var tocCode1 = [],
-		tocCode2 = [];
+	var tocCode1 = [];
 	
     /* reading the file names in the directory */
 	var folderNames = fs.readdir('_components/', (err, list) => {
@@ -440,7 +439,6 @@ gulp.task('compile', [ 'sass', 'scripts' ], function() {
 									for ( var k = 0; k < list.length; k++ ) {
 										
 										generateTOC( list[ k ], 'scss', tocCode1 );
-										generateTOC( list[ k ], 'js', tocCode2 );
 										
 									}
 		
@@ -451,6 +449,54 @@ gulp.task('compile', [ 'sass', 'scripts' ], function() {
 
 	
 });
+
+
+gulp.task('compile-scss-rtl', [ 'styles' ], function() {
+	
+	var tocCode2 = [];
+	
+    /* reading the file names in the directory */
+	var folderNames = fs.readdir('_components/', (err, list) => {
+								  list = list.filter(item => !(/(^|\/)\.[^\/\.]/g).test(item));
+		                        
+                                    //Read the SCSS and JS Files
+									for ( var k = 0; k < list.length; k++ ) {
+										
+										generateTOC( list[ k ], 'scss-rtl', tocCode2 );
+										
+									}
+		
+		
+								 
+								});
+	
+
+	
+});
+
+gulp.task('compile-js', [ 'scripts' ], function() {
+	
+	var tocCode3 = [];
+	
+    /* reading the file names in the directory */
+	var folderNames = fs.readdir('_components/', (err, list) => {
+								  list = list.filter(item => !(/(^|\/)\.[^\/\.]/g).test(item));
+		                        
+                                    //Read the SCSS and JS Files
+									for ( var k = 0; k < list.length; k++ ) {
+										
+										generateTOC( list[ k ], 'js', tocCode3 );
+										
+									}
+		
+		
+								 
+								});
+	
+
+	
+});
+
 
 function generateTOC( folderName, folderType, tocCode ) {
 	
@@ -505,6 +551,12 @@ function generateTOC( folderName, folderType, tocCode ) {
 								.pipe( gulp.dest( globs.cssTar ) );		
 						}
 						
+						if ( folderType == 'scss-rtl' ) {
+							gulp.src( 'examples/assets/css/rtl/uix-kit-rtl.css' )
+								.pipe( replace( '${{TOC}}', curToc ) )
+								.pipe( gulp.dest( globs.cssRTLTar ) );		
+						}
+						
 						if ( folderType == 'js' ) {
 							gulp.src( 'examples/assets/js/uix-kit.js' )
 								.pipe( replace( '${{TOC}}', curToc ) )
@@ -535,14 +587,14 @@ gulp.watch('files-to-watch', ['tasks_to_run']);
 
 //Running gulp and webpack scripts
 gulp.task('default', ['jshint', 'webpack'], function() {
-    gulp.start( [ 'sass', 'scripts', 'styles', 'watch', 'compile' ] );
+    gulp.start( [ 'sass', 'scripts', 'styles', 'watch', 'compile-scss', 'compile-scss-rtl', 'compile-js' ] );
 	
 });
 
 gulp.task('watch', function(){
-	gulp.watch( globs.scssRTL, [ 'styles' ] ); 
-	gulp.watch( globs.scss, [ 'sass', 'compile' ] ); 
-	gulp.watch( globs.js, [ 'scripts', 'compile' ] ); 
+	gulp.watch( globs.scssRTL, [ 'styles', 'compile-scss-rtl' ] ); 
+	gulp.watch( globs.scss, [ 'sass', 'compile-scss' ] ); 
+	gulp.watch( globs.js, [ 'scripts', 'compile-js' ] ); 
 	gulp.watch( globs.htmlFiles, [ 'clean-scripts' ] ); 
 	
 	

@@ -1,5 +1,10 @@
 # Changelog
 
+#### = 1.1.94 (March 30, 2018) =
+
+* New: Add a new module "Breadcrumbs".
+* Fix: Solved an issue that fighting the space between inline block elements.
+
 
 #### = 1.1.93 (March 29, 2018) =
 

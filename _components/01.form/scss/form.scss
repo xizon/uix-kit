@@ -7,7 +7,6 @@ $control-sub-color: #dce4e8;
 $control-focus-color: $primary-text-color1;
 
 
-
 @mixin select-arrow( $top, $right ){
 	/* @include select-arrow( -.875rem, 1rem ); */
 	border: 1px solid $control-sub-color;

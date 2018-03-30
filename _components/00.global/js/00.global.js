@@ -16,6 +16,7 @@ var is_safari   = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/), /*Tes
 	isIE        = !!window.ActiveXObject || "ActiveXObject" in window;     /*Test to 6 ~ 11 (not edge) */
 
 
+
 var theme = (function ( $, window, document ) {
     'use strict';
 
@@ -33,6 +34,7 @@ var theme = (function ( $, window, document ) {
 	}
 	
     $( document ).ready( documentReady );
+	
 	
 	
 	

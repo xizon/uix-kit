@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.93
- * ## Last Update         :  March 29, 2018
+ * ## Version             :  1.1.94
+ * ## Last Update         :  March 30, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -62,40 +62,42 @@
     21. 3rd Party Plugins 
     22. Social Media Icons 
     23. Accordion 
-    24. Button 
-    25. Author Card 
-    26. Counter 
-    27. Dropdown Menu 
-    28. Features 
-    29. Footer Templates 
-    30. Form 
-    31. Form Progress 
-    32. Gallery 
-    33. Custom Core Scripts & Stylesheets 
-    34. Brands List 
-    35. Bulleted List 
-    36. Maintain Aspect Ratio List 
-    37. List of Posts 
-    38. List of Split Posts 
-    39. Side by Side List 
-    40. Fullwidth List of Split 
-    41. Mobile Menu 
-    42. Modal Dialog 
-    43. Multiple Items Carousel 
-    44. Parallax 
-    45. Periodical Scroll 
-    46. Pricing 
-    47. Progress Bar 
-    48. Show More Less 
-    49. Cutom Light Box 
-    50. Single Post 
-    51. Slideshow ( with custom flexslider ) 
-    52. Source Code 
-    53. Tabs 
-    54. Testimonials Carousel 
-    55. Timeline 
-    56. ToolTip 
-    57. WordPress Core 
+    24. Breadcrumbs 
+    25. Button 
+    26. Author Card 
+    27. Counter 
+    28. Dropdown Menu 
+    29. Features 
+    30. Footer Templates 
+    31. Form 
+    32. Form 
+    33. Form Progress 
+    34. Gallery 
+    35. Custom Core Scripts & Stylesheets 
+    36. Brands List 
+    37. Bulleted List 
+    38. Maintain Aspect Ratio List 
+    39. List of Posts 
+    40. List of Split Posts 
+    41. Side by Side List 
+    42. Fullwidth List of Split 
+    43. Mobile Menu 
+    44. Modal Dialog 
+    45. Multiple Items Carousel 
+    46. Parallax 
+    47. Periodical Scroll 
+    48. Pricing 
+    49. Progress Bar 
+    50. Show More Less 
+    51. Cutom Light Box 
+    52. Single Post 
+    53. Slideshow ( with custom flexslider ) 
+    54. Source Code 
+    55. Tabs 
+    56. Testimonials Carousel 
+    57. Timeline 
+    58. ToolTip 
+    59. WordPress Core 
 
 
 
@@ -149,7 +151,8 @@
     color: #fff;
 }
 
-html, body {
+html,
+body {
     width: 100%;
     height: 100%;
 }
@@ -190,25 +193,27 @@ body {
     outline: none !important;
 }
 
-p, ul, ol, pre, table, blockquote {
+p,
+ul,
+ol,
+pre,
+table,
+blockquote {
     margin-bottom: 1.421875rem;
 }
 
-@media all and (max-width: 768px) {
-    p {
-        margin-bottom: 1.421875rem;
-    }
-}
-
-ul, ol {
+ul,
+ol {
     list-style: none;
 }
 
-ul > li, ol > li {
+ul > li,
+ol > li {
     margin-bottom: 0;
 }
 
-ul.list-normal, ol.list-normal {
+ul.list-normal,
+ol.list-normal {
     display: block;
     list-style-type: disc;
     margin: 1.421875rem;
@@ -223,11 +228,13 @@ ul.list-normal, ol.list-normal {
     padding-left: 0.875rem;
 }
 
-ul.list-normal, .list-normal ul {
+ul.list-normal,
+.list-normal ul {
     list-style-type: disc;
 }
 
-ol.list-normal, .list-normal ol {
+ol.list-normal,
+.list-normal ol {
     list-style-type: decimal;
 }
 
@@ -318,12 +325,14 @@ table.table-normal th {
     padding: 0.6875rem;
 }
 
-.table-normal table, table.table-normal {
+.table-normal table,
+table.table-normal {
     border-collapse: collapse;
     width: 100%;
 }
 
-.table-normal table th, table.table-normal th {
+.table-normal table th,
+table.table-normal th {
     text-align: left;
 }
 
@@ -1267,6 +1276,8 @@ section.site-google-map,
     float: left;
     margin: 0;
   /* Required*/
+    font-size: 0;
+  /*Fighting the Space Between Inline Block Elements*/
   /*---- Sub Menu ----*/;
 }
 
@@ -1291,7 +1302,9 @@ section.site-google-map,
     margin-right: 1.6875rem;
     padding-bottom: 1.421875rem;
     white-space: nowrap;
-  /* Required*/;
+  /* Required*/
+    font-size: 0.75rem;
+  /*Fighting the Space Between Inline Block Elements*/;
 }
 
 .menu-container:not(.mobile) ul.menu-main > li.active, .menu-container:not(.mobile) ul.menu-main > li.current-menu-item, .menu-container:not(.mobile) ul.menu-main > li:hover {
@@ -1815,6 +1828,17 @@ section.site-google-map,
     clear: both;
 }
 
+.pagination-container ul {
+    font-size: 0;
+  /*Fighting the Space Between Inline Block Elements*/;
+}
+
+.pagination-container li {
+    display: inline-block;
+    font-size: 1rem;
+  /*Fighting the Space Between Inline Block Elements*/;
+}
+
 .pagination-container li,
 .pagination-container div {
     display: inline-block;
@@ -1906,6 +1930,8 @@ section.site-google-map,
   /* @include transition-default(); */
     transition: all 0.3s ease;
     margin: 0;
+    font-size: 0;
+  /*Fighting the Space Between Inline Block Elements*/;
 }
 
 .nav-filters ul li {
@@ -1914,6 +1940,8 @@ section.site-google-map,
     transition: 0.2s linear;
     margin-right: 0.203125rem;
     opacity: .5;
+    font-size: 1rem;
+  /*Fighting the Space Between Inline Block Elements*/;
 }
 
 .nav-filters ul li::after {
@@ -2981,6 +3009,87 @@ ul.entry-meta {
     width: calc(100% - 2rem);
     padding: 1rem;
     font-size: 0.875rem;
+    display: none;
+}
+
+/* ====================================================== 
+   <!-- Breadcrumbs --> 
+/* ====================================================== */
+.custom-breadcrumbs ul {
+    list-style: none;
+    display: inline-table;
+    font-size: 0;
+  /*Fighting the Space Between Inline Block Elements*/;
+}
+
+.custom-breadcrumbs ul li {
+    display: inline-block;
+    font-size: 1rem;
+  /*Fighting the Space Between Inline Block Elements*/;
+}
+
+.custom-breadcrumbs ul li a {
+    display: block;
+    background: #efefef;
+    text-align: center;
+    padding: 0 32px 0 64px;
+    position: relative;
+    text-decoration: none;
+    color: #212121;
+    height: 32px;
+    line-height: 32px;
+}
+
+.custom-breadcrumbs ul li a:hover {
+    background: #EC5E79;
+    color: #fff;
+}
+
+.custom-breadcrumbs ul li a:hover::after {
+    border-left-color: #EC5E79;
+}
+
+.custom-breadcrumbs ul li a::after {
+    content: "";
+    border-top: 16px solid transparent;
+    border-bottom: 16px solid transparent;
+    border-left: 16px solid #efefef;
+    position: absolute;
+    right: -16px;
+    top: 0;
+    z-index: 1;
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+}
+
+.custom-breadcrumbs ul li a::before {
+    content: "";
+    border-top: 16px solid transparent;
+    border-bottom: 16px solid transparent;
+    border-left: 16px solid rgba(0, 0, 0, 0.6);
+    position: absolute;
+    left: 0;
+    top: 0;
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+}
+
+.custom-breadcrumbs ul li:first-child a {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.custom-breadcrumbs ul li:first-child a::before {
+    display: none;
+}
+
+.custom-breadcrumbs ul li:last-child a {
+    padding-right: 32px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.custom-breadcrumbs ul li:last-child a::after {
     display: none;
 }
 
@@ -8773,6 +8882,175 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 }
 
 /* ====================================================== 
+    <!-- Tabs -->      
+/* ====================================================== */
+.custom-tabs {
+  /* 
+	 ---------------------------
+	 Tab Normal Effect
+	 ---------------------------
+	 */
+  /* 
+	 ---------------------------
+	 Tab Rotation Effect
+	 ---------------------------
+	 */;
+}
+
+.custom-tabs:not(.rotation) {
+  /* @include outer-shadow(); */
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+}
+
+.custom-tabs:not(.rotation) .marker {
+    background: #212121;
+    height: 2px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    transition: .1s ease-in-out;
+}
+
+.custom-tabs .content {
+    display: none;
+    padding: 1.3125rem;
+    text-align: left;
+}
+
+.custom-tabs .content.active {
+    display: block;
+}
+
+.custom-tabs .custom-tabs-ul-container > ul > li {
+    position: relative;
+    display: block;
+    transition: .1s ease-in-out;
+    list-style: none;
+    float: left;
+    box-shadow: inset 1px 0px 0px 0px #e6e6e6;
+    background: #f7f7f7;
+    min-width: 7.5rem;
+}
+
+.custom-tabs .custom-tabs-ul-container > ul > li > a {
+    position: relative;
+    padding: 0.625rem 1rem;
+    display: block;
+    text-align: center;
+}
+
+.custom-tabs .custom-tabs-ul-container > ul > li.active {
+    background: #fff;
+}
+
+.custom-tabs .custom-tabs-ul-container > ul:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.custom-tabs.custom-tabs-center {
+    box-shadow: none;
+}
+
+.custom-tabs.custom-tabs-center .custom-tabs-ul-container > ul {
+    font-size: 0;
+  /*Fighting the Space Between Inline Block Elements*/
+    display: block;
+    width: 100%;
+    text-align: center;
+  /*require*/
+  /* @include outer-shadow(); */
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+}
+
+.custom-tabs.custom-tabs-center .custom-tabs-ul-container > ul li {
+    font-size: 1rem;
+  /*Fighting the Space Between Inline Block Elements*/
+    display: inline-block;
+  /*require*/
+    float: none;
+}
+
+.custom-tabs.rotation {
+    height: 400px;
+}
+
+.custom-tabs.rotation .content {
+    position: absolute;
+    top: 0;
+    left: 400px;
+    width: 300px;
+  /* @include outer-shadow(); */
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+}
+
+.custom-tabs.rotation .custom-tabs-ul-container {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    margin: 0;
+}
+
+.custom-tabs.rotation .custom-tabs-ul-container > ul {
+    position: relative;
+    display: block;
+    width: 300px;
+    height: 300px;
+}
+
+.custom-tabs.rotation .custom-tabs-ul-container > ul > li {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: none;
+    box-shadow: none;
+    transition: none;
+}
+
+.custom-tabs.rotation .custom-tabs-ul-container > ul > li > a {
+    width: 80px;
+    height: 80px;
+    line-height: 60px;
+    background: #fff;
+    border-radius: 100%;
+  /* @include outer-shadow(); */
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+}
+
+.custom-tabs.rotation .custom-tabs-ul-container > ul > li.active > a {
+    background: #212121;
+    color: #fff;
+}
+
+@media all and (max-width: 768px) {
+    .custom-tabs {
+    /* Tab Rotation Effect */;
+    }
+
+    .custom-tabs:not(.rotation) li {
+        width: 100% !important;
+    }
+
+    .custom-tabs.rotation {
+        height: 400px;
+    }
+
+    .custom-tabs.rotation .content {
+        position: relative;
+        left: 0;
+        width: 100%;
+    }
+
+    .custom-tabs.rotation .custom-tabs-ul-container {
+        margin-top: 50px;
+        margin-left: 120px;
+    }
+}
+
+/* ====================================================== 
    <!-- Source Code -->         
 /* ====================================================== */
 /* Pretty printing styles. Used with prettify.js. */
@@ -9048,175 +9326,6 @@ li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 {
     content: "\f067";
     color: #fff;
     font-size: 1rem;
-}
-
-/* ====================================================== 
-    <!-- Tabs -->      
-/* ====================================================== */
-.custom-tabs {
-  /* 
-	 ---------------------------
-	 Tab Normal Effect
-	 ---------------------------
-	 */
-  /* 
-	 ---------------------------
-	 Tab Rotation Effect
-	 ---------------------------
-	 */;
-}
-
-.custom-tabs:not(.rotation) {
-  /* @include outer-shadow(); */
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
-}
-
-.custom-tabs:not(.rotation) .marker {
-    background: #212121;
-    height: 2px;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-    transition: .1s ease-in-out;
-}
-
-.custom-tabs .content {
-    display: none;
-    padding: 1.3125rem;
-    text-align: left;
-}
-
-.custom-tabs .content.active {
-    display: block;
-}
-
-.custom-tabs .custom-tabs-ul-container > ul > li {
-    position: relative;
-    display: block;
-    transition: .1s ease-in-out;
-    list-style: none;
-    float: left;
-    box-shadow: inset 1px 0px 0px 0px #e6e6e6;
-    background: #f7f7f7;
-    min-width: 7.5rem;
-}
-
-.custom-tabs .custom-tabs-ul-container > ul > li > a {
-    position: relative;
-    padding: 0.625rem 1rem;
-    display: block;
-    text-align: center;
-}
-
-.custom-tabs .custom-tabs-ul-container > ul > li.active {
-    background: #fff;
-}
-
-.custom-tabs .custom-tabs-ul-container > ul:after {
-    content: '';
-    display: block;
-    clear: both;
-}
-
-.custom-tabs.custom-tabs-center {
-    box-shadow: none;
-}
-
-.custom-tabs.custom-tabs-center .custom-tabs-ul-container > ul {
-    font-size: 0;
-  /*Fighting the Space Between Inline Block Elements*/
-    display: block;
-    width: 100%;
-    text-align: center;
-  /*require*/
-  /* @include outer-shadow(); */
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
-}
-
-.custom-tabs.custom-tabs-center .custom-tabs-ul-container > ul li {
-    font-size: 1rem;
-  /*Fighting the Space Between Inline Block Elements*/
-    display: inline-block;
-  /*require*/
-    float: none;
-}
-
-.custom-tabs.rotation {
-    height: 400px;
-}
-
-.custom-tabs.rotation .content {
-    position: absolute;
-    top: 0;
-    left: 400px;
-    width: 300px;
-  /* @include outer-shadow(); */
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
-}
-
-.custom-tabs.rotation .custom-tabs-ul-container {
-    width: 300px;
-    height: 300px;
-    position: relative;
-    margin: 0;
-}
-
-.custom-tabs.rotation .custom-tabs-ul-container > ul {
-    position: relative;
-    display: block;
-    width: 300px;
-    height: 300px;
-}
-
-.custom-tabs.rotation .custom-tabs-ul-container > ul > li {
-    position: absolute;
-    width: 80px;
-    height: 80px;
-    background: none;
-    box-shadow: none;
-    transition: none;
-}
-
-.custom-tabs.rotation .custom-tabs-ul-container > ul > li > a {
-    width: 80px;
-    height: 80px;
-    line-height: 60px;
-    background: #fff;
-    border-radius: 100%;
-  /* @include outer-shadow(); */
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
-}
-
-.custom-tabs.rotation .custom-tabs-ul-container > ul > li.active > a {
-    background: #212121;
-    color: #fff;
-}
-
-@media all and (max-width: 768px) {
-    .custom-tabs {
-    /* Tab Rotation Effect */;
-    }
-
-    .custom-tabs:not(.rotation) li {
-        width: 100% !important;
-    }
-
-    .custom-tabs.rotation {
-        height: 400px;
-    }
-
-    .custom-tabs.rotation .content {
-        position: relative;
-        left: 0;
-        width: 100%;
-    }
-
-    .custom-tabs.rotation .custom-tabs-ul-container {
-        margin-top: 50px;
-        margin-left: 120px;
-    }
 }
 
 /* ====================================================== 

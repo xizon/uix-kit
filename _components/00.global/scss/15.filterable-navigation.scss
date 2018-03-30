@@ -8,6 +8,7 @@
 	ul {
 		@include transition-default();
 		margin: 0;
+		font-size: 0; /*Fighting the Space Between Inline Block Elements*/
 
 		li {
 			font-style: italic;
@@ -15,6 +16,7 @@
 			transition: 0.2s linear;
 			margin-right: 0.203125rem;
 			opacity: .5;
+			font-size: 1rem; /*Fighting the Space Between Inline Block Elements*/
 
 			&::after {
 				content: '/';

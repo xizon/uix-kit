@@ -11,8 +11,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.93
- * ## Last Update         :  March 29, 2018
+ * ## Version             :  1.1.94
+ * ## Last Update         :  March 30, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -21,8 +21,21 @@
  * ## Released under the MIT license.
  */
 
+/*
+
+	TABLE OF CONTENTS
+	---------------------------
+	
+    1. Basic 
+    2. Basic 
+    3. Helper Classes 
+    4. Basic Layout Styles 
+
+
+
+*/
 /* ====================================================== 
-   1. Basic                   
+   <!-- Basic -->                  
 /* ====================================================== */
 body {
     direction: rtl;
@@ -65,7 +78,7 @@ blockquote:before {
 }
 
 /* ====================================================== 
-   2. Helper Classes                                
+   <!-- Helper Classes -->                                 
 /* ====================================================== */
 .fl {
     float: right;
@@ -84,7 +97,7 @@ blockquote:before {
 }
 
 /* ====================================================== 
-   5. Basic Layout Styles                                        
+   <!-- Basic Layout Styles -->                                      
 /* ====================================================== */
 /* 5.4 Seamless Grid */
 .seamless-grid-container [class*='seamless-col-'] {
@@ -142,7 +155,7 @@ blockquote:before {
 }
 
 /* ====================================================== 
-   6. Navigation Area                                    
+   <!-- Navigation Area -->                                      
 /* ====================================================== */
 .menu-container:not(.mobile) {
     float: left;
@@ -222,7 +235,7 @@ blockquote:before {
 }
 
 /* ====================================================== 
-   7. Header Area                                        
+   <!-- Header Area -->                                          
 /* ====================================================== */
 .header-area {
     left: auto;
@@ -230,14 +243,14 @@ blockquote:before {
 }
 
 /* ====================================================== 
-   8. Brand                         
+   <!-- Brand -->                         
 /* ====================================================== */
 .brand {
     float: right;
 }
 
 /* ====================================================== 
-   15. Filterable Navigation                 
+   <!-- Filterable Navigation -->                     
 /* ====================================================== */
 .nav-filters ul li {
     margin-right: auto;
@@ -254,7 +267,7 @@ blockquote:before {
 }
 
 /* ====================================================== 
-   16. Sidebar            
+   <!-- Sidebar -->                  
 /* ====================================================== */
 .sidebar-container {
     padding-left: auto;
@@ -297,7 +310,7 @@ blockquote:before {
 }
 
 /* ====================================================== 
-   17. Search          
+   <!-- Search -->              
 /* ====================================================== */
 .search-box .wp-search-submit {
     right: auto;
@@ -305,7 +318,7 @@ blockquote:before {
 }
 
 /* ====================================================== 
-   20. Comments      
+   <!-- Comments -->         
 /* ====================================================== */
 .comment-avatar {
     float: right;
@@ -337,14 +350,14 @@ blockquote:before {
 }
 
 /* ====================================================== 
-   Author Card   
+    <!-- Author Card -->    
 /* ====================================================== */
 .author-card-final {
     text-align: left;
 }
 
 /* ====================================================== 
-   Dropdown Menu
+   <!-- Dropdown Menu -->   
 /* ====================================================== */
 /* Do not use <a> tag */
 .custom-dropdown-trigger > ul {
@@ -358,7 +371,7 @@ blockquote:before {
 }
 
 /* ====================================================== 
-   Form                                     
+    <!-- Form -->                                       
 /* ====================================================== */
 .controls {
     text-align: right;
@@ -392,14 +405,14 @@ blockquote:before {
 }
 
 /* ====================================================== 
-   Brands List
+   <!-- Brands List -->       
 /* ====================================================== */
 .list-brands li {
     float: right;
 }
 
 /* ====================================================== 
-   Bulleted List
+   <!-- Bulleted List -->
 /* ====================================================== */
 .list-bullet i {
     margin-right: auto;
@@ -407,7 +420,7 @@ blockquote:before {
 }
 
 /* ====================================================== 
-   Maintain Aspect Ratio List
+   <!-- Maintain Aspect Ratio List -->
 /* ====================================================== */
 @media all and (max-width: 768px) {
     .list-maintain-aspect-ratio {
@@ -421,7 +434,7 @@ blockquote:before {
 }
 
 /* ====================================================== 
-   Side by Side List
+   <!-- Side by Side List -->
 /* ====================================================== */
 dl.list-side-by-side dt {
     float: right;
@@ -437,7 +450,7 @@ dl.list-side-by-side dd {
 }
 
 /* ====================================================== 
-   Mobile Menu
+   <!-- Mobile Menu -->
 /* ====================================================== */
 /* Mobile Menu Toggle */
 .menu-mobile-toggle {
@@ -491,7 +504,7 @@ dl.list-side-by-side dd {
 }
 
 /* ====================================================== 
-   Slideshow ( with custom flexslider )
+   <!-- Slideshow ( with custom flexslider ) -->
 /* ====================================================== */
 .flexslider,
 .custom-theme-flexslider {
@@ -499,7 +512,7 @@ dl.list-side-by-side dd {
 }
 
 /* ====================================================== 
-   Source Code        
+    <!-- Source Code -->       
 /* ====================================================== */
 /* Pretty printing styles. Used with prettify.js. */
 pre.prettyprint {
@@ -513,7 +526,28 @@ pre.prettyprint {
 }
 
 /* ====================================================== 
-   ToolTip
+   <!-- ToolTip -->       
+/* ====================================================== */
+.custom-tip > div {
+    margin-left: auto;
+    margin-right: 1rem;
+}
+
+/*# sourceMappingURL=uix-kit-rtl.css.map */
+=uix-kit-rtl.css.map */
+ith prettify.js. */
+pre.prettyprint {
+    direction: ltr;
+}
+
+/* Source Code Button */
+#view-source {
+    right: auto;
+    left: 20px;
+}
+
+/* ====================================================== 
+   <!-- ToolTip -->       
 /* ====================================================== */
 .custom-tip > div {
     margin-left: auto;
