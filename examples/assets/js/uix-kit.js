@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.95
+ * ## Version             :  1.1.96
  * ## Last Update         :  April 2, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -38,17 +38,17 @@
     13. Accordion 
     14. Counter 
     15. Dynamic Drop Down List from JSON 
-    16. Form 
-    17. Form Progress 
-    18. Gallery 
+    16. Form Progress 
+    17. Gallery 
+    18. Form 
     19. Custom Core Scripts & Stylesheets 
     20. Bulleted List 
     21. Posts List With Ajax 
     22. Fullwidth List of Split 
     23. Mobile Menu 
     24. Modal Dialog 
-    25. Mousewheel Interaction 
-    26. Multiple Items Carousel 
+    25. Multiple Items Carousel 
+    26. Mousewheel Interaction 
     27. Navigation Highlighting 
     28. Parallax 
     29. Periodical Scroll 
@@ -7279,8 +7279,44 @@ theme = ( function ( theme, $, window, document ) {
 			
         }
 			
+		
+		
+		/*
+		* Method that updates children slides
+		* fortunately, since all the children are not animating,
+		* they will only update if the main flexslider updates. 
+		 *
+		 * @param  {number} slideNumber          - The current slider index.
+		 * @param  {object} childrenSlidesObj    - Target slider.
+		 * @param  {boolean} loop                - Gives the slider a seamless infinite loop.
+		 * @param  {number} speed                - Set the speed of animations, in milliseconds.
+		 * @param  {number} timing               - Set the speed of the slideshow cycling, in milliseconds.
+		 * @return {void}                        - The constructor.
+		 */
+		function updateChildrenSlides( slideNumber, childrenSlidesObj, loop, speed, timing ) {
+			
+			/** 
+			* Create the children flexsliders. Must be array of jquery objects with the
+			* flexslider data. Easiest way is to place selector group in a var.
+			*/
+			var childrenSlides = $( childrenSlidesObj ).flexslider({
+				slideshow         : false, // Remove the animations
+				controlNav        : false, // Remove the controls
+				animationLoop     : loop,
+				animationSpeed    : speed,
+				slideshowSpeed    : timing
+			}); 
 
-		/* 
+			
+			// Iterate through the children slides but not past the max
+			for ( var i=0; i < childrenSlides.length; i++ ) {
+				// Run the animate method on the child slide
+				$( childrenSlides[i] ).data( 'flexslider' ).flexAnimate( slideNumber );
+			}   
+		}
+		
+
+		/*! 
 		 ---------------------------
          Initialize slideshow
 		 ---------------------------
@@ -7304,7 +7340,8 @@ theme = ( function ( theme, $, window, document ) {
 				dataCountCur    = $this.data( 'mycountcur' ),
 				customConID     = $this.data( 'mycontrols' ),
 				dataShowItems   = $this.data( 'myshow' ),
-				dataParallax    = $this.data( 'myparallax' );
+				dataParallax    = $this.data( 'myparallax' ),
+				dataSync        = $this.data( 'mysync' );
 			
 			// Custom Controls
 			var myControlsContainer, myCustomDirectionNav;
@@ -7333,7 +7370,7 @@ theme = ( function ( theme, $, window, document ) {
 			if( typeof dataCountTotal === typeof undefined ) dataCountTotal = false;
 			if( typeof dataCountCur === typeof undefined ) dataCountCur = false;
 			if( typeof dataParallax === typeof undefined ) dataParallax = false;
-			
+		
 			
 			//Make slider image draggable 
 			if ( dataDrag ) slidesExDraggable( $this );
@@ -7363,11 +7400,10 @@ theme = ( function ( theme, $, window, document ) {
 				my_minItems  = dataShowItems;
 				my_maxItems  = dataShowItems;
 				
-				
 				if ( windowWidth <= 768 ) {
 					my_minItems  = 1;
 					my_maxItems  = 1;	
-				}	
+				}
 				
 			} 
 			
@@ -7397,23 +7433,32 @@ theme = ( function ( theme, $, window, document ) {
 				controlsContainer : myControlsContainer,
 				customDirectionNav: myCustomDirectionNav,
 				
+				
 				//Fires when the slider loads the first slide.
-				start             : function( slider ) {
+				start: function( slider ) {
 					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, 'start' );
 				},
 				
 				//Fires asynchronously with each slider animation.
-				before             : function( slider ) {
+				before: function( slider ) {
 					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, 'before' );
+					
+					// Call the updateChildrenSlides which itterates through all children slides 
+					if( typeof dataSync != typeof undefined && dataSync != '' && dataSync != 0 ) {
+						updateChildrenSlides( slider.animatingTo, dataSync, dataLoop, dataSpeed, dataTiming );
+						
+					}
+					
+
 				},
 				
 				//Fires after each slider animation completes.
-				after              : function( slider ) {
+				after: function( slider ) {
 					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, 'after' );
 				},
 				
 				//Fires when the slider reaches the last slide (asynchronous).
-				end                : function( slider ) {
+				end: function( slider ) {
 					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, 'end' );
 				}
 			});
@@ -7424,7 +7469,7 @@ theme = ( function ( theme, $, window, document ) {
 		
 
 		
-		/* 
+		/*! 
 		 ---------------------------
          Check grid size on resize event
 		 ---------------------------
@@ -7462,6 +7507,7 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
+
 
 
 

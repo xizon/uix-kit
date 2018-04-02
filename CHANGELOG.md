@@ -1,5 +1,11 @@
 # Changelog
 
+#### = 1.1.96 (April 2, 2018) =
+
+* New: Extend the module "Slideshow" that add a new demo "Sync Multiple Sliders".
+
+
+
 #### = 1.1.95 (March 30, 2018) =
 
 * New: Extend the module "Bulleted List".

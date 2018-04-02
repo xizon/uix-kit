@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.95
+ * ## Version             :  1.1.96
  * ## Last Update         :  April 2, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -39,8 +39,8 @@
 	TABLE OF CONTENTS
 	---------------------------
 	
-    1. Basic 
-    2. Helper Classes 
+    1. Helper Classes 
+    2. Basic 
     3. Typography 
     4. Spacing 
     5. Basic Layout Styles 
@@ -70,31 +70,33 @@
     29. Features 
     30. Footer Templates 
     31. Form 
-    32. Form 
-    33. Form Progress 
-    34. Gallery 
-    35. Custom Core Scripts & Stylesheets 
-    36. Brands List 
-    37. Bulleted List 
-    38. Maintain Aspect Ratio List 
-    39. List of Posts 
-    40. List of Split Posts 
-    41. Side by Side List 
-    42. Fullwidth List of Split 
-    43. Mobile Menu 
-    44. Modal Dialog 
-    45. Multiple Items Carousel 
-    46. Parallax 
-    47. Periodical Scroll 
-    48. Pricing 
-    49. Progress Bar 
-    50. Show More Less 
-    51. Cutom Light Box 
-    52. Single Post 
-    53. Slideshow ( with custom flexslider ) 
-    54. Source Code 
-    55. Tabs 
-    56. Testimonials Carousel 
+    32. Form Progress 
+    33. Gallery 
+    34. Custom Core Scripts & Stylesheets 
+    35. Brands List 
+    36. Bulleted List 
+    37. Maintain Aspect Ratio List 
+    38. List of Posts 
+    39. List of Split Posts 
+    40. Side by Side List 
+    41. Fullwidth List of Split 
+    42. Mobile Menu 
+    43. Modal Dialog 
+    44. Multiple Items Carousel 
+    45. Parallax 
+    46. Periodical Scroll 
+    47. Pricing 
+    48. Progress Bar 
+    49. Show More Less 
+    50. Cutom Light Box 
+    51. Single Post 
+    52. Slideshow ( with custom flexslider ) 
+    53. Source Code 
+    54. Tabs 
+    55. Testimonials Carousel 
+    56. Timeline 
+    57. ToolTip 
+    58. WordPress Core 
 
 
 
@@ -5959,6 +5961,162 @@ dl.list-side-by-side:after {
 }
 
 /* ====================================================== 
+       <!-- Periodical Scroll -->      
+/* ====================================================== */
+.custom-periodical-scroll {
+    position: relative;
+}
+
+.custom-periodical-scroll ul {
+    display: block;
+    overflow: hidden;
+    height: 0;
+}
+
+.custom-periodical-scroll ul li {
+    display: block;
+}
+
+.custom-periodical-scroll ul li span {
+    display: block;
+  /* @include icontxt-gradient(); */
+  /* The font is the default color when the browser is IE */
+    background: linear-gradient(to right, #EC5E79 0%, #E8588C 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 2px;
+}
+
+/* ====================================================== 
+   <!-- Pricing --> 
+/* ====================================================== */
+.custom-price {
+    text-align: center;
+    position: relative;
+}
+
+.custom-price:before {
+    padding-top: 2.25rem;
+}
+
+.custom-price:after {
+    padding-bottom: 0;
+}
+
+.custom-price ul,
+.custom-price ol {
+  /*default*/
+    display: block;
+    list-style-type: disc;
+    margin-top: 0.875rem;
+    margin-bottom: 0.875rem;
+    margin-left: 0;
+    margin-right: 0;
+    padding-bottom: 1.7rem;
+  /*custom*/
+    line-height: 2;
+}
+
+.custom-price li {
+  /*default*/
+    list-style: none;
+}
+
+.custom-price li:before {
+    font-family: 'FontAwesome';
+    content: "\f00c";
+    display: inline-block;
+    margin-right: .4rem;
+}
+
+.custom-price .hr {
+    margin: 1.5rem 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.custom-price .border-hover {
+    margin-bottom: 1.5rem;
+}
+
+.custom-price .border {
+    padding-top: 0.875rem;
+    position: relative;
+    box-shadow: 0 22px 40px 0 #eef4fc;
+    border-radius: 10px;
+    background: #fff;
+    transition: .1s ease-in-out;
+}
+
+.custom-price .border:hover {
+    box-shadow: 0 31px 32px 0 #cbdfee;
+}
+
+.custom-price .level {
+    font-size: 0.7rem;
+    text-align: center;
+    text-indent: 0.875rem;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 3;
+    font-weight: 700;
+    opacity: 0.35;
+}
+
+.custom-price .num {
+    color: #EC5E79;
+    font-weight: 700;
+    font-size: 3.5rem;
+    margin-top: 0.875rem;
+}
+
+.custom-price .currency {
+    font-size: 0.875rem;
+}
+
+.custom-price .period {
+    font-size: 12px;
+}
+
+.custom-price .period:before {
+    content: '/';
+    padding-right: .1rem;
+}
+
+.custom-price .detail {
+    text-align: left;
+    padding-bottom: 1.125rem;
+    padding-left: 1rem;
+    font-size: 0.875rem;
+}
+
+.custom-price .excerpt {
+    height: auto;
+    padding: 0 0.875rem;
+    font-size: 0.875rem;
+    opacity: 0.65;
+}
+
+.custom-price .excerpt p {
+    line-height: 1.5;
+}
+
+.custom-price .bg {
+    padding-top: 1.875rem;
+    height: auto;
+}
+
+.custom-price .border.active .num,
+.custom-price .border.active .excerpt,
+.custom-price .border.active .detail,
+.custom-price .border.active .level {
+    color: #fff !important;
+}
+
+.custom-price .border.active .excerpt {
+    opacity: 0.65;
+}
+
+/* ====================================================== 
    <!-- Progress Bar --> 
 /* ====================================================== */
 /* 
@@ -7888,162 +8046,6 @@ dl.list-side-by-side:after {
 }
 
 /* ====================================================== 
-       <!-- Periodical Scroll -->      
-/* ====================================================== */
-.custom-periodical-scroll {
-    position: relative;
-}
-
-.custom-periodical-scroll ul {
-    display: block;
-    overflow: hidden;
-    height: 0;
-}
-
-.custom-periodical-scroll ul li {
-    display: block;
-}
-
-.custom-periodical-scroll ul li span {
-    display: block;
-  /* @include icontxt-gradient(); */
-  /* The font is the default color when the browser is IE */
-    background: linear-gradient(to right, #EC5E79 0%, #E8588C 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    letter-spacing: 2px;
-}
-
-/* ====================================================== 
-   <!-- Pricing --> 
-/* ====================================================== */
-.custom-price {
-    text-align: center;
-    position: relative;
-}
-
-.custom-price:before {
-    padding-top: 2.25rem;
-}
-
-.custom-price:after {
-    padding-bottom: 0;
-}
-
-.custom-price ul,
-.custom-price ol {
-  /*default*/
-    display: block;
-    list-style-type: disc;
-    margin-top: 0.875rem;
-    margin-bottom: 0.875rem;
-    margin-left: 0;
-    margin-right: 0;
-    padding-bottom: 1.7rem;
-  /*custom*/
-    line-height: 2;
-}
-
-.custom-price li {
-  /*default*/
-    list-style: none;
-}
-
-.custom-price li:before {
-    font-family: 'FontAwesome';
-    content: "\f00c";
-    display: inline-block;
-    margin-right: .4rem;
-}
-
-.custom-price .hr {
-    margin: 1.5rem 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.custom-price .border-hover {
-    margin-bottom: 1.5rem;
-}
-
-.custom-price .border {
-    padding-top: 0.875rem;
-    position: relative;
-    box-shadow: 0 22px 40px 0 #eef4fc;
-    border-radius: 10px;
-    background: #fff;
-    transition: .1s ease-in-out;
-}
-
-.custom-price .border:hover {
-    box-shadow: 0 31px 32px 0 #cbdfee;
-}
-
-.custom-price .level {
-    font-size: 0.7rem;
-    text-align: center;
-    text-indent: 0.875rem;
-    text-transform: uppercase;
-    position: relative;
-    z-index: 3;
-    font-weight: 700;
-    opacity: 0.35;
-}
-
-.custom-price .num {
-    color: #EC5E79;
-    font-weight: 700;
-    font-size: 3.5rem;
-    margin-top: 0.875rem;
-}
-
-.custom-price .currency {
-    font-size: 0.875rem;
-}
-
-.custom-price .period {
-    font-size: 12px;
-}
-
-.custom-price .period:before {
-    content: '/';
-    padding-right: .1rem;
-}
-
-.custom-price .detail {
-    text-align: left;
-    padding-bottom: 1.125rem;
-    padding-left: 1rem;
-    font-size: 0.875rem;
-}
-
-.custom-price .excerpt {
-    height: auto;
-    padding: 0 0.875rem;
-    font-size: 0.875rem;
-    opacity: 0.65;
-}
-
-.custom-price .excerpt p {
-    line-height: 1.5;
-}
-
-.custom-price .bg {
-    padding-top: 1.875rem;
-    height: auto;
-}
-
-.custom-price .border.active .num,
-.custom-price .border.active .excerpt,
-.custom-price .border.active .detail,
-.custom-price .border.active .level {
-    color: #fff !important;
-}
-
-.custom-price .border.active .excerpt {
-    opacity: 0.65;
-}
-
-/* ====================================================== 
    <!-- Show More Less --> 
 /* ====================================================== */
 .custom-more-text-link > span:nth-child(2) {
@@ -8373,6 +8375,20 @@ dl.list-side-by-side:after {
     .custom-lightbox-overlay.no-fixed .lb-container.custom .html > .lb-box {
         width: auto;
     }
+}
+
+/* ====================================================== 
+     <!-- Single Post -->        
+/* ====================================================== */
+/* Post edit link */
+.post-edit-link {
+    display: inline-block;
+    background: #F9F9F9;
+    padding: 0.175rem 0.4375rem;
+    border: 1px solid #DDDDDD;
+    border-radius: 2px;
+    text-decoration: none !important;
+    margin-top: 1.09375rem;
 }
 
 /* ====================================================== 
@@ -8865,20 +8881,6 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 }
 
 /* ====================================================== 
-     <!-- Single Post -->        
-/* ====================================================== */
-/* Post edit link */
-.post-edit-link {
-    display: inline-block;
-    background: #F9F9F9;
-    padding: 0.175rem 0.4375rem;
-    border: 1px solid #DDDDDD;
-    border-radius: 2px;
-    text-decoration: none !important;
-    margin-top: 1.09375rem;
-}
-
-/* ====================================================== 
    <!-- Source Code -->         
 /* ====================================================== */
 /* Pretty printing styles. Used with prettify.js. */
@@ -9157,110 +9159,6 @@ li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 {
 }
 
 /* ====================================================== 
-   <!-- Testimonials Carousel -->  
-/* ====================================================== */
-.custom-testimonials-count {
-    font-size: 0.75rem;
-    letter-spacing: 1px;
-    text-align: center;
-}
-
-.custom-testimonials {
-  /* Required */
-    overflow: hidden;
-}
-
-.custom-testimonials .slides {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.custom-testimonials .slides li {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    cursor: move;
-}
-
-.custom-testimonials .content {
-    position: relative;
-    margin: 0 auto;
-    max-width: calc(100% - 176px);
-    box-shadow: 0 22px 40px 0 #eef4fc;
-    border-radius: 10px;
-    margin-bottom: 100px;
-    padding: 1rem 44px;
-}
-
-.custom-testimonials .signature {
-    font-size: 0.75rem;
-    text-align: center;
-    height: 40px;
-    width: 100%;
-    display: block;
-    font-style: italic;
-}
-
-.custom-testimonials .signature img.avatar,
-.custom-testimonials .signature .avatar img {
-    width: 32px;
-    height: 32px;
-    border-radius: 100%;
-    margin: .3rem 0 0.875rem 0.875rem;
-    vertical-align: middle;
-    display: inline-block;
-}
-
-.custom-testimonials .signature .no-avatar {
-    width: 1px;
-    height: 1px;
-    border: none;
-}
-
-.custom-testimonials .signature strong {
-    font-weight: 700;
-}
-
-.custom-testimonials .signature strong.pure-text {
-    display: inline-block;
-}
-
-@media all and (max-width: 768px) {
-    .custom-testimonials .content {
-        max-width: 100%;
-        margin-bottom: 50px;
-        padding: 1rem 0;
-    }
-}
-
-/* Custom controls */
-.slides-custom-control {
-    font-size: 0;
-    position: absolute;
-    text-align: center;
-    position: relative;
-    width: 100%;
-    display: block;
-    height: 20px;
-    margin-top: -88px;
-    z-index: 5;
-}
-
-.slides-custom-control li {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    margin: .3rem;
-    border-radius: 100%;
-    background: #AEAEAE;
-}
-
-.slides-custom-control li.flex-active {
-    background: #EC5E79;
-}
-
-/* ====================================================== 
     <!-- Tabs -->      
 /* ====================================================== */
 .custom-tabs {
@@ -9427,6 +9325,110 @@ li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 {
         margin-top: 50px;
         margin-left: 120px;
     }
+}
+
+/* ====================================================== 
+   <!-- Testimonials Carousel -->  
+/* ====================================================== */
+.custom-testimonials-count {
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.custom-testimonials {
+  /* Required */
+    overflow: hidden;
+}
+
+.custom-testimonials .slides {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.custom-testimonials .slides li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    cursor: move;
+}
+
+.custom-testimonials .content {
+    position: relative;
+    margin: 0 auto;
+    max-width: calc(100% - 176px);
+    box-shadow: 0 22px 40px 0 #eef4fc;
+    border-radius: 10px;
+    margin-bottom: 100px;
+    padding: 1rem 44px;
+}
+
+.custom-testimonials .signature {
+    font-size: 0.75rem;
+    text-align: center;
+    height: 40px;
+    width: 100%;
+    display: block;
+    font-style: italic;
+}
+
+.custom-testimonials .signature img.avatar,
+.custom-testimonials .signature .avatar img {
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+    margin: .3rem 0 0.875rem 0.875rem;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.custom-testimonials .signature .no-avatar {
+    width: 1px;
+    height: 1px;
+    border: none;
+}
+
+.custom-testimonials .signature strong {
+    font-weight: 700;
+}
+
+.custom-testimonials .signature strong.pure-text {
+    display: inline-block;
+}
+
+@media all and (max-width: 768px) {
+    .custom-testimonials .content {
+        max-width: 100%;
+        margin-bottom: 50px;
+        padding: 1rem 0;
+    }
+}
+
+/* Custom controls */
+.slides-custom-control {
+    font-size: 0;
+    position: absolute;
+    text-align: center;
+    position: relative;
+    width: 100%;
+    display: block;
+    height: 20px;
+    margin-top: -88px;
+    z-index: 5;
+}
+
+.slides-custom-control li {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: .3rem;
+    border-radius: 100%;
+    background: #AEAEAE;
+}
+
+.slides-custom-control li.flex-active {
+    background: #EC5E79;
 }
 
 /* ====================================================== 
@@ -10073,11 +10075,6 @@ a img.aligncenter {
 .gallery-columns-7 .gallery-caption,
 .gallery-columns-8 .gallery-caption,
 .gallery-columns-9 .gallery-caption {
-    display: none;
-}
-
-/* other */
-mns-9 .gallery-caption {
     display: none;
 }
 

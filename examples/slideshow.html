@@ -55,11 +55,11 @@
         
        
         <!-- Theme  -->
-        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTUyMjYzMTc1MjMzNQ"/>
+        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTUyMjYzOTA3NzI3MA"/>
         
         
          <!--[if lt IE 10]>
-           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTUyMjYzMTc1MjMzNQ" />
+           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTUyMjYzOTA3NzI3MA" />
         <![endif]-->
         
         
@@ -331,6 +331,7 @@
              data-mycounttotal="false"
              data-mycountcur="false"
              data-myparallax="false"
+             data-mysync="false"
              data-wheel="false"
              data-speed="600" 
              data-timing="10000" 
@@ -532,6 +533,7 @@
 										 data-mycounttotal="false"
 										 data-mycountcur="false"
 										 data-myparallax="false"
+										 data-mysync="false"
 										 data-wheel="false"
 										 data-speed="600" 
 										 data-timing="10000" 
@@ -612,6 +614,7 @@
 										 data-mycounttotal="false"
 										 data-mycountcur="false"
 										 data-myparallax="false"
+										 data-mysync="false"
 										 data-wheel="false"
 										 data-speed="600" 
 										 data-timing="20000" 
@@ -703,6 +706,7 @@
 										 data-mycounttotal="false"
 										 data-mycountcur="false"
 										 data-myparallax="false"
+										 data-mysync="false"
 										 data-wheel="false"
 										 data-speed="600" 
 										 data-timing="10000" 
@@ -789,6 +793,7 @@
 										 data-mycounttotal="false"
 										 data-mycountcur="false" 
 										 data-myparallax="false"
+										 data-mysync="false"
 										 data-wheel="false"
 										 data-speed="600" 
 										 data-timing="10000" 
@@ -900,6 +905,7 @@
 										 data-mycounttotal="p.count em.count"
 										 data-mycountcur="p.count em.current"
 										 data-myparallax="false"
+										 data-mysync="false"
 										 data-wheel="true"
 										 data-speed="600" 
 										 data-timing="10000" 
@@ -1012,6 +1018,7 @@
 										 data-mycounttotal="false"
 										 data-mycountcur="false"
 										 data-myparallax="false"
+										 data-mysync="false"
 										 data-wheel="false"
 										 data-speed="600" 
 										 data-timing="10000" 
@@ -1070,7 +1077,149 @@
       
       </section>    
                                         
-                                          
+                        
+        <!-- Title
+        ====================================================== -->
+        <section class="space-none">
+            <div class="container t-c">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2 t-c">
+							<h2>Sync Multiple Sliders</h2>
+                            <p>Set the <code>data-mysync</code> property to sync multiple sliders.</p>
+                        </div>
+                    </div>
+                    <!-- .row end -->
+              
+                    
+            </div>
+            <!-- .container end -->
+ 
+        </section>
+        
+            
+            
+       <!-- Slideshow
+        ====================================================== -->
+        <section>
+             <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                        
+                        
+                                    <div class="col-md-6">
+                                    
+                                       <!-- Slider 1 -->
+										<div class="custom-theme-flexslider"
+											 data-draggable="false" 
+											 data-mynavthumbs="false"
+											 data-mycontrols=".my-nav-3"
+											 data-myshow="false"
+											 data-mycounttotal="false"
+											 data-mycountcur="false"
+											 data-myparallax="false"
+											 data-mysync="#mysync-slider"
+											 data-wheel="false"
+											 data-speed="600" 
+											 data-timing="10000" 
+											 data-loop="true" 
+											 data-paging="true" 
+											 data-arrows="true" 
+											 data-animation="slide" 
+											 data-auto="true" 
+											 data-prev="<i class='fa fa-chevron-left'></i>" 
+											 data-next="<i class='fa fa-chevron-right'></i>"> 
+
+
+											<div class="custom-theme-slides">
+
+												<div class="item">
+													<a href="#" rel="theme-slider-prettyPhoto[cat-1]"><img src="assets-demo/images/test-img-big-1.jpg" alt="Title 1" /></a>  
+												</div>
+
+												<div class="item">
+													<a href="#" rel="theme-slider-prettyPhoto[cat-1]"><img src="assets-demo/images/test-img-big-2.jpg" alt="Title 2" /></a>
+												</div>
+
+
+												<div class="item">
+													<a href="#" rel="theme-slider-prettyPhoto[cat-1]"><img src="assets-demo/images/test-img-big-3.jpg" alt="Title 3" /></a>
+												</div>
+
+
+											</div>
+											<!-- .custom-theme-slides end -->
+										</div>
+										<!-- .custom-theme-flexslider end -->   
+
+
+										<div class="custom-navigation my-nav-3">
+											<a href="#" class="custom-theme-flex-prev"><i class="fa fa-chevron-left"></i></a>
+											<div class="custom-controls-container my-nav-3"></div>
+											<a href="#" class="custom-theme-flex-next"><i class="fa fa-chevron-right"></i></a>
+										</div> 
+  
+                                    
+                                    
+							        </div>
+                       
+                       
+                                    <div class="col-md-6">
+                                    
+                                           <!-- Slider 2 (Sync -->
+										   <div class="custom-theme-flexslider" id="mysync-slider"
+												 data-draggable="false" 
+												 data-mynavthumbs="false"
+												 data-mycontrols="false"
+												 data-myshow="false"
+												 data-mycounttotal="false"
+												 data-mycountcur="false"
+												 data-myparallax="false"
+												 data-mysync="false"
+												 data-wheel="false"
+												 data-speed="600" 
+												 data-timing="10000" 
+												 data-loop="true" 
+												 data-paging="false" 
+												 data-arrows="false" 
+												 data-animation="slide" 
+												 data-auto="true" 
+												 data-prev="<i class='fa fa-chevron-left'></i>" 
+												 data-next="<i class='fa fa-chevron-right'></i>"> 
+
+												<div class="custom-theme-slides">
+
+													<div class="item">
+														<a href="#" rel="theme-slider-prettyPhoto[cat-1]"><img src="assets-demo/images/test-img-big-1.jpg" alt="Title 1" /></a>  
+													</div>
+
+													<div class="item">
+														<a href="#" rel="theme-slider-prettyPhoto[cat-1]"><img src="assets-demo/images/test-img-big-2.jpg" alt="Title 2" /></a>
+													</div>
+
+
+													<div class="item">
+														<a href="#" rel="theme-slider-prettyPhoto[cat-1]"><img src="assets-demo/images/test-img-big-3.jpg" alt="Title 3" /></a>
+													</div>
+
+
+												</div>
+												<!-- .custom-theme-slides end -->
+											</div>
+											<!-- .custom-theme-flexslider end -->   
+							        </div>                       
+                       
+                       
+
+                        
+                        
+                        </div>
+                    </div>
+              </div>   
+      
+      </section>    
+                               
+                               
+                               
                                 
                 <!-- Footer
         ============================================= -->    
@@ -1142,7 +1291,7 @@
 			"homeUrl"     :""  //Eg. https://uiux.cc
 		};
     </script>  
-    <script src="assets/js/uix-kit.min.js?ver=MTUyMjYzMTc1MjMzNQ"></script>
+    <script src="assets/js/uix-kit.min.js?ver=MTUyMjYzOTA3NzI3MA"></script>
 
 
 
