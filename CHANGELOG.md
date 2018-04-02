@@ -1,9 +1,11 @@
 # Changelog
 
-#### = 1.1.97 (April 2, 2018) =
+#### = 1.2.0 (April 2, 2018) =
 
 * New: Extend the module "Slideshow" that add a new demo "Sync Multiple Sliders".
 * New: Add a new module "Fullwidth List of Split 2".
+* New: Add a new module "Equal-width Divs".
+* New: Add a new module "Badges".
 
 
 #### = 1.1.95 (March 30, 2018) =

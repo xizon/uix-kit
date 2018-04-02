@@ -1,0 +1,24 @@
+/* ====================================================== 
+   <!-- Badges --> 
+/* ====================================================== */
+.badges {
+	width: 300px;
+	height: 300px;
+	position: relative;
+	display: table;
+	margin: 0 auto;
+	margin-bottom: 3rem;
+	@include gradient-border( $btn-gradient-color1, $btn-gradient-color2, 15px, 'to bottom', #fff );
+	@include transition-default();
+	
+
+	&.circle {
+		border-radius: 50%;
+	}
+	
+	.inner {
+		display: table-cell;
+		vertical-align: middle;
+		text-align: center;
+	}
+}

@@ -92,28 +92,28 @@ blockquote {
 ul, 
 ol {
     list-style: none;
+	
+	> li {
+		margin-bottom: 0;
+	}
 }
 
-ul > li, 
-ol > li {
-    margin-bottom: 0;
-}
 
-ul.list-normal, 
-ol.list-normal {
+ol.list-normal,
+ul.list-normal,
+.list-normal ul,
+.list-normal ol {
+	
 	display: block;
-	list-style-type: disc;
 	margin: 1.421875rem;
-	padding-left: 0.875rem;
-}
-
-.list-normal {
+	padding-left: 0.875rem;	
+	
 	ul, 
 	ol {
-		display: block;
-		list-style-type: disc;
-		margin: 1.421875rem;
-		padding-left: 0.875rem;
+		margin-top: 0;
+		margin-bottom: 0;
+		padding-top: 0;
+		padding-bottom: 0;
 	}
 }
 
@@ -127,57 +127,16 @@ ol.list-normal,
     list-style-type: decimal;
 }
 
-ul.list-normal {
-	ul, 
-	ol {
-		margin-top: 0 !important;
-		margin-bottom: 0 !important;
-		padding-top: 0 !important;
-		padding-bottom: 0 !important;
-	}
-}
 
-ol.list-normal {
-	ul, 
-	ol {
-		margin-top: 0 !important;
-		margin-bottom: 0 !important;
-		padding-top: 0 !important;
-		padding-bottom: 0 !important;
-	}
-}
-
-.list-normal {
-	ul {
-		ul, 
-		ol {
-			margin-top: 0 !important;
-			margin-bottom: 0 !important;
-			padding-top: 0 !important;
-			padding-bottom: 0 !important;
-		}
-	}
-	ol {
-		ul, 
-		ol {
-			margin-top: 0 !important;
-			margin-bottom: 0 !important;
-			padding-top: 0 !important;
-			padding-bottom: 0 !important;
-		}
-	}
-}
-
-
-
-.list-numbered {
+ol.list-numbered,
+.list-numbered ol {
     list-style: none;
     margin-left: 1em;
     counter-reset: line;
 	
 	> li {
 		position: relative;
-		margin-bottom: 1.5em;
+		margin-bottom: .5em;
 	}
 
 	> li:before {
@@ -191,54 +150,37 @@ ol.list-normal {
 		border-radius: 50%;
 		color: #fff;
 		text-align: center;
-		line-height: 1.5;
+		line-height: 22px;
 		counter-increment: line;
 		content: '0' counter(line);
-	}
+		font-size: 0.75rem;
+	}	
+	
+	&.none-zero > li:before {
+		content: counter(line);
+	}	
 	
 }
 
 
+
+table.table-normal,
 .table-normal table {
 	border: 1px solid black;
-	td, 
-	th {
-		border: 1px solid black;
-	}
-}
-
-table.table-normal {
-	border: 1px solid black;
-	td, 
-	th {
-		border: 1px solid black;
-	}
-}
-
-.table-normal table {
-	td, 
-	th {
-		padding: 0.6875rem;
-	}
-}
-
-table.table-normal {
-	td, 
-	th {
-		padding: 0.6875rem;
-	}
-}
-
-.table-normal table, 
-table.table-normal {
 	border-collapse: collapse;
 	width: 100%;
+	
+	th {
+		text-align: left;
+	}
+	
+	td, 
+	th {
+		border: 1px solid black;
+		padding: 0.6875rem;
+	}
 }
 
-.table-normal table th, 
-table.table-normal th {
-    text-align: left;
-}
 
 select {
     max-width: 100%;

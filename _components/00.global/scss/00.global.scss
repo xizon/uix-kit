@@ -101,7 +101,8 @@ $primary-bg-color      : transparent;
 //
 @mixin bg-gradient() {
 	/* @include bg-gradient(); */
-	background: $highlight-color1;
+	//Compatible with ie9+
+	background: $highlight-color1; 
 	background: linear-gradient(to right, $highlight-color1 0%,$highlight-color2 100%);
 }
 
@@ -115,6 +116,32 @@ $primary-bg-color      : transparent;
 	background: linear-gradient(to right, $highlight-color1 0%,$highlight-color2 100%);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
+	
+}
+
+
+// Gradient Border
+// ---------------------------
+//
+@mixin gradient-border( $color1, $color2, $border-width, $direction, $bg ) {
+	/* @include gradient-border( $highlight-color1, $highlight-color2, 3px, 'to right', #fff ); */
+	//Compatible with ie9+
+	background: $bg;
+   
+	
+	&::after {
+		/* Please do not convert it to block elements and set width and height. */
+		content: '';
+		background: $color1;
+		background: linear-gradient(#{$direction}, $color1 0%, $color2 100%), linear-gradient(#{$direction}, $color1 0%, $color2 100%);
+		position: absolute;
+		top: -#{$border-width};
+		bottom: -#{$border-width};
+		right: -#{$border-width};
+		left: -#{$border-width};
+		z-index: -1;
+		border-radius: inherit;
+	}
 	
 }
 
@@ -177,6 +204,8 @@ $primary-bg-color      : transparent;
 	}
 	
 }
+
+
 
 
 // Ripple Effect

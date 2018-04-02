@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.97
+ * ## Version             :  1.2.0
  * ## Last Update         :  April 2, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -53,8 +53,8 @@
     12. Loader 
     13. Overlay 
     14. Pagination 
-    15. Sidebar 
-    16. Filterable Navigation 
+    15. Filterable Navigation 
+    16. Sidebar 
     17. Search 
     18. Tags 
     19. Entry 
@@ -62,42 +62,44 @@
     21. 3rd Party Plugins 
     22. Social Media Icons 
     23. Accordion 
-    24. Breadcrumbs 
-    25. Button 
-    26. Author Card 
-    27. Counter 
-    28. Dropdown Menu 
-    29. Features 
-    30. Footer Templates 
-    31. Form 
-    32. Form Progress 
-    33. Gallery 
-    34. Custom Core Scripts & Stylesheets 
-    35. Brands List 
-    36. Bulleted List 
-    37. Maintain Aspect Ratio List 
-    38. List of Posts 
-    39. List of Split Posts 
-    40. Side by Side List 
-    41. Fullwidth List of Split 2 
-    42. Fullwidth List of Split 
-    43. Mobile Menu 
-    44. Modal Dialog 
-    45. Multiple Items Carousel 
-    46. Parallax 
-    47. Periodical Scroll 
-    48. Pricing 
-    49. Progress Bar 
-    50. Show More Less 
-    51. Cutom Light Box 
-    52. Single Post 
-    53. Slideshow ( with custom flexslider ) 
-    54. Source Code 
-    55. Tabs 
-    56. Testimonials Carousel 
-    57. Timeline 
-    58. ToolTip 
-    59. WordPress Core 
+    24. Badges 
+    25. Breadcrumbs 
+    26. Button 
+    27. Author Card 
+    28. Counter 
+    29. Dropdown Menu 
+    30. Equal-width Divs 
+    31. Features 
+    32. Footer Templates 
+    33. Form 
+    34. Form Progress 
+    35. Gallery 
+    36. Custom Core Scripts & Stylesheets 
+    37. Brands List 
+    38. Bulleted List 
+    39. Maintain Aspect Ratio List 
+    40. List of Posts 
+    41. List of Split Posts 
+    42. Side by Side List 
+    43. Fullwidth List of Split 2 
+    44. Fullwidth List of Split 
+    45. Mobile Menu 
+    46. Modal Dialog 
+    47. Multiple Items Carousel 
+    48. Parallax 
+    49. Periodical Scroll 
+    50. Pricing 
+    51. Progress Bar 
+    52. Show More Less 
+    53. Cutom Light Box 
+    54. Single Post 
+    55. Slideshow ( with custom flexslider ) 
+    56. Source Code 
+    57. Tabs 
+    58. Testimonials Carousel 
+    59. Timeline 
+    60. ToolTip 
+    61. WordPress Core 
 
 
 
@@ -212,20 +214,27 @@ ol > li {
     margin-bottom: 0;
 }
 
+ol.list-normal,
 ul.list-normal,
-ol.list-normal {
+.list-normal ul,
+.list-normal ol {
     display: block;
-    list-style-type: disc;
     margin: 1.421875rem;
     padding-left: 0.875rem;
 }
 
-.list-normal ul,
-.list-normal ol {
-    display: block;
-    list-style-type: disc;
-    margin: 1.421875rem;
-    padding-left: 0.875rem;
+ol.list-normal ul,
+ol.list-normal ol,
+ul.list-normal ul,
+ul.list-normal ol,
+.list-normal ul ul,
+.list-normal ul ol,
+.list-normal ol ul,
+.list-normal ol ol {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 ul.list-normal,
@@ -238,50 +247,21 @@ ol.list-normal,
     list-style-type: decimal;
 }
 
-ul.list-normal ul,
-ul.list-normal ol {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-}
-
-ol.list-normal ul,
-ol.list-normal ol {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-}
-
-.list-normal ul ul,
-.list-normal ul ol {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-}
-
-.list-normal ol ul,
-.list-normal ol ol {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-}
-
-.list-numbered {
+ol.list-numbered,
+.list-numbered ol {
     list-style: none;
     margin-left: 1em;
     counter-reset: line;
 }
 
-.list-numbered > li {
+ol.list-numbered > li,
+.list-numbered ol > li {
     position: relative;
-    margin-bottom: 1.5em;
+    margin-bottom: .5em;
 }
 
-.list-numbered > li:before {
+ol.list-numbered > li:before,
+.list-numbered ol > li:before {
     position: absolute;
     left: -2.25em;
     display: inline-block;
@@ -292,48 +272,35 @@ ol.list-normal ol {
     border-radius: 50%;
     color: #fff;
     text-align: center;
-    line-height: 1.5;
+    line-height: 22px;
     counter-increment: line;
     content: "0" counter(line);
+    font-size: 0.75rem;
 }
 
+ol.list-numbered.none-zero > li:before,
+.list-numbered ol.none-zero > li:before {
+    content: counter(line);
+}
+
+table.table-normal,
 .table-normal table {
     border: 1px solid black;
-}
-
-.table-normal table td,
-.table-normal table th {
-    border: 1px solid black;
-}
-
-table.table-normal {
-    border: 1px solid black;
-}
-
-table.table-normal td,
-table.table-normal th {
-    border: 1px solid black;
-}
-
-.table-normal table td,
-.table-normal table th {
-    padding: 0.6875rem;
-}
-
-table.table-normal td,
-table.table-normal th {
-    padding: 0.6875rem;
-}
-
-.table-normal table,
-table.table-normal {
     border-collapse: collapse;
     width: 100%;
 }
 
-.table-normal table th,
-table.table-normal th {
+table.table-normal th,
+.table-normal table th {
     text-align: left;
+}
+
+table.table-normal td,
+table.table-normal th,
+.table-normal table td,
+.table-normal table th {
+    border: 1px solid black;
+    padding: 0.6875rem;
 }
 
 select {
@@ -3013,6 +2980,46 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
+   <!-- Badges --> 
+/* ====================================================== */
+.badges {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    display: table;
+    margin: 0 auto;
+    margin-bottom: 3rem;
+  /* @include gradient-border( $highlight-color1, $highlight-color2, 3px, 'to right', #fff ); */
+    background: #fff;
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+}
+
+.badges::after {
+  /* Please do not convert it to block elements and set width and height. */
+    content: '';
+    background: #EC5E79;
+    background: linear-gradient(to bottom, #EC5E79 0%, #f60 100%), linear-gradient(to bottom, #EC5E79 0%, #f60 100%);
+    position: absolute;
+    top: -15px;
+    bottom: -15px;
+    right: -15px;
+    left: -15px;
+    z-index: -1;
+    border-radius: inherit;
+}
+
+.badges.circle {
+    border-radius: 50%;
+}
+
+.badges .inner {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+/* ====================================================== 
    <!-- Breadcrumbs --> 
 /* ====================================================== */
 .custom-breadcrumbs ul {
@@ -3289,12 +3296,12 @@ ul.entry-meta {
     width: 100% !important;
 }
 
-.button-bg-primary.bg-none {
+.button-bg-primary.none-bg {
     background: none !important;
     color: #EC5E79 !important;
 }
 
-.button-bg-primary.bg-none:hover {
+.button-bg-primary.none-bg:hover {
     background-color: #EC5E79 !important;
     background-image: linear-gradient(to right, #EC5E79 0%, #f60 20%, #d83ba0 100%) !important;
     color: #fff !important;
@@ -3502,6 +3509,64 @@ ul.entry-meta {
 .custom-dropdown-trigger > :checked ~ ul {
     display: block;
     opacity: 1;
+}
+
+/* ====================================================== 
+   <!-- Equal-width Divs --> 
+/* ====================================================== */
+/**
+ * Using only CSS, we can make a tabbed navigation whose tabs always
+ * occupy an equal share of the available width. No JS to interrogate
+ * the DOM, no server-side logic to count through items, no inline styles.
+ *
+ */
+.equal-width-divs ul {
+    list-style: none;
+    font-size: 0;
+  /*Fighting the Space Between Inline Block Elements*/
+    display: table;
+  /* [1] */
+    table-layout: fixed;
+  /* [2] */
+    width: 100%;
+  /* [3] */;
+}
+
+.equal-width-divs ul li {
+    font-size: 1rem;
+  /*Fighting the Space Between Inline Block Elements*/
+    display: table-cell;
+  /* [4] */
+    box-shadow: 1px 0px 0px 0px #AEAEAE;
+}
+
+.equal-width-divs ul li:last-child {
+    box-shadow: none;
+}
+
+.equal-width-divs ul li span {
+    display: block;
+    font-size: 0.75rem;
+}
+
+@media all and (max-width: 768px) {
+    .equal-width-divs ul {
+        display: block;
+    }
+
+    .equal-width-divs ul li {
+        display: inline-block;
+        width: 50%;
+        margin-bottom: .5rem;
+    }
+
+    .equal-width-divs ul li:nth-child(2n+0) {
+        box-shadow: none;
+    }
+
+    .equal-width-divs ul li span {
+        padding-bottom: 1rem;
+    }
 }
 
 /* ====================================================== 
@@ -4134,7 +4199,7 @@ ul.entry-meta {
     transform: translateY(0);
 }
 
-.custom-select-wrapper .custom-select.bg-none .custom-select-trigger {
+.custom-select-wrapper .custom-select.none-bg .custom-select-trigger {
     background: none;
     border-color: rgba(255, 255, 255, 0.1);
 }
@@ -6083,6 +6148,135 @@ dl.list-side-by-side:after {
 }
 
 /* ====================================================== 
+   <!-- Pricing --> 
+/* ====================================================== */
+.custom-price {
+    text-align: center;
+    position: relative;
+}
+
+.custom-price:before {
+    padding-top: 2.25rem;
+}
+
+.custom-price:after {
+    padding-bottom: 0;
+}
+
+.custom-price ul,
+.custom-price ol {
+  /*default*/
+    display: block;
+    list-style-type: disc;
+    margin-top: 0.875rem;
+    margin-bottom: 0.875rem;
+    margin-left: 0;
+    margin-right: 0;
+    padding-bottom: 1.7rem;
+  /*custom*/
+    line-height: 2;
+}
+
+.custom-price li {
+  /*default*/
+    list-style: none;
+}
+
+.custom-price li:before {
+    font-family: 'FontAwesome';
+    content: "\f00c";
+    display: inline-block;
+    margin-right: .4rem;
+}
+
+.custom-price .hr {
+    margin: 1.5rem 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.custom-price .border-hover {
+    margin-bottom: 1.5rem;
+}
+
+.custom-price .border {
+    padding-top: 0.875rem;
+    position: relative;
+    box-shadow: 0 22px 40px 0 #eef4fc;
+    border-radius: 10px;
+    background: #fff;
+    transition: .1s ease-in-out;
+}
+
+.custom-price .border:hover {
+    box-shadow: 0 31px 32px 0 #cbdfee;
+}
+
+.custom-price .level {
+    font-size: 0.7rem;
+    text-align: center;
+    text-indent: 0.875rem;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 3;
+    font-weight: 700;
+    opacity: 0.35;
+}
+
+.custom-price .num {
+    color: #EC5E79;
+    font-weight: 700;
+    font-size: 3.5rem;
+    margin-top: 0.875rem;
+}
+
+.custom-price .currency {
+    font-size: 0.875rem;
+}
+
+.custom-price .period {
+    font-size: 12px;
+}
+
+.custom-price .period:before {
+    content: '/';
+    padding-right: .1rem;
+}
+
+.custom-price .detail {
+    text-align: left;
+    padding-bottom: 1.125rem;
+    padding-left: 1rem;
+    font-size: 0.875rem;
+}
+
+.custom-price .excerpt {
+    height: auto;
+    padding: 0 0.875rem;
+    font-size: 0.875rem;
+    opacity: 0.65;
+}
+
+.custom-price .excerpt p {
+    line-height: 1.5;
+}
+
+.custom-price .bg {
+    padding-top: 1.875rem;
+    height: auto;
+}
+
+.custom-price .border.active .num,
+.custom-price .border.active .excerpt,
+.custom-price .border.active .detail,
+.custom-price .border.active .level {
+    color: #fff !important;
+}
+
+.custom-price .border.active .excerpt {
+    opacity: 0.65;
+}
+
+/* ====================================================== 
    <!-- Progress Bar --> 
 /* ====================================================== */
 /* 
@@ -8012,135 +8206,6 @@ dl.list-side-by-side:after {
 }
 
 /* ====================================================== 
-   <!-- Pricing --> 
-/* ====================================================== */
-.custom-price {
-    text-align: center;
-    position: relative;
-}
-
-.custom-price:before {
-    padding-top: 2.25rem;
-}
-
-.custom-price:after {
-    padding-bottom: 0;
-}
-
-.custom-price ul,
-.custom-price ol {
-  /*default*/
-    display: block;
-    list-style-type: disc;
-    margin-top: 0.875rem;
-    margin-bottom: 0.875rem;
-    margin-left: 0;
-    margin-right: 0;
-    padding-bottom: 1.7rem;
-  /*custom*/
-    line-height: 2;
-}
-
-.custom-price li {
-  /*default*/
-    list-style: none;
-}
-
-.custom-price li:before {
-    font-family: 'FontAwesome';
-    content: "\f00c";
-    display: inline-block;
-    margin-right: .4rem;
-}
-
-.custom-price .hr {
-    margin: 1.5rem 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.custom-price .border-hover {
-    margin-bottom: 1.5rem;
-}
-
-.custom-price .border {
-    padding-top: 0.875rem;
-    position: relative;
-    box-shadow: 0 22px 40px 0 #eef4fc;
-    border-radius: 10px;
-    background: #fff;
-    transition: .1s ease-in-out;
-}
-
-.custom-price .border:hover {
-    box-shadow: 0 31px 32px 0 #cbdfee;
-}
-
-.custom-price .level {
-    font-size: 0.7rem;
-    text-align: center;
-    text-indent: 0.875rem;
-    text-transform: uppercase;
-    position: relative;
-    z-index: 3;
-    font-weight: 700;
-    opacity: 0.35;
-}
-
-.custom-price .num {
-    color: #EC5E79;
-    font-weight: 700;
-    font-size: 3.5rem;
-    margin-top: 0.875rem;
-}
-
-.custom-price .currency {
-    font-size: 0.875rem;
-}
-
-.custom-price .period {
-    font-size: 12px;
-}
-
-.custom-price .period:before {
-    content: '/';
-    padding-right: .1rem;
-}
-
-.custom-price .detail {
-    text-align: left;
-    padding-bottom: 1.125rem;
-    padding-left: 1rem;
-    font-size: 0.875rem;
-}
-
-.custom-price .excerpt {
-    height: auto;
-    padding: 0 0.875rem;
-    font-size: 0.875rem;
-    opacity: 0.65;
-}
-
-.custom-price .excerpt p {
-    line-height: 1.5;
-}
-
-.custom-price .bg {
-    padding-top: 1.875rem;
-    height: auto;
-}
-
-.custom-price .border.active .num,
-.custom-price .border.active .excerpt,
-.custom-price .border.active .detail,
-.custom-price .border.active .level {
-    color: #fff !important;
-}
-
-.custom-price .border.active .excerpt {
-    opacity: 0.65;
-}
-
-/* ====================================================== 
    <!-- Show More Less --> 
 /* ====================================================== */
 .custom-more-text-link > span:nth-child(2) {
@@ -8470,20 +8535,6 @@ dl.list-side-by-side:after {
     .custom-lightbox-overlay.no-fixed .lb-container.custom .html > .lb-box {
         width: auto;
     }
-}
-
-/* ====================================================== 
-     <!-- Single Post -->        
-/* ====================================================== */
-/* Post edit link */
-.post-edit-link {
-    display: inline-block;
-    background: #F9F9F9;
-    padding: 0.175rem 0.4375rem;
-    border: 1px solid #DDDDDD;
-    border-radius: 2px;
-    text-decoration: none !important;
-    margin-top: 1.09375rem;
 }
 
 /* ====================================================== 
@@ -8973,6 +9024,20 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 
 .custom-theme-flexslider.custom-parallax-flexslider .custom-theme-slides > .item.right .level-2 {
     transform: translate(50px, -50%);
+}
+
+/* ====================================================== 
+     <!-- Single Post -->        
+/* ====================================================== */
+/* Post edit link */
+.post-edit-link {
+    display: inline-block;
+    background: #F9F9F9;
+    padding: 0.175rem 0.4375rem;
+    border: 1px solid #DDDDDD;
+    border-radius: 2px;
+    text-decoration: none !important;
+    margin-top: 1.09375rem;
 }
 
 /* ====================================================== 

@@ -1,0 +1,70 @@
+/* ====================================================== 
+   <!-- Equal-width Divs --> 
+/* ====================================================== */
+
+/**
+ * Using only CSS, we can make a tabbed navigation whose tabs always
+ * occupy an equal share of the available width. No JS to interrogate
+ * the DOM, no server-side logic to count through items, no inline styles.
+ *
+ */
+.equal-width-divs {
+
+	ul {
+		list-style: none;
+		font-size: 0; /*Fighting the Space Between Inline Block Elements*/
+		
+		display: table; /* [1] */
+		table-layout: fixed; /* [2] */
+		width: 100%; /* [3] */	
+
+
+		li {
+			font-size: 1rem;/*Fighting the Space Between Inline Block Elements*/
+			display: table-cell; /* [4] */
+			box-shadow: 1px 0px 0px 0px $sub-text-color;
+			
+			&:last-child {
+				box-shadow: none;
+			}
+			
+			span {
+				display: block;
+				font-size: 0.75rem;
+			}
+
+		}
+		
+	}
+	
+}
+
+@media all and (max-width: 768px) {
+
+	.equal-width-divs {
+
+		ul {
+			display: block;
+
+			li {
+				
+				display: inline-block;
+				width: 50%;
+				margin-bottom: .5rem;
+				
+			
+				
+				&:nth-child(2n+0) {
+					box-shadow: none;
+				}
+				
+				span {
+					padding-bottom: 1rem;
+				}	
+				
+			}
+
+		}
+
+	}
+}
