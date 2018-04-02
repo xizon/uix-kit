@@ -1,7 +1,8 @@
 # Changelog
 
-#### = 1.1.94 (March 30, 2018) =
+#### = 1.1.95 (March 30, 2018) =
 
+* New: Extend the module "Bulleted List".
 * New: Add a new module "Breadcrumbs".
 * Fix: Solved an issue that fighting the space between inline block elements.
 

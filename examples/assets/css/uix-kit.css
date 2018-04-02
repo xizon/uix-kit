@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.1.94
- * ## Last Update         :  March 30, 2018
+ * ## Version             :  1.1.95
+ * ## Last Update         :  April 2, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -95,9 +95,6 @@
     54. Source Code 
     55. Tabs 
     56. Testimonials Carousel 
-    57. Timeline 
-    58. ToolTip 
-    59. WordPress Core 
 
 
 
@@ -5962,162 +5959,6 @@ dl.list-side-by-side:after {
 }
 
 /* ====================================================== 
-       <!-- Periodical Scroll -->      
-/* ====================================================== */
-.custom-periodical-scroll {
-    position: relative;
-}
-
-.custom-periodical-scroll ul {
-    display: block;
-    overflow: hidden;
-    height: 0;
-}
-
-.custom-periodical-scroll ul li {
-    display: block;
-}
-
-.custom-periodical-scroll ul li span {
-    display: block;
-  /* @include icontxt-gradient(); */
-  /* The font is the default color when the browser is IE */
-    background: linear-gradient(to right, #EC5E79 0%, #E8588C 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    letter-spacing: 2px;
-}
-
-/* ====================================================== 
-   <!-- Pricing --> 
-/* ====================================================== */
-.custom-price {
-    text-align: center;
-    position: relative;
-}
-
-.custom-price:before {
-    padding-top: 2.25rem;
-}
-
-.custom-price:after {
-    padding-bottom: 0;
-}
-
-.custom-price ul,
-.custom-price ol {
-  /*default*/
-    display: block;
-    list-style-type: disc;
-    margin-top: 0.875rem;
-    margin-bottom: 0.875rem;
-    margin-left: 0;
-    margin-right: 0;
-    padding-bottom: 1.7rem;
-  /*custom*/
-    line-height: 2;
-}
-
-.custom-price li {
-  /*default*/
-    list-style: none;
-}
-
-.custom-price li:before {
-    font-family: 'FontAwesome';
-    content: "\f00c";
-    display: inline-block;
-    margin-right: .4rem;
-}
-
-.custom-price .hr {
-    margin: 1.5rem 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.custom-price .border-hover {
-    margin-bottom: 1.5rem;
-}
-
-.custom-price .border {
-    padding-top: 0.875rem;
-    position: relative;
-    box-shadow: 0 22px 40px 0 #eef4fc;
-    border-radius: 10px;
-    background: #fff;
-    transition: .1s ease-in-out;
-}
-
-.custom-price .border:hover {
-    box-shadow: 0 31px 32px 0 #cbdfee;
-}
-
-.custom-price .level {
-    font-size: 0.7rem;
-    text-align: center;
-    text-indent: 0.875rem;
-    text-transform: uppercase;
-    position: relative;
-    z-index: 3;
-    font-weight: 700;
-    opacity: 0.35;
-}
-
-.custom-price .num {
-    color: #EC5E79;
-    font-weight: 700;
-    font-size: 3.5rem;
-    margin-top: 0.875rem;
-}
-
-.custom-price .currency {
-    font-size: 0.875rem;
-}
-
-.custom-price .period {
-    font-size: 12px;
-}
-
-.custom-price .period:before {
-    content: '/';
-    padding-right: .1rem;
-}
-
-.custom-price .detail {
-    text-align: left;
-    padding-bottom: 1.125rem;
-    padding-left: 1rem;
-    font-size: 0.875rem;
-}
-
-.custom-price .excerpt {
-    height: auto;
-    padding: 0 0.875rem;
-    font-size: 0.875rem;
-    opacity: 0.65;
-}
-
-.custom-price .excerpt p {
-    line-height: 1.5;
-}
-
-.custom-price .bg {
-    padding-top: 1.875rem;
-    height: auto;
-}
-
-.custom-price .border.active .num,
-.custom-price .border.active .excerpt,
-.custom-price .border.active .detail,
-.custom-price .border.active .level {
-    color: #fff !important;
-}
-
-.custom-price .border.active .excerpt {
-    opacity: 0.65;
-}
-
-/* ====================================================== 
    <!-- Progress Bar --> 
 /* ====================================================== */
 /* 
@@ -8047,6 +7888,162 @@ dl.list-side-by-side:after {
 }
 
 /* ====================================================== 
+       <!-- Periodical Scroll -->      
+/* ====================================================== */
+.custom-periodical-scroll {
+    position: relative;
+}
+
+.custom-periodical-scroll ul {
+    display: block;
+    overflow: hidden;
+    height: 0;
+}
+
+.custom-periodical-scroll ul li {
+    display: block;
+}
+
+.custom-periodical-scroll ul li span {
+    display: block;
+  /* @include icontxt-gradient(); */
+  /* The font is the default color when the browser is IE */
+    background: linear-gradient(to right, #EC5E79 0%, #E8588C 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 2px;
+}
+
+/* ====================================================== 
+   <!-- Pricing --> 
+/* ====================================================== */
+.custom-price {
+    text-align: center;
+    position: relative;
+}
+
+.custom-price:before {
+    padding-top: 2.25rem;
+}
+
+.custom-price:after {
+    padding-bottom: 0;
+}
+
+.custom-price ul,
+.custom-price ol {
+  /*default*/
+    display: block;
+    list-style-type: disc;
+    margin-top: 0.875rem;
+    margin-bottom: 0.875rem;
+    margin-left: 0;
+    margin-right: 0;
+    padding-bottom: 1.7rem;
+  /*custom*/
+    line-height: 2;
+}
+
+.custom-price li {
+  /*default*/
+    list-style: none;
+}
+
+.custom-price li:before {
+    font-family: 'FontAwesome';
+    content: "\f00c";
+    display: inline-block;
+    margin-right: .4rem;
+}
+
+.custom-price .hr {
+    margin: 1.5rem 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.custom-price .border-hover {
+    margin-bottom: 1.5rem;
+}
+
+.custom-price .border {
+    padding-top: 0.875rem;
+    position: relative;
+    box-shadow: 0 22px 40px 0 #eef4fc;
+    border-radius: 10px;
+    background: #fff;
+    transition: .1s ease-in-out;
+}
+
+.custom-price .border:hover {
+    box-shadow: 0 31px 32px 0 #cbdfee;
+}
+
+.custom-price .level {
+    font-size: 0.7rem;
+    text-align: center;
+    text-indent: 0.875rem;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 3;
+    font-weight: 700;
+    opacity: 0.35;
+}
+
+.custom-price .num {
+    color: #EC5E79;
+    font-weight: 700;
+    font-size: 3.5rem;
+    margin-top: 0.875rem;
+}
+
+.custom-price .currency {
+    font-size: 0.875rem;
+}
+
+.custom-price .period {
+    font-size: 12px;
+}
+
+.custom-price .period:before {
+    content: '/';
+    padding-right: .1rem;
+}
+
+.custom-price .detail {
+    text-align: left;
+    padding-bottom: 1.125rem;
+    padding-left: 1rem;
+    font-size: 0.875rem;
+}
+
+.custom-price .excerpt {
+    height: auto;
+    padding: 0 0.875rem;
+    font-size: 0.875rem;
+    opacity: 0.65;
+}
+
+.custom-price .excerpt p {
+    line-height: 1.5;
+}
+
+.custom-price .bg {
+    padding-top: 1.875rem;
+    height: auto;
+}
+
+.custom-price .border.active .num,
+.custom-price .border.active .excerpt,
+.custom-price .border.active .detail,
+.custom-price .border.active .level {
+    color: #fff !important;
+}
+
+.custom-price .border.active .excerpt {
+    opacity: 0.65;
+}
+
+/* ====================================================== 
    <!-- Show More Less --> 
 /* ====================================================== */
 .custom-more-text-link > span:nth-child(2) {
@@ -8376,20 +8373,6 @@ dl.list-side-by-side:after {
     .custom-lightbox-overlay.no-fixed .lb-container.custom .html > .lb-box {
         width: auto;
     }
-}
-
-/* ====================================================== 
-     <!-- Single Post -->        
-/* ====================================================== */
-/* Post edit link */
-.post-edit-link {
-    display: inline-block;
-    background: #F9F9F9;
-    padding: 0.175rem 0.4375rem;
-    border: 1px solid #DDDDDD;
-    border-radius: 2px;
-    text-decoration: none !important;
-    margin-top: 1.09375rem;
 }
 
 /* ====================================================== 
@@ -8882,172 +8865,17 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 }
 
 /* ====================================================== 
-    <!-- Tabs -->      
+     <!-- Single Post -->        
 /* ====================================================== */
-.custom-tabs {
-  /* 
-	 ---------------------------
-	 Tab Normal Effect
-	 ---------------------------
-	 */
-  /* 
-	 ---------------------------
-	 Tab Rotation Effect
-	 ---------------------------
-	 */;
-}
-
-.custom-tabs:not(.rotation) {
-  /* @include outer-shadow(); */
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
-}
-
-.custom-tabs:not(.rotation) .marker {
-    background: #212121;
-    height: 2px;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-    transition: .1s ease-in-out;
-}
-
-.custom-tabs .content {
-    display: none;
-    padding: 1.3125rem;
-    text-align: left;
-}
-
-.custom-tabs .content.active {
-    display: block;
-}
-
-.custom-tabs .custom-tabs-ul-container > ul > li {
-    position: relative;
-    display: block;
-    transition: .1s ease-in-out;
-    list-style: none;
-    float: left;
-    box-shadow: inset 1px 0px 0px 0px #e6e6e6;
-    background: #f7f7f7;
-    min-width: 7.5rem;
-}
-
-.custom-tabs .custom-tabs-ul-container > ul > li > a {
-    position: relative;
-    padding: 0.625rem 1rem;
-    display: block;
-    text-align: center;
-}
-
-.custom-tabs .custom-tabs-ul-container > ul > li.active {
-    background: #fff;
-}
-
-.custom-tabs .custom-tabs-ul-container > ul:after {
-    content: '';
-    display: block;
-    clear: both;
-}
-
-.custom-tabs.custom-tabs-center {
-    box-shadow: none;
-}
-
-.custom-tabs.custom-tabs-center .custom-tabs-ul-container > ul {
-    font-size: 0;
-  /*Fighting the Space Between Inline Block Elements*/
-    display: block;
-    width: 100%;
-    text-align: center;
-  /*require*/
-  /* @include outer-shadow(); */
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
-}
-
-.custom-tabs.custom-tabs-center .custom-tabs-ul-container > ul li {
-    font-size: 1rem;
-  /*Fighting the Space Between Inline Block Elements*/
+/* Post edit link */
+.post-edit-link {
     display: inline-block;
-  /*require*/
-    float: none;
-}
-
-.custom-tabs.rotation {
-    height: 400px;
-}
-
-.custom-tabs.rotation .content {
-    position: absolute;
-    top: 0;
-    left: 400px;
-    width: 300px;
-  /* @include outer-shadow(); */
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
-}
-
-.custom-tabs.rotation .custom-tabs-ul-container {
-    width: 300px;
-    height: 300px;
-    position: relative;
-    margin: 0;
-}
-
-.custom-tabs.rotation .custom-tabs-ul-container > ul {
-    position: relative;
-    display: block;
-    width: 300px;
-    height: 300px;
-}
-
-.custom-tabs.rotation .custom-tabs-ul-container > ul > li {
-    position: absolute;
-    width: 80px;
-    height: 80px;
-    background: none;
-    box-shadow: none;
-    transition: none;
-}
-
-.custom-tabs.rotation .custom-tabs-ul-container > ul > li > a {
-    width: 80px;
-    height: 80px;
-    line-height: 60px;
-    background: #fff;
-    border-radius: 100%;
-  /* @include outer-shadow(); */
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
-}
-
-.custom-tabs.rotation .custom-tabs-ul-container > ul > li.active > a {
-    background: #212121;
-    color: #fff;
-}
-
-@media all and (max-width: 768px) {
-    .custom-tabs {
-    /* Tab Rotation Effect */;
-    }
-
-    .custom-tabs:not(.rotation) li {
-        width: 100% !important;
-    }
-
-    .custom-tabs.rotation {
-        height: 400px;
-    }
-
-    .custom-tabs.rotation .content {
-        position: relative;
-        left: 0;
-        width: 100%;
-    }
-
-    .custom-tabs.rotation .custom-tabs-ul-container {
-        margin-top: 50px;
-        margin-left: 120px;
-    }
+    background: #F9F9F9;
+    padding: 0.175rem 0.4375rem;
+    border: 1px solid #DDDDDD;
+    border-radius: 2px;
+    text-decoration: none !important;
+    margin-top: 1.09375rem;
 }
 
 /* ====================================================== 
@@ -9430,6 +9258,175 @@ li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 {
 
 .slides-custom-control li.flex-active {
     background: #EC5E79;
+}
+
+/* ====================================================== 
+    <!-- Tabs -->      
+/* ====================================================== */
+.custom-tabs {
+  /* 
+	 ---------------------------
+	 Tab Normal Effect
+	 ---------------------------
+	 */
+  /* 
+	 ---------------------------
+	 Tab Rotation Effect
+	 ---------------------------
+	 */;
+}
+
+.custom-tabs:not(.rotation) {
+  /* @include outer-shadow(); */
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+}
+
+.custom-tabs:not(.rotation) .marker {
+    background: #212121;
+    height: 2px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    transition: .1s ease-in-out;
+}
+
+.custom-tabs .content {
+    display: none;
+    padding: 1.3125rem;
+    text-align: left;
+}
+
+.custom-tabs .content.active {
+    display: block;
+}
+
+.custom-tabs .custom-tabs-ul-container > ul > li {
+    position: relative;
+    display: block;
+    transition: .1s ease-in-out;
+    list-style: none;
+    float: left;
+    box-shadow: inset 1px 0px 0px 0px #e6e6e6;
+    background: #f7f7f7;
+    min-width: 7.5rem;
+}
+
+.custom-tabs .custom-tabs-ul-container > ul > li > a {
+    position: relative;
+    padding: 0.625rem 1rem;
+    display: block;
+    text-align: center;
+}
+
+.custom-tabs .custom-tabs-ul-container > ul > li.active {
+    background: #fff;
+}
+
+.custom-tabs .custom-tabs-ul-container > ul:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.custom-tabs.custom-tabs-center {
+    box-shadow: none;
+}
+
+.custom-tabs.custom-tabs-center .custom-tabs-ul-container > ul {
+    font-size: 0;
+  /*Fighting the Space Between Inline Block Elements*/
+    display: block;
+    width: 100%;
+    text-align: center;
+  /*require*/
+  /* @include outer-shadow(); */
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+}
+
+.custom-tabs.custom-tabs-center .custom-tabs-ul-container > ul li {
+    font-size: 1rem;
+  /*Fighting the Space Between Inline Block Elements*/
+    display: inline-block;
+  /*require*/
+    float: none;
+}
+
+.custom-tabs.rotation {
+    height: 400px;
+}
+
+.custom-tabs.rotation .content {
+    position: absolute;
+    top: 0;
+    left: 400px;
+    width: 300px;
+  /* @include outer-shadow(); */
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+}
+
+.custom-tabs.rotation .custom-tabs-ul-container {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    margin: 0;
+}
+
+.custom-tabs.rotation .custom-tabs-ul-container > ul {
+    position: relative;
+    display: block;
+    width: 300px;
+    height: 300px;
+}
+
+.custom-tabs.rotation .custom-tabs-ul-container > ul > li {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: none;
+    box-shadow: none;
+    transition: none;
+}
+
+.custom-tabs.rotation .custom-tabs-ul-container > ul > li > a {
+    width: 80px;
+    height: 80px;
+    line-height: 60px;
+    background: #fff;
+    border-radius: 100%;
+  /* @include outer-shadow(); */
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+}
+
+.custom-tabs.rotation .custom-tabs-ul-container > ul > li.active > a {
+    background: #212121;
+    color: #fff;
+}
+
+@media all and (max-width: 768px) {
+    .custom-tabs {
+    /* Tab Rotation Effect */;
+    }
+
+    .custom-tabs:not(.rotation) li {
+        width: 100% !important;
+    }
+
+    .custom-tabs.rotation {
+        height: 400px;
+    }
+
+    .custom-tabs.rotation .content {
+        position: relative;
+        left: 0;
+        width: 100%;
+    }
+
+    .custom-tabs.rotation .custom-tabs-ul-container {
+        margin-top: 50px;
+        margin-left: 120px;
+    }
 }
 
 /* ====================================================== 
@@ -10076,6 +10073,11 @@ a img.aligncenter {
 .gallery-columns-7 .gallery-caption,
 .gallery-columns-8 .gallery-caption,
 .gallery-columns-9 .gallery-caption {
+    display: none;
+}
+
+/* other */
+mns-9 .gallery-caption {
     display: none;
 }
 

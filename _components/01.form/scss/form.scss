@@ -617,7 +617,7 @@ $control-focus-color: $primary-text-color1;
 		display: none;
 
 		&:checked + .custom-radio-trigger::before{
-		transform: scale(1);
+		    transform: scale(1);
 		}
 	}
 
