@@ -53,8 +53,8 @@
     12. Loader 
     13. Overlay 
     14. Pagination 
-    15. Filterable Navigation 
-    16. Sidebar 
+    15. Sidebar 
+    16. Filterable Navigation 
     17. Search 
     18. Tags 
     19. Entry 
@@ -97,6 +97,7 @@
     56. Testimonials Carousel 
     57. Timeline 
     58. ToolTip 
+    59. WordPress Core 
 
 
 
@@ -5238,28 +5239,6 @@ dl.list-side-by-side:after {
     clear: both;
 }
 
-.list-split-content-container .imagery-background {
-    width: 100%;
-}
-
-.list-split-content-container .imagery-background img {
-    width: 100%;
-    display: block;
-    height: auto;
-}
-
-.list-split-content-container .image-container {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    opacity: 0;
-    transition: opacity 300ms cubic-bezier(0.694, 0, 0.335, 1);
-}
-
-.list-split-content-container .image-container.is-loaded {
-    opacity: 1;
-}
-
 .list-split-content-container .to-left {
     position: relative;
     width: 30%;
@@ -6101,135 +6080,6 @@ dl.list-side-by-side:after {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: 2px;
-}
-
-/* ====================================================== 
-   <!-- Pricing --> 
-/* ====================================================== */
-.custom-price {
-    text-align: center;
-    position: relative;
-}
-
-.custom-price:before {
-    padding-top: 2.25rem;
-}
-
-.custom-price:after {
-    padding-bottom: 0;
-}
-
-.custom-price ul,
-.custom-price ol {
-  /*default*/
-    display: block;
-    list-style-type: disc;
-    margin-top: 0.875rem;
-    margin-bottom: 0.875rem;
-    margin-left: 0;
-    margin-right: 0;
-    padding-bottom: 1.7rem;
-  /*custom*/
-    line-height: 2;
-}
-
-.custom-price li {
-  /*default*/
-    list-style: none;
-}
-
-.custom-price li:before {
-    font-family: 'FontAwesome';
-    content: "\f00c";
-    display: inline-block;
-    margin-right: .4rem;
-}
-
-.custom-price .hr {
-    margin: 1.5rem 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.custom-price .border-hover {
-    margin-bottom: 1.5rem;
-}
-
-.custom-price .border {
-    padding-top: 0.875rem;
-    position: relative;
-    box-shadow: 0 22px 40px 0 #eef4fc;
-    border-radius: 10px;
-    background: #fff;
-    transition: .1s ease-in-out;
-}
-
-.custom-price .border:hover {
-    box-shadow: 0 31px 32px 0 #cbdfee;
-}
-
-.custom-price .level {
-    font-size: 0.7rem;
-    text-align: center;
-    text-indent: 0.875rem;
-    text-transform: uppercase;
-    position: relative;
-    z-index: 3;
-    font-weight: 700;
-    opacity: 0.35;
-}
-
-.custom-price .num {
-    color: #EC5E79;
-    font-weight: 700;
-    font-size: 3.5rem;
-    margin-top: 0.875rem;
-}
-
-.custom-price .currency {
-    font-size: 0.875rem;
-}
-
-.custom-price .period {
-    font-size: 12px;
-}
-
-.custom-price .period:before {
-    content: '/';
-    padding-right: .1rem;
-}
-
-.custom-price .detail {
-    text-align: left;
-    padding-bottom: 1.125rem;
-    padding-left: 1rem;
-    font-size: 0.875rem;
-}
-
-.custom-price .excerpt {
-    height: auto;
-    padding: 0 0.875rem;
-    font-size: 0.875rem;
-    opacity: 0.65;
-}
-
-.custom-price .excerpt p {
-    line-height: 1.5;
-}
-
-.custom-price .bg {
-    padding-top: 1.875rem;
-    height: auto;
-}
-
-.custom-price .border.active .num,
-.custom-price .border.active .excerpt,
-.custom-price .border.active .detail,
-.custom-price .border.active .level {
-    color: #fff !important;
-}
-
-.custom-price .border.active .excerpt {
-    opacity: 0.65;
 }
 
 /* ====================================================== 
@@ -8159,6 +8009,135 @@ dl.list-side-by-side:after {
 
 .custom-rectangle-progressbar.progress-100 .track {
     width: 100%;
+}
+
+/* ====================================================== 
+   <!-- Pricing --> 
+/* ====================================================== */
+.custom-price {
+    text-align: center;
+    position: relative;
+}
+
+.custom-price:before {
+    padding-top: 2.25rem;
+}
+
+.custom-price:after {
+    padding-bottom: 0;
+}
+
+.custom-price ul,
+.custom-price ol {
+  /*default*/
+    display: block;
+    list-style-type: disc;
+    margin-top: 0.875rem;
+    margin-bottom: 0.875rem;
+    margin-left: 0;
+    margin-right: 0;
+    padding-bottom: 1.7rem;
+  /*custom*/
+    line-height: 2;
+}
+
+.custom-price li {
+  /*default*/
+    list-style: none;
+}
+
+.custom-price li:before {
+    font-family: 'FontAwesome';
+    content: "\f00c";
+    display: inline-block;
+    margin-right: .4rem;
+}
+
+.custom-price .hr {
+    margin: 1.5rem 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.custom-price .border-hover {
+    margin-bottom: 1.5rem;
+}
+
+.custom-price .border {
+    padding-top: 0.875rem;
+    position: relative;
+    box-shadow: 0 22px 40px 0 #eef4fc;
+    border-radius: 10px;
+    background: #fff;
+    transition: .1s ease-in-out;
+}
+
+.custom-price .border:hover {
+    box-shadow: 0 31px 32px 0 #cbdfee;
+}
+
+.custom-price .level {
+    font-size: 0.7rem;
+    text-align: center;
+    text-indent: 0.875rem;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 3;
+    font-weight: 700;
+    opacity: 0.35;
+}
+
+.custom-price .num {
+    color: #EC5E79;
+    font-weight: 700;
+    font-size: 3.5rem;
+    margin-top: 0.875rem;
+}
+
+.custom-price .currency {
+    font-size: 0.875rem;
+}
+
+.custom-price .period {
+    font-size: 12px;
+}
+
+.custom-price .period:before {
+    content: '/';
+    padding-right: .1rem;
+}
+
+.custom-price .detail {
+    text-align: left;
+    padding-bottom: 1.125rem;
+    padding-left: 1rem;
+    font-size: 0.875rem;
+}
+
+.custom-price .excerpt {
+    height: auto;
+    padding: 0 0.875rem;
+    font-size: 0.875rem;
+    opacity: 0.65;
+}
+
+.custom-price .excerpt p {
+    line-height: 1.5;
+}
+
+.custom-price .bg {
+    padding-top: 1.875rem;
+    height: auto;
+}
+
+.custom-price .border.active .num,
+.custom-price .border.active .excerpt,
+.custom-price .border.active .detail,
+.custom-price .border.active .level {
+    color: #fff !important;
+}
+
+.custom-price .border.active .excerpt {
+    opacity: 0.65;
 }
 
 /* ====================================================== 
@@ -10192,10 +10171,6 @@ a img.aligncenter {
 .gallery-columns-8 .gallery-caption,
 .gallery-columns-9 .gallery-caption {
     display: none;
-}
-
-/* other */
-y: none;
 }
 
 /* other */

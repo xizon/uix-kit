@@ -38,35 +38,34 @@
     13. Accordion 
     14. Counter 
     15. Dynamic Drop Down List from JSON 
-    16. Form Progress 
-    17. Gallery 
-    18. Form 
+    16. Form 
+    17. Form Progress 
+    18. Gallery 
     19. Custom Core Scripts & Stylesheets 
     20. Bulleted List 
     21. Posts List With Ajax 
-    22. Fullwidth List of Split 2 
-    23. Fullwidth List of Split 
-    24. Mobile Menu 
-    25. Modal Dialog 
-    26. Mousewheel Interaction 
-    27. Multiple Items Carousel 
-    28. Navigation Highlighting 
-    29. Parallax 
-    30. Periodical Scroll 
-    31. Pricing 
-    32. Progress Bar 
-    33. Retina Graphics for Website 
-    34. Scroll Reveal 
-    35. Show More Less 
-    36. Custom Lightbox 
-    37. Slideshow ( with custom flexslider ) 
-    38. Source Code 
-    39. Sticky Elements 
-    40. Tabs 
-    41. Testimonials Carousel 
-    42. Text effect 
-    43. Timeline 
-    44. AJAX 
+    22. Fullwidth List of Split 
+    23. Mobile Menu 
+    24. Modal Dialog 
+    25. Mousewheel Interaction 
+    26. Multiple Items Carousel 
+    27. Navigation Highlighting 
+    28. Parallax 
+    29. Periodical Scroll 
+    30. Pricing 
+    31. Progress Bar 
+    32. Retina Graphics for Website 
+    33. Scroll Reveal 
+    34. Show More Less 
+    35. Custom Lightbox 
+    36. Slideshow ( with custom flexslider ) 
+    37. Source Code 
+    38. Sticky Elements 
+    39. Tabs 
+    40. Testimonials Carousel 
+    41. Text effect 
+    42. Timeline 
+    43. AJAX 
 
 
 */
@@ -5097,73 +5096,6 @@ theme = ( function ( theme, $, window, document ) {
     };
 
     theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
-
-
-
-
-/* 
- *************************************
- * <!-- Fullwidth List of Split 2 -->
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-   
-   
-    var pageLoaded = function() {
-		
-		var $window      = $( window ),
-			windowWidth  = $window.width(),
-			windowHeight = $window.height();
-		
-		
-		fullwidthListSplitInit( windowWidth );
-		
-		$window.on( 'resize', function() {
-			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( $window.width() != windowWidth ) {
-
-				// Update the window width for next time
-				windowWidth = $window.width();
-
-				// Do stuff here
-				fullwidthListSplitInit( windowWidth );
-		
-
-			}
-		});
-		
-		
-		
-		function fullwidthListSplitInit( w ) {
-			
-			$( '.list-split-content-container' ).each(function() {
-		
-				if ( imgH > 0 ) {
-					$( this ).find( '.to-left, .to-right' ).css( 'height', imgH + 'px' );
-				}
-
-				if ( w <= 768 ) {
-					$( this ).find( '.to-left, .to-right' ).css( 'height', 'auto' );
-				}
-
-			});		
-			
-		}
-		
-
-		
-		
-	};
-		
-    theme.fullwidthListSplit2 = {
-        pageLoaded : pageLoaded        
-    };
-
-    theme.components.pageLoaded.push( pageLoaded );
     return theme;
 
 }( theme, jQuery, window, document ) );

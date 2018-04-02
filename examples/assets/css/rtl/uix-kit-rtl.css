@@ -30,23 +30,6 @@
     2. Helper Classes 
     3. Basic Layout Styles 
     4. Navigation Area 
-    5. Header Area 
-    6. Brand 
-    7. Filterable Navigation 
-    8. Sidebar 
-    9. Search 
-    10. Comments 
-    11. Author Card 
-    12. Dropdown Menu 
-    13. Form 
-    14. Brands List 
-    15. Bulleted List 
-    16. Maintain Aspect Ratio List 
-    17. Side by Side List 
-    18. Mobile Menu 
-    19. Slideshow ( with custom flexslider ) 
-    20. Source Code 
-    21. ToolTip 
 
 
 
@@ -532,6 +515,26 @@ dl.list-side-by-side dd {
     <!-- Source Code -->       
 /* ====================================================== */
 /* Pretty printing styles. Used with prettify.js. */
+pre.prettyprint {
+    direction: ltr;
+}
+
+/* Source Code Button */
+#view-source {
+    right: auto;
+    left: 20px;
+}
+
+/* ====================================================== 
+   <!-- ToolTip -->       
+/* ====================================================== */
+.custom-tip > div {
+    margin-left: auto;
+    margin-right: 1rem;
+}
+
+/*# sourceMappingURL=uix-kit-rtl.css.map */
+. */
 pre.prettyprint {
     direction: ltr;
 }
