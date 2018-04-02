@@ -511,10 +511,34 @@ theme = ( function ( theme, $, window, document ) {
 			} 
 			
 			
+			// Determine if this slider is added with a synchronization event
+			$( '[data-mysync]' ).each( function()  {
+				var curSync      = $( this ).data( 'mysync' ),
+					thisSliderID = $this.attr( 'id' );
+				
+				
+				if( typeof curSync != typeof undefined ) {
+					curSync = curSync.toString().replace( '#', '' ).replace( '.', '' );
+				}
+				
+				if( typeof thisSliderID != typeof undefined && thisSliderID == curSync ) {
+					dataAuto = false;
+					dataPaging = false;
+					
+					// break out of jQuery each Loop
+					return false; 
+				}
+
+
+			});
+			
+			
 			//Display counter
 			var $countTotal = ( dataCountTotal ) ? $( dataCountTotal ) : $( 'p.count em.count' ), 
 				$countCur   = ( dataCountCur ) ? $( dataCountCur ) : $( 'p.count em.current' );
 			
+			
+
 			
 			$this.flexslider({
 				namespace	      : 'custom-theme-flex-',
