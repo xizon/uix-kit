@@ -59,6 +59,7 @@ h5,
 h6, 
 p, 
 ul, 
+ol,
 a {
 	margin: 0;
 	padding: 0;
@@ -80,105 +81,10 @@ body {
 }
 
 p, 
-ul, 
-ol, 
 pre, 
 table, 
 blockquote {
     margin-bottom: 1.421875rem;
-}
-
-
-ul, 
-ol {
-    list-style: none;
-	
-	> li {
-		margin-bottom: 0;
-	}
-}
-
-
-ol.list-normal,
-ul.list-normal,
-.list-normal ul,
-.list-normal ol {
-	
-	display: block;
-	margin: 1.421875rem;
-	padding-left: 0.875rem;	
-	
-	ul, 
-	ol {
-		margin-top: 0;
-		margin-bottom: 0;
-		padding-top: 0;
-		padding-bottom: 0;
-	}
-}
-
-ul.list-normal, 
-.list-normal ul {
-    list-style-type: disc;
-}
-
-ol.list-normal, 
-.list-normal ol {
-    list-style-type: decimal;
-}
-
-
-ol.list-numbered,
-.list-numbered ol {
-    list-style: none;
-    margin-left: 1em;
-    counter-reset: line;
-	
-	> li {
-		position: relative;
-		margin-bottom: .5em;
-	}
-
-	> li:before {
-		position: absolute;
-		left: -2.25em;
-		display: inline-block;
-		width: 22px;
-		height: 22px;
-		margin-right: 0.5em;
-		background-color: $highlight-color1;
-		border-radius: 50%;
-		color: #fff;
-		text-align: center;
-		line-height: 22px;
-		counter-increment: line;
-		content: '0' counter(line);
-		font-size: 0.75rem;
-	}	
-	
-	&.none-zero > li:before {
-		content: counter(line);
-	}	
-	
-}
-
-
-
-table.table-normal,
-.table-normal table {
-	border: 1px solid black;
-	border-collapse: collapse;
-	width: 100%;
-	
-	th {
-		text-align: left;
-	}
-	
-	td, 
-	th {
-		border: 1px solid black;
-		padding: 0.6875rem;
-	}
 }
 
 
@@ -233,6 +139,7 @@ img {
 iframe {
     border: none !important;
 }
+
 
 
 

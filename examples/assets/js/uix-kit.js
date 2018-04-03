@@ -8,7 +8,7 @@
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
  * ## Version             :  1.2.0
- * ## Last Update         :  April 2, 2018
+ * ## Last Update         :  April 3, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -28,8 +28,8 @@
     3. Back to Top 
     4. Overlay 
     5. Navigation 
-    6. Videos 
-    7. Initialize the height of each column of the grid system 
+    6. Initialize the height of each column of the grid system 
+    7. Videos 
     8. Mega Menu 
     9. Dropdown Categories 
     10. Pagination 
@@ -38,8 +38,8 @@
     13. Accordion 
     14. Counter 
     15. Dynamic Drop Down List from JSON 
-    16. Form Progress 
-    17. Form 
+    16. Form 
+    17. Form Progress 
     18. Gallery 
     19. Custom Core Scripts & Stylesheets 
     20. Bulleted List 
@@ -63,8 +63,8 @@
     38. Sticky Elements 
     39. Tabs 
     40. Testimonials Carousel 
-    41. Timeline 
-    42. Text effect 
+    41. Text effect 
+    42. Timeline 
     43. AJAX 
 
 

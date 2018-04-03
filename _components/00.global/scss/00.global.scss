@@ -99,21 +99,21 @@ $primary-bg-color      : transparent;
 // Background Gradient
 // ---------------------------
 //
-@mixin bg-gradient() {
-	/* @include bg-gradient(); */
+@mixin bg-gradient( $direction: 'to right' ) {
+	/* @include bg-gradient( 'to bottom' ); */
 	//Compatible with ie9+
 	background: $highlight-color1; 
-	background: linear-gradient(to right, $highlight-color1 0%,$highlight-color2 100%);
+	background: linear-gradient(#{$direction}, $highlight-color1 0%,$highlight-color2 100%);
 }
 
 
 // Icon & Text Gradient
 // ---------------------------
 //
-@mixin icontxt-gradient() {
-	/* @include icontxt-gradient(); */
+@mixin icontxt-gradient( $direction: 'to right' ) {
+	/* @include icontxt-gradient( 'to bottom' ); */
 	/* The font is the default color when the browser is IE */
-	background: linear-gradient(to right, $highlight-color1 0%,$highlight-color2 100%);
+	background: linear-gradient(#{$direction}, $highlight-color1 0%,$highlight-color2 100%);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	
@@ -126,14 +126,14 @@ $primary-bg-color      : transparent;
 @mixin gradient-border( $color1, $color2, $border-width, $direction, $bg ) {
 	/* @include gradient-border( $highlight-color1, $highlight-color2, 3px, 'to right', #fff ); */
 	//Compatible with ie9+
-	background: $bg;
+	background: #{$bg};
    
 	
 	&::after {
 		/* Please do not convert it to block elements and set width and height. */
 		content: '';
-		background: $color1;
-		background: linear-gradient(#{$direction}, $color1 0%, $color2 100%), linear-gradient(#{$direction}, $color1 0%, $color2 100%);
+		background: #{$color1};
+		background: linear-gradient(#{$direction}, #{$color1} 0%, #{$color2} 100%), linear-gradient(#{$direction}, #{$color1} 0%, #{$color2} 100%);
 		position: absolute;
 		top: -#{$border-width};
 		bottom: -#{$border-width};
@@ -173,6 +173,29 @@ $primary-bg-color      : transparent;
 	white-space: nowrap;
 	
 }
+
+// Adding Stroke to Web Text
+// ---------------------------
+//
+@mixin stroke-text( $color, $width: '1px', $fill: 'white' ){
+	/* @include stroke-text( $highlight-color1, 1px, white ); */
+	text-fill-color: #{$fill}; /* Will override color (regardless of order) */
+	text-stroke-width: #{$width};
+	text-stroke-color: #{$color};
+	
+}
+
+//  Make the cursor a hand when a user hovers over an item
+// ---------------------------
+//
+@mixin cursor-img( $img: '../../assets-demo/images/cursorhand.png' ){
+	/* @include cursor-img( '../../assets-demo/images/cursorhand.png' ); */
+	cursor: url(#{$img}), auto;
+	
+}
+
+
+
 
 
 // Custom Scrollbar

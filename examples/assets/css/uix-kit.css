@@ -8,7 +8,7 @@
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
  * ## Version             :  1.2.0
- * ## Last Update         :  April 2, 2018
+ * ## Last Update         :  April 3, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -40,66 +40,69 @@
 	---------------------------
 	
     1. Basic 
-    2. Helper Classes 
-    3. Typography 
-    4. Spacing 
-    5. Basic Layout Styles 
-    6. Navigation Area 
-    7. Header Area 
-    8. Brand 
-    9. Footer 
-    10. Video 
-    11. Back to Top 
-    12. Loader 
-    13. Overlay 
-    14. Pagination 
-    15. Filterable Navigation 
-    16. Sidebar 
-    17. Search 
-    18. Tags 
-    19. Entry 
-    20. Comments 
-    21. 3rd Party Plugins 
-    22. Social Media Icons 
-    23. Accordion 
-    24. Badges 
-    25. Breadcrumbs 
-    26. Button 
-    27. Author Card 
-    28. Counter 
-    29. Dropdown Menu 
-    30. Equal-width Divs 
-    31. Features 
-    32. Footer Templates 
-    33. Form 
-    34. Form Progress 
-    35. Gallery 
-    36. Custom Core Scripts & Stylesheets 
-    37. Brands List 
-    38. Bulleted List 
-    39. Maintain Aspect Ratio List 
-    40. List of Posts 
-    41. List of Split Posts 
-    42. Side by Side List 
-    43. Fullwidth List of Split 2 
-    44. Fullwidth List of Split 
-    45. Mobile Menu 
-    46. Modal Dialog 
-    47. Multiple Items Carousel 
-    48. Parallax 
-    49. Periodical Scroll 
-    50. Pricing 
-    51. Progress Bar 
-    52. Show More Less 
-    53. Cutom Light Box 
-    54. Single Post 
-    55. Slideshow ( with custom flexslider ) 
-    56. Source Code 
-    57. Tabs 
-    58. Testimonials Carousel 
-    59. Timeline 
-    60. ToolTip 
-    61. WordPress Core 
+    2. Basic 
+    3. Table 
+    4. Bullet List 
+    5. Helper Classes 
+    6. Typography 
+    7. Spacing 
+    8. Basic Layout Styles 
+    9. Navigation Area 
+    10. Header Area 
+    11. Brand 
+    12. Footer 
+    13. Video 
+    14. Back to Top 
+    15. Loader 
+    16. Overlay 
+    17. Pagination 
+    18. Filterable Navigation 
+    19. Sidebar 
+    20. Search 
+    21. Tags 
+    22. Entry 
+    23. Comments 
+    24. 3rd Party Plugins 
+    25. Social Media Icons 
+    26. Accordion 
+    27. Badges 
+    28. Breadcrumbs 
+    29. Author Card 
+    30. Button 
+    31. Counter 
+    32. Dropdown Menu 
+    33. Equal-width Divs 
+    34. Features 
+    35. Footer Templates 
+    36. Form 
+    37. Form Progress 
+    38. Gallery 
+    39. Custom Core Scripts & Stylesheets 
+    40. Brands List 
+    41. Bulleted List 
+    42. Maintain Aspect Ratio List 
+    43. List of Posts 
+    44. List of Split Posts 
+    45. Side by Side List 
+    46. Fullwidth List of Split 2 
+    47. Fullwidth List of Split 
+    48. Mobile Menu 
+    49. Modal Dialog 
+    50. Multiple Items Carousel 
+    51. Parallax 
+    52. Periodical Scroll 
+    53. Pricing 
+    54. Progress Bar 
+    55. Show More Less 
+    56. Cutom Light Box 
+    57. Single Post 
+    58. Slideshow ( with custom flexslider ) 
+    59. Source Code 
+    60. Tabs 
+    61. Testimonials Carousel 
+    62. Timeline 
+    63. ToolTip 
+    64. WordPress Core 
 
 
 
@@ -175,6 +178,7 @@ h5,
 h6,
 p,
 ul,
+ol,
 a {
     margin: 0;
     padding: 0;
@@ -196,111 +200,10 @@ body {
 }
 
 p,
-ul,
-ol,
 pre,
 table,
 blockquote {
     margin-bottom: 1.421875rem;
-}
-
-ul,
-ol {
-    list-style: none;
-}
-
-ul > li,
-ol > li {
-    margin-bottom: 0;
-}
-
-ol.list-normal,
-ul.list-normal,
-.list-normal ul,
-.list-normal ol {
-    display: block;
-    margin: 1.421875rem;
-    padding-left: 0.875rem;
-}
-
-ol.list-normal ul,
-ol.list-normal ol,
-ul.list-normal ul,
-ul.list-normal ol,
-.list-normal ul ul,
-.list-normal ul ol,
-.list-normal ol ul,
-.list-normal ol ol {
-    margin-top: 0;
-    margin-bottom: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-}
-
-ul.list-normal,
-.list-normal ul {
-    list-style-type: disc;
-}
-
-ol.list-normal,
-.list-normal ol {
-    list-style-type: decimal;
-}
-
-ol.list-numbered,
-.list-numbered ol {
-    list-style: none;
-    margin-left: 1em;
-    counter-reset: line;
-}
-
-ol.list-numbered > li,
-.list-numbered ol > li {
-    position: relative;
-    margin-bottom: .5em;
-}
-
-ol.list-numbered > li:before,
-.list-numbered ol > li:before {
-    position: absolute;
-    left: -2.25em;
-    display: inline-block;
-    width: 22px;
-    height: 22px;
-    margin-right: 0.5em;
-    background-color: #EC5E79;
-    border-radius: 50%;
-    color: #fff;
-    text-align: center;
-    line-height: 22px;
-    counter-increment: line;
-    content: "0" counter(line);
-    font-size: 0.75rem;
-}
-
-ol.list-numbered.none-zero > li:before,
-.list-numbered ol.none-zero > li:before {
-    content: counter(line);
-}
-
-table.table-normal,
-.table-normal table {
-    border: 1px solid black;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-table.table-normal th,
-.table-normal table th {
-    text-align: left;
-}
-
-table.table-normal td,
-table.table-normal th,
-.table-normal table td,
-.table-normal table th {
-    border: 1px solid black;
-    padding: 0.6875rem;
 }
 
 select {
@@ -352,6 +255,150 @@ img {
 
 iframe {
     border: none !important;
+}
+
+/* ====================================================== 
+   <!-- Table -->      
+/* ====================================================== */
+table.table-normal,
+.table-normal table {
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table.table-normal th,
+.table-normal table th {
+    text-align: left;
+}
+
+table.table-normal td,
+table.table-normal th,
+.table-normal table td,
+.table-normal table th {
+    border: 1px solid black;
+    padding: 0.6875rem;
+}
+
+/* ====================================================== 
+   <!-- Bullet List -->      
+/* ====================================================== */
+ul,
+ol {
+    list-style: none;
+    margin-bottom: 1.421875rem;
+}
+
+ul > li,
+ol > li {
+    margin-bottom: 0;
+}
+
+ol.list-normal,
+ul.list-normal,
+.list-normal ul,
+.list-normal ol {
+    display: block;
+    margin: 1.421875rem;
+    padding-left: 0.875rem;
+}
+
+ol.list-normal ul,
+ol.list-normal ol,
+ul.list-normal ul,
+ul.list-normal ol,
+.list-normal ul ul,
+.list-normal ul ol,
+.list-normal ol ul,
+.list-normal ol ol {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+ul.list-normal,
+.list-normal ul {
+    list-style-type: disc;
+}
+
+ol.list-normal,
+.list-normal ol {
+    list-style-type: decimal;
+}
+
+ol.list-numbered,
+.list-numbered ol {
+    list-style: none;
+    margin-left: 1rem;
+    counter-reset: line;
+}
+
+ol.list-numbered > li,
+.list-numbered ol > li {
+    position: relative;
+    margin-bottom: .5rem;
+}
+
+ol.list-numbered > li:before,
+.list-numbered ol > li:before {
+    position: absolute;
+    left: -2.25em;
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    margin-right: 0.5em;
+    background-color: #EC5E79;
+    border-radius: 50%;
+    color: #fff;
+    text-align: center;
+    line-height: 22px;
+    counter-increment: line;
+    content: "0" counter(line);
+    font-size: 0.75rem;
+}
+
+ol.list-numbered.none-zero > li:before,
+.list-numbered ol.none-zero > li:before {
+    content: counter(line);
+}
+
+ol.list-circle,
+ul.list-circle,
+.list-circle ol,
+.list-circle ul {
+    list-style: none;
+    margin-left: 1rem;
+    counter-reset: line;
+}
+
+ol.list-circle > li,
+ul.list-circle > li,
+.list-circle ol > li,
+.list-circle ul > li {
+    position: relative;
+    margin-bottom: 1.5rem;
+    color: #212121;
+    font-size: 1.125rem;
+}
+
+ol.list-circle > li:before,
+ul.list-circle > li:before,
+.list-circle ol > li:before,
+.list-circle ul > li:before {
+    position: absolute;
+    left: -1.5em;
+    top: 50%;
+    transform: translateY(-50%);
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #EC5E79;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    counter-increment: line;
+    content: '';
 }
 
 /* ====================================================== 
@@ -788,6 +835,7 @@ List Normal & Other Text
     color: #AEAEAE !important;
 }
 
+/* Compatible with  Uix Shortcodes (WordPress Plugin) */
 .list-normal a:not(.uix-sc-btn),
 .table-normal a:not(.uix-sc-btn) {
     color: #EC5E79;
@@ -5322,7 +5370,7 @@ dl.list-side-by-side:after {
     float: left;
     padding-left: 5vw;
     padding-right: calc(6.730769230769% + 15px);
-  /* @include bg-gradient(); */
+  /* @include bg-gradient( 'to bottom' ); */
     background: #EC5E79;
     background: linear-gradient(to right, #EC5E79 0%, #E8588C 100%);
   /* @include outer-shadow(); */
@@ -6139,7 +6187,7 @@ dl.list-side-by-side:after {
 
 .custom-periodical-scroll ul li span {
     display: block;
-  /* @include icontxt-gradient(); */
+  /* @include icontxt-gradient( 'to bottom' ); */
   /* The font is the default color when the browser is IE */
     background: linear-gradient(to right, #EC5E79 0%, #E8588C 100%);
     -webkit-background-clip: text;
@@ -8538,6 +8586,20 @@ dl.list-side-by-side:after {
 }
 
 /* ====================================================== 
+     <!-- Single Post -->        
+/* ====================================================== */
+/* Post edit link */
+.post-edit-link {
+    display: inline-block;
+    background: #F9F9F9;
+    padding: 0.175rem 0.4375rem;
+    border: 1px solid #DDDDDD;
+    border-radius: 2px;
+    text-decoration: none !important;
+    margin-top: 1.09375rem;
+}
+
+/* ====================================================== 
     <!-- Slideshow ( with custom flexslider ) -->  
 /* ====================================================== */
 /* 
@@ -9024,20 +9086,6 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 
 .custom-theme-flexslider.custom-parallax-flexslider .custom-theme-slides > .item.right .level-2 {
     transform: translate(50px, -50%);
-}
-
-/* ====================================================== 
-     <!-- Single Post -->        
-/* ====================================================== */
-/* Post edit link */
-.post-edit-link {
-    display: inline-block;
-    background: #F9F9F9;
-    padding: 0.175rem 0.4375rem;
-    border: 1px solid #DDDDDD;
-    border-radius: 2px;
-    text-decoration: none !important;
-    margin-top: 1.09375rem;
 }
 
 /* ====================================================== 

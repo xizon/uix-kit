@@ -1,0 +1,19 @@
+/* ====================================================== 
+   <!-- Table -->      
+/* ====================================================== */
+table.table-normal,
+.table-normal table {
+	border: 1px solid black;
+	border-collapse: collapse;
+	width: 100%;
+	
+	th {
+		text-align: left;
+	}
+	
+	td, 
+	th {
+		border: 1px solid black;
+		padding: 0.6875rem;
+	}
+}
