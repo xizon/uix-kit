@@ -28,8 +28,8 @@
     3. Back to Top 
     4. Overlay 
     5. Navigation 
-    6. Initialize the height of each column of the grid system 
-    7. Videos 
+    6. Videos 
+    7. Initialize the height of each column of the grid system 
     8. Mega Menu 
     9. Dropdown Categories 
     10. Pagination 
@@ -38,8 +38,8 @@
     13. Accordion 
     14. Counter 
     15. Dynamic Drop Down List from JSON 
-    16. Form 
-    17. Form Progress 
+    16. Form Progress 
+    17. Form 
     18. Gallery 
     19. Custom Core Scripts & Stylesheets 
     20. Bulleted List 
@@ -5324,6 +5324,93 @@ theme = ( function ( theme, $, window, document ) {
 
 /* 
  *************************************
+ * <!-- Mousewheel Interaction -->
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ){
+		
+		
+		//Prevent this module from loading in other pages
+		if ( !$( 'body' ).hasClass( 'page-mousewheel-eff' ) ) return false;
+		
+		
+	    //Determine the direction of a jQuery scroll event
+		//Fix an issue for mousewheel event is too fast.
+		var mousewheelTrigger = true,
+			scrollCount       = 0;
+		
+		$( window ).on( 'mousewheel', function( event ) { 
+
+			if ( mousewheelTrigger ) {
+
+				if( event.originalEvent.wheelDelta < 0) {
+					//scroll down
+					$( '#demo-mousewheel-interaction-status' ).text( 'Direction: down, Total: ' + scrollCount );
+
+					scrollCount++;
+					
+					//Prohibited scrolling trigger
+					mousewheelTrigger = false;
+					
+					//Do something
+					customMouseHandle();		
+					
+
+				} else {
+					//scroll up
+					$( '#demo-mousewheel-interaction-status' ).text( 'Direction: up, Total: ' + scrollCount );
+
+					scrollCount++;
+					
+					//Prohibited scrolling trigger
+					mousewheelTrigger = false;
+					
+					//Do something
+					customMouseHandle();
+
+				}	
+
+			}
+			
+
+			//prevent page fom scrolling
+			//return false;
+
+		});
+	
+		
+		
+
+		function customMouseHandle() {
+			
+			//Reset scrolling trigger
+			setTimeout( function() {
+				mousewheelTrigger = true;	
+			}, 1500 );
+			
+			
+		}
+
+		
+	};
+		
+      
+    theme.mousewheelInteraction = {
+        documentReady : documentReady        
+    };  
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
+/* 
+ *************************************
  * <!-- Modal Dialog -->
  *************************************
  */
@@ -5437,91 +5524,89 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-
 /* 
  *************************************
- * <!-- Mousewheel Interaction -->
+ * <!-- Navigation Highlighting -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ){
-		
-		
-		//Prevent this module from loading in other pages
-		if ( !$( 'body' ).hasClass( 'page-mousewheel-eff' ) ) return false;
-		
-		
-	    //Determine the direction of a jQuery scroll event
-		//Fix an issue for mousewheel event is too fast.
-		var mousewheelTrigger = true,
-			scrollCount       = 0;
-		
-		$( window ).on( 'mousewheel', function( event ) { 
+    
+    var documentReady = function( $ ) {
+    
+        // Get section or article by href
+        function getRelatedContent( el ) {
+            return $( $( el ).attr( 'href' ) );
+        }
+        // Get link by section or article id
+        function getRelatedNavigation( el ) {
+            return $( '.menu-main li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' );
+        } 
+        
+	    //-------- Navigation highlighting using waypoints
+		if ( $( 'body' ).hasClass( 'onepage' ) ) {
 
-			if ( mousewheelTrigger ) {
-
-				if( event.originalEvent.wheelDelta < 0) {
-					//scroll down
-					$( '#demo-mousewheel-interaction-status' ).text( 'Direction: down, Total: ' + scrollCount );
-
-					scrollCount++;
-					
-					//Prohibited scrolling trigger
-					mousewheelTrigger = false;
-					
-					//Do something
-					customMouseHandle();		
-					
-
-				} else {
-					//scroll up
-					$( '#demo-mousewheel-interaction-status' ).text( 'Direction: up, Total: ' + scrollCount );
-
-					scrollCount++;
-					
-					//Prohibited scrolling trigger
-					mousewheelTrigger = false;
-					
-					//Do something
-					customMouseHandle();
-
-				}	
-
-			}
-			
-
-			//prevent page fom scrolling
-			//return false;
-
-		});
-	
-		
-		
-
-		function customMouseHandle() {
-			
-			//Reset scrolling trigger
-			setTimeout( function() {
-				mousewheelTrigger = true;	
-			}, 1500 );
+			//Activate the first item
+			$( '.menu-main li:first' ).addClass( 'active' );
 			
 			
+			// Smooth scroll to content
+			$( '.menu-main li > a' ).on('click', function(e) {
+				e.preventDefault();
+
+				$( 'html,body' ).animate({
+					scrollTop: getRelatedContent( this ).offset().top - 20
+				}, 500, 'easeOutExpo' );
+			});	
+
+			//-------- Default cwaypoint settings
+			var topSectionSpacing = $( '.header-area' ).outerHeight( true );
+			var waypoints1 = $( '[data-highlight-section="true"]' ).waypoint({
+				handler: function( direction ) {
+
+
+					// Highlight element when related content
+					getRelatedNavigation( this.element ).toggleClass( 'active', direction === 'down' );
+					$( this.element ).toggleClass( 'active', direction === 'down' );
+
+				},
+				offset: topSectionSpacing
+			});	
+
+			var waypoints2 = $( '[data-highlight-section="true"]' ).waypoint({
+				handler: function( direction ) {
+
+					// Highlight element when related content
+					getRelatedNavigation( this.element ).toggleClass( 'active', direction === 'up' );
+					$( this.element ).toggleClass( 'active', direction === 'up' );
+
+				},
+				offset: function() {  
+					return -$( this.element ).height() - topSectionSpacing; 
+				}
+			});	
+
 		}
 
 		
-	};
 		
-      
-    theme.mousewheelInteraction = {
+		
+		
+    };
+
+    theme.navHighlight = {
         documentReady : documentReady        
-    };  
+    };
+
     theme.components.documentReady.push( documentReady );
     return theme;
 
 }( theme, jQuery, window, document ) );
+
+
+
+
+
 
 
 /* 
@@ -5904,91 +5989,6 @@ theme = ( function ( theme, $, window, document ) {
     };
 
     theme.multiItemsCarousel = {
-        documentReady : documentReady        
-    };
-
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
-
-
-
-
-
-
-
-/* 
- *************************************
- * <!-- Navigation Highlighting -->
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-    
-    var documentReady = function( $ ) {
-    
-        // Get section or article by href
-        function getRelatedContent( el ) {
-            return $( $( el ).attr( 'href' ) );
-        }
-        // Get link by section or article id
-        function getRelatedNavigation( el ) {
-            return $( '.menu-main li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' );
-        } 
-        
-	    //-------- Navigation highlighting using waypoints
-		if ( $( 'body' ).hasClass( 'onepage' ) ) {
-
-			//Activate the first item
-			$( '.menu-main li:first' ).addClass( 'active' );
-			
-			
-			// Smooth scroll to content
-			$( '.menu-main li > a' ).on('click', function(e) {
-				e.preventDefault();
-
-				$( 'html,body' ).animate({
-					scrollTop: getRelatedContent( this ).offset().top - 20
-				}, 500, 'easeOutExpo' );
-			});	
-
-			//-------- Default cwaypoint settings
-			var topSectionSpacing = $( '.header-area' ).outerHeight( true );
-			var waypoints1 = $( '[data-highlight-section="true"]' ).waypoint({
-				handler: function( direction ) {
-
-
-					// Highlight element when related content
-					getRelatedNavigation( this.element ).toggleClass( 'active', direction === 'down' );
-					$( this.element ).toggleClass( 'active', direction === 'down' );
-
-				},
-				offset: topSectionSpacing
-			});	
-
-			var waypoints2 = $( '[data-highlight-section="true"]' ).waypoint({
-				handler: function( direction ) {
-
-					// Highlight element when related content
-					getRelatedNavigation( this.element ).toggleClass( 'active', direction === 'up' );
-					$( this.element ).toggleClass( 'active', direction === 'up' );
-
-				},
-				offset: function() {  
-					return -$( this.element ).height() - topSectionSpacing; 
-				}
-			});	
-
-		}
-
-		
-		
-		
-		
-    };
-
-    theme.navHighlight = {
         documentReady : documentReady        
     };
 

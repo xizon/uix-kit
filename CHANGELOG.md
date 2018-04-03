@@ -1,5 +1,11 @@
 # Changelog
 
+#### = 1.2.1 (April 3, 2018) =
+
+* Tweak: Expanded some demos of the module "Bulleted List".
+* Tweak: Optimized SCSS file structure.
+
+
 #### = 1.2.0 (April 2, 2018) =
 
 * New: Extend the module "Slideshow" that add a new demo "Sync Multiple Sliders".

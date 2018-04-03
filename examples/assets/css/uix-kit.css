@@ -40,69 +40,68 @@
 	---------------------------
 	
     1. Basic 
-    2. Basic 
-    3. Table 
-    4. Bullet List 
-    5. Helper Classes 
-    6. Typography 
-    7. Spacing 
-    8. Basic Layout Styles 
-    9. Navigation Area 
-    10. Header Area 
-    11. Brand 
-    12. Footer 
-    13. Video 
-    14. Back to Top 
-    15. Loader 
-    16. Overlay 
-    17. Pagination 
-    18. Filterable Navigation 
-    19. Sidebar 
-    20. Search 
-    21. Tags 
-    22. Entry 
-    23. Comments 
-    24. 3rd Party Plugins 
-    25. Social Media Icons 
-    26. Accordion 
-    27. Badges 
-    28. Breadcrumbs 
+    2. Table 
+    3. Bullet List 
+    4. Helper Classes 
+    5. Typography 
+    6. Spacing 
+    7. Basic Layout Styles 
+    8. Navigation Area 
+    9. Header Area 
+    10. Brand 
+    11. Footer 
+    12. Video 
+    13. Back to Top 
+    14. Loader 
+    15. Overlay 
+    16. Pagination 
+    17. Filterable Navigation 
+    18. Sidebar 
+    19. Search 
+    20. Tags 
+    21. Entry 
+    22. Comments 
+    23. 3rd Party Plugins 
+    24. Social Media Icons 
+    25. Accordion 
+    26. Badges 
+    27. Breadcrumbs 
+    28. Button 
     29. Author Card 
-    30. Button 
-    31. Counter 
-    32. Dropdown Menu 
-    33. Equal-width Divs 
-    34. Features 
-    35. Footer Templates 
-    36. Form 
-    37. Form Progress 
-    38. Gallery 
-    39. Custom Core Scripts & Stylesheets 
+    30. Counter 
+    31. Dropdown Menu 
+    32. Equal-width Divs 
+    33. Features 
+    34. Footer Templates 
+    35. Form 
+    36. Form Progress 
+    37. Gallery 
+    38. Custom Core Scripts & Stylesheets 
+    39. Bulleted List 
     40. Brands List 
-    41. Bulleted List 
-    42. Maintain Aspect Ratio List 
-    43. List of Posts 
-    44. List of Split Posts 
-    45. Side by Side List 
-    46. Fullwidth List of Split 2 
-    47. Fullwidth List of Split 
-    48. Mobile Menu 
-    49. Modal Dialog 
-    50. Multiple Items Carousel 
-    51. Parallax 
-    52. Periodical Scroll 
-    53. Pricing 
-    54. Progress Bar 
-    55. Show More Less 
-    56. Cutom Light Box 
-    57. Single Post 
-    58. Slideshow ( with custom flexslider ) 
-    59. Source Code 
-    60. Tabs 
-    61. Testimonials Carousel 
-    62. Timeline 
-    63. ToolTip 
-    64. WordPress Core 
+    41. Maintain Aspect Ratio List 
+    42. List of Posts 
+    43. List of Split Posts 
+    44. Side by Side List 
+    45. Fullwidth List of Split 2 
+    46. Fullwidth List of Split 
+    47. Mobile Menu 
+    48. Modal Dialog 
+    49. Multiple Items Carousel 
+    50. Parallax 
+    51. Periodical Scroll 
+    52. Pricing 
+    53. Progress Bar 
+    54. Show More Less 
+    55. Cutom Light Box 
+    56. Single Post 
+    57. Slideshow ( with custom flexslider ) 
+    58. Source Code 
+    59. Tabs 
+    60. Testimonials Carousel 
+    61. Timeline 
+    62. ToolTip 
+    63. WordPress Core 
 
 
 
@@ -283,6 +282,11 @@ table.table-normal th,
 /* ====================================================== 
    <!-- Bullet List -->      
 /* ====================================================== */
+/* 
+ ---------------------------
+ Normal List Styling
+ ---------------------------
+ */
 ul,
 ol {
     list-style: none;
@@ -292,6 +296,8 @@ ol {
 ul > li,
 ol > li {
     margin-bottom: 0;
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
 }
 
 ol.list-normal,
@@ -327,6 +333,11 @@ ol.list-normal,
     list-style-type: decimal;
 }
 
+/* 
+ ---------------------------
+ Normal Numbers Ordered List
+ ---------------------------
+ */
 ol.list-numbered,
 .list-numbered ol {
     list-style: none;
@@ -338,6 +349,7 @@ ol.list-numbered > li,
 .list-numbered ol > li {
     position: relative;
     margin-bottom: .5rem;
+    margin-left: .5rem;
 }
 
 ol.list-numbered > li:before,
@@ -358,11 +370,15 @@ ol.list-numbered > li:before,
     font-size: 0.75rem;
 }
 
-ol.list-numbered.none-zero > li:before,
-.list-numbered ol.none-zero > li:before {
+.list-numbered.none-zero > li:before {
     content: counter(line);
 }
 
+/* 
+ ---------------------------
+ Custom Circle Icons Ordered List
+ ---------------------------
+ */
 ol.list-circle,
 ul.list-circle,
 .list-circle ol,
@@ -377,9 +393,10 @@ ul.list-circle > li,
 .list-circle ol > li,
 .list-circle ul > li {
     position: relative;
-    margin-bottom: 1.5rem;
+    margin-bottom: .5rem;
     color: #212121;
     font-size: 1.125rem;
+    margin-left: 1rem;
 }
 
 ol.list-circle > li:before,
@@ -399,6 +416,85 @@ ul.list-circle > li:before,
     text-align: center;
     counter-increment: line;
     content: '';
+}
+
+/* 
+ ---------------------------
+ Big Numbers Ordered List
+ ---------------------------
+ */
+ol.list-big-numbered,
+.list-big-numbered ol {
+    counter-reset: item;
+  /*removes original number*/
+    list-style-type: none;
+  /*remove if full width*/
+    text-align: justify;
+}
+
+ol.list-big-numbered li,
+.list-big-numbered ol li {
+    display: block;
+    padding-left: 2.5rem;
+    position: relative;
+    min-height: 3.5rem;
+  /*generic alignment*/
+    text-indent: 0;
+    list-style-position: outside;
+    margin-left: 1.2rem;
+    list-style-type: number;
+}
+
+ol.list-big-numbered li:before,
+.list-big-numbered ol li:before {
+    content: "0" counter(item) ".";
+    counter-increment: item;
+    position: absolute;
+    margin-left: -3.5rem;
+    font-size: 3rem;
+    color: #AEAEAE;
+    line-height: 1;
+}
+
+.list-big-numbered.none-zero li:before {
+    content: counter(item) ".";
+}
+
+ol.list-big-numbered.fill-bg li,
+.list-big-numbered.fill-bg ol li {
+    background: #e4e1e1;
+    min-height: 70px;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+    margin-left: 0;
+    padding-left: 4.5rem;
+}
+
+ol.list-big-numbered.fill-bg li p,
+.list-big-numbered.fill-bg ol li p {
+    padding-top: 1.5rem;
+    padding-right: 2rem;
+    line-height: 1.3;
+}
+
+ol.list-big-numbered.fill-bg li:before,
+.list-big-numbered.fill-bg ol li:before {
+    background: #EC5E79;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    content: "0" counter(item);
+    font-size: 1.5rem;
+    color: #fff;
+    text-align: center;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: -4rem;
+}
+
+.list-big-numbered.fill-bg.none-zero li:before {
+    content: counter(item);
 }
 
 /* ====================================================== 
@@ -3149,6 +3245,101 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
+   <!-- Author Card -->    
+/* ====================================================== */
+.author-card {
+    margin: 0 auto;
+    border: 1px solid #eaeaea;
+    position: relative;
+    border-top: 3px solid #EC5E79;
+}
+
+.author-card-top {
+    min-height: 2.086538461rem;
+    background: #fff;
+    padding: 0.65625rem 1.75rem 0 1.75rem;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+.author-card-top h3 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.125rem;
+    line-height: 1.7;
+}
+
+.author-card-top .text {
+    margin-top: 0.4375rem;
+    float: left;
+    width: calc(100% - 105px);
+}
+
+.author-card-top .text a {
+    font-size: 0.625rem;
+}
+
+.author-card-top .pic {
+    position: relative;
+    top: 0.175rem;
+    height: 4.375rem;
+    width: 4.375rem;
+    float: right;
+    width: 100px;
+    height: 100px;
+}
+
+.author-card-top .pic img {
+    width: 90px !important;
+    height: 90px !important;
+    margin: 0.3125rem 0 0 0.3125rem;
+    border: 1px solid #eaeaea;
+    border-radius: 100%;
+}
+
+.author-card-middle {
+    background: #fff;
+    padding: 1.75rem 1.75rem 1.3125rem 1.75rem;
+    line-height: 1.5;
+}
+
+.author-card-middle:after {
+    content: '';
+    position: relative;
+    height: 0;
+    width: 0;
+    border-left: 0.4375rem solid transparent;
+    border-right: 0.4375rem solid transparent;
+    border-top: 0.4375rem solid #fff;
+    position: absolute;
+    bottom: 25px;
+    left: 1.75rem;
+}
+
+.author-card-middle p {
+    margin-top: 0.875rem;
+    padding: 0 0.875rem 0 1.75rem;
+}
+
+.author-card-final {
+    height: 30px;
+    font-size: 0.75rem;
+    display: block;
+    background: #F6F6F6;
+    padding: 0.525rem 2.1875rem;
+    text-align: right;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    transition: all 500ms ease-in-out;
+    color: #BDBDBD;
+}
+
+.author-card-final .text {
+    color: #fff;
+    margin-left: 0.4375rem;
+}
+
+/* ====================================================== 
    <!-- Button -->                  
 /* ====================================================== */
 /* 
@@ -3373,101 +3564,6 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   <!-- Author Card -->    
-/* ====================================================== */
-.author-card {
-    margin: 0 auto;
-    border: 1px solid #eaeaea;
-    position: relative;
-    border-top: 3px solid #EC5E79;
-}
-
-.author-card-top {
-    min-height: 2.086538461rem;
-    background: #fff;
-    padding: 0.65625rem 1.75rem 0 1.75rem;
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
-}
-
-.author-card-top h3 {
-    margin: 0;
-    padding: 0;
-    font-size: 1.125rem;
-    line-height: 1.7;
-}
-
-.author-card-top .text {
-    margin-top: 0.4375rem;
-    float: left;
-    width: calc(100% - 105px);
-}
-
-.author-card-top .text a {
-    font-size: 0.625rem;
-}
-
-.author-card-top .pic {
-    position: relative;
-    top: 0.175rem;
-    height: 4.375rem;
-    width: 4.375rem;
-    float: right;
-    width: 100px;
-    height: 100px;
-}
-
-.author-card-top .pic img {
-    width: 90px !important;
-    height: 90px !important;
-    margin: 0.3125rem 0 0 0.3125rem;
-    border: 1px solid #eaeaea;
-    border-radius: 100%;
-}
-
-.author-card-middle {
-    background: #fff;
-    padding: 1.75rem 1.75rem 1.3125rem 1.75rem;
-    line-height: 1.5;
-}
-
-.author-card-middle:after {
-    content: '';
-    position: relative;
-    height: 0;
-    width: 0;
-    border-left: 0.4375rem solid transparent;
-    border-right: 0.4375rem solid transparent;
-    border-top: 0.4375rem solid #fff;
-    position: absolute;
-    bottom: 25px;
-    left: 1.75rem;
-}
-
-.author-card-middle p {
-    margin-top: 0.875rem;
-    padding: 0 0.875rem 0 1.75rem;
-}
-
-.author-card-final {
-    height: 30px;
-    font-size: 0.75rem;
-    display: block;
-    background: #F6F6F6;
-    padding: 0.525rem 2.1875rem;
-    text-align: right;
-    border-bottom-left-radius: 2px;
-    border-bottom-right-radius: 2px;
-    transition: all 500ms ease-in-out;
-    color: #BDBDBD;
-}
-
-.author-card-final .text {
-    color: #fff;
-    margin-left: 0.4375rem;
-}
-
-/* ====================================================== 
        <!-- Counter --> 
 /* ====================================================== */
 [data-counter-number] {
@@ -3618,48 +3714,6 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   <!-- Features --> 
-/* ====================================================== */
-.custom-feature .icon i {
-    border: 1px #090909 solid;
-    border-radius: 100%;
-    width: 80px;
-    height: 80px;
-    line-height: 80px;
-    transition: .1s ease-in-out;
-    font-size: 32px;
-}
-
-.custom-feature .icon-side i {
-    margin-right: .4em;
-}
-
-.custom-feature .title {
-    font-size: 18px;
-    letter-spacing: 0;
-}
-
-.custom-feature .title i {
-    transition: .1s ease-in-out;
-}
-
-.custom-feature .title:hover i {
-    transform: rotate(30deg);
-}
-
-.custom-feature .desc {
-    margin: 0;
-    padding: 0;
-    font-size: 13px;
-    line-height: 1.6;
-    padding: .2em 0 1.5em;
-}
-
-.custom-feature .desc.desc-singlerow {
-    padding-bottom: 1.5em;
-}
-
-/* ====================================================== 
    <!-- Footer Templates -->  
 /* ====================================================== */
 .custom-footer-wrapper {
@@ -3717,6 +3771,48 @@ ul.entry-meta {
     .custom-footer-list-container > .list {
         width: 33.3%;
     }
+}
+
+/* ====================================================== 
+   <!-- Features --> 
+/* ====================================================== */
+.custom-feature .icon i {
+    border: 1px #090909 solid;
+    border-radius: 100%;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    transition: .1s ease-in-out;
+    font-size: 32px;
+}
+
+.custom-feature .icon-side i {
+    margin-right: .4em;
+}
+
+.custom-feature .title {
+    font-size: 18px;
+    letter-spacing: 0;
+}
+
+.custom-feature .title i {
+    transition: .1s ease-in-out;
+}
+
+.custom-feature .title:hover i {
+    transform: rotate(30deg);
+}
+
+.custom-feature .desc {
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    line-height: 1.6;
+    padding: .2em 0 1.5em;
+}
+
+.custom-feature .desc.desc-singlerow {
+    padding-bottom: 1.5em;
 }
 
 /* ====================================================== 
@@ -4912,9 +5008,6 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   <!-- Custom Core Scripts & Stylesheets --> 
-/* ====================================================== */
-/* ====================================================== 
     <!-- Brands List --> 
 /* ====================================================== */
 .list-brands {
@@ -5005,6 +5098,9 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
+   <!-- Custom Core Scripts & Stylesheets --> 
+/* ====================================================== */
+/* ====================================================== 
    <!-- Bulleted List --> 
 /* ====================================================== */
 .list-bullet i {
@@ -5092,6 +5188,40 @@ ul.entry-meta {
     .list-maintain-aspect-ratio .content {
         padding: .5rem;
     }
+}
+
+/* ====================================================== 
+   <!-- Side by Side List --> 
+/* ====================================================== */
+dl.list-side-by-side {
+    width: 100%;
+  /* adjust the width; make sure the total of both is 100% */
+    font-size: 0.875rem;
+}
+
+dl.list-side-by-side dt {
+    float: left;
+    clear: left;
+    width: 100px;
+    padding: 5px 0;
+    margin: 0;
+    font-weight: 600;
+    text-align: right;
+}
+
+dl.list-side-by-side dd {
+    float: left;
+    width: calc(100% - 100px);
+    padding: 5px 0;
+    margin: 0;
+    text-align: left;
+    padding-left: 1rem;
+}
+
+dl.list-side-by-side:after {
+    content: '';
+    display: table;
+    clear: both;
 }
 
 /* ====================================================== 
@@ -5303,40 +5433,6 @@ ul.entry-meta {
     .list-split-container .list-split-item .list-split-item-info > div {
         padding: 0;
     }
-}
-
-/* ====================================================== 
-   <!-- Side by Side List --> 
-/* ====================================================== */
-dl.list-side-by-side {
-    width: 100%;
-  /* adjust the width; make sure the total of both is 100% */
-    font-size: 0.875rem;
-}
-
-dl.list-side-by-side dt {
-    float: left;
-    clear: left;
-    width: 100px;
-    padding: 5px 0;
-    margin: 0;
-    font-weight: 600;
-    text-align: right;
-}
-
-dl.list-side-by-side dd {
-    float: left;
-    width: calc(100% - 100px);
-    padding: 5px 0;
-    margin: 0;
-    text-align: left;
-    padding-left: 1rem;
-}
-
-dl.list-side-by-side:after {
-    content: '';
-    display: table;
-    clear: both;
 }
 
 /* ====================================================== 

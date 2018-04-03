@@ -1,7 +1,11 @@
 /* ====================================================== 
    <!-- Bullet List -->      
 /* ====================================================== */
-
+/* 
+ ---------------------------
+ Normal List Styling
+ ---------------------------
+ */ 
 ul, 
 ol {
     list-style: none;
@@ -9,6 +13,7 @@ ol {
 	
 	> li {
 		margin-bottom: 0;
+		@include transition-default();
 	}
 }
 
@@ -41,6 +46,11 @@ ol.list-normal,
     list-style-type: decimal;
 }
 
+/* 
+ ---------------------------
+ Normal Numbers Ordered List
+ ---------------------------
+ */ 
 
 ol.list-numbered,
 .list-numbered ol {
@@ -51,6 +61,7 @@ ol.list-numbered,
 	> li {
 		position: relative;
 		margin-bottom: .5rem;
+		margin-left: .5rem;
 	}
 
 	> li:before {
@@ -70,13 +81,17 @@ ol.list-numbered,
 		font-size: 0.75rem;
 	}	
 	
-	&.none-zero > li:before {
-		content: counter(line);
-	}	
-	
+
 }
+.list-numbered.none-zero > li:before {
+	content: counter(line);
+}	
 
-
+/* 
+ ---------------------------
+ Custom Circle Icons Ordered List
+ ---------------------------
+ */ 
 
 ol.list-circle,
 ul.list-circle,
@@ -88,9 +103,10 @@ ul.list-circle,
 	
 	> li {
 		position: relative;
-		margin-bottom: 1.5rem;
+		margin-bottom: .5rem;
 		color: $primary-text-color1;
 		font-size: 1.125rem;
+		margin-left: 1rem;
 	}
 
 	> li:before {
@@ -111,3 +127,88 @@ ul.list-circle,
 	}
 	
 }
+
+
+/* 
+ ---------------------------
+ Big Numbers Ordered List
+ ---------------------------
+ */ 
+
+ol.list-big-numbered,
+.list-big-numbered ol {
+    counter-reset: item;
+	
+	/*removes original number*/
+    list-style-type: none;
+    /*remove if full width*/
+    text-align: justify;
+	
+	li {
+		display: block;
+		padding-left: 2.5rem;
+		position: relative;
+		min-height: 3.5rem;
+		
+		/*generic alignment*/
+		text-indent: 0;
+		list-style-position: outside;
+		margin-left: 1.2rem;
+		list-style-type: number;
+		
+		&:before {
+			content: '0' counter(item)".";
+			counter-increment: item;
+			position: absolute;
+			margin-left: -3.5rem;
+			font-size: 3rem;
+			color: $sub-text-color;
+			line-height: 1;
+		}	
+	}	
+
+}
+
+.list-big-numbered.none-zero li:before {
+	content: counter(item)".";
+}	
+
+ol.list-big-numbered.fill-bg,
+.list-big-numbered.fill-bg ol {
+   
+	li {
+		background: rgba(228,225,225,1.00);
+		min-height: 70px;
+		border-radius: 50px;
+		margin-bottom: 1rem;
+		margin-left: 0;
+		padding-left: 4.5rem;
+		
+		p {
+			padding-top: 1.5rem;
+			padding-right: 2rem;
+			line-height: 1.3;
+		}
+		
+		&:before {
+			background: $highlight-color1;
+			border-radius: 50%;
+			width: 50px;
+			height: 50px;
+			line-height: 50px;
+			content: '0' counter(item);
+			font-size: 1.5rem;
+			color: #fff;
+			text-align: center;
+			top: 50%;
+			transform: translateY(-50%);
+			margin-left: -4rem;
+			
+		}		
+	}
+
+}
+
+.list-big-numbered.fill-bg.none-zero li:before {
+	content: counter(item);
+}	
