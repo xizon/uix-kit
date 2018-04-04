@@ -77,119 +77,119 @@ h6,
 }
 
 h1 {
-	font-size: 3.5rem;
+	font-size: $font-size-h1;
 	line-height: 1.14285714286;
 }
 
 h2 {
-	font-size: 2.5rem;
+	font-size: $font-size-h2;
 	line-height: 1.2;
 }
 
 h3 {
-	font-size: 1.75rem;
+	font-size: $font-size-h3;
 	line-height: 1.25;
 }
 
 h4 {
-	font-size: 1.25rem;
+	font-size: $font-size-h4;
 	line-height: 1.33333333333;
 }
 
 h5 {
-	font-size: 1rem;
+	font-size: $font-size-h5;
 	line-height: 1.5;
 	font-weight: 600;
 }
 
 h6 {
-	font-size: 0.75rem;
+	font-size: $font-size-h6;
 	line-height: 2;
 	font-weight: 600;
 }
 
 .h1 {
-	font-size: 3.5rem !important;
+	font-size: $font-size-h1 !important;
 	line-height: 1.14285714286 !important;
 }
 
 .h2 {
-	font-size: 2.5rem !important;
+	font-size: $font-size-h2 !important;
 	line-height: 1.2 !important;
 }
 
 .h3 {
-	font-size: 1.75rem !important;
+	font-size: $font-size-h3 !important;
 	line-height: 1.25 !important;
 }
 
 .h4 {
-	font-size: 1.25rem !important;
+	font-size: $font-size-h4 !important;
 	line-height: 1.33333333333 !important;
 }
 
 .h5 {
-	font-size: 1rem !important;
+	font-size: $font-size-h5 !important;
 	line-height: 1.5 !important;
 	font-weight: 600 !important;
 }
 
 .h6 {
-	font-size: 0.75rem !important;
+	font-size: $font-size-h6 !important;
 	line-height: 2 !important;
 	font-weight: 600 !important;
 }
 
 @media all and (max-width: 768px) {
 	h1 {
-		font-size: 2.5rem;
+		font-size: #{$font-size-h1*0.71428571428571};
 		line-height: 1.15555556;
 	}
 	h2 {
-		font-size: 1.75rem;
+		font-size: #{$font-size-h2*0.7};
 		line-height: 1.421875;
 	}
 	h3 {
-		font-size: 1.25rem;
+		font-size: #{$font-size-h3*0.71428571428571};
 		line-height: 1.625;
 	}
 	.h1 {
-		font-size: 2.5rem !important;
+		font-size: #{$font-size-h1*0.71428571428571} !important;
 		line-height: 1.15555556 !important;
 	}
 	.h2 {
-		font-size: 1.75rem !important;
+		font-size: #{$font-size-h2*0.7} !important;
 		line-height: 1.421875 !important;
 	}
 	.h3 {
-		font-size: 1.25rem !important;
+		font-size: #{$font-size-h3*0.71428571428571} !important;
 		line-height: 1.625 !important;
 	}
 }
 
 @media all and (max-width: 480px) {
 	h1 {
-		font-size: 1.25rem;
+		font-size: #{$font-size-h1*0.35714285714286};
 		line-height: 1.38461538462;
 	}
 	h2 {
-		font-size: 1.5rem;
+		font-size: #{$font-size-h2*0.6};
 		line-height: 1.28571428571;
 	}
 	h3 {
-		font-size: 1.25rem;
+		font-size: #{$font-size-h3*0.71428571428571};
 		line-height: 1.5;
 	}
 	.h1 {
-		font-size: 1.25rem !important;
+		font-size: #{$font-size-h1*0.35714285714286} !important;
 		line-height: 1.38461538462 !important;
 	}
 	.h2 {
-		font-size: 1.5rem !important;
+		font-size: #{$font-size-h2*0.6} !important;
 		line-height: 1.28571428571 !important;
 	}
 	.h3 {
-		font-size: 1.25rem !important;
+		font-size: #{$font-size-h3*0.71428571428571} !important;
 		line-height: 1.5 !important;
 	}
 }

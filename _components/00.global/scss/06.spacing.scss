@@ -9,20 +9,17 @@ section,
 
 section, 
 .section {
-	padding-top: 6.5625rem;
-	padding-bottom: 7.984375rem;
+	padding: $spacing-default 0;
 }
 
 section.space-sm, 
 .section.space-sm {
-    padding-top: 4.8125rem;
-    padding-bottom: 4.8125rem;
+    padding: $spacing-small 0;
 }
 
 section.space-lg, 
 .section.space-lg {
-    padding-top: 11.375rem;
-    padding-bottom: 11.375rem;
+    padding: $spacing-large 0;
 }
 
 section.space-none, 
@@ -48,16 +45,15 @@ section.site-google-map,
 @media all and (max-width: 768px) {
 	section, 
 	.section {
-		padding: 4.265625rem 0;
+		padding: $spacing-default-mobile 0;
 	}
 	section.space-sm, 
 	.section.space-sm {
-		padding-top: 2.625rem;
-		padding-bottom: 2.625rem;
+		padding: $spacing-small-mobile 0;
 	}
 	section.space-lg, 
 	.section.space-lg {
-		padding: 4.265625rem 0;
+		padding: $spacing-large-mobile 0;
 	}
 	section.space-none, 
 	.section.space-none {

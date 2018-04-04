@@ -43,7 +43,7 @@ $control-focus-color: $primary-text-color1;
 	color: red;
 	display: inline-block;
 	padding: 0 .5rem;
-	font-size: 1.5rem;
+	font-size: #{$font-size-form*1.71428571428571};
 	position: absolute;
 }
 
@@ -69,7 +69,7 @@ $control-focus-color: $primary-text-color1;
 		-webkit-appearance: none;  
 
 		@include transition-default();
-		font-size: 0.875rem;
+		font-size: $font-size-form;
 		padding: 0.546875rem;
 		box-sizing: content-box;
 		background-color: #fff;
@@ -113,7 +113,7 @@ $control-focus-color: $primary-text-color1;
 		-webkit-appearance: none;    
 
 		width: calc(100% - 1.09375rem );
-		font-size: 0.875rem;
+		font-size: $font-size-form;
 		padding: 0.546875rem;
 		border: none;
 		box-sizing: content-box;
@@ -341,7 +341,7 @@ $control-focus-color: $primary-text-color1;
 /* Custom Controls */
 .controls-custom {
 	width: calc(100% - 1.09375rem );
-	font-size: 0.875rem;
+	font-size: $font-size-form;
 	padding: 0.546875rem;
 	border: none;
 	box-sizing: content-box;
@@ -387,7 +387,7 @@ $control-focus-color: $primary-text-color1;
 	color: $control-text-color;
 	margin-bottom: 1.09375rem;
 	border: 1px solid $control-sub-color;
-	font-size: 0.875rem;
+	font-size: $font-size-form;
 	padding: 0.546875rem 1.09375rem;
 	font-weight: 600;
 }
@@ -537,7 +537,7 @@ $control-focus-color: $primary-text-color1;
 		display: block;
 		padding: 0 1.5rem;
 		border-bottom: 1px solid $control-sub-color;
-		font-size: 0.875rem;
+		font-size: $font-size-form;
 		color: $control-text-color;
 		line-height: 47px;
 		cursor: pointer;
@@ -695,7 +695,7 @@ $control-focus-color: $primary-text-color1;
 			text-align: center;
 			line-height: 100%;
 			@include control-label-text();
-			font-size: 0.75rem;
+			font-size: #{$font-size-form*0.85714285714286};
 		}
 
 		&::before {

@@ -1,9 +1,11 @@
 # Changelog
 
-#### = 1.2.1 (April 3, 2018) =
 
+#### = 1.2.2 (April 4, 2018) =
+
+* New: Add a new module "Mouse Animation Scroll".
 * Tweak: Expanded some demos of the module "Bulleted List".
-* Tweak: Optimized SCSS file structure.
+* Tweak: Optimized SCSS files structure.
 
 
 #### = 1.2.0 (April 2, 2018) =
