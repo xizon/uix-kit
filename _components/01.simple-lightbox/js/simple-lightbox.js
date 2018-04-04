@@ -29,9 +29,12 @@ theme = ( function ( theme, $, window, document ) {
 				dataHtmlID    = $this.data( 'lb-html' ),
 				dataFixed     = $this.data( 'lb-fixed' ),
 				dataMaskClose = $this.data( 'lb-mask-close' ),
+				dataAjaxCon   = $this.data( 'lb-ajax-content' ),
 				htmlContent   = '',
 				imgSrcStr     = '',
 				imgSrcStrToW  = '';
+			
+
 			
 		
 			if( typeof dataFixed === typeof undefined ) {
@@ -62,6 +65,7 @@ theme = ( function ( theme, $, window, document ) {
 			
 
 			//-------- If it is photo
+			//-----------------------------
 			if( typeof dataPhoto != typeof undefined && dataPhoto != '' ) {
 				
 				
@@ -152,6 +156,7 @@ theme = ( function ( theme, $, window, document ) {
 			
 			
 			//-------- If it is not photo
+			//-----------------------------
 			if( typeof dataHtmlID != typeof undefined && dataHtmlID != '' ) {
 				dataHtmlID = dataHtmlID.replace( '#', '' );
 
@@ -175,6 +180,30 @@ theme = ( function ( theme, $, window, document ) {
 						
 						
 						$lbCon.find( '> .html' ).addClass( 'no-img' );
+						
+						
+						//Ajax-loaded content
+						if( typeof dataAjaxCon != typeof undefined && dataAjaxCon != '' ) {
+							
+							var $ajaxContentContainer = $lbCon.find( '> .html .lb-box > .content-show' );
+							
+							$ajaxContentContainer.html( $ajaxContentContainer.data( 'loading-text' ) );
+							
+							$.ajax({
+								url      : dataAjaxCon,
+								method   : 'POST',
+								dataType : 'html',
+								success  : function( data ) { 
+									$ajaxContentContainer.html( data );
+
+								 },
+								 error : function( XMLHttpRequest, textStatus, errorThrown ) {
+
+								 }
+							});
+
+						}
+						
 						
 					}
 

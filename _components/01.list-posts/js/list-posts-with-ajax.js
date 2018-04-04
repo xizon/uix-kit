@@ -464,7 +464,7 @@ theme = ( function ( theme, $, window, document ) {
 					}
 
 				 },
-				 error  : function() {
+				 error : function( XMLHttpRequest, textStatus, errorThrown ) {
 					 $button.addClass( 'hide' );
 					 
 				 }

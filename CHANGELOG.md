@@ -3,6 +3,8 @@
 #### = 1.2.3 (April 4, 2018) =
 
 * Fix: Fixed a bug that the width of the "Custom Lightbox" module automatically becomes smaller at the mobile device.
+* New: Add smooth scrolling when clicking an anchor link.
+* New: Extended "Simple Lightbox" module to support ajax asynchronous calls.
 
 
 #### = 1.2.2 (April 3, 2018) =

@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.2.2
+ * ## Version             :  1.2.3
  * ## Last Update         :  April 4, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -66,8 +66,8 @@
 	TABLE OF CONTENTS
 	---------------------------
 	
-    1. Basic 
-    2. Table 
+    1. Table 
+    2. Basic 
     3. Bullet List 
     4. Helper Classes 
     5. Typography 
@@ -90,8 +90,8 @@
     22. Comments 
     23. 3rd Party Plugins 
     24. Social Media Icons 
-    25. Accordion 
-    26. Badges 
+    25. Badges 
+    26. Accordion 
     27. Breadcrumbs 
     28. Button 
     29. Author Card 
@@ -115,22 +115,21 @@
     47. Mobile Menu 
     48. Modal Dialog 
     49. Mouse Animation Scroll 
-    50. Mouse Animation Scroll 
-    51. Multiple Items Carousel 
+    50. Multiple Items Carousel 
+    51. Parallax 
     52. Periodical Scroll 
-    53. Parallax 
-    54. Pricing 
-    55. Progress Bar 
-    56. Show More Less 
-    57. Cutom Light Box 
-    58. Single Post 
-    59. Slideshow ( with custom flexslider ) 
-    60. Source Code 
-    61. Tabs 
-    62. Testimonials Carousel 
-    63. Timeline 
-    64. ToolTip 
-    65. WordPress Core 
+    53. Pricing 
+    54. Progress Bar 
+    55. Show More Less 
+    56. Cutom Light Box 
+    57. Single Post 
+    58. Slideshow ( with custom flexslider ) 
+    59. Source Code 
+    60. Tabs 
+    61. Testimonials Carousel 
+    62. Timeline 
+    63. ToolTip 
+    64. WordPress Core 
 
 
 
@@ -3084,46 +3083,6 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   <!-- Badges --> 
-/* ====================================================== */
-.badges {
-    width: 300px;
-    height: 300px;
-    position: relative;
-    display: table;
-    margin: 0 auto;
-    margin-bottom: 3rem;
-  /* @include gradient-border( $highlight-color1, $highlight-color2, 3px, 'to right', #fff ); */
-    background: #fff;
-  /* @include transition-default(); */
-    transition: all 0.3s ease;
-}
-
-.badges::after {
-  /* Please do not convert it to block elements and set width and height. */
-    content: '';
-    background: #EC5E79;
-    background: linear-gradient(to bottom, #EC5E79 0%, #f60 100%), linear-gradient(to bottom, #EC5E79 0%, #f60 100%);
-    position: absolute;
-    top: -15px;
-    bottom: -15px;
-    right: -15px;
-    left: -15px;
-    z-index: -1;
-    border-radius: inherit;
-}
-
-.badges.circle {
-    border-radius: 50%;
-}
-
-.badges .inner {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-}
-
-/* ====================================================== 
     <!-- Accordion -->  
 /* ====================================================== */
 .custom-accordion dl {
@@ -3186,6 +3145,46 @@ ul.entry-meta {
     padding: 1rem;
     font-size: 0.875rem;
     display: none;
+}
+
+/* ====================================================== 
+   <!-- Badges --> 
+/* ====================================================== */
+.badges {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    display: table;
+    margin: 0 auto;
+    margin-bottom: 3rem;
+  /* @include gradient-border( $highlight-color1, $highlight-color2, 3px, 'to right', #fff ); */
+    background: #fff;
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+}
+
+.badges::after {
+  /* Please do not convert it to block elements and set width and height. */
+    content: '';
+    background: #EC5E79;
+    background: linear-gradient(to bottom, #EC5E79 0%, #f60 100%), linear-gradient(to bottom, #EC5E79 0%, #f60 100%);
+    position: absolute;
+    top: -15px;
+    bottom: -15px;
+    right: -15px;
+    left: -15px;
+    z-index: -1;
+    border-radius: inherit;
+}
+
+.badges.circle {
+    border-radius: 50%;
+}
+
+.badges .inner {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
 }
 
 /* ====================================================== 

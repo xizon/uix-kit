@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.2.2
+ * ## Version             :  1.2.3
  * ## Last Update         :  April 4, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -26,10 +26,10 @@
 	1. Header 
     2. Loader 
     3. Back to Top 
-    4. Navigation 
-    5. Videos 
-    6. Initialize the height of each column of the grid system 
-    7. Overlay 
+    4. Overlay 
+    5. Navigation 
+    6. Videos 
+    7. Initialize the height of each column of the grid system 
     8. Mega Menu 
     9. Dropdown Categories 
     10. Pagination 
@@ -38,12 +38,12 @@
     13. Accordion 
     14. Counter 
     15. Dynamic Drop Down List from JSON 
-    16. Form Progress 
-    17. Gallery 
-    18. Custom Core Scripts & Stylesheets 
-    19. Bulleted List 
-    20. Posts List With Ajax 
-    21. Form 
+    16. Form 
+    17. Form Progress 
+    18. Gallery 
+    19. Custom Core Scripts & Stylesheets 
+    20. Bulleted List 
+    21. Posts List With Ajax 
     22. Fullwidth List of Split 
     23. Mobile Menu 
     24. Modal Dialog 
@@ -59,12 +59,14 @@
     34. Show More Less 
     35. Custom Lightbox 
     36. Slideshow ( with custom flexslider ) 
-    37. Sticky Elements 
-    38. Tabs 
-    39. Testimonials Carousel 
-    40. Text effect 
-    41. Source Code 
-    42. Timeline 
+    37. Smooth Scrolling When Clicking An Anchor Link 
+    38. Source Code 
+    39. Sticky Elements 
+    40. Tabs 
+    41. Testimonials Carousel 
+    42. Text effect 
+    43. Timeline 
+    44. AJAX 
 
 
 */
@@ -5074,7 +5076,7 @@ theme = ( function ( theme, $, window, document ) {
 					}
 
 				 },
-				 error  : function() {
+				 error : function( XMLHttpRequest, textStatus, errorThrown ) {
 					 $button.addClass( 'hide' );
 					 
 				 }
@@ -6258,6 +6260,77 @@ http://www.gnu.org/licenses/gpl.html
 
 /* 
  *************************************
+ * <!-- Periodical Scroll -->
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+	
+		$( '[data-periodical-scroll-container]' ).each(function() {
+
+			var $this       = $( this ),
+				ul          = $this.data( 'periodical-scroll-container' ),
+				speed       = $this.data( 'periodical-scroll-speed' ),
+				timing      = $this.data( 'periodical-scroll-timing' );
+
+
+			if( typeof speed === typeof undefined ) {
+				speed = 600;
+			}
+
+			if( typeof timing === typeof undefined ) {
+				timing = 2000;
+			}	
+			
+			var $wrap  = $this.find( ul ),
+				time   = timing,
+				moveEv = null;
+			
+			//Initialize the container height
+			$wrap.css({
+				'height'   : $wrap.find( 'li:first' ).height() + 'px',
+				'overflow' : 'hidden'
+			});
+			
+ 
+			//Animation
+			$wrap.on( 'mouseenter', function() {
+
+				clearInterval( moveEv );
+
+			} ).on( 'mouseleave' , function() {
+				moveEv=setInterval(function(){
+					var $item     = $wrap.find( 'li:first' ),
+						curHeight = $item.height(); 
+
+					$item.animate({marginTop: -curHeight + 'px' }, speed, function(){
+						$item.css('marginTop',0).appendTo( $wrap );
+					});
+
+				}, time );
+			} ).trigger('mouseleave');
+			
+			
+		});
+	
+		
+		
+    };
+
+    theme.periodicalScroll = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+/* 
+ *************************************
  * <!-- Pricing -->
  *************************************
  */
@@ -6381,77 +6454,6 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
-
-
-/* 
- *************************************
- * <!-- Periodical Scroll -->
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-    
-    var documentReady = function( $ ) {
-	
-		$( '[data-periodical-scroll-container]' ).each(function() {
-
-			var $this       = $( this ),
-				ul          = $this.data( 'periodical-scroll-container' ),
-				speed       = $this.data( 'periodical-scroll-speed' ),
-				timing      = $this.data( 'periodical-scroll-timing' );
-
-
-			if( typeof speed === typeof undefined ) {
-				speed = 600;
-			}
-
-			if( typeof timing === typeof undefined ) {
-				timing = 2000;
-			}	
-			
-			var $wrap  = $this.find( ul ),
-				time   = timing,
-				moveEv = null;
-			
-			//Initialize the container height
-			$wrap.css({
-				'height'   : $wrap.find( 'li:first' ).height() + 'px',
-				'overflow' : 'hidden'
-			});
-			
- 
-			//Animation
-			$wrap.on( 'mouseenter', function() {
-
-				clearInterval( moveEv );
-
-			} ).on( 'mouseleave' , function() {
-				moveEv=setInterval(function(){
-					var $item     = $wrap.find( 'li:first' ),
-						curHeight = $item.height(); 
-
-					$item.animate({marginTop: -curHeight + 'px' }, speed, function(){
-						$item.css('marginTop',0).appendTo( $wrap );
-					});
-
-				}, time );
-			} ).trigger('mouseleave');
-			
-			
-		});
-	
-		
-		
-    };
-
-    theme.periodicalScroll = {
-        documentReady : documentReady        
-    };
-
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
 
 
 /* 
@@ -6673,9 +6675,12 @@ theme = ( function ( theme, $, window, document ) {
 				dataHtmlID    = $this.data( 'lb-html' ),
 				dataFixed     = $this.data( 'lb-fixed' ),
 				dataMaskClose = $this.data( 'lb-mask-close' ),
+				dataAjaxCon   = $this.data( 'lb-ajax-content' ),
 				htmlContent   = '',
 				imgSrcStr     = '',
 				imgSrcStrToW  = '';
+			
+
 			
 		
 			if( typeof dataFixed === typeof undefined ) {
@@ -6706,6 +6711,7 @@ theme = ( function ( theme, $, window, document ) {
 			
 
 			//-------- If it is photo
+			//-----------------------------
 			if( typeof dataPhoto != typeof undefined && dataPhoto != '' ) {
 				
 				
@@ -6796,6 +6802,7 @@ theme = ( function ( theme, $, window, document ) {
 			
 			
 			//-------- If it is not photo
+			//-----------------------------
 			if( typeof dataHtmlID != typeof undefined && dataHtmlID != '' ) {
 				dataHtmlID = dataHtmlID.replace( '#', '' );
 
@@ -6810,8 +6817,39 @@ theme = ( function ( theme, $, window, document ) {
 					
 					//Set container width
 					if ( $lbCon.find( '> .html .lb-box' ).length > 0 ) {
-						$lbCon.css( 'width', $lbCon.find( '> .html .lb-box' ).width() + 'px' );
+						
+						if ( $( window ).width() <= 768 ) {
+							$lbCon.css( 'width', $( window ).width() - 10 + 'px' );
+						} else {
+							$lbCon.css( 'width', $lbCon.find( '> .html .lb-box' ).width() + 'px' );
+						}
+						
+						
 						$lbCon.find( '> .html' ).addClass( 'no-img' );
+						
+						
+						//Ajax-loaded content
+						if( typeof dataAjaxCon != typeof undefined && dataAjaxCon != '' ) {
+							
+							var $ajaxContentContainer = $lbCon.find( '> .html .lb-box > .content-show' );
+							
+							$ajaxContentContainer.html( $ajaxContentContainer.data( 'loading-text' ) );
+							
+							$.ajax({
+								url      : dataAjaxCon,
+								method   : 'POST',
+								dataType : 'html',
+								success  : function( data ) { 
+									$ajaxContentContainer.html( data );
+
+								 },
+								 error : function( XMLHttpRequest, textStatus, errorThrown ) {
+
+								 }
+							});
+
+						}
+						
 						
 					}
 
@@ -7532,6 +7570,76 @@ theme = ( function ( theme, $, window, document ) {
 }( theme, jQuery, window, document ) );
 
 
+
+
+
+/* 
+ *************************************
+ * <!-- Smooth Scrolling When Clicking An Anchor Link -->
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ) {
+		
+		
+		//Prevent this module from loading in other pages
+		if ( $( 'body' ).hasClass( 'onepage' ) ) return false;
+		
+	
+		
+		$( 'a[href*="#"]' ).on( 'click', function( e ) {
+		
+			if ( 
+				location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && 
+				location.hostname == this.hostname
+			) {
+				
+				// Figure out element to scroll to
+				var target = $( this.hash );
+				target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+				// Does a scroll target exist?
+				if ( target.length ) {
+
+					// Only prevent default if animation is actually gonna happen
+					e.preventDefault();
+					
+
+					$( 'html, body' ).animate({
+						scrollTop: target.offset().top
+					}, 500, function() {
+						// Callback after animation
+						// Must change focus!
+						var $target = $(target);
+						$target.focus();
+						if ( $target.is( ':focus' ) ) { // Checking if the target was focused
+							return false;
+						} else {
+							$target.attr( 'tabindex', '-1' ); // Adding tabindex for elements not focusable
+							$target.focus();
+						};
+					});
+					
+					
+				}
+			}
+		} );
+
+	
+		
+	};
+	
+		
+    theme.smoothScrollingAnchorLink = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
 
 
 
@@ -8323,8 +8431,5 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
-
-
-cument ) );
 
 
