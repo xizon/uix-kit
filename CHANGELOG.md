@@ -1,11 +1,16 @@
 # Changelog
 
+#### = 1.2.3 (April 4, 2018) =
 
-#### = 1.2.2 (April 4, 2018) =
+* Fix: Fixed a bug that the width of the "Custom Lightbox" module automatically becomes smaller at the mobile device.
+
+
+#### = 1.2.2 (April 3, 2018) =
 
 * New: Add a new module "Mouse Animation Scroll".
 * Tweak: Expanded some demos of the module "Bulleted List".
 * Tweak: Optimized SCSS files structure.
+
 
 
 #### = 1.2.0 (April 2, 2018) =

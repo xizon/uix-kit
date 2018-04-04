@@ -166,7 +166,14 @@ theme = ( function ( theme, $, window, document ) {
 					
 					//Set container width
 					if ( $lbCon.find( '> .html .lb-box' ).length > 0 ) {
-						$lbCon.css( 'width', $lbCon.find( '> .html .lb-box' ).width() + 'px' );
+						
+						if ( $( window ).width() <= 768 ) {
+							$lbCon.css( 'width', $( window ).width() - 10 + 'px' );
+						} else {
+							$lbCon.css( 'width', $lbCon.find( '> .html .lb-box' ).width() + 'px' );
+						}
+						
+						
 						$lbCon.find( '> .html' ).addClass( 'no-img' );
 						
 					}
