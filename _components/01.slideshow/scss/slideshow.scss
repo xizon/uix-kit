@@ -454,7 +454,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 					font-size: 7vw !important;
 					line-height: 7vw !important;
 					margin-bottom: 0;
-					line-height: 1.5 !important;
+					line-height: 1.2 !important;
 					
 				}
 				.level-2 {
@@ -471,9 +471,19 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 @media all and (max-width: 768px) {
 
 	.custom-theme-flexslider.custom-primary-flexslider {
+		
+		&.fullscreen {
+			img {
+				height: auto;
+			}
+		}	
+			
+		
 		.custom-theme-slides > .item .button {
 			font-size: 2vw !important;
 		}
+
+		
 	}
 }
 

@@ -2,7 +2,7 @@
 
 
 
-#### = 1.2.4 (April 9, 2018) =
+#### = 1.2.5 (April 9, 2018) =
 
 * Fix: Fixed a bug of parallax at the mobile device.
 * Fix: Fixed a bug of smooth scrolling when clicking an anchor link.

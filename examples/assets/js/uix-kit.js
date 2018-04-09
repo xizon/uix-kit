@@ -38,35 +38,35 @@
     13. Accordion 
     14. Counter 
     15. Dynamic Drop Down List from JSON 
-    16. Form Progress 
-    17. Form 
-    18. Gallery 
-    19. Custom Core Scripts & Stylesheets 
-    20. Bulleted List 
-    21. Posts List With Ajax 
-    22. Fullwidth List of Split 
-    23. Mobile Menu 
-    24. Modal Dialog 
-    25. Mousewheel Interaction 
-    26. Multiple Items Carousel 
-    27. Navigation Highlighting 
-    28. Parallax 
-    29. Periodical Scroll 
-    30. Pricing 
-    31. Progress Bar 
-    32. Retina Graphics for Website 
-    33. Scroll Reveal 
-    34. Show More Less 
-    35. Custom Lightbox 
-    36. Slideshow ( with custom flexslider ) 
-    37. Smooth Scrolling When Clicking An Anchor Link 
-    38. Source Code 
-    39. Sticky Elements 
-    40. Tabs 
-    41. Testimonials Carousel 
-    42. Text effect 
-    43. Timeline 
-    44. AJAX 
+    16. Form 
+    17. Form Progress 
+    18. Custom Core Scripts & Stylesheets 
+    19. Bulleted List 
+    20. Posts List With Ajax 
+    21. Fullwidth List of Split 
+    22. Mobile Menu 
+    23. Modal Dialog 
+    24. Mousewheel Interaction 
+    25. Multiple Items Carousel 
+    26. Navigation Highlighting 
+    27. Parallax 
+    28. Periodical Scroll 
+    29. Pricing 
+    30. Progress Bar 
+    31. Retina Graphics for Website 
+    32. Scroll Reveal 
+    33. Show More Less 
+    34. Custom Lightbox 
+    35. Slideshow ( with custom flexslider ) 
+    36. Smooth Scrolling When Clicking An Anchor Link 
+    37. Source Code 
+    38. Sticky Elements 
+    39. Tabs 
+    40. Testimonials Carousel 
+    41. Text effect 
+    42. Timeline 
+    43. AJAX 
+    44. Gallery 
 
 
 */
