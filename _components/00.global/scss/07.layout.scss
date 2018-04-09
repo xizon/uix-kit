@@ -291,7 +291,7 @@ $seamless-grid-pad : 15px;
 @media all and (max-width: 768px) {
 	
 	
-	.seamless-grid-container {
+	.seamless-grid-container:not(.none-breaking) {
 		
 		.seamless-grid {
 			&.no-gutter {
@@ -385,10 +385,10 @@ $seamless-grid-pad : 15px;
 
 		}
 		
-		
-
+	
 
 	}
+
 
 
 	

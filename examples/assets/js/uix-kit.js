@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.2.3
- * ## Last Update         :  April 4, 2018
+ * ## Version             :  1.2.4
+ * ## Last Update         :  April 9, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -38,8 +38,8 @@
     13. Accordion 
     14. Counter 
     15. Dynamic Drop Down List from JSON 
-    16. Form 
-    17. Form Progress 
+    16. Form Progress 
+    17. Form 
     18. Gallery 
     19. Custom Core Scripts & Stylesheets 
     20. Bulleted List 
@@ -6021,24 +6021,32 @@ theme = ( function ( theme, $, window, document ) {
 
         
 		//  Initialize
-		parallaxInit( windowWidth );
+		parallaxInit( windowWidth, windowHeight );
 		
 		$window.on( 'resize', function() {
 			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
 			if ( $window.width() != windowWidth ) {
 
 				// Update the window width for next time
-				windowWidth = $window.width();
+				windowWidth  = $window.width();
+				windowHeight = $window.height();
 
 				// Do stuff here
-				parallaxInit( windowWidth );
+				parallaxInit( windowWidth, windowHeight );
 		
 
 			}
 		});
 		
-		
-		function parallaxInit( w ) {
+	
+		/*
+		 * Initialize parallx settings
+		 *
+		 * @param  {number} w         - Returns width of browser viewport
+		 * @param  {number} h         - Returns height of browser viewport
+		 * @return {void}             - The constructor.
+		 */
+		function parallaxInit( w, h ) {
 			
 			/* Pure parallax scrolling effect without other embedded HTML elements */
 			$( '.pure-bg-parallax' ).each(function() {
@@ -6072,11 +6080,18 @@ theme = ( function ( theme, $, window, document ) {
 					dataImg     = $this.data( 'image-src' ),
 					dataSkew    = $this.data( 'skew' ),
 					dataSpeed   = $this.data( 'speed' ),
-					dataElSpeed = $this.find( '.parallax-element' ).data( 'el-speed' );
+					dataElSpeed = $this.find( '.parallax-element' ).data( 'el-speed' ),
+					$curImg     = $this.find( '.parallax-img' ),
+					curImgH     = null,
+					curImgW     = null;
 				
 				
 				if( typeof dataAtt === typeof undefined ) { // If there is no data-xxx, save current source to it
 					dataAtt = 'fixed';
+				}
+				
+				if ( w <= 768 ) {
+					dataAtt = 'scroll';
 				}
 				
 				if( typeof dataW != typeof undefined ) {
@@ -6091,9 +6106,7 @@ theme = ( function ( theme, $, window, document ) {
 					$this.css( {
 						'height': dataH
 					} );
-					$this.find( '.parallax-img' ).css( {
-						'max-height': dataH
-					} );	
+					$curImg.css( 'max-height', dataH );	
 				}
 				
 				if( typeof dataSpeed === typeof undefined ) { // If there is no data-xxx, save current source to it
@@ -6105,8 +6118,20 @@ theme = ( function ( theme, $, window, document ) {
 				}	
 				
 				
-				
-				
+				//Trigger a callback when the selected images are loaded
+				//
+				//If the src is already set, then the event is firing in the cached case, 
+				//before you even get the event handler bound. To fix this, you can loop 
+				//through checking and triggering the event based off .complete
+				$curImg.one( 'load', function() {
+					curImgH = $( this ).height();
+					curImgW = $( this ).width();
+				}).each(function() {
+					if( this.complete ) $( this ).load();
+				});	
+		
+
+				//Custom height for parallax container
 				if ( 
 					$this.hasClass( 'height-10' ) || 
 					$this.hasClass( 'height-20' ) || 
@@ -6124,28 +6149,27 @@ theme = ( function ( theme, $, window, document ) {
 					$this.css( {
 						'height': newH + 'px'
 					} );	
-					$this.find( '.parallax-img' ).css( {
-						'max-height': newH + 'px'
-					} );	
+					$curImg.css( 'max-height', newH + 'px' );	
 				 }
 				
 				
 				//If the ".pos-vertical-align" has more content
 				if ( w <= 768 ) {
 					
-					if ( $this.find( '.pos-vertical-align' ).height() >= $this.find( '.parallax-img' ).height() ) {
+					if ( $this.find( '.pos-vertical-align' ).height() >= curImgH ) {
 						$this.find( '.pos-vertical-align' ).addClass( 'relative' );
-						$this.find( '.parallax-img' ).hide();	
+						$curImg.hide();	
 					}
 					
-
 				}
 
 				
-				
 				if( typeof dataImg != typeof undefined ) {
 					$this.css( {
-						'background': 'url(' + dataImg + ') 50% 0 no-repeat ' + dataAtt
+						'background-image'       : 'url(' + dataImg + ')',
+						'background-position'    : '50% 0',
+						'background-repeat'      : 'no-repeat',
+						'background-attachment'  : dataAtt
 					} );
 				}
 				
@@ -6153,10 +6177,26 @@ theme = ( function ( theme, $, window, document ) {
 					$this.css( {
 						'transform'         : 'skew(0deg, '+dataSkew+'deg)'
 					} );
-				}	
+				}
 				
-	
-				$this.bgParallax( "50%", dataSpeed );
+				
+				
+				if ( w > 768 ) {
+					
+					//Enable parallax
+					$this.bgParallax( "50%", dataSpeed );
+					
+					//Resize the background image to cover the entire container and
+					//Resize the background image to make sure the image is fully visible
+					if ( curImgW >= w ) {
+						$this.css( 'background-size', 'contain' );
+					} else {
+						$this.css( 'background-size', 'cover' );	
+					}
+				
+					
+				}
+					
 				
 				$window.on( 'scroll touchmove', function() {
 					var scrolled = $window.scrollTop();
@@ -6183,6 +6223,8 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
+
+
 
 
 
@@ -7594,7 +7636,8 @@ theme = ( function ( theme, $, window, document ) {
 		
 			if ( 
 				location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && 
-				location.hostname == this.hostname
+				location.hostname == this.hostname &&
+				$( this ).attr( 'href' ) != '#'
 			) {
 				
 				// Figure out element to scroll to

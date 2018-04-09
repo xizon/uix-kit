@@ -1,5 +1,16 @@
 # Changelog
 
+
+
+#### = 1.2.4 (April 9, 2018) =
+
+* Fix: Fixed a bug of parallax at the mobile device.
+* Fix: Fixed a bug of smooth scrolling when clicking an anchor link.
+* Tweak: Optimized some SCSS files.
+* Tweak: Provides some more comprehensive form modules of "Custom Select".
+
+
+
 #### = 1.2.3 (April 4, 2018) =
 
 * Fix: Fixed a bug that the width of the "Custom Lightbox" module automatically becomes smaller at the mobile device.

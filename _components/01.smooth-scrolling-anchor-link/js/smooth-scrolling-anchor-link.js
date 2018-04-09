@@ -20,7 +20,8 @@ theme = ( function ( theme, $, window, document ) {
 		
 			if ( 
 				location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && 
-				location.hostname == this.hostname
+				location.hostname == this.hostname &&
+				$( this ).attr( 'href' ) != '#'
 			) {
 				
 				// Figure out element to scroll to

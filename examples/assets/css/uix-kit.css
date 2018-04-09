@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.2.3
- * ## Last Update         :  April 4, 2018
+ * ## Version             :  1.2.4
+ * ## Last Update         :  April 9, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -66,8 +66,8 @@
 	TABLE OF CONTENTS
 	---------------------------
 	
-    1. Table 
-    2. Basic 
+    1. Basic 
+    2. Table 
     3. Bullet List 
     4. Helper Classes 
     5. Typography 
@@ -90,8 +90,8 @@
     22. Comments 
     23. 3rd Party Plugins 
     24. Social Media Icons 
-    25. Badges 
-    26. Accordion 
+    25. Accordion 
+    26. Badges 
     27. Breadcrumbs 
     28. Button 
     29. Author Card 
@@ -1302,89 +1302,89 @@ section.site-google-map,
 }
 
 @media all and (max-width: 768px) {
-    .seamless-grid-container {
+    .seamless-grid-container:not(.none-breaking) {
     /* Loop */
     /* Loop & 2 columns */
     /* 2 columns */;
     }
 
-    .seamless-grid-container .seamless-grid.no-gutter {
+    .seamless-grid-container:not(.none-breaking) .seamless-grid.no-gutter {
         width: calc(100% + 15px);
     }
 
-    .seamless-grid-container [class*='seamless-col-'] {
+    .seamless-grid-container:not(.none-breaking) [class*='seamless-col-'] {
         float: none;
         width: calc(100% - 15px);
         padding-left: 0;
         padding-right: 0;
     }
 
-    .seamless-grid-container .seamless-grid.loop .seamless-col-1-2:last-of-type,
-  .seamless-grid-container .seamless-grid.loop .seamless-col-1-3:last-of-type,
-  .seamless-grid-container .seamless-grid.loop .seamless-col-1-4:last-of-type,
-  .seamless-grid-container .seamless-grid.loop .seamless-col-1-6:last-of-type {
+    .seamless-grid-container:not(.none-breaking) .seamless-grid.loop .seamless-col-1-2:last-of-type,
+  .seamless-grid-container:not(.none-breaking) .seamless-grid.loop .seamless-col-1-3:last-of-type,
+  .seamless-grid-container:not(.none-breaking) .seamless-grid.loop .seamless-col-1-4:last-of-type,
+  .seamless-grid-container:not(.none-breaking) .seamless-grid.loop .seamless-col-1-6:last-of-type {
         padding-right: 15px;
         width: 100%;
     }
 
-    .seamless-grid-container .seamless-grid.loop.no-gutter .seamless-col-1-2:last-of-type,
-  .seamless-grid-container .seamless-grid.loop.no-gutter .seamless-col-1-3:last-of-type,
-  .seamless-grid-container .seamless-grid.loop.no-gutter .seamless-col-1-4:last-of-type,
-  .seamless-grid-container .seamless-grid.loop.no-gutter .seamless-col-1-6:last-of-type {
+    .seamless-grid-container:not(.none-breaking) .seamless-grid.loop.no-gutter .seamless-col-1-2:last-of-type,
+  .seamless-grid-container:not(.none-breaking) .seamless-grid.loop.no-gutter .seamless-col-1-3:last-of-type,
+  .seamless-grid-container:not(.none-breaking) .seamless-grid.loop.no-gutter .seamless-col-1-4:last-of-type,
+  .seamless-grid-container:not(.none-breaking) .seamless-grid.loop.no-gutter .seamless-col-1-6:last-of-type {
         width: calc(100% - 15px);
     }
 
-    .seamless-grid-container .seamless-grid.loop .seamless-col-1-2:last-of-type .content,
-  .seamless-grid-container .seamless-grid.loop .seamless-col-1-3:last-of-type .content,
-  .seamless-grid-container .seamless-grid.loop .seamless-col-1-4:last-of-type .content,
-  .seamless-grid-container .seamless-grid.loop .seamless-col-1-6:last-of-type .content {
+    .seamless-grid-container:not(.none-breaking) .seamless-grid.loop .seamless-col-1-2:last-of-type .content,
+  .seamless-grid-container:not(.none-breaking) .seamless-grid.loop .seamless-col-1-3:last-of-type .content,
+  .seamless-grid-container:not(.none-breaking) .seamless-grid.loop .seamless-col-1-4:last-of-type .content,
+  .seamless-grid-container:not(.none-breaking) .seamless-grid.loop .seamless-col-1-6:last-of-type .content {
         width: 100%;
     }
 
-    .seamless-grid-container .seamless-grid.loop .seamless-col-1-2,
-  .seamless-grid-container .seamless-grid.loop .seamless-col-1-3,
-  .seamless-grid-container .seamless-grid.loop .seamless-col-1-4,
-  .seamless-grid-container .seamless-grid.loop .seamless-col-1-6 {
+    .seamless-grid-container:not(.none-breaking) .seamless-grid.loop .seamless-col-1-2,
+  .seamless-grid-container:not(.none-breaking) .seamless-grid.loop .seamless-col-1-3,
+  .seamless-grid-container:not(.none-breaking) .seamless-grid.loop .seamless-col-1-4,
+  .seamless-grid-container:not(.none-breaking) .seamless-grid.loop .seamless-col-1-6 {
         width: calc(100% - 15px);
     }
 
-    .seamless-grid-container .seamless-grid.loop.use-2 .seamless-col-1-2:last-of-type,
-  .seamless-grid-container .seamless-grid.loop.use-2 .seamless-col-1-3:last-of-type,
-  .seamless-grid-container .seamless-grid.loop.use-2 .seamless-col-1-4:last-of-type,
-  .seamless-grid-container .seamless-grid.loop.use-2 .seamless-col-1-6:last-of-type {
+    .seamless-grid-container:not(.none-breaking) .seamless-grid.loop.use-2 .seamless-col-1-2:last-of-type,
+  .seamless-grid-container:not(.none-breaking) .seamless-grid.loop.use-2 .seamless-col-1-3:last-of-type,
+  .seamless-grid-container:not(.none-breaking) .seamless-grid.loop.use-2 .seamless-col-1-4:last-of-type,
+  .seamless-grid-container:not(.none-breaking) .seamless-grid.loop.use-2 .seamless-col-1-6:last-of-type {
         width: 50%;
     }
 
-    .seamless-grid-container .seamless-grid.loop.use-2.no-gutter .seamless-col-1-2:last-of-type,
-  .seamless-grid-container .seamless-grid.loop.use-2.no-gutter .seamless-col-1-3:last-of-type,
-  .seamless-grid-container .seamless-grid.loop.use-2.no-gutter .seamless-col-1-4:last-of-type,
-  .seamless-grid-container .seamless-grid.loop.use-2.no-gutter .seamless-col-1-6:last-of-type {
+    .seamless-grid-container:not(.none-breaking) .seamless-grid.loop.use-2.no-gutter .seamless-col-1-2:last-of-type,
+  .seamless-grid-container:not(.none-breaking) .seamless-grid.loop.use-2.no-gutter .seamless-col-1-3:last-of-type,
+  .seamless-grid-container:not(.none-breaking) .seamless-grid.loop.use-2.no-gutter .seamless-col-1-4:last-of-type,
+  .seamless-grid-container:not(.none-breaking) .seamless-grid.loop.use-2.no-gutter .seamless-col-1-6:last-of-type {
         width: calc(50% - 7.5px);
     }
 
-    .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-6,
-  .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-4,
-  .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-3 {
+    .seamless-grid-container:not(.none-breaking) .seamless-grid.use-2 .seamless-col-1-6,
+  .seamless-grid-container:not(.none-breaking) .seamless-grid.use-2 .seamless-col-1-4,
+  .seamless-grid-container:not(.none-breaking) .seamless-grid.use-2 .seamless-col-1-3 {
         width: 50%;
         float: left;
         margin-bottom: 0;
     }
 
-    .seamless-grid-container .seamless-grid.use-2.no-gutter .seamless-col-1-6,
-  .seamless-grid-container .seamless-grid.use-2.no-gutter .seamless-col-1-4,
-  .seamless-grid-container .seamless-grid.use-2.no-gutter .seamless-col-1-3 {
+    .seamless-grid-container:not(.none-breaking) .seamless-grid.use-2.no-gutter .seamless-col-1-6,
+  .seamless-grid-container:not(.none-breaking) .seamless-grid.use-2.no-gutter .seamless-col-1-4,
+  .seamless-grid-container:not(.none-breaking) .seamless-grid.use-2.no-gutter .seamless-col-1-3 {
         width: calc(50% - 7.5px);
     }
 
-    .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-6:nth-child(2n+1),
-  .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-4:nth-child(2n+1),
-  .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-3:nth-child(2n+1) {
+    .seamless-grid-container:not(.none-breaking) .seamless-grid.use-2 .seamless-col-1-6:nth-child(2n+1),
+  .seamless-grid-container:not(.none-breaking) .seamless-grid.use-2 .seamless-col-1-4:nth-child(2n+1),
+  .seamless-grid-container:not(.none-breaking) .seamless-grid.use-2 .seamless-col-1-3:nth-child(2n+1) {
         clear: both;
     }
 
-    .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-6:nth-child(2n+0),
-  .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-4:nth-child(2n+0),
-  .seamless-grid-container .seamless-grid.use-2 .seamless-col-1-3:nth-child(2n+0) {
+    .seamless-grid-container:not(.none-breaking) .seamless-grid.use-2 .seamless-col-1-6:nth-child(2n+0),
+  .seamless-grid-container:not(.none-breaking) .seamless-grid.use-2 .seamless-col-1-4:nth-child(2n+0),
+  .seamless-grid-container:not(.none-breaking) .seamless-grid.use-2 .seamless-col-1-3:nth-child(2n+0) {
         padding-right: 15px;
     }
 }
@@ -4321,6 +4321,38 @@ ul.entry-meta {
     transition: all 0.3s ease;
 }
 
+.custom-select-wrapper .dir-top {
+  /* Shown from above */;
+}
+
+.custom-select-wrapper .dir-top .custom-options {
+    top: auto;
+    bottom: 100%;
+    margin-bottom: 15px;
+}
+
+.custom-select-wrapper .dir-top .custom-options:after {
+    position: absolute;
+    display: block;
+    content: '';
+    bottom: 0;
+    right: 25px;
+    width: 7px;
+    height: 7px;
+    margin-bottom: -4px;
+    border-bottom: 1px solid #dce4e8;
+    border-left: 1px solid transparent;
+    background: #fff;
+    transform: rotate(45deg);
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.custom-select-wrapper .dir-top .custom-options:before {
+    display: none;
+}
+
 .custom-select-wrapper .option-hover:before {
     background: #f9f9f9;
 }
@@ -6397,7 +6429,7 @@ dl.list-side-by-side:after {
     background-attachment: fixed;
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: cover !important;
+    background-size: cover;
 }
 
 .pure-bg-parallax {
@@ -9249,14 +9281,15 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 
 @media all and (max-width: 991px) {
     .custom-theme-flexslider.custom-primary-flexslider .custom-theme-slides > .item .slides-info .container .level-1 {
-        font-size: 4vw !important;
-        line-height: 4vw !important;
+        font-size: 7vw !important;
+        line-height: 7vw !important;
         margin-bottom: 0;
+        line-height: 1.5 !important;
     }
 
     .custom-theme-flexslider.custom-primary-flexslider .custom-theme-slides > .item .slides-info .container .level-2 {
-        font-size: 2vw !important;
-        line-height: 2vw !important;
+        font-size: 4vw !important;
+        line-height: 4vw !important;
     }
 }
 

@@ -527,6 +527,41 @@ $control-focus-color: $primary-text-color1;
 
 	}
 
+	
+	.dir-top {
+		/* Shown from above */
+		.custom-options {
+			top: auto;
+			bottom: 100%;
+			margin-bottom: 15px;
+			
+
+			&:after {
+				position: absolute;
+				display: block;
+				content: '';
+				bottom: 0;
+				right: 25px;
+				width: 7px;
+				height: 7px;
+				margin-bottom: -4px;
+				border-bottom: 1px solid $control-sub-color;
+				border-left: 1px solid transparent;
+				background: #fff;
+				transform: rotate(45deg);
+				@include transition-default();
+				z-index: 1;
+			}	
+
+			&:before {
+				display: none;
+			}			
+			
+			
+		}
+
+	}
+	
 
 	.option-hover:before {
 	    background: #f9f9f9;
