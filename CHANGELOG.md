@@ -1,5 +1,9 @@
 # Changelog
 
+#### = 1.2.6 (April 10, 2018) =
+
+* Tweak: Optimized self-contained seamless grid system.
+* Tweak: Extended module of "Timeline".
 
 
 #### = 1.2.5 (April 9, 2018) =

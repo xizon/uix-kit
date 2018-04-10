@@ -13,8 +13,7 @@ theme = ( function ( theme, $, window, document ) {
 			handler: function( direction ) {
 
 				$( this.element ).countTo({
-					dilimiter      : true,
-					doubleDigits   : true
+					dilimiter      : true
 				});
 
 				//Prevents front-end javascripts that are activated in the background to repeat loading.

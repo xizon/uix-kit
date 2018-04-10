@@ -156,6 +156,22 @@ theme = ( function ( theme, $, window, document ) {
 			
 			// Init
 			$this.find( 'ul > li.active' ).trigger( 'click' );
+			
+			//Active current tab
+			var url    = window.location.href,
+				locArr,
+			    loc, 
+				curTab;
+			
+			if ( url.indexOf( '#' ) >= 0 ) {
+				
+				locArr = url.split( '#' );
+			    loc    = locArr[1];
+				curTab = $( '.custom-tabs' ).find( 'ul > li:eq('+loc+')' );
+				curTab.trigger( 'click' );	
+			}
+				
+			
 				
 			
 		});

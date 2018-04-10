@@ -97,9 +97,10 @@
 	
 	
 	&:hover {
-		color: #fff;
 		
-
+		i {
+			color: #fff;
+		}
 		&:after {
 			visibility: visible;
 			opacity: 1;

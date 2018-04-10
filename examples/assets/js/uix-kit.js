@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.2.4
- * ## Last Update         :  April 9, 2018
+ * ## Version             :  1.2.6
+ * ## Last Update         :  April 10, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -38,35 +38,34 @@
     13. Accordion 
     14. Counter 
     15. Dynamic Drop Down List from JSON 
-    16. Form 
-    17. Form Progress 
-    18. Custom Core Scripts & Stylesheets 
-    19. Bulleted List 
-    20. Posts List With Ajax 
-    21. Fullwidth List of Split 
-    22. Mobile Menu 
-    23. Modal Dialog 
-    24. Mousewheel Interaction 
-    25. Multiple Items Carousel 
-    26. Navigation Highlighting 
-    27. Parallax 
-    28. Periodical Scroll 
-    29. Pricing 
-    30. Progress Bar 
-    31. Retina Graphics for Website 
-    32. Scroll Reveal 
+    16. Form Progress 
+    17. Gallery 
+    18. Form 
+    19. Custom Core Scripts & Stylesheets 
+    20. Bulleted List 
+    21. Posts List With Ajax 
+    22. Fullwidth List of Split 
+    23. Mobile Menu 
+    24. Modal Dialog 
+    25. Mousewheel Interaction 
+    26. Multiple Items Carousel 
+    27. Navigation Highlighting 
+    28. Parallax 
+    29. Periodical Scroll 
+    30. Pricing 
+    31. Progress Bar 
+    32. Retina Graphics for Website 
     33. Show More Less 
-    34. Custom Lightbox 
-    35. Slideshow ( with custom flexslider ) 
-    36. Smooth Scrolling When Clicking An Anchor Link 
-    37. Source Code 
-    38. Sticky Elements 
-    39. Tabs 
-    40. Testimonials Carousel 
-    41. Text effect 
-    42. Timeline 
-    43. AJAX 
-    44. Gallery 
+    34. Scroll Reveal 
+    35. Custom Lightbox 
+    36. Slideshow ( with custom flexslider ) 
+    37. Smooth Scrolling When Clicking An Anchor Link 
+    38. Source Code 
+    39. Sticky Elements 
+    40. Tabs 
+    41. Testimonials Carousel 
+    42. Text effect 
+    43. Timeline 
 
 
 */
@@ -1354,8 +1353,7 @@ theme = ( function ( theme, $, window, document ) {
 			handler: function( direction ) {
 
 				$( this.element ).countTo({
-					dilimiter      : true,
-					doubleDigits   : true
+					dilimiter      : true
 				});
 
 				//Prevents front-end javascripts that are activated in the background to repeat loading.
@@ -7630,14 +7628,60 @@ theme = ( function ( theme, $, window, document ) {
 		//Prevent this module from loading in other pages
 		if ( $( 'body' ).hasClass( 'onepage' ) ) return false;
 		
-	
 		
+		var browserURL = window.location.href;
+	
+		//Prevent anchor behaviour
+		$( 'a' ).click( function( e ) {
+			
+			var linkURL    = $( this ).attr( 'href' ),
+				locIndex, 
+				locURL;
+			
+			if ( linkURL.indexOf( '#' ) >= 0 && linkURL != '#' ) {
+				e.preventDefault();
+				
+				var locArr = linkURL.split( '#' );
+			    locIndex = locArr[1];
+				locURL   = locArr[0];
+				
+				
+				if ( browserURL.indexOf( locURL ) < 0 ) {
+					window.location.href = locURL + '#!!' + locIndex;
+				}
+				
+				
+			}
+				
+			
+		} );
+		
+		
+		//Page automatically slide to jump to the corresponding position
+		if ( browserURL.indexOf( '#!!' ) >= 0 ) {
+			
+			var curndex = browserURL.split( '#!!' ),
+				$target = $( '#' + curndex[1] );
+
+			//Smooth scrolling
+			$( 'html, body' ).animate({
+				scrollTop: $target.offset().top
+			}, 500 );	
+			
+		}
+		
+		
+		
+		
+		
+		//Hyperlink click event
 		$( 'a[href*="#"]' ).on( 'click', function( e ) {
 		
 			if ( 
 				location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && 
 				location.hostname == this.hostname &&
 				$( this ).attr( 'href' ) != '#'
+				
 			) {
 				
 				// Figure out element to scroll to
@@ -7655,7 +7699,7 @@ theme = ( function ( theme, $, window, document ) {
 					}, 500, function() {
 						// Callback after animation
 						// Must change focus!
-						var $target = $(target);
+						var $target = $( target );
 						$target.focus();
 						if ( $target.is( ':focus' ) ) { // Checking if the target was focused
 							return false;
@@ -8069,6 +8113,22 @@ theme = ( function ( theme, $, window, document ) {
 			
 			// Init
 			$this.find( 'ul > li.active' ).trigger( 'click' );
+			
+			//Active current tab
+			var url    = window.location.href,
+				locArr,
+			    loc, 
+				curTab;
+			
+			if ( url.indexOf( '#' ) >= 0 ) {
+				
+				locArr = url.split( '#' );
+			    loc    = locArr[1];
+				curTab = $( '.custom-tabs' ).find( 'ul > li:eq('+loc+')' );
+				curTab.trigger( 'click' );	
+			}
+				
+			
 				
 			
 		});
@@ -8291,51 +8351,74 @@ theme = ( function ( theme, $, window, document ) {
 		
 		var $window          = $( window ),
 			windowWidth      = $window.width(),
-			windowHeight     = $window.height(),
-			$timeline        = $( '.list-timeline-container-outer.horizontal > .list-timeline-container' ),
-			$item            = $timeline.find( '.list-timeline-item' );
+			windowHeight     = $window.height();
+				
 				
 
-		
-		//--------  Timeline Event
+		/*! 
+		 ---------------------------
+         Horizontal Timeline
+		 ---------------------------
+		 */
 		if ( windowWidth > 768 ) {
 			$( '.list-timeline-container-outer-wrapper.horizontal' ).each( function()  {
 
+				var $this          = $( this ),
+					$timeline      = $this.find( '.list-timeline-container-outer.horizontal > .list-timeline-container' ),
+					dateShowEle    = $timeline.data( 'show-ele' );
 
-				var $this = $( this );
-
+				if ( typeof dateShowEle === typeof undefined ) {
+					dateShowEle = '#timeline-number-show';
+				}	
+		
+				
 				$this.css( 'height', $this.height() - 17 + 'px' ); //Scrollbar width is 17px by default
 
 
 				$this.find( '.timeline-prev' ).on( 'click', function( e ) {
 					e.preventDefault();
-					timelinePrev( $this, false );
+					timelineUpdate( $this, false, dateShowEle, true );
 					return false;
 				});
 
 				$this.find( '.timeline-next' ).on( 'click', function( e ) {
 					e.preventDefault();
-					timelineNext( $this, false );
+					timelineUpdate( $this, false, dateShowEle, false );
 					return false;
 				});
 
 				$this.find( '.list-timeline-item' ).on( 'click', function( e ) {
 					e.preventDefault();
-					timelineNext( $this, $( this ) );
+					timelineUpdate( $this, $( this ), dateShowEle, false );
 					return false;
 				});
 
+				
+				//Activate the default selection
+				timelineUpdate( $this, $this.find( '.list-timeline-item.active' ), dateShowEle, false );
+				if ( $this.find( '.list-timeline-item.active' ).index() == 0 ) {
+					$this.find( '.timeline-prev' ).addClass( 'disable' );
+				}
+				
 
+				
 
 			});	
 		}
 
-		
-		
-		function timelinePrev( obj, iscur ) {
-			var	itemTotal = obj.find( '.list-timeline-item' ).length,
-				tNav    = obj.find( '.list-timeline-item' ),
-				tLoop   = false;
+		/*
+		 * Method that updates items of timeline
+		 *
+		 * @param  {object} obj                  - Wrapper of timeline.
+		 * @param  {object} iscur                - The current item.
+		 * @param  {string} showEle              - Element ID or class name that push the current text.
+		 * @param  {boolean} prev                - Whether to slide forward.
+		 * @return {void}                        - The constructor.
+		 */
+		function timelineUpdate( obj, iscur, showEle, prev ) {
+			var	itemTotal  = obj.find( '.list-timeline-item' ).length,
+				tNav       = obj.find( '.list-timeline-item' ),
+				tLoop      = false;
 			
 			
 			var curIndex = obj.find( '.list-timeline-item.active' ).index(),
@@ -8346,18 +8429,43 @@ theme = ( function ( theme, $, window, document ) {
 				curIndex = iscur.index();
 				tarIndex = curIndex;
 			} else {
-				tarIndex = ( curIndex >= 0  ) ? curIndex-1 : 0;
+				
+				if ( prev ) {
+					tarIndex = ( curIndex >= 0  ) ? curIndex-1 : 0;
+				} else {
+					tarIndex = ( curIndex < itemTotal  ) ? curIndex+1 : itemTotal-1;
+				}
+				
 			}
 			
 			
-			
+		
 			
 			//loop the items
-			if ( tLoop ) {
-				if ( tarIndex < 0 ) tarIndex = itemTotal-1;
+			obj.find( '.timeline-prev, .timeline-next' ).removeClass( 'disable' );
+			
+			if ( prev ) {
+				
+				//Previous
+				if ( tLoop ) {
+					if ( tarIndex < 0 ) tarIndex = itemTotal-1;
+				} else {
+					if ( tarIndex < 0 ) tarIndex = 0;
+					if ( tarIndex == 0 ) obj.find( '.timeline-prev' ).addClass( 'disable' );
+					
+				}
 			} else {
-				if ( tarIndex < 0 ) tarIndex = 0;
+				
+				//Next
+				if ( tLoop ) {
+					if ( tarIndex == itemTotal ) tarIndex = 0;
+				} else {
+					if ( tarIndex > itemTotal-1 ) tarIndex = itemTotal-1;
+					if ( tarIndex > itemTotal-2 ) obj.find( '.timeline-next' ).addClass( 'disable' );
+					
+				}
 			}
+
 			
 			
 			tNav.removeClass( 'active' );
@@ -8373,55 +8481,13 @@ theme = ( function ( theme, $, window, document ) {
 				'margin-left' : -parseFloat( tNavW ) + 'px'
 			});
 			
-			
-		}
-
-
-		function timelineNext( obj, iscur ) {
-			var	itemTotal = obj.find( '.list-timeline-item' ).length,
-				tNav    = obj.find( '.list-timeline-item' ),
-				tLoop   = false;
-			
-			
-			var curIndex = obj.find( '.list-timeline-item.active' ).index(),
-				tarIndex;
-
-			//Check if a value is an object currently
-			if ( iscur && typeof iscur === 'object' ) {
-				curIndex = iscur.index();
-				tarIndex = curIndex;
-			} else {
-				tarIndex = ( curIndex < itemTotal  ) ? curIndex+1 : itemTotal-1;
-			}
-			
-			
-			
-			
-			//loop the items
-			if ( tLoop ) {
-				if ( tarIndex == itemTotal ) tarIndex = 0;
-			} else {
-				if ( tarIndex > itemTotal-1 ) tarIndex = itemTotal-1;
-			}
-			
-			tNav.removeClass( 'active' );
-			obj.find( '.list-timeline-item:eq('+tarIndex+')' ).addClass( 'active' );
-			
-
-			//scroll right
-			var tNavW = 0;
-			for ( var i = 0; i < tarIndex; i++ ) {
-				tNavW += obj.find( '.list-timeline-item:eq('+i+')' ).width();
-			}
-	
-			obj.find( '.list-timeline-container-outer.horizontal > .list-timeline-container' ).css({
-				'margin-left' : -parseFloat( tNavW ) + 'px'
-			});
+			//Push the current text to element 
+			$( showEle ).text( obj.find( '.list-timeline-item:eq('+i+')' ).find( '.date' ).text() );
 			
 			
 		}
 
-
+		
 
 
     };
@@ -8474,5 +8540,8 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
+
+
+cument ) );
 
 
