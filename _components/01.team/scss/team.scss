@@ -1,0 +1,95 @@
+/* ====================================================== 
+   <!-- Team --> 
+/* ====================================================== */
+
+.team-card {
+   
+	.team-card-item {
+		margin-top: 1.5rem;
+		padding-bottom: 3rem;
+		position: relative;
+		
+
+		&:first-child {
+			margin-top: 0;
+		}
+		
+
+		.item-left,
+		.item-body {
+			display: table-cell;
+			vertical-align: top;
+		}
+	
+		
+		.item-body {
+			overflow: hidden;
+			padding-left: 1.5rem;
+			
+			em {
+				color: $sub-text-color;
+				display: inline-block;
+				margin-right: 1rem;
+			}
+	
+		}
+		
+		.item-desc {
+			line-height: 1.5;
+			margin-top: 1em;
+		}
+
+		.item-left-imgbox {
+			width: 250px;
+			height: 250px;
+			overflow: hidden;
+			margin: 0 auto;
+
+			img {
+				width: 100%;
+			}
+
+
+		}
+
+		
+		
+	}
+
+	
+}
+
+
+
+
+
+@media (max-width: 768px) {
+ 
+    .team-card {
+		
+        text-align: center;
+		
+		.team-card-item {
+			
+			.item-left {
+				display: block;
+				text-align: center;
+				margin-bottom: 1rem;
+			}
+
+			.item-left-imgbox {
+				width: 100%;
+				/* Compulsively cover custom height of grid */
+				height: auto !important;
+			}
+
+			.item-body {
+				display: block;
+				padding-left: 0;
+				width: 100%;
+			}	
+		}
+    }
+
+
+}

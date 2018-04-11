@@ -22,6 +22,14 @@ theme = ( function ( theme, $, window, document ) {
    
     var documentReady = function( $ ) {
 		
+		/* 
+		 ---------------------------
+		 Callbacks for special forms (supports asynchronous)
+		 ---------------------------
+		 */ 
+		// Add this code to initialize the style when calling 
+		// the form externally with other scripts
+		$( document ).customSpecialFormsInit();
 		
 		/* 
 		 ---------------------------
@@ -69,52 +77,31 @@ theme = ( function ( theme, $, window, document ) {
 
 			// on focus add cladd active to label
 			$this.on( 'focus', function() {
-				$this.next().addClass( 'active' );
+				$( this ).closest( 'div' ).find( 'label, .bar' ).addClass( 'active' );
 			});
 			
 			
 			//on blur check field and remove class if needed
 			$this.on( 'blur change', function( e ) {
 				if( $this.val() === '' || $this.val() === 'blank') {
-					$this.next().removeClass();
+					$( this ).closest( 'div' ).find( 'label, .bar' ).removeClass( 'active' );
 				}	
 				
 			});
 			
 			// if exist cookie value
 			if( $this.val() != '' && $this.val() != 'blank') { 
-			    $this.next().addClass( 'active' );
+			   $( this ).closest( 'div' ).find( 'label, .bar' ).addClass( 'active' );
 			}
+			
 			
 		});
 		
+		
+		//Search Submit Event in WordPress
 		$( '.wp-search-submit' ).on( 'click', function() {
 			$( this ).parent().parent( 'form' ).submit();
 		});
-		
-		
-		/* 
-		 ---------------------------
-		 Input Validation 
-		 ---------------------------
-		 */ 
-		//Using the jQuery Validation Plugin to check your form
-		
-		
-		/* 
-		 ---------------------------
-		 Custom Select
-		 ---------------------------
-		 */ 
-		$( document ).customSelectInit();
-
-
-		/* 
-		 ---------------------------
-		 Custom Radio, Toggle And Checkbox
-		 ---------------------------
-		 */ 
-		$( document ).customRadioCheckboxInit();
 		
 		
 		
@@ -170,10 +157,11 @@ theme = ( function ( theme, $, window, document ) {
 			//Dynamic listening for the latest value
 			$( document ).on( 'mouseleave', '[data-handler]', function() {
 				$( '[data-picker]' ).each( function() {
-					$( this ).next().addClass( 'active' );
+					$( this ).closest( 'div' ).find( 'label, .bar' ).addClass( 'active' );
 				});
 
 			});	
+			
 			
 
 		}
@@ -203,11 +191,49 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
+
+
+
 /* 
  *************************************
  * Associated Functions
  *************************************
  */
+
+/*
+ * Callbacks for special forms (supports asynchronous)
+ *
+ * @return {void}                        - The constructor.
+ */
+( function ( $ ) {
+    $.fn.customSpecialFormsInit = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({ }, options );
+ 
+        this.each( function() {
+			
+			//Custom Select
+			$( document ).customSelectInit();
+
+
+			//Custom Radio, Toggle And Checkbox
+			$( document ).customRadioCheckboxInit();
+
+
+			//Create Line Effect on Click
+			$( document ).customControlsLineEffInit();
+
+
+			
+		});
+ 
+    };
+ 
+}( jQuery ));
+
+
+
 /*
  * Custom Select
  *
@@ -243,11 +269,12 @@ theme = ( function ( theme, $, window, document ) {
 					labelText = $this.find( '> span' ).html(),
 					dataExist = $this.data( 'exist' );
 
+				
 
 				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
 
 					template  = '<div class="' + classes + ' new">';
-					template += '<span class="custom-select-trigger">' + $this.find( 'select' ).attr( 'placeholder' ) + '</span>';
+					template += '<span class="custom-select-trigger">' + $this.find( 'select' ).attr( 'placeholder' ) + '</span><span class="bar"></span>';
 					template += '<div class="custom-options">';
 
 					$this.find( 'select option' ).each( function( index ) {
@@ -441,6 +468,49 @@ theme = ( function ( theme, $, window, document ) {
  
 }( jQuery ));
 
+
+		
+
+
+/*
+ * Create Line Effect on Click
+ *
+ * @param  {string} controls                 - Wrapper of controls.
+ * @return {void}                            - The constructor.
+ */
+( function ( $ ) {
+    $.fn.customControlsLineEffInit = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+			controls    : '.controls.line-eff'
+        }, options );
+ 
+        this.each( function() {
+			
+			var $this              = $( this ),
+				customControls     = settings.controls;
+
+
+			$( customControls ).each(function() {
+				var dataExist = $( this ).data( 'exist' );
+				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
+					$( '<span class="bar"></span>' ).insertAfter( $( this ).find( 'label' ) );
+
+					//Prevent the form from being initialized again
+					$( this ).data( 'exist', 1 );	
+				}
+
+			});
+
+			
+			
+			
+		});
+ 
+    };
+ 
+}( jQuery ));
 
 
 /*

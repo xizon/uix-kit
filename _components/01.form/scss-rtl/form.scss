@@ -1,32 +1,407 @@
 /* ====================================================== 
-    <!-- Form -->                                       
+    <!-- Form -->                                         
 /* ====================================================== */
-.controls {
+
+@mixin select-arrow-rtl( $top, $left ){
+	border-left: 0;
+	right: auto;
+	left: $left;
+}
+
+
+/* 
+ ---------------------------
+ 1) Controls
+ ---------------------------
+ */ 
+
+
+/* Default Controls */
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) {
 	text-align: right;
 	
+	&.controls-side {
+		margin-left: auto;
+		margin-right: .2rem;
+	}
+	
+	
+	
+	//Create Line Effect on Click
+	.bar {
+		left: auto;
+		right: -2px;
+		
+		&::before {
+			left: auto;
+			right: 51%;
+		}
+		&::after {
+			right: auto;
+			left: 49%;
+		}
+	
+	}
+	
+
+	
+	&.text-short-s {
+		
+		input:not([type="checkbox"]):not([type="radio"]) {
+			margin-right: auto;	
+			margin-left: .5rem;	
+		}
+		
+		
+
+	}  	
+
+	&.text-short-l {
+		input:not([type="checkbox"]):not([type="radio"]) {
+			margin-right: auto;	
+			margin-left: .5rem;	
+		}
+
+	}  
+	
+	
+	label {
+		left: auto;
+		right: 0.875rem;
+
+	}
+	
+	
+	/*-- Radio --*/
+	&.radio {
+	
+		label {
+			padding-left: auto !important;
+			padding-right: 1.25rem !important;
+			right: auto !important;
+		}	
+		
+	}
+	
+	/*-- Select --*/
+	&.select {
+
+		> span {
+			padding-right: auto;
+			padding-left: 1rem;
+			
+		}
+		
+		select {
+			padding-right: auto !important;
+			padding-left: 1.5rem !important;
+		}
+		
+		label {
+			right: auto !important;
+			padding-right: auto !important;
+			padding-left: 1rem !important;
+
+			&:after {
+			  @include select-arrow-rtl( -.875rem, 1rem );
+			}
+		}	
+		
+	}
+	
+	
+
+    /*-- Form With Icon --*/
+	&.withicon {
+		label {
+		    left: auto;
+			right: 3rem;
+		}
+
+		i {
+			left: auto;
+			right: 1rem;
+			
+			&::after {
+				left: auto;
+				right: 1.4rem;
+			}
+			
+		}
+
+		input:not([type="checkbox"]):not([type="radio"]) {
+			padding-left: auto;
+			padding-right: 3.5rem;
+
+		}
+
+		textarea, 
+		button, 
+		select {
+			padding-left: auto;
+			padding-right: 3.5rem;
+		}
+
+	}
+	
+	
+
+	
+	
+	/*-- Other --*/
 	.fa-sort {
 		right: auto;
 		left: 0.875rem;
 	}
-	label {
-		left: auto;
-		right: 0.875rem;
-	}
+
+
 	.req-icon {
 		right: auto;
 		left: 0.721875rem;
 	}
+	
+
+	
 }
 
-.form-merge input + button[type="submit"] {
-	margin-left: auto;
-	margin-right: -0.25rem;
+
+/* Create Line Effect on Click */
+.controls.line-eff {
+
+	label {
+		&.active {
+			transform: translateX(1.75rem) scale(.8);
+		}	
+	}
+	
+	&.withicon {
+		label {
+			&.active {
+				transform: translateX(4.09375rem) scale(.8);
+			}	
+		}	
+	}
+	
+
+	
 }
 
-@media all and (max-width: 768px) {
-	.form-merge input + button[type="submit"] {
-		margin-left: 0;
-		margin-right: 0;
+.col-sm-12 {
+	
+	.controls.line-eff {
+		
+		&:not(.text-short-s):not(.text-short-l) {
+			.bar {
+				right: -8px;
+
+			}	
+		}
+		
+		&.textarea {
+			.bar {
+				right: -8px;
+			}		
+		}
+		
+	
+	}
+
+}
+
+/* 
+ ---------------------------
+ 2) Upload
+ ---------------------------
+ */
+.controls-file-container {
+	input[type="file"] {
+		left: auto;
+		right: 0;
+	}
+}
+
+/* 
+ ---------------------------
+ 3) Group
+ ---------------------------
+ */ 
+
+.controls-merge {
+	
+	
+	
+	button {
+		margin-left: auto;
+		margin-right: -5px;
+		
+	}
+	
+	&.circle {
+		input {
+			border-radius: 0 50px 50px 0;
+		}
+		 
+		button {
+			border-radius: 50px 0 0 50px;
+		}
+		
+	}
+	
+    /*-- Form With Icon --*/
+	&.withicon {
+
+		input {
+			padding-left: auto;
+			padding-right: 3rem;
+
+		}
+
+		
+		i {
+			left: auto;
+			right: 1rem;
+			
+			&::after {
+				left: auto;
+				right: 1.4rem;
+			}
+			
+		}
+
+	}
+	
+}
+
+
+/* 
+ ---------------------------
+ 4) Custom Select
+ ---------------------------
+ */ 
+.custom-select {
+	text-align: right;
+}
+
+.custom-select-wrapper {
+	
+
+
+	.custom-select-trigger {
+		padding: 0.546875rem 1.5rem  0.546875rem 2.5rem;
+
+	}
+
+	
+	.line-eff  {
+		
+		//Create Line Effect on Click
+		.bar {
+			left: auto;
+			right: 0;
+			
+		
+			&::before {
+				left: auto;
+				right: 51%;
+			}
+			&::after {
+				right: auto;
+				left: 49%;
+			}
+
+		}	
+	
+		
+	}
+	
+	
+
+	.custom-select-label {
+		margin-left: auto;
+		margin-right: .5rem;
+	}
+
+	.custom-options {
+		left: auto;
+		right: 0;
+	}
+
+
+}	
+
+/* 
+ ---------------------------
+ 5) Custom Radio, Toggle And Checkbox
+ ---------------------------
+ */
+.custom-radio {
+  
+	text-align: right;
+
+	label {
+		right: auto;
+	}	
+
+	.custom-radio-trigger {
+		margin-right: auto;
+		margin-left: 5px;
+
+		&::before {
+			left: auto;
+			margin-left: auto;		
+			right: 50%;
+			margin-right: -3px;
+		}
+	}
+}
+
+
+
+.custom-toggle {
+	
+	text-align: right;
+
+
+	input[type="checkbox"] {
+		
+		&:checked + .custom-toggle-trigger {
+			margin-left: auto;
+			margin-right: 8px;
+		}
+	}
+
+	.custom-toggle-trigger {
+		margin: 0.5rem 0 0.5rem .5rem;
+		margin-left: auto;
+		margin-right: 50px;
+
+		&::before {
+			left: auto;
+			right: -50px;
+		}
+
+		&::after {
+			right: auto;
+			left: -50px;
+		}
+
+	}
+}
+
+.custom-checkbox {
+
+	text-align: right;
+
+	.custom-checkbox-trigger {
+		margin: 0.546875rem 0 0.546875rem .5rem;
+		
+		&::before,
+		&::after {
+			left: auto;
+			right: 4px;
+		
+		}
+
 	}
 }
 

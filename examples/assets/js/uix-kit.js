@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.2.6
- * ## Last Update         :  April 10, 2018
+ * ## Version             :  1.2.7
+ * ## Last Update         :  April 11, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -39,8 +39,8 @@
     14. Counter 
     15. Dynamic Drop Down List from JSON 
     16. Form Progress 
-    17. Gallery 
-    18. Form 
+    17. Form 
+    18. Gallery 
     19. Custom Core Scripts & Stylesheets 
     20. Bulleted List 
     21. Posts List With Ajax 
@@ -55,8 +55,8 @@
     30. Pricing 
     31. Progress Bar 
     32. Retina Graphics for Website 
-    33. Show More Less 
-    34. Scroll Reveal 
+    33. Scroll Reveal 
+    34. Show More Less 
     35. Custom Lightbox 
     36. Slideshow ( with custom flexslider ) 
     37. Smooth Scrolling When Clicking An Anchor Link 
@@ -66,6 +66,7 @@
     41. Testimonials Carousel 
     42. Text effect 
     43. Timeline 
+    44. AJAX 
 
 
 */
@@ -293,7 +294,7 @@ theme = ( function ( theme, $, window, document ) {
 		
 		$( '.overlay-bg' ).each(function() {
 			
-			var dataBgColor = $( this ).data( 'overlay-bg' ),
+			var dataBgColor   = $( this ).data( 'overlay-bg' ),
 				dataBgOpacity = $( this ).data( 'overlay-opacity' );
 			
 			
@@ -304,10 +305,9 @@ theme = ( function ( theme, $, window, document ) {
 					
 				}
 				
-				$( this ).animate( { opacity: $( this ).data( 'overlay-opacity' ) }, 0 );
-				
 				$( this ).css( {
-					'background-color': $( this ).data( 'overlay-bg' )
+					'background-color': $( this ).data( 'overlay-bg' ),
+					'opacity'         : $( this ).data( 'overlay-opacity' )
 				} );
 	
 			}
@@ -1671,6 +1671,14 @@ theme = ( function ( theme, $, window, document ) {
    
     var documentReady = function( $ ) {
 		
+		/* 
+		 ---------------------------
+		 Callbacks for special forms (supports asynchronous)
+		 ---------------------------
+		 */ 
+		// Add this code to initialize the style when calling 
+		// the form externally with other scripts
+		$( document ).customSpecialFormsInit();
 		
 		/* 
 		 ---------------------------
@@ -1718,52 +1726,31 @@ theme = ( function ( theme, $, window, document ) {
 
 			// on focus add cladd active to label
 			$this.on( 'focus', function() {
-				$this.next().addClass( 'active' );
+				$( this ).closest( 'div' ).find( 'label, .bar' ).addClass( 'active' );
 			});
 			
 			
 			//on blur check field and remove class if needed
 			$this.on( 'blur change', function( e ) {
 				if( $this.val() === '' || $this.val() === 'blank') {
-					$this.next().removeClass();
+					$( this ).closest( 'div' ).find( 'label, .bar' ).removeClass( 'active' );
 				}	
 				
 			});
 			
 			// if exist cookie value
 			if( $this.val() != '' && $this.val() != 'blank') { 
-			    $this.next().addClass( 'active' );
+			   $( this ).closest( 'div' ).find( 'label, .bar' ).addClass( 'active' );
 			}
+			
 			
 		});
 		
+		
+		//Search Submit Event in WordPress
 		$( '.wp-search-submit' ).on( 'click', function() {
 			$( this ).parent().parent( 'form' ).submit();
 		});
-		
-		
-		/* 
-		 ---------------------------
-		 Input Validation 
-		 ---------------------------
-		 */ 
-		//Using the jQuery Validation Plugin to check your form
-		
-		
-		/* 
-		 ---------------------------
-		 Custom Select
-		 ---------------------------
-		 */ 
-		$( document ).customSelectInit();
-
-
-		/* 
-		 ---------------------------
-		 Custom Radio, Toggle And Checkbox
-		 ---------------------------
-		 */ 
-		$( document ).customRadioCheckboxInit();
 		
 		
 		
@@ -1819,10 +1806,11 @@ theme = ( function ( theme, $, window, document ) {
 			//Dynamic listening for the latest value
 			$( document ).on( 'mouseleave', '[data-handler]', function() {
 				$( '[data-picker]' ).each( function() {
-					$( this ).next().addClass( 'active' );
+					$( this ).closest( 'div' ).find( 'label, .bar' ).addClass( 'active' );
 				});
 
 			});	
+			
 			
 
 		}
@@ -1852,11 +1840,49 @@ theme = ( function ( theme, $, window, document ) {
 
 
 
+
+
+
 /* 
  *************************************
  * Associated Functions
  *************************************
  */
+
+/*
+ * Callbacks for special forms (supports asynchronous)
+ *
+ * @return {void}                        - The constructor.
+ */
+( function ( $ ) {
+    $.fn.customSpecialFormsInit = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({ }, options );
+ 
+        this.each( function() {
+			
+			//Custom Select
+			$( document ).customSelectInit();
+
+
+			//Custom Radio, Toggle And Checkbox
+			$( document ).customRadioCheckboxInit();
+
+
+			//Create Line Effect on Click
+			$( document ).customControlsLineEffInit();
+
+
+			
+		});
+ 
+    };
+ 
+}( jQuery ));
+
+
+
 /*
  * Custom Select
  *
@@ -1892,11 +1918,12 @@ theme = ( function ( theme, $, window, document ) {
 					labelText = $this.find( '> span' ).html(),
 					dataExist = $this.data( 'exist' );
 
+				
 
 				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
 
 					template  = '<div class="' + classes + ' new">';
-					template += '<span class="custom-select-trigger">' + $this.find( 'select' ).attr( 'placeholder' ) + '</span>';
+					template += '<span class="custom-select-trigger">' + $this.find( 'select' ).attr( 'placeholder' ) + '</span><span class="bar"></span>';
 					template += '<div class="custom-options">';
 
 					$this.find( 'select option' ).each( function( index ) {
@@ -2090,6 +2117,49 @@ theme = ( function ( theme, $, window, document ) {
  
 }( jQuery ));
 
+
+		
+
+
+/*
+ * Create Line Effect on Click
+ *
+ * @param  {string} controls                 - Wrapper of controls.
+ * @return {void}                            - The constructor.
+ */
+( function ( $ ) {
+    $.fn.customControlsLineEffInit = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+			controls    : '.controls.line-eff'
+        }, options );
+ 
+        this.each( function() {
+			
+			var $this              = $( this ),
+				customControls     = settings.controls;
+
+
+			$( customControls ).each(function() {
+				var dataExist = $( this ).data( 'exist' );
+				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
+					$( '<span class="bar"></span>' ).insertAfter( $( this ).find( 'label' ) );
+
+					//Prevent the form from being initialized again
+					$( this ).data( 'exist', 1 );	
+				}
+
+			});
+
+			
+			
+			
+		});
+ 
+    };
+ 
+}( jQuery ));
 
 
 /*
@@ -6313,7 +6383,9 @@ theme = ( function ( theme, $, window, document ) {
 			var $this       = $( this ),
 				ul          = $this.data( 'periodical-scroll-container' ),
 				speed       = $this.data( 'periodical-scroll-speed' ),
-				timing      = $this.data( 'periodical-scroll-timing' );
+				timing      = $this.data( 'periodical-scroll-timing' ),
+				$wrap       = $this.find( ul ),
+				itemHeight  = $wrap.find( 'li:first' ).height();
 
 
 			if( typeof speed === typeof undefined ) {
@@ -6324,33 +6396,37 @@ theme = ( function ( theme, $, window, document ) {
 				timing = 2000;
 			}	
 			
-			var $wrap  = $this.find( ul ),
-				time   = timing,
-				moveEv = null;
-			
 			//Initialize the container height
 			$wrap.css({
-				'height'   : $wrap.find( 'li:first' ).height() + 'px',
+				'height'   : itemHeight + 'px',
 				'overflow' : 'hidden'
 			});
 			
- 
-			//Animation
-			$wrap.on( 'mouseenter', function() {
+			
+			
+			var stop      = false,
+				obj       = $wrap;
 
-				clearInterval( moveEv );
+			// change item
+			setInterval( periodicalTextChange, timing );
 
-			} ).on( 'mouseleave' , function() {
-				moveEv=setInterval(function(){
-					var $item     = $wrap.find( 'li:first' ),
-						curHeight = $item.height(); 
+			function periodicalTextChange() {
+				
+				if( stop ) return;
 
-					$item.animate({marginTop: -curHeight + 'px' }, speed, function(){
-						$item.css('marginTop',0).appendTo( $wrap );
-					});
+				var itemToMove = obj[0].firstElementChild;
+				itemToMove.style.marginTop = -itemHeight + 'px';
+			  
+				// move the child to the end of the items' list
+				setTimeout(function(){
+					itemToMove.removeAttribute( 'style' );
+					obj[0].appendChild( itemToMove );
+				}, 600);
+			}
 
-				}, time );
-			} ).trigger('mouseleave');
+			obj.on( 'mouseenter', function() { stop = true; } )
+			   .on( 'mouseleave', function() { stop = false; } );		
+
 			
 			
 		});
@@ -8540,8 +8616,5 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
-
-
-cument ) );
 
 

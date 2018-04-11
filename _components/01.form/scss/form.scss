@@ -5,6 +5,9 @@
 $control-text-color: #888;
 $control-sub-color: #dce4e8;
 $control-focus-color: $primary-text-color1;
+$control-focus-bordercolor: $primary-text-color1;
+$control-focus-bordercolor2: transparent;
+
 
 
 @mixin select-arrow( $top, $right ){
@@ -52,13 +55,60 @@ $control-focus-color: $primary-text-color1;
 .controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) {
 	text-align: left;
 	position: relative;
-	
+	margin-bottom: 1.09375rem;
+
 	&.controls-side {
 		margin-left: .2rem;
 	}
 	
 	&.t-c {
 		text-align: center !important;
+	}
+	
+	&.circle {
+		
+		input:not([type="checkbox"]):not([type="radio"]),
+		textarea, 
+		button, 
+		select {
+			border-radius: 50px;	
+		}
+		
+	}
+	
+	//Create Line Effect on Click
+	.bar {
+		position: absolute;
+		height: 2px;
+		left: -2px;
+		width: 100%;
+		bottom: 0.5px;
+		display: none;
+		
+		&::before,
+		&::after {
+			content: '';
+			display: block;
+			height: 100%;
+			width: 0;
+			position: absolute;
+			background: $primary-text-color1;
+			@include transition-default();
+		}
+		&::before {
+			left: 51%;
+		}
+		&::after {
+			right: 49%;
+		}
+
+		&.active {
+			&::before,
+			&::after {
+				width: 50%;
+			}
+
+		}		
 	}
 	
 
@@ -71,38 +121,53 @@ $control-focus-color: $primary-text-color1;
 		@include transition-default();
 		font-size: $font-size-form;
 		padding: 0.546875rem;
+		margin: 0;
 		box-sizing: content-box;
 		background-color: #fff;
 		color: $control-text-color;
-		margin-bottom: 1.09375rem;
 		border: 1px solid $control-sub-color;
 		width: calc(100% - 1.09375rem - 2px );	
-
-
-		&.text-short-s {
-			width: 7.5rem;
-			margin-right: .5rem;
-		}  	
-
-		&.text-short-l {
-			width: 12rem;
-			margin-right: .5rem;
-		}  	
-
-		&:focus ~ label, 
-		&:hover ~ label {
+	
+	
+		&:focus ~ label {
 			color: $control-focus-color;
 			cursor: text;
 		}	
 
-		&:focus, 
-		&:hover {
+		&:focus {
 			outline: none;
-			border-color: $control-focus-color;
+			border-color: $control-focus-bordercolor;
 		}	
-
+	
 		
 	}
+	
+	&.text-short-s {
+		
+		input:not([type="checkbox"]):not([type="radio"]) {
+			width: 120px;
+			margin-right: .5rem;	
+		}
+		
+		.bar {
+			width: calc( 120px + 1.09375rem + 2px );
+		}
+
+	}  	
+
+	&.text-short-l {
+		input:not([type="checkbox"]):not([type="radio"]) {
+			width: 192px;
+			margin-right: .5rem;	
+		}
+		
+		.bar {
+			width: calc( 192px + 1.09375rem + 2px );
+		}
+
+
+	}  
+	
 
     textarea, 
 	button, 
@@ -115,13 +180,13 @@ $control-focus-color: $primary-text-color1;
 		width: calc(100% - 1.09375rem );
 		font-size: $font-size-form;
 		padding: 0.546875rem;
+		margin: 0;
 		border: none;
 		box-sizing: content-box;
 		@include transition-default();
 
 		background-color: #fff;
 		color: $control-text-color;
-		margin-bottom: 1.09375rem;
 		border: 1px solid $control-sub-color;
 		width: calc(100% - 1.09375rem - 2px );  
 
@@ -133,16 +198,14 @@ $control-focus-color: $primary-text-color1;
 		resize: none;
 		height: 20vh; 
 
-		&:focus ~ label, 
-		&:hover ~ label {
+		&:focus ~ label {
 			color: $control-focus-color;
 			cursor: text;
 		}
 
-		&:focus, 
-		&:hover {
+		&:focus {
 			outline: none;
-			border-color: $control-focus-color;
+			border-color: $control-focus-bordercolor;
 		}  
 
 
@@ -156,16 +219,14 @@ $control-focus-color: $primary-text-color1;
 		width: 100%;
 		border-radius: 0;  
 
-		&:focus ~ label, 
-		&:hover ~ label {
+		&:focus ~ label {
 			color: $control-focus-color;
 			cursor: text;
 		}
 
-		&:focus, 
-		&:hover {
+		&:focus {
 			outline: none;
-			border-color: $control-focus-color;
+			border-color: $control-focus-bordercolor;
 		}  
 
 	}
@@ -173,10 +234,9 @@ $control-focus-color: $primary-text-color1;
 	select {
 		cursor: pointer;
 
-		&:focus, 
-		&:hover {
+		&:focus {
 			outline: none;
-			border-color: $control-focus-color;
+			border-color: $control-focus-bordercolor;
 		}  
 
 	}
@@ -186,18 +246,22 @@ $control-focus-color: $primary-text-color1;
 		@include control-label-text();
 		position: absolute;
 		left: 0.875rem;
-		top: 0.721875rem;
+		top: 0.5rem;
 		display: inline-block;
 		padding: 0 0.875rem;
 		background-color: rgba(255, 255, 255, 0);
 		pointer-events: none;
-		transition: color 0.3s, top 0.3s, background-color 0.2s;
+		@include transition-default();
+
+		
 		
 		&.active {
 			top: -1.09375rem;
 			color: #555;
 			background-color: white;
-		}
+		}	
+		
+		
 	}
 	
 	
@@ -257,17 +321,30 @@ $control-focus-color: $primary-text-color1;
     /*-- Form With Icon --*/
 	&.withicon {
 		label {
-		    left: 2rem;
+		    left: 3rem;
 		}
 
 		i {
 			position: absolute;
 			left: 1rem;
-			top: 1rem;
+			top: 0.875rem;
+			color: $control-sub-color;
+			
+			&::after {
+				content: '';
+				display: block;
+				height: 100%;
+				width: 1px;
+				background: $control-sub-color;
+				position: absolute;
+				left: 1.4rem;
+				top: 0;
+			}
+			
 		}
 
 		input:not([type="checkbox"]):not([type="radio"]) {
-			padding-left: 2.5rem;
+			padding-left: 3.5rem;
 			width: calc(100% - 1.09375rem - 2px - 2.5rem );
 
 		}
@@ -275,7 +352,7 @@ $control-focus-color: $primary-text-color1;
 		textarea, 
 		button, 
 		select {
-			padding-left: 2.5rem;
+			padding-left: 3.5rem;
 			width: calc(100% - 1.09375rem - 2px - 2.5rem );
 		}
 
@@ -298,6 +375,14 @@ $control-focus-color: $primary-text-color1;
 		label {
 		    color: #4AB005 !important;
 		}
+		
+		.bar {
+			&::before,
+			&::after {
+				background: #4AB005;
+			}	
+		}
+		
 	}
 	
 	/*-- Form Status: Error --*/
@@ -314,6 +399,14 @@ $control-focus-color: $primary-text-color1;
 		label {
 		    color: #f00 !important;
 		}
+		
+		.bar {
+			&::before,
+			&::after {
+				background: #f00;
+			}	
+		}
+		
 	}
 	
 	
@@ -338,16 +431,103 @@ $control-focus-color: $primary-text-color1;
 }
 
 
-/* Custom Controls */
-.controls-custom {
-	width: calc(100% - 1.09375rem );
-	font-size: $font-size-form;
-	padding: 0.546875rem;
-	border: none;
-	box-sizing: content-box;
-	@include transition-default();
+/* Create Line Effect on Click */
+.controls.line-eff {
+
+	&.circle {
+		input:not([type="checkbox"]):not([type="radio"]),
+		textarea, 
+		button, 
+		select {
+			border-radius: 0 !important;	
+		}
+		
+	}
+	
+	.bar {
+		display: block !important;
+	}
+	
+	input:not([type="checkbox"]):not([type="radio"]) {
+		border-top-color: $control-focus-bordercolor2 !important;
+		border-left-color: $control-focus-bordercolor2 !important;
+		border-right-color: $control-focus-bordercolor2 !important;
+	
+		&:focus {
+			border-color: $control-focus-bordercolor2 !important;
+		}	
+	
+		
+	}
+	
+	
+    textarea, 
+	button, 
+	select {
+		border-top-color: $control-focus-bordercolor2 !important;
+		border-left-color: $control-focus-bordercolor2 !important;
+		border-right-color: $control-focus-bordercolor2 !important;
+
+	}
+
+	textarea {
+		&:focus {
+			border-color: $control-focus-bordercolor2 !important;
+		}  
+
+	}
+	
+	
+	button {
+
+		&:focus {
+			border-color: $control-focus-bordercolor2 !important;
+		}  
+
+	}
+	
+	
+	
+	label {
+		&.active {
+			transform: translateX(-1.75rem) scale(.8);
+		}	
+	}
+	
+	&.withicon {
+		label {
+			&.active {
+				transform: translateX(-4.09375rem) scale(.8);
+			}	
+		}	
+	}
+	
+
+	
 }
 
+.col-sm-12 {
+	
+	.controls.line-eff {
+		
+		&:not(.text-short-s):not(.text-short-l) {
+			.bar {
+				left: -8px;
+
+			}	
+		}
+		
+		&.textarea {
+			.bar {
+				left: -8px;
+				transform: translateY(-0.546875rem);
+			}		
+		}
+		
+	
+	}
+
+}
 
 /* 
  ---------------------------
@@ -381,63 +561,98 @@ $control-focus-color: $primary-text-color1;
  3) Group
  ---------------------------
  */ 
-.controls-custom-merge {
-	@include transition-default();
-	background-color: #fff;
-	color: $control-text-color;
-	margin-bottom: 1.09375rem;
-	border: 1px solid $control-sub-color;
-	font-size: $font-size-form;
-	padding: 0.546875rem 1.09375rem;
-	font-weight: 600;
-}
 
-.form-merge {
-	min-width: 100%;
-	overflow: hidden;
-	&.no-labels label {
-	    display: none;
+$controls-merge-button-width: 20%;
+
+.controls-merge {
+	position: relative;
+	
+	&::after {
+		display: block;
+		content: '';
+		clear: both;
 	}
+	
+    textarea, 
+	button, 
+	select {
+
+		border-radius: 0;
+		/* Remove inner shadow from inputs on mobile iOS */
+		-webkit-appearance: none;
+		border: none;
+
+	}
+	
 	input {
-		
-		border-radius: 50px 0 0 50px;
-		
-		+ button[type="submit"] {
-			margin-left: -0.25rem;
-		}
-	}
-	
-	button[type="submit"] {
-		border-radius: 0 50px 50px 0;
-		position: relative;
-		margin: 0;
-		color: #527a8e;
-	}
-	
-	&.form-square {
-		input, 
-		button[type="submit"] {
-			border-radius: 0;
-		}
-	}
-}
+		@include transition-default();
+		font-size: $font-size-form;
+		font-weight: 600;
+		padding: 0.546875rem;
+		box-sizing: content-box;
+		color: $control-text-color;
+		margin-bottom: 1.09375rem;
+		border: 1px solid $control-sub-color;
+		width: calc(#{100-$controls-merge-button-width} - 1.09375rem - 1.09375rem );
 
-@media all and (max-width: 768px) {
-	.form-merge {
+	}
+	
+	button {
+		padding: 0.546875rem 0 !important;
+		width: calc(#{$controls-merge-button-width} + 5px) !important;
+		margin-left: -5px;
+		
+		span {
+			display: inline-block;
+			padding-left: .3rem;
+			padding-right: .3rem;
+			line-height: 100%;
+			@include ellipsis();
+		}
+	}
+	
+	&.circle {
 		input {
-			width: 100%;
-			border-radius: 50px;
-
-			+ button[type="submit"] {
-				margin-left: 0;
-			}
+			border-radius: 50px 0 0 50px;
 		}
-		button[type="submit"] {
-			bottom: 0;
-			border-radius: 50px;
-			width: 100%;
+		 
+		button {
+			border-radius: 0 50px 50px 0;
 		}
+		
 	}
+	
+    /*-- Form With Icon --*/
+	&.withicon {
+
+		input {
+			padding-left: 3rem;
+			width: calc(#{100-$controls-merge-button-width} - 1.09375rem - 1.09375rem - 2.453125rem );
+
+		}
+
+		
+		i {
+			position: absolute;
+			left: 1rem;
+			top: 0.875rem;
+			color: $control-sub-color;
+			
+			&::after {
+				content: '';
+				display: block;
+				height: 100%;
+				width: 1px;
+				background: $control-sub-color;
+				position: absolute;
+				left: 1.4rem;
+				top: 0;
+			}
+			
+		}
+
+	}
+	
 }
 
 /* 
@@ -471,17 +686,65 @@ $control-focus-color: $primary-text-color1;
 		cursor: pointer;
 		margin-bottom: 1.09375rem;
 
-		&:focus, 
-		&:hover {
+		&:focus {
 			outline: none;
-			border-color: $control-focus-color;
+			border-color: $control-focus-bordercolor;
 		} 	
 
 		&:after {
 			@include select-arrow( -.275rem, 1rem );
 		}
+
 	}
 
+	.circle {
+		.custom-select-trigger {
+			border-radius: 50px;
+		}	
+	}
+	
+	.line-eff  {
+		.custom-select-trigger {
+			border-radius: 0;
+			border-top-color: $control-focus-bordercolor2 !important;
+			border-left-color: $control-focus-bordercolor2 !important;
+			border-right-color: $control-focus-bordercolor2 !important;
+		
+		}	
+		
+		
+		//Create Line Effect on Click
+		.bar {
+			position: absolute;
+			height: 2px;
+			left: 0;
+			width: 100%;
+			bottom: calc( 1.09375rem + 0.5px);
+			transform: translateX(2px);
+			
+			&::before,
+			&::after {
+				content: '';
+				display: block;
+				height: 100%;
+				width: 0;
+				position: absolute;
+				background: $primary-text-color1;
+				@include transition-default();
+			}
+			&::before {
+				left: 51%;
+			}
+			&::after {
+				right: 49%;
+			}
+
+		}	
+	
+		
+	}
+	
+	
 
 	.custom-select-label {
 		display: inline-block;
@@ -599,8 +862,10 @@ $control-focus-color: $primary-text-color1;
 
 		&.opened {
 
-			.custom-select-trigger:after {
-				transform: rotate(-135deg);
+			.custom-select-trigger {
+				&:after {
+					transform: rotate(-135deg);
+				}
 			}	
 
 			.custom-options {
@@ -609,10 +874,17 @@ $control-focus-color: $primary-text-color1;
 				pointer-events: all;
 				transform: translateY(0);
 			}	
-
+			
+			.bar {
+				&::before,
+				&::after {
+					width: 50%;
+				}
+			}	
 		}	
 		
-
+	
+		
 		&.none-bg {
 			.custom-select-trigger {
 				background: none;
@@ -693,12 +965,17 @@ $control-focus-color: $primary-text-color1;
 		display: inline-block;
 		width: 70px;
 		border: 1px solid $control-sub-color;
-		border-radius: 18px;
 		white-space: nowrap;
 		overflow: hidden;
 		cursor: pointer;
 		margin-top: .5rem;
 	}	
+	
+	&.circle {
+		label {
+			border-radius: 18px;
+		}	
+	}
 
 	input[type="checkbox"] {
 		display: none;
@@ -753,15 +1030,16 @@ $control-focus-color: $primary-text-color1;
 
 	label {
 	    @include control-label-text();
+		cursor: pointer;
 	}
 
 
 	input[type="checkbox"] {
 		display: none;
-
+		
 		&:checked + .custom-checkbox-trigger::before,
 		&:checked + .custom-checkbox-trigger::after {
-			display: block;
+			opacity: 1;
 		}
 	}
 
@@ -779,14 +1057,16 @@ $control-focus-color: $primary-text-color1;
 
 		&::before,
 		&::after {
+			@include transition-default();
 			content: "";
 			position: absolute;
-			display: none;
 			background: $control-focus-color;
 			height: 3px;
 			left: 4px;
 			bottom: 2px;
 			transform-origin: 1px 1px;
+			opacity: 0;
+			
 
 		}
 

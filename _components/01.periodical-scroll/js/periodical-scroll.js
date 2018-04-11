@@ -13,7 +13,9 @@ theme = ( function ( theme, $, window, document ) {
 			var $this       = $( this ),
 				ul          = $this.data( 'periodical-scroll-container' ),
 				speed       = $this.data( 'periodical-scroll-speed' ),
-				timing      = $this.data( 'periodical-scroll-timing' );
+				timing      = $this.data( 'periodical-scroll-timing' ),
+				$wrap       = $this.find( ul ),
+				itemHeight  = $wrap.find( 'li:first' ).height();
 
 
 			if( typeof speed === typeof undefined ) {
@@ -24,33 +26,37 @@ theme = ( function ( theme, $, window, document ) {
 				timing = 2000;
 			}	
 			
-			var $wrap  = $this.find( ul ),
-				time   = timing,
-				moveEv = null;
-			
 			//Initialize the container height
 			$wrap.css({
-				'height'   : $wrap.find( 'li:first' ).height() + 'px',
+				'height'   : itemHeight + 'px',
 				'overflow' : 'hidden'
 			});
 			
- 
-			//Animation
-			$wrap.on( 'mouseenter', function() {
+			
+			
+			var stop      = false,
+				obj       = $wrap;
 
-				clearInterval( moveEv );
+			// change item
+			setInterval( periodicalTextChange, timing );
 
-			} ).on( 'mouseleave' , function() {
-				moveEv=setInterval(function(){
-					var $item     = $wrap.find( 'li:first' ),
-						curHeight = $item.height(); 
+			function periodicalTextChange() {
+				
+				if( stop ) return;
 
-					$item.animate({marginTop: -curHeight + 'px' }, speed, function(){
-						$item.css('marginTop',0).appendTo( $wrap );
-					});
+				var itemToMove = obj[0].firstElementChild;
+				itemToMove.style.marginTop = -itemHeight + 'px';
+			  
+				// move the child to the end of the items' list
+				setTimeout(function(){
+					itemToMove.removeAttribute( 'style' );
+					obj[0].appendChild( itemToMove );
+				}, 600);
+			}
 
-				}, time );
-			} ).trigger('mouseleave');
+			obj.on( 'mouseenter', function() { stop = true; } )
+			   .on( 'mouseleave', function() { stop = false; } );		
+
 			
 			
 		});

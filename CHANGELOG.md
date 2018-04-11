@@ -1,5 +1,17 @@
 # Changelog
 
+
+#### = 1.2.7 (April 11, 2018) =
+
+* New: Add a new module "Team".
+* New: Added some "Footer" premade templates.
+* New: Add a subscribe button to form module.
+* Fix: Animating an element is not always smooth for "Periodical Scroll".
+* Tweak: Optimized and extended form and buttons stylesheet.
+
+
+
+
 #### = 1.2.6 (April 10, 2018) =
 
 * Tweak: Optimized self-contained seamless grid system.

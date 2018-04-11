@@ -11,8 +11,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.2.6
- * ## Last Update         :  April 10, 2018
+ * ## Version             :  1.2.7
+ * ## Last Update         :  April 11, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -380,37 +380,285 @@ blockquote:before {
 }
 
 /* ====================================================== 
-    <!-- Form -->                                       
+    <!-- Form -->                                         
 /* ====================================================== */
-.controls {
+/* 
+ ---------------------------
+ 1) Controls
+ ---------------------------
+ */
+/* Default Controls */
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) {
     text-align: right;
+  /*-- Radio --*/
+  /*-- Select --*/
+  /*-- Form With Icon --*/
+  /*-- Other --*/;
 }
 
-.controls .fa-sort {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).controls-side {
+    margin-left: auto;
+    margin-right: .2rem;
+}
+
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) .bar {
+    left: auto;
+    right: -2px;
+}
+
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) .bar::before {
+    left: auto;
+    right: 51%;
+}
+
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) .bar::after {
     right: auto;
-    left: 0.875rem;
+    left: 49%;
 }
 
-.controls label {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).text-short-s input:not([type="checkbox"]):not([type="radio"]) {
+    margin-right: auto;
+    margin-left: .5rem;
+}
+
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).text-short-l input:not([type="checkbox"]):not([type="radio"]) {
+    margin-right: auto;
+    margin-left: .5rem;
+}
+
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) label {
     left: auto;
     right: 0.875rem;
 }
 
-.controls .req-icon {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).radio label {
+    padding-left: auto !important;
+    padding-right: 1.25rem !important;
+    right: auto !important;
+}
+
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).select > span {
+    padding-right: auto;
+    padding-left: 1rem;
+}
+
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).select select {
+    padding-right: auto !important;
+    padding-left: 1.5rem !important;
+}
+
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).select label {
+    right: auto !important;
+    padding-right: auto !important;
+    padding-left: 1rem !important;
+}
+
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).select label:after {
+    border-left: 0;
+    right: auto;
+    left: 1rem;
+}
+
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).withicon label {
+    left: auto;
+    right: 3rem;
+}
+
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).withicon i {
+    left: auto;
+    right: 1rem;
+}
+
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).withicon i::after {
+    left: auto;
+    right: 1.4rem;
+}
+
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).withicon input:not([type="checkbox"]):not([type="radio"]) {
+    padding-left: auto;
+    padding-right: 3.5rem;
+}
+
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).withicon textarea,
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).withicon button,
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).withicon select {
+    padding-left: auto;
+    padding-right: 3.5rem;
+}
+
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) .fa-sort {
+    right: auto;
+    left: 0.875rem;
+}
+
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) .req-icon {
     right: auto;
     left: 0.721875rem;
 }
 
-.form-merge input + button[type="submit"] {
-    margin-left: auto;
-    margin-right: -0.25rem;
+/* Create Line Effect on Click */
+.controls.line-eff label.active {
+    transform: translateX(1.75rem) scale(0.8);
 }
 
-@media all and (max-width: 768px) {
-    .form-merge input + button[type="submit"] {
-        margin-left: 0;
-        margin-right: 0;
-    }
+.controls.line-eff.withicon label.active {
+    transform: translateX(4.09375rem) scale(0.8);
+}
+
+.col-sm-12 .controls.line-eff:not(.text-short-s):not(.text-short-l) .bar {
+    right: -8px;
+}
+
+.col-sm-12 .controls.line-eff.textarea .bar {
+    right: -8px;
+}
+
+/* 
+ ---------------------------
+ 2) Upload
+ ---------------------------
+ */
+.controls-file-container input[type="file"] {
+    left: auto;
+    right: 0;
+}
+
+/* 
+ ---------------------------
+ 3) Group
+ ---------------------------
+ */
+.controls-merge {
+  /*-- Form With Icon --*/;
+}
+
+.controls-merge button {
+    margin-left: auto;
+    margin-right: -5px;
+}
+
+.controls-merge.circle input {
+    border-radius: 0 50px 50px 0;
+}
+
+.controls-merge.circle button {
+    border-radius: 50px 0 0 50px;
+}
+
+.controls-merge.withicon input {
+    padding-left: auto;
+    padding-right: 3rem;
+}
+
+.controls-merge.withicon i {
+    left: auto;
+    right: 1rem;
+}
+
+.controls-merge.withicon i::after {
+    left: auto;
+    right: 1.4rem;
+}
+
+/* 
+ ---------------------------
+ 4) Custom Select
+ ---------------------------
+ */
+.custom-select {
+    text-align: right;
+}
+
+.custom-select-wrapper .custom-select-trigger {
+    padding: 0.546875rem 1.5rem  0.546875rem 2.5rem;
+}
+
+.custom-select-wrapper .line-eff .bar {
+    left: auto;
+    right: 0;
+}
+
+.custom-select-wrapper .line-eff .bar::before {
+    left: auto;
+    right: 51%;
+}
+
+.custom-select-wrapper .line-eff .bar::after {
+    right: auto;
+    left: 49%;
+}
+
+.custom-select-wrapper .custom-select-label {
+    margin-left: auto;
+    margin-right: .5rem;
+}
+
+.custom-select-wrapper .custom-options {
+    left: auto;
+    right: 0;
+}
+
+/* 
+ ---------------------------
+ 5) Custom Radio, Toggle And Checkbox
+ ---------------------------
+ */
+.custom-radio {
+    text-align: right;
+}
+
+.custom-radio label {
+    right: auto;
+}
+
+.custom-radio .custom-radio-trigger {
+    margin-right: auto;
+    margin-left: 5px;
+}
+
+.custom-radio .custom-radio-trigger::before {
+    left: auto;
+    margin-left: auto;
+    right: 50%;
+    margin-right: -3px;
+}
+
+.custom-toggle {
+    text-align: right;
+}
+
+.custom-toggle input[type="checkbox"]:checked + .custom-toggle-trigger {
+    margin-left: auto;
+    margin-right: 8px;
+}
+
+.custom-toggle .custom-toggle-trigger {
+    margin: 0.5rem 0 0.5rem .5rem;
+    margin-left: auto;
+    margin-right: 50px;
+}
+
+.custom-toggle .custom-toggle-trigger::before {
+    left: auto;
+    right: -50px;
+}
+
+.custom-toggle .custom-toggle-trigger::after {
+    right: auto;
+    left: -50px;
+}
+
+.custom-checkbox {
+    text-align: right;
+}
+
+.custom-checkbox .custom-checkbox-trigger {
+    margin: 0.546875rem 0 0.546875rem .5rem;
+}
+
+.custom-checkbox .custom-checkbox-trigger::before, .custom-checkbox .custom-checkbox-trigger::after {
+    left: auto;
+    right: 4px;
 }
 
 /* ====================================================== 

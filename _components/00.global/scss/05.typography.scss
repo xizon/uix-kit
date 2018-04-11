@@ -74,6 +74,7 @@ h6,
 	margin-bottom: 0.625rem;
 	padding: 0 0 0.546875rem;
 	word-wrap: break-word;
+
 }
 
 h1 {
@@ -139,6 +140,13 @@ h6 {
 	line-height: 2 !important;
 	font-weight: 600 !important;
 }
+
+	
+.heading-space-none {
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
 
 @media all and (max-width: 768px) {
 	h1 {

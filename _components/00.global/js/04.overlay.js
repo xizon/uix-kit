@@ -11,7 +11,7 @@ theme = ( function ( theme, $, window, document ) {
 		
 		$( '.overlay-bg' ).each(function() {
 			
-			var dataBgColor = $( this ).data( 'overlay-bg' ),
+			var dataBgColor   = $( this ).data( 'overlay-bg' ),
 				dataBgOpacity = $( this ).data( 'overlay-opacity' );
 			
 			
@@ -22,10 +22,9 @@ theme = ( function ( theme, $, window, document ) {
 					
 				}
 				
-				$( this ).animate( { opacity: $( this ).data( 'overlay-opacity' ) }, 0 );
-				
 				$( this ).css( {
-					'background-color': $( this ).data( 'overlay-bg' )
+					'background-color': $( this ).data( 'overlay-bg' ),
+					'opacity'         : $( this ).data( 'overlay-opacity' )
 				} );
 	
 			}
