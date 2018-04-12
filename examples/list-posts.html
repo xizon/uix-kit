@@ -55,11 +55,11 @@
         
        
         <!-- Theme  -->
-        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTUyMzQ0Mzc5MjI2NQ"/>
+        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTUyMzUwNDM1NTgzMw"/>
         
         
          <!--[if lt IE 10]>
-           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTUyMzQ0Mzc5MjI2NQ" />
+           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTUyMzUwNDM1NTgzMw" />
         <![endif]-->
         
         
@@ -160,17 +160,18 @@
 												</li>
 												<li>
 													<ul class="sub-menu">
-														<li><span class="multi-column-title">Contents</span></li>
+														<li><span class="multi-column-title">Contents (Part 1)</span></li>
 														<li><a href="list-posts.html">Posts List</a></li>
 														<li><a href="list-split-imagery.html">Fullwidth List of Split</a></li>
 														<li><a href="list-split-content.html">Fullwidth List of Split 2</a></li>
 														<li><a href="list-side-by-side.html">Side by Side List</a></li>
+														<li><a href="list-side-by-side-img.html">Side by Side List With Photo</a></li>
 														<li><a href="list-bulleted.html">Bulleted List</a></li>
 														<li><a href="list-brands.html">Brands List</a></li>
 														<li><a href="list-maintain-aspect-ratio.html">Maintain Aspect Ratio List</a></li>
 														<li><a href="single-post.html">Single Post</a></li>
 														<li><a href="sidebar.html">Sidebar</a></li>
-														<li><a href="contact.html">Contact Form With Google Map</a></li>
+														<li><a href="contact.html">Contact Form With Map</a></li>
 														<li><a href="features.html">Features</a></li>
 														<li><a href="pricing.html">Pricing</a></li>
 														<li><a href="testimonials.html">Testimonials</a></li>
@@ -178,10 +179,19 @@
 														<li><a href="gallery.html">Gallery Normal</a></li>
 														<li><a href="gallery-filter.html">Gallery Filterable</a></li>
 														<li><a href="gallery-masonry.html">Gallery Masonry</a></li>
-														<li><a href="team.html">Team</a></li>
+														
 													</ul>
 													<!-- .sub-menu  end -->
 												</li>
+												
+												<li>
+													<ul class="sub-menu">
+														<li><span class="multi-column-title">Contents (Part 2)</span></li>
+														<li><a href="services.html">Services</a></li>
+														
+													</ul>
+													<!-- .sub-menu  end -->
+												</li>	
 
 												<li>
 													<ul class="sub-menu">
@@ -986,7 +996,7 @@
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2 t-c">
                             <h2>List Posts With Bootstrap (Split & Center vertically)</h2>
-							<p>Overlay the class <code>.full-height</code> on the <code>.row</code>, then add a div <code>&lt;div class=&quot;pos-vertical-align relative&quot;&gt; ... &lt;/div&gt;</code></p>
+							<p>Overlay the class <code>.common-height</code> on the <code>.row</code>, then add a div <code>&lt;div class=&quot;pos-vertical-align relative&quot;&gt; ... &lt;/div&gt;</code></p>
                         </div>
                     </div>
                     <!-- .row end -->
@@ -1012,7 +1022,7 @@
 							   <!-- List Item --> 
 							   <div class="list-split-item">
 
-									<div class="row full-height">
+									<div class="row common-height">
 										<div class="col-sm-6">
 											 <img src="assets-demo/images/test-img-big-1.jpg" alt="" />
 										</div>
@@ -1043,7 +1053,7 @@
 							   <!-- List Item --> 
 							   <div class="list-split-item is-reversed">
 
-									<div class="row full-height">
+									<div class="row common-height">
 										<div class="col-sm-6">
 											 <img src="assets-demo/images/test-img-big-1.jpg" alt="" />
 										</div>
@@ -1073,7 +1083,7 @@
 							   <!-- List Item --> 
 							   <div class="list-split-item">
 
-									<div class="row full-height">
+									<div class="row common-height">
 										<div class="col-sm-6">
 											 <img src="assets-demo/images/test-img-big-3.jpg" alt="" />
 										</div>
@@ -1103,7 +1113,7 @@
 							   <!-- List Item --> 
 							   <div class="list-split-item is-reversed">
 
-									<div class="row full-height">
+									<div class="row common-height">
 										<div class="col-sm-6">
 											 <img src="assets-demo/images/test-img-big-4.jpg" alt="" />
 										</div>
@@ -1177,7 +1187,7 @@
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2 t-c">
                             <h2>List Posts With Seamless Grid (Split & Center vertically)</h2>
-							<p>Overlay the class <code>.full-height</code> on the <code>.seamless-grid-container</code>, then add a div <code>&lt;div class=&quot;pos-vertical-align relative&quot;&gt; ... &lt;/div&gt;</code></p>
+							<p>Overlay the class <code>.common-height</code> on the <code>.seamless-grid</code>, then add a div <code>&lt;div class=&quot;pos-vertical-align relative&quot;&gt; ... &lt;/div&gt;</code></p>
                         </div>
                     </div>
                     <!-- .row end -->
@@ -1205,9 +1215,9 @@
 								   <div class="list-split-item">
 
 
-										<div class="seamless-grid-container full-height">
+										<div class="seamless-grid-container common-height">
 
-											<div class="seamless-grid">
+											<div class="seamless-grid common-height">
 
 												<div class="seamless-col-1-2">
 													<img src="assets-demo/images/test-img-big-1.jpg" alt="" />
@@ -1245,9 +1255,9 @@
 								   <!-- List Item --> 
 								   <div class="list-split-item is-reversed">
 
-										<div class="seamless-grid-container full-height">
+										<div class="seamless-grid-container">
 
-											<div class="seamless-grid">
+											<div class="seamless-grid common-height">
 
 												<div class="seamless-col-1-2">
 													<img src="assets-demo/images/test-img-big-2.jpg" alt="" />
@@ -1391,7 +1401,7 @@
 			"homeUrl"     :""  //Eg. https://uiux.cc
 		};
     </script>  
-    <script src="assets/js/uix-kit.min.js?ver=MTUyMzQ0Mzc5MjI2NQ"></script>
+    <script src="assets/js/uix-kit.min.js?ver=MTUyMzUwNDM1NTgzMw"></script>
 
 
 

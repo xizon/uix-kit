@@ -62,6 +62,12 @@ theme = ( function ( theme, $, window, document ) {
 			    perDefaultW  = 220; //Default width of each column
 
 			
+			//Basic Container
+			if ( w > 1430 ) maxWidth = 1278;
+			if ( w > 1600 ) maxWidth = 1410;
+			
+			
+			
 			// Remove the html tag for mega menu item
 			$( 'li.multi-column  > ul .multi-column-title' ).each( function()  {
 				var mega_old_item = $( this ).html();

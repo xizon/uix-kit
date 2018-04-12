@@ -43,6 +43,12 @@ $features-icon-size: 1.5rem;
 		line-height: #{$features-icon-size*2};
 		@include transition-default();
 		
+		
+		&.sep-col {
+			display: table-cell;
+			vertical-align: top;
+		}
+		
 		i {
 			font-size: $features-icon-size;
 			margin-right: .36rem;
@@ -66,8 +72,14 @@ $features-icon-size: 1.5rem;
 		line-height: 1.6;
 		padding: .175em 0 1.2rem;
 
-		&.desc-singlerow {
+		&.desc-sep-col {
 			padding-bottom: 1.2rem;
 		}
+		
+		&.desc-sep-col.sep-col {
+			display: table-cell;
+			vertical-align: top;
+		}
+		
 	}
 }

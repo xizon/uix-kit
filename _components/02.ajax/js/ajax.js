@@ -20,7 +20,7 @@ theme = ( function ( theme, $, window, document ) {
 		
 		function applyOriginalScripts() {
 			
-			theme.rowFullheight.pageLoaded(); //Multiple columns full height for Bootstrap 3.x
+			theme.commonHeight.pageLoaded(); //Common Height
 			theme.accordion.documentReady($); //Accordion
 			
 			

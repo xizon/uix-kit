@@ -61,6 +61,10 @@
 	    vertical-align: middle;
 	}
 	
+	i {
+		margin-right: .5rem;
+	}
+	
 }
 
 
@@ -90,7 +94,6 @@
 
 @media all and (max-width: 768px) {
 	.button {
-		margin: 0.7rem !important;
 		padding: 0.35rem 0.875rem !important;
 	}
 }

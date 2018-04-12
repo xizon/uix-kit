@@ -242,6 +242,26 @@ List Normal & Other Text
 }
 
 
+.font-white {
+	color: white;
+	
+	h1, 
+	h2, 
+	h3, 
+	h4, 
+	h5, 
+	h6, 
+	.h1, 
+	.h2, 
+	.h3, 
+	.h4, 
+	.h5, 
+	.h6 {
+	    color: white;
+	}
+}
+
+
 /* Compatible with  Uix Shortcodes (WordPress Plugin) */
 .list-normal a:not(.uix-sc-btn), 
 .table-normal a:not(.uix-sc-btn) {

@@ -3,6 +3,8 @@
 /* ====================================================== */
 .custom-periodical-scroll {
 	position: relative;
+	
+	
 	ul {
 		display: block;
 		overflow: hidden;
@@ -10,6 +12,8 @@
 
 		li {
 			display: block;
+			min-height: 6rem;/* The height of each scroll */
+			
 			span {
 				display: block;
 				@include icontxt-gradient();

@@ -1,18 +1,13 @@
 /* ====================================================== 
-   <!-- Team --> 
+   <!-- Side by Side List With Photo --> 
 /* ====================================================== */
 
-.team-card {
+.list-side-by-side-img {
    
-	.team-card-item {
+	.item {
 		margin-top: 1.5rem;
 		padding-bottom: 3rem;
 		position: relative;
-		
-
-		&:first-child {
-			margin-top: 0;
-		}
 		
 
 		.item-left,
@@ -23,7 +18,6 @@
 	
 		
 		.item-body {
-			overflow: hidden;
 			padding-left: 1.5rem;
 			
 			em {
@@ -41,8 +35,6 @@
 
 		.item-left-imgbox {
 			width: 250px;
-			height: 250px;
-			overflow: hidden;
 			margin: 0 auto;
 
 			img {
@@ -65,11 +57,11 @@
 
 @media (max-width: 768px) {
  
-    .team-card {
+    .list-side-by-side-img {
 		
         text-align: center;
 		
-		.team-card-item {
+		.item {
 			
 			.item-left {
 				display: block;
@@ -79,8 +71,6 @@
 
 			.item-left-imgbox {
 				width: 100%;
-				/* Compulsively cover custom height of grid */
-				height: auto !important;
 			}
 
 			.item-body {

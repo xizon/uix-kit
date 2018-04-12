@@ -1,12 +1,16 @@
 # Changelog
 
 
-#### = 1.2.7 (April 11, 2018) =
+#### = 1.2.8 (April 12, 2018) =
 
-* New: Add a new module "Team".
+* New: Add a new module "Side by Side List With Photo".
+* New: Add a new module "Services".
 * New: Added some "Footer" premade templates.
 * New: Add a subscribe button to form module.
+* New: Extended "Features" module to support another style.
+* New: Added a function of Common Height.
 * Fix: Animating an element is not always smooth for "Periodical Scroll".
+* Fix: Fixed width calculation problem for mega menu in widescreen.
 * Tweak: Optimized and extended form and buttons stylesheet.
 
 

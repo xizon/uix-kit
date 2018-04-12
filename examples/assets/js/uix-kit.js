@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.2.7
- * ## Last Update         :  April 11, 2018
+ * ## Version             :  1.2.8
+ * ## Last Update         :  April 12, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -28,18 +28,18 @@
     3. Back to Top 
     4. Overlay 
     5. Navigation 
-    6. Videos 
-    7. Initialize the height of each column of the grid system 
-    8. Mega Menu 
-    9. Dropdown Categories 
+    6. Common Height 
+    7. Mega Menu 
+    8. Dropdown Categories 
+    9. Videos 
     10. Pagination 
     11. Specify a background image 
     12. Get all custom attributes of an element like "data-*" 
-    13. Accordion 
-    14. Counter 
-    15. Dynamic Drop Down List from JSON 
-    16. Form Progress 
-    17. Form 
+    13. Counter 
+    14. Dynamic Drop Down List from JSON 
+    15. Accordion 
+    16. Form 
+    17. Form Progress 
     18. Gallery 
     19. Custom Core Scripts & Stylesheets 
     20. Bulleted List 
@@ -48,24 +48,24 @@
     23. Mobile Menu 
     24. Modal Dialog 
     25. Mousewheel Interaction 
-    26. Multiple Items Carousel 
-    27. Navigation Highlighting 
-    28. Parallax 
-    29. Periodical Scroll 
+    26. Navigation Highlighting 
+    27. Parallax 
+    28. Periodical Scroll 
+    29. Multiple Items Carousel 
     30. Pricing 
     31. Progress Bar 
     32. Retina Graphics for Website 
     33. Scroll Reveal 
     34. Show More Less 
     35. Custom Lightbox 
-    36. Slideshow ( with custom flexslider ) 
-    37. Smooth Scrolling When Clicking An Anchor Link 
-    38. Source Code 
-    39. Sticky Elements 
-    40. Tabs 
-    41. Testimonials Carousel 
-    42. Text effect 
-    43. Timeline 
+    36. Smooth Scrolling When Clicking An Anchor Link 
+    37. Source Code 
+    38. Slideshow ( with custom flexslider ) 
+    39. Tabs 
+    40. Sticky Elements 
+    41. Text effect 
+    42. Timeline 
+    43. Testimonials Carousel 
     44. AJAX 
 
 
@@ -837,72 +837,31 @@ theme = ( function ( theme, $, window, document ) {
 
 }( theme, jQuery, window, document ) );
 
+
 /* 
  *************************************
- * <!-- Initialize the height of each column of the grid system -->
-  
+ * <!-- Common Height -->
+ 
  *
  * Note: 
  *
  * Automatically sets the div height of the grid system to the height of the 
- * outer container when ".full-height" class on ".row" or ".seamless-grid-container" div.
+ * outer container when ".common-height" class on ".row" or ".seamless-grid" div.
  *
  *************************************
  */
+
 theme = ( function ( theme, $, window, document ) {
     'use strict';
     
     var pageLoaded = function() {
 		
-
-		var $window      = $( window ),
-			windowWidth  = $window.width(),
-			windowHeight = $window.height();
-
-		
-		rowColInit( windowWidth ); 
-		
-		
-		$window.on( 'resize', function() {
-			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( $window.width() != windowWidth ) {
-
-				// Update the window width for next time
-				windowWidth = $window.width();
-
-				// Do stuff here
-				rowColInit( windowWidth ); 
-		
-
-			}
-		});
-		
-
-		function rowColInit( w ) {
-
-			
-			//Bootstrap grid system
-			$( '.row.full-height' ).each( function()  {
-				var h = ( w > 768 ) ? $( this ).height() + 'px' : 'auto';
-				$( this ).find( '> div' ).css( 'height', h );
-			});
-			
-			//Custom seamless grid system
-			$( '.seamless-grid-container.full-height, .seamless-grid.full-height' ).each( function()  {
-				var h = ( w > 768 ) ? $( this ).height() + 'px' : 'auto';
-				$( this ).find( 'div[class*="seamless-col-"]' ).css( 'height', h );
-				
-			});
-						
-
-
-		}
-		
+		$( '.common-height' ).commonHeight();
 		
 
     };
 
-    theme.rowFullheight = {
+    theme.commonHeight = {
         pageLoaded : pageLoaded        
     };
 
@@ -912,6 +871,92 @@ theme = ( function ( theme, $, window, document ) {
 }( theme, jQuery, window, document ) );
 
 
+
+
+/* 
+ *************************************
+ * Associated Functions
+ *************************************
+ */
+
+/*
+ * Returns Common Height
+ *
+ * @param  {string} selector             - The current selector.
+ * @return {void}                        - The constructor.
+ */
+( function ( $ ) {
+    $.fn.commonHeight = function( options ) {
+
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+			selector : '[class*=col-], [class*=eamless-col-]' //Bootstrap grid system and Custom seamless grid system
+        }, options );
+ 
+        this.each( function() {
+			
+			var $this        = $( this ),
+				$window      = $( window ),
+				windowWidth  = $window.width(),
+				windowHeight = $window.height(),
+				element      = $this,
+				selectors    = settings.selector,
+				maxHeight    = 0;
+
+
+			element.children( selectors ).each(function() {
+				var element = $( this ).children();
+				if( element.hasClass( 'max-height' ) ) {
+					maxHeight = element.outerHeight();
+				} else {
+					if ( element.outerHeight() > maxHeight )
+					maxHeight = element.outerHeight();
+				}
+			});
+
+			
+			
+
+			//No on mobile devices
+			commonHeightInit( windowWidth );
+			
+			$window.on( 'resize', function() {
+				// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+				if ( $window.width() != windowWidth ) {
+
+					// Update the window width for next time
+					windowWidth = $window.width();
+
+					// Do stuff here
+					commonHeightInit( windowWidth );
+
+
+				}
+			});
+
+			
+			function commonHeightInit( w ) {
+
+				if ( w > 768 ) {
+					element.children( selectors ).each(function() {
+						$( this ).css( 'height', maxHeight );
+					});	
+				} else {
+					element.children( selectors ).each(function() {
+						$( this ).css( 'height', 'auto' );
+					});		
+				}
+
+
+			}		
+			
+
+			
+		});
+ 
+    };
+ 
+}( jQuery ));
 
 
 
@@ -977,6 +1022,12 @@ theme = ( function ( theme, $, window, document ) {
 			var maxWidth     = 1170, //The maximum width of the mega menu wrapper
 			    perDefaultW  = 220; //Default width of each column
 
+			
+			//Basic Container
+			if ( w > 1430 ) maxWidth = 1278;
+			if ( w > 1600 ) maxWidth = 1410;
+			
+			
 			
 			// Remove the html tag for mega menu item
 			$( 'li.multi-column  > ul .multi-column-title' ).each( function()  {
@@ -8599,7 +8650,7 @@ theme = ( function ( theme, $, window, document ) {
 		
 		function applyOriginalScripts() {
 			
-			theme.rowFullheight.pageLoaded(); //Multiple columns full height for Bootstrap 3.x
+			theme.commonHeight.pageLoaded(); //Common Height
 			theme.accordion.documentReady($); //Accordion
 			
 			
