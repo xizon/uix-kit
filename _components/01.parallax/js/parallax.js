@@ -58,7 +58,10 @@ theme = ( function ( theme, $, window, document ) {
 				
 				$window.on( 'scroll touchmove', function() {
 					var scrolled = $window.scrollTop();
-					$this.css( 'margin-top', ( scrolled * dataSpeed ) + 'px' );
+					$this.css( {
+							'margin-top': Math.round( scrolled * dataSpeed ) + 'px',
+							'transition': 'none'
+						} );
 				});	
 				
 		
@@ -187,15 +190,20 @@ theme = ( function ( theme, $, window, document ) {
 					} else {
 						$this.css( 'background-size', 'cover' );	
 					}
-				
 					
+
 				}
 					
-				
-				$window.on( 'scroll touchmove', function() {
-					var scrolled = $window.scrollTop();
-					$this.find( '.parallax-element' ).css( 'margin-top', ( scrolled * dataElSpeed ) + 'px' );
-				});	
+				if ( $this.find( '.parallax-element' ).length > 0 ) {
+					$window.on( 'scroll touchmove', function() {
+						var scrolled = $window.scrollTop();
+						$this.find( '.parallax-element' ).css( {
+							'transform' : 'translateY('+Math.round( ( $this.offset().top - scrolled ) * dataElSpeed )+'px)',
+							'transition': 'none'
+						} );
+					});			
+				}
+
 		
 			});
 			

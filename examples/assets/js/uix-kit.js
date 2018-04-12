@@ -28,16 +28,16 @@
     3. Back to Top 
     4. Overlay 
     5. Navigation 
-    6. Common Height 
-    7. Mega Menu 
-    8. Dropdown Categories 
-    9. Videos 
+    6. Videos 
+    7. Common Height 
+    8. Mega Menu 
+    9. Dropdown Categories 
     10. Pagination 
     11. Specify a background image 
     12. Get all custom attributes of an element like "data-*" 
-    13. Counter 
-    14. Dynamic Drop Down List from JSON 
-    15. Accordion 
+    13. Accordion 
+    14. Counter 
+    15. Dynamic Drop Down List from JSON 
     16. Form 
     17. Form Progress 
     18. Gallery 
@@ -48,25 +48,24 @@
     23. Mobile Menu 
     24. Modal Dialog 
     25. Mousewheel Interaction 
-    26. Navigation Highlighting 
-    27. Parallax 
-    28. Periodical Scroll 
-    29. Multiple Items Carousel 
+    26. Multiple Items Carousel 
+    27. Navigation Highlighting 
+    28. Parallax 
+    29. Periodical Scroll 
     30. Pricing 
     31. Progress Bar 
     32. Retina Graphics for Website 
     33. Scroll Reveal 
     34. Show More Less 
     35. Custom Lightbox 
-    36. Smooth Scrolling When Clicking An Anchor Link 
-    37. Source Code 
-    38. Slideshow ( with custom flexslider ) 
-    39. Tabs 
-    40. Sticky Elements 
-    41. Text effect 
-    42. Timeline 
-    43. Testimonials Carousel 
-    44. AJAX 
+    36. Slideshow ( with custom flexslider ) 
+    37. Smooth Scrolling When Clicking An Anchor Link 
+    38. Source Code 
+    39. Sticky Elements 
+    40. Tabs 
+    41. Testimonials Carousel 
+    42. Text effect 
+    43. Timeline 
 
 
 */
@@ -6183,7 +6182,10 @@ theme = ( function ( theme, $, window, document ) {
 				
 				$window.on( 'scroll touchmove', function() {
 					var scrolled = $window.scrollTop();
-					$this.css( 'margin-top', ( scrolled * dataSpeed ) + 'px' );
+					$this.css( {
+							'margin-top': Math.round( scrolled * dataSpeed ) + 'px',
+							'transition': 'none'
+						} );
 				});	
 				
 		
@@ -6312,15 +6314,20 @@ theme = ( function ( theme, $, window, document ) {
 					} else {
 						$this.css( 'background-size', 'cover' );	
 					}
-				
 					
+
 				}
 					
-				
-				$window.on( 'scroll touchmove', function() {
-					var scrolled = $window.scrollTop();
-					$this.find( '.parallax-element' ).css( 'margin-top', ( scrolled * dataElSpeed ) + 'px' );
-				});	
+				if ( $this.find( '.parallax-element' ).length > 0 ) {
+					$window.on( 'scroll touchmove', function() {
+						var scrolled = $window.scrollTop();
+						$this.find( '.parallax-element' ).css( {
+							'transform' : 'translateY('+Math.round( ( $this.offset().top - scrolled ) * dataElSpeed )+'px)',
+							'transition': 'none'
+						} );
+					});			
+				}
+
 		
 			});
 			
@@ -8667,5 +8674,8 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
+
+
+cument ) );
 
 

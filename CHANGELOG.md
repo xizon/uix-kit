@@ -1,7 +1,7 @@
 # Changelog
 
 
-#### = 1.2.8 (April 12, 2018) =
+#### = 1.2.9 (April 12, 2018) =
 
 * New: Add a new module "Side by Side List With Photo".
 * New: Add a new module "Services".
@@ -11,6 +11,7 @@
 * New: Added a function of Common Height.
 * Fix: Animating an element is not always smooth for "Periodical Scroll".
 * Fix: Fixed width calculation problem for mega menu in widescreen.
+* Tweak: Enhanced parallax effect compatibility.
 * Tweak: Optimized and extended form and buttons stylesheet.
 
 
