@@ -1,7 +1,7 @@
 # Changelog
 
 
-#### = 1.2.9 (April 12, 2018) =
+#### = 1.3.0 (April 12, 2018) =
 
 * New: Add a new module "Side by Side List With Photo".
 * New: Add a new module "Services".

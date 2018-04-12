@@ -4,31 +4,12 @@
 
 .parallax {
 	position: relative;
-	height: 100vh;
 	width: 100%;
 	background-attachment: fixed;
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: cover;
-}
-
-.pure-bg-parallax {
-	background-size: cover;
-	background-repeat: no-repeat;
-}
-
-.parallax-window {
-	height: 100%;
-	width: 100%;
-}
-
-.parallax-default-size {
-	height: 300px;
-	width: 100%;
-}
-
-
-.parallax-auto {
+	
 	height: auto;
 	width: 100%;
 	
@@ -37,4 +18,8 @@
 	}
 }
 
+.pure-bg-parallax {
+	background-size: cover;
+	background-repeat: no-repeat;
+}
 

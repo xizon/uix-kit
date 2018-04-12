@@ -71,25 +71,18 @@ theme = ( function ( theme, $, window, document ) {
 			/* Parallax scrolling effect with embedded HTML elements */
 			$( '.parallax' ).each(function() {
 				var $this       = $( this ),
-				    dataAtt     = $this.data( 'parallax' ),
-					dataH       = $this.data( 'height' ),
+					$curImg     = $this.find( '.parallax-img' ),
 					dataW       = $this.data( 'width' ),
-					dataImg     = $this.data( 'image-src' ),
+					dataImg     = $curImg.attr( 'src' ),
 					dataSkew    = $this.data( 'skew' ),
 					dataSpeed   = $this.data( 'speed' ),
-					dataElSpeed = $this.find( '.parallax-element' ).data( 'el-speed' ),
-					$curImg     = $this.find( '.parallax-img' ),
+					dataOverlay = $this.data( 'overlay-bg' ),
+					dataElSpeed = $this.find( '.parallax-element' ).data( 'el-speed' ),	
 					curImgH     = null,
-					curImgW     = null;
+					curImgW     = null,
+					curSize     = 'cover',
+				    curAtt      = 'fixed';
 				
-				
-				if( typeof dataAtt === typeof undefined ) { // If there is no data-xxx, save current source to it
-					dataAtt = 'fixed';
-				}
-				
-				if ( w <= 768 ) {
-					dataAtt = 'scroll';
-				}
 				
 				if( typeof dataW != typeof undefined ) {
 					$this.css( {
@@ -98,12 +91,13 @@ theme = ( function ( theme, $, window, document ) {
 	
 				}
 				
-				if( typeof dataH != typeof undefined ) {
-					
-					$this.css( {
-						'height': dataH
-					} );
-					$curImg.css( 'max-height', dataH );	
+				if( 
+					typeof dataOverlay === typeof undefined ||
+					dataOverlay == 'none' ||
+					dataOverlay == 0 ||
+					dataOverlay == false
+				  ) {
+					dataOverlay = 'rgba(0, 0, 0, 0)';
 				}
 				
 				if( typeof dataSpeed === typeof undefined ) { // If there is no data-xxx, save current source to it
@@ -126,8 +120,8 @@ theme = ( function ( theme, $, window, document ) {
 				}).each(function() {
 					if( this.complete ) $( this ).load();
 				});	
-		
-
+				
+				
 				//Custom height for parallax container
 				if ( 
 					$this.hasClass( 'height-10' ) || 
@@ -161,39 +155,65 @@ theme = ( function ( theme, $, window, document ) {
 				}
 
 				
-				if( typeof dataImg != typeof undefined ) {
-					$this.css( {
-						'background-image'       : 'url(' + dataImg + ')',
-						'background-position'    : '50% 0',
-						'background-repeat'      : 'no-repeat',
-						'background-attachment'  : dataAtt
-					} );
-				}
-				
-				if( typeof dataSkew != typeof undefined ) {
-					$this.css( {
-						'transform'         : 'skew(0deg, '+dataSkew+'deg)'
-					} );
-				}
-				
-				
-				
 				if ( w > 768 ) {
 					
-					//Enable parallax
+					//Enable parallax only desktop
 					$this.bgParallax( "50%", dataSpeed );
+
 					
 					//Resize the background image to cover the entire container and
 					//Resize the background image to make sure the image is fully visible
-					if ( curImgW >= w ) {
-						$this.css( 'background-size', 'contain' );
+					if ( curImgW > w ) {
+						curSize = 'contain';
 					} else {
-						$this.css( 'background-size', 'cover' );	
+						curSize = 'cover';
 					}
 					
+					curAtt = 'fixed';
+					
+				} else {
+					curSize = 'contain';
+					curAtt  = 'scroll';
+				}
+				
+				
+				//Determine image height and parallax container height
+				//If the height is the same, be sure to use the cover attribute
+				if ( curImgH <= $this.height() ) {
+					curSize = 'cover';
+				}
+				
+				
+				
+				//Add background image to parallax container
+				if( typeof dataImg != typeof undefined ) {
+					
+					if ( Modernizr.cssanimations ) {
+					    // supported
+
+						$this.css( {
+							'background' : 'linear-gradient('+dataOverlay+', '+dataOverlay+'), url(' + dataImg + ') 50% 0/'+curSize+' no-repeat ' + curAtt
+						} );
+					} else {
+					    // not-supported
+
+						$this.css( {
+							'background' : 'url(' + dataImg + ') 50% 0/'+curSize+' no-repeat ' + curAtt
+						} );
+					}
 
 				}
+				
+				
+				//Apply tilt effect
+				if( typeof dataSkew != typeof undefined ) {
+					$this.css( {
+						'transform'  : 'skew(0deg, '+dataSkew+'deg)'
+					} );
+				}
+
 					
+				//Embedded parent disparity elements
 				if ( $this.find( '.parallax-element' ).length > 0 ) {
 					$window.on( 'scroll touchmove', function() {
 						var scrolled = $window.scrollTop();
@@ -204,6 +224,8 @@ theme = ( function ( theme, $, window, document ) {
 					});			
 				}
 
+
+				
 		
 			});
 			

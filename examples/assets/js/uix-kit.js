@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.2.8
+ * ## Version             :  1.3.0
  * ## Last Update         :  April 12, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -26,7 +26,7 @@
 	1. Header 
     2. Loader 
     3. Back to Top 
-    4. Overlay 
+    4. Get all custom attributes of an element like "data-*" 
     5. Navigation 
     6. Videos 
     7. Common Height 
@@ -34,38 +34,36 @@
     9. Dropdown Categories 
     10. Pagination 
     11. Specify a background image 
-    12. Get all custom attributes of an element like "data-*" 
-    13. Accordion 
-    14. Counter 
-    15. Dynamic Drop Down List from JSON 
-    16. Form 
-    17. Form Progress 
-    18. Gallery 
-    19. Custom Core Scripts & Stylesheets 
-    20. Bulleted List 
-    21. Posts List With Ajax 
-    22. Fullwidth List of Split 
-    23. Mobile Menu 
-    24. Modal Dialog 
-    25. Mousewheel Interaction 
-    26. Multiple Items Carousel 
-    27. Navigation Highlighting 
-    28. Parallax 
-    29. Periodical Scroll 
-    30. Pricing 
-    31. Progress Bar 
-    32. Retina Graphics for Website 
-    33. Scroll Reveal 
-    34. Show More Less 
-    35. Custom Lightbox 
-    36. Slideshow ( with custom flexslider ) 
-    37. Smooth Scrolling When Clicking An Anchor Link 
-    38. Source Code 
-    39. Sticky Elements 
-    40. Tabs 
-    41. Testimonials Carousel 
-    42. Text effect 
-    43. Timeline 
+    12. Accordion 
+    13. Counter 
+    14. Dynamic Drop Down List from JSON 
+    15. Form 
+    16. Form Progress 
+    17. Gallery 
+    18. Custom Core Scripts & Stylesheets 
+    19. Bulleted List 
+    20. Posts List With Ajax 
+    21. Fullwidth List of Split 
+    22. Mobile Menu 
+    23. Modal Dialog 
+    24. Mousewheel Interaction 
+    25. Multiple Items Carousel 
+    26. Navigation Highlighting 
+    27. Parallax 
+    28. Periodical Scroll 
+    29. Pricing 
+    30. Progress Bar 
+    31. Retina Graphics for Website 
+    32. Scroll Reveal 
+    33. Show More Less 
+    34. Custom Lightbox 
+    35. Slideshow ( with custom flexslider ) 
+    36. Smooth Scrolling When Clicking An Anchor Link 
+    37. Source Code 
+    38. Sticky Elements 
+    39. Tabs 
+    40. Testimonials Carousel 
+    41. Text effect 
 
 
 */
@@ -283,40 +281,61 @@ theme = ( function ( theme, $, window, document ) {
 
 /* 
  *************************************
- * <!-- Overlay -->
+ * <!-- Get all custom attributes of an element like "data-*" -->
  *************************************
  */
+
+/* Get all attributes of an element using jQuery */
+(function(old) {
+  $.fn.attr = function() {
+    if(arguments.length === 0) {
+      if(this.length === 0) {
+        return null;
+      }
+
+      var obj = {};
+      $.each(this[0].attributes, function() {
+        if(this.specified) {
+          obj[this.name] = this.value;
+        }
+      });
+      return obj;
+    }
+
+    return old.apply(this, arguments);
+  };
+})($.fn.attr);
+
+
 theme = ( function ( theme, $, window, document ) {
     'use strict';
    
+   
     var documentReady = function( $ ) {
 		
-		$( '.overlay-bg' ).each(function() {
+		$( '[data-your-custom-datas]' ).each(function() {
+			var $this         = $( this );
+
 			
-			var dataBgColor   = $( this ).data( 'overlay-bg' ),
-				dataBgOpacity = $( this ).data( 'overlay-opacity' );
+			//Get all attributes of an element and push the new attributes like "data-*"
+			var curAttrs        = $this.attr(),
+				customPostData  = '';
 			
-			
-			if( typeof dataBgColor != typeof undefined ) {
-				
-				if( typeof dataBgOpacity === typeof undefined ) { // If there is no data-xxx, save current source to it
-					$( this ).attr( 'data-overlay-opacity', 1 );
-					
+			$.each( curAttrs, function( i, val ) {
+				if ( i.indexOf( 'data-ajax-list-field-' ) >= 0 ) {
+					customPostData += '"' + i.replace( 'data-ajax-list-field-', '' ) + '": ' + '"' + val + '", ';	
 				}
 				
-				$( this ).css( {
-					'background-color': $( this ).data( 'overlay-bg' ),
-					'opacity'         : $( this ).data( 'overlay-opacity' )
-				} );
-	
-			}
+			});
+			customPostData  = customPostData.replace(/,\s*$/, '' );
 			
-			
-		});		
+
+		});
+		
 	};
 	
 		
-    theme.overlay = {
+    theme.getAllCustomAttrs = {
         documentReady : documentReady        
     };
 
@@ -324,6 +343,7 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
+
 
 
 /* 
@@ -1245,73 +1265,6 @@ theme = ( function ( theme, $, window, document ) {
 	
 		
     theme.setBG = {
-        documentReady : documentReady        
-    };
-
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
-
-
-
-/* 
- *************************************
- * <!-- Get all custom attributes of an element like "data-*" -->
- *************************************
- */
-
-/* Get all attributes of an element using jQuery */
-(function(old) {
-  $.fn.attr = function() {
-    if(arguments.length === 0) {
-      if(this.length === 0) {
-        return null;
-      }
-
-      var obj = {};
-      $.each(this[0].attributes, function() {
-        if(this.specified) {
-          obj[this.name] = this.value;
-        }
-      });
-      return obj;
-    }
-
-    return old.apply(this, arguments);
-  };
-})($.fn.attr);
-
-
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
-		$( '[data-your-custom-datas]' ).each(function() {
-			var $this         = $( this );
-
-			
-			//Get all attributes of an element and push the new attributes like "data-*"
-			var curAttrs        = $this.attr(),
-				customPostData  = '';
-			
-			$.each( curAttrs, function( i, val ) {
-				if ( i.indexOf( 'data-ajax-list-field-' ) >= 0 ) {
-					customPostData += '"' + i.replace( 'data-ajax-list-field-', '' ) + '": ' + '"' + val + '", ';	
-				}
-				
-			});
-			customPostData  = customPostData.replace(/,\s*$/, '' );
-			
-
-		});
-		
-	};
-	
-		
-    theme.getAllCustomAttrs = {
         documentReady : documentReady        
     };
 
@@ -4697,40 +4650,6 @@ theme = ( function ( theme, $, window, document ) {
 
 /* 
  *************************************
- * <!-- Bulleted List -->
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
-
-		// Icon bulleted lists
-		$( '[data-list-bullet]' ).each( function() {
-			var bullet = $( this ).attr( 'data-list-bullet' );
-			$( this ).find( 'li' ).prepend( '<i class="'+bullet+'" aria-hidden="true"></i>' );
-		});
-
-		
-	
-		
-	};
-	
-		
-    theme.bulletedList = {
-        documentReady : documentReady        
-    };
-
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
-
-
-/* 
- *************************************
  * <!-- Posts List With Ajax -->
  *************************************
  */
@@ -5220,6 +5139,40 @@ theme = ( function ( theme, $, window, document ) {
 }( theme, jQuery, window, document ) );
 
 
+
+
+/* 
+ *************************************
+ * <!-- Bulleted List -->
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ) {
+		
+
+		// Icon bulleted lists
+		$( '[data-list-bullet]' ).each( function() {
+			var bullet = $( this ).attr( 'data-list-bullet' );
+			$( this ).find( 'li' ).prepend( '<i class="'+bullet+'" aria-hidden="true"></i>' );
+		});
+
+		
+	
+		
+	};
+	
+		
+    theme.bulletedList = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
 
 
 /* 
@@ -6195,25 +6148,18 @@ theme = ( function ( theme, $, window, document ) {
 			/* Parallax scrolling effect with embedded HTML elements */
 			$( '.parallax' ).each(function() {
 				var $this       = $( this ),
-				    dataAtt     = $this.data( 'parallax' ),
-					dataH       = $this.data( 'height' ),
+					$curImg     = $this.find( '.parallax-img' ),
 					dataW       = $this.data( 'width' ),
-					dataImg     = $this.data( 'image-src' ),
+					dataImg     = $curImg.attr( 'src' ),
 					dataSkew    = $this.data( 'skew' ),
 					dataSpeed   = $this.data( 'speed' ),
-					dataElSpeed = $this.find( '.parallax-element' ).data( 'el-speed' ),
-					$curImg     = $this.find( '.parallax-img' ),
+					dataOverlay = $this.data( 'overlay-bg' ),
+					dataElSpeed = $this.find( '.parallax-element' ).data( 'el-speed' ),	
 					curImgH     = null,
-					curImgW     = null;
+					curImgW     = null,
+					curSize     = 'cover',
+				    curAtt      = 'fixed';
 				
-				
-				if( typeof dataAtt === typeof undefined ) { // If there is no data-xxx, save current source to it
-					dataAtt = 'fixed';
-				}
-				
-				if ( w <= 768 ) {
-					dataAtt = 'scroll';
-				}
 				
 				if( typeof dataW != typeof undefined ) {
 					$this.css( {
@@ -6222,12 +6168,13 @@ theme = ( function ( theme, $, window, document ) {
 	
 				}
 				
-				if( typeof dataH != typeof undefined ) {
-					
-					$this.css( {
-						'height': dataH
-					} );
-					$curImg.css( 'max-height', dataH );	
+				if( 
+					typeof dataOverlay === typeof undefined ||
+					dataOverlay == 'none' ||
+					dataOverlay == 0 ||
+					dataOverlay == false
+				  ) {
+					dataOverlay = 'rgba(0, 0, 0, 0)';
 				}
 				
 				if( typeof dataSpeed === typeof undefined ) { // If there is no data-xxx, save current source to it
@@ -6250,8 +6197,8 @@ theme = ( function ( theme, $, window, document ) {
 				}).each(function() {
 					if( this.complete ) $( this ).load();
 				});	
-		
-
+				
+				
 				//Custom height for parallax container
 				if ( 
 					$this.hasClass( 'height-10' ) || 
@@ -6285,39 +6232,65 @@ theme = ( function ( theme, $, window, document ) {
 				}
 
 				
-				if( typeof dataImg != typeof undefined ) {
-					$this.css( {
-						'background-image'       : 'url(' + dataImg + ')',
-						'background-position'    : '50% 0',
-						'background-repeat'      : 'no-repeat',
-						'background-attachment'  : dataAtt
-					} );
-				}
-				
-				if( typeof dataSkew != typeof undefined ) {
-					$this.css( {
-						'transform'         : 'skew(0deg, '+dataSkew+'deg)'
-					} );
-				}
-				
-				
-				
 				if ( w > 768 ) {
 					
-					//Enable parallax
+					//Enable parallax only desktop
 					$this.bgParallax( "50%", dataSpeed );
+
 					
 					//Resize the background image to cover the entire container and
 					//Resize the background image to make sure the image is fully visible
-					if ( curImgW >= w ) {
-						$this.css( 'background-size', 'contain' );
+					if ( curImgW > w ) {
+						curSize = 'contain';
 					} else {
-						$this.css( 'background-size', 'cover' );	
+						curSize = 'cover';
 					}
 					
+					curAtt = 'fixed';
+					
+				} else {
+					curSize = 'contain';
+					curAtt  = 'scroll';
+				}
+				
+				
+				//Determine image height and parallax container height
+				//If the height is the same, be sure to use the cover attribute
+				if ( curImgH <= $this.height() ) {
+					curSize = 'cover';
+				}
+				
+				
+				
+				//Add background image to parallax container
+				if( typeof dataImg != typeof undefined ) {
+					
+					if ( Modernizr.cssanimations ) {
+					    // supported
+
+						$this.css( {
+							'background' : 'linear-gradient('+dataOverlay+', '+dataOverlay+'), url(' + dataImg + ') 50% 0/'+curSize+' no-repeat ' + curAtt
+						} );
+					} else {
+					    // not-supported
+
+						$this.css( {
+							'background' : 'url(' + dataImg + ') 50% 0/'+curSize+' no-repeat ' + curAtt
+						} );
+					}
 
 				}
+				
+				
+				//Apply tilt effect
+				if( typeof dataSkew != typeof undefined ) {
+					$this.css( {
+						'transform'  : 'skew(0deg, '+dataSkew+'deg)'
+					} );
+				}
+
 					
+				//Embedded parent disparity elements
 				if ( $this.find( '.parallax-element' ).length > 0 ) {
 					$window.on( 'scroll touchmove', function() {
 						var scrolled = $window.scrollTop();
@@ -6328,6 +6301,8 @@ theme = ( function ( theme, $, window, document ) {
 					});			
 				}
 
+
+				
 		
 			});
 			
@@ -8676,6 +8651,6 @@ theme = ( function ( theme, $, window, document ) {
 }( theme, jQuery, window, document ) );
 
 
-cument ) );
+jQuery, window, document ) );
 
 
