@@ -1,11 +1,13 @@
 # Changelog
 
-#### = 1.3.1 (April 13, 2018) =
+#### = 1.3.2 (April 13, 2018) =
 
 * New: Add a new module "Accordion Background Images".
 * Fix: Fixed some bugs for parallax module.
 * Tweak: Enhanced parallax effect compatibility.
 * Tweak: Optimized helper classes of core stylesheet.
+* Tweak: Optimized slider alignment and extended next/prev image thumbnail in navigation.
+* Tweak: Optimized the primary navigation style on your mobile device.
 
 
 

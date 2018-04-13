@@ -23,12 +23,13 @@ theme = ( function ( theme, $, window, document ) {
 		 * @param  {object} sliderWrapper       - The current slider wrapper.
 		 * @param  {number} showItems           - Each slider with dynamic min/max ranges.
 		 * @param  {boolean} parallax           - Whether to use parallax effect.
-		 * @param  {string} fireState           - State of fire asynchronously.
 		 * @param  {string} countTotalSelector  - Total counter selector.
 		 * @param  {string} countCurSelector    - Current counter selector.
+		 * @param  {string} customControlID     - Custom controls ID.
+		 * @param  {string} fireState           - State of fire asynchronously.
 		 * @return {number}                     - Index of current slider .
 		 */
-        function initslides( sliderWrapper, thisSlider, showItems, parallax, countTotalSelector, countCurSelector, fireState ) {
+        function initslides( sliderWrapper, thisSlider, showItems, parallax, countTotalSelector, countCurSelector, customControlID, fireState ) {
 
 			var prefix       = 'custom-theme',
 				curIndex     = thisSlider.currentSlide,
@@ -54,6 +55,18 @@ theme = ( function ( theme, $, window, document ) {
 				thisSlider.removeClass( prefix+'-flexslider-loading' );
 
 
+				
+				//Display Next/Prev image thumbnail in navigation
+				//-------------------------------------		
+				var pimg = thisSlider.slides.eq( curIndex - 1 ).find( 'img' ).attr( 'src' ),
+					nimg = thisSlider.slides.eq( curIndex + 1 ).find( 'img' ).attr( 'src' );
+
+				
+				if ( typeof pimg != typeof undefined ) $( '.custom-navigation'+customControlID+' .custom-theme-flex-prev .thumb' ).html('<img src="'+pimg+'" alt="">');
+				if ( typeof nimg != typeof undefined ) $( '.custom-navigation'+customControlID+' .custom-theme-flex-next .thumb' ).html('<img src="'+nimg+'" alt="">');			
+
+				
+				
 				// Fires local videos asynchronously with slider switch.
 				//-------------------------------------
 				videoEmbedInit( $items, false );
@@ -563,12 +576,13 @@ theme = ( function ( theme, $, window, document ) {
 				
 				//Fires when the slider loads the first slide.
 				start: function( slider ) {
-					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, 'start' );
+					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, customConID, 'start' );
+
 				},
 				
 				//Fires asynchronously with each slider animation.
 				before: function( slider ) {
-					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, 'before' );
+					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, customConID, 'before' );
 					
 					// Call the updateChildrenSlides which itterates through all children slides 
 					if( typeof dataSync != typeof undefined && dataSync != '' && dataSync != 0 ) {
@@ -581,12 +595,14 @@ theme = ( function ( theme, $, window, document ) {
 				
 				//Fires after each slider animation completes.
 				after: function( slider ) {
-					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, 'after' );
+					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, customConID, 'after' );
+
+					
 				},
 				
 				//Fires when the slider reaches the last slide (asynchronous).
 				end: function( slider ) {
-					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, 'end' );
+					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, customConID, 'end' );
 				}
 			});
 			

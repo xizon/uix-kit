@@ -52,14 +52,15 @@ theme = ( function ( theme, $, window, document ) {
         
 	  return k = {
           animationComplete : !1, 
-          text              : function(a) {
+          text              : function( a ) {
                                     this.animationComplete = !1;
-                                    a = document.getElementById(a);
+                                    a = document.querySelector( a );
+			  
                                     for ( var d = a.innerHTML, b = [], c = 0; c < d.length; c++ ) {
                                       b.push( d.charCodeAt( c ) );
                                     }
                                     a.innerHTML = "";
-                                    e(b, a, 0);
+                                    e( b, a, 0 );
 	                          }
       };
         
@@ -68,12 +69,27 @@ theme = ( function ( theme, $, window, document ) {
 
     var pageLoaded = function() {
 
-		setTimeout(function() {
-			if ( $( '#brand-text' ).text().length > 0 ) {
-				cipher.text( 'brand-text' );
+		$( '.text-eff' ).each( function()  {
+			if ( $( this ).text().length > 0 ) {
+				
+				var waypoints = $( this ).waypoint({
+					handler: function( direction ) {
+
+						
+						cipher.text( '#' + $( this.element ).attr( 'id' ) );
+
+						
+						this.disable();
+
+
+					},
+					offset: '100%' //0~100%, bottom-in-view
+				});
+				
+				
 			}
-			
-		}, 1500 );	
+		});
+		
 		
     };
 

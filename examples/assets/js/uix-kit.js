@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.3.1
+ * ## Version             :  1.3.2
  * ## Last Update         :  April 13, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -37,9 +37,9 @@
     12. Accordion 
     13. Counter 
     14. Dynamic Drop Down List from JSON 
-    15. Form 
-    16. Form Progress 
-    17. Gallery 
+    15. Form Progress 
+    16. Gallery 
+    17. Form 
     18. Custom Core Scripts & Stylesheets 
     19. Bulleted List 
     20. Posts List With Ajax 
@@ -56,16 +56,16 @@
     31. Retina Graphics for Website 
     32. Scroll Reveal 
     33. Show More Less 
-    34. Source Code 
-    35. Sticky Elements 
-    36. Tabs 
-    37. Testimonials Carousel 
-    38. Text effect 
-    39. Timeline 
-    40. AJAX 
-    41. Smooth Scrolling When Clicking An Anchor Link 
-    42. Slideshow ( with custom flexslider ) 
-    43. Custom Lightbox 
+    34. Custom Lightbox 
+    35. Slideshow ( with custom flexslider ) 
+    36. Smooth Scrolling When Clicking An Anchor Link 
+    37. Source Code 
+    38. Sticky Elements 
+    39. Tabs 
+    40. Testimonials Carousel 
+    41. Text effect 
+    42. Timeline 
+    43. AJAX 
 
 
 */
@@ -7120,12 +7120,13 @@ theme = ( function ( theme, $, window, document ) {
 		 * @param  {object} sliderWrapper       - The current slider wrapper.
 		 * @param  {number} showItems           - Each slider with dynamic min/max ranges.
 		 * @param  {boolean} parallax           - Whether to use parallax effect.
-		 * @param  {string} fireState           - State of fire asynchronously.
 		 * @param  {string} countTotalSelector  - Total counter selector.
 		 * @param  {string} countCurSelector    - Current counter selector.
+		 * @param  {string} customControlID     - Custom controls ID.
+		 * @param  {string} fireState           - State of fire asynchronously.
 		 * @return {number}                     - Index of current slider .
 		 */
-        function initslides( sliderWrapper, thisSlider, showItems, parallax, countTotalSelector, countCurSelector, fireState ) {
+        function initslides( sliderWrapper, thisSlider, showItems, parallax, countTotalSelector, countCurSelector, customControlID, fireState ) {
 
 			var prefix       = 'custom-theme',
 				curIndex     = thisSlider.currentSlide,
@@ -7151,6 +7152,18 @@ theme = ( function ( theme, $, window, document ) {
 				thisSlider.removeClass( prefix+'-flexslider-loading' );
 
 
+				
+				//Display Next/Prev image thumbnail in navigation
+				//-------------------------------------		
+				var pimg = thisSlider.slides.eq( curIndex - 1 ).find( 'img' ).attr( 'src' ),
+					nimg = thisSlider.slides.eq( curIndex + 1 ).find( 'img' ).attr( 'src' );
+
+				
+				if ( typeof pimg != typeof undefined ) $( '.custom-navigation'+customControlID+' .custom-theme-flex-prev .thumb' ).html('<img src="'+pimg+'" alt="">');
+				if ( typeof nimg != typeof undefined ) $( '.custom-navigation'+customControlID+' .custom-theme-flex-next .thumb' ).html('<img src="'+nimg+'" alt="">');			
+
+				
+				
 				// Fires local videos asynchronously with slider switch.
 				//-------------------------------------
 				videoEmbedInit( $items, false );
@@ -7660,12 +7673,13 @@ theme = ( function ( theme, $, window, document ) {
 				
 				//Fires when the slider loads the first slide.
 				start: function( slider ) {
-					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, 'start' );
+					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, customConID, 'start' );
+
 				},
 				
 				//Fires asynchronously with each slider animation.
 				before: function( slider ) {
-					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, 'before' );
+					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, customConID, 'before' );
 					
 					// Call the updateChildrenSlides which itterates through all children slides 
 					if( typeof dataSync != typeof undefined && dataSync != '' && dataSync != 0 ) {
@@ -7678,12 +7692,14 @@ theme = ( function ( theme, $, window, document ) {
 				
 				//Fires after each slider animation completes.
 				after: function( slider ) {
-					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, 'after' );
+					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, customConID, 'after' );
+
+					
 				},
 				
 				//Fires when the slider reaches the last slide (asynchronous).
 				end: function( slider ) {
-					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, 'end' );
+					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, customConID, 'end' );
 				}
 			});
 			
@@ -8425,14 +8441,15 @@ theme = ( function ( theme, $, window, document ) {
         
 	  return k = {
           animationComplete : !1, 
-          text              : function(a) {
+          text              : function( a ) {
                                     this.animationComplete = !1;
-                                    a = document.getElementById(a);
+                                    a = document.querySelector( a );
+			  
                                     for ( var d = a.innerHTML, b = [], c = 0; c < d.length; c++ ) {
                                       b.push( d.charCodeAt( c ) );
                                     }
                                     a.innerHTML = "";
-                                    e(b, a, 0);
+                                    e( b, a, 0 );
 	                          }
       };
         
@@ -8441,12 +8458,27 @@ theme = ( function ( theme, $, window, document ) {
 
     var pageLoaded = function() {
 
-		setTimeout(function() {
-			if ( $( '#brand-text' ).text().length > 0 ) {
-				cipher.text( 'brand-text' );
+		$( '.text-eff' ).each( function()  {
+			if ( $( this ).text().length > 0 ) {
+				
+				var waypoints = $( this ).waypoint({
+					handler: function( direction ) {
+
+						
+						cipher.text( '#' + $( this.element ).attr( 'id' ) );
+
+						
+						this.disable();
+
+
+					},
+					offset: '100%' //0~100%, bottom-in-view
+				});
+				
+				
 			}
-			
-		}, 1500 );	
+		});
+		
 		
     };
 

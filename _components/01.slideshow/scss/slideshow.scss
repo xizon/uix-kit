@@ -2,11 +2,11 @@
     <!-- Slideshow ( with custom flexslider ) -->  
 /* ====================================================== */
 
-
 /* 
-   Thumbnail ControlNav Pattern                   
--------------------------- 
-*/
+ ---------------------------
+ 1) Thumbnail ControlNav Pattern 
+ ---------------------------
+ */ 
 .custom-theme-flexslider-thumbs {
 	position: relative;
 	left: 50%;
@@ -66,11 +66,11 @@
 
 }
 
-
 /* 
-   Default Slideshow                                
--------------------------- 
-*/
+ ---------------------------
+ 2) Default Slideshow        
+ ---------------------------
+ */ 
 .custom-theme-flexslider, .custom-theme-flex-viewport {
 	transition: .1s ease;
 }
@@ -125,7 +125,18 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 	}
 }
 
+/*----- Left and right arrows by default -----*/
 .custom-theme-flex-direction-nav {
+	
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	display: block;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	
 	
 	.custom-theme-flex-prev {
 	    left: -100px;
@@ -135,17 +146,11 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 		text-align: right;
 	}
 	
-	a:before {
-	    display: none;
-	}
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	
 	li {
 		margin: 0;
 		padding: 0;
 		list-style: none;
+		position: relative;
 		
 		a {
 			display: block;
@@ -180,38 +185,22 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 	}
 }
 
-.custom-theme-flex-control-nav {
-	margin: 0;
-	padding: 0;
+/*----- Pagination dots -----*/
+.custom-theme-flex-control-nav.custom-theme-flex-control-paging {
 	list-style: none;
-	width: 100%;
-	position: absolute;
+	left: 0;
 	bottom: 0;
-	text-align: center;
-	
-	li {
-		margin: 0;
-		padding: 0;
-		list-style: none;
-		margin: 0 6px;
-		display: inline-block;
-		zoom: 1;
-		*display: inline;
-	}
-
-}
-
-.custom-theme-flex-control-paging {
-	margin: 0;
-	padding: 0;
-	list-style: none;
+	font-size: 0;/*Fighting the Space Between Inline Block Elements*/
+	display: block;
+	width: 100%;
+	text-align: center; /*require*/
+	position: absolute;
 
 	li {
-		margin: 0;
-		padding: 0;
-		list-style: none;
-		margin-right: 10px;
-		
+		font-size: 16px;/*Fighting the Space Between Inline Block Elements*/
+		display: inline-block; /*require*/
+		margin: 0 .2rem;
+
 		a {
 			width: 12px;
 			height: 12px;
@@ -227,10 +216,36 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 				background: rgba(255, 255, 255, 1);
 				width: 25px;
 			}
-		}
+		}	
+
+	}
+
+}
+
+/* Custom Style */
+.custom-controls-container {
+	.custom-theme-flex-control-nav.custom-theme-flex-control-paging {
+		
+		position: relative;
+		transform: translateY(.5rem);
+		
+		li {
+			a {
+				background: rgba(233, 47, 22, 0.5);
+
+				&:hover, 
+				&.custom-theme-flex-active {
+					background: rgba(233, 47, 22, 1);
+				}
+			}	
+			
+	    }
+
 	}
 }
 
+
+/*----- Thumbnail -----*/
 .custom-theme-flex-control-thumbs {
 	margin: 5px 0 0;
 	position: static;
@@ -259,13 +274,41 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 	}
 }
 
-/* Custom Controls */
 
+/*----- Left and right arrows by Custom Controls -----*/
 .custom-navigation {
 	display: table;
 	width: 100%;
 	table-layout: fixed;
 	margin-top: 1.75rem;
+	
+	
+	&.custom-navigation-thumb {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		width: calc(100% - 30px);
+		
+		
+	}
+	
+	.thumb {
+		@include transition-default();
+		width: 100px;
+		height: 100px;
+		border-radius: 50%;
+		display: inline-block;
+		overflow: hidden;
+		transform: scale(.7);
+		opacity: .5;
+		@include outer-shadow();
+		
+		img {
+			width: 100%;
+			height: 100%;
+		}
+	}
+	
 	
 	> {
 		* {
@@ -273,6 +316,14 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 		}
 		a {
 			width: 50px;
+			
+			&:hover {
+				.thumb {
+					transform: scale(1);
+					opacity: 1;
+				}
+			}	
+
 		}
 	}
 	
@@ -280,73 +331,27 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 		&.custom-theme-flex-disabled {
 			
 		}
+		
 	}
 	.custom-theme-flex-next {
+		
+		text-align: right;
+		
 		&.custom-theme-flex-disabled {
 			
 		}	
+		
+	
+		
 	}
 
 }
-
-.custom-controls-container {
-	.custom-theme-flex-control-nav {
-		margin: 0;
-		padding: 0;
-		list-style: none;
-		width: 100%;
-		text-align: center;
-		position: relative;
-		bottom: -6px;
-		
-		li {
-			margin: 0;
-			padding: 0;
-			list-style: none;
-			margin: 0 6px;
-			display: inline-block;
-			zoom: 1;
-			*display: inline;
-	    }
-
-	}
-	.custom-theme-flex-control-paging {
-		margin: 0;
-		padding: 0;
-		list-style: none;
-		
-		li {
-			margin: 0;
-			padding: 0;
-			list-style: none;
-			margin-right: 10px;
-
-			a {
-				width: 12px;
-				height: 12px;
-				display: block;
-				background: rgba(233, 47, 22, 0.5);
-				cursor: pointer;
-				text-indent: -9999px;
-				border-radius: 20px;
-				box-shadow: 0px 6px 23px -2px rgba(0, 0, 0, 0.36);
-
-				&:hover, 
-				&.custom-theme-flex-active {
-					background: rgba(233, 47, 22, 1);
-					width: 25px;
-				}
-			}
-		}
-	}
-}
-
-
 
 /* 
-   Primary Slideshow  (with dynamic min/max ranges )                            
--------------------------- 
-*/
+ ---------------------------
+ 3) Primary Slideshow  (with dynamic min/max ranges )      
+ ---------------------------
+ */ 
 .custom-theme-flexslider.custom-itemgrid {
 	
 	.item {
@@ -361,15 +366,26 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 	
 }
 	
-	
-	
+@media all and (max-width: 768px) {
+	.custom-theme-flexslider.custom-itemgrid {
 
+		.item {
+			opacity: 1;
+		}
+
+
+	}
+		
+}
+
+	
+	
 /* 
-   Primary Slideshow                                
--------------------------- 
-*/
+ ---------------------------
+ 4) Primary Slideshow    
+ ---------------------------
+ */ 
 .custom-theme-flexslider.custom-primary-flexslider {
-	max-height: 100vh;
 	overflow: hidden;
 
 	
@@ -515,11 +531,11 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 
 
 
-
 /* 
-   Parallax Slideshow                                
--------------------------- 
-*/
+ ---------------------------
+ 5) Parallax Slideshow                
+ ---------------------------
+ */ 
 .custom-theme-flexslider.custom-parallax-flexslider {
 	max-height: 100vh;
 	overflow: hidden;
@@ -535,6 +551,10 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 			background-size: cover;
 			background-repeat: no-repeat;
 			position: relative;
+			
+			img {
+				max-height: calc( 100% - 2rem );
+			}
 
 			.level {
 				position: absolute;

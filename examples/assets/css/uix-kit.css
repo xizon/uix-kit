@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.3.1
+ * ## Version             :  1.3.2
  * ## Last Update         :  April 13, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -69,8 +69,8 @@
     1. Basic 
     2. Table 
     3. Bullet List 
-    4. Typography 
-    5. Helper Classes 
+    4. Helper Classes 
+    5. Typography 
     6. Spacing 
     7. Basic Layout Styles 
     8. Navigation Area 
@@ -93,8 +93,8 @@
     25. Accordion Background Images 
     26. Badges 
     27. Breadcrumbs 
-    28. Button 
-    29. Author Card 
+    28. Author Card 
+    29. Button 
     30. Counter 
     31. Dropdown Menu 
     32. Equal-width Divs 
@@ -128,6 +128,9 @@
     60. Slideshow ( with custom flexslider ) 
     61. Source Code 
     62. Tabs 
+    63. Testimonials Carousel 
+    64. Timeline 
+    65. ToolTip 
 
 
 
@@ -6788,6 +6791,135 @@ dl.list-side-by-side:after {
 }
 
 /* ====================================================== 
+   <!-- Pricing --> 
+/* ====================================================== */
+.custom-price {
+    text-align: center;
+    position: relative;
+}
+
+.custom-price:before {
+    padding-top: 2.25rem;
+}
+
+.custom-price:after {
+    padding-bottom: 0;
+}
+
+.custom-price ul,
+.custom-price ol {
+  /*default*/
+    display: block;
+    list-style-type: disc;
+    margin-top: 0.875rem;
+    margin-bottom: 0.875rem;
+    margin-left: 0;
+    margin-right: 0;
+    padding-bottom: 1.7rem;
+  /*custom*/
+    line-height: 2;
+}
+
+.custom-price li {
+  /*default*/
+    list-style: none;
+}
+
+.custom-price li:before {
+    font-family: 'FontAwesome';
+    content: "\f00c";
+    display: inline-block;
+    margin-right: .4rem;
+}
+
+.custom-price .hr {
+    margin: 1.5rem 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.custom-price .border-hover {
+    margin-bottom: 1.5rem;
+}
+
+.custom-price .border {
+    padding-top: 0.875rem;
+    position: relative;
+    box-shadow: 0 22px 40px 0 #eef4fc;
+    border-radius: 10px;
+    background: #fff;
+    transition: .1s ease-in-out;
+}
+
+.custom-price .border:hover {
+    box-shadow: 0 31px 32px 0 #cbdfee;
+}
+
+.custom-price .level {
+    font-size: 0.7rem;
+    text-align: center;
+    text-indent: 0.875rem;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 3;
+    font-weight: 700;
+    opacity: 0.35;
+}
+
+.custom-price .num {
+    color: #EC5E79;
+    font-weight: 700;
+    font-size: 3.5rem;
+    margin-top: 0.875rem;
+}
+
+.custom-price .currency {
+    font-size: 0.875rem;
+}
+
+.custom-price .period {
+    font-size: 12px;
+}
+
+.custom-price .period:before {
+    content: '/';
+    padding-right: .1rem;
+}
+
+.custom-price .detail {
+    text-align: left;
+    padding-bottom: 1.125rem;
+    padding-left: 1rem;
+    font-size: 0.875rem;
+}
+
+.custom-price .excerpt {
+    height: auto;
+    padding: 0 0.875rem;
+    font-size: 0.875rem;
+    opacity: 0.65;
+}
+
+.custom-price .excerpt p {
+    line-height: 1.5;
+}
+
+.custom-price .bg {
+    padding-top: 1.875rem;
+    height: auto;
+}
+
+.custom-price .border.active .num,
+.custom-price .border.active .excerpt,
+.custom-price .border.active .detail,
+.custom-price .border.active .level {
+    color: #fff !important;
+}
+
+.custom-price .border.active .excerpt {
+    opacity: 0.65;
+}
+
+/* ====================================================== 
    <!-- Progress Bar --> 
 /* ====================================================== */
 /* 
@@ -8717,135 +8849,6 @@ dl.list-side-by-side:after {
 }
 
 /* ====================================================== 
-   <!-- Pricing --> 
-/* ====================================================== */
-.custom-price {
-    text-align: center;
-    position: relative;
-}
-
-.custom-price:before {
-    padding-top: 2.25rem;
-}
-
-.custom-price:after {
-    padding-bottom: 0;
-}
-
-.custom-price ul,
-.custom-price ol {
-  /*default*/
-    display: block;
-    list-style-type: disc;
-    margin-top: 0.875rem;
-    margin-bottom: 0.875rem;
-    margin-left: 0;
-    margin-right: 0;
-    padding-bottom: 1.7rem;
-  /*custom*/
-    line-height: 2;
-}
-
-.custom-price li {
-  /*default*/
-    list-style: none;
-}
-
-.custom-price li:before {
-    font-family: 'FontAwesome';
-    content: "\f00c";
-    display: inline-block;
-    margin-right: .4rem;
-}
-
-.custom-price .hr {
-    margin: 1.5rem 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.custom-price .border-hover {
-    margin-bottom: 1.5rem;
-}
-
-.custom-price .border {
-    padding-top: 0.875rem;
-    position: relative;
-    box-shadow: 0 22px 40px 0 #eef4fc;
-    border-radius: 10px;
-    background: #fff;
-    transition: .1s ease-in-out;
-}
-
-.custom-price .border:hover {
-    box-shadow: 0 31px 32px 0 #cbdfee;
-}
-
-.custom-price .level {
-    font-size: 0.7rem;
-    text-align: center;
-    text-indent: 0.875rem;
-    text-transform: uppercase;
-    position: relative;
-    z-index: 3;
-    font-weight: 700;
-    opacity: 0.35;
-}
-
-.custom-price .num {
-    color: #EC5E79;
-    font-weight: 700;
-    font-size: 3.5rem;
-    margin-top: 0.875rem;
-}
-
-.custom-price .currency {
-    font-size: 0.875rem;
-}
-
-.custom-price .period {
-    font-size: 12px;
-}
-
-.custom-price .period:before {
-    content: '/';
-    padding-right: .1rem;
-}
-
-.custom-price .detail {
-    text-align: left;
-    padding-bottom: 1.125rem;
-    padding-left: 1rem;
-    font-size: 0.875rem;
-}
-
-.custom-price .excerpt {
-    height: auto;
-    padding: 0 0.875rem;
-    font-size: 0.875rem;
-    opacity: 0.65;
-}
-
-.custom-price .excerpt p {
-    line-height: 1.5;
-}
-
-.custom-price .bg {
-    padding-top: 1.875rem;
-    height: auto;
-}
-
-.custom-price .border.active .num,
-.custom-price .border.active .excerpt,
-.custom-price .border.active .detail,
-.custom-price .border.active .level {
-    color: #fff !important;
-}
-
-.custom-price .border.active .excerpt {
-    opacity: 0.65;
-}
-
-/* ====================================================== 
    <!-- Services --> 
 /* ====================================================== */
 .custom-services [class*='col-'],
@@ -9201,12 +9204,27 @@ dl.list-side-by-side:after {
 }
 
 /* ====================================================== 
+     <!-- Single Post -->        
+/* ====================================================== */
+/* Post edit link */
+.post-edit-link {
+    display: inline-block;
+    background: #F9F9F9;
+    padding: 0.175rem 0.4375rem;
+    border: 1px solid #DDDDDD;
+    border-radius: 2px;
+    text-decoration: none !important;
+    margin-top: 1.09375rem;
+}
+
+/* ====================================================== 
     <!-- Slideshow ( with custom flexslider ) -->  
 /* ====================================================== */
 /* 
-   Thumbnail ControlNav Pattern                   
--------------------------- 
-*/
+ ---------------------------
+ 1) Thumbnail ControlNav Pattern 
+ ---------------------------
+ */
 .custom-theme-flexslider-thumbs {
     position: relative;
     left: 50%;
@@ -9259,9 +9277,10 @@ dl.list-side-by-side:after {
 }
 
 /* 
-   Default Slideshow                                
--------------------------- 
-*/
+ ---------------------------
+ 2) Default Slideshow        
+ ---------------------------
+ */
 .custom-theme-flexslider, .custom-theme-flex-viewport {
     transition: .1s ease;
 }
@@ -9315,7 +9334,13 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
     width: 100%;
 }
 
+/*----- Left and right arrows by default -----*/
 .custom-theme-flex-direction-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: block;
+    width: 100%;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -9330,14 +9355,11 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
     text-align: right;
 }
 
-.custom-theme-flex-direction-nav a:before {
-    display: none;
-}
-
 .custom-theme-flex-direction-nav li {
     margin: 0;
     padding: 0;
     list-style: none;
+    position: relative;
 }
 
 .custom-theme-flex-direction-nav li a {
@@ -9370,40 +9392,29 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
     right: 20px;
 }
 
-.custom-theme-flex-control-nav {
-    margin: 0;
-    padding: 0;
+/*----- Pagination dots -----*/
+.custom-theme-flex-control-nav.custom-theme-flex-control-paging {
     list-style: none;
-    width: 100%;
-    position: absolute;
+    left: 0;
     bottom: 0;
+    font-size: 0;
+  /*Fighting the Space Between Inline Block Elements*/
+    display: block;
+    width: 100%;
     text-align: center;
+  /*require*/
+    position: absolute;
 }
 
-.custom-theme-flex-control-nav li {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    margin: 0 6px;
+.custom-theme-flex-control-nav.custom-theme-flex-control-paging li {
+    font-size: 16px;
+  /*Fighting the Space Between Inline Block Elements*/
     display: inline-block;
-    zoom: 1;
-    *display: inline;
+  /*require*/
+    margin: 0 .2rem;
 }
 
-.custom-theme-flex-control-paging {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.custom-theme-flex-control-paging li {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    margin-right: 10px;
-}
-
-.custom-theme-flex-control-paging li a {
+.custom-theme-flex-control-nav.custom-theme-flex-control-paging li a {
     width: 12px;
     height: 12px;
     display: block;
@@ -9414,11 +9425,26 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
     box-shadow: 0px 6px 23px -2px rgba(0, 0, 0, 0.36);
 }
 
-.custom-theme-flex-control-paging li a:hover, .custom-theme-flex-control-paging li a.custom-theme-flex-active {
+.custom-theme-flex-control-nav.custom-theme-flex-control-paging li a:hover, .custom-theme-flex-control-nav.custom-theme-flex-control-paging li a.custom-theme-flex-active {
     background: white;
     width: 25px;
 }
 
+/* Custom Style */
+.custom-controls-container .custom-theme-flex-control-nav.custom-theme-flex-control-paging {
+    position: relative;
+    transform: translateY(0.5rem);
+}
+
+.custom-controls-container .custom-theme-flex-control-nav.custom-theme-flex-control-paging li a {
+    background: rgba(233, 47, 22, 0.5);
+}
+
+.custom-controls-container .custom-theme-flex-control-nav.custom-theme-flex-control-paging li a:hover, .custom-controls-container .custom-theme-flex-control-nav.custom-theme-flex-control-paging li a.custom-theme-flex-active {
+    background: #e92f16;
+}
+
+/*----- Thumbnail -----*/
 .custom-theme-flex-control-thumbs {
     margin: 5px 0 0;
     position: static;
@@ -9449,12 +9475,38 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
     cursor: default;
 }
 
-/* Custom Controls */
+/*----- Left and right arrows by Custom Controls -----*/
 .custom-navigation {
     display: table;
     width: 100%;
     table-layout: fixed;
     margin-top: 1.75rem;
+}
+
+.custom-navigation.custom-navigation-thumb {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: calc(100% - 30px);
+}
+
+.custom-navigation .thumb {
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: inline-block;
+    overflow: hidden;
+    transform: scale(0.7);
+    opacity: .5;
+  /* @include outer-shadow(); */
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+}
+
+.custom-navigation .thumb img {
+    width: 100%;
+    height: 100%;
 }
 
 .custom-navigation > * {
@@ -9465,59 +9517,20 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
     width: 50px;
 }
 
-.custom-controls-container .custom-theme-flex-control-nav {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    width: 100%;
-    text-align: center;
-    position: relative;
-    bottom: -6px;
+.custom-navigation > a:hover .thumb {
+    transform: scale(1);
+    opacity: 1;
 }
 
-.custom-controls-container .custom-theme-flex-control-nav li {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    margin: 0 6px;
-    display: inline-block;
-    zoom: 1;
-    *display: inline;
-}
-
-.custom-controls-container .custom-theme-flex-control-paging {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.custom-controls-container .custom-theme-flex-control-paging li {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    margin-right: 10px;
-}
-
-.custom-controls-container .custom-theme-flex-control-paging li a {
-    width: 12px;
-    height: 12px;
-    display: block;
-    background: rgba(233, 47, 22, 0.5);
-    cursor: pointer;
-    text-indent: -9999px;
-    border-radius: 20px;
-    box-shadow: 0px 6px 23px -2px rgba(0, 0, 0, 0.36);
-}
-
-.custom-controls-container .custom-theme-flex-control-paging li a:hover, .custom-controls-container .custom-theme-flex-control-paging li a.custom-theme-flex-active {
-    background: #e92f16;
-    width: 25px;
+.custom-navigation .custom-theme-flex-next {
+    text-align: right;
 }
 
 /* 
-   Primary Slideshow  (with dynamic min/max ranges )                            
--------------------------- 
-*/
+ ---------------------------
+ 3) Primary Slideshow  (with dynamic min/max ranges )      
+ ---------------------------
+ */
 .custom-theme-flexslider.custom-itemgrid .item {
     transition: .1s ease;
     opacity: 0.2;
@@ -9527,12 +9540,18 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
     opacity: 1;
 }
 
+@media all and (max-width: 768px) {
+    .custom-theme-flexslider.custom-itemgrid .item {
+        opacity: 1;
+    }
+}
+
 /* 
-   Primary Slideshow                                
--------------------------- 
-*/
+ ---------------------------
+ 4) Primary Slideshow    
+ ---------------------------
+ */
 .custom-theme-flexslider.custom-primary-flexslider {
-    max-height: 100vh;
     overflow: hidden;
   /* Full Screen Slider
 	 * You need add an attribute "data-slider-bg" to ".item"
@@ -9640,9 +9659,10 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 }
 
 /* 
-   Parallax Slideshow                                
--------------------------- 
-*/
+ ---------------------------
+ 5) Parallax Slideshow                
+ ---------------------------
+ */
 .custom-theme-flexslider.custom-parallax-flexslider {
     max-height: 100vh;
     overflow: hidden;
@@ -9656,6 +9676,10 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
     background-size: cover;
     background-repeat: no-repeat;
     position: relative;
+}
+
+.custom-theme-flexslider.custom-parallax-flexslider .custom-theme-slides > .item img {
+    max-height: calc( 100% - 2rem);
 }
 
 .custom-theme-flexslider.custom-parallax-flexslider .custom-theme-slides > .item .level {
@@ -9692,20 +9716,6 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 
 .custom-theme-flexslider.custom-parallax-flexslider .custom-theme-slides > .item.right .level-2 {
     transform: translate(50px, -50%);
-}
-
-/* ====================================================== 
-     <!-- Single Post -->        
-/* ====================================================== */
-/* Post edit link */
-.post-edit-link {
-    display: inline-block;
-    background: #F9F9F9;
-    padding: 0.175rem 0.4375rem;
-    border: 1px solid #DDDDDD;
-    border-radius: 2px;
-    text-decoration: none !important;
-    margin-top: 1.09375rem;
 }
 
 /* ====================================================== 
@@ -11006,11 +11016,6 @@ a img.aligncenter {
 .sticky {
     opacity: 1;
 }
-olumns-9 .gallery-caption {
-    display: none;
-}
-
-/* other */
-.sticky {
+cky {
     opacity: 1;
 }
