@@ -1,7 +1,15 @@
 # Changelog
 
+#### = 1.3.1 (April 13, 2018) =
 
-#### = 1.3.0 (April 12, 2018) =
+* New: Add a new module "Accordion Background Images".
+* Fix: Fixed some bugs for parallax module.
+* Tweak: Enhanced parallax effect compatibility.
+* Tweak: Optimized helper classes of core stylesheet.
+
+
+
+#### = 1.3.0 (April 11, 2018) =
 
 * New: Add a new module "Side by Side List With Photo".
 * New: Add a new module "Services".
@@ -11,9 +19,7 @@
 * New: Added a function of Common Height.
 * Fix: Animating an element is not always smooth for "Periodical Scroll".
 * Fix: Fixed width calculation problem for mega menu in widescreen.
-* Tweak: Enhanced parallax effect compatibility.
 * Tweak: Optimized and extended form and buttons stylesheet.
-
 
 
 

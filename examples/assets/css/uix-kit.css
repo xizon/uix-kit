@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.3.0
- * ## Last Update         :  April 12, 2018
+ * ## Version             :  1.3.1
+ * ## Last Update         :  April 13, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -67,10 +67,10 @@
 	---------------------------
 	
     1. Basic 
-    2. Bullet List 
-    3. Table 
-    4. Helper Classes 
-    5. Typography 
+    2. Table 
+    3. Bullet List 
+    4. Typography 
+    5. Helper Classes 
     6. Spacing 
     7. Basic Layout Styles 
     8. Navigation Area 
@@ -89,34 +89,34 @@
     21. Entry 
     22. Comments 
     23. 3rd Party Plugins 
-    24. Badges 
-    25. Accordion 
-    26. Breadcrumbs 
-    27. Button 
-    28. Author Card 
-    29. Counter 
-    30. Dropdown Menu 
-    31. Equal-width Divs 
-    32. Footer Templates 
+    24. Accordion 
+    25. Accordion Background Images 
+    26. Badges 
+    27. Breadcrumbs 
+    28. Button 
+    29. Author Card 
+    30. Counter 
+    31. Dropdown Menu 
+    32. Equal-width Divs 
     33. Features 
-    34. Form 
-    35. Form Progress 
-    36. Gallery 
-    37. Custom Core Scripts & Stylesheets 
-    38. Brands List 
-    39. Bulleted List 
-    40. Maintain Aspect Ratio List 
-    41. List of Posts 
-    42. List of Split Posts 
-    43. Side by Side List 
-    44. Side by Side List With Photo 
-    45. Fullwidth List of Split 2 
-    46. Fullwidth List of Split 
-    47. Mobile Menu 
-    48. Modal Dialog 
-    49. Mouse Animation Scroll 
-    50. Multiple Items Carousel 
-    51. Parallax 
+    34. Footer Templates 
+    35. Form 
+    36. Form Progress 
+    37. Gallery 
+    38. Custom Core Scripts & Stylesheets 
+    39. Brands List 
+    40. Bulleted List 
+    41. Maintain Aspect Ratio List 
+    42. List of Posts 
+    43. List of Split Posts 
+    44. Side by Side List 
+    45. Side by Side List With Photo 
+    46. Fullwidth List of Split 2 
+    47. Fullwidth List of Split 
+    48. Mobile Menu 
+    49. Modal Dialog 
+    50. Mouse Animation Scroll 
+    51. Multiple Items Carousel 
     52. Parallax 
     53. Periodical Scroll 
     54. Pricing 
@@ -128,8 +128,6 @@
     60. Slideshow ( with custom flexslider ) 
     61. Source Code 
     62. Tabs 
-    63. Testimonials Carousel 
-    64. Timeline 
 
 
 
@@ -582,16 +580,32 @@ ol.list-big-numbered.fill-bg li:before,
     float: left;
 }
 
+.fl.mobile-none {
+    float: none;
+}
+
 .fr {
     float: right;
+}
+
+.fr.mobile-none {
+    float: none;
 }
 
 .t-r {
     text-align: right;
 }
 
+.t-r.mobile-center {
+    text-align: center;
+}
+
 .t-l {
     text-align: left;
+}
+
+.t-l.mobile-center {
+    text-align: center;
 }
 
 .t-c {
@@ -703,16 +717,16 @@ ol.list-big-numbered.fill-bg li:before,
 }
 
 @media all and (max-width: 768px) {
-    .height-100,
-  .height-90,
-  .height-80,
-  .height-70,
-  .height-60,
-  .height-50,
-  .height-40,
-  .height-30,
-  .height-20,
-  .height-10 {
+    .height-100:not(.mobile-still),
+  .height-90:not(.mobile-still),
+  .height-80:not(.mobile-still),
+  .height-70:not(.mobile-still),
+  .height-60:not(.mobile-still),
+  .height-50:not(.mobile-still),
+  .height-40:not(.mobile-still),
+  .height-30:not(.mobile-still),
+  .height-20:not(.mobile-still),
+  .height-10:not(.mobile-still) {
         height: auto !important;
     }
 }
@@ -1709,7 +1723,6 @@ section.site-google-map,
     .footer-main-container .pull-left,
   .footer-main-container .pull-right {
         float: none !important;
-        text-align: center;
     }
 }
 
@@ -2990,46 +3003,6 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   <!-- Badges --> 
-/* ====================================================== */
-.badges {
-    width: 300px;
-    height: 300px;
-    position: relative;
-    display: table;
-    margin: 0 auto;
-    margin-bottom: 3rem;
-  /* @include gradient-border( $highlight-color1, $highlight-color2, 3px, 'to right', #fff ); */
-    background: #fff;
-  /* @include transition-default(); */
-    transition: all 0.3s ease;
-}
-
-.badges::after {
-  /* Please do not convert it to block elements and set width and height. */
-    content: '';
-    background: #EC5E79;
-    background: linear-gradient(to bottom, #EC5E79 0%, #f60 100%), linear-gradient(to bottom, #EC5E79 0%, #f60 100%);
-    position: absolute;
-    top: -15px;
-    bottom: -15px;
-    right: -15px;
-    left: -15px;
-    z-index: -1;
-    border-radius: inherit;
-}
-
-.badges.circle {
-    border-radius: 50%;
-}
-
-.badges .inner {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-}
-
-/* ====================================================== 
     <!-- Accordion -->  
 /* ====================================================== */
 .custom-accordion dl {
@@ -3092,6 +3065,147 @@ ul.entry-meta {
     padding: 1rem;
     font-size: 0.875rem;
     display: none;
+}
+
+/* ====================================================== 
+    <!-- Accordion Background Images -->  
+/* ====================================================== */
+.custom-accordion-img {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+
+.custom-accordion-img ul {
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+    margin: 0;
+    padding: 0;
+    font-size: 0;
+  /*Fighting the Space Between Inline Block Elements*/;
+}
+
+.custom-accordion-img ul li {
+    display: table-cell;
+    vertical-align: bottom;
+    position: relative;
+    width: 16.66666666666667%;
+    height: 250px;
+    font-size: 1rem;
+  /*Fighting the Space Between Inline Block Elements*/
+    background-position: center center;
+    background-repeat: no-repeat;
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+}
+
+.custom-accordion-img ul li > img {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.custom-accordion-img ul li > div a {
+    display: block;
+    height: 250px;
+    width: 100%;
+    position: relative;
+    z-index: 3;
+    vertical-align: bottom;
+    padding: 1rem 2.5rem;
+    box-sizing: border-box;
+    color: #fff;
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+}
+
+.custom-accordion-img ul li > div a * {
+    margin: 0;
+    position: relative;
+    z-index: 5;
+    transform: translateX(-20px);
+  /* @include ellipsis(); */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    white-space: nowrap;
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+}
+
+.custom-accordion-img ul li > div a h3 {
+    text-overflow: clip;
+    top: 140px;
+}
+
+.custom-accordion-img ul li > div a p {
+    top: 140px;
+}
+
+.custom-accordion-img ul:hover li {
+    width: 8%;
+}
+
+.custom-accordion-img ul:hover li:hover {
+    width: 60%;
+}
+
+@media all and (max-width: 768px) {
+    .custom-accordion-img {
+        height: auto;
+    }
+
+    .custom-accordion-img ul li,
+  .custom-accordion-img ul li:hover,
+  .custom-accordion-img ul:hover li,
+  .custom-accordion-img ul:hover li:hover {
+        position: relative;
+        display: table;
+        table-layout: fixed;
+        width: 100%;
+        transition: none;
+    }
+}
+
+/* ====================================================== 
+   <!-- Badges --> 
+/* ====================================================== */
+.badges {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    display: table;
+    margin: 0 auto;
+    margin-bottom: 3rem;
+  /* @include gradient-border( $highlight-color1, $highlight-color2, 3px, 'to right', #fff ); */
+    background: #fff;
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+}
+
+.badges::after {
+  /* Please do not convert it to block elements and set width and height. */
+    content: '';
+    background: #EC5E79;
+    background: linear-gradient(to bottom, #EC5E79 0%, #f60 100%), linear-gradient(to bottom, #EC5E79 0%, #f60 100%);
+    position: absolute;
+    top: -15px;
+    bottom: -15px;
+    right: -15px;
+    left: -15px;
+    z-index: -1;
+    border-radius: inherit;
+}
+
+.badges.circle {
+    border-radius: 50%;
+}
+
+.badges .inner {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
 }
 
 /* ====================================================== 
@@ -6674,135 +6788,6 @@ dl.list-side-by-side:after {
 }
 
 /* ====================================================== 
-   <!-- Pricing --> 
-/* ====================================================== */
-.custom-price {
-    text-align: center;
-    position: relative;
-}
-
-.custom-price:before {
-    padding-top: 2.25rem;
-}
-
-.custom-price:after {
-    padding-bottom: 0;
-}
-
-.custom-price ul,
-.custom-price ol {
-  /*default*/
-    display: block;
-    list-style-type: disc;
-    margin-top: 0.875rem;
-    margin-bottom: 0.875rem;
-    margin-left: 0;
-    margin-right: 0;
-    padding-bottom: 1.7rem;
-  /*custom*/
-    line-height: 2;
-}
-
-.custom-price li {
-  /*default*/
-    list-style: none;
-}
-
-.custom-price li:before {
-    font-family: 'FontAwesome';
-    content: "\f00c";
-    display: inline-block;
-    margin-right: .4rem;
-}
-
-.custom-price .hr {
-    margin: 1.5rem 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.custom-price .border-hover {
-    margin-bottom: 1.5rem;
-}
-
-.custom-price .border {
-    padding-top: 0.875rem;
-    position: relative;
-    box-shadow: 0 22px 40px 0 #eef4fc;
-    border-radius: 10px;
-    background: #fff;
-    transition: .1s ease-in-out;
-}
-
-.custom-price .border:hover {
-    box-shadow: 0 31px 32px 0 #cbdfee;
-}
-
-.custom-price .level {
-    font-size: 0.7rem;
-    text-align: center;
-    text-indent: 0.875rem;
-    text-transform: uppercase;
-    position: relative;
-    z-index: 3;
-    font-weight: 700;
-    opacity: 0.35;
-}
-
-.custom-price .num {
-    color: #EC5E79;
-    font-weight: 700;
-    font-size: 3.5rem;
-    margin-top: 0.875rem;
-}
-
-.custom-price .currency {
-    font-size: 0.875rem;
-}
-
-.custom-price .period {
-    font-size: 12px;
-}
-
-.custom-price .period:before {
-    content: '/';
-    padding-right: .1rem;
-}
-
-.custom-price .detail {
-    text-align: left;
-    padding-bottom: 1.125rem;
-    padding-left: 1rem;
-    font-size: 0.875rem;
-}
-
-.custom-price .excerpt {
-    height: auto;
-    padding: 0 0.875rem;
-    font-size: 0.875rem;
-    opacity: 0.65;
-}
-
-.custom-price .excerpt p {
-    line-height: 1.5;
-}
-
-.custom-price .bg {
-    padding-top: 1.875rem;
-    height: auto;
-}
-
-.custom-price .border.active .num,
-.custom-price .border.active .excerpt,
-.custom-price .border.active .detail,
-.custom-price .border.active .level {
-    color: #fff !important;
-}
-
-.custom-price .border.active .excerpt {
-    opacity: 0.65;
-}
-
-/* ====================================================== 
    <!-- Progress Bar --> 
 /* ====================================================== */
 /* 
@@ -8732,6 +8717,135 @@ dl.list-side-by-side:after {
 }
 
 /* ====================================================== 
+   <!-- Pricing --> 
+/* ====================================================== */
+.custom-price {
+    text-align: center;
+    position: relative;
+}
+
+.custom-price:before {
+    padding-top: 2.25rem;
+}
+
+.custom-price:after {
+    padding-bottom: 0;
+}
+
+.custom-price ul,
+.custom-price ol {
+  /*default*/
+    display: block;
+    list-style-type: disc;
+    margin-top: 0.875rem;
+    margin-bottom: 0.875rem;
+    margin-left: 0;
+    margin-right: 0;
+    padding-bottom: 1.7rem;
+  /*custom*/
+    line-height: 2;
+}
+
+.custom-price li {
+  /*default*/
+    list-style: none;
+}
+
+.custom-price li:before {
+    font-family: 'FontAwesome';
+    content: "\f00c";
+    display: inline-block;
+    margin-right: .4rem;
+}
+
+.custom-price .hr {
+    margin: 1.5rem 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.custom-price .border-hover {
+    margin-bottom: 1.5rem;
+}
+
+.custom-price .border {
+    padding-top: 0.875rem;
+    position: relative;
+    box-shadow: 0 22px 40px 0 #eef4fc;
+    border-radius: 10px;
+    background: #fff;
+    transition: .1s ease-in-out;
+}
+
+.custom-price .border:hover {
+    box-shadow: 0 31px 32px 0 #cbdfee;
+}
+
+.custom-price .level {
+    font-size: 0.7rem;
+    text-align: center;
+    text-indent: 0.875rem;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 3;
+    font-weight: 700;
+    opacity: 0.35;
+}
+
+.custom-price .num {
+    color: #EC5E79;
+    font-weight: 700;
+    font-size: 3.5rem;
+    margin-top: 0.875rem;
+}
+
+.custom-price .currency {
+    font-size: 0.875rem;
+}
+
+.custom-price .period {
+    font-size: 12px;
+}
+
+.custom-price .period:before {
+    content: '/';
+    padding-right: .1rem;
+}
+
+.custom-price .detail {
+    text-align: left;
+    padding-bottom: 1.125rem;
+    padding-left: 1rem;
+    font-size: 0.875rem;
+}
+
+.custom-price .excerpt {
+    height: auto;
+    padding: 0 0.875rem;
+    font-size: 0.875rem;
+    opacity: 0.65;
+}
+
+.custom-price .excerpt p {
+    line-height: 1.5;
+}
+
+.custom-price .bg {
+    padding-top: 1.875rem;
+    height: auto;
+}
+
+.custom-price .border.active .num,
+.custom-price .border.active .excerpt,
+.custom-price .border.active .detail,
+.custom-price .border.active .level {
+    color: #fff !important;
+}
+
+.custom-price .border.active .excerpt {
+    opacity: 0.65;
+}
+
+/* ====================================================== 
    <!-- Services --> 
 /* ====================================================== */
 .custom-services [class*='col-'],
@@ -9084,20 +9198,6 @@ dl.list-side-by-side:after {
     .custom-lightbox-overlay.no-fixed .lb-container.custom .html > .lb-box {
         width: auto;
     }
-}
-
-/* ====================================================== 
-     <!-- Single Post -->        
-/* ====================================================== */
-/* Post edit link */
-.post-edit-link {
-    display: inline-block;
-    background: #F9F9F9;
-    padding: 0.175rem 0.4375rem;
-    border: 1px solid #DDDDDD;
-    border-radius: 2px;
-    text-decoration: none !important;
-    margin-top: 1.09375rem;
 }
 
 /* ====================================================== 
@@ -9592,6 +9692,20 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 
 .custom-theme-flexslider.custom-parallax-flexslider .custom-theme-slides > .item.right .level-2 {
     transform: translate(50px, -50%);
+}
+
+/* ====================================================== 
+     <!-- Single Post -->        
+/* ====================================================== */
+/* Post edit link */
+.post-edit-link {
+    display: inline-block;
+    background: #F9F9F9;
+    padding: 0.175rem 0.4375rem;
+    border: 1px solid #DDDDDD;
+    border-radius: 2px;
+    text-decoration: none !important;
+    margin-top: 1.09375rem;
 }
 
 /* ====================================================== 
@@ -10891,6 +11005,9 @@ a img.aligncenter {
 /* other */
 .sticky {
     opacity: 1;
+}
+olumns-9 .gallery-caption {
+    display: none;
 }
 
 /* other */

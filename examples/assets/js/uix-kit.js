@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.3.0
- * ## Last Update         :  April 12, 2018
+ * ## Version             :  1.3.1
+ * ## Last Update         :  April 13, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -56,14 +56,16 @@
     31. Retina Graphics for Website 
     32. Scroll Reveal 
     33. Show More Less 
-    34. Custom Lightbox 
-    35. Slideshow ( with custom flexslider ) 
-    36. Smooth Scrolling When Clicking An Anchor Link 
-    37. Source Code 
-    38. Sticky Elements 
-    39. Tabs 
-    40. Testimonials Carousel 
-    41. Text effect 
+    34. Source Code 
+    35. Sticky Elements 
+    36. Tabs 
+    37. Testimonials Carousel 
+    38. Text effect 
+    39. Timeline 
+    40. AJAX 
+    41. Smooth Scrolling When Clicking An Anchor Link 
+    42. Slideshow ( with custom flexslider ) 
+    43. Custom Lightbox 
 
 
 */
@@ -4650,6 +4652,40 @@ theme = ( function ( theme, $, window, document ) {
 
 /* 
  *************************************
+ * <!-- Bulleted List -->
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ) {
+		
+
+		// Icon bulleted lists
+		$( '[data-list-bullet]' ).each( function() {
+			var bullet = $( this ).attr( 'data-list-bullet' );
+			$( this ).find( 'li' ).prepend( '<i class="'+bullet+'" aria-hidden="true"></i>' );
+		});
+
+		
+	
+		
+	};
+	
+		
+    theme.bulletedList = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+/* 
+ *************************************
  * <!-- Posts List With Ajax -->
  *************************************
  */
@@ -5139,40 +5175,6 @@ theme = ( function ( theme, $, window, document ) {
 }( theme, jQuery, window, document ) );
 
 
-
-
-/* 
- *************************************
- * <!-- Bulleted List -->
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
-
-		// Icon bulleted lists
-		$( '[data-list-bullet]' ).each( function() {
-			var bullet = $( this ).attr( 'data-list-bullet' );
-			$( this ).find( 'li' ).prepend( '<i class="'+bullet+'" aria-hidden="true"></i>' );
-		});
-
-		
-	
-		
-	};
-	
-		
-    theme.bulletedList = {
-        documentReady : documentReady        
-    };
-
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
 
 
 /* 
@@ -6147,26 +6149,19 @@ theme = ( function ( theme, $, window, document ) {
 			
 			/* Parallax scrolling effect with embedded HTML elements */
 			$( '.parallax' ).each(function() {
-				var $this       = $( this ),
-					$curImg     = $this.find( '.parallax-img' ),
-					dataW       = $this.data( 'width' ),
-					dataImg     = $curImg.attr( 'src' ),
-					dataSkew    = $this.data( 'skew' ),
-					dataSpeed   = $this.data( 'speed' ),
-					dataOverlay = $this.data( 'overlay-bg' ),
-					dataElSpeed = $this.find( '.parallax-element' ).data( 'el-speed' ),	
-					curImgH     = null,
-					curImgW     = null,
-					curSize     = 'cover',
-				    curAtt      = 'fixed';
+				var $this            = $( this ),
+					$curImg          = $this.find( '.parallax-img' ),
+					dataImg          = $curImg.attr( 'src' ),
+					dataSkew         = $this.data( 'skew' ),
+					dataSpeed        = $this.data( 'speed' ),
+					dataOverlay      = $this.data( 'overlay-bg' ),
+					dataFullyVisible = $this.data( 'fully-visible' ),
+					dataElSpeed      = $this.find( '.parallax-element' ).data( 'el-speed' ),	
+					curImgH          = null,
+					curImgW          = null,
+					curSize          = 'cover',
+				    curAtt           = 'fixed';
 				
-				
-				if( typeof dataW != typeof undefined ) {
-					$this.css( {
-						'width': dataW 
-					} );
-	
-				}
 				
 				if( 
 					typeof dataOverlay === typeof undefined ||
@@ -6181,10 +6176,13 @@ theme = ( function ( theme, $, window, document ) {
 					dataSpeed = 0;
 				}	
 				
-				if( typeof dataElSpeed === typeof undefined ) { // If there is no data-xxx, save current source to it
+				if( typeof dataElSpeed === typeof undefined ) {
 					dataElSpeed = 0;
 				}	
 				
+				if( typeof dataFullyVisible === typeof undefined ) {
+					dataFullyVisible = false;
+				}	
 				
 				//Trigger a callback when the selected images are loaded
 				//
@@ -6218,6 +6216,10 @@ theme = ( function ( theme, $, window, document ) {
 						'height': newH + 'px'
 					} );	
 					$curImg.css( 'max-height', newH + 'px' );	
+				 } else {
+					$this.css( {
+						'height': $this.height() + 'px'
+					} );	
 				 }
 				
 				
@@ -6252,15 +6254,27 @@ theme = ( function ( theme, $, window, document ) {
 					curSize = 'contain';
 					curAtt  = 'scroll';
 				}
-				
-				
+	
 				//Determine image height and parallax container height
-				//If the height is the same, be sure to use the cover attribute
+				//If the height is the same, higher or lower than the height of the container height, 
+				//be sure to use the cover attribute
 				if ( curImgH <= $this.height() ) {
 					curSize = 'cover';
 				}
 				
+				//Whether to display all pictures, including the edges
+				if ( dataFullyVisible ) {
+					
+					if ( curImgW < w ) {
+						curSize = 'cover';
+					} else {
+						curSize = 'contain';
+					}
+					
+				}
 				
+				
+				//console.log( 'Height: ' +curImgH + '===' + $this.height() + ' | Width: ' + curImgW + '===' + w + ' | ' + curSize );
 				
 				//Add background image to parallax container
 				if( typeof dataImg != typeof undefined ) {
@@ -8649,8 +8663,5 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
-
-
-jQuery, window, document ) );
 
 

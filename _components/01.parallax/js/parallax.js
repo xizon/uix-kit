@@ -70,26 +70,19 @@ theme = ( function ( theme, $, window, document ) {
 			
 			/* Parallax scrolling effect with embedded HTML elements */
 			$( '.parallax' ).each(function() {
-				var $this       = $( this ),
-					$curImg     = $this.find( '.parallax-img' ),
-					dataW       = $this.data( 'width' ),
-					dataImg     = $curImg.attr( 'src' ),
-					dataSkew    = $this.data( 'skew' ),
-					dataSpeed   = $this.data( 'speed' ),
-					dataOverlay = $this.data( 'overlay-bg' ),
-					dataElSpeed = $this.find( '.parallax-element' ).data( 'el-speed' ),	
-					curImgH     = null,
-					curImgW     = null,
-					curSize     = 'cover',
-				    curAtt      = 'fixed';
+				var $this            = $( this ),
+					$curImg          = $this.find( '.parallax-img' ),
+					dataImg          = $curImg.attr( 'src' ),
+					dataSkew         = $this.data( 'skew' ),
+					dataSpeed        = $this.data( 'speed' ),
+					dataOverlay      = $this.data( 'overlay-bg' ),
+					dataFullyVisible = $this.data( 'fully-visible' ),
+					dataElSpeed      = $this.find( '.parallax-element' ).data( 'el-speed' ),	
+					curImgH          = null,
+					curImgW          = null,
+					curSize          = 'cover',
+				    curAtt           = 'fixed';
 				
-				
-				if( typeof dataW != typeof undefined ) {
-					$this.css( {
-						'width': dataW 
-					} );
-	
-				}
 				
 				if( 
 					typeof dataOverlay === typeof undefined ||
@@ -104,10 +97,13 @@ theme = ( function ( theme, $, window, document ) {
 					dataSpeed = 0;
 				}	
 				
-				if( typeof dataElSpeed === typeof undefined ) { // If there is no data-xxx, save current source to it
+				if( typeof dataElSpeed === typeof undefined ) {
 					dataElSpeed = 0;
 				}	
 				
+				if( typeof dataFullyVisible === typeof undefined ) {
+					dataFullyVisible = false;
+				}	
 				
 				//Trigger a callback when the selected images are loaded
 				//
@@ -141,6 +137,10 @@ theme = ( function ( theme, $, window, document ) {
 						'height': newH + 'px'
 					} );	
 					$curImg.css( 'max-height', newH + 'px' );	
+				 } else {
+					$this.css( {
+						'height': $this.height() + 'px'
+					} );	
 				 }
 				
 				
@@ -175,15 +175,27 @@ theme = ( function ( theme, $, window, document ) {
 					curSize = 'contain';
 					curAtt  = 'scroll';
 				}
-				
-				
+	
 				//Determine image height and parallax container height
-				//If the height is the same, be sure to use the cover attribute
+				//If the height is the same, higher or lower than the height of the container height, 
+				//be sure to use the cover attribute
 				if ( curImgH <= $this.height() ) {
 					curSize = 'cover';
 				}
 				
+				//Whether to display all pictures, including the edges
+				if ( dataFullyVisible ) {
+					
+					if ( curImgW < w ) {
+						curSize = 'cover';
+					} else {
+						curSize = 'contain';
+					}
+					
+				}
 				
+				
+				//console.log( 'Height: ' +curImgH + '===' + $this.height() + ' | Width: ' + curImgW + '===' + w + ' | ' + curSize );
 				
 				//Add background image to parallax container
 				if( typeof dataImg != typeof undefined ) {

@@ -55,11 +55,11 @@
         
        
         <!-- Theme  -->
-        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTUyMzU0NTI1MjM4Ng"/>
+        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTUyMzU5MzE1NzQ5Ng"/>
         
         
          <!--[if lt IE 10]>
-           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTUyMzU0NTI1MjM4Ng" />
+           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTUyMzU5MzE1NzQ5Ng" />
         <![endif]-->
         
         
@@ -207,13 +207,14 @@
 														<li><a href="card.html">Card</a></li>
 														<li><a href="tabs.html">Tabs</a></li>
 														<li><a href="accordion.html">Accordion</a></li>
+														<li><a href="accordion-img.html">Accordion Background Images</a></li>
 														<li><a href="counter.html">Counter</a></li>
 														<li><a href="video-background.html">Video BG</a></li>
 														<li><a href="progress-bar.html">Progress Bar</a></li>
 														<li><a href="modal-dialog.html">Modal UI</a></li>
 														<li><a href="parallax.html">Parallax</a></li>
 														<li><a href="parallax2.html">Parallax 2</a></li>
-														<li><a href="scroll-reveal.html">Scroll Reveal</a></li>     
+														    
 														
 														
 														
@@ -224,6 +225,7 @@
 												<li>
 													<ul class="sub-menu">
 														<li><span class="multi-column-title">Web Elements (Part 2)</span></li>
+														<li><a href="scroll-reveal.html">Scroll Reveal</a></li>
 														<li><a href="footer-templates.html">Footer Templates</a></li>
 														<li><a href="pagination.html">Pagination</a></li>
 														<li><a href="breadcrumbs.html">Breadcrumbs</a></li>
@@ -320,7 +322,7 @@
         <!-- Parallax & Overlay Demo
         ============================================= --> 
         <section class="space-none">
-            <div class="parallax height-100" data-overlay-bg="false" data-skew="0" data-speed="0.1">
+            <div class="parallax height-100" data-fully-visible="false" data-overlay-bg="false" data-skew="0" data-speed="0.1">
                 <img class="parallax-img" src="assets-demo/images/spiral-galaxy-1920x1080.jpg" alt="">
                 <div class="pos-vertical-align t-c">
                     <h2>Fulscreen + Vertically Centered Text</h2>
@@ -329,7 +331,7 @@
         </section>
         
         <section class="space-sm">
-            <div class="parallax height-100 font-white" data-overlay-bg="rgba(0,0,0,.6)" data-skew="0" data-speed="0.4">
+            <div class="parallax height-100 font-white" data-fully-visible="false" data-overlay-bg="rgba(0,0,0,.6)" data-skew="0" data-speed="0.4">
                 <img class="parallax-img" src="assets-demo/images/spiral-galaxy-1920x1080.jpg" alt="">
                 
 				<div class="pos-vertical-align t-c">
@@ -345,7 +347,7 @@
             
             
         <section class="space-sm">
-            <div class="parallax height-100" data-overlay-bg="false" data-skew="0" data-speed="0.4">
+            <div class="parallax height-100" data-fully-visible="false" data-overlay-bg="false" data-skew="0" data-speed="0.4">
                 <img class="parallax-img" src="assets-demo/images/spiral-galaxy-1920x1080.jpg" alt="">
                 <div class="pos-normal-align t-c">
                     <h2>Fulscreen + Normal Text</h2>
@@ -359,7 +361,7 @@
             
         
         <section class="space-sm">
-            <div class="parallax height-30" data-overlay-bg="false" data-skew="0" data-speed="0.1">
+            <div class="parallax height-30" data-fully-visible="false" data-overlay-bg="false" data-skew="0" data-speed="0.1">
                 <img class="parallax-img" src="assets-demo/images/spiral-galaxy-1920x1080.jpg" alt="">
                 <div class="pos-vertical-align t-c">
                     <h2>Has class "height-30"</h2>
@@ -370,14 +372,14 @@
         
         
         <section class="space-sm">
-            <div class="parallax font-white" data-overlay-bg="rgba(0,0,0,.6)" data-skew="0" data-speed="0.3">
-                <img class="parallax-img" src="assets-demo/images/spiral-galaxy-1920x309.jpg" alt="">
+            <div class="parallax" data-fully-visible="true" data-overlay-bg="false" data-skew="0" data-speed="0.3">
+                <img class="parallax-img" src="assets-demo/images/spiral-galaxy-1920x600.jpg" alt="">
                 <div class="pos-vertical-align t-c">
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">
                             <h2>
-								Small Image
-								<p class="h4">Has Overlay Background</p>
+								Small Image 1920 x 600
+								<p class="h4">The image is fully visible</p>
                             </h2>
                         </div>
                     </div>
@@ -388,10 +390,27 @@
         </section>
         
         
-        
+        <section class="space-sm">
+            <div class="parallax font-white ggg" data-fully-visible="false" data-overlay-bg="rgba(0,0,0,.6)" data-skew="0" data-speed="0.3">
+                <img class="parallax-img" src="assets-demo/images/spiral-galaxy-1920x309.jpg" alt="">
+                <div class="pos-vertical-align t-c">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <h2>
+								Small Image 1920 x 309
+								<p class="h4">Has Overlay Background</p>
+                            </h2>
+                        </div>
+                    </div>
+                    <!-- .row end -->
+                </div>
+                <!-- .pos-vertical-align  end -->
+            </div>
+        </section>
+         
         
         <section class="space-sm">
-            <div class="parallax" data-overlay-bg="false" data-skew="-3" data-speed="0.3">
+            <div class="parallax" data-fully-visible="false" data-overlay-bg="false" data-skew="-3" data-speed="0.3">
                 <img class="parallax-img" src="assets-demo/images/spiral-galaxy-1920x309.jpg" alt="">
                 <div class="pos-vertical-align t-c">
                     <h2 class="skew-element">Skew Parallax Effect</h2>
@@ -406,7 +425,7 @@
         ============================================= -->    
         <footer class="footer-main-container">
             <div class="container">
-				<nav class="pull-left">
+				<nav class="pull-left t-l mobile-center">
 					<ul>
 						<li>
 							<a href="https://uiux.cc">
@@ -425,7 +444,7 @@
 						</li>
 					</ul>
 				</nav>
-				<div class="pull-right">
+				<div class="pull-right t-r mobile-center">
 					Copyright &copy; Uix Kit 2018.  |  All rights reserved. Created by UIUX Lab.
 				</div>
               
@@ -472,7 +491,7 @@
 			"homeUrl"     :""  //Eg. https://uiux.cc
 		};
     </script>  
-    <script src="assets/js/uix-kit.min.js?ver=MTUyMzU0NTI1MjM4Ng"></script>
+    <script src="assets/js/uix-kit.min.js?ver=MTUyMzU5MzE1NzQ5Ng"></script>
 
 
 

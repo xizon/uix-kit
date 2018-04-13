@@ -1,0 +1,133 @@
+/* ====================================================== 
+    <!-- Accordion Background Images -->  
+/* ====================================================== */
+
+// Accordion Height
+$accordion-img-height: 250px;
+
+// Position text along bottom
+$text-offset: $accordion-img-height - 110;
+
+.custom-accordion-img {
+
+	width: 100%;
+	height: $accordion-img-height;
+	overflow: hidden;
+
+	ul {
+
+		width: 100%;
+		display: table;
+		table-layout: fixed;
+		margin: 0;
+		padding: 0;
+		font-size: 0; /*Fighting the Space Between Inline Block Elements*/
+
+		li {
+			display: table-cell;
+			vertical-align: bottom;
+			position:  relative;
+			width: 16.66666666666667%; // 6 into 100
+			height: $accordion-img-height;
+			font-size: 1rem;/*Fighting the Space Between Inline Block Elements*/
+			
+			background-position: center center;
+			background-repeat: no-repeat;
+
+
+			@include transition-default();
+			
+			> img {
+				position: absolute;
+				left: 0;
+				top: 0;
+				
+			}
+
+			> div {
+				
+				
+				a {
+					display: block;
+					height: $accordion-img-height;
+					width: 100%;
+					position: relative;
+					z-index: 3;
+					vertical-align: bottom;
+					padding: 1rem 2.5rem;
+					box-sizing: border-box;
+					color: #fff;
+					@include transition-default();
+
+					* {
+						margin: 0;
+						position: relative;
+						z-index: 5;
+						transform: translateX(-20px);
+
+						@include ellipsis();
+						@include transition-default();
+
+					}
+
+					h3 {
+						text-overflow: clip;
+						top: $text-offset;
+					}
+
+					p {
+
+						top: $text-offset;
+
+					}
+
+				}
+
+			}
+
+		}
+
+
+		&:hover {
+			li { 
+				width: 8%; 
+
+				&:hover {
+					width: 60%;
+					
+				}	
+
+			}	
+		}
+
+
+	}
+
+}
+
+// Stack items
+@media all and (max-width:  768px) {
+
+	.custom-accordion-img {
+
+		height: auto;
+
+		ul,
+		ul:hover {
+
+			li,
+			li:hover {
+
+				position: relative;
+				display: table;
+				table-layout: fixed;
+				width: 100%;
+				transition: none;
+
+			}
+
+		}
+
+	}
+
+}

@@ -56,18 +56,34 @@
 
 .fl {
     float: left;
+	
+	&.mobile-none {
+		float: none;
+	}
 }
 
 .fr {
     float: right;
+	
+	&.mobile-none {
+		float: none;
+	}
 }
 
 .t-r {
     text-align: right;
+	
+	&.mobile-center {
+		text-align: center;
+	}	
 }
 
 .t-l {
     text-align: left;
+	
+	&.mobile-center {
+		text-align: center;
+	}
 }
 
 .t-c {
@@ -173,17 +189,18 @@
 }
 
 @media all and (max-width: 768px) {
-	.height-100, 
-	.height-90, 
-	.height-80, 
-	.height-70, 
-	.height-60, 
-	.height-50, 
-	.height-40, 
-	.height-30, 
-	.height-20, 
-	.height-10 {
+	.height-100:not(.mobile-still), 
+	.height-90:not(.mobile-still), 
+	.height-80:not(.mobile-still), 
+	.height-70:not(.mobile-still), 
+	.height-60:not(.mobile-still), 
+	.height-50:not(.mobile-still), 
+	.height-40:not(.mobile-still), 
+	.height-30:not(.mobile-still), 
+	.height-20:not(.mobile-still), 
+	.height-10:not(.mobile-still) {
 	    height: auto !important;
+		
 	}
 }
 
