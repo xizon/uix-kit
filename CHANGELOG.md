@@ -1,6 +1,6 @@
 # Changelog
 
-#### = 1.3.2 (April 13, 2018) =
+#### = 1.3.3 (April 16, 2018) =
 
 * New: Add a new module "Accordion Background Images".
 * Fix: Fixed some bugs for parallax module.

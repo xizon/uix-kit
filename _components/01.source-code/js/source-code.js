@@ -50,7 +50,7 @@ theme = ( function ( theme, $, window, document ) {
 			
 			pageBodyCode   = removeElements( pageBodyCode, '#view-source, #source-code' );
 			pageBodyCode   = pageBodyCode.replace(/[<>]/g, function(m) { return {'<':'&lt;','>':'&gt;'}[m]; });
-			pageHeaderCode = pageHeaderCode.replace(/[<>]/g, function(m) { return {'<':'&lt;','>':'&gt;'}[m]; })
+			pageHeaderCode = pageHeaderCode.replace(/[<>]/g, function(m) { return {'<':'&lt;','>':'&gt;'}[m]; });
 
 
 			$("<pre />", {

@@ -347,6 +347,73 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 
 }
 
+
+/*----- Next/Prev Image Thumbnail In Navigation -----*/
+.custom-prevnext-thumb-nav {
+	display: table;
+	width: 100%;
+	table-layout: fixed;
+	margin-top: 1.75rem;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	width: calc(100% - 30px);
+
+	
+	a > span {
+		@include transition-default();
+		width: 100px;
+		height: 100px;
+		border-radius: 50%;
+		display: inline-block;
+		overflow: hidden;
+		transform: scale(.7);
+		opacity: .5;
+		@include outer-shadow();
+		
+		img {
+			width: 100%;
+			height: 100%;
+		}
+	}
+	
+	
+	> {
+		* {
+			display: table-cell;
+		}
+		a {
+			width: 50px;
+			
+			&:hover {
+				> span {
+					transform: scale(1);
+					opacity: 1;
+				}
+			}	
+
+		}
+	}
+	
+	.thumb-prev {
+		&.disabled {
+			display: none;
+		}
+		
+	}
+	.thumb-next {
+		
+		text-align: right;
+		
+		&.disabled {
+			display: none;
+		}	
+		
+	
+		
+	}
+
+}
 /* 
  ---------------------------
  3) Primary Slideshow  (with dynamic min/max ranges )      

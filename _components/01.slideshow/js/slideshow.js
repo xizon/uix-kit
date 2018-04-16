@@ -19,17 +19,17 @@ theme = ( function ( theme, $, window, document ) {
 		/*
 		 * Return an event from callback function to each slider.
 		 *
-		 * @param  {object} thisSlider          - The current slider.
-		 * @param  {object} sliderWrapper       - The current slider wrapper.
-		 * @param  {number} showItems           - Each slider with dynamic min/max ranges.
-		 * @param  {boolean} parallax           - Whether to use parallax effect.
-		 * @param  {string} countTotalSelector  - Total counter selector.
-		 * @param  {string} countCurSelector    - Current counter selector.
-		 * @param  {string} customControlID     - Custom controls ID.
-		 * @param  {string} fireState           - State of fire asynchronously.
-		 * @return {number}                     - Index of current slider .
+		 * @param  {object} thisSlider             - The current slider.
+		 * @param  {object} sliderWrapper          - The current slider wrapper.
+		 * @param  {number} showItems              - Each slider with dynamic min/max ranges.
+		 * @param  {boolean} parallax              - Whether to use parallax effect.
+		 * @param  {string} countTotalSelector     - Total counter selector.
+		 * @param  {string} countCurSelector       - Current counter selector.
+		 * @param  {string} customPrevNextThumbsID - Custom ID of Next/Prev image thumbnail in navigation.
+		 * @param  {string} fireState              - State of fire asynchronously.
+		 * @return {number}                        - Index of current slider .
 		 */
-        function initslides( sliderWrapper, thisSlider, showItems, parallax, countTotalSelector, countCurSelector, customControlID, fireState ) {
+        function initslides( sliderWrapper, thisSlider, showItems, parallax, countTotalSelector, countCurSelector, customPrevNextThumbsID, fireState ) {
 
 			var prefix       = 'custom-theme',
 				curIndex     = thisSlider.currentSlide,
@@ -43,7 +43,7 @@ theme = ( function ( theme, $, window, document ) {
 				$next        = thisSlider.slides.eq( thisSlider.animatingTo ),
 				$first       = thisSlider.slides.eq( 0 ),
 				curHeight    = $current.height(),
-				curNhumbs    = thisSlider.data( 'mynavthumbs' );
+				curNhumbs    = thisSlider.data( 'my-nav-thumbs' );
 
 
 			// Fires when the slider loads the first slide.
@@ -58,14 +58,47 @@ theme = ( function ( theme, $, window, document ) {
 				
 				//Display Next/Prev image thumbnail in navigation
 				//-------------------------------------		
-				var pimg = thisSlider.slides.eq( curIndex - 1 ).find( 'img' ).attr( 'src' ),
-					nimg = thisSlider.slides.eq( curIndex + 1 ).find( 'img' ).attr( 'src' );
-
+				var prevIndex  = curIndex - 1,
+					nextIndex  = thisSlider.animatingTo + 1,
+					pimg       = '',
+					nimg       = '',
+					$plink     = $( customPrevNextThumbsID+'> a' ),
+					$plinkPrev = $plink.filter( '.thumb-prev' ),
+					$plinkNext = $plink.filter( '.thumb-next' );
 				
-				if ( typeof pimg != typeof undefined ) $( '.custom-navigation'+customControlID+' .custom-theme-flex-prev .thumb' ).html('<img src="'+pimg+'" alt="">');
-				if ( typeof nimg != typeof undefined ) $( '.custom-navigation'+customControlID+' .custom-theme-flex-next .thumb' ).html('<img src="'+nimg+'" alt="">');			
-
+				$plinkPrev.removeClass( 'disabled' );
+				$plinkNext.removeClass( 'disabled' );
 				
+				if ( !thisSlider.vars.animationLoop ) {
+					if ( prevIndex === -1 ) $plinkPrev.addClass( 'disabled' );
+					if ( nextIndex === thisSlider.last + 1 ) $plinkNext.addClass( 'disabled' );	
+				} else {
+					if ( prevIndex === -1 ) prevIndex = thisSlider.last;
+					if ( nextIndex === thisSlider.last + 1 ) nextIndex = 0;
+				}
+
+				//Get images URL
+				pimg = thisSlider.slides.eq( prevIndex ).find( 'img' ).attr( 'src' ),
+				nimg = thisSlider.slides.eq( nextIndex ).find( 'img' ).attr( 'src' )
+
+
+				if ( $( customPrevNextThumbsID ).length > 0 ) {
+					
+					$plink.attr( 'href', 'javascript:void(0);' );
+					
+					
+					if ( typeof pimg != typeof undefined ) $plinkPrev.attr( 'data-goto', prevIndex ).find( '> span' ).html('<img src="'+pimg+'" alt="">');
+					if ( typeof nimg != typeof undefined ) $plinkNext.attr( 'data-goto', nextIndex ).find( '> span' ).html('<img src="'+nimg+'" alt="">');		
+					
+					
+					$plink.on( 'click', function( e ) {
+						e.preventDefault();
+						
+						thisSlider.flexslider( parseInt( $( this ).attr( 'data-goto' ) ) );
+					});
+				}
+				
+		
 				
 				// Fires local videos asynchronously with slider switch.
 				//-------------------------------------
@@ -439,25 +472,29 @@ theme = ( function ( theme, $, window, document ) {
 		 */
 		var $sliderDefault = $( '.custom-theme-flexslider' );
 		$sliderDefault.each( function()  {
-			var $this           = $( this ),
-				dataSpeed       = $this.data( 'speed' ),
-				dataDrag        = $this.data( 'draggable' ),
-				dataWheel       = $this.data( 'wheel' ),
-				dataTiming      = $this.data( 'timing' ),
-				dataLoop        = $this.data( 'loop' ),
-				dataPrev        = $this.data( 'prev' ),
-				dataNext        = $this.data( 'next' ),
-				dataAnim        = $this.data( 'animation' ),
-				dataPaging      = $this.data( 'paging' ),
-				dataArrows      = $this.data( 'arrows' ),
-				dataAuto        = $this.data( 'auto' ),
-				dataNhumbs      = $this.data( 'mynavthumbs' ),
-				dataCountTotal  = $this.data( 'mycounttotal' ),
-				dataCountCur    = $this.data( 'mycountcur' ),
-				customConID     = $this.data( 'mycontrols' ),
-				dataShowItems   = $this.data( 'myshow' ),
-				dataParallax    = $this.data( 'myparallax' ),
-				dataSync        = $this.data( 'mysync' );
+			var $this             = $( this ),
+				dataSpeed         = $this.data( 'speed' ),
+				dataDrag          = $this.data( 'draggable' ),
+				dataWheel         = $this.data( 'wheel' ),
+				dataTiming        = $this.data( 'timing' ),
+				dataLoop          = $this.data( 'loop' ),
+				dataPrev          = $this.data( 'prev' ),
+				dataNext          = $this.data( 'next' ),
+				dataAnim          = $this.data( 'animation' ),
+				dataPaging        = $this.data( 'paging' ),
+				dataArrows        = $this.data( 'arrows' ),
+				dataAuto          = $this.data( 'auto' ),
+				dataNhumbs        = $this.data( 'my-nav-thumbs' ),
+				dataPNThumbs      = $this.data( 'my-prev-next-thumbs' ),
+				dataCountTotal    = $this.data( 'my-count-total' ),
+				dataCountCur      = $this.data( 'my-count-now' ),
+				customConID       = $this.data( 'my-controls' ),
+				dataShowItems     = $this.data( 'my-multiple-items' ),
+				dataParallax      = $this.data( 'my-parallax' ),
+				dataSync          = $this.data( 'my-sync' );
+			
+			
+			
 			
 			// Custom Controls
 			var myControlsContainer, myCustomDirectionNav;
@@ -483,11 +520,13 @@ theme = ( function ( theme, $, window, document ) {
 			if( typeof dataDrag === typeof undefined ) dataDrag = false;
 			if( typeof dataWheel === typeof undefined ) dataWheel = false;
 			if( typeof dataNhumbs === typeof undefined ) dataNhumbs = false;
+			if( typeof dataPNThumbs === typeof undefined ) dataPNThumbs = false;
 			if( typeof dataCountTotal === typeof undefined ) dataCountTotal = false;
 			if( typeof dataCountCur === typeof undefined ) dataCountCur = false;
 			if( typeof dataParallax === typeof undefined ) dataParallax = false;
 		
 			
+		
 			//Make slider image draggable 
 			if ( dataDrag ) slidesExDraggable( $this );
 
@@ -502,6 +541,7 @@ theme = ( function ( theme, $, window, document ) {
 				dataLoop = false;
 			}
 			
+		
 			
 			//Show number of items
 			var my_itemWidth = 0, 
@@ -525,8 +565,8 @@ theme = ( function ( theme, $, window, document ) {
 			
 			
 			// Determine if this slider is added with a synchronization event
-			$( '[data-mysync]' ).each( function()  {
-				var curSync      = $( this ).data( 'mysync' ),
+			$( '[data-my-sync]' ).each( function()  {
+				var curSync      = $( this ).data( 'my-sync' ),
 					thisSliderID = $this.attr( 'id' );
 				
 				
@@ -534,8 +574,9 @@ theme = ( function ( theme, $, window, document ) {
 					curSync = curSync.toString().replace( '#', '' ).replace( '.', '' );
 				}
 				
+				
 				if( typeof thisSliderID != typeof undefined && thisSliderID == curSync ) {
-					dataAuto = false;
+					dataAuto = false; //Set it not to scroll automatically
 					dataPaging = false;
 					
 					// break out of jQuery each Loop
@@ -576,13 +617,13 @@ theme = ( function ( theme, $, window, document ) {
 				
 				//Fires when the slider loads the first slide.
 				start: function( slider ) {
-					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, customConID, 'start' );
+					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, dataPNThumbs, 'start' );
 
 				},
 				
 				//Fires asynchronously with each slider animation.
 				before: function( slider ) {
-					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, customConID, 'before' );
+					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, dataPNThumbs, 'before' );
 					
 					// Call the updateChildrenSlides which itterates through all children slides 
 					if( typeof dataSync != typeof undefined && dataSync != '' && dataSync != 0 ) {
@@ -595,14 +636,14 @@ theme = ( function ( theme, $, window, document ) {
 				
 				//Fires after each slider animation completes.
 				after: function( slider ) {
-					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, customConID, 'after' );
+					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, dataPNThumbs, 'after' );
 
 					
 				},
 				
 				//Fires when the slider reaches the last slide (asynchronous).
 				end: function( slider ) {
-					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, customConID, 'end' );
+					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, dataPNThumbs, 'end' );
 				}
 			});
 			

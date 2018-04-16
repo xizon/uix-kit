@@ -55,11 +55,11 @@
         
        
         <!-- Theme  -->
-        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTUyMzYxNzQ1MzU1NA"/>
+        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTUyMzg1MTk3MTQ5OQ"/>
         
         
          <!--[if lt IE 10]>
-           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTUyMzYxNzQ1MzU1NA" />
+           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTUyMzg1MTk3MTQ5OQ" />
         <![endif]-->
         
         
@@ -342,13 +342,14 @@
         ====================================================== -->
         <div class="custom-theme-flexslider custom-primary-flexslider" 
              data-draggable="true" 
-             data-mynavthumbs="false"
-             data-mycontrols="false"
-             data-myshow="false"
-             data-mycounttotal="false"
-             data-mycountcur="false"
-             data-myparallax="false"
-             data-mysync="false"
+             data-my-nav-thumbs="false"
+             data-my-prev-next-thumbs="false"
+             data-my-controls="false"
+             data-my-multiple-items="false"
+             data-my-count-total="false"
+             data-my-count-now="false"
+             data-my-parallax="false"
+             data-my-sync="false"
              data-wheel="false"
              data-speed="600" 
              data-timing="10000" 
@@ -450,7 +451,7 @@
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2 t-c">
                             <h2>Parallax Effect</h2>
-                            <p>Set the <code>data-myparallax</code> property to make parallax effect.</p>
+                            <p>Set the <code>data-my-parallax</code> property to make parallax effect.</p>
                         </div>
                     </div>
                     <!-- .row end -->
@@ -466,12 +467,13 @@
         ====================================================== -->
         <div class="custom-theme-flexslider custom-parallax-flexslider" 
              data-draggable="true" 
-             data-mynavthumbs="false"
-             data-mycontrols="false"
-             data-myshow="false"
-             data-mycounttotal="false"
-             data-mycountcur="false"
-             data-myparallax="true"
+             data-my-nav-thumbs="false"
+             data-my-prev-next-thumbs="false"
+             data-my-controls="false"
+             data-my-multiple-items="false"
+             data-my-count-total="false"
+             data-my-count-now="false"
+             data-my-parallax="true"
              data-wheel="false"
              data-speed="1500" 
              data-timing="10000" 
@@ -544,13 +546,14 @@
                         
                                     <div class="custom-theme-flexslider"
 										 data-draggable="false" 
-										 data-mynavthumbs="false"
-										 data-mycontrols="false"
-										 data-myshow="false"
-										 data-mycounttotal="false"
-										 data-mycountcur="false"
-										 data-myparallax="false"
-										 data-mysync="false"
+										 data-my-nav-thumbs="false"
+										 data-my-prev-next-thumbs="false"
+										 data-my-controls="false"
+										 data-my-multiple-items="false"
+										 data-my-count-total="false"
+										 data-my-count-now="false"
+										 data-my-parallax="false"
+										 data-my-sync="false"
 										 data-wheel="false"
 										 data-speed="600" 
 										 data-timing="10000" 
@@ -602,7 +605,7 @@
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2 t-c">
                             <h2>Next/Prev Image Thumbnail In Navigation</h2>
-							<p>Set the <code>data-mycontrols</code> property and add <code>&lt;span class=&quot;thumb&quot;&gt;&lt;/span&gt;</code> into <code>&lt;a href=&quot;#&quot; class=&quot;custom-theme-flex-prev&quot;&gt;...&lt;/a&gt;</code> and <code>&lt;a href=&quot;#&quot; class=&quot;custom-theme-flex-next&quot;&gt;...&lt;/a&gt;</code> hyperlinks in order to display Next/Prev image thumbnail in navigation.</p>
+                            <p>Set the <code>data-my-prev-next-thumbs</code> property to display Next/Prev image thumbnail in navigation.</p>
                         </div>
                     </div>
                     <!-- .row end -->
@@ -624,19 +627,20 @@
                         
                                     <div class="custom-theme-flexslider"
 										 data-draggable="false" 
-										 data-mynavthumbs="false"
-										 data-mycontrols=".my-nav-4"
-										 data-myshow="false"
-										 data-mycounttotal="false"
-										 data-mycountcur="false"
-										 data-myparallax="false"
-										 data-mysync="false"
+										 data-my-nav-thumbs="false"
+										 data-my-prev-next-thumbs=".my-prevnext-thumb-nav-4"
+										 data-my-controls=".my-nav-4"
+										 data-my-multiple-items="false"
+										 data-my-count-total="false"
+										 data-my-count-now="false"
+										 data-my-parallax="false"
+										 data-my-sync="false"
 										 data-wheel="false"
 										 data-speed="600" 
 										 data-timing="10000" 
 										 data-loop="true" 
 										 data-paging="false" 
-										 data-arrows="true" 
+										 data-arrows="false" 
 										 data-animation="slide" 
 										 data-auto="true" 
 										 data-prev="<i class='fa fa-chevron-left'></i>" 
@@ -667,11 +671,12 @@
                                     </div>
                                     <!-- .custom-theme-flexslider end -->   
 
-                                    <div class="custom-navigation custom-navigation-thumb my-nav-4">
-										<a href="#" class="custom-theme-flex-prev"><span class="thumb"></span></a>
-                                        <a href="#" class="custom-theme-flex-next"><span class="thumb"></span></a>
-                                    </div> 
-                        
+                                   
+                                    <div class="custom-prevnext-thumb-nav my-prevnext-thumb-nav-4">
+										<a href="#" class="thumb-prev"><span></span></a>
+                                        <a href="#" class="thumb-next"><span></span></a>
+                                    </div>                                 
+                                   
                         
                         
                         </div>
@@ -713,13 +718,14 @@
                         
                                     <div class="custom-theme-flexslider" 
 										 data-draggable="false" 
-										 data-mynavthumbs="false"
-										 data-mycontrols="false"
-										 data-myshow="false"
-										 data-mycounttotal="false"
-										 data-mycountcur="false"
-										 data-myparallax="false"
-										 data-mysync="false"
+										 data-my-nav-thumbs="false"
+										 data-my-prev-next-thumbs="false"
+										 data-my-controls="false"
+										 data-my-multiple-items="false"
+										 data-my-count-total="false"
+										 data-my-count-now="false"
+										 data-my-parallax="false"
+										 data-my-sync="false"
 										 data-wheel="false"
 										 data-speed="600" 
 										 data-timing="20000" 
@@ -783,7 +789,7 @@
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2 t-c">
 							<h2>Custom Navigation Buttons</h2>
-                            <p>Set the <code>data-mycontrols</code> property to be used in lieu of dynamic controlNav.</p>
+                            <p>Set the <code>data-my-controls</code> property to be used in lieu of dynamic controlNav.</p>
                         </div>
                     </div>
                     <!-- .row end -->
@@ -805,13 +811,14 @@
                         
                                     <div class="custom-theme-flexslider"
 										 data-draggable="false" 
-										 data-mynavthumbs="false"
-										 data-mycontrols=".my-nav-1"
-										 data-myshow="false"
-										 data-mycounttotal="false"
-										 data-mycountcur="false"
-										 data-myparallax="false"
-										 data-mysync="false"
+										 data-my-nav-thumbs="false"
+										 data-my-prev-next-thumbs="false"
+										 data-my-controls=".my-nav-1"
+										 data-my-multiple-items="false"
+										 data-my-count-total="false"
+										 data-my-count-now="false"
+										 data-my-parallax="false"
+										 data-my-sync="false"
 										 data-wheel="false"
 										 data-speed="600" 
 										 data-timing="10000" 
@@ -870,7 +877,7 @@
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2 t-c">
 							<h2>Multiple Items</h2>
-							<p>Set the <code>data-myshow</code> property to control the number of items displayed.</p>
+							<p>Set the <code>data-my-multiple-items</code> property to control the number of items displayed.</p>
                             
                         </div>
                     </div>
@@ -892,13 +899,14 @@
                         
                                     <div class="custom-theme-flexslider custom-itemgrid"
 										 data-draggable="false" 
-										 data-mynavthumbs="false"
-										 data-mycontrols="false"
-										 data-myshow="3"
-										 data-mycounttotal="false"
-										 data-mycountcur="false" 
-										 data-myparallax="false"
-										 data-mysync="false"
+										 data-my-nav-thumbs="false"
+										 data-my-prev-next-thumbs="false"
+										 data-my-controls="false"
+										 data-my-multiple-items="3"
+										 data-my-count-total="false"
+										 data-my-count-now="false" 
+										 data-my-parallax="false"
+										 data-my-sync="false"
 										 data-wheel="false"
 										 data-speed="600" 
 										 data-timing="10000" 
@@ -982,7 +990,7 @@
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2 t-c">
 							<h2>Add Counter</h2>
-                            <p>Set the <code>data-mycounttotal</code> and <code>data-mycountcur</code> property to display counter.</p>
+                            <p>Set the <code>data-my-count-total</code> and <code>data-my-count-now</code> property to display counter.</p>
                         </div>
                     </div>
                     <!-- .row end -->
@@ -1004,13 +1012,14 @@
                         
                                     <div class="custom-theme-flexslider"
 										 data-draggable="false" 
-										 data-mynavthumbs="false"
-										 data-mycontrols="false"
-										 data-myshow="false"
-										 data-mycounttotal="p.count em.count"
-										 data-mycountcur="p.count em.current"
-										 data-myparallax="false"
-										 data-mysync="false"
+										 data-my-nav-thumbs="false"
+										 data-my-prev-next-thumbs="false"
+										 data-my-controls="false"
+										 data-my-multiple-items="false"
+										 data-my-count-total="p.count em.count"
+										 data-my-count-now="p.count em.current"
+										 data-my-parallax="false"
+										 data-my-sync="false"
 										 data-wheel="true"
 										 data-speed="600" 
 										 data-timing="10000" 
@@ -1095,7 +1104,7 @@
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2 t-c">
 							<h2>Thumbnail ControlNav Pattern</h2>
-                            <p>Set the <code>data-mynavthumbs</code> property to match a simple pattern.</p>
+                            <p>Set the <code>data-my-nav-thumbs</code> property to match a simple pattern.</p>
                         </div>
                     </div>
                     <!-- .row end -->
@@ -1117,13 +1126,14 @@
                         
                                     <div class="custom-theme-flexslider"
 										 data-draggable="false" 
-										 data-mynavthumbs=".my-navthumbs-1"
-										 data-mycontrols=".my-nav-2"
-										 data-myshow="false"
-										 data-mycounttotal="false"
-										 data-mycountcur="false"
-										 data-myparallax="false"
-										 data-mysync="false"
+										 data-my-nav-thumbs=".my-navthumbs-1"
+										 data-my-prev-next-thumbs="false"
+										 data-my-controls=".my-nav-2"
+										 data-my-multiple-items="false"
+										 data-my-count-total="false"
+										 data-my-count-now="false"
+										 data-my-parallax="false"
+										 data-my-sync="false"
 										 data-wheel="false"
 										 data-speed="600" 
 										 data-timing="10000" 
@@ -1190,7 +1200,7 @@
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2 t-c">
 							<h2>Sync Multiple Sliders</h2>
-                            <p>Set the <code>data-mysync</code> property to sync multiple sliders.</p>
+                            <p>Set the <code>data-my-sync</code> property to sync multiple sliders.</p>
                         </div>
                     </div>
                     <!-- .row end -->
@@ -1216,13 +1226,14 @@
                                        <!-- Slider 1 -->
 										<div class="custom-theme-flexslider"
 											 data-draggable="false" 
-											 data-mynavthumbs="false"
-											 data-mycontrols=".my-nav-3"
-											 data-myshow="false"
-											 data-mycounttotal="false"
-											 data-mycountcur="false"
-											 data-myparallax="false"
-											 data-mysync="#mysync-slider"
+											 data-my-nav-thumbs="false"
+											 data-my-prev-next-thumbs="false"
+											 data-my-controls=".my-nav-3"
+											 data-my-multiple-items="false"
+											 data-my-count-total="false"
+											 data-my-count-now="false"
+											 data-my-parallax="false"
+											 data-my-sync="#my-sync-slider"
 											 data-wheel="false"
 											 data-speed="600" 
 											 data-timing="10000" 
@@ -1271,15 +1282,16 @@
                                     <div class="col-md-6">
                                     
                                            <!-- Slider 2 (Sync -->
-										   <div class="custom-theme-flexslider" id="mysync-slider"
+										   <div class="custom-theme-flexslider" id="my-sync-slider"
 												 data-draggable="false" 
-												 data-mynavthumbs="false"
-												 data-mycontrols="false"
-												 data-myshow="false"
-												 data-mycounttotal="false"
-												 data-mycountcur="false"
-												 data-myparallax="false"
-												 data-mysync="false"
+												 data-my-nav-thumbs="false"
+												 data-my-prev-next-thumbs="false"
+												 data-my-controls="false"
+												 data-my-multiple-items="false"
+												 data-my-count-total="false"
+												 data-my-count-now="false"
+												 data-my-parallax="false"
+												 data-my-sync="false"
 												 data-wheel="false"
 												 data-speed="600" 
 												 data-timing="10000" 
@@ -1396,7 +1408,7 @@
 			"homeUrl"     :""  //Eg. https://uiux.cc
 		};
     </script>  
-    <script src="assets/js/uix-kit.min.js?ver=MTUyMzYxNzQ1MzU1NA"></script>
+    <script src="assets/js/uix-kit.min.js?ver=MTUyMzg1MTk3MTQ5OQ"></script>
 
 
 

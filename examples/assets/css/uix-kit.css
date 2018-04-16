@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.3.2
- * ## Last Update         :  April 13, 2018
+ * ## Version             :  1.3.3
+ * ## Last Update         :  April 16, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -93,8 +93,8 @@
     25. Accordion Background Images 
     26. Badges 
     27. Breadcrumbs 
-    28. Author Card 
-    29. Button 
+    28. Button 
+    29. Author Card 
     30. Counter 
     31. Dropdown Menu 
     32. Equal-width Divs 
@@ -131,6 +131,7 @@
     63. Testimonials Carousel 
     64. Timeline 
     65. ToolTip 
+    66. WordPress Core 
 
 
 
@@ -9526,6 +9527,62 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
     text-align: right;
 }
 
+/*----- Next/Prev Image Thumbnail In Navigation -----*/
+.custom-prevnext-thumb-nav {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    margin-top: 1.75rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: calc(100% - 30px);
+}
+
+.custom-prevnext-thumb-nav a > span {
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: inline-block;
+    overflow: hidden;
+    transform: scale(0.7);
+    opacity: .5;
+  /* @include outer-shadow(); */
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+}
+
+.custom-prevnext-thumb-nav a > span img {
+    width: 100%;
+    height: 100%;
+}
+
+.custom-prevnext-thumb-nav > * {
+    display: table-cell;
+}
+
+.custom-prevnext-thumb-nav > a {
+    width: 50px;
+}
+
+.custom-prevnext-thumb-nav > a:hover > span {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.custom-prevnext-thumb-nav .thumb-prev.disabled {
+    display: none;
+}
+
+.custom-prevnext-thumb-nav .thumb-next {
+    text-align: right;
+}
+
+.custom-prevnext-thumb-nav .thumb-next.disabled {
+    display: none;
+}
+
 /* 
  ---------------------------
  3) Primary Slideshow  (with dynamic min/max ranges )      
@@ -11014,8 +11071,5 @@ a img.aligncenter {
 
 /* other */
 .sticky {
-    opacity: 1;
-}
-cky {
     opacity: 1;
 }
