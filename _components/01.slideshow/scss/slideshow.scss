@@ -329,6 +329,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 	
 	.custom-theme-flex-prev {
 		&.custom-theme-flex-disabled {
+			visibility: hidden;
 			
 		}
 		
@@ -338,7 +339,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 		text-align: right;
 		
 		&.custom-theme-flex-disabled {
-			
+			visibility: hidden;
 		}	
 		
 	
@@ -414,6 +415,29 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 	}
 
 }
+
+
+
+/*----- Timeline -----*/
+.custom-timeline-nav {
+	
+	height: 3px;
+	position: relative;
+	width: 100%;
+	background: rgba(0,0,0,.1);
+	margin: 1rem 0;
+	
+	> span {
+		display: block;
+		width: 0;
+		height: 100%;
+		background: $highlight-color1;
+		@include transition-default();
+	}
+	
+}
+
+
 /* 
  ---------------------------
  3) Primary Slideshow  (with dynamic min/max ranges )      

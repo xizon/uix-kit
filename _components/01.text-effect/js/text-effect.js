@@ -42,7 +42,7 @@ theme = ( function ( theme, $, window, document ) {
                     c++;
                 }
 
-            }, 5 );
+            }, 13 ); 
             
         }
           

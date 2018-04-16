@@ -41,10 +41,10 @@
 	background: none;
 	
 	&.auto-height {
-	    height: calc( 65px + 0.284375rem );
+	    height: 75px;
 	}
 	
-	&.no-height {
+	&.none-height {
 	    height: 0 !important;
 	}
 }
@@ -72,12 +72,31 @@
 
 
 @media all and (max-width: 768px) {
+	
+	
+	.header-area {
+		position: relative;
+
+	}
+	
+	.header-inner {
+		height: calc(185px - 75px);
+
+		&.auto-height {
+			height: 0;
+		}
+
+	}
+
+	
 	.theme-white {
 
 		.header-area {
 			background-color: transparent;
 			border-bottom: none;
-			box-shadow: none;
+			position: relative;
+			
+			
 			&.spy-scroll-fixed {
 				background-color: transparent;
 			}

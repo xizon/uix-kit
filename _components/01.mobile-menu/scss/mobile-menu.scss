@@ -5,19 +5,17 @@
 /* Mobile Menu Toggle */
 .menu-mobile-toggle {
     @include transition-default();
-    position: fixed;
+    position: absolute;
     display: none;
     width: 40px;
     height: 40px;
-    top: 20px;
-    right: 30px;
+    top: 15px;
+    right: 20px;
     z-index: 90001;
     cursor: pointer;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    background: #fff;
     border-radius: 100%;
     transition: .1s ease-in-out;
-    box-shadow: 0px 7px 19px 0px rgba(0, 0, 0, 0.21);
 	
 }
 .menu-mobile-mask {
@@ -73,8 +71,8 @@
         position: absolute;
         top: 14px;
         left: 12px;
-        width: 17px;
-        height: 1px;
+        width: 20px;
+        height: 2px;
         background: #000;
         @include transition-default();
     }

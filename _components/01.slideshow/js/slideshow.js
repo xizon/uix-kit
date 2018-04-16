@@ -15,37 +15,54 @@ theme = ( function ( theme, $, window, document ) {
 			windowWidth        = $window.width(),
 			windowHeight       = $window.height();
 		
-
+	
+		
 		/*
 		 * Return an event from callback function to each slider.
 		 *
 		 * @param  {object} thisSlider             - The current slider.
 		 * @param  {object} sliderWrapper          - The current slider wrapper.
-		 * @param  {number} showItems              - Each slider with dynamic min/max ranges.
-		 * @param  {boolean} parallax              - Whether to use parallax effect.
-		 * @param  {string} countTotalSelector     - Total counter selector.
-		 * @param  {string} countCurSelector       - Current counter selector.
-		 * @param  {string} customPrevNextThumbsID - Custom ID of Next/Prev image thumbnail in navigation.
 		 * @param  {string} fireState              - State of fire asynchronously.
 		 * @return {number}                        - Index of current slider .
 		 */
-        function initslides( sliderWrapper, thisSlider, showItems, parallax, countTotalSelector, countCurSelector, customPrevNextThumbsID, fireState ) {
+        function initslides( sliderWrapper, thisSlider, fireState ) {
 
-			var prefix       = 'custom-theme',
-				curIndex     = thisSlider.currentSlide,
-				count        = thisSlider.count,
-				activeClass  = prefix+'-flex-active-slide',
-				prevClass    = activeClass + '-prev',
-				nextClass    = activeClass + '-next',
-				$items       = thisSlider.find( '.item' ),
-				$current     = thisSlider.slides.eq( curIndex ),
-				$prev        = thisSlider.slides.eq( curIndex - 1 ),
-				$next        = thisSlider.slides.eq( thisSlider.animatingTo ),
-				$first       = thisSlider.slides.eq( 0 ),
-				curHeight    = $current.height(),
-				curNhumbs    = thisSlider.data( 'my-nav-thumbs' );
+			var prefix            = 'custom-theme',
+				curIndex          = thisSlider.currentSlide,
+				count             = thisSlider.count,
+				activeClass       = prefix+'-flex-active-slide',
+				prevClass         = activeClass + '-prev',
+				nextClass         = activeClass + '-next',
+				$items            = thisSlider.find( '.item' ),
+				$current          = thisSlider.slides.eq( curIndex ),
+				$prev             = thisSlider.slides.eq( curIndex - 1 ),
+				$next             = thisSlider.slides.eq( thisSlider.animatingTo ),
+				$first            = thisSlider.slides.eq( 0 ),
+				curHeight         = $current.height(),
+				dataNhumbs        = thisSlider.data( 'my-nav-thumbs' ),
+				dataPNThumbs      = thisSlider.data( 'my-prev-next-thumbs' ),
+				dataTimeline      = thisSlider.data( 'my-nav-timeline' ),
+				dataCountTotal    = thisSlider.data( 'my-count-total' ),
+				dataCountCur      = thisSlider.data( 'my-count-now' ),
+				dataShowItems     = thisSlider.data( 'my-multiple-items' ),
+				dataParallax      = thisSlider.data( 'my-parallax' );
+			
+			
+			if( typeof dataPNThumbs === typeof undefined ) dataPNThumbs = false;
+			if( typeof dataTimeline === typeof undefined ) dataTimeline = false;
+			if( typeof dataCountTotal === typeof undefined ) dataCountTotal = false;
+			if( typeof dataCountCur === typeof undefined ) dataCountCur = false;
+			if( typeof dataParallax === typeof undefined ) dataParallax = false;	
+			
+			
+			//Total counter selector
+			//Current counter selector.
+			var countTotalSelector = ( dataCountTotal ) ? $( dataCountTotal ) : $( 'p.count em.count' ), 
+				countCurSelector   = ( dataCountCur ) ? $( dataCountCur ) : $( 'p.count em.current' );
+			
+			
 
-
+			
 			// Fires when the slider loads the first slide.
 			// Fires after each slider animation completes.
 			if ( fireState == 'start' || fireState == 'after' ) {
@@ -53,50 +70,73 @@ theme = ( function ( theme, $, window, document ) {
 				//Remove the slider loading
 				//-------------------------------------
 				thisSlider.removeClass( prefix+'-flexslider-loading' );
+				
 
+				
+				//With Timeline
+				//-------------------------------------	
+				if ( dataTimeline && dataTimeline != '' ) {
+					var curPerMinWidth = curIndex/count*100 + '%',
+						curPerMaxWidth = (curIndex + 1)/count*100 + '%',
+						curTotalWidth  = $( dataTimeline ).width(),
+						$timelineObj   = $( dataTimeline ).find( '> span' );
+				
+					//Fires animation effect of an element width.
+					$timelineObj.css( {
+						'width'     : curTotalWidth,
+						'transition': 'all ' + parseFloat( thisSlider.vars.slideshowSpeed - thisSlider.vars.animationSpeed ) + 'ms linear'	
+					} );	
+					
+	
+				}
+				
 
+				
 				
 				//Display Next/Prev image thumbnail in navigation
 				//-------------------------------------		
-				var prevIndex  = curIndex - 1,
-					nextIndex  = thisSlider.animatingTo + 1,
-					pimg       = '',
-					nimg       = '',
-					$plink     = $( customPrevNextThumbsID+'> a' ),
-					$plinkPrev = $plink.filter( '.thumb-prev' ),
-					$plinkNext = $plink.filter( '.thumb-next' );
-				
-				$plinkPrev.removeClass( 'disabled' );
-				$plinkNext.removeClass( 'disabled' );
-				
-				if ( !thisSlider.vars.animationLoop ) {
-					if ( prevIndex === -1 ) $plinkPrev.addClass( 'disabled' );
-					if ( nextIndex === thisSlider.last + 1 ) $plinkNext.addClass( 'disabled' );	
-				} else {
-					if ( prevIndex === -1 ) prevIndex = thisSlider.last;
-					if ( nextIndex === thisSlider.last + 1 ) nextIndex = 0;
+				if ( dataPNThumbs && dataPNThumbs != '' ) {
+					var prevIndex  = curIndex - 1,
+						nextIndex  = thisSlider.animatingTo + 1,
+						pimg       = '',
+						nimg       = '',
+						$plink     = $( dataPNThumbs+'> a' ),
+						$plinkPrev = $plink.filter( '.thumb-prev' ),
+						$plinkNext = $plink.filter( '.thumb-next' );
+
+					$plinkPrev.removeClass( 'disabled' );
+					$plinkNext.removeClass( 'disabled' );
+
+					if ( !thisSlider.vars.animationLoop ) {
+						if ( prevIndex === -1 ) $plinkPrev.addClass( 'disabled' );
+						if ( nextIndex === thisSlider.last + 1 ) $plinkNext.addClass( 'disabled' );	
+					} else {
+						if ( prevIndex === -1 ) prevIndex = thisSlider.last;
+						if ( nextIndex === thisSlider.last + 1 ) nextIndex = 0;
+					}
+
+					//Get images URL
+					pimg = thisSlider.slides.eq( prevIndex ).find( 'img' ).attr( 'src' ),
+					nimg = thisSlider.slides.eq( nextIndex ).find( 'img' ).attr( 'src' )
+
+
+					if ( $( dataPNThumbs ).length > 0 ) {
+
+						$plink.attr( 'href', 'javascript:void(0);' );
+
+
+						if ( typeof pimg != typeof undefined ) $plinkPrev.attr( 'data-goto', prevIndex ).find( '> span' ).html('<img src="'+pimg+'" alt="">');
+						if ( typeof nimg != typeof undefined ) $plinkNext.attr( 'data-goto', nextIndex ).find( '> span' ).html('<img src="'+nimg+'" alt="">');		
+
+
+						$plink.on( 'click', function( e ) {
+							e.preventDefault();
+
+							thisSlider.flexslider( parseInt( $( this ).attr( 'data-goto' ) ) );
+						});
+					}	
 				}
 
-				//Get images URL
-				pimg = thisSlider.slides.eq( prevIndex ).find( 'img' ).attr( 'src' ),
-				nimg = thisSlider.slides.eq( nextIndex ).find( 'img' ).attr( 'src' )
-
-
-				if ( $( customPrevNextThumbsID ).length > 0 ) {
-					
-					$plink.attr( 'href', 'javascript:void(0);' );
-					
-					
-					if ( typeof pimg != typeof undefined ) $plinkPrev.attr( 'data-goto', prevIndex ).find( '> span' ).html('<img src="'+pimg+'" alt="">');
-					if ( typeof nimg != typeof undefined ) $plinkNext.attr( 'data-goto', nextIndex ).find( '> span' ).html('<img src="'+nimg+'" alt="">');		
-					
-					
-					$plink.on( 'click', function( e ) {
-						e.preventDefault();
-						
-						thisSlider.flexslider( parseInt( $( this ).attr( 'data-goto' ) ) );
-					});
-				}
 				
 		
 				
@@ -126,9 +166,9 @@ theme = ( function ( theme, $, window, document ) {
 
 				//Thumbnail ControlNav Pattern
 				//-------------------------------------
-				if( typeof curNhumbs != typeof undefined ) {
-					$( '.custom-theme-flexslider-thumbs'+curNhumbs+' > ul > li' ).removeClass( 'active' );
-					$( '.custom-theme-flexslider-thumbs'+curNhumbs+' > ul > li' ).eq( curIndex ).addClass( 'active' );			
+				if ( dataNhumbs && dataNhumbs != '' ) {
+					$( '.custom-theme-flexslider-thumbs'+dataNhumbs+' > ul > li' ).removeClass( 'active' );
+					$( '.custom-theme-flexslider-thumbs'+dataNhumbs+' > ul > li' ).eq( curIndex ).addClass( 'active' );			
 				}
 
 
@@ -149,7 +189,7 @@ theme = ( function ( theme, $, window, document ) {
 				//Return an event from callback function to each slider 
 				//with dynamic min/max ranges.
 				//-------------------------------------
-				if( typeof showItems != typeof undefined && showItems != '' && showItems != 0 ) {
+				if( typeof dataShowItems != typeof undefined && dataShowItems != '' && dataShowItems != 0 ) {
 
 
 					$items.removeClass( activeClass );
@@ -183,18 +223,41 @@ theme = ( function ( theme, $, window, document ) {
 			// Fires asynchronously with each slider animation.
 			if ( fireState == 'before' ) {
 				
+				//Common images style
+				//-------------------------------------	
 				$next.find( 'img' ).addClass( 'active' );
-				
 				$current.find( 'img' ).removeClass( 'active' );
 				$prev.find( 'img' ).removeClass( 'active' );
 				$first.find( 'img' ).removeClass( 'active' );
+
+				//With Timeline
+				//-------------------------------------	
+				if ( dataTimeline && dataTimeline != '' ) {
+					var curTotalWidth  = $( dataTimeline ).width(),
+						$timelineObj   = $( dataTimeline ).find( '> span' );
+				
+					//Fires animation effect of an element width.
+					$timelineObj.css( {
+						'width'     : 0,
+						'transition': 'all 100ms linear'	
+					} );
+					
+
+	
+				}	
+				
+				
 			}
 			
 			
 			// Fires when the slider reaches the last slide (asynchronous).
 			if ( fireState == 'end' ) {
 				
+				
+				//Common images style
+				//-------------------------------------	
 				$first.find( 'img' ).addClass( 'active' );
+		
 				
 			}
 			
@@ -205,7 +268,7 @@ theme = ( function ( theme, $, window, document ) {
 				
 				//Return an event from callback function to each slider to make parallax effect.
 				//-------------------------------------
-				if ( parallax ) {
+				if ( dataParallax ) {
 				
 					
 					var dir = 'left';
@@ -486,12 +549,14 @@ theme = ( function ( theme, $, window, document ) {
 				dataAuto          = $this.data( 'auto' ),
 				dataNhumbs        = $this.data( 'my-nav-thumbs' ),
 				dataPNThumbs      = $this.data( 'my-prev-next-thumbs' ),
+				dataTimeline      = $this.data( 'my-nav-timeline' ),
 				dataCountTotal    = $this.data( 'my-count-total' ),
 				dataCountCur      = $this.data( 'my-count-now' ),
 				customConID       = $this.data( 'my-controls' ),
 				dataShowItems     = $this.data( 'my-multiple-items' ),
 				dataParallax      = $this.data( 'my-parallax' ),
 				dataSync          = $this.data( 'my-sync' );
+			
 			
 			
 			
@@ -521,10 +586,12 @@ theme = ( function ( theme, $, window, document ) {
 			if( typeof dataWheel === typeof undefined ) dataWheel = false;
 			if( typeof dataNhumbs === typeof undefined ) dataNhumbs = false;
 			if( typeof dataPNThumbs === typeof undefined ) dataPNThumbs = false;
+			if( typeof dataTimeline === typeof undefined ) dataTimeline = false;
 			if( typeof dataCountTotal === typeof undefined ) dataCountTotal = false;
 			if( typeof dataCountCur === typeof undefined ) dataCountCur = false;
 			if( typeof dataParallax === typeof undefined ) dataParallax = false;
 		
+			
 			
 		
 			//Make slider image draggable 
@@ -585,13 +652,7 @@ theme = ( function ( theme, $, window, document ) {
 
 
 			});
-			
-			
-			//Display counter
-			var $countTotal = ( dataCountTotal ) ? $( dataCountTotal ) : $( 'p.count em.count' ), 
-				$countCur   = ( dataCountCur ) ? $( dataCountCur ) : $( 'p.count em.current' );
-			
-			
+
 
 			
 			$this.flexslider({
@@ -617,13 +678,13 @@ theme = ( function ( theme, $, window, document ) {
 				
 				//Fires when the slider loads the first slide.
 				start: function( slider ) {
-					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, dataPNThumbs, 'start' );
+					initslides( $this, slider, 'start' );
 
 				},
 				
 				//Fires asynchronously with each slider animation.
 				before: function( slider ) {
-					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, dataPNThumbs, 'before' );
+					initslides( $this, slider, 'before' );
 					
 					// Call the updateChildrenSlides which itterates through all children slides 
 					if( typeof dataSync != typeof undefined && dataSync != '' && dataSync != 0 ) {
@@ -636,14 +697,14 @@ theme = ( function ( theme, $, window, document ) {
 				
 				//Fires after each slider animation completes.
 				after: function( slider ) {
-					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, dataPNThumbs, 'after' );
+					initslides( $this, slider, 'after' );
 
 					
 				},
 				
 				//Fires when the slider reaches the last slide (asynchronous).
 				end: function( slider ) {
-					initslides( $this, slider, dataShowItems, dataParallax, $countTotal, $countCur, dataPNThumbs, 'end' );
+					initslides( $this, slider, 'end' );
 				}
 			});
 			

@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.3.3
+ * ## Version             :  1.3.4
  * ## Last Update         :  April 16, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -69,8 +69,8 @@
     1. Basic 
     2. Table 
     3. Bullet List 
-    4. Helper Classes 
-    5. Typography 
+    4. Typography 
+    5. Helper Classes 
     6. Spacing 
     7. Basic Layout Styles 
     8. Navigation Area 
@@ -112,8 +112,8 @@
     44. Side by Side List 
     45. Side by Side List With Photo 
     46. Fullwidth List of Split 2 
-    47. Fullwidth List of Split 
-    48. Mobile Menu 
+    47. Mobile Menu 
+    48. Fullwidth List of Split 
     49. Modal Dialog 
     50. Mouse Animation Scroll 
     51. Multiple Items Carousel 
@@ -1640,10 +1640,10 @@ section.site-google-map,
 }
 
 .header-inner.auto-height {
-    height: calc( 65px + 0.284375rem);
+    height: 75px;
 }
 
-.header-inner.no-height {
+.header-inner.none-height {
     height: 0 !important;
 }
 
@@ -1662,10 +1662,22 @@ section.site-google-map,
 }
 
 @media all and (max-width: 768px) {
+    .header-area {
+        position: relative;
+    }
+
+    .header-inner {
+        height: calc(185px - 75px);
+    }
+
+    .header-inner.auto-height {
+        height: 0;
+    }
+
     .theme-white .header-area {
         background-color: transparent;
         border-bottom: none;
-        box-shadow: none;
+        position: relative;
     }
 
     .theme-white .header-area.spy-scroll-fixed {
@@ -1697,10 +1709,6 @@ section.site-google-map,
 }
 
 @media all and (max-width: 768px) {
-    .theme-white .brand {
-        display: none;
-    }
-
     .mobile-brand {
         display: block;
     }
@@ -6018,19 +6026,17 @@ dl.list-side-by-side:after {
 .menu-mobile-toggle {
   /* @include transition-default(); */
     transition: all 0.3s ease;
-    position: fixed;
+    position: absolute;
     display: none;
     width: 40px;
     height: 40px;
-    top: 20px;
-    right: 30px;
+    top: 15px;
+    right: 20px;
     z-index: 90001;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
-    background: #fff;
     border-radius: 100%;
     transition: .1s ease-in-out;
-    box-shadow: 0px 7px 19px 0px rgba(0, 0, 0, 0.21);
 }
 
 .menu-mobile-mask {
@@ -6084,8 +6090,8 @@ dl.list-side-by-side:after {
     position: absolute;
     top: 14px;
     left: 12px;
-    width: 17px;
-    height: 1px;
+    width: 20px;
+    height: 2px;
     background: #000;
   /* @include transition-default(); */
     transition: all 0.3s ease;
@@ -9523,8 +9529,16 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
     opacity: 1;
 }
 
+.custom-navigation .custom-theme-flex-prev.custom-theme-flex-disabled {
+    visibility: hidden;
+}
+
 .custom-navigation .custom-theme-flex-next {
     text-align: right;
+}
+
+.custom-navigation .custom-theme-flex-next.custom-theme-flex-disabled {
+    visibility: hidden;
 }
 
 /*----- Next/Prev Image Thumbnail In Navigation -----*/
@@ -9581,6 +9595,24 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 
 .custom-prevnext-thumb-nav .thumb-next.disabled {
     display: none;
+}
+
+/*----- Timeline -----*/
+.custom-timeline-nav {
+    height: 3px;
+    position: relative;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    margin: 1rem 0;
+}
+
+.custom-timeline-nav > span {
+    display: block;
+    width: 0;
+    height: 100%;
+    background: #EC5E79;
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
 }
 
 /* 
