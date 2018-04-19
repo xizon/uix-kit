@@ -12,7 +12,9 @@
 	width: 100%;
 	overflow: hidden;
 	z-index: 1;
+	background: #000;
 
+	
 	.inner {
 		
 		
@@ -23,6 +25,7 @@
 			z-index: 1;
 			width: 100%;
 			opacity: 0;
+			
 			
 			
 			canvas {
@@ -45,7 +48,7 @@
 				opacity: 0;
 			}
 			&.active {
-				transition: all 0.1s ease;
+				transition: all 0.6s ease;
 				transition-delay: 0.6s;
 				opacity: 1;
 			}

@@ -8,7 +8,7 @@
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
  * ## Version             :  1.3.5
- * ## Last Update         :  April 19, 2018
+ * ## Last Update         :  April 20, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -73,8 +73,8 @@
     5. Typography 
     6. Spacing 
     7. Basic Layout Styles 
-    8. Navigation Area 
-    9. Header Area 
+    8. Header Area 
+    9. Navigation Area 
     10. Brand 
     11. Footer 
     12. Video 
@@ -92,49 +92,50 @@
     24. Accordion 
     25. Accordion Background Images 
     26. Advanced Slider (Special Effects) 
-    27. Advanced Slider (Basic) 
-    28. Badges 
-    29. Breadcrumbs 
-    30. Button 
-    31. Author Card 
-    32. Counter 
-    33. Dropdown Menu 
-    34. Equal-width Divs 
-    35. Features 
-    36. Footer Templates 
-    37. Form 
-    38. Form Progress 
-    39. Gallery 
-    40. Custom Core Scripts & Stylesheets 
-    41. Cutom Light Box 
-    42. Brands List 
-    43. Bulleted List 
-    44. Maintain Aspect Ratio List 
-    45. List of Posts 
-    46. List of Split Posts 
-    47. Side by Side List 
-    48. Side by Side List With Photo 
-    49. Fullwidth List of Split 2 
-    50. Fullwidth List of Split 
-    51. Mobile Menu 
-    52. Modal Dialog 
-    53. Mouse Animation Scroll 
-    54. Multiple Items Carousel 
-    55. Parallax 
-    56. Periodical Scroll 
-    57. Pricing 
-    58. Progress Bar 
-    59. Services 
-    60. Show More Less 
-    61. Single Post 
-    62. Slideshow ( with custom flexslider ) 
-    63. Source Code 
-    64. Table Series 
-    65. Tabs 
-    66. Testimonials Carousel 
-    67. Timeline 
-    68. ToolTip 
-    69. WordPress Core 
+    27. Advanced Slider (Special Effects) 
+    28. Advanced Slider (Basic) 
+    29. Badges 
+    30. Breadcrumbs 
+    31. Button 
+    32. Author Card 
+    33. Counter 
+    34. Dropdown Menu 
+    35. Equal-width Divs 
+    36. Features 
+    37. Footer Templates 
+    38. Form 
+    39. Form Progress 
+    40. Gallery 
+    41. Custom Core Scripts & Stylesheets 
+    42. Cutom Light Box 
+    43. Brands List 
+    44. Bulleted List 
+    45. Maintain Aspect Ratio List 
+    46. List of Posts 
+    47. List of Split Posts 
+    48. Side by Side List 
+    49. Side by Side List With Photo 
+    50. Fullwidth List of Split 2 
+    51. Fullwidth List of Split 
+    52. Mobile Menu 
+    53. Modal Dialog 
+    54. Mouse Animation Scroll 
+    55. Multiple Items Carousel 
+    56. Parallax 
+    57. Periodical Scroll 
+    58. Pricing 
+    59. Progress Bar 
+    60. Services 
+    61. Show More Less 
+    62. Single Post 
+    63. Slideshow ( with custom flexslider ) 
+    64. Source Code 
+    65. Table Series 
+    66. Tabs 
+    67. Testimonials Carousel 
+    68. Timeline 
+    69. ToolTip 
+    70. WordPress Core 
 
 
 
@@ -3142,107 +3143,6 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-    <!-- Accordion Background Images -->  
-/* ====================================================== */
-.custom-accordion-img {
-    width: 100%;
-    height: 250px;
-    overflow: hidden;
-}
-
-.custom-accordion-img ul {
-    width: 100%;
-    display: table;
-    table-layout: fixed;
-    margin: 0;
-    padding: 0;
-    font-size: 0;
-  /*Fighting the Space Between Inline Block Elements*/;
-}
-
-.custom-accordion-img ul li {
-    display: table-cell;
-    vertical-align: bottom;
-    position: relative;
-    width: 16.66666666666667%;
-    height: 250px;
-    font-size: 1rem;
-  /*Fighting the Space Between Inline Block Elements*/
-    background-position: center center;
-    background-repeat: no-repeat;
-  /* @include transition-default(); */
-    transition: all 0.3s ease;
-}
-
-.custom-accordion-img ul li > img {
-    position: absolute;
-    left: 0;
-    top: 0;
-}
-
-.custom-accordion-img ul li > div a {
-    display: block;
-    height: 250px;
-    width: 100%;
-    position: relative;
-    z-index: 3;
-    vertical-align: bottom;
-    padding: 1rem 2.5rem;
-    box-sizing: border-box;
-    color: #fff;
-  /* @include transition-default(); */
-    transition: all 0.3s ease;
-}
-
-.custom-accordion-img ul li > div a * {
-    margin: 0;
-    position: relative;
-    z-index: 5;
-    transform: translateX(-20px);
-  /* @include ellipsis(); */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 100%;
-    white-space: nowrap;
-  /* @include transition-default(); */
-    transition: all 0.3s ease;
-}
-
-.custom-accordion-img ul li > div a h3 {
-    text-overflow: clip;
-    top: 140px;
-}
-
-.custom-accordion-img ul li > div a p {
-    top: 140px;
-}
-
-.custom-accordion-img ul:hover li {
-    width: 8%;
-}
-
-.custom-accordion-img ul:hover li:hover {
-    width: 60%;
-}
-
-@media all and (max-width: 768px) {
-    .custom-accordion-img {
-        height: auto;
-    }
-
-    .custom-accordion-img ul li,
-  .custom-accordion-img ul li:hover,
-  .custom-accordion-img ul:hover li,
-  .custom-accordion-img ul:hover li:hover {
-        position: relative;
-        display: table;
-        table-layout: fixed;
-        width: 100%;
-        transition: none;
-    }
-}
-
-/* ====================================================== 
    <!-- Advanced Slider (Special Effects) -->     
 /* ====================================================== */
 /* 
@@ -3255,6 +3155,7 @@ ul.entry-meta {
     width: 100%;
     overflow: hidden;
     z-index: 1;
+    background: #000;
 }
 
 .custom-advanced-slider-sp .inner .item {
@@ -3286,7 +3187,7 @@ ul.entry-meta {
 }
 
 .custom-advanced-slider-sp .inner .item.active {
-    transition: all 0.1s ease;
+    transition: all 0.6s ease;
     transition-delay: 0.6s;
     opacity: 1;
 }
@@ -3422,18 +3323,19 @@ ul.entry-meta {
     opacity: 1;
 }
 
-.custom-advanced-slider.eff-scale .inner .item {
+/* Tests native CSS3 and HTML5 features are available */
+.cssanimations .custom-advanced-slider.eff-scale .inner .item {
     opacity: 0;
     transform: scale(0.8);
 }
 
-.custom-advanced-slider.eff-scale .inner .item.leave {
+.cssanimations .custom-advanced-slider.eff-scale .inner .item.leave {
     transition: all 0.6s ease;
     opacity: 0;
     transform: scale(0.8);
 }
 
-.custom-advanced-slider.eff-scale .inner .item.active {
+.cssanimations .custom-advanced-slider.eff-scale .inner .item.active {
     transition: all 0.6s ease;
     transition-delay: 0.6s;
     opacity: 1;
@@ -3522,6 +3424,107 @@ ul.entry-meta {
 
 .custom-advanced-slider-arrows .next.disabled {
     visibility: hidden;
+}
+
+/* ====================================================== 
+    <!-- Accordion Background Images -->  
+/* ====================================================== */
+.custom-accordion-img {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+
+.custom-accordion-img ul {
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+    margin: 0;
+    padding: 0;
+    font-size: 0;
+  /*Fighting the Space Between Inline Block Elements*/;
+}
+
+.custom-accordion-img ul li {
+    display: table-cell;
+    vertical-align: bottom;
+    position: relative;
+    width: 16.66666666666667%;
+    height: 250px;
+    font-size: 1rem;
+  /*Fighting the Space Between Inline Block Elements*/
+    background-position: center center;
+    background-repeat: no-repeat;
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+}
+
+.custom-accordion-img ul li > img {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.custom-accordion-img ul li > div a {
+    display: block;
+    height: 250px;
+    width: 100%;
+    position: relative;
+    z-index: 3;
+    vertical-align: bottom;
+    padding: 1rem 2.5rem;
+    box-sizing: border-box;
+    color: #fff;
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+}
+
+.custom-accordion-img ul li > div a * {
+    margin: 0;
+    position: relative;
+    z-index: 5;
+    transform: translateX(-20px);
+  /* @include ellipsis(); */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    white-space: nowrap;
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+}
+
+.custom-accordion-img ul li > div a h3 {
+    text-overflow: clip;
+    top: 140px;
+}
+
+.custom-accordion-img ul li > div a p {
+    top: 140px;
+}
+
+.custom-accordion-img ul:hover li {
+    width: 8%;
+}
+
+.custom-accordion-img ul:hover li:hover {
+    width: 60%;
+}
+
+@media all and (max-width: 768px) {
+    .custom-accordion-img {
+        height: auto;
+    }
+
+    .custom-accordion-img ul li,
+  .custom-accordion-img ul li:hover,
+  .custom-accordion-img ul:hover li,
+  .custom-accordion-img ul:hover li:hover {
+        position: relative;
+        display: table;
+        table-layout: fixed;
+        width: 100%;
+        transition: none;
+    }
 }
 
 /* ====================================================== 
@@ -7457,135 +7460,6 @@ dl.list-side-by-side:after {
 }
 
 /* ====================================================== 
-   <!-- Pricing --> 
-/* ====================================================== */
-.custom-price {
-    text-align: center;
-    position: relative;
-}
-
-.custom-price:before {
-    padding-top: 2.25rem;
-}
-
-.custom-price:after {
-    padding-bottom: 0;
-}
-
-.custom-price ul,
-.custom-price ol {
-  /*default*/
-    display: block;
-    list-style-type: disc;
-    margin-top: 0.875rem;
-    margin-bottom: 0.875rem;
-    margin-left: 0;
-    margin-right: 0;
-    padding-bottom: 1.7rem;
-  /*custom*/
-    line-height: 2;
-}
-
-.custom-price li {
-  /*default*/
-    list-style: none;
-}
-
-.custom-price li:before {
-    font-family: 'FontAwesome';
-    content: "\f00c";
-    display: inline-block;
-    margin-right: .4rem;
-}
-
-.custom-price .hr {
-    margin: 1.5rem 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.custom-price .border-hover {
-    margin-bottom: 1.5rem;
-}
-
-.custom-price .border {
-    padding-top: 0.875rem;
-    position: relative;
-    box-shadow: 0 22px 40px 0 #eef4fc;
-    border-radius: 10px;
-    background: #fff;
-    transition: .1s ease-in-out;
-}
-
-.custom-price .border:hover {
-    box-shadow: 0 31px 32px 0 #cbdfee;
-}
-
-.custom-price .level {
-    font-size: 0.7rem;
-    text-align: center;
-    text-indent: 0.875rem;
-    text-transform: uppercase;
-    position: relative;
-    z-index: 3;
-    font-weight: 700;
-    opacity: 0.35;
-}
-
-.custom-price .num {
-    color: #EC5E79;
-    font-weight: 700;
-    font-size: 3.5rem;
-    margin-top: 0.875rem;
-}
-
-.custom-price .currency {
-    font-size: 0.875rem;
-}
-
-.custom-price .period {
-    font-size: 12px;
-}
-
-.custom-price .period:before {
-    content: '/';
-    padding-right: .1rem;
-}
-
-.custom-price .detail {
-    text-align: left;
-    padding-bottom: 1.125rem;
-    padding-left: 1rem;
-    font-size: 0.875rem;
-}
-
-.custom-price .excerpt {
-    height: auto;
-    padding: 0 0.875rem;
-    font-size: 0.875rem;
-    opacity: 0.65;
-}
-
-.custom-price .excerpt p {
-    line-height: 1.5;
-}
-
-.custom-price .bg {
-    padding-top: 1.875rem;
-    height: auto;
-}
-
-.custom-price .border.active .num,
-.custom-price .border.active .excerpt,
-.custom-price .border.active .detail,
-.custom-price .border.active .level {
-    color: #fff !important;
-}
-
-.custom-price .border.active .excerpt {
-    opacity: 0.65;
-}
-
-/* ====================================================== 
    <!-- Progress Bar --> 
 /* ====================================================== */
 /* 
@@ -9512,6 +9386,135 @@ dl.list-side-by-side:after {
 
 .custom-rectangle-progressbar.progress-100 .track {
     width: 100%;
+}
+
+/* ====================================================== 
+   <!-- Pricing --> 
+/* ====================================================== */
+.custom-price {
+    text-align: center;
+    position: relative;
+}
+
+.custom-price:before {
+    padding-top: 2.25rem;
+}
+
+.custom-price:after {
+    padding-bottom: 0;
+}
+
+.custom-price ul,
+.custom-price ol {
+  /*default*/
+    display: block;
+    list-style-type: disc;
+    margin-top: 0.875rem;
+    margin-bottom: 0.875rem;
+    margin-left: 0;
+    margin-right: 0;
+    padding-bottom: 1.7rem;
+  /*custom*/
+    line-height: 2;
+}
+
+.custom-price li {
+  /*default*/
+    list-style: none;
+}
+
+.custom-price li:before {
+    font-family: 'FontAwesome';
+    content: "\f00c";
+    display: inline-block;
+    margin-right: .4rem;
+}
+
+.custom-price .hr {
+    margin: 1.5rem 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.custom-price .border-hover {
+    margin-bottom: 1.5rem;
+}
+
+.custom-price .border {
+    padding-top: 0.875rem;
+    position: relative;
+    box-shadow: 0 22px 40px 0 #eef4fc;
+    border-radius: 10px;
+    background: #fff;
+    transition: .1s ease-in-out;
+}
+
+.custom-price .border:hover {
+    box-shadow: 0 31px 32px 0 #cbdfee;
+}
+
+.custom-price .level {
+    font-size: 0.7rem;
+    text-align: center;
+    text-indent: 0.875rem;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 3;
+    font-weight: 700;
+    opacity: 0.35;
+}
+
+.custom-price .num {
+    color: #EC5E79;
+    font-weight: 700;
+    font-size: 3.5rem;
+    margin-top: 0.875rem;
+}
+
+.custom-price .currency {
+    font-size: 0.875rem;
+}
+
+.custom-price .period {
+    font-size: 12px;
+}
+
+.custom-price .period:before {
+    content: '/';
+    padding-right: .1rem;
+}
+
+.custom-price .detail {
+    text-align: left;
+    padding-bottom: 1.125rem;
+    padding-left: 1rem;
+    font-size: 0.875rem;
+}
+
+.custom-price .excerpt {
+    height: auto;
+    padding: 0 0.875rem;
+    font-size: 0.875rem;
+    opacity: 0.65;
+}
+
+.custom-price .excerpt p {
+    line-height: 1.5;
+}
+
+.custom-price .bg {
+    padding-top: 1.875rem;
+    height: auto;
+}
+
+.custom-price .border.active .num,
+.custom-price .border.active .excerpt,
+.custom-price .border.active .detail,
+.custom-price .border.active .level {
+    color: #fff !important;
+}
+
+.custom-price .border.active .excerpt {
+    opacity: 0.65;
 }
 
 /* ====================================================== 

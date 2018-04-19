@@ -85,7 +85,7 @@ theme = ( function ( theme, $, window, document ) {
 
 				
 
-				//Add canvas to each slider
+				//Load slides to canvas
 				//-------------------------------------	\
 				$this.find( '.item' ).each( function( index )  {
 					if ( $( '#custom-advanced-slider-canvas-item-'+index ).length == 0 ) {
@@ -205,7 +205,7 @@ theme = ( function ( theme, $, window, document ) {
 		
 		
 		/*
-		 * Switch and activate sliders
+		 * Transition Between Slides
 		 *
 		 * @param  {number} elementIndex     - Index of current slider.
 		 * @param  {object} slider           - Selector of the slider .

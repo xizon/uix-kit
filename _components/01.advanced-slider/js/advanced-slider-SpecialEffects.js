@@ -85,62 +85,18 @@ theme = ( function ( theme, $, window, document ) {
 
 				
 
-				//Add canvas to each slider
-				//-------------------------------------	\
+				//Load slides to canvas
+				//-------------------------------------	
 				$this.find( '.item' ).each( function( index )  {
+					
 					if ( $( '#custom-advanced-slider-sp-canvas-item-'+index ).length == 0 ) {
 						$( this ).prepend( '<canvas id="custom-advanced-slider-sp-canvas-item-'+index+'" width="'+$this.width()+'" height="'+$this.height()+'"></canvas>' );
 					}
 					
 
-					if ( Modernizr.cssanimations ) {
-						
-						var stageW = $this.width(),
-							stageH = $this.height(),
-							image  = PIXI.Sprite.fromImage( $this.find( '.item' ).eq( index ).find( '> img' ).attr( 'src' ), true ),
-							app    = new PIXI.Application( stageW, stageH, {
-																	backgroundColor : 0x000000, 
-																	autoResize      : true, 
-																	view            : document.getElementById( 'custom-advanced-slider-sp-canvas-item-'+index )
-																});
-
-						image.width  = stageW;
-						image.height = stageH;
-						app.stage.addChild( image );
-
-
-
-						//Brightness Effect
-						//-------------------------------------	
-						if ( $this.hasClass( 'eff-brightness' ) ) {
-							
-							TweenLite.set( image, {
-								pixi: {
-									brightness: 3
-								}
-							});	
-
-							TweenLite.to( image, 1, {
-								pixi: {
-									brightness: 1
-								},
-								delay: 0.6
-							});		
-						}
-						
-						
-						//Liquid Distortion Effect
-						//-------------------------------------	
-						if ( $this.hasClass( 'eff-liquid' ) ) {
-							
-							// Do stuff here
-						}
-	
-						
-					}
-
+					//Canvas Interactions
+					canvasInteractions( index, $this )
 					
-
 				});
 				
 				
@@ -246,9 +202,9 @@ theme = ( function ( theme, $, window, document ) {
 
 		}
 		
-		
+	
 		/*
-		 * Switch and activate sliders
+		 * Transition Between Slides
 		 *
 		 * @param  {number} elementIndex     - Index of current slider.
 		 * @param  {object} slider           - Selector of the slider .
@@ -302,39 +258,57 @@ theme = ( function ( theme, $, window, document ) {
 			$( dataCountCur ).text( parseFloat( elementIndex ) + 1 );		
 			
 			
+			//Canvas Interactions
+			//-------------------------------------
+			canvasInteractions( elementIndex, slider )
 
 
-			if ( Modernizr.cssanimations ) {
+			
+		}
+		
+	
+		/*
+		 * Canvas Interactions
+		 * @http://pixijs.download/dev/docs/index.html
+		 *
+		 * @param  {number} elementIndex     - Index of current slider.
+		 * @param  {object} slider           - Selector of the slider .
+		 * @return {void}                    - The constructor.
+		 */
+        function canvasInteractions( elementIndex, slider ) {
+			
+			if ( Modernizr.webgl ) {
 				
-				
-					
-					
+
+				var curImgURL             = slider.find( '.item' ).eq( elementIndex ).find( '> img' ).attr( 'src' ),
+					stageW                = slider.width(),
+					stageH                = slider.height(),
+					curSprite             = PIXI.Sprite.fromImage( curImgURL, true ),
+					renderer              = new PIXI.Application( stageW, stageH, {
+															backgroundColor : 0x000000, 
+															autoResize      : true, 
+															view            : document.getElementById( 'custom-advanced-slider-sp-canvas-item-'+elementIndex )
+														});
+
+				curSprite.width  = stageW;
+				curSprite.height = stageH;
+
+
 				//Brightness Effect
 				//-------------------------------------		
 				if ( slider.hasClass( 'eff-brightness' ) ) {
 
+					// Add child container to the stage
+					renderer.stage.addChild( curSprite );
 
-					var stageW = slider.width(),
-						stageH = slider.height(),
-						image  = PIXI.Sprite.fromImage( slider.find( '.item' ).eq( elementIndex ).find( '> img' ).attr( 'src' ), true ),
-						app    = new PIXI.Application( stageW, stageH, {
-																backgroundColor : 0x000000, 
-																autoResize      : true, 
-																view            : document.getElementById( 'custom-advanced-slider-sp-canvas-item-'+elementIndex )
-															});
-
-					image.width  = stageW;
-					image.height = stageH;
-					app.stage.addChild( image );
-
-
-					TweenLite.set( image, {
+					
+					TweenLite.set( curSprite, {
 						pixi: {
 							brightness: 3
 						}
 					});	
 
-					TweenLite.to( image, 1, {
+					TweenLite.to( curSprite, 2, {
 						pixi: {
 							brightness: 1
 						},
@@ -349,22 +323,47 @@ theme = ( function ( theme, $, window, document ) {
 				//-------------------------------------		
 				if ( slider.hasClass( 'eff-liquid' ) ) {
 
-					// Do stuff here
-					
+						var count       = 0,
+							ropeLength  = stageW / 10,
+							points      = [];
 
+						for ( var i = 0; i < 10; i++ ) {
+							points.push( new PIXI.Point( i * ropeLength, 0 ) );
+						}
+
+						// Set the filter to stage and set some default values for the animation
+						var strip = new PIXI.mesh.Rope( PIXI.Texture.fromImage( curImgURL ), points );
+						strip.x = 0;
+					    strip.y = stageH/2 - 20;
+
+						// Add child container to the stage
+						renderer.stage.scale.set( 1 + stageH / stageW );
+						renderer.stage.addChild( strip );
+
+
+						renderer.ticker.add( function() {
+
+							// speed
+							count += 0.02; 
+
+							// make the effect
+							for ( var j = 0; j < points.length; j++ ) {
+								points[j].y = Math.sin((j * 0.5) + count) * 15;
+								points[j].x = j * ropeLength + Math.cos((j * 0.3) + count) * 15;
+							}
+						});
+
+					
 
 				}		
 				
 				
+			} else {
+				slider.find( '.item canvas' ).hide();
 			}
-
-
-			
-			
+	
 			
 		}
-		
-	
 
 
 
@@ -379,5 +378,4 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
-
 

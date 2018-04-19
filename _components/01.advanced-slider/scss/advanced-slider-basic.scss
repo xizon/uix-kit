@@ -51,33 +51,43 @@
 		}	
 		
 	}
+
 	
-	&.eff-scale {
-		.inner {
+}
 
-			.item {
-				opacity: 0;
-				transform: scale(.8);
 
-				&.leave {
-					transition: all 0.6s ease;
+/* Tests native CSS3 and HTML5 features are available */
+.cssanimations {
+
+	.custom-advanced-slider {
+		
+		&.eff-scale {
+			.inner {
+
+				.item {
 					opacity: 0;
 					transform: scale(.8);
-				}
-				&.active {
-					transition: all 0.6s ease;
-					transition-delay: 0.6s;
-					opacity: 1;
-					transform: scale(1);
-				}
+
+					&.leave {
+						transition: all 0.6s ease;
+						opacity: 0;
+						transform: scale(.8);
+					}
+					&.active {
+						transition: all 0.6s ease;
+						transition-delay: 0.6s;
+						opacity: 1;
+						transform: scale(1);
+					}
 
 
-			}	
+				}	
+
+			}
 
 		}
-		
+
 	}
-	
 
 	
 }
