@@ -68,13 +68,13 @@
 	
     1. Basic 
     2. Table 
-    3. Bullet List 
-    4. Helper Classes 
+    3. Helper Classes 
+    4. Bullet List 
     5. Typography 
     6. Spacing 
     7. Basic Layout Styles 
-    8. Header Area 
-    9. Navigation Area 
+    8. Navigation Area 
+    9. Header Area 
     10. Brand 
     11. Footer 
     12. Video 
@@ -92,50 +92,49 @@
     24. Accordion 
     25. Accordion Background Images 
     26. Advanced Slider (Special Effects) 
-    27. Advanced Slider (Special Effects) 
-    28. Advanced Slider (Basic) 
-    29. Badges 
-    30. Breadcrumbs 
-    31. Button 
-    32. Author Card 
-    33. Counter 
-    34. Dropdown Menu 
-    35. Equal-width Divs 
-    36. Features 
-    37. Footer Templates 
-    38. Form 
-    39. Form Progress 
-    40. Gallery 
-    41. Custom Core Scripts & Stylesheets 
-    42. Cutom Light Box 
-    43. Brands List 
-    44. Bulleted List 
-    45. Maintain Aspect Ratio List 
-    46. List of Posts 
-    47. List of Split Posts 
-    48. Side by Side List 
-    49. Side by Side List With Photo 
-    50. Fullwidth List of Split 2 
-    51. Fullwidth List of Split 
-    52. Mobile Menu 
-    53. Modal Dialog 
-    54. Mouse Animation Scroll 
-    55. Multiple Items Carousel 
-    56. Parallax 
-    57. Periodical Scroll 
-    58. Pricing 
-    59. Progress Bar 
-    60. Services 
-    61. Show More Less 
-    62. Single Post 
-    63. Slideshow ( with custom flexslider ) 
-    64. Source Code 
-    65. Table Series 
-    66. Tabs 
-    67. Testimonials Carousel 
-    68. Timeline 
-    69. ToolTip 
-    70. WordPress Core 
+    27. Advanced Slider (Basic) 
+    28. Badges 
+    29. Breadcrumbs 
+    30. Button 
+    31. Author Card 
+    32. Counter 
+    33. Dropdown Menu 
+    34. Equal-width Divs 
+    35. Features 
+    36. Footer Templates 
+    37. Form 
+    38. Form Progress 
+    39. Gallery 
+    40. Custom Core Scripts & Stylesheets 
+    41. Cutom Light Box 
+    42. Brands List 
+    43. Bulleted List 
+    44. Maintain Aspect Ratio List 
+    45. List of Posts 
+    46. List of Split Posts 
+    47. Side by Side List 
+    48. Side by Side List With Photo 
+    49. Fullwidth List of Split 2 
+    50. Fullwidth List of Split 
+    51. Mobile Menu 
+    52. Modal Dialog 
+    53. Mouse Animation Scroll 
+    54. Multiple Items Carousel 
+    55. Parallax 
+    56. Periodical Scroll 
+    57. Pricing 
+    58. Progress Bar 
+    59. Services 
+    60. Show More Less 
+    61. Single Post 
+    62. Slideshow ( with custom flexslider ) 
+    63. Source Code 
+    64. Table Series 
+    65. Tabs 
+    66. Testimonials Carousel 
+    67. Timeline 
+    68. ToolTip 
+    69. WordPress Core 
 
 
 
@@ -3143,6 +3142,107 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
+    <!-- Accordion Background Images -->  
+/* ====================================================== */
+.custom-accordion-img {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+
+.custom-accordion-img ul {
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+    margin: 0;
+    padding: 0;
+    font-size: 0;
+  /*Fighting the Space Between Inline Block Elements*/;
+}
+
+.custom-accordion-img ul li {
+    display: table-cell;
+    vertical-align: bottom;
+    position: relative;
+    width: 16.66666666666667%;
+    height: 250px;
+    font-size: 1rem;
+  /*Fighting the Space Between Inline Block Elements*/
+    background-position: center center;
+    background-repeat: no-repeat;
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+}
+
+.custom-accordion-img ul li > img {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.custom-accordion-img ul li > div a {
+    display: block;
+    height: 250px;
+    width: 100%;
+    position: relative;
+    z-index: 3;
+    vertical-align: bottom;
+    padding: 1rem 2.5rem;
+    box-sizing: border-box;
+    color: #fff;
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+}
+
+.custom-accordion-img ul li > div a * {
+    margin: 0;
+    position: relative;
+    z-index: 5;
+    transform: translateX(-20px);
+  /* @include ellipsis(); */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    white-space: nowrap;
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+}
+
+.custom-accordion-img ul li > div a h3 {
+    text-overflow: clip;
+    top: 140px;
+}
+
+.custom-accordion-img ul li > div a p {
+    top: 140px;
+}
+
+.custom-accordion-img ul:hover li {
+    width: 8%;
+}
+
+.custom-accordion-img ul:hover li:hover {
+    width: 60%;
+}
+
+@media all and (max-width: 768px) {
+    .custom-accordion-img {
+        height: auto;
+    }
+
+    .custom-accordion-img ul li,
+  .custom-accordion-img ul li:hover,
+  .custom-accordion-img ul:hover li,
+  .custom-accordion-img ul:hover li:hover {
+        position: relative;
+        display: table;
+        table-layout: fixed;
+        width: 100%;
+        transition: none;
+    }
+}
+
+/* ====================================================== 
    <!-- Advanced Slider (Special Effects) -->     
 /* ====================================================== */
 /* 
@@ -3424,107 +3524,6 @@ ul.entry-meta {
 
 .custom-advanced-slider-arrows .next.disabled {
     visibility: hidden;
-}
-
-/* ====================================================== 
-    <!-- Accordion Background Images -->  
-/* ====================================================== */
-.custom-accordion-img {
-    width: 100%;
-    height: 250px;
-    overflow: hidden;
-}
-
-.custom-accordion-img ul {
-    width: 100%;
-    display: table;
-    table-layout: fixed;
-    margin: 0;
-    padding: 0;
-    font-size: 0;
-  /*Fighting the Space Between Inline Block Elements*/;
-}
-
-.custom-accordion-img ul li {
-    display: table-cell;
-    vertical-align: bottom;
-    position: relative;
-    width: 16.66666666666667%;
-    height: 250px;
-    font-size: 1rem;
-  /*Fighting the Space Between Inline Block Elements*/
-    background-position: center center;
-    background-repeat: no-repeat;
-  /* @include transition-default(); */
-    transition: all 0.3s ease;
-}
-
-.custom-accordion-img ul li > img {
-    position: absolute;
-    left: 0;
-    top: 0;
-}
-
-.custom-accordion-img ul li > div a {
-    display: block;
-    height: 250px;
-    width: 100%;
-    position: relative;
-    z-index: 3;
-    vertical-align: bottom;
-    padding: 1rem 2.5rem;
-    box-sizing: border-box;
-    color: #fff;
-  /* @include transition-default(); */
-    transition: all 0.3s ease;
-}
-
-.custom-accordion-img ul li > div a * {
-    margin: 0;
-    position: relative;
-    z-index: 5;
-    transform: translateX(-20px);
-  /* @include ellipsis(); */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 100%;
-    white-space: nowrap;
-  /* @include transition-default(); */
-    transition: all 0.3s ease;
-}
-
-.custom-accordion-img ul li > div a h3 {
-    text-overflow: clip;
-    top: 140px;
-}
-
-.custom-accordion-img ul li > div a p {
-    top: 140px;
-}
-
-.custom-accordion-img ul:hover li {
-    width: 8%;
-}
-
-.custom-accordion-img ul:hover li:hover {
-    width: 60%;
-}
-
-@media all and (max-width: 768px) {
-    .custom-accordion-img {
-        height: auto;
-    }
-
-    .custom-accordion-img ul li,
-  .custom-accordion-img ul li:hover,
-  .custom-accordion-img ul:hover li,
-  .custom-accordion-img ul:hover li:hover {
-        position: relative;
-        display: table;
-        table-layout: fixed;
-        width: 100%;
-        transition: none;
-    }
 }
 
 /* ====================================================== 
@@ -5577,107 +5576,6 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-        <!-- Gallery --> 
-/* ====================================================== */
-.custom-gallery .custom-gallery-item {
-    transition: none;
-    position: relative;
-    text-align: left;
-}
-
-.custom-gallery .custom-gallery-item .link-to {
-    width: 100%;
-    position: absolute;
-    left: 0;
-    z-index: 3;
-    opacity: 0;
-    margin-top: -1rem;
-  /* Vertical Center */
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.custom-gallery .custom-gallery-item:hover .link-to {
-    opacity: 1;
-}
-
-.custom-gallery .custom-gallery-item .cover {
-    position: relative;
-}
-
-.custom-gallery .custom-gallery-item .cover:before {
-  /* @include transition-default(); */
-    transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0);
-    display: block;
-    content: '';
-    top: 0;
-    left: 0;
-    position: absolute;
-    z-index: 2;
-    width: 100%;
-    height: 100%;
-}
-
-.custom-gallery .custom-gallery-item:hover .cover:before {
-    background: rgba(255, 255, 255, 0.95);
-}
-
-.custom-gallery .custom-gallery-item h3 {
-    position: relative;
-    font-size: 1.125rem;
-    padding-top: 0.546875rem;
-}
-
-.custom-gallery .custom-gallery-item .title {
-    opacity: 0.7;
-    margin-left: 0.875rem;
-    font-size: 0.625rem;
-    line-height: 1.625;
-    display: inline-block;
-}
-
-.custom-gallery .custom-gallery-item .title:before {
-    content: '|';
-    padding-right: 0.875rem;
-}
-
-.custom-gallery .custom-gallery-item .category {
-    font-size: 0.625rem;
-    line-height: 1.625;
-    display: inline-block;
-    position: absolute;
-    bottom: 0.875rem;
-    right: 0;
-    background: #EC5E79;
-    border-radius: 25px;
-    padding: 0.0875rem 1.1375rem;
-    color: #fff;
-}
-
-.custom-gallery .custom-gallery-item .category a {
-    color: #fff;
-}
-
-.custom-gallery .custom-gallery-item .category:hover {
-    background: #C56263;
-}
-
-.custom-gallery .custom-gallery-item .image {
-    width: 100%;
-    display: block;
-    overflow: hidden;
-    position: relative;
-    outline: 0;
-    background: #ddd;
-    border: 1px solid #E7E7E7;
-}
-
-.custom-gallery .custom-gallery-item .cover img {
-    width: 100%;
-}
-
-/* ====================================================== 
    <!-- Custom Core Scripts & Stylesheets --> 
 /* ====================================================== */
 /* ====================================================== 
@@ -5993,6 +5891,107 @@ ul.entry-meta {
     .custom-lightbox-overlay.no-fixed .lb-container.custom .html > .lb-box {
         width: auto;
     }
+}
+
+/* ====================================================== 
+        <!-- Gallery --> 
+/* ====================================================== */
+.custom-gallery .custom-gallery-item {
+    transition: none;
+    position: relative;
+    text-align: left;
+}
+
+.custom-gallery .custom-gallery-item .link-to {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    z-index: 3;
+    opacity: 0;
+    margin-top: -1rem;
+  /* Vertical Center */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.custom-gallery .custom-gallery-item:hover .link-to {
+    opacity: 1;
+}
+
+.custom-gallery .custom-gallery-item .cover {
+    position: relative;
+}
+
+.custom-gallery .custom-gallery-item .cover:before {
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0);
+    display: block;
+    content: '';
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+}
+
+.custom-gallery .custom-gallery-item:hover .cover:before {
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.custom-gallery .custom-gallery-item h3 {
+    position: relative;
+    font-size: 1.125rem;
+    padding-top: 0.546875rem;
+}
+
+.custom-gallery .custom-gallery-item .title {
+    opacity: 0.7;
+    margin-left: 0.875rem;
+    font-size: 0.625rem;
+    line-height: 1.625;
+    display: inline-block;
+}
+
+.custom-gallery .custom-gallery-item .title:before {
+    content: '|';
+    padding-right: 0.875rem;
+}
+
+.custom-gallery .custom-gallery-item .category {
+    font-size: 0.625rem;
+    line-height: 1.625;
+    display: inline-block;
+    position: absolute;
+    bottom: 0.875rem;
+    right: 0;
+    background: #EC5E79;
+    border-radius: 25px;
+    padding: 0.0875rem 1.1375rem;
+    color: #fff;
+}
+
+.custom-gallery .custom-gallery-item .category a {
+    color: #fff;
+}
+
+.custom-gallery .custom-gallery-item .category:hover {
+    background: #C56263;
+}
+
+.custom-gallery .custom-gallery-item .image {
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    position: relative;
+    outline: 0;
+    background: #ddd;
+    border: 1px solid #E7E7E7;
+}
+
+.custom-gallery .custom-gallery-item .cover img {
+    width: 100%;
 }
 
 /* ====================================================== 
@@ -7457,6 +7456,135 @@ dl.list-side-by-side:after {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: 2px;
+}
+
+/* ====================================================== 
+   <!-- Pricing --> 
+/* ====================================================== */
+.custom-price {
+    text-align: center;
+    position: relative;
+}
+
+.custom-price:before {
+    padding-top: 2.25rem;
+}
+
+.custom-price:after {
+    padding-bottom: 0;
+}
+
+.custom-price ul,
+.custom-price ol {
+  /*default*/
+    display: block;
+    list-style-type: disc;
+    margin-top: 0.875rem;
+    margin-bottom: 0.875rem;
+    margin-left: 0;
+    margin-right: 0;
+    padding-bottom: 1.7rem;
+  /*custom*/
+    line-height: 2;
+}
+
+.custom-price li {
+  /*default*/
+    list-style: none;
+}
+
+.custom-price li:before {
+    font-family: 'FontAwesome';
+    content: "\f00c";
+    display: inline-block;
+    margin-right: .4rem;
+}
+
+.custom-price .hr {
+    margin: 1.5rem 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.custom-price .border-hover {
+    margin-bottom: 1.5rem;
+}
+
+.custom-price .border {
+    padding-top: 0.875rem;
+    position: relative;
+    box-shadow: 0 22px 40px 0 #eef4fc;
+    border-radius: 10px;
+    background: #fff;
+    transition: .1s ease-in-out;
+}
+
+.custom-price .border:hover {
+    box-shadow: 0 31px 32px 0 #cbdfee;
+}
+
+.custom-price .level {
+    font-size: 0.7rem;
+    text-align: center;
+    text-indent: 0.875rem;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 3;
+    font-weight: 700;
+    opacity: 0.35;
+}
+
+.custom-price .num {
+    color: #EC5E79;
+    font-weight: 700;
+    font-size: 3.5rem;
+    margin-top: 0.875rem;
+}
+
+.custom-price .currency {
+    font-size: 0.875rem;
+}
+
+.custom-price .period {
+    font-size: 12px;
+}
+
+.custom-price .period:before {
+    content: '/';
+    padding-right: .1rem;
+}
+
+.custom-price .detail {
+    text-align: left;
+    padding-bottom: 1.125rem;
+    padding-left: 1rem;
+    font-size: 0.875rem;
+}
+
+.custom-price .excerpt {
+    height: auto;
+    padding: 0 0.875rem;
+    font-size: 0.875rem;
+    opacity: 0.65;
+}
+
+.custom-price .excerpt p {
+    line-height: 1.5;
+}
+
+.custom-price .bg {
+    padding-top: 1.875rem;
+    height: auto;
+}
+
+.custom-price .border.active .num,
+.custom-price .border.active .excerpt,
+.custom-price .border.active .detail,
+.custom-price .border.active .level {
+    color: #fff !important;
+}
+
+.custom-price .border.active .excerpt {
+    opacity: 0.65;
 }
 
 /* ====================================================== 
@@ -9389,135 +9517,6 @@ dl.list-side-by-side:after {
 }
 
 /* ====================================================== 
-   <!-- Pricing --> 
-/* ====================================================== */
-.custom-price {
-    text-align: center;
-    position: relative;
-}
-
-.custom-price:before {
-    padding-top: 2.25rem;
-}
-
-.custom-price:after {
-    padding-bottom: 0;
-}
-
-.custom-price ul,
-.custom-price ol {
-  /*default*/
-    display: block;
-    list-style-type: disc;
-    margin-top: 0.875rem;
-    margin-bottom: 0.875rem;
-    margin-left: 0;
-    margin-right: 0;
-    padding-bottom: 1.7rem;
-  /*custom*/
-    line-height: 2;
-}
-
-.custom-price li {
-  /*default*/
-    list-style: none;
-}
-
-.custom-price li:before {
-    font-family: 'FontAwesome';
-    content: "\f00c";
-    display: inline-block;
-    margin-right: .4rem;
-}
-
-.custom-price .hr {
-    margin: 1.5rem 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.custom-price .border-hover {
-    margin-bottom: 1.5rem;
-}
-
-.custom-price .border {
-    padding-top: 0.875rem;
-    position: relative;
-    box-shadow: 0 22px 40px 0 #eef4fc;
-    border-radius: 10px;
-    background: #fff;
-    transition: .1s ease-in-out;
-}
-
-.custom-price .border:hover {
-    box-shadow: 0 31px 32px 0 #cbdfee;
-}
-
-.custom-price .level {
-    font-size: 0.7rem;
-    text-align: center;
-    text-indent: 0.875rem;
-    text-transform: uppercase;
-    position: relative;
-    z-index: 3;
-    font-weight: 700;
-    opacity: 0.35;
-}
-
-.custom-price .num {
-    color: #EC5E79;
-    font-weight: 700;
-    font-size: 3.5rem;
-    margin-top: 0.875rem;
-}
-
-.custom-price .currency {
-    font-size: 0.875rem;
-}
-
-.custom-price .period {
-    font-size: 12px;
-}
-
-.custom-price .period:before {
-    content: '/';
-    padding-right: .1rem;
-}
-
-.custom-price .detail {
-    text-align: left;
-    padding-bottom: 1.125rem;
-    padding-left: 1rem;
-    font-size: 0.875rem;
-}
-
-.custom-price .excerpt {
-    height: auto;
-    padding: 0 0.875rem;
-    font-size: 0.875rem;
-    opacity: 0.65;
-}
-
-.custom-price .excerpt p {
-    line-height: 1.5;
-}
-
-.custom-price .bg {
-    padding-top: 1.875rem;
-    height: auto;
-}
-
-.custom-price .border.active .num,
-.custom-price .border.active .excerpt,
-.custom-price .border.active .detail,
-.custom-price .border.active .level {
-    color: #fff !important;
-}
-
-.custom-price .border.active .excerpt {
-    opacity: 0.65;
-}
-
-/* ====================================================== 
    <!-- Services --> 
 /* ====================================================== */
 .custom-services [class*='col-'],
@@ -10175,135 +10174,6 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 /* ====================================================== 
    <!-- Source Code -->         
 /* ====================================================== */
-/* Pretty printing styles. Used with prettify.js. */
-/* Vim sunburst theme by David Leibovic */
-pre .str, code .str {
-    color: #65B042;
-}
-
-/* string  - green */
-pre .kwd, code .kwd {
-    color: #E28964;
-}
-
-/* keyword - dark pink */
-pre .com, code .com {
-    color: #AEAEAE;
-    font-style: italic;
-}
-
-/* comment - gray */
-pre .typ, code .typ {
-    color: #89bdff;
-}
-
-/* type - light blue */
-pre .lit, code .lit {
-    color: #3387CC;
-}
-
-/* literal - blue */
-pre .pun, code .pun {
-    color: #fff;
-}
-
-/* punctuation - white */
-pre .pln, code .pln {
-    color: #fff;
-}
-
-/* plaintext - white */
-pre .tag, code .tag {
-    color: #89bdff;
-}
-
-/* html/xml tag    - light blue */
-pre .atn, code .atn {
-    color: #bdb76b;
-}
-
-/* html/xml attribute name  - khaki */
-pre .atv, code .atv {
-    color: #65B042;
-}
-
-/* html/xml attribute value - green */
-pre .dec, code .dec {
-    color: #3387CC;
-}
-
-/* decimal - blue */
-pre.prettyprint, code.prettyprint {
-    background-color: #000;
-    border-radius: 8px;
-}
-
-pre.prettyprint {
-    width: 95%;
-    margin: 1em auto;
-    padding: 1em;
-    white-space: pre-wrap;
-}
-
-/* Specify class=linenums on a pre to get line numbering */
-ol.linenums {
-    margin-top: 0;
-    margin-bottom: 0;
-    color: #AEAEAE;
-}
-
-/* IE indents via margin-left */
-li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 {
-    list-style-type: none;
-}
-
-/* Alternate shading for lines */
-@media print {
-    pre .str, code .str {
-        color: #060;
-    }
-
-    pre .kwd, code .kwd {
-        color: #006;
-        font-weight: bold;
-    }
-
-    pre .com, code .com {
-        color: #600;
-        font-style: italic;
-    }
-
-    pre .typ, code .typ {
-        color: #404;
-        font-weight: bold;
-    }
-
-    pre .lit, code .lit {
-        color: #044;
-    }
-
-    pre .pun, code .pun {
-        color: #440;
-    }
-
-    pre .pln, code .pln {
-        color: #000;
-    }
-
-    pre .tag, code .tag {
-        color: #006;
-        font-weight: bold;
-    }
-
-    pre .atn, code .atn {
-        color: #404;
-    }
-
-    pre .atv, code .atv {
-        color: #060;
-    }
-}
-
 /* Source Code Button */
 #view-source {
     position: fixed;
@@ -10450,6 +10320,7 @@ li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 {
     font-size: 1rem;
 }
 
+/* Highlight Style */
 /* ====================================================== 
    <!-- Table Series -->    
 /* ====================================================== */
