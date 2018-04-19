@@ -31,6 +31,7 @@
 	}
 }
 
+
 .outer-shadower {
     @include outer-shadow();
 }
@@ -208,4 +209,40 @@
 /* Style of Irregular Shape */
 .skew-element {
     transform: skew(0deg, -2deg);	
+}
+
+/* Hidden the element on mobile device */
+
+@media all and (max-width: 768px) {
+	.mobile-ele-hide {
+		display: none;
+	}
+	
+}
+
+
+/* Tip Label */
+.tip-label {
+	font-weight: 100;
+	text-transform: uppercase;
+	font-weight: 700;
+	line-height: 1;
+	background: $highlight-color1;
+	border-radius: 10px;
+	padding: .1rem .3rem !important;
+	margin-left: .5rem;
+	font-size: 0.625rem;
+	vertical-align: middle;
+	color: #fff !important;
+	position: absolute;
+	right: 2.5rem;
+	top: .5rem;
+}
+
+@media all and (max-width: 768px) {
+	.tip-label {
+		right: 1rem;
+		top: .7rem;
+	}
+
 }

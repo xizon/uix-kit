@@ -1,0 +1,156 @@
+/* ====================================================== 
+   <!-- Advanced Slider (Special Effects) -->     
+/* ====================================================== */
+
+/* 
+ ---------------------------
+ 1) Initialize the slider style
+ ---------------------------
+ */ 
+.custom-advanced-slider-sp {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+	z-index: 1;
+
+	.inner {
+		
+		
+		.item {
+			position: absolute;
+			left: 0;
+			top: 0;
+			z-index: 1;
+			width: 100%;
+			opacity: 0;
+			
+			
+			canvas {
+				position: absolute;
+				left: 0;
+				top: 0;
+				z-index: 1;
+				width: 100%;
+				height: 100%;
+				background: #000;
+			}
+
+
+			img {
+				width: 100%;
+			}
+			
+			&.leave {
+				transition: all 0.6s ease;
+				opacity: 0;
+			}
+			&.active {
+				transition: all 0.1s ease;
+				transition-delay: 0.6s;
+				opacity: 1;
+			}
+
+
+		}	
+		
+	}
+	
+	
+
+	
+}
+
+
+/* 
+ ---------------------------
+ 2) Pagination dots 
+ ---------------------------
+ */ 
+.custom-advanced-slider-sp-pagination {
+	
+	position: relative;
+	transform: translateY(-40px);
+	z-index: 2;
+	
+	ul {
+		list-style: none;
+		left: 0;
+		bottom: 0;
+		font-size: 0;/*Fighting the Space Between Inline Block Elements*/
+		display: block;
+		width: 100%;
+		text-align: center; /*require*/
+		position: relative;
+		transform: translateY(.5rem);
+		
+		li {
+			font-size: 16px;/*Fighting the Space Between Inline Block Elements*/
+			display: inline-block; /*require*/
+			margin: 0 .2rem;
+
+			a {
+				width: 12px;
+				height: 12px;
+				display: block;
+				background: rgba(255,255,255, 0.5);
+				cursor: pointer;
+				text-indent: -9999px;
+				border-radius: 20px;
+				box-shadow: 0px 6px 23px -2px rgba(0, 0, 0, 0.36);
+
+				&:hover, 
+				&.active {
+					background: rgba(255,255,255, 1);
+					width: 25px;
+				}
+			}	
+
+		}	
+		
+	
+	}
+
+
+
+}
+
+/* 
+ ---------------------------
+ 3) Next/Prev buttons
+ ---------------------------
+ */ 
+.custom-advanced-slider-sp-arrows {
+	position: relative;
+	transform: translateY(-75px);
+	z-index: 3;
+	
+	a {
+		position: absolute;
+		display: inline-block;
+		color: #fff;
+		width: 50px;
+
+	}
+	
+	.prev {
+		left: 15px;
+		
+		&.disabled {
+			visibility: hidden;
+			
+		}
+		
+	}
+	.next {
+		right: 15px;
+		text-align: right;
+		
+		&.disabled {
+			visibility: hidden;
+		}	
+		
+	
+		
+	}
+
+}

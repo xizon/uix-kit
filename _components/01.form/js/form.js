@@ -317,7 +317,7 @@ theme = ( function ( theme, $, window, document ) {
 
 			});
 
-			$( document.body ).on( 'click', function( e ) {
+			$( document.body ).on( 'click touchstart', function( e ) {
 				$( settings.selector + '.new' ).removeClass( 'opened' );
 			});		
 

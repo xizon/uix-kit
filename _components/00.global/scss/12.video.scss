@@ -3,6 +3,32 @@
 /* ====================================================== */
 .web-video-embed {
 	visibility: hidden;
+	
+	& ~ .replay {
+		display: none;
+		position: absolute;
+		z-index: 11;
+		left: 50%;
+		top: 50%;
+		width: 44px;
+		height: 44px;
+		line-height: 44px;
+		margin-left: -22px;
+		margin-top: -22px;
+		font-size: 3rem;
+		text-shadow: 1px 0 3px rgba(0,0,0,.3);
+		
+		
+		&::before {
+			display: inline-block;
+			content: "\f021";
+			font-family: 'FontAwesome';
+			color: #fff;
+			cursor: pointer;
+		}
+
+	}	
+	
 }
 
 

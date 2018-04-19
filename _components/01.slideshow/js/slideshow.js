@@ -13,9 +13,21 @@ theme = ( function ( theme, $, window, document ) {
 
 		var $window            = $( window ),
 			windowWidth        = $window.width(),
-			windowHeight       = $window.height();
+			windowHeight       = $window.height(),
+			flexslider         = {
+						           vars: {}
+					              };
 		
-	
+		/*
+		 * Tiny helper function to add breakpoints.
+		 *
+		 * @param  {number} number           - Number of carousel items that should be visible.
+		 * @return {void}                    - The constructor.
+		 */
+        function getGridSize( number ) {
+            return ( $window.width() <= 768 ) ? 1 : number;
+        }
+
 		
 		/*
 		 * Return an event from callback function to each slider.
@@ -78,11 +90,10 @@ theme = ( function ( theme, $, window, document ) {
 				if ( dataTimeline && dataTimeline != '' ) {
 					var curPerMinWidth = curIndex/count*100 + '%',
 						curPerMaxWidth = (curIndex + 1)/count*100 + '%',
-						curTotalWidth  = $( dataTimeline ).width(),
-						$timelineObj   = $( dataTimeline ).find( '> span' );
+						curTotalWidth  = $( dataTimeline ).width();
 				
 					//Fires animation effect of an element width.
-					$timelineObj.css( {
+					$( dataTimeline ).find( '> span' ).css( {
 						'width'     : curTotalWidth,
 						'transition': 'all ' + parseFloat( thisSlider.vars.slideshowSpeed - thisSlider.vars.animationSpeed ) + 'ms linear'	
 					} );	
@@ -116,8 +127,8 @@ theme = ( function ( theme, $, window, document ) {
 					}
 
 					//Get images URL
-					pimg = thisSlider.slides.eq( prevIndex ).find( 'img' ).attr( 'src' ),
-					nimg = thisSlider.slides.eq( nextIndex ).find( 'img' ).attr( 'src' )
+					pimg = thisSlider.slides.eq( prevIndex ).find( 'img' ).attr( 'src' );
+					nimg = thisSlider.slides.eq( nextIndex ).find( 'img' ).attr( 'src' );
 
 
 					if ( $( dataPNThumbs ).length > 0 ) {
@@ -196,14 +207,22 @@ theme = ( function ( theme, $, window, document ) {
 					$items.removeClass( prevClass );
 					$items.removeClass( nextClass );
 
-					//Focus slider
-					$items.eq( parseFloat( curIndex+1 ) ).addClass( activeClass );
+					if ( windowWidth <= 768 ) {
+						
+						//Focus slider
+						$items.eq( parseFloat( curIndex ) ).addClass( activeClass );	
+						
+					} else {
+						//Focus slider
+						$items.eq( parseFloat( curIndex+1 ) ).addClass( activeClass );
 
-					//Previous slider
-					$items.eq( parseFloat( curIndex ) ).addClass( prevClass );
+						//Previous slider
+						$items.eq( parseFloat( curIndex ) ).addClass( prevClass );
 
-					//Next slider
-					$items.eq( parseFloat( curIndex+2 ) ).addClass( nextClass );	
+						//Next slider
+						$items.eq( parseFloat( curIndex+2 ) ).addClass( nextClass );	
+					}
+					
 				}
 
 
@@ -233,11 +252,9 @@ theme = ( function ( theme, $, window, document ) {
 				//With Timeline
 				//-------------------------------------	
 				if ( dataTimeline && dataTimeline != '' ) {
-					var curTotalWidth  = $( dataTimeline ).width(),
-						$timelineObj   = $( dataTimeline ).find( '> span' );
-				
+			
 					//Fires animation effect of an element width.
-					$timelineObj.css( {
+					$( dataTimeline ).find( '> span' ).css( {
 						'width'     : 0,
 						'transition': 'all 100ms linear'	
 					} );
@@ -306,7 +323,8 @@ theme = ( function ( theme, $, window, document ) {
 				var $this         = $( this ),
 					curVideoID    = $this.find( '.video-js' ).attr( 'id' ),
 					dataAuto      = $this.data( 'embed-video-autoplay' ),
-					dataLoop      = $this.data( 'embed-video-loop' );
+					dataLoop      = $this.data( 'embed-video-loop' ),
+					$replayBtn    = $( '#'+curVideoID+'-replay-btn' );
 
 			
 				if( typeof dataAuto === typeof undefined ) {
@@ -315,6 +333,13 @@ theme = ( function ( theme, $, window, document ) {
 				if( typeof dataLoop === typeof undefined ) {
 					dataLoop = true;
 				}
+				
+				
+				//Add replay button to video 
+				if ( $replayBtn.length == 0 ) {
+					$this.after( '<span class="replay" id="'+curVideoID+'-replay-btn"></span>' );
+				}
+				
 				
 				//HTML5 video autoplay on mobile revisited
 				if ( dataAuto && windowWidth <= 768 ) {
@@ -335,16 +360,34 @@ theme = ( function ( theme, $, window, document ) {
 						myPlayer.pause();
 						myPlayer.currentTime(0);
 					} else {
-						if ( dataAuto && dataLoop ) {
+						if ( dataAuto ) {
 
 							myPlayer.currentTime(0);
 							myPlayer.play();
+							$replayBtn.hide();
 
 							//Should the video go to the beginning when it ends
-
 							myPlayer.on( 'ended', function () { 
-								myPlayer.currentTime(0);
-								myPlayer.play();
+								
+								if ( dataLoop ) {
+									myPlayer.currentTime(0);
+									myPlayer.play();	
+								} else {
+									//Replay this video
+									myPlayer.currentTime(0);
+									
+									$replayBtn
+										.show()
+										.off( 'click' )
+										.on( 'click', function( e ) {
+											e.preventDefault();
+
+											myPlayer.play();
+											$replayBtn.hide();
+
+										});						
+								}
+							
 							});		
 
 
@@ -620,13 +663,8 @@ theme = ( function ( theme, $, window, document ) {
 				
 			    my_itemWidth = 1;
 				my_move      = 1;
-				my_minItems  = dataShowItems;
-				my_maxItems  = dataShowItems;
-				
-				if ( windowWidth <= 768 ) {
-					my_minItems  = 1;
-					my_maxItems  = 1;	
-				}
+				my_minItems  = getGridSize( dataShowItems );
+				my_maxItems  = getGridSize( dataShowItems );
 				
 			} 
 			
@@ -678,6 +716,12 @@ theme = ( function ( theme, $, window, document ) {
 				
 				//Fires when the slider loads the first slide.
 				start: function( slider ) {
+					
+					//set slider instance to flexslider variable
+					if( typeof dataShowItems != typeof undefined && dataShowItems != '' && dataShowItems != 0 ) {
+					    flexslider = slider;		
+					}
+					
 					initslides( $this, slider, 'start' );
 
 				},
@@ -729,6 +773,19 @@ theme = ( function ( theme, $, window, document ) {
 				$sliderDefault.each( function() {
 					
 					if ( $( this ).length > 0 ) {
+
+						// check grid size on resize event
+						var dataShowItems = $( this ).data( 'my-multiple-items' );
+		
+						
+						if( typeof dataShowItems != typeof undefined && dataShowItems != '' && dataShowItems != 0 ) {
+
+							var gridSize = getGridSize( dataShowItems );
+							flexslider.vars.minItems = gridSize;
+							flexslider.vars.maxItems = gridSize;
+							
+						}
+						
 						$( this ).data( 'flexslider' ).setup();
 					}			
 					

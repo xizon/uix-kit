@@ -93,6 +93,8 @@
 	> .item {
 		display: none;
 		-webkit-backface-visibility: hidden;
+		position: relative;
+
 	}
 	img {
 		max-width: 100%;

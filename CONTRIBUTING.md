@@ -32,9 +32,10 @@ Uix Kit bundles the following third-party resources:
 - [waypoints](https://github.com/imakewebthings/waypoints)
 - [Video.js](https://videojs.com/)
 - [Video.js Icon Font](https://github.com/videojs/font)
-- [videoBG](https://github.com/sydlawrence/jquery.videoBG)
 - [prefixfree](https://github.com/LeaVerou/prefixfree)
 - [template7](http://www.idangero.us/template7/)
+- [pixi](https://github.com/GoodBoyDigital/pixi.js)
+- [GSAP - Standard "No Charge" GreenSock License](https://greensock.com)
 
 
 

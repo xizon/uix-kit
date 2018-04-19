@@ -27,10 +27,14 @@ theme = ( function ( theme, $, window, document ) {
 		
 		$( '#toTop' ).on( 'click', function( e ) {
 			e.preventDefault();
-			$( 'html, body' ).stop().animate({
-				scrollTop: 0
-			}, { easing: 'easeOutQuart', duration: 500 } );	
-		
+			
+			TweenLite.to( window, 0.5, {
+				scrollTo: {
+					y: 0
+				},
+				ease: Power2.easeOut
+			});	
+
 		});
 		
 	   
@@ -46,9 +50,5 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
-
-
-
-
 
 

@@ -283,9 +283,14 @@ theme = ( function ( theme, $, window, document ) {
 
 
 			//Scroll Top
-			$( 'html, body' ).stop().animate({
-				scrollTop: 0
-			}, { easing: 'easeOutQuart', duration: 500 } );	
+			TweenLite.to( window, 0.5, {
+				scrollTo: {
+					y: 0
+				},
+				ease: Power2.easeOut
+			});	
+			
+			
 
 			return false;
 			

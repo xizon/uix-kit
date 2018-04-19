@@ -30,15 +30,52 @@ theme = ( function ( theme, $, window, document ) {
 			$( ulForDesktop + ' > li:not(.multi-column) ul, .menu-container:not(.mobile) li.multi-column > ul.sub-menu > li > ul, '+ulForDesktop+' li.multi-column > ul' ).css( 'margin-top', mTop + 'px' );
 			
 			$( ulForDesktop + ' li' ).on( 'mouseenter', function(){
-				$( this ).find( ' > ul.sub-menu:not(.multi), .mega-arrow' ).show().animate( { marginTop: 0, opacity: 1 }, { duration: 150 } );
+				
+			
+				TweenLite.set( $( this ).find( ' > ul.sub-menu:not(.multi), .mega-arrow' ), {
+					css: {
+						opacity    : 0,
+						display    : 'block',
+						marginTop  : mTop + 'px'
+					},
+					onComplete : function() {
+						
+						TweenLite.to( this.target, 0.3, {
+							css: {
+								opacity    : 1,
+								marginTop  : 0
+							},
+							ease   : Power2.easeOut
+						});		
+						
+						
+	
+					}
+				});				
+				
+
 				
 			}).on( 'mouseleave' , function(){
-				$( this ).find( '.mega-arrow' ).hide().animate( { opacity: 0 }, { duration: 150 } );
-				$( this ).find( ' > ul.sub-menu:not(.multi)' ).animate( { marginTop: mTop + 'px', opacity: 0 }, { duration: 150,
-						complete: function() {
-							$( this ).hide();
-						} 
-				} );		
+				
+				
+				TweenLite.to( $( this ).find( ' > ul.sub-menu:not(.multi), .mega-arrow' ), 0.3, {
+					css: {
+						opacity    : 0,
+						marginTop  : mTop + 'px'
+					},
+					onComplete : function() {
+						
+						TweenLite.set( this.target, {
+							css: {
+								display    : 'none',
+							}
+						});		
+						
+						
+	
+					}
+				});				
+					
 			});
 	
 	

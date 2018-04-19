@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.3.4
- * ## Last Update         :  April 16, 2018
+ * ## Version             :  1.3.5
+ * ## Last Update         :  April 19, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -69,8 +69,8 @@
     1. Basic 
     2. Table 
     3. Bullet List 
-    4. Typography 
-    5. Helper Classes 
+    4. Helper Classes 
+    5. Typography 
     6. Spacing 
     7. Basic Layout Styles 
     8. Navigation Area 
@@ -91,47 +91,50 @@
     23. 3rd Party Plugins 
     24. Accordion 
     25. Accordion Background Images 
-    26. Badges 
-    27. Breadcrumbs 
-    28. Button 
-    29. Author Card 
-    30. Counter 
-    31. Dropdown Menu 
-    32. Equal-width Divs 
-    33. Features 
-    34. Footer Templates 
-    35. Form 
-    36. Form Progress 
-    37. Gallery 
-    38. Custom Core Scripts & Stylesheets 
-    39. Brands List 
-    40. Bulleted List 
-    41. Maintain Aspect Ratio List 
-    42. List of Posts 
-    43. List of Split Posts 
-    44. Side by Side List 
-    45. Side by Side List With Photo 
-    46. Fullwidth List of Split 2 
-    47. Mobile Menu 
-    48. Fullwidth List of Split 
-    49. Modal Dialog 
-    50. Mouse Animation Scroll 
-    51. Multiple Items Carousel 
-    52. Parallax 
-    53. Periodical Scroll 
-    54. Pricing 
-    55. Progress Bar 
-    56. Services 
-    57. Show More Less 
-    58. Cutom Light Box 
-    59. Single Post 
-    60. Slideshow ( with custom flexslider ) 
-    61. Source Code 
-    62. Tabs 
-    63. Testimonials Carousel 
-    64. Timeline 
-    65. ToolTip 
-    66. WordPress Core 
+    26. Advanced Slider (Special Effects) 
+    27. Advanced Slider (Basic) 
+    28. Badges 
+    29. Breadcrumbs 
+    30. Button 
+    31. Author Card 
+    32. Counter 
+    33. Dropdown Menu 
+    34. Equal-width Divs 
+    35. Features 
+    36. Footer Templates 
+    37. Form 
+    38. Form Progress 
+    39. Gallery 
+    40. Custom Core Scripts & Stylesheets 
+    41. Cutom Light Box 
+    42. Brands List 
+    43. Bulleted List 
+    44. Maintain Aspect Ratio List 
+    45. List of Posts 
+    46. List of Split Posts 
+    47. Side by Side List 
+    48. Side by Side List With Photo 
+    49. Fullwidth List of Split 2 
+    50. Fullwidth List of Split 
+    51. Mobile Menu 
+    52. Modal Dialog 
+    53. Mouse Animation Scroll 
+    54. Multiple Items Carousel 
+    55. Parallax 
+    56. Periodical Scroll 
+    57. Pricing 
+    58. Progress Bar 
+    59. Services 
+    60. Show More Less 
+    61. Single Post 
+    62. Slideshow ( with custom flexslider ) 
+    63. Source Code 
+    64. Table Series 
+    65. Tabs 
+    66. Testimonials Carousel 
+    67. Timeline 
+    68. ToolTip 
+    69. WordPress Core 
 
 
 
@@ -738,6 +741,38 @@ ol.list-big-numbered.fill-bg li:before,
 /* Style of Irregular Shape */
 .skew-element {
     transform: skew(0deg, -2deg);
+}
+
+/* Hidden the element on mobile device */
+@media all and (max-width: 768px) {
+    .mobile-ele-hide {
+        display: none;
+    }
+}
+
+/* Tip Label */
+.tip-label {
+    font-weight: 100;
+    text-transform: uppercase;
+    font-weight: 700;
+    line-height: 1;
+    background: #EC5E79;
+    border-radius: 10px;
+    padding: .1rem .3rem !important;
+    margin-left: .5rem;
+    font-size: 0.625rem;
+    vertical-align: middle;
+    color: #fff !important;
+    position: absolute;
+    right: 2.5rem;
+    top: .5rem;
+}
+
+@media all and (max-width: 768px) {
+    .tip-label {
+        right: 1rem;
+        top: .7rem;
+    }
 }
 
 /* ====================================================== 
@@ -1745,6 +1780,29 @@ section.site-google-map,
     visibility: hidden;
 }
 
+.web-video-embed ~ .replay {
+    display: none;
+    position: absolute;
+    z-index: 11;
+    left: 50%;
+    top: 50%;
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+    margin-left: -22px;
+    margin-top: -22px;
+    font-size: 3rem;
+    text-shadow: 1px 0 3px rgba(0, 0, 0, 0.3);
+}
+
+.web-video-embed ~ .replay::before {
+    display: inline-block;
+    content: "\f021";
+    font-family: 'FontAwesome';
+    color: #fff;
+    cursor: pointer;
+}
+
 [data-video-iframe] {
     display: none;
 }
@@ -2409,6 +2467,10 @@ section.site-google-map,
     display: none;
     background: #212121;
     color: #fff;
+}
+
+.nav-filters.responsive-dropdown a {
+    display: block;
 }
 
 /* Responsive Dropdown Nav */
@@ -3178,6 +3240,288 @@ ul.entry-meta {
         width: 100%;
         transition: none;
     }
+}
+
+/* ====================================================== 
+   <!-- Advanced Slider (Special Effects) -->     
+/* ====================================================== */
+/* 
+ ---------------------------
+ 1) Initialize the slider style
+ ---------------------------
+ */
+.custom-advanced-slider-sp {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.custom-advanced-slider-sp .inner .item {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    opacity: 0;
+}
+
+.custom-advanced-slider-sp .inner .item canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background: #000;
+}
+
+.custom-advanced-slider-sp .inner .item img {
+    width: 100%;
+}
+
+.custom-advanced-slider-sp .inner .item.leave {
+    transition: all 0.6s ease;
+    opacity: 0;
+}
+
+.custom-advanced-slider-sp .inner .item.active {
+    transition: all 0.1s ease;
+    transition-delay: 0.6s;
+    opacity: 1;
+}
+
+/* 
+ ---------------------------
+ 2) Pagination dots 
+ ---------------------------
+ */
+.custom-advanced-slider-sp-pagination {
+    position: relative;
+    transform: translateY(-40px);
+    z-index: 2;
+}
+
+.custom-advanced-slider-sp-pagination ul {
+    list-style: none;
+    left: 0;
+    bottom: 0;
+    font-size: 0;
+  /*Fighting the Space Between Inline Block Elements*/
+    display: block;
+    width: 100%;
+    text-align: center;
+  /*require*/
+    position: relative;
+    transform: translateY(0.5rem);
+}
+
+.custom-advanced-slider-sp-pagination ul li {
+    font-size: 16px;
+  /*Fighting the Space Between Inline Block Elements*/
+    display: inline-block;
+  /*require*/
+    margin: 0 .2rem;
+}
+
+.custom-advanced-slider-sp-pagination ul li a {
+    width: 12px;
+    height: 12px;
+    display: block;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    text-indent: -9999px;
+    border-radius: 20px;
+    box-shadow: 0px 6px 23px -2px rgba(0, 0, 0, 0.36);
+}
+
+.custom-advanced-slider-sp-pagination ul li a:hover, .custom-advanced-slider-sp-pagination ul li a.active {
+    background: white;
+    width: 25px;
+}
+
+/* 
+ ---------------------------
+ 3) Next/Prev buttons
+ ---------------------------
+ */
+.custom-advanced-slider-sp-arrows {
+    position: relative;
+    transform: translateY(-75px);
+    z-index: 3;
+}
+
+.custom-advanced-slider-sp-arrows a {
+    position: absolute;
+    display: inline-block;
+    color: #fff;
+    width: 50px;
+}
+
+.custom-advanced-slider-sp-arrows .prev {
+    left: 15px;
+}
+
+.custom-advanced-slider-sp-arrows .prev.disabled {
+    visibility: hidden;
+}
+
+.custom-advanced-slider-sp-arrows .next {
+    right: 15px;
+    text-align: right;
+}
+
+.custom-advanced-slider-sp-arrows .next.disabled {
+    visibility: hidden;
+}
+
+/* ====================================================== 
+   <!-- Advanced Slider (Basic) -->     
+/* ====================================================== */
+/* 
+ ---------------------------
+ 1) Initialize the slider style
+ ---------------------------
+ */
+.custom-advanced-slider {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.custom-advanced-slider .inner .item {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    opacity: 0;
+}
+
+.custom-advanced-slider .inner .item canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    display: none;
+}
+
+.custom-advanced-slider .inner .item img {
+    width: 100%;
+}
+
+.custom-advanced-slider .inner .item.leave {
+    opacity: 0;
+}
+
+.custom-advanced-slider .inner .item.active {
+    opacity: 1;
+}
+
+.custom-advanced-slider.eff-scale .inner .item {
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+.custom-advanced-slider.eff-scale .inner .item.leave {
+    transition: all 0.6s ease;
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+.custom-advanced-slider.eff-scale .inner .item.active {
+    transition: all 0.6s ease;
+    transition-delay: 0.6s;
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* 
+ ---------------------------
+ 2) Pagination dots 
+ ---------------------------
+ */
+.custom-advanced-slider-pagination {
+    position: relative;
+    transform: translateY(-40px);
+    z-index: 2;
+}
+
+.custom-advanced-slider-pagination ul {
+    list-style: none;
+    left: 0;
+    bottom: 0;
+    font-size: 0;
+  /*Fighting the Space Between Inline Block Elements*/
+    display: block;
+    width: 100%;
+    text-align: center;
+  /*require*/
+    position: relative;
+    transform: translateY(0.5rem);
+}
+
+.custom-advanced-slider-pagination ul li {
+    font-size: 16px;
+  /*Fighting the Space Between Inline Block Elements*/
+    display: inline-block;
+  /*require*/
+    margin: 0 .2rem;
+}
+
+.custom-advanced-slider-pagination ul li a {
+    width: 12px;
+    height: 12px;
+    display: block;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    text-indent: -9999px;
+    border-radius: 20px;
+    box-shadow: 0px 6px 23px -2px rgba(0, 0, 0, 0.36);
+}
+
+.custom-advanced-slider-pagination ul li a:hover, .custom-advanced-slider-pagination ul li a.active {
+    background: white;
+    width: 25px;
+}
+
+/* 
+ ---------------------------
+ 3) Next/Prev buttons
+ ---------------------------
+ */
+.custom-advanced-slider-arrows {
+    position: relative;
+    transform: translateY(-75px);
+    z-index: 3;
+}
+
+.custom-advanced-slider-arrows a {
+    position: absolute;
+    display: inline-block;
+    color: #fff;
+    width: 50px;
+}
+
+.custom-advanced-slider-arrows .prev {
+    left: 15px;
+}
+
+.custom-advanced-slider-arrows .prev.disabled {
+    visibility: hidden;
+}
+
+.custom-advanced-slider-arrows .next {
+    right: 15px;
+    text-align: right;
+}
+
+.custom-advanced-slider-arrows .next.disabled {
+    visibility: hidden;
 }
 
 /* ====================================================== 
@@ -5333,6 +5677,321 @@ ul.entry-meta {
 /* ====================================================== 
    <!-- Custom Core Scripts & Stylesheets --> 
 /* ====================================================== */
+/* ====================================================== 
+   <!-- Cutom Light Box -->   
+/* ====================================================== */
+.custom-lightbox-html {
+    display: none;
+}
+
+.custom-lightbox-overlay-mask {
+    display: none;
+    position: fixed;
+    z-index: 99997;
+    background: rgba(0, 0, 0, 0.6);
+    top: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+.custom-lightbox-close-fixed {
+    display: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    text-align: center;
+    line-height: 34px;
+    overflow: hidden;
+    position: fixed;
+    z-index: 99999;
+    top: 25px;
+    right: 25px;
+    transform: rotate(45deg);
+    cursor: pointer;
+}
+
+.custom-lightbox-close-fixed.active {
+    display: block;
+}
+
+.custom-lightbox-close-fixed:after {
+    font-family: 'FontAwesome';
+    content: "\f067";
+    color: #fff;
+    font-size: 2rem;
+}
+
+.custom-lightbox-overlay {
+    display: none;
+    position: fixed;
+    z-index: 99998;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.custom-lightbox-overlay .lb-container {
+    display: none;
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+}
+
+.custom-lightbox-overlay .lb-container .html {
+  /* @include outer-shadow(); */
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+}
+
+.custom-lightbox-overlay .lb-container .html .lb-large-photos-container {
+    overflow: hidden;
+    background: #000;
+    position: relative;
+    transition: all 0.1s ease;
+}
+
+.custom-lightbox-overlay .lb-container .html .lb-large-photos-container ul {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.custom-lightbox-overlay .lb-container .html .lb-large-photos-container ul li {
+    padding: 0;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+}
+
+.custom-lightbox-overlay .lb-container .html .lb-large-photos-container ul li:first-child {
+    display: block;
+}
+
+.custom-lightbox-overlay .lb-container .html .lb-thumbs-container {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+    overflow-x: auto;
+    white-space: nowrap;
+  /* @include customScrollbar( 'vertical' ) ; */;
+}
+
+.custom-lightbox-overlay .lb-container .html .lb-thumbs-container::-webkit-scrollbar-track {
+    border-radius: 0px;
+    background-color: #E6E3E3;
+}
+
+.custom-lightbox-overlay .lb-container .html .lb-thumbs-container::-webkit-scrollbar {
+    height: 5px;
+    background-color: #EC5E79;
+}
+
+.custom-lightbox-overlay .lb-container .html .lb-thumbs-container::-webkit-scrollbar-thumb {
+    border-radius: 0px;
+    background-color: #EC5E79;
+}
+
+.custom-lightbox-overlay .lb-container .html .lb-thumbs-container ul {
+    margin: 0;
+    padding: 0;
+}
+
+.custom-lightbox-overlay .lb-container .html .lb-thumbs-container ul li {
+    width: 100px;
+    max-height: 100px;
+    display: inline-block;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 0;
+    transform: scale(0.9);
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+}
+
+.custom-lightbox-overlay .lb-container .html .lb-thumbs-container ul li.active {
+    transform: scale(1);
+}
+
+.custom-lightbox-overlay .lb-container .html .lb-thumbs-container ul li img {
+    box-shadow: 0px 6px 21px 1px rgba(0, 0, 0, 0.29);
+}
+
+.custom-lightbox-overlay .lb-container .html::before, .custom-lightbox-overlay .lb-container .html::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 25px;
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    background: #fff;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.custom-lightbox-overlay .lb-container .html::after {
+    top: auto;
+    bottom: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.custom-lightbox-overlay .lb-container .html.no-img {
+    background: #fff;
+    border-radius: 3px;
+}
+
+.custom-lightbox-overlay .lb-container .html > .lb-box {
+    position: relative;
+  /* Required Width */
+    width: 600px;
+    word-wrap: break-word;
+    max-height: 60vh;
+    overflow-y: auto;
+    text-align: left;
+  /* @include customScrollbar( 'vertical' ) ; */;
+}
+
+.custom-lightbox-overlay .lb-container .html > .lb-box::-webkit-scrollbar-track {
+    border-radius: 0px;
+    background-color: #E6E3E3;
+}
+
+.custom-lightbox-overlay .lb-container .html > .lb-box::-webkit-scrollbar {
+    width: 5px;
+    background-color: #EC5E79;
+}
+
+.custom-lightbox-overlay .lb-container .html > .lb-box::-webkit-scrollbar-thumb {
+    border-radius: 0px;
+    background-color: #EC5E79;
+}
+
+.custom-lightbox-overlay .lb-container .html > .lb-box > .content-show {
+    padding: 1.5rem;
+    color: #AEAEAE;
+    font-size: 0.75rem;
+}
+
+.custom-lightbox-overlay .lb-container .html > .lb-box > .content-show img {
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+.custom-lightbox-overlay .lb-container .html > img {
+    border-radius: 3px;
+    max-width: 100%;
+    width: auto;
+}
+
+.custom-lightbox-overlay .lb-container.pure-image .html::before, .custom-lightbox-overlay .lb-container.pure-image .html::after {
+    display: none;
+}
+
+.custom-lightbox-overlay .lb-close {
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: inline-block;
+    text-align: center;
+    line-height: 34px;
+    overflow: hidden;
+    position: absolute;
+    z-index: 99999;
+    top: 0;
+    right: -35px;
+    margin-top: -5px;
+    transform: rotate(45deg);
+    cursor: pointer;
+}
+
+.custom-lightbox-overlay .lb-close.no-fixed {
+    visibility: hidden;
+}
+
+.custom-lightbox-overlay .lb-close:after {
+    font-family: 'FontAwesome';
+    content: "\f067";
+    color: #fff;
+    font-size: 2rem;
+}
+
+.custom-lightbox-overlay.no-fixed {
+    position: absolute;
+    top: 100px;
+}
+
+.custom-lightbox-overlay.no-fixed .lb-container {
+    top: 0;
+    transform: translateY(0);
+    padding-bottom: 5rem;
+}
+
+.custom-lightbox-overlay.no-fixed .lb-container .html::after {
+    bottom: 5rem;
+}
+
+.custom-lightbox-overlay.no-fixed .lb-container.custom {
+    max-width: 1200px;
+}
+
+.custom-lightbox-overlay.no-fixed .lb-container.custom .html > .lb-box {
+    width: 1000px;
+    max-height: none;
+}
+
+@media all and (max-width: 768px) {
+    .custom-lightbox-overlay .lb-container {
+        max-width: calc(100vw - 30px);
+        margin: 15px auto;
+    }
+
+    .custom-lightbox-overlay .lb-container .html > .lb-box {
+        width: auto;
+    }
+
+    .custom-lightbox-overlay .lb-container .html .lb-thumbs-container {
+        bottom: -100px;
+    }
+
+    .custom-lightbox-overlay .lb-close {
+        right: -5px;
+        top: -30px;
+    }
+
+    .custom-lightbox-overlay.no-fixed {
+        top: 50px;
+    }
+
+    .custom-lightbox-overlay.no-fixed .lb-close {
+        right: -25px;
+    }
+
+    .custom-lightbox-overlay.no-fixed .lb-container.custom {
+        max-width: calc(100vw - 30px);
+    }
+
+    .custom-lightbox-overlay.no-fixed .lb-container.custom .html > .lb-box {
+        width: auto;
+    }
+}
+
 /* ====================================================== 
     <!-- Brands List --> 
 /* ====================================================== */
@@ -8913,304 +9572,6 @@ dl.list-side-by-side:after {
 }
 
 /* ====================================================== 
-   <!-- Cutom Light Box -->   
-/* ====================================================== */
-.custom-lightbox-html {
-    display: none;
-}
-
-.custom-lightbox-overlay-mask {
-    display: none;
-    position: fixed;
-    z-index: 99997;
-    background: rgba(0, 0, 0, 0.6);
-    top: 0;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-}
-
-.custom-lightbox-close-fixed {
-    display: none;
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    text-align: center;
-    line-height: 34px;
-    overflow: hidden;
-    position: fixed;
-    z-index: 99999;
-    top: 25px;
-    right: 25px;
-    transform: rotate(45deg);
-    cursor: pointer;
-}
-
-.custom-lightbox-close-fixed.active {
-    display: block;
-}
-
-.custom-lightbox-close-fixed:after {
-    font-family: 'FontAwesome';
-    content: "\f067";
-    color: #fff;
-    font-size: 2rem;
-}
-
-.custom-lightbox-overlay {
-    display: none;
-    position: fixed;
-    z-index: 99998;
-    top: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.custom-lightbox-overlay .lb-container {
-    display: none;
-    max-width: 1000px;
-    margin: 0 auto;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-    text-align: center;
-}
-
-.custom-lightbox-overlay .lb-container .html {
-  /* @include outer-shadow(); */
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
-}
-
-.custom-lightbox-overlay .lb-container .html .lb-large-photos-container {
-    overflow: hidden;
-    background: #000;
-    position: relative;
-    transition: all 0.1s ease;
-}
-
-.custom-lightbox-overlay .lb-container .html .lb-large-photos-container ul {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-}
-
-.custom-lightbox-overlay .lb-container .html .lb-large-photos-container ul li {
-    padding: 0;
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  /* @include transition-default(); */
-    transition: all 0.3s ease;
-}
-
-.custom-lightbox-overlay .lb-container .html .lb-large-photos-container ul li:first-child {
-    display: block;
-}
-
-.custom-lightbox-overlay .lb-container .html .lb-thumbs-container {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    width: 100%;
-    overflow: hidden;
-    overflow-x: auto;
-    white-space: nowrap;
-  /* @include customScrollbar( 'vertical' ) ; */;
-}
-
-.custom-lightbox-overlay .lb-container .html .lb-thumbs-container::-webkit-scrollbar-track {
-    border-radius: 0px;
-    background-color: #E6E3E3;
-}
-
-.custom-lightbox-overlay .lb-container .html .lb-thumbs-container::-webkit-scrollbar {
-    height: 5px;
-    background-color: #EC5E79;
-}
-
-.custom-lightbox-overlay .lb-container .html .lb-thumbs-container::-webkit-scrollbar-thumb {
-    border-radius: 0px;
-    background-color: #EC5E79;
-}
-
-.custom-lightbox-overlay .lb-container .html .lb-thumbs-container ul {
-    margin: 0;
-    padding: 0;
-}
-
-.custom-lightbox-overlay .lb-container .html .lb-thumbs-container ul li {
-    width: 100px;
-    max-height: 100px;
-    display: inline-block;
-    cursor: pointer;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    padding: 0;
-    transform: scale(0.9);
-  /* @include transition-default(); */
-    transition: all 0.3s ease;
-}
-
-.custom-lightbox-overlay .lb-container .html .lb-thumbs-container ul li.active {
-    transform: scale(1);
-}
-
-.custom-lightbox-overlay .lb-container .html .lb-thumbs-container ul li img {
-    box-shadow: 0px 6px 21px 1px rgba(0, 0, 0, 0.29);
-}
-
-.custom-lightbox-overlay .lb-container .html::before, .custom-lightbox-overlay .lb-container .html::after {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 25px;
-    position: absolute;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    background: #fff;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-}
-
-.custom-lightbox-overlay .lb-container .html::after {
-    top: auto;
-    bottom: 0;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
-}
-
-.custom-lightbox-overlay .lb-container .html.no-img {
-    background: #fff;
-    border-radius: 3px;
-}
-
-.custom-lightbox-overlay .lb-container .html > .lb-box {
-    position: relative;
-  /* Required Width */
-    width: 600px;
-    word-wrap: break-word;
-    max-height: 60vh;
-    overflow-y: auto;
-    text-align: left;
-  /* @include customScrollbar( 'vertical' ) ; */;
-}
-
-.custom-lightbox-overlay .lb-container .html > .lb-box::-webkit-scrollbar-track {
-    border-radius: 0px;
-    background-color: #E6E3E3;
-}
-
-.custom-lightbox-overlay .lb-container .html > .lb-box::-webkit-scrollbar {
-    width: 5px;
-    background-color: #EC5E79;
-}
-
-.custom-lightbox-overlay .lb-container .html > .lb-box::-webkit-scrollbar-thumb {
-    border-radius: 0px;
-    background-color: #EC5E79;
-}
-
-.custom-lightbox-overlay .lb-container .html > .lb-box > .content-show {
-    padding: 1.5rem;
-    color: #AEAEAE;
-    font-size: 0.75rem;
-}
-
-.custom-lightbox-overlay .lb-container .html > img {
-    border-radius: 3px;
-    max-width: 100%;
-    width: auto;
-}
-
-.custom-lightbox-overlay .lb-container.pure-image .html::before, .custom-lightbox-overlay .lb-container.pure-image .html::after {
-    display: none;
-}
-
-.custom-lightbox-overlay .lb-close {
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    display: inline-block;
-    text-align: center;
-    line-height: 34px;
-    overflow: hidden;
-    position: absolute;
-    z-index: 99999;
-    top: 0;
-    right: -35px;
-    margin-top: -5px;
-    transform: rotate(45deg);
-    cursor: pointer;
-}
-
-.custom-lightbox-overlay .lb-close.no-fixed {
-    visibility: hidden;
-}
-
-.custom-lightbox-overlay .lb-close:after {
-    font-family: 'FontAwesome';
-    content: "\f067";
-    color: #fff;
-    font-size: 2rem;
-}
-
-.custom-lightbox-overlay.no-fixed {
-    position: absolute;
-    top: 100px;
-}
-
-.custom-lightbox-overlay.no-fixed .lb-container {
-    top: 0;
-    transform: translateY(0);
-    padding-bottom: 5rem;
-}
-
-.custom-lightbox-overlay.no-fixed .lb-container .html::after {
-    bottom: 5rem;
-}
-
-.custom-lightbox-overlay.no-fixed .lb-container.custom {
-    max-width: 1200px;
-}
-
-.custom-lightbox-overlay.no-fixed .lb-container.custom .html > .lb-box {
-    width: 1000px;
-    max-height: none;
-}
-
-@media all and (max-width: 768px) {
-    .custom-lightbox-overlay .lb-container {
-        max-width: calc(100% - 30px);
-        margin: 15px auto;
-    }
-
-    .custom-lightbox-overlay .lb-container .html > .lb-box {
-        width: auto;
-    }
-
-    .custom-lightbox-overlay .lb-close {
-        right: -5px;
-        top: -30px;
-    }
-
-    .custom-lightbox-overlay.no-fixed {
-        top: 10px;
-    }
-
-    .custom-lightbox-overlay.no-fixed .lb-container.custom .html > .lb-box {
-        width: auto;
-    }
-}
-
-/* ====================================================== 
      <!-- Single Post -->        
 /* ====================================================== */
 /* Post edit link */
@@ -9309,6 +9670,7 @@ dl.list-side-by-side:after {
 .custom-theme-flexslider .custom-theme-slides > .item {
     display: none;
     -webkit-backface-visibility: hidden;
+    position: relative;
 }
 
 .custom-theme-flexslider .custom-theme-slides img {
@@ -10083,6 +10445,110 @@ li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 {
     content: "\f067";
     color: #fff;
     font-size: 1rem;
+}
+
+/* ====================================================== 
+   <!-- Table Series -->    
+/* ====================================================== */
+.custom-table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    empty-cells: show;
+    border: 1px solid #d6d5d5;
+    width: 100%;
+    border-color: #d6d5d5 !important;
+}
+
+.custom-table.noborder {
+    border: none;
+}
+
+.custom-table.top-noborder td {
+    border-top: none;
+}
+
+.custom-table.bottom-noborder td {
+    border-bottom: none;
+}
+
+.custom-table.alternant-row tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.custom-table.alternant-col col:first-child {
+    background-color: #000;
+}
+
+.custom-table.alternant-col col:nth-child(2n+3) {
+    background-color: #f2f2f2;
+}
+
+.custom-table caption {
+    padding: 0.875rem 0;
+    text-align: center;
+}
+
+.custom-table th,
+.custom-table td {
+    border-color: #d6d5d5 !important;
+}
+
+.custom-table td,
+.custom-table th {
+    border-left: 1px solid #d6d5d5;
+    border-width: 0 0 0 1px;
+    margin: 0;
+    overflow: visible;
+    padding: 0.5rem 0.75rem;
+}
+
+.custom-table td:first-child,
+.custom-table th:first-child {
+    border-left-width: 0;
+}
+
+.custom-table thead {
+    background: #f2f2f2;
+    text-align: left;
+    vertical-align: bottom;
+}
+
+.custom-table tfoot {
+    border: 1px solid #d6d5d5;
+}
+
+.custom-table tr th {
+    text-align: left;
+}
+
+.custom-table td {
+    background-color: transparent;
+}
+
+.custom-table.striped tr:nth-child(2n-1) td {
+    background-color: #f2f2f2;
+}
+
+.custom-table.bordered td {
+    border-bottom: 1px solid #d6d5d5;
+    border-width: 0 0 1px;
+}
+
+.custom-table.bordered tbody tr:last-child td {
+    border-bottom-width: 0;
+}
+
+.custom-table.horizontal td {
+    border-bottom: 1px solid #d6d5d5;
+    border-width: 0 0 1px;
+}
+
+.custom-table.horizontal tbody tr:last-child td {
+    border-bottom-width: 0;
+}
+
+.custom-table.horizontal th {
+    border-bottom: 1px solid #d6d5d5;
 }
 
 /* ====================================================== 

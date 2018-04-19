@@ -55,11 +55,11 @@
         
        
         <!-- Theme  -->
-        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTUyMzg3MTU4Mzg5MA"/>
+        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTUyNDEzNjcyNDEwMw"/>
         
         
          <!--[if lt IE 10]>
-           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTUyMzg3MTU4Mzg5MA" />
+           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTUyNDEzNjcyNDEwMw" />
         <![endif]-->
         
         
@@ -186,6 +186,8 @@
 													<ul class="sub-menu">
 														<li><span class="multi-column-title">Contents (Part 2)</span></li>
 														<li><a href="services.html">Services</a></li>
+														<li><a href="table-series.html">Table Series</a><span class="tip-label">new</span></li>
+														
 														
 													</ul>
 													<!-- .sub-menu  end -->
@@ -209,9 +211,10 @@
 														<li><a href="counter.html">Counter</a></li>
 														<li><a href="video-background.html">Video BG</a></li>
 														<li><a href="progress-bar.html">Progress Bar</a></li>
-														<li><a href="modal-dialog.html">Modal UI</a></li>
+														
 														<li><a href="parallax.html">Parallax</a></li>
 														<li><a href="parallax2.html">Parallax 2</a></li>
+													    <li><a href="modal-dialog.html">Modal UI</a></li>
 														    
 														
 														
@@ -219,6 +222,7 @@
 													</ul>
 													<!-- .sub-menu  end -->
 												</li>
+												
 												
 												<li>
 													<ul class="sub-menu">
@@ -230,7 +234,11 @@
 														<li><a href="badges.html">Badges</a></li>
 														<li><a href="equal-width-divs.html">Equal-width Divs</a></li>
 														<li><a href="mouse-animation-scroll.html">Mouse Animation Scroll</a></li>
-														<li><a href="periodical-scroll.html">Periodical Scroll</a></li>
+														<li><a href="periodical-scroll.html">Periodical Scroll</a></li>	
+														<li><a href="advanced-slider.html">Advanced Slider (Basic)</a><span class="tip-label">new</span></li>
+														<li><a href="advanced-slider-brightness.html">Advanced Slider Brightness</a><span class="tip-label">new</span></li>
+														<li><a href="advanced-slider-liquid.html">Advanced Slider Liquid</a><span class="tip-label">new</span></li>
+														
 														
 													</ul>
 													<!-- .sub-menu  end -->
@@ -246,7 +254,7 @@
 														<li><a href="tooltip.html">Tooltip</a></li>
 														<li><a href="show-more-less.html">Show More Less</a></li>
 														<li><a href="mousewheel-interaction.html">Mousewheel Interaction</a></li>
-														<li><a href="simple-lightbox.html">Simple Lightbox</a></li>
+														<li><a href="lightbox.html">Lightbox</a></li>
 														<li><a href="dynamic-dropdown-list-json.html">Dynamic Drop Down List</a></li>
 														
 														
@@ -317,14 +325,16 @@
       
        
     
-       
+        
+        
+     
         <!-- Content 01
         ====================================================== -->
-        <section class="space-none">
+        <section class="space-sm space-none-top">
             <div class="container t-c">
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2 t-c">
-                            <h2>Simple Lightbox</h2>
+                            <h2>Advanced Slider (Basic)</h2>
                             
                         </div>
                     </div>
@@ -337,116 +347,45 @@
         </section>
      
        
-    
        <!-- Content 02
         ====================================================== -->
-        <section>
-            <div class="container">
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2">
-                            
-							<p>
-                                <a class="button button-hover button-border-thin button-size-s button-bg-primary custom-lightbox" href="javascript:void(0);" data-lb-src="assets-demo/images/spiral-galaxy-1920x1080.jpg">Click Me To Show Image</a>
-                            </p>
-                            
-							<p>
-                                <a class="button button-hover button-border-thin button-size-s button-bg-primary custom-lightbox" href="javascript:void(0);" data-lb-src="[{'thumb':'assets-demo/images/slide-1.jpg', 'large':'assets-demo/images/slide-1.jpg'}, {'thumb':'assets-demo/images/spiral-galaxy-1920x1080.jpg', 'large':'assets-demo/images/spiral-galaxy-1920x1080.jpg'}, {'thumb':'assets-demo/images/slide-3.jpg', 'large':'assets-demo/images/slide-3.jpg'}, {'thumb':'assets-demo/images/slide-1.jpg', 'large':'assets-demo/images/slide-1.jpg'}]">Click Me To Show Multiple Image</a>
-                            </p>  
-                            
-                            
-							<p>
-                                <a class="button button-hover button-border-thin button-size-s button-bg-primary custom-lightbox" href="javascript:void(0);" data-lb-src="assets/images/placeholder/placeholder-800x2000.jpg" data-lb-fixed="false">Click Me To Show Image (Not Fixed)</a>
-                            </p>         
-                 
-							<p>
-							    <a class="button button-hover button-border-thin button-size-s button-bg-primary custom-lightbox" href="javascript:void(0);" data-lb-html="#my-lightbox-html-1">Click Me To Show HTML Code</a>
-							    
-							   <div class="custom-lightbox-html" id="my-lightbox-html-1">
-								   <div class="lb-box list-normal table-normal">
-									   <div class="content-show">
-									   
-											<!-- ///////   content begin /////// -->
+       <div class="custom-advanced-slider eff-scale" 
+          data-auto="true"
+          data-loop="true"
+          data-timing="10000" 
+		  data-count-total="false"
+		  data-count-now="false"
+          data-controls-pagination=".my-a-slider-pagination-1" 
+          data-controls-arrows=".my-a-slider-arrows-1">
+           <div class="inner">
+           
+			   <div class="item">
+				   <img src="assets-demo/images/slide-1.jpg" alt="Title 1" />
+			   </div>
 
-											<p>
-												<h5>Title</h5>
-											 </p>
-											<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. <a href="#">This is link</a></p>
+			   <div class="item">
+				   <img src="assets-demo/images/slide-2.jpg" alt="Title 2" />
+			   </div>
 
-											<p>Nullam id dolor id nibh ultricies vehicula ut id elit. <a href="#">Curabitur blandit tempus porttitor</a>. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper. Super/Duper/Long/NonBreaking/Path/Name/To/A/File/That/Is/Way/Deep/Down/In/Some/Mysterious/Remote/Desolate/Part/Of/The/Operating/System/To/A/File/That/Just/So/Happens/To/Be/Strangely/Named/Supercalifragilisticexpialidocious.txt</p>
-    
+			   <div class="item">
+				   <img src="assets-demo/images/slide-3.jpg" alt="Title 3" />
+			   </div> 
 
+		   </div>
+          <!-- /.inner -->
 
-											<!-- ///////   content end /////// -->
-
-										</div><!-- /.content-show -->
-								   </div><!-- /.lb-box -->
-							   </div>
-							   <!-- /.custom-lightbox-html -->
-						
-						
-						
-							</p>
-
-							<p>
-							    <a class="button button-hover button-border-thin button-size-s button-bg-primary custom-lightbox" href="javascript:void(0);" data-lb-html="#my-lightbox-html-2" data-lb-fixed="false">Click Me To Show HTML Code (Not Fixed)</a>
-							    
-							   <div class="custom-lightbox-html" id="my-lightbox-html-2">
-								   <div class="lb-box list-normal table-normal">
-									   <div class="content-show">
-									   
-											<!-- ///////   content begin /////// -->
-
-											<p>
-												<h5>Title</h5>
-											 </p>
-											<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. <a href="#">This is link</a></p>
-
-											<p>Nullam id dolor id nibh ultricies vehicula ut id elit. <a href="#">Curabitur blandit tempus porttitor</a>. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper. Super/Duper/Long/NonBreaking/Path/Name/To/A/File/That/Is/Way/Deep/Down/In/Some/Mysterious/Remote/Desolate/Part/Of/The/Operating/System/To/A/File/That/Just/So/Happens/To/Be/Strangely/Named/Supercalifragilisticexpialidocious.txt</p>
-    
-
-
-											<!-- ///////   content end /////// -->
-
-										</div><!-- /.content-show -->
-								   </div><!-- /.lb-box -->
-							   </div>
-							   <!-- /.custom-lightbox-html -->
-						
-						
-						
-							</p>
-							
-							
-							
-							<p>
-							    <a class="button button-hover button-border-thin button-size-s button-bg-primary custom-lightbox" href="javascript:void(0);" data-lb-html="#my-lightbox-html-3" data-lb-ajax-content="assets/json/content-html-lightbox.php" data-lb-fixed="false">Click Me To Show Content With AJAX</a>
-							    
-							   <div class="custom-lightbox-html" id="my-lightbox-html-3">
-								   <div class="lb-box list-normal table-normal">
-									   <div class="content-show" data-loading-text="Loading..."></div><!-- /.content-show -->
-								   </div><!-- /.lb-box -->
-							   </div>
-							   <!-- /.custom-lightbox-html -->
-						
-						
-						
-							</p>
-							
- 
-                       
-                        </div>
-                    </div>
-                    <!-- .row end -->
-              
-                    
-            </div>
-            <!-- .container end -->
- 
-        </section>
+		</div>
+       <!-- /.custom-advanced-slider -->
+       
+       <div class="custom-advanced-slider-pagination my-a-slider-pagination-1"></div>
+       <div class="custom-advanced-slider-arrows my-a-slider-arrows-1">
+			<a href="#" class="prev"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
+			<a href="#" class="next"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+       </div>
         
          
-           
-   
+         
+  
         
         
                 <!-- Footer
@@ -493,7 +432,11 @@
     <script src="assets/js/min/video.min.js?ver=5.19"></script> 
 	<script src="assets/js/min/jquery.waypoints.min.js?ver=4.0.1"></script> 
     <script src="assets/js/min/template7.min.js?ver=1.2.5"></script>
-
+    <script src="assets/js/min/pixi.min.js?ver=4.7.1"></script>
+    <script src="assets/js/min/TweenLite.min.js?ver=1.20.4"></script>
+   
+   
+  
     
     <!-- Slideshow  -->
     <script src="assets/js/min/jquery.flexslider.min.js?ver=2.7.0"></script>
@@ -519,7 +462,7 @@
 			"homeUrl"     :""  //Eg. https://uiux.cc
 		};
     </script>  
-    <script src="assets/js/uix-kit.min.js?ver=MTUyMzg3MTU4Mzg5MA"></script>
+    <script src="assets/js/uix-kit.min.js?ver=MTUyNDEzNjcyNDEwMw"></script>
 
 
 

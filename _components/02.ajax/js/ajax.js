@@ -12,13 +12,13 @@ theme = ( function ( theme, $, window, document ) {
     var documentReady = function( $ ) {
 		
 		/*
-		 * Apply the original scripts
+		 * Apply some original scripts
 		 *
 		 * @return {void}  - The constructor.
 		 */
 		
 		
-		function applyOriginalScripts() {
+		function applyOriginalSomeScripts() {
 			
 			theme.commonHeight.pageLoaded(); //Common Height
 			theme.accordion.documentReady($); //Accordion
@@ -26,6 +26,35 @@ theme = ( function ( theme, $, window, document ) {
 			
 		}
 
+		
+		/*
+		 * Apply all the original scripts
+		 *
+		 * @return {void}  - The constructor.
+		 */
+		
+		
+		function applyOriginalAllScripts() {
+			
+			
+			var scipts_pageLoaded    = theme.components.pageLoaded,
+				scipts_documentReady = theme.components.documentReady;
+			
+			
+			for ( var i = 0; i < scipts_pageLoaded.length; i++ ) {
+			     scipts_pageLoaded[i]();
+			}
+			for ( var j = 0; j < scipts_documentReady.length; j++ ) {
+			     scipts_documentReady[j]( $ );
+			}	
+		
+			
+			
+		}
+	
+		
+		
+		
 	};
 	
 		

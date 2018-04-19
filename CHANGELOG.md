@@ -1,5 +1,14 @@
 # Changelog
 
+
+#### = 1.3.5 (April 17, 2018) =
+
+* New: Add a new module "Table Series".
+* New: Add a new module "Advanced Slider". Support some effects of slider (advanced function).
+* New: Added replay button for slider with video.
+* New: Added "pixi" and "TweenLite" script library. Replace jQuery animate() and improve the animation performance of various devices.
+
+
 #### = 1.3.4 (April 16, 2018) =
 
 * Fix: Fixed some bugs for slides.

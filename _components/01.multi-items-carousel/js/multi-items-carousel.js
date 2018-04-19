@@ -44,6 +44,7 @@ theme = ( function ( theme, $, window, document ) {
 			}
 
 
+			
 			/* 
 			 ---------------------------
 			 Initialize carousel
@@ -179,11 +180,12 @@ theme = ( function ( theme, $, window, document ) {
 						
 						if ( carouselDir == 'horizontal' ) {
 							
-							$curItems
-								.first()
-								.animate({
-									'marginLeft': -carouselItemWidth
-								}, { duration: carouselSpeed, complete: function() {
+
+							TweenLite.to( $curItems.first(), carouselSpeed/1000, {
+								css: {
+									marginLeft : -carouselItemWidth
+								},
+								onComplete : function() {
 
 									//Initialize each item "margin-left"
 									$curItems.css( 'margin-left', 0 );
@@ -195,7 +197,8 @@ theme = ( function ( theme, $, window, document ) {
 										.appendTo( $carousel );
 
 
-									$( this ).remove();
+									//Remove duplicate elements
+									this.target.remove();
 
 
 
@@ -207,15 +210,18 @@ theme = ( function ( theme, $, window, document ) {
 									$( carouselPrev ).data( 'click', 0 ).removeClass( 'disable' );
 									$btn.data( 'click', 0 );
 
-								}} );	
+								}
+							});		
+					
 							
 						} else {
 							
-							$curItems
-								.first()
-								.animate({
-									'marginTop': -carouselItemHeight
-								}, { duration: carouselSpeed, complete: function() {
+							
+							TweenLite.to( $curItems.first(), carouselSpeed/1000, {
+								css: {
+									marginTop : -carouselItemHeight
+								},
+								onComplete : function() {
 
 									//Initialize each item "margin-top"
 									$curItems.css( 'margin-top', 0 );
@@ -227,7 +233,8 @@ theme = ( function ( theme, $, window, document ) {
 										.appendTo( $carousel );
 
 
-									$( this ).remove();
+									//Remove duplicate elements
+									this.target.remove();
 
 
 
@@ -239,7 +246,9 @@ theme = ( function ( theme, $, window, document ) {
 									$( carouselPrev ).data( 'click', 0 ).removeClass( 'disable' );
 									$btn.data( 'click', 0 );
 
-								}} );		
+								}
+							});				
+								
 						}
 
 	
@@ -267,9 +276,9 @@ theme = ( function ( theme, $, window, document ) {
 					btnLock     = $btn.data( 'click' ),
 					$curWrapper = $( e.data[0] ),
 					$curItems   = $curWrapper.children().find( '> .item' ),
-					isEnd       = false;
+					isEnd       = false,
+					$cloneItem  = null;
 
-				
 				
 				//Move to the end
 				if ( 1 == $curItems.first().data( 'id' ) ) {
@@ -296,48 +305,23 @@ theme = ( function ( theme, $, window, document ) {
 				
 						//Clone the first element to the last position
 						if ( carouselDir == 'horizontal' ) {
-							$curItems
-								.last()
-								.clone()
-								.prependTo( $carousel )
-								.css( 'margin-left', -carouselItemWidth + 'px' )
-								.animate({
-									'marginLeft': 0
-								}, { duration: carouselSpeed, complete: function() {
-
-									//Initialize each item "margin-left"
-									$curItems.css( 'margin-left', 0 );
-
-
-									$curItems
-										.last()
-										.remove();
-
-
-									//Active the center item
-									carouselActiveCenterItem( $curItems, 'right' );
-									
-
-									//Reset prevents code from duplicate run
-									$( carouselNext ).data( 'click', 0 ).removeClass( 'disable' );
-									$btn.data( 'click', 0 );
-
-								}} );			
 							
-						} else {
-							$curItems
-								.last()
-								.clone()
+							$cloneItem = $curItems.last().clone();
+							
+
+							//Clone the last element to the first position
+							$cloneItem
 								.prependTo( $carousel )
-								.css( 'margin-top', -carouselItemHeight + 'px' )
-								.animate({
-									'marginTop': 0
-								}, { duration: carouselSpeed, complete: function() {
-
-									//Initialize each item "margin-top"
-									$curItems.css( 'margin-top', 0 );
-
-
+							    .css( 'margin-left', -carouselItemWidth + 'px' );
+							
+							
+							TweenLite.to( $cloneItem, carouselSpeed/1000, {
+								css: {
+									marginLeft : 0
+								},
+								onComplete : function() {
+	
+									//Remove duplicate elements
 									$curItems
 										.last()
 										.remove();
@@ -352,7 +336,51 @@ theme = ( function ( theme, $, window, document ) {
 									$( carouselNext ).data( 'click', 0 ).removeClass( 'disable' );
 									$btn.data( 'click', 0 );
 
-								}} );		
+
+								}
+							});
+					
+
+
+						} else {
+							
+							
+							$cloneItem = $curItems.last().clone();
+							
+
+							//Clone the last element to the first position
+							$cloneItem
+								.prependTo( $carousel )
+							    .css( 'margin-top', -carouselItemHeight + 'px' );
+							
+							
+							TweenLite.to( $cloneItem, carouselSpeed/1000, {
+								css: {
+									marginTop : 0
+								},
+								onComplete : function() {
+	
+									//Remove duplicate elements
+									$curItems
+										.last()
+										.remove();
+
+
+
+									//Active the center item
+									carouselActiveCenterItem( $curItems, 'right' );
+
+
+									//Reset prevents code from duplicate run
+									$( carouselNext ).data( 'click', 0 ).removeClass( 'disable' );
+									$btn.data( 'click', 0 );
+
+
+								}
+							});
+						
+							
+						
 						}
 						
 						

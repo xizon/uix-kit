@@ -28,9 +28,13 @@ theme = ( function ( theme, $, window, document ) {
 			$( '.menu-main li > a' ).on('click', function(e) {
 				e.preventDefault();
 
-				$( 'html,body' ).animate({
-					scrollTop: getRelatedContent( this ).offset().top - 20
-				}, 500, 'easeOutExpo' );
+				TweenLite.to( window, 0.5, {
+					scrollTo: {
+						y: getRelatedContent( this ).offset().top - 20
+					},
+					ease: Power2.easeOut
+				});	
+			
 			});	
 
 			//-------- Default cwaypoint settings

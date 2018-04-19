@@ -42,16 +42,16 @@ theme = ( function ( theme, $, window, document ) {
 
 			function periodicalTextChange() {
 				
-				if( stop ) return;
+				if ( stop ) return;
 
 				var itemToMove = obj[0].firstElementChild;
 				itemToMove.style.marginTop = -itemHeight + 'px';
 			  
 				// move the child to the end of the items' list
-				setTimeout(function(){
+				setTimeout( function() {
 					itemToMove.removeAttribute( 'style' );
 					obj[0].appendChild( itemToMove );
-				}, 600);
+				}, speed );
 			}
 
 			obj.on( 'mouseenter', function() { stop = true; } )

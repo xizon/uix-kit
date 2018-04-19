@@ -207,12 +207,16 @@ $custom-lightbox-radius: 3px;
 					padding: 1.5rem;
 					color: $sub-text-color;
 					font-size: 0.75rem;
+					
+					img {
+						max-width: 100% !important;
+						height: auto !important;
+					}	
+					
 
 				}
 
 
-				
-			
 				
 			
 			}
@@ -316,15 +320,21 @@ $custom-lightbox-radius: 3px;
 		
 		.lb-container {
 
-			max-width: calc(100% - 30px);
+			max-width: calc(100vw - 30px);
 			margin: 15px auto;
 			
 			.html {
 				> .lb-box {
 					width: auto;
 				}	
+				
+
+				.lb-thumbs-container {
+					bottom: -100px;
+
+				}
+				
 			}
-			
 
 		}
 		
@@ -335,11 +345,19 @@ $custom-lightbox-radius: 3px;
 		}
 		
 		&.no-fixed {
-			top: 10px;
+			top: 50px;
+			
+
+			.lb-close {
+				right: -25px;
+			}	
 
 			.lb-container {
 				
 				&.custom {
+					
+					max-width: calc(100vw - 30px);
+					
 					.html > .lb-box {
 						width: auto;
 
