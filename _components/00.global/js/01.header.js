@@ -29,7 +29,7 @@ theme = ( function ( theme, $, window, document ) {
 		
 		
 		//-------- Header initialize
-		headerInit();
+		headerInit( windowWidth );
 		
 		$window.on( 'resize', function() {
 			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
@@ -39,13 +39,14 @@ theme = ( function ( theme, $, window, document ) {
 				windowWidth = $window.width();
 
 				// Do stuff here
-				headerInit();
+				headerInit( windowWidth );
 		
 
 			}
 		});
-		function headerInit() {
-			$( '.header-inner.auto-height' ).css( 'height', $( '.header-area' ).outerHeight() + 'px' ); 
+		function headerInit( w ) {
+			if ( w > 768 ) $( '.header-inner.auto-height' ).css( 'height', $( '.header-area' ).outerHeight() + 'px' ); 
+			
 		}
 		
 		

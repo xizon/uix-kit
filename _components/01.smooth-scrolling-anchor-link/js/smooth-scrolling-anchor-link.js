@@ -10,7 +10,6 @@ theme = ( function ( theme, $, window, document ) {
    
     var documentReady = function( $ ) {
 		
-		
 		//Prevent this module from loading in other pages
 		if ( $( 'body' ).hasClass( 'onepage' ) ) return false;
 		

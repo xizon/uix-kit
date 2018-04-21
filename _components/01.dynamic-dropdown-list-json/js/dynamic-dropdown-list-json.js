@@ -141,7 +141,7 @@ theme = ( function ( theme, $, window, document ) {
 						curLatitude  = $this.data( 'latitude' );
 
 					
-					console.log( curVal + ' Longitude: ' + curLongitude + ' | Latitude: ' + curLatitude );
+					//console.log( curVal + ' Longitude: ' + curLongitude + ' | Latitude: ' + curLatitude );
 					
 					return false;
 				

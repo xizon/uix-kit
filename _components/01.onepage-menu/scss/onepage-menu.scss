@@ -1,0 +1,75 @@
+/* ====================================================== 
+    <!-- Onepage Menu -->  
+/* ====================================================== */
+.custom-sidefixed-menu {
+	position: absolute;
+	z-index: 5;
+	margin-top: 200px;
+	width: 120px;
+	
+	&.fixed {
+		position: fixed;
+		top: 80px;
+		margin-top: 0;
+	}
+	
+	
+	li {
+		position: relative;
+		font-size: 0;
+		@include transition-default();
+		display: block;
+		width: 100px;
+		text-align: left;
+		cursor: pointer;
+		
+		strong {
+			position: absolute;
+			display: inline-block;
+			font-weight: normal;
+			left: 40px;
+			text-align: left;
+			
+		}
+
+		span {
+			font-size: 0.875rem;
+			display: inline-block;
+			padding-left: 1rem;
+			padding-right: .5rem;
+			font-weight: bold;
+			@include transition-default();
+		}
+		
+		a {
+			color: #fff;
+			display: block;
+		}
+			
+		
+		&.active {
+			font-size: 0.875rem;
+			color: #fff;
+			border-bottom: 2px solid #000;
+			
+			a {
+				color: #000;
+			}
+			
+			span {
+				font-weight: bold;
+			}	
+			
+			
+
+		}	
+	}
+
+}
+
+@media all and (max-width: 768px) {
+	.custom-sidefixed-menu {
+		display: none;
+	}
+}
+

@@ -486,6 +486,8 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 	 * You need add an attribute "data-slider-bg" to ".item"
 	*/
 	&.fullscreen {
+		min-height: 100vh;
+		
 		img {
 			height: 100vh;
 			visibility: hidden;
@@ -582,6 +584,8 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 	.custom-theme-flexslider.custom-primary-flexslider {
 		
 		&.fullscreen {
+			min-height: inherit;
+			
 			img {
 				height: auto;
 			}

@@ -77,7 +77,7 @@
 @media all and (max-width: 768px) {
 	.list-brands {
 		margin: 1.5rem 0;
-		min-height: none;
+		min-height: inherit;
 		
 		li {
 			

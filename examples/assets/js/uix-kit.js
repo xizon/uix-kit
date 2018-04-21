@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.3.5
- * ## Last Update         :  April 20, 2018
+ * ## Version             :  1.3.6
+ * ## Last Update         :  April 21, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -47,14 +47,14 @@
     22. Bulleted List 
     23. Posts List With Ajax 
     24. Fullwidth List of Split 
-    25. Mobile Menu 
+    25. Mousewheel Interaction 
     26. Modal Dialog 
-    27. Mousewheel Interaction 
-    28. Multiple Items Carousel 
-    29. Navigation Highlighting 
+    27. Mobile Menu 
+    28. Navigation Highlighting 
+    29. Multiple Items Carousel 
     30. Parallax 
-    31. Periodical Scroll 
-    32. Pricing 
+    31. Pricing 
+    32. Periodical Scroll 
     33. Progress Bar 
     34. Retina Graphics for Website 
     35. Scroll Reveal 
@@ -168,7 +168,7 @@ theme = ( function ( theme, $, window, document ) {
 		
 		
 		//-------- Header initialize
-		headerInit();
+		headerInit( windowWidth );
 		
 		$window.on( 'resize', function() {
 			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
@@ -178,13 +178,14 @@ theme = ( function ( theme, $, window, document ) {
 				windowWidth = $window.width();
 
 				// Do stuff here
-				headerInit();
+				headerInit( windowWidth );
 		
 
 			}
 		});
-		function headerInit() {
-			$( '.header-inner.auto-height' ).css( 'height', $( '.header-area' ).outerHeight() + 'px' ); 
+		function headerInit( w ) {
+			if ( w > 768 ) $( '.header-inner.auto-height' ).css( 'height', $( '.header-area' ).outerHeight() + 'px' ); 
+			
 		}
 		
 		
@@ -569,6 +570,7 @@ theme = ( function ( theme, $, window, document ) {
 					
 									});
 			
+			
 
 			myPlayer.ready(function() {
 				
@@ -585,11 +587,15 @@ theme = ( function ( theme, $, window, document ) {
 
 					//Scaled/Proportional Content 
 					newH = curH*(newW/curW);
+					
+				
+					if ( !isNaN( newW ) && !isNaN( newH ) )  {
+						myPlayer
+							.width( newW )
+							.height( newH );		
+					}
 
 
-					myPlayer
-						.width( newW )
-						.height( newH );
 					
 					//Show this video wrapper
 					$this.css( 'visibility', 'visible' );
@@ -858,12 +864,12 @@ theme = ( function ( theme, $, window, document ) {
 						progressAmount = ((this.currentTime() / duration) * 100) + "%";
 					}
 
-					console.log( progressAmount );
+					//console.log( progressAmount );
 				});
 
 				/* ---------  Callback for when a video has ended */
 				myPlayer.on( 'ended', function() {
-					console.log( 'video is done!' );
+					//console.log( 'video is done!' );
 				});
 
 
@@ -1417,6 +1423,185 @@ theme = ( function ( theme, $, window, document ) {
 		
 
 		
+		/*
+		 * Initialize embedded local video.
+		 *
+		 * @param  {object} wrapper          - The outermost video container, which can contain multiple videos
+		 * @param  {boolean} play            - Forced to trigger pause or play events.
+		 * @return {void}                    - The constructor.
+		 */
+		function advancedSliderVideoEmbedInit( wrapper, play ) {
+			wrapper.find( '.slider-video-embed' ).each( function()  {
+				var $this         = $( this ),
+					videoWrapperW = $this.closest( '.custom-advanced-slider-outer' ).width(),
+					videoWrapperH = $this.closest( '.custom-advanced-slider-outer' ).height(),
+					curVideoID    = $this.find( '.video-js' ).attr( 'id' ),
+					dataControls  = $this.data( 'embed-video-controls' ),
+					dataAuto      = $this.data( 'embed-video-autoplay' ),
+					dataLoop      = $this.data( 'embed-video-loop' ),
+					dataW         = $this.data( 'embed-video-width' ),
+					dataH         = $this.data( 'embed-video-height' ),
+					$replayBtn    = $( '#'+curVideoID+'-replay-btn' );
+				
+				if ( videoWrapperH == 0 ) videoWrapperH = videoWrapperW/1.77777777777778;
+
+			
+				if( typeof dataAuto === typeof undefined ) {
+					dataAuto = true;
+				}
+				if( typeof dataLoop === typeof undefined ) {
+					dataLoop = true;
+				}
+				
+
+				if( typeof dataControls === typeof undefined ) {
+					dataControls = false;
+				}	
+				
+				if( typeof dataW === typeof undefined || dataW == 'auto' ) {
+					dataW = videoWrapperW;
+				}	
+
+				if( typeof dataH === typeof undefined || dataH == 'auto' ) {
+					dataH = videoWrapperH;
+				}
+
+				
+				
+				
+				
+				//Add replay button to video 
+				if ( $replayBtn.length == 0 ) {
+					$this.after( '<span class="web-video-replay" id="'+curVideoID+'-replay-btn"></span>' );
+				}
+				
+				
+				//HTML5 video autoplay on mobile revisited
+				if ( dataAuto && windowWidth <= 768 ) {
+					$this.find( '.video-js' ).attr({
+						'autoplay'    : 'true',
+						'muted'       : 'true',
+						'playsinline' : 'true'
+					});
+				}
+
+				var myPlayer = videojs( curVideoID, {
+										  width     : dataW,
+										  height    : dataH,
+										  loop      : dataLoop,
+										  controlBar: {
+											  muteToggle : false,
+											  autoplay   : dataAuto,
+											  loop       : dataLoop,
+											  controls   : true,
+											  controlBar : {
+												  muteToggle: false
+											  }
+										  }
+
+
+										});
+
+
+				
+				
+				myPlayer.ready(function() {
+					
+					
+					/* ---------  Video initialize */
+					myPlayer.on( 'loadedmetadata', function() {
+
+						//Get Video Dimensions
+						var curW    = this.videoWidth(),
+							curH    = this.videoHeight(),
+							newW    = curW,
+							newH    = curH;
+
+						newW = videoWrapperW;
+
+						//Scaled/Proportional Content 
+						newH = curH*(newW/curW);
+
+
+						if ( !isNaN( newW ) && !isNaN( newH ) )  {
+							myPlayer
+								.width( newW )
+								.height( newH );	
+							
+							$this.css( 'height', newH );
+						}
+
+
+
+						//Show this video wrapper
+						$this.css( 'visibility', 'visible' );
+
+						//Hide loading effect
+						$this.find( '.vjs-loading-spinner, .vjs-big-play-button' ).hide();
+
+					});		
+
+		
+				
+					/* ---------  Set, tell the player it's in fullscreen  */
+					if ( dataAuto ) {
+						myPlayer.play();
+					}
+
+
+					/* ---------  Disable control bar play button click */
+					if ( !dataControls ) {
+						myPlayer.controls( false );
+					}
+
+					
+					/* ---------  Pause the video when it is not current slider  */
+					if ( !play ) {
+						myPlayer.pause();
+						myPlayer.currentTime(0);
+						
+					} else {
+						if ( dataAuto ) {
+
+							myPlayer.currentTime(0);
+							myPlayer.play();
+							$replayBtn.hide();
+
+							//Should the video go to the beginning when it ends
+							myPlayer.on( 'ended', function () { 
+								
+								if ( dataLoop ) {
+									myPlayer.currentTime(0);
+									myPlayer.play();	
+								} else {
+									//Replay this video
+									myPlayer.currentTime(0);
+									
+									$replayBtn
+										.show()
+										.off( 'click' )
+										.on( 'click', function( e ) {
+											e.preventDefault();
+
+											myPlayer.play();
+											$replayBtn.hide();
+
+										});						
+								}
+							
+							});		
+
+
+						}	
+					}
+					
+
+				});
+
+			});	
+		}	
+		
+		
 		
 		/*
 		 * Initialize slideshow
@@ -1431,7 +1616,7 @@ theme = ( function ( theme, $, window, document ) {
 				var $this                    = $( this ),
 					$items                   = $this.find( '.item' ),
 					total                    = $items.length,
-					timerEvtStop                 = null,
+					timerEvtStop             = null,
 					dataControlsPagination   = $this.data( 'controls-pagination' ),
 					dataControlsArrows       = $this.data( 'controls-arrows' ),
 					dataLoop                 = $this.data( 'loop' ),
@@ -1453,7 +1638,7 @@ theme = ( function ( theme, $, window, document ) {
 				$items.first().addClass( 'active' );
 				
 			
-				var curImgH = null;
+				var curImgH = 0;
 				//If the src is already set, then the event is firing in the cached case, 
 				//before you even get the event handler bound. To fix this, you can loop 
 				//through checking and triggering the event based off .complete
@@ -1468,21 +1653,29 @@ theme = ( function ( theme, $, window, document ) {
 					$this.css( 'height', curImgH + 'px' );
 				}
 
-				
-
+	
 				//Load slides to canvas
 				//-------------------------------------	
 				$this.find( '.item' ).each( function( index )  {
 					
-					if ( $( '#custom-advanced-slider-sp-canvas-item-'+index ).length == 0 ) {
-						$( this ).prepend( '<canvas id="custom-advanced-slider-sp-canvas-item-'+index+'" width="'+$this.width()+'" height="'+$this.height()+'"></canvas>' );
-					}
-					
 
 					//Canvas Interactions
-					canvasInteractions( index, $this )
+					if ( $items.eq( index ).find( 'video' ).length == 0 ) {
+						if ( $( '#custom-advanced-slider-sp-canvas-item-'+index ).length == 0 ) {
+							$( this ).prepend( '<canvas id="custom-advanced-slider-sp-canvas-item-'+index+'" width="'+$this.width()+'" height="'+$this.height()+'"></canvas>' );
+						}
+						canvasInteractions( index, $this );
+					}
+					
 					
 				});
+				
+				
+			
+				// Fires local videos asynchronously with slider switch.
+				//-------------------------------------
+				advancedSliderVideoEmbedInit( $items, false );	
+
 				
 				
 				//Autoplay Slider
@@ -1597,7 +1790,9 @@ theme = ( function ( theme, $, window, document ) {
 		 */
         function advancedSliderUpdates( elementIndex, slider ) {
 			
-			var total                    = slider.find( '.item' ).length,
+			var $items                   = slider.find( '.item' ),
+				$current                 = $items.eq( elementIndex ),
+			    total                    = $items.length,
 				dataCountTotal           = slider.data( 'count-total' ),
 				dataCountCur             = slider.data( 'count-now' ),
 				dataControlsPagination   = slider.data( 'controls-pagination' ),
@@ -1613,6 +1808,23 @@ theme = ( function ( theme, $, window, document ) {
 			if( typeof dataLoop === typeof undefined ) dataLoop = false;
 			if( typeof dataAuto === typeof undefined ) dataAuto = false;			
 		
+			
+			
+			//Reset the slider height
+			//-------------------------------------	
+			var curNewImgH = false;
+			$current.find( 'img' ).one( 'load', function() {
+				curNewImgH = $( this ).height();
+			}).each(function() {
+				if( this.complete ) $( this ).load();
+			});	
+
+
+			if ( curNewImgH && curNewImgH > 0 ) {
+				slider.css( 'height', curNewImgH + 'px' );
+			}
+			
+			
 			
 			//Transition Interception
 			//-------------------------------------
@@ -1630,10 +1842,11 @@ theme = ( function ( theme, $, window, document ) {
 			$( dataControlsPagination ).find( 'li a[data-index="'+elementIndex+'"]' ).addClass( 'active' ).removeClass( 'leave' );
 			
 			
-			slider.find( '.item' ).removeClass( 'leave' );
+			$items.removeClass( 'leave' );
 			slider.find( '.item.active' ).removeClass( 'active' ).addClass( 'leave' );
-			slider.find( '.item' ).eq( elementIndex ).addClass( 'active' ).removeClass( 'leave' );
+			$items.eq( elementIndex ).addClass( 'active' ).removeClass( 'leave' );
 
+			
 			
 
 			//Display counter
@@ -1642,6 +1855,13 @@ theme = ( function ( theme, $, window, document ) {
 			$( dataCountTotal ).text( total );
 			$( dataCountCur ).text( parseFloat( elementIndex ) + 1 );		
 			
+			
+			// Fires local videos asynchronously with slider switch.
+			//-------------------------------------
+			advancedSliderVideoEmbedInit( $items, false );
+			advancedSliderVideoEmbedInit( $current, true );
+			
+
 			
 			//Canvas Interactions
 			//-------------------------------------
@@ -1663,17 +1883,30 @@ theme = ( function ( theme, $, window, document ) {
         function canvasInteractions( elementIndex, slider ) {
 			
 			if ( Modernizr.webgl ) {
-				
-
-				var curImgURL             = slider.find( '.item' ).eq( elementIndex ).find( '> img' ).attr( 'src' ),
+			
+				var hasVideo              = ( slider.find( '.item' ).eq( elementIndex ).find( 'video' ).length > 0 ) ? true : false,
+				    curImgURL             = slider.find( '.item' ).eq( elementIndex ).find( 'img' ).attr( 'src' ),
 					stageW                = slider.width(),
 					stageH                = slider.height(),
-					curSprite             = PIXI.Sprite.fromImage( curImgURL, true ),
+					curSprite             = new PIXI.Sprite.fromImage( curImgURL, true ),
+					ticker                = new PIXI.ticker.Ticker(),
 					renderer              = new PIXI.Application( stageW, stageH, {
 															backgroundColor : 0x000000, 
 															autoResize      : true, 
 															view            : document.getElementById( 'custom-advanced-slider-sp-canvas-item-'+elementIndex )
+														}),
+				
+					filterAnimRenderer    = new PIXI.autoDetectRenderer( stageW, stageH, {
+															backgroundColor : 0x000000, 
+															transparent     : false,
+															view            : document.getElementById( 'custom-advanced-slider-sp-canvas-item-'+elementIndex )
 														});
+
+				
+				//If video
+				if ( hasVideo ) return false;
+				
+			
 
 				curSprite.width  = stageW;
 				curSprite.height = stageH;
@@ -1683,17 +1916,18 @@ theme = ( function ( theme, $, window, document ) {
 				//-------------------------------------		
 				if ( slider.hasClass( 'eff-brightness' ) ) {
 
-					// Add child container to the stage
+					// ------------ Add child container to the stage of each slider's canvas
 					renderer.stage.addChild( curSprite );
 
 					
+					// ------------ Animation Effects
 					TweenLite.set( curSprite, {
 						pixi: {
-							brightness: 3
+							brightness: 5
 						}
 					});	
 
-					TweenLite.to( curSprite, 2, {
+					TweenLite.to( curSprite, 3, {
 						pixi: {
 							brightness: 1
 						},
@@ -1708,6 +1942,8 @@ theme = ( function ( theme, $, window, document ) {
 				//-------------------------------------		
 				if ( slider.hasClass( 'eff-liquid' ) ) {
 
+					
+					    // ------------ Add filter container to the main container 
 						var count       = 0,
 							ropeLength  = stageW / 10,
 							points      = [];
@@ -1717,30 +1953,111 @@ theme = ( function ( theme, $, window, document ) {
 						}
 
 						// Set the filter to stage and set some default values for the animation
-						var strip = new PIXI.mesh.Rope( PIXI.Texture.fromImage( curImgURL ), points );
+					    var strip = new PIXI.mesh.Rope( PIXI.Texture.fromImage( curImgURL ), points );
+				
+					
 						strip.x = 0;
 					    strip.y = stageH/2 - 20;
 
-						// Add child container to the stage
+						// ------------ Add child container to the stage of each slider's canvas
 						renderer.stage.scale.set( 1 + stageH / stageW );
 						renderer.stage.addChild( strip );
 
-
-						renderer.ticker.add( function() {
+					
+					    // ------------ Animation Effects
+						ticker.autoStart = true;
+						ticker.add( function( delta ) {
 
 							// speed
-							count += 0.02; 
-
+							count += 0.01;
+						
 							// make the effect
 							for ( var j = 0; j < points.length; j++ ) {
+								
 								points[j].y = Math.sin((j * 0.5) + count) * 15;
-								points[j].x = j * ropeLength + Math.cos((j * 0.3) + count) * 15;
+								points[j].x = j * ropeLength + Math.cos((j * 0.3) + count) * 15;	
 							}
+							
 						});
+					
+					   
 
+				}	
+				
+				
+				//Liquid Distortion Effect
+				//-------------------------------------		
+				if ( slider.hasClass( 'eff-liquid2' ) ) {
+					
+						var filterStage         = new PIXI.Container(),
+							displacementSprite  = new PIXI.Sprite.fromImage( curImgURL ),
+							displacementFilter  = new PIXI.filters.DisplacementFilter( displacementSprite ),
+							rendererWidth       = renderer.view.width,
+							rendererHeight      = renderer.view.height;
+							
+				
+
+						// ------------ Add filter container to the main container 
+						curSprite.scale.set(1.04);
+						filterStage.addChild( curSprite );
+
+						// Enable Interactions
+						filterStage.interactive = true;
+
+						displacementSprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
+
+
+						// Set the filter to stage and set some default values for the animation
+						filterStage.filters = [ displacementFilter ];        
+
+						displacementSprite.anchor.set( 0.5 );
+						displacementSprite.x = filterAnimRenderer.width / 2;
+						displacementSprite.y = filterAnimRenderer.height / 2; 
+
+
+						displacementSprite.scale.x = 1;
+						displacementSprite.scale.y = 1;
+
+						// PIXI tries to fit the filter bounding box to the renderer so we optionally bypass
+						displacementFilter.autoFit = false;
+
+						filterStage.addChild( displacementSprite );
+					
+					
+					    // ------------ Add child container to the stage of each slider's canvas
+					    renderer.stage.addChild( filterStage );	
+					
+					
+						// ------------ Animation Effects
+						ticker.autoStart = true;
+						ticker.add( function( delta ) {
+							
+							
+							displacementSprite.x += 12.14 * delta;
+							displacementSprite.y += 42.24 * delta;
+
+							displacementSprite.scale.x += 0.2 * delta;
+							displacementSprite.scale.y += 0.2 * delta;
+							
+							
+							renderer.render( filterStage );
+
+						});
+					
+						// ------------ Add new ripple each time mouse is clicked
+						renderer.view.addEventListener( 'mousedown', function(ev) {
+							//console.log( ev.clientX + ', ' + ev.clientY );
+							
+							
+						}, false);
+					
 					
 
+
+
 				}		
+				
+				
 				
 				
 			} else {
@@ -1797,6 +2114,186 @@ theme = ( function ( theme, $, window, document ) {
 			}
 		});
 		
+		
+		
+		/*
+		 * Initialize embedded local video.
+		 *
+		 * @param  {object} wrapper          - The outermost video container, which can contain multiple videos
+		 * @param  {boolean} play            - Forced to trigger pause or play events.
+		 * @return {void}                    - The constructor.
+		 */
+		function advancedSliderVideoEmbedInit( wrapper, play ) {
+			wrapper.find( '.slider-video-embed' ).each( function()  {
+				var $this         = $( this ),
+					videoWrapperW = $this.closest( '.custom-advanced-slider-outer' ).width(),
+					videoWrapperH = $this.closest( '.custom-advanced-slider-outer' ).height(),
+					curVideoID    = $this.find( '.video-js' ).attr( 'id' ),
+					dataControls  = $this.data( 'embed-video-controls' ),
+					dataAuto      = $this.data( 'embed-video-autoplay' ),
+					dataLoop      = $this.data( 'embed-video-loop' ),
+					dataW         = $this.data( 'embed-video-width' ),
+					dataH         = $this.data( 'embed-video-height' ),
+					$replayBtn    = $( '#'+curVideoID+'-replay-btn' );
+				
+				if ( videoWrapperH == 0 ) videoWrapperH = videoWrapperW/1.77777777777778;
+
+			
+				if( typeof dataAuto === typeof undefined ) {
+					dataAuto = true;
+				}
+				if( typeof dataLoop === typeof undefined ) {
+					dataLoop = true;
+				}
+				
+
+				if( typeof dataControls === typeof undefined ) {
+					dataControls = false;
+				}	
+				
+				if( typeof dataW === typeof undefined || dataW == 'auto' ) {
+					dataW = videoWrapperW;
+				}	
+
+				if( typeof dataH === typeof undefined || dataH == 'auto' ) {
+					dataH = videoWrapperH;
+				}
+
+				
+				
+				
+				
+				//Add replay button to video 
+				if ( $replayBtn.length == 0 ) {
+					$this.after( '<span class="web-video-replay" id="'+curVideoID+'-replay-btn"></span>' );
+				}
+				
+				
+				//HTML5 video autoplay on mobile revisited
+				if ( dataAuto && windowWidth <= 768 ) {
+					$this.find( '.video-js' ).attr({
+						'autoplay'    : 'true',
+						'muted'       : 'true',
+						'playsinline' : 'true'
+					});
+				}
+
+				var myPlayer = videojs( curVideoID, {
+										  width     : dataW,
+										  height    : dataH,
+										  loop      : dataLoop,
+										  controlBar: {
+											  muteToggle : false,
+											  autoplay   : dataAuto,
+											  loop       : dataLoop,
+											  controls   : true,
+											  controlBar : {
+												  muteToggle: false
+											  }
+										  }
+
+
+										});
+
+
+				
+				
+				myPlayer.ready(function() {
+					
+					
+					/* ---------  Video initialize */
+					myPlayer.on( 'loadedmetadata', function() {
+
+						//Get Video Dimensions
+						var curW    = this.videoWidth(),
+							curH    = this.videoHeight(),
+							newW    = curW,
+							newH    = curH;
+
+						newW = videoWrapperW;
+
+						//Scaled/Proportional Content 
+						newH = curH*(newW/curW);
+
+
+						if ( !isNaN( newW ) && !isNaN( newH ) )  {
+							myPlayer
+								.width( newW )
+								.height( newH );	
+							
+							$this.css( 'height', newH );
+						}
+
+
+
+						//Show this video wrapper
+						$this.css( 'visibility', 'visible' );
+
+						//Hide loading effect
+						$this.find( '.vjs-loading-spinner, .vjs-big-play-button' ).hide();
+
+					});		
+
+		
+				
+					/* ---------  Set, tell the player it's in fullscreen  */
+					if ( dataAuto ) {
+						myPlayer.play();
+					}
+
+
+					/* ---------  Disable control bar play button click */
+					if ( !dataControls ) {
+						myPlayer.controls( false );
+					}
+
+					
+					/* ---------  Pause the video when it is not current slider  */
+					if ( !play ) {
+						myPlayer.pause();
+						myPlayer.currentTime(0);
+						
+					} else {
+						if ( dataAuto ) {
+
+							myPlayer.currentTime(0);
+							myPlayer.play();
+							$replayBtn.hide();
+
+							//Should the video go to the beginning when it ends
+							myPlayer.on( 'ended', function () { 
+								
+								if ( dataLoop ) {
+									myPlayer.currentTime(0);
+									myPlayer.play();	
+								} else {
+									//Replay this video
+									myPlayer.currentTime(0);
+									
+									$replayBtn
+										.show()
+										.off( 'click' )
+										.on( 'click', function( e ) {
+											e.preventDefault();
+
+											myPlayer.play();
+											$replayBtn.hide();
+
+										});						
+								}
+							
+							});		
+
+
+						}	
+					}
+					
+
+				});
+
+			});	
+		}	
+		
 
 		
 		
@@ -1813,7 +2310,7 @@ theme = ( function ( theme, $, window, document ) {
 				var $this                    = $( this ),
 					$items                   = $this.find( '.item' ),
 					total                    = $items.length,
-					timerEvtStop                 = null,
+					timerEvtStop             = null,
 					dataControlsPagination   = $this.data( 'controls-pagination' ),
 					dataControlsArrows       = $this.data( 'controls-arrows' ),
 					dataLoop                 = $this.data( 'loop' ),
@@ -1835,7 +2332,7 @@ theme = ( function ( theme, $, window, document ) {
 				$items.first().addClass( 'active' );
 				
 			
-				var curImgH = null;
+				var curImgH = 0;
 				//If the src is already set, then the event is firing in the cached case, 
 				//before you even get the event handler bound. To fix this, you can loop 
 				//through checking and triggering the event based off .complete
@@ -1853,13 +2350,26 @@ theme = ( function ( theme, $, window, document ) {
 				
 
 				//Load slides to canvas
-				//-------------------------------------	\
+				//-------------------------------------	
 				$this.find( '.item' ).each( function( index )  {
-					if ( $( '#custom-advanced-slider-canvas-item-'+index ).length == 0 ) {
-						$( this ).prepend( '<canvas id="custom-advanced-slider-canvas-item-'+index+'" width="'+$this.width()+'" height="'+$this.height()+'"></canvas>' );
+					
+					//Canvas Interactions
+					if ( $items.eq( index ).find( 'video' ).length == 0 ) {
+						
+						if ( $( '#custom-advanced-slider-canvas-item-'+index ).length == 0 ) {
+							$( this ).prepend( '<canvas id="custom-advanced-slider-canvas-item-'+index+'" width="'+$this.width()+'" height="'+$this.height()+'"></canvas>' );
+						}		
 					}
 
+
 				});
+				
+				
+			
+				// Fires local videos asynchronously with slider switch.
+				//-------------------------------------
+				advancedSliderVideoEmbedInit( $items, false );	
+				
 				
 				
 				//Autoplay Slider
@@ -1961,10 +2471,6 @@ theme = ( function ( theme, $, window, document ) {
 
 				
 
-
-
-				
-
 			});
 
 
@@ -1980,7 +2486,9 @@ theme = ( function ( theme, $, window, document ) {
 		 */
         function advancedSliderUpdates( elementIndex, slider ) {
 			
-			var total                    = slider.find( '.item' ).length,
+			var $items                   = slider.find( '.item' ),
+				$current                 = $items.eq( elementIndex ),
+			    total                    = $items.length,
 				dataCountTotal           = slider.data( 'count-total' ),
 				dataCountCur             = slider.data( 'count-now' ),
 				dataControlsPagination   = slider.data( 'controls-pagination' ),
@@ -1996,6 +2504,24 @@ theme = ( function ( theme, $, window, document ) {
 			if( typeof dataLoop === typeof undefined ) dataLoop = false;
 			if( typeof dataAuto === typeof undefined ) dataAuto = false;			
 		
+			
+			
+			
+			//Reset the slider height
+			//-------------------------------------	
+			var curNewImgH = false;
+			$current.find( 'img' ).one( 'load', function() {
+				curNewImgH = $( this ).height();
+			}).each(function() {
+				if( this.complete ) $( this ).load();
+			});	
+
+
+			if ( curNewImgH && curNewImgH > 0 ) {
+				slider.css( 'height', curNewImgH + 'px' );
+			}
+
+			
 			
 			//Transition Interception
 			//-------------------------------------
@@ -2013,9 +2539,9 @@ theme = ( function ( theme, $, window, document ) {
 			$( dataControlsPagination ).find( 'li a[data-index="'+elementIndex+'"]' ).addClass( 'active' ).removeClass( 'leave' );
 			
 			
-			slider.find( '.item' ).removeClass( 'leave' );
+			$items.removeClass( 'leave' );
 			slider.find( '.item.active' ).removeClass( 'active' ).addClass( 'leave' );
-			slider.find( '.item' ).eq( elementIndex ).addClass( 'active' ).removeClass( 'leave' );
+			$items.eq( elementIndex ).addClass( 'active' ).removeClass( 'leave' );
 
 			
 
@@ -2023,7 +2549,14 @@ theme = ( function ( theme, $, window, document ) {
 			//-------------------------------------
 
 			$( dataCountTotal ).text( total );
-			$( dataCountCur ).text( parseFloat( elementIndex ) + 1 );		
+			$( dataCountCur ).text( parseFloat( elementIndex ) + 1 );	
+			
+			
+			// Fires local videos asynchronously with slider switch.
+			//-------------------------------------
+			advancedSliderVideoEmbedInit( $items, false );
+			advancedSliderVideoEmbedInit( $current, true );
+			
 			
 		}
 		
@@ -2323,7 +2856,7 @@ theme = ( function ( theme, $, window, document ) {
 						curLatitude  = $this.data( 'latitude' );
 
 					
-					console.log( curVal + ' Longitude: ' + curLongitude + ' | Latitude: ' + curLatitude );
+					//console.log( curVal + ' Longitude: ' + curLongitude + ' | Latitude: ' + curLatitude );
 					
 					return false;
 				
@@ -7024,62 +7557,127 @@ theme = ( function ( theme, $, window, document ) {
     'use strict';
     
     var documentReady = function( $ ) {
-    
-        // Get section or article by href
+
+		var $primaryMenu      = $( '.menu-main' ),
+			$sidefixedMenu    = $( '.custom-sidefixed-menu' ),
+			topSectionSpacing = $( '.header-area' ).outerHeight( true );
+		
+
+		/*
+		 * Get section or article by href
+		 *
+		 * @param  {string, object} el  - The current selector or selector ID
+		 * @return {object}             - A new selector.
+		 */
         function getRelatedContent( el ) {
             return $( $( el ).attr( 'href' ) );
         }
-        // Get link by section or article id
-        function getRelatedNavigation( el ) {
-            return $( '.menu-main li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' );
+		
+		/*
+		 * Get link by section or article id
+		 *
+		 * @param  {string, object} el  - The current selector or selector ID
+		 * @param  {object} menuObj     - Returns the menu element within the document.
+		 * @return {object}             - A new selector.
+		 */
+        function getRelatedNavigation( el, menuObj ) {
+            return menuObj.find( 'li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' );
         } 
-        
-	    //-------- Navigation highlighting using waypoints
-		if ( $( 'body' ).hasClass( 'onepage' ) ) {
-
-			//Activate the first item
-			$( '.menu-main li:first' ).addClass( 'active' );
-			
-			
-			// Smooth scroll to content
-			$( '.menu-main li > a' ).on('click', function(e) {
+		
+		/*
+		 * Get all links by section or article
+		 *
+		 * @param  {object} menuObj     - Returns the menu element within the document.
+		 * @return {object}             - A new selector.
+		 */
+        function getAllNavigation( menuObj ) {
+            return menuObj.find( 'li' );
+        } 	
+		
+		/*
+		 * Smooth scroll to content
+		 *
+		 * @param  {object} menuObj     - Returns the menu element within the document.
+		 * @return {void}               - The constructor.
+		 */
+        function goPageSection( menuObj ) {
+			menuObj.find( 'li > a' ).on('click', function(e) {
 				e.preventDefault();
-
+				
+				
 				TweenLite.to( window, 0.5, {
 					scrollTo: {
-						y: getRelatedContent( this ).offset().top - 20
+						y: getRelatedContent( this ).offset().top - topSectionSpacing
 					},
 					ease: Power2.easeOut
 				});	
 			
 			});	
+	
+        } 	
+        
+		
+		//-------- Scroll Animate Interactions
+		//-----------------------------
+		if ( $( 'body' ).hasClass( 'onepage' ) ) {
 
-			//-------- Default cwaypoint settings
-			var topSectionSpacing = $( '.header-area' ).outerHeight( true );
-			var waypoints1 = $( '[data-highlight-section="true"]' ).waypoint({
-				handler: function( direction ) {
+			//Activate the first item
+			$primaryMenu.find( 'li:first' ).addClass( 'active' );
+			$sidefixedMenu.find( 'li:first' ).addClass( 'active' );
+	
+			// Smooth scroll to content
+			goPageSection( $primaryMenu );
+			goPageSection( $sidefixedMenu );
+			
+			
+			var navMinTop      = $sidefixedMenu.offset().top,
+				navMaxTop      = parseFloat( $( document ).height() - $( '.footer-main-container' ).height() ) - $( window ).height()/3;
+			
+			$( window ).on( 'scroll touchmove', function() {
+				var scrollTop = $( this ).scrollTop(),
+					spyTop    = parseFloat( scrollTop + topSectionSpacing ),
+					minTop    = $( '[data-highlight-section="true"]' ).first().offset().top,
+					maxTop    = $( '[data-highlight-section="true"]' ).last().offset().top + $( '[data-highlight-section="true"]' ).last().height();
 
+				
+				$( '[data-highlight-section="true"]' ).each( function()  {
+					var block     = $( this ),
+						eleTop    = block.offset().top;
+					
+			
+					if ( eleTop < spyTop ) {
 
-					// Highlight element when related content
-					getRelatedNavigation( this.element ).toggleClass( 'active', direction === 'down' );
-					$( this.element ).toggleClass( 'active', direction === 'down' );
-
-				},
-				offset: topSectionSpacing
-			});	
-
-			var waypoints2 = $( '[data-highlight-section="true"]' ).waypoint({
-				handler: function( direction ) {
-
-					// Highlight element when related content
-					getRelatedNavigation( this.element ).toggleClass( 'active', direction === 'up' );
-					$( this.element ).toggleClass( 'active', direction === 'up' );
-
-				},
-				offset: function() {  
-					return -$( this.element ).height() - topSectionSpacing; 
+						// Highlight element when related content
+						getAllNavigation( $primaryMenu ).removeClass( 'active' );
+						getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
+						getRelatedNavigation( block, $primaryMenu ).addClass( 'active' );
+						getRelatedNavigation( block, $sidefixedMenu ).addClass( 'active' );
+					} 
+				});
+				
+				
+				
+				//Cancel the current highlight element
+				if ( spyTop > maxTop || spyTop < minTop ) {
+					getAllNavigation( $primaryMenu ).removeClass( 'active' );
+					getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
 				}
+				
+				
+				//Detecting when user scrolls to bottom of div
+				if ( spyTop > navMaxTop || spyTop < navMinTop ) {
+					$sidefixedMenu.removeClass( 'fixed' );
+				} else {
+					$sidefixedMenu.addClass( 'fixed' );
+				}	
+				
+				
+				
+				
 			});	
+			
+			
+			
 
 		}
 
@@ -7097,6 +7695,8 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
+
+
 
 
 
@@ -8155,13 +8755,20 @@ theme = ( function ( theme, $, window, document ) {
 		 * @return {void}                    - The constructor.
 		 */
 		function videoEmbedInit( wrapper, play ) {
-			wrapper.find( '.web-video-embed' ).each( function()  {
+			wrapper.find( '.slider-video-embed' ).each( function()  {
 				var $this         = $( this ),
+					videoWrapperW = $this.closest( '[data-embed-video-wrapper]' ).width(),
+					videoWrapperH = $this.closest( '[data-embed-video-wrapper]' ).height(),
 					curVideoID    = $this.find( '.video-js' ).attr( 'id' ),
+					dataControls  = $this.data( 'embed-video-controls' ),
 					dataAuto      = $this.data( 'embed-video-autoplay' ),
 					dataLoop      = $this.data( 'embed-video-loop' ),
+					dataW         = $this.data( 'embed-video-width' ),
+					dataH         = $this.data( 'embed-video-height' ),
 					$replayBtn    = $( '#'+curVideoID+'-replay-btn' );
 
+				
+				if ( videoWrapperH == 0 ) videoWrapperH = videoWrapperW/1.77777777777778;
 			
 				if( typeof dataAuto === typeof undefined ) {
 					dataAuto = true;
@@ -8170,10 +8777,25 @@ theme = ( function ( theme, $, window, document ) {
 					dataLoop = true;
 				}
 				
+				if( typeof dataControls === typeof undefined ) {
+					dataControls = false;
+				}		
+				
+			
+				if( typeof dataW === typeof undefined || dataW == 'auto' ) {
+					dataW = videoWrapperW;
+				}	
+
+				if( typeof dataH === typeof undefined || dataH == 'auto' ) {
+					dataH = videoWrapperH;
+				}
+				
+
+
 				
 				//Add replay button to video 
 				if ( $replayBtn.length == 0 ) {
-					$this.after( '<span class="replay" id="'+curVideoID+'-replay-btn"></span>' );
+					$this.after( '<span class="web-video-replay" id="'+curVideoID+'-replay-btn"></span>' );
 				}
 				
 				
@@ -8186,12 +8808,76 @@ theme = ( function ( theme, $, window, document ) {
 					});
 				}
 
-				var myPlayer = videojs( curVideoID );
+				var myPlayer = videojs( curVideoID, {
+										  width     : dataW,
+										  height    : dataH,
+										  loop      : dataLoop,
+										  controlBar: {
+											  muteToggle : false,
+											  autoplay   : dataAuto,
+											  loop       : dataLoop,
+											  controls   : true,
+											  controlBar : {
+												  muteToggle: false
+											  }
+										  }
 
+
+										});
+
+				
 
 				myPlayer.ready(function() {
+					
+			
+					/* ---------  Video initialize */
+					myPlayer.on( 'loadedmetadata', function() {
 
-					//Pause the video when it is not current slider
+						//Get Video Dimensions
+						var curW    = this.videoWidth(),
+							curH    = this.videoHeight(),
+							newW    = curW,
+							newH    = curH;
+
+						newW = videoWrapperW;
+
+						//Scaled/Proportional Content 
+						newH = curH*(newW/curW);
+						
+					
+						if ( !isNaN( newW ) && !isNaN( newH ) )  {
+							myPlayer
+								.width( newW )
+								.height( newH );	
+							
+							$this.css( 'height', newH );
+						}
+
+
+
+						//Show this video wrapper
+						$this.css( 'visibility', 'visible' );
+
+						//Hide loading effect
+						$this.find( '.vjs-loading-spinner, .vjs-big-play-button' ).hide();
+
+					});		
+
+		
+				
+					/* ---------  Set, tell the player it's in fullscreen  */
+					if ( dataAuto ) {
+						myPlayer.play();
+					}
+
+
+					/* ---------  Disable control bar play button click */
+					if ( !dataControls ) {
+						myPlayer.controls( false );
+					}
+
+					
+					/* ---------  Pause the video when it is not current slider  */
 					if ( !play ) {
 						myPlayer.pause();
 						myPlayer.currentTime(0);
@@ -8437,7 +9123,8 @@ theme = ( function ( theme, $, window, document ) {
 				dataSync          = $this.data( 'my-sync' );
 			
 			
-			
+			//Fires local videos asynchronously with slider switch.
+			videoEmbedInit( $this.find( '.item' ), false );
 			
 			
 			// Custom Controls
@@ -8471,8 +9158,8 @@ theme = ( function ( theme, $, window, document ) {
 			if( typeof dataParallax === typeof undefined ) dataParallax = false;
 		
 			
+
 			
-		
 			//Make slider image draggable 
 			if ( dataDrag ) slidesExDraggable( $this );
 
@@ -8660,7 +9347,6 @@ theme = ( function ( theme, $, window, document ) {
    
    
     var documentReady = function( $ ) {
-		
 		
 		//Prevent this module from loading in other pages
 		if ( $( 'body' ).hasClass( 'onepage' ) ) return false;
@@ -8917,6 +9603,28 @@ theme = ( function ( theme, $, window, document ) {
 		  offset: topSpacing
 
 		});	
+		
+	
+			
+//		var	navMinTop    = $( '.stick-widget' ).offset().top + $( window ).height()/3,
+//			navMaxTop    = parseFloat( $( document ).height() - $( '.footer-main-container' ).height() ) - $( window ).height()/3;
+//
+//
+//		$( window ).on( 'scroll touchmove', function() {
+//			var scrollTop = $( this ).scrollTop(),
+//				spyTop    = parseFloat( scrollTop + $( window ).height()/2 );
+//
+//			//Detecting when user scrolls to bottom of div
+//			if ( spyTop > navMaxTop || spyTop < navMinTop ) {
+//				$( '.stick-widget' ).removeClass( 'act' );
+//			} else {
+//				$( '.stick-widget' ).addClass( 'act' );
+//			}	
+//
+//
+//		});
+
+
 
 		
     };

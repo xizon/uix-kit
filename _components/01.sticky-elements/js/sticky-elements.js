@@ -59,6 +59,28 @@ theme = ( function ( theme, $, window, document ) {
 		  offset: topSpacing
 
 		});	
+		
+	
+			
+//		var	navMinTop    = $( '.stick-widget' ).offset().top + $( window ).height()/3,
+//			navMaxTop    = parseFloat( $( document ).height() - $( '.footer-main-container' ).height() ) - $( window ).height()/3;
+//
+//
+//		$( window ).on( 'scroll touchmove', function() {
+//			var scrollTop = $( this ).scrollTop(),
+//				spyTop    = parseFloat( scrollTop + $( window ).height()/2 );
+//
+//			//Detecting when user scrolls to bottom of div
+//			if ( spyTop > navMaxTop || spyTop < navMinTop ) {
+//				$( '.stick-widget' ).removeClass( 'act' );
+//			} else {
+//				$( '.stick-widget' ).addClass( 'act' );
+//			}	
+//
+//
+//		});
+
+
 
 		
     };

@@ -87,6 +87,7 @@ theme = ( function ( theme, $, window, document ) {
 					
 									});
 			
+			
 
 			myPlayer.ready(function() {
 				
@@ -103,11 +104,15 @@ theme = ( function ( theme, $, window, document ) {
 
 					//Scaled/Proportional Content 
 					newH = curH*(newW/curW);
+					
+				
+					if ( !isNaN( newW ) && !isNaN( newH ) )  {
+						myPlayer
+							.width( newW )
+							.height( newH );		
+					}
 
 
-					myPlayer
-						.width( newW )
-						.height( newH );
 					
 					//Show this video wrapper
 					$this.css( 'visibility', 'visible' );
@@ -376,12 +381,12 @@ theme = ( function ( theme, $, window, document ) {
 						progressAmount = ((this.currentTime() / duration) * 100) + "%";
 					}
 
-					console.log( progressAmount );
+					//console.log( progressAmount );
 				});
 
 				/* ---------  Callback for when a video has ended */
 				myPlayer.on( 'ended', function() {
-					console.log( 'video is done!' );
+					//console.log( 'video is done!' );
 				});
 
 

@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.3.5
- * ## Last Update         :  April 20, 2018
+ * ## Version             :  1.3.6
+ * ## Last Update         :  April 21, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -68,8 +68,8 @@
 	
     1. Basic 
     2. Table 
-    3. Helper Classes 
-    4. Bullet List 
+    3. Bullet List 
+    4. Helper Classes 
     5. Typography 
     6. Spacing 
     7. Basic Layout Styles 
@@ -78,63 +78,65 @@
     10. Brand 
     11. Footer 
     12. Video 
-    13. Back to Top 
-    14. Loader 
-    15. Social Media Icons 
-    16. Pagination 
-    17. Filterable Navigation 
-    18. Sidebar 
-    19. Search 
-    20. Tags 
-    21. Entry 
-    22. Comments 
-    23. 3rd Party Plugins 
-    24. Accordion 
-    25. Accordion Background Images 
-    26. Advanced Slider (Special Effects) 
-    27. Advanced Slider (Basic) 
-    28. Badges 
-    29. Breadcrumbs 
+    13. Video 
+    14. Back to Top 
+    15. Loader 
+    16. Social Media Icons 
+    17. Pagination 
+    18. Filterable Navigation 
+    19. Sidebar 
+    20. Search 
+    21. Tags 
+    22. Entry 
+    23. Comments 
+    24. 3rd Party Plugins 
+    25. Accordion 
+    26. Accordion Background Images 
+    27. Advanced Slider (Special Effects) 
+    28. Advanced Slider (Basic) 
+    29. Badges 
     30. Button 
-    31. Author Card 
-    32. Counter 
-    33. Dropdown Menu 
-    34. Equal-width Divs 
-    35. Features 
-    36. Footer Templates 
-    37. Form 
-    38. Form Progress 
-    39. Gallery 
-    40. Custom Core Scripts & Stylesheets 
-    41. Cutom Light Box 
-    42. Brands List 
-    43. Bulleted List 
-    44. Maintain Aspect Ratio List 
-    45. List of Posts 
-    46. List of Split Posts 
-    47. Side by Side List 
-    48. Side by Side List With Photo 
-    49. Fullwidth List of Split 2 
-    50. Fullwidth List of Split 
-    51. Mobile Menu 
-    52. Modal Dialog 
-    53. Mouse Animation Scroll 
-    54. Multiple Items Carousel 
-    55. Parallax 
-    56. Periodical Scroll 
-    57. Pricing 
-    58. Progress Bar 
-    59. Services 
-    60. Show More Less 
-    61. Single Post 
-    62. Slideshow ( with custom flexslider ) 
-    63. Source Code 
-    64. Table Series 
-    65. Tabs 
-    66. Testimonials Carousel 
-    67. Timeline 
-    68. ToolTip 
-    69. WordPress Core 
+    31. Breadcrumbs 
+    32. Author Card 
+    33. Counter 
+    34. Dropdown Menu 
+    35. Equal-width Divs 
+    36. Features 
+    37. Footer Templates 
+    38. Form 
+    39. Form Progress 
+    40. Gallery 
+    41. Custom Core Scripts & Stylesheets 
+    42. Cutom Light Box 
+    43. Brands List 
+    44. Bulleted List 
+    45. Maintain Aspect Ratio List 
+    46. List of Posts 
+    47. List of Split Posts 
+    48. Side by Side List 
+    49. Side by Side List With Photo 
+    50. Fullwidth List of Split 2 
+    51. Fullwidth List of Split 
+    52. Mobile Menu 
+    53. Modal Dialog 
+    54. Mouse Animation Scroll 
+    55. Multiple Items Carousel 
+    56. Onepage Menu 
+    57. Parallax 
+    58. Periodical Scroll 
+    59. Pricing 
+    60. Progress Bar 
+    61. Services 
+    62. Show More Less 
+    63. Single Post 
+    64. Slideshow ( with custom flexslider ) 
+    65. Source Code 
+    66. Table Series 
+    67. Tabs 
+    68. Testimonials Carousel 
+    69. Timeline 
+    70. ToolTip 
+    71. WordPress Core 
 
 
 
@@ -755,7 +757,7 @@ ol.list-big-numbered.fill-bg li:before,
     font-weight: 100;
     text-transform: uppercase;
     font-weight: 700;
-    line-height: 1;
+    line-height: 1.2;
     background: #EC5E79;
     border-radius: 10px;
     padding: .1rem .3rem !important;
@@ -764,8 +766,9 @@ ol.list-big-numbered.fill-bg li:before,
     vertical-align: middle;
     color: #fff !important;
     position: absolute;
-    right: 2.5rem;
+    right: 2.3rem;
     top: .5rem;
+    transform: scale(0.7);
 }
 
 @media all and (max-width: 768px) {
@@ -1780,7 +1783,7 @@ section.site-google-map,
     visibility: hidden;
 }
 
-.web-video-embed ~ .replay {
+.web-video-replay {
     display: none;
     position: absolute;
     z-index: 11;
@@ -1795,7 +1798,7 @@ section.site-google-map,
     text-shadow: 1px 0 3px rgba(0, 0, 0, 0.3);
 }
 
-.web-video-embed ~ .replay::before {
+.web-video-replay::before {
     display: inline-block;
     content: "\f021";
     font-family: 'FontAwesome';
@@ -5576,6 +5579,107 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
+        <!-- Gallery --> 
+/* ====================================================== */
+.custom-gallery .custom-gallery-item {
+    transition: none;
+    position: relative;
+    text-align: left;
+}
+
+.custom-gallery .custom-gallery-item .link-to {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    z-index: 3;
+    opacity: 0;
+    margin-top: -1rem;
+  /* Vertical Center */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.custom-gallery .custom-gallery-item:hover .link-to {
+    opacity: 1;
+}
+
+.custom-gallery .custom-gallery-item .cover {
+    position: relative;
+}
+
+.custom-gallery .custom-gallery-item .cover:before {
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0);
+    display: block;
+    content: '';
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+}
+
+.custom-gallery .custom-gallery-item:hover .cover:before {
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.custom-gallery .custom-gallery-item h3 {
+    position: relative;
+    font-size: 1.125rem;
+    padding-top: 0.546875rem;
+}
+
+.custom-gallery .custom-gallery-item .title {
+    opacity: 0.7;
+    margin-left: 0.875rem;
+    font-size: 0.625rem;
+    line-height: 1.625;
+    display: inline-block;
+}
+
+.custom-gallery .custom-gallery-item .title:before {
+    content: '|';
+    padding-right: 0.875rem;
+}
+
+.custom-gallery .custom-gallery-item .category {
+    font-size: 0.625rem;
+    line-height: 1.625;
+    display: inline-block;
+    position: absolute;
+    bottom: 0.875rem;
+    right: 0;
+    background: #EC5E79;
+    border-radius: 25px;
+    padding: 0.0875rem 1.1375rem;
+    color: #fff;
+}
+
+.custom-gallery .custom-gallery-item .category a {
+    color: #fff;
+}
+
+.custom-gallery .custom-gallery-item .category:hover {
+    background: #C56263;
+}
+
+.custom-gallery .custom-gallery-item .image {
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    position: relative;
+    outline: 0;
+    background: #ddd;
+    border: 1px solid #E7E7E7;
+}
+
+.custom-gallery .custom-gallery-item .cover img {
+    width: 100%;
+}
+
+/* ====================================================== 
    <!-- Custom Core Scripts & Stylesheets --> 
 /* ====================================================== */
 /* ====================================================== 
@@ -5894,107 +5998,6 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-        <!-- Gallery --> 
-/* ====================================================== */
-.custom-gallery .custom-gallery-item {
-    transition: none;
-    position: relative;
-    text-align: left;
-}
-
-.custom-gallery .custom-gallery-item .link-to {
-    width: 100%;
-    position: absolute;
-    left: 0;
-    z-index: 3;
-    opacity: 0;
-    margin-top: -1rem;
-  /* Vertical Center */
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.custom-gallery .custom-gallery-item:hover .link-to {
-    opacity: 1;
-}
-
-.custom-gallery .custom-gallery-item .cover {
-    position: relative;
-}
-
-.custom-gallery .custom-gallery-item .cover:before {
-  /* @include transition-default(); */
-    transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0);
-    display: block;
-    content: '';
-    top: 0;
-    left: 0;
-    position: absolute;
-    z-index: 2;
-    width: 100%;
-    height: 100%;
-}
-
-.custom-gallery .custom-gallery-item:hover .cover:before {
-    background: rgba(255, 255, 255, 0.95);
-}
-
-.custom-gallery .custom-gallery-item h3 {
-    position: relative;
-    font-size: 1.125rem;
-    padding-top: 0.546875rem;
-}
-
-.custom-gallery .custom-gallery-item .title {
-    opacity: 0.7;
-    margin-left: 0.875rem;
-    font-size: 0.625rem;
-    line-height: 1.625;
-    display: inline-block;
-}
-
-.custom-gallery .custom-gallery-item .title:before {
-    content: '|';
-    padding-right: 0.875rem;
-}
-
-.custom-gallery .custom-gallery-item .category {
-    font-size: 0.625rem;
-    line-height: 1.625;
-    display: inline-block;
-    position: absolute;
-    bottom: 0.875rem;
-    right: 0;
-    background: #EC5E79;
-    border-radius: 25px;
-    padding: 0.0875rem 1.1375rem;
-    color: #fff;
-}
-
-.custom-gallery .custom-gallery-item .category a {
-    color: #fff;
-}
-
-.custom-gallery .custom-gallery-item .category:hover {
-    background: #C56263;
-}
-
-.custom-gallery .custom-gallery-item .image {
-    width: 100%;
-    display: block;
-    overflow: hidden;
-    position: relative;
-    outline: 0;
-    background: #ddd;
-    border: 1px solid #E7E7E7;
-}
-
-.custom-gallery .custom-gallery-item .cover img {
-    width: 100%;
-}
-
-/* ====================================================== 
     <!-- Brands List --> 
 /* ====================================================== */
 .list-brands {
@@ -6065,7 +6068,7 @@ ul.entry-meta {
 @media all and (max-width: 768px) {
     .list-brands {
         margin: 1.5rem 0;
-        min-height: none;
+        min-height: inherit;
     }
 
     .list-brands li {
@@ -7404,6 +7407,76 @@ dl.list-side-by-side:after {
     position: absolute;
     top: 20%;
     left: 600px;
+}
+
+/* ====================================================== 
+    <!-- Onepage Menu -->  
+/* ====================================================== */
+.custom-sidefixed-menu {
+    position: absolute;
+    z-index: 5;
+    margin-top: 200px;
+    width: 120px;
+}
+
+.custom-sidefixed-menu.fixed {
+    position: fixed;
+    top: 80px;
+    margin-top: 0;
+}
+
+.custom-sidefixed-menu li {
+    position: relative;
+    font-size: 0;
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+    display: block;
+    width: 100px;
+    text-align: left;
+    cursor: pointer;
+}
+
+.custom-sidefixed-menu li strong {
+    position: absolute;
+    display: inline-block;
+    font-weight: normal;
+    left: 40px;
+    text-align: left;
+}
+
+.custom-sidefixed-menu li span {
+    font-size: 0.875rem;
+    display: inline-block;
+    padding-left: 1rem;
+    padding-right: .5rem;
+    font-weight: bold;
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+}
+
+.custom-sidefixed-menu li a {
+    color: #fff;
+    display: block;
+}
+
+.custom-sidefixed-menu li.active {
+    font-size: 0.875rem;
+    color: #fff;
+    border-bottom: 2px solid #000;
+}
+
+.custom-sidefixed-menu li.active a {
+    color: #000;
+}
+
+.custom-sidefixed-menu li.active span {
+    font-weight: bold;
+}
+
+@media all and (max-width: 768px) {
+    .custom-sidefixed-menu {
+        display: none;
+    }
 }
 
 /* ====================================================== 
@@ -10011,6 +10084,10 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 	*/;
 }
 
+.custom-theme-flexslider.custom-primary-flexslider.fullscreen {
+    min-height: 100vh;
+}
+
 .custom-theme-flexslider.custom-primary-flexslider.fullscreen img {
     height: 100vh;
     visibility: hidden;
@@ -10079,6 +10156,10 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 }
 
 @media all and (max-width: 768px) {
+    .custom-theme-flexslider.custom-primary-flexslider.fullscreen {
+        min-height: inherit;
+    }
+
     .custom-theme-flexslider.custom-primary-flexslider.fullscreen img {
         height: auto;
     }

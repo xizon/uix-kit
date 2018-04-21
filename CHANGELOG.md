@@ -1,6 +1,15 @@
 # Changelog
 
 
+#### = 1.3.6 (April 21, 2018) =
+
+* New: Add a new effect for module "Advanced Slider".
+* Fix: Fixed some issues for smooth scrolling when clicking an anchor link.
+* Fix: Fixed an error of one page navigation activation.
+* Tweak: Optimized carousel interaction based on canvas effects.
+* Tweak: Adjusted the slides script to prevent other possible compatibility feature conflicts.
+
+
 #### = 1.3.5 (April 17, 2018) =
 
 * New: Add a new module "Table Series".

@@ -226,7 +226,7 @@
 	font-weight: 100;
 	text-transform: uppercase;
 	font-weight: 700;
-	line-height: 1;
+	line-height: 1.2;
 	background: $highlight-color1;
 	border-radius: 10px;
 	padding: .1rem .3rem !important;
@@ -235,8 +235,9 @@
 	vertical-align: middle;
 	color: #fff !important;
 	position: absolute;
-	right: 2.5rem;
+	right: 2.3rem;
 	top: .5rem;
+	transform: scale(.7);
 }
 
 @media all and (max-width: 768px) {

@@ -319,13 +319,20 @@ theme = ( function ( theme, $, window, document ) {
 		 * @return {void}                    - The constructor.
 		 */
 		function videoEmbedInit( wrapper, play ) {
-			wrapper.find( '.web-video-embed' ).each( function()  {
+			wrapper.find( '.slider-video-embed' ).each( function()  {
 				var $this         = $( this ),
+					videoWrapperW = $this.closest( '[data-embed-video-wrapper]' ).width(),
+					videoWrapperH = $this.closest( '[data-embed-video-wrapper]' ).height(),
 					curVideoID    = $this.find( '.video-js' ).attr( 'id' ),
+					dataControls  = $this.data( 'embed-video-controls' ),
 					dataAuto      = $this.data( 'embed-video-autoplay' ),
 					dataLoop      = $this.data( 'embed-video-loop' ),
+					dataW         = $this.data( 'embed-video-width' ),
+					dataH         = $this.data( 'embed-video-height' ),
 					$replayBtn    = $( '#'+curVideoID+'-replay-btn' );
 
+				
+				if ( videoWrapperH == 0 ) videoWrapperH = videoWrapperW/1.77777777777778;
 			
 				if( typeof dataAuto === typeof undefined ) {
 					dataAuto = true;
@@ -334,10 +341,25 @@ theme = ( function ( theme, $, window, document ) {
 					dataLoop = true;
 				}
 				
+				if( typeof dataControls === typeof undefined ) {
+					dataControls = false;
+				}		
+				
+			
+				if( typeof dataW === typeof undefined || dataW == 'auto' ) {
+					dataW = videoWrapperW;
+				}	
+
+				if( typeof dataH === typeof undefined || dataH == 'auto' ) {
+					dataH = videoWrapperH;
+				}
+				
+
+
 				
 				//Add replay button to video 
 				if ( $replayBtn.length == 0 ) {
-					$this.after( '<span class="replay" id="'+curVideoID+'-replay-btn"></span>' );
+					$this.after( '<span class="web-video-replay" id="'+curVideoID+'-replay-btn"></span>' );
 				}
 				
 				
@@ -350,12 +372,76 @@ theme = ( function ( theme, $, window, document ) {
 					});
 				}
 
-				var myPlayer = videojs( curVideoID );
+				var myPlayer = videojs( curVideoID, {
+										  width     : dataW,
+										  height    : dataH,
+										  loop      : dataLoop,
+										  controlBar: {
+											  muteToggle : false,
+											  autoplay   : dataAuto,
+											  loop       : dataLoop,
+											  controls   : true,
+											  controlBar : {
+												  muteToggle: false
+											  }
+										  }
 
+
+										});
+
+				
 
 				myPlayer.ready(function() {
+					
+			
+					/* ---------  Video initialize */
+					myPlayer.on( 'loadedmetadata', function() {
 
-					//Pause the video when it is not current slider
+						//Get Video Dimensions
+						var curW    = this.videoWidth(),
+							curH    = this.videoHeight(),
+							newW    = curW,
+							newH    = curH;
+
+						newW = videoWrapperW;
+
+						//Scaled/Proportional Content 
+						newH = curH*(newW/curW);
+						
+					
+						if ( !isNaN( newW ) && !isNaN( newH ) )  {
+							myPlayer
+								.width( newW )
+								.height( newH );	
+							
+							$this.css( 'height', newH );
+						}
+
+
+
+						//Show this video wrapper
+						$this.css( 'visibility', 'visible' );
+
+						//Hide loading effect
+						$this.find( '.vjs-loading-spinner, .vjs-big-play-button' ).hide();
+
+					});		
+
+		
+				
+					/* ---------  Set, tell the player it's in fullscreen  */
+					if ( dataAuto ) {
+						myPlayer.play();
+					}
+
+
+					/* ---------  Disable control bar play button click */
+					if ( !dataControls ) {
+						myPlayer.controls( false );
+					}
+
+					
+					/* ---------  Pause the video when it is not current slider  */
 					if ( !play ) {
 						myPlayer.pause();
 						myPlayer.currentTime(0);
@@ -601,7 +687,8 @@ theme = ( function ( theme, $, window, document ) {
 				dataSync          = $this.data( 'my-sync' );
 			
 			
-			
+			//Fires local videos asynchronously with slider switch.
+			videoEmbedInit( $this.find( '.item' ), false );
 			
 			
 			// Custom Controls
@@ -635,8 +722,8 @@ theme = ( function ( theme, $, window, document ) {
 			if( typeof dataParallax === typeof undefined ) dataParallax = false;
 		
 			
+
 			
-		
 			//Make slider image draggable 
 			if ( dataDrag ) slidesExDraggable( $this );
 

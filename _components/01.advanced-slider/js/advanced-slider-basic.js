@@ -30,6 +30,186 @@ theme = ( function ( theme, $, window, document ) {
 			}
 		});
 		
+		
+		
+		/*
+		 * Initialize embedded local video.
+		 *
+		 * @param  {object} wrapper          - The outermost video container, which can contain multiple videos
+		 * @param  {boolean} play            - Forced to trigger pause or play events.
+		 * @return {void}                    - The constructor.
+		 */
+		function advancedSliderVideoEmbedInit( wrapper, play ) {
+			wrapper.find( '.slider-video-embed' ).each( function()  {
+				var $this         = $( this ),
+					videoWrapperW = $this.closest( '.custom-advanced-slider-outer' ).width(),
+					videoWrapperH = $this.closest( '.custom-advanced-slider-outer' ).height(),
+					curVideoID    = $this.find( '.video-js' ).attr( 'id' ),
+					dataControls  = $this.data( 'embed-video-controls' ),
+					dataAuto      = $this.data( 'embed-video-autoplay' ),
+					dataLoop      = $this.data( 'embed-video-loop' ),
+					dataW         = $this.data( 'embed-video-width' ),
+					dataH         = $this.data( 'embed-video-height' ),
+					$replayBtn    = $( '#'+curVideoID+'-replay-btn' );
+				
+				if ( videoWrapperH == 0 ) videoWrapperH = videoWrapperW/1.77777777777778;
+
+			
+				if( typeof dataAuto === typeof undefined ) {
+					dataAuto = true;
+				}
+				if( typeof dataLoop === typeof undefined ) {
+					dataLoop = true;
+				}
+				
+
+				if( typeof dataControls === typeof undefined ) {
+					dataControls = false;
+				}	
+				
+				if( typeof dataW === typeof undefined || dataW == 'auto' ) {
+					dataW = videoWrapperW;
+				}	
+
+				if( typeof dataH === typeof undefined || dataH == 'auto' ) {
+					dataH = videoWrapperH;
+				}
+
+				
+				
+				
+				
+				//Add replay button to video 
+				if ( $replayBtn.length == 0 ) {
+					$this.after( '<span class="web-video-replay" id="'+curVideoID+'-replay-btn"></span>' );
+				}
+				
+				
+				//HTML5 video autoplay on mobile revisited
+				if ( dataAuto && windowWidth <= 768 ) {
+					$this.find( '.video-js' ).attr({
+						'autoplay'    : 'true',
+						'muted'       : 'true',
+						'playsinline' : 'true'
+					});
+				}
+
+				var myPlayer = videojs( curVideoID, {
+										  width     : dataW,
+										  height    : dataH,
+										  loop      : dataLoop,
+										  controlBar: {
+											  muteToggle : false,
+											  autoplay   : dataAuto,
+											  loop       : dataLoop,
+											  controls   : true,
+											  controlBar : {
+												  muteToggle: false
+											  }
+										  }
+
+
+										});
+
+
+				
+				
+				myPlayer.ready(function() {
+					
+					
+					/* ---------  Video initialize */
+					myPlayer.on( 'loadedmetadata', function() {
+
+						//Get Video Dimensions
+						var curW    = this.videoWidth(),
+							curH    = this.videoHeight(),
+							newW    = curW,
+							newH    = curH;
+
+						newW = videoWrapperW;
+
+						//Scaled/Proportional Content 
+						newH = curH*(newW/curW);
+
+
+						if ( !isNaN( newW ) && !isNaN( newH ) )  {
+							myPlayer
+								.width( newW )
+								.height( newH );	
+							
+							$this.css( 'height', newH );
+						}
+
+
+
+						//Show this video wrapper
+						$this.css( 'visibility', 'visible' );
+
+						//Hide loading effect
+						$this.find( '.vjs-loading-spinner, .vjs-big-play-button' ).hide();
+
+					});		
+
+		
+				
+					/* ---------  Set, tell the player it's in fullscreen  */
+					if ( dataAuto ) {
+						myPlayer.play();
+					}
+
+
+					/* ---------  Disable control bar play button click */
+					if ( !dataControls ) {
+						myPlayer.controls( false );
+					}
+
+					
+					/* ---------  Pause the video when it is not current slider  */
+					if ( !play ) {
+						myPlayer.pause();
+						myPlayer.currentTime(0);
+						
+					} else {
+						if ( dataAuto ) {
+
+							myPlayer.currentTime(0);
+							myPlayer.play();
+							$replayBtn.hide();
+
+							//Should the video go to the beginning when it ends
+							myPlayer.on( 'ended', function () { 
+								
+								if ( dataLoop ) {
+									myPlayer.currentTime(0);
+									myPlayer.play();	
+								} else {
+									//Replay this video
+									myPlayer.currentTime(0);
+									
+									$replayBtn
+										.show()
+										.off( 'click' )
+										.on( 'click', function( e ) {
+											e.preventDefault();
+
+											myPlayer.play();
+											$replayBtn.hide();
+
+										});						
+								}
+							
+							});		
+
+
+						}	
+					}
+					
+
+				});
+
+			});	
+		}	
+		
 
 		
 		
@@ -46,7 +226,7 @@ theme = ( function ( theme, $, window, document ) {
 				var $this                    = $( this ),
 					$items                   = $this.find( '.item' ),
 					total                    = $items.length,
-					timerEvtStop                 = null,
+					timerEvtStop             = null,
 					dataControlsPagination   = $this.data( 'controls-pagination' ),
 					dataControlsArrows       = $this.data( 'controls-arrows' ),
 					dataLoop                 = $this.data( 'loop' ),
@@ -68,7 +248,7 @@ theme = ( function ( theme, $, window, document ) {
 				$items.first().addClass( 'active' );
 				
 			
-				var curImgH = null;
+				var curImgH = 0;
 				//If the src is already set, then the event is firing in the cached case, 
 				//before you even get the event handler bound. To fix this, you can loop 
 				//through checking and triggering the event based off .complete
@@ -86,13 +266,26 @@ theme = ( function ( theme, $, window, document ) {
 				
 
 				//Load slides to canvas
-				//-------------------------------------	\
+				//-------------------------------------	
 				$this.find( '.item' ).each( function( index )  {
-					if ( $( '#custom-advanced-slider-canvas-item-'+index ).length == 0 ) {
-						$( this ).prepend( '<canvas id="custom-advanced-slider-canvas-item-'+index+'" width="'+$this.width()+'" height="'+$this.height()+'"></canvas>' );
+					
+					//Canvas Interactions
+					if ( $items.eq( index ).find( 'video' ).length == 0 ) {
+						
+						if ( $( '#custom-advanced-slider-canvas-item-'+index ).length == 0 ) {
+							$( this ).prepend( '<canvas id="custom-advanced-slider-canvas-item-'+index+'" width="'+$this.width()+'" height="'+$this.height()+'"></canvas>' );
+						}		
 					}
 
+
 				});
+				
+				
+			
+				// Fires local videos asynchronously with slider switch.
+				//-------------------------------------
+				advancedSliderVideoEmbedInit( $items, false );	
+				
 				
 				
 				//Autoplay Slider
@@ -194,10 +387,6 @@ theme = ( function ( theme, $, window, document ) {
 
 				
 
-
-
-				
-
 			});
 
 
@@ -213,7 +402,9 @@ theme = ( function ( theme, $, window, document ) {
 		 */
         function advancedSliderUpdates( elementIndex, slider ) {
 			
-			var total                    = slider.find( '.item' ).length,
+			var $items                   = slider.find( '.item' ),
+				$current                 = $items.eq( elementIndex ),
+			    total                    = $items.length,
 				dataCountTotal           = slider.data( 'count-total' ),
 				dataCountCur             = slider.data( 'count-now' ),
 				dataControlsPagination   = slider.data( 'controls-pagination' ),
@@ -229,6 +420,24 @@ theme = ( function ( theme, $, window, document ) {
 			if( typeof dataLoop === typeof undefined ) dataLoop = false;
 			if( typeof dataAuto === typeof undefined ) dataAuto = false;			
 		
+			
+			
+			
+			//Reset the slider height
+			//-------------------------------------	
+			var curNewImgH = false;
+			$current.find( 'img' ).one( 'load', function() {
+				curNewImgH = $( this ).height();
+			}).each(function() {
+				if( this.complete ) $( this ).load();
+			});	
+
+
+			if ( curNewImgH && curNewImgH > 0 ) {
+				slider.css( 'height', curNewImgH + 'px' );
+			}
+
+			
 			
 			//Transition Interception
 			//-------------------------------------
@@ -246,9 +455,9 @@ theme = ( function ( theme, $, window, document ) {
 			$( dataControlsPagination ).find( 'li a[data-index="'+elementIndex+'"]' ).addClass( 'active' ).removeClass( 'leave' );
 			
 			
-			slider.find( '.item' ).removeClass( 'leave' );
+			$items.removeClass( 'leave' );
 			slider.find( '.item.active' ).removeClass( 'active' ).addClass( 'leave' );
-			slider.find( '.item' ).eq( elementIndex ).addClass( 'active' ).removeClass( 'leave' );
+			$items.eq( elementIndex ).addClass( 'active' ).removeClass( 'leave' );
 
 			
 
@@ -256,7 +465,14 @@ theme = ( function ( theme, $, window, document ) {
 			//-------------------------------------
 
 			$( dataCountTotal ).text( total );
-			$( dataCountCur ).text( parseFloat( elementIndex ) + 1 );		
+			$( dataCountCur ).text( parseFloat( elementIndex ) + 1 );	
+			
+			
+			// Fires local videos asynchronously with slider switch.
+			//-------------------------------------
+			advancedSliderVideoEmbedInit( $items, false );
+			advancedSliderVideoEmbedInit( $current, true );
+			
 			
 		}
 		
