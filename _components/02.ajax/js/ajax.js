@@ -21,7 +21,7 @@ theme = ( function ( theme, $, window, document ) {
 		function applyOriginalSomeScripts() {
 			
 			theme.commonHeight.pageLoaded(); //Common Height
-			theme.accordion.documentReady($); //Accordion
+			theme.parallax.documentReady($); //Parallax
 			
 			
 		}

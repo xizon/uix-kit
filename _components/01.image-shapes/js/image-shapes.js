@@ -64,23 +64,14 @@ theme = ( function ( theme, $, window, document ) {
 				}
 
 
-				//If the src is already set, then the event is firing in the cached case, 
-				//before you even get the event handler bound. To fix this, you can loop 
-				//through checking and triggering the event based off .complete
-				$this.find( 'img' ).one( 'load', function() {
-					curImgH   = $( this ).height();
-					curImgW   = $( this ).width();
-					imgRatio  = curImgW / curImgH;
-				}).each(function() {
-					if( this.complete ) $( this ).load();
-				});	
+				//Check if the picture is loaded on the page
+				var img = new Image();
+				img.onload = function() {
+					curImgH   = $this.find( 'img' ).height();
+					curImgW   = $this.find( 'img' ).width();
+					imgRatio  = curImgW / curImgH;	
 
-
-
-				//Add a custom shape SVG to the page
-				if ( curImgH > 0 ) {
-
-
+					//Add a custom shape SVG to the page
 					bothWidthRatio = imgW / svgW;
 					newSvgHeight   = imgW / svgRatio;
 					newImgHeight   = svgW / imgRatio;
@@ -93,10 +84,12 @@ theme = ( function ( theme, $, window, document ) {
 					svgOut += '</svg>';	
 
 
-					$this.addClass( 'active' ).html( svgOut );
-
+					$this.addClass( 'active' ).html( svgOut );		
 				}
+				img.src = curImgURL;
 
+			 
+	
 
 			});
 			

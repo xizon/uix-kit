@@ -247,37 +247,36 @@ theme = ( function ( theme, $, window, document ) {
 				$items.first().addClass( 'active' );
 				
 			
-				var curImgH = 0;
-				//If the src is already set, then the event is firing in the cached case, 
-				//before you even get the event handler bound. To fix this, you can loop 
-				//through checking and triggering the event based off .complete
-				$items.first().find( 'img' ).one( 'load', function() {
-					curImgH = $( this ).height();
-				}).each(function() {
-					if( this.complete ) $( this ).load();
-				});	
-
-
-				if ( curImgH > 0 ) {
+				//Check if the picture is loaded on the page
+				var $curImg = $items.first().find( 'img' ),
+					curImgH = 0,
+					img     = new Image();
+				img.onload = function() {
+					
+					curImgH = $curImg.height();
 					$this.css( 'height', curImgH + 'px' );
+					
+					//Load slides to canvas
+					//-------------------------------------	
+					$this.find( '.item' ).each( function( index )  {
+
+						//Canvas Interactions
+						if ( $items.eq( index ).find( 'video' ).length == 0 ) {
+							if ( $( '#custom-advanced-slider-sp-canvas-item-'+index ).length == 0 ) {
+								$( this ).prepend( '<canvas id="custom-advanced-slider-sp-canvas-item-'+index+'" width="'+$this.width()+'" height="'+$this.height()+'"></canvas>' );
+							}
+							canvasInteractions( index, $this );
+						}
+
+
+					});
+	
 				}
+				img.src = $curImg.attr( 'src' );
+				
 
 	
-				//Load slides to canvas
-				//-------------------------------------	
-				$this.find( '.item' ).each( function( index )  {
-					
 
-					//Canvas Interactions
-					if ( $items.eq( index ).find( 'video' ).length == 0 ) {
-						if ( $( '#custom-advanced-slider-sp-canvas-item-'+index ).length == 0 ) {
-							$( this ).prepend( '<canvas id="custom-advanced-slider-sp-canvas-item-'+index+'" width="'+$this.width()+'" height="'+$this.height()+'"></canvas>' );
-						}
-						canvasInteractions( index, $this );
-					}
-					
-					
-				});
 				
 				
 			
@@ -487,17 +486,17 @@ theme = ( function ( theme, $, window, document ) {
 			
 			//Reset the slider height
 			//-------------------------------------	
-			var curNewImgH = false;
-			$current.find( 'img' ).one( 'load', function() {
-				curNewImgH = $( this ).height();
-			}).each(function() {
-				if( this.complete ) $( this ).load();
-			});	
+			var $curImg    = $current.find( 'img' ),
+				curNewImgH = false,
+				img        = new Image();
+			img.onload = function() {
 
-
-			if ( curNewImgH && curNewImgH > 0 ) {
+				curNewImgH = $curImg.height();
 				slider.css( 'height', curNewImgH + 'px' );
+
 			}
+			img.src = $curImg.attr( 'src' );
+
 			
 			
 			

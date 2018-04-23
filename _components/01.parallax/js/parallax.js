@@ -7,7 +7,7 @@
 theme = ( function ( theme, $, window, document ) {
     'use strict';
     
-    var pageLoaded = function() {
+    var documentReady = function( $ ) {
         
         var $window      = $( window ),
 		    windowWidth  = $window.width(),
@@ -106,138 +106,138 @@ theme = ( function ( theme, $, window, document ) {
 				}	
 				
 				//Trigger a callback when the selected images are loaded
-				//
-				//If the src is already set, then the event is firing in the cached case, 
-				//before you even get the event handler bound. To fix this, you can loop 
-				//through checking and triggering the event based off .complete
-				$curImg.one( 'load', function() {
-					curImgH = $( this ).height();
-					curImgW = $( this ).width();
-				}).each(function() {
-					if( this.complete ) $( this ).load();
-				});	
-				
-				
-				//Custom height for parallax container
-				if ( 
-					$this.hasClass( 'height-10' ) || 
-					$this.hasClass( 'height-20' ) || 
-					$this.hasClass( 'height-30' ) || 
-					$this.hasClass( 'height-40' ) || 
-					$this.hasClass( 'height-50' ) || 
-					$this.hasClass( 'height-60' ) || 
-					$this.hasClass( 'height-70' ) || 
-					$this.hasClass( 'height-80' ) || 
-					$this.hasClass( 'height-90' ) || 
-					$this.hasClass( 'height-100' )
-				 ) {		
+				//Check if the picture is loaded on the page
+				var curImgH = 0,
+					img     = new Image();
+				img.onload = function() {
 					
-					var newH = $this.height();
-					$this.css( {
-						'height': newH + 'px'
-					} );	
-					$curImg.css( 'max-height', newH + 'px' );	
-				 } else {
-					$this.css( {
-						'height': $this.height() + 'px'
-					} );	
-				 }
-				
-				
-				//If the ".pos-vertical-align" has more content
-				if ( w <= 768 ) {
+					curImgH = $curImg.height();
+					curImgW = $curImg.width();
 					
-					if ( $this.find( '.pos-vertical-align' ).height() >= curImgH ) {
-						$this.find( '.pos-vertical-align' ).addClass( 'relative' );
-						$curImg.hide();	
+					//Custom height for parallax container
+					if ( 
+						$this.hasClass( 'height-10' ) || 
+						$this.hasClass( 'height-20' ) || 
+						$this.hasClass( 'height-30' ) || 
+						$this.hasClass( 'height-40' ) || 
+						$this.hasClass( 'height-50' ) || 
+						$this.hasClass( 'height-60' ) || 
+						$this.hasClass( 'height-70' ) || 
+						$this.hasClass( 'height-80' ) || 
+						$this.hasClass( 'height-90' ) || 
+						$this.hasClass( 'height-100' )
+					 ) {		
+
+						var newH = $this.height();
+						$this.css( {
+							'height': newH + 'px'
+						} );	
+						$curImg.css( 'max-height', newH + 'px' );	
+					 } else {
+						$this.css( {
+							'height': $this.height() + 'px'
+						} );	
+					 }
+
+
+					//If the ".pos-vertical-align" has more content
+					if ( w <= 768 ) {
+
+						if ( $this.find( '.pos-vertical-align' ).height() >= curImgH ) {
+							$this.find( '.pos-vertical-align' ).addClass( 'relative' );
+							$curImg.hide();	
+						}
+
 					}
-					
-				}
 
-				
-				if ( w > 768 ) {
-					
-					//Enable parallax only desktop
-					$this.bgParallax( "50%", dataSpeed );
 
-					
-					//Resize the background image to cover the entire container and
-					//Resize the background image to make sure the image is fully visible
-					if ( curImgW > w ) {
-						curSize = 'contain';
+					if ( w > 768 ) {
+
+						//Enable parallax only desktop
+						$this.bgParallax( "50%", dataSpeed );
+
+
+						//Resize the background image to cover the entire container and
+						//Resize the background image to make sure the image is fully visible
+						if ( curImgW > w ) {
+							curSize = 'contain';
+						} else {
+							curSize = 'cover';
+						}
+
+						curAtt = 'fixed';
+
 					} else {
+						curSize = 'contain';
+						curAtt  = 'scroll';
+					}
+
+					//Determine image height and parallax container height
+					//If the height is the same, higher or lower than the height of the container height, 
+					//be sure to use the cover attribute
+					if ( curImgH <= $this.height() ) {
 						curSize = 'cover';
 					}
-					
-					curAtt = 'fixed';
-					
-				} else {
-					curSize = 'contain';
-					curAtt  = 'scroll';
-				}
+
+					//Whether to display all pictures, including the edges
+					if ( dataFullyVisible ) {
+
+						if ( curImgW < w ) {
+							curSize = 'cover';
+						} else {
+							curSize = 'contain';
+						}
+
+					}
+
+
+					//console.log( 'Height: ' +curImgH + '===' + $this.height() + ' | Width: ' + curImgW + '===' + w + ' | ' + curSize );
+
+					//Add background image to parallax container
+					if( typeof dataImg != typeof undefined ) {
+
+						if ( Modernizr.cssanimations ) {
+							// supported
+
+							$this.css( {
+								'background' : 'linear-gradient('+dataOverlay+', '+dataOverlay+'), url(' + dataImg + ') 50% 0/'+curSize+' no-repeat ' + curAtt
+							} );
+						} else {
+							// not-supported
+
+							$this.css( {
+								'background' : 'url(' + dataImg + ') 50% 0/'+curSize+' no-repeat ' + curAtt
+							} );
+						}
+
+					}
+
+
+					//Apply tilt effect
+					if( typeof dataSkew != typeof undefined ) {
+						$this.css( {
+							'transform'  : 'skew(0deg, '+dataSkew+'deg)'
+						} );
+					}
+
+
+					//Embedded parent disparity elements
+					if ( $this.find( '.parallax-element' ).length > 0 ) {
+						$window.on( 'scroll touchmove', function() {
+							var scrolled = $window.scrollTop();
+							$this.find( '.parallax-element' ).css( {
+								'transform' : 'translateY('+Math.round( ( $this.offset().top - scrolled ) * dataElSpeed )+'px)',
+								'transition': 'none'
+							} );
+						});			
+					}
 	
-				//Determine image height and parallax container height
-				//If the height is the same, higher or lower than the height of the container height, 
-				//be sure to use the cover attribute
-				if ( curImgH <= $this.height() ) {
-					curSize = 'cover';
-				}
-				
-				//Whether to display all pictures, including the edges
-				if ( dataFullyVisible ) {
 					
-					if ( curImgW < w ) {
-						curSize = 'cover';
-					} else {
-						curSize = 'contain';
-					}
 					
 				}
+				img.src = dataImg;
 				
-				
-				//console.log( 'Height: ' +curImgH + '===' + $this.height() + ' | Width: ' + curImgW + '===' + w + ' | ' + curSize );
-				
-				//Add background image to parallax container
-				if( typeof dataImg != typeof undefined ) {
-					
-					if ( Modernizr.cssanimations ) {
-					    // supported
-
-						$this.css( {
-							'background' : 'linear-gradient('+dataOverlay+', '+dataOverlay+'), url(' + dataImg + ') 50% 0/'+curSize+' no-repeat ' + curAtt
-						} );
-					} else {
-					    // not-supported
-
-						$this.css( {
-							'background' : 'url(' + dataImg + ') 50% 0/'+curSize+' no-repeat ' + curAtt
-						} );
-					}
-
-				}
-				
-				
-				//Apply tilt effect
-				if( typeof dataSkew != typeof undefined ) {
-					$this.css( {
-						'transform'  : 'skew(0deg, '+dataSkew+'deg)'
-					} );
-				}
-
-					
-				//Embedded parent disparity elements
-				if ( $this.find( '.parallax-element' ).length > 0 ) {
-					$window.on( 'scroll touchmove', function() {
-						var scrolled = $window.scrollTop();
-						$this.find( '.parallax-element' ).css( {
-							'transform' : 'translateY('+Math.round( ( $this.offset().top - scrolled ) * dataElSpeed )+'px)',
-							'transition': 'none'
-						} );
-					});			
-				}
-
-
-				
+			
 		
 			});
 			
@@ -252,14 +252,13 @@ theme = ( function ( theme, $, window, document ) {
 	
 
     theme.parallax = {
-        pageLoaded : pageLoaded        
+        documentReady : documentReady        
     };
 
-    theme.components.pageLoaded.push( pageLoaded );
+    theme.components.documentReady.push( documentReady );
     return theme;
 
 }( theme, jQuery, window, document ) );
-
 
 
 

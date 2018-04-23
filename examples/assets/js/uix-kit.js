@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.3.7
- * ## Last Update         :  April 23, 2018
+ * ## Version             :  1.3.8
+ * ## Last Update         :  April 24, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -23,8 +23,8 @@
 	---------------------------
 	
 	
-	1. Loader 
-    2. Header 
+	1. Header 
+    2. Loader 
     3. Back to Top 
     4. Get all custom attributes of an element like "data-*" 
     5. Navigation 
@@ -65,7 +65,12 @@
     40. Smooth Scrolling When Clicking An Anchor Link 
     41. Source Code 
     42. Sticky Elements 
-    43. Testimonials Carousel 
+    43. Tabs 
+    44. Testimonials Carousel 
+    45. Text effect 
+    46. Timeline 
+    47. AJAX 
+    48. GSAP Plugins 
 
 
 */
@@ -1635,37 +1640,36 @@ theme = ( function ( theme, $, window, document ) {
 				$items.first().addClass( 'active' );
 				
 			
-				var curImgH = 0;
-				//If the src is already set, then the event is firing in the cached case, 
-				//before you even get the event handler bound. To fix this, you can loop 
-				//through checking and triggering the event based off .complete
-				$items.first().find( 'img' ).one( 'load', function() {
-					curImgH = $( this ).height();
-				}).each(function() {
-					if( this.complete ) $( this ).load();
-				});	
-
-
-				if ( curImgH > 0 ) {
+				//Check if the picture is loaded on the page
+				var $curImg = $items.first().find( 'img' ),
+					curImgH = 0,
+					img     = new Image();
+				img.onload = function() {
+					
+					curImgH = $curImg.height();
 					$this.css( 'height', curImgH + 'px' );
+					
+					//Load slides to canvas
+					//-------------------------------------	
+					$this.find( '.item' ).each( function( index )  {
+
+						//Canvas Interactions
+						if ( $items.eq( index ).find( 'video' ).length == 0 ) {
+							if ( $( '#custom-advanced-slider-sp-canvas-item-'+index ).length == 0 ) {
+								$( this ).prepend( '<canvas id="custom-advanced-slider-sp-canvas-item-'+index+'" width="'+$this.width()+'" height="'+$this.height()+'"></canvas>' );
+							}
+							canvasInteractions( index, $this );
+						}
+
+
+					});
+	
 				}
+				img.src = $curImg.attr( 'src' );
+				
 
 	
-				//Load slides to canvas
-				//-------------------------------------	
-				$this.find( '.item' ).each( function( index )  {
-					
 
-					//Canvas Interactions
-					if ( $items.eq( index ).find( 'video' ).length == 0 ) {
-						if ( $( '#custom-advanced-slider-sp-canvas-item-'+index ).length == 0 ) {
-							$( this ).prepend( '<canvas id="custom-advanced-slider-sp-canvas-item-'+index+'" width="'+$this.width()+'" height="'+$this.height()+'"></canvas>' );
-						}
-						canvasInteractions( index, $this );
-					}
-					
-					
-				});
 				
 				
 			
@@ -1875,17 +1879,17 @@ theme = ( function ( theme, $, window, document ) {
 			
 			//Reset the slider height
 			//-------------------------------------	
-			var curNewImgH = false;
-			$current.find( 'img' ).one( 'load', function() {
-				curNewImgH = $( this ).height();
-			}).each(function() {
-				if( this.complete ) $( this ).load();
-			});	
+			var $curImg    = $current.find( 'img' ),
+				curNewImgH = false,
+				img        = new Image();
+			img.onload = function() {
 
-
-			if ( curNewImgH && curNewImgH > 0 ) {
+				curNewImgH = $curImg.height();
 				slider.css( 'height', curNewImgH + 'px' );
+
 			}
+			img.src = $curImg.attr( 'src' );
+
 			
 			
 			
@@ -2403,37 +2407,40 @@ theme = ( function ( theme, $, window, document ) {
 				$items.first().addClass( 'active' );
 				
 			
-				var curImgH = 0;
-				//If the src is already set, then the event is firing in the cached case, 
-				//before you even get the event handler bound. To fix this, you can loop 
-				//through checking and triggering the event based off .complete
-				$items.first().find( 'img' ).one( 'load', function() {
-					curImgH = $( this ).height();
-				}).each(function() {
-					if( this.complete ) $( this ).load();
-				});	
-
-
-				if ( curImgH > 0 ) {
+				
+				
+				//Check if the picture is loaded on the page
+				var $curImg = $items.first().find( 'img' ),
+					curImgH = 0,
+					img     = new Image();
+				img.onload = function() {
+					
+					curImgH = $curImg.height();
 					$this.css( 'height', curImgH + 'px' );
+					
+					//Load slides to canvas
+					//-------------------------------------	
+					$this.find( '.item' ).each( function( index )  {
+
+						//Canvas Interactions
+						if ( $items.eq( index ).find( 'video' ).length == 0 ) {
+
+							if ( $( '#custom-advanced-slider-canvas-item-'+index ).length == 0 ) {
+								$( this ).prepend( '<canvas id="custom-advanced-slider-canvas-item-'+index+'" width="'+$this.width()+'" height="'+$this.height()+'"></canvas>' );
+							}		
+						}
+
+
+					});	
+	
 				}
+				img.src = $curImg.attr( 'src' );
+				
+				
 
 				
 
-				//Load slides to canvas
-				//-------------------------------------	
-				$this.find( '.item' ).each( function( index )  {
-					
-					//Canvas Interactions
-					if ( $items.eq( index ).find( 'video' ).length == 0 ) {
-						
-						if ( $( '#custom-advanced-slider-canvas-item-'+index ).length == 0 ) {
-							$( this ).prepend( '<canvas id="custom-advanced-slider-canvas-item-'+index+'" width="'+$this.width()+'" height="'+$this.height()+'"></canvas>' );
-						}		
-					}
 
-
-				});
 				
 				
 			
@@ -2639,19 +2646,18 @@ theme = ( function ( theme, $, window, document ) {
 			
 			//Reset the slider height
 			//-------------------------------------	
-			var curNewImgH = false;
-			$current.find( 'img' ).one( 'load', function() {
-				curNewImgH = $( this ).height();
-			}).each(function() {
-				if( this.complete ) $( this ).load();
-			});	
+			var $curImg    = $current.find( 'img' ),
+				curNewImgH = false,
+				img        = new Image();
+			img.onload = function() {
 
-
-			if ( curNewImgH && curNewImgH > 0 ) {
+				curNewImgH = $curImg.height();
 				slider.css( 'height', curNewImgH + 'px' );
-			}
 
-			
+			}
+			img.src = $curImg.attr( 'src' );
+
+
 			
 			//Transition Interception
 			//-------------------------------------
@@ -6241,23 +6247,14 @@ theme = ( function ( theme, $, window, document ) {
 				}
 
 
-				//If the src is already set, then the event is firing in the cached case, 
-				//before you even get the event handler bound. To fix this, you can loop 
-				//through checking and triggering the event based off .complete
-				$this.find( 'img' ).one( 'load', function() {
-					curImgH   = $( this ).height();
-					curImgW   = $( this ).width();
-					imgRatio  = curImgW / curImgH;
-				}).each(function() {
-					if( this.complete ) $( this ).load();
-				});	
+				//Check if the picture is loaded on the page
+				var img = new Image();
+				img.onload = function() {
+					curImgH   = $this.find( 'img' ).height();
+					curImgW   = $this.find( 'img' ).width();
+					imgRatio  = curImgW / curImgH;	
 
-
-
-				//Add a custom shape SVG to the page
-				if ( curImgH > 0 ) {
-
-
+					//Add a custom shape SVG to the page
 					bothWidthRatio = imgW / svgW;
 					newSvgHeight   = imgW / svgRatio;
 					newImgHeight   = svgW / imgRatio;
@@ -6270,10 +6267,12 @@ theme = ( function ( theme, $, window, document ) {
 					svgOut += '</svg>';	
 
 
-					$this.addClass( 'active' ).html( svgOut );
-
+					$this.addClass( 'active' ).html( svgOut );		
 				}
+				img.src = curImgURL;
 
+			 
+	
 
 			});
 			
@@ -8123,7 +8122,7 @@ theme = ( function ( theme, $, window, document ) {
 theme = ( function ( theme, $, window, document ) {
     'use strict';
     
-    var pageLoaded = function() {
+    var documentReady = function( $ ) {
         
         var $window      = $( window ),
 		    windowWidth  = $window.width(),
@@ -8222,138 +8221,138 @@ theme = ( function ( theme, $, window, document ) {
 				}	
 				
 				//Trigger a callback when the selected images are loaded
-				//
-				//If the src is already set, then the event is firing in the cached case, 
-				//before you even get the event handler bound. To fix this, you can loop 
-				//through checking and triggering the event based off .complete
-				$curImg.one( 'load', function() {
-					curImgH = $( this ).height();
-					curImgW = $( this ).width();
-				}).each(function() {
-					if( this.complete ) $( this ).load();
-				});	
-				
-				
-				//Custom height for parallax container
-				if ( 
-					$this.hasClass( 'height-10' ) || 
-					$this.hasClass( 'height-20' ) || 
-					$this.hasClass( 'height-30' ) || 
-					$this.hasClass( 'height-40' ) || 
-					$this.hasClass( 'height-50' ) || 
-					$this.hasClass( 'height-60' ) || 
-					$this.hasClass( 'height-70' ) || 
-					$this.hasClass( 'height-80' ) || 
-					$this.hasClass( 'height-90' ) || 
-					$this.hasClass( 'height-100' )
-				 ) {		
+				//Check if the picture is loaded on the page
+				var curImgH = 0,
+					img     = new Image();
+				img.onload = function() {
 					
-					var newH = $this.height();
-					$this.css( {
-						'height': newH + 'px'
-					} );	
-					$curImg.css( 'max-height', newH + 'px' );	
-				 } else {
-					$this.css( {
-						'height': $this.height() + 'px'
-					} );	
-				 }
-				
-				
-				//If the ".pos-vertical-align" has more content
-				if ( w <= 768 ) {
+					curImgH = $curImg.height();
+					curImgW = $curImg.width();
 					
-					if ( $this.find( '.pos-vertical-align' ).height() >= curImgH ) {
-						$this.find( '.pos-vertical-align' ).addClass( 'relative' );
-						$curImg.hide();	
+					//Custom height for parallax container
+					if ( 
+						$this.hasClass( 'height-10' ) || 
+						$this.hasClass( 'height-20' ) || 
+						$this.hasClass( 'height-30' ) || 
+						$this.hasClass( 'height-40' ) || 
+						$this.hasClass( 'height-50' ) || 
+						$this.hasClass( 'height-60' ) || 
+						$this.hasClass( 'height-70' ) || 
+						$this.hasClass( 'height-80' ) || 
+						$this.hasClass( 'height-90' ) || 
+						$this.hasClass( 'height-100' )
+					 ) {		
+
+						var newH = $this.height();
+						$this.css( {
+							'height': newH + 'px'
+						} );	
+						$curImg.css( 'max-height', newH + 'px' );	
+					 } else {
+						$this.css( {
+							'height': $this.height() + 'px'
+						} );	
+					 }
+
+
+					//If the ".pos-vertical-align" has more content
+					if ( w <= 768 ) {
+
+						if ( $this.find( '.pos-vertical-align' ).height() >= curImgH ) {
+							$this.find( '.pos-vertical-align' ).addClass( 'relative' );
+							$curImg.hide();	
+						}
+
 					}
-					
-				}
 
-				
-				if ( w > 768 ) {
-					
-					//Enable parallax only desktop
-					$this.bgParallax( "50%", dataSpeed );
 
-					
-					//Resize the background image to cover the entire container and
-					//Resize the background image to make sure the image is fully visible
-					if ( curImgW > w ) {
-						curSize = 'contain';
+					if ( w > 768 ) {
+
+						//Enable parallax only desktop
+						$this.bgParallax( "50%", dataSpeed );
+
+
+						//Resize the background image to cover the entire container and
+						//Resize the background image to make sure the image is fully visible
+						if ( curImgW > w ) {
+							curSize = 'contain';
+						} else {
+							curSize = 'cover';
+						}
+
+						curAtt = 'fixed';
+
 					} else {
+						curSize = 'contain';
+						curAtt  = 'scroll';
+					}
+
+					//Determine image height and parallax container height
+					//If the height is the same, higher or lower than the height of the container height, 
+					//be sure to use the cover attribute
+					if ( curImgH <= $this.height() ) {
 						curSize = 'cover';
 					}
-					
-					curAtt = 'fixed';
-					
-				} else {
-					curSize = 'contain';
-					curAtt  = 'scroll';
-				}
+
+					//Whether to display all pictures, including the edges
+					if ( dataFullyVisible ) {
+
+						if ( curImgW < w ) {
+							curSize = 'cover';
+						} else {
+							curSize = 'contain';
+						}
+
+					}
+
+
+					//console.log( 'Height: ' +curImgH + '===' + $this.height() + ' | Width: ' + curImgW + '===' + w + ' | ' + curSize );
+
+					//Add background image to parallax container
+					if( typeof dataImg != typeof undefined ) {
+
+						if ( Modernizr.cssanimations ) {
+							// supported
+
+							$this.css( {
+								'background' : 'linear-gradient('+dataOverlay+', '+dataOverlay+'), url(' + dataImg + ') 50% 0/'+curSize+' no-repeat ' + curAtt
+							} );
+						} else {
+							// not-supported
+
+							$this.css( {
+								'background' : 'url(' + dataImg + ') 50% 0/'+curSize+' no-repeat ' + curAtt
+							} );
+						}
+
+					}
+
+
+					//Apply tilt effect
+					if( typeof dataSkew != typeof undefined ) {
+						$this.css( {
+							'transform'  : 'skew(0deg, '+dataSkew+'deg)'
+						} );
+					}
+
+
+					//Embedded parent disparity elements
+					if ( $this.find( '.parallax-element' ).length > 0 ) {
+						$window.on( 'scroll touchmove', function() {
+							var scrolled = $window.scrollTop();
+							$this.find( '.parallax-element' ).css( {
+								'transform' : 'translateY('+Math.round( ( $this.offset().top - scrolled ) * dataElSpeed )+'px)',
+								'transition': 'none'
+							} );
+						});			
+					}
 	
-				//Determine image height and parallax container height
-				//If the height is the same, higher or lower than the height of the container height, 
-				//be sure to use the cover attribute
-				if ( curImgH <= $this.height() ) {
-					curSize = 'cover';
-				}
-				
-				//Whether to display all pictures, including the edges
-				if ( dataFullyVisible ) {
 					
-					if ( curImgW < w ) {
-						curSize = 'cover';
-					} else {
-						curSize = 'contain';
-					}
 					
 				}
+				img.src = dataImg;
 				
-				
-				//console.log( 'Height: ' +curImgH + '===' + $this.height() + ' | Width: ' + curImgW + '===' + w + ' | ' + curSize );
-				
-				//Add background image to parallax container
-				if( typeof dataImg != typeof undefined ) {
-					
-					if ( Modernizr.cssanimations ) {
-					    // supported
-
-						$this.css( {
-							'background' : 'linear-gradient('+dataOverlay+', '+dataOverlay+'), url(' + dataImg + ') 50% 0/'+curSize+' no-repeat ' + curAtt
-						} );
-					} else {
-					    // not-supported
-
-						$this.css( {
-							'background' : 'url(' + dataImg + ') 50% 0/'+curSize+' no-repeat ' + curAtt
-						} );
-					}
-
-				}
-				
-				
-				//Apply tilt effect
-				if( typeof dataSkew != typeof undefined ) {
-					$this.css( {
-						'transform'  : 'skew(0deg, '+dataSkew+'deg)'
-					} );
-				}
-
-					
-				//Embedded parent disparity elements
-				if ( $this.find( '.parallax-element' ).length > 0 ) {
-					$window.on( 'scroll touchmove', function() {
-						var scrolled = $window.scrollTop();
-						$this.find( '.parallax-element' ).css( {
-							'transform' : 'translateY('+Math.round( ( $this.offset().top - scrolled ) * dataElSpeed )+'px)',
-							'transition': 'none'
-						} );
-					});			
-				}
-
-
-				
+			
 		
 			});
 			
@@ -8368,14 +8367,13 @@ theme = ( function ( theme, $, window, document ) {
 	
 
     theme.parallax = {
-        pageLoaded : pageLoaded        
+        documentReady : documentReady        
     };
 
-    theme.components.pageLoaded.push( pageLoaded );
+    theme.components.documentReady.push( documentReady );
     return theme;
 
 }( theme, jQuery, window, document ) );
-
 
 
 
@@ -10636,7 +10634,7 @@ theme = ( function ( theme, $, window, document ) {
 		function applyOriginalSomeScripts() {
 			
 			theme.commonHeight.pageLoaded(); //Common Height
-			theme.accordion.documentReady($); //Accordion
+			theme.parallax.documentReady($); //Parallax
 			
 			
 		}
@@ -16669,9 +16667,6 @@ var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(globa
 }("TextPlugin"));
 /* 
  *************************************
- * <!-- GSAP Plugins -->
- *************************************
- */*********************
  * <!-- GSAP Plugins -->
  *************************************
  */
