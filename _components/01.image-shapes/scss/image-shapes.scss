@@ -1,0 +1,16 @@
+/* ====================================================== 
+        <!-- Image Shapes --> 
+/* ====================================================== */
+.shape-img {
+	
+	opacity: 0;
+	@include transition-default();
+
+	&.active {
+		opacity: 1;
+	}
+	
+	img {
+		display: none;
+	}
+}

@@ -17,60 +17,55 @@ theme = ( function ( theme, $, window, document ) {
 		
 	    //Determine the direction of a jQuery scroll event
 		//Fix an issue for mousewheel event is too fast.
-		var mousewheelTrigger = true,
+		var lastAnimation     = 0,
+			quietPeriod       = 500, //Do not change it
+			animationTime     = 1000,//According to page transition animation changes
 			scrollCount       = 0;
 		
-		$( window ).on( 'mousewheel', function( event ) { 
+		$( document ).on( 'mousewheel', function( event ) { 
 
-			if ( mousewheelTrigger ) {
-
-				if( event.originalEvent.wheelDelta < 0) {
-					//scroll down
-					$( '#demo-mousewheel-interaction-status' ).text( 'Direction: down, Total: ' + scrollCount );
-
-					scrollCount++;
-					
-					//Prohibited scrolling trigger
-					mousewheelTrigger = false;
-					
-					//Do something
-					customMouseHandle();		
-					
-
-				} else {
-					//scroll up
-					$( '#demo-mousewheel-interaction-status' ).text( 'Direction: up, Total: ' + scrollCount );
-
-					scrollCount++;
-					
-					//Prohibited scrolling trigger
-					mousewheelTrigger = false;
-					
-					//Do something
-					customMouseHandle();
-
-				}	
-
-			}
-			
-
-			//prevent page fom scrolling
-			//return false;
+			event.preventDefault();//prevent page fom scrolling
+			var delta = event.originalEvent.wheelDelta || -event.originalEvent.detail;
+			scrollInit( event, delta );
 
 		});
+		
+	
 	
 		
 		
+		/*
+		 * Scroll initialize
+		 *
+		 * @param  {object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
+		 * @param  {string} delta        - Gets a value that indicates the amount that the mouse wheel has changed.
+		 * @return {void}                - The constructor.
+		 */
+		function scrollInit( event, delta ) {
+	
+			var timeNow = new Date().getTime();
+			// Cancel scroll if currently animating or within quiet period
+			if( timeNow - lastAnimation < quietPeriod + animationTime) {
+				event.preventDefault();
+				return;
+			}
 
-		function customMouseHandle() {
-			
-			//Reset scrolling trigger
-			setTimeout( function() {
-				mousewheelTrigger = true;	
-			}, 1500 );
-			
-			
+			if (delta < 0) {
+				//scroll down
+				$( '#demo-mousewheel-interaction-status' ).text( 'Direction: down, Total: ' + scrollCount );
+
+				scrollCount++;
+				
+			} else {
+				//scroll up
+				$( '#demo-mousewheel-interaction-status' ).text( 'Direction: up, Total: ' + scrollCount );
+
+				scrollCount++;
+			  
+			}
+			lastAnimation = timeNow;
 		}
+		
 
 		
 	};

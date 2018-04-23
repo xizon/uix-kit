@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.3.6
- * ## Last Update         :  April 21, 2018
+ * ## Version             :  1.3.7
+ * ## Last Update         :  April 23, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -23,8 +23,8 @@
 	---------------------------
 	
 	
-	1. Header 
-    2. Loader 
+	1. Loader 
+    2. Header 
     3. Back to Top 
     4. Get all custom attributes of an element like "data-*" 
     5. Navigation 
@@ -41,34 +41,31 @@
     16. Dynamic Drop Down List from JSON 
     17. Form 
     18. Form Progress 
-    19. Gallery 
-    20. Custom Core Scripts & Stylesheets 
-    21. Custom Lightbox 
-    22. Bulleted List 
-    23. Posts List With Ajax 
-    24. Fullwidth List of Split 
-    25. Mousewheel Interaction 
-    26. Modal Dialog 
+    19. Full Page Transition 
+    20. Gallery 
+    21. Image Shapes 
+    22. Custom Core Scripts & Stylesheets 
+    23. Custom Lightbox 
+    24. Bulleted List 
+    25. Posts List With Ajax 
+    26. Fullwidth List of Split 
     27. Mobile Menu 
-    28. Navigation Highlighting 
-    29. Multiple Items Carousel 
-    30. Parallax 
-    31. Pricing 
-    32. Periodical Scroll 
-    33. Progress Bar 
-    34. Retina Graphics for Website 
-    35. Scroll Reveal 
-    36. Show More Less 
-    37. Slideshow ( with custom flexslider ) 
-    38. Smooth Scrolling When Clicking An Anchor Link 
-    39. Source Code 
-    40. Sticky Elements 
-    41. Tabs 
-    42. Testimonials Carousel 
-    43. Text effect 
-    44. Timeline 
-    45. AJAX 
-    46. GSAP Plugins 
+    28. Modal Dialog 
+    29. Mousewheel Interaction 
+    30. Multiple Items Carousel 
+    31. Navigation Highlighting 
+    32. Parallax 
+    33. Periodical Scroll 
+    34. Pricing 
+    35. Progress Bar 
+    36. Retina Graphics for Website 
+    37. Scroll Reveal 
+    38. Show More Less 
+    39. Slideshow ( with custom flexslider ) 
+    40. Smooth Scrolling When Clicking An Anchor Link 
+    41. Source Code 
+    42. Sticky Elements 
+    43. Testimonials Carousel 
 
 
 */
@@ -1750,6 +1747,8 @@ theme = ( function ( theme, $, window, document ) {
 				if ( !dataLoop ) {
 					_prev.addClass( 'disabled' );
 				}
+
+				
 				
 				_prev.on( 'click', function( e ) {
 					e.preventDefault();
@@ -1772,6 +1771,70 @@ theme = ( function ( theme, $, window, document ) {
 					
 					
 				});
+				
+				
+				
+				//Added touch method to mobile device
+				//-------------------------------------	
+				var startX,
+					startY
+
+				
+				$this.on( 'touchstart.advancedSlider', function( event ) {
+					var touches = event.originalEvent.touches;
+					if ( touches && touches.length ) {
+						startX = touches[0].pageX;
+						startY = touches[0].pageY;
+				
+						
+						$this.on( 'touchmove.advancedSlider', function( event ) {
+							
+							var touches = event.originalEvent.touches;
+							if ( touches && touches.length ) {
+								var deltaX = startX - touches[0].pageX,
+									deltaY = startY - touches[0].pageY;
+
+								if ( deltaX >= 50) {
+									//--- swipe left
+									
+									
+									advancedSliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $advSlider );
+
+
+									//Pause the auto play event
+									timerEvtStop = true;
+									
+								}
+								if ( deltaX <= -50) {
+									//--- swipe right
+									
+									advancedSliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $advSlider );
+									
+
+									//Pause the auto play event
+									timerEvtStop = true;							
+
+									
+								}
+								if ( deltaY >= 50) {
+									//--- swipe up
+									
+									
+								}
+								if ( deltaY <= -50) {
+									//--- swipe down
+									
+								}
+								if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
+									$this.off( 'touchmove.advancedSlider' );
+								}
+							}
+							
+						});
+					}	
+				});
+
+				
 				
 				
 
@@ -1835,6 +1898,12 @@ theme = ( function ( theme, $, window, document ) {
 				$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
 				if ( elementIndex == total - 1 ) $( dataControlsArrows ).find( '.next' ).addClass( 'disabled' );
 				if ( elementIndex == 0 ) $( dataControlsArrows ).find( '.prev' ).addClass( 'disabled' );
+			}
+
+			// To determine if it is a touch screen.
+			if ( Modernizr.touchevents ) {
+				if ( elementIndex == total ) elementIndex = total-1;
+				if ( elementIndex < 0 ) elementIndex = 0;	
 			}
 
 			$( dataControlsPagination ).find( 'li a' ).removeClass( 'leave' );
@@ -1901,6 +1970,8 @@ theme = ( function ( theme, $, window, document ) {
 															transparent     : false,
 															view            : document.getElementById( 'custom-advanced-slider-sp-canvas-item-'+elementIndex )
 														});
+				
+			
 
 				
 				//If video
@@ -2468,6 +2539,65 @@ theme = ( function ( theme, $, window, document ) {
 				});
 				
 				
+				//Added touch method to mobile device
+				//-------------------------------------	
+				var startX,
+					startY;
+				
+				$this.on( 'touchstart.advancedSlider', function( event ) {
+					var touches = event.originalEvent.touches;
+					if ( touches && touches.length ) {
+						startX = touches[0].pageX;
+						startY = touches[0].pageY;
+						
+						$this.on( 'touchmove.advancedSlider', function( event ) {
+							
+							var touches = event.originalEvent.touches;
+							if ( touches && touches.length ) {
+								var deltaX = startX - touches[0].pageX,
+									deltaY = startY - touches[0].pageY;
+
+								if ( deltaX >= 50) {
+									//--- swipe left
+									
+									advancedSliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $advSlider );
+									
+
+									//Pause the auto play event
+									timerEvtStop = true;
+									
+								}
+								if ( deltaX <= -50) {
+									//--- swipe right
+
+									
+									advancedSliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $advSlider );
+									
+
+
+									//Pause the auto play event
+									timerEvtStop = true;							
+
+									
+								}
+								if ( deltaY >= 50) {
+									//--- swipe up
+									
+									
+								}
+								if ( deltaY <= -50) {
+									//--- swipe down
+									
+								}
+								if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
+									$this.off( 'touchmove.advancedSlider' );
+								}
+							}
+							
+						});
+					}	
+				});
+
 
 				
 
@@ -2533,6 +2663,13 @@ theme = ( function ( theme, $, window, document ) {
 				if ( elementIndex == total - 1 ) $( dataControlsArrows ).find( '.next' ).addClass( 'disabled' );
 				if ( elementIndex == 0 ) $( dataControlsArrows ).find( '.prev' ).addClass( 'disabled' );
 			}
+			
+			// To determine if it is a touch screen.
+			if ( Modernizr.touchevents ) {
+				if ( elementIndex == total ) elementIndex = total-1;
+				if ( elementIndex < 0 ) elementIndex = 0;	
+			}	
+			
 
 			$( dataControlsPagination ).find( 'li a' ).removeClass( 'leave' );
 			$( dataControlsPagination ).find( 'li a.active' ).removeClass( 'active' ).addClass( 'leave' );
@@ -5777,6 +5914,162 @@ theme = ( function ( theme, $, window, document ) {
 }( jQuery ));
 
 
+/* 
+ *************************************
+ * <!-- Full Page Transition -->
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+
+		//Prevent this module from loading in other pages
+		if ( !$( 'body' ).hasClass( 'page-mousewheel-eff' ) ) return false;
+		
+		
+	    //Determine the direction of a jQuery scroll event
+		//Fix an issue for mousewheel event is too fast.
+		var lastAnimation     = 0,
+			quietPeriod       = 500, //Do not change it
+			animationTime     = 1000,//According to page transition animation changes
+			updateURL         = true,
+			$el               = $( '.custom-fullpage-container' ),
+			$sections         = $el.find( '> section' ),
+			sectionTotal      = $sections.length,
+			topSectionSpacing = $( '.header-area' ).outerHeight( true );
+		
+		if ( $el.length == 0 ) return false;
+		
+		
+		$( document ).on( 'mousewheel', function( event ) { 
+
+			event.preventDefault();//prevent page fom scrolling
+			var delta = event.originalEvent.wheelDelta || -event.originalEvent.detail;
+			scrollMoveInit( event, delta );
+
+		});
+		
+
+		// Prepare everything before binding wheel scroll
+		$.each( $sections, function( i ) {
+			$( this ).attr( 'data-index', i );
+			if ( i == 0 ) {
+				$( this ).addClass( 'active' );
+
+			}
+			
+		});
+		
+		setTimeout( function() {
+			moveTo( $el, 'down', true );
+		}, quietPeriod );
+
+		
+
+		
+		/*
+		 * Scroll initialize
+		 *
+		 * @param  {object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
+		 * @param  {string} delta        - Gets a value that indicates the amount that the mouse wheel has changed.
+		 * @return {void}                - The constructor.
+		 */
+		function scrollMoveInit( event, delta ) {
+	
+			var timeNow = new Date().getTime();
+			// Cancel scroll if currently animating or within quiet period
+			if( timeNow - lastAnimation < quietPeriod + animationTime) {
+				event.preventDefault();
+				return;
+			}
+
+			if (delta < 0) {
+				//scroll down
+				moveTo( $el, 'down', false );
+				
+			} else {
+				//scroll up
+				moveTo( $el, 'up', false );
+				
+			  
+			}
+			lastAnimation = timeNow;
+		}
+		
+      
+		
+		/*
+		 * Move Animation
+		 *
+		 * @param  {object} el           - The container of each sections.
+		 * @param  {string} dir          - Rolling direction indicator.
+		 * @return {void}                - The constructor.
+		 */
+		function moveTo( el, dir, first ) {
+			var index     = parseFloat( $sections.filter( '.active' ).attr( 'data-index' ) ),
+				nextIndex = null,
+				$next     = null;
+			
+			
+			 
+			if ( dir == 'down' ) {
+				nextIndex = index + 1;
+			} else {
+				nextIndex = index - 1;
+			}
+			
+			if ( nextIndex > sectionTotal-1 ) nextIndex = sectionTotal-1;
+			if ( nextIndex < 0 ) nextIndex = 0;
+			
+
+			if ( first ) nextIndex = 0;
+			
+			//Returns the target section
+			$next = $sections.eq( nextIndex );
+			
+			//Smooth scroll to content
+			TweenLite.to( window, animationTime/1000, {
+				scrollTo: {
+					y: $next.offset().top - topSectionSpacing
+				},
+				ease: Power2.easeOut,
+				onComplete: function() {
+					$sections.removeClass( 'active' );
+					$next.addClass( 'active' );
+				}
+			});		
+
+
+			//Changing The Site URL
+			if ( history.replaceState && updateURL == true ) {
+				
+				var href = window.location.href.substr( 0, window.location.href.indexOf('#')) + "#section-" + (nextIndex+1);
+				
+				history.pushState( {}, document.title, href );
+			}
+			
+		}
+		
+    };
+
+    theme.fullPage = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
+
+
+
+
+
+
 
 /* 
  *************************************
@@ -5873,6 +6166,128 @@ theme = ( function ( theme, $, window, document ) {
 	
 		
     theme.gallery = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
+/* 
+ *************************************
+ * <!-- Image Shapes -->
+ *************************************
+ */	
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+		
+		
+        var $window      = $( window ),
+		    windowWidth  = $window.width(),
+		    windowHeight = $window.height();
+
+        
+		//  Initialize
+		shapesInit( windowWidth );
+		
+		$window.on( 'resize', function() {
+			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+			if ( $window.width() != windowWidth ) {
+
+				// Update the window width for next time
+				windowWidth  = $window.width();
+
+				// Do stuff here
+				shapesInit( windowWidth );
+		
+
+			}
+		});
+		
+	
+		/*
+		 * Initialize Shapes
+		 *
+		 * @param  {number} w         - Returns width of browser viewport
+		 * @param  {number} h         - Returns height of browser viewport
+		 * @return {void}             - The constructor.
+		 */
+		function shapesInit( w ) {
+			
+			$( '.shape-img' ).each( function()  {
+				var $this          = $( this ),
+					ranID          = 'shape-img-' + Math.random()*1000000000000000000,
+					svgPath        = $this.data( 'path' ),
+					svgW           = parseFloat( $this.data( 'svg-const-width' ) ),
+					svgH           = parseFloat( $this.data( 'svg-const-height' ) ),
+					imgW           = parseFloat( $this.data( 'img-width' ) ),
+					svgRatio       = svgW / svgH,
+					imgRatio       = null,
+					bothWidthRatio = null,
+					newSvgHeight   = null,		
+					newImgHeight   = null,		
+					svgOut         = '',
+					curImgW        = imgW,
+					curImgH        = null,
+					curImgURL      = $this.find( 'img' ).attr( 'src' );
+
+				if ( imgW > w ) {
+					imgW = w;
+				}
+
+
+				//If the src is already set, then the event is firing in the cached case, 
+				//before you even get the event handler bound. To fix this, you can loop 
+				//through checking and triggering the event based off .complete
+				$this.find( 'img' ).one( 'load', function() {
+					curImgH   = $( this ).height();
+					curImgW   = $( this ).width();
+					imgRatio  = curImgW / curImgH;
+				}).each(function() {
+					if( this.complete ) $( this ).load();
+				});	
+
+
+
+				//Add a custom shape SVG to the page
+				if ( curImgH > 0 ) {
+
+
+					bothWidthRatio = imgW / svgW;
+					newSvgHeight   = imgW / svgRatio;
+					newImgHeight   = svgW / imgRatio;
+
+					svgOut += '<svg fill-rule="evenodd" clip-rule="evenodd" width="'+imgW+'px" height="'+newSvgHeight+'px" viewBox="0 0 '+imgW+' '+newSvgHeight+'" >';
+					svgOut += '	<pattern id="'+ranID+'" patternUnits="userSpaceOnUse" width="'+svgW+'" height="'+svgH+'">';
+					svgOut += '		  <image xlink:href="'+curImgURL+'" width="'+svgW+'px" height="'+newImgHeight+'px" x="0" y="0" />';
+					svgOut += '	</pattern> ';   
+					svgOut += '	<path fill="url(#'+ranID+')" transform="scale('+bothWidthRatio+')" d="'+svgPath+'"/>';
+					svgOut += '</svg>';	
+
+
+					$this.addClass( 'active' ).html( svgOut );
+
+				}
+
+
+			});
+			
+		}
+		
+		
+
+		
+	
+
+		
+    };
+
+    theme.imageShapes = {
         documentReady : documentReady        
     };
 
@@ -7058,60 +7473,55 @@ theme = ( function ( theme, $, window, document ) {
 		
 	    //Determine the direction of a jQuery scroll event
 		//Fix an issue for mousewheel event is too fast.
-		var mousewheelTrigger = true,
+		var lastAnimation     = 0,
+			quietPeriod       = 500, //Do not change it
+			animationTime     = 1000,//According to page transition animation changes
 			scrollCount       = 0;
 		
-		$( window ).on( 'mousewheel', function( event ) { 
+		$( document ).on( 'mousewheel', function( event ) { 
 
-			if ( mousewheelTrigger ) {
-
-				if( event.originalEvent.wheelDelta < 0) {
-					//scroll down
-					$( '#demo-mousewheel-interaction-status' ).text( 'Direction: down, Total: ' + scrollCount );
-
-					scrollCount++;
-					
-					//Prohibited scrolling trigger
-					mousewheelTrigger = false;
-					
-					//Do something
-					customMouseHandle();		
-					
-
-				} else {
-					//scroll up
-					$( '#demo-mousewheel-interaction-status' ).text( 'Direction: up, Total: ' + scrollCount );
-
-					scrollCount++;
-					
-					//Prohibited scrolling trigger
-					mousewheelTrigger = false;
-					
-					//Do something
-					customMouseHandle();
-
-				}	
-
-			}
-			
-
-			//prevent page fom scrolling
-			//return false;
+			event.preventDefault();//prevent page fom scrolling
+			var delta = event.originalEvent.wheelDelta || -event.originalEvent.detail;
+			scrollInit( event, delta );
 
 		});
+		
+	
 	
 		
 		
+		/*
+		 * Scroll initialize
+		 *
+		 * @param  {object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
+		 * @param  {string} delta        - Gets a value that indicates the amount that the mouse wheel has changed.
+		 * @return {void}                - The constructor.
+		 */
+		function scrollInit( event, delta ) {
+	
+			var timeNow = new Date().getTime();
+			// Cancel scroll if currently animating or within quiet period
+			if( timeNow - lastAnimation < quietPeriod + animationTime) {
+				event.preventDefault();
+				return;
+			}
 
-		function customMouseHandle() {
-			
-			//Reset scrolling trigger
-			setTimeout( function() {
-				mousewheelTrigger = true;	
-			}, 1500 );
-			
-			
+			if (delta < 0) {
+				//scroll down
+				$( '#demo-mousewheel-interaction-status' ).text( 'Direction: down, Total: ' + scrollCount );
+
+				scrollCount++;
+				
+			} else {
+				//scroll up
+				$( '#demo-mousewheel-interaction-status' ).text( 'Direction: up, Total: ' + scrollCount );
+
+				scrollCount++;
+			  
+			}
+			lastAnimation = timeNow;
 		}
+		
 
 		
 	};
@@ -16259,6 +16669,9 @@ var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(globa
 }("TextPlugin"));
 /* 
  *************************************
+ * <!-- GSAP Plugins -->
+ *************************************
+ */*********************
  * <!-- GSAP Plugins -->
  *************************************
  */

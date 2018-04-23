@@ -1,5 +1,13 @@
 # Changelog
 
+#### = 1.3.7 (April 23, 2018) =
+
+
+* New: Add a new module "Image Shapes".
+* New: Add a new module "Full Page Transition".
+* New: Added touch method to mobile device for advanced slider.
+
+
 
 #### = 1.3.6 (April 21, 2018) =
 

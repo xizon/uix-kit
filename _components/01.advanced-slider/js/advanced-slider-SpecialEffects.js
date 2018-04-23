@@ -359,6 +359,8 @@ theme = ( function ( theme, $, window, document ) {
 				if ( !dataLoop ) {
 					_prev.addClass( 'disabled' );
 				}
+
+				
 				
 				_prev.on( 'click', function( e ) {
 					e.preventDefault();
@@ -381,6 +383,70 @@ theme = ( function ( theme, $, window, document ) {
 					
 					
 				});
+				
+				
+				
+				//Added touch method to mobile device
+				//-------------------------------------	
+				var startX,
+					startY
+
+				
+				$this.on( 'touchstart.advancedSlider', function( event ) {
+					var touches = event.originalEvent.touches;
+					if ( touches && touches.length ) {
+						startX = touches[0].pageX;
+						startY = touches[0].pageY;
+				
+						
+						$this.on( 'touchmove.advancedSlider', function( event ) {
+							
+							var touches = event.originalEvent.touches;
+							if ( touches && touches.length ) {
+								var deltaX = startX - touches[0].pageX,
+									deltaY = startY - touches[0].pageY;
+
+								if ( deltaX >= 50) {
+									//--- swipe left
+									
+									
+									advancedSliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $advSlider );
+
+
+									//Pause the auto play event
+									timerEvtStop = true;
+									
+								}
+								if ( deltaX <= -50) {
+									//--- swipe right
+									
+									advancedSliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $advSlider );
+									
+
+									//Pause the auto play event
+									timerEvtStop = true;							
+
+									
+								}
+								if ( deltaY >= 50) {
+									//--- swipe up
+									
+									
+								}
+								if ( deltaY <= -50) {
+									//--- swipe down
+									
+								}
+								if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
+									$this.off( 'touchmove.advancedSlider' );
+								}
+							}
+							
+						});
+					}	
+				});
+
+				
 				
 				
 
@@ -444,6 +510,12 @@ theme = ( function ( theme, $, window, document ) {
 				$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
 				if ( elementIndex == total - 1 ) $( dataControlsArrows ).find( '.next' ).addClass( 'disabled' );
 				if ( elementIndex == 0 ) $( dataControlsArrows ).find( '.prev' ).addClass( 'disabled' );
+			}
+
+			// To determine if it is a touch screen.
+			if ( Modernizr.touchevents ) {
+				if ( elementIndex == total ) elementIndex = total-1;
+				if ( elementIndex < 0 ) elementIndex = 0;	
 			}
 
 			$( dataControlsPagination ).find( 'li a' ).removeClass( 'leave' );
@@ -510,6 +582,8 @@ theme = ( function ( theme, $, window, document ) {
 															transparent     : false,
 															view            : document.getElementById( 'custom-advanced-slider-sp-canvas-item-'+elementIndex )
 														});
+				
+			
 
 				
 				//If video
