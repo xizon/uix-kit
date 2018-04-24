@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.4.0
- * ## Last Update         :  April 24, 2018
+ * ## Version             :  1.4.1
+ * ## Last Update         :  April 25, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -39,14 +39,14 @@
     14. Advanced Slider (Basic) 
     15. Counter 
     16. Dynamic Drop Down List from JSON 
-    17. Form 
-    18. Form Progress 
+    17. Form Progress 
+    18. Form 
     19. Full Page Transition 
     20. Gallery 
     21. Image Shapes 
     22. Custom Core Scripts & Stylesheets 
-    23. Custom Lightbox 
-    24. Bulleted List 
+    23. Bulleted List 
+    24. Custom Lightbox 
     25. Posts List With Ajax 
     26. Fullwidth List of Split 
     27. Mobile Menu 
@@ -508,15 +508,16 @@ theme = ( function ( theme, $, window, document ) {
 		 ---------------------------
 		 */  
 		$( '.web-video-embed' ).each( function()  {
-			var $this         = $( this ),
-			    curVideoID    = $this.find( '.video-js' ).attr( 'id' ),
-				videoWrapperW = $this.closest( '[data-embed-video-wrapper]' ).width(),
-				videoWrapperH = $this.closest( '[data-embed-video-wrapper]' ).height(),
-				dataAuto      = $this.data( 'embed-video-autoplay' ),
-				dataLoop      = $this.data( 'embed-video-loop' ),
-				dataControls  = $this.data( 'embed-video-controls' ),
-				dataW         = $this.data( 'embed-video-width' ),
-				dataH         = $this.data( 'embed-video-height' );
+			var $this          = $( this ),
+			    curVideoID     = $this.find( '.video-js' ).attr( 'id' ),
+				coverPlayBtnID = 'videocover-' + curVideoID,
+				videoWrapperW  = $this.closest( '[data-embed-video-wrapper]' ).width(),
+				videoWrapperH  = $this.closest( '[data-embed-video-wrapper]' ).height(),
+				dataAuto       = $this.data( 'embed-video-autoplay' ),
+				dataLoop       = $this.data( 'embed-video-loop' ),
+				dataControls   = $this.data( 'embed-video-controls' ),
+				dataW          = $this.data( 'embed-video-width' ),
+				dataH          = $this.data( 'embed-video-height' );
 
 			
 			
@@ -542,7 +543,24 @@ theme = ( function ( theme, $, window, document ) {
 				dataH = videoWrapperH;
 			}
 			
-		
+			//Display cover and play buttons when some mobile device browsers cannot automatically play video
+			if ( $( '#' + coverPlayBtnID ).length == 0 ) {
+				$( '<div id="'+coverPlayBtnID+'"><span class="cover-show" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="cover-play"></span></div>' ).insertBefore( $this );
+				
+	
+				var btnEv = ( Modernizr.touchevents ) ? 'touchstart' : 'click';
+				$( '#' + coverPlayBtnID + ' .cover-play' ).on( btnEv, function( e ) {
+					e.preventDefault();
+					
+					myPlayer.play();
+					
+					$( '#' + coverPlayBtnID ).hide();
+
+				});
+
+			}
+			
+			
 			
 			//HTML5 video autoplay on mobile revisited
 			if ( dataAuto && windowWidth <= 768 ) {
@@ -554,8 +572,6 @@ theme = ( function ( theme, $, window, document ) {
 			}
 			
 			
-
-
 			var myPlayer = videojs( curVideoID, {
 					                  width     : dataW,
 					                  height    : dataH,
@@ -599,9 +615,13 @@ theme = ( function ( theme, $, window, document ) {
 					}
 
 
+
+					
 					
 					//Show this video wrapper
 					$this.css( 'visibility', 'visible' );
+					
+
 
 					//Hide loading effect
 					$this.find( '.vjs-loading-spinner, .vjs-big-play-button' ).hide();
@@ -622,6 +642,29 @@ theme = ( function ( theme, $, window, document ) {
 				if ( !dataControls ) {
 					myPlayer.controls( false );
 				}
+				
+				
+				/* ---------  Determine if the video is auto played from mobile devices  */
+				var autoPlayOK = false;
+
+				myPlayer.on( 'timeupdate', function() {
+
+					var duration = this.duration();
+					if ( duration > 0 ) {
+						autoPlayOK = true;
+						if ( this.currentTime() > 0 ) {
+							autoPlayOK = true;
+							this.off( 'timeupdate' );
+
+							//Hide cover and play buttons when the video automatically played
+							$( '#' + coverPlayBtnID ).hide();
+						} 
+
+					}
+
+				});
+				
+				
 				
 
 			});
@@ -1435,16 +1478,17 @@ theme = ( function ( theme, $, window, document ) {
 		 */
 		function advancedSliderVideoEmbedInit( wrapper, play ) {
 			wrapper.find( '.slider-video-embed' ).each( function()  {
-				var $this         = $( this ),
-					videoWrapperW = $this.closest( '.custom-advanced-slider-outer' ).width(),
-					videoWrapperH = $this.closest( '.custom-advanced-slider-outer' ).height(),
-					curVideoID    = $this.find( '.video-js' ).attr( 'id' ),
-					dataControls  = $this.data( 'embed-video-controls' ),
-					dataAuto      = $this.data( 'embed-video-autoplay' ),
-					dataLoop      = $this.data( 'embed-video-loop' ),
-					dataW         = $this.data( 'embed-video-width' ),
-					dataH         = $this.data( 'embed-video-height' ),
-					$replayBtn    = $( '#'+curVideoID+'-replay-btn' );
+				var $this          = $( this ),
+					videoWrapperW  = $this.closest( '.custom-advanced-slider-outer' ).width(),
+					videoWrapperH  = $this.closest( '.custom-advanced-slider-outer' ).height(),
+					curVideoID     = $this.find( '.video-js' ).attr( 'id' ),
+					coverPlayBtnID = 'videocover-' + curVideoID,
+					dataControls   = $this.data( 'embed-video-controls' ),
+					dataAuto       = $this.data( 'embed-video-autoplay' ),
+					dataLoop       = $this.data( 'embed-video-loop' ),
+					dataW          = $this.data( 'embed-video-width' ),
+					dataH          = $this.data( 'embed-video-height' ),
+					$replayBtn     = $( '#'+curVideoID+'-replay-btn' );
 				
 				if ( videoWrapperH == 0 ) videoWrapperH = videoWrapperW/1.77777777777778;
 
@@ -1470,7 +1514,23 @@ theme = ( function ( theme, $, window, document ) {
 				}
 
 				
-				
+
+				//Display cover and play buttons when some mobile device browsers cannot automatically play video
+				if ( $( '#' + coverPlayBtnID ).length == 0 ) {
+					$( '<div id="'+coverPlayBtnID+'"><span class="cover-show" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="cover-play"></span></div>' ).insertBefore( $this );
+
+
+					var btnEv = ( Modernizr.touchevents ) ? 'touchstart' : 'click';
+					$( '#' + coverPlayBtnID + ' .cover-play' ).on( btnEv, function( e ) {
+						e.preventDefault();
+
+						myPlayer.play();
+
+						$( '#' + coverPlayBtnID ).hide();
+
+					});
+
+				}
 				
 				
 				//Add replay button to video 
@@ -1556,6 +1616,28 @@ theme = ( function ( theme, $, window, document ) {
 					if ( !dataControls ) {
 						myPlayer.controls( false );
 					}
+					
+					
+					/* ---------  Determine if the video is auto played from mobile devices  */
+					var autoPlayOK = false;
+
+					myPlayer.on( 'timeupdate', function() {
+
+						var duration = this.duration();
+						if ( duration > 0 ) {
+							autoPlayOK = true;
+							if ( this.currentTime() > 0 ) {
+								autoPlayOK = true;
+								this.off( 'timeupdate' );
+
+								//Hide cover and play buttons when the video automatically played
+								$( '#' + coverPlayBtnID ).hide();
+							} 
+
+						}
+
+					});
+				
 
 					
 					/* ---------  Pause the video when it is not current slider  */
@@ -1959,15 +2041,26 @@ theme = ( function ( theme, $, window, document ) {
 			if ( Modernizr.webgl ) {
 			
 				var hasVideo              = ( slider.find( '.item' ).eq( elementIndex ).find( 'video' ).length > 0 ) ? true : false,
-				    curImgURL             = slider.find( '.item' ).eq( elementIndex ).find( 'img' ).attr( 'src' ),
+					imgSel                = slider.find( '.item' ).eq( elementIndex ).find( 'img' ),
+				    curImgURL             = imgSel.attr( 'src' ),
 					stageW                = slider.width(),
 					stageH                = slider.height(),
+					realImgW,
+					realImgH,
 					curSprite,
 					ticker,
 					renderer,
 					filterAnimRenderer;
 				
-			
+
+				//create an offscreen image that isn't scaled
+				//but contains the same image.
+				//Because it's cached it should be instantly here.
+				var theImage = new Image();
+				theImage.src = curImgURL;
+				realImgW = theImage.width;
+				realImgH = theImage.height;
+				
 
 				
 				//If video
@@ -2031,12 +2124,6 @@ theme = ( function ( theme, $, window, document ) {
 															view            : document.getElementById( 'custom-advanced-slider-sp-canvas-item-'+elementIndex )
 														});
 
-					filterAnimRenderer    = new PIXI.autoDetectRenderer( stageW, stageH, {
-															backgroundColor : 0x000000, 
-															transparent     : false,
-															view            : document.getElementById( 'custom-advanced-slider-sp-canvas-item-'+elementIndex )
-														});
-
 					curSprite.width  = stageW;
 					curSprite.height = stageH;	
 
@@ -2052,7 +2139,6 @@ theme = ( function ( theme, $, window, document ) {
 
 					// Set the filter to stage and set some default values for the animation
 					var strip = new PIXI.mesh.Rope( PIXI.Texture.fromImage( curImgURL ), points );
-
 
 					strip.x = 0;
 					strip.y = stageH/2 - 20;
@@ -2090,7 +2176,7 @@ theme = ( function ( theme, $, window, document ) {
 				//----------------------------------------------------------------------------------
 				if ( slider.hasClass( 'eff-liquid2' ) ) {
 					
-					
+				
 					// ------------ Basic parameters 
 					curSprite             = new PIXI.Sprite.fromImage( curImgURL, true );
 					ticker                = new PIXI.ticker.Ticker();
@@ -2114,12 +2200,13 @@ theme = ( function ( theme, $, window, document ) {
 						displacementSprite  = new PIXI.Sprite.fromImage( curImgURL ),
 						displacementFilter  = new PIXI.filters.DisplacementFilter( displacementSprite ),
 						rendererWidth       = renderer.view.width,
-						rendererHeight      = renderer.view.height;
-
-
+						rendererHeight      = renderer.view.height,
+						canvasRatio         = rendererWidth/realImgW;
+					
 
 					// ------------ Add filter container to the main container 
-					curSprite.scale.set(1.04);
+					//Need to scale according to the screen
+					curSprite.scale.set( canvasRatio );
 					filterStage.addChild( curSprite );
 
 					// Enable Interactions
@@ -2134,7 +2221,6 @@ theme = ( function ( theme, $, window, document ) {
 					displacementSprite.anchor.set( 0.5 );
 					displacementSprite.x = filterAnimRenderer.width / 2;
 					displacementSprite.y = filterAnimRenderer.height / 2; 
-
 
 					displacementSprite.scale.x = 1;
 					displacementSprite.scale.y = 1;
@@ -2172,8 +2258,7 @@ theme = ( function ( theme, $, window, document ) {
 
 					}, false);
 
-					
-
+				
 
 
 				} // end effect
@@ -2427,16 +2512,17 @@ theme = ( function ( theme, $, window, document ) {
 		 */
 		function advancedSliderVideoEmbedInit( wrapper, play ) {
 			wrapper.find( '.slider-video-embed' ).each( function()  {
-				var $this         = $( this ),
-					videoWrapperW = $this.closest( '.custom-advanced-slider-outer' ).width(),
-					videoWrapperH = $this.closest( '.custom-advanced-slider-outer' ).height(),
-					curVideoID    = $this.find( '.video-js' ).attr( 'id' ),
-					dataControls  = $this.data( 'embed-video-controls' ),
-					dataAuto      = $this.data( 'embed-video-autoplay' ),
-					dataLoop      = $this.data( 'embed-video-loop' ),
-					dataW         = $this.data( 'embed-video-width' ),
-					dataH         = $this.data( 'embed-video-height' ),
-					$replayBtn    = $( '#'+curVideoID+'-replay-btn' );
+				var $this          = $( this ),
+					videoWrapperW  = $this.closest( '.custom-advanced-slider-outer' ).width(),
+					videoWrapperH  = $this.closest( '.custom-advanced-slider-outer' ).height(),
+					curVideoID     = $this.find( '.video-js' ).attr( 'id' ),
+					coverPlayBtnID = 'videocover-' + curVideoID,
+					dataControls   = $this.data( 'embed-video-controls' ),
+					dataAuto       = $this.data( 'embed-video-autoplay' ),
+					dataLoop       = $this.data( 'embed-video-loop' ),
+					dataW          = $this.data( 'embed-video-width' ),
+					dataH          = $this.data( 'embed-video-height' ),
+					$replayBtn     = $( '#'+curVideoID+'-replay-btn' );
 				
 				if ( videoWrapperH == 0 ) videoWrapperH = videoWrapperW/1.77777777777778;
 
@@ -2462,7 +2548,24 @@ theme = ( function ( theme, $, window, document ) {
 				}
 
 				
-				
+
+				//Display cover and play buttons when some mobile device browsers cannot automatically play video
+				if ( $( '#' + coverPlayBtnID ).length == 0 ) {
+					$( '<div id="'+coverPlayBtnID+'"><span class="cover-show" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="cover-play"></span></div>' ).insertBefore( $this );
+
+
+					var btnEv = ( Modernizr.touchevents ) ? 'touchstart' : 'click';
+					$( '#' + coverPlayBtnID + ' .cover-play' ).on( btnEv, function( e ) {
+						e.preventDefault();
+
+						myPlayer.play();
+
+						$( '#' + coverPlayBtnID ).hide();
+
+					});
+
+				}
+			
 				
 				
 				//Add replay button to video 
@@ -2549,6 +2652,29 @@ theme = ( function ( theme, $, window, document ) {
 						myPlayer.controls( false );
 					}
 
+					
+					
+					/* ---------  Determine if the video is auto played from mobile devices  */
+					var autoPlayOK = false;
+
+					myPlayer.on( 'timeupdate', function() {
+
+						var duration = this.duration();
+						if ( duration > 0 ) {
+							autoPlayOK = true;
+							if ( this.currentTime() > 0 ) {
+								autoPlayOK = true;
+								this.off( 'timeupdate' );
+
+								//Hide cover and play buttons when the video automatically played
+								$( '#' + coverPlayBtnID ).hide();
+							} 
+
+						}
+
+					});
+				
+					
 					
 					/* ---------  Pause the video when it is not current slider  */
 					if ( !play ) {
@@ -6306,6 +6432,111 @@ theme = ( function ( theme, $, window, document ) {
 
 /* 
  *************************************
+ * <!-- Gallery -->
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ) {
+		
+	
+		$( '.custom-gallery' ).each( function() {
+			var type = $( this ).data( 'show-type' );
+			
+			// Masonry
+			if ( type.indexOf( 'masonry' ) >= 0  ) {
+				$( this ).addClass( 'masonry-container' );
+				$( this ).find( '.custom-gallery-item' ).addClass( 'masonry-item' );
+			}
+			
+			// Filterable
+			if ( type.indexOf( 'filter' ) >= 0  ) {
+				$( this ).addClass( 'filter-container' );
+				$( this ).find( '.custom-gallery-item' ).addClass( 'filter-item' );	
+			}	
+		
+		});
+	
+	    /*--  Function of Masonry  --*/
+		var masonryObj = $( '.masonry-container .custom-gallery-tiles' );
+		imagesLoaded( masonryObj ).on( 'always', function() {
+			  masonryObj.masonry({
+				itemSelector: '.masonry-item'
+			  });  
+		});
+		
+		
+	    /*--  Function of Filterable  --*/
+		if ( $( "[data-show-type]" ).length > 0 ) {
+			if ( $( "[data-show-type]" ).data( 'show-type' ).indexOf( 'filter' ) >= 0 ) {
+				
+				$( '.custom-gallery' ).each( function() {
+					var filterCat      = $( this ).data( 'filter-id' ),
+						$grid          = $( this ).find( '.custom-gallery-tiles' ),
+						$filterOptions = $( filterCat );
+						
+					imagesLoaded( $grid ).on( 'always', function() {
+						
+						 $grid.shuffle({
+							itemSelector : '.filter-item',
+							speed        : 550, // Transition/animation speed (milliseconds).
+							easing       : 'ease-out', // CSS easing function to use.
+							sizer        : null // Sizer element. Use an element to determine the size of columns and gutters.
+						  });
+						  
+						
+						$filterOptions.find( 'li > a' ).on( 'click', function() {
+							  var $this       = $( this ),
+								  activeClass = 'current-cat',
+								  isActive    = $this.hasClass( activeClass ),
+								  group       = isActive ? 'all' : $this.data( 'group' );
+						
+							  // Hide current label, show current label in title
+							  if ( !isActive ) {
+								$filterOptions.find( '.' + activeClass ).removeClass( activeClass );
+							  }
+						
+							  $this.toggleClass( activeClass );
+						
+							  // Filter elements
+							  $grid.shuffle( 'shuffle', group );
+							  
+							  return false;	
+						});
+					
+			
+					});
+	
+					
+				} );
+		
+				
+			} else {
+				$( '[data-group="all"]' ).parent( 'li' ).hide();
+			}
+	
+		}
+		
+		
+		
+	};
+	
+		
+    theme.gallery = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
+/* 
+ *************************************
  * <!-- Image Shapes -->
  *************************************
  */	
@@ -6411,111 +6642,6 @@ theme = ( function ( theme, $, window, document ) {
     };
 
     theme.imageShapes = {
-        documentReady : documentReady        
-    };
-
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
-
-
-
-/* 
- *************************************
- * <!-- Gallery -->
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
-	
-		$( '.custom-gallery' ).each( function() {
-			var type = $( this ).data( 'show-type' );
-			
-			// Masonry
-			if ( type.indexOf( 'masonry' ) >= 0  ) {
-				$( this ).addClass( 'masonry-container' );
-				$( this ).find( '.custom-gallery-item' ).addClass( 'masonry-item' );
-			}
-			
-			// Filterable
-			if ( type.indexOf( 'filter' ) >= 0  ) {
-				$( this ).addClass( 'filter-container' );
-				$( this ).find( '.custom-gallery-item' ).addClass( 'filter-item' );	
-			}	
-		
-		});
-	
-	    /*--  Function of Masonry  --*/
-		var masonryObj = $( '.masonry-container .custom-gallery-tiles' );
-		imagesLoaded( masonryObj ).on( 'always', function() {
-			  masonryObj.masonry({
-				itemSelector: '.masonry-item'
-			  });  
-		});
-		
-		
-	    /*--  Function of Filterable  --*/
-		if ( $( "[data-show-type]" ).length > 0 ) {
-			if ( $( "[data-show-type]" ).data( 'show-type' ).indexOf( 'filter' ) >= 0 ) {
-				
-				$( '.custom-gallery' ).each( function() {
-					var filterCat      = $( this ).data( 'filter-id' ),
-						$grid          = $( this ).find( '.custom-gallery-tiles' ),
-						$filterOptions = $( filterCat );
-						
-					imagesLoaded( $grid ).on( 'always', function() {
-						
-						 $grid.shuffle({
-							itemSelector : '.filter-item',
-							speed        : 550, // Transition/animation speed (milliseconds).
-							easing       : 'ease-out', // CSS easing function to use.
-							sizer        : null // Sizer element. Use an element to determine the size of columns and gutters.
-						  });
-						  
-						
-						$filterOptions.find( 'li > a' ).on( 'click', function() {
-							  var $this       = $( this ),
-								  activeClass = 'current-cat',
-								  isActive    = $this.hasClass( activeClass ),
-								  group       = isActive ? 'all' : $this.data( 'group' );
-						
-							  // Hide current label, show current label in title
-							  if ( !isActive ) {
-								$filterOptions.find( '.' + activeClass ).removeClass( activeClass );
-							  }
-						
-							  $this.toggleClass( activeClass );
-						
-							  // Filter elements
-							  $grid.shuffle( 'shuffle', group );
-							  
-							  return false;	
-						});
-					
-			
-					});
-	
-					
-				} );
-		
-				
-			} else {
-				$( '[data-group="all"]' ).parent( 'li' ).hide();
-			}
-	
-		}
-		
-		
-		
-	};
-	
-		
-    theme.gallery = {
         documentReady : documentReady        
     };
 
@@ -9394,16 +9520,17 @@ theme = ( function ( theme, $, window, document ) {
 		 */
 		function videoEmbedInit( wrapper, play ) {
 			wrapper.find( '.slider-video-embed' ).each( function()  {
-				var $this         = $( this ),
-					videoWrapperW = $this.closest( '[data-embed-video-wrapper]' ).width(),
-					videoWrapperH = $this.closest( '[data-embed-video-wrapper]' ).height(),
-					curVideoID    = $this.find( '.video-js' ).attr( 'id' ),
-					dataControls  = $this.data( 'embed-video-controls' ),
-					dataAuto      = $this.data( 'embed-video-autoplay' ),
-					dataLoop      = $this.data( 'embed-video-loop' ),
-					dataW         = $this.data( 'embed-video-width' ),
-					dataH         = $this.data( 'embed-video-height' ),
-					$replayBtn    = $( '#'+curVideoID+'-replay-btn' );
+				var $this          = $( this ),
+					videoWrapperW  = $this.closest( '[data-embed-video-wrapper]' ).width(),
+					videoWrapperH  = $this.closest( '[data-embed-video-wrapper]' ).height(),
+					curVideoID     = $this.find( '.video-js' ).attr( 'id' ),
+					coverPlayBtnID = 'videocover-' + curVideoID,
+					dataControls   = $this.data( 'embed-video-controls' ),
+					dataAuto       = $this.data( 'embed-video-autoplay' ),
+					dataLoop       = $this.data( 'embed-video-loop' ),
+					dataW          = $this.data( 'embed-video-width' ),
+					dataH          = $this.data( 'embed-video-height' ),
+					$replayBtn     = $( '#'+curVideoID+'-replay-btn' );
 
 				
 				if ( videoWrapperH == 0 ) videoWrapperH = videoWrapperW/1.77777777777778;
@@ -9430,6 +9557,23 @@ theme = ( function ( theme, $, window, document ) {
 				
 
 
+				//Display cover and play buttons when some mobile device browsers cannot automatically play video
+				if ( $( '#' + coverPlayBtnID ).length == 0 ) {
+					$( '<div id="'+coverPlayBtnID+'"><span class="cover-show" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="cover-play"></span></div>' ).insertBefore( $this );
+
+
+					var btnEv = ( Modernizr.touchevents ) ? 'touchstart' : 'click';
+					$( '#' + coverPlayBtnID + ' .cover-play' ).on( btnEv, function( e ) {
+						e.preventDefault();
+
+						myPlayer.play();
+
+						$( '#' + coverPlayBtnID ).hide();
+
+					});
+
+				}
+				
 				
 				//Add replay button to video 
 				if ( $replayBtn.length == 0 ) {
@@ -9514,6 +9658,28 @@ theme = ( function ( theme, $, window, document ) {
 						myPlayer.controls( false );
 					}
 
+
+					/* ---------  Determine if the video is auto played from mobile devices  */
+					var autoPlayOK = false;
+
+					myPlayer.on( 'timeupdate', function() {
+
+						var duration = this.duration();
+						if ( duration > 0 ) {
+							autoPlayOK = true;
+							if ( this.currentTime() > 0 ) {
+								autoPlayOK = true;
+								this.off( 'timeupdate' );
+
+								//Hide cover and play buttons when the video automatically played
+								$( '#' + coverPlayBtnID ).hide();
+							} 
+
+						}
+
+					});
+				
+					
 					
 					/* ---------  Pause the video when it is not current slider  */
 					if ( !play ) {

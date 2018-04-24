@@ -1,9 +1,57 @@
 /* ====================================================== 
    <!-- Video -->
 /* ====================================================== */
-.web-video-embed {
-	visibility: hidden;	
+/* Embedded directly in the webpage or embedded via a slider */
+.web-video-embed,
+.slider-video-embed {
+	visibility: hidden;
+	
 }
+/* Display cover and play buttons when some mobile device browsers cannot automatically play video */
+.cover-show {
+	position: absolute;
+	z-index: 5;
+	left: 0;
+	top: 0;
+	display: block;
+	width: 100%;
+	height: 100%;
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+
+}
+
+.cover-play {
+	display: block;
+	position: absolute;
+	z-index: 11;
+	left: 50%;
+	top: 50%;
+	width: 44px;
+	height: 44px;
+	line-height: 44px;
+	margin-left: -22px;
+	margin-top: -22px;
+	font-size: 3rem;
+	text-shadow: 1px 0 3px rgba(0,0,0,.3);
+
+
+	&::before {
+		display: inline-block;
+		content: "\f01d";
+		font-family: 'FontAwesome';
+		color: #fff;
+		cursor: pointer;
+	}	
+}
+
+
+.slider-video-embed {
+	visibility: visible;
+}
+
 
 .web-video-replay {
 

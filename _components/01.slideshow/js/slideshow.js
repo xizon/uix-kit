@@ -320,16 +320,17 @@ theme = ( function ( theme, $, window, document ) {
 		 */
 		function videoEmbedInit( wrapper, play ) {
 			wrapper.find( '.slider-video-embed' ).each( function()  {
-				var $this         = $( this ),
-					videoWrapperW = $this.closest( '[data-embed-video-wrapper]' ).width(),
-					videoWrapperH = $this.closest( '[data-embed-video-wrapper]' ).height(),
-					curVideoID    = $this.find( '.video-js' ).attr( 'id' ),
-					dataControls  = $this.data( 'embed-video-controls' ),
-					dataAuto      = $this.data( 'embed-video-autoplay' ),
-					dataLoop      = $this.data( 'embed-video-loop' ),
-					dataW         = $this.data( 'embed-video-width' ),
-					dataH         = $this.data( 'embed-video-height' ),
-					$replayBtn    = $( '#'+curVideoID+'-replay-btn' );
+				var $this          = $( this ),
+					videoWrapperW  = $this.closest( '[data-embed-video-wrapper]' ).width(),
+					videoWrapperH  = $this.closest( '[data-embed-video-wrapper]' ).height(),
+					curVideoID     = $this.find( '.video-js' ).attr( 'id' ),
+					coverPlayBtnID = 'videocover-' + curVideoID,
+					dataControls   = $this.data( 'embed-video-controls' ),
+					dataAuto       = $this.data( 'embed-video-autoplay' ),
+					dataLoop       = $this.data( 'embed-video-loop' ),
+					dataW          = $this.data( 'embed-video-width' ),
+					dataH          = $this.data( 'embed-video-height' ),
+					$replayBtn     = $( '#'+curVideoID+'-replay-btn' );
 
 				
 				if ( videoWrapperH == 0 ) videoWrapperH = videoWrapperW/1.77777777777778;
@@ -356,6 +357,23 @@ theme = ( function ( theme, $, window, document ) {
 				
 
 
+				//Display cover and play buttons when some mobile device browsers cannot automatically play video
+				if ( $( '#' + coverPlayBtnID ).length == 0 ) {
+					$( '<div id="'+coverPlayBtnID+'"><span class="cover-show" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="cover-play"></span></div>' ).insertBefore( $this );
+
+
+					var btnEv = ( Modernizr.touchevents ) ? 'touchstart' : 'click';
+					$( '#' + coverPlayBtnID + ' .cover-play' ).on( btnEv, function( e ) {
+						e.preventDefault();
+
+						myPlayer.play();
+
+						$( '#' + coverPlayBtnID ).hide();
+
+					});
+
+				}
+				
 				
 				//Add replay button to video 
 				if ( $replayBtn.length == 0 ) {
@@ -440,6 +458,28 @@ theme = ( function ( theme, $, window, document ) {
 						myPlayer.controls( false );
 					}
 
+
+					/* ---------  Determine if the video is auto played from mobile devices  */
+					var autoPlayOK = false;
+
+					myPlayer.on( 'timeupdate', function() {
+
+						var duration = this.duration();
+						if ( duration > 0 ) {
+							autoPlayOK = true;
+							if ( this.currentTime() > 0 ) {
+								autoPlayOK = true;
+								this.off( 'timeupdate' );
+
+								//Hide cover and play buttons when the video automatically played
+								$( '#' + coverPlayBtnID ).hide();
+							} 
+
+						}
+
+					});
+				
+					
 					
 					/* ---------  Pause the video when it is not current slider  */
 					if ( !play ) {

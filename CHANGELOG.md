@@ -1,6 +1,7 @@
 # Changelog
 
-#### = 1.4.0 (April 24, 2018) =
+
+#### = 1.4.1 (April 24, 2018) =
 
 
 * New: Add a new 3D effect for module "Advanced Slider".
@@ -9,6 +10,7 @@
 * New: Add a new module "Full Page Transition".
 * New: Added touch method to mobile device for advanced slider.
 * Fix: Fixed an error that images of page might not be loaded.
+* Fix: Provides a solution for some mobile browsers that cannot automatically play videos.
 
 
 

@@ -22,15 +22,16 @@ theme = ( function ( theme, $, window, document ) {
 		 ---------------------------
 		 */  
 		$( '.web-video-embed' ).each( function()  {
-			var $this         = $( this ),
-			    curVideoID    = $this.find( '.video-js' ).attr( 'id' ),
-				videoWrapperW = $this.closest( '[data-embed-video-wrapper]' ).width(),
-				videoWrapperH = $this.closest( '[data-embed-video-wrapper]' ).height(),
-				dataAuto      = $this.data( 'embed-video-autoplay' ),
-				dataLoop      = $this.data( 'embed-video-loop' ),
-				dataControls  = $this.data( 'embed-video-controls' ),
-				dataW         = $this.data( 'embed-video-width' ),
-				dataH         = $this.data( 'embed-video-height' );
+			var $this          = $( this ),
+			    curVideoID     = $this.find( '.video-js' ).attr( 'id' ),
+				coverPlayBtnID = 'videocover-' + curVideoID,
+				videoWrapperW  = $this.closest( '[data-embed-video-wrapper]' ).width(),
+				videoWrapperH  = $this.closest( '[data-embed-video-wrapper]' ).height(),
+				dataAuto       = $this.data( 'embed-video-autoplay' ),
+				dataLoop       = $this.data( 'embed-video-loop' ),
+				dataControls   = $this.data( 'embed-video-controls' ),
+				dataW          = $this.data( 'embed-video-width' ),
+				dataH          = $this.data( 'embed-video-height' );
 
 			
 			
@@ -56,7 +57,24 @@ theme = ( function ( theme, $, window, document ) {
 				dataH = videoWrapperH;
 			}
 			
-		
+			//Display cover and play buttons when some mobile device browsers cannot automatically play video
+			if ( $( '#' + coverPlayBtnID ).length == 0 ) {
+				$( '<div id="'+coverPlayBtnID+'"><span class="cover-show" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="cover-play"></span></div>' ).insertBefore( $this );
+				
+	
+				var btnEv = ( Modernizr.touchevents ) ? 'touchstart' : 'click';
+				$( '#' + coverPlayBtnID + ' .cover-play' ).on( btnEv, function( e ) {
+					e.preventDefault();
+					
+					myPlayer.play();
+					
+					$( '#' + coverPlayBtnID ).hide();
+
+				});
+
+			}
+			
+			
 			
 			//HTML5 video autoplay on mobile revisited
 			if ( dataAuto && windowWidth <= 768 ) {
@@ -68,8 +86,6 @@ theme = ( function ( theme, $, window, document ) {
 			}
 			
 			
-
-
 			var myPlayer = videojs( curVideoID, {
 					                  width     : dataW,
 					                  height    : dataH,
@@ -113,9 +129,13 @@ theme = ( function ( theme, $, window, document ) {
 					}
 
 
+
+					
 					
 					//Show this video wrapper
 					$this.css( 'visibility', 'visible' );
+					
+
 
 					//Hide loading effect
 					$this.find( '.vjs-loading-spinner, .vjs-big-play-button' ).hide();
@@ -136,6 +156,29 @@ theme = ( function ( theme, $, window, document ) {
 				if ( !dataControls ) {
 					myPlayer.controls( false );
 				}
+				
+				
+				/* ---------  Determine if the video is auto played from mobile devices  */
+				var autoPlayOK = false;
+
+				myPlayer.on( 'timeupdate', function() {
+
+					var duration = this.duration();
+					if ( duration > 0 ) {
+						autoPlayOK = true;
+						if ( this.currentTime() > 0 ) {
+							autoPlayOK = true;
+							this.off( 'timeupdate' );
+
+							//Hide cover and play buttons when the video automatically played
+							$( '#' + coverPlayBtnID ).hide();
+						} 
+
+					}
+
+				});
+				
+				
 				
 
 			});
