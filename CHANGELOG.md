@@ -1,12 +1,15 @@
 # Changelog
 
-#### = 1.3.8 (April 24, 2018) =
+#### = 1.4.0 (April 24, 2018) =
 
 
+* New: Add a new 3D effect for module "Advanced Slider".
+* New: Added "three.js" engine to default site script.
 * New: Add a new module "Image Shapes".
 * New: Add a new module "Full Page Transition".
 * New: Added touch method to mobile device for advanced slider.
 * Fix: Fixed an error that images of page might not be loaded.
+
 
 
 #### = 1.3.6 (April 21, 2018) =

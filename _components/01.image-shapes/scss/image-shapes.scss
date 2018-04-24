@@ -14,3 +14,11 @@
 		display: none;
 	}
 }
+
+.no-cssanimations {
+	.shape-img {
+		img {
+			display: block;
+		}
+	}
+}

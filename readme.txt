@@ -5,6 +5,7 @@
 Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap.
 
 
+* Supports 3D and 2D rendering with three.js and pixi.js.
 * Automatically generate table of contents with Gulp for each module comment of name.
 * Simple custom CSS and JS core files
 * 100% Responsive & Mobile Ready

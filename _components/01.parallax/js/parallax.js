@@ -107,8 +107,7 @@ theme = ( function ( theme, $, window, document ) {
 				
 				//Trigger a callback when the selected images are loaded
 				//Check if the picture is loaded on the page
-				var curImgH = 0,
-					img     = new Image();
+				var img    = new Image();
 				img.onload = function() {
 					
 					curImgH = $curImg.height();
@@ -234,7 +233,9 @@ theme = ( function ( theme, $, window, document ) {
 	
 					
 					
-				}
+				};
+				
+				
 				img.src = dataImg;
 				
 			

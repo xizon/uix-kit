@@ -263,7 +263,7 @@ theme = ( function ( theme, $, window, document ) {
 						//Canvas Interactions
 						if ( $items.eq( index ).find( 'video' ).length == 0 ) {
 							if ( $( '#custom-advanced-slider-sp-canvas-item-'+index ).length == 0 ) {
-								$( this ).prepend( '<canvas id="custom-advanced-slider-sp-canvas-item-'+index+'" width="'+$this.width()+'" height="'+$this.height()+'"></canvas>' );
+								$( this ).prepend( '<span id="custom-advanced-slider-sp-canvas-wrapper-item-'+index+'"></span><canvas id="custom-advanced-slider-sp-canvas-item-'+index+'" width="'+$this.width()+'" height="'+$this.height()+'"></canvas>' );
 							}
 							canvasInteractions( index, $this );
 						}
@@ -568,19 +568,10 @@ theme = ( function ( theme, $, window, document ) {
 				    curImgURL             = slider.find( '.item' ).eq( elementIndex ).find( 'img' ).attr( 'src' ),
 					stageW                = slider.width(),
 					stageH                = slider.height(),
-					curSprite             = new PIXI.Sprite.fromImage( curImgURL, true ),
-					ticker                = new PIXI.ticker.Ticker(),
-					renderer              = new PIXI.Application( stageW, stageH, {
-															backgroundColor : 0x000000, 
-															autoResize      : true, 
-															view            : document.getElementById( 'custom-advanced-slider-sp-canvas-item-'+elementIndex )
-														}),
-				
-					filterAnimRenderer    = new PIXI.autoDetectRenderer( stageW, stageH, {
-															backgroundColor : 0x000000, 
-															transparent     : false,
-															view            : document.getElementById( 'custom-advanced-slider-sp-canvas-item-'+elementIndex )
-														});
+					curSprite,
+					ticker,
+					renderer,
+					filterAnimRenderer;
 				
 			
 
@@ -588,20 +579,29 @@ theme = ( function ( theme, $, window, document ) {
 				//If video
 				if ( hasVideo ) return false;
 				
-			
 
-				curSprite.width  = stageW;
-				curSprite.height = stageH;
-
-
-				//Brightness Effect
-				//-------------------------------------		
+				//----------------------------------------------------------------------------------
+				//--------------------------------- Brightness Effect -------------------------------	
+				//----------------------------------------------------------------------------------
 				if ( slider.hasClass( 'eff-brightness' ) ) {
+
+
+					// ------------ Basic parameters 
+					curSprite             = new PIXI.Sprite.fromImage( curImgURL, true );
+					renderer              = new PIXI.Application( stageW, stageH, {
+															backgroundColor : 0x000000, 
+															autoResize      : true, 
+															view            : document.getElementById( 'custom-advanced-slider-sp-canvas-item-'+elementIndex )
+														});
+
+					curSprite.width  = stageW;
+					curSprite.height = stageH;	
+
 
 					// ------------ Add child container to the stage of each slider's canvas
 					renderer.stage.addChild( curSprite );
 
-					
+
 					// ------------ Animation Effects
 					TweenLite.set( curSprite, {
 						pixi: {
@@ -617,128 +617,354 @@ theme = ( function ( theme, $, window, document ) {
 					});		
 
 
-				}
+				} // end effect
 
 
-				//Liquid Distortion Effect
-				//-------------------------------------		
+
+				//----------------------------------------------------------------------------------
+				//--------------------------------- Liquid Distortion Effect -----------------------
+				//----------------------------------------------------------------------------------
+					
 				if ( slider.hasClass( 'eff-liquid' ) ) {
 
 					
-					    // ------------ Add filter container to the main container 
-						var count       = 0,
-							ropeLength  = stageW / 10,
-							points      = [];
+					// ------------ Basic parameters 
+					curSprite             = new PIXI.Sprite.fromImage( curImgURL, true );
+					ticker                = new PIXI.ticker.Ticker();
+					renderer              = new PIXI.Application( stageW, stageH, {
+															backgroundColor : 0x000000, 
+															autoResize      : true, 
+															view            : document.getElementById( 'custom-advanced-slider-sp-canvas-item-'+elementIndex )
+														});
 
-						for ( var i = 0; i < 10; i++ ) {
-							points.push( new PIXI.Point( i * ropeLength, 0 ) );
+					filterAnimRenderer    = new PIXI.autoDetectRenderer( stageW, stageH, {
+															backgroundColor : 0x000000, 
+															transparent     : false,
+															view            : document.getElementById( 'custom-advanced-slider-sp-canvas-item-'+elementIndex )
+														});
+
+					curSprite.width  = stageW;
+					curSprite.height = stageH;	
+
+
+					// ------------ Add filter container to the main container 
+					var count       = 0,
+						ropeLength  = stageW / 10,
+						points      = [];
+
+					for ( var i = 0; i < 10; i++ ) {
+						points.push( new PIXI.Point( i * ropeLength, 0 ) );
+					}
+
+					// Set the filter to stage and set some default values for the animation
+					var strip = new PIXI.mesh.Rope( PIXI.Texture.fromImage( curImgURL ), points );
+
+
+					strip.x = 0;
+					strip.y = stageH/2 - 20;
+
+					// ------------ Add child container to the stage of each slider's canvas
+					renderer.stage.scale.set( 1 + stageH / stageW );
+					renderer.stage.addChild( strip );
+
+
+					// ------------ Animation Effects
+					ticker.autoStart = true;
+					ticker.add( function( delta ) {
+
+						// speed
+						count += 0.01;
+
+						// make the effect
+						for ( var j = 0; j < points.length; j++ ) {
+
+							points[j].y = Math.sin((j * 0.5) + count) * 15;
+							points[j].x = j * ropeLength + Math.cos((j * 0.3) + count) * 15;	
 						}
 
-						// Set the filter to stage and set some default values for the animation
-					    var strip = new PIXI.mesh.Rope( PIXI.Texture.fromImage( curImgURL ), points );
-				
-					
-						strip.x = 0;
-					    strip.y = stageH/2 - 20;
+					});
 
-						// ------------ Add child container to the stage of each slider's canvas
-						renderer.stage.scale.set( 1 + stageH / stageW );
-						renderer.stage.addChild( strip );
-
-					
-					    // ------------ Animation Effects
-						ticker.autoStart = true;
-						ticker.add( function( delta ) {
-
-							// speed
-							count += 0.01;
-						
-							// make the effect
-							for ( var j = 0; j < points.length; j++ ) {
-								
-								points[j].y = Math.sin((j * 0.5) + count) * 15;
-								points[j].x = j * ropeLength + Math.cos((j * 0.3) + count) * 15;	
-							}
-							
-						});
-					
 					   
 
-				}	
+				} // end effect	
 				
 				
-				//Liquid Distortion Effect
-				//-------------------------------------		
+				
+
+				//----------------------------------------------------------------------------------
+				//--------------------------------- Liquid Distortion Effect -----------------------
+				//----------------------------------------------------------------------------------
 				if ( slider.hasClass( 'eff-liquid2' ) ) {
 					
-						var filterStage         = new PIXI.Container(),
-							displacementSprite  = new PIXI.Sprite.fromImage( curImgURL ),
-							displacementFilter  = new PIXI.filters.DisplacementFilter( displacementSprite ),
-							rendererWidth       = renderer.view.width,
-							rendererHeight      = renderer.view.height;
-							
+					
+					// ------------ Basic parameters 
+					curSprite             = new PIXI.Sprite.fromImage( curImgURL, true );
+					ticker                = new PIXI.ticker.Ticker();
+					renderer              = new PIXI.Application( stageW, stageH, {
+															backgroundColor : 0x000000, 
+															autoResize      : true, 
+															view            : document.getElementById( 'custom-advanced-slider-sp-canvas-item-'+elementIndex )
+														});
+
+					filterAnimRenderer    = new PIXI.autoDetectRenderer( stageW, stageH, {
+															backgroundColor : 0x000000, 
+															transparent     : false,
+															view            : document.getElementById( 'custom-advanced-slider-sp-canvas-item-'+elementIndex )
+														});
+
+					curSprite.width  = stageW;
+					curSprite.height = stageH;	
+
+
+					var filterStage         = new PIXI.Container(),
+						displacementSprite  = new PIXI.Sprite.fromImage( curImgURL ),
+						displacementFilter  = new PIXI.filters.DisplacementFilter( displacementSprite ),
+						rendererWidth       = renderer.view.width,
+						rendererHeight      = renderer.view.height;
+
+
+
+					// ------------ Add filter container to the main container 
+					curSprite.scale.set(1.04);
+					filterStage.addChild( curSprite );
+
+					// Enable Interactions
+					filterStage.interactive = true;
+
+					displacementSprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
+
+
+					// Set the filter to stage and set some default values for the animation
+					filterStage.filters = [ displacementFilter ];        
+
+					displacementSprite.anchor.set( 0.5 );
+					displacementSprite.x = filterAnimRenderer.width / 2;
+					displacementSprite.y = filterAnimRenderer.height / 2; 
+
+
+					displacementSprite.scale.x = 1;
+					displacementSprite.scale.y = 1;
+
+					// PIXI tries to fit the filter bounding box to the renderer so we optionally bypass
+					displacementFilter.autoFit = false;
+
+					filterStage.addChild( displacementSprite );
+
+
+					// ------------ Add child container to the stage of each slider's canvas
+					renderer.stage.addChild( filterStage );	
+
+
+					// ------------ Animation Effects
+					ticker.autoStart = true;
+					ticker.add( function( delta ) {
+
+
+						displacementSprite.x += 12.14 * delta;
+						displacementSprite.y += 42.24 * delta;
+
+						displacementSprite.scale.x += 0.2 * delta;
+						displacementSprite.scale.y += 0.2 * delta;
+
+
+						renderer.render( filterStage );
+
+					});
+
+					// ------------ Add new ripple each time mouse is clicked
+					renderer.view.addEventListener( 'mousedown', function(ev) {
+						//console.log( ev.clientX + ', ' + ev.clientY );
+
+
+					}, false);
+
+					
+
+
+
+				} // end effect
 				
-
-						// ------------ Add filter container to the main container 
-						curSprite.scale.set(1.04);
-						filterStage.addChild( curSprite );
-
-						// Enable Interactions
-						filterStage.interactive = true;
-
-						displacementSprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
-
-
-						// Set the filter to stage and set some default values for the animation
-						filterStage.filters = [ displacementFilter ];        
-
-						displacementSprite.anchor.set( 0.5 );
-						displacementSprite.x = filterAnimRenderer.width / 2;
-						displacementSprite.y = filterAnimRenderer.height / 2; 
-
-
-						displacementSprite.scale.x = 1;
-						displacementSprite.scale.y = 1;
-
-						// PIXI tries to fit the filter bounding box to the renderer so we optionally bypass
-						displacementFilter.autoFit = false;
-
-						filterStage.addChild( displacementSprite );
-					
-					
-					    // ------------ Add child container to the stage of each slider's canvas
-					    renderer.stage.addChild( filterStage );	
-					
-					
-						// ------------ Animation Effects
-						ticker.autoStart = true;
-						ticker.add( function( delta ) {
-							
-							
-							displacementSprite.x += 12.14 * delta;
-							displacementSprite.y += 42.24 * delta;
-
-							displacementSprite.scale.x += 0.2 * delta;
-							displacementSprite.scale.y += 0.2 * delta;
-							
-							
-							renderer.render( filterStage );
-
-						});
-					
-						// ------------ Add new ripple each time mouse is clicked
-						renderer.view.addEventListener( 'mousedown', function(ev) {
-							//console.log( ev.clientX + ', ' + ev.clientY );
-							
-							
-						}, false);
-					
-					
-
-
-
-				}		
 				
+				
+				//----------------------------------------------------------------------------------
+				//--------------------------------- 3D Rotating Effect -----------------------------
+				//----------------------------------------------------------------------------------
+				if ( slider.hasClass( 'eff-3d-rotating' ) ) {
+					
+
+					// ------------ Add Geometries and Lights to the main container 
+
+					// create a scene, that will hold all our elements such as objects, cameras and lights.
+					var scene = new THREE.Scene();
+					//scene.background = new THREE.Color( 0x000000 );
+
+					// create a camera, which defines where we're looking at.
+					var aspect      = stageW / stageH,
+						camera      = new THREE.PerspectiveCamera( 45, aspect, 0.1, 1000 );
+
+					camera.position.x = 0;
+					camera.position.y = 12;
+					camera.position.z = 2000;
+					camera.lookAt( new THREE.Vector3( 0, 0, 0 ) );
+					
+
+					// create a render and set the size
+					var webGLRenderer = new THREE.WebGLRenderer( { alpha: true, antialias: true } );
+					webGLRenderer.setClearColor( new THREE.Color( 0x000000, 0 ) );
+					webGLRenderer.setSize( stageW, stageH );
+					webGLRenderer.setPixelRatio( window.devicePixelRatio );  
+					webGLRenderer.shadowMapEnabled = true;
+
+
+
+
+					//Generate plane geometries
+					var texture   = THREE.ImageUtils.loadTexture( curImgURL ),
+						spriteMat = new THREE.MeshPhongMaterial();
+					spriteMat.map = texture;
+
+
+
+					var imgRatio             = stageW / stageH,
+						geometry             = new THREE.BoxGeometry( imgRatio*23, 23, 2 ),
+						displacementSprite   = new THREE.Mesh( geometry, spriteMat );
+
+					displacementSprite.position.set( -0.01, -0.01, 0 );
+					displacementSprite.rotation.set( 0, 0, 0 );
+					scene.add( displacementSprite );
+
+ 
+					//Generate Ambient Light
+					var ambiLight = new THREE.AmbientLight( 0x141414 );
+					scene.add( ambiLight );
+
+					//Generate Directional Light
+					var light = new THREE.DirectionalLight();
+					light.position.set( 0, 30, 20 );
+					scene.add( light );
+
+					
+					
+					//  ------------ Add Controls
+					var controls = new THREE.OrbitControls( camera, webGLRenderer.domElement );
+					controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+					controls.dampingFactor = 0.15;
+					controls.screenSpacePanning = false;
+					controls.minDistance = 0;
+					controls.maxDistance = 30;
+					controls.maxPolarAngle = Math.PI / 2;
+					
+
+
+					// ------------ Add child container to the stage of each slider's canvas
+					document.getElementById( 'custom-advanced-slider-sp-canvas-wrapper-item-'+elementIndex ).appendChild( webGLRenderer.domElement );
+					document.getElementById( 'custom-advanced-slider-sp-canvas-item-'+elementIndex ).style.display = 'none';
+
+
+					// ------------ Animation Effects
+					var slowingFactor = 0.75;
+					render();
+
+					function render() {
+
+						//drag & drop
+						displacementSprite.rotation.x = toRad( targetRotationY * 1 );
+						displacementSprite.rotation.y = toRad( targetRotationX * 1 );
+
+
+						//console.log( camera.position.x + '---' + camera.position.y + '---' + camera.position.z );
+						
+						//auto animation
+						//displacementSprite.rotation.x += 0.005;
+						//displacementSprite.rotation.y += 0.005;
+
+
+						// render using requestAnimationFrame
+						requestAnimationFrame( render );
+						controls.update(); // only required if controls.enableDamping = true, or if controls.autoRotate = true
+						webGLRenderer.render( scene, camera );
+					}
+
+
+
+
+					// ------------ Mouse drag Rotate
+					var targetRotationX            = 0.5,
+						targetRotationOnMouseDownX = 0,
+						targetRotationY            = 0.2,
+						targetRotationOnMouseDownY = 0,
+						mouseX                     = 0,
+						mouseXOnMouseDown          = 0,
+						mouseY                     = 0,
+						mouseYOnMouseDown          = 0,
+						windowHalfX                = stageW / 2,
+						windowHalfY                = stageH / 2,
+						moveMagnitude              = 0.25;
+
+					document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+
+					function onDocumentMouseDown( event ) {
+
+						event.preventDefault();
+
+						document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+						document.addEventListener( 'mouseup', onDocumentMouseUp, false );
+						document.addEventListener( 'mouseout', onDocumentMouseOut, false );
+
+						mouseXOnMouseDown = event.offsetX - windowHalfX;
+						targetRotationOnMouseDownX = targetRotationX;
+
+						mouseYOnMouseDown = event.offsetY - windowHalfY;
+						targetRotationOnMouseDownY = targetRotationY;
+					}
+
+					function onDocumentMouseMove( event ) {
+
+						mouseX = event.offsetX - windowHalfX;
+
+						targetRotationX = ( mouseX - mouseXOnMouseDown ) * moveMagnitude;
+
+						mouseY = event.offsetY - windowHalfY;
+
+						targetRotationY = ( mouseY - mouseYOnMouseDown ) * moveMagnitude;
+
+
+					}
+
+					function onDocumentMouseUp( event ) {
+
+						document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
+						document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
+						document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
+					}
+
+					function onDocumentMouseOut( event ) {
+
+						document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
+						document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
+						document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
+					}
+
+
+					//Converts numeric degrees to radians
+					function toRad( number ) {
+						return number * Math.PI / 180;
+					}
+
+					// ------------ Responsive plane geometries
+					window.addEventListener( 'resize', function () {
+
+						camera.aspect = window.innerWidth / window.innerHeight;
+						camera.updateProjectionMatrix();
+
+						webGLRenderer.setSize( slider.width(), slider.height() );
+
+					}, false );
+					
+					
+					
+				}// end effect
+					
 				
 				
 				

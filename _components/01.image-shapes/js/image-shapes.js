@@ -85,7 +85,9 @@ theme = ( function ( theme, $, window, document ) {
 
 
 					$this.addClass( 'active' ).html( svgOut );		
-				}
+				};
+				
+				
 				img.src = curImgURL;
 
 			 

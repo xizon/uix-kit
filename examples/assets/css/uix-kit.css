@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.3.8
+ * ## Version             :  1.4.0
  * ## Last Update         :  April 24, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -77,8 +77,8 @@
     9. Header Area 
     10. Brand 
     11. Footer 
-    12. Back to Top 
-    13. Video 
+    12. Video 
+    13. Back to Top 
     14. Loader 
     15. Social Media Icons 
     16. Pagination 
@@ -90,9 +90,9 @@
     22. Comments 
     23. 3rd Party Plugins 
     24. Accordion 
-    25. Advanced Slider (Basic) 
+    25. Accordion Background Images 
     26. Advanced Slider (Special Effects) 
-    27. Accordion Background Images 
+    27. Advanced Slider (Basic) 
     28. Badges 
     29. Breadcrumbs 
     30. Button 
@@ -102,8 +102,8 @@
     34. Equal-width Divs 
     35. Features 
     36. Footer Templates 
-    37. Form Progress 
-    38. Form 
+    37. Form 
+    38. Form Progress 
     39. Gallery 
     40. Image Shapes 
     41. Custom Core Scripts & Stylesheets 
@@ -136,7 +136,6 @@
     68. Testimonials Carousel 
     69. Timeline 
     70. ToolTip 
-    71. WordPress Core 
 
 
 
@@ -5696,6 +5695,13 @@ ul.entry-meta {
     display: none;
 }
 
+.no-cssanimations .shape-img img {
+    display: block;
+}
+
+/* ====================================================== 
+   <!-- Custom Core Scripts & Stylesheets --> 
+/* ====================================================== */
 /* ====================================================== 
    <!-- Cutom Light Box -->   
 /* ====================================================== */
@@ -6011,9 +6017,6 @@ ul.entry-meta {
     }
 }
 
-/* ====================================================== 
-   <!-- Custom Core Scripts & Stylesheets --> 
-/* ====================================================== */
 /* ====================================================== 
     <!-- Brands List --> 
 /* ====================================================== */
@@ -11541,5 +11544,8 @@ a img.aligncenter {
 
 /* other */
 .sticky {
+    opacity: 1;
+}
+cky {
     opacity: 1;
 }
