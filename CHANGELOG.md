@@ -1,7 +1,7 @@
 # Changelog
 
 
-#### = 1.4.1 (April 24, 2018) =
+#### = 1.4.2 (April 24, 2018) =
 
 
 * New: Add a new 3D effect for module "Advanced Slider".

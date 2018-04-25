@@ -45,12 +45,25 @@ theme = ( function ( theme, $, window, document ) {
 			
 		});
 		
-		setTimeout( function() {
-			moveTo( $el, 'down', true );
-		}, quietPeriod );
 
 		
+		//Add hashchange event
+		setTimeout( function() {
+			var hash = window.location.hash,
+				locArr,
+				loc, 
+				curTab;
+			
+			if ( hash ) {
+				locArr = hash.split( '-' );
+				loc    = locArr[1];
+				moveTo( $el, 'down', loc );
+			}
 
+		}, quietPeriod );
+		
+		
+		
 		
 		/*
 		 * Scroll initialize
@@ -88,12 +101,14 @@ theme = ( function ( theme, $, window, document ) {
 		 *
 		 * @param  {object} el           - The container of each sections.
 		 * @param  {string} dir          - Rolling direction indicator.
+		 * @param  {number} hashID       - ID of custom hashchange event.
 		 * @return {void}                - The constructor.
 		 */
-		function moveTo( el, dir, first ) {
+		function moveTo( el, dir, hashID ) {
 			var index     = parseFloat( $sections.filter( '.active' ).attr( 'data-index' ) ),
 				nextIndex = null,
-				$next     = null;
+				$next     = null,
+				isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
 			
 			
 			 
@@ -107,7 +122,9 @@ theme = ( function ( theme, $, window, document ) {
 			if ( nextIndex < 0 ) nextIndex = 0;
 			
 
-			if ( first ) nextIndex = 0;
+			
+			//ID of custom hashchange event
+			if ( hashID && isNumeric.test( hashID ) ) nextIndex = parseFloat( hashID - 1 );
 			
 			//Returns the target section
 			$next = $sections.eq( nextIndex );

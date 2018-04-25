@@ -40,13 +40,13 @@
     15. Counter 
     16. Dynamic Drop Down List from JSON 
     17. Form Progress 
-    18. Form 
-    19. Full Page Transition 
+    18. Full Page Transition 
+    19. Form 
     20. Gallery 
     21. Image Shapes 
     22. Custom Core Scripts & Stylesheets 
-    23. Bulleted List 
-    24. Custom Lightbox 
+    23. Custom Lightbox 
+    24. Bulleted List 
     25. Posts List With Ajax 
     26. Fullwidth List of Split 
     27. Mobile Menu 
@@ -6320,12 +6320,25 @@ theme = ( function ( theme, $, window, document ) {
 			
 		});
 		
-		setTimeout( function() {
-			moveTo( $el, 'down', true );
-		}, quietPeriod );
 
 		
+		//Add hashchange event
+		setTimeout( function() {
+			var hash = window.location.hash,
+				locArr,
+				loc, 
+				curTab;
+			
+			if ( hash ) {
+				locArr = hash.split( '-' );
+				loc    = locArr[1];
+				moveTo( $el, 'down', loc );
+			}
 
+		}, quietPeriod );
+		
+		
+		
 		
 		/*
 		 * Scroll initialize
@@ -6363,12 +6376,14 @@ theme = ( function ( theme, $, window, document ) {
 		 *
 		 * @param  {object} el           - The container of each sections.
 		 * @param  {string} dir          - Rolling direction indicator.
+		 * @param  {number} hashID       - ID of custom hashchange event.
 		 * @return {void}                - The constructor.
 		 */
-		function moveTo( el, dir, first ) {
+		function moveTo( el, dir, hashID ) {
 			var index     = parseFloat( $sections.filter( '.active' ).attr( 'data-index' ) ),
 				nextIndex = null,
-				$next     = null;
+				$next     = null,
+				isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
 			
 			
 			 
@@ -6382,7 +6397,9 @@ theme = ( function ( theme, $, window, document ) {
 			if ( nextIndex < 0 ) nextIndex = 0;
 			
 
-			if ( first ) nextIndex = 0;
+			
+			//ID of custom hashchange event
+			if ( hashID && isNumeric.test( hashID ) ) nextIndex = parseFloat( hashID - 1 );
 			
 			//Returns the target section
 			$next = $sections.eq( nextIndex );
@@ -7892,6 +7909,162 @@ theme = ( function ( theme, $, window, document ) {
 
 /* 
  *************************************
+ * <!-- Navigation Highlighting -->
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+
+		var $primaryMenu      = $( '.menu-main' ),
+			$sidefixedMenu    = $( '.custom-sidefixed-menu' ),
+			topSectionSpacing = $( '.header-area' ).outerHeight( true );
+		
+
+		/*
+		 * Get section or article by href
+		 *
+		 * @param  {string, object} el  - The current selector or selector ID
+		 * @return {object}             - A new selector.
+		 */
+        function getRelatedContent( el ) {
+            return $( $( el ).attr( 'href' ) );
+        }
+		
+		/*
+		 * Get link by section or article id
+		 *
+		 * @param  {string, object} el  - The current selector or selector ID
+		 * @param  {object} menuObj     - Returns the menu element within the document.
+		 * @return {object}             - A new selector.
+		 */
+        function getRelatedNavigation( el, menuObj ) {
+            return menuObj.find( 'li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' );
+        } 
+		
+		/*
+		 * Get all links by section or article
+		 *
+		 * @param  {object} menuObj     - Returns the menu element within the document.
+		 * @return {object}             - A new selector.
+		 */
+        function getAllNavigation( menuObj ) {
+            return menuObj.find( 'li' );
+        } 	
+		
+		/*
+		 * Smooth scroll to content
+		 *
+		 * @param  {object} menuObj     - Returns the menu element within the document.
+		 * @return {void}               - The constructor.
+		 */
+        function goPageSection( menuObj ) {
+			menuObj.find( 'li > a' ).on('click', function(e) {
+				e.preventDefault();
+				
+				
+				TweenLite.to( window, 0.5, {
+					scrollTo: {
+						y: getRelatedContent( this ).offset().top - topSectionSpacing
+					},
+					ease: Power2.easeOut
+				});	
+			
+			});	
+	
+        } 	
+        
+		
+		//-------- Scroll Animate Interactions
+		//-----------------------------
+		if ( $( 'body' ).hasClass( 'onepage' ) ) {
+
+			//Activate the first item
+			$primaryMenu.find( 'li:first' ).addClass( 'active' );
+			$sidefixedMenu.find( 'li:first' ).addClass( 'active' );
+	
+			// Smooth scroll to content
+			goPageSection( $primaryMenu );
+			goPageSection( $sidefixedMenu );
+			
+			
+			var navMinTop      = $sidefixedMenu.offset().top,
+				navMaxTop      = parseFloat( $( document ).height() - $( '.footer-main-container' ).height() ) - $( window ).height()/3;
+			
+			$( window ).on( 'scroll touchmove', function() {
+				var scrollTop = $( this ).scrollTop(),
+					spyTop    = parseFloat( scrollTop + topSectionSpacing ),
+					minTop    = $( '[data-highlight-section="true"]' ).first().offset().top,
+					maxTop    = $( '[data-highlight-section="true"]' ).last().offset().top + $( '[data-highlight-section="true"]' ).last().height();
+
+				
+				$( '[data-highlight-section="true"]' ).each( function()  {
+					var block     = $( this ),
+						eleTop    = block.offset().top;
+					
+			
+					if ( eleTop < spyTop ) {
+
+						// Highlight element when related content
+						getAllNavigation( $primaryMenu ).removeClass( 'active' );
+						getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
+						getRelatedNavigation( block, $primaryMenu ).addClass( 'active' );
+						getRelatedNavigation( block, $sidefixedMenu ).addClass( 'active' );
+					} 
+				});
+				
+				
+				
+				//Cancel the current highlight element
+				if ( spyTop > maxTop || spyTop < minTop ) {
+					getAllNavigation( $primaryMenu ).removeClass( 'active' );
+					getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
+				}
+				
+				
+				//Detecting when user scrolls to bottom of div
+				if ( spyTop > navMaxTop || spyTop < navMinTop ) {
+					$sidefixedMenu.removeClass( 'fixed' );
+				} else {
+					$sidefixedMenu.addClass( 'fixed' );
+				}	
+				
+				
+				
+				
+			});	
+			
+			
+			
+
+		}
+
+		
+		
+		
+		
+    };
+
+    theme.navHighlight = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
+
+
+
+
+
+
+
+/* 
+ *************************************
  * <!-- Multiple Items Carousel -->
  *************************************
  */
@@ -8305,162 +8478,6 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
-
-
-
-
-
-
-
-/* 
- *************************************
- * <!-- Navigation Highlighting -->
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-    
-    var documentReady = function( $ ) {
-
-		var $primaryMenu      = $( '.menu-main' ),
-			$sidefixedMenu    = $( '.custom-sidefixed-menu' ),
-			topSectionSpacing = $( '.header-area' ).outerHeight( true );
-		
-
-		/*
-		 * Get section or article by href
-		 *
-		 * @param  {string, object} el  - The current selector or selector ID
-		 * @return {object}             - A new selector.
-		 */
-        function getRelatedContent( el ) {
-            return $( $( el ).attr( 'href' ) );
-        }
-		
-		/*
-		 * Get link by section or article id
-		 *
-		 * @param  {string, object} el  - The current selector or selector ID
-		 * @param  {object} menuObj     - Returns the menu element within the document.
-		 * @return {object}             - A new selector.
-		 */
-        function getRelatedNavigation( el, menuObj ) {
-            return menuObj.find( 'li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' );
-        } 
-		
-		/*
-		 * Get all links by section or article
-		 *
-		 * @param  {object} menuObj     - Returns the menu element within the document.
-		 * @return {object}             - A new selector.
-		 */
-        function getAllNavigation( menuObj ) {
-            return menuObj.find( 'li' );
-        } 	
-		
-		/*
-		 * Smooth scroll to content
-		 *
-		 * @param  {object} menuObj     - Returns the menu element within the document.
-		 * @return {void}               - The constructor.
-		 */
-        function goPageSection( menuObj ) {
-			menuObj.find( 'li > a' ).on('click', function(e) {
-				e.preventDefault();
-				
-				
-				TweenLite.to( window, 0.5, {
-					scrollTo: {
-						y: getRelatedContent( this ).offset().top - topSectionSpacing
-					},
-					ease: Power2.easeOut
-				});	
-			
-			});	
-	
-        } 	
-        
-		
-		//-------- Scroll Animate Interactions
-		//-----------------------------
-		if ( $( 'body' ).hasClass( 'onepage' ) ) {
-
-			//Activate the first item
-			$primaryMenu.find( 'li:first' ).addClass( 'active' );
-			$sidefixedMenu.find( 'li:first' ).addClass( 'active' );
-	
-			// Smooth scroll to content
-			goPageSection( $primaryMenu );
-			goPageSection( $sidefixedMenu );
-			
-			
-			var navMinTop      = $sidefixedMenu.offset().top,
-				navMaxTop      = parseFloat( $( document ).height() - $( '.footer-main-container' ).height() ) - $( window ).height()/3;
-			
-			$( window ).on( 'scroll touchmove', function() {
-				var scrollTop = $( this ).scrollTop(),
-					spyTop    = parseFloat( scrollTop + topSectionSpacing ),
-					minTop    = $( '[data-highlight-section="true"]' ).first().offset().top,
-					maxTop    = $( '[data-highlight-section="true"]' ).last().offset().top + $( '[data-highlight-section="true"]' ).last().height();
-
-				
-				$( '[data-highlight-section="true"]' ).each( function()  {
-					var block     = $( this ),
-						eleTop    = block.offset().top;
-					
-			
-					if ( eleTop < spyTop ) {
-
-						// Highlight element when related content
-						getAllNavigation( $primaryMenu ).removeClass( 'active' );
-						getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
-						getRelatedNavigation( block, $primaryMenu ).addClass( 'active' );
-						getRelatedNavigation( block, $sidefixedMenu ).addClass( 'active' );
-					} 
-				});
-				
-				
-				
-				//Cancel the current highlight element
-				if ( spyTop > maxTop || spyTop < minTop ) {
-					getAllNavigation( $primaryMenu ).removeClass( 'active' );
-					getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
-				}
-				
-				
-				//Detecting when user scrolls to bottom of div
-				if ( spyTop > navMaxTop || spyTop < navMinTop ) {
-					$sidefixedMenu.removeClass( 'fixed' );
-				} else {
-					$sidefixedMenu.addClass( 'fixed' );
-				}	
-				
-				
-				
-				
-			});	
-			
-			
-			
-
-		}
-
-		
-		
-		
-		
-    };
-
-    theme.navHighlight = {
-        documentReady : documentReady        
-    };
-
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
-
-
 
 
 

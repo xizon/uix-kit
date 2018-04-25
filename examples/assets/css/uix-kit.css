@@ -66,8 +66,8 @@
 	TABLE OF CONTENTS
 	---------------------------
 	
-    1. Basic 
-    2. Table 
+    1. Table 
+    2. Basic 
     3. Bullet List 
     4. Helper Classes 
     5. Typography 
@@ -136,7 +136,6 @@
     68. Testimonials Carousel 
     69. Timeline 
     70. ToolTip 
-    71. WordPress Core 
 
 
 
@@ -5748,96 +5747,6 @@ ul.entry-meta {
    <!-- Custom Core Scripts & Stylesheets --> 
 /* ====================================================== */
 /* ====================================================== 
-    <!-- Brands List --> 
-/* ====================================================== */
-.list-brands {
-    display: block;
-    background: #fff;
-    padding: 1.5rem 0;
-    margin: 3rem 0;
-    overflow: auto;
-  /* CSS background disappears when using float:left */
-  /* Default */;
-}
-
-.list-brands::after {
-    content: '';
-    display: block;
-    clear: both;
-}
-
-.list-brands li {
-    text-align: center;
-    display: inline-block;
-    padding: 1rem 0;
-    text-align: center;
-    margin: 0;
-    box-sizing: border-box;
-    float: left;
-  /* When using inline-block elements, there will always be an whitespace issue between those elements (that space is about ~ 4px wide). */;
-}
-
-.list-brands li span {
-    font-size: 0.875rem;
-    display: block;
-    padding: 1.5rem;
-}
-
-.list-brands.tiny li {
-    width: 16.66666666666667%;
-}
-
-.list-brands.tiny li:nth-child(6n+1) {
-    clear: both;
-}
-
-.list-brands.small li {
-    width: 20%;
-}
-
-.list-brands.small li:nth-child(5n+1) {
-    clear: both;
-}
-
-.list-brands.medium li {
-    width: 25%;
-}
-
-.list-brands.medium li:nth-child(4n+1) {
-    clear: both;
-}
-
-.list-brands.large li {
-    width: 33.33333333333333%;
-}
-
-.list-brands.large li:nth-child(3n+1) {
-    clear: both;
-}
-
-@media all and (max-width: 768px) {
-    .list-brands {
-        margin: 1.5rem 0;
-        min-height: inherit;
-    }
-
-    .list-brands li {
-        width: 50%;
-    }
-
-    .list-brands li:nth-child(2n+1) {
-        clear: both;
-    }
-
-    .list-brands.tiny li,
-  .list-brands.small li,
-  .list-brands.medium li,
-  .list-brands.large li {
-        width: 50%;
-    }
-}
-
-/* ====================================================== 
    <!-- Cutom Light Box -->   
 /* ====================================================== */
 .custom-lightbox-html {
@@ -6149,6 +6058,96 @@ ul.entry-meta {
 
     .custom-lightbox-overlay.no-fixed .lb-container.custom .html > .lb-box {
         width: auto;
+    }
+}
+
+/* ====================================================== 
+    <!-- Brands List --> 
+/* ====================================================== */
+.list-brands {
+    display: block;
+    background: #fff;
+    padding: 1.5rem 0;
+    margin: 3rem 0;
+    overflow: auto;
+  /* CSS background disappears when using float:left */
+  /* Default */;
+}
+
+.list-brands::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.list-brands li {
+    text-align: center;
+    display: inline-block;
+    padding: 1rem 0;
+    text-align: center;
+    margin: 0;
+    box-sizing: border-box;
+    float: left;
+  /* When using inline-block elements, there will always be an whitespace issue between those elements (that space is about ~ 4px wide). */;
+}
+
+.list-brands li span {
+    font-size: 0.875rem;
+    display: block;
+    padding: 1.5rem;
+}
+
+.list-brands.tiny li {
+    width: 16.66666666666667%;
+}
+
+.list-brands.tiny li:nth-child(6n+1) {
+    clear: both;
+}
+
+.list-brands.small li {
+    width: 20%;
+}
+
+.list-brands.small li:nth-child(5n+1) {
+    clear: both;
+}
+
+.list-brands.medium li {
+    width: 25%;
+}
+
+.list-brands.medium li:nth-child(4n+1) {
+    clear: both;
+}
+
+.list-brands.large li {
+    width: 33.33333333333333%;
+}
+
+.list-brands.large li:nth-child(3n+1) {
+    clear: both;
+}
+
+@media all and (max-width: 768px) {
+    .list-brands {
+        margin: 1.5rem 0;
+        min-height: inherit;
+    }
+
+    .list-brands li {
+        width: 50%;
+    }
+
+    .list-brands li:nth-child(2n+1) {
+        clear: both;
+    }
+
+    .list-brands.tiny li,
+  .list-brands.small li,
+  .list-brands.medium li,
+  .list-brands.large li {
+        width: 50%;
     }
 }
 
@@ -11589,5 +11588,8 @@ a img.aligncenter {
 
 /* other */
 .sticky {
+    opacity: 1;
+}
+cky {
     opacity: 1;
 }
