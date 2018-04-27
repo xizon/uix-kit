@@ -71,6 +71,7 @@
 	
 }
 
+/* If the browser does not support webGL then use the default video load event */
 .webgl .custom-advanced-slider-sp video {
 	display: none;
 }

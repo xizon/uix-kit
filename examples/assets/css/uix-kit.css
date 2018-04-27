@@ -78,8 +78,8 @@
     10. Brand 
     11. Footer 
     12. Video 
-    13. Loader 
-    14. Back to Top 
+    13. Back to Top 
+    14. Loader 
     15. Social Media Icons 
     16. Pagination 
     17. Filterable Navigation 
@@ -96,8 +96,8 @@
     28. Badges 
     29. Breadcrumbs 
     30. Button 
-    31. Author Card 
-    32. Counter 
+    31. Counter 
+    32. Author Card 
     33. Dropdown Menu 
     34. Equal-width Divs 
     35. Features 
@@ -136,6 +136,7 @@
     68. Testimonials Carousel 
     69. Timeline 
     70. ToolTip 
+    71. WordPress Core 
 
 
 
@@ -3350,6 +3351,7 @@ ul.entry-meta {
     opacity: 1;
 }
 
+/* If the browser does not support webGL then use the default video load event */
 .webgl .custom-advanced-slider-sp video {
     display: none;
 }
@@ -11598,8 +11600,5 @@ a img.aligncenter {
 
 /* other */
 .sticky {
-    opacity: 1;
-}
-cky {
     opacity: 1;
 }

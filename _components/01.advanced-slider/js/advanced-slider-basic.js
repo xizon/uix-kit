@@ -272,7 +272,9 @@ theme = ( function ( theme, $, window, document ) {
 					dataControlsArrows       = $this.data( 'controls-arrows' ),
 					dataLoop                 = $this.data( 'loop' ),
 					dataAuto                 = $this.data( 'auto' ),
-					dataTiming               = $this.data( 'timing' );
+					dataTiming               = $this.data( 'timing' ),
+					nativeItemW,
+					nativeItemH;
 
 
 				if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.custom-advanced-slider-pagination';
@@ -282,42 +284,45 @@ theme = ( function ( theme, $, window, document ) {
 				if( typeof dataTiming === typeof undefined ) dataTiming = 10000;
 
 
-
-			
-				//Initialize the slider style
+				//Initialize the slider container height
 				//-------------------------------------	
 				$items.first().addClass( 'active' );
 				
-			
-				
-				
-				//Check if the picture is loaded on the page
-				var $curImg, 
-					realSrc,
-					curImgH    = false,
-					img        = new Image();
+				if ( $items.first().find( 'video' ).length > 0 ) {
 
-				if ( $items.first().find( 'img' ).length == 0 ) {
-					$curImg    = $items.first().find( 'video' );
-					realSrc    = $curImg.attr( 'poster' );
+					//Returns the dimensions (intrinsic height and width ) of the video
+					var video    = document.getElementById( $items.first().find( 'video' ).attr( 'id' ) ),
+						videoURL = $items.first().find( 'source[type="video/mp4"]' ).attr( 'src' );
+
+					video.addEventListener( 'loadedmetadata', function( e ) {
+						$this.css( 'height', this.videoHeight*(windowWidth/this.videoWidth) + 'px' );	
+						
+						nativeItemW = this.videoWidth;
+						nativeItemH = this.videoHeight;	
+						
+					}, false);	
+
+					video.src = videoURL;
+
+
 				} else {
-					$curImg    = $items.first().find( 'img' );
-					realSrc    = $curImg.attr( 'src' );	
+
+					var imgURL   = $items.first().find( 'img' ).attr( 'src' ),
+						img      = new Image();
+
+					img.onload = function() {
+						$this.css( 'height', windowWidth*(this.height/this.width) + 'px' );		
+						
+						nativeItemW = this.width;
+						nativeItemH = this.height;	
+						
+					}
+
+					img.src = imgURL;
+
 				}
-
-
-				img.onload = function() {
-
-					curImgH = img.height*(img.width/windowWidth);
-					$this.css( 'height', curImgH + 'px' );
-
-				}
-
-				img.src = realSrc;
-
+				
 			
-				
-				
 			
 				// Fires local videos asynchronously with slider switch.
 				//-------------------------------------
@@ -538,10 +543,9 @@ theme = ( function ( theme, $, window, document ) {
 			
 			img.onload = function() {
 
-				curNewImgH = img.height*(img.width/windowWidth);
+				curNewImgH = windowWidth*(this.height/this.width);
 				slider.css( 'height', curNewImgH + 'px' );
 				
-				console.log( img.naturalHeight );
 
 			}
 			
