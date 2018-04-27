@@ -225,11 +225,10 @@ uix-kit/
 │   │       ├── css/
 │   │       ├── fonts/
 │   │       ├── images/
+│   │       ├── videos/
 │   │       ├── json/
 │   │       └── js/
-│   └── assets-demo/
-│           ├── images/
-│           └── videos/
+└──
 	
 ```
 

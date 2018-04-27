@@ -292,37 +292,30 @@ theme = ( function ( theme, $, window, document ) {
 				
 				
 				//Check if the picture is loaded on the page
-				var $curImg = $items.first().find( 'img' ),
-					curImgH = 0,
-					img     = new Image();
-				img.onload = function() {
-					
-					curImgH = $curImg.height();
-					$this.css( 'height', curImgH + 'px' );
-					
-					//Load slides to canvas
-					//-------------------------------------	
-					$this.find( '.item' ).each( function( index )  {
+				var $curImg, 
+					realSrc,
+					curImgH    = false,
+					img        = new Image();
 
-						//Canvas Interactions
-						if ( $items.eq( index ).find( 'video' ).length == 0 ) {
-
-							if ( $( '#custom-advanced-slider-canvas-item-'+index ).length == 0 ) {
-								$( this ).prepend( '<canvas id="custom-advanced-slider-canvas-item-'+index+'" width="'+$this.width()+'" height="'+$this.height()+'"></canvas>' );
-							}		
-						}
-
-
-					});	
-	
+				if ( $items.first().find( 'img' ).length == 0 ) {
+					$curImg    = $items.first().find( 'video' );
+					realSrc    = $curImg.attr( 'poster' );
+				} else {
+					$curImg    = $items.first().find( 'img' );
+					realSrc    = $curImg.attr( 'src' );	
 				}
-				img.src = $curImg.attr( 'src' );
-				
-				
-
-				
 
 
+				img.onload = function() {
+
+					curImgH = img.height*(img.width/windowWidth);
+					$this.css( 'height', curImgH + 'px' );
+
+				}
+
+				img.src = realSrc;
+
+			
 				
 				
 			
@@ -526,18 +519,35 @@ theme = ( function ( theme, $, window, document ) {
 			
 			
 			
+			
 			//Reset the slider height
 			//-------------------------------------	
-			var $curImg    = $current.find( 'img' ),
+			var $curImg, 
+				realSrc,
 				curNewImgH = false,
 				img        = new Image();
+			
+			if ( $current.find( 'img' ).length == 0 ) {
+			    $curImg    = $current.find( 'video' );
+				realSrc    = $curImg.attr( 'poster' );
+			} else {
+			    $curImg    = $current.find( 'img' );
+				realSrc    = $curImg.attr( 'src' );	
+			}
+		
+			
 			img.onload = function() {
 
-				curNewImgH = $curImg.height();
+				curNewImgH = img.height*(img.width/windowWidth);
 				slider.css( 'height', curNewImgH + 'px' );
+				
+				console.log( img.naturalHeight );
 
 			}
-			img.src = $curImg.attr( 'src' );
+			
+			img.src = realSrc;
+
+
 
 
 			

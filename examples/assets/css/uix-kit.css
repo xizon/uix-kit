@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.4.1
- * ## Last Update         :  April 25, 2018
+ * ## Version             :  1.4.3
+ * ## Last Update         :  April 27, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -66,8 +66,8 @@
 	TABLE OF CONTENTS
 	---------------------------
 	
-    1. Table 
-    2. Basic 
+    1. Basic 
+    2. Table 
     3. Bullet List 
     4. Helper Classes 
     5. Typography 
@@ -78,8 +78,8 @@
     10. Brand 
     11. Footer 
     12. Video 
-    13. Back to Top 
-    14. Loader 
+    13. Loader 
+    14. Back to Top 
     15. Social Media Icons 
     16. Pagination 
     17. Filterable Navigation 
@@ -3296,12 +3296,33 @@ ul.entry-meta {
  1) Initialize the slider style
  ---------------------------
  */
+.custom-advanced-slider-sp-canvas-outer {
+    position: relative;
+    z-index: 2;
+    display: block;
+}
+
 .custom-advanced-slider-sp {
     position: relative;
     width: 100%;
     overflow: hidden;
     z-index: 1;
     background: #000;
+}
+
+.custom-advanced-slider-sp canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    background: #000;
+}
+
+.custom-advanced-slider-sp .inner {
+    position: relative;
+    z-index: 1;
 }
 
 .custom-advanced-slider-sp .inner .item {
@@ -3313,18 +3334,9 @@ ul.entry-meta {
     opacity: 0;
 }
 
-.custom-advanced-slider-sp .inner .item canvas {
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    background: #000;
-}
-
 .custom-advanced-slider-sp .inner .item img {
     width: 100%;
+    visibility: hidden;
 }
 
 .custom-advanced-slider-sp .inner .item.leave {
@@ -3336,6 +3348,10 @@ ul.entry-meta {
     transition: all 0.6s ease;
     transition-delay: 0.6s;
     opacity: 1;
+}
+
+.webgl .custom-advanced-slider-sp video {
+    display: none;
 }
 
 /* 
@@ -3437,6 +3453,11 @@ ul.entry-meta {
     z-index: 1;
 }
 
+.custom-advanced-slider .inner {
+    position: relative;
+    z-index: 1;
+}
+
 .custom-advanced-slider .inner .item {
     position: absolute;
     left: 0;
@@ -3444,17 +3465,6 @@ ul.entry-meta {
     z-index: 1;
     width: 100%;
     opacity: 0;
-}
-
-.custom-advanced-slider .inner .item canvas {
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    background: #000;
-    display: none;
 }
 
 .custom-advanced-slider .inner .item img {

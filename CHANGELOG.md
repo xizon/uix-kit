@@ -1,8 +1,17 @@
 # Changelog
 
+#### = 1.4.3 (April 27, 2018) =
 
-#### = 1.4.2 (April 24, 2018) =
+* New: Add a new liquid effect for module "Advanced Slider".
+* New: Add hash event to fullpage scripts.
+* Tweak: Optimized the performance of demo scripts using PIXI and three.js.
+* Tweak: Special Effects Carousel Support Video Format.
+* Tweak: Remove the assets-demo folder and use "assets/images/demo/" instead of "assets-demo/images/".
+* Tweak: Remove the assets-demo folder and use "assets/videos/" instead of "assets-demo/videos/".
+* Tweak: Adjusted the component structure.
 
+
+#### = 1.4.1 (April 23, 2018) =
 
 * New: Add a new 3D effect for module "Advanced Slider".
 * New: Added "three.js" engine to default site script.

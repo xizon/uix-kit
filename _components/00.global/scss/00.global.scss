@@ -238,8 +238,8 @@ $primary-bg-color      : transparent;
 //  Make the cursor a hand when a user hovers over an item
 // ---------------------------
 //
-@mixin cursor-img( $img: '../../assets-demo/images/cursorhand.png' ){
-	/* @include cursor-img( '../../assets-demo/images/cursorhand.png' ); */
+@mixin cursor-img( $img: '../../assets/images/demo/cursorhand.png' ){
+	/* @include cursor-img( '../../assets/images/demo/cursorhand.png' ); */
 	cursor: url(#{$img}), auto;
 	
 }

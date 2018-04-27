@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.4.1
- * ## Last Update         :  April 25, 2018
+ * ## Version             :  1.4.3
+ * ## Last Update         :  April 27, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -47,9 +47,9 @@
     22. Custom Core Scripts & Stylesheets 
     23. Custom Lightbox 
     24. Bulleted List 
-    25. Posts List With Ajax 
-    26. Fullwidth List of Split 
-    27. Mobile Menu 
+    25. Fullwidth List of Split 
+    26. Mobile Menu 
+    27. Posts List With Ajax 
     28. Modal Dialog 
     29. Mousewheel Interaction 
     30. Multiple Items Carousel 
@@ -1447,9 +1447,27 @@ theme = ( function ( theme, $, window, document ) {
     var documentReady = function( $ ) {
 		
 	
-		var $window            = $( window ),
-			windowWidth        = $window.width(),
-			windowHeight       = $window.height();
+		var $window                   = $( window ),
+			windowWidth               = $window.width(),
+			windowHeight              = $window.height(),
+			animDuration              = 600,
+			
+			//Basic webGL renderers 
+			rendererOuterID           = 'custom-advanced-slider-sp-canvas-outer',
+			rendererID                = 'custom-advanced-slider-sp-canvas',
+			renderer,
+		    
+			//---
+			renderer_filter,
+		    rendererID_filter         = rendererID,
+		    stage_filter,
+			items_container,
+			displacementSprite,
+			displacementFilter,
+			
+			//---
+			scenesAll                 = [],
+			webGLRenderer;
 		
 		
 		
@@ -1706,7 +1724,8 @@ theme = ( function ( theme, $, window, document ) {
 					dataControlsArrows       = $this.data( 'controls-arrows' ),
 					dataLoop                 = $this.data( 'loop' ),
 					dataAuto                 = $this.data( 'auto' ),
-					dataTiming               = $this.data( 'timing' );
+					dataTiming               = $this.data( 'timing' ),
+					dataFilterTexture        = $this.data( 'filter-texture' );
 
 
 				if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.custom-advanced-slider-sp-pagination';
@@ -1714,6 +1733,7 @@ theme = ( function ( theme, $, window, document ) {
 				if( typeof dataLoop === typeof undefined ) dataLoop = false;
 				if( typeof dataAuto === typeof undefined ) dataAuto = false;	
 				if( typeof dataTiming === typeof undefined ) dataTiming = 10000;
+				if( typeof dataFilterTexture === typeof undefined ) dataFilterTexture = '';
 
 
 
@@ -1724,44 +1744,595 @@ theme = ( function ( theme, $, window, document ) {
 				
 			
 				//Check if the picture is loaded on the page
-				var $curImg = $items.first().find( 'img' ),
-					curImgH = 0,
-					img     = new Image();
+				var $curImg, 
+					realSrc,
+					curImgH    = false,
+					img        = new Image();
+
+				if ( $items.first().find( 'img' ).length == 0 ) {
+					$curImg    = $items.first().find( 'video' );
+					realSrc    = $curImg.attr( 'poster' );
+				} else {
+					$curImg    = $items.first().find( 'img' );
+					realSrc    = $curImg.attr( 'src' );	
+				}
+
+
 				img.onload = function() {
-					
-					curImgH = $curImg.height();
+
+					curImgH = img.height*(img.width/windowWidth);
 					$this.css( 'height', curImgH + 'px' );
+					
+					var realImgW = this.width,
+						realImgH = this.height;
+
+					
 					
 					//Load slides to canvas
 					//-------------------------------------	
-					$this.find( '.item' ).each( function( index )  {
+					if ( $( '#' + rendererID ).length == 0 ) {
+						$this.prepend( '<div id="'+rendererOuterID+'" class="custom-advanced-slider-sp-canvas-outer"><canvas id="'+rendererID+'"></canvas></div>' );
+					}
+					
+					//Basic webGL renderers 
+					//-------------------------------------
+					renderer              = new PIXI.Application( $this.width(), $this.height(), {
+															backgroundColor : 0x000000, 
+															autoResize      : true, 
+															view            : document.getElementById( rendererID )
+														});
+					
+					renderer_filter       = new PIXI.autoDetectRenderer( $this.width(), $this.height(), {
+															backgroundColor : 0x000000, 
+															transparent     : false,
+															view            : document.getElementById( rendererID_filter )
+														});
 
-						//Canvas Interactions
-						if ( $items.eq( index ).find( 'video' ).length == 0 ) {
-							if ( $( '#custom-advanced-slider-sp-canvas-item-'+index ).length == 0 ) {
-								$( this ).prepend( '<span id="custom-advanced-slider-sp-canvas-wrapper-item-'+index+'"></span><canvas id="custom-advanced-slider-sp-canvas-item-'+index+'" width="'+$this.width()+'" height="'+$this.height()+'"></canvas>' );
+
+				    stage_filter          = new PIXI.Container();
+					items_container       = new PIXI.Container();
+					displacementSprite    = ( dataFilterTexture.indexOf( '.mp4' ) >= 0 ) ? new PIXI.Sprite( PIXI.Texture.fromVideo( dataFilterTexture ) ) : new PIXI.Sprite.fromImage( dataFilterTexture );
+					displacementFilter    = new PIXI.filters.DisplacementFilter( displacementSprite );
+					
+
+					
+					
+                    //Add sprites to stage
+                    //Usage of returning sprite object: renderer.stage.children[index]
+
+
+					//----------------------------------------------------------------------------------
+					//--------------------------------- Brightness Effect -------------------------------	
+					//----------------------------------------------------------------------------------
+					if ( $this.hasClass( 'eff-brightness' ) ) {
+						
+						$this.find( '.item' ).each( function( index )  {
+
+							var $thisItem = $( this );
+
+							//Load sprite from each slider to canvas
+							//-------------------------------------
+							var curSprite;
+
+							if ( $thisItem.find( 'video' ).length > 0 ) {
+				
+								
+								// create a video texture from a path
+								var texture = PIXI.Texture.fromVideo( $thisItem.find( 'source[type="video/mp4"]' ).attr( 'src' ) );
+
+								curSprite = new PIXI.Sprite( texture );
+								
+								// pause the video
+								var videoSource = texture.baseTexture.source;
+								videoSource.autoplay = false;
+								videoSource.pause();
+								videoSource.currentTime = 0;
+								videoSource.muted = true;
+
+								
+
+								var myPlayer = videojs( $thisItem.find( 'video' ).attr( 'id' ) );
+								myPlayer.ready(function() {
+
+
+									/* ---------  Video initialize */
+									myPlayer.on( 'loadedmetadata', function() {
+
+										//Get Video Dimensions
+										var curW    = this.videoWidth(),
+											curH    = this.videoHeight(),
+											newW    = curW,
+											newH    = curH;
+
+										newW = $this.width();
+
+										//Scaled/Proportional Content 
+										newH = curH*(newW/curW);
+
+										curSprite.width  = newW;
+										curSprite.height = newH;	
+
+
+									});		
+
+								});
+
+
+
+
+							} else {
+								curSprite = new PIXI.Sprite.fromImage( $thisItem.find( 'img' ).attr( 'src' ) );
+								curSprite.width  = $this.width();
+								curSprite.height = $this.height();	
 							}
-							canvasInteractions( index, $this );
+
+
+
+							// Render updated scene
+							renderer.stage.addChild( curSprite );
+
+							TweenLite.set( curSprite, {
+								alpha : 0
+							});	
+
+
+
+						});
+		
+						
+					}// end effect
+
+
+					
+
+
+					//----------------------------------------------------------------------------------
+					//--------------------------------- Liquid Distortion Effect -----------------------
+					//----------------------------------------------------------------------------------
+					if ( $this.hasClass( 'eff-liquid' ) ) {
+
+						$this.find( '.item' ).each( function( index )  {
+
+							var $thisItem = $( this );
+
+							
+							
+							//Load sprite from each slider to canvas
+							//-------------------------------------
+							var curSprite, 
+								canvasRatio = $this.width()/realImgW;
+
+							if ( $thisItem.find( 'video' ).length > 0 ) {
+					
+							
+								// create a video texture from a path
+								var texture = PIXI.Texture.fromVideo( $thisItem.find( 'source[type="video/mp4"]' ).attr( 'src' ) );
+
+								curSprite = new PIXI.Sprite( texture );
+
+								// pause the video
+								var videoSource = texture.baseTexture.source;
+								videoSource.autoplay = false;
+								videoSource.pause();
+								videoSource.currentTime = 0;
+								videoSource.muted = true;
+
+								
+								var myPlayer = videojs( $thisItem.find( 'video' ).attr( 'id' ) );
+								myPlayer.ready(function() {
+
+
+									/* ---------  Video initialize */
+									myPlayer.on( 'loadedmetadata', function() {
+
+										//Get Video Dimensions
+										var curW    = this.videoWidth(),
+											curH    = this.videoHeight(),
+											newW    = curW,
+											newH    = curH;
+
+										newW = $this.width();
+
+										//Scaled/Proportional Content 
+										newH = curH*(newW/curW);
+
+										curSprite.width  = newW;
+										curSprite.height = newH;	
+
+
+									});		
+
+								});
+
+
+
+							} else {
+								curSprite = new PIXI.Sprite.fromImage( $thisItem.find( 'img' ).attr( 'src' ) );
+								curSprite.width  = $this.width();
+								curSprite.height = $this.height();	
+							}
+
+
+
+
+							//Need to scale according to the screen
+							curSprite.scale.set( canvasRatio );
+
+							TweenLite.set( curSprite, {
+								alpha : 0
+							});	
+
+
+							items_container.addChild( curSprite );
+							// Enable interactions
+							items_container.interactive = true;
+
+
+							//Add child container to the main container 
+							//-------------------------------------
+							stage_filter.addChild( items_container );
+							// Enable Interactions
+							stage_filter.interactive = true;
+
+							//A texture stores the information that represents an image
+							displacementSprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
+
+
+							//Set the filter to stage and set some default values for the animation
+							//-------------------------------------
+							stage_filter.filters = [ displacementFilter ];    
+
+
+							//Add filter container to the main container
+							//-------------------------------------				
+							displacementSprite.anchor.set( 0.5 );
+							displacementSprite.x = renderer_filter.width / 2;
+							displacementSprite.y = renderer_filter.height / 2; 
+
+							displacementSprite.scale.x = 1;
+							displacementSprite.scale.y = 1;
+
+							// PIXI tries to fit the filter bounding box to the renderer so we optionally bypass
+							displacementFilter.autoFit = false;
+
+							stage_filter.addChild( displacementSprite );
+
+							//Animation Effects
+							//-------------------------------------
+							var ticker       = new PIXI.ticker.Ticker();
+							ticker.autoStart = true;
+							ticker.add( function( delta ) {
+
+	//								displacementSprite.x += 12.14 * delta;
+	//								displacementSprite.y += 42.24 * delta;
+	//
+	//								displacementSprite.scale.x += 0.2 * delta;
+	//								displacementSprite.scale.y += 0.2 * delta;
+
+								// Render updated scene
+								renderer_filter.render( stage_filter );
+
+							});
+
+
+
+
+
+
+						});
+
+
+					}// end effect
+
+
+					
+
+					//----------------------------------------------------------------------------------
+					//--------------------------------- 3D Rotating Effect -----------------------------
+					//----------------------------------------------------------------------------------
+					if ( $this.hasClass( 'eff-3d-rotating' ) ) {
+
+
+						init();
+						animate();
+
+						
+						//Add Geometries and Lights to the main container 
+						//-------------------------------------					
+						function init() {
+							$this.find( '.item' ).each( function( index )  {
+
+								var $thisItem = $( this );
+						
+								// create a scene, that will hold all our elements such as objects, cameras and lights.
+								var scene  = new THREE.Scene();
+								scene.name = 'scene-' + index;
+
+
+								// make a list item
+								var element = document.createElement( 'div' );
+								element.className = 'list-item';
+								element.innerHTML = '<div class="scene" style="width:'+$this.width() +'px;height:'+$this.height() +'px;"></div>';
+
+								// Look up the element that represents the area
+								// we want to render the scene
+								scene.userData.element = element.querySelector( '.scene' );
+								document.getElementById( rendererOuterID ).appendChild( element );
+								
+								TweenLite.set( $( '#' + rendererOuterID ).find( '.list-item' ), {
+										alpha: 0,
+										css  : {
+											display: 'none'
+										}
+									});	
+
+
+								// Create a camera, which defines where we're looking at.
+								var aspect      = $this.width() / $this.height(),
+									camera      = new THREE.PerspectiveCamera( 45, aspect, 0.1, 1000 );
+
+								camera.position.x = 0;
+								camera.position.y = 12;
+								camera.position.z = 2000;
+								camera.lookAt( new THREE.Vector3( 0, 0, 0 ) );
+								scene.userData.camera = camera;
+
+
+
+								//Allow the camera to orbit around a target.
+								var controls = new THREE.OrbitControls( scene.userData.camera, scene.userData.element );
+								controls.enableDamping = true;
+								controls.dampingFactor = 0.15;
+								controls.screenSpacePanning = false;
+								controls.minDistance = 0;
+								controls.maxDistance = 30;
+								controls.maxPolarAngle = Math.PI / 2;
+
+								scene.userData.controls = controls;
+								
+								
+
+								// Generate one plane geometries mesh to each scene
+								var texture;
+								if ( $thisItem.find( 'video' ).length > 0 ) {
+
+									
+									texture = new THREE.VideoTexture( document.getElementById( $thisItem.find( 'video' ).attr( 'id' ) ) );
+									texture.minFilter = THREE.LinearFilter;
+									texture.magFilter = THREE.LinearFilter;
+									texture.format = THREE.RGBFormat;
+									
+									// pause the video
+									texture.image.autoplay = false;
+									texture.image.currentTime = 0;
+									texture.image.muted = true;
+									//if( typeof dataAuto === typeof undefined ) 
+
+								} else {
+									texture = new THREE.TextureLoader().load( $thisItem.find( 'img' ).attr( 'src' ) );
+									texture.generateMipmaps = false;
+									texture.wrapS = texture.wrapT = THREE.ClampToEdgeWrapping;
+									texture.minFilter = THREE.LinearFilter;
+								}
+
+								
+
+								// Immediately use the texture for material creation
+								var spriteMat            = new THREE.MeshPhongMaterial( { map: texture } ),
+									imgRatio             = $this.width() / $this.height(),
+									geometry             = new THREE.BoxGeometry( imgRatio*5, 5, 2 ),
+									displacementSprite   = new THREE.Mesh( geometry, spriteMat );
+
+								displacementSprite.position.set( -0.01, -0.01, 0 );
+								displacementSprite.rotation.set( 0, 0, 0 );
+								scene.add( displacementSprite );
+								
+
+
+								// Generate Ambient Light
+								var ambiLight = new THREE.AmbientLight( 0x404040 );
+								scene.add( ambiLight );
+
+								// Generate Directional Light
+								var light = new THREE.DirectionalLight( 0xffffff, 0.5 );
+								light.position.set( 0, 30, 70 );
+								scene.add( light );
+
+
+								// Display multiple instances of three.js in a single page
+								scenesAll.push( scene );
+
+
+
+							});
+
+							
+							//Create a render and set the size
+							webGLRenderer = new THREE.WebGLRenderer( { 
+													canvas   : document.getElementById( rendererID ), //canvas
+													alpha    : true, 
+													antialias: true 
+												} );
+
+							webGLRenderer.setClearColor( new THREE.Color( 0x000000, 0 ) );
+							webGLRenderer.setPixelRatio( window.devicePixelRatio );  
+							webGLRenderer.shadowMap.enabled = true;
+	
+							
+						}
+							
+
+						//Animation Effects
+						//-------------------------------------
+						function animate() {
+							render();
+							requestAnimationFrame( animate );
+						}
+						
+					
+						function render() {
+				
+							
+							webGLRenderer.setClearColor( 0x000000 );
+							webGLRenderer.setScissorTest( false );
+							webGLRenderer.clear();
+
+							webGLRenderer.setClearColor( 0x000000 );
+							webGLRenderer.setScissorTest( true );
+							
+							scenesAll.forEach( function( scene, i ) {
+							
+
+								//automatic rotation
+								if ( !dragDropNow ) {
+									scene.children[0].rotation.y = Date.now() * 0.001;
+								}
+								
+								
+								//drag & drop
+								if ( dragDropNow ) {
+									scene.children[0].rotation.x = toRad( targetRotationX * 1 );
+									scene.children[0].rotation.y = toRad( targetRotationY * 1 );	
+								}
+
+								// Get the element that is a place holder for where we want to draw the scene
+								var element = scene.userData.element;	
+
+
+								// Get its position relative to the page's viewport
+								var rect = element.getBoundingClientRect();
+								
+								// set the viewport
+								webGLRenderer.setViewport( 0, 0, rect.width, rect.height );
+								webGLRenderer.setScissor( 0, 0, rect.width, rect.height );
+								
+								// get the camera
+								var camera = scene.userData.camera;
+
+								scene.userData.controls.update();
+
+								
+								//drag & drop
+								webGLRenderer.render( scene, camera );
+
+							} );
+
+						}
+
+						
+						
+						//Mouse drag Rotate
+						//-------------------------------------
+						var dragDropNow                = false,
+						    targetRotationX            = 0.5,
+							targetRotationOnMouseDownX = 0,
+							targetRotationY            = 0.2,
+							targetRotationOnMouseDownY = 0,
+							mouseX                     = 0,
+							mouseXOnMouseDown          = 0,
+							mouseY                     = 0,
+							mouseYOnMouseDown          = 0,
+							windowHalfX                = $this.width() / 2,
+							windowHalfY                = $this.height() / 2,
+							moveMagnitude              = 0.25;
+
+						document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+
+						function onDocumentMouseDown( event ) {
+
+							event.preventDefault();
+
+							document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+							document.addEventListener( 'mouseup', onDocumentMouseUp, false );
+							document.addEventListener( 'mouseout', onDocumentMouseOut, false );
+
+							mouseXOnMouseDown = event.offsetX - windowHalfX;
+							targetRotationOnMouseDownX = targetRotationX;
+
+							mouseYOnMouseDown = event.offsetY - windowHalfY;
+							targetRotationOnMouseDownY = targetRotationY;
+							
+							dragDropNow = true;
+						}
+
+						function onDocumentMouseMove( event ) {
+
+							mouseX = event.offsetX - windowHalfX;
+							targetRotationX = ( mouseX - mouseXOnMouseDown ) * moveMagnitude;
+
+							mouseY = event.offsetY - windowHalfY;
+							targetRotationY = ( mouseY - mouseYOnMouseDown ) * moveMagnitude;
+
+
+						}
+
+						function onDocumentMouseUp( event ) {
+
+							document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
+							document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
+							document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
+							
+							dragDropNow = false;
+							
+						}
+
+						function onDocumentMouseOut( event ) {
+
+							document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
+							document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
+							document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
+							
+							dragDropNow = false;
 						}
 
 
-					});
-	
+						//Converts numeric degrees to radians
+						function toRad( number ) {
+							return number * Math.PI / 180;
+						}
+
+
+						//Responsive plane geometries
+						//-------------------------------------
+						window.addEventListener( 'resize', function () {
+
+							var width = document.getElementById( rendererID ).clientWidth;
+							var height = document.getElementById( rendererID ).clientHeight;
+
+							if ( document.getElementById( rendererID ).width !== width || document.getElementById( rendererID ).height !== height ) {
+
+								webGLRenderer.setSize( width, height, false );
+
+							}
+							
+
+						}, false );
+						
+						
+
+					}// end effect
+
+
+		
+					
+
+					canvasInteractions( 0, $this );
+					
+					
+
 				}
-				img.src = $curImg.attr( 'src' );
-				
 
-	
+				img.src = realSrc;
 
-				
+
 				
 			
 				// Fires local videos asynchronously with slider switch.
 				//-------------------------------------
-				advancedSliderVideoEmbedInit( $items, false );	
+				if ( !Modernizr.webgl ) advancedSliderVideoEmbedInit( $items, false );	
 
-				
-				
+
+			
 				//Autoplay Slider
 				//-------------------------------------			
 				if ( dataAuto && !isNaN( parseFloat( dataTiming ) ) && isFinite( dataTiming ) ) {
@@ -1962,17 +2533,30 @@ theme = ( function ( theme, $, window, document ) {
 			
 			//Reset the slider height
 			//-------------------------------------	
-			var $curImg    = $current.find( 'img' ),
+			var $curImg, 
+				realSrc,
 				curNewImgH = false,
 				img        = new Image();
+			
+			if ( $current.find( 'img' ).length == 0 ) {
+			    $curImg    = $current.find( 'video' );
+				realSrc    = $curImg.attr( 'poster' );
+			} else {
+			    $curImg    = $current.find( 'img' );
+				realSrc    = $curImg.attr( 'src' );	
+			}
+		
+			
 			img.onload = function() {
 
-				curNewImgH = $curImg.height();
+				curNewImgH = img.height*(img.width/windowWidth);
 				slider.css( 'height', curNewImgH + 'px' );
 
 			}
-			img.src = $curImg.attr( 'src' );
+			
+			img.src = realSrc;
 
+			
 			
 			
 			
@@ -2011,18 +2595,19 @@ theme = ( function ( theme, $, window, document ) {
 			$( dataCountTotal ).text( total );
 			$( dataCountCur ).text( parseFloat( elementIndex ) + 1 );		
 			
-			
+
 			// Fires local videos asynchronously with slider switch.
 			//-------------------------------------
-			advancedSliderVideoEmbedInit( $items, false );
-			advancedSliderVideoEmbedInit( $current, true );
+			if ( !Modernizr.webgl ) {
+				advancedSliderVideoEmbedInit( $items, false );
+				advancedSliderVideoEmbedInit( $current, true );	
+			}
 			
-
 			
 			//Canvas Interactions
 			//-------------------------------------
-			canvasInteractions( elementIndex, slider )
-
+			canvasInteractions( elementIndex, slider );
+			
 
 			
 		}
@@ -2040,408 +2625,256 @@ theme = ( function ( theme, $, window, document ) {
 			
 			if ( Modernizr.webgl ) {
 			
-				var hasVideo              = ( slider.find( '.item' ).eq( elementIndex ).find( 'video' ).length > 0 ) ? true : false,
-					imgSel                = slider.find( '.item' ).eq( elementIndex ).find( 'img' ),
+				var $myRenderer           = $( '#' + rendererOuterID ),
+				    $current              = slider.find( '.item' ).eq( elementIndex ),
+					imgSel                = $current.find( 'img' ),
 				    curImgURL             = imgSel.attr( 'src' ),
 					stageW                = slider.width(),
 					stageH                = slider.height(),
-					realImgW,
-					realImgH,
-					curSprite,
-					ticker,
-					renderer,
-					filterAnimRenderer;
+					spTotal               = slider.find( '.item' ).length;
 				
-
-				//create an offscreen image that isn't scaled
-				//but contains the same image.
-				//Because it's cached it should be instantly here.
-				var theImage = new Image();
-				theImage.src = curImgURL;
-				realImgW = theImage.width;
-				realImgH = theImage.height;
 				
-
-				
-				//If video
-				if ( hasVideo ) return false;
-				
-
 				//----------------------------------------------------------------------------------
 				//--------------------------------- Brightness Effect -------------------------------	
 				//----------------------------------------------------------------------------------
 				if ( slider.hasClass( 'eff-brightness' ) ) {
+				
+			
+					//Display wrapper of canvas (transitions between slides)
+					//-------------------------------------	
+					TweenLite.to( $myRenderer, animDuration/1000, {
+						alpha : 0,
+						onComplete    : function() {
+							
+							var curSp = renderer.stage.children[ elementIndex ];
+
+							TweenLite.to( this.target, animDuration/1000, {
+								alpha : 1
+							});			
+							
+							
+							//display the current item
+							for ( var k = 0; k < spTotal; k++ ) {
+								
+								var obj = renderer.stage.children[ k ];
+								TweenLite.set( obj, {
+									alpha : 0
+								});	
+								
+								//pause all videos
+								if ( obj._texture.baseTexture.imageType == null ) {
+									var videoSource = obj.texture.baseTexture.source;
+
+									// play the video
+									videoSource.currentTime = 0;
+									videoSource.autoplay = false;
+									videoSource.pause();
+									videoSource.muted = true;
+								}		
+								
+							}
+							
+							
+							
+							//play current video
+							if ( curSp._texture.baseTexture.imageType == null ) {
+								var videoSource = curSp.texture.baseTexture.source;
+								
+								// play the video
+								videoSource.currentTime = 0;
+								videoSource.autoplay = true;
+								videoSource.play();
+								videoSource.muted = false;
+							}
 
 
-					// ------------ Basic parameters 
-					curSprite             = new PIXI.Sprite.fromImage( curImgURL, true );
-					renderer              = new PIXI.Application( stageW, stageH, {
-															backgroundColor : 0x000000, 
-															autoResize      : true, 
-															view            : document.getElementById( 'custom-advanced-slider-sp-canvas-item-'+elementIndex )
-														});
-
-					curSprite.width  = stageW;
-					curSprite.height = stageH;	
-
-
-					// ------------ Add child container to the stage of each slider's canvas
-					renderer.stage.addChild( curSprite );
-
-
-					// ------------ Animation Effects
-					TweenLite.set( curSprite, {
-						pixi: {
-							brightness: 5
+							//display filters
+							TweenLite.set( curSp, {
+								pixi: {
+									brightness: 5
+								},
+								alpha : 1
+							});		
+							
+							TweenLite.to( curSp, animDuration/1000, {
+								pixi: {
+									brightness: 1
+								},
+								delay : animDuration/1000,
+							});		
+						
+							
+					
 						}
-					});	
-
-					TweenLite.to( curSprite, 3, {
-						pixi: {
-							brightness: 1
-						},
-						delay: 0.6
 					});		
+	
 
 
 				} // end effect
 
 
+				
+				
 
 				//----------------------------------------------------------------------------------
 				//--------------------------------- Liquid Distortion Effect -----------------------
 				//----------------------------------------------------------------------------------
-					
 				if ( slider.hasClass( 'eff-liquid' ) ) {
-
 					
-					// ------------ Basic parameters 
-					curSprite             = new PIXI.Sprite.fromImage( curImgURL, true );
-					ticker                = new PIXI.ticker.Ticker();
-					renderer              = new PIXI.Application( stageW, stageH, {
-															backgroundColor : 0x000000, 
-															autoResize      : true, 
-															view            : document.getElementById( 'custom-advanced-slider-sp-canvas-item-'+elementIndex )
-														});
+				
+					
+					//Display wrapper of canvas (transitions between slides)
+					//-------------------------------------	
+					TweenLite.to( $myRenderer, animDuration/1000, {
+						alpha : 0,
+						onComplete    : function() {
+							
+							var curSp = items_container.children[ elementIndex ];
+				
+							TweenLite.to( this.target, animDuration/1000, {
+								alpha : 1
+							});	
 
-					curSprite.width  = stageW;
-					curSprite.height = stageH;	
+							
+							//display the current item
+							for ( var k = 0; k < spTotal; k++ ) {
+								
+								var obj = items_container.children[ k ];
+								TweenLite.set( obj, {
+									alpha : 0
+								});	
+								
+								//pause all videos
+								if ( obj._texture.baseTexture.imageType == null ) {
+									var videoSource = obj.texture.baseTexture.source;
 
+									// play the video
+									videoSource.currentTime = 0;
+									videoSource.autoplay = false;
+									videoSource.pause();
+									videoSource.muted = true;
+								}		
+								
+							}
+							
+							
+							
+							//play current video
+							if ( curSp._texture.baseTexture.imageType == null ) {
+								var videoSource = curSp.texture.baseTexture.source;
+								
+								// play the video
+								videoSource.currentTime = 0;
+								videoSource.autoplay = true;
+								videoSource.play();
+								videoSource.muted = false;
+							}
+							
+                           
+							//display filters
+							TweenLite.set( curSp, {
+								alpha : 1
+							});	
+							
+							displacementSprite.scale.set( 10, 10 );
+							var baseTimeline = TweenLite.to( displacementSprite.scale, 2, { 
+								x: 0,
+								y: 0,
+								onComplete: function() {
+									
+									
+								},
+								onUpdate: function() {
+									//console.log( baseTimeline.progress() );
+									
+								}
+							} );
+							
 
-					// ------------ Add filter container to the main container 
-					var count       = 0,
-						ropeLength  = stageW / 10,
-						points      = [];
-
-					for ( var i = 0; i < 10; i++ ) {
-						points.push( new PIXI.Point( i * ropeLength, 0 ) );
-					}
-
-					// Set the filter to stage and set some default values for the animation
-					var strip = new PIXI.mesh.Rope( PIXI.Texture.fromImage( curImgURL ), points );
-
-					strip.x = 0;
-					strip.y = stageH/2 - 20;
-
-					// ------------ Add child container to the stage of each slider's canvas
-					renderer.stage.scale.set( 1 + stageH / stageW );
-					renderer.stage.addChild( strip );
-
-
-					// ------------ Animation Effects
-					ticker.autoStart = true;
-					ticker.add( function( delta ) {
-
-						// speed
-						count += 0.01;
-
-						// make the effect
-						for ( var j = 0; j < points.length; j++ ) {
-
-							points[j].y = Math.sin((j * 0.5) + count) * 15;
-							points[j].x = j * ropeLength + Math.cos((j * 0.3) + count) * 15;	
+							
+							
+					
 						}
+					});		
+					
+					
+					
+					//Add new ripple each time mouse is clicked
+					//-------------------------------------
+					// @https://pixijs.download/v4.5.4/docs/PIXI.interaction.InteractionManager.html
+					var rafID, mouseX, mouseY;
+					
+					stage_filter.pointerup = function( mouseData ) {
+						TweenLite.to( displacementSprite.scale, 1, { x: 0, y: 0 } );
+					    cancelAnimationFrame( rafID );               
+					
+					};
+    
+					stage_filter.pointerdown = function( mouseData ) {
+						mouseX = mouseData.data.global.x;
+						mouseY = mouseData.data.global.y;   
+						TweenLite.to( displacementSprite.scale, 1, { x: "+=" + Math.sin( mouseX ) * 100 + "", y: "+=" + Math.cos( mouseY ) * 100 + ""  });   
+						rotateSpite();	
+						
+					};     
 
-					});
-
-					   
-
-				} // end effect	
-				
-				
-				
-
-				//----------------------------------------------------------------------------------
-				//--------------------------------- Liquid Distortion Effect -----------------------
-				//----------------------------------------------------------------------------------
-				if ( slider.hasClass( 'eff-liquid2' ) ) {
+					function rotateSpite() {
+						displacementSprite.rotation += 0.001;
+						rafID = requestAnimationFrame( rotateSpite );
+					}
+					
 					
 				
-					// ------------ Basic parameters 
-					curSprite             = new PIXI.Sprite.fromImage( curImgURL, true );
-					ticker                = new PIXI.ticker.Ticker();
-					renderer              = new PIXI.Application( stageW, stageH, {
-															backgroundColor : 0x000000, 
-															autoResize      : true, 
-															view            : document.getElementById( 'custom-advanced-slider-sp-canvas-item-'+elementIndex )
-														});
-
-					filterAnimRenderer    = new PIXI.autoDetectRenderer( stageW, stageH, {
-															backgroundColor : 0x000000, 
-															transparent     : false,
-															view            : document.getElementById( 'custom-advanced-slider-sp-canvas-item-'+elementIndex )
-														});
-
-					curSprite.width  = stageW;
-					curSprite.height = stageH;	
-
-
-					var filterStage         = new PIXI.Container(),
-						displacementSprite  = new PIXI.Sprite.fromImage( curImgURL ),
-						displacementFilter  = new PIXI.filters.DisplacementFilter( displacementSprite ),
-						rendererWidth       = renderer.view.width,
-						rendererHeight      = renderer.view.height,
-						canvasRatio         = rendererWidth/realImgW;
-					
-
-					// ------------ Add filter container to the main container 
-					//Need to scale according to the screen
-					curSprite.scale.set( canvasRatio );
-					filterStage.addChild( curSprite );
-
-					// Enable Interactions
-					filterStage.interactive = true;
-
-					displacementSprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
-
-
-					// Set the filter to stage and set some default values for the animation
-					filterStage.filters = [ displacementFilter ];        
-
-					displacementSprite.anchor.set( 0.5 );
-					displacementSprite.x = filterAnimRenderer.width / 2;
-					displacementSprite.y = filterAnimRenderer.height / 2; 
-
-					displacementSprite.scale.x = 1;
-					displacementSprite.scale.y = 1;
-
-					// PIXI tries to fit the filter bounding box to the renderer so we optionally bypass
-					displacementFilter.autoFit = false;
-
-					filterStage.addChild( displacementSprite );
-
-
-					// ------------ Add child container to the stage of each slider's canvas
-					renderer.stage.addChild( filterStage );	
-
-
-					// ------------ Animation Effects
-					ticker.autoStart = true;
-					ticker.add( function( delta ) {
-
-
-						displacementSprite.x += 12.14 * delta;
-						displacementSprite.y += 42.24 * delta;
-
-						displacementSprite.scale.x += 0.2 * delta;
-						displacementSprite.scale.y += 0.2 * delta;
-
-
-						renderer.render( filterStage );
-
-					});
-
-					// ------------ Add new ripple each time mouse is clicked
-					renderer.view.addEventListener( 'mousedown', function(ev) {
-						//console.log( ev.clientX + ', ' + ev.clientY );
-
-
-					}, false);
-
-				
-
 
 				} // end effect
 				
 				
+
 				
 				//----------------------------------------------------------------------------------
 				//--------------------------------- 3D Rotating Effect -----------------------------
 				//----------------------------------------------------------------------------------
 				if ( slider.hasClass( 'eff-3d-rotating' ) ) {
 					
+					//Display wrapper of canvas (transitions between slides)
+					//-------------------------------------	
+					TweenLite.to( $myRenderer, animDuration/1000, {
+						alpha : 0,
+						onComplete    : function() {
+							
+							var curSp = $myRenderer.find( '.list-item' ).eq( elementIndex );
+							
+							TweenLite.to( this.target, animDuration/1000, {
+								alpha : 1
+							});
+							
+							
+							//display the current item
+							TweenLite.set( $myRenderer.find( '.list-item' ), {
+								alpha: 0,
+								css  : {
+									display: 'none'
+								}
+							});	
 
-					// ------------ Add Geometries and Lights to the main container 
-
-					// create a scene, that will hold all our elements such as objects, cameras and lights.
-					var scene = new THREE.Scene();
-					//scene.background = new THREE.Color( 0x000000 );
-
-					// create a camera, which defines where we're looking at.
-					var aspect      = stageW / stageH,
-						camera      = new THREE.PerspectiveCamera( 45, aspect, 0.1, 1000 );
-
-					camera.position.x = 0;
-					camera.position.y = 12;
-					camera.position.z = 2000;
-					camera.lookAt( new THREE.Vector3( 0, 0, 0 ) );
-					
-
-					// create a render and set the size
-					var webGLRenderer = new THREE.WebGLRenderer( { alpha: true, antialias: true } );
-					webGLRenderer.setClearColor( new THREE.Color( 0x000000, 0 ) );
-					webGLRenderer.setSize( stageW, stageH );
-					webGLRenderer.setPixelRatio( window.devicePixelRatio );  
-					webGLRenderer.shadowMapEnabled = true;
-
-
-
-
-					//Generate plane geometries
-					var texture   = THREE.ImageUtils.loadTexture( curImgURL ),
-						spriteMat = new THREE.MeshPhongMaterial();
-					spriteMat.map = texture;
-
-
-
-					var imgRatio             = stageW / stageH,
-						geometry             = new THREE.BoxGeometry( imgRatio*23, 23, 2 ),
-						displacementSprite   = new THREE.Mesh( geometry, spriteMat );
-
-					displacementSprite.position.set( -0.01, -0.01, 0 );
-					displacementSprite.rotation.set( 0, 0, 0 );
-					scene.add( displacementSprite );
-
- 
-					//Generate Ambient Light
-					var ambiLight = new THREE.AmbientLight( 0x141414 );
-					scene.add( ambiLight );
-
-					//Generate Directional Light
-					var light = new THREE.DirectionalLight();
-					light.position.set( 0, 30, 20 );
-					scene.add( light );
-
+							//console.log( $myRenderer.find( '.list-item' ) );
+							
+							console.log( scenesAll[ elementIndex ] );
+							
+							//display filters
+							TweenLite.to( curSp, animDuration/1000, {
+								alpha: 1,
+								css : {
+									display: 'block'
+								}
+							});	
+							
+							
+						}
+					});			
 					
 					
-					//  ------------ Add Controls
-					var controls = new THREE.OrbitControls( camera, webGLRenderer.domElement );
-					controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-					controls.dampingFactor = 0.15;
-					controls.screenSpacePanning = false;
-					controls.minDistance = 0;
-					controls.maxDistance = 30;
-					controls.maxPolarAngle = Math.PI / 2;
-					
 
-
-					// ------------ Add child container to the stage of each slider's canvas
-					document.getElementById( 'custom-advanced-slider-sp-canvas-wrapper-item-'+elementIndex ).appendChild( webGLRenderer.domElement );
-					document.getElementById( 'custom-advanced-slider-sp-canvas-item-'+elementIndex ).style.display = 'none';
-
-
-					// ------------ Animation Effects
-					var slowingFactor = 0.75;
-					render();
-
-					function render() {
-
-						//drag & drop
-						displacementSprite.rotation.x = toRad( targetRotationY * 1 );
-						displacementSprite.rotation.y = toRad( targetRotationX * 1 );
-
-
-						//console.log( camera.position.x + '---' + camera.position.y + '---' + camera.position.z );
-						
-						//auto animation
-						//displacementSprite.rotation.x += 0.005;
-						//displacementSprite.rotation.y += 0.005;
-
-
-						// render using requestAnimationFrame
-						requestAnimationFrame( render );
-						controls.update(); // only required if controls.enableDamping = true, or if controls.autoRotate = true
-						webGLRenderer.render( scene, camera );
-					}
-
-
-
-
-					// ------------ Mouse drag Rotate
-					var targetRotationX            = 0.5,
-						targetRotationOnMouseDownX = 0,
-						targetRotationY            = 0.2,
-						targetRotationOnMouseDownY = 0,
-						mouseX                     = 0,
-						mouseXOnMouseDown          = 0,
-						mouseY                     = 0,
-						mouseYOnMouseDown          = 0,
-						windowHalfX                = stageW / 2,
-						windowHalfY                = stageH / 2,
-						moveMagnitude              = 0.25;
-
-					document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-
-					function onDocumentMouseDown( event ) {
-
-						event.preventDefault();
-
-						document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-						document.addEventListener( 'mouseup', onDocumentMouseUp, false );
-						document.addEventListener( 'mouseout', onDocumentMouseOut, false );
-
-						mouseXOnMouseDown = event.offsetX - windowHalfX;
-						targetRotationOnMouseDownX = targetRotationX;
-
-						mouseYOnMouseDown = event.offsetY - windowHalfY;
-						targetRotationOnMouseDownY = targetRotationY;
-					}
-
-					function onDocumentMouseMove( event ) {
-
-						mouseX = event.offsetX - windowHalfX;
-
-						targetRotationX = ( mouseX - mouseXOnMouseDown ) * moveMagnitude;
-
-						mouseY = event.offsetY - windowHalfY;
-
-						targetRotationY = ( mouseY - mouseYOnMouseDown ) * moveMagnitude;
-
-
-					}
-
-					function onDocumentMouseUp( event ) {
-
-						document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
-						document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
-						document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
-					}
-
-					function onDocumentMouseOut( event ) {
-
-						document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
-						document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
-						document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
-					}
-
-
-					//Converts numeric degrees to radians
-					function toRad( number ) {
-						return number * Math.PI / 180;
-					}
-
-					// ------------ Responsive plane geometries
-					window.addEventListener( 'resize', function () {
-
-						camera.aspect = window.innerWidth / window.innerHeight;
-						camera.updateProjectionMatrix();
-
-						webGLRenderer.setSize( slider.width(), slider.height() );
-
-					}, false );
-					
-					
-					
 				}// end effect
 					
 				
@@ -2763,37 +3196,30 @@ theme = ( function ( theme, $, window, document ) {
 				
 				
 				//Check if the picture is loaded on the page
-				var $curImg = $items.first().find( 'img' ),
-					curImgH = 0,
-					img     = new Image();
-				img.onload = function() {
-					
-					curImgH = $curImg.height();
-					$this.css( 'height', curImgH + 'px' );
-					
-					//Load slides to canvas
-					//-------------------------------------	
-					$this.find( '.item' ).each( function( index )  {
+				var $curImg, 
+					realSrc,
+					curImgH    = false,
+					img        = new Image();
 
-						//Canvas Interactions
-						if ( $items.eq( index ).find( 'video' ).length == 0 ) {
-
-							if ( $( '#custom-advanced-slider-canvas-item-'+index ).length == 0 ) {
-								$( this ).prepend( '<canvas id="custom-advanced-slider-canvas-item-'+index+'" width="'+$this.width()+'" height="'+$this.height()+'"></canvas>' );
-							}		
-						}
-
-
-					});	
-	
+				if ( $items.first().find( 'img' ).length == 0 ) {
+					$curImg    = $items.first().find( 'video' );
+					realSrc    = $curImg.attr( 'poster' );
+				} else {
+					$curImg    = $items.first().find( 'img' );
+					realSrc    = $curImg.attr( 'src' );	
 				}
-				img.src = $curImg.attr( 'src' );
-				
-				
-
-				
 
 
+				img.onload = function() {
+
+					curImgH = img.height*(img.width/windowWidth);
+					$this.css( 'height', curImgH + 'px' );
+
+				}
+
+				img.src = realSrc;
+
+			
 				
 				
 			
@@ -2997,18 +3423,35 @@ theme = ( function ( theme, $, window, document ) {
 			
 			
 			
+			
 			//Reset the slider height
 			//-------------------------------------	
-			var $curImg    = $current.find( 'img' ),
+			var $curImg, 
+				realSrc,
 				curNewImgH = false,
 				img        = new Image();
+			
+			if ( $current.find( 'img' ).length == 0 ) {
+			    $curImg    = $current.find( 'video' );
+				realSrc    = $curImg.attr( 'poster' );
+			} else {
+			    $curImg    = $current.find( 'img' );
+				realSrc    = $curImg.attr( 'src' );	
+			}
+		
+			
 			img.onload = function() {
 
-				curNewImgH = $curImg.height();
+				curNewImgH = img.height*(img.width/windowWidth);
 				slider.css( 'height', curNewImgH + 'px' );
+				
+				console.log( img.naturalHeight );
 
 			}
-			img.src = $curImg.attr( 'src' );
+			
+			img.src = realSrc;
+
+
 
 
 			
@@ -7909,162 +8352,6 @@ theme = ( function ( theme, $, window, document ) {
 
 /* 
  *************************************
- * <!-- Navigation Highlighting -->
- *************************************
- */
-theme = ( function ( theme, $, window, document ) {
-    'use strict';
-    
-    var documentReady = function( $ ) {
-
-		var $primaryMenu      = $( '.menu-main' ),
-			$sidefixedMenu    = $( '.custom-sidefixed-menu' ),
-			topSectionSpacing = $( '.header-area' ).outerHeight( true );
-		
-
-		/*
-		 * Get section or article by href
-		 *
-		 * @param  {string, object} el  - The current selector or selector ID
-		 * @return {object}             - A new selector.
-		 */
-        function getRelatedContent( el ) {
-            return $( $( el ).attr( 'href' ) );
-        }
-		
-		/*
-		 * Get link by section or article id
-		 *
-		 * @param  {string, object} el  - The current selector or selector ID
-		 * @param  {object} menuObj     - Returns the menu element within the document.
-		 * @return {object}             - A new selector.
-		 */
-        function getRelatedNavigation( el, menuObj ) {
-            return menuObj.find( 'li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' );
-        } 
-		
-		/*
-		 * Get all links by section or article
-		 *
-		 * @param  {object} menuObj     - Returns the menu element within the document.
-		 * @return {object}             - A new selector.
-		 */
-        function getAllNavigation( menuObj ) {
-            return menuObj.find( 'li' );
-        } 	
-		
-		/*
-		 * Smooth scroll to content
-		 *
-		 * @param  {object} menuObj     - Returns the menu element within the document.
-		 * @return {void}               - The constructor.
-		 */
-        function goPageSection( menuObj ) {
-			menuObj.find( 'li > a' ).on('click', function(e) {
-				e.preventDefault();
-				
-				
-				TweenLite.to( window, 0.5, {
-					scrollTo: {
-						y: getRelatedContent( this ).offset().top - topSectionSpacing
-					},
-					ease: Power2.easeOut
-				});	
-			
-			});	
-	
-        } 	
-        
-		
-		//-------- Scroll Animate Interactions
-		//-----------------------------
-		if ( $( 'body' ).hasClass( 'onepage' ) ) {
-
-			//Activate the first item
-			$primaryMenu.find( 'li:first' ).addClass( 'active' );
-			$sidefixedMenu.find( 'li:first' ).addClass( 'active' );
-	
-			// Smooth scroll to content
-			goPageSection( $primaryMenu );
-			goPageSection( $sidefixedMenu );
-			
-			
-			var navMinTop      = $sidefixedMenu.offset().top,
-				navMaxTop      = parseFloat( $( document ).height() - $( '.footer-main-container' ).height() ) - $( window ).height()/3;
-			
-			$( window ).on( 'scroll touchmove', function() {
-				var scrollTop = $( this ).scrollTop(),
-					spyTop    = parseFloat( scrollTop + topSectionSpacing ),
-					minTop    = $( '[data-highlight-section="true"]' ).first().offset().top,
-					maxTop    = $( '[data-highlight-section="true"]' ).last().offset().top + $( '[data-highlight-section="true"]' ).last().height();
-
-				
-				$( '[data-highlight-section="true"]' ).each( function()  {
-					var block     = $( this ),
-						eleTop    = block.offset().top;
-					
-			
-					if ( eleTop < spyTop ) {
-
-						// Highlight element when related content
-						getAllNavigation( $primaryMenu ).removeClass( 'active' );
-						getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
-						getRelatedNavigation( block, $primaryMenu ).addClass( 'active' );
-						getRelatedNavigation( block, $sidefixedMenu ).addClass( 'active' );
-					} 
-				});
-				
-				
-				
-				//Cancel the current highlight element
-				if ( spyTop > maxTop || spyTop < minTop ) {
-					getAllNavigation( $primaryMenu ).removeClass( 'active' );
-					getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
-				}
-				
-				
-				//Detecting when user scrolls to bottom of div
-				if ( spyTop > navMaxTop || spyTop < navMinTop ) {
-					$sidefixedMenu.removeClass( 'fixed' );
-				} else {
-					$sidefixedMenu.addClass( 'fixed' );
-				}	
-				
-				
-				
-				
-			});	
-			
-			
-			
-
-		}
-
-		
-		
-		
-		
-    };
-
-    theme.navHighlight = {
-        documentReady : documentReady        
-    };
-
-    theme.components.documentReady.push( documentReady );
-    return theme;
-
-}( theme, jQuery, window, document ) );
-
-
-
-
-
-
-
-
-
-/* 
- *************************************
  * <!-- Multiple Items Carousel -->
  *************************************
  */
@@ -8478,6 +8765,162 @@ theme = ( function ( theme, $, window, document ) {
     return theme;
 
 }( theme, jQuery, window, document ) );
+
+
+
+
+
+
+
+/* 
+ *************************************
+ * <!-- Navigation Highlighting -->
+ *************************************
+ */
+theme = ( function ( theme, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+
+		var $primaryMenu      = $( '.menu-main' ),
+			$sidefixedMenu    = $( '.custom-sidefixed-menu' ),
+			topSectionSpacing = $( '.header-area' ).outerHeight( true );
+		
+
+		/*
+		 * Get section or article by href
+		 *
+		 * @param  {string, object} el  - The current selector or selector ID
+		 * @return {object}             - A new selector.
+		 */
+        function getRelatedContent( el ) {
+            return $( $( el ).attr( 'href' ) );
+        }
+		
+		/*
+		 * Get link by section or article id
+		 *
+		 * @param  {string, object} el  - The current selector or selector ID
+		 * @param  {object} menuObj     - Returns the menu element within the document.
+		 * @return {object}             - A new selector.
+		 */
+        function getRelatedNavigation( el, menuObj ) {
+            return menuObj.find( 'li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' );
+        } 
+		
+		/*
+		 * Get all links by section or article
+		 *
+		 * @param  {object} menuObj     - Returns the menu element within the document.
+		 * @return {object}             - A new selector.
+		 */
+        function getAllNavigation( menuObj ) {
+            return menuObj.find( 'li' );
+        } 	
+		
+		/*
+		 * Smooth scroll to content
+		 *
+		 * @param  {object} menuObj     - Returns the menu element within the document.
+		 * @return {void}               - The constructor.
+		 */
+        function goPageSection( menuObj ) {
+			menuObj.find( 'li > a' ).on('click', function(e) {
+				e.preventDefault();
+				
+				
+				TweenLite.to( window, 0.5, {
+					scrollTo: {
+						y: getRelatedContent( this ).offset().top - topSectionSpacing
+					},
+					ease: Power2.easeOut
+				});	
+			
+			});	
+	
+        } 	
+        
+		
+		//-------- Scroll Animate Interactions
+		//-----------------------------
+		if ( $( 'body' ).hasClass( 'onepage' ) ) {
+
+			//Activate the first item
+			$primaryMenu.find( 'li:first' ).addClass( 'active' );
+			$sidefixedMenu.find( 'li:first' ).addClass( 'active' );
+	
+			// Smooth scroll to content
+			goPageSection( $primaryMenu );
+			goPageSection( $sidefixedMenu );
+			
+			
+			var navMinTop      = $sidefixedMenu.offset().top,
+				navMaxTop      = parseFloat( $( document ).height() - $( '.footer-main-container' ).height() ) - $( window ).height()/3;
+			
+			$( window ).on( 'scroll touchmove', function() {
+				var scrollTop = $( this ).scrollTop(),
+					spyTop    = parseFloat( scrollTop + topSectionSpacing ),
+					minTop    = $( '[data-highlight-section="true"]' ).first().offset().top,
+					maxTop    = $( '[data-highlight-section="true"]' ).last().offset().top + $( '[data-highlight-section="true"]' ).last().height();
+
+				
+				$( '[data-highlight-section="true"]' ).each( function()  {
+					var block     = $( this ),
+						eleTop    = block.offset().top;
+					
+			
+					if ( eleTop < spyTop ) {
+
+						// Highlight element when related content
+						getAllNavigation( $primaryMenu ).removeClass( 'active' );
+						getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
+						getRelatedNavigation( block, $primaryMenu ).addClass( 'active' );
+						getRelatedNavigation( block, $sidefixedMenu ).addClass( 'active' );
+					} 
+				});
+				
+				
+				
+				//Cancel the current highlight element
+				if ( spyTop > maxTop || spyTop < minTop ) {
+					getAllNavigation( $primaryMenu ).removeClass( 'active' );
+					getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
+				}
+				
+				
+				//Detecting when user scrolls to bottom of div
+				if ( spyTop > navMaxTop || spyTop < navMinTop ) {
+					$sidefixedMenu.removeClass( 'fixed' );
+				} else {
+					$sidefixedMenu.addClass( 'fixed' );
+				}	
+				
+				
+				
+				
+			});	
+			
+			
+			
+
+		}
+
+		
+		
+		
+		
+    };
+
+    theme.navHighlight = {
+        documentReady : documentReady        
+    };
+
+    theme.components.documentReady.push( documentReady );
+    return theme;
+
+}( theme, jQuery, window, document ) );
+
+
 
 
 
@@ -17083,7 +17526,7 @@ var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(globa
  * <!-- GSAP Plugins -->
  *************************************
  */
-/**
+/*
  * @author qiao / https://github.com/qiao
  * @author mrdoob / http://mrdoob.com
  * @author alteredq / http://alteredqualia.com/

@@ -1,10 +1,12 @@
 {
   "author": "UIUX Lab",
   "name": "uix-kit",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "Uix Kit (https://github.com/xizon/uix-kit)",
   "main": "gulpfile.js",
-  "dependencies": {},
+  "dependencies": {
+    "npm": "^6.0.0"
+  },
   "devDependencies": {
     "crypto": "^1.0.1",
     "del": "^3.0.0",
@@ -33,6 +35,7 @@
     "gulp-uglify": "^3.0.0",
     "gulp-version-number": "^0.1.7",
     "gulp-version-replace": "^1.0.9",
+    "hoek": "^5.0.3",
     "js-md5": "^0.7.3",
     "jshint": "^2.9.5",
     "path": "^0.12.7",
