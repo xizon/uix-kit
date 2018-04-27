@@ -81,7 +81,7 @@ theme = ( function ( theme, $, window, document ) {
 						videoURL = $first.find( 'source:first' ).attr( 'src' );
 
 					video.addEventListener( 'loadedmetadata', function( e ) {
-						$this.css( 'height', this.videoHeight*(windowWidth/this.videoWidth) + 'px' );	
+						$this.css( 'height', this.videoHeight*($this.width()/this.videoWidth) + 'px' );	
 
 						nativeItemW = this.videoWidth;
 						nativeItemH = this.videoHeight;	
@@ -100,7 +100,7 @@ theme = ( function ( theme, $, window, document ) {
 						img      = new Image();
 
 					img.onload = function() {
-						$this.css( 'height', windowWidth*(this.height/this.width) + 'px' );		
+						$this.css( 'height', $this.width()*(this.height/this.width) + 'px' );		
 
 						nativeItemW = this.width;
 						nativeItemH = this.height;	
@@ -457,6 +457,20 @@ theme = ( function ( theme, $, window, document ) {
 
 				var texture;
 				
+				//Drag and Drop
+				var targetRotationX             = 0,
+					targetRotationXOnMouseDown  = 0,
+				    targetRotationY             = 0,
+					targetRotationYOnMouseDown  = 0,
+					mouseX                      = 0,
+					mouseY                      = 0,
+					mouseXOnMouseDown           = 0,
+					mouseYOnMouseDown           = 0,
+					windowHalfX                 = $this.width() / 2,
+					windowHalfY                 = $this.height() / 2;
+
+				
+				
 				init();
 				animate();
 
@@ -493,27 +507,13 @@ theme = ( function ( theme, $, window, document ) {
 
 						// Create a camera, which defines where we're looking at.
 						var aspect      = $this.width() / $this.height(),
-							camera      = new THREE.PerspectiveCamera( 45, aspect, 0.1, 1000 );
+							camera      = new THREE.PerspectiveCamera( 55, aspect, 0.1, 1000 );
 
 						camera.position.x = 0;
-						camera.position.y = 12;
-						camera.position.z = 2000;
+						camera.position.y = -30;
+						camera.position.z = 25;
 						camera.lookAt( new THREE.Vector3( 0, 0, 0 ) );
 						scene.userData.camera = camera;
-
-
-
-						//Allow the camera to orbit around a target.
-						var controls = new THREE.OrbitControls( scene.userData.camera, scene.userData.element );
-						controls.enableDamping = true;
-						controls.dampingFactor = 0.15;
-						controls.screenSpacePanning = false;
-						controls.minDistance = 0;
-						controls.maxDistance = 30;
-						controls.maxPolarAngle = Math.PI / 2;
-
-						scene.userData.controls = controls;
-
 
 
 						// Generate one plane geometries mesh to each scene
@@ -549,13 +549,12 @@ theme = ( function ( theme, $, window, document ) {
 						// Immediately use the texture for material creation
 						var spriteMat            = new THREE.MeshPhongMaterial( { map: texture } ),
 							imgRatio             = $this.width() / $this.height(),
-							geometry             = new THREE.BoxGeometry( imgRatio*13, 13, 2 ),
+							geometry             = new THREE.BoxGeometry( imgRatio*15, 15, 2 ),
 							displacementSprite   = new THREE.Mesh( geometry, spriteMat );
 
 						displacementSprite.position.set( -0.01, -0.01, 0 );
 						displacementSprite.rotation.set( 0, 0, 0 );
 						scene.add( displacementSprite );
-
 
 
 						// Generate Ambient Light
@@ -611,39 +610,35 @@ theme = ( function ( theme, $, window, document ) {
 
 					scenesAll.forEach( function( scene, i ) {
 
+						// Get the element that is a place holder for where we want to draw the scene
+						var element = scene.userData.element,
+							camera  = scene.userData.camera,
+							rect    = element.getBoundingClientRect();
+						
 						
 						//automatic rotation
-						if ( !dragDropNow ) {
-							scene.children[0].rotation.y = Date.now() * 0.0001;
-						}
+						scene.children[0].rotation.y = Date.now() * 0.0001;
 
 
 						//drag & drop
-						if ( dragDropNow ) {
-							scene.children[0].rotation.x = toRad( targetRotationX * 1 );
-							scene.children[0].rotation.y = toRad( targetRotationY * 1 );	
-						}
+//						scene.children[0].rotation.x = toRad( targetRotationX * 4 );
+//						scene.children[0].rotation.y = toRad( targetRotationY * 4 );	
+//						
+						//drag & drop with easing effect
+						scene.children[0].rotation.x += ( targetRotationX - scene.children[0].rotation.x ) * 0.05;
+						scene.children[0].rotation.y += ( targetRotationY - scene.children[0].rotation.y ) * 0.05;
 
-						// Get the element that is a place holder for where we want to draw the scene
-						var element = scene.userData.element;	
-
-
-						// Get its position relative to the page's viewport
-						var rect = element.getBoundingClientRect();
 
 						// set the viewport
 						webGLRenderer.setViewport( 0, 0, rect.width, rect.height );
 						webGLRenderer.setScissor( 0, 0, rect.width, rect.height );
 
-						// get the camera
-						var camera = scene.userData.camera;
-
-						//get the controls
-						scene.userData.controls.update();
-
+					
 						//tell texture object it needs to be updated
 						texture.needsUpdate = true;
 
+						camera.aspect = $this.width() / $this.height(); // not changing in this example
+						camera.updateProjectionMatrix();
 						
 						//drag & drop
 						webGLRenderer.render( scene, camera );
@@ -653,77 +648,49 @@ theme = ( function ( theme, $, window, document ) {
 				}
 
 
-
-				//Mouse drag Rotate
-				//-------------------------------------
-				var dragDropNow                = false,
-					targetRotationX            = 0.5,
-					targetRotationOnMouseDownX = 0,
-					targetRotationY            = 0.2,
-					targetRotationOnMouseDownY = 0,
-					mouseX                     = 0,
-					mouseXOnMouseDown          = 0,
-					mouseY                     = 0,
-					mouseYOnMouseDown          = 0,
-					windowHalfX                = $this.width() / 2,
-					windowHalfY                = $this.height() / 2,
-					moveMagnitude              = 0.25;
+				//Rotation and Drop
 
 				document.addEventListener( 'mousedown', onDocumentMouseDown, false );
 
-				function onDocumentMouseDown( event ) {
-
-					event.preventDefault();
-
+				function onDocumentMouseDown( e ) {
+					e.preventDefault( );
 					document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 					document.addEventListener( 'mouseup', onDocumentMouseUp, false );
 					document.addEventListener( 'mouseout', onDocumentMouseOut, false );
-
-					mouseXOnMouseDown = event.offsetX - windowHalfX;
-					targetRotationOnMouseDownX = targetRotationX;
-
-					mouseYOnMouseDown = event.offsetY - windowHalfY;
-					targetRotationOnMouseDownY = targetRotationY;
-
-					dragDropNow = true;
+					mouseXOnMouseDown = e.clientX - windowHalfX;
+					mouseYOnMouseDown = e.clientY - windowHalfY;
+					targetRotationXOnMouseDown = targetRotationX;
+					targetRotationYOnMouseDown = targetRotationY;
 				}
 
-				function onDocumentMouseMove( event ) {
-
-					mouseX = event.offsetX - windowHalfX;
-					targetRotationX = ( mouseX - mouseXOnMouseDown ) * moveMagnitude;
-
-					mouseY = event.offsetY - windowHalfY;
-					targetRotationY = ( mouseY - mouseYOnMouseDown ) * moveMagnitude;
-
-
+				function onDocumentMouseMove( e ) {
+					mouseX = e.clientX - windowHalfX;
+					mouseY = e.clientY - windowHalfY;
+					targetRotationX = targetRotationXOnMouseDown + (mouseX - mouseXOnMouseDown) * 0.02;
+					targetRotationY = targetRotationYOnMouseDown + (mouseY - mouseYOnMouseDown) * 0.02;
 				}
 
-				function onDocumentMouseUp( event ) {
-
+				function onDocumentMouseUp( e ) {
 					document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
 					document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
 					document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
 
-					dragDropNow = false;
-
 				}
 
-				function onDocumentMouseOut( event ) {
-
+				function onDocumentMouseOut( e ) {
 					document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
 					document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
 					document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
 
-					dragDropNow = false;
 				}
-
 
 				//Converts numeric degrees to radians
 				function toRad( number ) {
 					return number * Math.PI / 180;
 				}
 
+				
+				
 
 				//Responsive plane geometries
 				//-------------------------------------
@@ -1031,7 +998,7 @@ theme = ( function ( theme, $, window, document ) {
 				video.addEventListener( 'loadedmetadata', function( e ) {
 
 					//At the same time change the height of the canvas and slider container
-					var h = this.videoHeight*(windowWidth/this.videoWidth);
+					var h = this.videoHeight*(slider.closest( '.custom-advanced-slider-outer' ).width()/this.videoWidth);
 					renderer.view.style.height = h + 'px';
 					//---
 					$sliderWrapper.css( 'height', h + 'px' );	
@@ -1051,13 +1018,14 @@ theme = ( function ( theme, $, window, document ) {
 
 					renderer.view.style.height = slider.find( 'img' ).height() + 'px';	
 					//---
-					$sliderWrapper.css( 'height', windowWidth*(this.height/this.width) + 'px' );		
+					$sliderWrapper.css( 'height', slider.closest( '.custom-advanced-slider-outer' ).width()*(this.height/this.width) + 'px' );		
 
 				}
 
 				img.src = imgURL;
 
 			}	
+			
 
 
 		}
