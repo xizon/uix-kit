@@ -1,6 +1,6 @@
 # Changelog
 
-#### = 1.4.3 (April 27, 2018) =
+#### = 1.4.5 (April 27, 2018) =
 
 * New: Add a new liquid effect for module "Advanced Slider".
 * New: Add hash event to fullpage scripts.

@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.4.3
+ * ## Version             :  1.4.5
  * ## Last Update         :  April 28, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -32,16 +32,16 @@
     7. Common Height 
     8. Mega Menu 
     9. Dropdown Categories 
-    10. Pagination 
-    11. Specify a background image 
+    10. Specify a background image 
+    11. Pagination 
     12. Accordion 
     13. Advanced Slider (Special Effects) 
     14. Advanced Slider (Basic) 
     15. Counter 
     16. Dynamic Drop Down List from JSON 
-    17. Form 
-    18. Form Progress 
-    19. Full Page Transition 
+    17. Form Progress 
+    18. Full Page Transition 
+    19. Form 
     20. Gallery 
     21. Image Shapes 
     22. Custom Core Scripts & Stylesheets 
@@ -71,7 +71,6 @@
     46. Timeline 
     47. AJAX 
     48. GSAP Plugins 
-    49. Three.js Plugins 
 
 
 */
@@ -1444,7 +1443,7 @@ theme = ( function ( theme, $, window, document ) {
 theme = ( function ( theme, $, window, document ) {
     'use strict';
     
-    var documentReady = function( $ ) {
+    var pageLoaded = function() {
 		
 	
 		var $window                   = $( window ),
@@ -2995,10 +2994,10 @@ theme = ( function ( theme, $, window, document ) {
 
 	
     theme.advancedSlider_SpecialEffects = {
-        documentReady : documentReady        
+        pageLoaded : pageLoaded        
     };
 
-    theme.components.documentReady.push( documentReady );
+    theme.components.pageLoaded.push( pageLoaded );
     return theme;
 
 }( theme, jQuery, window, document ) );
@@ -3013,7 +3012,7 @@ theme = ( function ( theme, $, window, document ) {
 theme = ( function ( theme, $, window, document ) {
     'use strict';
     
-    var documentReady = function( $ ) {
+    var pageLoaded = function() {
 		
 	
 		var $window            = $( window ),
@@ -3613,13 +3612,14 @@ theme = ( function ( theme, $, window, document ) {
 
 	
     theme.advancedSlider = {
-        documentReady : documentReady        
+        pageLoaded : pageLoaded        
     };
 
-    theme.components.documentReady.push( documentReady );
+    theme.components.pageLoaded.push( pageLoaded );
     return theme;
 
 }( theme, jQuery, window, document ) );
+
 
 
 
@@ -17636,4 +17636,5 @@ var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(globa
  *************************************
  * <!-- Three.js Plugins -->
  *************************************
+ */**********************
  */
