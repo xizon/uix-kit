@@ -2,7 +2,7 @@
 
 
 
-#### = 1.4.6 (April 28, 2018) =
+#### = 1.4.7 (April 28, 2018) =
 
 * New: Added mobile touch function for three.js demo.
 * Fix: Fixed an switching error for "Advanced Slider".

@@ -11,7 +11,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.4.5
+ * ## Version             :  1.4.7
  * ## Last Update         :  April 28, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -36,16 +36,19 @@
     8. Sidebar 
     9. Search 
     10. Comments 
-    11. Author Card 
-    12. Dropdown Menu 
-    13. Form 
-    14. Brands List 
-    15. Bulleted List 
-    16. Maintain Aspect Ratio List 
-    17. Side by Side List 
-    18. Mobile Menu 
-    19. Slideshow ( with custom flexslider ) 
-    20. Source Code 
+    11. Advanced Slider (Special Effects) 
+    12. Advanced Slider (Basic) 
+    13. Author Card 
+    14. Dropdown Menu 
+    15. Flexslider 
+    16. Form 
+    17. Brands List 
+    18. Bulleted List 
+    19. Maintain Aspect Ratio List 
+    20. Side by Side List 
+    21. Mobile Menu 
+    22. Source Code 
+    23. ToolTip 
 
 
 
@@ -358,6 +361,89 @@ blockquote:before {
 }
 
 /* ====================================================== 
+   <!-- Advanced Slider (Special Effects) -->     
+/* ====================================================== */
+/* 
+ ---------------------------
+ 1) Initialize the slider style
+ ---------------------------
+ */
+.custom-advanced-slider-sp canvas {
+    left: auto;
+    right: 0;
+}
+
+.custom-advanced-slider-sp .inner .item {
+    left: auto;
+    right: 0;
+}
+
+/* 
+ ---------------------------
+ 2) Pagination dots 
+ ---------------------------
+ */
+.custom-advanced-slider-sp-pagination ul {
+    left: auto;
+    right: 0;
+}
+
+/* 
+ ---------------------------
+ 3) Next/Prev buttons
+ ---------------------------
+ */
+.custom-advanced-slider-sp-arrows .prev {
+    left: auto;
+    right: 15px;
+}
+
+.custom-advanced-slider-sp-arrows .next {
+    right: auto;
+    left: 15px;
+    text-align: left;
+}
+
+/* ====================================================== 
+   <!-- Advanced Slider (Basic) -->     
+/* ====================================================== */
+/* 
+ ---------------------------
+ 1) Initialize the slider style
+ ---------------------------
+ */
+.custom-advanced-slider .inner .item {
+    left: auto;
+    right: 0;
+}
+
+/* 
+ ---------------------------
+ 2) Pagination dots 
+ ---------------------------
+ */
+.custom-advanced-slider-pagination ul {
+    left: auto;
+    right: 0;
+}
+
+/* 
+ ---------------------------
+ 3) Next/Prev buttons
+ ---------------------------
+ */
+.custom-advanced-slider-arrows .prev {
+    left: auto;
+    right: 15px;
+}
+
+.custom-advanced-slider-arrows .next {
+    right: auto;
+    left: 15px;
+    text-align: left;
+}
+
+/* ====================================================== 
     <!-- Author Card -->    
 /* ====================================================== */
 .author-card-final {
@@ -376,6 +462,14 @@ blockquote:before {
 .custom-dropdown-trigger > ul:before {
     left: auto;
     right: 20px;
+}
+
+/* ====================================================== 
+   <!-- Flexslider -->
+/* ====================================================== */
+.flexslider,
+.custom-theme-flexslider {
+    direction: ltr !important;
 }
 
 /* ====================================================== 
@@ -760,14 +854,6 @@ dl.list-side-by-side dd {
 }
 
 /* ====================================================== 
-   <!-- Slideshow ( with custom flexslider ) -->
-/* ====================================================== */
-.flexslider,
-.custom-theme-flexslider {
-    direction: ltr !important;
-}
-
-/* ====================================================== 
     <!-- Source Code -->       
 /* ====================================================== */
 /* Pretty printing styles. Used with prettify.js. */
@@ -790,4 +876,3 @@ pre.prettyprint {
 }
 
 /*# sourceMappingURL=uix-kit-rtl.css.map */
-t-rtl.css.map */

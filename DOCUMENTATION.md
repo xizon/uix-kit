@@ -101,7 +101,6 @@ http://localhost:8080/examples/
         <!-- Basic  -->
         <link rel="stylesheet" href="assets/css/bootstrap.min.css?ver=3.3.7" media="all"/>
 		<link rel="stylesheet" href="assets/css/video.min.css?ver=5.19" media="all"/>
-        <link rel="stylesheet" href="assets/css/flexslider.min.css?ver=2.6.2" media="all" />
 		<link rel="stylesheet" href="assets/css/animate.min.css?ver=3.5.2" media="all" />
 		
         <!-- Icons  -->
@@ -158,10 +157,6 @@ http://localhost:8080/examples/
     <script src="assets/js/min/pixi.min.js?ver=4.7.1"></script>
     <script src="assets/js/min/three.min.js?ver=r92"></script>
 
-
-    <!-- Slideshow  -->
-    <script src="assets/js/min/jquery.flexslider.min.js?ver=2.7.0"></script>
-    
     <!-- Masonry -->
     <script src="assets/js/wp-jquery/masonry.min.js?ver=3.3.2"></script>
     <script src="assets/js/wp-jquery/imagesloaded.min.js?ver=4.1.0"></script>

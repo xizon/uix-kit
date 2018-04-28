@@ -1,7 +1,7 @@
 
 /* 
  *************************************
- * <!-- Slideshow ( with custom flexslider ) -->
+ * <!-- Flexslider -->
  *************************************
  */
 theme = ( function ( theme, $, window, document ) {

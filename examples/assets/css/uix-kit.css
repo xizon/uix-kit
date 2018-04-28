@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.4.5
+ * ## Version             :  1.4.7
  * ## Last Update         :  April 28, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -101,35 +101,35 @@
     33. Dropdown Menu 
     34. Equal-width Divs 
     35. Features 
-    36. Footer Templates 
-    37. Form 
-    38. Form Progress 
-    39. Gallery 
-    40. Image Shapes 
-    41. Custom Core Scripts & Stylesheets 
-    42. Cutom Light Box 
-    43. Brands List 
-    44. Bulleted List 
-    45. Maintain Aspect Ratio List 
-    46. List of Posts 
-    47. List of Split Posts 
-    48. Side by Side List 
-    49. Side by Side List With Photo 
-    50. Fullwidth List of Split 2 
-    51. Fullwidth List of Split 
-    52. Mobile Menu 
-    53. Modal Dialog 
-    54. Mouse Animation Scroll 
-    55. Multiple Items Carousel 
-    56. Onepage Menu 
-    57. Parallax 
-    58. Periodical Scroll 
-    59. Pricing 
-    60. Progress Bar 
-    61. Services 
-    62. Show More Less 
-    63. Single Post 
-    64. Slideshow ( with custom flexslider ) 
+    36. Flexslider 
+    37. Footer Templates 
+    38. Form 
+    39. Form Progress 
+    40. Gallery 
+    41. Image Shapes 
+    42. Custom Core Scripts & Stylesheets 
+    43. Cutom Light Box 
+    44. Brands List 
+    45. Bulleted List 
+    46. Maintain Aspect Ratio List 
+    47. List of Posts 
+    48. List of Split Posts 
+    49. Side by Side List 
+    50. Side by Side List With Photo 
+    51. Fullwidth List of Split 2 
+    52. Fullwidth List of Split 
+    53. Mobile Menu 
+    54. Modal Dialog 
+    55. Mouse Animation Scroll 
+    56. Multiple Items Carousel 
+    57. Onepage Menu 
+    58. Parallax 
+    59. Periodical Scroll 
+    60. Pricing 
+    61. Progress Bar 
+    62. Services 
+    63. Show More Less 
+    64. Single Post 
     65. Source Code 
     66. Table Series 
     67. Tabs 
@@ -4256,6 +4256,598 @@ ul.entry-meta {
 .custom-feature .desc.desc-sep-col.sep-col {
     display: table-cell;
     vertical-align: top;
+}
+
+/* ====================================================== 
+    <!-- Flexslider -->  
+/* ====================================================== */
+/* 
+ ---------------------------
+ 1) Thumbnail ControlNav Pattern 
+ ---------------------------
+ */
+.custom-theme-flexslider-thumbs {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+    overflow-x: auto;
+    white-space: nowrap;
+    margin-top: 1.5rem;
+}
+
+.custom-theme-flexslider-thumbs::-webkit-scrollbar-track {
+    border-radius: 0px;
+    background-color: #E6E3E3;
+}
+
+.custom-theme-flexslider-thumbs::-webkit-scrollbar {
+    height: 5px;
+    background-color: #EC5E79;
+}
+
+.custom-theme-flexslider-thumbs::-webkit-scrollbar-thumb {
+    border-radius: 0px;
+    background-color: #EC5E79;
+}
+
+.custom-theme-flexslider-thumbs ul {
+    margin: 0;
+    padding: 0;
+}
+
+.custom-theme-flexslider-thumbs ul li {
+    width: 100px;
+    max-height: 100px;
+    display: inline-block;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 0;
+    transform: scale(0.9);
+}
+
+.custom-theme-flexslider-thumbs ul li.active {
+    transform: scale(1);
+}
+
+.custom-theme-flexslider-thumbs ul li img {
+    box-shadow: 0px 6px 11px 1px rgba(0, 0, 0, 0.15);
+}
+
+/* 
+ ---------------------------
+ 2) Default Slideshow        
+ ---------------------------
+ */
+.custom-theme-flexslider, .custom-theme-flex-viewport {
+    transition: .1s ease;
+}
+
+.custom-theme-flexslider {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    zoom: 1;
+    width: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.custom-theme-flex-viewport {
+    max-height: 200vh;
+}
+
+.custom-theme-flexslider .custom-theme-slides > .item {
+    display: none;
+    -webkit-backface-visibility: hidden;
+    position: relative;
+}
+
+.custom-theme-flexslider .custom-theme-slides img {
+    max-width: 100%;
+    display: block;
+    border: none;
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+}
+
+html[xmlns] .custom-theme-flexslider .custom-theme-slides {
+    display: block;
+}
+
+* html .custom-theme-flexslider .custom-theme-slides {
+    height: 1%;
+}
+
+.no-js .custom-theme-flexslider .custom-theme-slides > .item:first-child {
+    display: block;
+}
+
+.custom-theme-flexslider .custom-theme-slides {
+    zoom: 1;
+}
+
+.custom-theme-flexslider .custom-theme-slides img {
+    height: auto;
+    width: 100%;
+}
+
+/*----- Left and right arrows by default -----*/
+.custom-theme-flex-direction-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.custom-theme-flex-direction-nav .custom-theme-flex-prev {
+    left: -100px;
+}
+
+.custom-theme-flex-direction-nav .custom-theme-flex-next {
+    right: -100px;
+    text-align: right;
+}
+
+.custom-theme-flex-direction-nav li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: relative;
+}
+
+.custom-theme-flex-direction-nav li a {
+    display: block;
+    z-index: 9;
+    position: absolute;
+    top: 50%;
+    height: 40px;
+    margin-top: -20px;
+    line-height: 40px;
+    width: 50px;
+    text-align: center;
+    opacity: 0.8;
+    color: #fff;
+    font-size: 1.3125rem;
+    opacity: 0.66;
+}
+
+.custom-theme-flex-direction-nav li a:hover {
+    opacity: 1;
+    color: #fff;
+    text-decoration: none;
+}
+
+.custom-theme-flexslider:hover a.custom-theme-flex-prev {
+    left: 0;
+}
+
+.custom-theme-flexslider:hover a.custom-theme-flex-next {
+    right: 20px;
+}
+
+/*----- Pagination dots -----*/
+.custom-theme-flex-control-nav.custom-theme-flex-control-paging {
+    list-style: none;
+    left: 0;
+    bottom: 0;
+    font-size: 0;
+  /*Fighting the Space Between Inline Block Elements*/
+    display: block;
+    width: 100%;
+    text-align: center;
+  /*require*/
+    position: absolute;
+}
+
+.custom-theme-flex-control-nav.custom-theme-flex-control-paging li {
+    font-size: 16px;
+  /*Fighting the Space Between Inline Block Elements*/
+    display: inline-block;
+  /*require*/
+    margin: 0 .2rem;
+}
+
+.custom-theme-flex-control-nav.custom-theme-flex-control-paging li a {
+    width: 12px;
+    height: 12px;
+    display: block;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    text-indent: -9999px;
+    border-radius: 20px;
+    box-shadow: 0px 6px 23px -2px rgba(0, 0, 0, 0.36);
+}
+
+.custom-theme-flex-control-nav.custom-theme-flex-control-paging li a:hover, .custom-theme-flex-control-nav.custom-theme-flex-control-paging li a.custom-theme-flex-active {
+    background: white;
+    width: 25px;
+}
+
+/* Custom Style */
+.custom-controls-container .custom-theme-flex-control-nav.custom-theme-flex-control-paging {
+    position: relative;
+    transform: translateY(0.5rem);
+}
+
+.custom-controls-container .custom-theme-flex-control-nav.custom-theme-flex-control-paging li a {
+    background: rgba(233, 47, 22, 0.5);
+}
+
+.custom-controls-container .custom-theme-flex-control-nav.custom-theme-flex-control-paging li a:hover, .custom-controls-container .custom-theme-flex-control-nav.custom-theme-flex-control-paging li a.custom-theme-flex-active {
+    background: #e92f16;
+}
+
+/*----- Thumbnail -----*/
+.custom-theme-flex-control-thumbs {
+    margin: 5px 0 0;
+    position: static;
+    overflow: hidden;
+}
+
+.custom-theme-flex-control-thumbs li {
+    width: 25%;
+    float: left;
+    margin: 0;
+}
+
+.custom-theme-flex-control-thumbs img {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: .7;
+    cursor: pointer;
+    transition: .1s ease;
+}
+
+.custom-theme-flex-control-thumbs img:hover {
+    opacity: 1;
+}
+
+.custom-theme-flex-control-thumbs .custom-theme-flex-active {
+    opacity: 1;
+    cursor: default;
+}
+
+/*----- Left and right arrows by Custom Controls -----*/
+.custom-navigation {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    margin-top: 1.75rem;
+}
+
+.custom-navigation.custom-navigation-thumb {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: calc(100% - 30px);
+}
+
+.custom-navigation .thumb {
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: inline-block;
+    overflow: hidden;
+    transform: scale(0.7);
+    opacity: .5;
+  /* @include outer-shadow(); */
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+}
+
+.custom-navigation .thumb img {
+    width: 100%;
+    height: 100%;
+}
+
+.custom-navigation > * {
+    display: table-cell;
+}
+
+.custom-navigation > a {
+    width: 50px;
+}
+
+.custom-navigation > a:hover .thumb {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.custom-navigation .custom-theme-flex-prev.custom-theme-flex-disabled {
+    visibility: hidden;
+}
+
+.custom-navigation .custom-theme-flex-next {
+    text-align: right;
+}
+
+.custom-navigation .custom-theme-flex-next.custom-theme-flex-disabled {
+    visibility: hidden;
+}
+
+/*----- Next/Prev Image Thumbnail In Navigation -----*/
+.custom-prevnext-thumb-nav {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    margin-top: 1.75rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: calc(100% - 30px);
+}
+
+.custom-prevnext-thumb-nav a > span {
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: inline-block;
+    overflow: hidden;
+    transform: scale(0.7);
+    opacity: .5;
+  /* @include outer-shadow(); */
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+}
+
+.custom-prevnext-thumb-nav a > span img {
+    width: 100%;
+    height: 100%;
+}
+
+.custom-prevnext-thumb-nav > * {
+    display: table-cell;
+}
+
+.custom-prevnext-thumb-nav > a {
+    width: 50px;
+}
+
+.custom-prevnext-thumb-nav > a:hover > span {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.custom-prevnext-thumb-nav .thumb-prev.disabled {
+    display: none;
+}
+
+.custom-prevnext-thumb-nav .thumb-next {
+    text-align: right;
+}
+
+.custom-prevnext-thumb-nav .thumb-next.disabled {
+    display: none;
+}
+
+/*----- Timeline -----*/
+.custom-timeline-nav {
+    height: 3px;
+    position: relative;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    margin: 1rem 0;
+}
+
+.custom-timeline-nav > span {
+    display: block;
+    width: 0;
+    height: 100%;
+    background: #EC5E79;
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+}
+
+/* 
+ ---------------------------
+ 3) Primary Slideshow  (with dynamic min/max ranges )      
+ ---------------------------
+ */
+.custom-theme-flexslider.custom-itemgrid .item {
+    transition: .1s ease;
+    opacity: 0.2;
+}
+
+.custom-theme-flexslider.custom-itemgrid .item.custom-theme-flex-active-slide {
+    opacity: 1;
+}
+
+@media all and (max-width: 768px) {
+    .custom-theme-flexslider.custom-itemgrid .item {
+        opacity: 1;
+    }
+}
+
+/* 
+ ---------------------------
+ 4) Primary Slideshow    
+ ---------------------------
+ */
+.custom-theme-flexslider.custom-primary-flexslider {
+    overflow: hidden;
+  /* Full Screen Slider
+	 * You need add an attribute "data-slider-bg" to ".item"
+	*/;
+}
+
+.custom-theme-flexslider.custom-primary-flexslider.fullscreen {
+    min-height: 100vh;
+}
+
+.custom-theme-flexslider.custom-primary-flexslider.fullscreen img {
+    height: 100vh;
+    visibility: hidden;
+}
+
+.custom-theme-flexslider.custom-primary-flexslider .custom-theme-slides > .item {
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.custom-theme-flexslider.custom-primary-flexslider .custom-theme-slides > .item .slides-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: white;
+    width: 100%;
+  /* Vertical Center */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.custom-theme-flexslider.custom-primary-flexslider .custom-theme-slides > .item .slides-info .container .level {
+    animation-delay: .5s;
+    animation-duration: .6s;
+    animation-fill-mode: both;
+    animation-name: fadeOutLeft;
+}
+
+.custom-theme-flexslider.custom-primary-flexslider .custom-theme-slides > .item .slides-info .container .level-1,
+.custom-theme-flexslider.custom-primary-flexslider .custom-theme-slides > .item .slides-info .container .level-2 {
+    color: #fff;
+}
+
+.custom-theme-flexslider.custom-primary-flexslider .custom-theme-slides > .item.custom-theme-flex-active-slide .slides-info .container .level {
+    animation-delay: .4s;
+    animation-duration: .6s;
+    animation-fill-mode: both;
+    animation-name: fadeInLeft;
+}
+
+.custom-theme-flexslider.custom-primary-flexslider .custom-theme-slides > .item.custom-theme-flex-active-slide .slides-info .container .level-1 {
+    animation-delay: .4s;
+}
+
+.custom-theme-flexslider.custom-primary-flexslider .custom-theme-slides > .item.custom-theme-flex-active-slide .slides-info .container .level-2 {
+    animation-delay: .5s;
+}
+
+.custom-theme-flexslider.custom-primary-flexslider .custom-theme-slides > .item.custom-theme-flex-active-slide .slides-info .container .level-3 {
+    animation-delay: .6s;
+}
+
+@media all and (max-width: 991px) {
+    .custom-theme-flexslider.custom-primary-flexslider .custom-theme-slides > .item .slides-info .container .level-1 {
+        font-size: 7vw !important;
+        line-height: 7vw !important;
+        margin-bottom: 0;
+        line-height: 1.2 !important;
+    }
+
+    .custom-theme-flexslider.custom-primary-flexslider .custom-theme-slides > .item .slides-info .container .level-2 {
+        font-size: 4vw !important;
+        line-height: 4vw !important;
+    }
+}
+
+@media all and (max-width: 768px) {
+    .custom-theme-flexslider.custom-primary-flexslider.fullscreen {
+        min-height: inherit;
+    }
+
+    .custom-theme-flexslider.custom-primary-flexslider.fullscreen img {
+        height: auto;
+    }
+
+    .custom-theme-flexslider.custom-primary-flexslider .custom-theme-slides > .item .button {
+        font-size: 2vw !important;
+    }
+}
+
+@keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        transform: translate3d(-100%, 0, 0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes fadeOutLeft {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(-100%, 0, 0);
+    }
+}
+
+/* 
+ ---------------------------
+ 5) Parallax Slideshow                
+ ---------------------------
+ */
+.custom-theme-flexslider.custom-parallax-flexslider {
+    max-height: 100vh;
+    overflow: hidden;
+}
+
+.custom-theme-flexslider.custom-parallax-flexslider img {
+    max-height: 100vh;
+}
+
+.custom-theme-flexslider.custom-parallax-flexslider .custom-theme-slides > .item {
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.custom-theme-flexslider.custom-parallax-flexslider .custom-theme-slides > .item img {
+    max-height: calc( 100% - 2rem);
+}
+
+.custom-theme-flexslider.custom-parallax-flexslider .custom-theme-slides > .item .level {
+    position: absolute;
+    transition: all 1.5s ease;
+  /* Note: The duration can not be less than 1.5 */
+    width: auto;
+    box-shadow: 0px 0px 34px -6px rgba(0, 0, 0, 0.55);
+    transform: translateY(-50%);
+    top: 50%;
+}
+
+.custom-theme-flexslider.custom-parallax-flexslider .custom-theme-slides > .item .level-1 {
+    left: 55%;
+    z-index: 3;
+}
+
+.custom-theme-flexslider.custom-parallax-flexslider .custom-theme-slides > .item .level-2 {
+    left: 30%;
+    z-index: 2;
+}
+
+.custom-theme-flexslider.custom-parallax-flexslider .custom-theme-slides > .item.left .level-1 {
+    transform: translate(-300px, -50%);
+}
+
+.custom-theme-flexslider.custom-parallax-flexslider .custom-theme-slides > .item.left .level-2 {
+    transform: translate(-50px, -50%);
+}
+
+.custom-theme-flexslider.custom-parallax-flexslider .custom-theme-slides > .item.right .level-1 {
+    transform: translate(300px, -50%);
+}
+
+.custom-theme-flexslider.custom-parallax-flexslider .custom-theme-slides > .item.right .level-2 {
+    transform: translate(50px, -50%);
 }
 
 /* ====================================================== 
@@ -9734,598 +10326,6 @@ dl.list-side-by-side:after {
     border-radius: 2px;
     text-decoration: none !important;
     margin-top: 1.09375rem;
-}
-
-/* ====================================================== 
-    <!-- Slideshow ( with custom flexslider ) -->  
-/* ====================================================== */
-/* 
- ---------------------------
- 1) Thumbnail ControlNav Pattern 
- ---------------------------
- */
-.custom-theme-flexslider-thumbs {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    width: 100%;
-    overflow: hidden;
-    overflow-x: auto;
-    white-space: nowrap;
-    margin-top: 1.5rem;
-}
-
-.custom-theme-flexslider-thumbs::-webkit-scrollbar-track {
-    border-radius: 0px;
-    background-color: #E6E3E3;
-}
-
-.custom-theme-flexslider-thumbs::-webkit-scrollbar {
-    height: 5px;
-    background-color: #EC5E79;
-}
-
-.custom-theme-flexslider-thumbs::-webkit-scrollbar-thumb {
-    border-radius: 0px;
-    background-color: #EC5E79;
-}
-
-.custom-theme-flexslider-thumbs ul {
-    margin: 0;
-    padding: 0;
-}
-
-.custom-theme-flexslider-thumbs ul li {
-    width: 100px;
-    max-height: 100px;
-    display: inline-block;
-    cursor: pointer;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    padding: 0;
-    transform: scale(0.9);
-}
-
-.custom-theme-flexslider-thumbs ul li.active {
-    transform: scale(1);
-}
-
-.custom-theme-flexslider-thumbs ul li img {
-    box-shadow: 0px 6px 11px 1px rgba(0, 0, 0, 0.15);
-}
-
-/* 
- ---------------------------
- 2) Default Slideshow        
- ---------------------------
- */
-.custom-theme-flexslider, .custom-theme-flex-viewport {
-    transition: .1s ease;
-}
-
-.custom-theme-flexslider {
-    margin: 0;
-    padding: 0;
-    position: relative;
-    zoom: 1;
-    width: 100%;
-    overflow: hidden;
-    z-index: 0;
-}
-
-.custom-theme-flex-viewport {
-    max-height: 200vh;
-}
-
-.custom-theme-flexslider .custom-theme-slides > .item {
-    display: none;
-    -webkit-backface-visibility: hidden;
-    position: relative;
-}
-
-.custom-theme-flexslider .custom-theme-slides img {
-    max-width: 100%;
-    display: block;
-    border: none;
-    box-shadow: none;
-    margin: 0;
-    padding: 0;
-}
-
-html[xmlns] .custom-theme-flexslider .custom-theme-slides {
-    display: block;
-}
-
-* html .custom-theme-flexslider .custom-theme-slides {
-    height: 1%;
-}
-
-.no-js .custom-theme-flexslider .custom-theme-slides > .item:first-child {
-    display: block;
-}
-
-.custom-theme-flexslider .custom-theme-slides {
-    zoom: 1;
-}
-
-.custom-theme-flexslider .custom-theme-slides img {
-    height: auto;
-    width: 100%;
-}
-
-/*----- Left and right arrows by default -----*/
-.custom-theme-flex-direction-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    display: block;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.custom-theme-flex-direction-nav .custom-theme-flex-prev {
-    left: -100px;
-}
-
-.custom-theme-flex-direction-nav .custom-theme-flex-next {
-    right: -100px;
-    text-align: right;
-}
-
-.custom-theme-flex-direction-nav li {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    position: relative;
-}
-
-.custom-theme-flex-direction-nav li a {
-    display: block;
-    z-index: 9;
-    position: absolute;
-    top: 50%;
-    height: 40px;
-    margin-top: -20px;
-    line-height: 40px;
-    width: 50px;
-    text-align: center;
-    opacity: 0.8;
-    color: #fff;
-    font-size: 1.3125rem;
-    opacity: 0.66;
-}
-
-.custom-theme-flex-direction-nav li a:hover {
-    opacity: 1;
-    color: #fff;
-    text-decoration: none;
-}
-
-.custom-theme-flexslider:hover a.custom-theme-flex-prev {
-    left: 0;
-}
-
-.custom-theme-flexslider:hover a.custom-theme-flex-next {
-    right: 20px;
-}
-
-/*----- Pagination dots -----*/
-.custom-theme-flex-control-nav.custom-theme-flex-control-paging {
-    list-style: none;
-    left: 0;
-    bottom: 0;
-    font-size: 0;
-  /*Fighting the Space Between Inline Block Elements*/
-    display: block;
-    width: 100%;
-    text-align: center;
-  /*require*/
-    position: absolute;
-}
-
-.custom-theme-flex-control-nav.custom-theme-flex-control-paging li {
-    font-size: 16px;
-  /*Fighting the Space Between Inline Block Elements*/
-    display: inline-block;
-  /*require*/
-    margin: 0 .2rem;
-}
-
-.custom-theme-flex-control-nav.custom-theme-flex-control-paging li a {
-    width: 12px;
-    height: 12px;
-    display: block;
-    background: rgba(255, 255, 255, 0.5);
-    cursor: pointer;
-    text-indent: -9999px;
-    border-radius: 20px;
-    box-shadow: 0px 6px 23px -2px rgba(0, 0, 0, 0.36);
-}
-
-.custom-theme-flex-control-nav.custom-theme-flex-control-paging li a:hover, .custom-theme-flex-control-nav.custom-theme-flex-control-paging li a.custom-theme-flex-active {
-    background: white;
-    width: 25px;
-}
-
-/* Custom Style */
-.custom-controls-container .custom-theme-flex-control-nav.custom-theme-flex-control-paging {
-    position: relative;
-    transform: translateY(0.5rem);
-}
-
-.custom-controls-container .custom-theme-flex-control-nav.custom-theme-flex-control-paging li a {
-    background: rgba(233, 47, 22, 0.5);
-}
-
-.custom-controls-container .custom-theme-flex-control-nav.custom-theme-flex-control-paging li a:hover, .custom-controls-container .custom-theme-flex-control-nav.custom-theme-flex-control-paging li a.custom-theme-flex-active {
-    background: #e92f16;
-}
-
-/*----- Thumbnail -----*/
-.custom-theme-flex-control-thumbs {
-    margin: 5px 0 0;
-    position: static;
-    overflow: hidden;
-}
-
-.custom-theme-flex-control-thumbs li {
-    width: 25%;
-    float: left;
-    margin: 0;
-}
-
-.custom-theme-flex-control-thumbs img {
-    width: 100%;
-    height: auto;
-    display: block;
-    opacity: .7;
-    cursor: pointer;
-    transition: .1s ease;
-}
-
-.custom-theme-flex-control-thumbs img:hover {
-    opacity: 1;
-}
-
-.custom-theme-flex-control-thumbs .custom-theme-flex-active {
-    opacity: 1;
-    cursor: default;
-}
-
-/*----- Left and right arrows by Custom Controls -----*/
-.custom-navigation {
-    display: table;
-    width: 100%;
-    table-layout: fixed;
-    margin-top: 1.75rem;
-}
-
-.custom-navigation.custom-navigation-thumb {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: calc(100% - 30px);
-}
-
-.custom-navigation .thumb {
-  /* @include transition-default(); */
-    transition: all 0.3s ease;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    display: inline-block;
-    overflow: hidden;
-    transform: scale(0.7);
-    opacity: .5;
-  /* @include outer-shadow(); */
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
-}
-
-.custom-navigation .thumb img {
-    width: 100%;
-    height: 100%;
-}
-
-.custom-navigation > * {
-    display: table-cell;
-}
-
-.custom-navigation > a {
-    width: 50px;
-}
-
-.custom-navigation > a:hover .thumb {
-    transform: scale(1);
-    opacity: 1;
-}
-
-.custom-navigation .custom-theme-flex-prev.custom-theme-flex-disabled {
-    visibility: hidden;
-}
-
-.custom-navigation .custom-theme-flex-next {
-    text-align: right;
-}
-
-.custom-navigation .custom-theme-flex-next.custom-theme-flex-disabled {
-    visibility: hidden;
-}
-
-/*----- Next/Prev Image Thumbnail In Navigation -----*/
-.custom-prevnext-thumb-nav {
-    display: table;
-    width: 100%;
-    table-layout: fixed;
-    margin-top: 1.75rem;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: calc(100% - 30px);
-}
-
-.custom-prevnext-thumb-nav a > span {
-  /* @include transition-default(); */
-    transition: all 0.3s ease;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    display: inline-block;
-    overflow: hidden;
-    transform: scale(0.7);
-    opacity: .5;
-  /* @include outer-shadow(); */
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
-}
-
-.custom-prevnext-thumb-nav a > span img {
-    width: 100%;
-    height: 100%;
-}
-
-.custom-prevnext-thumb-nav > * {
-    display: table-cell;
-}
-
-.custom-prevnext-thumb-nav > a {
-    width: 50px;
-}
-
-.custom-prevnext-thumb-nav > a:hover > span {
-    transform: scale(1);
-    opacity: 1;
-}
-
-.custom-prevnext-thumb-nav .thumb-prev.disabled {
-    display: none;
-}
-
-.custom-prevnext-thumb-nav .thumb-next {
-    text-align: right;
-}
-
-.custom-prevnext-thumb-nav .thumb-next.disabled {
-    display: none;
-}
-
-/*----- Timeline -----*/
-.custom-timeline-nav {
-    height: 3px;
-    position: relative;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.1);
-    margin: 1rem 0;
-}
-
-.custom-timeline-nav > span {
-    display: block;
-    width: 0;
-    height: 100%;
-    background: #EC5E79;
-  /* @include transition-default(); */
-    transition: all 0.3s ease;
-}
-
-/* 
- ---------------------------
- 3) Primary Slideshow  (with dynamic min/max ranges )      
- ---------------------------
- */
-.custom-theme-flexslider.custom-itemgrid .item {
-    transition: .1s ease;
-    opacity: 0.2;
-}
-
-.custom-theme-flexslider.custom-itemgrid .item.custom-theme-flex-active-slide {
-    opacity: 1;
-}
-
-@media all and (max-width: 768px) {
-    .custom-theme-flexslider.custom-itemgrid .item {
-        opacity: 1;
-    }
-}
-
-/* 
- ---------------------------
- 4) Primary Slideshow    
- ---------------------------
- */
-.custom-theme-flexslider.custom-primary-flexslider {
-    overflow: hidden;
-  /* Full Screen Slider
-	 * You need add an attribute "data-slider-bg" to ".item"
-	*/;
-}
-
-.custom-theme-flexslider.custom-primary-flexslider.fullscreen {
-    min-height: 100vh;
-}
-
-.custom-theme-flexslider.custom-primary-flexslider.fullscreen img {
-    height: 100vh;
-    visibility: hidden;
-}
-
-.custom-theme-flexslider.custom-primary-flexslider .custom-theme-slides > .item {
-    background-size: cover;
-    background-repeat: no-repeat;
-    position: relative;
-}
-
-.custom-theme-flexslider.custom-primary-flexslider .custom-theme-slides > .item .slides-info {
-    position: absolute;
-    top: 0;
-    left: 0;
-    color: white;
-    width: 100%;
-  /* Vertical Center */
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.custom-theme-flexslider.custom-primary-flexslider .custom-theme-slides > .item .slides-info .container .level {
-    animation-delay: .5s;
-    animation-duration: .6s;
-    animation-fill-mode: both;
-    animation-name: fadeOutLeft;
-}
-
-.custom-theme-flexslider.custom-primary-flexslider .custom-theme-slides > .item .slides-info .container .level-1,
-.custom-theme-flexslider.custom-primary-flexslider .custom-theme-slides > .item .slides-info .container .level-2 {
-    color: #fff;
-}
-
-.custom-theme-flexslider.custom-primary-flexslider .custom-theme-slides > .item.custom-theme-flex-active-slide .slides-info .container .level {
-    animation-delay: .4s;
-    animation-duration: .6s;
-    animation-fill-mode: both;
-    animation-name: fadeInLeft;
-}
-
-.custom-theme-flexslider.custom-primary-flexslider .custom-theme-slides > .item.custom-theme-flex-active-slide .slides-info .container .level-1 {
-    animation-delay: .4s;
-}
-
-.custom-theme-flexslider.custom-primary-flexslider .custom-theme-slides > .item.custom-theme-flex-active-slide .slides-info .container .level-2 {
-    animation-delay: .5s;
-}
-
-.custom-theme-flexslider.custom-primary-flexslider .custom-theme-slides > .item.custom-theme-flex-active-slide .slides-info .container .level-3 {
-    animation-delay: .6s;
-}
-
-@media all and (max-width: 991px) {
-    .custom-theme-flexslider.custom-primary-flexslider .custom-theme-slides > .item .slides-info .container .level-1 {
-        font-size: 7vw !important;
-        line-height: 7vw !important;
-        margin-bottom: 0;
-        line-height: 1.2 !important;
-    }
-
-    .custom-theme-flexslider.custom-primary-flexslider .custom-theme-slides > .item .slides-info .container .level-2 {
-        font-size: 4vw !important;
-        line-height: 4vw !important;
-    }
-}
-
-@media all and (max-width: 768px) {
-    .custom-theme-flexslider.custom-primary-flexslider.fullscreen {
-        min-height: inherit;
-    }
-
-    .custom-theme-flexslider.custom-primary-flexslider.fullscreen img {
-        height: auto;
-    }
-
-    .custom-theme-flexslider.custom-primary-flexslider .custom-theme-slides > .item .button {
-        font-size: 2vw !important;
-    }
-}
-
-@keyframes fadeInLeft {
-    0% {
-        opacity: 0;
-        transform: translate3d(-100%, 0, 0);
-    }
-
-    100% {
-        opacity: 1;
-        transform: none;
-    }
-}
-
-@keyframes fadeOutLeft {
-    0% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-        transform: translate3d(-100%, 0, 0);
-    }
-}
-
-/* 
- ---------------------------
- 5) Parallax Slideshow                
- ---------------------------
- */
-.custom-theme-flexslider.custom-parallax-flexslider {
-    max-height: 100vh;
-    overflow: hidden;
-}
-
-.custom-theme-flexslider.custom-parallax-flexslider img {
-    max-height: 100vh;
-}
-
-.custom-theme-flexslider.custom-parallax-flexslider .custom-theme-slides > .item {
-    background-size: cover;
-    background-repeat: no-repeat;
-    position: relative;
-}
-
-.custom-theme-flexslider.custom-parallax-flexslider .custom-theme-slides > .item img {
-    max-height: calc( 100% - 2rem);
-}
-
-.custom-theme-flexslider.custom-parallax-flexslider .custom-theme-slides > .item .level {
-    position: absolute;
-    transition: all 1.5s ease;
-  /* Note: The duration can not be less than 1.5 */
-    width: auto;
-    box-shadow: 0px 0px 34px -6px rgba(0, 0, 0, 0.55);
-    transform: translateY(-50%);
-    top: 50%;
-}
-
-.custom-theme-flexslider.custom-parallax-flexslider .custom-theme-slides > .item .level-1 {
-    left: 55%;
-    z-index: 3;
-}
-
-.custom-theme-flexslider.custom-parallax-flexslider .custom-theme-slides > .item .level-2 {
-    left: 30%;
-    z-index: 2;
-}
-
-.custom-theme-flexslider.custom-parallax-flexslider .custom-theme-slides > .item.left .level-1 {
-    transform: translate(-300px, -50%);
-}
-
-.custom-theme-flexslider.custom-parallax-flexslider .custom-theme-slides > .item.left .level-2 {
-    transform: translate(-50px, -50%);
-}
-
-.custom-theme-flexslider.custom-parallax-flexslider .custom-theme-slides > .item.right .level-1 {
-    transform: translate(300px, -50%);
-}
-
-.custom-theme-flexslider.custom-parallax-flexslider .custom-theme-slides > .item.right .level-2 {
-    transform: translate(50px, -50%);
 }
 
 /* ====================================================== 

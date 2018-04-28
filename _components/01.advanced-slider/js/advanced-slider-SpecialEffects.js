@@ -108,7 +108,7 @@ theme = ( function ( theme, $, window, document ) {
 						//Initialize all the items to the stage
 						addItemsToStage( $this, $sliderWrapper, nativeItemW, nativeItemH );
 
-					}
+					};
 
 					img.src = imgURL;
 
@@ -142,9 +142,7 @@ theme = ( function ( theme, $, window, document ) {
 				dataLoop                 = $this.data( 'loop' ),
 				dataAuto                 = $this.data( 'auto' ),
 				dataTiming               = $this.data( 'timing' ),
-				dataFilterTexture        = $this.data( 'filter-texture' ),
-				nativeItemW,
-				nativeItemH;
+				dataFilterTexture        = $this.data( 'filter-texture' );
 
 	
 			
@@ -262,7 +260,7 @@ theme = ( function ( theme, $, window, document ) {
 							renderer.view.style.height = $thisItem.find( 'img' ).height() + 'px';
 							
 
-						}
+						};
 
 						imgCur.src = imgURL;
 
@@ -372,7 +370,7 @@ theme = ( function ( theme, $, window, document ) {
 							renderer.view.style.width = $thisItem.find( 'img' ).width() + 'px';
 							renderer.view.style.height =$thisItem.find( 'img' ).height() + 'px';
 
-						}
+						};
 
 						imgCur.src = imgURL;
 
@@ -483,14 +481,10 @@ theme = ( function ( theme, $, window, document ) {
 					windowHalfY                 = $this.height() / 2;
 
 				
-				
-				init();
-				animate();
-
 
 				//Add Geometries and Lights to the main container 
 				//-------------------------------------					
-				function init() {
+				var init = function() {
 					$this.find( '.item' ).each( function( index )  {
 
 						var $thisItem = $( this );
@@ -600,18 +594,18 @@ theme = ( function ( theme, $, window, document ) {
 					webGLRenderer.shadowMap.enabled = true;
 
 
-				}
+				};
 
+				//Add render event
+				//-------------------------------------	
+				
+				//Converts numeric degrees to radians
+				var toRad = function( number ) {
+					return number * Math.PI / 180;
+				};
 
-				//Animation Effects
-				//-------------------------------------
-				function animate() {
-					render();
-					requestAnimationFrame( animate );
-				}
-
-
-				function render() {
+				
+				var render = function() {
 
 
 					webGLRenderer.setClearColor( 0x000000 );
@@ -658,18 +652,25 @@ theme = ( function ( theme, $, window, document ) {
 
 					} );
 
-				}
+				};
 
-
-				//Rotation and Drop
-                if ( Modernizr.touchevents ) {
-					document.addEventListener( 'touchstart', onDocumentTouchStart, false );
-				} else {
-					document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-				}
 				
+				
+				//Animation Effects
+				//-------------------------------------
+				var animate = function() {
+					render();
+					requestAnimationFrame( animate );
+				};
 
-				function onDocumentMouseDown( e ) {
+				
+				init();
+				animate();
+				
+				
+				//Rotation and Drop
+
+				var onDocumentMouseDown = function( e ) {
 					e.preventDefault();
 					document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 					document.addEventListener( 'mouseup', onDocumentMouseUp, false );
@@ -678,33 +679,33 @@ theme = ( function ( theme, $, window, document ) {
 					mouseYOnMouseDown = e.clientY - windowHalfY;
 					targetRotationXOnMouseDown = targetRotationX;
 					targetRotationYOnMouseDown = targetRotationY;
-				}
+				};
 
-				function onDocumentMouseMove( e ) {
+				var onDocumentMouseMove = function( e ) {
 					mouseX = e.clientX - windowHalfX;
 					mouseY = e.clientY - windowHalfY;
 					targetRotationX = targetRotationXOnMouseDown + (mouseX - mouseXOnMouseDown) * 0.02;
 					targetRotationY = targetRotationYOnMouseDown + (mouseY - mouseYOnMouseDown) * 0.02;
-				}
+				};
 
-				function onDocumentMouseUp( e ) {
+				var onDocumentMouseUp = function( e ) {
 					document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
 					document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
 					document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
 
-				}
+				};
 
-				function onDocumentMouseOut( e ) {
+				var onDocumentMouseOut = function( e ) {
 					document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
 					document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
 					document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
 
-				}
+				};
 				
 			
 				
 			
-				function onDocumentTouchStart( e ) {
+				var onDocumentTouchStart = function( e ) {
 					e.preventDefault();
 					e = e.changedTouches[ 0 ];
 					
@@ -716,9 +717,9 @@ theme = ( function ( theme, $, window, document ) {
 					targetRotationYOnTouchDown = targetRotationY;
 
 					
-				}
+				};
 
-				function onDocumentTouchMove( e ) {
+				var onDocumentTouchMove = function( e ) {
 					e.preventDefault();
 					e = e.changedTouches[ 0 ];
 						
@@ -729,20 +730,20 @@ theme = ( function ( theme, $, window, document ) {
 
 
 					
-				}
+				};
 
-				function onDocumentTouchEnd( e ) {
+				var onDocumentTouchEnd = function( e ) {
 					document.removeEventListener( 'touchmove', onDocumentTouchMove, false );
 					document.removeEventListener( 'touchend', onDocumentTouchEnd, false );
 
-				}
+				};
 
+                if ( Modernizr.touchevents ) {
+					document.addEventListener( 'touchstart', onDocumentTouchStart, false );
+				} else {
+					document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+				}
 				
-
-				//Converts numeric degrees to radians
-				function toRad( number ) {
-					return number * Math.PI / 180;
-				}
 
 				
 
@@ -786,8 +787,8 @@ theme = ( function ( theme, $, window, document ) {
 			//-------------------------------------			
 			if ( dataAuto && !isNaN( parseFloat( dataTiming ) ) && isFinite( dataTiming ) ) {
 
-				var playTimes     = 0,
-					timerEvtStop  = false;
+				var playTimes = 0;
+				timerEvtStop = false;
 
 				// change item
 				setInterval( function() {
@@ -884,7 +885,7 @@ theme = ( function ( theme, $, window, document ) {
 			//Added touch method to mobile device
 			//-------------------------------------	
 			var startX,
-				startY
+				startY;
 
 
 			$this.on( 'touchstart.advancedSlider', function( event ) {
@@ -1096,7 +1097,7 @@ theme = ( function ( theme, $, window, document ) {
 					//---
 					$sliderWrapper.css( 'height', slider.closest( '.custom-advanced-slider-outer' ).width()*(this.height/this.width) + 'px' );		
 
-				}
+				};
 
 				img.src = imgURL;
 
@@ -1173,13 +1174,13 @@ theme = ( function ( theme, $, window, document ) {
 							
 							//play current video
 							if ( curSp._texture.baseTexture.imageType == null ) {
-								var videoSource = curSp.texture.baseTexture.source;
+								var videoSource2 = curSp.texture.baseTexture.source;
 								
 								// play the video
-								videoSource.currentTime = 0;
-								videoSource.autoplay = true;
-								videoSource.play();
-								videoSource.muted = false;
+								videoSource2.currentTime = 0;
+								videoSource2.autoplay = true;
+								videoSource2.play();
+								videoSource2.muted = false;
 							}
 
 
@@ -1256,13 +1257,13 @@ theme = ( function ( theme, $, window, document ) {
 							
 							//play current video
 							if ( curSp._texture.baseTexture.imageType == null ) {
-								var videoSource = curSp.texture.baseTexture.source;
+								var videoSource2 = curSp.texture.baseTexture.source;
 								
 								// play the video
-								videoSource.currentTime = 0;
-								videoSource.autoplay = true;
-								videoSource.play();
-								videoSource.muted = false;
+								videoSource2.currentTime = 0;
+								videoSource2.autoplay = true;
+								videoSource2.play();
+								videoSource2.muted = false;
 							}
 							
                            
@@ -1313,10 +1314,10 @@ theme = ( function ( theme, $, window, document ) {
 						
 					};     
 
-					function rotateSpite() {
+					var rotateSpite = function() {
 						displacementSprite.rotation += 0.001;
 						rafID = requestAnimationFrame( rotateSpite );
-					}
+					};
 					
 					
 				

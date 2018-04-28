@@ -88,7 +88,7 @@ theme = ( function ( theme, $, window, document ) {
 						//Initialize all the items to the stage
 						addItemsToStage( $this, $sliderWrapper, nativeItemW, nativeItemH );
 
-					}
+					};
 
 					img.src = imgURL;
 
@@ -116,14 +116,12 @@ theme = ( function ( theme, $, window, document ) {
 				$items                   = $this.find( '.item' ),
 				$first                   = $items.first(),
 				itemsTotal               = $items.length,
-				timerEvtStop             = null,
 				dataControlsPagination   = $this.data( 'controls-pagination' ),
 				dataControlsArrows       = $this.data( 'controls-arrows' ),
 				dataLoop                 = $this.data( 'loop' ),
 				dataAuto                 = $this.data( 'auto' ),
 				dataTiming               = $this.data( 'timing' ),
-				nativeItemW,
-				nativeItemH;
+				timerEvtStop             = null;
 
 	
 			
@@ -153,8 +151,9 @@ theme = ( function ( theme, $, window, document ) {
 			//-------------------------------------			
 			if ( dataAuto && !isNaN( parseFloat( dataTiming ) ) && isFinite( dataTiming ) ) {
 
-				var playTimes     = 0,
-					timerEvtStop  = false;
+				var playTimes = 0;
+				timerEvtStop = false;
+					
 
 				// change item
 				setInterval( function() {
@@ -251,7 +250,7 @@ theme = ( function ( theme, $, window, document ) {
 			//Added touch method to mobile device
 			//-------------------------------------	
 			var startX,
-				startY
+				startY;
 
 
 			$this.on( 'touchstart.advancedSlider', function( event ) {
@@ -446,7 +445,7 @@ theme = ( function ( theme, $, window, document ) {
 
 					$sliderWrapper.css( 'height', slider.closest( '.custom-advanced-slider-outer' ).width()*(this.height/this.width) + 'px' );		
 
-				}
+				};
 
 				img.src = imgURL;
 

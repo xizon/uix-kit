@@ -46,7 +46,6 @@
         <!-- Basic  -->
         <link rel="stylesheet" href="assets/css/bootstrap.min.css?ver=3.3.7" media="all"/>
         <link rel="stylesheet" href="assets/css/video.min.css?ver=5.19" media="all"/>
-        <link rel="stylesheet" href="assets/css/flexslider.min.css?ver=2.6.2" media="all" />
 		<link rel="stylesheet" href="assets/css/animate.min.css?ver=3.5.2" media="all" />
         
         
@@ -55,11 +54,11 @@
         
        
         <!-- Theme  -->
-        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTUyNDg4MzYyNTI3Nw"/>
+        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTUyNDkwODQyOTQ4NA"/>
         
         
          <!--[if lt IE 10]>
-           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTUyNDg4MzYyNTI3Nw" />
+           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTUyNDkwODQyOTQ4NA" />
         <![endif]-->
         
         
@@ -122,8 +121,6 @@
     
     
 
-  
-   
     <div class="wrapper">
     
         <!-- Header Area
@@ -205,8 +202,6 @@
 														<li><a href="form2.html">Form Elements 2</a></li>
 														<li><a href="form-progress.html">Form Progress</a></li>
 														<li><a href="timeline.html">Timeline</a></li>
-														<li><a href="slideshow.html">Slideshow</a></li>
-														<li><a href="slideshow2.html">Slideshow Fullscreen</a></li>
 														<li><a href="card.html">Card</a></li>
 														<li><a href="tabs.html">Tabs</a></li>
 														<li><a href="accordion.html">Accordion</a></li>
@@ -218,8 +213,8 @@
 														<li><a href="parallax.html">Parallax</a></li>
 														<li><a href="parallax2.html">Parallax 2</a></li>
 													    <li><a href="modal-dialog.html">Modal UI</a></li>
-														    
-														
+													    <li><a href="breadcrumbs.html">Breadcrumbs</a></li>
+														<li><a href="image-shapes.html">Image Shapes</a><span class="tip-label">new</span></li>
 														
 														
 													</ul>
@@ -232,17 +227,16 @@
 														<li><span class="multi-column-title">Web Elements (Part 2)</span></li>
 														<li><a href="footer-templates.html">Footer Templates</a></li>
 														<li><a href="pagination.html">Pagination</a></li>
-														<li><a href="breadcrumbs.html">Breadcrumbs</a></li>
 														<li><a href="badges.html">Badges</a></li>
 														<li><a href="equal-width-divs.html">Equal-width Divs</a></li>
 														<li><a href="mouse-animation-scroll.html">Mouse Animation Scroll</a></li>
 														<li><a href="periodical-scroll.html">Periodical Scroll</a></li>	
+														<li><a href="flexslider.html">Flexslider</a></li>
+														<li><a href="flexslider2.html">Flexslider Fullscreen</a></li>
 														<li><a href="advanced-slider.html">Advanced Slider (Basic)</a></li>
 														<li><a href="advanced-slider-brightness.html">Advanced Slider Brightness</a><span class="tip-label">new</span></li>
 														<li><a href="advanced-slider-liquid.html">Advanced Slider Liquid</a><span class="tip-label">new</span></li>
-														<li><a href="advanced-slider-3D.html">Advanced Slider 3D Rotating</a><span class="tip-label">new</span></li>												
-														<li><a href="image-shapes.html">Image Shapes</a><span class="tip-label">new</span></li>
-														
+														<li><a href="advanced-slider-3D.html">Advanced Slider 3D Rotating</a><span class="tip-label">new</span></li>
 														
 														
 														
@@ -332,17 +326,32 @@
         </header>
         <div class="header-inner"></div>
       
-      
+       
+    
+        
+        
      
-        <!-- Title
+        <!-- Content 01
         ====================================================== -->
         <section class="space-sm space-none-top">
             <div class="container t-c">
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2 t-c">
-                            <h2>Full Screen Slider</h2>
-							<p>You need add an attribute <code>data-slider-bg</code> to <code>.item</code>. Simultaneously, use the <code>.fullscreen</code> class on your <code>.custom-primary-flexslider</code> div </p>
-                            
+                            <h2>Chop Slider</h2>
+							<p class="t-l">
+							    <code>Flat Effects: </code>fade, bricks, blinds_h, blinds_v, zip
+							    
+							    <br>
+					
+								<code>2D Effects: </code>smear, slide_h, zip_h, slide_v, zip_v, gravity, bulb, morpher, reveal 
+
+								<br>
+
+								<code>3D Effects: </code>turn, flip_h_single, flip_h_multi, flip_v_single, flip_v_multi, flip_random, blocks_v_1, blocks_v_2, blocks_v_3, blocks_v_4, blocks_v_5, blocks_v_6, blocks_v_7, blocks_h_1, blocks_h_2, blocks_h_3, cube, paper_h, paper_v, galaxy, explosion, polaroid, bricks3d, tiles3d, panels_h, panels_v
+
+							   <br><code>Canvas Effects: </code>burn, melt, roll, puzzles, diamonds, circles, brush, typewriter, lines, razor, circle_reveal
+                       
+                           </p>
                         </div>
                     </div>
                     <!-- .row end -->
@@ -353,115 +362,42 @@
  
         </section>
      
-     
-       <!-- Slideshow
+       
+       <!-- Content 02
         ====================================================== -->
-        <div class="custom-theme-flexslider custom-primary-flexslider fullscreen" 
-             data-draggable="true" 
-             data-my-nav-thumbs="false"
-             data-my-prev-next-thumbs="false"
-             data-my-nav-timeline="false"
-             data-my-controls="false"
-             data-my-multiple-items="false"
-             data-my-count-total="false"
-             data-my-count-now="false"
-             data-my-parallax="false"
-			 data-my-sync="false"
-             data-wheel="false"
-             data-speed="600" 
-             data-timing="10000" 
-             data-loop="false" 
-             data-paging="true" 
-             data-arrows="true" 
-             data-animation="slide" 
-             data-auto="true" 
-			 data-prev="<i class='fa fa-chevron-left custom-primary-flexslider-prev'></i>" 
-             data-next="<i class='fa fa-chevron-right custom-primary-flexslider-next'></i>">
-           
-            <div class="custom-theme-slides">
-
-                <div class="item" data-slider-bg="assets/images/demo/test-img-big-1.jpg">
-                    <img src="assets/images/demo/test-img-big-1.jpg" alt="Title 1" />
-                    
-                    <div class="slides-info">
-                    
-                        <div class="container t-c">
-                                <div class="row">
-                                    <div class="col-md-8 col-md-offset-2">
-                                        <h2 class="level level-1">Beautiful Free &amp; Premium Responsive WordPress Themes</h2>
-                                        <p class="h5 font-normal level level-2">Uix Responsive Web UI Frameworks</p>
-    
-                                    </div>
-                                </div>
-                                <!-- .row end -->
-                        </div>
+  
+		<div class="custom-chop-slider"
+			 data-auto="true"
+			 data-loop="true"
+			 data-timing="10000" 
+			 data-effect="panels_v"
+			 data-controls-pagination=".my-a-slider-pagination-1" 
+			 data-controls-arrows=".my-a-slider-arrows-1">
 
 
-                    </div>
-                    <!-- .slides-info  end -->   
-                    
-                </div>
-                
-                <div class="item" data-slider-bg="assets/images/demo/test-img-big-2.jpg">
-                    <img src="assets/images/demo/test-img-big-2.jpg" alt="Title 2" />
-                    
-                    <div class="slides-info">
-                    
-                        <div class="container t-c">
-                                <div class="row">
-                                    <div class="col-md-8 col-md-offset-2">
-                                    
-                                        <h2 class="level level-1">Hello World</h2>
-                                        <p class="h5 font-normal level level-2">UIUX Lab carefully crafts original design assets and publishes articles about UI/UX trends!</p>
-                                        <a class="button button-hover button-border-medium button-size-s level level-3" href="#">View Demo</a>
-    
-                                 
-                                    </div>
-                                </div>
-                                <!-- .row end -->
-                        </div>
+			<div class="inner">
+				<div class="item cs3-slide">
+				    <img src="assets/images/demo/cool-slider-1.jpg" alt="" />
+				</div>
+				<div class="item cs3-slide">
+				    <img src="assets/images/demo/cool-slider-2.jpg" alt="" />
+				</div>
+				<div class="item cs3-slide">
+				     <img src="assets/images/demo/cool-slider-3.jpg" alt="" />
+				</div>
+		
+			</div>
+		</div>  
+        
+        
+	   <div class="custom-chop-slider-pagination my-a-slider-pagination-1"></div>
+	   <div class="custom-chop-slider-arrows my-a-slider-arrows-1">
+			<a href="#" class="prev"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
+			<a href="#" class="next"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+	   </div>
 
-
-                    </div>
-                    <!-- .slides-info  end -->
-                     
-                </div>
-                
-                
-                <div class="item" data-slider-bg="assets/images/demo/test-img-big-3.jpg">
-                    <img src="assets/images/demo/test-img-big-3.jpg" alt="Title 3" />
-                    
-                    <div class="slides-info">
-                    
-                        <div class="container t-c">
-                                <div class="row">
-                                    <div class="col-md-8 col-md-offset-2">
-                                    
-                                        <h2 class="level level-1">Title 3</h2>
-                                        <p class="h5 font-normal level level-2">UIUX Lab carefully crafts original design assets and publishes articles about UI/UX trends!</p>
-                                        <a class="button button-hover button-border-medium button-size-s level level-3" href="#">View Demo</a>
-    
-                                 
-                                    </div>
-                                </div>
-                                <!-- .row end -->
-                        </div>
-
-
-                    </div>
-                    <!-- .slides-info  end --> 
-                    
-                </div>
-    
-
-            </div>
-            <!-- .custom-theme-slides end -->
-        </div>
-        <!-- .custom-theme-flexslider end -->
-
-          
-                                          
-                                
+        
+        
                 <!-- Footer
         ============================================= -->    
         <footer class="footer-main-container">
@@ -509,10 +445,6 @@
     <script src="assets/js/min/TweenLite.min.js?ver=1.20.4"></script>
     <script src="assets/js/min/pixi.min.js?ver=4.7.1"></script>
     <script src="assets/js/min/three.min.js?ver=r92"></script>
-
-
-    <!-- Slideshow  -->
-    <script src="assets/js/min/jquery.flexslider.min.js?ver=2.7.0"></script>
     
     <!-- Masonry -->
     <script src="assets/js/wp-jquery/masonry.min.js?ver=3.3.2"></script>
@@ -535,7 +467,7 @@
 			"homeUrl"     :""  //Eg. https://uiux.cc
 		};
     </script>  
-    <script src="assets/js/uix-kit.min.js?ver=MTUyNDg4MzYyNTI3Nw"></script>
+    <script src="assets/js/uix-kit.min.js?ver=MTUyNDkwODQyOTQ4NA"></script>
 
 
 
