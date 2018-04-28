@@ -6,7 +6,7 @@
 
 * New: Added mobile touch function for three.js demo.
 * Fix: Fixed an switching error for "Advanced Slider".
-
+* Tweak: Simplify the file structure further.
 
 
 #### = 1.4.5 (April 27, 2018) =

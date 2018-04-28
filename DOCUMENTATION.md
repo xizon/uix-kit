@@ -148,14 +148,17 @@ http://localhost:8080/examples/
   
 
     <!-- Basic Script -->
-    <script src="assets/js/min/jquery.mousewheel.min.js?ver=3.1.12"></script>
-    <script src="assets/js/min/jquery.easing.min.js?ver=1.3"></script>
+	<script src="assets/js/min/jquery.mousewheel.min.js?ver=3.1.12"></script>
+	<script src="assets/js/min/jquery.easing.min.js?ver=1.3"></script>
     <script src="assets/js/min/jquery.waitforimages.min.js?ver=1.0"></script>
     <script src="assets/js/min/video.min.js?ver=5.19"></script> 
 	<script src="assets/js/min/jquery.waypoints.min.js?ver=4.0.1"></script> 
-	<script src="assets/js/min/template7.min.js?ver=1.2.5"></script>
-    
-    
+    <script src="assets/js/min/template7.min.js?ver=1.2.5"></script>
+    <script src="assets/js/min/TweenLite.min.js?ver=1.20.4"></script>
+    <script src="assets/js/min/pixi.min.js?ver=4.7.1"></script>
+    <script src="assets/js/min/three.min.js?ver=r92"></script>
+
+
     <!-- Slideshow  -->
     <script src="assets/js/min/jquery.flexslider.min.js?ver=2.7.0"></script>
     
@@ -165,6 +168,7 @@ http://localhost:8080/examples/
 
     <!-- Filterable  -->
     <script src="assets/js/min/jquery.shuffle.min.js?ver=3.1.1"></script> 
+    
     
 	
 	<!-- Your Plugins & Theme Scripts
