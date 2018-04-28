@@ -43,7 +43,7 @@ theme = ( function ( theme, $, window, document ) {
 		function parallaxInit( w, h ) {
 			
 			/* Pure parallax scrolling effect without other embedded HTML elements */
-			$( '.pure-bg-parallax' ).each(function() {
+			$( '.pure-bg-parallax' ).each( function() {
 				var $this       = $( this ),
 					dataImg     = $this.data( 'parallax-bg' ),
 					dataSpeed   = $this.data( 'parallax' );
@@ -69,7 +69,7 @@ theme = ( function ( theme, $, window, document ) {
 			
 			
 			/* Parallax scrolling effect with embedded HTML elements */
-			$( '.parallax' ).each(function() {
+			$( '.parallax' ).each( function() {
 				var $this            = $( this ),
 					$curImg          = $this.find( '.parallax-img' ),
 					dataImg          = $curImg.attr( 'src' ),
@@ -292,7 +292,7 @@ http://www.gnu.org/licenses/gpl.html
 		var paddingTop = 0;
 		
 		//get the starting position of each element to have parallax applied to it		
-		$this.each(function(){
+		$this.each( function(){
 		    firstTop = $this.offset().top;
 		});
 
@@ -315,7 +315,7 @@ http://www.gnu.org/licenses/gpl.html
 		function update(){
 			var pos = $window.scrollTop();				
 
-			$this.each(function(){
+			$this.each( function(){
 				var $element = $(this);
 				var top = $element.offset().top;
 				var height = getHeight($element);

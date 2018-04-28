@@ -181,7 +181,7 @@ theme = ( function ( theme, $, window, document ) {
 						if ( carouselDir == 'horizontal' ) {
 							
 
-							TweenLite.to( $curItems.first(), carouselSpeed/1000, {
+							TweenMax.to( $curItems.first(), carouselSpeed/1000, {
 								css: {
 									marginLeft : -carouselItemWidth
 								},
@@ -217,7 +217,7 @@ theme = ( function ( theme, $, window, document ) {
 						} else {
 							
 							
-							TweenLite.to( $curItems.first(), carouselSpeed/1000, {
+							TweenMax.to( $curItems.first(), carouselSpeed/1000, {
 								css: {
 									marginTop : -carouselItemHeight
 								},
@@ -315,7 +315,7 @@ theme = ( function ( theme, $, window, document ) {
 							    .css( 'margin-left', -carouselItemWidth + 'px' );
 							
 							
-							TweenLite.to( $cloneItem, carouselSpeed/1000, {
+							TweenMax.to( $cloneItem, carouselSpeed/1000, {
 								css: {
 									marginLeft : 0
 								},
@@ -354,7 +354,7 @@ theme = ( function ( theme, $, window, document ) {
 							    .css( 'margin-top', -carouselItemHeight + 'px' );
 							
 							
-							TweenLite.to( $cloneItem, carouselSpeed/1000, {
+							TweenMax.to( $cloneItem, carouselSpeed/1000, {
 								css: {
 									marginTop : 0
 								},

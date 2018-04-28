@@ -623,7 +623,7 @@
       },
       uniqueID: function($clone) {
         // Append _clone to current level and children elements with id attributes
-        $clone.filter( '[id]' ).add($clone.find( '[id]' )).each(function() {
+        $clone.filter( '[id]' ).add($clone.find( '[id]' )).each( function() {
           var $this = $(this);
           $this.attr( 'id', $this.attr( 'id' ) + '_clone' );
         });
@@ -1189,7 +1189,7 @@
     if (options === undefined) { options = {}; }
 
     if (typeof options === "object") {
-      return this.each(function() {
+      return this.each( function() {
         var $this = $(this),
             selector = (options.selector) ? options.selector : ".slides > li",
             $slides = $this.find(selector);

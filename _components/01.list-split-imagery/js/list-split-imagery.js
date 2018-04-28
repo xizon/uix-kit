@@ -36,7 +36,7 @@ theme = ( function ( theme, $, window, document ) {
 		function fullwidthListSplitInit( w ) {
 			
 			
-			$( '.list-split-imagery-container' ).each(function() {
+			$( '.list-split-imagery-container' ).each( function() {
 				var imgH = $( this ).find( '.imagery-background img' ).height();
 
 				if ( imgH > 0 ) {

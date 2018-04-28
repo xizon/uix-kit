@@ -10,8 +10,7 @@ theme = ( function ( theme, $, window, document ) {
    
     var documentReady = function( $ ) {
 		
-		
-		$( '.custom-accordion' ).each(function() {
+		$( '.custom-accordion' ).each( function() {
 			var $this           = $( this ),
 				aEvent          = $this.data( 'event' ),
 				firstShow       = $this.data( 'first-show' ),

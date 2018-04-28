@@ -20,7 +20,6 @@ Uix Kit bundles the following third-party resources:
 
 - [Font Awesome](http://fontawesome.io)
 - [jQuery Easing](http://gsgd.co.uk/sandbox/jquery/easing/)
-- [jQuery Mousewheel](https://plugins.jquery.com/mousewheel/)
 - [Flexslider](https://github.com/woocommerce/FlexSlider)
 - [Bootstrap v3.3.7](http://getbootstrap.com)
 - [jQuery Parallax](http://www.ianlunn.co.uk/plugins/jquery-parallax/)

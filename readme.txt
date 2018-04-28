@@ -34,11 +34,6 @@ Licenses: Open source under the BSD License.
 Source: http://gsgd.co.uk/sandbox/jquery/easing/
 
 
-jQuery Mousewheel
-Licenses: MIT
-Source: https://plugins.jquery.com/mousewheel/
-
-
 Flexslider Icon
 Licenses: GPLv2 or later (Free and it is released under the same license as jQuery FlexSlider.)
 Source: https://github.com/woocommerce/FlexSlider

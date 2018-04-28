@@ -32,7 +32,7 @@ theme = ( function ( theme, $, window, document ) {
 			$( ulForDesktop + ' li' ).on( 'mouseenter', function(){
 				
 			
-				TweenLite.set( $( this ).find( ' > ul.sub-menu:not(.multi), .mega-arrow' ), {
+				TweenMax.set( $( this ).find( ' > ul.sub-menu:not(.multi), .mega-arrow' ), {
 					css: {
 						opacity    : 0,
 						display    : 'block',
@@ -40,7 +40,7 @@ theme = ( function ( theme, $, window, document ) {
 					},
 					onComplete : function() {
 						
-						TweenLite.to( this.target, 0.3, {
+						TweenMax.to( this.target, 0.3, {
 							css: {
 								opacity    : 1,
 								marginTop  : 0
@@ -58,14 +58,14 @@ theme = ( function ( theme, $, window, document ) {
 			}).on( 'mouseleave' , function(){
 				
 				
-				TweenLite.to( $( this ).find( ' > ul.sub-menu:not(.multi), .mega-arrow' ), 0.3, {
+				TweenMax.to( $( this ).find( ' > ul.sub-menu:not(.multi), .mega-arrow' ), 0.3, {
 					css: {
 						opacity    : 0,
 						marginTop  : mTop + 'px'
 					},
 					onComplete : function() {
 						
-						TweenLite.set( this.target, {
+						TweenMax.set( this.target, {
 							css: {
 								display    : 'none',
 							}

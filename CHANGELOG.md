@@ -2,11 +2,18 @@
 
 
 
-#### = 1.4.7 (April 28, 2018) =
+#### = 1.4.8 (April 28, 2018) =
 
+* New: Added "TweenMax" and "TimelineMax" script library.
 * New: Added mobile touch function for three.js demo.
 * Fix: Fixed an switching error for "Advanced Slider".
+* Fix: Fixed wrong direction of scroll wheel in Firefox and Internet Explorer.
+* Fix: Fixed an error of display "Advanced Slider" in Internet Explorer.
 * Tweak: Simplify the file structure further.
+* Tweak: Removed "TweenLite" script library.
+* Tweak: Removed "mousewheel.min.js" and "mousewheel.js" files.
+
+
 
 
 #### = 1.4.5 (April 27, 2018) =

@@ -65,7 +65,7 @@ theme = ( function ( theme, $, window, document ) {
 				maxHeight    = 0;
 
 
-			element.children( selectors ).each(function() {
+			element.children( selectors ).each( function() {
 				var element = $( this ).children();
 				if( element.hasClass( 'max-height' ) ) {
 					maxHeight = element.outerHeight();
@@ -99,11 +99,11 @@ theme = ( function ( theme, $, window, document ) {
 			function commonHeightInit( w ) {
 
 				if ( w > 768 ) {
-					element.children( selectors ).each(function() {
+					element.children( selectors ).each( function() {
 						$( this ).css( 'height', maxHeight );
 					});	
 				} else {
-					element.children( selectors ).each(function() {
+					element.children( selectors ).each( function() {
 						$( this ).css( 'height', 'auto' );
 					});		
 				}

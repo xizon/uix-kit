@@ -55,7 +55,7 @@ theme = ( function ( theme, $, window, document ) {
 				e.preventDefault();
 				
 				
-				TweenLite.to( window, 0.5, {
+				TweenMax.to( window, 0.5, {
 					scrollTo: {
 						y: getRelatedContent( this ).offset().top - topSectionSpacing
 					},

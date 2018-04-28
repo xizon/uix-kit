@@ -147,16 +147,16 @@ http://localhost:8080/examples/
   
 
     <!-- Basic Script -->
-	<script src="assets/js/min/jquery.mousewheel.min.js?ver=3.1.12"></script>
 	<script src="assets/js/min/jquery.easing.min.js?ver=1.3"></script>
     <script src="assets/js/min/jquery.waitforimages.min.js?ver=1.0"></script>
     <script src="assets/js/min/video.min.js?ver=5.19"></script> 
 	<script src="assets/js/min/jquery.waypoints.min.js?ver=4.0.1"></script> 
     <script src="assets/js/min/template7.min.js?ver=1.2.5"></script>
-    <script src="assets/js/min/TweenLite.min.js?ver=1.20.4"></script>
+    <script src="assets/js/min/TweenMax.min.js?ver=1.20.4"></script>
+    <script src="assets/js/min/TimelineMax.min.js?ver=1.20.4"></script>
     <script src="assets/js/min/pixi.min.js?ver=4.7.1"></script>
     <script src="assets/js/min/three.min.js?ver=r92"></script>
-
+    
     <!-- Masonry -->
     <script src="assets/js/wp-jquery/masonry.min.js?ver=3.3.2"></script>
     <script src="assets/js/wp-jquery/imagesloaded.min.js?ver=4.1.0"></script>

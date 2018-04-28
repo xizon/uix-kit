@@ -33,7 +33,7 @@ theme = ( function ( theme, $, window, document ) {
    
     var documentReady = function( $ ) {
 		
-		$( '[data-your-custom-datas]' ).each(function() {
+		$( '[data-your-custom-datas]' ).each( function() {
 			var $this         = $( this );
 
 			

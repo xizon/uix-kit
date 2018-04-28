@@ -10,7 +10,7 @@ theme = ( function ( theme, $, window, document ) {
    
     var documentReady = function( $ ) {
 		
-		$( '[data-bg]' ).each(function() {
+		$( '[data-bg]' ).each( function() {
 			var $this         = $( this ),
 				dataImg       = $this.data( 'bg' ),
 				dataPos       = $this.data( 'bg-position' ),

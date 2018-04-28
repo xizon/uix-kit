@@ -49,7 +49,7 @@ theme = ( function ( theme, $, window, document ) {
 				$target = $( '#' + curndex[1] );
 
 			//Smooth scrolling
-			TweenLite.to( window, 0.5, {
+			TweenMax.to( window, 0.5, {
 				scrollTo: {
 					y: $target.offset().top
 				},
@@ -83,7 +83,7 @@ theme = ( function ( theme, $, window, document ) {
 					e.preventDefault();
 					
 
-					TweenLite.to( window, 0.5, {
+					TweenMax.to( window, 0.5, {
 						scrollTo: {
 							y: target.offset().top
 						},

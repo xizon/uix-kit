@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.4.7
- * ## Last Update         :  April 28, 2018
+ * ## Version             :  1.4.8
+ * ## Last Update         :  April 29, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -25,11 +25,11 @@
 	
 	1. Header 
     2. Loader 
-    3. Get all custom attributes of an element like "data-*" 
-    4. Back to Top 
+    3. Back to Top 
+    4. Get all custom attributes of an element like "data-*" 
     5. Navigation 
-    6. Videos 
-    7. Common Height 
+    6. Common Height 
+    7. Videos 
     8. Mega Menu 
     9. Dropdown Categories 
     10. Pagination 
@@ -41,8 +41,8 @@
     16. Dynamic Drop Down List from JSON 
     17. Flexslider 
     18. Form Progress 
-    19. Form 
-    20. Full Page Transition 
+    19. Full Page Transition 
+    20. Form 
     21. Gallery 
     22. Image Shapes 
     23. Custom Core Scripts & Stylesheets 
@@ -262,7 +262,7 @@ theme = ( function ( theme, $, window, document ) {
 		$( '#toTop' ).on( 'click', function( e ) {
 			e.preventDefault();
 			
-			TweenLite.to( window, 0.5, {
+			TweenMax.to( window, 0.5, {
 				scrollTo: {
 					y: 0
 				},
@@ -322,7 +322,7 @@ theme = ( function ( theme, $, window, document ) {
    
     var documentReady = function( $ ) {
 		
-		$( '[data-your-custom-datas]' ).each(function() {
+		$( '[data-your-custom-datas]' ).each( function() {
 			var $this         = $( this );
 
 			
@@ -388,7 +388,7 @@ theme = ( function ( theme, $, window, document ) {
 			$( ulForDesktop + ' li' ).on( 'mouseenter', function(){
 				
 			
-				TweenLite.set( $( this ).find( ' > ul.sub-menu:not(.multi), .mega-arrow' ), {
+				TweenMax.set( $( this ).find( ' > ul.sub-menu:not(.multi), .mega-arrow' ), {
 					css: {
 						opacity    : 0,
 						display    : 'block',
@@ -396,7 +396,7 @@ theme = ( function ( theme, $, window, document ) {
 					},
 					onComplete : function() {
 						
-						TweenLite.to( this.target, 0.3, {
+						TweenMax.to( this.target, 0.3, {
 							css: {
 								opacity    : 1,
 								marginTop  : 0
@@ -414,14 +414,14 @@ theme = ( function ( theme, $, window, document ) {
 			}).on( 'mouseleave' , function(){
 				
 				
-				TweenLite.to( $( this ).find( ' > ul.sub-menu:not(.multi), .mega-arrow' ), 0.3, {
+				TweenMax.to( $( this ).find( ' > ul.sub-menu:not(.multi), .mega-arrow' ), 0.3, {
 					css: {
 						opacity    : 0,
 						marginTop  : mTop + 'px'
 					},
 					onComplete : function() {
 						
-						TweenLite.set( this.target, {
+						TweenMax.set( this.target, {
 							css: {
 								display    : 'none',
 							}
@@ -1017,7 +1017,7 @@ theme = ( function ( theme, $, window, document ) {
 				maxHeight    = 0;
 
 
-			element.children( selectors ).each(function() {
+			element.children( selectors ).each( function() {
 				var element = $( this ).children();
 				if( element.hasClass( 'max-height' ) ) {
 					maxHeight = element.outerHeight();
@@ -1051,11 +1051,11 @@ theme = ( function ( theme, $, window, document ) {
 			function commonHeightInit( w ) {
 
 				if ( w > 768 ) {
-					element.children( selectors ).each(function() {
+					element.children( selectors ).each( function() {
 						$( this ).css( 'height', maxHeight );
 					});	
 				} else {
-					element.children( selectors ).each(function() {
+					element.children( selectors ).each( function() {
 						$( this ).css( 'height', 'auto' );
 					});		
 				}
@@ -1323,7 +1323,7 @@ theme = ( function ( theme, $, window, document ) {
    
     var documentReady = function( $ ) {
 		
-		$( '[data-bg]' ).each(function() {
+		$( '[data-bg]' ).each( function() {
 			var $this         = $( this ),
 				dataImg       = $this.data( 'bg' ),
 				dataPos       = $this.data( 'bg-position' ),
@@ -1380,8 +1380,7 @@ theme = ( function ( theme, $, window, document ) {
    
     var documentReady = function( $ ) {
 		
-		
-		$( '.custom-accordion' ).each(function() {
+		$( '.custom-accordion' ).each( function() {
 			var $this           = $( this ),
 				aEvent          = $this.data( 'event' ),
 				firstShow       = $this.data( 'first-show' ),
@@ -1599,620 +1598,625 @@ theme = ( function ( theme, $, window, document ) {
 				$( dataControlsArrows ).hide();
 			}
 
-			
-			
-			//Load slides to canvas
-			//-------------------------------------	
-			if ( $( '#' + rendererCanvasID ).length == 0 ) {
-				$this.prepend( '<div id="'+rendererOuterID+'" class="custom-advanced-slider-sp-canvas-outer"><canvas id="'+rendererCanvasID+'"></canvas></div>' );
-			}
-
-			//Basic webGL renderers 
-			//-------------------------------------
-			renderer              = new PIXI.Application( $this.width(), $this.height(), {
-													backgroundColor : 0x000000, 
-													autoResize      : true, 
-													view            : document.getElementById( rendererCanvasID )
-												});
-
-			renderer_filter       = new PIXI.autoDetectRenderer( $this.width(), $this.height(), {
-													backgroundColor : 0x000000, 
-													transparent     : false,
-													view            : document.getElementById( rendererCanvasID_filter )
-												});
-
-
-			stage_filter          = new PIXI.Container();
-			items_container       = new PIXI.Container();
-			displacementSprite    = ( dataFilterTexture.indexOf( '.mp4' ) >= 0 ) ? new PIXI.Sprite( PIXI.Texture.fromVideo( dataFilterTexture ) ) : new PIXI.Sprite.fromImage( dataFilterTexture );
-			displacementFilter    = new PIXI.filters.DisplacementFilter( displacementSprite );
-
-
-			//----------------------------------------------------------------------------------
-			//--------------------------------- Brightness Effect -------------------------------	
-			//----------------------------------------------------------------------------------
-			//Usage of returning sprite object: renderer.stage.children[index]
-			if ( $this.hasClass( 'eff-brightness' ) ) {
-
-				$this.find( '.item' ).each( function( index )  {
-
-					var $thisItem = $( this );
-
-					//Load sprite from each slider to canvas
-					//-------------------------------------
-					var curSprite;
-
-					if ( $thisItem.find( 'video' ).length > 0 ) {
-
-
-						// create a video texture from a path
-						var videoURL = $thisItem.find( 'source:first' ).attr( 'src' ),
-							texture  = PIXI.Texture.fromVideo( videoURL );
-
-						curSprite = new PIXI.Sprite( texture );
-
-						// pause the video
-						var videoSource = texture.baseTexture.source;
-						videoSource.autoplay = false;
-						videoSource.pause();
-						videoSource.currentTime = 0;
-						videoSource.muted = true;
-
-						//Returns the dimensions (intrinsic height and width ) of the video
-						var video = document.getElementById( $thisItem.find( 'video' ).attr( 'id' ) );
-						video.addEventListener( 'loadedmetadata', function( e ) {
-
-							var	curW    = this.videoWidth,
-								curH    = this.videoHeight,
-								newW    = curW,
-								newH    = curH;
-
-							newW = $this.width();
-
-							//Scaled/Proportional Content 
-							newH = curH*(newW/curW);
-
-							//At the same time change the height of the canvas
-							renderer.view.style.width = newW + 'px';
-							renderer.view.style.height = newH + 'px';	
-
-
-						}, false);	
-
-						video.src = videoURL;
-
-
-
-					} else {
-
-						var imgURL   = $thisItem.find( 'img' ).attr( 'src' ),
-							imgCur   = new Image();
-
-						curSprite = new PIXI.Sprite.fromImage( imgURL );
-
-						imgCur.onload = function() {
-
-							//At the same time change the height of the canvas
-							renderer.view.style.width = $thisItem.find( 'img' ).width() + 'px';
-							renderer.view.style.height = $thisItem.find( 'img' ).height() + 'px';
-							
-
-						};
-
-						imgCur.src = imgURL;
-
-
-					}
-
-					curSprite.width  = $this.width();
-					curSprite.height = $this.height();	
-
-
-					// Render updated scene
-					renderer.stage.addChild( curSprite );
-
-					TweenLite.set( curSprite, {
-						alpha : 0
-					});	
-
-
-
-				});
+			if ( Modernizr.webgl ) {
 				
-				
-
-				//Initialize the default height of canvas
+				//Load slides to canvas
 				//-------------------------------------	
-				setTimeout( function() {
-					canvasDefaultInit( $first );
-				}, animDuration );
-				
-				
+				if ( $( '#' + rendererCanvasID ).length == 0 ) {
+					$this.prepend( '<div id="'+rendererOuterID+'" class="custom-advanced-slider-sp-canvas-outer"><canvas id="'+rendererCanvasID+'"></canvas></div>' );
+				}
+
+				//Basic webGL renderers 
+				//-------------------------------------
+				renderer              = new PIXI.Application( $this.width(), $this.height(), {
+														backgroundColor : 0x000000, 
+														autoResize      : true, 
+														view            : document.getElementById( rendererCanvasID )
+													});
+
+				renderer_filter       = new PIXI.autoDetectRenderer( $this.width(), $this.height(), {
+														backgroundColor : 0x000000, 
+														transparent     : false,
+														view            : document.getElementById( rendererCanvasID_filter )
+													});
+
+
+				stage_filter          = new PIXI.Container();
+				items_container       = new PIXI.Container();
+				displacementSprite    = ( dataFilterTexture.indexOf( '.mp4' ) >= 0 ) ? new PIXI.Sprite( PIXI.Texture.fromVideo( dataFilterTexture ) ) : new PIXI.Sprite.fromImage( dataFilterTexture );
+				displacementFilter    = new PIXI.filters.DisplacementFilter( displacementSprite );
+
+
+				//----------------------------------------------------------------------------------
+				//--------------------------------- Brightness Effect -------------------------------	
+				//----------------------------------------------------------------------------------
+				//Usage of returning sprite object: renderer.stage.children[index]
+				if ( $this.hasClass( 'eff-brightness' ) ) {
 
-			}// end effect
-
-
-
-
-
-			//----------------------------------------------------------------------------------
-			//--------------------------------- Liquid Distortion Effect -----------------------
-			//----------------------------------------------------------------------------------
-			//Usage of returning sprite object: items_container.children[index]
-			if ( $this.hasClass( 'eff-liquid' ) ) {
-
-				$this.find( '.item' ).each( function( index )  {
-
-					var $thisItem = $( this );
-
-
-
-					//Load sprite from each slider to canvas
-					//-------------------------------------
-					var curSprite, 
-						canvasRatio = $this.width()/nativeItemW;
-
-					if ( $thisItem.find( 'video' ).length > 0 ) {
-
-
-						// create a video texture from a path
-						var videoURL = $thisItem.find( 'source:first' ).attr( 'src' ),
-							texture  = PIXI.Texture.fromVideo( videoURL );
-
-						curSprite = new PIXI.Sprite( texture );
-
-						// pause the video
-						var videoSource = texture.baseTexture.source;
-						videoSource.autoplay = false;
-						videoSource.pause();
-						videoSource.currentTime = 0;
-						videoSource.muted = true;
-
-
-						//Returns the dimensions (intrinsic height and width ) of the video
-						var video = document.getElementById( $thisItem.find( 'video' ).attr( 'id' ) );
-						video.addEventListener( 'loadedmetadata', function( e ) {
-
-							var	curW    = this.videoWidth,
-								curH    = this.videoHeight,
-								newW    = curW,
-								newH    = curH;
-
-							newW = $this.width();
-
-							//Scaled/Proportional Content 
-							newH = curH*(newW/curW);
-
-							//At the same time change the height of the canvas
-							renderer.view.style.width = newW + 'px';
-							renderer.view.style.height = newH + 'px';	
-
-
-						}, false);	
-
-						video.src = videoURL;
-
-
-
-					} else {
-
-						var imgURL   = $thisItem.find( 'img' ).attr( 'src' ),
-							imgCur   = new Image();
-
-						curSprite = new PIXI.Sprite.fromImage( imgURL );
-
-						imgCur.onload = function() {
-
-							//At the same time change the height of the canvas
-							renderer.view.style.width = $thisItem.find( 'img' ).width() + 'px';
-							renderer.view.style.height =$thisItem.find( 'img' ).height() + 'px';
-
-						};
-
-						imgCur.src = imgURL;
-
-
-					}
-
-					curSprite.width  = $this.width();
-					curSprite.height = $this.height();	
-
-
-					//Need to scale according to the screen
-					curSprite.scale.set( canvasRatio );
-
-					TweenLite.set( curSprite, {
-						alpha : 0
-					});	
-
-
-					items_container.addChild( curSprite );
-					// Enable interactions
-					items_container.interactive = true;
-
-
-					//Add child container to the main container 
-					//-------------------------------------
-					stage_filter.addChild( items_container );
-					// Enable Interactions
-					stage_filter.interactive = true;
-
-					//A texture stores the information that represents an image
-					displacementSprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
-
-
-					//Set the filter to stage and set some default values for the animation
-					//-------------------------------------
-					stage_filter.filters = [ displacementFilter ];    
-
-
-					//Add filter container to the main container
-					//-------------------------------------				
-					displacementSprite.anchor.set( 0.5 );
-					displacementSprite.x = renderer_filter.width / 2;
-					displacementSprite.y = renderer_filter.height / 2; 
-
-					displacementSprite.scale.x = 1;
-					displacementSprite.scale.y = 1;
-
-					// PIXI tries to fit the filter bounding box to the renderer so we optionally bypass
-					displacementFilter.autoFit = false;
-
-					stage_filter.addChild( displacementSprite );
-
-					//Animation Effects
-					//-------------------------------------
-					var ticker       = new PIXI.ticker.Ticker();
-					ticker.autoStart = true;
-					ticker.add( function( delta ) {
-
-//								displacementSprite.x += 12.14 * delta;
-//								displacementSprite.y += 42.24 * delta;
-//
-//								displacementSprite.scale.x += 0.2 * delta;
-//								displacementSprite.scale.y += 0.2 * delta;
-
-						// Render updated scene
-						renderer_filter.render( stage_filter );
-
-					});
-
-
-				});
-
-				//Initialize the default height of canvas
-				//-------------------------------------	
-				setTimeout( function() {
-					canvasDefaultInit( $first );
-				}, animDuration );
-				
-
-			}// end effect
-
-
-
-
-			//----------------------------------------------------------------------------------
-			//--------------------------------- 3D Rotating Effect -----------------------------
-			//----------------------------------------------------------------------------------
-			//Usage of returning sprite object: texturesAll[ index ]
-			if ( $this.hasClass( 'eff-3d-rotating' ) ) {
-
-
-				var texture;
-				
-				//Drag and Drop
-				var targetRotationX             = 0,
-					targetRotationXOnMouseDown  = 0,
-					targetRotationXOnTouchDown  = 0,
-				    targetRotationY             = 0,
-					targetRotationYOnMouseDown  = 0,
-					targetRotationYOnTouchDown  = 0,
-					mouseX                      = 0,
-					mouseY                      = 0,
-					mouseXOnMouseDown           = 0,
-					mouseXOnTouchDown           = 0,
-					mouseYOnMouseDown           = 0,
-					mouseYOnTouchDown           = 0,
-					windowHalfX                 = $this.width() / 2,
-					windowHalfY                 = $this.height() / 2;
-
-				
-
-				//Add Geometries and Lights to the main container 
-				//-------------------------------------					
-				var init = function() {
 					$this.find( '.item' ).each( function( index )  {
 
 						var $thisItem = $( this );
 
-						// create a scene, that will hold all our elements such as objects, cameras and lights.
-						var scene  = new THREE.Scene();
-						scene.name = 'scene-' + index;
+						//Load sprite from each slider to canvas
+						//-------------------------------------
+						var curSprite;
 
-
-						// make a list item
-						var element = document.createElement( 'div' );
-						element.className = 'list-item';
-						element.innerHTML = '<div class="scene" style="width:'+$this.width() +'px;height:'+$this.height() +'px;"></div>';
-
-						// Look up the element that represents the area
-						// we want to render the scene
-						scene.userData.element = element.querySelector( '.scene' );
-						document.getElementById( rendererOuterID ).appendChild( element );
-
-						TweenLite.set( $( '#' + rendererOuterID ).find( '.list-item' ), {
-								alpha: 0,
-								css  : {
-									display: 'none'
-								}
-							});	
-
-
-						// Create a camera, which defines where we're looking at.
-						var aspect      = $this.width() / $this.height(),
-							camera      = new THREE.PerspectiveCamera( 55, aspect, 0.1, 1000 );
-
-						camera.position.x = 0;
-						camera.position.y = -30;
-						camera.position.z = 25;
-						camera.lookAt( new THREE.Vector3( 0, 0, 0 ) );
-						scene.userData.camera = camera;
-
-
-						// Generate one plane geometries mesh to each scene
 						if ( $thisItem.find( 'video' ).length > 0 ) {
 
 
-							texture = new THREE.VideoTexture( document.getElementById( $thisItem.find( 'video' ).attr( 'id' ) ) );
-							texture.minFilter = THREE.LinearFilter;
-							texture.magFilter = THREE.LinearFilter;
-							texture.format = THREE.RGBFormat;
+							// create a video texture from a path
+							var videoURL = $thisItem.find( 'source:first' ).attr( 'src' ),
+								texture  = PIXI.Texture.fromVideo( videoURL );
+
+							curSprite = new PIXI.Sprite( texture );
 
 							// pause the video
-							texture.image.autoplay = true;
-							texture.image.currentTime = 0;
-							texture.image.muted = false;
-							texture.image.pause();
-							
+							var videoSource = texture.baseTexture.source;
+							videoSource.autoplay = false;
+							videoSource.pause();
+							videoSource.currentTime = 0;
+							videoSource.muted = true;
+
+							//Returns the dimensions (intrinsic height and width ) of the video
+							var video = document.getElementById( $thisItem.find( 'video' ).attr( 'id' ) );
+							video.addEventListener( 'loadedmetadata', function( e ) {
+
+								var	curW    = this.videoWidth,
+									curH    = this.videoHeight,
+									newW    = curW,
+									newH    = curH;
+
+								newW = $this.width();
+
+								//Scaled/Proportional Content 
+								newH = curH*(newW/curW);
+
+								//At the same time change the height of the canvas
+								renderer.view.style.width = newW + 'px';
+								renderer.view.style.height = newH + 'px';	
+
+
+							}, false);	
+
+							video.src = videoURL;
+
 
 
 						} else {
-							texture = new THREE.TextureLoader().load( $thisItem.find( 'img' ).attr( 'src' ) );
-							texture.generateMipmaps = false;
-							texture.wrapS = texture.wrapT = THREE.ClampToEdgeWrapping;
-							texture.minFilter = THREE.LinearFilter;
+
+							var imgURL   = $thisItem.find( 'img' ).attr( 'src' ),
+								imgCur   = new Image();
+
+							curSprite = new PIXI.Sprite.fromImage( imgURL );
+
+							imgCur.onload = function() {
+
+								//At the same time change the height of the canvas
+								renderer.view.style.width = $thisItem.find( 'img' ).width() + 'px';
+								renderer.view.style.height = $thisItem.find( 'img' ).height() + 'px';
+
+
+							};
+
+							imgCur.src = imgURL;
+
+
 						}
-						
-						// texture controller
-						texturesAll.push( texture );
 
-						
+						curSprite.width  = $this.width();
+						curSprite.height = $this.height();	
 
 
-						// Immediately use the texture for material creation
-						var spriteMat            = new THREE.MeshPhongMaterial( { map: texture } ),
-							imgRatio             = $this.width() / $this.height(),
-							geometry             = new THREE.BoxGeometry( imgRatio*15, 15, 2 ),
-							displacementSprite   = new THREE.Mesh( geometry, spriteMat );
+						// Render updated scene
+						renderer.stage.addChild( curSprite );
 
-						displacementSprite.position.set( -0.01, -0.01, 0 );
-						displacementSprite.rotation.set( 0, 0, 0 );
-						scene.add( displacementSprite );
-
-
-						// Generate Ambient Light
-						var ambiLight = new THREE.AmbientLight( 0x404040 );
-						scene.add( ambiLight );
-
-						// Generate Directional Light
-						var light = new THREE.DirectionalLight( 0xffffff, 0.5 );
-						light.position.set( 0, 30, 70 );
-						scene.add( light );
-
-
-						// Display multiple instances of three.js in a single page
-						scenesAll.push( scene );
+						TweenMax.set( curSprite, {
+							alpha : 0
+						});	
 
 
 
 					});
 
 
-					//Create a render and set the size
-					webGLRenderer = new THREE.WebGLRenderer( { 
-											canvas   : document.getElementById( rendererCanvasID ), //canvas
-											alpha    : true, 
-											antialias: true 
-										} );
 
-					webGLRenderer.setClearColor( new THREE.Color( 0x000000, 0 ) );
-					webGLRenderer.setPixelRatio( window.devicePixelRatio );  
-					webGLRenderer.shadowMap.enabled = true;
+					//Initialize the default height of canvas
+					//-------------------------------------	
+					setTimeout( function() {
+						canvasDefaultInit( $first );
+					}, animDuration );
 
 
-				};
 
-				//Add render event
-				//-------------------------------------	
-				
-				//Converts numeric degrees to radians
-				var toRad = function( number ) {
-					return number * Math.PI / 180;
-				};
-
-				
-				var render = function() {
+				}// end effect
 
 
-					webGLRenderer.setClearColor( 0x000000 );
-					webGLRenderer.setScissorTest( false );
-					webGLRenderer.clear();
-
-					webGLRenderer.setClearColor( 0x000000 );
-					webGLRenderer.setScissorTest( true );
-
-					scenesAll.forEach( function( scene, i ) {
-
-						// Get the element that is a place holder for where we want to draw the scene
-						var element = scene.userData.element,
-							camera  = scene.userData.camera,
-							rect    = element.getBoundingClientRect();
-						
-						
-						//automatic rotation
-						scene.children[0].rotation.y = Date.now() * 0.0001;
 
 
-						//drag & drop
-//						scene.children[0].rotation.x = toRad( targetRotationX * 4 );
-//						scene.children[0].rotation.y = toRad( targetRotationY * 4 );	
-//						
-						//drag & drop with easing effect
-						scene.children[0].rotation.x += ( targetRotationX - scene.children[0].rotation.x ) * 0.05;
-						scene.children[0].rotation.y += ( targetRotationY - scene.children[0].rotation.y ) * 0.05;
+
+				//----------------------------------------------------------------------------------
+				//--------------------------------- Liquid Distortion Effect -----------------------
+				//----------------------------------------------------------------------------------
+				//Usage of returning sprite object: items_container.children[index]
+				if ( $this.hasClass( 'eff-liquid' ) ) {
+
+					$this.find( '.item' ).each( function( index )  {
+
+						var $thisItem = $( this );
 
 
-						// set the viewport
-						webGLRenderer.setViewport( 0, 0, rect.width, rect.height );
-						webGLRenderer.setScissor( 0, 0, rect.width, rect.height );
 
-					
-						//tell texture object it needs to be updated
-						texture.needsUpdate = true;
+						//Load sprite from each slider to canvas
+						//-------------------------------------
+						var curSprite, 
+							canvasRatio = $this.width()/nativeItemW;
 
-						camera.aspect = $this.width() / $this.height(); // not changing in this example
-						camera.updateProjectionMatrix();
-						
-						//drag & drop
-						webGLRenderer.render( scene, camera );
-
-					} );
-
-				};
-
-				
-				
-				//Animation Effects
-				//-------------------------------------
-				var animate = function() {
-					render();
-					requestAnimationFrame( animate );
-				};
-
-				
-				init();
-				animate();
-				
-				
-				//Rotation and Drop
-
-				var onDocumentMouseDown = function( e ) {
-					e.preventDefault();
-					document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-					document.addEventListener( 'mouseup', onDocumentMouseUp, false );
-					document.addEventListener( 'mouseout', onDocumentMouseOut, false );
-					mouseXOnMouseDown = e.clientX - windowHalfX;
-					mouseYOnMouseDown = e.clientY - windowHalfY;
-					targetRotationXOnMouseDown = targetRotationX;
-					targetRotationYOnMouseDown = targetRotationY;
-				};
-
-				var onDocumentMouseMove = function( e ) {
-					mouseX = e.clientX - windowHalfX;
-					mouseY = e.clientY - windowHalfY;
-					targetRotationX = targetRotationXOnMouseDown + (mouseX - mouseXOnMouseDown) * 0.02;
-					targetRotationY = targetRotationYOnMouseDown + (mouseY - mouseYOnMouseDown) * 0.02;
-				};
-
-				var onDocumentMouseUp = function( e ) {
-					document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
-					document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
-					document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
-
-				};
-
-				var onDocumentMouseOut = function( e ) {
-					document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
-					document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
-					document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
-
-				};
-				
-			
-				
-			
-				var onDocumentTouchStart = function( e ) {
-					e.preventDefault();
-					e = e.changedTouches[ 0 ];
-					
-					document.addEventListener( 'touchmove', onDocumentTouchMove, false );
-					document.addEventListener( 'touchend', onDocumentTouchEnd, false );
-					mouseXOnTouchDown = e.clientX - windowHalfX;
-					mouseYOnTouchDown = e.clientY - windowHalfY;
-					targetRotationXOnTouchDown = targetRotationX;
-					targetRotationYOnTouchDown = targetRotationY;
-
-					
-				};
-
-				var onDocumentTouchMove = function( e ) {
-					e.preventDefault();
-					e = e.changedTouches[ 0 ];
-						
-					mouseX = e.clientX - windowHalfX;
-					mouseY = e.clientY - windowHalfY;
-					targetRotationX = targetRotationXOnTouchDown + (mouseX - mouseXOnTouchDown) * 0.02;
-					targetRotationY = targetRotationYOnTouchDown + (mouseY - mouseYOnTouchDown) * 0.02;	
+						if ( $thisItem.find( 'video' ).length > 0 ) {
 
 
-					
-				};
+							// create a video texture from a path
+							var videoURL = $thisItem.find( 'source:first' ).attr( 'src' ),
+								texture  = PIXI.Texture.fromVideo( videoURL );
 
-				var onDocumentTouchEnd = function( e ) {
-					document.removeEventListener( 'touchmove', onDocumentTouchMove, false );
-					document.removeEventListener( 'touchend', onDocumentTouchEnd, false );
+							curSprite = new PIXI.Sprite( texture );
 
-				};
+							// pause the video
+							var videoSource = texture.baseTexture.source;
+							videoSource.autoplay = false;
+							videoSource.pause();
+							videoSource.currentTime = 0;
+							videoSource.muted = true;
 
-                if ( Modernizr.touchevents ) {
-					document.addEventListener( 'touchstart', onDocumentTouchStart, false );
-				} else {
-					document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-				}
-				
 
-				
+							//Returns the dimensions (intrinsic height and width ) of the video
+							var video = document.getElementById( $thisItem.find( 'video' ).attr( 'id' ) );
+							video.addEventListener( 'loadedmetadata', function( e ) {
 
-				//Responsive plane geometries
-				//-------------------------------------
-				window.addEventListener( 'resize', function () {
+								var	curW    = this.videoWidth,
+									curH    = this.videoHeight,
+									newW    = curW,
+									newH    = curH;
 
-					var width = document.getElementById( rendererCanvasID ).clientWidth;
-					var height = document.getElementById( rendererCanvasID ).clientHeight;
+								newW = $this.width();
 
-					if ( document.getElementById( rendererCanvasID ).width !== width || document.getElementById( rendererCanvasID ).height !== height ) {
+								//Scaled/Proportional Content 
+								newH = curH*(newW/curW);
 
-						webGLRenderer.setSize( width, height, false );
+								//At the same time change the height of the canvas
+								renderer.view.style.width = newW + 'px';
+								renderer.view.style.height = newH + 'px';	
 
+
+							}, false);	
+
+							video.src = videoURL;
+
+
+
+						} else {
+
+							var imgURL   = $thisItem.find( 'img' ).attr( 'src' ),
+								imgCur   = new Image();
+
+							curSprite = new PIXI.Sprite.fromImage( imgURL );
+
+							imgCur.onload = function() {
+
+								//At the same time change the height of the canvas
+								renderer.view.style.width = $thisItem.find( 'img' ).width() + 'px';
+								renderer.view.style.height =$thisItem.find( 'img' ).height() + 'px';
+
+							};
+
+							imgCur.src = imgURL;
+
+
+						}
+
+						curSprite.width  = $this.width();
+						curSprite.height = $this.height();	
+
+
+						//Need to scale according to the screen
+						curSprite.scale.set( canvasRatio );
+
+						TweenMax.set( curSprite, {
+							alpha : 0
+						});	
+
+
+						items_container.addChild( curSprite );
+						// Enable interactions
+						items_container.interactive = true;
+
+
+						//Add child container to the main container 
+						//-------------------------------------
+						stage_filter.addChild( items_container );
+						// Enable Interactions
+						stage_filter.interactive = true;
+
+						//A texture stores the information that represents an image
+						displacementSprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
+
+
+						//Set the filter to stage and set some default values for the animation
+						//-------------------------------------
+						stage_filter.filters = [ displacementFilter ];    
+
+
+						//Add filter container to the main container
+						//-------------------------------------				
+						displacementSprite.anchor.set( 0.5 );
+						displacementSprite.x = renderer_filter.width / 2;
+						displacementSprite.y = renderer_filter.height / 2; 
+
+						displacementSprite.scale.x = 1;
+						displacementSprite.scale.y = 1;
+
+						// PIXI tries to fit the filter bounding box to the renderer so we optionally bypass
+						displacementFilter.autoFit = false;
+
+						stage_filter.addChild( displacementSprite );
+
+						//Animation Effects
+						//-------------------------------------
+						var ticker       = new PIXI.ticker.Ticker();
+						ticker.autoStart = true;
+						ticker.add( function( delta ) {
+
+	//								displacementSprite.x += 12.14 * delta;
+	//								displacementSprite.y += 42.24 * delta;
+	//
+	//								displacementSprite.scale.x += 0.2 * delta;
+	//								displacementSprite.scale.y += 0.2 * delta;
+
+							// Render updated scene
+							renderer_filter.render( stage_filter );
+
+						});
+
+
+					});
+
+					//Initialize the default height of canvas
+					//-------------------------------------	
+					setTimeout( function() {
+						canvasDefaultInit( $first );
+					}, animDuration );
+
+
+				}// end effect
+
+
+
+
+				//----------------------------------------------------------------------------------
+				//--------------------------------- 3D Rotating Effect -----------------------------
+				//----------------------------------------------------------------------------------
+				//Usage of returning sprite object: texturesAll[ index ]     scenesAll[ index ]
+				if ( $this.hasClass( 'eff-3d-rotating' ) ) {
+
+
+					var texture;
+
+					//Drag and Drop
+					var targetRotationX             = 0,
+						targetRotationXOnMouseDown  = 0,
+						targetRotationXOnTouchDown  = 0,
+						targetRotationY             = 0,
+						targetRotationYOnMouseDown  = 0,
+						targetRotationYOnTouchDown  = 0,
+						mouseX                      = 0,
+						mouseY                      = 0,
+						mouseXOnMouseDown           = 0,
+						mouseXOnTouchDown           = 0,
+						mouseYOnMouseDown           = 0,
+						mouseYOnTouchDown           = 0,
+						windowHalfX                 = $this.width() / 2,
+						windowHalfY                 = $this.height() / 2;
+
+
+
+					//Add Geometries and Lights to the main container 
+					//-------------------------------------					
+					var init = function() {
+						$this.find( '.item' ).each( function( index )  {
+
+							var $thisItem = $( this );
+
+							// create a scene, that will hold all our elements such as objects, cameras and lights.
+							var scene  = new THREE.Scene();
+							scene.name = 'scene-' + index;
+
+
+							// make a list item
+							var element = document.createElement( 'div' );
+							element.className = 'list-item';
+							element.innerHTML = '<div class="scene" style="width:'+$this.width() +'px;height:'+$this.height() +'px;"></div>';
+
+							// Look up the element that represents the area
+							// we want to render the scene
+							scene.userData.element = element.querySelector( '.scene' );
+							document.getElementById( rendererOuterID ).appendChild( element );
+
+							TweenMax.set( $( '#' + rendererOuterID ).find( '.list-item' ), {
+									alpha: 0,
+									css  : {
+										display: 'none'
+									}
+								});	
+
+
+							// Create a camera, which defines where we're looking at.
+							var aspect      = $this.width() / $this.height(),
+								camera      = new THREE.PerspectiveCamera( 55, aspect, 0.1, 1000 );
+
+							camera.position.x = 0;
+							camera.position.y = -30;
+							camera.position.z = 25;
+							camera.lookAt( new THREE.Vector3( 0, 0, 0 ) );
+							scene.userData.camera = camera;
+
+
+							// Generate one plane geometries mesh to each scene
+							if ( $thisItem.find( 'video' ).length > 0 ) {
+
+
+								texture = new THREE.VideoTexture( document.getElementById( $thisItem.find( 'video' ).attr( 'id' ) ) );
+								texture.minFilter = THREE.LinearFilter;
+								texture.magFilter = THREE.LinearFilter;
+								texture.format = THREE.RGBFormat;
+
+								// pause the video
+								texture.image.autoplay = true;
+								texture.image.currentTime = 0;
+								texture.image.muted = false;
+								texture.image.pause();
+
+
+
+							} else {
+								texture = new THREE.TextureLoader().load( $thisItem.find( 'img' ).attr( 'src' ) );
+								texture.generateMipmaps = false;
+								texture.wrapS = texture.wrapT = THREE.ClampToEdgeWrapping;
+								texture.minFilter = THREE.LinearFilter;
+							}
+
+							// texture controller
+							texturesAll.push( texture );
+
+
+
+
+							// Immediately use the texture for material creation
+							var spriteMat            = new THREE.MeshPhongMaterial( { map: texture } ),
+								imgRatio             = $this.width() / $this.height(),
+								geometry             = new THREE.BoxGeometry( imgRatio*15, 15, 2 ),
+								displacementSprite   = new THREE.Mesh( geometry, spriteMat );
+
+							displacementSprite.position.set( -0.01, -0.01, 0 );
+							displacementSprite.rotation.set( 0, 0, 0 );
+							scene.add( displacementSprite );
+
+
+							// Generate Ambient Light
+							var ambiLight = new THREE.AmbientLight( 0x404040 );
+							scene.add( ambiLight );
+
+							// Generate Directional Light
+							var light = new THREE.DirectionalLight( 0xffffff, 0.5 );
+							light.position.set( 0, 30, 70 );
+							scene.add( light );
+
+
+							// Display multiple instances of three.js in a single page
+							scenesAll.push( scene );
+
+
+
+						});
+
+
+						//Create a render and set the size
+						webGLRenderer = new THREE.WebGLRenderer( { 
+												canvas   : document.getElementById( rendererCanvasID ), //canvas
+												alpha    : true, 
+												antialias: true 
+											} );
+
+						webGLRenderer.setClearColor( new THREE.Color( 0x000000, 0 ) );
+						webGLRenderer.setPixelRatio( window.devicePixelRatio );  
+						webGLRenderer.shadowMap.enabled = true;
+
+
+					};
+
+					//Add render event
+					//-------------------------------------	
+
+					//Converts numeric degrees to radians
+					var toRad = function( number ) {
+						return number * Math.PI / 180;
+					};
+
+
+					var render = function() {
+
+
+						webGLRenderer.setClearColor( 0x000000 );
+						webGLRenderer.setScissorTest( false );
+						webGLRenderer.clear();
+
+						webGLRenderer.setClearColor( 0x000000 );
+						webGLRenderer.setScissorTest( true );
+
+						scenesAll.forEach( function( scene, i ) {
+
+							// Get the element that is a place holder for where we want to draw the scene
+							var element = scene.userData.element,
+								camera  = scene.userData.camera,
+								rect    = element.getBoundingClientRect();
+
+
+							//automatic rotation
+							scene.children[0].rotation.y = Date.now() * 0.0001;
+
+
+							//drag & drop
+	//						scene.children[0].rotation.x = toRad( targetRotationX * 4 );
+	//						scene.children[0].rotation.y = toRad( targetRotationY * 4 );	
+	//						
+							//drag & drop with easing effect
+							scene.children[0].rotation.x += ( targetRotationX - scene.children[0].rotation.x ) * 0.05;
+							scene.children[0].rotation.y += ( targetRotationY - scene.children[0].rotation.y ) * 0.05;
+
+
+							// set the viewport
+							webGLRenderer.setViewport( 0, 0, rect.width, rect.height );
+							webGLRenderer.setScissor( 0, 0, rect.width, rect.height );
+
+
+							//tell texture object it needs to be updated
+							texture.needsUpdate = true;
+
+							camera.aspect = $this.width() / $this.height(); // not changing in this example
+							camera.updateProjectionMatrix();
+
+							//drag & drop
+							webGLRenderer.render( scene, camera );
+
+						} );
+
+					};
+
+
+
+					//Animation Effects
+					//-------------------------------------
+					var animate = function() {
+						render();
+						requestAnimationFrame( animate );
+					};
+
+
+					init();
+					animate();
+
+
+					//Rotation and Drop
+
+					var onDocumentMouseDown = function( e ) {
+						e.preventDefault();
+						document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+						document.addEventListener( 'mouseup', onDocumentMouseUp, false );
+						document.addEventListener( 'mouseout', onDocumentMouseOut, false );
+						mouseXOnMouseDown = e.clientX - windowHalfX;
+						mouseYOnMouseDown = e.clientY - windowHalfY;
+						targetRotationXOnMouseDown = targetRotationX;
+						targetRotationYOnMouseDown = targetRotationY;
+					};
+
+					var onDocumentMouseMove = function( e ) {
+						mouseX = e.clientX - windowHalfX;
+						mouseY = e.clientY - windowHalfY;
+						targetRotationX = targetRotationXOnMouseDown + (mouseX - mouseXOnMouseDown) * 0.02;
+						targetRotationY = targetRotationYOnMouseDown + (mouseY - mouseYOnMouseDown) * 0.02;
+					};
+
+					var onDocumentMouseUp = function( e ) {
+						document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
+						document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
+						document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
+
+					};
+
+					var onDocumentMouseOut = function( e ) {
+						document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
+						document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
+						document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
+
+					};
+
+
+
+
+					var onDocumentTouchStart = function( e ) {
+						e.preventDefault();
+						e = e.changedTouches[ 0 ];
+
+						document.addEventListener( 'touchmove', onDocumentTouchMove, false );
+						document.addEventListener( 'touchend', onDocumentTouchEnd, false );
+						mouseXOnTouchDown = e.clientX - windowHalfX;
+						mouseYOnTouchDown = e.clientY - windowHalfY;
+						targetRotationXOnTouchDown = targetRotationX;
+						targetRotationYOnTouchDown = targetRotationY;
+
+
+					};
+
+					var onDocumentTouchMove = function( e ) {
+						e.preventDefault();
+						e = e.changedTouches[ 0 ];
+
+						mouseX = e.clientX - windowHalfX;
+						mouseY = e.clientY - windowHalfY;
+						targetRotationX = targetRotationXOnTouchDown + (mouseX - mouseXOnTouchDown) * 0.02;
+						targetRotationY = targetRotationYOnTouchDown + (mouseY - mouseYOnTouchDown) * 0.02;	
+
+
+
+					};
+
+					var onDocumentTouchEnd = function( e ) {
+						document.removeEventListener( 'touchmove', onDocumentTouchMove, false );
+						document.removeEventListener( 'touchend', onDocumentTouchEnd, false );
+
+					};
+
+					if ( Modernizr.touchevents ) {
+						document.addEventListener( 'touchstart', onDocumentTouchStart, false );
+					} else {
+						document.addEventListener( 'mousedown', onDocumentMouseDown, false );
 					}
 
 
-				}, false );
 
 
-				//Initialize the default height of canvas
-				//-------------------------------------	
-				setTimeout( function() {
-					canvasDefaultInit( $first );
-				}, animDuration );
+					//Responsive plane geometries
+					//-------------------------------------
+					window.addEventListener( 'resize', function () {
+
+						var width = document.getElementById( rendererCanvasID ).clientWidth;
+						var height = document.getElementById( rendererCanvasID ).clientHeight;
+
+						if ( document.getElementById( rendererCanvasID ).width !== width || document.getElementById( rendererCanvasID ).height !== height ) {
+
+							webGLRenderer.setSize( width, height, false );
+
+						}
+
+
+					}, false );
+
+
+					//Initialize the default height of canvas
+					//-------------------------------------	
+					setTimeout( function() {
+						canvasDefaultInit( $first );
+					}, animDuration );
+
+
+				}// end effect
+
+
+				//Canvas Interactions
+				//-------------------------------------
+				transitionInteractions( 0, $this, 'in' );
 				
-
-			}// end effect
-
-
+				
+			}
 			
-			transitionInteractions( 0, $this );
 
 			// Fires local videos asynchronously with slider switch.
 			//-------------------------------------
@@ -2271,6 +2275,11 @@ theme = ( function ( theme, $, window, document ) {
 				e.preventDefault();
 
 				if ( !$( this ).hasClass( 'active' ) ) {
+					
+					//Canvas Interactions
+					transitionInteractions( $items.filter( '.active' ).index(), sliderWrapper, 'out' );
+					
+					//Update the current and previous/next items
 					sliderUpdates( $( this ).attr( 'data-index' ), sliderWrapper );
 
 					//Pause the auto play event
@@ -2298,6 +2307,10 @@ theme = ( function ( theme, $, window, document ) {
 			_prev.on( 'click', function( e ) {
 				e.preventDefault();
 
+				//Canvas Interactions
+				transitionInteractions( $items.filter( '.active' ).index(), sliderWrapper, 'out' );	
+
+				//Update the current and previous items
 				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, sliderWrapper );
 
 				//Pause the auto play event
@@ -2308,6 +2321,10 @@ theme = ( function ( theme, $, window, document ) {
 			_next.on( 'click', function( e ) {
 				e.preventDefault();
 
+				//Canvas Interactions
+				transitionInteractions( $items.filter( '.active' ).index(), sliderWrapper, 'out' );	
+
+				//Update the current and next items
 				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, sliderWrapper );
 
 
@@ -2485,7 +2502,7 @@ theme = ( function ( theme, $, window, document ) {
 			
 			//Canvas Interactions
 			//-------------------------------------
-			transitionInteractions( elementIndex, slider );
+			transitionInteractions( elementIndex, slider, 'in' );
 			
 
 			
@@ -2513,7 +2530,11 @@ theme = ( function ( theme, $, window, document ) {
 
 					//At the same time change the height of the canvas and slider container
 					var h = this.videoHeight*(slider.closest( '.custom-advanced-slider-outer' ).width()/this.videoWidth);
-					renderer.view.style.height = h + 'px';
+					
+					if ( Modernizr.webgl ) {
+						renderer.view.style.height = h + 'px';
+					}
+					
 					//---
 					$sliderWrapper.css( 'height', h + 'px' );	
 
@@ -2530,7 +2551,9 @@ theme = ( function ( theme, $, window, document ) {
 
 				img.onload = function() {
 
-					renderer.view.style.height = slider.find( 'img' ).height() + 'px';	
+					if ( Modernizr.webgl ) {
+					    renderer.view.style.height = slider.find( 'img' ).height() + 'px';		
+					}
 					//---
 					$sliderWrapper.css( 'height', slider.closest( '.custom-advanced-slider-outer' ).width()*(this.height/this.width) + 'px' );		
 
@@ -2551,10 +2574,12 @@ theme = ( function ( theme, $, window, document ) {
 		 * @http://pixijs.download/dev/docs/index.html
 		 *
 		 * @param  {number} elementIndex     - Index of current slider.
-		 * @param  {object} slider           - Selector of the slider .
+		 * @param  {object} slider           - Selector of the slider.
+		 * @param  {string} goType           - The type of entry and exit between two items.  
+		                                       Optional values: in, out
 		 * @return {void}                    - The constructor.
 		 */
-        function transitionInteractions( elementIndex, slider ) {
+        function transitionInteractions( elementIndex, slider, goType ) {
 			
 			if ( Modernizr.webgl ) {
 			
@@ -2575,71 +2600,88 @@ theme = ( function ( theme, $, window, document ) {
 			
 					//Display wrapper of canvas (transitions between slides)
 					//-------------------------------------	
-					TweenLite.to( $myRenderer, animDuration/1000, {
-						alpha : 0,
-						onComplete    : function() {
-							
-							var curSp = renderer.stage.children[ elementIndex ];
+					if ( goType == 'out' ) {
+						//Current item leaving action
+						
+						TweenMax.to( renderer.stage.children[ elementIndex ], 1, {
+							pixi: {
+								brightness: 5
+							},
+							alpha : 1
+						});	
+						
+					} else {
+						//Current item entry action
+						
+						TweenMax.to( $myRenderer, animDuration/1000, {
+							alpha : 0,
+							onComplete    : function() {
 
-							TweenLite.to( this.target, animDuration/1000, {
-								alpha : 1
-							});			
-							
-							
-							//display the current item
-							for ( var k = 0; k < spTotal; k++ ) {
-								
-								var obj = renderer.stage.children[ k ];
-								TweenLite.set( obj, {
-									alpha : 0
-								});	
-								
-								//pause all videos
-								if ( obj._texture.baseTexture.imageType == null ) {
-									var videoSource = obj.texture.baseTexture.source;
+								var curSp = renderer.stage.children[ elementIndex ];
+
+								TweenMax.to( this.target, animDuration/1000, {
+									alpha : 1
+								});			
+
+
+								//display the current item
+								for ( var k = 0; k < spTotal; k++ ) {
+
+									var obj = renderer.stage.children[ k ];
+									TweenMax.set( obj, {
+										alpha : 0
+									});	
+
+									//pause all videos
+									if ( obj._texture.baseTexture.imageType == null ) {
+										var videoSource = obj.texture.baseTexture.source;
+
+										// play the video
+										videoSource.currentTime = 0;
+										videoSource.autoplay = false;
+										videoSource.pause();
+										videoSource.muted = true;
+									}		
+
+								}
+
+
+
+								//play current video
+								if ( curSp._texture.baseTexture.imageType == null ) {
+									var videoSource2 = curSp.texture.baseTexture.source;
 
 									// play the video
-									videoSource.currentTime = 0;
-									videoSource.autoplay = false;
-									videoSource.pause();
-									videoSource.muted = true;
-								}		
-								
-							}
-							
-							
-							
-							//play current video
-							if ( curSp._texture.baseTexture.imageType == null ) {
-								var videoSource2 = curSp.texture.baseTexture.source;
-								
-								// play the video
-								videoSource2.currentTime = 0;
-								videoSource2.autoplay = true;
-								videoSource2.play();
-								videoSource2.muted = false;
-							}
+									videoSource2.currentTime = 0;
+									videoSource2.autoplay = true;
+									videoSource2.play();
+									videoSource2.muted = false;
+								}
 
 
-							//display filters
-							TweenLite.set( curSp, {
-								pixi: {
-									brightness: 5
-								},
-								alpha : 1
-							});		
-							
-							TweenLite.to( curSp, animDuration/1000, {
-								pixi: {
-									brightness: 1
-								},
-								delay : animDuration/1000,
-							});		
-						
-							
+								//display filters
+								TweenMax.set( curSp, {
+									pixi: {
+										brightness: 5
+									},
+									alpha : 1
+								});		
+
+								TweenMax.to( curSp, animDuration/1000, {
+									pixi: {
+										brightness: 1
+									},
+									delay : animDuration/1000,
+								});		
+
+
+
+							}
+						});			
+					}
 					
-						}
-					});		
+					
+
 	
 
 
@@ -2658,104 +2700,120 @@ theme = ( function ( theme, $, window, document ) {
 					
 					//Display wrapper of canvas (transitions between slides)
 					//-------------------------------------	
-					TweenLite.to( $myRenderer, animDuration/1000, {
-						alpha : 0,
-						onComplete    : function() {
-							
-							var curSp = items_container.children[ elementIndex ];
-				
-							TweenLite.to( this.target, animDuration/1000, {
-								alpha : 1
-							});	
+					if ( goType == 'out' ) {
+						//Current item leaving action
+						
+						TweenMax.to( displacementSprite.scale, 1, { 
+							x: 10,
+							y: 10
+						} );
 
-							
-							//display the current item
-							for ( var k = 0; k < spTotal; k++ ) {
-								
-								var obj = items_container.children[ k ];
-								TweenLite.set( obj, {
-									alpha : 0
+						
+					} else {
+						//Current item entry action
+						
+						TweenMax.to( $myRenderer, animDuration/1000, {
+							alpha : 0,
+							onComplete    : function() {
+
+								var curSp = items_container.children[ elementIndex ];
+
+								TweenMax.to( this.target, animDuration/1000, {
+									alpha : 1
 								});	
-								
-								//pause all videos
-								if ( obj._texture.baseTexture.imageType == null ) {
-									var videoSource = obj.texture.baseTexture.source;
+
+
+								//display the current item
+								for ( var k = 0; k < spTotal; k++ ) {
+
+									var obj = items_container.children[ k ];
+									TweenMax.set( obj, {
+										alpha : 0
+									});	
+
+									//pause all videos
+									if ( obj._texture.baseTexture.imageType == null ) {
+										var videoSource = obj.texture.baseTexture.source;
+
+										// play the video
+										videoSource.currentTime = 0;
+										videoSource.autoplay = false;
+										videoSource.pause();
+										videoSource.muted = true;
+									}		
+
+								}
+
+
+
+								//play current video
+								if ( curSp._texture.baseTexture.imageType == null ) {
+									var videoSource2 = curSp.texture.baseTexture.source;
 
 									// play the video
-									videoSource.currentTime = 0;
-									videoSource.autoplay = false;
-									videoSource.pause();
-									videoSource.muted = true;
-								}		
-								
-							}
-							
-							
-							
-							//play current video
-							if ( curSp._texture.baseTexture.imageType == null ) {
-								var videoSource2 = curSp.texture.baseTexture.source;
-								
-								// play the video
-								videoSource2.currentTime = 0;
-								videoSource2.autoplay = true;
-								videoSource2.play();
-								videoSource2.muted = false;
-							}
-							
-                           
-							//display filters
-							TweenLite.set( curSp, {
-								alpha : 1
-							});	
-							
-							displacementSprite.scale.set( 10, 10 );
-							var baseTimeline = TweenLite.to( displacementSprite.scale, 2, { 
-								x: 0,
-								y: 0,
-								onComplete: function() {
-									
-									
-								},
-								onUpdate: function() {
-									//console.log( baseTimeline.progress() );
-									
+									videoSource2.currentTime = 0;
+									videoSource2.autoplay = true;
+									videoSource2.play();
+									videoSource2.muted = false;
 								}
-							} );
-							
 
-							
-							
-					
-						}
-					});		
-					
-					
-					
-					//Add new ripple each time mouse is clicked
-					//-------------------------------------
-					// @https://pixijs.download/v4.5.4/docs/PIXI.interaction.InteractionManager.html
-					var rafID, mouseX, mouseY;
-					
-					stage_filter.pointerup = function( mouseData ) {
-						TweenLite.to( displacementSprite.scale, 1, { x: 0, y: 0 } );
-					    cancelAnimationFrame( rafID );               
-					
-					};
-    
-					stage_filter.pointerdown = function( mouseData ) {
-						mouseX = mouseData.data.global.x;
-						mouseY = mouseData.data.global.y;   
-						TweenLite.to( displacementSprite.scale, 1, { x: "+=" + Math.sin( mouseX ) * 100 + "", y: "+=" + Math.cos( mouseY ) * 100 + ""  });   
-						rotateSpite();	
-						
-					};     
 
-					var rotateSpite = function() {
-						displacementSprite.rotation += 0.001;
-						rafID = requestAnimationFrame( rotateSpite );
-					};
+								//display filters
+								TweenMax.set( curSp, {
+									alpha : 1
+								});	
+
+								displacementSprite.scale.set( 10, 10 );
+								var baseTimeline = TweenMax.to( displacementSprite.scale, 2, { 
+									x: 0,
+									y: 0,
+									onComplete: function() {
+
+
+									},
+									onUpdate: function() {
+										//console.log( baseTimeline.progress() );
+
+									}
+								} );
+
+
+
+
+
+							}
+						});		
+
+
+
+						//Add new ripple each time mouse is clicked
+						//-------------------------------------
+						// @https://pixijs.download/v4.5.4/docs/PIXI.interaction.InteractionManager.html
+						var rafID, mouseX, mouseY;
+
+						stage_filter.pointerup = function( mouseData ) {
+							TweenMax.to( displacementSprite.scale, 1, { x: 0, y: 0 } );
+							cancelAnimationFrame( rafID );               
+
+						};
+
+						stage_filter.pointerdown = function( mouseData ) {
+							mouseX = mouseData.data.global.x;
+							mouseY = mouseData.data.global.y;   
+							TweenMax.to( displacementSprite.scale, 1, { x: "+=" + Math.sin( mouseX ) * 100 + "", y: "+=" + Math.cos( mouseY ) * 100 + ""  });   
+							rotateSpite();	
+
+						};     
+
+						var rotateSpite = function() {
+							displacementSprite.rotation += 0.001;
+							rafID = requestAnimationFrame( rotateSpite );
+						};
+	
+					}	
 					
+					
+
 					
 				
 
@@ -2771,69 +2829,87 @@ theme = ( function ( theme, $, window, document ) {
 					
 					//Display wrapper of canvas (transitions between slides)
 					//-------------------------------------	
-					TweenLite.to( $myRenderer, animDuration/1000, {
-						alpha : 0,
-						onComplete    : function() {
-							
-							var curSp = $myRenderer.find( '.list-item' ).eq( elementIndex );
-							
-							TweenLite.to( this.target, animDuration/1000, {
-								alpha : 1
-							});
-							
-							
-							//display the current item
-							TweenLite.set( $myRenderer.find( '.list-item' ), {
-								alpha: 0,
-								css  : {
-									display: 'none'
-								}
-							});	
-
 					
-							// pause all videos
-							for ( var k = 0; k < spTotal; k++ ) {
-								
-								var videoOb = texturesAll[ k ].image;
-								
-								if ( videoOb.currentSrc.indexOf( '.mp4' ) >= 0 ) {
-									videoOb.autoplay = false;
-									videoOb.currentTime = 0;
-									videoOb.muted = true;
-									videoOb.pause();
+					if ( goType == 'out' ) {
+						//Current item leaving action
+						
+						
+						//rotation transition
+						TweenMax.to( scenesAll[ elementIndex ].children[ 0 ].rotation, animDuration/1000, {
+							x: '+=2',
+							y: '+=2'
+						});	
+						
+						
+	
+					} else {
+						//Current item entry action
+						
+						TweenMax.to( $myRenderer, animDuration/1000, {
+							alpha : 0,
+							onComplete    : function() {
+
+								var curSp = $myRenderer.find( '.list-item' ).eq( elementIndex );
+
+								TweenMax.to( this.target, animDuration/1000, {
+									alpha : 1
+								});
+
+
+								//display the current item
+								TweenMax.set( $myRenderer.find( '.list-item' ), {
+									alpha: 0,
+									css  : {
+										display: 'none'
+									}
+								});	
+
+
+								// pause all videos
+								for ( var k = 0; k < spTotal; k++ ) {
+
+									var videoOb = texturesAll[ k ].image;
+
+									if ( videoOb.currentSrc.indexOf( '.mp4' ) >= 0 ) {
+										videoOb.autoplay = false;
+										videoOb.currentTime = 0;
+										videoOb.muted = true;
+										videoOb.pause();
+									}
+
 								}
+
+
+
+								// play the video
+								var videoObCur =  texturesAll[ elementIndex ].image;
+
+								if ( videoObCur.currentSrc.indexOf( '.mp4' ) >= 0 ) {
+									videoObCur.autoplay = true;
+									videoObCur.currentTime = 0;
+									videoObCur.muted = false;
+									videoObCur.play();
+								}
+
+
+
+								//display filters
+								TweenMax.to( curSp, animDuration/1000, {
+									alpha: 1,
+									css : {
+										display: 'block'
+									}
+								});	
+
 
 							}
-							
-							
-							
-							// play the video
-							var videoObCur =  texturesAll[ elementIndex ].image;
-							
-							
-							
-							if ( videoObCur.currentSrc.indexOf( '.mp4' ) >= 0 ) {
-								videoObCur.autoplay = true;
-								videoObCur.currentTime = 0;
-								videoObCur.muted = false;
-								videoObCur.play();
-							}
+						});			
 
-							
-							
-							
-							//display filters
-							TweenLite.to( curSp, animDuration/1000, {
-								alpha: 1,
-								css : {
-									display: 'block'
-								}
-							});	
-							
-							
-						}
-					});			
-					
+						
+					}
+
+
+
 					
 
 				}// end effect
@@ -5653,7 +5729,7 @@ theme = ( function ( theme, $, window, document ) {
       },
       uniqueID: function($clone) {
         // Append _clone to current level and children elements with id attributes
-        $clone.filter( '[id]' ).add($clone.find( '[id]' )).each(function() {
+        $clone.filter( '[id]' ).add($clone.find( '[id]' )).each( function() {
           var $this = $(this);
           $this.attr( 'id', $this.attr( 'id' ) + '_clone' );
         });
@@ -6219,7 +6295,7 @@ theme = ( function ( theme, $, window, document ) {
     if (options === undefined) { options = {}; }
 
     if (typeof options === "object") {
-      return this.each(function() {
+      return this.each( function() {
         var $this = $(this),
             selector = (options.selector) ? options.selector : ".slides > li",
             $slides = $this.find(selector);
@@ -6673,7 +6749,7 @@ theme = ( function ( theme, $, window, document ) {
 				customCheckbox     = settings.checkboxWrapper;
 
 
-			$( customRadio ).find( 'input[type="radio"]' ).each(function() {
+			$( customRadio ).find( 'input[type="radio"]' ).each( function() {
 				var dataExist = $( this ).data( 'exist' );
 				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
 					$( '<span class="custom-radio-trigger"></span>' ).insertAfter( $( this ) );
@@ -6684,7 +6760,7 @@ theme = ( function ( theme, $, window, document ) {
 
 			});
 
-			$( customToggle ).find( 'input[type="checkbox"]' ).each(function() {
+			$( customToggle ).find( 'input[type="checkbox"]' ).each( function() {
 				var dataExist = $( this ).data( 'exist' );
 				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
 					$( '<span class="custom-toggle-trigger"></span>' ).insertAfter( $( this ) );
@@ -6696,7 +6772,7 @@ theme = ( function ( theme, $, window, document ) {
 
 			});
 
-			$( customCheckbox ).find( 'input[type="checkbox"]' ).each(function() {
+			$( customCheckbox ).find( 'input[type="checkbox"]' ).each( function() {
 				var dataExist = $( this ).data( 'exist' );
 				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
 					$( '<span class="custom-checkbox-trigger"></span>' ).insertAfter( $( this ) );
@@ -6740,7 +6816,7 @@ theme = ( function ( theme, $, window, document ) {
 				customControls     = settings.controls;
 
 
-			$( customControls ).each(function() {
+			$( customControls ).each( function() {
 				var dataExist = $( this ).data( 'exist' );
 				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
 					$( '<span class="bar"></span>' ).insertAfter( $( this ).find( 'label' ) );
@@ -7161,7 +7237,7 @@ $.extend(Datepicker.prototype, {
 		if (nodeName === "input") {
 			target.disabled = false;
 			inst.trigger.filter("button").
-				each(function() { this.disabled = false; }).end().
+				each( function() { this.disabled = false; }).end().
 				filter("img").css({opacity: "1.0", cursor: ""});
 		} else if (nodeName === "div" || nodeName === "span") {
 			inline = $target.children("." + this._inlineClass);
@@ -7189,7 +7265,7 @@ $.extend(Datepicker.prototype, {
 		if (nodeName === "input") {
 			target.disabled = true;
 			inst.trigger.filter("button").
-				each(function() { this.disabled = true; }).end().
+				each( function() { this.disabled = true; }).end().
 				filter("img").css({opacity: "0.5", cursor: "default"});
 		} else if (nodeName === "div" || nodeName === "span") {
 			inline = $target.children("." + this._inlineClass);
@@ -7508,7 +7584,7 @@ $.extend(Datepicker.prototype, {
 		}
 
 		isFixed = false;
-		$(input).parents().each(function() {
+		$(input).parents().each( function() {
 			isFixed |= $(this).css("position") === "fixed";
 			return !isFixed;
 		});
@@ -7815,7 +7891,7 @@ $.extend(Datepicker.prototype, {
 			altFormat = this._get(inst, "altFormat") || this._get(inst, "dateFormat");
 			date = this._getDate(inst);
 			dateStr = this.formatDate(altFormat, date, this._getFormatConfig(inst));
-			$(altField).each(function() { $(this).val(dateStr); });
+			$(altField).each( function() { $(this).val(dateStr); });
 		}
 	},
 
@@ -8816,7 +8892,7 @@ $.fn.datepicker = function(options){
 		return $.datepicker["_" + options + "Datepicker"].
 			apply($.datepicker, [this[0]].concat(otherArgs));
 	}
-	return this.each(function() {
+	return this.each( function() {
 		typeof options === "string" ?
 			$.datepicker["_" + options + "Datepicker"].
 				apply($.datepicker, [this].concat(otherArgs)) :
@@ -9117,7 +9193,7 @@ theme = ( function ( theme, $, window, document ) {
 
 
 			//Scroll Top
-			TweenLite.to( window, 0.5, {
+			TweenMax.to( window, 0.5, {
 				scrollTo: {
 					y: 0
 				},
@@ -9164,11 +9240,25 @@ theme = ( function ( theme, $, window, document ) {
 		if ( $el.length == 0 ) return false;
 		
 		
-		$( document ).on( 'mousewheel', function( event ) { 
+		$( document ).on( 'wheel', function( e ) { 
 
-			event.preventDefault();//prevent page fom scrolling
-			var delta = event.originalEvent.wheelDelta || -event.originalEvent.detail;
-			scrollMoveInit( event, delta );
+			var dir;
+			//Gets a value that indicates the amount that the mouse wheel has changed.
+			var delta = e.originalEvent.deltaY;
+			
+			if( delta > 0 ) { 
+				//scroll down
+				dir = 'down';
+				
+			} else {
+				//scroll up
+				dir = 'up';
+			}
+			
+			scrollMoveInit( e, dir );
+			
+			//prevent page fom scrolling
+			return false;
 
 		});
 		
@@ -9207,10 +9297,10 @@ theme = ( function ( theme, $, window, document ) {
 		 * Scroll initialize
 		 *
 		 * @param  {object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
-		 * @param  {string} delta        - Gets a value that indicates the amount that the mouse wheel has changed.
+		 * @param  {string} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
 		 * @return {void}                - The constructor.
 		 */
-		function scrollMoveInit( event, delta ) {
+		function scrollMoveInit( event, dir ) {
 	
 			var timeNow = new Date().getTime();
 			// Cancel scroll if currently animating or within quiet period
@@ -9219,7 +9309,7 @@ theme = ( function ( theme, $, window, document ) {
 				return;
 			}
 
-			if (delta < 0) {
+			if ( dir == 'down' ) {
 				//scroll down
 				moveTo( $el, 'down', false );
 				
@@ -9268,7 +9358,7 @@ theme = ( function ( theme, $, window, document ) {
 			$next = $sections.eq( nextIndex );
 			
 			//Smooth scroll to content
-			TweenLite.to( window, animationTime/1000, {
+			TweenMax.to( window, animationTime/1000, {
 				scrollTo: {
 					y: $next.offset().top - topSectionSpacing
 				},
@@ -10391,7 +10481,7 @@ theme = ( function ( theme, $, window, document ) {
 		function fullwidthListSplitInit( w ) {
 			
 			
-			$( '.list-split-imagery-container' ).each(function() {
+			$( '.list-split-imagery-container' ).each( function() {
 				var imgH = $( this ).find( '.imagery-background img' ).height();
 
 				if ( imgH > 0 ) {
@@ -10712,11 +10802,25 @@ theme = ( function ( theme, $, window, document ) {
 			animationTime     = 1000,//According to page transition animation changes
 			scrollCount       = 0;
 		
-		$( document ).on( 'mousewheel', function( event ) { 
+		$( document ).on( 'wheel', function( e ) { 
 
-			event.preventDefault();//prevent page fom scrolling
-			var delta = event.originalEvent.wheelDelta || -event.originalEvent.detail;
-			scrollInit( event, delta );
+			var dir;
+			//Gets a value that indicates the amount that the mouse wheel has changed.
+			var delta = e.originalEvent.deltaY;
+			
+			if( delta > 0 ) { 
+				//scroll down
+				dir = 'down';
+				
+			} else {
+				//scroll up
+				dir = 'up';
+			}
+			
+			scrollInit( e, dir );
+			
+			//prevent page fom scrolling
+			return false;
 
 		});
 		
@@ -10728,10 +10832,10 @@ theme = ( function ( theme, $, window, document ) {
 		 * Scroll initialize
 		 *
 		 * @param  {object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
-		 * @param  {string} delta        - Gets a value that indicates the amount that the mouse wheel has changed.
+		 * @param  {string} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
 		 * @return {void}                - The constructor.
 		 */
-		function scrollInit( event, delta ) {
+		function scrollInit( event, dir ) {
 	
 			var timeNow = new Date().getTime();
 			// Cancel scroll if currently animating or within quiet period
@@ -10740,7 +10844,7 @@ theme = ( function ( theme, $, window, document ) {
 				return;
 			}
 
-			if (delta < 0) {
+			if ( dir == 'down' ) {
 				//scroll down
 				$( '#demo-mousewheel-interaction-status' ).text( 'Direction: down, Total: ' + scrollCount );
 
@@ -10953,7 +11057,7 @@ theme = ( function ( theme, $, window, document ) {
 						if ( carouselDir == 'horizontal' ) {
 							
 
-							TweenLite.to( $curItems.first(), carouselSpeed/1000, {
+							TweenMax.to( $curItems.first(), carouselSpeed/1000, {
 								css: {
 									marginLeft : -carouselItemWidth
 								},
@@ -10989,7 +11093,7 @@ theme = ( function ( theme, $, window, document ) {
 						} else {
 							
 							
-							TweenLite.to( $curItems.first(), carouselSpeed/1000, {
+							TweenMax.to( $curItems.first(), carouselSpeed/1000, {
 								css: {
 									marginTop : -carouselItemHeight
 								},
@@ -11087,7 +11191,7 @@ theme = ( function ( theme, $, window, document ) {
 							    .css( 'margin-left', -carouselItemWidth + 'px' );
 							
 							
-							TweenLite.to( $cloneItem, carouselSpeed/1000, {
+							TweenMax.to( $cloneItem, carouselSpeed/1000, {
 								css: {
 									marginLeft : 0
 								},
@@ -11126,7 +11230,7 @@ theme = ( function ( theme, $, window, document ) {
 							    .css( 'margin-top', -carouselItemHeight + 'px' );
 							
 							
-							TweenLite.to( $cloneItem, carouselSpeed/1000, {
+							TweenMax.to( $cloneItem, carouselSpeed/1000, {
 								css: {
 									marginTop : 0
 								},
@@ -11249,7 +11353,7 @@ theme = ( function ( theme, $, window, document ) {
 				e.preventDefault();
 				
 				
-				TweenLite.to( window, 0.5, {
+				TweenMax.to( window, 0.5, {
 					scrollTo: {
 						y: getRelatedContent( this ).offset().top - topSectionSpacing
 					},
@@ -11393,7 +11497,7 @@ theme = ( function ( theme, $, window, document ) {
 		function parallaxInit( w, h ) {
 			
 			/* Pure parallax scrolling effect without other embedded HTML elements */
-			$( '.pure-bg-parallax' ).each(function() {
+			$( '.pure-bg-parallax' ).each( function() {
 				var $this       = $( this ),
 					dataImg     = $this.data( 'parallax-bg' ),
 					dataSpeed   = $this.data( 'parallax' );
@@ -11419,7 +11523,7 @@ theme = ( function ( theme, $, window, document ) {
 			
 			
 			/* Parallax scrolling effect with embedded HTML elements */
-			$( '.parallax' ).each(function() {
+			$( '.parallax' ).each( function() {
 				var $this            = $( this ),
 					$curImg          = $this.find( '.parallax-img' ),
 					dataImg          = $curImg.attr( 'src' ),
@@ -11642,7 +11746,7 @@ http://www.gnu.org/licenses/gpl.html
 		var paddingTop = 0;
 		
 		//get the starting position of each element to have parallax applied to it		
-		$this.each(function(){
+		$this.each( function(){
 		    firstTop = $this.offset().top;
 		});
 
@@ -11665,7 +11769,7 @@ http://www.gnu.org/licenses/gpl.html
 		function update(){
 			var pos = $window.scrollTop();				
 
-			$this.each(function(){
+			$this.each( function(){
 				var $element = $(this);
 				var top = $element.offset().top;
 				var height = getHeight($element);
@@ -11696,7 +11800,7 @@ theme = ( function ( theme, $, window, document ) {
     
     var documentReady = function( $ ) {
 	
-		$( '[data-periodical-scroll-container]' ).each(function() {
+		$( '[data-periodical-scroll-container]' ).each( function() {
 
 			var $this       = $( this ),
 				ul          = $this.data( 'periodical-scroll-container' ),
@@ -12129,7 +12233,7 @@ theme = ( function ( theme, $, window, document ) {
 				$target = $( '#' + curndex[1] );
 
 			//Smooth scrolling
-			TweenLite.to( window, 0.5, {
+			TweenMax.to( window, 0.5, {
 				scrollTo: {
 					y: $target.offset().top
 				},
@@ -12163,7 +12267,7 @@ theme = ( function ( theme, $, window, document ) {
 					e.preventDefault();
 					
 
-					TweenLite.to( window, 0.5, {
+					TweenMax.to( window, 0.5, {
 						scrollTo: {
 							y: target.offset().top
 						},
@@ -12395,7 +12499,7 @@ theme = ( function ( theme, $, window, document ) {
    
     var documentReady = function( $ ){
 		
-		$( '.custom-tabs' ).each(function( id ) {
+		$( '.custom-tabs' ).each( function( id ) {
 			var $this             = $( this ),
 			    $li               = $this.find( 'ul > li' ),
 				liNum             = $li.length,

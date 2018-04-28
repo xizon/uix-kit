@@ -76,6 +76,21 @@
 	display: none;
 }
 
+.no-webgl .custom-advanced-slider-sp {
+	canvas {
+		display: none !important;
+	}
+	
+	.inner {
+		.item {
+			img {
+				visibility: visible;
+			}
+		}
+	}
+}
+
+
 /* 
  ---------------------------
  2) Pagination dots 

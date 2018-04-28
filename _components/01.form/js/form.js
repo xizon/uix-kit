@@ -425,7 +425,7 @@ theme = ( function ( theme, $, window, document ) {
 				customCheckbox     = settings.checkboxWrapper;
 
 
-			$( customRadio ).find( 'input[type="radio"]' ).each(function() {
+			$( customRadio ).find( 'input[type="radio"]' ).each( function() {
 				var dataExist = $( this ).data( 'exist' );
 				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
 					$( '<span class="custom-radio-trigger"></span>' ).insertAfter( $( this ) );
@@ -436,7 +436,7 @@ theme = ( function ( theme, $, window, document ) {
 
 			});
 
-			$( customToggle ).find( 'input[type="checkbox"]' ).each(function() {
+			$( customToggle ).find( 'input[type="checkbox"]' ).each( function() {
 				var dataExist = $( this ).data( 'exist' );
 				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
 					$( '<span class="custom-toggle-trigger"></span>' ).insertAfter( $( this ) );
@@ -448,7 +448,7 @@ theme = ( function ( theme, $, window, document ) {
 
 			});
 
-			$( customCheckbox ).find( 'input[type="checkbox"]' ).each(function() {
+			$( customCheckbox ).find( 'input[type="checkbox"]' ).each( function() {
 				var dataExist = $( this ).data( 'exist' );
 				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
 					$( '<span class="custom-checkbox-trigger"></span>' ).insertAfter( $( this ) );
@@ -492,7 +492,7 @@ theme = ( function ( theme, $, window, document ) {
 				customControls     = settings.controls;
 
 
-			$( customControls ).each(function() {
+			$( customControls ).each( function() {
 				var dataExist = $( this ).data( 'exist' );
 				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
 					$( '<span class="bar"></span>' ).insertAfter( $( this ).find( 'label' ) );
@@ -913,7 +913,7 @@ $.extend(Datepicker.prototype, {
 		if (nodeName === "input") {
 			target.disabled = false;
 			inst.trigger.filter("button").
-				each(function() { this.disabled = false; }).end().
+				each( function() { this.disabled = false; }).end().
 				filter("img").css({opacity: "1.0", cursor: ""});
 		} else if (nodeName === "div" || nodeName === "span") {
 			inline = $target.children("." + this._inlineClass);
@@ -941,7 +941,7 @@ $.extend(Datepicker.prototype, {
 		if (nodeName === "input") {
 			target.disabled = true;
 			inst.trigger.filter("button").
-				each(function() { this.disabled = true; }).end().
+				each( function() { this.disabled = true; }).end().
 				filter("img").css({opacity: "0.5", cursor: "default"});
 		} else if (nodeName === "div" || nodeName === "span") {
 			inline = $target.children("." + this._inlineClass);
@@ -1260,7 +1260,7 @@ $.extend(Datepicker.prototype, {
 		}
 
 		isFixed = false;
-		$(input).parents().each(function() {
+		$(input).parents().each( function() {
 			isFixed |= $(this).css("position") === "fixed";
 			return !isFixed;
 		});
@@ -1567,7 +1567,7 @@ $.extend(Datepicker.prototype, {
 			altFormat = this._get(inst, "altFormat") || this._get(inst, "dateFormat");
 			date = this._getDate(inst);
 			dateStr = this.formatDate(altFormat, date, this._getFormatConfig(inst));
-			$(altField).each(function() { $(this).val(dateStr); });
+			$(altField).each( function() { $(this).val(dateStr); });
 		}
 	},
 
@@ -2568,7 +2568,7 @@ $.fn.datepicker = function(options){
 		return $.datepicker["_" + options + "Datepicker"].
 			apply($.datepicker, [this[0]].concat(otherArgs));
 	}
-	return this.each(function() {
+	return this.each( function() {
 		typeof options === "string" ?
 			$.datepicker["_" + options + "Datepicker"].
 				apply($.datepicker, [this].concat(otherArgs)) :

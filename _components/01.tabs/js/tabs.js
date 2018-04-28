@@ -10,7 +10,7 @@ theme = ( function ( theme, $, window, document ) {
    
     var documentReady = function( $ ){
 		
-		$( '.custom-tabs' ).each(function( id ) {
+		$( '.custom-tabs' ).each( function( id ) {
 			var $this             = $( this ),
 			    $li               = $this.find( 'ul > li' ),
 				liNum             = $li.length,

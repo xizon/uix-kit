@@ -26,11 +26,25 @@ theme = ( function ( theme, $, window, document ) {
 		if ( $el.length == 0 ) return false;
 		
 		
-		$( document ).on( 'mousewheel', function( event ) { 
+		$( document ).on( 'wheel', function( e ) { 
 
-			event.preventDefault();//prevent page fom scrolling
-			var delta = event.originalEvent.wheelDelta || -event.originalEvent.detail;
-			scrollMoveInit( event, delta );
+			var dir;
+			//Gets a value that indicates the amount that the mouse wheel has changed.
+			var delta = e.originalEvent.deltaY;
+			
+			if( delta > 0 ) { 
+				//scroll down
+				dir = 'down';
+				
+			} else {
+				//scroll up
+				dir = 'up';
+			}
+			
+			scrollMoveInit( e, dir );
+			
+			//prevent page fom scrolling
+			return false;
 
 		});
 		
@@ -69,10 +83,10 @@ theme = ( function ( theme, $, window, document ) {
 		 * Scroll initialize
 		 *
 		 * @param  {object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
-		 * @param  {string} delta        - Gets a value that indicates the amount that the mouse wheel has changed.
+		 * @param  {string} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
 		 * @return {void}                - The constructor.
 		 */
-		function scrollMoveInit( event, delta ) {
+		function scrollMoveInit( event, dir ) {
 	
 			var timeNow = new Date().getTime();
 			// Cancel scroll if currently animating or within quiet period
@@ -81,7 +95,7 @@ theme = ( function ( theme, $, window, document ) {
 				return;
 			}
 
-			if (delta < 0) {
+			if ( dir == 'down' ) {
 				//scroll down
 				moveTo( $el, 'down', false );
 				
@@ -130,7 +144,7 @@ theme = ( function ( theme, $, window, document ) {
 			$next = $sections.eq( nextIndex );
 			
 			//Smooth scroll to content
-			TweenLite.to( window, animationTime/1000, {
+			TweenMax.to( window, animationTime/1000, {
 				scrollTo: {
 					y: $next.offset().top - topSectionSpacing
 				},

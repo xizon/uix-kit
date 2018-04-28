@@ -8,7 +8,7 @@ theme = ( function ( theme, $, window, document ) {
     
     var documentReady = function( $ ) {
 	
-		$( '[data-periodical-scroll-container]' ).each(function() {
+		$( '[data-periodical-scroll-container]' ).each( function() {
 
 			var $this       = $( this ),
 				ul          = $this.data( 'periodical-scroll-container' ),
