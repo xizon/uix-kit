@@ -1,5 +1,14 @@
 # Changelog
 
+
+
+#### = 1.4.6 (April 28, 2018) =
+
+* New: Added mobile touch function for three.js demo.
+* Fix: Fixed an switching error for "Advanced Slider".
+
+
+
 #### = 1.4.5 (April 27, 2018) =
 
 * New: Add a new liquid effect for module "Advanced Slider".

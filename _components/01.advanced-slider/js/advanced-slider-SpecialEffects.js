@@ -156,7 +156,16 @@ theme = ( function ( theme, $, window, document ) {
 			if( typeof dataFilterTexture === typeof undefined ) dataFilterTexture = '';
 
 
-		
+				
+
+		    //Prevent bubbling
+			if ( itemsTotal == 1 ) {
+				$( dataControlsPagination ).hide();
+				$( dataControlsArrows ).hide();
+			}
+
+			
+			
 			//Load slides to canvas
 			//-------------------------------------	
 			if ( $( '#' + rendererCanvasID ).length == 0 ) {
@@ -460,12 +469,16 @@ theme = ( function ( theme, $, window, document ) {
 				//Drag and Drop
 				var targetRotationX             = 0,
 					targetRotationXOnMouseDown  = 0,
+					targetRotationXOnTouchDown  = 0,
 				    targetRotationY             = 0,
 					targetRotationYOnMouseDown  = 0,
+					targetRotationYOnTouchDown  = 0,
 					mouseX                      = 0,
 					mouseY                      = 0,
 					mouseXOnMouseDown           = 0,
+					mouseXOnTouchDown           = 0,
 					mouseYOnMouseDown           = 0,
+					mouseYOnTouchDown           = 0,
 					windowHalfX                 = $this.width() / 2,
 					windowHalfY                 = $this.height() / 2;
 
@@ -649,11 +662,15 @@ theme = ( function ( theme, $, window, document ) {
 
 
 				//Rotation and Drop
-
-				document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+                if ( Modernizr.touchevents ) {
+					document.addEventListener( 'touchstart', onDocumentTouchStart, false );
+				} else {
+					document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+				}
+				
 
 				function onDocumentMouseDown( e ) {
-					e.preventDefault( );
+					e.preventDefault();
 					document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 					document.addEventListener( 'mouseup', onDocumentMouseUp, false );
 					document.addEventListener( 'mouseout', onDocumentMouseOut, false );
@@ -683,13 +700,50 @@ theme = ( function ( theme, $, window, document ) {
 					document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
 
 				}
+				
+			
+				
+			
+				function onDocumentTouchStart( e ) {
+					e.preventDefault();
+					e = e.changedTouches[ 0 ];
+					
+					document.addEventListener( 'touchmove', onDocumentTouchMove, false );
+					document.addEventListener( 'touchend', onDocumentTouchEnd, false );
+					mouseXOnTouchDown = e.clientX - windowHalfX;
+					mouseYOnTouchDown = e.clientY - windowHalfY;
+					targetRotationXOnTouchDown = targetRotationX;
+					targetRotationYOnTouchDown = targetRotationY;
+
+					
+				}
+
+				function onDocumentTouchMove( e ) {
+					e.preventDefault();
+					e = e.changedTouches[ 0 ];
+						
+					mouseX = e.clientX - windowHalfX;
+					mouseY = e.clientY - windowHalfY;
+					targetRotationX = targetRotationXOnTouchDown + (mouseX - mouseXOnTouchDown) * 0.02;
+					targetRotationY = targetRotationYOnTouchDown + (mouseY - mouseYOnTouchDown) * 0.02;	
+
+
+					
+				}
+
+				function onDocumentTouchEnd( e ) {
+					document.removeEventListener( 'touchmove', onDocumentTouchMove, false );
+					document.removeEventListener( 'touchend', onDocumentTouchEnd, false );
+
+				}
+
+				
 
 				//Converts numeric degrees to radians
 				function toRad( number ) {
 					return number * Math.PI / 180;
 				}
 
-				
 				
 
 				//Responsive plane geometries
@@ -910,8 +964,8 @@ theme = ( function ( theme, $, window, document ) {
 				dataControlsArrows       = slider.data( 'controls-arrows' ),	
 				dataLoop                 = slider.data( 'loop' ),
 				dataAuto                 = slider.data( 'auto' );
-				
 			
+
 			if( typeof dataCountTotal === typeof undefined ) dataCountTotal = 'p.count em.count';
 			if( typeof dataCountCur === typeof undefined ) dataCountCur = 'p.count em.current';
 			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.custom-advanced-slider-sp-pagination';
@@ -919,6 +973,13 @@ theme = ( function ( theme, $, window, document ) {
 			if( typeof dataLoop === typeof undefined ) dataLoop = false;
 			if( typeof dataAuto === typeof undefined ) dataAuto = false;			
 		
+		    //Prevent bubbling
+			if ( total == 1 ) {
+				$( dataControlsPagination ).hide();
+				$( dataControlsArrows ).hide();
+				return false;
+			}
+	
 			
 			
 			//Transition Interception
@@ -936,6 +997,21 @@ theme = ( function ( theme, $, window, document ) {
 			if ( Modernizr.touchevents ) {
 				if ( elementIndex == total ) elementIndex = total-1;
 				if ( elementIndex < 0 ) elementIndex = 0;	
+				
+				//Prevent bubbling
+				if ( !dataLoop ) {
+					//first item
+					if ( elementIndex == 0 ) {
+						$( dataControlsArrows ).find( '.prev' ).addClass( 'disabled' );
+					}
+
+					//last item
+					if ( elementIndex == total - 1 ) {
+						$( dataControlsArrows ).find( '.next' ).addClass( 'disabled' );
+					}	
+				}
+
+				
 			}
 
 			$( dataControlsPagination ).find( 'li a' ).removeClass( 'leave' );

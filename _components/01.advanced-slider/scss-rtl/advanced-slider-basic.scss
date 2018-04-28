@@ -1,0 +1,61 @@
+/* ====================================================== 
+   <!-- Advanced Slider (Basic) -->     
+/* ====================================================== */
+
+/* 
+ ---------------------------
+ 1) Initialize the slider style
+ ---------------------------
+ */ 
+.custom-advanced-slider {
+	
+	.inner {
+		
+		.item {
+			left: auto;
+			right: 0;
+
+		}	
+		
+	}
+
+	
+}
+
+/* 
+ ---------------------------
+ 2) Pagination dots 
+ ---------------------------
+ */ 
+.custom-advanced-slider-pagination {
+
+	ul {
+		left: auto;
+		right: 0;
+	
+	}
+
+
+
+}
+
+/* 
+ ---------------------------
+ 3) Next/Prev buttons
+ ---------------------------
+ */ 
+.custom-advanced-slider-arrows {
+
+	.prev {
+		left: auto;
+		right: 15px;
+		
+	}
+	.next {
+		right: auto;
+		left: 15px;
+		text-align: left;
+		
+	}
+
+}

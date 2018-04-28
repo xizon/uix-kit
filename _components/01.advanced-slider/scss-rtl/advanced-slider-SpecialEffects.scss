@@ -1,0 +1,72 @@
+/* ====================================================== 
+   <!-- Advanced Slider (Special Effects) -->     
+/* ====================================================== */
+
+/* 
+ ---------------------------
+ 1) Initialize the slider style
+ ---------------------------
+ */ 
+
+.custom-advanced-slider-sp {
+	
+	canvas {
+		left: auto;
+		right: 0;
+	}
+
+	
+	.inner {
+		
+	
+		.item {
+			left: auto;
+			right: 0;
+
+		}	
+		
+	}
+	
+	
+
+	
+}
+
+
+
+/* 
+ ---------------------------
+ 2) Pagination dots 
+ ---------------------------
+ */ 
+.custom-advanced-slider-sp-pagination {
+	
+	
+	ul {
+		left: auto;
+		right: 0;
+	}
+
+
+
+}
+
+/* 
+ ---------------------------
+ 3) Next/Prev buttons
+ ---------------------------
+ */ 
+.custom-advanced-slider-sp-arrows {
+	
+	.prev {
+		left: auto;
+		right: 15px;
+	}
+	.next {
+		right: auto;
+		left: 15px;
+		text-align: left;
+		
+	}
+
+}

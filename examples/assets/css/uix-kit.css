@@ -134,6 +134,9 @@
     66. Table Series 
     67. Tabs 
     68. Testimonials Carousel 
+    69. Timeline 
+    70. ToolTip 
+    71. WordPress Core 
 
 
 
@@ -11593,13 +11596,6 @@ a img.aligncenter {
 .gallery-columns-8 .gallery-caption,
 .gallery-columns-9 .gallery-caption {
     display: none;
-}
-
-/* other */
-.sticky {
-    opacity: 1;
-}
- display: none;
 }
 
 /* other */
