@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.4.8
- * ## Last Update         :  April 29, 2018
+ * ## Version             :  1.5.0
+ * ## Last Update         :  May 2, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -92,51 +92,51 @@
     24. Accordion 
     25. Accordion Background Images 
     26. Advanced Slider (Special Effects) 
-    27. Advanced Slider (Special Effects) 
-    28. Advanced Slider (Basic) 
-    29. Badges 
-    30. Breadcrumbs 
-    31. Button 
-    32. Author Card 
-    33. Counter 
-    34. Dropdown Menu 
-    35. Equal-width Divs 
-    36. Features 
-    37. Flexslider 
-    38. Footer Templates 
-    39. Form 
-    40. Form Progress 
-    41. Gallery 
-    42. Image Shapes 
-    43. Custom Core Scripts & Stylesheets 
-    44. Cutom Light Box 
-    45. Brands List 
-    46. Bulleted List 
-    47. Maintain Aspect Ratio List 
-    48. List of Posts 
-    49. List of Split Posts 
-    50. Side by Side List 
-    51. Side by Side List With Photo 
-    52. Fullwidth List of Split 2 
-    53. Fullwidth List of Split 
-    54. Mobile Menu 
-    55. Modal Dialog 
-    56. Mouse Animation Scroll 
-    57. Multiple Items Carousel 
-    58. Onepage Menu 
-    59. Parallax 
-    60. Periodical Scroll 
-    61. Pricing 
-    62. Progress Bar 
-    63. Services 
-    64. Show More Less 
-    65. Single Post 
-    66. Source Code 
-    67. Table Series 
-    68. Tabs 
-    69. Testimonials Carousel 
-    70. Timeline 
-    71. ToolTip 
+    27. Advanced Slider (Basic) 
+    28. Badges 
+    29. Breadcrumbs 
+    30. Button 
+    31. Author Card 
+    32. Counter 
+    33. Dropdown Menu 
+    34. Equal-width Divs 
+    35. Features 
+    36. Flexslider 
+    37. Footer Templates 
+    38. Form 
+    39. Form Progress 
+    40. Gallery 
+    41. Image Shapes 
+    42. Custom Core Scripts & Stylesheets 
+    43. Cutom Light Box 
+    44. Brands List 
+    45. Bulleted List 
+    46. Maintain Aspect Ratio List 
+    47. List of Posts 
+    48. List of Split Posts 
+    49. Side by Side List 
+    50. Side by Side List With Photo 
+    51. Fullwidth List of Split 2 
+    52. Fullwidth List of Split 
+    53. Mobile Menu 
+    54. Modal Dialog 
+    55. Mouse Animation Scroll 
+    56. Multiple Items Carousel 
+    57. Onepage Menu 
+    58. Parallax 
+    59. Periodical Scroll 
+    60. Pricing 
+    61. Progress Bar 
+    62. Services 
+    63. Show More Less 
+    64. Single Post 
+    65. Source Code 
+    66. Table Series 
+    67. Tabs 
+    68. Testimonials Carousel 
+    69. Timeline 
+    70. ToolTip 
+    71. WordPress Core 
 
 
 
@@ -11607,8 +11607,5 @@ a img.aligncenter {
 
 /* other */
 .sticky {
-    opacity: 1;
-}
-cky {
     opacity: 1;
 }

@@ -1,5 +1,10 @@
 # Changelog
 
+#### = 1.5.0 (May 2, 2018) =
+
+New: Add a new module "3D Pages" with three.js.
+
+
 
 
 #### = 1.4.8 (April 28, 2018) =
