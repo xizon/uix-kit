@@ -4,7 +4,7 @@
  * <!-- Header -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
     
     var documentReady = function( $ ) {
@@ -52,14 +52,14 @@ theme = ( function ( theme, $, window, document ) {
 		
     };
 
-    theme.header = {
+    App.header = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 		

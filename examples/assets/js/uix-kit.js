@@ -24,8 +24,8 @@
 	
 	
 	1. Header 
-    2. Back to Top 
-    3. Loader 
+    2. Loader 
+    3. Back to Top 
     4. Get all custom attributes of an element like "data-*" 
     5. Navigation 
     6. Videos 
@@ -34,18 +34,18 @@
     9. Dropdown Categories 
     10. Pagination 
     11. Specify a background image 
-    12. Accordion 
-    13. Advanced Slider (Basic) 
+    12. 3D Pages 
+    13. Accordion 
     14. Advanced Slider (Special Effects) 
-    15. Counter 
-    16. Dynamic Drop Down List from JSON 
-    17. 3D Pages 
+    15. Advanced Slider (Basic) 
+    16. Counter 
+    17. Dynamic Drop Down List from JSON 
     18. Flexslider 
-    19. Form Progress 
-    20. Form 
+    19. Form 
+    20. Form Progress 
     21. Full Page Transition 
-    22. Image Shapes 
-    23. Gallery 
+    22. Gallery 
+    23. Image Shapes 
     24. Custom Core Scripts & Stylesheets 
     25. Custom Lightbox 
     26. Bulleted List 
@@ -77,19 +77,24 @@
 
 */
 
-var templateUrl = wp_theme_custom_root_path.templateUrl,
-	homeUrl     = wp_theme_custom_root_path.homeUrl;
+
+//Global variables from front pages
+var templateUrl = AppRootPath.templateUrl,
+	homeUrl     = AppRootPath.homeUrl;
+
 
 //Determine whether it is a special browser
-var is_safari   = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/), /*Test to 9, 10. */
-	isIE        = !!window.ActiveXObject || "ActiveXObject" in window;     /*Test to 6 ~ 11 (not edge) */
+var browser = {
+	isSafari : !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/), /*Test to 9, 10. */
+	isIE     : !!window.ActiveXObject || "ActiveXObject" in window     /*Test to 6 ~ 11 (not edge) */
+};
 
 
-
-var theme = (function ( $, window, document ) {
+//Core scripts for current site
+var App = (function ( $, window, document ) {
     'use strict';
 
-    var theme         = {},
+    var App           = {},
         components    = { documentReady: [], pageLoaded: [] };
 
 	if ( $( 'img' ).length == 0 ) {
@@ -123,7 +128,7 @@ var theme = (function ( $, window, document ) {
         });
     }
 
-    theme.setContext = function ( contextSelector ) {
+    App.setContext = function ( contextSelector ) {
         var context = $;
         if( typeof contextSelector !== typeof undefined ) {
             return function( selector ) {
@@ -133,11 +138,11 @@ var theme = (function ( $, window, document ) {
         return context;
     };
 
-    theme.components         = components;
-    theme.documentReady      = documentReady;
-	theme.pageLoaded         = pageLoaded;
+    App.components         = components;
+    App.documentReady      = documentReady;
+	App.pageLoaded         = pageLoaded;
 
-    return theme;
+    return App;
 }( jQuery, window, document ) ); 
 
 
@@ -147,7 +152,7 @@ var theme = (function ( $, window, document ) {
  * <!-- Header -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
     
     var documentReady = function( $ ) {
@@ -195,14 +200,14 @@ theme = ( function ( theme, $, window, document ) {
 		
     };
 
-    theme.header = {
+    App.header = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 		
@@ -212,7 +217,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Loader -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
     
     var pageLoaded = function() {
@@ -221,14 +226,14 @@ theme = ( function ( theme, $, window, document ) {
 		
     };
 
-    theme.loader = {
+    App.loader = {
         pageLoaded : pageLoaded        
     };
 
-    theme.components.pageLoaded.push( pageLoaded );
-    return theme;
+    App.components.pageLoaded.push( pageLoaded );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 
@@ -238,7 +243,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Back to Top -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
     
     var documentReady = function( $ ) {
@@ -277,14 +282,14 @@ theme = ( function ( theme, $, window, document ) {
 		
     };
 
-    theme.backtoTop = {
+    App.backtoTop = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 
@@ -317,7 +322,7 @@ theme = ( function ( theme, $, window, document ) {
 })($.fn.attr);
 
 
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
    
    
@@ -345,14 +350,14 @@ theme = ( function ( theme, $, window, document ) {
 	};
 	
 		
-    theme.getAllCustomAttrs = {
+    App.getAllCustomAttrs = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 
@@ -361,7 +366,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Navigation -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
    
    
@@ -475,14 +480,14 @@ theme = ( function ( theme, $, window, document ) {
 	};
 	
 		
-    theme.navigation = {
+    App.navigation = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 
@@ -491,7 +496,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Videos -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
     
     var documentReady = function( $ ) {
@@ -942,14 +947,14 @@ theme = ( function ( theme, $, window, document ) {
 		
     };
 
-    theme.videos = {
+    App.videos = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 /* 
@@ -965,7 +970,7 @@ theme = ( function ( theme, $, window, document ) {
  *************************************
  */
 
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
     
     var pageLoaded = function() {
@@ -975,14 +980,14 @@ theme = ( function ( theme, $, window, document ) {
 
     };
 
-    theme.commonHeight = {
+    App.commonHeight = {
         pageLoaded : pageLoaded        
     };
 
-    theme.components.pageLoaded.push( pageLoaded );
-    return theme;
+    App.components.pageLoaded.push( pageLoaded );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 
@@ -1079,7 +1084,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Mega Menu -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
    
    
@@ -1243,14 +1248,14 @@ theme = ( function ( theme, $, window, document ) {
 		
     };
 
-    theme.megamenu = {
+    App.megamenu = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 /* 
@@ -1258,7 +1263,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Dropdown Categories -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
    
    
@@ -1275,14 +1280,14 @@ theme = ( function ( theme, $, window, document ) {
 	};
 	
 		
-    theme.dropdownCat = {
+    App.dropdownCat = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 /* 
@@ -1290,7 +1295,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Pagination -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
    
    
@@ -1302,14 +1307,14 @@ theme = ( function ( theme, $, window, document ) {
 	};
 	
 		
-    theme.Pagination = {
+    App.Pagination = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 
@@ -1318,7 +1323,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Specify a background image -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
    
    
@@ -1359,14 +1364,14 @@ theme = ( function ( theme, $, window, document ) {
 	};
 	
 		
-    theme.setBG = {
+    App.setBG = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 /* 
@@ -1374,7 +1379,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- 3D Pages -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
     
     var documentReady = function( $ ) {
@@ -1406,18 +1411,19 @@ theme = ( function ( theme, $, window, document ) {
 				pages   = target.find( '.html3D-view-content' ),
 				self    = this;
 
-			pages.each(function() {
+			pages.each( function() {
 				var el = new THREE.CSS3DObject( $.parseHTML( $( this )[0].outerHTML )[0] );
 
 				el.position.x = $( this ).data( 'positionX' ) || 0;
 				el.position.y = $( this ).data( 'positionY' ) || 0;
 				el.position.z = $( this ).data( 'positionZ' ) || 0;
 				el.rotation.x = $( this ).data( 'rotationX' ) || 0;
-				el.rotation.y = $( this ).data( 'rotationY' ) || 3.141592654;
+				el.rotation.y = $( this ).data( 'rotationY' ) || 3.14159265358979;
 				el.rotation.z = $( this ).data( 'rotationZ' ) || 0;
 
 				self.scene.add( el );
 			});
+			
 
 			//CSS3D Renderer
 			this.renderer = new THREE.CSS3DRenderer();
@@ -1491,14 +1497,14 @@ theme = ( function ( theme, $, window, document ) {
 		
     };
 
-    theme.threeDimensionalPages = {
+    App.threeDimensionalPages = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 
@@ -1514,7 +1520,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Accordion -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
    
    
@@ -1565,14 +1571,14 @@ theme = ( function ( theme, $, window, document ) {
 	};
 	
 		
-    theme.accordion = {
+    App.accordion = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 /* 
@@ -1580,7 +1586,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Advanced Slider (Special Effects) -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
     
     var pageLoaded = function() {
@@ -3287,14 +3293,14 @@ theme = ( function ( theme, $, window, document ) {
     };
 
 	
-    theme.advancedSlider_SpecialEffects = {
+    App.advancedSlider_SpecialEffects = {
         pageLoaded : pageLoaded        
     };
 
-    theme.components.pageLoaded.push( pageLoaded );
-    return theme;
+    App.components.pageLoaded.push( pageLoaded );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 
@@ -3303,7 +3309,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Advanced Slider (Basic) -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
     
     var pageLoaded = function() {
@@ -3981,14 +3987,14 @@ theme = ( function ( theme, $, window, document ) {
     };
 
 	
-    theme.advancedSlider = {
+    App.advancedSlider = {
         pageLoaded : pageLoaded        
     };
 
-    theme.components.pageLoaded.push( pageLoaded );
-    return theme;
+    App.components.pageLoaded.push( pageLoaded );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 
@@ -3999,7 +4005,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Counter -->
  *************************************
  */	
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
     
     var documentReady = function( $ ) {
@@ -4023,14 +4029,14 @@ theme = ( function ( theme, $, window, document ) {
 		
     };
 
-    theme.counter = {
+    App.counter = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 
@@ -4134,7 +4140,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Dynamic Drop Down List from JSON -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
    
    
@@ -4292,14 +4298,14 @@ theme = ( function ( theme, $, window, document ) {
 	};
 	
 		
-    theme.dynamicDDList = {
+    App.dynamicDDList = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 
@@ -4308,7 +4314,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Flexslider -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
    
    
@@ -5232,14 +5238,14 @@ theme = ( function ( theme, $, window, document ) {
 	};
 	
 		
-    theme.flexSlider = {
+    App.flexSlider = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 
@@ -6480,7 +6486,7 @@ theme = ( function ( theme, $, window, document ) {
 */
 
 
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
    
    
@@ -6644,14 +6650,14 @@ theme = ( function ( theme, $, window, document ) {
 	};
 	
 		
-    theme.form = {
+    App.form = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 
@@ -9069,7 +9075,7 @@ var datepicker = $.datepicker;
 	
 */
 
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
    
    
@@ -9150,14 +9156,14 @@ theme = ( function ( theme, $, window, document ) {
 	};
 		
       
-    theme.formProgress = {
+    App.formProgress = {
         pageLoaded : pageLoaded        
     };
 
-    theme.components.pageLoaded.push( pageLoaded );
-    return theme;
+    App.components.pageLoaded.push( pageLoaded );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 
@@ -9357,7 +9363,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Full Page Transition -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
     
     var documentReady = function( $ ) {
@@ -9522,14 +9528,14 @@ theme = ( function ( theme, $, window, document ) {
 		
     };
 
-    theme.fullPage = {
+    App.fullPage = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 
@@ -9545,7 +9551,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Gallery -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
    
    
@@ -9634,14 +9640,14 @@ theme = ( function ( theme, $, window, document ) {
 	};
 	
 		
-    theme.gallery = {
+    App.gallery = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 
@@ -9650,7 +9656,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Image Shapes -->
  *************************************
  */	
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
     
     var documentReady = function( $ ) {
@@ -9751,14 +9757,14 @@ theme = ( function ( theme, $, window, document ) {
 		
     };
 
-    theme.imageShapes = {
+    App.imageShapes = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 /* 
@@ -9774,7 +9780,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Custom Lightbox -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
     
     var pageLoaded = function() {
@@ -10045,14 +10051,14 @@ theme = ( function ( theme, $, window, document ) {
 		
     };
 
-    theme.customLightbox = {
+    App.customLightbox = {
         pageLoaded : pageLoaded        
     };
 
-    theme.components.pageLoaded.push( pageLoaded );
-    return theme;
+    App.components.pageLoaded.push( pageLoaded );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 
@@ -10062,7 +10068,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Bulleted List -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
    
    
@@ -10081,14 +10087,14 @@ theme = ( function ( theme, $, window, document ) {
 	};
 	
 		
-    theme.bulletedList = {
+    App.bulletedList = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 /* 
@@ -10096,7 +10102,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Posts List With Ajax -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
    
    
@@ -10470,8 +10476,8 @@ theme = ( function ( theme, $, window, document ) {
 						//Data overflow may occur when the total number of pages is not posted
 						try {
 
-							var pageLoaded    = theme.components.pageLoaded,
-								documentReady = theme.components.documentReady,
+							var pageLoaded    = App.components.pageLoaded,
+								documentReady = App.components.documentReady,
 								thisData      = data,
 								html          = compiledTemplate( thisData ),
 								curHtml       = $divRoot.find( pushContainer ).html(),
@@ -10520,10 +10526,10 @@ theme = ( function ( theme, $, window, document ) {
 							
 							
 							//--------- Init Videos
-							theme.videos.documentReady($);
+							App.videos.documentReady($);
 							
 							//--------- Init Custom Lightbox
-							theme.customLightbox.pageLoaded();
+							App.customLightbox.pageLoaded();
 
 
 							//--------- Remove this button
@@ -10572,14 +10578,14 @@ theme = ( function ( theme, $, window, document ) {
 	};
 	
 		
-    theme.listAjax = {
+    App.listAjax = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 
@@ -10589,7 +10595,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Fullwidth List of Split -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
    
    
@@ -10640,14 +10646,14 @@ theme = ( function ( theme, $, window, document ) {
 		
 	};
 		
-    theme.fullwidthListSplit = {
+    App.fullwidthListSplit = {
         pageLoaded : pageLoaded        
     };
 
-    theme.components.pageLoaded.push( pageLoaded );
-    return theme;
+    App.components.pageLoaded.push( pageLoaded );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 
@@ -10657,7 +10663,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Mobile Menu -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
    
    
@@ -10792,14 +10798,14 @@ theme = ( function ( theme, $, window, document ) {
 	};
 	
 		
-    theme.mobileMenu = {
+    App.mobileMenu = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 
@@ -10808,7 +10814,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Modal Dialog -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
    
    
@@ -10908,13 +10914,13 @@ theme = ( function ( theme, $, window, document ) {
 	};
 		
       
-    theme.modalbox = {
+    App.modalbox = {
         documentReady : documentReady        
     };  
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 
@@ -10924,7 +10930,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Mousewheel Interaction -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
    
    
@@ -11005,13 +11011,13 @@ theme = ( function ( theme, $, window, document ) {
 	};
 		
       
-    theme.mousewheelInteraction = {
+    App.mousewheelInteraction = {
         documentReady : documentReady        
     };  
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 /* 
@@ -11019,7 +11025,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Multiple Items Carousel -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
     
     var documentReady = function( $ ) {
@@ -11421,14 +11427,14 @@ theme = ( function ( theme, $, window, document ) {
 		
     };
 
-    theme.multiItemsCarousel = {
+    App.multiItemsCarousel = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 
@@ -11441,7 +11447,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Navigation Highlighting -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
     
     var documentReady = function( $ ) {
@@ -11575,14 +11581,14 @@ theme = ( function ( theme, $, window, document ) {
 		
     };
 
-    theme.navHighlight = {
+    App.navHighlight = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 
@@ -11598,7 +11604,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Parallax -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
     
     var documentReady = function( $ ) {
@@ -11846,14 +11852,14 @@ theme = ( function ( theme, $, window, document ) {
 
 	
 
-    theme.parallax = {
+    App.parallax = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 
@@ -11935,7 +11941,7 @@ http://www.gnu.org/licenses/gpl.html
  * <!-- Periodical Scroll -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
     
     var documentReady = function( $ ) {
@@ -11997,14 +12003,14 @@ theme = ( function ( theme, $, window, document ) {
 		
     };
 
-    theme.periodicalScroll = {
+    App.periodicalScroll = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 /* 
@@ -12012,7 +12018,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Pricing -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
     
     var documentReady = function( $ ) {
@@ -12119,14 +12125,14 @@ theme = ( function ( theme, $, window, document ) {
 		
     };
 
-    theme.pricing = {
+    App.pricing = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 
@@ -12139,7 +12145,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Progress Bar -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
     
     var documentReady = function( $ ) {
@@ -12186,14 +12192,14 @@ theme = ( function ( theme, $, window, document ) {
 		
     };
 
-    theme.progressBar = {
+    App.progressBar = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 
@@ -12207,7 +12213,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Retina Graphics for Website -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
    
    
@@ -12238,14 +12244,14 @@ theme = ( function ( theme, $, window, document ) {
 	};
 	
 		
-    theme.retina = {
+    App.retina = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 /* 
@@ -12253,7 +12259,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Scroll Reveal -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
    
    
@@ -12281,21 +12287,21 @@ theme = ( function ( theme, $, window, document ) {
 	};
 	
 		
-    theme.scrollReveal = {
+    App.scrollReveal = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 /* 
  *************************************
  * <!-- Show More Less -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
    
    
@@ -12313,13 +12319,13 @@ theme = ( function ( theme, $, window, document ) {
 	};
 		
       
-    theme.showMoreLess = {
+    App.showMoreLess = {
         documentReady : documentReady        
     };  
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 
@@ -12328,7 +12334,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Smooth Scrolling When Clicking An Anchor Link -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
    
    
@@ -12438,14 +12444,14 @@ theme = ( function ( theme, $, window, document ) {
 	};
 	
 		
-    theme.smoothScrollingAnchorLink = {
+    App.smoothScrollingAnchorLink = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 
@@ -12454,7 +12460,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Source Code -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
    
    
@@ -12519,13 +12525,13 @@ theme = ( function ( theme, $, window, document ) {
 	};
 		
       
-    theme.sourceCode = {
+    App.sourceCode = {
         documentReady : documentReady        
     };  
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 
@@ -12535,7 +12541,7 @@ theme = ( function ( theme, $, window, document ) {
  *  <!-- Sticky Elements -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
     
     var pageLoaded = function() {
@@ -12615,14 +12621,14 @@ theme = ( function ( theme, $, window, document ) {
 		
     };
 
-    theme.stickyElements = {
+    App.stickyElements = {
         pageLoaded : pageLoaded        
     };
 
-    theme.components.pageLoaded.push( pageLoaded );
-    return theme;
+    App.components.pageLoaded.push( pageLoaded );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 
@@ -12633,7 +12639,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Tabs -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
    
    
@@ -12810,13 +12816,13 @@ theme = ( function ( theme, $, window, document ) {
 	};
 		
       
-    theme.customTabs = {
+    App.customTabs = {
         documentReady : documentReady        
     };  
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 /* 
@@ -12824,7 +12830,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Testimonials Carousel -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
     
     var documentReady = function( $ ) {
@@ -12905,14 +12911,14 @@ theme = ( function ( theme, $, window, document ) {
 		
     };
 
-    theme.testimonials = {
+    App.testimonials = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 
@@ -12927,7 +12933,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Text effect -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
     
 	//////////////// cipher
@@ -13015,14 +13021,14 @@ theme = ( function ( theme, $, window, document ) {
 		
     };
 
-    theme.textEffect = {
+    App.textEffect = {
         pageLoaded : pageLoaded        
     };
 
-    theme.components.pageLoaded.push( pageLoaded );
-    return theme;
+    App.components.pageLoaded.push( pageLoaded );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 
@@ -13031,7 +13037,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- Timeline -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
     
     var pageLoaded = function() {
@@ -13180,14 +13186,14 @@ theme = ( function ( theme, $, window, document ) {
 
     };
 
-    theme.timeline = {
+    App.timeline = {
         pageLoaded : pageLoaded        
     };
 
-    theme.components.pageLoaded.push( pageLoaded );
-    return theme;
+    App.components.pageLoaded.push( pageLoaded );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 
@@ -13196,7 +13202,7 @@ theme = ( function ( theme, $, window, document ) {
  * <!-- AJAX -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
    
    
@@ -13211,8 +13217,8 @@ theme = ( function ( theme, $, window, document ) {
 		
 		function applyOriginalSomeScripts() {
 			
-			theme.commonHeight.pageLoaded(); //Common Height
-			theme.parallax.documentReady($); //Parallax
+			App.commonHeight.pageLoaded(); //Common Height
+			App.parallax.documentReady($); //Parallax
 			
 			
 		}
@@ -13228,8 +13234,8 @@ theme = ( function ( theme, $, window, document ) {
 		function applyOriginalAllScripts() {
 			
 			
-			var scipts_pageLoaded    = theme.components.pageLoaded,
-				scipts_documentReady = theme.components.documentReady;
+			var scipts_pageLoaded    = App.components.pageLoaded,
+				scipts_documentReady = App.components.documentReady;
 			
 			
 			for ( var i = 0; i < scipts_pageLoaded.length; i++ ) {
@@ -13249,14 +13255,14 @@ theme = ( function ( theme, $, window, document ) {
 	};
 	
 		
-    theme.ajax = {
+    App.ajax = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 

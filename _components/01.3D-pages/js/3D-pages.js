@@ -3,7 +3,7 @@
  * <!-- 3D Pages -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
     
     var documentReady = function( $ ) {
@@ -35,18 +35,19 @@ theme = ( function ( theme, $, window, document ) {
 				pages   = target.find( '.html3D-view-content' ),
 				self    = this;
 
-			pages.each(function() {
+			pages.each( function() {
 				var el = new THREE.CSS3DObject( $.parseHTML( $( this )[0].outerHTML )[0] );
 
 				el.position.x = $( this ).data( 'positionX' ) || 0;
 				el.position.y = $( this ).data( 'positionY' ) || 0;
 				el.position.z = $( this ).data( 'positionZ' ) || 0;
 				el.rotation.x = $( this ).data( 'rotationX' ) || 0;
-				el.rotation.y = $( this ).data( 'rotationY' ) || 3.141592654;
+				el.rotation.y = $( this ).data( 'rotationY' ) || 3.14159265358979;
 				el.rotation.z = $( this ).data( 'rotationZ' ) || 0;
 
 				self.scene.add( el );
 			});
+			
 
 			//CSS3D Renderer
 			this.renderer = new THREE.CSS3DRenderer();
@@ -120,14 +121,14 @@ theme = ( function ( theme, $, window, document ) {
 		
     };
 
-    theme.threeDimensionalPages = {
+    App.threeDimensionalPages = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 

@@ -5,7 +5,7 @@
  * <!-- Text effect -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
     
 	//////////////// cipher
@@ -93,12 +93,12 @@ theme = ( function ( theme, $, window, document ) {
 		
     };
 
-    theme.textEffect = {
+    App.textEffect = {
         pageLoaded : pageLoaded        
     };
 
-    theme.components.pageLoaded.push( pageLoaded );
-    return theme;
+    App.components.pageLoaded.push( pageLoaded );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 

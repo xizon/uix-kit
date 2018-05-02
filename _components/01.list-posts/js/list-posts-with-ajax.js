@@ -4,7 +4,7 @@
  * <!-- Posts List With Ajax -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
    
    
@@ -378,8 +378,8 @@ theme = ( function ( theme, $, window, document ) {
 						//Data overflow may occur when the total number of pages is not posted
 						try {
 
-							var pageLoaded    = theme.components.pageLoaded,
-								documentReady = theme.components.documentReady,
+							var pageLoaded    = App.components.pageLoaded,
+								documentReady = App.components.documentReady,
 								thisData      = data,
 								html          = compiledTemplate( thisData ),
 								curHtml       = $divRoot.find( pushContainer ).html(),
@@ -428,10 +428,10 @@ theme = ( function ( theme, $, window, document ) {
 							
 							
 							//--------- Init Videos
-							theme.videos.documentReady($);
+							App.videos.documentReady($);
 							
 							//--------- Init Custom Lightbox
-							theme.customLightbox.pageLoaded();
+							App.customLightbox.pageLoaded();
 
 
 							//--------- Remove this button
@@ -480,13 +480,13 @@ theme = ( function ( theme, $, window, document ) {
 	};
 	
 		
-    theme.listAjax = {
+    App.listAjax = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 

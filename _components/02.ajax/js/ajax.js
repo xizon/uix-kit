@@ -5,7 +5,7 @@
  * <!-- AJAX -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
    
    
@@ -20,8 +20,8 @@ theme = ( function ( theme, $, window, document ) {
 		
 		function applyOriginalSomeScripts() {
 			
-			theme.commonHeight.pageLoaded(); //Common Height
-			theme.parallax.documentReady($); //Parallax
+			App.commonHeight.pageLoaded(); //Common Height
+			App.parallax.documentReady($); //Parallax
 			
 			
 		}
@@ -37,8 +37,8 @@ theme = ( function ( theme, $, window, document ) {
 		function applyOriginalAllScripts() {
 			
 			
-			var scipts_pageLoaded    = theme.components.pageLoaded,
-				scipts_documentReady = theme.components.documentReady;
+			var scipts_pageLoaded    = App.components.pageLoaded,
+				scipts_documentReady = App.components.documentReady;
 			
 			
 			for ( var i = 0; i < scipts_pageLoaded.length; i++ ) {
@@ -58,13 +58,13 @@ theme = ( function ( theme, $, window, document ) {
 	};
 	
 		
-    theme.ajax = {
+    App.ajax = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 

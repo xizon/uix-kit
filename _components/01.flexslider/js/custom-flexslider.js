@@ -4,7 +4,7 @@
  * <!-- Flexslider -->
  *************************************
  */
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
    
    
@@ -928,14 +928,14 @@ theme = ( function ( theme, $, window, document ) {
 	};
 	
 		
-    theme.flexSlider = {
+    App.flexSlider = {
         documentReady : documentReady        
     };
 
-    theme.components.documentReady.push( documentReady );
-    return theme;
+    App.components.documentReady.push( documentReady );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 

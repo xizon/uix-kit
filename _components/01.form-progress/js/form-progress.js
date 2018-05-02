@@ -19,7 +19,7 @@
 	
 */
 
-theme = ( function ( theme, $, window, document ) {
+App = ( function ( App, $, window, document ) {
     'use strict';
    
    
@@ -100,14 +100,14 @@ theme = ( function ( theme, $, window, document ) {
 	};
 		
       
-    theme.formProgress = {
+    App.formProgress = {
         pageLoaded : pageLoaded        
     };
 
-    theme.components.pageLoaded.push( pageLoaded );
-    return theme;
+    App.components.pageLoaded.push( pageLoaded );
+    return App;
 
-}( theme, jQuery, window, document ) );
+}( App, jQuery, window, document ) );
 
 
 

@@ -8,19 +8,24 @@
 
 */
 
-var templateUrl = wp_theme_custom_root_path.templateUrl,
-	homeUrl     = wp_theme_custom_root_path.homeUrl;
+
+//Global variables from front pages
+var templateUrl = AppRootPath.templateUrl,
+	homeUrl     = AppRootPath.homeUrl;
+
 
 //Determine whether it is a special browser
-var is_safari   = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/), /*Test to 9, 10. */
-	isIE        = !!window.ActiveXObject || "ActiveXObject" in window;     /*Test to 6 ~ 11 (not edge) */
+var browser = {
+	isSafari : !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/), /*Test to 9, 10. */
+	isIE     : !!window.ActiveXObject || "ActiveXObject" in window     /*Test to 6 ~ 11 (not edge) */
+};
 
 
-
-var theme = (function ( $, window, document ) {
+//Core scripts for current site
+var App = (function ( $, window, document ) {
     'use strict';
 
-    var theme         = {},
+    var App           = {},
         components    = { documentReady: [], pageLoaded: [] };
 
 	if ( $( 'img' ).length == 0 ) {
@@ -54,7 +59,7 @@ var theme = (function ( $, window, document ) {
         });
     }
 
-    theme.setContext = function ( contextSelector ) {
+    App.setContext = function ( contextSelector ) {
         var context = $;
         if( typeof contextSelector !== typeof undefined ) {
             return function( selector ) {
@@ -64,10 +69,10 @@ var theme = (function ( $, window, document ) {
         return context;
     };
 
-    theme.components         = components;
-    theme.documentReady      = documentReady;
-	theme.pageLoaded         = pageLoaded;
+    App.components         = components;
+    App.documentReady      = documentReady;
+	App.pageLoaded         = pageLoaded;
 
-    return theme;
+    return App;
 }( jQuery, window, document ) ); 
 
