@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.5.0
- * ## Last Update         :  May 2, 2018
+ * ## Version             :  1.5.1
+ * ## Last Update         :  May 3, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -89,40 +89,40 @@
     21. Entry 
     22. Comments 
     23. 3rd Party Plugins 
-    24. Accordion 
-    25. Accordion Background Images 
-    26. Advanced Slider (Special Effects) 
-    27. Advanced Slider (Basic) 
-    28. Badges 
-    29. Breadcrumbs 
-    30. Button 
-    31. Author Card 
-    32. Counter 
-    33. Dropdown Menu 
-    34. Equal-width Divs 
-    35. Features 
-    36. Flexslider 
-    37. Footer Templates 
-    38. Form 
-    39. Form Progress 
-    40. Gallery 
-    41. Image Shapes 
-    42. Custom Core Scripts & Stylesheets 
-    43. Cutom Light Box 
-    44. Brands List 
-    45. Bulleted List 
-    46. Maintain Aspect Ratio List 
-    47. List of Posts 
-    48. List of Split Posts 
-    49. Side by Side List 
-    50. Fullwidth List of Split 2 
+    24. Onepage Menu 
+    25. Accordion 
+    26. Accordion Background Images 
+    27. Advanced Slider (Special Effects) 
+    28. Advanced Slider (Basic) 
+    29. Badges 
+    30. Breadcrumbs 
+    31. Button 
+    32. Author Card 
+    33. Counter 
+    34. Dropdown Menu 
+    35. Equal-width Divs 
+    36. Features 
+    37. Flexslider 
+    38. Footer Templates 
+    39. Form 
+    40. Form Progress 
+    41. Gallery 
+    42. Image Shapes 
+    43. Custom Core Scripts & Stylesheets 
+    44. Cutom Light Box 
+    45. Brands List 
+    46. Bulleted List 
+    47. Maintain Aspect Ratio List 
+    48. List of Posts 
+    49. List of Split Posts 
+    50. Side by Side List 
     51. Side by Side List With Photo 
-    52. Fullwidth List of Split 
-    53. Mobile Menu 
-    54. Modal Dialog 
-    55. Multiple Items Carousel 
+    52. Fullwidth List of Split 2 
+    53. Fullwidth List of Split 
+    54. Mobile Menu 
+    55. Modal Dialog 
     56. Mouse Animation Scroll 
-    57. Onepage Menu 
+    57. Multiple Items Carousel 
     58. Parallax 
     59. Periodical Scroll 
     60. Pricing 
@@ -1692,7 +1692,7 @@ section.site-google-map,
 }
 
 .theme-white .header-area.spy-scroll-fixed {
-    background-color: #DA304A;
+    background-color: #000;
 }
 
 .theme-white .header-area .menu-right a {
@@ -3121,6 +3121,76 @@ ul.entry-meta {
 /* Alobaidi Captcha */
 .alobaidi-captcha-comment-field {
     margin-left: 0.875rem;
+}
+
+/* ====================================================== 
+    <!-- Onepage Menu -->  
+/* ====================================================== */
+.custom-sidefixed-menu {
+    position: absolute;
+    z-index: 13;
+    margin-top: 200px;
+    width: 120px;
+}
+
+.custom-sidefixed-menu.fixed {
+    position: fixed;
+    top: 120px;
+    margin-top: 0;
+}
+
+.custom-sidefixed-menu li {
+    position: relative;
+    font-size: 0;
+    display: block;
+    width: 100px;
+    text-align: left;
+    cursor: pointer;
+  /* @include transition-none(); */
+    transition: none;
+}
+
+.custom-sidefixed-menu li strong {
+    position: absolute;
+    display: inline-block;
+    font-weight: normal;
+    left: 40px;
+    text-align: left;
+}
+
+.custom-sidefixed-menu li span {
+    font-size: 0.875rem;
+    display: inline-block;
+    padding-left: 1rem;
+    padding-right: .5rem;
+    font-weight: bold;
+}
+
+.custom-sidefixed-menu li a {
+    color: #fff;
+    display: block;
+  /* @include transition-none(); */
+    transition: none;
+}
+
+.custom-sidefixed-menu li.active {
+    font-size: 0.875rem;
+    color: #fff;
+    border-bottom: 2px solid #000;
+}
+
+.custom-sidefixed-menu li.active a {
+    color: #000;
+}
+
+.custom-sidefixed-menu li.active span {
+    font-weight: bold;
+}
+
+@media all and (max-width: 768px) {
+    .custom-sidefixed-menu {
+        display: none;
+    }
 }
 
 /* ====================================================== 
@@ -4858,75 +4928,6 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 }
 
 /* ====================================================== 
-   <!-- Footer Templates -->  
-/* ====================================================== */
-.custom-footer-wrapper {
-    background: #212121;
-    padding: 3rem 0;
-    margin: 3rem 0;
-    color: #AEAEAE;
-}
-
-.custom-footer-wrapper img.logo {
-    max-width: 80%;
-    margin-bottom: 1.5rem;
-}
-
-.custom-footer-wrapper h3,
-.custom-footer-wrapper .h3 {
-    margin-bottom: 1rem;
-    font-size: 1.2em;
-    font-weight: 500;
-    color: #AEAEAE;
-}
-
-.custom-footer-wrapper .custom-footer-list-container:after {
-    content: '';
-    display: block;
-    clear: both;
-    width: 100%;
-}
-
-.custom-footer-wrapper .custom-footer-list-container > .list {
-    width: 12rem;
-    float: left;
-}
-
-.custom-footer-wrapper .custom-footer-list-container > .list li {
-    margin: .5rem 0;
-    display: block;
-}
-
-@media all and (max-width: 768px) {
-    .custom-footer-wrapper {
-        in: 3rem 0;
-    }
-
-    .custom-footer-wrapper img.logo {
-        max-width: 100%;
-    }
-
-    .custom-footer-wrapper .pull-left,
-  .custom-footer-wrapper .pull-right {
-        position: relative !important;
-        display: block !important;
-        width: 100% !important;
-        text-align: left;
-        float: none;
-    }
-
-    .custom-footer-wrapper .t-l,
-  .custom-footer-wrapper .t-r {
-        float: none;
-        text-align: center;
-    }
-
-    .custom-footer-wrapper .custom-footer-list-container > .list {
-        width: 33.3%;
-    }
-}
-
-/* ====================================================== 
     <!-- Form -->                                         
 /* ====================================================== */
 /* 
@@ -6104,6 +6105,75 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 .ui-datepicker-rtl .ui-datepicker-group-middle .ui-datepicker-header {
     border-right-width: 0;
     border-left-width: 1px;
+}
+
+/* ====================================================== 
+   <!-- Footer Templates -->  
+/* ====================================================== */
+.custom-footer-wrapper {
+    background: #212121;
+    padding: 3rem 0;
+    margin: 3rem 0;
+    color: #AEAEAE;
+}
+
+.custom-footer-wrapper img.logo {
+    max-width: 80%;
+    margin-bottom: 1.5rem;
+}
+
+.custom-footer-wrapper h3,
+.custom-footer-wrapper .h3 {
+    margin-bottom: 1rem;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #AEAEAE;
+}
+
+.custom-footer-wrapper .custom-footer-list-container:after {
+    content: '';
+    display: block;
+    clear: both;
+    width: 100%;
+}
+
+.custom-footer-wrapper .custom-footer-list-container > .list {
+    width: 12rem;
+    float: left;
+}
+
+.custom-footer-wrapper .custom-footer-list-container > .list li {
+    margin: .5rem 0;
+    display: block;
+}
+
+@media all and (max-width: 768px) {
+    .custom-footer-wrapper {
+        in: 3rem 0;
+    }
+
+    .custom-footer-wrapper img.logo {
+        max-width: 100%;
+    }
+
+    .custom-footer-wrapper .pull-left,
+  .custom-footer-wrapper .pull-right {
+        position: relative !important;
+        display: block !important;
+        width: 100% !important;
+        text-align: left;
+        float: none;
+    }
+
+    .custom-footer-wrapper .t-l,
+  .custom-footer-wrapper .t-r {
+        float: none;
+        text-align: center;
+    }
+
+    .custom-footer-wrapper .custom-footer-list-container > .list {
+        width: 33.3%;
+    }
 }
 
 /* ====================================================== 
@@ -8082,76 +8152,6 @@ dl.list-side-by-side:after {
     position: absolute;
     top: 20%;
     left: 600px;
-}
-
-/* ====================================================== 
-    <!-- Onepage Menu -->  
-/* ====================================================== */
-.custom-sidefixed-menu {
-    position: absolute;
-    z-index: 5;
-    margin-top: 200px;
-    width: 120px;
-}
-
-.custom-sidefixed-menu.fixed {
-    position: fixed;
-    top: 80px;
-    margin-top: 0;
-}
-
-.custom-sidefixed-menu li {
-    position: relative;
-    font-size: 0;
-  /* @include transition-default(); */
-    transition: all 0.3s ease;
-    display: block;
-    width: 100px;
-    text-align: left;
-    cursor: pointer;
-}
-
-.custom-sidefixed-menu li strong {
-    position: absolute;
-    display: inline-block;
-    font-weight: normal;
-    left: 40px;
-    text-align: left;
-}
-
-.custom-sidefixed-menu li span {
-    font-size: 0.875rem;
-    display: inline-block;
-    padding-left: 1rem;
-    padding-right: .5rem;
-    font-weight: bold;
-  /* @include transition-default(); */
-    transition: all 0.3s ease;
-}
-
-.custom-sidefixed-menu li a {
-    color: #fff;
-    display: block;
-}
-
-.custom-sidefixed-menu li.active {
-    font-size: 0.875rem;
-    color: #fff;
-    border-bottom: 2px solid #000;
-}
-
-.custom-sidefixed-menu li.active a {
-    color: #000;
-}
-
-.custom-sidefixed-menu li.active span {
-    font-weight: bold;
-}
-
-@media all and (max-width: 768px) {
-    .custom-sidefixed-menu {
-        display: none;
-    }
 }
 
 /* ====================================================== 

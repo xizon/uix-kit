@@ -454,6 +454,157 @@ App = ( function ( App, $, window, document ) {
 
 
 
+				//----------------------------------------------------------------------------------
+				//--------------------------------- Liquid Distortion Effect 2 -----------------------
+				//----------------------------------------------------------------------------------
+				//Usage of returning sprite object: items_container.children[index]
+				if ( $this.hasClass( 'eff-liquid2' ) ) {
+
+					$this.find( '.item' ).each( function( index )  {
+
+						var $thisItem = $( this );
+
+
+
+						//Load sprite from each slider to canvas
+						//-------------------------------------
+						var curSprite, 
+							canvasRatio = $this.width()/nativeItemW;
+
+						if ( $thisItem.find( 'video' ).length > 0 ) {
+
+
+							// create a video texture from a path
+							var videoURL = $thisItem.find( 'source:first' ).attr( 'src' ),
+								texture  = PIXI.Texture.fromVideo( videoURL );
+
+							curSprite = new PIXI.Sprite( texture );
+
+							// pause the video
+							var videoSource = texture.baseTexture.source;
+							videoSource.autoplay = false;
+							videoSource.pause();
+							videoSource.currentTime = 0;
+							videoSource.muted = true;
+
+
+							//Returns the dimensions (intrinsic height and width ) of the video
+							var video = document.getElementById( $thisItem.find( 'video' ).attr( 'id' ) );
+							video.addEventListener( 'loadedmetadata', function( e ) {
+
+								var	curW    = this.videoWidth,
+									curH    = this.videoHeight,
+									newW    = curW,
+									newH    = curH;
+
+								newW = $this.width();
+
+								//Scaled/Proportional Content 
+								newH = curH*(newW/curW);
+
+								//At the same time change the height of the canvas
+								renderer.view.style.width = newW + 'px';
+								renderer.view.style.height = newH + 'px';	
+
+
+							}, false);	
+
+							video.src = videoURL;
+
+
+
+						} else {
+
+							var imgURL   = $thisItem.find( 'img' ).attr( 'src' ),
+								imgCur   = new Image();
+
+							curSprite = new PIXI.Sprite.fromImage( imgURL );
+
+							imgCur.onload = function() {
+
+								//At the same time change the height of the canvas
+								renderer.view.style.width = $thisItem.find( 'img' ).width() + 'px';
+								renderer.view.style.height =$thisItem.find( 'img' ).height() + 'px';
+
+							};
+
+							imgCur.src = imgURL;
+
+
+						}
+
+						curSprite.width  = $this.width();
+						curSprite.height = $this.height();	
+
+
+						//Need to scale according to the screen
+						curSprite.scale.set( canvasRatio );
+
+						TweenMax.set( curSprite, {
+							alpha : 0
+						});	
+
+
+						items_container.addChild( curSprite );
+						// Enable interactions
+						items_container.interactive = true;
+
+
+						//Add child container to the main container 
+						//-------------------------------------
+						stage_filter.addChild( items_container );
+						// Enable Interactions
+						stage_filter.interactive = true;
+
+						//A texture stores the information that represents an image
+						displacementSprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.CLAMP;
+						
+
+
+						//Set the filter to stage and set some default values for the animation
+						//-------------------------------------
+						stage_filter.filters = [ displacementFilter ];    
+
+
+						//Add filter container to the main container
+						//-------------------------------------				
+						displacementSprite.anchor.set( 0.5 );
+						displacementSprite.x = renderer_filter.width / 2;
+						displacementSprite.y = renderer_filter.height / 2;
+					
+
+
+						// PIXI tries to fit the filter bounding box to the renderer so we optionally bypass
+						displacementFilter.autoFit = false;
+
+						stage_filter.addChild( displacementSprite );
+
+						//Animation Effects
+						//-------------------------------------
+						var ticker       = new PIXI.ticker.Ticker();
+						ticker.autoStart = true;
+						ticker.add( function( delta ) {
+							
+
+							// Render updated scene
+							renderer_filter.render( stage_filter );
+
+						});
+
+
+					});
+
+					//Initialize the default height of canvas
+					//-------------------------------------	
+					setTimeout( function() {
+						canvasDefaultInit( $first );
+					}, animDuration );
+
+
+				}// end effect
+		
+				
+
 
 				//----------------------------------------------------------------------------------
 				//--------------------------------- 3D Rotating Effect -----------------------------
@@ -1373,6 +1524,133 @@ App = ( function ( App, $, window, document ) {
 							displacementSprite.rotation += 0.001;
 							rafID = requestAnimationFrame( rotateSpite );
 						};
+	
+					}	
+					
+					
+
+					
+				
+
+				} // end effect
+				
+				
+				
+				
+				//----------------------------------------------------------------------------------
+				//--------------------------------- Liquid Distortion Effect 2 -----------------------
+				//----------------------------------------------------------------------------------
+				if ( slider.hasClass( 'eff-liquid2' ) ) {
+					
+				
+					
+					//Display wrapper of canvas (transitions between slides)
+					//-------------------------------------	
+					if ( goType == 'out' ) {
+						//Current item leaving action
+						
+						TweenMax.to( displacementSprite.scale, 1, { 
+							x: 10
+						} );
+
+						
+					} else {
+						//Current item entry action
+						
+						TweenMax.to( $myRenderer, animDuration/1000, {
+							alpha : 0,
+							onComplete    : function() {
+
+								var curSp = items_container.children[ elementIndex ];
+
+								TweenMax.to( this.target, animDuration/1000, {
+									alpha : 1
+								});	
+
+
+								//display the current item
+								for ( var k = 0; k < spTotal; k++ ) {
+
+									var obj = items_container.children[ k ];
+									TweenMax.set( obj, {
+										alpha : 0
+									});	
+
+									//pause all videos
+									if ( obj._texture.baseTexture.imageType == null ) {
+										var videoSource = obj.texture.baseTexture.source;
+
+										// play the video
+										videoSource.currentTime = 0;
+										videoSource.autoplay = false;
+										videoSource.pause();
+										videoSource.muted = true;
+									}		
+
+								}
+
+
+
+								//play current video
+								if ( curSp._texture.baseTexture.imageType == null ) {
+									var videoSource2 = curSp.texture.baseTexture.source;
+
+									// play the video
+									videoSource2.currentTime = 0;
+									videoSource2.autoplay = true;
+									videoSource2.play();
+									videoSource2.muted = false;
+								}
+
+
+								//display filters
+								
+								//sprite
+								var baseTimeline = new TimelineMax( {
+									delay       : 0,
+									paused      : false,
+									repeat      : 0,
+									onRepeat    : function() {},
+									onComplete  : function() {
+										
+										TweenMax.to( displacementSprite.scale, 1, { x: 1, y: 1 });   
+										TweenMax.to( displacementSprite, 1, { rotation: 0 }); 
+										
+										
+
+									},
+									onUpdate    : function() {  
+										displacementSprite.scale.set( baseTimeline.progress() * 13 );
+										displacementSprite.rotation += baseTimeline.progress() * 0.02;
+										
+									}
+								} );
+								
+								baseTimeline.clear();
+
+								//filter
+								baseTimeline
+								  .to( displacementFilter.scale, 1, { y: "+=" + 200 + "", ease: Power3.easeOut } )
+								  .to( curSp, 0.5, { alpha: 1, ease: Power3.easeOut }, 0.4 )     
+								  .to( displacementFilter.scale, 1, { y: 0,  ease: Power3.easeOut }, 1 );      		
+
+								
+								
+
+								
+
+							}
+						});		
+
+						
+
+						//Add new ripple each time mouse is clicked
+						//-------------------------------------
+						document.addEventListener("mousemove", function(e) {
+					
+							TweenMax.to( displacementFilter.scale, 1, { x: e.pageX/2 + "" });   
+						});
+
 	
 					}	
 					

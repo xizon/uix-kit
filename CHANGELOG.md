@@ -1,8 +1,11 @@
 # Changelog
 
-#### = 1.5.0 (May 2, 2018) =
+#### = 1.5.1 (May 2, 2018) =
 
-New: Add a new module "3D Pages" with three.js.
+* New: Add a new module "3D Pages" with three.js.
+* New: Add a new liquid effect for module "Advanced Slider".
+* New: Add a new module "Full Page/One Page 2".
+* Fix: Solved an issue of one-page demo in Safari and Firefox browsers.
 
 
 

@@ -3,13 +3,13 @@
 /* ====================================================== */
 .custom-sidefixed-menu {
 	position: absolute;
-	z-index: 5;
+	z-index: 13;
 	margin-top: 200px;
 	width: 120px;
 	
 	&.fixed {
 		position: fixed;
-		top: 80px;
+		top: 120px;
 		margin-top: 0;
 	}
 	
@@ -17,11 +17,12 @@
 	li {
 		position: relative;
 		font-size: 0;
-		@include transition-default();
 		display: block;
 		width: 100px;
 		text-align: left;
 		cursor: pointer;
+		@include transition-none();
+		
 		
 		strong {
 			position: absolute;
@@ -38,12 +39,12 @@
 			padding-left: 1rem;
 			padding-right: .5rem;
 			font-weight: bold;
-			@include transition-default();
 		}
 		
 		a {
 			color: #fff;
 			display: block;
+			@include transition-none();
 		}
 			
 		

@@ -66,13 +66,13 @@ App = ( function ( App, $, window, document ) {
 
 			if ( dir == 'down' ) {
 				//scroll down
-				$( '#demo-mousewheel-interaction-status' ).text( 'Direction: down, Total: ' + scrollCount );
+				$( '#demo-mousewheel-interaction-status' ).html( 'Direction: &darr;&darr;&darr;&darr;&darr;&darr;&darr;&darr;&darr;&darr;&darr;&darr;&darr;&darr;&darr;, Total: ' + scrollCount );
 
 				scrollCount++;
 				
 			} else {
 				//scroll up
-				$( '#demo-mousewheel-interaction-status' ).text( 'Direction: up, Total: ' + scrollCount );
+				$( '#demo-mousewheel-interaction-status' ).html( 'Direction: &uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;, Total: ' + scrollCount );
 
 				scrollCount++;
 			  

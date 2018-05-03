@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.5.0
- * ## Last Update         :  May 2, 2018
+ * ## Version             :  1.5.1
+ * ## Last Update         :  May 3, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -43,36 +43,32 @@
     18. Flexslider 
     19. Form 
     20. Form Progress 
-    21. Full Page Transition 
-    22. Gallery 
-    23. Image Shapes 
-    24. Custom Core Scripts & Stylesheets 
-    25. Custom Lightbox 
-    26. Bulleted List 
-    27. Posts List With Ajax 
-    28. Fullwidth List of Split 
-    29. Mobile Menu 
-    30. Modal Dialog 
-    31. Mousewheel Interaction 
+    21. Gallery 
+    22. Image Shapes 
+    23. Custom Core Scripts & Stylesheets 
+    24. Custom Lightbox 
+    25. Bulleted List 
+    26. Posts List With Ajax 
+    27. Fullwidth List of Split 
+    28. Mobile Menu 
+    29. Modal Dialog 
+    30. Full Page/One Page Transition 2 
+    31. Full Page/One Page Transition 
     32. Multiple Items Carousel 
-    33. Navigation Highlighting 
+    33. Mousewheel Interaction 
     34. Parallax 
-    35. Periodical Scroll 
-    36. Pricing 
+    35. Pricing 
+    36. Periodical Scroll 
     37. Progress Bar 
-    38. Retina Graphics for Website 
-    39. Scroll Reveal 
-    40. Show More Less 
-    41. Smooth Scrolling When Clicking An Anchor Link 
-    42. Source Code 
-    43. Sticky Elements 
-    44. Tabs 
-    45. Testimonials Carousel 
-    46. Text effect 
-    47. Timeline 
-    48. AJAX 
-    49. GSAP Plugins 
-    50. Three.js Plugins 
+    38. Smooth Scrolling When Clicking An Anchor Link 
+    39. Source Code 
+    40. Sticky Elements 
+    41. Tabs 
+    42. Testimonials Carousel 
+    43. Text effect 
+    44. Timeline 
+    45. AJAX 
+    46. GSAP Plugins 
 
 
 */
@@ -157,6 +153,10 @@ App = ( function ( App, $, window, document ) {
     
     var documentReady = function( $ ) {
 	
+		
+		//Prevent this module from loading in other pages
+		if ( $( 'body' ).hasClass( 'onepage' ) ) return false;
+		
 
 		var $window      = $( window ),
 			windowWidth  = $window.width(),
@@ -2036,6 +2036,157 @@ App = ( function ( App, $, window, document ) {
 
 
 
+				//----------------------------------------------------------------------------------
+				//--------------------------------- Liquid Distortion Effect 2 -----------------------
+				//----------------------------------------------------------------------------------
+				//Usage of returning sprite object: items_container.children[index]
+				if ( $this.hasClass( 'eff-liquid2' ) ) {
+
+					$this.find( '.item' ).each( function( index )  {
+
+						var $thisItem = $( this );
+
+
+
+						//Load sprite from each slider to canvas
+						//-------------------------------------
+						var curSprite, 
+							canvasRatio = $this.width()/nativeItemW;
+
+						if ( $thisItem.find( 'video' ).length > 0 ) {
+
+
+							// create a video texture from a path
+							var videoURL = $thisItem.find( 'source:first' ).attr( 'src' ),
+								texture  = PIXI.Texture.fromVideo( videoURL );
+
+							curSprite = new PIXI.Sprite( texture );
+
+							// pause the video
+							var videoSource = texture.baseTexture.source;
+							videoSource.autoplay = false;
+							videoSource.pause();
+							videoSource.currentTime = 0;
+							videoSource.muted = true;
+
+
+							//Returns the dimensions (intrinsic height and width ) of the video
+							var video = document.getElementById( $thisItem.find( 'video' ).attr( 'id' ) );
+							video.addEventListener( 'loadedmetadata', function( e ) {
+
+								var	curW    = this.videoWidth,
+									curH    = this.videoHeight,
+									newW    = curW,
+									newH    = curH;
+
+								newW = $this.width();
+
+								//Scaled/Proportional Content 
+								newH = curH*(newW/curW);
+
+								//At the same time change the height of the canvas
+								renderer.view.style.width = newW + 'px';
+								renderer.view.style.height = newH + 'px';	
+
+
+							}, false);	
+
+							video.src = videoURL;
+
+
+
+						} else {
+
+							var imgURL   = $thisItem.find( 'img' ).attr( 'src' ),
+								imgCur   = new Image();
+
+							curSprite = new PIXI.Sprite.fromImage( imgURL );
+
+							imgCur.onload = function() {
+
+								//At the same time change the height of the canvas
+								renderer.view.style.width = $thisItem.find( 'img' ).width() + 'px';
+								renderer.view.style.height =$thisItem.find( 'img' ).height() + 'px';
+
+							};
+
+							imgCur.src = imgURL;
+
+
+						}
+
+						curSprite.width  = $this.width();
+						curSprite.height = $this.height();	
+
+
+						//Need to scale according to the screen
+						curSprite.scale.set( canvasRatio );
+
+						TweenMax.set( curSprite, {
+							alpha : 0
+						});	
+
+
+						items_container.addChild( curSprite );
+						// Enable interactions
+						items_container.interactive = true;
+
+
+						//Add child container to the main container 
+						//-------------------------------------
+						stage_filter.addChild( items_container );
+						// Enable Interactions
+						stage_filter.interactive = true;
+
+						//A texture stores the information that represents an image
+						displacementSprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.CLAMP;
+						
+
+
+						//Set the filter to stage and set some default values for the animation
+						//-------------------------------------
+						stage_filter.filters = [ displacementFilter ];    
+
+
+						//Add filter container to the main container
+						//-------------------------------------				
+						displacementSprite.anchor.set( 0.5 );
+						displacementSprite.x = renderer_filter.width / 2;
+						displacementSprite.y = renderer_filter.height / 2;
+					
+
+
+						// PIXI tries to fit the filter bounding box to the renderer so we optionally bypass
+						displacementFilter.autoFit = false;
+
+						stage_filter.addChild( displacementSprite );
+
+						//Animation Effects
+						//-------------------------------------
+						var ticker       = new PIXI.ticker.Ticker();
+						ticker.autoStart = true;
+						ticker.add( function( delta ) {
+							
+
+							// Render updated scene
+							renderer_filter.render( stage_filter );
+
+						});
+
+
+					});
+
+					//Initialize the default height of canvas
+					//-------------------------------------	
+					setTimeout( function() {
+						canvasDefaultInit( $first );
+					}, animDuration );
+
+
+				}// end effect
+		
+				
+
 
 				//----------------------------------------------------------------------------------
 				//--------------------------------- 3D Rotating Effect -----------------------------
@@ -2955,6 +3106,132 @@ App = ( function ( App, $, window, document ) {
 							displacementSprite.rotation += 0.001;
 							rafID = requestAnimationFrame( rotateSpite );
 						};
+	
+					}	
+					
+					
+
+					
+				
+
+				} // end effect
+				
+				
+				
+				
+				//----------------------------------------------------------------------------------
+				//--------------------------------- Liquid Distortion Effect 2 -----------------------
+				//----------------------------------------------------------------------------------
+				if ( slider.hasClass( 'eff-liquid2' ) ) {
+					
+				
+					
+					//Display wrapper of canvas (transitions between slides)
+					//-------------------------------------	
+					if ( goType == 'out' ) {
+						//Current item leaving action
+						
+						TweenMax.to( displacementSprite.scale, 1, { 
+							x: 10
+						} );
+
+						
+					} else {
+						//Current item entry action
+						
+						TweenMax.to( $myRenderer, animDuration/1000, {
+							alpha : 0,
+							onComplete    : function() {
+
+								var curSp = items_container.children[ elementIndex ];
+
+								TweenMax.to( this.target, animDuration/1000, {
+									alpha : 1
+								});	
+
+
+								//display the current item
+								for ( var k = 0; k < spTotal; k++ ) {
+
+									var obj = items_container.children[ k ];
+									TweenMax.set( obj, {
+										alpha : 0
+									});	
+
+									//pause all videos
+									if ( obj._texture.baseTexture.imageType == null ) {
+										var videoSource = obj.texture.baseTexture.source;
+
+										// play the video
+										videoSource.currentTime = 0;
+										videoSource.autoplay = false;
+										videoSource.pause();
+										videoSource.muted = true;
+									}		
+
+								}
+
+
+
+								//play current video
+								if ( curSp._texture.baseTexture.imageType == null ) {
+									var videoSource2 = curSp.texture.baseTexture.source;
+
+									// play the video
+									videoSource2.currentTime = 0;
+									videoSource2.autoplay = true;
+									videoSource2.play();
+									videoSource2.muted = false;
+								}
+
+
+								//display filters
+								
+								//sprite
+								var baseTimeline = new TimelineMax( {
+									delay       : 0,
+									paused      : false,
+									repeat      : 0,
+									onRepeat    : function() {},
+									onComplete  : function() {
+										
+										TweenMax.to( displacementSprite.scale, 1, { x: 1, y: 1 });   
+										TweenMax.to( displacementSprite, 1, { rotation: 0 });   
+										
+
+									},
+									onUpdate    : function() {  
+										displacementSprite.scale.set( baseTimeline.progress() * 13 );
+										displacementSprite.rotation += baseTimeline.progress() * 0.02;
+										
+									}
+								} );
+								
+								baseTimeline.clear();
+
+								//filter
+								baseTimeline
+								  .to( displacementFilter.scale, 1, { y: "+=" + 200 + "", ease: Power3.easeOut } )
+								  .to( curSp, 0.5, { alpha: 1, ease: Power3.easeOut }, 0.4 )     
+								  .to( displacementFilter.scale, 1, { y: 0,  ease: Power3.easeOut }, 1 );      		
+
+								
+								
+
+								
+
+							}
+						});		
+
+						
+
+						//Add new ripple each time mouse is clicked
+						//-------------------------------------
+						document.addEventListener("mousemove", function(e) {
+					
+							TweenMax.to( displacementFilter.scale, 1, { x: e.pageX/2 + "" });   
+						});
+
 	
 					}	
 					
@@ -9358,193 +9635,6 @@ App = ( function ( App, $, window, document ) {
 }( jQuery ));
 
 
-/* 
- *************************************
- * <!-- Full Page Transition -->
- *************************************
- */
-App = ( function ( App, $, window, document ) {
-    'use strict';
-    
-    var documentReady = function( $ ) {
-
-		//Prevent this module from loading in other pages
-		if ( !$( 'body' ).hasClass( 'page-mousewheel-eff' ) ) return false;
-		
-		
-	    //Determine the direction of a jQuery scroll event
-		//Fix an issue for mousewheel event is too fast.
-		var lastAnimation     = 0,
-			quietPeriod       = 500, //Do not change it
-			animationTime     = 1000,//According to page transition animation changes
-			updateURL         = true,
-			$el               = $( '.custom-fullpage-container' ),
-			$sections         = $el.find( '> section' ),
-			sectionTotal      = $sections.length,
-			topSectionSpacing = $( '.header-area' ).outerHeight( true );
-		
-		if ( $el.length == 0 ) return false;
-		
-		
-		$( document ).on( 'wheel', function( e ) { 
-
-			var dir;
-			//Gets a value that indicates the amount that the mouse wheel has changed.
-			var delta = e.originalEvent.deltaY;
-			
-			if( delta > 0 ) { 
-				//scroll down
-				dir = 'down';
-				
-			} else {
-				//scroll up
-				dir = 'up';
-			}
-			
-			scrollMoveInit( e, dir );
-			
-			//prevent page fom scrolling
-			return false;
-
-		});
-		
-
-		// Prepare everything before binding wheel scroll
-		$.each( $sections, function( i ) {
-			$( this ).attr( 'data-index', i );
-			if ( i == 0 ) {
-				$( this ).addClass( 'active' );
-
-			}
-			
-		});
-		
-
-		
-		//Add hashchange event
-		setTimeout( function() {
-			var hash = window.location.hash,
-				locArr,
-				loc, 
-				curTab;
-			
-			if ( hash ) {
-				locArr = hash.split( '-' );
-				loc    = locArr[1];
-				moveTo( $el, 'down', loc );
-			}
-
-		}, quietPeriod );
-		
-		
-		
-		
-		/*
-		 * Scroll initialize
-		 *
-		 * @param  {object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
-		 * @param  {string} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
-		 * @return {void}                - The constructor.
-		 */
-		function scrollMoveInit( event, dir ) {
-	
-			var timeNow = new Date().getTime();
-			// Cancel scroll if currently animating or within quiet period
-			if( timeNow - lastAnimation < quietPeriod + animationTime) {
-				event.preventDefault();
-				return;
-			}
-
-			if ( dir == 'down' ) {
-				//scroll down
-				moveTo( $el, 'down', false );
-				
-			} else {
-				//scroll up
-				moveTo( $el, 'up', false );
-				
-			  
-			}
-			lastAnimation = timeNow;
-		}
-		
-      
-		
-		/*
-		 * Move Animation
-		 *
-		 * @param  {object} el           - The container of each sections.
-		 * @param  {string} dir          - Rolling direction indicator.
-		 * @param  {number} hashID       - ID of custom hashchange event.
-		 * @return {void}                - The constructor.
-		 */
-		function moveTo( el, dir, hashID ) {
-			var index     = parseFloat( $sections.filter( '.active' ).attr( 'data-index' ) ),
-				nextIndex = null,
-				$next     = null,
-				isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
-			
-			
-			 
-			if ( dir == 'down' ) {
-				nextIndex = index + 1;
-			} else {
-				nextIndex = index - 1;
-			}
-			
-			if ( nextIndex > sectionTotal-1 ) nextIndex = sectionTotal-1;
-			if ( nextIndex < 0 ) nextIndex = 0;
-			
-
-			
-			//ID of custom hashchange event
-			if ( hashID && isNumeric.test( hashID ) ) nextIndex = parseFloat( hashID - 1 );
-			
-			//Returns the target section
-			$next = $sections.eq( nextIndex );
-			
-			//Smooth scroll to content
-			TweenMax.to( window, animationTime/1000, {
-				scrollTo: {
-					y: $next.offset().top - topSectionSpacing
-				},
-				ease: Power2.easeOut,
-				onComplete: function() {
-					$sections.removeClass( 'active' );
-					$next.addClass( 'active' );
-				}
-			});		
-
-
-			//Changing The Site URL
-			if ( history.replaceState && updateURL == true ) {
-				
-				var href = window.location.href.substr( 0, window.location.href.indexOf('#')) + "#section-" + (nextIndex+1);
-				
-				history.pushState( {}, document.title, href );
-			}
-			
-		}
-		
-    };
-
-    App.fullPage = {
-        documentReady : documentReady        
-    };
-
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
-
-
-
-
-
-
-
-
-
 
 /* 
  *************************************
@@ -10992,13 +11082,13 @@ App = ( function ( App, $, window, document ) {
 
 			if ( dir == 'down' ) {
 				//scroll down
-				$( '#demo-mousewheel-interaction-status' ).text( 'Direction: down, Total: ' + scrollCount );
+				$( '#demo-mousewheel-interaction-status' ).html( 'Direction: &darr;&darr;&darr;&darr;&darr;&darr;&darr;&darr;&darr;&darr;&darr;&darr;&darr;&darr;&darr;, Total: ' + scrollCount );
 
 				scrollCount++;
 				
 			} else {
 				//scroll up
-				$( '#demo-mousewheel-interaction-status' ).text( 'Direction: up, Total: ' + scrollCount );
+				$( '#demo-mousewheel-interaction-status' ).html( 'Direction: &uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;, Total: ' + scrollCount );
 
 				scrollCount++;
 			  
@@ -11444,7 +11534,7 @@ App = ( function ( App, $, window, document ) {
 
 /* 
  *************************************
- * <!-- Navigation Highlighting -->
+ * <!-- Full Page/One Page Transition -->
  *************************************
  */
 App = ( function ( App, $, window, document ) {
@@ -11452,11 +11542,227 @@ App = ( function ( App, $, window, document ) {
     
     var documentReady = function( $ ) {
 
-		var $primaryMenu      = $( '.menu-main' ),
-			$sidefixedMenu    = $( '.custom-sidefixed-menu' ),
-			topSectionSpacing = $( '.header-area' ).outerHeight( true );
+
+        var $window      = $( window ),
+		    windowWidth  = $window.width(),
+		    windowHeight = $window.height();
+		
+		/* 
+		 ====================================================
+		 *  Transition Effect
+		 ====================================================
+		 */
+		
+	    //Determine the direction of a jQuery scroll event
+		//Fix an issue for mousewheel event is too fast.
+		var lastAnimation     = 0,
+			quietPeriod       = 500, //Do not change it
+			animationTime     = 1000,//According to page transition animation changes
+			updateURL         = true,
+			$el               = $( '.custom-fullpage-container' ),
+			$sections         = $el.find( '> section' ),
+			sectionTotal      = $sections.length,
+			topSectionSpacing = 0,
+			$primaryMenu      = $( '.menu-main' ),
+			$sidefixedMenu    = $( '.custom-sidefixed-menu' );
+		
+		
+		//Prevent this module from loading in other pages
+		if ( $el.length == 0 ) return false;
+		
+		
+		
+		
+		$( document ).on( 'wheel', function( e ) { 
+
+			var dir;
+			//Gets a value that indicates the amount that the mouse wheel has changed.
+			var delta = e.originalEvent.deltaY;
+			
+			if( delta > 0 ) { 
+				//scroll down
+				dir = 'down';
+				
+			} else {
+				//scroll up
+				dir = 'up';
+			}
+			
+			scrollMoveInit( e, dir );
+			
+			//prevent page fom scrolling
+			return false;
+
+		});
 		
 
+		// Prepare everything before binding wheel scroll
+		$.each( $sections, function( i ) {
+			$( this ).attr( 'data-index', i );
+			if ( i == 0 ) {
+				$( this ).addClass( 'active' );
+
+			}
+			
+		});
+		
+
+		
+		//Init the section location
+		sectionStart();
+
+		
+		/*
+		 * Init the section location
+		 *
+		 * @return {void}                - The constructor.
+		 */
+		function sectionStart() {
+	
+			setTimeout( function() {
+				var hash = window.location.hash,
+					locArr,
+					loc, 
+					curTab;
+
+				if ( hash ) {
+					
+					//Add hashchange event
+					locArr = hash.split( 'section-' );
+					loc    = locArr[1];
+					moveTo( $el, false, loc );
+				} else {
+					moveTo( $el, false, 1 );
+				}
+
+			}, quietPeriod );
+
+		}
+			
+		
+		/*
+		 * Scroll initialize
+		 *
+		 * @param  {object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
+		 * @param  {string} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
+		 * @return {void}                - The constructor.
+		 */
+		function scrollMoveInit( event, dir ) {
+	
+			var timeNow = new Date().getTime();
+			// Cancel scroll if currently animating or within quiet period
+			if( timeNow - lastAnimation < quietPeriod + animationTime) {
+				event.preventDefault();
+				return;
+			}
+
+			if ( dir == 'down' ) {
+				//scroll down
+				moveTo( $el, 'down', false );
+				
+			} else {
+				//scroll up
+				moveTo( $el, 'up', false );
+				
+			  
+			}
+			lastAnimation = timeNow;
+		}
+		
+      
+		
+		/*
+		 * Move Animation
+		 *
+		 * @param  {object} el           - The container of each sections.
+		 * @param  {string} dir          - Rolling direction indicator.
+		 * @param  {number} hashID       - ID of custom hashchange event.
+		 * @return {void}                - The constructor.
+		 */
+		function moveTo( el, dir, hashID ) {
+			var index     = parseFloat( $sections.filter( '.active' ).attr( 'data-index' ) ),
+				nextIndex = null,
+				$next     = null,
+				isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
+			
+			
+			 
+			if ( dir == 'down' || dir === false ) {
+				nextIndex = index + 1;
+			} else {
+				nextIndex = index - 1;
+			}
+			
+
+			//ID of custom hashchange event
+			if ( hashID && isNumeric.test( hashID ) ) nextIndex = parseFloat( hashID - 1 );
+			
+			
+			if ( nextIndex <= parseFloat( sectionTotal-1 ) && nextIndex >= 0 ) {
+				
+				if ( nextIndex > parseFloat( sectionTotal-1 ) ) nextIndex = parseFloat( sectionTotal-1 );
+				if ( nextIndex < 0 ) nextIndex = 0;
+
+
+				//Returns the target section
+				$next = $sections.eq( nextIndex );
+
+				//Smooth scroll to content
+				if ( $next.length > 0 ) {
+					TweenMax.to( window, animationTime/1000, {
+						scrollTo: {
+							y: $next.offset().top - topSectionSpacing
+						},
+						ease: Power2.easeOut,
+						onComplete: function() {
+
+							$sections.removeClass( 'leave' );
+							$sections.eq( index ).addClass( 'leave' );
+
+							$sections.removeClass( 'active' );
+							$next.addClass( 'active' ).removeClass( 'leave' );
+
+
+
+							//Changing The Site URL
+							var curSectionIndex = $sections.filter( '.active' ).index() + 1,
+								href            = window.location.href.substr( 0, window.location.href.indexOf( '#' ) ) + '#' + $sections.filter( '.active' ).attr( 'id' );
+
+							if ( Modernizr.cssanimations ) {
+								history.pushState( {}, document.title, href );
+								console.log( 'Section ' + curSectionIndex + ' loaded!' );
+							}
+
+
+						}
+					});			
+				}	
+				
+			}
+			
+
+	
+
+			
+		}
+		
+		
+
+		/* 
+		 ====================================================
+		 *  Navigation Interaction
+		 ====================================================
+		 */
+		goPageSection( $primaryMenu );
+		goPageSection( $sidefixedMenu );
+
+        
+	
+		//Activate the first item
+		$primaryMenu.find( 'li:first' ).addClass( 'active' );
+		$sidefixedMenu.find( 'li:first' ).addClass( 'active' );
+		
+		
 		/*
 		 * Get section or article by href
 		 *
@@ -11470,12 +11776,19 @@ App = ( function ( App, $, window, document ) {
 		/*
 		 * Get link by section or article id
 		 *
-		 * @param  {string, object} el  - The current selector or selector ID
-		 * @param  {object} menuObj     - Returns the menu element within the document.
-		 * @return {object}             - A new selector.
+		 * @param  {string, object} el    - The current selector or selector ID
+		 * @param  {object} menuObj       - Returns the menu element within the document.
+		 * @param  {boolean} echoIndex    - Whether to return the current index.
+		 * @return {object}               - A new selector.
 		 */
-        function getRelatedNavigation( el, menuObj ) {
-            return menuObj.find( 'li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' );
+        function getRelatedNavigation( el, menuObj, echoIndex ) {
+			
+			if ( echoIndex ) {
+				return menuObj.find( 'li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' ).index();
+			} else {
+			    return menuObj.find( 'li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' );	
+			}
+            
         } 
 		
 		/*
@@ -11488,6 +11801,7 @@ App = ( function ( App, $, window, document ) {
             return menuObj.find( 'li' );
         } 	
 		
+		
 		/*
 		 * Smooth scroll to content
 		 *
@@ -11495,93 +11809,76 @@ App = ( function ( App, $, window, document ) {
 		 * @return {void}               - The constructor.
 		 */
         function goPageSection( menuObj ) {
-			menuObj.find( 'li > a' ).on('click', function(e) {
+			menuObj.find( 'li > a' ).on( 'click', function(e) {
 				e.preventDefault();
 				
+				if ( $( this ).parent().hasClass( 'active' ) ) return false;
 				
-				TweenMax.to( window, 0.5, {
-					scrollTo: {
-						y: getRelatedContent( this ).offset().top - topSectionSpacing
-					},
-					ease: Power2.easeOut
-				});	
-			
+				
+				moveTo( $el, false, $( this ).parent( 'li' ).index() + 1 );
 			});	
 	
         } 	
-        
-		
-		//-------- Scroll Animate Interactions
-		//-----------------------------
-		if ( $( 'body' ).hasClass( 'onepage' ) ) {
 
-			//Activate the first item
-			$primaryMenu.find( 'li:first' ).addClass( 'active' );
-			$sidefixedMenu.find( 'li:first' ).addClass( 'active' );
-	
-			// Smooth scroll to content
-			goPageSection( $primaryMenu );
-			goPageSection( $sidefixedMenu );
-			
-			
-			var navMinTop      = $sidefixedMenu.offset().top,
-				navMaxTop      = parseFloat( $( document ).height() - $( '.footer-main-container' ).height() ) - $( window ).height()/3;
-			
-			$( window ).on( 'scroll touchmove', function() {
-				var scrollTop = $( this ).scrollTop(),
-					spyTop    = parseFloat( scrollTop + topSectionSpacing ),
-					minTop    = $( '[data-highlight-section="true"]' ).first().offset().top,
-					maxTop    = $( '[data-highlight-section="true"]' ).last().offset().top + $( '[data-highlight-section="true"]' ).last().height();
 
-				
-				$( '[data-highlight-section="true"]' ).each( function()  {
-					var block     = $( this ),
-						eleTop    = block.offset().top;
-					
-			
-					if ( eleTop < spyTop ) {
 
-						// Highlight element when related content
-						getAllNavigation( $primaryMenu ).removeClass( 'active' );
-						getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
-						getRelatedNavigation( block, $primaryMenu ).addClass( 'active' );
-						getRelatedNavigation( block, $sidefixedMenu ).addClass( 'active' );
-					} 
-				});
+		var navMinTop      = ( $sidefixedMenu.length > 0 ) ? $sidefixedMenu.offset().top : 0,
+			navMaxTop      = parseFloat( $( document ).height() - $( '.footer-main-container' ).height() ) - windowHeight/3;
+
+		$window.on( 'scroll touchmove', function() {
+			var scrollTop = $( this ).scrollTop(),
+				spyTop    = parseFloat( scrollTop + topSectionSpacing ),
+				minTop    = $( '[data-highlight-section="true"]' ).first().offset().top,
+				maxTop    = $( '[data-highlight-section="true"]' ).last().offset().top + $( '[data-highlight-section="true"]' ).last().height();
+
+			$( '[data-highlight-section="true"]' ).each( function()  {
+				var block     = $( this ),
+					eleTop    = block.offset().top;
 				
-				
-				
-				//Cancel the current highlight element
-				if ( spyTop > maxTop || spyTop < minTop ) {
+
+				// The 1 pixel in order to solve inaccurate value of outerHeight() 
+				// in Safari and Firefox browsers.
+				if ( eleTop < spyTop + 1 ) {
+
+					// Highlight element when related content
 					getAllNavigation( $primaryMenu ).removeClass( 'active' );
 					getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
-				}
-				
-				
-				//Detecting when user scrolls to bottom of div
-				if ( spyTop > navMaxTop || spyTop < navMinTop ) {
-					$sidefixedMenu.removeClass( 'fixed' );
-				} else {
-					$sidefixedMenu.addClass( 'fixed' );
-				}	
-				
-				
-				
-				
-			});	
-			
-			
-			
+					getRelatedNavigation( block, $primaryMenu, false ).addClass( 'active' );
+					getRelatedNavigation( block, $sidefixedMenu, false ).addClass( 'active' );
+					
+					
+				} 
+			});
 
-		}
 
-		
+
+			//Cancel the current highlight element
+			// The 1 pixel in order to solve inaccurate value of outerHeight() 
+			// in Safari and Firefox browsers.
+			if ( spyTop > maxTop || spyTop < minTop - 1 ) {
+				getAllNavigation( $primaryMenu ).removeClass( 'active' );
+				getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
+			}
+
+
+			//Detecting when user scrolls to bottom of div
+			if ( spyTop > navMaxTop || spyTop < navMinTop ) {
+				$sidefixedMenu.removeClass( 'fixed' );
+			} else {
+				$sidefixedMenu.addClass( 'fixed' );
+			}	
+
+
+
+
+		});	
+	
 		
 		
 		
     };
 
-    App.navHighlight = {
+    App.onepage = {
         documentReady : documentReady        
     };
 
@@ -11592,9 +11889,388 @@ App = ( function ( App, $, window, document ) {
 
 
 
+/* 
+ *************************************
+ * <!-- Full Page/One Page Transition 2 -->
+ *************************************
+ */
+App = ( function ( App, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+
+        
+        var $window      = $( window ),
+		    windowWidth  = $window.width(),
+		    windowHeight = $window.height();
+
+		
+
+		/* 
+		 ====================================================
+		 *  Transition Effect
+		 ====================================================
+		 */
+		
+	    //Determine the direction of a jQuery scroll event
+		//Fix an issue for mousewheel event is too fast.
+		var lastAnimation     = 0,
+			quietPeriod       = 500, //Do not change it
+			animationTime     = 1000,//According to page transition animation changes
+			updateURL         = true,
+			$el               = $( '.custom-fullpage-container2' ),
+			$sections         = $el.find( '> section' ),
+			sectionTotal      = $sections.length,
+			topSectionSpacing = 0,
+			$primaryMenu      = $( '.menu-main' ),
+			$sidefixedMenu    = $( '.custom-sidefixed-menu' );
+		
+		
+		//Prevent this module from loading in other pages
+		if ( $el.length == 0 ) return false;
+		
+		
+		//Init the sections style
+		$el.css({
+			'position' : 'relative'
+		});
+		
+		var secIndex = 10;
+		for ( var i = 0; i < sectionTotal; i++ ) {
+			
+			$sections.eq( i ).css({
+				'position' : 'absolute',
+				'width'    : '100%',
+				'z-index'  : secIndex,
+				'top'      : 0,
+				'left'     : 0
+			});		
+			
+			secIndex--;
+			
+			
+		}
+		
+		
+		
+		$( document ).on( 'wheel', function( e ) { 
+
+			var dir;
+			//Gets a value that indicates the amount that the mouse wheel has changed.
+			var delta = e.originalEvent.deltaY;
+			
+			if( delta > 0 ) { 
+				//scroll down
+				dir = 'down';
+				
+			} else {
+				//scroll up
+				dir = 'up';
+			}
+			
+			scrollMoveInit( e, dir );
+			
+			//prevent page fom scrolling
+			return false;
+
+		});
+		
+
+		// Prepare everything before binding wheel scroll
+		$.each( $sections, function( i ) {
+			$( this ).attr( 'data-index', i );
+			if ( i == 0 ) {
+				$( this ).addClass( 'active' );
+
+			}
+			
+		});
+		
+
+		//Init the section location
+		sectionStart();
+
+		
+		/*
+		 * Init the section location
+		 *
+		 * @return {void}                - The constructor.
+		 */
+		function sectionStart() {
+	
+			setTimeout( function() {
+				var hash = window.location.hash,
+					locArr,
+					loc, 
+					curTab;
+
+				if ( hash ) {
+					
+					//Add hashchange event
+					locArr = hash.split( 'section-' );
+					loc    = locArr[1];
+					moveTo( $el, false, loc );
+				} else {
+					moveTo( $el, false, 1 );
+				}
+
+			}, quietPeriod );
+
+		}
+			
+		
+
+		/*
+		 * Initialize the depth of all sections
+		 *
+		 * @param  {number} nextIndex        - Index of next section.
+		 * @param  {number} currentIndex     - Index of current section.
+		 * @return {void}                    - The constructor.
+		 */
+		function sectionsDepthInit( nextIndex, currentIndex ) {
+	
+			var secIndex = 10;
+			
+			for ( var i = 0; i < sectionTotal; i++ ) {
+
+				if ( nextIndex && i != nextIndex && i != currentIndex ) {
+					$sections.eq( i ).css( 'z-index', secIndex );
+				}
+				 
+				secIndex--;
+
+			}
+			
+			
+		}
+		
+		
+		
+		
+		/*
+		 * Scroll initialize
+		 *
+		 * @param  {object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
+		 * @param  {string} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
+		 * @return {void}                - The constructor.
+		 */
+		function scrollMoveInit( event, dir ) {
+	
+			var timeNow = new Date().getTime();
+			// Cancel scroll if currently animating or within quiet period
+			if( timeNow - lastAnimation < quietPeriod + animationTime) {
+				event.preventDefault();
+				return;
+			}
+
+			if ( dir == 'down' ) {
+				//scroll down
+				moveTo( $el, 'down', false );
+				
+			} else {
+				//scroll up
+				moveTo( $el, 'up', false );
+				
+			  
+			}
+			lastAnimation = timeNow;
+		}
+		
+      
+		
+		/*
+		 * Move Animation
+		 *
+		 * @param  {object} el           - The container of each sections.
+		 * @param  {string} dir          - Rolling direction indicator.
+		 * @param  {number} hashID       - ID of custom hashchange event.
+		 * @return {void}                - The constructor.
+		 */
+		function moveTo( el, dir, hashID ) {
+			var index     = parseFloat( $sections.filter( '.active' ).attr( 'data-index' ) ),
+				nextIndex = null,
+				$next     = null,
+				isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
+			
+			
+			if ( dir == 'down' || dir === false ) {
+				nextIndex = index + 1;
+			} else {
+				nextIndex = index - 1;
+			}
+			
+			//ID of custom hashchange event
+			if ( hashID && isNumeric.test( hashID ) ) nextIndex = parseFloat( hashID - 1 );
+			
+			
+			if ( nextIndex <= parseFloat( sectionTotal-1 ) && nextIndex >= 0 ) {
+				
+				if ( nextIndex > parseFloat( sectionTotal-1 ) ) nextIndex = parseFloat( sectionTotal-1 );
+				if ( nextIndex < 0 ) nextIndex = 0;
+
+
+				//Returns the target section
+				$next = $sections.eq( nextIndex );
+
+				if ( $next.length > 0 ) {
+
+					TweenMax.set( $next, {
+						css: {
+							'z-index' : 12,
+							'top'     : ( dir == 'down' || dir === false ) ? windowHeight : -windowHeight
+						},
+						onComplete: function() {
+
+							//Reset sections z-index
+							$sections.eq( index ).css( 'z-index', 11 );
+							sectionsDepthInit( nextIndex, index );
+
+
+							TweenMax.to( $sections.eq( index ), animationTime/1000, {
+								css: {
+									'top'     : ( dir == 'down' || dir === false ) ? -windowHeight/2 : windowHeight/2
+								},
+								ease: Power2.easeOut
+							});		
 
 
 
+							TweenMax.to( this.target, animationTime/2000, {
+								css: {
+									'top'     : 0
+								},
+								ease: Power2.easeOut,
+								onComplete: function() {
+
+
+									$sections.removeClass( 'leave' );
+									$sections.eq( index ).addClass( 'leave' );
+
+									$sections.removeClass( 'active' );
+									$next.addClass( 'active' ).removeClass( 'leave' );
+
+
+
+									//Changing The Site URL
+									var curSectionIndex = $sections.filter( '.active' ).index() + 1,
+										href            = window.location.href.substr( 0, window.location.href.indexOf( '#' ) ) + '#' + $sections.filter( '.active' ).attr( 'id' );
+
+									if ( Modernizr.cssanimations ) {
+										history.pushState( {}, document.title, href );
+										console.log( 'Section ' + curSectionIndex + ' loaded!' );
+									}
+
+
+									// Highlight element when related content
+									getAllNavigation( $primaryMenu ).removeClass( 'active' );
+									getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
+									$primaryMenu.find( 'li' ).eq( nextIndex ).addClass( 'active' );
+									$sidefixedMenu.find( 'li' ).eq( nextIndex ).addClass( 'active' );
+
+
+
+								}
+							});			
+
+						}
+					});
+
+
+
+				}		
+				
+				
+			}
+			
+			
+
+
+			
+	
+			
+		}
+		
+		
+		
+		/* 
+		 ====================================================
+		 *  Navigation Interaction
+		 ====================================================
+		 */
+		var $primaryMenu      = $( '.menu-main' ),
+			$sidefixedMenu    = $( '.custom-sidefixed-menu' );
+		
+
+		goPageSection( $primaryMenu );
+		goPageSection( $sidefixedMenu );
+
+	
+		//Activate the first item
+		$primaryMenu.find( 'li:first' ).addClass( 'active' );
+		$sidefixedMenu.find( 'li:first' ).addClass( 'active' );
+
+		
+		/*
+		 * Get section or article by href
+		 *
+		 * @param  {string, object} el  - The current selector or selector ID
+		 * @return {object}             - A new selector.
+		 */
+        function getRelatedContent( el ) {
+            return $( $( el ).attr( 'href' ) );
+        }
+
+		
+		/*
+		 * Get all links by section or article
+		 *
+		 * @param  {object} menuObj     - Returns the menu element within the document.
+		 * @return {object}             - A new selector.
+		 */
+        function getAllNavigation( menuObj ) {
+            return menuObj.find( 'li' );
+        } 	
+		
+		
+		/*
+		 * Smooth scroll to content
+		 *
+		 * @param  {object} menuObj     - Returns the menu element within the document.
+		 * @return {void}               - The constructor.
+		 */
+        function goPageSection( menuObj ) {
+			menuObj.find( 'li > a' ).on( 'click', function(e) {
+				e.preventDefault();
+				
+				if ( $( this ).parent().hasClass( 'active' ) ) return false;
+				
+			
+				var dir = 'down';
+				
+				if ( $sections.filter( '.active' ).index() > $( this ).parent().index() ) {
+					dir = 'up';
+				}
+				moveTo( $el, dir, $( this ).parent( 'li' ).index() + 1 );
+				
+				
+			});	
+	
+        } 	
+        
+	
+		
+		
+		
+    };
+
+    App.onepage2 = {
+        documentReady : documentReady        
+    };
+
+    App.components.documentReady.push( documentReady );
+    return App;
+
+}( App, jQuery, window, document ) );
 
 
 
@@ -20625,6 +21301,9 @@ Object.defineProperties( THREE.OrbitControls.prototype, {
 
 /* 
  *************************************
+ * <!-- Three.js Plugins -->
+ *************************************
+ */ *************************************
  * <!-- Three.js Plugins -->
  *************************************
  */
