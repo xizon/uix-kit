@@ -1,0 +1,172 @@
+/* ====================================================== 
+    <!-- Advanced Content Slider -->  
+/* ====================================================== */
+
+/* 
+ ---------------------------
+ 1) Initialize the slider style
+ ---------------------------
+ */ 
+.custom-advanced-content-slider {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+	z-index: 1;
+	height: 0;
+
+
+	.inner {
+		
+		position: relative;
+		z-index: 1;
+		
+		
+		.item {
+			position: relative;
+			z-index: 1;
+			display: inline-block;
+			float: left;
+
+
+			img {
+				width: 100%;
+			}
+			
+
+
+		}	
+		
+	}
+
+	
+}
+
+
+
+
+
+/* 
+ ---------------------------
+ 2) Pagination dots 
+ ---------------------------
+ */ 
+.custom-advanced-content-slider-pagination {
+	
+	position: relative;
+	z-index: 2;
+	margin-top: 1rem;
+	
+	ul.default {
+		list-style: none;
+		left: 0;
+		bottom: 0;
+		font-size: 0;/*Fighting the Space Between Inline Block Elements*/
+		display: block;
+		width: 100%;
+		text-align: center; /*require*/
+		position: relative;
+		
+		li {
+			font-size: 1rem;/*Fighting the Space Between Inline Block Elements*/
+			display: inline-block; /*require*/
+			margin: 0 .2rem;
+
+			a {
+				width: 12px;
+				height: 12px;
+				display: block;
+				background: rgba( 0, 0, 0, 0.5);
+				cursor: pointer;
+				text-indent: -9999px;
+				border-radius: 20px;
+				box-shadow: 0px 6px 23px -2px rgba(0, 0, 0, 0.36);
+
+				&:hover, 
+				&.active {
+					background: rgba(0, 0, 0, 1);
+					width: 25px;
+				}
+			}	
+
+		}	
+		
+	
+	}
+
+	
+	ul.custom {
+		list-style: none;
+		left: 0;
+		bottom: 0;
+		font-size: 0;/*Fighting the Space Between Inline Block Elements*/
+		display: block;
+		width: 100%;
+		text-align: center; /*require*/
+		position: relative;
+		transform: translateY(.5rem);
+		
+		li {
+			font-size: 0.75rem;/*Fighting the Space Between Inline Block Elements*/
+			display: inline-block; /*require*/
+			margin: 0 .2rem;
+
+			a {
+				display: block;
+				background: rgba( 0, 0, 0, 0.5);
+				cursor: pointer;
+				border-radius: 20px;
+				box-shadow: 0px 6px 23px -2px rgba(0, 0, 0, 0.36);
+				color: #fff;
+				padding: .2rem 1rem;
+
+				&:hover, 
+				&.active {
+					background: rgba(0, 0, 0, 1);
+				}
+			}	
+
+		}	
+		
+	
+	}
+
+
+}
+
+/* 
+ ---------------------------
+ 3) Next/Prev buttons
+ ---------------------------
+ */ 
+.custom-advanced-content-slider-arrows {
+	position: relative;
+	z-index: 3;
+	
+	a {
+		display: inline-block;
+		margin-right: 1rem;
+	}
+	
+	.prev {
+		left: 15px;
+		
+		&.disabled {
+			display: none;
+			
+		}
+		
+	}
+	.next {
+		right: 15px;
+		text-align: right;
+		
+		&.disabled {
+			display: none;
+		}	
+		
+	
+		
+	}
+
+}
+

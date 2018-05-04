@@ -46,7 +46,7 @@
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2 t-c">
                             <h2>Accordion Background Images</h2>
-                            
+                            <p>Show hidden divs on mouse event.</p>
                         </div>
                     </div>
                     <!-- .row end -->
@@ -67,12 +67,12 @@
                             
                             
                             
-                            <div class="custom-accordion-img font-white">
+                            <div class="custom-accordion-img font-white" data-event="mouseover" data-out-reset="true" data-width-show="60%" data-close-btn="false">
                             
 								<ul>
 									<li style="background-image: url(assets/images/demo/test-img-big-1.jpg);">
-										<div>
-											<a href="#">
+										<div class="outer">
+											<a href="javascript:">
 												<h3>Lorem Ipsum</h3>
 												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
 											</a>
@@ -80,8 +80,8 @@
 									</li>
 									
 									<li style="background-image: url(assets/images/demo/test-img-big-2.jpg);">
-										<div>
-											<a href="#">
+										<div class="outer">
+											<a href="javascript:">
 												<h3>Lorem Ipsum</h3>
 												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
 											</a>
@@ -89,8 +89,8 @@
 									</li>
 									
 									<li style="background-image: url(assets/images/demo/test-img-big-1.jpg);">
-										<div>
-											<a href="#">
+										<div class="outer">
+											<a href="javascript:">
 												<h3>Lorem Ipsum</h3>
 												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
 											</a>
@@ -98,8 +98,8 @@
 									</li>
 									
 									<li style="background-image: url(assets/images/demo/test-img-big-4.jpg);">
-										<div>
-											<a href="#">
+										<div class="outer">
+											<a href="javascript:">
 												<h3>Lorem Ipsum</h3>
 												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
 											</a>
@@ -107,8 +107,8 @@
 									</li>
 									
 									<li style="background-image: url(assets/images/demo/test-img-big-5.jpg);">
-										<div>
-											<a href="#">
+										<div class="outer">
+											<a href="javascript:">
 												<h3>Lorem Ipsum</h3>
 												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
 											</a>
@@ -116,8 +116,8 @@
 									</li>
 									
 									<li style="background-image: url(assets/images/demo/test-img-big-1.jpg);">
-										<div>
-											<a href="#">
+										<div class="outer">
+											<a href="javascript:">
 												<h3>Lorem Ipsum</h3>
 												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
 											</a>
@@ -143,7 +143,96 @@
         
          
      
-        
+        <!-- Content 01
+        ====================================================== -->
+        <section class="space-none">
+            <div class="container t-c">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2 t-c">
+                            <h2>Accordion Background Images 2</h2>
+                            <p>Click the item to show it. Hidden divs when you click the close button.</p>
+                        </div>
+                    </div>
+                    <!-- .row end -->
+              
+                    
+            </div>
+            <!-- .container end -->
+ 
+        </section>
+     
+       
+       <!-- Content 02
+        ====================================================== -->
+        <section>
+            <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            
+                            
+                            
+                            <div class="custom-accordion-img font-white" data-event="click" data-out-reset="false" data-width-show="60%" data-close-btn=".close-item">
+                            
+								<ul>
+									<li style="background-image: url(assets/images/demo/test-img-big-1.jpg);">
+										<div class="outer">
+											<h3>Lorem Ipsum</h3>
+											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+											<a class="close-item" href="javascript:">Close</a>
+										</div>
+									</li>
+									
+									<li style="background-image: url(assets/images/demo/test-img-big-2.jpg);">
+										<div class="outer">
+											<h3>Lorem Ipsum</h3>
+											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+											<a class="close-item" href="javascript:">Close</a>
+										</div>
+									</li>
+									
+									<li style="background-image: url(assets/images/demo/test-img-big-1.jpg);">
+										<div class="outer">
+											<h3>Lorem Ipsum</h3>
+											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+											<a class="close-item" href="javascript:">Close</a>
+										</div>
+									</li>
+									
+									<li style="background-image: url(assets/images/demo/test-img-big-4.jpg);">
+										<div class="outer">
+											<h3>Lorem Ipsum</h3>
+											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+											<a class="close-item" href="javascript:">Close</a>
+										</div>
+									</li>
+									
+									<li style="background-image: url(assets/images/demo/test-img-big-5.jpg);">
+										<div class="outer">
+											<h3>Lorem Ipsum</h3>
+											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+										    <a class="close-item" href="javascript:">Close</a>
+										</div>
+									</li>
+									
+								</ul> 
+                            
+                            
+
+                          
+                           
+                            </div>
+                            <!-- .custom-accordion-img end -->     
+                            
+                  
+                        </div>
+                    </div>
+                    <!-- .row end -->
+              
+                    
+            </div>
+            <!-- .container end -->
+ 
+        </section> 
 
        
     @@include('../00.global/include-copyright.html')

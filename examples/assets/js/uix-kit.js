@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.5.1
- * ## Last Update         :  May 3, 2018
+ * ## Version             :  1.5.2
+ * ## Last Update         :  May 4, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -36,39 +36,45 @@
     11. Specify a background image 
     12. 3D Pages 
     13. Accordion 
-    14. Advanced Slider (Special Effects) 
-    15. Advanced Slider (Basic) 
-    16. Counter 
-    17. Dynamic Drop Down List from JSON 
-    18. Flexslider 
-    19. Form 
-    20. Form Progress 
-    21. Gallery 
-    22. Image Shapes 
-    23. Custom Core Scripts & Stylesheets 
-    24. Custom Lightbox 
-    25. Bulleted List 
-    26. Posts List With Ajax 
-    27. Fullwidth List of Split 
-    28. Mobile Menu 
-    29. Modal Dialog 
-    30. Full Page/One Page Transition 2 
-    31. Full Page/One Page Transition 
-    32. Multiple Items Carousel 
-    33. Mousewheel Interaction 
-    34. Parallax 
-    35. Pricing 
-    36. Periodical Scroll 
-    37. Progress Bar 
-    38. Smooth Scrolling When Clicking An Anchor Link 
-    39. Source Code 
-    40. Sticky Elements 
-    41. Tabs 
-    42. Testimonials Carousel 
-    43. Text effect 
-    44. Timeline 
-    45. AJAX 
-    46. GSAP Plugins 
+    14. Accordion Background Images 
+    15. Advanced Content Slider 
+    16. Advanced Slider (Special Effects) 
+    17. Advanced Slider (Basic) 
+    18. Counter 
+    19. Dynamic Drop Down List from JSON 
+    20. Flexslider 
+    21. Form Progress 
+    22. Form 
+    23. Gallery 
+    24. Image Shapes 
+    25. Custom Core Scripts & Stylesheets 
+    26. Custom Lightbox 
+    27. Bulleted List 
+    28. Posts List With Ajax 
+    29. Fullwidth List of Split 
+    30. Mobile Menu 
+    31. Modal Dialog 
+    32. Mousewheel Interaction 
+    33. Multiple Items Carousel 
+    34. Full Page/One Page Transition 
+    35. Full Page/One Page Transition 2 
+    36. Parallax 
+    37. Periodical Scroll 
+    38. Pricing 
+    39. Progress Bar 
+    40. Retina Graphics for Website 
+    41. Scroll Reveal 
+    42. Show More Less 
+    43. Smooth Scrolling When Clicking An Anchor Link 
+    44. Source Code 
+    45. Sticky Elements 
+    46. Tabs 
+    47. Testimonials Carousel 
+    48. Text effect 
+    49. Timeline 
+    50. AJAX 
+    51. GSAP Plugins 
+    52. Three.js Plugins 
 
 
 */
@@ -1414,12 +1420,12 @@ App = ( function ( App, $, window, document ) {
 			pages.each( function() {
 				var el = new THREE.CSS3DObject( $.parseHTML( $( this )[0].outerHTML )[0] );
 
-				el.position.x = $( this ).data( 'positionX' ) || 0;
-				el.position.y = $( this ).data( 'positionY' ) || 0;
-				el.position.z = $( this ).data( 'positionZ' ) || 0;
-				el.rotation.x = $( this ).data( 'rotationX' ) || 0;
-				el.rotation.y = $( this ).data( 'rotationY' ) || 3.14159265358979;
-				el.rotation.z = $( this ).data( 'rotationZ' ) || 0;
+				el.position.x = $( this ).data( 'position-x' ) || 0;
+				el.position.y = $( this ).data( 'position-y' ) || 0;
+				el.position.z = $( this ).data( 'position-z' ) || 0;
+				el.rotation.x = $( this ).data( 'rotation-x' ) || 0;
+				el.rotation.y = $( this ).data( 'rotation-y' ) || 3.14159265358979;
+				el.rotation.z = $( this ).data( 'rotation-z' ) || 0;
 
 				self.scene.add( el );
 			});
@@ -1530,7 +1536,7 @@ App = ( function ( App, $, window, document ) {
 			var $this           = $( this ),
 				aEvent          = $this.data( 'event' ),
 				firstShow       = $this.data( 'first-show' ),
-				$li             = $this.find( 'dl' ),
+				$li             = $this.children( 'dl' ),
 				$titlebox       = $this.find( 'dt' );
 			
 			if( typeof aEvent === typeof undefined ) {
@@ -1547,7 +1553,8 @@ App = ( function ( App, $, window, document ) {
 			}
 			
 
-			$titlebox.on( aEvent, function() {
+			$titlebox.on( aEvent, function( e ) {
+				e.stopPropagation();
 				
 				var $cur = $( this ).closest( 'dl' );
 				
@@ -1572,6 +1579,318 @@ App = ( function ( App, $, window, document ) {
 	
 		
     App.accordion = {
+        documentReady : documentReady        
+    };
+
+    App.components.documentReady.push( documentReady );
+    return App;
+
+}( App, jQuery, window, document ) );
+
+
+/* 
+ *************************************
+ * <!-- Accordion Background Images -->
+ *************************************
+ */
+App = ( function ( App, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ) {
+		
+		$( '.custom-accordion-img' ).each( function() {
+			var $this           = $( this ),
+				aEvent          = $this.data( 'event' ),
+				outReset        = $this.data( 'out-reset' ),
+				widthShow       = $this.data( 'width-show' ),
+				closeBtn        = $this.data( 'close-btn' ),
+				$li             = $this.find( 'ul' ).children( 'li' ),
+				total           = $li.length;
+			
+			
+			
+			
+			if( typeof aEvent === typeof undefined ) {
+				aEvent = 'click';
+			}	
+			
+			if( typeof outReset === typeof undefined ) {
+				outReset = true;
+			}	
+			
+			if( typeof widthShow === typeof undefined ) {
+				widthShow = '60%';
+			}		
+			
+			//Initialize the width of each item
+			itemInit();
+			
+
+			$li.on( aEvent, function( e ) {
+				e.stopPropagation();
+			
+				
+				//Apply click method to outer div but not inner div
+				if ( e.target.className == 'outer' ) {
+					
+					if ( $( this ).hasClass( 'active' ) ) {
+						$( this ).addClass( 'active' );
+
+					} else {
+						
+						$li.addClass( 'sub-active' );
+						$( this ).addClass( 'active' );
+						$( this ).siblings().removeClass( 'active' );
+
+						$li.css( 'width', ( 100 - parseFloat( widthShow ) )/(total - 1) + '%' );
+						$( this ).css( 'width', widthShow );
+
+					}	
+				}
+			
+			}); 
+			
+			if ( outReset ) {
+				$this.on( 'mouseleave', function( e ) {
+					itemInit();
+				}); 	
+			}
+			
+			if( typeof closeBtn != typeof undefined && closeBtn != false && closeBtn != '' ) {
+				$( closeBtn ).on( 'click', function( e ) {
+					e.preventDefault();
+					itemInit();
+				}); 		
+				
+			}	
+			
+	
+			/*
+			 * Initialize the width of each item
+			 *
+			 * @return {void}             - The constructor.
+			 */
+			function itemInit() {
+				$li.removeClass( 'active sub-active' ).css( 'width', 100/total + '%' );
+			}
+			
+			
+			
+		});
+		
+		
+	};
+	
+		
+    App.accordionImg = {
+        documentReady : documentReady        
+    };
+
+    App.components.documentReady.push( documentReady );
+    return App;
+
+}( App, jQuery, window, document ) );
+
+
+/* 
+ *************************************
+ * <!-- Advanced Content Slider -->
+ *************************************
+ */
+App = ( function ( App, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ) {
+		
+		
+	
+		var $window                   = $( window ),
+			windowWidth               = $window.width(),
+			windowHeight              = $window.height(),
+			animDuration              = 1200;
+		
+		
+		
+		sliderInit();
+		
+		$window.on( 'resize', function() {
+			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+			if ( $window.width() != windowWidth ) {
+
+				// Update the window width for next time
+				windowWidth = $window.width();
+
+				sliderInit();
+				
+			}
+		});
+		
+		
+		/*
+		 * Initialize slideshow
+		 *
+		 * @return {void}                   - The constructor.
+		 */
+        function sliderInit() {
+			
+			$( '.custom-advanced-content-slider' ).each( function() {
+				var $this                      = $( this ),
+					$items                     = $this.find( '.item' ),
+					$itemsWrapper              = $this.children( '.inner' ),
+					$first                     = $items.first(),
+					itemWidth                  = $this.width(),
+					itemsTotal                 = $items.length,
+					totalWidth                 = itemWidth*itemsTotal,
+					dataControlsPagination     = $this.data( 'controls-pagination' ),
+					dataControlsArrows         = $this.data( 'controls-arrows' ),
+					dataControlsPaginationAuto = false;
+
+
+				if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.custom-advanced-content-slider-sp-pagination';
+				if ( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.custom-advanced-content-slider-sp-arrows';
+				
+				if ( $( dataControlsPagination ).html().length == 0 ) dataControlsPaginationAuto = true;
+
+				
+
+				//Initialize the width of each item
+				//-------------------------------------		
+				$first.addClass( 'active' );
+				
+				$items.css( 'width', itemWidth + 'px' );
+				
+				TweenMax.set( $itemsWrapper, { 
+					width: totalWidth,
+					onComplete  : function() {
+						$this.css( 'height', 'auto' );
+					}
+				} );		
+			
+
+				//Pagination dots 
+				//-------------------------------------	
+				if ( dataControlsPaginationAuto ) {
+					var _dot       = '',
+						_dotActive = '';
+					_dot += '<ul class="default">';
+					for ( var i = 0; i < itemsTotal; i++ ) {
+
+						_dotActive = ( i == 0 ) ? 'class="active"' : '';
+
+						_dot += '<li><a '+_dotActive+' data-index="'+i+'" href="javascript:"></a></li>';
+					}
+					_dot += '</ul>';
+
+					if ( $( dataControlsPagination ).html() == '' ) $( dataControlsPagination ).html( _dot );	
+				} else {
+					$( dataControlsPagination ).find( 'li' ).first().find( 'a' ).addClass( 'active' );
+				}
+
+
+				$( dataControlsPagination ).find( 'li a' ).on( 'click', function( e ) {
+					e.preventDefault();
+
+					if ( !$( this ).hasClass( 'active' ) ) {
+						
+						sliderUpdates( $( this ).attr( 'data-index' ), $this, dataControlsArrows, dataControlsPagination );
+					}
+
+
+
+				});
+
+				
+				//Next/Prev buttons
+				//-------------------------------------		
+				var _prev = $( dataControlsArrows ).find( '.prev' ),
+					_next = $( dataControlsArrows ).find( '.next' );
+				
+				
+
+				$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
+				
+				_prev.addClass( 'disabled' );
+
+				_prev.on( 'click', function( e ) {
+					e.preventDefault();
+
+					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
+
+				});
+
+				_next.on( 'click', function( e ) {
+					e.preventDefault();
+
+					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
+
+				});
+
+				
+			});	
+			
+		}
+		
+		/*
+		 * Transition Between Slides
+		 *
+		 * @param  {number} elementIndex     - Index of current slider.
+		 * @param  {object} slider           - Selector of the slider .
+		 * @param  {string} arrows           - Controller name of prev/next buttons.
+		 * @param  {string} pagination       - Controller name of pagination buttons.
+		 * @return {void}                    - The constructor.
+		 */
+        function sliderUpdates( elementIndex, slider, arrows, pagination ) {
+			
+			var $items        = slider.find( '.item' ),
+				$current      = $items.eq( elementIndex ),
+				itemsTotal    = $items.length,
+				$prev         = $( arrows ).find( '.prev' ),
+				$next         = $( arrows ).find( '.next' ),
+				$pagination   = $( pagination ).find( 'li a' );
+				
+			$next.removeClass( 'disabled' );
+			$prev.removeClass( 'disabled' );
+			$pagination.removeClass( 'active' );
+			
+			if ( elementIndex == itemsTotal - 1 ) {
+				$next.addClass( 'disabled' );
+			}
+			
+			if ( elementIndex == 0 ) {
+				$prev.addClass( 'disabled' );
+			}
+			
+			$pagination.eq( elementIndex ).addClass( 'active' );
+			
+			
+			if ( elementIndex <= itemsTotal - 1 && elementIndex >= 0 ) {
+
+				$items.removeClass( 'active' );
+				$current.addClass( 'active' );	
+				
+				
+				TweenMax.to( slider.children( '.inner' ), animDuration/1000, { 
+					x: '-' + ( slider.width() * elementIndex ),
+					onComplete  : function() {
+
+					},
+					ease: Power3.easeOut
+				} );
+				
+	
+			}
+			
+
+			
+		}
+		
+		
+	};
+	
+		
+    App.advancedContentSlider = {
         documentReady : documentReady        
     };
 
@@ -3196,7 +3515,8 @@ App = ( function ( App, $, window, document ) {
 									onComplete  : function() {
 										
 										TweenMax.to( displacementSprite.scale, 1, { x: 1, y: 1 });   
-										TweenMax.to( displacementSprite, 1, { rotation: 0 });   
+										TweenMax.to( displacementSprite, 1, { rotation: 0 }); 
+										
 										
 
 									},
@@ -9347,7 +9667,7 @@ var datepicker = $.datepicker;
 		'selector'         : $( '.custom-form-progress-target .form-step' ),
 		'formTarget'       : $( '.custom-form-progress-target' ),
 		'indicator'        : '.custom-form-progress .indicator',
-		'index'            : 0 // 0 -> step 2,1 -> step 2, 2 -> step 3, 3 -> step 4, 4 -> step 5 
+		'index'            : 0 // 0 -> step 1, 1 -> step 2, 2 -> step 3, 3 -> step 4, 4 -> step 5 
 	});
 	
 */
@@ -9393,15 +9713,17 @@ App = ( function ( App, $, window, document ) {
 		// Show next form on continue click
 		$( document ).on( 'click', '.custom-form-progress-target .go-step:not(.disable)', function( e ) {
 			e.preventDefault();
-			var $currentForm = $( this ).parents( '.form-step' );
+			var $sections = $( this ).parents( '.form-step' );
 			$( document ).formProgressNext({ 
 				'selector'   : $( '.custom-form-progress-target .form-step' ),
 				'formTarget' : $formTarget,
 				'indicator'  : '.custom-form-progress .indicator',
-				'index'      : $currentForm.index() + 1
+				'index'      : $sections.index() + 1
 			});
 			
 		});
+		
+		
 
 		// Reset form on reset button click
 		$( document ).on( 'click', '.custom-form-progress-target .go-reset', function( e ) {
@@ -9421,7 +9743,7 @@ App = ( function ( App, $, window, document ) {
 				'selector'         : $( '.custom-form-progress-target .form-step' ),
 				'formTarget'       : $( '.custom-form-progress-target' ),
 				'indicator'        : '.custom-form-progress .indicator',
-				'index'            : 0 // 0 -> step 2,1 -> step 2, 2 -> step 3, 3 -> step 4, 4 -> step 5 
+				'index'            : 0 // 0 -> step 1, 1 -> step 2, 2 -> step 3, 3 -> step 4, 4 -> step 5 
 			});
 		
 			
@@ -9475,7 +9797,7 @@ App = ( function ( App, $, window, document ) {
 			
 			var $this            = $( this ),
 				transitionEnd    = 'webkitTransitionEnd transitionend',
-				currentForm      = settings.selector,
+				$sections        = settings.selector,
 				$formTarget      = settings.formTarget,	
 				$indicator       = $( settings.indicator ),
 				allStep          = $indicator.length,
@@ -9521,7 +9843,7 @@ App = ( function ( App, $, window, document ) {
 
 
 
-			var currentFormStep  = parseInt(currentForm.eq( tarIndex ).attr( 'data-step' ) ) || false,
+			var currentFormStep  = parseInt($sections.eq( tarIndex ).attr( 'data-step' ) ) || false,
 				$nextForm        = $formTarget.find( '.form-step[data-step="' + (currentFormStep + 1) + '"]'),
 				currentFormIndex = $nextForm.attr( 'data-step' ) - 1;
 
@@ -9531,17 +9853,17 @@ App = ( function ( App, $, window, document ) {
 			// Activate other unused modules
 			if ( currentFormIndex > 0 ) {
 				for ( var i = 0; i < curIndex; i++ ) {
-					currentForm.eq( i ).addClass( 'leaving' );
+					$sections.eq( i ).addClass( 'leaving' );
 					$indicator.eq( i ).addClass( 'active' );
 				}
 				$indicator.eq( curIndex ).addClass( 'active' );
-
+				
 			}
 
 
 
 			// Hide current form fields
-			currentForm.eq( tarIndex ).addClass( 'leaving' );
+			$sections.eq( tarIndex ).addClass( 'leaving' );
 			setTimeout(function() {
 				$indicator.eq( currentFormIndex ).addClass( 'active' );
 			}, animeSpeed );
@@ -9551,6 +9873,10 @@ App = ( function ( App, $, window, document ) {
 			$nextForm.addClass( 'coming' ).one( transitionEnd, function() {
 				$nextForm.removeClass( 'coming waiting' );
 			});
+			
+			// Active next form fields
+			$sections.removeClass( 'active' );
+			$sections.eq( currentFormIndex ).addClass( 'active' );
 
 			// Increment value (based on 4 steps 0 - 100)
 			value += stepPerValue;
@@ -12197,10 +12523,6 @@ App = ( function ( App, $, window, document ) {
 		 *  Navigation Interaction
 		 ====================================================
 		 */
-		var $primaryMenu      = $( '.menu-main' ),
-			$sidefixedMenu    = $( '.custom-sidefixed-menu' );
-		
-
 		goPageSection( $primaryMenu );
 		goPageSection( $sidefixedMenu );
 
@@ -21301,9 +21623,6 @@ Object.defineProperties( THREE.OrbitControls.prototype, {
 
 /* 
  *************************************
- * <!-- Three.js Plugins -->
- *************************************
- */ *************************************
  * <!-- Three.js Plugins -->
  *************************************
  */

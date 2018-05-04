@@ -101,7 +101,7 @@ $indicator-desc-w: 60px;
 	}
 
 	.form-step.leaving {
-		animation: step-leaving .5s forwards;
+		transform: translateX(-110%);
 	}
 
 	.form-step.waiting {
@@ -109,23 +109,12 @@ $indicator-desc-w: 60px;
 	}
 
 	.form-step.coming {
-		animation: step-coming .5s forwards;
+		transform: translateX(0);
 	}
 	
 }
 
 
-@keyframes step-leaving {
-	100% {
-		transform: translateX(-110%);
-	}
-}
-
-@keyframes step-coming {
-	100% {
-		transform: translateX(0);
-	}
-}
 
 @keyframes indicator-ok {
 	50% {

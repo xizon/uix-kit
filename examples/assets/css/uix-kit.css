@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.5.1
- * ## Last Update         :  May 3, 2018
+ * ## Version             :  1.5.2
+ * ## Last Update         :  May 4, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -92,51 +92,54 @@
     24. Onepage Menu 
     25. Accordion 
     26. Accordion Background Images 
-    27. Advanced Slider (Special Effects) 
-    28. Advanced Slider (Basic) 
-    29. Badges 
-    30. Breadcrumbs 
-    31. Button 
-    32. Author Card 
-    33. Counter 
-    34. Dropdown Menu 
-    35. Equal-width Divs 
-    36. Features 
-    37. Flexslider 
-    38. Footer Templates 
-    39. Form 
-    40. Form Progress 
-    41. Gallery 
-    42. Image Shapes 
-    43. Custom Core Scripts & Stylesheets 
-    44. Cutom Light Box 
-    45. Brands List 
-    46. Bulleted List 
-    47. Maintain Aspect Ratio List 
-    48. List of Posts 
-    49. List of Split Posts 
-    50. Side by Side List 
-    51. Side by Side List With Photo 
-    52. Fullwidth List of Split 2 
-    53. Fullwidth List of Split 
-    54. Mobile Menu 
-    55. Modal Dialog 
-    56. Mouse Animation Scroll 
-    57. Multiple Items Carousel 
-    58. Parallax 
-    59. Periodical Scroll 
-    60. Pricing 
-    61. Progress Bar 
-    62. Services 
-    63. Show More Less 
-    64. Single Post 
-    65. Source Code 
-    66. Table Series 
-    67. Tabs 
-    68. Testimonials Carousel 
-    69. Timeline 
-    70. ToolTip 
-    71. WordPress Core 
+    27. Advanced Content Slider 
+    28. Advanced Content Slider 
+    29. Advanced Slider (Special Effects) 
+    30. Advanced Slider (Basic) 
+    31. Badges 
+    32. Breadcrumbs 
+    33. Button 
+    34. Author Card 
+    35. Counter 
+    36. Dropdown Menu 
+    37. Equal-width Divs 
+    38. Features 
+    39. Flexslider 
+    40. Footer Templates 
+    41. Form 
+    42. Form Progress 
+    43. Gallery 
+    44. Header Pinlines 
+    45. Image Shapes 
+    46. Custom Core Scripts & Stylesheets 
+    47. Cutom Light Box 
+    48. Brands List 
+    49. Bulleted List 
+    50. Maintain Aspect Ratio List 
+    51. List of Posts 
+    52. List of Split Posts 
+    53. Side by Side List 
+    54. Side by Side List With Photo 
+    55. Fullwidth List of Split 2 
+    56. Fullwidth List of Split 
+    57. Mobile Menu 
+    58. Modal Dialog 
+    59. Mouse Animation Scroll 
+    60. Multiple Items Carousel 
+    61. Parallax 
+    62. Periodical Scroll 
+    63. Pricing 
+    64. Progress Bar 
+    65. Services 
+    66. Show More Less 
+    67. Single Post 
+    68. Source Code 
+    69. Table Series 
+    70. Tabs 
+    71. Testimonials Carousel 
+    72. Timeline 
+    73. ToolTip 
+    74. WordPress Core 
 
 
 
@@ -1024,6 +1027,7 @@ List Normal & Other Text
     color: white;
 }
 
+.font-white p,
 .font-white h1,
 .font-white h2,
 .font-white h3,
@@ -3290,13 +3294,17 @@ ul.entry-meta {
     transition: all 0.3s ease;
 }
 
+.custom-accordion-img ul li.active {
+    width: 60%;
+}
+
 .custom-accordion-img ul li > img {
     position: absolute;
     left: 0;
     top: 0;
 }
 
-.custom-accordion-img ul li > div a {
+.custom-accordion-img ul li > .outer {
     display: block;
     height: 250px;
     width: 100%;
@@ -3306,11 +3314,12 @@ ul.entry-meta {
     padding: 1rem 2.5rem;
     box-sizing: border-box;
     color: #fff;
+    cursor: pointer;
   /* @include transition-default(); */
     transition: all 0.3s ease;
 }
 
-.custom-accordion-img ul li > div a * {
+.custom-accordion-img ul li > .outer * {
     margin: 0;
     position: relative;
     z-index: 5;
@@ -3324,21 +3333,27 @@ ul.entry-meta {
     transition: all 0.3s ease;
 }
 
-.custom-accordion-img ul li > div a h3 {
+.custom-accordion-img ul li > .outer h3 {
     text-overflow: clip;
     top: 140px;
 }
 
-.custom-accordion-img ul li > div a p {
+.custom-accordion-img ul li > .outer p {
     top: 140px;
 }
 
-.custom-accordion-img ul:hover li {
-    width: 8%;
-}
-
-.custom-accordion-img ul:hover li:hover {
-    width: 60%;
+.custom-accordion-img ul li > .outer .close-item {
+    position: absolute;
+    right: 0;
+    top: 10px;
+    z-index: 2;
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    border-radius: 15px;
+    width: auto;
+    font-size: 0.75rem;
+    padding: 0 1rem;
 }
 
 @media all and (max-width: 768px) {
@@ -3356,6 +3371,154 @@ ul.entry-meta {
         width: 100%;
         transition: none;
     }
+}
+
+/* ====================================================== 
+    <!-- Advanced Content Slider -->  
+/* ====================================================== */
+/* 
+ ---------------------------
+ 1) Initialize the slider style
+ ---------------------------
+ */
+.custom-advanced-content-slider {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    z-index: 1;
+    height: 0;
+}
+
+.custom-advanced-content-slider .inner {
+    position: relative;
+    z-index: 1;
+}
+
+.custom-advanced-content-slider .inner .item {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    float: left;
+}
+
+.custom-advanced-content-slider .inner .item img {
+    width: 100%;
+}
+
+/* 
+ ---------------------------
+ 2) Pagination dots 
+ ---------------------------
+ */
+.custom-advanced-content-slider-pagination {
+    position: relative;
+    z-index: 2;
+    margin-top: 1rem;
+}
+
+.custom-advanced-content-slider-pagination ul.default {
+    list-style: none;
+    left: 0;
+    bottom: 0;
+    font-size: 0;
+  /*Fighting the Space Between Inline Block Elements*/
+    display: block;
+    width: 100%;
+    text-align: center;
+  /*require*/
+    position: relative;
+}
+
+.custom-advanced-content-slider-pagination ul.default li {
+    font-size: 1rem;
+  /*Fighting the Space Between Inline Block Elements*/
+    display: inline-block;
+  /*require*/
+    margin: 0 .2rem;
+}
+
+.custom-advanced-content-slider-pagination ul.default li a {
+    width: 12px;
+    height: 12px;
+    display: block;
+    background: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    text-indent: -9999px;
+    border-radius: 20px;
+    box-shadow: 0px 6px 23px -2px rgba(0, 0, 0, 0.36);
+}
+
+.custom-advanced-content-slider-pagination ul.default li a:hover, .custom-advanced-content-slider-pagination ul.default li a.active {
+    background: black;
+    width: 25px;
+}
+
+.custom-advanced-content-slider-pagination ul.custom {
+    list-style: none;
+    left: 0;
+    bottom: 0;
+    font-size: 0;
+  /*Fighting the Space Between Inline Block Elements*/
+    display: block;
+    width: 100%;
+    text-align: center;
+  /*require*/
+    position: relative;
+    transform: translateY(0.5rem);
+}
+
+.custom-advanced-content-slider-pagination ul.custom li {
+    font-size: 0.75rem;
+  /*Fighting the Space Between Inline Block Elements*/
+    display: inline-block;
+  /*require*/
+    margin: 0 .2rem;
+}
+
+.custom-advanced-content-slider-pagination ul.custom li a {
+    display: block;
+    background: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    border-radius: 20px;
+    box-shadow: 0px 6px 23px -2px rgba(0, 0, 0, 0.36);
+    color: #fff;
+    padding: .2rem 1rem;
+}
+
+.custom-advanced-content-slider-pagination ul.custom li a:hover, .custom-advanced-content-slider-pagination ul.custom li a.active {
+    background: black;
+}
+
+/* 
+ ---------------------------
+ 3) Next/Prev buttons
+ ---------------------------
+ */
+.custom-advanced-content-slider-arrows {
+    position: relative;
+    z-index: 3;
+}
+
+.custom-advanced-content-slider-arrows a {
+    display: inline-block;
+    margin-right: 1rem;
+}
+
+.custom-advanced-content-slider-arrows .prev {
+    left: 15px;
+}
+
+.custom-advanced-content-slider-arrows .prev.disabled {
+    display: none;
+}
+
+.custom-advanced-content-slider-arrows .next {
+    right: 15px;
+    text-align: right;
+}
+
+.custom-advanced-content-slider-arrows .next.disabled {
+    display: none;
 }
 
 /* ====================================================== 
@@ -3459,7 +3622,7 @@ ul.entry-meta {
 }
 
 .custom-advanced-slider-sp-pagination ul li {
-    font-size: 16px;
+    font-size: 1rem;
   /*Fighting the Space Between Inline Block Elements*/
     display: inline-block;
   /*require*/
@@ -3603,7 +3766,7 @@ ul.entry-meta {
 }
 
 .custom-advanced-slider-pagination ul li {
-    font-size: 16px;
+    font-size: 1rem;
   /*Fighting the Space Between Inline Block Elements*/
     display: inline-block;
   /*require*/
@@ -4526,7 +4689,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 }
 
 .custom-theme-flex-control-nav.custom-theme-flex-control-paging li {
-    font-size: 16px;
+    font-size: 1rem;
   /*Fighting the Space Between Inline Block Elements*/
     display: inline-block;
   /*require*/
@@ -4925,6 +5088,75 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 
 .custom-theme-flexslider.custom-parallax-flexslider .custom-theme-slides > .item.right .level-2 {
     transform: translate(50px, -50%);
+}
+
+/* ====================================================== 
+   <!-- Footer Templates -->  
+/* ====================================================== */
+.custom-footer-wrapper {
+    background: #212121;
+    padding: 3rem 0;
+    margin: 3rem 0;
+    color: #AEAEAE;
+}
+
+.custom-footer-wrapper img.logo {
+    max-width: 80%;
+    margin-bottom: 1.5rem;
+}
+
+.custom-footer-wrapper h3,
+.custom-footer-wrapper .h3 {
+    margin-bottom: 1rem;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #AEAEAE;
+}
+
+.custom-footer-wrapper .custom-footer-list-container:after {
+    content: '';
+    display: block;
+    clear: both;
+    width: 100%;
+}
+
+.custom-footer-wrapper .custom-footer-list-container > .list {
+    width: 12rem;
+    float: left;
+}
+
+.custom-footer-wrapper .custom-footer-list-container > .list li {
+    margin: .5rem 0;
+    display: block;
+}
+
+@media all and (max-width: 768px) {
+    .custom-footer-wrapper {
+        in: 3rem 0;
+    }
+
+    .custom-footer-wrapper img.logo {
+        max-width: 100%;
+    }
+
+    .custom-footer-wrapper .pull-left,
+  .custom-footer-wrapper .pull-right {
+        position: relative !important;
+        display: block !important;
+        width: 100% !important;
+        text-align: left;
+        float: none;
+    }
+
+    .custom-footer-wrapper .t-l,
+  .custom-footer-wrapper .t-r {
+        float: none;
+        text-align: center;
+    }
+
+    .custom-footer-wrapper .custom-footer-list-container > .list {
+        width: 33.3%;
+    }
 }
 
 /* ====================================================== 
@@ -6108,201 +6340,6 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 }
 
 /* ====================================================== 
-   <!-- Footer Templates -->  
-/* ====================================================== */
-.custom-footer-wrapper {
-    background: #212121;
-    padding: 3rem 0;
-    margin: 3rem 0;
-    color: #AEAEAE;
-}
-
-.custom-footer-wrapper img.logo {
-    max-width: 80%;
-    margin-bottom: 1.5rem;
-}
-
-.custom-footer-wrapper h3,
-.custom-footer-wrapper .h3 {
-    margin-bottom: 1rem;
-    font-size: 1.2em;
-    font-weight: 500;
-    color: #AEAEAE;
-}
-
-.custom-footer-wrapper .custom-footer-list-container:after {
-    content: '';
-    display: block;
-    clear: both;
-    width: 100%;
-}
-
-.custom-footer-wrapper .custom-footer-list-container > .list {
-    width: 12rem;
-    float: left;
-}
-
-.custom-footer-wrapper .custom-footer-list-container > .list li {
-    margin: .5rem 0;
-    display: block;
-}
-
-@media all and (max-width: 768px) {
-    .custom-footer-wrapper {
-        in: 3rem 0;
-    }
-
-    .custom-footer-wrapper img.logo {
-        max-width: 100%;
-    }
-
-    .custom-footer-wrapper .pull-left,
-  .custom-footer-wrapper .pull-right {
-        position: relative !important;
-        display: block !important;
-        width: 100% !important;
-        text-align: left;
-        float: none;
-    }
-
-    .custom-footer-wrapper .t-l,
-  .custom-footer-wrapper .t-r {
-        float: none;
-        text-align: center;
-    }
-
-    .custom-footer-wrapper .custom-footer-list-container > .list {
-        width: 33.3%;
-    }
-}
-
-/* ====================================================== 
-   <!-- Form Progress -->     
-/* ====================================================== */
-.custom-form-progress {
-    position: relative;
-    display: block;
-    margin: 3rem 0;
-    width: calc(100% - 60px);
-}
-
-.custom-form-progress .line {
-    display: block;
-    position: relative;
-    top: 5px;
-    left: 5px;
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100%;
-    height: 5px;
-    background-color: #ddd;
-}
-
-.custom-form-progress .line > span {
-    display: block;
-    width: 0;
-    height: 100%;
-    transition: all 0.5s ease-in-out;
-    background-color: #EC5E79;
-}
-
-.custom-form-progress .indicator {
-    position: absolute;
-    top: -2px;
-    left: 0;
-    z-index: 1;
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    background: #fff;
-    border: 3px solid #ddd;
-    border-radius: 50%;
-  /* @include transition-default(); */
-    transition: all 0.3s ease;
-}
-
-.custom-form-progress .indicator > span {
-    font-size: 0.75rem;
-    color: #AEAEAE;
-    display: inline-block;
-    position: absolute;
-    background: #fff;
-    margin-top: -3px;
-    margin-left: 17px;
-    padding: 0 .5rem;
-    min-width: 60px;
-}
-
-.custom-form-progress .indicator.active {
-    animation: indicator-ok .5s forwards;
-    border-color: #EC5E79;
-}
-
-/* Form animations */
-.custom-form-progress-target {
-  /* @include transition-default(); */
-    transition: all 0.3s ease;
-    position: relative;
-    width: 100%;
-    height: 0;
-    transition: .3s;
-    overflow: hidden;
-}
-
-.custom-form-progress-target.show {
-    height: auto;
-}
-
-.custom-form-progress-target .button {
-    width: auto;
-}
-
-.custom-form-progress-target .form-step {
-    width: 100%;
-    position: absolute;
-  /* @include transition-default(); */
-    transition: all 0.3s ease;
-}
-
-.custom-form-progress-target .form-step:first-child {
-    position: relative;
-}
-
-.custom-form-progress-target .form-step.leaving {
-    animation: step-leaving .5s forwards;
-}
-
-.custom-form-progress-target .form-step.waiting {
-    transform: translateX(110%);
-}
-
-.custom-form-progress-target .form-step.coming {
-    animation: step-coming .5s forwards;
-}
-
-@keyframes step-leaving {
-    100% {
-        transform: translateX(-110%);
-    }
-}
-
-@keyframes step-coming {
-    100% {
-        transform: translateX(0);
-    }
-}
-
-@keyframes indicator-ok {
-    50% {
-        transform: scale(1.5);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
-/* ====================================================== 
         <!-- Gallery --> 
 /* ====================================================== */
 .custom-gallery .custom-gallery-item {
@@ -6401,6 +6438,156 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 
 .custom-gallery .custom-gallery-item .cover img {
     width: 100%;
+}
+
+/* ====================================================== 
+   <!-- Form Progress -->     
+/* ====================================================== */
+.custom-form-progress {
+    position: relative;
+    display: block;
+    margin: 3rem 0;
+    width: calc(100% - 60px);
+}
+
+.custom-form-progress .line {
+    display: block;
+    position: relative;
+    top: 5px;
+    left: 5px;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 5px;
+    background-color: #ddd;
+}
+
+.custom-form-progress .line > span {
+    display: block;
+    width: 0;
+    height: 100%;
+    transition: all 0.5s ease-in-out;
+    background-color: #EC5E79;
+}
+
+.custom-form-progress .indicator {
+    position: absolute;
+    top: -2px;
+    left: 0;
+    z-index: 1;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border: 3px solid #ddd;
+    border-radius: 50%;
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+}
+
+.custom-form-progress .indicator > span {
+    font-size: 0.75rem;
+    color: #AEAEAE;
+    display: inline-block;
+    position: absolute;
+    background: #fff;
+    margin-top: -3px;
+    margin-left: 17px;
+    padding: 0 .5rem;
+    min-width: 60px;
+}
+
+.custom-form-progress .indicator.active {
+    animation: indicator-ok .5s forwards;
+    border-color: #EC5E79;
+}
+
+/* Form animations */
+.custom-form-progress-target {
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+    position: relative;
+    width: 100%;
+    height: 0;
+    transition: .3s;
+    overflow: hidden;
+}
+
+.custom-form-progress-target.show {
+    height: auto;
+}
+
+.custom-form-progress-target .button {
+    width: auto;
+}
+
+.custom-form-progress-target .form-step {
+    width: 100%;
+    position: absolute;
+  /* @include transition-default(); */
+    transition: all 0.3s ease;
+}
+
+.custom-form-progress-target .form-step:first-child {
+    position: relative;
+}
+
+.custom-form-progress-target .form-step.leaving {
+    transform: translateX(-110%);
+}
+
+.custom-form-progress-target .form-step.waiting {
+    transform: translateX(110%);
+}
+
+.custom-form-progress-target .form-step.coming {
+    transform: translateX(0);
+}
+
+@keyframes indicator-ok {
+    50% {
+        transform: scale(1.5);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* ====================================================== 
+   <!-- Header Pinlines --> 
+/* ====================================================== */
+.pinline {
+    text-align: center;
+    display: block;
+    overflow: hidden;
+    margin: 1.5rem 0;
+}
+
+.pinline span {
+    position: relative;
+    display: inline-block;
+    max-width: 80%;
+    line-height: 1;
+}
+
+.pinline span:before, .pinline span:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    height: 1px;
+    background: #212121;
+    width: 99999px;
+}
+
+.pinline span:before {
+    left: 100%;
+    margin-left: 1.5rem;
+}
+
+.pinline span:after {
+    right: 100%;
+    margin-right: 1.5rem;
 }
 
 /* ====================================================== 

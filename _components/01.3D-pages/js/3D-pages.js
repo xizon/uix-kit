@@ -38,12 +38,12 @@ App = ( function ( App, $, window, document ) {
 			pages.each( function() {
 				var el = new THREE.CSS3DObject( $.parseHTML( $( this )[0].outerHTML )[0] );
 
-				el.position.x = $( this ).data( 'positionX' ) || 0;
-				el.position.y = $( this ).data( 'positionY' ) || 0;
-				el.position.z = $( this ).data( 'positionZ' ) || 0;
-				el.rotation.x = $( this ).data( 'rotationX' ) || 0;
-				el.rotation.y = $( this ).data( 'rotationY' ) || 3.14159265358979;
-				el.rotation.z = $( this ).data( 'rotationZ' ) || 0;
+				el.position.x = $( this ).data( 'position-x' ) || 0;
+				el.position.y = $( this ).data( 'position-y' ) || 0;
+				el.position.z = $( this ).data( 'position-z' ) || 0;
+				el.rotation.x = $( this ).data( 'rotation-x' ) || 0;
+				el.rotation.y = $( this ).data( 'rotation-y' ) || 3.14159265358979;
+				el.rotation.z = $( this ).data( 'rotation-z' ) || 0;
 
 				self.scene.add( el );
 			});

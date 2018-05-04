@@ -14,7 +14,7 @@
 		'selector'         : $( '.custom-form-progress-target .form-step' ),
 		'formTarget'       : $( '.custom-form-progress-target' ),
 		'indicator'        : '.custom-form-progress .indicator',
-		'index'            : 0 // 0 -> step 2,1 -> step 2, 2 -> step 3, 3 -> step 4, 4 -> step 5 
+		'index'            : 0 // 0 -> step 1, 1 -> step 2, 2 -> step 3, 3 -> step 4, 4 -> step 5 
 	});
 	
 */
@@ -60,15 +60,17 @@ App = ( function ( App, $, window, document ) {
 		// Show next form on continue click
 		$( document ).on( 'click', '.custom-form-progress-target .go-step:not(.disable)', function( e ) {
 			e.preventDefault();
-			var $currentForm = $( this ).parents( '.form-step' );
+			var $sections = $( this ).parents( '.form-step' );
 			$( document ).formProgressNext({ 
 				'selector'   : $( '.custom-form-progress-target .form-step' ),
 				'formTarget' : $formTarget,
 				'indicator'  : '.custom-form-progress .indicator',
-				'index'      : $currentForm.index() + 1
+				'index'      : $sections.index() + 1
 			});
 			
 		});
+		
+		
 
 		// Reset form on reset button click
 		$( document ).on( 'click', '.custom-form-progress-target .go-reset', function( e ) {
@@ -88,7 +90,7 @@ App = ( function ( App, $, window, document ) {
 				'selector'         : $( '.custom-form-progress-target .form-step' ),
 				'formTarget'       : $( '.custom-form-progress-target' ),
 				'indicator'        : '.custom-form-progress .indicator',
-				'index'            : 0 // 0 -> step 2,1 -> step 2, 2 -> step 3, 3 -> step 4, 4 -> step 5 
+				'index'            : 0 // 0 -> step 1, 1 -> step 2, 2 -> step 3, 3 -> step 4, 4 -> step 5 
 			});
 		
 			
@@ -142,7 +144,7 @@ App = ( function ( App, $, window, document ) {
 			
 			var $this            = $( this ),
 				transitionEnd    = 'webkitTransitionEnd transitionend',
-				currentForm      = settings.selector,
+				$sections        = settings.selector,
 				$formTarget      = settings.formTarget,	
 				$indicator       = $( settings.indicator ),
 				allStep          = $indicator.length,
@@ -188,7 +190,7 @@ App = ( function ( App, $, window, document ) {
 
 
 
-			var currentFormStep  = parseInt(currentForm.eq( tarIndex ).attr( 'data-step' ) ) || false,
+			var currentFormStep  = parseInt($sections.eq( tarIndex ).attr( 'data-step' ) ) || false,
 				$nextForm        = $formTarget.find( '.form-step[data-step="' + (currentFormStep + 1) + '"]'),
 				currentFormIndex = $nextForm.attr( 'data-step' ) - 1;
 
@@ -198,17 +200,17 @@ App = ( function ( App, $, window, document ) {
 			// Activate other unused modules
 			if ( currentFormIndex > 0 ) {
 				for ( var i = 0; i < curIndex; i++ ) {
-					currentForm.eq( i ).addClass( 'leaving' );
+					$sections.eq( i ).addClass( 'leaving' );
 					$indicator.eq( i ).addClass( 'active' );
 				}
 				$indicator.eq( curIndex ).addClass( 'active' );
-
+				
 			}
 
 
 
 			// Hide current form fields
-			currentForm.eq( tarIndex ).addClass( 'leaving' );
+			$sections.eq( tarIndex ).addClass( 'leaving' );
 			setTimeout(function() {
 				$indicator.eq( currentFormIndex ).addClass( 'active' );
 			}, animeSpeed );
@@ -218,6 +220,10 @@ App = ( function ( App, $, window, document ) {
 			$nextForm.addClass( 'coming' ).one( transitionEnd, function() {
 				$nextForm.removeClass( 'coming waiting' );
 			});
+			
+			// Active next form fields
+			$sections.removeClass( 'active' );
+			$sections.eq( currentFormIndex ).addClass( 'active' );
 
 			// Increment value (based on 4 steps 0 - 100)
 			value += stepPerValue;

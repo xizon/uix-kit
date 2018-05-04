@@ -14,7 +14,7 @@ App = ( function ( App, $, window, document ) {
 			var $this           = $( this ),
 				aEvent          = $this.data( 'event' ),
 				firstShow       = $this.data( 'first-show' ),
-				$li             = $this.find( 'dl' ),
+				$li             = $this.children( 'dl' ),
 				$titlebox       = $this.find( 'dt' );
 			
 			if( typeof aEvent === typeof undefined ) {
@@ -31,7 +31,8 @@ App = ( function ( App, $, window, document ) {
 			}
 			
 
-			$titlebox.on( aEvent, function() {
+			$titlebox.on( aEvent, function( e ) {
+				e.stopPropagation();
 				
 				var $cur = $( this ).closest( 'dl' );
 				

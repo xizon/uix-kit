@@ -37,6 +37,12 @@ $text-offset: $accordion-img-height - 110;
 
 			@include transition-default();
 			
+
+			&.active {
+				width: 60%;
+
+			}	
+			
 			> img {
 				position: absolute;
 				left: 0;
@@ -44,61 +50,64 @@ $text-offset: $accordion-img-height - 110;
 				
 			}
 
-			> div {
-				
-				
-				a {
-					display: block;
-					height: $accordion-img-height;
-					width: 100%;
+			> .outer {
+				display: block;
+				height: $accordion-img-height;
+				width: 100%;
+				position: relative;
+				z-index: 3;
+				vertical-align: bottom;
+				padding: 1rem 2.5rem;
+				box-sizing: border-box;
+				color: #fff;
+				cursor: pointer;
+				@include transition-default();
+
+				* {
+					margin: 0;
 					position: relative;
-					z-index: 3;
-					vertical-align: bottom;
-					padding: 1rem 2.5rem;
-					box-sizing: border-box;
-					color: #fff;
+					z-index: 5;
+					transform: translateX(-20px);
+
+					@include ellipsis();
 					@include transition-default();
-
-					* {
-						margin: 0;
-						position: relative;
-						z-index: 5;
-						transform: translateX(-20px);
-
-						@include ellipsis();
-						@include transition-default();
-
-					}
-
-					h3 {
-						text-overflow: clip;
-						top: $text-offset;
-					}
-
-					p {
-
-						top: $text-offset;
-
-					}
 
 				}
 
+				h3 {
+					text-overflow: clip;
+					top: $text-offset;
+				}
+
+				p {
+
+					top: $text-offset;
+
+				}
+				
+				.close-item {
+					position: absolute;
+					right: 0;
+					top: 10px;
+					z-index: 2;
+					display: inline-block;
+					background: rgba(255,255,255,.2);
+					color: #fff;
+					border-radius: 15px;
+					width: auto;
+					font-size: 0.75rem;
+					padding: 0 1rem;
+					
+				}
+
+
 			}
 
+			
+
 		}
 
 
-		&:hover {
-			li { 
-				width: 8%; 
-
-				&:hover {
-					width: 60%;
-					
-				}	
-
-			}	
-		}
 
 
 	}

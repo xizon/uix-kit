@@ -306,10 +306,6 @@ App = ( function ( App, $, window, document ) {
 		 *  Navigation Interaction
 		 ====================================================
 		 */
-		var $primaryMenu      = $( '.menu-main' ),
-			$sidefixedMenu    = $( '.custom-sidefixed-menu' );
-		
-
 		goPageSection( $primaryMenu );
 		goPageSection( $sidefixedMenu );
 
