@@ -132,7 +132,113 @@ App = ( function ( App, $, window, document ) {
 					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
 
 				});
+				
+				
+				//Drag and Drop
+				//-------------------------------------	
+				var $dragDropTrigger = $items;
 
+				//Make the cursor a move icon when a user hovers over an item
+				$dragDropTrigger.css( 'cursor', 'move' );
+
+
+				//Mouse event
+				$dragDropTrigger.on( 'mousedown.advancedContentSlider touchstart.advancedContentSlider', function( e ) {
+					e.preventDefault();
+
+					var touches = e.originalEvent.touches;
+					
+					$( this ).addClass( 'dragging' );
+					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
+					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
+					
+					
+					if ( touches && touches.length ) {	
+						$( this ).data( 'origin_mouse_x', parseInt( touches[0].pageX ) );
+						$( this ).data( 'origin_mouse_y', parseInt( touches[0].pageY ) );
+
+					} else {
+						$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
+						$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );
+
+					}
+					
+					$dragDropTrigger.on( 'mouseup.advancedContentSlider touchmove.advancedContentSlider', function( e ) {
+						e.preventDefault();
+
+						$( this ).removeClass( 'dragging' );
+						var touches        = e.originalEvent.touches,
+							origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
+							origin_mouse_y = $( this ).data( 'origin_mouse_y' );
+
+						if ( touches && touches.length ) {
+
+							var deltaX = origin_mouse_x - touches[0].pageX,
+								deltaY = origin_mouse_y - touches[0].pageY;
+
+							if ( deltaX >= 50) {
+								//--- left
+								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
+
+
+							}
+							if ( deltaX <= -50) {
+								//--- right
+								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
+
+
+							}
+							if ( deltaY >= 50) {
+								//--- up
+
+
+							}
+							if ( deltaY <= -50) {
+								//--- down
+
+							}
+
+							if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
+								$dragDropTrigger.off( 'touchmove.advancedContentSlider' );
+							}	
+
+
+						} else {
+							//right
+							if ( e.pageX > origin_mouse_x ) {
+								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
+							}
+
+							//left
+							if ( e.pageX < origin_mouse_x ) {
+								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
+							}
+
+							//down
+							if ( e.pageY > origin_mouse_y ) {
+
+							}
+
+							//up
+							if ( e.pageY < origin_mouse_y ) {
+
+							}	
+							
+							$dragDropTrigger.off( 'mouseup.advancedContentSlider' );
+							
+							
+						}
+
+
+
+					} );
+
+					
+					
+
+				} );
+
+			
 				
 			});	
 			
@@ -150,31 +256,34 @@ App = ( function ( App, $, window, document ) {
         function sliderUpdates( elementIndex, slider, arrows, pagination ) {
 			
 			var $items        = slider.find( '.item' ),
-				$current      = $items.eq( elementIndex ),
 				itemsTotal    = $items.length,
 				$prev         = $( arrows ).find( '.prev' ),
 				$next         = $( arrows ).find( '.next' ),
 				$pagination   = $( pagination ).find( 'li a' );
 				
-			$next.removeClass( 'disabled' );
-			$prev.removeClass( 'disabled' );
-			$pagination.removeClass( 'active' );
-			
-			if ( elementIndex == itemsTotal - 1 ) {
-				$next.addClass( 'disabled' );
-			}
-			
-			if ( elementIndex == 0 ) {
-				$prev.addClass( 'disabled' );
-			}
-			
-			$pagination.eq( elementIndex ).addClass( 'active' );
-			
-			
 			if ( elementIndex <= itemsTotal - 1 && elementIndex >= 0 ) {
 
+				if ( elementIndex > parseFloat( itemsTotal - 1 ) ) elementIndex = parseFloat( itemsTotal - 1 );
+				if ( elementIndex < 0 ) elementIndex = 0;
+				
+				$next.removeClass( 'disabled' );
+				$prev.removeClass( 'disabled' );
+				$pagination.removeClass( 'active' );
+
+				if ( elementIndex == itemsTotal - 1 ) {
+					$next.addClass( 'disabled' );
+				}
+
+				if ( elementIndex == 0 ) {
+					$prev.addClass( 'disabled' );
+				}
+
+				
+
 				$items.removeClass( 'active' );
-				$current.addClass( 'active' );	
+				$items.eq( elementIndex ).addClass( 'active' );	
+				$pagination.eq( elementIndex ).addClass( 'active' );
+				
 				
 				
 				TweenMax.to( slider.children( '.inner' ), animDuration/1000, { 
@@ -191,6 +300,8 @@ App = ( function ( App, $, window, document ) {
 
 			
 		}
+		
+
 		
 		
 	};

@@ -23,9 +23,11 @@ App = ( function ( App, $, window, document ) {
 		// HTML Render
 		//-------------------------------------	
 		function htmlRenderer() {
-			this.camera;
-			this.scene;
-			this.renderer;
+			//If a strict mode function is executed using function invocation, 
+			//its 'this' value will be undefined.
+			this.camera = camera;
+			this.scene = scene;
+			this.renderer = renderer;
 		}
 		htmlRenderer.prototype.init = function( camera ) {
 			this.scene  = new THREE.Scene();
@@ -61,11 +63,11 @@ App = ( function ( App, $, window, document ) {
 				camera.aspect = windowWidth / windowHeight;
 				camera.updateProjectionMatrix();
 			}, false );
-		}
+		};
 
 		htmlRenderer.prototype.render = function() {
 		    this.renderer.render( this.scene, this.camera );
-		}
+		};
 
 		
 		
@@ -102,7 +104,7 @@ App = ( function ( App, $, window, document ) {
 
 			//WebGL Renderer
 			renderer = new THREE.WebGLRenderer({ antialias: true });
-			renderer.setClearColor( 0xffffff, 1 )
+			renderer.setClearColor( 0xffffff, 1 );
 			renderer.setSize( windowWidth - 50, windowHeight - 50 );
 			renderer.domElement.style.zIndex = 5;
 			document.getElementById( viewRenderer ).appendChild( renderer.domElement );

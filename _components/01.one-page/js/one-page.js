@@ -13,54 +13,24 @@ App = ( function ( App, $, window, document ) {
 		    windowWidth  = $window.width(),
 		    windowHeight = $window.height();
 		
-		/* 
-		 ====================================================
-		 *  Transition Effect
-		 ====================================================
-		 */
-		
+
 	    //Determine the direction of a jQuery scroll event
 		//Fix an issue for mousewheel event is too fast.
-		var lastAnimation     = 0,
-			quietPeriod       = 500, //Do not change it
-			animationTime     = 1000,//According to page transition animation changes
-			updateURL         = true,
-			$el               = $( '.custom-fullpage-container' ),
-			$sections         = $el.find( '> section' ),
-			sectionTotal      = $sections.length,
-			topSectionSpacing = 0,
-			$primaryMenu      = $( '.menu-main' ),
-			$sidefixedMenu    = $( '.custom-sidefixed-menu' );
+		var lastAnimation      = 0,
+			quietPeriod        = 500, //Do not change it
+			animationTime      = 1000,//According to page transition animation changes
+			$sectionsContainer = $( '.custom-fullpage-container' ),
+			$sections          = $sectionsContainer.find( '> section' ),
+			sectionTotal       = $sections.length,
+			topSectionSpacing  = 0,
+			$primaryMenu       = $( '.menu-main' ),
+			$sidefixedMenu     = $( '.custom-sidefixed-menu' );
 		
 		
 		//Prevent this module from loading in other pages
-		if ( $el.length == 0 ) return false;
+		if ( $sectionsContainer.length == 0 ) return false;
 		
-		
-		
-		
-		$( document ).on( 'wheel', function( e ) { 
 
-			var dir;
-			//Gets a value that indicates the amount that the mouse wheel has changed.
-			var delta = e.originalEvent.deltaY;
-			
-			if( delta > 0 ) { 
-				//scroll down
-				dir = 'down';
-				
-			} else {
-				//scroll up
-				dir = 'up';
-			}
-			
-			scrollMoveInit( e, dir );
-			
-			//prevent page fom scrolling
-			return false;
-
-		});
-		
 
 		// Prepare everything before binding wheel scroll
 		$.each( $sections, function( i ) {
@@ -96,9 +66,9 @@ App = ( function ( App, $, window, document ) {
 					//Add hashchange event
 					locArr = hash.split( 'section-' );
 					loc    = locArr[1];
-					moveTo( $el, false, loc );
+					moveTo( $sectionsContainer, false, loc );
 				} else {
-					moveTo( $el, false, 1 );
+					moveTo( $sectionsContainer, false, 1 );
 				}
 
 			}, quietPeriod );
@@ -124,11 +94,11 @@ App = ( function ( App, $, window, document ) {
 
 			if ( dir == 'down' ) {
 				//scroll down
-				moveTo( $el, 'down', false );
+				moveTo( $sectionsContainer, 'down', false );
 				
 			} else {
 				//scroll up
-				moveTo( $el, 'up', false );
+				moveTo( $sectionsContainer, 'up', false );
 				
 			  
 			}
@@ -161,7 +131,7 @@ App = ( function ( App, $, window, document ) {
 			
 
 			//ID of custom hashchange event
-			if ( hashID && isNumeric.test( hashID ) ) nextIndex = parseFloat( hashID - 1 );
+			if ( isNumeric.test( hashID ) ) nextIndex = parseFloat( hashID - 1 );
 			
 			
 			if ( nextIndex <= parseFloat( sectionTotal-1 ) && nextIndex >= 0 ) {
@@ -239,6 +209,7 @@ App = ( function ( App, $, window, document ) {
             return $( $( el ).attr( 'href' ) );
         }
 		
+		
 		/*
 		 * Get link by section or article id
 		 *
@@ -281,7 +252,7 @@ App = ( function ( App, $, window, document ) {
 				if ( $( this ).parent().hasClass( 'active' ) ) return false;
 				
 				
-				moveTo( $el, false, $( this ).parent( 'li' ).index() + 1 );
+				moveTo( $sectionsContainer, false, $( this ).parent( 'li' ).index() + 1 );
 			});	
 	
         } 	
@@ -340,6 +311,94 @@ App = ( function ( App, $, window, document ) {
 		});	
 	
 		
+
+		
+		
+		/* 
+		 ====================================================
+		 *  Mouse Wheel Method
+		 ====================================================
+		 */
+		$( document ).on( 'wheel', function( e ) { 
+
+			var dir;
+			//Gets a value that indicates the amount that the mouse wheel has changed.
+			var delta = e.originalEvent.deltaY;
+			
+			if( delta > 0 ) { 
+				//scroll down
+				dir = 'down';
+				
+			} else {
+				//scroll up
+				dir = 'up';
+			}
+			
+			scrollMoveInit( e, dir );
+			
+			//prevent page fom scrolling
+			return false;
+
+		});
+		
+		
+		
+		/* 
+		 ====================================================
+		 *  Touch Method
+		 ====================================================
+		 */
+			
+		var startX,
+			startY;
+
+
+		$sectionsContainer.on( 'touchstart.onepage', function( event ) {
+			var touches = event.originalEvent.touches;
+			if ( touches && touches.length ) {
+				startX = touches[0].pageX;
+				startY = touches[0].pageY;
+
+
+				$sectionsContainer.on( 'touchmove.onepage', function( event ) {
+
+					var touches = event.originalEvent.touches;
+					if ( touches && touches.length ) {
+						var deltaX = startX - touches[0].pageX,
+							deltaY = startY - touches[0].pageY;
+
+						if ( deltaX >= 50) {
+							//--- swipe left
+
+
+						}
+						if ( deltaX <= -50) {
+							//--- swipe right
+						
+
+
+						}
+						if ( deltaY >= 50) {
+							//--- swipe up
+							moveTo( $sectionsContainer, 'down', false );
+
+						}
+						if ( deltaY <= -50) {
+							//--- swipe down
+							moveTo( $sectionsContainer, 'up', false );
+							
+
+						}
+						if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
+							$sectionsContainer.off( 'touchmove.onepage' );
+						}
+					}
+
+				});
+			}	
+		});
+
+
 		
 		
     };

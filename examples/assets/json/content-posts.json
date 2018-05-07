@@ -1,7 +1,7 @@
 {
 	"items": [
 		{
-		  "img"     : "assets-demo/images/test-img-big-1.jpg",
+		  "img"     : "assets/images/demo/test-img-big-1.jpg",
 		  "title"   : "Project Title",
 		  "time"    : "December 10, 2017",
 		  "author"  : "David",
@@ -13,7 +13,7 @@
 			
   		},
 		{
-		  "img"     : "assets-demo/images/test-img-big-2.jpg",
+		  "img"     : "assets/images/demo/test-img-big-2.jpg",
 		  "title"   : "Project Title Here",
 		  "time"    : "December 9, 2017",
 		  "author"  : "David",
@@ -24,7 +24,7 @@
 	      "link"    : "#"
 		},
 		{
-		  "img"     : "assets-demo/images/test-img-big-3.jpg",
+		  "img"     : "assets/images/demo/test-img-big-3.jpg",
 		  "title"   : "Project Title Here",
 		  "time"    : "December 8, 2017",
 		  "author"  : "David",

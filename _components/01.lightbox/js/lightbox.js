@@ -193,8 +193,8 @@ App = ( function ( App, $, window, document ) {
 								url      : dataAjaxCon,
 								method   : 'POST',
 								dataType : 'html',
-								success  : function( data ) { 
-									$ajaxContentContainer.html( data );
+								success  : function( response ) { 
+									$ajaxContentContainer.html( $( response ).find( '.entry-content' ).html() );
 
 								 },
 								 error : function( XMLHttpRequest, textStatus, errorThrown ) {

@@ -24,7 +24,7 @@ if ( $page == 4 ) {
 	{
 		"items": [
 			{
-			  "img"     : "assets-demo/images/test-img-big-1.jpg",
+			  "img"     : "assets/images/demo/test-img-big-1.jpg",
 			  "title"   : "Project Title - PAGE 4",
 			  "time"    : "December 10, 2017",
 			  "author"  : "David",
@@ -36,7 +36,7 @@ if ( $page == 4 ) {
 
 			},
 			{
-			  "img"     : "assets-demo/images/test-img-big-3.jpg",
+			  "img"     : "assets/images/demo/test-img-big-3.jpg",
 			  "title"   : "Project Title Here - PAGE 4",
 			  "time"    : "December 9, 2017",
 			  "author"  : "David",
@@ -47,7 +47,7 @@ if ( $page == 4 ) {
 			  "link"    : "#"
 			},
 			{
-			  "img"     : "assets-demo/images/test-img-big-2.jpg",
+			  "img"     : "assets/images/demo/test-img-big-2.jpg",
 			  "title"   : "Project Title Here - PAGE 4",
 			  "time"    : "December 8, 2017",
 			  "author"  : "David",
@@ -70,7 +70,7 @@ if ( $page == 3 ) {
 	{
 		"items": [
 			{
-			  "img"     : "assets-demo/images/test-img-big-2.jpg",
+			  "img"     : "assets/images/demo/test-img-big-2.jpg",
 			  "title"   : "Project Title - PAGE 3",
 			  "time"    : "December 10, 2017",
 			  "author"  : "David",
@@ -82,7 +82,7 @@ if ( $page == 3 ) {
 
 			},
 			{
-			  "img"     : "assets-demo/images/test-img-big-5.jpg",
+			  "img"     : "assets/images/demo/test-img-big-5.jpg",
 			  "title"   : "Project Title Here - PAGE 3",
 			  "time"    : "December 9, 2017",
 			  "author"  : "David",
@@ -93,7 +93,7 @@ if ( $page == 3 ) {
 			  "link"    : "#"
 			},
 			{
-			  "img"     : "assets-demo/images/test-img-big-4.jpg",
+			  "img"     : "assets/images/demo/test-img-big-4.jpg",
 			  "title"   : "Project Title Here - PAGE 3",
 			  "time"    : "December 8, 2017",
 			  "author"  : "David",
@@ -115,7 +115,7 @@ if ( $page == 2 ) {
 		"items": [
 		
 			{
-			  "img"     : "assets-demo/images/test-img-big-3.jpg",
+			  "img"     : "assets/images/demo/test-img-big-3.jpg",
 			  "title"   : "'.$title.'  - PAGE 2",
 			  "time"    : "December 10, 2017",
 			  "author"  : "David",
@@ -127,7 +127,7 @@ if ( $page == 2 ) {
 
 			},
 			{
-			  "img"     : "assets-demo/images/test-img-big-5.jpg",
+			  "img"     : "assets/images/demo/test-img-big-5.jpg",
 			  "title"   : "'.$title.'  - PAGE 2",
 			  "time"    : "December 9, 2017",
 			  "author"  : "David",
@@ -138,7 +138,7 @@ if ( $page == 2 ) {
 			  "link"    : "#"
 			},
 			{
-			  "img"     : "assets-demo/images/test-img-big-2.jpg",
+			  "img"     : "assets/images/demo/test-img-big-2.jpg",
 			  "title"   : "'.$title.'  - PAGE 2",
 			  "time"    : "December 8, 2017",
 			  "author"  : "David",
@@ -161,7 +161,7 @@ if ( $page == 1 ) {
 		"items": [
 		
 			{
-			  "img"     : "assets-demo/images/test-img-big-1.jpg",
+			  "img"     : "assets/images/demo/test-img-big-1.jpg",
 			  "title"   : "Project Title",
 			  "time"    : "December 10, 2017",
 			  "author"  : "David",
@@ -173,7 +173,7 @@ if ( $page == 1 ) {
 
 			},
 			{
-			  "img"     : "assets-demo/images/test-img-big-2.jpg",
+			  "img"     : "assets/images/demo/test-img-big-2.jpg",
 			  "title"   : "Project Title Here",
 			  "time"    : "December 9, 2017",
 			  "author"  : "David",
@@ -184,7 +184,7 @@ if ( $page == 1 ) {
 			  "link"    : "#"
 			},
 			{
-			  "img"     : "assets-demo/images/test-img-big-3.jpg",
+			  "img"     : "assets/images/demo/test-img-big-3.jpg",
 			  "title"   : "Project Title Here",
 			  "time"    : "December 8, 2017",
 			  "author"  : "David",
