@@ -142,10 +142,18 @@
 					var $this        = $( this[ this.selectedIndex ] ),
 						curVal       = $this.val(),
 						curLongitude = $this.data( 'longitude' ),
-						curLatitude  = $this.data( 'latitude' );
+						curLatitude  = $this.data( 'latitude' ),
+						curAddresses = $this.data( 'addresses' );
 
+					
+					var curContents = '';
+					for ( var k = 0; k < curAddresses.length; k++ ) {
+						curContents += curAddresses[k].addr_name + ': ' + curAddresses[k].addr_longitude + ', ' + curAddresses[k].addr_latitude + ' ';
+					}
+						
+					
 
-					$( '#dynamic-callback').text( '{ Name: '+curVal+', Longitude: ' + curLongitude + ', Latitude: ' + curLatitude + '}'  );
+					$( '#dynamic-callback').text( '{ Name: '+curVal+', Longitude: ' + curLongitude + ', Latitude: ' + curLatitude + ', Addresses: ' + curContents + '}'  );
 
 					return false;
 

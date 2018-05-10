@@ -6,9 +6,7 @@
 	position: relative;
 	width: 100%;
 	background-attachment: fixed;
-	background-position: center center;
-	background-repeat: no-repeat;
-	background-size: cover;
+	@include background-cover();
 	
 	height: auto;
 	width: 100%;
@@ -19,7 +17,6 @@
 }
 
 .pure-bg-parallax {
-	background-size: cover;
-	background-repeat: no-repeat;
+	@include background-cover();
 }
 

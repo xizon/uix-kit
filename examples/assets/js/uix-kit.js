@@ -8,7 +8,7 @@
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
  * ## Version             :  1.5.3
- * ## Last Update         :  May 8, 2018
+ * ## Last Update         :  May 11, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -24,57 +24,57 @@
 	
 	
 	1. Header 
-    2. Loader 
-    3. Back to Top 
+    2. Back to Top 
+    3. Loader 
     4. Get all custom attributes of an element like "data-*" 
     5. Navigation 
     6. Videos 
     7. Common Height 
-    8. Mega Menu 
-    9. Dropdown Categories 
+    8. Dropdown Categories 
+    9. Mega Menu 
     10. Pagination 
     11. Specify a background image 
     12. 3D Pages 
     13. Accordion 
     14. Accordion Background Images 
-    15. Advanced Slider (Basic) 
-    16. Counter 
-    17. Dynamic Drop Down List from JSON 
-    18. Flexslider 
-    19. Form 
-    20. Gallery 
-    21. Image Shapes 
-    22. Form Progress 
-    23. Custom Core Scripts & Stylesheets 
-    24. Custom Lightbox 
-    25. Bulleted List 
-    26. Posts List With Ajax 
-    27. Fullwidth List of Split 
-    28. Mobile Menu 
-    29. Modal Dialog 
-    30. Mousewheel Interaction 
-    31. Multiple Items Carousel 
-    32. Full Page/One Page Transition 
-    33. Full Page/One Page Transition 2 
-    34. Parallax 
-    35. Periodical Scroll 
-    36. Pricing 
-    37. Progress Bar 
-    38. Rotating Elements 
-    39. Ajax Page Loader (Loading A Page via Ajax Into Div)  
-    40. Scroll Reveal 
-    41. Advanced Slider (Special Effects) 
-    42. Show More Less 
-    43. Smooth Scrolling When Clicking An Anchor Link 
-    44. Source Code 
-    45. Advanced Content Slider 
+    15. Advanced Content Slider 
+    16. Advanced Slider (Special Effects) 
+    17. Advanced Slider (Basic) 
+    18. Counter 
+    19. Dynamic Drop Down List from JSON 
+    20. Flexslider 
+    21. Form Progress 
+    22. Form 
+    23. Gallery 
+    24. Image Shapes 
+    25. Custom Core Scripts & Stylesheets 
+    26. Custom Lightbox 
+    27. Bulleted List 
+    28. Posts List With Ajax 
+    29. Fullwidth List of Split 
+    30. Mobile Menu 
+    31. Modal Dialog 
+    32. Mousewheel Interaction 
+    33. Multiple Items Carousel 
+    34. Full Page/One Page Transition 
+    35. Full Page/One Page Transition 2 
+    36. Parallax 
+    37. Periodical Scroll 
+    38. Pricing 
+    39. Progress Bar 
+    40. Retina Graphics for Website 
+    41. Rotating Elements 
+    42. Scroll Reveal 
+    43. Show More Less 
+    44. Smooth Scrolling When Clicking An Anchor Link 
+    45. Source Code 
     46. Sticky Elements 
     47. Tabs 
     48. Team Focus 
     49. Testimonials Carousel 
     50. Text effect 
     51. Timeline 
-    52. Retina Graphics for Website 
+    52. Ajax Page Loader (Loading A Page via Ajax Into Div)  
     53. GSAP Plugins 
     54. Three.js Plugins 
 
@@ -1749,11 +1749,13 @@ App = ( function ( App, $, window, document ) {
 					totalWidth                 = itemWidth*itemsTotal,
 					dataControlsPagination     = $this.data( 'controls-pagination' ),
 					dataControlsArrows         = $this.data( 'controls-arrows' ),
+					dataDraggable              = $this.data( 'draggable' ),
 					dataControlsPaginationAuto = false;
 
 
 				if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.custom-advanced-content-slider-sp-pagination';
 				if ( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.custom-advanced-content-slider-sp-arrows';
+				if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
 				
 				if ( $( dataControlsPagination ).html().length == 0 ) dataControlsPaginationAuto = true;
 
@@ -1837,7 +1839,8 @@ App = ( function ( App, $, window, document ) {
 				var $dragDropTrigger = $items;
 
 				//Make the cursor a move icon when a user hovers over an item
-				$dragDropTrigger.css( 'cursor', 'move' );
+				if ( dataDraggable ) $dragDropTrigger.css( 'cursor', 'move' );
+				
 
 
 				//Mouse event
@@ -1856,8 +1859,12 @@ App = ( function ( App, $, window, document ) {
 						$( this ).data( 'origin_mouse_y', parseInt( touches[0].pageY ) );
 
 					} else {
-						$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
-						$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );
+						
+						if ( dataDraggable ) {
+							$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
+							$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );	
+						}
+
 
 					}
 					
@@ -1902,27 +1909,32 @@ App = ( function ( App, $, window, document ) {
 
 
 						} else {
-							//right
-							if ( e.pageX > origin_mouse_x ) {
-								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
-							}
+							
+							if ( dataDraggable ) {
+								//right
+								if ( e.pageX > origin_mouse_x ) {
+									sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
+								}
 
-							//left
-							if ( e.pageX < origin_mouse_x ) {
-								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
-							}
+								//left
+								if ( e.pageX < origin_mouse_x ) {
+									sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
+								}
 
-							//down
-							if ( e.pageY > origin_mouse_y ) {
+								//down
+								if ( e.pageY > origin_mouse_y ) {
 
-							}
+								}
 
-							//up
-							if ( e.pageY < origin_mouse_y ) {
+								//up
+								if ( e.pageY < origin_mouse_y ) {
 
+								}	
+
+								$dragDropTrigger.off( 'mouseup.advancedContentSlider' );
+								
 							}	
 							
-							$dragDropTrigger.off( 'mouseup.advancedContentSlider' );
 							
 							
 						}
@@ -4711,398 +4723,6 @@ App = ( function ( App, $, window, document ) {
 
 
 
-/* 
- *************************************
- * <!-- Ajax Page Loader (Loading A Page via Ajax Into Div)  -->
- *************************************
- */
-App = ( function ( App, $, window, document ) {
-    'use strict';
-    
-    var documentReady = function( $ ) {
-		
-        var $window                  = $( window ),
-		    windowWidth              = $window.width(),
-		    windowHeight             = $window.height();
-
-		
-		
-	    //Determine the direction of a jQuery scroll event
-		//Fix an issue for mousewheel event is too fast.
-		var lastAnimation       = 0,
-			quietPeriod         = 500, //Do not change it
-			animationTime       = 1000,//According to page transition animation changes
-			AJAXPageLinks       = '[data-ajax-page]',
-			$navs               = $( AJAXPageLinks ).parent().parent().find( 'li' ),
-			total               = $navs.length,
-			$sectionsContainer  = $( '.custom-fullpage-ajax-container' ),
-			$ajaxContainer      = $( '#ajax-container' ),
-			curAjaxPageID       = $ajaxContainer.data( 'ajax-page-id' );
-		
-		
-		//Prevent this module from loading in other pages
-		if ( $sectionsContainer.length == 0 ) return false;
-		
-		
-		/* 
-		 ====================================================
-		 *  Navigation Interaction
-		 ====================================================
-		 */
-	
-		//Activate the first item
-		if ( $( '.entry-content' ).length == 0 ) {
-			moveTo( $ajaxContainer, false, 'down', 0 );
-		} else {
-			//Activate navigation from AJAX request
-			if ( typeof curAjaxPageID != typeof undefined ) $navs.eq( curAjaxPageID ).addClass( 'active' );
-		}
-
-		
-		
-
-		/* 
-		 ====================================================
-		 *  AJAX Interaction
-		 ====================================================
-		 */
-		/*
-		 * Initialize the clickable ajax links
-		 *
-		 * @return {void}  - The constructor.
-		 */
-		function ajaxInit() {
-			if ( windowWidth <= 768 ) {
-				$( AJAXPageLinks ).data( 'mobile-running', true );
-			} else {
-				$( AJAXPageLinks ).data( 'mobile-running', false );
-			}
-			
-			
-		}
-			
-		ajaxInit();
-		$window.on( 'resize', function() {
-			windowWidth = $window.width();
-			ajaxInit();
-		} );	
-
-		
-
-		
-		/*
-		 * Call AJAX on click event for "single pages links"
-		 *
-		 */
-		$( document ).on( 'click', AJAXPageLinks, function( e ) {
-			
-			//Prevents third-party plug-ins from triggering
-			if ( $( this ).data( 'mobile-running' ) ) {
-				return;
-			}
-			
-			e.preventDefault();
-			
-			
-			var $this            = $( this ),
-				curIndex         = $this.attr( 'data-index' ),
-			    curURL           = $this.attr( 'href' ); 
-
-			
-			//The currently URL of link
-			if ( typeof curURL === typeof undefined ) {
-				curURL = $this.closest( 'a' ).attr( 'href' );
-			}
-			
-			
-			//Prevent multiple request on click
-			if ( $( AJAXPageLinks ).data( 'request-running' ) ) {
-				return;
-			}
-			$( AJAXPageLinks ).data( 'request-running', true );
-
-			
-			//Click on this link element using an AJAX request
-			moveTo( $ajaxContainer, curURL, 'down', curIndex );
-			
-			
-			
-			return false;
-			
-			
-		})
-		
-		
-		/*
-		 * Scroll initialize
-		 *
-		 * @param  {object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
-		 * @param  {string} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
-		 * @return {void}                - The constructor.
-		 */
-		function scrollMoveInit( event, dir ) {
-	
-			var timeNow = new Date().getTime();
-			// Cancel scroll if currently animating or within quiet period
-			if( timeNow - lastAnimation < quietPeriod + animationTime) {
-				event.preventDefault();
-				return;
-			}
-
-			if ( dir == 'down' ) {
-				//scroll down
-				moveTo( $ajaxContainer, false, 'down', false );
-				
-			} else {
-				//scroll up
-				moveTo( $ajaxContainer, false, 'up', false );
-				
-			  
-			}
-			lastAnimation = timeNow;
-		}
-		
-		
-		
-		/*
-		 * Move Animation
-		 *
-		 * @param  {object} container    - The instance returned from the request succeeds 
-		 * @param  {string} url          - The target URL via AJAX.
-		 * @param  {string} dir          - Rolling direction indicator.
-		 * @param  {number} customIndex  - User-specified index value, located on the corresponding AJAX hyperlink.
-		 * @return {void}                - The constructor.
-		 */
-		function moveTo( container, url, dir, customIndex ) {
-			var index     = parseFloat( $navs.filter( '.active' ).find( '> a' ).attr( 'data-index' ) ),
-				nextIndex = null,
-				isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
-			
-		
-			//If there is a custom index, it is enabled first
-			if ( isNumeric.test( customIndex ) ) {
-				nextIndex = customIndex;
-				
-			} else {
-				if ( dir == 'down' || dir === false ) {
-					nextIndex = index + 1;
-				} else {
-					nextIndex = index - 1;
-				}	
-			}
-
-			
-			if ( nextIndex <= parseFloat( total - 1 ) && nextIndex >= 0 ) {
-				
-				if ( nextIndex > parseFloat( total - 1 ) ) nextIndex = parseFloat( total - 1 );
-				if ( nextIndex < 0 ) nextIndex = 0;
-				
-
-		
-				//Prevents third-party plug-ins from triggering
-				if ( $navs.eq( nextIndex ).find( '> a' ).data( 'mobile-running' ) ) {
-					return;
-				}
-			
-				
-				//Activate navigation from AJAX request
-				$navs.removeClass( 'active' );
-				$navs.eq( nextIndex ).addClass( 'active' );
-
-
-				
-				//Use automatic indexing when no URLs come in.
-				if ( !url || typeof url === typeof undefined ) {
-					url = $navs.eq( nextIndex ).find( '> a' ).attr( 'href' );
-				}
-
-				//Click on this link element using an AJAX request
-				$.ajax({
-					timeout  : 15000,
-					url      : url,
-					method   : 'POST',
-					dataType : 'html',
-					data     : {
-						action  : 'load_singlepages_ajax_content'
-					},	
-					success  : function( response ) {
-						
-						//A function to be called if the request succeeds
-						ajaxSucceeds( container, url, $( response ).find( '.entry-content' ).html() );
-
-					},
-					error: function(){
-						window.location.href = url;
-					},
-					beforeSend: function() {
-
-						TweenMax.set( '.ajax-loader', {
-							css         : {
-								'display' : 'block'
-							},
-							onComplete  : function() {
-								TweenMax.to( '.ajax-loader', 0.5, {
-									alpha : 1
-								});
-							}
-						});		
-
-
-
-					}
-				}).fail( function( jqXHR, textStatus ) {
-					if( textStatus === 'timeout' ) {
-						window.location.href = url;
-					}
-				});		
-				
-				
-			}
-			
-	
-			
-		}
-		
-		
-		
-		/*
-		 * A function to be called if the request succeeds
-		 *
-		 * @param  {object} container - The instance returned from the request succeeds
-		 * @param  {string} url       - Current URL after click
-		 * @param  {string} content   - The data returned from the server
-		 * @return {void}             - The constructor.
-		 */
-		function ajaxSucceeds( container, url, content ) {
-			
-		
-			//Remove loader
-			TweenMax.to( '.ajax-loader', 0.5, {
-				alpha       : 0,
-				onComplete  : function() {
-					TweenMax.set( '.ajax-loader', {
-						css         : {
-							'display' : 'none'
-						}
-					});
-					
-					//The data returned from the server
-					container.html( content );
-	
-					
-				},
-				delay       : 1
-			});
-			
-			
-			
-			
-			
-			//Change page title
-			if ( container.find( '#ajax-wptitle' ).length > 0 ) {
-				$( 'title' ).html( container.find( '#ajax-wptitle' ).data( 'ajax-wptitle' ) );
-			}
-			
-			// Apply the original scripts
-			applyOriginalSomeScripts();
-
-			// Modify the URL without reloading the page
-			if( history.pushState ) {
-				history.pushState( null, null, url );
-			}
-			else {
-				location.hash = url;
-			}
-			
-			//Prevent multiple request on click
-			$( AJAXPageLinks ).data( 'request-running', false );
-			
-		}
-		
-		
-		
-		/*
-		 * Apply some original scripts
-		 *
-		 * @return {void}  - The constructor.
-		 */
-		function applyOriginalSomeScripts() {
-			
-			App.commonHeight.pageLoaded(); //Common Height
-			App.parallax.documentReady($); //Parallax
-			
-		}
-
-		
-		/*
-		 * Apply all the original scripts
-		 *
-		 * @return {void}  - The constructor.
-		 */
-		
-		
-		function applyOriginalAllScripts() {
-			
-			
-			var scipts_pageLoaded    = App.components.pageLoaded,
-				scipts_documentReady = App.components.documentReady;
-			
-			
-			for ( var i = 0; i < scipts_pageLoaded.length; i++ ) {
-			     scipts_pageLoaded[i]();
-			}
-			for ( var j = 0; j < scipts_documentReady.length; j++ ) {
-			     scipts_documentReady[j]( $ );
-			}	
-		
-			
-			
-		}
-		
-		
-		/* 
-		 ====================================================
-		 *  Mouse Wheel Method
-		 ====================================================
-		 */
-		$( document ).on( 'wheel', function( e ) { 
-
-			var dir;
-			//Gets a value that indicates the amount that the mouse wheel has changed.
-			var delta = e.originalEvent.deltaY;
-			
-			if( delta > 0 ) { 
-				//scroll down
-				dir = 'down';
-				
-			} else {
-				//scroll up
-				dir = 'up';
-			}
-			
-			scrollMoveInit( e, dir );
-			
-			//prevent page fom scrolling
-			return false;
-
-		});		
-		
-
-	
-		
-    };
-
-    App.ajaxPageLoader = {
-        documentReady : documentReady        
-    };
-
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
-
-
-
 
 /* 
  *************************************
@@ -5330,9 +4950,18 @@ App = ( function ( App, $, window, document ) {
 											
 											var name      = thisVal[ i ].name,
 												longitude = thisVal[ i ].longitude,
-												latitude  = thisVal[ i ].latitude;
+												latitude  = thisVal[ i ].latitude,
+												addresses = thisVal[ i ].addresses;
 												
-											optionsHtml += "<option data-longitude='"+longitude+"' data-latitude='"+latitude+"' value='"+name+"'>"+name+"</option>";
+											var addressesArr = '';
+											for ( var k = 0; k < addresses.length; k++ ) {
+												addressesArr += JSON.stringify( addresses[k] ) + ',';
+											}
+											
+											addressesArr = addressesArr.replace(/,\s*$/, '' );
+											
+											
+											optionsHtml += "<option data-addresses='["+addressesArr+"]' data-longitude='"+longitude+"' data-latitude='"+latitude+"' value='"+name+"'>"+name+"</option>";
 
 										}
 
@@ -5378,10 +5007,17 @@ App = ( function ( App, $, window, document ) {
 					var $this        = $( this[ this.selectedIndex ] ),
 						curVal       = $this.val(),
 						curLongitude = $this.data( 'longitude' ),
-						curLatitude  = $this.data( 'latitude' );
+						curLatitude  = $this.data( 'latitude' ),
+						curAddresses = $this.data( 'addresses' );
 
 					
-					//console.log( curVal + ' Longitude: ' + curLongitude + ' | Latitude: ' + curLatitude );
+					var curContents = '';
+					for ( var k = 0; k < curAddresses.length; k++ ) {
+						curContents += curAddresses[k].addr_name + ': ' + curAddresses[k].addr_longitude + ', ' + curAddresses[k].addr_latitude;
+					}
+					
+					
+					//console.log( curVal + ' Longitude: ' + curLongitude + ' | Latitude: ' + curLatitude + ' | Addresses: ' + curContents );
 					
 					return false;
 				
@@ -14527,7 +14163,115 @@ App = ( function ( App, $, window, document ) {
     
 		
 		
+		$( '.custom-team-focus' ).each( function() {
+			var $this           = $( this ),
+				thisID          = 'custom-team-focus-' + Math.random()*1000000000000000000,
+				hoverWidth      = $this.data( 'hover-width' ),
+				targetWidth     = $this.data( 'target-width' ), // Div over width as a percentage 
+				closeBtn        = $this.data( 'close-btn' ),
+				el              = '#' + thisID + '> .item',
+				total           = 0;
+			
+			
+			
+			$this.attr( 'id', thisID );
+			
 		
+			if( typeof hoverWidth === typeof undefined ) {
+				hoverWidth = 20;
+			}	
+			
+			if( typeof targetWidth === typeof undefined ) {
+				targetWidth = 80;
+			}	
+		
+			total = $( el ).length;
+		
+
+			TweenMax.set( el, {
+				width: 100/total + '%'
+			});
+			
+			
+
+			$( el ).on( 'mouseenter', function() {
+
+				var $cur      = $( this ),
+					$neighbor = $cur.siblings(); //Get the siblings of each element in the set of matched elements
+
+				TweenMax.to( $cur, 0.3, {
+					width: hoverWidth + '%'
+				});
+
+				TweenMax.to( $neighbor, 0.3, {
+					width: ( 100 - hoverWidth )/( total - 1 ) + '%'
+				})
+
+			} )
+
+			$( document ).on( 'click', el, function( e ) {
+				e.preventDefault();
+
+				var $cur        = $( this ),
+					$neighbor   = $cur.siblings(), //Get the siblings of each element in the set of matched elements
+					$cloneItem  = $cur.clone();
+
+				if ( !$cur.hasClass( 'active' ) ) {
+					$( el + '.active' ).remove();
+
+
+					TweenMax.set( $cloneItem, {
+						alpha      : 0,
+						onComplete : function() {
+
+							this.target
+								.prependTo( '#' + thisID )
+								.addClass( 'active' );
+
+						}
+					})
+
+					TweenMax.to( el, 0.3, {
+						alpha      : 1
+					})	
+
+
+					TweenMax.to( $cur, 0.3, {
+						alpha : 0
+					})
+
+				}
+
+
+
+			});
+
+			$( document ).on( 'click', el + '.active', function( e ) {
+				e.preventDefault();
+
+				TweenMax.to( el, 0.3, {
+					width : 100/total + '%',
+					ease  : Back.easeOut
+				})
+
+				TweenMax.to( el + '.active', 0.3, {
+					alpha : 0,
+					onComplete : function() {
+
+						$( el + '.active' ).remove();
+						TweenMax.to( el, 0.3, {
+							alpha : 1
+						})	
+					}
+				})
+
+
+
+			});	
+			
+			
+			
+		});	
 
 
 		
@@ -14541,8 +14285,6 @@ App = ( function ( App, $, window, document ) {
     return App;
 
 }( App, jQuery, window, document ) );
-
-
 
 
 
@@ -14917,6 +14659,481 @@ App = ( function ( App, $, window, document ) {
     return App;
 
 }( App, jQuery, window, document ) );
+
+/* 
+ *************************************
+ * <!-- Ajax Page Loader (Loading A Page via Ajax Into Div)  -->
+ *************************************
+ */
+App = ( function ( App, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+		
+        var $window                  = $( window ),
+		    windowWidth              = $window.width(),
+		    windowHeight             = $window.height();
+
+		
+		
+	    //Determine the direction of a jQuery scroll event
+		//Fix an issue for mousewheel event is too fast.
+		var lastAnimation       = 0,
+			quietPeriod         = 500, //Do not change it
+			animationTime       = 1000,//According to page transition animation changes
+			AJAXPageLinks       = '[data-ajax-page]',
+			$navs               = $( AJAXPageLinks ).parent().parent().find( 'li' ),
+			total               = $navs.length,
+			$sectionsContainer  = $( '.custom-fullpage-ajax-container' ),
+			ajaxContainer       = '.ajax-container',
+			curAjaxPageID       = $( ajaxContainer ).data( 'ajax-page-id' );
+		
+		
+		//Prevent this module from loading in other pages
+		if ( $sectionsContainer.length == 0 ) return false;
+		
+		
+		/* 
+		 ====================================================
+		 *  Navigation Interaction
+		 ====================================================
+		 */
+	
+		//Activate the first item
+		if ( $( '.entry-content' ).length == 0 ) {
+			moveTo( $( ajaxContainer ), false, 'down', 0 );
+		} else {
+			//Activate navigation from AJAX request
+			if ( typeof curAjaxPageID != typeof undefined ) $navs.eq( curAjaxPageID ).addClass( 'active' );
+		}
+
+		
+		
+
+		/* 
+		 ====================================================
+		 *  AJAX Interaction
+		 ====================================================
+		 */
+		/*
+		 * Initialize the clickable ajax links
+		 *
+		 * @return {void}  - The constructor.
+		 */
+		function ajaxInit() {
+			if ( windowWidth <= 768 ) {
+				$( AJAXPageLinks ).data( 'mobile-running', true );
+			} else {
+				$( AJAXPageLinks ).data( 'mobile-running', false );
+			}
+			
+			
+		}
+			
+		ajaxInit();
+		$window.on( 'resize', function() {
+			windowWidth = $window.width();
+			ajaxInit();
+		} );	
+
+		
+
+		
+		/*
+		 * Call AJAX on click event for "single pages links"
+		 *
+		 */
+		$( document ).on( 'click', AJAXPageLinks, function( e ) {
+			
+			//Prevents third-party plug-ins from triggering
+			if ( $( this ).data( 'mobile-running' ) ) {
+				return;
+			}
+			
+			e.preventDefault();
+			
+			
+			var $this            = $( this ),
+				curIndex         = $this.attr( 'data-index' ),
+			    curURL           = $this.attr( 'href' ); 
+
+			
+			//The currently URL of link
+			if ( typeof curURL === typeof undefined ) {
+				curURL = $this.closest( 'a' ).attr( 'href' );
+			}
+			
+			
+			//Prevent multiple request on click
+			if ( $( AJAXPageLinks ).data( 'request-running' ) ) {
+				return;
+			}
+			$( AJAXPageLinks ).data( 'request-running', true );
+
+			
+			//Click on this link element using an AJAX request
+			var dir = 'down';
+
+			if ( $navs.filter( '.active' ).find( '> a' ).attr( 'data-index' ) > curIndex ) {
+				dir = 'up';
+			}
+			moveTo( $( ajaxContainer ), curURL, dir, curIndex );
+			
+			
+			
+			return false;
+			
+			
+		})
+		
+		
+		/*
+		 * Scroll initialize
+		 *
+		 * @param  {object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
+		 * @param  {string} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
+		 * @return {void}                - The constructor.
+		 */
+		function scrollMoveInit( event, dir ) {
+	
+			var timeNow = new Date().getTime();
+			// Cancel scroll if currently animating or within quiet period
+			if( timeNow - lastAnimation < quietPeriod + animationTime) {
+				event.preventDefault();
+				return;
+			}
+
+			if ( dir == 'down' ) {
+				//scroll down
+				moveTo( $( ajaxContainer ), false, 'down', false );
+				
+			} else {
+				//scroll up
+				moveTo( $( ajaxContainer ), false, 'up', false );
+				
+			  
+			}
+			lastAnimation = timeNow;
+		}
+		
+		
+		/*
+		 * Move Animation
+		 *
+		 * @param  {object} container    - The instance returned from the request succeeds 
+		 * @param  {string} url          - The target URL via AJAX.
+		 * @param  {string} dir          - Rolling direction indicator.
+		 * @param  {number} customIndex  - User-specified index value, located on the corresponding AJAX hyperlink.
+		 * @return {void}                - The constructor.
+		 */
+		function moveTo( container, url, dir, customIndex ) {
+			var index     = parseFloat( $navs.filter( '.active' ).find( '> a' ).attr( 'data-index' ) ),
+				nextIndex = null,
+				isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
+			
+		
+			//If there is a custom index, it is enabled first
+			if ( isNumeric.test( customIndex ) ) {
+				nextIndex = customIndex;
+				
+			} else {
+				if ( dir == 'down' || dir === false ) {
+					nextIndex = index + 1;
+				} else {
+					nextIndex = index - 1;
+				}	
+			}
+
+			
+			if ( nextIndex <= parseFloat( total - 1 ) && nextIndex >= 0 ) {
+				
+				if ( nextIndex > parseFloat( total - 1 ) ) nextIndex = parseFloat( total - 1 );
+				if ( nextIndex < 0 ) nextIndex = 0;
+				
+
+		
+				//Prevents third-party plug-ins from triggering
+				if ( $navs.eq( nextIndex ).find( '> a' ).data( 'mobile-running' ) ) {
+					return;
+				}
+			
+				
+				//Activate navigation from AJAX request
+				$navs.removeClass( 'active' );
+				$navs.eq( nextIndex ).addClass( 'active' );
+
+
+				
+				//Use automatic indexing when no URLs come in.
+				if ( !url || typeof url === typeof undefined ) {
+					url = $navs.eq( nextIndex ).find( '> a' ).attr( 'href' );
+				}
+
+				//Click on this link element using an AJAX request
+				$.ajax({
+					timeout  : 15000,
+					url      : url,
+					method   : 'POST',
+					dataType : 'html',
+					data     : {
+						action  : 'load_singlepages_ajax_content'
+					},	
+					success  : function( response ) {
+						
+						//A function to be called if the request succeeds
+						ajaxSucceeds( dir, container, url, $( response ).find( '.entry-content' ).html() );
+
+					},
+					error: function(){
+						window.location.href = url;
+					},
+					beforeSend: function() {
+
+						TweenMax.set( '.ajax-loader', {
+							css         : {
+								'display' : 'block'
+							},
+							onComplete  : function() {
+								TweenMax.to( '.ajax-loader', 0.5, {
+									alpha : 1
+								});
+							}
+						});
+
+
+
+					}
+				}).fail( function( jqXHR, textStatus ) {
+					if( textStatus === 'timeout' ) {
+						window.location.href = url;
+					}
+				});		
+				
+				
+			}
+			
+	
+			
+		}
+		
+		
+		
+		/*
+		 * A function to be called if the request succeeds
+		 *
+		 * @param  {string} dir       - Gets a value that indicates the amount that the mouse wheel has changed.
+		 * @param  {object} container - The instance returned from the request succeeds
+		 * @param  {string} url       - Current URL after click
+		 * @param  {string} content   - The data returned from the server
+		 * @return {void}             - The constructor.
+		 */
+		function ajaxSucceeds( dir, container, url, content ) {
+			
+			var oldContent = container.html();
+		
+			//Remove loader
+			TweenMax.to( '.ajax-loader', 0.5, {
+				alpha       : 0,
+				onComplete  : function() {
+					TweenMax.set( '.ajax-loader', {
+						css         : {
+							'display' : 'none'
+						}
+					});
+					
+
+					//The data returned from the server
+					container.html( content ).promise().done( function(){
+						
+						//Transition effect between two elements.
+						eleTransitionEff( dir, oldContent, content );
+	
+						// Modify the URL without reloading the page
+						if( history.pushState ) {
+							history.pushState( null, null, url );
+						}
+						else {
+							location.hash = url;
+						}
+
+						//Prevent multiple request on click
+						$( AJAXPageLinks ).data( 'request-running', false );	
+						
+						
+						
+					});
+					
+
+	
+					
+				},
+				delay       : 0.5
+			});
+			
+			
+		}
+		
+		
+		
+		/*
+		 * Transition effect between two elements.
+		 *
+		 * @param  {string} dir            - Gets a value that indicates the amount that the mouse wheel has changed.
+		 * @param  {string} oldContent     - A string of HTML to set as the content of matched old element.
+		 * @param  {string} newContent     - A string of HTML to set as the content of matched new element.
+		 * @return {void}                  - The constructor.
+		 */
+		function eleTransitionEff( dir, oldContent, newContent ) {
+			
+			var $originalItem   = $sectionsContainer.find( '> section' ),
+				$cloneItem      = $originalItem.clone();
+
+			
+			//Reset the original element
+			$originalItem.css( {
+				'z-index': 1
+			} );
+			
+
+			//Clone the last element to the first position
+			$cloneItem
+				.prependTo( $sectionsContainer )
+				.css( {
+				    'z-index': 2,
+				    'transform': 'translateY('+( ( dir == 'down' || dir === false ) ? windowHeight : -windowHeight )+'px)'
+				} )
+			    //Add the latest content to the new container
+			    .find( ajaxContainer )
+			    .html( newContent );
+
+			
+			$originalItem.first().find( ajaxContainer ).html( oldContent ).promise().done( function(){
+						
+
+				TweenMax.to( $originalItem.first(), animationTime/1000, {
+					y          : ( dir == 'down' || dir === false ) ? -windowHeight/2 : windowHeight/2,
+					ease       : Power2.easeOut
+				});		
+
+				
+
+				TweenMax.to( $cloneItem, animationTime/1000, {
+					y          : 0,
+					ease       : Power2.easeOut,
+					onComplete : function() {
+
+						//Remove duplicate elements
+						$originalItem
+							.first()
+							.remove();
+
+
+						// Apply the original scripts
+						applyOriginalSomeScripts();
+						
+						
+					}
+				});
+	
+			});
+			
+			
+		}
+		
+		
+		
+		/*
+		 * Apply some original scripts
+		 *
+		 * @return {void}  - The constructor.
+		 */
+		function applyOriginalSomeScripts() {
+			
+			App.commonHeight.pageLoaded(); //Common Height
+			App.parallax.documentReady($); //Parallax
+			
+			//Uix Shortcodes
+			if ( $.isFunction( $.uix_sc_init ) ) {
+				$.uix_sc_init();
+			}
+	
+			
+			
+		}
+
+		
+		/*
+		 * Apply all the original scripts
+		 *
+		 * @return {void}  - The constructor.
+		 */
+		
+		
+		function applyOriginalAllScripts() {
+			
+			
+			var scipts_pageLoaded    = App.components.pageLoaded,
+				scipts_documentReady = App.components.documentReady;
+			
+			
+			for ( var i = 0; i < scipts_pageLoaded.length; i++ ) {
+			     scipts_pageLoaded[i]();
+			}
+			for ( var j = 0; j < scipts_documentReady.length; j++ ) {
+			     scipts_documentReady[j]( $ );
+			}	
+		
+			//Uix Shortcodes
+			if ( $.isFunction( $.uix_sc_init ) ) {
+				$.uix_sc_init();
+			}
+			
+			
+		}
+		
+		
+		/* 
+		 ====================================================
+		 *  Mouse Wheel Method
+		 ====================================================
+		 */
+		$( document ).on( 'wheel', function( e ) { 
+
+			var dir;
+			//Gets a value that indicates the amount that the mouse wheel has changed.
+			var delta = e.originalEvent.deltaY;
+			
+			if( delta > 0 ) { 
+				//scroll down
+				dir = 'down';
+				
+			} else {
+				//scroll up
+				dir = 'up';
+			}
+			
+			scrollMoveInit( e, dir );
+			
+			//prevent page fom scrolling
+			return false;
+
+		});		
+		
+
+	
+		
+    };
+
+    App.ajaxPageLoader = {
+        documentReady : documentReady        
+    };
+
+    App.components.documentReady.push( documentReady );
+    return App;
+
+}( App, jQuery, window, document ) );
+
+
 
 /*!
  * VERSION: 0.6.1

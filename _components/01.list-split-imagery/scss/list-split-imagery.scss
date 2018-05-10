@@ -25,9 +25,7 @@ $list-split-imagery-text-gutter: 5vw;
 	}
 
 	.image-container {
-		background-size: cover;
-		background-repeat: no-repeat;
-		background-position: center;
+		@include background-cover();
 		opacity: 0;
 		transition: opacity 300ms cubic-bezier(.694,0,.335,1);
 	}

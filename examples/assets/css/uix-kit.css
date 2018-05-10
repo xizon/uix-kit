@@ -8,7 +8,7 @@
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
  * ## Version             :  1.5.3
- * ## Last Update         :  May 8, 2018
+ * ## Last Update         :  May 11, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -71,11 +71,11 @@
     3. Bullet List 
     4. Helper Classes 
     5. Typography 
-    6. Spacing 
-    7. Basic Layout Styles 
+    6. Basic Layout Styles 
+    7. Spacing 
     8. Navigation Area 
-    9. Brand 
-    10. Header Area 
+    9. Header Area 
+    10. Brand 
     11. Footer 
     12. Video 
     13. Back to Top 
@@ -95,12 +95,12 @@
     27. Advanced Content Slider 
     28. Advanced Slider (Special Effects) 
     29. Advanced Slider (Basic) 
-    30. Ajax Page Loader (Loading A Page via Ajax Into Div)  
-    31. Badges 
-    32. Breadcrumbs 
-    33. Button 
-    34. Author Card 
-    35. Counter 
+    30. Badges 
+    31. Breadcrumbs 
+    32. Button 
+    33. Author Card 
+    34. Counter 
+    35. Dotted Line 
     36. Dropdown Menu 
     37. Equal-width Divs 
     38. Features 
@@ -139,8 +139,9 @@
     71. Team Focus 
     72. Testimonials Carousel 
     73. Timeline 
-    74. ToolTip 
-    75. WordPress Core 
+    74. WordPress Core 
+    75. ToolTip 
+    76. Ajax Page Loader (Loading A Page via Ajax Into Div)  
 
 
 
@@ -1799,10 +1800,11 @@ section.site-google-map,
     display: block;
     width: 100%;
     height: 100%;
-    background-size: cover;
+    background-attachment: scroll;
+  /* @include background-cover(); */
     background-position: center center;
     background-repeat: no-repeat;
-    background-attachment: scroll;
+    background-size: cover;
 }
 
 .cover-play {
@@ -3820,71 +3822,6 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   <!-- Ajax Page Loader (Loading A Page via Ajax Into Div)  --> 
-/* ====================================================== */
-.ajax-loader {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    position: fixed;
-    z-index: 99999;
-    display: none;
-    opacity: 0;
-}
-
-.ajax-loader > span {
-    display: inline-block;
-    width: 200px;
-    height: 20px;
-    top: 50%;
-    left: 50%;
-    background-color: #ddd;
-    transform: translate(-50%, -50%);
-    position: absolute;
-    border-radius: 100px;
-}
-
-.ajax-loader > span::after {
-    border-radius: 100px;
-    content: "";
-    position: absolute;
-    background-color: #333;
-    left: 2px;
-    top: 2px;
-    bottom: 2px;
-    right: 180px;
-    animation: ajax-loader-slide 2s linear infinite;
-}
-
-@keyframes ajax-loader-slide {
-    0% {
-        right: 180px;
-        left: 2px;
-    }
-
-    5% {
-        left: 2px;
-    }
-
-    50% {
-        right: 2px;
-        left: 180px;
-    }
-
-    55% {
-        right: 2px;
-    }
-
-    100% {
-        right: 180px;
-        left: 2px;
-    }
-}
-
-/* ====================================================== 
    <!-- Badges --> 
 /* ====================================================== */
 .badges {
@@ -4332,6 +4269,90 @@ ul.entry-meta {
 /* ====================================================== */
 [data-counter-number] {
     padding: 2rem;
+}
+
+/* ====================================================== 
+   <!-- Dotted Line --> 
+/* ====================================================== */
+.dotted-line-s {
+    display: inline-block;
+    margin: 1.5rem;
+    height: 300px;
+    width: 1px;
+    background: #212121;
+    background: linear-gradient(to bottom, #212121 10%, rgba(255, 255, 255, 0) 0%);
+    background-position: left;
+    background-size: 1px 8px;
+    background-repeat: repeat-y;
+}
+
+.dotted-line-s.horizontal {
+    background: linear-gradient(to right, #212121 10%, rgba(255, 255, 255, 0) 0%);
+    background-position: top;
+    background-size: 8px 1px;
+    background-repeat: repeat-x;
+    width: 300px;
+    height: 1px;
+}
+
+.dotted-line-s.circle {
+    background: radial-gradient(circle, #212121 1.5px, transparent 2px);
+    background-position: top;
+    background-size: 12px 6px;
+}
+
+.dotted-line-m {
+    display: inline-block;
+    margin: 1.5rem;
+    height: 300px;
+    width: 3px;
+    background: #212121;
+    background: linear-gradient(to bottom, #212121 20%, rgba(255, 255, 255, 0) 0%);
+    background-position: left;
+    background-size: 3px 10px;
+    background-repeat: repeat-y;
+}
+
+.dotted-line-m.horizontal {
+    background: linear-gradient(to right, #212121 20%, rgba(255, 255, 255, 0) 0%);
+    background-position: top;
+    background-size: 10px 3px;
+    background-repeat: repeat-x;
+    width: 300px;
+    height: 3px;
+}
+
+.dotted-line-m.circle {
+    background: radial-gradient(circle, #212121 1.5px, transparent 2px);
+    background-position: top;
+    background-size: 12px 6px;
+}
+
+.dotted-line-l {
+    display: inline-block;
+    margin: 1.5rem;
+    height: 300px;
+    width: 6px;
+    background: #212121;
+    background: linear-gradient(to bottom, #212121 30%, rgba(255, 255, 255, 0) 0%);
+    background-position: left;
+    background-size: 6px 12px;
+    background-repeat: repeat-y;
+}
+
+.dotted-line-l.horizontal {
+    background: linear-gradient(to right, #212121 30%, rgba(255, 255, 255, 0) 0%);
+    background-position: top;
+    background-size: 12px 6px;
+    background-repeat: repeat-x;
+    width: 300px;
+    height: 6px;
+}
+
+.dotted-line-l.circle {
+    background: radial-gradient(circle, #212121 1.5px, transparent 2px);
+    background-position: top;
+    background-size: 12px 6px;
 }
 
 /* ====================================================== 
@@ -4992,8 +5013,10 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 }
 
 .custom-theme-flexslider.custom-primary-flexslider .custom-theme-slides > .item {
-    background-size: cover;
+  /* @include background-cover(); */
+    background-position: center center;
     background-repeat: no-repeat;
+    background-size: cover;
     position: relative;
 }
 
@@ -5105,8 +5128,10 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 }
 
 .custom-theme-flexslider.custom-parallax-flexslider .custom-theme-slides > .item {
-    background-size: cover;
+  /* @include background-cover(); */
+    background-position: center center;
     background-repeat: no-repeat;
+    background-size: cover;
     position: relative;
 }
 
@@ -5855,6 +5880,8 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
     visibility: hidden;
     pointer-events: none;
     transform: translateY(-15px);
+    overflow-y: auto;
+    max-height: 300px;
 }
 
 .custom-select-wrapper .custom-options:before {
@@ -6950,7 +6977,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 
 .custom-lightbox-overlay.no-fixed .lb-container.custom .html > .lb-box {
     width: 1000px;
-    max-height: none;
+    max-height: inherit;
 }
 
 @media all and (max-width: 768px) {
@@ -7594,9 +7621,10 @@ dl.list-side-by-side:after {
 }
 
 .list-split-imagery-container .image-container {
-    background-size: cover;
+  /* @include background-cover(); */
+    background-position: center center;
     background-repeat: no-repeat;
-    background-position: center;
+    background-size: cover;
     opacity: 0;
     transition: opacity 300ms cubic-bezier(0.694, 0, 0.335, 1);
 }
@@ -8408,6 +8436,7 @@ dl.list-side-by-side:after {
     position: relative;
     width: 100%;
     background-attachment: fixed;
+  /* @include background-cover(); */
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -8420,8 +8449,10 @@ dl.list-side-by-side:after {
 }
 
 .pure-bg-parallax {
-    background-size: cover;
+  /* @include background-cover(); */
+    background-position: center center;
     background-repeat: no-repeat;
+    background-size: cover;
 }
 
 /* ====================================================== 
@@ -11008,6 +11039,35 @@ dl.list-side-by-side:after {
 /* ====================================================== 
    <!-- Team Focus --> 
 /* ====================================================== */
+.custom-team-focus {
+    position: relative;
+}
+
+.custom-team-focus .item {
+    height: 250px;
+    margin: 0px;
+    background-color: #7CFC00;
+    float: left;
+    box-shadow: 0 0 0 4px  #333;
+    font-family: arial;
+    font-size: 1.2em;
+    text-align: center;
+    overflow: hidden;
+    padding-top: 20px;
+    cursor: pointer;
+    z-index: 4;
+}
+
+.custom-team-focus .item.active {
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    height: 100px;
+    background-color: #2E63C5;
+    transform: translateX(-50%);
+    z-index: 5;
+}
+
 /* ====================================================== 
    <!-- Testimonials Carousel -->  
 /* ====================================================== */
@@ -11858,4 +11918,84 @@ a img.aligncenter {
 /* other */
 .sticky {
     opacity: 1;
+}
+
+/* ====================================================== 
+   <!-- Ajax Page Loader (Loading A Page via Ajax Into Div)  --> 
+/* ====================================================== */
+.custom-fullpage-ajax-container {
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+.custom-fullpage-ajax-container > section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 1;
+}
+
+.ajax-loader {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: fixed;
+    z-index: 99999;
+    display: none;
+    opacity: 0;
+}
+
+.ajax-loader > span {
+    display: inline-block;
+    width: 200px;
+    height: 20px;
+    top: 50%;
+    left: 50%;
+    background-color: #ddd;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    border-radius: 100px;
+}
+
+.ajax-loader > span::after {
+    border-radius: 100px;
+    content: "";
+    position: absolute;
+    background-color: #333;
+    left: 2px;
+    top: 2px;
+    bottom: 2px;
+    right: 180px;
+    animation: ajax-loader-slide 2s linear infinite;
+}
+
+@keyframes ajax-loader-slide {
+    0% {
+        right: 180px;
+        left: 2px;
+    }
+
+    5% {
+        left: 2px;
+    }
+
+    50% {
+        right: 2px;
+        left: 180px;
+    }
+
+    55% {
+        right: 2px;
+    }
+
+    100% {
+        right: 180px;
+        left: 2px;
+    }
 }

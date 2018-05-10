@@ -498,8 +498,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 
 		> .item {
 
-			background-size: cover;
-			background-repeat: no-repeat;
+			@include background-cover();
 			position: relative;
 
 			.slides-info {
@@ -645,8 +644,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 
 		> .item {
 
-			background-size: cover;
-			background-repeat: no-repeat;
+			@include background-cover();
 			position: relative;
 			
 			img {

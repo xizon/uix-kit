@@ -90,9 +90,18 @@ App = ( function ( App, $, window, document ) {
 											
 											var name      = thisVal[ i ].name,
 												longitude = thisVal[ i ].longitude,
-												latitude  = thisVal[ i ].latitude;
+												latitude  = thisVal[ i ].latitude,
+												addresses = thisVal[ i ].addresses;
 												
-											optionsHtml += "<option data-longitude='"+longitude+"' data-latitude='"+latitude+"' value='"+name+"'>"+name+"</option>";
+											var addressesArr = '';
+											for ( var k = 0; k < addresses.length; k++ ) {
+												addressesArr += JSON.stringify( addresses[k] ) + ',';
+											}
+											
+											addressesArr = addressesArr.replace(/,\s*$/, '' );
+											
+											
+											optionsHtml += "<option data-addresses='["+addressesArr+"]' data-longitude='"+longitude+"' data-latitude='"+latitude+"' value='"+name+"'>"+name+"</option>";
 
 										}
 
@@ -138,10 +147,17 @@ App = ( function ( App, $, window, document ) {
 					var $this        = $( this[ this.selectedIndex ] ),
 						curVal       = $this.val(),
 						curLongitude = $this.data( 'longitude' ),
-						curLatitude  = $this.data( 'latitude' );
+						curLatitude  = $this.data( 'latitude' ),
+						curAddresses = $this.data( 'addresses' );
 
 					
-					//console.log( curVal + ' Longitude: ' + curLongitude + ' | Latitude: ' + curLatitude );
+					var curContents = '';
+					for ( var k = 0; k < curAddresses.length; k++ ) {
+						curContents += curAddresses[k].addr_name + ': ' + curAddresses[k].addr_longitude + ', ' + curAddresses[k].addr_latitude;
+					}
+					
+					
+					//console.log( curVal + ' Longitude: ' + curLongitude + ' | Latitude: ' + curLatitude + ' | Addresses: ' + curContents );
 					
 					return false;
 				

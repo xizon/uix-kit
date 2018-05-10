@@ -1,13 +1,17 @@
 # Changelog
 
 
-#### = 1.5.3 (May 7, 2018) =
+#### = 1.5.3 (May 10, 2018) =
 
+
+* New: Add a new module "Dotted Line".
 * New: Add a new module "Rotating Elements".
 * New: Add a new module "Ajax Page Loader".
 * New: Add a new module "Team Focus".
 * Tweak: Add touch effects to a one-page demos.
 * Tweak: Boost module "Advanced Content Slider" experience allows it to support mouse drag effects.
+* Tweak: Improve the performance and experience of some modules.
+
 
 
 

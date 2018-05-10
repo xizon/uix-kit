@@ -2,6 +2,21 @@
    <!-- Ajax Page Loader (Loading A Page via Ajax Into Div)  --> 
 /* ====================================================== */
 
+.custom-fullpage-ajax-container {
+	height: 100vh;
+	overflow: hidden;
+	position: relative;
+	
+	> section {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100vh;
+		z-index: 1;
+	}
+}
+
 .ajax-loader {
 	
 	width: 100%;

@@ -23,8 +23,8 @@ App = ( function ( App, $, window, document ) {
 			$navs               = $( AJAXPageLinks ).parent().parent().find( 'li' ),
 			total               = $navs.length,
 			$sectionsContainer  = $( '.custom-fullpage-ajax-container' ),
-			$ajaxContainer      = $( '#ajax-container' ),
-			curAjaxPageID       = $ajaxContainer.data( 'ajax-page-id' );
+			ajaxContainer       = '.ajax-container',
+			curAjaxPageID       = $( ajaxContainer ).data( 'ajax-page-id' );
 		
 		
 		//Prevent this module from loading in other pages
@@ -39,7 +39,7 @@ App = ( function ( App, $, window, document ) {
 	
 		//Activate the first item
 		if ( $( '.entry-content' ).length == 0 ) {
-			moveTo( $ajaxContainer, false, 'down', 0 );
+			moveTo( $( ajaxContainer ), false, 'down', 0 );
 		} else {
 			//Activate navigation from AJAX request
 			if ( typeof curAjaxPageID != typeof undefined ) $navs.eq( curAjaxPageID ).addClass( 'active' );
@@ -110,7 +110,12 @@ App = ( function ( App, $, window, document ) {
 
 			
 			//Click on this link element using an AJAX request
-			moveTo( $ajaxContainer, curURL, 'down', curIndex );
+			var dir = 'down';
+
+			if ( $navs.filter( '.active' ).find( '> a' ).attr( 'data-index' ) > curIndex ) {
+				dir = 'up';
+			}
+			moveTo( $( ajaxContainer ), curURL, dir, curIndex );
 			
 			
 			
@@ -138,17 +143,16 @@ App = ( function ( App, $, window, document ) {
 
 			if ( dir == 'down' ) {
 				//scroll down
-				moveTo( $ajaxContainer, false, 'down', false );
+				moveTo( $( ajaxContainer ), false, 'down', false );
 				
 			} else {
 				//scroll up
-				moveTo( $ajaxContainer, false, 'up', false );
+				moveTo( $( ajaxContainer ), false, 'up', false );
 				
 			  
 			}
 			lastAnimation = timeNow;
 		}
-		
 		
 		
 		/*
@@ -215,7 +219,7 @@ App = ( function ( App, $, window, document ) {
 					success  : function( response ) {
 						
 						//A function to be called if the request succeeds
-						ajaxSucceeds( container, url, $( response ).find( '.entry-content' ).html() );
+						ajaxSucceeds( dir, container, url, $( response ).find( '.entry-content' ).html() );
 
 					},
 					error: function(){
@@ -232,7 +236,7 @@ App = ( function ( App, $, window, document ) {
 									alpha : 1
 								});
 							}
-						});		
+						});
 
 
 
@@ -255,13 +259,15 @@ App = ( function ( App, $, window, document ) {
 		/*
 		 * A function to be called if the request succeeds
 		 *
+		 * @param  {string} dir       - Gets a value that indicates the amount that the mouse wheel has changed.
 		 * @param  {object} container - The instance returned from the request succeeds
 		 * @param  {string} url       - Current URL after click
 		 * @param  {string} content   - The data returned from the server
 		 * @return {void}             - The constructor.
 		 */
-		function ajaxSucceeds( container, url, content ) {
+		function ajaxSucceeds( dir, container, url, content ) {
 			
+			var oldContent = container.html();
 		
 			//Remove loader
 			TweenMax.to( '.ajax-loader', 0.5, {
@@ -273,36 +279,102 @@ App = ( function ( App, $, window, document ) {
 						}
 					});
 					
+
 					//The data returned from the server
-					container.html( content );
+					container.html( content ).promise().done( function(){
+						
+						//Transition effect between two elements.
+						eleTransitionEff( dir, oldContent, content );
+	
+						// Modify the URL without reloading the page
+						if( history.pushState ) {
+							history.pushState( null, null, url );
+						}
+						else {
+							location.hash = url;
+						}
+
+						//Prevent multiple request on click
+						$( AJAXPageLinks ).data( 'request-running', false );	
+						
+						
+						
+					});
+					
+
 	
 					
 				},
-				delay       : 1
+				delay       : 0.5
 			});
 			
 			
+		}
+		
+		
+		
+		/*
+		 * Transition effect between two elements.
+		 *
+		 * @param  {string} dir            - Gets a value that indicates the amount that the mouse wheel has changed.
+		 * @param  {string} oldContent     - A string of HTML to set as the content of matched old element.
+		 * @param  {string} newContent     - A string of HTML to set as the content of matched new element.
+		 * @return {void}                  - The constructor.
+		 */
+		function eleTransitionEff( dir, oldContent, newContent ) {
 			
-			
-			
-			//Change page title
-			if ( container.find( '#ajax-wptitle' ).length > 0 ) {
-				$( 'title' ).html( container.find( '#ajax-wptitle' ).data( 'ajax-wptitle' ) );
-			}
-			
-			// Apply the original scripts
-			applyOriginalSomeScripts();
+			var $originalItem   = $sectionsContainer.find( '> section' ),
+				$cloneItem      = $originalItem.clone();
 
-			// Modify the URL without reloading the page
-			if( history.pushState ) {
-				history.pushState( null, null, url );
-			}
-			else {
-				location.hash = url;
-			}
 			
-			//Prevent multiple request on click
-			$( AJAXPageLinks ).data( 'request-running', false );
+			//Reset the original element
+			$originalItem.css( {
+				'z-index': 1
+			} );
+			
+
+			//Clone the last element to the first position
+			$cloneItem
+				.prependTo( $sectionsContainer )
+				.css( {
+				    'z-index': 2,
+				    'transform': 'translateY('+( ( dir == 'down' || dir === false ) ? windowHeight : -windowHeight )+'px)'
+				} )
+			    //Add the latest content to the new container
+			    .find( ajaxContainer )
+			    .html( newContent );
+
+			
+			$originalItem.first().find( ajaxContainer ).html( oldContent ).promise().done( function(){
+						
+
+				TweenMax.to( $originalItem.first(), animationTime/1000, {
+					y          : ( dir == 'down' || dir === false ) ? -windowHeight/2 : windowHeight/2,
+					ease       : Power2.easeOut
+				});		
+
+				
+
+				TweenMax.to( $cloneItem, animationTime/1000, {
+					y          : 0,
+					ease       : Power2.easeOut,
+					onComplete : function() {
+
+						//Remove duplicate elements
+						$originalItem
+							.first()
+							.remove();
+
+
+						// Apply the original scripts
+						applyOriginalSomeScripts();
+						
+						
+					}
+				});
+	
+			});
+			
 			
 		}
 		
@@ -317,6 +389,13 @@ App = ( function ( App, $, window, document ) {
 			
 			App.commonHeight.pageLoaded(); //Common Height
 			App.parallax.documentReady($); //Parallax
+			
+			//Uix Shortcodes
+			if ( $.isFunction( $.uix_sc_init ) ) {
+				$.uix_sc_init();
+			}
+	
+			
 			
 		}
 
@@ -342,6 +421,10 @@ App = ( function ( App, $, window, document ) {
 			     scipts_documentReady[j]( $ );
 			}	
 		
+			//Uix Shortcodes
+			if ( $.isFunction( $.uix_sc_init ) ) {
+				$.uix_sc_init();
+			}
 			
 			
 		}

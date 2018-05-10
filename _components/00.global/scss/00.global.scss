@@ -244,8 +244,15 @@ $primary-bg-color      : transparent;
 	
 }
 
-
-
+//  Resize the background image to cover the entire container
+// ---------------------------
+//
+@mixin background-cover() {
+	/* @include background-cover(); */
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
 
 
 // Custom Scrollbar

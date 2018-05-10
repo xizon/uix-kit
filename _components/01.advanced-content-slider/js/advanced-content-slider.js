@@ -51,11 +51,13 @@ App = ( function ( App, $, window, document ) {
 					totalWidth                 = itemWidth*itemsTotal,
 					dataControlsPagination     = $this.data( 'controls-pagination' ),
 					dataControlsArrows         = $this.data( 'controls-arrows' ),
+					dataDraggable              = $this.data( 'draggable' ),
 					dataControlsPaginationAuto = false;
 
 
 				if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.custom-advanced-content-slider-sp-pagination';
 				if ( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.custom-advanced-content-slider-sp-arrows';
+				if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
 				
 				if ( $( dataControlsPagination ).html().length == 0 ) dataControlsPaginationAuto = true;
 
@@ -139,7 +141,8 @@ App = ( function ( App, $, window, document ) {
 				var $dragDropTrigger = $items;
 
 				//Make the cursor a move icon when a user hovers over an item
-				$dragDropTrigger.css( 'cursor', 'move' );
+				if ( dataDraggable ) $dragDropTrigger.css( 'cursor', 'move' );
+				
 
 
 				//Mouse event
@@ -158,8 +161,12 @@ App = ( function ( App, $, window, document ) {
 						$( this ).data( 'origin_mouse_y', parseInt( touches[0].pageY ) );
 
 					} else {
-						$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
-						$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );
+						
+						if ( dataDraggable ) {
+							$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
+							$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );	
+						}
+
 
 					}
 					
@@ -204,27 +211,32 @@ App = ( function ( App, $, window, document ) {
 
 
 						} else {
-							//right
-							if ( e.pageX > origin_mouse_x ) {
-								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
-							}
+							
+							if ( dataDraggable ) {
+								//right
+								if ( e.pageX > origin_mouse_x ) {
+									sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
+								}
 
-							//left
-							if ( e.pageX < origin_mouse_x ) {
-								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
-							}
+								//left
+								if ( e.pageX < origin_mouse_x ) {
+									sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
+								}
 
-							//down
-							if ( e.pageY > origin_mouse_y ) {
+								//down
+								if ( e.pageY > origin_mouse_y ) {
 
-							}
+								}
 
-							//up
-							if ( e.pageY < origin_mouse_y ) {
+								//up
+								if ( e.pageY < origin_mouse_y ) {
 
+								}	
+
+								$dragDropTrigger.off( 'mouseup.advancedContentSlider' );
+								
 							}	
 							
-							$dragDropTrigger.off( 'mouseup.advancedContentSlider' );
 							
 							
 						}
