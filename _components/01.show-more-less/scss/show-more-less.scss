@@ -25,7 +25,8 @@
 	}
 
 	&.show {
-		max-height: 100rem;
+		max-height: 100rem !important; 
+		/* If the specified maximum height is affected by the container, priority is required */
 
 		&:after {
 			display: none;
