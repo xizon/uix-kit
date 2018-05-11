@@ -24,59 +24,58 @@
 	
 	
 	1. Header 
-    2. Back to Top 
-    3. Loader 
+    2. Loader 
+    3. Back to Top 
     4. Get all custom attributes of an element like "data-*" 
     5. Navigation 
     6. Videos 
     7. Common Height 
-    8. Dropdown Categories 
-    9. Mega Menu 
+    8. Mega Menu 
+    9. Dropdown Categories 
     10. Pagination 
     11. Specify a background image 
-    12. 3D Pages 
-    13. Accordion 
-    14. Accordion Background Images 
-    15. Advanced Content Slider 
-    16. Advanced Slider (Special Effects) 
-    17. Advanced Slider (Basic) 
-    18. Counter 
-    19. Dynamic Drop Down List from JSON 
-    20. Flexslider 
-    21. Form Progress 
+    12. 3D Background 
+    13. 3D Pages 
+    14. Accordion 
+    15. Accordion Background Images 
+    16. Advanced Content Slider 
+    17. Advanced Slider (Special Effects) 
+    18. Advanced Slider (Basic) 
+    19. Counter 
+    20. Dynamic Drop Down List from JSON 
+    21. Flexslider 
     22. Form 
-    23. Gallery 
-    24. Image Shapes 
-    25. Custom Core Scripts & Stylesheets 
-    26. Custom Lightbox 
-    27. Bulleted List 
-    28. Posts List With Ajax 
-    29. Fullwidth List of Split 
-    30. Mobile Menu 
-    31. Modal Dialog 
-    32. Mousewheel Interaction 
-    33. Multiple Items Carousel 
-    34. Full Page/One Page Transition 
-    35. Full Page/One Page Transition 2 
-    36. Parallax 
-    37. Periodical Scroll 
-    38. Pricing 
-    39. Progress Bar 
-    40. Retina Graphics for Website 
-    41. Rotating Elements 
-    42. Scroll Reveal 
-    43. Show More Less 
-    44. Smooth Scrolling When Clicking An Anchor Link 
-    45. Source Code 
-    46. Sticky Elements 
-    47. Tabs 
-    48. Team Focus 
-    49. Testimonials Carousel 
-    50. Text effect 
-    51. Timeline 
-    52. Ajax Page Loader (Loading A Page via Ajax Into Div)  
-    53. GSAP Plugins 
-    54. Three.js Plugins 
+    23. Form Progress 
+    24. Gallery 
+    25. Image Shapes 
+    26. Custom Core Scripts & Stylesheets 
+    27. Custom Lightbox 
+    28. Bulleted List 
+    29. Posts List With Ajax 
+    30. Fullwidth List of Split 
+    31. Mobile Menu 
+    32. Modal Dialog 
+    33. Mousewheel Interaction 
+    34. Multiple Items Carousel 
+    35. Full Page/One Page Transition 
+    36. Full Page/One Page Transition 2 
+    37. Parallax 
+    38. Periodical Scroll 
+    39. Pricing 
+    40. Progress Bar 
+    41. Retina Graphics for Website 
+    42. Rotating Elements 
+    43. Scroll Reveal 
+    44. Show More Less 
+    45. Smooth Scrolling When Clicking An Anchor Link 
+    46. Source Code 
+    47. Sticky Elements 
+    48. Tabs 
+    49. Team Focus 
+    50. Testimonials Carousel 
+    51. Text effect 
+    52. Timeline 
+    53. Ajax Page Loader (Loading A Page via Ajax Into Div)  
 
 
 */
@@ -1380,6 +1379,105 @@ App = ( function ( App, $, window, document ) {
     return App;
 
 }( App, jQuery, window, document ) );
+
+
+/* 
+ *************************************
+ * <!-- 3D Background -->
+ *************************************
+ */
+App = ( function ( App, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+
+		var $window                   = $( window ),
+			windowWidth               = $window.width(),
+			windowHeight              = $window.height();
+		
+		
+		
+		//grab each 3dAnimate element and pass it into the animate function along with the config data
+		$( '[data-3dAnimate]' ).each( function( index, element ) {
+			var a = $( element ).data( '3danimate' );
+			animate3dElement( a[0], a[1], element );
+		});
+		
+
+		
+		/*
+		 * Sets an animation for each element
+		 *
+		 * @param  {number} base           - Base offset value.
+		 * @param  {number} multiple       - The power of target number.
+		 * @param  {object} element        - An HTML element.
+		 * @return {void}                  - The constructor.
+		 */
+		function animate3dElement( base, multiple, element ) {
+
+			//get the specs of the element
+			var divOffset = $( element ).offset(),
+				divTop    = divOffset.top,
+				divLeft   = divOffset.left,
+				divWidth  = $( element ).innerWidth(),
+				divHeight = $( element ).innerHeight();
+
+	
+			//set an onmousemove event on the element
+			$( element ).on( 'mousemove touchmove', function( e ){
+
+				var pctX, 
+					pctY,
+					touches = e.originalEvent.touches;
+			
+				if ( touches && touches.length ) {
+
+					pctX = ( touches[0].pageX - divLeft )/divWidth;
+					pctY = ( touches[0].pageY - divTop )/divHeight;
+
+				} else {
+
+					pctX = ( e.pageX - divLeft )/divWidth;
+					pctY = ( e.pageY - divTop )/divHeight;
+				}
+
+
+
+				$( this ).children().each( function( index, element ) {
+					var x         = pctX * ( base*Math.pow( multiple, index ) ),
+						y         = pctY * ( base*Math.pow( multiple, index ) ),
+						z         = 0,
+						deg       = pctY * ( 180 / Math.PI ),
+						rotateDeg = parseFloat( deg - 35 );
+				
+					
+					$( element ).css( 'transform', 'translate('+ x +'px ,'+ y +'px) rotate3d( -1, 1, 0, '+ rotateDeg +'deg )' );
+					
+					
+					
+				});
+
+			});
+
+		}
+		
+    };
+
+    App.threeDimensionalBackground = {
+        documentReady : documentReady        
+    };
+
+    App.components.documentReady.push( documentReady );
+    return App;
+
+}( App, jQuery, window, document ) );
+
+
+
+
+
+
+
 
 
 /* 
@@ -13536,7 +13634,7 @@ App = ( function ( App, $, window, document ) {
 						mouseX = pointerEvent.pageX;
 						mouseY = pointerEvent.pageY;
 					} else {
-						mouseX = e.clientX,
+						mouseX = e.clientX;
 						mouseY = e.clientY;
 					}
 
@@ -14184,6 +14282,10 @@ App = ( function ( App, $, window, document ) {
 			if( typeof targetWidth === typeof undefined ) {
 				targetWidth = 80;
 			}	
+			
+			if( typeof closeBtn === typeof undefined ) {
+				closeBtn = '.close';
+			}
 		
 			total = $( el ).length;
 		
@@ -14193,11 +14295,13 @@ App = ( function ( App, $, window, document ) {
 			});
 			
 			
+			
 
+			//Create item hover overlay effects
 			$( el ).on( 'mouseenter', function() {
 
 				var $cur      = $( this ),
-					$neighbor = $cur.siblings(); //Get the siblings of each element in the set of matched elements
+					$neighbor = $cur.siblings().not( '.active' ); //Get the siblings of each element in the set of matched elements
 
 				TweenMax.to( $cur, 0.3, {
 					width: hoverWidth + '%'
@@ -14205,10 +14309,12 @@ App = ( function ( App, $, window, document ) {
 
 				TweenMax.to( $neighbor, 0.3, {
 					width: ( 100 - hoverWidth )/( total - 1 ) + '%'
-				})
+				});
 
-			} )
+			} );
 
+			
+			//Display the target item
 			$( document ).on( 'click', el, function( e ) {
 				e.preventDefault();
 
@@ -14229,30 +14335,37 @@ App = ( function ( App, $, window, document ) {
 								.addClass( 'active' );
 
 						}
-					})
+					});
 
 					TweenMax.to( el, 0.3, {
 						alpha      : 1
-					})	
+					});
 
 
 					TweenMax.to( $cur, 0.3, {
 						alpha : 0
-					})
-
+					});
+					
+					TweenMax.to( $neighbor, 0.3, {
+						alpha : 0.3
+					});
 				}
 
 
 
 			});
 
-			$( document ).on( 'click', el + '.active', function( e ) {
+			
+			//Close the actived item
+			$( document ).on( 'click', el + '.active, ' + closeBtn, function( e ) {
 				e.preventDefault();
 
+
+				
 				TweenMax.to( el, 0.3, {
 					width : 100/total + '%',
 					ease  : Back.easeOut
-				})
+				});
 
 				TweenMax.to( el + '.active', 0.3, {
 					alpha : 0,
@@ -14261,9 +14374,9 @@ App = ( function ( App, $, window, document ) {
 						$( el + '.active' ).remove();
 						TweenMax.to( el, 0.3, {
 							alpha : 1
-						})	
+						});
 					}
-				})
+				});
 
 
 
@@ -14681,6 +14794,7 @@ App = ( function ( App, $, window, document ) {
 		var lastAnimation       = 0,
 			quietPeriod         = 500, //Do not change it
 			animationTime       = 1000,//According to page transition animation changes
+			loaderRemoveDelay   = 500,
 			AJAXPageLinks       = '[data-ajax-page]',
 			$navs               = $( AJAXPageLinks ).parent().parent().find( 'li' ),
 			total               = $navs.length,
@@ -14784,7 +14898,7 @@ App = ( function ( App, $, window, document ) {
 			return false;
 			
 			
-		})
+		});
 		
 		
 		/*
@@ -14967,7 +15081,7 @@ App = ( function ( App, $, window, document ) {
 	
 					
 				},
-				delay       : 0.5
+				delay       : loaderRemoveDelay/1000
 			});
 			
 			
@@ -22495,5 +22609,7 @@ Object.defineProperties( THREE.OrbitControls.prototype, {
 /* 
  *************************************
  * <!-- Three.js Plugins -->
+ *************************************
+ */s -->
  *************************************
  */

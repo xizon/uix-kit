@@ -210,6 +210,11 @@ $primary-bg-color      : transparent;
 	
 }
 
+@mixin outer-shadow-large() {
+	/* @include outer-shadow-large(); */
+	box-shadow: 0 31px 32px 0 #cbdfee;
+	
+}
 
 
 // Text wWith Ellipsis

@@ -28,7 +28,7 @@ App = ( function ( App, $, window, document ) {
 						mouseX = pointerEvent.pageX;
 						mouseY = pointerEvent.pageY;
 					} else {
-						mouseX = e.clientX,
+						mouseX = e.clientX;
 						mouseY = e.clientY;
 					}
 

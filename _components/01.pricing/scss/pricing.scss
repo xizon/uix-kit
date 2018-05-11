@@ -55,7 +55,7 @@
 		transition: .1s ease-in-out;
 		
 		&:hover {
-			box-shadow: 0 31px 32px 0 #cbdfee;
+			@include outer-shadow-large();
 		}
 
 	}

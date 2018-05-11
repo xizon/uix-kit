@@ -19,6 +19,7 @@ App = ( function ( App, $, window, document ) {
 		var lastAnimation       = 0,
 			quietPeriod         = 500, //Do not change it
 			animationTime       = 1000,//According to page transition animation changes
+			loaderRemoveDelay   = 500,
 			AJAXPageLinks       = '[data-ajax-page]',
 			$navs               = $( AJAXPageLinks ).parent().parent().find( 'li' ),
 			total               = $navs.length,
@@ -122,7 +123,7 @@ App = ( function ( App, $, window, document ) {
 			return false;
 			
 			
-		})
+		});
 		
 		
 		/*
@@ -305,7 +306,7 @@ App = ( function ( App, $, window, document ) {
 	
 					
 				},
-				delay       : 0.5
+				delay       : loaderRemoveDelay/1000
 			});
 			
 			

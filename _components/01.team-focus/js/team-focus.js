@@ -31,6 +31,10 @@ App = ( function ( App, $, window, document ) {
 			if( typeof targetWidth === typeof undefined ) {
 				targetWidth = 80;
 			}	
+			
+			if( typeof closeBtn === typeof undefined ) {
+				closeBtn = '.close';
+			}
 		
 			total = $( el ).length;
 		
@@ -40,11 +44,13 @@ App = ( function ( App, $, window, document ) {
 			});
 			
 			
+			
 
+			//Create item hover overlay effects
 			$( el ).on( 'mouseenter', function() {
 
 				var $cur      = $( this ),
-					$neighbor = $cur.siblings(); //Get the siblings of each element in the set of matched elements
+					$neighbor = $cur.siblings().not( '.active' ); //Get the siblings of each element in the set of matched elements
 
 				TweenMax.to( $cur, 0.3, {
 					width: hoverWidth + '%'
@@ -52,10 +58,12 @@ App = ( function ( App, $, window, document ) {
 
 				TweenMax.to( $neighbor, 0.3, {
 					width: ( 100 - hoverWidth )/( total - 1 ) + '%'
-				})
+				});
 
-			} )
+			} );
 
+			
+			//Display the target item
 			$( document ).on( 'click', el, function( e ) {
 				e.preventDefault();
 
@@ -76,30 +84,37 @@ App = ( function ( App, $, window, document ) {
 								.addClass( 'active' );
 
 						}
-					})
+					});
 
 					TweenMax.to( el, 0.3, {
 						alpha      : 1
-					})	
+					});
 
 
 					TweenMax.to( $cur, 0.3, {
 						alpha : 0
-					})
-
+					});
+					
+					TweenMax.to( $neighbor, 0.3, {
+						alpha : 0.3
+					});
 				}
 
 
 
 			});
 
-			$( document ).on( 'click', el + '.active', function( e ) {
+			
+			//Close the actived item
+			$( document ).on( 'click', el + '.active, ' + closeBtn, function( e ) {
 				e.preventDefault();
 
+
+				
 				TweenMax.to( el, 0.3, {
 					width : 100/total + '%',
 					ease  : Back.easeOut
-				})
+				});
 
 				TweenMax.to( el + '.active', 0.3, {
 					alpha : 0,
@@ -108,9 +123,9 @@ App = ( function ( App, $, window, document ) {
 						$( el + '.active' ).remove();
 						TweenMax.to( el, 0.3, {
 							alpha : 1
-						})	
+						});
 					}
-				})
+				});
 
 
 

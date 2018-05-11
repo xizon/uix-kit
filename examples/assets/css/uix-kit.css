@@ -71,8 +71,8 @@
     3. Bullet List 
     4. Helper Classes 
     5. Typography 
-    6. Basic Layout Styles 
-    7. Spacing 
+    6. Spacing 
+    7. Basic Layout Styles 
     8. Navigation Area 
     9. Header Area 
     10. Brand 
@@ -139,8 +139,8 @@
     71. Team Focus 
     72. Testimonials Carousel 
     73. Timeline 
-    74. WordPress Core 
-    75. ToolTip 
+    74. ToolTip 
+    75. WordPress Core 
     76. Ajax Page Loader (Loading A Page via Ajax Into Div)  
 
 
@@ -8545,6 +8545,7 @@ dl.list-side-by-side:after {
 }
 
 .custom-price .border:hover {
+  /* @include outer-shadow-large(); */
     box-shadow: 0 31px 32px 0 #cbdfee;
 }
 
@@ -11044,28 +11045,30 @@ dl.list-side-by-side:after {
 }
 
 .custom-team-focus .item {
-    height: 250px;
-    margin: 0px;
-    background-color: #7CFC00;
     float: left;
-    box-shadow: 0 0 0 4px  #333;
-    font-family: arial;
-    font-size: 1.2em;
-    text-align: center;
-    overflow: hidden;
-    padding-top: 20px;
     cursor: pointer;
     z-index: 4;
+    text-align: center;
+}
+
+.custom-team-focus .item img {
+    width: 90%;
+    border-radius: 100%;
 }
 
 .custom-team-focus .item.active {
     position: absolute;
-    top: 200px;
+    top: 0;
     left: 50%;
     height: 100px;
-    background-color: #2E63C5;
     transform: translateX(-50%);
     z-index: 5;
+}
+
+.custom-team-focus .item.active img {
+    transform: scale(1.3);
+  /* @include outer-shadow-large(); */
+    box-shadow: 0 31px 32px 0 #cbdfee;
 }
 
 /* ====================================================== 
