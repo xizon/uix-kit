@@ -90,58 +90,59 @@
     22. Comments 
     23. 3rd Party Plugins 
     24. Onepage Menu 
-    25. Accordion 
-    26. Accordion Background Images 
-    27. Advanced Content Slider 
-    28. Advanced Slider (Special Effects) 
-    29. Advanced Slider (Basic) 
-    30. Badges 
-    31. Breadcrumbs 
-    32. Button 
-    33. Author Card 
-    34. Counter 
-    35. Dotted Line 
-    36. Dropdown Menu 
-    37. Equal-width Divs 
-    38. Features 
-    39. Flexslider 
-    40. Footer Templates 
-    41. Form 
-    42. Form Progress 
-    43. Gallery 
-    44. Header Pinlines 
-    45. Image Shapes 
-    46. Custom Core Scripts & Stylesheets 
-    47. Cutom Light Box 
-    48. Brands List 
-    49. Bulleted List 
-    50. Maintain Aspect Ratio List 
-    51. List of Posts 
+    25. 3D Background 
+    26. Accordion 
+    27. Accordion Background Images 
+    28. Advanced Content Slider 
+    29. Advanced Slider (Special Effects) 
+    30. Advanced Slider (Basic) 
+    31. Badges 
+    32. Breadcrumbs 
+    33. Button 
+    34. Author Card 
+    35. Counter 
+    36. Dotted Line 
+    37. Dropdown Menu 
+    38. Equal-width Divs 
+    39. Features 
+    40. Flexslider 
+    41. Footer Templates 
+    42. Form 
+    43. Form Progress 
+    44. Gallery 
+    45. Header Pinlines 
+    46. Image Shapes 
+    47. Custom Core Scripts & Stylesheets 
+    48. Cutom Light Box 
+    49. Brands List 
+    50. Bulleted List 
+    51. Maintain Aspect Ratio List 
     52. List of Split Posts 
-    53. Side by Side List 
-    54. Side by Side List With Photo 
-    55. Fullwidth List of Split 2 
-    56. Fullwidth List of Split 
-    57. Mobile Menu 
-    58. Modal Dialog 
-    59. Mouse Animation Scroll 
-    60. Multiple Items Carousel 
-    61. Parallax 
-    62. Periodical Scroll 
-    63. Pricing 
-    64. Progress Bar 
-    65. Services 
-    66. Show More Less 
-    67. Single Post 
-    68. Source Code 
-    69. Table Series 
-    70. Tabs 
-    71. Team Focus 
-    72. Testimonials Carousel 
-    73. Timeline 
-    74. ToolTip 
-    75. WordPress Core 
-    76. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    53. List of Posts 
+    54. Side by Side List 
+    55. Side by Side List With Photo 
+    56. Fullwidth List of Split 2 
+    57. Fullwidth List of Split 
+    58. Mobile Menu 
+    59. Modal Dialog 
+    60. Mouse Animation Scroll 
+    61. Multiple Items Carousel 
+    62. Parallax 
+    63. Periodical Scroll 
+    64. Pricing 
+    65. Progress Bar 
+    66. Services 
+    67. Show More Less 
+    68. Single Post 
+    69. Source Code 
+    70. Table Series 
+    71. Tabs 
+    72. Team Focus 
+    73. Testimonials Carousel 
+    74. Timeline 
+    75. ToolTip 
+    76. WordPress Core 
+    77. Ajax Page Loader (Loading A Page via Ajax Into Div)  
 
 
 
@@ -3192,6 +3193,14 @@ ul.entry-meta {
 
 .custom-sidefixed-menu li.active span {
     font-weight: bold;
+}
+
+/* ====================================================== 
+    <!-- 3D Background -->  
+/* ====================================================== */
+.html3D-bg {
+  /* Require more than 500, compatible firefox height */
+    perspective: 700px;
 }
 
 /* ====================================================== 
@@ -7408,40 +7417,6 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 }
 
 /* ====================================================== 
-   <!-- Side by Side List --> 
-/* ====================================================== */
-dl.list-side-by-side {
-    width: 100%;
-  /* adjust the width; make sure the total of both is 100% */
-    font-size: 0.875rem;
-}
-
-dl.list-side-by-side dt {
-    float: left;
-    clear: left;
-    width: 100px;
-    padding: 5px 0;
-    margin: 0;
-    font-weight: 600;
-    text-align: right;
-}
-
-dl.list-side-by-side dd {
-    float: left;
-    width: calc(100% - 100px);
-    padding: 5px 0;
-    margin: 0;
-    text-align: left;
-    padding-left: 1rem;
-}
-
-dl.list-side-by-side:after {
-    content: '';
-    display: table;
-    clear: both;
-}
-
-/* ====================================================== 
    <!-- Side by Side List With Photo --> 
 /* ====================================================== */
 .list-side-by-side-img .item {
@@ -7500,6 +7475,40 @@ dl.list-side-by-side:after {
         padding-left: 0;
         width: 100%;
     }
+}
+
+/* ====================================================== 
+   <!-- Side by Side List --> 
+/* ====================================================== */
+dl.list-side-by-side {
+    width: 100%;
+  /* adjust the width; make sure the total of both is 100% */
+    font-size: 0.875rem;
+}
+
+dl.list-side-by-side dt {
+    float: left;
+    clear: left;
+    width: 100px;
+    padding: 5px 0;
+    margin: 0;
+    font-weight: 600;
+    text-align: right;
+}
+
+dl.list-side-by-side dd {
+    float: left;
+    width: calc(100% - 100px);
+    padding: 5px 0;
+    margin: 0;
+    text-align: left;
+    padding-left: 1rem;
+}
+
+dl.list-side-by-side:after {
+    content: '';
+    display: table;
+    clear: both;
 }
 
 /* ====================================================== 

@@ -62,8 +62,8 @@
     37. Parallax 
     38. Periodical Scroll 
     39. Pricing 
-    40. Progress Bar 
-    41. Retina Graphics for Website 
+    40. Retina Graphics for Website 
+    41. Progress Bar 
     42. Rotating Elements 
     43. Scroll Reveal 
     44. Show More Less 
@@ -76,6 +76,8 @@
     51. Text effect 
     52. Timeline 
     53. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    54. GSAP Plugins 
+    55. Three.js Plugins 
 
 
 */
@@ -1398,8 +1400,8 @@ App = ( function ( App, $, window, document ) {
 		
 		
 		//grab each 3dAnimate element and pass it into the animate function along with the config data
-		$( '[data-3dAnimate]' ).each( function( index, element ) {
-			var a = $( element ).data( '3danimate' );
+		$( '[data-3d-animate]' ).each( function( index, element ) {
+			var a = $( element ).data( '3d-animate' );
 			animate3dElement( a[0], a[1], element );
 		});
 		
@@ -1422,6 +1424,7 @@ App = ( function ( App, $, window, document ) {
 				divWidth  = $( element ).innerWidth(),
 				divHeight = $( element ).innerHeight();
 
+			
 	
 			//set an onmousemove event on the element
 			$( element ).on( 'mousemove touchmove', function( e ){
@@ -10756,6 +10759,74 @@ App = ( function ( App, $, window, document ) {
 
 /* 
  *************************************
+ * <!-- Fullwidth List of Split -->
+ *************************************
+ */
+App = ( function ( App, $, window, document ) {
+    'use strict';
+   
+   
+    var pageLoaded = function() {
+		
+		var $window      = $( window ),
+			windowWidth  = $window.width(),
+			windowHeight = $window.height();
+		
+		
+		fullwidthListSplitInit( windowWidth );
+		
+		$window.on( 'resize', function() {
+			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+			if ( $window.width() != windowWidth ) {
+
+				// Update the window width for next time
+				windowWidth = $window.width();
+
+				// Do stuff here
+				fullwidthListSplitInit( windowWidth );
+		
+
+			}
+		});
+		
+		
+		
+		function fullwidthListSplitInit( w ) {
+			
+			
+			$( '.list-split-imagery-container' ).each( function() {
+				var imgH = $( this ).find( '.imagery-background img' ).height();
+
+				if ( imgH > 0 ) {
+					$( this ).find( '.feature-text, .feature-imagery' ).css( 'height', imgH + 'px' );
+				}
+
+				if ( w <= 768 ) {
+					$( this ).find( '.feature-text, .feature-imagery' ).css( 'height', 'auto' );
+				}
+
+			});	
+		}
+		
+
+		
+		
+	};
+		
+    App.fullwidthListSplit = {
+        pageLoaded : pageLoaded        
+    };
+
+    App.components.pageLoaded.push( pageLoaded );
+    return App;
+
+}( App, jQuery, window, document ) );
+
+
+
+
+/* 
+ *************************************
  * <!-- Posts List With Ajax -->
  *************************************
  */
@@ -11240,74 +11311,6 @@ App = ( function ( App, $, window, document ) {
     };
 
     App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
-
-
-
-
-/* 
- *************************************
- * <!-- Fullwidth List of Split -->
- *************************************
- */
-App = ( function ( App, $, window, document ) {
-    'use strict';
-   
-   
-    var pageLoaded = function() {
-		
-		var $window      = $( window ),
-			windowWidth  = $window.width(),
-			windowHeight = $window.height();
-		
-		
-		fullwidthListSplitInit( windowWidth );
-		
-		$window.on( 'resize', function() {
-			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( $window.width() != windowWidth ) {
-
-				// Update the window width for next time
-				windowWidth = $window.width();
-
-				// Do stuff here
-				fullwidthListSplitInit( windowWidth );
-		
-
-			}
-		});
-		
-		
-		
-		function fullwidthListSplitInit( w ) {
-			
-			
-			$( '.list-split-imagery-container' ).each( function() {
-				var imgH = $( this ).find( '.imagery-background img' ).height();
-
-				if ( imgH > 0 ) {
-					$( this ).find( '.feature-text, .feature-imagery' ).css( 'height', imgH + 'px' );
-				}
-
-				if ( w <= 768 ) {
-					$( this ).find( '.feature-text, .feature-imagery' ).css( 'height', 'auto' );
-				}
-
-			});	
-		}
-		
-
-		
-		
-	};
-		
-    App.fullwidthListSplit = {
-        pageLoaded : pageLoaded        
-    };
-
-    App.components.pageLoaded.push( pageLoaded );
     return App;
 
 }( App, jQuery, window, document ) );
@@ -22609,7 +22612,5 @@ Object.defineProperties( THREE.OrbitControls.prototype, {
 /* 
  *************************************
  * <!-- Three.js Plugins -->
- *************************************
- */s -->
  *************************************
  */

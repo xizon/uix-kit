@@ -15,8 +15,8 @@ App = ( function ( App, $, window, document ) {
 		
 		
 		//grab each 3dAnimate element and pass it into the animate function along with the config data
-		$( '[data-3dAnimate]' ).each( function( index, element ) {
-			var a = $( element ).data( '3danimate' );
+		$( '[data-3d-animate]' ).each( function( index, element ) {
+			var a = $( element ).data( '3d-animate' );
 			animate3dElement( a[0], a[1], element );
 		});
 		
@@ -39,6 +39,7 @@ App = ( function ( App, $, window, document ) {
 				divWidth  = $( element ).innerWidth(),
 				divHeight = $( element ).innerHeight();
 
+			
 	
 			//set an onmousemove event on the element
 			$( element ).on( 'mousemove touchmove', function( e ){

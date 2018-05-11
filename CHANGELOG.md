@@ -1,7 +1,7 @@
 # Changelog
 
 
-#### = 1.5.3 (May 10, 2018) =
+#### = 1.5.4 (May 10, 2018) =
 
 * New: Add a new module "3D Background".
 * New: Add a new module "Dotted Line".
