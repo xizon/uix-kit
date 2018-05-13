@@ -1,5 +1,10 @@
 # Changelog
 
+#### = 1.5.5 (May 13, 2018) =
+
+* Tweak: Extend the loading method when loading a page.
+
+
 
 #### = 1.5.4 (May 10, 2018) =
 

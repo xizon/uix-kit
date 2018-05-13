@@ -1,7 +1,14 @@
 /* ====================================================== 
    <!-- Loader -->                                               
 /* ====================================================== */
-.loader {
+.loader-progress {
+	text-align: center;
+	font-size: 0.75rem;
+	transform: translate(10px,-10px);
+}
+
+.loader,
+.loader-progress {
 	bottom: 0;
 	left: 0;
 	width: 65px;
@@ -15,6 +22,7 @@
 	align-items: center;
 	justify-content: center;
 	z-index: 99999;
+
 
 	svg {
 	    width:  65px;

@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.5.3
- * ## Last Update         :  May 11, 2018
+ * ## Version             :  1.5.5
+ * ## Last Update         :  May 13, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -26,8 +26,8 @@
 	1. Header 
     2. Loader 
     3. Back to Top 
-    4. Get all custom attributes of an element like "data-*" 
-    5. Navigation 
+    4. Navigation 
+    5. Get all custom attributes of an element like "data-*" 
     6. Videos 
     7. Common Height 
     8. Mega Menu 
@@ -62,8 +62,8 @@
     37. Parallax 
     38. Periodical Scroll 
     39. Pricing 
-    40. Retina Graphics for Website 
-    41. Progress Bar 
+    40. Progress Bar 
+    41. Retina Graphics for Website 
     42. Rotating Elements 
     43. Scroll Reveal 
     44. Show More Less 
@@ -90,9 +90,11 @@ var templateUrl = AppRootPath.templateUrl,
 
 //Determine whether it is a special browser
 var browser = {
+	isPC : !navigator.userAgent.match(/(iPhone|iPod|Android|ios|Mobile)/i),
 	isSafari : !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/), /*Test to 9, 10. */
 	isIE     : !!window.ActiveXObject || "ActiveXObject" in window     /*Test to 6 ~ 11 (not edge) */
 };
+
 
 
 //Core scripts for current site
@@ -220,7 +222,6 @@ App = ( function ( App, $, window, document ) {
 
 
 		
-
 /* 
  *************************************
  * <!-- Loader -->
@@ -229,24 +230,77 @@ App = ( function ( App, $, window, document ) {
 App = ( function ( App, $, window, document ) {
     'use strict';
     
-    var pageLoaded = function() {
-		// Remove loader
-		$( '.loader' ).fadeOut();
+    var documentReady = function( $ ) {
+	
+		
+		
+		// Disable devices scaling
+		//-------------------------------------	
+		document.addEventListener('touchstart',function (event) {
+			if(event.touches.length>1){
+				event.preventDefault();
+			}
+		});
+		
+		var lastTouchEnd=0;
+		document.addEventListener('touchend',function (event) {
+			var now=(new Date()).getTime();
+			if( now-lastTouchEnd <= 300 ){
+				event.preventDefault();
+			}
+			lastTouchEnd=now;
+		},false);
+		
+		
+		
+		// Loader Process
+		//-------------------------------------	
+		$( 'body' ).waitForImages().progress( function( loaded, count, success ) {
+			
+			var per = parseInt( loaded/(count-1) * 100 );
+			
+			if ( $( 'img' ).length <= 1 ) {
+				per = 100;
+			}
+			
+			if ( isNaN( per ) ) per = 100;
+			
+			$( '.loader-progress span' ).text( per + '%' );
+			
+			
+		}).done( function() {
+			
+			//Event after loading is complete
+			
+			
+			// Remove loader
+			TweenMax.to( '.loader, .loader-progress', 0.5, {
+				css: {
+					opacity : 0,
+					display : 'none'
+				}
+			});
+							
+			
+			
+
+		});
+		
+		
 		
     };
 
     App.loader = {
-        pageLoaded : pageLoaded        
+        documentReady : documentReady        
     };
 
-    App.components.pageLoaded.push( pageLoaded );
+    App.components.documentReady.push( documentReady );
     return App;
 
 }( App, jQuery, window, document ) );
 
 
-
-		
+			
 /* 
  *************************************
  * <!-- Back to Top -->
@@ -10759,74 +10813,6 @@ App = ( function ( App, $, window, document ) {
 
 /* 
  *************************************
- * <!-- Fullwidth List of Split -->
- *************************************
- */
-App = ( function ( App, $, window, document ) {
-    'use strict';
-   
-   
-    var pageLoaded = function() {
-		
-		var $window      = $( window ),
-			windowWidth  = $window.width(),
-			windowHeight = $window.height();
-		
-		
-		fullwidthListSplitInit( windowWidth );
-		
-		$window.on( 'resize', function() {
-			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( $window.width() != windowWidth ) {
-
-				// Update the window width for next time
-				windowWidth = $window.width();
-
-				// Do stuff here
-				fullwidthListSplitInit( windowWidth );
-		
-
-			}
-		});
-		
-		
-		
-		function fullwidthListSplitInit( w ) {
-			
-			
-			$( '.list-split-imagery-container' ).each( function() {
-				var imgH = $( this ).find( '.imagery-background img' ).height();
-
-				if ( imgH > 0 ) {
-					$( this ).find( '.feature-text, .feature-imagery' ).css( 'height', imgH + 'px' );
-				}
-
-				if ( w <= 768 ) {
-					$( this ).find( '.feature-text, .feature-imagery' ).css( 'height', 'auto' );
-				}
-
-			});	
-		}
-		
-
-		
-		
-	};
-		
-    App.fullwidthListSplit = {
-        pageLoaded : pageLoaded        
-    };
-
-    App.components.pageLoaded.push( pageLoaded );
-    return App;
-
-}( App, jQuery, window, document ) );
-
-
-
-
-/* 
- *************************************
  * <!-- Posts List With Ajax -->
  *************************************
  */
@@ -11311,6 +11297,74 @@ App = ( function ( App, $, window, document ) {
     };
 
     App.components.documentReady.push( documentReady );
+    return App;
+
+}( App, jQuery, window, document ) );
+
+
+
+
+/* 
+ *************************************
+ * <!-- Fullwidth List of Split -->
+ *************************************
+ */
+App = ( function ( App, $, window, document ) {
+    'use strict';
+   
+   
+    var pageLoaded = function() {
+		
+		var $window      = $( window ),
+			windowWidth  = $window.width(),
+			windowHeight = $window.height();
+		
+		
+		fullwidthListSplitInit( windowWidth );
+		
+		$window.on( 'resize', function() {
+			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+			if ( $window.width() != windowWidth ) {
+
+				// Update the window width for next time
+				windowWidth = $window.width();
+
+				// Do stuff here
+				fullwidthListSplitInit( windowWidth );
+		
+
+			}
+		});
+		
+		
+		
+		function fullwidthListSplitInit( w ) {
+			
+			
+			$( '.list-split-imagery-container' ).each( function() {
+				var imgH = $( this ).find( '.imagery-background img' ).height();
+
+				if ( imgH > 0 ) {
+					$( this ).find( '.feature-text, .feature-imagery' ).css( 'height', imgH + 'px' );
+				}
+
+				if ( w <= 768 ) {
+					$( this ).find( '.feature-text, .feature-imagery' ).css( 'height', 'auto' );
+				}
+
+			});	
+		}
+		
+
+		
+		
+	};
+		
+    App.fullwidthListSplit = {
+        pageLoaded : pageLoaded        
+    };
+
+    App.components.pageLoaded.push( pageLoaded );
     return App;
 
 }( App, jQuery, window, document ) );
@@ -13494,6 +13548,52 @@ App = ( function ( App, $, window, document ) {
 
 
 
+
+/* 
+ *************************************
+ * <!-- Retina Graphics for Website -->
+ *************************************
+ */
+App = ( function ( App, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ) {
+		
+		//Determine if you have retinal display
+		var hasRetina  = false,
+			rootRetina = (typeof exports === 'undefined' ? window : exports),
+			mediaQuery = '(-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-resolution: 1.5dppx)';
+	
+		if ( rootRetina.devicePixelRatio > 1 || rootRetina.matchMedia && rootRetina.matchMedia( mediaQuery ).matches ) {
+			hasRetina = true;
+		} 
+
+		if ( hasRetina ) {
+			//do something
+			$( '[data-retina]' ).each( function() {
+				$( this ).attr( {
+					'src'     : $( this ).data( 'retina' ),
+				} );
+			});
+		
+		} 
+		
+		
+	
+		
+	};
+	
+		
+    App.retina = {
+        documentReady : documentReady        
+    };
+
+    App.components.documentReady.push( documentReady );
+    return App;
+
+}( App, jQuery, window, document ) );
+
 /* 
  *************************************
  * <!-- Progress Bar -->
@@ -13560,52 +13660,6 @@ App = ( function ( App, $, window, document ) {
 
 
 
-
-
-/* 
- *************************************
- * <!-- Retina Graphics for Website -->
- *************************************
- */
-App = ( function ( App, $, window, document ) {
-    'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
-		//Determine if you have retinal display
-		var hasRetina  = false,
-			rootRetina = (typeof exports === 'undefined' ? window : exports),
-			mediaQuery = '(-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-resolution: 1.5dppx)';
-	
-		if ( rootRetina.devicePixelRatio > 1 || rootRetina.matchMedia && rootRetina.matchMedia( mediaQuery ).matches ) {
-			hasRetina = true;
-		} 
-
-		if ( hasRetina ) {
-			//do something
-			$( '[data-retina]' ).each( function() {
-				$( this ).attr( {
-					'src'     : $( this ).data( 'retina' ),
-				} );
-			});
-		
-		} 
-		
-		
-	
-		
-	};
-	
-		
-    App.retina = {
-        documentReady : documentReady        
-    };
-
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
 
 /* 
  *************************************
@@ -13882,86 +13936,6 @@ App = ( function ( App, $, window, document ) {
 
 
 
-/* 
- *************************************
- * <!-- Source Code -->
- *************************************
- */
-App = ( function ( App, $, window, document ) {
-    'use strict';
-   
-   
-    var documentReady = function( $ ){
-		
-
-		//Add view source code to body
-		$( 'body' ).prepend( '<a href="#source-code" id="view-source"><i class="fa fa-code" aria-hidden="true"></i></a><div id="source-code"><a href="javascript:void(0);" id="close"></a></div>' );
-				
-		
-		//View source button event
-		$( '#view-source' ).on( 'click', function() {
-			$( 'html' ).css( 'overflow-y', 'hidden' );
-			$( '#source-code' ).show();
-		});
-		
-		$( '#source-code > #close' ).on( 'click', function() {
-			$( 'html' ).css( 'overflow-y', 'auto' );
-			var uri = window.location.toString();
-			if ( uri.indexOf( '#' ) > 0 ) {
-				var clean_uri = uri.substring(0, uri.indexOf( '#' ) );
-				window.history.replaceState({}, document.title, clean_uri );
-			}
-			$( '#source-code' ).hide();
-			
-		});
-		
-		
-		//Remove tag from HTML-String
-		var removeElements = function( text, selector ) {
-			var wrapped = $( "<div>" + text + "</div>" );
-			wrapped.find( selector ).remove();
-			return wrapped.html();
-		};
-
-
-		//Source code init
-		var sourceCodeBodyClass      = $( 'body' ).attr( 'class' ),
-			sourceCodeBodyClassCode  = ( typeof sourceCodeBodyClass != typeof undefined ) ? 'body class="'+sourceCodeBodyClass+'"' : 'body';
-		
-		$.get( window.location.toString(), function( data ) {
-			var pageBodyCode   = data.split("<body")[1].split(">").slice(1).join(">").split("</body>")[0],
-				pageHeaderCode = data.split("</head>")[0];
-			
-			pageBodyCode   = removeElements( pageBodyCode, '#view-source, #source-code' );
-			pageBodyCode   = pageBodyCode.replace(/[<>]/g, function(m) { return {'<':'&lt;','>':'&gt;'}[m]; });
-			pageHeaderCode = pageHeaderCode.replace(/[<>]/g, function(m) { return {'<':'&lt;','>':'&gt;'}[m]; });
-
-
-			$("<pre />", {
-				"html":   pageHeaderCode + '&lt;/head&gt;\n&lt;'+sourceCodeBodyClassCode+'&gt;\n' + pageBodyCode + '\n&lt;/body&gt;\n&lt;/html&gt;',
-				"class": 'highlightBlock-print html'
-			}).appendTo( '#source-code' );	
-			
-		});
-		
-		
-		
-		//highlighter written
-	
-		
-	};
-		
-      
-    App.sourceCode = {
-        documentReady : documentReady        
-    };  
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
-
-
-
 
 /* 
  *************************************
@@ -14056,6 +14030,240 @@ App = ( function ( App, $, window, document ) {
     return App;
 
 }( App, jQuery, window, document ) );
+
+
+
+
+
+/* 
+ *************************************
+ * <!-- Source Code -->
+ *************************************
+ */
+App = ( function ( App, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ){
+		
+
+		//Add view source code to body
+		$( 'body' ).prepend( '<a href="#source-code" id="view-source"><i class="fa fa-code" aria-hidden="true"></i></a><div id="source-code"><a href="javascript:void(0);" id="close"></a></div>' );
+				
+		
+		//View source button event
+		$( '#view-source' ).on( 'click', function() {
+			$( 'html' ).css( 'overflow-y', 'hidden' );
+			$( '#source-code' ).show();
+		});
+		
+		$( '#source-code > #close' ).on( 'click', function() {
+			$( 'html' ).css( 'overflow-y', 'auto' );
+			var uri = window.location.toString();
+			if ( uri.indexOf( '#' ) > 0 ) {
+				var clean_uri = uri.substring(0, uri.indexOf( '#' ) );
+				window.history.replaceState({}, document.title, clean_uri );
+			}
+			$( '#source-code' ).hide();
+			
+		});
+		
+		
+		//Remove tag from HTML-String
+		var removeElements = function( text, selector ) {
+			var wrapped = $( "<div>" + text + "</div>" );
+			wrapped.find( selector ).remove();
+			return wrapped.html();
+		};
+
+
+		//Source code init
+		var sourceCodeBodyClass      = $( 'body' ).attr( 'class' ),
+			sourceCodeBodyClassCode  = ( typeof sourceCodeBodyClass != typeof undefined ) ? 'body class="'+sourceCodeBodyClass+'"' : 'body';
+		
+		$.get( window.location.toString(), function( data ) {
+			var pageBodyCode   = data.split("<body")[1].split(">").slice(1).join(">").split("</body>")[0],
+				pageHeaderCode = data.split("</head>")[0];
+			
+			pageBodyCode   = removeElements( pageBodyCode, '#view-source, #source-code' );
+			pageBodyCode   = pageBodyCode.replace(/[<>]/g, function(m) { return {'<':'&lt;','>':'&gt;'}[m]; });
+			pageHeaderCode = pageHeaderCode.replace(/[<>]/g, function(m) { return {'<':'&lt;','>':'&gt;'}[m]; });
+
+
+			$("<pre />", {
+				"html":   pageHeaderCode + '&lt;/head&gt;\n&lt;'+sourceCodeBodyClassCode+'&gt;\n' + pageBodyCode + '\n&lt;/body&gt;\n&lt;/html&gt;',
+				"class": 'highlightBlock-print html'
+			}).appendTo( '#source-code' );	
+			
+		});
+		
+		
+		
+		//highlighter written
+	
+		
+	};
+		
+      
+    App.sourceCode = {
+        documentReady : documentReady        
+    };  
+    App.components.documentReady.push( documentReady );
+    return App;
+
+}( App, jQuery, window, document ) );
+
+
+/* 
+ *************************************
+ * <!-- Team Focus -->
+ *************************************
+ */
+App = ( function ( App, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+    
+		
+		
+		$( '.custom-team-focus' ).each( function() {
+			var $this           = $( this ),
+				thisID          = 'custom-team-focus-' + Math.random()*1000000000000000000,
+				hoverWidth      = $this.data( 'hover-width' ),
+				targetWidth     = $this.data( 'target-width' ), // Div over width as a percentage 
+				closeBtn        = $this.data( 'close-btn' ),
+				el              = '#' + thisID + '> .item',
+				total           = 0;
+			
+			
+			
+			$this.attr( 'id', thisID );
+			
+		
+			if( typeof hoverWidth === typeof undefined ) {
+				hoverWidth = 20;
+			}	
+			
+			if( typeof targetWidth === typeof undefined ) {
+				targetWidth = 80;
+			}	
+			
+			if( typeof closeBtn === typeof undefined ) {
+				closeBtn = '.close';
+			}
+		
+			total = $( el ).length;
+		
+
+			TweenMax.set( el, {
+				width: 100/total + '%'
+			});
+			
+			
+			
+
+			//Create item hover overlay effects
+			$( el ).on( 'mouseenter', function() {
+
+				var $cur      = $( this ),
+					$neighbor = $cur.siblings().not( '.active' ); //Get the siblings of each element in the set of matched elements
+
+				TweenMax.to( $cur, 0.3, {
+					width: hoverWidth + '%'
+				});
+
+				TweenMax.to( $neighbor, 0.3, {
+					width: ( 100 - hoverWidth )/( total - 1 ) + '%'
+				});
+
+			} );
+
+			
+			//Display the target item
+			$( document ).on( 'click', el, function( e ) {
+				e.preventDefault();
+
+				var $cur        = $( this ),
+					$neighbor   = $cur.siblings(), //Get the siblings of each element in the set of matched elements
+					$cloneItem  = $cur.clone();
+
+				if ( !$cur.hasClass( 'active' ) ) {
+					$( el + '.active' ).remove();
+
+
+					TweenMax.set( $cloneItem, {
+						alpha      : 0,
+						onComplete : function() {
+
+							this.target
+								.prependTo( '#' + thisID )
+								.addClass( 'active' );
+
+						}
+					});
+
+					TweenMax.to( el, 0.3, {
+						alpha      : 1
+					});
+
+
+					TweenMax.to( $cur, 0.3, {
+						alpha : 0
+					});
+					
+					TweenMax.to( $neighbor, 0.3, {
+						alpha : 0.3
+					});
+				}
+
+
+
+			});
+
+			
+			//Close the actived item
+			$( document ).on( 'click', el + '.active, ' + closeBtn, function( e ) {
+				e.preventDefault();
+
+
+				
+				TweenMax.to( el, 0.3, {
+					width : 100/total + '%',
+					ease  : Back.easeOut
+				});
+
+				TweenMax.to( el + '.active', 0.3, {
+					alpha : 0,
+					onComplete : function() {
+
+						$( el + '.active' ).remove();
+						TweenMax.to( el, 0.3, {
+							alpha : 1
+						});
+					}
+				});
+
+
+
+			});	
+			
+			
+			
+		});	
+
+
+		
+    };
+
+    App.teamFocus = {
+        documentReady : documentReady        
+    };
+
+    App.components.documentReady.push( documentReady );
+    return App;
+
+}( App, jQuery, window, document ) );
+
 
 
 
@@ -14250,160 +14458,6 @@ App = ( function ( App, $, window, document ) {
     return App;
 
 }( App, jQuery, window, document ) );
-
-
-/* 
- *************************************
- * <!-- Team Focus -->
- *************************************
- */
-App = ( function ( App, $, window, document ) {
-    'use strict';
-    
-    var documentReady = function( $ ) {
-    
-		
-		
-		$( '.custom-team-focus' ).each( function() {
-			var $this           = $( this ),
-				thisID          = 'custom-team-focus-' + Math.random()*1000000000000000000,
-				hoverWidth      = $this.data( 'hover-width' ),
-				targetWidth     = $this.data( 'target-width' ), // Div over width as a percentage 
-				closeBtn        = $this.data( 'close-btn' ),
-				el              = '#' + thisID + '> .item',
-				total           = 0;
-			
-			
-			
-			$this.attr( 'id', thisID );
-			
-		
-			if( typeof hoverWidth === typeof undefined ) {
-				hoverWidth = 20;
-			}	
-			
-			if( typeof targetWidth === typeof undefined ) {
-				targetWidth = 80;
-			}	
-			
-			if( typeof closeBtn === typeof undefined ) {
-				closeBtn = '.close';
-			}
-		
-			total = $( el ).length;
-		
-
-			TweenMax.set( el, {
-				width: 100/total + '%'
-			});
-			
-			
-			
-
-			//Create item hover overlay effects
-			$( el ).on( 'mouseenter', function() {
-
-				var $cur      = $( this ),
-					$neighbor = $cur.siblings().not( '.active' ); //Get the siblings of each element in the set of matched elements
-
-				TweenMax.to( $cur, 0.3, {
-					width: hoverWidth + '%'
-				});
-
-				TweenMax.to( $neighbor, 0.3, {
-					width: ( 100 - hoverWidth )/( total - 1 ) + '%'
-				});
-
-			} );
-
-			
-			//Display the target item
-			$( document ).on( 'click', el, function( e ) {
-				e.preventDefault();
-
-				var $cur        = $( this ),
-					$neighbor   = $cur.siblings(), //Get the siblings of each element in the set of matched elements
-					$cloneItem  = $cur.clone();
-
-				if ( !$cur.hasClass( 'active' ) ) {
-					$( el + '.active' ).remove();
-
-
-					TweenMax.set( $cloneItem, {
-						alpha      : 0,
-						onComplete : function() {
-
-							this.target
-								.prependTo( '#' + thisID )
-								.addClass( 'active' );
-
-						}
-					});
-
-					TweenMax.to( el, 0.3, {
-						alpha      : 1
-					});
-
-
-					TweenMax.to( $cur, 0.3, {
-						alpha : 0
-					});
-					
-					TweenMax.to( $neighbor, 0.3, {
-						alpha : 0.3
-					});
-				}
-
-
-
-			});
-
-			
-			//Close the actived item
-			$( document ).on( 'click', el + '.active, ' + closeBtn, function( e ) {
-				e.preventDefault();
-
-
-				
-				TweenMax.to( el, 0.3, {
-					width : 100/total + '%',
-					ease  : Back.easeOut
-				});
-
-				TweenMax.to( el + '.active', 0.3, {
-					alpha : 0,
-					onComplete : function() {
-
-						$( el + '.active' ).remove();
-						TweenMax.to( el, 0.3, {
-							alpha : 1
-						});
-					}
-				});
-
-
-
-			});	
-			
-			
-			
-		});	
-
-
-		
-    };
-
-    App.teamFocus = {
-        documentReady : documentReady        
-    };
-
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
-
-
-
 
 
 /* 

@@ -16,9 +16,11 @@ var templateUrl = AppRootPath.templateUrl,
 
 //Determine whether it is a special browser
 var browser = {
+	isPC : !navigator.userAgent.match(/(iPhone|iPod|Android|ios|Mobile)/i),
 	isSafari : !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/), /*Test to 9, 10. */
 	isIE     : !!window.ActiveXObject || "ActiveXObject" in window     /*Test to 6 ~ 11 (not edge) */
 };
+
 
 
 //Core scripts for current site
