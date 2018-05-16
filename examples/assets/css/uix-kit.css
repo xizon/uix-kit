@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.5.5
- * ## Last Update         :  May 13, 2018
+ * ## Version             :  1.5.6
+ * ## Last Update         :  May 16, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -107,12 +107,41 @@
     39. Features 
     40. Flexslider 
     41. Footer Templates 
-    42. Form Progress 
-    43. Form 
+    42. Form 
+    43. Form Progress 
     44. Gallery 
-    45. Image Shapes 
-    46. Header Pinlines 
+    45. Header Pinlines 
+    46. Image Shapes 
     47. Custom Core Scripts & Stylesheets 
+    48. Cutom Light Box 
+    49. Brands List 
+    50. Bulleted List 
+    51. Maintain Aspect Ratio List 
+    52. List of Posts 
+    53. List of Split Posts 
+    54. Side by Side List 
+    55. Side by Side List With Photo 
+    56. Fullwidth List of Split 2 
+    57. Fullwidth List of Split 
+    58. Mobile Menu 
+    59. Modal Dialog 
+    60. Mouse Animation Scroll 
+    61. Multiple Items Carousel 
+    62. Parallax 
+    63. Periodical Scroll 
+    64. Pricing 
+    65. Progress Bar 
+    66. Services 
+    67. Show More Less 
+    68. Single Post 
+    69. Source Code 
+    70. Table Series 
+    71. Tabs 
+    72. Team Focus 
+    73. Testimonials Carousel 
+    74. Timeline 
+    75. ToolTip 
+    76. WordPress Core 
 
 
 
@@ -4263,6 +4292,90 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
+   <!-- Dotted Line --> 
+/* ====================================================== */
+.dotted-line-s {
+    display: inline-block;
+    margin: 1.5rem;
+    height: 300px;
+    width: 1px;
+    background: #212121;
+    background: linear-gradient(to bottom, #212121 10%, rgba(255, 255, 255, 0) 0%);
+    background-position: left;
+    background-size: 1px 8px;
+    background-repeat: repeat-y;
+}
+
+.dotted-line-s.horizontal {
+    background: linear-gradient(to right, #212121 10%, rgba(255, 255, 255, 0) 0%);
+    background-position: top;
+    background-size: 8px 1px;
+    background-repeat: repeat-x;
+    width: 300px;
+    height: 1px;
+}
+
+.dotted-line-s.circle {
+    background: radial-gradient(circle, #212121 1.5px, transparent 2px);
+    background-position: top;
+    background-size: 12px 6px;
+}
+
+.dotted-line-m {
+    display: inline-block;
+    margin: 1.5rem;
+    height: 300px;
+    width: 3px;
+    background: #212121;
+    background: linear-gradient(to bottom, #212121 20%, rgba(255, 255, 255, 0) 0%);
+    background-position: left;
+    background-size: 3px 10px;
+    background-repeat: repeat-y;
+}
+
+.dotted-line-m.horizontal {
+    background: linear-gradient(to right, #212121 20%, rgba(255, 255, 255, 0) 0%);
+    background-position: top;
+    background-size: 10px 3px;
+    background-repeat: repeat-x;
+    width: 300px;
+    height: 3px;
+}
+
+.dotted-line-m.circle {
+    background: radial-gradient(circle, #212121 1.5px, transparent 2px);
+    background-position: top;
+    background-size: 12px 6px;
+}
+
+.dotted-line-l {
+    display: inline-block;
+    margin: 1.5rem;
+    height: 300px;
+    width: 6px;
+    background: #212121;
+    background: linear-gradient(to bottom, #212121 30%, rgba(255, 255, 255, 0) 0%);
+    background-position: left;
+    background-size: 6px 12px;
+    background-repeat: repeat-y;
+}
+
+.dotted-line-l.horizontal {
+    background: linear-gradient(to right, #212121 30%, rgba(255, 255, 255, 0) 0%);
+    background-position: top;
+    background-size: 12px 6px;
+    background-repeat: repeat-x;
+    width: 300px;
+    height: 6px;
+}
+
+.dotted-line-l.circle {
+    background: radial-gradient(circle, #212121 1.5px, transparent 2px);
+    background-position: top;
+    background-size: 12px 6px;
+}
+
+/* ====================================================== 
    <!-- Dropdown Menu --> 
 /* ====================================================== */
 /* Do not use <a> tag */
@@ -4345,90 +4458,6 @@ ul.entry-meta {
 .custom-dropdown-trigger > :checked ~ ul {
     display: block;
     opacity: 1;
-}
-
-/* ====================================================== 
-   <!-- Dotted Line --> 
-/* ====================================================== */
-.dotted-line-s {
-    display: inline-block;
-    margin: 1.5rem;
-    height: 300px;
-    width: 1px;
-    background: #212121;
-    background: linear-gradient(to bottom, #212121 10%, rgba(255, 255, 255, 0) 0%);
-    background-position: left;
-    background-size: 1px 8px;
-    background-repeat: repeat-y;
-}
-
-.dotted-line-s.horizontal {
-    background: linear-gradient(to right, #212121 10%, rgba(255, 255, 255, 0) 0%);
-    background-position: top;
-    background-size: 8px 1px;
-    background-repeat: repeat-x;
-    width: 300px;
-    height: 1px;
-}
-
-.dotted-line-s.circle {
-    background: radial-gradient(circle, #212121 1.5px, transparent 2px);
-    background-position: top;
-    background-size: 12px 6px;
-}
-
-.dotted-line-m {
-    display: inline-block;
-    margin: 1.5rem;
-    height: 300px;
-    width: 3px;
-    background: #212121;
-    background: linear-gradient(to bottom, #212121 20%, rgba(255, 255, 255, 0) 0%);
-    background-position: left;
-    background-size: 3px 10px;
-    background-repeat: repeat-y;
-}
-
-.dotted-line-m.horizontal {
-    background: linear-gradient(to right, #212121 20%, rgba(255, 255, 255, 0) 0%);
-    background-position: top;
-    background-size: 10px 3px;
-    background-repeat: repeat-x;
-    width: 300px;
-    height: 3px;
-}
-
-.dotted-line-m.circle {
-    background: radial-gradient(circle, #212121 1.5px, transparent 2px);
-    background-position: top;
-    background-size: 12px 6px;
-}
-
-.dotted-line-l {
-    display: inline-block;
-    margin: 1.5rem;
-    height: 300px;
-    width: 6px;
-    background: #212121;
-    background: linear-gradient(to bottom, #212121 30%, rgba(255, 255, 255, 0) 0%);
-    background-position: left;
-    background-size: 6px 12px;
-    background-repeat: repeat-y;
-}
-
-.dotted-line-l.horizontal {
-    background: linear-gradient(to right, #212121 30%, rgba(255, 255, 255, 0) 0%);
-    background-position: top;
-    background-size: 12px 6px;
-    background-repeat: repeat-x;
-    width: 300px;
-    height: 6px;
-}
-
-.dotted-line-l.circle {
-    background: radial-gradient(circle, #212121 1.5px, transparent 2px);
-    background-position: top;
-    background-size: 12px 6px;
 }
 
 /* ====================================================== 
@@ -11994,51 +12023,7 @@ a img.aligncenter {
         left: 2px;
     }
 }
-  left: 2px;
-    }
-}
-jax-loader > span {
-    display: inline-block;
-    width: 200px;
-    height: 20px;
-    top: 50%;
-    left: 50%;
-    background-color: #ddd;
-    transform: translate(-50%, -50%);
-    position: absolute;
-    border-radius: 100px;
-}
 
-.ajax-loader > span::after {
-    border-radius: 100px;
-    content: "";
-    position: absolute;
-    background-color: #333;
-    left: 2px;
-    top: 2px;
-    bottom: 2px;
-    right: 180px;
-    animation: ajax-loader-slide 2s linear infinite;
-}
-
-@keyframes ajax-loader-slide {
-    0% {
-        right: 180px;
-        left: 2px;
-    }
-
-    5% {
-        left: 2px;
-    }
-
-    50% {
-        right: 2px;
-        left: 180px;
-    }
-
-    55% {
-        right: 2px;
-    }
 
     100% {
         right: 180px;

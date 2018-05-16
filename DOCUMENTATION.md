@@ -153,7 +153,6 @@ http://localhost:8080/examples/
 	<script src="assets/js/min/jquery.waypoints.min.js?ver=4.0.1"></script> 
     <script src="assets/js/min/template7.min.js?ver=1.2.5"></script>
     <script src="assets/js/min/TweenMax.min.js?ver=1.20.4"></script>
-    <script src="assets/js/min/TimelineMax.min.js?ver=1.20.4"></script>
     <script src="assets/js/min/pixi.min.js?ver=4.7.1"></script>
     <script src="assets/js/min/three.min.js?ver=r92"></script>
     

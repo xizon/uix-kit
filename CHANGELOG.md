@@ -1,5 +1,10 @@
 # Changelog
 
+#### = 1.5.6 (May 16, 2018) =
+
+* Tweak: Removed duplicate script files.
+
+
 #### = 1.5.5 (May 13, 2018) =
 
 * Tweak: Extend the loading method when loading a page.
