@@ -88,8 +88,7 @@
   </head>     
   
      
-  <body class="page theme-white" style="overflow: hidden;">
-  
+  <body class="page">
   
   
           
@@ -123,8 +122,6 @@
     
     
 
-  
-  
     <div class="wrapper">
     
         <!-- Header Area
@@ -339,70 +336,83 @@
              </div>
         
         </header>
-    
-		<!-- Section Navigation
-		============================================= --> 
-		<ol class="custom-sidefixed-menu"> 
-			<li><a href="ajax-content-page-1.html" data-ajax-page="true" data-index="0"><span>01</span><strong>Page 1</strong></a></li>
-			<li><a href="ajax-content-page-2.html" data-ajax-page="true" data-index="1"><span>02</span><strong>Page 2</strong></a></li>
-			<li><a href="ajax-content-page-3.html" data-ajax-page="true" data-index="2"><span>03</span><strong>Page 3</strong></a></li>
-			<li><a href="ajax-content-page-4.html" data-ajax-page="true" data-index="3"><span>04</span><strong>Page 4</strong></a></li>
-		</ol>
-
-       	
+        <div class="header-inner"></div>
+      
        
-        <!-- Page Container
-        ============================================= --> 
-        <div class="custom-fullpage-ajax-container">
-        
-			<div class="ajax-loader"><span></span></div>
-            
-			<section class="space-sm height-100 mobile-still" style="background: #b5bdc8; background: linear-gradient(to bottom, #b5bdc8 0%,#28343b 100%);">
-				<div class="container">
+    
+       
+       
+        <!-- Content 01
+        ====================================================== -->
+        <section class="space-none">
+            <div class="container t-c">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2 t-c">
+                            <h2>3D Carousel</h2>
+                            
+                        </div>
+                    </div>
+                    <!-- .row end -->
+              
+                    
+            </div>
+            <!-- .container end -->
+ 
+        </section>
+     
+       
+    
+       <!-- Content 02
+        ====================================================== -->
+        <section>
+			<div class="container t-c">
 					<div class="row">
-						<div class="col-md-8 col-md-offset-2">
+						<div class="col-md-12">
 
-						    <!-- ajax container -->
-							<div class="ajax-container" data-ajax-page-id="0">
+							<div class="custom-carousel-3d" 
+								data-timing="3500" 
+								data-draggable="true"
+								data-prev-btn=".my-carousel-3d-prev" 
+								data-next-btn=".my-carousel-3d-next">
 								
-								<!-- Entry Content
-								========================= -->
-								<div class="entry-content list-normal table-normal">
+								<ul>
+									<li class="items main-pos">
+										<img src="assets/images/demo/test-img-big-1.jpg" alt="">
+									</li>
+									<li class="items main-pos">
+										<img src="assets/images/demo/test-img-big-2.jpg" alt="">
+									</li>
+									<li class="items main-pos">
+										<img src="assets/images/demo/test-img-big-3.jpg" alt="">
+									</li>
+									<li class="items main-pos">
+										<img src="assets/images/demo/test-img-big-4.jpg" alt="">
+									</li>
 
-									<br><br>
-									<h1>AJAX Content 1</h1>
-
-									<p>Dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper.</p>
-
-									<p>Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper.</p>
-
-									<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
-
-									<p>Nullam id dolor id nibh ultricies vehicula ut id elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper.</p>
-
-
-
-								</div>
-								<!-- Entry Content  end -->
-		
-								
-								
+								</ul>
 							</div>
-						
-						
+							
+							<a href="javascript:" class="my-carousel-3d-prev">Previous</a> | 
+							<a href="javascript:" class="my-carousel-3d-next">Next</a>
 
-						    
+
+
 						</div>
 					</div>
-				</div>
-			</section> 	  
-        
-		</div>
-        <!-- /.custom-fullpage-container -->
-       
+					<!-- .row end -->
 
+
+			</div>
+			<!-- .container end -->
+
+		</section>
 		
-		
+
+         
+           
+
+											     
+        
                 <!-- Footer
         ============================================= -->    
         <footer class="footer-main-container">
@@ -496,7 +506,3 @@
 </html>
 
 
-
-  
-  
-   

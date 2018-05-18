@@ -121,8 +121,8 @@ $primary-bg-color      : transparent;
 // ---------------------------
 //
 @mixin transition-cubic-bezier() {
-	/* @include transition-cubic-bezier(); */
-	  transition: 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+	// @include transition-cubic-bezier();
+	transition: 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
 }
 
 
@@ -131,7 +131,7 @@ $primary-bg-color      : transparent;
 // ---------------------------
 //
 @mixin transition-default() {
-	/* @include transition-default(); */
+	// @include transition-default(); 
 	transition: all 0.3s ease;
 }
 
@@ -141,7 +141,7 @@ $primary-bg-color      : transparent;
 // ---------------------------
 //
 @mixin transition-none() {
-	/* @include transition-none(); */
+	// @include transition-none();
 	transition: none; 
 }
 
@@ -150,8 +150,8 @@ $primary-bg-color      : transparent;
 // ---------------------------
 //
 @mixin bg-gradient( $direction: 'to right' ) {
-	/* @include bg-gradient( 'to bottom' ); */
-	//Compatible with ie9+
+	// @include bg-gradient( 'to bottom' );
+	// Compatible with ie9+
 	background: $highlight-color1; 
 	background: linear-gradient(#{$direction}, $highlight-color1 0%,$highlight-color2 100%);
 }
@@ -161,8 +161,8 @@ $primary-bg-color      : transparent;
 // ---------------------------
 //
 @mixin icontxt-gradient( $direction: 'to right' ) {
-	/* @include icontxt-gradient( 'to bottom' ); */
-	/* The font is the default color when the browser is IE */
+	// @include icontxt-gradient( 'to bottom' );
+	// The font is the default color when the browser is IE
 	background: linear-gradient(#{$direction}, $highlight-color1 0%,$highlight-color2 100%);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
@@ -174,8 +174,8 @@ $primary-bg-color      : transparent;
 // ---------------------------
 //
 @mixin gradient-border( $color1, $color2, $border-width, $direction, $bg ) {
-	/* @include gradient-border( $highlight-color1, $highlight-color2, 3px, 'to right', #fff ); */
-	//Compatible with ie9+
+	// @include gradient-border( $highlight-color1, $highlight-color2, 3px, 'to right', #fff );
+	// Compatible with ie9+
 	background: #{$bg};
    
 	
@@ -200,7 +200,7 @@ $primary-bg-color      : transparent;
 // ---------------------------
 //
 @mixin outer-shadow() {
-	/* @include outer-shadow(); */
+	// @include outer-shadow();
 	box-shadow: 0 4px  4px  rgba(0, 0, 0, .05),
                0 1px  6px  rgba(0, 0, 0, .05),
                0 8px  8px  rgba(0, 0, 0, .05), 
@@ -211,7 +211,7 @@ $primary-bg-color      : transparent;
 }
 
 @mixin outer-shadow-large() {
-	/* @include outer-shadow-large(); */
+	// @include outer-shadow-large();
 	box-shadow: 0 31px 32px 0 #cbdfee;
 	
 }
@@ -221,7 +221,7 @@ $primary-bg-color      : transparent;
 // ---------------------------
 //
 @mixin ellipsis(){
-	/* @include ellipsis(); */
+	// @include ellipsis();
 	overflow: hidden;
 	text-overflow: ellipsis;	
 	width: 100%;
@@ -233,7 +233,7 @@ $primary-bg-color      : transparent;
 // ---------------------------
 //
 @mixin stroke-text( $color, $width: '1px', $fill: 'white' ){
-	/* @include stroke-text( $highlight-color1, 1px, white ); */
+	// @include stroke-text( $highlight-color1, 1px, white );
 	text-fill-color: #{$fill}; /* Will override color (regardless of order) */
 	text-stroke-width: #{$width};
 	text-stroke-color: #{$color};
@@ -244,7 +244,7 @@ $primary-bg-color      : transparent;
 // ---------------------------
 //
 @mixin cursor-img( $img: '../../assets/images/demo/cursorhand.png' ){
-	/* @include cursor-img( '../../assets/images/demo/cursorhand.png' ); */
+	// @include cursor-img( '../../assets/images/demo/cursorhand.png' );
 	cursor: url(#{$img}), auto;
 	
 }
@@ -253,7 +253,7 @@ $primary-bg-color      : transparent;
 // ---------------------------
 //
 @mixin background-cover() {
-	/* @include background-cover(); */
+	// @include background-cover();
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -264,7 +264,7 @@ $primary-bg-color      : transparent;
 // ---------------------------
 //
 @mixin customScrollbar( $dir ){
-	/* @include customScrollbar( 'vertical' ) ; */
+	// @include customScrollbar( 'vertical' ) ;
 	&::-webkit-scrollbar-track {
 		border-radius: 0px;
 		background-color: #E6E3E3;
@@ -297,7 +297,7 @@ $primary-bg-color      : transparent;
 // ---------------------------
 //
 @mixin anime-ripple() {
-	/* @include ianime-ripple(); */
+	// @include ianime-ripple();
 	animation: ripple 0.6s linear infinite;
 }
 

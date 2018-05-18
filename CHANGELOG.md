@@ -1,5 +1,11 @@
 # Changelog
 
+#### = 1.5.7 (May 18, 2018) =
+
+* New: Add a new module "3D Carousel".
+
+
+
 #### = 1.5.6 (May 16, 2018) =
 
 * Tweak: Removed duplicate script files.

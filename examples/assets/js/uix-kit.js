@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.5.6
- * ## Last Update         :  May 16, 2018
+ * ## Version             :  1.5.7
+ * ## Last Update         :  May 18, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -35,49 +35,50 @@
     10. Pagination 
     11. Specify a background image 
     12. 3D Background 
-    13. 3D Pages 
-    14. Accordion 
-    15. Accordion Background Images 
-    16. Advanced Content Slider 
-    17. Advanced Slider (Special Effects) 
-    18. Advanced Slider (Basic) 
-    19. Counter 
-    20. Dynamic Drop Down List from JSON 
-    21. Flexslider 
-    22. Form Progress 
-    23. Gallery 
-    24. Form 
-    25. Image Shapes 
-    26. Custom Core Scripts & Stylesheets 
-    27. Custom Lightbox 
-    28. Bulleted List 
-    29. Posts List With Ajax 
-    30. Fullwidth List of Split 
-    31. Mobile Menu 
-    32. Modal Dialog 
-    33. Mousewheel Interaction 
-    34. Multiple Items Carousel 
-    35. Full Page/One Page Transition 
-    36. Full Page/One Page Transition 2 
-    37. Parallax 
-    38. Periodical Scroll 
+    13. 3D Carousel 
+    14. 3D Pages 
+    15. Accordion 
+    16. Accordion Background Images 
+    17. Counter 
+    18. Dynamic Drop Down List from JSON 
+    19. Flexslider 
+    20. Form 
+    21. Form Progress 
+    22. Gallery 
+    23. Image Shapes 
+    24. Custom Core Scripts & Stylesheets 
+    25. Custom Lightbox 
+    26. Bulleted List 
+    27. Posts List With Ajax 
+    28. Fullwidth List of Split 
+    29. Mobile Menu 
+    30. Modal Dialog 
+    31. Mousewheel Interaction 
+    32. Multiple Items Carousel 
+    33. Full Page/One Page Transition 
+    34. Full Page/One Page Transition 2 
+    35. Advanced Slider (Basic) 
+    36. Parallax 
+    37. Periodical Scroll 
+    38. Advanced Slider (Special Effects) 
     39. Pricing 
     40. Progress Bar 
     41. Retina Graphics for Website 
-    42. Rotating Elements 
-    43. Scroll Reveal 
-    44. Show More Less 
-    45. Smooth Scrolling When Clicking An Anchor Link 
-    46. Source Code 
-    47. Sticky Elements 
-    48. Tabs 
-    49. Team Focus 
-    50. Testimonials Carousel 
-    51. Text effect 
-    52. Timeline 
-    53. Ajax Page Loader (Loading A Page via Ajax Into Div)  
-    54. GSAP Plugins 
-    55. Three.js Plugins 
+    42. Advanced Content Slider 
+    43. Rotating Elements 
+    44. Scroll Reveal 
+    45. Show More Less 
+    46. Smooth Scrolling When Clicking An Anchor Link 
+    47. Source Code 
+    48. Sticky Elements 
+    49. Tabs 
+    50. Team Focus 
+    51. Testimonials Carousel 
+    52. Text effect 
+    53. Timeline 
+    54. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    55. GSAP Plugins 
+    56. Three.js Plugins 
 
 
 */
@@ -1537,6 +1538,286 @@ App = ( function ( App, $, window, document ) {
 
 
 
+
+/* 
+ *************************************
+ * <!-- 3D Carousel -->
+ *************************************
+ */
+App = ( function ( App, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ) {
+
+		$( '.custom-carousel-3d' ).each( function() {
+			var $this             = $( this ),
+				dataTiming        = $this.data( 'timing' ),
+				dataPrevBtn       = $this.data( 'prev-btn' ),
+				dataNextBtn       = $this.data( 'next-btn' ),
+				dataDraggable     = $this.data( 'draggable' ),
+			    autoSwap          = null,
+				$wrapper          = $this.find( '> ul' ),
+				$items            = $wrapper.find( '> li' ),
+				items             = [],
+				startItem         = 1,
+				position          = 0,
+				itemCount         = $items.length,
+				leftpos           = itemCount,
+				resetCount        = itemCount;
+
+			if( typeof dataTiming === typeof undefined ) dataTiming = 5000;
+			if( typeof dataPrevBtn === typeof undefined ) dataPrevBtn = ".my-carousel-3d-prev";
+			if( typeof dataNextBtn === typeof undefined ) dataNextBtn = ".my-carousel-3d-next";
+			if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
+			
+
+				
+			//Adding an index to an element makes it easy to query
+			//-------------------------------------	
+			$items.each( function( index ) {
+				items[index] = $( this ).text();
+				$( this ).attr( 'id', index+1 );
+
+			});
+
+			//Pause slideshow and reinstantiate on mouseout
+			//-------------------------------------	
+			$wrapper.on( 'mouseenter', function() {
+				clearInterval( autoSwap );
+			} ).on( 'mouseleave' , function() {
+				autoSwap = setInterval( itemUpdates, dataTiming );
+			} );
+
+
+			
+			//Initialize the default effect
+			//-------------------------------------	
+			itemUpdates( 'clockwise' );
+			
+			
+			//The matched click events for the element.
+			//-------------------------------------	
+			$( dataPrevBtn ).on( 'click', function( e ) {
+				e.preventDefault();
+				itemUpdates( 'clockwise' );
+				return false;
+				
+			});
+			$( dataNextBtn ).on( 'click', function( e ) {
+				e.preventDefault();
+				itemUpdates( 'counter-clockwise' );
+				return false;
+				
+			});
+			
+			
+			$items.on( 'click', function( e ) {
+				e.preventDefault();
+
+				if ( $( this ).attr( 'class' ) == 'items left-pos' ) {
+					itemUpdates( 'counter-clockwise' );
+				} else {
+					itemUpdates( 'clockwise' );
+				}
+			});
+
+
+			//Drag and Drop
+			//-------------------------------------	
+			var $dragDropTrigger = $wrapper;
+
+			//Mouse event
+			$dragDropTrigger.on( 'mousedown.threeDimensionalCarousel touchstart.threeDimensionalCarousel', function( e ) {
+				e.preventDefault();
+
+				var touches = e.originalEvent.touches;
+
+				$( this ).addClass( 'dragging' );
+				$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
+				$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
+
+
+				if ( touches && touches.length ) {	
+					$( this ).data( 'origin_mouse_x', parseInt( touches[0].pageX ) );
+					$( this ).data( 'origin_mouse_y', parseInt( touches[0].pageY ) );
+
+				} else {
+
+					if ( dataDraggable ) {
+						$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
+						$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );	
+					}
+
+
+				}
+
+				$dragDropTrigger.on( 'mouseup.threeDimensionalCarousel touchmove.threeDimensionalCarousel', function( e ) {
+					e.preventDefault();
+
+					$( this ).removeClass( 'dragging' );
+					var touches        = e.originalEvent.touches,
+						origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
+						origin_mouse_y = $( this ).data( 'origin_mouse_y' );
+
+					if ( touches && touches.length ) {
+
+						var deltaX = origin_mouse_x - touches[0].pageX,
+							deltaY = origin_mouse_y - touches[0].pageY;
+
+						if ( deltaX >= 50) {
+							//--- left
+							itemUpdates( 'clockwise' );
+
+
+						}
+						if ( deltaX <= -50) {
+							//--- right
+							itemUpdates( 'counter-clockwise' );
+
+
+						}
+						if ( deltaY >= 50) {
+							//--- up
+
+
+						}
+						if ( deltaY <= -50) {
+							//--- down
+
+						}
+
+						if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
+							$dragDropTrigger.off( 'touchmove.threeDimensionalCarousel' );
+						}	
+
+
+					} else {
+
+						if ( dataDraggable ) {
+							//right
+							if ( e.pageX > origin_mouse_x ) {
+								itemUpdates( 'counter-clockwise' );
+							}
+
+							//left
+							if ( e.pageX < origin_mouse_x ) {
+								itemUpdates( 'clockwise' );
+								
+							}
+
+							//down
+							if ( e.pageY > origin_mouse_y ) {
+
+							}
+
+							//up
+							if ( e.pageY < origin_mouse_y ) {
+
+							}	
+
+							$dragDropTrigger.off( 'mouseup.threeDimensionalCarousel' );
+
+						}	
+
+
+
+					}
+
+
+
+				} );
+
+
+
+
+			} );
+			
+
+			/*
+			 * Swap Between Images
+			 *
+			 * @param  {string} action           - Direction of movement, optional: clockwise, counter-clockwise
+			 * @return {void}                    - The constructor.
+			 */
+			function itemUpdates( action ) {
+				var direction = action;
+
+				//moving carousel backwards
+				if ( direction == 'counter-clockwise' ) {
+					var leftitem = parseFloat( $wrapper.find( '> li.left-pos' ).attr( 'id' ) - 1 );
+					if ( leftitem == 0 ) {
+						leftitem = itemCount;
+					}
+
+					$wrapper.find( '> li.right-pos' ).removeClass( 'right-pos' ).addClass( 'back-pos' );
+					$wrapper.find( '> li.main-pos' ).removeClass( 'main-pos' ).addClass( 'right-pos' );
+					$wrapper.find( '> li.left-pos' ).removeClass( 'left-pos' ).addClass( 'main-pos' );
+					$wrapper.find( '> li#' + leftitem + '').removeClass( 'back-pos' ).addClass( 'left-pos' );
+
+					startItem--;
+
+					if ( startItem < 1 ) {
+						startItem = itemCount;
+					}
+				}
+
+				//moving carousel forward
+				if ( direction == 'clockwise' || direction == '' || direction == null ) {
+					function pos( positionvalue ) {
+						if ( positionvalue != 'leftposition' ) {
+							//increment image list id
+							position++;
+
+							//if final result is greater than image count, reset position.
+							if ( startItem + position > resetCount ) {
+								position = 1 - startItem;
+							}
+						}
+
+						//setting the left positioned item
+						if (positionvalue == 'leftposition') {
+							//left positioned image should always be one left than main positioned image.
+							position = startItem - 1;
+
+							//reset last image in list to left position if first image is in main position
+							if (position < 1) {
+								position = itemCount;
+							}
+						}
+
+						return position;
+					}
+
+					$wrapper.find( '> li#' + startItem + '').removeClass( 'main-pos' ).addClass( 'left-pos' );
+					$wrapper.find( '> li#' + (startItem + pos()) + '').removeClass( 'right-pos' ).addClass( 'main-pos' );
+					$wrapper.find( '> li#' + (startItem + pos()) + '').removeClass( 'back-pos' ).addClass( 'right-pos' );
+					$wrapper.find( '> li#' + pos( 'leftposition' ) + '').removeClass( 'left-pos' ).addClass( 'back-pos' );
+
+					startItem++;
+					position = 0;
+					if ( startItem > itemCount ) {
+						startItem = 1;
+					}
+				}
+			}
+
+			
+
+		});
+
+		
+		
+    };
+
+    App.threeDimensionalCarousel = {
+        documentReady : documentReady        
+    };
+
+    App.components.documentReady.push( documentReady );
+    return App;
+
+}( App, jQuery, window, document ) );
 /* 
  *************************************
  * <!-- 3D Pages -->
@@ -13423,6 +13704,73 @@ App = ( function ( App, $, window, document ) {
 
 /* 
  *************************************
+ * <!-- Progress Bar -->
+ *************************************
+ */
+App = ( function ( App, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+
+		var waypoints = $( '[data-progressbar-percent]' ).waypoint({
+			handler: function( direction ) {
+
+				var $this        = $( this.element ),
+					percent      = $this.data( 'progressbar-percent' ),
+					unit         = $this.data( 'progressbar-unit' );
+
+				if( typeof percent === typeof undefined ) {
+					percent = 0;
+				}
+
+				if( typeof unit === typeof undefined ) {
+					unit = '%';
+				}	
+
+
+				//Radial Progress Bar
+				if ( $this.hasClass( 'custom-radial-progressbar' ) ) {
+					$this.find( '.track' ).html( '<span>'+percent+'<em class="unit">'+unit+'</em></span>' );
+					$this.addClass( 'progress-' + percent );	
+				} 
+
+
+				//Rectangle Progress Bar
+				if ( $this.hasClass( 'custom-rectangle-progressbar' ) ) {
+					$this.find( '.bar > span' ).html( ''+percent+'<em class="unit">'+unit+'</em>' );
+					$this.addClass( 'progress-' + percent );	
+				} 
+
+				//Prevents front-end javascripts that are activated in the background to repeat loading.
+				this.disable();
+
+
+
+			},
+			offset: '100%' //0~100%, bottom-in-view
+		});
+
+		
+		
+    };
+
+    App.progressBar = {
+        documentReady : documentReady        
+    };
+
+    App.components.documentReady.push( documentReady );
+    return App;
+
+}( App, jQuery, window, document ) );
+
+
+
+
+
+
+
+/* 
+ *************************************
  * <!-- Pricing -->
  *************************************
  */
@@ -13534,73 +13882,6 @@ App = ( function ( App, $, window, document ) {
     };
 
     App.pricing = {
-        documentReady : documentReady        
-    };
-
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
-
-
-
-
-
-
-
-/* 
- *************************************
- * <!-- Progress Bar -->
- *************************************
- */
-App = ( function ( App, $, window, document ) {
-    'use strict';
-    
-    var documentReady = function( $ ) {
-
-		var waypoints = $( '[data-progressbar-percent]' ).waypoint({
-			handler: function( direction ) {
-
-				var $this        = $( this.element ),
-					percent      = $this.data( 'progressbar-percent' ),
-					unit         = $this.data( 'progressbar-unit' );
-
-				if( typeof percent === typeof undefined ) {
-					percent = 0;
-				}
-
-				if( typeof unit === typeof undefined ) {
-					unit = '%';
-				}	
-
-
-				//Radial Progress Bar
-				if ( $this.hasClass( 'custom-radial-progressbar' ) ) {
-					$this.find( '.track' ).html( '<span>'+percent+'<em class="unit">'+unit+'</em></span>' );
-					$this.addClass( 'progress-' + percent );	
-				} 
-
-
-				//Rectangle Progress Bar
-				if ( $this.hasClass( 'custom-rectangle-progressbar' ) ) {
-					$this.find( '.bar > span' ).html( ''+percent+'<em class="unit">'+unit+'</em>' );
-					$this.addClass( 'progress-' + percent );	
-				} 
-
-				//Prevents front-end javascripts that are activated in the background to repeat loading.
-				this.disable();
-
-
-
-			},
-			offset: '100%' //0~100%, bottom-in-view
-		});
-
-		
-		
-    };
-
-    App.progressBar = {
         documentReady : documentReady        
     };
 
@@ -14114,160 +14395,6 @@ App = ( function ( App, $, window, document ) {
 
 
 
-/* 
- *************************************
- * <!-- Team Focus -->
- *************************************
- */
-App = ( function ( App, $, window, document ) {
-    'use strict';
-    
-    var documentReady = function( $ ) {
-    
-		
-		
-		$( '.custom-team-focus' ).each( function() {
-			var $this           = $( this ),
-				thisID          = 'custom-team-focus-' + Math.random()*1000000000000000000,
-				hoverWidth      = $this.data( 'hover-width' ),
-				targetWidth     = $this.data( 'target-width' ), // Div over width as a percentage 
-				closeBtn        = $this.data( 'close-btn' ),
-				el              = '#' + thisID + '> .item',
-				total           = 0;
-			
-			
-			
-			$this.attr( 'id', thisID );
-			
-		
-			if( typeof hoverWidth === typeof undefined ) {
-				hoverWidth = 20;
-			}	
-			
-			if( typeof targetWidth === typeof undefined ) {
-				targetWidth = 80;
-			}	
-			
-			if( typeof closeBtn === typeof undefined ) {
-				closeBtn = '.close';
-			}
-		
-			total = $( el ).length;
-		
-
-			TweenMax.set( el, {
-				width: 100/total + '%'
-			});
-			
-			
-			
-
-			//Create item hover overlay effects
-			$( el ).on( 'mouseenter', function() {
-
-				var $cur      = $( this ),
-					$neighbor = $cur.siblings().not( '.active' ); //Get the siblings of each element in the set of matched elements
-
-				TweenMax.to( $cur, 0.3, {
-					width: hoverWidth + '%'
-				});
-
-				TweenMax.to( $neighbor, 0.3, {
-					width: ( 100 - hoverWidth )/( total - 1 ) + '%'
-				});
-
-			} );
-
-			
-			//Display the target item
-			$( document ).on( 'click', el, function( e ) {
-				e.preventDefault();
-
-				var $cur        = $( this ),
-					$neighbor   = $cur.siblings(), //Get the siblings of each element in the set of matched elements
-					$cloneItem  = $cur.clone();
-
-				if ( !$cur.hasClass( 'active' ) ) {
-					$( el + '.active' ).remove();
-
-
-					TweenMax.set( $cloneItem, {
-						alpha      : 0,
-						onComplete : function() {
-
-							this.target
-								.prependTo( '#' + thisID )
-								.addClass( 'active' );
-
-						}
-					});
-
-					TweenMax.to( el, 0.3, {
-						alpha      : 1
-					});
-
-
-					TweenMax.to( $cur, 0.3, {
-						alpha : 0
-					});
-					
-					TweenMax.to( $neighbor, 0.3, {
-						alpha : 0.3
-					});
-				}
-
-
-
-			});
-
-			
-			//Close the actived item
-			$( document ).on( 'click', el + '.active, ' + closeBtn, function( e ) {
-				e.preventDefault();
-
-
-				
-				TweenMax.to( el, 0.3, {
-					width : 100/total + '%',
-					ease  : Back.easeOut
-				});
-
-				TweenMax.to( el + '.active', 0.3, {
-					alpha : 0,
-					onComplete : function() {
-
-						$( el + '.active' ).remove();
-						TweenMax.to( el, 0.3, {
-							alpha : 1
-						});
-					}
-				});
-
-
-
-			});	
-			
-			
-			
-		});	
-
-
-		
-    };
-
-    App.teamFocus = {
-        documentReady : documentReady        
-    };
-
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
-
-
-
-
-
 
 /* 
  *************************************
@@ -14458,6 +14585,160 @@ App = ( function ( App, $, window, document ) {
     return App;
 
 }( App, jQuery, window, document ) );
+
+
+/* 
+ *************************************
+ * <!-- Team Focus -->
+ *************************************
+ */
+App = ( function ( App, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+    
+		
+		
+		$( '.custom-team-focus' ).each( function() {
+			var $this           = $( this ),
+				thisID          = 'custom-team-focus-' + Math.random()*1000000000000000000,
+				hoverWidth      = $this.data( 'hover-width' ),
+				targetWidth     = $this.data( 'target-width' ), // Div over width as a percentage 
+				closeBtn        = $this.data( 'close-btn' ),
+				el              = '#' + thisID + '> .item',
+				total           = 0;
+			
+			
+			
+			$this.attr( 'id', thisID );
+			
+		
+			if( typeof hoverWidth === typeof undefined ) {
+				hoverWidth = 20;
+			}	
+			
+			if( typeof targetWidth === typeof undefined ) {
+				targetWidth = 80;
+			}	
+			
+			if( typeof closeBtn === typeof undefined ) {
+				closeBtn = '.close';
+			}
+		
+			total = $( el ).length;
+		
+
+			TweenMax.set( el, {
+				width: 100/total + '%'
+			});
+			
+			
+			
+
+			//Create item hover overlay effects
+			$( el ).on( 'mouseenter', function() {
+
+				var $cur      = $( this ),
+					$neighbor = $cur.siblings().not( '.active' ); //Get the siblings of each element in the set of matched elements
+
+				TweenMax.to( $cur, 0.3, {
+					width: hoverWidth + '%'
+				});
+
+				TweenMax.to( $neighbor, 0.3, {
+					width: ( 100 - hoverWidth )/( total - 1 ) + '%'
+				});
+
+			} );
+
+			
+			//Display the target item
+			$( document ).on( 'click', el, function( e ) {
+				e.preventDefault();
+
+				var $cur        = $( this ),
+					$neighbor   = $cur.siblings(), //Get the siblings of each element in the set of matched elements
+					$cloneItem  = $cur.clone();
+
+				if ( !$cur.hasClass( 'active' ) ) {
+					$( el + '.active' ).remove();
+
+
+					TweenMax.set( $cloneItem, {
+						alpha      : 0,
+						onComplete : function() {
+
+							this.target
+								.prependTo( '#' + thisID )
+								.addClass( 'active' );
+
+						}
+					});
+
+					TweenMax.to( el, 0.3, {
+						alpha      : 1
+					});
+
+
+					TweenMax.to( $cur, 0.3, {
+						alpha : 0
+					});
+					
+					TweenMax.to( $neighbor, 0.3, {
+						alpha : 0.3
+					});
+				}
+
+
+
+			});
+
+			
+			//Close the actived item
+			$( document ).on( 'click', el + '.active, ' + closeBtn, function( e ) {
+				e.preventDefault();
+
+
+				
+				TweenMax.to( el, 0.3, {
+					width : 100/total + '%',
+					ease  : Back.easeOut
+				});
+
+				TweenMax.to( el + '.active', 0.3, {
+					alpha : 0,
+					onComplete : function() {
+
+						$( el + '.active' ).remove();
+						TweenMax.to( el, 0.3, {
+							alpha : 1
+						});
+					}
+				});
+
+
+
+			});	
+			
+			
+			
+		});	
+
+
+		
+    };
+
+    App.teamFocus = {
+        documentReady : documentReady        
+    };
+
+    App.components.documentReady.push( documentReady );
+    return App;
+
+}( App, jQuery, window, document ) );
+
+
+
 
 
 /* 
