@@ -6,3 +6,4 @@ node_js:
 script: 
  - npm install --dev
  - gulp default
+ - npm run -s test:travis
