@@ -34,7 +34,7 @@
 
 ## Getting Started
 
-[![How To Use Uix Kit?](https://github.com/xizon/uix-kit/tree/master/_screenshots/video-cover.jpg)](https://www.youtube.com/watch?v=ckYJBMfPtBs "How To Use Uix Kit? Tutorial")
+[![How To Use Uix Kit?](https://github.com/xizon/uix-kit/blob/master/_screenshots/video-cover.jpg)](https://www.youtube.com/watch?v=ckYJBMfPtBs "How To Use Uix Kit? Tutorial")
 
 
 
