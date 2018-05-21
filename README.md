@@ -1,5 +1,7 @@
 # Uix Kit
 
+[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=1.5.8&x2=0)](https://www.npmjs.com/package/uix-kit)
+
 <p align = "center">
     <img src="https://uiux.cc/uix-kit/assets/images/logo.png">
 </p>
@@ -124,8 +126,7 @@ uix-kit/
 ├── LICENSE
 ├── package-lock.json
 ├── package.json
-├── documentation/
-├── _config.yml
+├── docs/
 ├── _grid/
 ├── _screenshots/
 ├── _components/
@@ -185,17 +186,17 @@ Licensed under the [MIT](https://opensource.org/licenses/MIT).
 
 ## Contributing
 
-Finding bugs, sending pull requests or improving our docs - any contribution is welcome and highly appreciated. To get started, head over to our [contribution guidelines](documentation/contributing.md). Thanks!
+Finding bugs, sending pull requests or improving our docs - any contribution is welcome and highly appreciated. To get started, head over to our [contribution guidelines](docs/contributing.md). Thanks!
 
 
 ## Changelog
 
-[Check Out Here](documentation/changelog.md)
+[Check Out Here](docs/changelog.md)
 
 
 ## How To Use
 
-How to use and quickly understand, please [check out the documentation](documentation/getting-starded.md)
+How to use and quickly understand, please [check out the documentation](docs/getting-starded.md)
 
 
 ## Buy Me a Coffee

@@ -207,8 +207,7 @@ uix-kit/
 ├── LICENSE
 ├── package-lock.json
 ├── package.json
-├── documentation/
-├── _config.yml
+├── docs/
 ├── _grid/
 ├── _screenshots/
 ├── _components/

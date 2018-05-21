@@ -1,5 +1,13 @@
 # Changelog
 
+#### = 1.5.8 (May 21, 2018) =
+
+
+* Fix: Solved an issue of display in Safari browser.
+* Tweak: Simplify the file structure further.
+* Tweak: Modified Accordion transition for pure CSS3 animation.
+
+
 #### = 1.5.7 (May 18, 2018) =
 
 * New: Add a new module "3D Carousel".

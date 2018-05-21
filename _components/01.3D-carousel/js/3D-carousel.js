@@ -224,8 +224,8 @@ App = ( function ( App, $, window, document ) {
 
 				//moving carousel forward
 				if ( direction == 'clockwise' || direction == '' || direction == null ) {
-					function pos( positionvalue ) {
-						if ( positionvalue != 'leftposition' ) {
+					var carousel3DPos = function( dir ) {
+						if ( dir != 'leftposition' ) {
 							//increment image list id
 							position++;
 
@@ -236,7 +236,7 @@ App = ( function ( App, $, window, document ) {
 						}
 
 						//setting the left positioned item
-						if (positionvalue == 'leftposition') {
+						if (dir == 'leftposition') {
 							//left positioned image should always be one left than main positioned image.
 							position = startItem - 1;
 
@@ -247,12 +247,12 @@ App = ( function ( App, $, window, document ) {
 						}
 
 						return position;
-					}
+					};
 
 					$wrapper.find( '> li#' + startItem + '').removeClass( 'main-pos' ).addClass( 'left-pos' );
-					$wrapper.find( '> li#' + (startItem + pos()) + '').removeClass( 'right-pos' ).addClass( 'main-pos' );
-					$wrapper.find( '> li#' + (startItem + pos()) + '').removeClass( 'back-pos' ).addClass( 'right-pos' );
-					$wrapper.find( '> li#' + pos( 'leftposition' ) + '').removeClass( 'left-pos' ).addClass( 'back-pos' );
+					$wrapper.find( '> li#' + (startItem + carousel3DPos()) + '').removeClass( 'right-pos' ).addClass( 'main-pos' );
+					$wrapper.find( '> li#' + (startItem + carousel3DPos()) + '').removeClass( 'back-pos' ).addClass( 'right-pos' );
+					$wrapper.find( '> li#' + carousel3DPos( 'leftposition' ) + '').removeClass( 'left-pos' ).addClass( 'back-pos' );
 
 					startItem++;
 					position = 0;

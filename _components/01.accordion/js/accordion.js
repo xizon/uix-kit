@@ -27,27 +27,26 @@ App = ( function ( App, $, window, document ) {
 			
 		
 			if ( firstShow ) {
-				$li.filter( '.active' ).find( 'dd' ).slideDown( 300 );
+				$li.first().addClass( 'active' );
 			}
 			
 
-			$titlebox.on( aEvent, function( e ) {
+			$li.on( aEvent, function( e ) {
 				e.stopPropagation();
 				
-				var $cur = $( this ).closest( 'dl' );
+				$( this ).find( 'dd' ).addClass( 'active' );
 				
-				if ( !$cur.hasClass( 'active' ) ) {
+				
+				if ( !$( this ).hasClass( 'active' ) ) {
 					$li.removeClass( 'active' );
-					$li.find( 'dd' ).slideUp( 300 );
 
-					$cur.addClass( 'active' );
-					$cur.find( 'dd' ).slideDown( 300 );	
+					$( this ).addClass( 'active' );
 				} else {
 					$li.removeClass( 'active' );
-					$li.find( 'dd' ).slideUp( 300 );
 				}
-				
+			
 			}); 
+						
 			
 			
 		});

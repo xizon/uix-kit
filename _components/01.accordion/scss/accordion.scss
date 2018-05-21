@@ -1,13 +1,49 @@
 /* ====================================================== 
     <!-- Accordion -->  
 /* ====================================================== */
-
 .custom-accordion {
 	dl {
 		position: relative;
 		background: white;
 		transition: .1s ease-in-out;
 
+		dt {
+			padding: 1rem;
+			cursor: pointer;
+
+			a {
+				display: block;
+			}
+
+			&:before {
+				position: absolute;
+				display: block;
+				font-family: 'FontAwesome';
+				content: "\f105";
+				font-size: 18pt;
+				right: 1rem;
+				top: .5rem;
+				transition: .1s ease-in-out;
+				color: rgba(0, 0, 0, 0.54);
+			}
+		}
+
+		dd {
+			width: calc(100% - 2rem);
+			overflow: hidden;
+			
+			/* Use max-height with different transition easing and delay for each state. */
+			max-height: 0px;
+			transition: max-height .8s cubic-bezier(0, 1, 0, 1) -.1s;
+			font-size: 0.875rem;
+			
+			> div {
+				padding: 1rem;
+			}
+
+		}
+		
+		
 		&::before {
 			content: '';
 			position: absolute;
@@ -19,6 +55,7 @@
 			pointer-events: none;
 			box-shadow: 0 -1px 0 #e5e5e5, 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.24);
 		}
+		
 		
 		/* Actived status */
 		&.active {
@@ -34,39 +71,21 @@
 				}
 				
 			}
+			
+			dd {
+				max-height: 9999px;
+				transition-timing-function: cubic-bezier(0.5, 0, 1, 0); 
+				transition-delay: 0s;
+
+			}		
+			
 		}
 
-	
+
 		
 	}
 
-	dt {
-		padding: 1rem;
-		cursor: pointer;
 
-		a {
-			display: block;
-		}
-		
-		&:before {
-			position: absolute;
-			display: block;
-			font-family: 'FontAwesome';
-			content: "\f105";
-			font-size: 18pt;
-			right: 1rem;
-			top: .5rem;
-			transition: .1s ease-in-out;
-			color: rgba(0, 0, 0, 0.54);
-		}
-	}
-	
-	dd {
-		width: calc(100% - 2rem);
-		padding: 1rem;
-		font-size: 0.875rem;
-		display: none;
-	}
 
 }
 
