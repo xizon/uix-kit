@@ -1,6 +1,10 @@
 # Uix Kit
 
-[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=1.5.8&x2=0)](https://www.npmjs.com/package/uix-kit)
+
+[![Travis CI](https://api.travis-ci.org/xizon/uix-kit.svg?branch=master)](https://travis-ci.org/xizon/uix-kit/)
+[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=1.6.0&x2=0)](https://www.npmjs.com/package/uix-kit)
+[![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
+
 
 <p align = "center">
     <img src="https://uiux.cc/uix-kit/assets/images/logo.png">
@@ -30,7 +34,8 @@
 
 ## Getting Started
 
-https://www.youtube.com/watch?v=ckYJBMfPtBs
+[![How To Use Uix Kit?](https://github.com/xizon/uix-kit/tree/master/_screenshots/video-cover.jpg)](https://www.youtube.com/watch?v=ckYJBMfPtBs "How To Use Uix Kit? Tutorial")
+
 
 
 

@@ -67,17 +67,17 @@
 	---------------------------
 	
     1. Basic 
-    2. Bullet List 
-    3. Helper Classes 
-    4. Table 
-    5. Spacing 
-    6. Typography 
+    2. Table 
+    3. Bullet List 
+    4. Helper Classes 
+    5. Typography 
+    6. Spacing 
     7. Basic Layout Styles 
-    8. Navigation Area 
-    9. Header Area 
+    8. Header Area 
+    9. Navigation Area 
     10. Brand 
-    11. Footer 
-    12. Video 
+    11. Video 
+    12. Footer 
     13. Back to Top 
     14. Loader 
     15. Social Media Icons 
@@ -93,57 +93,54 @@
     25. 3D Background 
     26. 3D Carousel 
     27. Accordion 
-    28. Accordion 
-    29. Accordion Background Images 
-    30. Advanced Content Slider 
-    31. Advanced Slider (Special Effects) 
-    32. Advanced Slider (Basic) 
-    33. Badges 
-    34. Breadcrumbs 
-    35. Button 
-    36. Author Card 
-    37. Counter 
-    38. Dotted Line 
-    39. Dropdown Menu 
-    40. Equal-width Divs 
-    41. Features 
-    42. Flexslider 
-    43. Footer Templates 
-    44. Form 
-    45. Form Progress 
-    46. Gallery 
-    47. Header Pinlines 
-    48. Image Shapes 
-    49. Custom Core Scripts & Stylesheets 
-    50. Cutom Light Box 
-    51. Brands List 
-    52. Bulleted List 
-    53. Maintain Aspect Ratio List 
-    54. List of Posts 
-    55. List of Split Posts 
-    56. Side by Side List 
-    57. Side by Side List With Photo 
-    58. Fullwidth List of Split 2 
-    59. Fullwidth List of Split 
-    60. Mobile Menu 
-    61. Modal Dialog 
-    62. Mouse Animation Scroll 
-    63. Multiple Items Carousel 
-    64. Parallax 
-    65. Periodical Scroll 
-    66. Pricing 
+    28. Accordion Background Images 
+    29. Advanced Content Slider 
+    30. Advanced Slider (Special Effects) 
+    31. Advanced Slider (Basic) 
+    32. Badges 
+    33. Breadcrumbs 
+    34. Button 
+    35. Author Card 
+    36. Counter 
+    37. Dotted Line 
+    38. Dropdown Menu 
+    39. Equal-width Divs 
+    40. Features 
+    41. Flexslider 
+    42. Footer Templates 
+    43. Form 
+    44. Form Progress 
+    45. Gallery 
+    46. Header Pinlines 
+    47. Image Shapes 
+    48. Custom Core Scripts & Stylesheets 
+    49. Cutom Light Box 
+    50. Brands List 
+    51. Bulleted List 
+    52. Maintain Aspect Ratio List 
+    53. List of Posts 
+    54. List of Split Posts 
+    55. Side by Side List 
+    56. Side by Side List With Photo 
+    57. Fullwidth List of Split 2 
+    58. Fullwidth List of Split 
+    59. Mobile Menu 
+    60. Modal Dialog 
+    61. Mouse Animation Scroll 
+    62. Multiple Items Carousel 
+    63. Parallax 
+    64. Periodical Scroll 
+    65. Pricing 
+    66. Progress Bar 
     67. Services 
-    68. Progress Bar 
-    69. Show More Less 
-    70. Single Post 
-    71. Source Code 
-    72. Table Series 
-    73. Tabs 
-    74. Team Focus 
-    75. Testimonials Carousel 
-    76. Timeline 
-    77. ToolTip 
-    78. WordPress Core 
+    68. Show More Less 
+    69. Single Post 
+    70. Source Code 
+    71. Table Series 
+    72. Tabs 
+    73. Team Focus 
+    74. Testimonials Carousel 
+    75. Timeline 
 
 
 
@@ -3369,6 +3366,114 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
+    <!-- Accordion Background Images -->  
+/* ====================================================== */
+.custom-accordion-img {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+
+.custom-accordion-img ul {
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+    margin: 0;
+    padding: 0;
+    font-size: 0;
+  /*Fighting the Space Between Inline Block Elements*/;
+}
+
+.custom-accordion-img ul li {
+    display: table-cell;
+    vertical-align: bottom;
+    position: relative;
+    width: 16.66666666666667%;
+    height: 250px;
+    font-size: 1rem;
+  /*Fighting the Space Between Inline Block Elements*/
+    background-position: center center;
+    background-repeat: no-repeat;
+    transition: all 0.3s ease;
+}
+
+.custom-accordion-img ul li.active {
+    width: 60%;
+}
+
+.custom-accordion-img ul li > img {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.custom-accordion-img ul li > .outer {
+    display: block;
+    height: 250px;
+    width: 100%;
+    position: relative;
+    z-index: 3;
+    vertical-align: bottom;
+    padding: 1rem 2.5rem;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.custom-accordion-img ul li > .outer * {
+    margin: 0;
+    position: relative;
+    z-index: 5;
+    transform: translateX(-20px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.custom-accordion-img ul li > .outer h3 {
+    text-overflow: clip;
+    top: 140px;
+}
+
+.custom-accordion-img ul li > .outer p {
+    top: 140px;
+}
+
+.custom-accordion-img ul li > .outer .close-item {
+    position: absolute;
+    right: 0;
+    top: 10px;
+    z-index: 2;
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    border-radius: 15px;
+    width: auto;
+    font-size: 0.75rem;
+    padding: 0 1rem;
+}
+
+@media all and (max-width: 768px) {
+    .custom-accordion-img {
+        height: auto;
+    }
+
+    .custom-accordion-img ul li,
+  .custom-accordion-img ul li:hover,
+  .custom-accordion-img ul:hover li,
+  .custom-accordion-img ul:hover li:hover {
+        position: relative;
+        display: table;
+        table-layout: fixed;
+        width: 100%;
+        transition: none;
+    }
+}
+
+/* ====================================================== 
     <!-- Advanced Content Slider -->  
 /* ====================================================== */
 /* 
@@ -3514,152 +3619,6 @@ ul.entry-meta {
 
 .custom-advanced-content-slider-arrows .next.disabled {
     display: none;
-}
-
-/* ====================================================== 
-    <!-- Accordion Background Images -->  
-/* ====================================================== */
-.custom-accordion-img {
-    width: 100%;
-    height: 250px;
-    overflow: hidden;
-}
-
-.custom-accordion-img ul {
-    width: 100%;
-    display: table;
-    table-layout: fixed;
-    margin: 0;
-    padding: 0;
-    font-size: 0;
-  /*Fighting the Space Between Inline Block Elements*/;
-}
-
-.custom-accordion-img ul li {
-    display: table-cell;
-    vertical-align: bottom;
-    position: relative;
-    width: 16.66666666666667%;
-    height: 250px;
-    font-size: 1rem;
-  /*Fighting the Space Between Inline Block Elements*/
-    background-position: center center;
-    background-repeat: no-repeat;
-    transition: all 0.3s ease;
-}
-
-.custom-accordion-img ul li.active {
-    width: 60%;
-}
-
-.custom-accordion-img ul li > img {
-    position: absolute;
-    left: 0;
-    top: 0;
-}
-
-.custom-accordion-img ul li > .outer {
-    display: block;
-    height: 250px;
-    width: 100%;
-    position: relative;
-    z-index: 3;
-    vertical-align: bottom;
-    padding: 1rem 2.5rem;
-    box-sizing: border-box;
-    color: #fff;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.custom-accordion-img ul li > .outer * {
-    margin: 0;
-    position: relative;
-    z-index: 5;
-    transform: translateX(-20px);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 100%;
-    white-space: nowrap;
-    transition: all 0.3s ease;
-}
-
-.custom-accordion-img ul li > .outer h3 {
-    text-overflow: clip;
-    top: 140px;
-}
-
-.custom-accordion-img ul li > .outer p {
-    top: 140px;
-}
-
-.custom-accordion-img ul li > .outer .close-item {
-    position: absolute;
-    right: 0;
-    top: 10px;
-    z-index: 2;
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.2);
-    color: #fff;
-    border-radius: 15px;
-    width: auto;
-    font-size: 0.75rem;
-    padding: 0 1rem;
-}
-
-@media all and (max-width: 768px) {
-    .custom-accordion-img {
-        height: auto;
-    }
-
-    .custom-accordion-img ul li,
-  .custom-accordion-img ul li:hover,
-  .custom-accordion-img ul:hover li,
-  .custom-accordion-img ul:hover li:hover {
-        position: relative;
-        display: table;
-        table-layout: fixed;
-        width: 100%;
-        transition: none;
-    }
-}
-
-/* ====================================================== 
-   <!-- Badges --> 
-/* ====================================================== */
-.badges {
-    width: 300px;
-    height: 300px;
-    position: relative;
-    display: table;
-    margin: 0 auto;
-    margin-bottom: 3rem;
-    background: #fff;
-    transition: all 0.3s ease;
-}
-
-.badges::after {
-  /* Please do not convert it to block elements and set width and height. */
-    content: '';
-    background: #EC5E79;
-    background: linear-gradient(to bottom, #EC5E79 0%, #f60 100%), linear-gradient(to bottom, #EC5E79 0%, #f60 100%);
-    position: absolute;
-    top: -15px;
-    bottom: -15px;
-    right: -15px;
-    left: -15px;
-    z-index: -1;
-    border-radius: inherit;
-}
-
-.badges.circle {
-    border-radius: 50%;
-}
-
-.badges .inner {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
 }
 
 /* ====================================================== 
@@ -3963,6 +3922,44 @@ ul.entry-meta {
 
 .custom-advanced-slider-arrows .next.disabled {
     visibility: hidden;
+}
+
+/* ====================================================== 
+   <!-- Badges --> 
+/* ====================================================== */
+.badges {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    display: table;
+    margin: 0 auto;
+    margin-bottom: 3rem;
+    background: #fff;
+    transition: all 0.3s ease;
+}
+
+.badges::after {
+  /* Please do not convert it to block elements and set width and height. */
+    content: '';
+    background: #EC5E79;
+    background: linear-gradient(to bottom, #EC5E79 0%, #f60 100%), linear-gradient(to bottom, #EC5E79 0%, #f60 100%);
+    position: absolute;
+    top: -15px;
+    bottom: -15px;
+    right: -15px;
+    left: -15px;
+    z-index: -1;
+    border-radius: inherit;
+}
+
+.badges.circle {
+    border-radius: 50%;
+}
+
+.badges .inner {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
 }
 
 /* ====================================================== 
@@ -10814,6 +10811,110 @@ dl.list-side-by-side:after {
 
 /* Highlight Style */
 /* ====================================================== 
+   <!-- Table Series -->    
+/* ====================================================== */
+.custom-table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    empty-cells: show;
+    border: 1px solid #d6d5d5;
+    width: 100%;
+    border-color: #d6d5d5 !important;
+}
+
+.custom-table.noborder {
+    border: none;
+}
+
+.custom-table.top-noborder td {
+    border-top: none;
+}
+
+.custom-table.bottom-noborder td {
+    border-bottom: none;
+}
+
+.custom-table.alternant-row tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.custom-table.alternant-col col:first-child {
+    background-color: #000;
+}
+
+.custom-table.alternant-col col:nth-child(2n+3) {
+    background-color: #f2f2f2;
+}
+
+.custom-table caption {
+    padding: 0.875rem 0;
+    text-align: center;
+}
+
+.custom-table th,
+.custom-table td {
+    border-color: #d6d5d5 !important;
+}
+
+.custom-table td,
+.custom-table th {
+    border-left: 1px solid #d6d5d5;
+    border-width: 0 0 0 1px;
+    margin: 0;
+    overflow: visible;
+    padding: 0.5rem 0.75rem;
+}
+
+.custom-table td:first-child,
+.custom-table th:first-child {
+    border-left-width: 0;
+}
+
+.custom-table thead {
+    background: #f2f2f2;
+    text-align: left;
+    vertical-align: bottom;
+}
+
+.custom-table tfoot {
+    border: 1px solid #d6d5d5;
+}
+
+.custom-table tr th {
+    text-align: left;
+}
+
+.custom-table td {
+    background-color: transparent;
+}
+
+.custom-table.striped tr:nth-child(2n-1) td {
+    background-color: #f2f2f2;
+}
+
+.custom-table.bordered td {
+    border-bottom: 1px solid #d6d5d5;
+    border-width: 0 0 1px;
+}
+
+.custom-table.bordered tbody tr:last-child td {
+    border-bottom-width: 0;
+}
+
+.custom-table.horizontal td {
+    border-bottom: 1px solid #d6d5d5;
+    border-width: 0 0 1px;
+}
+
+.custom-table.horizontal tbody tr:last-child td {
+    border-bottom-width: 0;
+}
+
+.custom-table.horizontal th {
+    border-bottom: 1px solid #d6d5d5;
+}
+
+/* ====================================================== 
     <!-- Tabs -->      
 /* ====================================================== */
 .custom-tabs {
@@ -10976,110 +11077,6 @@ dl.list-side-by-side:after {
         margin-top: 50px;
         margin-left: 120px;
     }
-}
-
-/* ====================================================== 
-   <!-- Table Series -->    
-/* ====================================================== */
-.custom-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    empty-cells: show;
-    border: 1px solid #d6d5d5;
-    width: 100%;
-    border-color: #d6d5d5 !important;
-}
-
-.custom-table.noborder {
-    border: none;
-}
-
-.custom-table.top-noborder td {
-    border-top: none;
-}
-
-.custom-table.bottom-noborder td {
-    border-bottom: none;
-}
-
-.custom-table.alternant-row tbody tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-.custom-table.alternant-col col:first-child {
-    background-color: #000;
-}
-
-.custom-table.alternant-col col:nth-child(2n+3) {
-    background-color: #f2f2f2;
-}
-
-.custom-table caption {
-    padding: 0.875rem 0;
-    text-align: center;
-}
-
-.custom-table th,
-.custom-table td {
-    border-color: #d6d5d5 !important;
-}
-
-.custom-table td,
-.custom-table th {
-    border-left: 1px solid #d6d5d5;
-    border-width: 0 0 0 1px;
-    margin: 0;
-    overflow: visible;
-    padding: 0.5rem 0.75rem;
-}
-
-.custom-table td:first-child,
-.custom-table th:first-child {
-    border-left-width: 0;
-}
-
-.custom-table thead {
-    background: #f2f2f2;
-    text-align: left;
-    vertical-align: bottom;
-}
-
-.custom-table tfoot {
-    border: 1px solid #d6d5d5;
-}
-
-.custom-table tr th {
-    text-align: left;
-}
-
-.custom-table td {
-    background-color: transparent;
-}
-
-.custom-table.striped tr:nth-child(2n-1) td {
-    background-color: #f2f2f2;
-}
-
-.custom-table.bordered td {
-    border-bottom: 1px solid #d6d5d5;
-    border-width: 0 0 1px;
-}
-
-.custom-table.bordered tbody tr:last-child td {
-    border-bottom-width: 0;
-}
-
-.custom-table.horizontal td {
-    border-bottom: 1px solid #d6d5d5;
-    border-width: 0 0 1px;
-}
-
-.custom-table.horizontal tbody tr:last-child td {
-    border-bottom-width: 0;
-}
-
-.custom-table.horizontal th {
-    border-bottom: 1px solid #d6d5d5;
 }
 
 /* ====================================================== 
@@ -12042,7 +12039,11 @@ a img.aligncenter {
         left: 2px;
     }
 }
+   }
 
+    55% {
+        right: 2px;
+    }
 
     100% {
         right: 180px;

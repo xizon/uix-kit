@@ -45,8 +45,8 @@
     20. Counter 
     21. Dynamic Drop Down List from JSON 
     22. Flexslider 
-    23. Form Progress 
-    24. Form 
+    23. Form 
+    24. Form Progress 
     25. Gallery 
     26. Image Shapes 
     27. Custom Core Scripts & Stylesheets 

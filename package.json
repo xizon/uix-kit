@@ -1,7 +1,7 @@
 {
   "author": "UIUX Lab",
   "name": "uix-kit",
-  "version": "1.5.8",
+  "version": "1.6.0",
   "description": "Uix Kit (https://github.com/xizon/uix-kit)",
   "main": "gulpfile.js",
   "dependencies": {
@@ -56,6 +56,7 @@
   },
   "homepage": "https://github.com/xizon/uix-kit#readme",
   "directories": {
+    "doc": "docs",
     "example": "examples"
   },
   "keywords": [

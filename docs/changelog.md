@@ -1,6 +1,6 @@
 # Changelog
 
-#### = 1.5.8 (May 21, 2018) =
+#### = 1.6.0 (May 21, 2018) =
 
 
 * Fix: Solved an issue of display in Safari browser.
