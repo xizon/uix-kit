@@ -189,17 +189,17 @@ Licensed under the [MIT](https://opensource.org/licenses/MIT).
 
 ## Contributing
 
-Finding bugs, sending pull requests or improving our docs - any contribution is welcome and highly appreciated. To get started, head over to our [contribution guidelines](https://github.com/xizon/uix-kit/blob/master/documentation/CONTRIBUTING.md). Thanks!
+Finding bugs, sending pull requests or improving our docs - any contribution is welcome and highly appreciated. To get started, head over to our [contribution guidelines](documentation/contributing.md). Thanks!
 
 
 ## Changelog
 
-[Check Out Here](https://github.com/xizon/uix-kit/blob/master/documentation/CHANGELOG.md)
+[Check Out Here](documentation/changelog.md)
 
 
 ## How To Use
 
-How to use and quickly understand, please [check out the documentation](https://github.com/xizon/uix-kit/blob/master/documentation/DOCUMENTATION.md)
+How to use and quickly understand, please [check out the documentation](documentation/getting-starded.md)
 
 
 ## Buy Me a Coffee
