@@ -122,9 +122,9 @@ uix-kit/
 ├── gulpfile.js
 ├── main.js
 ├── LICENSE
-├── readme.txt
 ├── package-lock.json
 ├── package.json
+├── documentation/
 ├── _config.yml
 ├── _grid/
 ├── _screenshots/
@@ -140,10 +140,6 @@ uix-kit/
 │   │       ├── videos/
 │   │       ├── json/
 │   │       └── js/
-├── documentation/
-│   ├── changelog.md
-│   ├── contributing.md
-│   └── getting-starded.md
 └──
 ```
 
