@@ -1,4 +1,4 @@
-# Documentation
+# Getting Starded
 
 
 https://www.youtube.com/watch?v=ckYJBMfPtBs
@@ -202,9 +202,6 @@ The `examples/assets-demo/` folder can be deleted.
 
 uix-kit/
 ├── README.md
-├── CHANGELOG.md
-├── CONTRIBUTING.md
-├── DOCUMENTATION.md
 ├── gulpfile.js
 ├── main.js
 ├── LICENSE
@@ -226,6 +223,10 @@ uix-kit/
 │   │       ├── videos/
 │   │       ├── json/
 │   │       └── js/
+├── documentation/
+│   ├── changelog.md
+│   ├── contributing.md
+│   └── getting-starded.md
 └──
 	
 ```

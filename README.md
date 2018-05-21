@@ -119,9 +119,6 @@ The `examples/assets-demo/` folder can be deleted.
 
 uix-kit/
 ├── README.md
-├── CHANGELOG.md
-├── CONTRIBUTING.md
-├── DOCUMENTATION.md
 ├── gulpfile.js
 ├── main.js
 ├── LICENSE
@@ -143,6 +140,10 @@ uix-kit/
 │   │       ├── videos/
 │   │       ├── json/
 │   │       └── js/
+├── documentation/
+│   ├── changelog.md
+│   ├── contributing.md
+│   └── getting-starded.md
 └──
 ```
 
@@ -188,17 +189,17 @@ Licensed under the [MIT](https://opensource.org/licenses/MIT).
 
 ## Contributing
 
-Finding bugs, sending pull requests or improving our docs - any contribution is welcome and highly appreciated. To get started, head over to our [contribution guidelines](CONTRIBUTING.md). Thanks!
+Finding bugs, sending pull requests or improving our docs - any contribution is welcome and highly appreciated. To get started, head over to our [contribution guidelines](documentation/CONTRIBUTING.md). Thanks!
 
 
 ## Changelog
 
-[Check Out Here](CHANGELOG.md)
+[Check Out Here](documentation/CHANGELOG.md)
 
 
 ## How To Use
 
-How to use and quickly understand, please [check out the documentation](DOCUMENTATION.md)
+How to use and quickly understand, please [check out the documentation](documentation/DOCUMENTATION.md)
 
 
 ## Buy Me a Coffee
