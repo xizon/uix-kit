@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.5.8
- * ## Last Update         :  May 21, 2018
+ * ## Version             :  1.6.1
+ * ## Last Update         :  May 24, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -37,48 +37,49 @@
     12. 3D Background 
     13. 3D Carousel 
     14. 3D Pages 
-    15. Accordion 
-    16. Accordion Background Images 
-    17. Advanced Content Slider 
-    18. Advanced Slider (Special Effects) 
-    19. Advanced Slider (Basic) 
-    20. Counter 
-    21. Dynamic Drop Down List from JSON 
-    22. Flexslider 
-    23. Form 
-    24. Form Progress 
-    25. Gallery 
-    26. Image Shapes 
-    27. Custom Core Scripts & Stylesheets 
-    28. Custom Lightbox 
-    29. Bulleted List 
-    30. Posts List With Ajax 
-    31. Fullwidth List of Split 
-    32. Mobile Menu 
-    33. Modal Dialog 
-    34. Mousewheel Interaction 
-    35. Multiple Items Carousel 
-    36. Full Page/One Page Transition 
-    37. Full Page/One Page Transition 2 
-    38. Parallax 
-    39. Periodical Scroll 
-    40. Pricing 
-    41. Progress Bar 
-    42. Retina Graphics for Website 
-    43. Rotating Elements 
-    44. Scroll Reveal 
-    45. Show More Less 
-    46. Smooth Scrolling When Clicking An Anchor Link 
-    47. Source Code 
-    48. Sticky Elements 
-    49. Tabs 
-    50. Team Focus 
-    51. Testimonials Carousel 
-    52. Text effect 
-    53. Timeline 
-    54. Ajax Page Loader (Loading A Page via Ajax Into Div)  
-    55. GSAP Plugins 
-    56. Three.js Plugins 
+    15. 3D Particle Effect 
+    16. Accordion 
+    17. Accordion Background Images 
+    18. Advanced Content Slider 
+    19. Advanced Slider (Special Effects) 
+    20. Advanced Slider (Basic) 
+    21. Counter 
+    22. Dynamic Drop Down List from JSON 
+    23. Flexslider 
+    24. Form 
+    25. Form Progress 
+    26. Gallery 
+    27. Image Shapes 
+    28. Custom Core Scripts & Stylesheets 
+    29. Custom Lightbox 
+    30. Bulleted List 
+    31. Posts List With Ajax 
+    32. Fullwidth List of Split 
+    33. Mobile Menu 
+    34. Modal Dialog 
+    35. Mousewheel Interaction 
+    36. Multiple Items Carousel 
+    37. Full Page/One Page Transition 
+    38. Full Page/One Page Transition 2 
+    39. Parallax 
+    40. Periodical Scroll 
+    41. Pricing 
+    42. Progress Bar 
+    43. Retina Graphics for Website 
+    44. Rotating Elements 
+    45. Scroll Reveal 
+    46. Show More Less 
+    47. Smooth Scrolling When Clicking An Anchor Link 
+    48. Source Code 
+    49. Sticky Elements 
+    50. Tabs 
+    51. Team Focus 
+    52. Testimonials Carousel 
+    53. Text effect 
+    54. Timeline 
+    55. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    56. GSAP Plugins 
+    57. Three.js Plugins 
 
 
 */
@@ -1830,7 +1831,7 @@ App = ( function ( App, $, window, document ) {
 
 		
 		//Prevent this module from loading in other pages
-		if ( $( '#3D-renderer' ).length == 0 ) return false;
+		if ( $( '#3D-renderer' ).length == 0 || ! Modernizr.webgl ) return false;
 		
 		
 		
@@ -1956,6 +1957,208 @@ App = ( function ( App, $, window, document ) {
 
 
 
+
+
+
+
+/* 
+ *************************************
+ * <!-- 3D Particle Effect -->
+ *************************************
+ */
+App = ( function ( App, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+
+		
+		//Prevent this module from loading in other pages
+		if ( $( '#3D-particle-effect-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
+		
+		
+		
+		var $window                   = $( window ),
+			windowWidth               = $window.width(),
+			windowHeight              = $window.height(),
+			rendererCanvasID          = '3D-particle-effect-canvas',
+			rendererCanvasWidth       = 800,
+			rendererCanvasHeight      = 400;
+		
+		// Draw Image To Canvas
+		//-------------------------------------	
+		//drawImageToCanvas( rendererCanvasID, $( '#' + rendererCanvasID ).data( 'img-src' ) );
+
+		
+		// Effect Render
+		//-------------------------------------	
+		var renderer, scene, camera, controls;
+
+
+		// Create a camera, which defines where we're looking at.		
+		renderer = new THREE.WebGLRenderer( { 
+								canvas   : document.getElementById( rendererCanvasID ), //canvas
+								alpha    : true, 
+								antialias: true 
+							} );
+		renderer.setSize( windowWidth, windowHeight );
+	
+		
+		scene = new THREE.Scene();
+		camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 0.01, 100 );
+		camera.position.set( -1.5, 0.5, 0.5 );
+		camera.lookAt( new THREE.Vector3(0,0,0) );
+		controls = new THREE.OrbitControls( camera );
+
+		
+
+	
+		// Immediately use the texture for material creation
+		var createGeometryTexture = function( geometry, size ) {
+			var data = new Float32Array(size * size * 3);
+			var verticesLength = geometry.vertices.length;
+			for (var i = 0; i < size * size; i++) {
+				if (verticesLength > i) {
+					data[i * 3] = geometry.vertices[i].x;
+					data[i * 3 + 1] = geometry.vertices[i].y;
+					data[i * 3 + 2] = geometry.vertices[i].z;
+				} else {
+					data[i * 3] = data[i * 3 + 1] = data[i * 3 + 2] = 0.0;
+				}
+			}
+			var dataTexture = new THREE.DataTexture( data, size, size, THREE.RGBFormat, THREE.FloatType );
+			dataTexture.needsUpdate = true;
+			return dataTexture;
+		};
+
+		var size            = 84,
+			horizontalPlane = {
+			vertices: []
+		};
+		
+		for (var i = 0; i < size * size; i++) {
+			horizontalPlane.vertices.push({
+				x: (((i % size) / size) - 0.5) * 1.2,
+				y: 0.0,
+				z: (((i / size) / size) - 0.5) * 1.2
+			});
+		};
+
+		var particleTextureTarget = createGeometryTexture(new THREE.SphereGeometry(0.5, size - 1, size - 1), size),
+			texturePlane          = createGeometryTexture(horizontalPlane, size),
+			textureSphere         = createGeometryTexture(new THREE.SphereGeometry(0.5, size - 1, size - 1), size),
+			textureBox            = createGeometryTexture(new THREE.BoxGeometry(0.7, 0.7, 0.7, 26, 26, 26), size);
+
+		
+		// Add textures to array for iteration
+		var geometryTextures = [];
+		geometryTextures.push( texturePlane, textureSphere, textureBox );
+
+		// Change particleTextureTarget.image on click
+		var geometryTextureIndex = 0;
+		$( 'body' ).on( 'click', function() {
+			geometryTextureIndex++;
+			if (geometryTextureIndex > geometryTextures.length - 1) {
+				geometryTextureIndex = 0;
+			}
+			particleTextureTarget.image = geometryTextures[geometryTextureIndex].image;
+			particleTextureTarget.needsUpdate = true;
+		});
+		
+
+		// Create the particles
+		var particleOptions = {
+			textureSize: size,
+			explodeRate: 0.1,
+			targetTexture: particleTextureTarget,
+			velocityFunctionString: 'outVelocity = direction * (dist/50.0);',
+			colorFunctionString: 'color = vec4(0.0, 0.0, 0.0, 1.0);'
+		};
+		var particles = new Particles( renderer, scene, particleOptions );
+
+		
+		//controls.update() must be called after any manual changes to the camera's transform
+		controls.update();
+
+		animate();
+		function animate() {
+
+			requestAnimationFrame( animate );
+
+			// required if controls.enableDamping or controls.autoRotate are set to true
+			controls.update();
+			
+			// Update the particles for each frame
+			particles.pointCloud.rotation.y += 0.005;
+			particles.update();
+
+			renderer.render( scene, camera );
+
+		}
+		
+		
+		
+	
+
+		/*
+		 * Returns a random number between two other numbers
+		 *
+		 * @param  {string} src                 - The URL of the image.
+		 * @param  {number} width               - The width of the image.
+		 * @param  {number} height              - The height of the image.
+		 * @param  {function} callback          - Callback function when the image is loaded.
+		 * @return {object}                     - The image element.
+		 */
+		function loadImage( src, width, height, callback ) {
+			var image = new Image( width, height ); 
+			image.src = src ;
+			image.onload = function() {
+				callback.call();
+			};
+
+			return image;
+		}
+		
+	
+		/*
+		 * Draw Image To Canvas
+		 *
+		 * @param  {object} canvasID         - The ID of a canvas.
+		 * @param  {string} img              - Image URL.
+		 * @return {void}                    - The constructor.
+		 */
+		function drawImageToCanvas( canvasID, img ) {
+			
+			var image = loadImage( img, rendererCanvasWidth, rendererCanvasHeight, function() {
+
+					var c      = document.getElementById( canvasID ),
+						ctx    = c.getContext( '2d' );
+					
+					c.width = rendererCanvasWidth;
+					c.height = rendererCanvasHeight;
+
+					ctx.drawImage( image, 0, 0 );
+
+		
+				}
+			);
+			
+		
+		}
+
+
+		
+		
+		
+    };
+
+    App.threeDimensionalParticleEffect = {
+        documentReady : documentReady        
+    };
+
+    App.components.documentReady.push( documentReady );
+    return App;
+
+}( App, jQuery, window, document ) );
 
 
 
@@ -2636,14 +2839,15 @@ App = ( function ( App, $, window, document ) {
 				//Basic webGL renderers 
 				//-------------------------------------
 				renderer              = new PIXI.Application( $this.width(), $this.height(), {
-														backgroundColor : 0x000000, 
+														//backgroundColor : 0x000000, 
+					                                    transparent     : true,
 														autoResize      : true, 
 														view            : document.getElementById( rendererCanvasID )
 													});
 
 				renderer_filter       = new PIXI.autoDetectRenderer( $this.width(), $this.height(), {
-														backgroundColor : 0x000000, 
-														transparent     : false,
+														//backgroundColor : 0x000000, 
+														transparent     : true,
 														view            : document.getElementById( rendererCanvasID_filter )
 													});
 
@@ -3048,7 +3252,7 @@ App = ( function ( App, $, window, document ) {
 						ticker.autoStart = true;
 						ticker.add( function( delta ) {
 							
-
+          
 							// Render updated scene
 							renderer_filter.render( stage_filter );
 
@@ -3067,7 +3271,158 @@ App = ( function ( App, $, window, document ) {
 				}// end effect
 		
 				
+				//----------------------------------------------------------------------------------
+				//--------------------------------- Liquid Distortion Effect 3 -----------------------
+				//----------------------------------------------------------------------------------
+				//Usage of returning sprite object: items_container.children[index]
+				if ( $this.hasClass( 'eff-liquid3' ) ) {
 
+					$this.find( '.item' ).each( function( index )  {
+
+						var $thisItem = $( this );
+
+
+
+						//Load sprite from each slider to canvas
+						//-------------------------------------
+						var curSprite, 
+							canvasRatio = $this.width()/nativeItemW;
+
+						if ( $thisItem.find( 'video' ).length > 0 ) {
+
+
+							// create a video texture from a path
+							var videoURL = $thisItem.find( 'source:first' ).attr( 'src' ),
+								texture  = PIXI.Texture.fromVideo( videoURL );
+
+							curSprite = new PIXI.Sprite( texture );
+
+							// pause the video
+							var videoSource = texture.baseTexture.source;
+							videoSource.autoplay = false;
+							videoSource.pause();
+							videoSource.currentTime = 0;
+							videoSource.muted = true;
+
+
+							//Returns the dimensions (intrinsic height and width ) of the video
+							var video = document.getElementById( $thisItem.find( 'video' ).attr( 'id' ) );
+							video.addEventListener( 'loadedmetadata', function( e ) {
+
+								var	curW    = this.videoWidth,
+									curH    = this.videoHeight,
+									newW    = curW,
+									newH    = curH;
+
+								newW = $this.width();
+
+								//Scaled/Proportional Content 
+								newH = curH*(newW/curW);
+
+								//At the same time change the height of the canvas
+								renderer.view.style.width = newW + 'px';
+								renderer.view.style.height = newH + 'px';	
+
+
+							}, false);	
+
+							video.src = videoURL;
+
+
+
+						} else {
+
+							var imgURL   = $thisItem.find( 'img' ).attr( 'src' ),
+								imgCur   = new Image();
+
+							curSprite = new PIXI.Sprite.fromImage( imgURL );
+
+							imgCur.onload = function() {
+
+								//At the same time change the height of the canvas
+								renderer.view.style.width = $thisItem.find( 'img' ).width() + 'px';
+								renderer.view.style.height =$thisItem.find( 'img' ).height() + 'px';
+
+							};
+
+							imgCur.src = imgURL;
+
+
+						}
+
+						curSprite.width  = $this.width();
+						curSprite.height = $this.height();	
+
+
+						//Need to scale according to the screen
+						curSprite.scale.set( canvasRatio );
+
+						TweenMax.set( curSprite, {
+							alpha : 0
+						});	
+
+
+						items_container.addChild( curSprite );
+						// Enable interactions
+						items_container.interactive = true;
+
+
+						//Add child container to the main container 
+						//-------------------------------------
+						stage_filter.addChild( items_container );
+						// Enable Interactions
+						stage_filter.interactive = true;
+
+						//A texture stores the information that represents an image
+						displacementSprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
+						
+
+
+						//Set the filter to stage and set some default values for the animation
+						//-------------------------------------
+						stage_filter.filters = [ displacementFilter ];    
+
+
+						//Add filter container to the main container
+						//-------------------------------------				
+						displacementSprite.anchor.set( 0.5 );
+						displacementSprite.x = renderer_filter.width / 2;
+						displacementSprite.y = renderer_filter.height / 2;
+					
+
+
+						// PIXI tries to fit the filter bounding box to the renderer so we optionally bypass
+						displacementFilter.autoFit = false;
+
+						stage_filter.addChild( displacementSprite );
+
+						//Animation Effects
+						//-------------------------------------
+						var ticker       = new PIXI.ticker.Ticker();
+						ticker.autoStart = true;
+						ticker.add( function( delta ) {
+							
+                            //Need the displacementSprite.texture.baseTexture.wrapMode is "PIXI.WRAP_MODES.REPEAT"
+							displacementSprite.x += 1 * delta;
+							displacementSprite.y += 0.3;
+							
+							// Render updated scene
+							renderer_filter.render( stage_filter );
+
+						});
+
+
+					});
+
+					//Initialize the default height of canvas
+					//-------------------------------------	
+					setTimeout( function() {
+						canvasDefaultInit( $first );
+					}, animDuration );
+
+
+				}// end effect
+				
 
 				//----------------------------------------------------------------------------------
 				//--------------------------------- 3D Rotating Effect -----------------------------
@@ -3239,8 +3594,9 @@ App = ( function ( App, $, window, document ) {
 
 							//automatic rotation
 							scene.children[0].rotation.y = Date.now() * 0.0001;
+							var amplitudeVal = 1.0 + Math.sin( Date.now() * 0.0001 * 0.5 );
 
-
+							
 							//drag & drop
 	//						scene.children[0].rotation.x = toRad( targetRotationX * 4 );
 	//						scene.children[0].rotation.y = toRad( targetRotationY * 4 );	
@@ -4126,6 +4482,122 @@ App = ( function ( App, $, window, document ) {
 				
 				
 
+				//----------------------------------------------------------------------------------
+				//--------------------------------- Liquid Distortion Effect 3 -----------------------
+				//----------------------------------------------------------------------------------
+				if ( slider.hasClass( 'eff-liquid3' ) ) {
+					
+				
+					
+					//Display wrapper of canvas (transitions between slides)
+					//-------------------------------------	
+					if ( goType == 'out' ) {
+						//Current item leaving action
+						
+						
+						TweenMax.to( displacementSprite, 1, { 
+							x: 23,
+							y: 10
+						} );
+						
+						
+					} else {
+						//Current item entry action
+						
+						TweenMax.to( $myRenderer, animDuration/1000, {
+							alpha : 0,
+							onComplete    : function() {
+
+								var curSp = items_container.children[ elementIndex ];
+
+								TweenMax.to( this.target, animDuration/1000, {
+									alpha : 1
+								});	
+
+
+								//display the current item
+								for ( var k = 0; k < spTotal; k++ ) {
+
+									var obj = items_container.children[ k ];
+									TweenMax.set( obj, {
+										alpha : 0
+									});	
+
+									//pause all videos
+									if ( obj._texture.baseTexture.imageType == null ) {
+										var videoSource = obj.texture.baseTexture.source;
+
+										// play the video
+										videoSource.currentTime = 0;
+										videoSource.autoplay = false;
+										videoSource.pause();
+										videoSource.muted = true;
+									}		
+
+								}
+
+
+
+								//play current video
+								if ( curSp._texture.baseTexture.imageType == null ) {
+									var videoSource2 = curSp.texture.baseTexture.source;
+
+									// play the video
+									videoSource2.currentTime = 0;
+									videoSource2.autoplay = true;
+									videoSource2.play();
+									videoSource2.muted = false;
+								}
+
+
+								//display filters
+								
+								//sprite
+								var baseTimeline = new TimelineMax( {
+									delay       : 0,
+									paused      : false,
+									repeat      : 0,
+									onRepeat    : function() {},
+									onComplete  : function() {
+							
+
+									},
+									onUpdate    : function() {  
+									   
+									}
+								} );
+								
+								baseTimeline.clear();
+
+								//filter
+								baseTimeline
+								  .to( displacementFilter.scale, 1, { y: "+=" + 50 + "", ease: Power3.easeOut } )
+								  .to( curSp, 0.5, { alpha: 1, ease: Power3.easeOut }, 0.4 )     
+								  .to( displacementFilter.scale, 1, { y: 0,  ease: Power3.easeOut }, 1 );  
+
+								
+								
+								
+								
+
+								
+
+							}
+						});		
+
+	
+					}	
+					
+					
+
+					
+				
+
+				} // end effect
+				
+				
+				
+				
 				
 				//----------------------------------------------------------------------------------
 				//--------------------------------- 3D Rotating Effect -----------------------------
@@ -19173,3 +19645,329 @@ Object.defineProperties( THREE.OrbitControls.prototype, {
  * <!-- Three.js Plugins -->
  *************************************
  */
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+
+
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	(function(window){
+
+	  var buffer = 0;
+
+	  //Utils
+	  function _extend (target, source) {
+	    var a = Object.create(target);
+	    Object.keys(source).map(function (prop) {
+	      a[prop] = source[prop];
+	    });
+	    return a;
+	  }
+
+	  var Particles = function(renderer, scene, options){
+
+	    var defaults = {
+	      pointSize: 1.0,
+	      gravityFactor: 1.0,
+	      textureSize: 256,
+	      explodeRate: 1.0,
+	      targetPosition: new THREE.Vector3(0.0, 0.0, 0.0)
+	    }
+	    options = _extend(defaults, options);
+
+	    var textureSize = options.textureSize;
+
+	    var renderTargets = createRenderTargets(textureSize);
+
+	    var shaderTextContents = {
+	      velocityVertex: __webpack_require__(1),
+	      velocityFragment: __webpack_require__(2),
+	      positionVertex: __webpack_require__(3),
+	      positionFragment: __webpack_require__(4),
+	      displayVertex: __webpack_require__(5),
+	      displayFragment: __webpack_require__(6),
+	      randomVertex: __webpack_require__(7),
+	      randomFragment: __webpack_require__(8)
+	    };
+
+	    if(options.velocityFunctionString){
+	      shaderTextContents.velocityFragment = replaceBehaviour(shaderTextContents.velocityFragment, options.velocityFunctionString);
+	    }
+
+	    if(options.positionFunctionString){
+	      shaderTextContents.positionFragment = replaceBehaviour(shaderTextContents.positionFragment, options.positionFunctionString);
+	    }
+
+	    if(options.colorFunctionString){
+	      shaderTextContents.displayFragment = replaceBehaviour(shaderTextContents.displayFragment, options.colorFunctionString);
+	    }
+
+	    var uniforms = {
+	      velocity: createVelocityUniforms(renderTargets, options.targetPosition, options.targetTexture, options.gravityFactor),
+	      position: createPositionUniforms(renderTargets),
+	      display: createDisplayUniforms(renderTargets, options.targetPosition, options.pointSize),
+	      random: createRandomUniforms(options.explodeRate),
+	    };
+
+	    var shaderMaterials  = createShaderMaterials(shaderTextContents, uniforms);
+
+	    var scenes = {
+	      velocity: new THREE.Scene(),
+	      position: new THREE.Scene(),
+	      display: scene,
+	      random: new THREE.Scene()
+	    };
+
+	    scenes.velocity.add(createMesh(textureSize, shaderMaterials.velocity));
+	    scenes.position.add(createMesh(textureSize, shaderMaterials.position));
+	    scenes.random.add(createMesh(textureSize, shaderMaterials.random));
+	    this.pointCloud = createPoints(textureSize, shaderMaterials.display);
+	    scenes.display.add(this.pointCloud);
+
+	    //debug
+	    //scenes.display.add(createMesh(textureSize, shaderMaterials.velocity));
+	    //scenes.display.add(createMesh(textureSize, shaderMaterials.position));
+
+	    var processCamera = new THREE.OrthographicCamera(-textureSize/2, textureSize/2, textureSize/2, -textureSize/2, -1, 0);
+
+	    //start with random values
+	    renderer.render(scenes.random, processCamera, renderTargets.velocity[0]);
+	    renderer.render(scenes.random, processCamera, renderTargets.position[0]);
+
+
+	    return {
+	      update: function(){
+	        update(renderer, scenes, processCamera, renderTargets, uniforms);
+	      },
+	      pointCloud: this.pointCloud
+	    };
+	  };
+
+	  var replaceBehaviour = function(shader, snippet){
+	    var regex = /\/\*replace\*\/[^]*\/\*replace\*\//g;
+	    var newShader = shader.replace(regex, snippet);
+	    console.log(newShader);
+	    return newShader;
+	  };
+
+	  var createRenderTargets = function(size, options){
+	    return {
+	      velocity: [
+	        createRenderTarget(size, options),
+	        createRenderTarget(size, options)
+	      ],
+	      position: [
+	        createRenderTarget(size, options),
+	        createRenderTarget(size, options)
+	      ]
+	    };
+	  };
+
+	  var createRenderTarget = function(size, options) {
+	    options = options || {
+	      format: THREE.RGBFormat,
+	      generateMipmaps: false,
+	      magFilter: THREE.NearestFilter,
+	      minFilter: THREE.NearestFilter,
+	      type: THREE.HalfFloatType
+	    };
+	    return new THREE.WebGLRenderTarget(size, size, options);
+	  };
+
+	  var createVelocityUniforms = function(renderTargets, targetPosition, targetTexture, gravityFactor){
+	    return {
+	      velTex: {type: "t", value: renderTargets.velocity[0]},
+	      posTex: {type: "t", value: renderTargets.position[0]},
+	      targetTex: {type: "t", value: targetTexture},
+	      targetPosition: {type: "v3", value: targetPosition},
+	      useTargetTexture: {type: "i", value: !!targetTexture ? 1 : 0},
+	      gravityFactor: {type: "f", value: gravityFactor}
+	    };
+	  };
+
+	  var createPositionUniforms = function(renderTargets){
+	    return {
+	      velTex: {type: "t", value: renderTargets.velocity[0]},
+	      posTex: {type: "t", value: renderTargets.position[0]}
+	    };
+	  };
+
+	  var createDisplayUniforms = function(renderTargets, targetPosition, pointSize){
+	    return {
+	      pointSize: {type: "f", value: pointSize},
+	      posTex: {type: "t", value: renderTargets.position[0]},
+	      targetPosition: {type: "v3", value: targetPosition},
+	      alpha: {type: "f", value: 0.5}
+	    };
+	  };
+
+	  var createRandomUniforms = function(explodeRate){
+	    return {
+	      explodeRate: {type: "f", value: explodeRate}
+	    };
+	  };
+
+	  var createShaderMaterials = function(shaders, uniforms, displayMaterialOptions){
+
+	    displayMaterialOptions = displayMaterialOptions || {
+	      transparent: true,
+	      wireframe: false,
+	      blending: THREE.NormalBlending,
+	      depthWrite: false
+	    };
+
+	    return {
+	      velocity: createShaderMaterial(shaders.velocityVertex, shaders.velocityFragment, uniforms.velocity),
+	      position: createShaderMaterial(shaders.positionVertex, shaders.positionFragment, uniforms.position),
+	      display: createShaderMaterial(shaders.displayVertex, shaders.displayFragment, uniforms.display, displayMaterialOptions),
+	      random: createShaderMaterial(shaders.randomVertex, shaders.randomFragment, uniforms.random)
+	    };
+	  };
+
+	  var createShaderMaterial = function(vShader, fShader, uniforms, options) {
+	    options = options || {};
+	    var defaults = {
+	      uniforms: uniforms,
+	      vertexShader: vShader,
+	      fragmentShader: fShader
+	    };
+	    window.$.extend(defaults, options);
+	    return new THREE.ShaderMaterial(defaults);
+	  };
+
+	  var createMesh = function(size, material) {
+	    return new THREE.Mesh(
+	      new THREE.PlaneBufferGeometry( size, size ),
+	      material
+	    );
+	  };
+
+	  var createPoints = function(size, material) {
+	    var points = new THREE.Geometry();
+	    for (var i = 0; i < size * size; i++) {
+	      var pos = new THREE.Vector3((i % size)/size, Math.floor(i/size)/size , 0);
+	      points.vertices.push(pos);
+	    }
+	    return new THREE.Points(points, material);
+	  };
+
+	  var update = function(renderer, scenes, processCamera, renderTargets, uniforms){
+	    var newBuffer = (buffer+1)%2;
+	    uniforms.velocity.velTex.value = renderTargets.velocity[buffer];
+	    uniforms.position.posTex.value = renderTargets.position[buffer];
+	    renderer.render(scenes.velocity, processCamera, renderTargets.velocity[newBuffer]);
+
+	    uniforms.position.velTex.value = renderTargets.velocity[newBuffer];
+	    uniforms.position.posTex.value = renderTargets.position[buffer];
+	    renderer.render(scenes.position, processCamera, renderTargets.position[newBuffer]);
+
+	    uniforms.display.posTex.value = renderTargets.position[newBuffer];
+
+	    buffer = newBuffer;
+	  };
+
+
+	  if( true ) {
+	    if( typeof module !== 'undefined' && module.exports ) {
+	      exports = module.exports = Particles;
+	    }
+	    exports.Particles = Particles;
+	  }
+	  if(window) {
+	    window.Particles = Particles;
+	  }
+
+	})(window);
+
+
+/***/ },
+/* 1 */
+/***/ function(module, exports) {
+
+	module.exports = "varying vec2 vUv;\n\nvoid main() {\n  vUv = uv;\n  gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);\n}\n"
+
+/***/ },
+/* 2 */
+/***/ function(module, exports) {
+
+	module.exports = "varying vec2 vUv;\nuniform sampler2D velTex;\nuniform sampler2D posTex;\nuniform sampler2D targetTex;\nuniform vec3 targetPosition;\nuniform float gravityFactor;\nuniform int useTargetTexture;\n\nvoid main() {\n  vec3 inVelocity = texture2D(velTex, vUv).rgb;\n  vec3 inPosition = texture2D(posTex, vUv).rgb;\n  vec3 targetPos = targetPosition;\n  vec3 outVelocity;\n  if(useTargetTexture == 1) {\n    targetPos = texture2D(targetTex, vUv).rgb;\n  }\n\n  float dist = distance(targetPos, inPosition);\n  vec3 direction = normalize(targetPos - inPosition);\n\n  /*replace*/\n  dist = max(dist, 1.0);\n  outVelocity = inVelocity + ((direction / dist) * gravityFactor * 0.01);\n  /*replace*/\n\n  gl_FragColor = vec4( outVelocity, 1.0 );\n}\n"
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+	module.exports = "varying vec2 vUv;\n\nvoid main() {\n  vUv = uv;\n  gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);\n}\n"
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+	module.exports = "varying vec2 vUv;\nuniform sampler2D velTex;\nuniform sampler2D posTex;\n\nvoid main() {\n  vec3 velocity = texture2D(velTex, vUv).rgb;\n  vec3 pos = texture2D(posTex, vUv).rgb;\n\n  /*replace*/\n  pos += velocity;\n  /*replace*/\n  \n  gl_FragColor = vec4( pos, 1.0 );\n}\n"
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
+	module.exports = "uniform sampler2D posTex;\nuniform float pointSize;\nuniform vec3 targetPosition;\nvarying float dist;\n\nvoid main() {\n  vec3 pos = texture2D(posTex, position.xy).rgb;\n  dist = distance(targetPosition, pos);\n  gl_PointSize = pointSize;\n  gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);\n}\n"
+
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
+
+	module.exports = "varying float dist;\nuniform float alpha;\n\nvoid main() {\n  vec4 color;\n  /*replace*/\n  color = vec4(0.0, 1.0, 0.0, alpha);\n  /*replace*/\n  gl_FragColor = color;\n}\n"
+
+/***/ },
+/* 7 */
+/***/ function(module, exports) {
+
+	module.exports = "varying vec2 vUv;\n\nvoid main() {\n  vUv = uv;\n  gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);\n}\n"
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+	module.exports = "uniform float explodeRate;\nvarying vec2 vUv;\n\n\nfloat rand(vec2 co){\n  return fract(sin(dot(co.xy, vec2(12.8273, 67.245))) * 53726.17623);\n}\n\nvoid main() {\n  vec3 col;\n  col.g = rand(vec2(vUv.x, vUv.y + 1.0));\n  col.b = rand(vec2(vUv.x, vUv.y + 2.0));\n  col.r = rand(vec2(vUv.xy));\n  col = col - 0.5;\n  col *= explodeRate;\n\n  gl_FragColor = vec4(col, 1.0);\n}\n"
+
+/***/ }
+/******/ ]);

@@ -10,7 +10,7 @@ App = ( function ( App, $, window, document ) {
 
 		
 		//Prevent this module from loading in other pages
-		if ( $( '#3D-renderer' ).length == 0 ) return false;
+		if ( $( '#3D-renderer' ).length == 0 || ! Modernizr.webgl ) return false;
 		
 		
 		

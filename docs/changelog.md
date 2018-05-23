@@ -1,5 +1,13 @@
 # Changelog
 
+#### = 1.6.1 (May 24, 2018) =
+
+* New: Add a new module "3D Particle Effect".
+* New: Add a new liquid effect for module "Advanced Slider".
+* Tweak: Optimize the style of some modules.
+* Tweak: Optimized the background display of the "Advanced Slider".
+
+
 #### = 1.6.0 (May 21, 2018) =
 
 
