@@ -91,7 +91,7 @@
 			&:not(:last-child) {
 				margin-right: 0;
 
-				&:after {
+				&::after {
 					content: '';
 					margin-left: 0;
 				}

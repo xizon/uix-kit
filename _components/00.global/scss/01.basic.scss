@@ -101,7 +101,7 @@ blockquote {
 	line-height: 2;
 	font-size: $font-size-blockquote;
 	
-	&:before {
+	&::before {
 		color: $highlight-color1;
 		content: open-quote;
 		font-size: 5.25rem;

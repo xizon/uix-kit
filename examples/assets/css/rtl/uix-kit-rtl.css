@@ -11,8 +11,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.6.1
- * ## Last Update         :  May 24, 2018
+ * ## Version             :  1.6.2
+ * ## Last Update         :  May 25, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -32,13 +32,13 @@
     4. Navigation Area 
     5. Header Area 
     6. Brand 
-    7. Filterable Navigation 
-    8. Sidebar 
+    7. Sidebar 
+    8. Filterable Navigation 
     9. Search 
     10. Comments 
     11. Advanced Slider (Special Effects) 
-    12. Advanced Slider (Basic) 
-    13. Author Card 
+    12. Author Card 
+    13. Advanced Slider (Basic) 
     14. Dropdown Menu 
     15. Flexslider 
     16. Form 
@@ -48,7 +48,6 @@
     20. Side by Side List 
     21. Mobile Menu 
     22. Source Code 
-    23. ToolTip 
 
 
 
@@ -91,7 +90,7 @@ blockquote {
     border-right-color: #EC5E79;
 }
 
-blockquote:before {
+blockquote::before {
     margin-right: auto;
     margin-left: 0.21875rem;
 }
@@ -191,12 +190,12 @@ blockquote:before {
     margin-right: -0.071875rem;
 }
 
-.menu-container:not(.mobile) ul.menu-main > li > ul:before {
+.menu-container:not(.mobile) ul.menu-main > li > ul::before {
     left: auto;
     right: 0;
 }
 
-.menu-container:not(.mobile) ul.menu-main > li > ul:after {
+.menu-container:not(.mobile) ul.menu-main > li > ul::after {
     left: auto;
     right: 3.5rem;
     margin-left: auto;
@@ -293,7 +292,7 @@ blockquote:before {
     text-align: left;
 }
 
-.sidebar-container .widget-title:after {
+.sidebar-container .widget-title::after {
     margin-left: auto;
     margin-right: 0.4375rem;
 }
@@ -459,7 +458,7 @@ blockquote:before {
     right: 0;
 }
 
-.custom-dropdown-trigger > ul:before {
+.custom-dropdown-trigger > ul::before {
     left: auto;
     right: 20px;
 }
@@ -546,7 +545,7 @@ blockquote:before {
     padding-left: 1rem !important;
 }
 
-.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).select label:after {
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).select label::after {
     border-left: 0;
     right: auto;
     left: 1rem;
@@ -876,3 +875,4 @@ pre.prettyprint {
 }
 
 /*# sourceMappingURL=uix-kit-rtl.css.map */
+t-rtl.css.map */

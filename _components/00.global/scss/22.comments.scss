@@ -38,7 +38,7 @@
 .comment-meta {
 	margin-bottom: 0.875rem;
 	
-	&:after {
+	&::after {
 		content: '';
 		display: block;
 		clear: both;

@@ -38,7 +38,7 @@ $custom-lightbox-radius: 3px;
 	}
 
 
-	&:after {
+	&::after {
 		font-family: 'FontAwesome';
 		content: "\f067";
 		color: #fff;
@@ -122,7 +122,7 @@ $custom-lightbox-radius: 3px;
 				overflow: hidden;
 				overflow-x: auto;
 				white-space: nowrap;
-				@include customScrollbar( 'vertical' );
+				@include customScrollbar( 'horizontal' );
 				
 				
 				
@@ -201,7 +201,7 @@ $custom-lightbox-radius: 3px;
 				max-height: 60vh;
 				overflow-y: auto;
 				text-align: left;
-				@include customScrollbar( 'horizontal' );
+				@include customScrollbar( 'vertical' );
 				
 				> .content-show {
 					padding: 1.5rem;
@@ -270,7 +270,7 @@ $custom-lightbox-radius: 3px;
 			visibility: hidden;
 		}
 		
-		&:after {
+		&::after {
 			font-family: 'FontAwesome';
 			content: "\f067";
 			color: #fff;

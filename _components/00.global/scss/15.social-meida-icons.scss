@@ -18,6 +18,10 @@
 	padding: 0;
 	margin: 0;
 	
+	&.border-none {
+		border-color: transparent;
+	}
+	
 	&.fill-white {
 		background: #fff;
 		color: $primary-text-color1;
@@ -31,7 +35,7 @@
 	&.fillet {
 		border-radius: 50%;
 		
-		&:after {
+		&::after {
 			border-radius: 50%;
 		}
 	}
@@ -77,7 +81,7 @@
 	}
 	
 
-	&:after {
+	&::after {
 		@include transition-default();
 		position: absolute;
 		content: '';
@@ -101,7 +105,7 @@
 		i {
 			color: #fff;
 		}
-		&:after {
+		&::after {
 			visibility: visible;
 			opacity: 1;
 			transform: scale(1, 1);
@@ -389,7 +393,7 @@
 				color: $primary-text-color1;
 			}
 			
-			&:after {
+			&::after {
 				background-color: #fff;
 			}
 		}

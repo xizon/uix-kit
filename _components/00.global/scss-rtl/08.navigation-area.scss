@@ -19,12 +19,12 @@
 		    }
 			
 		    > ul {
-		        &:before {
+		        &::before {
 			        left: auto;
 			        right: 0;
 		        }
 				
-		        &:after {
+		        &::after {
 			        left: auto;
 			        right: 3.5rem;
 			        margin-left: auto;

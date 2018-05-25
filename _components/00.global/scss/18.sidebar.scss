@@ -121,7 +121,7 @@
 		position: relative;
 
 
-		&:after {
+		&::after {
 			display: block;
 			content: '';
 			clear: both;
@@ -233,9 +233,9 @@
 	transition: 0.2s linear;
 }
 
-.widget_categories li a:before, 
-.widget_nav_menu li a:before, 
-.widget_pages li a:before {
+.widget_categories li a::before, 
+.widget_nav_menu li a::before, 
+.widget_pages li a::before {
 	content: '\203A';
 	opacity: 0.7;
 	margin-right: 0.721875rem;

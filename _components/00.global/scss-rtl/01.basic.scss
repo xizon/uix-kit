@@ -38,7 +38,7 @@ blockquote {
 	border-left-color: #F8F8F8;
 	border-right-color: #EC5E79;
 	
-	&:before {
+	&::before {
 		margin-right: auto;
 		margin-left: 0.21875rem;
 	}

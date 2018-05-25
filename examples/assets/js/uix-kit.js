@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.6.1
- * ## Last Update         :  May 24, 2018
+ * ## Version             :  1.6.2
+ * ## Last Update         :  May 25, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -1463,6 +1463,7 @@ App = ( function ( App, $, window, document ) {
 		
 
 		
+		
 		/*
 		 * Sets an animation for each element
 		 *
@@ -2166,72 +2167,6 @@ App = ( function ( App, $, window, document ) {
 
 /* 
  *************************************
- * <!-- Accordion -->
- *************************************
- */
-App = ( function ( App, $, window, document ) {
-    'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
-		$( '.custom-accordion' ).each( function() {
-			var $this           = $( this ),
-				aEvent          = $this.data( 'event' ),
-				firstShow       = $this.data( 'first-show' ),
-				$li             = $this.children( 'dl' ),
-				$titlebox       = $this.find( 'dt' );
-			
-			if( typeof aEvent === typeof undefined ) {
-				aEvent = 'click';
-			}	
-			
-			if( typeof firstShow === typeof undefined ) {
-				firstShow = false;
-			}		
-			
-		
-			if ( firstShow ) {
-				$li.first().addClass( 'active' );
-			}
-			
-
-			$li.on( aEvent, function( e ) {
-				e.stopPropagation();
-				
-				$( this ).find( 'dd' ).addClass( 'active' );
-				
-				
-				if ( !$( this ).hasClass( 'active' ) ) {
-					$li.removeClass( 'active' );
-
-					$( this ).addClass( 'active' );
-				} else {
-					$li.removeClass( 'active' );
-				}
-			
-			}); 
-						
-			
-			
-		});
-		
-		
-	};
-	
-		
-    App.accordion = {
-        documentReady : documentReady        
-    };
-
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
-
-
-/* 
- *************************************
  * <!-- Accordion Background Images -->
  *************************************
  */
@@ -2337,6 +2272,72 @@ App = ( function ( App, $, window, document ) {
 
 /* 
  *************************************
+ * <!-- Accordion -->
+ *************************************
+ */
+App = ( function ( App, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ) {
+		
+		$( '.custom-accordion' ).each( function() {
+			var $this           = $( this ),
+				aEvent          = $this.data( 'event' ),
+				firstShow       = $this.data( 'first-show' ),
+				$li             = $this.children( 'dl' ),
+				$titlebox       = $this.find( 'dt' );
+			
+			if( typeof aEvent === typeof undefined ) {
+				aEvent = 'click';
+			}	
+			
+			if( typeof firstShow === typeof undefined ) {
+				firstShow = false;
+			}		
+			
+		
+			if ( firstShow ) {
+				$li.first().addClass( 'active' );
+			}
+			
+
+			$li.on( aEvent, function( e ) {
+				e.stopPropagation();
+				
+				$( this ).find( 'dd' ).addClass( 'active' );
+				
+				
+				if ( !$( this ).hasClass( 'active' ) ) {
+					$li.removeClass( 'active' );
+
+					$( this ).addClass( 'active' );
+				} else {
+					$li.removeClass( 'active' );
+				}
+			
+			}); 
+						
+			
+			
+		});
+		
+		
+	};
+	
+		
+    App.accordion = {
+        documentReady : documentReady        
+    };
+
+    App.components.documentReady.push( documentReady );
+    return App;
+
+}( App, jQuery, window, document ) );
+
+
+/* 
+ *************************************
  * <!-- Advanced Content Slider -->
  *************************************
  */
@@ -2388,12 +2389,16 @@ App = ( function ( App, $, window, document ) {
 					dataControlsPagination     = $this.data( 'controls-pagination' ),
 					dataControlsArrows         = $this.data( 'controls-arrows' ),
 					dataDraggable              = $this.data( 'draggable' ),
+					dataDraggableCursor        = $this.data( 'draggable-cursor' ),
 					dataControlsPaginationAuto = false;
 
+				
+				
 
 				if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.custom-advanced-content-slider-sp-pagination';
 				if ( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.custom-advanced-content-slider-sp-arrows';
 				if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
+				if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
 				
 				if ( $( dataControlsPagination ).html().length == 0 ) dataControlsPaginationAuto = true;
 
@@ -2430,6 +2435,7 @@ App = ( function ( App, $, window, document ) {
 					if ( $( dataControlsPagination ).html() == '' ) $( dataControlsPagination ).html( _dot );	
 				} else {
 					$( dataControlsPagination ).find( 'li' ).first().find( 'a' ).addClass( 'active' );
+					$( dataControlsPagination ).find( 'li' ).first().addClass( 'active' );
 				}
 
 
@@ -2477,7 +2483,7 @@ App = ( function ( App, $, window, document ) {
 				var $dragDropTrigger = $items;
 
 				//Make the cursor a move icon when a user hovers over an item
-				if ( dataDraggable ) $dragDropTrigger.css( 'cursor', 'move' );
+				if ( dataDraggable && dataDraggableCursor != '' && dataDraggableCursor != false ) $dragDropTrigger.css( 'cursor', dataDraggableCursor );
 				
 
 
@@ -2617,6 +2623,7 @@ App = ( function ( App, $, window, document ) {
 				$next.removeClass( 'disabled' );
 				$prev.removeClass( 'disabled' );
 				$pagination.removeClass( 'active' );
+				$pagination.parent().removeClass( 'active' );
 
 				if ( elementIndex == itemsTotal - 1 ) {
 					$next.addClass( 'disabled' );
@@ -2631,6 +2638,7 @@ App = ( function ( App, $, window, document ) {
 				$items.removeClass( 'active' );
 				$items.eq( elementIndex ).addClass( 'active' );	
 				$pagination.eq( elementIndex ).addClass( 'active' );
+				$pagination.eq( elementIndex ).parent().addClass( 'active' );
 				
 				
 				
@@ -14413,6 +14421,48 @@ App = ( function ( App, $, window, document ) {
 
 }( App, jQuery, window, document ) );
 
+
+/* 
+ *************************************
+ * <!-- Scroll Reveal -->
+ *************************************
+ */
+App = ( function ( App, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ) {
+
+		//Reversing Scroll Animations in CSS with Waypoints
+		if ( Modernizr.cssanimations ) {
+			
+			var $scrollRevealElements = $( '.scroll-reveal' ),
+				waypoints             = $scrollRevealElements.waypoint({
+				handler: function( direction ) {
+
+					//$( this.element ).toggleClass( 'animated fadeInUp', direction === 'down' );
+					$( this.element ).addClass( 'animated fadeInUp' );
+
+				},
+				offset: '100%' //0~100%, bottom-in-view
+			});
+
+	
+		}
+
+		
+		
+	};
+	
+		
+    App.scrollReveal = {
+        documentReady : documentReady        
+    };
+
+    App.components.documentReady.push( documentReady );
+    return App;
+
+}( App, jQuery, window, document ) );
 /* 
  *************************************
  * <!-- Rotating Elements -->
@@ -14486,48 +14536,6 @@ App = ( function ( App, $, window, document ) {
 
 
 
-
-/* 
- *************************************
- * <!-- Scroll Reveal -->
- *************************************
- */
-App = ( function ( App, $, window, document ) {
-    'use strict';
-   
-   
-    var documentReady = function( $ ) {
-
-		//Reversing Scroll Animations in CSS with Waypoints
-		if ( Modernizr.cssanimations ) {
-			
-			var $scrollRevealElements = $( '.scroll-reveal' ),
-				waypoints             = $scrollRevealElements.waypoint({
-				handler: function( direction ) {
-
-					//$( this.element ).toggleClass( 'animated fadeInUp', direction === 'down' );
-					$( this.element ).addClass( 'animated fadeInUp' );
-
-				},
-				offset: '100%' //0~100%, bottom-in-view
-			});
-
-	
-		}
-
-		
-		
-	};
-	
-		
-    App.scrollReveal = {
-        documentReady : documentReady        
-    };
-
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
 
 /* 
  *************************************
@@ -15069,14 +15077,18 @@ App = ( function ( App, $, window, document ) {
     var documentReady = function( $ ) {
     
 		
-		
-		$( '.custom-team-focus' ).each( function() {
+		var teamFocusContent = '.custom-team-focus',
+			teamFocusMask    = '.custom-team-focus-mask';
+			
+			
+		$( teamFocusContent ).each( function() {
 			var $this           = $( this ),
 				thisID          = 'custom-team-focus-' + Math.random()*1000000000000000000,
 				hoverWidth      = $this.data( 'hover-width' ),
 				targetWidth     = $this.data( 'target-width' ), // Div over width as a percentage 
+				targetInfo      = $this.data( 'target-info' ), // Corresponding character details display
 				closeBtn        = $this.data( 'close-btn' ),
-				el              = '#' + thisID + '> .item',
+				el              = '#' + thisID + '> div',
 				total           = 0;
 			
 			
@@ -15095,6 +15107,10 @@ App = ( function ( App, $, window, document ) {
 			if( typeof closeBtn === typeof undefined ) {
 				closeBtn = '.close';
 			}
+			
+			if( typeof targetInfo === typeof undefined ) {
+				targetInfo = '.custom-team-focus-info';
+			}		
 		
 			total = $( el ).length;
 		
@@ -15104,13 +15120,17 @@ App = ( function ( App, $, window, document ) {
 			});
 			
 			
+			//Add an index to each item
+			$( el ).each( function( index )  {
+				$( this ).attr( 'data-index', index );
+			});
 			
 
 			//Create item hover overlay effects
 			$( el ).on( 'mouseenter', function() {
 
 				var $cur      = $( this ),
-					$neighbor = $cur.siblings().not( '.active' ); //Get the siblings of each element in the set of matched elements
+					$neighbor = $cur.siblings().not( '.focus' ); //Get the siblings of each element in the set of matched elements
 
 				TweenMax.to( $cur, 0.3, {
 					width: hoverWidth + '%'
@@ -15130,9 +15150,34 @@ App = ( function ( App, $, window, document ) {
 				var $cur        = $( this ),
 					$neighbor   = $cur.siblings(), //Get the siblings of each element in the set of matched elements
 					$cloneItem  = $cur.clone();
+				
+				//The mask prevent click and hover
+				$( teamFocusMask ).show();
+				
+				$( el ).removeClass( 'active' );
+				$cur.addClass( 'active' );
+				
+				
+				
+				var $info   = $( targetInfo ),
+					cName   = $cur.data( 'name' ),
+					cPo     = $cur.data( 'po' ),
+					cIntro  = $cur.data( 'intro' );
+					
+				TweenMax.to( $info, 0.5, {
+					css: {
+						opacity : 1,
+						display : 'block'
+					}
+				});
+				
+				$info.find( 'h4 strong' ).html( cName );
+				$info.find( 'h4 em' ).html( cPo );
+				$info.find( '.intro' ).html( cIntro );
+				
 
-				if ( !$cur.hasClass( 'active' ) ) {
-					$( el + '.active' ).remove();
+				if ( !$cur.hasClass( 'focus' ) ) {
+					$( el + '.focus' ).remove();
 
 
 					TweenMax.set( $cloneItem, {
@@ -15141,7 +15186,7 @@ App = ( function ( App, $, window, document ) {
 
 							this.target
 								.prependTo( '#' + thisID )
-								.addClass( 'active' );
+								.addClass( 'focus' );
 
 						}
 					});
@@ -15165,28 +15210,41 @@ App = ( function ( App, $, window, document ) {
 			});
 
 			
-			//Close the actived item
-			$( document ).on( 'click', el + '.active, ' + closeBtn, function( e ) {
+			//Close the focus item
+			$( document ).on( 'click', el + '.focus, ' + closeBtn + ', ' + targetInfo + ', ' + teamFocusMask, function( e ) {
 				e.preventDefault();
-
-
+				
+				//Remove the mask
+				$( teamFocusMask ).hide();
 				
 				TweenMax.to( el, 0.3, {
 					width : 100/total + '%',
 					ease  : Back.easeOut
 				});
 
-				TweenMax.to( el + '.active', 0.3, {
+				TweenMax.to( el + '.focus', 0.3, {
 					alpha : 0,
 					onComplete : function() {
 
-						$( el + '.active' ).remove();
+						$( el + '.focus' ).remove();
 						TweenMax.to( el, 0.3, {
 							alpha : 1
 						});
 					}
 				});
 
+				
+				var $info = $( targetInfo );
+				TweenMax.to( $info, 0.5, {
+					css: {
+						opacity : 0,
+						display : 'none'
+					}
+				});	
+				
+				$info.find( 'h4 strong' ).html( '' );
+				$info.find( 'h4 em' ).html( '' );
+				$info.find( '.intro' ).html( '' );		
 
 
 			});	
@@ -15623,7 +15681,7 @@ App = ( function ( App, $, window, document ) {
 		 */
 	
 		//Activate the first item
-		if ( $( '.entry-content' ).length == 0 ) {
+		if ( $( '.js-ajax-content-wrapper' ).length == 0 ) {
 			moveTo( $( ajaxContainer ), false, 'down', 0 );
 		} else {
 			//Activate navigation from AJAX request
@@ -15804,7 +15862,7 @@ App = ( function ( App, $, window, document ) {
 					success  : function( response ) {
 						
 						//A function to be called if the request succeeds
-						ajaxSucceeds( dir, container, url, $( response ).find( '.entry-content' ).html() );
+						ajaxSucceeds( dir, container, url, $( response ).find( '.js-ajax-content-wrapper' ).html() );
 
 					},
 					error: function(){
@@ -19713,7 +19771,7 @@ Object.defineProperties( THREE.OrbitControls.prototype, {
 	      textureSize: 256,
 	      explodeRate: 1.0,
 	      targetPosition: new THREE.Vector3(0.0, 0.0, 0.0)
-	    }
+	    };
 	    options = _extend(defaults, options);
 
 	    var textureSize = options.textureSize;
@@ -19925,49 +19983,49 @@ Object.defineProperties( THREE.OrbitControls.prototype, {
 /* 1 */
 /***/ function(module, exports) {
 
-	module.exports = "varying vec2 vUv;\n\nvoid main() {\n  vUv = uv;\n  gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);\n}\n"
+	module.exports = "varying vec2 vUv;\n\nvoid main() {\n  vUv = uv;\n  gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);\n}\n";
 
 /***/ },
 /* 2 */
 /***/ function(module, exports) {
 
-	module.exports = "varying vec2 vUv;\nuniform sampler2D velTex;\nuniform sampler2D posTex;\nuniform sampler2D targetTex;\nuniform vec3 targetPosition;\nuniform float gravityFactor;\nuniform int useTargetTexture;\n\nvoid main() {\n  vec3 inVelocity = texture2D(velTex, vUv).rgb;\n  vec3 inPosition = texture2D(posTex, vUv).rgb;\n  vec3 targetPos = targetPosition;\n  vec3 outVelocity;\n  if(useTargetTexture == 1) {\n    targetPos = texture2D(targetTex, vUv).rgb;\n  }\n\n  float dist = distance(targetPos, inPosition);\n  vec3 direction = normalize(targetPos - inPosition);\n\n  /*replace*/\n  dist = max(dist, 1.0);\n  outVelocity = inVelocity + ((direction / dist) * gravityFactor * 0.01);\n  /*replace*/\n\n  gl_FragColor = vec4( outVelocity, 1.0 );\n}\n"
+	module.exports = "varying vec2 vUv;\nuniform sampler2D velTex;\nuniform sampler2D posTex;\nuniform sampler2D targetTex;\nuniform vec3 targetPosition;\nuniform float gravityFactor;\nuniform int useTargetTexture;\n\nvoid main() {\n  vec3 inVelocity = texture2D(velTex, vUv).rgb;\n  vec3 inPosition = texture2D(posTex, vUv).rgb;\n  vec3 targetPos = targetPosition;\n  vec3 outVelocity;\n  if(useTargetTexture == 1) {\n    targetPos = texture2D(targetTex, vUv).rgb;\n  }\n\n  float dist = distance(targetPos, inPosition);\n  vec3 direction = normalize(targetPos - inPosition);\n\n  /*replace*/\n  dist = max(dist, 1.0);\n  outVelocity = inVelocity + ((direction / dist) * gravityFactor * 0.01);\n  /*replace*/\n\n  gl_FragColor = vec4( outVelocity, 1.0 );\n}\n";
 
 /***/ },
 /* 3 */
 /***/ function(module, exports) {
 
-	module.exports = "varying vec2 vUv;\n\nvoid main() {\n  vUv = uv;\n  gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);\n}\n"
+	module.exports = "varying vec2 vUv;\n\nvoid main() {\n  vUv = uv;\n  gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);\n}\n";
 
 /***/ },
 /* 4 */
 /***/ function(module, exports) {
 
-	module.exports = "varying vec2 vUv;\nuniform sampler2D velTex;\nuniform sampler2D posTex;\n\nvoid main() {\n  vec3 velocity = texture2D(velTex, vUv).rgb;\n  vec3 pos = texture2D(posTex, vUv).rgb;\n\n  /*replace*/\n  pos += velocity;\n  /*replace*/\n  \n  gl_FragColor = vec4( pos, 1.0 );\n}\n"
+	module.exports = "varying vec2 vUv;\nuniform sampler2D velTex;\nuniform sampler2D posTex;\n\nvoid main() {\n  vec3 velocity = texture2D(velTex, vUv).rgb;\n  vec3 pos = texture2D(posTex, vUv).rgb;\n\n  /*replace*/\n  pos += velocity;\n  /*replace*/\n  \n  gl_FragColor = vec4( pos, 1.0 );\n}\n";
 
 /***/ },
 /* 5 */
 /***/ function(module, exports) {
 
-	module.exports = "uniform sampler2D posTex;\nuniform float pointSize;\nuniform vec3 targetPosition;\nvarying float dist;\n\nvoid main() {\n  vec3 pos = texture2D(posTex, position.xy).rgb;\n  dist = distance(targetPosition, pos);\n  gl_PointSize = pointSize;\n  gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);\n}\n"
+	module.exports = "uniform sampler2D posTex;\nuniform float pointSize;\nuniform vec3 targetPosition;\nvarying float dist;\n\nvoid main() {\n  vec3 pos = texture2D(posTex, position.xy).rgb;\n  dist = distance(targetPosition, pos);\n  gl_PointSize = pointSize;\n  gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);\n}\n";
 
 /***/ },
 /* 6 */
 /***/ function(module, exports) {
 
-	module.exports = "varying float dist;\nuniform float alpha;\n\nvoid main() {\n  vec4 color;\n  /*replace*/\n  color = vec4(0.0, 1.0, 0.0, alpha);\n  /*replace*/\n  gl_FragColor = color;\n}\n"
+	module.exports = "varying float dist;\nuniform float alpha;\n\nvoid main() {\n  vec4 color;\n  /*replace*/\n  color = vec4(0.0, 1.0, 0.0, alpha);\n  /*replace*/\n  gl_FragColor = color;\n}\n";
 
 /***/ },
 /* 7 */
 /***/ function(module, exports) {
 
-	module.exports = "varying vec2 vUv;\n\nvoid main() {\n  vUv = uv;\n  gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);\n}\n"
+	module.exports = "varying vec2 vUv;\n\nvoid main() {\n  vUv = uv;\n  gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);\n}\n";
 
 /***/ },
 /* 8 */
 /***/ function(module, exports) {
 
-	module.exports = "uniform float explodeRate;\nvarying vec2 vUv;\n\n\nfloat rand(vec2 co){\n  return fract(sin(dot(co.xy, vec2(12.8273, 67.245))) * 53726.17623);\n}\n\nvoid main() {\n  vec3 col;\n  col.g = rand(vec2(vUv.x, vUv.y + 1.0));\n  col.b = rand(vec2(vUv.x, vUv.y + 2.0));\n  col.r = rand(vec2(vUv.xy));\n  col = col - 0.5;\n  col *= explodeRate;\n\n  gl_FragColor = vec4(col, 1.0);\n}\n"
+	module.exports = "uniform float explodeRate;\nvarying vec2 vUv;\n\n\nfloat rand(vec2 co){\n  return fract(sin(dot(co.xy, vec2(12.8273, 67.245))) * 53726.17623);\n}\n\nvoid main() {\n  vec3 col;\n  col.g = rand(vec2(vUv.x, vUv.y + 1.0));\n  col.b = rand(vec2(vUv.x, vUv.y + 2.0));\n  col.r = rand(vec2(vUv.xy));\n  col = col - 0.5;\n  col *= explodeRate;\n\n  gl_FragColor = vec4(col, 1.0);\n}\n";
 
 /***/ }
 /******/ ]);

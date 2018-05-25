@@ -22,6 +22,7 @@ App = ( function ( App, $, window, document ) {
 		
 
 		
+		
 		/*
 		 * Sets an animation for each element
 		 *

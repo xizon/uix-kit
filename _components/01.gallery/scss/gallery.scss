@@ -25,7 +25,7 @@
 		.cover {
 			position: relative;
 
-			&:before {
+			&::before {
 				@include transition-default();
 				background: rgba(255, 255, 255, 0);
 				display: block;
@@ -38,7 +38,7 @@
 				height: 100%;
 			}
 		}
-		&:hover .cover:before {
+		&:hover .cover::before {
 			background: rgba(255, 255, 255, 0.95);
 		}
 
@@ -54,7 +54,7 @@
 			line-height: 1.625;
 			display: inline-block;
 
-			&:before {
+			&::before {
 				content: '|';
 				padding-right: 0.875rem;
 			}

@@ -2,6 +2,20 @@
    <!-- Ajax Page Loader (Loading A Page via Ajax Into Div)  --> 
 /* ====================================================== */
 
+
+.ajax-content-wrapper {
+	padding: 7rem 0;
+	position: relative;
+}
+
+@media all and (max-width: 768px) {
+	
+
+	.ajax-content-wrapper {
+		padding: 2rem 0;
+	}	
+}
+
 .custom-fullpage-ajax-container {
 	height: 100vh;
 	overflow: hidden;

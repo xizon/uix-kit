@@ -50,7 +50,7 @@
 		    line-height: inherit;
 		    quotes: none;
 			
-		    &:before {
+		    &::before {
 			    display: none;
 		    }
 	    }

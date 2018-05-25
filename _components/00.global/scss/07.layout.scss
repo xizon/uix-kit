@@ -145,7 +145,7 @@ $seamless-grid-pad : 15px;
 
 		width: calc( 100% + #{$seamless-grid-pad} );
 
-		&:after {
+		&::after {
 			/* Or @extend clearfix */
 			content: "";
 			display: table;

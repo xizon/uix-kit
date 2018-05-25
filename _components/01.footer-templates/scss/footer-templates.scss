@@ -24,7 +24,7 @@
 
 	.custom-footer-list-container {
 
-		&:after {
+		&::after {
 			content: '';
 			display: block;
 			clear: both;

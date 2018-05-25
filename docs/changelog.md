@@ -1,5 +1,16 @@
 # Changelog
 
+#### = 1.6.2 (June 1, 2018) =
+
+* New: Add a new module "Striking".
+* Tweak: Extended Upgraded module "Badges".
+* Tweak: Optimized structure of ajax loaded page demo, enhanced stability and scalability.
+* Tweak: Optimized user experience of some modules.
+* Tweak: Upgraded module "Team Focus" that support corresponding character details display.
+* Tweak: Optimized style sheet details of each module.
+
+
+
 #### = 1.6.1 (May 24, 2018) =
 
 * New: Add a new module "3D Particle Effect".

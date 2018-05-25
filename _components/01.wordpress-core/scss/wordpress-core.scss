@@ -5,7 +5,7 @@
 .edit-link {
 	display: block;
 	
-	&:before, &:after {
+	&::before, &::after {
 		content: '';
 		display: block;
 		clear: both;

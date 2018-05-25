@@ -12,7 +12,7 @@
 	overflow: hidden;
 	transition: max-height 0.7s;
 
-	&:after {
+	&::after {
 		display: block;
 		content: "...";
 		text-align: right;
@@ -28,7 +28,7 @@
 		max-height: 100rem !important; 
 		/* If the specified maximum height is affected by the container, priority is required */
 
-		&:after {
+		&::after {
 			display: none;
 		}
 

@@ -15,7 +15,7 @@
 				display: block;
 			}
 
-			&:before {
+			&::before {
 				position: absolute;
 				display: block;
 				font-family: 'FontAwesome';
@@ -66,7 +66,7 @@
 			dt {
 				border-bottom: 1px solid rgba(0, 0, 0, 0.18);
 				
-				&:before {
+				&::before {
 					transform: rotate(90deg);
 				}
 				

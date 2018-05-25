@@ -79,7 +79,7 @@
 		top: 12px;
 		transform: rotate(45deg);
 		
-		&:after {
+		&::after {
 			font-family: 'FontAwesome';
 			content: "\f067";
 			color: #fff;
@@ -92,7 +92,7 @@
 		
 	}
 	
-	&.video .close-btn:after {
+	&.video .close-btn::after {
 	    font-size: 2rem;
 	}
 	
@@ -124,7 +124,7 @@
 		.close-btn {
 			right: 26px;
 
-			&:after {
+			&::after {
 				font-size: 1rem;
 			}
 			
@@ -144,7 +144,7 @@
 	    background: none;
 	}
 
-	&:not(.fullscreen).active .close-btn:after {
+	&:not(.fullscreen).active .close-btn::after {
 		color: #929292;
 		font-size: 1.875rem;
 	}

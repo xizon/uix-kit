@@ -1,0 +1,52 @@
+/* ====================================================== 
+   <!-- Striking --> 
+/* ====================================================== */
+
+.custom-striking-msg {
+    padding: .5rem 1rem;
+    margin: 1rem 0;
+	display: block;
+	border-radius: 25px;
+	font-size: 0.875rem;
+	line-height: 1.2;
+	font-family: 'Source Sans Pro', sans-serif;
+	
+	i:first-child {
+		margin-right: .5rem;
+	}
+
+	
+	
+	&.default {
+		background-color: rgba(252,232,220,1);
+		box-shadow:0 3px 15px 0 rgba(0,0,0,.1), 0 5px 10px -7px rgba(252,232,220,.3);		
+
+	}
+
+	&.success {
+		background-color: rgba(128,207,75,1);
+		box-shadow:0 3px 15px 0 rgba(0,0,0,.1), 0 5px 10px -7px rgba(128,207,75,.3);
+		color: #fff;
+	}
+
+
+	&.alert {
+		background-color: rgba(245,146,86,1);
+		box-shadow:0 3px 15px 0 rgba(0,0,0,.1), 0 5px 10px -7px rgba(245,146,86,.3);
+		color: #fff;
+	}
+	
+	
+	&.danger {
+		background-color: rgba(236, 94, 121,1);
+		box-shadow:0 3px 15px 0 rgba(0,0,0,.1), 0 5px 10px -7px rgba(236, 94, 121,.3);
+		color: #fff;
+	}
+
+	&.info {
+		background-color: rgba(216,245,254,1);
+		box-shadow:0 3px 15px 0 rgba(0,0,0,.1), 0 5px 10px -7px rgba(216,245,254,.3);	
+	}
+
+}
+

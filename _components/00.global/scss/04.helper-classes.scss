@@ -17,13 +17,13 @@
 
 .clearfix {
 	
-	&:before {
+	&::before {
 		display: table;
 		content: "";
 		line-height: 0;
 	}
 	
-	&:after {
+	&::after {
 		display: table;
 		content: "";
 		line-height: 0;

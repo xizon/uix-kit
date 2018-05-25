@@ -64,7 +64,7 @@ ol.list-numbered,
 		margin-left: .5rem;
 	}
 
-	> li:before {
+	> li::before {
 		position: absolute;
 		left: -2.25em;
 		display: inline-block;
@@ -83,7 +83,7 @@ ol.list-numbered,
 	
 
 }
-.list-numbered.none-zero > li:before {
+.list-numbered.none-zero > li::before {
 	content: counter(line);
 }	
 
@@ -109,7 +109,7 @@ ul.list-circle,
 		margin-left: 1rem;
 	}
 
-	> li:before {
+	> li::before {
 		position: absolute;
 		left: -1.5em;
 		top: 50%;
@@ -156,7 +156,7 @@ ol.list-big-numbered,
 		margin-left: 1.2rem;
 		list-style-type: number;
 		
-		&:before {
+		&::before {
 			content: '0' counter(item)".";
 			counter-increment: item;
 			position: absolute;
@@ -169,7 +169,7 @@ ol.list-big-numbered,
 
 }
 
-.list-big-numbered.none-zero li:before {
+.list-big-numbered.none-zero li::before {
 	content: counter(item)".";
 }	
 
@@ -190,7 +190,7 @@ ol.list-big-numbered.fill-bg,
 			line-height: 1.3;
 		}
 		
-		&:before {
+		&::before {
 			background: $highlight-color1;
 			border-radius: 50%;
 			width: 50px;
@@ -209,6 +209,6 @@ ol.list-big-numbered.fill-bg,
 
 }
 
-.list-big-numbered.fill-bg.none-zero li:before {
+.list-big-numbered.fill-bg.none-zero li::before {
 	content: counter(item);
 }	

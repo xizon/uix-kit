@@ -39,7 +39,7 @@ App = ( function ( App, $, window, document ) {
 		 */
 	
 		//Activate the first item
-		if ( $( '.entry-content' ).length == 0 ) {
+		if ( $( '.js-ajax-content-wrapper' ).length == 0 ) {
 			moveTo( $( ajaxContainer ), false, 'down', 0 );
 		} else {
 			//Activate navigation from AJAX request
@@ -220,7 +220,7 @@ App = ( function ( App, $, window, document ) {
 					success  : function( response ) {
 						
 						//A function to be called if the request succeeds
-						ajaxSucceeds( dir, container, url, $( response ).find( '.entry-content' ).html() );
+						ajaxSucceeds( dir, container, url, $( response ).find( '.js-ajax-content-wrapper' ).html() );
 
 					},
 					error: function(){

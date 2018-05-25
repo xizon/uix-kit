@@ -102,7 +102,7 @@
 			padding-right: auto !important;
 			padding-left: 1rem !important;
 
-			&:after {
+			&::after {
 			  @include select-arrow-rtl( -.875rem, 1rem );
 			}
 		}	

@@ -272,14 +272,15 @@ $primary-bg-color      : transparent;
 
 	@if ($dir == 'vertical') {
 		&::-webkit-scrollbar {
-			height: 5px;
+			width: 5px;
 			background-color: $highlight-color1;
 		}
 	} @else {
 		&::-webkit-scrollbar {
-			width: 5px;
+			height: 5px;
 			background-color: $highlight-color1;
 		}
+
 	}
 	
 

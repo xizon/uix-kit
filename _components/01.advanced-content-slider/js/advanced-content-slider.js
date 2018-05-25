@@ -52,12 +52,16 @@ App = ( function ( App, $, window, document ) {
 					dataControlsPagination     = $this.data( 'controls-pagination' ),
 					dataControlsArrows         = $this.data( 'controls-arrows' ),
 					dataDraggable              = $this.data( 'draggable' ),
+					dataDraggableCursor        = $this.data( 'draggable-cursor' ),
 					dataControlsPaginationAuto = false;
 
+				
+				
 
 				if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.custom-advanced-content-slider-sp-pagination';
 				if ( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.custom-advanced-content-slider-sp-arrows';
 				if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
+				if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
 				
 				if ( $( dataControlsPagination ).html().length == 0 ) dataControlsPaginationAuto = true;
 
@@ -94,6 +98,7 @@ App = ( function ( App, $, window, document ) {
 					if ( $( dataControlsPagination ).html() == '' ) $( dataControlsPagination ).html( _dot );	
 				} else {
 					$( dataControlsPagination ).find( 'li' ).first().find( 'a' ).addClass( 'active' );
+					$( dataControlsPagination ).find( 'li' ).first().addClass( 'active' );
 				}
 
 
@@ -141,7 +146,7 @@ App = ( function ( App, $, window, document ) {
 				var $dragDropTrigger = $items;
 
 				//Make the cursor a move icon when a user hovers over an item
-				if ( dataDraggable ) $dragDropTrigger.css( 'cursor', 'move' );
+				if ( dataDraggable && dataDraggableCursor != '' && dataDraggableCursor != false ) $dragDropTrigger.css( 'cursor', dataDraggableCursor );
 				
 
 
@@ -281,6 +286,7 @@ App = ( function ( App, $, window, document ) {
 				$next.removeClass( 'disabled' );
 				$prev.removeClass( 'disabled' );
 				$pagination.removeClass( 'active' );
+				$pagination.parent().removeClass( 'active' );
 
 				if ( elementIndex == itemsTotal - 1 ) {
 					$next.addClass( 'disabled' );
@@ -295,6 +301,7 @@ App = ( function ( App, $, window, document ) {
 				$items.removeClass( 'active' );
 				$items.eq( elementIndex ).addClass( 'active' );	
 				$pagination.eq( elementIndex ).addClass( 'active' );
+				$pagination.eq( elementIndex ).parent().addClass( 'active' );
 				
 				
 				

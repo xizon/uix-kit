@@ -1,7 +1,12 @@
 /* ====================================================== 
    <!-- Badges --> 
 /* ====================================================== */
-.badges {
+/* 
+ ---------------------------
+ 1) Crazy Badges
+ ---------------------------
+ */ 
+.badge-crazy {
 	width: 300px;
 	height: 300px;
 	position: relative;
@@ -22,3 +27,35 @@
 		text-align: center;
 	}
 }
+
+/* 
+ ---------------------------
+ 2) Status Badges
+ ---------------------------
+ */ 
+.badge-status {
+    position: relative;
+    white-space: nowrap;
+    margin-right: 1.5rem;
+	padding-right: .625rem;
+	
+
+	&::after {
+		content: attr(data-badge);
+		position: absolute;
+		text-align: center;
+		top: -.625rem;
+		right: -.625rem;
+		font-weight: 600;
+		font-size: 0.625rem;
+		width: 20px;
+		height: 20px;
+		line-height: 20px;
+		border-radius: 50%;
+		background: $highlight-color1;
+		color: #fff;
+	}
+
+	
+}
+

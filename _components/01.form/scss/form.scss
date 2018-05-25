@@ -305,7 +305,7 @@ $control-focus-bordercolor2: transparent;
 			pointer-events: auto !important;
 			padding-right: 1rem !important;
 
-			&:after {
+			&::after {
 			  @include select-arrow( -.875rem, 1rem );
 			}
 
@@ -691,7 +691,7 @@ $controls-merge-button-width: 20%;
 			border-color: $control-focus-bordercolor;
 		} 	
 
-		&:after {
+		&::after {
 			@include select-arrow( -.275rem, 1rem );
 		}
 
@@ -773,7 +773,7 @@ $controls-merge-button-width: 20%;
 		overflow-y: auto; 
 		max-height: 300px;
 
-		&:before {
+		&::before {
 			position: absolute;
 			display: block;
 			content: '';
@@ -800,7 +800,7 @@ $controls-merge-button-width: 20%;
 			margin-bottom: 15px;
 
 
-			&:after {
+			&::after {
 				position: absolute;
 				display: block;
 				content: '';
@@ -817,7 +817,7 @@ $controls-merge-button-width: 20%;
 				z-index: 1;
 			}	
 
-			&:before {
+			&::before {
 				display: none;
 			}			
 			
@@ -827,7 +827,7 @@ $controls-merge-button-width: 20%;
 	}
 	
 
-	.option-hover:before {
+	.option-hover::before {
 	    background: #f9f9f9;
 	}
 
@@ -864,7 +864,7 @@ $controls-merge-button-width: 20%;
 		&.opened {
 
 			.custom-select-trigger {
-				&:after {
+				&::after {
 					transform: rotate(-135deg);
 				}
 			}	

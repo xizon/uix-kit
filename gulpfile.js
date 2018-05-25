@@ -55,6 +55,8 @@ var customWebsiteVersion     = json.version,
 
 
 
+
+
 /*! 
  *************************************
  * WebPack configuration
@@ -243,6 +245,14 @@ gulp.task('html', function() {
 	};
 
   console.log( 'cache:' + ver );
+	
+	
+
+  //Delete all HTML files from examples/
+  gulp.src( 'examples/*.html', {read: true})
+	  .pipe(clean());
+
+
 	
   return gulp.src( globs.htmlFiles )
 

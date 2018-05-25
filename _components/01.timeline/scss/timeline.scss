@@ -21,7 +21,7 @@
 			margin: 3.5rem 0;
 			padding-bottom: 3rem;
 
-			&:after {
+			&::after {
 				clear: both;
 				content: "";
 				display: table;
@@ -64,7 +64,7 @@
 				@include outer-shadow();
 				@include transition-default();
 
-				&:after {
+				&::after {
 					clear: both;
 					content: '';
 					display: table;
@@ -197,7 +197,7 @@ $horizontal-item-width: 250px;
 		width: 1000px;
 		margin: 0 auto;
 
-		&:after {
+		&::after {
 			content: '';
 			display: block;
 			position: absolute;
@@ -217,7 +217,7 @@ $horizontal-item-width: 250px;
 			width: 9999px;
 			transition: .5s ease-in-out; 
 
-			&:after {
+			&::after {
 				clear: both;
 				content: "";
 				display: table;
@@ -229,7 +229,7 @@ $horizontal-item-width: 250px;
 				width: $horizontal-item-width;
 				margin: 0;
 
-				&:after {
+				&::after {
 					display: none;
 				}
 				.line {
@@ -325,7 +325,7 @@ $horizontal-item-width: 250px;
 			padding: 0;
 			width: auto;
 
-			&:after {
+			&::after {
 				display: none;
 			}
 
@@ -403,7 +403,7 @@ $horizontal-item-width: 250px;
 	
 	.list-timeline-container-outer.horizontal {
 		
-		&:after {
+		&::after {
 			top: 227px;
 		}
 

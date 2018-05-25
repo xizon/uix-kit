@@ -5,10 +5,10 @@
 	text-align: center;
 	position: relative;
 
-	&:before {
+	&::before {
 	    padding-top: 2.25rem;
 	}
-	&:after {
+	&::after {
 	    padding-bottom: 0;
 	}
 	ul, 
@@ -28,7 +28,7 @@
 		/*default*/
 		list-style: none;
 
-		&:before {
+		&::before {
 			font-family: 'FontAwesome';
 			content: "\f00c";
 			display: inline-block;
@@ -87,7 +87,7 @@
 	.period {
 		font-size: 12px;
 
-		&:before {
+		&::before {
 			content: '/';
 			padding-right: .1rem;
 		}

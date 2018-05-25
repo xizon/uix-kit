@@ -10,7 +10,7 @@
 		margin-bottom: 0.175rem;
 		display: inline-block;
 
-		&:after {
+		&::after {
 			content: '/';
 			display: inline-block;
 			margin-left: 0.546875rem;
