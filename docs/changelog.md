@@ -1,6 +1,17 @@
 # Changelog
 
-#### = 1.6.2 (June 1, 2018) =
+
+#### = 1.6.3 (May 29, 2018) =
+
+* Fix: Solved an issue of display in 3D Carousel module.
+* New: Added a variety of styles to the card module.
+* New: Added an auxiliary Grid System for Inline Elements to make the layout more flexible.
+* Tweak: Enhanced extension styles of button.
+
+
+
+
+#### = 1.6.2 (May 26, 2018) =
 
 * New: Add a new module "Striking".
 * Tweak: Extended Upgraded module "Badges".

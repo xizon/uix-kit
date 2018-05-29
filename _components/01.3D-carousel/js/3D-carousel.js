@@ -32,7 +32,35 @@ App = ( function ( App, $, window, document ) {
 			if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
 			
 
-				
+			//Avoid problems caused by insufficient quantity
+			//-------------------------------------		
+			if ( itemCount == 3 ) {
+				var $clone = $items.eq(1).clone();
+				$items.last().after( $clone );
+			}
+			
+			if ( itemCount == 2 ) {
+				var $clone1 = $items.eq(0).clone(),
+					$clone2 = $items.eq(1).clone();
+				$items.last().after( [$clone1, $clone2 ] );
+			}
+			
+			if ( itemCount == 1 ) {
+				var $clone1 = $items.eq(0).clone(),
+					$clone2 = $items.eq(0).clone(),
+					$clone3 = $items.eq(0).clone();
+					
+				$items.last().after( [$clone1, $clone2, $clone3 ] );
+			}		
+			
+
+			//New objects of items and wrapper
+			$wrapper  = $this.find( '> ul' );
+			$items = $wrapper.find( '> li' );
+			itemCount = $items.length;
+			leftpos  = itemCount;
+			resetCount = itemCount;
+
 			//Adding an index to an element makes it easy to query
 			//-------------------------------------	
 			$items.each( function( index ) {

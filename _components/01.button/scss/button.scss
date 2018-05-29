@@ -54,6 +54,11 @@
 		border-radius: 35px;
 	}
 	
+	&.button-radius-s {
+		border-radius: 4px;
+	}
+	
+	
 	&:focus {
 	    outline: none;
 	}
@@ -222,20 +227,35 @@
 
 
 .button-bg-secondary {
-	border-color: #fff !important;
-	background-color: transparent !important;
-	box-shadow: 0 4px 15px 0 rgba(255, 255, 255, 0.2);
-	color: #fff !important;
 	width: auto !important; 
 	
 	&.button-fullwidth {
 		width: 100% !important;
 	}	
 	
+	&:not(.fill-white) {
+		border-color: #fff !important;
+		background-color: transparent !important;
+		box-shadow: 0 4px 15px 0 rgba(255, 255, 255, 0.2);
+		color: #fff !important;
+	}
+	
+	&.fill-white {
+		border-color: #fff !important;
+		background-color: #fff !important;
+		box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.2);
+		color: $primary-text-color2 !important;
+	}
+	
 	&:hover {
 		background-color: #fff !important;
-		color: $primary-text-color1 !important;
-
+		color: $primary-text-color2 !important;
 	}
+	
+	
+	&.fill-white:hover {
+		box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.6);
+	}	
+	
 }
 

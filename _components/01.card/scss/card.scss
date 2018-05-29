@@ -1,92 +1,259 @@
 /* ====================================================== 
-   <!-- Author Card -->    
+   <!-- Cards -->    
 /* ====================================================== */
 
-.author-card {
+/* 
+ ---------------------------
+ 1) Style One
+ ---------------------------
+ */ 
+
+.custom-card1 {
 	margin: 0 auto;
 	border: 1px solid #eaeaea;
 	position: relative;
-	border-top: 3px solid $highlight-color1;
-}
-
-.author-card-top {
-	min-height: 2.086538461rem;
-	background: #fff;
-	padding: 0.65625rem 1.75rem 0 1.75rem;
-	border-top-left-radius: 2px;
-	border-top-right-radius: 2px;
+	border-top: 8px solid $highlight-color1;
+	border-radius: 8px;
+	@include outer-shadow();
 	
-	h3 {
-		margin: 0;
-		padding: 0;
-		font-size: 1.125rem;
-		line-height: 1.7;
-	}
-	.text {
-		margin-top: 0.4375rem;
-		float: left;
-		width: calc(100% - 105px );
-		a {
-			font-size: 0.625rem;
+	.custom-card1-headline {
+		min-height: 2.086538461rem;
+		background: #fff;
+		padding: 0.65625rem 1.75rem 0 1.75rem;
+		border-top-left-radius: 2px;
+		border-top-right-radius: 2px;
+
+		h3 {
+			margin: 0;
+			padding: 0;
+			font-size: 1.125rem;
+			
+		}
+		.text {
+			margin-top: 0.4375rem;
+			float: left;
+			width: calc(100% - 105px );
+			a {
+				font-size: 0.75rem;
+			}
+		}
+		.pic {
+			position: relative;
+			top: 0.175rem;
+			height: 4.375rem;
+			width: 4.375rem;
+			float: right;
+			width: 100px;
+			height: 100px;
+
+			img {
+				width: 90px !important;
+				height: 90px !important;
+				margin: 0.3125rem 0 0 0.3125rem;
+				border: 1px solid #eaeaea;
+				border-radius: 100%;
+			}
 		}
 	}
-	.pic {
-		position: relative;
-		top: 0.175rem;
-		height: 4.375rem;
-		width: 4.375rem;
-		float: right;
-		width: 100px;
-		height: 100px;
 
-		img {
-			width: 90px !important;
-			height: 90px !important;
-			margin: 0.3125rem 0 0 0.3125rem;
-			border: 1px solid #eaeaea;
-			border-radius: 100%;
+	.custom-card1-content {
+		background: #fff;
+		padding: 1.75rem 1.75rem 1.3125rem 1.75rem;
+		line-height: 1.5;
+
+		&::after {
+			content: '';
+			position: relative;
+			height: 0;
+			width: 0;
+			border-left: 0.4375rem solid transparent;
+			border-right: 0.4375rem solid transparent;
+			border-top: 0.4375rem solid #fff;
+			position: absolute;
+			bottom: 25px;
+			left: 1.75rem;
+		}
+
+		p {
+			margin-top: 0.875rem;
+			padding: 0 0.875rem 0 1.75rem;
 		}
 	}
-}
 
-.author-card-middle {
-	background: #fff;
-	padding: 1.75rem 1.75rem 1.3125rem 1.75rem;
-	line-height: 1.5;
-	
-	&::after {
-		content: '';
-		position: relative;
-		height: 0;
-		width: 0;
-		border-left: 0.4375rem solid transparent;
-		border-right: 0.4375rem solid transparent;
-		border-top: 0.4375rem solid #fff;
-		position: absolute;
-		bottom: 25px;
-		left: 1.75rem;
+	.custom-card1-jump {
+		height: 30px;
+		font-size: 0.75rem;
+		display: block;
+		background: #F6F6F6;
+		padding: 0.525rem 2.1875rem;
+		text-align: right;
+		border-bottom-left-radius: 2px;
+		border-bottom-right-radius: 2px;
+		transition: all 500ms ease-in-out;
+		color: #BDBDBD;
+
+		.text {
+			color: #fff;
+			margin-left: 0.4375rem;
+		}
 	}
 	
-	p {
-		margin-top: 0.875rem;
-		padding: 0 0.875rem 0 1.75rem;
-	}
+	
 }
 
-.author-card-final {
-	height: 30px;
-	font-size: 0.75rem;
-	display: block;
-	background: #F6F6F6;
-	padding: 0.525rem 2.1875rem;
-	text-align: right;
-	border-bottom-left-radius: 2px;
-	border-bottom-right-radius: 2px;
-	transition: all 500ms ease-in-out;
-	color: #BDBDBD;
+
+/* 
+ ---------------------------
+ 2) Style Two
+ ---------------------------
+ */ 
+.custom-card2 {
+    position: relative;
+    min-height: 21.25rem;
+    padding: 1.5rem;
+    border-radius: 8px;
+	background-position: 50% 50%;
+	background-size: cover;
+	margin-bottom: 1.5rem;
+    @include transition-default();
+	@include outer-shadow();
 	
-	.text {
+	.custom-card2-tagline {
+		font-size: 0.75rem;
+		font-weight: 500;
+		letter-spacing: 2px;
+		text-transform: uppercase;
+		color: rgba(51, 51, 51, .4);
+	}
+	
+
+	.custom-card2-headline {
+		margin-top: 10px;
 		color: #fff;
-		margin-left: 0.4375rem;
+
 	}
+
+	
+	
+	.custom-card2-content {
+		position: relative;
+	}
+
 }
+
+
+/* 
+ ---------------------------
+ 3) Style Three
+ ---------------------------
+ */ 
+.custom-card3 {
+	position: relative;
+    border-radius: 8px;
+    background-color: #fff;
+	margin-bottom: 1.5rem;
+    @include transition-default();
+	@include outer-shadow();
+	
+
+	.custom-card3-tagline {
+		font-size: 0.75rem;
+		font-weight: 500;
+		letter-spacing: 2px;
+		text-transform: uppercase;
+		color: rgba(51, 51, 51, .4);
+	}
+	
+
+	.custom-card3-headline {
+		margin-top: 10px;
+		margin: 0;
+	}
+	
+	.custom-card3-image {
+		height: 260px;
+		border-top-left-radius: 8px;
+		border-top-right-radius: 8px;
+		background-image: -webkit-linear-gradient(270deg, hsla(0, 0%, 96%, .5), hsla(0, 0%, 96%, .5));
+		background-image: linear-gradient(180deg, hsla(0, 0%, 96%, .5), hsla(0, 0%, 96%, .5));
+		background-position: 50% 50%;
+		background-size: cover;
+	}
+
+	.custom-card3-content {
+		padding: 1rem 1.5rem;
+	}
+	
+
+	
+
+}
+
+
+/* 
+ ---------------------------
+ 4) Style Four
+ ---------------------------
+ */ 
+.custom-card4 {
+	position: relative;
+    border-radius: 8px;
+    background-color: #fff;
+	margin-bottom: 1.5rem;
+    @include transition-default();
+	@include outer-shadow();
+	
+
+	.custom-card4-tagline {
+		font-size: 0.75rem;
+		font-weight: 500;
+		letter-spacing: 2px;
+		text-transform: uppercase;
+		color: rgba(51, 51, 51, .4);
+	}
+	
+	.custom-card4-headline {
+		margin-top: 10px;
+		margin: 0;
+	}
+	
+	
+
+	.custom-card4-image {
+		height: 21.25rem;
+		border-top-left-radius: 8px;
+		border-bottom-left-radius: 8px;
+		background-position: 50% 50%;
+		background-size: cover;
+	}
+	
+
+	.custom-card4-content {
+		height: 21.25rem;
+		padding: 1.5rem 3rem;
+	}
+
+
+	
+}
+
+
+@media all and (max-width: 768px) {
+	.custom-card4 {
+		
+		.custom-card4-image {
+			border-bottom-left-radius: 0;
+		}
+
+		.custom-card4-content {
+			height: auto;
+		}
+
+
+
+	}
+	
+}
+
+
+

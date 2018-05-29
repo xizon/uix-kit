@@ -16,7 +16,7 @@ App = ( function ( App, $, window, document ) {
 	};
 	
 		
-    App.Pagination = {
+    App.pagination = {
         documentReady : documentReady        
     };
 

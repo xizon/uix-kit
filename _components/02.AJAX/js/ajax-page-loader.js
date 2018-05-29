@@ -294,6 +294,13 @@ App = ( function ( App, $, window, document ) {
 						else {
 							location.hash = url;
 						}
+						
+						//Change URL without refresh the page
+						if ( url == 'home.html' ) {
+							history.pushState(null, null, window.location.href.replace( 'home.html', '' ) );
+						}	
+						
+						
 
 						//Prevent multiple request on click
 						$( AJAXPageLinks ).data( 'request-running', false );	
@@ -389,7 +396,21 @@ App = ( function ( App, $, window, document ) {
 		function applyOriginalSomeScripts() {
 			
 			App.commonHeight.pageLoaded(); //Common Height
+			App.customLightbox.pageLoaded(); //Custom Lightbox
+			App.modalbox.documentReady($); //Modal Dialog
 			App.parallax.documentReady($); //Parallax
+			App.videos.documentReady($); //Videos
+			App.setBG.documentReady($); //Specify a background image
+			App.getAllCustomAttrs.documentReady($); //Get all custom attributes of an element like "data-*"
+			App.pagination.documentReady($); //Pagination
+			App.form.documentReady($); //Form
+			App.flexSlider.documentReady($); //Flexslider
+			App.retina.documentReady($); //Retina Graphics for Website
+			App.showMoreLess.documentReady($); //Show More Less
+			
+			//Other functions here
+			
+			
 			
 			//Uix Shortcodes
 			if ( $.isFunction( $.uix_sc_init ) ) {
