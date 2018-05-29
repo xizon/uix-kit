@@ -35,22 +35,22 @@ App = ( function ( App, $, window, document ) {
 			//Avoid problems caused by insufficient quantity
 			//-------------------------------------		
 			if ( itemCount == 3 ) {
-				var $clone = $items.eq(1).clone();
-				$items.last().after( $clone );
+				var $clone3 = $items.eq(1).clone();
+				$items.last().after( $clone3 );
 			}
 			
 			if ( itemCount == 2 ) {
-				var $clone1 = $items.eq(0).clone(),
-					$clone2 = $items.eq(1).clone();
-				$items.last().after( [$clone1, $clone2 ] );
+				var $clone2_1 = $items.eq(0).clone(),
+					$clone2_2 = $items.eq(1).clone();
+				$items.last().after( [$clone2_1, $clone2_2 ] );
 			}
 			
 			if ( itemCount == 1 ) {
-				var $clone1 = $items.eq(0).clone(),
-					$clone2 = $items.eq(0).clone(),
-					$clone3 = $items.eq(0).clone();
+				var $clone1_1 = $items.eq(0).clone(),
+					$clone1_2 = $items.eq(0).clone(),
+					$clone1_3 = $items.eq(0).clone();
 					
-				$items.last().after( [$clone1, $clone2, $clone3 ] );
+				$items.last().after( [$clone1_1, $clone1_2, $clone1_3 ] );
 			}		
 			
 

@@ -155,6 +155,7 @@ http://localhost:8080/examples/
     <script src="assets/js/min/TweenMax.min.js?ver=1.20.4"></script>
     <script src="assets/js/min/pixi.min.js?ver=4.7.1"></script>
     <script src="assets/js/min/three.min.js?ver=r92"></script>
+	<script src="assets/js/min/anime.min.js?ver=2.2.0"></script>
     
     <!-- Masonry -->
     <script src="assets/js/wp-jquery/masonry.min.js?ver=3.3.2"></script>
@@ -171,8 +172,8 @@ http://localhost:8080/examples/
     <!-- Theme Script -->
 	<script>
         var wp_theme_root_path = {
-			"templateUrl" :"", //If the file is in the root directory, you can leave it empty; if in another directory, you can write: "/blog"
-			"homeUrl"     :""  //Eg. https://uiux.cc
+			"templateUrl" : "", //If the file is in the root directory, you can leave it empty; if in another directory, you can write : "/blog"
+			"homeUrl"     : ""  //Eg. https://uiux.cc
 		};
     </script>  
     <script src="assets/js/uix-kit.min.js?ver=1.0.0"></script>

@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.6.3
+ * ## Version             :  1.6.5
  * ## Last Update         :  May 29, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -37,21 +37,49 @@
     12. 3D Background 
     13. 3D Carousel 
     14. 3D Pages 
-    15. Accordion 
-    16. 3D Particle Effect 
-    17. Accordion Background Images 
-    18. Advanced Content Slider 
-    19. Advanced Slider (Special Effects) 
-    20. Advanced Slider (Basic) 
+    15. 3D Particle Effect 
+    16. Accordion 
+    17. Advanced Content Slider 
+    18. Accordion Background Images 
+    19. Advanced Slider (Basic) 
+    20. Advanced Slider (Special Effects) 
     21. Counter 
     22. Dynamic Drop Down List from JSON 
     23. Flexslider 
-    24. Form 
-    25. Form Progress 
-    26. Gallery 
+    24. Form Progress 
+    25. Gallery 
+    26. Form 
     27. Image Shapes 
     28. Custom Core Scripts & Stylesheets 
     29. Custom Lightbox 
+    30. Bulleted List 
+    31. Posts List With Ajax 
+    32. Fullwidth List of Split 
+    33. Mobile Menu 
+    34. Modal Dialog 
+    35. Mousewheel Interaction 
+    36. Multiple Items Carousel 
+    37. Full Page/One Page Transition 
+    38. Full Page/One Page Transition 2 
+    39. Parallax 
+    40. Periodical Scroll 
+    41. Pricing 
+    42. Progress Bar 
+    43. Retina Graphics for Website 
+    44. Rotating Elements 
+    45. Scroll Reveal 
+    46. Show More Less 
+    47. Smooth Scrolling When Clicking An Anchor Link 
+    48. Source Code 
+    49. Sticky Elements 
+    50. Tabs 
+    51. Team Focus 
+    52. Testimonials Carousel 
+    53. Text effect 
+    54. Timeline 
+    55. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    56. GSAP Plugins 
+    57. Three.js Plugins 
 
 
 */
@@ -1512,148 +1540,6 @@ App = ( function ( App, $, window, document ) {
 
 
 
-/* 
- *************************************
- * <!-- 3D Pages -->
- *************************************
- */
-App = ( function ( App, $, window, document ) {
-    'use strict';
-    
-    var documentReady = function( $ ) {
-
-		
-		//Prevent this module from loading in other pages
-		if ( $( '#3D-renderer' ).length == 0 || ! Modernizr.webgl ) return false;
-		
-		
-		
-		var $window                   = $( window ),
-			windowWidth               = $window.width(),
-			windowHeight              = $window.height(),
-			viewRenderer              = '3D-renderer';
-		
-		
-		// HTML Render
-		//-------------------------------------	
-		function htmlRenderer() {
-			//If a strict mode function is executed using function invocation, 
-			//its 'this' value will be undefined.
-			this.camera = camera;
-			this.scene = scene;
-			this.renderer = renderer;
-		}
-		htmlRenderer.prototype.init = function( camera ) {
-			this.scene  = new THREE.Scene();
-			this.camera = camera;
-			
-			var target  = $( '#html3D-view' ).clone(),
-				pages   = target.find( '.html3D-view-content' ),
-				self    = this;
-
-			pages.each( function() {
-				var el = new THREE.CSS3DObject( $.parseHTML( $( this )[0].outerHTML )[0] );
-
-				el.position.x = $( this ).data( 'position-x' ) || 0;
-				el.position.y = $( this ).data( 'position-y' ) || 0;
-				el.position.z = $( this ).data( 'position-z' ) || 0;
-				el.rotation.x = $( this ).data( 'rotation-x' ) || 0;
-				el.rotation.y = $( this ).data( 'rotation-y' ) || 3.14159265358979;
-				el.rotation.z = $( this ).data( 'rotation-z' ) || 0;
-
-				self.scene.add( el );
-			});
-			
-
-			//CSS3D Renderer
-			this.renderer = new THREE.CSS3DRenderer();
-			this.renderer.setSize( windowWidth, windowHeight );
-			this.renderer.domElement.style.position = 'absolute';
-			this.renderer.domElement.style.top = 0;
-			document.getElementById( viewRenderer ).appendChild( this.renderer.domElement );
-
-			window.addEventListener( 'resize', function() {
-				self.renderer.setSize( windowWidth, windowHeight );
-				camera.aspect = windowWidth / windowHeight;
-				camera.updateProjectionMatrix();
-			}, false );
-		};
-
-		htmlRenderer.prototype.render = function() {
-		    this.renderer.render( this.scene, this.camera );
-		};
-
-		
-		
-		
-		// Generate one plane geometries mesh to scene
-		//-------------------------------------	
-		var camera,
-			controls,
-			scene,
-			light,
-			renderer,
-			html3d = new htmlRenderer();
-
-		threePagesInit();
-		threePagesAnimate();
-
-		function threePagesInit() {
-			//camera
-			camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 1, 10000 );
-			camera.position.set(0, 0, -1000);
-
-			//controls
-			controls = new THREE.OrbitControls( camera );
-			controls.rotateSpeed = 1.0;
-			controls.zoomSpeed = 1.2;
-			controls.panSpeed = 0.8;
-
-			//Scene
-			scene = new THREE.Scene();
-
-			//HemisphereLight
-			light = new THREE.HemisphereLight( 0xffbf67, 0x15c6ff );
-			scene.add( light );
-
-			//WebGL Renderer
-			renderer = new THREE.WebGLRenderer({ antialias: true });
-			renderer.setClearColor( 0xffffff, 1 );
-			renderer.setSize( windowWidth - 50, windowHeight - 50 );
-			renderer.domElement.style.zIndex = 5;
-			document.getElementById( viewRenderer ).appendChild( renderer.domElement );
-
-			html3d.init( camera );
-		}
-
-		function threePagesAnimate() {
-			requestAnimationFrame( threePagesAnimate );
-			html3d.render();
-			renderer.render( scene, camera );
-			controls.update();
-		}
-
-
-		
-    };
-
-    App.threeDimensionalPages = {
-        documentReady : documentReady        
-    };
-
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
-
-
-
-
-
-
-
-
-
 
 /* 
  *************************************
@@ -1691,22 +1577,22 @@ App = ( function ( App, $, window, document ) {
 			//Avoid problems caused by insufficient quantity
 			//-------------------------------------		
 			if ( itemCount == 3 ) {
-				var $clone = $items.eq(1).clone();
-				$items.last().after( $clone );
+				var $clone3 = $items.eq(1).clone();
+				$items.last().after( $clone3 );
 			}
 			
 			if ( itemCount == 2 ) {
-				var $clone1 = $items.eq(0).clone(),
-					$clone2 = $items.eq(1).clone();
-				$items.last().after( [$clone1, $clone2 ] );
+				var $clone2_1 = $items.eq(0).clone(),
+					$clone2_2 = $items.eq(1).clone();
+				$items.last().after( [$clone2_1, $clone2_2 ] );
 			}
 			
 			if ( itemCount == 1 ) {
-				var $clone1 = $items.eq(0).clone(),
-					$clone2 = $items.eq(0).clone(),
-					$clone3 = $items.eq(0).clone();
+				var $clone1_1 = $items.eq(0).clone(),
+					$clone1_2 = $items.eq(0).clone(),
+					$clone1_3 = $items.eq(0).clone();
 					
-				$items.last().after( [$clone1, $clone2, $clone3 ] );
+				$items.last().after( [$clone1_1, $clone1_2, $clone1_3 ] );
 			}		
 			
 
@@ -1964,6 +1850,148 @@ App = ( function ( App, $, window, document ) {
 }( App, jQuery, window, document ) );
 /* 
  *************************************
+ * <!-- 3D Pages -->
+ *************************************
+ */
+App = ( function ( App, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+
+		
+		//Prevent this module from loading in other pages
+		if ( $( '#3D-renderer' ).length == 0 || ! Modernizr.webgl ) return false;
+		
+		
+		
+		var $window                   = $( window ),
+			windowWidth               = $window.width(),
+			windowHeight              = $window.height(),
+			viewRenderer              = '3D-renderer';
+		
+		
+		// HTML Render
+		//-------------------------------------	
+		function htmlRenderer() {
+			//If a strict mode function is executed using function invocation, 
+			//its 'this' value will be undefined.
+			this.camera = camera;
+			this.scene = scene;
+			this.renderer = renderer;
+		}
+		htmlRenderer.prototype.init = function( camera ) {
+			this.scene  = new THREE.Scene();
+			this.camera = camera;
+			
+			var target  = $( '#html3D-view' ).clone(),
+				pages   = target.find( '.html3D-view-content' ),
+				self    = this;
+
+			pages.each( function() {
+				var el = new THREE.CSS3DObject( $.parseHTML( $( this )[0].outerHTML )[0] );
+
+				el.position.x = $( this ).data( 'position-x' ) || 0;
+				el.position.y = $( this ).data( 'position-y' ) || 0;
+				el.position.z = $( this ).data( 'position-z' ) || 0;
+				el.rotation.x = $( this ).data( 'rotation-x' ) || 0;
+				el.rotation.y = $( this ).data( 'rotation-y' ) || 3.14159265358979;
+				el.rotation.z = $( this ).data( 'rotation-z' ) || 0;
+
+				self.scene.add( el );
+			});
+			
+
+			//CSS3D Renderer
+			this.renderer = new THREE.CSS3DRenderer();
+			this.renderer.setSize( windowWidth, windowHeight );
+			this.renderer.domElement.style.position = 'absolute';
+			this.renderer.domElement.style.top = 0;
+			document.getElementById( viewRenderer ).appendChild( this.renderer.domElement );
+
+			window.addEventListener( 'resize', function() {
+				self.renderer.setSize( windowWidth, windowHeight );
+				camera.aspect = windowWidth / windowHeight;
+				camera.updateProjectionMatrix();
+			}, false );
+		};
+
+		htmlRenderer.prototype.render = function() {
+		    this.renderer.render( this.scene, this.camera );
+		};
+
+		
+		
+		
+		// Generate one plane geometries mesh to scene
+		//-------------------------------------	
+		var camera,
+			controls,
+			scene,
+			light,
+			renderer,
+			html3d = new htmlRenderer();
+
+		threePagesInit();
+		threePagesAnimate();
+
+		function threePagesInit() {
+			//camera
+			camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 1, 10000 );
+			camera.position.set(0, 0, -1000);
+
+			//controls
+			controls = new THREE.OrbitControls( camera );
+			controls.rotateSpeed = 1.0;
+			controls.zoomSpeed = 1.2;
+			controls.panSpeed = 0.8;
+
+			//Scene
+			scene = new THREE.Scene();
+
+			//HemisphereLight
+			light = new THREE.HemisphereLight( 0xffbf67, 0x15c6ff );
+			scene.add( light );
+
+			//WebGL Renderer
+			renderer = new THREE.WebGLRenderer({ antialias: true });
+			renderer.setClearColor( 0xffffff, 1 );
+			renderer.setSize( windowWidth - 50, windowHeight - 50 );
+			renderer.domElement.style.zIndex = 5;
+			document.getElementById( viewRenderer ).appendChild( renderer.domElement );
+
+			html3d.init( camera );
+		}
+
+		function threePagesAnimate() {
+			requestAnimationFrame( threePagesAnimate );
+			html3d.render();
+			renderer.render( scene, camera );
+			controls.update();
+		}
+
+
+		
+    };
+
+    App.threeDimensionalPages = {
+        documentReady : documentReady        
+    };
+
+    App.components.documentReady.push( documentReady );
+    return App;
+
+}( App, jQuery, window, document ) );
+
+
+
+
+
+
+
+
+
+/* 
+ *************************************
  * <!-- 3D Particle Effect -->
  *************************************
  */
@@ -2042,7 +2070,7 @@ App = ( function ( App, $, window, document ) {
 				y: 0.0,
 				z: (((i / size) / size) - 0.5) * 1.2
 			});
-		};
+		}
 
 		var particleTextureTarget = createGeometryTexture(new THREE.SphereGeometry(0.5, size - 1, size - 1), size),
 			texturePlane          = createGeometryTexture(horizontalPlane, size),
@@ -14375,6 +14403,52 @@ App = ( function ( App, $, window, document ) {
 
 
 
+
+/* 
+ *************************************
+ * <!-- Retina Graphics for Website -->
+ *************************************
+ */
+App = ( function ( App, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ) {
+		
+		//Determine if you have retinal display
+		var hasRetina  = false,
+			rootRetina = (typeof exports === 'undefined' ? window : exports),
+			mediaQuery = '(-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-resolution: 1.5dppx)';
+	
+		if ( rootRetina.devicePixelRatio > 1 || rootRetina.matchMedia && rootRetina.matchMedia( mediaQuery ).matches ) {
+			hasRetina = true;
+		} 
+
+		if ( hasRetina ) {
+			//do something
+			$( '[data-retina]' ).each( function() {
+				$( this ).attr( {
+					'src'     : $( this ).data( 'retina' ),
+				} );
+			});
+		
+		} 
+		
+		
+	
+		
+	};
+	
+		
+    App.retina = {
+        documentReady : documentReady        
+    };
+
+    App.components.documentReady.push( documentReady );
+    return App;
+
+}( App, jQuery, window, document ) );
+
 /* 
  *************************************
  * <!-- Rotating Elements -->
@@ -14447,52 +14521,6 @@ App = ( function ( App, $, window, document ) {
 }( App, jQuery, window, document ) );
 
 
-
-
-/* 
- *************************************
- * <!-- Retina Graphics for Website -->
- *************************************
- */
-App = ( function ( App, $, window, document ) {
-    'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
-		//Determine if you have retinal display
-		var hasRetina  = false,
-			rootRetina = (typeof exports === 'undefined' ? window : exports),
-			mediaQuery = '(-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-resolution: 1.5dppx)';
-	
-		if ( rootRetina.devicePixelRatio > 1 || rootRetina.matchMedia && rootRetina.matchMedia( mediaQuery ).matches ) {
-			hasRetina = true;
-		} 
-
-		if ( hasRetina ) {
-			//do something
-			$( '[data-retina]' ).each( function() {
-				$( this ).attr( {
-					'src'     : $( this ).data( 'retina' ),
-				} );
-			});
-		
-		} 
-		
-		
-	
-		
-	};
-	
-		
-    App.retina = {
-        documentReady : documentReady        
-    };
-
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
 
 
 /* 
@@ -15381,87 +15409,15 @@ App = ( function ( App, $, window, document ) {
 App = ( function ( App, $, window, document ) {
     'use strict';
     
-	//////////////// cipher
-	var cipher = function() {
-	  function e(a, d, b) {
-		var c, f, g, h;
-          
-        if ( b == a.length ) {
-            k.animationComplete = !0;
-        } else {
-            g = d.innerHTML;
-            h = Math.floor(21 * Math.random() + 5);
-            
-            if ( 32 === a[b] ) {
-               c = 32; 
-            } else {
-               c = a[b] - h; 
-            }
-            
-            f = setInterval(function() {
-                
-              d.innerHTML = g + String.fromCharCode(c);
-
-                if ( c == a[b] ) {
-                    clearInterval( f );
-                    c = 32;
-                    b++;
-
-                    setTimeout( function() {
-                        e(a, d, b);
-                    }, 10 );
-
-                } else {
-                    c++;
-                }
-
-            }, 13 ); 
-            
-        }
-          
-          
-	  }
-	  var k = {};
-        
-	  return k = {
-          animationComplete : !1, 
-          text              : function( a ) {
-                                    this.animationComplete = !1;
-                                    a = document.querySelector( a );
-			  
-                                    for ( var d = a.innerHTML, b = [], c = 0; c < d.length; c++ ) {
-                                      b.push( d.charCodeAt( c ) );
-                                    }
-                                    a.innerHTML = "";
-                                    e( b, a, 0 );
-	                          }
-      };
-        
-	}();
-
-
+	
     var pageLoaded = function() {
 
-		$( '.text-eff' ).each( function()  {
-			if ( $( this ).text().length > 0 ) {
-				
-				var waypoints = $( this ).waypoint({
-					handler: function( direction ) {
-
-						
-						cipher.text( '#' + $( this.element ).attr( 'id' ) );
-
-						
-						this.disable();
-
-
-					},
-					offset: '100%' //0~100%, bottom-in-view
-				});
-				
-				
-			}
+		//Default Effect
+		//-------------------------------------	
+		$( '[data-text-eff]' ).each( function( index )  {
+			$( document ).customTextEffInit( { selectors: '[data-text-eff="'+$( this ).data( 'text-eff' )+'"]' } );
 		});
+		
 		
 		
     };
@@ -15475,6 +15431,78 @@ App = ( function ( App, $, window, document ) {
 
 }( App, jQuery, window, document ) );
 
+
+
+/*
+ * Text Effect
+ *
+ * @param  {string} selectors                - Text wrapper ID or class name.
+ * @return {void}                            - The constructor.
+ */
+( function ( $ ) {
+    $.fn.customTextEffInit = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+			selectors    : '.letters-eff-fadeInRight'
+        }, options );
+ 
+        this.each( function() {
+			
+			var $this                = $( this ),
+				customControls       = settings.selectors,
+				speed                = $( customControls ).data( 'text-eff-speed' ),
+				txtEff;
+
+			
+				if( typeof speed === typeof undefined ) {
+					speed = 1200;
+				}	
+			
+		
+				$( customControls ).html( $( customControls ).text().replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>") );
+			
+			
+				if( customControls.indexOf( 'fadeInRight' ) >= 0 ) {
+					txtEff = anime.timeline({loop: false})
+						  .add({
+							targets: customControls + ' .letter',
+							translateX: [40,0],
+							translateZ: 0,
+							opacity: [0,1],
+							easing: "easeOutExpo",
+							duration: speed,
+							delay: function(el, i) {
+							  return 500 + 30 * i;
+							}
+						  });
+
+				}
+			
+			
+				if( customControls.indexOf( 'zoomInDown' ) >= 0 ) {
+					txtEff = anime.timeline({loop: false})
+						  .add({
+						    targets: customControls + ' .letter',
+							scale: [0, 1],
+							duration: speed,
+							elasticity: 600,
+							delay: function(el, i) {
+							  return 45 * (i+1)
+							}
+						  });
+
+				}	
+			
+
+
+
+			
+		});
+ 
+    };
+ 
+}( jQuery ));
 
 
 /* 
@@ -20047,26 +20075,6 @@ Object.defineProperties( THREE.OrbitControls.prototype, {
 /***/ function(module, exports) {
 
 	module.exports = "uniform float explodeRate;\nvarying vec2 vUv;\n\n\nfloat rand(vec2 co){\n  return fract(sin(dot(co.xy, vec2(12.8273, 67.245))) * 53726.17623);\n}\n\nvoid main() {\n  vec3 col;\n  col.g = rand(vec2(vUv.x, vUv.y + 1.0));\n  col.b = rand(vec2(vUv.x, vUv.y + 2.0));\n  col.r = rand(vec2(vUv.xy));\n  col = col - 0.5;\n  col *= explodeRate;\n\n  gl_FragColor = vec4(col, 1.0);\n}\n";
-
-/***/ }
-/******/ ]);;
-
-/***/ }
-/******/ ]);\n  gl_FragColor = vec4(col, 1.0);\n}\n";
-
-/***/ }
-/******/ ]); function(module, exports) {
-
-	module.exports = "varying vec2 vUv;\n\nvoid main() {\n  vUv = uv;\n  gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);\n}\n";
-
-/***/ },
-/* 8 */
-/***/ function(module, exports) {
-
-	module.exports = "uniform float explodeRate;\nvarying vec2 vUv;\n\n\nfloat rand(vec2 co){\n  return fract(sin(dot(co.xy, vec2(12.8273, 67.245))) * 53726.17623);\n}\n\nvoid main() {\n  vec3 col;\n  col.g = rand(vec2(vUv.x, vUv.y + 1.0));\n  col.b = rand(vec2(vUv.x, vUv.y + 2.0));\n  col.r = rand(vec2(vUv.xy));\n  col = col - 0.5;\n  col *= explodeRate;\n\n  gl_FragColor = vec4(col, 1.0);\n}\n";
-
-/***/ }
-/******/ ]);r = vec4(col, 1.0);\n}\n";
 
 /***/ }
 /******/ ]);

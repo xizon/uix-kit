@@ -8,87 +8,15 @@
 App = ( function ( App, $, window, document ) {
     'use strict';
     
-	//////////////// cipher
-	var cipher = function() {
-	  function e(a, d, b) {
-		var c, f, g, h;
-          
-        if ( b == a.length ) {
-            k.animationComplete = !0;
-        } else {
-            g = d.innerHTML;
-            h = Math.floor(21 * Math.random() + 5);
-            
-            if ( 32 === a[b] ) {
-               c = 32; 
-            } else {
-               c = a[b] - h; 
-            }
-            
-            f = setInterval(function() {
-                
-              d.innerHTML = g + String.fromCharCode(c);
-
-                if ( c == a[b] ) {
-                    clearInterval( f );
-                    c = 32;
-                    b++;
-
-                    setTimeout( function() {
-                        e(a, d, b);
-                    }, 10 );
-
-                } else {
-                    c++;
-                }
-
-            }, 13 ); 
-            
-        }
-          
-          
-	  }
-	  var k = {};
-        
-	  return k = {
-          animationComplete : !1, 
-          text              : function( a ) {
-                                    this.animationComplete = !1;
-                                    a = document.querySelector( a );
-			  
-                                    for ( var d = a.innerHTML, b = [], c = 0; c < d.length; c++ ) {
-                                      b.push( d.charCodeAt( c ) );
-                                    }
-                                    a.innerHTML = "";
-                                    e( b, a, 0 );
-	                          }
-      };
-        
-	}();
-
-
+	
     var pageLoaded = function() {
 
-		$( '.text-eff' ).each( function()  {
-			if ( $( this ).text().length > 0 ) {
-				
-				var waypoints = $( this ).waypoint({
-					handler: function( direction ) {
-
-						
-						cipher.text( '#' + $( this.element ).attr( 'id' ) );
-
-						
-						this.disable();
-
-
-					},
-					offset: '100%' //0~100%, bottom-in-view
-				});
-				
-				
-			}
+		//Default Effect
+		//-------------------------------------	
+		$( '[data-text-eff]' ).each( function( index )  {
+			$( document ).customTextEffInit( { selectors: '[data-text-eff="'+$( this ).data( 'text-eff' )+'"]' } );
 		});
+		
 		
 		
     };
@@ -102,3 +30,75 @@ App = ( function ( App, $, window, document ) {
 
 }( App, jQuery, window, document ) );
 
+
+
+/*
+ * Text Effect
+ *
+ * @param  {string} selectors                - Text wrapper ID or class name.
+ * @return {void}                            - The constructor.
+ */
+( function ( $ ) {
+    $.fn.customTextEffInit = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+			selectors    : '.letters-eff-fadeInRight'
+        }, options );
+ 
+        this.each( function() {
+			
+			var $this                = $( this ),
+				customControls       = settings.selectors,
+				speed                = $( customControls ).data( 'text-eff-speed' ),
+				txtEff;
+
+			
+				if( typeof speed === typeof undefined ) {
+					speed = 1200;
+				}	
+			
+		
+				$( customControls ).html( $( customControls ).text().replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>") );
+			
+			
+				if( customControls.indexOf( 'fadeInRight' ) >= 0 ) {
+					txtEff = anime.timeline({loop: false})
+						  .add({
+							targets: customControls + ' .letter',
+							translateX: [40,0],
+							translateZ: 0,
+							opacity: [0,1],
+							easing: "easeOutExpo",
+							duration: speed,
+							delay: function(el, i) {
+							  return 500 + 30 * i;
+							}
+						  });
+
+				}
+			
+			
+				if( customControls.indexOf( 'zoomInDown' ) >= 0 ) {
+					txtEff = anime.timeline({loop: false})
+						  .add({
+						    targets: customControls + ' .letter',
+							scale: [0, 1],
+							duration: speed,
+							elasticity: 600,
+							delay: function(el, i) {
+							  return 45 * (i+1)
+							}
+						  });
+
+				}	
+			
+
+
+
+			
+		});
+ 
+    };
+ 
+}( jQuery ));

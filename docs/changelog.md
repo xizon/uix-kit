@@ -1,13 +1,13 @@
 # Changelog
 
 
-#### = 1.6.3 (May 29, 2018) =
+#### = 1.6.5 (May 29, 2018) =
 
 * Fix: Solved an issue of display in 3D Carousel module.
 * New: Added a variety of styles to the card module.
 * New: Added an auxiliary Grid System for Inline Elements to make the layout more flexible.
 * Tweak: Enhanced extension styles of button.
-
+* Tweak: Add "animejs" to expand more flexible effects.
 
 
 

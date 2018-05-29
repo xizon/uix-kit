@@ -78,7 +78,7 @@ App = ( function ( App, $, window, document ) {
 				y: 0.0,
 				z: (((i / size) / size) - 0.5) * 1.2
 			});
-		};
+		}
 
 		var particleTextureTarget = createGeometryTexture(new THREE.SphereGeometry(0.5, size - 1, size - 1), size),
 			texturePlane          = createGeometryTexture(horizontalPlane, size),

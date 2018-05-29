@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.6.3
+ * ## Version             :  1.6.5
  * ## Last Update         :  May 29, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -80,8 +80,8 @@
     12. Video 
     13. Back to Top 
     14. Loader 
-    15. Pagination 
-    16. Social Media Icons 
+    15. Social Media Icons 
+    16. Pagination 
     17. Filterable Navigation 
     18. Sidebar 
     19. Search 
@@ -101,8 +101,8 @@
     33. Breadcrumbs 
     34. Button 
     35. Cards 
-    36. Dotted Line 
-    37. Counter 
+    36. Counter 
+    37. Dotted Line 
     38. Dropdown Menu 
     39. Equal-width Divs 
     40. Features 
@@ -119,8 +119,8 @@
     51. Bulleted List 
     52. Maintain Aspect Ratio List 
     53. List of Posts 
-    54. List of Split Posts 
-    55. Side by Side List 
+    54. Side by Side List 
+    55. List of Split Posts 
     56. Side by Side List With Photo 
     57. Fullwidth List of Split 2 
     58. Fullwidth List of Split 
@@ -141,10 +141,12 @@
     73. Tabs 
     74. Team Focus 
     75. Testimonials Carousel 
-    76. Timeline 
-    77. ToolTip 
-    78. WordPress Core 
-    79. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    76. Multiple Items Carousel 
+    77. Multiple Items Carousel 
+    78. Timeline 
+    79. ToolTip 
+    80. WordPress Core 
+    81. Ajax Page Loader (Loading A Page via Ajax Into Div)  
 
 
 
@@ -7546,40 +7548,6 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 }
 
 /* ====================================================== 
-   <!-- Side by Side List --> 
-/* ====================================================== */
-dl.list-side-by-side {
-    width: 100%;
-  /* adjust the width; make sure the total of both is 100% */
-    font-size: 0.875rem;
-}
-
-dl.list-side-by-side dt {
-    float: left;
-    clear: left;
-    width: 100px;
-    padding: 5px 0;
-    margin: 0;
-    font-weight: 600;
-    text-align: right;
-}
-
-dl.list-side-by-side dd {
-    float: left;
-    width: calc(100% - 100px);
-    padding: 5px 0;
-    margin: 0;
-    text-align: left;
-    padding-left: 1rem;
-}
-
-dl.list-side-by-side::after {
-    content: '';
-    display: table;
-    clear: both;
-}
-
-/* ====================================================== 
    <!-- List of Posts --> 
 /* ====================================================== */
 .list-topic-container .list-topic-item {
@@ -7793,6 +7761,40 @@ dl.list-side-by-side::after {
     .list-split-container .list-split-item .list-split-item-info > div {
         padding: 0;
     }
+}
+
+/* ====================================================== 
+   <!-- Side by Side List --> 
+/* ====================================================== */
+dl.list-side-by-side {
+    width: 100%;
+  /* adjust the width; make sure the total of both is 100% */
+    font-size: 0.875rem;
+}
+
+dl.list-side-by-side dt {
+    float: left;
+    clear: left;
+    width: 100px;
+    padding: 5px 0;
+    margin: 0;
+    font-weight: 600;
+    text-align: right;
+}
+
+dl.list-side-by-side dd {
+    float: left;
+    width: calc(100% - 100px);
+    padding: 5px 0;
+    margin: 0;
+    text-align: left;
+    padding-left: 1rem;
+}
+
+dl.list-side-by-side::after {
+    content: '';
+    display: table;
+    clear: both;
 }
 
 /* ====================================================== 
@@ -11600,6 +11602,15 @@ dl.list-side-by-side::after {
 
 .slides-custom-control li.flex-active {
     background: #EC5E79;
+}
+
+/* ====================================================== 
+   <!-- Multiple Items Carousel -->   
+/* ====================================================== */
+.letter {
+    transform-origin: 50% 100%;
+    display: inline-block;
+    line-height: 1;
 }
 
 /* ====================================================== 
