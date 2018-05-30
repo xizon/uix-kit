@@ -41,11 +41,24 @@ App = ( function ( App, $, window, document ) {
 	
 		
 		scene = new THREE.Scene();
+		
+		//camera
 		camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 0.01, 100 );
 		camera.position.set( -1.5, 0.5, 0.5 );
 		camera.lookAt( new THREE.Vector3(0,0,0) );
+		
+		//controls
 		controls = new THREE.OrbitControls( camera );
-
+		controls.rotateSpeed = 0.5;
+		controls.zoomSpeed = 1.2;
+		controls.panSpeed = 0.8;
+		controls.enableZoom = true;
+		controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+		controls.dampingFactor = 0.25;
+		controls.screenSpacePanning = false;
+	    controls.minDistance = 1.5;
+		controls.maxDistance = 5;
+		controls.maxPolarAngle = Math.PI / 2;
 		
 
 	
@@ -104,17 +117,15 @@ App = ( function ( App, $, window, document ) {
 
 		// Create the particles
 		var particleOptions = {
-			textureSize: size,
-			explodeRate: 0.1,
-			targetTexture: particleTextureTarget,
-			velocityFunctionString: 'outVelocity = direction * (dist/50.0);',
-			colorFunctionString: 'color = vec4(0.0, 0.0, 0.0, 1.0);'
+			textureSize            : size,
+			explodeRate            : 0.1,
+			targetTexture          : particleTextureTarget,
+			velocityFunctionString : 'outVelocity = direction * (dist/50.0);',
+			colorFunctionString    : 'color = vec4(0.0, 0.0, 0.0, 1.0);'
 		};
 		var particles = new Particles( renderer, scene, particleOptions );
 
 		
-		//controls.update() must be called after any manual changes to the camera's transform
-		controls.update();
 
 		animate();
 		function animate() {

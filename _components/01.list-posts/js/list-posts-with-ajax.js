@@ -201,7 +201,8 @@ App = ( function ( App, $, window, document ) {
 							$( nextTrigger ).addClass( 'hide' );	
 						}
 
-						$( document ).on( 'click', nextTrigger, function( e ) {
+						//Avoid using $( document ) to cause an asynchronous load without counting from 1
+						$( nextTrigger ).on( 'click', function( e ) {
 
 							e.preventDefault();
 
@@ -243,7 +244,8 @@ App = ( function ( App, $, window, document ) {
 						//Hide the prev button 
 						$( prevTrigger ).addClass( 'hide' );
 						
-						$( document ).on( 'click', prevTrigger, function( e ) {
+						//Avoid using $( document ) to cause an asynchronous load without counting from 1
+						$( prevTrigger ).on( 'click', function( e ) {
 
 							e.preventDefault();
 
@@ -292,7 +294,8 @@ App = ( function ( App, $, window, document ) {
 							$( trigger ).addClass( 'hide' );	
 						}
 
-						$( document ).on( 'click', trigger, function( e ) {
+						//Avoid using $( document ) to cause an asynchronous load without counting from 1
+						$( trigger ).on( 'click', function( e ) {
 
 							e.preventDefault();
 

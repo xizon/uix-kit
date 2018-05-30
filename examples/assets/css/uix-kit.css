@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.6.5
- * ## Last Update         :  May 29, 2018
+ * ## Version             :  1.6.6
+ * ## Last Update         :  May 30, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -85,8 +85,8 @@
     17. Filterable Navigation 
     18. Sidebar 
     19. Search 
-    20. Tags 
-    21. Entry 
+    20. Entry 
+    21. Tags 
     22. Comments 
     23. 3rd Party Plugins 
     24. Onepage Menu 
@@ -98,9 +98,9 @@
     30. Advanced Slider (Special Effects) 
     31. Advanced Slider (Basic) 
     32. Badges 
-    33. Breadcrumbs 
-    34. Button 
-    35. Cards 
+    33. Button 
+    34. Cards 
+    35. Breadcrumbs 
     36. Counter 
     37. Dotted Line 
     38. Dropdown Menu 
@@ -119,8 +119,8 @@
     51. Bulleted List 
     52. Maintain Aspect Ratio List 
     53. List of Posts 
-    54. Side by Side List 
-    55. List of Split Posts 
+    54. List of Split Posts 
+    55. Side by Side List 
     56. Side by Side List With Photo 
     57. Fullwidth List of Split 2 
     58. Fullwidth List of Split 
@@ -141,12 +141,11 @@
     73. Tabs 
     74. Team Focus 
     75. Testimonials Carousel 
-    76. Multiple Items Carousel 
-    77. Multiple Items Carousel 
-    78. Timeline 
-    79. ToolTip 
-    80. WordPress Core 
-    81. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    76. Text effect 
+    77. Timeline 
+    78. ToolTip 
+    79. WordPress Core 
+    80. Ajax Page Loader (Loading A Page via Ajax Into Div)  
 
 
 
@@ -11605,7 +11604,7 @@ dl.list-side-by-side::after {
 }
 
 /* ====================================================== 
-   <!-- Multiple Items Carousel -->   
+   <!-- Text effect -->   
 /* ====================================================== */
 .letter {
     transform-origin: 50% 100%;

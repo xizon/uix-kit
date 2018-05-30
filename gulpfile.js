@@ -383,7 +383,11 @@ gulp.task('sass', function(){
 //Merge JS
 gulp.task('jshint', function () {
 	return gulp.src( globs.js )
-		.pipe(jshint())
+		.pipe(jshint({
+            "validthis" : true,// Tolerate using this in a non-constructor
+	     	"expr"      : true, //This option suppresses warnings about the use of expressions where normally you would expect to see assignments or function calls. 
+		    "scripturl" : true //This option suppresses warnings about the use of script-targeted URLs
+		}))
 		.pipe(jshint.reporter('default'));
 });
 

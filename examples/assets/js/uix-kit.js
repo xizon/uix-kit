@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.6.5
- * ## Last Update         :  May 29, 2018
+ * ## Version             :  1.6.6
+ * ## Last Update         :  May 30, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -27,59 +27,60 @@
     2. Loader 
     3. Back to Top 
     4. Get all custom attributes of an element like "data-*" 
-    5. Navigation 
-    6. Videos 
+    5. Videos 
+    6. Navigation 
     7. Common Height 
     8. Mega Menu 
     9. Dropdown Categories 
     10. Pagination 
     11. Specify a background image 
     12. 3D Background 
-    13. 3D Carousel 
-    14. 3D Pages 
-    15. 3D Particle Effect 
-    16. Accordion 
-    17. Advanced Content Slider 
+    13. 3D Background 2 
+    14. 3D Carousel 
+    15. 3D Pages 
+    16. 3D Particle Effect 
+    17. Accordion 
     18. Accordion Background Images 
-    19. Advanced Slider (Basic) 
+    19. Advanced Content Slider 
     20. Advanced Slider (Special Effects) 
-    21. Counter 
-    22. Dynamic Drop Down List from JSON 
-    23. Flexslider 
-    24. Form Progress 
+    21. Advanced Slider (Basic) 
+    22. Counter 
+    23. Dynamic Drop Down List from JSON 
+    24. Flexslider 
     25. Gallery 
-    26. Form 
-    27. Image Shapes 
-    28. Custom Core Scripts & Stylesheets 
+    26. Form Progress 
+    27. Form 
+    28. Image Shapes 
     29. Custom Lightbox 
-    30. Bulleted List 
-    31. Posts List With Ajax 
-    32. Fullwidth List of Split 
-    33. Mobile Menu 
-    34. Modal Dialog 
-    35. Mousewheel Interaction 
-    36. Multiple Items Carousel 
-    37. Full Page/One Page Transition 
-    38. Full Page/One Page Transition 2 
-    39. Parallax 
-    40. Periodical Scroll 
-    41. Pricing 
-    42. Progress Bar 
-    43. Retina Graphics for Website 
-    44. Rotating Elements 
-    45. Scroll Reveal 
-    46. Show More Less 
-    47. Smooth Scrolling When Clicking An Anchor Link 
-    48. Source Code 
-    49. Sticky Elements 
-    50. Tabs 
-    51. Team Focus 
-    52. Testimonials Carousel 
-    53. Text effect 
-    54. Timeline 
-    55. Ajax Page Loader (Loading A Page via Ajax Into Div)  
-    56. GSAP Plugins 
-    57. Three.js Plugins 
+    30. Custom Core Scripts & Stylesheets 
+    31. Bulleted List 
+    32. Posts List With Ajax 
+    33. Fullwidth List of Split 
+    34. Mobile Menu 
+    35. Modal Dialog 
+    36. Mousewheel Interaction 
+    37. Multiple Items Carousel 
+    38. Full Page/One Page Transition 
+    39. Full Page/One Page Transition 2 
+    40. Parallax 
+    41. Periodical Scroll 
+    42. Pricing 
+    43. Progress Bar 
+    44. Retina Graphics for Website 
+    45. Rotating Elements 
+    46. Scroll Reveal 
+    47. Show More Less 
+    48. Smooth Scrolling When Clicking An Anchor Link 
+    49. Source Code 
+    50. Sticky Elements 
+    51. Tabs 
+    52. Team Focus 
+    53. Testimonials Carousel 
+    54. Text effect 
+    55. Timeline 
+    56. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    57. GSAP Plugins 
+    58. Three.js Plugins 
 
 
 */
@@ -1540,6 +1541,221 @@ App = ( function ( App, $, window, document ) {
 
 
 
+/* 
+ *************************************
+ * <!-- 3D Background 2 -->
+ *************************************
+ */
+App = ( function ( App, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+
+
+		
+		//Prevent this module from loading in other pages
+		if ( $( '#3D-background-three-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
+		
+		
+		var $window                   = $( window ),
+			windowWidth               = $window.width(),
+			windowHeight              = $window.height(),
+			rendererCanvasID          = '3D-background-three-canvas';
+		
+	
+
+		
+		// Generate one plane geometries mesh to scene
+		//-------------------------------------	
+		var camera,
+			controls,
+			scene,
+			light,
+			renderer,
+			displacementSprite,
+			clock = new THREE.Clock();
+
+		init();
+		animate();
+
+		function init() {
+			//camera
+			camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 1, 10000 );
+			camera.position.set(0, 0, -1000);
+
+			//controls
+			controls = new THREE.OrbitControls( camera );
+			controls.rotateSpeed = 0.5;
+			controls.zoomSpeed = 1.2;
+			controls.panSpeed = 0.8;
+			controls.enableZoom = true;
+			controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+			controls.dampingFactor = 0.25;
+			controls.screenSpacePanning = false;
+			controls.minDistance = 100;
+			controls.maxDistance = 500;
+			controls.maxPolarAngle = Math.PI / 2;
+
+			//Scene
+			scene = new THREE.Scene();
+
+			//HemisphereLight
+			scene.add( new THREE.AmbientLight( 0x555555 ) );
+
+			light = new THREE.SpotLight( 0xffffff, 1.5 );
+			light.position.set( 0, 500, 2000 );
+			scene.add( light );
+			
+			
+
+			//WebGL Renderer
+
+			// Create a camera, which defines where we're looking at.		
+			renderer = new THREE.WebGLRenderer( { 
+									canvas   : document.getElementById( rendererCanvasID ), //canvas
+									alpha    : true, 
+									antialias: true 
+								} );
+			renderer.setSize( windowWidth, windowHeight );
+
+			
+			// Immediately use the texture for material creation
+
+			var defaultMaterial    = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
+			
+			displacementSprite = new THREE.Mesh( generateGeometry( 'sphere', 200 ), defaultMaterial );
+			scene.add( displacementSprite );
+			
+			
+
+			window.addEventListener( 'resize', function() {
+				renderer.setSize( windowWidth, windowHeight );
+				camera.aspect = windowWidth / windowHeight;
+				camera.updateProjectionMatrix();
+			}, false );
+			
+			
+		}
+
+		function animate() {
+			requestAnimationFrame( animate );
+			
+            var objVector = new THREE.Vector3(0,0.2,0.1),
+				delta     = clock.getDelta();
+			
+			displacementSprite.rotation.x += delta * objVector.x;
+			displacementSprite.rotation.y += delta * objVector.y;
+			displacementSprite.rotation.z += delta * objVector.z;
+
+			//To set a background color.
+			//renderer.setClearColor( 0x000000 );	
+			
+
+			renderer.render( scene, camera );
+			controls.update();
+		}
+
+		
+		
+		/*
+		 * Batch generation of geometry
+		 *
+		 * @param  {string} objectType     - String of geometry type identifier.
+		 * @param  {number} numObjects       - The total number of generated objects.
+		 * @return {void}                  - The constructor.
+		 */
+		function generateGeometry( objectType, numObjects ) {
+
+			var geometry = new THREE.Geometry();
+
+			var applyVertexColors = function( g, c ) {
+
+				g.faces.forEach( function( f ) {
+
+					var n = ( f instanceof THREE.Face3 ) ? 3 : 4;
+
+					for ( var j = 0; j < n; j ++ ) {
+
+						f.vertexColors[ j ] = c;
+
+					}
+
+				} );
+
+			};
+
+			for ( var i = 0; i < numObjects; i ++ ) {
+
+				var position = new THREE.Vector3();
+
+				position.x = Math.random() * 10000 - 5000;
+				position.y = Math.random() * 6000 - 3000;
+				position.z = Math.random() * 8000 - 4000;
+
+				var rotation = new THREE.Euler();
+
+				rotation.x = Math.random() * 2 * Math.PI;
+				rotation.y = Math.random() * 2 * Math.PI;
+				rotation.z = Math.random() * 2 * Math.PI;
+
+				var scale = new THREE.Vector3();
+
+				var geom, color = new THREE.Color();
+
+				scale.x = Math.random() * 200 + 100;
+
+				if ( objectType == "cube" ) {
+
+					geom = new THREE.BoxGeometry( 1, 1, 1 );
+					scale.y = Math.random() * 200 + 100;
+					scale.z = Math.random() * 200 + 100;
+					color.setRGB( 0, 0, Math.random() + 0.1 );
+
+				} else if ( objectType == "sphere" ) {
+
+					geom = new THREE.IcosahedronGeometry( 1, 1 );
+					scale.y = scale.z = scale.x;
+					color.setRGB( Math.random() + 0.1, 0, 0 );
+
+				}
+
+				// give the geom's vertices a random color, to be displayed
+				applyVertexColors( geom, color );
+
+				var mesh = new THREE.Mesh( geom );
+				mesh.position.copy( position );
+				mesh.rotation.copy( rotation );
+				mesh.scale.copy( scale );
+				mesh.updateMatrix();
+
+				geometry.merge( mesh.geometry, mesh.matrix );
+
+			}
+
+			return geometry;
+
+		}
+
+		
+    };
+
+    App.threeDimensionalBackground2 = {
+        documentReady : documentReady        
+    };
+
+    App.components.documentReady.push( documentReady );
+    return App;
+
+}( App, jQuery, window, document ) );
+
+
+
+
+
+
+
+
+
 
 /* 
  *************************************
@@ -1870,22 +2086,58 @@ App = ( function ( App, $, window, document ) {
 			viewRenderer              = '3D-renderer';
 		
 		
-		// HTML Render
+		
+		// Generate one plane geometries mesh to scene
 		//-------------------------------------	
-		function htmlRenderer() {
-			//If a strict mode function is executed using function invocation, 
-			//its 'this' value will be undefined.
-			this.camera = camera;
-			this.scene = scene;
-			this.renderer = renderer;
-		}
-		htmlRenderer.prototype.init = function( camera ) {
-			this.scene  = new THREE.Scene();
-			this.camera = camera;
+		var camera,
+			controls,
+			scene,
+			light,
+			renderer,
+			clock = new THREE.Clock();
+
+		init();
+		animate();
+
+		function init() {
+			//camera
+			camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 1, 10000 );
+			camera.position.set(0, 0, -1000);
+
+			//controls
+			controls = new THREE.OrbitControls( camera );
+			controls.rotateSpeed = 0.5;
+			controls.zoomSpeed = 1.2;
+			controls.panSpeed = 0.8;
+			controls.enableZoom = true;
+			controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+			controls.dampingFactor = 0.25;
+			controls.screenSpacePanning = false;
+			controls.minDistance = 1000;
+			controls.maxDistance = 1500;
+			controls.maxPolarAngle = Math.PI / 2;
+
+			//Scene
+			scene = new THREE.Scene();
+
+			//HemisphereLight
+			light = new THREE.HemisphereLight( 0xffbf67, 0x15c6ff );
+			scene.add( light );
+
+			//WebGL Renderer
+			renderer = new THREE.WebGLRenderer( { 
+									alpha    : true, 
+									antialias: true 
+								} );
+			renderer.setClearColor( 0xffffff, 0 );
+			renderer.setSize( windowWidth - 50, windowHeight - 50 );
+			renderer.domElement.style.zIndex = 5;
+			document.getElementById( viewRenderer ).appendChild( renderer.domElement );
+
 			
+			//Add HTML elements to scene
 			var target  = $( '#html3D-view' ).clone(),
-				pages   = target.find( '.html3D-view-content' ),
-				self    = this;
+				pages   = target.find( '.html3D-view-content' );
 
 			pages.each( function() {
 				var el = new THREE.CSS3DObject( $.parseHTML( $( this )[0].outerHTML )[0] );
@@ -1897,75 +2149,35 @@ App = ( function ( App, $, window, document ) {
 				el.rotation.y = $( this ).data( 'rotation-y' ) || 3.14159265358979;
 				el.rotation.z = $( this ).data( 'rotation-z' ) || 0;
 
-				self.scene.add( el );
+				scene.add( el );
 			});
 			
 
+			
+			
 			//CSS3D Renderer
-			this.renderer = new THREE.CSS3DRenderer();
-			this.renderer.setSize( windowWidth, windowHeight );
-			this.renderer.domElement.style.position = 'absolute';
-			this.renderer.domElement.style.top = 0;
-			document.getElementById( viewRenderer ).appendChild( this.renderer.domElement );
+			renderer = new THREE.CSS3DRenderer();
+			renderer.setSize( windowWidth, windowHeight );
+			renderer.domElement.style.position = 'absolute';
+			renderer.domElement.style.top = 0;
+			document.getElementById( viewRenderer ).appendChild( renderer.domElement );
 
 			window.addEventListener( 'resize', function() {
-				self.renderer.setSize( windowWidth, windowHeight );
+				renderer.setSize( windowWidth, windowHeight );
 				camera.aspect = windowWidth / windowHeight;
 				camera.updateProjectionMatrix();
 			}, false );
-		};
-
-		htmlRenderer.prototype.render = function() {
-		    this.renderer.render( this.scene, this.camera );
-		};
-
-		
-		
-		
-		// Generate one plane geometries mesh to scene
-		//-------------------------------------	
-		var camera,
-			controls,
-			scene,
-			light,
-			renderer,
-			html3d = new htmlRenderer();
-
-		threePagesInit();
-		threePagesAnimate();
-
-		function threePagesInit() {
-			//camera
-			camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 1, 10000 );
-			camera.position.set(0, 0, -1000);
-
-			//controls
-			controls = new THREE.OrbitControls( camera );
-			controls.rotateSpeed = 1.0;
-			controls.zoomSpeed = 1.2;
-			controls.panSpeed = 0.8;
-
-			//Scene
-			scene = new THREE.Scene();
-
-			//HemisphereLight
-			light = new THREE.HemisphereLight( 0xffbf67, 0x15c6ff );
-			scene.add( light );
-
-			//WebGL Renderer
-			renderer = new THREE.WebGLRenderer({ antialias: true });
-			renderer.setClearColor( 0xffffff, 1 );
-			renderer.setSize( windowWidth - 50, windowHeight - 50 );
-			renderer.domElement.style.zIndex = 5;
-			document.getElementById( viewRenderer ).appendChild( renderer.domElement );
-
-			html3d.init( camera );
+			
+			
 		}
 
-		function threePagesAnimate() {
-			requestAnimationFrame( threePagesAnimate );
-			html3d.render();
+		function animate() {
+			requestAnimationFrame( animate );
+
+            var delta = clock.getDelta();
+			
 			renderer.render( scene, camera );
+			
 			controls.update();
 		}
 
@@ -2033,11 +2245,24 @@ App = ( function ( App, $, window, document ) {
 	
 		
 		scene = new THREE.Scene();
+		
+		//camera
 		camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 0.01, 100 );
 		camera.position.set( -1.5, 0.5, 0.5 );
 		camera.lookAt( new THREE.Vector3(0,0,0) );
+		
+		//controls
 		controls = new THREE.OrbitControls( camera );
-
+		controls.rotateSpeed = 0.5;
+		controls.zoomSpeed = 1.2;
+		controls.panSpeed = 0.8;
+		controls.enableZoom = true;
+		controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+		controls.dampingFactor = 0.25;
+		controls.screenSpacePanning = false;
+	    controls.minDistance = 1.5;
+		controls.maxDistance = 5;
+		controls.maxPolarAngle = Math.PI / 2;
 		
 
 	
@@ -2096,17 +2321,15 @@ App = ( function ( App, $, window, document ) {
 
 		// Create the particles
 		var particleOptions = {
-			textureSize: size,
-			explodeRate: 0.1,
-			targetTexture: particleTextureTarget,
-			velocityFunctionString: 'outVelocity = direction * (dist/50.0);',
-			colorFunctionString: 'color = vec4(0.0, 0.0, 0.0, 1.0);'
+			textureSize            : size,
+			explodeRate            : 0.1,
+			targetTexture          : particleTextureTarget,
+			velocityFunctionString : 'outVelocity = direction * (dist/50.0);',
+			colorFunctionString    : 'color = vec4(0.0, 0.0, 0.0, 1.0);'
 		};
 		var particles = new Particles( renderer, scene, particleOptions );
 
 		
-		//controls.update() must be called after any manual changes to the camera's transform
-		controls.update();
 
 		animate();
 		function animate() {
@@ -11801,7 +12024,8 @@ App = ( function ( App, $, window, document ) {
 							$( nextTrigger ).addClass( 'hide' );	
 						}
 
-						$( document ).on( 'click', nextTrigger, function( e ) {
+						//Avoid using $( document ) to cause an asynchronous load without counting from 1
+						$( nextTrigger ).on( 'click', function( e ) {
 
 							e.preventDefault();
 
@@ -11843,7 +12067,8 @@ App = ( function ( App, $, window, document ) {
 						//Hide the prev button 
 						$( prevTrigger ).addClass( 'hide' );
 						
-						$( document ).on( 'click', prevTrigger, function( e ) {
+						//Avoid using $( document ) to cause an asynchronous load without counting from 1
+						$( prevTrigger ).on( 'click', function( e ) {
 
 							e.preventDefault();
 
@@ -11892,7 +12117,8 @@ App = ( function ( App, $, window, document ) {
 							$( trigger ).addClass( 'hide' );	
 						}
 
-						$( document ).on( 'click', trigger, function( e ) {
+						//Avoid using $( document ) to cause an asynchronous load without counting from 1
+						$( trigger ).on( 'click', function( e ) {
 
 							e.preventDefault();
 
@@ -15488,7 +15714,7 @@ App = ( function ( App, $, window, document ) {
 							duration: speed,
 							elasticity: 600,
 							delay: function(el, i) {
-							  return 45 * (i+1)
+							  return 45 * (i+1);
 							}
 						  });
 
@@ -19752,6 +19978,9 @@ Object.defineProperties( THREE.OrbitControls.prototype, {
  * <!-- Three.js Plugins -->
  *************************************
  */
+/* https://github.com/pwambach/threejs-particle-shader 
+License: MIT
+*/
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};

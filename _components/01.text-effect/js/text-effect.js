@@ -87,7 +87,7 @@ App = ( function ( App, $, window, document ) {
 							duration: speed,
 							elasticity: 600,
 							delay: function(el, i) {
-							  return 45 * (i+1)
+							  return 45 * (i+1);
 							}
 						  });
 

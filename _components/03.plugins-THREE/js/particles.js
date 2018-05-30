@@ -1,3 +1,6 @@
+/* https://github.com/pwambach/threejs-particle-shader 
+License: MIT
+*/
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
