@@ -31,7 +31,7 @@ App = ( function ( App, $, window, document ) {
 			clock = new THREE.Clock();
 
 		init();
-		animate();
+		render();
 
 		function init() {
 			//camera
@@ -96,24 +96,29 @@ App = ( function ( App, $, window, document ) {
 			renderer.domElement.style.top = 0;
 			document.getElementById( viewRenderer ).appendChild( renderer.domElement );
 
-			window.addEventListener( 'resize', function() {
-				renderer.setSize( windowWidth, windowHeight );
-				camera.aspect = windowWidth / windowHeight;
-				camera.updateProjectionMatrix();
-			}, false );
+			// Fires when the window changes
+			window.addEventListener( 'resize', onWindowResize, false );
 			
 			
 		}
 
-		function animate() {
-			requestAnimationFrame( animate );
+		function render() {
+			requestAnimationFrame( render );
 
             var delta = clock.getDelta();
 			
+			controls.update();
+			
 			renderer.render( scene, camera );
 			
-			controls.update();
 		}
+		
+		function onWindowResize() {
+			camera.aspect = window.innerWidth / window.innerHeight;
+			camera.updateProjectionMatrix();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+		}
+
 
 
 		

@@ -32,8 +32,9 @@ App = ( function ( App, $, window, document ) {
 			displacementSprite,
 			clock = new THREE.Clock();
 
+		
 		init();
-		animate();
+		render();
 
 		function init() {
 			//camera
@@ -65,9 +66,7 @@ App = ( function ( App, $, window, document ) {
 			
 			
 
-			//WebGL Renderer
-
-			// Create a camera, which defines where we're looking at.		
+			//WebGL Renderer		
 			renderer = new THREE.WebGLRenderer( { 
 									canvas   : document.getElementById( rendererCanvasID ), //canvas
 									alpha    : true, 
@@ -77,25 +76,20 @@ App = ( function ( App, $, window, document ) {
 
 			
 			// Immediately use the texture for material creation
-
 			var defaultMaterial    = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
 			
 			displacementSprite = new THREE.Mesh( generateGeometry( 'sphere', 200 ), defaultMaterial );
 			scene.add( displacementSprite );
-			
-			
 
-			window.addEventListener( 'resize', function() {
-				renderer.setSize( windowWidth, windowHeight );
-				camera.aspect = windowWidth / windowHeight;
-				camera.updateProjectionMatrix();
-			}, false );
+
+			// Fires when the window changes
+			window.addEventListener( 'resize', onWindowResize, false );
 			
 			
 		}
 
-		function animate() {
-			requestAnimationFrame( animate );
+		function render() {
+			requestAnimationFrame( render );
 			
             var objVector = new THREE.Vector3(0,0.2,0.1),
 				delta     = clock.getDelta();
@@ -107,12 +101,24 @@ App = ( function ( App, $, window, document ) {
 			//To set a background color.
 			//renderer.setClearColor( 0x000000 );	
 			
-
-			renderer.render( scene, camera );
 			controls.update();
+			
+			renderer.render( scene, camera );
+			
+			
+
+			
+		}
+
+
+		function onWindowResize() {
+			camera.aspect = window.innerWidth / window.innerHeight;
+			camera.updateProjectionMatrix();
+			renderer.setSize( window.innerWidth, window.innerHeight );
 		}
 
 		
+
 		
 		/*
 		 * Batch generation of geometry
@@ -174,22 +180,32 @@ App = ( function ( App, $, window, document ) {
 					scale.y = scale.z = scale.x;
 					color.setRGB( Math.random() + 0.1, 0, 0 );
 
+				} else if ( objectType == "poly" ) {
+
+
+					geom = new THREE.CylinderGeometry( 3, 6, 3, 5, 1 );
+					scale.y = Math.random() * 30;
+					scale.z = Math.random() * 30;
+					color.setRGB( Math.random() + 0.1, 0, 0 );
+
 				}
+
 
 				// give the geom's vertices a random color, to be displayed
 				applyVertexColors( geom, color );
 
-				var mesh = new THREE.Mesh( geom );
-				mesh.position.copy( position );
-				mesh.rotation.copy( rotation );
-				mesh.scale.copy( scale );
-				mesh.updateMatrix();
+				var object = new THREE.Mesh( geom );
+				object.position.copy( position );
+				object.rotation.copy( rotation );
+				object.scale.copy( scale );
+				object.updateMatrix();
 
-				geometry.merge( mesh.geometry, mesh.matrix );
+				geometry.merge( object.geometry, object.matrix );
 
 			}
 
 			return geometry;
+			
 
 		}
 

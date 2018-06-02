@@ -1,0 +1,262 @@
+{
+	"asset": {
+		"generator": "Unity 5.6.0f3",
+		"extras": {
+			"exporterVersion" : "2.0.6"
+		},
+		"version": "2.0"
+	},
+	"accessors": [
+		{
+			"bufferView": 2,
+			"byteOffset": 0,
+			"componentType": 5126,
+			"count": 13198,
+			"max": [ 1.5, 1.5, 1.95 ],
+			"min": [ -1.5, -1.5, -1.567647 ],
+			"type": "VEC3"
+		},
+		{
+			"bufferView": 2,
+			"byteOffset": 158376,
+			"componentType": 5126,
+			"count": 13198,
+			"max": [ 0.9967885, 1, 0.9999103 ],
+			"min": [ -1, -1, -1 ],
+			"type": "VEC3"
+		},
+		{
+			"bufferView": 1,
+			"byteOffset": 0,
+			"componentType": 5126,
+			"count": 13198,
+			"max": [ 1, 1 ],
+			"min": [ 0, 0 ],
+			"type": "VEC2"
+		},
+		{
+			"bufferView": 3,
+			"byteOffset": 0,
+			"componentType": 5126,
+			"count": 13198,
+			"max": [ 1, 0.9998312, 0.9970216, 1 ],
+			"min": [ -0.9977514, -0.9957961, -0.9969336, -1 ],
+			"type": "VEC4"
+		},
+		{
+			"bufferView": 0,
+			"byteOffset": 0,
+			"componentType": 5123,
+			"count": 19257,
+			"max": [ 10581 ],
+			"min": [ 0 ],
+			"type": "SCALAR"
+		},
+		{
+			"bufferView": 0,
+			"byteOffset": 38514,
+			"componentType": 5123,
+			"count": 4536,
+			"max": [ 13197 ],
+			"min": [ 6412 ],
+			"type": "SCALAR"
+		},
+		{
+			"bufferView": 2,
+			"byteOffset": 316752,
+			"componentType": 5126,
+			"count": 4,
+			"max": [ 1.5, 1.5, 0 ],
+			"min": [ -1.5, -1.5, 0 ],
+			"type": "VEC3"
+		},
+		{
+			"bufferView": 2,
+			"byteOffset": 316800,
+			"componentType": 5126,
+			"count": 4,
+			"max": [ 0, 0, -1 ],
+			"min": [ 0, 0, -1 ],
+			"type": "VEC3"
+		},
+		{
+			"bufferView": 3,
+			"byteOffset": 211168,
+			"componentType": 5126,
+			"count": 4,
+			"max": [ 1, 0, 0, 1 ],
+			"min": [ 1, 0, 0, 1 ],
+			"type": "VEC4"
+		},
+		{
+			"bufferView": 0,
+			"byteOffset": 47586,
+			"componentType": 5123,
+			"count": 6,
+			"max": [ 3 ],
+			"min": [ 0 ],
+			"type": "SCALAR"
+		}
+	],
+	"buffers": [
+		{
+			"byteLength": 681262,
+			"uri": "project.bin"
+		}
+	],
+	"bufferViews": [
+		{
+			"buffer": 0,
+			"byteLength": 47598,
+			"byteOffset": 0,
+			"byteStride": 0,
+			"target": 34963
+		},
+		{
+			"buffer": 0,
+			"byteLength": 105584,
+			"byteOffset": 47598,
+			"byteStride": 8,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 316848,
+			"byteOffset": 153182,
+			"byteStride": 12,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 211232,
+			"byteOffset": 470030,
+			"byteStride": 16,
+			"target": 34962
+		}
+	],
+	"extensionsRequired": [
+		"KHR_materials_pbrSpecularGlossiness"
+	],
+	"extensionsUsed": [
+		"KHR_materials_pbrSpecularGlossiness"
+	],
+	"materials": [
+		{
+			"pbrMetallicRoughness": {
+				"baseColorFactor": [0.4832944, 0.5808823, 0.2477292, 1],
+				"roughnessFactor": 0,
+				"metallicFactor": 0
+			},
+			"doubleSided": false,
+			"emissiveFactor": [0, 0, 0],
+			"name": "mountain"
+		},
+		{
+			"pbrMetallicRoughness": {
+				"baseColorFactor": [1, 1, 1, 1],
+				"roughnessFactor": 0,
+				"metallicFactor": 0
+			},
+			"doubleSided": false,
+			"emissiveFactor": [0, 0, 0],
+			"name": "white"
+		},
+		{
+			"extensions": {
+				"KHR_materials_pbrSpecularGlossiness": {
+					"diffuseFactor": [0.1378676, 0.3676471, 0.3676471, 0.678],
+					"glossinessFactor": 1,
+					"specularFactor": [0.2, 0.2, 0.2, 1]				}
+
+			},
+			"doubleSided": false,
+			"alphaMode": "BLEND",
+			"alphaCutoff": 0.5,
+			"emissiveFactor": [0, 0, 0],
+			"name": "river"
+		}
+	],
+	"meshes": [
+		{
+			"name": "mesh_Plane_10742mountain",
+			"primitives": [
+				{
+					"attributes": {
+						"POSITION": 0,
+						"NORMAL": 1,
+						"TEXCOORD_0": 2,
+						"TANGENT4": 3
+					},
+					"indices": 4,
+					"material": 0,
+					"mode": 4
+				},
+				{
+					"attributes": {
+						"POSITION": 0,
+						"NORMAL": 1,
+						"TEXCOORD_0": 2,
+						"TANGENT4": 3
+					},
+					"indices": 5,
+					"material": 1,
+					"mode": 4
+				}
+			]
+		},
+		{
+			"name": "mesh_Plane.001_10744water",
+			"primitives": [
+				{
+					"attributes": {
+						"POSITION": 6,
+						"NORMAL": 7,
+						"TANGENT4": 8
+					},
+					"indices": 9,
+					"material": 2,
+					"mode": 4
+				}
+			]
+		}
+	],
+	"nodes": [
+		{
+			"name": "UnityGlTF_correctionMatrix",
+			"children": [
+				2
+			],
+			"matrix": [-1, 0, -8.742278E-08, 0, 0, 1, 0, 0, 8.742278E-08, 0, -1, 0, 0, 0, 0, 1]
+		},
+		{
+			"name": "node_mountain_10944",
+			"mesh": 0,
+			"scale": [ 750, 750, 100],
+			"rotation": [-0.7071068, 0, 0, -0.7071068]
+		},
+		{
+			"name": "node_mountains_11108",
+			"children": [
+				1,
+				3
+			],
+			"matrix": [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
+		},
+		{
+			"name": "node_water_11062",
+			"mesh": 1,
+			"translation": [ 0, -147.1303, 0],
+			"scale": [ 750, 750, 100],
+			"rotation": [-0.7071068, 0, 0, -0.7071068]
+		}
+	],
+	"scenes": [
+		{
+			"name":"defaultScene",
+			"nodes": [
+				0
+			]
+		}
+	],
+	"scene": 0
+}

@@ -960,7 +960,7 @@ App = ( function ( App, $, window, document ) {
 
 
 
-					//Animation Effects
+					//Animation Interactions
 					//-------------------------------------
 					var animate = function() {
 						render();
@@ -2254,7 +2254,6 @@ App = ( function ( App, $, window, document ) {
 		}	
 		
 		
-
     };
 
 	

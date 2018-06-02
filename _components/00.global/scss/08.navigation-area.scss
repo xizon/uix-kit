@@ -48,12 +48,13 @@ $nav-font-size: 0.75rem;
 			&.active, 
 			&.current-menu-item, 
 			&:hover {
-				box-shadow: 0 1.15px 0 rgba(51, 51, 51, 1);
+				box-shadow: 0 2.15px 0 rgba(255, 255, 255, 1);
 			} 
 
 			> a {
 				text-transform: uppercase;
 				font-weight: 700;
+				color: #fff;
 			}
 
 			ul {
@@ -224,7 +225,7 @@ $nav-font-size: 0.75rem;
 		position: absolute;
 		right: 0.284375rem;
 		top: 25%;
-		background-color: #000;
+		background-color: #fff;
 		width: 3px;
 		height: 3px;
 		border-radius: 100%;
@@ -255,30 +256,5 @@ $nav-font-size: 0.75rem;
 }
 
 
-
-/*----- Theme - White -----*/
-
-.theme-white {
-	
-	.menu-container:not(.mobile) {
-	    ul.menu-main > li {
-		    > a {
-		        color: #fff;
-		    }
-			
-		    &.active, 
-			&.current-menu-item, 
-			&:hover {
-		        box-shadow: 0 1.15px 0 rgba(255, 255, 255, 1);
-		    }
-			
-		    > .nav-arrow {
-		        background-color: #fff;
-		    }
-	    }	
-		
-	}
-
-}
 
 

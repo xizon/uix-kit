@@ -240,7 +240,9 @@ gulp.task('html', function() {
 			[/\@\@\{website_desc\}/ig, customWebsiteDesc ],
 			[/\@\@\{website_canonical\}/ig, customWebsiteCanonical ],
 			[/\@\@\{website_author\}/ig, customWebsiteAuthor ],
-			[/\@\@\{website_generator\}/ig, customWebsiteGenerator ]
+			[/\@\@\{website_generator\}/ig, customWebsiteGenerator ],
+			[/\@\@\{website_version\}/ig, customWebsiteVersion ]
+			
 		],
 	};
 

@@ -10,8 +10,13 @@
 
 
 //Global variables from front pages
-var templateUrl = AppRootPath.templateUrl,
-	homeUrl     = AppRootPath.homeUrl;
+var templateUrl = APP_ROOTPATH.templateUrl,
+	homeUrl     = APP_ROOTPATH.homeUrl;
+
+//Modify templateUrl as the correct path when local test is enabled
+if ( location.hostname === 'localhost' || location.hostname === '127.0.0.1' ) {
+    templateUrl = '/examples';
+}
 
 
 //Determine whether it is a special browser

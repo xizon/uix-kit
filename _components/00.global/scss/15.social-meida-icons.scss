@@ -111,6 +111,31 @@
 			transform: scale(1, 1);
 		}
 	}
+	
+	
+	/* white style */
+	&.white {
+		border-color: #fff;
+		color: #fff;
+		
+		&:hover {
+			
+			i {
+				color: $primary-text-color1;
+			}
+			
+			
+			&::after {
+				background-color: #fff;
+			}		
+			
+		}		
+	}
+	
+
+
+	
+
 
 }
 
@@ -377,29 +402,6 @@
 .social-bg-colourful[href*="rss"], 
 .social-bg-colourful[href*="feed"] {
     color: #FF7500;
-}
-
-
-/*----- Theme - White -----*/
-
-.theme-white {
-	
-	.social-btn {
-		border-color: #fff;
-		
-		&:hover {
-			
-			i {
-				color: $primary-text-color1;
-			}
-			
-			&::after {
-				background-color: #fff;
-			}
-		}
-		
-	}
-	
 }
 
 

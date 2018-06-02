@@ -1,10 +1,11 @@
 # Changelog
 
 
-#### = 1.6.6 (June 1, 2018) =
+#### = 1.6.7 (June 1, 2018) =
 
 * Fix: Fixed an error that does not count from 1 when ajax loads the list asynchronously.
 * New: Add a new module "3D Background" with three.js.
+* New: Add a new module "3D Model" with three.js.
 
 
 

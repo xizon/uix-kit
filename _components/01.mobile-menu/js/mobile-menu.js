@@ -30,13 +30,6 @@ App = ( function ( App, $, window, document ) {
 		
 			
 			// Mobile Menu
-			if ( $( '.brand img' ).length > 0 ) {
-				$( '.mobile-brand' ).html( '<img src="'+$( '.brand img' ).attr( 'src' )+'" alt="">' );
-			} else {
-				$( '.mobile-brand' ).html( '<img src=" ' + templateUrl + '/assets/images/blank.gif" alt="">' );
-			}
-			
-			
 		    var $toggle     = $( '.menu-mobile-toggle' ),
 				$toggleBody = $( 'body' );
 		

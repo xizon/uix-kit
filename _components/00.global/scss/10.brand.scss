@@ -27,7 +27,15 @@
 
 	.mobile-brand {
 		display: block;
+	    text-align: center;
+		
+	    img {
+			max-width: 90%;
+			margin: 20px auto;
+	    }	
+		
 	}
+	
 	.brand img {
 		margin-bottom: 0.75rem;
 	}

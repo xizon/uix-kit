@@ -141,7 +141,7 @@ App = ( function ( App, $, window, document ) {
 			
 			/* 
 			 ---------------------------
-			 Move left
+			 Move left/up
 			 ---------------------------
 			 */ 
 			$( carouselNext ).on( 'click', $carouselWrapper, function( e ) {
@@ -149,114 +149,13 @@ App = ( function ( App, $, window, document ) {
 				
 				
 				var $btn        = $( this ),
-					btnLock     = $btn.data( 'click' ),
 					$curWrapper = $( e.data[0] ),
 					$curItems   = $curWrapper.children().find( '> .item' ),
-					isEnd       = false;
-				
-				
-				
-				//Move to the end
-				if ( (carouselItemTotal - showcarouselItem + 1) == $curItems.first().data( 'id' ) ) {
-					isEnd = true;
-				}
-				if ( (carouselItemTotal - showcarouselItem) == $curItems.first().data( 'id' ) && !carouselLoop ) {
-					$btn.addClass( 'disable' );
-				}
-				
-				
-				//Loop items
-				if ( carouselLoop ) {
-					isEnd = false;
-				}
-				
+					//Protection button is not triggered multiple times.
+					btnLock     = $btn.data( 'click' );
 				
 				if ( typeof btnLock === typeof undefined || btnLock === 0 ) {
-					
-					if ( !isEnd ) {
-						
-						//Avoid button repeated trigger
-						$btn.data( 'click', 1 );
-						
-						if ( carouselDir == 'horizontal' ) {
-							
-
-							TweenMax.to( $curItems.first(), carouselSpeed/1000, {
-								css: {
-									marginLeft : -carouselItemWidth
-								},
-								onComplete : function() {
-
-									//Initialize each item "margin-left"
-									$curItems.css( 'margin-left', 0 );
-
-									//Clone the first element to the last position
-									$curItems
-										.first()
-										.clone()
-										.appendTo( $carousel );
-
-
-									//Remove duplicate elements
-									this.target.remove();
-
-
-
-									//Active the center item
-									carouselActiveCenterItem( $curItems, 'left' );
-									
-									
-									//Reset prevents code from duplicate run
-									$( carouselPrev ).data( 'click', 0 ).removeClass( 'disable' );
-									$btn.data( 'click', 0 );
-
-								}
-							});		
-					
-							
-						} else {
-							
-							
-							TweenMax.to( $curItems.first(), carouselSpeed/1000, {
-								css: {
-									marginTop : -carouselItemHeight
-								},
-								onComplete : function() {
-
-									//Initialize each item "margin-top"
-									$curItems.css( 'margin-top', 0 );
-
-									//Clone the first element to the last position
-									$curItems
-										.first()
-										.clone()
-										.appendTo( $carousel );
-
-
-									//Remove duplicate elements
-									this.target.remove();
-
-
-
-									//Active the center item
-									carouselActiveCenterItem( $curItems, 'left' );
-
-
-									//Reset prevents code from duplicate run
-									$( carouselPrev ).data( 'click', 0 ).removeClass( 'disable' );
-									$btn.data( 'click', 0 );
-
-								}
-							});				
-								
-						}
-
-	
-					}
-
-
-					
-	
+					moveNext( $curWrapper, $curItems, $btn, carouselNext, carouselPrev );
 				}
 
 
@@ -265,7 +164,7 @@ App = ( function ( App, $, window, document ) {
 			
 			/* 
 			 ---------------------------
-			 Move right
+			 Move right/down
 			 ---------------------------
 			 */ 
 			$( carouselPrev ).on( 'click', $carouselWrapper, function( e ) {
@@ -273,123 +172,15 @@ App = ( function ( App, $, window, document ) {
 
 				
 				var $btn        = $( this ),
-					btnLock     = $btn.data( 'click' ),
 					$curWrapper = $( e.data[0] ),
 					$curItems   = $curWrapper.children().find( '> .item' ),
-					isEnd       = false,
-					$cloneItem  = null;
+					//Protection button is not triggered multiple times.
+					btnLock     = $btn.data( 'click' );
 
-				
-				//Move to the end
-				if ( 1 == $curItems.first().data( 'id' ) ) {
-					isEnd = true;
-				}
-				if ( 2 == $curItems.first().data( 'id' ) && !carouselLoop ) {
-					$btn.addClass( 'disable' );
-				}
-				
-				
-				//Loop items
-				if ( carouselLoop ) {
-					isEnd = false;
-				}
-				
+			
 				
 				if ( typeof btnLock === typeof undefined || btnLock === 0 ) {
-					
-					if ( !isEnd ) {
-						
-						//Avoid button repeated trigger
-						$btn.data( 'click', 1 );
-
-				
-						//Clone the first element to the last position
-						if ( carouselDir == 'horizontal' ) {
-							
-							$cloneItem = $curItems.last().clone();
-							
-
-							//Clone the last element to the first position
-							$cloneItem
-								.prependTo( $carousel )
-							    .css( 'margin-left', -carouselItemWidth + 'px' );
-							
-							
-							TweenMax.to( $cloneItem, carouselSpeed/1000, {
-								css: {
-									marginLeft : 0
-								},
-								onComplete : function() {
-	
-									//Remove duplicate elements
-									$curItems
-										.last()
-										.remove();
-
-
-
-									//Active the center item
-									carouselActiveCenterItem( $curItems, 'right' );
-
-
-									//Reset prevents code from duplicate run
-									$( carouselNext ).data( 'click', 0 ).removeClass( 'disable' );
-									$btn.data( 'click', 0 );
-
-
-								}
-							});
-					
-
-
-						} else {
-							
-							
-							$cloneItem = $curItems.last().clone();
-							
-
-							//Clone the last element to the first position
-							$cloneItem
-								.prependTo( $carousel )
-							    .css( 'margin-top', -carouselItemHeight + 'px' );
-							
-							
-							TweenMax.to( $cloneItem, carouselSpeed/1000, {
-								css: {
-									marginTop : 0
-								},
-								onComplete : function() {
-	
-									//Remove duplicate elements
-									$curItems
-										.last()
-										.remove();
-
-
-
-									//Active the center item
-									carouselActiveCenterItem( $curItems, 'right' );
-
-
-									//Reset prevents code from duplicate run
-									$( carouselNext ).data( 'click', 0 ).removeClass( 'disable' );
-									$btn.data( 'click', 0 );
-
-
-								}
-							});
-						
-							
-						
-						}
-						
-						
-	
-					}
-
-
-					
-	
+					movePrev( $curWrapper, $curItems, $btn, carouselNext, carouselPrev );
 				}
 				
 				
@@ -398,6 +189,290 @@ App = ( function ( App, $, window, document ) {
 			
 			
 			
+			/*
+			 * Transition between items next (left/up)
+			 *
+			 * @param  {object} wrapper         - Wrapper of carousel.
+			 * @param  {object} items           - Items of carousel.
+			 * @param  {object} curBtn          - The button that currently triggers the move.
+			 * @param  {string} nextBtnStr      - The button ID or class that triggers the next move.
+			 * @param  {string} prevBtnStr      - The button ID or class that triggers the previous move.
+			 * @return {void}                   - The constructor.
+			 */
+			function moveNext( wrapper, items, curBtn, nextBtnStr, prevBtnStr ) {
+
+		
+				var $curWrapper = wrapper,  //Default: $carousel
+					$curItems   = items,  //Default: $carouselItem
+					isEnd       = false,
+					$cloneItem  = null;
+					
+
+				//Move to the end
+				if ( (carouselItemTotal - showcarouselItem + 1) == $curItems.first().data( 'id' ) ) {
+					isEnd = true;
+				}
+				if ( (carouselItemTotal - showcarouselItem) == $curItems.first().data( 'id' ) && !carouselLoop ) {
+					if ( curBtn ) curBtn.addClass( 'disable' );
+				}
+				
+				
+				//Loop items
+				if ( carouselLoop ) {
+					isEnd = false;
+				}
+				
+				//Reset prevents code from duplicate run
+				var preventEvent = function() {
+					if ( carouselPrev && carouselPrev != '' ) {
+						$( carouselPrev ).data( 'click', 0 ).removeClass( 'disable' );
+					}
+
+					if ( curBtn ) curBtn.data( 'click', 0 );
+			
+				};
+				
+				if ( !isEnd ) {
+
+
+					//Avoid button repeated trigger
+					if ( curBtn ) curBtn.data( 'click', 1 );
+
+
+
+					//Clone the first element to the last position
+					if ( carouselDir == 'horizontal' ) {
+
+						TweenMax.to( $curItems.first(), carouselSpeed/1000, {
+							css: {
+								marginLeft : -carouselItemWidth
+							},
+							onComplete : function() {
+
+								//Initialize each item "margin-left"
+								$curItems.css( 'margin-left', 0 );
+
+								//Clone the first element to the last position
+								$curItems
+									.first()
+									.clone()
+									.appendTo( $carousel );
+
+
+								//Remove duplicate elements
+								this.target.remove();
+
+
+
+								//Active the center item
+								carouselActiveCenterItem( $curItems, 'left' );
+
+								//Reset prevents code from duplicate run
+								preventEvent();
+								
+
+							}
+						});		
+						
+					
+
+
+					} else {
+
+
+
+						TweenMax.to( $curItems.first(), carouselSpeed/1000, {
+							css: {
+								marginTop : -carouselItemHeight
+							},
+							onComplete : function() {
+
+								//Initialize each item "margin-top"
+								$curItems.css( 'margin-top', 0 );
+
+								//Clone the first element to the last position
+								$curItems
+									.first()
+									.clone()
+									.appendTo( $carousel );
+
+
+								//Remove duplicate elements
+								this.target.remove();
+
+
+
+								//Active the center item
+								carouselActiveCenterItem( $curItems, 'left' );
+
+								//Reset prevents code from duplicate run
+								preventEvent();
+
+
+							}
+						});		
+
+
+					}
+
+
+
+				}// end isEnd
+				
+				
+
+					
+
+			}
+	
+			
+			
+			
+			/*
+			 * Transition between items previously (right/down)
+			 *
+			 * @param  {object} wrapper         - Wrapper of carousel.
+			 * @param  {object} items           - Items of carousel.
+			 * @param  {object} curBtn          - The button that currently triggers the move.
+			 * @param  {string} nextBtnStr      - The button ID or class that triggers the next move.
+			 * @param  {string} prevBtnStr      - The button ID or class that triggers the previous move.
+			 * @return {void}                   - The constructor.
+			 */
+			function movePrev( wrapper, items, curBtn, nextBtnStr, prevBtnStr ) {
+
+		
+				var $curWrapper = wrapper,  //Default: $carousel
+					$curItems   = items,  //Default: $carouselItem
+					isEnd       = false,
+					$cloneItem  = null;
+					
+
+				
+				//Move to the end
+				if ( 1 == $curItems.first().data( 'id' ) ) {
+					isEnd = true;
+				}
+				if ( 2 == $curItems.first().data( 'id' ) && !carouselLoop ) {
+					if ( curBtn ) curBtn.addClass( 'disable' );
+				}
+				
+				
+				//Loop items
+				if ( carouselLoop ) {
+					isEnd = false;
+				}
+				
+				//Reset prevents code from duplicate run
+				var preventEvent = function() {
+					if ( carouselNext && carouselNext != '' ) {
+						$( carouselNext ).data( 'click', 0 ).removeClass( 'disable' );
+					}
+
+					if ( curBtn ) curBtn.data( 'click', 0 );
+			
+				};
+				
+				if ( !isEnd ) {
+
+
+					//Avoid button repeated trigger
+					if ( curBtn ) curBtn.data( 'click', 1 );
+
+
+
+					//Clone the first element to the last position
+					if ( carouselDir == 'horizontal' ) {
+
+						$cloneItem = $curItems.last().clone();
+
+
+						//Clone the last element to the first position
+						$cloneItem
+							.prependTo( $carousel )
+							.css( 'margin-left', -carouselItemWidth + 'px' );
+
+
+						TweenMax.to( $cloneItem, carouselSpeed/1000, {
+							css: {
+								marginLeft : 0
+							},
+							onComplete : function() {
+
+								//Remove duplicate elements
+								$curItems
+									.last()
+									.remove();
+
+
+
+								//Active the center item
+								carouselActiveCenterItem( $curItems, 'right' );
+
+								//Reset prevents code from duplicate run
+								preventEvent();
+								
+						
+
+
+
+							}
+						});
+						
+
+
+
+					} else {
+
+
+						$cloneItem = $curItems.last().clone();
+
+
+						//Clone the last element to the first position
+						$cloneItem
+							.prependTo( $carousel )
+							.css( 'margin-top', -carouselItemHeight + 'px' );
+
+
+						TweenMax.to( $cloneItem, carouselSpeed/1000, {
+							css: {
+								marginTop : 0
+							},
+							onComplete : function() {
+
+								//Remove duplicate elements
+								$curItems
+									.last()
+									.remove();
+
+
+
+								//Active the center item
+								carouselActiveCenterItem( $curItems, 'right' );
+
+								//Reset prevents code from duplicate run
+								preventEvent();
+
+
+
+							}
+						});
+
+
+
+					}
+
+
+
+				}// end isEnd
+				
+				
+
+					
+
+			}
+
+
+
 
 
 		});		

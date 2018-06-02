@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.6.6
- * ## Last Update         :  May 30, 2018
+ * ## Version             :  1.6.7
+ * ## Last Update         :  June 3, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -81,71 +81,72 @@
     13. Back to Top 
     14. Loader 
     15. Social Media Icons 
-    16. Pagination 
-    17. Filterable Navigation 
-    18. Sidebar 
-    19. Search 
-    20. Entry 
-    21. Tags 
-    22. Comments 
-    23. 3rd Party Plugins 
-    24. Onepage Menu 
-    25. 3D Background 
-    26. 3D Carousel 
-    27. Accordion 
-    28. Accordion Background Images 
-    29. Advanced Content Slider 
-    30. Advanced Slider (Special Effects) 
-    31. Advanced Slider (Basic) 
-    32. Badges 
-    33. Button 
-    34. Cards 
-    35. Breadcrumbs 
-    36. Counter 
-    37. Dotted Line 
-    38. Dropdown Menu 
-    39. Equal-width Divs 
-    40. Features 
-    41. Flexslider 
-    42. Footer Templates 
-    43. Form 
-    44. Form Progress 
-    45. Gallery 
-    46. Header Pinlines 
-    47. Image Shapes 
-    48. Custom Core Scripts & Stylesheets 
-    49. Cutom Light Box 
-    50. Brands List 
-    51. Bulleted List 
-    52. Maintain Aspect Ratio List 
+    16. Search 
+    17. Tags 
+    18. Entry 
+    19. Comments 
+    20. 3rd Party Plugins 
+    21. Onepage Menu 
+    22. 3D Background 
+    23. 3D Carousel 
+    24. Accordion 
+    25. Accordion Background Images 
+    26. Advanced Content Slider 
+    27. Advanced Slider (Special Effects) 
+    28. Advanced Slider (Basic) 
+    29. Badges 
+    30. Breadcrumbs 
+    31. Button 
+    32. Cards 
+    33. Counter 
+    34. Dotted Line 
+    35. Dropdown Menu 
+    36. Equal-width Divs 
+    37. Features 
+    38. Flexslider 
+    39. Footer Templates 
+    40. Form 
+    41. Form Progress 
+    42. Gallery 
+    43. Header Pinlines 
+    44. Image Shapes 
+    45. Custom Core Scripts & Stylesheets 
+    46. Cutom Light Box 
+    47. Bulleted List 
+    48. Sidebar 
+    49. Maintain Aspect Ratio List 
+    50. Filterable Navigation 
+    51. Pagination 
+    52. Brands List 
     53. List of Posts 
     54. List of Split Posts 
-    55. Side by Side List 
-    56. Side by Side List With Photo 
-    57. Fullwidth List of Split 2 
-    58. Fullwidth List of Split 
-    59. Mobile Menu 
+    55. Side by Side List With Photo 
+    56. Fullwidth List of Split 2 
+    57. Fullwidth List of Split 
+    58. Mobile Menu 
+    59. Side by Side List 
     60. Modal Dialog 
-    61. Mouse Animation Scroll 
-    62. Multiple Items Carousel 
-    63. Parallax 
-    64. Periodical Scroll 
-    65. Pricing 
-    66. Progress Bar 
-    67. Services 
-    68. Show More Less 
-    69. Single Post 
-    70. Source Code 
-    71. Striking 
-    72. Table Series 
-    73. Tabs 
-    74. Team Focus 
-    75. Testimonials Carousel 
-    76. Text effect 
-    77. Timeline 
-    78. ToolTip 
-    79. WordPress Core 
-    80. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    61. Mobile Menu 
+    62. Mouse Animation Scroll 
+    63. Pricing 
+    64. Progress Bar 
+    65. Services 
+    66. Show More Less 
+    67. Single Post 
+    68. Source Code 
+    69. Striking 
+    70. Table Series 
+    71. Tabs 
+    72. Team Focus 
+    73. Testimonials Carousel 
+    74. Text effect 
+    75. Timeline 
+    76. ToolTip 
+    77. WordPress Core 
+    78. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    79. Periodical Scroll 
+    80. Parallax 
+    81. Multiple Items Carousel 
 
 
 
@@ -1566,12 +1567,13 @@ section.site-google-map,
 }
 
 .menu-container:not(.mobile) ul.menu-main > li.active, .menu-container:not(.mobile) ul.menu-main > li.current-menu-item, .menu-container:not(.mobile) ul.menu-main > li:hover {
-    box-shadow: 0 1.15px 0 #333333;
+    box-shadow: 0 2.15px 0 white;
 }
 
 .menu-container:not(.mobile) ul.menu-main > li > a {
     text-transform: uppercase;
     font-weight: 700;
+    color: #fff;
 }
 
 .menu-container:not(.mobile) ul.menu-main > li ul {
@@ -1713,7 +1715,7 @@ section.site-google-map,
     position: absolute;
     right: 0.284375rem;
     top: 25%;
-    background-color: #000;
+    background-color: #fff;
     width: 3px;
     height: 3px;
     border-radius: 100%;
@@ -1733,19 +1735,6 @@ section.site-google-map,
     }
 }
 
-/*----- Theme - White -----*/
-.theme-white .menu-container:not(.mobile) ul.menu-main > li > a {
-    color: #fff;
-}
-
-.theme-white .menu-container:not(.mobile) ul.menu-main > li.active, .theme-white .menu-container:not(.mobile) ul.menu-main > li.current-menu-item, .theme-white .menu-container:not(.mobile) ul.menu-main > li:hover {
-    box-shadow: 0 1.15px 0 white;
-}
-
-.theme-white .menu-container:not(.mobile) ul.menu-main > li > .nav-arrow {
-    background-color: #fff;
-}
-
 /* ====================================================== 
    <!-- Header Area -->                                        
 /* ====================================================== */
@@ -1756,13 +1745,10 @@ section.site-google-map,
   top: 0;
   width: 100%;
   z-index: 90000;
-  background-color: white;
-  border-bottom: 1.15px solid rgba(51, 51, 51, 0.2);
+  border-bottom: 2.15px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0px 5px 40px 0px rgba(0, 0, 0, 0.08);
-}
-
-.header-area.spy-scroll-fixed {
-  background-color: white;
+  background: #F3556D;
+  background: linear-gradient(to right, #F3556D 0%, #E22444 100%);
 }
 
 /* Don't use "margin" or "padding" to set up ".header-container" */
@@ -1790,16 +1776,13 @@ section.site-google-map,
 
 /*----- Theme - White -----*/
 .theme-white .header-area {
-    background-color: rgba(255, 255, 255, 0.15);
-    border-bottom-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.15);
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.15) 100%);
 }
 
 .theme-white .header-area.spy-scroll-fixed {
-    background-color: #000;
-}
-
-.theme-white .header-area .menu-right a {
-    color: #fff;
+    background: #F3556D;
+    background: linear-gradient(to right, #F3556D 0%, #E22444 100%);
 }
 
 @media all and (max-width: 768px) {
@@ -1816,13 +1799,9 @@ section.site-google-map,
     }
 
     .theme-white .header-area {
-        background-color: transparent;
-        border-bottom: none;
+        background: #F3556D;
+        background: linear-gradient(to right, #F3556D 0%, #E22444 100%);
         position: relative;
-    }
-
-    .theme-white .header-area.spy-scroll-fixed {
-        background-color: transparent;
     }
 }
 
@@ -1852,6 +1831,12 @@ section.site-google-map,
 @media all and (max-width: 768px) {
     .mobile-brand {
         display: block;
+        text-align: center;
+    }
+
+    .mobile-brand img {
+        max-width: 90%;
+        margin: 20px auto;
     }
 
     .brand img {
@@ -2113,6 +2098,7 @@ section.site-google-map,
     color: #212121;
     padding: 0;
     margin: 0;
+  /* white style */;
 }
 
 .social-btn.border-none {
@@ -2193,6 +2179,19 @@ section.site-google-map,
     visibility: visible;
     opacity: 1;
     transform: scale(1, 1);
+}
+
+.social-btn.white {
+    border-color: #fff;
+    color: #fff;
+}
+
+.social-btn.white:hover i {
+    color: #212121;
+}
+
+.social-btn.white:hover::after {
+    background-color: #fff;
 }
 
 /* 
@@ -2455,19 +2454,6 @@ section.site-google-map,
 .social-bg-colourful[href*="rss"],
 .social-bg-colourful[href*="feed"] {
     color: #FF7500;
-}
-
-/*----- Theme - White -----*/
-.theme-white .social-btn {
-    border-color: #fff;
-}
-
-.theme-white .social-btn:hover i {
-    color: #212121;
-}
-
-.theme-white .social-btn:hover::after {
-    background-color: #fff;
 }
 
 /* ====================================================== 
@@ -8066,7 +8052,7 @@ dl.list-side-by-side::after {
     height: 40px;
     top: 15px;
     right: 20px;
-    z-index: 90001;
+    z-index: 90002;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
     border-radius: 100%;
@@ -8078,7 +8064,7 @@ dl.list-side-by-side::after {
     left: 0;
     top: 0;
     position: fixed;
-    z-index: 89999;
+    z-index: 90001;
     display: block;
     background: transparent;
     width: 100%;
@@ -8126,7 +8112,7 @@ dl.list-side-by-side::after {
     left: 12px;
     width: 20px;
     height: 2px;
-    background: #000;
+    background: #fff;
     transition: all 0.3s ease;
 }
 
@@ -8319,16 +8305,6 @@ dl.list-side-by-side::after {
     font-weight: 100;
     font-family: serif;
     color: #ABABAB;
-}
-
-.menu-container.mobile .mobile-brand {
-    text-align: center;
-    display: block;
-}
-
-.menu-container.mobile .mobile-brand img {
-    max-width: 90%;
-    margin: 20px auto;
 }
 
 .menu-container.mobile form {
