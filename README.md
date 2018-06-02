@@ -257,7 +257,6 @@ http://localhost:8080/examples/
 ### 2\. File Structures
 
 
-
 ```sh
 
 uix-kit/
@@ -290,28 +289,17 @@ uix-kit/
 
 *   `_components/*`
 
-#### Core CSS:
+#### Custom Core Files:
+
+You can customize these files to meet the different needs of the site you want :-)
 
 *   `examples/assets/css/uix-kit.css`
 *   `examples/assets/css/uix-kit.min.css`
 *   `examples/assets/css/uix-kit.IE.css`
-
-#### Core CSS(RTL):
-
 *   `examples/assets/css/rtl/uix-kit-rtl.css`
-
-#### Core Javascript:
-
 *   `examples/assets/js/uix-kit.js`
 *   `examples/assets/js/uix-kit.min.js`
 
-#### Core Images:
-
-*   `examples/assets/images/*`
-
-#### Core Fonts:
-
-*   `examples/assets/fonts/*`
 
 
 ### 3\. PSD Grid Templates

@@ -26,15 +26,15 @@
 	1. Header 
     2. Loader 
     3. Back to Top 
-    4. Get all custom attributes of an element like "data-*" 
-    5. Navigation 
+    4. Navigation 
+    5. Get all custom attributes of an element like "data-*" 
     6. Videos 
     7. Common Height 
     8. Mega Menu 
     9. Dropdown Categories 
     10. Pagination 
-    11. 3D Background 
-    12. Specify a background image 
+    11. Specify a background image 
+    12. 3D Background 
     13. 3D Background 2 
     14. 3D Background 2 
     15. 3D Carousel 
@@ -70,8 +70,8 @@
     45. Progress Bar 
     46. Retina Graphics for Website 
     47. Rotating Elements 
-    48. Show More Less 
-    49. Scroll Reveal 
+    48. Scroll Reveal 
+    49. Show More Less 
     50. Smooth Scrolling When Clicking An Anchor Link 
     51. Source Code 
     52. Sticky Elements 
@@ -3044,6 +3044,72 @@ App = ( function ( App, $, window, document ) {
 
 /* 
  *************************************
+ * <!-- Accordion -->
+ *************************************
+ */
+App = ( function ( App, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ) {
+		
+		$( '.custom-accordion' ).each( function() {
+			var $this           = $( this ),
+				aEvent          = $this.data( 'event' ),
+				firstShow       = $this.data( 'first-show' ),
+				$li             = $this.children( 'dl' ),
+				$titlebox       = $this.find( 'dt' );
+			
+			if( typeof aEvent === typeof undefined ) {
+				aEvent = 'click';
+			}	
+			
+			if( typeof firstShow === typeof undefined ) {
+				firstShow = false;
+			}		
+			
+		
+			if ( firstShow ) {
+				$li.first().addClass( 'active' );
+			}
+			
+
+			$li.on( aEvent, function( e ) {
+				e.stopPropagation();
+				
+				$( this ).find( 'dd' ).addClass( 'active' );
+				
+				
+				if ( !$( this ).hasClass( 'active' ) ) {
+					$li.removeClass( 'active' );
+
+					$( this ).addClass( 'active' );
+				} else {
+					$li.removeClass( 'active' );
+				}
+			
+			}); 
+						
+			
+			
+		});
+		
+		
+	};
+	
+		
+    App.accordion = {
+        documentReady : documentReady        
+    };
+
+    App.components.documentReady.push( documentReady );
+    return App;
+
+}( App, jQuery, window, document ) );
+
+
+/* 
+ *************************************
  * <!-- Accordion Background Images -->
  *************************************
  */
@@ -3149,7 +3215,7 @@ App = ( function ( App, $, window, document ) {
 
 /* 
  *************************************
- * <!-- Accordion -->
+ * <!-- Advanced Content Slider -->
  *************************************
  */
 App = ( function ( App, $, window, document ) {
@@ -3158,52 +3224,323 @@ App = ( function ( App, $, window, document ) {
    
     var documentReady = function( $ ) {
 		
-		$( '.custom-accordion' ).each( function() {
-			var $this           = $( this ),
-				aEvent          = $this.data( 'event' ),
-				firstShow       = $this.data( 'first-show' ),
-				$li             = $this.children( 'dl' ),
-				$titlebox       = $this.find( 'dt' );
-			
-			if( typeof aEvent === typeof undefined ) {
-				aEvent = 'click';
-			}	
-			
-			if( typeof firstShow === typeof undefined ) {
-				firstShow = false;
-			}		
-			
 		
-			if ( firstShow ) {
-				$li.first().addClass( 'active' );
+	
+		var $window                   = $( window ),
+			windowWidth               = $window.width(),
+			windowHeight              = $window.height(),
+			animDuration              = 1200;
+		
+		
+		
+		sliderInit();
+		
+		$window.on( 'resize', function() {
+			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+			if ( $window.width() != windowWidth ) {
+
+				// Update the window width for next time
+				windowWidth = $window.width();
+
+				sliderInit();
+				
+			}
+		});
+		
+		
+		/*
+		 * Initialize slideshow
+		 *
+		 * @return {void}                   - The constructor.
+		 */
+        function sliderInit() {
+			
+			$( '.custom-advanced-content-slider' ).each( function() {
+				var $this                      = $( this ),
+					$items                     = $this.find( '.item' ),
+					$itemsWrapper              = $this.children( '.inner' ),
+					$first                     = $items.first(),
+					itemWidth                  = $this.width(),
+					itemsTotal                 = $items.length,
+					totalWidth                 = itemWidth*itemsTotal,
+					dataControlsPagination     = $this.data( 'controls-pagination' ),
+					dataControlsArrows         = $this.data( 'controls-arrows' ),
+					dataDraggable              = $this.data( 'draggable' ),
+					dataDraggableCursor        = $this.data( 'draggable-cursor' ),
+					dataControlsPaginationAuto = false;
+
+				
+				
+
+				if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.custom-advanced-content-slider-sp-pagination';
+				if ( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.custom-advanced-content-slider-sp-arrows';
+				if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
+				if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
+				
+				if ( $( dataControlsPagination ).html().length == 0 ) dataControlsPaginationAuto = true;
+
+				
+
+				//Initialize the width of each item
+				//-------------------------------------		
+				$first.addClass( 'active' );
+				
+				$items.css( 'width', itemWidth + 'px' );
+				
+				TweenMax.set( $itemsWrapper, { 
+					width: totalWidth,
+					onComplete  : function() {
+						$this.css( 'height', 'auto' );
+					}
+				} );		
+			
+
+				//Pagination dots 
+				//-------------------------------------	
+				if ( dataControlsPaginationAuto ) {
+					var _dot       = '',
+						_dotActive = '';
+					_dot += '<ul class="default">';
+					for ( var i = 0; i < itemsTotal; i++ ) {
+
+						_dotActive = ( i == 0 ) ? 'class="active"' : '';
+
+						_dot += '<li><a '+_dotActive+' data-index="'+i+'" href="javascript:"></a></li>';
+					}
+					_dot += '</ul>';
+
+					if ( $( dataControlsPagination ).html() == '' ) $( dataControlsPagination ).html( _dot );	
+				} else {
+					$( dataControlsPagination ).find( 'li' ).first().find( 'a' ).addClass( 'active' );
+					$( dataControlsPagination ).find( 'li' ).first().addClass( 'active' );
+				}
+
+
+				$( dataControlsPagination ).find( 'li a' ).on( 'click', function( e ) {
+					e.preventDefault();
+
+					if ( !$( this ).hasClass( 'active' ) ) {
+						
+						sliderUpdates( $( this ).attr( 'data-index' ), $this, dataControlsArrows, dataControlsPagination );
+					}
+
+
+
+				});
+
+				
+				//Next/Prev buttons
+				//-------------------------------------		
+				var _prev = $( dataControlsArrows ).find( '.prev' ),
+					_next = $( dataControlsArrows ).find( '.next' );
+				
+				
+
+				$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
+				
+				_prev.addClass( 'disabled' );
+
+				_prev.on( 'click', function( e ) {
+					e.preventDefault();
+
+					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
+
+				});
+
+				_next.on( 'click', function( e ) {
+					e.preventDefault();
+
+					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
+
+				});
+				
+				
+				//Drag and Drop
+				//-------------------------------------	
+				var $dragDropTrigger = $items;
+
+				//Make the cursor a move icon when a user hovers over an item
+				if ( dataDraggable && dataDraggableCursor != '' && dataDraggableCursor != false ) $dragDropTrigger.css( 'cursor', dataDraggableCursor );
+				
+
+
+				//Mouse event
+				$dragDropTrigger.on( 'mousedown.advancedContentSlider touchstart.advancedContentSlider', function( e ) {
+					e.preventDefault();
+
+					var touches = e.originalEvent.touches;
+					
+					$( this ).addClass( 'dragging' );
+					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
+					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
+					
+					
+					if ( touches && touches.length ) {	
+						$( this ).data( 'origin_mouse_x', parseInt( touches[0].pageX ) );
+						$( this ).data( 'origin_mouse_y', parseInt( touches[0].pageY ) );
+
+					} else {
+						
+						if ( dataDraggable ) {
+							$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
+							$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );	
+						}
+
+
+					}
+					
+					$dragDropTrigger.on( 'mouseup.advancedContentSlider touchmove.advancedContentSlider', function( e ) {
+						e.preventDefault();
+
+						$( this ).removeClass( 'dragging' );
+						var touches        = e.originalEvent.touches,
+							origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
+							origin_mouse_y = $( this ).data( 'origin_mouse_y' );
+
+						if ( touches && touches.length ) {
+
+							var deltaX = origin_mouse_x - touches[0].pageX,
+								deltaY = origin_mouse_y - touches[0].pageY;
+
+							if ( deltaX >= 50) {
+								//--- left
+								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
+
+
+							}
+							if ( deltaX <= -50) {
+								//--- right
+								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
+
+
+							}
+							if ( deltaY >= 50) {
+								//--- up
+
+
+							}
+							if ( deltaY <= -50) {
+								//--- down
+
+							}
+
+							if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
+								$dragDropTrigger.off( 'touchmove.advancedContentSlider' );
+							}	
+
+
+						} else {
+							
+							if ( dataDraggable ) {
+								//right
+								if ( e.pageX > origin_mouse_x ) {
+									sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
+								}
+
+								//left
+								if ( e.pageX < origin_mouse_x ) {
+									sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
+								}
+
+								//down
+								if ( e.pageY > origin_mouse_y ) {
+
+								}
+
+								//up
+								if ( e.pageY < origin_mouse_y ) {
+
+								}	
+
+								$dragDropTrigger.off( 'mouseup.advancedContentSlider' );
+								
+							}	
+							
+							
+							
+						}
+
+
+
+					} );
+
+					
+					
+
+				} );
+
+			
+				
+			});	
+			
+		}
+		
+		/*
+		 * Transition Between Slides
+		 *
+		 * @param  {number} elementIndex     - Index of current slider.
+		 * @param  {object} slider           - Selector of the slider .
+		 * @param  {string} arrows           - Controller name of prev/next buttons.
+		 * @param  {string} pagination       - Controller name of pagination buttons.
+		 * @return {void}                    - The constructor.
+		 */
+        function sliderUpdates( elementIndex, slider, arrows, pagination ) {
+			
+			var $items        = slider.find( '.item' ),
+				itemsTotal    = $items.length,
+				$prev         = $( arrows ).find( '.prev' ),
+				$next         = $( arrows ).find( '.next' ),
+				$pagination   = $( pagination ).find( 'li a' );
+				
+			if ( elementIndex <= itemsTotal - 1 && elementIndex >= 0 ) {
+
+				if ( elementIndex > parseFloat( itemsTotal - 1 ) ) elementIndex = parseFloat( itemsTotal - 1 );
+				if ( elementIndex < 0 ) elementIndex = 0;
+				
+				$next.removeClass( 'disabled' );
+				$prev.removeClass( 'disabled' );
+				$pagination.removeClass( 'active' );
+				$pagination.parent().removeClass( 'active' );
+
+				if ( elementIndex == itemsTotal - 1 ) {
+					$next.addClass( 'disabled' );
+				}
+
+				if ( elementIndex == 0 ) {
+					$prev.addClass( 'disabled' );
+				}
+
+				
+
+				$items.removeClass( 'active' );
+				$items.eq( elementIndex ).addClass( 'active' );	
+				$pagination.eq( elementIndex ).addClass( 'active' );
+				$pagination.eq( elementIndex ).parent().addClass( 'active' );
+				
+				
+				
+				TweenMax.to( slider.children( '.inner' ), animDuration/1000, { 
+					x: '-' + ( slider.width() * elementIndex ),
+					onComplete  : function() {
+
+					},
+					ease: Power3.easeOut
+				} );
+				
+	
 			}
 			
 
-			$li.on( aEvent, function( e ) {
-				e.stopPropagation();
-				
-				$( this ).find( 'dd' ).addClass( 'active' );
-				
-				
-				if ( !$( this ).hasClass( 'active' ) ) {
-					$li.removeClass( 'active' );
+			
+		}
+		
 
-					$( this ).addClass( 'active' );
-				} else {
-					$li.removeClass( 'active' );
-				}
-			
-			}); 
-						
-			
-			
-		});
 		
 		
 	};
 	
 		
-    App.accordion = {
+    App.advancedContentSlider = {
         documentReady : documentReady        
     };
 
@@ -6176,343 +6513,6 @@ App = ( function ( App, $, window, document ) {
 
 
 
-
-
-/* 
- *************************************
- * <!-- Advanced Content Slider -->
- *************************************
- */
-App = ( function ( App, $, window, document ) {
-    'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
-		
-	
-		var $window                   = $( window ),
-			windowWidth               = $window.width(),
-			windowHeight              = $window.height(),
-			animDuration              = 1200;
-		
-		
-		
-		sliderInit();
-		
-		$window.on( 'resize', function() {
-			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( $window.width() != windowWidth ) {
-
-				// Update the window width for next time
-				windowWidth = $window.width();
-
-				sliderInit();
-				
-			}
-		});
-		
-		
-		/*
-		 * Initialize slideshow
-		 *
-		 * @return {void}                   - The constructor.
-		 */
-        function sliderInit() {
-			
-			$( '.custom-advanced-content-slider' ).each( function() {
-				var $this                      = $( this ),
-					$items                     = $this.find( '.item' ),
-					$itemsWrapper              = $this.children( '.inner' ),
-					$first                     = $items.first(),
-					itemWidth                  = $this.width(),
-					itemsTotal                 = $items.length,
-					totalWidth                 = itemWidth*itemsTotal,
-					dataControlsPagination     = $this.data( 'controls-pagination' ),
-					dataControlsArrows         = $this.data( 'controls-arrows' ),
-					dataDraggable              = $this.data( 'draggable' ),
-					dataDraggableCursor        = $this.data( 'draggable-cursor' ),
-					dataControlsPaginationAuto = false;
-
-				
-				
-
-				if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.custom-advanced-content-slider-sp-pagination';
-				if ( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.custom-advanced-content-slider-sp-arrows';
-				if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
-				if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
-				
-				if ( $( dataControlsPagination ).html().length == 0 ) dataControlsPaginationAuto = true;
-
-				
-
-				//Initialize the width of each item
-				//-------------------------------------		
-				$first.addClass( 'active' );
-				
-				$items.css( 'width', itemWidth + 'px' );
-				
-				TweenMax.set( $itemsWrapper, { 
-					width: totalWidth,
-					onComplete  : function() {
-						$this.css( 'height', 'auto' );
-					}
-				} );		
-			
-
-				//Pagination dots 
-				//-------------------------------------	
-				if ( dataControlsPaginationAuto ) {
-					var _dot       = '',
-						_dotActive = '';
-					_dot += '<ul class="default">';
-					for ( var i = 0; i < itemsTotal; i++ ) {
-
-						_dotActive = ( i == 0 ) ? 'class="active"' : '';
-
-						_dot += '<li><a '+_dotActive+' data-index="'+i+'" href="javascript:"></a></li>';
-					}
-					_dot += '</ul>';
-
-					if ( $( dataControlsPagination ).html() == '' ) $( dataControlsPagination ).html( _dot );	
-				} else {
-					$( dataControlsPagination ).find( 'li' ).first().find( 'a' ).addClass( 'active' );
-					$( dataControlsPagination ).find( 'li' ).first().addClass( 'active' );
-				}
-
-
-				$( dataControlsPagination ).find( 'li a' ).on( 'click', function( e ) {
-					e.preventDefault();
-
-					if ( !$( this ).hasClass( 'active' ) ) {
-						
-						sliderUpdates( $( this ).attr( 'data-index' ), $this, dataControlsArrows, dataControlsPagination );
-					}
-
-
-
-				});
-
-				
-				//Next/Prev buttons
-				//-------------------------------------		
-				var _prev = $( dataControlsArrows ).find( '.prev' ),
-					_next = $( dataControlsArrows ).find( '.next' );
-				
-				
-
-				$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
-				
-				_prev.addClass( 'disabled' );
-
-				_prev.on( 'click', function( e ) {
-					e.preventDefault();
-
-					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
-
-				});
-
-				_next.on( 'click', function( e ) {
-					e.preventDefault();
-
-					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
-
-				});
-				
-				
-				//Drag and Drop
-				//-------------------------------------	
-				var $dragDropTrigger = $items;
-
-				//Make the cursor a move icon when a user hovers over an item
-				if ( dataDraggable && dataDraggableCursor != '' && dataDraggableCursor != false ) $dragDropTrigger.css( 'cursor', dataDraggableCursor );
-				
-
-
-				//Mouse event
-				$dragDropTrigger.on( 'mousedown.advancedContentSlider touchstart.advancedContentSlider', function( e ) {
-					e.preventDefault();
-
-					var touches = e.originalEvent.touches;
-					
-					$( this ).addClass( 'dragging' );
-					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
-					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
-					
-					
-					if ( touches && touches.length ) {	
-						$( this ).data( 'origin_mouse_x', parseInt( touches[0].pageX ) );
-						$( this ).data( 'origin_mouse_y', parseInt( touches[0].pageY ) );
-
-					} else {
-						
-						if ( dataDraggable ) {
-							$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
-							$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );	
-						}
-
-
-					}
-					
-					$dragDropTrigger.on( 'mouseup.advancedContentSlider touchmove.advancedContentSlider', function( e ) {
-						e.preventDefault();
-
-						$( this ).removeClass( 'dragging' );
-						var touches        = e.originalEvent.touches,
-							origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
-							origin_mouse_y = $( this ).data( 'origin_mouse_y' );
-
-						if ( touches && touches.length ) {
-
-							var deltaX = origin_mouse_x - touches[0].pageX,
-								deltaY = origin_mouse_y - touches[0].pageY;
-
-							if ( deltaX >= 50) {
-								//--- left
-								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
-
-
-							}
-							if ( deltaX <= -50) {
-								//--- right
-								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
-
-
-							}
-							if ( deltaY >= 50) {
-								//--- up
-
-
-							}
-							if ( deltaY <= -50) {
-								//--- down
-
-							}
-
-							if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
-								$dragDropTrigger.off( 'touchmove.advancedContentSlider' );
-							}	
-
-
-						} else {
-							
-							if ( dataDraggable ) {
-								//right
-								if ( e.pageX > origin_mouse_x ) {
-									sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
-								}
-
-								//left
-								if ( e.pageX < origin_mouse_x ) {
-									sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
-								}
-
-								//down
-								if ( e.pageY > origin_mouse_y ) {
-
-								}
-
-								//up
-								if ( e.pageY < origin_mouse_y ) {
-
-								}	
-
-								$dragDropTrigger.off( 'mouseup.advancedContentSlider' );
-								
-							}	
-							
-							
-							
-						}
-
-
-
-					} );
-
-					
-					
-
-				} );
-
-			
-				
-			});	
-			
-		}
-		
-		/*
-		 * Transition Between Slides
-		 *
-		 * @param  {number} elementIndex     - Index of current slider.
-		 * @param  {object} slider           - Selector of the slider .
-		 * @param  {string} arrows           - Controller name of prev/next buttons.
-		 * @param  {string} pagination       - Controller name of pagination buttons.
-		 * @return {void}                    - The constructor.
-		 */
-        function sliderUpdates( elementIndex, slider, arrows, pagination ) {
-			
-			var $items        = slider.find( '.item' ),
-				itemsTotal    = $items.length,
-				$prev         = $( arrows ).find( '.prev' ),
-				$next         = $( arrows ).find( '.next' ),
-				$pagination   = $( pagination ).find( 'li a' );
-				
-			if ( elementIndex <= itemsTotal - 1 && elementIndex >= 0 ) {
-
-				if ( elementIndex > parseFloat( itemsTotal - 1 ) ) elementIndex = parseFloat( itemsTotal - 1 );
-				if ( elementIndex < 0 ) elementIndex = 0;
-				
-				$next.removeClass( 'disabled' );
-				$prev.removeClass( 'disabled' );
-				$pagination.removeClass( 'active' );
-				$pagination.parent().removeClass( 'active' );
-
-				if ( elementIndex == itemsTotal - 1 ) {
-					$next.addClass( 'disabled' );
-				}
-
-				if ( elementIndex == 0 ) {
-					$prev.addClass( 'disabled' );
-				}
-
-				
-
-				$items.removeClass( 'active' );
-				$items.eq( elementIndex ).addClass( 'active' );	
-				$pagination.eq( elementIndex ).addClass( 'active' );
-				$pagination.eq( elementIndex ).parent().addClass( 'active' );
-				
-				
-				
-				TweenMax.to( slider.children( '.inner' ), animDuration/1000, { 
-					x: '-' + ( slider.width() * elementIndex ),
-					onComplete  : function() {
-
-					},
-					ease: Power3.easeOut
-				} );
-				
-	
-			}
-			
-
-			
-		}
-		
-
-		
-		
-	};
-	
-		
-    App.advancedContentSlider = {
-        documentReady : documentReady        
-    };
-
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
 
 
 /* 
@@ -13013,122 +13013,6 @@ App = ( function ( App, $, window, document ) {
 
 /* 
  *************************************
- * <!-- Modal Dialog -->
- *************************************
- */
-App = ( function ( App, $, window, document ) {
-    'use strict';
-   
-   
-    var documentReady = function( $ ){
-		
-		function getTransitionDuration( elementOrSelector ){
-			var $el, durString, isMS, numberStr, numberNum;
-			$el = $( elementOrSelector );
-			if( $el.length === 0 ){
-				return false;
-			}
-			$el = $($el[0]); // Force just the first item.  need more?  use .each
-			
-			var dur = $el.css('transition-duration');
-			if( typeof dur === typeof undefined ) { 
-				dur = '0.5s';
-			}
-			
-			durString = dur.toLowerCase();
-			isMS = durString.indexOf( 'ms' ) >= 0;
-			numberNum = durString.replace( 'ms', '' ).replace( 's', '' );
-			return isMS ? numberNum : numberNum * 1000;
-		}
-		
-		
-		/*
-		  * Unbind that one in a safe way that won't accidentally unbind other click handlers.
-		  * In order to trigger other custom Modal Dialog events.
-			
-			$( '#element' ).off( 'click.modalDialog' );
-			$( '#element' ).off( 'click.modalDialogClose' );
-			
-		*/
-		
-	
-		if ( $( '.modal-mask' ).length == 0 ) {
-			$( 'body' ).prepend( '<div class="modal-mask"></div>' );
-		}
-	    
-		$( document ).on( 'click.modalDialog', '[data-modal-id]', function() {
-			var dataID = $( this ).data( 'modal-id' ),
-			    dataH  = $( this ).data( 'modal-height' ),
-				dataW  = $( this ).data( 'modal-width' ),
-				$obj   = $( '.modal-box#'+dataID );
-			
-			// Initializate modal
-			$( this ).attr( 'href', 'javascript:void(0)' );
-			$obj.find( '.content' ).addClass( 'no-fullscreen' );
-			
-			
-			if ( $( this ).data( 'video-win' ) ) {
-				$obj.find( '.content' ).css( 'overflow-y', 'hidden' );
-			}
-			
-			
-			if ( $obj.length > 0 ) {
-				if( typeof dataH != typeof undefined && dataH != '' ) {
-					$obj.css( {'height': dataH } );
-				}
-				
-				if( typeof dataW != typeof undefined && dataW != '' ) {
-					$obj.css( {'width': dataW } );
-				}
-				
-				$( '.modal-mask' ).fadeIn( 'fast' );
-				$obj.addClass( 'active' );	
-			}
-			
-			if ( $obj.hasClass( 'fullscreen' ) ) {
-				setTimeout( function() {
-					$( 'html' ).css( 'overflow-y', 'hidden' );
-					if ( !$obj.hasClass( 'video' ) ) {
-						$obj.find( '.content' ).css( 'overflow-y', 'scroll' );
-					}
-					
-				}, getTransitionDuration( '.modal-box#'+dataID ) );
-				
-			}
-		
-		});
-		
-		$( document ).on( 'click.modalDialogClose', '.modal-box .close-btn', function() {
-			$( this ).parent().removeClass( 'active' );
-		});
-		
-		$( document ).on( 'click.modalDialogClose', '.modal-box .close-btn, .modal-mask', function() {
-			$( '.modal-box' ).removeClass( 'active' );
-			$( '.modal-mask' ).fadeOut( 'fast' );
-			$( '.modal-box' ).find( '.content' ).removeClass( 'no-fullscreen' );
-			$( 'html' ).css( 'overflow-y', 'auto' );
-			setTimeout( function() {
-	
-			}, getTransitionDuration( '.modal-box:first' ) );
-			
-		});
-		
-	};
-		
-      
-    App.modalbox = {
-        documentReady : documentReady        
-    };  
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
-
-
-
-
-/* 
- *************************************
  * <!-- Mobile Menu -->
  *************************************
  */
@@ -13264,6 +13148,218 @@ App = ( function ( App, $, window, document ) {
         documentReady : documentReady        
     };
 
+    App.components.documentReady.push( documentReady );
+    return App;
+
+}( App, jQuery, window, document ) );
+
+
+
+/* 
+ *************************************
+ * <!-- Modal Dialog -->
+ *************************************
+ */
+App = ( function ( App, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ){
+		
+		function getTransitionDuration( elementOrSelector ){
+			var $el, durString, isMS, numberStr, numberNum;
+			$el = $( elementOrSelector );
+			if( $el.length === 0 ){
+				return false;
+			}
+			$el = $($el[0]); // Force just the first item.  need more?  use .each
+			
+			var dur = $el.css('transition-duration');
+			if( typeof dur === typeof undefined ) { 
+				dur = '0.5s';
+			}
+			
+			durString = dur.toLowerCase();
+			isMS = durString.indexOf( 'ms' ) >= 0;
+			numberNum = durString.replace( 'ms', '' ).replace( 's', '' );
+			return isMS ? numberNum : numberNum * 1000;
+		}
+		
+		
+		/*
+		  * Unbind that one in a safe way that won't accidentally unbind other click handlers.
+		  * In order to trigger other custom Modal Dialog events.
+			
+			$( '#element' ).off( 'click.modalDialog' );
+			$( '#element' ).off( 'click.modalDialogClose' );
+			
+		*/
+		
+	
+		if ( $( '.modal-mask' ).length == 0 ) {
+			$( 'body' ).prepend( '<div class="modal-mask"></div>' );
+		}
+	    
+		$( document ).on( 'click.modalDialog', '[data-modal-id]', function() {
+			var dataID = $( this ).data( 'modal-id' ),
+			    dataH  = $( this ).data( 'modal-height' ),
+				dataW  = $( this ).data( 'modal-width' ),
+				$obj   = $( '.modal-box#'+dataID );
+			
+			// Initializate modal
+			$( this ).attr( 'href', 'javascript:void(0)' );
+			$obj.find( '.content' ).addClass( 'no-fullscreen' );
+			
+			
+			if ( $( this ).data( 'video-win' ) ) {
+				$obj.find( '.content' ).css( 'overflow-y', 'hidden' );
+			}
+			
+			
+			if ( $obj.length > 0 ) {
+				if( typeof dataH != typeof undefined && dataH != '' ) {
+					$obj.css( {'height': dataH } );
+				}
+				
+				if( typeof dataW != typeof undefined && dataW != '' ) {
+					$obj.css( {'width': dataW } );
+				}
+				
+				$( '.modal-mask' ).fadeIn( 'fast' );
+				$obj.addClass( 'active' );	
+			}
+			
+			if ( $obj.hasClass( 'fullscreen' ) ) {
+				setTimeout( function() {
+					$( 'html' ).css( 'overflow-y', 'hidden' );
+					if ( !$obj.hasClass( 'video' ) ) {
+						$obj.find( '.content' ).css( 'overflow-y', 'scroll' );
+					}
+					
+				}, getTransitionDuration( '.modal-box#'+dataID ) );
+				
+			}
+		
+		});
+		
+		$( document ).on( 'click.modalDialogClose', '.modal-box .close-btn', function() {
+			$( this ).parent().removeClass( 'active' );
+		});
+		
+		$( document ).on( 'click.modalDialogClose', '.modal-box .close-btn, .modal-mask', function() {
+			$( '.modal-box' ).removeClass( 'active' );
+			$( '.modal-mask' ).fadeOut( 'fast' );
+			$( '.modal-box' ).find( '.content' ).removeClass( 'no-fullscreen' );
+			$( 'html' ).css( 'overflow-y', 'auto' );
+			setTimeout( function() {
+	
+			}, getTransitionDuration( '.modal-box:first' ) );
+			
+		});
+		
+	};
+		
+      
+    App.modalbox = {
+        documentReady : documentReady        
+    };  
+    App.components.documentReady.push( documentReady );
+    return App;
+
+}( App, jQuery, window, document ) );
+
+
+
+
+/* 
+ *************************************
+ * <!-- Mousewheel Interaction -->
+ *************************************
+ */
+App = ( function ( App, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ){
+		
+		
+		//Prevent this module from loading in other pages
+		if ( !$( 'body' ).hasClass( 'page-mousewheel-eff' ) ) return false;
+		
+		
+	    //Determine the direction of a jQuery scroll event
+		//Fix an issue for mousewheel event is too fast.
+		var lastAnimation     = 0,
+			quietPeriod       = 500, //Do not change it
+			animationTime     = 1000,//According to page transition animation changes
+			scrollCount       = 0;
+		
+		$( document ).on( 'wheel', function( e ) { 
+
+			var dir;
+			//Gets a value that indicates the amount that the mouse wheel has changed.
+			var delta = e.originalEvent.deltaY;
+			
+			if( delta > 0 ) { 
+				//scroll down
+				dir = 'down';
+				
+			} else {
+				//scroll up
+				dir = 'up';
+			}
+			
+			scrollInit( e, dir );
+			
+			//prevent page fom scrolling
+			return false;
+
+		});
+		
+	
+	
+		
+		
+		/*
+		 * Scroll initialize
+		 *
+		 * @param  {object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
+		 * @param  {string} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
+		 * @return {void}                - The constructor.
+		 */
+		function scrollInit( event, dir ) {
+	
+			var timeNow = new Date().getTime();
+			// Cancel scroll if currently animating or within quiet period
+			if( timeNow - lastAnimation < quietPeriod + animationTime) {
+				event.preventDefault();
+				return;
+			}
+
+			if ( dir == 'down' ) {
+				//scroll down
+				$( '#demo-mousewheel-interaction-status' ).html( 'Direction: &darr;&darr;&darr;&darr;&darr;&darr;&darr;&darr;&darr;&darr;&darr;&darr;&darr;&darr;&darr;, Total: ' + scrollCount );
+
+				scrollCount++;
+				
+			} else {
+				//scroll up
+				$( '#demo-mousewheel-interaction-status' ).html( 'Direction: &uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;, Total: ' + scrollCount );
+
+				scrollCount++;
+			  
+			}
+			lastAnimation = timeNow;
+		}
+		
+
+		
+	};
+		
+      
+    App.mousewheelInteraction = {
+        documentReady : documentReady        
+    };  
     App.components.documentReady.push( documentReady );
     return App;
 
@@ -13765,102 +13861,6 @@ App = ( function ( App, $, window, document ) {
 
 
 
-
-
-
-/* 
- *************************************
- * <!-- Mousewheel Interaction -->
- *************************************
- */
-App = ( function ( App, $, window, document ) {
-    'use strict';
-   
-   
-    var documentReady = function( $ ){
-		
-		
-		//Prevent this module from loading in other pages
-		if ( !$( 'body' ).hasClass( 'page-mousewheel-eff' ) ) return false;
-		
-		
-	    //Determine the direction of a jQuery scroll event
-		//Fix an issue for mousewheel event is too fast.
-		var lastAnimation     = 0,
-			quietPeriod       = 500, //Do not change it
-			animationTime     = 1000,//According to page transition animation changes
-			scrollCount       = 0;
-		
-		$( document ).on( 'wheel', function( e ) { 
-
-			var dir;
-			//Gets a value that indicates the amount that the mouse wheel has changed.
-			var delta = e.originalEvent.deltaY;
-			
-			if( delta > 0 ) { 
-				//scroll down
-				dir = 'down';
-				
-			} else {
-				//scroll up
-				dir = 'up';
-			}
-			
-			scrollInit( e, dir );
-			
-			//prevent page fom scrolling
-			return false;
-
-		});
-		
-	
-	
-		
-		
-		/*
-		 * Scroll initialize
-		 *
-		 * @param  {object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
-		 * @param  {string} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
-		 * @return {void}                - The constructor.
-		 */
-		function scrollInit( event, dir ) {
-	
-			var timeNow = new Date().getTime();
-			// Cancel scroll if currently animating or within quiet period
-			if( timeNow - lastAnimation < quietPeriod + animationTime) {
-				event.preventDefault();
-				return;
-			}
-
-			if ( dir == 'down' ) {
-				//scroll down
-				$( '#demo-mousewheel-interaction-status' ).html( 'Direction: &darr;&darr;&darr;&darr;&darr;&darr;&darr;&darr;&darr;&darr;&darr;&darr;&darr;&darr;&darr;, Total: ' + scrollCount );
-
-				scrollCount++;
-				
-			} else {
-				//scroll up
-				$( '#demo-mousewheel-interaction-status' ).html( 'Direction: &uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;&uarr;, Total: ' + scrollCount );
-
-				scrollCount++;
-			  
-			}
-			lastAnimation = timeNow;
-		}
-		
-
-		
-	};
-		
-      
-    App.mousewheelInteraction = {
-        documentReady : documentReady        
-    };  
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
 
 
 /* 
@@ -16217,6 +16217,107 @@ App = ( function ( App, $, window, document ) {
 
 
 
+/* 
+ *************************************
+ * <!-- Testimonials Carousel -->
+ *************************************
+ */
+App = ( function ( App, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+    
+		var $obj                 = $( '.custom-testimonials .flexslider' ),
+			testimonialsControls = '';
+		
+		
+		for ( var i = 0; i < $obj.find( '.slides > li' ).length; i++ ) {
+			testimonialsControls += '<li></li>';
+		}
+		$( '.slides-custom-control' ).html( testimonialsControls );
+    	
+		
+		
+		$obj.flexslider({
+			animation         : 'slide',
+			slideshow         : true,
+			smoothHeight      : true,
+			controlNav        : true,
+			manualControls    : '.slides-custom-control li',
+			directionNav      : false,
+			animationSpeed    : 600,
+			slideshowSpeed    : 7000,
+			selector          : ".slides > li",
+			start: function(slider){
+				$obj.on( 'mousedown', function( e ) {
+					if ( $obj.data( 'flexslider' ).animating ) {
+						return;
+					}
+						
+					$( this ).addClass('dragging');
+					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
+					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
+					$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
+					$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );
+				} );
+			
+				$obj.on( 'mouseup', function( e ) {
+					if ( $obj.data('flexslider').animating ) {
+						return;
+					}
+						
+					$( this ).removeClass('dragging');
+					var origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
+					    origin_mouse_y = $( this ).data( 'origin_mouse_y' );
+					
+					if ( 'horizontal' === $obj.data('flexslider').vars.direction ) {
+						if ( e.pageX > origin_mouse_x ) {
+							$obj.flexslider('prev');
+						}
+						if ( e.pageX < origin_mouse_x ) {
+							$obj.flexslider('next');
+						}
+					} else {
+						if ( e.pageY > origin_mouse_y ) {
+							$obj.flexslider('prev');
+						}
+						if ( e.pageY < origin_mouse_y ) {
+							$obj.flexslider('next');
+						}
+					}
+				} );
+				
+				
+				$( '.custom-testimonials-count .total' ).text( '0' + slider.count );
+				$( '.custom-testimonials-count .cur' ).text( '0' + parseFloat( slider.currentSlide + 1 ) );
+				
+			},
+			after: function(slider){
+				
+				$( '.custom-testimonials-count .total' ).text( '0' + slider.count );
+				$( '.custom-testimonials-count .cur' ).text( '0' + parseFloat( slider.currentSlide + 1 ) );
+				
+			}
+		});
+		
+		
+    };
+
+    App.testimonials = {
+        documentReady : documentReady        
+    };
+
+    App.components.documentReady.push( documentReady );
+    return App;
+
+}( App, jQuery, window, document ) );
+
+
+
+
+
+
+
 
 
 /* 
@@ -16321,107 +16422,6 @@ App = ( function ( App, $, window, document ) {
     };
  
 }( jQuery ));
-
-/* 
- *************************************
- * <!-- Testimonials Carousel -->
- *************************************
- */
-App = ( function ( App, $, window, document ) {
-    'use strict';
-    
-    var documentReady = function( $ ) {
-    
-		var $obj                 = $( '.custom-testimonials .flexslider' ),
-			testimonialsControls = '';
-		
-		
-		for ( var i = 0; i < $obj.find( '.slides > li' ).length; i++ ) {
-			testimonialsControls += '<li></li>';
-		}
-		$( '.slides-custom-control' ).html( testimonialsControls );
-    	
-		
-		
-		$obj.flexslider({
-			animation         : 'slide',
-			slideshow         : true,
-			smoothHeight      : true,
-			controlNav        : true,
-			manualControls    : '.slides-custom-control li',
-			directionNav      : false,
-			animationSpeed    : 600,
-			slideshowSpeed    : 7000,
-			selector          : ".slides > li",
-			start: function(slider){
-				$obj.on( 'mousedown', function( e ) {
-					if ( $obj.data( 'flexslider' ).animating ) {
-						return;
-					}
-						
-					$( this ).addClass('dragging');
-					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
-					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
-					$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
-					$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );
-				} );
-			
-				$obj.on( 'mouseup', function( e ) {
-					if ( $obj.data('flexslider').animating ) {
-						return;
-					}
-						
-					$( this ).removeClass('dragging');
-					var origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
-					    origin_mouse_y = $( this ).data( 'origin_mouse_y' );
-					
-					if ( 'horizontal' === $obj.data('flexslider').vars.direction ) {
-						if ( e.pageX > origin_mouse_x ) {
-							$obj.flexslider('prev');
-						}
-						if ( e.pageX < origin_mouse_x ) {
-							$obj.flexslider('next');
-						}
-					} else {
-						if ( e.pageY > origin_mouse_y ) {
-							$obj.flexslider('prev');
-						}
-						if ( e.pageY < origin_mouse_y ) {
-							$obj.flexslider('next');
-						}
-					}
-				} );
-				
-				
-				$( '.custom-testimonials-count .total' ).text( '0' + slider.count );
-				$( '.custom-testimonials-count .cur' ).text( '0' + parseFloat( slider.currentSlide + 1 ) );
-				
-			},
-			after: function(slider){
-				
-				$( '.custom-testimonials-count .total' ).text( '0' + slider.count );
-				$( '.custom-testimonials-count .cur' ).text( '0' + parseFloat( slider.currentSlide + 1 ) );
-				
-			}
-		});
-		
-		
-    };
-
-    App.testimonials = {
-        documentReady : documentReady        
-    };
-
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
-
-
-
-
-
-
 
 
 /* 
