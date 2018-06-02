@@ -254,15 +254,9 @@ http://localhost:8080/examples/
 
 ```
 
-### 2\. Custom Core Files
+### 2\. File Structures
 
 
-You can customize these files to meet the different needs of the site you want :-)
-
-The `examples/assets-demo/` folder can be deleted.
-
-
-#### File Structures:
 
 ```sh
 
@@ -292,6 +286,9 @@ uix-kit/
 └──
 ```
 
+#### HTML/JS/CSS Components:
+
+*   `_components/*`
 
 #### Core CSS:
 
@@ -317,7 +314,7 @@ uix-kit/
 *   `examples/assets/fonts/*`
 
 
-### 2\. PSD Grid Templates
+### 3\. PSD Grid Templates
 
 You can download the corresponding .PSD grid files based on Bootstrap 3.x from the `_grid` folder.
 
