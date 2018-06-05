@@ -1,5 +1,11 @@
 # Changelog
 
+#### = 1.6.8 (June 5, 2018) =
+
+* New: Add a new module "Video PopUp".
+* Tweak: Optimized javascript of some modules.
+* Fix: Fixed an error of full-screen position for video.
+
 
 #### = 1.6.7 (June 1, 2018) =
 

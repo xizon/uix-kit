@@ -77,9 +77,10 @@ App = ( function ( App, $, window, document ) {
 					width: totalWidth,
 					onComplete  : function() {
 						$this.css( 'height', 'auto' );
+						
 					}
-				} );		
-			
+				} );	
+				
 
 				//Pagination dots 
 				//-------------------------------------	

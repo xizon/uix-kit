@@ -21,7 +21,7 @@
 
 
 			/* Demo Style */
-			border-right: 1px solid rgba(255,255,255,.5);
+			box-shadow: inset -1px 0px 0px 0px rgba(255,255,255,.5);
 			font-size: 1.2rem;
 			padding: 2rem 0;
 			text-align: center;
@@ -42,7 +42,7 @@
 	}
 }
 
-
+/*----- Previous/Next Arrows -----*/
 .custom-multi-items-carousel-controls {
 	margin-top: 30px;
 	text-align: center;
@@ -77,7 +77,7 @@
 
 
 
-/* Vertical Carousel */
+/*----- Vertical Carousel -----*/
 .custom-multi-items-carousel.vertical {
 	/* Required */
 	overflow: hidden;
@@ -95,7 +95,7 @@
 			width: 100%;
 
 			/* Demo Style */
-			border-bottom: 1px solid rgba(255,255,255,.5);
+			box-shadow: inset 0px -1px 0px 0px rgba(255,255,255,.5);
 			padding: 0 0;
 
 		}

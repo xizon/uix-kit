@@ -2,12 +2,12 @@
 
 
 [![Travis CI](https://api.travis-ci.org/xizon/uix-kit.svg?branch=master)](https://travis-ci.org/xizon/uix-kit/)
-[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=1.6.7&x2=0)](https://www.npmjs.com/package/uix-kit)
+[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=1.6.8&x2=0)](https://www.npmjs.com/package/uix-kit)
 [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
 
 
 <p align = "left">
-    <img src="https://uiux.cc/uix-kit/assets/images/logo-color.png">
+    <img width="300" src="https://uiux.cc/uix-kit/assets/images/logo-colorful.png">
 </p>
 
 ---
@@ -48,7 +48,7 @@ Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap.
 
 An underlying front-end system that makes it easy to extend and modify core files. This spec is a living document that will be updated as we continue to develop the tenets and specifics of Uix Kit. Support JS and CSS component( SCSS ) development with Gulp & Webpack together.
 
-Enjoy the fluid grid system based on **12** columns. Uix Kit is built over Bootstrap and has all the benefits that the framework comes with. Regardless of the screen size, the website content will naturally fit the given resolution. Using the Uix Kit will save you large amount of time to build your projects.
+Enjoy the fluid grid system based on Bootstrap and self-expansion. Uix Kit is built over Bootstrap and has all the benefits that the framework comes with. Regardless of the screen size, the website content will naturally fit the given resolution. Using the Uix Kit will save you large amount of time to build your projects. It supports 3D and 2D rendering with three.js and pixi.js. More typically, automatically generate core files with Gulp & Webpack for each module (contains .js, .scss, .html files).
 
 * Supports 3D and 2D rendering with three.js and pixi.js.
 * Automatically generate table of contents with Gulp for each module comment of name.
@@ -253,6 +253,7 @@ http://localhost:8080/examples/
 
 
 ```
+
 
 ### 2\. File Structures
 

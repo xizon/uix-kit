@@ -280,7 +280,7 @@ App = ( function ( App, $, window, document ) {
 				// Immediately use the texture for material creation
 				var defaultMaterial     = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
 
-				displacementSprite  = new THREE.Mesh( geometry, defaultMaterial )
+				displacementSprite  = new THREE.Mesh( geometry, defaultMaterial );
 				displacementSprite.position.x = Math.random() * 800 - 400;
 				displacementSprite.position.y = Math.random() * 800 - 400;
 				displacementSprite.position.z = Math.random() * 800 - 400;

@@ -28,6 +28,12 @@
 			box-shadow: none;
 		}
 	}
+	
+	.web-video-container {
+		> div.video-js {
+			margin: 0 auto;
+		}
+	}
 }
 
 @media all and (max-width: 991px) {
@@ -93,7 +99,7 @@
 	}
 	
 	&.video .close-btn::after {
-	    font-size: 2rem;
+		font-size: 2rem !important;
 	}
 	
 	&.active, 
@@ -130,8 +136,10 @@
 			
 		}
 		&.video .close-btn {
-			background: none;
 			box-shadow: none;
+			background: none;
+		
+
 		}
 	}
 	

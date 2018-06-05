@@ -383,6 +383,7 @@ gulp.task('sass', function(){
 
 
 //Merge JS
+//@http://jshint.com/docs/options/
 gulp.task('jshint', function () {
 	return gulp.src( globs.js )
 		.pipe(jshint({

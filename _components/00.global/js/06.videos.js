@@ -178,15 +178,15 @@ App = ( function ( App, $, window, document ) {
 
 				});
 				
-				
-				
+
+
 
 			});
 			
 		});
 		
 		
-		
+	
 		/* 
 		 ---------------------------
 		 Video Popup Interaction
@@ -316,6 +316,7 @@ App = ( function ( App, $, window, document ) {
 						//Scaled/Proportional Content 
 						newH = curH*(newW/curW);
 					}	
+					
 
 					$ifm.css({
 						'left'   : ( newMaxW - newW )/2 + 'px',
@@ -397,11 +398,11 @@ App = ( function ( App, $, window, document ) {
 						.height( newH );
 
 
-					$( '#' + vid ).css({
-						'left' : ( newMaxW - newW )/2 + 'px',
-						'top'  : ( newMaxH - newH )/2 + 'px'
-					});
-
+					//In order to allow CSS to support video centering
+					$( '#' + vid ).closest( '.web-video-container > div.video-js' ).css({
+						'width' : newW + 'px'
+					});			
+					
 
 
 

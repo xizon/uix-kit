@@ -69,7 +69,23 @@ App = ( function ( App, $, window, document ) {
 					$obj.css( {'width': dataW } );
 				}
 				
-				$( '.modal-mask' ).fadeIn( 'fast' );
+				TweenMax.set( '.modal-mask', {
+					css: {
+						opacity : 0,
+						display : 'none'
+					},
+					onComplete : function() {
+						
+						TweenMax.to( this.target, 0.3, {
+							css: {
+								opacity    : 1,
+								display    : 'block'
+							}
+						});		
+						
+					}
+				});
+
 				$obj.addClass( 'active' );	
 			}
 			
@@ -92,7 +108,13 @@ App = ( function ( App, $, window, document ) {
 		
 		$( document ).on( 'click.modalDialogClose', '.modal-box .close-btn, .modal-mask', function() {
 			$( '.modal-box' ).removeClass( 'active' );
-			$( '.modal-mask' ).fadeOut( 'fast' );
+			TweenMax.to( '.modal-mask', 0.3, {
+				css: {
+					opacity : 0,
+					display : 'none'
+				}
+			});
+				
 			$( '.modal-box' ).find( '.content' ).removeClass( 'no-fullscreen' );
 			$( 'html' ).css( 'overflow-y', 'auto' );
 			setTimeout( function() {

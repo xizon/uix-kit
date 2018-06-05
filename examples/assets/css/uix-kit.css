@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.6.7
- * ## Last Update         :  June 3, 2018
+ * ## Version             :  1.6.8
+ * ## Last Update         :  June 5, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -128,24 +128,23 @@
     60. Modal Dialog 
     61. Mouse Animation Scroll 
     62. Multiple Items Carousel 
-    63. Parallax 
-    64. Periodical Scroll 
-    65. Pricing 
-    66. Progress Bar 
-    67. Services 
-    68. Show More Less 
-    69. Single Post 
-    70. Source Code 
-    71. Striking 
-    72. Table Series 
-    73. Tabs 
-    74. Team Focus 
-    75. Testimonials Carousel 
-    76. Text effect 
-    77. Timeline 
-    78. ToolTip 
-    79. WordPress Core 
-    80. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    63. Multiple Items Carousel 
+    64. Parallax 
+    65. Periodical Scroll 
+    66. Pricing 
+    67. Progress Bar 
+    68. Services 
+    69. Show More Less 
+    70. Single Post 
+    71. Source Code 
+    72. Striking 
+    73. Table Series 
+    74. Tabs 
+    75. Team Focus 
+    76. Testimonials Carousel 
+    77. Text effect 
+    78. Timeline 
+    79. ToolTip 
 
 
 
@@ -8394,6 +8393,10 @@ dl.list-side-by-side::after {
     box-shadow: none;
 }
 
+.modal-box .web-video-container > div.video-js {
+    margin: 0 auto;
+}
+
 @media all and (max-width: 991px) {
     .modal-box:not(.fullscreen) {
         width: 850px !important;
@@ -8454,7 +8457,7 @@ dl.list-side-by-side::after {
 }
 
 .modal-box.video .close-btn::after {
-    font-size: 2rem;
+    font-size: 2rem !important;
 }
 
 .modal-box.active, .modal-box.fullscreen.active {
@@ -8490,8 +8493,8 @@ dl.list-side-by-side::after {
 }
 
 .modal-box.fullscreen.video .close-btn {
-    background: none;
     box-shadow: none;
+    background: none;
 }
 
 .modal-box:not(.fullscreen).active .close-btn {
@@ -8672,7 +8675,7 @@ dl.list-side-by-side::after {
     visibility: hidden;
     box-sizing: border-box;
   /* Demo Style */
-    border-right: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: inset -1px 0px 0px 0px rgba(255, 255, 255, 0.5);
     font-size: 1.2rem;
     padding: 2rem 0;
     text-align: center;
@@ -8689,6 +8692,7 @@ dl.list-side-by-side::after {
     font-size: 2rem;
 }
 
+/*----- Previous/Next Arrows -----*/
 .custom-multi-items-carousel-controls {
     margin-top: 30px;
     text-align: center;
@@ -8723,7 +8727,7 @@ dl.list-side-by-side::after {
     opacity: .3;
 }
 
-/* Vertical Carousel */
+/*----- Vertical Carousel -----*/
 .custom-multi-items-carousel.vertical {
   /* Required */
     overflow: hidden;
@@ -8741,7 +8745,7 @@ dl.list-side-by-side::after {
     float: none;
     width: 100%;
   /* Demo Style */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: inset 0px -1px 0px 0px rgba(255, 255, 255, 0.5);
     padding: 0 0;
 }
 
@@ -12414,6 +12418,14 @@ a img.aligncenter {
 
     55% {
         right: 2px;
+    }
+
+    100% {
+        right: 180px;
+        left: 2px;
+    }
+}
+       right: 2px;
     }
 
     100% {

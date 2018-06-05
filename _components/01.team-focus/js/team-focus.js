@@ -96,12 +96,23 @@ App = ( function ( App, $, window, document ) {
 					cPo     = $cur.data( 'po' ),
 					cIntro  = $cur.data( 'intro' );
 					
-				TweenMax.to( $info, 0.5, {
+				TweenMax.set( $info, {
 					css: {
-						opacity : 1,
-						display : 'block'
+						opacity : 0,
+						display : 'none'
+					},
+					onComplete : function() {
+						
+						TweenMax.to( this.target, 0.5, {
+							css: {
+								opacity    : 1,
+								display    : 'block'
+							}
+						});		
+						
 					}
 				});
+				
 				
 				$info.find( 'h4 strong' ).html( cName );
 				$info.find( 'h4 em' ).html( cPo );
