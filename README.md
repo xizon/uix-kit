@@ -2,7 +2,7 @@
 
 
 [![Travis CI](https://api.travis-ci.org/xizon/uix-kit.svg?branch=master)](https://travis-ci.org/xizon/uix-kit/)
-[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=1.6.8&x2=0)](https://www.npmjs.com/package/uix-kit)
+[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=1.7.0&x2=0)](https://www.npmjs.com/package/uix-kit)
 [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
 
 
@@ -44,7 +44,8 @@
 
 ## Description
 
-Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap.
+Make over <strong>100+</strong> components to wear again and again!
+
 
 An underlying front-end system that makes it easy to extend and modify core files. This spec is a living document that will be updated as we continue to develop the tenets and specifics of Uix Kit. Support JS and CSS component( SCSS ) development with Gulp & Webpack together.
 
@@ -123,7 +124,7 @@ http://localhost:8080/examples/
 <html dir="ltr" lang="en-US">
 	<head>
 		<meta charset="utf-8" />
-		<title>Uix Kit</title>	
+		<title></title>	
         
 		<!-- Mobile Settings
 		============================================= -->
@@ -152,11 +153,6 @@ http://localhost:8080/examples/
 
 
 
-		<!-- Web Fonts
-		============================================= -->
-        <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700,800" rel="stylesheet"> -->
-        <!-- Web Fonts  end -->
-        
 		<!-- Core & Theme CSS
 		============================================= -->
         
@@ -179,26 +175,7 @@ http://localhost:8080/examples/
         
         <!-- Core & Theme CSS  end -->
         
-            
-		<!-- SEO
-		============================================= -->
-        <meta name="description" content="Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap">
-        <meta name="generator" content="Uix Kit" /> 
-        <link rel="canonical" href="https://uiux.cc" /> 
-        <meta name="author" content="UIUX Lab"> 
-        <!-- SEO  end -->
-  
-        
-		<!-- Favicons
-		============================================= -->
-        <link rel="icon" href="assets/images/favicon/favicon-32x32.png" type="image/x-icon">
-        <link rel="shortcut icon" href="assets/images/favicon/favicon-32x32.png" sizes="32x32">
-        <link rel="apple-touch-icon" href="assets/images/favicon/apple-touch-icon-57x57.png">
-        <link rel="apple-touch-icon" sizes="72x72" href="assets/images/favicon/apple-touch-icon-72x72.png">
-        <link rel="apple-touch-icon" sizes="114x114" href="assets/images/favicon/apple-touch-icon-114x114.png">
-        <!-- Favicons  end -->
      
-  
   </head>     
   <body>
   
@@ -230,22 +207,17 @@ http://localhost:8080/examples/
 	
 	<!-- Your Plugins & Theme Scripts
 	============================================= -->
-	
-    <!-- Theme Script -->
+
 	<script>
-		var REVISION     = "@@{website_version}",
+		var REVISION     = "1.0.0",
 			APP_ROOTPATH = {
-				"templateUrl" : "", //If the file is in the root directory, you can leave it empty; if in another directory, you can write: "/blog"
-				"homeUrl"     : ""  //Eg. https://uiux.cc
+				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
+				"homeUrl"     : "",  //Eg. https://uiux.cc
+				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
 			};
     </script>  
     <script src="assets/js/uix-kit.min.js?ver=1.0.0"></script>
 
-
-
-	<!-- Your Plugins & Theme Scripts  end -->
-    
- 
 
   </body>
 </html>

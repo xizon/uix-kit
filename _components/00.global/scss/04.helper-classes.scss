@@ -2,10 +2,65 @@
     <!-- Helper Classes -->              
 /* ====================================================== */
 
+/*
+ * 1. Content Block
+ * 2. Elements after a floating element will flow around it. 
+ * 3. Shadow Effect
+ * 4. Smooth Transition Effect
+ * 5. Element Floating
+ * 6. Element Alignment
+ * 7. Truncate String with Ellipsis
+ * 8. Vertically or Horizontally Aligned Blocks
+ * 9. Specifies Whether To Clip Content
+ * 10. Specifies a Default Height
+ * 11. Style of Irregular Shape
+ * 12. Hidden The Element on Mobile Device
+ * 13. Tip Label
+ * 14. Image Hover Overlay Effects
+ * 15. Position
+*/
+
+
+/* 
+ ---------------------------
+ 1. Content Block
+ ---------------------------
+ */ 
 .relative {
     position: relative;
+	
 }
 
+.relative-inline {
+	display: inline-block;
+	position: relative;
+	
+	/* Prevent content overflow */
+	max-width: 100%;
+	
+	/* Behave like most inline-block elements */
+	vertical-align: middle;
+	
+	/*
+	 * Force hardware acceleration without creating a new stacking context
+	 *    to fix 1px glitch when combined with overlays and transitions in Webkit
+	 */
+	-webkit-backface-visibility: hidden;
+	
+	/* Clip child elements */
+	&.clip {
+	  overflow: hidden;
+	}
+}
+
+
+
+/* 
+ ---------------------------
+ 2. Elements after a floating element will flow around it. 
+    Use the "clear" or "clearfix" hack to fix the problem
+ ---------------------------
+ */ 
 .clear {
 	clear: both;
 	display: block;
@@ -32,10 +87,21 @@
 }
 
 
+/* 
+ ---------------------------
+ 3. Shadow Effect
+ ---------------------------
+ */ 
 .outer-shadower {
     @include outer-shadow();
 }
 
+
+/* 
+ ---------------------------
+ 4. Smooth Transition Effect
+ ---------------------------
+ */ 
 .transition {
     @include transition-default();
 	
@@ -55,6 +121,13 @@
 }
 
 
+
+
+/* 
+ ---------------------------
+ 5. Element Floating
+ ---------------------------
+ */ 
 .fl {
     float: left;
 	
@@ -71,6 +144,12 @@
 	}
 }
 
+
+/* 
+ ---------------------------
+ 6. Element Alignment
+ ---------------------------
+ */ 
 .t-r {
     text-align: right;
 	
@@ -91,18 +170,22 @@
     text-align: center;
 }
 
-.inline-block {
-    display: inline-block;
-}
 
-.block {
-    display: block;
-}
-
+/* 
+ ---------------------------
+ 7. Truncate String with Ellipsis
+ ---------------------------
+ */ 
 .ellipsis {
 	@include ellipsis();
 }
 
+
+/* 
+ ---------------------------
+ 8. Vertically or Horizontally Aligned Blocks
+ ---------------------------
+ */ 
 .pos-normal-align, 
 .pos-vertical-align {
     position: absolute;
@@ -141,6 +224,12 @@
 	}
 }
 
+
+/* 
+ ---------------------------
+ 9. Specifies Whether To Clip Content
+ ---------------------------
+ */ 
 .overflow-hidden-x {
     overflow-x: hidden;
 }
@@ -149,6 +238,13 @@
     overflow: hidden;
 }
 
+
+
+/* 
+ ---------------------------
+ 10. Specifies a Default Height
+ ---------------------------
+ */ 
 .height-10 {
     height: 10vh !important;
 }
@@ -205,13 +301,21 @@
 	}
 }
 
-
-/* Style of Irregular Shape */
+/* 
+ ---------------------------
+ 11. Style of Irregular Shape
+ ---------------------------
+ */ 
 .skew-element {
     transform: skew(0deg, -2deg);	
 }
 
-/* Hidden the element on mobile device */
+
+/* 
+ ---------------------------
+ 12. Hidden The Element on Mobile Device
+ ---------------------------
+ */ 
 
 @media all and (max-width: 768px) {
 	.mobile-ele-hide {
@@ -220,8 +324,11 @@
 	
 }
 
-
-/* Tip Label */
+/* 
+ ---------------------------
+ 13. Tip Label
+ ---------------------------
+ */ 
 .tip-label {
 	font-weight: 100;
 	text-transform: uppercase;
@@ -247,3 +354,75 @@
 	}
 
 }
+
+/* 
+ ---------------------------
+ 14. Image Hover Overlay Effects
+ ---------------------------
+ */ 
+img.imghover-color,
+.imghover-color img {
+	transition: filter .3s cubic-bezier(.445,.05,.55,.95);
+    will-change: filter;
+	
+	&:hover {
+		filter: brightness(120%) hue-rotate(45deg);
+	}
+}
+
+
+
+/* 
+ ---------------------------
+ 15. Position
+ ---------------------------
+ */ 
+/*--- Directions --- */
+[class*='dir-top'],
+[class*='dir-bottom'],
+[class*='dir-left'],
+[class*='dir-right'],
+[class*='dir-center'] {
+    position: absolute !important;
+}
+
+
+/* Don't use `width: 100%` because it is wrong if the parent has padding. */
+.dir-top {
+	top: 0;
+	left: 0;
+	right: 0;
+}
+.dir-bottom {
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+.dir-left {
+	top: 0;
+	bottom: 0;
+	left: 0;
+}
+.dir-right {
+	top: 0;
+	bottom: 0;
+	right: 0;
+}
+
+.dir-top-left {
+	top: 0;
+	left: 0;
+}
+.dir-top-right {
+	top: 0;
+	right: 0;
+}
+.dir-bottom-left {
+	bottom: 0;
+	left: 0;
+}
+.dir-bottom-right {
+	bottom: 0;
+	right: 0;
+}
+

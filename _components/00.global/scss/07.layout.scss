@@ -1,10 +1,19 @@
 /* ====================================================== 
    <!-- Basic Layout Styles -->                                        
 /* ====================================================== */
+/*
+ * 1. Bootstrap 3.x
+ * 2. Material Container
+ * 3. Main Wrapper 
+ * 4. Seamless Grid
+ * 5. Auxiliary Grid System for Inline Elements
+*/
+
+
 
 /* 
  ---------------------------
- 1) Bootstrap 3.x
+ 1. Bootstrap 3.x
  ---------------------------
  */ 
 /* New XL container for Bootstrap 3.x */
@@ -47,7 +56,7 @@
 
 /* 
  ---------------------------
- 2) Material Container
+ 2. Material Container
  ---------------------------
  */ 
 
@@ -115,7 +124,7 @@
 
 /* 
  ---------------------------
- 3) Main Wrapper 
+ 3. Main Wrapper 
  ---------------------------
  */ 
 /* Note: Do not use the "transform" property, otherwise it may affect the internal elements */
@@ -127,7 +136,7 @@
 
 /* 
  ---------------------------
- 4) Seamless Grid
+ 4. Seamless Grid
  ---------------------------
  */ 
 $seamless-grid-pad : 15px;
@@ -349,7 +358,7 @@ $seamless-grid-pad : 15px;
 
 /* 
  ---------------------------
- 5) Auxiliary Grid System for Inline Elements
+ 5. Auxiliary Grid System for Inline Elements
  ---------------------------
  */ 
 

@@ -2,6 +2,18 @@
    <!-- Pagination -->                         
 /* ====================================================== */
 
+/*
+ * 1. Default
+ * 2. Paginate WordPress Posts
+*/
+
+
+
+/* 
+ ---------------------------
+ 1. Default
+ ---------------------------
+ */ 
 .pagination-container {
 	margin-top: 2.84375rem;
 	
@@ -79,8 +91,12 @@
 
 }
 
-/* Paginate WordPress Posts */
 
+/* 
+ ---------------------------
+ 2. Paginate WordPress Posts
+ ---------------------------
+ */ 
 .page-links {
 	margin: 0.875rem 0;
 	font-weight: 600;

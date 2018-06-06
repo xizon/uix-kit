@@ -2,12 +2,28 @@
    <!-- 3rd Party Plugins -->     
 /* ====================================================== */
 
-/* Disqus */
+/*
+ * 1. Disqus
+ * 2. Alobaidi Captcha
+*/
+
+
+/* 
+ ---------------------------
+ 1. Disqus
+ ---------------------------
+ */ 
 #disqus_thread {
     padding-top: 1.75rem;
 }
 
-/* Alobaidi Captcha */
+
+
+/* 
+ ---------------------------
+ 2. Alobaidi Captcha
+ ---------------------------
+ */ 
 .alobaidi-captcha-comment-field {
     margin-left: 0.875rem;
 }

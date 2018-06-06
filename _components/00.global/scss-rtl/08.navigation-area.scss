@@ -5,7 +5,12 @@
 .menu-container:not(.mobile) {
     float: left;
 	
-	/*---- Primary Menu ----*/
+	
+	/* 
+	 ---------------------------
+	 1. Primary Menu
+	 ---------------------------
+	 */ 
 	ul.menu-main {
 	    float: right;
 		
@@ -44,7 +49,11 @@
 	    }
 		
 		
-		/*---- Sub Menu ----*/
+		/* 
+		 ---------------------------
+		 2. Sub Menu
+		 ---------------------------
+		 */ 
 	    ul.sub-menu {
 		    left: auto;
 		    right: 0;
@@ -58,7 +67,11 @@
 
 
 
-	/*---- Dropdown Menu ----*/
+	/* 
+	 ---------------------------
+	 3. Mega/Dropdown Menu
+	 ---------------------------
+	 */ 
 	/* Multi-column */
 
 	li.multi-column > ul li {
@@ -71,8 +84,11 @@
 	    left: 1.159375rem;
 	}	
 	
-
-	/*---- Dropdown Arrow ----*/
+	/* 
+	 ---------------------------
+	 4. Dropdown Arrow
+	 ---------------------------
+	 */ 
 	.nav-arrow {
 	    right: auto;
 	    left: 0.284375rem;

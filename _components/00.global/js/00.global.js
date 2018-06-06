@@ -11,7 +11,8 @@
 
 //Global variables from front pages
 var templateUrl = APP_ROOTPATH.templateUrl,
-	homeUrl     = APP_ROOTPATH.homeUrl;
+	homeUrl     = APP_ROOTPATH.homeUrl,
+	ajaxUrl     = APP_ROOTPATH.ajaxUrl;
 
 //Modify templateUrl as the correct path when local test is enabled
 if ( location.hostname === 'localhost' || location.hostname === '127.0.0.1' ) {

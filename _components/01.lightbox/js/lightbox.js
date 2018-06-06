@@ -22,7 +22,7 @@ App = ( function ( App, $, window, document ) {
 			lbCloseFixedEl  = '.custom-lightbox-close-fixed',
 			$lbContent      = $lbCon.find( '.html' );
 		
-		$( document ).on( 'click', '.custom-lightbox', function() { 
+		$( document ).on( 'click touchstart', '.custom-lightbox', function() { 
 
 			var $this         = $( this ),
 				dataPhoto     = $this.data( 'lb-src' ),

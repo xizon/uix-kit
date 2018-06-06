@@ -21,6 +21,7 @@ App = ( function ( App, $, window, document ) {
 		
 		
 		
+		
 		// Generate one plane geometries mesh to scene
 		//-------------------------------------	
 		var camera,

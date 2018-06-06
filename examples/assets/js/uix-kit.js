@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.6.8
- * ## Last Update         :  June 6, 2018
+ * ## Version             :  1.7.0
+ * ## Last Update         :  June 7, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -28,8 +28,8 @@
     3. Back to Top 
     4. Get all custom attributes of an element like "data-*" 
     5. Navigation 
-    6. Videos 
-    7. Common Height 
+    6. Common Height 
+    7. Videos 
     8. Mega Menu 
     9. Dropdown Categories 
     10. Pagination 
@@ -50,8 +50,8 @@
     25. Dynamic Drop Down List from JSON 
     26. Flexslider 
     27. Form Progress 
-    28. Gallery 
-    29. Form 
+    28. Form 
+    29. Gallery 
     30. Image Shapes 
     31. Custom Core Scripts & Stylesheets 
     32. Custom Lightbox 
@@ -90,7 +90,8 @@
 
 //Global variables from front pages
 var templateUrl = APP_ROOTPATH.templateUrl,
-	homeUrl     = APP_ROOTPATH.homeUrl;
+	homeUrl     = APP_ROOTPATH.homeUrl,
+	ajaxUrl     = APP_ROOTPATH.ajaxUrl;
 
 //Modify templateUrl as the correct path when local test is enabled
 if ( location.hostname === 'localhost' || location.hostname === '127.0.0.1' ) {
@@ -624,7 +625,9 @@ App = ( function ( App, $, window, document ) {
 			
 			//Display cover and play buttons when some mobile device browsers cannot automatically play video
 			if ( $( '#' + coverPlayBtnID ).length == 0 ) {
-				$( '<div id="'+coverPlayBtnID+'"><span class="cover-show" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="cover-play"></span></div>' ).insertBefore( $this );
+				
+				$( '<div id="'+coverPlayBtnID+'" class="web-video-embed-cover"><span class="cover-show" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="cover-play"></span></div>' ).insertBefore( $this );
+				
 				
 	
 				var btnEv = ( Modernizr.touchevents ) ? 'touchstart' : 'click';
@@ -2706,6 +2709,7 @@ App = ( function ( App, $, window, document ) {
 			windowWidth               = $window.width(),
 			windowHeight              = $window.height(),
 			viewRenderer              = '3D-renderer';
+		
 		
 		
 		
@@ -5637,7 +5641,7 @@ App = ( function ( App, $, window, document ) {
 
 				//Display cover and play buttons when some mobile device browsers cannot automatically play video
 				if ( $( '#' + coverPlayBtnID ).length == 0 ) {
-					$( '<div id="'+coverPlayBtnID+'"><span class="cover-show" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="cover-play"></span></div>' ).insertBefore( $this );
+					$( '<div id="'+coverPlayBtnID+'" class="web-video-embed-cover"><span class="cover-show" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="cover-play"></span></div>' ).insertBefore( $this );
 
 
 					var btnEv = ( Modernizr.touchevents ) ? 'touchstart' : 'click';
@@ -6326,7 +6330,7 @@ App = ( function ( App, $, window, document ) {
 
 				//Display cover and play buttons when some mobile device browsers cannot automatically play video
 				if ( $( '#' + coverPlayBtnID ).length == 0 ) {
-					$( '<div id="'+coverPlayBtnID+'"><span class="cover-show" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="cover-play"></span></div>' ).insertBefore( $this );
+					$( '<div id="'+coverPlayBtnID+'" class="web-video-embed-cover"><span class="cover-show" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="cover-play"></span></div>' ).insertBefore( $this );
 
 
 					var btnEv = ( Modernizr.touchevents ) ? 'touchstart' : 'click';
@@ -7202,7 +7206,7 @@ App = ( function ( App, $, window, document ) {
 
 				//Display cover and play buttons when some mobile device browsers cannot automatically play video
 				if ( $( '#' + coverPlayBtnID ).length == 0 ) {
-					$( '<div id="'+coverPlayBtnID+'"><span class="cover-show" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="cover-play"></span></div>' ).insertBefore( $this );
+					$( '<div id="'+coverPlayBtnID+'" class="web-video-embed-cover"><span class="cover-show" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="cover-play"></span></div>' ).insertBefore( $this );
 
 
 					var btnEv = ( Modernizr.touchevents ) ? 'touchstart' : 'click';
@@ -12125,6 +12129,27 @@ App = ( function ( App, $, window, document ) {
  *************************************
  */
 
+App = ( function ( App, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+    
+		
+	    //your code here...
+
+		
+    };
+
+    App.index = {
+        documentReady : documentReady        
+    };
+
+    App.components.documentReady.push( documentReady );
+    return App;
+
+}( App, jQuery, window, document ) );
+
+
 
 
 /* 
@@ -12150,7 +12175,7 @@ App = ( function ( App, $, window, document ) {
 			lbCloseFixedEl  = '.custom-lightbox-close-fixed',
 			$lbContent      = $lbCon.find( '.html' );
 		
-		$( document ).on( 'click', '.custom-lightbox', function() { 
+		$( document ).on( 'click touchstart', '.custom-lightbox', function() { 
 
 			var $this         = $( this ),
 				dataPhoto     = $this.data( 'lb-src' ),
@@ -16746,6 +16771,7 @@ App = ( function ( App, $, window, document ) {
 			
 		
 				$( customControls ).html( $( customControls ).text().replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>") );
+			
 			
 			
 				if( customControls.indexOf( 'fadeInRight' ) >= 0 ) {

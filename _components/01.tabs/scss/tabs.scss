@@ -2,12 +2,19 @@
     <!-- Tabs -->      
 /* ====================================================== */
 
+/*
+ * 1. Tab Normal Effect
+ * 2. Tab Rotation Effect
+*/
+
+
+
 .custom-tabs {
 	
 	
 	/* 
 	 ---------------------------
-	 Tab Normal Effect
+	 1. Tab Normal Effect
 	 ---------------------------
 	 */ 
 	&:not(.rotation) {
@@ -102,7 +109,7 @@
 
 	/* 
 	 ---------------------------
-	 Tab Rotation Effect
+	 2. Tab Rotation Effect
 	 ---------------------------
 	 */ 
 	&.rotation {

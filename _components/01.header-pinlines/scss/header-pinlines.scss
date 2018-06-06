@@ -36,7 +36,29 @@
 		
 		
 	}
-
 	
+	&.text-left {
+		text-align: left;
+	
+		span {
+		
+			&::after {
+				display: none;
+			}	
+
+		}	
+	}
+
+	&.text-right {
+		text-align: right;
+	
+		span {
+		
+			&::before {
+				display: none;
+			}	
+
+		}	
+	}	
 }
 

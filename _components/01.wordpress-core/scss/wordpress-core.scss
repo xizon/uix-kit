@@ -2,6 +2,19 @@
    <!-- WordPress Core -->              
 /* ====================================================== */
 
+/*
+ * 1. General
+ * 2. Text meant only for screen readers.
+ * 3. Galleries
+ * 4. Sticky
+*/
+
+
+/* 
+ ---------------------------
+ 1. General
+ ---------------------------
+ */ 
 .edit-link {
 	display: block;
 	
@@ -84,7 +97,12 @@ a img {
 	}
 }
 
-/* Text meant only for screen readers. */
+
+/* 
+ ---------------------------
+ 2. Text meant only for screen readers.
+ ---------------------------
+ */ 
 
 .screen-reader-text {
 	clip: rect(1px, 1px, 1px, 1px);
@@ -113,7 +131,12 @@ a img {
 	}
 }
 
-/* Galleries */
+
+/* 
+ ---------------------------
+ 3. Galleries
+ ---------------------------
+ */ 
 
 .gallery {
     margin-bottom: 1.4rem;
@@ -180,7 +203,11 @@ a img {
     display: none;
 }
 
-/* other */
+/* 
+ ---------------------------
+ 4. Sticky
+ ---------------------------
+ */ 
 .sticky {
 	opacity: 1;
 }

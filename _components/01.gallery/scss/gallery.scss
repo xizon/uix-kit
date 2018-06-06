@@ -8,20 +8,6 @@
 		position: relative;
 		text-align: left;	
 
-		.link-to {
-			width: 100%;
-			position: absolute;
-			left: 0;
-			z-index: 3;
-			opacity: 0;
-			margin-top: -1rem;
-			/* Vertical Center */
-			top: 50%;
-			transform: translateY(-50%);
-		}
-		&:hover .link-to {
-			opacity: 1;
-		}
 		.cover {
 			position: relative;
 
@@ -38,8 +24,14 @@
 				height: 100%;
 			}
 		}
-		&:hover .cover::before {
-			background: rgba(255, 255, 255, 0.95);
+		&:hover {
+			
+			.cover {
+				&::before {
+					background: rgba(255, 255, 255, 0.95);
+				}
+			}
+			
 		}
 
 		h3 {

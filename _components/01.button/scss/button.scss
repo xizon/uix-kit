@@ -2,9 +2,19 @@
    <!-- Button -->                  
 /* ====================================================== */
 
+/*
+ * 1. Common button styles
+ * 2. Borders
+ * 3. Sizes
+ * 4. Hover Effect
+ * 5. Background
+*/
+
+
+
 /* 
  ---------------------------
- 1) Common button styles
+ 1. Common button styles
  ---------------------------
  */ 
 
@@ -100,6 +110,7 @@
 @media all and (max-width: 768px) {
 	.button {
 		padding: 0.35rem 0.875rem !important;
+		margin: 0.5rem 1.5rem 0.5rem 0;
 	}
 }
 
@@ -128,7 +139,7 @@
 
 /* 
  ---------------------------
- 2) Borders
+ 2. Borders
  ---------------------------
  */ 
 .button-border-thin {
@@ -149,7 +160,7 @@
 
 /* 
  ---------------------------
- 3) Sizes
+ 3. Sizes
  ---------------------------
  */ 
 .button-size-tiny {
@@ -175,7 +186,7 @@
 
 /* 
  ---------------------------
- 4) Hover
+ 4. Hover Effect
  ---------------------------
  */ 
 
@@ -192,7 +203,7 @@
 
 /* 
  ---------------------------
- 5) Background
+ 5. Background
  ---------------------------
  */ 
 .button-bg:hover {

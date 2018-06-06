@@ -2,6 +2,16 @@
     <!-- Form -->                                         
 /* ====================================================== */
 
+/*
+ * 1. Controls
+ * 2. Upload
+ * 3. Group
+ * 4. Custom Select
+ * 5. Custom Radio, Toggle And Checkbox
+*/
+
+
+
 @mixin select-arrow-rtl( $top, $left ){
 	border-left: 0;
 	right: auto;
@@ -11,7 +21,7 @@
 
 /* 
  ---------------------------
- 1) Controls
+ 1. Controls
  ---------------------------
  */ 
 
@@ -210,7 +220,7 @@
 
 /* 
  ---------------------------
- 2) Upload
+ 2. Upload
  ---------------------------
  */
 .controls-file-container {
@@ -222,7 +232,7 @@
 
 /* 
  ---------------------------
- 3) Group
+ 3. Group
  ---------------------------
  */ 
 
@@ -275,7 +285,7 @@
 
 /* 
  ---------------------------
- 4) Custom Select
+ 4. Custom Select
  ---------------------------
  */ 
 .custom-select {
@@ -331,7 +341,7 @@
 
 /* 
  ---------------------------
- 5) Custom Radio, Toggle And Checkbox
+ 5. Custom Radio, Toggle And Checkbox
  ---------------------------
  */
 .custom-radio {

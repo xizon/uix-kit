@@ -62,6 +62,7 @@ App = ( function ( App, $, window, document ) {
 				$( customControls ).html( $( customControls ).text().replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>") );
 			
 			
+			
 				if( customControls.indexOf( 'fadeInRight' ) >= 0 ) {
 					txtEff = anime.timeline({loop: false})
 						  .add({

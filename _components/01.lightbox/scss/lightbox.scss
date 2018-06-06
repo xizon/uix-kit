@@ -43,6 +43,7 @@ $custom-lightbox-radius: 3px;
 		content: "\f067";
 		color: #fff;
 		font-size: 2rem;
+		text-shadow: 0 2px 3px rgba(0,0,0,.3);
 	}	
 }
 
@@ -243,7 +244,16 @@ $custom-lightbox-radius: 3px;
 
 		}
 		
+		
+		 /* Custom content width you want */
 		&.custom {
+			max-width: 70vw;
+			
+			.html {
+				> .lb-box {
+					width: 70vw;
+				}
+			}	
 			
 		}
 
@@ -316,12 +326,19 @@ $custom-lightbox-radius: 3px;
 }
 
 @media all and (max-width: 768px) {
+	
+	.custom-lightbox-close-fixed {
+		right: 15px;
+		
+	}
+	
 	.custom-lightbox-overlay {
 		
 		.lb-container {
 
-			max-width: calc(100vw - 30px);
+			max-width: calc(100% - 30px) !important;
 			margin: 15px auto;
+			
 			
 			.html {
 				> .lb-box {
@@ -334,6 +351,19 @@ $custom-lightbox-radius: 3px;
 
 				}
 				
+			}
+			
+			
+			 /* Custom content width you want */
+			&.custom {
+				max-width: calc(100vw - 30px);
+
+				.html {
+					> .lb-box {
+						width: auto;
+					}
+				}	
+
 			}
 
 		}
@@ -353,6 +383,9 @@ $custom-lightbox-radius: 3px;
 			}	
 
 			.lb-container {
+				
+				/* Prevent closing button position error */
+				overflow: hidden;
 				
 				&.custom {
 					

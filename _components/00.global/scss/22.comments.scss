@@ -2,11 +2,30 @@
    <!-- Comments -->      
 /* ====================================================== */
 
+/*
+ * 1. Comments Wrapper
+ * 2. Highlight Author Comments in WordPress
+ * 3. Nested Comments
+ * 4. Comment Respond
+*/
+
+
+
+/* 
+ ---------------------------
+ 1. Comments Wrapper
+ ---------------------------
+ */ 
 .comments {
 	
 }
 
-/* Highlight Author Comments in WordPress */
+
+/* 
+ ---------------------------
+ 2. Highlight Author Comments in WordPress
+ ---------------------------
+ */ 
 .comment {
 	
 	&.bypostauthor {
@@ -27,8 +46,11 @@
 	
 }
 
-/* Nested comments */
-
+/* 
+ ---------------------------
+ 3. Nested Comments
+ ---------------------------
+ */
 @media all and (max-width: 768px) {
 	.comment .comment {
 	    margin-left: 0;
@@ -101,7 +123,12 @@
 	}
 }
 
-/* WordPress Comment Respond */
+
+/* 
+ ---------------------------
+ 4. Comment Respond
+ ---------------------------
+ */
 .comment-reply-title {
 	/* Same to .entry-section .entry-title  */
 	padding-bottom: 1.75rem;

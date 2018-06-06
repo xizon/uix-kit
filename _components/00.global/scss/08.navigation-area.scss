@@ -2,6 +2,15 @@
    <!-- Navigation Area -->                                    
 /* ====================================================== */
 
+/*
+ * 1. Primary Menu
+ * 2. Sub Menu
+ * 3. Mega/Dropdown Menu 
+ * 4. Dropdown Arrow
+*/
+
+
+
 $nav-font-size: 0.75rem;
 
 .menu-container:not(.mobile) {
@@ -14,7 +23,12 @@ $nav-font-size: 0.75rem;
 		padding-bottom: 0;
 	}
 
-	/*---- Primary Menu ----*/
+	
+	/* 
+	 ---------------------------
+	 1. Primary Menu
+	 ---------------------------
+	 */ 
 	ul.menu-main {
 		float: left;
 		margin: 0; /* Required*/
@@ -101,8 +115,11 @@ $nav-font-size: 0.75rem;
 
 		}
 
-
-		/*---- Sub Menu ----*/
+		/* 
+		 ---------------------------
+		 2. Sub Menu
+		 ---------------------------
+		 */ 
 		ul.sub-menu {
 			top: 100%;
 			left: 0;
@@ -125,7 +142,11 @@ $nav-font-size: 0.75rem;
 	}
 
 
-	/*---- Dropdown Menu ----*/
+	/* 
+	 ---------------------------
+	 3. Mega/Dropdown Menu 
+	 ---------------------------
+	 */ 
 	/* Multi-column */
 	li.multi-column {
 
@@ -218,8 +239,11 @@ $nav-font-size: 0.75rem;
 		display: none;
 	}
 
-
-	/*---- Dropdown Arrow ----*/
+	/* 
+	 ---------------------------
+	 4. Dropdown Arrow
+	 ---------------------------
+	 */ 
 	.nav-arrow {
 		display: block;
 		position: absolute;

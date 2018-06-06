@@ -2,6 +2,17 @@
    <!-- Filterable Navigation -->                 
 /* ====================================================== */
 
+/*
+ * 1. Default Navigation
+ * 2. Responsive Dropdown Navigation
+*/
+
+
+/* 
+ ---------------------------
+ 1. Default Navigation
+ ---------------------------
+ */ 
 .nav-filters {
 	padding: 1.421875rem 0;
 	
@@ -62,7 +73,12 @@
 
 }
 
-/* Responsive Dropdown Nav */
+
+/* 
+ ---------------------------
+ 2. Responsive Dropdown Navigation
+ ---------------------------
+ */ 
 @media all and (max-width: 768px) {
 	
 	.nav-filters.responsive-dropdown {

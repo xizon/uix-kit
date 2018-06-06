@@ -1,9 +1,19 @@
 /* ====================================================== 
    <!-- Sidebar -->            
 /* ====================================================== */
+
+/*
+ * 1. Basic
+ * 2. Calendar Widget
+ * 3. Post List
+ * 4. Post List with Featured Image
+ * 5. Link List
+*/
+
+
 /* 
  ---------------------------
- Basic
+ 1. Basic
  ---------------------------
  */ 
 .sidebar-container {
@@ -37,7 +47,7 @@
 
 /* 
  ---------------------------
- Calendar Widget
+ 2. Calendar Widget
  ---------------------------
  */ 
 .calendar-box {
@@ -86,7 +96,7 @@
 
 /* 
  ---------------------------
- Post List
+ 3. Post List
  ---------------------------
  */ 
 
@@ -98,7 +108,7 @@
 
 /* 
  ---------------------------
- Post List with Featured Image
+ 4. Post List with Featured Image
  ---------------------------
  */ 
 .post-img-list-box {
@@ -197,7 +207,7 @@
 
 /* 
  ---------------------------
- Link List
+ 5. Link List
  ---------------------------
  */ 
 .widget_categories ul, 

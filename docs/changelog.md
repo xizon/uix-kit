@@ -1,5 +1,18 @@
 # Changelog
 
+
+#### = 1.7.0 (June 6, 2018) =
+
+* New: Add a new module "Overlay".
+* New: Add a new module "Section Layout".
+* New: Add a helper class ".dropcap" that you can achieve a drop cap within a text by adding it.
+* New: Add a helper class ".imghover-color" that you can change an image effect.
+* Tweak: Extended Upgraded module "Header Pinlines".
+* Tweak: Extended Upgraded module "Pagination".
+* Tweak: Optimized the display effect of the Custom Lightbox.
+
+
+
 #### = 1.6.8 (June 5, 2018) =
 
 * New: Add a new module "Video PopUp".
@@ -202,7 +215,7 @@
 
 * Fix: Fixed a bug that the width of the "Custom Lightbox" module automatically becomes smaller at the mobile device.
 * New: Add smooth scrolling when clicking an anchor link.
-* New: Extended "Simple Lightbox" module to support ajax asynchronous calls.
+* New: Extended "Custom Lightbox" module to support ajax asynchronous calls.
 
 
 #### = 1.2.2 (April 3, 2018) =

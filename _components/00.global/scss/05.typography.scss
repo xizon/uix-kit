@@ -2,6 +2,21 @@
    <!-- Typography -->            
 /* ====================================================== */
 
+/*
+ * 1. General
+ * 2. Hyperlink
+ * 3. Heading (h1,h2,h3,h4,h5,h6)
+ * 4. Text Effect
+ * 5. Table & List Effect by Default
+ * 6. Drop Cap
+*/
+
+
+/* 
+ ---------------------------
+ 1. General
+ ---------------------------
+ */ 
 a,
 h1, 
 h2, 
@@ -20,7 +35,7 @@ h6,
 
 /* 
  ---------------------------
- Hyperlink
+ 2. Hyperlink
  ---------------------------
  */ 
 a {
@@ -51,7 +66,7 @@ a {
 
 /* 
  ---------------------------
- Heading (h1,h2,h3,h4,h5,h6)
+ 3. Heading (h1,h2,h3,h4,h5,h6)
  ---------------------------
  */ 
 h1, 
@@ -205,7 +220,7 @@ h6 {
 
 /* 
  ---------------------------
-List Normal & Other Text
+ 4. Text Effect
  ---------------------------
  */ 
 .font-normal {
@@ -262,7 +277,11 @@ List Normal & Other Text
 	}
 }
 
-
+/* 
+ ---------------------------
+ 5. Table & List Effect by Default
+ ---------------------------
+ */ 
 /* Compatible with  Uix Shortcodes (WordPress Plugin) */
 .list-normal a:not(.uix-sc-btn), 
 .table-normal a:not(.uix-sc-btn) {
@@ -279,3 +298,21 @@ List Normal & Other Text
 .table-normal a:not(.uix-sc-btn):hover img {
     text-decoration: none;
 }
+
+
+/* 
+ ---------------------------
+ 6. Drop Cap
+ ---------------------------
+ */ 
+.dropcap::first-letter,
+.dropcap > p:first-of-type::first-letter {
+    display: block;
+    margin-right: 10px;
+    float: left;
+    font-size: 3.5rem;
+    line-height: 1;
+    margin-bottom: -2px;
+}
+
+

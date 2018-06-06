@@ -2,10 +2,17 @@
    <!-- Timeline -->     
 /* ====================================================== */
 
+/*
+ * 1. Vertical
+ * 2. Horizontal
+ * 3. Horizontal ( Classic)
+*/
+
+
 
 /* 
  ---------------------------
- 1) Vertical
+ 1. Vertical
  ---------------------------
  */ 
 .list-timeline-container-outer {
@@ -155,7 +162,7 @@
 
 /* 
  ---------------------------
- 2) Horizontal
+ 2. Horizontal
  ---------------------------
  */ 
 $horizontal-item-width: 250px;
@@ -391,7 +398,7 @@ $horizontal-item-width: 250px;
 
 /* 
  ---------------------------
- 3) Horizontal ( Classic)
+ 3. Horizontal ( Classic)
  ---------------------------
  */ 
 

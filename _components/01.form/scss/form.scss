@@ -2,6 +2,17 @@
     <!-- Form -->                                         
 /* ====================================================== */
 
+/*
+ * 1. Controls
+ * 2. Upload
+ * 3. Group
+ * 4. Custom Select
+ * 5. Custom Radio, Toggle And Checkbox
+ * 6. Date Picker (With Jquery UI Widget)
+*/
+
+
+
 $control-text-color: #888;
 $control-sub-color: #dce4e8;
 $control-focus-color: $primary-text-color1;
@@ -37,7 +48,7 @@ $control-focus-bordercolor2: transparent;
 
 /* 
  ---------------------------
- 1) Controls
+ 1. Controls
  ---------------------------
  */ 
 
@@ -531,7 +542,7 @@ $control-focus-bordercolor2: transparent;
 
 /* 
  ---------------------------
- 2) Upload
+ 2. Upload
  ---------------------------
  */ 
 .controls-file-container {
@@ -558,7 +569,7 @@ $control-focus-bordercolor2: transparent;
 
 /* 
  ---------------------------
- 3) Group
+ 3. Group
  ---------------------------
  */ 
 
@@ -657,7 +668,7 @@ $controls-merge-button-width: 20%;
 
 /* 
  ---------------------------
- 4) Custom Select
+ 4. Custom Select
  ---------------------------
  */ 
 .custom-select {
@@ -904,7 +915,7 @@ $controls-merge-button-width: 20%;
 
 /* 
  ---------------------------
- 5) Custom Radio, Toggle And Checkbox
+ 5. Custom Radio, Toggle And Checkbox
  ---------------------------
  */
 .custom-radio {
@@ -1090,7 +1101,7 @@ $controls-merge-button-width: 20%;
 
 /* 
  ---------------------------
- 6) Date Picker (With Jquery UI Widget)
+ 6. Date Picker (With Jquery UI Widget)
  ---------------------------
  */ 
 /* jQuery UI - v1.12.1 - 2016-09-14
