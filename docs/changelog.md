@@ -1,7 +1,14 @@
 # Changelog
 
 
-#### = 1.7.2 (June 7, 2018) =
+
+#### = 1.7.3 (June 7, 2018) =
+
+* Tweak: Extended scripts of reveal animations when you scroll.
+* Tweak: Removed "animate.css" for HTML Structure.
+
+
+#### = 1.7.2 (June 6, 2018) =
 
 * Fix: Fixed an error of Filterable Navigation.
 * New: Add a new module "Overlay".

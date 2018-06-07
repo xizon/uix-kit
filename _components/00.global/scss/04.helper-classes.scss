@@ -18,6 +18,7 @@
  * 13. Tip Label
  * 14. Image Hover Overlay Effects
  * 15. Position
+ * 16. Element Hidden Style
 */
 
 
@@ -424,5 +425,18 @@ img.imghover-color,
 .dir-bottom-right {
 	bottom: 0;
 	right: 0;
+}
+
+
+/* 
+ ---------------------------
+ 16. Element Hidden Style
+ ---------------------------
+ */ 
+.el-transparent {
+	opacity: 0;
+}
+.el-zoom {
+	transform: scale(0);
 }
 

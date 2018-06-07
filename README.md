@@ -2,7 +2,7 @@
 
 
 [![Travis CI](https://api.travis-ci.org/xizon/uix-kit.svg?branch=master)](https://travis-ci.org/xizon/uix-kit/)
-[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=1.7.2&x2=0)](https://www.npmjs.com/package/uix-kit)
+[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=1.7.3&x2=0)](https://www.npmjs.com/package/uix-kit)
 [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
 
 
@@ -159,7 +159,6 @@ http://localhost:8080/examples/
         <!-- Basic  -->
         <link rel="stylesheet" href="assets/css/bootstrap.min.css?ver=3.3.7" media="all"/>
 		<link rel="stylesheet" href="assets/css/video.min.css?ver=5.19" media="all"/>
-		<link rel="stylesheet" href="assets/css/animate.min.css?ver=3.5.2" media="all" />
 		
         <!-- Icons  -->
         <link rel="stylesheet" href="assets/fonts/fontawesome/font-awesome.min.css?ver=4.5" media="all" />  

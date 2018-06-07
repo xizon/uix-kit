@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.7.2
+ * ## Version             :  1.7.3
  * ## Last Update         :  June 7, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -66,12 +66,12 @@
 	TABLE OF CONTENTS
 	---------------------------
 	
-    1. Helper Classes 
-    2. Typography 
+    1. Basic 
+    2. Table 
     3. Bullet List 
-    4. Spacing 
-    5. Basic 
-    6. Table 
+    4. Helper Classes 
+    5. Typography 
+    6. Spacing 
     7. Basic Layout Styles 
     8. Navigation Area 
     9. Header Area 
@@ -119,8 +119,8 @@
     51. Bulleted List 
     52. Maintain Aspect Ratio List 
     53. List of Posts 
-    54. Side by Side List 
-    55. List of Split Posts 
+    54. List of Split Posts 
+    55. Side by Side List 
     56. Side by Side List With Photo 
     57. Fullwidth List of Split 2 
     58. Fullwidth List of Split 
@@ -133,19 +133,18 @@
     65. Periodical Scroll 
     66. Pricing 
     67. Progress Bar 
-    68. Show More Less 
-    69. Services 
-    70. Striking 
-    71. Table Series 
-    72. Tabs 
-    73. Team Focus 
-    74. Source Code 
-    75. Single Post 
+    68. Services 
+    69. Show More Less 
+    70. Single Post 
+    71. Source Code 
+    72. Striking 
+    73. Table Series 
+    74. Tabs 
+    75. Team Focus 
     76. Testimonials Carousel 
     77. Text effect 
     78. Timeline 
     79. ToolTip 
-    80. WordPress Core 
 
 
 
@@ -565,6 +564,7 @@ ol.list-big-numbered.fill-bg li::before,
  * 13. Tip Label
  * 14. Image Hover Overlay Effects
  * 15. Position
+ * 16. Element Hidden Style
 */
 /* 
  ---------------------------
@@ -951,6 +951,19 @@ img.imghover-color:hover,
 .dir-bottom-right {
   bottom: 0;
   right: 0;
+}
+
+/* 
+ ---------------------------
+ 16. Element Hidden Style
+ ---------------------------
+ */
+.el-transparent {
+  opacity: 0;
+}
+
+.el-zoom {
+  transform: scale(0);
 }
 
 /* ====================================================== 
@@ -5054,6 +5067,61 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
+   <!-- Equal-width Divs --> 
+/* ====================================================== */
+/**
+ * Using only CSS, we can make a tabbed navigation whose tabs always
+ * occupy an equal share of the available width. No JS to interrogate
+ * the DOM, no server-side logic to count through items, no inline styles.
+ *
+ */
+.equal-width-divs ul {
+  list-style: none;
+  font-size: 0;
+  /*Fighting the Space Between Inline Block Elements*/
+  display: table;
+  /* [1] */
+  table-layout: fixed;
+  /* [2] */
+  width: 100%;
+  /* [3] */
+}
+
+.equal-width-divs ul li {
+  font-size: 1rem;
+  /*Fighting the Space Between Inline Block Elements*/
+  display: table-cell;
+  /* [4] */
+  box-shadow: 1px 0px 0px 0px #AEAEAE;
+}
+
+.equal-width-divs ul li:last-child {
+  box-shadow: none;
+}
+
+.equal-width-divs ul li span {
+  display: block;
+  font-size: 0.75rem;
+}
+
+@media all and (max-width: 768px) {
+  .equal-width-divs ul {
+    display: block;
+  }
+  .equal-width-divs ul li {
+    display: inline-block;
+    width: 50%;
+    margin-bottom: .5rem;
+  }
+  .equal-width-divs ul li:nth-child(2n+0) {
+    box-shadow: none;
+  }
+  .equal-width-divs ul li span {
+    padding-bottom: 1rem;
+  }
+}
+
+/* ====================================================== 
    <!-- Dropdown Menu --> 
 /* ====================================================== */
 /* Do not use <a> tag */
@@ -5138,58 +5206,80 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   <!-- Equal-width Divs --> 
+   <!-- Features --> 
 /* ====================================================== */
-/**
- * Using only CSS, we can make a tabbed navigation whose tabs always
- * occupy an equal share of the available width. No JS to interrogate
- * the DOM, no server-side logic to count through items, no inline styles.
- *
- */
-.equal-width-divs ul {
-  list-style: none;
-  font-size: 0;
-  /*Fighting the Space Between Inline Block Elements*/
-  display: table;
-  /* [1] */
-  table-layout: fixed;
-  /* [2] */
-  width: 100%;
-  /* [3] */
+.custom-feature {
+  /* Horizontal Icons */
+  /* Vertical Icons */
 }
 
-.equal-width-divs ul li {
-  font-size: 1rem;
-  /*Fighting the Space Between Inline Block Elements*/
+.custom-feature .icon {
+  display: inline-block;
+  width: 4.5rem;
+  height: 4.5rem;
+  line-height: 4.5rem;
+  border: 1px #212121 solid;
+  border-radius: 100%;
+  transition: all 0.3s ease;
+}
+
+.custom-feature .icon i {
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.custom-feature .icon:hover {
+  background: #212121;
+  border-color: #212121;
+}
+
+.custom-feature .icon:hover i {
+  color: #fff;
+}
+
+.custom-feature .icon-side {
+  display: inline-block;
+  width: 3rem;
+  height: 3rem;
+  line-height: 3rem;
+  transition: all 0.3s ease;
+}
+
+.custom-feature .icon-side.sep-col {
   display: table-cell;
-  /* [4] */
-  box-shadow: 1px 0px 0px 0px #AEAEAE;
+  vertical-align: top;
 }
 
-.equal-width-divs ul li:last-child {
-  box-shadow: none;
+.custom-feature .icon-side i {
+  font-size: 1.5rem;
+  margin-right: .36rem;
+  transition: all 0.3s ease;
 }
 
-.equal-width-divs ul li span {
-  display: block;
+.custom-feature .title {
+  font-size: 1.125rem;
+  letter-spacing: 0;
+}
+
+.custom-feature .title:hover i {
+  transform: rotate(30deg);
+}
+
+.custom-feature .desc {
+  margin: 0;
+  padding: 0;
   font-size: 0.75rem;
+  line-height: 1.6;
+  padding: .175em 0 1.2rem;
 }
 
-@media all and (max-width: 768px) {
-  .equal-width-divs ul {
-    display: block;
-  }
-  .equal-width-divs ul li {
-    display: inline-block;
-    width: 50%;
-    margin-bottom: .5rem;
-  }
-  .equal-width-divs ul li:nth-child(2n+0) {
-    box-shadow: none;
-  }
-  .equal-width-divs ul li span {
-    padding-bottom: 1rem;
-  }
+.custom-feature .desc.desc-sep-col {
+  padding-bottom: 1.2rem;
+}
+
+.custom-feature .desc.desc-sep-col.sep-col {
+  display: table-cell;
+  vertical-align: top;
 }
 
 /* ====================================================== 
@@ -5774,83 +5864,6 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 
 .custom-theme-flexslider.custom-parallax-flexslider .custom-theme-slides > .item.right .level-2 {
   transform: translate(50px, -50%);
-}
-
-/* ====================================================== 
-   <!-- Features --> 
-/* ====================================================== */
-.custom-feature {
-  /* Horizontal Icons */
-  /* Vertical Icons */
-}
-
-.custom-feature .icon {
-  display: inline-block;
-  width: 4.5rem;
-  height: 4.5rem;
-  line-height: 4.5rem;
-  border: 1px #212121 solid;
-  border-radius: 100%;
-  transition: all 0.3s ease;
-}
-
-.custom-feature .icon i {
-  font-size: 1.5rem;
-  transition: all 0.3s ease;
-}
-
-.custom-feature .icon:hover {
-  background: #212121;
-  border-color: #212121;
-}
-
-.custom-feature .icon:hover i {
-  color: #fff;
-}
-
-.custom-feature .icon-side {
-  display: inline-block;
-  width: 3rem;
-  height: 3rem;
-  line-height: 3rem;
-  transition: all 0.3s ease;
-}
-
-.custom-feature .icon-side.sep-col {
-  display: table-cell;
-  vertical-align: top;
-}
-
-.custom-feature .icon-side i {
-  font-size: 1.5rem;
-  margin-right: .36rem;
-  transition: all 0.3s ease;
-}
-
-.custom-feature .title {
-  font-size: 1.125rem;
-  letter-spacing: 0;
-}
-
-.custom-feature .title:hover i {
-  transform: rotate(30deg);
-}
-
-.custom-feature .desc {
-  margin: 0;
-  padding: 0;
-  font-size: 0.75rem;
-  line-height: 1.6;
-  padding: .175em 0 1.2rem;
-}
-
-.custom-feature .desc.desc-sep-col {
-  padding-bottom: 1.2rem;
-}
-
-.custom-feature .desc.desc-sep-col.sep-col {
-  display: table-cell;
-  vertical-align: top;
 }
 
 /* ====================================================== 
@@ -12787,7 +12800,10 @@ a img.aligncenter {
     left: 2px;
   }
 }
-ght: 2px;
+80px;
+  }
+  55% {
+    right: 2px;
   }
   100% {
     right: 180px;

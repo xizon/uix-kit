@@ -46,7 +46,6 @@
         <!-- Basic  -->
         <link rel="stylesheet" href="assets/css/bootstrap.min.css?ver=3.3.7" media="all"/>
         <link rel="stylesheet" href="assets/css/video.min.css?ver=5.19" media="all"/>
-		<link rel="stylesheet" href="assets/css/animate.min.css?ver=3.5.2" media="all" />
         
         
         <!-- Icons  -->
@@ -54,11 +53,11 @@
         
        
         <!-- Theme  -->
-        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTUyODM2Mjk3NzUwMA"/>
+        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTUyODM4NjQwNTAyMA"/>
         
         
          <!--[if lt IE 10]>
-           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTUyODM2Mjk3NzUwMA" />
+           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTUyODM4NjQwNTAyMA" />
         <![endif]-->
         
         
@@ -88,7 +87,7 @@
   </head>     
   
      
-  <body class="page">
+  <body class="page theme-white">
   
   
           
@@ -355,45 +354,63 @@
              </div>
         
         </header>
-        <div class="header-inner auto-height"></div><!-- This class "auto-height" is used for seamless connection with float navigation. -->
-      
-     
-       
+
     
         <!-- Scroll Reveal
         ============================================= --> 
-        <section class="space-sm height-100 scroll-reveal" style="background:#D08D8E">
+        <section class="space-sm height-50 el-transparent" data-uix-anim='{"from":{"opacity":0,"x":100},"to":{"opacity":1,"x":0},"ease":"Power2.easeOut","duration":0.8,"delay":0,"infinite":false}' style="background: #cb60b3; background: linear-gradient(to bottom, #cb60b3 0%,#ad1283 100%);">
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-                        <h1>Scroll Reveal Text</h1>
+                        <h3>Moving the element when going left</h3>
                     </div>
                 </div>
             </div>
         </section> 
         
-        <section class="space-sm height-100 scroll-reveal" style="background:#DDE997">
+        <section class="space-sm height-50 el-transparent" data-uix-anim='{"from":{"opacity":0,"scale":0.5,"transform":"translateX(50px) rotate(30deg)"},"to":{"opacity":1,"scale":1,"transform":"translateX(0) rotate(0deg)"},"ease":"Power2.easeOut","duration":0.8,"delay":0.5,"infinite":false}' style="background: #d2ff52; background: linear-gradient(to bottom, #d2ff52 0%,#91e842 100%);">
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-                        <h1>Scroll Reveal Text</h1>
+                        <h3>Flipping the element when going left</h3>
                     </div>
                 </div>
             </div>
         </section>
         
-        <section class="space-sm height-100 scroll-reveal" style="background:#A5DCDE">
+        <section class="space-sm height-50 el-transparent" data-uix-anim='{"from":{"opacity":0,"y":150},"to":{"opacity":1,"y":0},"ease":"Power2.easeOut","duration":0.8,"delay":0,"infinite":true}' style="background: #ffb76b; background: linear-gradient(to bottom, #ffb76b 0%,#ff7f04 100%);">
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-                        <h1>Scroll Reveal Text</h1>
+                        <h3>Infinite loop animation</h3>
                     </div>
                 </div>
             </div>
         </section>
     
     
+        <section class="space-sm height-50 el-transparent" data-uix-anim='{"from":{"opacity":0,"y":150},"to":{"opacity":1,"y":0},"ease":"Power2.easeOut","duration":0.8,"delay":0,"infinite":false}' style="background: #f0b7a1; background: linear-gradient(to bottom, #f0b7a1 0%,#8c3310 100%);">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h3>Moving the element when going top</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+           
+           
     
+        <section class="space-sm height-50 el-zoom" data-uix-anim='{"from":{"scale":0},"to":{"scale":1},"ease":"Power2.easeOut","duration":0.8,"delay":0,"infinite":false}' style="background: #b5bdc8; background: linear-gradient(to bottom, #b5bdc8 0%,#28343b 100%);">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h3>Scale effect</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+              
             
             
                 <!-- Footer
@@ -457,14 +474,14 @@
 	============================================= -->
 	
 	<script>
-		var REVISION     = "1.7.2",
+		var REVISION     = "1.7.3",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
 				"homeUrl"     : "",  //Eg. https://uiux.cc
 				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
 			};
     </script>  
-    <script src="assets/js/uix-kit.min.js?ver=MTUyODM2Mjk3NzUwMA"></script>
+    <script src="assets/js/uix-kit.min.js?ver=MTUyODM4NjQwNTAyMA"></script>
 
 
 
