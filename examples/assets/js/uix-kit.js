@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.7.0
+ * ## Version             :  1.7.1
  * ## Last Update         :  June 7, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -23,34 +23,34 @@
 	---------------------------
 	
 	
-	1. Header 
-    2. Loader 
+	1. Loader 
+    2. Header 
     3. Back to Top 
     4. Get all custom attributes of an element like "data-*" 
     5. Navigation 
-    6. Common Height 
-    7. Videos 
+    6. Videos 
+    7. Common Height 
     8. Mega Menu 
     9. Dropdown Categories 
-    10. Pagination 
-    11. Specify a background image 
+    10. Specify a background image 
+    11. Pagination 
     12. 3D Background 
     13. 3D Background 2 
     14. 3D Background 2 
     15. 3D Carousel 
-    16. 3D Model 
-    17. 3D Pages 
+    16. 3D Pages 
+    17. 3D Model 
     18. 3D Particle Effect 
-    19. Accordion 
-    20. Accordion Background Images 
+    19. Accordion Background Images 
+    20. Accordion 
     21. Advanced Content Slider 
-    22. Advanced Slider (Special Effects) 
-    23. Advanced Slider (Basic) 
-    24. Counter 
-    25. Dynamic Drop Down List from JSON 
+    22. Advanced Slider (Basic) 
+    23. Counter 
+    24. Dynamic Drop Down List from JSON 
+    25. Advanced Slider (Special Effects) 
     26. Flexslider 
-    27. Form Progress 
-    28. Form 
+    27. Form 
+    28. Form Progress 
     29. Gallery 
     30. Image Shapes 
     31. Custom Core Scripts & Stylesheets 
@@ -72,9 +72,9 @@
     47. Rotating Elements 
     48. Scroll Reveal 
     49. Show More Less 
-    50. Smooth Scrolling When Clicking An Anchor Link 
+    50. Sticky Elements 
     51. Source Code 
-    52. Sticky Elements 
+    52. Smooth Scrolling When Clicking An Anchor Link 
     53. Tabs 
     54. Team Focus 
     55. Testimonials Carousel 
@@ -1461,30 +1461,69 @@ App = ( function ( App, $, window, document ) {
     
     var documentReady = function( $ ) {
 
-		var $window                   = $( window ),
-			windowWidth               = $window.width(),
-			windowHeight              = $window.height();
-		
-		
-		
 		//grab each 3dAnimate element and pass it into the animate function along with the config data
 		$( '[data-3d-animate]' ).each( function( index, element ) {
 			var a = $( element ).data( '3d-animate' );
-			animate3dElement( a[0], a[1], element );
+			
+			if ( Object.prototype.toString.call( a ) =='[object Array]' ) {
+				animate3dMultiElement( a[0], a[1], element );
+			} else {
+				animate3dElement( a, $( this ) );
+			}
+			
+			
 		});
 		
-
-		
-		
+	
 		/*
 		 * Sets an animation for each element
+		 *
+		 * @param  {number} base           - Base offset value.
+		 * @param  {object} element        - An HTML element.
+		 * @return {void}                  - The constructor.
+		 */
+		function animate3dElement( base, element ) {
+
+			var $el     = element,
+				w       = $( window ).width(),
+				h       = $( window ).height();
+
+			$( window ).on( 'mousemove touchmove', function( e ) {
+				var offsetX          = 0.5 - e.pageX / w, // cursor X
+					offsetY          = 0.5 - e.pageY / h, // cursor Y
+					dy               = e.pageY - h / 2, // poster center vert.
+					dx               = e.pageX - w / 2, // poster center hor.
+					theta            = Math.atan2(dy, dx), // angle b/w cursor and poster center in RAD
+					angle            = theta * 180 / Math.PI - 90, // convert rad to => degrees
+					offsetEl         = base,
+					transformEl      = 'translateY(' + -offsetX * offsetEl + 'px) rotateX(' + (-offsetY * offsetEl) + 'deg) rotateY(' + (offsetX * (offsetEl * 2)) + 'deg)'; // poster transform
+
+				// get angle
+				if ( angle < 0 ) {
+					angle = angle + 360;
+				}
+
+
+				// poster transform
+				$el.css({
+					'transform' : transformEl  
+				});
+
+			});
+
+	
+		}
+			
+		
+		/*
+		 * Sets an animation with parallax for each element
 		 *
 		 * @param  {number} base           - Base offset value.
 		 * @param  {number} multiple       - The power of target number.
 		 * @param  {object} element        - An HTML element.
 		 * @return {void}                  - The constructor.
 		 */
-		function animate3dElement( base, multiple, element ) {
+		function animate3dMultiElement( base, multiple, element ) {
 
 			//get the specs of the element
 			var divOffset = $( element ).offset(),

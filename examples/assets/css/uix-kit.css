@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.7.0
+ * ## Version             :  1.7.1
  * ## Last Update         :  June 7, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -16,14 +16,6 @@
  * ## Compatible Browsers :  IE9, IE10, IE11, Firefox, Safari, Opera, Chrome, Edge
  * ## Released under the MIT license.
  */
-
-/* ====================================================== 
-    <!-- 3D Background -->  
-/* ====================================================== */
-.html3D-bg {
-  /* Require more than 500, compatible firefox height */
-    perspective: 700px;
-}
 
 /*
 
@@ -75,11 +67,11 @@
 	---------------------------
 	
     1. Basic 
-    2. Bullet List 
-    3. Table 
+    2. Table 
+    3. Bullet List 
     4. Helper Classes 
-    5. Spacing 
-    6. Typography 
+    5. Typography 
+    6. Spacing 
     7. Basic Layout Styles 
     8. Navigation Area 
     9. Header Area 
@@ -88,8 +80,8 @@
     12. Video 
     13. Back to Top 
     14. Loader 
-    15. Pagination 
-    16. Social Media Icons 
+    15. Social Media Icons 
+    16. Pagination 
     17. Filterable Navigation 
     18. Sidebar 
     19. Search 
@@ -121,9 +113,9 @@
     45. Gallery 
     46. Header Pinlines 
     47. Image Shapes 
-    48. Cutom Light Box 
-    49. Brands List 
-    50. Custom Core Scripts & Stylesheets 
+    48. Custom Core Scripts & Stylesheets 
+    49. Cutom Light Box 
+    50. Brands List 
     51. Bulleted List 
     52. Maintain Aspect Ratio List 
     53. List of Posts 
@@ -137,25 +129,24 @@
     61. Mouse Animation Scroll 
     62. Multiple Items Carousel 
     63. Overlay 
-    64. Overlay 
-    65. Parallax 
-    66. Periodical Scroll 
-    67. Pricing 
-    68. Progress Bar 
-    69. Services 
-    70. Show More Less 
-    71. Single Post 
-    72. Source Code 
-    73. Striking 
-    74. Table Series 
-    75. Tabs 
-    76. Team Focus 
-    77. Testimonials Carousel 
-    78. Text effect 
-    79. Timeline 
-    80. ToolTip 
-    81. WordPress Core 
-    82. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    64. Parallax 
+    65. Periodical Scroll 
+    66. Pricing 
+    67. Progress Bar 
+    68. Services 
+    69. Show More Less 
+    70. Single Post 
+    71. Source Code 
+    72. Striking 
+    73. Table Series 
+    74. Tabs 
+    75. Team Focus 
+    76. Testimonials Carousel 
+    77. Text effect 
+    78. Timeline 
+    79. ToolTip 
+    80. WordPress Core 
+    81. Ajax Page Loader (Loading A Page via Ajax Into Div)  
 
 
 
@@ -973,6 +964,7 @@ img.imghover-color:hover,
  * 4. Text Effect
  * 5. Table & List Effect by Default
  * 6. Drop Cap
+ * 7. Vertical Text
 */
 /* 
  ---------------------------
@@ -1144,15 +1136,15 @@ h6 {
 
 @media all and (max-width: 480px) {
   h1 {
-    font-size: 1.25rem;
+    font-size: 2.125rem;
     line-height: 1.38461538462;
   }
   h2 {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     line-height: 1.28571428571;
   }
   h3 {
-    font-size: 1.25rem;
+    font-size: 1.375rem;
     line-height: 1.5;
   }
   .h1 {
@@ -1262,6 +1254,30 @@ h6 {
   font-size: 3.5rem;
   line-height: 1;
   margin-bottom: -2px;
+}
+
+/* 
+ ---------------------------
+ 7. Vertical Text
+ ---------------------------
+ */
+.vertical-text {
+  /* Defines the orientation of the text characters in a line.  */
+}
+
+.vertical-text:not(.characters-line) {
+  transform: rotate(90deg);
+  transform-origin: left top 0;
+  line-height: 0;
+  /* Fix the problem of left-leaning text after rotation */
+}
+
+.vertical-text.characters-line {
+  width: 1px;
+  word-wrap: break-word;
+  line-height: 1;
+  white-space: pre-wrap;
+  /* this is for displaying whitespaces including Firefox */
 }
 
 /* ====================================================== 
@@ -3583,6 +3599,14 @@ ul.entry-meta {
 
 .custom-sidefixed-menu li.active span {
   font-weight: bold;
+}
+
+/* ====================================================== 
+    <!-- 3D Background -->  
+/* ====================================================== */
+.html3D-bg {
+  /* Require more than 500, compatible firefox height */
+  perspective: 700px;
 }
 
 /* ====================================================== 
@@ -11722,6 +11746,85 @@ dl.list-side-by-side::after {
 }
 
 /* ====================================================== 
+   <!-- Team Focus --> 
+/* ====================================================== */
+.custom-team-focus-info {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 12;
+  width: 300px;
+  padding-left: 2rem;
+  cursor: pointer;
+  opacity: 0;
+  display: none;
+}
+
+.custom-team-focus-info h4 em {
+  display: block;
+  font-size: 0.75rem !important;
+}
+
+.custom-team-focus-info h4 span {
+  display: block;
+}
+
+.custom-team-focus-info h4::after {
+  content: '';
+  display: block;
+  height: 3px;
+  width: 35px;
+  background: #EC5E79;
+  margin: .5rem 0;
+}
+
+.custom-team-focus-mask {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 11;
+  content: '';
+  width: 100vw;
+  height: 100vh;
+  background-color: transparent;
+  display: none;
+}
+
+.custom-team-focus {
+  position: relative;
+  z-index: 10;
+}
+
+.custom-team-focus > div {
+  float: left;
+  cursor: pointer;
+  z-index: 4;
+  text-align: center;
+}
+
+.custom-team-focus > div img {
+  width: 90%;
+  border-radius: 100%;
+}
+
+.custom-team-focus > div.focus {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 100px;
+  transform: translateX(-50%);
+  z-index: 5;
+  margin-left: -300px;
+}
+
+.custom-team-focus > div.focus img {
+  transform: scale(1.3);
+  box-shadow: 0 31px 32px 0 #cbdfee;
+}
+
+/* ====================================================== 
    <!-- Testimonials Carousel -->  
 /* ====================================================== */
 .custom-testimonials-count {
@@ -11823,85 +11926,6 @@ dl.list-side-by-side::after {
 
 .slides-custom-control li.flex-active {
   background: #EC5E79;
-}
-
-/* ====================================================== 
-   <!-- Team Focus --> 
-/* ====================================================== */
-.custom-team-focus-info {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 12;
-  width: 300px;
-  padding-left: 2rem;
-  cursor: pointer;
-  opacity: 0;
-  display: none;
-}
-
-.custom-team-focus-info h4 em {
-  display: block;
-  font-size: 0.75rem !important;
-}
-
-.custom-team-focus-info h4 span {
-  display: block;
-}
-
-.custom-team-focus-info h4::after {
-  content: '';
-  display: block;
-  height: 3px;
-  width: 35px;
-  background: #EC5E79;
-  margin: .5rem 0;
-}
-
-.custom-team-focus-mask {
-  display: block;
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 11;
-  content: '';
-  width: 100vw;
-  height: 100vh;
-  background-color: transparent;
-  display: none;
-}
-
-.custom-team-focus {
-  position: relative;
-  z-index: 10;
-}
-
-.custom-team-focus > div {
-  float: left;
-  cursor: pointer;
-  z-index: 4;
-  text-align: center;
-}
-
-.custom-team-focus > div img {
-  width: 90%;
-  border-radius: 100%;
-}
-
-.custom-team-focus > div.focus {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  height: 100px;
-  transform: translateX(-50%);
-  z-index: 5;
-  margin-left: -300px;
-}
-
-.custom-team-focus > div.focus img {
-  transform: scale(1.3);
-  box-shadow: 0 31px 32px 0 #cbdfee;
 }
 
 /* ====================================================== 

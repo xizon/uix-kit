@@ -8,30 +8,69 @@ App = ( function ( App, $, window, document ) {
     
     var documentReady = function( $ ) {
 
-		var $window                   = $( window ),
-			windowWidth               = $window.width(),
-			windowHeight              = $window.height();
-		
-		
-		
 		//grab each 3dAnimate element and pass it into the animate function along with the config data
 		$( '[data-3d-animate]' ).each( function( index, element ) {
 			var a = $( element ).data( '3d-animate' );
-			animate3dElement( a[0], a[1], element );
+			
+			if ( Object.prototype.toString.call( a ) =='[object Array]' ) {
+				animate3dMultiElement( a[0], a[1], element );
+			} else {
+				animate3dElement( a, $( this ) );
+			}
+			
+			
 		});
 		
-
-		
-		
+	
 		/*
 		 * Sets an animation for each element
+		 *
+		 * @param  {number} base           - Base offset value.
+		 * @param  {object} element        - An HTML element.
+		 * @return {void}                  - The constructor.
+		 */
+		function animate3dElement( base, element ) {
+
+			var $el     = element,
+				w       = $( window ).width(),
+				h       = $( window ).height();
+
+			$( window ).on( 'mousemove touchmove', function( e ) {
+				var offsetX          = 0.5 - e.pageX / w, // cursor X
+					offsetY          = 0.5 - e.pageY / h, // cursor Y
+					dy               = e.pageY - h / 2, // poster center vert.
+					dx               = e.pageX - w / 2, // poster center hor.
+					theta            = Math.atan2(dy, dx), // angle b/w cursor and poster center in RAD
+					angle            = theta * 180 / Math.PI - 90, // convert rad to => degrees
+					offsetEl         = base,
+					transformEl      = 'translateY(' + -offsetX * offsetEl + 'px) rotateX(' + (-offsetY * offsetEl) + 'deg) rotateY(' + (offsetX * (offsetEl * 2)) + 'deg)'; // poster transform
+
+				// get angle
+				if ( angle < 0 ) {
+					angle = angle + 360;
+				}
+
+
+				// poster transform
+				$el.css({
+					'transform' : transformEl  
+				});
+
+			});
+
+	
+		}
+			
+		
+		/*
+		 * Sets an animation with parallax for each element
 		 *
 		 * @param  {number} base           - Base offset value.
 		 * @param  {number} multiple       - The power of target number.
 		 * @param  {object} element        - An HTML element.
 		 * @return {void}                  - The constructor.
 		 */
-		function animate3dElement( base, multiple, element ) {
+		function animate3dMultiElement( base, multiple, element ) {
 
 			//get the specs of the element
 			var divOffset = $( element ).offset(),

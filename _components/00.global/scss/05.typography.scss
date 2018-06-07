@@ -9,6 +9,7 @@
  * 4. Text Effect
  * 5. Table & List Effect by Default
  * 6. Drop Cap
+ * 7. Vertical Text
 */
 
 
@@ -192,15 +193,15 @@ h6 {
 
 @media all and (max-width: 480px) {
 	h1 {
-		font-size: #{$font-size-h1*0.35714285714286};
+		font-size: #{$font-size-h1*0.60714285714286};
 		line-height: 1.38461538462;
 	}
 	h2 {
-		font-size: #{$font-size-h2*0.6};
+		font-size: #{$font-size-h2*0.7};
 		line-height: 1.28571428571;
 	}
 	h3 {
-		font-size: #{$font-size-h3*0.71428571428571};
+		font-size: #{$font-size-h3*0.78571428571429};
 		line-height: 1.5;
 	}
 	.h1 {
@@ -315,4 +316,26 @@ h6 {
     margin-bottom: -2px;
 }
 
+/* 
+ ---------------------------
+ 7. Vertical Text
+ ---------------------------
+ */ 
+.vertical-text {
+
+	&:not(.characters-line) {
+		transform: rotate(90deg);
+		transform-origin: left top 0;
+		line-height: 0;/* Fix the problem of left-leaning text after rotation */
+	
+	}
+	
+	/* Defines the orientation of the text characters in a line.  */
+	&.characters-line {
+		width: 1px;
+		word-wrap: break-word;
+		line-height: 1;
+		white-space: pre-wrap;/* this is for displaying whitespaces including Firefox */
+	}
+}
 

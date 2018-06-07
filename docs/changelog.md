@@ -1,14 +1,17 @@
 # Changelog
 
 
-#### = 1.7.0 (June 6, 2018) =
+#### = 1.7.1 (June 7, 2018) =
 
 * New: Add a new module "Overlay".
 * New: Add a new module "Section Layout".
 * New: Add a helper class ".dropcap" that you can achieve a drop cap within a text by adding it.
 * New: Add a helper class ".imghover-color" that you can change an image effect.
+* New: Add a helper class ".vertical-text" to display element text in a vertical fashion.  
+* Tweak: Optimized font-size of Heading for mobile devices.
 * Tweak: Extended Upgraded module "Header Pinlines".
 * Tweak: Extended Upgraded module "Pagination".
+* Tweak: Extended Upgraded module "3D Background".
 * Tweak: Optimized the display effect of the Custom Lightbox.
 
 
