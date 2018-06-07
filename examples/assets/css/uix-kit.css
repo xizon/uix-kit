@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.7.1
+ * ## Version             :  1.7.2
  * ## Last Update         :  June 7, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -66,12 +66,12 @@
 	TABLE OF CONTENTS
 	---------------------------
 	
-    1. Basic 
-    2. Table 
+    1. Helper Classes 
+    2. Typography 
     3. Bullet List 
-    4. Helper Classes 
-    5. Typography 
-    6. Spacing 
+    4. Spacing 
+    5. Basic 
+    6. Table 
     7. Basic Layout Styles 
     8. Navigation Area 
     9. Header Area 
@@ -119,8 +119,8 @@
     51. Bulleted List 
     52. Maintain Aspect Ratio List 
     53. List of Posts 
-    54. List of Split Posts 
-    55. Side by Side List 
+    54. Side by Side List 
+    55. List of Split Posts 
     56. Side by Side List With Photo 
     57. Fullwidth List of Split 2 
     58. Fullwidth List of Split 
@@ -133,20 +133,19 @@
     65. Periodical Scroll 
     66. Pricing 
     67. Progress Bar 
-    68. Services 
-    69. Show More Less 
-    70. Single Post 
-    71. Source Code 
-    72. Striking 
-    73. Table Series 
-    74. Tabs 
-    75. Team Focus 
+    68. Show More Less 
+    69. Services 
+    70. Striking 
+    71. Table Series 
+    72. Tabs 
+    73. Team Focus 
+    74. Source Code 
+    75. Single Post 
     76. Testimonials Carousel 
     77. Text effect 
     78. Timeline 
     79. ToolTip 
     80. WordPress Core 
-    81. Ajax Page Loader (Loading A Page via Ajax Into Div)  
 
 
 
@@ -2846,7 +2845,6 @@ section.site-google-map,
 }
 
 .nav-filters ul li {
-  font-style: italic;
   display: inline-block;
   transition: 0.2s linear;
   margin-right: 0.203125rem;
@@ -2857,7 +2855,7 @@ section.site-google-map,
 
 .nav-filters ul li::after {
   content: '/';
-  margin-left: 0.203125rem;
+  margin-left: 0.5rem;
   opacity: 0.5;
 }
 
@@ -2869,7 +2867,7 @@ section.site-google-map,
   display: none;
 }
 
-.nav-filters ul li:hover, .nav-filters ul li.active, .nav-filters ul li.current-cat {
+.nav-filters ul li.active, .nav-filters ul li.current-cat {
   opacity: 1;
 }
 
@@ -2881,10 +2879,6 @@ section.site-google-map,
   display: none;
   background: #212121;
   color: #fff;
-}
-
-.nav-filters.responsive-dropdown a {
-  display: block;
 }
 
 /* 
@@ -2913,6 +2907,7 @@ section.site-google-map,
     display: block;
     width: 100%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    text-align: left;
   }
   .nav-filters.responsive-dropdown li:not(:last-child) {
     margin-right: 0;
@@ -2920,6 +2915,21 @@ section.site-google-map,
   .nav-filters.responsive-dropdown li:not(:last-child)::after {
     content: '';
     margin-left: 0;
+  }
+  .nav-filters.responsive-dropdown li a {
+    display: block;
+    position: relative;
+    text-indent: 1rem;
+  }
+  .nav-filters.responsive-dropdown li a::after {
+    font-family: 'FontAwesome';
+    content: "\f105";
+    font-size: 1rem;
+    float: right;
+    position: absolute;
+    right: .5rem;
+    top: 50%;
+    transform: translateY(-50%);
   }
 }
 
@@ -5183,83 +5193,6 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   <!-- Features --> 
-/* ====================================================== */
-.custom-feature {
-  /* Horizontal Icons */
-  /* Vertical Icons */
-}
-
-.custom-feature .icon {
-  display: inline-block;
-  width: 4.5rem;
-  height: 4.5rem;
-  line-height: 4.5rem;
-  border: 1px #212121 solid;
-  border-radius: 100%;
-  transition: all 0.3s ease;
-}
-
-.custom-feature .icon i {
-  font-size: 1.5rem;
-  transition: all 0.3s ease;
-}
-
-.custom-feature .icon:hover {
-  background: #212121;
-  border-color: #212121;
-}
-
-.custom-feature .icon:hover i {
-  color: #fff;
-}
-
-.custom-feature .icon-side {
-  display: inline-block;
-  width: 3rem;
-  height: 3rem;
-  line-height: 3rem;
-  transition: all 0.3s ease;
-}
-
-.custom-feature .icon-side.sep-col {
-  display: table-cell;
-  vertical-align: top;
-}
-
-.custom-feature .icon-side i {
-  font-size: 1.5rem;
-  margin-right: .36rem;
-  transition: all 0.3s ease;
-}
-
-.custom-feature .title {
-  font-size: 1.125rem;
-  letter-spacing: 0;
-}
-
-.custom-feature .title:hover i {
-  transform: rotate(30deg);
-}
-
-.custom-feature .desc {
-  margin: 0;
-  padding: 0;
-  font-size: 0.75rem;
-  line-height: 1.6;
-  padding: .175em 0 1.2rem;
-}
-
-.custom-feature .desc.desc-sep-col {
-  padding-bottom: 1.2rem;
-}
-
-.custom-feature .desc.desc-sep-col.sep-col {
-  display: table-cell;
-  vertical-align: top;
-}
-
-/* ====================================================== 
     <!-- Flexslider -->  
 /* ====================================================== */
 /* 
@@ -5841,6 +5774,83 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 
 .custom-theme-flexslider.custom-parallax-flexslider .custom-theme-slides > .item.right .level-2 {
   transform: translate(50px, -50%);
+}
+
+/* ====================================================== 
+   <!-- Features --> 
+/* ====================================================== */
+.custom-feature {
+  /* Horizontal Icons */
+  /* Vertical Icons */
+}
+
+.custom-feature .icon {
+  display: inline-block;
+  width: 4.5rem;
+  height: 4.5rem;
+  line-height: 4.5rem;
+  border: 1px #212121 solid;
+  border-radius: 100%;
+  transition: all 0.3s ease;
+}
+
+.custom-feature .icon i {
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.custom-feature .icon:hover {
+  background: #212121;
+  border-color: #212121;
+}
+
+.custom-feature .icon:hover i {
+  color: #fff;
+}
+
+.custom-feature .icon-side {
+  display: inline-block;
+  width: 3rem;
+  height: 3rem;
+  line-height: 3rem;
+  transition: all 0.3s ease;
+}
+
+.custom-feature .icon-side.sep-col {
+  display: table-cell;
+  vertical-align: top;
+}
+
+.custom-feature .icon-side i {
+  font-size: 1.5rem;
+  margin-right: .36rem;
+  transition: all 0.3s ease;
+}
+
+.custom-feature .title {
+  font-size: 1.125rem;
+  letter-spacing: 0;
+}
+
+.custom-feature .title:hover i {
+  transform: rotate(30deg);
+}
+
+.custom-feature .desc {
+  margin: 0;
+  padding: 0;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  padding: .175em 0 1.2rem;
+}
+
+.custom-feature .desc.desc-sep-col {
+  padding-bottom: 1.2rem;
+}
+
+.custom-feature .desc.desc-sep-col.sep-col {
+  display: table-cell;
+  vertical-align: top;
 }
 
 /* ====================================================== 
@@ -12771,6 +12781,13 @@ a img.aligncenter {
   }
   55% {
     right: 2px;
+  }
+  100% {
+    right: 180px;
+    left: 2px;
+  }
+}
+ght: 2px;
   }
   100% {
     right: 180px;

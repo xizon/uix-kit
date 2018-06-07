@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.7.1
+ * ## Version             :  1.7.2
  * ## Last Update         :  June 7, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -23,8 +23,8 @@
 	---------------------------
 	
 	
-	1. Loader 
-    2. Header 
+	1. Header 
+    2. Loader 
     3. Back to Top 
     4. Get all custom attributes of an element like "data-*" 
     5. Navigation 
@@ -32,22 +32,22 @@
     7. Common Height 
     8. Mega Menu 
     9. Dropdown Categories 
-    10. Specify a background image 
-    11. Pagination 
+    10. Pagination 
+    11. Specify a background image 
     12. 3D Background 
     13. 3D Background 2 
     14. 3D Background 2 
     15. 3D Carousel 
-    16. 3D Pages 
-    17. 3D Model 
+    16. 3D Model 
+    17. 3D Pages 
     18. 3D Particle Effect 
-    19. Accordion Background Images 
-    20. Accordion 
+    19. Accordion 
+    20. Accordion Background Images 
     21. Advanced Content Slider 
-    22. Advanced Slider (Basic) 
-    23. Counter 
-    24. Dynamic Drop Down List from JSON 
-    25. Advanced Slider (Special Effects) 
+    22. Advanced Slider (Special Effects) 
+    23. Advanced Slider (Basic) 
+    24. Counter 
+    25. Dynamic Drop Down List from JSON 
     26. Flexslider 
     27. Form 
     28. Form Progress 
@@ -72,9 +72,9 @@
     47. Rotating Elements 
     48. Scroll Reveal 
     49. Show More Less 
-    50. Sticky Elements 
+    50. Smooth Scrolling When Clicking An Anchor Link 
     51. Source Code 
-    52. Smooth Scrolling When Clicking An Anchor Link 
+    52. Sticky Elements 
     53. Tabs 
     54. Team Focus 
     55. Testimonials Carousel 
@@ -82,7 +82,6 @@
     57. Timeline 
     58. Ajax Page Loader (Loading A Page via Ajax Into Div)  
     59. GSAP Plugins 
-    60. Three.js Plugins 
 
 
 */
@@ -2144,314 +2143,6 @@ App = ( function ( App, $, window, document ) {
 
 
 
-
-/* 
- *************************************
- * <!-- 3D Carousel -->
- *************************************
- */
-App = ( function ( App, $, window, document ) {
-    'use strict';
-   
-   
-    var documentReady = function( $ ) {
-
-		$( '.custom-carousel-3d' ).each( function() {
-			var $this             = $( this ),
-				dataTiming        = $this.data( 'timing' ),
-				dataPrevBtn       = $this.data( 'prev-btn' ),
-				dataNextBtn       = $this.data( 'next-btn' ),
-				dataDraggable     = $this.data( 'draggable' ),
-			    autoSwap          = null,
-				$wrapper          = $this.find( '> ul' ),
-				$items            = $wrapper.find( '> li' ),
-				items             = [],
-				startItem         = 1,
-				position          = 0,
-				itemCount         = $items.length,
-				leftpos           = itemCount,
-				resetCount        = itemCount;
-
-			if( typeof dataTiming === typeof undefined ) dataTiming = 5000;
-			if( typeof dataPrevBtn === typeof undefined ) dataPrevBtn = ".my-carousel-3d-prev";
-			if( typeof dataNextBtn === typeof undefined ) dataNextBtn = ".my-carousel-3d-next";
-			if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
-			
-
-			//Avoid problems caused by insufficient quantity
-			//-------------------------------------		
-			if ( itemCount == 3 ) {
-				var $clone3 = $items.eq(1).clone();
-				$items.last().after( $clone3 );
-			}
-			
-			if ( itemCount == 2 ) {
-				var $clone2_1 = $items.eq(0).clone(),
-					$clone2_2 = $items.eq(1).clone();
-				$items.last().after( [$clone2_1, $clone2_2 ] );
-			}
-			
-			if ( itemCount == 1 ) {
-				var $clone1_1 = $items.eq(0).clone(),
-					$clone1_2 = $items.eq(0).clone(),
-					$clone1_3 = $items.eq(0).clone();
-					
-				$items.last().after( [$clone1_1, $clone1_2, $clone1_3 ] );
-			}		
-			
-
-			//New objects of items and wrapper
-			$wrapper  = $this.find( '> ul' );
-			$items = $wrapper.find( '> li' );
-			itemCount = $items.length;
-			leftpos  = itemCount;
-			resetCount = itemCount;
-
-			//Adding an index to an element makes it easy to query
-			//-------------------------------------	
-			$items.each( function( index ) {
-				items[index] = $( this ).text();
-				$( this ).attr( 'id', index+1 );
-
-			});
-
-			//Pause slideshow and reinstantiate on mouseout
-			//-------------------------------------	
-			$wrapper.on( 'mouseenter', function() {
-				clearInterval( autoSwap );
-			} ).on( 'mouseleave' , function() {
-				autoSwap = setInterval( itemUpdates, dataTiming );
-			} );
-
-
-			
-			//Initialize the default effect
-			//-------------------------------------	
-			itemUpdates( 'clockwise' );
-			
-			
-			//The matched click events for the element.
-			//-------------------------------------	
-			$( dataPrevBtn ).on( 'click', function( e ) {
-				e.preventDefault();
-				itemUpdates( 'clockwise' );
-				return false;
-				
-			});
-			$( dataNextBtn ).on( 'click', function( e ) {
-				e.preventDefault();
-				itemUpdates( 'counter-clockwise' );
-				return false;
-				
-			});
-			
-			
-			$items.on( 'click', function( e ) {
-				e.preventDefault();
-
-				if ( $( this ).attr( 'class' ) == 'items left-pos' ) {
-					itemUpdates( 'counter-clockwise' );
-				} else {
-					itemUpdates( 'clockwise' );
-				}
-			});
-
-
-			//Drag and Drop
-			//-------------------------------------	
-			var $dragDropTrigger = $wrapper;
-
-			//Mouse event
-			$dragDropTrigger.on( 'mousedown.threeDimensionalCarousel touchstart.threeDimensionalCarousel', function( e ) {
-				e.preventDefault();
-
-				var touches = e.originalEvent.touches;
-
-				$( this ).addClass( 'dragging' );
-				$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
-				$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
-
-
-				if ( touches && touches.length ) {	
-					$( this ).data( 'origin_mouse_x', parseInt( touches[0].pageX ) );
-					$( this ).data( 'origin_mouse_y', parseInt( touches[0].pageY ) );
-
-				} else {
-
-					if ( dataDraggable ) {
-						$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
-						$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );	
-					}
-
-
-				}
-
-				$dragDropTrigger.on( 'mouseup.threeDimensionalCarousel touchmove.threeDimensionalCarousel', function( e ) {
-					e.preventDefault();
-
-					$( this ).removeClass( 'dragging' );
-					var touches        = e.originalEvent.touches,
-						origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
-						origin_mouse_y = $( this ).data( 'origin_mouse_y' );
-
-					if ( touches && touches.length ) {
-
-						var deltaX = origin_mouse_x - touches[0].pageX,
-							deltaY = origin_mouse_y - touches[0].pageY;
-
-						if ( deltaX >= 50) {
-							//--- left
-							itemUpdates( 'clockwise' );
-
-
-						}
-						if ( deltaX <= -50) {
-							//--- right
-							itemUpdates( 'counter-clockwise' );
-
-
-						}
-						if ( deltaY >= 50) {
-							//--- up
-
-
-						}
-						if ( deltaY <= -50) {
-							//--- down
-
-						}
-
-						if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
-							$dragDropTrigger.off( 'touchmove.threeDimensionalCarousel' );
-						}	
-
-
-					} else {
-
-						if ( dataDraggable ) {
-							//right
-							if ( e.pageX > origin_mouse_x ) {
-								itemUpdates( 'counter-clockwise' );
-							}
-
-							//left
-							if ( e.pageX < origin_mouse_x ) {
-								itemUpdates( 'clockwise' );
-								
-							}
-
-							//down
-							if ( e.pageY > origin_mouse_y ) {
-
-							}
-
-							//up
-							if ( e.pageY < origin_mouse_y ) {
-
-							}	
-
-							$dragDropTrigger.off( 'mouseup.threeDimensionalCarousel' );
-
-						}	
-
-
-
-					}
-
-
-
-				} );
-
-
-
-
-			} );
-			
-
-			/*
-			 * Swap Between Images
-			 *
-			 * @param  {string} action           - Direction of movement, optional: clockwise, counter-clockwise
-			 * @return {void}                    - The constructor.
-			 */
-			function itemUpdates( action ) {
-				var direction = action;
-
-				//moving carousel backwards
-				if ( direction == 'counter-clockwise' ) {
-					var leftitem = parseFloat( $wrapper.find( '> li.left-pos' ).attr( 'id' ) - 1 );
-					if ( leftitem == 0 ) {
-						leftitem = itemCount;
-					}
-
-					$wrapper.find( '> li.right-pos' ).removeClass( 'right-pos' ).addClass( 'back-pos' );
-					$wrapper.find( '> li.main-pos' ).removeClass( 'main-pos' ).addClass( 'right-pos' );
-					$wrapper.find( '> li.left-pos' ).removeClass( 'left-pos' ).addClass( 'main-pos' );
-					$wrapper.find( '> li#' + leftitem + '').removeClass( 'back-pos' ).addClass( 'left-pos' );
-
-					startItem--;
-
-					if ( startItem < 1 ) {
-						startItem = itemCount;
-					}
-				}
-
-				//moving carousel forward
-				if ( direction == 'clockwise' || direction == '' || direction == null ) {
-					var carousel3DPos = function( dir ) {
-						if ( dir != 'leftposition' ) {
-							//increment image list id
-							position++;
-
-							//if final result is greater than image count, reset position.
-							if ( startItem + position > resetCount ) {
-								position = 1 - startItem;
-							}
-						}
-
-						//setting the left positioned item
-						if (dir == 'leftposition') {
-							//left positioned image should always be one left than main positioned image.
-							position = startItem - 1;
-
-							//reset last image in list to left position if first image is in main position
-							if (position < 1) {
-								position = itemCount;
-							}
-						}
-
-						return position;
-					};
-
-					$wrapper.find( '> li#' + startItem + '').removeClass( 'main-pos' ).addClass( 'left-pos' );
-					$wrapper.find( '> li#' + (startItem + carousel3DPos()) + '').removeClass( 'right-pos' ).addClass( 'main-pos' );
-					$wrapper.find( '> li#' + (startItem + carousel3DPos()) + '').removeClass( 'back-pos' ).addClass( 'right-pos' );
-					$wrapper.find( '> li#' + carousel3DPos( 'leftposition' ) + '').removeClass( 'left-pos' ).addClass( 'back-pos' );
-
-					startItem++;
-					position = 0;
-					if ( startItem > itemCount ) {
-						startItem = 1;
-					}
-				}
-			}
-
-			
-
-		});
-
-		
-		
-    };
-
-    App.threeDimensionalCarousel = {
-        documentReady : documentReady        
-    };
-
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
 /* 
  *************************************
  * <!-- 3D Model -->
@@ -2872,6 +2563,314 @@ App = ( function ( App, $, window, document ) {
 
 
 
+
+/* 
+ *************************************
+ * <!-- 3D Carousel -->
+ *************************************
+ */
+App = ( function ( App, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ) {
+
+		$( '.custom-carousel-3d' ).each( function() {
+			var $this             = $( this ),
+				dataTiming        = $this.data( 'timing' ),
+				dataPrevBtn       = $this.data( 'prev-btn' ),
+				dataNextBtn       = $this.data( 'next-btn' ),
+				dataDraggable     = $this.data( 'draggable' ),
+			    autoSwap          = null,
+				$wrapper          = $this.find( '> ul' ),
+				$items            = $wrapper.find( '> li' ),
+				items             = [],
+				startItem         = 1,
+				position          = 0,
+				itemCount         = $items.length,
+				leftpos           = itemCount,
+				resetCount        = itemCount;
+
+			if( typeof dataTiming === typeof undefined ) dataTiming = 5000;
+			if( typeof dataPrevBtn === typeof undefined ) dataPrevBtn = ".my-carousel-3d-prev";
+			if( typeof dataNextBtn === typeof undefined ) dataNextBtn = ".my-carousel-3d-next";
+			if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
+			
+
+			//Avoid problems caused by insufficient quantity
+			//-------------------------------------		
+			if ( itemCount == 3 ) {
+				var $clone3 = $items.eq(1).clone();
+				$items.last().after( $clone3 );
+			}
+			
+			if ( itemCount == 2 ) {
+				var $clone2_1 = $items.eq(0).clone(),
+					$clone2_2 = $items.eq(1).clone();
+				$items.last().after( [$clone2_1, $clone2_2 ] );
+			}
+			
+			if ( itemCount == 1 ) {
+				var $clone1_1 = $items.eq(0).clone(),
+					$clone1_2 = $items.eq(0).clone(),
+					$clone1_3 = $items.eq(0).clone();
+					
+				$items.last().after( [$clone1_1, $clone1_2, $clone1_3 ] );
+			}		
+			
+
+			//New objects of items and wrapper
+			$wrapper  = $this.find( '> ul' );
+			$items = $wrapper.find( '> li' );
+			itemCount = $items.length;
+			leftpos  = itemCount;
+			resetCount = itemCount;
+
+			//Adding an index to an element makes it easy to query
+			//-------------------------------------	
+			$items.each( function( index ) {
+				items[index] = $( this ).text();
+				$( this ).attr( 'id', index+1 );
+
+			});
+
+			//Pause slideshow and reinstantiate on mouseout
+			//-------------------------------------	
+			$wrapper.on( 'mouseenter', function() {
+				clearInterval( autoSwap );
+			} ).on( 'mouseleave' , function() {
+				autoSwap = setInterval( itemUpdates, dataTiming );
+			} );
+
+
+			
+			//Initialize the default effect
+			//-------------------------------------	
+			itemUpdates( 'clockwise' );
+			
+			
+			//The matched click events for the element.
+			//-------------------------------------	
+			$( dataPrevBtn ).on( 'click', function( e ) {
+				e.preventDefault();
+				itemUpdates( 'clockwise' );
+				return false;
+				
+			});
+			$( dataNextBtn ).on( 'click', function( e ) {
+				e.preventDefault();
+				itemUpdates( 'counter-clockwise' );
+				return false;
+				
+			});
+			
+			
+			$items.on( 'click', function( e ) {
+				e.preventDefault();
+
+				if ( $( this ).attr( 'class' ) == 'items left-pos' ) {
+					itemUpdates( 'counter-clockwise' );
+				} else {
+					itemUpdates( 'clockwise' );
+				}
+			});
+
+
+			//Drag and Drop
+			//-------------------------------------	
+			var $dragDropTrigger = $wrapper;
+
+			//Mouse event
+			$dragDropTrigger.on( 'mousedown.threeDimensionalCarousel touchstart.threeDimensionalCarousel', function( e ) {
+				e.preventDefault();
+
+				var touches = e.originalEvent.touches;
+
+				$( this ).addClass( 'dragging' );
+				$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
+				$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
+
+
+				if ( touches && touches.length ) {	
+					$( this ).data( 'origin_mouse_x', parseInt( touches[0].pageX ) );
+					$( this ).data( 'origin_mouse_y', parseInt( touches[0].pageY ) );
+
+				} else {
+
+					if ( dataDraggable ) {
+						$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
+						$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );	
+					}
+
+
+				}
+
+				$dragDropTrigger.on( 'mouseup.threeDimensionalCarousel touchmove.threeDimensionalCarousel', function( e ) {
+					e.preventDefault();
+
+					$( this ).removeClass( 'dragging' );
+					var touches        = e.originalEvent.touches,
+						origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
+						origin_mouse_y = $( this ).data( 'origin_mouse_y' );
+
+					if ( touches && touches.length ) {
+
+						var deltaX = origin_mouse_x - touches[0].pageX,
+							deltaY = origin_mouse_y - touches[0].pageY;
+
+						if ( deltaX >= 50) {
+							//--- left
+							itemUpdates( 'clockwise' );
+
+
+						}
+						if ( deltaX <= -50) {
+							//--- right
+							itemUpdates( 'counter-clockwise' );
+
+
+						}
+						if ( deltaY >= 50) {
+							//--- up
+
+
+						}
+						if ( deltaY <= -50) {
+							//--- down
+
+						}
+
+						if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
+							$dragDropTrigger.off( 'touchmove.threeDimensionalCarousel' );
+						}	
+
+
+					} else {
+
+						if ( dataDraggable ) {
+							//right
+							if ( e.pageX > origin_mouse_x ) {
+								itemUpdates( 'counter-clockwise' );
+							}
+
+							//left
+							if ( e.pageX < origin_mouse_x ) {
+								itemUpdates( 'clockwise' );
+								
+							}
+
+							//down
+							if ( e.pageY > origin_mouse_y ) {
+
+							}
+
+							//up
+							if ( e.pageY < origin_mouse_y ) {
+
+							}	
+
+							$dragDropTrigger.off( 'mouseup.threeDimensionalCarousel' );
+
+						}	
+
+
+
+					}
+
+
+
+				} );
+
+
+
+
+			} );
+			
+
+			/*
+			 * Swap Between Images
+			 *
+			 * @param  {string} action           - Direction of movement, optional: clockwise, counter-clockwise
+			 * @return {void}                    - The constructor.
+			 */
+			function itemUpdates( action ) {
+				var direction = action;
+
+				//moving carousel backwards
+				if ( direction == 'counter-clockwise' ) {
+					var leftitem = parseFloat( $wrapper.find( '> li.left-pos' ).attr( 'id' ) - 1 );
+					if ( leftitem == 0 ) {
+						leftitem = itemCount;
+					}
+
+					$wrapper.find( '> li.right-pos' ).removeClass( 'right-pos' ).addClass( 'back-pos' );
+					$wrapper.find( '> li.main-pos' ).removeClass( 'main-pos' ).addClass( 'right-pos' );
+					$wrapper.find( '> li.left-pos' ).removeClass( 'left-pos' ).addClass( 'main-pos' );
+					$wrapper.find( '> li#' + leftitem + '').removeClass( 'back-pos' ).addClass( 'left-pos' );
+
+					startItem--;
+
+					if ( startItem < 1 ) {
+						startItem = itemCount;
+					}
+				}
+
+				//moving carousel forward
+				if ( direction == 'clockwise' || direction == '' || direction == null ) {
+					var carousel3DPos = function( dir ) {
+						if ( dir != 'leftposition' ) {
+							//increment image list id
+							position++;
+
+							//if final result is greater than image count, reset position.
+							if ( startItem + position > resetCount ) {
+								position = 1 - startItem;
+							}
+						}
+
+						//setting the left positioned item
+						if (dir == 'leftposition') {
+							//left positioned image should always be one left than main positioned image.
+							position = startItem - 1;
+
+							//reset last image in list to left position if first image is in main position
+							if (position < 1) {
+								position = itemCount;
+							}
+						}
+
+						return position;
+					};
+
+					$wrapper.find( '> li#' + startItem + '').removeClass( 'main-pos' ).addClass( 'left-pos' );
+					$wrapper.find( '> li#' + (startItem + carousel3DPos()) + '').removeClass( 'right-pos' ).addClass( 'main-pos' );
+					$wrapper.find( '> li#' + (startItem + carousel3DPos()) + '').removeClass( 'back-pos' ).addClass( 'right-pos' );
+					$wrapper.find( '> li#' + carousel3DPos( 'leftposition' ) + '').removeClass( 'left-pos' ).addClass( 'back-pos' );
+
+					startItem++;
+					position = 0;
+					if ( startItem > itemCount ) {
+						startItem = 1;
+					}
+				}
+			}
+
+			
+
+		});
+
+		
+		
+    };
+
+    App.threeDimensionalCarousel = {
+        documentReady : documentReady        
+    };
+
+    App.components.documentReady.push( documentReady );
+    return App;
+
+}( App, jQuery, window, document ) );
 /* 
  *************************************
  * <!-- 3D Particle Effect -->
@@ -3248,344 +3247,6 @@ App = ( function ( App, $, window, document ) {
 	
 		
     App.accordionImg = {
-        documentReady : documentReady        
-    };
-
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
-
-
-/* 
- *************************************
- * <!-- Advanced Content Slider -->
- *************************************
- */
-App = ( function ( App, $, window, document ) {
-    'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
-		
-	
-		var $window                   = $( window ),
-			windowWidth               = $window.width(),
-			windowHeight              = $window.height(),
-			animDuration              = 1200;
-		
-		
-		
-		sliderInit();
-		
-		$window.on( 'resize', function() {
-			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( $window.width() != windowWidth ) {
-
-				// Update the window width for next time
-				windowWidth = $window.width();
-
-				sliderInit();
-				
-			}
-		});
-		
-		
-		/*
-		 * Initialize slideshow
-		 *
-		 * @return {void}                   - The constructor.
-		 */
-        function sliderInit() {
-			
-			$( '.custom-advanced-content-slider' ).each( function() {
-				var $this                      = $( this ),
-					$items                     = $this.find( '.item' ),
-					$itemsWrapper              = $this.children( '.inner' ),
-					$first                     = $items.first(),
-					itemWidth                  = $this.width(),
-					itemsTotal                 = $items.length,
-					totalWidth                 = itemWidth*itemsTotal,
-					dataControlsPagination     = $this.data( 'controls-pagination' ),
-					dataControlsArrows         = $this.data( 'controls-arrows' ),
-					dataDraggable              = $this.data( 'draggable' ),
-					dataDraggableCursor        = $this.data( 'draggable-cursor' ),
-					dataControlsPaginationAuto = false;
-
-				
-				
-
-				if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.custom-advanced-content-slider-sp-pagination';
-				if ( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.custom-advanced-content-slider-sp-arrows';
-				if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
-				if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
-				
-				if ( $( dataControlsPagination ).html().length == 0 ) dataControlsPaginationAuto = true;
-
-				
-
-				//Initialize the width of each item
-				//-------------------------------------		
-				$first.addClass( 'active' );
-				
-				$items.css( 'width', itemWidth + 'px' );
-				
-				TweenMax.set( $itemsWrapper, { 
-					width: totalWidth,
-					onComplete  : function() {
-						$this.css( 'height', 'auto' );
-						
-					}
-				} );	
-				
-
-				//Pagination dots 
-				//-------------------------------------	
-				if ( dataControlsPaginationAuto ) {
-					var _dot       = '',
-						_dotActive = '';
-					_dot += '<ul class="default">';
-					for ( var i = 0; i < itemsTotal; i++ ) {
-
-						_dotActive = ( i == 0 ) ? 'class="active"' : '';
-
-						_dot += '<li><a '+_dotActive+' data-index="'+i+'" href="javascript:"></a></li>';
-					}
-					_dot += '</ul>';
-
-					if ( $( dataControlsPagination ).html() == '' ) $( dataControlsPagination ).html( _dot );	
-				} else {
-					$( dataControlsPagination ).find( 'li' ).first().find( 'a' ).addClass( 'active' );
-					$( dataControlsPagination ).find( 'li' ).first().addClass( 'active' );
-				}
-
-
-				$( dataControlsPagination ).find( 'li a' ).on( 'click', function( e ) {
-					e.preventDefault();
-
-					if ( !$( this ).hasClass( 'active' ) ) {
-						
-						sliderUpdates( $( this ).attr( 'data-index' ), $this, dataControlsArrows, dataControlsPagination );
-					}
-
-
-
-				});
-
-				
-				//Next/Prev buttons
-				//-------------------------------------		
-				var _prev = $( dataControlsArrows ).find( '.prev' ),
-					_next = $( dataControlsArrows ).find( '.next' );
-				
-				
-
-				$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
-				
-				_prev.addClass( 'disabled' );
-
-				_prev.on( 'click', function( e ) {
-					e.preventDefault();
-
-					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
-
-				});
-
-				_next.on( 'click', function( e ) {
-					e.preventDefault();
-
-					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
-
-				});
-				
-				
-				//Drag and Drop
-				//-------------------------------------	
-				var $dragDropTrigger = $items;
-
-				//Make the cursor a move icon when a user hovers over an item
-				if ( dataDraggable && dataDraggableCursor != '' && dataDraggableCursor != false ) $dragDropTrigger.css( 'cursor', dataDraggableCursor );
-				
-
-
-				//Mouse event
-				$dragDropTrigger.on( 'mousedown.advancedContentSlider touchstart.advancedContentSlider', function( e ) {
-					e.preventDefault();
-
-					var touches = e.originalEvent.touches;
-					
-					$( this ).addClass( 'dragging' );
-					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
-					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
-					
-					
-					if ( touches && touches.length ) {	
-						$( this ).data( 'origin_mouse_x', parseInt( touches[0].pageX ) );
-						$( this ).data( 'origin_mouse_y', parseInt( touches[0].pageY ) );
-
-					} else {
-						
-						if ( dataDraggable ) {
-							$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
-							$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );	
-						}
-
-
-					}
-					
-					$dragDropTrigger.on( 'mouseup.advancedContentSlider touchmove.advancedContentSlider', function( e ) {
-						e.preventDefault();
-
-						$( this ).removeClass( 'dragging' );
-						var touches        = e.originalEvent.touches,
-							origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
-							origin_mouse_y = $( this ).data( 'origin_mouse_y' );
-
-						if ( touches && touches.length ) {
-
-							var deltaX = origin_mouse_x - touches[0].pageX,
-								deltaY = origin_mouse_y - touches[0].pageY;
-
-							if ( deltaX >= 50) {
-								//--- left
-								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
-
-
-							}
-							if ( deltaX <= -50) {
-								//--- right
-								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
-
-
-							}
-							if ( deltaY >= 50) {
-								//--- up
-
-
-							}
-							if ( deltaY <= -50) {
-								//--- down
-
-							}
-
-							if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
-								$dragDropTrigger.off( 'touchmove.advancedContentSlider' );
-							}	
-
-
-						} else {
-							
-							if ( dataDraggable ) {
-								//right
-								if ( e.pageX > origin_mouse_x ) {
-									sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
-								}
-
-								//left
-								if ( e.pageX < origin_mouse_x ) {
-									sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
-								}
-
-								//down
-								if ( e.pageY > origin_mouse_y ) {
-
-								}
-
-								//up
-								if ( e.pageY < origin_mouse_y ) {
-
-								}	
-
-								$dragDropTrigger.off( 'mouseup.advancedContentSlider' );
-								
-							}	
-							
-							
-							
-						}
-
-
-
-					} );
-
-					
-					
-
-				} );
-
-			
-				
-			});	
-			
-		}
-		
-		/*
-		 * Transition Between Slides
-		 *
-		 * @param  {number} elementIndex     - Index of current slider.
-		 * @param  {object} slider           - Selector of the slider .
-		 * @param  {string} arrows           - Controller name of prev/next buttons.
-		 * @param  {string} pagination       - Controller name of pagination buttons.
-		 * @return {void}                    - The constructor.
-		 */
-        function sliderUpdates( elementIndex, slider, arrows, pagination ) {
-			
-			var $items        = slider.find( '.item' ),
-				itemsTotal    = $items.length,
-				$prev         = $( arrows ).find( '.prev' ),
-				$next         = $( arrows ).find( '.next' ),
-				$pagination   = $( pagination ).find( 'li a' );
-				
-			if ( elementIndex <= itemsTotal - 1 && elementIndex >= 0 ) {
-
-				if ( elementIndex > parseFloat( itemsTotal - 1 ) ) elementIndex = parseFloat( itemsTotal - 1 );
-				if ( elementIndex < 0 ) elementIndex = 0;
-				
-				$next.removeClass( 'disabled' );
-				$prev.removeClass( 'disabled' );
-				$pagination.removeClass( 'active' );
-				$pagination.parent().removeClass( 'active' );
-
-				if ( elementIndex == itemsTotal - 1 ) {
-					$next.addClass( 'disabled' );
-				}
-
-				if ( elementIndex == 0 ) {
-					$prev.addClass( 'disabled' );
-				}
-
-				
-
-				$items.removeClass( 'active' );
-				$items.eq( elementIndex ).addClass( 'active' );	
-				$pagination.eq( elementIndex ).addClass( 'active' );
-				$pagination.eq( elementIndex ).parent().addClass( 'active' );
-				
-				
-				
-				TweenMax.to( slider.children( '.inner' ), animDuration/1000, { 
-					x: '-' + ( slider.width() * elementIndex ),
-					onComplete  : function() {
-
-					},
-					ease: Power3.easeOut
-				} );
-				
-	
-			}
-			
-
-			
-		}
-		
-
-		
-		
-	};
-	
-		
-    App.advancedContentSlider = {
         documentReady : documentReady        
     };
 
@@ -6558,6 +6219,344 @@ App = ( function ( App, $, window, document ) {
 
 
 
+
+
+/* 
+ *************************************
+ * <!-- Advanced Content Slider -->
+ *************************************
+ */
+App = ( function ( App, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ) {
+		
+		
+	
+		var $window                   = $( window ),
+			windowWidth               = $window.width(),
+			windowHeight              = $window.height(),
+			animDuration              = 1200;
+		
+		
+		
+		sliderInit();
+		
+		$window.on( 'resize', function() {
+			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+			if ( $window.width() != windowWidth ) {
+
+				// Update the window width for next time
+				windowWidth = $window.width();
+
+				sliderInit();
+				
+			}
+		});
+		
+		
+		/*
+		 * Initialize slideshow
+		 *
+		 * @return {void}                   - The constructor.
+		 */
+        function sliderInit() {
+			
+			$( '.custom-advanced-content-slider' ).each( function() {
+				var $this                      = $( this ),
+					$items                     = $this.find( '.item' ),
+					$itemsWrapper              = $this.children( '.inner' ),
+					$first                     = $items.first(),
+					itemWidth                  = $this.width(),
+					itemsTotal                 = $items.length,
+					totalWidth                 = itemWidth*itemsTotal,
+					dataControlsPagination     = $this.data( 'controls-pagination' ),
+					dataControlsArrows         = $this.data( 'controls-arrows' ),
+					dataDraggable              = $this.data( 'draggable' ),
+					dataDraggableCursor        = $this.data( 'draggable-cursor' ),
+					dataControlsPaginationAuto = false;
+
+				
+				
+
+				if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.custom-advanced-content-slider-sp-pagination';
+				if ( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.custom-advanced-content-slider-sp-arrows';
+				if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
+				if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
+				
+				if ( $( dataControlsPagination ).html().length == 0 ) dataControlsPaginationAuto = true;
+
+				
+
+				//Initialize the width of each item
+				//-------------------------------------		
+				$first.addClass( 'active' );
+				
+				$items.css( 'width', itemWidth + 'px' );
+				
+				TweenMax.set( $itemsWrapper, { 
+					width: totalWidth,
+					onComplete  : function() {
+						$this.css( 'height', 'auto' );
+						
+					}
+				} );	
+				
+
+				//Pagination dots 
+				//-------------------------------------	
+				if ( dataControlsPaginationAuto ) {
+					var _dot       = '',
+						_dotActive = '';
+					_dot += '<ul class="default">';
+					for ( var i = 0; i < itemsTotal; i++ ) {
+
+						_dotActive = ( i == 0 ) ? 'class="active"' : '';
+
+						_dot += '<li><a '+_dotActive+' data-index="'+i+'" href="javascript:"></a></li>';
+					}
+					_dot += '</ul>';
+
+					if ( $( dataControlsPagination ).html() == '' ) $( dataControlsPagination ).html( _dot );	
+				} else {
+					$( dataControlsPagination ).find( 'li' ).first().find( 'a' ).addClass( 'active' );
+					$( dataControlsPagination ).find( 'li' ).first().addClass( 'active' );
+				}
+
+
+				$( dataControlsPagination ).find( 'li a' ).on( 'click', function( e ) {
+					e.preventDefault();
+
+					if ( !$( this ).hasClass( 'active' ) ) {
+						
+						sliderUpdates( $( this ).attr( 'data-index' ), $this, dataControlsArrows, dataControlsPagination );
+					}
+
+
+
+				});
+
+				
+				//Next/Prev buttons
+				//-------------------------------------		
+				var _prev = $( dataControlsArrows ).find( '.prev' ),
+					_next = $( dataControlsArrows ).find( '.next' );
+				
+				
+
+				$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
+				
+				_prev.addClass( 'disabled' );
+
+				_prev.on( 'click', function( e ) {
+					e.preventDefault();
+
+					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
+
+				});
+
+				_next.on( 'click', function( e ) {
+					e.preventDefault();
+
+					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
+
+				});
+				
+				
+				//Drag and Drop
+				//-------------------------------------	
+				var $dragDropTrigger = $items;
+
+				//Make the cursor a move icon when a user hovers over an item
+				if ( dataDraggable && dataDraggableCursor != '' && dataDraggableCursor != false ) $dragDropTrigger.css( 'cursor', dataDraggableCursor );
+				
+
+
+				//Mouse event
+				$dragDropTrigger.on( 'mousedown.advancedContentSlider touchstart.advancedContentSlider', function( e ) {
+					e.preventDefault();
+
+					var touches = e.originalEvent.touches;
+					
+					$( this ).addClass( 'dragging' );
+					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
+					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
+					
+					
+					if ( touches && touches.length ) {	
+						$( this ).data( 'origin_mouse_x', parseInt( touches[0].pageX ) );
+						$( this ).data( 'origin_mouse_y', parseInt( touches[0].pageY ) );
+
+					} else {
+						
+						if ( dataDraggable ) {
+							$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
+							$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );	
+						}
+
+
+					}
+					
+					$dragDropTrigger.on( 'mouseup.advancedContentSlider touchmove.advancedContentSlider', function( e ) {
+						e.preventDefault();
+
+						$( this ).removeClass( 'dragging' );
+						var touches        = e.originalEvent.touches,
+							origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
+							origin_mouse_y = $( this ).data( 'origin_mouse_y' );
+
+						if ( touches && touches.length ) {
+
+							var deltaX = origin_mouse_x - touches[0].pageX,
+								deltaY = origin_mouse_y - touches[0].pageY;
+
+							if ( deltaX >= 50) {
+								//--- left
+								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
+
+
+							}
+							if ( deltaX <= -50) {
+								//--- right
+								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
+
+
+							}
+							if ( deltaY >= 50) {
+								//--- up
+
+
+							}
+							if ( deltaY <= -50) {
+								//--- down
+
+							}
+
+							if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
+								$dragDropTrigger.off( 'touchmove.advancedContentSlider' );
+							}	
+
+
+						} else {
+							
+							if ( dataDraggable ) {
+								//right
+								if ( e.pageX > origin_mouse_x ) {
+									sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
+								}
+
+								//left
+								if ( e.pageX < origin_mouse_x ) {
+									sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
+								}
+
+								//down
+								if ( e.pageY > origin_mouse_y ) {
+
+								}
+
+								//up
+								if ( e.pageY < origin_mouse_y ) {
+
+								}	
+
+								$dragDropTrigger.off( 'mouseup.advancedContentSlider' );
+								
+							}	
+							
+							
+							
+						}
+
+
+
+					} );
+
+					
+					
+
+				} );
+
+			
+				
+			});	
+			
+		}
+		
+		/*
+		 * Transition Between Slides
+		 *
+		 * @param  {number} elementIndex     - Index of current slider.
+		 * @param  {object} slider           - Selector of the slider .
+		 * @param  {string} arrows           - Controller name of prev/next buttons.
+		 * @param  {string} pagination       - Controller name of pagination buttons.
+		 * @return {void}                    - The constructor.
+		 */
+        function sliderUpdates( elementIndex, slider, arrows, pagination ) {
+			
+			var $items        = slider.find( '.item' ),
+				itemsTotal    = $items.length,
+				$prev         = $( arrows ).find( '.prev' ),
+				$next         = $( arrows ).find( '.next' ),
+				$pagination   = $( pagination ).find( 'li a' );
+				
+			if ( elementIndex <= itemsTotal - 1 && elementIndex >= 0 ) {
+
+				if ( elementIndex > parseFloat( itemsTotal - 1 ) ) elementIndex = parseFloat( itemsTotal - 1 );
+				if ( elementIndex < 0 ) elementIndex = 0;
+				
+				$next.removeClass( 'disabled' );
+				$prev.removeClass( 'disabled' );
+				$pagination.removeClass( 'active' );
+				$pagination.parent().removeClass( 'active' );
+
+				if ( elementIndex == itemsTotal - 1 ) {
+					$next.addClass( 'disabled' );
+				}
+
+				if ( elementIndex == 0 ) {
+					$prev.addClass( 'disabled' );
+				}
+
+				
+
+				$items.removeClass( 'active' );
+				$items.eq( elementIndex ).addClass( 'active' );	
+				$pagination.eq( elementIndex ).addClass( 'active' );
+				$pagination.eq( elementIndex ).parent().addClass( 'active' );
+				
+				
+				
+				TweenMax.to( slider.children( '.inner' ), animDuration/1000, { 
+					x: '-' + ( slider.width() * elementIndex ),
+					onComplete  : function() {
+
+					},
+					ease: Power3.easeOut
+				} );
+				
+	
+			}
+			
+
+			
+		}
+		
+
+		
+		
+	};
+	
+		
+    App.advancedContentSlider = {
+        documentReady : documentReady        
+    };
+
+    App.components.documentReady.push( documentReady );
+    return App;
+
+}( App, jQuery, window, document ) );
 
 
 /* 
@@ -25946,6 +25945,9 @@ License: MIT
 /***/ function(module, exports) {
 
 	module.exports = "uniform float explodeRate;\nvarying vec2 vUv;\n\n\nfloat rand(vec2 co){\n  return fract(sin(dot(co.xy, vec2(12.8273, 67.245))) * 53726.17623);\n}\n\nvoid main() {\n  vec3 col;\n  col.g = rand(vec2(vUv.x, vUv.y + 1.0));\n  col.b = rand(vec2(vUv.x, vUv.y + 2.0));\n  col.r = rand(vec2(vUv.xy));\n  col = col - 0.5;\n  col *= explodeRate;\n\n  gl_FragColor = vec4(col, 1.0);\n}\n";
+
+/***/ }
+/******/ ]);\n";
 
 /***/ }
 /******/ ]);

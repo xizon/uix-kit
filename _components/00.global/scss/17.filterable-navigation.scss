@@ -22,7 +22,6 @@
 		font-size: 0; /*Fighting the Space Between Inline Block Elements*/
 
 		li {
-			font-style: italic;
 			display: inline-block;
 			transition: 0.2s linear;
 			margin-right: 0.203125rem;
@@ -31,7 +30,7 @@
 
 			&::after {
 				content: '/';
-				margin-left: 0.203125rem;
+				margin-left: 0.5rem;
 				opacity: 0.5;
 			}	
 			
@@ -44,7 +43,6 @@
 			}
 		
 
-			&:hover,
 			&.active,
 			&.current-cat {
 				opacity: 1;
@@ -53,25 +51,25 @@
 			
 		}
 	}
+	
+	&.responsive-dropdown {
+		> input{
+			display: none;
+		}
+
+		.nav-filters-toggle-label {
+			display: none;
+			background: $primary-text-color1;
+			color: #fff;
+		}
+
+
+	}	
+	
 }
 
 
-.nav-filters.responsive-dropdown {
-	> input{
-		display: none;
-	}
-	
-	.nav-filters-toggle-label {
-        display: none;
-		background: $primary-text-color1;
-		color: #fff;
-	}
-	
-	a {
-		display: block;
-	}
 
-}
 
 
 /* 
@@ -104,6 +102,7 @@
 			display: block;
 			width: 100%;
 			border-bottom: 1px solid rgba(0,0,0,.1);
+			text-align: left;
 			&:not(:last-child) {
 				margin-right: 0;
 
@@ -111,6 +110,23 @@
 					content: '';
 					margin-left: 0;
 				}
+			}
+			
+			a {
+				display: block;
+				position: relative;
+				text-indent: 1rem;
+				
+				&::after {
+					font-family: 'FontAwesome';
+					content: "\f105";
+					font-size: 1rem;
+					float: right;
+					position: absolute;
+					right: .5rem;
+					top: 50%;
+					transform: translateY(-50%);
+				}	
 			}
 
 		}	
