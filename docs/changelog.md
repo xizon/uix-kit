@@ -1,13 +1,9 @@
 # Changelog
 
-#### = 1.7.2 (June 10, 2018) =
+
+#### = 1.7.2 (June 7, 2018) =
 
 * Fix: Fixed an error of Filterable Navigation.
-
-
-
-#### = 1.7.1 (June 7, 2018) =
-
 * New: Add a new module "Overlay".
 * New: Add a new module "Section Layout".
 * New: Add a helper class ".dropcap" that you can achieve a drop cap within a text by adding it.
