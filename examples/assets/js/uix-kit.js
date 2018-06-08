@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.7.3
- * ## Last Update         :  June 7, 2018
+ * ## Version             :  1.7.4
+ * ## Last Update         :  June 9, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -26,15 +26,15 @@
 	1. Header 
     2. Loader 
     3. Back to Top 
-    4. Get all custom attributes of an element like "data-*" 
-    5. Navigation 
-    6. Videos 
-    7. Common Height 
+    4. Navigation 
+    5. Videos 
+    6. Common Height 
+    7. Get all custom attributes of an element like "data-*" 
     8. Mega Menu 
     9. Dropdown Categories 
     10. Pagination 
-    11. 3D Background 
-    12. Specify a background image 
+    11. Specify a background image 
+    12. 3D Background 
     13. 3D Background 2 
     14. 3D Background 2 
     15. 3D Carousel 
@@ -49,14 +49,14 @@
     24. Counter 
     25. Dynamic Drop Down List from JSON 
     26. Flexslider 
-    27. Form Progress 
-    28. Gallery 
-    29. Image Shapes 
-    30. Custom Core Scripts & Stylesheets 
-    31. Form 
+    27. Form 
+    28. Form Progress 
+    29. Gallery 
+    30. Image Shapes 
+    31. Custom Core Scripts & Stylesheets 
     32. Custom Lightbox 
-    33. Posts List With Ajax 
-    34. Bulleted List 
+    33. Bulleted List 
+    34. Posts List With Ajax 
     35. Fullwidth List of Split 
     36. Mobile Menu 
     37. Modal Dialog 
@@ -70,19 +70,16 @@
     45. Progress Bar 
     46. Retina Graphics for Website 
     47. Rotating Elements 
-    48. Scroll Reveal 
-    49. Show More Less 
-    50. Smooth Scrolling When Clicking An Anchor Link 
-    51. Source Code 
-    52. Sticky Elements 
-    53. Tabs 
-    54. Team Focus 
-    55. Testimonials Carousel 
-    56. Text effect 
-    57. Timeline 
-    58. Ajax Page Loader (Loading A Page via Ajax Into Div)  
-    59. GSAP Plugins 
-    60. Three.js Plugins 
+    48. Show More Less 
+    49. Sticky Elements 
+    50. Tabs 
+    51. Team Focus 
+    52. Source Code 
+    53. Testimonials Carousel 
+    54. Text effect 
+    55. Scroll Reveal 
+    56. Timeline 
+    57. Ajax Page Loader (Loading A Page via Ajax Into Div)  
 
 
 */
@@ -101,9 +98,10 @@ if ( location.hostname === 'localhost' || location.hostname === '127.0.0.1' ) {
 
 //Determine whether it is a special browser
 var browser = {
-	isPC : !navigator.userAgent.match(/(iPhone|iPod|Android|ios|Mobile)/i),
-	isSafari : !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/), /*Test to 9, 10. */
-	isIE     : !!window.ActiveXObject || "ActiveXObject" in window     /*Test to 6 ~ 11 (not edge) */
+	isAndroid : /(android)/i.test(navigator.userAgent),
+	isPC      : !navigator.userAgent.match(/(iPhone|iPod|Android|ios|Mobile)/i),
+	isSafari  : !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/), /*Test to 9, 10. */
+	isIE      : !!window.ActiveXObject || "ActiveXObject" in window     /*Test to 6 ~ 11 (not edge) */
 };
 
 
@@ -589,7 +587,8 @@ App = ( function ( App, $, window, document ) {
 		 */  
 		$( '.web-video-embed' ).each( function()  {
 			var $this          = $( this ),
-			    curVideoID     = $this.find( '.video-js' ).attr( 'id' ),
+				tempID         = 'video-' + Math.random()*1000000000000000000,
+			    curVideoID     = tempID,
 				coverPlayBtnID = 'videocover-' + curVideoID,
 				videoWrapperW  = $this.closest( '[data-embed-video-wrapper]' ).width(),
 				videoWrapperH  = $this.closest( '[data-embed-video-wrapper]' ).height(),
@@ -599,6 +598,11 @@ App = ( function ( App, $, window, document ) {
 				dataW          = $this.data( 'embed-video-width' ),
 				dataH          = $this.data( 'embed-video-height' );
 
+			
+			//Push a new ID to video
+			//Solve the problem that ajax asynchronous loading does not play
+			$this.find( '.video-js' ).attr( 'id', tempID );
+			
 			
 			
 			if ( videoWrapperH == 0 ) videoWrapperH = videoWrapperW/1.77777777777778;
@@ -639,32 +643,38 @@ App = ( function ( App, $, window, document ) {
 					$( '#' + coverPlayBtnID ).hide();
 
 				});
+				
+				//Prevent some devices from automatically playing video and trigger with buttons
+				if ( !dataAuto || browser.isAndroid ) {
+					$( '#' + coverPlayBtnID + ' .cover-play' ).show();
+				}
 
 			}
 			
 			
 			
-			//HTML5 video autoplay on mobile revisited
-			if ( dataAuto && windowWidth <= 768 ) {
+			 
+
+			/* ---------  HTML5 video autoplay on mobile revisited  */
+			if ( windowWidth <= 768 ) {
 				$this.find( '.video-js' ).attr({
-					'autoplay'    : 'true',
-					'muted'       : 'true',
 					'playsinline' : 'true'
 				});
 			}
-			
 			
 			var myPlayer = videojs( curVideoID, {
 					                  width     : dataW,
 					                  height    : dataH,
 				                      loop      : dataLoop,
+				                      
 									  controlBar: {
 										  muteToggle : false,
 										  autoplay   : dataAuto,
 										  loop       : dataLoop,
 										  controls   : true,
 										  controlBar : {
-											  muteToggle: false
+											  muteToggle: false,
+										  
 										  }
 									  }
 					
@@ -711,14 +721,16 @@ App = ( function ( App, $, window, document ) {
 				});		
 			
 
+
 			
-				
 				
 				/* ---------  Set, tell the player it's in fullscreen  */
 				if ( dataAuto ) {
+
+					myPlayer.muted( true ); //Fix an error of Video auto play is not working in browser
 					myPlayer.play();
+
 				}
-				
 
 				/* ---------  Disable control bar play button click */
 				if ( !dataControls ) {
@@ -815,7 +827,7 @@ App = ( function ( App, $, window, document ) {
 				v += '<div class="modal-box fullscreen video" id="'+videoContainerMid+'">';
 				v += '<a href="javascript:void(0)" class="close-btn"></a>';
 				v += '<div class="content">';
-				v += '<div class="web-video-container">';
+				v += '<div class="web-video-waiting"></div><div class="web-video-container" data-video-player-init="0">';
 				
 				if ( $this.find( '[data-video-iframe]' ).length > 0 && videoSrcIfm != '' ) {
 					//If iframe
@@ -847,15 +859,43 @@ App = ( function ( App, $, window, document ) {
 		//Check out: http://docs.videojs.com/tutorial-player-workflows.html
 		$( document ).on( 'click', modalDialogTrigger, function() {
 
-			var vid      = $( this ).data( 'video-id' ),
-				$ifm     = false,
-				newMaxW  = windowWidth - 80,
-				newMaxH  = windowHeight - 80;
+			var vid          = $( this ).data( 'video-id' ),
+				$ifm         = false,
+				newMaxW      = windowWidth - 80,
+				newMaxH      = windowHeight - 80,
+				$vContainer  = $( '#' + vid ).closest( '.web-video-container' ),
+				$vLoader     = $vContainer.prev( '.web-video-waiting' ),
+				myPlayerInit = $vContainer.data( 'video-player-init' );
 
+			
 
+			//----- Hidden/Display the wrapper of video
+			var displayVC = function() {
+				
+				TweenMax.set( $vContainer, {
+					alpha: 1
+				});
+				$vLoader.removeClass( 'active' );
+			};
+			
+			var hiddenVC = function() {
+				
+				TweenMax.set( $vContainer, {
+					alpha: 0
+				});
+
+				$vLoader.addClass( 'active' );
+			};
+
+			
+			
+
+			
 			//----- Embed iframe
 			if ( $( '#' + vid ).find( 'iframe' ).length > 0 ) {
 				$ifm = $( '#' + vid ).find( 'iframe' );
+			} else {
+				hiddenVC();
 			}
 
 
@@ -903,17 +943,24 @@ App = ( function ( App, $, window, document ) {
 					}
 
 
-
-
 				}
 
 				return false;
 			}
 
 
+			//----- HTML5 video autoplay on mobile revisited
+			if ( windowWidth <= 768 ) {
+				$( '#' + vid ).attr({
+					'playsinline' : 'true'
+				});
+			}
+			
+			
+
 
 			//----- Embed local video
-			var myPlayer = videojs( vid, {
+			var myPlayer     = videojs( vid, {
 									  width     : 1,
 									  height    : 1,
 									  controlBar: {
@@ -967,13 +1014,24 @@ App = ( function ( App, $, window, document ) {
 
 
 					//In order to allow CSS to support video centering
-					$( '#' + vid ).closest( '.web-video-container > div.video-js' ).css({
+					$vContainer.find( ' > div.video-js' ).css({
 						'width' : newW + 'px'
 					});			
 					
+					
+					//Vertically center the video area
+					var mt = parseFloat( windowHeight - newH )/2 - 50;
+					$vContainer.css({
+						'transform' : 'translateY('+ mt +'px)'
+					});			
+					
+					//Display the wrapper of video
+					displayVC();
+					
+					//If a player instance has already been created for this variable.
+					$vContainer.data( 'video-player-init', 1 );
 
-
-
+					
 				});
 
 				/* ---------  Set, tell the player it's in fullscreen  */
@@ -1002,17 +1060,21 @@ App = ( function ( App, $, window, document ) {
 				});
 
 
-
 			});
 
-
-
-
+			
+			/* ---------  Display the wrapper of video  */
+			if ( myPlayerInit === 1 ) {
+				displayVC();
+			}
+			
+			
 			/* ---------  Close the modal  */
 			$( document ).on( 'click', '.modal-box .close-btn', function() {
 
 				myPlayer.ready(function() {
 					myPlayer.pause();
+					
 				});				
 
 			});
@@ -5644,7 +5706,8 @@ App = ( function ( App, $, window, document ) {
 				var $this          = $( this ),
 					videoWrapperW  = $this.closest( '.custom-advanced-slider-outer' ).width(),
 					videoWrapperH  = $this.closest( '.custom-advanced-slider-outer' ).height(),
-					curVideoID     = $this.find( '.video-js' ).attr( 'id' ),
+					tempID         = 'video-' + Math.random()*1000000000000000000,
+					curVideoID     = tempID,
 					coverPlayBtnID = 'videocover-' + curVideoID,
 					dataControls   = $this.data( 'embed-video-controls' ),
 					dataAuto       = $this.data( 'embed-video-autoplay' ),
@@ -5652,6 +5715,12 @@ App = ( function ( App, $, window, document ) {
 					dataW          = $this.data( 'embed-video-width' ),
 					dataH          = $this.data( 'embed-video-height' ),
 					$replayBtn     = $( '#'+curVideoID+'-replay-btn' );
+				
+				
+				//Push a new ID to video
+				//Solve the problem that ajax asynchronous loading does not play
+				$this.find( '.video-js' ).attr( 'id', tempID );
+
 				
 				if ( videoWrapperH == 0 ) videoWrapperH = videoWrapperW/1.77777777777778;
 
@@ -6333,7 +6402,8 @@ App = ( function ( App, $, window, document ) {
 				var $this          = $( this ),
 					videoWrapperW  = $this.closest( '.custom-advanced-slider-outer' ).width(),
 					videoWrapperH  = $this.closest( '.custom-advanced-slider-outer' ).height(),
-					curVideoID     = $this.find( '.video-js' ).attr( 'id' ),
+					tempID         = 'video-' + Math.random()*1000000000000000000,
+					curVideoID     = tempID,
 					coverPlayBtnID = 'videocover-' + curVideoID,
 					dataControls   = $this.data( 'embed-video-controls' ),
 					dataAuto       = $this.data( 'embed-video-autoplay' ),
@@ -6341,6 +6411,11 @@ App = ( function ( App, $, window, document ) {
 					dataW          = $this.data( 'embed-video-width' ),
 					dataH          = $this.data( 'embed-video-height' ),
 					$replayBtn     = $( '#'+curVideoID+'-replay-btn' );
+				
+				//Push a new ID to video
+				//Solve the problem that ajax asynchronous loading does not play
+				$this.find( '.video-js' ).attr( 'id', tempID );
+
 				
 				if ( videoWrapperH == 0 ) videoWrapperH = videoWrapperW/1.77777777777778;
 
@@ -7209,7 +7284,8 @@ App = ( function ( App, $, window, document ) {
 				var $this          = $( this ),
 					videoWrapperW  = $this.closest( '[data-embed-video-wrapper]' ).width(),
 					videoWrapperH  = $this.closest( '[data-embed-video-wrapper]' ).height(),
-					curVideoID     = $this.find( '.video-js' ).attr( 'id' ),
+					tempID         = 'video-' + Math.random()*1000000000000000000,
+					curVideoID     = tempID,
 					coverPlayBtnID = 'videocover-' + curVideoID,
 					dataControls   = $this.data( 'embed-video-controls' ),
 					dataAuto       = $this.data( 'embed-video-autoplay' ),
@@ -7217,6 +7293,10 @@ App = ( function ( App, $, window, document ) {
 					dataW          = $this.data( 'embed-video-width' ),
 					dataH          = $this.data( 'embed-video-height' ),
 					$replayBtn     = $( '#'+curVideoID+'-replay-btn' );
+
+				//Push a new ID to video
+				//Solve the problem that ajax asynchronous loading does not play
+				$this.find( '.video-js' ).attr( 'id', tempID );
 
 				
 				if ( videoWrapperH == 0 ) videoWrapperH = videoWrapperW/1.77777777777778;
@@ -26023,6 +26103,9 @@ License: MIT
 /***/ function(module, exports) {
 
 	module.exports = "uniform float explodeRate;\nvarying vec2 vUv;\n\n\nfloat rand(vec2 co){\n  return fract(sin(dot(co.xy, vec2(12.8273, 67.245))) * 53726.17623);\n}\n\nvoid main() {\n  vec3 col;\n  col.g = rand(vec2(vUv.x, vUv.y + 1.0));\n  col.b = rand(vec2(vUv.x, vUv.y + 2.0));\n  col.r = rand(vec2(vUv.xy));\n  col = col - 0.5;\n  col *= explodeRate;\n\n  gl_FragColor = vec4(col, 1.0);\n}\n";
+
+/***/ }
+/******/ ]);ol = col - 0.5;\n  col *= explodeRate;\n\n  gl_FragColor = vec4(col, 1.0);\n}\n";
 
 /***/ }
 /******/ ]);

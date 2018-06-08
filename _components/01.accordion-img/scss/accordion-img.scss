@@ -63,17 +63,7 @@ $text-offset: $accordion-img-height - 110;
 				cursor: pointer;
 				@include transition-default();
 
-				* {
-					margin: 0;
-					position: relative;
-					z-index: 5;
-					transform: translateX(-20px);
-
-					@include ellipsis();
-					@include transition-default();
-
-				}
-
+				
 				h3 {
 					text-overflow: clip;
 					top: $text-offset;

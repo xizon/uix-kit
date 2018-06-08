@@ -29,11 +29,38 @@
 		}
 	}
 	
+	
+	/* Video container */
 	.web-video-container {
 		> div.video-js {
 			margin: 0 auto;
 		}
+		
 	}
+	
+	.web-video-waiting {
+		
+		display: none;
+		position: fixed;
+		left: 50%;
+		top: 50%;
+		z-index: 99998;
+		margin-left: -1rem;
+		
+		&::after {
+			font-family: 'FontAwesome';
+			content: "\f110";
+			color: #fff;
+			font-size: 2rem;
+			text-shadow: 0 2px 3px rgba(0,0,0,.3);
+			display: inline-block;
+			animation: fa-spin 2s infinite linear;
+		}
+		
+		&.active {
+			display: block;
+		}
+	}	
 }
 
 @media all and (max-width: 991px) {

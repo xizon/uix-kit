@@ -1,5 +1,12 @@
 # Changelog
 
+#### = 1.7.4 (June 8, 2018) =
+
+* Fix: Fixed an error of Video auto play is not working in chrome browser.
+* Fix: Solve the problem that ajax asynchronous loading does not play.
+* Fix: Fixed some style issues with form components.
+* Tweak: Reconstruct the structure of the button module。
+* Tweak: Improved video experience.
 
 
 #### = 1.7.3 (June 7, 2018) =

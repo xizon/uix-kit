@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.7.3
- * ## Last Update         :  June 7, 2018
+ * ## Version             :  1.7.4
+ * ## Last Update         :  June 9, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -145,6 +145,8 @@
     77. Text effect 
     78. Timeline 
     79. ToolTip 
+    80. WordPress Core 
+    81. Ajax Page Loader (Loading A Page via Ajax Into Div)  
 
 
 
@@ -2141,7 +2143,7 @@ section.site-google-map,
 }
 
 .web-video-embed-cover .cover-play {
-  display: block;
+  display: none;
   position: absolute;
   z-index: 11;
   left: 50%;
@@ -2454,260 +2456,260 @@ section.site-google-map,
  ---------------------------
  */
 .social-bg {
-  color: #fff;
+  color: #fff !important;
 }
 
 .social-bg-twitter {
-  border-color: #53B9FD;
-  background-color: #53B9FD;
+  border-color: #53B9FD !important;
+  background-color: #53B9FD !important;
 }
 
 .social-bg-facebook {
-  border-color: #78A4DD;
-  background-color: #78A4DD;
+  border-color: #78A4DD !important;
+  background-color: #78A4DD !important;
 }
 
 .social-bg-google {
-  border-color: #FC5B5B;
-  background-color: #FC5B5B;
+  border-color: #FC5B5B !important;
+  background-color: #FC5B5B !important;
 }
 
 .social-bg-instagram {
-  border-color: #6156C7;
-  background-color: #6156C7;
+  border-color: #6156C7 !important;
+  background-color: #6156C7 !important;
 }
 
 .social-bg-lastfm {
-  border-color: #B90000;
-  background-color: #B90000;
+  border-color: #B90000 !important;
+  background-color: #B90000 !important;
 }
 
 .social-bg-youtube {
-  border-color: #CC181E;
-  background-color: #CC181E;
+  border-color: #CC181E !important;
+  background-color: #CC181E !important;
 }
 
 .social-bg-vimeo {
-  border-color: #1ab7ea;
-  background-color: #1ab7ea;
+  border-color: #1ab7ea !important;
+  background-color: #1ab7ea !important;
 }
 
 .social-bg-dribbble {
-  border-color: #FA8BBC;
-  background-color: #FA8BBC;
+  border-color: #FA8BBC !important;
+  background-color: #FA8BBC !important;
 }
 
 .social-bg-github {
-  border-color: #652F51;
-  background-color: #652F51;
+  border-color: #652F51 !important;
+  background-color: #652F51 !important;
 }
 
 .social-bg-flickr {
-  border-color: #fc4ca4;
-  background-color: #fc4ca4;
+  border-color: #fc4ca4 !important;
+  background-color: #fc4ca4 !important;
 }
 
 .social-bg-medium {
-  border-color: #00AB6B;
-  background-color: #00AB6B;
+  border-color: #00AB6B !important;
+  background-color: #00AB6B !important;
 }
 
 .social-bg-codepen {
-  border-color: #333;
-  background-color: #333;
+  border-color: #333 !important;
+  background-color: #333 !important;
 }
 
 .social-bg-behance {
-  border-color: #4F8FD6;
-  background-color: #4F8FD6;
+  border-color: #4F8FD6 !important;
+  background-color: #4F8FD6 !important;
 }
 
 .social-bg-dropbox {
-  border-color: #349BE9;
-  background-color: #349BE9;
+  border-color: #349BE9 !important;
+  background-color: #349BE9 !important;
 }
 
 .social-bg-pinterest {
-  border-color: #F35359;
-  background-color: #F35359;
+  border-color: #F35359 !important;
+  background-color: #F35359 !important;
 }
 
 .social-bg-reddit {
-  border-color: #FF4500;
-  background-color: #FF4500;
+  border-color: #FF4500 !important;
+  background-color: #FF4500 !important;
 }
 
 .social-bg-soundcloud {
-  border-color: #FF7500;
-  background-color: #FF7500;
+  border-color: #FF7500 !important;
+  background-color: #FF7500 !important;
 }
 
 .social-bg-producthunt {
-  border-color: #DA552F;
-  background-color: #DA552F;
+  border-color: #DA552F !important;
+  background-color: #DA552F !important;
 }
 
 .social-bg-weibo {
-  border-color: #E6162D;
-  background-color: #E6162D;
+  border-color: #E6162D !important;
+  background-color: #E6162D !important;
 }
 
 .social-bg-deviantart {
-  border-color: #05CC47;
-  background-color: #05CC47;
+  border-color: #05CC47 !important;
+  background-color: #05CC47 !important;
 }
 
 .social-bg-spotify {
-  border-color: #A5CE3F;
-  background-color: #A5CE3F;
+  border-color: #A5CE3F !important;
+  background-color: #A5CE3F !important;
 }
 
 .social-bg-wordpress {
-  border-color: #24A5DD;
-  background-color: #24A5DD;
+  border-color: #24A5DD !important;
+  background-color: #24A5DD !important;
 }
 
 .social-bg-digg {
-  border-color: #333;
-  background-color: #333;
+  border-color: #333 !important;
+  background-color: #333 !important;
 }
 
 .social-bg-tumblr {
-  border-color: #529ECC;
-  background-color: #529ECC;
+  border-color: #529ECC !important;
+  background-color: #529ECC !important;
 }
 
 .social-bg-linkedin {
-  border-color: #24A5DD;
-  background-color: #24A5DD;
+  border-color: #24A5DD !important;
+  background-color: #24A5DD !important;
 }
 
 .social-bg-stackoverflow {
-  border-color: #FF7500;
-  background-color: #FF7500;
+  border-color: #FF7500 !important;
+  background-color: #FF7500 !important;
 }
 
 .social-bg-colourful {
-  display: inline-block;
-  *display: inline;
-  margin: .2em .5em;
+  display: inline-block !important;
+  *display: inline !important;
+  margin: .2em .5em !important;
 }
 
 .social-bg-colourful {
-  color: #333333;
+  color: #333333 !important;
 }
 
 .social-bg-colourful[href*="twitter.com"] {
-  color: #53B9FD;
+  color: #53B9FD !important;
 }
 
 .social-bg-colourful[href*="facebook.com"] {
-  color: #78A4DD;
+  color: #78A4DD !important;
 }
 
 .social-bg-colourful[href*="google.com"] {
-  color: #FC5B5B;
+  color: #FC5B5B !important;
 }
 
 .social-bg-colourful[href*="instagram.com"] {
-  color: #6156C7;
+  color: #6156C7 !important;
 }
 
 .social-bg-colourful[href*="last.fm"] {
-  color: #B90000;
+  color: #B90000 !important;
 }
 
 .social-bg-colourful[href*="youtube.com"] {
-  color: #CC181E;
+  color: #CC181E !important;
 }
 
 .social-bg-colourful[href*="vimeo.com"] {
-  color: #1ab7ea;
+  color: #1ab7ea !important;
 }
 
 .social-bg-colourful[href*="dribbble.com"] {
-  color: #FA8BBC;
+  color: #FA8BBC !important;
 }
 
 .social-bg-colourful[href*="github.com"] {
-  color: #652F51;
+  color: #652F51 !important;
 }
 
 .social-bg-colourful[href*="flickr.com"] {
-  color: #fc4ca4;
+  color: #fc4ca4 !important;
 }
 
 .social-bg-colourful[href*="medium.com"] {
-  color: #00AB6B;
+  color: #00AB6B !important;
 }
 
 .social-bg-colourful[href*="codepen.com"] {
-  color: #333;
+  color: #333 !important;
 }
 
 .social-bg-colourful[href*="behance.net"] {
-  color: #4F8FD6;
+  color: #4F8FD6 !important;
 }
 
 .social-bg-colourful[href*="dropbox.com"] {
-  color: #349BE9;
+  color: #349BE9 !important;
 }
 
 .social-bg-colourful[href*="pinterest.com"] {
-  color: #F35359;
+  color: #F35359 !important;
 }
 
 .social-bg-colourful[href*="reddit.com"] {
-  color: #FF4500;
+  color: #FF4500 !important;
 }
 
 .social-bg-colourful[href*="soundcloud.com"] {
-  color: #FF7500;
+  color: #FF7500 !important;
 }
 
 .social-bg-colourful[href*="producthunt.com"] {
-  color: #DA552F;
+  color: #DA552F !important;
 }
 
 .social-bg-colourful[href*="weibo.com"] {
-  color: #E6162D;
+  color: #E6162D !important;
 }
 
 .social-bg-colourful[href*="deviantart.com"] {
-  color: #05CC47;
+  color: #05CC47 !important;
 }
 
 .social-bg-colourful[href*="spotify.com"] {
-  color: #A5CE3F;
+  color: #A5CE3F !important;
 }
 
 .social-bg-colourful[href*="wordpress.com"] {
-  color: #24A5DD;
+  color: #24A5DD !important;
 }
 
 .social-bg-colourful[href*="mailto"] {
-  color: #333;
+  color: #333 !important;
 }
 
 .social-bg-colourful[href*="digg.com"] {
-  color: #333;
+  color: #333 !important;
 }
 
 .social-bg-colourful[href*="tumblr.com"] {
-  color: #529ECC;
+  color: #529ECC !important;
 }
 
 .social-bg-colourful[href*="linkedin.com"] {
-  color: #24A5DD;
+  color: #24A5DD !important;
 }
 
 .social-bg-colourful[href*="stackoverflow.com"] {
-  color: #FF7500;
+  color: #FF7500 !important;
 }
 
 .social-bg-colourful[href*="rss"],
 .social-bg-colourful[href*="feed"] {
-  color: #FF7500;
+  color: #FF7500 !important;
 }
 
 /* ====================================================== 
@@ -3847,18 +3849,6 @@ ul.entry-meta {
   transition: all 0.3s ease;
 }
 
-.custom-accordion-img ul li > .outer * {
-  margin: 0;
-  position: relative;
-  z-index: 5;
-  transform: translateX(-20px);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 100%;
-  white-space: nowrap;
-  transition: all 0.3s ease;
-}
-
 .custom-accordion-img ul li > .outer h3 {
   text-overflow: clip;
   top: 140px;
@@ -4506,20 +4496,24 @@ ul.entry-meta {
  * 1. Common button styles
  * 2. Borders
  * 3. Sizes
- * 4. Hover Effect
- * 5. Background
+ * 4. Icons
+ * 5. Group
+ * 6. Background
 */
 /* 
  ---------------------------
  1. Common button styles
  ---------------------------
  */
+.button[class*=button-]:focus {
+  box-shadow: none;
+}
+
 .button {
   display: inline-block;
   text-align: center;
   min-width: 100px;
-  margin: 0.875rem 1.75rem 0.875rem 0;
-  padding: 0.4375rem 1.5rem;
+  margin: 0 1rem 1.5rem 0;
   border: none;
   background: none;
   color: inherit;
@@ -4529,13 +4523,17 @@ ul.entry-meta {
   font-weight: 600;
   text-transform: uppercase;
   z-index: 1;
+  letter-spacing: .02rem;
+  line-height: 1.2;
+  transition: all 0.3s ease;
   /* Waiting state */
 }
 
 .button.disable {
+  background-image: linear-gradient(to right, #e4e7ed 0%, #e4e7ed 20%, #e4e7ed 100%) !important;
   border-color: #e4e7ed !important;
-  background-color: #e4e7ed !important;
-  cursor: not-allowed;
+  cursor: not-allowed !important;
+  box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.2) !important;
 }
 
 .button.hide {
@@ -4550,7 +4548,11 @@ ul.entry-meta {
 }
 
 .button:hover {
-  background-position: 100% 0 !important;
+  background-position: 100% 0;
+}
+
+.button:hover, .button:focus {
+  color: #fff;
 }
 
 .button.button-radius {
@@ -4573,6 +4575,14 @@ ul.entry-meta {
   margin-right: .5rem;
 }
 
+.t-c .button {
+  margin: 0 0.5rem 1.5rem 0.5rem;
+}
+
+.t-c .t-l .button {
+  margin: 0 1rem 1.5rem 0;
+}
+
 @keyframes move-waiting-stripes {
   0% {
     background-position: 0 0;
@@ -4582,46 +4592,15 @@ ul.entry-meta {
   }
 }
 
-.t-c .button {
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-}
-
-.button-text-white {
-  color: #fff;
-}
-
-.button-box-br {
-  margin-left: -0.875rem;
-}
-
-@media all and (max-width: 768px) {
-  .button {
-    padding: 0.35rem 0.875rem !important;
-    margin: 0.5rem 1.5rem 0.5rem 0;
-  }
-}
-
-.button-space-none {
-  margin: 0;
-}
-
-@media all and (max-width: 768px) {
-  .button-space-none {
-    margin: 0 !important;
-  }
-}
-
 .button-fullwidth {
   max-width: none;
   width: 100%;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
 }
 
-@media all and (max-width: 768px) {
-  .button-fullwidth {
-    max-width: none !important;
-    width: calc( 100% - 1.75rem) !important;
-  }
+.t-c .button-fullwidth {
+  margin: 0 0 1.5rem 0;
 }
 
 /* 
@@ -4650,100 +4629,195 @@ ul.entry-meta {
  3. Sizes
  ---------------------------
  */
-.button-size-tiny {
-  font-size: 0.75rem;
-}
-
 .button-size-s {
   font-size: 0.875rem;
+  padding: .8rem 1.5rem;
 }
 
 .button-size-m {
   font-size: 1rem;
-  margin: 1rem 0.875rem 1rem 0;
-  padding: 0.4375rem 2rem;
+  padding: 1rem 2.5rem;
 }
 
 .button-size-l {
   font-size: 1.375rem;
-  margin: 1.375rem 1rem 1.375rem 0;
-  padding: 0.4375rem 3rem;
+  padding: 1.25rem 5rem;
 }
 
 /* 
  ---------------------------
- 4. Hover Effect
+ 4. Icons
  ---------------------------
  */
-.button-hover {
-  overflow: hidden;
-  transition: all 0.3s ease;
+.button-icon {
+  padding-left: 3.6rem;
+  position: relative;
 }
 
-.button-hover:hover {
-  color: #212121;
-  border-color: #212121;
+.button-icon.button-icon-right {
+  padding-left: 2.5rem;
+  padding-right: 3.6rem;
+}
+
+.button-icon.button-icon-right > span {
+  right: 0;
+  left: auto;
+}
+
+.button-icon > span {
+  width: 2.6rem;
+  left: 0;
+  top: 0;
+  height: 100%;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.1);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.button-icon > span i {
+  margin: 0;
+}
+
+.button-icon.none-bg > span {
+  background-color: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.button-icon.button-icon-left > span {
+  left: 0;
+}
+
+.button-icon.button-radius.button-icon-left span {
+  border-radius: 35px 0 0 35px;
+}
+
+.button-icon.button-radius.button-icon-right span {
+  border-radius: 0 50px 50px 0;
+}
+
+.button-icon.button-radius-s.button-icon-left span {
+  border-radius: 4px 0 0 4px;
+}
+
+.button-icon.button-radius-s.button-icon-right span {
+  border-radius: 0 4px 4px 0;
 }
 
 /* 
  ---------------------------
- 5. Background
+ 5. Group
  ---------------------------
  */
-.button-bg:hover {
-  opacity: 0.7;
+.button-group {
+  display: inline-block;
+  margin-bottom: 1.5rem;
 }
 
+.button-group::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.button-group > .button {
+  margin: 0;
+  border-radius: 0;
+  float: left;
+  box-sizing: border-box;
+}
+
+.button-group > .button.button-radius:first-child {
+  border-radius: 50px 0 0 50px;
+}
+
+.button-group > .button.button-radius:last-child {
+  border-radius: 0 50px 50px 0;
+}
+
+.button-group > .button.button-radius-s:first-child {
+  border-radius: 4px 0 0 4px;
+}
+
+.button-group > .button.button-radius-s:last-child {
+  border-radius: 0 4px 4px 0;
+}
+
+.button-group > .button.button-border-thin:not(:first-child) {
+  margin-left: -1px;
+}
+
+.button-group > .button.button-border-medium:not(:first-child) {
+  margin-left: -2px;
+}
+
+.button-group > .button.button-border-thick:not(:first-child) {
+  margin-left: -3px;
+}
+
+/* 
+ ---------------------------
+ 6. Background
+ ---------------------------
+ */
 /* Your Custom colors for buttons */
 .button-bg-primary {
-  border-color: #EC5E79 !important;
-  background-color: #EC5E79 !important;
-  background-image: linear-gradient(to right, #EC5E79 0%, #f60 20%, #d83ba0 100%) !important;
+  border-color: #EC5E79;
+  background-color: #EC5E79;
+  background-image: linear-gradient(to right, #EC5E79 0%, #f60 20%, #d83ba0 100%);
   box-shadow: 0 4px 15px 0 rgba(236, 94, 121, 0.75);
-  color: #fff !important;
-  width: auto !important;
+  color: #fff;
+  width: auto;
 }
 
 .button-bg-primary.button-fullwidth {
-  width: 100% !important;
+  width: 100%;
 }
 
 .button-bg-primary.none-bg {
-  background: none !important;
-  color: #EC5E79 !important;
+  background: none;
+  color: #EC5E79;
+  box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.2);
 }
 
 .button-bg-primary.none-bg:hover {
-  background-color: #EC5E79 !important;
-  background-image: linear-gradient(to right, #EC5E79 0%, #f60 20%, #d83ba0 100%) !important;
-  color: #fff !important;
+  background-color: #EC5E79;
+  background-image: linear-gradient(to right, #EC5E79 0%, #f60 20%, #d83ba0 100%);
+  color: #fff;
 }
 
 .button-bg-secondary {
-  width: auto !important;
+  width: auto;
 }
 
 .button-bg-secondary.button-fullwidth {
-  width: 100% !important;
+  width: 100%;
 }
 
 .button-bg-secondary:not(.fill-white) {
-  border-color: #fff !important;
-  background-color: transparent !important;
+  border-color: #fff;
+  background-color: transparent;
   box-shadow: 0 4px 15px 0 rgba(255, 255, 255, 0.2);
-  color: #fff !important;
+  color: #fff;
 }
 
 .button-bg-secondary.fill-white {
-  border-color: #fff !important;
-  background-color: #fff !important;
+  border-color: #fff;
+  background-color: #fff;
   box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.2);
-  color: #474747 !important;
+  color: #474747;
 }
 
 .button-bg-secondary:hover {
-  background-color: #fff !important;
-  color: #474747 !important;
+  background-color: #fff;
+  color: #474747;
 }
 
 .button-bg-secondary.fill-white:hover {
@@ -5067,61 +5141,6 @@ ul.entry-meta {
 }
 
 /* ====================================================== 
-   <!-- Equal-width Divs --> 
-/* ====================================================== */
-/**
- * Using only CSS, we can make a tabbed navigation whose tabs always
- * occupy an equal share of the available width. No JS to interrogate
- * the DOM, no server-side logic to count through items, no inline styles.
- *
- */
-.equal-width-divs ul {
-  list-style: none;
-  font-size: 0;
-  /*Fighting the Space Between Inline Block Elements*/
-  display: table;
-  /* [1] */
-  table-layout: fixed;
-  /* [2] */
-  width: 100%;
-  /* [3] */
-}
-
-.equal-width-divs ul li {
-  font-size: 1rem;
-  /*Fighting the Space Between Inline Block Elements*/
-  display: table-cell;
-  /* [4] */
-  box-shadow: 1px 0px 0px 0px #AEAEAE;
-}
-
-.equal-width-divs ul li:last-child {
-  box-shadow: none;
-}
-
-.equal-width-divs ul li span {
-  display: block;
-  font-size: 0.75rem;
-}
-
-@media all and (max-width: 768px) {
-  .equal-width-divs ul {
-    display: block;
-  }
-  .equal-width-divs ul li {
-    display: inline-block;
-    width: 50%;
-    margin-bottom: .5rem;
-  }
-  .equal-width-divs ul li:nth-child(2n+0) {
-    box-shadow: none;
-  }
-  .equal-width-divs ul li span {
-    padding-bottom: 1rem;
-  }
-}
-
-/* ====================================================== 
    <!-- Dropdown Menu --> 
 /* ====================================================== */
 /* Do not use <a> tag */
@@ -5203,6 +5222,61 @@ ul.entry-meta {
 .custom-dropdown-trigger > :checked ~ ul {
   display: block;
   opacity: 1;
+}
+
+/* ====================================================== 
+   <!-- Equal-width Divs --> 
+/* ====================================================== */
+/**
+ * Using only CSS, we can make a tabbed navigation whose tabs always
+ * occupy an equal share of the available width. No JS to interrogate
+ * the DOM, no server-side logic to count through items, no inline styles.
+ *
+ */
+.equal-width-divs ul {
+  list-style: none;
+  font-size: 0;
+  /*Fighting the Space Between Inline Block Elements*/
+  display: table;
+  /* [1] */
+  table-layout: fixed;
+  /* [2] */
+  width: 100%;
+  /* [3] */
+}
+
+.equal-width-divs ul li {
+  font-size: 1rem;
+  /*Fighting the Space Between Inline Block Elements*/
+  display: table-cell;
+  /* [4] */
+  box-shadow: 1px 0px 0px 0px #AEAEAE;
+}
+
+.equal-width-divs ul li:last-child {
+  box-shadow: none;
+}
+
+.equal-width-divs ul li span {
+  display: block;
+  font-size: 0.75rem;
+}
+
+@media all and (max-width: 768px) {
+  .equal-width-divs ul {
+    display: block;
+  }
+  .equal-width-divs ul li {
+    display: inline-block;
+    width: 50%;
+    margin-bottom: .5rem;
+  }
+  .equal-width-divs ul li:nth-child(2n+0) {
+    box-shadow: none;
+  }
+  .equal-width-divs ul li span {
+    padding-bottom: 1rem;
+  }
 }
 
 /* ====================================================== 
@@ -6059,7 +6133,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 }
 
 .controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) textarea,
-.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) button,
+.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) button:not(.button),
 .controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) select {
   border-radius: 0;
   /* Remove inner shadow from inputs on mobile iOS */
@@ -6071,10 +6145,10 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
   border: none;
   box-sizing: content-box;
   transition: all 0.3s ease;
+  width: calc(100% - 1.09375rem - 2px);
   background-color: #fff;
   color: #888;
   border: 1px solid #dce4e8;
-  width: calc(100% - 1.09375rem - 2px);
 }
 
 .controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) textarea {
@@ -6184,7 +6258,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
   pointer-events: none;
   position: absolute;
   transform: rotate(-45deg);
-  margin-top: -0.875rem;
+  margin-top: -0.3rem;
   right: 1rem;
   top: 50%;
   z-index: 1;
@@ -6342,10 +6416,18 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
  */
 .controls-file-container {
   position: relative;
+  cursor: pointer;
+  display: inline-block;
+  color: #888;
+  transition: all 0.3s ease;
 }
 
-.controls-file-trigger {
-  cursor: pointer;
+.controls-file-container .controls-file-trigger i {
+  margin-right: .5rem;
+}
+
+.controls-file-container:hover {
+  color: #000;
 }
 
 .controls-file-container input[type="file"] {
@@ -6354,10 +6436,9 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
   left: 0;
   width: 14.0625rem;
   opacity: 0;
-  cursor: pointer;
 }
 
-.controls-file-container .controls-file-return {
+.controls-file-return {
   font-style: italic;
 }
 
@@ -6402,6 +6483,10 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
   padding: 0.546875rem 0 !important;
   width: calc(20% + 5px) !important;
   margin-left: -5px;
+  text-transform: uppercase;
+  letter-spacing: .02rem;
+  font-weight: 600;
+  font-size: 0.875rem;
 }
 
 .controls-merge button span {
@@ -6460,6 +6545,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
   position: relative;
   display: inline-block;
   user-select: none;
+  min-height: 4.1rem;
 }
 
 .custom-select-wrapper select {
@@ -6587,17 +6673,17 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
   transition: all 0.3s ease;
 }
 
-.custom-select-wrapper .dir-top {
+.custom-select-wrapper .option-top {
   /* Shown from above */
 }
 
-.custom-select-wrapper .dir-top .custom-options {
+.custom-select-wrapper .option-top .custom-options {
   top: auto;
   bottom: 100%;
   margin-bottom: 15px;
 }
 
-.custom-select-wrapper .dir-top .custom-options::after {
+.custom-select-wrapper .option-top .custom-options::after {
   position: absolute;
   display: block;
   content: '';
@@ -6614,7 +6700,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
   z-index: 1;
 }
 
-.custom-select-wrapper .dir-top .custom-options::before {
+.custom-select-wrapper .option-top .custom-options::before {
   display: none;
 }
 
@@ -8119,64 +8205,6 @@ dl.list-side-by-side::after {
 }
 
 /* ====================================================== 
-   <!-- Side by Side List With Photo --> 
-/* ====================================================== */
-.list-side-by-side-img .item {
-  margin-top: 1.5rem;
-  padding-bottom: 3rem;
-  position: relative;
-}
-
-.list-side-by-side-img .item .item-left,
-.list-side-by-side-img .item .item-body {
-  display: table-cell;
-  vertical-align: top;
-}
-
-.list-side-by-side-img .item .item-body {
-  padding-left: 1.5rem;
-}
-
-.list-side-by-side-img .item .item-body em {
-  color: #AEAEAE;
-  display: inline-block;
-  margin-right: 1rem;
-}
-
-.list-side-by-side-img .item .item-desc {
-  line-height: 1.5;
-  margin-top: 1em;
-}
-
-.list-side-by-side-img .item .item-left-imgbox {
-  width: 250px;
-  margin: 0 auto;
-}
-
-.list-side-by-side-img .item .item-left-imgbox img {
-  width: 100%;
-}
-
-@media (max-width: 768px) {
-  .list-side-by-side-img {
-    text-align: center;
-  }
-  .list-side-by-side-img .item .item-left {
-    display: block;
-    text-align: center;
-    margin-bottom: 1rem;
-  }
-  .list-side-by-side-img .item .item-left-imgbox {
-    width: 100%;
-  }
-  .list-side-by-side-img .item .item-body {
-    display: block;
-    padding-left: 0;
-    width: 100%;
-  }
-}
-
-/* ====================================================== 
     <!-- Fullwidth List of Split 2 --> 
 /* ====================================================== */
 .list-split-content-container {
@@ -8260,6 +8288,64 @@ dl.list-side-by-side::after {
     min-height: inherit;
     width: 100%;
     padding: 0 15px;
+  }
+}
+
+/* ====================================================== 
+   <!-- Side by Side List With Photo --> 
+/* ====================================================== */
+.list-side-by-side-img .item {
+  margin-top: 1.5rem;
+  padding-bottom: 3rem;
+  position: relative;
+}
+
+.list-side-by-side-img .item .item-left,
+.list-side-by-side-img .item .item-body {
+  display: table-cell;
+  vertical-align: top;
+}
+
+.list-side-by-side-img .item .item-body {
+  padding-left: 1.5rem;
+}
+
+.list-side-by-side-img .item .item-body em {
+  color: #AEAEAE;
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.list-side-by-side-img .item .item-desc {
+  line-height: 1.5;
+  margin-top: 1em;
+}
+
+.list-side-by-side-img .item .item-left-imgbox {
+  width: 250px;
+  margin: 0 auto;
+}
+
+.list-side-by-side-img .item .item-left-imgbox img {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .list-side-by-side-img {
+    text-align: center;
+  }
+  .list-side-by-side-img .item .item-left {
+    display: block;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .list-side-by-side-img .item .item-left-imgbox {
+    width: 100%;
+  }
+  .list-side-by-side-img .item .item-body {
+    display: block;
+    padding-left: 0;
+    width: 100%;
   }
 }
 
@@ -8706,6 +8792,7 @@ dl.list-side-by-side::after {
   box-shadow: 0px 0px 71px 0px rgba(0, 0, 0, 0.47);
   left: 50%;
   transform: translate(-50%, -50%);
+  /* Video container */
 }
 
 .modal-box.fullscreen {
@@ -8723,6 +8810,29 @@ dl.list-side-by-side::after {
 
 .modal-box .web-video-container > div.video-js {
   margin: 0 auto;
+}
+
+.modal-box .web-video-waiting {
+  display: none;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index: 99998;
+  margin-left: -1rem;
+}
+
+.modal-box .web-video-waiting::after {
+  font-family: 'FontAwesome';
+  content: "\f110";
+  color: #fff;
+  font-size: 2rem;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+  display: inline-block;
+  animation: fa-spin 2s infinite linear;
+}
+
+.modal-box .web-video-waiting.active {
+  display: block;
 }
 
 @media all and (max-width: 991px) {
@@ -12791,16 +12901,6 @@ a img.aligncenter {
   50% {
     right: 2px;
     left: 180px;
-  }
-  55% {
-    right: 2px;
-  }
-  100% {
-    right: 180px;
-    left: 2px;
-  }
-}
-80px;
   }
   55% {
     right: 2px;

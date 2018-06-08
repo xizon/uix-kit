@@ -23,7 +23,8 @@ App = ( function ( App, $, window, document ) {
 		 */  
 		$( '.web-video-embed' ).each( function()  {
 			var $this          = $( this ),
-			    curVideoID     = $this.find( '.video-js' ).attr( 'id' ),
+				tempID         = 'video-' + Math.random()*1000000000000000000,
+			    curVideoID     = tempID,
 				coverPlayBtnID = 'videocover-' + curVideoID,
 				videoWrapperW  = $this.closest( '[data-embed-video-wrapper]' ).width(),
 				videoWrapperH  = $this.closest( '[data-embed-video-wrapper]' ).height(),
@@ -33,6 +34,11 @@ App = ( function ( App, $, window, document ) {
 				dataW          = $this.data( 'embed-video-width' ),
 				dataH          = $this.data( 'embed-video-height' );
 
+			
+			//Push a new ID to video
+			//Solve the problem that ajax asynchronous loading does not play
+			$this.find( '.video-js' ).attr( 'id', tempID );
+			
 			
 			
 			if ( videoWrapperH == 0 ) videoWrapperH = videoWrapperW/1.77777777777778;
@@ -73,32 +79,38 @@ App = ( function ( App, $, window, document ) {
 					$( '#' + coverPlayBtnID ).hide();
 
 				});
+				
+				//Prevent some devices from automatically playing video and trigger with buttons
+				if ( !dataAuto || browser.isAndroid ) {
+					$( '#' + coverPlayBtnID + ' .cover-play' ).show();
+				}
 
 			}
 			
 			
 			
-			//HTML5 video autoplay on mobile revisited
-			if ( dataAuto && windowWidth <= 768 ) {
+			 
+
+			/* ---------  HTML5 video autoplay on mobile revisited  */
+			if ( windowWidth <= 768 ) {
 				$this.find( '.video-js' ).attr({
-					'autoplay'    : 'true',
-					'muted'       : 'true',
 					'playsinline' : 'true'
 				});
 			}
-			
 			
 			var myPlayer = videojs( curVideoID, {
 					                  width     : dataW,
 					                  height    : dataH,
 				                      loop      : dataLoop,
+				                      
 									  controlBar: {
 										  muteToggle : false,
 										  autoplay   : dataAuto,
 										  loop       : dataLoop,
 										  controls   : true,
 										  controlBar : {
-											  muteToggle: false
+											  muteToggle: false,
+										  
 										  }
 									  }
 					
@@ -145,14 +157,16 @@ App = ( function ( App, $, window, document ) {
 				});		
 			
 
+
 			
-				
 				
 				/* ---------  Set, tell the player it's in fullscreen  */
 				if ( dataAuto ) {
+
+					myPlayer.muted( true ); //Fix an error of Video auto play is not working in browser
 					myPlayer.play();
+
 				}
-				
 
 				/* ---------  Disable control bar play button click */
 				if ( !dataControls ) {
@@ -249,7 +263,7 @@ App = ( function ( App, $, window, document ) {
 				v += '<div class="modal-box fullscreen video" id="'+videoContainerMid+'">';
 				v += '<a href="javascript:void(0)" class="close-btn"></a>';
 				v += '<div class="content">';
-				v += '<div class="web-video-container">';
+				v += '<div class="web-video-waiting"></div><div class="web-video-container" data-video-player-init="0">';
 				
 				if ( $this.find( '[data-video-iframe]' ).length > 0 && videoSrcIfm != '' ) {
 					//If iframe
@@ -281,15 +295,43 @@ App = ( function ( App, $, window, document ) {
 		//Check out: http://docs.videojs.com/tutorial-player-workflows.html
 		$( document ).on( 'click', modalDialogTrigger, function() {
 
-			var vid      = $( this ).data( 'video-id' ),
-				$ifm     = false,
-				newMaxW  = windowWidth - 80,
-				newMaxH  = windowHeight - 80;
+			var vid          = $( this ).data( 'video-id' ),
+				$ifm         = false,
+				newMaxW      = windowWidth - 80,
+				newMaxH      = windowHeight - 80,
+				$vContainer  = $( '#' + vid ).closest( '.web-video-container' ),
+				$vLoader     = $vContainer.prev( '.web-video-waiting' ),
+				myPlayerInit = $vContainer.data( 'video-player-init' );
 
+			
 
+			//----- Hidden/Display the wrapper of video
+			var displayVC = function() {
+				
+				TweenMax.set( $vContainer, {
+					alpha: 1
+				});
+				$vLoader.removeClass( 'active' );
+			};
+			
+			var hiddenVC = function() {
+				
+				TweenMax.set( $vContainer, {
+					alpha: 0
+				});
+
+				$vLoader.addClass( 'active' );
+			};
+
+			
+			
+
+			
 			//----- Embed iframe
 			if ( $( '#' + vid ).find( 'iframe' ).length > 0 ) {
 				$ifm = $( '#' + vid ).find( 'iframe' );
+			} else {
+				hiddenVC();
 			}
 
 
@@ -337,17 +379,24 @@ App = ( function ( App, $, window, document ) {
 					}
 
 
-
-
 				}
 
 				return false;
 			}
 
 
+			//----- HTML5 video autoplay on mobile revisited
+			if ( windowWidth <= 768 ) {
+				$( '#' + vid ).attr({
+					'playsinline' : 'true'
+				});
+			}
+			
+			
+
 
 			//----- Embed local video
-			var myPlayer = videojs( vid, {
+			var myPlayer     = videojs( vid, {
 									  width     : 1,
 									  height    : 1,
 									  controlBar: {
@@ -401,13 +450,24 @@ App = ( function ( App, $, window, document ) {
 
 
 					//In order to allow CSS to support video centering
-					$( '#' + vid ).closest( '.web-video-container > div.video-js' ).css({
+					$vContainer.find( ' > div.video-js' ).css({
 						'width' : newW + 'px'
 					});			
 					
+					
+					//Vertically center the video area
+					var mt = parseFloat( windowHeight - newH )/2 - 50;
+					$vContainer.css({
+						'transform' : 'translateY('+ mt +'px)'
+					});			
+					
+					//Display the wrapper of video
+					displayVC();
+					
+					//If a player instance has already been created for this variable.
+					$vContainer.data( 'video-player-init', 1 );
 
-
-
+					
 				});
 
 				/* ---------  Set, tell the player it's in fullscreen  */
@@ -436,17 +496,21 @@ App = ( function ( App, $, window, document ) {
 				});
 
 
-
 			});
 
-
-
-
+			
+			/* ---------  Display the wrapper of video  */
+			if ( myPlayerInit === 1 ) {
+				displayVC();
+			}
+			
+			
 			/* ---------  Close the modal  */
 			$( document ).on( 'click', '.modal-box .close-btn', function() {
 
 				myPlayer.ready(function() {
 					myPlayer.pause();
+					
 				});				
 
 			});

@@ -323,7 +323,8 @@ App = ( function ( App, $, window, document ) {
 				var $this          = $( this ),
 					videoWrapperW  = $this.closest( '[data-embed-video-wrapper]' ).width(),
 					videoWrapperH  = $this.closest( '[data-embed-video-wrapper]' ).height(),
-					curVideoID     = $this.find( '.video-js' ).attr( 'id' ),
+					tempID         = 'video-' + Math.random()*1000000000000000000,
+					curVideoID     = tempID,
 					coverPlayBtnID = 'videocover-' + curVideoID,
 					dataControls   = $this.data( 'embed-video-controls' ),
 					dataAuto       = $this.data( 'embed-video-autoplay' ),
@@ -331,6 +332,10 @@ App = ( function ( App, $, window, document ) {
 					dataW          = $this.data( 'embed-video-width' ),
 					dataH          = $this.data( 'embed-video-height' ),
 					$replayBtn     = $( '#'+curVideoID+'-replay-btn' );
+
+				//Push a new ID to video
+				//Solve the problem that ajax asynchronous loading does not play
+				$this.find( '.video-js' ).attr( 'id', tempID );
 
 				
 				if ( videoWrapperH == 0 ) videoWrapperH = videoWrapperW/1.77777777777778;

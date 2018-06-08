@@ -151,262 +151,262 @@
  ---------------------------
  */ 
 .social-bg {
-    color: #fff;
+    color: #fff !important;
 }
 
 .social-bg-twitter {
-    border-color: #53B9FD;
-    background-color: #53B9FD;
+    border-color: #53B9FD !important;
+    background-color: #53B9FD !important;
 }
 
 .social-bg-facebook {
-	border-color: #78A4DD;
-	background-color: #78A4DD;
+	border-color: #78A4DD !important;
+	background-color: #78A4DD !important;
 }
 
 .social-bg-google {
-	border-color: #FC5B5B;
-	background-color: #FC5B5B;
+	border-color: #FC5B5B !important;
+	background-color: #FC5B5B !important;
 }
 
 .social-bg-instagram {
-	border-color: #6156C7;
-	background-color: #6156C7;
+	border-color: #6156C7 !important;
+	background-color: #6156C7 !important;
 }
 
 .social-bg-lastfm {
-	border-color: #B90000;
-	background-color: #B90000;
+	border-color: #B90000 !important;
+	background-color: #B90000 !important;
 }
 
 .social-bg-youtube {
-	border-color: #CC181E;
-	background-color: #CC181E;
+	border-color: #CC181E !important;
+	background-color: #CC181E !important;
 }
 
 .social-bg-vimeo {
-	border-color: #1ab7ea;
-	background-color: #1ab7ea;
+	border-color: #1ab7ea !important;
+	background-color: #1ab7ea !important;
 }
 
 .social-bg-dribbble {
-	border-color: #FA8BBC;
-	background-color: #FA8BBC;
+	border-color: #FA8BBC !important;
+	background-color: #FA8BBC !important;
 }
 
 .social-bg-github {
-	border-color: #652F51;
-	background-color: #652F51;
+	border-color: #652F51 !important;
+	background-color: #652F51 !important;
 }
 
 .social-bg-flickr {
-	border-color: #fc4ca4;
-	background-color: #fc4ca4;
+	border-color: #fc4ca4 !important;
+	background-color: #fc4ca4 !important;
 }
 
 .social-bg-medium {
-	border-color: #00AB6B;
-	background-color: #00AB6B;
+	border-color: #00AB6B !important;
+	background-color: #00AB6B !important;
 }
 
 .social-bg-codepen {
-	border-color: #333;
-	background-color: #333;
+	border-color: #333 !important;
+	background-color: #333 !important;
 }
 
 .social-bg-behance {
-	border-color: #4F8FD6;
-	background-color: #4F8FD6;
+	border-color: #4F8FD6 !important;
+	background-color: #4F8FD6 !important;
 }
 
 .social-bg-dropbox {
-	border-color: #349BE9;
-	background-color: #349BE9;
+	border-color: #349BE9 !important;
+	background-color: #349BE9 !important;
 }
 
 .social-bg-pinterest {
-	border-color: #F35359;
-	background-color: #F35359;
+	border-color: #F35359 !important;
+	background-color: #F35359 !important;
 }
 
 .social-bg-reddit {
-	border-color: #FF4500;
-	background-color: #FF4500;
+	border-color: #FF4500 !important;
+	background-color: #FF4500 !important;
 }
 
 .social-bg-soundcloud {
-	border-color: #FF7500;
-	background-color: #FF7500;
+	border-color: #FF7500 !important;
+	background-color: #FF7500 !important;
 }
 
 .social-bg-producthunt {
-	border-color: #DA552F;
-	background-color: #DA552F;
+	border-color: #DA552F !important;
+	background-color: #DA552F !important;
 }
 
 .social-bg-weibo {
-	border-color: #E6162D;
-	background-color: #E6162D;
+	border-color: #E6162D !important;
+	background-color: #E6162D !important;
 }
 
 .social-bg-deviantart {
-	border-color: #05CC47;
-	background-color: #05CC47;
+	border-color: #05CC47 !important;
+	background-color: #05CC47 !important;
 }
 
 .social-bg-spotify {
-	border-color: #A5CE3F;
-	background-color: #A5CE3F;
+	border-color: #A5CE3F !important;
+	background-color: #A5CE3F !important;
 }
 
 .social-bg-wordpress {
-	border-color: #24A5DD;
-	background-color: #24A5DD;
+	border-color: #24A5DD !important;
+	background-color: #24A5DD !important;
 }
 
 .social-bg-digg {
-	border-color: #333;
-	background-color: #333;
+	border-color: #333 !important;
+	background-color: #333 !important;
 }
 
 .social-bg-tumblr {
-	border-color: #529ECC;
-	background-color: #529ECC;
+	border-color: #529ECC !important;
+	background-color: #529ECC !important;
 }
 
 .social-bg-linkedin {
-	border-color: #24A5DD;
-	background-color: #24A5DD;
+	border-color: #24A5DD !important;
+	background-color: #24A5DD !important;
 }
 
 .social-bg-stackoverflow {
-	border-color: #FF7500;
-	background-color: #FF7500;
+	border-color: #FF7500 !important;
+	background-color: #FF7500 !important;
 }
 
 
 .social-bg-colourful {
-    display: inline-block;
-    *display: inline;
-	margin: .2em .5em;
+    display: inline-block !important;
+    *display: inline !important;
+	margin: .2em .5em !important;
 }
 
 .social-bg-colourful {
-	color: #333333;
+	color: #333333 !important;
 }
 
 .social-bg-colourful[href*="twitter.com"] {
-    color: #53B9FD;
+    color: #53B9FD !important;
 }
 
 .social-bg-colourful[href*="facebook.com"] {
-    color: #78A4DD;
+    color: #78A4DD !important;
 }
 
 .social-bg-colourful[href*="google.com"] {
-    color: #FC5B5B;
+    color: #FC5B5B !important;
 }
 
 .social-bg-colourful[href*="instagram.com"] {
-    color: #6156C7;
+    color: #6156C7 !important;
 }
 
 .social-bg-colourful[href*="last.fm"] {
-    color: #B90000;
+    color: #B90000 !important;
 }
 
 .social-bg-colourful[href*="youtube.com"] {
-    color: #CC181E;
+    color: #CC181E !important;
 }
 
 .social-bg-colourful[href*="vimeo.com"] {
-    color: #1ab7ea;
+    color: #1ab7ea !important;
 }
 
 .social-bg-colourful[href*="dribbble.com"] {
-    color: #FA8BBC;
+    color: #FA8BBC !important;
 }
 
 .social-bg-colourful[href*="github.com"] {
-    color: #652F51;
+    color: #652F51 !important;
 }
 
 .social-bg-colourful[href*="flickr.com"] {
-    color: #fc4ca4;
+    color: #fc4ca4 !important;
 }
 
 .social-bg-colourful[href*="medium.com"] {
-    color: #00AB6B;
+    color: #00AB6B !important;
 }
 
 .social-bg-colourful[href*="codepen.com"] {
-    color: #333;
+    color: #333 !important;
 }
 
 .social-bg-colourful[href*="behance.net"] {
-    color: #4F8FD6;
+    color: #4F8FD6 !important;
 }
 
 .social-bg-colourful[href*="dropbox.com"] {
-    color: #349BE9;
+    color: #349BE9 !important;
 }
 
 .social-bg-colourful[href*="pinterest.com"] {
-    color: #F35359;
+    color: #F35359 !important;
 }
 
 .social-bg-colourful[href*="reddit.com"] {
-    color: #FF4500;
+    color: #FF4500 !important;
 }
 
 .social-bg-colourful[href*="soundcloud.com"] {
-    color: #FF7500;
+    color: #FF7500 !important;
 }
 
 .social-bg-colourful[href*="producthunt.com"] {
-    color: #DA552F;
+    color: #DA552F !important;
 }
 
 .social-bg-colourful[href*="weibo.com"] {
-    color: #E6162D;
+    color: #E6162D !important;
 }
 
 
 .social-bg-colourful[href*="deviantart.com"] {
-    color: #05CC47;
+    color: #05CC47 !important;
 }
 
 .social-bg-colourful[href*="spotify.com"] {
-    color: #A5CE3F;
+    color: #A5CE3F !important;
 }
 
 .social-bg-colourful[href*="wordpress.com"] {
-    color: #24A5DD;
+    color: #24A5DD !important;
 }
 
 .social-bg-colourful[href*="mailto"] {
-    color: #333;
+    color: #333 !important;
 }
 
 .social-bg-colourful[href*="digg.com"] {
-    color: #333;
+    color: #333 !important;
 }
 
 .social-bg-colourful[href*="tumblr.com"] {
-    color: #529ECC;
+    color: #529ECC !important;
 }
 
 .social-bg-colourful[href*="linkedin.com"] {
-    color: #24A5DD;
+    color: #24A5DD !important;
 }
 
 .social-bg-colourful[href*="stackoverflow.com"] {
-    color: #FF7500;
+    color: #FF7500 !important;
 }
 
 .social-bg-colourful[href*="rss"], 
 .social-bg-colourful[href*="feed"] {
-    color: #FF7500;
+    color: #FF7500 !important;
 }
 
 

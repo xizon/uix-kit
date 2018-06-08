@@ -22,9 +22,10 @@ if ( location.hostname === 'localhost' || location.hostname === '127.0.0.1' ) {
 
 //Determine whether it is a special browser
 var browser = {
-	isPC : !navigator.userAgent.match(/(iPhone|iPod|Android|ios|Mobile)/i),
-	isSafari : !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/), /*Test to 9, 10. */
-	isIE     : !!window.ActiveXObject || "ActiveXObject" in window     /*Test to 6 ~ 11 (not edge) */
+	isAndroid : /(android)/i.test(navigator.userAgent),
+	isPC      : !navigator.userAgent.match(/(iPhone|iPod|Android|ios|Mobile)/i),
+	isSafari  : !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/), /*Test to 9, 10. */
+	isIE      : !!window.ActiveXObject || "ActiveXObject" in window     /*Test to 6 ~ 11 (not edge) */
 };
 
 

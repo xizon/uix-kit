@@ -6,10 +6,14 @@
  * 1. Common button styles
  * 2. Borders
  * 3. Sizes
- * 4. Hover Effect
- * 5. Background
+ * 4. Icons
+ * 5. Group
+ * 6. Background
 */
 
+
+$button-margin-lr: 1rem;
+$button-margin-b: 1.5rem;
 
 
 /* 
@@ -17,13 +21,16 @@
  1. Common button styles
  ---------------------------
  */ 
+.button[class*=button-]:focus {
+    box-shadow: none;
+}
+
 
 .button {
 	display: inline-block;
 	text-align: center;
 	min-width: 100px;
-	margin: 0.875rem 1.75rem 0.875rem 0;
-	padding: 0.4375rem 1.5rem;
+	margin: 0 #{$button-margin-lr} #{$button-margin-b} 0;
 	border: none;
 	background: none;
 	color: inherit;
@@ -33,13 +40,18 @@
 	font-weight: 600;
 	text-transform: uppercase;
 	z-index: 1;
+	letter-spacing: .02rem;
+	line-height: 1.2;
+	@include transition-default();
+
 
 	&.disable {
+		background-image: linear-gradient(to right, #e4e7ed 0%, #e4e7ed 20%, #e4e7ed 100%)  !important;
 		border-color: #e4e7ed !important;
-		background-color: #e4e7ed !important;
-		cursor: not-allowed;
-		
+		cursor: not-allowed !important;
+		box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.2) !important;
 	}
+	
 	
 	
 	&.hide {
@@ -58,8 +70,16 @@
 
 
 	&:hover {
-		background-position: 100% 0 !important;
+		background-position: 100% 0;
 	}
+	
+	&:hover,
+	&:focus {
+		color: #fff;
+	}
+
+	
+	
 	&.button-radius {
 		border-radius: 35px;
 	}
@@ -83,6 +103,19 @@
 }
 
 
+.t-c {
+	.button {
+		margin: 0 #{$button-margin-lr/2} #{$button-margin-b} #{$button-margin-lr/2};
+	}
+	
+	.t-l {
+		.button {
+			margin: 0 #{$button-margin-lr} #{$button-margin-b} 0;
+		}	
+	}
+}
+
+
 @keyframes move-waiting-stripes {
     0% {
         background-position: 0 0;
@@ -94,48 +127,18 @@
 }
 
 
-.t-c .button {
-	margin-left: 0 !important;
-	margin-right: 0 !important;
-}
-
-.button-text-white {
-    color: #fff;
-}
-
-.button-box-br {
-    margin-left: -0.875rem;
-}
-
-@media all and (max-width: 768px) {
-	.button {
-		padding: 0.35rem 0.875rem !important;
-		margin: 0.5rem 1.5rem 0.5rem 0;
-	}
-}
-
-
-.button-space-none {
-    margin: 0;
-}
-
-@media all and (max-width: 768px) {
-	.button-space-none {
-	    margin: 0 !important;
-	}
-}
 
 .button-fullwidth {
 	max-width: none;
 	width: 100%;
+	padding-left: $button-margin-lr !important;
+	padding-right: $button-margin-lr !important;
 }
 
-@media all and (max-width: 768px) {
-	.button-fullwidth {
-		max-width: none !important;
-		width: calc( 100% - 1.75rem ) !important;
-	}
+.t-c .button-fullwidth {
+	margin: 0 0 #{$button-margin-b} 0;
 }
+
 
 /* 
  ---------------------------
@@ -163,104 +166,229 @@
  3. Sizes
  ---------------------------
  */ 
-.button-size-tiny {
-    font-size: 0.75rem;
-}
-
 .button-size-s {
     font-size: 0.875rem;
+	padding: .8rem 1.5rem;
 }
 
 .button-size-m {
 	font-size: 1rem;
-	margin: 1rem 0.875rem 1rem 0;
-	padding: 0.4375rem 2rem;
+	padding: 1rem 2.5rem;
 }
 
 .button-size-l {
 	font-size: 1.375rem;
-	margin: 1.375rem 1rem 1.375rem 0;
-	padding: 0.4375rem 3rem;
+	padding: 1.25rem 5rem;
 }
-
 
 /* 
  ---------------------------
- 4. Hover Effect
+ 4. Icons
  ---------------------------
  */ 
 
-.button-hover {
-	overflow: hidden;
-	@include transition-default();
+.button-icon {
+    padding-left: 3.6rem;
+    position: relative;
 	
-	&:hover {
-		color: $primary-text-color1;
-		border-color: $primary-text-color1;
+
+	&.button-icon-right {
+		padding-left: 2.5rem;
+		padding-right: 3.6rem;
+
+		> span {
+			right: 0;
+			left: auto;
+		}	
 	}
-}
 
-
-/* 
- ---------------------------
- 5. Background
- ---------------------------
- */ 
-.button-bg:hover {
-    opacity: 0.7;
-}
-
-/* Your Custom colors for buttons */
-
-.button-bg-primary {
-	border-color: $btn-gradient-color1 !important;
-	background-color: $btn-gradient-color1 !important;
-	background-image: linear-gradient(to right, $btn-gradient-color1 0%, $btn-gradient-color2 20%, $btn-gradient-color3 100%) !important;
-	box-shadow: 0 4px 15px 0 rgba(236, 94, 121, 0.75);
-	color: #fff !important;
-	width: auto !important; 
-	
-	&.button-fullwidth {
-		width: 100% !important;
+	> span {
+		width: 2.6rem;
+		left: 0;
+		top: 0;
+		height: 100%;
+		position: absolute;
+		background-color: rgba(0,0,0,.1);
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-align: center;
+		-ms-flex-align: center;
+		align-items: center;
+		-webkit-box-pack: center;
+		-ms-flex-pack: center;
+		justify-content: center;
+		
+		i {
+			margin: 0;
+		}
 	}
 	
 	&.none-bg {
-		background: none !important;
-		color: $btn-gradient-color1 !important;
+		> span {
+			background-color: transparent;
+			border: 1px solid rgba(0,0,0,.1);
+		}	
+	}
+
+
+	&.button-icon-left {
+
+		> span {
+			left: 0;
+		}
+
+	}
+
+
+	&.button-radius.button-icon-left span {
+		border-radius: 35px 0 0 35px;
+	}
+
+	&.button-radius.button-icon-right span {
+		border-radius: 0 50px 50px 0;
+	}
+	
+	&.button-radius-s.button-icon-left span {
+		border-radius: 4px 0 0 4px;
+	}
+
+	&.button-radius-s.button-icon-right span {
+		border-radius: 0 4px 4px 0;
+	}	
+	
+	
+	
+}
+
+
+/* 
+ ---------------------------
+ 5. Group
+ ---------------------------
+ */ 
+.button-group {
+	
+	display: inline-block;
+	margin-bottom: $button-margin-b;
+
+	
+	&::after {
+		content: '';
+		display: table;
+		clear: both;
+	}
+	
+	> .button {
+		margin: 0;
+		border-radius: 0;
+		float: left;
+		box-sizing: border-box;
+		
+		&.button-radius {
+
+			&:first-child {
+				border-radius: 50px 0 0 50px;
+			}
+
+			&:last-child {
+				border-radius: 0 50px 50px 0;
+			}	
+
+		}	
+		
+		&.button-radius-s {
+
+			&:first-child {
+				border-radius: 4px 0 0 4px;
+			}
+
+			&:last-child {
+				border-radius: 0 4px 4px 0;
+			}	
+
+		}		
+		
+		&.button-border-thin:not(:first-child) {
+			margin-left: -1px;
+		}
+
+		&.button-border-medium:not(:first-child) {
+			margin-left: -2px;
+		}
+
+		&.button-border-thick:not(:first-child) {
+			margin-left: -3px;
+		}
+
+		
+		
+	}
+	
+
+	
+
+}
+
+
+
+/* 
+ ---------------------------
+ 6. Background
+ ---------------------------
+ */ 
+/* Your Custom colors for buttons */
+
+.button-bg-primary {
+	border-color: $btn-gradient-color1;
+	background-color: $btn-gradient-color1;
+	background-image: linear-gradient(to right, $btn-gradient-color1 0%, $btn-gradient-color2 20%, $btn-gradient-color3 100%);
+	box-shadow: 0 4px 15px 0 rgba(236, 94, 121, 0.75);
+	color: #fff;
+	width: auto; 
+	
+	&.button-fullwidth {
+		width: 100%;
+	}
+	
+	&.none-bg {
+		background: none;
+		color: $btn-gradient-color1;
+		box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.2);
 		
 		&:hover {
-			background-color: $btn-gradient-color1 !important;
-			background-image: linear-gradient(to right, $btn-gradient-color1 0%, $btn-gradient-color2 20%, $btn-gradient-color3 100%) !important;
-			color: #fff !important;
+			background-color: $btn-gradient-color1;
+			background-image: linear-gradient(to right, $btn-gradient-color1 0%, $btn-gradient-color2 20%, $btn-gradient-color3 100%);
+			color: #fff;
 		}
 	}
 }
 
 
 .button-bg-secondary {
-	width: auto !important; 
+	width: auto; 
 	
 	&.button-fullwidth {
-		width: 100% !important;
+		width: 100%;
 	}	
 	
 	&:not(.fill-white) {
-		border-color: #fff !important;
-		background-color: transparent !important;
+		border-color: #fff;
+		background-color: transparent;
 		box-shadow: 0 4px 15px 0 rgba(255, 255, 255, 0.2);
-		color: #fff !important;
+		color: #fff;
 	}
 	
 	&.fill-white {
-		border-color: #fff !important;
-		background-color: #fff !important;
+		border-color: #fff;
+		background-color: #fff;
 		box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.2);
-		color: $primary-text-color2 !important;
+		color: $primary-text-color2;
 	}
 	
 	&:hover {
-		background-color: #fff !important;
-		color: $primary-text-color2 !important;
+		background-color: #fff;
+		color: $primary-text-color2;
 	}
 	
 	

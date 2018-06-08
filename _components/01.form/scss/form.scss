@@ -181,9 +181,8 @@ $control-focus-bordercolor2: transparent;
 	
 
     textarea, 
-	button, 
+	button:not(.button), 
 	select {
-
 		border-radius: 0;
 		/* Remove inner shadow from inputs on mobile iOS */
 		-webkit-appearance: none;    
@@ -196,12 +195,13 @@ $control-focus-bordercolor2: transparent;
 		box-sizing: content-box;
 		@include transition-default();
 
+		width: calc(100% - 1.09375rem - 2px );  
 		background-color: #fff;
 		color: $control-text-color;
 		border: 1px solid $control-sub-color;
-		width: calc(100% - 1.09375rem - 2px );  
-
+		
 	}
+	
 
 
 	textarea {
@@ -317,7 +317,7 @@ $control-focus-bordercolor2: transparent;
 			padding-right: 1rem !important;
 
 			&::after {
-			  @include select-arrow( -.875rem, 1rem );
+			  @include select-arrow( -.3rem, 1rem );
 			}
 
 			&.active {
@@ -545,27 +545,42 @@ $control-focus-bordercolor2: transparent;
  2. Upload
  ---------------------------
  */ 
+
 .controls-file-container {
+	
     position: relative;
-}
+	cursor: pointer;
+	display: inline-block;
+	color: $control-text-color;
+	@include transition-default();
+	
+	.controls-file-trigger {
 
-.controls-file-trigger {
-    cursor: pointer;
-}
+		i {
+			margin-right: .5rem;
+		}
+	}
+	
+	&:hover {
+		color: #000;
+	}
 
-.controls-file-container {
+	
 	input[type="file"] {
 		position: absolute;
 		top: 0;
 		left: 0;
 		width: 14.0625rem;
 		opacity: 0;
-		cursor: pointer;
 	}
-	.controls-file-return {
-	    font-style: italic;
-	}
+	
+
 }
+
+.controls-file-return {
+	font-style: italic;
+}
+
 
 /* 
  ---------------------------
@@ -612,6 +627,10 @@ $controls-merge-button-width: 20%;
 		padding: 0.546875rem 0 !important;
 		width: calc(#{$controls-merge-button-width} + 5px) !important;
 		margin-left: -5px;
+		text-transform: uppercase;
+		letter-spacing: .02rem;
+		font-weight: 600;
+		font-size: 0.875rem;
 		
 		span {
 			display: inline-block;
@@ -680,6 +699,7 @@ $controls-merge-button-width: 20%;
 	position: relative;
 	display: inline-block;
 	user-select: none;
+	min-height: 4.1rem;
 	
 	select {
 	    display: none;
@@ -803,7 +823,7 @@ $controls-merge-button-width: 20%;
 	}
 
 	
-	.dir-top {
+	.option-top {
 		/* Shown from above */
 		.custom-options {
 			top: auto;
