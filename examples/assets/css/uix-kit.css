@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.7.4
- * ## Last Update         :  June 9, 2018
+ * ## Version             :  1.7.5
+ * ## Last Update         :  June 11, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -98,55 +98,55 @@
     30. Advanced Slider (Special Effects) 
     31. Advanced Slider (Basic) 
     32. Badges 
-    33. Breadcrumbs 
-    34. Button 
-    35. Cards 
-    36. Counter 
-    37. Dotted Line 
-    38. Dropdown Menu 
-    39. Equal-width Divs 
-    40. Features 
-    41. Flexslider 
-    42. Footer Templates 
-    43. Form 
-    44. Form Progress 
-    45. Gallery 
-    46. Header Pinlines 
-    47. Image Shapes 
-    48. Custom Core Scripts & Stylesheets 
-    49. Cutom Light Box 
-    50. Brands List 
-    51. Bulleted List 
-    52. Maintain Aspect Ratio List 
-    53. List of Posts 
-    54. List of Split Posts 
-    55. Side by Side List 
-    56. Side by Side List With Photo 
-    57. Fullwidth List of Split 2 
-    58. Fullwidth List of Split 
-    59. Mobile Menu 
-    60. Modal Dialog 
-    61. Mouse Animation Scroll 
-    62. Multiple Items Carousel 
-    63. Overlay 
-    64. Parallax 
-    65. Periodical Scroll 
-    66. Pricing 
-    67. Progress Bar 
-    68. Services 
-    69. Show More Less 
-    70. Single Post 
-    71. Source Code 
-    72. Striking 
-    73. Table Series 
-    74. Tabs 
-    75. Team Focus 
-    76. Testimonials Carousel 
-    77. Text effect 
-    78. Timeline 
-    79. ToolTip 
-    80. WordPress Core 
-    81. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    33. Advanced Slider (Basic) 
+    34. Breadcrumbs 
+    35. Button 
+    36. Cards 
+    37. Counter 
+    38. Dotted Line 
+    39. Dropdown Menu 
+    40. Equal-width Divs 
+    41. Features 
+    42. Flexslider 
+    43. Footer Templates 
+    44. Form 
+    45. Form Progress 
+    46. Gallery 
+    47. Header Pinlines 
+    48. Image Shapes 
+    49. Custom Core Scripts & Stylesheets 
+    50. Cutom Light Box 
+    51. Brands List 
+    52. Bulleted List 
+    53. Maintain Aspect Ratio List 
+    54. List of Posts 
+    55. List of Split Posts 
+    56. Side by Side List 
+    57. Side by Side List With Photo 
+    58. Fullwidth List of Split 2 
+    59. Fullwidth List of Split 
+    60. Mobile Menu 
+    61. Modal Dialog 
+    62. Mouse Animation Scroll 
+    63. Multiple Items Carousel 
+    64. Overlay 
+    65. Parallax 
+    66. Periodical Scroll 
+    67. Pricing 
+    68. Progress Bar 
+    69. Services 
+    70. Show More Less 
+    71. Single Post 
+    72. Source Code 
+    73. Striking 
+    74. Table Series 
+    75. Tabs 
+    76. Team Focus 
+    77. Testimonials Carousel 
+    78. Text effect 
+    79. Timeline 
+    80. ToolTip 
+    81. WordPress Core 
 
 
 
@@ -4148,15 +4148,15 @@ ul.entry-meta {
   width: 12px;
   height: 12px;
   display: block;
-  background: rgba(236, 94, 121, 0.5);
+  box-shadow: 0px 3px 22px 0px rgba(0, 0, 0, 0.45);
+  background: rgba(255, 255, 255, 0.6);
   cursor: pointer;
   text-indent: -9999px;
   border-radius: 20px;
-  box-shadow: 0px 6px 23px -2px rgba(0, 0, 0, 0.36);
 }
 
 .custom-advanced-slider-sp-pagination ul li a:hover, .custom-advanced-slider-sp-pagination ul li a.active {
-  background: #ec5e79;
+  background: white;
   width: 25px;
 }
 
@@ -4167,15 +4167,20 @@ ul.entry-meta {
  */
 .custom-advanced-slider-sp-arrows {
   position: relative;
-  transform: translateY(-75px);
+  transform: translateY(-65px);
   z-index: 3;
 }
 
 .custom-advanced-slider-sp-arrows a {
-  position: absolute;
-  display: inline-block;
-  color: #ec5e79;
+  box-shadow: 0px 10px 54px 0px rgba(19, 32, 62, 0.21);
+  border-radius: 100%;
   width: 50px;
+  height: 50px;
+  position: absolute;
+  transition: .3s ease-in-out;
+  line-height: 50px;
+  text-align: center;
+  background: #fff;
 }
 
 .custom-advanced-slider-sp-arrows .prev {
@@ -4188,7 +4193,6 @@ ul.entry-meta {
 
 .custom-advanced-slider-sp-arrows .next {
   right: 15px;
-  text-align: right;
 }
 
 .custom-advanced-slider-sp-arrows .next.disabled {
@@ -4292,15 +4296,15 @@ ul.entry-meta {
   width: 12px;
   height: 12px;
   display: block;
-  background: rgba(236, 94, 121, 0.5);
+  box-shadow: 0px 3px 22px 0px rgba(0, 0, 0, 0.45);
+  background: rgba(255, 255, 255, 0.6);
   cursor: pointer;
   text-indent: -9999px;
   border-radius: 20px;
-  box-shadow: 0px 6px 23px -2px rgba(0, 0, 0, 0.36);
 }
 
 .custom-advanced-slider-pagination ul li a:hover, .custom-advanced-slider-pagination ul li a.active {
-  background: #ec5e79;
+  background: white;
   width: 25px;
 }
 
@@ -4311,15 +4315,20 @@ ul.entry-meta {
  */
 .custom-advanced-slider-arrows {
   position: relative;
-  transform: translateY(-75px);
+  transform: translateY(-65px);
   z-index: 3;
 }
 
 .custom-advanced-slider-arrows a {
-  position: absolute;
-  display: inline-block;
-  color: #ec5e79;
+  box-shadow: 0px 10px 54px 0px rgba(19, 32, 62, 0.21);
+  border-radius: 100%;
   width: 50px;
+  height: 50px;
+  position: absolute;
+  transition: .3s ease-in-out;
+  line-height: 50px;
+  text-align: center;
+  background: #fff;
 }
 
 .custom-advanced-slider-arrows .prev {
@@ -4332,7 +4341,6 @@ ul.entry-meta {
 
 .custom-advanced-slider-arrows .next {
   right: 15px;
-  text-align: right;
 }
 
 .custom-advanced-slider-arrows .next.disabled {
@@ -8205,6 +8213,64 @@ dl.list-side-by-side::after {
 }
 
 /* ====================================================== 
+   <!-- Side by Side List With Photo --> 
+/* ====================================================== */
+.list-side-by-side-img .item {
+  margin-top: 1.5rem;
+  padding-bottom: 3rem;
+  position: relative;
+}
+
+.list-side-by-side-img .item .item-left,
+.list-side-by-side-img .item .item-body {
+  display: table-cell;
+  vertical-align: top;
+}
+
+.list-side-by-side-img .item .item-body {
+  padding-left: 1.5rem;
+}
+
+.list-side-by-side-img .item .item-body em {
+  color: #AEAEAE;
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.list-side-by-side-img .item .item-desc {
+  line-height: 1.5;
+  margin-top: 1em;
+}
+
+.list-side-by-side-img .item .item-left-imgbox {
+  width: 250px;
+  margin: 0 auto;
+}
+
+.list-side-by-side-img .item .item-left-imgbox img {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .list-side-by-side-img {
+    text-align: center;
+  }
+  .list-side-by-side-img .item .item-left {
+    display: block;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .list-side-by-side-img .item .item-left-imgbox {
+    width: 100%;
+  }
+  .list-side-by-side-img .item .item-body {
+    display: block;
+    padding-left: 0;
+    width: 100%;
+  }
+}
+
+/* ====================================================== 
     <!-- Fullwidth List of Split 2 --> 
 /* ====================================================== */
 .list-split-content-container {
@@ -8288,64 +8354,6 @@ dl.list-side-by-side::after {
     min-height: inherit;
     width: 100%;
     padding: 0 15px;
-  }
-}
-
-/* ====================================================== 
-   <!-- Side by Side List With Photo --> 
-/* ====================================================== */
-.list-side-by-side-img .item {
-  margin-top: 1.5rem;
-  padding-bottom: 3rem;
-  position: relative;
-}
-
-.list-side-by-side-img .item .item-left,
-.list-side-by-side-img .item .item-body {
-  display: table-cell;
-  vertical-align: top;
-}
-
-.list-side-by-side-img .item .item-body {
-  padding-left: 1.5rem;
-}
-
-.list-side-by-side-img .item .item-body em {
-  color: #AEAEAE;
-  display: inline-block;
-  margin-right: 1rem;
-}
-
-.list-side-by-side-img .item .item-desc {
-  line-height: 1.5;
-  margin-top: 1em;
-}
-
-.list-side-by-side-img .item .item-left-imgbox {
-  width: 250px;
-  margin: 0 auto;
-}
-
-.list-side-by-side-img .item .item-left-imgbox img {
-  width: 100%;
-}
-
-@media (max-width: 768px) {
-  .list-side-by-side-img {
-    text-align: center;
-  }
-  .list-side-by-side-img .item .item-left {
-    display: block;
-    text-align: center;
-    margin-bottom: 1rem;
-  }
-  .list-side-by-side-img .item .item-left-imgbox {
-    width: 100%;
-  }
-  .list-side-by-side-img .item .item-body {
-    display: block;
-    padding-left: 0;
-    width: 100%;
   }
 }
 
@@ -12904,6 +12912,13 @@ a img.aligncenter {
   }
   55% {
     right: 2px;
+  }
+  100% {
+    right: 180px;
+    left: 2px;
+  }
+}
+ght: 2px;
   }
   100% {
     right: 180px;

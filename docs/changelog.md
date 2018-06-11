@@ -1,5 +1,13 @@
 # Changelog
 
+
+#### = 1.7.5 (June 11, 2018) =
+
+* Fix: Fixed the smoothness of the brightness effects slider.
+* Fix: Fixed an error with the timer of the Advanced Slider.
+
+
+
 #### = 1.7.4 (June 8, 2018) =
 
 * Fix: Fixed an error of Video auto play is not working in chrome browser.

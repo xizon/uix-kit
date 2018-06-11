@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.7.4
- * ## Last Update         :  June 9, 2018
+ * ## Version             :  1.7.5
+ * ## Last Update         :  June 11, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -26,10 +26,10 @@
 	1. Header 
     2. Loader 
     3. Back to Top 
-    4. Navigation 
-    5. Videos 
-    6. Common Height 
-    7. Get all custom attributes of an element like "data-*" 
+    4. Get all custom attributes of an element like "data-*" 
+    5. Navigation 
+    6. Videos 
+    7. Common Height 
     8. Mega Menu 
     9. Dropdown Categories 
     10. Pagination 
@@ -45,12 +45,12 @@
     20. Accordion Background Images 
     21. Advanced Content Slider 
     22. Advanced Slider (Special Effects) 
-    23. Advanced Slider (Basic) 
-    24. Counter 
+    23. Counter 
+    24. Advanced Slider (Basic) 
     25. Dynamic Drop Down List from JSON 
     26. Flexslider 
-    27. Form 
-    28. Form Progress 
+    27. Form Progress 
+    28. Form 
     29. Gallery 
     30. Image Shapes 
     31. Custom Core Scripts & Stylesheets 
@@ -67,19 +67,22 @@
     42. Parallax 
     43. Periodical Scroll 
     44. Pricing 
-    45. Progress Bar 
-    46. Retina Graphics for Website 
+    45. Retina Graphics for Website 
+    46. Progress Bar 
     47. Rotating Elements 
-    48. Show More Less 
-    49. Sticky Elements 
-    50. Tabs 
-    51. Team Focus 
-    52. Source Code 
-    53. Testimonials Carousel 
-    54. Text effect 
-    55. Scroll Reveal 
-    56. Timeline 
-    57. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    48. Scroll Reveal 
+    49. Show More Less 
+    50. Smooth Scrolling When Clicking An Anchor Link 
+    51. Source Code 
+    52. Sticky Elements 
+    53. Tabs 
+    54. Team Focus 
+    55. Testimonials Carousel 
+    56. Text effect 
+    57. Timeline 
+    58. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    59. GSAP Plugins 
+    60. Three.js Plugins 
 
 
 */
@@ -3673,6 +3676,12 @@ App = ( function ( App, $, window, document ) {
 			windowHeight              = $window.height(),
 			animDuration              = 600,
 			$sliderWrapper            = $( '.custom-advanced-slider-sp' ),
+
+			
+			//Autoplay global variables
+			timer                     = null,
+			playTimes,
+			
 			
 			//Basic webGL renderers 
 			rendererOuterID           = 'custom-advanced-slider-sp-canvas-outer',
@@ -3694,7 +3703,7 @@ App = ( function ( App, $, window, document ) {
 		
 		
 		
-		sliderInit();
+		sliderInit( false );
 		
 		$window.on( 'resize', function() {
 			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
@@ -3703,7 +3712,7 @@ App = ( function ( App, $, window, document ) {
 				// Update the window width for next time
 				windowWidth = $window.width();
 
-				sliderInit();
+				sliderInit( true );
 				
 			}
 		});
@@ -3714,9 +3723,10 @@ App = ( function ( App, $, window, document ) {
 		/*
 		 * Initialize slideshow
 		 *
+		 * @param  {boolean} resize            - Determine whether the window size changes.
 		 * @return {void}                   - The constructor.
 		 */
-        function sliderInit() {
+        function sliderInit( resize ) {
 	
 			$sliderWrapper.each( function()  {
 
@@ -3772,11 +3782,82 @@ App = ( function ( App, $, window, document ) {
 
 				}	
 				
+				
+				
+
+				//Autoplay Slider
+				//-------------------------------------		
+				if ( !resize ) {
+
+					var dataAuto                 = $this.data( 'auto' ),
+						dataTiming               = $this.data( 'timing' ),
+						dataLoop                 = $this.data( 'loop' );
+
+					if( typeof dataAuto === typeof undefined ) dataAuto = false;	
+					if( typeof dataTiming === typeof undefined ) dataTiming = 10000;
+					if( typeof dataLoop === typeof undefined ) dataLoop = false;
+
+
+					if ( dataAuto && !isNaN( parseFloat( dataTiming ) ) && isFinite( dataTiming ) ) {
+
+						sliderAutoPlay( dataTiming, $items, dataLoop );
+
+						$this.on({
+							mouseenter: function() {
+								clearInterval( timer );
+							},
+							mouseleave: function() {
+								sliderAutoPlay( dataTiming, $items, dataLoop );
+							}
+						});	
+
+					}
+
+
+				}
+
+				
+				
 
 			});
 
 
 		}
+		
+		
+
+
+        /*
+		 * Trigger slider autoplay
+		 *
+		 * @param  {number} timing           - Autoplay interval.
+		 * @param  {object} items            - Each item in current slider.
+		 * @param  {boolean} loop            - Determine whether to loop through each item.
+		 * @return {void}                    - The constructor.
+		 */
+        function sliderAutoPlay( timing, items, loop ) {	
+			
+			var total = items.length;
+			
+			timer = setInterval( function() {
+
+				playTimes = parseFloat( items.filter( '.active' ).index() );
+				playTimes++;
+				
+			
+				if ( !loop ) {
+					if ( playTimes < total && playTimes >= 0 ) sliderUpdates( playTimes, $sliderWrapper );
+				} else {
+					if ( playTimes == total ) playTimes = 0;
+					if ( playTimes < 0 ) playTimes = total-1;		
+					sliderUpdates( playTimes, $sliderWrapper );
+				}
+				
+
+				
+			}, timing );	
+		}
+
 		
 		
 		/*
@@ -3794,12 +3875,9 @@ App = ( function ( App, $, window, document ) {
 				$items                   = $this.find( '.item' ),
 				$first                   = $items.first(),
 				itemsTotal               = $items.length,
-				timerEvtStop             = null,
 				dataControlsPagination   = $this.data( 'controls-pagination' ),
 				dataControlsArrows       = $this.data( 'controls-arrows' ),
 				dataLoop                 = $this.data( 'loop' ),
-				dataAuto                 = $this.data( 'auto' ),
-				dataTiming               = $this.data( 'timing' ),
 				dataFilterTexture        = $this.data( 'filter-texture' );
 
 	
@@ -3807,8 +3885,6 @@ App = ( function ( App, $, window, document ) {
 			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.custom-advanced-slider-sp-pagination';
 			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.custom-advanced-slider-sp-arrows';
 			if( typeof dataLoop === typeof undefined ) dataLoop = false;
-			if( typeof dataAuto === typeof undefined ) dataAuto = false;	
-			if( typeof dataTiming === typeof undefined ) dataTiming = 10000;
 			if( typeof dataFilterTexture === typeof undefined ) dataFilterTexture = '';
 
 
@@ -4750,38 +4826,6 @@ App = ( function ( App, $, window, document ) {
 
 
 
-			//Autoplay Slider
-			//-------------------------------------			
-			if ( dataAuto && !isNaN( parseFloat( dataTiming ) ) && isFinite( dataTiming ) ) {
-
-				var playTimes = 0;
-				timerEvtStop = false;
-
-				// change item
-				setInterval( function() {
-
-					if ( timerEvtStop ) return;
-
-					setTimeout( function() {
-						if ( playTimes == itemsTotal ) playTimes = 0;
-						if ( playTimes < 0 ) playTimes = itemsTotal-1;	
-
-						sliderUpdates( playTimes, sliderWrapper );
-
-						playTimes++;
-
-					}, dataTiming );	
-
-				}, dataTiming );
-
-			}
-
-			$this.on( 'mouseout', function() {
-				timerEvtStop = false;
-			} );
-
-
-
 			//Pagination dots 
 			//-------------------------------------	
 			var _dot       = '',
@@ -4809,7 +4853,7 @@ App = ( function ( App, $, window, document ) {
 					sliderUpdates( $( this ).attr( 'data-index' ), sliderWrapper );
 
 					//Pause the auto play event
-					timerEvtStop = true;	
+					clearInterval( timer );	
 				}
 
 
@@ -4840,7 +4884,7 @@ App = ( function ( App, $, window, document ) {
 				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, sliderWrapper );
 
 				//Pause the auto play event
-				timerEvtStop = true;
+				clearInterval( timer );
 
 			});
 
@@ -4855,7 +4899,7 @@ App = ( function ( App, $, window, document ) {
 
 
 				//Pause the auto play event
-				timerEvtStop = true;
+				clearInterval( timer );
 
 
 			});
@@ -4890,7 +4934,7 @@ App = ( function ( App, $, window, document ) {
 
 
 								//Pause the auto play event
-								timerEvtStop = true;
+								clearInterval( timer );
 
 							}
 							if ( deltaX <= -50) {
@@ -4900,7 +4944,7 @@ App = ( function ( App, $, window, document ) {
 
 
 								//Pause the auto play event
-								timerEvtStop = true;							
+								clearInterval( timer );							
 
 
 							}
@@ -4943,16 +4987,14 @@ App = ( function ( App, $, window, document ) {
 				dataCountCur             = slider.data( 'count-now' ),
 				dataControlsPagination   = slider.data( 'controls-pagination' ),
 				dataControlsArrows       = slider.data( 'controls-arrows' ),	
-				dataLoop                 = slider.data( 'loop' ),
-				dataAuto                 = slider.data( 'auto' );
+				dataLoop                 = slider.data( 'loop' );
 			
 
 			if( typeof dataCountTotal === typeof undefined ) dataCountTotal = 'p.count em.count';
 			if( typeof dataCountCur === typeof undefined ) dataCountCur = 'p.count em.current';
 			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.custom-advanced-slider-sp-pagination';
 			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.custom-advanced-slider-sp-arrows';
-			if( typeof dataLoop === typeof undefined ) dataLoop = false;
-			if( typeof dataAuto === typeof undefined ) dataAuto = false;			
+			if( typeof dataLoop === typeof undefined ) dataLoop = false;			
 		
 		    //Prevent bubbling
 			if ( total == 1 ) {
@@ -5190,15 +5232,16 @@ App = ( function ( App, $, window, document ) {
 									pixi: {
 										brightness: 5
 									},
-									alpha : 1
+									alpha : 1,
+									onComplete    : function() {
+										TweenMax.to( this.target, animDuration/1000, {
+											pixi: {
+												brightness: 1
+											}
+										});				
+									}
 								});		
-
-								TweenMax.to( curSp, animDuration/1000, {
-									pixi: {
-										brightness: 1
-									},
-									delay : animDuration/1000,
-								});		
+	
 
 
 
@@ -5948,11 +5991,15 @@ App = ( function ( App, $, window, document ) {
 			windowWidth               = $window.width(),
 			windowHeight              = $window.height(),
 			animDuration              = 600,
-			$sliderWrapper            = $( '.custom-advanced-slider' );
+			$sliderWrapper            = $( '.custom-advanced-slider' ),
+			
+			//Autoplay global variables
+			timer                     = null,
+			playTimes
 		
 		
 		
-		sliderInit();
+		sliderInit( false );
 		
 		$window.on( 'resize', function() {
 			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
@@ -5961,7 +6008,7 @@ App = ( function ( App, $, window, document ) {
 				// Update the window width for next time
 				windowWidth = $window.width();
 
-				sliderInit();
+				sliderInit( true );
 				
 			}
 		});
@@ -5970,9 +6017,10 @@ App = ( function ( App, $, window, document ) {
 		/*
 		 * Initialize slideshow
 		 *
-		 * @return {void}                   - The constructor.
+		 * @param  {boolean} resize            - Determine whether the window size changes.
+		 * @return {void}                      - The constructor.
 		 */
-        function sliderInit() {
+        function sliderInit( resize ) {
 	
 			$sliderWrapper.each( function()  {
 
@@ -6028,11 +6076,82 @@ App = ( function ( App, $, window, document ) {
 
 				}	
 				
+				
+
+				//Autoplay Slider
+				//-------------------------------------		
+				if ( !resize ) {
+					
+					var dataAuto                 = $this.data( 'auto' ),
+						dataTiming               = $this.data( 'timing' ),
+						dataLoop                 = $this.data( 'loop' );
+
+					if( typeof dataAuto === typeof undefined ) dataAuto = false;	
+					if( typeof dataTiming === typeof undefined ) dataTiming = 10000;
+					if( typeof dataLoop === typeof undefined ) dataLoop = false;
+
+
+					if ( dataAuto && !isNaN( parseFloat( dataTiming ) ) && isFinite( dataTiming ) ) {
+
+						sliderAutoPlay( dataTiming, $items, dataLoop );
+
+						$this.on({
+							mouseenter: function() {
+								clearInterval( timer );
+							},
+							mouseleave: function() {
+								sliderAutoPlay( dataTiming, $items, dataLoop );
+							}
+						});	
+
+					}
+	
+					
+				}
+				
+
+
 
 			});
 
 
 		}
+		
+
+
+
+        /*
+		 * Trigger slider autoplay
+		 *
+		 * @param  {number} timing           - Autoplay interval.
+		 * @param  {object} items            - Each item in current slider.
+		 * @param  {boolean} loop            - Determine whether to loop through each item.
+		 * @return {void}                    - The constructor.
+		 */
+        function sliderAutoPlay( timing, items, loop ) {	
+			
+			var total = items.length;
+			
+			timer = setInterval( function() {
+
+				playTimes = parseFloat( items.filter( '.active' ).index() );
+				playTimes++;
+				
+			
+				if ( !loop ) {
+					if ( playTimes < total && playTimes >= 0 ) sliderUpdates( playTimes, $sliderWrapper );
+				} else {
+					if ( playTimes == total ) playTimes = 0;
+					if ( playTimes < 0 ) playTimes = total-1;		
+					sliderUpdates( playTimes, $sliderWrapper );
+				}
+				
+
+				
+			}, timing );	
+		}
+
+		
 		
 
         /*
@@ -6052,19 +6171,14 @@ App = ( function ( App, $, window, document ) {
 				itemsTotal               = $items.length,
 				dataControlsPagination   = $this.data( 'controls-pagination' ),
 				dataControlsArrows       = $this.data( 'controls-arrows' ),
-				dataLoop                 = $this.data( 'loop' ),
-				dataAuto                 = $this.data( 'auto' ),
-				dataTiming               = $this.data( 'timing' ),
-				timerEvtStop             = null;
+				dataLoop                 = $this.data( 'loop' );
 
 	
 			
 			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.custom-advanced-slider-sp-pagination';
 			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.custom-advanced-slider-sp-arrows';
 			if( typeof dataLoop === typeof undefined ) dataLoop = false;
-			if( typeof dataAuto === typeof undefined ) dataAuto = false;	
-			if( typeof dataTiming === typeof undefined ) dataTiming = 10000;
-		
+
 				
 
 		    //Prevent bubbling
@@ -6079,38 +6193,6 @@ App = ( function ( App, $, window, document ) {
 			//-------------------------------------
 			normalSliderVideoInit( $items, false );	
 
-
-
-			//Autoplay Slider
-			//-------------------------------------			
-			if ( dataAuto && !isNaN( parseFloat( dataTiming ) ) && isFinite( dataTiming ) ) {
-
-				var playTimes = 0;
-				timerEvtStop = false;
-					
-
-				// change item
-				setInterval( function() {
-
-					if ( timerEvtStop ) return;
-
-					setTimeout( function() {
-						if ( playTimes == itemsTotal ) playTimes = 0;
-						if ( playTimes < 0 ) playTimes = itemsTotal-1;	
-
-						sliderUpdates( playTimes, sliderWrapper );
-
-						playTimes++;
-
-					}, dataTiming );	
-
-				}, dataTiming );
-
-			}
-
-			$this.on( 'mouseout', function() {
-				timerEvtStop = false;
-			} );
 
 
 
@@ -6136,7 +6218,7 @@ App = ( function ( App, $, window, document ) {
 					sliderUpdates( $( this ).attr( 'data-index' ), sliderWrapper );
 
 					//Pause the auto play event
-					timerEvtStop = true;	
+					clearInterval( timer );	
 				}
 
 
@@ -6163,7 +6245,7 @@ App = ( function ( App, $, window, document ) {
 				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, sliderWrapper );
 
 				//Pause the auto play event
-				timerEvtStop = true;
+				clearInterval( timer );
 
 			});
 
@@ -6174,7 +6256,7 @@ App = ( function ( App, $, window, document ) {
 
 
 				//Pause the auto play event
-				timerEvtStop = true;
+				clearInterval( timer );
 
 
 			});
@@ -6209,7 +6291,7 @@ App = ( function ( App, $, window, document ) {
 
 
 								//Pause the auto play event
-								timerEvtStop = true;
+								clearInterval( timer );
 
 							}
 							if ( deltaX <= -50) {
@@ -6219,7 +6301,7 @@ App = ( function ( App, $, window, document ) {
 
 
 								//Pause the auto play event
-								timerEvtStop = true;							
+								clearInterval( timer );							
 
 
 							}
@@ -6263,8 +6345,7 @@ App = ( function ( App, $, window, document ) {
 				dataCountCur             = slider.data( 'count-now' ),
 				dataControlsPagination   = slider.data( 'controls-pagination' ),
 				dataControlsArrows       = slider.data( 'controls-arrows' ),	
-				dataLoop                 = slider.data( 'loop' ),
-				dataAuto                 = slider.data( 'auto' );
+				dataLoop                 = slider.data( 'loop' );
 			
 
 			if( typeof dataCountTotal === typeof undefined ) dataCountTotal = 'p.count em.count';
@@ -6272,7 +6353,7 @@ App = ( function ( App, $, window, document ) {
 			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.custom-advanced-slider-sp-pagination';
 			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.custom-advanced-slider-sp-arrows';
 			if( typeof dataLoop === typeof undefined ) dataLoop = false;
-			if( typeof dataAuto === typeof undefined ) dataAuto = false;			
+					
 		
 		    //Prevent bubbling
 			if ( total == 1 ) {
@@ -26103,9 +26184,6 @@ License: MIT
 /***/ function(module, exports) {
 
 	module.exports = "uniform float explodeRate;\nvarying vec2 vUv;\n\n\nfloat rand(vec2 co){\n  return fract(sin(dot(co.xy, vec2(12.8273, 67.245))) * 53726.17623);\n}\n\nvoid main() {\n  vec3 col;\n  col.g = rand(vec2(vUv.x, vUv.y + 1.0));\n  col.b = rand(vec2(vUv.x, vUv.y + 2.0));\n  col.r = rand(vec2(vUv.xy));\n  col = col - 0.5;\n  col *= explodeRate;\n\n  gl_FragColor = vec4(col, 1.0);\n}\n";
-
-/***/ }
-/******/ ]);ol = col - 0.5;\n  col *= explodeRate;\n\n  gl_FragColor = vec4(col, 1.0);\n}\n";
 
 /***/ }
 /******/ ]);
