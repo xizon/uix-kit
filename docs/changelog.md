@@ -1,6 +1,14 @@
 # Changelog
 
 
+#### = 1.7.6 (June 12, 2018) =
+
+* New: Add a new module "Ajax Push Content" which allow AJAX dynamically adds specified content to element.
+* Tweak: Updated the structure of the Dropdown Menu module.
+
+
+
+
 #### = 1.7.5 (June 11, 2018) =
 
 * Fix: Fixed the smoothness of the brightness effects slider.

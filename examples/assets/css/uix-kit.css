@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.7.5
- * ## Last Update         :  June 11, 2018
+ * ## Version             :  1.7.6
+ * ## Last Update         :  June 12, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -67,10 +67,10 @@
 	---------------------------
 	
     1. Basic 
-    2. Table 
-    3. Bullet List 
+    2. Bullet List 
+    3. Typography 
     4. Helper Classes 
-    5. Typography 
+    5. Table 
     6. Spacing 
     7. Basic Layout Styles 
     8. Navigation Area 
@@ -82,8 +82,8 @@
     14. Loader 
     15. Social Media Icons 
     16. Pagination 
-    17. Filterable Navigation 
-    18. Sidebar 
+    17. Sidebar 
+    18. Filterable Navigation 
     19. Search 
     20. Tags 
     21. Entry 
@@ -98,55 +98,53 @@
     30. Advanced Slider (Special Effects) 
     31. Advanced Slider (Basic) 
     32. Badges 
-    33. Advanced Slider (Basic) 
-    34. Breadcrumbs 
-    35. Button 
-    36. Cards 
-    37. Counter 
-    38. Dotted Line 
-    39. Dropdown Menu 
-    40. Equal-width Divs 
-    41. Features 
+    33. Breadcrumbs 
+    34. Button 
+    35. Cards 
+    36. Counter 
+    37. Dotted Line 
+    38. Dropdown Menu 
+    39. Equal-width Divs 
+    40. Features 
+    41. Footer Templates 
     42. Flexslider 
-    43. Footer Templates 
-    44. Form 
-    45. Form Progress 
-    46. Gallery 
+    43. Form 
+    44. Form Progress 
+    45. Gallery 
+    46. Image Shapes 
     47. Header Pinlines 
-    48. Image Shapes 
+    48. Cutom Light Box 
     49. Custom Core Scripts & Stylesheets 
-    50. Cutom Light Box 
-    51. Brands List 
-    52. Bulleted List 
-    53. Maintain Aspect Ratio List 
+    50. Brands List 
+    51. Bulleted List 
+    52. Maintain Aspect Ratio List 
+    53. List of Split Posts 
     54. List of Posts 
-    55. List of Split Posts 
-    56. Side by Side List 
-    57. Side by Side List With Photo 
-    58. Fullwidth List of Split 2 
+    55. Side by Side List 
+    56. Fullwidth List of Split 2 
+    57. Mobile Menu 
+    58. Side by Side List With Photo 
     59. Fullwidth List of Split 
-    60. Mobile Menu 
-    61. Modal Dialog 
-    62. Mouse Animation Scroll 
-    63. Multiple Items Carousel 
-    64. Overlay 
-    65. Parallax 
-    66. Periodical Scroll 
-    67. Pricing 
-    68. Progress Bar 
-    69. Services 
-    70. Show More Less 
-    71. Single Post 
-    72. Source Code 
-    73. Striking 
-    74. Table Series 
-    75. Tabs 
-    76. Team Focus 
-    77. Testimonials Carousel 
+    60. Mouse Animation Scroll 
+    61. Multiple Items Carousel 
+    62. Modal Dialog 
+    63. Overlay 
+    64. Parallax 
+    65. Progress Bar 
+    66. Pricing 
+    67. Periodical Scroll 
+    68. Services 
+    69. Show More Less 
+    70. Single Post 
+    71. Source Code 
+    72. Striking 
+    73. Tabs 
+    74. Team Focus 
+    75. Table Series 
+    76. Testimonials Carousel 
+    77. Timeline 
     78. Text effect 
-    79. Timeline 
-    80. ToolTip 
-    81. WordPress Core 
+    79. ToolTip 
 
 
 
@@ -5156,7 +5154,6 @@ ul.entry-meta {
   display: inline-block;
   cursor: pointer;
   position: relative;
-  /* wrapping this in media querry to prevent fails while change screen size and checked inputs */
 }
 
 .custom-dropdown-trigger > input {
@@ -5167,6 +5164,7 @@ ul.entry-meta {
   cursor: pointer;
   margin: 0;
   padding: 0;
+  user-select: none;
 }
 
 .custom-dropdown-trigger > ul {
@@ -5227,7 +5225,7 @@ ul.entry-meta {
   border-bottom: 0;
 }
 
-.custom-dropdown-trigger > :checked ~ ul {
+.custom-dropdown-trigger.open > ul {
   display: block;
   opacity: 1;
 }
@@ -11966,6 +11964,15 @@ dl.list-side-by-side::after {
 }
 
 /* ====================================================== 
+   <!-- Text effect -->   
+/* ====================================================== */
+.letter {
+  transform-origin: 50% 100%;
+  display: inline-block;
+  line-height: 1;
+}
+
+/* ====================================================== 
    <!-- Testimonials Carousel -->  
 /* ====================================================== */
 .custom-testimonials-count {
@@ -12067,15 +12074,6 @@ dl.list-side-by-side::after {
 
 .slides-custom-control li.flex-active {
   background: #EC5E79;
-}
-
-/* ====================================================== 
-   <!-- Text effect -->   
-/* ====================================================== */
-.letter {
-  transform-origin: 50% 100%;
-  display: inline-block;
-  line-height: 1;
 }
 
 /* ====================================================== 
@@ -12918,7 +12916,10 @@ a img.aligncenter {
     left: 2px;
   }
 }
-ght: 2px;
+80px;
+  }
+  55% {
+    right: 2px;
   }
   100% {
     right: 180px;

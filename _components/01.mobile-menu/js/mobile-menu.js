@@ -42,8 +42,10 @@ App = ( function ( App, $, window, document ) {
 				
 		
 				$toggle.on( 'touchstart click', function( e ) {
-					e.stopPropagation(); 
 					e.preventDefault();
+					
+					//Prevents further propagation of the current event in the capturing and bubbling phases.
+					e.stopPropagation(); 
 
 					$( this ).toggleClass( 'open' );
 					if ( $( this ).hasClass( 'open' ) ) {

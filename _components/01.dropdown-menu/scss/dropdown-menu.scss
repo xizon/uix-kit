@@ -2,6 +2,7 @@
    <!-- Dropdown Menu --> 
 /* ====================================================== */
 /* Do not use <a> tag */
+
 .custom-dropdown-trigger {
 	display: inline-block;
 	cursor: pointer;
@@ -15,6 +16,7 @@
 		cursor: pointer;
 		margin: 0;
 		padding: 0;
+		user-select: none;
 	}
 
 	> ul {
@@ -29,6 +31,7 @@
 		opacity: 0;
 		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 		@include transition-default();
+	
 
 		&::before {
 			content: '';
@@ -75,12 +78,15 @@
 		}
 
 	}	
-
-
-	/* wrapping this in media querry to prevent fails while change screen size and checked inputs */
-	> :checked ~ ul {
-		display: block;
-		opacity: 1;
+	
+	
+	&.open {
+		
+		> ul {
+			display: block;
+			opacity: 1;		
+		}
+		
 	}
 	
 	

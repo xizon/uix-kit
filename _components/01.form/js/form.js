@@ -1175,6 +1175,8 @@ $.extend(Datepicker.prototype, {
 
 		if (handled) {
 			event.preventDefault();
+			
+			//Prevents further propagation of the current event in the capturing and bubbling phases.
 			event.stopPropagation();
 		}
 	},

@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.7.5
- * ## Last Update         :  June 11, 2018
+ * ## Version             :  1.7.6
+ * ## Last Update         :  June 12, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -34,8 +34,8 @@
     9. Dropdown Categories 
     10. Pagination 
     11. Specify a background image 
-    12. 3D Background 
-    13. 3D Background 2 
+    12. 3D Background 2 
+    13. 3D Background 
     14. 3D Background 2 
     15. 3D Carousel 
     16. 3D Model 
@@ -45,44 +45,46 @@
     20. Accordion Background Images 
     21. Advanced Content Slider 
     22. Advanced Slider (Special Effects) 
-    23. Counter 
-    24. Advanced Slider (Basic) 
-    25. Dynamic Drop Down List from JSON 
-    26. Flexslider 
-    27. Form Progress 
-    28. Form 
-    29. Gallery 
-    30. Image Shapes 
-    31. Custom Core Scripts & Stylesheets 
-    32. Custom Lightbox 
-    33. Bulleted List 
-    34. Posts List With Ajax 
-    35. Fullwidth List of Split 
-    36. Mobile Menu 
-    37. Modal Dialog 
-    38. Mousewheel Interaction 
-    39. Multiple Items Carousel 
-    40. Full Page/One Page Transition 
-    41. Full Page/One Page Transition 2 
-    42. Parallax 
-    43. Periodical Scroll 
-    44. Pricing 
-    45. Retina Graphics for Website 
+    23. Advanced Slider (Basic) 
+    24. Counter 
+    25. Dropdown Menu 
+    26. Dynamic Drop Down List from JSON 
+    27. Flexslider 
+    28. Form Progress 
+    29. Form 
+    30. Gallery 
+    31. Image Shapes 
+    32. Custom Core Scripts & Stylesheets 
+    33. Custom Lightbox 
+    34. Bulleted List 
+    35. Posts List With Ajax 
+    36. Fullwidth List of Split 
+    37. Mobile Menu 
+    38. Modal Dialog 
+    39. Mousewheel Interaction 
+    40. Multiple Items Carousel 
+    41. Full Page/One Page Transition 
+    42. Full Page/One Page Transition 2 
+    43. Parallax 
+    44. Periodical Scroll 
+    45. Pricing 
     46. Progress Bar 
-    47. Rotating Elements 
-    48. Scroll Reveal 
-    49. Show More Less 
-    50. Smooth Scrolling When Clicking An Anchor Link 
-    51. Source Code 
-    52. Sticky Elements 
-    53. Tabs 
-    54. Team Focus 
-    55. Testimonials Carousel 
-    56. Text effect 
-    57. Timeline 
-    58. Ajax Page Loader (Loading A Page via Ajax Into Div)  
-    59. GSAP Plugins 
-    60. Three.js Plugins 
+    47. Retina Graphics for Website 
+    48. Rotating Elements 
+    49. Scroll Reveal 
+    50. Show More Less 
+    51. Smooth Scrolling When Clicking An Anchor Link 
+    52. Source Code 
+    53. Sticky Elements 
+    54. Tabs 
+    55. Team Focus 
+    56. Testimonials Carousel 
+    57. Text effect 
+    58. Timeline 
+    59. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    60. Ajax Push Content  
+    61. GSAP Plugins 
+    62. Three.js Plugins 
 
 
 */
@@ -3184,6 +3186,7 @@ App = ( function ( App, $, window, document ) {
 			
 
 			$li.on( aEvent, function( e ) {
+				//Prevents further propagation of the current event in the capturing and bubbling phases.
 				e.stopPropagation();
 				
 				$( this ).find( 'dd' ).addClass( 'active' );
@@ -3257,6 +3260,7 @@ App = ( function ( App, $, window, document ) {
 			
 
 			$li.on( aEvent, function( e ) {
+				//Prevents further propagation of the current event in the capturing and bubbling phases.
 				e.stopPropagation();
 			
 				
@@ -3825,7 +3829,6 @@ App = ( function ( App, $, window, document ) {
 		}
 		
 		
-
 
         /*
 		 * Trigger slider autoplay
@@ -5995,7 +5998,7 @@ App = ( function ( App, $, window, document ) {
 			
 			//Autoplay global variables
 			timer                     = null,
-			playTimes
+			playTimes;
 		
 		
 		
@@ -6850,6 +6853,63 @@ App = ( function ( App, $, window, document ) {
 	
 	
 }(jQuery));
+
+/* 
+ *************************************
+ * <!-- Dropdown Menu -->
+ *************************************
+ */	
+App = ( function ( App, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+		
+
+		//Create a trigger of Dropdown Menu on Click
+		$( '.custom-dropdown-trigger' ).each( function() {
+			var $this = $( this );
+
+			//Close the target
+			$this.find( '> label' ).on( 'click', function( e ) {
+				e.preventDefault();
+				//Prevents further propagation of the current event in the capturing and bubbling phases.
+				e.stopPropagation();
+
+				$this.toggleClass( 'open' );
+
+			});	
+
+			$this.find( 'li a' ).on( 'click', function() {
+				$this.removeClass( 'open' );	
+				$this.find( 'input[type="hidden"]' ).val( $( this ).data( 'value' ) );
+				$this.find( '> label > span' ).html( $( this ).text() );
+ 
+			});		
+
+
+			$( 'html' ).on( 'click', function() {
+				$this.removeClass( 'open' );	
+			});		
+
+
+
+		});
+
+
+				
+    };
+
+    App.dropdownMenu = {
+        documentReady : documentReady        
+    };
+
+    App.components.documentReady.push( documentReady );
+    return App;
+
+}( App, jQuery, window, document ) );
+
+
+
 
 /* 
  *************************************
@@ -10382,6 +10442,8 @@ $.extend(Datepicker.prototype, {
 
 		if (handled) {
 			event.preventDefault();
+			
+			//Prevents further propagation of the current event in the capturing and bubbling phases.
 			event.stopPropagation();
 		}
 	},
@@ -13281,8 +13343,10 @@ App = ( function ( App, $, window, document ) {
 				
 		
 				$toggle.on( 'touchstart click', function( e ) {
-					e.stopPropagation(); 
 					e.preventDefault();
+					
+					//Prevents further propagation of the current event in the capturing and bubbling phases.
+					e.stopPropagation(); 
 
 					$( this ).toggleClass( 'open' );
 					if ( $( this ).hasClass( 'open' ) ) {
@@ -15958,53 +16022,71 @@ App = ( function ( App, $, window, document ) {
     
     var documentReady = function( $ ) {
 
-		if ( $( '#pointer' ).length > 0 ) {
-			
-			var pointer      = $( '#pointer' )[0],
-				pointerBox   = pointer.getBoundingClientRect(),
-				centerPoint  = window.getComputedStyle( pointer ).transformOrigin,
-				centers      = centerPoint.split( ' ' ),
-				mouseSpy     = false,
-				mouseX,
-				mouseY;
+
+		$( '[data-pointer-to-deg]' ).each( function()  {
+
+			var $this  = $( this ),
+				config = $this.data( 'pointer-to-deg' );
 
 
-			if ( mouseSpy ) {
-				$( document ).on( 'mousemove touchstart touchmove', function( e ) {
-					var pointerEvent = e;
-					if ( e.targetTouches && e.targetTouches[0] ) {
-						e.preventDefault();
-						pointerEvent = e.targetTouches[0];
-						mouseX = pointerEvent.pageX;
-						mouseY = pointerEvent.pageY;
-					} else {
-						mouseX = e.clientX;
-						mouseY = e.clientY;
-					}
-
-
-					var centerY = pointerBox.top + parseInt(centers[1]) - window.pageYOffset,
-						centerX = pointerBox.left + parseInt(centers[0]) - window.pageXOffset,
-						radians = Math.atan2(mouseX - centerX, mouseY - centerY),
-						degrees = (radians * (180 / Math.PI) * -1) + 180;
-
-
-					pointer.style.transform = 'rotate(' + degrees + 'deg)';
-
-				});
-
+			if( typeof config === typeof undefined ) {
+				config = false;
 			}
 
+			if ( config ) {
+
+				if ( $( config.target ).length == 0 ) return false;
+				
+				
+				var pointer      = $( config.target )[0],
+					pointerBox   = pointer.getBoundingClientRect(),
+					centerPoint  = window.getComputedStyle( pointer ).transformOrigin,
+					centers      = centerPoint.split( ' ' ),
+					mouseX,
+					mouseY;
 
 
-			$( '[data-pointer-to-deg]' ).on( 'click', function( e ) {
-				e.preventDefault();
+				if ( config.mouseSpy ) {
+					$( document ).on( 'mousemove touchstart touchmove', function( e ) {
+						var pointerEvent = e;
+						if ( e.targetTouches && e.targetTouches[0] ) {
+							e.preventDefault();
+							pointerEvent = e.targetTouches[0];
+							mouseX = pointerEvent.pageX;
+							mouseY = pointerEvent.pageY;
+						} else {
+							mouseX = e.clientX;
+							mouseY = e.clientY;
+						}
 
-				pointer.style.transform = 'rotate(' + $( this ).data( 'pointer-to-deg' ) + 'deg)';
 
-			});
+						var centerY = pointerBox.top + parseInt(centers[1]) - window.pageYOffset,
+							centerX = pointerBox.left + parseInt(centers[0]) - window.pageXOffset,
+							radians = Math.atan2(mouseX - centerX, mouseY - centerY),
+							degrees = (radians * (180 / Math.PI) * -1) + 180;
+
+
+						pointer.style.transform = 'rotate(' + degrees + 'deg)';
+
+					});
+
+				}
+
+				
+				$this.on( 'click', function( e ) {
+					e.preventDefault();
+
+					pointer.style.transform = 'rotate(' + config.deg + 'deg)';
+
+				});
+				
+
+			}
 			
-		}
+			
+		});
+		
+
 			
 
 		
@@ -17491,7 +17573,7 @@ App = ( function ( App, $, window, document ) {
 								'display' : 'block'
 							},
 							onComplete  : function() {
-								TweenMax.to( '.ajax-loader', 0.5, {
+								TweenMax.to( this.target, 0.5, {
 									alpha : 1
 								});
 							}
@@ -17532,7 +17614,7 @@ App = ( function ( App, $, window, document ) {
 			TweenMax.to( '.ajax-loader', 0.5, {
 				alpha       : 0,
 				onComplete  : function() {
-					TweenMax.set( '.ajax-loader', {
+					TweenMax.set( this.target, {
 						css         : {
 							'display' : 'none'
 						}
@@ -17633,7 +17715,7 @@ App = ( function ( App, $, window, document ) {
 
 
 						// Apply the original scripts
-						applyOriginalSomeScripts();
+						$( document ).applyOriginalSomeScripts();
 						
 						
 					}
@@ -17644,71 +17726,7 @@ App = ( function ( App, $, window, document ) {
 			
 		}
 		
-		
-		
-		/*
-		 * Apply some original scripts
-		 *
-		 * @return {void}  - The constructor.
-		 */
-		function applyOriginalSomeScripts() {
-			
-			App.commonHeight.pageLoaded(); //Common Height
-			App.customLightbox.pageLoaded(); //Custom Lightbox
-			App.modalbox.documentReady($); //Modal Dialog
-			App.parallax.documentReady($); //Parallax
-			App.videos.documentReady($); //Videos
-			App.setBG.documentReady($); //Specify a background image
-			App.getAllCustomAttrs.documentReady($); //Get all custom attributes of an element like "data-*"
-			App.pagination.documentReady($); //Pagination
-			App.form.documentReady($); //Form
-			App.flexSlider.documentReady($); //Flexslider
-			App.retina.documentReady($); //Retina Graphics for Website
-			App.showMoreLess.documentReady($); //Show More Less
-			
-			//Other functions here
-			
-			
-			
-			//Uix Shortcodes
-			if ( $.isFunction( $.uix_sc_init ) ) {
-				$.uix_sc_init();
-			}
-	
-			
-			
-		}
 
-		
-		/*
-		 * Apply all the original scripts
-		 *
-		 * @return {void}  - The constructor.
-		 */
-		
-		
-		function applyOriginalAllScripts() {
-			
-			
-			var scipts_pageLoaded    = App.components.pageLoaded,
-				scipts_documentReady = App.components.documentReady;
-			
-			
-			for ( var i = 0; i < scipts_pageLoaded.length; i++ ) {
-			     scipts_pageLoaded[i]();
-			}
-			for ( var j = 0; j < scipts_documentReady.length; j++ ) {
-			     scipts_documentReady[j]( $ );
-			}	
-		
-			//Uix Shortcodes
-			if ( $.isFunction( $.uix_sc_init ) ) {
-				$.uix_sc_init();
-			}
-			
-			
-		}
-		
 		
 		/* 
 		 ====================================================
@@ -17743,6 +17761,304 @@ App = ( function ( App, $, window, document ) {
     };
 
     App.ajaxPageLoader = {
+        documentReady : documentReady        
+    };
+
+    App.components.documentReady.push( documentReady );
+    return App;
+
+}( App, jQuery, window, document ) );
+
+
+
+
+
+
+		
+		
+/*
+ * Apply some original scripts
+ *
+ * @return {void}  - The constructor.
+ */
+( function ( $ ) {
+    $.fn.applyOriginalSomeScripts = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+			controls    : '.controls.line-eff'
+        }, options );
+ 
+        this.each( function() {
+
+			App.commonHeight.pageLoaded(); //Common Height
+			App.customLightbox.pageLoaded(); //Custom Lightbox
+			App.modalbox.documentReady($); //Modal Dialog
+			App.parallax.documentReady($); //Parallax
+			App.videos.documentReady($); //Videos
+			App.setBG.documentReady($); //Specify a background image
+			App.getAllCustomAttrs.documentReady($); //Get all custom attributes of an element like "data-*"
+			App.pagination.documentReady($); //Pagination
+			App.form.documentReady($); //Form
+			App.flexSlider.documentReady($); //Flexslider
+			App.retina.documentReady($); //Retina Graphics for Website
+			App.showMoreLess.documentReady($); //Show More Less
+			App.dropdownMenu.documentReady($); //Dropdown Menu
+
+			//Other functions here
+
+
+
+			//Uix Shortcodes
+			if ( $.isFunction( $.uix_sc_init ) ) {
+				$.uix_sc_init();
+			}
+			
+			
+		});
+ 
+    };
+ 
+}( jQuery ));
+
+
+
+		
+
+		
+/*
+ * Apply all the original scripts
+ *
+ * @return {void}  - The constructor.
+ */	
+( function ( $ ) {
+    $.fn.applyOriginalAllScripts = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+			controls    : '.controls.line-eff'
+        }, options );
+ 
+        this.each( function() {
+
+			var scipts_pageLoaded    = App.components.pageLoaded,
+				scipts_documentReady = App.components.documentReady;
+
+
+			for ( var i = 0; i < scipts_pageLoaded.length; i++ ) {
+				 scipts_pageLoaded[i]();
+			}
+			for ( var j = 0; j < scipts_documentReady.length; j++ ) {
+				 scipts_documentReady[j]( $ );
+			}	
+
+			//Uix Shortcodes
+			if ( $.isFunction( $.uix_sc_init ) ) {
+				$.uix_sc_init();
+			}
+
+			
+		});
+ 
+    };
+ 
+}( jQuery ));
+
+
+/* 
+ *************************************
+ * <!-- Ajax Push Content  -->
+ *************************************
+ */
+App = ( function ( App, $, window, document ) {
+    'use strict';
+    
+    var documentReady = function( $ ) {
+		
+        var $window                  = $( window ),
+		    windowWidth              = $window.width(),
+		    windowHeight             = $window.height();
+
+		
+		
+	    //Determine the direction of a jQuery scroll event
+		//Fix an issue for mousewheel event is too fast.
+		var loaderRemoveDelay   = 500,
+			AJAXPageLinks       = '[data-ajax-push-content]';
+		
+
+		/*
+		 * Call AJAX on click event for "single pages links"
+		 *
+		 */
+		$( document ).on( 'click', AJAXPageLinks, function( e ) {
+			
+			e.preventDefault();
+			
+			
+			var $this            = $( this ),
+				config           = $this.data( 'ajax-push-content' ),
+			    curURL           = $this.attr( 'href' ); 
+
+			if( typeof config === typeof undefined ) {
+				config = false;
+			}
+				
+			if ( config ) {
+			
+				//The currently URL of link
+				if ( typeof curURL === typeof undefined ) {
+					curURL = $this.closest( 'a' ).attr( 'href' );
+				}
+
+
+				//Prevent multiple request on click
+				if ( $( AJAXPageLinks ).data( 'request-running' ) ) {
+					return;
+				}
+				$( AJAXPageLinks ).data( 'request-running', true );
+
+			
+				//Click on this link element using an AJAX request
+				pushAction( $( config.container ), config.target, config.loading, curURL );
+
+
+				
+			}
+			
+
+			return false;
+			
+			
+		});
+		
+		
+
+		/*
+		 * Move Animation
+		 *
+		 * @param  {string} container    - The target container to which the content will be added.
+		 * @param  {string} target       - The instance ID or class name returned from the callback data
+		 * @param  {string} loading      - Content of loading area.
+		 * @param  {string} url          - The target URL via AJAX.
+		 * @return {void}                - The constructor.
+		 */
+		function pushAction( container, target, loading, url ) {
+		
+
+			//Click on this link element using an AJAX request
+			$.ajax({
+				timeout  : 15000,
+				url      : url,
+				method   : 'POST',
+				dataType : 'html',
+				data     : {
+					action  : 'load_singlepages_ajax_content'
+				},	
+				success  : function( response ) {
+					
+
+					//A function to be called if the request succeeds
+					ajaxSucceeds( container, url, $( response ).find( target ).html() );
+
+				},
+				error: function(){
+					window.location.href = url;
+				},
+				beforeSend: function() {
+
+					container.html( '<div class="ajax-content-loader">'+loading+'</div>' ).promise().done( function(){
+						
+						TweenMax.set( container.find( '.ajax-content-loader' ), {
+							css         : {
+								'display' : 'block'
+							},
+							onComplete  : function() {
+								TweenMax.to( this.target, 0.5, {
+									alpha : 1
+								});
+							}
+						});	
+					});
+					
+
+
+				}
+			}).fail( function( jqXHR, textStatus ) {
+				if( textStatus === 'timeout' ) {
+					window.location.href = url;
+				}
+			});		
+
+	
+			
+		}
+		
+		
+		
+		/*
+		 * A function to be called if the request succeeds
+		 *
+		 * @param  {string} container    - The target container to which the content will be added.
+		 * @param  {string} url          - Current URL after click
+		 * @param  {string} content      - The data returned from the server
+		 * @return {void}                - The constructor.
+		 */
+		function ajaxSucceeds( container, url, content ) {
+			
+		
+			//Remove loader
+			TweenMax.to( container.find( '.ajax-content-loader' ), 0.5, {
+				alpha       : 0,
+				onComplete  : function() {
+					TweenMax.set( this.target, {
+						css         : {
+							'display' : 'none'
+						}
+					});
+					
+
+					//The data returned from the server
+					container.html( content ).promise().done( function(){
+						
+						
+						// Apply the original scripts
+						$( document ).applyOriginalSomeScripts();
+	
+						// Modify the URL without reloading the page
+						if( history.pushState ) {
+							history.pushState( null, null, url );
+						}
+						else {
+							location.hash = url;
+						}
+						
+					
+
+						//Prevent multiple request on click
+						$( AJAXPageLinks ).data( 'request-running', false );	
+						
+						
+						
+					});
+					
+
+	
+					
+				},
+				delay       : loaderRemoveDelay/1000
+			});
+			
+			
+		}
+		
+		
+		
+	
+		
+    };
+
+    App.ajaxPushContent = {
         documentReady : documentReady        
     };
 

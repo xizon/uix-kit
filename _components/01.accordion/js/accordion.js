@@ -32,6 +32,7 @@ App = ( function ( App, $, window, document ) {
 			
 
 			$li.on( aEvent, function( e ) {
+				//Prevents further propagation of the current event in the capturing and bubbling phases.
 				e.stopPropagation();
 				
 				$( this ).find( 'dd' ).addClass( 'active' );

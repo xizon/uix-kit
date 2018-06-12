@@ -233,7 +233,7 @@ App = ( function ( App, $, window, document ) {
 								'display' : 'block'
 							},
 							onComplete  : function() {
-								TweenMax.to( '.ajax-loader', 0.5, {
+								TweenMax.to( this.target, 0.5, {
 									alpha : 1
 								});
 							}
@@ -274,7 +274,7 @@ App = ( function ( App, $, window, document ) {
 			TweenMax.to( '.ajax-loader', 0.5, {
 				alpha       : 0,
 				onComplete  : function() {
-					TweenMax.set( '.ajax-loader', {
+					TweenMax.set( this.target, {
 						css         : {
 							'display' : 'none'
 						}
@@ -375,7 +375,7 @@ App = ( function ( App, $, window, document ) {
 
 
 						// Apply the original scripts
-						applyOriginalSomeScripts();
+						$( document ).applyOriginalSomeScripts();
 						
 						
 					}
@@ -386,71 +386,7 @@ App = ( function ( App, $, window, document ) {
 			
 		}
 		
-		
-		
-		/*
-		 * Apply some original scripts
-		 *
-		 * @return {void}  - The constructor.
-		 */
-		function applyOriginalSomeScripts() {
-			
-			App.commonHeight.pageLoaded(); //Common Height
-			App.customLightbox.pageLoaded(); //Custom Lightbox
-			App.modalbox.documentReady($); //Modal Dialog
-			App.parallax.documentReady($); //Parallax
-			App.videos.documentReady($); //Videos
-			App.setBG.documentReady($); //Specify a background image
-			App.getAllCustomAttrs.documentReady($); //Get all custom attributes of an element like "data-*"
-			App.pagination.documentReady($); //Pagination
-			App.form.documentReady($); //Form
-			App.flexSlider.documentReady($); //Flexslider
-			App.retina.documentReady($); //Retina Graphics for Website
-			App.showMoreLess.documentReady($); //Show More Less
-			
-			//Other functions here
-			
-			
-			
-			//Uix Shortcodes
-			if ( $.isFunction( $.uix_sc_init ) ) {
-				$.uix_sc_init();
-			}
-	
-			
-			
-		}
 
-		
-		/*
-		 * Apply all the original scripts
-		 *
-		 * @return {void}  - The constructor.
-		 */
-		
-		
-		function applyOriginalAllScripts() {
-			
-			
-			var scipts_pageLoaded    = App.components.pageLoaded,
-				scipts_documentReady = App.components.documentReady;
-			
-			
-			for ( var i = 0; i < scipts_pageLoaded.length; i++ ) {
-			     scipts_pageLoaded[i]();
-			}
-			for ( var j = 0; j < scipts_documentReady.length; j++ ) {
-			     scipts_documentReady[j]( $ );
-			}	
-		
-			//Uix Shortcodes
-			if ( $.isFunction( $.uix_sc_init ) ) {
-				$.uix_sc_init();
-			}
-			
-			
-		}
-		
 		
 		/* 
 		 ====================================================
@@ -493,4 +429,98 @@ App = ( function ( App, $, window, document ) {
 
 }( App, jQuery, window, document ) );
 
+
+
+
+
+
+		
+		
+/*
+ * Apply some original scripts
+ *
+ * @return {void}  - The constructor.
+ */
+( function ( $ ) {
+    $.fn.applyOriginalSomeScripts = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+			controls    : '.controls.line-eff'
+        }, options );
+ 
+        this.each( function() {
+
+			App.commonHeight.pageLoaded(); //Common Height
+			App.customLightbox.pageLoaded(); //Custom Lightbox
+			App.modalbox.documentReady($); //Modal Dialog
+			App.parallax.documentReady($); //Parallax
+			App.videos.documentReady($); //Videos
+			App.setBG.documentReady($); //Specify a background image
+			App.getAllCustomAttrs.documentReady($); //Get all custom attributes of an element like "data-*"
+			App.pagination.documentReady($); //Pagination
+			App.form.documentReady($); //Form
+			App.flexSlider.documentReady($); //Flexslider
+			App.retina.documentReady($); //Retina Graphics for Website
+			App.showMoreLess.documentReady($); //Show More Less
+			App.dropdownMenu.documentReady($); //Dropdown Menu
+
+			//Other functions here
+
+
+
+			//Uix Shortcodes
+			if ( $.isFunction( $.uix_sc_init ) ) {
+				$.uix_sc_init();
+			}
+			
+			
+		});
+ 
+    };
+ 
+}( jQuery ));
+
+
+
+		
+
+		
+/*
+ * Apply all the original scripts
+ *
+ * @return {void}  - The constructor.
+ */	
+( function ( $ ) {
+    $.fn.applyOriginalAllScripts = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+			controls    : '.controls.line-eff'
+        }, options );
+ 
+        this.each( function() {
+
+			var scipts_pageLoaded    = App.components.pageLoaded,
+				scipts_documentReady = App.components.documentReady;
+
+
+			for ( var i = 0; i < scipts_pageLoaded.length; i++ ) {
+				 scipts_pageLoaded[i]();
+			}
+			for ( var j = 0; j < scipts_documentReady.length; j++ ) {
+				 scipts_documentReady[j]( $ );
+			}	
+
+			//Uix Shortcodes
+			if ( $.isFunction( $.uix_sc_init ) ) {
+				$.uix_sc_init();
+			}
+
+			
+		});
+ 
+    };
+ 
+}( jQuery ));
 

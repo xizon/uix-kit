@@ -18,7 +18,7 @@ App = ( function ( App, $, window, document ) {
 			
 			//Autoplay global variables
 			timer                     = null,
-			playTimes
+			playTimes;
 		
 		
 		
