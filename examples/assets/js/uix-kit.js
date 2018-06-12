@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.7.6
- * ## Last Update         :  June 12, 2018
+ * ## Version             :  1.7.7
+ * ## Last Update         :  June 13, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -34,8 +34,8 @@
     9. Dropdown Categories 
     10. Pagination 
     11. Specify a background image 
-    12. 3D Background 2 
-    13. 3D Background 
+    12. 3D Background 
+    13. 3D Background 2 
     14. 3D Background 2 
     15. 3D Carousel 
     16. 3D Model 
@@ -50,8 +50,8 @@
     25. Dropdown Menu 
     26. Dynamic Drop Down List from JSON 
     27. Flexslider 
-    28. Form Progress 
-    29. Form 
+    28. Form 
+    29. Form Progress 
     30. Gallery 
     31. Image Shapes 
     32. Custom Core Scripts & Stylesheets 
@@ -3230,6 +3230,13 @@ App = ( function ( App, $, window, document ) {
    
    
     var documentReady = function( $ ) {
+		
+        var $window      = $( window ),
+		    windowWidth  = $window.width(),
+		    windowHeight = $window.height();
+		
+		
+		if ( windowWidth <= 768 ) return false;
 		
 		$( '.custom-accordion-img' ).each( function() {
 			var $this           = $( this ),

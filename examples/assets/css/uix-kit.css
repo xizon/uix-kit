@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.7.6
- * ## Last Update         :  June 12, 2018
+ * ## Version             :  1.7.7
+ * ## Last Update         :  June 13, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -67,10 +67,10 @@
 	---------------------------
 	
     1. Basic 
-    2. Bullet List 
-    3. Typography 
+    2. Table 
+    3. Bullet List 
     4. Helper Classes 
-    5. Table 
+    5. Typography 
     6. Spacing 
     7. Basic Layout Styles 
     8. Navigation Area 
@@ -82,8 +82,8 @@
     14. Loader 
     15. Social Media Icons 
     16. Pagination 
-    17. Sidebar 
-    18. Filterable Navigation 
+    17. Filterable Navigation 
+    18. Sidebar 
     19. Search 
     20. Tags 
     21. Entry 
@@ -102,49 +102,51 @@
     34. Button 
     35. Cards 
     36. Counter 
-    37. Dotted Line 
-    38. Dropdown Menu 
-    39. Equal-width Divs 
+    37. Dropdown Menu 
+    38. Equal-width Divs 
+    39. Dotted Line 
     40. Features 
-    41. Footer Templates 
-    42. Flexslider 
+    41. Flexslider 
+    42. Footer Templates 
     43. Form 
     44. Form Progress 
     45. Gallery 
-    46. Image Shapes 
-    47. Header Pinlines 
-    48. Cutom Light Box 
-    49. Custom Core Scripts & Stylesheets 
+    46. Header Pinlines 
+    47. Image Shapes 
+    48. Custom Core Scripts & Stylesheets 
+    49. Cutom Light Box 
     50. Brands List 
     51. Bulleted List 
     52. Maintain Aspect Ratio List 
-    53. List of Split Posts 
-    54. List of Posts 
+    53. List of Posts 
+    54. List of Split Posts 
     55. Side by Side List 
-    56. Fullwidth List of Split 2 
-    57. Mobile Menu 
-    58. Side by Side List With Photo 
-    59. Fullwidth List of Split 
-    60. Mouse Animation Scroll 
-    61. Multiple Items Carousel 
-    62. Modal Dialog 
+    56. Side by Side List With Photo 
+    57. Fullwidth List of Split 2 
+    58. Fullwidth List of Split 
+    59. Mobile Menu 
+    60. Modal Dialog 
+    61. Mouse Animation Scroll 
+    62. Multiple Items Carousel 
     63. Overlay 
     64. Parallax 
-    65. Progress Bar 
+    65. Periodical Scroll 
     66. Pricing 
-    67. Periodical Scroll 
+    67. Progress Bar 
     68. Services 
     69. Show More Less 
     70. Single Post 
     71. Source Code 
     72. Striking 
-    73. Tabs 
-    74. Team Focus 
-    75. Table Series 
+    73. Table Series 
+    74. Tabs 
+    75. Team Focus 
     76. Testimonials Carousel 
-    77. Timeline 
-    78. Text effect 
+    77. Text effect 
+    78. Timeline 
     79. ToolTip 
+    80. WordPress Core 
+    81. Ajax Page Loader (Loading A Page via Ajax Into Div)  
 
 
 
@@ -3818,13 +3820,10 @@ ul.entry-meta {
   height: 250px;
   font-size: 1rem;
   /*Fighting the Space Between Inline Block Elements*/
+  z-index: 1;
   background-position: center center;
   background-repeat: no-repeat;
   transition: all 0.3s ease;
-}
-
-.custom-accordion-img ul li.active {
-  width: 60%;
 }
 
 .custom-accordion-img ul li > img {
@@ -3837,8 +3836,6 @@ ul.entry-meta {
   display: block;
   height: 250px;
   width: 100%;
-  position: relative;
-  z-index: 3;
   vertical-align: bottom;
   padding: 1rem 2.5rem;
   box-sizing: border-box;
@@ -3847,18 +3844,16 @@ ul.entry-meta {
   transition: all 0.3s ease;
 }
 
-.custom-accordion-img ul li > .outer h3 {
-  text-overflow: clip;
-  top: 140px;
-}
-
+.custom-accordion-img ul li > .outer h3,
 .custom-accordion-img ul li > .outer p {
-  top: 140px;
+  position: relative;
+  z-index: -1;
+  word-break: break-all;
 }
 
 .custom-accordion-img ul li > .outer .close-item {
   position: absolute;
-  right: 0;
+  right: 10px;
   top: 10px;
   z-index: 2;
   display: inline-block;
@@ -3868,6 +3863,18 @@ ul.entry-meta {
   width: auto;
   font-size: 0.75rem;
   padding: 0 1rem;
+}
+
+.custom-accordion-img ul li.active {
+  width: 60%;
+}
+
+.custom-accordion-img ul li.sub-active > .outer h3,
+.custom-accordion-img ul li.sub-active > .outer p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  white-space: nowrap;
 }
 
 @media all and (max-width: 768px) {
@@ -11964,15 +11971,6 @@ dl.list-side-by-side::after {
 }
 
 /* ====================================================== 
-   <!-- Text effect -->   
-/* ====================================================== */
-.letter {
-  transform-origin: 50% 100%;
-  display: inline-block;
-  line-height: 1;
-}
-
-/* ====================================================== 
    <!-- Testimonials Carousel -->  
 /* ====================================================== */
 .custom-testimonials-count {
@@ -12074,6 +12072,15 @@ dl.list-side-by-side::after {
 
 .slides-custom-control li.flex-active {
   background: #EC5E79;
+}
+
+/* ====================================================== 
+   <!-- Text effect -->   
+/* ====================================================== */
+.letter {
+  transform-origin: 50% 100%;
+  display: inline-block;
+  line-height: 1;
 }
 
 /* ====================================================== 
@@ -12907,16 +12914,6 @@ a img.aligncenter {
   50% {
     right: 2px;
     left: 180px;
-  }
-  55% {
-    right: 2px;
-  }
-  100% {
-    right: 180px;
-    left: 2px;
-  }
-}
-80px;
   }
   55% {
     right: 2px;

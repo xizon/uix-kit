@@ -5,9 +5,6 @@
 // Accordion Height
 $accordion-img-height: 250px;
 
-// Position text along bottom
-$text-offset: $accordion-img-height - 110;
-
 .custom-accordion-img {
 
 	width: 100%;
@@ -30,19 +27,14 @@ $text-offset: $accordion-img-height - 110;
 			width: 16.66666666666667%; // 6 into 100
 			height: $accordion-img-height;
 			font-size: 1rem;/*Fighting the Space Between Inline Block Elements*/
+			z-index: 1;
 			
 			background-position: center center;
 			background-repeat: no-repeat;
 
 
 			@include transition-default();
-			
 
-			&.active {
-				width: 60%;
-
-			}	
-			
 			> img {
 				position: absolute;
 				left: 0;
@@ -54,8 +46,6 @@ $text-offset: $accordion-img-height - 110;
 				display: block;
 				height: $accordion-img-height;
 				width: 100%;
-				position: relative;
-				z-index: 3;
 				vertical-align: bottom;
 				padding: 1rem 2.5rem;
 				box-sizing: border-box;
@@ -63,21 +53,18 @@ $text-offset: $accordion-img-height - 110;
 				cursor: pointer;
 				@include transition-default();
 
-				
-				h3 {
-					text-overflow: clip;
-					top: $text-offset;
-				}
-
+				h3,
 				p {
-
-					top: $text-offset;
-
+					position: relative;
+					z-index: -1;
+					word-break: break-all;
 				}
+				
+
 				
 				.close-item {
 					position: absolute;
-					right: 0;
+					right: 10px;
 					top: 10px;
 					z-index: 2;
 					display: inline-block;
@@ -93,7 +80,23 @@ $text-offset: $accordion-img-height - 110;
 
 			}
 
+			&.active {
+				width: 60%;
+			}	
 			
+
+			&.sub-active {
+			
+				> .outer {
+					
+					h3,
+					p {
+						@include ellipsis();
+					}	
+				}
+
+
+			}		
 
 		}
 
@@ -103,7 +106,6 @@ $text-offset: $accordion-img-height - 110;
 	}
 
 }
-
 // Stack items
 @media all and (max-width:  768px) {
 

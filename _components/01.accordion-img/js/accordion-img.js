@@ -10,6 +10,14 @@ App = ( function ( App, $, window, document ) {
    
     var documentReady = function( $ ) {
 		
+        var $window      = $( window ),
+		    windowWidth  = $window.width(),
+		    windowHeight = $window.height();
+		
+		
+		if ( windowWidth <= 768 ) return false;
+		
+		
 		$( '.custom-accordion-img' ).each( function() {
 			var $this           = $( this ),
 				aEvent          = $this.data( 'event' ),
