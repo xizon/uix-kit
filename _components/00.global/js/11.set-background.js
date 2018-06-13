@@ -11,33 +11,63 @@ App = ( function ( App, $, window, document ) {
     var documentReady = function( $ ) {
 		
 		$( '[data-bg]' ).each( function() {
-			var $this         = $( this ),
-				dataImg       = $this.data( 'bg' ),
-				dataPos       = $this.data( 'bg-position' ),
-				dataSize      = $this.data( 'bg-size' ),
-				dataRepeat    = $this.data( 'bg-repeat' );
+			var $this    = $( this ),
+				config   = $this.data( 'bg' );
 
-			if( typeof dataPos === typeof undefined ) {
-				dataPos = 'top left';
+
+			if( typeof config === typeof undefined ) {
+				config = {
+					"src"      : "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+					"position" : "top left",
+					"size"     : "cover",
+					"repeat"   : "no-repeat",
+					"fill"     : false,
+				};
 			}
-			
-			if( typeof dataSize === typeof undefined ) {
-				dataSize = 'cover';
+
+			if ( config ) {
+
+				var dataImg       = config.src,
+					dataPos       = config.position,
+					dataSize      = config.size,
+					dataRepeat    = config.repeat;
+
+				if( typeof dataPos === typeof undefined ) dataPos = 'top left';
+				if( typeof dataSize === typeof undefined ) dataSize = 'cover';
+				if( typeof dataRepeat === typeof undefined ) dataRepeat = 'no-repeat';
+				
+
+				if ( typeof dataImg != typeof undefined && dataImg != '' ) {
+
+					if ( config.fill ) {
+						//Show Image Under Text
+						if ( Modernizr.cssanimations ) {
+							$this.css( {
+								'background'               : 'url('+dataImg+') '+dataRepeat+'',
+								'background-size'          : dataSize,
+								'-webkit-background-clip'  : 'text',
+								'-webkit-text-fill-color'  : 'transparent',
+							} );	
+	
+						}
+
+
+					} else {
+
+						$this.css( {
+							'background-image'    : 'url('+dataImg+')',
+							'background-position' : dataPos,
+							'background-size'     : dataSize,
+							'background-repeat'   : dataRepeat
+						} );	
+					}
+
+				}	
+				
+				
 			}
-			
-			if( typeof dataRepeat === typeof undefined ) {
-				dataRepeat = 'no-repeat';
-			}	
-			
-			
-			if ( typeof dataImg != typeof undefined && dataImg != '' ) {
-				$this.css( {
-					'background-image'    : 'url('+dataImg+')',
-					'background-position' : dataPos,
-					'background-size'     : dataSize,
-					'background-repeat'   : dataRepeat
-				} );
-			}
+		
+
 			
 
 		});

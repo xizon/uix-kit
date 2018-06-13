@@ -1,0 +1,157 @@
+/* ====================================================== 
+   <!-- Heading -->    
+/* ====================================================== */
+
+/* 
+ ---------------------------
+ 1) Header Pinlines
+ ---------------------------
+ */ 
+.heading-pinline {
+    text-align: center;
+    display: block;
+    overflow: hidden;
+    
+	
+	span {
+		position: relative;
+		display: inline-block;
+		max-width: 80%;
+		line-height: 1;
+		
+
+		&::before,
+		&::after {
+			content: "";
+			position: absolute;
+			top: 50%;
+			height: 1px;
+			background: $primary-text-color1;
+			width: 99999px;
+		}
+
+		&::before {
+			left: 100%;
+			margin-left: 1.5rem;
+		}
+
+		&::after {
+			right: 100%;
+			margin-right: 1.5rem;
+		}	
+		
+		
+	}
+	
+	&.text-left {
+		text-align: left;
+	
+		span {
+		
+			&::after {
+				display: none;
+			}	
+
+		}	
+	}
+
+	&.text-right {
+		text-align: right;
+	
+		span {
+		
+			&::before {
+				display: none;
+			}	
+
+		}	
+	}	
+}
+
+
+
+/* 
+ ---------------------------
+ 2) Text Overlay
+ ---------------------------
+ */ 
+.heading-overlay {
+	position: relative;
+
+	&::before {
+		content: attr(data-text);
+		color: rgba(220,220,220,0.5);
+		font-size: inherit;
+		display: block;
+		font-weight: 900;
+		letter-spacing: .5rem;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: -1;
+		transform: scale(2);
+		transform-origin: left center 0;
+	}	
+}
+
+
+/* 
+ ---------------------------
+ 3) Show Image Under Text
+ ---------------------------
+ */ 
+.heading-fill {
+	user-select: none;
+	color: $primary-text-color1;  /* Fallback: assume this color ON TOP of image */
+	background: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) no-repeat;
+	background-size: cover;
+
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+
+}
+
+
+/* 
+ ---------------------------
+ 4) Custom Underline
+ ---------------------------
+ */ 
+.heading-underline {
+	
+	span {
+		display: inline-block;
+		@include bg-gradient( '130deg' );
+		@include transition-default(); 
+		background-repeat: no-repeat;
+		background-size: 100% 0.3rem;
+		background-position: 0 88%;
+
+
+		&:hover {
+			background-size: 100% 88%;
+		}	
+		
+	}
+	
+
+}
+
+
+
+/* 
+ ---------------------------
+ 5) Hybrid Heading
+ ---------------------------
+ */ 
+.heading-hybrid {
+	
+	span {
+		display: block;
+		font-size: 0.875rem;
+		letter-spacing: 2px;
+	}
+	
+}
+
+

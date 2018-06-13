@@ -133,8 +133,6 @@
 
 	}
 
-	
-	
 	.custom-card2-content {
 		position: relative;
 	}
@@ -171,19 +169,30 @@
 	}
 	
 	.custom-card3-image {
-		height: 260px;
+		height: 21.25rem;
 		border-top-left-radius: 8px;
 		border-top-right-radius: 8px;
 		background-image: -webkit-linear-gradient(270deg, hsla(0, 0%, 96%, .5), hsla(0, 0%, 96%, .5));
 		background-image: linear-gradient(180deg, hsla(0, 0%, 96%, .5), hsla(0, 0%, 96%, .5));
 		background-position: 50% 50%;
 		background-size: cover;
+		
+		img {
+			visibility: hidden;
+		}	
+		
 	}
 
 	.custom-card3-content {
 		padding: 1rem 1.5rem;
 	}
 	
+	
+	&.common-height {
+		.custom-card3-image {
+			height: auto;
+		}
+	}
 
 	
 
@@ -225,12 +234,28 @@
 		border-bottom-left-radius: 8px;
 		background-position: 50% 50%;
 		background-size: cover;
+		
+		img {
+			visibility: hidden;
+		}
+		
 	}
 	
 
 	.custom-card4-content {
 		height: 21.25rem;
 		padding: 1.5rem 3rem;
+	}
+	
+	.custom-card4-title {
+		padding-bottom: 1.5rem;
+	}
+	
+	&.common-height {
+		.custom-card4-image,
+		.custom-card4-content {
+			height: auto;
+		}
 	}
 
 

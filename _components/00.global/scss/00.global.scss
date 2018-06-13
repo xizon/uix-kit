@@ -105,7 +105,7 @@ $heading-text-color    : #212121;
 $sub-text-color        : #AEAEAE;
 
 //Dividing Line Color
-$dividing-line-color   : #F4F4F4;
+$dividing-line-color   : #DCDCDC; //rgba(220, 220, 220, 1)
 
 //Button Gradient Color
 $btn-gradient-color1   : #EC5E79;
@@ -173,8 +173,8 @@ $primary-bg-color      : transparent;
 // Gradient Border
 // ---------------------------
 //
-@mixin gradient-border( $color1, $color2, $border-width, $direction, $bg ) {
-	// @include gradient-border( $highlight-color1, $highlight-color2, 3px, 'to right', #fff );
+@mixin border-gradient( $color1, $color2, $border-width, $direction, $bg ) {
+	// @include border-gradient( $highlight-color1, $highlight-color2, 3px, 'to right', #fff );
 	// Compatible with ie9+
 	background: #{$bg};
    
@@ -289,27 +289,5 @@ $primary-bg-color      : transparent;
 		background-color: $highlight-color1;
 	}
 	
-}
-
-
-
-
-// Ripple Effect
-// ---------------------------
-//
-@mixin anime-ripple() {
-	// @include ianime-ripple();
-	animation: ripple 0.6s linear infinite;
-}
-
-
-/* Ripple Effect */
-@keyframes ripple {
-    0% {
-        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1), 0 0 0 20px rgba(255, 255, 255, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1);
-    }
-    100% {
-        box-shadow: 0 0 0 20px rgba(255, 255, 255, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1), 0 0 0 80px rgba(255, 255, 255, 0);
-    }
 }
 

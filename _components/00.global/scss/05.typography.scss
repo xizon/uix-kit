@@ -251,15 +251,49 @@ h6 {
 
 .font-primary-color {
 	color: $highlight-color1 !important;
+	
+	
+	p,
+	h1, 
+	h2, 
+	h3, 
+	h4, 
+	h5, 
+	h6, 
+	.h1, 
+	.h2, 
+	.h3, 
+	.h4, 
+	.h5, 
+	.h6 {
+	    color: $highlight-color1;
+	}	
+	
 }
 
 .font-sub-color {
 	color: $sub-text-color !important;
+	
+	p,
+	h1, 
+	h2, 
+	h3, 
+	h4, 
+	h5, 
+	h6, 
+	.h1, 
+	.h2, 
+	.h3, 
+	.h4, 
+	.h5, 
+	.h6 {
+	    color: $sub-text-color;
+	}
 }
 
 
 .font-white {
-	color: white;
+	color: white !important;
 	
 	p,
 	h1, 

@@ -11,13 +11,12 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.7.7
- * ## Last Update         :  June 12, 2018
+ * ## Version             :  1.7.8
+ * ## Last Update         :  June 13, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
- * ## Compatible With     :  Bootstrap 3.x, Chinese, English
- * ## Compatible Browsers :  IE9, IE10, IE11, Firefox, Safari, Opera, Chrome, Edge
+ * ## Compatible With     :  Bootstrap 3.x
  * ## Released under the MIT license.
  */
 
@@ -36,19 +35,21 @@
     8. Sidebar 
     9. Search 
     10. Comments 
-    11. Advanced Slider (Special Effects) 
-    12. Advanced Slider (Basic) 
-    13. Cards 
-    14. Dropdown Menu 
-    15. Flexslider 
-    16. Form 
-    17. Brands List 
-    18. Bulleted List 
-    19. Maintain Aspect Ratio List 
-    20. Side by Side List 
-    21. Mobile Menu 
-    22. Source Code 
-    23. ToolTip 
+    11. Modal Dialog 
+    12. Modal Dialog 
+    13. Advanced Slider (Special Effects) 
+    14. Advanced Slider (Basic) 
+    15. Cards 
+    16. Dropdown Menu 
+    17. Flexslider 
+    18. Form 
+    19. Brands List 
+    20. Bulleted List 
+    21. Maintain Aspect Ratio List 
+    22. Side by Side List 
+    23. Mobile Menu 
+    24. Source Code 
+    25. ToolTip 
 
 
 
@@ -387,6 +388,42 @@ blockquote::before {
 .comment-content a.respond {
     right: auto;
     left: 0;
+}
+
+/* ====================================================== 
+    <!-- Modal Dialog --> 
+/* ====================================================== */
+.modal-box {
+    left: auto;
+    right: 50%;
+  /* Video container */;
+}
+
+.modal-box.fullscreen {
+    left: auto;
+    right: 0;
+}
+
+.modal-box .web-video-waiting {
+    left: auto;
+    right: 50%;
+    margin-left: auto;
+    margin-right: -1rem;
+}
+
+.modal-mask {
+    left: auto;
+    right: 0;
+}
+
+.modal-box .close-btn {
+    right: auto;
+    left: 12px;
+}
+
+.modal-box.fullscreen .close-btn {
+    right: auto;
+    left: 26px;
 }
 
 /* ====================================================== 

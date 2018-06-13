@@ -1,7 +1,17 @@
 # Changelog
 
 
-#### = 1.7.7 (June 13, 2018) =
+#### = 1.7.8 (June 13, 2018) =
+
+* New: Add a new module "Dots".
+* New: Add a new module "Heading".
+* New: Add a new module "Dividing Line".
+* Tweak: Refactored and optimized some scripts.
+* Tweak: Optimized display effect of the some modules.
+
+
+
+#### = 1.7.7 (June 12, 2018) =
 
 * Fix: Fixed an invalid click on the accordion background.
 * New: Add a new module "Ajax Push Content" which allow AJAX dynamically adds specified content to element.

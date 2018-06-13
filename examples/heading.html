@@ -53,11 +53,11 @@
         
        
         <!-- Theme  -->
-        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTUyODgyMDYyODU4Mw"/>
+        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTUyODg4MjQ2ODM2Mg"/>
         
         
          <!--[if lt IE 10]>
-           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTUyODgyMDYyODU4Mw" />
+           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTUyODg4MjQ2ODM2Mg" />
         <![endif]-->
         
         
@@ -122,7 +122,6 @@
     
 
   
-  
     <div class="wrapper">
     
         <!-- Header Area
@@ -163,6 +162,9 @@
 														<li><a href="overlay.html">Overlay</a></li>
 														<li><a href="video.html">Video</a></li>
 														<li><a href="video-background.html">Video BG</a></li>
+														<li><a href="heading.html">Heading</a></li>
+														<li><a href="dividing-line.html">Dividing Line</a></li>
+														<li><a href="modal-dialog.html">Modal Dialog</a></li>
 													</ul>
 													
 													<!-- .sub-menu  end -->
@@ -174,7 +176,6 @@
 												<li>
 													<ul class="sub-menu">
 														<li><span class="multi-column-title">Web Elements (Part 1)</span></li>
-														<li><a href="header-pinlines.html">Header Pinlines</a></li>
 														<li><a href="social-meida-icons.html">Social Media Icons</a></li>
 														<li><a href="form.html">Form Elements</a></li>
 														<li><a href="form2.html">Form Elements 2</a></li>
@@ -188,10 +189,12 @@
 														<li><a href="progress-bar.html">Progress Bar</a></li>
 														<li><a href="parallax.html">Parallax</a></li>
 														<li><a href="parallax2.html">Parallax 2</a></li>
-													    <li><a href="modal-dialog.html">Modal UI</a></li>
 													    <li><a href="breadcrumbs.html">Breadcrumbs</a></li>
 													    <li><a href="vertical-text.html">Vertical Text</a></li>
+													    <li><a href="tooltip.html">Tooltip</a></li>
+													    <li><a href="dots.html">Dots</a></li>
 													    
+													   
 														
 													</ul>
 													<!-- .sub-menu  end -->
@@ -278,7 +281,6 @@
 														<li><a href="list-posts-with-ajax.html">Ajax Load Posts</a></li>
 														<li><a href="list-posts-with-ajax2.html">Ajax Load Posts 2</a></li>
 														<li><a href="list-posts-with-ajax-infinitescroll.html">Infinite Scroll Posts</a></li>
-														<li><a href="tooltip.html">Tooltip</a></li>
 														<li><a href="show-more-less.html">Show More Less</a></li>
 														<li><a href="mousewheel-interaction.html">Mousewheel Interaction</a></li>
 														<li><a href="lightbox.html">Lightbox</a></li>
@@ -358,38 +360,39 @@
         </header>
         <div class="header-inner"></div>
       
-      
-        <!-- Content 01
+ 
+       <!-- Content 01
         ====================================================== -->
         <section class="space-none">
-            <div class="container t-c">
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2 t-c">
-                            <h2>Header Pinlines</h2>
-                        </div>
-                    </div>
-                    <!-- .row end -->
-              
-                    
-            </div>
-            <!-- .container end -->
- 
-        </section>
-     
-        
-       <!-- Content 02 
-        ====================================================== -->
-        <section>
             <div class="container">
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">
                            
                            
-                              <h4 class="pinline"><span>Header Pinline</span></h4>	
-                              <h4 class="pinline"><span>I'm a full-stack designer on the way of pursuing the dream. Focus on user interface, user experience</span></h4>	
-                              <h4 class="pinline text-left"><span>Header Pinline</span></h4>	
-                              <h4 class="pinline text-right"><span>Header Pinline</span></h4>
-                               
+                              <h3 class="heading-pinline"><span>Header Pinline</span></h3>	
+                              <h3 class="heading-pinline"><span>I'm a full-stack designer on the way of pursuing the dream. Focus on user interface, user experience</span></h3>	
+                              <h3 class="heading-pinline text-left"><span>Header Pinline</span></h3>	
+                              <h3 class="heading-pinline text-right"><span>Header Pinline</span></h3>
+                               	
+                              <br><br>
+                              
+                              <h2 class="heading-overlay" data-text="EFFECT">Text Overlay</h2>
+                              
+                              <br><br>
+                           
+							  <h2 class="heading-fill" data-bg='{"src":"assets/images/demo/test-img-big-4.jpg","position":"top left","size":"cover","repeat":"no-repeat","fill":true}'>SHOW IMAGE UNDER TEXT</h2> 
+                         
+                              <br><br>
+                          
+							  <h2 class="heading-underline"><span>My Custom Underline</span></h2> 
+                         	  
+                         	  <br><br>
+                         	 	
+							  <h2 class="heading-hybrid">Hybrid Heading<span>Should I make design before or after sobering?</span></h2>  
+                          	 	 
+                          	 	 
+                          	 	 
+                           
                            
                            
                         </div>
@@ -401,9 +404,9 @@
             <!-- .container end -->
  
         </section>   
-        
- 
-        
+
+     
+      
         
                 <!-- Footer
         ============================================= -->    
@@ -466,14 +469,14 @@
 	============================================= -->
 	
 	<script>
-		var REVISION     = "1.7.7",
+		var REVISION     = "1.7.8",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
 				"homeUrl"     : "",  //Eg. https://uiux.cc
 				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
 			};
     </script>  
-    <script src="assets/js/uix-kit.min.js?ver=MTUyODgyMDYyODU4Mw"></script>
+    <script src="assets/js/uix-kit.min.js?ver=MTUyODg4MjQ2ODM2Mg"></script>
 
 
 

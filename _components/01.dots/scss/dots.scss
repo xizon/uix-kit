@@ -1,0 +1,138 @@
+/* ====================================================== 
+   <!-- Dots -->    
+/* ====================================================== */
+
+$dot-size: 20px;
+
+/* 
+ ---------------------------
+ 1) Ripple effect 1
+ ---------------------------
+ */ 
+
+.dot-ripple-line {
+	position: relative;
+	display: inline-block;
+	background: $highlight-color1;
+	height: $dot-size;
+	width: $dot-size;
+	border-radius: 100%;
+
+	&:before,
+	&:after {
+		position: absolute;
+		content: '';
+		border-radius: inherit;
+		height: 0px;
+		width: 0px;
+		box-shadow: 0 0 0 2px $highlight-color1;
+		left: $dot-size/2;
+		top: $dot-size/2;
+		transform: translate(-50%, -50%);
+		
+	}
+
+	&:after {
+		height: 7px;
+		width: 7px;
+		box-shadow: 0 0 0 2px $highlight-color2;
+		
+	}
+	
+	&:not(.anim) {
+		&:before {
+			position: absolute;
+			content: '';
+			border-radius: inherit;
+			height: #{$dot-size + 10};
+			width: #{$dot-size + 10};
+			box-shadow: 0 0 0 2px $highlight-color1;
+			left: $dot-size/2;
+			top: $dot-size/2;
+			transform: translate(-50%, -50%);
+
+		}	
+	}
+	
+	&.anim {
+		&:before {
+		    animation: dotPulseInner 2s infinite ease-out;	
+		}
+		&:after {
+			animation: dotPpulseOuter 2s infinite ease-out;
+		}		
+		
+	}
+	
+
+}
+
+@keyframes dotPulseInner {
+	0% {
+		height: 0;
+		width: 0;
+		opacity: 0;
+	}
+	20% {
+		opacity: 1
+	}
+	95% {
+		height: #{$dot-size*2};
+		width: #{$dot-size*2};
+		opacity: 0.25;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+@keyframes dotPpulseOuter {
+	0% {
+		height: 7px;
+		width: 7px;
+		opacity: 0;
+	}
+	20% {
+		opacity: 1
+	}
+	100% {
+		height: #{$dot-size*3};
+		width: #{$dot-size*3};
+		opacity: 0.25;
+	}
+}
+
+
+/* 
+ ---------------------------
+ 2) Ripple Effect 2
+ ---------------------------
+ */ 
+
+.dot-ripple-bg {
+	position: relative;
+	display: inline-block;
+	background: $highlight-color1;
+	height: $dot-size;
+	width: $dot-size;
+	border-radius: 100%;
+	
+	box-shadow: 0 0 0 5px rgba($highlight-color1, 0.4),
+	            0 0 0 10px rgba($highlight-color1, 0.1);
+	
+	&.anim {
+		animation: dotRipple 2s linear infinite;
+	}
+}
+
+@keyframes dotRipple {
+    0% {
+		box-shadow: 0 0 0 5px rgba($highlight-color1, 0.4),
+					0 0 0 10px rgba($highlight-color1, 0.1);
+    }
+    100% {
+		box-shadow: 0 0 0 25px rgba($highlight-color1, 0),
+					0 0 0 30px rgba($highlight-color1, 0);
+    }
+}
+
+

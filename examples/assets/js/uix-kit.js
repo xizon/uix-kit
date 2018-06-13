@@ -7,13 +7,12 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.7.7
+ * ## Version             :  1.7.8
  * ## Last Update         :  June 13, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
- * ## Compatible With     :  Bootstrap 3.x, Chinese, English
- * ## Compatible Browsers :  IE9, IE10, IE11, Firefox, Safari, Opera, Chrome, Edge
+ * ## Compatible With     :  Bootstrap 3.x
  * ## Released under the MIT license.
  */
 
@@ -34,33 +33,33 @@
     9. Dropdown Categories 
     10. Pagination 
     11. Specify a background image 
-    12. 3D Background 
-    13. 3D Background 2 
+    12. Modal Dialog 
+    13. 3D Background 
     14. 3D Background 2 
-    15. 3D Carousel 
-    16. 3D Model 
-    17. 3D Pages 
-    18. 3D Particle Effect 
-    19. Accordion 
-    20. Accordion Background Images 
-    21. Advanced Content Slider 
-    22. Advanced Slider (Special Effects) 
-    23. Advanced Slider (Basic) 
-    24. Counter 
-    25. Dropdown Menu 
-    26. Dynamic Drop Down List from JSON 
-    27. Flexslider 
-    28. Form 
+    15. 3D Background 2 
+    16. 3D Carousel 
+    17. 3D Model 
+    18. 3D Pages 
+    19. 3D Particle Effect 
+    20. Accordion 
+    21. Accordion Background Images 
+    22. Advanced Content Slider 
+    23. Advanced Slider (Special Effects) 
+    24. Advanced Slider (Basic) 
+    25. Counter 
+    26. Dropdown Menu 
+    27. Dynamic Drop Down List from JSON 
+    28. Flexslider 
     29. Form Progress 
     30. Gallery 
-    31. Image Shapes 
-    32. Custom Core Scripts & Stylesheets 
-    33. Custom Lightbox 
-    34. Bulleted List 
-    35. Posts List With Ajax 
-    36. Fullwidth List of Split 
-    37. Mobile Menu 
-    38. Modal Dialog 
+    31. Form 
+    32. Image Shapes 
+    33. Custom Core Scripts & Stylesheets 
+    34. Custom Lightbox 
+    35. Bulleted List 
+    36. Posts List With Ajax 
+    37. Fullwidth List of Split 
+    38. Mobile Menu 
     39. Mousewheel Interaction 
     40. Multiple Items Carousel 
     41. Full Page/One Page Transition 
@@ -89,11 +88,34 @@
 
 */
 
+if ( typeof jQuery === 'undefined' || typeof TweenMax === 'undefined' || typeof Waypoint === 'undefined' ) {
+    throw new Error( 'Uix Kit\'s JavaScript requires jQuery, TweenMax, Waypoint.' );
+}
+
 
 //Global variables from front pages
-var templateUrl = APP_ROOTPATH.templateUrl,
-	homeUrl     = APP_ROOTPATH.homeUrl,
+var 
+	//If the file is in the root directory, you can leave it empty. 
+	//If in another directory, you can write: "/blog"
+    templateUrl, 
+
+	//Eg. https://uiux.cc
+	homeUrl, 
+	
+	//Eg. https://uiux.cc/wp-admin/admin-ajax.php
+	ajaxUrl; 
+
+
+if ( typeof APP_ROOTPATH === 'undefined' ) {
+    templateUrl = '';
+	homeUrl     = '';
+	ajaxUrl     = '';
+} else {
+    templateUrl = APP_ROOTPATH.templateUrl;
+	homeUrl     = APP_ROOTPATH.homeUrl;
 	ajaxUrl     = APP_ROOTPATH.ajaxUrl;
+}
+
 
 //Modify templateUrl as the correct path when local test is enabled
 if ( location.hostname === 'localhost' || location.hostname === '127.0.0.1' ) {
@@ -119,7 +141,7 @@ var App = (function ( $, window, document ) {
         components    = { documentReady: [], pageLoaded: [] };
 
 	if ( $( 'img' ).length == 0 ) {
-		$( 'body' ).prepend( '<img src="'+templateUrl+'/assets/images/blank.gif" alt="" style="display:none">' );
+		$( 'body' ).prepend( '<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" style="display:none">' );
 	}
 	
 	if( $.isFunction( $.fn.waitForImages ) ) {
@@ -405,7 +427,7 @@ App = ( function ( App, $, window, document ) {
    
     var documentReady = function( $ ) {
 		
-		$( '[data-your-custom-datas]' ).each( function() {
+		$( '[data-my-custom-datas]' ).each( function() {
 			var $this         = $( this );
 
 			
@@ -414,8 +436,8 @@ App = ( function ( App, $, window, document ) {
 				customPostData  = '';
 			
 			$.each( curAttrs, function( i, val ) {
-				if ( i.indexOf( 'data-ajax-list-field-' ) >= 0 ) {
-					customPostData += '"' + i.replace( 'data-ajax-list-field-', '' ) + '": ' + '"' + val + '", ';	
+				if ( i.indexOf( 'data-custom-field-' ) >= 0 ) {
+					customPostData += '"' + i.replace( 'data-custom-field-', '' ) + '": ' + '"' + val + '", ';	
 				}
 				
 			});
@@ -1153,7 +1175,7 @@ App = ( function ( App, $, window, document ) {
 
         // This is the easiest way to have default options.
         var settings = $.extend({
-			selector : '[class*=col-], [class*=eamless-col-]' //Bootstrap grid system and Custom seamless grid system
+			selector : '[class*=col-], [class*=eamless-col-], [class*=el-col-]' //Bootstrap grid system and Custom seamless grid system
         }, options );
  
         this.each( function() {
@@ -1177,7 +1199,6 @@ App = ( function ( App, $, window, document ) {
 				}
 			});
 
-			
 			
 
 			//No on mobile devices
@@ -1474,33 +1495,63 @@ App = ( function ( App, $, window, document ) {
     var documentReady = function( $ ) {
 		
 		$( '[data-bg]' ).each( function() {
-			var $this         = $( this ),
-				dataImg       = $this.data( 'bg' ),
-				dataPos       = $this.data( 'bg-position' ),
-				dataSize      = $this.data( 'bg-size' ),
-				dataRepeat    = $this.data( 'bg-repeat' );
+			var $this    = $( this ),
+				config   = $this.data( 'bg' );
 
-			if( typeof dataPos === typeof undefined ) {
-				dataPos = 'top left';
+
+			if( typeof config === typeof undefined ) {
+				config = {
+					"src"      : "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+					"position" : "top left",
+					"size"     : "cover",
+					"repeat"   : "no-repeat",
+					"fill"     : false,
+				};
 			}
-			
-			if( typeof dataSize === typeof undefined ) {
-				dataSize = 'cover';
+
+			if ( config ) {
+
+				var dataImg       = config.src,
+					dataPos       = config.position,
+					dataSize      = config.size,
+					dataRepeat    = config.repeat;
+
+				if( typeof dataPos === typeof undefined ) dataPos = 'top left';
+				if( typeof dataSize === typeof undefined ) dataSize = 'cover';
+				if( typeof dataRepeat === typeof undefined ) dataRepeat = 'no-repeat';
+				
+
+				if ( typeof dataImg != typeof undefined && dataImg != '' ) {
+
+					if ( config.fill ) {
+						//Show Image Under Text
+						if ( Modernizr.cssanimations ) {
+							$this.css( {
+								'background'               : 'url('+dataImg+') '+dataRepeat+'',
+								'background-size'          : dataSize,
+								'-webkit-background-clip'  : 'text',
+								'-webkit-text-fill-color'  : 'transparent',
+							} );	
+	
+						}
+
+
+					} else {
+
+						$this.css( {
+							'background-image'    : 'url('+dataImg+')',
+							'background-position' : dataPos,
+							'background-size'     : dataSize,
+							'background-repeat'   : dataRepeat
+						} );	
+					}
+
+				}	
+				
+				
 			}
-			
-			if( typeof dataRepeat === typeof undefined ) {
-				dataRepeat = 'no-repeat';
-			}	
-			
-			
-			if ( typeof dataImg != typeof undefined && dataImg != '' ) {
-				$this.css( {
-					'background-image'    : 'url('+dataImg+')',
-					'background-position' : dataPos,
-					'background-size'     : dataSize,
-					'background-repeat'   : dataRepeat
-				} );
-			}
+		
+
 			
 
 		});
@@ -1516,6 +1567,144 @@ App = ( function ( App, $, window, document ) {
     return App;
 
 }( App, jQuery, window, document ) );
+
+
+
+/* 
+ *************************************
+ * <!-- Modal Dialog -->
+ *************************************
+ */
+App = ( function ( App, $, window, document ) {
+    'use strict';
+   
+   
+    var documentReady = function( $ ){
+		
+		function getTransitionDuration( elementOrSelector ){
+			var $el, durString, isMS, numberStr, numberNum;
+			$el = $( elementOrSelector );
+			if( $el.length === 0 ){
+				return false;
+			}
+			$el = $($el[0]); // Force just the first item.  need more?  use .each
+			
+			var dur = $el.css('transition-duration');
+			if( typeof dur === typeof undefined ) { 
+				dur = '0.5s';
+			}
+			
+			durString = dur.toLowerCase();
+			isMS = durString.indexOf( 'ms' ) >= 0;
+			numberNum = durString.replace( 'ms', '' ).replace( 's', '' );
+			return isMS ? numberNum : numberNum * 1000;
+		}
+		
+		
+		/*
+		  * Unbind that one in a safe way that won't accidentally unbind other click handlers.
+		  * In order to trigger other custom Modal Dialog events.
+			
+			$( '#element' ).off( 'click.modalDialog' );
+			$( '#element' ).off( 'click.modalDialogClose' );
+			
+		*/
+		
+	
+		if ( $( '.modal-mask' ).length == 0 ) {
+			$( 'body' ).prepend( '<div class="modal-mask"></div>' );
+		}
+	    
+		$( document ).on( 'click.modalDialog', '[data-modal-id]', function() {
+			var dataID = $( this ).data( 'modal-id' ),
+			    dataH  = $( this ).data( 'modal-height' ),
+				dataW  = $( this ).data( 'modal-width' ),
+				$obj   = $( '.modal-box#'+dataID );
+			
+			// Initializate modal
+			$( this ).attr( 'href', 'javascript:void(0)' );
+			$obj.find( '.content' ).addClass( 'no-fullscreen' );
+			
+			
+			if ( $( this ).data( 'video-win' ) ) {
+				$obj.find( '.content' ).css( 'overflow-y', 'hidden' );
+			}
+			
+			
+			if ( $obj.length > 0 ) {
+				if( typeof dataH != typeof undefined && dataH != '' ) {
+					$obj.css( {'height': dataH } );
+				}
+				
+				if( typeof dataW != typeof undefined && dataW != '' ) {
+					$obj.css( {'width': dataW } );
+				}
+				
+				TweenMax.set( '.modal-mask', {
+					css: {
+						opacity : 0,
+						display : 'none'
+					},
+					onComplete : function() {
+						
+						TweenMax.to( this.target, 0.3, {
+							css: {
+								opacity    : 1,
+								display    : 'block'
+							}
+						});		
+						
+					}
+				});
+
+				$obj.addClass( 'active' );	
+			}
+			
+			if ( $obj.hasClass( 'fullscreen' ) ) {
+				setTimeout( function() {
+					$( 'html' ).css( 'overflow-y', 'hidden' );
+					if ( !$obj.hasClass( 'video' ) ) {
+						$obj.find( '.content' ).css( 'overflow-y', 'scroll' );
+					}
+					
+				}, getTransitionDuration( '.modal-box#'+dataID ) );
+				
+			}
+		
+		});
+		
+		$( document ).on( 'click.modalDialogClose', '.modal-box .close-btn', function() {
+			$( this ).parent().removeClass( 'active' );
+		});
+		
+		$( document ).on( 'click.modalDialogClose', '.modal-box .close-btn, .modal-mask', function() {
+			$( '.modal-box' ).removeClass( 'active' );
+			TweenMax.to( '.modal-mask', 0.3, {
+				css: {
+					opacity : 0,
+					display : 'none'
+				}
+			});
+				
+			$( '.modal-box' ).find( '.content' ).removeClass( 'no-fullscreen' );
+			$( 'html' ).css( 'overflow-y', 'auto' );
+			setTimeout( function() {
+	
+			}, getTransitionDuration( '.modal-box:first' ) );
+			
+		});
+		
+	};
+		
+      
+    App.modalbox = {
+        documentReady : documentReady        
+    };  
+    App.components.documentReady.push( documentReady );
+    return App;
+
+}( App, jQuery, window, document ) );
+
 
 
 /* 
@@ -3237,6 +3426,7 @@ App = ( function ( App, $, window, document ) {
 		
 		
 		if ( windowWidth <= 768 ) return false;
+		
 		
 		$( '.custom-accordion-img' ).each( function() {
 			var $this           = $( this ),
@@ -13450,144 +13640,6 @@ App = ( function ( App, $, window, document ) {
     return App;
 
 }( App, jQuery, window, document ) );
-
-
-
-/* 
- *************************************
- * <!-- Modal Dialog -->
- *************************************
- */
-App = ( function ( App, $, window, document ) {
-    'use strict';
-   
-   
-    var documentReady = function( $ ){
-		
-		function getTransitionDuration( elementOrSelector ){
-			var $el, durString, isMS, numberStr, numberNum;
-			$el = $( elementOrSelector );
-			if( $el.length === 0 ){
-				return false;
-			}
-			$el = $($el[0]); // Force just the first item.  need more?  use .each
-			
-			var dur = $el.css('transition-duration');
-			if( typeof dur === typeof undefined ) { 
-				dur = '0.5s';
-			}
-			
-			durString = dur.toLowerCase();
-			isMS = durString.indexOf( 'ms' ) >= 0;
-			numberNum = durString.replace( 'ms', '' ).replace( 's', '' );
-			return isMS ? numberNum : numberNum * 1000;
-		}
-		
-		
-		/*
-		  * Unbind that one in a safe way that won't accidentally unbind other click handlers.
-		  * In order to trigger other custom Modal Dialog events.
-			
-			$( '#element' ).off( 'click.modalDialog' );
-			$( '#element' ).off( 'click.modalDialogClose' );
-			
-		*/
-		
-	
-		if ( $( '.modal-mask' ).length == 0 ) {
-			$( 'body' ).prepend( '<div class="modal-mask"></div>' );
-		}
-	    
-		$( document ).on( 'click.modalDialog', '[data-modal-id]', function() {
-			var dataID = $( this ).data( 'modal-id' ),
-			    dataH  = $( this ).data( 'modal-height' ),
-				dataW  = $( this ).data( 'modal-width' ),
-				$obj   = $( '.modal-box#'+dataID );
-			
-			// Initializate modal
-			$( this ).attr( 'href', 'javascript:void(0)' );
-			$obj.find( '.content' ).addClass( 'no-fullscreen' );
-			
-			
-			if ( $( this ).data( 'video-win' ) ) {
-				$obj.find( '.content' ).css( 'overflow-y', 'hidden' );
-			}
-			
-			
-			if ( $obj.length > 0 ) {
-				if( typeof dataH != typeof undefined && dataH != '' ) {
-					$obj.css( {'height': dataH } );
-				}
-				
-				if( typeof dataW != typeof undefined && dataW != '' ) {
-					$obj.css( {'width': dataW } );
-				}
-				
-				TweenMax.set( '.modal-mask', {
-					css: {
-						opacity : 0,
-						display : 'none'
-					},
-					onComplete : function() {
-						
-						TweenMax.to( this.target, 0.3, {
-							css: {
-								opacity    : 1,
-								display    : 'block'
-							}
-						});		
-						
-					}
-				});
-
-				$obj.addClass( 'active' );	
-			}
-			
-			if ( $obj.hasClass( 'fullscreen' ) ) {
-				setTimeout( function() {
-					$( 'html' ).css( 'overflow-y', 'hidden' );
-					if ( !$obj.hasClass( 'video' ) ) {
-						$obj.find( '.content' ).css( 'overflow-y', 'scroll' );
-					}
-					
-				}, getTransitionDuration( '.modal-box#'+dataID ) );
-				
-			}
-		
-		});
-		
-		$( document ).on( 'click.modalDialogClose', '.modal-box .close-btn', function() {
-			$( this ).parent().removeClass( 'active' );
-		});
-		
-		$( document ).on( 'click.modalDialogClose', '.modal-box .close-btn, .modal-mask', function() {
-			$( '.modal-box' ).removeClass( 'active' );
-			TweenMax.to( '.modal-mask', 0.3, {
-				css: {
-					opacity : 0,
-					display : 'none'
-				}
-			});
-				
-			$( '.modal-box' ).find( '.content' ).removeClass( 'no-fullscreen' );
-			$( 'html' ).css( 'overflow-y', 'auto' );
-			setTimeout( function() {
-	
-			}, getTransitionDuration( '.modal-box:first' ) );
-			
-		});
-		
-	};
-		
-      
-    App.modalbox = {
-        documentReady : documentReady        
-    };  
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
-
 
 
 

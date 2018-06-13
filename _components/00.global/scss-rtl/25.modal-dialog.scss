@@ -1,0 +1,59 @@
+/* ====================================================== 
+    <!-- Modal Dialog --> 
+/* ====================================================== */
+
+.modal-box {
+	left: auto;
+	right: 50%;
+	
+	&.fullscreen {
+		left: auto;
+		right: 0;
+		
+	}
+	
+	
+	/* Video container */
+	
+	.web-video-waiting {
+		
+		left: auto;
+		right: 50%;
+		margin-left: auto;
+		margin-right: -1rem;
+		
+	
+	}	
+}
+
+.modal-mask {
+	left: auto;
+	right: 0;
+}
+
+.modal-box {
+	
+	
+	
+	.close-btn {
+		right: auto;
+		left: 12px;
+		
+	
+		
+	}
+	
+
+	&.fullscreen {
+		.close-btn {
+			right: auto;
+			left: 26px;
+
+			
+		}
+		
+	}
+	
+
+}
+

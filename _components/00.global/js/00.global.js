@@ -8,11 +8,34 @@
 
 */
 
+if ( typeof jQuery === 'undefined' || typeof TweenMax === 'undefined' || typeof Waypoint === 'undefined' ) {
+    throw new Error( 'Uix Kit\'s JavaScript requires jQuery, TweenMax, Waypoint.' );
+}
+
 
 //Global variables from front pages
-var templateUrl = APP_ROOTPATH.templateUrl,
-	homeUrl     = APP_ROOTPATH.homeUrl,
+var 
+	//If the file is in the root directory, you can leave it empty. 
+	//If in another directory, you can write: "/blog"
+    templateUrl, 
+
+	//Eg. https://uiux.cc
+	homeUrl, 
+	
+	//Eg. https://uiux.cc/wp-admin/admin-ajax.php
+	ajaxUrl; 
+
+
+if ( typeof APP_ROOTPATH === 'undefined' ) {
+    templateUrl = '';
+	homeUrl     = '';
+	ajaxUrl     = '';
+} else {
+    templateUrl = APP_ROOTPATH.templateUrl;
+	homeUrl     = APP_ROOTPATH.homeUrl;
 	ajaxUrl     = APP_ROOTPATH.ajaxUrl;
+}
+
 
 //Modify templateUrl as the correct path when local test is enabled
 if ( location.hostname === 'localhost' || location.hostname === '127.0.0.1' ) {
@@ -38,7 +61,7 @@ var App = (function ( $, window, document ) {
         components    = { documentReady: [], pageLoaded: [] };
 
 	if ( $( 'img' ).length == 0 ) {
-		$( 'body' ).prepend( '<img src="'+templateUrl+'/assets/images/blank.gif" alt="" style="display:none">' );
+		$( 'body' ).prepend( '<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" style="display:none">' );
 	}
 	
 	if( $.isFunction( $.fn.waitForImages ) ) {

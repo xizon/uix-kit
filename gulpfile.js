@@ -48,8 +48,7 @@ var customWebsiteVersion     = json.version,
         ## Powered by          :  ` + customWebsiteAuthor + `
 		## Created by          :  UIUX Lab (https://uiux.cc)
 		## Contact Us          :  uiuxlab@gmail.com
-		## Compatible With     :  Bootstrap 3.x, Chinese, English
-		## Compatible Browsers :  IE9, IE10, IE11, Firefox, Safari, Opera, Chrome, Edge
+		## Compatible With     :  Bootstrap 3.x
 		## Released under the MIT license.
 	`;
 

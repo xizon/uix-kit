@@ -13,7 +13,7 @@
 	display: table;
 	margin: 0 auto;
 	margin-bottom: 3rem;
-	@include gradient-border( $btn-gradient-color1, $btn-gradient-color2, 15px, 'to bottom', #fff );
+	@include border-gradient( $btn-gradient-color1, $btn-gradient-color2, 15px, 'to bottom', #fff );
 	@include transition-default();
 	
 

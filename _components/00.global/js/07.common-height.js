@@ -51,7 +51,7 @@ App = ( function ( App, $, window, document ) {
 
         // This is the easiest way to have default options.
         var settings = $.extend({
-			selector : '[class*=col-], [class*=eamless-col-]' //Bootstrap grid system and Custom seamless grid system
+			selector : '[class*=col-], [class*=eamless-col-], [class*=el-col-]' //Bootstrap grid system and Custom seamless grid system
         }, options );
  
         this.each( function() {
@@ -75,7 +75,6 @@ App = ( function ( App, $, window, document ) {
 				}
 			});
 
-			
 			
 
 			//No on mobile devices

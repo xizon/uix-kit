@@ -33,7 +33,7 @@ App = ( function ( App, $, window, document ) {
    
     var documentReady = function( $ ) {
 		
-		$( '[data-your-custom-datas]' ).each( function() {
+		$( '[data-my-custom-datas]' ).each( function() {
 			var $this         = $( this );
 
 			
@@ -42,8 +42,8 @@ App = ( function ( App, $, window, document ) {
 				customPostData  = '';
 			
 			$.each( curAttrs, function( i, val ) {
-				if ( i.indexOf( 'data-ajax-list-field-' ) >= 0 ) {
-					customPostData += '"' + i.replace( 'data-ajax-list-field-', '' ) + '": ' + '"' + val + '", ';	
+				if ( i.indexOf( 'data-custom-field-' ) >= 0 ) {
+					customPostData += '"' + i.replace( 'data-custom-field-', '' ) + '": ' + '"' + val + '", ';	
 				}
 				
 			});
