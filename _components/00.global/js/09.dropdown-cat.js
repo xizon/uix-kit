@@ -4,11 +4,13 @@
  * <!-- Dropdown Categories -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
+	
+    APP.DROPDOWN_CAT               = APP.DROPDOWN_CAT || {};
+	APP.DROPDOWN_CAT.version       = '0.0.1';
+    APP.DROPDOWN_CAT.documentReady = function( $ ) {
+
 		
 		  $( '#cat' ).on( 'change', function () {
 			  var cvalue = $( this ).val();
@@ -17,15 +19,14 @@ App = ( function ( App, $, window, document ) {
 			  }
 			  return false;
 		  });
-
-	};
-	
 		
-    App.dropdownCat = {
-        documentReady : documentReady        
     };
 
-    App.components.documentReady.push( documentReady );
-    return App;
+    APP.components.documentReady.push( APP.DROPDOWN_CAT.documentReady );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
+
+
+
+

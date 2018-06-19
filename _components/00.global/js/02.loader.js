@@ -3,13 +3,13 @@
  * <!-- Loader -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
 	
-		
-		
+    APP.LOADER               = APP.LOADER || {};
+	APP.LOADER.version       = '0.0.2';
+    APP.LOADER.documentReady = function( $ ) {
+
 		// Disable devices scaling
 		//-------------------------------------	
 		document.addEventListener('touchstart',function (event) {
@@ -60,20 +60,15 @@ App = ( function ( App, $, window, document ) {
 			
 			
 
-		});
-		
-		
+		});    
 		
     };
 
-    App.loader = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP.LOADER.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
+}( APP, jQuery, window, document ) );
 
-}( App, jQuery, window, document ) );
 
 
 			

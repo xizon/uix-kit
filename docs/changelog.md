@@ -1,5 +1,14 @@
 # Changelog
 
+#### = 1.8.0 (June 20, 2018) =
+
+* New: Add a new module "Vertical Separator".
+* Fix: Fixed a bug in the Scroll Reveal module.
+* Tweak: Optimized core stylesheet.
+* Tweak: Extended the text display of the "Advanced Slider".
+* Tweak: Add version numbers and inheritance properties to all JavaScript components.
+
+
 
 #### = 1.7.8 (June 13, 2018) =
 

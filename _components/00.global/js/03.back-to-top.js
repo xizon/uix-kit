@@ -3,11 +3,13 @@
  * <!-- Back to Top -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
-    
+	
+    APP.BACK_TO_TOP               = APP.BACK_TO_TOP || {};
+	APP.BACK_TO_TOP.version       = '0.0.1';
+    APP.BACK_TO_TOP.documentReady = function( $ ) {
+
 		// Add button to body for back to top
 		if ( $( '#toTop' ).length == 0 ) {
 			$( 'body' ).prepend( '<a href="#" id="toTop"><span id="toTopHover"></span></a>' );
@@ -37,18 +39,13 @@ App = ( function ( App, $, window, document ) {
 
 		});
 		
-	   
-		
 		
     };
 
-    App.backtoTop = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP.BACK_TO_TOP.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
+}( APP, jQuery, window, document ) );
 
-}( App, jQuery, window, document ) );
 
 

@@ -4,13 +4,13 @@
  * <!-- Mousewheel Interaction -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ){
-		
-		
+	
+    APP.MOUSEWHEEL_INTERACTION               = APP.MOUSEWHEEL_INTERACTION || {};
+	APP.MOUSEWHEEL_INTERACTION.version       = '0.0.1';
+    APP.MOUSEWHEEL_INTERACTION.documentReady = function( $ ) {
+
 		//Prevent this module from loading in other pages
 		if ( !$( 'body' ).hasClass( 'page-mousewheel-eff' ) ) return false;
 		
@@ -80,16 +80,12 @@ App = ( function ( App, $, window, document ) {
 			lastAnimation = timeNow;
 		}
 		
+    };
 
-		
-	};
-		
-      
-    App.mousewheelInteraction = {
-        documentReady : documentReady        
-    };  
-    App.components.documentReady.push( documentReady );
-    return App;
+    APP.components.documentReady.push( APP.MOUSEWHEEL_INTERACTION.documentReady );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
+
+
 

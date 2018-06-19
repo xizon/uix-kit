@@ -70,9 +70,6 @@ $custom-lightbox-radius: 3px;
 		
 		.html {
 
-			@include outer-shadow();
-			
-			
 			.lb-large-photos-container {
 				
 				overflow: hidden;
@@ -239,6 +236,10 @@ $custom-lightbox-radius: 3px;
 				&::after {
 					display: none;
 				}	
+				
+				img {
+					max-height: 95vh; /* Do not use percentages here */
+				}
 
 			}	
 
@@ -306,7 +307,18 @@ $custom-lightbox-radius: 3px;
 				}	
 			}
 
-				
+		
+			&.pure-image {
+
+				.html {
+
+					img {
+						max-height: inherit;
+					}
+
+				}	
+
+			}	
 
 			&.custom {
 				

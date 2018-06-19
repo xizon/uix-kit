@@ -4,12 +4,13 @@
  * <!-- Accordion -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
+	
+    APP.ACCORDION               = APP.ACCORDION || {};
+	APP.ACCORDION.version       = '0.0.1';
+    APP.ACCORDION.documentReady = function( $ ) {
+
 		$( '.custom-accordion' ).each( function() {
 			var $this           = $( this ),
 				aEvent          = $this.data( 'event' ),
@@ -52,15 +53,11 @@ App = ( function ( App, $, window, document ) {
 			
 		});
 		
-		
-	};
-	
-		
-    App.accordion = {
-        documentReady : documentReady        
     };
 
-    App.components.documentReady.push( documentReady );
-    return App;
+    APP.components.documentReady.push( APP.ACCORDION.documentReady );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
+
+

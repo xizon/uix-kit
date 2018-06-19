@@ -4,11 +4,12 @@
  * <!-- Videos -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
-		
+	
+    APP.VIDEOS               = APP.VIDEOS || {};
+	APP.VIDEOS.version       = '0.0.6';
+    APP.VIDEOS.documentReady = function( $ ) {
 
 		var $window      = $( window ),
 			windowWidth  = $window.width(),
@@ -517,16 +518,11 @@ App = ( function ( App, $, window, document ) {
 
 
 		});
-
-
 		
     };
 
-    App.videos = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP.VIDEOS.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
+}( APP, jQuery, window, document ) );
 
-}( App, jQuery, window, document ) );

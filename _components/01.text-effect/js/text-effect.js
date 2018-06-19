@@ -5,30 +5,28 @@
  * <!-- Text effect -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
 	
-    var pageLoaded = function() {
+
+    APP.TEXT_EFFECT               = APP.TEXT_EFFECT || {};
+	APP.TEXT_EFFECT.version       = '0.0.3';
+    APP.TEXT_EFFECT.pageLoaded    = function() {
 
 		//Default Effect
 		//-------------------------------------	
 		$( '[data-text-eff]' ).each( function( index )  {
 			$( document ).customTextEffInit( { selectors: '[data-text-eff="'+$( this ).data( 'text-eff' )+'"]' } );
-		});
-		
-		
+		});   
 		
     };
 
-    App.textEffect = {
-        pageLoaded : pageLoaded        
-    };
+    APP.components.pageLoaded.push( APP.TEXT_EFFECT.pageLoaded );
+    return APP;
 
-    App.components.pageLoaded.push( pageLoaded );
-    return App;
+}( APP, jQuery, window, document ) );
 
-}( App, jQuery, window, document ) );
 
 
 

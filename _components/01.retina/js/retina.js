@@ -4,12 +4,13 @@
  * <!-- Retina Graphics for Website -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
+	
+    APP.RETINA               = APP.RETINA || {};
+	APP.RETINA.version       = '0.0.1';
+    APP.RETINA.documentReady = function( $ ) {
+
 		//Determine if you have retinal display
 		var hasRetina  = false,
 			rootRetina = (typeof exports === 'undefined' ? window : exports),
@@ -28,18 +29,13 @@ App = ( function ( App, $, window, document ) {
 			});
 		
 		} 
+			
 		
-		
-	
-		
-	};
-	
-		
-    App.retina = {
-        documentReady : documentReady        
     };
 
-    App.components.documentReady.push( documentReady );
-    return App;
+    APP.components.documentReady.push( APP.RETINA.documentReady );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
+
+

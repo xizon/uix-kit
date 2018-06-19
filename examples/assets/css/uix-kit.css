@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.7.8
- * ## Last Update         :  June 13, 2018
+ * ## Version             :  1.8.0
+ * ## Last Update         :  June 20, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -95,8 +95,8 @@
     28. Accordion 
     29. Accordion Background Images 
     30. Advanced Content Slider 
-    31. Advanced Slider (Special Effects) 
-    32. Advanced Slider (Basic) 
+    31. Advanced Slider (Basic) 
+    32. Advanced Slider (Special Effects) 
     33. Badges 
     34. Breadcrumbs 
     35. Button 
@@ -120,8 +120,8 @@
     53. Brands List 
     54. Bulleted List 
     55. Maintain Aspect Ratio List 
-    56. List of Split Posts 
-    57. List of Posts 
+    56. List of Posts 
+    57. List of Split Posts 
     58. Side by Side List 
     59. Side by Side List With Photo 
     60. Fullwidth List of Split 2 
@@ -146,7 +146,9 @@
     79. Text effect 
     80. Timeline 
     81. ToolTip 
-    82. WordPress Core 
+    82. Vertical Separator 
+    83. WordPress Core 
+    84. Ajax Page Loader (Loading A Page via Ajax Into Div)  
 
 
 
@@ -2379,7 +2381,7 @@ section.site-google-map,
 }
 
 .social-btn.border-none {
-  border-color: transparent;
+  border-color: transparent !important;
 }
 
 .social-btn.fill-white {
@@ -4097,9 +4099,14 @@ ul.entry-meta {
 /* ====================================================== 
     <!-- Advanced Content Slider -->  
 /* ====================================================== */
+/*
+ * 1. Initialize the slider style
+ * 2. Pagination dots 
+ * 3. Next/Prev buttons
+*/
 /* 
  ---------------------------
- 1) Initialize the slider style
+ 1. Initialize the slider style
  ---------------------------
  */
 .custom-advanced-content-slider {
@@ -4128,7 +4135,7 @@ ul.entry-meta {
 
 /* 
  ---------------------------
- 2) Pagination dots 
+ 2. Pagination dots 
  ---------------------------
  */
 .custom-advanced-content-slider-pagination {
@@ -4212,7 +4219,7 @@ ul.entry-meta {
 
 /* 
  ---------------------------
- 3) Next/Prev buttons
+ 3. Next/Prev buttons
  ---------------------------
  */
 .custom-advanced-content-slider-arrows {
@@ -4245,9 +4252,14 @@ ul.entry-meta {
 /* ====================================================== 
    <!-- Advanced Slider (Special Effects) -->     
 /* ====================================================== */
+/*
+ * 1. Initialize the slider style
+ * 2. Pagination dots 
+ * 3. Next/Prev buttons
+*/
 /* 
  ---------------------------
- 1) Initialize the slider style
+ 1. Initialize the slider style
  ---------------------------
  */
 .custom-advanced-slider-sp-canvas-outer {
@@ -4319,7 +4331,7 @@ ul.entry-meta {
 
 /* 
  ---------------------------
- 2) Pagination dots 
+ 2. Pagination dots 
  ---------------------------
  */
 .custom-advanced-slider-sp-pagination {
@@ -4368,7 +4380,7 @@ ul.entry-meta {
 
 /* 
  ---------------------------
- 3) Next/Prev buttons
+ 3. Next/Prev buttons
  ---------------------------
  */
 .custom-advanced-slider-sp-arrows {
@@ -4408,9 +4420,14 @@ ul.entry-meta {
 /* ====================================================== 
    <!-- Advanced Slider (Basic) -->     
 /* ====================================================== */
+/*
+ * 1. Initialize the slider style
+ * 2. Pagination dots 
+ * 3. Next/Prev buttons
+*/
 /* 
  ---------------------------
- 1) Initialize the slider style
+ 1. Initialize the slider style
  ---------------------------
  */
 .custom-advanced-slider {
@@ -4467,7 +4484,7 @@ ul.entry-meta {
 
 /* 
  ---------------------------
- 2) Pagination dots 
+ 2. Pagination dots 
  ---------------------------
  */
 .custom-advanced-slider-pagination {
@@ -4516,7 +4533,7 @@ ul.entry-meta {
 
 /* 
  ---------------------------
- 3) Next/Prev buttons
+ 3. Next/Prev buttons
  ---------------------------
  */
 .custom-advanced-slider-arrows {
@@ -5035,9 +5052,15 @@ ul.entry-meta {
 /* ====================================================== 
    <!-- Cards -->    
 /* ====================================================== */
+/*
+ * 1. Style One
+ * 2. Style Two
+ * 3. Style Three
+ * 4. Style Four
+*/
 /* 
  ---------------------------
- 1) Style One
+ 1. Style One
  ---------------------------
  */
 .custom-card1 {
@@ -5135,7 +5158,7 @@ ul.entry-meta {
 
 /* 
  ---------------------------
- 2) Style Two
+ 2. Style Two
  ---------------------------
  */
 .custom-card2 {
@@ -5169,7 +5192,7 @@ ul.entry-meta {
 
 /* 
  ---------------------------
- 3) Style Three
+ 3. Style Three
  ---------------------------
  */
 .custom-card3 {
@@ -5218,7 +5241,7 @@ ul.entry-meta {
 
 /* 
  ---------------------------
- 4) Style Four
+ 4. Style Four
  ---------------------------
  */
 .custom-card4 {
@@ -5367,9 +5390,13 @@ ul.entry-meta {
 /* ====================================================== 
    <!-- Dots -->    
 /* ====================================================== */
+/*
+ * 1. Ripple effect 1
+ * 2. Ripple Effect 2
+*/
 /* 
  ---------------------------
- 1) Ripple effect 1
+ 1. Ripple effect 1
  ---------------------------
  */
 .dot-ripple-line {
@@ -5456,7 +5483,7 @@ ul.entry-meta {
 
 /* 
  ---------------------------
- 2) Ripple Effect 2
+ 2. Ripple Effect 2
  ---------------------------
  */
 .dot-ripple-bg {
@@ -5785,9 +5812,16 @@ ul.entry-meta {
 /* ====================================================== 
     <!-- Flexslider -->  
 /* ====================================================== */
+/*
+ * 1. Thumbnail ControlNav Pattern 
+ * 2. Default Slideshow        
+ * 3. Primary Slideshow  (with dynamic min/max ranges )      
+ * 4. Primary Slideshow       
+ * 5. Parallax Slideshow    
+*/
 /* 
  ---------------------------
- 1) Thumbnail ControlNav Pattern 
+ 1. Thumbnail ControlNav Pattern 
  ---------------------------
  */
 .custom-theme-flexslider-thumbs {
@@ -5843,7 +5877,7 @@ ul.entry-meta {
 
 /* 
  ---------------------------
- 2) Default Slideshow        
+ 2. Default Slideshow        
  ---------------------------
  */
 .custom-theme-flexslider, .custom-theme-flex-viewport {
@@ -6047,6 +6081,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
   width: 100%;
   table-layout: fixed;
   margin-top: 1.75rem;
+  /*---- Custom Styles ----*/
 }
 
 .custom-navigation.custom-navigation-thumb {
@@ -6096,6 +6131,42 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 
 .custom-navigation .custom-theme-flex-next.custom-theme-flex-disabled {
   visibility: hidden;
+}
+
+.custom-navigation.style-1 {
+  text-align: right;
+}
+
+.custom-navigation.style-1 .custom-theme-flex-prev,
+.custom-navigation.style-1 .custom-theme-flex-next {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border: 1px solid #999999;
+  text-align: center;
+  display: inline-block;
+  line-height: 55px;
+}
+
+.custom-navigation.style-1 .custom-theme-flex-prev i,
+.custom-navigation.style-1 .custom-theme-flex-next i {
+  color: #999999;
+  font-size: 2rem;
+}
+
+.custom-navigation.style-1 .custom-theme-flex-prev:hover,
+.custom-navigation.style-1 .custom-theme-flex-next:hover {
+  background: #EC5E79;
+  border-color: #EC5E79;
+}
+
+.custom-navigation.style-1 .custom-theme-flex-prev:hover i,
+.custom-navigation.style-1 .custom-theme-flex-next:hover i {
+  color: #fff;
+}
+
+.custom-navigation.style-1 .custom-theme-flex-prev {
+  margin-right: 1.5rem;
 }
 
 /*----- Next/Prev Image Thumbnail In Navigation -----*/
@@ -6171,7 +6242,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 
 /* 
  ---------------------------
- 3) Primary Slideshow  (with dynamic min/max ranges )      
+ 3. Primary Slideshow  (with dynamic min/max ranges )      
  ---------------------------
  */
 .custom-theme-flexslider.custom-itemgrid .item {
@@ -6191,7 +6262,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 
 /* 
  ---------------------------
- 4) Primary Slideshow    
+ 4. Primary Slideshow    
  ---------------------------
  */
 .custom-theme-flexslider.custom-primary-flexslider {
@@ -6307,7 +6378,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 
 /* 
  ---------------------------
- 5) Parallax Slideshow                
+ 5. Parallax Slideshow                
  ---------------------------
  */
 .custom-theme-flexslider.custom-parallax-flexslider {
@@ -7079,6 +7150,9 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
   visibility: hidden;
   pointer-events: none;
   transform: translateY(-15px);
+}
+
+.custom-select-wrapper .custom-options > div {
   overflow-y: auto;
   max-height: 300px;
 }
@@ -7815,9 +7889,16 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 /* ====================================================== 
    <!-- Heading -->    
 /* ====================================================== */
+/*
+ * 1. Header Pinlines
+ * 2. Text Overlay
+ * 3. Show Image Under Text
+ * 4. Custom Underline
+ * 5. Hybrid Heading
+*/
 /* 
  ---------------------------
- 1) Header Pinlines
+ 1. Header Pinlines
  ---------------------------
  */
 .heading-pinline {
@@ -7870,11 +7951,19 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 
 /* 
  ---------------------------
- 2) Text Overlay
+ 2. Text Overlay
  ---------------------------
  */
 .heading-overlay {
   position: relative;
+}
+
+.heading-overlay em {
+  font-style: normal;
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 0;
 }
 
 .heading-overlay::before {
@@ -7887,14 +7976,18 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: -1;
+  z-index: 0;
   transform: scale(2);
   transform-origin: left center 0;
 }
 
+.heading-overlay.t-r::before {
+  transform-origin: right center 0;
+}
+
 /* 
  ---------------------------
- 3) Show Image Under Text
+ 3. Show Image Under Text
  ---------------------------
  */
 .heading-fill {
@@ -7909,7 +8002,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 
 /* 
  ---------------------------
- 4) Custom Underline
+ 4. Custom Underline
  ---------------------------
  */
 .heading-underline span {
@@ -7928,7 +8021,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 
 /* 
  ---------------------------
- 5) Hybrid Heading
+ 5. Hybrid Heading
  ---------------------------
  */
 .heading-hybrid span {
@@ -8024,10 +8117,6 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
   transform: translateY(-50%);
   text-align: center;
   /* Custom content width you want */
-}
-
-.custom-lightbox-overlay .lb-container .html {
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
 }
 
 .custom-lightbox-overlay .lb-container .html .lb-large-photos-container {
@@ -8184,6 +8273,11 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
   display: none;
 }
 
+.custom-lightbox-overlay .lb-container.pure-image .html img {
+  max-height: 95vh;
+  /* Do not use percentages here */
+}
+
 .custom-lightbox-overlay .lb-container.custom {
   max-width: 70vw;
 }
@@ -8233,6 +8327,10 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 
 .custom-lightbox-overlay.no-fixed .lb-container .html::after {
   bottom: 5rem;
+}
+
+.custom-lightbox-overlay.no-fixed .lb-container.pure-image .html img {
+  max-height: inherit;
 }
 
 .custom-lightbox-overlay.no-fixed .lb-container.custom {
@@ -12933,6 +13031,37 @@ dl.list-side-by-side::after {
 }
 
 /* ====================================================== 
+   <!-- Vertical Separator -->    
+/* ====================================================== */
+.vertical-separator {
+  font-size: 0.875rem;
+  height: calc(80px + 2rem);
+  width: 2rem;
+  text-transform: uppercase;
+  line-height: 2;
+  display: inline-block;
+  padding-top: 1rem;
+  font-weight: bold;
+}
+
+.vertical-separator::before, .vertical-separator::after {
+  content: '';
+  height: 40px;
+  width: 3px;
+  background: #AEAEAE;
+  display: block;
+  transform: translateX(1rem);
+}
+
+.vertical-separator::before {
+  margin-top: -1rem;
+}
+
+.vertical-separator::after {
+  margin-top: 0;
+}
+
+/* ====================================================== 
    <!-- WordPress Core -->              
 /* ====================================================== */
 /*
@@ -13223,13 +13352,6 @@ a img.aligncenter {
   }
   55% {
     right: 2px;
-  }
-  100% {
-    right: 180px;
-    left: 2px;
-  }
-}
-ght: 2px;
   }
   100% {
     right: 180px;

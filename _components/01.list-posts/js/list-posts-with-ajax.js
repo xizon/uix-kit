@@ -4,13 +4,13 @@
  * <!-- Posts List With Ajax -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
 	
+    APP.POST_LIST_AJAX               = APP.POST_LIST_AJAX || {};
+	APP.POST_LIST_AJAX.version       = '0.0.1';
+    APP.POST_LIST_AJAX.documentReady = function( $ ) {
+
 		$( '[data-ajax-list-json]' ).each( function() {
 			var $this            = $( this ),
 				wrapperID        = 'refresh-all-waypoint-' + Math.random()*1000000000000000000,
@@ -381,9 +381,7 @@ App = ( function ( App, $, window, document ) {
 						//Data overflow may occur when the total number of pages is not posted
 						try {
 
-							var pageLoaded    = App.components.pageLoaded,
-								documentReady = App.components.documentReady,
-								thisData      = data,
+							var thisData      = data,
 								html          = compiledTemplate( thisData ),
 								curHtml       = $divRoot.find( pushContainer ).html(),
 								result        = null,
@@ -429,12 +427,8 @@ App = ( function ( App, $, window, document ) {
 							});	
 				
 							
-							
-							//--------- Init Videos
-							App.videos.documentReady($);
-							
-							//--------- Init Custom Lightbox
-							App.customLightbox.pageLoaded();
+							//--------- Apply the original scripts
+							$( document ).applyOriginalSomeScripts();
 
 
 							//--------- Remove this button
@@ -476,20 +470,16 @@ App = ( function ( App, $, window, document ) {
 		}
 
 	
-	   
+	   	
 		
-		
-		
-	};
-	
-		
-    App.listAjax = {
-        documentReady : documentReady        
     };
 
-    App.components.documentReady.push( documentReady );
-    return App;
+    APP.components.documentReady.push( APP.POST_LIST_AJAX.documentReady );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
+
+
+
 
 

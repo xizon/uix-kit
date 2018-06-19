@@ -4,12 +4,13 @@
  * <!-- Modal Dialog -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ){
-		
+	
+    APP.MODAL_DIALOG               = APP.MODAL_DIALOG || {};
+	APP.MODAL_DIALOG.version       = '0.0.1';
+    APP.MODAL_DIALOG.documentReady = function( $ ) {
+
 		function getTransitionDuration( elementOrSelector ){
 			var $el, durString, isMS, numberStr, numberNum;
 			$el = $( elementOrSelector );
@@ -123,15 +124,13 @@ App = ( function ( App, $, window, document ) {
 			
 		});
 		
-	};
-		
-      
-    App.modalbox = {
-        documentReady : documentReady        
-    };  
-    App.components.documentReady.push( documentReady );
-    return App;
+    };
 
-}( App, jQuery, window, document ) );
+    APP.components.documentReady.push( APP.MODAL_DIALOG.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
 
 

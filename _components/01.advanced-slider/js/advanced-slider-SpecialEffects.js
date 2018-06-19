@@ -4,11 +4,14 @@
  * <!-- Advanced Slider (Special Effects) -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var pageLoaded = function() {
-		
+	
+
+    APP.ADVANCED_SLIDER_FILTER               = APP.ADVANCED_SLIDER_FILTER || {};
+	APP.ADVANCED_SLIDER_FILTER.version       = '0.0.2';
+    APP.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
+
 	
 		var $window                   = $( window ),
 			windowWidth               = $window.width(),
@@ -2297,18 +2300,14 @@ App = ( function ( App, $, window, document ) {
 				});
 
 			});	
-		}	
-		
+		}	    
 		
     };
 
-	
-    App.advancedSlider_SpecialEffects = {
-        pageLoaded : pageLoaded        
-    };
+    APP.components.pageLoaded.push( APP.ADVANCED_SLIDER_FILTER.pageLoaded );
+    return APP;
 
-    App.components.pageLoaded.push( pageLoaded );
-    return App;
+}( APP, jQuery, window, document ) );
 
-}( App, jQuery, window, document ) );
+
 

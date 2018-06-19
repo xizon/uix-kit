@@ -4,17 +4,17 @@
  * <!-- Counter -->
  *************************************
  */	
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
-		
+	
+    APP.COUNTER               = APP.COUNTER || {};
+	APP.COUNTER.version       = '0.0.2';
+    APP.COUNTER.documentReady = function( $ ) {
+
 		var waypoints = $( '[data-counter-number]' ).waypoint({
 			handler: function( direction ) {
 
-				$( this.element ).countTo({
-					dilimiter      : true
-				});
+				$( this.element ).countTo();
 
 				//Prevents front-end javascripts that are activated in the background to repeat loading.
 				this.disable();
@@ -24,18 +24,16 @@ App = ( function ( App, $, window, document ) {
 			offset: '100%' //0~100%, bottom-in-view
 		});
 
-
 		
     };
 
-    App.counter = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP.COUNTER.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
+}( APP, jQuery, window, document ) );
 
-}( App, jQuery, window, document ) );
+
+
 
 
 

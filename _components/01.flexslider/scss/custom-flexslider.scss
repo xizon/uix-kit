@@ -2,9 +2,18 @@
     <!-- Flexslider -->  
 /* ====================================================== */
 
+/*
+ * 1. Thumbnail ControlNav Pattern 
+ * 2. Default Slideshow        
+ * 3. Primary Slideshow  (with dynamic min/max ranges )      
+ * 4. Primary Slideshow       
+ * 5. Parallax Slideshow    
+*/
+
+
 /* 
  ---------------------------
- 1) Thumbnail ControlNav Pattern 
+ 1. Thumbnail ControlNav Pattern 
  ---------------------------
  */ 
 .custom-theme-flexslider-thumbs {
@@ -68,7 +77,7 @@
 
 /* 
  ---------------------------
- 2) Default Slideshow        
+ 2. Default Slideshow        
  ---------------------------
  */ 
 .custom-theme-flexslider, .custom-theme-flex-viewport {
@@ -347,6 +356,43 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 	
 		
 	}
+	
+	
+	/*---- Custom Styles ----*/
+	&.style-1 {
+		
+		text-align: right;
+		
+		.custom-theme-flex-prev,
+		.custom-theme-flex-next {
+			position: relative;
+			width: 50px;
+			height: 50px;
+			border: 1px solid #999999;
+			text-align: center;
+			display: inline-block;
+			line-height: 55px;
+			
+			i {
+				color: #999999;
+				font-size: 2rem;
+			}
+			
+			&:hover {
+				background: $highlight-color1;
+				border-color: $highlight-color1;
+				
+				i {
+					color: #fff;
+				}
+			}
+			
+		}
+		
+		.custom-theme-flex-prev {
+			margin-right: 1.5rem;
+		}
+	}
 
 }
 
@@ -442,7 +488,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 
 /* 
  ---------------------------
- 3) Primary Slideshow  (with dynamic min/max ranges )      
+ 3. Primary Slideshow  (with dynamic min/max ranges )      
  ---------------------------
  */ 
 .custom-theme-flexslider.custom-itemgrid {
@@ -475,7 +521,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 	
 /* 
  ---------------------------
- 4) Primary Slideshow    
+ 4. Primary Slideshow    
  ---------------------------
  */ 
 .custom-theme-flexslider.custom-primary-flexslider {
@@ -629,7 +675,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 
 /* 
  ---------------------------
- 5) Parallax Slideshow                
+ 5. Parallax Slideshow                
  ---------------------------
  */ 
 .custom-theme-flexslider.custom-parallax-flexslider {

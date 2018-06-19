@@ -4,12 +4,13 @@
  * <!-- Smooth Scrolling When Clicking An Anchor Link -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
+	
+    APP.SMOOTH_SCROLLING_ANCHORLINK               = APP.SMOOTH_SCROLLING_ANCHORLINK || {};
+	APP.SMOOTH_SCROLLING_ANCHORLINK.version       = '0.0.3';
+    APP.SMOOTH_SCROLLING_ANCHORLINK.documentReady = function( $ ) {
+
 		//Prevent this module from loading in other pages
 		if ( $( 'body' ).hasClass( 'onepage' ) ) return false;
 		
@@ -109,17 +110,12 @@ App = ( function ( App, $, window, document ) {
 			}
 		} );
 
-	
 		
-	};
-	
-		
-    App.smoothScrollingAnchorLink = {
-        documentReady : documentReady        
     };
 
-    App.components.documentReady.push( documentReady );
-    return App;
+    APP.components.documentReady.push( APP.SMOOTH_SCROLLING_ANCHORLINK.documentReady );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
+
 

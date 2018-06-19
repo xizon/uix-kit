@@ -4,11 +4,12 @@
  * <!-- Scroll Reveal -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
+	
+    APP.SCROLL_REVEAL               = APP.SCROLL_REVEAL || {};
+	APP.SCROLL_REVEAL.version       = '0.0.8';
+    APP.SCROLL_REVEAL.documentReady = function( $ ) {
 
 		
 		//From JSON config in data attribute in HTML
@@ -81,39 +82,62 @@ App = ( function ( App, $, window, document ) {
 
 
 		$scrollRevealElements.each( function()  {
-			tmAnim( $( this ), 'from' );
+			
+			//Prevent asynchronous loading of repeated calls
+			var actived = $( this ).data( 'active' );
+			
+			if( typeof actived === typeof undefined ) {
+				tmAnim( $( this ), 'from' );
+
+			}
+			
 		});
 
 					
-		var waypoints = $scrollRevealElements.waypoint({
-			handler: function( direction ) {
+		//Prevent the location of page elements from being loaded incorrectly
+		//Invoking a jQuery function after .each() has completed
+		setTimeout( function() {
+			var waypoints = $scrollRevealElements.waypoint({
+				handler: function( direction ) {
 
-				//$( this.element ).toggleClass( 'animated fadeInUp', direction === 'down' );
-				var tmLoop = tmAnim( $( this.element ), 'loop' );
-				
-				if ( tmLoop === 1 ) {
-					if ( direction === 'up' ) {
-						tmAnim( $( this.element ), 'from-anim' );
-					} else {
+					
+					//Prevent asynchronous loading of repeated calls
+					var actived = $( this.element ).data( 'active' ),
+						tmLoop  = tmAnim( $( this.element ), 'loop' );
+					
+
+					if( typeof actived === typeof undefined && tmLoop != 1 ) {
+						
+						//$( this.element ).toggleClass( 'animated fadeInUp', direction === 'down' );
 						tmAnim( $( this.element ), 'to' );
+
+						$( this.element ).data( 'active', 1 );
+
+						
 					}
-				} else {
-					tmAnim( $( this.element ), 'to' );
-				}
+					
+					if ( tmLoop === 1 ) {
+						if ( direction === 'up' ) {
+							tmAnim( $( this.element ), 'from-anim' );
+						} else {
+							tmAnim( $( this.element ), 'to' );
+						}
+					}	
+					
 
-			},
-			offset: '100%' //0~100%, bottom-in-view
-		});
 
-		
-	};
+
+				},
+				offset: '100%' //0~100%, bottom-in-view
+			});
 	
+		}, 500 );
 		
-    App.scrollReveal = {
-        documentReady : documentReady        
     };
 
-    App.components.documentReady.push( documentReady );
-    return App;
+    APP.components.documentReady.push( APP.SCROLL_REVEAL.documentReady );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
+
+

@@ -5,11 +5,15 @@
  *  <!-- Sticky Elements -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var pageLoaded = function() {
-		
+	
+
+    APP.STICKY_EL               = APP.STICKY_EL || {};
+	APP.STICKY_EL.version       = '0.0.1';
+    APP.STICKY_EL.pageLoaded    = function() {
+
 		var $window      = $( window ),
 			windowWidth  = $window.width(),
 			windowHeight = $window.height(),
@@ -81,18 +85,15 @@ App = ( function ( App, $, window, document ) {
 //		});
 
 
-
+    
 		
     };
 
-    App.stickyElements = {
-        pageLoaded : pageLoaded        
-    };
+    APP.components.pageLoaded.push( APP.STICKY_EL.pageLoaded );
+    return APP;
 
-    App.components.pageLoaded.push( pageLoaded );
-    return App;
+}( APP, jQuery, window, document ) );
 
-}( App, jQuery, window, document ) );
 
 
 

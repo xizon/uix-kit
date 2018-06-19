@@ -1,15 +1,15 @@
 
 /* 
  *************************************
- * <!-- Source Code -->
+ * <!-- Source Code View -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ){
-		
+	
+    APP.SOURCE_CODE_VIEW               = APP.SOURCE_CODE_VIEW || {};
+	APP.SOURCE_CODE_VIEW.version       = '0.0.1';
+    APP.SOURCE_CODE_VIEW.documentReady = function( $ ) {
 
 		//Add view source code to body
 		$( 'body' ).prepend( '<a href="#source-code" id="view-source"><i class="fa fa-code" aria-hidden="true"></i></a><div id="source-code"><a href="javascript:void(0);" id="close"></a></div>' );
@@ -64,16 +64,12 @@ App = ( function ( App, $, window, document ) {
 		
 		
 		//highlighter written
-	
 		
-	};
-		
-      
-    App.sourceCode = {
-        documentReady : documentReady        
-    };  
-    App.components.documentReady.push( documentReady );
-    return App;
+    };
 
-}( App, jQuery, window, document ) );
+    APP.components.documentReady.push( APP.SOURCE_CODE_VIEW.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
 

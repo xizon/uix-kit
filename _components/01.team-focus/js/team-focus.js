@@ -3,12 +3,13 @@
  * <!-- Team Focus -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
-    
-		
+	
+    APP.TEAM_FOCUS               = APP.TEAM_FOCUS || {};
+	APP.TEAM_FOCUS.version       = '0.0.2';
+    APP.TEAM_FOCUS.documentReady = function( $ ) {
+
 		var teamFocusContent = '.custom-team-focus',
 			teamFocusMask    = '.custom-team-focus-mask';
 			
@@ -200,14 +201,10 @@ App = ( function ( App, $, window, document ) {
 		
     };
 
-    App.teamFocus = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP.TEAM_FOCUS.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
 
 
 

@@ -3,11 +3,12 @@
  * <!-- Full Page/One Page Transition -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
-
+	
+    APP.ONEPAGE               = APP.ONEPAGE || {};
+	APP.ONEPAGE.version       = '0.0.1';
+    APP.ONEPAGE.documentReady = function( $ ) {
 
         var $window      = $( window ),
 		    windowWidth  = $window.width(),
@@ -400,16 +401,11 @@ App = ( function ( App, $, window, document ) {
 
 
 		
-		
     };
 
-    App.onepage = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP.ONEPAGE.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
 
 

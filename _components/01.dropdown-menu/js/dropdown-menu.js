@@ -4,11 +4,12 @@
  * <!-- Dropdown Menu -->
  *************************************
  */	
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
-		
+	
+    APP.DROPDOWN_MENU               = APP.DROPDOWN_MENU || {};
+	APP.DROPDOWN_MENU.version       = '0.0.1';
+    APP.DROPDOWN_MENU.documentReady = function( $ ) {
 
 		//Create a trigger of Dropdown Menu on Click
 		$( '.custom-dropdown-trigger' ).each( function() {
@@ -40,17 +41,12 @@ App = ( function ( App, $, window, document ) {
 
 		});
 
-
-				
+		
     };
 
-    App.dropdownMenu = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP.DROPDOWN_MENU.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
 
 

@@ -54,10 +54,10 @@ var browser = {
 
 
 //Core scripts for current site
-var App = (function ( $, window, document ) {
+var APP = (function ( $, window, document ) {
     'use strict';
 
-    var App           = {},
+    var APP           = {},
         components    = { documentReady: [], pageLoaded: [] };
 
 	if ( $( 'img' ).length == 0 ) {
@@ -91,7 +91,7 @@ var App = (function ( $, window, document ) {
         });
     }
 
-    App.setContext = function ( contextSelector ) {
+    APP.setContext = function ( contextSelector ) {
         var context = $;
         if( typeof contextSelector !== typeof undefined ) {
             return function( selector ) {
@@ -101,10 +101,10 @@ var App = (function ( $, window, document ) {
         return context;
     };
 
-    App.components         = components;
-    App.documentReady      = documentReady;
-	App.pageLoaded         = pageLoaded;
+    APP.components         = components;
+    APP.documentReady      = documentReady;
+	APP.pageLoaded         = pageLoaded;
 
-    return App;
+    return APP;
 }( jQuery, window, document ) ); 
 

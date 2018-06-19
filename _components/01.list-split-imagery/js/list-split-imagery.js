@@ -4,12 +4,15 @@
  * <!-- Fullwidth List of Split -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var pageLoaded = function() {
-		
+	
+
+    APP.POST_LIST_SPLIT_FULLWIDTH               = APP.POST_LIST_SPLIT_FULLWIDTH || {};
+	APP.POST_LIST_SPLIT_FULLWIDTH.version       = '0.0.1';
+    APP.POST_LIST_SPLIT_FULLWIDTH.pageLoaded    = function() {
+
 		var $window      = $( window ),
 			windowWidth  = $window.width(),
 			windowHeight = $window.height();
@@ -49,19 +52,13 @@ App = ( function ( App, $, window, document ) {
 
 			});	
 		}
+			    
 		
-
-		
-		
-	};
-		
-    App.fullwidthListSplit = {
-        pageLoaded : pageLoaded        
     };
 
-    App.components.pageLoaded.push( pageLoaded );
-    return App;
+    APP.components.pageLoaded.push( APP.POST_LIST_SPLIT_FULLWIDTH.pageLoaded );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
 
 

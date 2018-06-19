@@ -4,12 +4,12 @@
  * <!-- Flexslider -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
+	
+    APP.FLEXSLIDER               = APP.FLEXSLIDER || {};
+	APP.FLEXSLIDER.version       = '0.0.1';
+    APP.FLEXSLIDER.documentReady = function( $ ) {
 
 		var $window            = $( window ),
 			windowWidth        = $window.width(),
@@ -928,19 +928,13 @@ App = ( function ( App, $, window, document ) {
 			}
 		});
 		
-
-		
-	};
-	
-		
-    App.flexSlider = {
-        documentReady : documentReady        
     };
 
-    App.components.documentReady.push( documentReady );
-    return App;
+    APP.components.documentReady.push( APP.FLEXSLIDER.documentReady );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
+
 
 
 

@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.7.8
- * ## Last Update         :  June 13, 2018
+ * ## Version             :  1.8.0
+ * ## Last Update         :  June 20, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -27,8 +27,8 @@
     3. Back to Top 
     4. Get all custom attributes of an element like "data-*" 
     5. Navigation 
-    6. Videos 
-    7. Common Height 
+    6. Common Height 
+    7. Videos 
     8. Mega Menu 
     9. Dropdown Categories 
     10. Pagination 
@@ -50,40 +50,41 @@
     26. Dropdown Menu 
     27. Dynamic Drop Down List from JSON 
     28. Flexslider 
-    29. Form Progress 
-    30. Gallery 
-    31. Form 
-    32. Image Shapes 
-    33. Custom Core Scripts & Stylesheets 
-    34. Custom Lightbox 
-    35. Bulleted List 
-    36. Posts List With Ajax 
-    37. Fullwidth List of Split 
-    38. Mobile Menu 
-    39. Mousewheel Interaction 
-    40. Multiple Items Carousel 
-    41. Full Page/One Page Transition 
-    42. Full Page/One Page Transition 2 
-    43. Parallax 
-    44. Periodical Scroll 
-    45. Pricing 
-    46. Progress Bar 
-    47. Retina Graphics for Website 
-    48. Rotating Elements 
-    49. Scroll Reveal 
-    50. Show More Less 
-    51. Smooth Scrolling When Clicking An Anchor Link 
-    52. Source Code 
-    53. Sticky Elements 
-    54. Tabs 
-    55. Team Focus 
-    56. Testimonials Carousel 
-    57. Text effect 
-    58. Timeline 
-    59. Ajax Page Loader (Loading A Page via Ajax Into Div)  
-    60. Ajax Push Content  
-    61. GSAP Plugins 
-    62. Three.js Plugins 
+    29. Form 
+    30. Form Progress 
+    31. jQuery UI Datepicker 1.11.4 
+    32. Gallery 
+    33. Image Shapes 
+    34. Custom Core Scripts  
+    35. Custom Lightbox 
+    36. Bulleted List 
+    37. Posts List With Ajax 
+    38. Fullwidth List of Split 
+    39. Mobile Menu 
+    40. Mousewheel Interaction 
+    41. Multiple Items Carousel 
+    42. Full Page/One Page Transition 
+    43. Full Page/One Page Transition 2 
+    44. Parallax 
+    45. Periodical Scroll 
+    46. Pricing 
+    47. Progress Bar 
+    48. Retina Graphics for Website 
+    49. Rotating Elements 
+    50. Scroll Reveal 
+    51. Show More Less 
+    52. Smooth Scrolling When Clicking An Anchor Link 
+    53. Source Code View 
+    54. Sticky Elements 
+    55. Tabs 
+    56. Team Focus 
+    57. Testimonials Carousel 
+    58. Text effect 
+    59. Timeline 
+    60. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    61. Ajax Push Content  
+    62. GSAP Plugins 
+    63. Three.js Plugins 
 
 
 */
@@ -134,10 +135,10 @@ var browser = {
 
 
 //Core scripts for current site
-var App = (function ( $, window, document ) {
+var APP = (function ( $, window, document ) {
     'use strict';
 
-    var App           = {},
+    var APP           = {},
         components    = { documentReady: [], pageLoaded: [] };
 
 	if ( $( 'img' ).length == 0 ) {
@@ -171,7 +172,7 @@ var App = (function ( $, window, document ) {
         });
     }
 
-    App.setContext = function ( contextSelector ) {
+    APP.setContext = function ( contextSelector ) {
         var context = $;
         if( typeof contextSelector !== typeof undefined ) {
             return function( selector ) {
@@ -181,11 +182,11 @@ var App = (function ( $, window, document ) {
         return context;
     };
 
-    App.components         = components;
-    App.documentReady      = documentReady;
-	App.pageLoaded         = pageLoaded;
+    APP.components         = components;
+    APP.documentReady      = documentReady;
+	APP.pageLoaded         = pageLoaded;
 
-    return App;
+    return APP;
 }( jQuery, window, document ) ); 
 
 
@@ -195,12 +196,13 @@ var App = (function ( $, window, document ) {
  * <!-- Header -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
 	
-		
+    APP.HEADER               = APP.HEADER || {};
+	APP.HEADER.version       = '0.0.1';
+    APP.HEADER.documentReady = function( $ ) {
+
 		//Prevent this module from loading in other pages
 		if ( $( 'body' ).hasClass( 'onepage' ) ) return false;
 		
@@ -216,6 +218,7 @@ App = ( function ( App, $, window, document ) {
 			handler: function( direction ) {
 				
 				$( this.element ).toggleClass( 'spy-scroll-fixed', direction === 'down' );
+				$( '.header-inner' ).toggleClass( 'spy-scroll-fixed', direction === 'down' );
 
 			},
 			offset: -120
@@ -247,14 +250,10 @@ App = ( function ( App, $, window, document ) {
 		
     };
 
-    App.header = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP.HEADER.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
 
 
 		
@@ -263,13 +262,13 @@ App = ( function ( App, $, window, document ) {
  * <!-- Loader -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
 	
-		
-		
+    APP.LOADER               = APP.LOADER || {};
+	APP.LOADER.version       = '0.0.2';
+    APP.LOADER.documentReady = function( $ ) {
+
 		// Disable devices scaling
 		//-------------------------------------	
 		document.addEventListener('touchstart',function (event) {
@@ -320,20 +319,15 @@ App = ( function ( App, $, window, document ) {
 			
 			
 
-		});
-		
-		
+		});    
 		
     };
 
-    App.loader = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP.LOADER.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
+}( APP, jQuery, window, document ) );
 
-}( App, jQuery, window, document ) );
 
 
 			
@@ -342,11 +336,13 @@ App = ( function ( App, $, window, document ) {
  * <!-- Back to Top -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
-    
+	
+    APP.BACK_TO_TOP               = APP.BACK_TO_TOP || {};
+	APP.BACK_TO_TOP.version       = '0.0.1';
+    APP.BACK_TO_TOP.documentReady = function( $ ) {
+
 		// Add button to body for back to top
 		if ( $( '#toTop' ).length == 0 ) {
 			$( 'body' ).prepend( '<a href="#" id="toTop"><span id="toTopHover"></span></a>' );
@@ -376,19 +372,14 @@ App = ( function ( App, $, window, document ) {
 
 		});
 		
-	   
-		
 		
     };
 
-    App.backtoTop = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP.BACK_TO_TOP.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
+}( APP, jQuery, window, document ) );
 
-}( App, jQuery, window, document ) );
 
 
 
@@ -398,35 +389,13 @@ App = ( function ( App, $, window, document ) {
  * <!-- Get all custom attributes of an element like "data-*" -->
  *************************************
  */
-
-/* Get all attributes of an element using jQuery */
-(function(old) {
-  $.fn.attr = function() {
-    if(arguments.length === 0) {
-      if(this.length === 0) {
-        return null;
-      }
-
-      var obj = {};
-      $.each(this[0].attributes, function() {
-        if(this.specified) {
-          obj[this.name] = this.value;
-        }
-      });
-      return obj;
-    }
-
-    return old.apply(this, arguments);
-  };
-})($.fn.attr);
-
-
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
+	
+    APP.GET_CUSTOM_ATTRS               = APP.GET_CUSTOM_ATTRS || {};
+	APP.GET_CUSTOM_ATTRS.version       = '0.0.1';
+    APP.GET_CUSTOM_ATTRS.documentReady = function( $ ) {
+
 		$( '[data-my-custom-datas]' ).each( function() {
 			var $this         = $( this );
 
@@ -446,18 +415,38 @@ App = ( function ( App, $, window, document ) {
 
 		});
 		
-	};
-	
-		
-    App.getAllCustomAttrs = {
-        documentReady : documentReady        
     };
 
-    App.components.documentReady.push( documentReady );
-    return App;
+    APP.components.documentReady.push( APP.GET_CUSTOM_ATTRS.documentReady );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
 
+
+
+/*
+ * Get all attributes of an element using jQuery
+ *
+ */
+( function( old ) {
+  $.fn.attr = function() {
+    if(arguments.length === 0) {
+      if(this.length === 0) {
+        return null;
+      }
+
+      var obj = {};
+      $.each(this[0].attributes, function() {
+        if(this.specified) {
+          obj[this.name] = this.value;
+        }
+      });
+      return obj;
+    }
+
+    return old.apply(this, arguments);
+  };
+} )( $.fn.attr );
 
 
 /* 
@@ -465,128 +454,122 @@ App = ( function ( App, $, window, document ) {
  * <!-- Navigation -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
-			var $window      = $( window ),
-				windowWidth  = $window.width(),
-				windowHeight = $window.height(),
-				ulForDesktop = '.menu-container:not(.mobile) ul.menu-main';
 	
-		
-		    // Menu selected (if it exists "data-current" property in <ul>)
-		    var curMenuIndex = $( ulForDesktop ).data( 'current' );
-		    if ( typeof curMenuIndex !== typeof undefined ) {
-				$( ulForDesktop + ' > li:eq('+curMenuIndex+')' ).addClass( 'active' );
-			}
-		    
-		    
-		
-			// Menu Hover
-			var mTop = 15;
-			$( ulForDesktop + ' > li.multi-column > ul li ul' ).addClass( 'multi' );
-			$( ulForDesktop + ' > li:not(.multi-column) ul, .menu-container:not(.mobile) li.multi-column > ul.sub-menu > li > ul, '+ulForDesktop+' li.multi-column > ul' ).css( 'margin-top', mTop + 'px' );
-			
-			$( ulForDesktop + ' li' ).on( 'mouseenter', function(){
-				
-			
-				TweenMax.set( $( this ).find( ' > ul.sub-menu:not(.multi), .mega-arrow' ), {
-					css: {
-						opacity    : 0,
-						display    : 'block',
-						marginTop  : mTop + 'px'
-					},
-					onComplete : function() {
-						
-						TweenMax.to( this.target, 0.3, {
-							css: {
-								opacity    : 1,
-								marginTop  : 0
-							},
-							ease   : Power2.easeOut
-						});		
-						
-						
-	
-					}
-				});				
-				
+    APP.NAVIGATION               = APP.NAVIGATION || {};
+	APP.NAVIGATION.version       = '0.0.3';
+    APP.NAVIGATION.documentReady = function( $ ) {
 
-				
-			}).on( 'mouseleave' , function(){
-				
-				
-				TweenMax.to( $( this ).find( ' > ul.sub-menu:not(.multi), .mega-arrow' ), 0.3, {
-					css: {
-						opacity    : 0,
-						marginTop  : mTop + 'px'
-					},
-					onComplete : function() {
-						
-						TweenMax.set( this.target, {
-							css: {
-								display    : 'none',
-							}
-						});		
-						
-						
-	
-					}
-				});				
-					
-			});
-	
-	
-		
-			//Add Sub-menu Arrow
-			$( ulForDesktop + ' li' ).each( function() {
-				if ( $( this ).find( 'ul' ).length > 0 ) {
-					$( this ).prepend( '<span class="nav-arrow"></span>' );
-				}
-				
-			} );	
-		
+		var $window      = $( window ),
+			windowWidth  = $window.width(),
+			windowHeight = $window.height(),
+			ulForDesktop = '.menu-container:not(.mobile) ul.menu-main';
 
 
-			// Sticky primary navigation
-			var waypoints2 = $( '.menu-container:not(.mobile)' ).waypoint({
-				handler: function( direction ) {
+		// Menu selected (if it exists "data-current" property in <ul>)
+		var curMenuIndex = $( ulForDesktop ).data( 'current' );
+		if ( typeof curMenuIndex !== typeof undefined ) {
+			$( ulForDesktop + ' > li:eq('+curMenuIndex+')' ).addClass( 'active' );
+		}
 
-					$( this.element ).toggleClass( 'spy-scroll-fixed', direction === 'down' );
 
+
+		// Menu Hover
+		var mTop = 15;
+		$( ulForDesktop + ' > li.multi-column > ul li ul' ).addClass( 'multi' );
+		$( ulForDesktop + ' > li:not(.multi-column) ul, .menu-container:not(.mobile) li.multi-column > ul.sub-menu > li > ul, '+ulForDesktop+' li.multi-column > ul' ).css( 'margin-top', mTop + 'px' );
+
+		$( ulForDesktop + ' li' ).on( 'mouseenter', function(){
+
+
+			TweenMax.set( $( this ).find( ' > ul.sub-menu:not(.multi), .mega-arrow' ), {
+				css: {
+					opacity    : 0,
+					display    : 'block',
+					marginTop  : mTop + 'px'
 				},
-				offset: -120
-			});
+				onComplete : function() {
+
+					TweenMax.to( this.target, 0.3, {
+						css: {
+							opacity    : 1,
+							marginTop  : 0
+						},
+						ease   : Power2.easeOut
+					});		
 
 
-			//Prevent to <a> of page transitions
-			$( 'a' ).each( function() {
-				var attr = $( this ).attr( 'href' );
-				if ( typeof attr !== typeof undefined && attr !== false ) {
-					if  ( $( this ).attr( 'href' ).indexOf( '/#' ) >= 0   || $( this ).attr( 'href' ) == '#' ) {
-						$( this ).attr( 'data-normal', 1 ); 
-					 }	
+
 				}
-					
-			});
-		
+			});				
 
-			
-		
-	};
+
+
+		}).on( 'mouseleave' , function(){
+
+
+			TweenMax.to( $( this ).find( ' > ul.sub-menu:not(.multi), .mega-arrow' ), 0.3, {
+				css: {
+					opacity    : 0,
+					marginTop  : mTop + 'px'
+				},
+				onComplete : function() {
+
+					TweenMax.set( this.target, {
+						css: {
+							display    : 'none',
+						}
+					});		
+
+
+
+				}
+			});				
+
+		});
+
+
+
+		//Add Sub-menu Arrow
+		$( ulForDesktop + ' li' ).each( function() {
+			if ( $( this ).find( 'ul' ).length > 0 ) {
+				$( this ).prepend( '<span class="nav-arrow"></span>' );
+			}
+
+		} );	
+
+
+
+		// Sticky primary navigation
+		var waypoints2 = $( '.menu-container:not(.mobile)' ).waypoint({
+			handler: function( direction ) {
+
+				$( this.element ).toggleClass( 'spy-scroll-fixed', direction === 'down' );
+
+			},
+			offset: -120
+		});
+
+
+		//Prevent to <a> of page transitions
+		$( 'a' ).each( function() {
+			var attr = $( this ).attr( 'href' );
+			if ( typeof attr !== typeof undefined && attr !== false ) {
+				if  ( $( this ).attr( 'href' ).indexOf( '/#' ) >= 0   || $( this ).attr( 'href' ) == '#' ) {
+					$( this ).attr( 'data-normal', 1 ); 
+				 }	
+			}
+
+		});
 	
 		
-    App.navigation = {
-        documentReady : documentReady        
     };
 
-    App.components.documentReady.push( documentReady );
-    return App;
+    APP.components.documentReady.push( APP.NAVIGATION.documentReady );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
 
 
 
@@ -595,11 +578,12 @@ App = ( function ( App, $, window, document ) {
  * <!-- Videos -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
-		
+	
+    APP.VIDEOS               = APP.VIDEOS || {};
+	APP.VIDEOS.version       = '0.0.6';
+    APP.VIDEOS.documentReady = function( $ ) {
 
 		var $window      = $( window ),
 			windowWidth  = $window.width(),
@@ -1108,19 +1092,14 @@ App = ( function ( App, $, window, document ) {
 
 
 		});
-
-
 		
     };
 
-    App.videos = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP.VIDEOS.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
+}( APP, jQuery, window, document ) );
 
-}( App, jQuery, window, document ) );
 
 
 /* 
@@ -1136,24 +1115,22 @@ App = ( function ( App, $, window, document ) {
  *************************************
  */
 
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var pageLoaded = function() {
-		
-		$( '.common-height' ).commonHeight();
-		
+	
 
+    APP.COMMON_HEIGHT               = APP.COMMON_HEIGHT || {};
+	APP.COMMON_HEIGHT.version       = '0.0.1';
+    APP.COMMON_HEIGHT.pageLoaded    = function() {
+
+	    $( '.common-height' ).commonHeight();
+		
     };
 
-    App.commonHeight = {
-        pageLoaded : pageLoaded        
-    };
+    APP.components.pageLoaded.push( APP.COMMON_HEIGHT.pageLoaded );
+    return APP;
 
-    App.components.pageLoaded.push( pageLoaded );
-    return App;
-
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
 
 
 
@@ -1249,13 +1226,13 @@ App = ( function ( App, $, window, document ) {
  * <!-- Mega Menu -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
-		
+	
+    APP.MEGAMENU               = APP.MEGAMENU || {};
+	APP.MEGAMENU.version       = '0.0.1';
+    APP.MEGAMENU.documentReady = function( $ ) {
+
 		var $window      = $( window ),
 			windowWidth  = $window.width(),
 			windowHeight = $window.height();
@@ -1406,21 +1383,15 @@ App = ( function ( App, $, window, document ) {
 
 			}
 		}
-		
-
-		
-		
+			
 		
     };
 
-    App.megamenu = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP.MEGAMENU.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
+}( APP, jQuery, window, document ) );
 
-}( App, jQuery, window, document ) );
 
 
 /* 
@@ -1428,11 +1399,13 @@ App = ( function ( App, $, window, document ) {
  * <!-- Dropdown Categories -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
+	
+    APP.DROPDOWN_CAT               = APP.DROPDOWN_CAT || {};
+	APP.DROPDOWN_CAT.version       = '0.0.1';
+    APP.DROPDOWN_CAT.documentReady = function( $ ) {
+
 		
 		  $( '#cat' ).on( 'change', function () {
 			  var cvalue = $( this ).val();
@@ -1441,18 +1414,17 @@ App = ( function ( App, $, window, document ) {
 			  }
 			  return false;
 		  });
-
-	};
-	
 		
-    App.dropdownCat = {
-        documentReady : documentReady        
     };
 
-    App.components.documentReady.push( documentReady );
-    return App;
+    APP.components.documentReady.push( APP.DROPDOWN_CAT.documentReady );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
+
+
+
+
 
 
 /* 
@@ -1460,26 +1432,25 @@ App = ( function ( App, $, window, document ) {
  * <!-- Pagination -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
+	
+    APP.PAGINATION               = APP.PAGINATION || {};
+	APP.PAGINATION.version       = '0.0.1';
+    APP.PAGINATION.documentReady = function( $ ) {
+
 		$( '.pagination-container li > span.current' ).each( function()  {
 			$( this ).parent( 'li' ).addClass( 'active' );
 		});
-	};
-	
 		
-    App.pagination = {
-        documentReady : documentReady        
     };
 
-    App.components.documentReady.push( documentReady );
-    return App;
+    APP.components.documentReady.push( APP.PAGINATION.documentReady );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
+
+
 
 
 
@@ -1488,12 +1459,13 @@ App = ( function ( App, $, window, document ) {
  * <!-- Specify a background image -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
+	
+    APP.SET_BG               = APP.SET_BG || {};
+	APP.SET_BG.version       = '0.0.1';
+    APP.SET_BG.documentReady = function( $ ) {
+
 		$( '[data-bg]' ).each( function() {
 			var $this    = $( this ),
 				config   = $this.data( 'bg' );
@@ -1556,17 +1528,13 @@ App = ( function ( App, $, window, document ) {
 
 		});
 		
-	};
-	
 		
-    App.setBG = {
-        documentReady : documentReady        
     };
 
-    App.components.documentReady.push( documentReady );
-    return App;
+    APP.components.documentReady.push( APP.SET_BG.documentReady );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
 
 
 
@@ -1575,12 +1543,13 @@ App = ( function ( App, $, window, document ) {
  * <!-- Modal Dialog -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ){
-		
+	
+    APP.MODAL_DIALOG               = APP.MODAL_DIALOG || {};
+	APP.MODAL_DIALOG.version       = '0.0.1';
+    APP.MODAL_DIALOG.documentReady = function( $ ) {
+
 		function getTransitionDuration( elementOrSelector ){
 			var $el, durString, isMS, numberStr, numberNum;
 			$el = $( elementOrSelector );
@@ -1694,16 +1663,14 @@ App = ( function ( App, $, window, document ) {
 			
 		});
 		
-	};
-		
-      
-    App.modalbox = {
-        documentReady : documentReady        
-    };  
-    App.components.documentReady.push( documentReady );
-    return App;
+    };
 
-}( App, jQuery, window, document ) );
+    APP.components.documentReady.push( APP.MODAL_DIALOG.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
 
 
 
@@ -1712,10 +1679,12 @@ App = ( function ( App, $, window, document ) {
  * <!-- 3D Background -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
+	
+    APP._3D_BACKGROUND               = APP._3D_BACKGROUND || {};
+	APP._3D_BACKGROUND.version       = '0.0.1';
+    APP._3D_BACKGROUND.documentReady = function( $ ) {
 
 		//grab each 3dAnimate element and pass it into the animate function along with the config data
 		$( '[data-3d-animate]' ).each( function( index, element ) {
@@ -1826,21 +1795,14 @@ App = ( function ( App, $, window, document ) {
 
 			});
 
-		}
+		}	
 		
     };
 
-    App.threeDimensionalBackground = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP._3D_BACKGROUND.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
-
-
-
+}( APP, jQuery, window, document ) );
 
 
 
@@ -1852,11 +1814,12 @@ App = ( function ( App, $, window, document ) {
  * <!-- 3D Background 2 -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
-
+	
+    APP._3D_BACKGROUND_THREE               = APP._3D_BACKGROUND_THREE || {};
+	APP._3D_BACKGROUND_THREE.version       = '0.0.1';
+    APP._3D_BACKGROUND_THREE.documentReady = function( $ ) {
 
 		
 		//Prevent this module from loading in other pages
@@ -2061,18 +2024,10 @@ App = ( function ( App, $, window, document ) {
 		
     };
 
-    App.threeDimensionalBackground2 = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP._3D_BACKGROUND_THREE.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
-
-
-
-
+}( APP, jQuery, window, document ) );
 
 
 
@@ -2083,13 +2038,13 @@ App = ( function ( App, $, window, document ) {
  * <!-- 3D Background 2 -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
+	
+    APP._3D_BACKGROUND_THREE2               = APP._3D_BACKGROUND_THREE2 || {};
+	APP._3D_BACKGROUND_THREE2.version       = '0.0.1';
+    APP._3D_BACKGROUND_THREE2.documentReady = function( $ ) {
 
-
-		
 		//Prevent this module from loading in other pages
 		if ( $( '#3D-background-three-canvas2' ).length == 0 || ! Modernizr.webgl ) return false;
 		
@@ -2379,19 +2334,13 @@ App = ( function ( App, $, window, document ) {
 
 
 		}
-
 		
     };
 
-    App.threeDimensionalBackground2 = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP._3D_BACKGROUND_THREE2.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
-
+}( APP, jQuery, window, document ) );
 
 
 
@@ -2406,11 +2355,12 @@ App = ( function ( App, $, window, document ) {
  * <!-- 3D Carousel -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
+	
+    APP._3D_CAROUSEL               = APP._3D_CAROUSEL || {};
+	APP._3D_CAROUSEL.version       = '0.0.1';
+    APP._3D_CAROUSEL.documentReady = function( $ ) {
 
 		$( '.custom-carousel-3d' ).each( function() {
 			var $this             = $( this ),
@@ -2697,27 +2647,26 @@ App = ( function ( App, $, window, document ) {
 		});
 
 		
-		
     };
 
-    App.threeDimensionalCarousel = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP._3D_CAROUSEL.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
+}( APP, jQuery, window, document ) );
 
-}( App, jQuery, window, document ) );
+
+
 /* 
  *************************************
  * <!-- 3D Model -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
-
+	
+    APP._3D_MODEL               = APP._3D_MODEL || {};
+	APP._3D_MODEL.version       = '0.0.1';
+    APP._3D_MODEL.documentReady = function( $ ) {
 
 		
 		//Prevent this module from loading in other pages
@@ -2962,25 +2911,13 @@ App = ( function ( App, $, window, document ) {
 			
 		
 
-
-
 		
     };
 
-    App.threeDimensionalModel = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP._3D_MODEL.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
-
-
-
-
-
-
+}( APP, jQuery, window, document ) );
 
 
 
@@ -2989,10 +2926,12 @@ App = ( function ( App, $, window, document ) {
  * <!-- 3D Pages -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
+	
+    APP._3D_PAGES               = APP._3D_PAGES || {};
+	APP._3D_PAGES.version       = '0.0.1';
+    APP._3D_PAGES.documentReady = function( $ ) {
 
 		
 		//Prevent this module from loading in other pages
@@ -3107,23 +3046,13 @@ App = ( function ( App, $, window, document ) {
 		}
 
 
-
 		
     };
 
-    App.threeDimensionalPages = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP._3D_PAGES.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
-
-
-
-
-
+}( APP, jQuery, window, document ) );
 
 
 
@@ -3133,12 +3062,13 @@ App = ( function ( App, $, window, document ) {
  * <!-- 3D Particle Effect -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
+	
+    APP._3D_PARTICLE               = APP._3D_PARTICLE || {};
+	APP._3D_PARTICLE.version       = '0.0.1';
+    APP._3D_PARTICLE.documentReady = function( $ ) {
 
-		
 		//Prevent this module from loading in other pages
 		if ( $( '#3D-particle-effect-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
 		
@@ -3322,21 +3252,13 @@ App = ( function ( App, $, window, document ) {
 			
 		
 		}
-
-
-		
-		
 		
     };
 
-    App.threeDimensionalParticleEffect = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP._3D_PARTICLE.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
 
 
 
@@ -3347,12 +3269,13 @@ App = ( function ( App, $, window, document ) {
  * <!-- Accordion -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
+	
+    APP.ACCORDION               = APP.ACCORDION || {};
+	APP.ACCORDION.version       = '0.0.1';
+    APP.ACCORDION.documentReady = function( $ ) {
+
 		$( '.custom-accordion' ).each( function() {
 			var $this           = $( this ),
 				aEvent          = $this.data( 'event' ),
@@ -3395,18 +3318,14 @@ App = ( function ( App, $, window, document ) {
 			
 		});
 		
-		
-	};
-	
-		
-    App.accordion = {
-        documentReady : documentReady        
     };
 
-    App.components.documentReady.push( documentReady );
-    return App;
+    APP.components.documentReady.push( APP.ACCORDION.documentReady );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
+
+
 
 
 /* 
@@ -3414,11 +3333,13 @@ App = ( function ( App, $, window, document ) {
  * <!-- Accordion Background Images -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
+	
+    APP.ACCORDION_BG               = APP.ACCORDION_BG || {};
+	APP.ACCORDION_BG.version       = '0.0.4';
+    APP.ACCORDION_BG.documentReady = function( $ ) {
+		
 		
         var $window      = $( window ),
 		    windowWidth  = $window.width(),
@@ -3509,18 +3430,17 @@ App = ( function ( App, $, window, document ) {
 			
 		});
 		
-		
-	};
 	
 		
-    App.accordionImg = {
-        documentReady : documentReady        
     };
 
-    App.components.documentReady.push( documentReady );
-    return App;
+    APP.components.documentReady.push( APP.ACCORDION_BG.documentReady );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
+
+
+
 
 
 /* 
@@ -3528,14 +3448,13 @@ App = ( function ( App, $, window, document ) {
  * <!-- Advanced Content Slider -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
-		
 	
+    APP.ADVANCED_CONTENT_SLIDER               = APP.ADVANCED_CONTENT_SLIDER || {};
+	APP.ADVANCED_CONTENT_SLIDER.version       = '0.0.2';
+    APP.ADVANCED_CONTENT_SLIDER.documentReady = function( $ ) {
+
 		var $window                   = $( window ),
 			windowWidth               = $window.width(),
 			windowHeight              = $window.height(),
@@ -3845,20 +3764,15 @@ App = ( function ( App, $, window, document ) {
 			
 		}
 		
-
 		
-		
-	};
-	
-		
-    App.advancedContentSlider = {
-        documentReady : documentReady        
     };
 
-    App.components.documentReady.push( documentReady );
-    return App;
+    APP.components.documentReady.push( APP.ADVANCED_CONTENT_SLIDER.documentReady );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
+
+
 
 
 /* 
@@ -3866,11 +3780,14 @@ App = ( function ( App, $, window, document ) {
  * <!-- Advanced Slider (Special Effects) -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var pageLoaded = function() {
-		
+	
+
+    APP.ADVANCED_SLIDER_FILTER               = APP.ADVANCED_SLIDER_FILTER || {};
+	APP.ADVANCED_SLIDER_FILTER.version       = '0.0.2';
+    APP.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
+
 	
 		var $window                   = $( window ),
 			windowWidth               = $window.width(),
@@ -6159,20 +6076,16 @@ App = ( function ( App, $, window, document ) {
 				});
 
 			});	
-		}	
-		
+		}	    
 		
     };
 
-	
-    App.advancedSlider_SpecialEffects = {
-        pageLoaded : pageLoaded        
-    };
+    APP.components.pageLoaded.push( APP.ADVANCED_SLIDER_FILTER.pageLoaded );
+    return APP;
 
-    App.components.pageLoaded.push( pageLoaded );
-    return App;
+}( APP, jQuery, window, document ) );
 
-}( App, jQuery, window, document ) );
+
 
 
 
@@ -6181,12 +6094,14 @@ App = ( function ( App, $, window, document ) {
  * <!-- Advanced Slider (Basic) -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var pageLoaded = function() {
-		
 	
+
+    APP.ADVANCED_SLIDER               = APP.ADVANCED_SLIDER || {};
+	APP.ADVANCED_SLIDER.version       = '0.0.5';
+    APP.ADVANCED_SLIDER.pageLoaded    = function() {
+
 		var $window                   = $( window ),
 			windowWidth               = $window.width(),
 			windowHeight              = $window.height(),
@@ -6896,21 +6811,14 @@ App = ( function ( App, $, window, document ) {
 			});	
 		}	
 		
-
+    
 		
-
-
     };
 
-	
-    App.advancedSlider = {
-        pageLoaded : pageLoaded        
-    };
+    APP.components.pageLoaded.push( APP.ADVANCED_SLIDER.pageLoaded );
+    return APP;
 
-    App.components.pageLoaded.push( pageLoaded );
-    return App;
-
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
 
 
 
@@ -6921,17 +6829,17 @@ App = ( function ( App, $, window, document ) {
  * <!-- Counter -->
  *************************************
  */	
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
-		
+	
+    APP.COUNTER               = APP.COUNTER || {};
+	APP.COUNTER.version       = '0.0.2';
+    APP.COUNTER.documentReady = function( $ ) {
+
 		var waypoints = $( '[data-counter-number]' ).waypoint({
 			handler: function( direction ) {
 
-				$( this.element ).countTo({
-					dilimiter      : true
-				});
+				$( this.element ).countTo();
 
 				//Prevents front-end javascripts that are activated in the background to repeat loading.
 				this.disable();
@@ -6941,18 +6849,16 @@ App = ( function ( App, $, window, document ) {
 			offset: '100%' //0~100%, bottom-in-view
 		});
 
-
 		
     };
 
-    App.counter = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP.COUNTER.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
+}( APP, jQuery, window, document ) );
 
-}( App, jQuery, window, document ) );
+
+
 
 
 
@@ -7056,11 +6962,12 @@ App = ( function ( App, $, window, document ) {
  * <!-- Dropdown Menu -->
  *************************************
  */	
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
-		
+	
+    APP.DROPDOWN_MENU               = APP.DROPDOWN_MENU || {};
+	APP.DROPDOWN_MENU.version       = '0.0.1';
+    APP.DROPDOWN_MENU.documentReady = function( $ ) {
 
 		//Create a trigger of Dropdown Menu on Click
 		$( '.custom-dropdown-trigger' ).each( function() {
@@ -7092,18 +6999,13 @@ App = ( function ( App, $, window, document ) {
 
 		});
 
-
-				
+		
     };
 
-    App.dropdownMenu = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP.DROPDOWN_MENU.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
 
 
 
@@ -7113,12 +7015,13 @@ App = ( function ( App, $, window, document ) {
  * <!-- Dynamic Drop Down List from JSON -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
+	
+    APP.DYNAMIC_DD_LIST               = APP.DYNAMIC_DD_LIST || {};
+	APP.DYNAMIC_DD_LIST.version       = '0.0.1';
+    APP.DYNAMIC_DD_LIST.documentReady = function( $ ) {
+
 		$( '[data-ajax-dynamic-dd-json]' ).each( function() {
 			var $this            = $( this ),
 			    jsonFile         = $this.data( 'ajax-dynamic-dd-json' ),
@@ -7282,20 +7185,350 @@ App = ( function ( App, $, window, document ) {
 			
 			
 		});
-			
 		
-	};
-	
-		
-    App.dynamicDDList = {
-        documentReady : documentReady        
     };
 
-    App.components.documentReady.push( documentReady );
-    return App;
+    APP.components.documentReady.push( APP.DYNAMIC_DD_LIST.documentReady );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
 
+
+
+
+
+
+
+/*
+ * Search string from JSON data
+ *
+ * @param  {function} callback               - Return function after successful loading of JSON file.
+ * @param  {string} jsonFile                 - The path to the JSON file.
+ * @param  {string} key                      - Target key of the JSON data.
+ * @return {function}                        - Return a callback function.
+ */
+/*
+
+
+{
+	"Country 1": [{
+			"name": "City 1",
+			"longitude": 86.212172,
+			"latitude": 14.480298,
+			"addresses": [{
+					"addr_name": "Address 1",
+					"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
+					"addr_longitude": 22.362791,
+					"addr_latitude": 114.131421
+				},
+				{
+					"addr_name": "Address 2",
+					"addr_info": "See Addresses for more details on usage.",
+					"addr_longitude": 22.349032,
+					"addr_latitude": 114.075408
+				},
+				{
+					"addr_name": "Address 3",
+					"addr_info": "The various addr keys are used to provide address information for buildings and facilities.",
+					"addr_longitude": 22.348031,
+					"addr_latitude": 114.064361
+				}
+			]
+		},
+
+		{
+			"name": "City 2",
+			"longitude": 83.526166,
+			"latitude": 30.910773,
+			"addresses": [{
+					"addr_name": "Address 4",
+					"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
+					"addr_longitude": 22.362791,
+					"addr_latitude": 114.131421
+				},
+				{
+					"addr_name": "Address 5",
+					"addr_info": "See Addresses for more details on usage.",
+					"addr_longitude": 22.349032,
+					"addr_latitude": 114.075408
+				},
+				{
+					"addr_name": "Address 6",
+					"addr_info": "The various addr keys are used to provide address information for buildings and facilities.",
+					"addr_longitude": 22.348031,
+					"addr_latitude": 114.064361
+				}
+			]
+		},
+
+		{
+			"name": "City 3",
+			"longitude": 86.212172,
+			"latitude": 14.480298,
+			"addresses": [{
+					"addr_name": "Address 7",
+					"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
+					"addr_longitude": 22.362791,
+					"addr_latitude": 114.131421
+				},
+				{
+					"addr_name": "Address 8",
+					"addr_info": "See Addresses for more details on usage.",
+					"addr_longitude": 22.349032,
+					"addr_latitude": 114.075408
+				}
+			]
+		},
+
+		{
+			"name": "City 4",
+			"longitude": 83.526166,
+			"latitude": 30.910773,
+			"addresses": [{
+					"addr_name": "Address 9",
+					"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
+					"addr_longitude": 22.362791,
+					"addr_latitude": 114.131421
+				},
+				{
+					"addr_name": "Address 10",
+					"addr_info": "See Addresses for more details on usage.",
+					"addr_longitude": 22.349032,
+					"addr_latitude": 114.075408
+				}
+			]
+		},
+
+		{
+			"name": "City 5",
+			"longitude": 86.212172,
+			"latitude": 14.480298,
+			"addresses": [{
+				"addr_name": "Address 11",
+				"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
+				"addr_longitude": 22.362791,
+				"addr_latitude": 114.131421
+			}]
+		}
+
+	],
+	"Country 2": [{
+			"name": "City 2_1",
+			"longitude": 86.212172,
+			"latitude": 14.480298,
+			"addresses": [{
+					"addr_name": "Address 12",
+					"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
+					"addr_longitude": 22.362791,
+					"addr_latitude": 114.131421
+				},
+				{
+					"addr_name": "Address 13",
+					"addr_info": "See Addresses for more details on usage.",
+					"addr_longitude": 22.349032,
+					"addr_latitude": 114.075408
+				}
+			]
+		},
+
+		{
+			"name": "City 2_2",
+			"longitude": 83.526166,
+			"latitude": 30.910773,
+			"addresses": [{
+				"addr_name": "Address 14",
+				"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
+				"addr_longitude": 22.362791,
+				"addr_latitude": 114.131421
+			}]
+		},
+
+		{
+			"name": "City 2_3",
+			"longitude": 86.212172,
+			"latitude": 14.480298,
+			"addresses": [{
+				"addr_name": "Address 15",
+				"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
+				"addr_longitude": 22.362791,
+				"addr_latitude": 114.131421
+			}]
+		}
+
+	],
+	"Country 3": [{
+			"name": "City 3_1",
+			"longitude": 86.212172,
+			"latitude": 14.480298,
+			"addresses": [{
+				"addr_name": "Address 16",
+				"addr_info": "The various addr keys are used to provide address information for buildings and facilities.",
+				"addr_longitude": 22.362791,
+				"addr_latitude": 114.131421
+			}]
+		},
+
+		{
+			"name": "City 3_2",
+			"longitude": 83.526166,
+			"latitude": 30.910773,
+			"addresses": [{
+				"addr_name": "Address 17",
+				"addr_info": "The various addr keys are used to provide address information for buildings and facilities.",
+				"addr_longitude": 22.362791,
+				"addr_latitude": 114.131421
+			}]
+		},
+		{
+			"name": "City 3_3",
+			"longitude": 86.212172,
+			"latitude": 14.480298,
+			"addresses": [{
+				"addr_name": "Address 18",
+				"addr_info": "The various addr keys are used to provide address information for buildings and facilities.",
+				"addr_longitude": 22.362791,
+				"addr_latitude": 114.131421
+			}]
+		}
+
+	]
+
+}
+
+
+*/
+( function ( $ ) {
+    $.fn.searchJsonString = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+			callback  : null,
+			jsonFile  : '',
+			key       : 'addresses'
+        }, options );
+ 
+        this.each( function() {
+			
+			var obj = $( this );
+			
+			
+			//Returns JSON data
+			$.ajax({
+				url      : $( '#dynamic-dd-country' ).data( 'ajax-dynamic-dd-json' ),
+				method   : 'POST',
+				dataType : 'json',
+				success  : function ( data ) { 
+
+					var newArr = [];
+					var formatFromServer = function formatFromServer( data ) {
+						var formatData = {};
+
+						for ( var item in data ) {
+							if ( $( document ).isJsonObject( { string:  data[item] } ) ) {
+								formatFromServer( data[item], formatData );
+							} else {
+								formatData[item] = data[item];
+							}
+						}
+
+						for ( var item2 in formatData ) {
+							//console.log( formatData[ item2 ] );
+							newArr.push( formatData[ item2 ] );
+						}
+
+
+
+						return formatData;
+					};
+
+					formatFromServer( data );
+
+
+					//search JSON key that contains specific string
+					for ( var p = 0; p < newArr.length; p++ ) {
+
+						for ( var n = 0; n < newArr[p].length; n++ ) {
+
+							if ( Object.prototype.toString.call( newArr[p][n][settings.key] ) =='[object Array]' ) {
+								
+								// API: Callback
+								settings.callback( newArr[p][n][settings.key] );
+
+							}
+
+
+						}
+
+
+					}
+
+
+
+				 },
+				 error  : function() {
+
+
+				 }
+			});
+
+			
+		});
+ 
+    };
+ 
+}( jQuery ));
+
+
+
+/*
+ * Check if a string is a valid JSON string
+ * Note: Used when certain functions use "JSON.parse"
+ *
+ * @param  {string} string                   - A json arbitrary string
+ * @return {boolean}                         - Return a boolean.
+ */
+( function ( $ ) {
+    $.fn.isJsonObject = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+			string    : ''
+        }, options );
+ 
+        this.each( function() {
+			
+			var str = settings.str;
+
+			if ( typeof( str ) == 'string' && str.length > 0 ) {
+
+				if ( str.replace( /\"\"/g, '' ).replace( /\,/g, '' ) == '[{}]' ) {
+					return false;
+				} else {
+
+					if (/^[\],:{}\s]*$/.test( str.replace(/\\["\\\/bfnrtu]/g, '@' ).
+					replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
+					replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
+
+						return true;
+
+					}else{
+
+						return false;
+
+					}	
+
+				}
+
+			} else {
+				return false;
+			}
+			
+			
+		});
+ 
+    };
+ 
+}( jQuery ));
 
 
 /* 
@@ -7303,12 +7536,12 @@ App = ( function ( App, $, window, document ) {
  * <!-- Flexslider -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
+	
+    APP.FLEXSLIDER               = APP.FLEXSLIDER || {};
+	APP.FLEXSLIDER.version       = '0.0.1';
+    APP.FLEXSLIDER.documentReady = function( $ ) {
 
 		var $window            = $( window ),
 			windowWidth        = $window.width(),
@@ -8227,19 +8460,13 @@ App = ( function ( App, $, window, document ) {
 			}
 		});
 		
-
-		
-	};
-	
-		
-    App.flexSlider = {
-        documentReady : documentReady        
     };
 
-    App.components.documentReady.push( documentReady );
-    return App;
+    APP.components.documentReady.push( APP.FLEXSLIDER.documentReady );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
+
 
 
 
@@ -9479,13 +9706,13 @@ App = ( function ( App, $, window, document ) {
 	
 */
 
-
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
+	
+    APP.FORM               = APP.FORM || {};
+	APP.FORM.version       = '0.0.1';
+    APP.FORM.documentReady = function( $ ) {
+
 		/* 
 		 ---------------------------
 		 Callbacks for special forms (supports asynchronous)
@@ -9639,21 +9866,12 @@ App = ( function ( App, $, window, document ) {
 		
 		
 		
-		
-		
-	};
-	
-		
-    App.form = {
-        documentReady : documentReady        
     };
 
-    App.components.documentReady.push( documentReady );
-    return App;
+    APP.components.documentReady.push( APP.FORM.documentReady );
+    return APP;
 
-}( App, jQuery, window, document ) );
-
-
+}( APP, jQuery, window, document ) );
 
 
 
@@ -9843,7 +10061,7 @@ App = ( function ( App, $, window, document ) {
 				});
 
 
-				$cusSelect.find( settings.itemsWrapper ).html( newOptions );
+				$cusSelect.find( settings.itemsWrapper ).html( '<div>' + newOptions + '</div>' );
 
 
 				//Set the default selector text
@@ -9976,6 +10194,12 @@ App = ( function ( App, $, window, document ) {
  
 }( jQuery ));
 
+
+/* 
+ *************************************
+ * <!-- jQuery UI Datepicker 1.11.4 -->
+ *************************************
+ */
 
 /*
  * jQuery UI Datepicker 1.11.4
@@ -12071,13 +12295,15 @@ var datepicker = $.datepicker;
 	
 */
 
-App = ( function ( App, $, window, document ) {
+
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var pageLoaded = function() {
-		
-		
+	
+
+    APP.FORM_PROGRESS               = APP.FORM_PROGRESS || {};
+	APP.FORM_PROGRESS.version       = '0.0.1';
+    APP.FORM_PROGRESS.pageLoaded    = function() {
+
 		//Prevent this module from loading in other pages
 		if ( !$( 'body' ).hasClass( 'page-form-progress-eff' ) ) return false;
 		
@@ -12147,21 +12373,16 @@ App = ( function ( App, $, window, document ) {
 		
 			
 		}
+			    
 		
-		
-
-
-	};
-		
-      
-    App.formProgress = {
-        pageLoaded : pageLoaded        
     };
 
-    App.components.pageLoaded.push( pageLoaded );
-    return App;
+    APP.components.pageLoaded.push( APP.FORM_PROGRESS.pageLoaded );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
+
+
 
 
 
@@ -12366,13 +12587,13 @@ App = ( function ( App, $, window, document ) {
  * <!-- Gallery -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
 	
+    APP.GALLERY               = APP.GALLERY || {};
+	APP.GALLERY.version       = '0.0.1';
+    APP.GALLERY.documentReady = function( $ ) {
+
 		$( '.custom-gallery' ).each( function() {
 			var type = $( this ).data( 'show-type' );
 			
@@ -12452,17 +12673,14 @@ App = ( function ( App, $, window, document ) {
 		
 		
 		
-	};
-	
-		
-    App.gallery = {
-        documentReady : documentReady        
     };
 
-    App.components.documentReady.push( documentReady );
-    return App;
+    APP.components.documentReady.push( APP.GALLERY.documentReady );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
+
+
 
 
 
@@ -12471,12 +12689,13 @@ App = ( function ( App, $, window, document ) {
  * <!-- Image Shapes -->
  *************************************
  */	
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
-		
-		
+	
+    APP.IMAGE_SHAPES               = APP.IMAGE_SHAPES || {};
+	APP.IMAGE_SHAPES.version       = '0.0.1';
+    APP.IMAGE_SHAPES.documentReady = function( $ ) {
+
         var $window      = $( window ),
 		    windowWidth  = $window.width(),
 		    windowHeight = $window.height();
@@ -12562,51 +12781,42 @@ App = ( function ( App, $, window, document ) {
 
 			});
 			
-		}
-		
-		
-
-		
-	
-
+		}	
 		
     };
 
-    App.imageShapes = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP.IMAGE_SHAPES.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
+}( APP, jQuery, window, document ) );
 
-}( App, jQuery, window, document ) );
+
 
 
 /* 
  *************************************
- * <!-- Custom Core Scripts & Stylesheets -->
+ * <!-- Custom Core Scripts  -->
  *************************************
  */
 
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
     
-    var documentReady = function( $ ) {
-    
-		
+    APP.INDEX               = APP.INDEX || {};
+	APP.INDEX.version       = '0.0.1';
+    APP.INDEX.documentReady = function( $ ) {
+
 	    //your code here...
-
 		
     };
 
-    App.index = {
-        documentReady : documentReady        
-    };
 
-    App.components.documentReady.push( documentReady );
-    return App;
+    APP.components.documentReady.push( APP.INDEX.documentReady );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
+
+
 
 
 
@@ -12616,12 +12826,15 @@ App = ( function ( App, $, window, document ) {
  * <!-- Custom Lightbox -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var pageLoaded = function() {
-		
 	
+
+    APP.LIGHTBOX               = APP.LIGHTBOX || {};
+	APP.LIGHTBOX.version       = '0.0.7';
+    APP.LIGHTBOX.pageLoaded    = function() {
+
 		if ( $( '.custom-lightbox-overlay' ).length == 0 ) {
 			$( 'body' ).prepend( '<div class="custom-lightbox-overlay"><div class="lb-container"><div class="html"></div><span class="lb-close"></span><p class="title"></p></div></div><div class="custom-lightbox-overlay-mask"></div><div class="custom-lightbox-close-fixed"></div>' );
 		}
@@ -12883,18 +13096,14 @@ App = ( function ( App, $, window, document ) {
 			$lbMask.hide();
 		}
 		
-		
+		    
 		
     };
 
-    App.customLightbox = {
-        pageLoaded : pageLoaded        
-    };
+    APP.components.pageLoaded.push( APP.LIGHTBOX.pageLoaded );
+    return APP;
 
-    App.components.pageLoaded.push( pageLoaded );
-    return App;
-
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
 
 
 
@@ -12904,12 +13113,13 @@ App = ( function ( App, $, window, document ) {
  * <!-- Bulleted List -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
+	
+    APP.BULLETED_LIST               = APP.BULLETED_LIST || {};
+	APP.BULLETED_LIST.version       = '0.0.1';
+    APP.BULLETED_LIST.documentReady = function( $ ) {
+
 
 		// Icon bulleted lists
 		$( '[data-list-bullet]' ).each( function() {
@@ -12918,19 +13128,14 @@ App = ( function ( App, $, window, document ) {
 		});
 
 		
-	
-		
-	};
-	
-		
-    App.bulletedList = {
-        documentReady : documentReady        
     };
 
-    App.components.documentReady.push( documentReady );
-    return App;
+    APP.components.documentReady.push( APP.BULLETED_LIST.documentReady );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
+
+
 
 
 /* 
@@ -12938,13 +13143,13 @@ App = ( function ( App, $, window, document ) {
  * <!-- Posts List With Ajax -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
 	
+    APP.POST_LIST_AJAX               = APP.POST_LIST_AJAX || {};
+	APP.POST_LIST_AJAX.version       = '0.0.1';
+    APP.POST_LIST_AJAX.documentReady = function( $ ) {
+
 		$( '[data-ajax-list-json]' ).each( function() {
 			var $this            = $( this ),
 				wrapperID        = 'refresh-all-waypoint-' + Math.random()*1000000000000000000,
@@ -13315,9 +13520,7 @@ App = ( function ( App, $, window, document ) {
 						//Data overflow may occur when the total number of pages is not posted
 						try {
 
-							var pageLoaded    = App.components.pageLoaded,
-								documentReady = App.components.documentReady,
-								thisData      = data,
+							var thisData      = data,
 								html          = compiledTemplate( thisData ),
 								curHtml       = $divRoot.find( pushContainer ).html(),
 								result        = null,
@@ -13363,12 +13566,8 @@ App = ( function ( App, $, window, document ) {
 							});	
 				
 							
-							
-							//--------- Init Videos
-							App.videos.documentReady($);
-							
-							//--------- Init Custom Lightbox
-							App.customLightbox.pageLoaded();
+							//--------- Apply the original scripts
+							$( document ).applyOriginalSomeScripts();
 
 
 							//--------- Remove this button
@@ -13410,21 +13609,17 @@ App = ( function ( App, $, window, document ) {
 		}
 
 	
-	   
+	   	
 		
-		
-		
-	};
-	
-		
-    App.listAjax = {
-        documentReady : documentReady        
     };
 
-    App.components.documentReady.push( documentReady );
-    return App;
+    APP.components.documentReady.push( APP.POST_LIST_AJAX.documentReady );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
+
+
+
 
 
 
@@ -13434,12 +13629,15 @@ App = ( function ( App, $, window, document ) {
  * <!-- Fullwidth List of Split -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var pageLoaded = function() {
-		
+	
+
+    APP.POST_LIST_SPLIT_FULLWIDTH               = APP.POST_LIST_SPLIT_FULLWIDTH || {};
+	APP.POST_LIST_SPLIT_FULLWIDTH.version       = '0.0.1';
+    APP.POST_LIST_SPLIT_FULLWIDTH.pageLoaded    = function() {
+
 		var $window      = $( window ),
 			windowWidth  = $window.width(),
 			windowHeight = $window.height();
@@ -13479,20 +13677,14 @@ App = ( function ( App, $, window, document ) {
 
 			});	
 		}
+			    
 		
-
-		
-		
-	};
-		
-    App.fullwidthListSplit = {
-        pageLoaded : pageLoaded        
     };
 
-    App.components.pageLoaded.push( pageLoaded );
-    return App;
+    APP.components.pageLoaded.push( APP.POST_LIST_SPLIT_FULLWIDTH.pageLoaded );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
 
 
 
@@ -13502,144 +13694,139 @@ App = ( function ( App, $, window, document ) {
  * <!-- Mobile Menu -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
-			var $window      = $( window ),
-				windowWidth  = $window.width(),
-				windowHeight = $window.height();
 	
-			
-			
-		
-			//Show Toolbar when viewing site for WordPress
-			var waypoints = $( '.admin-bar .menu-mobile-toggle' ).waypoint({
-				handler: function( direction ) {
+    APP.MOBILE_MENU               = APP.MOBILE_MENU || {};
+	APP.MOBILE_MENU.version       = '0.0.1';
+    APP.MOBILE_MENU.documentReady = function( $ ) {
 
-					$( this.element ).toggleClass( 'spy-scroll-postion', direction === 'down' );
+		var $window      = $( window ),
+			windowWidth  = $window.width(),
+			windowHeight = $window.height();
 
-				},
-				offset: -46
-			});
-		
-		
-			
-			// Mobile Menu
-		    var $toggle     = $( '.menu-mobile-toggle' ),
-				$toggleBody = $( 'body' );
-		
-			
-		
-		    //Add mobile menu to your website
-	        $( 'nav.menu-container' ).clone().addClass( 'mobile' ).appendTo( 'body' );
-		    //Wait until previous .appendTo() is complete
-			$.when( $( '.menu-container.mobile' ).length > 0 ).then( function(){
-				
-		
-				$toggle.on( 'touchstart click', function( e ) {
-					e.preventDefault();
-					
-					//Prevents further propagation of the current event in the capturing and bubbling phases.
-					e.stopPropagation(); 
 
-					$( this ).toggleClass( 'open' );
-					if ( $( this ).hasClass( 'open' ) ) {
 
-						//Add mobile brand
-						var logoURL = $( '.mobile-brand img' ).attr( 'src' );
-						if ( typeof logoURL !== typeof undefined && logoURL != '' ) {
-							if ( logoURL.indexOf( 'blank.gif' ) >= 0 ) $( '.mobile-inner' ).css( 'margin-top', '-70px' );
-						}	
 
-						//Toggle effect
-						$toggleBody.addClass( 'menu-open' );
-					} else {
-						$toggleBody.removeClass( 'menu-open' );
-					}
+		//Show Toolbar when viewing site for WordPress
+		var waypoints = $( '.admin-bar .menu-mobile-toggle' ).waypoint({
+			handler: function( direction ) {
 
-				});
-				
-				//Mobile menu mask event
-				$( '.menu-mobile-mask' ).on( 'click', function() {
-					$toggle.removeClass( 'open' );
+				$( this.element ).toggleClass( 'spy-scroll-postion', direction === 'down' );
+
+			},
+			offset: -46
+		});
+
+
+
+		// Mobile Menu
+		var $toggle     = $( '.menu-mobile-toggle' ),
+			$toggleBody = $( 'body' );
+
+
+
+		//Add mobile menu to your website
+		$( 'nav.menu-container' ).clone().addClass( 'mobile' ).appendTo( 'body' );
+		//Wait until previous .appendTo() is complete
+		$.when( $( '.menu-container.mobile' ).length > 0 ).then( function(){
+
+
+			$toggle.on( 'touchstart click', function( e ) {
+				e.preventDefault();
+
+				//Prevents further propagation of the current event in the capturing and bubbling phases.
+				e.stopPropagation(); 
+
+				$( this ).toggleClass( 'open' );
+				if ( $( this ).hasClass( 'open' ) ) {
+
+					//Add mobile brand
+					var logoURL = $( '.mobile-brand img' ).attr( 'src' );
+					if ( typeof logoURL !== typeof undefined && logoURL != '' ) {
+						if ( logoURL.indexOf( 'blank.gif' ) >= 0 ) $( '.mobile-inner' ).css( 'margin-top', '-70px' );
+					}	
+
+					//Toggle effect
+					$toggleBody.addClass( 'menu-open' );
+				} else {
 					$toggleBody.removeClass( 'menu-open' );
-				});
-				
-
-
-
-				// Menu click event
-				$( '.menu-container.mobile ul li' ).on( 'click', function( e ) {
-
-					  var arrowText = $( this ).find( '.mobile-nav-arrow' ).text().replace( /(.).*\1/g, "$1" );
-					  $( this ).find( '> .sub-menu:not(.sub-sub)' ).toggle();
-
-					  if ( arrowText != '-' ) {
-						  $( this ).find( '.mobile-nav-arrow' ).text( '-' );
-					  } else {
-						  $( this ).find( '.mobile-nav-arrow' ).text( '+' );
-					  }
-
-
-				} );
-				
-				
-				sidrmenuInit( windowWidth ); 
-
-				// Close the menu on window change
-				$window.on( 'resize', function() {
-					// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-					if ( $window.width() != windowWidth ) {
-
-						// Update the window width for next time
-						windowWidth = $window.width();
-
-						// Do stuff here
-						$toggleBody.removeClass( 'menu-open' );
-						$toggle.removeClass( 'open' );
-						sidrmenuInit( windowWidth );
-
-
-					}
-				});
-
-				
-			});
-		
-		
-
-			
-			function sidrmenuInit( w ) {
-				
-				if ( w <= 768 ) {
-					$( '.menu-container.mobile .menu-main > li' ).each( function() {
-						if ( $( this ).find( 'ul' ).length > 0 ) {
-							if ( $( this ).find( '.mobile-nav-arrow' ).length < 1 ) $( this ).prepend( '<em class="mobile-nav-arrow">+</em>' );
-							$( this ).find( 'ul ul' ).addClass( 'sub-sub' );
-							$( this ).find( ' > a' ).attr( 'href', 'javascript:void(0);' );
-						}
-					} );		
 				}
-	
 
+			});
+
+			//Mobile menu mask event
+			$( '.menu-mobile-mask' ).on( 'click', function() {
+				$toggle.removeClass( 'open' );
+				$toggleBody.removeClass( 'menu-open' );
+			});
+
+
+
+
+			// Menu click event
+			$( '.menu-container.mobile ul li' ).on( 'click', function( e ) {
+
+				  var arrowText = $( this ).find( '.mobile-nav-arrow' ).text().replace( /(.).*\1/g, "$1" );
+				  $( this ).find( '> .sub-menu:not(.sub-sub)' ).toggle();
+
+				  if ( arrowText != '-' ) {
+					  $( this ).find( '.mobile-nav-arrow' ).text( '-' );
+				  } else {
+					  $( this ).find( '.mobile-nav-arrow' ).text( '+' );
+				  }
+
+
+			} );
+
+
+			sidrmenuInit( windowWidth ); 
+
+			// Close the menu on window change
+			$window.on( 'resize', function() {
+				// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+				if ( $window.width() != windowWidth ) {
+
+					// Update the window width for next time
+					windowWidth = $window.width();
+
+					// Do stuff here
+					$toggleBody.removeClass( 'menu-open' );
+					$toggle.removeClass( 'open' );
+					sidrmenuInit( windowWidth );
+
+
+				}
+			});
+
+
+		});
+
+
+
+
+		function sidrmenuInit( w ) {
+
+			if ( w <= 768 ) {
+				$( '.menu-container.mobile .menu-main > li' ).each( function() {
+					if ( $( this ).find( 'ul' ).length > 0 ) {
+						if ( $( this ).find( '.mobile-nav-arrow' ).length < 1 ) $( this ).prepend( '<em class="mobile-nav-arrow">+</em>' );
+						$( this ).find( 'ul ul' ).addClass( 'sub-sub' );
+						$( this ).find( ' > a' ).attr( 'href', 'javascript:void(0);' );
+					}
+				} );		
 			}
-			
+
+
+		}
 		
-		
-	};
-	
-		
-    App.mobileMenu = {
-        documentReady : documentReady        
     };
 
-    App.components.documentReady.push( documentReady );
-    return App;
+    APP.components.documentReady.push( APP.MOBILE_MENU.documentReady );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
+
 
 
 
@@ -13648,13 +13835,13 @@ App = ( function ( App, $, window, document ) {
  * <!-- Mousewheel Interaction -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ){
-		
-		
+	
+    APP.MOUSEWHEEL_INTERACTION               = APP.MOUSEWHEEL_INTERACTION || {};
+	APP.MOUSEWHEEL_INTERACTION.version       = '0.0.1';
+    APP.MOUSEWHEEL_INTERACTION.documentReady = function( $ ) {
+
 		//Prevent this module from loading in other pages
 		if ( !$( 'body' ).hasClass( 'page-mousewheel-eff' ) ) return false;
 		
@@ -13724,18 +13911,14 @@ App = ( function ( App, $, window, document ) {
 			lastAnimation = timeNow;
 		}
 		
+    };
 
-		
-	};
-		
-      
-    App.mousewheelInteraction = {
-        documentReady : documentReady        
-    };  
-    App.components.documentReady.push( documentReady );
-    return App;
+    APP.components.documentReady.push( APP.MOUSEWHEEL_INTERACTION.documentReady );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
+
+
 
 
 /* 
@@ -13743,11 +13926,13 @@ App = ( function ( App, $, window, document ) {
  * <!-- Multiple Items Carousel -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
-    
+	
+    APP.MULTI_ITEMS_CAROUSEL               = APP.MULTI_ITEMS_CAROUSEL || {};
+	APP.MULTI_ITEMS_CAROUSEL.version       = '0.0.1';
+    APP.MULTI_ITEMS_CAROUSEL.documentReady = function( $ ) {
+
 		$( '.custom-multi-items-carousel' ).each( function()  {
 
 			var $carouselWrapper   = $( this ),
@@ -14063,25 +14248,20 @@ App = ( function ( App, $, window, document ) {
 		
     };
 
-    App.multiItemsCarousel = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP.MULTI_ITEMS_CAROUSEL.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
 
 
 
-
-//
-//
-//App = ( function ( App, $, window, document ) {
+//APP = ( function ( APP, $, window, document ) {
 //    'use strict';
-//    
-//    var documentReady = function( $ ) {
-//    
+//	
+//    APP.MULTI_ITEMS_CAROUSEL               = APP.MULTI_ITEMS_CAROUSEL || {};
+//	  APP.MULTI_ITEMS_CAROUSEL.version       = '0.0.1';
+//    APP.MULTI_ITEMS_CAROUSEL.documentReady = function( $ ) {
+//
 //		$( '.custom-multi-items-carousel' ).each( function()  {
 //
 //			var $carouselWrapper   = $( this ),
@@ -14551,18 +14731,13 @@ App = ( function ( App, $, window, document ) {
 //
 //		});		
 //		
-//		
 //    };
 //
-//    App.multiItemsCarousel = {
-//        documentReady : documentReady        
-//    };
+//    APP.components.documentReady.push( APP.MULTI_ITEMS_CAROUSEL.documentReady );
+//    return APP;
 //
-//    App.components.documentReady.push( documentReady );
-//    return App;
+//}( APP, jQuery, window, document ) );
 //
-//}( App, jQuery, window, document ) );
-
 
 
 
@@ -14571,11 +14746,12 @@ App = ( function ( App, $, window, document ) {
  * <!-- Full Page/One Page Transition -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
-
+	
+    APP.ONEPAGE               = APP.ONEPAGE || {};
+	APP.ONEPAGE.version       = '0.0.1';
+    APP.ONEPAGE.documentReady = function( $ ) {
 
         var $window      = $( window ),
 		    windowWidth  = $window.width(),
@@ -14968,17 +15144,12 @@ App = ( function ( App, $, window, document ) {
 
 
 		
-		
     };
 
-    App.onepage = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP.ONEPAGE.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
 
 
 
@@ -14987,12 +15158,13 @@ App = ( function ( App, $, window, document ) {
  * <!-- Full Page/One Page Transition 2 -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
+	
+    APP.ONEPAGE2               = APP.ONEPAGE2 || {};
+	APP.ONEPAGE2.version       = '0.0.1';
+    APP.ONEPAGE2.documentReady = function( $ ) {
 
-        
         var $window      = $( window ),
 		    windowWidth  = $window.width(),
 		    windowHeight = $window.height();
@@ -15405,14 +15577,10 @@ App = ( function ( App, $, window, document ) {
 		
     };
 
-    App.onepage2 = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP.ONEPAGE2.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
 
 
 
@@ -15422,11 +15590,13 @@ App = ( function ( App, $, window, document ) {
  * <!-- Parallax -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
-        
+	
+    APP.PARALLAX               = APP.PARALLAX || {};
+	APP.PARALLAX.version       = '0.0.3';
+    APP.PARALLAX.documentReady = function( $ ) {
+
         var $window      = $( window ),
 		    windowWidth  = $window.width(),
 		    windowHeight = $window.height();
@@ -15662,22 +15832,15 @@ App = ( function ( App, $, window, document ) {
 			
 		
 	
-		}
+		}	
 		
-	
-
     };
 
-	
+    APP.components.documentReady.push( APP.PARALLAX.documentReady );
+    return APP;
 
-    App.parallax = {
-        documentReady : documentReady        
-    };
+}( APP, jQuery, window, document ) );
 
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
 
 
 
@@ -15759,11 +15922,13 @@ http://www.gnu.org/licenses/gpl.html
  * <!-- Periodical Scroll -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
 	
+    APP.PERIODICAL_SCROLL               = APP.PERIODICAL_SCROLL || {};
+	APP.PERIODICAL_SCROLL.version       = '0.0.1';
+    APP.PERIODICAL_SCROLL.documentReady = function( $ ) {
+
 		$( '[data-periodical-scroll-container]' ).each( function() {
 
 			var $this       = $( this ),
@@ -15816,19 +15981,14 @@ App = ( function ( App, $, window, document ) {
 			
 			
 		});
-	
-		
 		
     };
 
-    App.periodicalScroll = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP.PERIODICAL_SCROLL.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
+}( APP, jQuery, window, document ) );
 
-}( App, jQuery, window, document ) );
 
 
 /* 
@@ -15836,11 +15996,13 @@ App = ( function ( App, $, window, document ) {
  * <!-- Pricing -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
-    
+	
+    APP.PRICING               = APP.PRICING || {};
+	APP.PRICING.version       = '0.0.2';
+    APP.PRICING.documentReady = function( $ ) {
+
 		
 		var $window      = $( window ),
 			windowWidth  = $window.width(),
@@ -15938,23 +16100,13 @@ App = ( function ( App, $, window, document ) {
 		}
 		
 		
-
-
 		
     };
 
-    App.pricing = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP.PRICING.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
-
-
-
-
+}( APP, jQuery, window, document ) );
 
 
 
@@ -15963,10 +16115,12 @@ App = ( function ( App, $, window, document ) {
  * <!-- Progress Bar -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
+	
+    APP.PROGRESSBAR               = APP.PROGRESSBAR || {};
+	APP.PROGRESSBAR.version       = '0.0.4';
+    APP.PROGRESSBAR.documentReady = function( $ ) {
 
 		var waypoints = $( '[data-progressbar-percent]' ).waypoint({
 			handler: function( direction ) {
@@ -16007,21 +16161,12 @@ App = ( function ( App, $, window, document ) {
 		});
 
 		
-		
     };
 
-    App.progressBar = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP.PROGRESSBAR.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
-
-
-
-
+}( APP, jQuery, window, document ) );
 
 
 
@@ -16031,12 +16176,13 @@ App = ( function ( App, $, window, document ) {
  * <!-- Retina Graphics for Website -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
+	
+    APP.RETINA               = APP.RETINA || {};
+	APP.RETINA.version       = '0.0.1';
+    APP.RETINA.documentReady = function( $ ) {
+
 		//Determine if you have retinal display
 		var hasRetina  = false,
 			rootRetina = (typeof exports === 'undefined' ? window : exports),
@@ -16055,31 +16201,28 @@ App = ( function ( App, $, window, document ) {
 			});
 		
 		} 
+			
 		
-		
-	
-		
-	};
-	
-		
-    App.retina = {
-        documentReady : documentReady        
     };
 
-    App.components.documentReady.push( documentReady );
-    return App;
+    APP.components.documentReady.push( APP.RETINA.documentReady );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
+
+
 
 /* 
  *************************************
  * <!-- Rotating Elements -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
+	
+    APP.ROTATING_EL               = APP.ROTATING_EL || {};
+	APP.ROTATING_EL.version       = '0.0.1';
+    APP.ROTATING_EL.documentReady = function( $ ) {
 
 
 		$( '[data-pointer-to-deg]' ).each( function()  {
@@ -16147,18 +16290,13 @@ App = ( function ( App, $, window, document ) {
 		
 
 			
-
 		
     };
 
-    App.rotatingElements = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP.ROTATING_EL.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
 
 
 
@@ -16168,11 +16306,12 @@ App = ( function ( App, $, window, document ) {
  * <!-- Scroll Reveal -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
+	
+    APP.SCROLL_REVEAL               = APP.SCROLL_REVEAL || {};
+	APP.SCROLL_REVEAL.version       = '0.0.8';
+    APP.SCROLL_REVEAL.documentReady = function( $ ) {
 
 		
 		//From JSON config in data attribute in HTML
@@ -16245,54 +16384,79 @@ App = ( function ( App, $, window, document ) {
 
 
 		$scrollRevealElements.each( function()  {
-			tmAnim( $( this ), 'from' );
+			
+			//Prevent asynchronous loading of repeated calls
+			var actived = $( this ).data( 'active' );
+			
+			if( typeof actived === typeof undefined ) {
+				tmAnim( $( this ), 'from' );
+
+			}
+			
 		});
 
 					
-		var waypoints = $scrollRevealElements.waypoint({
-			handler: function( direction ) {
+		//Prevent the location of page elements from being loaded incorrectly
+		//Invoking a jQuery function after .each() has completed
+		setTimeout( function() {
+			var waypoints = $scrollRevealElements.waypoint({
+				handler: function( direction ) {
 
-				//$( this.element ).toggleClass( 'animated fadeInUp', direction === 'down' );
-				var tmLoop = tmAnim( $( this.element ), 'loop' );
-				
-				if ( tmLoop === 1 ) {
-					if ( direction === 'up' ) {
-						tmAnim( $( this.element ), 'from-anim' );
-					} else {
+					
+					//Prevent asynchronous loading of repeated calls
+					var actived = $( this.element ).data( 'active' ),
+						tmLoop  = tmAnim( $( this.element ), 'loop' );
+					
+
+					if( typeof actived === typeof undefined && tmLoop != 1 ) {
+						
+						//$( this.element ).toggleClass( 'animated fadeInUp', direction === 'down' );
 						tmAnim( $( this.element ), 'to' );
+
+						$( this.element ).data( 'active', 1 );
+
+						
 					}
-				} else {
-					tmAnim( $( this.element ), 'to' );
-				}
+					
+					if ( tmLoop === 1 ) {
+						if ( direction === 'up' ) {
+							tmAnim( $( this.element ), 'from-anim' );
+						} else {
+							tmAnim( $( this.element ), 'to' );
+						}
+					}	
+					
 
-			},
-			offset: '100%' //0~100%, bottom-in-view
-		});
 
-		
-	};
+
+				},
+				offset: '100%' //0~100%, bottom-in-view
+			});
 	
+		}, 500 );
 		
-    App.scrollReveal = {
-        documentReady : documentReady        
     };
 
-    App.components.documentReady.push( documentReady );
-    return App;
+    APP.components.documentReady.push( APP.SCROLL_REVEAL.documentReady );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
+
+
+
 
 /* 
  *************************************
  * <!-- Show More Less -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ){
-		
+	
+    APP.SHOW_MORELESS               = APP.SHOW_MORELESS || {};
+	APP.SHOW_MORELESS.version       = '0.0.1';
+    APP.SHOW_MORELESS.documentReady = function( $ ) {
+
 		$( '.custom-more-text-link' ).on( 'click', function( e ) {
 			e.preventDefault();
 			$( this ).parent().prev( '.custom-more-text' ).toggleClass( 'show' );
@@ -16300,18 +16464,15 @@ App = ( function ( App, $, window, document ) {
 			$( this ).find( '> span' ).eq(1).toggle();
 			
 
-		});
+		});	
 		
-	};
-		
-      
-    App.showMoreLess = {
-        documentReady : documentReady        
-    };  
-    App.components.documentReady.push( documentReady );
-    return App;
+    };
 
-}( App, jQuery, window, document ) );
+    APP.components.documentReady.push( APP.SHOW_MORELESS.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
 
 
 
@@ -16320,12 +16481,13 @@ App = ( function ( App, $, window, document ) {
  * <!-- Smooth Scrolling When Clicking An Anchor Link -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
+	
+    APP.SMOOTH_SCROLLING_ANCHORLINK               = APP.SMOOTH_SCROLLING_ANCHORLINK || {};
+	APP.SMOOTH_SCROLLING_ANCHORLINK.version       = '0.0.3';
+    APP.SMOOTH_SCROLLING_ANCHORLINK.documentReady = function( $ ) {
+
 		//Prevent this module from loading in other pages
 		if ( $( 'body' ).hasClass( 'onepage' ) ) return false;
 		
@@ -16425,33 +16587,28 @@ App = ( function ( App, $, window, document ) {
 			}
 		} );
 
-	
 		
-	};
-	
-		
-    App.smoothScrollingAnchorLink = {
-        documentReady : documentReady        
     };
 
-    App.components.documentReady.push( documentReady );
-    return App;
+    APP.components.documentReady.push( APP.SMOOTH_SCROLLING_ANCHORLINK.documentReady );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
+
 
 
 
 /* 
  *************************************
- * <!-- Source Code -->
+ * <!-- Source Code View -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ){
-		
+	
+    APP.SOURCE_CODE_VIEW               = APP.SOURCE_CODE_VIEW || {};
+	APP.SOURCE_CODE_VIEW.version       = '0.0.1';
+    APP.SOURCE_CODE_VIEW.documentReady = function( $ ) {
 
 		//Add view source code to body
 		$( 'body' ).prepend( '<a href="#source-code" id="view-source"><i class="fa fa-code" aria-hidden="true"></i></a><div id="source-code"><a href="javascript:void(0);" id="close"></a></div>' );
@@ -16506,18 +16663,14 @@ App = ( function ( App, $, window, document ) {
 		
 		
 		//highlighter written
-	
 		
-	};
-		
-      
-    App.sourceCode = {
-        documentReady : documentReady        
-    };  
-    App.components.documentReady.push( documentReady );
-    return App;
+    };
 
-}( App, jQuery, window, document ) );
+    APP.components.documentReady.push( APP.SOURCE_CODE_VIEW.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
 
 
 
@@ -16527,11 +16680,15 @@ App = ( function ( App, $, window, document ) {
  *  <!-- Sticky Elements -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var pageLoaded = function() {
-		
+	
+
+    APP.STICKY_EL               = APP.STICKY_EL || {};
+	APP.STICKY_EL.version       = '0.0.1';
+    APP.STICKY_EL.pageLoaded    = function() {
+
 		var $window      = $( window ),
 			windowWidth  = $window.width(),
 			windowHeight = $window.height(),
@@ -16603,18 +16760,15 @@ App = ( function ( App, $, window, document ) {
 //		});
 
 
-
+    
 		
     };
 
-    App.stickyElements = {
-        pageLoaded : pageLoaded        
-    };
+    APP.components.pageLoaded.push( APP.STICKY_EL.pageLoaded );
+    return APP;
 
-    App.components.pageLoaded.push( pageLoaded );
-    return App;
+}( APP, jQuery, window, document ) );
 
-}( App, jQuery, window, document ) );
 
 
 
@@ -16625,12 +16779,13 @@ App = ( function ( App, $, window, document ) {
  * <!-- Tabs -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ){
-		
+	
+    APP.TABS               = APP.TABS || {};
+	APP.TABS.version       = '0.1.2';
+    APP.TABS.documentReady = function( $ ) {
+
 		$( '.custom-tabs' ).each( function( id ) {
 			var $this             = $( this ),
 			    $li               = $this.find( 'ul > li' ),
@@ -16797,18 +16952,16 @@ App = ( function ( App, $, window, document ) {
 			
 		});
 		
-
 		
-	};
-		
-      
-    App.customTabs = {
-        documentReady : documentReady        
-    };  
-    App.components.documentReady.push( documentReady );
-    return App;
+    };
 
-}( App, jQuery, window, document ) );
+    APP.components.documentReady.push( APP.TABS.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
 
 
 /* 
@@ -16816,12 +16969,13 @@ App = ( function ( App, $, window, document ) {
  * <!-- Team Focus -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
-    
-		
+	
+    APP.TEAM_FOCUS               = APP.TEAM_FOCUS || {};
+	APP.TEAM_FOCUS.version       = '0.0.2';
+    APP.TEAM_FOCUS.documentReady = function( $ ) {
+
 		var teamFocusContent = '.custom-team-focus',
 			teamFocusMask    = '.custom-team-focus-mask';
 			
@@ -17013,14 +17167,10 @@ App = ( function ( App, $, window, document ) {
 		
     };
 
-    App.teamFocus = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP.TEAM_FOCUS.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
 
 
 
@@ -17031,11 +17181,13 @@ App = ( function ( App, $, window, document ) {
  * <!-- Testimonials Carousel -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
-    
+	
+    APP.TESTIMONIALS               = APP.TESTIMONIALS || {};
+	APP.TESTIMONIALS.version       = '0.0.1';
+    APP.TESTIMONIALS.documentReady = function( $ ) {
+
 		var $obj                 = $( '.custom-testimonials .flexslider' ),
 			testimonialsControls = '';
 		
@@ -17112,16 +17264,10 @@ App = ( function ( App, $, window, document ) {
 		
     };
 
-    App.testimonials = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP.TESTIMONIALS.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
-
-
+}( APP, jQuery, window, document ) );
 
 
 
@@ -17134,30 +17280,28 @@ App = ( function ( App, $, window, document ) {
  * <!-- Text effect -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
 	
-    var pageLoaded = function() {
+
+    APP.TEXT_EFFECT               = APP.TEXT_EFFECT || {};
+	APP.TEXT_EFFECT.version       = '0.0.3';
+    APP.TEXT_EFFECT.pageLoaded    = function() {
 
 		//Default Effect
 		//-------------------------------------	
 		$( '[data-text-eff]' ).each( function( index )  {
 			$( document ).customTextEffInit( { selectors: '[data-text-eff="'+$( this ).data( 'text-eff' )+'"]' } );
-		});
-		
-		
+		});   
 		
     };
 
-    App.textEffect = {
-        pageLoaded : pageLoaded        
-    };
+    APP.components.pageLoaded.push( APP.TEXT_EFFECT.pageLoaded );
+    return APP;
 
-    App.components.pageLoaded.push( pageLoaded );
-    return App;
+}( APP, jQuery, window, document ) );
 
-}( App, jQuery, window, document ) );
 
 
 
@@ -17239,12 +17383,15 @@ App = ( function ( App, $, window, document ) {
  * <!-- Timeline -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var pageLoaded = function() {
-		
-		
+	
+
+    APP.TIMELINE               = APP.TIMELINE || {};
+	APP.TIMELINE.version       = '0.1.5';
+    APP.TIMELINE.pageLoaded    = function() {
+
 		var $window          = $( window ),
 			windowWidth      = $window.width(),
 			windowHeight     = $window.height();
@@ -17382,31 +17529,30 @@ App = ( function ( App, $, window, document ) {
 			
 			
 		}
-
+    
 		
-
-
     };
 
-    App.timeline = {
-        pageLoaded : pageLoaded        
-    };
+    APP.components.pageLoaded.push( APP.TIMELINE.pageLoaded );
+    return APP;
 
-    App.components.pageLoaded.push( pageLoaded );
-    return App;
+}( APP, jQuery, window, document ) );
 
-}( App, jQuery, window, document ) );
+
+
 
 /* 
  *************************************
  * <!-- Ajax Page Loader (Loading A Page via Ajax Into Div)  -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
-		
+	
+    APP.AJAX_PAGE_LOADER               = APP.AJAX_PAGE_LOADER || {};
+	APP.AJAX_PAGE_LOADER.version       = '0.0.4';
+    APP.AJAX_PAGE_LOADER.documentReady = function( $ ) {
+
         var $window                  = $( window ),
 		    windowWidth              = $window.width(),
 		    windowHeight             = $window.height();
@@ -17815,19 +17961,13 @@ App = ( function ( App, $, window, document ) {
 		});		
 		
 
-	
 		
     };
 
-    App.ajaxPageLoader = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP.AJAX_PAGE_LOADER.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
-
+}( APP, jQuery, window, document ) );
 
 
 
@@ -17850,19 +17990,23 @@ App = ( function ( App, $, window, document ) {
  
         this.each( function() {
 
-			App.commonHeight.pageLoaded(); //Common Height
-			App.customLightbox.pageLoaded(); //Custom Lightbox
-			App.modalbox.documentReady($); //Modal Dialog
-			App.parallax.documentReady($); //Parallax
-			App.videos.documentReady($); //Videos
-			App.setBG.documentReady($); //Specify a background image
-			App.getAllCustomAttrs.documentReady($); //Get all custom attributes of an element like "data-*"
-			App.pagination.documentReady($); //Pagination
-			App.form.documentReady($); //Form
-			App.flexSlider.documentReady($); //Flexslider
-			App.retina.documentReady($); //Retina Graphics for Website
-			App.showMoreLess.documentReady($); //Show More Less
-			App.dropdownMenu.documentReady($); //Dropdown Menu
+			APP.COMMON_HEIGHT.pageLoaded(); //Common Height
+			APP.LIGHTBOX.pageLoaded(); //Custom Lightbox
+			APP.MODAL_DIALOG.documentReady($); //Modal Dialog
+			APP.PARALLAX.documentReady($); //Parallax
+			APP.VIDEOS.documentReady($); //Videos
+			APP.SET_BG.documentReady($); //Specify a background image
+			APP.GET_CUSTOM_ATTRS.documentReady($); //Get all custom attributes of an element like "data-*"
+			APP.PAGINATION.documentReady($); //Pagination
+			APP.FORM.documentReady($); //Form
+			APP.DYNAMIC_DD_LIST.documentReady($); //Dynamic Drop Down List from JSON
+			APP.FLEXSLIDER.documentReady($); //Flexslider
+			APP.RETINA.documentReady($); //Retina Graphics for Website
+			APP.SHOW_MORELESS.documentReady($); //Show More Less
+			APP.DROPDOWN_MENU.documentReady($); //Dropdown Menu
+			APP.COUNTER.documentReady($); //Counter
+			APP.SCROLL_REVEAL.documentReady($); //Scroll Reveal
+			
 
 			//Other functions here
 
@@ -17900,8 +18044,8 @@ App = ( function ( App, $, window, document ) {
  
         this.each( function() {
 
-			var scipts_pageLoaded    = App.components.pageLoaded,
-				scipts_documentReady = App.components.documentReady;
+			var scipts_pageLoaded    = APP.components.pageLoaded,
+				scipts_documentReady = APP.components.documentReady;
 
 
 			for ( var i = 0; i < scipts_pageLoaded.length; i++ ) {
@@ -17929,11 +18073,13 @@ App = ( function ( App, $, window, document ) {
  * <!-- Ajax Push Content  -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
-		
+	
+    APP.AJAX_PUSH_CONTENT               = APP.AJAX_PUSH_CONTENT || {};
+	APP.AJAX_PUSH_CONTENT.version       = '0.0.2';
+    APP.AJAX_PUSH_CONTENT.documentReady = function( $ ) {
+
         var $window                  = $( window ),
 		    windowWidth              = $window.width(),
 		    windowHeight             = $window.height();
@@ -18016,7 +18162,6 @@ App = ( function ( App, $, window, document ) {
 				},	
 				success  : function( response ) {
 					
-
 					//A function to be called if the request succeeds
 					ajaxSucceeds( container, url, $( response ).find( target ).html() );
 
@@ -18026,7 +18171,17 @@ App = ( function ( App, $, window, document ) {
 				},
 				beforeSend: function() {
 
+					TweenMax.to( container.find( '.ajax-content-loader' ), 0.3, {
+						css: {
+							opacity    : 1
+						},
+						ease   : Power2.easeOut
+					});		
+
+
 					container.html( '<div class="ajax-content-loader">'+loading+'</div>' ).promise().done( function(){
+
+						
 						
 						TweenMax.set( container.find( '.ajax-content-loader' ), {
 							css         : {
@@ -18039,6 +18194,7 @@ App = ( function ( App, $, window, document ) {
 							}
 						});	
 					});
+
 					
 
 
@@ -18113,18 +18269,12 @@ App = ( function ( App, $, window, document ) {
 		
 		
 		
-	
-		
     };
 
-    App.ajaxPushContent = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP.AJAX_PUSH_CONTENT.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
 
 
 

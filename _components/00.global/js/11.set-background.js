@@ -4,12 +4,13 @@
  * <!-- Specify a background image -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
+	
+    APP.SET_BG               = APP.SET_BG || {};
+	APP.SET_BG.version       = '0.0.1';
+    APP.SET_BG.documentReady = function( $ ) {
+
 		$( '[data-bg]' ).each( function() {
 			var $this    = $( this ),
 				config   = $this.data( 'bg' );
@@ -72,15 +73,11 @@ App = ( function ( App, $, window, document ) {
 
 		});
 		
-	};
-	
 		
-    App.setBG = {
-        documentReady : documentReady        
     };
 
-    App.components.documentReady.push( documentReady );
-    return App;
+    APP.components.documentReady.push( APP.SET_BG.documentReady );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
 

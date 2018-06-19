@@ -4,12 +4,14 @@
  * <!-- Advanced Slider (Basic) -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var pageLoaded = function() {
-		
 	
+
+    APP.ADVANCED_SLIDER               = APP.ADVANCED_SLIDER || {};
+	APP.ADVANCED_SLIDER.version       = '0.0.5';
+    APP.ADVANCED_SLIDER.pageLoaded    = function() {
+
 		var $window                   = $( window ),
 			windowWidth               = $window.width(),
 			windowHeight              = $window.height(),
@@ -719,21 +721,14 @@ App = ( function ( App, $, window, document ) {
 			});	
 		}	
 		
-
+    
 		
-
-
     };
 
-	
-    App.advancedSlider = {
-        pageLoaded : pageLoaded        
-    };
+    APP.components.pageLoaded.push( APP.ADVANCED_SLIDER.pageLoaded );
+    return APP;
 
-    App.components.pageLoaded.push( pageLoaded );
-    return App;
-
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
 
 
 

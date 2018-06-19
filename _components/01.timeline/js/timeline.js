@@ -4,12 +4,15 @@
  * <!-- Timeline -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var pageLoaded = function() {
-		
-		
+	
+
+    APP.TIMELINE               = APP.TIMELINE || {};
+	APP.TIMELINE.version       = '0.1.5';
+    APP.TIMELINE.pageLoaded    = function() {
+
 		var $window          = $( window ),
 			windowWidth      = $window.width(),
 			windowHeight     = $window.height();
@@ -147,17 +150,14 @@ App = ( function ( App, $, window, document ) {
 			
 			
 		}
-
+    
 		
-
-
     };
 
-    App.timeline = {
-        pageLoaded : pageLoaded        
-    };
+    APP.components.pageLoaded.push( APP.TIMELINE.pageLoaded );
+    return APP;
 
-    App.components.pageLoaded.push( pageLoaded );
-    return App;
+}( APP, jQuery, window, document ) );
 
-}( App, jQuery, window, document ) );
+
+

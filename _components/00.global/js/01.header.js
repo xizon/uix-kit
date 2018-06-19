@@ -4,12 +4,13 @@
  * <!-- Header -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
 	
-		
+    APP.HEADER               = APP.HEADER || {};
+	APP.HEADER.version       = '0.0.1';
+    APP.HEADER.documentReady = function( $ ) {
+
 		//Prevent this module from loading in other pages
 		if ( $( 'body' ).hasClass( 'onepage' ) ) return false;
 		
@@ -25,6 +26,7 @@ App = ( function ( App, $, window, document ) {
 			handler: function( direction ) {
 				
 				$( this.element ).toggleClass( 'spy-scroll-fixed', direction === 'down' );
+				$( '.header-inner' ).toggleClass( 'spy-scroll-fixed', direction === 'down' );
 
 			},
 			offset: -120
@@ -56,14 +58,10 @@ App = ( function ( App, $, window, document ) {
 		
     };
 
-    App.header = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP.HEADER.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
 
 
 		

@@ -4,13 +4,13 @@
  * <!-- Gallery -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
 	
+    APP.GALLERY               = APP.GALLERY || {};
+	APP.GALLERY.version       = '0.0.1';
+    APP.GALLERY.documentReady = function( $ ) {
+
 		$( '.custom-gallery' ).each( function() {
 			var type = $( this ).data( 'show-type' );
 			
@@ -90,15 +90,12 @@ App = ( function ( App, $, window, document ) {
 		
 		
 		
-	};
-	
-		
-    App.gallery = {
-        documentReady : documentReady        
     };
 
-    App.components.documentReady.push( documentReady );
-    return App;
+    APP.components.documentReady.push( APP.GALLERY.documentReady );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
+
+
 

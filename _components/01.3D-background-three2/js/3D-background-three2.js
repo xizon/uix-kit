@@ -3,13 +3,13 @@
  * <!-- 3D Background 2 -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
+	
+    APP._3D_BACKGROUND_THREE2               = APP._3D_BACKGROUND_THREE2 || {};
+	APP._3D_BACKGROUND_THREE2.version       = '0.0.1';
+    APP._3D_BACKGROUND_THREE2.documentReady = function( $ ) {
 
-
-		
 		//Prevent this module from loading in other pages
 		if ( $( '#3D-background-three-canvas2' ).length == 0 || ! Modernizr.webgl ) return false;
 		
@@ -299,19 +299,13 @@ App = ( function ( App, $, window, document ) {
 
 
 		}
-
 		
     };
 
-    App.threeDimensionalBackground2 = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP._3D_BACKGROUND_THREE2.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
-
+}( APP, jQuery, window, document ) );
 
 
 

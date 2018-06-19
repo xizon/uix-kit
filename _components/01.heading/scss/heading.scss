@@ -1,10 +1,18 @@
 /* ====================================================== 
    <!-- Heading -->    
 /* ====================================================== */
+/*
+ * 1. Header Pinlines
+ * 2. Text Overlay
+ * 3. Show Image Under Text
+ * 4. Custom Underline
+ * 5. Hybrid Heading
+*/
+
 
 /* 
  ---------------------------
- 1) Header Pinlines
+ 1. Header Pinlines
  ---------------------------
  */ 
 .heading-pinline {
@@ -72,12 +80,21 @@
 
 /* 
  ---------------------------
- 2) Text Overlay
+ 2. Text Overlay
  ---------------------------
  */ 
 .heading-overlay {
 	position: relative;
 
+	
+	em {
+		font-style: normal;
+		position: relative;
+		z-index: 1;
+		margin: 0;
+		padding: 0;
+	}
+	
 	&::before {
 		content: attr(data-text);
 		color: rgba(220,220,220,0.5);
@@ -88,16 +105,23 @@
 		position: absolute;
 		top: 0;
 		left: 0;
-		z-index: -1;
+		z-index: 0;
 		transform: scale(2);
 		transform-origin: left center 0;
 	}	
+	
+	&.t-r {
+		&::before {
+			transform-origin: right center 0;
+		}		
+	}
+	
 }
 
 
 /* 
  ---------------------------
- 3) Show Image Under Text
+ 3. Show Image Under Text
  ---------------------------
  */ 
 .heading-fill {
@@ -114,7 +138,7 @@
 
 /* 
  ---------------------------
- 4) Custom Underline
+ 4. Custom Underline
  ---------------------------
  */ 
 .heading-underline {
@@ -141,7 +165,7 @@
 
 /* 
  ---------------------------
- 5) Hybrid Heading
+ 5. Hybrid Heading
  ---------------------------
  */ 
 .heading-hybrid {

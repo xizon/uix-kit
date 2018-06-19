@@ -19,13 +19,15 @@
 	
 */
 
-App = ( function ( App, $, window, document ) {
+
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var pageLoaded = function() {
-		
-		
+	
+
+    APP.FORM_PROGRESS               = APP.FORM_PROGRESS || {};
+	APP.FORM_PROGRESS.version       = '0.0.1';
+    APP.FORM_PROGRESS.pageLoaded    = function() {
+
 		//Prevent this module from loading in other pages
 		if ( !$( 'body' ).hasClass( 'page-form-progress-eff' ) ) return false;
 		
@@ -95,21 +97,16 @@ App = ( function ( App, $, window, document ) {
 		
 			
 		}
+			    
 		
-		
-
-
-	};
-		
-      
-    App.formProgress = {
-        pageLoaded : pageLoaded        
     };
 
-    App.components.pageLoaded.push( pageLoaded );
-    return App;
+    APP.components.pageLoaded.push( APP.FORM_PROGRESS.pageLoaded );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
+
+
 
 
 

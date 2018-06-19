@@ -4,14 +4,13 @@
  * <!-- Advanced Content Slider -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
-		
 	
+    APP.ADVANCED_CONTENT_SLIDER               = APP.ADVANCED_CONTENT_SLIDER || {};
+	APP.ADVANCED_CONTENT_SLIDER.version       = '0.0.2';
+    APP.ADVANCED_CONTENT_SLIDER.documentReady = function( $ ) {
+
 		var $window                   = $( window ),
 			windowWidth               = $window.width(),
 			windowHeight              = $window.height(),
@@ -321,17 +320,12 @@ App = ( function ( App, $, window, document ) {
 			
 		}
 		
-
 		
-		
-	};
-	
-		
-    App.advancedContentSlider = {
-        documentReady : documentReady        
     };
 
-    App.components.documentReady.push( documentReady );
-    return App;
+    APP.components.documentReady.push( APP.ADVANCED_CONTENT_SLIDER.documentReady );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
+
+

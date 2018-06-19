@@ -3,11 +3,12 @@
  * <!-- 3D Model -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
-
+	
+    APP._3D_MODEL               = APP._3D_MODEL || {};
+	APP._3D_MODEL.version       = '0.0.1';
+    APP._3D_MODEL.documentReady = function( $ ) {
 
 		
 		//Prevent this module from loading in other pages
@@ -252,24 +253,12 @@ App = ( function ( App, $, window, document ) {
 			
 		
 
-
-
 		
     };
 
-    App.threeDimensionalModel = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP._3D_MODEL.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
-
-
-
-
-
-
+}( APP, jQuery, window, document ) );
 
 

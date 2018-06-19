@@ -4,35 +4,13 @@
  * <!-- Get all custom attributes of an element like "data-*" -->
  *************************************
  */
-
-/* Get all attributes of an element using jQuery */
-(function(old) {
-  $.fn.attr = function() {
-    if(arguments.length === 0) {
-      if(this.length === 0) {
-        return null;
-      }
-
-      var obj = {};
-      $.each(this[0].attributes, function() {
-        if(this.specified) {
-          obj[this.name] = this.value;
-        }
-      });
-      return obj;
-    }
-
-    return old.apply(this, arguments);
-  };
-})($.fn.attr);
-
-
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
+	
+    APP.GET_CUSTOM_ATTRS               = APP.GET_CUSTOM_ATTRS || {};
+	APP.GET_CUSTOM_ATTRS.version       = '0.0.1';
+    APP.GET_CUSTOM_ATTRS.documentReady = function( $ ) {
+
 		$( '[data-my-custom-datas]' ).each( function() {
 			var $this         = $( this );
 
@@ -52,15 +30,35 @@ App = ( function ( App, $, window, document ) {
 
 		});
 		
-	};
-	
-		
-    App.getAllCustomAttrs = {
-        documentReady : documentReady        
     };
 
-    App.components.documentReady.push( documentReady );
-    return App;
+    APP.components.documentReady.push( APP.GET_CUSTOM_ATTRS.documentReady );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
 
+
+
+/*
+ * Get all attributes of an element using jQuery
+ *
+ */
+( function( old ) {
+  $.fn.attr = function() {
+    if(arguments.length === 0) {
+      if(this.length === 0) {
+        return null;
+      }
+
+      var obj = {};
+      $.each(this[0].attributes, function() {
+        if(this.specified) {
+          obj[this.name] = this.value;
+        }
+      });
+      return obj;
+    }
+
+    return old.apply(this, arguments);
+  };
+} )( $.fn.attr );

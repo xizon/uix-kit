@@ -3,11 +3,13 @@
  * <!-- Periodical Scroll -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
 	
+    APP.PERIODICAL_SCROLL               = APP.PERIODICAL_SCROLL || {};
+	APP.PERIODICAL_SCROLL.version       = '0.0.1';
+    APP.PERIODICAL_SCROLL.documentReady = function( $ ) {
+
 		$( '[data-periodical-scroll-container]' ).each( function() {
 
 			var $this       = $( this ),
@@ -60,17 +62,12 @@ App = ( function ( App, $, window, document ) {
 			
 			
 		});
-	
-		
 		
     };
 
-    App.periodicalScroll = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP.PERIODICAL_SCROLL.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
+}( APP, jQuery, window, document ) );
 
-}( App, jQuery, window, document ) );
 

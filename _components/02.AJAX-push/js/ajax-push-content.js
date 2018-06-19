@@ -3,11 +3,13 @@
  * <!-- Ajax Push Content  -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
-		
+	
+    APP.AJAX_PUSH_CONTENT               = APP.AJAX_PUSH_CONTENT || {};
+	APP.AJAX_PUSH_CONTENT.version       = '0.0.2';
+    APP.AJAX_PUSH_CONTENT.documentReady = function( $ ) {
+
         var $window                  = $( window ),
 		    windowWidth              = $window.width(),
 		    windowHeight             = $window.height();
@@ -90,7 +92,6 @@ App = ( function ( App, $, window, document ) {
 				},	
 				success  : function( response ) {
 					
-
 					//A function to be called if the request succeeds
 					ajaxSucceeds( container, url, $( response ).find( target ).html() );
 
@@ -100,7 +101,17 @@ App = ( function ( App, $, window, document ) {
 				},
 				beforeSend: function() {
 
+					TweenMax.to( container.find( '.ajax-content-loader' ), 0.3, {
+						css: {
+							opacity    : 1
+						},
+						ease   : Power2.easeOut
+					});		
+
+
 					container.html( '<div class="ajax-content-loader">'+loading+'</div>' ).promise().done( function(){
+
+						
 						
 						TweenMax.set( container.find( '.ajax-content-loader' ), {
 							css         : {
@@ -113,6 +124,7 @@ App = ( function ( App, $, window, document ) {
 							}
 						});	
 					});
+
 					
 
 
@@ -187,17 +199,11 @@ App = ( function ( App, $, window, document ) {
 		
 		
 		
-	
-		
     };
 
-    App.ajaxPushContent = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP.AJAX_PUSH_CONTENT.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
 
 

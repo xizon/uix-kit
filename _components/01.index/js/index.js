@@ -1,27 +1,26 @@
 /* 
  *************************************
- * <!-- Custom Core Scripts & Stylesheets -->
+ * <!-- Custom Core Scripts  -->
  *************************************
  */
 
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
     
-    var documentReady = function( $ ) {
-    
-		
+    APP.INDEX               = APP.INDEX || {};
+	APP.INDEX.version       = '0.0.1';
+    APP.INDEX.documentReady = function( $ ) {
+
 	    //your code here...
-
 		
     };
 
-    App.index = {
-        documentReady : documentReady        
-    };
 
-    App.components.documentReady.push( documentReady );
-    return App;
+    APP.components.documentReady.push( APP.INDEX.documentReady );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
+
+
 
 

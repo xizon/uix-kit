@@ -4,11 +4,12 @@
  * <!-- 3D Carousel -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
+	
+    APP._3D_CAROUSEL               = APP._3D_CAROUSEL || {};
+	APP._3D_CAROUSEL.version       = '0.0.1';
+    APP._3D_CAROUSEL.documentReady = function( $ ) {
 
 		$( '.custom-carousel-3d' ).each( function() {
 			var $this             = $( this ),
@@ -295,14 +296,11 @@ App = ( function ( App, $, window, document ) {
 		});
 
 		
-		
     };
 
-    App.threeDimensionalCarousel = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP._3D_CAROUSEL.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
+}( APP, jQuery, window, document ) );
 
-}( App, jQuery, window, document ) );
+

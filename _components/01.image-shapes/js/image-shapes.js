@@ -4,12 +4,13 @@
  * <!-- Image Shapes -->
  *************************************
  */	
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
-		
-		
+	
+    APP.IMAGE_SHAPES               = APP.IMAGE_SHAPES || {};
+	APP.IMAGE_SHAPES.version       = '0.0.1';
+    APP.IMAGE_SHAPES.documentReady = function( $ ) {
+
         var $window      = $( window ),
 		    windowWidth  = $window.width(),
 		    windowHeight = $window.height();
@@ -95,22 +96,14 @@ App = ( function ( App, $, window, document ) {
 
 			});
 			
-		}
-		
-		
-
-		
-	
-
+		}	
 		
     };
 
-    App.imageShapes = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP.IMAGE_SHAPES.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
+}( APP, jQuery, window, document ) );
 
-}( App, jQuery, window, document ) );
+
 

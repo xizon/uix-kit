@@ -3,10 +3,12 @@
  * <!-- Progress Bar -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
+	
+    APP.PROGRESSBAR               = APP.PROGRESSBAR || {};
+	APP.PROGRESSBAR.version       = '0.0.4';
+    APP.PROGRESSBAR.documentReady = function( $ ) {
 
 		var waypoints = $( '[data-progressbar-percent]' ).waypoint({
 			handler: function( direction ) {
@@ -47,20 +49,11 @@ App = ( function ( App, $, window, document ) {
 		});
 
 		
-		
     };
 
-    App.progressBar = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP.PROGRESSBAR.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
-
-
-
-
+}( APP, jQuery, window, document ) );
 
 

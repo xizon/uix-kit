@@ -18,6 +18,7 @@ Hi, there!
 
 Uix Kit bundles the following third-party resources:
 
+- [jQuery](https://jquery.com/)
 - [Font Awesome](http://fontawesome.io)
 - [jQuery Easing](http://gsgd.co.uk/sandbox/jquery/easing/)
 - [Flexslider](https://github.com/woocommerce/FlexSlider)

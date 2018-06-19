@@ -4,13 +4,13 @@
  * <!-- Mega Menu -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
-		
+	
+    APP.MEGAMENU               = APP.MEGAMENU || {};
+	APP.MEGAMENU.version       = '0.0.1';
+    APP.MEGAMENU.documentReady = function( $ ) {
+
 		var $window      = $( window ),
 			windowWidth  = $window.width(),
 			windowHeight = $window.height();
@@ -161,18 +161,12 @@ App = ( function ( App, $, window, document ) {
 
 			}
 		}
-		
-
-		
-		
+			
 		
     };
 
-    App.megamenu = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP.MEGAMENU.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
+}( APP, jQuery, window, document ) );
 
-}( App, jQuery, window, document ) );

@@ -3,11 +3,12 @@
  * <!-- 3D Background 2 -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
-
+	
+    APP._3D_BACKGROUND_THREE               = APP._3D_BACKGROUND_THREE || {};
+	APP._3D_BACKGROUND_THREE.version       = '0.0.1';
+    APP._3D_BACKGROUND_THREE.documentReady = function( $ ) {
 
 		
 		//Prevent this module from loading in other pages
@@ -212,18 +213,10 @@ App = ( function ( App, $, window, document ) {
 		
     };
 
-    App.threeDimensionalBackground2 = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP._3D_BACKGROUND_THREE.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
-
-
-
-
+}( APP, jQuery, window, document ) );
 
 
 

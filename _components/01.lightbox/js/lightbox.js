@@ -4,12 +4,15 @@
  * <!-- Custom Lightbox -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var pageLoaded = function() {
-		
 	
+
+    APP.LIGHTBOX               = APP.LIGHTBOX || {};
+	APP.LIGHTBOX.version       = '0.0.7';
+    APP.LIGHTBOX.pageLoaded    = function() {
+
 		if ( $( '.custom-lightbox-overlay' ).length == 0 ) {
 			$( 'body' ).prepend( '<div class="custom-lightbox-overlay"><div class="lb-container"><div class="html"></div><span class="lb-close"></span><p class="title"></p></div></div><div class="custom-lightbox-overlay-mask"></div><div class="custom-lightbox-close-fixed"></div>' );
 		}
@@ -271,17 +274,13 @@ App = ( function ( App, $, window, document ) {
 			$lbMask.hide();
 		}
 		
-		
+		    
 		
     };
 
-    App.customLightbox = {
-        pageLoaded : pageLoaded        
-    };
+    APP.components.pageLoaded.push( APP.LIGHTBOX.pageLoaded );
+    return APP;
 
-    App.components.pageLoaded.push( pageLoaded );
-    return App;
-
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
 
 

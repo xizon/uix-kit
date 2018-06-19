@@ -3,12 +3,13 @@
  * <!-- 3D Particle Effect -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
+	
+    APP._3D_PARTICLE               = APP._3D_PARTICLE || {};
+	APP._3D_PARTICLE.version       = '0.0.1';
+    APP._3D_PARTICLE.documentReady = function( $ ) {
 
-		
 		//Prevent this module from loading in other pages
 		if ( $( '#3D-particle-effect-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
 		
@@ -192,21 +193,13 @@ App = ( function ( App, $, window, document ) {
 			
 		
 		}
-
-
-		
-		
 		
     };
 
-    App.threeDimensionalParticleEffect = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP._3D_PARTICLE.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
 
 
 

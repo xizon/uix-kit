@@ -4,12 +4,13 @@
  * <!-- Bulleted List -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
-		
+	
+    APP.BULLETED_LIST               = APP.BULLETED_LIST || {};
+	APP.BULLETED_LIST.version       = '0.0.1';
+    APP.BULLETED_LIST.documentReady = function( $ ) {
+
 
 		// Icon bulleted lists
 		$( '[data-list-bullet]' ).each( function() {
@@ -18,16 +19,11 @@ App = ( function ( App, $, window, document ) {
 		});
 
 		
-	
-		
-	};
-	
-		
-    App.bulletedList = {
-        documentReady : documentReady        
     };
 
-    App.components.documentReady.push( documentReady );
-    return App;
+    APP.components.documentReady.push( APP.BULLETED_LIST.documentReady );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
+
+

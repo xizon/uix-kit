@@ -3,11 +3,13 @@
  * <!-- Pricing -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
-    
+	
+    APP.PRICING               = APP.PRICING || {};
+	APP.PRICING.version       = '0.0.2';
+    APP.PRICING.documentReady = function( $ ) {
+
 		
 		var $window      = $( window ),
 			windowWidth  = $window.width(),
@@ -105,22 +107,12 @@ App = ( function ( App, $, window, document ) {
 		}
 		
 		
-
-
 		
     };
 
-    App.pricing = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP.PRICING.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
-
-
-
-
+}( APP, jQuery, window, document ) );
 
 

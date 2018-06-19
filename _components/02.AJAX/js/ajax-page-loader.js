@@ -3,11 +3,13 @@
  * <!-- Ajax Page Loader (Loading A Page via Ajax Into Div)  -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
-		
+	
+    APP.AJAX_PAGE_LOADER               = APP.AJAX_PAGE_LOADER || {};
+	APP.AJAX_PAGE_LOADER.version       = '0.0.4';
+    APP.AJAX_PAGE_LOADER.documentReady = function( $ ) {
+
         var $window                  = $( window ),
 		    windowWidth              = $window.width(),
 		    windowHeight             = $window.height();
@@ -416,19 +418,13 @@ App = ( function ( App, $, window, document ) {
 		});		
 		
 
-	
 		
     };
 
-    App.ajaxPageLoader = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP.AJAX_PAGE_LOADER.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
-
+}( APP, jQuery, window, document ) );
 
 
 
@@ -451,19 +447,23 @@ App = ( function ( App, $, window, document ) {
  
         this.each( function() {
 
-			App.commonHeight.pageLoaded(); //Common Height
-			App.customLightbox.pageLoaded(); //Custom Lightbox
-			App.modalbox.documentReady($); //Modal Dialog
-			App.parallax.documentReady($); //Parallax
-			App.videos.documentReady($); //Videos
-			App.setBG.documentReady($); //Specify a background image
-			App.getAllCustomAttrs.documentReady($); //Get all custom attributes of an element like "data-*"
-			App.pagination.documentReady($); //Pagination
-			App.form.documentReady($); //Form
-			App.flexSlider.documentReady($); //Flexslider
-			App.retina.documentReady($); //Retina Graphics for Website
-			App.showMoreLess.documentReady($); //Show More Less
-			App.dropdownMenu.documentReady($); //Dropdown Menu
+			APP.COMMON_HEIGHT.pageLoaded(); //Common Height
+			APP.LIGHTBOX.pageLoaded(); //Custom Lightbox
+			APP.MODAL_DIALOG.documentReady($); //Modal Dialog
+			APP.PARALLAX.documentReady($); //Parallax
+			APP.VIDEOS.documentReady($); //Videos
+			APP.SET_BG.documentReady($); //Specify a background image
+			APP.GET_CUSTOM_ATTRS.documentReady($); //Get all custom attributes of an element like "data-*"
+			APP.PAGINATION.documentReady($); //Pagination
+			APP.FORM.documentReady($); //Form
+			APP.DYNAMIC_DD_LIST.documentReady($); //Dynamic Drop Down List from JSON
+			APP.FLEXSLIDER.documentReady($); //Flexslider
+			APP.RETINA.documentReady($); //Retina Graphics for Website
+			APP.SHOW_MORELESS.documentReady($); //Show More Less
+			APP.DROPDOWN_MENU.documentReady($); //Dropdown Menu
+			APP.COUNTER.documentReady($); //Counter
+			APP.SCROLL_REVEAL.documentReady($); //Scroll Reveal
+			
 
 			//Other functions here
 
@@ -501,8 +501,8 @@ App = ( function ( App, $, window, document ) {
  
         this.each( function() {
 
-			var scipts_pageLoaded    = App.components.pageLoaded,
-				scipts_documentReady = App.components.documentReady;
+			var scipts_pageLoaded    = APP.components.pageLoaded,
+				scipts_documentReady = APP.components.documentReady;
 
 
 			for ( var i = 0; i < scipts_pageLoaded.length; i++ ) {

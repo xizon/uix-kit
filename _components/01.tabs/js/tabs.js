@@ -4,12 +4,13 @@
  * <!-- Tabs -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ){
-		
+	
+    APP.TABS               = APP.TABS || {};
+	APP.TABS.version       = '0.1.2';
+    APP.TABS.documentReady = function( $ ) {
+
 		$( '.custom-tabs' ).each( function( id ) {
 			var $this             = $( this ),
 			    $li               = $this.find( 'ul > li' ),
@@ -176,16 +177,14 @@ App = ( function ( App, $, window, document ) {
 			
 		});
 		
-
 		
-	};
-		
-      
-    App.customTabs = {
-        documentReady : documentReady        
-    };  
-    App.components.documentReady.push( documentReady );
-    return App;
+    };
 
-}( App, jQuery, window, document ) );
+    APP.components.documentReady.push( APP.TABS.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
 

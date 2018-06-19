@@ -4,11 +4,13 @@
  * <!-- Parallax -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
-        
+	
+    APP.PARALLAX               = APP.PARALLAX || {};
+	APP.PARALLAX.version       = '0.0.3';
+    APP.PARALLAX.documentReady = function( $ ) {
+
         var $window      = $( window ),
 		    windowWidth  = $window.width(),
 		    windowHeight = $window.height();
@@ -244,22 +246,15 @@ App = ( function ( App, $, window, document ) {
 			
 		
 	
-		}
+		}	
 		
-	
-
     };
 
-	
+    APP.components.documentReady.push( APP.PARALLAX.documentReady );
+    return APP;
 
-    App.parallax = {
-        documentReady : documentReady        
-    };
+}( APP, jQuery, window, document ) );
 
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
 
 
 

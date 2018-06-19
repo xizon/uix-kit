@@ -12,24 +12,22 @@
  *************************************
  */
 
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var pageLoaded = function() {
-		
-		$( '.common-height' ).commonHeight();
-		
+	
 
+    APP.COMMON_HEIGHT               = APP.COMMON_HEIGHT || {};
+	APP.COMMON_HEIGHT.version       = '0.0.1';
+    APP.COMMON_HEIGHT.pageLoaded    = function() {
+
+	    $( '.common-height' ).commonHeight();
+		
     };
 
-    App.commonHeight = {
-        pageLoaded : pageLoaded        
-    };
+    APP.components.pageLoaded.push( APP.COMMON_HEIGHT.pageLoaded );
+    return APP;
 
-    App.components.pageLoaded.push( pageLoaded );
-    return App;
-
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
 
 
 

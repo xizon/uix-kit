@@ -4,11 +4,13 @@
  * <!-- Accordion Background Images -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-   
-   
-    var documentReady = function( $ ) {
+	
+    APP.ACCORDION_BG               = APP.ACCORDION_BG || {};
+	APP.ACCORDION_BG.version       = '0.0.4';
+    APP.ACCORDION_BG.documentReady = function( $ ) {
+		
 		
         var $window      = $( window ),
 		    windowWidth  = $window.width(),
@@ -99,15 +101,14 @@ App = ( function ( App, $, window, document ) {
 			
 		});
 		
-		
-	};
 	
 		
-    App.accordionImg = {
-        documentReady : documentReady        
     };
 
-    App.components.documentReady.push( documentReady );
-    return App;
+    APP.components.documentReady.push( APP.ACCORDION_BG.documentReady );
+    return APP;
 
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
+
+
+

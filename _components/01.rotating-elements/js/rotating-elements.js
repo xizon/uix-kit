@@ -3,10 +3,12 @@
  * <!-- Rotating Elements -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
+	
+    APP.ROTATING_EL               = APP.ROTATING_EL || {};
+	APP.ROTATING_EL.version       = '0.0.1';
+    APP.ROTATING_EL.documentReady = function( $ ) {
 
 
 		$( '[data-pointer-to-deg]' ).each( function()  {
@@ -74,17 +76,12 @@ App = ( function ( App, $, window, document ) {
 		
 
 			
-
 		
     };
 
-    App.rotatingElements = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP.ROTATING_EL.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
+}( APP, jQuery, window, document ) );
 
 

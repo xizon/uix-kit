@@ -3,10 +3,12 @@
  * <!-- 3D Background -->
  *************************************
  */
-App = ( function ( App, $, window, document ) {
+APP = ( function ( APP, $, window, document ) {
     'use strict';
-    
-    var documentReady = function( $ ) {
+	
+    APP._3D_BACKGROUND               = APP._3D_BACKGROUND || {};
+	APP._3D_BACKGROUND.version       = '0.0.1';
+    APP._3D_BACKGROUND.documentReady = function( $ ) {
 
 		//grab each 3dAnimate element and pass it into the animate function along with the config data
 		$( '[data-3d-animate]' ).each( function( index, element ) {
@@ -117,21 +119,14 @@ App = ( function ( App, $, window, document ) {
 
 			});
 
-		}
+		}	
 		
     };
 
-    App.threeDimensionalBackground = {
-        documentReady : documentReady        
-    };
+    APP.components.documentReady.push( APP._3D_BACKGROUND.documentReady );
+    return APP;
 
-    App.components.documentReady.push( documentReady );
-    return App;
-
-}( App, jQuery, window, document ) );
-
-
-
+}( APP, jQuery, window, document ) );
 
 
 

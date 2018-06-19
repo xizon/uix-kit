@@ -801,9 +801,13 @@ $controls-merge-button-width: 20%;
 		visibility: hidden;
 		pointer-events: none;
 		transform: translateY(-15px);
-		overflow-y: auto; 
-		max-height: 300px;
-
+	
+		> div {
+			overflow-y: auto; 
+			max-height: 300px;	
+		}
+		
+		
 		&::before {
 			position: absolute;
 			display: block;
