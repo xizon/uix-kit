@@ -551,6 +551,7 @@ $control-focus-bordercolor2: transparent;
     position: relative;
 	cursor: pointer;
 	display: inline-block;
+	height: 2.71875rem;
 	color: $control-text-color;
 	@include transition-default();
 	
@@ -693,6 +694,8 @@ $controls-merge-button-width: 20%;
 .custom-select {
 	position: relative;
 	text-align: left;
+	margin-right: .3rem;
+	
 }
 
 .custom-select-wrapper {
@@ -779,7 +782,8 @@ $controls-merge-button-width: 20%;
 
 	.custom-select-label {
 		display: inline-block;
-		margin-left: .5rem;
+		margin-left: .3rem;
+		margin-right: .3rem;
 		@include control-label-text();
 	}
 

@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.8.0
- * ## Last Update         :  June 20, 2018
+ * ## Version             :  1.8.1
+ * ## Last Update         :  June 22, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -22,69 +22,71 @@
 	---------------------------
 	
 	
-	1. Header 
+	1. Header Area 
     2. Loader 
     3. Back to Top 
     4. Get all custom attributes of an element like "data-*" 
     5. Navigation 
-    6. Common Height 
-    7. Videos 
+    6. Videos 
+    7. Common Height 
     8. Mega Menu 
     9. Dropdown Categories 
     10. Pagination 
     11. Specify a background image 
     12. Modal Dialog 
-    13. 3D Background 
-    14. 3D Background 2 
+    13. Mobile Menu 
+    14. 3D Background 
     15. 3D Background 2 
-    16. 3D Carousel 
-    17. 3D Model 
-    18. 3D Pages 
-    19. 3D Particle Effect 
-    20. Accordion 
-    21. Accordion Background Images 
-    22. Advanced Content Slider 
-    23. Advanced Slider (Special Effects) 
-    24. Advanced Slider (Basic) 
-    25. Counter 
-    26. Dropdown Menu 
-    27. Dynamic Drop Down List from JSON 
-    28. Flexslider 
-    29. Form 
-    30. Form Progress 
-    31. jQuery UI Datepicker 1.11.4 
-    32. Gallery 
-    33. Image Shapes 
-    34. Custom Core Scripts  
-    35. Custom Lightbox 
-    36. Bulleted List 
-    37. Posts List With Ajax 
-    38. Fullwidth List of Split 
-    39. Mobile Menu 
-    40. Mousewheel Interaction 
-    41. Multiple Items Carousel 
-    42. Full Page/One Page Transition 
-    43. Full Page/One Page Transition 2 
-    44. Parallax 
-    45. Periodical Scroll 
-    46. Pricing 
-    47. Progress Bar 
-    48. Retina Graphics for Website 
-    49. Rotating Elements 
-    50. Scroll Reveal 
-    51. Show More Less 
-    52. Smooth Scrolling When Clicking An Anchor Link 
-    53. Source Code View 
-    54. Sticky Elements 
-    55. Tabs 
-    56. Team Focus 
-    57. Testimonials Carousel 
-    58. Text effect 
-    59. Timeline 
-    60. Ajax Page Loader (Loading A Page via Ajax Into Div)  
-    61. Ajax Push Content  
-    62. GSAP Plugins 
-    63. Three.js Plugins 
+    16. 3D Background 2 
+    17. 3D Carousel 
+    18. 3D Model 
+    19. 3D Pages 
+    20. 3D Particle Effect 
+    21. Accordion 
+    22. Accordion Background Images 
+    23. Advanced Content Slider 
+    24. Advanced Slider (Special Effects) 
+    25. Advanced Slider (Basic) 
+    26. Counter 
+    27. Dropdown Menu 
+    28. Dropdown Menu 2 (Multi-level drop-down navigation) 
+    29. Dynamic Drop Down List from JSON 
+    30. Flexslider 
+    31. Form 
+    32. Form Progress 
+    33. jQuery UI Datepicker 1.11.4 
+    34. Gallery 
+    35. Image Shapes 
+    36. Custom Core Scripts  
+    37. Custom Lightbox 
+    38. Bulleted List 
+    39. Posts List With Ajax 
+    40. Fullwidth List of Split 
+    41. Mousewheel Interaction 
+    42. Multiple Items Carousel 
+    43. Full Page/One Page Transition 
+    44. Full Page/One Page Transition 2 
+    45. Parallax 
+    46. Periodical Scroll 
+    47. Pricing 
+    48. Progress Bar 
+    49. Retina Graphics for Website 
+    50. Rotating Elements 
+    51. Scroll Reveal 
+    52. Show More Less 
+    53. Smooth Scrolling When Clicking An Anchor Link 
+    54. Source Code View 
+    55. Sticky Elements 
+    56. Tabs 
+    57. Team Focus 
+    58. Testimonials Carousel 
+    59. Text effect 
+    60. Timeline 
+    61. Vertical Menu 
+    62. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    63. Ajax Push Content  
+    64. GSAP Plugins 
+    65. Three.js Plugins 
 
 
 */
@@ -193,7 +195,7 @@ var APP = (function ( $, window, document ) {
 
 /* 
  *************************************
- * <!-- Header -->
+ * <!-- Header Area -->
  *************************************
  */
 APP = ( function ( APP, $, window, document ) {
@@ -1280,8 +1282,11 @@ APP = ( function ( APP, $, window, document ) {
 		
 		// Initialize mega menu
 		function megaMenuInit( w ) {
-			var maxWidth     = 1170, //The maximum width of the mega menu wrapper
-			    perDefaultW  = 220; //Default width of each column
+			var $menuWrap  = $( '.menu-container:not(.mobile)' ),
+				maxWidth     = 1170, //The maximum width of the mega menu wrapper
+				
+				//This value is equal to the $nav-mega-li-w variable in the SCSS
+			    perDefaultW  = 270; //Default width of each column
 
 			
 			//Basic Container
@@ -1291,7 +1296,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			// Remove the html tag for mega menu item
-			$( 'li.multi-column  > ul .multi-column-title' ).each( function()  {
+			$menuWrap.find( 'li.multi-column  > ul .multi-column-title' ).each( function()  {
 				var mega_old_item = $( this ).html();
 				if ( mega_old_item != '' ) {
 					$( this ).html( mega_old_item.replace(/<[^>]+>/g, '' ) );
@@ -1301,7 +1306,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			if ( w > 768 ){
 
-				$( 'li.multi-column' ).each( function() {
+				$menuWrap.find( 'li.multi-column' ).each( function() {
 					var root_li          = $( this ),
 						col_total        = root_li.find( '> ul .multi-column-title' ).length,
 						col_div          = root_li.find( '> ul .multi-column-title' ).closest( 'li' ),
@@ -1330,7 +1335,13 @@ APP = ( function ( APP, $, window, document ) {
 							mega_div_w       = maxWidth;
 							mega_single_w    = maxWidth/col_total - 2.888;
 							
+							//Resetting the width of each column
 							mega_div.find( '> li' ).css( {
+								'width' : mega_single_w + 'px'
+							} );
+							
+							//Resetting the width of each <li> tag
+							mega_div.find( '> li ul li' ).css( {
 								'width' : mega_single_w + 'px'
 							} );
 							
@@ -1350,9 +1361,17 @@ APP = ( function ( APP, $, window, document ) {
 							
 						} else {
 							
+							//Resetting the width of each column
 							mega_div.find( '> li' ).css( {
 								'width' : perDefaultW + 'px'
-							} );				
+							} );	
+							
+							//Resetting the width of each <li> tag
+							mega_div.find( '> li ul li' ).css( {
+								'width' : perDefaultW + 'px'
+							} );
+								
+							
 							
 							var chkWidth = parseFloat( root_li_left  + mega_div_w );
 
@@ -1674,6 +1693,147 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
+
+/* 
+ *************************************
+ * <!-- Mobile Menu -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.MOBILE_MENU               = APP.MOBILE_MENU || {};
+	APP.MOBILE_MENU.version       = '0.0.1';
+    APP.MOBILE_MENU.documentReady = function( $ ) {
+
+		var $window      = $( window ),
+			windowWidth  = $window.width(),
+			windowHeight = $window.height();
+
+
+
+
+		//Show Toolbar when viewing site for WordPress
+		var waypoints = $( '.admin-bar .menu-mobile-toggle' ).waypoint({
+			handler: function( direction ) {
+
+				$( this.element ).toggleClass( 'spy-scroll-postion', direction === 'down' );
+
+			},
+			offset: -46
+		});
+
+
+
+		// Mobile Menu
+		var $toggle     = $( '.menu-mobile-toggle' ),
+			$toggleBody = $( 'body' );
+
+
+
+		//Add mobile menu to your website
+		$( 'nav.menu-container' ).clone().addClass( 'mobile' ).appendTo( 'body' );
+		//Wait until previous .appendTo() is complete
+		$.when( $( '.menu-container.mobile' ).length > 0 ).then( function(){
+
+
+			$toggle.on( 'touchstart click', function( e ) {
+				e.preventDefault();
+
+				//Prevents further propagation of the current event in the capturing and bubbling phases.
+				e.stopPropagation(); 
+
+				$( this ).toggleClass( 'open' );
+				if ( $( this ).hasClass( 'open' ) ) {
+
+					//Add mobile brand
+					var logoURL = $( '.mobile-brand img' ).attr( 'src' );
+					if ( typeof logoURL !== typeof undefined && logoURL != '' ) {
+						if ( logoURL.indexOf( 'blank.gif' ) >= 0 ) $( '.mobile-inner' ).css( 'margin-top', '-70px' );
+					}	
+
+					//Toggle effect
+					$toggleBody.addClass( 'menu-open' );
+				} else {
+					$toggleBody.removeClass( 'menu-open' );
+				}
+
+			});
+
+			//Mobile menu mask event
+			$( '.menu-mobile-mask' ).on( 'click', function() {
+				$toggle.removeClass( 'open' );
+				$toggleBody.removeClass( 'menu-open' );
+			});
+
+
+
+
+			// Menu click event
+			$( '.menu-container.mobile ul li' ).on( 'click', function( e ) {
+
+				  var arrowText = $( this ).find( '.mobile-nav-arrow' ).text().replace( /(.).*\1/g, "$1" );
+				  $( this ).find( '> .sub-menu:not(.sub-sub)' ).toggle();
+
+				  if ( arrowText != '-' ) {
+					  $( this ).find( '.mobile-nav-arrow' ).text( '-' );
+				  } else {
+					  $( this ).find( '.mobile-nav-arrow' ).text( '+' );
+				  }
+
+
+			} );
+
+
+			sidrmenuInit( windowWidth ); 
+
+			// Close the menu on window change
+			$window.on( 'resize', function() {
+				// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+				if ( $window.width() != windowWidth ) {
+
+					// Update the window width for next time
+					windowWidth = $window.width();
+
+					// Do stuff here
+					$toggleBody.removeClass( 'menu-open' );
+					$toggle.removeClass( 'open' );
+					sidrmenuInit( windowWidth );
+
+
+				}
+			});
+
+
+		});
+
+
+
+
+		function sidrmenuInit( w ) {
+
+			if ( w <= 768 ) {
+				$( '.menu-container.mobile .menu-main > li' ).each( function() {
+					if ( $( this ).find( 'ul' ).length > 0 ) {
+						if ( $( this ).find( '.mobile-nav-arrow' ).length < 1 ) $( this ).prepend( '<em class="mobile-nav-arrow">+</em>' );
+						$( this ).find( 'ul ul' ).addClass( 'sub-sub' );
+						$( this ).find( ' > a' ).attr( 'href', 'javascript:void(0);' );
+					}
+				} );		
+			}
+
+
+		}
+		
+    };
+
+    APP.components.documentReady.push( APP.MOBILE_MENU.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
 /* 
  *************************************
  * <!-- 3D Background -->
@@ -1683,84 +1843,142 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP._3D_BACKGROUND               = APP._3D_BACKGROUND || {};
-	APP._3D_BACKGROUND.version       = '0.0.1';
+	APP._3D_BACKGROUND.version       = '0.0.2';
     APP._3D_BACKGROUND.documentReady = function( $ ) {
+
 
 		//grab each 3dAnimate element and pass it into the animate function along with the config data
 		$( '[data-3d-animate]' ).each( function( index, element ) {
-			var a = $( element ).data( '3d-animate' );
+			var config      = $( element ).data( '3d-animate' );
 			
-			if ( Object.prototype.toString.call( a ) =='[object Array]' ) {
-				animate3dMultiElement( a[0], a[1], element );
-			} else {
-				animate3dElement( a, $( this ) );
+			if( typeof config === typeof undefined ) {
+				config = false;
+			}
+
+			if ( config ) {
+				
+				if ( Object.prototype.toString.call( config.offset ) == '[object Array]' ) {
+					animate3dMultiElement( config.offset[0], config.offset[1], element, config.reset );
+				} else {
+					animate3dElement( config.offset, element, config.reset );
+				}
+
 			}
 			
 			
 		});
+		
 		
 	
 		/*
 		 * Sets an animation for each element
 		 *
 		 * @param  {number} base           - Base offset value.
-		 * @param  {object} element        - An HTML element.
+		 * @param  {object} obj            - An HTML element.
+		 * @param  {boolean} reset         - Reset block on mouse leave
 		 * @return {void}                  - The constructor.
 		 */
-		function animate3dElement( base, element ) {
+		function animate3dElement( base, obj, reset ) {
 
-			var $el     = element,
-				w       = $( window ).width(),
-				h       = $( window ).height();
+			var $el      = $( obj ),
+				w        = $el.innerWidth(),
+				h        = $el.innerHeight();
+			
 
-			$( window ).on( 'mousemove touchmove', function( e ) {
-				var offsetX          = 0.5 - e.pageX / w, // cursor X
-					offsetY          = 0.5 - e.pageY / h, // cursor Y
-					dy               = e.pageY - h / 2, // poster center vert.
-					dx               = e.pageX - w / 2, // poster center hor.
-					theta            = Math.atan2(dy, dx), // angle b/w cursor and poster center in RAD
-					angle            = theta * 180 / Math.PI - 90, // convert rad to => degrees
-					offsetEl         = base,
-					transformEl      = 'translateY(' + -offsetX * offsetEl + 'px) rotateX(' + (-offsetY * offsetEl) + 'deg) rotateY(' + (offsetX * (offsetEl * 2)) + 'deg)'; // poster transform
+//			TweenMax.set( $el, {
+//				perspective    : 500,
+//				transformStyle : "preserve-3d"
+//			});
 
-				// get angle
-				if ( angle < 0 ) {
-					angle = angle + 360;
+
+			
+			// mouse move on block
+			$( obj ).on( 'mousemove touchmove', function( e ) {
+				
+				var mX, 
+					mY,
+					rmX,
+					rmY,
+					touches = e.originalEvent.touches;
+			
+				if ( touches && touches.length ) {
+
+					mX = touches[0].pageX;
+					mY = touches[0].pageY;
+
+				} else {
+
+					mX = e.pageX;
+					mY = e.pageY;
 				}
-
-
-				// poster transform
-				$el.css({
-					'transform' : transformEl  
-				});
-
-			});
-
+				
+				//Find mouse position relative to element
+				rmX = mX - $( this ).offset().left;
+				rmY = mY - $( this ).offset().top;	
+				
+				//console.log('X: ' + rmX + ' Y: ' + rmY );
 	
+				
+				// function to run matrix3D effect on block
+				var tX = mousePosition( rmX, w ),
+					tY = mousePosition( rmY, h );
+
+
+				TweenMax.to( $( this ), 0.2, {
+					rotationY          : tX,
+					rotationX          : tY,
+					backgroundPosition : ( tX + 120 ) + "% 50%",
+				});
+				
+				
+				
+			});
+				
+			
+			if ( reset ) {
+				$( obj ).on( 'mouseleave touchcancel', function() {
+					TweenMax.to( $( this ), 0.5, {
+						rotationY          : 0,
+						rotationX          : 0,
+						backgroundPosition : "120% 50%"
+					});
+				});	
+			}
+				
+
+
+			// make some calculations for mouse position
+			function mousePosition( mousePos, dimension ) {
+				return ( Math.floor( mousePos / dimension * (base*2) ) - base );
+			}
+
+			
 		}
 			
+		
 		
 		/*
 		 * Sets an animation with parallax for each element
 		 *
 		 * @param  {number} base           - Base offset value.
 		 * @param  {number} multiple       - The power of target number.
-		 * @param  {object} element        - An HTML element.
+		 * @param  {object} obj            - An HTML element.
+		 * @param  {boolean} reset         - Reset block on mouse leave
 		 * @return {void}                  - The constructor.
 		 */
-		function animate3dMultiElement( base, multiple, element ) {
+		function animate3dMultiElement( base, multiple, obj, reset ) {
 
 			//get the specs of the element
-			var divOffset = $( element ).offset(),
+			var divOffset = $( obj ).offset(),
 				divTop    = divOffset.top,
 				divLeft   = divOffset.left,
-				divWidth  = $( element ).innerWidth(),
-				divHeight = $( element ).innerHeight();
+				divWidth  = $( obj ).innerWidth(),
+				divHeight = $( obj ).innerHeight();
 
 			
 	
 			//set an onmousemove event on the element
-			$( element ).on( 'mousemove touchmove', function( e ){
+			$( obj ).on( 'mousemove touchmove', function( e ){
 
 				var pctX, 
 					pctY,
@@ -1777,25 +1995,47 @@ APP = ( function ( APP, $, window, document ) {
 					pctY = ( e.pageY - divTop )/divHeight;
 				}
 
+				
+				
 
-
-				$( this ).children().each( function( index, element ) {
+				$( this ).children().each( function( index, elementSub ) {
 					var x         = pctX * ( base*Math.pow( multiple, index ) ),
 						y         = pctY * ( base*Math.pow( multiple, index ) ),
 						z         = 0,
 						deg       = pctY * ( 180 / Math.PI ),
 						rotateDeg = parseFloat( deg - 35 );
-				
-					
-					$( element ).css( 'transform', 'translate('+ x +'px ,'+ y +'px) rotate3d( -1, 1, 0, '+ rotateDeg +'deg )' );
 					
 					
+					TweenMax.to( $( elementSub ), 0.2, {
+						css: {
+							'transform' : 'translate('+ x +'px ,'+ y +'px) rotate3d( -1, 1, 0, '+ rotateDeg +'deg )'
+						}
+					});
+			
 					
 				});
 
 			});
+			
+			if ( reset ) {
+				$( obj ).on( 'mouseleave touchcancel', function() {
+					
+					
+					$( this ).children().each( function( index, elementSub ) {
 
-		}	
+						TweenMax.to( $( elementSub ), 0.5, {
+							css: {
+								'transform' : 'translate(0,0) rotate3d( -1, 1, 0, 0deg )'
+							}
+						});
+					});
+				});	
+			}
+						
+			
+
+		}
+		
 		
     };
 
@@ -7012,6 +7252,49 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
+ * <!-- Dropdown Menu 2 (Multi-level drop-down navigation) -->
+ *************************************
+ */	
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.DROPDOWN_MENU2               = APP.DROPDOWN_MENU2 || {};
+	APP.DROPDOWN_MENU2.version       = '0.0.1';
+    APP.DROPDOWN_MENU2.documentReady = function( $ ) {
+
+		var $verticalMenuLi = $( '.custom-vertical-menu li' );
+		
+		$verticalMenuLi.find( '> a' ).on( 'click', function( e ) {
+			e.preventDefault();
+			
+			var $sub = $( this ).parent( 'li' ).children( 'ul' );
+
+			$sub.slideToggle( 500 );
+			$( this ).parent( 'li' ).toggleClass( 'active' );
+
+        });
+		
+		//Add multilevel indicator arrow
+        $verticalMenuLi.find( '> a' ).append( '<span class="arrow"></span>' );
+		$verticalMenuLi.each( function() {
+			var len = $( this ).find( 'ul' ).length;
+			if ( len == 0 ) {
+				$( this ).children( 'a' ).children( '.arrow' ).hide();
+			}
+		});
+		
+    };
+
+    APP.components.documentReady.push( APP.DROPDOWN_MENU2.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+/* 
+ *************************************
  * <!-- Dynamic Drop Down List from JSON -->
  *************************************
  */
@@ -7063,17 +7346,54 @@ APP = ( function ( APP, $, window, document ) {
 			//Parse the JSON data
 			if ( jsonFile != '' ) {
 				
+				//Initialize dependent/chained dropdown list
+				$.ajax({
+					url      : jsonFile,
+					method   : method,
+					data     : toData,
+					dataType : 'json',
+					success  : function ( data ) { 
+
+						var firstOptionsHtml = '';
+						
+						//Push the options to target select
+						for ( var m = 0; m < data.length; m++ ) {
+							firstOptionsHtml += "<option value='"+data[m].name+"'>"+data[m].name+"</option>";
+						}	
+						
+						$( firstOptionsHtml ).insertAfter( $this.find( 'option' ).first() );
+
+
+						//Initialize the custom select
+						$( document ).customSelectInit();
+					
+
+					 },
+					 error  : function() {
+
+
+					 }
+				});
+				
+				
+				
+				//Dropdown list change event trigger
 				$( document ).on( 'change', '#' + curID, function( e ) {
 
 					e.preventDefault();
 					
+				
 					if ( thisChange ) {
 						
 						thisChange = false;
 						
-						var curVal = $( this[ this.selectedIndex ] ).val();
+						var curVal = $( '#' + curID + ' option:selected' ).val();
 
+						
 						if ( curVal != '' ) {
+							
+							//remove the empty option
+							$( '#' + curID + ' option[value=""]' ).remove();
 
 							//Returns JSON data
 							$.ajax({
@@ -7088,44 +7408,71 @@ APP = ( function ( APP, $, window, document ) {
 										//do something
 									}
 
-
-
-									//Push the options to target select
 									
-									//Check if a key exists inside a json object
-									if ( data && data.hasOwnProperty( curVal ) ) {
-										
-										var optionsHtml   = '',
-											thisVal       = data[ curVal ];
+									for ( var m = 0; m < data.length; m++ ) {
 
-										for ( var i = 0; i < thisVal.length; i++ ) {
-											
-											var name      = thisVal[ i ].name,
-												longitude = thisVal[ i ].longitude,
-												latitude  = thisVal[ i ].latitude,
-												addresses = thisVal[ i ].addresses;
-												
-											var addressesArr = '';
-											for ( var k = 0; k < addresses.length; k++ ) {
-												addressesArr += JSON.stringify( addresses[k] ) + ',';
+										//Check if a key exists inside a json object
+										if ( data[m].name == curVal ) {
+
+
+											var optionsHtml   = '',
+												cities        = data[m].city,
+												list          = data[m].list;
+
+
+											if ( typeof list === typeof undefined ) {
+												//Traversing json of chinese provinces and cities
+												//-------------------------------------	
+												for ( var i = 0; i < cities.length; i++ ) {
+
+													var city      = cities[i].name,
+														area      = cities[i].area;
+
+													var areaTxt = '';
+													for ( var k = 0; k < area.length; k++ ) {
+														areaTxt += JSON.stringify( area[k] ) + ',';
+													}
+
+													areaTxt = areaTxt.replace(/,\s*$/, '' );
+
+
+													optionsHtml += "<option data-name='"+city+"' data-area='["+areaTxt+"]'  value='"+city+"'>"+city+"</option>";
+
+												}
+											} else {
+												//Traversing json with coordinates and details
+												//-------------------------------------		
+												for ( var i2 = 0; i2 < list.length; i2++ ) {
+
+													var name      = list[i2].name,
+														longitude = list[i2].longitude,
+														latitude  = list[i2].latitude,
+														addresses = list[i2].addresses;
+
+													var addressesTxt = '';
+													for ( var k2 = 0; k2 < addresses.length; k2++ ) {
+														addressesTxt += JSON.stringify( addresses[k2] ) + ',';
+													}
+
+													addressesTxt = addressesTxt.replace(/,\s*$/, '' );
+
+
+													optionsHtml += "<option data-name='"+name+"' data-addresses='["+addressesTxt+"]' data-longitude='"+longitude+"' data-latitude='"+latitude+"' value='"+name+"'>"+name+"</option>";
+
+												}
+
 											}
-											
-											addressesArr = addressesArr.replace(/,\s*$/, '' );
-											
-											
-											optionsHtml += "<option data-addresses='["+addressesArr+"]' data-longitude='"+longitude+"' data-latitude='"+latitude+"' value='"+name+"'>"+name+"</option>";
 
+											$( associated ).html( optionsHtml );
+
+
+											//Initialize the custom select
+											$( document ).customSelectInit();
+											$( associated ).attr( 'selected', 'selected' ).change();
+
+											break;
 										}
-
-										$( associated ).html( optionsHtml );
-
-										
-
-										//Initialize the custom select
-										$( document ).customSelectInit();
-										$( associated ).attr( 'selected', 'selected' ).change();
-
-									}
+									}//end for
 									
 
 									//Avoid duplicate events running
@@ -7160,14 +7507,15 @@ APP = ( function ( APP, $, window, document ) {
 						curVal       = $this.val(),
 						curLongitude = $this.data( 'longitude' ),
 						curLatitude  = $this.data( 'latitude' ),
-						curAddresses = $this.data( 'addresses' );
-
+						curAddresses = $this.data( 'addresses' ),
+						curContents  = '';
 					
-					var curContents = '';
-					for ( var k = 0; k < curAddresses.length; k++ ) {
-						curContents += curAddresses[k].addr_name + ': ' + curAddresses[k].addr_longitude + ', ' + curAddresses[k].addr_latitude;
+					if ( Object.prototype.toString.call( curAddresses ) =='[object Array]' ) {
+						for ( var k = 0; k < curAddresses.length; k++ ) {
+							curContents += curAddresses[k].addr_name + ': ' + curAddresses[k].addr_longitude + ', ' + curAddresses[k].addr_latitude;
+						}
+						
 					}
-					
 					
 					//console.log( curVal + ' Longitude: ' + curLongitude + ' | Latitude: ' + curLatitude + ' | Addresses: ' + curContents );
 					
@@ -7201,202 +7549,13 @@ APP = ( function ( APP, $, window, document ) {
 
 /*
  * Search string from JSON data
+ * @Format reference: assets/json/countries.json
  *
  * @param  {function} callback               - Return function after successful loading of JSON file.
  * @param  {string} jsonFile                 - The path to the JSON file.
  * @param  {string} key                      - Target key of the JSON data.
  * @return {function}                        - Return a callback function.
  */
-/*
-
-
-{
-	"Country 1": [{
-			"name": "City 1",
-			"longitude": 86.212172,
-			"latitude": 14.480298,
-			"addresses": [{
-					"addr_name": "Address 1",
-					"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
-					"addr_longitude": 22.362791,
-					"addr_latitude": 114.131421
-				},
-				{
-					"addr_name": "Address 2",
-					"addr_info": "See Addresses for more details on usage.",
-					"addr_longitude": 22.349032,
-					"addr_latitude": 114.075408
-				},
-				{
-					"addr_name": "Address 3",
-					"addr_info": "The various addr keys are used to provide address information for buildings and facilities.",
-					"addr_longitude": 22.348031,
-					"addr_latitude": 114.064361
-				}
-			]
-		},
-
-		{
-			"name": "City 2",
-			"longitude": 83.526166,
-			"latitude": 30.910773,
-			"addresses": [{
-					"addr_name": "Address 4",
-					"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
-					"addr_longitude": 22.362791,
-					"addr_latitude": 114.131421
-				},
-				{
-					"addr_name": "Address 5",
-					"addr_info": "See Addresses for more details on usage.",
-					"addr_longitude": 22.349032,
-					"addr_latitude": 114.075408
-				},
-				{
-					"addr_name": "Address 6",
-					"addr_info": "The various addr keys are used to provide address information for buildings and facilities.",
-					"addr_longitude": 22.348031,
-					"addr_latitude": 114.064361
-				}
-			]
-		},
-
-		{
-			"name": "City 3",
-			"longitude": 86.212172,
-			"latitude": 14.480298,
-			"addresses": [{
-					"addr_name": "Address 7",
-					"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
-					"addr_longitude": 22.362791,
-					"addr_latitude": 114.131421
-				},
-				{
-					"addr_name": "Address 8",
-					"addr_info": "See Addresses for more details on usage.",
-					"addr_longitude": 22.349032,
-					"addr_latitude": 114.075408
-				}
-			]
-		},
-
-		{
-			"name": "City 4",
-			"longitude": 83.526166,
-			"latitude": 30.910773,
-			"addresses": [{
-					"addr_name": "Address 9",
-					"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
-					"addr_longitude": 22.362791,
-					"addr_latitude": 114.131421
-				},
-				{
-					"addr_name": "Address 10",
-					"addr_info": "See Addresses for more details on usage.",
-					"addr_longitude": 22.349032,
-					"addr_latitude": 114.075408
-				}
-			]
-		},
-
-		{
-			"name": "City 5",
-			"longitude": 86.212172,
-			"latitude": 14.480298,
-			"addresses": [{
-				"addr_name": "Address 11",
-				"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
-				"addr_longitude": 22.362791,
-				"addr_latitude": 114.131421
-			}]
-		}
-
-	],
-	"Country 2": [{
-			"name": "City 2_1",
-			"longitude": 86.212172,
-			"latitude": 14.480298,
-			"addresses": [{
-					"addr_name": "Address 12",
-					"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
-					"addr_longitude": 22.362791,
-					"addr_latitude": 114.131421
-				},
-				{
-					"addr_name": "Address 13",
-					"addr_info": "See Addresses for more details on usage.",
-					"addr_longitude": 22.349032,
-					"addr_latitude": 114.075408
-				}
-			]
-		},
-
-		{
-			"name": "City 2_2",
-			"longitude": 83.526166,
-			"latitude": 30.910773,
-			"addresses": [{
-				"addr_name": "Address 14",
-				"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
-				"addr_longitude": 22.362791,
-				"addr_latitude": 114.131421
-			}]
-		},
-
-		{
-			"name": "City 2_3",
-			"longitude": 86.212172,
-			"latitude": 14.480298,
-			"addresses": [{
-				"addr_name": "Address 15",
-				"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
-				"addr_longitude": 22.362791,
-				"addr_latitude": 114.131421
-			}]
-		}
-
-	],
-	"Country 3": [{
-			"name": "City 3_1",
-			"longitude": 86.212172,
-			"latitude": 14.480298,
-			"addresses": [{
-				"addr_name": "Address 16",
-				"addr_info": "The various addr keys are used to provide address information for buildings and facilities.",
-				"addr_longitude": 22.362791,
-				"addr_latitude": 114.131421
-			}]
-		},
-
-		{
-			"name": "City 3_2",
-			"longitude": 83.526166,
-			"latitude": 30.910773,
-			"addresses": [{
-				"addr_name": "Address 17",
-				"addr_info": "The various addr keys are used to provide address information for buildings and facilities.",
-				"addr_longitude": 22.362791,
-				"addr_latitude": 114.131421
-			}]
-		},
-		{
-			"name": "City 3_3",
-			"longitude": 86.212172,
-			"latitude": 14.480298,
-			"addresses": [{
-				"addr_name": "Address 18",
-				"addr_info": "The various addr keys are used to provide address information for buildings and facilities.",
-				"addr_longitude": 22.362791,
-				"addr_latitude": 114.131421
-			}]
-		}
-
-	]
-
-}
-
-
-*/
 ( function ( $ ) {
     $.fn.searchJsonString = function( options ) {
  
@@ -7414,12 +7573,14 @@ APP = ( function ( APP, $, window, document ) {
 			
 			//Returns JSON data
 			$.ajax({
-				url      : $( '#dynamic-dd-country' ).data( 'ajax-dynamic-dd-json' ),
+				url      : settings.jsonFile,
 				method   : 'POST',
 				dataType : 'json',
 				success  : function ( data ) { 
 
 					var newArr = [];
+					
+					//Convert JSON to an array
 					var formatFromServer = function formatFromServer( data ) {
 						var formatData = {};
 
@@ -7446,13 +7607,13 @@ APP = ( function ( APP, $, window, document ) {
 
 					//search JSON key that contains specific string
 					for ( var p = 0; p < newArr.length; p++ ) {
-
-						for ( var n = 0; n < newArr[p].length; n++ ) {
-
-							if ( Object.prototype.toString.call( newArr[p][n][settings.key] ) =='[object Array]' ) {
+						
+						for ( var n = 0; n < newArr[p].list.length; n++ ) {
+							
+							if ( Object.prototype.toString.call( newArr[p].list[n][settings.key] ) =='[object Array]' ) {
 								
 								// API: Callback
-								settings.callback( newArr[p][n][settings.key] );
+								settings.callback( newArr[p].list[n][settings.key] );
 
 							}
 
@@ -12809,9 +12970,18 @@ APP = ( function ( APP, $, window, document ) {
 	    //your code here...
 		
     };
+	
+    APP.INDEX.pageLoaded    = function() {
 
+	    //your code here...
+		
+    };
+	
 
     APP.components.documentReady.push( APP.INDEX.documentReady );
+    APP.components.pageLoaded.push( APP.INDEX.pageLoaded );
+	
+	
     return APP;
 
 }( APP, jQuery, window, document ) );
@@ -13682,147 +13852,6 @@ APP = ( function ( APP, $, window, document ) {
     };
 
     APP.components.pageLoaded.push( APP.POST_LIST_SPLIT_FULLWIDTH.pageLoaded );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
-/* 
- *************************************
- * <!-- Mobile Menu -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.MOBILE_MENU               = APP.MOBILE_MENU || {};
-	APP.MOBILE_MENU.version       = '0.0.1';
-    APP.MOBILE_MENU.documentReady = function( $ ) {
-
-		var $window      = $( window ),
-			windowWidth  = $window.width(),
-			windowHeight = $window.height();
-
-
-
-
-		//Show Toolbar when viewing site for WordPress
-		var waypoints = $( '.admin-bar .menu-mobile-toggle' ).waypoint({
-			handler: function( direction ) {
-
-				$( this.element ).toggleClass( 'spy-scroll-postion', direction === 'down' );
-
-			},
-			offset: -46
-		});
-
-
-
-		// Mobile Menu
-		var $toggle     = $( '.menu-mobile-toggle' ),
-			$toggleBody = $( 'body' );
-
-
-
-		//Add mobile menu to your website
-		$( 'nav.menu-container' ).clone().addClass( 'mobile' ).appendTo( 'body' );
-		//Wait until previous .appendTo() is complete
-		$.when( $( '.menu-container.mobile' ).length > 0 ).then( function(){
-
-
-			$toggle.on( 'touchstart click', function( e ) {
-				e.preventDefault();
-
-				//Prevents further propagation of the current event in the capturing and bubbling phases.
-				e.stopPropagation(); 
-
-				$( this ).toggleClass( 'open' );
-				if ( $( this ).hasClass( 'open' ) ) {
-
-					//Add mobile brand
-					var logoURL = $( '.mobile-brand img' ).attr( 'src' );
-					if ( typeof logoURL !== typeof undefined && logoURL != '' ) {
-						if ( logoURL.indexOf( 'blank.gif' ) >= 0 ) $( '.mobile-inner' ).css( 'margin-top', '-70px' );
-					}	
-
-					//Toggle effect
-					$toggleBody.addClass( 'menu-open' );
-				} else {
-					$toggleBody.removeClass( 'menu-open' );
-				}
-
-			});
-
-			//Mobile menu mask event
-			$( '.menu-mobile-mask' ).on( 'click', function() {
-				$toggle.removeClass( 'open' );
-				$toggleBody.removeClass( 'menu-open' );
-			});
-
-
-
-
-			// Menu click event
-			$( '.menu-container.mobile ul li' ).on( 'click', function( e ) {
-
-				  var arrowText = $( this ).find( '.mobile-nav-arrow' ).text().replace( /(.).*\1/g, "$1" );
-				  $( this ).find( '> .sub-menu:not(.sub-sub)' ).toggle();
-
-				  if ( arrowText != '-' ) {
-					  $( this ).find( '.mobile-nav-arrow' ).text( '-' );
-				  } else {
-					  $( this ).find( '.mobile-nav-arrow' ).text( '+' );
-				  }
-
-
-			} );
-
-
-			sidrmenuInit( windowWidth ); 
-
-			// Close the menu on window change
-			$window.on( 'resize', function() {
-				// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-				if ( $window.width() != windowWidth ) {
-
-					// Update the window width for next time
-					windowWidth = $window.width();
-
-					// Do stuff here
-					$toggleBody.removeClass( 'menu-open' );
-					$toggle.removeClass( 'open' );
-					sidrmenuInit( windowWidth );
-
-
-				}
-			});
-
-
-		});
-
-
-
-
-		function sidrmenuInit( w ) {
-
-			if ( w <= 768 ) {
-				$( '.menu-container.mobile .menu-main > li' ).each( function() {
-					if ( $( this ).find( 'ul' ).length > 0 ) {
-						if ( $( this ).find( '.mobile-nav-arrow' ).length < 1 ) $( this ).prepend( '<em class="mobile-nav-arrow">+</em>' );
-						$( this ).find( 'ul ul' ).addClass( 'sub-sub' );
-						$( this ).find( ' > a' ).attr( 'href', 'javascript:void(0);' );
-					}
-				} );		
-			}
-
-
-		}
-		
-    };
-
-    APP.components.documentReady.push( APP.MOBILE_MENU.documentReady );
     return APP;
 
 }( APP, jQuery, window, document ) );
@@ -14743,418 +14772,6 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
- * <!-- Full Page/One Page Transition -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.ONEPAGE               = APP.ONEPAGE || {};
-	APP.ONEPAGE.version       = '0.0.1';
-    APP.ONEPAGE.documentReady = function( $ ) {
-
-        var $window      = $( window ),
-		    windowWidth  = $window.width(),
-		    windowHeight = $window.height();
-		
-
-	    //Determine the direction of a jQuery scroll event
-		//Fix an issue for mousewheel event is too fast.
-		var lastAnimation      = 0,
-			quietPeriod        = 500, //Do not change it
-			animationTime      = 1000,//According to page transition animation changes
-			$sectionsContainer = $( '.custom-fullpage-container' ),
-			$sections          = $sectionsContainer.find( '> section' ),
-			sectionTotal       = $sections.length,
-			topSectionSpacing  = 0,
-			$primaryMenu       = $( '.menu-main' ),
-			$sidefixedMenu     = $( '.custom-sidefixed-menu' );
-		
-		
-		//Prevent this module from loading in other pages
-		if ( $sectionsContainer.length == 0 ) return false;
-		
-
-
-		// Prepare everything before binding wheel scroll
-		$.each( $sections, function( i ) {
-			$( this ).attr( 'data-index', i );
-			if ( i == 0 ) {
-				$( this ).addClass( 'active' );
-
-			}
-			
-		});
-		
-
-		
-		//Init the section location
-		sectionStart();
-
-		
-		/*
-		 * Init the section location
-		 *
-		 * @return {void}                - The constructor.
-		 */
-		function sectionStart() {
-	
-			setTimeout( function() {
-				var hash = window.location.hash,
-					locArr,
-					loc, 
-					curTab;
-
-				if ( hash ) {
-					
-					//Add hashchange event
-					locArr = hash.split( 'section-' );
-					loc    = locArr[1];
-					moveTo( $sectionsContainer, false, loc );
-				} else {
-					moveTo( $sectionsContainer, false, 1 );
-				}
-
-			}, quietPeriod );
-
-		}
-			
-		
-		/*
-		 * Scroll initialize
-		 *
-		 * @param  {object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
-		 * @param  {string} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
-		 * @return {void}                - The constructor.
-		 */
-		function scrollMoveInit( event, dir ) {
-	
-			var timeNow = new Date().getTime();
-			// Cancel scroll if currently animating or within quiet period
-			if( timeNow - lastAnimation < quietPeriod + animationTime) {
-				event.preventDefault();
-				return;
-			}
-
-			if ( dir == 'down' ) {
-				//scroll down
-				moveTo( $sectionsContainer, 'down', false );
-				
-			} else {
-				//scroll up
-				moveTo( $sectionsContainer, 'up', false );
-				
-			  
-			}
-			lastAnimation = timeNow;
-		}
-		
-      
-		
-		/*
-		 * Move Animation
-		 *
-		 * @param  {object} el           - The container of each sections.
-		 * @param  {string} dir          - Rolling direction indicator.
-		 * @param  {number} hashID       - ID of custom hashchange event.
-		 * @return {void}                - The constructor.
-		 */
-		function moveTo( el, dir, hashID ) {
-			var index     = parseFloat( $sections.filter( '.active' ).attr( 'data-index' ) ),
-				nextIndex = null,
-				$next     = null,
-				isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
-			
-			
-			 
-			if ( dir == 'down' || dir === false ) {
-				nextIndex = index + 1;
-			} else {
-				nextIndex = index - 1;
-			}
-			
-
-			//ID of custom hashchange event
-			if ( isNumeric.test( hashID ) ) nextIndex = parseFloat( hashID - 1 );
-			
-			
-			if ( nextIndex <= parseFloat( sectionTotal-1 ) && nextIndex >= 0 ) {
-				
-				if ( nextIndex > parseFloat( sectionTotal-1 ) ) nextIndex = parseFloat( sectionTotal-1 );
-				if ( nextIndex < 0 ) nextIndex = 0;
-
-
-				//Returns the target section
-				$next = $sections.eq( nextIndex );
-
-				//Smooth scroll to content
-				if ( $next.length > 0 ) {
-					TweenMax.to( window, animationTime/1000, {
-						scrollTo: {
-							y: $next.offset().top - topSectionSpacing
-						},
-						ease: Power2.easeOut,
-						onComplete: function() {
-
-							$sections.removeClass( 'leave' );
-							$sections.eq( index ).addClass( 'leave' );
-
-							$sections.removeClass( 'active' );
-							$next.addClass( 'active' ).removeClass( 'leave' );
-
-
-
-							//Changing The Site URL
-							var curSectionIndex = $sections.filter( '.active' ).index() + 1,
-								href            = window.location.href.substr( 0, window.location.href.indexOf( '#' ) ) + '#' + $sections.filter( '.active' ).attr( 'id' );
-
-							if ( Modernizr.cssanimations ) {
-								history.pushState( {}, document.title, href );
-								console.log( 'Section ' + curSectionIndex + ' loaded!' );
-							}
-
-
-						}
-					});			
-				}	
-				
-			}
-			
-
-	
-
-			
-		}
-		
-		
-
-		/* 
-		 ====================================================
-		 *  Navigation Interaction
-		 ====================================================
-		 */
-		goPageSection( $primaryMenu );
-		goPageSection( $sidefixedMenu );
-
-        
-	
-		//Activate the first item
-		$primaryMenu.find( 'li:first' ).addClass( 'active' );
-		$sidefixedMenu.find( 'li:first' ).addClass( 'active' );
-		
-		
-		/*
-		 * Get section or article by href
-		 *
-		 * @param  {string, object} el  - The current selector or selector ID
-		 * @return {object}             - A new selector.
-		 */
-        function getRelatedContent( el ) {
-            return $( $( el ).attr( 'href' ) );
-        }
-		
-		
-		/*
-		 * Get link by section or article id
-		 *
-		 * @param  {string, object} el    - The current selector or selector ID
-		 * @param  {object} menuObj       - Returns the menu element within the document.
-		 * @param  {boolean} echoIndex    - Whether to return the current index.
-		 * @return {object}               - A new selector.
-		 */
-        function getRelatedNavigation( el, menuObj, echoIndex ) {
-			
-			if ( echoIndex ) {
-				return menuObj.find( 'li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' ).index();
-			} else {
-			    return menuObj.find( 'li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' );	
-			}
-            
-        } 
-		
-		/*
-		 * Get all links by section or article
-		 *
-		 * @param  {object} menuObj     - Returns the menu element within the document.
-		 * @return {object}             - A new selector.
-		 */
-        function getAllNavigation( menuObj ) {
-            return menuObj.find( 'li' );
-        } 	
-		
-		
-		/*
-		 * Smooth scroll to content
-		 *
-		 * @param  {object} menuObj     - Returns the menu element within the document.
-		 * @return {void}               - The constructor.
-		 */
-        function goPageSection( menuObj ) {
-			menuObj.find( 'li > a' ).on( 'click', function(e) {
-				e.preventDefault();
-				
-				if ( $( this ).parent().hasClass( 'active' ) ) return false;
-				
-				
-				moveTo( $sectionsContainer, false, $( this ).parent( 'li' ).index() + 1 );
-			});	
-	
-        } 	
-
-
-
-		var navMinTop      = ( $sidefixedMenu.length > 0 ) ? $sidefixedMenu.offset().top : 0,
-			navMaxTop      = parseFloat( $( document ).height() - $( '.footer-main-container' ).height() ) - windowHeight/3;
-
-		$window.on( 'scroll touchmove', function() {
-			var scrollTop = $( this ).scrollTop(),
-				spyTop    = parseFloat( scrollTop + topSectionSpacing ),
-				minTop    = $( '[data-highlight-section="true"]' ).first().offset().top,
-				maxTop    = $( '[data-highlight-section="true"]' ).last().offset().top + $( '[data-highlight-section="true"]' ).last().height();
-
-			$( '[data-highlight-section="true"]' ).each( function()  {
-				var block     = $( this ),
-					eleTop    = block.offset().top;
-				
-
-				// The 1 pixel in order to solve inaccurate value of outerHeight() 
-				// in Safari and Firefox browsers.
-				if ( eleTop < spyTop + 1 ) {
-
-					// Highlight element when related content
-					getAllNavigation( $primaryMenu ).removeClass( 'active' );
-					getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
-					getRelatedNavigation( block, $primaryMenu, false ).addClass( 'active' );
-					getRelatedNavigation( block, $sidefixedMenu, false ).addClass( 'active' );
-					
-					
-				} 
-			});
-
-
-
-			//Cancel the current highlight element
-			// The 1 pixel in order to solve inaccurate value of outerHeight() 
-			// in Safari and Firefox browsers.
-			if ( spyTop > maxTop || spyTop < minTop - 1 ) {
-				getAllNavigation( $primaryMenu ).removeClass( 'active' );
-				getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
-			}
-
-
-			//Detecting when user scrolls to bottom of div
-			if ( spyTop > navMaxTop || spyTop < navMinTop ) {
-				$sidefixedMenu.removeClass( 'fixed' );
-			} else {
-				$sidefixedMenu.addClass( 'fixed' );
-			}	
-
-
-
-
-		});	
-	
-		
-
-		
-		
-		/* 
-		 ====================================================
-		 *  Mouse Wheel Method
-		 ====================================================
-		 */
-		$( document ).on( 'wheel', function( e ) { 
-
-			var dir;
-			//Gets a value that indicates the amount that the mouse wheel has changed.
-			var delta = e.originalEvent.deltaY;
-			
-			if( delta > 0 ) { 
-				//scroll down
-				dir = 'down';
-				
-			} else {
-				//scroll up
-				dir = 'up';
-			}
-			
-			scrollMoveInit( e, dir );
-			
-			//prevent page fom scrolling
-			return false;
-
-		});
-		
-		
-		
-		/* 
-		 ====================================================
-		 *  Touch Method
-		 ====================================================
-		 */
-			
-		var startX,
-			startY;
-
-
-		$sectionsContainer.on( 'touchstart.onepage', function( event ) {
-			var touches = event.originalEvent.touches;
-			if ( touches && touches.length ) {
-				startX = touches[0].pageX;
-				startY = touches[0].pageY;
-
-
-				$sectionsContainer.on( 'touchmove.onepage', function( event ) {
-
-					var touches = event.originalEvent.touches;
-					if ( touches && touches.length ) {
-						var deltaX = startX - touches[0].pageX,
-							deltaY = startY - touches[0].pageY;
-
-						if ( deltaX >= 50) {
-							//--- swipe left
-
-
-						}
-						if ( deltaX <= -50) {
-							//--- swipe right
-						
-
-
-						}
-						if ( deltaY >= 50) {
-							//--- swipe up
-							moveTo( $sectionsContainer, 'down', false );
-
-						}
-						if ( deltaY <= -50) {
-							//--- swipe down
-							moveTo( $sectionsContainer, 'up', false );
-							
-
-						}
-						if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
-							$sectionsContainer.off( 'touchmove.onepage' );
-						}
-					}
-
-				});
-			}	
-		});
-
-
-		
-    };
-
-    APP.components.documentReady.push( APP.ONEPAGE.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-/* 
- *************************************
  * <!-- Full Page/One Page Transition 2 -->
  *************************************
  */
@@ -15578,6 +15195,418 @@ APP = ( function ( APP, $, window, document ) {
     };
 
     APP.components.documentReady.push( APP.ONEPAGE2.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+/* 
+ *************************************
+ * <!-- Full Page/One Page Transition -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.ONEPAGE               = APP.ONEPAGE || {};
+	APP.ONEPAGE.version       = '0.0.1';
+    APP.ONEPAGE.documentReady = function( $ ) {
+
+        var $window      = $( window ),
+		    windowWidth  = $window.width(),
+		    windowHeight = $window.height();
+		
+
+	    //Determine the direction of a jQuery scroll event
+		//Fix an issue for mousewheel event is too fast.
+		var lastAnimation      = 0,
+			quietPeriod        = 500, //Do not change it
+			animationTime      = 1000,//According to page transition animation changes
+			$sectionsContainer = $( '.custom-fullpage-container' ),
+			$sections          = $sectionsContainer.find( '> section' ),
+			sectionTotal       = $sections.length,
+			topSectionSpacing  = 0,
+			$primaryMenu       = $( '.menu-main' ),
+			$sidefixedMenu     = $( '.custom-sidefixed-menu' );
+		
+		
+		//Prevent this module from loading in other pages
+		if ( $sectionsContainer.length == 0 ) return false;
+		
+
+
+		// Prepare everything before binding wheel scroll
+		$.each( $sections, function( i ) {
+			$( this ).attr( 'data-index', i );
+			if ( i == 0 ) {
+				$( this ).addClass( 'active' );
+
+			}
+			
+		});
+		
+
+		
+		//Init the section location
+		sectionStart();
+
+		
+		/*
+		 * Init the section location
+		 *
+		 * @return {void}                - The constructor.
+		 */
+		function sectionStart() {
+	
+			setTimeout( function() {
+				var hash = window.location.hash,
+					locArr,
+					loc, 
+					curTab;
+
+				if ( hash ) {
+					
+					//Add hashchange event
+					locArr = hash.split( 'section-' );
+					loc    = locArr[1];
+					moveTo( $sectionsContainer, false, loc );
+				} else {
+					moveTo( $sectionsContainer, false, 1 );
+				}
+
+			}, quietPeriod );
+
+		}
+			
+		
+		/*
+		 * Scroll initialize
+		 *
+		 * @param  {object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
+		 * @param  {string} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
+		 * @return {void}                - The constructor.
+		 */
+		function scrollMoveInit( event, dir ) {
+	
+			var timeNow = new Date().getTime();
+			// Cancel scroll if currently animating or within quiet period
+			if( timeNow - lastAnimation < quietPeriod + animationTime) {
+				event.preventDefault();
+				return;
+			}
+
+			if ( dir == 'down' ) {
+				//scroll down
+				moveTo( $sectionsContainer, 'down', false );
+				
+			} else {
+				//scroll up
+				moveTo( $sectionsContainer, 'up', false );
+				
+			  
+			}
+			lastAnimation = timeNow;
+		}
+		
+      
+		
+		/*
+		 * Move Animation
+		 *
+		 * @param  {object} el           - The container of each sections.
+		 * @param  {string} dir          - Rolling direction indicator.
+		 * @param  {number} hashID       - ID of custom hashchange event.
+		 * @return {void}                - The constructor.
+		 */
+		function moveTo( el, dir, hashID ) {
+			var index     = parseFloat( $sections.filter( '.active' ).attr( 'data-index' ) ),
+				nextIndex = null,
+				$next     = null,
+				isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
+			
+			
+			 
+			if ( dir == 'down' || dir === false ) {
+				nextIndex = index + 1;
+			} else {
+				nextIndex = index - 1;
+			}
+			
+
+			//ID of custom hashchange event
+			if ( isNumeric.test( hashID ) ) nextIndex = parseFloat( hashID - 1 );
+			
+			
+			if ( nextIndex <= parseFloat( sectionTotal-1 ) && nextIndex >= 0 ) {
+				
+				if ( nextIndex > parseFloat( sectionTotal-1 ) ) nextIndex = parseFloat( sectionTotal-1 );
+				if ( nextIndex < 0 ) nextIndex = 0;
+
+
+				//Returns the target section
+				$next = $sections.eq( nextIndex );
+
+				//Smooth scroll to content
+				if ( $next.length > 0 ) {
+					TweenMax.to( window, animationTime/1000, {
+						scrollTo: {
+							y: $next.offset().top - topSectionSpacing
+						},
+						ease: Power2.easeOut,
+						onComplete: function() {
+
+							$sections.removeClass( 'leave' );
+							$sections.eq( index ).addClass( 'leave' );
+
+							$sections.removeClass( 'active' );
+							$next.addClass( 'active' ).removeClass( 'leave' );
+
+
+
+							//Changing The Site URL
+							var curSectionIndex = $sections.filter( '.active' ).index() + 1,
+								href            = window.location.href.substr( 0, window.location.href.indexOf( '#' ) ) + '#' + $sections.filter( '.active' ).attr( 'id' );
+
+							if ( Modernizr.cssanimations ) {
+								history.pushState( {}, document.title, href );
+								console.log( 'Section ' + curSectionIndex + ' loaded!' );
+							}
+
+
+						}
+					});			
+				}	
+				
+			}
+			
+
+	
+
+			
+		}
+		
+		
+
+		/* 
+		 ====================================================
+		 *  Navigation Interaction
+		 ====================================================
+		 */
+		goPageSection( $primaryMenu );
+		goPageSection( $sidefixedMenu );
+
+        
+	
+		//Activate the first item
+		$primaryMenu.find( 'li:first' ).addClass( 'active' );
+		$sidefixedMenu.find( 'li:first' ).addClass( 'active' );
+		
+		
+		/*
+		 * Get section or article by href
+		 *
+		 * @param  {string, object} el  - The current selector or selector ID
+		 * @return {object}             - A new selector.
+		 */
+        function getRelatedContent( el ) {
+            return $( $( el ).attr( 'href' ) );
+        }
+		
+		
+		/*
+		 * Get link by section or article id
+		 *
+		 * @param  {string, object} el    - The current selector or selector ID
+		 * @param  {object} menuObj       - Returns the menu element within the document.
+		 * @param  {boolean} echoIndex    - Whether to return the current index.
+		 * @return {object}               - A new selector.
+		 */
+        function getRelatedNavigation( el, menuObj, echoIndex ) {
+			
+			if ( echoIndex ) {
+				return menuObj.find( 'li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' ).index();
+			} else {
+			    return menuObj.find( 'li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' );	
+			}
+            
+        } 
+		
+		/*
+		 * Get all links by section or article
+		 *
+		 * @param  {object} menuObj     - Returns the menu element within the document.
+		 * @return {object}             - A new selector.
+		 */
+        function getAllNavigation( menuObj ) {
+            return menuObj.find( 'li' );
+        } 	
+		
+		
+		/*
+		 * Smooth scroll to content
+		 *
+		 * @param  {object} menuObj     - Returns the menu element within the document.
+		 * @return {void}               - The constructor.
+		 */
+        function goPageSection( menuObj ) {
+			menuObj.find( 'li > a' ).on( 'click', function(e) {
+				e.preventDefault();
+				
+				if ( $( this ).parent().hasClass( 'active' ) ) return false;
+				
+				
+				moveTo( $sectionsContainer, false, $( this ).parent( 'li' ).index() + 1 );
+			});	
+	
+        } 	
+
+
+
+		var navMinTop      = ( $sidefixedMenu.length > 0 ) ? $sidefixedMenu.offset().top : 0,
+			navMaxTop      = parseFloat( $( document ).height() - $( '.footer-main-container' ).height() ) - windowHeight/3;
+
+		$window.on( 'scroll touchmove', function() {
+			var scrollTop = $( this ).scrollTop(),
+				spyTop    = parseFloat( scrollTop + topSectionSpacing ),
+				minTop    = $( '[data-highlight-section="true"]' ).first().offset().top,
+				maxTop    = $( '[data-highlight-section="true"]' ).last().offset().top + $( '[data-highlight-section="true"]' ).last().height();
+
+			$( '[data-highlight-section="true"]' ).each( function()  {
+				var block     = $( this ),
+					eleTop    = block.offset().top;
+				
+
+				// The 1 pixel in order to solve inaccurate value of outerHeight() 
+				// in Safari and Firefox browsers.
+				if ( eleTop < spyTop + 1 ) {
+
+					// Highlight element when related content
+					getAllNavigation( $primaryMenu ).removeClass( 'active' );
+					getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
+					getRelatedNavigation( block, $primaryMenu, false ).addClass( 'active' );
+					getRelatedNavigation( block, $sidefixedMenu, false ).addClass( 'active' );
+					
+					
+				} 
+			});
+
+
+
+			//Cancel the current highlight element
+			// The 1 pixel in order to solve inaccurate value of outerHeight() 
+			// in Safari and Firefox browsers.
+			if ( spyTop > maxTop || spyTop < minTop - 1 ) {
+				getAllNavigation( $primaryMenu ).removeClass( 'active' );
+				getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
+			}
+
+
+			//Detecting when user scrolls to bottom of div
+			if ( spyTop > navMaxTop || spyTop < navMinTop ) {
+				$sidefixedMenu.removeClass( 'fixed' );
+			} else {
+				$sidefixedMenu.addClass( 'fixed' );
+			}	
+
+
+
+
+		});	
+	
+		
+
+		
+		
+		/* 
+		 ====================================================
+		 *  Mouse Wheel Method
+		 ====================================================
+		 */
+		$( document ).on( 'wheel', function( e ) { 
+
+			var dir;
+			//Gets a value that indicates the amount that the mouse wheel has changed.
+			var delta = e.originalEvent.deltaY;
+			
+			if( delta > 0 ) { 
+				//scroll down
+				dir = 'down';
+				
+			} else {
+				//scroll up
+				dir = 'up';
+			}
+			
+			scrollMoveInit( e, dir );
+			
+			//prevent page fom scrolling
+			return false;
+
+		});
+		
+		
+		
+		/* 
+		 ====================================================
+		 *  Touch Method
+		 ====================================================
+		 */
+			
+		var startX,
+			startY;
+
+
+		$sectionsContainer.on( 'touchstart.onepage', function( event ) {
+			var touches = event.originalEvent.touches;
+			if ( touches && touches.length ) {
+				startX = touches[0].pageX;
+				startY = touches[0].pageY;
+
+
+				$sectionsContainer.on( 'touchmove.onepage', function( event ) {
+
+					var touches = event.originalEvent.touches;
+					if ( touches && touches.length ) {
+						var deltaX = startX - touches[0].pageX,
+							deltaY = startY - touches[0].pageY;
+
+						if ( deltaX >= 50) {
+							//--- swipe left
+
+
+						}
+						if ( deltaX <= -50) {
+							//--- swipe right
+						
+
+
+						}
+						if ( deltaY >= 50) {
+							//--- swipe up
+							moveTo( $sectionsContainer, 'down', false );
+
+						}
+						if ( deltaY <= -50) {
+							//--- swipe down
+							moveTo( $sectionsContainer, 'up', false );
+							
+
+						}
+						if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
+							$sectionsContainer.off( 'touchmove.onepage' );
+						}
+					}
+
+				});
+			}	
+		});
+
+
+		
+    };
+
+    APP.components.documentReady.push( APP.ONEPAGE.documentReady );
     return APP;
 
 }( APP, jQuery, window, document ) );
@@ -17274,110 +17303,6 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
-
-/* 
- *************************************
- * <!-- Text effect -->
- *************************************
- */
-
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-
-    APP.TEXT_EFFECT               = APP.TEXT_EFFECT || {};
-	APP.TEXT_EFFECT.version       = '0.0.3';
-    APP.TEXT_EFFECT.pageLoaded    = function() {
-
-		//Default Effect
-		//-------------------------------------	
-		$( '[data-text-eff]' ).each( function( index )  {
-			$( document ).customTextEffInit( { selectors: '[data-text-eff="'+$( this ).data( 'text-eff' )+'"]' } );
-		});   
-		
-    };
-
-    APP.components.pageLoaded.push( APP.TEXT_EFFECT.pageLoaded );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
-/*
- * Text Effect
- *
- * @param  {string} selectors                - Text wrapper ID or class name.
- * @return {void}                            - The constructor.
- */
-( function ( $ ) {
-    $.fn.customTextEffInit = function( options ) {
- 
-        // This is the easiest way to have default options.
-        var settings = $.extend({
-			selectors    : '.letters-eff-fadeInRight'
-        }, options );
- 
-        this.each( function() {
-			
-			var $this                = $( this ),
-				customControls       = settings.selectors,
-				speed                = $( customControls ).data( 'text-eff-speed' ),
-				txtEff;
-
-			
-				if( typeof speed === typeof undefined ) {
-					speed = 1200;
-				}	
-			
-		
-				$( customControls ).html( $( customControls ).text().replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>") );
-			
-			
-			
-				if( customControls.indexOf( 'fadeInRight' ) >= 0 ) {
-					txtEff = anime.timeline({loop: false})
-						  .add({
-							targets: customControls + ' .letter',
-							translateX: [40,0],
-							translateZ: 0,
-							opacity: [0,1],
-							easing: "easeOutExpo",
-							duration: speed,
-							delay: function(el, i) {
-							  return 500 + 30 * i;
-							}
-						  });
-
-				}
-			
-			
-				if( customControls.indexOf( 'zoomInDown' ) >= 0 ) {
-					txtEff = anime.timeline({loop: false})
-						  .add({
-						    targets: customControls + ' .letter',
-							scale: [0, 1],
-							duration: speed,
-							elasticity: 600,
-							delay: function(el, i) {
-							  return 45 * (i+1);
-							}
-						  });
-
-				}	
-			
-
-
-
-			
-		});
- 
-    };
- 
-}( jQuery ));
-
-
 /* 
  *************************************
  * <!-- Timeline -->
@@ -17537,6 +17462,304 @@ APP = ( function ( APP, $, window, document ) {
     return APP;
 
 }( APP, jQuery, window, document ) );
+
+
+
+
+
+
+/* 
+ *************************************
+ * <!-- Text effect -->
+ *************************************
+ */
+
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+
+    APP.TEXT_EFFECT               = APP.TEXT_EFFECT || {};
+	APP.TEXT_EFFECT.version       = '0.0.3';
+    APP.TEXT_EFFECT.pageLoaded    = function() {
+
+		//Default Effect
+		//-------------------------------------	
+		$( '[data-text-eff]' ).each( function( index )  {
+			$( document ).customTextEffInit( { selectors: '[data-text-eff="'+$( this ).data( 'text-eff' )+'"]' } );
+		});   
+		
+    };
+
+    APP.components.pageLoaded.push( APP.TEXT_EFFECT.pageLoaded );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+/*
+ * Text Effect
+ *
+ * @param  {string} selectors                - Text wrapper ID or class name.
+ * @return {void}                            - The constructor.
+ */
+( function ( $ ) {
+    $.fn.customTextEffInit = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+			selectors    : '.letters-eff-fadeInRight'
+        }, options );
+ 
+        this.each( function() {
+			
+			var $this                = $( this ),
+				customControls       = settings.selectors,
+				speed                = $( customControls ).data( 'text-eff-speed' ),
+				txtEff;
+
+			
+				if( typeof speed === typeof undefined ) {
+					speed = 1200;
+				}	
+			
+		
+				$( customControls ).html( $( customControls ).text().replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>") );
+			
+			
+			
+				if( customControls.indexOf( 'fadeInRight' ) >= 0 ) {
+					txtEff = anime.timeline({loop: false})
+						  .add({
+							targets: customControls + ' .letter',
+							translateX: [40,0],
+							translateZ: 0,
+							opacity: [0,1],
+							easing: "easeOutExpo",
+							duration: speed,
+							delay: function(el, i) {
+							  return 500 + 30 * i;
+							}
+						  });
+
+				}
+			
+			
+				if( customControls.indexOf( 'zoomInDown' ) >= 0 ) {
+					txtEff = anime.timeline({loop: false})
+						  .add({
+						    targets: customControls + ' .letter',
+							scale: [0, 1],
+							duration: speed,
+							elasticity: 600,
+							delay: function(el, i) {
+							  return 45 * (i+1);
+							}
+						  });
+
+				}	
+			
+
+
+
+			
+		});
+ 
+    };
+ 
+}( jQuery ));
+
+
+/* 
+ *************************************
+ * <!-- Vertical Menu -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.VERTICAL_MENU               = APP.VERTICAL_MENU || {};
+	APP.VERTICAL_MENU.version       = '0.0.1';
+    APP.VERTICAL_MENU.documentReady = function( $ ) {
+
+		var $window      = $( window ),
+			windowWidth  = $window.width(),
+			windowHeight = $window.height(),
+			ulForDesktop = '.menu-v-container:not(.mobile) ul.menu-main';
+
+
+		// Menu Hover
+		var mTop = 15;
+		$( ulForDesktop + ' > li.multi-column > ul li ul' ).addClass( 'multi' );
+		$( ulForDesktop + ' > li:not(.multi-column) ul, .menu-v-container:not(.mobile) li.multi-column > ul.sub-menu > li > ul, '+ulForDesktop+' li.multi-column > ul' ).css( 'margin-top', mTop + 'px' );
+
+		$( ulForDesktop + ' li' ).on( 'mouseenter', function(){
+
+
+			TweenMax.set( $( this ).find( ' > ul.sub-menu:not(.multi), .mega-arrow' ), {
+				css: {
+					opacity    : 0,
+					display    : 'block',
+					marginTop  : mTop + 'px'
+				},
+				onComplete : function() {
+
+					TweenMax.to( this.target, 0.3, {
+						css: {
+							opacity    : 1,
+							marginTop  : 0
+						},
+						ease   : Power2.easeOut
+					});		
+
+
+
+				}
+			});				
+
+
+		
+			//Calculate whether the total width of a large navigation is greater than the window
+			var megaMenuW        = $( ulForDesktop + ' > li.multi-column > ul' ).width(),
+				megaMaxW         = parseFloat( windowWidth - $( ulForDesktop ).parent().width() ),
+				megaMenuCoLength = $( ulForDesktop + ' > li.multi-column > ul > li' ).length;
+			
+			if ( megaMenuW > megaMaxW ) {
+				
+				$( ulForDesktop + ' > li.multi-column > ul > li' ).css( 'width', megaMaxW/megaMenuCoLength + 'px' );
+				
+			}
+			
+			
+
+		}).on( 'mouseleave' , function(){
+
+
+			TweenMax.to( $( this ).find( ' > ul.sub-menu:not(.multi), .mega-arrow' ), 0.3, {
+				css: {
+					opacity    : 0,
+					marginTop  : mTop + 'px'
+				},
+				onComplete : function() {
+
+					TweenMax.set( this.target, {
+						css: {
+							display    : 'none',
+						}
+					});		
+
+
+
+				}
+			});				
+
+		});
+		
+
+
+
+		//Add Sub-menu Arrow
+		$( ulForDesktop + ' li' ).each( function() {
+			if ( $( this ).find( 'ul' ).length > 0 ) {
+				$( this ).prepend( '<span class="nav-arrow"></span>' );
+			}
+
+		} );	
+		
+		
+		
+		
+		
+		//Monitor the maximum height of the vertical navigation
+		menuWrapInit( windowWidth, windowHeight );
+		
+		$window.on( 'resize', function() {
+			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+			if ( $window.width() != windowWidth ) {
+
+				// Update the window width for next time
+				windowWidth  = $window.width();
+				windowHeight = $window.height();
+
+				// Do stuff here
+				menuWrapInit( windowWidth, windowHeight );
+		
+
+			}
+		});
+		
+	
+		/*
+		 * Monitor the maximum height of the vertical navigation
+		 *
+		 * @param  {number} w         - Returns width of browser viewport
+		 * @param  {number} h         - Returns height of browser viewport
+		 * @return {void}             - The constructor.
+		 */
+		function menuWrapInit( w, h ) {
+			
+			var $menuWrap  = $( '.menu-v-container:not(.mobile)' ),
+				vMenuTop   = 0, //This value is equal to the $vertical-menu-top variable in the SCSS
+				winHeight  = h - vMenuTop;
+
+			//WoedPress spy
+			if ( $( '.admin-bar' ).length > 0 ) {
+				winHeight = h - 132;
+			}	
+
+			$menuWrap.css({
+				position  : 'fixed',
+				height    : winHeight + 'px',
+				marginTop : 0
+			});	
+
+			$window.on('scroll', function() {
+
+				var curULHeight = $( 'ul.menu-main' ).height(),
+					windowPos   = $window.scrollTop();
+
+				if ( curULHeight > winHeight ) {
+					$menuWrap.css({
+						position : 'absolute',
+						height   : curULHeight + 'px'
+					});
+
+					if ( windowPos >= ( curULHeight - winHeight ) ) {
+						$menuWrap.css({
+							position  : 'fixed',
+							marginTop : -( curULHeight - winHeight ) + 'px'
+						});	
+					} else {
+						$menuWrap.css({
+							position : 'absolute',
+							marginTop : 0
+						});		
+					}
+
+				}
+
+				if ( $menuWrap.height() < winHeight ) {
+					$menuWrap.css({
+						position  : 'fixed',
+						height    : winHeight + 'px',
+						marginTop : 0
+					});		
+				}
+
+
+			});	
+			
+		}
+			
+		
+    };
+
+    APP.components.documentReady.push( APP.VERTICAL_MENU.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
 
 
 
@@ -17990,11 +18213,23 @@ APP = ( function ( APP, $, window, document ) {
  
         this.each( function() {
 
+			
+			//----
 			APP.COMMON_HEIGHT.pageLoaded(); //Common Height
 			APP.LIGHTBOX.pageLoaded(); //Custom Lightbox
+			APP.ADVANCED_SLIDER.pageLoaded(); //Advanced Slider (Basic)
+			APP.ADVANCED_SLIDER_FILTER.pageLoaded(); //Advanced Slider (Special Effects)	
+			APP.POST_LIST_SPLIT_FULLWIDTH.pageLoaded(); //Fullwidth List of Split
+			APP.STICKY_EL.pageLoaded(); //Sticky Elements
+			APP.TEXT_EFFECT.pageLoaded(); //Text effect
+			APP.TIMELINE.pageLoaded(); //Timeline
+			
+		
+			//----
 			APP.MODAL_DIALOG.documentReady($); //Modal Dialog
 			APP.PARALLAX.documentReady($); //Parallax
 			APP.VIDEOS.documentReady($); //Videos
+			APP.HEADER.documentReady($); //Header Area
 			APP.SET_BG.documentReady($); //Specify a background image
 			APP.GET_CUSTOM_ATTRS.documentReady($); //Get all custom attributes of an element like "data-*"
 			APP.PAGINATION.documentReady($); //Pagination
@@ -18004,15 +18239,29 @@ APP = ( function ( APP, $, window, document ) {
 			APP.RETINA.documentReady($); //Retina Graphics for Website
 			APP.SHOW_MORELESS.documentReady($); //Show More Less
 			APP.DROPDOWN_MENU.documentReady($); //Dropdown Menu
+			APP.DROPDOWN_MENU2.documentReady($); //Dropdown Menu2
 			APP.COUNTER.documentReady($); //Counter
 			APP.SCROLL_REVEAL.documentReady($); //Scroll Reveal
+			APP._3D_BACKGROUND.documentReady($); //3D Background
+			APP.ACCORDION.documentReady($); //Accordion	
+			APP.ADVANCED_CONTENT_SLIDER.documentReady($); //Advanced Content Slider
+			APP.GALLERY.documentReady($); //Gallery
+			APP.IMAGE_SHAPES.documentReady($); //Image Shapes
+			APP.POST_LIST_AJAX.documentReady($); //Posts List With Ajax
+			APP.PERIODICAL_SCROLL.documentReady($); //Periodical Scroll
+			APP.PRICING.documentReady($); //Pricing
+			APP.PROGRESSBAR.documentReady($); //Progress Bar
+			APP.ROTATING_EL.documentReady($); //Rotating Elements
+			APP.SMOOTH_SCROLLING_ANCHORLINK.documentReady($); //Smooth Scrolling When Clicking An Anchor Link
+			APP.TABS.documentReady($); //Tabs
+			APP.TEAM_FOCUS.documentReady($); //Team Focus
+			APP.TESTIMONIALS.documentReady($); //Testimonials Carousel
 			
-
-			//Other functions here
-
+			//----Other functions here
 
 
-			//Uix Shortcodes
+
+			//----Uix Shortcodes
 			if ( $.isFunction( $.uix_sc_init ) ) {
 				$.uix_sc_init();
 			}

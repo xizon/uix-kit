@@ -8,31 +8,38 @@
 		position: relative;
 		text-align: left;	
 
-		.cover {
+		.image {
+			width: 100%;
+			display: block;
+			overflow: hidden;
 			position: relative;
-
-			&::before {
-				@include transition-default();
-				background: rgba(255, 255, 255, 0);
-				display: block;
-				content: '';
-				top: 0;
-				left: 0;
-				position: absolute;
-				z-index: 2;
-				width: 100%;
-				height: 100%;
-			}
-		}
-		&:hover {
+			outline: 0;
+			background: #ddd;
+			border: 1px solid #E7E7E7;
 			
 			.cover {
-				&::before {
-					background: rgba(255, 255, 255, 0.95);
+				position: relative;
+
+				img {
+					width: 100%;
 				}
-			}
+
+				&::before {
+					@include transition-default();
+					background: rgba(255, 255, 255, 0);
+					display: block;
+					content: '';
+					top: 0;
+					left: 0;
+					position: absolute;
+					z-index: 2;
+					width: 100%;
+					height: 100%;
+				}
+			}	
 			
 		}
+
 
 		h3 {
 			position: relative;
@@ -72,17 +79,17 @@
 				background: #C56263;
 			}
 		}
-		.image {
-			width: 100%;
-			display: block;
-			overflow: hidden;
-			position: relative;
-			outline: 0;
-			background: #ddd;
-			border: 1px solid #E7E7E7;
+		
+		&:hover {
+			
+			.cover {
+				&::before {
+					background: rgba(255, 255, 255, 0.95);
+				}
+			}
+			
 		}
-		.cover img {
-			width: 100%;
-		}
+		
+
 	}	
 }

@@ -52,17 +52,54 @@ APP = ( function ( APP, $, window, document ) {
 			//Parse the JSON data
 			if ( jsonFile != '' ) {
 				
+				//Initialize dependent/chained dropdown list
+				$.ajax({
+					url      : jsonFile,
+					method   : method,
+					data     : toData,
+					dataType : 'json',
+					success  : function ( data ) { 
+
+						var firstOptionsHtml = '';
+						
+						//Push the options to target select
+						for ( var m = 0; m < data.length; m++ ) {
+							firstOptionsHtml += "<option value='"+data[m].name+"'>"+data[m].name+"</option>";
+						}	
+						
+						$( firstOptionsHtml ).insertAfter( $this.find( 'option' ).first() );
+
+
+						//Initialize the custom select
+						$( document ).customSelectInit();
+					
+
+					 },
+					 error  : function() {
+
+
+					 }
+				});
+				
+				
+				
+				//Dropdown list change event trigger
 				$( document ).on( 'change', '#' + curID, function( e ) {
 
 					e.preventDefault();
 					
+				
 					if ( thisChange ) {
 						
 						thisChange = false;
 						
-						var curVal = $( this[ this.selectedIndex ] ).val();
+						var curVal = $( '#' + curID + ' option:selected' ).val();
 
+						
 						if ( curVal != '' ) {
+							
+							//remove the empty option
+							$( '#' + curID + ' option[value=""]' ).remove();
 
 							//Returns JSON data
 							$.ajax({
@@ -77,44 +114,71 @@ APP = ( function ( APP, $, window, document ) {
 										//do something
 									}
 
-
-
-									//Push the options to target select
 									
-									//Check if a key exists inside a json object
-									if ( data && data.hasOwnProperty( curVal ) ) {
-										
-										var optionsHtml   = '',
-											thisVal       = data[ curVal ];
+									for ( var m = 0; m < data.length; m++ ) {
 
-										for ( var i = 0; i < thisVal.length; i++ ) {
-											
-											var name      = thisVal[ i ].name,
-												longitude = thisVal[ i ].longitude,
-												latitude  = thisVal[ i ].latitude,
-												addresses = thisVal[ i ].addresses;
-												
-											var addressesArr = '';
-											for ( var k = 0; k < addresses.length; k++ ) {
-												addressesArr += JSON.stringify( addresses[k] ) + ',';
+										//Check if a key exists inside a json object
+										if ( data[m].name == curVal ) {
+
+
+											var optionsHtml   = '',
+												cities        = data[m].city,
+												list          = data[m].list;
+
+
+											if ( typeof list === typeof undefined ) {
+												//Traversing json of chinese provinces and cities
+												//-------------------------------------	
+												for ( var i = 0; i < cities.length; i++ ) {
+
+													var city      = cities[i].name,
+														area      = cities[i].area;
+
+													var areaTxt = '';
+													for ( var k = 0; k < area.length; k++ ) {
+														areaTxt += JSON.stringify( area[k] ) + ',';
+													}
+
+													areaTxt = areaTxt.replace(/,\s*$/, '' );
+
+
+													optionsHtml += "<option data-name='"+city+"' data-area='["+areaTxt+"]'  value='"+city+"'>"+city+"</option>";
+
+												}
+											} else {
+												//Traversing json with coordinates and details
+												//-------------------------------------		
+												for ( var i2 = 0; i2 < list.length; i2++ ) {
+
+													var name      = list[i2].name,
+														longitude = list[i2].longitude,
+														latitude  = list[i2].latitude,
+														addresses = list[i2].addresses;
+
+													var addressesTxt = '';
+													for ( var k2 = 0; k2 < addresses.length; k2++ ) {
+														addressesTxt += JSON.stringify( addresses[k2] ) + ',';
+													}
+
+													addressesTxt = addressesTxt.replace(/,\s*$/, '' );
+
+
+													optionsHtml += "<option data-name='"+name+"' data-addresses='["+addressesTxt+"]' data-longitude='"+longitude+"' data-latitude='"+latitude+"' value='"+name+"'>"+name+"</option>";
+
+												}
+
 											}
-											
-											addressesArr = addressesArr.replace(/,\s*$/, '' );
-											
-											
-											optionsHtml += "<option data-addresses='["+addressesArr+"]' data-longitude='"+longitude+"' data-latitude='"+latitude+"' value='"+name+"'>"+name+"</option>";
 
+											$( associated ).html( optionsHtml );
+
+
+											//Initialize the custom select
+											$( document ).customSelectInit();
+											$( associated ).attr( 'selected', 'selected' ).change();
+
+											break;
 										}
-
-										$( associated ).html( optionsHtml );
-
-										
-
-										//Initialize the custom select
-										$( document ).customSelectInit();
-										$( associated ).attr( 'selected', 'selected' ).change();
-
-									}
+									}//end for
 									
 
 									//Avoid duplicate events running
@@ -149,14 +213,15 @@ APP = ( function ( APP, $, window, document ) {
 						curVal       = $this.val(),
 						curLongitude = $this.data( 'longitude' ),
 						curLatitude  = $this.data( 'latitude' ),
-						curAddresses = $this.data( 'addresses' );
-
+						curAddresses = $this.data( 'addresses' ),
+						curContents  = '';
 					
-					var curContents = '';
-					for ( var k = 0; k < curAddresses.length; k++ ) {
-						curContents += curAddresses[k].addr_name + ': ' + curAddresses[k].addr_longitude + ', ' + curAddresses[k].addr_latitude;
+					if ( Object.prototype.toString.call( curAddresses ) =='[object Array]' ) {
+						for ( var k = 0; k < curAddresses.length; k++ ) {
+							curContents += curAddresses[k].addr_name + ': ' + curAddresses[k].addr_longitude + ', ' + curAddresses[k].addr_latitude;
+						}
+						
 					}
-					
 					
 					//console.log( curVal + ' Longitude: ' + curLongitude + ' | Latitude: ' + curLatitude + ' | Addresses: ' + curContents );
 					
@@ -190,202 +255,13 @@ APP = ( function ( APP, $, window, document ) {
 
 /*
  * Search string from JSON data
+ * @Format reference: assets/json/countries.json
  *
  * @param  {function} callback               - Return function after successful loading of JSON file.
  * @param  {string} jsonFile                 - The path to the JSON file.
  * @param  {string} key                      - Target key of the JSON data.
  * @return {function}                        - Return a callback function.
  */
-/*
-
-
-{
-	"Country 1": [{
-			"name": "City 1",
-			"longitude": 86.212172,
-			"latitude": 14.480298,
-			"addresses": [{
-					"addr_name": "Address 1",
-					"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
-					"addr_longitude": 22.362791,
-					"addr_latitude": 114.131421
-				},
-				{
-					"addr_name": "Address 2",
-					"addr_info": "See Addresses for more details on usage.",
-					"addr_longitude": 22.349032,
-					"addr_latitude": 114.075408
-				},
-				{
-					"addr_name": "Address 3",
-					"addr_info": "The various addr keys are used to provide address information for buildings and facilities.",
-					"addr_longitude": 22.348031,
-					"addr_latitude": 114.064361
-				}
-			]
-		},
-
-		{
-			"name": "City 2",
-			"longitude": 83.526166,
-			"latitude": 30.910773,
-			"addresses": [{
-					"addr_name": "Address 4",
-					"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
-					"addr_longitude": 22.362791,
-					"addr_latitude": 114.131421
-				},
-				{
-					"addr_name": "Address 5",
-					"addr_info": "See Addresses for more details on usage.",
-					"addr_longitude": 22.349032,
-					"addr_latitude": 114.075408
-				},
-				{
-					"addr_name": "Address 6",
-					"addr_info": "The various addr keys are used to provide address information for buildings and facilities.",
-					"addr_longitude": 22.348031,
-					"addr_latitude": 114.064361
-				}
-			]
-		},
-
-		{
-			"name": "City 3",
-			"longitude": 86.212172,
-			"latitude": 14.480298,
-			"addresses": [{
-					"addr_name": "Address 7",
-					"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
-					"addr_longitude": 22.362791,
-					"addr_latitude": 114.131421
-				},
-				{
-					"addr_name": "Address 8",
-					"addr_info": "See Addresses for more details on usage.",
-					"addr_longitude": 22.349032,
-					"addr_latitude": 114.075408
-				}
-			]
-		},
-
-		{
-			"name": "City 4",
-			"longitude": 83.526166,
-			"latitude": 30.910773,
-			"addresses": [{
-					"addr_name": "Address 9",
-					"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
-					"addr_longitude": 22.362791,
-					"addr_latitude": 114.131421
-				},
-				{
-					"addr_name": "Address 10",
-					"addr_info": "See Addresses for more details on usage.",
-					"addr_longitude": 22.349032,
-					"addr_latitude": 114.075408
-				}
-			]
-		},
-
-		{
-			"name": "City 5",
-			"longitude": 86.212172,
-			"latitude": 14.480298,
-			"addresses": [{
-				"addr_name": "Address 11",
-				"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
-				"addr_longitude": 22.362791,
-				"addr_latitude": 114.131421
-			}]
-		}
-
-	],
-	"Country 2": [{
-			"name": "City 2_1",
-			"longitude": 86.212172,
-			"latitude": 14.480298,
-			"addresses": [{
-					"addr_name": "Address 12",
-					"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
-					"addr_longitude": 22.362791,
-					"addr_latitude": 114.131421
-				},
-				{
-					"addr_name": "Address 13",
-					"addr_info": "See Addresses for more details on usage.",
-					"addr_longitude": 22.349032,
-					"addr_latitude": 114.075408
-				}
-			]
-		},
-
-		{
-			"name": "City 2_2",
-			"longitude": 83.526166,
-			"latitude": 30.910773,
-			"addresses": [{
-				"addr_name": "Address 14",
-				"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
-				"addr_longitude": 22.362791,
-				"addr_latitude": 114.131421
-			}]
-		},
-
-		{
-			"name": "City 2_3",
-			"longitude": 86.212172,
-			"latitude": 14.480298,
-			"addresses": [{
-				"addr_name": "Address 15",
-				"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
-				"addr_longitude": 22.362791,
-				"addr_latitude": 114.131421
-			}]
-		}
-
-	],
-	"Country 3": [{
-			"name": "City 3_1",
-			"longitude": 86.212172,
-			"latitude": 14.480298,
-			"addresses": [{
-				"addr_name": "Address 16",
-				"addr_info": "The various addr keys are used to provide address information for buildings and facilities.",
-				"addr_longitude": 22.362791,
-				"addr_latitude": 114.131421
-			}]
-		},
-
-		{
-			"name": "City 3_2",
-			"longitude": 83.526166,
-			"latitude": 30.910773,
-			"addresses": [{
-				"addr_name": "Address 17",
-				"addr_info": "The various addr keys are used to provide address information for buildings and facilities.",
-				"addr_longitude": 22.362791,
-				"addr_latitude": 114.131421
-			}]
-		},
-		{
-			"name": "City 3_3",
-			"longitude": 86.212172,
-			"latitude": 14.480298,
-			"addresses": [{
-				"addr_name": "Address 18",
-				"addr_info": "The various addr keys are used to provide address information for buildings and facilities.",
-				"addr_longitude": 22.362791,
-				"addr_latitude": 114.131421
-			}]
-		}
-
-	]
-
-}
-
-
-*/
 ( function ( $ ) {
     $.fn.searchJsonString = function( options ) {
  
@@ -403,12 +279,14 @@ APP = ( function ( APP, $, window, document ) {
 			
 			//Returns JSON data
 			$.ajax({
-				url      : $( '#dynamic-dd-country' ).data( 'ajax-dynamic-dd-json' ),
+				url      : settings.jsonFile,
 				method   : 'POST',
 				dataType : 'json',
 				success  : function ( data ) { 
 
 					var newArr = [];
+					
+					//Convert JSON to an array
 					var formatFromServer = function formatFromServer( data ) {
 						var formatData = {};
 
@@ -435,13 +313,13 @@ APP = ( function ( APP, $, window, document ) {
 
 					//search JSON key that contains specific string
 					for ( var p = 0; p < newArr.length; p++ ) {
-
-						for ( var n = 0; n < newArr[p].length; n++ ) {
-
-							if ( Object.prototype.toString.call( newArr[p][n][settings.key] ) =='[object Array]' ) {
+						
+						for ( var n = 0; n < newArr[p].list.length; n++ ) {
+							
+							if ( Object.prototype.toString.call( newArr[p].list[n][settings.key] ) =='[object Array]' ) {
 								
 								// API: Callback
-								settings.callback( newArr[p][n][settings.key] );
+								settings.callback( newArr[p].list[n][settings.key] );
 
 							}
 

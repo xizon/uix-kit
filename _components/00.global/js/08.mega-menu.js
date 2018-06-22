@@ -58,8 +58,11 @@ APP = ( function ( APP, $, window, document ) {
 		
 		// Initialize mega menu
 		function megaMenuInit( w ) {
-			var maxWidth     = 1170, //The maximum width of the mega menu wrapper
-			    perDefaultW  = 220; //Default width of each column
+			var $menuWrap  = $( '.menu-container:not(.mobile)' ),
+				maxWidth     = 1170, //The maximum width of the mega menu wrapper
+				
+				//This value is equal to the $nav-mega-li-w variable in the SCSS
+			    perDefaultW  = 270; //Default width of each column
 
 			
 			//Basic Container
@@ -69,7 +72,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			// Remove the html tag for mega menu item
-			$( 'li.multi-column  > ul .multi-column-title' ).each( function()  {
+			$menuWrap.find( 'li.multi-column  > ul .multi-column-title' ).each( function()  {
 				var mega_old_item = $( this ).html();
 				if ( mega_old_item != '' ) {
 					$( this ).html( mega_old_item.replace(/<[^>]+>/g, '' ) );
@@ -79,7 +82,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			if ( w > 768 ){
 
-				$( 'li.multi-column' ).each( function() {
+				$menuWrap.find( 'li.multi-column' ).each( function() {
 					var root_li          = $( this ),
 						col_total        = root_li.find( '> ul .multi-column-title' ).length,
 						col_div          = root_li.find( '> ul .multi-column-title' ).closest( 'li' ),
@@ -108,7 +111,13 @@ APP = ( function ( APP, $, window, document ) {
 							mega_div_w       = maxWidth;
 							mega_single_w    = maxWidth/col_total - 2.888;
 							
+							//Resetting the width of each column
 							mega_div.find( '> li' ).css( {
+								'width' : mega_single_w + 'px'
+							} );
+							
+							//Resetting the width of each <li> tag
+							mega_div.find( '> li ul li' ).css( {
 								'width' : mega_single_w + 'px'
 							} );
 							
@@ -128,9 +137,17 @@ APP = ( function ( APP, $, window, document ) {
 							
 						} else {
 							
+							//Resetting the width of each column
 							mega_div.find( '> li' ).css( {
 								'width' : perDefaultW + 'px'
-							} );				
+							} );	
+							
+							//Resetting the width of each <li> tag
+							mega_div.find( '> li ul li' ).css( {
+								'width' : perDefaultW + 'px'
+							} );
+								
+							
 							
 							var chkWidth = parseFloat( root_li_left  + mega_div_w );
 

@@ -1,5 +1,20 @@
 # Changelog
 
+
+#### = 1.8.1 (June 21, 2018) =
+
+
+* New: Add a new module "Vertical Menu" which includes RTL.
+* New: Added some sample pages for building your own website fast.
+* New: Add a new module "Dropdown Menu 2 (Multi-level drop-down navigation)".
+* Tweak: Optimized trigger events of module "3D Background".
+* Tweak: Simplified primary navigation style.
+* Tweak: Micro optimization of other scripts.
+* Tweak: Upgraded the custom selector for dependent/chained dropdown list.
+
+
+
+
 #### = 1.8.0 (June 20, 2018) =
 
 * New: Add a new module "Vertical Separator".

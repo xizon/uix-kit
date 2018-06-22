@@ -11,8 +11,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.8.0
- * ## Last Update         :  June 20, 2018
+ * ## Version             :  1.8.1
+ * ## Last Update         :  June 22, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -25,29 +25,31 @@
 	TABLE OF CONTENTS
 	---------------------------
 	
-    1. Basic 
-    2. Helper Classes 
+    1. Helper Classes 
+    2. Basic 
     3. Basic Layout Styles 
-    4. Navigation Area 
+    4. Navigation 
     5. Header Area 
     6. Brand 
     7. Filterable Navigation 
     8. Sidebar 
     9. Search 
     10. Comments 
-    11. Modal Dialog 
-    12. Advanced Slider (Special Effects) 
-    13. Advanced Slider (Basic) 
-    14. Cards 
-    15. Dropdown Menu 
-    16. Flexslider 
-    17. Form 
-    18. Brands List 
-    19. Bulleted List 
-    20. Maintain Aspect Ratio List 
-    21. Side by Side List 
-    22. Mobile Menu 
+    11. Mobile Menu 
+    12. Modal Dialog 
+    13. Advanced Slider (Special Effects) 
+    14. Advanced Slider (Basic) 
+    15. Cards 
+    16. Dropdown Menu 
+    17. Flexslider 
+    18. Form 
+    19. Brands List 
+    20. Bulleted List 
+    21. Maintain Aspect Ratio List 
+    22. Side by Side List 
     23. Source Code 
+    24. ToolTip 
+    25. Vertical Menu (RTL) 
 
 
 
@@ -178,7 +180,7 @@ blockquote::before {
 }
 
 /* ====================================================== 
-   <!-- Navigation Area -->                                      
+   <!-- Navigation -->                                      
 /* ====================================================== */
 .menu-container:not(.mobile) {
     float: left;
@@ -217,6 +219,10 @@ blockquote::before {
 .menu-container:not(.mobile) ul.menu-main > li:not(.multi-column) > ul ul {
     margin-left: auto;
     margin-right: -0.071875rem;
+}
+
+.menu-container:not(.mobile) ul.menu-main > li:not(.multi-column) > ul ul ul {
+    margin-right: 0;
 }
 
 .menu-container:not(.mobile) ul.menu-main > li > ul::before {
@@ -386,6 +392,60 @@ blockquote::before {
 .comment-content a.respond {
     right: auto;
     left: 0;
+}
+
+/* ====================================================== 
+   <!-- Mobile Menu -->
+/* ====================================================== */
+/* Mobile Menu Toggle */
+.menu-mobile-toggle {
+    right: auto;
+    left: 30px;
+}
+
+.menu-mobile-toggle span {
+    left: auto;
+    right: 12px;
+}
+
+.menu-mobile-toggle.open span {
+    right: 7px;
+}
+
+/* Mobile Menu Container */
+.menu-container.mobile {
+    left: auto;
+    right: 0;
+    transform: translateX(300px);
+}
+
+.menu-container.mobile ul li ul li a, .menu-container.mobile ul li ul li span {
+    padding-left: auto;
+    padding-right: 30px;
+}
+
+.menu-container.mobile li:not(.multi-column) ul ul {
+    padding-left: auto;
+    padding-right: .825em;
+}
+
+.menu-container.mobile > .inner > .menu-right {
+    padding-left: auto;
+    padding-right: .5rem;
+}
+
+.menu-container.mobile > .inner > .menu-right a {
+    margin-right: auto;
+    margin-left: .3rem;
+}
+
+.menu-container.mobile .mobile-nav-arrow {
+    right: auto;
+    left: 10px;
+}
+
+.menu-open .menu-container.mobile {
+    transform: translateX(0);
 }
 
 /* ====================================================== 
@@ -867,60 +927,6 @@ dl.list-side-by-side dd {
 }
 
 /* ====================================================== 
-   <!-- Mobile Menu -->
-/* ====================================================== */
-/* Mobile Menu Toggle */
-.menu-mobile-toggle {
-    right: auto;
-    left: 30px;
-}
-
-.menu-mobile-toggle span {
-    left: auto;
-    right: 12px;
-}
-
-.menu-mobile-toggle.open span {
-    right: 7px;
-}
-
-/* Mobile Menu Container */
-.menu-container.mobile {
-    left: auto;
-    right: 0;
-    transform: translateX(300px);
-}
-
-.menu-container.mobile ul li ul li a, .menu-container.mobile ul li ul li span {
-    padding-left: auto;
-    padding-right: 30px;
-}
-
-.menu-container.mobile li:not(.multi-column) ul ul {
-    padding-left: auto;
-    padding-right: .825em;
-}
-
-.menu-container.mobile > .inner > .menu-right {
-    padding-left: auto;
-    padding-right: .5rem;
-}
-
-.menu-container.mobile > .inner > .menu-right a {
-    margin-right: auto;
-    margin-left: .3rem;
-}
-
-.menu-container.mobile .mobile-nav-arrow {
-    right: auto;
-    left: 10px;
-}
-
-.menu-open .menu-container.mobile {
-    transform: translateX(0);
-}
-
-/* ====================================================== 
     <!-- Source Code -->       
 /* ====================================================== */
 /* Pretty printing styles. Used with prettify.js. */
@@ -942,5 +948,132 @@ pre.prettyprint {
     margin-right: 1rem;
 }
 
+/* ====================================================== 
+   <!-- Vertical Menu (RTL) -->     
+/* ====================================================== */
+/*
+ * 1. Primary Menu
+ * 2. Sub Menu
+ * 3. Multi-level Sub Menu Position 
+ * 4. Mega/Dropdown Menu 
+ * 5. Dropdown Arrow
+*/
+.menu-v-container:not(.mobile) {
+    left: auto;
+    right: 0;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  /* 
+	 ---------------------------
+	 1. Primary Menu
+	 ---------------------------
+	 */
+  /* 
+	 ---------------------------
+	 4. Dropdown Arrow
+	 ---------------------------
+	 */;
+}
+
+.menu-v-container:not(.mobile) ul.menu-main {
+  /* 
+		 ---------------------------
+		 2. Sub Menu
+		 ---------------------------
+		 */
+  /* 
+		 ---------------------------
+		 4. Mega/Dropdown Menu 
+		 ---------------------------
+		 */
+  /* Multi-column */;
+}
+
+.menu-v-container:not(.mobile) ul.menu-main li {
+    text-align: left;
+}
+
+.menu-v-container:not(.mobile) ul.menu-main li .tip-label {
+    right: auto;
+    left: 1rem;
+}
+
+.menu-v-container:not(.mobile) ul.menu-main ul.sub-menu {
+    border-left: none;
+    border-right: 1px solid rgba(255, 255, 255, 0.13);
+    left: auto;
+    right: 250px;
+  /* 
+			 ---------------------------
+			 3. Multi-level Sub Menu Position
+			 ---------------------------
+			 */;
+}
+
+.menu-v-container:not(.mobile) ul.menu-main ul.sub-menu ul {
+    right: 450px;
+}
+
+.menu-v-container:not(.mobile) ul.menu-main ul.sub-menu ul ul {
+    right: 650px;
+}
+
+.menu-v-container:not(.mobile) ul.menu-main ul.sub-menu ul ul ul {
+    right: 850px;
+}
+
+.menu-v-container:not(.mobile) ul.menu-main ul.sub-menu ul ul ul ul {
+    right: 1050px;
+}
+
+.menu-v-container:not(.mobile) ul.menu-main ul.sub-menu ul ul ul ul ul {
+    right: 1250px;
+}
+
+.menu-v-container:not(.mobile) ul.menu-main ul.sub-menu ul ul ul ul ul ul {
+    right: 1450px;
+}
+
+.menu-v-container:not(.mobile) ul.menu-main ul.sub-menu ul ul ul ul ul ul ul {
+    right: 1650px;
+}
+
+.menu-v-container:not(.mobile) ul.menu-main ul.sub-menu ul ul ul ul ul ul ul ul {
+    right: 1850px;
+}
+
+.menu-v-container:not(.mobile) ul.menu-main ul.sub-menu ul ul ul ul ul ul ul ul ul {
+    right: 2050px;
+}
+
+.menu-v-container:not(.mobile) ul.menu-main li.multi-column > ul .multi-column-title {
+    text-align: right;
+}
+
+.menu-v-container:not(.mobile) ul.menu-main li.multi-column > ul ul li {
+    text-align: right;
+}
+
+.menu-v-container:not(.mobile) ul.menu-main li.multi-column > ul li ul {
+    border-right: none;
+}
+
+.menu-v-container:not(.mobile) ul.menu-main li.multi-column > ul > li {
+    border-left: none;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.menu-v-container:not(.mobile) ul.menu-main li.multi-column > ul > li:first-child {
+    border-right: none;
+}
+
+.menu-v-container:not(.mobile) ul.menu-main li.multi-column > ul > li ul {
+    left: auto;
+    right: 0;
+}
+
+.menu-v-container:not(.mobile) .nav-arrow {
+    right: auto;
+    left: .5rem;
+}
+
 /*# sourceMappingURL=uix-kit-rtl.css.map */
-t-rtl.css.map */

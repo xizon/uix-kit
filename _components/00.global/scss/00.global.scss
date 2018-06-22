@@ -264,7 +264,7 @@ $primary-bg-color      : transparent;
 // ---------------------------
 //
 @mixin customScrollbar( $dir ){
-	// @include customScrollbar( 'vertical' ) ;
+	// @include customScrollbar( 'vertical' );
 	&::-webkit-scrollbar-track {
 		border-radius: 0px;
 		background-color: #E6E3E3;

@@ -60,59 +60,44 @@
         <section>
             <div class="container">
                     <div class="row">
-                        <div class="col-md-8 col-md-offset-2 t-c">
+                        <div class="col-md-8 col-md-offset-2">
    
-						       <p><strong>Callback:</strong> <span id="dynamic-callback">City Name Here</span></p>
+						       <p class="custom-striking-msg info"><strong>Callback:</strong> <span id="dynamic-callback">-</span></p>
          
-							   <div class="row">
-									<div class="col-md-6">
+								<div class="controls custom-select">
+									<label>
+										<select 
+												id="dynamic-dd-country" 
+												name="dynamic-dd-country" 
+												placeholder="Country"
+												data-ajax-dynamic-dd-json="assets/json/countries.json"
+												data-ajax-dynamic-dd-method="POST" 
+												data-ajax-dynamic-dd-event="change" 
+												data-ajax-dynamic-dd-data="" 
+												data-ajax-dynamic-dd-associated="#dynamic-dd-city">
 
-										<div class="controls custom-select">
-											<label>
-												<select 
-														id="dynamic-dd-country" 
-														name="dynamic-dd-country" 
-														placeholder="Country"
-														data-ajax-dynamic-dd-json="assets/json/countries.json"
-														data-ajax-dynamic-dd-method="POST" 
-														data-ajax-dynamic-dd-event="change" 
-														data-ajax-dynamic-dd-data="" 
-														data-ajax-dynamic-dd-associated="#dynamic-dd-city">
-														
-														
-													<option value="" selected>Select Country</option>
-													<option value="Country 1">Country 1</option>
-													<option value="Country 2">Country 2</option>
-													<option value="Country 3">Country 3</option>
-												</select>
 
-											</label>
-											<span>Country</span>
+											<option value="" selected>- Country -</option>
+										</select>
 
-										</div>
-
-									</div>  
-
-									<div class="col-md-6">
-
-										<div class="controls custom-select">
-											<label>
-												<select id="dynamic-dd-city" name="dynamic-dd-city" placeholder="City">
-													<option value="Option 1">Option 1</option>
-													<option value="Option 2">Option 2</option>
-												</select>
-
-											</label>
-											<span>City</span>
-
-										</div>
-
-									</div>  		
-
+									</label>
+									<span>Country</span>
 
 								</div>
-								<!-- .row end --> 		   
 
+
+								<!-- ////////   -->
+
+								<div class="controls custom-select">
+									<label>
+										<select id="dynamic-dd-city" name="dynamic-dd-city" placeholder="City">
+										    <option value="" selected>- City -</option>
+										</select>
+
+									</label>
+									<span>City</span>
+
+								</div>			
                         
                        
                         </div>
@@ -167,6 +152,133 @@
 			
 		</script>
         
+        
+        
+        
+    
+       <!-- Content 03
+        ====================================================== -->
+        <section class="space-none-top">
+            <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+   
+						       <p class="custom-striking-msg info"><strong>(中国)区县:</strong> <span id="dynamic-callback2">-</span></p>
+         
+
+								<div class="controls custom-select option-top">
+									<label>
+										<select 
+												id="dynamic-dd-china-province" 
+												name="dynamic-dd-china-province" 
+												placeholder="省份"
+												data-ajax-dynamic-dd-json="assets/json/china.json"
+												data-ajax-dynamic-dd-method="POST" 
+												data-ajax-dynamic-dd-event="change" 
+												data-ajax-dynamic-dd-data="" 
+												data-ajax-dynamic-dd-associated="#dynamic-dd-china-city">	
+
+											<option value="">- 省份 -</option>
+										</select>
+
+									</label>
+								</div>
+
+
+								<!-- ////////   -->
+
+								<div class="controls custom-select option-top">
+									<label>
+										<select name="dynamic-dd-china-city" id="dynamic-dd-china-city" placeholder="城市">
+											<option value="">- 城市 -</option>
+										</select>
+
+									</label>
+
+								</div>		
+
+
+								<!-- ////////   -->
+
+								<div class="controls custom-select option-top">
+									<label>
+										<select name="dynamic-dd-china-area" id="dynamic-dd-china-area" placeholder="区县">
+											<option value="">- 区县 -</option>
+										</select>
+
+									</label>
+
+								</div>		
+
+                                      
+                       
+                        </div>
+                        <!-- .col-md-12 end -->
+                    </div>
+                    <!-- .row end -->
+                    
+                    
+            </div>
+            <!-- .container end -->
+            
+            
+        </section>
+        
+        
+        <script>
+			
+		( function( $ ) {
+		"use strict";
+
+			$( function() {
+
+				//The target select event
+				$( document ).on( 'change.cusSelectDynamicDD', '#dynamic-dd-china-city', function( e ) {
+
+					e.preventDefault();
+
+					var $this        = $( this[ this.selectedIndex ] ),
+						$areaSel     = $( '#dynamic-dd-china-area'),
+						curVal       = $this.val(),
+						curArea      = $this.data( 'area' );
+
+
+					var optionsHtml = '';
+					for ( var k = 0; k < curArea.length; k++ ) {
+						optionsHtml += "<option value='"+curArea[k]+"'>"+curArea[k]+"</option>";
+					}
+
+					$areaSel.html( optionsHtml );
+
+					//Initialize the custom select
+					$( document ).customSelectInit();
+					$areaSel.attr( 'selected', 'selected' ).change();
+					
+					
+					
+					
+					//Console
+					var areaTxt = '';
+					for ( var k = 0; k < curArea.length; k++ ) {
+						areaTxt += JSON.stringify( curArea[k] ) + ',';
+					}
+
+					areaTxt = areaTxt.replace(/,\s*$/, '' );
+					$( '#dynamic-callback2').text( '[' + areaTxt + ']' );
+	
+					
+					
+					return false;
+
+
+				});			
+			} );
+
+		} ) ( jQuery );
+				
+			
+			
+		</script>
         
         
         

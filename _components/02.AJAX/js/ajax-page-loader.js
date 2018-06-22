@@ -447,11 +447,23 @@ APP = ( function ( APP, $, window, document ) {
  
         this.each( function() {
 
+			
+			//----
 			APP.COMMON_HEIGHT.pageLoaded(); //Common Height
 			APP.LIGHTBOX.pageLoaded(); //Custom Lightbox
+			APP.ADVANCED_SLIDER.pageLoaded(); //Advanced Slider (Basic)
+			APP.ADVANCED_SLIDER_FILTER.pageLoaded(); //Advanced Slider (Special Effects)	
+			APP.POST_LIST_SPLIT_FULLWIDTH.pageLoaded(); //Fullwidth List of Split
+			APP.STICKY_EL.pageLoaded(); //Sticky Elements
+			APP.TEXT_EFFECT.pageLoaded(); //Text effect
+			APP.TIMELINE.pageLoaded(); //Timeline
+			
+		
+			//----
 			APP.MODAL_DIALOG.documentReady($); //Modal Dialog
 			APP.PARALLAX.documentReady($); //Parallax
 			APP.VIDEOS.documentReady($); //Videos
+			APP.HEADER.documentReady($); //Header Area
 			APP.SET_BG.documentReady($); //Specify a background image
 			APP.GET_CUSTOM_ATTRS.documentReady($); //Get all custom attributes of an element like "data-*"
 			APP.PAGINATION.documentReady($); //Pagination
@@ -461,15 +473,29 @@ APP = ( function ( APP, $, window, document ) {
 			APP.RETINA.documentReady($); //Retina Graphics for Website
 			APP.SHOW_MORELESS.documentReady($); //Show More Less
 			APP.DROPDOWN_MENU.documentReady($); //Dropdown Menu
+			APP.DROPDOWN_MENU2.documentReady($); //Dropdown Menu2
 			APP.COUNTER.documentReady($); //Counter
 			APP.SCROLL_REVEAL.documentReady($); //Scroll Reveal
+			APP._3D_BACKGROUND.documentReady($); //3D Background
+			APP.ACCORDION.documentReady($); //Accordion	
+			APP.ADVANCED_CONTENT_SLIDER.documentReady($); //Advanced Content Slider
+			APP.GALLERY.documentReady($); //Gallery
+			APP.IMAGE_SHAPES.documentReady($); //Image Shapes
+			APP.POST_LIST_AJAX.documentReady($); //Posts List With Ajax
+			APP.PERIODICAL_SCROLL.documentReady($); //Periodical Scroll
+			APP.PRICING.documentReady($); //Pricing
+			APP.PROGRESSBAR.documentReady($); //Progress Bar
+			APP.ROTATING_EL.documentReady($); //Rotating Elements
+			APP.SMOOTH_SCROLLING_ANCHORLINK.documentReady($); //Smooth Scrolling When Clicking An Anchor Link
+			APP.TABS.documentReady($); //Tabs
+			APP.TEAM_FOCUS.documentReady($); //Team Focus
+			APP.TESTIMONIALS.documentReady($); //Testimonials Carousel
 			
-
-			//Other functions here
-
+			//----Other functions here
 
 
-			//Uix Shortcodes
+
+			//----Uix Shortcodes
 			if ( $.isFunction( $.uix_sc_init ) ) {
 				$.uix_sc_init();
 			}

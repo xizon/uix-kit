@@ -1,184 +1,196 @@
-{
-	"Country 1": [{
-			"name": "City 1",
-			"longitude": 86.212172,
-			"latitude": 14.480298,
-			"addresses": [{
-					"addr_name": "Address 1",
+[
+    {
+        "name": "Country 1",
+        "list": [
+			{
+				"name": "City 1_1",
+				"longitude": 86.212172,
+				"latitude": 14.480298,
+				"addresses": [{
+						"addr_name": "Address 1",
+						"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
+						"addr_longitude": 22.362791,
+						"addr_latitude": 114.131421
+					},
+					{
+						"addr_name": "Address 2",
+						"addr_info": "See Addresses for more details on usage.",
+						"addr_longitude": 22.349032,
+						"addr_latitude": 114.075408
+					},
+					{
+						"addr_name": "Address 3",
+						"addr_info": "The various addr keys are used to provide address information for buildings and facilities.",
+						"addr_longitude": 22.348031,
+						"addr_latitude": 114.064361
+					}
+				]
+			},
+
+			{
+				"name": "City 1_2",
+				"longitude": 83.526166,
+				"latitude": 30.910773,
+				"addresses": [{
+						"addr_name": "Address 4",
+						"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
+						"addr_longitude": 22.362791,
+						"addr_latitude": 114.131421
+					},
+					{
+						"addr_name": "Address 5",
+						"addr_info": "See Addresses for more details on usage.",
+						"addr_longitude": 22.349032,
+						"addr_latitude": 114.075408
+					},
+					{
+						"addr_name": "Address 6",
+						"addr_info": "The various addr keys are used to provide address information for buildings and facilities.",
+						"addr_longitude": 22.348031,
+						"addr_latitude": 114.064361
+					}
+				]
+			},
+
+			{
+				"name": "City 1_3",
+				"longitude": 86.212172,
+				"latitude": 14.480298,
+				"addresses": [{
+						"addr_name": "Address 7",
+						"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
+						"addr_longitude": 22.362791,
+						"addr_latitude": 114.131421
+					},
+					{
+						"addr_name": "Address 8",
+						"addr_info": "See Addresses for more details on usage.",
+						"addr_longitude": 22.349032,
+						"addr_latitude": 114.075408
+					}
+				]
+			},
+
+			{
+				"name": "City 1_4",
+				"longitude": 83.526166,
+				"latitude": 30.910773,
+				"addresses": [{
+						"addr_name": "Address 9",
+						"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
+						"addr_longitude": 22.362791,
+						"addr_latitude": 114.131421
+					},
+					{
+						"addr_name": "Address 10",
+						"addr_info": "See Addresses for more details on usage.",
+						"addr_longitude": 22.349032,
+						"addr_latitude": 114.075408
+					}
+				]
+			},
+
+			{
+				"name": "City 1_5",
+				"longitude": 86.212172,
+				"latitude": 14.480298,
+				"addresses": [{
+					"addr_name": "Address 11",
 					"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
 					"addr_longitude": 22.362791,
 					"addr_latitude": 114.131421
-				},
-				{
-					"addr_name": "Address 2",
-					"addr_info": "See Addresses for more details on usage.",
-					"addr_longitude": 22.349032,
-					"addr_latitude": 114.075408
-				},
-				{
-					"addr_name": "Address 3",
+				}]
+			}
+
+		]
+    },
+    {
+        "name": "Country 2",
+        "list": [
+			{
+				"name": "City 2_1",
+				"longitude": 86.212172,
+				"latitude": 14.480298,
+				"addresses": [{
+						"addr_name": "Address 12",
+						"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
+						"addr_longitude": 22.362791,
+						"addr_latitude": 114.131421
+					},
+					{
+						"addr_name": "Address 13",
+						"addr_info": "See Addresses for more details on usage.",
+						"addr_longitude": 22.349032,
+						"addr_latitude": 114.075408
+					}
+				]
+			},
+
+			{
+				"name": "City 2_2",
+				"longitude": 83.526166,
+				"latitude": 30.910773,
+				"addresses": [{
+					"addr_name": "Address 14",
+					"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
+					"addr_longitude": 22.362791,
+					"addr_latitude": 114.131421
+				}]
+			},
+
+			{
+				"name": "City 2_3",
+				"longitude": 86.212172,
+				"latitude": 14.480298,
+				"addresses": [{
+					"addr_name": "Address 15",
+					"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
+					"addr_longitude": 22.362791,
+					"addr_latitude": 114.131421
+				}]
+			}
+
+		]
+    },
+    {
+        "name": "Country 3",
+        "list": [
+			{
+				"name": "City 3_1",
+				"longitude": 86.212172,
+				"latitude": 14.480298,
+				"addresses": [{
+					"addr_name": "Address 16",
 					"addr_info": "The various addr keys are used to provide address information for buildings and facilities.",
-					"addr_longitude": 22.348031,
-					"addr_latitude": 114.064361
-				}
-			]
-		},
-
-		{
-			"name": "City 2",
-			"longitude": 83.526166,
-			"latitude": 30.910773,
-			"addresses": [{
-					"addr_name": "Address 4",
-					"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
 					"addr_longitude": 22.362791,
 					"addr_latitude": 114.131421
-				},
-				{
-					"addr_name": "Address 5",
-					"addr_info": "See Addresses for more details on usage.",
-					"addr_longitude": 22.349032,
-					"addr_latitude": 114.075408
-				},
-				{
-					"addr_name": "Address 6",
+				}]
+			},
+
+			{
+				"name": "City 3_2",
+				"longitude": 83.526166,
+				"latitude": 30.910773,
+				"addresses": [{
+					"addr_name": "Address 17",
 					"addr_info": "The various addr keys are used to provide address information for buildings and facilities.",
-					"addr_longitude": 22.348031,
-					"addr_latitude": 114.064361
-				}
-			]
-		},
-
-		{
-			"name": "City 3",
-			"longitude": 86.212172,
-			"latitude": 14.480298,
-			"addresses": [{
-					"addr_name": "Address 7",
-					"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
 					"addr_longitude": 22.362791,
 					"addr_latitude": 114.131421
-				},
-				{
-					"addr_name": "Address 8",
-					"addr_info": "See Addresses for more details on usage.",
-					"addr_longitude": 22.349032,
-					"addr_latitude": 114.075408
-				}
-			]
-		},
-
-		{
-			"name": "City 4",
-			"longitude": 83.526166,
-			"latitude": 30.910773,
-			"addresses": [{
-					"addr_name": "Address 9",
-					"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
+				}]
+			},
+			{
+				"name": "City 3_3",
+				"longitude": 86.212172,
+				"latitude": 14.480298,
+				"addresses": [{
+					"addr_name": "Address 18",
+					"addr_info": "The various addr keys are used to provide address information for buildings and facilities.",
 					"addr_longitude": 22.362791,
 					"addr_latitude": 114.131421
-				},
-				{
-					"addr_name": "Address 10",
-					"addr_info": "See Addresses for more details on usage.",
-					"addr_longitude": 22.349032,
-					"addr_latitude": 114.075408
-				}
-			]
-		},
+				}]
+			}
 
-		{
-			"name": "City 5",
-			"longitude": 86.212172,
-			"latitude": 14.480298,
-			"addresses": [{
-				"addr_name": "Address 11",
-				"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
-				"addr_longitude": 22.362791,
-				"addr_latitude": 114.131421
-			}]
-		}
+		]
+    }
 
-	],
-	"Country 2": [{
-			"name": "City 2_1",
-			"longitude": 86.212172,
-			"latitude": 14.480298,
-			"addresses": [{
-					"addr_name": "Address 12",
-					"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
-					"addr_longitude": 22.362791,
-					"addr_latitude": 114.131421
-				},
-				{
-					"addr_name": "Address 13",
-					"addr_info": "See Addresses for more details on usage.",
-					"addr_longitude": 22.349032,
-					"addr_latitude": 114.075408
-				}
-			]
-		},
-
-		{
-			"name": "City 2_2",
-			"longitude": 83.526166,
-			"latitude": 30.910773,
-			"addresses": [{
-				"addr_name": "Address 14",
-				"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
-				"addr_longitude": 22.362791,
-				"addr_latitude": 114.131421
-			}]
-		},
-
-		{
-			"name": "City 2_3",
-			"longitude": 86.212172,
-			"latitude": 14.480298,
-			"addresses": [{
-				"addr_name": "Address 15",
-				"addr_info": "The various addr keys are used to provide address information for buildings and facilities. See Addresses for more details on usage.",
-				"addr_longitude": 22.362791,
-				"addr_latitude": 114.131421
-			}]
-		}
-
-	],
-	"Country 3": [{
-			"name": "City 3_1",
-			"longitude": 86.212172,
-			"latitude": 14.480298,
-			"addresses": [{
-				"addr_name": "Address 16",
-				"addr_info": "The various addr keys are used to provide address information for buildings and facilities.",
-				"addr_longitude": 22.362791,
-				"addr_latitude": 114.131421
-			}]
-		},
-
-		{
-			"name": "City 3_2",
-			"longitude": 83.526166,
-			"latitude": 30.910773,
-			"addresses": [{
-				"addr_name": "Address 17",
-				"addr_info": "The various addr keys are used to provide address information for buildings and facilities.",
-				"addr_longitude": 22.362791,
-				"addr_latitude": 114.131421
-			}]
-		},
-		{
-			"name": "City 3_3",
-			"longitude": 86.212172,
-			"latitude": 14.480298,
-			"addresses": [{
-				"addr_name": "Address 18",
-				"addr_info": "The various addr keys are used to provide address information for buildings and facilities.",
-				"addr_longitude": 22.362791,
-				"addr_latitude": 114.131421
-			}]
-		}
-
-	]
-
-}
+]

@@ -1,5 +1,5 @@
 /* ====================================================== 
-   <!-- Navigation Area -->                                    
+   <!-- Navigation -->                                    
 /* ====================================================== */
 
 /*
@@ -11,7 +11,9 @@
 
 
 
-$nav-font-size: 0.75rem;
+$nav-font-size    : 0.75rem;
+$nav-sub-w        : 220px;
+$nav-mega-li-w    : 270px;
 
 .menu-container:not(.mobile) {
 	font-size: $nav-font-size;
@@ -34,12 +36,6 @@ $nav-font-size: 0.75rem;
 		margin: 0; /* Required*/
 		font-size: 0; /*Fighting the Space Between Inline Block Elements*/
 
-
-		ul a:hover {
-			color: #000 !important;
-			background: #F1F1F1;
-		}
-
 		li {
 			position: relative;
 			margin-bottom: 0;
@@ -47,9 +43,14 @@ $nav-font-size: 0.75rem;
 
 			a {
 				display: block;
-				padding-left: 0.625rem !important;
+				padding-left: 0.625rem;
 			}
+			
+
+			
 		}
+		
+		
 
 		> li {
 			display: inline-block;
@@ -58,24 +59,36 @@ $nav-font-size: 0.75rem;
 			white-space: nowrap; /* Required*/
 			font-size: $nav-font-size; /*Fighting the Space Between Inline Block Elements*/
 
-
+			.tip-label {
+				right: 1rem;
+			}
+			
 			&.active, 
-			&.current-menu-item, 
-			&:hover {
+			&.current-menu-item {
 				box-shadow: 0 2.15px 0 rgba(255, 255, 255, 1);
 			} 
 
+			
 			> a {
 				text-transform: uppercase;
 				font-weight: 700;
-				color: #fff;
+				color: #DEDEDE;
+				
+				&:hover {
+					color: #fff;
+				}	
+				
 			}
-
+			
 			ul {
-				min-width: 220px;
+				min-width: $nav-sub-w;
 				display: none;
 				position: absolute;
-				padding: 0.525rem 0;
+				padding-bottom: 0.525rem;
+				
+				li {
+					padding-left: 1.25rem;
+				}	
 			}
 
 			> ul {
@@ -97,23 +110,9 @@ $nav-font-size: 0.75rem;
 
 			}
 
-			&:not(.multi-column) > ul ul {
-				background: #fff;
-				border: 1.15px solid $primary-text-color1;
-				margin-left: -0.071875rem;
-				padding: 1.421875rem 0;
-			} 
-
-			li {
-				padding-left: 0.875rem;
-			}
-
-			ul li {
-				padding-left: 1.25rem;
-			}
-
-
+		
 		}
+
 
 		/* 
 		 ---------------------------
@@ -123,20 +122,38 @@ $nav-font-size: 0.75rem;
 		ul.sub-menu {
 			top: 100%;
 			left: 0;
-
-
-			li a {
+				
+			a {
 				word-wrap: break-word;
 				white-space: normal;
 				/* Required*/
 				line-height: 1.4;
 				padding: 0.35rem 0;
+
+				&:hover {
+					color: #000;
+					background: #F1F1F1;	
+				}	
+				
 			}
+			
+
 		}
 
-		> li:not(.multi-column) > ul ul {
-			top: 0;
-			left: 100%;
+		> li:not(.multi-column) > ul {
+			ul {
+				top: 0;
+				left: 100%;
+				background: #fff;
+				border: 1.15px solid $primary-text-color1;
+				padding: 1.421875rem 0;
+				margin-left: -0.071875rem;
+
+				ul {
+					margin-left: 0;
+				}
+				
+			}	
 		}
 
 	}
@@ -150,11 +167,65 @@ $nav-font-size: 0.75rem;
 	/* Multi-column */
 	li.multi-column {
 
+
 		> ul {
-			width: auto !important;
+			width: auto;
 			white-space: nowrap;
 			display: none;
-			padding: 0 !important;
+			padding: 0;
+
+			.multi-column-title {
+				text-transform: uppercase;
+				font-weight: 700;
+				color: #B9B9B9;
+				display: inline-block;
+				cursor: default;
+			}
+
+
+			li {
+				width: $nav-mega-li-w; /* Required, JS script needs to listen on it for calculation */
+				overflow: hidden;
+				display: inline-block;
+				vertical-align: top;
+				padding-left: 0.75rem;
+			
+	
+				.tip-label {
+					right: 1.2rem;
+				}
+				
+				
+				a {
+					
+					&:hover {
+						color: #000;
+						background: #F1F1F1;	
+					}	
+				}
+
+
+				ul {
+					position: relative;
+					box-shadow: none;
+					
+					/* Prevent JS script from disturbing */
+					margin-top: 0 !important;
+				}
+			}
+	
+			
+			ul {
+				display: block;
+
+				li {
+					float: none;
+					display: block;
+				}
+
+			}
+
+			
 		}
 
 		.mega-arrow {
@@ -171,58 +242,6 @@ $nav-font-size: 0.75rem;
 			opacity: 0;
 		}
 
-
-		> ul {
-
-			.multi-column-title {
-				padding-left: 0.625rem !important;
-				text-transform: uppercase;
-				font-weight: 700;
-				color: #B9B9B9;
-				display: inline-block;
-				padding: 0.4375rem 0 0;
-				cursor: default;
-				padding-top: 0.875rem;
-			}
-
-			> li > a {
-				color: #B9B9B9;
-				display: inline-block;
-				padding: 0.4375rem 0 0;
-				cursor: default;
-				padding-top: 0.875rem;
-
-				&:hover {
-					color: #B9B9B9 !important;
-				}
-			}
-
-
-			li {
-				width: 220px;
-				overflow: hidden;
-				display: inline-block;
-				vertical-align: top;
-				padding-left: 0.75rem !important;
-
-				ul {
-					position: relative !important;
-					box-shadow: none !important;
-				}
-			}
-
-
-			ul {
-				display: block !important;
-
-				li {
-					float: none;
-					display: block;
-				}
-
-			}
-
-		}
 
 
 	}

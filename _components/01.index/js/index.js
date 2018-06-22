@@ -14,9 +14,18 @@ APP = ( function ( APP, $, window, document ) {
 	    //your code here...
 		
     };
+	
+    APP.INDEX.pageLoaded    = function() {
 
+	    //your code here...
+		
+    };
+	
 
     APP.components.documentReady.push( APP.INDEX.documentReady );
+    APP.components.pageLoaded.push( APP.INDEX.pageLoaded );
+	
+	
     return APP;
 
 }( APP, jQuery, window, document ) );

@@ -7,84 +7,142 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP._3D_BACKGROUND               = APP._3D_BACKGROUND || {};
-	APP._3D_BACKGROUND.version       = '0.0.1';
+	APP._3D_BACKGROUND.version       = '0.0.2';
     APP._3D_BACKGROUND.documentReady = function( $ ) {
+
 
 		//grab each 3dAnimate element and pass it into the animate function along with the config data
 		$( '[data-3d-animate]' ).each( function( index, element ) {
-			var a = $( element ).data( '3d-animate' );
+			var config      = $( element ).data( '3d-animate' );
 			
-			if ( Object.prototype.toString.call( a ) =='[object Array]' ) {
-				animate3dMultiElement( a[0], a[1], element );
-			} else {
-				animate3dElement( a, $( this ) );
+			if( typeof config === typeof undefined ) {
+				config = false;
+			}
+
+			if ( config ) {
+				
+				if ( Object.prototype.toString.call( config.offset ) == '[object Array]' ) {
+					animate3dMultiElement( config.offset[0], config.offset[1], element, config.reset );
+				} else {
+					animate3dElement( config.offset, element, config.reset );
+				}
+
 			}
 			
 			
 		});
+		
 		
 	
 		/*
 		 * Sets an animation for each element
 		 *
 		 * @param  {number} base           - Base offset value.
-		 * @param  {object} element        - An HTML element.
+		 * @param  {object} obj            - An HTML element.
+		 * @param  {boolean} reset         - Reset block on mouse leave
 		 * @return {void}                  - The constructor.
 		 */
-		function animate3dElement( base, element ) {
+		function animate3dElement( base, obj, reset ) {
 
-			var $el     = element,
-				w       = $( window ).width(),
-				h       = $( window ).height();
+			var $el      = $( obj ),
+				w        = $el.innerWidth(),
+				h        = $el.innerHeight();
+			
 
-			$( window ).on( 'mousemove touchmove', function( e ) {
-				var offsetX          = 0.5 - e.pageX / w, // cursor X
-					offsetY          = 0.5 - e.pageY / h, // cursor Y
-					dy               = e.pageY - h / 2, // poster center vert.
-					dx               = e.pageX - w / 2, // poster center hor.
-					theta            = Math.atan2(dy, dx), // angle b/w cursor and poster center in RAD
-					angle            = theta * 180 / Math.PI - 90, // convert rad to => degrees
-					offsetEl         = base,
-					transformEl      = 'translateY(' + -offsetX * offsetEl + 'px) rotateX(' + (-offsetY * offsetEl) + 'deg) rotateY(' + (offsetX * (offsetEl * 2)) + 'deg)'; // poster transform
+//			TweenMax.set( $el, {
+//				perspective    : 500,
+//				transformStyle : "preserve-3d"
+//			});
 
-				// get angle
-				if ( angle < 0 ) {
-					angle = angle + 360;
+
+			
+			// mouse move on block
+			$( obj ).on( 'mousemove touchmove', function( e ) {
+				
+				var mX, 
+					mY,
+					rmX,
+					rmY,
+					touches = e.originalEvent.touches;
+			
+				if ( touches && touches.length ) {
+
+					mX = touches[0].pageX;
+					mY = touches[0].pageY;
+
+				} else {
+
+					mX = e.pageX;
+					mY = e.pageY;
 				}
-
-
-				// poster transform
-				$el.css({
-					'transform' : transformEl  
-				});
-
-			});
-
+				
+				//Find mouse position relative to element
+				rmX = mX - $( this ).offset().left;
+				rmY = mY - $( this ).offset().top;	
+				
+				//console.log('X: ' + rmX + ' Y: ' + rmY );
 	
+				
+				// function to run matrix3D effect on block
+				var tX = mousePosition( rmX, w ),
+					tY = mousePosition( rmY, h );
+
+
+				TweenMax.to( $( this ), 0.2, {
+					rotationY          : tX,
+					rotationX          : tY,
+					backgroundPosition : ( tX + 120 ) + "% 50%",
+				});
+				
+				
+				
+			});
+				
+			
+			if ( reset ) {
+				$( obj ).on( 'mouseleave touchcancel', function() {
+					TweenMax.to( $( this ), 0.5, {
+						rotationY          : 0,
+						rotationX          : 0,
+						backgroundPosition : "120% 50%"
+					});
+				});	
+			}
+				
+
+
+			// make some calculations for mouse position
+			function mousePosition( mousePos, dimension ) {
+				return ( Math.floor( mousePos / dimension * (base*2) ) - base );
+			}
+
+			
 		}
 			
+		
 		
 		/*
 		 * Sets an animation with parallax for each element
 		 *
 		 * @param  {number} base           - Base offset value.
 		 * @param  {number} multiple       - The power of target number.
-		 * @param  {object} element        - An HTML element.
+		 * @param  {object} obj            - An HTML element.
+		 * @param  {boolean} reset         - Reset block on mouse leave
 		 * @return {void}                  - The constructor.
 		 */
-		function animate3dMultiElement( base, multiple, element ) {
+		function animate3dMultiElement( base, multiple, obj, reset ) {
 
 			//get the specs of the element
-			var divOffset = $( element ).offset(),
+			var divOffset = $( obj ).offset(),
 				divTop    = divOffset.top,
 				divLeft   = divOffset.left,
-				divWidth  = $( element ).innerWidth(),
-				divHeight = $( element ).innerHeight();
+				divWidth  = $( obj ).innerWidth(),
+				divHeight = $( obj ).innerHeight();
 
 			
 	
 			//set an onmousemove event on the element
-			$( element ).on( 'mousemove touchmove', function( e ){
+			$( obj ).on( 'mousemove touchmove', function( e ){
 
 				var pctX, 
 					pctY,
@@ -101,25 +159,47 @@ APP = ( function ( APP, $, window, document ) {
 					pctY = ( e.pageY - divTop )/divHeight;
 				}
 
+				
+				
 
-
-				$( this ).children().each( function( index, element ) {
+				$( this ).children().each( function( index, elementSub ) {
 					var x         = pctX * ( base*Math.pow( multiple, index ) ),
 						y         = pctY * ( base*Math.pow( multiple, index ) ),
 						z         = 0,
 						deg       = pctY * ( 180 / Math.PI ),
 						rotateDeg = parseFloat( deg - 35 );
-				
-					
-					$( element ).css( 'transform', 'translate('+ x +'px ,'+ y +'px) rotate3d( -1, 1, 0, '+ rotateDeg +'deg )' );
 					
 					
+					TweenMax.to( $( elementSub ), 0.2, {
+						css: {
+							'transform' : 'translate('+ x +'px ,'+ y +'px) rotate3d( -1, 1, 0, '+ rotateDeg +'deg )'
+						}
+					});
+			
 					
 				});
 
 			});
+			
+			if ( reset ) {
+				$( obj ).on( 'mouseleave touchcancel', function() {
+					
+					
+					$( this ).children().each( function( index, elementSub ) {
 
-		}	
+						TweenMax.to( $( elementSub ), 0.5, {
+							css: {
+								'transform' : 'translate(0,0) rotate3d( -1, 1, 0, 0deg )'
+							}
+						});
+					});
+				});	
+			}
+						
+			
+
+		}
+		
 		
     };
 

@@ -2,7 +2,7 @@
 
 
 [![Travis CI](https://api.travis-ci.org/xizon/uix-kit.svg?branch=master)](https://travis-ci.org/xizon/uix-kit/)
-[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=1.8.0&x2=0)](https://www.npmjs.com/package/uix-kit)
+[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=1.8.1&x2=0)](https://www.npmjs.com/package/uix-kit)
 [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
 
 
@@ -34,11 +34,10 @@
 
 ## Getting Started
 
+
 <p align = "left">
 	<a href="https://www.youtube.com/watch?v=ckYJBMfPtBs"><img src="https://uiux.cc/uix-kit/_screenshots/video-cover.jpg" width="400"></a>
 </p>
-
-
 
 
 
