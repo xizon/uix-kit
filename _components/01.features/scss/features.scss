@@ -12,14 +12,21 @@ $features-icon-size: 1.5rem;
 		width: #{$features-icon-size*3};
 		height: #{$features-icon-size*3};
 		line-height: #{$features-icon-size*3};
-		border: 1px $primary-text-color1 solid;
-		border-radius: 100%;
 		@include transition-default();
 		
 		i {
-			font-size: $features-icon-size;
+			font-size: #{$features-icon-size*1.2};
 			@include transition-default();
 		}	
+		
+		&.border {
+			border: 1px $primary-text-color1 solid;
+			border-radius: 100%;	
+			
+			i {
+				font-size: $features-icon-size;
+			}
+		}
 		
 		&:hover {
 			background: $primary-text-color1;
@@ -37,23 +44,57 @@ $features-icon-size: 1.5rem;
 	
 	/* Vertical Icons */
 	.icon-side {
+		position: relative;
 		display: inline-block;
 		width: #{$features-icon-size*2};
 		height: #{$features-icon-size*2};
 		line-height: #{$features-icon-size*2};
 		@include transition-default();
 		
+		i {
+			font-size: $features-icon-size;
+			margin-right: .36rem;
+			@include transition-default();
+		}
+
 		
 		&.sep-col {
 			display: table-cell;
 			vertical-align: top;
 		}
 		
-		i {
-			font-size: $features-icon-size;
-			margin-right: .36rem;
-			@include transition-default();
+		
+		&.border {
+			text-align: center;
+			margin-right: 1rem;
+			
+			
+			i {
+				font-size: #{$features-icon-size/1.2};
+				margin-right: 0;
+			}
+			
+			~ .desc {
+				transform: translateX(1rem);
+			}
+			
+			&::before {
+				content: '';
+				display: block;
+				width: #{$features-icon-size*2};
+				height: #{$features-icon-size*2};
+				position: absolute;
+				z-index: 0;
+				left: 0;
+				top: 0;
+				border: 1px $primary-text-color1 solid;
+				border-radius: 100%;
+				text-align: center;
+				margin-right: 1rem;	
+				
+			}
 		}
+
 	}
 
 
@@ -82,4 +123,39 @@ $features-icon-size: 1.5rem;
 		}
 		
 	}
+}
+
+
+.font-white {
+
+	.custom-feature {
+
+		/* Horizontal Icons */
+		.icon {
+			
+			&.border {
+				border-color: #fff;
+			}
+
+		}
+
+
+
+		/* Vertical Icons */
+		.icon-side {
+	
+
+			&.border {
+			
+
+				&::before {
+					border-color: #fff;
+
+				}
+			}
+
+		}
+
+	}
+	
 }

@@ -139,221 +139,238 @@
  4. Seamless Grid
  ---------------------------
  */ 
-$seamless-grid-pad : 15px;
 
-.seamless-grid-container {
-	width: 100%;
+
+// Custom Scrollbar
+// ---------------------------
+//
+@mixin seamlessGridGenerate( $classname: '.seamless-grid-container', $pad: '15px' ) {
+	// @include seamlessGridGenerate( '.seamless-grid-container', '15px' );
 	
-	.seamless-grid,
-	[class*='seamless-col-'] {
-	    box-sizing: border-box;
-	}
+	$seamless-grid-pad : #{$pad};
 	
-
-	.seamless-grid {
-
-		width: calc( 100% + #{$seamless-grid-pad} );
-
-		&::after {
-			/* Or @extend clearfix */
-			content: "";
-			display: table;
-			clear: both;
-		}
-
-		.content {
-			word-wrap: break-word;
-			position: relative;
-		}
-
-		
-		&.no-gutter {
-			
+    @if ( $classname != '' ) {
+		#{$classname} {
 			width: 100%;
-			
-			> [class*='seamless-col-'] {
-			    padding-right: 0 !important;
-	    	}
-		  
-		}		
+
+			.seamless-grid,
+			[class*='seamless-col-'] {
+				box-sizing: border-box;
+			}
 
 
-	}
+			.seamless-grid {
+
+				width: calc( 100% + #{$seamless-grid-pad} );
+
+				&::after {
+					/* Or @extend clearfix */
+					content: "";
+					display: table;
+					clear: both;
+				}
+
+				.content {
+					word-wrap: break-word;
+					position: relative;
+				}
 
 
-	[class*='seamless-col-'] {
-		float: left;
-		padding-right: $seamless-grid-pad;
-		margin-bottom: $seamless-grid-pad/2;
+				&.no-gutter {
 
-		.seamless-grid &:last-of-type {
-			padding-right: 0;
+					width: 100%;
+
+					> [class*='seamless-col-'] {
+						padding-right: 0 !important;
+					}
+
+				}		
+
+
+			}
+
+
+			[class*='seamless-col-'] {
+				float: left;
+				padding-right: $seamless-grid-pad;
+				margin-bottom: $seamless-grid-pad/2;
+
+				.seamless-grid &:last-of-type {
+					padding-right: 0;
+				}
+				.seamless-grid &:last-of-type .content {
+					width: calc(100% - #{$seamless-grid-pad}); 
+				}	
+
+
+
+
+			}
+
+
+			.seamless-col-1 {
+				width: 8.333333333333%;
+			}
+
+			.seamless-col-2 {
+				width: 16.66666666666667%;
+			}
+
+			.seamless-col-3 {
+				width: 25%;
+			}
+
+			.seamless-col-4 {
+				width: 33.333333333333%;
+			}
+
+
+			.seamless-col-5 {
+				width: 41.666666666667%;
+			}
+
+			.seamless-col-6 {
+				width: 50%;
+			}
+
+			.seamless-col-7 {
+				width: 58.333333333333%;
+			}
+
+			.seamless-col-8 {
+				width: 66.666666666667%;
+			}
+
+			.seamless-col-9 {
+				width: 75%;
+			}
+
+			.seamless-col-10 {
+				width: 83.333333333333%;
+			}
+
+
+			.seamless-col-11 {
+				width: 91.666666666667%;
+			}
+
+			.seamless-col-12 {
+				width: 100%;
+			}
+
+
+			.seamless-grid.loop .seamless-col-6:nth-child(2n+1),
+			.seamless-grid.loop .seamless-col-4:nth-child(3n+1),
+			.seamless-grid.loop .seamless-col-3:nth-child(4n+1),
+			.seamless-grid.loop .seamless-col-2:nth-child(6n+1) {
+				clear: both;
+			}
+
+
+
 		}
-		.seamless-grid &:last-of-type .content {
-			width: calc(100% - #{$seamless-grid-pad}); 
-		}	
 
 
 
-		
-	}
+
+		@media all and (max-width: 991px) {
+
+			#{$classname} {
 
 
-	.seamless-col-1 {
-		width: 8.333333333333%;
-	}
-	
-	.seamless-col-2 {
-		width: 16.66666666666667%;
-	}
+				/* 2 columns */
+				.seamless-grid.use-2 .seamless-col-2,
+				.seamless-grid.use-2 .seamless-col-3,
+				.seamless-grid.use-2 .seamless-col-4 {
+					width: 50%;
+					float: left;
+				}
 
-	.seamless-col-3 {
-		width: 25%;
-	}
-	
-	.seamless-col-4 {
-		width: 33.333333333333%;
-	}
-	
-	
-	.seamless-col-5 {
-		width: 41.666666666667%;
-	}
-	
-	.seamless-col-6 {
-		width: 50%;
-	}
-	
-	.seamless-col-7 {
-		width: 58.333333333333%;
-	}
-	
-	.seamless-col-8 {
-		width: 66.666666666667%;
-	}
+				.seamless-grid.use-2 .seamless-col-2:nth-child(2n+1),
+				.seamless-grid.use-2 .seamless-col-3:nth-child(2n+1),
+				.seamless-grid.use-2 .seamless-col-4:nth-child(2n+1) {
+					padding-right: $seamless-grid-pad;
+					clear: both;
 
-	.seamless-col-9 {
-		width: 75%;
-	}
-	
-	.seamless-col-10 {
-		width: 83.333333333333%;
-	}
-	
-
-	.seamless-col-11 {
-		width: 91.666666666667%;
-	}
-
-	.seamless-col-12 {
-		width: 100%;
-	}
-	
-
-	.seamless-grid.loop .seamless-col-6:nth-child(2n+1),
-	.seamless-grid.loop .seamless-col-4:nth-child(3n+1),
-	.seamless-grid.loop .seamless-col-3:nth-child(4n+1),
-	.seamless-grid.loop .seamless-col-2:nth-child(6n+1) {
-		clear: both;
-	}
+				}
 
 
+			}
+
+
+
+
+		}
+
+
+		@media all and (max-width: 768px) {
+
+
+			#{$classname}:not(.none-breaking) {
+
+				.seamless-grid {
+					&.no-gutter {
+						width: calc(100% + #{$seamless-grid-pad});
+					}	
+				}
+
+				[class*='seamless-col-'] {
+					float: none;
+					width: calc(100% - #{$seamless-grid-pad});
+					padding-left: 0;
+					padding-right: 0;
+				}
+
+
+
+				/* 2 columns */
+				.seamless-grid.use-2 .seamless-col-2,
+				.seamless-grid.use-2 .seamless-col-3,
+				.seamless-grid.use-2 .seamless-col-4 {
+					width: 50%;
+					float: left;
+					margin-bottom: 0;
+				}
+
+				.seamless-grid.use-2.no-gutter .seamless-col-2,
+				.seamless-grid.use-2.no-gutter .seamless-col-3,
+				.seamless-grid.use-2.no-gutter .seamless-col-4 {
+					width: calc(50% - #{$seamless-grid-pad/2});
+				}
+
+
+				.seamless-grid.use-2 .seamless-col-2:nth-child(2n+1),
+				.seamless-grid.use-2 .seamless-col-3:nth-child(2n+1),
+				.seamless-grid.use-2 .seamless-col-4:nth-child(2n+1) {
+					clear: both;
+
+				}
+
+
+				.seamless-grid.use-2 .seamless-col-2:nth-child(2n+0),
+				.seamless-grid.use-2 .seamless-col-3:nth-child(2n+0),
+				.seamless-grid.use-2 .seamless-col-4:nth-child(2n+0) {
+					padding-right: $seamless-grid-pad;
+
+				}
+
+
+
+			}
+
+
+
+
+		}
+
+
+	}
 	
 }
 
 
-
-
-@media all and (max-width: 991px) {
-	
-	.seamless-grid-container {
-		
-	
-		/* 2 columns */
-		.seamless-grid.use-2 .seamless-col-2,
-		.seamless-grid.use-2 .seamless-col-3,
-		.seamless-grid.use-2 .seamless-col-4 {
-			width: 50%;
-			float: left;
-		}
-
-		.seamless-grid.use-2 .seamless-col-2:nth-child(2n+1),
-		.seamless-grid.use-2 .seamless-col-3:nth-child(2n+1),
-		.seamless-grid.use-2 .seamless-col-4:nth-child(2n+1) {
-			padding-right: $seamless-grid-pad;
-			clear: both;
-
-		}
-
-
-	}
-	
-
-
-	
-}
-
-
-@media all and (max-width: 768px) {
-	
-	
-	.seamless-grid-container:not(.none-breaking) {
-		
-		.seamless-grid {
-			&.no-gutter {
-				width: calc(100% + #{$seamless-grid-pad});
-			}	
-		}
-		
-		[class*='seamless-col-'] {
-			float: none;
-			width: calc(100% - #{$seamless-grid-pad});
-			padding-left: 0;
-			padding-right: 0;
-		}
-
-		
-		
-		/* 2 columns */
-		.seamless-grid.use-2 .seamless-col-2,
-		.seamless-grid.use-2 .seamless-col-3,
-		.seamless-grid.use-2 .seamless-col-4 {
-			width: 50%;
-			float: left;
-			margin-bottom: 0;
-		}
-		
-		.seamless-grid.use-2.no-gutter .seamless-col-2,
-		.seamless-grid.use-2.no-gutter .seamless-col-3,
-		.seamless-grid.use-2.no-gutter .seamless-col-4 {
-			width: calc(50% - #{$seamless-grid-pad/2});
-		}
-	
-		
-		.seamless-grid.use-2 .seamless-col-2:nth-child(2n+1),
-		.seamless-grid.use-2 .seamless-col-3:nth-child(2n+1),
-		.seamless-grid.use-2 .seamless-col-4:nth-child(2n+1) {
-			clear: both;
-
-		}
-
-
-		.seamless-grid.use-2 .seamless-col-2:nth-child(2n+0),
-		.seamless-grid.use-2 .seamless-col-3:nth-child(2n+0),
-		.seamless-grid.use-2 .seamless-col-4:nth-child(2n+0) {
-			padding-right: $seamless-grid-pad;
-
-		}
-		
-	
-
-	}
-
-
-
-	
-}
-
+@include seamlessGridGenerate( '.seamless-grid-container', '15px' );
+@include seamlessGridGenerate( '.seamless-grid-container-large', '30px' );
 
 
 /* 
@@ -383,12 +400,10 @@ $seamless-grid-pad : 15px;
     float: left;
     width: 100%;
     min-height: 1px;
-    padding-left: 10px;
-    padding-right: 10px;
 	
-	&.el-col {
-		padding-left: 0;
-		padding-right: 0;
+	&.el-col-center {
+		float: none;
+		display: inline-block;
 	}
 }
 

@@ -8,7 +8,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.NAVIGATION               = APP.NAVIGATION || {};
-	APP.NAVIGATION.version       = '0.0.3';
+	APP.NAVIGATION.version       = '0.0.4';
     APP.NAVIGATION.documentReady = function( $ ) {
 
 		var $window      = $( window ),
@@ -17,7 +17,7 @@ APP = ( function ( APP, $, window, document ) {
 			ulForDesktop = '.menu-container:not(.mobile) ul.menu-main';
 
 
-		// Menu selected (if it exists "data-current" property in <ul>)
+		//-------- Menu selected (if it exists "data-current" property in <ul>)
 		var curMenuIndex = $( ulForDesktop ).data( 'current' );
 		if ( typeof curMenuIndex !== typeof undefined ) {
 			$( ulForDesktop + ' > li:eq('+curMenuIndex+')' ).addClass( 'active' );
@@ -25,7 +25,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
-		// Menu Hover
+		//-------- Menu Hover
 		var mTop = 15;
 		$( ulForDesktop + ' > li.multi-column > ul li ul' ).addClass( 'multi' );
 		$( ulForDesktop + ' > li:not(.multi-column) ul, .menu-container:not(.mobile) li.multi-column > ul.sub-menu > li > ul, '+ulForDesktop+' li.multi-column > ul' ).css( 'margin-top', mTop + 'px' );
@@ -81,7 +81,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
-		//Add Sub-menu Arrow
+		//-------- Add Sub-menu Arrow
 		$( ulForDesktop + ' li' ).each( function() {
 			if ( $( this ).find( 'ul' ).length > 0 ) {
 				$( this ).prepend( '<span class="nav-arrow"></span>' );
@@ -91,18 +91,24 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
-		// Sticky primary navigation
-		var waypoints2 = $( '.menu-container:not(.mobile)' ).waypoint({
-			handler: function( direction ) {
+		//-------- Sticky primary navigation
+		//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
+		var $el = $( '.menu-container:not(.mobile)' );
+		$window.on('scroll touchmove', function() {
 
-				$( this.element ).toggleClass( 'spy-scroll-fixed', direction === 'down' );
-
-			},
-			offset: -120
+			var scrollTop = $( this ).scrollTop(),
+				spyTop    = 220;
+			
+			if ( scrollTop >= spyTop ) {
+				$el.addClass( 'spy-scroll-fixed' );
+			} else {
+				$el.removeClass( 'spy-scroll-fixed' );	
+			}
+			
 		});
+		
 
-
-		//Prevent to <a> of page transitions
+		//-------- Prevent to <a> of page transitions
 		$( 'a' ).each( function() {
 			var attr = $( this ).attr( 'href' );
 			if ( typeof attr !== typeof undefined && attr !== false ) {

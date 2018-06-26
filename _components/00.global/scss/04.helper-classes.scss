@@ -132,16 +132,20 @@
 .fl {
     float: left;
 	
-	&.mobile-none {
-		float: none;
+	@media all and (max-width: 768px) {
+		&.mobile-none {
+			float: none;
+		}
 	}
 }
 
 .fr {
     float: right;
 	
-	&.mobile-none {
-		float: none;
+	@media all and (max-width: 768px) {
+		&.mobile-none {
+			float: none;
+		}
 	}
 }
 
@@ -154,16 +158,20 @@
 .t-r {
     text-align: right;
 	
-	&.mobile-center {
-		text-align: center;
-	}	
+	@media all and (max-width: 768px) {
+		&.mobile-center {
+			text-align: center;
+		}	
+	}
 }
 
 .t-l {
     text-align: left;
 	
-	&.mobile-center {
-		text-align: center;
+	@media all and (max-width: 768px) {
+		&.mobile-center {
+			text-align: center;
+		}
 	}
 }
 

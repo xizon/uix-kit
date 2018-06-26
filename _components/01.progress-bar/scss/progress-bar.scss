@@ -7,6 +7,7 @@ $bar-line-size  : 8px;
 $bar-bg         : $primary-text-color1;
 $bar-track-bg   : rgba(236,236,236,1.00);
 $bar-fill-color : $highlight-color1;
+$bar-speed      : 0.8s;
 
 /* 
  ---------------------------
@@ -39,7 +40,7 @@ $bar-fill-color : $highlight-color1;
 		top: 0;
 
 		.half-circle {
-			@include transition-default();
+			transition: all #{$bar-speed} ease;
 			@include size(100%, 100%);
 			border: $bar-line-size solid;
 			border-radius: 50%;
@@ -177,7 +178,7 @@ $bar-fill-color : $highlight-color1;
 		}
 		
 		.track {
-			@include transition-default();
+			transition: all #{$bar-speed} ease;
 			position: relative;
 			height: 100%;
 			width: 0;

@@ -8,7 +8,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.MOBILE_MENU               = APP.MOBILE_MENU || {};
-	APP.MOBILE_MENU.version       = '0.0.1';
+	APP.MOBILE_MENU.version       = '0.0.2';
     APP.MOBILE_MENU.documentReady = function( $ ) {
 
 		var $window      = $( window ),
@@ -18,25 +18,31 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
-		//Show Toolbar when viewing site for WordPress
-		var waypoints = $( '.admin-bar .menu-mobile-toggle' ).waypoint({
-			handler: function( direction ) {
+		//-------- Show Toolbar when viewing site for WordPress
+		//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
+		var $el = $( '.admin-bar .menu-mobile-toggle' );
+		$window.on('scroll touchmove', function() {
 
-				$( this.element ).toggleClass( 'spy-scroll-postion', direction === 'down' );
-
-			},
-			offset: -46
+			var scrollTop = $( this ).scrollTop(),
+				spyTop    = 46;
+			
+			if ( scrollTop >= spyTop ) {
+				$el.addClass( 'spy-scroll-postion' );
+			} else {
+				$el.removeClass( 'spy-scroll-postion' );	
+			}
+			
 		});
 
 
 
-		// Mobile Menu
+		//-------- Mobile Menu
 		var $toggle     = $( '.menu-mobile-toggle' ),
 			$toggleBody = $( 'body' );
 
 
 
-		//Add mobile menu to your website
+		//-------- Add mobile menu to your website
 		$( 'nav.menu-container' ).clone().addClass( 'mobile' ).appendTo( 'body' );
 		//Wait until previous .appendTo() is complete
 		$.when( $( '.menu-container.mobile' ).length > 0 ).then( function(){

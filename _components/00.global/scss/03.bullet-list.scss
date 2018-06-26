@@ -7,6 +7,7 @@
  * 2. Normal Numbers Ordered List
  * 3. Custom Circle Icons Ordered List
  * 4. Big Numbers Ordered List
+ * 5. Step Timeline By Numbers
 */
 
 
@@ -221,3 +222,72 @@ ol.list-big-numbered.fill-bg,
 .list-big-numbered.fill-bg.none-zero li::before {
 	content: counter(item);
 }	
+
+
+/* 
+ ---------------------------
+ 5. Step Timeline By Numbers
+ ---------------------------
+ */ 
+$step-line-color: #333;
+
+.list-step-numbers {
+    counter-reset: step;
+    list-style-type: none;
+	margin-left: 1rem;
+	
+	li {
+		position: relative;
+		padding: 0 0 1.5rem 3.75rem;
+		min-height: 75px;
+		border-left: 2px solid $step-line-color;
+	
+
+
+		&::before {
+			counter-increment: step;
+			content: counters(step,".") " ";
+			position: absolute;
+			left: -26px;
+			top: 0;
+			height: 50px;
+			width: 50px;
+			font-size: 1rem;
+			font-weight: 700;
+			line-height: 48px;
+			text-align: center;
+			color: #fff;
+			background-color: $highlight-color1;
+			border: 2px solid $step-line-color;
+			border-radius: 50%;
+			z-index: 2;
+		}
+
+
+		&:last-child {
+			border-left: none;
+		}
+
+		&:last-child::before {
+			content: '\2713';
+		}
+
+	}
+
+	
+}
+
+
+
+@media all and (max-width:768px) {
+
+    .list-step-numbers {
+		
+		li {
+			padding-left: 2.5rem;
+		}
+		
+    }
+
+}
+

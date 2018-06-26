@@ -1,0 +1,59 @@
+/* ====================================================== 
+   <!-- Shape Animation --> 
+/* ====================================================== */
+.shape-anim {
+	position: relative;
+	width: 300px;
+	height: 50px;
+
+	&::before,
+	&::after {
+		content: "";
+		width: 0%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0px;
+		background-color: $highlight-color1;
+		transform: skew(-20deg,0);
+		-webkit-transform: skew(-20deg,0);
+		transform: skew(-20deg,0);
+		z-index: 0;
+	}
+
+	&::after {
+		left: auto;
+		right: 0px;
+		animation: toAfter 0.6s 0.8s ease-in-out forwards;
+	}
+
+	&::before {
+		animation: toBefore 0.6s 0.2s ease-in-out;
+	}
+	
+}
+
+
+@keyframes toBefore {
+    0% {
+        z-index: 1;
+    }
+
+    100% {
+        z-index: 1;
+        width: 100%;
+    }
+}
+
+@keyframes toAfter {
+    0% {
+        z-index: 5;
+        width: 100%;
+    }
+
+    100% {
+        z-index: 0;
+        width: 10%;
+        min-width: 50px;
+    }
+}

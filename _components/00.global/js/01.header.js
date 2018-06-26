@@ -8,7 +8,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.HEADER               = APP.HEADER || {};
-	APP.HEADER.version       = '0.0.1';
+	APP.HEADER.version       = '0.0.2';
     APP.HEADER.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -19,20 +19,6 @@ APP = ( function ( APP, $, window, document ) {
 			windowWidth  = $window.width(),
 			windowHeight = $window.height();
 
-
-		
-		//-------- Sticky header area
-		var waypoints = $( '.header-area' ).waypoint({
-			handler: function( direction ) {
-				
-				$( this.element ).toggleClass( 'spy-scroll-fixed', direction === 'down' );
-				$( '.header-inner' ).toggleClass( 'spy-scroll-fixed', direction === 'down' );
-
-			},
-			offset: -120
-		});
-		
-		
 		
 		//-------- Header initialize
 		headerInit( windowWidth );
@@ -55,6 +41,26 @@ APP = ( function ( APP, $, window, document ) {
 			
 		}
 		
+		
+
+
+		
+		//-------- Sticky header area
+		//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
+		var $el = $( '.header-area' );
+		$window.on('scroll touchmove', function() {
+
+			var scrollTop = $( this ).scrollTop(),
+				spyTop    = 220;
+			
+			if ( scrollTop >= spyTop ) {
+				$el.addClass( 'spy-scroll-fixed' );
+			} else {
+				$el.removeClass( 'spy-scroll-fixed' );	
+			}
+			
+		});
+
 		
     };
 

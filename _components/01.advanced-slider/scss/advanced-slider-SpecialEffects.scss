@@ -40,7 +40,7 @@
 	.inner {
 		
 		position: relative;
-		z-index: 1;
+		z-index: 3;
 		
 		.item {
 			position: absolute;
@@ -50,7 +50,23 @@
 			width: 100%;
 			opacity: 0;
 			
+			.txt {
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%,-50%);
+				z-index: 15;
+				
+				h3 {
+					margin-bottom: 0;
+				}
+			}
+			
+			
+			@include securityWidthForElement( '.txt' ) ;
 
+			
+			
 			img {
 				width: 100%;
 				visibility: hidden;

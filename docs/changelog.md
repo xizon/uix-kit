@@ -1,6 +1,19 @@
 # Changelog
 
 
+
+#### = 1.8.2 (June 26, 2018) =
+
+* Fix: Fixed a bug in style spying when scrolling.
+* New: Add a new module "Ribbon".
+* New: Add a new module "Shape Animation".
+* New: Added two default page combination demos. To quickly build a basic composite structure for building a website.
+* New: Add a new list style "Step Timeline By Numbers" of "BUllet List".
+* Tweak: Improved flexibility of some modules, optimized SCSS code.
+* Tweak: Added more disabled style attributes to the form Kit.
+* Tweak: Removed class ".theme-white" from the page &lt;body&gt; tag.
+
+
 #### = 1.8.1 (June 21, 2018) =
 
 

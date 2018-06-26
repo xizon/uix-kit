@@ -1,0 +1,89 @@
+/* ====================================================== 
+   <!-- Ribbon --> 
+/* ====================================================== */
+
+$ribbon-bg: $highlight-color1;
+$ribbon-w: 40px;
+$ribbon-tail: 10px;
+
+.ribbon-triangle {
+	padding: 0 0 $ribbon-tail 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: $ribbon-w;
+
+
+	&.style-1 {
+		> div {
+			background:  $ribbon-bg;
+			color: #fff;
+			padding: 0.5rem 0;
+			text-align: center;
+
+			&::after {
+				border-left:  $ribbon-w/2 solid $ribbon-bg;
+				border-right:  $ribbon-w/2 solid $ribbon-bg;
+				border-bottom:  $ribbon-tail solid transparent;
+				bottom: 0;
+				content: '';
+				height: 0;
+				left: 0;
+				position: absolute;
+				width: 0;
+			}  
+
+		}	
+	}
+
+
+	&.style-2 {
+		
+		&::after {
+			border-top: $ribbon-w solid transparent;
+			border-bottom: $ribbon-w solid transparent;
+			border-left: $ribbon-w solid $ribbon-bg;
+			transform: rotate(-45deg);
+			bottom: -0.75rem;
+			content: '';
+			height: 0;
+			left: 0.25rem;
+			position: absolute;
+			width: 0;
+			z-index: 0;
+		}  
+		
+		> div {
+			color: #fff;
+			padding: 0 0 0.25rem 0.5rem;
+			text-align: center;
+			position: relative;
+			z-index: 1;
+		}	
+		
+	}
+	
+	
+	
+	&.left {
+		right: auto;
+		left: 0;
+		
+
+		&.style-2 {
+
+			&::after {
+				transform: rotate(-135deg);
+				left: -0.25rem;
+			} 
+
+		}
+
+		
+		
+	}
+
+
+}
+
+

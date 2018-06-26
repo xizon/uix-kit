@@ -7,29 +7,37 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.BACK_TO_TOP               = APP.BACK_TO_TOP || {};
-	APP.BACK_TO_TOP.version       = '0.0.1';
+	APP.BACK_TO_TOP.version       = '0.0.2';
     APP.BACK_TO_TOP.documentReady = function( $ ) {
 
-		// Add button to body for back to top
-		if ( $( '#toTop' ).length == 0 ) {
-			$( 'body' ).prepend( '<a href="#" id="toTop"><span id="toTopHover"></span></a>' );
-		}
 		
-		
-		// Sticky button of back to top 
-		var waypoints = $( '#toTop' ).waypoint({
-			handler: function( direction ) {
-				
-				$( this.element ).toggleClass( 'active', direction === 'down' );
+		var $window      = $( window ),
+			windowWidth  = $window.width(),
+			windowHeight = $window.height(),
+			$el          = $( '#toTop' );
 
-			},
-			offset: -120
+
+		//-------- Sticky button of back to top 
+		//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
+		$( window ).on('scroll touchmove', function() {
+
+			var scrollTop = $( this ).scrollTop(),
+				spyTop    = windowHeight/2;
+
+		
+			if ( scrollTop >= spyTop ) {
+				$el.addClass( 'active' );
+			} else {
+				$el.removeClass( 'active' );	
+			}
+
 		});
-		
-		
-		$( '#toTop' ).on( 'click', function( e ) {
+
+
+		//-------- Click event of back button
+		$el.on( 'click', function( e ) {
 			e.preventDefault();
-			
+
 			TweenMax.to( window, 0.5, {
 				scrollTo: {
 					y: 0
@@ -37,7 +45,8 @@ APP = ( function ( APP, $, window, document ) {
 				ease: Power2.easeOut
 			});	
 
-		});
+		});	
+			
 		
 		
     };

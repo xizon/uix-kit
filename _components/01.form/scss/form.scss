@@ -187,7 +187,6 @@ $control-focus-bordercolor2: transparent;
 		/* Remove inner shadow from inputs on mobile iOS */
 		-webkit-appearance: none;    
 
-		width: calc(100% - 1.09375rem );
 		font-size: $font-size-form;
 		padding: 0.546875rem;
 		margin: 0;
@@ -420,6 +419,57 @@ $control-focus-bordercolor2: transparent;
 		
 	}
 	
+	/*-- Form Status: Disable --*/
+	&:not(.line-eff).disable {
+		input:not([type="checkbox"]):not([type="radio"]) {
+		    border-color: #E1E1E1;
+			background: #EDEDED;
+
+		}
+		textarea, 
+		button, 
+		select {
+		    border-color: #E1E1E1;
+			background: #E1E1E1;
+		}
+		
+
+		.bar {
+			&::before,
+			&::after {
+				background: #E1E1E1;
+			}	
+		}
+		
+		
+	}
+	
+	
+	&.line-eff.disable {
+		input:not([type="checkbox"]):not([type="radio"]) {
+		    opacity: .7;
+
+		}
+		textarea, 
+		button, 
+		select {
+		    opacity: .7;
+		}
+		
+		label {
+			opacity: .5;
+		}
+		
+		
+		.bar {
+			&::before,
+			&::after {
+				opacity: .5;
+			}	
+		}
+		
+	}
+	
 	
 	/*-- Other --*/
 	.fa-sort {
@@ -445,6 +495,7 @@ $control-focus-bordercolor2: transparent;
 /* Create Line Effect on Click */
 .controls.line-eff {
 
+	
 	&.circle {
 		input:not([type="checkbox"]):not([type="radio"]),
 		textarea, 
@@ -696,6 +747,11 @@ $controls-merge-button-width: 20%;
 	text-align: left;
 	margin-right: .3rem;
 	
+	&.fullwidth {
+		width: 100%;
+	}	
+
+	
 }
 
 .custom-select-wrapper {
@@ -703,6 +759,62 @@ $controls-merge-button-width: 20%;
 	display: inline-block;
 	user-select: none;
 	min-height: 4.1rem;
+	
+	&.fullwidth {
+		width: 100%;
+		
+		.custom-select-trigger {
+			width: 100% !important;
+		}
+		
+	}
+	
+	&:not(.line-eff).disable {
+		
+		/* Mask used to prohibit selection */
+		&::before {
+			content: '';
+			position: absolute;
+			display: block;
+			width: 100%;
+			height: 100%;
+			background: none;
+			top: 0;
+			left: 0;
+			z-index: 2;
+			user-select: none;
+
+		}
+
+		.custom-select-trigger {
+			border-color: #E1E1E1 !important;
+			background: #EDEDED !important;
+			
+		}
+
+	}
+	
+	&.line-eff.disable {
+		
+		opacity: .7;
+		
+		/* Mask used to prohibit selection */
+		&::before {
+			content: '';
+			position: absolute;
+			display: block;
+			width: 100%;
+			height: 100%;
+			background: none;
+			top: 0;
+			left: 0;
+			z-index: 2;
+			user-select: none;
+
+		}
+
+	}
+	
 	
 	select {
 	    display: none;
@@ -728,6 +840,7 @@ $controls-merge-button-width: 20%;
 		&::after {
 			@include select-arrow( -.275rem, 1rem );
 		}
+
 
 	}
 

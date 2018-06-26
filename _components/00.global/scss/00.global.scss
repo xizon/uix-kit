@@ -270,15 +270,15 @@ $primary-bg-color      : transparent;
 		background-color: #E6E3E3;
 	}
 
-	@if ($dir == 'vertical') {
+	@if ( $dir == 'vertical' ) {
 		&::-webkit-scrollbar {
 			width: 5px;
-			background-color: $highlight-color1;
+			background-color: #{$highlight-color1};
 		}
 	} @else {
 		&::-webkit-scrollbar {
 			height: 5px;
-			background-color: $highlight-color1;
+			background-color: #{$highlight-color1};
 		}
 
 	}
@@ -286,7 +286,50 @@ $primary-bg-color      : transparent;
 
 	&::-webkit-scrollbar-thumb {
 		border-radius: 0px;
-		background-color: $highlight-color1;
+		background-color: #{$highlight-color1};
+	}
+	
+}
+
+
+// Security Width Setting for Absolute Element 
+// ---------------------------
+// Note: Generally used for elements that cannot use ".container", such as 
+//       absolutely elements whose security width cannot be determined
+//
+@mixin securityWidthForElement( $classname: '.demo' ){
+	// @include securityWidthForAbsoluteEl( '.txt' );
+
+	@if ( $classname != '' ) {
+		/* New XL container for Bootstrap 3.x */
+		#{$classname} {
+			width: 1170px;
+			position: absolute;
+			left: 50%;
+			transform: translateX(-50%);
+			padding-left: 15px;
+			padding-right: 15px;
+		}
+
+		@media all and (max-width: 1171px) {
+			#{$classname} {
+				width: calc( 100% - 15px);
+			}
+		}
+
+		@media all and (min-width: 1430px) {
+			#{$classname} {
+				width: 1278px;
+			}
+		}
+
+		/* New XXL container for Bootstrap 3.x */
+		@media all and (min-width: 1600px) {
+			#{$classname} {
+				width: 1410px;
+			}
+		}
+
 	}
 	
 }

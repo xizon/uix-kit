@@ -32,6 +32,25 @@
 	&.spy-scroll-fixed {
 		
 	}
+	
+
+	/* 
+	 ---------------------------
+	 2. Overlay Header
+	 ---------------------------
+	 */ 
+	&.header-overlay {
+		background: rgba(255, 255, 255, 0.15);
+		background: linear-gradient(to right, rgba(255, 255, 255, 0.15) 0%,rgba(255, 255, 255, 0.15) 100%);	
+
+		&.spy-scroll-fixed {
+			background: #F3556D; 
+			background: linear-gradient(to right, #F3556D 0%,#E22444 100%);	
+		}
+
+	}
+
+	
 }
 
 
@@ -71,33 +90,22 @@
 
 
 
-
-/* 
- ---------------------------
- 2. Theme - White
- ---------------------------
- */ 
-.theme-white {
-  
-	.header-area {
-		background: rgba(255, 255, 255, 0.15);
-		background: linear-gradient(to right, rgba(255, 255, 255, 0.15) 0%,rgba(255, 255, 255, 0.15) 100%);	
-		
-		&.spy-scroll-fixed {
-			background: #F3556D; 
-			background: linear-gradient(to right, #F3556D 0%,#E22444 100%);	
-		}
-	
-	}
-}
-
-
 @media all and (max-width: 768px) {
 	
 	
 	.header-area {
 		position: relative;
 
+		
+		&.header-overlay {
+
+			background: #F3556D; 
+			background: linear-gradient(to right, #F3556D 0%,#E22444 100%);	
+			position: relative;
+
+		}
+
+		
 	}
 	
 	.header-inner {
@@ -110,15 +118,4 @@
 	}
 
 	
-	.theme-white {
-
-		.header-area {
-			background: #F3556D; 
-			background: linear-gradient(to right, #F3556D 0%,#E22444 100%);	
-			position: relative;
-			
-		}
-
-	}
-
 }

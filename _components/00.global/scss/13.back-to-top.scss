@@ -4,36 +4,27 @@
 
 #toTop {
 	display: none;
-	text-decoration: none;
 	position: fixed;
 	bottom: 12px;
 	right: 12px;
-	overflow: hidden;
 	width: 50px;
 	height: 50px;
-	border: none;
-	text-indent: 100%;
-	background: url(../images/back-top.png) no-repeat left top;
 	z-index: 1;
+	text-align: center;
+	
+	i {
+		font-size: 1.5rem;
+	}
 	
 	&.active {
 	    display: block;
 	}
-}
-
-#toTopHover {
-	background: url(../images/back-top.png) no-repeat left -50px;
-	width: 50px;
-	height: 50px;
-	display: block;
-	overflow: hidden;
-	float: left;
-	opacity: 0;
-}
-
-#toTop {
+	
 	&:active, 
 	&:focus {
 	    outline: none;
 	}
+	
 }
+
+

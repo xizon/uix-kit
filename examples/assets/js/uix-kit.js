@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.8.1
- * ## Last Update         :  June 22, 2018
+ * ## Version             :  1.8.2
+ * ## Last Update         :  June 26, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -53,8 +53,8 @@
     29. Dynamic Drop Down List from JSON 
     30. Flexslider 
     31. Form 
-    32. Form Progress 
-    33. jQuery UI Datepicker 1.11.4 
+    32. jQuery UI Datepicker 1.11.4 
+    33. Form Progress 
     34. Gallery 
     35. Image Shapes 
     36. Custom Core Scripts  
@@ -202,7 +202,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.HEADER               = APP.HEADER || {};
-	APP.HEADER.version       = '0.0.1';
+	APP.HEADER.version       = '0.0.2';
     APP.HEADER.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -213,20 +213,6 @@ APP = ( function ( APP, $, window, document ) {
 			windowWidth  = $window.width(),
 			windowHeight = $window.height();
 
-
-		
-		//-------- Sticky header area
-		var waypoints = $( '.header-area' ).waypoint({
-			handler: function( direction ) {
-				
-				$( this.element ).toggleClass( 'spy-scroll-fixed', direction === 'down' );
-				$( '.header-inner' ).toggleClass( 'spy-scroll-fixed', direction === 'down' );
-
-			},
-			offset: -120
-		});
-		
-		
 		
 		//-------- Header initialize
 		headerInit( windowWidth );
@@ -249,6 +235,26 @@ APP = ( function ( APP, $, window, document ) {
 			
 		}
 		
+		
+
+
+		
+		//-------- Sticky header area
+		//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
+		var $el = $( '.header-area' );
+		$window.on('scroll touchmove', function() {
+
+			var scrollTop = $( this ).scrollTop(),
+				spyTop    = 220;
+			
+			if ( scrollTop >= spyTop ) {
+				$el.addClass( 'spy-scroll-fixed' );
+			} else {
+				$el.removeClass( 'spy-scroll-fixed' );	
+			}
+			
+		});
+
 		
     };
 
@@ -342,29 +348,37 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.BACK_TO_TOP               = APP.BACK_TO_TOP || {};
-	APP.BACK_TO_TOP.version       = '0.0.1';
+	APP.BACK_TO_TOP.version       = '0.0.2';
     APP.BACK_TO_TOP.documentReady = function( $ ) {
 
-		// Add button to body for back to top
-		if ( $( '#toTop' ).length == 0 ) {
-			$( 'body' ).prepend( '<a href="#" id="toTop"><span id="toTopHover"></span></a>' );
-		}
 		
-		
-		// Sticky button of back to top 
-		var waypoints = $( '#toTop' ).waypoint({
-			handler: function( direction ) {
-				
-				$( this.element ).toggleClass( 'active', direction === 'down' );
+		var $window      = $( window ),
+			windowWidth  = $window.width(),
+			windowHeight = $window.height(),
+			$el          = $( '#toTop' );
 
-			},
-			offset: -120
+
+		//-------- Sticky button of back to top 
+		//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
+		$( window ).on('scroll touchmove', function() {
+
+			var scrollTop = $( this ).scrollTop(),
+				spyTop    = windowHeight/2;
+
+		
+			if ( scrollTop >= spyTop ) {
+				$el.addClass( 'active' );
+			} else {
+				$el.removeClass( 'active' );	
+			}
+
 		});
-		
-		
-		$( '#toTop' ).on( 'click', function( e ) {
+
+
+		//-------- Click event of back button
+		$el.on( 'click', function( e ) {
 			e.preventDefault();
-			
+
 			TweenMax.to( window, 0.5, {
 				scrollTo: {
 					y: 0
@@ -372,7 +386,8 @@ APP = ( function ( APP, $, window, document ) {
 				ease: Power2.easeOut
 			});	
 
-		});
+		});	
+			
 		
 		
     };
@@ -460,7 +475,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.NAVIGATION               = APP.NAVIGATION || {};
-	APP.NAVIGATION.version       = '0.0.3';
+	APP.NAVIGATION.version       = '0.0.4';
     APP.NAVIGATION.documentReady = function( $ ) {
 
 		var $window      = $( window ),
@@ -469,7 +484,7 @@ APP = ( function ( APP, $, window, document ) {
 			ulForDesktop = '.menu-container:not(.mobile) ul.menu-main';
 
 
-		// Menu selected (if it exists "data-current" property in <ul>)
+		//-------- Menu selected (if it exists "data-current" property in <ul>)
 		var curMenuIndex = $( ulForDesktop ).data( 'current' );
 		if ( typeof curMenuIndex !== typeof undefined ) {
 			$( ulForDesktop + ' > li:eq('+curMenuIndex+')' ).addClass( 'active' );
@@ -477,7 +492,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
-		// Menu Hover
+		//-------- Menu Hover
 		var mTop = 15;
 		$( ulForDesktop + ' > li.multi-column > ul li ul' ).addClass( 'multi' );
 		$( ulForDesktop + ' > li:not(.multi-column) ul, .menu-container:not(.mobile) li.multi-column > ul.sub-menu > li > ul, '+ulForDesktop+' li.multi-column > ul' ).css( 'margin-top', mTop + 'px' );
@@ -533,7 +548,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
-		//Add Sub-menu Arrow
+		//-------- Add Sub-menu Arrow
 		$( ulForDesktop + ' li' ).each( function() {
 			if ( $( this ).find( 'ul' ).length > 0 ) {
 				$( this ).prepend( '<span class="nav-arrow"></span>' );
@@ -543,18 +558,24 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
-		// Sticky primary navigation
-		var waypoints2 = $( '.menu-container:not(.mobile)' ).waypoint({
-			handler: function( direction ) {
+		//-------- Sticky primary navigation
+		//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
+		var $el = $( '.menu-container:not(.mobile)' );
+		$window.on('scroll touchmove', function() {
 
-				$( this.element ).toggleClass( 'spy-scroll-fixed', direction === 'down' );
-
-			},
-			offset: -120
+			var scrollTop = $( this ).scrollTop(),
+				spyTop    = 220;
+			
+			if ( scrollTop >= spyTop ) {
+				$el.addClass( 'spy-scroll-fixed' );
+			} else {
+				$el.removeClass( 'spy-scroll-fixed' );	
+			}
+			
 		});
+		
 
-
-		//Prevent to <a> of page transitions
+		//-------- Prevent to <a> of page transitions
 		$( 'a' ).each( function() {
 			var attr = $( this ).attr( 'href' );
 			if ( typeof attr !== typeof undefined && attr !== false ) {
@@ -1703,7 +1724,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.MOBILE_MENU               = APP.MOBILE_MENU || {};
-	APP.MOBILE_MENU.version       = '0.0.1';
+	APP.MOBILE_MENU.version       = '0.0.2';
     APP.MOBILE_MENU.documentReady = function( $ ) {
 
 		var $window      = $( window ),
@@ -1713,25 +1734,31 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
-		//Show Toolbar when viewing site for WordPress
-		var waypoints = $( '.admin-bar .menu-mobile-toggle' ).waypoint({
-			handler: function( direction ) {
+		//-------- Show Toolbar when viewing site for WordPress
+		//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
+		var $el = $( '.admin-bar .menu-mobile-toggle' );
+		$window.on('scroll touchmove', function() {
 
-				$( this.element ).toggleClass( 'spy-scroll-postion', direction === 'down' );
-
-			},
-			offset: -46
+			var scrollTop = $( this ).scrollTop(),
+				spyTop    = 46;
+			
+			if ( scrollTop >= spyTop ) {
+				$el.addClass( 'spy-scroll-postion' );
+			} else {
+				$el.removeClass( 'spy-scroll-postion' );	
+			}
+			
 		});
 
 
 
-		// Mobile Menu
+		//-------- Mobile Menu
 		var $toggle     = $( '.menu-mobile-toggle' ),
 			$toggleBody = $( 'body' );
 
 
 
-		//Add mobile menu to your website
+		//-------- Add mobile menu to your website
 		$( 'nav.menu-container' ).clone().addClass( 'mobile' ).appendTo( 'body' );
 		//Wait until previous .appendTo() is complete
 		$.when( $( '.menu-container.mobile' ).length > 0 ).then( function(){
@@ -3679,338 +3706,6 @@ APP = ( function ( APP, $, window, document ) {
 
 }( APP, jQuery, window, document ) );
 
-
-
-
-
-/* 
- *************************************
- * <!-- Advanced Content Slider -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.ADVANCED_CONTENT_SLIDER               = APP.ADVANCED_CONTENT_SLIDER || {};
-	APP.ADVANCED_CONTENT_SLIDER.version       = '0.0.2';
-    APP.ADVANCED_CONTENT_SLIDER.documentReady = function( $ ) {
-
-		var $window                   = $( window ),
-			windowWidth               = $window.width(),
-			windowHeight              = $window.height(),
-			animDuration              = 1200;
-		
-		
-		
-		sliderInit();
-		
-		$window.on( 'resize', function() {
-			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( $window.width() != windowWidth ) {
-
-				// Update the window width for next time
-				windowWidth = $window.width();
-
-				sliderInit();
-				
-			}
-		});
-		
-		
-		/*
-		 * Initialize slideshow
-		 *
-		 * @return {void}                   - The constructor.
-		 */
-        function sliderInit() {
-			
-			$( '.custom-advanced-content-slider' ).each( function() {
-				var $this                      = $( this ),
-					$items                     = $this.find( '.item' ),
-					$itemsWrapper              = $this.children( '.inner' ),
-					$first                     = $items.first(),
-					itemWidth                  = $this.width(),
-					itemsTotal                 = $items.length,
-					totalWidth                 = itemWidth*itemsTotal,
-					dataControlsPagination     = $this.data( 'controls-pagination' ),
-					dataControlsArrows         = $this.data( 'controls-arrows' ),
-					dataDraggable              = $this.data( 'draggable' ),
-					dataDraggableCursor        = $this.data( 'draggable-cursor' ),
-					dataControlsPaginationAuto = false;
-
-				
-				
-
-				if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.custom-advanced-content-slider-sp-pagination';
-				if ( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.custom-advanced-content-slider-sp-arrows';
-				if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
-				if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
-				
-				if ( $( dataControlsPagination ).html().length == 0 ) dataControlsPaginationAuto = true;
-
-				
-
-				//Initialize the width of each item
-				//-------------------------------------		
-				$first.addClass( 'active' );
-				
-				$items.css( 'width', itemWidth + 'px' );
-				
-				TweenMax.set( $itemsWrapper, { 
-					width: totalWidth,
-					onComplete  : function() {
-						$this.css( 'height', 'auto' );
-						
-					}
-				} );	
-				
-
-				//Pagination dots 
-				//-------------------------------------	
-				if ( dataControlsPaginationAuto ) {
-					var _dot       = '',
-						_dotActive = '';
-					_dot += '<ul class="default">';
-					for ( var i = 0; i < itemsTotal; i++ ) {
-
-						_dotActive = ( i == 0 ) ? 'class="active"' : '';
-
-						_dot += '<li><a '+_dotActive+' data-index="'+i+'" href="javascript:"></a></li>';
-					}
-					_dot += '</ul>';
-
-					if ( $( dataControlsPagination ).html() == '' ) $( dataControlsPagination ).html( _dot );	
-				} else {
-					$( dataControlsPagination ).find( 'li' ).first().find( 'a' ).addClass( 'active' );
-					$( dataControlsPagination ).find( 'li' ).first().addClass( 'active' );
-				}
-
-
-				$( dataControlsPagination ).find( 'li a' ).on( 'click', function( e ) {
-					e.preventDefault();
-
-					if ( !$( this ).hasClass( 'active' ) ) {
-						
-						sliderUpdates( $( this ).attr( 'data-index' ), $this, dataControlsArrows, dataControlsPagination );
-					}
-
-
-
-				});
-
-				
-				//Next/Prev buttons
-				//-------------------------------------		
-				var _prev = $( dataControlsArrows ).find( '.prev' ),
-					_next = $( dataControlsArrows ).find( '.next' );
-				
-				
-
-				$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
-				
-				_prev.addClass( 'disabled' );
-
-				_prev.on( 'click', function( e ) {
-					e.preventDefault();
-
-					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
-
-				});
-
-				_next.on( 'click', function( e ) {
-					e.preventDefault();
-
-					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
-
-				});
-				
-				
-				//Drag and Drop
-				//-------------------------------------	
-				var $dragDropTrigger = $items;
-
-				//Make the cursor a move icon when a user hovers over an item
-				if ( dataDraggable && dataDraggableCursor != '' && dataDraggableCursor != false ) $dragDropTrigger.css( 'cursor', dataDraggableCursor );
-				
-
-
-				//Mouse event
-				$dragDropTrigger.on( 'mousedown.advancedContentSlider touchstart.advancedContentSlider', function( e ) {
-					e.preventDefault();
-
-					var touches = e.originalEvent.touches;
-					
-					$( this ).addClass( 'dragging' );
-					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
-					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
-					
-					
-					if ( touches && touches.length ) {	
-						$( this ).data( 'origin_mouse_x', parseInt( touches[0].pageX ) );
-						$( this ).data( 'origin_mouse_y', parseInt( touches[0].pageY ) );
-
-					} else {
-						
-						if ( dataDraggable ) {
-							$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
-							$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );	
-						}
-
-
-					}
-					
-					$dragDropTrigger.on( 'mouseup.advancedContentSlider touchmove.advancedContentSlider', function( e ) {
-						e.preventDefault();
-
-						$( this ).removeClass( 'dragging' );
-						var touches        = e.originalEvent.touches,
-							origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
-							origin_mouse_y = $( this ).data( 'origin_mouse_y' );
-
-						if ( touches && touches.length ) {
-
-							var deltaX = origin_mouse_x - touches[0].pageX,
-								deltaY = origin_mouse_y - touches[0].pageY;
-
-							if ( deltaX >= 50) {
-								//--- left
-								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
-
-
-							}
-							if ( deltaX <= -50) {
-								//--- right
-								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
-
-
-							}
-							if ( deltaY >= 50) {
-								//--- up
-
-
-							}
-							if ( deltaY <= -50) {
-								//--- down
-
-							}
-
-							if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
-								$dragDropTrigger.off( 'touchmove.advancedContentSlider' );
-							}	
-
-
-						} else {
-							
-							if ( dataDraggable ) {
-								//right
-								if ( e.pageX > origin_mouse_x ) {
-									sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
-								}
-
-								//left
-								if ( e.pageX < origin_mouse_x ) {
-									sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
-								}
-
-								//down
-								if ( e.pageY > origin_mouse_y ) {
-
-								}
-
-								//up
-								if ( e.pageY < origin_mouse_y ) {
-
-								}	
-
-								$dragDropTrigger.off( 'mouseup.advancedContentSlider' );
-								
-							}	
-							
-							
-							
-						}
-
-
-
-					} );
-
-					
-					
-
-				} );
-
-			
-				
-			});	
-			
-		}
-		
-		/*
-		 * Transition Between Slides
-		 *
-		 * @param  {number} elementIndex     - Index of current slider.
-		 * @param  {object} slider           - Selector of the slider .
-		 * @param  {string} arrows           - Controller name of prev/next buttons.
-		 * @param  {string} pagination       - Controller name of pagination buttons.
-		 * @return {void}                    - The constructor.
-		 */
-        function sliderUpdates( elementIndex, slider, arrows, pagination ) {
-			
-			var $items        = slider.find( '.item' ),
-				itemsTotal    = $items.length,
-				$prev         = $( arrows ).find( '.prev' ),
-				$next         = $( arrows ).find( '.next' ),
-				$pagination   = $( pagination ).find( 'li a' );
-				
-			if ( elementIndex <= itemsTotal - 1 && elementIndex >= 0 ) {
-
-				if ( elementIndex > parseFloat( itemsTotal - 1 ) ) elementIndex = parseFloat( itemsTotal - 1 );
-				if ( elementIndex < 0 ) elementIndex = 0;
-				
-				$next.removeClass( 'disabled' );
-				$prev.removeClass( 'disabled' );
-				$pagination.removeClass( 'active' );
-				$pagination.parent().removeClass( 'active' );
-
-				if ( elementIndex == itemsTotal - 1 ) {
-					$next.addClass( 'disabled' );
-				}
-
-				if ( elementIndex == 0 ) {
-					$prev.addClass( 'disabled' );
-				}
-
-				
-
-				$items.removeClass( 'active' );
-				$items.eq( elementIndex ).addClass( 'active' );	
-				$pagination.eq( elementIndex ).addClass( 'active' );
-				$pagination.eq( elementIndex ).parent().addClass( 'active' );
-				
-				
-				
-				TweenMax.to( slider.children( '.inner' ), animDuration/1000, { 
-					x: '-' + ( slider.width() * elementIndex ),
-					onComplete  : function() {
-
-					},
-					ease: Power3.easeOut
-				} );
-				
-	
-			}
-			
-
-			
-		}
-		
-		
-    };
-
-    APP.components.documentReady.push( APP.ADVANCED_CONTENT_SLIDER.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
 
 
 
@@ -7066,6 +6761,338 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
+ * <!-- Advanced Content Slider -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.ADVANCED_CONTENT_SLIDER               = APP.ADVANCED_CONTENT_SLIDER || {};
+	APP.ADVANCED_CONTENT_SLIDER.version       = '0.0.2';
+    APP.ADVANCED_CONTENT_SLIDER.documentReady = function( $ ) {
+
+		var $window                   = $( window ),
+			windowWidth               = $window.width(),
+			windowHeight              = $window.height(),
+			animDuration              = 1200;
+		
+		
+		
+		sliderInit();
+		
+		$window.on( 'resize', function() {
+			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+			if ( $window.width() != windowWidth ) {
+
+				// Update the window width for next time
+				windowWidth = $window.width();
+
+				sliderInit();
+				
+			}
+		});
+		
+		
+		/*
+		 * Initialize slideshow
+		 *
+		 * @return {void}                   - The constructor.
+		 */
+        function sliderInit() {
+			
+			$( '.custom-advanced-content-slider' ).each( function() {
+				var $this                      = $( this ),
+					$items                     = $this.find( '.item' ),
+					$itemsWrapper              = $this.children( '.inner' ),
+					$first                     = $items.first(),
+					itemWidth                  = $this.width(),
+					itemsTotal                 = $items.length,
+					totalWidth                 = itemWidth*itemsTotal,
+					dataControlsPagination     = $this.data( 'controls-pagination' ),
+					dataControlsArrows         = $this.data( 'controls-arrows' ),
+					dataDraggable              = $this.data( 'draggable' ),
+					dataDraggableCursor        = $this.data( 'draggable-cursor' ),
+					dataControlsPaginationAuto = false;
+
+				
+				
+
+				if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.custom-advanced-content-slider-sp-pagination';
+				if ( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.custom-advanced-content-slider-sp-arrows';
+				if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
+				if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
+				
+				if ( $( dataControlsPagination ).html().length == 0 ) dataControlsPaginationAuto = true;
+
+				
+
+				//Initialize the width of each item
+				//-------------------------------------		
+				$first.addClass( 'active' );
+				
+				$items.css( 'width', itemWidth + 'px' );
+				
+				TweenMax.set( $itemsWrapper, { 
+					width: totalWidth,
+					onComplete  : function() {
+						$this.css( 'height', 'auto' );
+						
+					}
+				} );	
+				
+
+				//Pagination dots 
+				//-------------------------------------	
+				if ( dataControlsPaginationAuto ) {
+					var _dot       = '',
+						_dotActive = '';
+					_dot += '<ul class="default">';
+					for ( var i = 0; i < itemsTotal; i++ ) {
+
+						_dotActive = ( i == 0 ) ? 'class="active"' : '';
+
+						_dot += '<li><a '+_dotActive+' data-index="'+i+'" href="javascript:"></a></li>';
+					}
+					_dot += '</ul>';
+
+					if ( $( dataControlsPagination ).html() == '' ) $( dataControlsPagination ).html( _dot );	
+				} else {
+					$( dataControlsPagination ).find( 'li' ).first().find( 'a' ).addClass( 'active' );
+					$( dataControlsPagination ).find( 'li' ).first().addClass( 'active' );
+				}
+
+
+				$( dataControlsPagination ).find( 'li a' ).on( 'click', function( e ) {
+					e.preventDefault();
+
+					if ( !$( this ).hasClass( 'active' ) ) {
+						
+						sliderUpdates( $( this ).attr( 'data-index' ), $this, dataControlsArrows, dataControlsPagination );
+					}
+
+
+
+				});
+
+				
+				//Next/Prev buttons
+				//-------------------------------------		
+				var _prev = $( dataControlsArrows ).find( '.prev' ),
+					_next = $( dataControlsArrows ).find( '.next' );
+				
+				
+
+				$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
+				
+				_prev.addClass( 'disabled' );
+
+				_prev.on( 'click', function( e ) {
+					e.preventDefault();
+
+					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
+
+				});
+
+				_next.on( 'click', function( e ) {
+					e.preventDefault();
+
+					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
+
+				});
+				
+				
+				//Drag and Drop
+				//-------------------------------------	
+				var $dragDropTrigger = $items;
+
+				//Make the cursor a move icon when a user hovers over an item
+				if ( dataDraggable && dataDraggableCursor != '' && dataDraggableCursor != false ) $dragDropTrigger.css( 'cursor', dataDraggableCursor );
+				
+
+
+				//Mouse event
+				$dragDropTrigger.on( 'mousedown.advancedContentSlider touchstart.advancedContentSlider', function( e ) {
+					e.preventDefault();
+
+					var touches = e.originalEvent.touches;
+					
+					$( this ).addClass( 'dragging' );
+					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
+					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
+					
+					
+					if ( touches && touches.length ) {	
+						$( this ).data( 'origin_mouse_x', parseInt( touches[0].pageX ) );
+						$( this ).data( 'origin_mouse_y', parseInt( touches[0].pageY ) );
+
+					} else {
+						
+						if ( dataDraggable ) {
+							$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
+							$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );	
+						}
+
+
+					}
+					
+					$dragDropTrigger.on( 'mouseup.advancedContentSlider touchmove.advancedContentSlider', function( e ) {
+						e.preventDefault();
+
+						$( this ).removeClass( 'dragging' );
+						var touches        = e.originalEvent.touches,
+							origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
+							origin_mouse_y = $( this ).data( 'origin_mouse_y' );
+
+						if ( touches && touches.length ) {
+
+							var deltaX = origin_mouse_x - touches[0].pageX,
+								deltaY = origin_mouse_y - touches[0].pageY;
+
+							if ( deltaX >= 50) {
+								//--- left
+								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
+
+
+							}
+							if ( deltaX <= -50) {
+								//--- right
+								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
+
+
+							}
+							if ( deltaY >= 50) {
+								//--- up
+
+
+							}
+							if ( deltaY <= -50) {
+								//--- down
+
+							}
+
+							if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
+								$dragDropTrigger.off( 'touchmove.advancedContentSlider' );
+							}	
+
+
+						} else {
+							
+							if ( dataDraggable ) {
+								//right
+								if ( e.pageX > origin_mouse_x ) {
+									sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
+								}
+
+								//left
+								if ( e.pageX < origin_mouse_x ) {
+									sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
+								}
+
+								//down
+								if ( e.pageY > origin_mouse_y ) {
+
+								}
+
+								//up
+								if ( e.pageY < origin_mouse_y ) {
+
+								}	
+
+								$dragDropTrigger.off( 'mouseup.advancedContentSlider' );
+								
+							}	
+							
+							
+							
+						}
+
+
+
+					} );
+
+					
+					
+
+				} );
+
+			
+				
+			});	
+			
+		}
+		
+		/*
+		 * Transition Between Slides
+		 *
+		 * @param  {number} elementIndex     - Index of current slider.
+		 * @param  {object} slider           - Selector of the slider .
+		 * @param  {string} arrows           - Controller name of prev/next buttons.
+		 * @param  {string} pagination       - Controller name of pagination buttons.
+		 * @return {void}                    - The constructor.
+		 */
+        function sliderUpdates( elementIndex, slider, arrows, pagination ) {
+			
+			var $items        = slider.find( '.item' ),
+				itemsTotal    = $items.length,
+				$prev         = $( arrows ).find( '.prev' ),
+				$next         = $( arrows ).find( '.next' ),
+				$pagination   = $( pagination ).find( 'li a' );
+				
+			if ( elementIndex <= itemsTotal - 1 && elementIndex >= 0 ) {
+
+				if ( elementIndex > parseFloat( itemsTotal - 1 ) ) elementIndex = parseFloat( itemsTotal - 1 );
+				if ( elementIndex < 0 ) elementIndex = 0;
+				
+				$next.removeClass( 'disabled' );
+				$prev.removeClass( 'disabled' );
+				$pagination.removeClass( 'active' );
+				$pagination.parent().removeClass( 'active' );
+
+				if ( elementIndex == itemsTotal - 1 ) {
+					$next.addClass( 'disabled' );
+				}
+
+				if ( elementIndex == 0 ) {
+					$prev.addClass( 'disabled' );
+				}
+
+				
+
+				$items.removeClass( 'active' );
+				$items.eq( elementIndex ).addClass( 'active' );	
+				$pagination.eq( elementIndex ).addClass( 'active' );
+				$pagination.eq( elementIndex ).parent().addClass( 'active' );
+				
+				
+				
+				TweenMax.to( slider.children( '.inner' ), animDuration/1000, { 
+					x: '-' + ( slider.width() * elementIndex ),
+					onComplete  : function() {
+
+					},
+					ease: Power3.easeOut
+				} );
+				
+	
+			}
+			
+
+			
+		}
+		
+		
+    };
+
+    APP.components.documentReady.push( APP.ADVANCED_CONTENT_SLIDER.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+/* 
+ *************************************
  * <!-- Counter -->
  *************************************
  */	
@@ -9969,35 +9996,34 @@ APP = ( function ( APP, $, window, document ) {
 				var $this            = $( this ),
 					dateFormat       = $this.data( 'picker-format' ),
 					monthNames       = $this.data( 'picker-month' ),
-					monthNamesShort  = $this.data( 'picker-month-s' ),
 					nextText         = $this.data( 'picker-next' ),
 					prevText         = $this.data( 'picker-prev' ),
 					dayNames         = $this.data( 'picker-day' ),
-					dayNamesShort    = $this.data( 'picker-day-s' );
+					myminDate        = $this.data( 'picker-minDate' ),
+					mymaxDate        = $this.data( 'picker-maxDate' );
 				
 				
 				
 				// If there is no data-xxx, save current source to it
 				if( typeof dateFormat === typeof undefined ) dateFormat = 'MM d, yy';
-				if( typeof monthNames === typeof undefined ) monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-				if( typeof monthNamesShort === typeof undefined ) monthNamesShort = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+				if( typeof monthNames === typeof undefined ) monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 				if( typeof nextText === typeof undefined ) nextText = '&#8594;';
 				if( typeof prevText === typeof undefined ) prevText = '&#8592;';
-				if( typeof dayNames === typeof undefined ) dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-				if( typeof dayNamesShort === typeof undefined ) dayNamesShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
+				if( typeof dayNames === typeof undefined ) dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+				if( typeof myminDate === typeof undefined ) myminDate = -1825;
+				if( typeof mymaxDate === typeof undefined ) mymaxDate = 0;
 		
 				$this.datepicker({
-					"monthNames"      : monthNames,
-					"monthNamesShort" : monthNamesShort,
+					"monthNamesShort" : monthNames,
 					"nextText"        : nextText,
 					"prevText"        : prevText,
-					"dayNames"        : dayNames,
-					"dayNamesShort"   : dayNamesShort,
+					"dayNamesShort"   : dayNames,
 					"dateFormat"      : dateFormat,
 					"changeMonth"     : true,
 					"changeYear"      : true,
-					"yearRange"       : "1930:2092"
+					"yearRange"       : "1930:2092",
+					"minDate"         : myminDate,
+					"maxDate"         : mymaxDate
 				});
 				
 
@@ -10137,7 +10163,7 @@ APP = ( function ( APP, $, window, document ) {
 					}
 
 
-					$this.wrap('<div class="custom-select-wrapper"></div>');
+					$this.wrap('<div class="'+ settings.targetWrapper.replace( '.', '' )+' '+( $this.hasClass( 'line-eff' ) ? 'line-eff' : '' )+' '+( $this.hasClass( 'fullwidth' ) ? 'fullwidth' : '' )+' '+( $this.hasClass( 'disable' ) ? 'disable' : '' )+'"></div>');
 					$this.hide();
 					$this.after( template );	
 
@@ -14772,6 +14798,418 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
+ * <!-- Full Page/One Page Transition -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.ONEPAGE               = APP.ONEPAGE || {};
+	APP.ONEPAGE.version       = '0.0.1';
+    APP.ONEPAGE.documentReady = function( $ ) {
+
+        var $window      = $( window ),
+		    windowWidth  = $window.width(),
+		    windowHeight = $window.height();
+		
+
+	    //Determine the direction of a jQuery scroll event
+		//Fix an issue for mousewheel event is too fast.
+		var lastAnimation      = 0,
+			quietPeriod        = 500, //Do not change it
+			animationTime      = 1000,//According to page transition animation changes
+			$sectionsContainer = $( '.custom-fullpage-container' ),
+			$sections          = $sectionsContainer.find( '> section' ),
+			sectionTotal       = $sections.length,
+			topSectionSpacing  = 0,
+			$primaryMenu       = $( '.menu-main' ),
+			$sidefixedMenu     = $( '.custom-sidefixed-menu' );
+		
+		
+		//Prevent this module from loading in other pages
+		if ( $sectionsContainer.length == 0 ) return false;
+		
+
+
+		// Prepare everything before binding wheel scroll
+		$.each( $sections, function( i ) {
+			$( this ).attr( 'data-index', i );
+			if ( i == 0 ) {
+				$( this ).addClass( 'active' );
+
+			}
+			
+		});
+		
+
+		
+		//Init the section location
+		sectionStart();
+
+		
+		/*
+		 * Init the section location
+		 *
+		 * @return {void}                - The constructor.
+		 */
+		function sectionStart() {
+	
+			setTimeout( function() {
+				var hash = window.location.hash,
+					locArr,
+					loc, 
+					curTab;
+
+				if ( hash ) {
+					
+					//Add hashchange event
+					locArr = hash.split( 'section-' );
+					loc    = locArr[1];
+					moveTo( $sectionsContainer, false, loc );
+				} else {
+					moveTo( $sectionsContainer, false, 1 );
+				}
+
+			}, quietPeriod );
+
+		}
+			
+		
+		/*
+		 * Scroll initialize
+		 *
+		 * @param  {object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
+		 * @param  {string} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
+		 * @return {void}                - The constructor.
+		 */
+		function scrollMoveInit( event, dir ) {
+	
+			var timeNow = new Date().getTime();
+			// Cancel scroll if currently animating or within quiet period
+			if( timeNow - lastAnimation < quietPeriod + animationTime) {
+				event.preventDefault();
+				return;
+			}
+
+			if ( dir == 'down' ) {
+				//scroll down
+				moveTo( $sectionsContainer, 'down', false );
+				
+			} else {
+				//scroll up
+				moveTo( $sectionsContainer, 'up', false );
+				
+			  
+			}
+			lastAnimation = timeNow;
+		}
+		
+      
+		
+		/*
+		 * Move Animation
+		 *
+		 * @param  {object} el           - The container of each sections.
+		 * @param  {string} dir          - Rolling direction indicator.
+		 * @param  {number} hashID       - ID of custom hashchange event.
+		 * @return {void}                - The constructor.
+		 */
+		function moveTo( el, dir, hashID ) {
+			var index     = parseFloat( $sections.filter( '.active' ).attr( 'data-index' ) ),
+				nextIndex = null,
+				$next     = null,
+				isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
+			
+			
+			 
+			if ( dir == 'down' || dir === false ) {
+				nextIndex = index + 1;
+			} else {
+				nextIndex = index - 1;
+			}
+			
+
+			//ID of custom hashchange event
+			if ( isNumeric.test( hashID ) ) nextIndex = parseFloat( hashID - 1 );
+			
+			
+			if ( nextIndex <= parseFloat( sectionTotal-1 ) && nextIndex >= 0 ) {
+				
+				if ( nextIndex > parseFloat( sectionTotal-1 ) ) nextIndex = parseFloat( sectionTotal-1 );
+				if ( nextIndex < 0 ) nextIndex = 0;
+
+
+				//Returns the target section
+				$next = $sections.eq( nextIndex );
+
+				//Smooth scroll to content
+				if ( $next.length > 0 ) {
+					TweenMax.to( window, animationTime/1000, {
+						scrollTo: {
+							y: $next.offset().top - topSectionSpacing
+						},
+						ease: Power2.easeOut,
+						onComplete: function() {
+
+							$sections.removeClass( 'leave' );
+							$sections.eq( index ).addClass( 'leave' );
+
+							$sections.removeClass( 'active' );
+							$next.addClass( 'active' ).removeClass( 'leave' );
+
+
+
+							//Changing The Site URL
+							var curSectionIndex = $sections.filter( '.active' ).index() + 1,
+								href            = window.location.href.substr( 0, window.location.href.indexOf( '#' ) ) + '#' + $sections.filter( '.active' ).attr( 'id' );
+
+							if ( Modernizr.cssanimations ) {
+								history.pushState( {}, document.title, href );
+								console.log( 'Section ' + curSectionIndex + ' loaded!' );
+							}
+
+
+						}
+					});			
+				}	
+				
+			}
+			
+
+	
+
+			
+		}
+		
+		
+
+		/* 
+		 ====================================================
+		 *  Navigation Interaction
+		 ====================================================
+		 */
+		goPageSection( $primaryMenu );
+		goPageSection( $sidefixedMenu );
+
+        
+	
+		//Activate the first item
+		$primaryMenu.find( 'li:first' ).addClass( 'active' );
+		$sidefixedMenu.find( 'li:first' ).addClass( 'active' );
+		
+		
+		/*
+		 * Get section or article by href
+		 *
+		 * @param  {string, object} el  - The current selector or selector ID
+		 * @return {object}             - A new selector.
+		 */
+        function getRelatedContent( el ) {
+            return $( $( el ).attr( 'href' ) );
+        }
+		
+		
+		/*
+		 * Get link by section or article id
+		 *
+		 * @param  {string, object} el    - The current selector or selector ID
+		 * @param  {object} menuObj       - Returns the menu element within the document.
+		 * @param  {boolean} echoIndex    - Whether to return the current index.
+		 * @return {object}               - A new selector.
+		 */
+        function getRelatedNavigation( el, menuObj, echoIndex ) {
+			
+			if ( echoIndex ) {
+				return menuObj.find( 'li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' ).index();
+			} else {
+			    return menuObj.find( 'li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' );	
+			}
+            
+        } 
+		
+		/*
+		 * Get all links by section or article
+		 *
+		 * @param  {object} menuObj     - Returns the menu element within the document.
+		 * @return {object}             - A new selector.
+		 */
+        function getAllNavigation( menuObj ) {
+            return menuObj.find( 'li' );
+        } 	
+		
+		
+		/*
+		 * Smooth scroll to content
+		 *
+		 * @param  {object} menuObj     - Returns the menu element within the document.
+		 * @return {void}               - The constructor.
+		 */
+        function goPageSection( menuObj ) {
+			menuObj.find( 'li > a' ).on( 'click', function(e) {
+				e.preventDefault();
+				
+				if ( $( this ).parent().hasClass( 'active' ) ) return false;
+				
+				
+				moveTo( $sectionsContainer, false, $( this ).parent( 'li' ).index() + 1 );
+			});	
+	
+        } 	
+
+
+
+		var navMinTop      = ( $sidefixedMenu.length > 0 ) ? $sidefixedMenu.offset().top : 0,
+			navMaxTop      = parseFloat( $( document ).height() - $( '.footer-main-container' ).height() ) - windowHeight/3;
+
+		$window.on( 'scroll touchmove', function() {
+			var scrollTop = $( this ).scrollTop(),
+				spyTop    = parseFloat( scrollTop + topSectionSpacing ),
+				minTop    = $( '[data-highlight-section="true"]' ).first().offset().top,
+				maxTop    = $( '[data-highlight-section="true"]' ).last().offset().top + $( '[data-highlight-section="true"]' ).last().height();
+
+			$( '[data-highlight-section="true"]' ).each( function()  {
+				var block     = $( this ),
+					eleTop    = block.offset().top;
+				
+
+				// The 1 pixel in order to solve inaccurate value of outerHeight() 
+				// in Safari and Firefox browsers.
+				if ( eleTop < spyTop + 1 ) {
+
+					// Highlight element when related content
+					getAllNavigation( $primaryMenu ).removeClass( 'active' );
+					getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
+					getRelatedNavigation( block, $primaryMenu, false ).addClass( 'active' );
+					getRelatedNavigation( block, $sidefixedMenu, false ).addClass( 'active' );
+					
+					
+				} 
+			});
+
+
+
+			//Cancel the current highlight element
+			// The 1 pixel in order to solve inaccurate value of outerHeight() 
+			// in Safari and Firefox browsers.
+			if ( spyTop > maxTop || spyTop < minTop - 1 ) {
+				getAllNavigation( $primaryMenu ).removeClass( 'active' );
+				getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
+			}
+
+
+			//Detecting when user scrolls to bottom of div
+			if ( spyTop > navMaxTop || spyTop < navMinTop ) {
+				$sidefixedMenu.removeClass( 'fixed' );
+			} else {
+				$sidefixedMenu.addClass( 'fixed' );
+			}	
+
+
+
+
+		});	
+	
+		
+
+		
+		
+		/* 
+		 ====================================================
+		 *  Mouse Wheel Method
+		 ====================================================
+		 */
+		$( document ).on( 'wheel', function( e ) { 
+
+			var dir;
+			//Gets a value that indicates the amount that the mouse wheel has changed.
+			var delta = e.originalEvent.deltaY;
+			
+			if( delta > 0 ) { 
+				//scroll down
+				dir = 'down';
+				
+			} else {
+				//scroll up
+				dir = 'up';
+			}
+			
+			scrollMoveInit( e, dir );
+			
+			//prevent page fom scrolling
+			return false;
+
+		});
+		
+		
+		
+		/* 
+		 ====================================================
+		 *  Touch Method
+		 ====================================================
+		 */
+			
+		var startX,
+			startY;
+
+
+		$sectionsContainer.on( 'touchstart.onepage', function( event ) {
+			var touches = event.originalEvent.touches;
+			if ( touches && touches.length ) {
+				startX = touches[0].pageX;
+				startY = touches[0].pageY;
+
+
+				$sectionsContainer.on( 'touchmove.onepage', function( event ) {
+
+					var touches = event.originalEvent.touches;
+					if ( touches && touches.length ) {
+						var deltaX = startX - touches[0].pageX,
+							deltaY = startY - touches[0].pageY;
+
+						if ( deltaX >= 50) {
+							//--- swipe left
+
+
+						}
+						if ( deltaX <= -50) {
+							//--- swipe right
+						
+
+
+						}
+						if ( deltaY >= 50) {
+							//--- swipe up
+							moveTo( $sectionsContainer, 'down', false );
+
+						}
+						if ( deltaY <= -50) {
+							//--- swipe down
+							moveTo( $sectionsContainer, 'up', false );
+							
+
+						}
+						if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
+							$sectionsContainer.off( 'touchmove.onepage' );
+						}
+					}
+
+				});
+			}	
+		});
+
+
+		
+    };
+
+    APP.components.documentReady.push( APP.ONEPAGE.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+/* 
+ *************************************
  * <!-- Full Page/One Page Transition 2 -->
  *************************************
  */
@@ -15195,418 +15633,6 @@ APP = ( function ( APP, $, window, document ) {
     };
 
     APP.components.documentReady.push( APP.ONEPAGE2.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-/* 
- *************************************
- * <!-- Full Page/One Page Transition -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.ONEPAGE               = APP.ONEPAGE || {};
-	APP.ONEPAGE.version       = '0.0.1';
-    APP.ONEPAGE.documentReady = function( $ ) {
-
-        var $window      = $( window ),
-		    windowWidth  = $window.width(),
-		    windowHeight = $window.height();
-		
-
-	    //Determine the direction of a jQuery scroll event
-		//Fix an issue for mousewheel event is too fast.
-		var lastAnimation      = 0,
-			quietPeriod        = 500, //Do not change it
-			animationTime      = 1000,//According to page transition animation changes
-			$sectionsContainer = $( '.custom-fullpage-container' ),
-			$sections          = $sectionsContainer.find( '> section' ),
-			sectionTotal       = $sections.length,
-			topSectionSpacing  = 0,
-			$primaryMenu       = $( '.menu-main' ),
-			$sidefixedMenu     = $( '.custom-sidefixed-menu' );
-		
-		
-		//Prevent this module from loading in other pages
-		if ( $sectionsContainer.length == 0 ) return false;
-		
-
-
-		// Prepare everything before binding wheel scroll
-		$.each( $sections, function( i ) {
-			$( this ).attr( 'data-index', i );
-			if ( i == 0 ) {
-				$( this ).addClass( 'active' );
-
-			}
-			
-		});
-		
-
-		
-		//Init the section location
-		sectionStart();
-
-		
-		/*
-		 * Init the section location
-		 *
-		 * @return {void}                - The constructor.
-		 */
-		function sectionStart() {
-	
-			setTimeout( function() {
-				var hash = window.location.hash,
-					locArr,
-					loc, 
-					curTab;
-
-				if ( hash ) {
-					
-					//Add hashchange event
-					locArr = hash.split( 'section-' );
-					loc    = locArr[1];
-					moveTo( $sectionsContainer, false, loc );
-				} else {
-					moveTo( $sectionsContainer, false, 1 );
-				}
-
-			}, quietPeriod );
-
-		}
-			
-		
-		/*
-		 * Scroll initialize
-		 *
-		 * @param  {object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
-		 * @param  {string} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
-		 * @return {void}                - The constructor.
-		 */
-		function scrollMoveInit( event, dir ) {
-	
-			var timeNow = new Date().getTime();
-			// Cancel scroll if currently animating or within quiet period
-			if( timeNow - lastAnimation < quietPeriod + animationTime) {
-				event.preventDefault();
-				return;
-			}
-
-			if ( dir == 'down' ) {
-				//scroll down
-				moveTo( $sectionsContainer, 'down', false );
-				
-			} else {
-				//scroll up
-				moveTo( $sectionsContainer, 'up', false );
-				
-			  
-			}
-			lastAnimation = timeNow;
-		}
-		
-      
-		
-		/*
-		 * Move Animation
-		 *
-		 * @param  {object} el           - The container of each sections.
-		 * @param  {string} dir          - Rolling direction indicator.
-		 * @param  {number} hashID       - ID of custom hashchange event.
-		 * @return {void}                - The constructor.
-		 */
-		function moveTo( el, dir, hashID ) {
-			var index     = parseFloat( $sections.filter( '.active' ).attr( 'data-index' ) ),
-				nextIndex = null,
-				$next     = null,
-				isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
-			
-			
-			 
-			if ( dir == 'down' || dir === false ) {
-				nextIndex = index + 1;
-			} else {
-				nextIndex = index - 1;
-			}
-			
-
-			//ID of custom hashchange event
-			if ( isNumeric.test( hashID ) ) nextIndex = parseFloat( hashID - 1 );
-			
-			
-			if ( nextIndex <= parseFloat( sectionTotal-1 ) && nextIndex >= 0 ) {
-				
-				if ( nextIndex > parseFloat( sectionTotal-1 ) ) nextIndex = parseFloat( sectionTotal-1 );
-				if ( nextIndex < 0 ) nextIndex = 0;
-
-
-				//Returns the target section
-				$next = $sections.eq( nextIndex );
-
-				//Smooth scroll to content
-				if ( $next.length > 0 ) {
-					TweenMax.to( window, animationTime/1000, {
-						scrollTo: {
-							y: $next.offset().top - topSectionSpacing
-						},
-						ease: Power2.easeOut,
-						onComplete: function() {
-
-							$sections.removeClass( 'leave' );
-							$sections.eq( index ).addClass( 'leave' );
-
-							$sections.removeClass( 'active' );
-							$next.addClass( 'active' ).removeClass( 'leave' );
-
-
-
-							//Changing The Site URL
-							var curSectionIndex = $sections.filter( '.active' ).index() + 1,
-								href            = window.location.href.substr( 0, window.location.href.indexOf( '#' ) ) + '#' + $sections.filter( '.active' ).attr( 'id' );
-
-							if ( Modernizr.cssanimations ) {
-								history.pushState( {}, document.title, href );
-								console.log( 'Section ' + curSectionIndex + ' loaded!' );
-							}
-
-
-						}
-					});			
-				}	
-				
-			}
-			
-
-	
-
-			
-		}
-		
-		
-
-		/* 
-		 ====================================================
-		 *  Navigation Interaction
-		 ====================================================
-		 */
-		goPageSection( $primaryMenu );
-		goPageSection( $sidefixedMenu );
-
-        
-	
-		//Activate the first item
-		$primaryMenu.find( 'li:first' ).addClass( 'active' );
-		$sidefixedMenu.find( 'li:first' ).addClass( 'active' );
-		
-		
-		/*
-		 * Get section or article by href
-		 *
-		 * @param  {string, object} el  - The current selector or selector ID
-		 * @return {object}             - A new selector.
-		 */
-        function getRelatedContent( el ) {
-            return $( $( el ).attr( 'href' ) );
-        }
-		
-		
-		/*
-		 * Get link by section or article id
-		 *
-		 * @param  {string, object} el    - The current selector or selector ID
-		 * @param  {object} menuObj       - Returns the menu element within the document.
-		 * @param  {boolean} echoIndex    - Whether to return the current index.
-		 * @return {object}               - A new selector.
-		 */
-        function getRelatedNavigation( el, menuObj, echoIndex ) {
-			
-			if ( echoIndex ) {
-				return menuObj.find( 'li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' ).index();
-			} else {
-			    return menuObj.find( 'li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' );	
-			}
-            
-        } 
-		
-		/*
-		 * Get all links by section or article
-		 *
-		 * @param  {object} menuObj     - Returns the menu element within the document.
-		 * @return {object}             - A new selector.
-		 */
-        function getAllNavigation( menuObj ) {
-            return menuObj.find( 'li' );
-        } 	
-		
-		
-		/*
-		 * Smooth scroll to content
-		 *
-		 * @param  {object} menuObj     - Returns the menu element within the document.
-		 * @return {void}               - The constructor.
-		 */
-        function goPageSection( menuObj ) {
-			menuObj.find( 'li > a' ).on( 'click', function(e) {
-				e.preventDefault();
-				
-				if ( $( this ).parent().hasClass( 'active' ) ) return false;
-				
-				
-				moveTo( $sectionsContainer, false, $( this ).parent( 'li' ).index() + 1 );
-			});	
-	
-        } 	
-
-
-
-		var navMinTop      = ( $sidefixedMenu.length > 0 ) ? $sidefixedMenu.offset().top : 0,
-			navMaxTop      = parseFloat( $( document ).height() - $( '.footer-main-container' ).height() ) - windowHeight/3;
-
-		$window.on( 'scroll touchmove', function() {
-			var scrollTop = $( this ).scrollTop(),
-				spyTop    = parseFloat( scrollTop + topSectionSpacing ),
-				minTop    = $( '[data-highlight-section="true"]' ).first().offset().top,
-				maxTop    = $( '[data-highlight-section="true"]' ).last().offset().top + $( '[data-highlight-section="true"]' ).last().height();
-
-			$( '[data-highlight-section="true"]' ).each( function()  {
-				var block     = $( this ),
-					eleTop    = block.offset().top;
-				
-
-				// The 1 pixel in order to solve inaccurate value of outerHeight() 
-				// in Safari and Firefox browsers.
-				if ( eleTop < spyTop + 1 ) {
-
-					// Highlight element when related content
-					getAllNavigation( $primaryMenu ).removeClass( 'active' );
-					getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
-					getRelatedNavigation( block, $primaryMenu, false ).addClass( 'active' );
-					getRelatedNavigation( block, $sidefixedMenu, false ).addClass( 'active' );
-					
-					
-				} 
-			});
-
-
-
-			//Cancel the current highlight element
-			// The 1 pixel in order to solve inaccurate value of outerHeight() 
-			// in Safari and Firefox browsers.
-			if ( spyTop > maxTop || spyTop < minTop - 1 ) {
-				getAllNavigation( $primaryMenu ).removeClass( 'active' );
-				getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
-			}
-
-
-			//Detecting when user scrolls to bottom of div
-			if ( spyTop > navMaxTop || spyTop < navMinTop ) {
-				$sidefixedMenu.removeClass( 'fixed' );
-			} else {
-				$sidefixedMenu.addClass( 'fixed' );
-			}	
-
-
-
-
-		});	
-	
-		
-
-		
-		
-		/* 
-		 ====================================================
-		 *  Mouse Wheel Method
-		 ====================================================
-		 */
-		$( document ).on( 'wheel', function( e ) { 
-
-			var dir;
-			//Gets a value that indicates the amount that the mouse wheel has changed.
-			var delta = e.originalEvent.deltaY;
-			
-			if( delta > 0 ) { 
-				//scroll down
-				dir = 'down';
-				
-			} else {
-				//scroll up
-				dir = 'up';
-			}
-			
-			scrollMoveInit( e, dir );
-			
-			//prevent page fom scrolling
-			return false;
-
-		});
-		
-		
-		
-		/* 
-		 ====================================================
-		 *  Touch Method
-		 ====================================================
-		 */
-			
-		var startX,
-			startY;
-
-
-		$sectionsContainer.on( 'touchstart.onepage', function( event ) {
-			var touches = event.originalEvent.touches;
-			if ( touches && touches.length ) {
-				startX = touches[0].pageX;
-				startY = touches[0].pageY;
-
-
-				$sectionsContainer.on( 'touchmove.onepage', function( event ) {
-
-					var touches = event.originalEvent.touches;
-					if ( touches && touches.length ) {
-						var deltaX = startX - touches[0].pageX,
-							deltaY = startY - touches[0].pageY;
-
-						if ( deltaX >= 50) {
-							//--- swipe left
-
-
-						}
-						if ( deltaX <= -50) {
-							//--- swipe right
-						
-
-
-						}
-						if ( deltaY >= 50) {
-							//--- swipe up
-							moveTo( $sectionsContainer, 'down', false );
-
-						}
-						if ( deltaY <= -50) {
-							//--- swipe down
-							moveTo( $sectionsContainer, 'up', false );
-							
-
-						}
-						if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
-							$sectionsContainer.off( 'touchmove.onepage' );
-						}
-					}
-
-				});
-			}	
-		});
-
-
-		
-    };
-
-    APP.components.documentReady.push( APP.ONEPAGE.documentReady );
     return APP;
 
 }( APP, jQuery, window, document ) );
@@ -17303,6 +17329,110 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
+
+/* 
+ *************************************
+ * <!-- Text effect -->
+ *************************************
+ */
+
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+
+    APP.TEXT_EFFECT               = APP.TEXT_EFFECT || {};
+	APP.TEXT_EFFECT.version       = '0.0.3';
+    APP.TEXT_EFFECT.pageLoaded    = function() {
+
+		//Default Effect
+		//-------------------------------------	
+		$( '[data-text-eff]' ).each( function( index )  {
+			$( document ).customTextEffInit( { selectors: '[data-text-eff="'+$( this ).data( 'text-eff' )+'"]' } );
+		});   
+		
+    };
+
+    APP.components.pageLoaded.push( APP.TEXT_EFFECT.pageLoaded );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+/*
+ * Text Effect
+ *
+ * @param  {string} selectors                - Text wrapper ID or class name.
+ * @return {void}                            - The constructor.
+ */
+( function ( $ ) {
+    $.fn.customTextEffInit = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+			selectors    : '.letters-eff-fadeInRight'
+        }, options );
+ 
+        this.each( function() {
+			
+			var $this                = $( this ),
+				customControls       = settings.selectors,
+				speed                = $( customControls ).data( 'text-eff-speed' ),
+				txtEff;
+
+			
+				if( typeof speed === typeof undefined ) {
+					speed = 1200;
+				}	
+			
+		
+				$( customControls ).html( $( customControls ).text().replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>") );
+			
+			
+			
+				if( customControls.indexOf( 'fadeInRight' ) >= 0 ) {
+					txtEff = anime.timeline({loop: false})
+						  .add({
+							targets: customControls + ' .letter',
+							translateX: [40,0],
+							translateZ: 0,
+							opacity: [0,1],
+							easing: "easeOutExpo",
+							duration: speed,
+							delay: function(el, i) {
+							  return 500 + 30 * i;
+							}
+						  });
+
+				}
+			
+			
+				if( customControls.indexOf( 'zoomInDown' ) >= 0 ) {
+					txtEff = anime.timeline({loop: false})
+						  .add({
+						    targets: customControls + ' .letter',
+							scale: [0, 1],
+							duration: speed,
+							elasticity: 600,
+							delay: function(el, i) {
+							  return 45 * (i+1);
+							}
+						  });
+
+				}	
+			
+
+
+
+			
+		});
+ 
+    };
+ 
+}( jQuery ));
+
+
 /* 
  *************************************
  * <!-- Timeline -->
@@ -17465,110 +17595,6 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
-
-
-
-/* 
- *************************************
- * <!-- Text effect -->
- *************************************
- */
-
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-
-    APP.TEXT_EFFECT               = APP.TEXT_EFFECT || {};
-	APP.TEXT_EFFECT.version       = '0.0.3';
-    APP.TEXT_EFFECT.pageLoaded    = function() {
-
-		//Default Effect
-		//-------------------------------------	
-		$( '[data-text-eff]' ).each( function( index )  {
-			$( document ).customTextEffInit( { selectors: '[data-text-eff="'+$( this ).data( 'text-eff' )+'"]' } );
-		});   
-		
-    };
-
-    APP.components.pageLoaded.push( APP.TEXT_EFFECT.pageLoaded );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
-/*
- * Text Effect
- *
- * @param  {string} selectors                - Text wrapper ID or class name.
- * @return {void}                            - The constructor.
- */
-( function ( $ ) {
-    $.fn.customTextEffInit = function( options ) {
- 
-        // This is the easiest way to have default options.
-        var settings = $.extend({
-			selectors    : '.letters-eff-fadeInRight'
-        }, options );
- 
-        this.each( function() {
-			
-			var $this                = $( this ),
-				customControls       = settings.selectors,
-				speed                = $( customControls ).data( 'text-eff-speed' ),
-				txtEff;
-
-			
-				if( typeof speed === typeof undefined ) {
-					speed = 1200;
-				}	
-			
-		
-				$( customControls ).html( $( customControls ).text().replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>") );
-			
-			
-			
-				if( customControls.indexOf( 'fadeInRight' ) >= 0 ) {
-					txtEff = anime.timeline({loop: false})
-						  .add({
-							targets: customControls + ' .letter',
-							translateX: [40,0],
-							translateZ: 0,
-							opacity: [0,1],
-							easing: "easeOutExpo",
-							duration: speed,
-							delay: function(el, i) {
-							  return 500 + 30 * i;
-							}
-						  });
-
-				}
-			
-			
-				if( customControls.indexOf( 'zoomInDown' ) >= 0 ) {
-					txtEff = anime.timeline({loop: false})
-						  .add({
-						    targets: customControls + ' .letter',
-							scale: [0, 1],
-							duration: speed,
-							elasticity: 600,
-							delay: function(el, i) {
-							  return 45 * (i+1);
-							}
-						  });
-
-				}	
-			
-
-
-
-			
-		});
- 
-    };
- 
-}( jQuery ));
 
 
 /* 
