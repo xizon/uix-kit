@@ -14,20 +14,20 @@
  1. Initialize the slider style
  ---------------------------
  */ 
-.custom-advanced-slider {
+.uix-advanced-slider {
 	position: relative;
 	width: 100%;
 	overflow: hidden;
 	z-index: 1;
 
 
-	.inner {
+	.uix-advanced-slider__inner {
 		
 		position: relative;
 		z-index: 1;
 		
 		
-		.item {
+		.uix-advanced-slider__item {
 			position: absolute;
 			left: 0;
 			top: 0;
@@ -59,12 +59,12 @@
 /* Tests native CSS3 and HTML5 features are available */
 .cssanimations {
 
-	.custom-advanced-slider {
+	.uix-advanced-slider {
 		
-		&.eff-scale {
-			.inner {
+		&.uix-advanced-slider--eff-scale {
+			.uix-advanced-slider__inner {
 
-				.item {
+				.uix-advanced-slider__item {
 					opacity: 0;
 					transform: scale(.8);
 
@@ -98,7 +98,7 @@
  2. Pagination dots 
  ---------------------------
  */ 
-.custom-advanced-slider-pagination {
+.uix-advanced-slider__pagination {
 	
 	position: relative;
 	transform: translateY(-40px);
@@ -151,7 +151,7 @@
  3. Next/Prev buttons
  ---------------------------
  */ 
-.custom-advanced-slider-arrows {
+.uix-advanced-slider__arrows {
 	position: relative;
 	transform: translateY(-65px);
 	z-index: 3;
@@ -169,7 +169,7 @@
 		
 	}
 	
-	.prev {
+	.uix-advanced-slider__arrows--prev {
 		left: 15px;
 		
 		&.disabled {
@@ -178,7 +178,7 @@
 		}
 		
 	}
-	.next {
+	.uix-advanced-slider__arrows--next {
 		right: 15px;
 		
 		&.disabled {

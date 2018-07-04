@@ -4,23 +4,9 @@
 	Load our IE specific stylesheet for a range of older versions
 	---------------------------
 	
-
-	TABLE OF CONTENTS
-	---------------------------
-	
-	1. Modal    
-
 	
 */
 
-.IE-hide {
+.is-hide-IE {
 	display: none !important;
-}
-
-/* ====================================================== 
-   1. Modal                               
-/* ====================================================== */
-.modal-box.active .content img,
-.modal-box.fullscreen.active .content img {
-	opacity: 1; 
 }

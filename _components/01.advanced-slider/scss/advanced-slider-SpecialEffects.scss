@@ -14,12 +14,12 @@
  1. Initialize the slider style
  ---------------------------
  */ 
-.custom-advanced-slider-sp-canvas-outer {
+.uix-advanced-slider-sp__canvas-container {
 	position: relative;
 	z-index: 2;
 	display: block;
 }
-.custom-advanced-slider-sp {
+.uix-advanced-slider-sp {
 	position: relative;
 	width: 100%;
 	overflow: hidden;
@@ -37,12 +37,12 @@
 	}
 
 	
-	.inner {
+	.uix-advanced-slider-sp__inner {
 		
 		position: relative;
 		z-index: 3;
 		
-		.item {
+		.uix-advanced-slider-sp__item {
 			position: absolute;
 			left: 0;
 			top: 0;
@@ -50,7 +50,7 @@
 			width: 100%;
 			opacity: 0;
 			
-			.txt {
+			.uix-advanced-slider-sp__txt {
 				position: absolute;
 				left: 50%;
 				top: 50%;
@@ -93,17 +93,17 @@
 }
 
 /* If the browser does not support webGL then use the default video load event */
-.webgl .custom-advanced-slider-sp video {
+.webgl .uix-advanced-slider-sp video {
 	display: none;
 }
 
-.no-webgl .custom-advanced-slider-sp {
+.no-webgl .uix-advanced-slider-sp {
 	canvas {
 		display: none !important;
 	}
 	
-	.inner {
-		.item {
+	.uix-advanced-slider-sp__inner {
+		.uix-advanced-slider-sp__item {
 			img {
 				visibility: visible;
 			}
@@ -117,7 +117,7 @@
  2. Pagination dots 
  ---------------------------
  */ 
-.custom-advanced-slider-sp-pagination {
+.uix-advanced-slider-sp__pagination {
 	
 	position: relative;
 	transform: translateY(-40px);
@@ -170,7 +170,7 @@
  3. Next/Prev buttons
  ---------------------------
  */ 
-.custom-advanced-slider-sp-arrows {
+.uix-advanced-slider-sp__arrows {
 	position: relative;
 	transform: translateY(-65px);
 	z-index: 3;
@@ -189,7 +189,7 @@
 		
 	}
 	
-	.prev {
+	.uix-advanced-slider-sp__arrows--prev {
 		left: 15px;
 		
 		&.disabled {
@@ -198,7 +198,7 @@
 		}
 		
 	}
-	.next {
+	.uix-advanced-slider-sp__arrows--next {
 		right: 15px;
 		
 		&.disabled {

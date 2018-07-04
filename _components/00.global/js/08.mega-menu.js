@@ -58,7 +58,7 @@ APP = ( function ( APP, $, window, document ) {
 		
 		// Initialize mega menu
 		function megaMenuInit( w ) {
-			var $menuWrap  = $( '.menu-container:not(.mobile)' ),
+			var $menuWrap  = $( '.uix-menu__container:not(.is-mobile)' ),
 				maxWidth     = 1170, //The maximum width of the mega menu wrapper
 				
 				//This value is equal to the $nav-mega-li-w variable in the SCSS
@@ -93,7 +93,7 @@ APP = ( function ( APP, $, window, document ) {
 					
 					
 					// Add mega arrow
-					if ( root_li.find( '.mega-arrow' ).length < 1 ) root_li.prepend( '<span class="mega-arrow"></span>' );
+					if ( root_li.find( '.uix-menu__arrow-mega' ).length < 1 ) root_li.prepend( '<span class="uix-menu__arrow-mega"></span>' );
 					
 
 					// Detecting if the right or left of the div is touching the browser window edge.

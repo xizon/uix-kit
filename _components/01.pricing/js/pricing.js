@@ -37,21 +37,21 @@ APP = ( function ( APP, $, window, document ) {
 		
 		function pricingInit( w ) {
 			//Initialize the height
-			$( '.custom-price' ).each( function(){
+			$( '.uix-price' ).each( function(){
 
 
 					//returns new id
 					var $this            = $( this ),
 						priceBGH         = Array(),
 						priceBGH_excerpt = Array(),
-						$initHeight      = $this.find( '.init-height' );
+						$initHeight      = $this.find( '.js-uix-init-height' );
 
 					$initHeight.each( function( index ) {
 						//Screen protection of height
-						$( this ).find( '.border,.excerpt' ).css( 'height', 'auto' );
+						$( this ).find( '.uix-price__outline, .uix-price__excerpt' ).css( 'height', 'auto' );
 
 						var tempheight = $( this ).height();
-						var tempheight_excerpt = $( this ).find( '.excerpt' ).height();
+						var tempheight_excerpt = $( this ).find( '.uix-price__excerpt' ).height();
 						priceBGH.push( tempheight );
 						priceBGH_excerpt.push( tempheight_excerpt );
 
@@ -65,10 +65,10 @@ APP = ( function ( APP, $, window, document ) {
 						if ( w > 768 ){
 
 							// Initialize the height of all columns
-							$initHeight.find( '.border' ).css( 'height', priceBGH_Max + 'px' );
+							$initHeight.find( '.uix-price__outline' ).css( 'height', priceBGH_Max + 'px' );
 
 							// Actived columns
-							$initHeight.find( '.border.active' ).each( function() {
+							$initHeight.find( '.uix-price__outline.active' ).each( function() {
 
 								var ty = Math.abs( parseInt( $( this ).css('transform').split(',')[5]));
 								if ( !isNaN(ty) ) {
@@ -80,20 +80,20 @@ APP = ( function ( APP, $, window, document ) {
 
 
 						} else {
-							$initHeight.find( '.border' ).css( 'height', 'auto' );
+							$initHeight.find( '.uix-price__outline' ).css( 'height', 'auto' );
 
 
 						}
 
 
 						// Actived columns
-						$initHeight.find( '.border.active' ).each( function() {
+						$initHeight.find( '.uix-price__outline.active' ).each( function() {
 
-							var textColor = $( this ).closest( '.border-hover' ).data( 'tcolor' ),
-								btnColor  = $( this ).closest( '.border-hover' ).data( 'bcolor' );
+							var textColor = $( this ).closest( '.uix-price__outline--hover' ).data( 'tcolor' ),
+								btnColor  = $( this ).closest( '.uix-price__outline--hover' ).data( 'bcolor' );
 
 							$( this ).css( 'background-color', btnColor );
-							$( this ).find( '.button' ).removeClass( 'button-bg-primary' ).addClass( 'button-bg-secondary' );
+							$( this ).find( '.uix-btn' ).removeClass( 'uix-btn__bg--primary' ).addClass( 'uix-btn__bg--secondary' );
 
 
 						});	

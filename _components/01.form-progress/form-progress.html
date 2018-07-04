@@ -9,13 +9,13 @@
     
     
 
-    <div class="wrapper">
+    <div class="uix-wrapper">
     
         <!-- Header Area
         ============================================= -->      
-        <header class="header-area">
+        <header class="uix-header__container">
             
-             <div class="header-container">
+             <div class="uix-header">
                  <div class="container">
                  
                         @@include('../00.global/include-brand.html')
@@ -28,11 +28,11 @@
                   </div>
                   <!-- .container end -->
                   
-                  <div class="clear"></div>
+                  <div class="uix-clear"></div>
              </div>
         
         </header>
-        <div class="header-inner"></div>
+        <div class="uix-header__placeholder"></div>
       
        
     
@@ -40,8 +40,8 @@
        
         <!-- Content 01
         ====================================================== -->
-        <section class="space-none">
-            <div class="container t-c">
+        <section class="uix-section--no-spacing">
+            <div class="container uix-t-c">
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">
                             <h2>Form Progress</h2>
@@ -66,92 +66,93 @@
                         <div class="col-md-8 col-md-offset-2">
                             
 
-								<div class="custom-form-progress">
-									<div class="indicator"><span>Step 1</span></div>
-									<div class="indicator"><span>Step 2</span></div>
-									<div class="indicator"><span>Step 3</span></div>
-									<div class="indicator"><span>Step 4</span></div>
-									<div class="line"><span></span></div>
+								<div class="uix-form-progress">
+									<div class="uix-form-progress__indicator"><span>Step 1</span></div>
+									<div class="uix-form-progress__indicator"><span>Step 2</span></div>
+									<div class="uix-form-progress__indicator"><span>Step 3</span></div>
+									<div class="uix-form-progress__indicator"><span>Step 4</span></div>
+									<div class="uix-form-progress__line"><span></span></div>
 								</div>
-								<!-- /.custom-form-progress -->
+								<!-- /.uix-form-progress -->
 								
-								<div class="custom-form-progress-target" data-anime-speed="0.2s">
+								
+								<div class="uix-form-progress__target" data-anime-speed="0.2s">
 								
 								    <form method="post" action="#">
 								
 										<!-- Step -->
-										<div class="form-step">
+										<div class="uix-form-progress__target__step">
 										    
-										    <div class="content">
+										    <div class="uix-form-progress__content">
 										    
 										        <!-- ////////////  content begin  ////////////-->
 											    <h4>Step 1</h4>
 
 
-												<div class="controls">
+												<div class="uix-controls">
 												  <input type="text" class="float-label" name="label-1">
 												  <label>Label 1</label>
 												</div>
 
-												<div class="controls">
+												<div class="uix-controls">
 												  <input type="text" class="float-label" name="label-2">
 												  <label>Label 2</label>
 												</div>
 
-												<div class="controls">
-												  <a href="javascript:void(0);" class="button button-border-thin button-size-s button-bg-primary go-step">Next</a>
+												<div class="uix-controls">
+												  <a href="javascript:void(0);" class="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary go-step">Next</a>
 												</div>  
 											    
 											    <!-- ////////////  content end  ////////////-->
 											    
 												    
 											</div>
-											<!-- /.content -->
+											<!-- /.uix-form-progress__content -->
 											
 
 
 										</div>
 
 										<!-- Step -->
-										<div class="form-step">
+										<div class="uix-form-progress__target__step">
 										
-										    <div class="content">
+										    <div class="uix-form-progress__content">
 										    
 										        <!-- ////////////  content begin  ////////////-->
 										        
 											    <h4>Step 2</h4>
 
-												<div class="controls">
+												<div class="uix-controls">
 												  <input type="text" class="float-label" name="label-1">
 												  <label>Label 1</label>
 												</div>
 
-												<div class="controls">
-												  <a href="javascript:void(0);" class="button button-border-thin button-size-s button-bg-primary go-step">Next</a>
+												<div class="uix-controls">
+												  <a href="javascript:void(0);" class="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary go-step">Next</a>
 												</div>     
 									    
 									            <!-- ////////////  content end  ////////////-->
 										    
 											</div>
-											<!-- /.content -->
+											<!-- /.uix-form-progress__content -->
 										
 
 
 										</div>
 
 										<!-- Step -->
-										<div class="form-step">
+										<div class="uix-form-progress__target__step">
 										
-										    <div class="content">
+										    <div class="uix-form-progress__content">
 										        <!-- ////////////  content begin  ////////////-->
 											    <h4>Step 3</h4>
 
-												<div class="controls">
+												<div class="uix-controls">
 												  <input type="text" class="float-label" name="label-1">
 												  <label>Label 1</label>
 												</div>
 
-												<div class="controls">
+												<div class="uix-controls">
 												  <input type="text" class="float-label" name="label-2">
 												  <label>Label 2</label>
 												</div>
@@ -159,14 +160,14 @@
 											    <p>This is demo.</p>
 											    <p>This is demo.</p>
 
-												<div class="controls">
-												  <a href="javascript:void(0);" class="button button-border-thin button-size-s button-bg-primary go-step">Next</a>
+												<div class="uix-controls">
+												  <a href="javascript:void(0);" class="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary go-step">Next</a>
 												</div>  
 										        <!-- ////////////  content end  ////////////-->
 										    
 										    
 											</div>
-											<!-- /.content -->
+											<!-- /.uix-form-progress__content -->
 											
 										
 
@@ -174,32 +175,32 @@
 										</div>
 
 										<!-- Step -->
-										<div class="form-step">
+										<div class="uix-form-progress__target__step">
 										
-										    <div class="content">
+										    <div class="uix-form-progress__content">
 										    
 										        <!-- ////////////  content begin  ////////////-->
 											    <h4>Step 4</h4>
 
-												<div class="controls">
+												<div class="uix-controls">
 												  <input type="text" class="float-label" name="label-1">
 												  <label>Label 1</label>
 												</div>
 
-												<div class="controls">
+												<div class="uix-controls">
 												  <input type="text" class="float-label" name="label-2">
 												  <label>Label 2</label>
 												</div>
 
-												<div class="controls">
-												  <button type="submit" class="button button-border-thin button-size-s button-bg-primary">Submit</button>
+												<div class="uix-controls">
+												  <button type="submit" class="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary">Submit</button>
 												  <a href="javascript:void(0);" class="go-reset">Reset</a>
 												</div>  
 										        <!-- ////////////  content end  ////////////-->
 										    
 
 											</div>
-											<!-- /.content -->
+											<!-- /.uix-form-progress__content -->
 										
 
 
@@ -210,7 +211,7 @@
 									</form>	
 									
 								</div>
-								<!-- /.custom-form-progress-target -->
+								<!-- /.uix-form-progress__target -->
 						
                   
                        

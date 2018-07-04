@@ -7,7 +7,7 @@
  * Note: 
  *
  * Automatically sets the div height of the grid system to the height of the 
- * outer container when ".common-height" class on ".row" or ".seamless-grid" div.
+ * outer container when ".js-uix-common-height" class on ".row" or ".uix-core-grid__row" div.
  *
  *************************************
  */
@@ -20,7 +20,7 @@ APP = ( function ( APP, $, window, document ) {
 	APP.COMMON_HEIGHT.version       = '0.0.1';
     APP.COMMON_HEIGHT.pageLoaded    = function() {
 
-	    $( '.common-height' ).commonHeight();
+	    $( '.js-uix-common-height' ).commonHeight();
 		
     };
 
@@ -49,7 +49,7 @@ APP = ( function ( APP, $, window, document ) {
 
         // This is the easiest way to have default options.
         var settings = $.extend({
-			selector : '[class*=col-], [class*=eamless-col-], [class*=el-col-]' //Bootstrap grid system and Custom seamless grid system
+			selector : '[class*=col-], [class*=uix-core-grid__col-], [class*=uix-el-grid__col-]' //Bootstrap grid system and Custom seamless grid system
         }, options );
  
         this.each( function() {

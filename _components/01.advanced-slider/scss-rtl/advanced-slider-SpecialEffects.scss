@@ -8,7 +8,7 @@
  ---------------------------
  */ 
 
-.custom-advanced-slider-sp {
+.uix-advanced-slider-sp {
 	
 	canvas {
 		left: auto;
@@ -16,10 +16,10 @@
 	}
 
 	
-	.inner {
+	.uix-advanced-slider-sp__inner {
 		
 	
-		.item {
+		.uix-advanced-slider-sp__item {
 			left: auto;
 			right: 0;
 
@@ -39,7 +39,7 @@
  2) Pagination dots 
  ---------------------------
  */ 
-.custom-advanced-slider-sp-pagination {
+.uix-advanced-slider-sp__pagination {
 	
 	
 	ul {
@@ -56,13 +56,13 @@
  3) Next/Prev buttons
  ---------------------------
  */ 
-.custom-advanced-slider-sp-arrows {
+.uix-advanced-slider-sp__arrows {
 	
-	.prev {
+	.uix-advanced-slider-sp__arrows--prev {
 		left: auto;
 		right: 15px;
 	}
-	.next {
+	.uix-advanced-slider-sp__arrows--next {
 		right: auto;
 		left: 15px;
 		text-align: left;

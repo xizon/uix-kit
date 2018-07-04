@@ -1,13 +1,13 @@
 /* ====================================================== 
-   <!-- Sidebar -->            
+   <!-- Sidebar  -->            
 /* ====================================================== */
 
 /*
- * 1. Basic
- * 2. Calendar Widget
- * 3. Post List
- * 4. Post List with Featured Image
- * 5. Link List
+ * 1. Basic                             - Synchronize to WordPress's class name
+ * 2. Calendar Widget                   - Synchronize to WordPress's class name
+ * 3. Link List                         - Synchronize to WordPress's class name
+ * 4. Post List
+ * 5. Post List with Featured Image
 */
 
 
@@ -16,7 +16,7 @@
  1. Basic
  ---------------------------
  */ 
-.sidebar-container {
+.uix-sidebar__container {
 	position: relative;
 	word-wrap: break-word;
 	padding-left: 2.1875rem;
@@ -40,7 +40,7 @@
 }
 
 @media all and (max-width: 768px) {
-	.sidebar-container {
+	.uix-sidebar__container {
 		padding-left: 0;
 	}
 }
@@ -96,22 +96,82 @@
 
 /* 
  ---------------------------
- 3. Post List
+ 3. Link List
+ ---------------------------
+ */ 
+.widget_categories ul, 
+.widget_nav_menu ul, 
+.widget_pages ul {
+    margin-left: 0.875rem;
+	
+	li {
+		margin-bottom: 0;
+		position: relative;
+		
+		a {
+			display: inline-block;
+			padding: 0.35546875rem;
+			font-style: italic;
+			transition: 0.2s linear;
+			
+			&::before {
+				content: '\203A';
+				opacity: 0.7;
+				margin-right: 0.721875rem;
+			}
+			
+		}
+
+		> .cat-item-count {
+			position: absolute;
+			top: 0.875rem;
+			right: 0;
+			border: 1px solid #C2C2C2;
+			border-radius: 50px;
+			display: inline-block;
+			min-width: 16px;
+			height: 16px;
+			font-size: 0.625rem;
+			text-align: center;
+			line-height: 16px;
+			opacity: 0.5;
+		}
+
+		
+	}
+	
+	> li {
+		border-bottom: 1px dashed #E6E6E6;
+		
+		li {
+			border-bottom: none;
+		}	
+	}
+
+}
+
+
+
+/* 
+ ---------------------------
+ 4. Post List
  ---------------------------
  */ 
 
-.post-list-box li {
-	border-bottom: 1px dashed #E6E6E6;
-	margin-bottom: 0.721875rem;
+.uix-sidebar__posts {
+	li {
+		border-bottom: 1px dashed #E6E6E6;
+		margin-bottom: 0.721875rem;
+	}
 }
 
 
 /* 
  ---------------------------
- 4. Post List with Featured Image
+ 5. Post List with Featured Image
  ---------------------------
  */ 
-.post-img-list-box {
+.uix-sidebar__posts-img {
 	
 	margin: 0;
 	padding: 0;
@@ -138,7 +198,7 @@
 			border-bottom: 1px dashed #E6E6E6;
 		}
 
-		.item-thumb {
+		.uix-sidebar__posts-img__thumb {
 			float: left;
 			width: 39.4%;
 			margin-right: 0.875rem;
@@ -154,7 +214,7 @@
 			}
 		}
 
-		.item-info {
+		.uix-sidebar__posts-img__desc {
 			float: left;
 			width: 50%;
 
@@ -164,16 +224,16 @@
 			}
 		}
 
-		&.nothumb {
+		&.uix-sidebar__posts-img__no-thumb {
 			display: none;
 		}
 
 
-		.item-title {
+		.uix-sidebar__posts-img__title {
 
 		}
 
-		.item-date {
+		.uix-sidebar__posts-img__date {
 			opacity: 0.65;
 			font-size: 0.75rem;
 			padding: 0.6125rem 0;
@@ -182,86 +242,26 @@
 }
 
 @media all and (max-width: 991px) {
-	.post-img-list-box li .item-thumb {
+	.uix-sidebar__posts-img li .uix-sidebar__posts-img__thumb {
 	    width: 15%;
 	}
 }
 
 @media all and (max-width: 480px) {
-	.post-img-list-box li .item-thumb {
+	.uix-sidebar__posts-img li .uix-sidebar__posts-img__thumb {
 	    width: 39.4%;
 	}
 }
 
 @media all and (max-width: 991px) {
-	.post-img-list-box li .item-info {
+	.uix-sidebar__posts-img li .uix-sidebar__posts-img__desc {
 	    width: 82.5%;
 	}
 }
 
 @media all and (max-width: 480px) {
-	.post-img-list-box li .item-info {
+	.uix-sidebar__posts-img li .uix-sidebar__posts-img__desc {
 	    width: 50%;
 	}
 }
 
-/* 
- ---------------------------
- 5. Link List
- ---------------------------
- */ 
-.widget_categories ul, 
-.widget_nav_menu ul, 
-.widget_pages ul {
-    margin-left: 0.875rem;
-}
-
-.widget_categories li, 
-.widget_nav_menu li, 
-.widget_pages li {
-    margin-bottom: 0;
-    position: relative;
-}
-
-.widget_categories ul > li, 
-.widget_nav_menu ul > li, 
-.widget_pages ul > li {
-    border-bottom: 1px dashed #E6E6E6;
-}
-
-.widget_categories ul > li li, 
-.widget_pages ul > li li {
-    border-bottom: none;
-}
-
-.widget_categories li a, 
-.widget_nav_menu li a, 
-.widget_pages li a {
-	display: inline-block;
-	padding: 0.35546875rem;
-	font-style: italic;
-	transition: 0.2s linear;
-}
-
-.widget_categories li a::before, 
-.widget_nav_menu li a::before, 
-.widget_pages li a::before {
-	content: '\203A';
-	opacity: 0.7;
-	margin-right: 0.721875rem;
-}
-
-.widget_categories li > .cat-item-count {
-	position: absolute;
-	top: 0.875rem;
-	right: 0;
-	border: 1px solid #C2C2C2;
-	border-radius: 50px;
-	display: inline-block;
-	min-width: 16px;
-	height: 16px;
-	font-size: 0.625rem;
-	text-align: center;
-	line-height: 16px;
-	opacity: 0.5;
-}

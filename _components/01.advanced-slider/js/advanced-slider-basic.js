@@ -16,7 +16,7 @@ APP = ( function ( APP, $, window, document ) {
 			windowWidth               = $window.width(),
 			windowHeight              = $window.height(),
 			animDuration              = 600,
-			$sliderWrapper            = $( '.custom-advanced-slider' ),
+			$sliderWrapper            = $( '.uix-advanced-slider' ),
 			
 			//Autoplay global variables
 			timer                     = null,
@@ -50,7 +50,7 @@ APP = ( function ( APP, $, window, document ) {
 			$sliderWrapper.each( function()  {
 
 				var $this                    = $( this ),
-					$items                   = $this.find( '.item' ),
+					$items                   = $this.find( '.uix-advanced-slider__item' ),
 					$first                   = $items.first(),
 					nativeItemW,
 					nativeItemH;
@@ -191,7 +191,7 @@ APP = ( function ( APP, $, window, document ) {
         function addItemsToStage( slider, sliderWrapper, nativeItemW, nativeItemH ) {
 			
 			var $this                    = slider,
-				$items                   = $this.find( '.item' ),
+				$items                   = $this.find( '.uix-advanced-slider__item' ),
 				$first                   = $items.first(),
 				itemsTotal               = $items.length,
 				dataControlsPagination   = $this.data( 'controls-pagination' ),
@@ -200,8 +200,8 @@ APP = ( function ( APP, $, window, document ) {
 
 	
 			
-			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.custom-advanced-slider-sp-pagination';
-			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.custom-advanced-slider-sp-arrows';
+			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider-sp__pagination';
+			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
 			if( typeof dataLoop === typeof undefined ) dataLoop = false;
 
 				
@@ -252,8 +252,8 @@ APP = ( function ( APP, $, window, document ) {
 
 			//Next/Prev buttons
 			//-------------------------------------		
-			var _prev = $( dataControlsArrows ).find( '.prev' ),
-				_next = $( dataControlsArrows ).find( '.next' );
+			var _prev = $( dataControlsArrows ).find( '.uix-advanced-slider__arrows--prev' ),
+				_next = $( dataControlsArrows ).find( '.uix-advanced-slider__arrows--next' );
 
 			$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
 
@@ -294,14 +294,14 @@ APP = ( function ( APP, $, window, document ) {
 				startY;
 
 
-			$this.on( 'touchstart.advancedSlider', function( event ) {
+			$this.on( 'touchstart.ADVANCED_SLIDER', function( event ) {
 				var touches = event.originalEvent.touches;
 				if ( touches && touches.length ) {
 					startX = touches[0].pageX;
 					startY = touches[0].pageY;
 
 
-					$this.on( 'touchmove.advancedSlider', function( event ) {
+					$this.on( 'touchmove.ADVANCED_SLIDER', function( event ) {
 
 						var touches = event.originalEvent.touches;
 						if ( touches && touches.length ) {
@@ -340,7 +340,7 @@ APP = ( function ( APP, $, window, document ) {
 
 							}
 							if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
-								$this.off( 'touchmove.advancedSlider' );
+								$this.off( 'touchmove.ADVANCED_SLIDER' );
 							}
 						}
 
@@ -363,7 +363,7 @@ APP = ( function ( APP, $, window, document ) {
 		 */
         function sliderUpdates( elementIndex, slider ) {
 			
-			var $items                   = slider.find( '.item' ),
+			var $items                   = slider.find( '.uix-advanced-slider__item' ),
 				$current                 = $items.eq( elementIndex ),
 			    total                    = $items.length,
 				dataCountTotal           = slider.data( 'count-total' ),
@@ -375,8 +375,8 @@ APP = ( function ( APP, $, window, document ) {
 
 			if( typeof dataCountTotal === typeof undefined ) dataCountTotal = 'p.count em.count';
 			if( typeof dataCountCur === typeof undefined ) dataCountCur = 'p.count em.current';
-			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.custom-advanced-slider-sp-pagination';
-			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.custom-advanced-slider-sp-arrows';
+			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider-sp__pagination';
+			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
 			if( typeof dataLoop === typeof undefined ) dataLoop = false;
 					
 		
@@ -396,8 +396,8 @@ APP = ( function ( APP, $, window, document ) {
 				if ( elementIndex < 0 ) elementIndex = total-1;	
 			} else {
 				$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
-				if ( elementIndex == total - 1 ) $( dataControlsArrows ).find( '.next' ).addClass( 'disabled' );
-				if ( elementIndex == 0 ) $( dataControlsArrows ).find( '.prev' ).addClass( 'disabled' );
+				if ( elementIndex == total - 1 ) $( dataControlsArrows ).find( '.uix-advanced-slider__arrows--next' ).addClass( 'disabled' );
+				if ( elementIndex == 0 ) $( dataControlsArrows ).find( '.uix-advanced-slider__arrows--prev' ).addClass( 'disabled' );
 			}
 
 			// To determine if it is a touch screen.
@@ -409,12 +409,12 @@ APP = ( function ( APP, $, window, document ) {
 				if ( !dataLoop ) {
 					//first item
 					if ( elementIndex == 0 ) {
-						$( dataControlsArrows ).find( '.prev' ).addClass( 'disabled' );
+						$( dataControlsArrows ).find( '.uix-advanced-slider__arrows--prev' ).addClass( 'disabled' );
 					}
 
 					//last item
 					if ( elementIndex == total - 1 ) {
-						$( dataControlsArrows ).find( '.next' ).addClass( 'disabled' );
+						$( dataControlsArrows ).find( '.uix-advanced-slider__arrows--next' ).addClass( 'disabled' );
 					}	
 				}
 
@@ -427,7 +427,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			$items.removeClass( 'leave' );
-			slider.find( '.item.active' ).removeClass( 'active' ).addClass( 'leave' );
+			slider.find( '.uix-advanced-slider__item.active' ).removeClass( 'active' ).addClass( 'leave' );
 			$items.eq( elementIndex ).addClass( 'active' ).removeClass( 'leave' );
 
 			
@@ -468,7 +468,7 @@ APP = ( function ( APP, $, window, document ) {
 
 				video.addEventListener( 'loadedmetadata', function( e ) {
 
-					$sliderWrapper.css( 'height', this.videoHeight*(slider.closest( '.custom-advanced-slider-outer' ).width()/this.videoWidth) + 'px' );	
+					$sliderWrapper.css( 'height', this.videoHeight*(slider.closest( '.uix-advanced-slider__outline' ).width()/this.videoWidth) + 'px' );	
 
 				}, false);	
 
@@ -483,7 +483,7 @@ APP = ( function ( APP, $, window, document ) {
 
 				img.onload = function() {
 
-					$sliderWrapper.css( 'height', slider.closest( '.custom-advanced-slider-outer' ).width()*(this.height/this.width) + 'px' );		
+					$sliderWrapper.css( 'height', slider.closest( '.uix-advanced-slider__outline' ).width()*(this.height/this.width) + 'px' );		
 
 				};
 
@@ -504,10 +504,10 @@ APP = ( function ( APP, $, window, document ) {
 		 * @return {void}                    - The constructor.
 		 */
 		function normalSliderVideoInit( wrapper, play ) {
-			wrapper.find( '.slider-video-embed' ).each( function()  {
+			wrapper.find( '.uix-video__slider' ).each( function()  {
 				var $this          = $( this ),
-					videoWrapperW  = $this.closest( '.custom-advanced-slider-outer' ).width(),
-					videoWrapperH  = $this.closest( '.custom-advanced-slider-outer' ).height(),
+					videoWrapperW  = $this.closest( '.uix-advanced-slider__outline' ).width(),
+					videoWrapperH  = $this.closest( '.uix-advanced-slider__outline' ).height(),
 					tempID         = 'video-' + Math.random()*1000000000000000000,
 					curVideoID     = tempID,
 					coverPlayBtnID = 'videocover-' + curVideoID,
@@ -550,7 +550,7 @@ APP = ( function ( APP, $, window, document ) {
 
 				//Display cover and play buttons when some mobile device browsers cannot automatically play video
 				if ( $( '#' + coverPlayBtnID ).length == 0 ) {
-					$( '<div id="'+coverPlayBtnID+'" class="web-video-embed-cover"><span class="cover-show" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="cover-play"></span></div>' ).insertBefore( $this );
+					$( '<div id="'+coverPlayBtnID+'" class="uix-video__cover"><span class="uix-video__cover-placeholder" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="cover-play"></span></div>' ).insertBefore( $this );
 
 
 					var btnEv = ( Modernizr.touchevents ) ? 'touchstart' : 'click';
@@ -569,7 +569,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 				//Add replay button to video 
 				if ( $replayBtn.length == 0 ) {
-					$this.after( '<span class="web-video-replay" id="'+curVideoID+'-replay-btn"></span>' );
+					$this.after( '<span class="uix-video__btn-play" id="'+curVideoID+'-replay-btn"></span>' );
 				}
 				
 				

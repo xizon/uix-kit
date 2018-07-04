@@ -11,13 +11,13 @@
 
   
   
-    <div class="wrapper">
+    <div class="uix-wrapper">
     
         <!-- Header Area
         ============================================= -->      
-        <header class="header-area">
+        <header class="uix-header__container">
             
-             <div class="header-container">
+             <div class="uix-header">
                  <div class="container">
                  
                         @@include('../00.global/include-brand.html')
@@ -30,18 +30,18 @@
                   </div>
                   <!-- .container end -->
                   
-                  <div class="clear"></div>
+                  <div class="uix-clear"></div>
              </div>
         
         </header>
-        <div class="header-inner"></div>
+        <div class="uix-header__placeholder"></div>
       
       
      
         <!-- Content 01
         ====================================================== -->
-        <section class="space-none">
-            <div class="container t-c">
+        <section class="uix-section--no-spacing">
+            <div class="container uix-t-c">
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">
                             <h2>Infinite Scroll Posts</h2>
@@ -63,11 +63,11 @@
         <section>
             <div class="container">
                     <div class="row">
-                        <div class="col-md-12 transition imghover-color">
+                        <div class="col-md-12 uix-trans uix-filter-hover--color">
                         
                         
                             <!-- Recommended to enter the total number of attribute "data-ajax-list-page-total". -->
-							<div class="list-topic-container"
+							<div class="uix-list-topic"
 							     data-ajax-list-json="assets/json/content-posts.php" 
 							     data-ajax-list-method="POST" 
 							     data-ajax-list-temp-id="list-topic-ajax-template-1" 
@@ -76,15 +76,15 @@
 							     data-ajax-list-page-total="-1" 
 							     data-ajax-list-trigger="#ajax-loadmore-btn-1" 
 							     data-ajax-list-trigger-active-class=".active" 
-							     data-ajax-list-push-container-class=".list-topic-items-ajax-container" 
+							     data-ajax-list-push-container-class=".uix-list-topic__items-ajax-container" 
 							     data-ajax-list-infinitescroll="true"
 							     data-ajax-list-field-name1="Custom String 1"
 							     data-ajax-list-field-name2="Custom String 2">
 
 									<!-- List Item -->
-									<div class="list-topic-item style-2">
+									<div class="uix-list-topic__item uix-list-topic__item--style-2">
 										<div class="row">
-											<div class="col-md-4 list-topic-item-img transition">
+											<div class="col-md-4 uix-list-topic__item__img uix-trans">
 												<a href="#"> 
 													<img src="assets/images/demo/test-img-big-1.jpg" alt="" />
 												</a>
@@ -93,10 +93,10 @@
 
 											<div class="col-md-8">
 
-												<div class="list-topic-item-info transition el-row">
+												<div class="uix-list-topic__item__info uix-trans uix-el-grid__row">
 
 
-													<div class="el-col el-col-5 el-col-half">
+													<div class="uix-el-grid__col-5 uix-el-grid__col-half">
 
 														<h3>
 															 <a href="#">
@@ -106,33 +106,33 @@
 													</div>
 
 
-													<div class="el-col el-col-7 el-col-half">
+													<div class="uix-el-grid__col-7 uix-el-grid__col-half">
 
-														<div class="el-col el-col-5 el-col-stack">
+														<div class="uix-el-grid__col-5 uix-el-grid__col-stack">
 															<p><strong>Author:</strong> David</p>
 															<p><strong>Date:</strong> December 10, 2017</p>
 														</div>
 
 
-														<div class="el-col el-col-7 el-col-stack">
+														<div class="uix-el-grid__col-7 uix-el-grid__col-stack">
 															<p><strong>Comments:</strong> 20</p>
 															<p><strong>Categories:</strong> Art, Design</p>
 														</div>	
 
 													</div>	
 
-												</div><!-- /.list-topic-item-info -->
+												</div><!-- /.uix-list-topic__item__info -->
 
 
-												<div class="clear"></div>
+												<div class="uix-clear"></div>
 
 
-												<div class="detail list-normal table-normal">
+												<div class="uix-list-topic__item__addition uix-list uix-list--normal uix-table uix-table--bordered">
 
 														<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
 
 
-													 <div class="tags-box">
+													 <div class="uix-tags-box">
 														 <a href="#">Tag</a>
 														 <a href="#">Video</a>
 														 <a href="#">Web Design</a>
@@ -155,9 +155,9 @@
 
 
 									<!-- List Item -->
-									<div class="list-topic-item style-2">
+									<div class="uix-list-topic__item uix-list-topic__item--style-2">
 										<div class="row">
-											<div class="col-md-4 list-topic-item-img transition">
+											<div class="col-md-4 uix-list-topic__item__img uix-trans">
 												<a href="#"> 
 													<img src="assets/images/demo/test-img-big-2.jpg" alt="" />
 												</a>
@@ -166,10 +166,10 @@
 
 											<div class="col-md-8">
 
-												<div class="list-topic-item-info transition el-row">
+												<div class="uix-list-topic__item__info uix-trans uix-el-grid__row">
 
 
-													<div class="el-col el-col-5 el-col-half">
+													<div class="uix-el-grid__col-5 uix-el-grid__col-half">
 
 														<h3>
 															 <a href="#">
@@ -179,33 +179,33 @@
 													</div>
 
 
-													<div class="el-col el-col-7 el-col-half">
+													<div class="uix-el-grid__col-7 uix-el-grid__col-half">
 
-														<div class="el-col el-col-5 el-col-stack">
+														<div class="uix-el-grid__col-5 uix-el-grid__col-stack">
 															<p><strong>Author:</strong> David</p>
 															<p><strong>Date:</strong> December 10, 2017</p>
 														</div>
 
 
-														<div class="el-col el-col-7 el-col-stack">
+														<div class="uix-el-grid__col-7 uix-el-grid__col-stack">
 															<p><strong>Comments:</strong> 20</p>
 															<p><strong>Categories:</strong> Art, Design</p>
 														</div>	
 
 													</div>	
 
-												</div><!-- /.list-topic-item-info -->
+												</div><!-- /.uix-list-topic__item__info -->
 
 
-												<div class="clear"></div>
+												<div class="uix-clear"></div>
 
 
-												<div class="detail list-normal table-normal">
+												<div class="uix-list-topic__item__addition uix-list uix-list--normal uix-table uix-table--bordered">
 
 														<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
 
 
-													 <div class="tags-box">
+													 <div class="uix-tags-box">
 														 <a href="#">Tag</a>
 														 <a href="#">Video</a>
 														 <a href="#">Web Design</a>
@@ -230,9 +230,9 @@
 
 
 									<!-- List Item -->
-									<div class="list-topic-item style-2">
+									<div class="uix-list-topic__item uix-list-topic__item--style-2">
 										<div class="row">
-											<div class="col-md-4 list-topic-item-img transition">
+											<div class="col-md-4 uix-list-topic__item__img uix-trans">
 												<a href="#"> 
 													<img src="assets/images/demo/test-img-big-3.jpg" alt="" />
 												</a>
@@ -241,10 +241,10 @@
 
 											<div class="col-md-8">
 
-												<div class="list-topic-item-info transition el-row">
+												<div class="uix-list-topic__item__info uix-trans uix-el-grid__row">
 
 
-													<div class="el-col el-col-5 el-col-half">
+													<div class="uix-el-grid__col-5 uix-el-grid__col-half">
 
 														<h3>
 															 <a href="#">
@@ -254,28 +254,28 @@
 													</div>
 
 
-													<div class="el-col el-col-7 el-col-half">
+													<div class="uix-el-grid__col-7 uix-el-grid__col-half">
 
-														<div class="el-col el-col-5 el-col-stack">
+														<div class="uix-el-grid__col-5 uix-el-grid__col-stack">
 															<p><strong>Author:</strong> David</p>
 															<p><strong>Date:</strong> December 10, 2017</p>
 														</div>
 
 
-														<div class="el-col el-col-7 el-col-stack">
+														<div class="uix-el-grid__col-7 uix-el-grid__col-stack">
 															<p><strong>Comments:</strong> 20</p>
 															<p><strong>Categories:</strong> Art, Design</p>
 														</div>	
 
 													</div>	
 
-												</div><!-- /.list-topic-item-info -->
+												</div><!-- /.uix-list-topic__item__info -->
 
 
-												<div class="clear"></div>
+												<div class="uix-clear"></div>
 
 
-												<div class="detail list-normal table-normal">
+												<div class="uix-list-topic__item__addition uix-list uix-list--normal uix-table uix-table--bordered">
 
 														<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac.</p>
 
@@ -284,7 +284,7 @@
 													<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac.</p>
 
 
-													 <div class="tags-box">
+													 <div class="uix-tags-box">
 														 <a href="#">Tag</a>
 														 <a href="#">Video</a>
 														 <a href="#">Web Design</a>
@@ -307,16 +307,16 @@
  	
 								
 						
-						            <div class="list-topic-items-ajax-container"></div>
+						            <div class="uix-list-topic__items-ajax-container"></div>
 									<script id="list-topic-ajax-template-1" type="text/template7">
 									
 									    {{#each items}}
 										
 										
 											<!-- List Item -->
-											<div class="list-topic-item style-2">
+											<div class="uix-list-topic__item uix-list-topic__item--style-2">
 												<div class="row">
-													<div class="col-md-4 list-topic-item-img transition">
+													<div class="col-md-4 uix-list-topic__item__img uix-trans">
 														<a href="{{link}}"> 
 															<img src="{{img}}" alt="" />
 														</a>
@@ -325,10 +325,10 @@
 
 													<div class="col-md-8">
 
-														<div class="list-topic-item-info transition el-row">
+														<div class="uix-list-topic__item__info uix-trans uix-el-grid__row">
 
 
-															<div class="el-col el-col-5 el-col-half">
+															<div class="uix-el-grid__col-5 uix-el-grid__col-half">
 
 																<h3>
 																	 <a href="{{link}}">
@@ -338,32 +338,32 @@
 															</div>
 
 
-															<div class="el-col el-col-7 el-col-half">
+															<div class="uix-el-grid__col-7 uix-el-grid__col-half">
 
-																<div class="el-col el-col-5 el-col-stack">
+																<div class="uix-el-grid__col-5 uix-el-grid__col-stack">
 																	<p><strong>Author:</strong> {{author}}</p>
 																	<p><strong>Date:</strong> {{time}}</p>
 																</div>
 
 
-																<div class="el-col el-col-7 el-col-stack">
+																<div class="uix-el-grid__col-7 uix-el-grid__col-stack">
 																	<p><strong>Comments:</strong> {{comments}}</p>
 																	<p><strong>Categories:</strong> {{cat}}</p>
 																</div>	
 
 															</div>	
 
-														</div><!-- /.list-topic-item-info -->
+														</div><!-- /.uix-list-topic__item__info -->
 
 
-														<div class="clear"></div>
+														<div class="uix-clear"></div>
 
 
-														<div class="detail list-normal table-normal">
+														<div class="uix-list-topic__item__addition uix-list uix-list--normal uix-table uix-table--bordered">
 
 																<p>{{detail}}</p>
 
-															 <div class="tags-box">
+															 <div class="uix-tags-box">
 																 {{tags}}
 															 </div>
 
@@ -391,7 +391,7 @@
 						
 						
 						
-							</div><!-- /.list-topic-container -->
+							</div><!-- /.uix-list-topic -->
                        
                        
                         </div>
@@ -401,8 +401,8 @@
                     
                     
                       
-                    <p class="t-c">
-                        <a id="ajax-loadmore-btn-1" href="javascript:void(0)" class="button button-border-thin button-size-s button-bg-primary button-radius">Load More</a>
+                    <p class="uix-t-c">
+                        <a id="ajax-loadmore-btn-1" href="javascript:void(0)" class="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary is-pill">Load More</a>
 				    </p>
                     
             </div>

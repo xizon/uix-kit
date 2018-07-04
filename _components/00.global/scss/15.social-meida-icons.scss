@@ -12,7 +12,7 @@
  1. Social Button
  ---------------------------
  */ 
-.social-btn {
+.uix-social-btn {
     position: relative;
     border: 2px solid $primary-text-color1;
     text-align: center;
@@ -23,21 +23,22 @@
 	padding: 0;
 	margin: 0;
 	
-	&.border-none {
-		border-color: transparent !important;
-	}
-	
-	&.fill-white {
+	&.is-fill-white {
 		background: #fff;
 		color: $primary-text-color1;
 	}
 	
-	&.thin {
+	&.uix-social-btn--no-border {
+		border-color: transparent !important;
+	}
+	
+	
+	&.uix-social-btn--thin {
 		border-width: 1px;
 	}
 	
 	
-	&.fillet {
+	&.uix-social-btn--circle {
 		border-radius: 50%;
 		
 		&::after {
@@ -45,7 +46,7 @@
 		}
 	}
 
-	&.small {
+	&.uix-social-btn--small {
 		width: 2rem;
 		height: 2rem;
 		line-height: 1.875rem;	
@@ -59,7 +60,7 @@
 		
 	}
 	
-	&.medium {
+	&.uix-social-btn--medium {
 		width: 2.875rem;
 		height: 2.875rem;
 		line-height: 2.875rem;	
@@ -72,7 +73,7 @@
 		
 	}
 	
-	&.large {
+	&.uix-social-btn--large {
 		width: 3.75rem;
 		height: 3.75rem;
 		line-height: 3.75rem;	
@@ -119,7 +120,7 @@
 	
 	
 	/* white style */
-	&.white {
+	&.uix-social-btn--white {
 		border-color: #fff;
 		color: #fff;
 		
@@ -150,262 +151,262 @@
  2. Social Background
  ---------------------------
  */ 
-.social-bg {
+.uix-social-bg {
     color: #fff !important;
 }
 
-.social-bg-twitter {
+.uix-social-bg--twitter {
     border-color: #53B9FD !important;
     background-color: #53B9FD !important;
 }
 
-.social-bg-facebook {
+.uix-social-bg--facebook {
 	border-color: #78A4DD !important;
 	background-color: #78A4DD !important;
 }
 
-.social-bg-google {
+.uix-social-bg--google {
 	border-color: #FC5B5B !important;
 	background-color: #FC5B5B !important;
 }
 
-.social-bg-instagram {
+.uix-social-bg--instagram {
 	border-color: #6156C7 !important;
 	background-color: #6156C7 !important;
 }
 
-.social-bg-lastfm {
+.uix-social-bg--lastfm {
 	border-color: #B90000 !important;
 	background-color: #B90000 !important;
 }
 
-.social-bg-youtube {
+.uix-social-bg--youtube {
 	border-color: #CC181E !important;
 	background-color: #CC181E !important;
 }
 
-.social-bg-vimeo {
+.uix-social-bg--vimeo {
 	border-color: #1ab7ea !important;
 	background-color: #1ab7ea !important;
 }
 
-.social-bg-dribbble {
+.uix-social-bg--dribbble {
 	border-color: #FA8BBC !important;
 	background-color: #FA8BBC !important;
 }
 
-.social-bg-github {
+.uix-social-bg--github {
 	border-color: #652F51 !important;
 	background-color: #652F51 !important;
 }
 
-.social-bg-flickr {
+.uix-social-bg--flickr {
 	border-color: #fc4ca4 !important;
 	background-color: #fc4ca4 !important;
 }
 
-.social-bg-medium {
+.uix-social-bg--medium {
 	border-color: #00AB6B !important;
 	background-color: #00AB6B !important;
 }
 
-.social-bg-codepen {
+.uix-social-bg--codepen {
 	border-color: #333 !important;
 	background-color: #333 !important;
 }
 
-.social-bg-behance {
+.uix-social-bg--behance {
 	border-color: #4F8FD6 !important;
 	background-color: #4F8FD6 !important;
 }
 
-.social-bg-dropbox {
+.uix-social-bg--dropbox {
 	border-color: #349BE9 !important;
 	background-color: #349BE9 !important;
 }
 
-.social-bg-pinterest {
+.uix-social-bg--pinterest {
 	border-color: #F35359 !important;
 	background-color: #F35359 !important;
 }
 
-.social-bg-reddit {
+.uix-social-bg--reddit {
 	border-color: #FF4500 !important;
 	background-color: #FF4500 !important;
 }
 
-.social-bg-soundcloud {
+.uix-social-bg--soundcloud {
 	border-color: #FF7500 !important;
 	background-color: #FF7500 !important;
 }
 
-.social-bg-producthunt {
+.uix-social-bg--producthunt {
 	border-color: #DA552F !important;
 	background-color: #DA552F !important;
 }
 
-.social-bg-weibo {
+.uix-social-bg--weibo {
 	border-color: #E6162D !important;
 	background-color: #E6162D !important;
 }
 
-.social-bg-deviantart {
+.uix-social-bg--deviantart {
 	border-color: #05CC47 !important;
 	background-color: #05CC47 !important;
 }
 
-.social-bg-spotify {
+.uix-social-bg--spotify {
 	border-color: #A5CE3F !important;
 	background-color: #A5CE3F !important;
 }
 
-.social-bg-wordpress {
+.uix-social-bg--wordpress {
 	border-color: #24A5DD !important;
 	background-color: #24A5DD !important;
 }
 
-.social-bg-digg {
+.uix-social-bg--digg {
 	border-color: #333 !important;
 	background-color: #333 !important;
 }
 
-.social-bg-tumblr {
+.uix-social-bg--tumblr {
 	border-color: #529ECC !important;
 	background-color: #529ECC !important;
 }
 
-.social-bg-linkedin {
+.uix-social-bg--linkedin {
 	border-color: #24A5DD !important;
 	background-color: #24A5DD !important;
 }
 
-.social-bg-stackoverflow {
+.uix-social-bg--stackoverflow {
 	border-color: #FF7500 !important;
 	background-color: #FF7500 !important;
 }
 
 
-.social-bg-colourful {
+.uix-social-bg--colourful {
     display: inline-block !important;
     *display: inline !important;
 	margin: .2em .5em !important;
 }
 
-.social-bg-colourful {
+.uix-social-bg--colourful {
 	color: #333333 !important;
 }
 
-.social-bg-colourful[href*="twitter.com"] {
+.uix-social-bg--colourful[href*="twitter.com"] {
     color: #53B9FD !important;
 }
 
-.social-bg-colourful[href*="facebook.com"] {
+.uix-social-bg--colourful[href*="facebook.com"] {
     color: #78A4DD !important;
 }
 
-.social-bg-colourful[href*="google.com"] {
+.uix-social-bg--colourful[href*="google.com"] {
     color: #FC5B5B !important;
 }
 
-.social-bg-colourful[href*="instagram.com"] {
+.uix-social-bg--colourful[href*="instagram.com"] {
     color: #6156C7 !important;
 }
 
-.social-bg-colourful[href*="last.fm"] {
+.uix-social-bg--colourful[href*="last.fm"] {
     color: #B90000 !important;
 }
 
-.social-bg-colourful[href*="youtube.com"] {
+.uix-social-bg--colourful[href*="youtube.com"] {
     color: #CC181E !important;
 }
 
-.social-bg-colourful[href*="vimeo.com"] {
+.uix-social-bg--colourful[href*="vimeo.com"] {
     color: #1ab7ea !important;
 }
 
-.social-bg-colourful[href*="dribbble.com"] {
+.uix-social-bg--colourful[href*="dribbble.com"] {
     color: #FA8BBC !important;
 }
 
-.social-bg-colourful[href*="github.com"] {
+.uix-social-bg--colourful[href*="github.com"] {
     color: #652F51 !important;
 }
 
-.social-bg-colourful[href*="flickr.com"] {
+.uix-social-bg--colourful[href*="flickr.com"] {
     color: #fc4ca4 !important;
 }
 
-.social-bg-colourful[href*="medium.com"] {
+.uix-social-bg--colourful[href*="medium.com"] {
     color: #00AB6B !important;
 }
 
-.social-bg-colourful[href*="codepen.com"] {
+.uix-social-bg--colourful[href*="codepen.com"] {
     color: #333 !important;
 }
 
-.social-bg-colourful[href*="behance.net"] {
+.uix-social-bg--colourful[href*="behance.net"] {
     color: #4F8FD6 !important;
 }
 
-.social-bg-colourful[href*="dropbox.com"] {
+.uix-social-bg--colourful[href*="dropbox.com"] {
     color: #349BE9 !important;
 }
 
-.social-bg-colourful[href*="pinterest.com"] {
+.uix-social-bg--colourful[href*="pinterest.com"] {
     color: #F35359 !important;
 }
 
-.social-bg-colourful[href*="reddit.com"] {
+.uix-social-bg--colourful[href*="reddit.com"] {
     color: #FF4500 !important;
 }
 
-.social-bg-colourful[href*="soundcloud.com"] {
+.uix-social-bg--colourful[href*="soundcloud.com"] {
     color: #FF7500 !important;
 }
 
-.social-bg-colourful[href*="producthunt.com"] {
+.uix-social-bg--colourful[href*="producthunt.com"] {
     color: #DA552F !important;
 }
 
-.social-bg-colourful[href*="weibo.com"] {
+.uix-social-bg--colourful[href*="weibo.com"] {
     color: #E6162D !important;
 }
 
 
-.social-bg-colourful[href*="deviantart.com"] {
+.uix-social-bg--colourful[href*="deviantart.com"] {
     color: #05CC47 !important;
 }
 
-.social-bg-colourful[href*="spotify.com"] {
+.uix-social-bg--colourful[href*="spotify.com"] {
     color: #A5CE3F !important;
 }
 
-.social-bg-colourful[href*="wordpress.com"] {
+.uix-social-bg--colourful[href*="wordpress.com"] {
     color: #24A5DD !important;
 }
 
-.social-bg-colourful[href*="mailto"] {
+.uix-social-bg--colourful[href*="mailto"] {
     color: #333 !important;
 }
 
-.social-bg-colourful[href*="digg.com"] {
+.uix-social-bg--colourful[href*="digg.com"] {
     color: #333 !important;
 }
 
-.social-bg-colourful[href*="tumblr.com"] {
+.uix-social-bg--colourful[href*="tumblr.com"] {
     color: #529ECC !important;
 }
 
-.social-bg-colourful[href*="linkedin.com"] {
+.uix-social-bg--colourful[href*="linkedin.com"] {
     color: #24A5DD !important;
 }
 
-.social-bg-colourful[href*="stackoverflow.com"] {
+.uix-social-bg--colourful[href*="stackoverflow.com"] {
     color: #FF7500 !important;
 }
 
-.social-bg-colourful[href*="rss"], 
-.social-bg-colourful[href*="feed"] {
+.uix-social-bg--colourful[href*="rss"], 
+.uix-social-bg--colourful[href*="feed"] {
     color: #FF7500 !important;
 }
 

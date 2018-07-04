@@ -2,7 +2,7 @@
    <!-- Parallax -->                                           
 /* ====================================================== */
 
-.parallax {
+.uix-parallax {
 	position: relative;
 	width: 100%;
 	background-attachment: fixed;
@@ -11,12 +11,12 @@
 	height: auto;
 	width: 100%;
 	
-	.parallax-img {
+	.uix-parallax__img {
 	    visibility: hidden;
 	}
 }
 
-.pure-bg-parallax {
+.uix-parallax--pure-bg {
 	@include background-cover();
 }
 

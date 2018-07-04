@@ -12,14 +12,14 @@ APP = ( function ( APP, $, window, document ) {
 
 		// Disable devices scaling
 		//-------------------------------------	
-		document.addEventListener('touchstart',function (event) {
+		document.addEventListener( 'touchstart', function (event) {
 			if(event.touches.length>1){
 				event.preventDefault();
 			}
 		});
 		
 		var lastTouchEnd=0;
-		document.addEventListener('touchend',function (event) {
+		document.addEventListener( 'touchend', function (event) {
 			var now=(new Date()).getTime();
 			if( now-lastTouchEnd <= 300 ){
 				event.preventDefault();
@@ -41,7 +41,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			if ( isNaN( per ) ) per = 100;
 			
-			$( '.loader-progress span' ).text( per + '%' );
+			$( '.uix-loader-progress span' ).text( per + '%' );
 			
 			
 		}).done( function() {
@@ -50,7 +50,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			// Remove loader
-			TweenMax.to( '.loader, .loader-progress', 0.5, {
+			TweenMax.to( '.uix-loader, .uix-loader-progress', 0.5, {
 				css: {
 					opacity : 0,
 					display : 'none'

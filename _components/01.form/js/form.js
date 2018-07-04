@@ -37,7 +37,7 @@ APP = ( function ( APP, $, window, document ) {
 		 ---------------------------
 		 */ 	
 		
-		$( 'input.disable' ).each( function(){
+		$( 'input.disabled' ).each( function(){
 			$( this ).prop('disabled', true);
 		});
 		
@@ -48,10 +48,10 @@ APP = ( function ( APP, $, window, document ) {
 		 Input File
 		 ---------------------------
 		 */ 
-		$( '.controls-file-container' ).each( function()  {
+		$( '.uix-controls__file-container' ).each( function()  {
 			var fileInput  = $( this ).find( 'input[type="file"]' ),
-				fileBtn    = $( this ).find( '.controls-file-trigger' ),
-				filePath   = $( this ).next( '.controls-file-return' );
+				fileBtn    = $( this ).find( '.uix-controls__file-trigger' ),
+				filePath   = $( this ).next( '.uix-controls__file-return' );
 			
 			fileBtn.on( 'click', function() {
 				fileInput.focusin();
@@ -77,21 +77,21 @@ APP = ( function ( APP, $, window, document ) {
 
 			// on focus add cladd active to label
 			$this.on( 'focus', function() {
-				$( this ).closest( 'div' ).find( 'label, .bar' ).addClass( 'active' );
+				$( this ).closest( 'div' ).find( 'label, .uix-controls__bar' ).addClass( 'active' );
 			});
 			
 			
 			//on blur check field and remove class if needed
 			$this.on( 'blur change', function( e ) {
 				if( $this.val() === '' || $this.val() === 'blank') {
-					$( this ).closest( 'div' ).find( 'label, .bar' ).removeClass( 'active' );
+					$( this ).closest( 'div' ).find( 'label, .uix-controls__bar' ).removeClass( 'active' );
 				}	
 				
 			});
 			
 			// if exist cookie value
 			if( $this.val() != '' && $this.val() != 'blank') { 
-			   $( this ).closest( 'div' ).find( 'label, .bar' ).addClass( 'active' );
+			   $( this ).closest( 'div' ).find( 'label, .uix-controls__bar' ).addClass( 'active' );
 			}
 			
 			
@@ -99,7 +99,7 @@ APP = ( function ( APP, $, window, document ) {
 		
 		
 		//Search Submit Event in WordPress
-		$( '.wp-search-submit' ).on( 'click', function() {
+		$( '.uix-search-box__submit' ).on( 'click', function() {
 			$( this ).parent().parent( 'form' ).submit();
 		});
 		
@@ -120,8 +120,8 @@ APP = ( function ( APP, $, window, document ) {
 					nextText         = $this.data( 'picker-next' ),
 					prevText         = $this.data( 'picker-prev' ),
 					dayNames         = $this.data( 'picker-day' ),
-					myminDate        = $this.data( 'picker-minDate' ),
-					mymaxDate        = $this.data( 'picker-maxDate' );
+					myminDate        = $this.data( 'picker-min-date' ),
+					mymaxDate        = $this.data( 'picker-max-date' );
 				
 				
 				
@@ -156,7 +156,7 @@ APP = ( function ( APP, $, window, document ) {
 			//Dynamic listening for the latest value
 			$( document ).on( 'mouseleave', '[data-handler]', function() {
 				$( '[data-picker]' ).each( function() {
-					$( this ).closest( 'div' ).find( 'label, .bar' ).addClass( 'active' );
+					$( this ).closest( 'div' ).find( 'label, .uix-controls__bar' ).addClass( 'active' );
 				});
 
 			});	
@@ -170,7 +170,54 @@ APP = ( function ( APP, $, window, document ) {
 		 Input Validation 
 		 ---------------------------
 		 */ 
-		//Using the jQuery Validation Plugin to check your form
+//		$(document).on( 'submit', '.app-general-form-container form', function(e) {
+//
+//			var $form        = $( this ),
+//				validationOK = true,
+//				emailRe      = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm,
+//				numReg       = /^\d+$/;
+//
+//
+//
+//			//Email
+//			var emailVal = $form.find( '[name="name5"]' ).val();
+//			if ( emailVal != '' && !emailRe.test( emailVal ) ) {
+//				$form.find( '.response' ).html( '<span class="no"><i class="fa fa-times" aria-hidden="true"></i> A valid email address.</span>' );
+//
+//				validationOK = false;
+//			}
+//
+//
+//			$form.find( '.reqiured' ).each( function()  {
+//
+//
+//				if ( $( this ).val() == '' ) {
+//
+//					var info = $( this )
+//									.closest( '.row' )
+//									.find( '.col-sm-4' )
+//									.html()
+//									.replace(/(&nbsp;|<([^>]+)>|\*)/ig, '' );
+//
+//					$form.find( '.response' ).html( '<span class="no"><i class="fa fa-times" aria-hidden="true"></i> "'+info+'" Can not be empty.</span>' );
+//
+//					validationOK = false;
+//					return false;
+//
+//				}
+//
+//
+//
+//			});
+//
+//
+//			if ( validationOK ) {
+//				return true;
+//			} else {
+//				return false;
+//			}
+//
+//		});
 		
 		
 		
@@ -239,17 +286,17 @@ APP = ( function ( APP, $, window, document ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
-			selector         : '.custom-select',
-			targetWrapper    : '.custom-select-wrapper',
-			trigger          : '.custom-select-trigger',	
-			itemsWrapper     : '.custom-options',
-			item             : '.custom-option'
+			selector         : '.uix-controls__select',
+			targetWrapper    : '.uix-controls__select-wrapper',
+			trigger          : '.uix-controls__select-trigger',	
+			itemsWrapper     : '.uix-controls__select__option-container',
+			item             : '.uix-controls__select__option'
         }, options );
  
         this.each( function() {
 			
 		
-			$( settings.selector ).not( '.new' ).each( function() {
+			$( settings.selector ).not( '.js-uix-new' ).each( function() {
 
 				var $this     = $( this ),
 					classes   = $this.attr( 'class' ),
@@ -263,9 +310,9 @@ APP = ( function ( APP, $, window, document ) {
 
 				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
 
-					template  = '<div class="' + classes + ' new">';
-					template += '<span class="custom-select-trigger">' + $this.find( 'select' ).attr( 'placeholder' ) + '</span><span class="bar"></span>';
-					template += '<div class="custom-options">';
+					template  = '<div class="' + classes + ' js-uix-new">';
+					template += '<span class="uix-controls__select-trigger">' + $this.find( 'select' ).attr( 'placeholder' ) + '</span><span class="uix-controls__bar"></span>';
+					template += '<div class="uix-controls__select__option-container">';
 
 					$this.find( 'select option' ).each( function( index ) {
 
@@ -275,16 +322,16 @@ APP = ( function ( APP, $, window, document ) {
 							selected = 'active';
 						}
 
-						template += '<span class="custom-option '+selected+'" data-value="' + $( this ).attr( 'value' ) + '">' + $( this ).html() + '</span>';
+						template += '<span class="uix-controls__select__option '+selected+'" data-value="' + $( this ).attr( 'value' ) + '">' + $( this ).html() + '</span>';
 					});
 					template += '</div></div>';
 
 					if ( typeof labelText != typeof undefined && labelText != '' ) {
-						template += '<span class="custom-select-label">' + labelText + '</span>';
+						template += '<span class="uix-controls__select-label">' + labelText + '</span>';
 					}
 
 
-					$this.wrap('<div class="'+ settings.targetWrapper.replace( '.', '' )+' '+( $this.hasClass( 'line-eff' ) ? 'line-eff' : '' )+' '+( $this.hasClass( 'fullwidth' ) ? 'fullwidth' : '' )+' '+( $this.hasClass( 'disable' ) ? 'disable' : '' )+'"></div>');
+					$this.wrap('<div class="'+ settings.targetWrapper.replace( '.', '' )+' '+( $this.hasClass( 'uix-controls--line' ) ? 'uix-controls--line' : '' )+' '+( $this.hasClass( 'fullwidth' ) ? 'fullwidth' : '' )+' '+( $this.hasClass( 'disabled' ) ? 'disabled' : '' )+'"></div>');
 					$this.hide();
 					$this.after( template );	
 
@@ -301,37 +348,37 @@ APP = ( function ( APP, $, window, document ) {
 				e.preventDefault();
 
 				var $selectWrapper    = $( this ).closest( settings.targetWrapper ),
-					$selectCurWrapper = $selectWrapper.find( settings.selector + '.new' );
+					$selectCurWrapper = $selectWrapper.find( settings.selector + '.js-uix-new' );
 
-				$selectCurWrapper.addClass( 'opened' );
+				$selectCurWrapper.addClass( 'is-opened' );
 
 			});
 
 			$( document.body ).on( 'click touchstart', function( e ) {
-				$( settings.selector + '.new' ).removeClass( 'opened' );
+				$( settings.selector + '.js-uix-new' ).removeClass( 'is-opened' );
 			});		
 
 
 
 
 			//Set the default selector text
-			$( settings.selector + '.new' ).each( function( index ) {
+			$( settings.selector + '.js-uix-new' ).each( function( index ) {
 				$( this ).find( settings.trigger ).text( $( this ).find( settings.item + '.active' ).html() );
 			});
 
 
 			//Change Event Here
 			//Prevents the triggering of multiple change events
-			$( document ).off( 'click.curCustomSelectItem' );
-			$( document ).on( 'click.curCustomSelectItem', settings.item, function( e ) {
+			$( document ).off( 'click.FORM_SELECT' );
+			$( document ).on( 'click.FORM_SELECT', settings.item, function( e ) {
 				e.preventDefault();
 
 				var $selectWrapper    = $( this ).closest( settings.targetWrapper ),
-					$selectCurWrapper = $selectWrapper.find( settings.selector + '.new' ),
+					$selectCurWrapper = $selectWrapper.find( settings.selector + '.js-uix-new' ),
 					curVal            = $( this ).data( 'value' );
 
 				//Close the selector
-				$selectCurWrapper.removeClass( 'opened' );
+				$selectCurWrapper.removeClass( 'is-opened' );
 
 				//Set the selector text
 				$selectCurWrapper.find( settings.trigger ).text( $( this ).html() );
@@ -350,10 +397,10 @@ APP = ( function ( APP, $, window, document ) {
 
 
 			//Synchronize to the original select change event
-			$( settings.selector ).not( '.new' ).each( function() {
+			$( settings.selector ).not( '.js-uix-new' ).each( function() {
 
 				var $this       = $( this ).find( 'select' ),
-					$cusSelect  = $this.closest( settings.targetWrapper ).find( settings.selector + '.new' ),
+					$cusSelect  = $this.closest( settings.targetWrapper ).find( settings.selector + '.js-uix-new' ),
 					newOptions  = '';
 
 
@@ -365,7 +412,7 @@ APP = ( function ( APP, $, window, document ) {
 						selected = 'active';
 					}
 
-					newOptions += '<span class="custom-option '+selected+'" data-value="' + $( this ).attr( 'value' ) + '">' + $( this ).html() + '</span>';
+					newOptions += '<span class="uix-controls__select__option '+selected+'" data-value="' + $( this ).attr( 'value' ) + '">' + $( this ).html() + '</span>';
 				});
 
 
@@ -402,9 +449,9 @@ APP = ( function ( APP, $, window, document ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
-			radioWrapper    : '.custom-radio',
-			toggle          : '.custom-toggle',
-			checkboxWrapper : '.custom-checkbox'
+			radioWrapper    : '.uix-controls__radio',
+			toggle          : '.uix-controls__toggle',
+			checkboxWrapper : '.uix-controls__checkbox'
         }, options );
  
         this.each( function() {
@@ -418,7 +465,7 @@ APP = ( function ( APP, $, window, document ) {
 			$( customRadio ).find( 'input[type="radio"]' ).each( function() {
 				var dataExist = $( this ).data( 'exist' );
 				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
-					$( '<span class="custom-radio-trigger"></span>' ).insertAfter( $( this ) );
+					$( '<span class="uix-controls__radio-trigger"></span>' ).insertAfter( $( this ) );
 
 					//Prevent the form from being initialized again
 					$( this ).data( 'exist', 1 );	
@@ -429,7 +476,7 @@ APP = ( function ( APP, $, window, document ) {
 			$( customToggle ).find( 'input[type="checkbox"]' ).each( function() {
 				var dataExist = $( this ).data( 'exist' );
 				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
-					$( '<span class="custom-toggle-trigger"></span>' ).insertAfter( $( this ) );
+					$( '<span class="uix-controls__toggle-trigger"></span>' ).insertAfter( $( this ) );
 
 					//Prevent the form from being initialized again
 					$( this ).data( 'exist', 1 );	
@@ -441,7 +488,7 @@ APP = ( function ( APP, $, window, document ) {
 			$( customCheckbox ).find( 'input[type="checkbox"]' ).each( function() {
 				var dataExist = $( this ).data( 'exist' );
 				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
-					$( '<span class="custom-checkbox-trigger"></span>' ).insertAfter( $( this ) );
+					$( '<span class="uix-controls__checkbox-trigger"></span>' ).insertAfter( $( this ) );
 
 					//Prevent the form from being initialized again
 					$( this ).data( 'exist', 1 );	
@@ -473,7 +520,7 @@ APP = ( function ( APP, $, window, document ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
-			controls    : '.controls.line-eff'
+			controls    : '.uix-controls.uix-controls--line'
         }, options );
  
         this.each( function() {
@@ -485,7 +532,7 @@ APP = ( function ( APP, $, window, document ) {
 			$( customControls ).each( function() {
 				var dataExist = $( this ).data( 'exist' );
 				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
-					$( '<span class="bar"></span>' ).insertAfter( $( this ).find( 'label' ) );
+					$( '<span class="uix-controls__bar"></span>' ).insertAfter( $( this ).find( 'label' ) );
 
 					//Prevent the form from being initialized again
 					$( this ).data( 'exist', 1 );	

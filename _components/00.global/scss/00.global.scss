@@ -42,8 +42,6 @@
 
 
 
-
-
 	TABLE OF CONTENTS
 	---------------------------
 	
@@ -51,6 +49,36 @@
 
 
 */
+
+
+//	COMMON STYLE ATTRIBUTES IN THE MODULE
+//	---------------------------
+//  Note: Valid only on certain special modules
+//
+//    .is-horizontal            --> Let the elements be laid out horizontally.
+//    .is-vertical              --> Let the elements be laid out vertically.
+//    .is-fixed                 --> Let it be in a fixed position.
+//    .is-mobile                --> Execute when using a mobile device.
+//    .is-fill-white            --> Fill a white background.
+//    .is-fullscreen            --> Display in full screen.
+//    .is-video                 --> Determine if the element contains a video type.
+//    .is-pill                  --> Display elements using pill style.
+//    .is-round                 --> Give the element "rounded corners".
+//    .is-circle                --> Display elements using circle style.
+//    .is-transparent           --> Make the background or other properties of the element transparent.
+//    .is-animating             --> Contains animation effects.
+//    .is-reversed              --> Change the layout direction of the elements to the opposite position.
+//    .is-loaded                --> Determine if the element has been loaded.
+//    .is-opened                --> Determine if the element has been opened.
+//    .is-bordered              --> Add a border to the element.
+//    .is-iconic                --> Elements and icons are used together.
+//    .is-success               --> Returns a style of success, often used in forms.
+//    .is-error                 --> Returns a style of error, often used in forms.
+//    .is-mobile-still          --> Do not change any style properties on mobile devices.
+//    .is-mobile-hide           --> Hide this element on mobile devices.
+//    .is-hide-IE               --> Hide this element in old IE (10-). Only IE is valid.
+//    
+
 
 
 // FONTS
@@ -199,22 +227,26 @@ $primary-bg-color      : transparent;
 // Outer Shadow Effect
 // ---------------------------
 //
-@mixin outer-shadow() {
-	// @include outer-shadow();
-	box-shadow: 0 4px  4px  rgba(0, 0, 0, .05),
-               0 1px  6px  rgba(0, 0, 0, .05),
-               0 8px  8px  rgba(0, 0, 0, .05), 
-               0 16px 16px rgba(0, 0, 0, .05), 
-               8px 32px 32px rgba(0, 0, 0, .02), 
-               8px 64px 64px rgba(0, 0, 0, .02);
+@mixin outer-shadow( $type: 1 ) {
+	// @include outer-shadow( 1 );
+	
+	@if ( $type == 1 ) {
+		box-shadow: 0 4px  4px  rgba(0, 0, 0, .05),
+				   0 1px  6px  rgba(0, 0, 0, .05),
+				   0 8px  8px  rgba(0, 0, 0, .05), 
+				   0 16px 16px rgba(0, 0, 0, .05), 
+				   8px 32px 32px rgba(0, 0, 0, .02), 
+				   8px 64px 64px rgba(0, 0, 0, .02);	
+	}
+	
+	@if ( $type == 2 ) {
+		box-shadow: 0 1.8vw 4vw -.7vw #cbdfee;
+	}
+
+
 	
 }
 
-@mixin outer-shadow-large() {
-	// @include outer-shadow-large();
-	box-shadow: 0 31px 32px 0 #cbdfee;
-	
-}
 
 
 // Text wWith Ellipsis
@@ -309,6 +341,11 @@ $primary-bg-color      : transparent;
 			transform: translateX(-50%);
 			padding-left: 15px;
 			padding-right: 15px;
+			pointer-events: none; /* Prevent layers from hiding the underlying elements */
+			
+			> div {
+				pointer-events: auto;
+			}
 		}
 
 		@media all and (max-width: 1171px) {

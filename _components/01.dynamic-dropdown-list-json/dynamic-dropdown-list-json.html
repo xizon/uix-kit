@@ -9,13 +9,13 @@
     
   
   
-    <div class="wrapper">
+    <div class="uix-wrapper">
     
         <!-- Header Area
         ============================================= -->      
-        <header class="header-area">
+        <header class="uix-header__container">
             
-             <div class="header-container">
+             <div class="uix-header">
                  <div class="container">
                  
                         @@include('../00.global/include-brand.html')
@@ -26,18 +26,18 @@
                   </div>
                   <!-- .container end -->
                   
-                  <div class="clear"></div>
+                  <div class="uix-clear"></div>
              </div>
         
         </header>
-        <div class="header-inner"></div>
+        <div class="uix-header__placeholder"></div>
       
       
      
         <!-- Content 01
         ====================================================== -->
-        <section class="space-none">
-            <div class="container t-c">
+        <section class="uix-section--no-spacing">
+            <div class="container uix-t-c">
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">
                             <h2>Dynamic Drop Down List from JSON</h2>
@@ -62,9 +62,9 @@
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">
    
-						       <p class="custom-striking-msg info"><strong>Callback:</strong> <span id="dynamic-callback">-</span></p>
+						       <p class="uix-striking-msg uix-striking-msg--info"><strong>Callback:</strong> <span id="dynamic-callback">-</span></p>
          
-								<div class="controls custom-select">
+								<div class="uix-controls uix-controls__select">
 									<label>
 										<select 
 												id="dynamic-dd-country" 
@@ -88,7 +88,7 @@
 
 								<!-- ////////   -->
 
-								<div class="controls custom-select">
+								<div class="uix-controls uix-controls__select">
 									<label>
 										<select id="dynamic-dd-city" name="dynamic-dd-city" placeholder="City">
 										    <option value="" selected>- City -</option>
@@ -158,15 +158,15 @@
     
        <!-- Content 03
         ====================================================== -->
-        <section class="space-none-top">
+        <section class="uix-section--no-spacing-top">
             <div class="container">
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">
    
-						       <p class="custom-striking-msg info"><strong>(中国)区县:</strong> <span id="dynamic-callback2">-</span></p>
+						       <p class="uix-striking-msg uix-striking-msg--info"><strong>(中国)区县:</strong> <span id="dynamic-callback2">-</span></p>
          
 
-								<div class="controls custom-select option-top">
+								<div class="uix-controls uix-controls__select uix-controls__select--top">
 									<label>
 										<select 
 												id="dynamic-dd-china-province" 
@@ -187,7 +187,7 @@
 
 								<!-- ////////   -->
 
-								<div class="controls custom-select option-top">
+								<div class="uix-controls uix-controls__select uix-controls__select--top">
 									<label>
 										<select name="dynamic-dd-china-city" id="dynamic-dd-china-city" placeholder="城市">
 											<option value="">- 城市 -</option>
@@ -200,7 +200,7 @@
 
 								<!-- ////////   -->
 
-								<div class="controls custom-select option-top">
+								<div class="uix-controls uix-controls__select uix-controls__select--top">
 									<label>
 										<select name="dynamic-dd-china-area" id="dynamic-dd-china-area" placeholder="区县">
 											<option value="">- 区县 -</option>

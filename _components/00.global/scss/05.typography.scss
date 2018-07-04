@@ -3,9 +3,9 @@
 /* ====================================================== */
 
 /*
- * 1. General
- * 2. Hyperlink
- * 3. Heading (h1,h2,h3,h4,h5,h6)
+ * 1. General                    
+ * 2. Hyperlink                        
+ * 3. Heading (h1,h2,h3,h4,h5,h6) 
  * 4. Text Effect
  * 5. Table & List Effect by Default
  * 6. Drop Cap
@@ -25,12 +25,12 @@ h3,
 h4, 
 h5, 
 h6, 
-.h1, 
-.h2, 
-.h3, 
-.h4, 
-.h5, 
-.h6 {
+.uix-typo--h1, 
+.uix-typo--h2, 
+.uix-typo--h3, 
+.uix-typo--h4, 
+.uix-typo--h5, 
+.uix-typo--h6 {
     @include transition-default();
 }
 
@@ -55,14 +55,7 @@ a {
 	&:focus {
 		
 	}
-	
-	&.link {
-		text-decoration: underline;
-		color: $highlight-color1;
-		&:hover {
-			color: $highlight-color2;
-		}
-	}
+
 }
 
 /* 
@@ -76,12 +69,12 @@ h3,
 h4, 
 h5, 
 h6, 
-.h1, 
-.h2, 
-.h3, 
-.h4, 
-.h5, 
-.h6 {
+.uix-typo--h1, 
+.uix-typo--h2, 
+.uix-typo--h3, 
+.uix-typo--h4, 
+.uix-typo--h5, 
+.uix-typo--h6 {
 	color: $heading-text-color;
 	font-weight: 700;
 	font-variant-ligatures: common-ligatures;
@@ -90,6 +83,7 @@ h6,
 	margin-bottom: 0.625rem;
 	padding: 0 0 0.546875rem;
 	word-wrap: break-word;
+	
 
 }
 
@@ -125,42 +119,36 @@ h6 {
 	font-weight: 600;
 }
 
-.h1 {
+.uix-typo--h1 {
 	font-size: $font-size-h1 !important;
 	line-height: 1.14285714286 !important;
 }
 
-.h2 {
+.uix-typo--h2 {
 	font-size: $font-size-h2 !important;
 	line-height: 1.2 !important;
 }
 
-.h3 {
+.uix-typo--h3 {
 	font-size: $font-size-h3 !important;
 	line-height: 1.25 !important;
 }
 
-.h4 {
+.uix-typo--h4 {
 	font-size: $font-size-h4 !important;
 	line-height: 1.33333333333 !important;
 }
 
-.h5 {
+.uix-typo--h5 {
 	font-size: $font-size-h5 !important;
 	line-height: 1.5 !important;
 	font-weight: 600 !important;
 }
 
-.h6 {
+.uix-typo--h6 {
 	font-size: $font-size-h6 !important;
 	line-height: 2 !important;
 	font-weight: 600 !important;
-}
-
-	
-.heading-space-none {
-	margin: 0 !important;
-	padding: 0 !important;
 }
 
 
@@ -177,15 +165,15 @@ h6 {
 		font-size: #{$font-size-h3*0.71428571428571};
 		line-height: 1.625;
 	}
-	.h1 {
+	.uix-typo--h1 {
 		font-size: #{$font-size-h1*0.71428571428571} !important;
 		line-height: 1.15555556 !important;
 	}
-	.h2 {
+	.uix-typo--h2 {
 		font-size: #{$font-size-h2*0.7} !important;
 		line-height: 1.421875 !important;
 	}
-	.h3 {
+	.uix-typo--h3 {
 		font-size: #{$font-size-h3*0.71428571428571} !important;
 		line-height: 1.625 !important;
 	}
@@ -204,19 +192,20 @@ h6 {
 		font-size: #{$font-size-h3*0.78571428571429};
 		line-height: 1.5;
 	}
-	.h1 {
+	.uix-typo--h1 {
 		font-size: #{$font-size-h1*0.35714285714286} !important;
 		line-height: 1.38461538462 !important;
 	}
-	.h2 {
+	.uix-typo--h2 {
 		font-size: #{$font-size-h2*0.6} !important;
 		line-height: 1.28571428571 !important;
 	}
-	.h3 {
+	.uix-typo--h3 {
 		font-size: #{$font-size-h3*0.71428571428571} !important;
 		line-height: 1.5 !important;
 	}
-}
+}	
+
 
 
 /* 
@@ -224,32 +213,42 @@ h6 {
  4. Text Effect
  ---------------------------
  */ 
-.font-normal {
+/* Without spacing */
+.uix-typo--no-spacing {
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+.uix-typo--style-normal {
 	font-family: $font-stack;
 	font-weight: 400 !important;
 }
 
-.font-uppercase {
+.uix-typo--style-uppercase {
     text-transform: uppercase !important;
 }
 
-.font-bold {
+.uix-typo--style-bold {
     font-weight: 800 !important;
 }
 
-.font-italic {
+.uix-typo--style-italic {
     font-style: italic !important;
 }
 
-.font-no-italic {
+.uix-typo--style-noitalic {
     font-style: normal !important;
 }
 
-.font-underline {
+.uix-typo--style-underline {
     text-decoration: underline !important;
 }
 
-.font-primary-color {
+.uix-typo--style-tiny {
+	font-size: 0.75rem !important;
+}
+
+.uix-typo--color-primary {
 	color: $highlight-color1 !important;
 	
 	
@@ -260,18 +259,18 @@ h6 {
 	h4, 
 	h5, 
 	h6, 
-	.h1, 
-	.h2, 
-	.h3, 
-	.h4, 
-	.h5, 
-	.h6 {
+	.uix-typo--h1, 
+	.uix-typo--h2, 
+	.uix-typo--h3, 
+	.uix-typo--h4, 
+	.uix-typo--h5, 
+	.uix-typo--h6 {
 	    color: $highlight-color1;
 	}	
 	
 }
 
-.font-sub-color {
+.uix-typo--color-sub {
 	color: $sub-text-color !important;
 	
 	p,
@@ -281,18 +280,18 @@ h6 {
 	h4, 
 	h5, 
 	h6, 
-	.h1, 
-	.h2, 
-	.h3, 
-	.h4, 
-	.h5, 
-	.h6 {
+	.uix-typo--h1, 
+	.uix-typo--h2, 
+	.uix-typo--h3, 
+	.uix-typo--h4, 
+	.uix-typo--h5, 
+	.uix-typo--h6 {
 	    color: $sub-text-color;
 	}
 }
 
 
-.font-white {
+.uix-typo--color-white {
 	color: white !important;
 	
 	p,
@@ -302,12 +301,12 @@ h6 {
 	h4, 
 	h5, 
 	h6, 
-	.h1, 
-	.h2, 
-	.h3, 
-	.h4, 
-	.h5, 
-	.h6 {
+	.uix-typo--h1, 
+	.uix-typo--h2, 
+	.uix-typo--h3, 
+	.uix-typo--h4, 
+	.uix-typo--h5, 
+	.uix-typo--h6 {
 	    color: white;
 	}
 }
@@ -318,19 +317,19 @@ h6 {
  ---------------------------
  */ 
 /* Compatible with  Uix Shortcodes (WordPress Plugin) */
-.list-normal a:not(.uix-sc-btn), 
-.table-normal a:not(.uix-sc-btn) {
+.uix-list--normal a:not(.uix-sc-btn), 
+.uix-table a:not(.uix-sc-btn) {
     color: $highlight-color1;
 }
 
-.list-normal a:not(.uix-sc-btn):not(.button):hover, 
-.table-normal a:not(.uix-sc-btn):not(.button):hover {
+.uix-list--normal a:not(.uix-sc-btn):not(.uix-btn):hover, 
+.uix-table a:not(.uix-sc-btn):not(.uix-btn):hover {
     color: $highlight-color2;
     text-decoration: underline;
 }
 
-.list-normal a:not(.uix-sc-btn):hover img, 
-.table-normal a:not(.uix-sc-btn):hover img {
+.uix-list--normal a:not(.uix-sc-btn):hover img, 
+.uix-table a:not(.uix-sc-btn):hover img {
     text-decoration: none;
 }
 
@@ -340,8 +339,8 @@ h6 {
  6. Drop Cap
  ---------------------------
  */ 
-.dropcap::first-letter,
-.dropcap > p:first-of-type::first-letter {
+.uix-typo--dropcap::first-letter,
+.uix-typo--dropcap > p:first-of-type::first-letter {
     display: block;
     margin-right: 10px;
     float: left;
@@ -355,9 +354,9 @@ h6 {
  7. Vertical Text
  ---------------------------
  */ 
-.vertical-text {
+.uix-typo--vertical {
 
-	&:not(.characters-line) {
+	&:not(.uix-typo--vertical-characters-line) {
 		transform: rotate(90deg);
 		transform-origin: left top 0;
 		line-height: 0;/* Fix the problem of left-leaning text after rotation */
@@ -365,7 +364,7 @@ h6 {
 	}
 	
 	/* Defines the orientation of the text characters in a line.  */
-	&.characters-line {
+	&.uix-typo--vertical-characters-line {
 		width: 1px;
 		word-wrap: break-word;
 		line-height: 1;

@@ -22,7 +22,7 @@ APP = ( function ( APP, $, window, document ) {
 		 Video Embed
 		 ---------------------------
 		 */  
-		$( '.web-video-embed' ).each( function()  {
+		$( '.uix-video' ).each( function()  {
 			var $this          = $( this ),
 				tempID         = 'video-' + Math.random()*1000000000000000000,
 			    curVideoID     = tempID,
@@ -67,7 +67,7 @@ APP = ( function ( APP, $, window, document ) {
 			//Display cover and play buttons when some mobile device browsers cannot automatically play video
 			if ( $( '#' + coverPlayBtnID ).length == 0 ) {
 				
-				$( '<div id="'+coverPlayBtnID+'" class="web-video-embed-cover"><span class="cover-show" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="cover-play"></span></div>' ).insertBefore( $this );
+				$( '<div id="'+coverPlayBtnID+'" class="uix-video__cover"><span class="uix-video__cover-placeholder" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="cover-play"></span></div>' ).insertBefore( $this );
 				
 				
 	
@@ -261,10 +261,10 @@ APP = ( function ( APP, $, window, document ) {
 					vogv = '<source src="'+videoSrcOgv+'" type="video/ogv">';
 				}
 				
-				v += '<div class="modal-box fullscreen video" id="'+videoContainerMid+'">';
-				v += '<a href="javascript:void(0)" class="close-btn"></a>';
-				v += '<div class="content">';
-				v += '<div class="web-video-waiting"></div><div class="web-video-container" data-video-player-init="0">';
+				v += '<div class="uix-modal-box is-fullscreen is-video" id="'+videoContainerMid+'">';
+				v += '<a href="javascript:void(0)" class="uix-modal-box__close"></a>';
+				v += '<div class="uix-modal-box__content">';
+				v += '<div class="uix-modal-box__video-waiting"></div><div class="uix-modal-box__video-container" data-video-player-init="0">';
 				
 				if ( $this.find( '[data-video-iframe]' ).length > 0 && videoSrcIfm != '' ) {
 					//If iframe
@@ -300,8 +300,8 @@ APP = ( function ( APP, $, window, document ) {
 				$ifm         = false,
 				newMaxW      = windowWidth - 80,
 				newMaxH      = windowHeight - 80,
-				$vContainer  = $( '#' + vid ).closest( '.web-video-container' ),
-				$vLoader     = $vContainer.prev( '.web-video-waiting' ),
+				$vContainer  = $( '#' + vid ).closest( '.uix-modal-box__video-container' ),
+				$vLoader     = $vContainer.prev( '.uix-modal-box__video-waiting' ),
 				myPlayerInit = $vContainer.data( 'video-player-init' );
 
 			
@@ -507,7 +507,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			/* ---------  Close the modal  */
-			$( document ).on( 'click', '.modal-box .close-btn', function() {
+			$( document ).on( 'click', '.uix-modal-box .uix-modal-box__close', function() {
 
 				myPlayer.ready(function() {
 					myPlayer.pause();

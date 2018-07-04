@@ -1,7 +1,7 @@
 /* ====================================================== 
         <!-- Image Shapes --> 
 /* ====================================================== */
-.shape-img {
+.uix-shape-img {
 	
 	opacity: 0;
 	@include transition-default();
@@ -16,7 +16,7 @@
 }
 
 .no-cssanimations {
-	.shape-img {
+	.uix-shape-img {
 		img {
 			display: block;
 		}

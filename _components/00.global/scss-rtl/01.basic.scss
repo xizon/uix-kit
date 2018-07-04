@@ -13,13 +13,13 @@ td {
 }
 
 
-ul.list-normal, 
-ol.list-normal {
+ul.uix-list--normal, 
+ol.uix-list--normal {
 	  padding-left: auto;
 	  padding-right: 0.875rem;
 }
 
-.list-normal {
+.uix-list--normal {
 	ul, 
 	ol {
 		padding-left: auto;
@@ -27,8 +27,8 @@ ol.list-normal {
 	}
 }
 
-.table-normal table th, 
-table.table-normal th {
+.uix-table table th, 
+table.uix-table th {
     text-align: right;
 }
 

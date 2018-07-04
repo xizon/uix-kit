@@ -14,18 +14,18 @@ APP = ( function ( APP, $, window, document ) {
 		var $window      = $( window ),
 			windowWidth  = $window.width(),
 			windowHeight = $window.height(),
-			ulForDesktop = '.menu-v-container:not(.mobile) ul.menu-main';
+			ulForDesktop = '.uix-v-menu__container:not(.is-mobile) ul.uix-menu';
 
 
 		// Menu Hover
 		var mTop = 15;
 		$( ulForDesktop + ' > li.multi-column > ul li ul' ).addClass( 'multi' );
-		$( ulForDesktop + ' > li:not(.multi-column) ul, .menu-v-container:not(.mobile) li.multi-column > ul.sub-menu > li > ul, '+ulForDesktop+' li.multi-column > ul' ).css( 'margin-top', mTop + 'px' );
+		$( ulForDesktop + ' > li:not(.multi-column) ul, .uix-v-menu__container:not(.is-mobile) li.multi-column > ul.sub-menu > li > ul, '+ulForDesktop+' li.multi-column > ul' ).css( 'margin-top', mTop + 'px' );
 
 		$( ulForDesktop + ' li' ).on( 'mouseenter', function(){
 
 
-			TweenMax.set( $( this ).find( ' > ul.sub-menu:not(.multi), .mega-arrow' ), {
+			TweenMax.set( $( this ).find( ' > ul.sub-menu:not(.multi), .uix-menu__arrow-mega' ), {
 				css: {
 					opacity    : 0,
 					display    : 'block',
@@ -64,7 +64,7 @@ APP = ( function ( APP, $, window, document ) {
 		}).on( 'mouseleave' , function(){
 
 
-			TweenMax.to( $( this ).find( ' > ul.sub-menu:not(.multi), .mega-arrow' ), 0.3, {
+			TweenMax.to( $( this ).find( ' > ul.sub-menu:not(.multi), .uix-menu__arrow-mega' ), 0.3, {
 				css: {
 					opacity    : 0,
 					marginTop  : mTop + 'px'
@@ -90,7 +90,7 @@ APP = ( function ( APP, $, window, document ) {
 		//Add Sub-menu Arrow
 		$( ulForDesktop + ' li' ).each( function() {
 			if ( $( this ).find( 'ul' ).length > 0 ) {
-				$( this ).prepend( '<span class="nav-arrow"></span>' );
+				$( this ).prepend( '<span class="uix-menu__arrow"></span>' );
 			}
 
 		} );	
@@ -127,7 +127,7 @@ APP = ( function ( APP, $, window, document ) {
 		 */
 		function menuWrapInit( w, h ) {
 			
-			var $menuWrap  = $( '.menu-v-container:not(.mobile)' ),
+			var $menuWrap  = $( '.uix-v-menu__container:not(.is-mobile)' ),
 				vMenuTop   = 0, //This value is equal to the $vertical-menu-top variable in the SCSS
 				winHeight  = h - vMenuTop;
 
@@ -144,7 +144,7 @@ APP = ( function ( APP, $, window, document ) {
 
 			$window.on('scroll', function() {
 
-				var curULHeight = $( 'ul.menu-main' ).height(),
+				var curULHeight = $( 'ul.uix-menu' ).height(),
 					windowPos   = $window.scrollTop();
 
 				if ( curULHeight > winHeight ) {

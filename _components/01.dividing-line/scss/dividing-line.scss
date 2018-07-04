@@ -1,7 +1,7 @@
 /* ====================================================== 
    <!-- Dividing Line -->    
 /* ====================================================== */
-.separator-base {
+.uix-separator-base {
     display: block;
     clear: both;
     width: 100%;
@@ -12,31 +12,31 @@
     outline: none;
     margin: 1.5rem auto;
 	
-	&.separator-solid {
+	&.uix-separator-base--solid {
 		border-top-style: solid;
 	}
 
-	&.separator-dashed {
+	&.uix-separator-base--dashed {
 		border-top-style: dashed;
 	}
 
-	&.separator-dotted {
+	&.uix-separator-base--dotted {
 		border-top-style: dotted;
 	}
 
-	&.separator-double {
+	&.uix-separator-base--double {
 		bborder-top-style: solid;
 		border-bottom: 1px solid $dividing-line-color;
 		height: 3px;
 	}
 	
-	&.black {
+	&.uix-separator-base--black {
 		border-color: rgba(255,255,255,.1);
 	}
 	
 }
 
-.separator-gradient {
+.uix-separator-gradient {
     clear: both;
     display: block;
     width: 100%;
@@ -46,7 +46,7 @@
     background: $dividing-line-color;
     background: linear-gradient(to right,rgba(220, 220, 220,0) 0,rgba(220, 220, 220,1) 35%,rgba(220, 220, 220,1) 70%,rgba(220, 220, 220,0) 100%);
 	
-	&.black {
+	&.uix-separator-gradient--black {
 		background: rgba(255,255,255,.1);
 		background: linear-gradient(to right,rgba(255,255,255,0) 0,rgba(255,255,255,.1) 35%,rgba(255,255,255,.1) 70%,rgba(255,255,255,0) 100%);
 
@@ -55,7 +55,7 @@
 	
 }
 
-.separator-shadow {
+.uix-separator-shadow {
     clear: both;
     width: 100%;
     margin: 1.5rem auto;
@@ -76,7 +76,7 @@
 		}	
 	}
 	
-	&.black {
+	&.uix-separator-shadow--black {
 		span {
 			i {
 				box-shadow: 0 0 8px rgba(255,255,255,.1);

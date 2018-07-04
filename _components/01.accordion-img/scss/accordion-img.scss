@@ -5,7 +5,7 @@
 // Accordion Height
 $accordion-img-height: 250px;
 
-.custom-accordion-img {
+.uix-accordion-img {
 
 	width: 100%;
 	height: $accordion-img-height;
@@ -42,7 +42,7 @@ $accordion-img-height: 250px;
 				
 			}
 
-			> .outer {
+			> .uix-accordion-img__content {
 				display: block;
 				height: $accordion-img-height;
 				width: 100%;
@@ -62,7 +62,7 @@ $accordion-img-height: 250px;
 				
 
 				
-				.close-item {
+				.uix-accordion-img__close {
 					position: absolute;
 					right: 10px;
 					top: 10px;
@@ -109,7 +109,7 @@ $accordion-img-height: 250px;
 // Stack items
 @media all and (max-width:  768px) {
 
-	.custom-accordion-img {
+	.uix-accordion-img {
 
 		height: auto;
 

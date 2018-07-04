@@ -21,12 +21,12 @@ $button-margin-b: 1.5rem;
  1. Common button styles
  ---------------------------
  */ 
-.button[class*=button-]:focus {
+.uix-btn[class*=button-]:focus {
     box-shadow: none;
 }
 
 
-.button {
+.uix-btn {
 	display: inline-block;
 	text-align: center;
 	min-width: 100px;
@@ -45,25 +45,20 @@ $button-margin-b: 1.5rem;
 	@include transition-default();
 
 
-	&.disable {
+	&.disabled {
 		background-image: linear-gradient(to right, #e4e7ed 0%, #e4e7ed 20%, #e4e7ed 100%)  !important;
 		border-color: #e4e7ed !important;
 		cursor: not-allowed !important;
 		box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.2) !important;
 	}
 	
-	
-	
-	&.hide {
-		display: none !important;
-	}
 
 	/* Waiting state */
 	&.active,
 	&.wait {
 		background-image: linear-gradient(-45deg,rgba(0,0,0,.15) 25%,transparent 25%,transparent 50%,rgba(0,0,0,.15) 50%,rgba(0,0,0,.15) 75%,transparent 75%,transparent) !important;
 		background-size: 30px 30px !important;
-		animation: move-waiting-stripes 0.5s linear infinite !important;
+		animation: uix-cssAnim--moveWaitingStripes 0.5s linear infinite !important;
 		cursor: wait !important;
 
 	}
@@ -80,11 +75,11 @@ $button-margin-b: 1.5rem;
 
 	
 	
-	&.button-radius {
+	&.is-pill {
 		border-radius: 35px;
 	}
 	
-	&.button-radius-s {
+	&.is-round {
 		border-radius: 4px;
 	}
 	
@@ -103,20 +98,20 @@ $button-margin-b: 1.5rem;
 }
 
 
-.t-c {
-	.button {
+.uix-t-c {
+	.uix-btn {
 		margin: 0 #{$button-margin-lr/2} #{$button-margin-b} #{$button-margin-lr/2};
 	}
 	
-	.t-l {
-		.button {
+	.uix-t-l {
+		.uix-btn {
 			margin: 0 #{$button-margin-lr} #{$button-margin-b} 0;
 		}	
 	}
 }
 
 
-@keyframes move-waiting-stripes {
+@keyframes uix-cssAnim--moveWaitingStripes {
     0% {
         background-position: 0 0;
     }
@@ -128,14 +123,14 @@ $button-margin-b: 1.5rem;
 
 
 
-.button-fullwidth {
+.uix-btn--full {
 	max-width: none;
 	width: 100%;
 	padding-left: $button-margin-lr !important;
 	padding-right: $button-margin-lr !important;
 }
 
-.t-c .button-fullwidth {
+.uix-t-c .uix-btn--full {
 	margin: 0 0 #{$button-margin-b} 0;
 }
 
@@ -145,19 +140,19 @@ $button-margin-b: 1.5rem;
  2. Borders
  ---------------------------
  */ 
-.button-border-thin {
+.uix-btn__border--thin {
     border: 1px solid;
 }
 
-.button-border-medium {
+.uix-btn__border--medium {
     border: 2px solid;
 }
 
-.button-border-thick {
+.uix-btn__border--thick {
     border: 3px solid;
 }
 
-.button-border-white {
+.uix-btn__border--white {
     border-color: #fff;
 }
 
@@ -166,17 +161,17 @@ $button-margin-b: 1.5rem;
  3. Sizes
  ---------------------------
  */ 
-.button-size-s {
+.uix-btn__size--s {
     font-size: 0.875rem;
 	padding: .8rem 1.5rem;
 }
 
-.button-size-m {
+.uix-btn__size--m {
 	font-size: 1rem;
 	padding: 1rem 2.5rem;
 }
 
-.button-size-l {
+.uix-btn__size--l {
 	font-size: 1.375rem;
 	padding: 1.25rem 5rem;
 }
@@ -187,12 +182,12 @@ $button-margin-b: 1.5rem;
  ---------------------------
  */ 
 
-.button-icon {
+.uix-btn__icon {
     padding-left: 3.6rem;
     position: relative;
 	
 
-	&.button-icon-right {
+	&.uix-btn__icon--right {
 		padding-left: 2.5rem;
 		padding-right: 3.6rem;
 
@@ -219,7 +214,7 @@ $button-margin-b: 1.5rem;
 		}
 	}
 	
-	&.none-bg {
+	&.is-transparent {
 		> span {
 			background-color: transparent;
 			border: 1px solid rgba(0,0,0,.1);
@@ -227,7 +222,7 @@ $button-margin-b: 1.5rem;
 	}
 
 
-	&.button-icon-left {
+	&.uix-btn__icon--left {
 
 		> span {
 			left: 0;
@@ -236,19 +231,19 @@ $button-margin-b: 1.5rem;
 	}
 
 
-	&.button-radius.button-icon-left span {
+	&.is-pill.uix-btn__icon--left span {
 		border-radius: 35px 0 0 35px;
 	}
 
-	&.button-radius.button-icon-right span {
+	&.is-pill.uix-btn__icon--right span {
 		border-radius: 0 50px 50px 0;
 	}
 	
-	&.button-radius-s.button-icon-left span {
+	&.is-round.uix-btn__icon--left span {
 		border-radius: 4px 0 0 4px;
 	}
 
-	&.button-radius-s.button-icon-right span {
+	&.is-round.uix-btn__icon--right span {
 		border-radius: 0 4px 4px 0;
 	}	
 	
@@ -262,7 +257,7 @@ $button-margin-b: 1.5rem;
  5. Group
  ---------------------------
  */ 
-.button-group {
+.uix-btn__group {
 	
 	display: inline-block;
 	margin-bottom: $button-margin-b;
@@ -274,13 +269,13 @@ $button-margin-b: 1.5rem;
 		clear: both;
 	}
 	
-	> .button {
+	> .uix-btn {
 		margin: 0;
 		border-radius: 0;
 		float: left;
 		box-sizing: border-box;
 		
-		&.button-radius {
+		&.is-pill {
 
 			&:first-child {
 				border-radius: 50px 0 0 50px;
@@ -292,7 +287,7 @@ $button-margin-b: 1.5rem;
 
 		}	
 		
-		&.button-radius-s {
+		&.is-round {
 
 			&:first-child {
 				border-radius: 4px 0 0 4px;
@@ -304,15 +299,15 @@ $button-margin-b: 1.5rem;
 
 		}		
 		
-		&.button-border-thin:not(:first-child) {
+		&.uix-btn__border--thin:not(:first-child) {
 			margin-left: -1px;
 		}
 
-		&.button-border-medium:not(:first-child) {
+		&.uix-btn__border--medium:not(:first-child) {
 			margin-left: -2px;
 		}
 
-		&.button-border-thick:not(:first-child) {
+		&.uix-btn__border--thick:not(:first-child) {
 			margin-left: -3px;
 		}
 
@@ -334,7 +329,7 @@ $button-margin-b: 1.5rem;
  */ 
 /* Your Custom colors for buttons */
 
-.button-bg-primary {
+.uix-btn__bg--primary {
 	border-color: $btn-gradient-color1;
 	background-color: $btn-gradient-color1;
 	background-image: linear-gradient(to right, $btn-gradient-color1 0%, $btn-gradient-color2 20%, $btn-gradient-color3 100%);
@@ -342,11 +337,11 @@ $button-margin-b: 1.5rem;
 	color: #fff;
 	width: auto; 
 	
-	&.button-fullwidth {
+	&.uix-btn--full {
 		width: 100%;
 	}
 	
-	&.none-bg {
+	&.is-transparent {
 		background: none;
 		color: $btn-gradient-color1;
 		box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.2);
@@ -360,21 +355,21 @@ $button-margin-b: 1.5rem;
 }
 
 
-.button-bg-secondary {
+.uix-btn__bg--secondary {
 	width: auto; 
 	
-	&.button-fullwidth {
+	&.uix-btn--full {
 		width: 100%;
 	}	
 	
-	&:not(.fill-white) {
+	&:not(.is-fill-white) {
 		border-color: #fff;
 		background-color: transparent;
 		box-shadow: 0 4px 15px 0 rgba(255, 255, 255, 0.2);
 		color: #fff;
 	}
 	
-	&.fill-white {
+	&.is-fill-white {
 		border-color: #fff;
 		background-color: #fff;
 		box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.2);
@@ -387,7 +382,7 @@ $button-margin-b: 1.5rem;
 	}
 	
 	
-	&.fill-white:hover {
+	&.is-fill-white:hover {
 		box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.6);
 	}	
 	

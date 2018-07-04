@@ -11,9 +11,9 @@ APP = ( function ( APP, $, window, document ) {
 	APP.SHOW_MORELESS.version       = '0.0.1';
     APP.SHOW_MORELESS.documentReady = function( $ ) {
 
-		$( '.custom-more-text-link' ).on( 'click', function( e ) {
+		$( '.uix-more-btn__link' ).on( 'click', function( e ) {
 			e.preventDefault();
-			$( this ).parent().prev( '.custom-more-text' ).toggleClass( 'show' );
+			$( this ).parent().prev( '.uix-more-btn' ).toggleClass( 'js-uix-show' );
 			$( this ).find( '> span' ).first().toggle();
 			$( this ).find( '> span' ).eq(1).toggle();
 			

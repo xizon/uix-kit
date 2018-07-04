@@ -10,13 +10,13 @@ APP = ( function ( APP, $, window, document ) {
 	APP.TEAM_FOCUS.version       = '0.0.2';
     APP.TEAM_FOCUS.documentReady = function( $ ) {
 
-		var teamFocusContent = '.custom-team-focus',
-			teamFocusMask    = '.custom-team-focus-mask';
+		var teamFocusContent = '.uix-team-focus',
+			teamFocusMask    = '.uix-team-focus__mask';
 			
 			
 		$( teamFocusContent ).each( function() {
 			var $this           = $( this ),
-				thisID          = 'custom-team-focus-' + Math.random()*1000000000000000000,
+				thisID          = 'uix-team-focus-' + Math.random()*1000000000000000000,
 				hoverWidth      = $this.data( 'hover-width' ),
 				targetWidth     = $this.data( 'target-width' ), // Div over width as a percentage 
 				targetInfo      = $this.data( 'target-info' ), // Corresponding character details display
@@ -42,7 +42,7 @@ APP = ( function ( APP, $, window, document ) {
 			}
 			
 			if( typeof targetInfo === typeof undefined ) {
-				targetInfo = '.custom-team-focus-info';
+				targetInfo = '.uix-team-focus__info';
 			}		
 		
 			total = $( el ).length;
@@ -117,7 +117,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 				$info.find( 'h4 strong' ).html( cName );
 				$info.find( 'h4 em' ).html( cPo );
-				$info.find( '.intro' ).html( cIntro );
+				$info.find( '.uix-team-focus__info__text' ).html( cIntro );
 				
 
 				if ( !$cur.hasClass( 'focus' ) ) {
@@ -188,7 +188,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 				$info.find( 'h4 strong' ).html( '' );
 				$info.find( 'h4 em' ).html( '' );
-				$info.find( '.intro' ).html( '' );		
+				$info.find( '.uix-team-focus__info__text' ).html( '' );		
 
 
 			});	

@@ -8,7 +8,7 @@
  * the DOM, no server-side logic to count through items, no inline styles.
  *
  */
-.equal-width-divs {
+.uix-equal-width-divs {
 
 	ul {
 		list-style: none;
@@ -41,7 +41,7 @@
 
 @media all and (max-width: 768px) {
 
-	.equal-width-divs {
+	.uix-equal-width-divs {
 
 		ul {
 			display: block;

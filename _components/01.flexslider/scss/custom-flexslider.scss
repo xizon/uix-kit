@@ -2,6 +2,8 @@
     <!-- Flexslider -->  
 /* ====================================================== */
 
+
+
 /*
  * 1. Thumbnail ControlNav Pattern 
  * 2. Default Slideshow        
@@ -16,7 +18,7 @@
  1. Thumbnail ControlNav Pattern 
  ---------------------------
  */ 
-.custom-theme-flexslider-thumbs {
+.uix-flexslider__thumbs {
 	position: relative;
 	left: 50%;
 	transform: translateX(-50%);
@@ -80,11 +82,12 @@
  2. Default Slideshow        
  ---------------------------
  */ 
-.custom-theme-flexslider, .custom-theme-flex-viewport {
+.uix-flexslider, 
+.uix-flexslider__viewport {
 	transition: .1s ease;
 }
 
-.custom-theme-flexslider {
+.uix-flexslider {
 	margin: 0;
 	padding: 0;
 	position: relative;
@@ -94,12 +97,12 @@
 	z-index: 0;
 }
 
-.custom-theme-flex-viewport {
+.uix-flexslider__viewport {
     max-height: 200vh;
 }
 
-.custom-theme-flexslider .custom-theme-slides {
-	> .item {
+.uix-flexslider .uix-flexslider__inner {
+	> .uix-flexslider__item {
 		display: none;
 		-webkit-backface-visibility: hidden;
 		position: relative;
@@ -115,19 +118,19 @@
 	}
 }
 
-html[xmlns] .custom-theme-flexslider .custom-theme-slides {
+html[xmlns] .uix-flexslider .uix-flexslider__inner {
     display: block;
 }
 
-* html .custom-theme-flexslider .custom-theme-slides {
+* html .uix-flexslider .uix-flexslider__inner {
     height: 1%;
 }
 
-.no-js .custom-theme-flexslider .custom-theme-slides > .item:first-child {
+.no-js .uix-flexslider .uix-flexslider__inner > .uix-flexslider__item:first-child {
     display: block;
 }
 
-.custom-theme-flexslider .custom-theme-slides {
+.uix-flexslider .uix-flexslider__inner {
 	zoom: 1;
 	
 	img {
@@ -137,7 +140,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 }
 
 /*----- Left and right arrows by default -----*/
-.custom-theme-flex-direction-nav {
+.uix-flexslider__direction-nav {
 	
 	position: absolute;
 	top: 50%;
@@ -148,14 +151,26 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 	padding: 0;
 	list-style: none;
 	
-	
-	.custom-theme-flex-prev {
+
+	.uix-flexslider__prev {
 	    left: -100px;
+		
+		&.uix-flexslider__disabled {
+			visibility: hidden;
+		}	
+		
 	}
-	.custom-theme-flex-next {
+	.uix-flexslider__next {
 		right: -100px;
 		text-align: right;
+		
+		&.uix-flexslider__disabled {
+			visibility: hidden;
+		}
+		
 	}
+	
+	
 	
 	li {
 		margin: 0;
@@ -187,17 +202,17 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 	}
 }
 
-.custom-theme-flexslider:hover a {
-	&.custom-theme-flex-prev {
+.uix-flexslider:hover a {
+	&.uix-flexslider__prev {
 	    left: 0;
 	}
-	&.custom-theme-flex-next {
+	&.uix-flexslider__next {
 	    right: 20px;
 	}
 }
 
 /*----- Pagination dots -----*/
-.custom-theme-flex-control-nav.custom-theme-flex-control-paging {
+.uix-flexslider__control-nav.uix-flexslider__control-paging {
 	list-style: none;
 	left: 0;
 	bottom: 0;
@@ -223,7 +238,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 			box-shadow: 0px 6px 23px -2px rgba(0, 0, 0, 0.36);
 
 			&:hover, 
-			&.custom-theme-flex-active {
+			&.uix-flexslider__active {
 				background: rgba(255, 255, 255, 1);
 				width: 25px;
 			}
@@ -234,8 +249,8 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 }
 
 /* Custom Style */
-.custom-controls-container {
-	.custom-theme-flex-control-nav.custom-theme-flex-control-paging {
+.uix-flexslider__controls {
+	.uix-flexslider__control-nav.uix-flexslider__control-paging {
 		
 		position: relative;
 		transform: translateY(.5rem);
@@ -245,7 +260,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 				background: rgba(233, 47, 22, 0.5);
 
 				&:hover, 
-				&.custom-theme-flex-active {
+				&.uix-flexslider__active {
 					background: rgba(233, 47, 22, 1);
 				}
 			}	
@@ -257,7 +272,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 
 
 /*----- Thumbnail -----*/
-.custom-theme-flex-control-thumbs {
+.uix-flexslider__control-thumbs {
 	margin: 5px 0 0;
 	position: static;
 	overflow: hidden;
@@ -279,7 +294,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 			opacity: 1;
 		}
 	}
-	.custom-theme-flex-active {
+	.uix-flexslider__active {
 		opacity: 1;
 		cursor: default;
 	}
@@ -287,14 +302,14 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 
 
 /*----- Left and right arrows by Custom Controls -----*/
-.custom-navigation {
+.uix-flexslider__arrows {
 	display: table;
 	width: 100%;
 	table-layout: fixed;
 	margin-top: 1.75rem;
 	
 	
-	&.custom-navigation-thumb {
+	&.uix-flexslider__arrows-thumb {
 		position: absolute;
 		top: 50%;
 		transform: translateY(-50%);
@@ -303,22 +318,6 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 		
 	}
 	
-	.thumb {
-		@include transition-default();
-		width: 100px;
-		height: 100px;
-		border-radius: 50%;
-		display: inline-block;
-		overflow: hidden;
-		transform: scale(.7);
-		opacity: .5;
-		@include outer-shadow();
-		
-		img {
-			width: 100%;
-			height: 100%;
-		}
-	}
 	
 	
 	> {
@@ -338,18 +337,18 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 		}
 	}
 	
-	.custom-theme-flex-prev {
-		&.custom-theme-flex-disabled {
+	.uix-flexslider__prev {
+		&.uix-flexslider__disabled {
 			visibility: hidden;
 			
 		}
 		
 	}
-	.custom-theme-flex-next {
+	.uix-flexslider__next {
 		
 		text-align: right;
 		
-		&.custom-theme-flex-disabled {
+		&.uix-flexslider__disabled {
 			visibility: hidden;
 		}	
 		
@@ -359,12 +358,12 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 	
 	
 	/*---- Custom Styles ----*/
-	&.style-1 {
+	&.uix-flexslider__arrows--style-1 {
 		
 		text-align: right;
 		
-		.custom-theme-flex-prev,
-		.custom-theme-flex-next {
+		.uix-flexslider__prev,
+		.uix-flexslider__next {
 			position: relative;
 			width: 50px;
 			height: 50px;
@@ -389,7 +388,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 			
 		}
 		
-		.custom-theme-flex-prev {
+		.uix-flexslider__prev {
 			margin-right: 1.5rem;
 		}
 	}
@@ -398,7 +397,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 
 
 /*----- Next/Prev Image Thumbnail In Navigation -----*/
-.custom-prevnext-thumb-nav {
+.uix-flexslider__arrows-thumb {
 	display: table;
 	width: 100%;
 	table-layout: fixed;
@@ -444,13 +443,13 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 		}
 	}
 	
-	.thumb-prev {
+	.uix-flexslider__arrows-thumb--prev {
 		&.disabled {
 			display: none;
 		}
 		
 	}
-	.thumb-next {
+	.uix-flexslider__arrows-thumb--next {
 		
 		text-align: right;
 		
@@ -467,7 +466,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 
 
 /*----- Timeline -----*/
-.custom-timeline-nav {
+.uix-flexslider__timeline-nav {
 	
 	height: 3px;
 	position: relative;
@@ -491,13 +490,21 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
  3. Primary Slideshow  (with dynamic min/max ranges )      
  ---------------------------
  */ 
-.custom-theme-flexslider.custom-itemgrid {
+.uix-flexslider.uix-flexslider--itemgrid {
 	
-	.item {
+	.uix-flexslider__item {
 		transition: .1s ease;
 		opacity: 0.2;
+		
+		&.uix-flexslider__item--active-prev {
+			
+		}
+		
+		&.uix-flexslider__item--active-next {
+			
+		}
 
-		&.custom-theme-flex-active-slide {
+		&.uix-flexslider__item--active {
 			opacity: 1;
 		}
 	}
@@ -506,9 +513,9 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 }
 	
 @media all and (max-width: 768px) {
-	.custom-theme-flexslider.custom-itemgrid {
+	.uix-flexslider.uix-flexslider--itemgrid {
 
-		.item {
+		.uix-flexslider__item {
 			opacity: 1;
 		}
 
@@ -524,14 +531,14 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
  4. Primary Slideshow    
  ---------------------------
  */ 
-.custom-theme-flexslider.custom-primary-flexslider {
+.uix-flexslider.uix-flexslider--primary {
 	overflow: hidden;
 
 	
 	/* Full Screen Slider
-	 * You need add an attribute "data-slider-bg" to ".item"
+	 * You need add an attribute "data-slider-bg" to ".uix-flexslider__item"
 	*/
-	&.fullscreen {
+	&.is-fullscreen {
 		min-height: 100vh;
 		
 		img {
@@ -540,14 +547,14 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 		}
 	}
 
-	.custom-theme-slides {
+	.uix-flexslider__inner {
 
-		> .item {
+		> .uix-flexslider__item {
 
 			@include background-cover();
 			position: relative;
 
-			.slides-info {
+			.uix-flexslider__desc {
 				position: absolute;
 				top: 0;
 				left: 0;
@@ -559,37 +566,37 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 
 				.container {
 
-					.level {
+					.uix-flexslider__el-level {
 						animation-delay: .5s;
 						animation-duration: .6s;
 						animation-fill-mode: both;
-						animation-name: fadeOutLeft;
+						animation-name: uix-cssAnim--fadeOutLeft;
 					}
-					.level-1, 
-					.level-2 {
+					.uix-flexslider__el-level-1, 
+					.uix-flexslider__el-level-2 {
 						color: #fff;
 					}
 				}
 			}
 
-			&.custom-theme-flex-active-slide {
+			&.uix-flexslider__active-slide {
 
-				.slides-info .container {
+				.uix-flexslider__desc .container {
 
-					.level {
+					.uix-flexslider__el-level {
 						animation-delay: .4s;
 						animation-duration: .6s;
 						animation-fill-mode: both;
-						animation-name: fadeInLeft;
+						animation-name: uix-cssAnim--fadeInLeft;
 					}
 
-					.level-1 {
+					.uix-flexslider__el-level-1 {
 						animation-delay: .4s;
 					}
-					.level-2 {
+					.uix-flexslider__el-level-2 {
 						animation-delay: .5s;
 					}
-					.level-3 {
+					.uix-flexslider__el-level-3 {
 						animation-delay: .6s;
 					}  
 
@@ -601,19 +608,19 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 
 @media all and (max-width: 991px) {
 	
-	.custom-theme-flexslider.custom-primary-flexslider .custom-theme-slides > .item {
+	.uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item {
 
-		.slides-info {
+		.uix-flexslider__desc {
 
 			.container {
-				.level-1 {
+				.uix-flexslider__el-level-1 {
 					font-size: 7vw !important;
 					line-height: 7vw !important;
 					margin-bottom: 0;
 					line-height: 1.2 !important;
 					
 				}
-				.level-2 {
+				.uix-flexslider__el-level-2 {
 					font-size: 4vw !important;
 					line-height: 4vw !important;
 				}
@@ -626,9 +633,9 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 
 @media all and (max-width: 768px) {
 
-	.custom-theme-flexslider.custom-primary-flexslider {
+	.uix-flexslider.uix-flexslider--primary {
 		
-		&.fullscreen {
+		&.is-fullscreen {
 			min-height: inherit;
 			
 			img {
@@ -637,7 +644,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 		}	
 			
 		
-		.custom-theme-slides > .item .button {
+		.uix-flexslider__inner > .uix-flexslider__item .uix-btn {
 			font-size: 2vw !important;
 		}
 
@@ -647,7 +654,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 
 
 
-@keyframes fadeInLeft {
+@keyframes uix-cssAnim--fadeInLeft {
 	0% {
 		opacity: 0;
 		transform: translate3d(-100%, 0, 0);
@@ -660,7 +667,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 }
 
 
-@keyframes fadeOutLeft {
+@keyframes uix-cssAnim--fadeOutLeft {
 	0% {
 	    opacity: 1;
 	}
@@ -678,7 +685,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
  5. Parallax Slideshow                
  ---------------------------
  */ 
-.custom-theme-flexslider.custom-parallax-flexslider {
+.uix-flexslider.uix-flexslider--parallax {
 	max-height: 100vh;
 	overflow: hidden;
 
@@ -686,9 +693,9 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 	    max-height: 100vh;
 	}
 
-	.custom-theme-slides {
+	.uix-flexslider__inner {
 
-		> .item {
+		> .uix-flexslider__item {
 
 			@include background-cover();
 			position: relative;
@@ -697,7 +704,7 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 				max-height: calc( 100% - 2rem );
 			}
 
-			.level {
+			.uix-flexslider__el-level {
 				position: absolute;
 				transition: all 1.5s ease; /* Note: The duration can not be less than 1.5 */
 				width: auto;
@@ -706,30 +713,30 @@ html[xmlns] .custom-theme-flexslider .custom-theme-slides {
 				top: 50%;
 			}
 
-			.level-1 {
+			.uix-flexslider__el-level-1 {
 				left: 55%;
 				z-index: 3;
 			}
 
-			.level-2 {
+			.uix-flexslider__el-level-2 {
 				left: 30%;
 				z-index: 2;
 			}
 
-			&.left {
-				.level-1 {
+			&.uix-flexslider__item--left {
+				.uix-flexslider__el-level-1 {
 					transform: translate(-300px,-50%);
 				}
-				.level-2 {
+				.uix-flexslider__el-level-2 {
 					transform: translate(-50px,-50%);
 				}	
 			}
 
-			&.right {
-				.level-1 {
+			&.uix-flexslider__item--right {
+				.uix-flexslider__el-level-1 {
 					transform: translate(300px,-50%);
 				}
-				.level-2 {
+				.uix-flexslider__el-level-2 {
 					transform: translate(50px,-50%);
 				}	
 			}		

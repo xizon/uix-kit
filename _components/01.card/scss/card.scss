@@ -15,7 +15,7 @@
  ---------------------------
  */ 
 
-.custom-card1 {
+.uix-card1 {
 	margin: 0 auto;
 	border: 1px solid #eaeaea;
 	position: relative;
@@ -23,7 +23,7 @@
 	border-radius: 8px;
 	@include outer-shadow();
 	
-	.custom-card1-headline {
+	.uix-card1__headline {
 		min-height: 2.086538461rem;
 		background: #fff;
 		padding: 0.65625rem 1.75rem 0 1.75rem;
@@ -36,7 +36,7 @@
 			font-size: 1.125rem;
 			
 		}
-		.text {
+		.uix-card1__text {
 			margin-top: 0.4375rem;
 			float: left;
 			width: calc(100% - 105px );
@@ -44,7 +44,7 @@
 				font-size: 0.75rem;
 			}
 		}
-		.pic {
+		.uix-card1__pic {
 			position: relative;
 			top: 0.175rem;
 			height: 4.375rem;
@@ -63,7 +63,7 @@
 		}
 	}
 
-	.custom-card1-content {
+	.uix-card1__content {
 		background: #fff;
 		padding: 1.75rem 1.75rem 1.3125rem 1.75rem;
 		line-height: 1.5;
@@ -87,7 +87,7 @@
 		}
 	}
 
-	.custom-card1-jump {
+	.uix-card1__jump {
 		height: 30px;
 		font-size: 0.75rem;
 		display: block;
@@ -98,11 +98,6 @@
 		border-bottom-right-radius: 2px;
 		transition: all 500ms ease-in-out;
 		color: #BDBDBD;
-
-		.text {
-			color: #fff;
-			margin-left: 0.4375rem;
-		}
 	}
 	
 	
@@ -114,7 +109,7 @@
  2. Style Two
  ---------------------------
  */ 
-.custom-card2 {
+.uix-card2 {
     position: relative;
     min-height: 21.25rem;
     padding: 1.5rem;
@@ -125,7 +120,7 @@
     @include transition-default();
 	@include outer-shadow();
 	
-	.custom-card2-tagline {
+	.uix-card2__tagline {
 		font-size: 0.75rem;
 		font-weight: 500;
 		letter-spacing: 2px;
@@ -134,13 +129,13 @@
 	}
 	
 
-	.custom-card2-headline {
+	.uix-card2__headline {
 		margin-top: 10px;
 		color: #fff;
 
 	}
 
-	.custom-card2-content {
+	.uix-card2__content {
 		position: relative;
 	}
 
@@ -152,7 +147,7 @@
  3. Style Three
  ---------------------------
  */ 
-.custom-card3 {
+.uix-card3 {
 	position: relative;
     border-radius: 8px;
     background-color: #fff;
@@ -161,7 +156,7 @@
 	@include outer-shadow();
 	
 
-	.custom-card3-tagline {
+	.uix-card3__tagline {
 		font-size: 0.75rem;
 		font-weight: 500;
 		letter-spacing: 2px;
@@ -170,12 +165,12 @@
 	}
 	
 
-	.custom-card3-headline {
+	.uix-card3__headline {
 		margin-top: 10px;
 		margin: 0;
 	}
 	
-	.custom-card3-image {
+	.uix-card3__pic {
 		height: 21.25rem;
 		border-top-left-radius: 8px;
 		border-top-right-radius: 8px;
@@ -190,13 +185,13 @@
 		
 	}
 
-	.custom-card3-content {
+	.uix-card3__content {
 		padding: 1rem 1.5rem;
 	}
 	
 	
-	&.common-height {
-		.custom-card3-image {
+	&.js-uix-common-height {
+		.uix-card3__pic {
 			height: auto;
 		}
 	}
@@ -211,7 +206,7 @@
  4. Style Four
  ---------------------------
  */ 
-.custom-card4 {
+.uix-card4 {
 	position: relative;
     border-radius: 8px;
     background-color: #fff;
@@ -220,7 +215,7 @@
 	@include outer-shadow();
 	
 
-	.custom-card4-tagline {
+	.uix-card4__tagline {
 		font-size: 0.75rem;
 		font-weight: 500;
 		letter-spacing: 2px;
@@ -228,14 +223,14 @@
 		color: rgba(51, 51, 51, .4);
 	}
 	
-	.custom-card4-headline {
+	.uix-card4__headline {
 		margin-top: 10px;
 		margin: 0;
 	}
 	
 	
 
-	.custom-card4-image {
+	.uix-card4__pic {
 		height: 21.25rem;
 		border-top-left-radius: 8px;
 		border-bottom-left-radius: 8px;
@@ -249,18 +244,18 @@
 	}
 	
 
-	.custom-card4-content {
+	.uix-card4__content {
 		height: 21.25rem;
 		padding: 1.5rem 3rem;
 	}
 	
-	.custom-card4-title {
+	.uix-card4__title {
 		padding-bottom: 1.5rem;
 	}
 	
-	&.common-height {
-		.custom-card4-image,
-		.custom-card4-content {
+	&.js-uix-common-height {
+		.uix-card4__pic,
+		.uix-card4__content {
 			height: auto;
 		}
 	}
@@ -271,13 +266,13 @@
 
 
 @media all and (max-width: 768px) {
-	.custom-card4 {
+	.uix-card4 {
 		
-		.custom-card4-image {
+		.uix-card4__pic {
 			border-bottom-left-radius: 0;
 		}
 
-		.custom-card4-content {
+		.uix-card4__content {
 			height: auto;
 		}
 

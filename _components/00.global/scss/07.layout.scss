@@ -2,11 +2,11 @@
    <!-- Basic Layout Styles -->                                        
 /* ====================================================== */
 /*
- * 1. Bootstrap 3.x
- * 2. Material Container
- * 3. Main Wrapper 
- * 4. Seamless Grid
- * 5. Auxiliary Grid System for Inline Elements
+ * 1. Bootstrap 3.x                              - Do not use prefix "uix-"
+ * 2. Material Container                         
+ * 3. Main Wrapper                               
+ * 4. Seamless Grid (Core Grid)
+ * 5. Auxiliary Grid System for Inline Elements (Subordinate Grid)
 */
 
 
@@ -60,7 +60,7 @@
  ---------------------------
  */ 
 
-.container-bg {
+.uix-container__bg {
 	position: relative;
 	z-index: 2;
 	background: #fff;
@@ -68,57 +68,52 @@
 	margin-bottom: 10rem;
 	min-height: 50vh;
 	
-	&.fillet-large {
+	&.uix-container__bg--round-large {
 		border-radius: 15px;
 	}
 	
-	&.fillet-medium {
+	&.uix-container__bg--round-medium {
 		border-radius: 7px;
 	}
 	
-	&.fillet-small {
+	&.uix-container__bg--round-small {
 		border-radius: 2px;
 	}
 	
-}
-
-
-
-.container-bg-totop {
-	&.totop-large {
+	&.uix-container__bg--totop-large {
 		margin-top: -15rem;
 	}
 	
-	&.totop-medium {
+	&.uix-container__bg--totop-medium {
 		margin-top: -10rem;
 	}
 	
-	&.totop-small {
+	&.uix-container__bg--totop-small {
 		margin-top: -5rem;
 	}
 	
 }
 
 
+
 @media all and (max-width: 768px) { 
 	
-	.container-bg {
+	.uix-container__bg {
 		margin-bottom: 3rem;
-	}
-
-	.container-bg-totop {
-		&.totop-large {
+		
+		&.uix-container__bg--totop-large {
 			margin-top: -7rem;
 		}
 
-		&.totop-medium {
+		&.uix-container__bg--totop-medium {
 			margin-top: -4rem;
 		}
 
-		&.totop-small {
+		&.uix-container__bg--totop-small {
 			margin-top: -2rem;
-		}
-	}		
+		}	
+		
+	}	
 }
 
 
@@ -128,7 +123,7 @@
  ---------------------------
  */ 
 /* Note: Do not use the "transform" property, otherwise it may affect the internal elements */
-.wrapper {
+.uix-wrapper {
 	min-height: 100%;
 	width: 100%;
 	overflow: hidden;
@@ -141,46 +136,46 @@
  */ 
 
 
-// Custom Scrollbar
-// ---------------------------
-//
-@mixin seamlessGridGenerate( $classname: '.seamless-grid-container', $pad: '15px' ) {
-	// @include seamlessGridGenerate( '.seamless-grid-container', '15px' );
+@mixin seamlessGridGenerate( $classname: '.uix-core-grid', $pad: '15px' ) {
+	// @include seamlessGridGenerate( '.uix-core-grid', '15px' );
 	
-	$seamless-grid-pad : #{$pad};
+	$pad : #{$pad};
 	
     @if ( $classname != '' ) {
 		#{$classname} {
 			width: 100%;
 
-			.seamless-grid,
-			[class*='seamless-col-'] {
+			.uix-core-grid__row,
+			[class*='uix-core-grid__col-'] {
 				box-sizing: border-box;
 			}
 
 
-			.seamless-grid {
+			.uix-core-grid__row {
 
-				width: calc( 100% + #{$seamless-grid-pad} );
+				width: calc( 100% + #{$pad} );
 
 				&::after {
-					/* Or @extend clearfix */
+					/* Or @extend .uix-clearfix */
 					content: "";
 					display: table;
 					clear: both;
 				}
 
-				.content {
-					word-wrap: break-word;
-					position: relative;
+
+			    [class*='uix-core-grid__col-'] {
+					> div {
+						word-wrap: break-word;
+						position: relative;
+					}	
 				}
 
 
-				&.no-gutter {
+				&.uix-core-grid__row--no-gutter {
 
 					width: 100%;
 
-					> [class*='seamless-col-'] {
+					[class*='uix-core-grid__col-'] {
 						padding-right: 0 !important;
 					}
 
@@ -190,79 +185,82 @@
 			}
 
 
-			[class*='seamless-col-'] {
+			[class*='uix-core-grid__col-'] {
 				float: left;
-				padding-right: $seamless-grid-pad;
-				margin-bottom: $seamless-grid-pad/2;
+				padding-right: $pad;
+				margin-bottom: $pad/2;
 
-				.seamless-grid &:last-of-type {
+				.uix-core-grid__row &:last-of-type {
 					padding-right: 0;
+					
+				    [class*='uix-core-grid__col-'] {
+						> div {
+							width: calc(100% - #{$pad}); 
+						}	
+					}
+		
+					
 				}
-				.seamless-grid &:last-of-type .content {
-					width: calc(100% - #{$seamless-grid-pad}); 
-				}	
-
-
-
+			
 
 			}
 
 
-			.seamless-col-1 {
+			.uix-core-grid__col-1 {
 				width: 8.333333333333%;
 			}
 
-			.seamless-col-2 {
+			.uix-core-grid__col-2 {
 				width: 16.66666666666667%;
 			}
 
-			.seamless-col-3 {
+			.uix-core-grid__col-3 {
 				width: 25%;
 			}
 
-			.seamless-col-4 {
+			.uix-core-grid__col-4 {
 				width: 33.333333333333%;
 			}
 
 
-			.seamless-col-5 {
+			.uix-core-grid__col-5 {
 				width: 41.666666666667%;
 			}
 
-			.seamless-col-6 {
+			.uix-core-grid__col-6 {
 				width: 50%;
 			}
 
-			.seamless-col-7 {
+			.uix-core-grid__col-7 {
 				width: 58.333333333333%;
 			}
 
-			.seamless-col-8 {
+			.uix-core-grid__col-8 {
 				width: 66.666666666667%;
 			}
 
-			.seamless-col-9 {
+			.uix-core-grid__col-9 {
 				width: 75%;
 			}
 
-			.seamless-col-10 {
+			.uix-core-grid__col-10 {
 				width: 83.333333333333%;
 			}
 
 
-			.seamless-col-11 {
+			.uix-core-grid__col-11 {
 				width: 91.666666666667%;
 			}
 
-			.seamless-col-12 {
+			.uix-core-grid__col-12 {
 				width: 100%;
 			}
 
 
-			.seamless-grid.loop .seamless-col-6:nth-child(2n+1),
-			.seamless-grid.loop .seamless-col-4:nth-child(3n+1),
-			.seamless-grid.loop .seamless-col-3:nth-child(4n+1),
-			.seamless-grid.loop .seamless-col-2:nth-child(6n+1) {
+			.uix-core-grid__row.uix-core-grid__row--loop .uix-core-grid__col-6:nth-child(2n+1),
+			.uix-core-grid__row.uix-core-grid__row--loop .uix-core-grid__col-4:nth-child(3n+1),
+			.uix-core-grid__row.uix-core-grid__row--loop .uix-core-grid__col-3:nth-child(4n+1),
+			.uix-core-grid__row.uix-core-grid__row--loop .uix-core-grid__col-2:nth-child(6n+1) {
 				clear: both;
 			}
 
@@ -279,17 +277,17 @@
 
 
 				/* 2 columns */
-				.seamless-grid.use-2 .seamless-col-2,
-				.seamless-grid.use-2 .seamless-col-3,
-				.seamless-grid.use-2 .seamless-col-4 {
+				.uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-2,
+				.uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-3,
+				.uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-4 {
 					width: 50%;
 					float: left;
 				}
 
-				.seamless-grid.use-2 .seamless-col-2:nth-child(2n+1),
-				.seamless-grid.use-2 .seamless-col-3:nth-child(2n+1),
-				.seamless-grid.use-2 .seamless-col-4:nth-child(2n+1) {
-					padding-right: $seamless-grid-pad;
+				.uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-2:nth-child(2n+1),
+				.uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-3:nth-child(2n+1),
+				.uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-4:nth-child(2n+1) {
+					padding-right: $pad;
 					clear: both;
 
 				}
@@ -306,17 +304,17 @@
 		@media all and (max-width: 768px) {
 
 
-			#{$classname}:not(.none-breaking) {
+			#{$classname}:not(.uix-core-grid__row--nobreaking) {
 
-				.seamless-grid {
-					&.no-gutter {
-						width: calc(100% + #{$seamless-grid-pad});
+				.uix-core-grid__row {
+					&.uix-core-grid__row--no-gutter {
+						width: calc(100% + #{$pad});
 					}	
 				}
 
-				[class*='seamless-col-'] {
+				[class*='uix-core-grid__col-'] {
 					float: none;
-					width: calc(100% - #{$seamless-grid-pad});
+					width: calc(100% - #{$pad});
 					padding-left: 0;
 					padding-right: 0;
 				}
@@ -324,33 +322,33 @@
 
 
 				/* 2 columns */
-				.seamless-grid.use-2 .seamless-col-2,
-				.seamless-grid.use-2 .seamless-col-3,
-				.seamless-grid.use-2 .seamless-col-4 {
+				.uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-2,
+				.uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-3,
+				.uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-4 {
 					width: 50%;
 					float: left;
 					margin-bottom: 0;
 				}
 
-				.seamless-grid.use-2.no-gutter .seamless-col-2,
-				.seamless-grid.use-2.no-gutter .seamless-col-3,
-				.seamless-grid.use-2.no-gutter .seamless-col-4 {
-					width: calc(50% - #{$seamless-grid-pad/2});
+				.uix-core-grid__row.uix-core-grid__row--col-2.uix-core-grid__row--no-gutter .uix-core-grid__col-2,
+				.uix-core-grid__row.uix-core-grid__row--col-2.uix-core-grid__row--no-gutter .uix-core-grid__col-3,
+				.uix-core-grid__row.uix-core-grid__row--col-2.uix-core-grid__row--no-gutter .uix-core-grid__col-4 {
+					width: calc(50% - #{$pad/2});
 				}
 
 
-				.seamless-grid.use-2 .seamless-col-2:nth-child(2n+1),
-				.seamless-grid.use-2 .seamless-col-3:nth-child(2n+1),
-				.seamless-grid.use-2 .seamless-col-4:nth-child(2n+1) {
+				.uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-2:nth-child(2n+1),
+				.uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-3:nth-child(2n+1),
+				.uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-4:nth-child(2n+1) {
 					clear: both;
 
 				}
 
 
-				.seamless-grid.use-2 .seamless-col-2:nth-child(2n+0),
-				.seamless-grid.use-2 .seamless-col-3:nth-child(2n+0),
-				.seamless-grid.use-2 .seamless-col-4:nth-child(2n+0) {
-					padding-right: $seamless-grid-pad;
+				.uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-2:nth-child(2n+0),
+				.uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-3:nth-child(2n+0),
+				.uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-4:nth-child(2n+0) {
+					padding-right: $pad;
 
 				}
 
@@ -369,8 +367,8 @@
 }
 
 
-@include seamlessGridGenerate( '.seamless-grid-container', '15px' );
-@include seamlessGridGenerate( '.seamless-grid-container-large', '30px' );
+@include seamlessGridGenerate( '.uix-core-grid', '15px' );
+@include seamlessGridGenerate( '.uix-core-grid-large', '30px' );
 
 
 /* 
@@ -379,80 +377,79 @@
  ---------------------------
  */ 
 
-.el-row:before,
-.el-row:after {
+.uix-el-grid__row:before,
+.uix-el-grid__row:after {
     content: " ";
     display: table;
 }
 
-.el-row:after {
+.uix-el-grid__row:after {
     clear: both;
 }
 
-.el-row .el-row {
+.uix-el-grid__row .uix-el-grid__row {
     margin-left: 0;
     margin-right: 0;
 }
 
-
-.el-col {
+[class*='uix-el-grid__col-'] {
     position: relative;
     float: left;
     width: 100%;
     min-height: 1px;
-	
-	&.el-col-center {
-		float: none;
-		display: inline-block;
-	}
+}
+
+.uix-el-grid__col-center {
+	float: none;
+	display: inline-block;
 }
 
 
-.el-col-1 {
+.uix-el-grid__col-1 {
     width: 8.333333333333%;
 }
 
-.el-col-2 {
+.uix-el-grid__col-2 {
     width: 16.666666666667%;
 }
 
-.el-col-3 {
+.uix-el-grid__col-3 {
     width: 25%;
 }
 
-.el-col-4 {
+.uix-el-grid__col-4 {
     width: 33.333333333333%;
 }
 
-.el-col-5 {
+.uix-el-grid__col-5 {
     width: 41.666666666667%;
 }
 
-.el-col-6 {
+.uix-el-grid__col-6 {
     width: 50%;
 }
 
-.el-col-7 {
+.uix-el-grid__col-7 {
     width: 58.333333333333%;
 }
 
-.el-col-8 {
+.uix-el-grid__col-8 {
     width: 66.666666666667%;
 }
 
-.el-col-9 {
+.uix-el-grid__col-9 {
     width: 75%;
 }
 
-.el-col-10 {
+.uix-el-grid__col-10 {
     width: 83.333333333333%;
 }
 
-.el-col-11 {
+.uix-el-grid__col-11 {
     width: 91.666666666667%;
 }
 
-.el-col-12 {
+.uix-el-grid__col-12 {
     width: 100%;
 }
 
@@ -460,12 +457,12 @@
 @media all and (max-width: 768px) {
   
   
-    .el-col-half {
+    .uix-el-grid__col-half {
         width: 50%;
     }
 
 	
-    .el-col-stack {
+    .uix-el-grid__col-stack {
         width: 100%;
     }
 

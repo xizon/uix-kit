@@ -43,9 +43,9 @@ APP = ( function ( APP, $, window, document ) {
 		 */
 		function shapesInit( w ) {
 			
-			$( '.shape-img' ).each( function()  {
+			$( '.uix-shape-img' ).each( function()  {
 				var $this          = $( this ),
-					ranID          = 'shape-img-' + Math.random()*1000000000000000000,
+					ranID          = 'uix-shape-img-' + Math.random()*1000000000000000000,
 					svgPath        = $this.data( 'path' ),
 					svgW           = parseFloat( $this.data( 'svg-const-width' ) ),
 					svgH           = parseFloat( $this.data( 'svg-const-height' ) ),

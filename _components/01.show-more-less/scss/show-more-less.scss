@@ -1,12 +1,12 @@
 /* ====================================================== 
    <!-- Show More Less --> 
 /* ====================================================== */
-.custom-more-text-link {
+.uix-more-btn__link {
 	> span:nth-child(2) {
 		display: none;
 	}
 }
-.custom-more-text {
+.uix-more-btn {
 	position: relative;
 	max-height: 10rem;
 	overflow: hidden;
@@ -24,7 +24,7 @@
 		background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 100%);
 	}
 
-	&.show {
+	&.js-uix-show {
 		max-height: 100rem !important; 
 		/* If the specified maximum height is affected by the container, priority is required */
 

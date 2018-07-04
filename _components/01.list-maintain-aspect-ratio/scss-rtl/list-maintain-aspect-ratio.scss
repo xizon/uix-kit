@@ -2,12 +2,12 @@
    <!-- Maintain Aspect Ratio List -->
 /* ====================================================== */
 @media all and (max-width: 768px) {
-	.list-maintain-aspect-ratio {
+	.uix-list-aspect-ratio {
 		
 		padding-right: auto;
 		padding-left: 15px;
 
-		.seamless-col-4 {
+		.uix-core-grid__col-4 {
 			float: right;
 		}
 		

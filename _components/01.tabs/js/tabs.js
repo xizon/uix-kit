@@ -11,11 +11,11 @@ APP = ( function ( APP, $, window, document ) {
 	APP.TABS.version       = '0.1.2';
     APP.TABS.documentReady = function( $ ) {
 
-		$( '.custom-tabs' ).each( function( id ) {
+		$( '.uix-tabs' ).each( function( id ) {
 			var $this             = $( this ),
 			    $li               = $this.find( 'ul > li' ),
 				liNum             = $li.length,
-				$contentbox       = $this.find( '.content' ),
+				$contentbox       = $this.find( '.uix-tabs__content' ),
 				ulWidth           = $this.data( 'width' ),
 				fullwidth         = $this.data( 'fullwidth' ),
 				rotation          = $this.data( 'rotation' ),
@@ -114,8 +114,8 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			// Tab Sliding Effext
-			if ( $this.find( 'ul li:first .marker' ).length == 0 ) {
-				$this.find( 'ul li:first' ).prepend( '<div class="marker"></div>' );
+			if ( $this.find( 'ul li:first .uix-tabs__marker' ).length == 0 ) {
+				$this.find( 'ul li:first' ).prepend( '<div class="uix-tabs__marker"></div>' );
 			}
 			
 			
@@ -127,7 +127,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 				
 				$this.find( 'li' ).removeClass( 'active' );
-				$this.find( '.content' ).removeClass( 'active' );
+				$this.find( '.uix-tabs__content' ).removeClass( 'active' );
 		
 				$( this ).addClass( 'active' );
 				$( '#' + tabID ).addClass( 'active' );
@@ -139,11 +139,11 @@ APP = ( function ( APP, $, window, document ) {
 					translateY = $( this ).index() * liHeight;
 				
 				if ( $( window ).width() <= 768 ) {
-					$this.find( '.marker' ).css({
+					$this.find( '.uix-tabs__marker' ).css({
 						'transform'          : 'translateY( '+translateY+'px )'	
 					});	
 				} else {
-					$this.find( '.marker' ).css({
+					$this.find( '.uix-tabs__marker' ).css({
 						'transform'          : 'translateX( '+translateX+'% )'	
 					});	
 				}
@@ -168,7 +168,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 				locArr = url.split( '#' );
 			    loc    = locArr[1];
-				curTab = $( '.custom-tabs' ).find( 'ul > li:eq('+loc+')' );
+				curTab = $( '.uix-tabs' ).find( 'ul > li:eq('+loc+')' );
 				curTab.trigger( 'click' );	
 			}
 				

@@ -53,7 +53,7 @@ $control-focus-bordercolor2: transparent;
  */ 
 
 /* Required field marker */
-.controls-im {
+.uix-controls__im {
 	color: red;
 	display: inline-block;
 	padding: 0 .5rem;
@@ -63,20 +63,20 @@ $control-focus-bordercolor2: transparent;
 
 
 /* Default Controls */
-.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) {
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) {
 	text-align: left;
 	position: relative;
 	margin-bottom: 1.09375rem;
 
-	&.controls-side {
+	&.uix-controls__side {
 		margin-left: .2rem;
 	}
 	
-	&.t-c {
+	&.uix-t-c {
 		text-align: center !important;
 	}
 	
-	&.circle {
+	&.is-pill {
 		
 		input:not([type="checkbox"]):not([type="radio"]),
 		textarea, 
@@ -88,7 +88,7 @@ $control-focus-bordercolor2: transparent;
 	}
 	
 	//Create Line Effect on Click
-	.bar {
+	.uix-controls__bar {
 		position: absolute;
 		height: 2px;
 		left: -2px;
@@ -153,26 +153,26 @@ $control-focus-bordercolor2: transparent;
 		
 	}
 	
-	&.text-short-s {
+	&.uix-controls__short-s {
 		
 		input:not([type="checkbox"]):not([type="radio"]) {
 			width: 120px;
 			margin-right: .5rem;	
 		}
 		
-		.bar {
+		.uix-controls__bar {
 			width: calc( 120px + 1.09375rem + 2px );
 		}
 
 	}  	
 
-	&.text-short-l {
+	&.uix-controls__short-l {
 		input:not([type="checkbox"]):not([type="radio"]) {
 			width: 192px;
 			margin-right: .5rem;	
 		}
 		
-		.bar {
+		.uix-controls__bar {
 			width: calc( 192px + 1.09375rem + 2px );
 		}
 
@@ -181,7 +181,7 @@ $control-focus-bordercolor2: transparent;
 	
 
     textarea, 
-	button:not(.button), 
+	button:not(.uix-btn), 
 	select {
 		border-radius: 0;
 		/* Remove inner shadow from inputs on mobile iOS */
@@ -223,10 +223,9 @@ $control-focus-bordercolor2: transparent;
 	
 	
 	button {
-
 		cursor: pointer;
 		padding: 0.75rem 0;
-		width: 100%;
+		width: auto;
 		border-radius: 0;  
 
 		&:focus ~ label {
@@ -276,7 +275,7 @@ $control-focus-bordercolor2: transparent;
 	
 	
 	/*-- Radio --*/
-	&.radio {
+	&.uix-controls__normal-radio {
 	
 		label {
 			padding-left: 1.25rem !important;
@@ -293,7 +292,7 @@ $control-focus-bordercolor2: transparent;
 	}
 	
 	/*-- Select --*/
-	&.select {
+	&.uix-controls__normal-select {
 
 		> span {
 			display: inline-block;
@@ -329,7 +328,7 @@ $control-focus-bordercolor2: transparent;
 	
 
     /*-- Form With Icon --*/
-	&.withicon {
+	&.is-iconic {
 		label {
 		    left: 3rem;
 		}
@@ -370,7 +369,7 @@ $control-focus-bordercolor2: transparent;
 	
 	
 	/*-- Form Status: Success --*/
-	&.success {
+	&.is-success {
 		input:not([type="checkbox"]):not([type="radio"]) {
 		    border-color: #4AB005;
 
@@ -386,7 +385,7 @@ $control-focus-bordercolor2: transparent;
 		    color: #4AB005 !important;
 		}
 		
-		.bar {
+		.uix-controls__bar {
 			&::before,
 			&::after {
 				background: #4AB005;
@@ -396,7 +395,7 @@ $control-focus-bordercolor2: transparent;
 	}
 	
 	/*-- Form Status: Error --*/
-	&.error {
+	&.is-error {
 		input:not([type="checkbox"]):not([type="radio"]) {
 		    border-color: #f00;
 
@@ -410,7 +409,7 @@ $control-focus-bordercolor2: transparent;
 		    color: #f00 !important;
 		}
 		
-		.bar {
+		.uix-controls__bar {
 			&::before,
 			&::after {
 				background: #f00;
@@ -420,7 +419,7 @@ $control-focus-bordercolor2: transparent;
 	}
 	
 	/*-- Form Status: Disable --*/
-	&:not(.line-eff).disable {
+	&:not(.uix-controls--line).disabled {
 		input:not([type="checkbox"]):not([type="radio"]) {
 		    border-color: #E1E1E1;
 			background: #EDEDED;
@@ -434,7 +433,7 @@ $control-focus-bordercolor2: transparent;
 		}
 		
 
-		.bar {
+		.uix-controls__bar {
 			&::before,
 			&::after {
 				background: #E1E1E1;
@@ -445,7 +444,7 @@ $control-focus-bordercolor2: transparent;
 	}
 	
 	
-	&.line-eff.disable {
+	&.uix-controls--line.disabled {
 		input:not([type="checkbox"]):not([type="radio"]) {
 		    opacity: .7;
 
@@ -461,7 +460,7 @@ $control-focus-bordercolor2: transparent;
 		}
 		
 		
-		.bar {
+		.uix-controls__bar {
 			&::before,
 			&::after {
 				opacity: .5;
@@ -472,14 +471,16 @@ $control-focus-bordercolor2: transparent;
 	
 	
 	/*-- Other --*/
-	.fa-sort {
+	.uix-controls__arrow {
+		display: inline-block;
 		position: absolute;
 		right: 0.875rem;
-		top: 1.09375rem;
+		top: 0.5rem;
 		@include control-label-text();
 	}
 
 
+	/* WordPress Style */
 	.req-icon {
 		position: absolute;
 		right: 0.721875rem;
@@ -493,10 +494,10 @@ $control-focus-bordercolor2: transparent;
 
 
 /* Create Line Effect on Click */
-.controls.line-eff {
+.uix-controls.uix-controls--line {
 
 	
-	&.circle {
+	&.is-pill {
 		input:not([type="checkbox"]):not([type="radio"]),
 		textarea, 
 		button, 
@@ -506,7 +507,7 @@ $control-focus-bordercolor2: transparent;
 		
 	}
 	
-	.bar {
+	.uix-controls__bar {
 		display: block !important;
 	}
 	
@@ -556,7 +557,7 @@ $control-focus-bordercolor2: transparent;
 		}	
 	}
 	
-	&.withicon {
+	&.is-iconic {
 		label {
 			&.active {
 				transform: translateX(-4.09375rem) scale(.8);
@@ -570,17 +571,17 @@ $control-focus-bordercolor2: transparent;
 
 .col-sm-12 {
 	
-	.controls.line-eff {
+	.uix-controls.uix-controls--line {
 		
-		&:not(.text-short-s):not(.text-short-l) {
-			.bar {
+		&:not(.uix-controls__short-s):not(.uix-controls__short-l) {
+			.uix-controls__bar {
 				left: -8px;
 
 			}	
 		}
 		
-		&.textarea {
-			.bar {
+		&.uix-controls__textarea {
+			.uix-controls__bar {
 				left: -8px;
 				transform: translateY(-0.546875rem);
 			}		
@@ -597,7 +598,7 @@ $control-focus-bordercolor2: transparent;
  ---------------------------
  */ 
 
-.controls-file-container {
+.uix-controls__file-container {
 	
     position: relative;
 	cursor: pointer;
@@ -606,7 +607,7 @@ $control-focus-bordercolor2: transparent;
 	color: $control-text-color;
 	@include transition-default();
 	
-	.controls-file-trigger {
+	.uix-controls__file-trigger {
 
 		i {
 			margin-right: .5rem;
@@ -629,7 +630,7 @@ $control-focus-bordercolor2: transparent;
 
 }
 
-.controls-file-return {
+.uix-controls__file-return {
 	font-style: italic;
 }
 
@@ -642,7 +643,7 @@ $control-focus-bordercolor2: transparent;
 
 $controls-merge-button-width: 20%;
 
-.controls-merge {
+.uix-controls__merge {
 	position: relative;
 	
 	&::after {
@@ -693,7 +694,7 @@ $controls-merge-button-width: 20%;
 		}
 	}
 	
-	&.circle {
+	&.is-pill {
 		input {
 			border-radius: 50px 0 0 50px;
 		}
@@ -705,7 +706,7 @@ $controls-merge-button-width: 20%;
 	}
 	
     /*-- Form With Icon --*/
-	&.withicon {
+	&.is-iconic {
 
 		input {
 			padding-left: 3rem;
@@ -742,7 +743,7 @@ $controls-merge-button-width: 20%;
  4. Custom Select
  ---------------------------
  */ 
-.custom-select {
+.uix-controls__select {
 	position: relative;
 	text-align: left;
 	margin-right: .3rem;
@@ -754,7 +755,7 @@ $controls-merge-button-width: 20%;
 	
 }
 
-.custom-select-wrapper {
+.uix-controls__select-wrapper {
 	position: relative;
 	display: inline-block;
 	user-select: none;
@@ -763,13 +764,13 @@ $controls-merge-button-width: 20%;
 	&.fullwidth {
 		width: 100%;
 		
-		.custom-select-trigger {
+		.uix-controls__select-trigger {
 			width: 100% !important;
 		}
 		
 	}
 	
-	&:not(.line-eff).disable {
+	&:not(.uix-controls--line).disabled {
 		
 		/* Mask used to prohibit selection */
 		&::before {
@@ -786,7 +787,7 @@ $controls-merge-button-width: 20%;
 
 		}
 
-		.custom-select-trigger {
+		.uix-controls__select-trigger {
 			border-color: #E1E1E1 !important;
 			background: #EDEDED !important;
 			
@@ -794,7 +795,7 @@ $controls-merge-button-width: 20%;
 
 	}
 	
-	&.line-eff.disable {
+	&.uix-controls--line.disabled {
 		
 		opacity: .7;
 		
@@ -821,7 +822,7 @@ $controls-merge-button-width: 20%;
 	}
 
 
-	.custom-select-trigger {
+	.uix-controls__select-trigger {
 		@include control-label-text();
 		position: relative;
 		display: inline-block;
@@ -844,14 +845,14 @@ $controls-merge-button-width: 20%;
 
 	}
 
-	.circle {
-		.custom-select-trigger {
+	.is-pill {
+		.uix-controls__select-trigger {
 			border-radius: 50px;
 		}	
 	}
 	
-	.line-eff  {
-		.custom-select-trigger {
+	.uix-controls--line  {
+		.uix-controls__select-trigger {
 			border-radius: 0;
 			border-top-color: $control-focus-bordercolor2 !important;
 			border-left-color: $control-focus-bordercolor2 !important;
@@ -861,7 +862,7 @@ $controls-merge-button-width: 20%;
 		
 		
 		//Create Line Effect on Click
-		.bar {
+		.uix-controls__bar {
 			position: absolute;
 			height: 2px;
 			left: 0;
@@ -893,14 +894,14 @@ $controls-merge-button-width: 20%;
 	
 	
 
-	.custom-select-label {
+	.uix-controls__select-label {
 		display: inline-block;
 		margin-left: .3rem;
 		margin-right: .3rem;
 		@include control-label-text();
 	}
 
-	.custom-options {
+	.uix-controls__select__option-container {
 		position: absolute;
 		z-index: 2;
 		display: block;
@@ -944,9 +945,9 @@ $controls-merge-button-width: 20%;
 	}
 
 	
-	.option-top {
+	.uix-controls__select--top {
 		/* Shown from above */
-		.custom-options {
+		.uix-controls__select__option-container {
 			top: auto;
 			bottom: 100%;
 			margin-bottom: 15px;
@@ -978,12 +979,7 @@ $controls-merge-button-width: 20%;
 
 	}
 	
-
-	.option-hover::before {
-	    background: #f9f9f9;
-	}
-
-	.custom-option {
+	.uix-controls__select__option {
 		position: relative;
 		display: block;
 		padding: 0 1.5rem;
@@ -1009,19 +1005,19 @@ $controls-merge-button-width: 20%;
 	}
 
 
-	.custom-select {
+	.uix-controls__select {
 		position: relative;
 		display: inline-block;
 
-		&.opened {
+		&.is-opened {
 
-			.custom-select-trigger {
+			.uix-controls__select-trigger {
 				&::after {
 					transform: rotate(-135deg);
 				}
 			}	
 
-			.custom-options {
+			.uix-controls__select__option-container {
 				opacity: 1;
 				visibility: visible;
 				pointer-events: all;
@@ -1029,7 +1025,7 @@ $controls-merge-button-width: 20%;
 
 			}	
 			
-			.bar {
+			.uix-controls__bar {
 				&::before,
 				&::after {
 					width: 50%;
@@ -1039,8 +1035,8 @@ $controls-merge-button-width: 20%;
 		
 	
 		
-		&.none-bg {
-			.custom-select-trigger {
+		&.is-transparent {
+			.uix-controls__select-trigger {
 				background: none;
 				border-color: rgba(255,255,255,.1);
 			}
@@ -1059,7 +1055,7 @@ $controls-merge-button-width: 20%;
  5. Custom Radio, Toggle And Checkbox
  ---------------------------
  */
-.custom-radio {
+.uix-controls__radio {
   
 	position: relative;
 	text-align: left;
@@ -1077,12 +1073,12 @@ $controls-merge-button-width: 20%;
 	input[type="radio"] {
 		display: none;
 
-		&:checked + .custom-radio-trigger::before{
+		&:checked + .uix-controls__radio-trigger::before{
 		    transform: scale(1);
 		}
 	}
 
-	.custom-radio-trigger {
+	.uix-controls__radio-trigger {
 		width: 18px;
 		height: 18px;
 		border-radius: 50%;
@@ -1110,7 +1106,7 @@ $controls-merge-button-width: 20%;
 
 
 
-.custom-toggle {
+.uix-controls__toggle {
 	
 	position: relative;
 	text-align: left;
@@ -1125,7 +1121,7 @@ $controls-merge-button-width: 20%;
 		margin-top: .5rem;
 	}	
 	
-	&.circle {
+	&.is-pill {
 		label {
 			border-radius: 18px;
 		}	
@@ -1134,13 +1130,13 @@ $controls-merge-button-width: 20%;
 	input[type="checkbox"] {
 		display: none;
 
-		&:checked + .custom-toggle-trigger {
+		&:checked + .uix-controls__toggle-trigger {
 			margin-left: 8px;
 			background: $control-focus-color;
 		}
 	}
 
-	.custom-toggle-trigger {
+	.uix-controls__toggle-trigger {
 		width: 12px;
 		height: 12px;
 		background: $control-sub-color;
@@ -1177,7 +1173,7 @@ $controls-merge-button-width: 20%;
 	}
 }
 
-.custom-checkbox {
+.uix-controls__checkbox {
 
 	position: relative;
 	text-align: left;
@@ -1191,13 +1187,13 @@ $controls-merge-button-width: 20%;
 	input[type="checkbox"] {
 		display: none;
 		
-		&:checked + .custom-checkbox-trigger::before,
-		&:checked + .custom-checkbox-trigger::after {
+		&:checked + .uix-controls__checkbox-trigger::before,
+		&:checked + .uix-controls__checkbox-trigger::after {
 			opacity: 1;
 		}
 	}
 
-	.custom-checkbox-trigger {
+	.uix-controls__checkbox-trigger {
 		display: inline-block;
 		width: 15px;
 		height: 15px;

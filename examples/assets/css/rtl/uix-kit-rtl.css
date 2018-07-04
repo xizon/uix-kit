@@ -11,8 +11,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.8.2
- * ## Last Update         :  June 26, 2018
+ * ## Version             :  1.8.5
+ * ## Last Update         :  July 5, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -26,8 +26,8 @@
 	---------------------------
 	
     1. Basic 
-    2. Basic Layout Styles 
-    3. Helper Classes 
+    2. Helper Classes 
+    3. Basic Layout Styles 
     4. Navigation 
     5. Header Area 
     6. Brand 
@@ -68,20 +68,20 @@ td {
     text-align: right;
 }
 
-ul.list-normal,
-ol.list-normal {
+ul.uix-list--normal,
+ol.uix-list--normal {
     padding-left: auto;
     padding-right: 0.875rem;
 }
 
-.list-normal ul,
-.list-normal ol {
+.uix-list--normal ul,
+.uix-list--normal ol {
     padding-left: auto;
     padding-right: 0.875rem;
 }
 
-.table-normal table th,
-table.table-normal th {
+.uix-table table th,
+table.uix-table th {
     text-align: right;
 }
 
@@ -100,19 +100,19 @@ blockquote::before {
 /* ====================================================== 
    <!-- Helper Classes -->                                 
 /* ====================================================== */
-.fl {
+.uix-f-l {
     float: right;
 }
 
-.fr {
+.uix-f-r {
     float: left;
 }
 
-.t-r {
+.uix-t-r {
     text-align: left;
 }
 
-.t-l {
+.uix-t-l {
     text-align: right;
 }
 
@@ -124,49 +124,95 @@ blockquote::before {
  4. Seamless Grid
  ---------------------------
  */
-.seamless-grid-container [class*='seamless-col-'] {
+.uix-core-grid [class*='uix-core-grid__col-'] {
     float: right;
     padding-right: auto;
     padding-left: 15px;
 }
 
-.seamless-grid .seamless-grid-container [class*='seamless-col-']:last-of-type {
+.uix-core-grid__row .uix-core-grid [class*='uix-core-grid__col-']:last-of-type {
     padding-left: 0;
 }
 
 @media all and (max-width: 991px) {
-    .seamless-grid-container {
+    .uix-core-grid {
     /* 2 columns */;
     }
 
-    .seamless-grid-container .seamless-grid.use-2 .seamless-col-2,
-  .seamless-grid-container .seamless-grid.use-2 .seamless-col-3,
-  .seamless-grid-container .seamless-grid.use-2 .seamless-col-4 {
+    .uix-core-grid .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-2,
+  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-3,
+  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-4 {
         float: right;
     }
 
-    .seamless-grid-container .seamless-grid.use-2 .seamless-col-2:nth-child(2n+1),
-  .seamless-grid-container .seamless-grid.use-2 .seamless-col-3:nth-child(2n+1),
-  .seamless-grid-container .seamless-grid.use-2 .seamless-col-4:nth-child(2n+1) {
+    .uix-core-grid .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-2:nth-child(2n+1),
+  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-3:nth-child(2n+1),
+  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-4:nth-child(2n+1) {
         padding-left: 15px;
     }
 }
 
 @media all and (max-width: 768px) {
-    .seamless-grid-container {
+    .uix-core-grid {
     /* 2 columns */;
     }
 
-    .seamless-grid-container .seamless-grid.use-2 .seamless-col-2,
-  .seamless-grid-container .seamless-grid.use-2 .seamless-col-3,
-  .seamless-grid-container .seamless-grid.use-2 .seamless-col-4 {
+    .uix-core-grid .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-2,
+  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-3,
+  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-4 {
         float: right;
     }
 
-    .seamless-grid-container .seamless-grid.use-2 .seamless-col-2:nth-child(2n+0),
-  .seamless-grid-container .seamless-grid.use-2 .seamless-col-3:nth-child(2n+0),
-  .seamless-grid-container .seamless-grid.use-2 .seamless-col-4:nth-child(2n+0) {
+    .uix-core-grid .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-2:nth-child(2n+0),
+  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-3:nth-child(2n+0),
+  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-4:nth-child(2n+0) {
         padding-left: 15px;
+    }
+}
+
+.uix-core-grid-large [class*='uix-core-grid__col-'] {
+    float: right;
+    padding-right: auto;
+    padding-left: 30px;
+}
+
+.uix-core-grid__row .uix-core-grid-large [class*='uix-core-grid__col-']:last-of-type {
+    padding-left: 0;
+}
+
+@media all and (max-width: 991px) {
+    .uix-core-grid-large {
+    /* 2 columns */;
+    }
+
+    .uix-core-grid-large .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-2,
+  .uix-core-grid-large .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-3,
+  .uix-core-grid-large .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-4 {
+        float: right;
+    }
+
+    .uix-core-grid-large .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-2:nth-child(2n+1),
+  .uix-core-grid-large .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-3:nth-child(2n+1),
+  .uix-core-grid-large .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-4:nth-child(2n+1) {
+        padding-left: 30px;
+    }
+}
+
+@media all and (max-width: 768px) {
+    .uix-core-grid-large {
+    /* 2 columns */;
+    }
+
+    .uix-core-grid-large .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-2,
+  .uix-core-grid-large .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-3,
+  .uix-core-grid-large .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-4 {
+        float: right;
+    }
+
+    .uix-core-grid-large .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-2:nth-child(2n+0),
+  .uix-core-grid-large .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-3:nth-child(2n+0),
+  .uix-core-grid-large .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-4:nth-child(2n+0) {
+        padding-left: 30px;
     }
 }
 
@@ -175,14 +221,14 @@ blockquote::before {
  5. Auxiliary Grid System for Inline Elements
  ---------------------------
  */
-.el-col {
+[class*='uix-el-grid__col-'] {
     float: right;
 }
 
 /* ====================================================== 
    <!-- Navigation -->                                      
 /* ====================================================== */
-.menu-container:not(.mobile) {
+.uix-menu__container:not(.mobile) {
     float: left;
   /* 
 	 ---------------------------
@@ -202,78 +248,78 @@ blockquote::before {
 	 */;
 }
 
-.menu-container:not(.mobile) ul.menu-main {
+.uix-menu__container:not(.mobile) ul.uix-menu {
     float: right;
   /* 
 		 ---------------------------
-		 2. Sub Menu
+		 2. Sub Menu (Using WordPress default class name )
 		 ---------------------------
 		 */;
 }
 
-.menu-container:not(.mobile) ul.menu-main > li {
+.uix-menu__container:not(.mobile) ul.uix-menu > li {
     margin-right: auto;
     margin-left: 1.6875rem;
 }
 
-.menu-container:not(.mobile) ul.menu-main > li:not(.multi-column) > ul ul {
+.uix-menu__container:not(.mobile) ul.uix-menu > li:not(.multi-column) > ul ul {
     margin-left: auto;
     margin-right: -0.071875rem;
 }
 
-.menu-container:not(.mobile) ul.menu-main > li:not(.multi-column) > ul ul ul {
+.uix-menu__container:not(.mobile) ul.uix-menu > li:not(.multi-column) > ul ul ul {
     margin-right: 0;
 }
 
-.menu-container:not(.mobile) ul.menu-main > li > ul::before {
+.uix-menu__container:not(.mobile) ul.uix-menu > li > ul::before {
     left: auto;
     right: 0;
 }
 
-.menu-container:not(.mobile) ul.menu-main > li > ul::after {
+.uix-menu__container:not(.mobile) ul.uix-menu > li > ul::after {
     left: auto;
     right: 3.5rem;
     margin-left: auto;
     margin-right: -0.15625rem;
 }
 
-.menu-container:not(.mobile) ul.menu-main > li li {
+.uix-menu__container:not(.mobile) ul.uix-menu > li li {
     padding-left: auto;
     padding-right: 0.875rem;
 }
 
-.menu-container:not(.mobile) ul.menu-main > li ul li {
+.uix-menu__container:not(.mobile) ul.uix-menu > li ul li {
     padding-left: auto;
     padding-right: 2.034375rem;
 }
 
-.menu-container:not(.mobile) ul.menu-main ul.sub-menu {
+.uix-menu__container:not(.mobile) ul.uix-menu ul.sub-menu {
     left: auto;
     right: 0;
 }
 
-.menu-container:not(.mobile) ul.menu-main > li:not(.multi-column) > ul ul {
+.uix-menu__container:not(.mobile) ul.uix-menu > li:not(.multi-column) > ul ul {
     left: auto;
     right: 100%;
 }
 
-.menu-container:not(.mobile) li.multi-column > ul li {
+.uix-menu__container:not(.mobile) li.multi-column > ul li {
     padding-left: auto !important;
     padding-right: 1.159375rem !important;
 }
 
-.menu-container:not(.mobile) ul.menu-main ul.sub-menu .nav-arrow {
+.uix-menu__container:not(.mobile) ul.uix-menu ul.sub-menu .uix-menu__arrow {
     right: auto;
     left: 1.159375rem;
 }
 
-.menu-container:not(.mobile) .nav-arrow {
+.uix-menu__container:not(.mobile) .uix-menu__arrow {
     right: auto;
     left: 0.284375rem;
 }
 
 @media all and (max-width: 1250px) {
-    .menu-container:not(.mobile) ul.menu-main > li {
+    .uix-menu__container:not(.mobile) ul.uix-menu > li {
         margin-right: auto;
         margin-left: 1.125rem;
     }
@@ -282,7 +328,7 @@ blockquote::before {
 /* ====================================================== 
    <!-- Header Area -->                                          
 /* ====================================================== */
-.header-area {
+.uix-header__container {
     left: auto;
     right: 0;
 }
@@ -290,31 +336,31 @@ blockquote::before {
 /* ====================================================== 
    <!-- Brand -->                         
 /* ====================================================== */
-.brand {
+.uix-brand {
     float: right;
 }
 
 /* ====================================================== 
    <!-- Filterable Navigation -->                     
 /* ====================================================== */
-.nav-filters ul li {
+.uix-nav-links--filters ul li {
     margin-right: auto;
     margin-left: 0.203125rem;
 }
 
-.nav-filters ul li::after {
+.uix-nav-links--filters ul li::after {
     margin-left: auto;
     margin-right: 0.203125rem;
 }
 
-.nav-filters ul li:last-child {
+.uix-nav-links--filters ul li:last-child {
     margin-left: 0;
 }
 
 /* ====================================================== 
    <!-- Sidebar -->                  
 /* ====================================================== */
-.sidebar-container {
+.uix-sidebar__container {
     padding-left: auto;
     padding-right: 2.1875rem;
 }
@@ -327,37 +373,37 @@ blockquote::before {
     text-align: left;
 }
 
-.sidebar-container .widget-title::after {
+.uix-sidebar__container .widget-title::after {
     margin-left: auto;
     margin-right: 0.4375rem;
 }
 
-.post-img-list-box li .item-thumb {
+.uix-sidebar__posts-img li .uix-sidebar__posts-img__thumb {
     float: right;
     margin-right: auto;
     margin-left: 0.875rem;
 }
 
-.post-img-list-box li .item-info {
+.uix-sidebar__posts-img li .uix-sidebar__posts-img__desc {
     float: right;
 }
 
 /* With Uix Plugins */
-.uix-iso-grid-widget .uix-iso-grid-recent-item .item-thumb {
+.uix-iso-grid-widget .uix-iso-grid-recent-item .uix-sidebar__posts-img__thumb {
     float: right;
     margin-right: auto;
     margin-left: 0.875rem;
     text-align: right;
 }
 
-.uix-iso-grid-widget .uix-iso-grid-recent-item .item-info {
+.uix-iso-grid-widget .uix-iso-grid-recent-item .uix-sidebar__posts-img__desc {
     float: right;
 }
 
 /* ====================================================== 
    <!-- Search -->              
 /* ====================================================== */
-.search-box .wp-search-submit {
+.uix-search-box .uix-search-box__submit {
     right: auto;
     left: 0.875rem;
 }
@@ -398,90 +444,90 @@ blockquote::before {
    <!-- Mobile Menu -->
 /* ====================================================== */
 /* Mobile Menu Toggle */
-.menu-mobile-toggle {
+.uix-menu-mobile__toggle {
     right: auto;
     left: 30px;
 }
 
-.menu-mobile-toggle span {
+.uix-menu-mobile__toggle span {
     left: auto;
     right: 12px;
 }
 
-.menu-mobile-toggle.open span {
+.uix-menu-mobile__toggle.is-opened span {
     right: 7px;
 }
 
 /* Mobile Menu Container */
-.menu-container.mobile {
+.uix-menu__container.is-mobile {
     left: auto;
     right: 0;
     transform: translateX(300px);
 }
 
-.menu-container.mobile ul li ul li a, .menu-container.mobile ul li ul li span {
+.uix-menu__container.is-mobile ul li ul li a, .uix-menu__container.is-mobile ul li ul li span {
     padding-left: auto;
     padding-right: 30px;
 }
 
-.menu-container.mobile li:not(.multi-column) ul ul {
+.uix-menu__container.is-mobile li:not(.multi-column) ul ul {
     padding-left: auto;
     padding-right: .825em;
 }
 
-.menu-container.mobile > .inner > .menu-right {
+.uix-menu__container.is-mobile > .uix-menu__inner > .uix-menu__right-box {
     padding-left: auto;
     padding-right: .5rem;
 }
 
-.menu-container.mobile > .inner > .menu-right a {
+.uix-menu__container.is-mobile > .uix-menu__inner > .uix-menu__right-box a {
     margin-right: auto;
     margin-left: .3rem;
 }
 
-.menu-container.mobile .mobile-nav-arrow {
+.uix-menu__container.is-mobile .uix-menu__arrow-mobile {
     right: auto;
     left: 10px;
 }
 
-.menu-open .menu-container.mobile {
+.js-uix-menu-opened .uix-menu__container.is-mobile {
     transform: translateX(0);
 }
 
 /* ====================================================== 
     <!-- Modal Dialog --> 
 /* ====================================================== */
-.modal-box {
+.uix-modal-box {
     left: auto;
     right: 50%;
   /* Video container */;
 }
 
-.modal-box.fullscreen {
-    left: auto;
-    right: 0;
-}
-
-.modal-box .web-video-waiting {
+.uix-modal-box .uix-modal-box__video-waiting {
     left: auto;
     right: 50%;
     margin-left: auto;
     margin-right: -1rem;
 }
 
-.modal-mask {
-    left: auto;
-    right: 0;
-}
-
-.modal-box .close-btn {
+.uix-modal-box .uix-modal-box__close {
     right: auto;
     left: 12px;
 }
 
-.modal-box.fullscreen .close-btn {
+.uix-modal-box.is-fullscreen {
+    left: auto;
+    right: 0;
+}
+
+.uix-modal-box.is-fullscreen .uix-modal-box__close {
     right: auto;
     left: 26px;
+}
+
+.uix-modal-mask {
+    left: auto;
+    right: 0;
 }
 
 /* ====================================================== 
@@ -492,12 +538,12 @@ blockquote::before {
  1) Initialize the slider style
  ---------------------------
  */
-.custom-advanced-slider-sp canvas {
+.uix-advanced-slider-sp canvas {
     left: auto;
     right: 0;
 }
 
-.custom-advanced-slider-sp .inner .item {
+.uix-advanced-slider-sp .uix-advanced-slider-sp__inner .uix-advanced-slider-sp__item {
     left: auto;
     right: 0;
 }
@@ -507,7 +553,7 @@ blockquote::before {
  2) Pagination dots 
  ---------------------------
  */
-.custom-advanced-slider-sp-pagination ul {
+.uix-advanced-slider-sp__pagination ul {
     left: auto;
     right: 0;
 }
@@ -517,12 +563,12 @@ blockquote::before {
  3) Next/Prev buttons
  ---------------------------
  */
-.custom-advanced-slider-sp-arrows .prev {
+.uix-advanced-slider-sp__arrows .uix-advanced-slider-sp__arrows--prev {
     left: auto;
     right: 15px;
 }
 
-.custom-advanced-slider-sp-arrows .next {
+.uix-advanced-slider-sp__arrows .uix-advanced-slider-sp__arrows--next {
     right: auto;
     left: 15px;
     text-align: left;
@@ -536,7 +582,7 @@ blockquote::before {
  1) Initialize the slider style
  ---------------------------
  */
-.custom-advanced-slider .inner .item {
+.uix-advanced-slider .uix-advanced-slider__inner .uix-advanced-slider__item {
     left: auto;
     right: 0;
 }
@@ -546,7 +592,7 @@ blockquote::before {
  2) Pagination dots 
  ---------------------------
  */
-.custom-advanced-slider-pagination ul {
+.uix-advanced-slider__pagination ul {
     left: auto;
     right: 0;
 }
@@ -556,12 +602,12 @@ blockquote::before {
  3) Next/Prev buttons
  ---------------------------
  */
-.custom-advanced-slider-arrows .prev {
+.uix-advanced-slider__arrows .uix-advanced-slider__arrows--prev {
     left: auto;
     right: 15px;
 }
 
-.custom-advanced-slider-arrows .next {
+.uix-advanced-slider__arrows .uix-advanced-slider__arrows--next {
     right: auto;
     left: 15px;
     text-align: left;
@@ -574,12 +620,12 @@ blockquote::before {
    <!-- Dropdown Menu -->   
 /* ====================================================== */
 /* Do not use <a> tag */
-.custom-dropdown-trigger > ul {
+.uix-dropdown-menu > ul {
     left: auto;
     right: 0;
 }
 
-.custom-dropdown-trigger > ul::before {
+.uix-dropdown-menu > ul::before {
     left: auto;
     right: 20px;
 }
@@ -588,7 +634,7 @@ blockquote::before {
    <!-- Flexslider -->
 /* ====================================================== */
 .flexslider,
-.custom-theme-flexslider {
+.uix-flexslider {
     direction: ltr !important;
 }
 
@@ -608,128 +654,129 @@ blockquote::before {
  ---------------------------
  */
 /* Default Controls */
-.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) {
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) {
     text-align: right;
   /*-- Radio --*/
   /*-- Select --*/
   /*-- Form With Icon --*/
-  /*-- Other --*/;
+  /*-- Other --*/
+  /* WordPress Style */;
 }
 
-.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).controls-side {
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls-side {
     margin-left: auto;
     margin-right: .2rem;
 }
 
-.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) .bar {
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .uix-controls__bar {
     left: auto;
     right: -2px;
 }
 
-.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) .bar::before {
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .uix-controls__bar::before {
     left: auto;
     right: 51%;
 }
 
-.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) .bar::after {
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .uix-controls__bar::after {
     right: auto;
     left: 49%;
 }
 
-.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).text-short-s input:not([type="checkbox"]):not([type="radio"]) {
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__short-s input:not([type="checkbox"]):not([type="radio"]) {
     margin-right: auto;
     margin-left: .5rem;
 }
 
-.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).text-short-l input:not([type="checkbox"]):not([type="radio"]) {
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__short-l input:not([type="checkbox"]):not([type="radio"]) {
     margin-right: auto;
     margin-left: .5rem;
 }
 
-.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) label {
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) label {
     left: auto;
     right: 0.875rem;
 }
 
-.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).radio label {
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-radio label {
     padding-left: auto !important;
     padding-right: 1.25rem !important;
     right: auto !important;
 }
 
-.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).select > span {
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-select > span {
     padding-right: auto;
     padding-left: 1rem;
 }
 
-.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).select select {
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-select select {
     padding-right: auto !important;
     padding-left: 1.5rem !important;
 }
 
-.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).select label {
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-select label {
     right: auto !important;
     padding-right: auto !important;
     padding-left: 1rem !important;
 }
 
-.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).select label::after {
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-select label::after {
     border-left: 0;
     right: auto;
     left: 1rem;
 }
 
-.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).withicon label {
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic label {
     left: auto;
     right: 3rem;
 }
 
-.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).withicon i {
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic i {
     left: auto;
     right: 1rem;
 }
 
-.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).withicon i::after {
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic i::after {
     left: auto;
     right: 1.4rem;
 }
 
-.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).withicon input:not([type="checkbox"]):not([type="radio"]) {
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic input:not([type="checkbox"]):not([type="radio"]) {
     padding-left: auto;
     padding-right: 3.5rem;
 }
 
-.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).withicon textarea,
-.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).withicon button,
-.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select).withicon select {
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic textarea,
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic button,
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic select {
     padding-left: auto;
     padding-right: 3.5rem;
 }
 
-.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) .fa-sort {
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .uix-controls__arrow {
     right: auto;
     left: 0.875rem;
 }
 
-.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) .req-icon {
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .req-icon {
     right: auto;
     left: 0.721875rem;
 }
 
 /* Create Line Effect on Click */
-.controls.line-eff label.active {
+.uix-controls.uix-controls--line label.active {
     transform: translateX(1.75rem) scale(0.8);
 }
 
-.controls.line-eff.withicon label.active {
+.uix-controls.uix-controls--line.is-iconic label.active {
     transform: translateX(4.09375rem) scale(0.8);
 }
 
-.col-sm-12 .controls.line-eff:not(.text-short-s):not(.text-short-l) .bar {
+.col-sm-12 .uix-controls.uix-controls--line:not(.uix-controls__short-s):not(.uix-controls__short-l) .uix-controls__bar {
     right: -8px;
 }
 
-.col-sm-12 .controls.line-eff.textarea .bar {
+.col-sm-12 .uix-controls.uix-controls--line.uix-controls__textarea .uix-controls__bar {
     right: -8px;
 }
 
@@ -738,7 +785,7 @@ blockquote::before {
  2. Upload
  ---------------------------
  */
-.controls-file-container input[type="file"] {
+.uix-controls-file-container input[type="file"] {
     left: auto;
     right: 0;
 }
@@ -748,34 +795,34 @@ blockquote::before {
  3. Group
  ---------------------------
  */
-.controls-merge {
+.uix-controls-merge {
   /*-- Form With Icon --*/;
 }
 
-.controls-merge button {
+.uix-controls-merge button {
     margin-left: auto;
     margin-right: -5px;
 }
 
-.controls-merge.circle input {
+.uix-controls-merge.is-pill input {
     border-radius: 0 50px 50px 0;
 }
 
-.controls-merge.circle button {
+.uix-controls-merge.is-pill button {
     border-radius: 50px 0 0 50px;
 }
 
-.controls-merge.withicon input {
+.uix-controls-merge.is-iconic input {
     padding-left: auto;
     padding-right: 3rem;
 }
 
-.controls-merge.withicon i {
+.uix-controls-merge.is-iconic i {
     left: auto;
     right: 1rem;
 }
 
-.controls-merge.withicon i::after {
+.uix-controls-merge.is-iconic i::after {
     left: auto;
     right: 1.4rem;
 }
@@ -785,35 +832,35 @@ blockquote::before {
  4. Custom Select
  ---------------------------
  */
-.custom-select {
+.uix-controls__select {
     text-align: right;
 }
 
-.custom-select-wrapper .custom-select-trigger {
+.uix-controls__select-wrapper .uix-controls__select-trigger {
     padding: 0.546875rem 1.5rem  0.546875rem 2.5rem;
 }
 
-.custom-select-wrapper .line-eff .bar {
+.uix-controls__select-wrapper .uix-controls--line .uix-controls__bar {
     left: auto;
     right: 0;
 }
 
-.custom-select-wrapper .line-eff .bar::before {
+.uix-controls__select-wrapper .uix-controls--line .uix-controls__bar::before {
     left: auto;
     right: 51%;
 }
 
-.custom-select-wrapper .line-eff .bar::after {
+.uix-controls__select-wrapper .uix-controls--line .uix-controls__bar::after {
     right: auto;
     left: 49%;
 }
 
-.custom-select-wrapper .custom-select-label {
+.uix-controls__select-wrapper .uix-controls__select-label {
     margin-left: auto;
     margin-right: .5rem;
 }
 
-.custom-select-wrapper .custom-options {
+.uix-controls__select-wrapper .uix-controls__select__option-container {
     left: auto;
     right: 0;
 }
@@ -823,60 +870,60 @@ blockquote::before {
  5. Custom Radio, Toggle And Checkbox
  ---------------------------
  */
-.custom-radio {
+.uix-controls__radio {
     text-align: right;
 }
 
-.custom-radio label {
+.uix-controls__radio label {
     right: auto;
 }
 
-.custom-radio .custom-radio-trigger {
+.uix-controls__radio .uix-controls__radio-trigger {
     margin-right: auto;
     margin-left: 5px;
 }
 
-.custom-radio .custom-radio-trigger::before {
+.uix-controls__radio .uix-controls__radio-trigger::before {
     left: auto;
     margin-left: auto;
     right: 50%;
     margin-right: -3px;
 }
 
-.custom-toggle {
+.uix-controls__toggle {
     text-align: right;
 }
 
-.custom-toggle input[type="checkbox"]:checked + .custom-toggle-trigger {
+.uix-controls__toggle input[type="checkbox"]:checked + .uix-controls__toggle-trigger {
     margin-left: auto;
     margin-right: 8px;
 }
 
-.custom-toggle .custom-toggle-trigger {
+.uix-controls__toggle .uix-controls__toggle-trigger {
     margin: 0.5rem 0 0.5rem .5rem;
     margin-left: auto;
     margin-right: 50px;
 }
 
-.custom-toggle .custom-toggle-trigger::before {
+.uix-controls__toggle .uix-controls__toggle-trigger::before {
     left: auto;
     right: -50px;
 }
 
-.custom-toggle .custom-toggle-trigger::after {
+.uix-controls__toggle .uix-controls__toggle-trigger::after {
     right: auto;
     left: -50px;
 }
 
-.custom-checkbox {
+.uix-controls__checkbox {
     text-align: right;
 }
 
-.custom-checkbox .custom-checkbox-trigger {
+.uix-controls__checkbox .uix-controls__checkbox-trigger {
     margin: 0.546875rem 0 0.546875rem .5rem;
 }
 
-.custom-checkbox .custom-checkbox-trigger::before, .custom-checkbox .custom-checkbox-trigger::after {
+.uix-controls__checkbox .uix-controls__checkbox-trigger::before, .uix-controls__checkbox .uix-controls__checkbox-trigger::after {
     left: auto;
     right: 4px;
 }
@@ -884,14 +931,14 @@ blockquote::before {
 /* ====================================================== 
    <!-- Brands List -->       
 /* ====================================================== */
-.list-brands li {
+.uix-list-brands li {
     float: right;
 }
 
 /* ====================================================== 
    <!-- Bulleted List -->
 /* ====================================================== */
-.list-bullet i {
+.uix-list-bullet i {
     margin-right: auto;
     margin-left: .5rem;
 }
@@ -900,12 +947,12 @@ blockquote::before {
    <!-- Maintain Aspect Ratio List -->
 /* ====================================================== */
 @media all and (max-width: 768px) {
-    .list-maintain-aspect-ratio {
+    .uix-list-aspect-ratio {
         padding-right: auto;
         padding-left: 15px;
     }
 
-    .list-maintain-aspect-ratio .seamless-col-4 {
+    .uix-list-aspect-ratio .uix-core-grid__col-4 {
         float: right;
     }
 }
@@ -913,13 +960,13 @@ blockquote::before {
 /* ====================================================== 
    <!-- Side by Side List -->
 /* ====================================================== */
-dl.list-side-by-side dt {
+dl.uix-list-abreast dt {
     float: right;
     clear: right;
     text-align: left;
 }
 
-dl.list-side-by-side dd {
+dl.uix-list-abreast dd {
     float: right;
     text-align: right;
     padding-left: auto;
@@ -935,7 +982,7 @@ pre.prettyprint {
 }
 
 /* Source Code Button */
-#view-source {
+#uix-view-source {
     right: auto;
     left: 20px;
 }
@@ -943,7 +990,7 @@ pre.prettyprint {
 /* ====================================================== 
    <!-- ToolTip -->       
 /* ====================================================== */
-.custom-tip > div {
+.uix-tooltip > div {
     margin-left: auto;
     margin-right: 1rem;
 }
@@ -953,12 +1000,12 @@ pre.prettyprint {
 /* ====================================================== */
 /*
  * 1. Primary Menu
- * 2. Sub Menu
+ * 2. Sub Menu (Using WordPress default class name )
  * 3. Multi-level Sub Menu Position 
  * 4. Mega/Dropdown Menu 
  * 5. Dropdown Arrow
 */
-.menu-v-container:not(.mobile) {
+.uix-v-menu__container:not(.is-mobile) {
     left: auto;
     right: 0;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
@@ -974,10 +1021,10 @@ pre.prettyprint {
 	 */;
 }
 
-.menu-v-container:not(.mobile) ul.menu-main {
+.uix-v-menu__container:not(.is-mobile) ul.uix-menu {
   /* 
 		 ---------------------------
-		 2. Sub Menu
+		 2. Sub Menu (Using WordPress default class name )
 		 ---------------------------
 		 */
   /* 
@@ -988,16 +1035,16 @@ pre.prettyprint {
   /* Multi-column */;
 }
 
-.menu-v-container:not(.mobile) ul.menu-main li {
+.uix-v-menu__container:not(.is-mobile) ul.uix-menu li {
     text-align: left;
 }
 
-.menu-v-container:not(.mobile) ul.menu-main li .tip-label {
+.uix-v-menu__container:not(.is-mobile) ul.uix-menu li .uix-bubble {
     right: auto;
     left: 1rem;
 }
 
-.menu-v-container:not(.mobile) ul.menu-main ul.sub-menu {
+.uix-v-menu__container:not(.is-mobile) ul.uix-menu ul.sub-menu {
     border-left: none;
     border-right: 1px solid rgba(255, 255, 255, 0.13);
     left: auto;
@@ -1009,69 +1056,69 @@ pre.prettyprint {
 			 */;
 }
 
-.menu-v-container:not(.mobile) ul.menu-main ul.sub-menu ul {
+.uix-v-menu__container:not(.is-mobile) ul.uix-menu ul.sub-menu ul {
     right: 450px;
 }
 
-.menu-v-container:not(.mobile) ul.menu-main ul.sub-menu ul ul {
+.uix-v-menu__container:not(.is-mobile) ul.uix-menu ul.sub-menu ul ul {
     right: 650px;
 }
 
-.menu-v-container:not(.mobile) ul.menu-main ul.sub-menu ul ul ul {
+.uix-v-menu__container:not(.is-mobile) ul.uix-menu ul.sub-menu ul ul ul {
     right: 850px;
 }
 
-.menu-v-container:not(.mobile) ul.menu-main ul.sub-menu ul ul ul ul {
+.uix-v-menu__container:not(.is-mobile) ul.uix-menu ul.sub-menu ul ul ul ul {
     right: 1050px;
 }
 
-.menu-v-container:not(.mobile) ul.menu-main ul.sub-menu ul ul ul ul ul {
+.uix-v-menu__container:not(.is-mobile) ul.uix-menu ul.sub-menu ul ul ul ul ul {
     right: 1250px;
 }
 
-.menu-v-container:not(.mobile) ul.menu-main ul.sub-menu ul ul ul ul ul ul {
+.uix-v-menu__container:not(.is-mobile) ul.uix-menu ul.sub-menu ul ul ul ul ul ul {
     right: 1450px;
 }
 
-.menu-v-container:not(.mobile) ul.menu-main ul.sub-menu ul ul ul ul ul ul ul {
+.uix-v-menu__container:not(.is-mobile) ul.uix-menu ul.sub-menu ul ul ul ul ul ul ul {
     right: 1650px;
 }
 
-.menu-v-container:not(.mobile) ul.menu-main ul.sub-menu ul ul ul ul ul ul ul ul {
+.uix-v-menu__container:not(.is-mobile) ul.uix-menu ul.sub-menu ul ul ul ul ul ul ul ul {
     right: 1850px;
 }
 
-.menu-v-container:not(.mobile) ul.menu-main ul.sub-menu ul ul ul ul ul ul ul ul ul {
+.uix-v-menu__container:not(.is-mobile) ul.uix-menu ul.sub-menu ul ul ul ul ul ul ul ul ul {
     right: 2050px;
 }
 
-.menu-v-container:not(.mobile) ul.menu-main li.multi-column > ul .multi-column-title {
+.uix-v-menu__container:not(.is-mobile) ul.uix-menu li.multi-column > ul .multi-column-title {
     text-align: right;
 }
 
-.menu-v-container:not(.mobile) ul.menu-main li.multi-column > ul ul li {
+.uix-v-menu__container:not(.is-mobile) ul.uix-menu li.multi-column > ul ul li {
     text-align: right;
 }
 
-.menu-v-container:not(.mobile) ul.menu-main li.multi-column > ul li ul {
+.uix-v-menu__container:not(.is-mobile) ul.uix-menu li.multi-column > ul li ul {
     border-right: none;
 }
 
-.menu-v-container:not(.mobile) ul.menu-main li.multi-column > ul > li {
+.uix-v-menu__container:not(.is-mobile) ul.uix-menu li.multi-column > ul > li {
     border-left: none;
     border-right: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.menu-v-container:not(.mobile) ul.menu-main li.multi-column > ul > li:first-child {
+.uix-v-menu__container:not(.is-mobile) ul.uix-menu li.multi-column > ul > li:first-child {
     border-right: none;
 }
 
-.menu-v-container:not(.mobile) ul.menu-main li.multi-column > ul > li ul {
+.uix-v-menu__container:not(.is-mobile) ul.uix-menu li.multi-column > ul > li ul {
     left: auto;
     right: 0;
 }
 
-.menu-v-container:not(.mobile) .nav-arrow {
+.uix-v-menu__container:not(.is-mobile) .uix-menu__arrow {
     right: auto;
     left: .5rem;
 }

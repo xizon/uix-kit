@@ -11,7 +11,7 @@ $carousel-3d-item-m-height: 135px;
 $carousel-3d-item-m-offset: 70px;
 $carousel-3d-item-m-gutter: 1rem;
 
-.custom-carousel-3d {
+.uix-3d-carousel {
     position: relative;
 	width: #{$carousel-3d-item-width + $carousel-3d-item-offset*2};
 	height: $carousel-3d-item-height;
@@ -25,7 +25,7 @@ $carousel-3d-item-m-gutter: 1rem;
 		position: relative;
 		display: block;
 		
-		.items {
+		.uix-3d-carousel__item {
 			position: absolute;
 			width: $carousel-3d-item-width;
 			height: $carousel-3d-item-height;
@@ -34,14 +34,14 @@ $carousel-3d-item-m-gutter: 1rem;
 			overflow: hidden;
 
 
-			&.main-pos {
+			&.uix-3d-carousel__item--main-pos {
 				margin-left: $carousel-3d-item-gutter;
 				z-index: 3000;
 				transform: scale(1.2);
 				filter: blur(.5px);/* Prevent image flash when transitioning with blur */
 			}
 			
-			&.left-pos {
+			&.uix-3d-carousel__item--left-pos {
 				opacity: .3;
 				margin-left: calc(-#{$carousel-3d-item-width - $carousel-3d-item-offset} + #{$carousel-3d-item-gutter * 2});
 				z-index: 1000;
@@ -49,14 +49,14 @@ $carousel-3d-item-m-gutter: 1rem;
 				filter: blur(5px);
 			}
 
-			&.back-pos {
+			&.uix-3d-carousel__item--back-pos {
 				margin-left: $carousel-3d-item-gutter;
 				opacity: .05;
 				transform: scale(1);
 				filter: blur(5px);
 			}
 
-			&.right-pos {
+			&.uix-3d-carousel__item--right-pos {
 				opacity: .3;
 				margin-left: #{$carousel-3d-item-width - $carousel-3d-item-offset};
 				z-index: 1000;
@@ -75,32 +75,32 @@ $carousel-3d-item-m-gutter: 1rem;
 
 @media all and (max-width: 768px) {
 
-	.custom-carousel-3d {
+	.uix-3d-carousel {
 		width: #{$carousel-3d-item-m-width + $carousel-3d-item-m-offset*2};
 		height: $carousel-3d-item-m-height;
 		transform: translateX( #{$carousel-3d-item-m-offset} );
 
 		ul {
 		
-			.items {
+			.uix-3d-carousel__item {
 				width: $carousel-3d-item-m-width;
 				height: $carousel-3d-item-m-height;
 
-				&.main-pos {
+				&.uix-3d-carousel__item--main-pos {
 					margin-left: $carousel-3d-item-m-gutter;
 					
 				}
 
-				&.left-pos {
+				&.uix-3d-carousel__item--left-pos {
 					margin-left: calc(-#{$carousel-3d-item-m-width - $carousel-3d-item-m-offset} + #{$carousel-3d-item-m-gutter * 2});
 					
 				}
 
-				&.back-pos {
+				&.uix-3d-carousel__item--back-pos {
 					margin-left: $carousel-3d-item-m-gutter;
 				}
 
-				&.right-pos {
+				&.uix-3d-carousel__item--right-pos {
 					margin-left: #{$carousel-3d-item-m-width - $carousel-3d-item-m-offset};
 				}
 

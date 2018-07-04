@@ -17,7 +17,7 @@ APP = ( function ( APP, $, window, document ) {
 		var $window      = $( window ),
 			windowWidth  = $window.width(),
 			windowHeight = $window.height(),
-			topSpacing   = $( '.header-area' ).outerHeight( true ) + 10;
+			topSpacing   = $( '.uix-header__container' ).outerHeight( true ) + 10;
 		
 		
 		$window.on( 'scroll touchmove', function() {
@@ -67,7 +67,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 			
 //		var	navMinTop    = $( '.stick-widget' ).offset().top + $( window ).height()/3,
-//			navMaxTop    = parseFloat( $( document ).height() - $( '.footer-main-container' ).height() ) - $( window ).height()/3;
+//			navMaxTop    = parseFloat( $( document ).height() - $( '.uix-footer__container' ).height() ) - $( window ).height()/3;
 //
 //
 //		$( window ).on( 'scroll touchmove', function() {

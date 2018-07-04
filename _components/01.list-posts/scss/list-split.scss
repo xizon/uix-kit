@@ -2,15 +2,15 @@
    <!-- List of Split Posts --> 
 /* ====================================================== */
 
-.list-split-container {
+.uix-list-split {
 	
-	.list-split-item {
+	.uix-list-split__item {
 
 		position: relative;
 		margin-bottom: 4.8125rem;
 
 
-		.list-split-item-info {
+		.uix-list-split__item__info {
 			p {
 				font-size: 0.875rem;
 			}
@@ -19,7 +19,7 @@
 			}
 		}
 		&.is-reversed .row > .col-sm-6,
-		&.is-reversed .seamless-grid-container .seamless-col-6 {
+		&.is-reversed .uix-core-grid .uix-core-grid__col-6 {
 			float: right;
 		}
 	}
@@ -30,20 +30,20 @@
 
 @media all and (max-width: 768px) {
 	
-	.list-split-container {
+	.uix-list-split {
 
-		.list-split-item {
+		.uix-list-split__item {
 
 			margin-bottom: 3rem;
 
 			&.is-reversed .row > .col-sm-6,
-			&.is-reversed .seamless-grid-container .seamless-col-6 {
+			&.is-reversed .uix-core-grid .uix-core-grid__col-6 {
 				float: left;
 				&:first-child, &:nth-child(2) {
 					transform: translateX(0);
 				}
 			}
-			.list-split-item-info {
+			.uix-list-split__item__info {
 				margin-top: 1.5rem;
 
 				> div {

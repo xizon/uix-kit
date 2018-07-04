@@ -1,12 +1,12 @@
 /* ====================================================== 
    <!-- Dropdown Menu 2 (Multi-level drop-down navigation) --> 
 /* ====================================================== */
-.custom-vertical-menu {
+.uix-vertical-menu {
 	
 	margin: 0;
 	padding: 0;
 	
-	.arrow {
+	.uix-vertical-menu__arrow {
 		@include transition-default();
 		display: inline-block;
 		width: 1rem;

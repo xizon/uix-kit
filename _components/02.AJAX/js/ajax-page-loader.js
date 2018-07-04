@@ -25,7 +25,7 @@ APP = ( function ( APP, $, window, document ) {
 			AJAXPageLinks       = '[data-ajax-page]',
 			$navs               = $( AJAXPageLinks ).parent().parent().find( 'li' ),
 			total               = $navs.length,
-			$sectionsContainer  = $( '.custom-fullpage-ajax-container' ),
+			$sectionsContainer  = $( '.uix-ajax-load__fullpage-container' ),
 			ajaxContainer       = '.ajax-container',
 			curAjaxPageID       = $( ajaxContainer ).data( 'ajax-page-id' );
 		
@@ -41,7 +41,7 @@ APP = ( function ( APP, $, window, document ) {
 		 */
 	
 		//Activate the first item
-		if ( $( '.js-ajax-content-wrapper' ).length == 0 ) {
+		if ( $( '.js-uix-ajax-load__container' ).length == 0 ) {
 			moveTo( $( ajaxContainer ), false, 'down', 0 );
 		} else {
 			//Activate navigation from AJAX request
@@ -209,12 +209,12 @@ APP = ( function ( APP, $, window, document ) {
 				if ( !url || typeof url === typeof undefined ) {
 					url = $navs.eq( nextIndex ).find( '> a' ).attr( 'href' );
 				}
-
+ 
 				//Click on this link element using an AJAX request
 				$.ajax({
 					timeout  : 15000,
 					url      : url,
-					method   : 'POST',
+					method   : ( typeof container.data( 'ajax-method' ) === typeof undefined ) ? 'POST' : container.data( 'ajax-method' ),
 					dataType : 'html',
 					data     : {
 						action  : 'load_singlepages_ajax_content'
@@ -222,7 +222,7 @@ APP = ( function ( APP, $, window, document ) {
 					success  : function( response ) {
 						
 						//A function to be called if the request succeeds
-						ajaxSucceeds( dir, container, url, $( response ).find( '.js-ajax-content-wrapper' ).html() );
+						ajaxSucceeds( dir, container, url, $( response ).find( '.js-uix-ajax-load__container' ).html() );
 
 					},
 					error: function(){
@@ -230,7 +230,7 @@ APP = ( function ( APP, $, window, document ) {
 					},
 					beforeSend: function() {
 
-						TweenMax.set( '.ajax-loader', {
+						TweenMax.set( '.uix-ajax-load__loader', {
 							css         : {
 								'display' : 'block'
 							},
@@ -273,7 +273,7 @@ APP = ( function ( APP, $, window, document ) {
 			var oldContent = container.html();
 		
 			//Remove loader
-			TweenMax.to( '.ajax-loader', 0.5, {
+			TweenMax.to( '.uix-ajax-load__loader', 0.5, {
 				alpha       : 0,
 				onComplete  : function() {
 					TweenMax.set( this.target, {
@@ -435,6 +435,10 @@ APP = ( function ( APP, $, window, document ) {
 /*
  * Apply some original scripts
  *
+ * @param  {boolean} scrollReveal          - Run script of module "Scroll Reveal". a page commonly used to 
+ *                                           load asynchronous information
+ * @param  {boolean} ajaxPostList          - Run script of module "Posts List With Ajax". a page commonly used to 
+ *                                           load asynchronous information
  * @return {void}  - The constructor.
  */
 ( function ( $ ) {
@@ -442,7 +446,8 @@ APP = ( function ( APP, $, window, document ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
-			controls    : '.controls.line-eff'
+			scrollReveal    : true,
+			ajaxPostList    : true
         }, options );
  
         this.each( function() {
@@ -475,13 +480,11 @@ APP = ( function ( APP, $, window, document ) {
 			APP.DROPDOWN_MENU.documentReady($); //Dropdown Menu
 			APP.DROPDOWN_MENU2.documentReady($); //Dropdown Menu2
 			APP.COUNTER.documentReady($); //Counter
-			APP.SCROLL_REVEAL.documentReady($); //Scroll Reveal
 			APP._3D_BACKGROUND.documentReady($); //3D Background
 			APP.ACCORDION.documentReady($); //Accordion	
 			APP.ADVANCED_CONTENT_SLIDER.documentReady($); //Advanced Content Slider
 			APP.GALLERY.documentReady($); //Gallery
 			APP.IMAGE_SHAPES.documentReady($); //Image Shapes
-			APP.POST_LIST_AJAX.documentReady($); //Posts List With Ajax
 			APP.PERIODICAL_SCROLL.documentReady($); //Periodical Scroll
 			APP.PRICING.documentReady($); //Pricing
 			APP.PROGRESSBAR.documentReady($); //Progress Bar
@@ -490,6 +493,11 @@ APP = ( function ( APP, $, window, document ) {
 			APP.TABS.documentReady($); //Tabs
 			APP.TEAM_FOCUS.documentReady($); //Team Focus
 			APP.TESTIMONIALS.documentReady($); //Testimonials Carousel
+			
+			if ( settings.scrollReveal ) APP.SCROLL_REVEAL.documentReady($); //Scroll Reveal
+			if ( settings.ajaxPostList ) APP.POST_LIST_AJAX.documentReady($); //Posts List With Ajax
+			
+			
 			
 			//----Other functions here
 
@@ -515,6 +523,7 @@ APP = ( function ( APP, $, window, document ) {
 /*
  * Apply all the original scripts
  *
+ * @param  {boolean} runAll          - Run all module scripts.
  * @return {void}  - The constructor.
  */	
 ( function ( $ ) {
@@ -522,7 +531,7 @@ APP = ( function ( APP, $, window, document ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
-			controls    : '.controls.line-eff'
+			runAll    : true
         }, options );
  
         this.each( function() {
@@ -530,13 +539,17 @@ APP = ( function ( APP, $, window, document ) {
 			var scipts_pageLoaded    = APP.components.pageLoaded,
 				scipts_documentReady = APP.components.documentReady;
 
-
-			for ( var i = 0; i < scipts_pageLoaded.length; i++ ) {
-				 scipts_pageLoaded[i]();
+			if ( settings.runAll ) {
+				
+				for ( var i = 0; i < scipts_pageLoaded.length; i++ ) {
+					 scipts_pageLoaded[i]();
+				}
+				for ( var j = 0; j < scipts_documentReady.length; j++ ) {
+					 scipts_documentReady[j]( $ );
+				}		
 			}
-			for ( var j = 0; j < scipts_documentReady.length; j++ ) {
-				 scipts_documentReady[j]( $ );
-			}	
+
+
 
 			//Uix Shortcodes
 			if ( $.isFunction( $.uix_sc_init ) ) {
@@ -544,6 +557,39 @@ APP = ( function ( APP, $, window, document ) {
 			}
 
 			
+		});
+ 
+    };
+ 
+}( jQuery ));
+
+
+		
+/*
+ * Back to History URL 
+ *
+ * @return {void}  - The constructor.
+ */	
+( function ( $ ) {
+    $.fn.backToHisroryURL = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+			url    : false
+        }, options );
+ 
+        this.each( function() {
+			
+			var baseFullURL = window.location.protocol+'//'+window.location.hostname+window.location.pathname;
+			
+			if ( settings.url && settings.url != '' ) {
+				baseFullURL = settings.url;
+			}
+			
+			if ( $.support.pjax ) {
+				history.pushState( {},'', baseFullURL );
+			}
+		
 		});
  
     };

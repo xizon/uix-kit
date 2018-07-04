@@ -4,7 +4,7 @@
 
 /*
  * 1. Primary Menu
- * 2. Sub Menu
+ * 2. Sub Menu (Using WordPress default class name )
  * 3. Multi-level Sub Menu Position 
  * 4. Mega/Dropdown Menu 
  * 5. Dropdown Arrow
@@ -18,7 +18,7 @@ $vertical-menu-font-size    : 0.75rem;
 $vertical-menu-top          : 0;
 
 
-.menu-v-container:not(.mobile) {
+.uix-v-menu__container:not(.is-mobile) {
 	width: $vertical-menu-w;
 	background: #F3556D; 
 	background: linear-gradient(to right, #F3556D 0%,#E22444 100%);	
@@ -34,7 +34,7 @@ $vertical-menu-top          : 0;
 	 1. Primary Menu
 	 ---------------------------
 	 */ 
-	ul.menu-main {
+	ul.uix-menu {
 		margin: 0;
 		padding: 0;
 		
@@ -59,7 +59,7 @@ $vertical-menu-top          : 0;
 			}
 			
 			
-			.tip-label {
+			.uix-bubble {
 				right: 1rem;
 			}
 			
@@ -68,7 +68,7 @@ $vertical-menu-top          : 0;
 
 		/* 
 		 ---------------------------
-		 2. Sub Menu
+		 2. Sub Menu (Using WordPress default class name )
 		 ---------------------------
 		 */ 
 		ul.sub-menu {
@@ -130,7 +130,7 @@ $vertical-menu-top          : 0;
 		/* Multi-column */
 		li.multi-column {
 	
-			.mega-arrow {
+			.uix-menu__arrow-mega {
 				display: none !important;
 			}
 		
@@ -217,7 +217,7 @@ $vertical-menu-top          : 0;
 						border-bottom-color: rgba(255, 255, 255, 0.07);
 					}
 
-					.nav-arrow {
+					.uix-menu__arrow {
 						display: none;
 					}
 					
@@ -241,7 +241,7 @@ $vertical-menu-top          : 0;
 	 5. Dropdown Arrow
 	 ---------------------------
 	 */ 
-	.nav-arrow {
+	.uix-menu__arrow {
 		display: block;
 		position: absolute;
 		right: .5rem;

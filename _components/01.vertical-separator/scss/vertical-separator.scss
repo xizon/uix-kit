@@ -2,11 +2,11 @@
    <!-- Vertical Separator -->    
 /* ====================================================== */
 
-$vertical-separator-h: 40px;
+$separator-h: 40px;
 
-.vertical-separator {
+.uix-vertical-separator {
 	font-size: 0.875rem;
-	height: calc(#{$vertical-separator-h*2} + 2rem);
+	height: calc(#{$separator-h*2} + 2rem);
 	width: 2rem;
 	text-transform: uppercase;
 	line-height: 2;
@@ -17,7 +17,7 @@ $vertical-separator-h: 40px;
 	&::before,
 	&::after {
 		content: '';
-		height: $vertical-separator-h;
+		height: $separator-h;
 		width: 3px;
 		background: $sub-text-color;
 		display: block;

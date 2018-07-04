@@ -2,7 +2,7 @@
    <!-- Sidebar -->                  
 /* ====================================================== */
 
-.sidebar-container {
+.uix-sidebar__container {
 	padding-left: auto;
 	padding-right: 2.1875rem;
 }
@@ -17,18 +17,18 @@
 	}
 }
 
-.sidebar-container .widget-title::after {
+.uix-sidebar__container .widget-title::after {
 	margin-left: auto;
 	margin-right: 0.4375rem;
 }
 
-.post-img-list-box li {
-	.item-thumb {
+.uix-sidebar__posts-img li {
+	.uix-sidebar__posts-img__thumb {
 		float: right;
 		margin-right: auto;
 		margin-left: 0.875rem;
 	}
-	.item-info {
+	.uix-sidebar__posts-img__desc {
 		float: right;
 	}
 }
@@ -36,13 +36,13 @@
 
 /* With Uix Plugins */
 .uix-iso-grid-widget .uix-iso-grid-recent-item {
-	.item-thumb {
+	.uix-sidebar__posts-img__thumb {
 		float: right;
 		margin-right: auto;
 		margin-left: 0.875rem;
 		text-align: right;
 	}
-	.item-info {
+	.uix-sidebar__posts-img__desc {
 	    float: right;
 	}
 }

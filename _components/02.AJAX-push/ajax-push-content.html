@@ -12,13 +12,13 @@
 
   
   
-    <div class="wrapper">
+    <div class="uix-wrapper">
     
         <!-- Header Area
         ============================================= -->      
-        <header class="header-area">
+        <header class="uix-header__container">
             
-             <div class="header-container">
+             <div class="uix-header">
                  <div class="container">
                  
                         @@include('../00.global/include-brand.html')
@@ -31,17 +31,17 @@
                   </div>
                   <!-- .container end -->
                   
-                  <div class="clear"></div>
+                  <div class="uix-clear"></div>
              </div>
         
         </header>
-         <div class="header-inner"></div>
+         <div class="uix-header__placeholder"></div>
     
      
         <!-- Content 01
         ====================================================== -->
-        <section class="space-none">
-            <div class="container t-c">
+        <section class="uix-section--no-spacing">
+            <div class="container uix-t-c">
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">
                             <h2>Ajax Push Content</h2>
@@ -61,14 +61,14 @@
        <!-- Content 02
         ====================================================== -->
         <section>
-            <div class="container t-c">
+            <div class="container uix-t-c">
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">
                        
-							<a href="button.html" data-ajax-push-content='{"container":"#my-ajax-push-id-1","target":"#my-buttons","loading":"<div class=\"my-loader\">Loading...</div>"}'><i class="fa fa-cog" aria-hidden="true"></i> Add "button.html" Elements To Div</a>
+							<a href="button.html" data-ajax-push-content='{"container":"#my-ajax-demo-push-container","target":"#my-ajax-demo-target-container","loading":"<div class=\"my-loader\"><span><i class=\"fa fa-spinner fa-spin\"></i> loading...</span></div>","method":"POST"}'><i class="fa fa-cog" aria-hidden="true"></i> Add "button.html" Elements To Div</a>
 							
 							
-							<div id="my-ajax-push-id-1" style="padding: 15px; margin: 15px; background: rgba(237,235,235,1.00);"></div>
+							<div id="my-ajax-demo-push-container" style="padding: 15px; margin: 15px; background: rgba(237,235,235,1.00);"></div>
 
 
                  

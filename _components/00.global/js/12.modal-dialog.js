@@ -35,29 +35,29 @@ APP = ( function ( APP, $, window, document ) {
 		  * Unbind that one in a safe way that won't accidentally unbind other click handlers.
 		  * In order to trigger other custom Modal Dialog events.
 			
-			$( '#element' ).off( 'click.modalDialog' );
-			$( '#element' ).off( 'click.modalDialogClose' );
+			$( '#element' ).off( 'click.MODAL_DIALOG' );
+			$( '#element' ).off( 'click.MODAL_DIALOG_CLOSE' );
 			
 		*/
 		
 	
-		if ( $( '.modal-mask' ).length == 0 ) {
-			$( 'body' ).prepend( '<div class="modal-mask"></div>' );
+		if ( $( '.uix-modal-mask' ).length == 0 ) {
+			$( 'body' ).prepend( '<div class="uix-modal-mask"></div>' );
 		}
 	    
-		$( document ).on( 'click.modalDialog', '[data-modal-id]', function() {
+		$( document ).on( 'click.MODAL_DIALOG', '[data-modal-id]', function() {
 			var dataID = $( this ).data( 'modal-id' ),
 			    dataH  = $( this ).data( 'modal-height' ),
 				dataW  = $( this ).data( 'modal-width' ),
-				$obj   = $( '.modal-box#'+dataID );
+				$obj   = $( '.uix-modal-box#'+dataID );
 			
 			// Initializate modal
 			$( this ).attr( 'href', 'javascript:void(0)' );
-			$obj.find( '.content' ).addClass( 'no-fullscreen' );
+			$obj.find( '.uix-modal-box__content' ).addClass( 'js-uix-no-fullscreen' );
 			
 			
 			if ( $( this ).data( 'video-win' ) ) {
-				$obj.find( '.content' ).css( 'overflow-y', 'hidden' );
+				$obj.find( '.uix-modal-box__content' ).css( 'overflow-y', 'hidden' );
 			}
 			
 			
@@ -70,7 +70,7 @@ APP = ( function ( APP, $, window, document ) {
 					$obj.css( {'width': dataW } );
 				}
 				
-				TweenMax.set( '.modal-mask', {
+				TweenMax.set( '.uix-modal-mask', {
 					css: {
 						opacity : 0,
 						display : 'none'
@@ -90,37 +90,38 @@ APP = ( function ( APP, $, window, document ) {
 				$obj.addClass( 'active' );	
 			}
 			
-			if ( $obj.hasClass( 'fullscreen' ) ) {
+			if ( $obj.hasClass( 'is-fullscreen' ) ) {
 				setTimeout( function() {
 					$( 'html' ).css( 'overflow-y', 'hidden' );
-					if ( !$obj.hasClass( 'video' ) ) {
-						$obj.find( '.content' ).css( 'overflow-y', 'scroll' );
+					
+					if ( !$obj.hasClass( 'is-video' ) ) {
+						$obj.find( '.uix-modal-box__content' ).css( 'overflow-y', 'scroll' );
 					}
 					
-				}, getTransitionDuration( '.modal-box#'+dataID ) );
+				}, getTransitionDuration( '.uix-modal-box#'+dataID ) );
 				
 			}
 		
 		});
 		
-		$( document ).on( 'click.modalDialogClose', '.modal-box .close-btn', function() {
+		$( document ).on( 'click.MODAL_DIALOG_CLOSE', '.uix-modal-box .uix-modal-box__close', function() {
 			$( this ).parent().removeClass( 'active' );
 		});
 		
-		$( document ).on( 'click.modalDialogClose', '.modal-box .close-btn, .modal-mask', function() {
-			$( '.modal-box' ).removeClass( 'active' );
-			TweenMax.to( '.modal-mask', 0.3, {
+		$( document ).on( 'click.MODAL_DIALOG_CLOSE', '.uix-modal-box .uix-modal-box__close, .uix-modal-mask', function() {
+			$( '.uix-modal-box' ).removeClass( 'active' );
+			TweenMax.to( '.uix-modal-mask', 0.3, {
 				css: {
 					opacity : 0,
 					display : 'none'
 				}
 			});
 				
-			$( '.modal-box' ).find( '.content' ).removeClass( 'no-fullscreen' );
+			$( '.uix-modal-box' ).find( '.uix-modal-box__content' ).removeClass( 'js-uix-no-fullscreen' );
 			$( 'html' ).css( 'overflow-y', 'auto' );
 			setTimeout( function() {
 	
-			}, getTransitionDuration( '.modal-box:first' ) );
+			}, getTransitionDuration( '.uix-modal-box:first' ) );
 			
 		});
 		

@@ -37,7 +37,7 @@ APP = ( function ( APP, $, window, document ) {
 			}
 		});
 		function headerInit( w ) {
-			if ( w > 768 ) $( '.header-inner.auto-height' ).css( 'height', $( '.header-area' ).outerHeight() + 'px' ); 
+			if ( w > 768 ) $( '.uix-header__placeholder.uix-header__placeholder--auto-height' ).css( 'height', $( '.uix-header__container' ).outerHeight() + 'px' ); 
 			
 		}
 		
@@ -47,16 +47,16 @@ APP = ( function ( APP, $, window, document ) {
 		
 		//-------- Sticky header area
 		//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
-		var $el = $( '.header-area' );
+		var $el = $( '.uix-header__container' );
 		$window.on('scroll touchmove', function() {
 
 			var scrollTop = $( this ).scrollTop(),
 				spyTop    = 220;
 			
 			if ( scrollTop >= spyTop ) {
-				$el.addClass( 'spy-scroll-fixed' );
+				$el.addClass( 'is-fixed' );
 			} else {
-				$el.removeClass( 'spy-scroll-fixed' );	
+				$el.removeClass( 'is-fixed' );	
 			}
 			
 		});

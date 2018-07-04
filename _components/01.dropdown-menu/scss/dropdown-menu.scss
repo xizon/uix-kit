@@ -3,7 +3,7 @@
 /* ====================================================== */
 /* Do not use <a> tag */
 
-.custom-dropdown-trigger {
+.uix-dropdown-menu {
 	display: inline-block;
 	cursor: pointer;
 	position: relative;
@@ -80,7 +80,7 @@
 	}	
 	
 	
-	&.open {
+	&.is-opened {
 		
 		> ul {
 			display: block;

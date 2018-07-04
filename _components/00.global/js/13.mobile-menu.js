@@ -20,16 +20,16 @@ APP = ( function ( APP, $, window, document ) {
 
 		//-------- Show Toolbar when viewing site for WordPress
 		//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
-		var $el = $( '.admin-bar .menu-mobile-toggle' );
+		var $el = $( '.admin-bar .uix-menu-mobile__toggle' );
 		$window.on('scroll touchmove', function() {
 
 			var scrollTop = $( this ).scrollTop(),
 				spyTop    = 46;
 			
 			if ( scrollTop >= spyTop ) {
-				$el.addClass( 'spy-scroll-postion' );
+				$el.addClass( 'is-fixed' );
 			} else {
-				$el.removeClass( 'spy-scroll-postion' );	
+				$el.removeClass( 'is-fixed' );	
 			}
 			
 		});
@@ -37,15 +37,15 @@ APP = ( function ( APP, $, window, document ) {
 
 
 		//-------- Mobile Menu
-		var $toggle     = $( '.menu-mobile-toggle' ),
+		var $toggle     = $( '.uix-menu-mobile__toggle' ),
 			$toggleBody = $( 'body' );
 
 
 
 		//-------- Add mobile menu to your website
-		$( 'nav.menu-container' ).clone().addClass( 'mobile' ).appendTo( 'body' );
+		$( 'nav.uix-menu__container' ).clone().addClass( 'is-mobile' ).appendTo( 'body' );
 		//Wait until previous .appendTo() is complete
-		$.when( $( '.menu-container.mobile' ).length > 0 ).then( function(){
+		$.when( $( '.uix-menu__container.is-mobile' ).length > 0 ).then( function(){
 
 
 			$toggle.on( 'touchstart click', function( e ) {
@@ -54,42 +54,42 @@ APP = ( function ( APP, $, window, document ) {
 				//Prevents further propagation of the current event in the capturing and bubbling phases.
 				e.stopPropagation(); 
 
-				$( this ).toggleClass( 'open' );
-				if ( $( this ).hasClass( 'open' ) ) {
+				$( this ).toggleClass( 'is-opened' );
+				if ( $( this ).hasClass( 'is-opened' ) ) {
 
 					//Add mobile brand
-					var logoURL = $( '.mobile-brand img' ).attr( 'src' );
+					var logoURL = $( '.uix-brand--mobile img' ).attr( 'src' );
 					if ( typeof logoURL !== typeof undefined && logoURL != '' ) {
 						if ( logoURL.indexOf( 'blank.gif' ) >= 0 ) $( '.mobile-inner' ).css( 'margin-top', '-70px' );
 					}	
 
 					//Toggle effect
-					$toggleBody.addClass( 'menu-open' );
+					$toggleBody.addClass( 'js-uix-menu-opened' );
 				} else {
-					$toggleBody.removeClass( 'menu-open' );
+					$toggleBody.removeClass( 'js-uix-menu-opened' );
 				}
 
 			});
 
 			//Mobile menu mask event
-			$( '.menu-mobile-mask' ).on( 'click', function() {
-				$toggle.removeClass( 'open' );
-				$toggleBody.removeClass( 'menu-open' );
+			$( '.uix-menu-mobile__mask' ).on( 'click', function() {
+				$toggle.removeClass( 'is-opened' );
+				$toggleBody.removeClass( 'js-uix-menu-opened' );
 			});
 
 
 
 
 			// Menu click event
-			$( '.menu-container.mobile ul li' ).on( 'click', function( e ) {
+			$( '.uix-menu__container.is-mobile ul li' ).on( 'click', function( e ) {
 
-				  var arrowText = $( this ).find( '.mobile-nav-arrow' ).text().replace( /(.).*\1/g, "$1" );
+				  var arrowText = $( this ).find( '.uix-menu__arrow-mobile' ).text().replace( /(.).*\1/g, "$1" );
 				  $( this ).find( '> .sub-menu:not(.sub-sub)' ).toggle();
 
 				  if ( arrowText != '-' ) {
-					  $( this ).find( '.mobile-nav-arrow' ).text( '-' );
+					  $( this ).find( '.uix-menu__arrow-mobile' ).text( '-' );
 				  } else {
-					  $( this ).find( '.mobile-nav-arrow' ).text( '+' );
+					  $( this ).find( '.uix-menu__arrow-mobile' ).text( '+' );
 				  }
 
 
@@ -107,8 +107,8 @@ APP = ( function ( APP, $, window, document ) {
 					windowWidth = $window.width();
 
 					// Do stuff here
-					$toggleBody.removeClass( 'menu-open' );
-					$toggle.removeClass( 'open' );
+					$toggleBody.removeClass( 'js-uix-menu-opened' );
+					$toggle.removeClass( 'is-opened' );
 					sidrmenuInit( windowWidth );
 
 
@@ -124,9 +124,9 @@ APP = ( function ( APP, $, window, document ) {
 		function sidrmenuInit( w ) {
 
 			if ( w <= 768 ) {
-				$( '.menu-container.mobile .menu-main > li' ).each( function() {
+				$( '.uix-menu__container.is-mobile .uix-menu > li' ).each( function() {
 					if ( $( this ).find( 'ul' ).length > 0 ) {
-						if ( $( this ).find( '.mobile-nav-arrow' ).length < 1 ) $( this ).prepend( '<em class="mobile-nav-arrow">+</em>' );
+						if ( $( this ).find( '.uix-menu__arrow-mobile' ).length < 1 ) $( this ).prepend( '<em class="uix-menu__arrow-mobile">+</em>' );
 						$( this ).find( 'ul ul' ).addClass( 'sub-sub' );
 						$( this ).find( ' > a' ).attr( 'href', 'javascript:void(0);' );
 					}

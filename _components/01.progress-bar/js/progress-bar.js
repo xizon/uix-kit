@@ -27,16 +27,16 @@ APP = ( function ( APP, $, window, document ) {
 
 
 				//Radial Progress Bar
-				if ( $this.hasClass( 'custom-radial-progressbar' ) ) {
-					$this.find( '.track' ).html( '<span>'+percent+'<em class="unit">'+unit+'</em></span>' );
-					$this.addClass( 'progress-' + percent );	
+				if ( $this.hasClass( 'uix-progressbar--circle' ) ) {
+					$this.find( '.uix-progressbar__track' ).html( '<span>'+percent+'<em class="uix-progressbar__unit">'+unit+'</em></span>' );
+					$this.addClass( 'uix-progressbar--progress-' + percent );	
 				} 
 
 
 				//Rectangle Progress Bar
-				if ( $this.hasClass( 'custom-rectangle-progressbar' ) ) {
-					$this.find( '.bar > span' ).html( ''+percent+'<em class="unit">'+unit+'</em>' );
-					$this.addClass( 'progress-' + percent );	
+				if ( $this.hasClass( 'uix-progressbar--rectangle' ) ) {
+					$this.find( '.uix-progressbar__bar > span' ).html( ''+percent+'<em class="uix-progressbar__unit">'+unit+'</em>' );
+					$this.addClass( 'uix-progressbar--progress-' + percent );	
 				} 
 
 				//Prevents front-end javascripts that are activated in the background to repeat loading.

@@ -22,8 +22,6 @@ APP = ( function ( APP, $, window, document ) {
 			viewRenderer              = '3D-renderer';
 		
 		
-		
-		
 		// Generate one plane geometries mesh to scene
 		//-------------------------------------	
 		var camera,

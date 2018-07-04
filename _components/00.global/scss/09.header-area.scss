@@ -15,9 +15,9 @@
  ---------------------------
  */ 
 
-/* Don't use "margin" or "padding" to set up ".header-area" */
+/* Don't use "margin" or "padding" to set up ".uix-header__container" */
 
-.header-area {
+.uix-header__container {
 	position: fixed;
 	left: 0;
 	top: 0;
@@ -29,7 +29,7 @@
 	background: linear-gradient(to right, #F3556D 0%,#E22444 100%);	
 	
 	
-	&.spy-scroll-fixed {
+	&.is-fixed {
 		
 	}
 	
@@ -39,11 +39,11 @@
 	 2. Overlay Header
 	 ---------------------------
 	 */ 
-	&.header-overlay {
+	&.uix-header__container--overlay {
 		background: rgba(255, 255, 255, 0.15);
 		background: linear-gradient(to right, rgba(255, 255, 255, 0.15) 0%,rgba(255, 255, 255, 0.15) 100%);	
 
-		&.spy-scroll-fixed {
+		&.is-fixed {
 			background: #F3556D; 
 			background: linear-gradient(to right, #F3556D 0%,#E22444 100%);	
 		}
@@ -54,38 +54,28 @@
 }
 
 
-/* Don't use "margin" or "padding" to set up ".header-container" */
+/* Don't use "margin" or "padding" to set up ".uix-header" */
 
-.header-container {
+.uix-header {
 	/* Floating layer protection for IE */
-	background: url(../images/blank.gif);
+	background: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7);
 	
-	.menu-right {
+	.uix-menu__right-box {
 		float: right;
 	}
 }
 
 
-.navbar-fixed-top .header-container {
-	
-}
 
-.header-inner {
+/* Header Placeholder, to prevent floating elements from affecting layout */
+.uix-header__placeholder {
 	height: 185px;
 	background: none;
 	
-	&.auto-height {
+	&.uix-header__placeholder--auto-height {
 	    height: 75px;
 	}
-	
-	&.none-height {
-	    height: 0 !important;
-	}
-	
-	
-	&.spy-scroll-fixed {
-		
-	}
+
 }
 
 
@@ -93,11 +83,11 @@
 @media all and (max-width: 768px) {
 	
 	
-	.header-area {
+	.uix-header__container {
 		position: relative;
 
 		
-		&.header-overlay {
+		&.uix-header__container--overlay {
 
 			background: #F3556D; 
 			background: linear-gradient(to right, #F3556D 0%,#E22444 100%);	
@@ -108,10 +98,10 @@
 		
 	}
 	
-	.header-inner {
+	.uix-header__placeholder {
 		height: calc(185px - 75px);
 
-		&.auto-height {
+		&.uix-header__placeholder--auto-height {
 			height: 0;
 		}
 

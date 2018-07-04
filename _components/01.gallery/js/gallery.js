@@ -11,25 +11,25 @@ APP = ( function ( APP, $, window, document ) {
 	APP.GALLERY.version       = '0.0.1';
     APP.GALLERY.documentReady = function( $ ) {
 
-		$( '.custom-gallery' ).each( function() {
+		$( '.uix-gallery' ).each( function() {
 			var type = $( this ).data( 'show-type' );
 			
 			// Masonry
 			if ( type.indexOf( 'masonry' ) >= 0  ) {
 				$( this ).addClass( 'masonry-container' );
-				$( this ).find( '.custom-gallery-item' ).addClass( 'masonry-item' );
+				$( this ).find( '.uix-gallery__item' ).addClass( 'masonry-item' );
 			}
 			
 			// Filterable
 			if ( type.indexOf( 'filter' ) >= 0  ) {
 				$( this ).addClass( 'filter-container' );
-				$( this ).find( '.custom-gallery-item' ).addClass( 'filter-item' );	
+				$( this ).find( '.uix-gallery__item' ).addClass( 'filter-item' );	
 			}	
 		
 		});
 	
 	    /*--  Function of Masonry  --*/
-		var masonryObj = $( '.masonry-container .custom-gallery-tiles' );
+		var masonryObj = $( '.masonry-container .uix-gallery-tiles' );
 		imagesLoaded( masonryObj ).on( 'always', function() {
 			  masonryObj.masonry({
 				itemSelector: '.masonry-item'
@@ -41,9 +41,9 @@ APP = ( function ( APP, $, window, document ) {
 		if ( $( "[data-show-type]" ).length > 0 ) {
 			if ( $( "[data-show-type]" ).data( 'show-type' ).indexOf( 'filter' ) >= 0 ) {
 				
-				$( '.custom-gallery' ).each( function() {
+				$( '.uix-gallery' ).each( function() {
 					var filterCat      = $( this ).data( 'filter-id' ),
-						$grid          = $( this ).find( '.custom-gallery-tiles' ),
+						$grid          = $( this ).find( '.uix-gallery-tiles' ),
 						$filterOptions = $( filterCat );
 						
 					imagesLoaded( $grid ).on( 'always', function() {

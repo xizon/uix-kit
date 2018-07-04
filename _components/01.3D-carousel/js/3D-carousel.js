@@ -11,7 +11,7 @@ APP = ( function ( APP, $, window, document ) {
 	APP._3D_CAROUSEL.version       = '0.0.1';
     APP._3D_CAROUSEL.documentReady = function( $ ) {
 
-		$( '.custom-carousel-3d' ).each( function() {
+		$( '.uix-3d-carousel' ).each( function() {
 			var $this             = $( this ),
 				dataTiming        = $this.data( 'timing' ),
 				dataPrevBtn       = $this.data( 'prev-btn' ),
@@ -104,7 +104,7 @@ APP = ( function ( APP, $, window, document ) {
 			$items.on( 'click', function( e ) {
 				e.preventDefault();
 
-				if ( $( this ).attr( 'class' ) == 'items left-pos' ) {
+				if ( $( this ).attr( 'class' ) == 'uix-3d-carousel__item uix-3d-carousel__item--left-pos' ) {
 					itemUpdates( 'counter-clockwise' );
 				} else {
 					itemUpdates( 'clockwise' );
@@ -117,7 +117,7 @@ APP = ( function ( APP, $, window, document ) {
 			var $dragDropTrigger = $wrapper;
 
 			//Mouse event
-			$dragDropTrigger.on( 'mousedown.threeDimensionalCarousel touchstart.threeDimensionalCarousel', function( e ) {
+			$dragDropTrigger.on( 'mousedown._3D_CAROUSEL touchstart._3D_CAROUSEL', function( e ) {
 				e.preventDefault();
 
 				var touches = e.originalEvent.touches;
@@ -141,7 +141,7 @@ APP = ( function ( APP, $, window, document ) {
 
 				}
 
-				$dragDropTrigger.on( 'mouseup.threeDimensionalCarousel touchmove.threeDimensionalCarousel', function( e ) {
+				$dragDropTrigger.on( 'mouseup._3D_CAROUSEL touchmove._3D_CAROUSEL', function( e ) {
 					e.preventDefault();
 
 					$( this ).removeClass( 'dragging' );
@@ -177,7 +177,7 @@ APP = ( function ( APP, $, window, document ) {
 						}
 
 						if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
-							$dragDropTrigger.off( 'touchmove.threeDimensionalCarousel' );
+							$dragDropTrigger.off( 'touchmove._3D_CAROUSEL' );
 						}	
 
 
@@ -205,7 +205,7 @@ APP = ( function ( APP, $, window, document ) {
 
 							}	
 
-							$dragDropTrigger.off( 'mouseup.threeDimensionalCarousel' );
+							$dragDropTrigger.off( 'mouseup._3D_CAROUSEL' );
 
 						}	
 
@@ -234,15 +234,15 @@ APP = ( function ( APP, $, window, document ) {
 
 				//moving carousel backwards
 				if ( direction == 'counter-clockwise' ) {
-					var leftitem = parseFloat( $wrapper.find( '> li.left-pos' ).attr( 'id' ) - 1 );
+					var leftitem = parseFloat( $wrapper.find( '> li.uix-3d-carousel__item--left-pos' ).attr( 'id' ) - 1 );
 					if ( leftitem == 0 ) {
 						leftitem = itemCount;
 					}
 
-					$wrapper.find( '> li.right-pos' ).removeClass( 'right-pos' ).addClass( 'back-pos' );
-					$wrapper.find( '> li.main-pos' ).removeClass( 'main-pos' ).addClass( 'right-pos' );
-					$wrapper.find( '> li.left-pos' ).removeClass( 'left-pos' ).addClass( 'main-pos' );
-					$wrapper.find( '> li#' + leftitem + '').removeClass( 'back-pos' ).addClass( 'left-pos' );
+					$wrapper.find( '> li.uix-3d-carousel__item--right-pos' ).removeClass( 'uix-3d-carousel__item--right-pos' ).addClass( 'uix-3d-carousel__item--back-pos' );
+					$wrapper.find( '> li.uix-3d-carousel__item--main-pos' ).removeClass( 'uix-3d-carousel__item--main-pos' ).addClass( 'uix-3d-carousel__item--right-pos' );
+					$wrapper.find( '> li.uix-3d-carousel__item--left-pos' ).removeClass( 'uix-3d-carousel__item--left-pos' ).addClass( 'uix-3d-carousel__item--main-pos' );
+					$wrapper.find( '> li#' + leftitem + '').removeClass( 'uix-3d-carousel__item--back-pos' ).addClass( 'uix-3d-carousel__item--left-pos' );
 
 					startItem--;
 
@@ -278,10 +278,10 @@ APP = ( function ( APP, $, window, document ) {
 						return position;
 					};
 
-					$wrapper.find( '> li#' + startItem + '').removeClass( 'main-pos' ).addClass( 'left-pos' );
-					$wrapper.find( '> li#' + (startItem + carousel3DPos()) + '').removeClass( 'right-pos' ).addClass( 'main-pos' );
-					$wrapper.find( '> li#' + (startItem + carousel3DPos()) + '').removeClass( 'back-pos' ).addClass( 'right-pos' );
-					$wrapper.find( '> li#' + carousel3DPos( 'leftposition' ) + '').removeClass( 'left-pos' ).addClass( 'back-pos' );
+					$wrapper.find( '> li#' + startItem + '').removeClass( 'uix-3d-carousel__item--main-pos' ).addClass( 'uix-3d-carousel__item--left-pos' );
+					$wrapper.find( '> li#' + (startItem + carousel3DPos()) + '').removeClass( 'uix-3d-carousel__item--right-pos' ).addClass( 'uix-3d-carousel__item--main-pos' );
+					$wrapper.find( '> li#' + (startItem + carousel3DPos()) + '').removeClass( 'uix-3d-carousel__item--back-pos' ).addClass( 'uix-3d-carousel__item--right-pos' );
+					$wrapper.find( '> li#' + carousel3DPos( 'leftposition' ) + '').removeClass( 'uix-3d-carousel__item--left-pos' ).addClass( 'uix-3d-carousel__item--back-pos' );
 
 					startItem++;
 					position = 0;

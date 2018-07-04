@@ -10,13 +10,13 @@
     
 
   
-    <div class="wrapper">
+    <div class="uix-wrapper">
     
         <!-- Header Area
         ============================================= -->      
-        <header class="header-area">
+        <header class="uix-header__container">
             
-             <div class="header-container">
+             <div class="uix-header">
                  <div class="container">
                  
                         @@include('../00.global/include-brand.html')
@@ -29,18 +29,18 @@
                   </div>
                   <!-- .container end -->
                   
-                  <div class="clear"></div>
+                  <div class="uix-clear"></div>
              </div>
         
         </header>
-        <div class="header-inner"></div>
+        <div class="uix-header__placeholder"></div>
       
       
      
         <!-- Content 01
         ====================================================== -->
-        <section class="space-none">
-            <div class="container t-c">
+        <section class="uix-section--no-spacing">
+            <div class="container uix-t-c">
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">
                             <h2>Sidebar</h2>
@@ -73,24 +73,24 @@
                     
                             <!-- Sidebar
                             ========================= -->
-                            <div class="sidebar-container" role="complementary">
+                            <div class="uix-sidebar__container" role="complementary">
                             
                       
                             
                                 <div class="widget">
-                                    <form method="get" class="search-box" action="#">
+                                    <form method="get" class="uix-search-box" action="#">
                                         <label> 
                                             <span class="screen-reader-text">Search for:</span>
-                                            <input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" /> 
+                                            <input type="search" class="uix-search-box__field" placeholder="Search &hellip;" value="" name="s" /> 
                                          </label> 
-                                         <i class="fa fa-search wp-search-submit"></i> 
+                                         <i class="fa fa-search uix-search-box__submit"></i> 
                                      </form>
                                 </div>
                                 
                                 <div class="widget widget_categories">
-                                    <h3 class="widget-title h5 font-uppercase">Categories</h3>
+                                    <h3 class="widget-title uix-typo--h5 uix-typo--style-uppercase">Categories</h3>
                                     <div data-target-pjax="1">
-                                        <ul class="link-list">
+                                        <ul>
                                             <li class="cat-item cat-item-8"><a href="#">Art Direction</a><span class="cat-item-count">12</span></li>
                                             <li class="cat-item cat-item-4"><a href="#">Discovery</a><span class="cat-item-count">4</span></li>
                                             <li class="cat-item cat-item-3"><a href="#">Featured</a><span class="cat-item-count">4</span></li>
@@ -106,8 +106,8 @@
                                 
                                 
                                 <div class="widget">
-                                    <h3 class="widget-title h5 font-uppercase">Tags</h3>
-                                    <div class="tagcloud tags-box" data-target-pjax="1">
+                                    <h3 class="widget-title uix-typo--h5 uix-typo--style-uppercase">Tags</h3>
+                                    <div class="tagcloud uix-tags-box" data-target-pjax="1">
                                         <a href="#" class="tag-link">Web Design</a>
                                         <a href="#" class="tag-link">Detail</a>
                                         <a href="#" class="tag-link">SEO</a>
@@ -198,14 +198,14 @@
                                 
                                 
                                 <div class="widget">
-                                    <h3 class="widget-title h5 font-uppercase">About</h3>
+                                    <h3 class="widget-title uix-typo--h5 uix-typo--style-uppercase">About</h3>
                                     <div class="textwidget">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Qualem igitur hominem natura inchoavit? Non enim, si omnia non sequebatur, idcirco non erat ortus illinc. Quid turpius quam sapientis vitam ex insipientium sermone pendere.</div>
                                 </div>
                                 
                                 
                                 <div class="widget">
-                                    <h3 class="widget-title h5 font-uppercase">Recent Posts</h3>
-                                    <ul class="post-list-box" data-target-pjax-singleFullscreen="1">
+                                    <h3 class="widget-title uix-typo--h5 uix-typo--style-uppercase">Recent Posts</h3>
+                                    <ul class="uix-sidebar__posts" data-target-pjax-singleFullscreen="1">
                                         <li><a href="#">Making Your Site Retina-Ready</a></li>
                                         <li><a href="#">Hi, The Test Post is Loremipsum</a></li>
                                         <li><a href="#">One Simple Post</a></li>
@@ -217,33 +217,33 @@
                                 
                                 
                                 <div class="widget stick-widget">
-                                    <h3 class="widget-title h5 font-uppercase">Sticky Posts</h3>
-                                    <ul class="post-img-list-box" data-target-pjax-singleFullscreen="1">
+                                    <h3 class="widget-title uix-typo--h5 uix-typo--style-uppercase">Sticky Posts</h3>
+                                    <ul class="uix-sidebar__posts-img" data-target-pjax-singleFullscreen="1">
                                         <li>
-                                            <div class="item-thumb"><a href="#"><img src="assets/images/demo/test-img-big-1.jpg" alt="" ></a></div>
-                                            <div class="item-info">
-                                                <div class="item-title">
+                                            <div class="uix-sidebar__posts-img__thumb"><a href="#"><img src="assets/images/demo/test-img-big-1.jpg" alt="" ></a></div>
+                                            <div class="uix-sidebar__posts-img__desc">
+                                                <div class="uix-sidebar__posts-img__title">
                                                     <a href="#">Making Your Site Retina-Ready</a>
                                                 </div>
-                                                <div class="item-date">August 29, 2016</div>
+                                                <div class="uix-sidebar__posts-img__date">August 29, 2016</div>
                                             </div>
                                         </li>
                                         <li>
-                                            <div class="item-thumb"><a href="#"><img src="assets/images/demo/test-img-big-2.jpg" alt="" ></a></div>
-                                            <div class="item-info">
-                                                <div class="item-title">
+                                            <div class="uix-sidebar__posts-img__thumb"><a href="#"><img src="assets/images/demo/test-img-big-2.jpg" alt="" ></a></div>
+                                            <div class="uix-sidebar__posts-img__desc">
+                                                <div class="uix-sidebar__posts-img__title">
                                                     <a href="#">Hi, The Test Post is Loremipsum</a>
                                                 </div>
-                                                <div class="item-date">August 29, 2016</div>
+                                                <div class="uix-sidebar__posts-img__date">August 29, 2016</div>
                                             </div>
                                         </li>
                                         <li>
-                                            <div class="item-thumb"><a href="#"><img src="assets/images/demo/test-img-big-3.jpg" alt="" ></a></div>
-                                            <div class="item-info">
-                                                <div class="item-title">
+                                            <div class="uix-sidebar__posts-img__thumb"><a href="#"><img src="assets/images/demo/test-img-big-3.jpg" alt="" ></a></div>
+                                            <div class="uix-sidebar__posts-img__desc">
+                                                <div class="uix-sidebar__posts-img__title">
                                                     <a href="#">Post Formats: Embed Soundcloud </a>
                                                 </div>
-                                                <div class="item-date">August 29, 2016</div>
+                                                <div class="uix-sidebar__posts-img__date">August 29, 2016</div>
                                             </div>
                                         </li>
                                        

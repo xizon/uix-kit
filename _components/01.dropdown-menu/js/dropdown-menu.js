@@ -12,7 +12,7 @@ APP = ( function ( APP, $, window, document ) {
     APP.DROPDOWN_MENU.documentReady = function( $ ) {
 
 		//Create a trigger of Dropdown Menu on Click
-		$( '.custom-dropdown-trigger' ).each( function() {
+		$( '.uix-dropdown-menu' ).each( function() {
 			var $this = $( this );
 
 			//Close the target
@@ -21,12 +21,12 @@ APP = ( function ( APP, $, window, document ) {
 				//Prevents further propagation of the current event in the capturing and bubbling phases.
 				e.stopPropagation();
 
-				$this.toggleClass( 'open' );
+				$this.toggleClass( 'is-opened' );
 
 			});	
 
 			$this.find( 'li a' ).on( 'click', function() {
-				$this.removeClass( 'open' );	
+				$this.removeClass( 'is-opened' );	
 				$this.find( 'input[type="hidden"]' ).val( $( this ).data( 'value' ) );
 				$this.find( '> label > span' ).html( $( this ).text() );
  
@@ -34,7 +34,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 			$( 'html' ).on( 'click', function() {
-				$this.removeClass( 'open' );	
+				$this.removeClass( 'is-opened' );	
 			});		
 
 

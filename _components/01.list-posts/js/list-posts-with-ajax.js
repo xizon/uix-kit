@@ -8,7 +8,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.POST_LIST_AJAX               = APP.POST_LIST_AJAX || {};
-	APP.POST_LIST_AJAX.version       = '0.0.1';
+	APP.POST_LIST_AJAX.version       = '0.0.4';
     APP.POST_LIST_AJAX.documentReady = function( $ ) {
 
 		$( '[data-ajax-list-json]' ).each( function() {
@@ -48,7 +48,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			if( typeof trigger === typeof undefined ) {
-				trigger = '.load-more';
+				trigger = '.uix-load-more';
 			}
 			
 			if( typeof infinitescroll === typeof undefined ) {
@@ -82,10 +82,10 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			if( typeof pushContainer === typeof undefined ) {
-				pushContainer = '.portfolio-items-ajax-container';
+				pushContainer = '.uix-ajax-items__container';
 				
 				if ( $this.find( pushContainer ).length == 0 ) {
-					$( '#' + template7ID ).after( '<div class="portfolio-items-ajax-container"></div>' );
+					$( '#' + template7ID ).after( '<div class="uix-ajax-items__container"></div>' );
 				}
 				
 			}		
@@ -286,6 +286,7 @@ APP = ( function ( APP, $, window, document ) {
 					} else {
 						
 						
+						//----------------- More Button ----------------
 						//Add default page number to the button
 						$( trigger ).attr( 'data-cur-page', 1 );
 
@@ -295,7 +296,7 @@ APP = ( function ( APP, $, window, document ) {
 						}
 
 						//Avoid using $( document ) to cause an asynchronous load without counting from 1
-						$( trigger ).on( 'click', function( e ) {
+						$( trigger ).on( 'click.POST_LIST_AJAX', function( e ) {
 
 							e.preventDefault();
 
@@ -305,7 +306,8 @@ APP = ( function ( APP, $, window, document ) {
 							//Add next page number to the button
 							curPage = parseFloat( curPage ) + 1;
 							$button.attr( 'data-cur-page', curPage );
-
+							
+						
 							
 							// Active this button
 							$button.addClass( triggerActive );		
@@ -371,7 +373,10 @@ APP = ( function ( APP, $, window, document ) {
 				success  : function (data) { 
 					
 					//If the data is empty
-					if ( data == null ) $button.addClass( 'hide' );
+					if ( data && ( data == null || Object.prototype.toString.call( data.items )=='[object String]' ) ) {
+						$button.addClass( 'hide' );
+					}
+					
 				
 					
 					//Check if a key exists inside a json object
@@ -405,12 +410,12 @@ APP = ( function ( APP, $, window, document ) {
 							
 							
 							//--------- jQuery Masonry and Ajax Append Items
-							$( '.custom-gallery' ).each( function() {
+							$( '.uix-gallery' ).each( function() {
 								var type = $( this ).data( 'show-type' );
 
 								if ( type.indexOf( 'masonry' ) >= 0  ) {
 									$( this ).addClass( 'masonry-container' );
-									$( this ).find( '.custom-gallery-item' ).addClass( 'masonry-item' );
+									$( this ).find( '.uix-gallery__item' ).addClass( 'masonry-item' );
 								}
 								
 							});
@@ -428,7 +433,10 @@ APP = ( function ( APP, $, window, document ) {
 				
 							
 							//--------- Apply the original scripts
-							$( document ).applyOriginalSomeScripts();
+							$( document ).applyOriginalSomeScripts({
+								scrollReveal : false,
+								ajaxPostList : false
+							});
 
 
 							//--------- Remove this button

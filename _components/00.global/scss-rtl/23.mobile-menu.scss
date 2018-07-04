@@ -3,7 +3,7 @@
 /* ====================================================== */
 
 /* Mobile Menu Toggle */
-.menu-mobile-toggle {
+.uix-menu-mobile__toggle {
     right: auto;
     left: 30px;
 	
@@ -12,7 +12,7 @@
         right: 12px;
     }
 	
-    &.open {
+    &.is-opened {
 	    span {
 		    right: 7px;
 	    } 
@@ -23,7 +23,7 @@
 
 
 /* Mobile Menu Container */
-.menu-container.mobile {
+.uix-menu__container.is-mobile {
 	left: auto;
 	right: 0;
 	transform: translateX(300px);
@@ -41,8 +41,8 @@
         padding-right: .825em;
     }
 	
-    > .inner {
-	    > .menu-right {
+    > .uix-menu__inner {
+	    > .uix-menu__right-box {
 		    padding-left: auto;
 		    padding-right: .5rem;
 		
@@ -53,13 +53,13 @@
 	    }  
     }
 	
-	.mobile-nav-arrow {
+	.uix-menu__arrow-mobile {
 	    right: auto;
 	    left: 10px;
 	}	
 			
 }
 
-.menu-open .menu-container.mobile {
+.js-uix-menu-opened .uix-menu__container.is-mobile {
     transform: translateX(0);
 }

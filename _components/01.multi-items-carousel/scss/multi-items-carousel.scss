@@ -2,17 +2,17 @@
    <!-- Multiple Items Carousel -->   
 /* ====================================================== */
 
-.custom-multi-items-carousel {
+.uix-multi-carousel {
 	/* Required */
 	overflow: hidden;
 
-	.items {
+	.uix-multi-carousel__items {
 		height: 150px;
 		width: 100%;
 		position: relative;
 		overflow: hidden;
 		
-		.item {
+		> div {
 			position: relative;
 			float: left;
 			height: 100%;
@@ -43,14 +43,14 @@
 }
 
 /*----- Previous/Next Arrows -----*/
-.custom-multi-items-carousel-controls {
+.uix-multi-carousel__controls {
 	margin-top: 30px;
 	text-align: center;
 	
-	.prev {
+	.uix-multi-carousel__controls--prev {
 	    padding-left: 2px;
 	}
-	.next {
+	.uix-multi-carousel__controls--next {
 	    padding-right: 2px;
 	}
 	a {
@@ -69,7 +69,7 @@
 		text-decoration: none;
 		font-family: Arial, "sans-serif";
 
-		&.disable {
+		&.disabled {
 			opacity: .3;
 		}
 	}
@@ -78,19 +78,19 @@
 
 
 /*----- Vertical Carousel -----*/
-.custom-multi-items-carousel.vertical {
+.uix-multi-carousel.is-vertical {
 	/* Required */
 	overflow: hidden;
 	width: 500px;
 	height: 450px;
 
-	.items {
+	.uix-multi-carousel__items {
 
 		width: 100%;
 		/* Required */ 
 		height: 100%;
 
-		.item {
+		> div {
 			float: none;
 			width: 100%;
 
@@ -103,7 +103,7 @@
 }
 
 
-.custom-multi-items-carousel-controls.vertical {
+.uix-multi-carousel__controls.is-vertical {
 	width: 300px;
 	position: absolute;
 	top: 20%;

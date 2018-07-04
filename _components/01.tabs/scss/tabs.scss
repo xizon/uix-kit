@@ -9,7 +9,7 @@
 
 
 
-.custom-tabs {
+.uix-tabs {
 	
 	
 	/* 
@@ -17,10 +17,10 @@
 	 1. Tab Normal Effect
 	 ---------------------------
 	 */ 
-	&:not(.rotation) {
+	&:not(.uix-tabs--rotation) {
 	    @include outer-shadow();
 		
-		.marker {
+		.uix-tabs__marker {
 			background: $primary-text-color1;
 			height: 2px;
 			width: 100%;
@@ -33,7 +33,7 @@
 		
 	}
 	
-	.content {
+	.uix-tabs__content {
 		
 		display: none;
 		padding: 1.3125rem;
@@ -44,7 +44,7 @@
 		}
 	}
 	
-	.custom-tabs-ul-container {
+	.uix-tabs__nav {
 		> ul {
 			> li {
 				position: relative;
@@ -78,10 +78,10 @@
 
 	
 
-	&.custom-tabs-center {
+	&.uix-tabs--center {
 		box-shadow: none;
 
-		.custom-tabs-ul-container {
+		.uix-tabs__nav {
 			
 			> ul {
 				font-size: 0; /*Fighting the Space Between Inline Block Elements*/
@@ -112,18 +112,18 @@
 	 2. Tab Rotation Effect
 	 ---------------------------
 	 */ 
-	&.rotation {
+	&.uix-tabs--rotation {
 		
 		height: 400px;
 
-		.content {
+		.uix-tabs__content {
 			position: absolute;
 			top: 0;
 			left: 400px;
 			width: 300px;
 			@include outer-shadow();
 		}
-		.custom-tabs-ul-container {
+		.uix-tabs__nav {
 			width: 300px;
 			height: 300px;
 			position: relative;
@@ -168,24 +168,24 @@
 
 
 @media all and (max-width: 768px) { 
-	.custom-tabs {
+	.uix-tabs {
 
-		&:not(.rotation) li {
+		&:not(.uix-tabs--rotation) li {
 			width: 100% !important;
 		}
 
 		/* Tab Rotation Effect */
-		&.rotation {
+		&.uix-tabs--rotation {
 
 			height: 400px;
 
-			.content {
+			.uix-tabs__content {
 				position: relative;
 				left: 0;
 				width: 100%;
 			}
 
-			.custom-tabs-ul-container {
+			.uix-tabs__nav {
 				margin-top: 50px;
 				margin-left: 120px;
 			}

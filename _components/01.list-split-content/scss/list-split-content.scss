@@ -1,11 +1,11 @@
 /* ====================================================== 
     <!-- Fullwidth List of Split 2 --> 
 /* ====================================================== */
-$list-split-content-gutter: 15px;
-$list-split-content-text-gutter: 5vw;
+$content-gutter: 15px;
+$content-text-gutter: 5vw;
 
 
-.list-split-content-container {
+.uix-list-split-full {
 	position: relative;
 	
 	&::after {
@@ -16,23 +16,23 @@ $list-split-content-text-gutter: 5vw;
 	
 
 	
-	.to-left {
+	.uix-list-split-full__left {
 		position: relative;
 		width: 30%;
 		float: left;
-		padding-right: $list-split-content-text-gutter;
-		padding-left: calc(6.730769230769% + #{$list-split-content-gutter});
+		padding-right: $content-text-gutter;
+		padding-left: calc(6.730769230769% + #{$content-gutter});
 		@include outer-shadow();
 		min-height: 150px;
 	}
 	
-	.to-right {
+	.uix-list-split-full__right {
 		word-wrap: break-word;
 		box-sizing: border-box;
 		width: 70%;
 		float: left;
-		padding-left: $list-split-content-text-gutter;
-		padding-right: calc(6.730769230769% + #{$list-split-content-gutter});
+		padding-left: $content-text-gutter;
+		padding-right: calc(6.730769230769% + #{$content-gutter});
 		@include bg-gradient();
 		@include outer-shadow();
 		min-height: 150px;
@@ -47,15 +47,15 @@ $list-split-content-text-gutter: 5vw;
 
 /* New XL container for Bootstrap 3.x */
 @media all and (min-width: 1430px) {
-	.list-split-content-container {
+	.uix-list-split-full {
 		
-		.to-left {
-			padding-left: calc(5.189340813464% + #{$list-split-content-gutter}); /* (1426-1278)/1426/2 * 100 */
+		.uix-list-split-full__left {
+			padding-left: calc(5.189340813464% + #{$content-gutter}); /* (1426-1278)/1426/2 * 100 */
 
 		}
 		
-		.to-right {
-			padding-right: calc(5.189340813464% + #{$list-split-content-gutter}); /* (1426-1278)/1426/2 * 100 */
+		.uix-list-split-full__right {
+			padding-right: calc(5.189340813464% + #{$content-gutter}); /* (1426-1278)/1426/2 * 100 */
 
 		}
 
@@ -65,12 +65,12 @@ $list-split-content-text-gutter: 5vw;
 /* New XXL container for Bootstrap 3.x */
 @media all and (min-width: 1600px) {
 
-	.list-split-content-container {
-		.to-left {
-			padding-left: calc(12.992125984252% + #{$list-split-content-gutter}); /* (1905-1410)/1905/2 * 100 */
+	.uix-list-split-full {
+		.uix-list-split-full__left {
+			padding-left: calc(12.992125984252% + #{$content-gutter}); /* (1905-1410)/1905/2 * 100 */
 		}
-		.to-right {
-			padding-right: calc(12.992125984252% + #{$list-split-content-gutter}); /* (1905-1410)/1905/2 * 100 */
+		.uix-list-split-full__right {
+			padding-right: calc(12.992125984252% + #{$content-gutter}); /* (1905-1410)/1905/2 * 100 */
 		}
 	}
 }
@@ -78,32 +78,32 @@ $list-split-content-text-gutter: 5vw;
 /* > 2560 */
 @media all and (min-width: 2400px) {
 
-	.list-split-content-container {
-		.to-left {
-			padding-left: calc(22.298624754421% + #{$list-split-content-gutter}); /* (2545-1410)/2545/2 * 100 */
-			padding-right: $list-split-content-gutter;
+	.uix-list-split-full {
+		.uix-list-split-full__left {
+			padding-left: calc(22.298624754421% + #{$content-gutter}); /* (2545-1410)/2545/2 * 100 */
+			padding-right: $content-gutter;
 		}
-		.to-right {
-			padding-right: calc(22.298624754421% + #{$list-split-content-gutter}); /* (2545-1410)/2545/2 * 100 */
-			margin-left: $list-split-content-text-gutter;
-			width: calc( 70% - #{$list-split-content-text-gutter});
+		.uix-list-split-full__right {
+			padding-right: calc(22.298624754421% + #{$content-gutter}); /* (2545-1410)/2545/2 * 100 */
+			margin-left: $content-text-gutter;
+			width: calc( 70% - #{$content-text-gutter});
 		}
 	}
 }
 
 @media all and (max-width: 768px) {
-	.list-split-content-container {
+	.uix-list-split-full {
 		
 
-		.to-left {
+		.uix-list-split-full__left {
 			width: 100%;
 			min-height: inherit;
 		}	
 		
-		.to-right {
+		.uix-list-split-full__right {
 			min-height: inherit;
 			width: 100%;
-			padding: 0 $list-split-content-gutter;
+			padding: 0 $content-gutter;
 			
 		}
 		

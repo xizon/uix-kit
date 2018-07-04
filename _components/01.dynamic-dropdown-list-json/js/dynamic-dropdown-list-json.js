@@ -267,6 +267,7 @@ APP = ( function ( APP, $, window, document ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
+			method    : 'POST',
 			callback  : null,
 			jsonFile  : '',
 			key       : 'addresses'
@@ -280,7 +281,7 @@ APP = ( function ( APP, $, window, document ) {
 			//Returns JSON data
 			$.ajax({
 				url      : settings.jsonFile,
-				method   : 'POST',
+				method   : settings.method,
 				dataType : 'json',
 				success  : function ( data ) { 
 

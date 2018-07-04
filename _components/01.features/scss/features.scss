@@ -4,10 +4,10 @@
 
 $features-icon-size: 1.5rem;
 
-.custom-feature {
+.uix-feature {
 	
 	/* Horizontal Icons */
-	.icon {
+	.uix-feature__icon {
 		display: inline-block;
 		width: #{$features-icon-size*3};
 		height: #{$features-icon-size*3};
@@ -19,7 +19,7 @@ $features-icon-size: 1.5rem;
 			@include transition-default();
 		}	
 		
-		&.border {
+		&.is-bordered {
 			border: 1px $primary-text-color1 solid;
 			border-radius: 100%;	
 			
@@ -43,7 +43,7 @@ $features-icon-size: 1.5rem;
 
 	
 	/* Vertical Icons */
-	.icon-side {
+	.uix-feature__icon--side {
 		position: relative;
 		display: inline-block;
 		width: #{$features-icon-size*2};
@@ -58,13 +58,13 @@ $features-icon-size: 1.5rem;
 		}
 
 		
-		&.sep-col {
+		&.uix-feature__icon--side--sep-col {
 			display: table-cell;
 			vertical-align: top;
 		}
 		
 		
-		&.border {
+		&.is-bordered {
 			text-align: center;
 			margin-right: 1rem;
 			
@@ -74,7 +74,7 @@ $features-icon-size: 1.5rem;
 				margin-right: 0;
 			}
 			
-			~ .desc {
+			~ .uix-feature__desc {
 				transform: translateX(1rem);
 			}
 			
@@ -98,7 +98,7 @@ $features-icon-size: 1.5rem;
 	}
 
 
-	.title {
+	.uix-feature__title {
 		font-size: 1.125rem;
 		letter-spacing: 0;
 
@@ -106,18 +106,19 @@ $features-icon-size: 1.5rem;
 			transform: rotate(30deg);
 		}
 	}
-	.desc {
+	.uix-feature__desc {
 		margin: 0;
 		padding: 0;
 		font-size: 0.75rem;
 		line-height: 1.6;
 		padding: .175em 0 1.2rem;
 
-		&.desc-sep-col {
+		&.uix-feature__desc--sep-col {
 			padding-bottom: 1.2rem;
 		}
 		
-		&.desc-sep-col.sep-col {
+		&.uix-feature__desc--sep-col-side {
+			padding-bottom: 1.2rem;
 			display: table-cell;
 			vertical-align: top;
 		}
@@ -126,14 +127,14 @@ $features-icon-size: 1.5rem;
 }
 
 
-.font-white {
+.uix-typo--color-white {
 
-	.custom-feature {
+	.uix-feature {
 
 		/* Horizontal Icons */
-		.icon {
+		.uix-feature__icon {
 			
-			&.border {
+			&.is-bordered {
 				border-color: #fff;
 			}
 
@@ -142,10 +143,10 @@ $features-icon-size: 1.5rem;
 
 
 		/* Vertical Icons */
-		.icon-side {
+		.uix-feature__icon--side {
 	
 
-			&.border {
+			&.is-bordered {
 			
 
 				&::before {

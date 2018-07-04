@@ -6,6 +6,7 @@
 	color: $placeholder-text-color;
 }
 
+//Usage: var(--pink)
 :root {
 	--blue: #007007;
 	--indigo: #6610f2;
@@ -29,6 +30,7 @@
 	--light: #f8f9fa;
 	--dark: #343a40;
 }
+
 
 ::selection, 
 ::-moz-selection, 

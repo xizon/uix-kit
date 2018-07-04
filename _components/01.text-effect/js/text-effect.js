@@ -57,14 +57,14 @@ APP = ( function ( APP, $, window, document ) {
 				}	
 			
 		
-				$( customControls ).html( $( customControls ).text().replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>") );
+				$( customControls ).html( $( customControls ).text().replace(/([^\x00-\x80]|\w)/g, "<span class='uix-letter'>$&</span>") );
 			
 			
 			
 				if( customControls.indexOf( 'fadeInRight' ) >= 0 ) {
 					txtEff = anime.timeline({loop: false})
 						  .add({
-							targets: customControls + ' .letter',
+							targets: customControls + ' .uix-letter',
 							translateX: [40,0],
 							translateZ: 0,
 							opacity: [0,1],
@@ -81,7 +81,7 @@ APP = ( function ( APP, $, window, document ) {
 				if( customControls.indexOf( 'zoomInDown' ) >= 0 ) {
 					txtEff = anime.timeline({loop: false})
 						  .add({
-						    targets: customControls + ' .letter',
+						    targets: customControls + ' .uix-letter',
 							scale: [0, 1],
 							duration: speed,
 							elasticity: 600,
@@ -91,6 +91,7 @@ APP = ( function ( APP, $, window, document ) {
 						  });
 
 				}	
+			
 			
 
 

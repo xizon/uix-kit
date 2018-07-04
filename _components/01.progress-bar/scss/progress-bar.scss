@@ -19,7 +19,7 @@ $bar-speed      : 0.8s;
 	width: $w;
 }
 
-.custom-radial-progressbar {
+.uix-progressbar--circle {
 	@include size($bar-size, $bar-size);
 
 	display: inline-block;
@@ -27,19 +27,19 @@ $bar-speed      : 0.8s;
 	position: relative;
 
 
-	.title {
+	.uix-progressbar__title {
 		color: $primary-text-color1;
 		padding-top: 1rem;
 	}
 
-	.pie {
+	.uix-progressbar__pie {
 		@include size(100%, 100%);
 		clip: rect(0, $bar-size, $bar-size, $bar-size / 2);
 		left: 0;
 		position: absolute;
 		top: 0;
 
-		.half-circle {
+		.uix-progressbar__pie--half-circle {
 			transition: all #{$bar-speed} ease;
 			@include size(100%, 100%);
 			border: $bar-line-size solid;
@@ -51,7 +51,7 @@ $bar-speed      : 0.8s;
 		}
 	}
 
-	.track {
+	.uix-progressbar__track {
 		border: $bar-line-size solid $bar-track-bg;
 		background: $bar-bg;
 		border-radius: 100%;
@@ -72,7 +72,7 @@ $bar-speed      : 0.8s;
 			top: 0;
 		}
 
-		.unit {
+		.uix-progressbar__unit {
 			color: $sub-text-color;
 			font-size: 0.875rem;
 			display: inline-block;
@@ -82,9 +82,9 @@ $bar-speed      : 0.8s;
 	}
 
 
-	&.no-c-bg {
+	&.is-transparent {
 		
-		.track {
+		.uix-progressbar__track {
 			color: $primary-text-color1;
 			background: none;
 		}
@@ -92,41 +92,41 @@ $bar-speed      : 0.8s;
 
 	@for $i from 1 to 101 {
 
-		&.progress-#{$i} {
+		&.uix-progressbar--progress-#{$i} {
 
 			@if $i <= 50 {
-				.pie {
-					.right-side {
+				.uix-progressbar__pie {
+					.uix-progressbar__pie--right-side {
 						display: none;
 					}
 				}
 			}
 
 			@if $i > 50 {
-				.pie {
+				.uix-progressbar__pie {
 					clip: rect(auto, auto, auto, auto);
 
-					.right-side {
+					.uix-progressbar__pie--right-side {
 						transform: rotate(180deg);
 					}
 				}
 
 			}   
 
-			.pie {
-				.half-circle {
+			.uix-progressbar__pie {
+				.uix-progressbar__pie--half-circle {
 					border-color: $bar-fill-color;
 				}
 
-				.left-side {
+				.uix-progressbar__pie--left-side {
 					transform: rotate(#{$i*3.5}deg);
 				}
 
 			}	
 
 			@if $i == 100 {
-				.pie {
-					.right-side {
+				.uix-progressbar__pie {
+					.uix-progressbar__pie--right-side {
 						transform: rotate(170deg);
 					}   
 				}
@@ -147,17 +147,17 @@ $bar-speed      : 0.8s;
  2) Rectangle Progress Bar
  ---------------------------
  */ 
-.custom-rectangle-progressbar {
+.uix-progressbar--rectangle {
 	display: block;
 	margin: 1rem;
 	position: relative;
 	width: calc(100% - 2rem);
 	
-	.title {
+	.uix-progressbar__title {
 		color: $primary-text-color1;
 	}
   
-	.bar {
+	.uix-progressbar__bar {
 		height: $bar-line-size;
 		background-color: $bar-track-bg;
 
@@ -168,7 +168,7 @@ $bar-speed      : 0.8s;
 			right: 0;
 			font-weight: bold;
 			
-			.unit {
+			.uix-progressbar__unit {
 				color: $sub-text-color;
 				font-size: 0.875rem;
 				display: inline-block;
@@ -177,7 +177,7 @@ $bar-speed      : 0.8s;
 			}	
 		}
 		
-		.track {
+		.uix-progressbar__track {
 			transition: all #{$bar-speed} ease;
 			position: relative;
 			height: 100%;
@@ -189,7 +189,7 @@ $bar-speed      : 0.8s;
 	}
 	
 	@for $i from 1 to 101 {
-		&.progress-#{$i} .track {
+		&.uix-progressbar--progress-#{$i} .uix-progressbar__track {
 			width: #{$i}#{"%"};
 		}
 	}

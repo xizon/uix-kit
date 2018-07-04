@@ -2,20 +2,159 @@
    <!-- Table -->      
 /* ====================================================== */
 
-table.table-normal,
-.table-normal table {
-	border: 1px solid black;
+
+$table-border-color: #d6d5d5;
+$table-border-headerbg: #f2f2f2;
+
+table.uix-table,
+.uix-table table {
+
+	border-collapse: collapse;
+	border-spacing: 0;
+	empty-cells: show;
+	border: 1px solid $table-border-color;
+	width: 100%;
+	border-color: $table-border-color;
+
+	caption {
+		padding: 0.875rem 0;
+		text-align: center;
+	}
+	
+	
+	th,
+	td {
+		border-color: $table-border-color;
+	}
+
+	td,
+	th {
+
+		border-left: 1px solid $table-border-color;
+		border-width: 0 0 0 1px;
+		margin: 0;
+		overflow: visible;
+		padding: 0.5rem 0.75rem;
+	}
+
+
+	thead {
+		background: $table-border-headerbg;
+		text-align: left;
+		vertical-align: bottom;
+	}
+
+	tfoot {
+		border: 1px solid $table-border-color;
+	}
+
+	tr {
+
+		th {
+			text-align: left;
+		}	
+	}
+
+	td {
+		background-color: transparent;
+
+	}
+
+	
+}
+
+table.uix-table--bordered,
+.uix-table--bordered table {
+
+	border: 1px solid $table-border-color;
 	border-collapse: collapse;
 	width: 100%;
-	
+
 	th {
 		text-align: left;
 	}
-	
+
 	td, 
 	th {
-		border: 1px solid black;
+		border: 1px solid $table-border-color;
 		padding: 0.6875rem;
+	}
+
+}
+
+table.uix-table--noborder,
+.uix-table--noborder table {
+	border: none;
+}
+
+table.uix-table--top-noborder,
+.uix-table--top-noborder table {
+	td {
+		border-top: none;
 	}
 }
 
+table.uix-table--bottom-noborder,
+.uix-table--bottom-noborder table {
+	td {
+		border-bottom: none;
+	}	
+}
+
+table.uix-table--alternant-row,
+.uix-table--alternant-row table {
+	tbody tr:nth-child(even) {
+		background-color: $table-border-headerbg;
+	}
+}
+
+table.uix-table--alternant-col,
+.uix-table--alternant-col table {
+
+	col:first-child {
+		background-color: #000;
+	}
+	col:nth-child(2n+3) {
+		background-color: $table-border-headerbg;
+	}	
+
+}
+
+table.uix-table--striped tr:nth-child(2n-1) td,
+.uix-table--striped table tr:nth-child(2n-1) td {
+	background-color: $table-border-headerbg;
+}
+
+table.uix-table--per-line,
+.uix-table--per-line table {
+
+	td {
+		border-bottom: 1px solid $table-border-color;
+		border-width: 0 0 1px;
+	}
+
+
+	tbody tr:last-child td {
+		border-bottom-width: 0;
+	}		
+
+}
+
+table.is-horizontal,
+.is-horizontal table {
+
+	td {
+		border-bottom: 1px solid $table-border-color;
+		border-width: 0 0 1px;
+	}
+
+	tbody tr:last-child td {
+		border-bottom-width: 0;
+	}	
+
+	th {
+
+		border-bottom: 1px solid $table-border-color;
+	}
+
+}

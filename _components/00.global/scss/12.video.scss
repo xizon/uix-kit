@@ -2,17 +2,17 @@
    <!-- Video -->
 /* ====================================================== */
 /* Embedded directly in the webpage or embedded via a slider */
-.web-video-embed,
-.slider-video-embed {
+.uix-video,
+.uix-video__slider {
 	visibility: hidden;
 	
 }
 
 
 /* Display cover and play buttons when some mobile device browsers cannot automatically play video */
-.web-video-embed-cover {
+.uix-video__cover {
 
-	.cover-show {
+	.uix-video__cover-placeholder {
 		position: absolute;
 		z-index: 5;
 		left: 0;
@@ -53,12 +53,12 @@
 }
 
 
-.slider-video-embed {
+.uix-video__slider {
 	visibility: visible;
 }
 
-
-.web-video-replay {
+/* Video play button */
+.uix-video__btn-play {
 
 	display: none;
 	position: absolute;
@@ -87,7 +87,10 @@
 	display: none;
 }
 
-.web-video-background-container {
+
+/* External container for video background. */
+
+.uix-video__container-bg {
 	position: relative;
 	height: 100vh;
 	width: 100%;
@@ -97,7 +100,7 @@
 
 @media all and (max-width: 768px) {
 	
-	.web-video-background-container {
+	.uix-video__container-bg {
 		height: auto;
 	}
 	

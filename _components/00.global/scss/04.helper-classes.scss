@@ -3,8 +3,8 @@
 /* ====================================================== */
 
 /*
- * 1. Content Block
- * 2. Elements after a floating element will flow around it. 
+ * 1. Content Block                     
+ * 2. Elements after a floating element will flow around it.
  * 3. Shadow Effect
  * 4. Smooth Transition Effect
  * 5. Element Floating
@@ -13,12 +13,11 @@
  * 8. Vertically or Horizontally Aligned Blocks
  * 9. Specifies Whether To Clip Content
  * 10. Specifies a Default Height
- * 11. Style of Irregular Shape
- * 12. Hidden The Element on Mobile Device
- * 13. Tip Label
- * 14. Image Hover Overlay Effects
- * 15. Position
- * 16. Element Hidden Style
+ * 11. Hidden The Element on Mobile Device
+ * 12. Tip Bubble
+ * 13. Image Hover Overlay Effects
+ * 14. Position
+ * 15. Element Hidden Style
 */
 
 
@@ -27,12 +26,12 @@
  1. Content Block
  ---------------------------
  */ 
-.relative {
+.uix-relative {
     position: relative;
 	
 }
 
-.relative-inline {
+.uix-relative--inline {
 	display: inline-block;
 	position: relative;
 	
@@ -48,21 +47,21 @@
 	 */
 	-webkit-backface-visibility: hidden;
 	
-	/* Clip child elements */
-	&.clip {
-	  overflow: hidden;
-	}
+
 }
 
-
+/* Clip child elements */
+.uix-relative--inline-clip {
+  overflow: hidden;
+}
 
 /* 
  ---------------------------
  2. Elements after a floating element will flow around it. 
-    Use the "clear" or "clearfix" hack to fix the problem
+    Use the "uix-clear" or "uix-clearfix" hack to fix the problem
  ---------------------------
  */ 
-.clear {
+.uix-clear {
 	clear: both;
 	display: block;
 	overflow: hidden;
@@ -71,7 +70,7 @@
 	height: 0;
 }
 
-.clearfix {
+.uix-clearfix {
 	
 	&::before {
 		display: table;
@@ -93,8 +92,11 @@
  3. Shadow Effect
  ---------------------------
  */ 
-.outer-shadower {
-    @include outer-shadow();
+.uix-outer-shadow--s {
+    @include outer-shadow( 1 );
+}
+.uix-outer-shadow--l {
+    @include outer-shadow( 2 );
 }
 
 
@@ -103,15 +105,9 @@
  4. Smooth Transition Effect
  ---------------------------
  */ 
-.transition {
+.uix-trans {
     @include transition-default();
-	
-    div {
-        &.nav-previous, &.nav-next {
-          @include transition-default();
-        }
-    }
-	
+
     img, 
 	a, 
 	i, 
@@ -129,7 +125,7 @@
  5. Element Floating
  ---------------------------
  */ 
-.fl {
+.uix-f-l {
     float: left;
 	
 	@media all and (max-width: 768px) {
@@ -139,7 +135,7 @@
 	}
 }
 
-.fr {
+.uix-f-r {
     float: right;
 	
 	@media all and (max-width: 768px) {
@@ -155,7 +151,7 @@
  6. Element Alignment
  ---------------------------
  */ 
-.t-r {
+.uix-t-r {
     text-align: right;
 	
 	@media all and (max-width: 768px) {
@@ -165,7 +161,7 @@
 	}
 }
 
-.t-l {
+.uix-t-l {
     text-align: left;
 	
 	@media all and (max-width: 768px) {
@@ -175,7 +171,7 @@
 	}
 }
 
-.t-c {
+.uix-t-c {
     text-align: center;
 }
 
@@ -185,7 +181,7 @@
  7. Truncate String with Ellipsis
  ---------------------------
  */ 
-.ellipsis {
+.uix-t-ellipsis {
 	@include ellipsis();
 }
 
@@ -195,35 +191,30 @@
  8. Vertically or Horizontally Aligned Blocks
  ---------------------------
  */ 
-.pos-normal-align, 
-.pos-vertical-align {
+.uix-v-align--absolute,
+.uix-v-align--relative {
     position: absolute;
     z-index: 6;
     width: 100%;
-}
-
-.pos-normal-align {
-    top: 0;
-}
-
-.pos-vertical-align {
 	/* Vertical Center */
 	top: 50%;
-	transform: translateY(-50%);
-	&.relative {
-	    position: relative;
-	}
+	transform: translateY(-50%);	
 }
 
+.uix-v-align--relative {
+    position: relative;
+}
+
+
 @media all and (max-width: 768px) {
-	.pos-vertical-align.relative {
+	.uix-v-align--relative {
 		top: 0;
 		transform: none;
 		padding-top: 1.5rem;
 	}
 }
 
-.center-vertically {
+.uix-v-align--table {
 	display: table;
 	width: 100%;
 	height: 100%;
@@ -239,11 +230,11 @@
  9. Specifies Whether To Clip Content
  ---------------------------
  */ 
-.overflow-hidden-x {
+.uix-hidden-scrollbar-x {
     overflow-x: hidden;
 }
 
-.overflow-hidden {
+.uix-hidden-scrollbar {
     overflow: hidden;
 }
 
@@ -254,80 +245,72 @@
  10. Specifies a Default Height
  ---------------------------
  */ 
-.height-10 {
+.uix-height--10 {
     height: 10vh !important;
 }
 
-.height-20 {
+.uix-height--20 {
     height: 20vh !important;
 }
 
-.height-30 {
+.uix-height--30 {
     height: 30vh !important;
 }
 
-.height-40 {
+.uix-height--40 {
     height: 40vh !important;
 }
 
-.height-50 {
+.uix-height--50 {
     height: 50vh !important;
 }
 
-.height-60 {
+.uix-height--60 {
     height: 60vh !important;
 }
 
-.height-70 {
+.uix-height--70 {
     height: 70vh !important;
 }
 
-.height-80 {
+.uix-height--80 {
     height: 80vh !important;
 }
 
-.height-90 {
+.uix-height--90 {
     height: 90vh !important;
 }
 
-.height-100 {
+.uix-height--100 {
     height: 100vh !important;
 }
 
 @media all and (max-width: 768px) {
-	.height-100:not(.mobile-still), 
-	.height-90:not(.mobile-still), 
-	.height-80:not(.mobile-still), 
-	.height-70:not(.mobile-still), 
-	.height-60:not(.mobile-still), 
-	.height-50:not(.mobile-still), 
-	.height-40:not(.mobile-still), 
-	.height-30:not(.mobile-still), 
-	.height-20:not(.mobile-still), 
-	.height-10:not(.mobile-still) {
+	.uix-height--100:not(.is-mobile-still), 
+	.uix-height--90:not(.is-mobile-still), 
+	.uix-height--80:not(.is-mobile-still), 
+	.uix-height--70:not(.is-mobile-still), 
+	.uix-height--60:not(.is-mobile-still), 
+	.uix-height--50:not(.is-mobile-still), 
+	.uix-height--40:not(.is-mobile-still), 
+	.uix-height--30:not(.is-mobile-still), 
+	.uix-height--20:not(.is-mobile-still), 
+	.uix-height--10:not(.is-mobile-still) {
 	    height: auto !important;
 		
 	}
 }
 
-/* 
- ---------------------------
- 11. Style of Irregular Shape
- ---------------------------
- */ 
-.skew-element {
-    transform: skew(0deg, -2deg);	
-}
 
 
 /* 
  ---------------------------
- 12. Hidden The Element on Mobile Device
+ 11. Hidden The Element on Mobile Device
  ---------------------------
  */ 
 
 @media all and (max-width: 768px) {
-	.mobile-ele-hide {
+	.is-mobile-hide {
 		display: none;
 	}
 	
@@ -335,10 +318,10 @@
 
 /* 
  ---------------------------
- 13. Tip Label
+ 12. Tip Bubble
  ---------------------------
  */ 
-.tip-label {
+.uix-bubble {
 	font-weight: 100;
 	text-transform: uppercase;
 	font-weight: 700;
@@ -357,7 +340,7 @@
 }
 
 @media all and (max-width: 768px) {
-	.tip-label {
+	.uix-bubble {
 		right: 1rem;
 		top: .7rem;
 	}
@@ -366,11 +349,11 @@
 
 /* 
  ---------------------------
- 14. Image Hover Overlay Effects
+ 13. Image Hover Overlay Effects
  ---------------------------
  */ 
-img.imghover-color,
-.imghover-color img {
+img.uix-filter-hover--color,
+.uix-filter-hover--color img {
 	transition: filter .3s cubic-bezier(.445,.05,.55,.95);
     will-change: filter;
 	
@@ -383,54 +366,54 @@ img.imghover-color,
 
 /* 
  ---------------------------
- 15. Position
+ 14. Position
  ---------------------------
  */ 
 /*--- Directions --- */
-[class*='dir-top'],
-[class*='dir-bottom'],
-[class*='dir-left'],
-[class*='dir-right'],
-[class*='dir-center'] {
+[class*='uix-dir--top'],
+[class*='uix-dir--bottom'],
+[class*='uix-dir--left'],
+[class*='uix-dir--right'],
+[class*='uix-dir--center'] {
     position: absolute !important;
 }
 
 
 /* Don't use `width: 100%` because it is wrong if the parent has padding. */
-.dir-top {
+.uix-dir--top {
 	top: 0;
 	left: 0;
 	right: 0;
 }
-.dir-bottom {
+.uix-dir--bottom {
 	bottom: 0;
 	left: 0;
 	right: 0;
 }
-.dir-left {
+.uix-dir--left {
 	top: 0;
 	bottom: 0;
 	left: 0;
 }
-.dir-right {
+.uix-dir--right {
 	top: 0;
 	bottom: 0;
 	right: 0;
 }
 
-.dir-top-left {
+.uix-dir--top-left {
 	top: 0;
 	left: 0;
 }
-.dir-top-right {
+.uix-dir--top-right {
 	top: 0;
 	right: 0;
 }
-.dir-bottom-left {
+.uix-dir--bottom-left {
 	bottom: 0;
 	left: 0;
 }
-.dir-bottom-right {
+.uix-dir--bottom-right {
 	bottom: 0;
 	right: 0;
 }
@@ -438,13 +421,16 @@ img.imghover-color,
 
 /* 
  ---------------------------
- 16. Element Hidden Style
+ 15. Element Hidden Style
  ---------------------------
  */ 
-.el-transparent {
+.uix-el--transparent {
 	opacity: 0;
 }
-.el-zoom {
+.uix-el--zoom {
 	transform: scale(0);
+}
+.uix-el--skew {
+    transform: skew(0deg, -2deg);	
 }
 

@@ -1,14 +1,14 @@
 /* ====================================================== 
    <!-- Loader -->                                               
 /* ====================================================== */
-.loader-progress {
+.uix-loader-progress {
 	text-align: center;
 	font-size: 0.75rem;
 	transform: translate(10px,-10px);
 }
 
-.loader,
-.loader-progress {
+.uix-loader,
+.uix-loader-progress {
 	bottom: 0;
 	left: 0;
 	width: 65px;
@@ -40,30 +40,30 @@
 		bottom: 10px;
 		left: 10px;
 	}
-	.spinner-container {
-	    animation: rotate .5s linear infinite;
+	.uix-loader__spinner {
+	    animation: uix-cssAnim--rotate .5s linear infinite;
 		
-		.path {
+		path {
 			stroke-dasharray: 1,150;
 			/* 1%, 101% circumference */
 			stroke-dashoffset: 0;
 			stroke: $highlight-color1;
 			stroke-linecap: round;
-			animation: dash 1.5s ease-in-out infinite;
+			animation: uix-cssAnim--dash 1.5s ease-in-out infinite;
 		}
 	}
 	
 }
 
 
-@keyframes rotate {
+@keyframes uix-cssAnim--rotate {
 	100% {
 	    transform: rotate(360deg);
 	}
 }
 
 
-@keyframes dash {
+@keyframes uix-cssAnim--dash {
 	0% {
 		stroke-dasharray: 1,150;
 		/* 1%, 101% circumference */

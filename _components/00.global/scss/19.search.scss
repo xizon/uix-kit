@@ -12,7 +12,7 @@
  1. Search of Widget
  ---------------------------
  */ 
-.search-box {
+.uix-search-box {
 	position: relative;
 	font-size: 0.875rem;
 	
@@ -20,7 +20,7 @@
 	label {
 		width: 100%;
 	}
-	.search-field {
+	.uix-search-box__field {
 		width: 100%;
 		background: #fff;
 		border: 1px solid $sub-text-color;
@@ -41,7 +41,7 @@
 			display: none;
 		}
 	}
-	.wp-search-submit {
+	.uix-search-box__submit {
 		position: absolute;
 		top: 0.546875rem;
 		right: 0.875rem;

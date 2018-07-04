@@ -2,11 +2,11 @@
    <!-- ToolTip --> 
 /* ====================================================== */
 
-.custom-tooltip {
+.uix-tooltip {
     position: relative;
     display: inline-block;
     
-	.tip-text {
+	.uix-tooltip__content {
 		
 		font-size: 0.75rem;
 		visibility: hidden;
@@ -30,14 +30,14 @@
 		
 	}
 
-	&:hover .tip-text {
+	&:hover .uix-tooltip__content {
 		visibility: visible;
 		opacity: 1;
 		transform: translate(0,0);
 	}
 
 
-	.tip-right {
+	.uix-tooltip__content--right {
 		top: -5px;
 		left: 125%;
 		transform: translate(10px,0);
@@ -70,7 +70,7 @@
 
 
 
-	.tip-bottom {
+	.uix-tooltip__content--bottom {
 		top: 125%;
 		left: 50%;
 		margin-left: -60px;
@@ -103,7 +103,7 @@
 
 
 
-	.tip-top {
+	.uix-tooltip__content--top {
 		bottom: 125%;
 		left: 50%;
 		margin-left: -60px;
@@ -137,7 +137,7 @@
 	
 
 
-	.tip-left {
+	.uix-tooltip__content--left {
 		top: -5px;
 		bottom: auto;
 		right: 125%;

@@ -7,7 +7,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.ONEPAGE               = APP.ONEPAGE || {};
-	APP.ONEPAGE.version       = '0.0.1';
+	APP.ONEPAGE.version       = '0.0.2';
     APP.ONEPAGE.documentReady = function( $ ) {
 
         var $window      = $( window ),
@@ -20,12 +20,12 @@ APP = ( function ( APP, $, window, document ) {
 		var lastAnimation      = 0,
 			quietPeriod        = 500, //Do not change it
 			animationTime      = 1000,//According to page transition animation changes
-			$sectionsContainer = $( '.custom-fullpage-container' ),
+			$sectionsContainer = $( '.uix-noemal-load__onepage-container' ),
 			$sections          = $sectionsContainer.find( '> section' ),
 			sectionTotal       = $sections.length,
 			topSectionSpacing  = 0,
-			$primaryMenu       = $( '.menu-main' ),
-			$sidefixedMenu     = $( '.custom-sidefixed-menu' );
+			$primaryMenu       = $( '.uix-menu' ),
+			$sidefixedMenu     = $( '.uix-menu-sidefixed' );
 		
 		
 		//Prevent this module from loading in other pages
@@ -47,6 +47,12 @@ APP = ( function ( APP, $, window, document ) {
 		
 		//Init the section location
 		sectionStart();
+		
+		
+		$( window ).on( 'hashchange', function(){
+			console.log( 'hash changed!' );
+		} );
+		
 
 		
 		/*
@@ -165,10 +171,12 @@ APP = ( function ( APP, $, window, document ) {
 							var curSectionIndex = $sections.filter( '.active' ).index() + 1,
 								href            = window.location.href.substr( 0, window.location.href.indexOf( '#' ) ) + '#' + $sections.filter( '.active' ).attr( 'id' );
 
-							if ( Modernizr.cssanimations ) {
-								history.pushState( {}, document.title, href );
-								console.log( 'Section ' + curSectionIndex + ' loaded!' );
-							}
+							// Save state on history stack
+							// - First argument is any object that will let you restore state
+							// - Second argument is a title (not the page title, and not currently used)
+							// - Third argument is the URL - this will appear in the browser address bar
+							history.pushState( {}, document.title, href );
+							console.log( 'Section ' + curSectionIndex + ' loaded!' );
 
 
 						}
@@ -261,7 +269,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 		var navMinTop      = ( $sidefixedMenu.length > 0 ) ? $sidefixedMenu.offset().top : 0,
-			navMaxTop      = parseFloat( $( document ).height() - $( '.footer-main-container' ).height() ) - windowHeight/3;
+			navMaxTop      = parseFloat( $( document ).height() - $( '.uix-footer__container' ).height() ) - windowHeight/3;
 
 		$window.on( 'scroll touchmove', function() {
 			var scrollTop = $( this ).scrollTop(),
@@ -301,9 +309,9 @@ APP = ( function ( APP, $, window, document ) {
 
 			//Detecting when user scrolls to bottom of div
 			if ( spyTop > navMaxTop || spyTop < navMinTop ) {
-				$sidefixedMenu.removeClass( 'fixed' );
+				$sidefixedMenu.removeClass( 'is-fixed' );
 			} else {
-				$sidefixedMenu.addClass( 'fixed' );
+				$sidefixedMenu.addClass( 'is-fixed' );
 			}	
 
 
@@ -354,14 +362,14 @@ APP = ( function ( APP, $, window, document ) {
 			startY;
 
 
-		$sectionsContainer.on( 'touchstart.onepage', function( event ) {
+		$sectionsContainer.on( 'touchstart.ONEPAGE', function( event ) {
 			var touches = event.originalEvent.touches;
 			if ( touches && touches.length ) {
 				startX = touches[0].pageX;
 				startY = touches[0].pageY;
 
 
-				$sectionsContainer.on( 'touchmove.onepage', function( event ) {
+				$sectionsContainer.on( 'touchmove.ONEPAGE', function( event ) {
 
 					var touches = event.originalEvent.touches;
 					if ( touches && touches.length ) {
@@ -391,7 +399,7 @@ APP = ( function ( APP, $, window, document ) {
 
 						}
 						if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
-							$sectionsContainer.off( 'touchmove.onepage' );
+							$sectionsContainer.off( 'touchmove.ONEPAGE' );
 						}
 					}
 
@@ -399,6 +407,8 @@ APP = ( function ( APP, $, window, document ) {
 			}	
 		});
 
+		
+		
 
 		
     };

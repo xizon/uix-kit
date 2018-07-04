@@ -11,7 +11,7 @@ APP = ( function ( APP, $, window, document ) {
 	APP.ACCORDION.version       = '0.0.1';
     APP.ACCORDION.documentReady = function( $ ) {
 
-		$( '.custom-accordion' ).each( function() {
+		$( '.uix-accordion' ).each( function() {
 			var $this           = $( this ),
 				aEvent          = $this.data( 'event' ),
 				firstShow       = $this.data( 'first-show' ),

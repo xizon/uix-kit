@@ -12,13 +12,13 @@
 
   
   
-    <div class="wrapper">
+    <div class="uix-wrapper">
     
         <!-- Header Area
         ============================================= -->      
-        <header class="header-area header-overlay">
+        <header class="uix-header__container uix-header__container--overlay">
             
-             <div class="header-container">
+             <div class="uix-header">
                  <div class="container">
                  
                         @@include('../00.global/include-brand.html')
@@ -31,14 +31,14 @@
                   </div>
                   <!-- .container end -->
                   
-                  <div class="clear"></div>
+                  <div class="uix-clear"></div>
              </div>
         
         </header>
     
 		<!-- Section Navigation
 		============================================= --> 
-		<ol class="custom-sidefixed-menu"> 
+		<ol class="uix-menu-sidefixed"> 
 			<li><a href="ajax-content-page-1.html" data-ajax-page="true" data-index="0"><span>01</span><strong>Page 1</strong></a></li>
 			<li><a href="ajax-content-page-2.html" data-ajax-page="true" data-index="1"><span>02</span><strong>Page 2</strong></a></li>
 			<li><a href="ajax-content-page-3.html" data-ajax-page="true" data-index="2"><span>03</span><strong>Page 3</strong></a></li>
@@ -48,19 +48,19 @@
        	
         <!-- Page Container
         ============================================= --> 
-        <div class="custom-fullpage-ajax-container">
+        <div class="uix-ajax-load__fullpage-container">
         
-			<div class="ajax-loader"><span></span></div>
+			<div class="uix-ajax-load__loader"><span></span></div>
             
-            <section class="space-none height-100 mobile-still" style="background: #b5bdc8; background: linear-gradient(to bottom, #b5bdc8 0%,#28343b 100%);">
+            <section class="uix-section--no-spacing uix-height--100 is-mobile-still" style="background: #b5bdc8; background: linear-gradient(to bottom, #b5bdc8 0%,#28343b 100%);">
             
 				<!-- ajax container -->
-				<div class="ajax-container" data-ajax-page-id="0">
+				<div class="ajax-container" data-ajax-method="POST" data-ajax-page-id="0">
 
 				
-					<div class="js-ajax-content-wrapper">
+					<div class="js-uix-ajax-load__container">
 				    
-					    <div class="ajax-content-wrapper">
+					    <div class="uix-ajax-load__container">
 					    
 							<!-- Your Special Content Here
 							========================= -->
@@ -71,7 +71,7 @@
 										<div class="col-md-10 col-md-offset-1">
 
 
-												<div class="entry-content list-normal table-normal">
+												<div class="entry-content uix-list uix-list--normal uix-table uix-table--bordered">
 
 													<h1>AJAX Content 1</h1>
 
@@ -103,7 +103,7 @@
 					    
 					    
 						</div>
-						<!-- /.ajax-content-wrapper -->
+						<!-- /.uix-ajax-load__container -->
 					
 
 
@@ -116,7 +116,7 @@
               	  
         
 		</div>
-        <!-- /.custom-fullpage-container -->
+        <!-- /.uix-ajax-load__fullpage-container -->
         
      
 		

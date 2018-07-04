@@ -1,93 +1,93 @@
 /* ====================================================== 
    <!-- Dotted Line --> 
 /* ====================================================== */
-.dotted-line-s {
+.uix-dotted-line {
 	display: inline-block;
 	margin: 1.5rem;
 	height: 300px;
-	width: 1px;
-	background: $primary-text-color1;
-	background: linear-gradient(to bottom, $primary-text-color1 10%, rgba(255, 255, 255, 0) 0%);
-	background-position: left;
-	background-size: 1px 8px;
-	background-repeat: repeat-y;
 	
-	&.horizontal {
-		background: linear-gradient(to right, $primary-text-color1 10%, rgba(255, 255, 255, 0) 0%);
-		background-position: top;
-		background-size: 8px 1px;
-		background-repeat: repeat-x;
-		width: 300px;
-		height: 1px;
-	}
 	
-	&.circle {
-		background: radial-gradient(circle, $primary-text-color1 1.5px, transparent 2px);
-		background-position: top;
-		background-size: 12px 6px;
+	/* Small Size */
+	&.uix-dotted-line--s {
+
+		width: 1px;
+		background: $primary-text-color1;
+		background: linear-gradient(to bottom, $primary-text-color1 10%, rgba(255, 255, 255, 0) 0%);
+		background-position: left;
+		background-size: 1px 8px;
+		background-repeat: repeat-y;
+
+		&.is-horizontal {
+			background: linear-gradient(to right, $primary-text-color1 10%, rgba(255, 255, 255, 0) 0%);
+			background-position: top;
+			background-size: 8px 1px;
+			background-repeat: repeat-x;
+			width: 300px;
+			height: 1px;
+		}
+
+		&.is-circle {
+			background: radial-gradient(circle, $primary-text-color1 1.5px, transparent 2px);
+			background-position: top;
+			background-size: 12px 6px;
+		}
+
 	}
+
+	/* Medium Size */
+	&.uix-dotted-line--m {
+		width: 3px;
+		background: $primary-text-color1;
+		background: linear-gradient(to bottom, $primary-text-color1 20%, rgba(255, 255, 255, 0) 0%);
+		background-position: left;
+		background-size: 3px 10px;
+		background-repeat: repeat-y;
+
+		&.is-horizontal {
+			background: linear-gradient(to right, $primary-text-color1 20%, rgba(255, 255, 255, 0) 0%);
+			background-position: top;
+			background-size: 10px 3px;
+			background-repeat: repeat-x;
+			width: 300px;
+			height: 3px;
+		}
+
+		&.is-circle {
+			background: radial-gradient(circle, $primary-text-color1 1.5px, transparent 2px);
+			background-position: top;
+			background-size: 12px 6px;
+		}
+
+
+	}
+
+	/* Large Size */
+	&.uix-dotted-line--l {
+		width: 6px;
+		background: $primary-text-color1;
+		background: linear-gradient(to bottom, $primary-text-color1 30%, rgba(255, 255, 255, 0) 0%);
+		background-position: left;
+		background-size: 6px 12px;
+		background-repeat: repeat-y;
+
+
+		&.is-horizontal {
+			background: linear-gradient(to right, $primary-text-color1 30%, rgba(255, 255, 255, 0) 0%);
+			background-position: top;
+			background-size: 12px 6px;
+			background-repeat: repeat-x;
+			width: 300px;
+			height: 6px;
+		}
+
+
+		&.is-circle {
+			background: radial-gradient(circle, $primary-text-color1 1.5px, transparent 2px);
+			background-position: top;
+			background-size: 12px 6px;
+		}
+
+	}
+
 	
 }
-
-.dotted-line-m {
-	display: inline-block;
-	margin: 1.5rem;
-	height: 300px;
-	width: 3px;
-	background: $primary-text-color1;
-	background: linear-gradient(to bottom, $primary-text-color1 20%, rgba(255, 255, 255, 0) 0%);
-	background-position: left;
-	background-size: 3px 10px;
-	background-repeat: repeat-y;
-	
-	&.horizontal {
-		background: linear-gradient(to right, $primary-text-color1 20%, rgba(255, 255, 255, 0) 0%);
-		background-position: top;
-		background-size: 10px 3px;
-		background-repeat: repeat-x;
-		width: 300px;
-		height: 3px;
-	}
-	
-	&.circle {
-		background: radial-gradient(circle, $primary-text-color1 1.5px, transparent 2px);
-		background-position: top;
-		background-size: 12px 6px;
-	}
-	
-	
-}
-
-
-
-
-.dotted-line-l {
-	display: inline-block;
-	margin: 1.5rem;
-	height: 300px;
-	width: 6px;
-	background: $primary-text-color1;
-	background: linear-gradient(to bottom, $primary-text-color1 30%, rgba(255, 255, 255, 0) 0%);
-	background-position: left;
-	background-size: 6px 12px;
-	background-repeat: repeat-y;
-	
-	
-	&.horizontal {
-		background: linear-gradient(to right, $primary-text-color1 30%, rgba(255, 255, 255, 0) 0%);
-		background-position: top;
-		background-size: 12px 6px;
-		background-repeat: repeat-x;
-		width: 300px;
-		height: 6px;
-	}
-	
-	
-	&.circle {
-		background: radial-gradient(circle, $primary-text-color1 1.5px, transparent 2px);
-		background-position: top;
-		background-size: 12px 6px;
-	}
-	
-}
-

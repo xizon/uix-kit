@@ -1,15 +1,15 @@
 /* ====================================================== 
    <!-- Maintain Aspect Ratio List --> 
 /* ====================================================== */
-.list-maintain-aspect-ratio {
+.uix-list-aspect-ratio {
 	
 	padding: 0 3rem;
 	
-	.content {
+	.uix-list-aspect-ratio__content {
 		padding: 3rem;
 	}
 	
-	.item {
+	.uix-list-aspect-ratio__item {
 		display: block;
 		@include transition-default();
 		background: #212121;
@@ -22,7 +22,7 @@
 
 		img,
 		i,
-		.disable {
+		.disabled {
 			@include transition-default();
 			position: absolute;
 			top: 50%;
@@ -36,7 +36,7 @@
 			color: rgba(255,255,255,1);
 		}
 		
-		.disable {
+		.disabled {
 			opacity: 1;
 			z-index: 2;
 			color: rgba(255,255,255,.3);
@@ -52,7 +52,7 @@
 				opacity: 1;
 			}
 			
-			.disable {
+			.disabled {
 				opacity: 0;
 			}	
 			
@@ -62,27 +62,27 @@
 
 
 @media all and (max-width: 768px) {
-	.list-maintain-aspect-ratio {
+	.uix-list-aspect-ratio {
 
 		padding: 0;
 		padding-right: 15px;
 		
-		.item {
+		.uix-list-aspect-ratio__item {
 			
 			img,
 			i,
-			.disable {
+			.disabled {
 				width: 2.5rem;
 				font-size: 2.5rem;
 			}	
 		}
 		
-		.seamless-col-4 {
+		.uix-core-grid__col-4 {
 			width: 33.333333333333%;
 			float: left;
 		}
 		
-		.content {
+		.uix-list-aspect-ratio__content {
 			padding: .5rem;
 		}
 

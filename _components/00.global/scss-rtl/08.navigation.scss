@@ -2,7 +2,7 @@
    <!-- Navigation -->                                      
 /* ====================================================== */
 
-.menu-container:not(.mobile) {
+.uix-menu__container:not(.mobile) {
     float: left;
 	
 	
@@ -11,7 +11,7 @@
 	 1. Primary Menu
 	 ---------------------------
 	 */ 
-	ul.menu-main {
+	ul.uix-menu {
 	    float: right;
 		
 	    > li {
@@ -55,7 +55,7 @@
 		
 		/* 
 		 ---------------------------
-		 2. Sub Menu
+		 2. Sub Menu (Using WordPress default class name )
 		 ---------------------------
 		 */ 
 	    ul.sub-menu {
@@ -83,7 +83,7 @@
 	    padding-right: 1.159375rem !important;
 	}
 
-	ul.menu-main ul.sub-menu .nav-arrow {
+	ul.uix-menu ul.sub-menu .uix-menu__arrow {
 	    right: auto;
 	    left: 1.159375rem;
 	}	
@@ -93,7 +93,7 @@
 	 4. Dropdown Arrow
 	 ---------------------------
 	 */ 
-	.nav-arrow {
+	.uix-menu__arrow {
 	    right: auto;
 	    left: 0.284375rem;
 	}
@@ -104,8 +104,8 @@
 
 @media all and (max-width: 1250px) {
 	
-	.menu-container:not(.mobile) {
-		ul.menu-main > li {
+	.uix-menu__container:not(.mobile) {
+		ul.uix-menu > li {
 			margin-right: auto;
 			margin-left: 1.125rem;
 		}	

@@ -7,15 +7,15 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.MULTI_ITEMS_CAROUSEL               = APP.MULTI_ITEMS_CAROUSEL || {};
-	APP.MULTI_ITEMS_CAROUSEL.version       = '0.0.1';
+	APP.MULTI_ITEMS_CAROUSEL.version       = '0.0.2';
     APP.MULTI_ITEMS_CAROUSEL.documentReady = function( $ ) {
 
-		$( '.custom-multi-items-carousel' ).each( function()  {
+		$( '.uix-multi-carousel' ).each( function()  {
 
 			var $carouselWrapper   = $( this ),
 				goSteps            = 0,
-				$carousel          = $carouselWrapper.find( '.items' ),
-				$carouselItem      = $carouselWrapper.find( '.items > .item' ),
+				$carousel          = $carouselWrapper.find( '.uix-multi-carousel__items' ),
+				$carouselItem      = $carouselWrapper.find( '.uix-multi-carousel__items > div' ),
 				itemTotal          = $carouselItem.length,
 				amountVisible      = $carouselWrapper.data( 'cus-carousel-show' ),
 				carouselItemWidth  = $carousel.width()/amountVisible,
@@ -42,10 +42,10 @@ APP = ( function ( APP, $, window, document ) {
 				carouselSpeed = 250;
 			}
 			if( typeof carouselNext === typeof undefined ) {
-				carouselNext = '.next';
+				carouselNext = '.uix-multi-carousel__controls--next';
 			}
 			if( typeof carouselPrev === typeof undefined ) {
-				carouselPrev = '.prev';
+				carouselPrev = '.uix-multi-carousel__controls--prev';
 			}
 			
 
@@ -80,7 +80,7 @@ APP = ( function ( APP, $, window, document ) {
 
 			//default button status
 			if ( $carouselItem.first().data( 'id' ) == 1 && !carouselLoop ) {
-				$( carouselPrev ).addClass( 'disable' );
+				$( carouselPrev ).addClass( 'disabled' );
 			}	
 
 			/* 
@@ -232,8 +232,8 @@ APP = ( function ( APP, $, window, document ) {
 			function itemUpdates( wrapper, curBtn, nextBtnStr, prevBtnStr, steps ) {
 
 		
-				var $curWrapper = wrapper.children( '.items' ),  //Default: $carousel
-					$curItems   = $curWrapper.find( '> .item' ), //Default: $carouselItem
+				var $curWrapper = wrapper.children( '.uix-multi-carousel__items' ),  //Default: $carousel
+					$curItems   = $curWrapper.find( '> div' ), //Default: $carouselItem
 					isEnd       = false,
 					isFirst     = false,
 					isMid       = false;
@@ -253,12 +253,12 @@ APP = ( function ( APP, $, window, document ) {
 				//The state of the control button
 				if ( !carouselLoop ) {
 					
-					if ( isEnd ) $( nextBtnStr ).addClass( 'disable' );
-					if ( isFirst ) $( prevBtnStr ).addClass( 'disable' );
+					if ( isEnd ) $( nextBtnStr ).addClass( 'disabled' );
+					if ( isFirst ) $( prevBtnStr ).addClass( 'disabled' );
 					
 					if ( isMid ) {
-						$( nextBtnStr ).removeClass( 'disable' );
-						$( prevBtnStr ).removeClass( 'disable' );
+						$( nextBtnStr ).removeClass( 'disabled' );
+						$( prevBtnStr ).removeClass( 'disabled' );
 					}
 					
 					
@@ -339,11 +339,11 @@ APP = ( function ( APP, $, window, document ) {
 //	  APP.MULTI_ITEMS_CAROUSEL.version       = '0.0.1';
 //    APP.MULTI_ITEMS_CAROUSEL.documentReady = function( $ ) {
 //
-//		$( '.custom-multi-items-carousel' ).each( function()  {
+//		$( '.uix-multi-carousel' ).each( function()  {
 //
 //			var $carouselWrapper   = $( this ),
-//				$carousel          = $carouselWrapper.find( '.items' ),
-//				$carouselItem      = $carouselWrapper.find( '.items > .item' ),
+//				$carousel          = $carouselWrapper.find( '.uix-multi-carousel__items' ),
+//				$carouselItem      = $carouselWrapper.find( '.uix-multi-carousel__items > div' ),
 //				carouselItemTotal  = $carouselItem.length,
 //				showcarouselItem   = $carouselWrapper.data( 'cus-carousel-show' ),
 //				carouselItemWidth  = $carousel.width()/showcarouselItem,
@@ -368,10 +368,10 @@ APP = ( function ( APP, $, window, document ) {
 //				carouselSpeed = 250;
 //			}
 //			if( typeof carouselNext === typeof undefined ) {
-//				carouselNext = '.next';
+//				carouselNext = '.uix-multi-carousel__controls--next';
 //			}
 //			if( typeof carouselPrev === typeof undefined ) {
-//				carouselPrev = '.prev';
+//				carouselPrev = '.uix-multi-carousel__controls--prev';
 //			}
 //
 //
@@ -398,7 +398,7 @@ APP = ( function ( APP, $, window, document ) {
 //
 //			//default button status
 //			if ( $carouselItem.first().data( 'id' ) == 1 && !carouselLoop ) {
-//				$( carouselPrev ).addClass( 'disable' );
+//				$( carouselPrev ).addClass( 'disabled' );
 //			}	
 //
 //			/* 
@@ -481,7 +481,7 @@ APP = ( function ( APP, $, window, document ) {
 //				
 //				var $btn        = $( this ),
 //					$curWrapper = $( e.data[0] ),
-//					$curItems   = $curWrapper.children().find( '> .item' ),
+//					$curItems   = $curWrapper.children().find( '> div' ),
 //					//Protection button is not triggered multiple times.
 //					btnLock     = $btn.data( 'click' );
 //				
@@ -504,7 +504,7 @@ APP = ( function ( APP, $, window, document ) {
 //				
 //				var $btn        = $( this ),
 //					$curWrapper = $( e.data[0] ),
-//					$curItems   = $curWrapper.children().find( '> .item' ),
+//					$curItems   = $curWrapper.children().find( '> div' ),
 //					//Protection button is not triggered multiple times.
 //					btnLock     = $btn.data( 'click' );
 //
@@ -544,7 +544,7 @@ APP = ( function ( APP, $, window, document ) {
 //					isEnd = true;
 //				}
 //				if ( (carouselItemTotal - showcarouselItem) == $curItems.first().data( 'id' ) && !carouselLoop ) {
-//					if ( curBtn ) curBtn.addClass( 'disable' );
+//					if ( curBtn ) curBtn.addClass( 'disabled' );
 //				}
 //				
 //				
@@ -556,7 +556,7 @@ APP = ( function ( APP, $, window, document ) {
 //				//Reset prevents code from duplicate run
 //				var preventEvent = function() {
 //					if ( carouselPrev && carouselPrev != '' ) {
-//						$( carouselPrev ).data( 'click', 0 ).removeClass( 'disable' );
+//						$( carouselPrev ).data( 'click', 0 ).removeClass( 'disabled' );
 //					}
 //
 //					if ( curBtn ) curBtn.data( 'click', 0 );
@@ -684,7 +684,7 @@ APP = ( function ( APP, $, window, document ) {
 //					isEnd = true;
 //				}
 //				if ( 2 == $curItems.first().data( 'id' ) && !carouselLoop ) {
-//					if ( curBtn ) curBtn.addClass( 'disable' );
+//					if ( curBtn ) curBtn.addClass( 'disabled' );
 //				}
 //				
 //				
@@ -696,7 +696,7 @@ APP = ( function ( APP, $, window, document ) {
 //				//Reset prevents code from duplicate run
 //				var preventEvent = function() {
 //					if ( carouselNext && carouselNext != '' ) {
-//						$( carouselNext ).data( 'click', 0 ).removeClass( 'disable' );
+//						$( carouselNext ).data( 'click', 0 ).removeClass( 'disabled' );
 //					}
 //
 //					if ( curBtn ) curBtn.data( 'click', 0 );

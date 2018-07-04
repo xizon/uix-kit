@@ -10,70 +10,93 @@
 
 $dot-size: 20px;
 
-/* 
- ---------------------------
- 1. Ripple effect 1
- ---------------------------
- */ 
 
-.dot-ripple-line {
+.uix-dot-ripple {
 	position: relative;
 	display: inline-block;
 	background: $highlight-color1;
 	height: $dot-size;
 	width: $dot-size;
 	border-radius: 100%;
-
-	&:before,
-	&:after {
-		position: absolute;
-		content: '';
-		border-radius: inherit;
-		height: 0px;
-		width: 0px;
-		box-shadow: 0 0 0 2px $highlight-color1;
-		left: $dot-size/2;
-		top: $dot-size/2;
-		transform: translate(-50%, -50%);
-		
-	}
-
-	&:after {
-		height: 7px;
-		width: 7px;
-		box-shadow: 0 0 0 2px $highlight-color2;
-		
-	}
 	
-	&:not(.anim) {
-		&:before {
+	
+	/* 
+	 ---------------------------
+	 1. Ripple effect 1
+	 ---------------------------
+	 */ 
+	&.uix-dot-ripple--line {
+
+		&:before,
+		&:after {
 			position: absolute;
 			content: '';
 			border-radius: inherit;
-			height: #{$dot-size + 10};
-			width: #{$dot-size + 10};
+			height: 0px;
+			width: 0px;
 			box-shadow: 0 0 0 2px $highlight-color1;
 			left: $dot-size/2;
 			top: $dot-size/2;
 			transform: translate(-50%, -50%);
 
-		}	
-	}
-	
-	&.anim {
-		&:before {
-		    animation: dotPulseInner 2s infinite ease-out;	
 		}
+
 		&:after {
-			animation: dotPpulseOuter 2s infinite ease-out;
-		}		
-		
+			height: 7px;
+			width: 7px;
+			box-shadow: 0 0 0 2px $highlight-color2;
+
+		}
+
+		&:not(.is-animating) {
+			&:before {
+				position: absolute;
+				content: '';
+				border-radius: inherit;
+				height: #{$dot-size + 10};
+				width: #{$dot-size + 10};
+				box-shadow: 0 0 0 2px $highlight-color1;
+				left: $dot-size/2;
+				top: $dot-size/2;
+				transform: translate(-50%, -50%);
+
+			}	
+		}
+
+		&.is-animating {
+			&:before {
+				animation: uix-cssAnim--dotPulseInner 2s infinite ease-out;	
+			}
+			&:after {
+				animation: uix-cssAnim--dotPpulseOuter 2s infinite ease-out;
+			}		
+
+		}
+
+
 	}
 	
 
+	/* 
+	 ---------------------------
+	 2. Ripple Effect 2
+	 ---------------------------
+	 */ 
+
+	&.uix-dot-ripple--bg {
+
+		box-shadow: 0 0 0 5px rgba($highlight-color1, 0.4),
+					0 0 0 10px rgba($highlight-color1, 0.1);
+
+		&.is-animating {
+			animation: uix-cssAnim--dotRipple 2s linear infinite;
+		}
+	}
+	
 }
 
-@keyframes dotPulseInner {
+
+@keyframes uix-cssAnim--dotPulseInner {
 	0% {
 		height: 0;
 		width: 0;
@@ -91,7 +114,7 @@ $dot-size: 20px;
 		opacity: 0;
 	}
 }
-@keyframes dotPpulseOuter {
+@keyframes uix-cssAnim--dotPpulseOuter {
 	0% {
 		height: 7px;
 		width: 7px;
@@ -108,29 +131,8 @@ $dot-size: 20px;
 }
 
 
-/* 
- ---------------------------
- 2. Ripple Effect 2
- ---------------------------
- */ 
 
-.dot-ripple-bg {
-	position: relative;
-	display: inline-block;
-	background: $highlight-color1;
-	height: $dot-size;
-	width: $dot-size;
-	border-radius: 100%;
-	
-	box-shadow: 0 0 0 5px rgba($highlight-color1, 0.4),
-	            0 0 0 10px rgba($highlight-color1, 0.1);
-	
-	&.anim {
-		animation: dotRipple 2s linear infinite;
-	}
-}
-
-@keyframes dotRipple {
+@keyframes uix-cssAnim--dotRipple {
     0% {
 		box-shadow: 0 0 0 5px rgba($highlight-color1, 0.4),
 					0 0 0 10px rgba($highlight-color1, 0.1);

@@ -11,7 +11,7 @@ APP = ( function ( APP, $, window, document ) {
 	APP.DROPDOWN_MENU2.version       = '0.0.1';
     APP.DROPDOWN_MENU2.documentReady = function( $ ) {
 
-		var $verticalMenuLi = $( '.custom-vertical-menu li' );
+		var $verticalMenuLi = $( '.uix-vertical-menu li' );
 		
 		$verticalMenuLi.find( '> a' ).on( 'click', function( e ) {
 			e.preventDefault();
@@ -24,11 +24,11 @@ APP = ( function ( APP, $, window, document ) {
         });
 		
 		//Add multilevel indicator arrow
-        $verticalMenuLi.find( '> a' ).append( '<span class="arrow"></span>' );
+        $verticalMenuLi.find( '> a' ).append( '<span class="uix-vertical-menu__arrow"></span>' );
 		$verticalMenuLi.each( function() {
 			var len = $( this ).find( 'ul' ).length;
 			if ( len == 0 ) {
-				$( this ).children( 'a' ).children( '.arrow' ).hide();
+				$( this ).children( 'a' ).children( '.uix-vertical-menu__arrow' ).hide();
 			}
 		});
 		

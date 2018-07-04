@@ -4,9 +4,8 @@
 
 /*
  * 1. Spacing
- * 2. Text
- * 3. Main Content
- * 4. Meta Info
+ * 2. Main Content
+ * 3. Meta Info
 */
 
 
@@ -17,40 +16,39 @@
  ---------------------------
  */ 
 
-.entry-section {
+.uix-entry-box {
 	padding: 2.84375rem 0 1.75rem;
 	
-	&.entry-section-top {
+	&.uix-entry-box--top {
 		padding: 2.84375rem 0 0;
 	}
-	.entry-title {
+	
+	&.uix-entry-box--mark a {
+		color: $highlight-color1;
+
+		&:hover {
+			color: $highlight-color2;
+		}
+	}
+	
+	.uix-entry-box__title {
 		padding-bottom: 1.75rem;
 	}
 }
 
 @media all and (max-width: 768px) {
-	.entry-section .entry-title {
-	    padding-bottom: 0.4375rem;
+	.uix-entry-box {
+		.uix-entry-box__title {
+			padding-bottom: 0.4375rem;
+		}
 	}
 }
 
 
-/* 
- ---------------------------
- 2. Text
- ---------------------------
- */ 
-.entry-mark a {
-	color: $highlight-color1;
-	
-	&:hover {
-	    color: $highlight-color2;
-	}
-}
 
 /* 
  ---------------------------
- 3. Main Content
+ 2. Main Content
  ---------------------------
  */ 
 .entry-content {
@@ -67,48 +65,43 @@
 
 /* 
  ---------------------------
- 4. Meta Info
+ 3. Meta Info
  ---------------------------
  */ 
-.entry-meta {
+ul.uix-entry-meta {
+	width: 500px;
+	margin: 0 auto;
+	display: block;
 	color: #999;
 	font-style: italic;
 	font-size: 0.75rem;
 	line-height: 1.33333333333;
-}
-
-ul.entry-meta {
-	width: 500px;
-	margin: 0 auto;
-	display: block;
-}
-
-.entry-meta {
+	
 	li {
 		display: inline-block;
 		/*require*/
 		margin-bottom: 0.62890625rem;
-		
+
 		&::before {
 			content: '/';
 			display: inline-block;
 			margin-right: 0.4375rem;
 		}
-		
+
 		a {
 			color: #999;
 		}
-		
-	}
-	
 
-	&.wrap li {
+	}
+
+
+	&.uix-entry-meta--wrap li {
 		display: block;
 
 		&::before {
 			display: none;
 		}
-		
+
 		strong {
 			padding-right: 0.4375rem;
 			font-size: 0.875rem;
@@ -121,7 +114,7 @@ ul.entry-meta {
 			display: inline-block;
 			width: calc( 100% - 130px - 0.875rem );
 		}
-	
+
 		a {
 			color: $highlight-color1;
 
@@ -129,14 +122,13 @@ ul.entry-meta {
 				color: $highlight-color2;
 			}
 		}
-		
+
 	}
 
-	
-	&:not(.wrap) li:first-child::before {
+
+	&:not(.uix-entry-meta--wrap) li:first-child::before {
 		display: none;
 	}
 
-	
 	
 }

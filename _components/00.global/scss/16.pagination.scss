@@ -14,7 +14,7 @@
  1. Default
  ---------------------------
  */ 
-.pagination-container {
+.uix-pagination__container {
 	margin-top: 2.84375rem;
 	
 	&::before {
@@ -29,65 +29,66 @@
 		clear: both;
 	}
 	
-	ul {
+	ul.uix-pagination {
 		font-size: 0; /*Fighting the Space Between Inline Block Elements*/
-	}
-	
-	
-	li {
-		display: inline-block;
-		font-size: 1rem;/*Fighting the Space Between Inline Block Elements*/
-	}
-	
-	li,
-	div {
 		
-		display: inline-block;
-		
-		a, 
-		&.active > span, 
-		> span.current {
+		li {
 			display: inline-block;
-			width: 3.125rem;
-			height: 3.125rem;
-			padding-top: 0.25rem;
-			text-align: center;
-			background: none;
-			border: none;
-			color: $primary-text-color1;
-			font-variant-ligatures: common-ligatures;
-			/*Ligatures and contextual forms are ways of combining glyphs to produce more harmonized forms.*/
-			margin-bottom: 0;
-			font-size: 0.875rem;
-			line-height: 3.25;
-			margin-top: 0;
-			margin-bottom: 2.06818181818rem;
-		}	
-		
-		a:hover {
-			background: #efefef;
-			color: #232323;	
+			font-size: 1rem;/*Fighting the Space Between Inline Block Elements*/
 		}
-		
-		&.active {
 
-			a {
-				color: #989898;
-				font-style: italic;
-				&:hover {
-					background: #e7e7e7;
-					color: #232323;
+		li,
+		div {
+
+			display: inline-block;
+
+			a, 
+			&.active > span, 
+			> span.current {
+				display: inline-block;
+				width: 3.125rem;
+				height: 3.125rem;
+				padding-top: 0.25rem;
+				text-align: center;
+				background: none;
+				border: none;
+				color: $primary-text-color1;
+				font-variant-ligatures: common-ligatures;
+				/*Ligatures and contextual forms are ways of combining glyphs to produce more harmonized forms.*/
+				margin-bottom: 0;
+				font-size: 0.875rem;
+				line-height: 3.25;
+				margin-top: 0;
+				margin-bottom: 2.06818181818rem;
+			}	
+
+			a:hover {
+				background: #efefef;
+				color: #232323;	
+			}
+
+			&.active {
+
+				a {
+					color: #989898;
+					font-style: italic;
+					&:hover {
+						background: #e7e7e7;
+						color: #232323;
+					}
 				}
-			}
 
-			> span {
-				color: #989898;
-				font-style: italic;
-			}
+				> span {
+					color: #989898;
+					font-style: italic;
+				}
+			}	
+
 		}	
+		
 		
 	}
-	
+
 
 }
 
@@ -97,7 +98,7 @@
  2. Paginate WordPress Posts
  ---------------------------
  */ 
-.page-links {
+.uix-page-links {
 	margin: 0.875rem 0;
 	font-weight: 600;
 	

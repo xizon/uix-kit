@@ -20,7 +20,7 @@ APP = ( function ( APP, $, window, document ) {
 		if ( windowWidth <= 768 ) return false;
 		
 		
-		$( '.custom-accordion-img' ).each( function() {
+		$( '.uix-accordion-img' ).each( function() {
 			var $this           = $( this ),
 				aEvent          = $this.data( 'event' ),
 				outReset        = $this.data( 'out-reset' ),
@@ -47,6 +47,7 @@ APP = ( function ( APP, $, window, document ) {
 			//Initialize the width of each item
 			itemInit();
 			
+			
 
 			$li.on( aEvent, function( e ) {
 				//Prevents further propagation of the current event in the capturing and bubbling phases.
@@ -54,7 +55,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 				
 				//Apply click method to outer div but not inner div
-				if ( e.target.className == 'outer' ) {
+				if ( e.target.className == 'uix-accordion-img__content' ) {
 					
 					if ( $( this ).hasClass( 'active' ) ) {
 						$( this ).addClass( 'active' );
@@ -86,6 +87,7 @@ APP = ( function ( APP, $, window, document ) {
 				}); 		
 				
 			}	
+			
 			
 	
 			/*

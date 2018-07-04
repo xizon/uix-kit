@@ -39,13 +39,13 @@ APP = ( function ( APP, $, window, document ) {
 		 */
         function initslides( sliderWrapper, thisSlider, fireState ) {
 
-			var prefix            = 'custom-theme',
+			var prefix            = 'uix-flexslider__',
 				curIndex          = thisSlider.currentSlide,
 				count             = thisSlider.count,
-				activeClass       = prefix+'-flex-active-slide',
+				activeClass       = prefix + 'item--active',
 				prevClass         = activeClass + '-prev',
 				nextClass         = activeClass + '-next',
-				$items            = thisSlider.find( '.item' ),
+				$items            = thisSlider.find( '.'+prefix+'item' ),
 				$current          = thisSlider.slides.eq( curIndex ),
 				$prev             = thisSlider.slides.eq( curIndex - 1 ),
 				$next             = thisSlider.slides.eq( thisSlider.animatingTo ),
@@ -112,8 +112,8 @@ APP = ( function ( APP, $, window, document ) {
 						pimg       = '',
 						nimg       = '',
 						$plink     = $( dataPNThumbs+'> a' ),
-						$plinkPrev = $plink.filter( '.thumb-prev' ),
-						$plinkNext = $plink.filter( '.thumb-next' );
+						$plinkPrev = $plink.filter( '.uix-flexslider__arrows-thumb--prev' ),
+						$plinkNext = $plink.filter( '.uix-flexslider__arrows-thumb--next' );
 
 					$plinkPrev.removeClass( 'disabled' );
 					$plinkNext.removeClass( 'disabled' );
@@ -178,8 +178,8 @@ APP = ( function ( APP, $, window, document ) {
 				//Thumbnail ControlNav Pattern
 				//-------------------------------------
 				if ( dataNhumbs && dataNhumbs != '' ) {
-					$( '.custom-theme-flexslider-thumbs'+dataNhumbs+' > ul > li' ).removeClass( 'active' );
-					$( '.custom-theme-flexslider-thumbs'+dataNhumbs+' > ul > li' ).eq( curIndex ).addClass( 'active' );			
+					$( '.uix-flexslider__thumbs'+dataNhumbs+' > ul > li' ).removeClass( 'active' );
+					$( '.uix-flexslider__thumbs'+dataNhumbs+' > ul > li' ).eq( curIndex ).addClass( 'active' );			
 				}
 
 
@@ -288,13 +288,13 @@ APP = ( function ( APP, $, window, document ) {
 				if ( dataParallax ) {
 				
 					
-					var dir = 'left';
+					var dir = 'uix-flexslider__item--left';
 
 					$.each( thisSlider.slides, function( i, item ) {
 						var el = $( item );
-						el.removeClass( 'right left' );
-						if (i >= thisSlider.animatingTo && dir !== 'right') {
-							dir = 'right';
+						el.removeClass( 'uix-flexslider__item--right uix-flexslider__item--left' );
+						if (i >= thisSlider.animatingTo && dir !== 'uix-flexslider__item--right') {
+							dir = 'uix-flexslider__item--right';
 						} else {
 							el.addClass( dir );
 						}
@@ -319,7 +319,7 @@ APP = ( function ( APP, $, window, document ) {
 		 * @return {void}                    - The constructor.
 		 */
 		function videoEmbedInit( wrapper, play ) {
-			wrapper.find( '.slider-video-embed' ).each( function()  {
+			wrapper.find( '.uix-video__slider' ).each( function()  {
 				var $this          = $( this ),
 					videoWrapperW  = $this.closest( '[data-embed-video-wrapper]' ).width(),
 					videoWrapperH  = $this.closest( '[data-embed-video-wrapper]' ).height(),
@@ -364,7 +364,7 @@ APP = ( function ( APP, $, window, document ) {
 
 				//Display cover and play buttons when some mobile device browsers cannot automatically play video
 				if ( $( '#' + coverPlayBtnID ).length == 0 ) {
-					$( '<div id="'+coverPlayBtnID+'" class="web-video-embed-cover"><span class="cover-show" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="cover-play"></span></div>' ).insertBefore( $this );
+					$( '<div id="'+coverPlayBtnID+'" class="uix-video__cover"><span class="uix-video__cover-placeholder" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="cover-play"></span></div>' ).insertBefore( $this );
 
 
 					var btnEv = ( Modernizr.touchevents ) ? 'touchstart' : 'click';
@@ -382,7 +382,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 				//Add replay button to video 
 				if ( $replayBtn.length == 0 ) {
-					$this.after( '<span class="web-video-replay" id="'+curVideoID+'-replay-btn"></span>' );
+					$this.after( '<span class="uix-video__btn-play" id="'+curVideoID+'-replay-btn"></span>' );
 				}
 				
 				
@@ -541,7 +541,7 @@ APP = ( function ( APP, $, window, document ) {
 		 */
         function slidesExDraggable( $obj ) {
 			
-			var $dragDropTrigger = $obj.find( '.custom-theme-slides > div.item' );
+			var $dragDropTrigger = $obj.find( '.uix-flexslider__inner > div.uix-flexslider__item' );
 			
 			//Make the cursor a move icon when a user hovers over an item
 			$dragDropTrigger.css( 'cursor', 'move' );
@@ -655,9 +655,9 @@ APP = ( function ( APP, $, window, document ) {
 		 */
         function initslidesWithNavThumb( slider, navThumbClass ) {
 
-				$( '.custom-theme-flexslider-thumbs'+navThumbClass+' > ul > li' ).on( 'click', function() {
+				$( '.uix-flexslider__thumbs'+navThumbClass+' > ul > li' ).on( 'click', function() {
 
-					$( '.custom-theme-flexslider-thumbs'+navThumbClass+' > ul > li' ).removeClass( 'active' );
+					$( '.uix-flexslider__thumbs'+navThumbClass+' > ul > li' ).removeClass( 'active' );
 					$( this ).addClass( 'active' );
 					slider.flexslider( $( this ).index() );
 
@@ -707,7 +707,7 @@ APP = ( function ( APP, $, window, document ) {
          Initialize slideshow
 		 ---------------------------
 		 */
-		var $sliderDefault = $( '.custom-theme-flexslider' );
+		var $sliderDefault = $( '.uix-flexslider' );
 		$sliderDefault.each( function()  {
 			var $this             = $( this ),
 				dataSpeed         = $this.data( 'speed' ),
@@ -733,7 +733,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			//Fires local videos asynchronously with slider switch.
-			videoEmbedInit( $this.find( '.item' ), false );
+			videoEmbedInit( $this.find( '.uix-flexslider__item' ), false );
 			
 			
 			// Custom Controls
@@ -742,8 +742,8 @@ APP = ( function ( APP, $, window, document ) {
 				myControlsContainer  = '';
 				myCustomDirectionNav = '';
 			} else {
-				myControlsContainer  = $( '.custom-controls-container' + customConID );
-				myCustomDirectionNav = $( '.custom-navigation'+customConID+' a' );	
+				myControlsContainer  = $( '.uix-flexslider__controls' + customConID );
+				myCustomDirectionNav = $( '.uix-flexslider__arrows'+customConID+' a' );	
 			}
 
 			
@@ -826,9 +826,9 @@ APP = ( function ( APP, $, window, document ) {
 
 			
 			$this.flexslider({
-				namespace	      : 'custom-theme-flex-',
+				namespace	      : 'uix-flexslider__',
 				animation         : dataAnim,
-				selector          : '.custom-theme-slides > div.item',
+				selector          : '.uix-flexslider__inner > div.uix-flexslider__item',
 				controlNav        : dataPaging,
 				smoothHeight      : true,
 				prevText          : dataPrev,

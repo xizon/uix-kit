@@ -27,10 +27,10 @@
 
 
 /* Default Controls */
-.controls:not(.custom-toggle):not(.custom-checkbox):not(.custom-radio):not(.custom-select) {
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) {
 	text-align: right;
 	
-	&.controls-side {
+	&.uix-controls-side {
 		margin-left: auto;
 		margin-right: .2rem;
 	}
@@ -38,7 +38,7 @@
 	
 	
 	//Create Line Effect on Click
-	.bar {
+	.uix-controls__bar {
 		left: auto;
 		right: -2px;
 		
@@ -55,7 +55,7 @@
 	
 
 	
-	&.text-short-s {
+	&.uix-controls__short-s {
 		
 		input:not([type="checkbox"]):not([type="radio"]) {
 			margin-right: auto;	
@@ -66,7 +66,7 @@
 
 	}  	
 
-	&.text-short-l {
+	&.uix-controls__short-l {
 		input:not([type="checkbox"]):not([type="radio"]) {
 			margin-right: auto;	
 			margin-left: .5rem;	
@@ -83,7 +83,7 @@
 	
 	
 	/*-- Radio --*/
-	&.radio {
+	&.uix-controls__normal-radio {
 	
 		label {
 			padding-left: auto !important;
@@ -94,7 +94,7 @@
 	}
 	
 	/*-- Select --*/
-	&.select {
+	&.uix-controls__normal-select {
 
 		> span {
 			padding-right: auto;
@@ -122,7 +122,7 @@
 	
 
     /*-- Form With Icon --*/
-	&.withicon {
+	&.is-iconic {
 		label {
 		    left: auto;
 			right: 3rem;
@@ -159,12 +159,13 @@
 	
 	
 	/*-- Other --*/
-	.fa-sort {
+	.uix-controls__arrow {
 		right: auto;
 		left: 0.875rem;
 	}
 
 
+	/* WordPress Style */
 	.req-icon {
 		right: auto;
 		left: 0.721875rem;
@@ -176,7 +177,7 @@
 
 
 /* Create Line Effect on Click */
-.controls.line-eff {
+.uix-controls.uix-controls--line {
 
 	label {
 		&.active {
@@ -184,7 +185,7 @@
 		}	
 	}
 	
-	&.withicon {
+	&.is-iconic {
 		label {
 			&.active {
 				transform: translateX(4.09375rem) scale(.8);
@@ -198,17 +199,17 @@
 
 .col-sm-12 {
 	
-	.controls.line-eff {
+	.uix-controls.uix-controls--line {
 		
-		&:not(.text-short-s):not(.text-short-l) {
-			.bar {
+		&:not(.uix-controls__short-s):not(.uix-controls__short-l) {
+			.uix-controls__bar {
 				right: -8px;
 
 			}	
 		}
 		
-		&.textarea {
-			.bar {
+		&.uix-controls__textarea {
+			.uix-controls__bar {
 				right: -8px;
 			}		
 		}
@@ -223,7 +224,7 @@
  2. Upload
  ---------------------------
  */
-.controls-file-container {
+.uix-controls-file-container {
 	input[type="file"] {
 		left: auto;
 		right: 0;
@@ -236,7 +237,7 @@
  ---------------------------
  */ 
 
-.controls-merge {
+.uix-controls-merge {
 	
 	
 	
@@ -246,7 +247,7 @@
 		
 	}
 	
-	&.circle {
+	&.is-pill {
 		input {
 			border-radius: 0 50px 50px 0;
 		}
@@ -258,7 +259,7 @@
 	}
 	
     /*-- Form With Icon --*/
-	&.withicon {
+	&.is-iconic {
 
 		input {
 			padding-left: auto;
@@ -288,24 +289,24 @@
  4. Custom Select
  ---------------------------
  */ 
-.custom-select {
+.uix-controls__select {
 	text-align: right;
 }
 
-.custom-select-wrapper {
+.uix-controls__select-wrapper {
 	
 
 
-	.custom-select-trigger {
+	.uix-controls__select-trigger {
 		padding: 0.546875rem 1.5rem  0.546875rem 2.5rem;
 
 	}
 
 	
-	.line-eff  {
+	.uix-controls--line  {
 		
 		//Create Line Effect on Click
-		.bar {
+		.uix-controls__bar {
 			left: auto;
 			right: 0;
 			
@@ -326,12 +327,12 @@
 	
 	
 
-	.custom-select-label {
+	.uix-controls__select-label {
 		margin-left: auto;
 		margin-right: .5rem;
 	}
 
-	.custom-options {
+	.uix-controls__select__option-container {
 		left: auto;
 		right: 0;
 	}
@@ -344,7 +345,7 @@
  5. Custom Radio, Toggle And Checkbox
  ---------------------------
  */
-.custom-radio {
+.uix-controls__radio {
   
 	text-align: right;
 
@@ -352,7 +353,7 @@
 		right: auto;
 	}	
 
-	.custom-radio-trigger {
+	.uix-controls__radio-trigger {
 		margin-right: auto;
 		margin-left: 5px;
 
@@ -367,20 +368,20 @@
 
 
 
-.custom-toggle {
+.uix-controls__toggle {
 	
 	text-align: right;
 
 
 	input[type="checkbox"] {
 		
-		&:checked + .custom-toggle-trigger {
+		&:checked + .uix-controls__toggle-trigger {
 			margin-left: auto;
 			margin-right: 8px;
 		}
 	}
 
-	.custom-toggle-trigger {
+	.uix-controls__toggle-trigger {
 		margin: 0.5rem 0 0.5rem .5rem;
 		margin-left: auto;
 		margin-right: 50px;
@@ -398,11 +399,11 @@
 	}
 }
 
-.custom-checkbox {
+.uix-controls__checkbox {
 
 	text-align: right;
 
-	.custom-checkbox-trigger {
+	.uix-controls__checkbox-trigger {
 		margin: 0.546875rem 0 0.546875rem .5rem;
 		
 		&::before,

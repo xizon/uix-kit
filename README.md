@@ -2,7 +2,7 @@
 
 
 [![Travis CI](https://api.travis-ci.org/xizon/uix-kit.svg?branch=master)](https://travis-ci.org/xizon/uix-kit/)
-[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=1.8.2&x2=0)](https://www.npmjs.com/package/uix-kit)
+[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=1.8.5&x2=0)](https://www.npmjs.com/package/uix-kit)
 [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
 
 
@@ -46,21 +46,21 @@
 Make over <strong>100+</strong> components to wear again and again!
 
 
-An underlying front-end system that makes it easy to extend and modify core files. This spec is a living document that will be updated as we continue to develop the tenets and specifics of Uix Kit. Support JS and CSS component( SCSS ) development with Gulp & Webpack together.
+An underlying front-end system that makes it easy to extend and modify core files. This spec is a living document that will be updated as we continue to develop the tenets and specifics of Uix Kit. Support JS and CSS component( Sass Format ) development with Gulp & Webpack together.
 
 Enjoy the fluid grid system based on Bootstrap and self-expansion. Uix Kit is built over Bootstrap and has all the benefits that the framework comes with. Regardless of the screen size, the website content will naturally fit the given resolution. Using the Uix Kit will save you large amount of time to build your projects. It supports 3D and 2D rendering with three.js and pixi.js. More typically, automatically generate core files with Gulp & Webpack for each module (contains .js, .scss, .html files).
 
 * Supports 3D and 2D rendering with three.js and pixi.js.
+* Using Sass to Control Scope With BEM Naming
 * Automatically generate table of contents with Gulp for each module comment of name.
 * Simple custom CSS and JS core files
 * 100% Responsive & Mobile Ready
 * Prepare some generic plug-ins in advance
-* Support Chinese and English
 * Core style sheet compatible with Bootstrap 3.x (Optimized reference to Bootstrap 4.x)
 * Provides a common web page components and layouts
-* Standard Code
 * W3C Standard Support
-* Support JS and CSS component( SCSS ) development with Gulp & Webpack together
+* Support PJAX no refresh method for loading pages
+* Support JS and CSS component( Sass Format ) development with Gulp & Webpack together
 
 
 * * *

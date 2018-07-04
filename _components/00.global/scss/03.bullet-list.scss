@@ -11,11 +11,6 @@
 */
 
 
-/* 
- ---------------------------
- 1. Normal List Styling
- ---------------------------
- */ 
 ul, 
 ol {
     list-style: none;
@@ -27,11 +22,23 @@ ol {
 	}
 }
 
+.uix-list {
+	&::after {
+		content: '';
+		clear: both;
+		display: block;
+	}
+}
 
-ol.list-normal,
-ul.list-normal,
-.list-normal ul,
-.list-normal ol {
+/* 
+ ---------------------------
+ 1. Normal List Styling
+ ---------------------------
+ */ 
+ol.uix-list--normal,
+ul.uix-list--normal,
+.uix-list--normal ul,
+.uix-list--normal ol {
 	
 	display: block;
 	margin: 1.421875rem;
@@ -46,13 +53,13 @@ ul.list-normal,
 	}
 }
 
-ul.list-normal, 
-.list-normal ul {
+ul.uix-list--normal, 
+.uix-list--normal ul {
     list-style-type: disc;
 }
 
-ol.list-normal, 
-.list-normal ol {
+ol.uix-list--normal, 
+.uix-list--normal ol {
     list-style-type: decimal;
 }
 
@@ -62,8 +69,8 @@ ol.list-normal,
  ---------------------------
  */ 
 
-ol.list-numbered,
-.list-numbered ol {
+ol.uix-list--numbered,
+.uix-list--numbered ol {
     list-style: none;
     margin-left: 1rem;
     counter-reset: line;
@@ -93,7 +100,7 @@ ol.list-numbered,
 	
 
 }
-.list-numbered.none-zero > li::before {
+.uix-list--numbered.uix-list--numbered-1-digit > li::before {
 	content: counter(line);
 }	
 
@@ -103,10 +110,10 @@ ol.list-numbered,
  ---------------------------
  */ 
 
-ol.list-circle,
-ul.list-circle,
-.list-circle ol,
-.list-circle ul {
+ol.uix-list--circle,
+ul.uix-list--circle,
+.uix-list--circle ol,
+.uix-list--circle ul {
     list-style: none;
     margin-left: 1rem;
     counter-reset: line;
@@ -145,8 +152,8 @@ ul.list-circle,
  ---------------------------
  */ 
 
-ol.list-big-numbered,
-.list-big-numbered ol {
+ol.uix-list--numbered-large,
+.uix-list--numbered-large ol {
     counter-reset: item;
 	
 	/*removes original number*/
@@ -179,12 +186,12 @@ ol.list-big-numbered,
 
 }
 
-.list-big-numbered.none-zero li::before {
+.uix-list--numbered-large.uix-list--numbered-1-digit li::before {
 	content: counter(item)".";
 }	
 
-ol.list-big-numbered.fill-bg,
-.list-big-numbered.fill-bg ol {
+ol.uix-list--numbered-large.uix-list--numbered-bg,
+.uix-list--numbered-large.uix-list--numbered-bg ol {
    
 	li {
 		background: rgba(228,225,225,1.00);
@@ -219,7 +226,7 @@ ol.list-big-numbered.fill-bg,
 
 }
 
-.list-big-numbered.fill-bg.none-zero li::before {
+.uix-list--numbered-large.uix-list--numbered-bg.uix-list--numbered-1-digit li::before {
 	content: counter(item);
 }	
 
@@ -231,7 +238,7 @@ ol.list-big-numbered.fill-bg,
  */ 
 $step-line-color: #333;
 
-.list-step-numbers {
+.uix-list--numbered-step {
     counter-reset: step;
     list-style-type: none;
 	margin-left: 1rem;
@@ -281,7 +288,7 @@ $step-line-color: #333;
 
 @media all and (max-width:768px) {
 
-    .list-step-numbers {
+    .uix-list--numbered-step {
 		
 		li {
 			padding-left: 2.5rem;

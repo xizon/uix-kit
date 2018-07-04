@@ -13,7 +13,7 @@
  1. Default Navigation
  ---------------------------
  */ 
-.nav-filters {
+.uix-nav-links--filters {
 	padding: 1.421875rem 0;
 	
 	ul {
@@ -43,6 +43,7 @@
 			}
 		
 
+			/* Sync to WordPress activation class name ".current-cat" */
 			&.active,
 			&.current-cat {
 				opacity: 1;
@@ -52,12 +53,12 @@
 		}
 	}
 	
-	&.responsive-dropdown {
+	&.uix-nav-links--dropdown-mobile {
 		> input{
 			display: none;
 		}
 
-		.nav-filters-toggle-label {
+		.uix-nav-links--filters-toggle-label {
 			display: none;
 			background: $primary-text-color1;
 			color: #fff;
@@ -79,9 +80,9 @@
  */ 
 @media all and (max-width: 768px) {
 	
-	.nav-filters.responsive-dropdown {
+	.uix-nav-links--filters.uix-nav-links--dropdown-mobile {
 
-		.nav-filters-toggle-label {
+		.uix-nav-links--filters-toggle-label {
 			display: block;
 			cursor: pointer;
 			user-select: none;

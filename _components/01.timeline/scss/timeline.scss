@@ -15,14 +15,14 @@
  1. Vertical
  ---------------------------
  */ 
-.list-timeline-container-outer {
+.uix-timeline__container {
 	width: 100%;
 	overflow: hidden;
 	
-	.list-timeline-container {
+	.uix-timeline {
 
 
-		.list-timeline-item {
+		.uix-timeline__item {
 			
 			position: relative;
 			margin: 3.5rem 0;
@@ -39,7 +39,7 @@
 			&:last-child {
 				margin-bottom: 0;
 			}
-			.line {
+			.uix-timeline__line {
 				height: calc( 100% + 5rem );
 				width: 1px;
 				background: $highlight-color1;
@@ -48,7 +48,7 @@
 				left: 50%;
 			}
 
-			.list-timeline-item-img {
+			.uix-timeline__item--img {
 				position: absolute;
 				top: 0;
 				width: 40px;
@@ -64,7 +64,7 @@
 				}
 			}
 
-			.list-timeline-item-info {
+			.uix-timeline__item--info {
 				position: relative;
 				padding: 1.4rem;
 				width: 45%;
@@ -84,7 +84,7 @@
 					font-size: 0.875rem;
 					margin: 0.875rem 0;
 				}
-				.date {
+				.uix-timeline__item--date {
 					font-size: 0.875rem;
 					display: inline-block;
 					float: left;
@@ -98,10 +98,10 @@
 
 			}
 
-			&:nth-child(even) .list-timeline-item-info {
+			&:nth-child(even) .uix-timeline__item--info {
 				float: right;
 
-				.date {
+				.uix-timeline__item--date {
 					left: auto;
 					right: 122%;
 					text-align: right;
@@ -121,32 +121,32 @@
 
 @media all and (max-width: 768px) {
 	
-	.list-timeline-container-outer {
+	.uix-timeline__container {
 
-		.list-timeline-container {
+		.uix-timeline {
 
-			.list-timeline-item {
+			.uix-timeline__item {
 
-				.line {
+				.uix-timeline__line {
 					left: 20px;
 				}
-				.list-timeline-item-img {
+				.uix-timeline__item--img {
 					left: 0;
 					margin-left: auto;
 				}
 
-				.list-timeline-item-info {
+				.uix-timeline__item--info {
 					width: 80%;
 					margin-left: 3.5rem;
 
-					.date {
+					.uix-timeline__item--date {
 						top: 45px;
 						left: -60px !important;
 						right: auto !important;
 						text-align: left !important;
 					}
 				}
-				&:nth-child(even) .list-timeline-item-info {
+				&:nth-child(even) .uix-timeline__item--info {
 					float: none;
 				}
 				
@@ -167,9 +167,9 @@
  */ 
 $horizontal-item-width: 250px;
 
-.list-timeline-container-outer-wrapper.horizontal {
+.uix-timeline__container-wrapper.is-horizontal {
 	
-	.timeline-btn {
+	.uix-timeline__btn {
 		box-shadow: 0px 10px 54px 0px rgba(19, 32, 62, 0.21);
 		border-radius: 100%;
 		width: 50px;
@@ -183,23 +183,23 @@ $horizontal-item-width: 250px;
 		text-align: center;
 		background: #fff;
 		
-		&.timeline-next {
+		&.uix-timeline__btn--next {
 			left: auto;
 			right: 8%;
 		}
-		&.timeline-prev:hover {
+		&.uix-timeline__btn--prev:hover {
 			margin-left: -0.3125rem;
 		}
-		&.timeline-next:hover {
+		&.uix-timeline__btn--next:hover {
 			margin-right: -0.3125rem;
 		}
 		
-		&.disable {
+		&.disabled {
 			display: none;
 		}
 	}
 	
-	.list-timeline-container-outer.horizontal {
+	.uix-timeline__container.is-horizontal {
 		padding: 3.5rem 0;
 		width: 1000px;
 		margin: 0 auto;
@@ -219,7 +219,7 @@ $horizontal-item-width: 250px;
 
 
 
-		.list-timeline-container {
+		.uix-timeline {
 
 			width: 9999px;
 			transition: .5s ease-in-out; 
@@ -231,7 +231,7 @@ $horizontal-item-width: 250px;
 			}
 
 
-			.list-timeline-item {
+			.uix-timeline__item {
 				float: left;
 				width: $horizontal-item-width;
 				margin: 0;
@@ -239,7 +239,7 @@ $horizontal-item-width: 250px;
 				&::after {
 					display: none;
 				}
-				.line {
+				.uix-timeline__line {
 					height: 1px;
 					width: 100%;
 					position: absolute;
@@ -248,7 +248,7 @@ $horizontal-item-width: 250px;
 					z-index: 1;
 				}
 
-				.list-timeline-item-img {
+				.uix-timeline__item--img {
 					top: -20px;
 					left: 50%;
 					transform: translateX(-50%);
@@ -264,7 +264,7 @@ $horizontal-item-width: 250px;
 				}
 
 
-				.list-timeline-item-info {
+				.uix-timeline__item--info {
 					min-width: #{$horizontal-item-width - 50};
 					margin-bottom: 17px;
 					/* Scrollbar width is 17px by default */
@@ -274,7 +274,7 @@ $horizontal-item-width: 250px;
 					left: 50%;
 					transform: translateX(-50%);
 
-					.date {
+					.uix-timeline__item--date {
 						position: absolute;
 						display: inline-block;
 						width: 50px;
@@ -292,12 +292,12 @@ $horizontal-item-width: 250px;
 
 				&.active {
 
-					.list-timeline-item-img {
+					.uix-timeline__item--img {
 						opacity: 1;
 					}	
 
-					.list-timeline-item-info {
-						.date {
+					.uix-timeline__item--info {
+						.uix-timeline__item--date {
 							color: $highlight-color1;
 						}	
 					}	
@@ -321,14 +321,14 @@ $horizontal-item-width: 250px;
 
 @media all and (max-width: 768px) {
 
-	.list-timeline-container-outer-wrapper.horizontal {
+	.uix-timeline__container-wrapper.is-horizontal {
 		
-		.timeline-btn {
+		.uix-timeline__btn {
 			display: none;
 			background: #f00;
 		}
 		
-		.list-timeline-container-outer.horizontal {
+		.uix-timeline__container.is-horizontal {
 			padding: 0;
 			width: auto;
 
@@ -336,36 +336,36 @@ $horizontal-item-width: 250px;
 				display: none;
 			}
 
-			.list-timeline-container {
+			.uix-timeline {
 				width: 100%;
 
-				.list-timeline-item {
+				.uix-timeline__item {
 					float: none;
 					width: 100%;
 					max-width: none;
 					margin: 0 0 3.5rem;
 
-					.line {
+					.uix-timeline__line {
 						height: calc( 100% + 5rem );
 						width: 1px;
 						left: 36px;
 						top: 20px;
 					}
 
-					.list-timeline-item-img {
+					.uix-timeline__item--img {
 						top: 20px;
 						left: 16px;
 						margin-left: 20px;
 						opacity: 1;	
 					}
 
-					.list-timeline-item-info {
+					.uix-timeline__item--info {
 						position: relative;
 						width: calc( 80% - 40px );
 						margin: 0;
 						margin-left: .5rem;
 
-						.date {
+						.uix-timeline__item--date {
 							float: left;
 							top: 45px;
 							left: -28px !important;
@@ -376,8 +376,8 @@ $horizontal-item-width: 250px;
 
 					&.active {
 
-						.list-timeline-item-info {
-							.date {
+						.uix-timeline__item--info {
+							.uix-timeline__item--date {
 								color: inherit;
 							}	
 						}	
@@ -402,35 +402,35 @@ $horizontal-item-width: 250px;
  ---------------------------
  */ 
 
-.list-timeline-container-outer-wrapper.horizontal.classic {
+.uix-timeline__container-wrapper.is-horizontal.uix-timeline__container-wrapper--classic {
 	
-	.timeline-btn {
+	.uix-timeline__btn {
 		top: 200px;
 	}
 	
-	.list-timeline-container-outer.horizontal {
+	.uix-timeline__container.is-horizontal {
 		
 		&::after {
 			top: 227px;
 		}
 
 		
-		.list-timeline-container {
+		.uix-timeline {
 
 
-			.list-timeline-item {
+			.uix-timeline__item {
 				
 				padding-bottom: 8rem;
 				
-				.line {
+				.uix-timeline__line {
 					display: none;
 				}
 				
 				
 
-				.list-timeline-item-img {
+				.uix-timeline__item--img {
 					
-					.date {
+					.uix-timeline__item--date {
 						font-size: 0.875rem;
 						display: inline-block;
 						min-width: 100px;
@@ -438,7 +438,7 @@ $horizontal-item-width: 250px;
 					
 				}
 
-				.list-timeline-item-info {
+				.uix-timeline__item--info {
 					width: #{$horizontal-item-width*2};
 					margin: 0 auto;
 					top: 135px;
@@ -452,7 +452,7 @@ $horizontal-item-width: 250px;
 
 
 				&.active {
-					.list-timeline-item-info {
+					.uix-timeline__item--info {
 						opacity: 1;
 					}	
 
@@ -464,12 +464,12 @@ $horizontal-item-width: 250px;
 
 			
 			/* Whether to slide to the middle. */
-			&.to-center {
+			&.uix-timeline--to-center {
 				transform: translateX(#{$horizontal-item-width + $horizontal-item-width/2});
 				
-				.list-timeline-item {
+				.uix-timeline__item {
 
-					.list-timeline-item-info {
+					.uix-timeline__item--info {
 						transform: translateX(-#{$horizontal-item-width/2});
 
 					}
@@ -491,23 +491,23 @@ $horizontal-item-width: 250px;
 
 @media all and (max-width: 768px) {
 
-	.list-timeline-container-outer-wrapper.horizontal.classic {
+	.uix-timeline__container-wrapper.is-horizontal.uix-timeline__container-wrapper--classic {
 
 		
-		.list-timeline-container-outer.horizontal {
+		.uix-timeline__container.is-horizontal {
 
-			.list-timeline-container {
+			.uix-timeline {
 
-				.list-timeline-item {
+				.uix-timeline__item {
 					
 					padding-bottom: 3rem;
 
-					.line {
+					.uix-timeline__line {
 						display: block;
 					}
 
 
-					.list-timeline-item-info {
+					.uix-timeline__item--info {
 						position: relative;
 						width: calc( 80% - 40px );
 						margin: 0;
@@ -526,12 +526,12 @@ $horizontal-item-width: 250px;
 				}
 				
 				/* Whether to slide to the middle. */
-				&.to-center {
+				&.uix-timeline--to-center {
 					transform: translateX(0);
 
-					.list-timeline-item {
+					.uix-timeline__item {
 
-						.list-timeline-item-info {
+						.uix-timeline__item--info {
 							transform: translateX(0);
 
 						}

@@ -2,7 +2,7 @@
    <!-- Overlay -->    
 /* ====================================================== */
 
-.img-overlay {
+.uix-overlay {
 	max-width: 100%;
 	touch-action: none;
     padding: 1.5rem;
@@ -23,11 +23,11 @@
 		margin: 0;
 	}
 
-	&.white {
+	&.uix-overlay--white {
 		background: rgba(255,255,255,0.6);
 	}
 
-	&.black {
+	&.uix-overlay--black {
 		background: rgba(34,34,34,0.8);
 		color: #fff;
 
@@ -36,7 +36,7 @@
 		}
 	}
 	
-	&.cover {
+	&.uix-overlay--cover {
 		top: 0;
 		bottom: 0;
 		left: 0;

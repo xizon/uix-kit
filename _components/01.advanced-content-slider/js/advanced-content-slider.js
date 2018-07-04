@@ -40,10 +40,10 @@ APP = ( function ( APP, $, window, document ) {
 		 */
         function sliderInit() {
 			
-			$( '.custom-advanced-content-slider' ).each( function() {
+			$( '.uix-advanced-content-slider' ).each( function() {
 				var $this                      = $( this ),
-					$items                     = $this.find( '.item' ),
-					$itemsWrapper              = $this.children( '.inner' ),
+					$items                     = $this.find( '.uix-advanced-content-slider__item' ),
+					$itemsWrapper              = $this.children( '.uix-advanced-content-slider__inner' ),
 					$first                     = $items.first(),
 					itemWidth                  = $this.width(),
 					itemsTotal                 = $items.length,
@@ -57,8 +57,8 @@ APP = ( function ( APP, $, window, document ) {
 				
 				
 
-				if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.custom-advanced-content-slider-sp-pagination';
-				if ( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.custom-advanced-content-slider-sp-arrows';
+				if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-content-slider-sp-pagination';
+				if ( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-content-slider-sp-arrows';
 				if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
 				if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
 				
@@ -86,7 +86,7 @@ APP = ( function ( APP, $, window, document ) {
 				if ( dataControlsPaginationAuto ) {
 					var _dot       = '',
 						_dotActive = '';
-					_dot += '<ul class="default">';
+					_dot += '<ul class="uix-advanced-content-slider__pagination--default">';
 					for ( var i = 0; i < itemsTotal; i++ ) {
 
 						_dotActive = ( i == 0 ) ? 'class="active"' : '';
@@ -117,8 +117,8 @@ APP = ( function ( APP, $, window, document ) {
 				
 				//Next/Prev buttons
 				//-------------------------------------		
-				var _prev = $( dataControlsArrows ).find( '.prev' ),
-					_next = $( dataControlsArrows ).find( '.next' );
+				var _prev = $( dataControlsArrows ).find( '.uix-advanced-content-slider__arrows--prev' ),
+					_next = $( dataControlsArrows ).find( '.uix-advanced-content-slider__arrows--next' );
 				
 				
 
@@ -151,7 +151,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 				//Mouse event
-				$dragDropTrigger.on( 'mousedown.advancedContentSlider touchstart.advancedContentSlider', function( e ) {
+				$dragDropTrigger.on( 'mousedown.ADVANCED_CONTENT_SLIDER touchstart.ADVANCED_CONTENT_SLIDER', function( e ) {
 					e.preventDefault();
 
 					var touches = e.originalEvent.touches;
@@ -175,7 +175,7 @@ APP = ( function ( APP, $, window, document ) {
 
 					}
 					
-					$dragDropTrigger.on( 'mouseup.advancedContentSlider touchmove.advancedContentSlider', function( e ) {
+					$dragDropTrigger.on( 'mouseup.ADVANCED_CONTENT_SLIDER touchmove.ADVANCED_CONTENT_SLIDER', function( e ) {
 						e.preventDefault();
 
 						$( this ).removeClass( 'dragging' );
@@ -211,7 +211,7 @@ APP = ( function ( APP, $, window, document ) {
 							}
 
 							if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
-								$dragDropTrigger.off( 'touchmove.advancedContentSlider' );
+								$dragDropTrigger.off( 'touchmove.ADVANCED_CONTENT_SLIDER' );
 							}	
 
 
@@ -238,7 +238,7 @@ APP = ( function ( APP, $, window, document ) {
 
 								}	
 
-								$dragDropTrigger.off( 'mouseup.advancedContentSlider' );
+								$dragDropTrigger.off( 'mouseup.ADVANCED_CONTENT_SLIDER' );
 								
 							}	
 							
@@ -272,10 +272,10 @@ APP = ( function ( APP, $, window, document ) {
 		 */
         function sliderUpdates( elementIndex, slider, arrows, pagination ) {
 			
-			var $items        = slider.find( '.item' ),
+			var $items        = slider.find( '.uix-advanced-content-slider__item' ),
 				itemsTotal    = $items.length,
-				$prev         = $( arrows ).find( '.prev' ),
-				$next         = $( arrows ).find( '.next' ),
+				$prev         = $( arrows ).find( '.uix-advanced-content-slider__arrows--prev' ),
+				$next         = $( arrows ).find( '.uix-advanced-content-slider__arrows--next' ),
 				$pagination   = $( pagination ).find( 'li a' );
 				
 			if ( elementIndex <= itemsTotal - 1 && elementIndex >= 0 ) {
@@ -305,7 +305,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 				
 				
-				TweenMax.to( slider.children( '.inner' ), animDuration/1000, { 
+				TweenMax.to( slider.children( '.uix-advanced-content-slider__inner' ), animDuration/1000, { 
 					x: '-' + ( slider.width() * elementIndex ),
 					onComplete  : function() {
 

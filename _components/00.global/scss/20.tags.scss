@@ -2,7 +2,7 @@
    <!-- Tags -->      
 /* ====================================================== */
 
-.tags-box {
+.uix-tags-box {
 	
 	> a {
 		font-size: 0.875rem;
@@ -21,7 +21,7 @@
 			display: none;
 		}
 	}
-	&.tags-border > a {
+	&.uix-tags-box--has-border > a {
 		border: 1px solid #E6E6E6;
 	}
 }

@@ -1,13 +1,13 @@
 /* ====================================================== 
     <!-- Onepage Menu -->  
 /* ====================================================== */
-.custom-sidefixed-menu {
+.uix-menu-sidefixed {
 	position: absolute;
 	z-index: 13;
 	margin-top: 200px;
 	width: 120px;
 	
-	&.fixed {
+	&.is-fixed {
 		position: fixed;
 		top: 120px;
 		margin-top: 0;

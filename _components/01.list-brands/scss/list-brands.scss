@@ -1,7 +1,7 @@
 /* ====================================================== 
     <!-- Brands List --> 
 /* ====================================================== */
-.list-brands {
+.uix-list-brands {
 	display: block;
 	background: #fff;
 	padding: 1.5rem 0;
@@ -33,7 +33,7 @@
 	}
 	
 	
-	&.tiny li {
+	&.uix-list-brands--tiny li {
 		width: 16.66666666666667%;
 		
 		
@@ -43,7 +43,7 @@
 		
 	}
 	
-	&.small li {
+	&.uix-list-brands--small li {
 		width: 20%;
 		
 		&:nth-child(5n+1) {
@@ -53,7 +53,7 @@
 	}
 	
 	/* Default */
-	&.medium li {
+	&.uix-list-brands--medium li {
 		width: 25%;
 		
 		&:nth-child(4n+1) {
@@ -62,7 +62,7 @@
 		
 	}
 	
-	&.large li {
+	&.uix-list-brands--large li {
 		width: 33.33333333333333%;
 		
 		
@@ -75,7 +75,7 @@
 }
 
 @media all and (max-width: 768px) {
-	.list-brands {
+	.uix-list-brands {
 		margin: 1.5rem 0;
 		min-height: inherit;
 		
@@ -89,10 +89,10 @@
 			
 		}
 		
-		&.tiny li,
-		&.small li,
-		&.medium li,
-		&.large li {
+		&.uix-list-brands--tiny li,
+		&.uix-list-brands--small li,
+		&.uix-list-brands--medium li,
+		&.uix-list-brands--large li {
 			width: 50%;
 		}
 		

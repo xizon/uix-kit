@@ -14,7 +14,7 @@ APP = ( function ( APP, $, window, document ) {
 		var $window      = $( window ),
 			windowWidth  = $window.width(),
 			windowHeight = $window.height(),
-			ulForDesktop = '.menu-container:not(.mobile) ul.menu-main';
+			ulForDesktop = '.uix-menu__container:not(.is-mobile) ul.uix-menu';
 
 
 		//-------- Menu selected (if it exists "data-current" property in <ul>)
@@ -28,12 +28,12 @@ APP = ( function ( APP, $, window, document ) {
 		//-------- Menu Hover
 		var mTop = 15;
 		$( ulForDesktop + ' > li.multi-column > ul li ul' ).addClass( 'multi' );
-		$( ulForDesktop + ' > li:not(.multi-column) ul, .menu-container:not(.mobile) li.multi-column > ul.sub-menu > li > ul, '+ulForDesktop+' li.multi-column > ul' ).css( 'margin-top', mTop + 'px' );
+		$( ulForDesktop + ' > li:not(.multi-column) ul, .uix-menu__container:not(.is-mobile) li.multi-column > ul.sub-menu > li > ul, '+ulForDesktop+' li.multi-column > ul' ).css( 'margin-top', mTop + 'px' );
 
 		$( ulForDesktop + ' li' ).on( 'mouseenter', function(){
 
 
-			TweenMax.set( $( this ).find( ' > ul.sub-menu:not(.multi), .mega-arrow' ), {
+			TweenMax.set( $( this ).find( ' > ul.sub-menu:not(.multi), .uix-menu__arrow-mega' ), {
 				css: {
 					opacity    : 0,
 					display    : 'block',
@@ -59,7 +59,7 @@ APP = ( function ( APP, $, window, document ) {
 		}).on( 'mouseleave' , function(){
 
 
-			TweenMax.to( $( this ).find( ' > ul.sub-menu:not(.multi), .mega-arrow' ), 0.3, {
+			TweenMax.to( $( this ).find( ' > ul.sub-menu:not(.multi), .uix-menu__arrow-mega' ), 0.3, {
 				css: {
 					opacity    : 0,
 					marginTop  : mTop + 'px'
@@ -84,7 +84,7 @@ APP = ( function ( APP, $, window, document ) {
 		//-------- Add Sub-menu Arrow
 		$( ulForDesktop + ' li' ).each( function() {
 			if ( $( this ).find( 'ul' ).length > 0 ) {
-				$( this ).prepend( '<span class="nav-arrow"></span>' );
+				$( this ).prepend( '<span class="uix-menu__arrow"></span>' );
 			}
 
 		} );	
@@ -93,16 +93,16 @@ APP = ( function ( APP, $, window, document ) {
 
 		//-------- Sticky primary navigation
 		//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
-		var $el = $( '.menu-container:not(.mobile)' );
+		var $el = $( '.uix-menu__container:not(.is-mobile)' );
 		$window.on('scroll touchmove', function() {
 
 			var scrollTop = $( this ).scrollTop(),
 				spyTop    = 220;
 			
 			if ( scrollTop >= spyTop ) {
-				$el.addClass( 'spy-scroll-fixed' );
+				$el.addClass( 'is-fixed' );
 			} else {
-				$el.removeClass( 'spy-scroll-fixed' );	
+				$el.removeClass( 'is-fixed' );	
 			}
 			
 		});

@@ -14,7 +14,7 @@
  1. Initialize the slider style
  ---------------------------
  */ 
-.custom-advanced-content-slider {
+.uix-advanced-content-slider {
 	position: relative;
 	width: 100%;
 	overflow: hidden;
@@ -22,13 +22,13 @@
 	height: 0;
 
 
-	.inner {
+	.uix-advanced-content-slider__inner {
 		
 		position: relative;
 		z-index: 1;
 		
 		
-		.item {
+		.uix-advanced-content-slider__item {
 			position: relative;
 			z-index: 1;
 			display: inline-block;
@@ -57,13 +57,13 @@
  2. Pagination dots 
  ---------------------------
  */ 
-.custom-advanced-content-slider-pagination {
+.uix-advanced-content-slider__pagination {
 	
 	position: relative;
 	z-index: 2;
 	margin-top: 1rem;
 	
-	ul.default {
+	ul.uix-advanced-content-slider__pagination--default {
 		list-style: none;
 		left: 0;
 		bottom: 0;
@@ -101,7 +101,7 @@
 	}
 
 	
-	ul.custom {
+	ul.uix-advanced-content-slider__pagination--custom {
 		list-style: none;
 		left: 0;
 		bottom: 0;
@@ -145,7 +145,7 @@
  3. Next/Prev buttons
  ---------------------------
  */ 
-.custom-advanced-content-slider-arrows {
+.uix-advanced-content-slider__arrows {
 	position: relative;
 	z-index: 3;
 	
@@ -154,7 +154,7 @@
 		margin-right: 1rem;
 	}
 	
-	.prev {
+	.uix-advanced-content-slider__arrows--prev {
 		left: 15px;
 		
 		&.disabled {
@@ -163,7 +163,7 @@
 		}
 		
 	}
-	.next {
+	.uix-advanced-content-slider__arrows--next {
 		right: 15px;
 		text-align: right;
 		

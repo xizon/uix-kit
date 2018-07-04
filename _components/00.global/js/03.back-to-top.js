@@ -14,7 +14,7 @@ APP = ( function ( APP, $, window, document ) {
 		var $window      = $( window ),
 			windowWidth  = $window.width(),
 			windowHeight = $window.height(),
-			$el          = $( '#toTop' );
+			$el          = $( '#uix-to-top' );
 
 
 		//-------- Sticky button of back to top 

@@ -1,7 +1,7 @@
 /* ====================================================== 
    <!-- Footer -->                               
 /* ====================================================== */
-.footer-main-container {
+.uix-footer__container {
 	font-size: 0.75rem;
 	padding: 2.625rem 0;
 	
@@ -12,7 +12,7 @@
 }
 
 @media all and (max-width: 768px) {
-	.footer-main-container {
+	.uix-footer__container {
 		
 		.pull-left, 
 		.pull-right {

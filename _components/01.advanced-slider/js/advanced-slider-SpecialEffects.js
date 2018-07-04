@@ -17,7 +17,7 @@ APP = ( function ( APP, $, window, document ) {
 			windowWidth               = $window.width(),
 			windowHeight              = $window.height(),
 			animDuration              = 600,
-			$sliderWrapper            = $( '.custom-advanced-slider-sp' ),
+			$sliderWrapper            = $( '.uix-advanced-slider-sp' ),
 
 			
 			//Autoplay global variables
@@ -26,8 +26,8 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			//Basic webGL renderers 
-			rendererOuterID           = 'custom-advanced-slider-sp-canvas-outer',
-			rendererCanvasID          = 'custom-advanced-slider-sp-canvas',
+			rendererOuterID           = 'uix-advanced-slider-sp__canvas-container',
+			rendererCanvasID          = 'uix-advanced-slider-sp__canvas',
 			renderer,
 		    
 			//PIXI
@@ -73,7 +73,7 @@ APP = ( function ( APP, $, window, document ) {
 			$sliderWrapper.each( function()  {
 
 				var $this                    = $( this ),
-					$items                   = $this.find( '.item' ),
+					$items                   = $this.find( '.uix-advanced-slider-sp__item' ),
 					$first                   = $items.first(),
 					nativeItemW,
 					nativeItemH;
@@ -213,7 +213,7 @@ APP = ( function ( APP, $, window, document ) {
         function addItemsToStage( slider, sliderWrapper, nativeItemW, nativeItemH ) {
 			
 			var $this                    = slider,
-				$items                   = $this.find( '.item' ),
+				$items                   = $this.find( '.uix-advanced-slider-sp__item' ),
 				$first                   = $items.first(),
 				itemsTotal               = $items.length,
 				dataControlsPagination   = $this.data( 'controls-pagination' ),
@@ -223,8 +223,8 @@ APP = ( function ( APP, $, window, document ) {
 
 	
 			
-			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.custom-advanced-slider-sp-pagination';
-			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.custom-advanced-slider-sp-arrows';
+			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider-sp__pagination';
+			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
 			if( typeof dataLoop === typeof undefined ) dataLoop = false;
 			if( typeof dataFilterTexture === typeof undefined ) dataFilterTexture = '';
 
@@ -242,7 +242,7 @@ APP = ( function ( APP, $, window, document ) {
 				//Load slides to canvas
 				//-------------------------------------	
 				if ( $( '#' + rendererCanvasID ).length == 0 ) {
-					$this.prepend( '<div id="'+rendererOuterID+'" class="custom-advanced-slider-sp-canvas-outer"><canvas id="'+rendererCanvasID+'"></canvas></div>' );
+					$this.prepend( '<div id="'+rendererOuterID+'" class="uix-advanced-slider-sp__canvas-container"><canvas id="'+rendererCanvasID+'"></canvas></div>' );
 				}
 
 				//Basic webGL renderers 
@@ -271,9 +271,9 @@ APP = ( function ( APP, $, window, document ) {
 				//--------------------------------- Brightness Effect -------------------------------	
 				//----------------------------------------------------------------------------------
 				//Usage of returning sprite object: renderer.stage.children[index]
-				if ( $this.hasClass( 'eff-brightness' ) ) {
+				if ( $this.hasClass( 'uix-advanced-slider-sp--eff-brightness' ) ) {
 
-					$this.find( '.item' ).each( function( index )  {
+					$this.find( '.uix-advanced-slider-sp__item' ).each( function( index )  {
 
 						var $thisItem = $( this );
 
@@ -378,9 +378,9 @@ APP = ( function ( APP, $, window, document ) {
 				//--------------------------------- Liquid Distortion Effect -----------------------
 				//----------------------------------------------------------------------------------
 				//Usage of returning sprite object: items_container.children[index]
-				if ( $this.hasClass( 'eff-liquid' ) ) {
+				if ( $this.hasClass( 'uix-advanced-slider-sp--eff-liquid' ) ) {
 
-					$this.find( '.item' ).each( function( index )  {
+					$this.find( '.uix-advanced-slider-sp__item' ).each( function( index )  {
 
 						var $thisItem = $( this );
 
@@ -534,9 +534,9 @@ APP = ( function ( APP, $, window, document ) {
 				//--------------------------------- Liquid Distortion Effect 2 -----------------------
 				//----------------------------------------------------------------------------------
 				//Usage of returning sprite object: items_container.children[index]
-				if ( $this.hasClass( 'eff-liquid2' ) ) {
+				if ( $this.hasClass( 'uix-advanced-slider-sp--eff-liquid2' ) ) {
 
-					$this.find( '.item' ).each( function( index )  {
+					$this.find( '.uix-advanced-slider-sp__item' ).each( function( index )  {
 
 						var $thisItem = $( this );
 
@@ -684,9 +684,9 @@ APP = ( function ( APP, $, window, document ) {
 				//--------------------------------- Liquid Distortion Effect 3 -----------------------
 				//----------------------------------------------------------------------------------
 				//Usage of returning sprite object: items_container.children[index]
-				if ( $this.hasClass( 'eff-liquid3' ) ) {
+				if ( $this.hasClass( 'uix-advanced-slider-sp--eff-liquid3' ) ) {
 
-					$this.find( '.item' ).each( function( index )  {
+					$this.find( '.uix-advanced-slider-sp__item' ).each( function( index )  {
 
 						var $thisItem = $( this );
 
@@ -837,7 +837,7 @@ APP = ( function ( APP, $, window, document ) {
 				//--------------------------------- 3D Rotating Effect -----------------------------
 				//----------------------------------------------------------------------------------
 				//Usage of returning sprite object: texturesAll[ index ]     scenesAll[ index ]
-				if ( $this.hasClass( 'eff-3d-rotating' ) ) {
+				if ( $this.hasClass( 'uix-advanced-slider-sp--eff-3d-rotating' ) ) {
 
 
 					var texture;
@@ -863,7 +863,7 @@ APP = ( function ( APP, $, window, document ) {
 					//Add Geometries and Lights to the main container 
 					//-------------------------------------					
 					var init = function() {
-						$this.find( '.item' ).each( function( index )  {
+						$this.find( '.uix-advanced-slider-sp__item' ).each( function( index )  {
 
 							var $thisItem = $( this );
 
@@ -1203,8 +1203,8 @@ APP = ( function ( APP, $, window, document ) {
 
 			//Next/Prev buttons
 			//-------------------------------------		
-			var _prev = $( dataControlsArrows ).find( '.prev' ),
-				_next = $( dataControlsArrows ).find( '.next' );
+			var _prev = $( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--prev' ),
+				_next = $( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--next' );
 
 			$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
 
@@ -1253,14 +1253,14 @@ APP = ( function ( APP, $, window, document ) {
 				startY;
 
 
-			$this.on( 'touchstart.advancedSlider', function( event ) {
+			$this.on( 'touchstart.ADVANCED_SLIDER_FILTER', function( event ) {
 				var touches = event.originalEvent.touches;
 				if ( touches && touches.length ) {
 					startX = touches[0].pageX;
 					startY = touches[0].pageY;
 
 
-					$this.on( 'touchmove.advancedSlider', function( event ) {
+					$this.on( 'touchmove.ADVANCED_SLIDER_FILTER', function( event ) {
 
 						var touches = event.originalEvent.touches;
 						if ( touches && touches.length ) {
@@ -1299,7 +1299,7 @@ APP = ( function ( APP, $, window, document ) {
 
 							}
 							if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
-								$this.off( 'touchmove.advancedSlider' );
+								$this.off( 'touchmove.ADVANCED_SLIDER_FILTER' );
 							}
 						}
 
@@ -1321,7 +1321,7 @@ APP = ( function ( APP, $, window, document ) {
 		 */
         function sliderUpdates( elementIndex, slider ) {
 			
-			var $items                   = slider.find( '.item' ),
+			var $items                   = slider.find( '.uix-advanced-slider-sp__item' ),
 				$current                 = $items.eq( elementIndex ),
 			    total                    = $items.length,
 				dataCountTotal           = slider.data( 'count-total' ),
@@ -1333,8 +1333,8 @@ APP = ( function ( APP, $, window, document ) {
 
 			if( typeof dataCountTotal === typeof undefined ) dataCountTotal = 'p.count em.count';
 			if( typeof dataCountCur === typeof undefined ) dataCountCur = 'p.count em.current';
-			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.custom-advanced-slider-sp-pagination';
-			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.custom-advanced-slider-sp-arrows';
+			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider-sp__pagination';
+			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
 			if( typeof dataLoop === typeof undefined ) dataLoop = false;			
 		
 		    //Prevent bubbling
@@ -1353,8 +1353,8 @@ APP = ( function ( APP, $, window, document ) {
 				if ( elementIndex < 0 ) elementIndex = total-1;	
 			} else {
 				$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
-				if ( elementIndex == total - 1 ) $( dataControlsArrows ).find( '.next' ).addClass( 'disabled' );
-				if ( elementIndex == 0 ) $( dataControlsArrows ).find( '.prev' ).addClass( 'disabled' );
+				if ( elementIndex == total - 1 ) $( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--next' ).addClass( 'disabled' );
+				if ( elementIndex == 0 ) $( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--prev' ).addClass( 'disabled' );
 			}
 
 			// To determine if it is a touch screen.
@@ -1366,12 +1366,12 @@ APP = ( function ( APP, $, window, document ) {
 				if ( !dataLoop ) {
 					//first item
 					if ( elementIndex == 0 ) {
-						$( dataControlsArrows ).find( '.prev' ).addClass( 'disabled' );
+						$( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--prev' ).addClass( 'disabled' );
 					}
 
 					//last item
 					if ( elementIndex == total - 1 ) {
-						$( dataControlsArrows ).find( '.next' ).addClass( 'disabled' );
+						$( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--next' ).addClass( 'disabled' );
 					}	
 				}
 
@@ -1384,7 +1384,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			$items.removeClass( 'leave' );
-			slider.find( '.item.active' ).removeClass( 'active' ).addClass( 'leave' );
+			slider.find( '.uix-advanced-slider-sp__item.active' ).removeClass( 'active' ).addClass( 'leave' );
 			$items.eq( elementIndex ).addClass( 'active' ).removeClass( 'leave' );
 
 			
@@ -1438,7 +1438,7 @@ APP = ( function ( APP, $, window, document ) {
 				video.addEventListener( 'loadedmetadata', function( e ) {
 
 					//At the same time change the height of the canvas and slider container
-					var h = this.videoHeight*(slider.closest( '.custom-advanced-slider-outer' ).width()/this.videoWidth);
+					var h = this.videoHeight*(slider.closest( '.uix-advanced-slider__outline' ).width()/this.videoWidth);
 					
 					if ( Modernizr.webgl ) {
 						renderer.view.style.height = h + 'px';
@@ -1464,7 +1464,7 @@ APP = ( function ( APP, $, window, document ) {
 					    renderer.view.style.height = slider.find( 'img' ).height() + 'px';		
 					}
 					//---
-					$sliderWrapper.css( 'height', slider.closest( '.custom-advanced-slider-outer' ).width()*(this.height/this.width) + 'px' );		
+					$sliderWrapper.css( 'height', slider.closest( '.uix-advanced-slider__outline' ).width()*(this.height/this.width) + 'px' );		
 
 				};
 
@@ -1493,18 +1493,18 @@ APP = ( function ( APP, $, window, document ) {
 			if ( Modernizr.webgl ) {
 			
 				var $myRenderer           = $( '#' + rendererOuterID ),
-				    $current              = slider.find( '.item' ).eq( elementIndex ),
+				    $current              = slider.find( '.uix-advanced-slider-sp__item' ).eq( elementIndex ),
 					imgSel                = $current.find( 'img' ),
 				    curImgURL             = imgSel.attr( 'src' ),
 					stageW                = slider.width(),
 					stageH                = slider.height(),
-					spTotal               = slider.find( '.item' ).length;
+					spTotal               = slider.find( '.uix-advanced-slider-sp__item' ).length;
 				
 				
 				//----------------------------------------------------------------------------------
 				//--------------------------------- Brightness Effect -------------------------------	
 				//----------------------------------------------------------------------------------
-				if ( slider.hasClass( 'eff-brightness' ) ) {
+				if ( slider.hasClass( 'uix-advanced-slider-sp--eff-brightness' ) ) {
 				
 			
 					//Display wrapper of canvas (transitions between slides)
@@ -1604,7 +1604,7 @@ APP = ( function ( APP, $, window, document ) {
 				//----------------------------------------------------------------------------------
 				//--------------------------------- Liquid Distortion Effect -----------------------
 				//----------------------------------------------------------------------------------
-				if ( slider.hasClass( 'eff-liquid' ) ) {
+				if ( slider.hasClass( 'uix-advanced-slider-sp--eff-liquid' ) ) {
 					
 				
 					
@@ -1735,7 +1735,7 @@ APP = ( function ( APP, $, window, document ) {
 				//----------------------------------------------------------------------------------
 				//--------------------------------- Liquid Distortion Effect 2 -----------------------
 				//----------------------------------------------------------------------------------
-				if ( slider.hasClass( 'eff-liquid2' ) ) {
+				if ( slider.hasClass( 'uix-advanced-slider-sp--eff-liquid2' ) ) {
 					
 				
 					
@@ -1861,7 +1861,7 @@ APP = ( function ( APP, $, window, document ) {
 				//----------------------------------------------------------------------------------
 				//--------------------------------- Liquid Distortion Effect 3 -----------------------
 				//----------------------------------------------------------------------------------
-				if ( slider.hasClass( 'eff-liquid3' ) ) {
+				if ( slider.hasClass( 'uix-advanced-slider-sp--eff-liquid3' ) ) {
 					
 				
 					
@@ -1978,7 +1978,7 @@ APP = ( function ( APP, $, window, document ) {
 				//----------------------------------------------------------------------------------
 				//--------------------------------- 3D Rotating Effect -----------------------------
 				//----------------------------------------------------------------------------------
-				if ( slider.hasClass( 'eff-3d-rotating' ) ) {
+				if ( slider.hasClass( 'uix-advanced-slider-sp--eff-3d-rotating' ) ) {
 					
 					//Display wrapper of canvas (transitions between slides)
 					//-------------------------------------	
@@ -2071,7 +2071,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 				
 			} else {
-				slider.find( '.item canvas' ).hide();
+				slider.find( '.uix-advanced-slider-sp__item canvas' ).hide();
 			}
 	
 			
@@ -2086,10 +2086,10 @@ APP = ( function ( APP, $, window, document ) {
 		 * @return {void}                    - The constructor.
 		 */
 		function normalSliderVideoInit( wrapper, play ) {
-			wrapper.find( '.slider-video-embed' ).each( function()  {
+			wrapper.find( '.uix-video__slider' ).each( function()  {
 				var $this          = $( this ),
-					videoWrapperW  = $this.closest( '.custom-advanced-slider-outer' ).width(),
-					videoWrapperH  = $this.closest( '.custom-advanced-slider-outer' ).height(),
+					videoWrapperW  = $this.closest( '.uix-advanced-slider__outline' ).width(),
+					videoWrapperH  = $this.closest( '.uix-advanced-slider__outline' ).height(),
 					tempID         = 'video-' + Math.random()*1000000000000000000,
 					curVideoID     = tempID,
 					coverPlayBtnID = 'videocover-' + curVideoID,
@@ -2133,7 +2133,7 @@ APP = ( function ( APP, $, window, document ) {
 
 				//Display cover and play buttons when some mobile device browsers cannot automatically play video
 				if ( $( '#' + coverPlayBtnID ).length == 0 ) {
-					$( '<div id="'+coverPlayBtnID+'" class="web-video-embed-cover"><span class="cover-show" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="cover-play"></span></div>' ).insertBefore( $this );
+					$( '<div id="'+coverPlayBtnID+'" class="uix-video__cover"><span class="uix-video__cover-placeholder" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="cover-play"></span></div>' ).insertBefore( $this );
 
 
 					var btnEv = ( Modernizr.touchevents ) ? 'touchstart' : 'click';
@@ -2151,7 +2151,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 				//Add replay button to video 
 				if ( $replayBtn.length == 0 ) {
-					$this.after( '<span class="web-video-replay" id="'+curVideoID+'-replay-btn"></span>' );
+					$this.after( '<span class="uix-video__btn-play" id="'+curVideoID+'-replay-btn"></span>' );
 				}
 				
 				

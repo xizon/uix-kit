@@ -45,7 +45,7 @@ APP = ( function ( APP, $, window, document ) {
 		function parallaxInit( w, h ) {
 			
 			/* Pure parallax scrolling effect without other embedded HTML elements */
-			$( '.pure-bg-parallax' ).each( function() {
+			$( '.uix-parallax--pure-bg' ).each( function() {
 				var $this       = $( this ),
 					dataImg     = $this.data( 'parallax-bg' ),
 					dataSpeed   = $this.data( 'parallax' );
@@ -71,15 +71,15 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			/* Parallax scrolling effect with embedded HTML elements */
-			$( '.parallax' ).each( function() {
+			$( '.uix-parallax' ).each( function() {
 				var $this            = $( this ),
-					$curImg          = $this.find( '.parallax-img' ),
+					$curImg          = $this.find( '.uix-parallax__img' ),
 					dataImg          = $curImg.attr( 'src' ),
 					dataSkew         = $this.data( 'skew' ),
 					dataSpeed        = $this.data( 'speed' ),
 					dataOverlay      = $this.data( 'overlay-bg' ),
 					dataFullyVisible = $this.data( 'fully-visible' ),
-					dataElSpeed      = $this.find( '.parallax-element' ).data( 'el-speed' ),	
+					dataElSpeed      = $this.find( '.uix-parallax__el' ).data( 'el-speed' ),	
 					curImgH          = null,
 					curImgW          = null,
 					curSize          = 'cover',
@@ -117,16 +117,16 @@ APP = ( function ( APP, $, window, document ) {
 					
 					//Custom height for parallax container
 					if ( 
-						$this.hasClass( 'height-10' ) || 
-						$this.hasClass( 'height-20' ) || 
-						$this.hasClass( 'height-30' ) || 
-						$this.hasClass( 'height-40' ) || 
-						$this.hasClass( 'height-50' ) || 
-						$this.hasClass( 'height-60' ) || 
-						$this.hasClass( 'height-70' ) || 
-						$this.hasClass( 'height-80' ) || 
-						$this.hasClass( 'height-90' ) || 
-						$this.hasClass( 'height-100' )
+						$this.hasClass( 'uix-height--10' ) || 
+						$this.hasClass( 'uix-height--20' ) || 
+						$this.hasClass( 'uix-height--30' ) || 
+						$this.hasClass( 'uix-height--40' ) || 
+						$this.hasClass( 'uix-height--50' ) || 
+						$this.hasClass( 'uix-height--60' ) || 
+						$this.hasClass( 'uix-height--70' ) || 
+						$this.hasClass( 'uix-height--80' ) || 
+						$this.hasClass( 'uix-height--90' ) || 
+						$this.hasClass( 'uix-height--100' )
 					 ) {		
 
 						var newH = $this.height();
@@ -141,11 +141,11 @@ APP = ( function ( APP, $, window, document ) {
 					 }
 
 
-					//If the ".pos-vertical-align" has more content
+					//If the ".uix-v-align--absolute" has more content
 					if ( w <= 768 ) {
 
-						if ( $this.find( '.pos-vertical-align' ).height() >= curImgH ) {
-							$this.find( '.pos-vertical-align' ).addClass( 'relative' );
+						if ( $this.find( '.uix-v-align--absolute' ).height() >= curImgH ) {
+							$this.find( '.uix-v-align--absolute' ).addClass( 'uix-v-align--relative' );
 							$curImg.hide();	
 						}
 
@@ -223,10 +223,10 @@ APP = ( function ( APP, $, window, document ) {
 
 
 					//Embedded parent disparity elements
-					if ( $this.find( '.parallax-element' ).length > 0 ) {
+					if ( $this.find( '.uix-parallax__el' ).length > 0 ) {
 						$window.on( 'scroll touchmove', function() {
 							var scrolled = $window.scrollTop();
-							$this.find( '.parallax-element' ).css( {
+							$this.find( '.uix-parallax__el' ).css( {
 								'transform' : 'translateY('+Math.round( ( $this.offset().top - scrolled ) * dataElSpeed )+'px)',
 								'transition': 'none'
 							} );

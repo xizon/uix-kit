@@ -4,7 +4,7 @@
 
 /*
  * 1. Primary Menu
- * 2. Sub Menu
+ * 2. Sub Menu (Using WordPress default class name )
  * 3. Mega/Dropdown Menu 
  * 4. Dropdown Arrow
 */
@@ -15,13 +15,13 @@ $nav-font-size    : 0.75rem;
 $nav-sub-w        : 220px;
 $nav-mega-li-w    : 270px;
 
-.menu-container:not(.mobile) {
+.uix-menu__container:not(.is-mobile) {
 	font-size: $nav-font-size;
 	float: right;
 	padding-top: 1.25rem;
 	line-height: 2.34375;
 
-	&.spy-scroll-fixed {
+	&.is-fixed {
 		padding-bottom: 0;
 	}
 
@@ -31,7 +31,7 @@ $nav-mega-li-w    : 270px;
 	 1. Primary Menu
 	 ---------------------------
 	 */ 
-	ul.menu-main {
+	ul.uix-menu {
 		float: left;
 		margin: 0; /* Required*/
 		font-size: 0; /*Fighting the Space Between Inline Block Elements*/
@@ -59,10 +59,11 @@ $nav-mega-li-w    : 270px;
 			white-space: nowrap; /* Required*/
 			font-size: $nav-font-size; /*Fighting the Space Between Inline Block Elements*/
 
-			.tip-label {
+			.uix-bubble {
 				right: 1rem;
 			}
 			
+			/* Sync to WordPress activation class name ".current-menu-item" */
 			&.active, 
 			&.current-menu-item {
 				box-shadow: 0 2.15px 0 rgba(255, 255, 255, 1);
@@ -116,7 +117,7 @@ $nav-mega-li-w    : 270px;
 
 		/* 
 		 ---------------------------
-		 2. Sub Menu
+		 2. Sub Menu (Using WordPress default class name )
 		 ---------------------------
 		 */ 
 		ul.sub-menu {
@@ -191,7 +192,7 @@ $nav-mega-li-w    : 270px;
 				padding-left: 0.75rem;
 			
 	
-				.tip-label {
+				.uix-bubble {
 					right: 1.2rem;
 				}
 				
@@ -228,7 +229,7 @@ $nav-mega-li-w    : 270px;
 			
 		}
 
-		.mega-arrow {
+		.uix-menu__arrow-mega {
 			content: '';
 			display: none;
 			position: absolute;
@@ -243,18 +244,16 @@ $nav-mega-li-w    : 270px;
 		}
 
 
-
 	}
 
 
-
-	ul.menu-main ul.sub-menu .nav-arrow {
+	ul.uix-menu ul.sub-menu .uix-menu__arrow {
 		background-color: #000;
 		right: 2.159375rem;
 		margin-top: 0.3125rem;
 	}
 
-	li.multi-column > ul li .nav-arrow {
+	li.multi-column > ul li .uix-menu__arrow {
 		display: none;
 	}
 
@@ -263,7 +262,7 @@ $nav-mega-li-w    : 270px;
 	 4. Dropdown Arrow
 	 ---------------------------
 	 */ 
-	.nav-arrow {
+	.uix-menu__arrow {
 		display: block;
 		position: absolute;
 		right: 0.284375rem;
@@ -278,8 +277,8 @@ $nav-mega-li-w    : 270px;
 
 
 @media all and (max-width: 1250px) {
-	.menu-container:not(.mobile) {
-		ul.menu-main {
+	.uix-menu__container:not(.is-mobile) {
+		ul.uix-menu {
 			> li {
 				padding-left: 0.875rem;
 				padding-right: 0.875rem;
@@ -293,11 +292,8 @@ $nav-mega-li-w    : 270px;
 
 @media all and (max-width: 768px) {
 	
-    .menu-container:not(.mobile) {
+    .uix-menu__container:not(.is-mobile) {
         display: none;
     }
 }
-
-
-
 

@@ -3,7 +3,7 @@
 /* ====================================================== */
 
 /* Mobile Menu Toggle */
-.menu-mobile-toggle {
+.uix-menu-mobile__toggle {
     @include transition-default();
     position: absolute;
     display: none;
@@ -18,7 +18,7 @@
     transition: .1s ease-in-out;
 	
 }
-.menu-mobile-mask {
+.uix-menu-mobile__mask {
 	content: '';
 	left: 0;
 	top: 0;
@@ -31,41 +31,41 @@
 	display: none;
 }
 
-.menu-open .menu-mobile-mask {
+.js-uix-menu-opened .uix-menu-mobile__mask {
 	background: rgba(0,0,0,.7);
 	display: block;
 }
 
 
 /* Show Toolbar when viewing site with WordPress */
-.admin-bar .menu-mobile-toggle {
+.admin-bar .uix-menu-mobile__toggle {
     top: 66px;
 	
-    &.spy-scroll-postion {
+    &.is-fixed {
         top: 20px;
     }
 }
 
 /* Admin bar becomes taller on smaller devices with WordPress */
 @media all and (max-width: 782px) {
-    .admin-bar .menu-mobile-toggle.spy-scroll-postion {
+    .admin-bar .uix-menu-mobile__toggle.is-fixed {
         top: 66px;
     }
 }
 
 @media all and (max-width: 600px) {
-    .admin-bar .menu-mobile-toggle.spy-scroll-postion {
+    .admin-bar .uix-menu-mobile__toggle.is-fixed {
         top: 20px;
     }
 }
 
 @media all and (max-width: 768px) {
-    .menu-mobile-toggle {
+    .uix-menu-mobile__toggle {
         display: block;
     }
 }
 
-.menu-mobile-toggle {
+.uix-menu-mobile__toggle {
     span {
         display: block;
         position: absolute;
@@ -89,7 +89,7 @@
     }
 	
 	
-    &.open {
+    &.is-opened {
 	    span {
 		    left: 16px;
 		  
@@ -111,7 +111,7 @@
 
 /* Mobile Menu Container */
 
-.menu-container.mobile {
+.uix-menu__container.is-mobile {
 	
     @include transition-default();
     left: -300px;
@@ -130,14 +130,14 @@
     box-shadow: 0px 0px 37px 0px rgba(0, 0, 0, 0.1);
 
 	
-    > .inner {
+    > .uix-menu__inner {
         padding: 0 0 15px;
         > p {
             margin-left: 15px;
             margin-right: 15px;
         }
 	  
-	    > .menu-right {
+	    > .uix-menu__right-box {
 		    padding-left: .5rem;
 		
 		    a {
@@ -297,7 +297,7 @@
 	    padding-left: 0.721875rem;
 	}
 
-	.mobile-nav-arrow {
+	.uix-menu__arrow-mobile {
 	    position: absolute;
 	    top: 0;
 	    right: 10px;
@@ -368,6 +368,6 @@
 
 }
 
-.menu-open .menu-container.mobile {
+.js-uix-menu-opened .uix-menu__container.is-mobile {
 	left: 0;
 }

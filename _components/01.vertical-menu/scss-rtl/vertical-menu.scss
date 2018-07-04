@@ -4,7 +4,7 @@
 
 /*
  * 1. Primary Menu
- * 2. Sub Menu
+ * 2. Sub Menu (Using WordPress default class name )
  * 3. Multi-level Sub Menu Position 
  * 4. Mega/Dropdown Menu 
  * 5. Dropdown Arrow
@@ -15,7 +15,7 @@ $vertical-menu-sub-w        : 200px;
 $vertical-menu-font-size    : 0.75rem;
 $vertical-menu-top          : 0;
 
-.menu-v-container:not(.mobile) {
+.uix-v-menu__container:not(.is-mobile) {
 	left: auto;
 	right: 0;
 	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
@@ -25,13 +25,13 @@ $vertical-menu-top          : 0;
 	 1. Primary Menu
 	 ---------------------------
 	 */ 
-	ul.menu-main {
+	ul.uix-menu {
 		
 		li {
 			text-align: left;
 		
 			
-			.tip-label {
+			.uix-bubble {
 				right: auto;
 				left: 1rem;
 			}
@@ -41,7 +41,7 @@ $vertical-menu-top          : 0;
 
 		/* 
 		 ---------------------------
-		 2. Sub Menu
+		 2. Sub Menu (Using WordPress default class name )
 		 ---------------------------
 		 */ 
 		ul.sub-menu {
@@ -153,7 +153,7 @@ $vertical-menu-top          : 0;
 	 4. Dropdown Arrow
 	 ---------------------------
 	 */ 
-	.nav-arrow {
+	.uix-menu__arrow {
 		right: auto;
 		left: .5rem;
 	}

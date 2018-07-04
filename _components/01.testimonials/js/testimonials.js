@@ -10,14 +10,14 @@ APP = ( function ( APP, $, window, document ) {
 	APP.TESTIMONIALS.version       = '0.0.1';
     APP.TESTIMONIALS.documentReady = function( $ ) {
 
-		var $obj                 = $( '.custom-testimonials .flexslider' ),
+		var $obj                 = $( '.uix-testimonials .flexslider' ),
 			testimonialsControls = '';
 		
 		
 		for ( var i = 0; i < $obj.find( '.slides > li' ).length; i++ ) {
 			testimonialsControls += '<li></li>';
 		}
-		$( '.slides-custom-control' ).html( testimonialsControls );
+		$( '.uix-testimonials__controls' ).html( testimonialsControls );
     	
 		
 		
@@ -26,7 +26,7 @@ APP = ( function ( APP, $, window, document ) {
 			slideshow         : true,
 			smoothHeight      : true,
 			controlNav        : true,
-			manualControls    : '.slides-custom-control li',
+			manualControls    : '.uix-testimonials__controls li',
 			directionNav      : false,
 			animationSpeed    : 600,
 			slideshowSpeed    : 7000,
@@ -71,14 +71,14 @@ APP = ( function ( APP, $, window, document ) {
 				} );
 				
 				
-				$( '.custom-testimonials-count .total' ).text( '0' + slider.count );
-				$( '.custom-testimonials-count .cur' ).text( '0' + parseFloat( slider.currentSlide + 1 ) );
+				$( '.uix-testimonials__count .total' ).text( '0' + slider.count );
+				$( '.uix-testimonials__count .cur' ).text( '0' + parseFloat( slider.currentSlide + 1 ) );
 				
 			},
 			after: function(slider){
 				
-				$( '.custom-testimonials-count .total' ).text( '0' + slider.count );
-				$( '.custom-testimonials-count .cur' ).text( '0' + parseFloat( slider.currentSlide + 1 ) );
+				$( '.uix-testimonials__count .total' ).text( '0' + slider.count );
+				$( '.uix-testimonials__count .cur' ).text( '0' + parseFloat( slider.currentSlide + 1 ) );
 				
 			}
 		});

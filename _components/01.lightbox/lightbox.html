@@ -9,13 +9,13 @@
     
     
 
-    <div class="wrapper">
+    <div class="uix-wrapper">
     
         <!-- Header Area
         ============================================= -->      
-        <header class="header-area">
+        <header class="uix-header__container">
             
-             <div class="header-container">
+             <div class="uix-header">
                  <div class="container">
                  
                         @@include('../00.global/include-brand.html')
@@ -28,19 +28,19 @@
                   </div>
                   <!-- .container end -->
                   
-                  <div class="clear"></div>
+                  <div class="uix-clear"></div>
              </div>
         
         </header>
-        <div class="header-inner"></div>
+        <div class="uix-header__placeholder"></div>
       
        
     
        
         <!-- Content 01
         ====================================================== -->
-        <section class="space-none">
-            <div class="container t-c">
+        <section class="uix-section--no-spacing">
+            <div class="container uix-t-c">
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">
                             <h2>Simple Lightbox</h2>
@@ -65,24 +65,24 @@
                         <div class="col-md-8 col-md-offset-2">
                             
 							<p>
-                                <a class="custom-lightbox" href="javascript:void(0);" data-lb-src="assets/images/demo/spiral-galaxy-1920x1080.jpg"><i class="fa fa-search-plus" aria-hidden="true"></i> Click Me To Show Image</a>
+                                <a class="uix-lightbox__trigger" href="javascript:void(0);" data-lb-src="assets/images/demo/spiral-galaxy-1920x1080.jpg"><i class="fa fa-search-plus" aria-hidden="true"></i> Click Me To Show Image</a>
                             </p>
                             
 							<p>
-                                <a class="custom-lightbox" href="javascript:void(0);" data-lb-src="[{'thumb':'assets/images/demo/slide-1.jpg', 'large':'assets/images/demo/slide-1.jpg'}, {'thumb':'assets/images/demo/spiral-galaxy-1920x1080.jpg', 'large':'assets/images/demo/spiral-galaxy-1920x1080.jpg'}, {'thumb':'assets/images/demo/slide-3.jpg', 'large':'assets/images/demo/slide-3.jpg'}, {'thumb':'assets/images/demo/slide-1.jpg', 'large':'assets/images/demo/slide-1.jpg'}]"><i class="fa fa-search-plus" aria-hidden="true"></i> Click Me To Show Multiple Image</a>
+                                <a class="uix-lightbox__trigger" href="javascript:void(0);" data-lb-src="[{'thumb':'assets/images/demo/slide-1.jpg', 'large':'assets/images/demo/slide-1.jpg'}, {'thumb':'assets/images/demo/spiral-galaxy-1920x1080.jpg', 'large':'assets/images/demo/spiral-galaxy-1920x1080.jpg'}, {'thumb':'assets/images/demo/slide-3.jpg', 'large':'assets/images/demo/slide-3.jpg'}, {'thumb':'assets/images/demo/slide-1.jpg', 'large':'assets/images/demo/slide-1.jpg'}]"><i class="fa fa-search-plus" aria-hidden="true"></i> Click Me To Show Multiple Image</a>
                             </p>  
                             
                             
 							<p>
-                                <a class="custom-lightbox" href="javascript:void(0);" data-lb-src="assets/images/placeholder/placeholder-800x2000.jpg" data-lb-fixed="false"><i class="fa fa-search-plus" aria-hidden="true"></i> Click Me To Show Image (Not Fixed)</a>
+                                <a class="uix-lightbox__trigger" href="javascript:void(0);" data-lb-src="assets/images/placeholder/placeholder-800x2000.jpg" data-lb-fixed="false"><i class="fa fa-search-plus" aria-hidden="true"></i> Click Me To Show Image (Not Fixed)</a>
                             </p>         
                  
 							<p>
-							    <a class="custom-lightbox" href="javascript:void(0);" data-lb-html="#my-lightbox-html-1"><i class="fa fa-search-plus" aria-hidden="true"></i> Click Me To Show HTML Code</a>
+							    <a class="uix-lightbox__trigger" href="javascript:void(0);" data-lb-html="#my-lightbox-html-1"><i class="fa fa-search-plus" aria-hidden="true"></i> Click Me To Show HTML Code</a>
 							    
-							   <div class="custom-lightbox-html" id="my-lightbox-html-1">
-								   <div class="lb-box list-normal table-normal">
-									   <div class="content-show">
+							   <div class="uix-lightbox__content-container" id="my-lightbox-html-1">
+								   <div class="uix-lightbox__content uix-list uix-list--normal uix-table uix-table--bordered">
+									   <div data-loading-text="Loading...">
 									   
 											<!-- ///////   content begin /////// -->
 
@@ -97,21 +97,21 @@
 
 											<!-- ///////   content end /////// -->
 
-										</div><!-- /.content-show -->
-								   </div><!-- /.lb-box -->
+										</div><!-- /div -->
+								   </div><!-- /.uix-lightbox__content -->
 							   </div>
-							   <!-- /.custom-lightbox-html -->
+							   <!-- /.uix-lightbox__content-container -->
 						
 						
 						
 							</p>
 
 							<p>
-							    <a class="custom-lightbox" href="javascript:void(0);" data-lb-html="#my-lightbox-html-2" data-lb-fixed="false"><i class="fa fa-search-plus" aria-hidden="true"></i> Click Me To Show HTML Code (Not Fixed)</a>
+							    <a class="uix-lightbox__trigger" href="javascript:void(0);" data-lb-html="#my-lightbox-html-2" data-lb-fixed="false"><i class="fa fa-search-plus" aria-hidden="true"></i> Click Me To Show HTML Code (Not Fixed)</a>
 							    
-							   <div class="custom-lightbox-html" id="my-lightbox-html-2">
-								   <div class="lb-box list-normal table-normal">
-									   <div class="content-show">
+							   <div class="uix-lightbox__content-container" id="my-lightbox-html-2">
+								   <div class="uix-lightbox__content uix-list uix-list--normal uix-table uix-table--bordered">
+									   <div data-loading-text="Loading...">
 									   
 											<!-- ///////   content begin /////// -->
 
@@ -126,10 +126,10 @@
 
 											<!-- ///////   content end /////// -->
 
-										</div><!-- /.content-show -->
-								   </div><!-- /.lb-box -->
+										</div><!-- /div -->
+								   </div><!-- /.uix-lightbox__content -->
 							   </div>
-							   <!-- /.custom-lightbox-html -->
+							   <!-- /.uix-lightbox__content-container -->
 						
 						
 						
@@ -138,14 +138,14 @@
 							
 							
 							<p>
-							    <a class="custom-lightbox" href="javascript:void(0);" data-lb-html="#my-lightbox-html-3" data-lb-ajax-content="ajax-content-page-1.html" data-lb-fixed="false"><i class="fa fa-search-plus" aria-hidden="true"></i> Click Me To Show Content With AJAX</a>
+							    <a class="uix-lightbox__trigger" href="javascript:void(0);" data-lb-html="#my-lightbox-html-3" data-lb-ajax-method="POST" data-lb-ajax-content="ajax-content-page-1.html" data-lb-fixed="false"><i class="fa fa-search-plus" aria-hidden="true"></i> Click Me To Show Content With AJAX</a>
 							    
-							   <div class="custom-lightbox-html" id="my-lightbox-html-3">
-								   <div class="lb-box list-normal table-normal">
-									   <div class="content-show" data-loading-text="Loading..."></div><!-- /.content-show -->
-								   </div><!-- /.lb-box -->
+							   <div class="uix-lightbox__content-container" id="my-lightbox-html-3">
+								   <div class="uix-lightbox__content uix-list uix-list--normal uix-table uix-table--bordered">
+									   <div data-loading-text="Loading..."></div><!-- /div -->
+								   </div><!-- /.uix-lightbox__content -->
 							   </div>
-							   <!-- /.custom-lightbox-html -->
+							   <!-- /.uix-lightbox__content-container -->
 						
 						
 						

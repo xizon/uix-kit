@@ -15,7 +15,7 @@
  1. Header Pinlines
  ---------------------------
  */ 
-.heading-pinline {
+.uix-heading--pinline {
     text-align: center;
     display: block;
     overflow: hidden;
@@ -51,7 +51,7 @@
 		
 	}
 	
-	&.text-left {
+	&.uix-heading--pinline--left {
 		text-align: left;
 	
 		span {
@@ -63,7 +63,7 @@
 		}	
 	}
 
-	&.text-right {
+	&.uix-heading--pinline--right {
 		text-align: right;
 	
 		span {
@@ -83,7 +83,7 @@
  2. Text Overlay
  ---------------------------
  */ 
-.heading-overlay {
+.uix-heading--overlay {
 	position: relative;
 
 	
@@ -111,13 +111,13 @@
 //		transform-origin: left center 0;
 	}	
 	
-	&.t-r {
+	&.uix-t-r {
 		&::before {
 			transform-origin: right center 0;
 		}		
 	}
 	
-	&.bottom {
+	&.uix-heading--overlay--bottom {
 		
 		p {
 			display: inline-block;
@@ -148,7 +148,7 @@
 		
 	}
 	
-	&.sub {
+	&.uix-heading--overlay--sub {
 		background-color: rgb(255, 255, 255);
 		box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.1);
 		padding: 1rem 4rem;
@@ -181,7 +181,7 @@
  3. Show Image Under Text
  ---------------------------
  */ 
-.heading-fill {
+.uix-heading--fill {
 	user-select: none;
 	color: $primary-text-color1;  /* Fallback: assume this color ON TOP of image */
 	background: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) no-repeat;
@@ -198,7 +198,7 @@
  4. Custom Underline
  ---------------------------
  */ 
-.heading-underline {
+.uix-heading--underline {
 	
 	span {
 		display: inline-block;
@@ -225,7 +225,7 @@
  5. Hybrid Heading
  ---------------------------
  */ 
-.heading-hybrid {
+.uix-heading--hybrid {
 	
 	span {
 		display: block;

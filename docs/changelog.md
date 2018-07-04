@@ -1,6 +1,16 @@
 # Changelog
 
 
+#### = 1.8.5 (July 3, 2018) =
+
+* New: Add a new module "Wave Background". (Coming Soon)
+* Fix: Fixed ajax paged reload error.
+* Fix: Fixed selector of date picker for form.
+* Tweak: CSS Naming Conventions optimized for all modules.
+* Tweak: Expanded all ajax module parameters.
+
+
+
 
 #### = 1.8.2 (June 26, 2018) =
 

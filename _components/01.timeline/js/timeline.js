@@ -25,10 +25,10 @@ APP = ( function ( APP, $, window, document ) {
 		 ---------------------------
 		 */
 		if ( windowWidth > 768 ) {
-			$( '.list-timeline-container-outer-wrapper.horizontal' ).each( function()  {
+			$( '.uix-timeline__container-wrapper.is-horizontal' ).each( function()  {
 
 				var $this          = $( this ),
-					$timeline      = $this.find( '.list-timeline-container-outer.horizontal > .list-timeline-container' ),
+					$timeline      = $this.find( '.uix-timeline__container.is-horizontal > .uix-timeline' ),
 					dateShowEle    = $timeline.data( 'show-ele' );
 
 				if ( typeof dateShowEle === typeof undefined ) {
@@ -39,19 +39,19 @@ APP = ( function ( APP, $, window, document ) {
 				$this.css( 'height', $this.height() - 17 + 'px' ); //Scrollbar width is 17px by default
 
 
-				$this.find( '.timeline-prev' ).on( 'click', function( e ) {
+				$this.find( '.uix-timeline__btn--prev' ).on( 'click', function( e ) {
 					e.preventDefault();
 					timelineUpdate( $this, false, dateShowEle, true );
 					return false;
 				});
 
-				$this.find( '.timeline-next' ).on( 'click', function( e ) {
+				$this.find( '.uix-timeline__btn--next' ).on( 'click', function( e ) {
 					e.preventDefault();
 					timelineUpdate( $this, false, dateShowEle, false );
 					return false;
 				});
 
-				$this.find( '.list-timeline-item' ).on( 'click', function( e ) {
+				$this.find( '.uix-timeline__item' ).on( 'click', function( e ) {
 					e.preventDefault();
 					timelineUpdate( $this, $( this ), dateShowEle, false );
 					return false;
@@ -59,9 +59,9 @@ APP = ( function ( APP, $, window, document ) {
 
 				
 				//Activate the default selection
-				timelineUpdate( $this, $this.find( '.list-timeline-item.active' ), dateShowEle, false );
-				if ( $this.find( '.list-timeline-item.active' ).index() == 0 ) {
-					$this.find( '.timeline-prev' ).addClass( 'disable' );
+				timelineUpdate( $this, $this.find( '.uix-timeline__item.active' ), dateShowEle, false );
+				if ( $this.find( '.uix-timeline__item.active' ).index() == 0 ) {
+					$this.find( '.uix-timeline__btn--prev' ).addClass( 'disabled' );
 				}
 				
 
@@ -80,12 +80,12 @@ APP = ( function ( APP, $, window, document ) {
 		 * @return {void}                        - The constructor.
 		 */
 		function timelineUpdate( obj, iscur, showEle, prev ) {
-			var	itemTotal  = obj.find( '.list-timeline-item' ).length,
-				tNav       = obj.find( '.list-timeline-item' ),
+			var	itemTotal  = obj.find( '.uix-timeline__item' ).length,
+				tNav       = obj.find( '.uix-timeline__item' ),
 				tLoop      = false;
 			
 			
-			var curIndex = obj.find( '.list-timeline-item.active' ).index(),
+			var curIndex = obj.find( '.uix-timeline__item.active' ).index(),
 				tarIndex;
 
 			//Check if a value is an object currently
@@ -106,7 +106,7 @@ APP = ( function ( APP, $, window, document ) {
 		
 			
 			//loop the items
-			obj.find( '.timeline-prev, .timeline-next' ).removeClass( 'disable' );
+			obj.find( '.uix-timeline__btn--prev, .uix-timeline__btn--next' ).removeClass( 'disabled' );
 			
 			if ( prev ) {
 				
@@ -115,7 +115,7 @@ APP = ( function ( APP, $, window, document ) {
 					if ( tarIndex < 0 ) tarIndex = itemTotal-1;
 				} else {
 					if ( tarIndex < 0 ) tarIndex = 0;
-					if ( tarIndex == 0 ) obj.find( '.timeline-prev' ).addClass( 'disable' );
+					if ( tarIndex == 0 ) obj.find( '.uix-timeline__btn--prev' ).addClass( 'disabled' );
 					
 				}
 			} else {
@@ -125,7 +125,7 @@ APP = ( function ( APP, $, window, document ) {
 					if ( tarIndex == itemTotal ) tarIndex = 0;
 				} else {
 					if ( tarIndex > itemTotal-1 ) tarIndex = itemTotal-1;
-					if ( tarIndex > itemTotal-2 ) obj.find( '.timeline-next' ).addClass( 'disable' );
+					if ( tarIndex > itemTotal-2 ) obj.find( '.uix-timeline__btn--next' ).addClass( 'disabled' );
 					
 				}
 			}
@@ -133,20 +133,20 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			tNav.removeClass( 'active' );
-			obj.find( '.list-timeline-item:eq('+tarIndex+')' ).addClass( 'active' );
+			obj.find( '.uix-timeline__item:eq('+tarIndex+')' ).addClass( 'active' );
 
 			//scroll left
 			var tNavW = 0;
 			for ( var i = 0; i < tarIndex; i++ ) {
-				tNavW += obj.find( '.list-timeline-item:eq('+i+')' ).width();
+				tNavW += obj.find( '.uix-timeline__item:eq('+i+')' ).width();
 			}
 	
-			obj.find( '.list-timeline-container-outer.horizontal > .list-timeline-container' ).css({
+			obj.find( '.uix-timeline__container.is-horizontal > .uix-timeline' ).css({
 				'margin-left' : -parseFloat( tNavW ) + 'px'
 			});
 			
 			//Push the current text to element 
-			$( showEle ).text( obj.find( '.list-timeline-item:eq('+i+')' ).find( '.date' ).text() );
+			$( showEle ).text( obj.find( '.uix-timeline__item:eq('+i+')' ).find( '.uix-timeline__item--date' ).text() );
 			
 			
 		}

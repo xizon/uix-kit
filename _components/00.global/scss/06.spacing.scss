@@ -2,73 +2,63 @@
    <!-- Spacing -->                                
 /* ====================================================== */
 
-section, 
-.section {
+section,
+.uix-section {
     position: relative;
-}
-
-section, 
-.section {
 	padding: $spacing-default 0;
+	
+
+	&.uix-section--sm {
+		padding: $spacing-small 0;
+	}
+
+	&.uix-section--lg {
+		padding: $spacing-large 0;
+	}
+
+	&.uix-section--no-spacing {
+		padding: 0 !important;
+	}
+
+	&.uix-section--no-spacing-top {
+		padding-top: 0 !important;
+	}
+
+	&.uix-section--no-spacing-bottom {
+		padding-bottom: 0 !important;
+	}
+
+	&.uix-section--googlemap {
+		padding-top: 0 !important;
+	}
+	
 }
 
-section.space-sm, 
-.section.space-sm {
-    padding: $spacing-small 0;
-}
-
-section.space-lg, 
-.section.space-lg {
-    padding: $spacing-large 0;
-}
-
-section.space-none, 
-.section.space-none {
-    padding: 0 !important;
-}
-
-section.space-none-top, 
-.section.space-none-top {
-    padding-top: 0 !important;
-}
-
-section.space-none-bottom, 
-.section.space-none-bottom {
-    padding-bottom: 0 !important;
-}
-
-section.site-google-map, 
-.section.site-google-map {
-    padding-top: 0 !important;
-}
 
 @media all and (max-width: 768px) {
-	section, 
-	.section {
+	section,
+	.uix-section {
 		padding: $spacing-default-mobile 0;
+		
+		&.uix-section--sm {
+			padding: $spacing-small-mobile 0;
+		}
+		
+		&.uix-section--lg {
+			padding: $spacing-large-mobile 0;
+		}
+		&.uix-section--no-spacing {
+			padding: 0;
+		}
+		&.uix-section--no-spacing-top {
+			padding-top: 0;
+		}
+		&.uix-section--no-spacing-bottom {
+			padding-bottom: 0;
+		}
+		&.uix-section--googlemap {
+			padding-top: 0;
+		}		
 	}
-	section.space-sm, 
-	.section.space-sm {
-		padding: $spacing-small-mobile 0;
-	}
-	section.space-lg, 
-	.section.space-lg {
-		padding: $spacing-large-mobile 0;
-	}
-	section.space-none, 
-	.section.space-none {
-		padding: 0;
-	}
-	section.space-none-top, 
-	.section.space-none-top {
-		padding-top: 0;
-	}
-	section.space-none-bottom, 
-	.section.space-none-bottom {
-		padding-bottom: 0;
-	}
-	section.site-google-map, 
-	.section.site-google-map {
-		padding-top: 0;
-	}
+
 }

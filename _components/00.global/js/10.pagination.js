@@ -11,7 +11,7 @@ APP = ( function ( APP, $, window, document ) {
 	APP.PAGINATION.version       = '0.0.1';
     APP.PAGINATION.documentReady = function( $ ) {
 
-		$( '.pagination-container li > span.current' ).each( function()  {
+		$( '.uix-pagination__container li > span.current' ).each( function()  {
 			$( this ).parent( 'li' ).addClass( 'active' );
 		});
 		

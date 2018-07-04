@@ -1,7 +1,7 @@
 /* ====================================================== 
    <!-- Pricing --> 
 /* ====================================================== */
-.custom-price {
+.uix-price {
 	text-align: center;
 	position: relative;
 
@@ -36,17 +36,17 @@
 		}
 	}
 
-	.hr {
+	.uix-price__hr {
 		margin: 1.5rem 0;
 		border-top: 1px solid rgba(0, 0, 0, 0.05);
 	}
 
-	.border-hover {
+	.uix-price__outline--hover {
 	    margin-bottom: 1.5rem;
 	}
 
 
-	.border {
+	.uix-price__outline {
 		padding-top: 0.875rem;
 		position: relative;
 		box-shadow: 0 22px 40px 0 #eef4fc;
@@ -55,13 +55,13 @@
 		transition: .1s ease-in-out;
 		
 		&:hover {
-			@include outer-shadow-large();
+			@include outer-shadow( 2 );
 		}
 
 	}
 
 
-	.level {
+	.uix-price__level {
 		font-size: 0.7rem;
 		text-align: center;
 		text-indent: 0.875rem;
@@ -72,19 +72,23 @@
 		opacity: 0.35;
 	}
 
-	.num {
+	.uix-price__num {
 		color: $highlight-color1;
 		font-weight: 700;
 		font-size: 3.5rem;
 		margin-top: 0.875rem;
 	}
+	
+	.uix-price__num--im {
+		
+	}
 
-	.currency {
+	.uix-price__currency {
 	    font-size: 0.875rem;
 	}
 
 
-	.period {
+	.uix-price__period {
 		font-size: 12px;
 
 		&::before {
@@ -93,14 +97,14 @@
 		}
 	}
 
-	.detail {
+	.uix-price__detail {
 		text-align: left;
 		padding-bottom: 1.125rem;
 		padding-left: 1rem;
 		font-size: 0.875rem;
 	}
 
-	.excerpt {
+	.uix-price__excerpt {
 		height: auto;
 		padding: 0 0.875rem;
 		font-size: 0.875rem;
@@ -111,22 +115,17 @@
 		}
 	}
 
-	.bg {
-		padding-top: 1.875rem;
-		height: auto;
-	}
 
-
-	.border.active {
+	.uix-price__outline.active {
 		
-		.num, 
-		.excerpt, 
-		.detail, 
-		.level {
+		.uix-price__num, 
+		.uix-price__excerpt, 
+		.uix-price__detail, 
+		.uix-price__level {
 			color: #fff !important;
 		}
 		
-		.excerpt {
+		.uix-price__excerpt {
 			opacity: 0.65;
 		}
 

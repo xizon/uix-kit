@@ -4,13 +4,13 @@
 
 $indicator-desc-w: 60px;
 
-.custom-form-progress {
+.uix-form-progress {
 	position: relative;
 	display: block;
 	margin: 3rem 0;
 	width: calc(100% - #{$indicator-desc-w});
 
-	.line { 
+	.uix-form-progress__line { 
 		display: block;
 		position: relative;
 		top: 5px;
@@ -32,7 +32,7 @@ $indicator-desc-w: 60px;
 	
 
 
-	.indicator {
+	.uix-form-progress__indicator {
 		position: absolute;
 		top: -2px;
 		left: 0;
@@ -60,11 +60,11 @@ $indicator-desc-w: 60px;
 		}
 
 		&.active {
-			animation: indicator-ok .5s forwards;
+			animation: uix-cssAnim--indicatorOK .5s forwards;
 			border-color: $highlight-color1;
 		}
 		&.current {
-			
+			background: $highlight-color1;
 		}
 		
 		
@@ -74,41 +74,43 @@ $indicator-desc-w: 60px;
 
 
 /* Form animations */
-.custom-form-progress-target {
+.uix-form-progress__target {
 	@include transition-default();
 	position: relative;
 	width: 100%;
 	height: 0;
 	transition: .3s;
 	overflow: hidden;
+	opacity: 0;
 	
-	&.show {
+	&.active {
+		opacity: 1;
+	}
+	
+	&.js-uix-show {
 		height: auto;
 	}
+
 	
-	.button {
-		width: auto;
-	}
-	
-	.form-step {
+	.uix-form-progress__target__step {
 		width: 100%;
 		position: absolute;
 		@include transition-default();
 	}
 	
-	.form-step:first-child {
+	.uix-form-progress__target__step:first-child {
 		position: relative;
 	}
 
-	.form-step.leaving {
+	.uix-form-progress__target__step.leaving {
 		transform: translateX(-110%);
 	}
 
-	.form-step.waiting {
+	.uix-form-progress__target__step.waiting {
 		transform: translateX(110%);
 	}
 
-	.form-step.coming {
+	.uix-form-progress__target__step.coming {
 		transform: translateX(0);
 	}
 	
@@ -116,7 +118,7 @@ $indicator-desc-w: 60px;
 
 
 
-@keyframes indicator-ok {
+@keyframes uix-cssAnim--indicatorOK {
 	50% {
 		transform: scale(1.5);
 	}

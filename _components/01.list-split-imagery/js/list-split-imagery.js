@@ -10,7 +10,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.POST_LIST_SPLIT_FULLWIDTH               = APP.POST_LIST_SPLIT_FULLWIDTH || {};
-	APP.POST_LIST_SPLIT_FULLWIDTH.version       = '0.0.1';
+	APP.POST_LIST_SPLIT_FULLWIDTH.version       = '0.0.2';
     APP.POST_LIST_SPLIT_FULLWIDTH.pageLoaded    = function() {
 
 		var $window      = $( window ),
@@ -39,15 +39,15 @@ APP = ( function ( APP, $, window, document ) {
 		function fullwidthListSplitInit( w ) {
 			
 			
-			$( '.list-split-imagery-container' ).each( function() {
-				var imgH = $( this ).find( '.imagery-background img' ).height();
+			$( '.uix-list-split-imagery' ).each( function() {
+				var imgH = $( this ).find( '.uix-list-split-imagery__img img' ).height();
 
 				if ( imgH > 0 ) {
-					$( this ).find( '.feature-text, .feature-imagery' ).css( 'height', imgH + 'px' );
+					$( this ).find( '.uix-list-split-imagery__info, .uix-list-split-imagery__img-container' ).css( 'height', imgH + 'px' );
 				}
 
 				if ( w <= 768 ) {
-					$( this ).find( '.feature-text, .feature-imagery' ).css( 'height', 'auto' );
+					$( this ).find( '.uix-list-split-imagery__info, .uix-list-split-imagery__img-container' ).css( 'height', 'auto' );
 				}
 
 			});	

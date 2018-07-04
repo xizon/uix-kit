@@ -1,19 +1,23 @@
 /* ====================================================== 
    <!-- Footer Templates -->  
 /* ====================================================== */
-.custom-footer-wrapper {
+.uix-special-footer__container {
 	background: $primary-text-color1;
 	padding: 3rem 0;	
 	margin: 3rem 0 0;
 	color: $sub-text-color;
+	
+	&.is-transparent {
+		background: none;
+	}
 
 	img.logo {
-		max-width: 80%;
+		max-width: 150px;
 		margin-bottom: 1.5rem;
 	}
 	
 	h3,
-	.h3 {
+	.uix-typo--h3 {
 		margin-bottom: 1rem;
 		font-size: 1.2em;
 		font-weight: 500;
@@ -22,7 +26,7 @@
 	}
 	
 
-	.custom-footer-list-container {
+	.uix-special-footer__menus {
 
 		&::after {
 			content: '';
@@ -49,7 +53,7 @@
 @media all and (max-width: 768px) {
 
 	
-	.custom-footer-wrapper {in: 3rem 0;
+	.uix-special-footer__container {in: 3rem 0;
 
 		img.logo {
 			max-width: 100%;
@@ -66,13 +70,13 @@
 		}
 	
 		
-		.t-l,
-		.t-r {
+		.uix-t-l,
+		.uix-t-r {
 			float: none;
 			text-align: center;
 		}
 		
-		.custom-footer-list-container {
+		.uix-special-footer__menus {
 
 			> .list {
 				width: 33.3%;

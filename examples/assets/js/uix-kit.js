@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.8.2
- * ## Last Update         :  June 26, 2018
+ * ## Version             :  1.8.5
+ * ## Last Update         :  July 5, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -52,8 +52,8 @@
     28. Dropdown Menu 2 (Multi-level drop-down navigation) 
     29. Dynamic Drop Down List from JSON 
     30. Flexslider 
-    31. Form 
-    32. jQuery UI Datepicker 1.11.4 
+    31. jQuery UI Datepicker 1.11.4 
+    32. Form 
     33. Form Progress 
     34. Gallery 
     35. Image Shapes 
@@ -193,6 +193,116 @@ var APP = (function ( $, window, document ) {
 
 
 
+
+
+/*
+ * Hash Change Event
+ *
+ * @return {void}                        - The constructor.
+ */
+( function($){
+
+  // Store the initial location.hash so that the event isn't triggered when
+  // the page is first loaded.
+  var last_hash = location.hash,
+
+    // An id with which the polling loop can be canceled.
+    timeout_id;
+
+  // Special event definition.
+  $.event.special.hashchange = {
+    setup: function() {
+      // If the event is supported natively, return false so that jQuery
+      // will bind to the event using DOM methods instead of using the
+      //  polling loop.
+      if ( 'onhashchange' in window ) { return false; }
+
+      // Start the polling loop if it's not already running.
+      start();
+    },
+    teardown: function() {
+      // If the event is supported natively, return false so that jQuery
+      // will bind to the event using DOM methods instead of using the
+      // polling loop.
+      if ( 'onhashchange' in window ) { return false; }
+
+      // Stop the polling loop. Since this event is only evern bound to
+      // the `window` object, multiple-element tracking is unnecessary.
+      stop();
+    },
+    add: function( handleObj ) {
+      // Save a reference to the bound event handler.
+      var old_handler = handleObj.handler;
+
+      // This function will now be called when the event is triggered,
+      // instead of the bound event handler.
+      handleObj.handler = function(event) {
+
+        // Augment the event object with the location.hash at the time
+        // the event was triggered.
+        event.fragment = location.hash.replace( /^#/, '' );
+
+        // Call the originally-bound event handler, complete with modified
+        // event object! The result from this call doesn't need to be
+        // returned, because there is no default action to prevent, and 
+        // nothing to propagate to.
+        old_handler.apply( this, arguments );
+      };
+    }
+  };
+
+  // Start (or continue) the polling loop.
+  function start() {
+    // Stop the polling loop if it has already started.
+    stop();
+
+    // Get the current location.hash. If is has changed since the last loop
+    // iteration, store that value and trigger the hashchange event.
+    var hash = location.hash;
+    if ( hash !== last_hash ) {
+      $(window).trigger( 'hashchange' );
+      last_hash = hash;
+    }
+
+    // Poll, setting timeout_id so the polling loop can be canceled.
+    timeout_id = setTimeout( start, 100 );
+  };
+
+  // Stop the polling loop.
+  function stop() {
+    clearTimeout( timeout_id );
+  };
+
+})(jQuery);
+
+
+
+/*
+ * Get all attributes of an element using jQuery
+ *
+ * @return {array}                        - Returns a new array.
+ */
+( function( old ) {
+  $.fn.attr = function() {
+    if(arguments.length === 0) {
+      if(this.length === 0) {
+        return null;
+      }
+
+      var obj = {};
+      $.each(this[0].attributes, function() {
+        if(this.specified) {
+          obj[this.name] = this.value;
+        }
+      });
+      return obj;
+    }
+
+    return old.apply(this, arguments);
+  };
+} )( $.fn.attr );
+
+
 /* 
  *************************************
  * <!-- Header Area -->
@@ -231,7 +341,7 @@ APP = ( function ( APP, $, window, document ) {
 			}
 		});
 		function headerInit( w ) {
-			if ( w > 768 ) $( '.header-inner.auto-height' ).css( 'height', $( '.header-area' ).outerHeight() + 'px' ); 
+			if ( w > 768 ) $( '.uix-header__placeholder.uix-header__placeholder--auto-height' ).css( 'height', $( '.uix-header__container' ).outerHeight() + 'px' ); 
 			
 		}
 		
@@ -241,16 +351,16 @@ APP = ( function ( APP, $, window, document ) {
 		
 		//-------- Sticky header area
 		//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
-		var $el = $( '.header-area' );
+		var $el = $( '.uix-header__container' );
 		$window.on('scroll touchmove', function() {
 
 			var scrollTop = $( this ).scrollTop(),
 				spyTop    = 220;
 			
 			if ( scrollTop >= spyTop ) {
-				$el.addClass( 'spy-scroll-fixed' );
+				$el.addClass( 'is-fixed' );
 			} else {
-				$el.removeClass( 'spy-scroll-fixed' );	
+				$el.removeClass( 'is-fixed' );	
 			}
 			
 		});
@@ -279,14 +389,14 @@ APP = ( function ( APP, $, window, document ) {
 
 		// Disable devices scaling
 		//-------------------------------------	
-		document.addEventListener('touchstart',function (event) {
+		document.addEventListener( 'touchstart', function (event) {
 			if(event.touches.length>1){
 				event.preventDefault();
 			}
 		});
 		
 		var lastTouchEnd=0;
-		document.addEventListener('touchend',function (event) {
+		document.addEventListener( 'touchend', function (event) {
 			var now=(new Date()).getTime();
 			if( now-lastTouchEnd <= 300 ){
 				event.preventDefault();
@@ -308,7 +418,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			if ( isNaN( per ) ) per = 100;
 			
-			$( '.loader-progress span' ).text( per + '%' );
+			$( '.uix-loader-progress span' ).text( per + '%' );
 			
 			
 		}).done( function() {
@@ -317,7 +427,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			// Remove loader
-			TweenMax.to( '.loader, .loader-progress', 0.5, {
+			TweenMax.to( '.uix-loader, .uix-loader-progress', 0.5, {
 				css: {
 					opacity : 0,
 					display : 'none'
@@ -355,7 +465,7 @@ APP = ( function ( APP, $, window, document ) {
 		var $window      = $( window ),
 			windowWidth  = $window.width(),
 			windowHeight = $window.height(),
-			$el          = $( '#toTop' );
+			$el          = $( '#uix-to-top' );
 
 
 		//-------- Sticky button of back to top 
@@ -441,29 +551,6 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
-/*
- * Get all attributes of an element using jQuery
- *
- */
-( function( old ) {
-  $.fn.attr = function() {
-    if(arguments.length === 0) {
-      if(this.length === 0) {
-        return null;
-      }
-
-      var obj = {};
-      $.each(this[0].attributes, function() {
-        if(this.specified) {
-          obj[this.name] = this.value;
-        }
-      });
-      return obj;
-    }
-
-    return old.apply(this, arguments);
-  };
-} )( $.fn.attr );
 
 
 /* 
@@ -481,7 +568,7 @@ APP = ( function ( APP, $, window, document ) {
 		var $window      = $( window ),
 			windowWidth  = $window.width(),
 			windowHeight = $window.height(),
-			ulForDesktop = '.menu-container:not(.mobile) ul.menu-main';
+			ulForDesktop = '.uix-menu__container:not(.is-mobile) ul.uix-menu';
 
 
 		//-------- Menu selected (if it exists "data-current" property in <ul>)
@@ -495,12 +582,12 @@ APP = ( function ( APP, $, window, document ) {
 		//-------- Menu Hover
 		var mTop = 15;
 		$( ulForDesktop + ' > li.multi-column > ul li ul' ).addClass( 'multi' );
-		$( ulForDesktop + ' > li:not(.multi-column) ul, .menu-container:not(.mobile) li.multi-column > ul.sub-menu > li > ul, '+ulForDesktop+' li.multi-column > ul' ).css( 'margin-top', mTop + 'px' );
+		$( ulForDesktop + ' > li:not(.multi-column) ul, .uix-menu__container:not(.is-mobile) li.multi-column > ul.sub-menu > li > ul, '+ulForDesktop+' li.multi-column > ul' ).css( 'margin-top', mTop + 'px' );
 
 		$( ulForDesktop + ' li' ).on( 'mouseenter', function(){
 
 
-			TweenMax.set( $( this ).find( ' > ul.sub-menu:not(.multi), .mega-arrow' ), {
+			TweenMax.set( $( this ).find( ' > ul.sub-menu:not(.multi), .uix-menu__arrow-mega' ), {
 				css: {
 					opacity    : 0,
 					display    : 'block',
@@ -526,7 +613,7 @@ APP = ( function ( APP, $, window, document ) {
 		}).on( 'mouseleave' , function(){
 
 
-			TweenMax.to( $( this ).find( ' > ul.sub-menu:not(.multi), .mega-arrow' ), 0.3, {
+			TweenMax.to( $( this ).find( ' > ul.sub-menu:not(.multi), .uix-menu__arrow-mega' ), 0.3, {
 				css: {
 					opacity    : 0,
 					marginTop  : mTop + 'px'
@@ -551,7 +638,7 @@ APP = ( function ( APP, $, window, document ) {
 		//-------- Add Sub-menu Arrow
 		$( ulForDesktop + ' li' ).each( function() {
 			if ( $( this ).find( 'ul' ).length > 0 ) {
-				$( this ).prepend( '<span class="nav-arrow"></span>' );
+				$( this ).prepend( '<span class="uix-menu__arrow"></span>' );
 			}
 
 		} );	
@@ -560,16 +647,16 @@ APP = ( function ( APP, $, window, document ) {
 
 		//-------- Sticky primary navigation
 		//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
-		var $el = $( '.menu-container:not(.mobile)' );
+		var $el = $( '.uix-menu__container:not(.is-mobile)' );
 		$window.on('scroll touchmove', function() {
 
 			var scrollTop = $( this ).scrollTop(),
 				spyTop    = 220;
 			
 			if ( scrollTop >= spyTop ) {
-				$el.addClass( 'spy-scroll-fixed' );
+				$el.addClass( 'is-fixed' );
 			} else {
-				$el.removeClass( 'spy-scroll-fixed' );	
+				$el.removeClass( 'is-fixed' );	
 			}
 			
 		});
@@ -619,7 +706,7 @@ APP = ( function ( APP, $, window, document ) {
 		 Video Embed
 		 ---------------------------
 		 */  
-		$( '.web-video-embed' ).each( function()  {
+		$( '.uix-video' ).each( function()  {
 			var $this          = $( this ),
 				tempID         = 'video-' + Math.random()*1000000000000000000,
 			    curVideoID     = tempID,
@@ -664,7 +751,7 @@ APP = ( function ( APP, $, window, document ) {
 			//Display cover and play buttons when some mobile device browsers cannot automatically play video
 			if ( $( '#' + coverPlayBtnID ).length == 0 ) {
 				
-				$( '<div id="'+coverPlayBtnID+'" class="web-video-embed-cover"><span class="cover-show" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="cover-play"></span></div>' ).insertBefore( $this );
+				$( '<div id="'+coverPlayBtnID+'" class="uix-video__cover"><span class="uix-video__cover-placeholder" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="cover-play"></span></div>' ).insertBefore( $this );
 				
 				
 	
@@ -858,10 +945,10 @@ APP = ( function ( APP, $, window, document ) {
 					vogv = '<source src="'+videoSrcOgv+'" type="video/ogv">';
 				}
 				
-				v += '<div class="modal-box fullscreen video" id="'+videoContainerMid+'">';
-				v += '<a href="javascript:void(0)" class="close-btn"></a>';
-				v += '<div class="content">';
-				v += '<div class="web-video-waiting"></div><div class="web-video-container" data-video-player-init="0">';
+				v += '<div class="uix-modal-box is-fullscreen is-video" id="'+videoContainerMid+'">';
+				v += '<a href="javascript:void(0)" class="uix-modal-box__close"></a>';
+				v += '<div class="uix-modal-box__content">';
+				v += '<div class="uix-modal-box__video-waiting"></div><div class="uix-modal-box__video-container" data-video-player-init="0">';
 				
 				if ( $this.find( '[data-video-iframe]' ).length > 0 && videoSrcIfm != '' ) {
 					//If iframe
@@ -897,8 +984,8 @@ APP = ( function ( APP, $, window, document ) {
 				$ifm         = false,
 				newMaxW      = windowWidth - 80,
 				newMaxH      = windowHeight - 80,
-				$vContainer  = $( '#' + vid ).closest( '.web-video-container' ),
-				$vLoader     = $vContainer.prev( '.web-video-waiting' ),
+				$vContainer  = $( '#' + vid ).closest( '.uix-modal-box__video-container' ),
+				$vLoader     = $vContainer.prev( '.uix-modal-box__video-waiting' ),
 				myPlayerInit = $vContainer.data( 'video-player-init' );
 
 			
@@ -1104,7 +1191,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			/* ---------  Close the modal  */
-			$( document ).on( 'click', '.modal-box .close-btn', function() {
+			$( document ).on( 'click', '.uix-modal-box .uix-modal-box__close', function() {
 
 				myPlayer.ready(function() {
 					myPlayer.pause();
@@ -1133,7 +1220,7 @@ APP = ( function ( APP, $, window, document ) {
  * Note: 
  *
  * Automatically sets the div height of the grid system to the height of the 
- * outer container when ".common-height" class on ".row" or ".seamless-grid" div.
+ * outer container when ".js-uix-common-height" class on ".row" or ".uix-core-grid__row" div.
  *
  *************************************
  */
@@ -1146,7 +1233,7 @@ APP = ( function ( APP, $, window, document ) {
 	APP.COMMON_HEIGHT.version       = '0.0.1';
     APP.COMMON_HEIGHT.pageLoaded    = function() {
 
-	    $( '.common-height' ).commonHeight();
+	    $( '.js-uix-common-height' ).commonHeight();
 		
     };
 
@@ -1175,7 +1262,7 @@ APP = ( function ( APP, $, window, document ) {
 
         // This is the easiest way to have default options.
         var settings = $.extend({
-			selector : '[class*=col-], [class*=eamless-col-], [class*=el-col-]' //Bootstrap grid system and Custom seamless grid system
+			selector : '[class*=col-], [class*=uix-core-grid__col-], [class*=uix-el-grid__col-]' //Bootstrap grid system and Custom seamless grid system
         }, options );
  
         this.each( function() {
@@ -1303,7 +1390,7 @@ APP = ( function ( APP, $, window, document ) {
 		
 		// Initialize mega menu
 		function megaMenuInit( w ) {
-			var $menuWrap  = $( '.menu-container:not(.mobile)' ),
+			var $menuWrap  = $( '.uix-menu__container:not(.is-mobile)' ),
 				maxWidth     = 1170, //The maximum width of the mega menu wrapper
 				
 				//This value is equal to the $nav-mega-li-w variable in the SCSS
@@ -1338,7 +1425,7 @@ APP = ( function ( APP, $, window, document ) {
 					
 					
 					// Add mega arrow
-					if ( root_li.find( '.mega-arrow' ).length < 1 ) root_li.prepend( '<span class="mega-arrow"></span>' );
+					if ( root_li.find( '.uix-menu__arrow-mega' ).length < 1 ) root_li.prepend( '<span class="uix-menu__arrow-mega"></span>' );
 					
 
 					// Detecting if the right or left of the div is touching the browser window edge.
@@ -1479,7 +1566,7 @@ APP = ( function ( APP, $, window, document ) {
 	APP.PAGINATION.version       = '0.0.1';
     APP.PAGINATION.documentReady = function( $ ) {
 
-		$( '.pagination-container li > span.current' ).each( function()  {
+		$( '.uix-pagination__container li > span.current' ).each( function()  {
 			$( this ).parent( 'li' ).addClass( 'active' );
 		});
 		
@@ -1614,29 +1701,29 @@ APP = ( function ( APP, $, window, document ) {
 		  * Unbind that one in a safe way that won't accidentally unbind other click handlers.
 		  * In order to trigger other custom Modal Dialog events.
 			
-			$( '#element' ).off( 'click.modalDialog' );
-			$( '#element' ).off( 'click.modalDialogClose' );
+			$( '#element' ).off( 'click.MODAL_DIALOG' );
+			$( '#element' ).off( 'click.MODAL_DIALOG_CLOSE' );
 			
 		*/
 		
 	
-		if ( $( '.modal-mask' ).length == 0 ) {
-			$( 'body' ).prepend( '<div class="modal-mask"></div>' );
+		if ( $( '.uix-modal-mask' ).length == 0 ) {
+			$( 'body' ).prepend( '<div class="uix-modal-mask"></div>' );
 		}
 	    
-		$( document ).on( 'click.modalDialog', '[data-modal-id]', function() {
+		$( document ).on( 'click.MODAL_DIALOG', '[data-modal-id]', function() {
 			var dataID = $( this ).data( 'modal-id' ),
 			    dataH  = $( this ).data( 'modal-height' ),
 				dataW  = $( this ).data( 'modal-width' ),
-				$obj   = $( '.modal-box#'+dataID );
+				$obj   = $( '.uix-modal-box#'+dataID );
 			
 			// Initializate modal
 			$( this ).attr( 'href', 'javascript:void(0)' );
-			$obj.find( '.content' ).addClass( 'no-fullscreen' );
+			$obj.find( '.uix-modal-box__content' ).addClass( 'js-uix-no-fullscreen' );
 			
 			
 			if ( $( this ).data( 'video-win' ) ) {
-				$obj.find( '.content' ).css( 'overflow-y', 'hidden' );
+				$obj.find( '.uix-modal-box__content' ).css( 'overflow-y', 'hidden' );
 			}
 			
 			
@@ -1649,7 +1736,7 @@ APP = ( function ( APP, $, window, document ) {
 					$obj.css( {'width': dataW } );
 				}
 				
-				TweenMax.set( '.modal-mask', {
+				TweenMax.set( '.uix-modal-mask', {
 					css: {
 						opacity : 0,
 						display : 'none'
@@ -1669,37 +1756,38 @@ APP = ( function ( APP, $, window, document ) {
 				$obj.addClass( 'active' );	
 			}
 			
-			if ( $obj.hasClass( 'fullscreen' ) ) {
+			if ( $obj.hasClass( 'is-fullscreen' ) ) {
 				setTimeout( function() {
 					$( 'html' ).css( 'overflow-y', 'hidden' );
-					if ( !$obj.hasClass( 'video' ) ) {
-						$obj.find( '.content' ).css( 'overflow-y', 'scroll' );
+					
+					if ( !$obj.hasClass( 'is-video' ) ) {
+						$obj.find( '.uix-modal-box__content' ).css( 'overflow-y', 'scroll' );
 					}
 					
-				}, getTransitionDuration( '.modal-box#'+dataID ) );
+				}, getTransitionDuration( '.uix-modal-box#'+dataID ) );
 				
 			}
 		
 		});
 		
-		$( document ).on( 'click.modalDialogClose', '.modal-box .close-btn', function() {
+		$( document ).on( 'click.MODAL_DIALOG_CLOSE', '.uix-modal-box .uix-modal-box__close', function() {
 			$( this ).parent().removeClass( 'active' );
 		});
 		
-		$( document ).on( 'click.modalDialogClose', '.modal-box .close-btn, .modal-mask', function() {
-			$( '.modal-box' ).removeClass( 'active' );
-			TweenMax.to( '.modal-mask', 0.3, {
+		$( document ).on( 'click.MODAL_DIALOG_CLOSE', '.uix-modal-box .uix-modal-box__close, .uix-modal-mask', function() {
+			$( '.uix-modal-box' ).removeClass( 'active' );
+			TweenMax.to( '.uix-modal-mask', 0.3, {
 				css: {
 					opacity : 0,
 					display : 'none'
 				}
 			});
 				
-			$( '.modal-box' ).find( '.content' ).removeClass( 'no-fullscreen' );
+			$( '.uix-modal-box' ).find( '.uix-modal-box__content' ).removeClass( 'js-uix-no-fullscreen' );
 			$( 'html' ).css( 'overflow-y', 'auto' );
 			setTimeout( function() {
 	
-			}, getTransitionDuration( '.modal-box:first' ) );
+			}, getTransitionDuration( '.uix-modal-box:first' ) );
 			
 		});
 		
@@ -1736,16 +1824,16 @@ APP = ( function ( APP, $, window, document ) {
 
 		//-------- Show Toolbar when viewing site for WordPress
 		//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
-		var $el = $( '.admin-bar .menu-mobile-toggle' );
+		var $el = $( '.admin-bar .uix-menu-mobile__toggle' );
 		$window.on('scroll touchmove', function() {
 
 			var scrollTop = $( this ).scrollTop(),
 				spyTop    = 46;
 			
 			if ( scrollTop >= spyTop ) {
-				$el.addClass( 'spy-scroll-postion' );
+				$el.addClass( 'is-fixed' );
 			} else {
-				$el.removeClass( 'spy-scroll-postion' );	
+				$el.removeClass( 'is-fixed' );	
 			}
 			
 		});
@@ -1753,15 +1841,15 @@ APP = ( function ( APP, $, window, document ) {
 
 
 		//-------- Mobile Menu
-		var $toggle     = $( '.menu-mobile-toggle' ),
+		var $toggle     = $( '.uix-menu-mobile__toggle' ),
 			$toggleBody = $( 'body' );
 
 
 
 		//-------- Add mobile menu to your website
-		$( 'nav.menu-container' ).clone().addClass( 'mobile' ).appendTo( 'body' );
+		$( 'nav.uix-menu__container' ).clone().addClass( 'is-mobile' ).appendTo( 'body' );
 		//Wait until previous .appendTo() is complete
-		$.when( $( '.menu-container.mobile' ).length > 0 ).then( function(){
+		$.when( $( '.uix-menu__container.is-mobile' ).length > 0 ).then( function(){
 
 
 			$toggle.on( 'touchstart click', function( e ) {
@@ -1770,42 +1858,42 @@ APP = ( function ( APP, $, window, document ) {
 				//Prevents further propagation of the current event in the capturing and bubbling phases.
 				e.stopPropagation(); 
 
-				$( this ).toggleClass( 'open' );
-				if ( $( this ).hasClass( 'open' ) ) {
+				$( this ).toggleClass( 'is-opened' );
+				if ( $( this ).hasClass( 'is-opened' ) ) {
 
 					//Add mobile brand
-					var logoURL = $( '.mobile-brand img' ).attr( 'src' );
+					var logoURL = $( '.uix-brand--mobile img' ).attr( 'src' );
 					if ( typeof logoURL !== typeof undefined && logoURL != '' ) {
 						if ( logoURL.indexOf( 'blank.gif' ) >= 0 ) $( '.mobile-inner' ).css( 'margin-top', '-70px' );
 					}	
 
 					//Toggle effect
-					$toggleBody.addClass( 'menu-open' );
+					$toggleBody.addClass( 'js-uix-menu-opened' );
 				} else {
-					$toggleBody.removeClass( 'menu-open' );
+					$toggleBody.removeClass( 'js-uix-menu-opened' );
 				}
 
 			});
 
 			//Mobile menu mask event
-			$( '.menu-mobile-mask' ).on( 'click', function() {
-				$toggle.removeClass( 'open' );
-				$toggleBody.removeClass( 'menu-open' );
+			$( '.uix-menu-mobile__mask' ).on( 'click', function() {
+				$toggle.removeClass( 'is-opened' );
+				$toggleBody.removeClass( 'js-uix-menu-opened' );
 			});
 
 
 
 
 			// Menu click event
-			$( '.menu-container.mobile ul li' ).on( 'click', function( e ) {
+			$( '.uix-menu__container.is-mobile ul li' ).on( 'click', function( e ) {
 
-				  var arrowText = $( this ).find( '.mobile-nav-arrow' ).text().replace( /(.).*\1/g, "$1" );
+				  var arrowText = $( this ).find( '.uix-menu__arrow-mobile' ).text().replace( /(.).*\1/g, "$1" );
 				  $( this ).find( '> .sub-menu:not(.sub-sub)' ).toggle();
 
 				  if ( arrowText != '-' ) {
-					  $( this ).find( '.mobile-nav-arrow' ).text( '-' );
+					  $( this ).find( '.uix-menu__arrow-mobile' ).text( '-' );
 				  } else {
-					  $( this ).find( '.mobile-nav-arrow' ).text( '+' );
+					  $( this ).find( '.uix-menu__arrow-mobile' ).text( '+' );
 				  }
 
 
@@ -1823,8 +1911,8 @@ APP = ( function ( APP, $, window, document ) {
 					windowWidth = $window.width();
 
 					// Do stuff here
-					$toggleBody.removeClass( 'menu-open' );
-					$toggle.removeClass( 'open' );
+					$toggleBody.removeClass( 'js-uix-menu-opened' );
+					$toggle.removeClass( 'is-opened' );
 					sidrmenuInit( windowWidth );
 
 
@@ -1840,9 +1928,9 @@ APP = ( function ( APP, $, window, document ) {
 		function sidrmenuInit( w ) {
 
 			if ( w <= 768 ) {
-				$( '.menu-container.mobile .menu-main > li' ).each( function() {
+				$( '.uix-menu__container.is-mobile .uix-menu > li' ).each( function() {
 					if ( $( this ).find( 'ul' ).length > 0 ) {
-						if ( $( this ).find( '.mobile-nav-arrow' ).length < 1 ) $( this ).prepend( '<em class="mobile-nav-arrow">+</em>' );
+						if ( $( this ).find( '.uix-menu__arrow-mobile' ).length < 1 ) $( this ).prepend( '<em class="uix-menu__arrow-mobile">+</em>' );
 						$( this ).find( 'ul ul' ).addClass( 'sub-sub' );
 						$( this ).find( ' > a' ).attr( 'href', 'javascript:void(0);' );
 					}
@@ -2629,7 +2717,7 @@ APP = ( function ( APP, $, window, document ) {
 	APP._3D_CAROUSEL.version       = '0.0.1';
     APP._3D_CAROUSEL.documentReady = function( $ ) {
 
-		$( '.custom-carousel-3d' ).each( function() {
+		$( '.uix-3d-carousel' ).each( function() {
 			var $this             = $( this ),
 				dataTiming        = $this.data( 'timing' ),
 				dataPrevBtn       = $this.data( 'prev-btn' ),
@@ -2722,7 +2810,7 @@ APP = ( function ( APP, $, window, document ) {
 			$items.on( 'click', function( e ) {
 				e.preventDefault();
 
-				if ( $( this ).attr( 'class' ) == 'items left-pos' ) {
+				if ( $( this ).attr( 'class' ) == 'uix-3d-carousel__item uix-3d-carousel__item--left-pos' ) {
 					itemUpdates( 'counter-clockwise' );
 				} else {
 					itemUpdates( 'clockwise' );
@@ -2735,7 +2823,7 @@ APP = ( function ( APP, $, window, document ) {
 			var $dragDropTrigger = $wrapper;
 
 			//Mouse event
-			$dragDropTrigger.on( 'mousedown.threeDimensionalCarousel touchstart.threeDimensionalCarousel', function( e ) {
+			$dragDropTrigger.on( 'mousedown._3D_CAROUSEL touchstart._3D_CAROUSEL', function( e ) {
 				e.preventDefault();
 
 				var touches = e.originalEvent.touches;
@@ -2759,7 +2847,7 @@ APP = ( function ( APP, $, window, document ) {
 
 				}
 
-				$dragDropTrigger.on( 'mouseup.threeDimensionalCarousel touchmove.threeDimensionalCarousel', function( e ) {
+				$dragDropTrigger.on( 'mouseup._3D_CAROUSEL touchmove._3D_CAROUSEL', function( e ) {
 					e.preventDefault();
 
 					$( this ).removeClass( 'dragging' );
@@ -2795,7 +2883,7 @@ APP = ( function ( APP, $, window, document ) {
 						}
 
 						if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
-							$dragDropTrigger.off( 'touchmove.threeDimensionalCarousel' );
+							$dragDropTrigger.off( 'touchmove._3D_CAROUSEL' );
 						}	
 
 
@@ -2823,7 +2911,7 @@ APP = ( function ( APP, $, window, document ) {
 
 							}	
 
-							$dragDropTrigger.off( 'mouseup.threeDimensionalCarousel' );
+							$dragDropTrigger.off( 'mouseup._3D_CAROUSEL' );
 
 						}	
 
@@ -2852,15 +2940,15 @@ APP = ( function ( APP, $, window, document ) {
 
 				//moving carousel backwards
 				if ( direction == 'counter-clockwise' ) {
-					var leftitem = parseFloat( $wrapper.find( '> li.left-pos' ).attr( 'id' ) - 1 );
+					var leftitem = parseFloat( $wrapper.find( '> li.uix-3d-carousel__item--left-pos' ).attr( 'id' ) - 1 );
 					if ( leftitem == 0 ) {
 						leftitem = itemCount;
 					}
 
-					$wrapper.find( '> li.right-pos' ).removeClass( 'right-pos' ).addClass( 'back-pos' );
-					$wrapper.find( '> li.main-pos' ).removeClass( 'main-pos' ).addClass( 'right-pos' );
-					$wrapper.find( '> li.left-pos' ).removeClass( 'left-pos' ).addClass( 'main-pos' );
-					$wrapper.find( '> li#' + leftitem + '').removeClass( 'back-pos' ).addClass( 'left-pos' );
+					$wrapper.find( '> li.uix-3d-carousel__item--right-pos' ).removeClass( 'uix-3d-carousel__item--right-pos' ).addClass( 'uix-3d-carousel__item--back-pos' );
+					$wrapper.find( '> li.uix-3d-carousel__item--main-pos' ).removeClass( 'uix-3d-carousel__item--main-pos' ).addClass( 'uix-3d-carousel__item--right-pos' );
+					$wrapper.find( '> li.uix-3d-carousel__item--left-pos' ).removeClass( 'uix-3d-carousel__item--left-pos' ).addClass( 'uix-3d-carousel__item--main-pos' );
+					$wrapper.find( '> li#' + leftitem + '').removeClass( 'uix-3d-carousel__item--back-pos' ).addClass( 'uix-3d-carousel__item--left-pos' );
 
 					startItem--;
 
@@ -2896,10 +2984,10 @@ APP = ( function ( APP, $, window, document ) {
 						return position;
 					};
 
-					$wrapper.find( '> li#' + startItem + '').removeClass( 'main-pos' ).addClass( 'left-pos' );
-					$wrapper.find( '> li#' + (startItem + carousel3DPos()) + '').removeClass( 'right-pos' ).addClass( 'main-pos' );
-					$wrapper.find( '> li#' + (startItem + carousel3DPos()) + '').removeClass( 'back-pos' ).addClass( 'right-pos' );
-					$wrapper.find( '> li#' + carousel3DPos( 'leftposition' ) + '').removeClass( 'left-pos' ).addClass( 'back-pos' );
+					$wrapper.find( '> li#' + startItem + '').removeClass( 'uix-3d-carousel__item--main-pos' ).addClass( 'uix-3d-carousel__item--left-pos' );
+					$wrapper.find( '> li#' + (startItem + carousel3DPos()) + '').removeClass( 'uix-3d-carousel__item--right-pos' ).addClass( 'uix-3d-carousel__item--main-pos' );
+					$wrapper.find( '> li#' + (startItem + carousel3DPos()) + '').removeClass( 'uix-3d-carousel__item--back-pos' ).addClass( 'uix-3d-carousel__item--right-pos' );
+					$wrapper.find( '> li#' + carousel3DPos( 'leftposition' ) + '').removeClass( 'uix-3d-carousel__item--left-pos' ).addClass( 'uix-3d-carousel__item--back-pos' );
 
 					startItem++;
 					position = 0;
@@ -3210,8 +3298,6 @@ APP = ( function ( APP, $, window, document ) {
 			windowWidth               = $window.width(),
 			windowHeight              = $window.height(),
 			viewRenderer              = '3D-renderer';
-		
-		
 		
 		
 		// Generate one plane geometries mesh to scene
@@ -3543,7 +3629,7 @@ APP = ( function ( APP, $, window, document ) {
 	APP.ACCORDION.version       = '0.0.1';
     APP.ACCORDION.documentReady = function( $ ) {
 
-		$( '.custom-accordion' ).each( function() {
+		$( '.uix-accordion' ).each( function() {
 			var $this           = $( this ),
 				aEvent          = $this.data( 'event' ),
 				firstShow       = $this.data( 'first-show' ),
@@ -3616,7 +3702,7 @@ APP = ( function ( APP, $, window, document ) {
 		if ( windowWidth <= 768 ) return false;
 		
 		
-		$( '.custom-accordion-img' ).each( function() {
+		$( '.uix-accordion-img' ).each( function() {
 			var $this           = $( this ),
 				aEvent          = $this.data( 'event' ),
 				outReset        = $this.data( 'out-reset' ),
@@ -3643,6 +3729,7 @@ APP = ( function ( APP, $, window, document ) {
 			//Initialize the width of each item
 			itemInit();
 			
+			
 
 			$li.on( aEvent, function( e ) {
 				//Prevents further propagation of the current event in the capturing and bubbling phases.
@@ -3650,7 +3737,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 				
 				//Apply click method to outer div but not inner div
-				if ( e.target.className == 'outer' ) {
+				if ( e.target.className == 'uix-accordion-img__content' ) {
 					
 					if ( $( this ).hasClass( 'active' ) ) {
 						$( this ).addClass( 'active' );
@@ -3683,6 +3770,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 			}	
 			
+			
 	
 			/*
 			 * Initialize the width of each item
@@ -3712,6 +3800,338 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
+ * <!-- Advanced Content Slider -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.ADVANCED_CONTENT_SLIDER               = APP.ADVANCED_CONTENT_SLIDER || {};
+	APP.ADVANCED_CONTENT_SLIDER.version       = '0.0.2';
+    APP.ADVANCED_CONTENT_SLIDER.documentReady = function( $ ) {
+
+		var $window                   = $( window ),
+			windowWidth               = $window.width(),
+			windowHeight              = $window.height(),
+			animDuration              = 1200;
+		
+		
+		
+		sliderInit();
+		
+		$window.on( 'resize', function() {
+			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+			if ( $window.width() != windowWidth ) {
+
+				// Update the window width for next time
+				windowWidth = $window.width();
+
+				sliderInit();
+				
+			}
+		});
+		
+		
+		/*
+		 * Initialize slideshow
+		 *
+		 * @return {void}                   - The constructor.
+		 */
+        function sliderInit() {
+			
+			$( '.uix-advanced-content-slider' ).each( function() {
+				var $this                      = $( this ),
+					$items                     = $this.find( '.uix-advanced-content-slider__item' ),
+					$itemsWrapper              = $this.children( '.uix-advanced-content-slider__inner' ),
+					$first                     = $items.first(),
+					itemWidth                  = $this.width(),
+					itemsTotal                 = $items.length,
+					totalWidth                 = itemWidth*itemsTotal,
+					dataControlsPagination     = $this.data( 'controls-pagination' ),
+					dataControlsArrows         = $this.data( 'controls-arrows' ),
+					dataDraggable              = $this.data( 'draggable' ),
+					dataDraggableCursor        = $this.data( 'draggable-cursor' ),
+					dataControlsPaginationAuto = false;
+
+				
+				
+
+				if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-content-slider-sp-pagination';
+				if ( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-content-slider-sp-arrows';
+				if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
+				if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
+				
+				if ( $( dataControlsPagination ).html().length == 0 ) dataControlsPaginationAuto = true;
+
+				
+
+				//Initialize the width of each item
+				//-------------------------------------		
+				$first.addClass( 'active' );
+				
+				$items.css( 'width', itemWidth + 'px' );
+				
+				TweenMax.set( $itemsWrapper, { 
+					width: totalWidth,
+					onComplete  : function() {
+						$this.css( 'height', 'auto' );
+						
+					}
+				} );	
+				
+
+				//Pagination dots 
+				//-------------------------------------	
+				if ( dataControlsPaginationAuto ) {
+					var _dot       = '',
+						_dotActive = '';
+					_dot += '<ul class="uix-advanced-content-slider__pagination--default">';
+					for ( var i = 0; i < itemsTotal; i++ ) {
+
+						_dotActive = ( i == 0 ) ? 'class="active"' : '';
+
+						_dot += '<li><a '+_dotActive+' data-index="'+i+'" href="javascript:"></a></li>';
+					}
+					_dot += '</ul>';
+
+					if ( $( dataControlsPagination ).html() == '' ) $( dataControlsPagination ).html( _dot );	
+				} else {
+					$( dataControlsPagination ).find( 'li' ).first().find( 'a' ).addClass( 'active' );
+					$( dataControlsPagination ).find( 'li' ).first().addClass( 'active' );
+				}
+
+
+				$( dataControlsPagination ).find( 'li a' ).on( 'click', function( e ) {
+					e.preventDefault();
+
+					if ( !$( this ).hasClass( 'active' ) ) {
+						
+						sliderUpdates( $( this ).attr( 'data-index' ), $this, dataControlsArrows, dataControlsPagination );
+					}
+
+
+
+				});
+
+				
+				//Next/Prev buttons
+				//-------------------------------------		
+				var _prev = $( dataControlsArrows ).find( '.uix-advanced-content-slider__arrows--prev' ),
+					_next = $( dataControlsArrows ).find( '.uix-advanced-content-slider__arrows--next' );
+				
+				
+
+				$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
+				
+				_prev.addClass( 'disabled' );
+
+				_prev.on( 'click', function( e ) {
+					e.preventDefault();
+
+					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
+
+				});
+
+				_next.on( 'click', function( e ) {
+					e.preventDefault();
+
+					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
+
+				});
+				
+				
+				//Drag and Drop
+				//-------------------------------------	
+				var $dragDropTrigger = $items;
+
+				//Make the cursor a move icon when a user hovers over an item
+				if ( dataDraggable && dataDraggableCursor != '' && dataDraggableCursor != false ) $dragDropTrigger.css( 'cursor', dataDraggableCursor );
+				
+
+
+				//Mouse event
+				$dragDropTrigger.on( 'mousedown.ADVANCED_CONTENT_SLIDER touchstart.ADVANCED_CONTENT_SLIDER', function( e ) {
+					e.preventDefault();
+
+					var touches = e.originalEvent.touches;
+					
+					$( this ).addClass( 'dragging' );
+					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
+					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
+					
+					
+					if ( touches && touches.length ) {	
+						$( this ).data( 'origin_mouse_x', parseInt( touches[0].pageX ) );
+						$( this ).data( 'origin_mouse_y', parseInt( touches[0].pageY ) );
+
+					} else {
+						
+						if ( dataDraggable ) {
+							$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
+							$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );	
+						}
+
+
+					}
+					
+					$dragDropTrigger.on( 'mouseup.ADVANCED_CONTENT_SLIDER touchmove.ADVANCED_CONTENT_SLIDER', function( e ) {
+						e.preventDefault();
+
+						$( this ).removeClass( 'dragging' );
+						var touches        = e.originalEvent.touches,
+							origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
+							origin_mouse_y = $( this ).data( 'origin_mouse_y' );
+
+						if ( touches && touches.length ) {
+
+							var deltaX = origin_mouse_x - touches[0].pageX,
+								deltaY = origin_mouse_y - touches[0].pageY;
+
+							if ( deltaX >= 50) {
+								//--- left
+								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
+
+
+							}
+							if ( deltaX <= -50) {
+								//--- right
+								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
+
+
+							}
+							if ( deltaY >= 50) {
+								//--- up
+
+
+							}
+							if ( deltaY <= -50) {
+								//--- down
+
+							}
+
+							if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
+								$dragDropTrigger.off( 'touchmove.ADVANCED_CONTENT_SLIDER' );
+							}	
+
+
+						} else {
+							
+							if ( dataDraggable ) {
+								//right
+								if ( e.pageX > origin_mouse_x ) {
+									sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
+								}
+
+								//left
+								if ( e.pageX < origin_mouse_x ) {
+									sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
+								}
+
+								//down
+								if ( e.pageY > origin_mouse_y ) {
+
+								}
+
+								//up
+								if ( e.pageY < origin_mouse_y ) {
+
+								}	
+
+								$dragDropTrigger.off( 'mouseup.ADVANCED_CONTENT_SLIDER' );
+								
+							}	
+							
+							
+							
+						}
+
+
+
+					} );
+
+					
+					
+
+				} );
+
+			
+				
+			});	
+			
+		}
+		
+		/*
+		 * Transition Between Slides
+		 *
+		 * @param  {number} elementIndex     - Index of current slider.
+		 * @param  {object} slider           - Selector of the slider .
+		 * @param  {string} arrows           - Controller name of prev/next buttons.
+		 * @param  {string} pagination       - Controller name of pagination buttons.
+		 * @return {void}                    - The constructor.
+		 */
+        function sliderUpdates( elementIndex, slider, arrows, pagination ) {
+			
+			var $items        = slider.find( '.uix-advanced-content-slider__item' ),
+				itemsTotal    = $items.length,
+				$prev         = $( arrows ).find( '.uix-advanced-content-slider__arrows--prev' ),
+				$next         = $( arrows ).find( '.uix-advanced-content-slider__arrows--next' ),
+				$pagination   = $( pagination ).find( 'li a' );
+				
+			if ( elementIndex <= itemsTotal - 1 && elementIndex >= 0 ) {
+
+				if ( elementIndex > parseFloat( itemsTotal - 1 ) ) elementIndex = parseFloat( itemsTotal - 1 );
+				if ( elementIndex < 0 ) elementIndex = 0;
+				
+				$next.removeClass( 'disabled' );
+				$prev.removeClass( 'disabled' );
+				$pagination.removeClass( 'active' );
+				$pagination.parent().removeClass( 'active' );
+
+				if ( elementIndex == itemsTotal - 1 ) {
+					$next.addClass( 'disabled' );
+				}
+
+				if ( elementIndex == 0 ) {
+					$prev.addClass( 'disabled' );
+				}
+
+				
+
+				$items.removeClass( 'active' );
+				$items.eq( elementIndex ).addClass( 'active' );	
+				$pagination.eq( elementIndex ).addClass( 'active' );
+				$pagination.eq( elementIndex ).parent().addClass( 'active' );
+				
+				
+				
+				TweenMax.to( slider.children( '.uix-advanced-content-slider__inner' ), animDuration/1000, { 
+					x: '-' + ( slider.width() * elementIndex ),
+					onComplete  : function() {
+
+					},
+					ease: Power3.easeOut
+				} );
+				
+	
+			}
+			
+
+			
+		}
+		
+		
+    };
+
+    APP.components.documentReady.push( APP.ADVANCED_CONTENT_SLIDER.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+/* 
+ *************************************
  * <!-- Advanced Slider (Special Effects) -->
  *************************************
  */
@@ -3728,7 +4148,7 @@ APP = ( function ( APP, $, window, document ) {
 			windowWidth               = $window.width(),
 			windowHeight              = $window.height(),
 			animDuration              = 600,
-			$sliderWrapper            = $( '.custom-advanced-slider-sp' ),
+			$sliderWrapper            = $( '.uix-advanced-slider-sp' ),
 
 			
 			//Autoplay global variables
@@ -3737,8 +4157,8 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			//Basic webGL renderers 
-			rendererOuterID           = 'custom-advanced-slider-sp-canvas-outer',
-			rendererCanvasID          = 'custom-advanced-slider-sp-canvas',
+			rendererOuterID           = 'uix-advanced-slider-sp__canvas-container',
+			rendererCanvasID          = 'uix-advanced-slider-sp__canvas',
 			renderer,
 		    
 			//PIXI
@@ -3784,7 +4204,7 @@ APP = ( function ( APP, $, window, document ) {
 			$sliderWrapper.each( function()  {
 
 				var $this                    = $( this ),
-					$items                   = $this.find( '.item' ),
+					$items                   = $this.find( '.uix-advanced-slider-sp__item' ),
 					$first                   = $items.first(),
 					nativeItemW,
 					nativeItemH;
@@ -3924,7 +4344,7 @@ APP = ( function ( APP, $, window, document ) {
         function addItemsToStage( slider, sliderWrapper, nativeItemW, nativeItemH ) {
 			
 			var $this                    = slider,
-				$items                   = $this.find( '.item' ),
+				$items                   = $this.find( '.uix-advanced-slider-sp__item' ),
 				$first                   = $items.first(),
 				itemsTotal               = $items.length,
 				dataControlsPagination   = $this.data( 'controls-pagination' ),
@@ -3934,8 +4354,8 @@ APP = ( function ( APP, $, window, document ) {
 
 	
 			
-			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.custom-advanced-slider-sp-pagination';
-			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.custom-advanced-slider-sp-arrows';
+			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider-sp__pagination';
+			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
 			if( typeof dataLoop === typeof undefined ) dataLoop = false;
 			if( typeof dataFilterTexture === typeof undefined ) dataFilterTexture = '';
 
@@ -3953,7 +4373,7 @@ APP = ( function ( APP, $, window, document ) {
 				//Load slides to canvas
 				//-------------------------------------	
 				if ( $( '#' + rendererCanvasID ).length == 0 ) {
-					$this.prepend( '<div id="'+rendererOuterID+'" class="custom-advanced-slider-sp-canvas-outer"><canvas id="'+rendererCanvasID+'"></canvas></div>' );
+					$this.prepend( '<div id="'+rendererOuterID+'" class="uix-advanced-slider-sp__canvas-container"><canvas id="'+rendererCanvasID+'"></canvas></div>' );
 				}
 
 				//Basic webGL renderers 
@@ -3982,9 +4402,9 @@ APP = ( function ( APP, $, window, document ) {
 				//--------------------------------- Brightness Effect -------------------------------	
 				//----------------------------------------------------------------------------------
 				//Usage of returning sprite object: renderer.stage.children[index]
-				if ( $this.hasClass( 'eff-brightness' ) ) {
+				if ( $this.hasClass( 'uix-advanced-slider-sp--eff-brightness' ) ) {
 
-					$this.find( '.item' ).each( function( index )  {
+					$this.find( '.uix-advanced-slider-sp__item' ).each( function( index )  {
 
 						var $thisItem = $( this );
 
@@ -4089,9 +4509,9 @@ APP = ( function ( APP, $, window, document ) {
 				//--------------------------------- Liquid Distortion Effect -----------------------
 				//----------------------------------------------------------------------------------
 				//Usage of returning sprite object: items_container.children[index]
-				if ( $this.hasClass( 'eff-liquid' ) ) {
+				if ( $this.hasClass( 'uix-advanced-slider-sp--eff-liquid' ) ) {
 
-					$this.find( '.item' ).each( function( index )  {
+					$this.find( '.uix-advanced-slider-sp__item' ).each( function( index )  {
 
 						var $thisItem = $( this );
 
@@ -4245,9 +4665,9 @@ APP = ( function ( APP, $, window, document ) {
 				//--------------------------------- Liquid Distortion Effect 2 -----------------------
 				//----------------------------------------------------------------------------------
 				//Usage of returning sprite object: items_container.children[index]
-				if ( $this.hasClass( 'eff-liquid2' ) ) {
+				if ( $this.hasClass( 'uix-advanced-slider-sp--eff-liquid2' ) ) {
 
-					$this.find( '.item' ).each( function( index )  {
+					$this.find( '.uix-advanced-slider-sp__item' ).each( function( index )  {
 
 						var $thisItem = $( this );
 
@@ -4395,9 +4815,9 @@ APP = ( function ( APP, $, window, document ) {
 				//--------------------------------- Liquid Distortion Effect 3 -----------------------
 				//----------------------------------------------------------------------------------
 				//Usage of returning sprite object: items_container.children[index]
-				if ( $this.hasClass( 'eff-liquid3' ) ) {
+				if ( $this.hasClass( 'uix-advanced-slider-sp--eff-liquid3' ) ) {
 
-					$this.find( '.item' ).each( function( index )  {
+					$this.find( '.uix-advanced-slider-sp__item' ).each( function( index )  {
 
 						var $thisItem = $( this );
 
@@ -4548,7 +4968,7 @@ APP = ( function ( APP, $, window, document ) {
 				//--------------------------------- 3D Rotating Effect -----------------------------
 				//----------------------------------------------------------------------------------
 				//Usage of returning sprite object: texturesAll[ index ]     scenesAll[ index ]
-				if ( $this.hasClass( 'eff-3d-rotating' ) ) {
+				if ( $this.hasClass( 'uix-advanced-slider-sp--eff-3d-rotating' ) ) {
 
 
 					var texture;
@@ -4574,7 +4994,7 @@ APP = ( function ( APP, $, window, document ) {
 					//Add Geometries and Lights to the main container 
 					//-------------------------------------					
 					var init = function() {
-						$this.find( '.item' ).each( function( index )  {
+						$this.find( '.uix-advanced-slider-sp__item' ).each( function( index )  {
 
 							var $thisItem = $( this );
 
@@ -4914,8 +5334,8 @@ APP = ( function ( APP, $, window, document ) {
 
 			//Next/Prev buttons
 			//-------------------------------------		
-			var _prev = $( dataControlsArrows ).find( '.prev' ),
-				_next = $( dataControlsArrows ).find( '.next' );
+			var _prev = $( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--prev' ),
+				_next = $( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--next' );
 
 			$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
 
@@ -4964,14 +5384,14 @@ APP = ( function ( APP, $, window, document ) {
 				startY;
 
 
-			$this.on( 'touchstart.advancedSlider', function( event ) {
+			$this.on( 'touchstart.ADVANCED_SLIDER_FILTER', function( event ) {
 				var touches = event.originalEvent.touches;
 				if ( touches && touches.length ) {
 					startX = touches[0].pageX;
 					startY = touches[0].pageY;
 
 
-					$this.on( 'touchmove.advancedSlider', function( event ) {
+					$this.on( 'touchmove.ADVANCED_SLIDER_FILTER', function( event ) {
 
 						var touches = event.originalEvent.touches;
 						if ( touches && touches.length ) {
@@ -5010,7 +5430,7 @@ APP = ( function ( APP, $, window, document ) {
 
 							}
 							if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
-								$this.off( 'touchmove.advancedSlider' );
+								$this.off( 'touchmove.ADVANCED_SLIDER_FILTER' );
 							}
 						}
 
@@ -5032,7 +5452,7 @@ APP = ( function ( APP, $, window, document ) {
 		 */
         function sliderUpdates( elementIndex, slider ) {
 			
-			var $items                   = slider.find( '.item' ),
+			var $items                   = slider.find( '.uix-advanced-slider-sp__item' ),
 				$current                 = $items.eq( elementIndex ),
 			    total                    = $items.length,
 				dataCountTotal           = slider.data( 'count-total' ),
@@ -5044,8 +5464,8 @@ APP = ( function ( APP, $, window, document ) {
 
 			if( typeof dataCountTotal === typeof undefined ) dataCountTotal = 'p.count em.count';
 			if( typeof dataCountCur === typeof undefined ) dataCountCur = 'p.count em.current';
-			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.custom-advanced-slider-sp-pagination';
-			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.custom-advanced-slider-sp-arrows';
+			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider-sp__pagination';
+			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
 			if( typeof dataLoop === typeof undefined ) dataLoop = false;			
 		
 		    //Prevent bubbling
@@ -5064,8 +5484,8 @@ APP = ( function ( APP, $, window, document ) {
 				if ( elementIndex < 0 ) elementIndex = total-1;	
 			} else {
 				$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
-				if ( elementIndex == total - 1 ) $( dataControlsArrows ).find( '.next' ).addClass( 'disabled' );
-				if ( elementIndex == 0 ) $( dataControlsArrows ).find( '.prev' ).addClass( 'disabled' );
+				if ( elementIndex == total - 1 ) $( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--next' ).addClass( 'disabled' );
+				if ( elementIndex == 0 ) $( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--prev' ).addClass( 'disabled' );
 			}
 
 			// To determine if it is a touch screen.
@@ -5077,12 +5497,12 @@ APP = ( function ( APP, $, window, document ) {
 				if ( !dataLoop ) {
 					//first item
 					if ( elementIndex == 0 ) {
-						$( dataControlsArrows ).find( '.prev' ).addClass( 'disabled' );
+						$( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--prev' ).addClass( 'disabled' );
 					}
 
 					//last item
 					if ( elementIndex == total - 1 ) {
-						$( dataControlsArrows ).find( '.next' ).addClass( 'disabled' );
+						$( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--next' ).addClass( 'disabled' );
 					}	
 				}
 
@@ -5095,7 +5515,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			$items.removeClass( 'leave' );
-			slider.find( '.item.active' ).removeClass( 'active' ).addClass( 'leave' );
+			slider.find( '.uix-advanced-slider-sp__item.active' ).removeClass( 'active' ).addClass( 'leave' );
 			$items.eq( elementIndex ).addClass( 'active' ).removeClass( 'leave' );
 
 			
@@ -5149,7 +5569,7 @@ APP = ( function ( APP, $, window, document ) {
 				video.addEventListener( 'loadedmetadata', function( e ) {
 
 					//At the same time change the height of the canvas and slider container
-					var h = this.videoHeight*(slider.closest( '.custom-advanced-slider-outer' ).width()/this.videoWidth);
+					var h = this.videoHeight*(slider.closest( '.uix-advanced-slider__outline' ).width()/this.videoWidth);
 					
 					if ( Modernizr.webgl ) {
 						renderer.view.style.height = h + 'px';
@@ -5175,7 +5595,7 @@ APP = ( function ( APP, $, window, document ) {
 					    renderer.view.style.height = slider.find( 'img' ).height() + 'px';		
 					}
 					//---
-					$sliderWrapper.css( 'height', slider.closest( '.custom-advanced-slider-outer' ).width()*(this.height/this.width) + 'px' );		
+					$sliderWrapper.css( 'height', slider.closest( '.uix-advanced-slider__outline' ).width()*(this.height/this.width) + 'px' );		
 
 				};
 
@@ -5204,18 +5624,18 @@ APP = ( function ( APP, $, window, document ) {
 			if ( Modernizr.webgl ) {
 			
 				var $myRenderer           = $( '#' + rendererOuterID ),
-				    $current              = slider.find( '.item' ).eq( elementIndex ),
+				    $current              = slider.find( '.uix-advanced-slider-sp__item' ).eq( elementIndex ),
 					imgSel                = $current.find( 'img' ),
 				    curImgURL             = imgSel.attr( 'src' ),
 					stageW                = slider.width(),
 					stageH                = slider.height(),
-					spTotal               = slider.find( '.item' ).length;
+					spTotal               = slider.find( '.uix-advanced-slider-sp__item' ).length;
 				
 				
 				//----------------------------------------------------------------------------------
 				//--------------------------------- Brightness Effect -------------------------------	
 				//----------------------------------------------------------------------------------
-				if ( slider.hasClass( 'eff-brightness' ) ) {
+				if ( slider.hasClass( 'uix-advanced-slider-sp--eff-brightness' ) ) {
 				
 			
 					//Display wrapper of canvas (transitions between slides)
@@ -5315,7 +5735,7 @@ APP = ( function ( APP, $, window, document ) {
 				//----------------------------------------------------------------------------------
 				//--------------------------------- Liquid Distortion Effect -----------------------
 				//----------------------------------------------------------------------------------
-				if ( slider.hasClass( 'eff-liquid' ) ) {
+				if ( slider.hasClass( 'uix-advanced-slider-sp--eff-liquid' ) ) {
 					
 				
 					
@@ -5446,7 +5866,7 @@ APP = ( function ( APP, $, window, document ) {
 				//----------------------------------------------------------------------------------
 				//--------------------------------- Liquid Distortion Effect 2 -----------------------
 				//----------------------------------------------------------------------------------
-				if ( slider.hasClass( 'eff-liquid2' ) ) {
+				if ( slider.hasClass( 'uix-advanced-slider-sp--eff-liquid2' ) ) {
 					
 				
 					
@@ -5572,7 +5992,7 @@ APP = ( function ( APP, $, window, document ) {
 				//----------------------------------------------------------------------------------
 				//--------------------------------- Liquid Distortion Effect 3 -----------------------
 				//----------------------------------------------------------------------------------
-				if ( slider.hasClass( 'eff-liquid3' ) ) {
+				if ( slider.hasClass( 'uix-advanced-slider-sp--eff-liquid3' ) ) {
 					
 				
 					
@@ -5689,7 +6109,7 @@ APP = ( function ( APP, $, window, document ) {
 				//----------------------------------------------------------------------------------
 				//--------------------------------- 3D Rotating Effect -----------------------------
 				//----------------------------------------------------------------------------------
-				if ( slider.hasClass( 'eff-3d-rotating' ) ) {
+				if ( slider.hasClass( 'uix-advanced-slider-sp--eff-3d-rotating' ) ) {
 					
 					//Display wrapper of canvas (transitions between slides)
 					//-------------------------------------	
@@ -5782,7 +6202,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 				
 			} else {
-				slider.find( '.item canvas' ).hide();
+				slider.find( '.uix-advanced-slider-sp__item canvas' ).hide();
 			}
 	
 			
@@ -5797,10 +6217,10 @@ APP = ( function ( APP, $, window, document ) {
 		 * @return {void}                    - The constructor.
 		 */
 		function normalSliderVideoInit( wrapper, play ) {
-			wrapper.find( '.slider-video-embed' ).each( function()  {
+			wrapper.find( '.uix-video__slider' ).each( function()  {
 				var $this          = $( this ),
-					videoWrapperW  = $this.closest( '.custom-advanced-slider-outer' ).width(),
-					videoWrapperH  = $this.closest( '.custom-advanced-slider-outer' ).height(),
+					videoWrapperW  = $this.closest( '.uix-advanced-slider__outline' ).width(),
+					videoWrapperH  = $this.closest( '.uix-advanced-slider__outline' ).height(),
 					tempID         = 'video-' + Math.random()*1000000000000000000,
 					curVideoID     = tempID,
 					coverPlayBtnID = 'videocover-' + curVideoID,
@@ -5844,7 +6264,7 @@ APP = ( function ( APP, $, window, document ) {
 
 				//Display cover and play buttons when some mobile device browsers cannot automatically play video
 				if ( $( '#' + coverPlayBtnID ).length == 0 ) {
-					$( '<div id="'+coverPlayBtnID+'" class="web-video-embed-cover"><span class="cover-show" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="cover-play"></span></div>' ).insertBefore( $this );
+					$( '<div id="'+coverPlayBtnID+'" class="uix-video__cover"><span class="uix-video__cover-placeholder" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="cover-play"></span></div>' ).insertBefore( $this );
 
 
 					var btnEv = ( Modernizr.touchevents ) ? 'touchstart' : 'click';
@@ -5862,7 +6282,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 				//Add replay button to video 
 				if ( $replayBtn.length == 0 ) {
-					$this.after( '<span class="web-video-replay" id="'+curVideoID+'-replay-btn"></span>' );
+					$this.after( '<span class="uix-video__btn-play" id="'+curVideoID+'-replay-btn"></span>' );
 				}
 				
 				
@@ -6041,7 +6461,7 @@ APP = ( function ( APP, $, window, document ) {
 			windowWidth               = $window.width(),
 			windowHeight              = $window.height(),
 			animDuration              = 600,
-			$sliderWrapper            = $( '.custom-advanced-slider' ),
+			$sliderWrapper            = $( '.uix-advanced-slider' ),
 			
 			//Autoplay global variables
 			timer                     = null,
@@ -6075,7 +6495,7 @@ APP = ( function ( APP, $, window, document ) {
 			$sliderWrapper.each( function()  {
 
 				var $this                    = $( this ),
-					$items                   = $this.find( '.item' ),
+					$items                   = $this.find( '.uix-advanced-slider__item' ),
 					$first                   = $items.first(),
 					nativeItemW,
 					nativeItemH;
@@ -6216,7 +6636,7 @@ APP = ( function ( APP, $, window, document ) {
         function addItemsToStage( slider, sliderWrapper, nativeItemW, nativeItemH ) {
 			
 			var $this                    = slider,
-				$items                   = $this.find( '.item' ),
+				$items                   = $this.find( '.uix-advanced-slider__item' ),
 				$first                   = $items.first(),
 				itemsTotal               = $items.length,
 				dataControlsPagination   = $this.data( 'controls-pagination' ),
@@ -6225,8 +6645,8 @@ APP = ( function ( APP, $, window, document ) {
 
 	
 			
-			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.custom-advanced-slider-sp-pagination';
-			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.custom-advanced-slider-sp-arrows';
+			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider-sp__pagination';
+			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
 			if( typeof dataLoop === typeof undefined ) dataLoop = false;
 
 				
@@ -6277,8 +6697,8 @@ APP = ( function ( APP, $, window, document ) {
 
 			//Next/Prev buttons
 			//-------------------------------------		
-			var _prev = $( dataControlsArrows ).find( '.prev' ),
-				_next = $( dataControlsArrows ).find( '.next' );
+			var _prev = $( dataControlsArrows ).find( '.uix-advanced-slider__arrows--prev' ),
+				_next = $( dataControlsArrows ).find( '.uix-advanced-slider__arrows--next' );
 
 			$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
 
@@ -6319,14 +6739,14 @@ APP = ( function ( APP, $, window, document ) {
 				startY;
 
 
-			$this.on( 'touchstart.advancedSlider', function( event ) {
+			$this.on( 'touchstart.ADVANCED_SLIDER', function( event ) {
 				var touches = event.originalEvent.touches;
 				if ( touches && touches.length ) {
 					startX = touches[0].pageX;
 					startY = touches[0].pageY;
 
 
-					$this.on( 'touchmove.advancedSlider', function( event ) {
+					$this.on( 'touchmove.ADVANCED_SLIDER', function( event ) {
 
 						var touches = event.originalEvent.touches;
 						if ( touches && touches.length ) {
@@ -6365,7 +6785,7 @@ APP = ( function ( APP, $, window, document ) {
 
 							}
 							if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
-								$this.off( 'touchmove.advancedSlider' );
+								$this.off( 'touchmove.ADVANCED_SLIDER' );
 							}
 						}
 
@@ -6388,7 +6808,7 @@ APP = ( function ( APP, $, window, document ) {
 		 */
         function sliderUpdates( elementIndex, slider ) {
 			
-			var $items                   = slider.find( '.item' ),
+			var $items                   = slider.find( '.uix-advanced-slider__item' ),
 				$current                 = $items.eq( elementIndex ),
 			    total                    = $items.length,
 				dataCountTotal           = slider.data( 'count-total' ),
@@ -6400,8 +6820,8 @@ APP = ( function ( APP, $, window, document ) {
 
 			if( typeof dataCountTotal === typeof undefined ) dataCountTotal = 'p.count em.count';
 			if( typeof dataCountCur === typeof undefined ) dataCountCur = 'p.count em.current';
-			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.custom-advanced-slider-sp-pagination';
-			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.custom-advanced-slider-sp-arrows';
+			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider-sp__pagination';
+			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
 			if( typeof dataLoop === typeof undefined ) dataLoop = false;
 					
 		
@@ -6421,8 +6841,8 @@ APP = ( function ( APP, $, window, document ) {
 				if ( elementIndex < 0 ) elementIndex = total-1;	
 			} else {
 				$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
-				if ( elementIndex == total - 1 ) $( dataControlsArrows ).find( '.next' ).addClass( 'disabled' );
-				if ( elementIndex == 0 ) $( dataControlsArrows ).find( '.prev' ).addClass( 'disabled' );
+				if ( elementIndex == total - 1 ) $( dataControlsArrows ).find( '.uix-advanced-slider__arrows--next' ).addClass( 'disabled' );
+				if ( elementIndex == 0 ) $( dataControlsArrows ).find( '.uix-advanced-slider__arrows--prev' ).addClass( 'disabled' );
 			}
 
 			// To determine if it is a touch screen.
@@ -6434,12 +6854,12 @@ APP = ( function ( APP, $, window, document ) {
 				if ( !dataLoop ) {
 					//first item
 					if ( elementIndex == 0 ) {
-						$( dataControlsArrows ).find( '.prev' ).addClass( 'disabled' );
+						$( dataControlsArrows ).find( '.uix-advanced-slider__arrows--prev' ).addClass( 'disabled' );
 					}
 
 					//last item
 					if ( elementIndex == total - 1 ) {
-						$( dataControlsArrows ).find( '.next' ).addClass( 'disabled' );
+						$( dataControlsArrows ).find( '.uix-advanced-slider__arrows--next' ).addClass( 'disabled' );
 					}	
 				}
 
@@ -6452,7 +6872,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			$items.removeClass( 'leave' );
-			slider.find( '.item.active' ).removeClass( 'active' ).addClass( 'leave' );
+			slider.find( '.uix-advanced-slider__item.active' ).removeClass( 'active' ).addClass( 'leave' );
 			$items.eq( elementIndex ).addClass( 'active' ).removeClass( 'leave' );
 
 			
@@ -6493,7 +6913,7 @@ APP = ( function ( APP, $, window, document ) {
 
 				video.addEventListener( 'loadedmetadata', function( e ) {
 
-					$sliderWrapper.css( 'height', this.videoHeight*(slider.closest( '.custom-advanced-slider-outer' ).width()/this.videoWidth) + 'px' );	
+					$sliderWrapper.css( 'height', this.videoHeight*(slider.closest( '.uix-advanced-slider__outline' ).width()/this.videoWidth) + 'px' );	
 
 				}, false);	
 
@@ -6508,7 +6928,7 @@ APP = ( function ( APP, $, window, document ) {
 
 				img.onload = function() {
 
-					$sliderWrapper.css( 'height', slider.closest( '.custom-advanced-slider-outer' ).width()*(this.height/this.width) + 'px' );		
+					$sliderWrapper.css( 'height', slider.closest( '.uix-advanced-slider__outline' ).width()*(this.height/this.width) + 'px' );		
 
 				};
 
@@ -6529,10 +6949,10 @@ APP = ( function ( APP, $, window, document ) {
 		 * @return {void}                    - The constructor.
 		 */
 		function normalSliderVideoInit( wrapper, play ) {
-			wrapper.find( '.slider-video-embed' ).each( function()  {
+			wrapper.find( '.uix-video__slider' ).each( function()  {
 				var $this          = $( this ),
-					videoWrapperW  = $this.closest( '.custom-advanced-slider-outer' ).width(),
-					videoWrapperH  = $this.closest( '.custom-advanced-slider-outer' ).height(),
+					videoWrapperW  = $this.closest( '.uix-advanced-slider__outline' ).width(),
+					videoWrapperH  = $this.closest( '.uix-advanced-slider__outline' ).height(),
 					tempID         = 'video-' + Math.random()*1000000000000000000,
 					curVideoID     = tempID,
 					coverPlayBtnID = 'videocover-' + curVideoID,
@@ -6575,7 +6995,7 @@ APP = ( function ( APP, $, window, document ) {
 
 				//Display cover and play buttons when some mobile device browsers cannot automatically play video
 				if ( $( '#' + coverPlayBtnID ).length == 0 ) {
-					$( '<div id="'+coverPlayBtnID+'" class="web-video-embed-cover"><span class="cover-show" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="cover-play"></span></div>' ).insertBefore( $this );
+					$( '<div id="'+coverPlayBtnID+'" class="uix-video__cover"><span class="uix-video__cover-placeholder" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="cover-play"></span></div>' ).insertBefore( $this );
 
 
 					var btnEv = ( Modernizr.touchevents ) ? 'touchstart' : 'click';
@@ -6594,7 +7014,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 				//Add replay button to video 
 				if ( $replayBtn.length == 0 ) {
-					$this.after( '<span class="web-video-replay" id="'+curVideoID+'-replay-btn"></span>' );
+					$this.after( '<span class="uix-video__btn-play" id="'+curVideoID+'-replay-btn"></span>' );
 				}
 				
 				
@@ -6761,338 +7181,6 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
- * <!-- Advanced Content Slider -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.ADVANCED_CONTENT_SLIDER               = APP.ADVANCED_CONTENT_SLIDER || {};
-	APP.ADVANCED_CONTENT_SLIDER.version       = '0.0.2';
-    APP.ADVANCED_CONTENT_SLIDER.documentReady = function( $ ) {
-
-		var $window                   = $( window ),
-			windowWidth               = $window.width(),
-			windowHeight              = $window.height(),
-			animDuration              = 1200;
-		
-		
-		
-		sliderInit();
-		
-		$window.on( 'resize', function() {
-			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( $window.width() != windowWidth ) {
-
-				// Update the window width for next time
-				windowWidth = $window.width();
-
-				sliderInit();
-				
-			}
-		});
-		
-		
-		/*
-		 * Initialize slideshow
-		 *
-		 * @return {void}                   - The constructor.
-		 */
-        function sliderInit() {
-			
-			$( '.custom-advanced-content-slider' ).each( function() {
-				var $this                      = $( this ),
-					$items                     = $this.find( '.item' ),
-					$itemsWrapper              = $this.children( '.inner' ),
-					$first                     = $items.first(),
-					itemWidth                  = $this.width(),
-					itemsTotal                 = $items.length,
-					totalWidth                 = itemWidth*itemsTotal,
-					dataControlsPagination     = $this.data( 'controls-pagination' ),
-					dataControlsArrows         = $this.data( 'controls-arrows' ),
-					dataDraggable              = $this.data( 'draggable' ),
-					dataDraggableCursor        = $this.data( 'draggable-cursor' ),
-					dataControlsPaginationAuto = false;
-
-				
-				
-
-				if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.custom-advanced-content-slider-sp-pagination';
-				if ( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.custom-advanced-content-slider-sp-arrows';
-				if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
-				if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
-				
-				if ( $( dataControlsPagination ).html().length == 0 ) dataControlsPaginationAuto = true;
-
-				
-
-				//Initialize the width of each item
-				//-------------------------------------		
-				$first.addClass( 'active' );
-				
-				$items.css( 'width', itemWidth + 'px' );
-				
-				TweenMax.set( $itemsWrapper, { 
-					width: totalWidth,
-					onComplete  : function() {
-						$this.css( 'height', 'auto' );
-						
-					}
-				} );	
-				
-
-				//Pagination dots 
-				//-------------------------------------	
-				if ( dataControlsPaginationAuto ) {
-					var _dot       = '',
-						_dotActive = '';
-					_dot += '<ul class="default">';
-					for ( var i = 0; i < itemsTotal; i++ ) {
-
-						_dotActive = ( i == 0 ) ? 'class="active"' : '';
-
-						_dot += '<li><a '+_dotActive+' data-index="'+i+'" href="javascript:"></a></li>';
-					}
-					_dot += '</ul>';
-
-					if ( $( dataControlsPagination ).html() == '' ) $( dataControlsPagination ).html( _dot );	
-				} else {
-					$( dataControlsPagination ).find( 'li' ).first().find( 'a' ).addClass( 'active' );
-					$( dataControlsPagination ).find( 'li' ).first().addClass( 'active' );
-				}
-
-
-				$( dataControlsPagination ).find( 'li a' ).on( 'click', function( e ) {
-					e.preventDefault();
-
-					if ( !$( this ).hasClass( 'active' ) ) {
-						
-						sliderUpdates( $( this ).attr( 'data-index' ), $this, dataControlsArrows, dataControlsPagination );
-					}
-
-
-
-				});
-
-				
-				//Next/Prev buttons
-				//-------------------------------------		
-				var _prev = $( dataControlsArrows ).find( '.prev' ),
-					_next = $( dataControlsArrows ).find( '.next' );
-				
-				
-
-				$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
-				
-				_prev.addClass( 'disabled' );
-
-				_prev.on( 'click', function( e ) {
-					e.preventDefault();
-
-					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
-
-				});
-
-				_next.on( 'click', function( e ) {
-					e.preventDefault();
-
-					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
-
-				});
-				
-				
-				//Drag and Drop
-				//-------------------------------------	
-				var $dragDropTrigger = $items;
-
-				//Make the cursor a move icon when a user hovers over an item
-				if ( dataDraggable && dataDraggableCursor != '' && dataDraggableCursor != false ) $dragDropTrigger.css( 'cursor', dataDraggableCursor );
-				
-
-
-				//Mouse event
-				$dragDropTrigger.on( 'mousedown.advancedContentSlider touchstart.advancedContentSlider', function( e ) {
-					e.preventDefault();
-
-					var touches = e.originalEvent.touches;
-					
-					$( this ).addClass( 'dragging' );
-					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
-					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
-					
-					
-					if ( touches && touches.length ) {	
-						$( this ).data( 'origin_mouse_x', parseInt( touches[0].pageX ) );
-						$( this ).data( 'origin_mouse_y', parseInt( touches[0].pageY ) );
-
-					} else {
-						
-						if ( dataDraggable ) {
-							$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
-							$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );	
-						}
-
-
-					}
-					
-					$dragDropTrigger.on( 'mouseup.advancedContentSlider touchmove.advancedContentSlider', function( e ) {
-						e.preventDefault();
-
-						$( this ).removeClass( 'dragging' );
-						var touches        = e.originalEvent.touches,
-							origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
-							origin_mouse_y = $( this ).data( 'origin_mouse_y' );
-
-						if ( touches && touches.length ) {
-
-							var deltaX = origin_mouse_x - touches[0].pageX,
-								deltaY = origin_mouse_y - touches[0].pageY;
-
-							if ( deltaX >= 50) {
-								//--- left
-								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
-
-
-							}
-							if ( deltaX <= -50) {
-								//--- right
-								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
-
-
-							}
-							if ( deltaY >= 50) {
-								//--- up
-
-
-							}
-							if ( deltaY <= -50) {
-								//--- down
-
-							}
-
-							if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
-								$dragDropTrigger.off( 'touchmove.advancedContentSlider' );
-							}	
-
-
-						} else {
-							
-							if ( dataDraggable ) {
-								//right
-								if ( e.pageX > origin_mouse_x ) {
-									sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
-								}
-
-								//left
-								if ( e.pageX < origin_mouse_x ) {
-									sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
-								}
-
-								//down
-								if ( e.pageY > origin_mouse_y ) {
-
-								}
-
-								//up
-								if ( e.pageY < origin_mouse_y ) {
-
-								}	
-
-								$dragDropTrigger.off( 'mouseup.advancedContentSlider' );
-								
-							}	
-							
-							
-							
-						}
-
-
-
-					} );
-
-					
-					
-
-				} );
-
-			
-				
-			});	
-			
-		}
-		
-		/*
-		 * Transition Between Slides
-		 *
-		 * @param  {number} elementIndex     - Index of current slider.
-		 * @param  {object} slider           - Selector of the slider .
-		 * @param  {string} arrows           - Controller name of prev/next buttons.
-		 * @param  {string} pagination       - Controller name of pagination buttons.
-		 * @return {void}                    - The constructor.
-		 */
-        function sliderUpdates( elementIndex, slider, arrows, pagination ) {
-			
-			var $items        = slider.find( '.item' ),
-				itemsTotal    = $items.length,
-				$prev         = $( arrows ).find( '.prev' ),
-				$next         = $( arrows ).find( '.next' ),
-				$pagination   = $( pagination ).find( 'li a' );
-				
-			if ( elementIndex <= itemsTotal - 1 && elementIndex >= 0 ) {
-
-				if ( elementIndex > parseFloat( itemsTotal - 1 ) ) elementIndex = parseFloat( itemsTotal - 1 );
-				if ( elementIndex < 0 ) elementIndex = 0;
-				
-				$next.removeClass( 'disabled' );
-				$prev.removeClass( 'disabled' );
-				$pagination.removeClass( 'active' );
-				$pagination.parent().removeClass( 'active' );
-
-				if ( elementIndex == itemsTotal - 1 ) {
-					$next.addClass( 'disabled' );
-				}
-
-				if ( elementIndex == 0 ) {
-					$prev.addClass( 'disabled' );
-				}
-
-				
-
-				$items.removeClass( 'active' );
-				$items.eq( elementIndex ).addClass( 'active' );	
-				$pagination.eq( elementIndex ).addClass( 'active' );
-				$pagination.eq( elementIndex ).parent().addClass( 'active' );
-				
-				
-				
-				TweenMax.to( slider.children( '.inner' ), animDuration/1000, { 
-					x: '-' + ( slider.width() * elementIndex ),
-					onComplete  : function() {
-
-					},
-					ease: Power3.easeOut
-				} );
-				
-	
-			}
-			
-
-			
-		}
-		
-		
-    };
-
-    APP.components.documentReady.push( APP.ADVANCED_CONTENT_SLIDER.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
-/* 
- *************************************
  * <!-- Counter -->
  *************************************
  */	
@@ -7237,7 +7325,7 @@ APP = ( function ( APP, $, window, document ) {
     APP.DROPDOWN_MENU.documentReady = function( $ ) {
 
 		//Create a trigger of Dropdown Menu on Click
-		$( '.custom-dropdown-trigger' ).each( function() {
+		$( '.uix-dropdown-menu' ).each( function() {
 			var $this = $( this );
 
 			//Close the target
@@ -7246,12 +7334,12 @@ APP = ( function ( APP, $, window, document ) {
 				//Prevents further propagation of the current event in the capturing and bubbling phases.
 				e.stopPropagation();
 
-				$this.toggleClass( 'open' );
+				$this.toggleClass( 'is-opened' );
 
 			});	
 
 			$this.find( 'li a' ).on( 'click', function() {
-				$this.removeClass( 'open' );	
+				$this.removeClass( 'is-opened' );	
 				$this.find( 'input[type="hidden"]' ).val( $( this ).data( 'value' ) );
 				$this.find( '> label > span' ).html( $( this ).text() );
  
@@ -7259,7 +7347,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 			$( 'html' ).on( 'click', function() {
-				$this.removeClass( 'open' );	
+				$this.removeClass( 'is-opened' );	
 			});		
 
 
@@ -7289,7 +7377,7 @@ APP = ( function ( APP, $, window, document ) {
 	APP.DROPDOWN_MENU2.version       = '0.0.1';
     APP.DROPDOWN_MENU2.documentReady = function( $ ) {
 
-		var $verticalMenuLi = $( '.custom-vertical-menu li' );
+		var $verticalMenuLi = $( '.uix-vertical-menu li' );
 		
 		$verticalMenuLi.find( '> a' ).on( 'click', function( e ) {
 			e.preventDefault();
@@ -7302,11 +7390,11 @@ APP = ( function ( APP, $, window, document ) {
         });
 		
 		//Add multilevel indicator arrow
-        $verticalMenuLi.find( '> a' ).append( '<span class="arrow"></span>' );
+        $verticalMenuLi.find( '> a' ).append( '<span class="uix-vertical-menu__arrow"></span>' );
 		$verticalMenuLi.each( function() {
 			var len = $( this ).find( 'ul' ).length;
 			if ( len == 0 ) {
-				$( this ).children( 'a' ).children( '.arrow' ).hide();
+				$( this ).children( 'a' ).children( '.uix-vertical-menu__arrow' ).hide();
 			}
 		});
 		
@@ -7588,6 +7676,7 @@ APP = ( function ( APP, $, window, document ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
+			method    : 'POST',
 			callback  : null,
 			jsonFile  : '',
 			key       : 'addresses'
@@ -7601,7 +7690,7 @@ APP = ( function ( APP, $, window, document ) {
 			//Returns JSON data
 			$.ajax({
 				url      : settings.jsonFile,
-				method   : 'POST',
+				method   : settings.method,
 				dataType : 'json',
 				success  : function ( data ) { 
 
@@ -7759,13 +7848,13 @@ APP = ( function ( APP, $, window, document ) {
 		 */
         function initslides( sliderWrapper, thisSlider, fireState ) {
 
-			var prefix            = 'custom-theme',
+			var prefix            = 'uix-flexslider__',
 				curIndex          = thisSlider.currentSlide,
 				count             = thisSlider.count,
-				activeClass       = prefix+'-flex-active-slide',
+				activeClass       = prefix + 'item--active',
 				prevClass         = activeClass + '-prev',
 				nextClass         = activeClass + '-next',
-				$items            = thisSlider.find( '.item' ),
+				$items            = thisSlider.find( '.'+prefix+'item' ),
 				$current          = thisSlider.slides.eq( curIndex ),
 				$prev             = thisSlider.slides.eq( curIndex - 1 ),
 				$next             = thisSlider.slides.eq( thisSlider.animatingTo ),
@@ -7832,8 +7921,8 @@ APP = ( function ( APP, $, window, document ) {
 						pimg       = '',
 						nimg       = '',
 						$plink     = $( dataPNThumbs+'> a' ),
-						$plinkPrev = $plink.filter( '.thumb-prev' ),
-						$plinkNext = $plink.filter( '.thumb-next' );
+						$plinkPrev = $plink.filter( '.uix-flexslider__arrows-thumb--prev' ),
+						$plinkNext = $plink.filter( '.uix-flexslider__arrows-thumb--next' );
 
 					$plinkPrev.removeClass( 'disabled' );
 					$plinkNext.removeClass( 'disabled' );
@@ -7898,8 +7987,8 @@ APP = ( function ( APP, $, window, document ) {
 				//Thumbnail ControlNav Pattern
 				//-------------------------------------
 				if ( dataNhumbs && dataNhumbs != '' ) {
-					$( '.custom-theme-flexslider-thumbs'+dataNhumbs+' > ul > li' ).removeClass( 'active' );
-					$( '.custom-theme-flexslider-thumbs'+dataNhumbs+' > ul > li' ).eq( curIndex ).addClass( 'active' );			
+					$( '.uix-flexslider__thumbs'+dataNhumbs+' > ul > li' ).removeClass( 'active' );
+					$( '.uix-flexslider__thumbs'+dataNhumbs+' > ul > li' ).eq( curIndex ).addClass( 'active' );			
 				}
 
 
@@ -8008,13 +8097,13 @@ APP = ( function ( APP, $, window, document ) {
 				if ( dataParallax ) {
 				
 					
-					var dir = 'left';
+					var dir = 'uix-flexslider__item--left';
 
 					$.each( thisSlider.slides, function( i, item ) {
 						var el = $( item );
-						el.removeClass( 'right left' );
-						if (i >= thisSlider.animatingTo && dir !== 'right') {
-							dir = 'right';
+						el.removeClass( 'uix-flexslider__item--right uix-flexslider__item--left' );
+						if (i >= thisSlider.animatingTo && dir !== 'uix-flexslider__item--right') {
+							dir = 'uix-flexslider__item--right';
 						} else {
 							el.addClass( dir );
 						}
@@ -8039,7 +8128,7 @@ APP = ( function ( APP, $, window, document ) {
 		 * @return {void}                    - The constructor.
 		 */
 		function videoEmbedInit( wrapper, play ) {
-			wrapper.find( '.slider-video-embed' ).each( function()  {
+			wrapper.find( '.uix-video__slider' ).each( function()  {
 				var $this          = $( this ),
 					videoWrapperW  = $this.closest( '[data-embed-video-wrapper]' ).width(),
 					videoWrapperH  = $this.closest( '[data-embed-video-wrapper]' ).height(),
@@ -8084,7 +8173,7 @@ APP = ( function ( APP, $, window, document ) {
 
 				//Display cover and play buttons when some mobile device browsers cannot automatically play video
 				if ( $( '#' + coverPlayBtnID ).length == 0 ) {
-					$( '<div id="'+coverPlayBtnID+'" class="web-video-embed-cover"><span class="cover-show" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="cover-play"></span></div>' ).insertBefore( $this );
+					$( '<div id="'+coverPlayBtnID+'" class="uix-video__cover"><span class="uix-video__cover-placeholder" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="cover-play"></span></div>' ).insertBefore( $this );
 
 
 					var btnEv = ( Modernizr.touchevents ) ? 'touchstart' : 'click';
@@ -8102,7 +8191,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 				//Add replay button to video 
 				if ( $replayBtn.length == 0 ) {
-					$this.after( '<span class="web-video-replay" id="'+curVideoID+'-replay-btn"></span>' );
+					$this.after( '<span class="uix-video__btn-play" id="'+curVideoID+'-replay-btn"></span>' );
 				}
 				
 				
@@ -8261,7 +8350,7 @@ APP = ( function ( APP, $, window, document ) {
 		 */
         function slidesExDraggable( $obj ) {
 			
-			var $dragDropTrigger = $obj.find( '.custom-theme-slides > div.item' );
+			var $dragDropTrigger = $obj.find( '.uix-flexslider__inner > div.uix-flexslider__item' );
 			
 			//Make the cursor a move icon when a user hovers over an item
 			$dragDropTrigger.css( 'cursor', 'move' );
@@ -8375,9 +8464,9 @@ APP = ( function ( APP, $, window, document ) {
 		 */
         function initslidesWithNavThumb( slider, navThumbClass ) {
 
-				$( '.custom-theme-flexslider-thumbs'+navThumbClass+' > ul > li' ).on( 'click', function() {
+				$( '.uix-flexslider__thumbs'+navThumbClass+' > ul > li' ).on( 'click', function() {
 
-					$( '.custom-theme-flexslider-thumbs'+navThumbClass+' > ul > li' ).removeClass( 'active' );
+					$( '.uix-flexslider__thumbs'+navThumbClass+' > ul > li' ).removeClass( 'active' );
 					$( this ).addClass( 'active' );
 					slider.flexslider( $( this ).index() );
 
@@ -8427,7 +8516,7 @@ APP = ( function ( APP, $, window, document ) {
          Initialize slideshow
 		 ---------------------------
 		 */
-		var $sliderDefault = $( '.custom-theme-flexslider' );
+		var $sliderDefault = $( '.uix-flexslider' );
 		$sliderDefault.each( function()  {
 			var $this             = $( this ),
 				dataSpeed         = $this.data( 'speed' ),
@@ -8453,7 +8542,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			//Fires local videos asynchronously with slider switch.
-			videoEmbedInit( $this.find( '.item' ), false );
+			videoEmbedInit( $this.find( '.uix-flexslider__item' ), false );
 			
 			
 			// Custom Controls
@@ -8462,8 +8551,8 @@ APP = ( function ( APP, $, window, document ) {
 				myControlsContainer  = '';
 				myCustomDirectionNav = '';
 			} else {
-				myControlsContainer  = $( '.custom-controls-container' + customConID );
-				myCustomDirectionNav = $( '.custom-navigation'+customConID+' a' );	
+				myControlsContainer  = $( '.uix-flexslider__controls' + customConID );
+				myCustomDirectionNav = $( '.uix-flexslider__arrows'+customConID+' a' );	
 			}
 
 			
@@ -8546,9 +8635,9 @@ APP = ( function ( APP, $, window, document ) {
 
 			
 			$this.flexslider({
-				namespace	      : 'custom-theme-flex-',
+				namespace	      : 'uix-flexslider__',
 				animation         : dataAnim,
-				selector          : '.custom-theme-slides > div.item',
+				selector          : '.uix-flexslider__inner > div.uix-flexslider__item',
 				controlNav        : dataPaging,
 				smoothHeight      : true,
 				prevText          : dataPrev,
@@ -9916,7 +10005,7 @@ APP = ( function ( APP, $, window, document ) {
 		 ---------------------------
 		 */ 	
 		
-		$( 'input.disable' ).each( function(){
+		$( 'input.disabled' ).each( function(){
 			$( this ).prop('disabled', true);
 		});
 		
@@ -9927,10 +10016,10 @@ APP = ( function ( APP, $, window, document ) {
 		 Input File
 		 ---------------------------
 		 */ 
-		$( '.controls-file-container' ).each( function()  {
+		$( '.uix-controls__file-container' ).each( function()  {
 			var fileInput  = $( this ).find( 'input[type="file"]' ),
-				fileBtn    = $( this ).find( '.controls-file-trigger' ),
-				filePath   = $( this ).next( '.controls-file-return' );
+				fileBtn    = $( this ).find( '.uix-controls__file-trigger' ),
+				filePath   = $( this ).next( '.uix-controls__file-return' );
 			
 			fileBtn.on( 'click', function() {
 				fileInput.focusin();
@@ -9956,21 +10045,21 @@ APP = ( function ( APP, $, window, document ) {
 
 			// on focus add cladd active to label
 			$this.on( 'focus', function() {
-				$( this ).closest( 'div' ).find( 'label, .bar' ).addClass( 'active' );
+				$( this ).closest( 'div' ).find( 'label, .uix-controls__bar' ).addClass( 'active' );
 			});
 			
 			
 			//on blur check field and remove class if needed
 			$this.on( 'blur change', function( e ) {
 				if( $this.val() === '' || $this.val() === 'blank') {
-					$( this ).closest( 'div' ).find( 'label, .bar' ).removeClass( 'active' );
+					$( this ).closest( 'div' ).find( 'label, .uix-controls__bar' ).removeClass( 'active' );
 				}	
 				
 			});
 			
 			// if exist cookie value
 			if( $this.val() != '' && $this.val() != 'blank') { 
-			   $( this ).closest( 'div' ).find( 'label, .bar' ).addClass( 'active' );
+			   $( this ).closest( 'div' ).find( 'label, .uix-controls__bar' ).addClass( 'active' );
 			}
 			
 			
@@ -9978,7 +10067,7 @@ APP = ( function ( APP, $, window, document ) {
 		
 		
 		//Search Submit Event in WordPress
-		$( '.wp-search-submit' ).on( 'click', function() {
+		$( '.uix-search-box__submit' ).on( 'click', function() {
 			$( this ).parent().parent( 'form' ).submit();
 		});
 		
@@ -9999,8 +10088,8 @@ APP = ( function ( APP, $, window, document ) {
 					nextText         = $this.data( 'picker-next' ),
 					prevText         = $this.data( 'picker-prev' ),
 					dayNames         = $this.data( 'picker-day' ),
-					myminDate        = $this.data( 'picker-minDate' ),
-					mymaxDate        = $this.data( 'picker-maxDate' );
+					myminDate        = $this.data( 'picker-min-date' ),
+					mymaxDate        = $this.data( 'picker-max-date' );
 				
 				
 				
@@ -10035,7 +10124,7 @@ APP = ( function ( APP, $, window, document ) {
 			//Dynamic listening for the latest value
 			$( document ).on( 'mouseleave', '[data-handler]', function() {
 				$( '[data-picker]' ).each( function() {
-					$( this ).closest( 'div' ).find( 'label, .bar' ).addClass( 'active' );
+					$( this ).closest( 'div' ).find( 'label, .uix-controls__bar' ).addClass( 'active' );
 				});
 
 			});	
@@ -10049,7 +10138,54 @@ APP = ( function ( APP, $, window, document ) {
 		 Input Validation 
 		 ---------------------------
 		 */ 
-		//Using the jQuery Validation Plugin to check your form
+//		$(document).on( 'submit', '.app-general-form-container form', function(e) {
+//
+//			var $form        = $( this ),
+//				validationOK = true,
+//				emailRe      = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm,
+//				numReg       = /^\d+$/;
+//
+//
+//
+//			//Email
+//			var emailVal = $form.find( '[name="name5"]' ).val();
+//			if ( emailVal != '' && !emailRe.test( emailVal ) ) {
+//				$form.find( '.response' ).html( '<span class="no"><i class="fa fa-times" aria-hidden="true"></i> A valid email address.</span>' );
+//
+//				validationOK = false;
+//			}
+//
+//
+//			$form.find( '.reqiured' ).each( function()  {
+//
+//
+//				if ( $( this ).val() == '' ) {
+//
+//					var info = $( this )
+//									.closest( '.row' )
+//									.find( '.col-sm-4' )
+//									.html()
+//									.replace(/(&nbsp;|<([^>]+)>|\*)/ig, '' );
+//
+//					$form.find( '.response' ).html( '<span class="no"><i class="fa fa-times" aria-hidden="true"></i> "'+info+'" Can not be empty.</span>' );
+//
+//					validationOK = false;
+//					return false;
+//
+//				}
+//
+//
+//
+//			});
+//
+//
+//			if ( validationOK ) {
+//				return true;
+//			} else {
+//				return false;
+//			}
+//
+//		});
 		
 		
 		
@@ -10118,17 +10254,17 @@ APP = ( function ( APP, $, window, document ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
-			selector         : '.custom-select',
-			targetWrapper    : '.custom-select-wrapper',
-			trigger          : '.custom-select-trigger',	
-			itemsWrapper     : '.custom-options',
-			item             : '.custom-option'
+			selector         : '.uix-controls__select',
+			targetWrapper    : '.uix-controls__select-wrapper',
+			trigger          : '.uix-controls__select-trigger',	
+			itemsWrapper     : '.uix-controls__select__option-container',
+			item             : '.uix-controls__select__option'
         }, options );
  
         this.each( function() {
 			
 		
-			$( settings.selector ).not( '.new' ).each( function() {
+			$( settings.selector ).not( '.js-uix-new' ).each( function() {
 
 				var $this     = $( this ),
 					classes   = $this.attr( 'class' ),
@@ -10142,9 +10278,9 @@ APP = ( function ( APP, $, window, document ) {
 
 				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
 
-					template  = '<div class="' + classes + ' new">';
-					template += '<span class="custom-select-trigger">' + $this.find( 'select' ).attr( 'placeholder' ) + '</span><span class="bar"></span>';
-					template += '<div class="custom-options">';
+					template  = '<div class="' + classes + ' js-uix-new">';
+					template += '<span class="uix-controls__select-trigger">' + $this.find( 'select' ).attr( 'placeholder' ) + '</span><span class="uix-controls__bar"></span>';
+					template += '<div class="uix-controls__select__option-container">';
 
 					$this.find( 'select option' ).each( function( index ) {
 
@@ -10154,16 +10290,16 @@ APP = ( function ( APP, $, window, document ) {
 							selected = 'active';
 						}
 
-						template += '<span class="custom-option '+selected+'" data-value="' + $( this ).attr( 'value' ) + '">' + $( this ).html() + '</span>';
+						template += '<span class="uix-controls__select__option '+selected+'" data-value="' + $( this ).attr( 'value' ) + '">' + $( this ).html() + '</span>';
 					});
 					template += '</div></div>';
 
 					if ( typeof labelText != typeof undefined && labelText != '' ) {
-						template += '<span class="custom-select-label">' + labelText + '</span>';
+						template += '<span class="uix-controls__select-label">' + labelText + '</span>';
 					}
 
 
-					$this.wrap('<div class="'+ settings.targetWrapper.replace( '.', '' )+' '+( $this.hasClass( 'line-eff' ) ? 'line-eff' : '' )+' '+( $this.hasClass( 'fullwidth' ) ? 'fullwidth' : '' )+' '+( $this.hasClass( 'disable' ) ? 'disable' : '' )+'"></div>');
+					$this.wrap('<div class="'+ settings.targetWrapper.replace( '.', '' )+' '+( $this.hasClass( 'uix-controls--line' ) ? 'uix-controls--line' : '' )+' '+( $this.hasClass( 'fullwidth' ) ? 'fullwidth' : '' )+' '+( $this.hasClass( 'disabled' ) ? 'disabled' : '' )+'"></div>');
 					$this.hide();
 					$this.after( template );	
 
@@ -10180,37 +10316,37 @@ APP = ( function ( APP, $, window, document ) {
 				e.preventDefault();
 
 				var $selectWrapper    = $( this ).closest( settings.targetWrapper ),
-					$selectCurWrapper = $selectWrapper.find( settings.selector + '.new' );
+					$selectCurWrapper = $selectWrapper.find( settings.selector + '.js-uix-new' );
 
-				$selectCurWrapper.addClass( 'opened' );
+				$selectCurWrapper.addClass( 'is-opened' );
 
 			});
 
 			$( document.body ).on( 'click touchstart', function( e ) {
-				$( settings.selector + '.new' ).removeClass( 'opened' );
+				$( settings.selector + '.js-uix-new' ).removeClass( 'is-opened' );
 			});		
 
 
 
 
 			//Set the default selector text
-			$( settings.selector + '.new' ).each( function( index ) {
+			$( settings.selector + '.js-uix-new' ).each( function( index ) {
 				$( this ).find( settings.trigger ).text( $( this ).find( settings.item + '.active' ).html() );
 			});
 
 
 			//Change Event Here
 			//Prevents the triggering of multiple change events
-			$( document ).off( 'click.curCustomSelectItem' );
-			$( document ).on( 'click.curCustomSelectItem', settings.item, function( e ) {
+			$( document ).off( 'click.FORM_SELECT' );
+			$( document ).on( 'click.FORM_SELECT', settings.item, function( e ) {
 				e.preventDefault();
 
 				var $selectWrapper    = $( this ).closest( settings.targetWrapper ),
-					$selectCurWrapper = $selectWrapper.find( settings.selector + '.new' ),
+					$selectCurWrapper = $selectWrapper.find( settings.selector + '.js-uix-new' ),
 					curVal            = $( this ).data( 'value' );
 
 				//Close the selector
-				$selectCurWrapper.removeClass( 'opened' );
+				$selectCurWrapper.removeClass( 'is-opened' );
 
 				//Set the selector text
 				$selectCurWrapper.find( settings.trigger ).text( $( this ).html() );
@@ -10229,10 +10365,10 @@ APP = ( function ( APP, $, window, document ) {
 
 
 			//Synchronize to the original select change event
-			$( settings.selector ).not( '.new' ).each( function() {
+			$( settings.selector ).not( '.js-uix-new' ).each( function() {
 
 				var $this       = $( this ).find( 'select' ),
-					$cusSelect  = $this.closest( settings.targetWrapper ).find( settings.selector + '.new' ),
+					$cusSelect  = $this.closest( settings.targetWrapper ).find( settings.selector + '.js-uix-new' ),
 					newOptions  = '';
 
 
@@ -10244,7 +10380,7 @@ APP = ( function ( APP, $, window, document ) {
 						selected = 'active';
 					}
 
-					newOptions += '<span class="custom-option '+selected+'" data-value="' + $( this ).attr( 'value' ) + '">' + $( this ).html() + '</span>';
+					newOptions += '<span class="uix-controls__select__option '+selected+'" data-value="' + $( this ).attr( 'value' ) + '">' + $( this ).html() + '</span>';
 				});
 
 
@@ -10281,9 +10417,9 @@ APP = ( function ( APP, $, window, document ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
-			radioWrapper    : '.custom-radio',
-			toggle          : '.custom-toggle',
-			checkboxWrapper : '.custom-checkbox'
+			radioWrapper    : '.uix-controls__radio',
+			toggle          : '.uix-controls__toggle',
+			checkboxWrapper : '.uix-controls__checkbox'
         }, options );
  
         this.each( function() {
@@ -10297,7 +10433,7 @@ APP = ( function ( APP, $, window, document ) {
 			$( customRadio ).find( 'input[type="radio"]' ).each( function() {
 				var dataExist = $( this ).data( 'exist' );
 				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
-					$( '<span class="custom-radio-trigger"></span>' ).insertAfter( $( this ) );
+					$( '<span class="uix-controls__radio-trigger"></span>' ).insertAfter( $( this ) );
 
 					//Prevent the form from being initialized again
 					$( this ).data( 'exist', 1 );	
@@ -10308,7 +10444,7 @@ APP = ( function ( APP, $, window, document ) {
 			$( customToggle ).find( 'input[type="checkbox"]' ).each( function() {
 				var dataExist = $( this ).data( 'exist' );
 				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
-					$( '<span class="custom-toggle-trigger"></span>' ).insertAfter( $( this ) );
+					$( '<span class="uix-controls__toggle-trigger"></span>' ).insertAfter( $( this ) );
 
 					//Prevent the form from being initialized again
 					$( this ).data( 'exist', 1 );	
@@ -10320,7 +10456,7 @@ APP = ( function ( APP, $, window, document ) {
 			$( customCheckbox ).find( 'input[type="checkbox"]' ).each( function() {
 				var dataExist = $( this ).data( 'exist' );
 				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
-					$( '<span class="custom-checkbox-trigger"></span>' ).insertAfter( $( this ) );
+					$( '<span class="uix-controls__checkbox-trigger"></span>' ).insertAfter( $( this ) );
 
 					//Prevent the form from being initialized again
 					$( this ).data( 'exist', 1 );	
@@ -10352,7 +10488,7 @@ APP = ( function ( APP, $, window, document ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
-			controls    : '.controls.line-eff'
+			controls    : '.uix-controls.uix-controls--line'
         }, options );
  
         this.each( function() {
@@ -10364,7 +10500,7 @@ APP = ( function ( APP, $, window, document ) {
 			$( customControls ).each( function() {
 				var dataExist = $( this ).data( 'exist' );
 				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
-					$( '<span class="bar"></span>' ).insertAfter( $( this ).find( 'label' ) );
+					$( '<span class="uix-controls__bar"></span>' ).insertAfter( $( this ).find( 'label' ) );
 
 					//Prevent the form from being initialized again
 					$( this ).data( 'exist', 1 );	
@@ -12474,9 +12610,9 @@ var datepicker = $.datepicker;
 	you need to call the following function:
 	
 	$( document ).formProgressNext({ 
-		'selector'         : $( '.custom-form-progress-target .form-step' ),
-		'formTarget'       : $( '.custom-form-progress-target' ),
-		'indicator'        : '.custom-form-progress .indicator',
+		'selector'         : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
+		'formTarget'       : $( '.uix-form-progress__target' ),
+		'indicator'        : '.uix-form-progress .uix-form-progress__indicator',
 		'index'            : 0 // 0 -> step 1, 1 -> step 2, 2 -> step 3, 3 -> step 4, 4 -> step 5 
 	});
 	
@@ -12495,18 +12631,16 @@ APP = ( function ( APP, $, window, document ) {
 		if ( !$( 'body' ).hasClass( 'page-form-progress-eff' ) ) return false;
 		
 
-		var $progressBar   = $( '.custom-form-progress progress' ),
-			$formTarget    = $( '.custom-form-progress-target' ),
-			$indicator     = $( '.custom-form-progress .indicator' ),
+		var $progressBar   = $( '.uix-form-progress progress' ),
+			$formTarget    = $( '.uix-form-progress__target' ),
+			$indicator     = $( '.uix-form-progress .uix-form-progress__indicator' ),
 			formAreaH      = $formTarget.height(),
 			allStep        = $indicator.length,
 			stepPerValue   = 100/( allStep - 1 ),
 			value          = 0,
 			transitionEnd  = 'webkitTransitionEnd transitionend';
 		
-		
 
-		
 		//Get form transition speed
 		var dur = $formTarget.data( 'anime-speed' );
 		if( typeof dur === typeof undefined ) { 
@@ -12521,15 +12655,21 @@ APP = ( function ( APP, $, window, document ) {
 		
 		//Gets the party started.
 		formReset();
+		
+		//Display the target
+		setTimeout( function() {
+			$formTarget.addClass( 'active' );
+		}, parseFloat( dur ) * 1000 );
+		
 
 		// Show next form on continue click
-		$( document ).on( 'click', '.custom-form-progress-target .go-step:not(.disable)', function( e ) {
+		$( document ).on( 'click', '.uix-form-progress__target .go-step:not(.disable)', function( e ) {
 			e.preventDefault();
-			var $sections = $( this ).parents( '.form-step' );
+			var $sections = $( this ).parents( '.uix-form-progress__target__step' );
 			$( document ).formProgressNext({ 
-				'selector'   : $( '.custom-form-progress-target .form-step' ),
+				'selector'   : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
 				'formTarget' : $formTarget,
-				'indicator'  : '.custom-form-progress .indicator',
+				'indicator'  : '.uix-form-progress .uix-form-progress__indicator',
 				'index'      : $sections.index() + 1
 			});
 			
@@ -12538,7 +12678,7 @@ APP = ( function ( APP, $, window, document ) {
 		
 
 		// Reset form on reset button click
-		$( document ).on( 'click', '.custom-form-progress-target .go-reset', function( e ) {
+		$( document ).on( 'click', '.uix-form-progress__target .go-reset', function( e ) {
 			e.preventDefault();
 			formReset();
 		});
@@ -12552,9 +12692,9 @@ APP = ( function ( APP, $, window, document ) {
 		function formReset() {
 			
 			$( document ).formProgressNext({ 
-				'selector'         : $( '.custom-form-progress-target .form-step' ),
-				'formTarget'       : $( '.custom-form-progress-target' ),
-				'indicator'        : '.custom-form-progress .indicator',
+				'selector'         : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
+				'formTarget'       : $( '.uix-form-progress__target' ),
+				'indicator'        : '.uix-form-progress .uix-form-progress__indicator',
 				'index'            : 0 // 0 -> step 1, 1 -> step 2, 2 -> step 3, 3 -> step 4, 4 -> step 5 
 			});
 		
@@ -12594,9 +12734,9 @@ APP = ( function ( APP, $, window, document ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
-			selector         : $( '.custom-form-progress-target .form-step' ),
-			formTarget       : $( '.custom-form-progress-target' ),
-			indicator        : '.custom-form-progress .indicator',
+			selector         : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
+			formTarget       : $( '.uix-form-progress__target' ),
+			indicator        : '.uix-form-progress .uix-form-progress__indicator',
 			index            : 0
         }, options );
  
@@ -12651,7 +12791,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 			var currentFormStep  = parseInt($sections.eq( tarIndex ).attr( 'data-step' ) ) || false,
-				$nextForm        = $formTarget.find( '.form-step[data-step="' + (currentFormStep + 1) + '"]'),
+				$nextForm        = $formTarget.find( '.uix-form-progress__target__step[data-step="' + (currentFormStep + 1) + '"]'),
 				currentFormIndex = $nextForm.attr( 'data-step' ) - 1;
 
 
@@ -12703,15 +12843,15 @@ APP = ( function ( APP, $, window, document ) {
 				$indicator.removeClass( 'active' );
 				$indicator.each( function( index )  {
 					$( this ).css( 'left', index*stepPerValue + '%' );
-					$formTarget.find( '.form-step:eq('+index+')' ).attr( 'data-step', index+1 );
+					$formTarget.find( '.uix-form-progress__target__step:eq('+index+')' ).attr( 'data-step', index+1 );
 				});
 
 				setTimeout(function() {
-					$formTarget.addClass( 'show' );
+					$formTarget.addClass( 'js-uix-show' );
 				}, animeSpeed );
 
 
-				$formTarget.find( '.form-step' )
+				$formTarget.find( '.uix-form-progress__target__step' )
 												.removeClass( 'left leaving' )
 												.css( {
 													'position'   : 'absolute'
@@ -12724,10 +12864,10 @@ APP = ( function ( APP, $, window, document ) {
 
 
 			//Set wrapper height
-			var currentContentH  = $formTarget.find( '.form-step:eq('+currentFormIndex+') > .content' ).height() + 100;
+			var currentContentH  = $formTarget.find( '.uix-form-progress__target__step:eq('+currentFormIndex+') > .uix-form-progress__content' ).height() + 100;
 			$formTarget.css( 'height', currentContentH + 'px' );
 
-			var curText = $( '.custom-form-progress .indicator:eq('+currentFormIndex+') > span' ).html();
+			var curText = $( '.uix-form-progress .uix-form-progress__indicator:eq('+currentFormIndex+') > span' ).html();
 			$( '#app-form-progress-text' ).text( curText );
 
 			//The current indicator class
@@ -12736,16 +12876,16 @@ APP = ( function ( APP, $, window, document ) {
 
 			// Reset if we've reached the end
 			if (value >= 100) {
-				$formTarget.find( '.form-step' )
+				$formTarget.find( '.uix-form-progress__target__step' )
 											   .addClass( 'leaving' )
 											   .last()
 											   .removeClass( 'coming waiting leaving' );
 			} else {
-				$( '.custom-form-progress' ).find( 'indicator.active' ).next( '.indicator' ).addClass( 'active' );
+				$( '.uix-form-progress' ).find( '.uix-form-progress__indicator.active' ).next( '.uix-form-progress__indicator' ).addClass( 'active' );
 			}
 
 			// Set progress bar value
-			$( '.custom-form-progress .line span' ).css( 'width', value + '%' );
+			$( '.uix-form-progress .uix-form-progress__line span' ).css( 'width', value + '%' );
 
 
 			//Scroll Top
@@ -12781,25 +12921,25 @@ APP = ( function ( APP, $, window, document ) {
 	APP.GALLERY.version       = '0.0.1';
     APP.GALLERY.documentReady = function( $ ) {
 
-		$( '.custom-gallery' ).each( function() {
+		$( '.uix-gallery' ).each( function() {
 			var type = $( this ).data( 'show-type' );
 			
 			// Masonry
 			if ( type.indexOf( 'masonry' ) >= 0  ) {
 				$( this ).addClass( 'masonry-container' );
-				$( this ).find( '.custom-gallery-item' ).addClass( 'masonry-item' );
+				$( this ).find( '.uix-gallery__item' ).addClass( 'masonry-item' );
 			}
 			
 			// Filterable
 			if ( type.indexOf( 'filter' ) >= 0  ) {
 				$( this ).addClass( 'filter-container' );
-				$( this ).find( '.custom-gallery-item' ).addClass( 'filter-item' );	
+				$( this ).find( '.uix-gallery__item' ).addClass( 'filter-item' );	
 			}	
 		
 		});
 	
 	    /*--  Function of Masonry  --*/
-		var masonryObj = $( '.masonry-container .custom-gallery-tiles' );
+		var masonryObj = $( '.masonry-container .uix-gallery-tiles' );
 		imagesLoaded( masonryObj ).on( 'always', function() {
 			  masonryObj.masonry({
 				itemSelector: '.masonry-item'
@@ -12811,9 +12951,9 @@ APP = ( function ( APP, $, window, document ) {
 		if ( $( "[data-show-type]" ).length > 0 ) {
 			if ( $( "[data-show-type]" ).data( 'show-type' ).indexOf( 'filter' ) >= 0 ) {
 				
-				$( '.custom-gallery' ).each( function() {
+				$( '.uix-gallery' ).each( function() {
 					var filterCat      = $( this ).data( 'filter-id' ),
-						$grid          = $( this ).find( '.custom-gallery-tiles' ),
+						$grid          = $( this ).find( '.uix-gallery-tiles' ),
 						$filterOptions = $( filterCat );
 						
 					imagesLoaded( $grid ).on( 'always', function() {
@@ -12915,9 +13055,9 @@ APP = ( function ( APP, $, window, document ) {
 		 */
 		function shapesInit( w ) {
 			
-			$( '.shape-img' ).each( function()  {
+			$( '.uix-shape-img' ).each( function()  {
 				var $this          = $( this ),
-					ranID          = 'shape-img-' + Math.random()*1000000000000000000,
+					ranID          = 'uix-shape-img-' + Math.random()*1000000000000000000,
 					svgPath        = $this.data( 'path' ),
 					svgW           = parseFloat( $this.data( 'svg-const-width' ) ),
 					svgH           = parseFloat( $this.data( 'svg-const-height' ) ),
@@ -13028,28 +13168,30 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.LIGHTBOX               = APP.LIGHTBOX || {};
-	APP.LIGHTBOX.version       = '0.0.7';
+	APP.LIGHTBOX.version       = '0.0.8';
     APP.LIGHTBOX.pageLoaded    = function() {
 
-		if ( $( '.custom-lightbox-overlay' ).length == 0 ) {
-			$( 'body' ).prepend( '<div class="custom-lightbox-overlay"><div class="lb-container"><div class="html"></div><span class="lb-close"></span><p class="title"></p></div></div><div class="custom-lightbox-overlay-mask"></div><div class="custom-lightbox-close-fixed"></div>' );
+		if ( $( '.uix-lightbox__container' ).length == 0 ) {
+			$( 'body' ).prepend( '<div class="uix-lightbox__container"><div class="uix-lightbox__inner"><div class="uix-lightbox__html"></div><span class="uix-lightbox__close"></span><p class="title"></p></div></div><div class="uix-lightbox__container-mask"></div><div class="uix-lightbox__close-fixed"></div>' );
 		}
 		
 
-		var	$lbCon          = $( '.lb-container' ),
-			$lbWrapper      = $( '.custom-lightbox-overlay' ),
-			$lbMask         = $( '.custom-lightbox-overlay-mask' ),
-			lbCloseEl       = '.custom-lightbox-overlay .lb-close',
-			lbCloseFixedEl  = '.custom-lightbox-close-fixed',
-			$lbContent      = $lbCon.find( '.html' );
+		var	$lbCon          = $( '.uix-lightbox__inner' ),
+			$lbWrapper      = $( '.uix-lightbox__container' ),
+			$lbMask         = $( '.uix-lightbox__container-mask' ),
+			lbCloseEl       = '.uix-lightbox__container .uix-lightbox__close',
+			lbCloseFixedEl  = '.uix-lightbox__close-fixed',
+			$lbContent      = $lbCon.find( '.uix-lightbox__html' ),
+			tempID          = 'lightbox-' + Math.random()*1000000000000000000;
 		
-		$( document ).on( 'click touchstart', '.custom-lightbox', function() { 
+		$( document ).on( 'click touchstart', '.uix-lightbox__trigger', function() { 
 
 			var $this         = $( this ),
 				dataPhoto     = $this.data( 'lb-src' ),
 				dataHtmlID    = $this.data( 'lb-html' ),
 				dataFixed     = $this.data( 'lb-fixed' ),
 				dataMaskClose = $this.data( 'lb-mask-close' ),
+				dataMethod    = $this.data( 'lb-ajax-method' ),
 				dataAjaxCon   = $this.data( 'lb-ajax-content' ),
 				htmlContent   = '',
 				imgSrcStr     = '',
@@ -13065,13 +13207,19 @@ APP = ( function ( APP, $, window, document ) {
 				dataMaskClose = false;
 			}	
 			
+			if( typeof dataMethod === typeof undefined ) {
+				dataMethod = 'POST';
+			}		
+			
+			
+			
 			//Reset the wrapper position
 			$lbWrapper.css( 'margin-top', 0 );	
 			
 
 			if ( !dataFixed ) {
-				$lbWrapper.addClass( 'no-fixed' );
-				$( lbCloseEl ).addClass( 'no-fixed' );
+				$lbWrapper.addClass( 'js-uix-no-fixed' );
+				$( lbCloseEl ).addClass( 'js-uix-no-fixed' );
 				$( lbCloseFixedEl ).addClass( 'active' );
 				
 				//Initialize the wrapper position
@@ -13081,7 +13229,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			//Reset current container type
-			$lbCon.removeClass( 'custom pure-image' );
+			$lbCon.removeClass( 'js-uix-custom js-uix-pure-image' );
 			
 			
 
@@ -13112,14 +13260,25 @@ APP = ( function ( APP, $, window, document ) {
 					imgSrcStrToW = imgSrcStr[0].large;
 					
 					//push the large photos
-					largePhotos += '<div class="lb-large-photos-container"><ul>';
+					largePhotos += '<div class="uix-lightbox__photo-container uix-lightbox__photo-sets-container"><ul>';
 					for ( var i = 0; i < imgSrcStr.length; i++ ) {
-						largePhotos += '<li><img src="'+ imgSrcStr[i].large +'" alt=""></li>';
+						
+						
+						largePhotos += '<li>';
+						largePhotos += '	<a class="uix-lightbox__original__link" href="#'+tempID+'-sets-'+i+'">';
+						largePhotos += '	   <img src="'+ imgSrcStr[i].large +'" alt="">';
+						largePhotos += '	</a>';
+						largePhotos += '	<div class="uix-lightbox__original__target" id="'+tempID+'-sets-'+i+'">';
+						largePhotos += '	   <img src="'+ imgSrcStr[i].large +'" alt="">';
+						largePhotos += '	   <a class="uix-lightbox__original__close" href="#"></a>';
+						largePhotos += '	</div>';
+						largePhotos += '</li>'; 
+
 					}
 					largePhotos += '</ul></div>';
 					
 					//push the thumbs
-					thumbs += '<div class="lb-thumbs-container"><ul>';
+					thumbs += '<div class="uix-lightbox__thumb-container"><ul>';
 					for ( var k = 0; k < imgSrcStr.length; k++ ) {
 						thumbs += '<li><img src="'+ imgSrcStr[k].thumb +'" alt=""></li>';
 					}
@@ -13130,16 +13289,25 @@ APP = ( function ( APP, $, window, document ) {
 
 					
 				} else {
-					
+
+					//Only one image
 					imgSrcStrToW = imgSrcStr;
-					htmlContent = '<img src="'+ imgSrcStr +'" alt="">';
+					htmlContent += '<div class="uix-lightbox__photo-container">';
+					htmlContent += '	<a class="uix-lightbox__original__link" href="#'+tempID+'">';
+					htmlContent += '	   <img src="'+ imgSrcStr +'" alt="">';
+					htmlContent += '	</a>';
+					htmlContent += '	<div class="uix-lightbox__original__target" id="'+tempID+'">';
+					htmlContent += '	   <img src="'+ imgSrcStr +'" alt="">';
+					htmlContent += '	   <a class="uix-lightbox__original__close" href="#"></a>';
+					htmlContent += '	</div>';
+					htmlContent += '</div>'; 
 					
 				}
 						
 				$lbContent.html( htmlContent ).promise().done( function(){
 
 					//Set current container type
-					$lbCon.addClass( 'pure-image' );
+					$lbCon.addClass( 'js-uix-pure-image' );
 
 					//Set container width
 					var img = new Image();
@@ -13160,7 +13328,7 @@ APP = ( function ( APP, $, window, document ) {
 						} );
 						
 						
-						$( '.lb-large-photos-container' ).css( {
+						$( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' ).css( {
 							'height': h + 'px'
 						} );	
 						
@@ -13168,7 +13336,7 @@ APP = ( function ( APP, $, window, document ) {
 					};
 					
 					
-					$lbCon.find( '> .html' ).removeClass( 'no-img' );
+					$lbCon.find( '> .uix-lightbox__html' ).removeClass( 'js-uix-no-img' );
 
 				});		
 
@@ -13188,31 +13356,31 @@ APP = ( function ( APP, $, window, document ) {
 				$lbContent.html( $( '#' + dataHtmlID ).html() ).promise().done( function(){
 					
 					//Set current container type
-					$lbCon.addClass( 'custom' );
+					$lbCon.addClass( 'js-uix-custom' );
 					
 					//Set container width
-					if ( $lbCon.find( '> .html .lb-box' ).length > 0 ) {
+					if ( $lbCon.find( '> .uix-lightbox__html .uix-lightbox__content' ).length > 0 ) {
 						
 						if ( $( window ).width() <= 768 ) {
 							$lbCon.css( 'width', $( window ).width() - 10 + 'px' );
 						} else {
-							$lbCon.css( 'width', $lbCon.find( '> .html .lb-box' ).width() + 'px' );
+							$lbCon.css( 'width', $lbCon.find( '> .uix-lightbox__html .uix-lightbox__content' ).width() + 'px' );
 						}
 						
 						
-						$lbCon.find( '> .html' ).addClass( 'no-img' );
+						$lbCon.find( '> .uix-lightbox__html' ).addClass( 'js-uix-no-img' );
 						
 						
 						//Ajax-loaded content
 						if( typeof dataAjaxCon != typeof undefined && dataAjaxCon != '' ) {
 							
-							var $ajaxContentContainer = $lbCon.find( '> .html .lb-box > .content-show' );
+							var $ajaxContentContainer = $lbCon.find( '> .uix-lightbox__html .uix-lightbox__content > div' );
 							
 							$ajaxContentContainer.html( $ajaxContentContainer.data( 'loading-text' ) );
 							
 							$.ajax({
 								url      : dataAjaxCon,
-								method   : 'POST',
+								method   : dataMethod,
 								dataType : 'html',
 								success  : function( response ) { 
 									$ajaxContentContainer.html( $( response ).find( '.entry-content' ).html() );
@@ -13250,10 +13418,10 @@ APP = ( function ( APP, $, window, document ) {
 		
 
 		//Click thumbnail to switch large photo
-		$( document ).on( 'click', '.lb-thumbs-container li', function() {
+		$( document ).on( 'click', '.uix-lightbox__thumb-container li', function() {
 			
-			var $largePhoto = $( this ).closest( '.html' ).find( '.lb-large-photos-container' ),
-				$thumb      = $( '.lb-thumbs-container li' ),
+			var $largePhoto = $( this ).closest( '.uix-lightbox__html' ).find( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' ),
+				$thumb      = $( '.uix-lightbox__thumb-container li' ),
 				curImgH     = 0;
 
 			
@@ -13279,18 +13447,46 @@ APP = ( function ( APP, $, window, document ) {
 		
 		function customLBCloseEvent() {
 			//Remove all dynamic classes
-			$lbWrapper.removeClass( 'no-fixed' );
-			$( lbCloseEl ).removeClass( 'no-fixed' );
+			$lbWrapper.removeClass( 'js-uix-no-fixed' );
+			$( lbCloseEl ).removeClass( 'js-uix-no-fixed' );
 			$( lbCloseFixedEl ).removeClass( 'active' );
 			
+			$( 'html' ).css( 'overflow-y', 'auto' );
+			
 			//Reset current container type
-			$lbCon.removeClass( 'custom pure-image' );
+			$lbCon.removeClass( 'js-uix-custom js-uix-pure-image' );
 			
 			
 			//close windows
 			$lbWrapper.hide();
 			$lbMask.hide();
+			
+			
+			//Changing The Site URL
+			var href = window.location.href.substr( 0, window.location.href.indexOf( '#' ) );
+			history.pushState( '', document.title, href );
+	
+			
 		}
+		
+		
+		
+		
+		
+		
+		//Close/Open enlarge image
+		$( document ).on( 'click', '.uix-lightbox__original__link', function( e ) {
+			$( 'html' ).css( 'overflow-y', 'hidden' );
+
+		});	
+		
+		$( document ).on( 'click', '.uix-lightbox__original__close', function( e ) {
+
+			$( 'html' ).css( 'overflow-y', 'auto' );
+		});
+
+		
+		
 		
 		    
 		
@@ -13343,7 +13539,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.POST_LIST_AJAX               = APP.POST_LIST_AJAX || {};
-	APP.POST_LIST_AJAX.version       = '0.0.1';
+	APP.POST_LIST_AJAX.version       = '0.0.4';
     APP.POST_LIST_AJAX.documentReady = function( $ ) {
 
 		$( '[data-ajax-list-json]' ).each( function() {
@@ -13383,7 +13579,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			if( typeof trigger === typeof undefined ) {
-				trigger = '.load-more';
+				trigger = '.uix-load-more';
 			}
 			
 			if( typeof infinitescroll === typeof undefined ) {
@@ -13417,10 +13613,10 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			if( typeof pushContainer === typeof undefined ) {
-				pushContainer = '.portfolio-items-ajax-container';
+				pushContainer = '.uix-ajax-items__container';
 				
 				if ( $this.find( pushContainer ).length == 0 ) {
-					$( '#' + template7ID ).after( '<div class="portfolio-items-ajax-container"></div>' );
+					$( '#' + template7ID ).after( '<div class="uix-ajax-items__container"></div>' );
 				}
 				
 			}		
@@ -13621,6 +13817,7 @@ APP = ( function ( APP, $, window, document ) {
 					} else {
 						
 						
+						//----------------- More Button ----------------
 						//Add default page number to the button
 						$( trigger ).attr( 'data-cur-page', 1 );
 
@@ -13630,7 +13827,7 @@ APP = ( function ( APP, $, window, document ) {
 						}
 
 						//Avoid using $( document ) to cause an asynchronous load without counting from 1
-						$( trigger ).on( 'click', function( e ) {
+						$( trigger ).on( 'click.POST_LIST_AJAX', function( e ) {
 
 							e.preventDefault();
 
@@ -13640,7 +13837,8 @@ APP = ( function ( APP, $, window, document ) {
 							//Add next page number to the button
 							curPage = parseFloat( curPage ) + 1;
 							$button.attr( 'data-cur-page', curPage );
-
+							
+						
 							
 							// Active this button
 							$button.addClass( triggerActive );		
@@ -13706,7 +13904,10 @@ APP = ( function ( APP, $, window, document ) {
 				success  : function (data) { 
 					
 					//If the data is empty
-					if ( data == null ) $button.addClass( 'hide' );
+					if ( data && ( data == null || Object.prototype.toString.call( data.items )=='[object String]' ) ) {
+						$button.addClass( 'hide' );
+					}
+					
 				
 					
 					//Check if a key exists inside a json object
@@ -13740,12 +13941,12 @@ APP = ( function ( APP, $, window, document ) {
 							
 							
 							//--------- jQuery Masonry and Ajax Append Items
-							$( '.custom-gallery' ).each( function() {
+							$( '.uix-gallery' ).each( function() {
 								var type = $( this ).data( 'show-type' );
 
 								if ( type.indexOf( 'masonry' ) >= 0  ) {
 									$( this ).addClass( 'masonry-container' );
-									$( this ).find( '.custom-gallery-item' ).addClass( 'masonry-item' );
+									$( this ).find( '.uix-gallery__item' ).addClass( 'masonry-item' );
 								}
 								
 							});
@@ -13763,7 +13964,10 @@ APP = ( function ( APP, $, window, document ) {
 				
 							
 							//--------- Apply the original scripts
-							$( document ).applyOriginalSomeScripts();
+							$( document ).applyOriginalSomeScripts({
+								scrollReveal : false,
+								ajaxPostList : false
+							});
 
 
 							//--------- Remove this button
@@ -13831,7 +14035,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.POST_LIST_SPLIT_FULLWIDTH               = APP.POST_LIST_SPLIT_FULLWIDTH || {};
-	APP.POST_LIST_SPLIT_FULLWIDTH.version       = '0.0.1';
+	APP.POST_LIST_SPLIT_FULLWIDTH.version       = '0.0.2';
     APP.POST_LIST_SPLIT_FULLWIDTH.pageLoaded    = function() {
 
 		var $window      = $( window ),
@@ -13860,15 +14064,15 @@ APP = ( function ( APP, $, window, document ) {
 		function fullwidthListSplitInit( w ) {
 			
 			
-			$( '.list-split-imagery-container' ).each( function() {
-				var imgH = $( this ).find( '.imagery-background img' ).height();
+			$( '.uix-list-split-imagery' ).each( function() {
+				var imgH = $( this ).find( '.uix-list-split-imagery__img img' ).height();
 
 				if ( imgH > 0 ) {
-					$( this ).find( '.feature-text, .feature-imagery' ).css( 'height', imgH + 'px' );
+					$( this ).find( '.uix-list-split-imagery__info, .uix-list-split-imagery__img-container' ).css( 'height', imgH + 'px' );
 				}
 
 				if ( w <= 768 ) {
-					$( this ).find( '.feature-text, .feature-imagery' ).css( 'height', 'auto' );
+					$( this ).find( '.uix-list-split-imagery__info, .uix-list-split-imagery__img-container' ).css( 'height', 'auto' );
 				}
 
 			});	
@@ -13985,15 +14189,15 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.MULTI_ITEMS_CAROUSEL               = APP.MULTI_ITEMS_CAROUSEL || {};
-	APP.MULTI_ITEMS_CAROUSEL.version       = '0.0.1';
+	APP.MULTI_ITEMS_CAROUSEL.version       = '0.0.2';
     APP.MULTI_ITEMS_CAROUSEL.documentReady = function( $ ) {
 
-		$( '.custom-multi-items-carousel' ).each( function()  {
+		$( '.uix-multi-carousel' ).each( function()  {
 
 			var $carouselWrapper   = $( this ),
 				goSteps            = 0,
-				$carousel          = $carouselWrapper.find( '.items' ),
-				$carouselItem      = $carouselWrapper.find( '.items > .item' ),
+				$carousel          = $carouselWrapper.find( '.uix-multi-carousel__items' ),
+				$carouselItem      = $carouselWrapper.find( '.uix-multi-carousel__items > div' ),
 				itemTotal          = $carouselItem.length,
 				amountVisible      = $carouselWrapper.data( 'cus-carousel-show' ),
 				carouselItemWidth  = $carousel.width()/amountVisible,
@@ -14020,10 +14224,10 @@ APP = ( function ( APP, $, window, document ) {
 				carouselSpeed = 250;
 			}
 			if( typeof carouselNext === typeof undefined ) {
-				carouselNext = '.next';
+				carouselNext = '.uix-multi-carousel__controls--next';
 			}
 			if( typeof carouselPrev === typeof undefined ) {
-				carouselPrev = '.prev';
+				carouselPrev = '.uix-multi-carousel__controls--prev';
 			}
 			
 
@@ -14058,7 +14262,7 @@ APP = ( function ( APP, $, window, document ) {
 
 			//default button status
 			if ( $carouselItem.first().data( 'id' ) == 1 && !carouselLoop ) {
-				$( carouselPrev ).addClass( 'disable' );
+				$( carouselPrev ).addClass( 'disabled' );
 			}	
 
 			/* 
@@ -14210,8 +14414,8 @@ APP = ( function ( APP, $, window, document ) {
 			function itemUpdates( wrapper, curBtn, nextBtnStr, prevBtnStr, steps ) {
 
 		
-				var $curWrapper = wrapper.children( '.items' ),  //Default: $carousel
-					$curItems   = $curWrapper.find( '> .item' ), //Default: $carouselItem
+				var $curWrapper = wrapper.children( '.uix-multi-carousel__items' ),  //Default: $carousel
+					$curItems   = $curWrapper.find( '> div' ), //Default: $carouselItem
 					isEnd       = false,
 					isFirst     = false,
 					isMid       = false;
@@ -14231,12 +14435,12 @@ APP = ( function ( APP, $, window, document ) {
 				//The state of the control button
 				if ( !carouselLoop ) {
 					
-					if ( isEnd ) $( nextBtnStr ).addClass( 'disable' );
-					if ( isFirst ) $( prevBtnStr ).addClass( 'disable' );
+					if ( isEnd ) $( nextBtnStr ).addClass( 'disabled' );
+					if ( isFirst ) $( prevBtnStr ).addClass( 'disabled' );
 					
 					if ( isMid ) {
-						$( nextBtnStr ).removeClass( 'disable' );
-						$( prevBtnStr ).removeClass( 'disable' );
+						$( nextBtnStr ).removeClass( 'disabled' );
+						$( prevBtnStr ).removeClass( 'disabled' );
 					}
 					
 					
@@ -14317,11 +14521,11 @@ APP = ( function ( APP, $, window, document ) {
 //	  APP.MULTI_ITEMS_CAROUSEL.version       = '0.0.1';
 //    APP.MULTI_ITEMS_CAROUSEL.documentReady = function( $ ) {
 //
-//		$( '.custom-multi-items-carousel' ).each( function()  {
+//		$( '.uix-multi-carousel' ).each( function()  {
 //
 //			var $carouselWrapper   = $( this ),
-//				$carousel          = $carouselWrapper.find( '.items' ),
-//				$carouselItem      = $carouselWrapper.find( '.items > .item' ),
+//				$carousel          = $carouselWrapper.find( '.uix-multi-carousel__items' ),
+//				$carouselItem      = $carouselWrapper.find( '.uix-multi-carousel__items > div' ),
 //				carouselItemTotal  = $carouselItem.length,
 //				showcarouselItem   = $carouselWrapper.data( 'cus-carousel-show' ),
 //				carouselItemWidth  = $carousel.width()/showcarouselItem,
@@ -14346,10 +14550,10 @@ APP = ( function ( APP, $, window, document ) {
 //				carouselSpeed = 250;
 //			}
 //			if( typeof carouselNext === typeof undefined ) {
-//				carouselNext = '.next';
+//				carouselNext = '.uix-multi-carousel__controls--next';
 //			}
 //			if( typeof carouselPrev === typeof undefined ) {
-//				carouselPrev = '.prev';
+//				carouselPrev = '.uix-multi-carousel__controls--prev';
 //			}
 //
 //
@@ -14376,7 +14580,7 @@ APP = ( function ( APP, $, window, document ) {
 //
 //			//default button status
 //			if ( $carouselItem.first().data( 'id' ) == 1 && !carouselLoop ) {
-//				$( carouselPrev ).addClass( 'disable' );
+//				$( carouselPrev ).addClass( 'disabled' );
 //			}	
 //
 //			/* 
@@ -14459,7 +14663,7 @@ APP = ( function ( APP, $, window, document ) {
 //				
 //				var $btn        = $( this ),
 //					$curWrapper = $( e.data[0] ),
-//					$curItems   = $curWrapper.children().find( '> .item' ),
+//					$curItems   = $curWrapper.children().find( '> div' ),
 //					//Protection button is not triggered multiple times.
 //					btnLock     = $btn.data( 'click' );
 //				
@@ -14482,7 +14686,7 @@ APP = ( function ( APP, $, window, document ) {
 //				
 //				var $btn        = $( this ),
 //					$curWrapper = $( e.data[0] ),
-//					$curItems   = $curWrapper.children().find( '> .item' ),
+//					$curItems   = $curWrapper.children().find( '> div' ),
 //					//Protection button is not triggered multiple times.
 //					btnLock     = $btn.data( 'click' );
 //
@@ -14522,7 +14726,7 @@ APP = ( function ( APP, $, window, document ) {
 //					isEnd = true;
 //				}
 //				if ( (carouselItemTotal - showcarouselItem) == $curItems.first().data( 'id' ) && !carouselLoop ) {
-//					if ( curBtn ) curBtn.addClass( 'disable' );
+//					if ( curBtn ) curBtn.addClass( 'disabled' );
 //				}
 //				
 //				
@@ -14534,7 +14738,7 @@ APP = ( function ( APP, $, window, document ) {
 //				//Reset prevents code from duplicate run
 //				var preventEvent = function() {
 //					if ( carouselPrev && carouselPrev != '' ) {
-//						$( carouselPrev ).data( 'click', 0 ).removeClass( 'disable' );
+//						$( carouselPrev ).data( 'click', 0 ).removeClass( 'disabled' );
 //					}
 //
 //					if ( curBtn ) curBtn.data( 'click', 0 );
@@ -14662,7 +14866,7 @@ APP = ( function ( APP, $, window, document ) {
 //					isEnd = true;
 //				}
 //				if ( 2 == $curItems.first().data( 'id' ) && !carouselLoop ) {
-//					if ( curBtn ) curBtn.addClass( 'disable' );
+//					if ( curBtn ) curBtn.addClass( 'disabled' );
 //				}
 //				
 //				
@@ -14674,7 +14878,7 @@ APP = ( function ( APP, $, window, document ) {
 //				//Reset prevents code from duplicate run
 //				var preventEvent = function() {
 //					if ( carouselNext && carouselNext != '' ) {
-//						$( carouselNext ).data( 'click', 0 ).removeClass( 'disable' );
+//						$( carouselNext ).data( 'click', 0 ).removeClass( 'disabled' );
 //					}
 //
 //					if ( curBtn ) curBtn.data( 'click', 0 );
@@ -14805,7 +15009,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.ONEPAGE               = APP.ONEPAGE || {};
-	APP.ONEPAGE.version       = '0.0.1';
+	APP.ONEPAGE.version       = '0.0.2';
     APP.ONEPAGE.documentReady = function( $ ) {
 
         var $window      = $( window ),
@@ -14818,12 +15022,12 @@ APP = ( function ( APP, $, window, document ) {
 		var lastAnimation      = 0,
 			quietPeriod        = 500, //Do not change it
 			animationTime      = 1000,//According to page transition animation changes
-			$sectionsContainer = $( '.custom-fullpage-container' ),
+			$sectionsContainer = $( '.uix-noemal-load__onepage-container' ),
 			$sections          = $sectionsContainer.find( '> section' ),
 			sectionTotal       = $sections.length,
 			topSectionSpacing  = 0,
-			$primaryMenu       = $( '.menu-main' ),
-			$sidefixedMenu     = $( '.custom-sidefixed-menu' );
+			$primaryMenu       = $( '.uix-menu' ),
+			$sidefixedMenu     = $( '.uix-menu-sidefixed' );
 		
 		
 		//Prevent this module from loading in other pages
@@ -14845,6 +15049,12 @@ APP = ( function ( APP, $, window, document ) {
 		
 		//Init the section location
 		sectionStart();
+		
+		
+		$( window ).on( 'hashchange', function(){
+			console.log( 'hash changed!' );
+		} );
+		
 
 		
 		/*
@@ -14963,10 +15173,12 @@ APP = ( function ( APP, $, window, document ) {
 							var curSectionIndex = $sections.filter( '.active' ).index() + 1,
 								href            = window.location.href.substr( 0, window.location.href.indexOf( '#' ) ) + '#' + $sections.filter( '.active' ).attr( 'id' );
 
-							if ( Modernizr.cssanimations ) {
-								history.pushState( {}, document.title, href );
-								console.log( 'Section ' + curSectionIndex + ' loaded!' );
-							}
+							// Save state on history stack
+							// - First argument is any object that will let you restore state
+							// - Second argument is a title (not the page title, and not currently used)
+							// - Third argument is the URL - this will appear in the browser address bar
+							history.pushState( {}, document.title, href );
+							console.log( 'Section ' + curSectionIndex + ' loaded!' );
 
 
 						}
@@ -15059,7 +15271,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 		var navMinTop      = ( $sidefixedMenu.length > 0 ) ? $sidefixedMenu.offset().top : 0,
-			navMaxTop      = parseFloat( $( document ).height() - $( '.footer-main-container' ).height() ) - windowHeight/3;
+			navMaxTop      = parseFloat( $( document ).height() - $( '.uix-footer__container' ).height() ) - windowHeight/3;
 
 		$window.on( 'scroll touchmove', function() {
 			var scrollTop = $( this ).scrollTop(),
@@ -15099,9 +15311,9 @@ APP = ( function ( APP, $, window, document ) {
 
 			//Detecting when user scrolls to bottom of div
 			if ( spyTop > navMaxTop || spyTop < navMinTop ) {
-				$sidefixedMenu.removeClass( 'fixed' );
+				$sidefixedMenu.removeClass( 'is-fixed' );
 			} else {
-				$sidefixedMenu.addClass( 'fixed' );
+				$sidefixedMenu.addClass( 'is-fixed' );
 			}	
 
 
@@ -15152,14 +15364,14 @@ APP = ( function ( APP, $, window, document ) {
 			startY;
 
 
-		$sectionsContainer.on( 'touchstart.onepage', function( event ) {
+		$sectionsContainer.on( 'touchstart.ONEPAGE', function( event ) {
 			var touches = event.originalEvent.touches;
 			if ( touches && touches.length ) {
 				startX = touches[0].pageX;
 				startY = touches[0].pageY;
 
 
-				$sectionsContainer.on( 'touchmove.onepage', function( event ) {
+				$sectionsContainer.on( 'touchmove.ONEPAGE', function( event ) {
 
 					var touches = event.originalEvent.touches;
 					if ( touches && touches.length ) {
@@ -15189,7 +15401,7 @@ APP = ( function ( APP, $, window, document ) {
 
 						}
 						if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
-							$sectionsContainer.off( 'touchmove.onepage' );
+							$sectionsContainer.off( 'touchmove.ONEPAGE' );
 						}
 					}
 
@@ -15197,6 +15409,8 @@ APP = ( function ( APP, $, window, document ) {
 			}	
 		});
 
+		
+		
 
 		
     };
@@ -15230,12 +15444,12 @@ APP = ( function ( APP, $, window, document ) {
 		var lastAnimation      = 0,
 			quietPeriod        = 500, //Do not change it
 			animationTime      = 1000,//According to page transition animation changes
-			$sectionsContainer = $( '.custom-fullpage-container2' ),
+			$sectionsContainer = $( '.uix-noemal-load__onepage-container2' ),
 			$sections          = $sectionsContainer.find( '> section' ),
 			sectionTotal       = $sections.length,
 			topSectionSpacing  = 0,
-			$primaryMenu       = $( '.menu-main' ),
-			$sidefixedMenu     = $( '.custom-sidefixed-menu' );
+			$primaryMenu       = $( '.uix-menu' ),
+			$sidefixedMenu     = $( '.uix-menu-sidefixed' );
 		
 		
 		//Prevent this module from loading in other pages
@@ -15280,6 +15494,11 @@ APP = ( function ( APP, $, window, document ) {
 		//Init the section location
 		sectionStart();
 
+		$( window ).on( 'hashchange', function(){
+			console.log( 'hash changed!' );
+		} );
+		
+		
 		
 		/*
 		 * Init the section location
@@ -15445,11 +15664,13 @@ APP = ( function ( APP, $, window, document ) {
 									var curSectionIndex = $sections.filter( '.active' ).index() + 1,
 										href            = window.location.href.substr( 0, window.location.href.indexOf( '#' ) ) + '#' + $sections.filter( '.active' ).attr( 'id' );
 
-									if ( Modernizr.cssanimations ) {
-										history.pushState( {}, document.title, href );
-										console.log( 'Section ' + curSectionIndex + ' loaded!' );
-									}
-
+									
+									// Save state on history stack
+									// - First argument is any object that will let you restore state
+									// - Second argument is a title (not the page title, and not currently used)
+									// - Third argument is the URL - this will appear in the browser address bar
+									history.pushState( {}, document.title, href );
+									console.log( 'Section ' + curSectionIndex + ' loaded!' );
 
 									// Highlight element when related content
 									getAllNavigation( $primaryMenu ).removeClass( 'active' );
@@ -15583,14 +15804,14 @@ APP = ( function ( APP, $, window, document ) {
 			startY;
 
 
-		$sectionsContainer.on( 'touchstart.onepage', function( event ) {
+		$sectionsContainer.on( 'touchstart.ONEPAGE2', function( event ) {
 			var touches = event.originalEvent.touches;
 			if ( touches && touches.length ) {
 				startX = touches[0].pageX;
 				startY = touches[0].pageY;
 
 
-				$sectionsContainer.on( 'touchmove.onepage', function( event ) {
+				$sectionsContainer.on( 'touchmove.ONEPAGE2', function( event ) {
 
 					var touches = event.originalEvent.touches;
 					if ( touches && touches.length ) {
@@ -15620,7 +15841,7 @@ APP = ( function ( APP, $, window, document ) {
 
 						}
 						if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
-							$sectionsContainer.off( 'touchmove.onepage' );
+							$sectionsContainer.off( 'touchmove.ONEPAGE2' );
 						}
 					}
 
@@ -15686,7 +15907,7 @@ APP = ( function ( APP, $, window, document ) {
 		function parallaxInit( w, h ) {
 			
 			/* Pure parallax scrolling effect without other embedded HTML elements */
-			$( '.pure-bg-parallax' ).each( function() {
+			$( '.uix-parallax--pure-bg' ).each( function() {
 				var $this       = $( this ),
 					dataImg     = $this.data( 'parallax-bg' ),
 					dataSpeed   = $this.data( 'parallax' );
@@ -15712,15 +15933,15 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			/* Parallax scrolling effect with embedded HTML elements */
-			$( '.parallax' ).each( function() {
+			$( '.uix-parallax' ).each( function() {
 				var $this            = $( this ),
-					$curImg          = $this.find( '.parallax-img' ),
+					$curImg          = $this.find( '.uix-parallax__img' ),
 					dataImg          = $curImg.attr( 'src' ),
 					dataSkew         = $this.data( 'skew' ),
 					dataSpeed        = $this.data( 'speed' ),
 					dataOverlay      = $this.data( 'overlay-bg' ),
 					dataFullyVisible = $this.data( 'fully-visible' ),
-					dataElSpeed      = $this.find( '.parallax-element' ).data( 'el-speed' ),	
+					dataElSpeed      = $this.find( '.uix-parallax__el' ).data( 'el-speed' ),	
 					curImgH          = null,
 					curImgW          = null,
 					curSize          = 'cover',
@@ -15758,16 +15979,16 @@ APP = ( function ( APP, $, window, document ) {
 					
 					//Custom height for parallax container
 					if ( 
-						$this.hasClass( 'height-10' ) || 
-						$this.hasClass( 'height-20' ) || 
-						$this.hasClass( 'height-30' ) || 
-						$this.hasClass( 'height-40' ) || 
-						$this.hasClass( 'height-50' ) || 
-						$this.hasClass( 'height-60' ) || 
-						$this.hasClass( 'height-70' ) || 
-						$this.hasClass( 'height-80' ) || 
-						$this.hasClass( 'height-90' ) || 
-						$this.hasClass( 'height-100' )
+						$this.hasClass( 'uix-height--10' ) || 
+						$this.hasClass( 'uix-height--20' ) || 
+						$this.hasClass( 'uix-height--30' ) || 
+						$this.hasClass( 'uix-height--40' ) || 
+						$this.hasClass( 'uix-height--50' ) || 
+						$this.hasClass( 'uix-height--60' ) || 
+						$this.hasClass( 'uix-height--70' ) || 
+						$this.hasClass( 'uix-height--80' ) || 
+						$this.hasClass( 'uix-height--90' ) || 
+						$this.hasClass( 'uix-height--100' )
 					 ) {		
 
 						var newH = $this.height();
@@ -15782,11 +16003,11 @@ APP = ( function ( APP, $, window, document ) {
 					 }
 
 
-					//If the ".pos-vertical-align" has more content
+					//If the ".uix-v-align--absolute" has more content
 					if ( w <= 768 ) {
 
-						if ( $this.find( '.pos-vertical-align' ).height() >= curImgH ) {
-							$this.find( '.pos-vertical-align' ).addClass( 'relative' );
+						if ( $this.find( '.uix-v-align--absolute' ).height() >= curImgH ) {
+							$this.find( '.uix-v-align--absolute' ).addClass( 'uix-v-align--relative' );
 							$curImg.hide();	
 						}
 
@@ -15864,10 +16085,10 @@ APP = ( function ( APP, $, window, document ) {
 
 
 					//Embedded parent disparity elements
-					if ( $this.find( '.parallax-element' ).length > 0 ) {
+					if ( $this.find( '.uix-parallax__el' ).length > 0 ) {
 						$window.on( 'scroll touchmove', function() {
 							var scrolled = $window.scrollTop();
-							$this.find( '.parallax-element' ).css( {
+							$this.find( '.uix-parallax__el' ).css( {
 								'transform' : 'translateY('+Math.round( ( $this.offset().top - scrolled ) * dataElSpeed )+'px)',
 								'transition': 'none'
 							} );
@@ -16085,21 +16306,21 @@ APP = ( function ( APP, $, window, document ) {
 		
 		function pricingInit( w ) {
 			//Initialize the height
-			$( '.custom-price' ).each( function(){
+			$( '.uix-price' ).each( function(){
 
 
 					//returns new id
 					var $this            = $( this ),
 						priceBGH         = Array(),
 						priceBGH_excerpt = Array(),
-						$initHeight      = $this.find( '.init-height' );
+						$initHeight      = $this.find( '.js-uix-init-height' );
 
 					$initHeight.each( function( index ) {
 						//Screen protection of height
-						$( this ).find( '.border,.excerpt' ).css( 'height', 'auto' );
+						$( this ).find( '.uix-price__outline, .uix-price__excerpt' ).css( 'height', 'auto' );
 
 						var tempheight = $( this ).height();
-						var tempheight_excerpt = $( this ).find( '.excerpt' ).height();
+						var tempheight_excerpt = $( this ).find( '.uix-price__excerpt' ).height();
 						priceBGH.push( tempheight );
 						priceBGH_excerpt.push( tempheight_excerpt );
 
@@ -16113,10 +16334,10 @@ APP = ( function ( APP, $, window, document ) {
 						if ( w > 768 ){
 
 							// Initialize the height of all columns
-							$initHeight.find( '.border' ).css( 'height', priceBGH_Max + 'px' );
+							$initHeight.find( '.uix-price__outline' ).css( 'height', priceBGH_Max + 'px' );
 
 							// Actived columns
-							$initHeight.find( '.border.active' ).each( function() {
+							$initHeight.find( '.uix-price__outline.active' ).each( function() {
 
 								var ty = Math.abs( parseInt( $( this ).css('transform').split(',')[5]));
 								if ( !isNaN(ty) ) {
@@ -16128,20 +16349,20 @@ APP = ( function ( APP, $, window, document ) {
 
 
 						} else {
-							$initHeight.find( '.border' ).css( 'height', 'auto' );
+							$initHeight.find( '.uix-price__outline' ).css( 'height', 'auto' );
 
 
 						}
 
 
 						// Actived columns
-						$initHeight.find( '.border.active' ).each( function() {
+						$initHeight.find( '.uix-price__outline.active' ).each( function() {
 
-							var textColor = $( this ).closest( '.border-hover' ).data( 'tcolor' ),
-								btnColor  = $( this ).closest( '.border-hover' ).data( 'bcolor' );
+							var textColor = $( this ).closest( '.uix-price__outline--hover' ).data( 'tcolor' ),
+								btnColor  = $( this ).closest( '.uix-price__outline--hover' ).data( 'bcolor' );
 
 							$( this ).css( 'background-color', btnColor );
-							$( this ).find( '.button' ).removeClass( 'button-bg-primary' ).addClass( 'button-bg-secondary' );
+							$( this ).find( '.uix-btn' ).removeClass( 'uix-btn__bg--primary' ).addClass( 'uix-btn__bg--secondary' );
 
 
 						});	
@@ -16194,16 +16415,16 @@ APP = ( function ( APP, $, window, document ) {
 
 
 				//Radial Progress Bar
-				if ( $this.hasClass( 'custom-radial-progressbar' ) ) {
-					$this.find( '.track' ).html( '<span>'+percent+'<em class="unit">'+unit+'</em></span>' );
-					$this.addClass( 'progress-' + percent );	
+				if ( $this.hasClass( 'uix-progressbar--circle' ) ) {
+					$this.find( '.uix-progressbar__track' ).html( '<span>'+percent+'<em class="uix-progressbar__unit">'+unit+'</em></span>' );
+					$this.addClass( 'uix-progressbar--progress-' + percent );	
 				} 
 
 
 				//Rectangle Progress Bar
-				if ( $this.hasClass( 'custom-rectangle-progressbar' ) ) {
-					$this.find( '.bar > span' ).html( ''+percent+'<em class="unit">'+unit+'</em>' );
-					$this.addClass( 'progress-' + percent );	
+				if ( $this.hasClass( 'uix-progressbar--rectangle' ) ) {
+					$this.find( '.uix-progressbar__bar > span' ).html( ''+percent+'<em class="uix-progressbar__unit">'+unit+'</em>' );
+					$this.addClass( 'uix-progressbar--progress-' + percent );	
 				} 
 
 				//Prevents front-end javascripts that are activated in the background to repeat loading.
@@ -16242,6 +16463,7 @@ APP = ( function ( APP, $, window, document ) {
 		var hasRetina  = false,
 			rootRetina = (typeof exports === 'undefined' ? window : exports),
 			mediaQuery = '(-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-resolution: 1.5dppx)';
+		
 	
 		if ( rootRetina.devicePixelRatio > 1 || rootRetina.matchMedia && rootRetina.matchMedia( mediaQuery ).matches ) {
 			hasRetina = true;
@@ -16512,9 +16734,9 @@ APP = ( function ( APP, $, window, document ) {
 	APP.SHOW_MORELESS.version       = '0.0.1';
     APP.SHOW_MORELESS.documentReady = function( $ ) {
 
-		$( '.custom-more-text-link' ).on( 'click', function( e ) {
+		$( '.uix-more-btn__link' ).on( 'click', function( e ) {
 			e.preventDefault();
-			$( this ).parent().prev( '.custom-more-text' ).toggleClass( 'show' );
+			$( this ).parent().prev( '.uix-more-btn' ).toggleClass( 'js-uix-show' );
 			$( this ).find( '> span' ).first().toggle();
 			$( this ).find( '> span' ).eq(1).toggle();
 			
@@ -16666,23 +16888,24 @@ APP = ( function ( APP, $, window, document ) {
     APP.SOURCE_CODE_VIEW.documentReady = function( $ ) {
 
 		//Add view source code to body
-		$( 'body' ).prepend( '<a href="#source-code" id="view-source"><i class="fa fa-code" aria-hidden="true"></i></a><div id="source-code"><a href="javascript:void(0);" id="close"></a></div>' );
+		$( 'body' ).prepend( '<a href="#uix-source-code" id="uix-view-source"><i class="fa fa-code" aria-hidden="true"></i></a><div id="uix-source-code"><a href="javascript:void(0);" id="uix-source-code__close"></a></div>' );
 				
 		
+		
 		//View source button event
-		$( '#view-source' ).on( 'click', function() {
+		$( '#uix-view-source' ).on( 'click', function() {
 			$( 'html' ).css( 'overflow-y', 'hidden' );
-			$( '#source-code' ).show();
+			$( '#uix-source-code' ).show();
 		});
 		
-		$( '#source-code > #close' ).on( 'click', function() {
+		$( '#uix-source-code > #uix-source-code__close' ).on( 'click', function() {
 			$( 'html' ).css( 'overflow-y', 'auto' );
 			var uri = window.location.toString();
 			if ( uri.indexOf( '#' ) > 0 ) {
 				var clean_uri = uri.substring(0, uri.indexOf( '#' ) );
 				window.history.replaceState({}, document.title, clean_uri );
 			}
-			$( '#source-code' ).hide();
+			$( '#uix-source-code' ).hide();
 			
 		});
 		
@@ -16703,7 +16926,7 @@ APP = ( function ( APP, $, window, document ) {
 			var pageBodyCode   = data.split("<body")[1].split(">").slice(1).join(">").split("</body>")[0],
 				pageHeaderCode = data.split("</head>")[0];
 			
-			pageBodyCode   = removeElements( pageBodyCode, '#view-source, #source-code' );
+			pageBodyCode   = removeElements( pageBodyCode, '#uix-view-source, #uix-source-code' );
 			pageBodyCode   = pageBodyCode.replace(/[<>]/g, function(m) { return {'<':'&lt;','>':'&gt;'}[m]; });
 			pageHeaderCode = pageHeaderCode.replace(/[<>]/g, function(m) { return {'<':'&lt;','>':'&gt;'}[m]; });
 
@@ -16711,7 +16934,7 @@ APP = ( function ( APP, $, window, document ) {
 			$("<pre />", {
 				"html":   pageHeaderCode + '&lt;/head&gt;\n&lt;'+sourceCodeBodyClassCode+'&gt;\n' + pageBodyCode + '\n&lt;/body&gt;\n&lt;/html&gt;',
 				"class": 'highlightBlock-print html'
-			}).appendTo( '#source-code' );	
+			}).appendTo( '#uix-source-code' );	
 			
 		});
 		
@@ -16747,7 +16970,7 @@ APP = ( function ( APP, $, window, document ) {
 		var $window      = $( window ),
 			windowWidth  = $window.width(),
 			windowHeight = $window.height(),
-			topSpacing   = $( '.header-area' ).outerHeight( true ) + 10;
+			topSpacing   = $( '.uix-header__container' ).outerHeight( true ) + 10;
 		
 		
 		$window.on( 'scroll touchmove', function() {
@@ -16797,7 +17020,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 			
 //		var	navMinTop    = $( '.stick-widget' ).offset().top + $( window ).height()/3,
-//			navMaxTop    = parseFloat( $( document ).height() - $( '.footer-main-container' ).height() ) - $( window ).height()/3;
+//			navMaxTop    = parseFloat( $( document ).height() - $( '.uix-footer__container' ).height() ) - $( window ).height()/3;
 //
 //
 //		$( window ).on( 'scroll touchmove', function() {
@@ -16841,11 +17064,11 @@ APP = ( function ( APP, $, window, document ) {
 	APP.TABS.version       = '0.1.2';
     APP.TABS.documentReady = function( $ ) {
 
-		$( '.custom-tabs' ).each( function( id ) {
+		$( '.uix-tabs' ).each( function( id ) {
 			var $this             = $( this ),
 			    $li               = $this.find( 'ul > li' ),
 				liNum             = $li.length,
-				$contentbox       = $this.find( '.content' ),
+				$contentbox       = $this.find( '.uix-tabs__content' ),
 				ulWidth           = $this.data( 'width' ),
 				fullwidth         = $this.data( 'fullwidth' ),
 				rotation          = $this.data( 'rotation' ),
@@ -16944,8 +17167,8 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			// Tab Sliding Effext
-			if ( $this.find( 'ul li:first .marker' ).length == 0 ) {
-				$this.find( 'ul li:first' ).prepend( '<div class="marker"></div>' );
+			if ( $this.find( 'ul li:first .uix-tabs__marker' ).length == 0 ) {
+				$this.find( 'ul li:first' ).prepend( '<div class="uix-tabs__marker"></div>' );
 			}
 			
 			
@@ -16957,7 +17180,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 				
 				$this.find( 'li' ).removeClass( 'active' );
-				$this.find( '.content' ).removeClass( 'active' );
+				$this.find( '.uix-tabs__content' ).removeClass( 'active' );
 		
 				$( this ).addClass( 'active' );
 				$( '#' + tabID ).addClass( 'active' );
@@ -16969,11 +17192,11 @@ APP = ( function ( APP, $, window, document ) {
 					translateY = $( this ).index() * liHeight;
 				
 				if ( $( window ).width() <= 768 ) {
-					$this.find( '.marker' ).css({
+					$this.find( '.uix-tabs__marker' ).css({
 						'transform'          : 'translateY( '+translateY+'px )'	
 					});	
 				} else {
-					$this.find( '.marker' ).css({
+					$this.find( '.uix-tabs__marker' ).css({
 						'transform'          : 'translateX( '+translateX+'% )'	
 					});	
 				}
@@ -16998,7 +17221,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 				locArr = url.split( '#' );
 			    loc    = locArr[1];
-				curTab = $( '.custom-tabs' ).find( 'ul > li:eq('+loc+')' );
+				curTab = $( '.uix-tabs' ).find( 'ul > li:eq('+loc+')' );
 				curTab.trigger( 'click' );	
 			}
 				
@@ -17021,6 +17244,103 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
+ * <!-- Testimonials Carousel -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.TESTIMONIALS               = APP.TESTIMONIALS || {};
+	APP.TESTIMONIALS.version       = '0.0.1';
+    APP.TESTIMONIALS.documentReady = function( $ ) {
+
+		var $obj                 = $( '.uix-testimonials .flexslider' ),
+			testimonialsControls = '';
+		
+		
+		for ( var i = 0; i < $obj.find( '.slides > li' ).length; i++ ) {
+			testimonialsControls += '<li></li>';
+		}
+		$( '.uix-testimonials__controls' ).html( testimonialsControls );
+    	
+		
+		
+		$obj.flexslider({
+			animation         : 'slide',
+			slideshow         : true,
+			smoothHeight      : true,
+			controlNav        : true,
+			manualControls    : '.uix-testimonials__controls li',
+			directionNav      : false,
+			animationSpeed    : 600,
+			slideshowSpeed    : 7000,
+			selector          : ".slides > li",
+			start: function(slider){
+				$obj.on( 'mousedown', function( e ) {
+					if ( $obj.data( 'flexslider' ).animating ) {
+						return;
+					}
+						
+					$( this ).addClass('dragging');
+					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
+					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
+					$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
+					$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );
+				} );
+			
+				$obj.on( 'mouseup', function( e ) {
+					if ( $obj.data('flexslider').animating ) {
+						return;
+					}
+						
+					$( this ).removeClass('dragging');
+					var origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
+					    origin_mouse_y = $( this ).data( 'origin_mouse_y' );
+					
+					if ( 'horizontal' === $obj.data('flexslider').vars.direction ) {
+						if ( e.pageX > origin_mouse_x ) {
+							$obj.flexslider('prev');
+						}
+						if ( e.pageX < origin_mouse_x ) {
+							$obj.flexslider('next');
+						}
+					} else {
+						if ( e.pageY > origin_mouse_y ) {
+							$obj.flexslider('prev');
+						}
+						if ( e.pageY < origin_mouse_y ) {
+							$obj.flexslider('next');
+						}
+					}
+				} );
+				
+				
+				$( '.uix-testimonials__count .total' ).text( '0' + slider.count );
+				$( '.uix-testimonials__count .cur' ).text( '0' + parseFloat( slider.currentSlide + 1 ) );
+				
+			},
+			after: function(slider){
+				
+				$( '.uix-testimonials__count .total' ).text( '0' + slider.count );
+				$( '.uix-testimonials__count .cur' ).text( '0' + parseFloat( slider.currentSlide + 1 ) );
+				
+			}
+		});
+		
+		
+    };
+
+    APP.components.documentReady.push( APP.TESTIMONIALS.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+
+/* 
+ *************************************
  * <!-- Team Focus -->
  *************************************
  */
@@ -17031,13 +17351,13 @@ APP = ( function ( APP, $, window, document ) {
 	APP.TEAM_FOCUS.version       = '0.0.2';
     APP.TEAM_FOCUS.documentReady = function( $ ) {
 
-		var teamFocusContent = '.custom-team-focus',
-			teamFocusMask    = '.custom-team-focus-mask';
+		var teamFocusContent = '.uix-team-focus',
+			teamFocusMask    = '.uix-team-focus__mask';
 			
 			
 		$( teamFocusContent ).each( function() {
 			var $this           = $( this ),
-				thisID          = 'custom-team-focus-' + Math.random()*1000000000000000000,
+				thisID          = 'uix-team-focus-' + Math.random()*1000000000000000000,
 				hoverWidth      = $this.data( 'hover-width' ),
 				targetWidth     = $this.data( 'target-width' ), // Div over width as a percentage 
 				targetInfo      = $this.data( 'target-info' ), // Corresponding character details display
@@ -17063,7 +17383,7 @@ APP = ( function ( APP, $, window, document ) {
 			}
 			
 			if( typeof targetInfo === typeof undefined ) {
-				targetInfo = '.custom-team-focus-info';
+				targetInfo = '.uix-team-focus__info';
 			}		
 		
 			total = $( el ).length;
@@ -17138,7 +17458,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 				$info.find( 'h4 strong' ).html( cName );
 				$info.find( 'h4 em' ).html( cPo );
-				$info.find( '.intro' ).html( cIntro );
+				$info.find( '.uix-team-focus__info__text' ).html( cIntro );
 				
 
 				if ( !$cur.hasClass( 'focus' ) ) {
@@ -17209,7 +17529,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 				$info.find( 'h4 strong' ).html( '' );
 				$info.find( 'h4 em' ).html( '' );
-				$info.find( '.intro' ).html( '' );		
+				$info.find( '.uix-team-focus__info__text' ).html( '' );		
 
 
 			});	
@@ -17223,103 +17543,6 @@ APP = ( function ( APP, $, window, document ) {
     };
 
     APP.components.documentReady.push( APP.TEAM_FOCUS.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
-
-/* 
- *************************************
- * <!-- Testimonials Carousel -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.TESTIMONIALS               = APP.TESTIMONIALS || {};
-	APP.TESTIMONIALS.version       = '0.0.1';
-    APP.TESTIMONIALS.documentReady = function( $ ) {
-
-		var $obj                 = $( '.custom-testimonials .flexslider' ),
-			testimonialsControls = '';
-		
-		
-		for ( var i = 0; i < $obj.find( '.slides > li' ).length; i++ ) {
-			testimonialsControls += '<li></li>';
-		}
-		$( '.slides-custom-control' ).html( testimonialsControls );
-    	
-		
-		
-		$obj.flexslider({
-			animation         : 'slide',
-			slideshow         : true,
-			smoothHeight      : true,
-			controlNav        : true,
-			manualControls    : '.slides-custom-control li',
-			directionNav      : false,
-			animationSpeed    : 600,
-			slideshowSpeed    : 7000,
-			selector          : ".slides > li",
-			start: function(slider){
-				$obj.on( 'mousedown', function( e ) {
-					if ( $obj.data( 'flexslider' ).animating ) {
-						return;
-					}
-						
-					$( this ).addClass('dragging');
-					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
-					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
-					$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
-					$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );
-				} );
-			
-				$obj.on( 'mouseup', function( e ) {
-					if ( $obj.data('flexslider').animating ) {
-						return;
-					}
-						
-					$( this ).removeClass('dragging');
-					var origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
-					    origin_mouse_y = $( this ).data( 'origin_mouse_y' );
-					
-					if ( 'horizontal' === $obj.data('flexslider').vars.direction ) {
-						if ( e.pageX > origin_mouse_x ) {
-							$obj.flexslider('prev');
-						}
-						if ( e.pageX < origin_mouse_x ) {
-							$obj.flexslider('next');
-						}
-					} else {
-						if ( e.pageY > origin_mouse_y ) {
-							$obj.flexslider('prev');
-						}
-						if ( e.pageY < origin_mouse_y ) {
-							$obj.flexslider('next');
-						}
-					}
-				} );
-				
-				
-				$( '.custom-testimonials-count .total' ).text( '0' + slider.count );
-				$( '.custom-testimonials-count .cur' ).text( '0' + parseFloat( slider.currentSlide + 1 ) );
-				
-			},
-			after: function(slider){
-				
-				$( '.custom-testimonials-count .total' ).text( '0' + slider.count );
-				$( '.custom-testimonials-count .cur' ).text( '0' + parseFloat( slider.currentSlide + 1 ) );
-				
-			}
-		});
-		
-		
-    };
-
-    APP.components.documentReady.push( APP.TESTIMONIALS.documentReady );
     return APP;
 
 }( APP, jQuery, window, document ) );
@@ -17387,14 +17610,14 @@ APP = ( function ( APP, $, window, document ) {
 				}	
 			
 		
-				$( customControls ).html( $( customControls ).text().replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>") );
+				$( customControls ).html( $( customControls ).text().replace(/([^\x00-\x80]|\w)/g, "<span class='uix-letter'>$&</span>") );
 			
 			
 			
 				if( customControls.indexOf( 'fadeInRight' ) >= 0 ) {
 					txtEff = anime.timeline({loop: false})
 						  .add({
-							targets: customControls + ' .letter',
+							targets: customControls + ' .uix-letter',
 							translateX: [40,0],
 							translateZ: 0,
 							opacity: [0,1],
@@ -17411,7 +17634,7 @@ APP = ( function ( APP, $, window, document ) {
 				if( customControls.indexOf( 'zoomInDown' ) >= 0 ) {
 					txtEff = anime.timeline({loop: false})
 						  .add({
-						    targets: customControls + ' .letter',
+						    targets: customControls + ' .uix-letter',
 							scale: [0, 1],
 							duration: speed,
 							elasticity: 600,
@@ -17421,6 +17644,7 @@ APP = ( function ( APP, $, window, document ) {
 						  });
 
 				}	
+			
 			
 
 
@@ -17459,10 +17683,10 @@ APP = ( function ( APP, $, window, document ) {
 		 ---------------------------
 		 */
 		if ( windowWidth > 768 ) {
-			$( '.list-timeline-container-outer-wrapper.horizontal' ).each( function()  {
+			$( '.uix-timeline__container-wrapper.is-horizontal' ).each( function()  {
 
 				var $this          = $( this ),
-					$timeline      = $this.find( '.list-timeline-container-outer.horizontal > .list-timeline-container' ),
+					$timeline      = $this.find( '.uix-timeline__container.is-horizontal > .uix-timeline' ),
 					dateShowEle    = $timeline.data( 'show-ele' );
 
 				if ( typeof dateShowEle === typeof undefined ) {
@@ -17473,19 +17697,19 @@ APP = ( function ( APP, $, window, document ) {
 				$this.css( 'height', $this.height() - 17 + 'px' ); //Scrollbar width is 17px by default
 
 
-				$this.find( '.timeline-prev' ).on( 'click', function( e ) {
+				$this.find( '.uix-timeline__btn--prev' ).on( 'click', function( e ) {
 					e.preventDefault();
 					timelineUpdate( $this, false, dateShowEle, true );
 					return false;
 				});
 
-				$this.find( '.timeline-next' ).on( 'click', function( e ) {
+				$this.find( '.uix-timeline__btn--next' ).on( 'click', function( e ) {
 					e.preventDefault();
 					timelineUpdate( $this, false, dateShowEle, false );
 					return false;
 				});
 
-				$this.find( '.list-timeline-item' ).on( 'click', function( e ) {
+				$this.find( '.uix-timeline__item' ).on( 'click', function( e ) {
 					e.preventDefault();
 					timelineUpdate( $this, $( this ), dateShowEle, false );
 					return false;
@@ -17493,9 +17717,9 @@ APP = ( function ( APP, $, window, document ) {
 
 				
 				//Activate the default selection
-				timelineUpdate( $this, $this.find( '.list-timeline-item.active' ), dateShowEle, false );
-				if ( $this.find( '.list-timeline-item.active' ).index() == 0 ) {
-					$this.find( '.timeline-prev' ).addClass( 'disable' );
+				timelineUpdate( $this, $this.find( '.uix-timeline__item.active' ), dateShowEle, false );
+				if ( $this.find( '.uix-timeline__item.active' ).index() == 0 ) {
+					$this.find( '.uix-timeline__btn--prev' ).addClass( 'disabled' );
 				}
 				
 
@@ -17514,12 +17738,12 @@ APP = ( function ( APP, $, window, document ) {
 		 * @return {void}                        - The constructor.
 		 */
 		function timelineUpdate( obj, iscur, showEle, prev ) {
-			var	itemTotal  = obj.find( '.list-timeline-item' ).length,
-				tNav       = obj.find( '.list-timeline-item' ),
+			var	itemTotal  = obj.find( '.uix-timeline__item' ).length,
+				tNav       = obj.find( '.uix-timeline__item' ),
 				tLoop      = false;
 			
 			
-			var curIndex = obj.find( '.list-timeline-item.active' ).index(),
+			var curIndex = obj.find( '.uix-timeline__item.active' ).index(),
 				tarIndex;
 
 			//Check if a value is an object currently
@@ -17540,7 +17764,7 @@ APP = ( function ( APP, $, window, document ) {
 		
 			
 			//loop the items
-			obj.find( '.timeline-prev, .timeline-next' ).removeClass( 'disable' );
+			obj.find( '.uix-timeline__btn--prev, .uix-timeline__btn--next' ).removeClass( 'disabled' );
 			
 			if ( prev ) {
 				
@@ -17549,7 +17773,7 @@ APP = ( function ( APP, $, window, document ) {
 					if ( tarIndex < 0 ) tarIndex = itemTotal-1;
 				} else {
 					if ( tarIndex < 0 ) tarIndex = 0;
-					if ( tarIndex == 0 ) obj.find( '.timeline-prev' ).addClass( 'disable' );
+					if ( tarIndex == 0 ) obj.find( '.uix-timeline__btn--prev' ).addClass( 'disabled' );
 					
 				}
 			} else {
@@ -17559,7 +17783,7 @@ APP = ( function ( APP, $, window, document ) {
 					if ( tarIndex == itemTotal ) tarIndex = 0;
 				} else {
 					if ( tarIndex > itemTotal-1 ) tarIndex = itemTotal-1;
-					if ( tarIndex > itemTotal-2 ) obj.find( '.timeline-next' ).addClass( 'disable' );
+					if ( tarIndex > itemTotal-2 ) obj.find( '.uix-timeline__btn--next' ).addClass( 'disabled' );
 					
 				}
 			}
@@ -17567,20 +17791,20 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			tNav.removeClass( 'active' );
-			obj.find( '.list-timeline-item:eq('+tarIndex+')' ).addClass( 'active' );
+			obj.find( '.uix-timeline__item:eq('+tarIndex+')' ).addClass( 'active' );
 
 			//scroll left
 			var tNavW = 0;
 			for ( var i = 0; i < tarIndex; i++ ) {
-				tNavW += obj.find( '.list-timeline-item:eq('+i+')' ).width();
+				tNavW += obj.find( '.uix-timeline__item:eq('+i+')' ).width();
 			}
 	
-			obj.find( '.list-timeline-container-outer.horizontal > .list-timeline-container' ).css({
+			obj.find( '.uix-timeline__container.is-horizontal > .uix-timeline' ).css({
 				'margin-left' : -parseFloat( tNavW ) + 'px'
 			});
 			
 			//Push the current text to element 
-			$( showEle ).text( obj.find( '.list-timeline-item:eq('+i+')' ).find( '.date' ).text() );
+			$( showEle ).text( obj.find( '.uix-timeline__item:eq('+i+')' ).find( '.uix-timeline__item--date' ).text() );
 			
 			
 		}
@@ -17612,18 +17836,18 @@ APP = ( function ( APP, $, window, document ) {
 		var $window      = $( window ),
 			windowWidth  = $window.width(),
 			windowHeight = $window.height(),
-			ulForDesktop = '.menu-v-container:not(.mobile) ul.menu-main';
+			ulForDesktop = '.uix-v-menu__container:not(.is-mobile) ul.uix-menu';
 
 
 		// Menu Hover
 		var mTop = 15;
 		$( ulForDesktop + ' > li.multi-column > ul li ul' ).addClass( 'multi' );
-		$( ulForDesktop + ' > li:not(.multi-column) ul, .menu-v-container:not(.mobile) li.multi-column > ul.sub-menu > li > ul, '+ulForDesktop+' li.multi-column > ul' ).css( 'margin-top', mTop + 'px' );
+		$( ulForDesktop + ' > li:not(.multi-column) ul, .uix-v-menu__container:not(.is-mobile) li.multi-column > ul.sub-menu > li > ul, '+ulForDesktop+' li.multi-column > ul' ).css( 'margin-top', mTop + 'px' );
 
 		$( ulForDesktop + ' li' ).on( 'mouseenter', function(){
 
 
-			TweenMax.set( $( this ).find( ' > ul.sub-menu:not(.multi), .mega-arrow' ), {
+			TweenMax.set( $( this ).find( ' > ul.sub-menu:not(.multi), .uix-menu__arrow-mega' ), {
 				css: {
 					opacity    : 0,
 					display    : 'block',
@@ -17662,7 +17886,7 @@ APP = ( function ( APP, $, window, document ) {
 		}).on( 'mouseleave' , function(){
 
 
-			TweenMax.to( $( this ).find( ' > ul.sub-menu:not(.multi), .mega-arrow' ), 0.3, {
+			TweenMax.to( $( this ).find( ' > ul.sub-menu:not(.multi), .uix-menu__arrow-mega' ), 0.3, {
 				css: {
 					opacity    : 0,
 					marginTop  : mTop + 'px'
@@ -17688,7 +17912,7 @@ APP = ( function ( APP, $, window, document ) {
 		//Add Sub-menu Arrow
 		$( ulForDesktop + ' li' ).each( function() {
 			if ( $( this ).find( 'ul' ).length > 0 ) {
-				$( this ).prepend( '<span class="nav-arrow"></span>' );
+				$( this ).prepend( '<span class="uix-menu__arrow"></span>' );
 			}
 
 		} );	
@@ -17725,7 +17949,7 @@ APP = ( function ( APP, $, window, document ) {
 		 */
 		function menuWrapInit( w, h ) {
 			
-			var $menuWrap  = $( '.menu-v-container:not(.mobile)' ),
+			var $menuWrap  = $( '.uix-v-menu__container:not(.is-mobile)' ),
 				vMenuTop   = 0, //This value is equal to the $vertical-menu-top variable in the SCSS
 				winHeight  = h - vMenuTop;
 
@@ -17742,7 +17966,7 @@ APP = ( function ( APP, $, window, document ) {
 
 			$window.on('scroll', function() {
 
-				var curULHeight = $( 'ul.menu-main' ).height(),
+				var curULHeight = $( 'ul.uix-menu' ).height(),
 					windowPos   = $window.scrollTop();
 
 				if ( curULHeight > winHeight ) {
@@ -17817,7 +18041,7 @@ APP = ( function ( APP, $, window, document ) {
 			AJAXPageLinks       = '[data-ajax-page]',
 			$navs               = $( AJAXPageLinks ).parent().parent().find( 'li' ),
 			total               = $navs.length,
-			$sectionsContainer  = $( '.custom-fullpage-ajax-container' ),
+			$sectionsContainer  = $( '.uix-ajax-load__fullpage-container' ),
 			ajaxContainer       = '.ajax-container',
 			curAjaxPageID       = $( ajaxContainer ).data( 'ajax-page-id' );
 		
@@ -17833,7 +18057,7 @@ APP = ( function ( APP, $, window, document ) {
 		 */
 	
 		//Activate the first item
-		if ( $( '.js-ajax-content-wrapper' ).length == 0 ) {
+		if ( $( '.js-uix-ajax-load__container' ).length == 0 ) {
 			moveTo( $( ajaxContainer ), false, 'down', 0 );
 		} else {
 			//Activate navigation from AJAX request
@@ -18001,12 +18225,12 @@ APP = ( function ( APP, $, window, document ) {
 				if ( !url || typeof url === typeof undefined ) {
 					url = $navs.eq( nextIndex ).find( '> a' ).attr( 'href' );
 				}
-
+ 
 				//Click on this link element using an AJAX request
 				$.ajax({
 					timeout  : 15000,
 					url      : url,
-					method   : 'POST',
+					method   : ( typeof container.data( 'ajax-method' ) === typeof undefined ) ? 'POST' : container.data( 'ajax-method' ),
 					dataType : 'html',
 					data     : {
 						action  : 'load_singlepages_ajax_content'
@@ -18014,7 +18238,7 @@ APP = ( function ( APP, $, window, document ) {
 					success  : function( response ) {
 						
 						//A function to be called if the request succeeds
-						ajaxSucceeds( dir, container, url, $( response ).find( '.js-ajax-content-wrapper' ).html() );
+						ajaxSucceeds( dir, container, url, $( response ).find( '.js-uix-ajax-load__container' ).html() );
 
 					},
 					error: function(){
@@ -18022,7 +18246,7 @@ APP = ( function ( APP, $, window, document ) {
 					},
 					beforeSend: function() {
 
-						TweenMax.set( '.ajax-loader', {
+						TweenMax.set( '.uix-ajax-load__loader', {
 							css         : {
 								'display' : 'block'
 							},
@@ -18065,7 +18289,7 @@ APP = ( function ( APP, $, window, document ) {
 			var oldContent = container.html();
 		
 			//Remove loader
-			TweenMax.to( '.ajax-loader', 0.5, {
+			TweenMax.to( '.uix-ajax-load__loader', 0.5, {
 				alpha       : 0,
 				onComplete  : function() {
 					TweenMax.set( this.target, {
@@ -18227,6 +18451,10 @@ APP = ( function ( APP, $, window, document ) {
 /*
  * Apply some original scripts
  *
+ * @param  {boolean} scrollReveal          - Run script of module "Scroll Reveal". a page commonly used to 
+ *                                           load asynchronous information
+ * @param  {boolean} ajaxPostList          - Run script of module "Posts List With Ajax". a page commonly used to 
+ *                                           load asynchronous information
  * @return {void}  - The constructor.
  */
 ( function ( $ ) {
@@ -18234,7 +18462,8 @@ APP = ( function ( APP, $, window, document ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
-			controls    : '.controls.line-eff'
+			scrollReveal    : true,
+			ajaxPostList    : true
         }, options );
  
         this.each( function() {
@@ -18267,13 +18496,11 @@ APP = ( function ( APP, $, window, document ) {
 			APP.DROPDOWN_MENU.documentReady($); //Dropdown Menu
 			APP.DROPDOWN_MENU2.documentReady($); //Dropdown Menu2
 			APP.COUNTER.documentReady($); //Counter
-			APP.SCROLL_REVEAL.documentReady($); //Scroll Reveal
 			APP._3D_BACKGROUND.documentReady($); //3D Background
 			APP.ACCORDION.documentReady($); //Accordion	
 			APP.ADVANCED_CONTENT_SLIDER.documentReady($); //Advanced Content Slider
 			APP.GALLERY.documentReady($); //Gallery
 			APP.IMAGE_SHAPES.documentReady($); //Image Shapes
-			APP.POST_LIST_AJAX.documentReady($); //Posts List With Ajax
 			APP.PERIODICAL_SCROLL.documentReady($); //Periodical Scroll
 			APP.PRICING.documentReady($); //Pricing
 			APP.PROGRESSBAR.documentReady($); //Progress Bar
@@ -18282,6 +18509,11 @@ APP = ( function ( APP, $, window, document ) {
 			APP.TABS.documentReady($); //Tabs
 			APP.TEAM_FOCUS.documentReady($); //Team Focus
 			APP.TESTIMONIALS.documentReady($); //Testimonials Carousel
+			
+			if ( settings.scrollReveal ) APP.SCROLL_REVEAL.documentReady($); //Scroll Reveal
+			if ( settings.ajaxPostList ) APP.POST_LIST_AJAX.documentReady($); //Posts List With Ajax
+			
+			
 			
 			//----Other functions here
 
@@ -18307,6 +18539,7 @@ APP = ( function ( APP, $, window, document ) {
 /*
  * Apply all the original scripts
  *
+ * @param  {boolean} runAll          - Run all module scripts.
  * @return {void}  - The constructor.
  */	
 ( function ( $ ) {
@@ -18314,7 +18547,7 @@ APP = ( function ( APP, $, window, document ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
-			controls    : '.controls.line-eff'
+			runAll    : true
         }, options );
  
         this.each( function() {
@@ -18322,13 +18555,17 @@ APP = ( function ( APP, $, window, document ) {
 			var scipts_pageLoaded    = APP.components.pageLoaded,
 				scipts_documentReady = APP.components.documentReady;
 
-
-			for ( var i = 0; i < scipts_pageLoaded.length; i++ ) {
-				 scipts_pageLoaded[i]();
+			if ( settings.runAll ) {
+				
+				for ( var i = 0; i < scipts_pageLoaded.length; i++ ) {
+					 scipts_pageLoaded[i]();
+				}
+				for ( var j = 0; j < scipts_documentReady.length; j++ ) {
+					 scipts_documentReady[j]( $ );
+				}		
 			}
-			for ( var j = 0; j < scipts_documentReady.length; j++ ) {
-				 scipts_documentReady[j]( $ );
-			}	
+
+
 
 			//Uix Shortcodes
 			if ( $.isFunction( $.uix_sc_init ) ) {
@@ -18336,6 +18573,39 @@ APP = ( function ( APP, $, window, document ) {
 			}
 
 			
+		});
+ 
+    };
+ 
+}( jQuery ));
+
+
+		
+/*
+ * Back to History URL 
+ *
+ * @return {void}  - The constructor.
+ */	
+( function ( $ ) {
+    $.fn.backToHisroryURL = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+			url    : false
+        }, options );
+ 
+        this.each( function() {
+			
+			var baseFullURL = window.location.protocol+'//'+window.location.hostname+window.location.pathname;
+			
+			if ( settings.url && settings.url != '' ) {
+				baseFullURL = settings.url;
+			}
+			
+			if ( $.support.pjax ) {
+				history.pushState( {},'', baseFullURL );
+			}
+		
 		});
  
     };
@@ -18364,16 +18634,60 @@ APP = ( function ( APP, $, window, document ) {
 	    //Determine the direction of a jQuery scroll event
 		//Fix an issue for mousewheel event is too fast.
 		var loaderRemoveDelay   = 500,
-			AJAXPageLinks       = '[data-ajax-push-content]';
-		
+			AJAXPageLinks       = '[data-ajax-push-content]',
+			historyEnable       = false;
 
+
+		
 		/*
 		 * Call AJAX on click event for "single pages links"
 		 *
 		 */
-		$( document ).on( 'click', AJAXPageLinks, function( e ) {
+		
+		if ( historyEnable ) {
+			//Detect URL change in JavaScript
+			var History = window.History;
+
+			if ( History.enabled ) {
+
+				// Load the page
+				if ( $( '#my-ajax-demo-push-container' ).length > 0 ) {
+					pushAction( $( '#my-ajax-demo-push-container' ), '#my-ajax-demo-target-container', "<div class=\"my-loader\"><span><i class=\"fa fa-spinner fa-spin\"></i> loading...</span></div>", window.location.href, 'POST', false );
+
+
+					// Apply the original scripts
+					$( document ).applyOriginalSomeScripts();		
+
+				}	
+
+			} else {
+				return false;
+			}
+
+
+			// Content update and back/forward button handler
+			History.Adapter.bind(window, 'statechange', function() {
+				var State = History.getState();	
+				// Do ajax
+				if ( $( '#my-ajax-demo-push-container' ).length > 0 ) {
+					pushAction( $( '#my-ajax-demo-push-container' ), '#my-ajax-demo-target-container', "<div class=\"my-loader\"><span><i class=\"fa fa-spinner fa-spin\"></i> loading...</span></div>", State.data.path, 'POST', false );
+
+				}	
+
+
+				// Log the history object to your browser's console
+				History.log(State);
+			});
+	
+		}
+
+
+
+
+		
+		$( document ).on( 'click', AJAXPageLinks, function( event ) {
 			
-			e.preventDefault();
+			event.preventDefault();
 			
 			
 			var $this            = $( this ),
@@ -18399,9 +18713,16 @@ APP = ( function ( APP, $, window, document ) {
 				$( AJAXPageLinks ).data( 'request-running', true );
 
 			
-				//Click on this link element using an AJAX request
-				pushAction( $( config.container ), config.target, config.loading, curURL );
-
+				if ( historyEnable ) {
+					//Click on this link element using an AJAX request
+					// When we do this, History.Adapter will also execute its contents. 	
+					History.pushState({path: curURL}, document.title, curURL ); 	
+				} else {
+					
+					//Click on this link element using an AJAX request
+					pushAction( $( config.container ), config.target, config.loading, curURL, config.method, event );
+	
+				}
 
 				
 			}
@@ -18410,33 +18731,64 @@ APP = ( function ( APP, $, window, document ) {
 			return false;
 			
 			
+			
 		});
+		
+		
 		
 		
 
 		/*
 		 * Move Animation
 		 *
-		 * @param  {string} container    - The target container to which the content will be added.
+		 * @param  {object} container    - The target container to which the content will be added.
 		 * @param  {string} target       - The instance ID or class name returned from the callback data
 		 * @param  {string} loading      - Content of loading area.
 		 * @param  {string} url          - The target URL via AJAX.
+		 * @param  {string} method       - The HTTP method to use for the request (e.g. "POST", "GET", "PUT")
+		 * @param  {object} event        - An object containing data that will be passed to the event handler.
 		 * @return {void}                - The constructor.
 		 */
-		function pushAction( container, target, loading, url ) {
+		function pushAction( container, target, loading, url, method, event ) {
 		
 
-			//Click on this link element using an AJAX request
+			if ( typeof method === typeof undefined || method == '' ) {
+			    method = 'POST';
+			}
+			
+			//Click on this link element using an PJAX request
+			//This is a lower level function used by $.fn.pjax itself. 
+			//It allows you to get a little more control over the pjax event handling.
+			if ( event ) {
+				
+				
+//				$.pjax.click( event, container,  {
+//					showHTMLdelay : 0, 
+//					startEvent    : function() {
+//
+//
+//
+//					}, 
+//					endEvent      : function() {
+//
+//
+//					}
+//				} );
+
+			}
+
+		
 			$.ajax({
 				timeout  : 15000,
 				url      : url,
-				method   : 'POST',
+				method   : method,
 				dataType : 'html',
 				data     : {
 					action  : 'load_singlepages_ajax_content'
 				},	
 				success  : function( response ) {
 					
+
 					//A function to be called if the request succeeds
 					ajaxSucceeds( container, url, $( response ).find( target ).html() );
 
@@ -18515,14 +18867,19 @@ APP = ( function ( APP, $, window, document ) {
 						// Apply the original scripts
 						$( document ).applyOriginalSomeScripts();
 	
-						// Modify the URL without reloading the page
-						if( history.pushState ) {
-							history.pushState( null, null, url );
-						}
-						else {
-							location.hash = url;
-						}
 						
+						if ( ! historyEnable ) {
+							
+							// Modify the URL without reloading the page
+							if( history.pushState ) {
+								history.pushState( null, null, url );
+							}
+							else {
+								location.hash = url;
+							}
+	
+						}
+
 					
 
 						//Prevent multiple request on click

@@ -6,7 +6,7 @@ $ribbon-bg: $highlight-color1;
 $ribbon-w: 40px;
 $ribbon-tail: 10px;
 
-.ribbon-triangle {
+.uix-ribbon--triangle {
 	padding: 0 0 $ribbon-tail 0;
 	position: absolute;
 	right: 0;
@@ -14,7 +14,7 @@ $ribbon-tail: 10px;
 	width: $ribbon-w;
 
 
-	&.style-1 {
+	&.uix-ribbon--triangle--style-1 {
 		> div {
 			background:  $ribbon-bg;
 			color: #fff;
@@ -37,7 +37,7 @@ $ribbon-tail: 10px;
 	}
 
 
-	&.style-2 {
+	&.uix-ribbon--triangle--style-2 {
 		
 		&::after {
 			border-top: $ribbon-w solid transparent;
@@ -65,12 +65,12 @@ $ribbon-tail: 10px;
 	
 	
 	
-	&.left {
+	&.uix-ribbon--triangle--left {
 		right: auto;
 		left: 0;
 		
 
-		&.style-2 {
+		&.uix-ribbon--triangle--style-2 {
 
 			&::after {
 				transform: rotate(-135deg);
