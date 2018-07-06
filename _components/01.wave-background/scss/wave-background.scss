@@ -1,0 +1,47 @@
+/* ====================================================== 
+   <!-- Wave Background -->    
+/* ====================================================== */
+.uix-wave-bg__container {
+	position: relative;
+	height: 300px;
+	overflow: hidden;
+
+	.uix-wave-bg {
+		overflow: hidden;
+		height: 300px;
+		@include bg-gradient( 'to right' );
+	}
+	
+}	
+
+
+.uix-wave-bg__svgmask {
+	overflow: hidden;
+	position: absolute;
+	width: 140%;
+	transform: translateY(-50%);
+	color: #fff;
+	margin-left: -20%;
+	animation: 5s ease-in-out infinite alternate uix-cssAnim--wave;
+	
+	svg {
+		fill: currentColor;
+		width: 102%;
+		margin-left: -1%;
+		height: auto;
+		
+	}
+}
+
+
+	
+
+@keyframes uix-cssAnim--wave {
+    0% {
+        transform: translate(-80px,-52%);
+    }
+
+    100% {
+        transform: translate(80px,-50%);
+    }
+}

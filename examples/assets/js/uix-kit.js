@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.8.5
- * ## Last Update         :  July 5, 2018
+ * ## Version             :  1.8.6
+ * ## Last Update         :  July 6, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -47,14 +47,14 @@
     23. Advanced Content Slider 
     24. Advanced Slider (Special Effects) 
     25. Advanced Slider (Basic) 
-    26. Counter 
-    27. Dropdown Menu 
+    26. Dropdown Menu 
+    27. Counter 
     28. Dropdown Menu 2 (Multi-level drop-down navigation) 
     29. Dynamic Drop Down List from JSON 
     30. Flexslider 
-    31. jQuery UI Datepicker 1.11.4 
-    32. Form 
-    33. Form Progress 
+    31. Form 
+    32. Form Progress 
+    33. jQuery UI Datepicker 1.11.4 
     34. Gallery 
     35. Image Shapes 
     36. Custom Core Scripts  
@@ -2172,230 +2172,6 @@ APP = ( function ( APP, $, window, document ) {
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
-    APP._3D_BACKGROUND_THREE               = APP._3D_BACKGROUND_THREE || {};
-	APP._3D_BACKGROUND_THREE.version       = '0.0.1';
-    APP._3D_BACKGROUND_THREE.documentReady = function( $ ) {
-
-		
-		//Prevent this module from loading in other pages
-		if ( $( '#3D-background-three-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
-		
-		
-		var $window                   = $( window ),
-			windowWidth               = $window.width(),
-			windowHeight              = $window.height(),
-			rendererCanvasID          = '3D-background-three-canvas';
-		
-	
-
-		
-		// Generate one plane geometries mesh to scene
-		//-------------------------------------	
-		var camera,
-			controls,
-			scene,
-			light,
-			renderer,
-			displacementSprite,
-			clock = new THREE.Clock();
-
-		
-		init();
-		render();
-
-		function init() {
-			//camera
-			camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 1, 10000 );
-			camera.position.set(0, 0, -1000);
-
-			//controls
-			controls = new THREE.OrbitControls( camera );
-			controls.rotateSpeed = 0.5;
-			controls.zoomSpeed = 1.2;
-			controls.panSpeed = 0.8;
-			controls.enableZoom = true;
-			controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-			controls.dampingFactor = 0.25;
-			controls.screenSpacePanning = false;
-			controls.minDistance = 100;
-			controls.maxDistance = 500;
-			controls.maxPolarAngle = Math.PI / 2;
-
-			//Scene
-			scene = new THREE.Scene();
-
-			//HemisphereLight
-			scene.add( new THREE.AmbientLight( 0x555555 ) );
-
-			light = new THREE.SpotLight( 0xffffff, 1.5 );
-			light.position.set( 0, 500, 2000 );
-			scene.add( light );
-			
-			
-
-			//WebGL Renderer		
-			renderer = new THREE.WebGLRenderer( { 
-									canvas   : document.getElementById( rendererCanvasID ), //canvas
-									alpha    : true, 
-									antialias: true 
-								} );
-			renderer.setSize( windowWidth, windowHeight );
-
-			
-			// Immediately use the texture for material creation
-			var defaultMaterial    = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
-			
-			displacementSprite = new THREE.Mesh( generateGeometry( 'sphere', 200 ), defaultMaterial );
-			scene.add( displacementSprite );
-
-
-			// Fires when the window changes
-			window.addEventListener( 'resize', onWindowResize, false );
-			
-			
-		}
-
-		function render() {
-			requestAnimationFrame( render );
-			
-            var objVector = new THREE.Vector3(0,0.2,0.1),
-				delta     = clock.getDelta();
-			
-			displacementSprite.rotation.x += delta * objVector.x;
-			displacementSprite.rotation.y += delta * objVector.y;
-			displacementSprite.rotation.z += delta * objVector.z;
-
-			//To set a background color.
-			//renderer.setClearColor( 0x000000 );	
-			
-			controls.update();
-			
-			renderer.render( scene, camera );
-			
-			
-
-			
-		}
-
-
-		function onWindowResize() {
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-			renderer.setSize( window.innerWidth, window.innerHeight );
-		}
-
-		
-
-		
-		/*
-		 * Batch generation of geometry
-		 *
-		 * @param  {string} objectType     - String of geometry type identifier.
-		 * @param  {number} numObjects       - The total number of generated objects.
-		 * @return {void}                  - The constructor.
-		 */
-		function generateGeometry( objectType, numObjects ) {
-
-			var geometry = new THREE.Geometry();
-
-			var applyVertexColors = function( g, c ) {
-
-				g.faces.forEach( function( f ) {
-
-					var n = ( f instanceof THREE.Face3 ) ? 3 : 4;
-
-					for ( var j = 0; j < n; j ++ ) {
-
-						f.vertexColors[ j ] = c;
-
-					}
-
-				} );
-
-			};
-
-			for ( var i = 0; i < numObjects; i ++ ) {
-
-				var position = new THREE.Vector3();
-
-				position.x = Math.random() * 10000 - 5000;
-				position.y = Math.random() * 6000 - 3000;
-				position.z = Math.random() * 8000 - 4000;
-
-				var rotation = new THREE.Euler();
-
-				rotation.x = Math.random() * 2 * Math.PI;
-				rotation.y = Math.random() * 2 * Math.PI;
-				rotation.z = Math.random() * 2 * Math.PI;
-
-				var scale = new THREE.Vector3();
-
-				var geom, color = new THREE.Color();
-
-				scale.x = Math.random() * 200 + 100;
-
-				if ( objectType == "cube" ) {
-
-					geom = new THREE.BoxGeometry( 1, 1, 1 );
-					scale.y = Math.random() * 200 + 100;
-					scale.z = Math.random() * 200 + 100;
-					color.setRGB( 0, 0, Math.random() + 0.1 );
-
-				} else if ( objectType == "sphere" ) {
-
-					geom = new THREE.IcosahedronGeometry( 1, 1 );
-					scale.y = scale.z = scale.x;
-					color.setRGB( Math.random() + 0.1, 0, 0 );
-
-				} else if ( objectType == "poly" ) {
-
-
-					geom = new THREE.CylinderGeometry( 3, 6, 3, 5, 1 );
-					scale.y = Math.random() * 30;
-					scale.z = Math.random() * 30;
-					color.setRGB( Math.random() + 0.1, 0, 0 );
-
-				}
-
-
-				// give the geom's vertices a random color, to be displayed
-				applyVertexColors( geom, color );
-
-				var object = new THREE.Mesh( geom );
-				object.position.copy( position );
-				object.rotation.copy( rotation );
-				object.scale.copy( scale );
-				object.updateMatrix();
-
-				geometry.merge( object.geometry, object.matrix );
-
-			}
-
-			return geometry;
-			
-
-		}
-
-		
-    };
-
-    APP.components.documentReady.push( APP._3D_BACKGROUND_THREE.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
-
-/* 
- *************************************
- * <!-- 3D Background 2 -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
     APP._3D_BACKGROUND_THREE2               = APP._3D_BACKGROUND_THREE2 || {};
 	APP._3D_BACKGROUND_THREE2.version       = '0.0.1';
     APP._3D_BACKGROUND_THREE2.documentReady = function( $ ) {
@@ -2699,6 +2475,230 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
+
+
+
+
+
+/* 
+ *************************************
+ * <!-- 3D Background 2 -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP._3D_BACKGROUND_THREE               = APP._3D_BACKGROUND_THREE || {};
+	APP._3D_BACKGROUND_THREE.version       = '0.0.1';
+    APP._3D_BACKGROUND_THREE.documentReady = function( $ ) {
+
+		
+		//Prevent this module from loading in other pages
+		if ( $( '#3D-background-three-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
+		
+		
+		var $window                   = $( window ),
+			windowWidth               = $window.width(),
+			windowHeight              = $window.height(),
+			rendererCanvasID          = '3D-background-three-canvas';
+		
+	
+
+		
+		// Generate one plane geometries mesh to scene
+		//-------------------------------------	
+		var camera,
+			controls,
+			scene,
+			light,
+			renderer,
+			displacementSprite,
+			clock = new THREE.Clock();
+
+		
+		init();
+		render();
+
+		function init() {
+			//camera
+			camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 1, 10000 );
+			camera.position.set(0, 0, -1000);
+
+			//controls
+			controls = new THREE.OrbitControls( camera );
+			controls.rotateSpeed = 0.5;
+			controls.zoomSpeed = 1.2;
+			controls.panSpeed = 0.8;
+			controls.enableZoom = true;
+			controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+			controls.dampingFactor = 0.25;
+			controls.screenSpacePanning = false;
+			controls.minDistance = 100;
+			controls.maxDistance = 500;
+			controls.maxPolarAngle = Math.PI / 2;
+
+			//Scene
+			scene = new THREE.Scene();
+
+			//HemisphereLight
+			scene.add( new THREE.AmbientLight( 0x555555 ) );
+
+			light = new THREE.SpotLight( 0xffffff, 1.5 );
+			light.position.set( 0, 500, 2000 );
+			scene.add( light );
+			
+			
+
+			//WebGL Renderer		
+			renderer = new THREE.WebGLRenderer( { 
+									canvas   : document.getElementById( rendererCanvasID ), //canvas
+									alpha    : true, 
+									antialias: true 
+								} );
+			renderer.setSize( windowWidth, windowHeight );
+
+			
+			// Immediately use the texture for material creation
+			var defaultMaterial    = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
+			
+			displacementSprite = new THREE.Mesh( generateGeometry( 'sphere', 200 ), defaultMaterial );
+			scene.add( displacementSprite );
+
+
+			// Fires when the window changes
+			window.addEventListener( 'resize', onWindowResize, false );
+			
+			
+		}
+
+		function render() {
+			requestAnimationFrame( render );
+			
+            var objVector = new THREE.Vector3(0,0.2,0.1),
+				delta     = clock.getDelta();
+			
+			displacementSprite.rotation.x += delta * objVector.x;
+			displacementSprite.rotation.y += delta * objVector.y;
+			displacementSprite.rotation.z += delta * objVector.z;
+
+			//To set a background color.
+			//renderer.setClearColor( 0x000000 );	
+			
+			controls.update();
+			
+			renderer.render( scene, camera );
+			
+			
+
+			
+		}
+
+
+		function onWindowResize() {
+			camera.aspect = window.innerWidth / window.innerHeight;
+			camera.updateProjectionMatrix();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+		}
+
+		
+
+		
+		/*
+		 * Batch generation of geometry
+		 *
+		 * @param  {string} objectType     - String of geometry type identifier.
+		 * @param  {number} numObjects       - The total number of generated objects.
+		 * @return {void}                  - The constructor.
+		 */
+		function generateGeometry( objectType, numObjects ) {
+
+			var geometry = new THREE.Geometry();
+
+			var applyVertexColors = function( g, c ) {
+
+				g.faces.forEach( function( f ) {
+
+					var n = ( f instanceof THREE.Face3 ) ? 3 : 4;
+
+					for ( var j = 0; j < n; j ++ ) {
+
+						f.vertexColors[ j ] = c;
+
+					}
+
+				} );
+
+			};
+
+			for ( var i = 0; i < numObjects; i ++ ) {
+
+				var position = new THREE.Vector3();
+
+				position.x = Math.random() * 10000 - 5000;
+				position.y = Math.random() * 6000 - 3000;
+				position.z = Math.random() * 8000 - 4000;
+
+				var rotation = new THREE.Euler();
+
+				rotation.x = Math.random() * 2 * Math.PI;
+				rotation.y = Math.random() * 2 * Math.PI;
+				rotation.z = Math.random() * 2 * Math.PI;
+
+				var scale = new THREE.Vector3();
+
+				var geom, color = new THREE.Color();
+
+				scale.x = Math.random() * 200 + 100;
+
+				if ( objectType == "cube" ) {
+
+					geom = new THREE.BoxGeometry( 1, 1, 1 );
+					scale.y = Math.random() * 200 + 100;
+					scale.z = Math.random() * 200 + 100;
+					color.setRGB( 0, 0, Math.random() + 0.1 );
+
+				} else if ( objectType == "sphere" ) {
+
+					geom = new THREE.IcosahedronGeometry( 1, 1 );
+					scale.y = scale.z = scale.x;
+					color.setRGB( Math.random() + 0.1, 0, 0 );
+
+				} else if ( objectType == "poly" ) {
+
+
+					geom = new THREE.CylinderGeometry( 3, 6, 3, 5, 1 );
+					scale.y = Math.random() * 30;
+					scale.z = Math.random() * 30;
+					color.setRGB( Math.random() + 0.1, 0, 0 );
+
+				}
+
+
+				// give the geom's vertices a random color, to be displayed
+				applyVertexColors( geom, color );
+
+				var object = new THREE.Mesh( geom );
+				object.position.copy( position );
+				object.rotation.copy( rotation );
+				object.scale.copy( scale );
+				object.updateMatrix();
+
+				geometry.merge( object.geometry, object.matrix );
+
+			}
+
+			return geometry;
+			
+
+		}
+
+		
+    };
+
+    APP.components.documentReady.push( APP._3D_BACKGROUND_THREE.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
 
 
 
@@ -15002,428 +15002,6 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
- * <!-- Full Page/One Page Transition -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.ONEPAGE               = APP.ONEPAGE || {};
-	APP.ONEPAGE.version       = '0.0.2';
-    APP.ONEPAGE.documentReady = function( $ ) {
-
-        var $window      = $( window ),
-		    windowWidth  = $window.width(),
-		    windowHeight = $window.height();
-		
-
-	    //Determine the direction of a jQuery scroll event
-		//Fix an issue for mousewheel event is too fast.
-		var lastAnimation      = 0,
-			quietPeriod        = 500, //Do not change it
-			animationTime      = 1000,//According to page transition animation changes
-			$sectionsContainer = $( '.uix-noemal-load__onepage-container' ),
-			$sections          = $sectionsContainer.find( '> section' ),
-			sectionTotal       = $sections.length,
-			topSectionSpacing  = 0,
-			$primaryMenu       = $( '.uix-menu' ),
-			$sidefixedMenu     = $( '.uix-menu-sidefixed' );
-		
-		
-		//Prevent this module from loading in other pages
-		if ( $sectionsContainer.length == 0 ) return false;
-		
-
-
-		// Prepare everything before binding wheel scroll
-		$.each( $sections, function( i ) {
-			$( this ).attr( 'data-index', i );
-			if ( i == 0 ) {
-				$( this ).addClass( 'active' );
-
-			}
-			
-		});
-		
-
-		
-		//Init the section location
-		sectionStart();
-		
-		
-		$( window ).on( 'hashchange', function(){
-			console.log( 'hash changed!' );
-		} );
-		
-
-		
-		/*
-		 * Init the section location
-		 *
-		 * @return {void}                - The constructor.
-		 */
-		function sectionStart() {
-	
-			setTimeout( function() {
-				var hash = window.location.hash,
-					locArr,
-					loc, 
-					curTab;
-
-				if ( hash ) {
-					
-					//Add hashchange event
-					locArr = hash.split( 'section-' );
-					loc    = locArr[1];
-					moveTo( $sectionsContainer, false, loc );
-				} else {
-					moveTo( $sectionsContainer, false, 1 );
-				}
-
-			}, quietPeriod );
-
-		}
-			
-		
-		/*
-		 * Scroll initialize
-		 *
-		 * @param  {object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
-		 * @param  {string} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
-		 * @return {void}                - The constructor.
-		 */
-		function scrollMoveInit( event, dir ) {
-	
-			var timeNow = new Date().getTime();
-			// Cancel scroll if currently animating or within quiet period
-			if( timeNow - lastAnimation < quietPeriod + animationTime) {
-				event.preventDefault();
-				return;
-			}
-
-			if ( dir == 'down' ) {
-				//scroll down
-				moveTo( $sectionsContainer, 'down', false );
-				
-			} else {
-				//scroll up
-				moveTo( $sectionsContainer, 'up', false );
-				
-			  
-			}
-			lastAnimation = timeNow;
-		}
-		
-      
-		
-		/*
-		 * Move Animation
-		 *
-		 * @param  {object} el           - The container of each sections.
-		 * @param  {string} dir          - Rolling direction indicator.
-		 * @param  {number} hashID       - ID of custom hashchange event.
-		 * @return {void}                - The constructor.
-		 */
-		function moveTo( el, dir, hashID ) {
-			var index     = parseFloat( $sections.filter( '.active' ).attr( 'data-index' ) ),
-				nextIndex = null,
-				$next     = null,
-				isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
-			
-			
-			 
-			if ( dir == 'down' || dir === false ) {
-				nextIndex = index + 1;
-			} else {
-				nextIndex = index - 1;
-			}
-			
-
-			//ID of custom hashchange event
-			if ( isNumeric.test( hashID ) ) nextIndex = parseFloat( hashID - 1 );
-			
-			
-			if ( nextIndex <= parseFloat( sectionTotal-1 ) && nextIndex >= 0 ) {
-				
-				if ( nextIndex > parseFloat( sectionTotal-1 ) ) nextIndex = parseFloat( sectionTotal-1 );
-				if ( nextIndex < 0 ) nextIndex = 0;
-
-
-				//Returns the target section
-				$next = $sections.eq( nextIndex );
-
-				//Smooth scroll to content
-				if ( $next.length > 0 ) {
-					TweenMax.to( window, animationTime/1000, {
-						scrollTo: {
-							y: $next.offset().top - topSectionSpacing
-						},
-						ease: Power2.easeOut,
-						onComplete: function() {
-
-							$sections.removeClass( 'leave' );
-							$sections.eq( index ).addClass( 'leave' );
-
-							$sections.removeClass( 'active' );
-							$next.addClass( 'active' ).removeClass( 'leave' );
-
-
-
-							//Changing The Site URL
-							var curSectionIndex = $sections.filter( '.active' ).index() + 1,
-								href            = window.location.href.substr( 0, window.location.href.indexOf( '#' ) ) + '#' + $sections.filter( '.active' ).attr( 'id' );
-
-							// Save state on history stack
-							// - First argument is any object that will let you restore state
-							// - Second argument is a title (not the page title, and not currently used)
-							// - Third argument is the URL - this will appear in the browser address bar
-							history.pushState( {}, document.title, href );
-							console.log( 'Section ' + curSectionIndex + ' loaded!' );
-
-
-						}
-					});			
-				}	
-				
-			}
-			
-
-	
-
-			
-		}
-		
-		
-
-		/* 
-		 ====================================================
-		 *  Navigation Interaction
-		 ====================================================
-		 */
-		goPageSection( $primaryMenu );
-		goPageSection( $sidefixedMenu );
-
-        
-	
-		//Activate the first item
-		$primaryMenu.find( 'li:first' ).addClass( 'active' );
-		$sidefixedMenu.find( 'li:first' ).addClass( 'active' );
-		
-		
-		/*
-		 * Get section or article by href
-		 *
-		 * @param  {string, object} el  - The current selector or selector ID
-		 * @return {object}             - A new selector.
-		 */
-        function getRelatedContent( el ) {
-            return $( $( el ).attr( 'href' ) );
-        }
-		
-		
-		/*
-		 * Get link by section or article id
-		 *
-		 * @param  {string, object} el    - The current selector or selector ID
-		 * @param  {object} menuObj       - Returns the menu element within the document.
-		 * @param  {boolean} echoIndex    - Whether to return the current index.
-		 * @return {object}               - A new selector.
-		 */
-        function getRelatedNavigation( el, menuObj, echoIndex ) {
-			
-			if ( echoIndex ) {
-				return menuObj.find( 'li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' ).index();
-			} else {
-			    return menuObj.find( 'li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' );	
-			}
-            
-        } 
-		
-		/*
-		 * Get all links by section or article
-		 *
-		 * @param  {object} menuObj     - Returns the menu element within the document.
-		 * @return {object}             - A new selector.
-		 */
-        function getAllNavigation( menuObj ) {
-            return menuObj.find( 'li' );
-        } 	
-		
-		
-		/*
-		 * Smooth scroll to content
-		 *
-		 * @param  {object} menuObj     - Returns the menu element within the document.
-		 * @return {void}               - The constructor.
-		 */
-        function goPageSection( menuObj ) {
-			menuObj.find( 'li > a' ).on( 'click', function(e) {
-				e.preventDefault();
-				
-				if ( $( this ).parent().hasClass( 'active' ) ) return false;
-				
-				
-				moveTo( $sectionsContainer, false, $( this ).parent( 'li' ).index() + 1 );
-			});	
-	
-        } 	
-
-
-
-		var navMinTop      = ( $sidefixedMenu.length > 0 ) ? $sidefixedMenu.offset().top : 0,
-			navMaxTop      = parseFloat( $( document ).height() - $( '.uix-footer__container' ).height() ) - windowHeight/3;
-
-		$window.on( 'scroll touchmove', function() {
-			var scrollTop = $( this ).scrollTop(),
-				spyTop    = parseFloat( scrollTop + topSectionSpacing ),
-				minTop    = $( '[data-highlight-section="true"]' ).first().offset().top,
-				maxTop    = $( '[data-highlight-section="true"]' ).last().offset().top + $( '[data-highlight-section="true"]' ).last().height();
-
-			$( '[data-highlight-section="true"]' ).each( function()  {
-				var block     = $( this ),
-					eleTop    = block.offset().top;
-				
-
-				// The 1 pixel in order to solve inaccurate value of outerHeight() 
-				// in Safari and Firefox browsers.
-				if ( eleTop < spyTop + 1 ) {
-
-					// Highlight element when related content
-					getAllNavigation( $primaryMenu ).removeClass( 'active' );
-					getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
-					getRelatedNavigation( block, $primaryMenu, false ).addClass( 'active' );
-					getRelatedNavigation( block, $sidefixedMenu, false ).addClass( 'active' );
-					
-					
-				} 
-			});
-
-
-
-			//Cancel the current highlight element
-			// The 1 pixel in order to solve inaccurate value of outerHeight() 
-			// in Safari and Firefox browsers.
-			if ( spyTop > maxTop || spyTop < minTop - 1 ) {
-				getAllNavigation( $primaryMenu ).removeClass( 'active' );
-				getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
-			}
-
-
-			//Detecting when user scrolls to bottom of div
-			if ( spyTop > navMaxTop || spyTop < navMinTop ) {
-				$sidefixedMenu.removeClass( 'is-fixed' );
-			} else {
-				$sidefixedMenu.addClass( 'is-fixed' );
-			}	
-
-
-
-
-		});	
-	
-		
-
-		
-		
-		/* 
-		 ====================================================
-		 *  Mouse Wheel Method
-		 ====================================================
-		 */
-		$( document ).on( 'wheel', function( e ) { 
-
-			var dir;
-			//Gets a value that indicates the amount that the mouse wheel has changed.
-			var delta = e.originalEvent.deltaY;
-			
-			if( delta > 0 ) { 
-				//scroll down
-				dir = 'down';
-				
-			} else {
-				//scroll up
-				dir = 'up';
-			}
-			
-			scrollMoveInit( e, dir );
-			
-			//prevent page fom scrolling
-			return false;
-
-		});
-		
-		
-		
-		/* 
-		 ====================================================
-		 *  Touch Method
-		 ====================================================
-		 */
-			
-		var startX,
-			startY;
-
-
-		$sectionsContainer.on( 'touchstart.ONEPAGE', function( event ) {
-			var touches = event.originalEvent.touches;
-			if ( touches && touches.length ) {
-				startX = touches[0].pageX;
-				startY = touches[0].pageY;
-
-
-				$sectionsContainer.on( 'touchmove.ONEPAGE', function( event ) {
-
-					var touches = event.originalEvent.touches;
-					if ( touches && touches.length ) {
-						var deltaX = startX - touches[0].pageX,
-							deltaY = startY - touches[0].pageY;
-
-						if ( deltaX >= 50) {
-							//--- swipe left
-
-
-						}
-						if ( deltaX <= -50) {
-							//--- swipe right
-						
-
-
-						}
-						if ( deltaY >= 50) {
-							//--- swipe up
-							moveTo( $sectionsContainer, 'down', false );
-
-						}
-						if ( deltaY <= -50) {
-							//--- swipe down
-							moveTo( $sectionsContainer, 'up', false );
-							
-
-						}
-						if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
-							$sectionsContainer.off( 'touchmove.ONEPAGE' );
-						}
-					}
-
-				});
-			}	
-		});
-
-		
-		
-
-		
-    };
-
-    APP.components.documentReady.push( APP.ONEPAGE.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-/* 
- *************************************
  * <!-- Full Page/One Page Transition 2 -->
  *************************************
  */
@@ -15854,6 +15432,428 @@ APP = ( function ( APP, $, window, document ) {
     };
 
     APP.components.documentReady.push( APP.ONEPAGE2.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+/* 
+ *************************************
+ * <!-- Full Page/One Page Transition -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.ONEPAGE               = APP.ONEPAGE || {};
+	APP.ONEPAGE.version       = '0.0.2';
+    APP.ONEPAGE.documentReady = function( $ ) {
+
+        var $window      = $( window ),
+		    windowWidth  = $window.width(),
+		    windowHeight = $window.height();
+		
+
+	    //Determine the direction of a jQuery scroll event
+		//Fix an issue for mousewheel event is too fast.
+		var lastAnimation      = 0,
+			quietPeriod        = 500, //Do not change it
+			animationTime      = 1000,//According to page transition animation changes
+			$sectionsContainer = $( '.uix-noemal-load__onepage-container' ),
+			$sections          = $sectionsContainer.find( '> section' ),
+			sectionTotal       = $sections.length,
+			topSectionSpacing  = 0,
+			$primaryMenu       = $( '.uix-menu' ),
+			$sidefixedMenu     = $( '.uix-menu-sidefixed' );
+		
+		
+		//Prevent this module from loading in other pages
+		if ( $sectionsContainer.length == 0 ) return false;
+		
+
+
+		// Prepare everything before binding wheel scroll
+		$.each( $sections, function( i ) {
+			$( this ).attr( 'data-index', i );
+			if ( i == 0 ) {
+				$( this ).addClass( 'active' );
+
+			}
+			
+		});
+		
+
+		
+		//Init the section location
+		sectionStart();
+		
+		
+		$( window ).on( 'hashchange', function(){
+			console.log( 'hash changed!' );
+		} );
+		
+
+		
+		/*
+		 * Init the section location
+		 *
+		 * @return {void}                - The constructor.
+		 */
+		function sectionStart() {
+	
+			setTimeout( function() {
+				var hash = window.location.hash,
+					locArr,
+					loc, 
+					curTab;
+
+				if ( hash ) {
+					
+					//Add hashchange event
+					locArr = hash.split( 'section-' );
+					loc    = locArr[1];
+					moveTo( $sectionsContainer, false, loc );
+				} else {
+					moveTo( $sectionsContainer, false, 1 );
+				}
+
+			}, quietPeriod );
+
+		}
+			
+		
+		/*
+		 * Scroll initialize
+		 *
+		 * @param  {object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
+		 * @param  {string} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
+		 * @return {void}                - The constructor.
+		 */
+		function scrollMoveInit( event, dir ) {
+	
+			var timeNow = new Date().getTime();
+			// Cancel scroll if currently animating or within quiet period
+			if( timeNow - lastAnimation < quietPeriod + animationTime) {
+				event.preventDefault();
+				return;
+			}
+
+			if ( dir == 'down' ) {
+				//scroll down
+				moveTo( $sectionsContainer, 'down', false );
+				
+			} else {
+				//scroll up
+				moveTo( $sectionsContainer, 'up', false );
+				
+			  
+			}
+			lastAnimation = timeNow;
+		}
+		
+      
+		
+		/*
+		 * Move Animation
+		 *
+		 * @param  {object} el           - The container of each sections.
+		 * @param  {string} dir          - Rolling direction indicator.
+		 * @param  {number} hashID       - ID of custom hashchange event.
+		 * @return {void}                - The constructor.
+		 */
+		function moveTo( el, dir, hashID ) {
+			var index     = parseFloat( $sections.filter( '.active' ).attr( 'data-index' ) ),
+				nextIndex = null,
+				$next     = null,
+				isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
+			
+			
+			 
+			if ( dir == 'down' || dir === false ) {
+				nextIndex = index + 1;
+			} else {
+				nextIndex = index - 1;
+			}
+			
+
+			//ID of custom hashchange event
+			if ( isNumeric.test( hashID ) ) nextIndex = parseFloat( hashID - 1 );
+			
+			
+			if ( nextIndex <= parseFloat( sectionTotal-1 ) && nextIndex >= 0 ) {
+				
+				if ( nextIndex > parseFloat( sectionTotal-1 ) ) nextIndex = parseFloat( sectionTotal-1 );
+				if ( nextIndex < 0 ) nextIndex = 0;
+
+
+				//Returns the target section
+				$next = $sections.eq( nextIndex );
+
+				//Smooth scroll to content
+				if ( $next.length > 0 ) {
+					TweenMax.to( window, animationTime/1000, {
+						scrollTo: {
+							y: $next.offset().top - topSectionSpacing
+						},
+						ease: Power2.easeOut,
+						onComplete: function() {
+
+							$sections.removeClass( 'leave' );
+							$sections.eq( index ).addClass( 'leave' );
+
+							$sections.removeClass( 'active' );
+							$next.addClass( 'active' ).removeClass( 'leave' );
+
+
+
+							//Changing The Site URL
+							var curSectionIndex = $sections.filter( '.active' ).index() + 1,
+								href            = window.location.href.substr( 0, window.location.href.indexOf( '#' ) ) + '#' + $sections.filter( '.active' ).attr( 'id' );
+
+							// Save state on history stack
+							// - First argument is any object that will let you restore state
+							// - Second argument is a title (not the page title, and not currently used)
+							// - Third argument is the URL - this will appear in the browser address bar
+							history.pushState( {}, document.title, href );
+							console.log( 'Section ' + curSectionIndex + ' loaded!' );
+
+
+						}
+					});			
+				}	
+				
+			}
+			
+
+	
+
+			
+		}
+		
+		
+
+		/* 
+		 ====================================================
+		 *  Navigation Interaction
+		 ====================================================
+		 */
+		goPageSection( $primaryMenu );
+		goPageSection( $sidefixedMenu );
+
+        
+	
+		//Activate the first item
+		$primaryMenu.find( 'li:first' ).addClass( 'active' );
+		$sidefixedMenu.find( 'li:first' ).addClass( 'active' );
+		
+		
+		/*
+		 * Get section or article by href
+		 *
+		 * @param  {string, object} el  - The current selector or selector ID
+		 * @return {object}             - A new selector.
+		 */
+        function getRelatedContent( el ) {
+            return $( $( el ).attr( 'href' ) );
+        }
+		
+		
+		/*
+		 * Get link by section or article id
+		 *
+		 * @param  {string, object} el    - The current selector or selector ID
+		 * @param  {object} menuObj       - Returns the menu element within the document.
+		 * @param  {boolean} echoIndex    - Whether to return the current index.
+		 * @return {object}               - A new selector.
+		 */
+        function getRelatedNavigation( el, menuObj, echoIndex ) {
+			
+			if ( echoIndex ) {
+				return menuObj.find( 'li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' ).index();
+			} else {
+			    return menuObj.find( 'li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' );	
+			}
+            
+        } 
+		
+		/*
+		 * Get all links by section or article
+		 *
+		 * @param  {object} menuObj     - Returns the menu element within the document.
+		 * @return {object}             - A new selector.
+		 */
+        function getAllNavigation( menuObj ) {
+            return menuObj.find( 'li' );
+        } 	
+		
+		
+		/*
+		 * Smooth scroll to content
+		 *
+		 * @param  {object} menuObj     - Returns the menu element within the document.
+		 * @return {void}               - The constructor.
+		 */
+        function goPageSection( menuObj ) {
+			menuObj.find( 'li > a' ).on( 'click', function(e) {
+				e.preventDefault();
+				
+				if ( $( this ).parent().hasClass( 'active' ) ) return false;
+				
+				
+				moveTo( $sectionsContainer, false, $( this ).parent( 'li' ).index() + 1 );
+			});	
+	
+        } 	
+
+
+
+		var navMinTop      = ( $sidefixedMenu.length > 0 ) ? $sidefixedMenu.offset().top : 0,
+			navMaxTop      = parseFloat( $( document ).height() - $( '.uix-footer__container' ).height() ) - windowHeight/3;
+
+		$window.on( 'scroll touchmove', function() {
+			var scrollTop = $( this ).scrollTop(),
+				spyTop    = parseFloat( scrollTop + topSectionSpacing ),
+				minTop    = $( '[data-highlight-section="true"]' ).first().offset().top,
+				maxTop    = $( '[data-highlight-section="true"]' ).last().offset().top + $( '[data-highlight-section="true"]' ).last().height();
+
+			$( '[data-highlight-section="true"]' ).each( function()  {
+				var block     = $( this ),
+					eleTop    = block.offset().top;
+				
+
+				// The 1 pixel in order to solve inaccurate value of outerHeight() 
+				// in Safari and Firefox browsers.
+				if ( eleTop < spyTop + 1 ) {
+
+					// Highlight element when related content
+					getAllNavigation( $primaryMenu ).removeClass( 'active' );
+					getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
+					getRelatedNavigation( block, $primaryMenu, false ).addClass( 'active' );
+					getRelatedNavigation( block, $sidefixedMenu, false ).addClass( 'active' );
+					
+					
+				} 
+			});
+
+
+
+			//Cancel the current highlight element
+			// The 1 pixel in order to solve inaccurate value of outerHeight() 
+			// in Safari and Firefox browsers.
+			if ( spyTop > maxTop || spyTop < minTop - 1 ) {
+				getAllNavigation( $primaryMenu ).removeClass( 'active' );
+				getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
+			}
+
+
+			//Detecting when user scrolls to bottom of div
+			if ( spyTop > navMaxTop || spyTop < navMinTop ) {
+				$sidefixedMenu.removeClass( 'is-fixed' );
+			} else {
+				$sidefixedMenu.addClass( 'is-fixed' );
+			}	
+
+
+
+
+		});	
+	
+		
+
+		
+		
+		/* 
+		 ====================================================
+		 *  Mouse Wheel Method
+		 ====================================================
+		 */
+		$( document ).on( 'wheel', function( e ) { 
+
+			var dir;
+			//Gets a value that indicates the amount that the mouse wheel has changed.
+			var delta = e.originalEvent.deltaY;
+			
+			if( delta > 0 ) { 
+				//scroll down
+				dir = 'down';
+				
+			} else {
+				//scroll up
+				dir = 'up';
+			}
+			
+			scrollMoveInit( e, dir );
+			
+			//prevent page fom scrolling
+			return false;
+
+		});
+		
+		
+		
+		/* 
+		 ====================================================
+		 *  Touch Method
+		 ====================================================
+		 */
+			
+		var startX,
+			startY;
+
+
+		$sectionsContainer.on( 'touchstart.ONEPAGE', function( event ) {
+			var touches = event.originalEvent.touches;
+			if ( touches && touches.length ) {
+				startX = touches[0].pageX;
+				startY = touches[0].pageY;
+
+
+				$sectionsContainer.on( 'touchmove.ONEPAGE', function( event ) {
+
+					var touches = event.originalEvent.touches;
+					if ( touches && touches.length ) {
+						var deltaX = startX - touches[0].pageX,
+							deltaY = startY - touches[0].pageY;
+
+						if ( deltaX >= 50) {
+							//--- swipe left
+
+
+						}
+						if ( deltaX <= -50) {
+							//--- swipe right
+						
+
+
+						}
+						if ( deltaY >= 50) {
+							//--- swipe up
+							moveTo( $sectionsContainer, 'down', false );
+
+						}
+						if ( deltaY <= -50) {
+							//--- swipe down
+							moveTo( $sectionsContainer, 'up', false );
+							
+
+						}
+						if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
+							$sectionsContainer.off( 'touchmove.ONEPAGE' );
+						}
+					}
+
+				});
+			}	
+		});
+
+		
+		
+
+		
+    };
+
+    APP.components.documentReady.push( APP.ONEPAGE.documentReady );
     return APP;
 
 }( APP, jQuery, window, document ) );
@@ -17244,103 +17244,6 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
- * <!-- Testimonials Carousel -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.TESTIMONIALS               = APP.TESTIMONIALS || {};
-	APP.TESTIMONIALS.version       = '0.0.1';
-    APP.TESTIMONIALS.documentReady = function( $ ) {
-
-		var $obj                 = $( '.uix-testimonials .flexslider' ),
-			testimonialsControls = '';
-		
-		
-		for ( var i = 0; i < $obj.find( '.slides > li' ).length; i++ ) {
-			testimonialsControls += '<li></li>';
-		}
-		$( '.uix-testimonials__controls' ).html( testimonialsControls );
-    	
-		
-		
-		$obj.flexslider({
-			animation         : 'slide',
-			slideshow         : true,
-			smoothHeight      : true,
-			controlNav        : true,
-			manualControls    : '.uix-testimonials__controls li',
-			directionNav      : false,
-			animationSpeed    : 600,
-			slideshowSpeed    : 7000,
-			selector          : ".slides > li",
-			start: function(slider){
-				$obj.on( 'mousedown', function( e ) {
-					if ( $obj.data( 'flexslider' ).animating ) {
-						return;
-					}
-						
-					$( this ).addClass('dragging');
-					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
-					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
-					$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
-					$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );
-				} );
-			
-				$obj.on( 'mouseup', function( e ) {
-					if ( $obj.data('flexslider').animating ) {
-						return;
-					}
-						
-					$( this ).removeClass('dragging');
-					var origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
-					    origin_mouse_y = $( this ).data( 'origin_mouse_y' );
-					
-					if ( 'horizontal' === $obj.data('flexslider').vars.direction ) {
-						if ( e.pageX > origin_mouse_x ) {
-							$obj.flexslider('prev');
-						}
-						if ( e.pageX < origin_mouse_x ) {
-							$obj.flexslider('next');
-						}
-					} else {
-						if ( e.pageY > origin_mouse_y ) {
-							$obj.flexslider('prev');
-						}
-						if ( e.pageY < origin_mouse_y ) {
-							$obj.flexslider('next');
-						}
-					}
-				} );
-				
-				
-				$( '.uix-testimonials__count .total' ).text( '0' + slider.count );
-				$( '.uix-testimonials__count .cur' ).text( '0' + parseFloat( slider.currentSlide + 1 ) );
-				
-			},
-			after: function(slider){
-				
-				$( '.uix-testimonials__count .total' ).text( '0' + slider.count );
-				$( '.uix-testimonials__count .cur' ).text( '0' + parseFloat( slider.currentSlide + 1 ) );
-				
-			}
-		});
-		
-		
-    };
-
-    APP.components.documentReady.push( APP.TESTIMONIALS.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
-
-/* 
- *************************************
  * <!-- Team Focus -->
  *************************************
  */
@@ -17543,6 +17446,103 @@ APP = ( function ( APP, $, window, document ) {
     };
 
     APP.components.documentReady.push( APP.TEAM_FOCUS.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+
+/* 
+ *************************************
+ * <!-- Testimonials Carousel -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.TESTIMONIALS               = APP.TESTIMONIALS || {};
+	APP.TESTIMONIALS.version       = '0.0.1';
+    APP.TESTIMONIALS.documentReady = function( $ ) {
+
+		var $obj                 = $( '.uix-testimonials .flexslider' ),
+			testimonialsControls = '';
+		
+		
+		for ( var i = 0; i < $obj.find( '.slides > li' ).length; i++ ) {
+			testimonialsControls += '<li></li>';
+		}
+		$( '.uix-testimonials__controls' ).html( testimonialsControls );
+    	
+		
+		
+		$obj.flexslider({
+			animation         : 'slide',
+			slideshow         : true,
+			smoothHeight      : true,
+			controlNav        : true,
+			manualControls    : '.uix-testimonials__controls li',
+			directionNav      : false,
+			animationSpeed    : 600,
+			slideshowSpeed    : 7000,
+			selector          : ".slides > li",
+			start: function(slider){
+				$obj.on( 'mousedown', function( e ) {
+					if ( $obj.data( 'flexslider' ).animating ) {
+						return;
+					}
+						
+					$( this ).addClass('dragging');
+					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
+					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
+					$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
+					$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );
+				} );
+			
+				$obj.on( 'mouseup', function( e ) {
+					if ( $obj.data('flexslider').animating ) {
+						return;
+					}
+						
+					$( this ).removeClass('dragging');
+					var origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
+					    origin_mouse_y = $( this ).data( 'origin_mouse_y' );
+					
+					if ( 'horizontal' === $obj.data('flexslider').vars.direction ) {
+						if ( e.pageX > origin_mouse_x ) {
+							$obj.flexslider('prev');
+						}
+						if ( e.pageX < origin_mouse_x ) {
+							$obj.flexslider('next');
+						}
+					} else {
+						if ( e.pageY > origin_mouse_y ) {
+							$obj.flexslider('prev');
+						}
+						if ( e.pageY < origin_mouse_y ) {
+							$obj.flexslider('next');
+						}
+					}
+				} );
+				
+				
+				$( '.uix-testimonials__count .total' ).text( '0' + slider.count );
+				$( '.uix-testimonials__count .cur' ).text( '0' + parseFloat( slider.currentSlide + 1 ) );
+				
+			},
+			after: function(slider){
+				
+				$( '.uix-testimonials__count .total' ).text( '0' + slider.count );
+				$( '.uix-testimonials__count .cur' ).text( '0' + parseFloat( slider.currentSlide + 1 ) );
+				
+			}
+		});
+		
+		
+    };
+
+    APP.components.documentReady.push( APP.TESTIMONIALS.documentReady );
     return APP;
 
 }( APP, jQuery, window, document ) );

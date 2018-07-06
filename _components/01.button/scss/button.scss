@@ -79,7 +79,7 @@ $button-margin-b: 1.5rem;
 		border-radius: 35px;
 	}
 	
-	&.is-round {
+	&.is-rounded {
 		border-radius: 4px;
 	}
 	
@@ -239,11 +239,11 @@ $button-margin-b: 1.5rem;
 		border-radius: 0 50px 50px 0;
 	}
 	
-	&.is-round.uix-btn__icon--left span {
+	&.is-rounded.uix-btn__icon--left span {
 		border-radius: 4px 0 0 4px;
 	}
 
-	&.is-round.uix-btn__icon--right span {
+	&.is-rounded.uix-btn__icon--right span {
 		border-radius: 0 4px 4px 0;
 	}	
 	
@@ -287,7 +287,7 @@ $button-margin-b: 1.5rem;
 
 		}	
 		
-		&.is-round {
+		&.is-rounded {
 
 			&:first-child {
 				border-radius: 4px 0 0 4px;

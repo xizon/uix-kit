@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.8.5
- * ## Last Update         :  July 5, 2018
+ * ## Version             :  1.8.6
+ * ## Last Update         :  July 6, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -63,93 +63,97 @@
 	TABLE OF CONTENTS
 	---------------------------
 	
-    1. Basic 
-    2. Table 
+    1. Table 
+    2. Basic 
     3. Bullet List 
     4. Helper Classes 
     5. Typography 
     6. Spacing 
     7. Basic Layout Styles 
-    8. Navigation 
-    9. Header Area 
-    10. Brand 
-    11. Footer 
-    12. Video 
-    13. Back to Top 
-    14. Loader 
-    15. Social Media Icons 
-    16. Pagination 
-    17. Filterable Navigation 
-    18. Sidebar  
-    19. Search 
-    20. Tags 
-    21. Entry 
-    22. Comments ( Synchronize to WordPress's class name ) 
-    23. Mobile Menu 
-    24. Onepage Menu 
-    25. Modal Dialog 
-    26. 3rd Party Plugins 
-    27. 3D Background 
-    28. 3D Carousel 
-    29. Accordion 
+    8. Basic Layout Styles 
+    9. Navigation 
+    10. Header Area 
+    11. Brand 
+    12. Footer 
+    13. Video 
+    14. Back to Top 
+    15. Loader 
+    16. Social Media Icons 
+    17. Pagination 
+    18. Filterable Navigation 
+    19. Sidebar  
+    20. Search 
+    21. Tags 
+    22. Entry 
+    23. Comments ( Synchronize to WordPress's class name ) 
+    24. Mobile Menu 
+    25. Onepage Menu 
+    26. Modal Dialog 
+    27. 3rd Party Plugins 
+    28. 3D Background 
+    29. 3D Carousel 
     30. Accordion Background Images 
-    31. Advanced Content Slider 
-    32. Advanced Slider (Special Effects) 
-    33. Advanced Slider (Basic) 
-    34. Badges 
-    35. Breadcrumbs 
-    36. Button 
-    37. Cards 
-    38. Counter 
-    39. Dividing Line 
-    40. Dots 
-    41. Dotted Line 
-    42. Dropdown Menu 
-    43. Dropdown Menu 2 (Multi-level drop-down navigation) 
-    44. Equal-width Divs 
-    45. Features 
-    46. Flexslider 
-    47. Footer Templates 
-    48. Form 
-    49. Form Progress 
-    50. Gallery 
-    51. Heading 
-    52. Image Shapes 
-    53. Custom Core Scripts & Stylesheets 
-    54. Brands List 
+    31. Accordion 
+    32. Advanced Content Slider 
+    33. Advanced Slider (Special Effects) 
+    34. Advanced Slider (Basic) 
+    35. Badges 
+    36. Breadcrumbs 
+    37. Button 
+    38. Cards 
+    39. Counter 
+    40. Dividing Line 
+    41. Dots 
+    42. Dotted Line 
+    43. Dropdown Menu 
+    44. Dropdown Menu 2 (Multi-level drop-down navigation) 
+    45. Equal-width Divs 
+    46. Features 
+    47. Flexslider 
+    48. Footer Templates 
+    49. Form 
+    50. Form Progress 
+    51. Gallery 
+    52. Heading 
+    53. Image Shapes 
+    54. Custom Core Scripts & Stylesheets 
     55. Cutom Light Box 
-    56. Maintain Aspect Ratio List 
+    56. Brands List 
     57. Bulleted List 
-    58. List of Posts 
-    59. List of Split Posts 
-    60. Side by Side List 
-    61. Side by Side List With Photo 
-    62. Fullwidth List of Split 2 
-    63. Fullwidth List of Split 
-    64. Mouse Animation Scroll 
-    65. Multiple Items Carousel 
-    66. Overlay 
-    67. Parallax 
-    68. Periodical Scroll 
-    69. Pricing 
-    70. Progress Bar 
-    71. Ribbon 
-    72. Services 
-    73. Shape Animation 
-    74. Show More Less 
-    75. Single Post 
-    76. Source Code 
-    77. Striking 
-    78. Tabs 
-    79. Team Focus 
-    80. Testimonials Carousel 
-    81. Text effect 
-    82. Timeline 
-    83. ToolTip 
-    84. Vertical Menu 
-    85. Vertical Separator 
-    86. WordPress Core ( Do not use prefix "uix-" ) 
-    87. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    58. Maintain Aspect Ratio List 
+    59. List of Posts 
+    60. List of Split Posts 
+    61. Side by Side List 
+    62. Side by Side List With Photo 
+    63. Fullwidth List of Split 2 
+    64. Fullwidth List of Split 
+    65. Mouse Animation Scroll 
+    66. Multiple Items Carousel 
+    67. Overlay 
+    68. Parallax 
+    69. Periodical Scroll 
+    70. Pricing 
+    71. Progress Bar 
+    72. Ribbon 
+    73. Services 
+    74. Shape Animation 
+    75. Show More Less 
+    76. Single Post 
+    77. Source Code 
+    78. Striking 
+    79. Tabs 
+    80. Team Focus 
+    81. Team Fullwidth (Style using the Side by Side List With Photo module) 
+    82. Team Gird 
+    83. Testimonials Carousel 
+    84. Text effect 
+    85. Timeline 
+    86. ToolTip 
+    87. Vertical Menu 
+    88. Vertical Separator 
+    89. Wave Background 
+    90. WordPress Core ( Do not use prefix "uix-" ) 
+    91. Ajax Page Loader (Loading A Page via Ajax Into Div)  
 
 
 
@@ -734,6 +738,7 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li::before,
  * 13. Image Hover Overlay Effects
  * 14. Position
  * 15. Element Hidden Style
+ * 16. Border Radius
 */
 /* 
  ---------------------------
@@ -1129,6 +1134,43 @@ img.uix-filter-hover--color:hover,
 
 .uix-el--skew {
   transform: skew(0deg, -2deg);
+}
+
+/* 
+ ---------------------------
+  16. Border Radius
+ ---------------------------
+ */
+.uix-border--rounded {
+  border-radius: 4px;
+}
+
+.uix-border--rounded.uix-border--rounded-img > img {
+  border-radius: 4px;
+}
+
+.uix-border--rounded.uix-border--rounded-only-img {
+  border-radius: 0;
+}
+
+.uix-border--rounded.uix-border--rounded-only-img > img {
+  border-radius: 4px;
+}
+
+.uix-border--circle {
+  border-radius: 50%;
+}
+
+.uix-border--circle.uix-border--circle-img > img {
+  border-radius: 50%;
+}
+
+.uix-border--circle.uix-border--circle-only-img {
+  border-radius: 0;
+}
+
+.uix-border--circle.uix-border--circle-only-img > img {
+  border-radius: 50%;
 }
 
 /* ====================================================== 
@@ -1619,15 +1661,15 @@ section.uix-section--googlemap,
   min-height: 50vh;
 }
 
-.uix-container__bg.uix-container__bg--round-large {
+.uix-container__bg.uix-container__bg--rounded-large {
   border-radius: 15px;
 }
 
-.uix-container__bg.uix-container__bg--round-medium {
+.uix-container__bg.uix-container__bg--rounded-medium {
   border-radius: 7px;
 }
 
-.uix-container__bg.uix-container__bg--round-small {
+.uix-container__bg.uix-container__bg--rounded-small {
   border-radius: 2px;
 }
 
@@ -5274,7 +5316,7 @@ ul.uix-entry-meta:not(.uix-entry-meta--wrap) li:first-child::before {
   text-align: center;
 }
 
-.uix-badge.uix-badge--round {
+.uix-badge.uix-badge--rounded {
   border-radius: 50%;
 }
 
@@ -5471,7 +5513,7 @@ ul.uix-entry-meta:not(.uix-entry-meta--wrap) li:first-child::before {
   border-radius: 35px;
 }
 
-.uix-btn.is-round {
+.uix-btn.is-rounded {
   border-radius: 4px;
 }
 
@@ -5609,11 +5651,11 @@ ul.uix-entry-meta:not(.uix-entry-meta--wrap) li:first-child::before {
   border-radius: 0 50px 50px 0;
 }
 
-.uix-btn__icon.is-round.uix-btn__icon--left span {
+.uix-btn__icon.is-rounded.uix-btn__icon--left span {
   border-radius: 4px 0 0 4px;
 }
 
-.uix-btn__icon.is-round.uix-btn__icon--right span {
+.uix-btn__icon.is-rounded.uix-btn__icon--right span {
   border-radius: 0 4px 4px 0;
 }
 
@@ -5648,11 +5690,11 @@ ul.uix-entry-meta:not(.uix-entry-meta--wrap) li:first-child::before {
   border-radius: 0 50px 50px 0;
 }
 
-.uix-btn__group > .uix-btn.is-round:first-child {
+.uix-btn__group > .uix-btn.is-rounded:first-child {
   border-radius: 4px 0 0 4px;
 }
 
-.uix-btn__group > .uix-btn.is-round:last-child {
+.uix-btn__group > .uix-btn.is-rounded:last-child {
   border-radius: 0 4px 4px 0;
 }
 
@@ -5792,7 +5834,6 @@ ul.uix-entry-meta:not(.uix-entry-meta--wrap) li:first-child::before {
   height: 90px !important;
   margin: 0.3125rem 0 0 0.3125rem;
   border: 1px solid #eaeaea;
-  border-radius: 100%;
 }
 
 .uix-card1 .uix-card1__content {
@@ -6475,7 +6516,6 @@ h3[data-counter-number] {
 
 .uix-feature .uix-feature__icon.is-bordered {
   border: 1px #212121 solid;
-  border-radius: 100%;
 }
 
 .uix-feature .uix-feature__icon.is-bordered i {
@@ -6489,6 +6529,7 @@ h3[data-counter-number] {
 
 .uix-feature .uix-feature__icon:hover i {
   color: #fff;
+  transform: rotate(30deg);
 }
 
 .uix-feature .uix-feature__icon--side {
@@ -6504,6 +6545,10 @@ h3[data-counter-number] {
   font-size: 1.5rem;
   margin-right: .36rem;
   transition: all 0.3s ease;
+}
+
+.uix-feature .uix-feature__icon--side:hover i {
+  transform: rotate(30deg);
 }
 
 .uix-feature .uix-feature__icon--side.uix-feature__icon--side--sep-col {
@@ -6535,9 +6580,16 @@ h3[data-counter-number] {
   left: 0;
   top: 0;
   border: 1px #212121 solid;
-  border-radius: 100%;
   text-align: center;
   margin-right: 1rem;
+}
+
+.uix-feature .uix-feature__icon--side.is-bordered.uix-border--circle::before {
+  border-radius: 100%;
+}
+
+.uix-feature .uix-feature__icon--side.is-bordered.uix-border--rounded::before {
+  border-radius: 4px;
 }
 
 .uix-feature .uix-feature__title {
@@ -13122,7 +13174,6 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
 
 .uix-team-focus > div img {
     width: 90%;
-    border-radius: 100%;
 }
 
 .uix-team-focus > div.focus {
@@ -13138,6 +13189,136 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
 .uix-team-focus > div.focus img {
     transform: scale(1.3);
     box-shadow: 0 1.8vw 4vw -.7vw #cbdfee;
+}
+
+/* ====================================================== 
+   <!-- Team Fullwidth (Style using the Side by Side List With Photo module) -->    
+/* ====================================================== */
+/* ====================================================== 
+   <!-- Team Gird -->    
+/* ====================================================== */
+.uix-team--grid .uix-team--grid__item {
+    position: relative;
+    margin-bottom: 3rem;
+}
+
+.uix-team--grid .uix-team--grid__item h3 {
+    font-weight: normal;
+    font-size: 1.25rem;
+    margin: 1rem 0 0 0;
+    padding-bottom: 0;
+}
+
+.uix-team--grid .uix-team--grid__item h4 {
+    font-size: 0.875rem;
+    opacity: .4;
+}
+
+.uix-team--grid .uix-team--grid__item .uix-team--grid__detail {
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.uix-team--grid .uix-team--grid__item .uix-team--grid__detail.uix-team--grid__detail--toggle {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 1.5rem 1rem;
+    width: 100%;
+    opacity: 0;
+    border-radius: 4px;
+    height: 100%;
+    overflow: auto;
+}
+
+.uix-team--grid .uix-team--grid__item .uix-team--grid__detail.uix-team--grid__detail--toggle h3,
+.uix-team--grid .uix-team--grid__item .uix-team--grid__detail.uix-team--grid__detail--toggle h4 {
+    color: #fff;
+}
+
+.uix-team--grid .uix-team--grid__item .uix-team--grid__detail.uix-team--grid__detail--toggle::-webkit-scrollbar-track {
+    border-radius: 0px;
+    background-color: #000;
+}
+
+.uix-team--grid .uix-team--grid__item .uix-team--grid__detail.uix-team--grid__detail--toggle::-webkit-scrollbar {
+    width: 3px;
+    background-color: #fff;
+}
+
+.uix-team--grid .uix-team--grid__item .uix-team--grid__detail.uix-team--grid__detail--toggle::-webkit-scrollbar-thumb {
+    border-radius: 0px;
+    background-color: #fff;
+}
+
+.uix-team--grid .uix-team--grid__item .uix-team--grid__img {
+    opacity: 1;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    width: 80%;
+    padding-top: 80%;
+  /* 1:1 Aspect Ratio */
+    margin-left: 10%;
+    margin-bottom: 1.5rem;
+}
+
+.uix-team--grid .uix-team--grid__item .uix-team--grid__img img {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.uix-team--grid .uix-team--grid__item .uix-team--grid__img::after {
+    content: "";
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    transition: all 0.3s ease;
+}
+
+.uix-team--grid .uix-team--grid__item .uix-team--grid__img a {
+    color: #fff;
+}
+
+.uix-team--grid .uix-team--grid__item .uix-team--grid__img ul {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    width: 100%;
+    height: 0px;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.uix-team--grid .uix-team--grid__item .uix-team--grid__img ul li {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.uix-team--grid .uix-team--grid__item .uix-team--grid__img:hover::after {
+    opacity: 1;
+}
+
+.uix-team--grid .uix-team--grid__item .uix-team--grid__img:hover ul {
+    opacity: 1;
+}
+
+.uix-team--grid .uix-team--grid__item:hover .uix-team--grid__detail.uix-team--grid__detail--toggle {
+    opacity: 1;
 }
 
 /* ====================================================== 
@@ -13187,11 +13368,9 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
     font-style: italic;
 }
 
-.uix-testimonials .uix-testimonials__signature img.uix-testimonials__signature--avatar,
 .uix-testimonials .uix-testimonials__signature .uix-testimonials__signature--avatar img {
     width: 32px;
     height: 32px;
-    border-radius: 100%;
     margin: .3rem 0 0.875rem 0.875rem;
     vertical-align: middle;
     display: inline-block;
@@ -13315,7 +13494,6 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
 .uix-timeline__container .uix-timeline .uix-timeline__item .uix-timeline__item--img img {
     width: 40px;
     height: 40px;
-    border-radius: 100%;
 }
 
 .uix-timeline__container .uix-timeline .uix-timeline__item .uix-timeline__item--info {
@@ -14070,6 +14248,49 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
 
 .uix-vertical-separator::after {
     margin-top: 0;
+}
+
+/* ====================================================== 
+   <!-- Wave Background -->    
+/* ====================================================== */
+.uix-wave-bg__container {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+}
+
+.uix-wave-bg__container .uix-wave-bg {
+    overflow: hidden;
+    height: 300px;
+    background: #EC5E79;
+    background: linear-gradient(to right, #EC5E79 0%, #E8588C 100%);
+}
+
+.uix-wave-bg__svgmask {
+    overflow: hidden;
+    position: absolute;
+    width: 140%;
+    transform: translateY(-50%);
+    color: #fff;
+    margin-left: -20%;
+    animation: 5s ease-in-out infinite alternate uix-cssAnim--wave;
+}
+
+.uix-wave-bg__svgmask svg {
+    fill: currentColor;
+    width: 102%;
+    margin-left: -1%;
+    height: auto;
+}
+
+@keyframes uix-cssAnim--wave {
+    0% {
+        transform: translate(-80px, -52%);
+    }
+
+    100% {
+        transform: translate(80px, -50%);
+    }
 }
 
 /* ====================================================== 

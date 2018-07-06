@@ -1,9 +1,16 @@
 # Changelog
 
+#### = 1.8.6 (July 6, 2018) =
+
+* New: Add a new module "Wave Background".
+* New: Add a new module "Team Gird".
+* New: Add a new module "Team Fullwidth".
+* Tweak: Changed the "Features" module's HTML code structure.
+
+
 
 #### = 1.8.5 (July 3, 2018) =
 
-* New: Add a new module "Wave Background". (Coming Soon)
 * Fix: Fixed ajax paged reload error.
 * Fix: Fixed selector of date picker for form.
 * Tweak: CSS Naming Conventions optimized for all modules.

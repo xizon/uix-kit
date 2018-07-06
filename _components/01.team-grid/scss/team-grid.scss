@@ -1,0 +1,163 @@
+/* ====================================================== 
+   <!-- Team Gird -->    
+/* ====================================================== */
+
+.uix-team--grid {
+	
+	
+	.uix-team--grid__item {
+		
+		position: relative;
+		margin-bottom: 3rem;
+	
+		h3 {
+			font-weight: normal;
+			font-size: 1.25rem;
+			margin: 1rem 0 0 0;
+			padding-bottom: 0;
+		}
+		h4 {
+			font-size: 0.875rem;
+			opacity: .4;
+		}
+		
+
+		.uix-team--grid__detail {
+
+			@include transition-default();
+			text-align: left;
+			
+			
+			&.uix-team--grid__detail--toggle {
+				display: block;
+				position: absolute;
+				left: 0;
+				top: 0;
+				z-index: 2;
+				background: rgba(0,0,0,.8);
+				color: #fff;
+				padding: 1.5rem 1rem;
+				width: 100%;
+				opacity: 0;
+				border-radius: 4px;
+				height: 100%;
+				overflow: auto;
+				
+				
+				h3,
+				h4 {
+					color: #fff;
+				}
+				
+				
+				&::-webkit-scrollbar-track {
+					border-radius: 0px;
+					background-color: #000;
+				}
+
+				&::-webkit-scrollbar {
+					width: 3px;
+					background-color: #fff;
+				}
+
+				&::-webkit-scrollbar-thumb {
+					border-radius: 0px;
+					background-color:#fff;
+				}	
+	
+				
+				
+			}	
+			
+		}	
+		
+		
+		.uix-team--grid__img {
+			opacity: 1;
+			display: block;
+			position: relative;
+			overflow: hidden;
+			width: 80%;
+			padding-top: 80%; /* 1:1 Aspect Ratio */
+			margin-left: 10%;
+			margin-bottom: 1.5rem;
+
+			img {
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+
+
+			&::after{
+				content: "";
+				opacity: 0;
+				background-color: rgba(0, 0, 0, 0.75);
+				position: absolute;
+				right: 0;
+				left: 0;
+				top: 0;
+				bottom: 0;
+				@include transition-default();
+			}
+
+
+			a {
+				color:#fff;
+			}
+
+
+			ul {
+				position: absolute;
+				z-index: 2;
+				top: 50%;
+				transform: translateY(-50%);
+				text-align: center;
+				width: 100%;
+				height: 0px;
+				opacity: 0;
+				@include transition-default();
+
+
+				li {
+					width: 30px;
+					height: 30px;
+					line-height: 30px;
+					display: inline-block;
+					@include transition-default();
+				}	
+
+			}
+
+			&:hover {
+
+				&::after{
+					opacity: 1;
+				}
+
+				ul {
+					opacity: 1;
+				}	
+
+
+
+			}
+
+		}
+		
+		
+		&:hover {
+			.uix-team--grid__detail {
+
+				&.uix-team--grid__detail--toggle {
+					opacity: 1;
+				}
+
+			}		
+		}
+
+	}
+
+
+
+}

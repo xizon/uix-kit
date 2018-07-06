@@ -18,6 +18,7 @@
  * 13. Image Hover Overlay Effects
  * 14. Position
  * 15. Element Hidden Style
+ * 16. Border Radius
 */
 
 
@@ -433,4 +434,47 @@ img.uix-filter-hover--color,
 .uix-el--skew {
     transform: skew(0deg, -2deg);	
 }
+
+/* 
+ ---------------------------
+  16. Border Radius
+ ---------------------------
+ */ 
+.uix-border--rounded {
+	
+	border-radius: 4px;
+	
+	&.uix-border--rounded-img {
+		> img {
+			border-radius: 4px;
+		}		
+	}
+	
+	&.uix-border--rounded-only-img {
+		border-radius: 0;
+		> img {
+			border-radius: 4px;
+		}		
+	}	
+	
+
+}
+
+.uix-border--circle {
+	border-radius: 50%;
+	
+	&.uix-border--circle-img {
+		> img {
+			border-radius: 50%;
+		}		
+	}
+	
+	&.uix-border--circle-only-img {
+		border-radius: 0;
+		> img {
+			border-radius: 50%;
+		}		
+	}	
+}
+
 
