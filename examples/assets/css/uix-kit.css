@@ -16,6 +16,18 @@
  * ## Released under the MIT license.
  */
 
+/* ====================================================== 
+    <!-- 3D Background -->  
+/* ====================================================== */
+.uix-3d-bg {
+  /* Require more than 500, compatible firefox height */
+    perspective: 700px;
+}
+
+.uix-3d-bg > span {
+    display: inline-block;
+}
+
 /*
 
 
@@ -70,90 +82,89 @@
     5. Typography 
     6. Spacing 
     7. Basic Layout Styles 
-    8. Basic Layout Styles 
-    9. Navigation 
-    10. Header Area 
-    11. Brand 
-    12. Footer 
-    13. Video 
-    14. Back to Top 
-    15. Loader 
-    16. Social Media Icons 
-    17. Pagination 
-    18. Filterable Navigation 
-    19. Sidebar  
-    20. Search 
-    21. Tags 
-    22. Entry 
-    23. Comments ( Synchronize to WordPress's class name ) 
-    24. Mobile Menu 
-    25. Onepage Menu 
-    26. Modal Dialog 
-    27. 3rd Party Plugins 
-    28. 3D Background 
-    29. 3D Carousel 
+    8. Navigation 
+    9. Header Area 
+    10. Brand 
+    11. Footer 
+    12. Video 
+    13. Back to Top 
+    14. Loader 
+    15. Social Media Icons 
+    16. Pagination 
+    17. Filterable Navigation 
+    18. Sidebar  
+    19. Search 
+    20. Tags 
+    21. Entry 
+    22. Comments ( Synchronize to WordPress's class name ) 
+    23. Mobile Menu 
+    24. Onepage Menu 
+    25. Modal Dialog 
+    26. 3rd Party Plugins 
+    27. 3D Background 
+    28. 3D Carousel 
+    29. Accordion 
     30. Accordion Background Images 
-    31. Accordion 
-    32. Advanced Content Slider 
-    33. Advanced Slider (Special Effects) 
-    34. Advanced Slider (Basic) 
-    35. Badges 
-    36. Breadcrumbs 
-    37. Button 
-    38. Cards 
-    39. Counter 
-    40. Dividing Line 
-    41. Dots 
-    42. Dotted Line 
-    43. Dropdown Menu 
-    44. Dropdown Menu 2 (Multi-level drop-down navigation) 
-    45. Equal-width Divs 
-    46. Features 
-    47. Flexslider 
-    48. Footer Templates 
-    49. Form 
-    50. Form Progress 
-    51. Gallery 
-    52. Heading 
-    53. Image Shapes 
-    54. Custom Core Scripts & Stylesheets 
-    55. Cutom Light Box 
-    56. Brands List 
-    57. Bulleted List 
-    58. Maintain Aspect Ratio List 
-    59. List of Posts 
-    60. List of Split Posts 
-    61. Side by Side List 
-    62. Side by Side List With Photo 
-    63. Fullwidth List of Split 2 
-    64. Fullwidth List of Split 
-    65. Mouse Animation Scroll 
-    66. Multiple Items Carousel 
-    67. Overlay 
-    68. Parallax 
-    69. Periodical Scroll 
-    70. Pricing 
-    71. Progress Bar 
-    72. Ribbon 
-    73. Services 
-    74. Shape Animation 
-    75. Show More Less 
-    76. Single Post 
-    77. Source Code 
-    78. Striking 
-    79. Tabs 
-    80. Team Focus 
-    81. Team Fullwidth (Style using the Side by Side List With Photo module) 
-    82. Team Gird 
-    83. Testimonials Carousel 
-    84. Text effect 
-    85. Timeline 
-    86. ToolTip 
-    87. Vertical Menu 
-    88. Vertical Separator 
-    89. Wave Background 
-    90. WordPress Core ( Do not use prefix "uix-" ) 
-    91. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    31. Advanced Content Slider 
+    32. Advanced Slider (Special Effects) 
+    33. Advanced Slider (Basic) 
+    34. Badges 
+    35. Breadcrumbs 
+    36. Button 
+    37. Cards 
+    38. Counter 
+    39. Dividing Line 
+    40. Dots 
+    41. Dotted Line 
+    42. Dropdown Menu 
+    43. Dropdown Menu 2 (Multi-level drop-down navigation) 
+    44. Equal-width Divs 
+    45. Features 
+    46. Flexslider 
+    47. Footer Templates 
+    48. Form 
+    49. Form Progress 
+    50. Gallery 
+    51. Heading 
+    52. Image Shapes 
+    53. Custom Core Scripts & Stylesheets 
+    54. Cutom Light Box 
+    55. Brands List 
+    56. Bulleted List 
+    57. Maintain Aspect Ratio List 
+    58. List of Posts 
+    59. List of Split Posts 
+    60. Side by Side List 
+    61. Side by Side List With Photo 
+    62. Fullwidth List of Split 2 
+    63. Fullwidth List of Split 
+    64. Mouse Animation Scroll 
+    65. Multiple Items Carousel 
+    66. Overlay 
+    67. Parallax 
+    68. Periodical Scroll 
+    69. Pricing 
+    70. Progress Bar 
+    71. Ribbon 
+    72. Services 
+    73. Shape Animation 
+    74. Show More Less 
+    75. Single Post 
+    76. Source Code 
+    77. Striking 
+    78. Tabs 
+    79. Team Focus 
+    80. Team Fullwidth (Style using the Side by Side List With Photo module) 
+    81. Team Gird 
+    82. Testimonials Carousel 
+    83. Text effect 
+    84. Timeline 
+    85. ToolTip 
+    86. Vertical Menu 
+    87. Vertical Separator 
+    88. Wave Background 
+    89. WordPress Core ( Do not use prefix "uix-" ) 
+    90. Ajax Page Loader (Loading A Page via Ajax Into Div)  
 
 
 
@@ -4499,18 +4510,6 @@ ul.uix-entry-meta:not(.uix-entry-meta--wrap) li:first-child::before {
 }
 
 /* ====================================================== 
-    <!-- 3D Background -->  
-/* ====================================================== */
-.uix-3d-bg {
-  /* Require more than 500, compatible firefox height */
-  perspective: 700px;
-}
-
-.uix-3d-bg > span {
-  display: inline-block;
-}
-
-/* ====================================================== 
     <!-- 3D Carousel --> 
 /* ====================================================== */
 .uix-3d-carousel {
@@ -4987,7 +4986,7 @@ ul.uix-entry-meta:not(.uix-entry-meta--wrap) li:first-child::before {
   margin-bottom: 0;
 }
 
-.uix-advanced-slider-sp .uix-advanced-slider-sp__inner .uix-advanced-slider-sp__item .txt {
+.uix-advanced-slider-sp .uix-advanced-slider-sp__inner .uix-advanced-slider-sp__item .uix-advanced-slider-sp__txt {
   width: 1170px;
   position: absolute;
   left: 50%;
@@ -4998,24 +4997,24 @@ ul.uix-entry-meta:not(.uix-entry-meta--wrap) li:first-child::before {
   /* Prevent layers from hiding the underlying elements */
 }
 
-.uix-advanced-slider-sp .uix-advanced-slider-sp__inner .uix-advanced-slider-sp__item .txt > div {
+.uix-advanced-slider-sp .uix-advanced-slider-sp__inner .uix-advanced-slider-sp__item .uix-advanced-slider-sp__txt > div {
   pointer-events: auto;
 }
 
 @media all and (max-width: 1171px) {
-  .uix-advanced-slider-sp .uix-advanced-slider-sp__inner .uix-advanced-slider-sp__item .txt {
+  .uix-advanced-slider-sp .uix-advanced-slider-sp__inner .uix-advanced-slider-sp__item .uix-advanced-slider-sp__txt {
     width: calc( 100% - 15px);
   }
 }
 
 @media all and (min-width: 1430px) {
-  .uix-advanced-slider-sp .uix-advanced-slider-sp__inner .uix-advanced-slider-sp__item .txt {
+  .uix-advanced-slider-sp .uix-advanced-slider-sp__inner .uix-advanced-slider-sp__item .uix-advanced-slider-sp__txt {
     width: 1278px;
   }
 }
 
 @media all and (min-width: 1600px) {
-  .uix-advanced-slider-sp .uix-advanced-slider-sp__inner .uix-advanced-slider-sp__item .txt {
+  .uix-advanced-slider-sp .uix-advanced-slider-sp__inner .uix-advanced-slider-sp__item .uix-advanced-slider-sp__txt {
     width: 1410px;
   }
 }

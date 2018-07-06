@@ -1,6 +1,6 @@
 # Changelog
 
-#### = 1.8.6 (July 6, 2018) =
+#### = 1.8.7 (July 6, 2018) =
 
 * New: Add a new module "Wave Background".
 * New: Add a new module "Team Gird".
