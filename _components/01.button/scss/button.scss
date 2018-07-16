@@ -43,7 +43,7 @@ $button-margin-b: 1.5rem;
 	letter-spacing: .02rem;
 	line-height: 1.2;
 	@include transition-default();
-
+	
 
 	&.disabled {
 		background-image: linear-gradient(to right, #e4e7ed 0%, #e4e7ed 20%, #e4e7ed 100%)  !important;

@@ -1,0 +1,245 @@
+/* ====================================================== 
+   <!-- Blended Grid Layout --> 
+/* ====================================================== */
+
+@mixin blendedGridGenerate( $classname: '.uix-blended-grid', $gap: 15px, $height: 100vh, $height-mobile: 40vh ) {
+	// @include blendedGridGenerate( '.uix-blended-grid', 15px, 100vh, 40vh );
+	
+    @if ( $classname != '' ) {
+		
+		#{$classname} {
+			width: calc( 100% + #{$gap*2} );
+			height: 0;
+			padding-bottom: #{$height};
+			display: block;
+			position: relative;
+			
+			> ul {
+				margin: 0;
+				padding: 0;
+				
+				
+				> li {
+					margin: 0;
+					padding: 0;
+					width: 33%;
+					height: 33%;
+					position: absolute;
+					padding: #{$gap};
+					box-sizing: border-box;
+					margin-left: -#{$gap};
+
+
+					> div {
+						background-position: center center;
+						background-size: cover;		
+						width: 100%;
+						height: 100%;
+					}
+
+				}		
+				
+			}
+
+
+
+			/*--- 2 Rows, Large image on the left ---*/
+			.uix-blended-grid__col-two-left {
+
+
+				> li:nth-child(1) {
+					top: 0;	
+					left: 0;
+					width: 50%;
+					height: 100%;
+				}
+
+
+				> li:nth-child(2) {
+					top: 0;
+					left: 50%;
+					width: 50%;
+					height: 50%;
+
+				}
+
+				> li:nth-child(3) {
+					top: 50%;
+					left: 50%;
+					width: 50%;
+					height: 50%;
+				}
+
+
+			}
+
+			/*--- 2 Rows, Large image on the right ---*/
+			.uix-blended-grid__col-two-right {
+
+				> li:nth-child(1) {
+					top: 0;
+					left: 0;
+					width: 50%;
+					height: 50%;	
+				}
+
+
+				> li:nth-child(2) {
+					top: 0;
+					left: 50%;
+					width: 50%;
+					height: 100%;	
+				}
+
+				> li:nth-child(3) {
+					top: 50%;
+					left: 0;
+					width: 50%;
+					height: 50%;	
+				}
+
+			}
+
+
+			/*--- 3 Rows, Large image on the left ---*/
+			.uix-blended-grid__col-three-left {
+
+				> li:nth-child(1) {
+					top: 0;
+					left: 0;
+					width: 66.6%;
+					height: 66.6%;	
+
+				}
+
+
+				> li:nth-child(2) {
+					top: 0;
+					left: 66.6%;
+					width: 33.3%;
+					height: 33.3%;
+				}
+
+				> li:nth-child(3) {
+					top: 33.3%;
+					left: 66.6%;
+					width: 33.3%;
+					height: 33.3%;
+				}
+
+
+				> li:nth-child(4) {
+					top: 66.6%;
+					left: 0;
+					width: 33.3%;
+					height: 33.3%;	
+				}
+
+				> li:nth-child(5) {
+					top: 66.6%;
+					left: 33.3%;
+					width: 33.3%;
+					height: 33.3%;	
+				}	
+
+				> li:nth-child(6) {
+					top: 66.6%;
+					left: 66.6%;
+					width: 33.3%;
+					height: 33.3%;	
+				}	
+
+			}
+
+			/*--- 3 Rows, Large image on the right ---*/
+			.uix-blended-grid__col-three-right {
+
+				
+				> li:nth-child(1) {
+					top: 0;
+					left: 0;
+					width: 33.3%;
+					height: 33.3%;	
+				}
+
+
+				> li:nth-child(2) {
+					top: 0;
+					left: 33.3%;
+					width: 66.6%;
+					height: 66.6%;	
+				}
+
+				> li:nth-child(3) {
+					top: 33.3%;
+					left: 0;
+					width: 33.3%;
+					height: 33.3%;	
+				}
+
+
+				> li:nth-child(4) {
+					top: 66.6%;
+					left: 0;
+					width: 33.3%;
+					height: 33.3%;	
+				}
+
+				> li:nth-child(5) {
+					top: 66.6%;
+					left: 33.3%;
+					width: 33.3%;
+					height: 33.3%;	
+				}	
+
+				> li:nth-child(6) {
+					top: 66.6%;
+					left: 66.6%;
+					width: 33.3%;
+					height: 33.3%;	
+				}				
+
+
+			}
+
+		}
+		
+		@media all and (max-width: 768px) {
+			
+			#{$classname} {
+				
+				width: 100%;
+				height: auto;
+				padding-bottom: 0;	
+				
+				> ul {
+					
+					
+					> li {
+						width: 100% !important;
+						height: #{$height-mobile} !important;
+						position: relative !important;
+						padding: 0 !important;
+						top: auto !important;
+						left: auto !important;
+						margin-bottom: #{$gap} !important;
+						margin-left: 0;
+
+					}	
+				}
+
+
+			}
+
+			
+		}
+
+
+	}
+	
+}
+
+
+@include blendedGridGenerate( '.uix-blended-grid', 15px, 100vh, 40vh );
+
+

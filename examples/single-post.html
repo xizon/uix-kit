@@ -53,11 +53,11 @@
         
        
         <!-- Theme  -->
-        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTUzMDg2OTEyMjMzNw"/>
+        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTUzMTc1ODk1NzgwOA"/>
         
         
          <!--[if lt IE 10]>
-           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTUzMDg2OTEyMjMzNw" />
+           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTUzMTc1ODk1NzgwOA" />
         <![endif]-->
         
         
@@ -164,6 +164,7 @@
 														<li><span class="multi-column-title">Web Elements (Basic)</span></li>
 														<li><a href="seamless-grid.html">Seamless Grid</a></li>
 														<li><a href="bootstrap-grid.html">Bootstrap Grid</a></li>
+														<li><a href="blended-grid-layout.html">Blended Grid</a><span class="uix-bubble">new</span></li>
 														<li><a href="section-layout.html">Section Layout</a></li>
 														<li><a href="material-container.html">Material Container</a></li>
 														<li><a href="striking.html">Striking</a></li>
@@ -175,8 +176,8 @@
 														<li><a href="dividing-line.html">Dividing Line</a></li>
 														<li><a href="card.html">Cards</a></li>
 														<li><a href="modal-dialog.html">Modal Dialog</a></li>
-														<li><a href="shape-animation.html">Shape Animation</a><span class="uix-bubble">new</span></li>
-														<li><a href="ribbon.html">Ribbon</a><span class="uix-bubble">new</span></li>
+														<li><a href="shape-animation.html">Shape Animation</a></li>
+														<li><a href="ribbon.html">Ribbon</a></li>
 													</ul>
 													
 													<!-- .sub-menu  end -->
@@ -399,12 +400,12 @@
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">
                                 <h1 class="uix-typo--h2">Example: Single Post Title Here</h1>
-								<ul class="uix-entry-meta">
+								<ul class="uix-entry__meta">
 									<li>July 21, 2016</li>
 									<li>by <a href="#">admin</a></li>
 									<li><a href="#">General</a>, <a href="#">Media</a></li>
 									<li><a href="#">43 Comments</a></li>
-								</ul><!-- .uix-entry-meta end -->
+								</ul><!-- .uix-entry__meta end -->
                                 
                                 
                             
@@ -428,13 +429,13 @@
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">
                                 <h1 class="uix-typo--h2">Example: Single Post Title Here</h1>
-								<ul class="uix-entry-meta uix-entry-meta--wrap uix-typo--style-noitalic uix-t-l">
+								<ul class="uix-entry__meta uix-entry__meta--wrap uix-typo--style-noitalic uix-t-l">
                                     <li><strong>Release</strong><span>July 21, 2016</span></li>
 									<li><strong>Current Version</strong><span>1.1.3</span></li>
 									<li><strong>Software Version</strong><span>WordPress 4.6+</span></li>
                                     <li><strong>Compatible Browsers</strong><span>IE9, IE10, IE11, Firefox, Safari, Opera, Chrome, Edge</span></li>
                                 
-								</ul><!-- .uix-entry-meta end --> 
+								</ul><!-- .uix-entry__meta end --> 
                                 
                             
                         </div>
@@ -458,7 +459,7 @@
                     
                             <!-- Entry Content
                             ========================= -->
-                            <div class="entry-content uix-list uix-list--normal uix-table uix-table--bordered">
+                            <div class="uix-entry__content uix-list uix-list--normal uix-table uix-table--bordered">
                                                         
                                 <div class="entry-image alignleft">
                                     <a href="#"><img src="assets/images/demo/test-img-big-1.jpg" width="200" alt="Blog Single"></a>
@@ -473,6 +474,8 @@
                                 <p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras mattis consectetur purus sit amet fermentum. Donec id elit non mi porta gravida at eget metus.</p>
                                 
                                 <p><img src="assets/images/demo/test-img-big-1.jpg" alt="big image" width="1024" height="682"></p>
+                                
+                                
     
                                 <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Aenean lacinia bibendum nulla sed consectetur. Cras justo odio, dapibus ac facilisis in, egestas eget quam. <a href="#">Nullam quis risus eget urna</a> mollis ornare vel eu leo. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
     
@@ -484,7 +487,12 @@ padding-top: 40px;
 }</pre>
     
     
+
                                 <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
+                                
+                                
+                                <p><img src="assets/images/demo/cool-slider-1.jpg"  class="alignfull" alt="big image" width="1024" height="682"></p>
+      
                                 
                                 <p>
                                     <ul>
@@ -604,7 +612,7 @@ padding-top: 40px;
                             
                             <!-- Post Navigation
                             ========================= -->
-                            <div class="uix-entry-box uix-entry-box--top uix-entry-box--mark">
+                            <div class="uix-entry__box uix-entry__box--top uix-entry__box--mark">
                                <hr>
                                <div class="row">
                                    <div class="col-xs-6 uix-t-l">
@@ -623,9 +631,9 @@ padding-top: 40px;
                                     
                             <!-- Comments
                             ========================= -->
-                            <div class="uix-entry-box comments">
+                            <div class="uix-entry__box comments">
                             
-                                   <h4 class="uix-typo--style-uppercase uix-entry-box__title">3 comments</h4>
+                                   <h4 class="uix-typo--style-uppercase uix-entry__box__title">3 comments</h4>
     
                                     <!-- comment start -->
                                     <div class="comment uix-clearfix" id="comment-1">
@@ -743,8 +751,8 @@ padding-top: 40px;
                            
                             <!-- Comments Form
                             ========================= -->
-                            <div class="uix-entry-box" data-validate="3">
-                                <h4 class="uix-typo--style-uppercase uix-entry-box__title comment-reply-title">Leave a Reply<small><a rel="nofollow" id="cancel-comment-reply-link" href="#" style="display:none;">Cancel reply</a></small></h4>
+                            <div class="uix-entry__box" data-validate="3">
+                                <h4 class="uix-typo--style-uppercase uix-entry__box__title comment-reply-title">Leave a Reply<small><a rel="nofollow" id="cancel-comment-reply-link" href="#" style="display:none;">Cancel reply</a></small></h4>
                                 <form method="post" action="#">
                                 
                                 
@@ -890,14 +898,14 @@ padding-top: 40px;
 	============================================= -->
 	
 	<script>
-		var REVISION     = "1.8.6",
+		var REVISION     = "1.8.8",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
 				"homeUrl"     : "",  //Eg. https://uiux.cc
 				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
 			};
     </script>  
-    <script src="assets/js/uix-kit.min.js?ver=MTUzMDg2OTEyMjMzNw"></script>
+    <script src="assets/js/uix-kit.min.js?ver=MTUzMTc1ODk1NzgwOA"></script>
 
 
 

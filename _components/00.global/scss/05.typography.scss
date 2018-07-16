@@ -249,6 +249,27 @@ h6 {
 }
 
 .uix-typo--color-primary {
+	color: $primary-text-color1 !important;
+	
+	p,
+	h1, 
+	h2, 
+	h3, 
+	h4, 
+	h5, 
+	h6, 
+	.uix-typo--h1, 
+	.uix-typo--h2, 
+	.uix-typo--h3, 
+	.uix-typo--h4, 
+	.uix-typo--h5, 
+	.uix-typo--h6 {
+	    color: $primary-text-color1;
+	}
+}
+
+
+.uix-typo--color-highlight {
 	color: $highlight-color1 !important;
 	
 	
@@ -289,6 +310,7 @@ h6 {
 	    color: $sub-text-color;
 	}
 }
+
 
 
 .uix-typo--color-white {

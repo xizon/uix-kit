@@ -136,11 +136,10 @@
  */ 
 
 
-@mixin seamlessGridGenerate( $classname: '.uix-core-grid', $pad: '15px' ) {
-	// @include seamlessGridGenerate( '.uix-core-grid', '15px' );
+@mixin seamlessGridGenerate( $classname: '.uix-core-grid', $pad: 15px ) {
+	// @include seamlessGridGenerate( '.uix-core-grid', 15px );
 	
-	$pad : #{$pad};
-	
+
     @if ( $classname != '' ) {
 		#{$classname} {
 			width: 100%;
@@ -187,8 +186,8 @@
 
 			[class*='uix-core-grid__col-'] {
 				float: left;
-				padding-right: $pad;
-				margin-bottom: $pad/2;
+				padding-right: #{$pad};
+				margin-bottom: #{$pad/2};
 
 				.uix-core-grid__row &:last-of-type {
 					padding-right: 0;
@@ -287,7 +286,7 @@
 				.uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-2:nth-child(2n+1),
 				.uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-3:nth-child(2n+1),
 				.uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-4:nth-child(2n+1) {
-					padding-right: $pad;
+					padding-right: #{$pad};
 					clear: both;
 
 				}
@@ -317,6 +316,8 @@
 					width: calc(100% - #{$pad});
 					padding-left: 0;
 					padding-right: 0;
+					margin-bottom: #{$pad};
+					
 				}
 
 
@@ -327,7 +328,7 @@
 				.uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-4 {
 					width: 50%;
 					float: left;
-					margin-bottom: 0;
+					margin-bottom: #{$pad/2};
 				}
 
 				.uix-core-grid__row.uix-core-grid__row--col-2.uix-core-grid__row--no-gutter .uix-core-grid__col-2,
@@ -348,7 +349,7 @@
 				.uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-2:nth-child(2n+0),
 				.uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-3:nth-child(2n+0),
 				.uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-4:nth-child(2n+0) {
-					padding-right: $pad;
+					padding-right: #{$pad};
 
 				}
 
@@ -367,8 +368,7 @@
 }
 
 
-@include seamlessGridGenerate( '.uix-core-grid', '15px' );
-@include seamlessGridGenerate( '.uix-core-grid-large', '30px' );
+@include seamlessGridGenerate( '.uix-core-grid', 15px );
 
 
 /* 

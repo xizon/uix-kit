@@ -225,7 +225,7 @@ APP = ( function ( APP, $, window, document ) {
 								method   : dataMethod,
 								dataType : 'html',
 								success  : function( response ) { 
-									$ajaxContentContainer.html( $( response ).find( '.entry-content' ).html() );
+									$ajaxContentContainer.html( $( response ).find( '.uix-entry__content' ).html() );
 
 								 },
 								 error : function( XMLHttpRequest, textStatus, errorThrown ) {

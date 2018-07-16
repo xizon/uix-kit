@@ -248,8 +248,9 @@ html[xmlns] .uix-flexslider .uix-flexslider__inner {
 
 }
 
-/* Custom Style */
+/* Custom Style of Pagination */
 .uix-flexslider__controls {
+	
 	.uix-flexslider__control-nav.uix-flexslider__control-paging {
 		
 		position: relative;
@@ -268,6 +269,36 @@ html[xmlns] .uix-flexslider .uix-flexslider__inner {
 	    }
 
 	}
+	
+	/*---- Custom Styles ----*/
+	&.uix-flexslider__controls--style-2 {
+		
+		.uix-flexslider__control-nav.uix-flexslider__control-paging {
+
+			position: absolute;
+			transform: translateY(0);
+			top: calc(100% - 30px);
+			text-align: center;
+			z-index: 2;
+
+			li {
+				a {
+					background: #a3a3a3;
+
+					&:hover, 
+					&.uix-flexslider__active {
+						background: #333;
+					}
+				}	
+
+			}
+
+		}	
+		
+	}
+	
+	
+	
 }
 
 

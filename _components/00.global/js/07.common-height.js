@@ -65,6 +65,17 @@ APP = ( function ( APP, $, window, document ) {
 
 			element.children( selectors ).each( function() {
 				var element = $( this ).children();
+				
+				//Solve the problem that the image cannot be read accurately
+				element.find( 'img' ).each( function()  {
+					var imgOuter = $( this ).parent( 'a' ).css( 'display' );
+					if ( imgOuter == 'inline' ) {
+						$( this ).parent( 'a' ).css( 'display', 'inline-block' );
+					}
+				});
+				
+				
+				//Height condition judgment
 				if( element.hasClass( 'max-height' ) ) {
 					maxHeight = element.outerHeight();
 				} else {

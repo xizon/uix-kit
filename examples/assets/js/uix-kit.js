@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.8.6
- * ## Last Update         :  July 6, 2018
+ * ## Version             :  1.8.8
+ * ## Last Update         :  July 16, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -53,8 +53,8 @@
     29. Dynamic Drop Down List from JSON 
     30. Flexslider 
     31. Form 
-    32. Form Progress 
-    33. jQuery UI Datepicker 1.11.4 
+    32. jQuery UI Datepicker 1.11.4 
+    33. Form Progress 
     34. Gallery 
     35. Image Shapes 
     36. Custom Core Scripts  
@@ -1278,6 +1278,17 @@ APP = ( function ( APP, $, window, document ) {
 
 			element.children( selectors ).each( function() {
 				var element = $( this ).children();
+				
+				//Solve the problem that the image cannot be read accurately
+				element.find( 'img' ).each( function()  {
+					var imgOuter = $( this ).parent( 'a' ).css( 'display' );
+					if ( imgOuter == 'inline' ) {
+						$( this ).parent( 'a' ).css( 'display', 'inline-block' );
+					}
+				});
+				
+				
+				//Height condition judgment
 				if( element.hasClass( 'max-height' ) ) {
 					maxHeight = element.outerHeight();
 				} else {
@@ -7314,49 +7325,6 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
- * <!-- Dropdown Menu 2 (Multi-level drop-down navigation) -->
- *************************************
- */	
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.DROPDOWN_MENU2               = APP.DROPDOWN_MENU2 || {};
-	APP.DROPDOWN_MENU2.version       = '0.0.1';
-    APP.DROPDOWN_MENU2.documentReady = function( $ ) {
-
-		var $verticalMenuLi = $( '.uix-vertical-menu li' );
-		
-		$verticalMenuLi.find( '> a' ).on( 'click', function( e ) {
-			e.preventDefault();
-			
-			var $sub = $( this ).parent( 'li' ).children( 'ul' );
-
-			$sub.slideToggle( 500 );
-			$( this ).parent( 'li' ).toggleClass( 'active' );
-
-        });
-		
-		//Add multilevel indicator arrow
-        $verticalMenuLi.find( '> a' ).append( '<span class="uix-vertical-menu__arrow"></span>' );
-		$verticalMenuLi.each( function() {
-			var len = $( this ).find( 'ul' ).length;
-			if ( len == 0 ) {
-				$( this ).children( 'a' ).children( '.uix-vertical-menu__arrow' ).hide();
-			}
-		});
-		
-    };
-
-    APP.components.documentReady.push( APP.DROPDOWN_MENU2.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
-/* 
- *************************************
  * <!-- Dropdown Menu -->
  *************************************
  */	
@@ -7401,6 +7369,52 @@ APP = ( function ( APP, $, window, document ) {
     };
 
     APP.components.documentReady.push( APP.DROPDOWN_MENU.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+/* 
+ *************************************
+ * <!-- Dropdown Menu 2 (Multi-level drop-down navigation) -->
+ *************************************
+ */	
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.DROPDOWN_MENU2               = APP.DROPDOWN_MENU2 || {};
+	APP.DROPDOWN_MENU2.version       = '0.0.1';
+    APP.DROPDOWN_MENU2.documentReady = function( $ ) {
+
+		var $verticalMenuLi = $( '.uix-vertical-menu li' );
+		
+		$verticalMenuLi.find( '> a' ).on( 'click', function( e ) {
+			e.preventDefault();
+			
+			var $sub = $( this ).parent( 'li' ).children( 'ul' );
+
+			$sub.slideToggle( 500 );
+			$( this ).parent( 'li' ).toggleClass( 'active' );
+
+        });
+		
+		//Add multilevel indicator arrow
+		if ( $verticalMenuLi.find( '> a .uix-vertical-menu__arrow' ).length == 0 ) {
+			$verticalMenuLi.find( '> a' ).append( '<span class="uix-vertical-menu__arrow"></span>' );
+		}
+        
+		$verticalMenuLi.each( function() {
+			var len = $( this ).find( 'ul' ).length;
+			if ( len == 0 ) {
+				$( this ).children( 'a' ).children( '.uix-vertical-menu__arrow' ).hide();
+			}
+		});
+		
+    };
+
+    APP.components.documentReady.push( APP.DROPDOWN_MENU2.documentReady );
     return APP;
 
 }( APP, jQuery, window, document ) );
@@ -13383,7 +13397,7 @@ APP = ( function ( APP, $, window, document ) {
 								method   : dataMethod,
 								dataType : 'html',
 								success  : function( response ) { 
-									$ajaxContentContainer.html( $( response ).find( '.entry-content' ).html() );
+									$ajaxContentContainer.html( $( response ).find( '.uix-entry__content' ).html() );
 
 								 },
 								 error : function( XMLHttpRequest, textStatus, errorThrown ) {
@@ -18910,6 +18924,2219 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
+/*!
+ * VERSION: 0.6.6
+ * DATE: 2018-02-15
+ * UPDATES AND DOCS AT: http://greensock.com
+ *
+ * @license Copyright (c) 2008-2018, GreenSock. All rights reserved.
+ * This work is subject to the terms at http://greensock.com/standard-license or for
+ * Club GreenSock members, the software agreement that was issued with your membership.
+ * 
+ * @author: Jack Doyle, jack@greensock.com
+ */
+var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(global) !== "undefined") ? global : this || window; //helps ensure compatibility with AMD/RequireJS and CommonJS/Node
+(_gsScope._gsQueue || (_gsScope._gsQueue = [])).push( function() {
+
+	"use strict";
+
+	_gsScope._gsDefine("plugins.CSSRulePlugin", ["plugins.TweenPlugin","TweenLite","plugins.CSSPlugin"], function(TweenPlugin, TweenLite, CSSPlugin) {
+
+		/** @constructor **/
+		var CSSRulePlugin = function() {
+				TweenPlugin.call(this, "cssRule");
+				this._overwriteProps.length = 0;
+			},
+			_doc = _gsScope.document,
+			_superSetRatio = CSSPlugin.prototype.setRatio,
+			p = CSSRulePlugin.prototype = new CSSPlugin();
+
+		p._propName = "cssRule";
+		p.constructor = CSSRulePlugin;
+		CSSRulePlugin.version = "0.6.6";
+		CSSRulePlugin.API = 2;
+
+		/**
+		 * Searches the style sheets in the document for a particular selector like ".myClass" or "a" or "a:hover" or ":after" and
+		 * returns a reference to that style sheet (or an array of them in the case of a pseudo selector like ":after"). Then you
+		 * can animate the individual properties of the style sheet.
+		 *
+		 * @param {!string} selector a string describing the selector, like ".myClass" or "a" or "a:hover" or ":after"
+		 * @return a reference to the style sheet (or an array of them in the case of a pseudo selector). If none was found, null is returned (or an empty array for a pseudo selector)
+		 */
+		CSSRulePlugin.getRule = function(selector) {
+			var ruleProp = _doc.all ? "rules" : "cssRules",
+				ss = _doc.styleSheets,
+				i = ss.length,
+				pseudo = (selector.charAt(0) === ":"),
+				j, curSS, cs, a;
+			selector = (pseudo ? "" : ",") + selector.split("::").join(":").toLowerCase() + ","; //note: old versions of IE report tag name selectors as upper case, so we just change everything to lowercase.
+			if (pseudo) {
+				a = [];
+			}
+			while (--i > -1) {
+				//Firefox may throw insecure operation errors when css is loaded from other domains, so try/catch.
+				try {
+					curSS = ss[i][ruleProp];
+					if (!curSS) {
+						continue;
+					}
+					j = curSS.length;
+				} catch (e) {
+					console.log(e);
+					continue;
+				}
+				while (--j > -1) {
+					cs = curSS[j];
+					if (cs.selectorText && ("," + cs.selectorText.split("::").join(":").toLowerCase() + ",").indexOf(selector) !== -1) { //note: IE adds an extra ":" to pseudo selectors, so .myClass:after becomes .myClass::after, so we need to strip the extra one out.
+						if (pseudo) {
+							a.push(cs.style);
+						} else {
+							return cs.style;
+						}
+					}
+				}
+			}
+			return a;
+		};
+							
+		
+		// @private gets called when the tween renders for the first time. This kicks everything off, recording start/end values, etc.
+		p._onInitTween = function(target, value, tween) {
+			if (target.cssText === undefined) {
+				return false;
+			}
+			var div = target._gsProxy = target._gsProxy || _doc.createElement("div");
+			this._ss = target;
+			this._proxy = div.style;
+			div.style.cssText = target.cssText;
+			CSSPlugin.prototype._onInitTween.call(this, div, value, tween); //we just offload all the work to the regular CSSPlugin and then copy the cssText back over to the rule in the setRatio() method. This allows us to have all of the updates to CSSPlugin automatically flow through to CSSRulePlugin instead of having to maintain both
+			return true;
+		};
+
+		
+		
+		// @private gets called every time the tween updates, passing the new ratio (typically a value between 0 and 1, but not always (for example, if an Elastic.easeOut is used, the value can jump above 1 mid-tween). It will always start and 0 and end at 1.
+		p.setRatio = function(v) {
+			_superSetRatio.call(this, v);
+			this._ss.cssText = this._proxy.cssText;
+		};
+		
+		
+		TweenPlugin.activate([CSSRulePlugin]);
+		return CSSRulePlugin;
+		
+	}, true);
+	
+}); if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); }
+
+//export to AMD/RequireJS and CommonJS/Node (precursor to full modular build system coming at a later date)
+(function(name) {
+	"use strict";
+	var getGlobal = function() {
+		return (_gsScope.GreenSockGlobals || _gsScope)[name];
+	};
+	if (typeof(module) !== "undefined" && module.exports) { //node
+		require("../TweenLite.js");
+		module.exports = getGlobal();
+	} else if (typeof(define) === "function" && define.amd) { //AMD
+		define(["TweenLite"], getGlobal);
+	}
+}("CSSRulePlugin"));
+/*!
+ * VERSION: 1.5.3
+ * DATE: 2018-02-15
+ * UPDATES AND DOCS AT: http://greensock.com
+ *
+ * @license Copyright (c) 2008-2018, GreenSock. All rights reserved.
+ * This work is subject to the terms at http://greensock.com/standard-license or for
+ * Club GreenSock members, the software agreement that was issued with your membership.
+ * 
+ * @author: Jack Doyle, jack@greensock.com
+ **/
+var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(global) !== "undefined") ? global : this || window; //helps ensure compatibility with AMD/RequireJS and CommonJS/Node
+(_gsScope._gsQueue || (_gsScope._gsQueue = [])).push( function() {
+
+	"use strict";
+
+	var _numExp = /(\d|\.)+/g,
+		_relNumExp = /(?:\d|\-\d|\.\d|\-\.\d|\+=\d|\-=\d|\+=.\d|\-=\.\d)+/g,
+		_colorLookup = {aqua:[0,255,255],
+			lime:[0,255,0],
+			silver:[192,192,192],
+			black:[0,0,0],
+			maroon:[128,0,0],
+			teal:[0,128,128],
+			blue:[0,0,255],
+			navy:[0,0,128],
+			white:[255,255,255],
+			fuchsia:[255,0,255],
+			olive:[128,128,0],
+			yellow:[255,255,0],
+			orange:[255,165,0],
+			gray:[128,128,128],
+			purple:[128,0,128],
+			green:[0,128,0],
+			red:[255,0,0],
+			pink:[255,192,203],
+			cyan:[0,255,255],
+			transparent:[255,255,255,0]},
+		_hue = function(h, m1, m2) {
+			h = (h < 0) ? h + 1 : (h > 1) ? h - 1 : h;
+			return ((((h * 6 < 1) ? m1 + (m2 - m1) * h * 6 : (h < 0.5) ? m2 : (h * 3 < 2) ? m1 + (m2 - m1) * (2 / 3 - h) * 6 : m1) * 255) + 0.5) | 0;
+		},
+		/**
+		 * @private Parses a color (like #9F0, #FF9900, rgb(255,51,153) or hsl(108, 50%, 10%)) into an array with 3 elements for red, green, and blue or if toHSL parameter is true, it will populate the array with hue, saturation, and lightness values. If a relative value is found in an hsl() or hsla() string, it will preserve those relative prefixes and all the values in the array will be strings instead of numbers (in all other cases it will be populated with numbers).
+		 * @param {(string|number)} v The value the should be parsed which could be a string like #9F0 or rgb(255,102,51) or rgba(255,0,0,0.5) or it could be a number like 0xFF00CC or even a named color like red, blue, purple, etc.
+		 * @param {(boolean)} toHSL If true, an hsl() or hsla() value will be returned instead of rgb() or rgba()
+		 * @return {Array.<number>} An array containing red, green, and blue (and optionally alpha) in that order, or if the toHSL parameter was true, the array will contain hue, saturation and lightness (and optionally alpha) in that order. Always numbers unless there's a relative prefix found in an hsl() or hsla() string and toHSL is true.
+		 */
+		_parseColor = function(v, toHSL) {
+			var a, r, g, b, h, s, l, max, min, d, wasHSL;
+			if (!v) {
+				a = _colorLookup.black;
+			} else if (typeof(v) === "number") {
+				a = [v >> 16, (v >> 8) & 255, v & 255];
+			} else {
+				if (v.charAt(v.length - 1) === ",") { //sometimes a trailing comma is included and we should chop it off (typically from a comma-delimited list of values like a textShadow:"2px 2px 2px blue, 5px 5px 5px rgb(255,0,0)" - in this example "blue," has a trailing comma. We could strip it out inside parseComplex() but we'd need to do it to the beginning and ending values plus it wouldn't provide protection from other potential scenarios like if the user passes in a similar value.
+					v = v.substr(0, v.length - 1);
+				}
+				if (_colorLookup[v]) {
+					a = _colorLookup[v];
+				} else if (v.charAt(0) === "#") {
+					if (v.length === 4) { //for shorthand like #9F0
+						r = v.charAt(1);
+						g = v.charAt(2);
+						b = v.charAt(3);
+						v = "#" + r + r + g + g + b + b;
+					}
+					v = parseInt(v.substr(1), 16);
+					a = [v >> 16, (v >> 8) & 255, v & 255];
+				} else if (v.substr(0, 3) === "hsl") {
+					a = wasHSL = v.match(_numExp);
+					if (!toHSL) {
+						h = (Number(a[0]) % 360) / 360;
+						s = Number(a[1]) / 100;
+						l = Number(a[2]) / 100;
+						g = (l <= 0.5) ? l * (s + 1) : l + s - l * s;
+						r = l * 2 - g;
+						if (a.length > 3) {
+							a[3] = Number(a[3]);
+						}
+						a[0] = _hue(h + 1 / 3, r, g);
+						a[1] = _hue(h, r, g);
+						a[2] = _hue(h - 1 / 3, r, g);
+					} else if (v.indexOf("=") !== -1) { //if relative values are found, just return the raw strings with the relative prefixes in place.
+						return v.match(_relNumExp);
+					}
+				} else {
+					a = v.match(_numExp) || _colorLookup.transparent;
+				}
+				a[0] = Number(a[0]);
+				a[1] = Number(a[1]);
+				a[2] = Number(a[2]);
+				if (a.length > 3) {
+					a[3] = Number(a[3]);
+				}
+			}
+			if (toHSL && !wasHSL) {
+				r = a[0] / 255;
+				g = a[1] / 255;
+				b = a[2] / 255;
+				max = Math.max(r, g, b);
+				min = Math.min(r, g, b);
+				l = (max + min) / 2;
+				if (max === min) {
+					h = s = 0;
+				} else {
+					d = max - min;
+					s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+					h = (max === r) ? (g - b) / d + (g < b ? 6 : 0) : (max === g) ? (b - r) / d + 2 : (r - g) / d + 4;
+					h *= 60;
+				}
+				a[0] = (h + 0.5) | 0;
+				a[1] = (s * 100 + 0.5) | 0;
+				a[2] = (l * 100 + 0.5) | 0;
+			}
+			return a;
+		},
+		_formatColors = function(s, toHSL) {
+			var colors = (s + "").match(_colorExp) || [],
+				charIndex = 0,
+				parsed = "",
+				i, color, temp;
+			if (!colors.length) {
+				return s;
+			}
+			for (i = 0; i < colors.length; i++) {
+				color = colors[i];
+				temp = s.substr(charIndex, s.indexOf(color, charIndex)-charIndex);
+				charIndex += temp.length + color.length;
+				color = _parseColor(color, toHSL);
+				if (color.length === 3) {
+					color.push(1);
+				}
+				parsed += temp + (toHSL ? "hsla(" + color[0] + "," + color[1] + "%," + color[2] + "%," + color[3] : "rgba(" + color.join(",")) + ")";
+			}
+			return parsed + s.substr(charIndex);
+		}, p, _colorStringFilter,
+		TweenLite = (_gsScope.GreenSockGlobals || _gsScope).TweenLite,
+		_colorExp = "(?:\\b(?:(?:rgb|rgba|hsl|hsla)\\(.+?\\))|\\B#(?:[0-9a-f]{3}){1,2}\\b", //we'll dynamically build this Regular Expression to conserve file size. After building it, it will be able to find rgb(), rgba(), # (hexadecimal), and named color values like red, blue, purple, etc.
+
+		ColorPropsPlugin = _gsScope._gsDefine.plugin({
+			propName: "colorProps",
+			version: "1.5.3",
+			priority: -1,
+			API: 2,
+			global: true,
+
+			//called when the tween renders for the first time. This is where initial values should be recorded and any setup routines should run.
+			init: function(target, value, tween, index) {
+				var p, proxy, pt, val;
+				this._target = target;
+				this._proxy = proxy = ((value.format + "").toUpperCase() === "NUMBER") ? {} : 0;
+				for (p in value) {
+					if (p !== "format") {
+						if (proxy) {
+							this._firstNumPT = pt = {_next:this._firstNumPT, t:target, p:p, f:(typeof(target[p]) === "function")};
+							proxy[p] = "rgb(" + _parseColor(!pt.f ? target[p] : target[ ((p.indexOf("set") || typeof(target["get" + p.substr(3)]) !== "function") ? p : "get" + p.substr(3)) ]()).join(",") + ")";
+							val = value[p];
+							if (typeof(val) === "function") {
+								val = val(index, target);
+							}
+							this._addTween(proxy, p, "get", ((typeof(val) === "number") ? "rgb(" + _parseColor(val, false).join(",") + ")" : val), p, null, null, _colorStringFilter);
+						} else {
+							this._addTween(target, p, "get", value[p], p, null, null, _colorStringFilter, index);
+						}
+
+					}
+				}
+				return true;
+			},
+
+			//called each time the values should be updated, and the ratio gets passed as the only parameter (typically it's a value between 0 and 1, but it can exceed those when using an ease like Elastic.easeOut or Back.easeOut, etc.)
+			set: function(v) {
+				var pt = this._firstNumPT,
+					val;
+				this._super.setRatio.call(this, v);
+				while (pt) {
+					val = _parseColor(this._proxy[pt.p], false);
+					val = val[0] << 16 | val[1] << 8 | val[2];
+					if (pt.f) {
+						this._target[pt.p](val);
+					} else {
+						this._target[pt.p] = val;
+					}
+					pt = pt._next;
+				}
+			}
+		});
+
+	for (p in _colorLookup) {
+		_colorExp += "|" + p + "\\b";
+	}
+	_colorExp = new RegExp(_colorExp+")", "gi");
+	ColorPropsPlugin.colorStringFilter = _colorStringFilter = function(a) {
+		var combined = a[0] + " " + a[1],
+			toHSL;
+		_colorExp.lastIndex = 0;
+		if (_colorExp.test(combined)) {
+			toHSL = (combined.indexOf("hsl(") !== -1 || combined.indexOf("hsla(") !== -1);
+			a[0] = _formatColors(a[0], toHSL);
+			a[1] = _formatColors(a[1], toHSL);
+		}
+	};
+
+	if (!TweenLite.defaultStringFilter) {
+		TweenLite.defaultStringFilter = ColorPropsPlugin.colorStringFilter;
+	}
+
+	ColorPropsPlugin.parseColor = _parseColor;
+	p = ColorPropsPlugin.prototype;
+	p._firstNumPT = null;
+	p._kill = function(lookup) {
+		var pt = this._firstNumPT,
+			prev;
+		while (pt) {
+			if (pt.p in lookup) {
+				if (pt === p._firstNumPT) {
+					this._firstNumPT = pt._next;
+				}
+				if (prev) {
+					prev._next = pt._next;
+				}
+			} else {
+				prev = pt;
+			}
+			pt = pt._next;
+		}
+		return this._super._kill(lookup);
+	};
+
+}); if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); }
+
+//export to AMD/RequireJS and CommonJS/Node (precursor to full modular build system coming at a later date)
+(function(name) {
+	"use strict";
+	var getGlobal = function() {
+		return (_gsScope.GreenSockGlobals || _gsScope)[name];
+	};
+	if (typeof(module) !== "undefined" && module.exports) { //node
+		require("../TweenLite.js");
+		module.exports = getGlobal();
+	} else if (typeof(define) === "function" && define.amd) { //AMD
+		define(["TweenLite"], getGlobal);
+	}
+}("ColorPropsPlugin"));
+/*!
+ * VERSION: 0.2.2
+ * DATE: 2018-02-15
+ * UPDATES AND DOCS AT: http://greensock.com
+ *
+ * @license Copyright (c) 2008-2018, GreenSock. All rights reserved.
+ * This work is subject to the terms at http://greensock.com/standard-license or for
+ * Club GreenSock members, the software agreement that was issued with your membership.
+ * 
+ * @author: Jack Doyle, jack@greensock.com
+ **/
+var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(global) !== "undefined") ? global : this || window; //helps ensure compatibility with AMD/RequireJS and CommonJS/Node
+(_gsScope._gsQueue || (_gsScope._gsQueue = [])).push( function() {
+
+	"use strict";
+
+	var _numExp = /(\d|\.)+/g,
+		_ColorFilter, _ColorMatrixFilter,
+		_colorProps = ["redMultiplier","greenMultiplier","blueMultiplier","alphaMultiplier","redOffset","greenOffset","blueOffset","alphaOffset"],
+		_colorLookup = {aqua:[0,255,255],
+			lime:[0,255,0],
+			silver:[192,192,192],
+			black:[0,0,0],
+			maroon:[128,0,0],
+			teal:[0,128,128],
+			blue:[0,0,255],
+			navy:[0,0,128],
+			white:[255,255,255],
+			fuchsia:[255,0,255],
+			olive:[128,128,0],
+			yellow:[255,255,0],
+			orange:[255,165,0],
+			gray:[128,128,128],
+			purple:[128,0,128],
+			green:[0,128,0],
+			red:[255,0,0],
+			pink:[255,192,203],
+			cyan:[0,255,255],
+			transparent:[255,255,255,0]},
+		_parseColor = function(color) {
+			if (color === "" || color == null || color === "none") {
+				return _colorLookup.transparent;
+			} else if (_colorLookup[color]) {
+				return _colorLookup[color];
+			} else if (typeof(color) === "number") {
+				return [color >> 16, (color >> 8) & 255, color & 255];
+			} else if (color.charAt(0) === "#") {
+				if (color.length === 4) { //for shorthand like #9F0
+					color = "#" + color.charAt(1) + color.charAt(1) + color.charAt(2) + color.charAt(2) + color.charAt(3) + color.charAt(3);
+				}
+				color = parseInt(color.substr(1), 16);
+				return [color >> 16, (color >> 8) & 255, color & 255];
+			}
+			return color.match(_numExp) || _colorLookup.transparent;
+		},
+		_parseColorFilter = function(t, v, pg) {
+			if (!_ColorFilter) {
+				_ColorFilter = (_gsScope.ColorFilter || _gsScope.createjs.ColorFilter);
+				if (!_ColorFilter) {
+					throw("EaselPlugin error: The EaselJS ColorFilter JavaScript file wasn't loaded.");
+				}
+			}
+			var filters = t.filters || [],
+				i = filters.length,
+				c, s, e, a, p;
+			while (--i > -1) {
+				if (filters[i] instanceof _ColorFilter) {
+					s = filters[i];
+					break;
+				}
+			}
+			if (!s) {
+				s = new _ColorFilter();
+				filters.push(s);
+				t.filters = filters;
+			}
+			e = s.clone();
+			if (v.tint != null) {
+				c = _parseColor(v.tint);
+				a = (v.tintAmount != null) ? Number(v.tintAmount) : 1;
+				e.redOffset = Number(c[0]) * a;
+				e.greenOffset = Number(c[1]) * a;
+				e.blueOffset = Number(c[2]) * a;
+				e.redMultiplier = e.greenMultiplier = e.blueMultiplier = 1 - a;
+			} else {
+				for (p in v) {
+					if (p !== "exposure") if (p !== "brightness") {
+						e[p] = Number(v[p]);
+					}
+				}
+			}
+			if (v.exposure != null) {
+				e.redOffset = e.greenOffset = e.blueOffset = 255 * (Number(v.exposure) - 1);
+				e.redMultiplier = e.greenMultiplier = e.blueMultiplier = 1;
+			} else if (v.brightness != null) {
+				a = Number(v.brightness) - 1;
+				e.redOffset = e.greenOffset = e.blueOffset = (a > 0) ? a * 255 : 0;
+				e.redMultiplier = e.greenMultiplier = e.blueMultiplier = 1 - Math.abs(a);
+			}
+			i = 8;
+			while (--i > -1) {
+				p = _colorProps[i];
+				if (s[p] !== e[p]) {
+					pg._addTween(s, p, s[p], e[p], "easel_colorFilter");
+				}
+			}
+			pg._overwriteProps.push("easel_colorFilter");
+			if (!t.cacheID) {
+				throw("EaselPlugin warning: for filters to display in EaselJS, you must call the object's cache() method first. " + t);
+			}
+		},
+
+		_idMatrix = [1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0],
+		_lumR = 0.212671,
+		_lumG = 0.715160,
+		_lumB = 0.072169,
+
+		_applyMatrix = function(m, m2) {
+			if (!(m instanceof Array) || !(m2 instanceof Array)) {
+				return m2;
+			}
+			var temp = [],
+				i = 0,
+				z = 0,
+				y, x;
+			for (y = 0; y < 4; y++) {
+				for (x = 0; x < 5; x++) {
+					z = (x === 4) ? m[i + 4] : 0;
+					temp[i + x] = m[i]   * m2[x] + m[i+1] * m2[x + 5] +	m[i+2] * m2[x + 10] + m[i+3] * m2[x + 15] +	z;
+				}
+				i += 5;
+			}
+			return temp;
+		},
+
+		_setSaturation = function(m, n) {
+			if (isNaN(n)) {
+				return m;
+			}
+			var inv = 1 - n,
+				r = inv * _lumR,
+				g = inv * _lumG,
+				b = inv * _lumB;
+			return _applyMatrix([r + n, g, b, 0, 0, r, g + n, b, 0, 0, r, g, b + n, 0, 0, 0, 0, 0, 1, 0], m);
+		},
+
+		_colorize = function(m, color, amount) {
+			if (isNaN(amount)) {
+				amount = 1;
+			}
+			var c = _parseColor(color),
+				r = c[0] / 255,
+				g = c[1] / 255,
+				b = c[2] / 255,
+				inv = 1 - amount;
+			return _applyMatrix([inv + amount * r * _lumR, amount * r * _lumG, amount * r * _lumB, 0, 0, amount * g * _lumR, inv + amount * g * _lumG, amount * g * _lumB, 0, 0, amount * b * _lumR, amount * b * _lumG, inv + amount * b * _lumB, 0, 0, 0, 0, 0, 1, 0], m);
+		},
+
+		_setHue = function(m, n) {
+			if (isNaN(n)) {
+				return m;
+			}
+			n *= Math.PI / 180;
+			var c = Math.cos(n),
+				s = Math.sin(n);
+			return _applyMatrix([(_lumR + (c * (1 - _lumR))) + (s * (-_lumR)), (_lumG + (c * (-_lumG))) + (s * (-_lumG)), (_lumB + (c * (-_lumB))) + (s * (1 - _lumB)), 0, 0, (_lumR + (c * (-_lumR))) + (s * 0.143), (_lumG + (c * (1 - _lumG))) + (s * 0.14), (_lumB + (c * (-_lumB))) + (s * -0.283), 0, 0, (_lumR + (c * (-_lumR))) + (s * (-(1 - _lumR))), (_lumG + (c * (-_lumG))) + (s * _lumG), (_lumB + (c * (1 - _lumB))) + (s * _lumB), 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1], m);
+		},
+
+		_setContrast = function(m, n) {
+			if (isNaN(n)) {
+				return m;
+			}
+			n += 0.01;
+			return _applyMatrix([n,0,0,0,128 * (1 - n), 0,n,0,0,128 * (1 - n), 0,0,n,0,128 * (1 - n), 0,0,0,1,0], m);
+		},
+
+		_parseColorMatrixFilter = function(t, v, pg) {
+			if (!_ColorMatrixFilter) {
+				_ColorMatrixFilter = (_gsScope.ColorMatrixFilter || _gsScope.createjs.ColorMatrixFilter);
+				if (!_ColorMatrixFilter) {
+					throw("EaselPlugin error: The EaselJS ColorMatrixFilter JavaScript file wasn't loaded.");
+				}
+			}
+			var filters = t.filters || [],
+				i = filters.length,
+				matrix, startMatrix, s;
+			while (--i > -1) {
+				if (filters[i] instanceof _ColorMatrixFilter) {
+					s = filters[i];
+					break;
+				}
+			}
+			if (!s) {
+				s = new _ColorMatrixFilter(_idMatrix.slice());
+				filters.push(s);
+				t.filters = filters;
+			}
+			startMatrix = s.matrix;
+			matrix = _idMatrix.slice();
+			if (v.colorize != null) {
+				matrix = _colorize(matrix, v.colorize, Number(v.colorizeAmount));
+			}
+			if (v.contrast != null) {
+				matrix = _setContrast(matrix, Number(v.contrast));
+			}
+			if (v.hue != null) {
+				matrix = _setHue(matrix, Number(v.hue));
+			}
+			if (v.saturation != null) {
+				matrix = _setSaturation(matrix, Number(v.saturation));
+			}
+
+			i = matrix.length;
+			while (--i > -1) {
+				if (matrix[i] !== startMatrix[i]) {
+					pg._addTween(startMatrix, i, startMatrix[i], matrix[i], "easel_colorMatrixFilter");
+				}
+			}
+
+			pg._overwriteProps.push("easel_colorMatrixFilter");
+			if (!t.cacheID) {
+				throw("EaselPlugin warning: for filters to display in EaselJS, you must call the object's cache() method first. " + t);
+			}
+
+			pg._matrix = startMatrix;
+		};
+
+
+	_gsScope._gsDefine.plugin({
+		propName: "easel",
+		priority: -1,
+		version: "0.2.2",
+		API: 2,
+
+		//called when the tween renders for the first time. This is where initial values should be recorded and any setup routines should run.
+		init: function(target, value, tween, index) {
+			this._target = target;
+			var p, pt, tint, colorMatrix, end, labels, i;
+			for (p in value) {
+
+				end = value[p];
+				if (typeof(end) === "function") {
+					end = end(index, target);
+				}
+				if (p === "colorFilter" || p === "tint" || p === "tintAmount" || p === "exposure" || p === "brightness") {
+					if (!tint) {
+						_parseColorFilter(target, value.colorFilter || value, this);
+						tint = true;
+					}
+
+				} else if (p === "saturation" || p === "contrast" || p === "hue" || p === "colorize" || p === "colorizeAmount") {
+					if (!colorMatrix) {
+						_parseColorMatrixFilter(target, value.colorMatrixFilter || value, this);
+						colorMatrix = true;
+					}
+
+				} else if (p === "frame") {
+					this._firstPT = pt = {_next:this._firstPT, t:target, p:"gotoAndStop", s:target.currentFrame, f:true, n:"frame", pr:0, type:0, m:Math.round};
+					if (typeof(end) === "string" && end.charAt(1) !== "=" && (labels = target.labels)) {
+						for (i = 0; i < labels.length; i++) {
+							if (labels[i].label === end) {
+								end = labels[i].position;
+							}
+						}
+					}
+					pt.c = (typeof(end) === "number") ? end - pt.s : parseFloat((end+"").split("=").join(""));
+					if (pt._next) {
+						pt._next._prev = pt;
+					}
+
+				} else if (target[p] != null) {
+					this._firstPT = pt = {_next:this._firstPT, t:target, p:p, f:(typeof(target[p]) === "function"), n:p, pr:0, type:0};
+					pt.s = (!pt.f) ? parseFloat(target[p]) : target[ ((p.indexOf("set") || typeof(target["get" + p.substr(3)]) !== "function") ? p : "get" + p.substr(3)) ]();
+					pt.c = (typeof(end) === "number") ? end - pt.s : (typeof(end) === "string") ? parseFloat(end.split("=").join("")) : 0;
+
+					if (pt._next) {
+						pt._next._prev = pt;
+					}
+				}
+
+			}
+			return true;
+		},
+
+		//called each time the values should be updated, and the ratio gets passed as the only parameter (typically it's a value between 0 and 1, but it can exceed those when using an ease like Elastic.easeOut or Back.easeOut, etc.)
+		set: function(v) {
+			var pt = this._firstPT,
+				min = 0.000001,
+				val;
+			while (pt) {
+				val = pt.c * v + pt.s;
+				if (pt.m) {
+					val = pt.m(val, pt.t);
+				} else if (val < min && val > -min) {
+					val = 0;
+				}
+				if (pt.f) {
+					pt.t[pt.p](val);
+				} else {
+					pt.t[pt.p] = val;
+				}
+				pt = pt._next;
+			}
+			if (this._target.cacheID) {
+				this._target.updateCache();
+			}
+		}
+
+	});
+
+}); if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); }
+//export to AMD/RequireJS and CommonJS/Node (precursor to full modular build system coming at a later date)
+(function(name) {
+	"use strict";
+	var getGlobal = function() {
+		return (_gsScope.GreenSockGlobals || _gsScope)[name];
+	};
+	if (typeof(module) !== "undefined" && module.exports) { //node
+		require("../TweenLite.js");
+		module.exports = getGlobal();
+	} else if (typeof(define) === "function" && define.amd) { //AMD
+		define(["TweenLite"], getGlobal);
+	}
+}("EaselPlugin"));
+/*!
+ * VERSION: 0.1.3
+ * DATE: 2018-02-15
+ * UPDATES AND DOCS AT: http://greensock.com
+ *
+ * @license Copyright (c) 2008-2018, GreenSock. All rights reserved.
+ * This work is subject to the terms at http://greensock.com/standard-license or for
+ * Club GreenSock members, the software agreement that was issued with your membership.
+ * 
+ * @author: Jack Doyle, jack@greensock.com
+ */
+var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(global) !== "undefined") ? global : this || window; //helps ensure compatibility with AMD/RequireJS and CommonJS/Node
+(_gsScope._gsQueue || (_gsScope._gsQueue = [])).push( function() {
+	
+	"use strict";
+
+	_gsScope._gsDefine.plugin({
+		propName: "endArray",
+		API: 2,
+		version: "0.1.3",
+
+		//called when the tween renders for the first time. This is where initial values should be recorded and any setup routines should run.
+		init: function(target, value, tween) {
+			var i = value.length,
+				a = this.a = [],
+				start, end;
+			this.target = target;
+			this._mod = 0;
+			if (!i) {
+				return false;
+			}
+			while (--i > -1) {
+				start = target[i];
+				end = value[i];
+				if (start !== end) {
+					a.push({i:i, s:start, c:end - start});
+				}
+			}
+			return true;
+		},
+
+		mod: function(lookup) {
+			if (typeof(lookup.endArray) === "function") {
+				this._mod = lookup.endArray;
+			}
+		},
+
+		//called each time the values should be updated, and the ratio gets passed as the only parameter (typically it's a value between 0 and 1, but it can exceed those when using an ease like Elastic.easeOut or Back.easeOut, etc.)
+		set: function(ratio) {
+			var target = this.target,
+				a = this.a,
+				i = a.length,
+				mod = this._mod,
+				e, val;
+			if (mod) {
+				while (--i > -1) {
+					e = a[i];
+					target[e.i] = mod(e.s + e.c * ratio, target);
+				}
+			} else {
+				while (--i > -1) {
+					e = a[i];
+					val = e.s + e.c * ratio;
+					target[e.i] = (val < 0.000001 && val > -0.000001) ? 0 : val;
+				}
+			}
+		}
+
+	});
+
+}); if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); }
+/*!
+ * VERSION: 0.0.3
+ * DATE: 2018-02-15
+ * UPDATES AND DOCS AT: http://greensock.com
+ *
+ * @license Copyright (c) 2008-2018, GreenSock. All rights reserved.
+ * This work is subject to the terms at http://greensock.com/standard-license or for
+ * Club GreenSock members, the software agreement that was issued with your membership.
+ * 
+ * @author: Jack Doyle, jack@greensock.com
+ */
+var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(global) !== "undefined") ? global : this || window; //helps ensure compatibility with AMD/RequireJS and CommonJS/Node
+(_gsScope._gsQueue || (_gsScope._gsQueue = [])).push( function() {
+	
+	"use strict";
+
+		var _cssRatioSetter = function(pt, cssp, mod) { //Takes an individual CSSPropTween and converts it into a type:2 that has a setRatio that does everything the regular CSSPlugin.setRatio() method does but applying the mod() too. We do this to keep the main CSSPlugin.setRatio() as fast as possible (the vast majority of times, no mod() will be necessary)
+				var type = pt.type,
+					oldSetRatio = pt.setRatio,
+					tween = cssp._tween,
+					target = cssp._target;
+				pt.type = 2;
+				pt.m = mod;
+				pt.setRatio = function(v) {
+					var min = 0.000001,
+						val, str, i;
+					if (v === 1 && (tween._time === tween._duration || tween._time === 0)) {
+
+						if (type !== 2) {
+							if (pt.r && type !== -1) {
+								val = Math.round(pt.s + pt.c);
+								if (!type) {
+									pt.t[pt.p] = mod(val + pt.xs0, target);
+								} else if (type === 1) {
+									str = pt.xs0 + val + pt.xs1;
+									for (i = 1; i < pt.l; i++) {
+										str += pt["xn"+i] + pt["xs"+(i+1)];
+									}
+									pt.t[pt.p] = mod(str, target);
+								}
+							} else {
+								pt.t[pt.p] = mod(pt.e, target);
+							}
+						} else {
+							oldSetRatio.call(pt, v);
+						}
+
+					} else if (v || !(tween._time === tween._duration || tween._time === 0) || tween._rawPrevTime === -0.000001) {
+						val = pt.c * v + pt.s;
+						if (pt.r) {
+							val = Math.round(val);
+						} else if (val < min) if (val > -min) {
+							val = 0;
+						}
+						if (!type) {
+							pt.t[pt.p] = mod(val + pt.xs0, target);
+						} else if (type === 1) {
+							str = pt.xs0 + val + pt.xs1;
+							for (i = 1; i < pt.l; i++) {
+								str += pt["xn"+i] + pt["xs"+(i+1)];
+							}
+							pt.t[pt.p] = mod(str, target);
+
+						} else if (type === -1) { //non-tweening value
+							pt.t[pt.p] = mod(pt.xs0, target);
+
+						} else if (oldSetRatio) {
+							oldSetRatio.call(pt, v);
+						}
+
+					} else {
+						if (type !== 2) {
+							pt.t[pt.p] = mod(pt.b, target);
+						} else {
+							oldSetRatio.call(pt, v);
+						}
+					}
+				};
+			},
+			_modCSS = function(lookup, cssp) {
+				var pt = cssp._firstPT,
+					hasBezier = (lookup.rotation && cssp._overwriteProps.join("").indexOf("bezier") !== -1); //when a Bezier tween is applying autoRotation, it's a very special case we need to handle differently.
+				while (pt) {
+					if (typeof(lookup[pt.p]) === "function") {
+						_cssRatioSetter(pt, cssp, lookup[pt.p]);
+					} else if (hasBezier && pt.n === "bezier" && pt.plugin._overwriteProps.join("").indexOf("rotation") !== -1) {
+						pt.data.mod = lookup.rotation;
+					}
+					pt = pt._next;
+				}
+			},
+
+			ModifiersPlugin = _gsScope._gsDefine.plugin({
+				propName: "modifiers",
+				version: "0.0.3",
+				API: 2,
+
+				//called when the tween renders for the first time. This is where initial values should be recorded and any setup routines should run.
+				init: function(target, value, tween) {
+					this._tween = tween;
+					this._vars = value;
+					return true;
+				},
+
+				initAll: function() {
+					var tween = this._tween,
+						lookup = this._vars,
+						mpt = this,
+						pt = tween._firstPT,
+						val, next;
+					while (pt) {
+						next = pt._next; //record here, because it may get removed
+						val = lookup[pt.n];
+						if (pt.pg) {
+							if (pt.t._propName === "css") { //handle CSSPlugin uniquely (for performance, due to the fact that the values almost always are a concatenation of numbers and strings, like suffixes, and we don't want to slow down the regular CSSPlugin setRatio() performance with conditional checks for if the value needs to be modded, so we pull any modding prop out and change it to a type:2 one that simply calls a setRatio() method where we encapsulate the modding and update all together. That way, it says in the main CSSProp linked list and just has some custom logic applied to it inside its setRatio())
+								_modCSS(lookup, pt.t);
+							} else if (pt.t !== mpt) { //don't run modProps on modProps :)
+								val = lookup[pt.t._propName];
+								pt.t._mod((typeof(val) === "object") ? val : lookup);
+							}
+						} else if (typeof(val) === "function") {
+							if (pt.f === 2 && pt.t) { //a blob (text containing multiple numeric values)
+								pt.t._applyPT.m = val;
+							} else {
+								this._add(pt.t, pt.p, pt.s, pt.c, val);
+								//remove from linked list
+								if (next) {
+									next._prev = pt._prev;
+								}
+								if (pt._prev) {
+									pt._prev._next = next;
+								} else if (tween._firstPT === pt) {
+									tween._firstPT = next;
+								}
+								pt._next = pt._prev = null;
+								tween._propLookup[pt.n] = mpt;
+							}
+						}
+						pt = next;
+					}
+					return false;
+				}
+
+			}),
+			p = ModifiersPlugin.prototype;
+
+		p._add = function(target, p, s, c, mod) {
+			this._addTween(target, p, s, s + c, p, mod);
+			this._overwriteProps.push(p);
+		};
+
+	p = _gsScope._gsDefine.globals.TweenLite.version.split(".");
+	if (Number(p[0]) <= 1 && Number(p[1]) < 19 && _gsScope.console) {
+		console.log("ModifiersPlugin requires GSAP 1.19.0 or later.");
+	}
+
+
+}); if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); }
+
+//export to AMD/RequireJS and CommonJS/Node (precursor to full modular build system coming at a later date)
+(function(name) {
+	"use strict";
+	var getGlobal = function() {
+		return (_gsScope.GreenSockGlobals || _gsScope)[name];
+	};
+	if (typeof(module) !== "undefined" && module.exports) { //node
+		require("../TweenLite.js");
+		module.exports = getGlobal();
+	} else if (typeof(define) === "function" && define.amd) { //AMD
+		define(["TweenLite"], getGlobal);
+	}
+}("ModifiersPlugin"));
+/*!
+ * VERSION: 0.2.1
+ * DATE: 2018-02-15
+ * UPDATES AND DOCS AT: http://greensock.com
+ *
+ * @license Copyright (c) 2008-2018, GreenSock. All rights reserved.
+ * PixiPlugin is subject to the terms at http://greensock.com/standard-license or for
+ * Club GreenSock members, the software agreement that was issued with your membership.
+ *
+ * @author: Jack Doyle, jack@greensock.com
+ */
+var _gsScope = (typeof module !== "undefined" && module.exports && typeof global !== "undefined") ? global : this || window;
+(_gsScope._gsQueue || (_gsScope._gsQueue = [])).push(function () {
+    "use strict";
+
+    var _numExp = /(\d|\.)+/g,
+		_relNumExp = /(?:\d|\-\d|\.\d|\-\.\d|\+=\d|\-=\d|\+=.\d|\-=\.\d)+/g,
+		_colorLookup = {aqua:[0,255,255],
+			lime:[0,255,0],
+			silver:[192,192,192],
+			black:[0,0,0],
+			maroon:[128,0,0],
+			teal:[0,128,128],
+			blue:[0,0,255],
+			navy:[0,0,128],
+			white:[255,255,255],
+			fuchsia:[255,0,255],
+			olive:[128,128,0],
+			yellow:[255,255,0],
+			orange:[255,165,0],
+			gray:[128,128,128],
+			purple:[128,0,128],
+			green:[0,128,0],
+			red:[255,0,0],
+			pink:[255,192,203],
+			cyan:[0,255,255],
+			transparent:[255,255,255,0]},
+		_hue = function(h, m1, m2) {
+			h = (h < 0) ? h + 1 : (h > 1) ? h - 1 : h;
+			return ((((h * 6 < 1) ? m1 + (m2 - m1) * h * 6 : (h < 0.5) ? m2 : (h * 3 < 2) ? m1 + (m2 - m1) * (2 / 3 - h) * 6 : m1) * 255) + 0.5) | 0;
+		},
+		/**
+		 * @private Parses a color (like #9F0, #FF9900, rgb(255,51,153) or hsl(108, 50%, 10%)) into an array with 3 elements for red, green, and blue or if "format" parameter is "hsl", it will populate the array with hue, saturation, and lightness values. Or if "format" is "number", it'll return a number like 0xFF0000 instead of an array. If a relative value is found in an hsl() or hsla() string, it will preserve those relative prefixes and all the values in the array will be strings instead of numbers (in all other cases it will be populated with numbers).
+		 * @param {(string|number)} v The value the should be parsed which could be a string like #9F0 or rgb(255,102,51) or rgba(255,0,0,0.5) or it could be a number like 0xFF00CC or even a named color like red, blue, purple, etc.
+		 * @param {(string)} format If "hsl", an hsl() or hsla() value will be returned instead of rgb() or rgba(). Or if "number", then a numeric value will be returned, like 0xFF0000. Default is rgb.
+		 * @return {(array|number)} An array containing red, green, and blue (and optionally alpha) in that order, or if the format parameter was "hsl", the array will contain hue, saturation and lightness (and optionally alpha) in that order. Or if "format" is defined as "number", it'll return a number like 0xFF0000. Always numbers unless there's a relative prefix found in an hsl() or hsla() string and "format" is "hsl".
+		 */
+		_parseColor = function(v, format) {
+			var toHSL = (format === "hsl"),
+				a, r, g, b, h, s, l, max, min, d, wasHSL;
+			if (!v) {
+				a = _colorLookup.black;
+			} else if (typeof(v) === "number") {
+				a = [v >> 16, (v >> 8) & 255, v & 255];
+			} else {
+				if (v.charAt(v.length - 1) === ",") { //sometimes a trailing comma is included and we should chop it off (typically from a comma-delimited list of values like a textShadow:"2px 2px 2px blue, 5px 5px 5px rgb(255,0,0)" - in this example "blue," has a trailing comma. We could strip it out inside parseComplex() but we'd need to do it to the beginning and ending values plus it wouldn't provide protection from other potential scenarios like if the user passes in a similar value.
+					v = v.substr(0, v.length - 1);
+				}
+				if (_colorLookup[v]) {
+					a = _colorLookup[v];
+				} else if (v.charAt(0) === "#") {
+					if (v.length === 4) { //for shorthand like #9F0
+						r = v.charAt(1);
+						g = v.charAt(2);
+						b = v.charAt(3);
+						v = "#" + r + r + g + g + b + b;
+					}
+					v = parseInt(v.substr(1), 16);
+					a = [v >> 16, (v >> 8) & 255, v & 255];
+				} else if (v.substr(0, 3) === "hsl") {
+					a = wasHSL = v.match(_numExp);
+					if (!toHSL) {
+						h = (Number(a[0]) % 360) / 360;
+						s = Number(a[1]) / 100;
+						l = Number(a[2]) / 100;
+						g = (l <= 0.5) ? l * (s + 1) : l + s - l * s;
+						r = l * 2 - g;
+						if (a.length > 3) {
+							a[3] = Number(v[3]);
+						}
+						a[0] = _hue(h + 1 / 3, r, g);
+						a[1] = _hue(h, r, g);
+						a[2] = _hue(h - 1 / 3, r, g);
+					} else if (v.indexOf("=") !== -1) { //if relative values are found, just return the raw strings with the relative prefixes in place.
+						return v.match(_relNumExp);
+					}
+				} else {
+					a = v.match(_numExp) || _colorLookup.transparent;
+				}
+				a[0] = Number(a[0]);
+				a[1] = Number(a[1]);
+				a[2] = Number(a[2]);
+				if (a.length > 3) {
+					a[3] = Number(a[3]);
+				}
+			}
+			if (toHSL && !wasHSL) {
+				r = a[0] / 255;
+				g = a[1] / 255;
+				b = a[2] / 255;
+				max = Math.max(r, g, b);
+				min = Math.min(r, g, b);
+				l = (max + min) / 2;
+				if (max === min) {
+					h = s = 0;
+				} else {
+					d = max - min;
+					s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+					h = (max === r) ? (g - b) / d + (g < b ? 6 : 0) : (max === g) ? (b - r) / d + 2 : (r - g) / d + 4;
+					h *= 60;
+				}
+				a[0] = (h + 0.5) | 0;
+				a[1] = (s * 100 + 0.5) | 0;
+				a[2] = (l * 100 + 0.5) | 0;
+			}
+			return (format === "number") ? (a[0] << 16 | a[1] << 8 | a[2]) : a;
+		},
+		_formatColors = function(s, toHSL) {
+			var colors = (s + "").match(_colorExp) || [],
+				charIndex = 0,
+				parsed = "",
+				i, color, temp;
+			if (!colors.length) {
+				return s;
+			}
+			for (i = 0; i < colors.length; i++) {
+				color = colors[i];
+				temp = s.substr(charIndex, s.indexOf(color, charIndex)-charIndex);
+				charIndex += temp.length + color.length;
+				color = _parseColor(color, (toHSL ? "hsl" : "rgb"));
+				if (color.length === 3) {
+					color.push(1);
+				}
+				parsed += temp + (toHSL ? "hsla(" + color[0] + "," + color[1] + "%," + color[2] + "%," + color[3] : "rgba(" + color.join(",")) + ")";
+			}
+			return parsed + s.substr(charIndex);
+		}, _colorStringFilter,
+		TweenLite = (_gsScope.GreenSockGlobals || _gsScope).TweenLite,
+		_colorExp = "(?:\\b(?:(?:rgb|rgba|hsl|hsla)\\(.+?\\))|\\B#(?:[0-9a-f]{3}){1,2}\\b", //we'll dynamically build this Regular Expression to conserve file size. After building it, it will be able to find rgb(), rgba(), # (hexadecimal), and named color values like red, blue, purple, etc.
+
+		_idMatrix = [1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0],
+		_lumR = 0.212671,
+		_lumG = 0.715160,
+		_lumB = 0.072169,
+
+		_applyMatrix = function(m, m2) {
+			var temp = [],
+				i = 0,
+				z = 0,
+				y, x;
+			for (y = 0; y < 4; y++) {
+				for (x = 0; x < 5; x++) {
+					z = (x === 4) ? m[i + 4] : 0;
+					temp[i + x] = m[i]   * m2[x] + m[i+1] * m2[x + 5] +	m[i+2] * m2[x + 10] + m[i+3] * m2[x + 15] +	z;
+				}
+				i += 5;
+			}
+			return temp;
+		},
+
+		_setSaturation = function(m, n) {
+			var inv = 1 - n,
+				r = inv * _lumR,
+				g = inv * _lumG,
+				b = inv * _lumB;
+			return _applyMatrix([r + n, g, b, 0, 0, r, g + n, b, 0, 0, r, g, b + n, 0, 0, 0, 0, 0, 1, 0], m);
+		},
+
+		_colorize = function(m, color, amount) {
+			var c = _parseColor(color),
+				r = c[0] / 255,
+				g = c[1] / 255,
+				b = c[2] / 255,
+				inv = 1 - amount;
+			return _applyMatrix([inv + amount * r * _lumR, amount * r * _lumG, amount * r * _lumB, 0, 0, amount * g * _lumR, inv + amount * g * _lumG, amount * g * _lumB, 0, 0, amount * b * _lumR, amount * b * _lumG, inv + amount * b * _lumB, 0, 0, 0, 0, 0, 1, 0], m);
+		},
+
+		_setHue = function(m, n) {
+			n *= Math.PI / 180;
+			var c = Math.cos(n),
+				s = Math.sin(n);
+			return _applyMatrix([(_lumR + (c * (1 - _lumR))) + (s * (-_lumR)), (_lumG + (c * (-_lumG))) + (s * (-_lumG)), (_lumB + (c * (-_lumB))) + (s * (1 - _lumB)), 0, 0, (_lumR + (c * (-_lumR))) + (s * 0.143), (_lumG + (c * (1 - _lumG))) + (s * 0.14), (_lumB + (c * (-_lumB))) + (s * -0.283), 0, 0, (_lumR + (c * (-_lumR))) + (s * (-(1 - _lumR))), (_lumG + (c * (-_lumG))) + (s * _lumG), (_lumB + (c * (1 - _lumB))) + (s * _lumB), 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1], m);
+		},
+
+		_setContrast = function(m, n) {
+			return _applyMatrix([n,0,0,0,0.5 * (1 - n), 0,n,0,0,0.5 * (1 - n), 0,0,n,0,0.5 * (1 - n), 0,0,0,1,0], m);
+		},
+
+		_getFilter = function(t, type) {
+			var filterClass = _gsScope.PIXI.filters[type],
+				filters = t.filters || [],
+				i = filters.length,
+				filter;
+			if (!filterClass) {
+				throw("PixiPlugin error: " + type + " isn't present.");
+			}
+			while (--i > -1) {
+				if (filters[i] instanceof filterClass) {
+					return filters[i];
+				}
+			}
+			filter = new filterClass();
+			if (type === "BlurFilter") {
+				filter.blur = 0;
+			}
+			filters.push(filter);
+			t.filters = filters;
+			return filter;
+		},
+
+		_addColorMatrixFilterCacheTween = function(p, pg, cache, vars) { //we cache the ColorMatrixFilter components in a _gsColorMatrixFilter object attached to the target object so that it's easy to grab the current value at any time.
+			pg._addTween(cache, p, cache[p], vars[p], p);
+			pg._overwriteProps.push(p);
+		},
+
+		_applyBrightnessToMatrix = function(brightness, matrix) {
+			var temp = new _gsScope.PIXI.filters.ColorMatrixFilter();
+			temp.matrix = matrix;
+			temp.brightness(brightness, true);
+			return temp.matrix;
+		},
+
+		_CMFdefaults = {contrast:1, saturation:1, colorizeAmount:0, colorize:"rgb(255,255,255)", hue:0, brightness:1},
+
+		_parseColorMatrixFilter = function(t, v, pg) {
+			var filter = _getFilter(t, "ColorMatrixFilter"),
+				cache = t._gsColorMatrixFilter = t._gsColorMatrixFilter || {contrast:1, saturation:1, colorizeAmount:0, colorize:"rgb(255,255,255)", hue:0, brightness:1},
+				combine = v.combineCMF && !("colorMatrixFilter" in v && !v.colorMatrixFilter),
+				i, matrix, startMatrix;
+			startMatrix = filter.matrix;
+			if (v.resolution) {
+				filter.resolution = v.resolution;
+			}
+			if (v.matrix && v.matrix.length === startMatrix.length) {
+				matrix = v.matrix;
+				if (cache.contrast !== 1) {
+					_addColorMatrixFilterCacheTween("contrast", pg, cache, _CMFdefaults);
+				}
+				if (cache.hue) {
+					_addColorMatrixFilterCacheTween("hue", pg, cache, _CMFdefaults);
+				}
+				if (cache.brightness !== 1) {
+					_addColorMatrixFilterCacheTween("brightness", pg, cache, _CMFdefaults);
+				}
+				if (cache.colorizeAmount) {
+					_addColorMatrixFilterCacheTween("colorize", pg, cache, _CMFdefaults);
+					_addColorMatrixFilterCacheTween("colorizeAmount", pg, cache, _CMFdefaults);
+				}
+				if (cache.saturation !== 1) {
+					_addColorMatrixFilterCacheTween("saturation", pg, cache, _CMFdefaults);
+				}
+
+			} else {
+				matrix = _idMatrix.slice();
+				if (v.contrast != null) {
+					matrix = _setContrast(matrix, Number(v.contrast));
+					_addColorMatrixFilterCacheTween("contrast", pg, cache, v);
+				} else if (cache.contrast !== 1) {
+					if (combine) {
+						matrix = _setContrast(matrix, cache.contrast);
+					} else {
+						_addColorMatrixFilterCacheTween("contrast", pg, cache, _CMFdefaults);
+					}
+				}
+				if (v.hue != null) {
+					matrix = _setHue(matrix, Number(v.hue));
+					_addColorMatrixFilterCacheTween("hue", pg, cache, v);
+				} else if (cache.hue) {
+					if (combine) {
+						matrix = _setHue(matrix, cache.hue);
+					} else {
+						_addColorMatrixFilterCacheTween("hue", pg, cache, _CMFdefaults);
+					}
+				}
+				if (v.brightness != null) {
+					matrix = _applyBrightnessToMatrix(Number(v.brightness), matrix);
+					_addColorMatrixFilterCacheTween("brightness", pg, cache, v);
+				} else if (cache.brightness !== 1) {
+					if (combine) {
+						matrix = _applyBrightnessToMatrix(cache.brightness, matrix);
+					} else {
+						_addColorMatrixFilterCacheTween("brightness", pg, cache, _CMFdefaults);
+					}
+				}
+				if (v.colorize != null) {
+					v.colorizeAmount = ("colorizeAmount" in v) ? Number(v.colorizeAmount) : 1;
+					matrix = _colorize(matrix, v.colorize, v.colorizeAmount);
+					_addColorMatrixFilterCacheTween("colorize", pg, cache, v);
+					_addColorMatrixFilterCacheTween("colorizeAmount", pg, cache, v);
+				} else if (cache.colorizeAmount) {
+					if (combine) {
+						matrix = _colorize(matrix, cache.colorize, cache.colorizeAmount);
+					} else {
+						_addColorMatrixFilterCacheTween("colorize", pg, cache, _CMFdefaults);
+						_addColorMatrixFilterCacheTween("colorizeAmount", pg, cache, _CMFdefaults);
+					}
+				}
+				if (v.saturation != null) {
+					matrix = _setSaturation(matrix, Number(v.saturation));
+					_addColorMatrixFilterCacheTween("saturation", pg, cache, v);
+				} else if (cache.saturation !== 1) {
+					if (combine) {
+						matrix = _setSaturation(matrix, cache.saturation);
+					} else {
+						_addColorMatrixFilterCacheTween("saturation", pg, cache, _CMFdefaults);
+					}
+				}
+			}
+			i = matrix.length;
+			while (--i > -1) {
+				if (matrix[i] !== startMatrix[i]) {
+					pg._addTween(startMatrix, i, startMatrix[i], matrix[i], "colorMatrixFilter");
+				}
+			}
+			pg._overwriteProps.push("colorMatrixFilter");
+		},
+
+		_addColorTween = function(target, p, value, colorSetter, plugin) {
+			var pt = colorSetter._firstPT = {_next:colorSetter._firstPT, t:target, p:p, proxy:{}, f:(typeof(target[p]) === "function")};
+			pt.proxy[p] = "rgb(" + _parseColor(!pt.f ? target[p] : target[ ((p.indexOf("set") || typeof(target["get" + p.substr(3)]) !== "function") ? p : "get" + p.substr(3)) ]()).join(",") + ")";
+			plugin._addTween(pt.proxy, p, "get", ((typeof(value) === "number") ? "rgb(" + _parseColor(value, false).join(",") + ")" : value), p, null, null, _colorStringFilter);
+		},
+
+		//to improve performance, when a color is sensed, we hijack the setRatio() method of the plugin instance with a new function that this method spits back. This is a special method that handles parsing color values on-the-fly and turns them into numeric values which PixiJS requires. In other words, instead of "rgb(255, 0, 0)", PixiJS wants 0xFF0000. This also works with hsl() values.
+		_buildColorSetter = function(tween, plugin) {
+			var setRatio = plugin.setRatio, //save the original (super) setRatio() function
+				func = function(v) {
+					var pt = func._firstPT,
+						val;
+					setRatio.call(plugin, v);
+					while (pt) {
+						val = _parseColor(pt.proxy[pt.p], "number");
+						if (pt.f) {
+							pt.t[pt.p](val);
+						} else {
+							pt.t[pt.p] = val;
+						}
+						pt = pt._next;
+					}
+					if (func.graphics) { //in order for PixiJS to actually redraw GraphicsData, we've gotta increment the "dirty" and "clearDirty" values. If we don't do this, the values will be tween properly, but not rendered.
+						func.graphics.dirty++;
+						func.graphics.clearDirty++;
+					}
+				};
+			plugin.setRatio = func;
+			return func;
+		},
+
+
+		_colorProps = {tint:1, lineColor:1, fillColor:1},
+		_xyContexts = "position,scale,skew,pivot,anchor,tilePosition,tileScale".split(","),
+		_contexts = {x:"position", y:"position", tileX:"tilePosition", tileY:"tilePosition"},
+		_colorMatrixFilterProps = {colorMatrixFilter:1, saturation:1, contrast:1, hue:1, colorize:1, colorizeAmount:1, brightness:1, combineCMF:1},
+		_DEG2RAD = Math.PI / 180,
+        _degreesToRadians = function(value) {
+			return (typeof(value) === "string" && value.charAt(1) === "=") ? value.substr(0, 2) + (parseFloat(value.substr(2)) * _DEG2RAD) : value * _DEG2RAD;
+        }, i, p;
+
+	//context setup...
+	for (i = 0; i < _xyContexts.length; i++) {
+		p = _xyContexts[i];
+		_contexts[p + "X"] = p;
+		_contexts[p + "Y"] = p;
+    }
+
+    //color parsing setup...
+	for (p in _colorLookup) {
+		_colorExp += "|" + p + "\\b";
+	}
+	_colorExp = new RegExp(_colorExp+")", "gi");
+	_colorStringFilter = function(a) {
+		var combined = a[0] + " " + a[1],
+			toHSL;
+		_colorExp.lastIndex = 0;
+		if (_colorExp.test(combined)) {
+			toHSL = (combined.indexOf("hsl(") !== -1 || combined.indexOf("hsla(") !== -1);
+			a[0] = _formatColors(a[0], toHSL);
+			a[1] = _formatColors(a[1], toHSL);
+		}
+	};
+
+	if (!TweenLite.defaultStringFilter) {
+		TweenLite.defaultStringFilter = _colorStringFilter;
+	}
+
+    var PixiPlugin = _gsScope._gsDefine.plugin({
+        propName: "pixi",
+        priority: 0,
+        API: 2,
+		global: true,
+        version: "0.2.1",
+
+        init: function (target, values, tween, index) {
+            if (!target instanceof _gsScope.PIXI.DisplayObject) {
+                return false;
+            }
+            var context, axis, value, colorMatrix, filter, p, padding, colorSetter, i, data, pt;
+            for (p in values) {
+                context = _contexts[p];
+                value = values[p];
+                if (typeof(value) === "function") {
+                    value = value(index || 0, target);
+                }
+                if (context) {
+                    axis = (p.charAt(p.length-1).toLowerCase().indexOf("x") !== -1) ? "x" : "y";
+					this._addTween(target[context], axis, target[context][axis], (context === "skew") ? _degreesToRadians(value) : value, p);
+                } else if (p === "scale" || p === "anchor" || p === "pivot" || p === "tileScale") {
+					this._addTween(target[p], "x", target[p].x, value, p + "X");
+					this._addTween(target[p], "y", target[p].y, value, p + "Y");
+                } else if (p === "rotation") { //PIXI expects rotation in radians, but as a convenience we let folks define it in degrees and we do the conversion.
+					this._addTween(target, p, target.rotation, _degreesToRadians(value), p);
+
+                } else if (_colorMatrixFilterProps[p]) {
+					if (!colorMatrix) {
+						_parseColorMatrixFilter(target, values.colorMatrixFilter || values, this);
+						colorMatrix = true;
+					}
+                } else if (p === "blur" || p === "blurX" || p === "blurY" || p === "blurPadding") {
+					filter = _getFilter(target, "BlurFilter");
+					this._addTween(filter, p, filter[p], value, p);
+					if (values.blurPadding !== 0) {
+						padding = values.blurPadding || Math.max(filter[p], value) * 2;
+						i = target.filters.length;
+						while (--i > -1) {
+							target.filters[i].padding = Math.max(target.filters[i].padding, padding); //if we don't expand the padding on all the filters, it can look clipped.
+						}
+					}
+                } else if (_colorProps[p]) {
+					if (!colorSetter) {
+						colorSetter = _buildColorSetter(tween, this);
+					}
+					if ((p === "lineColor" || p === "fillColor") && target instanceof _gsScope.PIXI.Graphics) {
+						data = target.graphicsData;
+						i = data.length;
+						while (--i > -1) {
+							_addColorTween(data[i], p, value, colorSetter, this);
+						}
+						colorSetter.graphics = target;
+					} else {
+						_addColorTween(target, p, value, colorSetter, this);
+					}
+                } else if (p === "autoAlpha") {
+					this._firstPT = pt = {t: {setRatio:function() { target.visible = !!target.alpha; }}, p: "setRatio", s: 0, c: 1, f: 1, pg: 0, n: "visible", pr: 0, m: 0, _next:this._firstPT};
+					if (pt._next) {
+						pt._next._prev = pt;
+					}
+					this._addTween(target, "alpha", target.alpha, value, "alpha");
+					this._overwriteProps.push("alpha", "visible");
+                } else {
+					this._addTween(target, p, target[p], value, p);
+                }
+				this._overwriteProps.push(p);
+            }
+            return true;
+        }
+    });
+
+	PixiPlugin.colorProps = _colorProps;
+	PixiPlugin.parseColor = _parseColor;
+	PixiPlugin.formatColors = _formatColors;
+	PixiPlugin.colorStringFilter = _colorStringFilter;
+
+
+}); if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); }
+
+//export to AMD/RequireJS and CommonJS/Node (precursor to full modular build system coming at a later date)
+(function(name) {
+	"use strict";
+	var getGlobal = function() {
+		return (_gsScope.GreenSockGlobals || _gsScope)[name];
+	};
+	if (typeof(module) !== "undefined" && module.exports) { //node
+		require("../TweenLite.js");
+		module.exports = getGlobal();
+	} else if (typeof(define) === "function" && define.amd) { //AMD
+		define(["TweenLite"], getGlobal);
+	}
+}("PixiPlugin"));
+/*!
+ * VERSION: 0.2.2
+ * DATE: 2018-02-15
+ * UPDATES AND DOCS AT: http://greensock.com
+ *
+ * @license Copyright (c) 2008-2018, GreenSock. All rights reserved.
+ * This work is subject to the terms at http://greensock.com/standard-license or for
+ * Club GreenSock members, the software agreement that was issued with your membership.
+ * 
+ * @author: Jack Doyle, jack@greensock.com
+ */
+var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(global) !== "undefined") ? global : this || window; //helps ensure compatibility with AMD/RequireJS and CommonJS/Node
+(_gsScope._gsQueue || (_gsScope._gsQueue = [])).push( function() {
+
+	"use strict";
+
+	var	_NaNExp = /[^\d\-\.]/g,
+		_DEG2RAD = Math.PI / 180,
+		_numExp = /(\d|\.)+/g,
+		_colorLookup = {aqua:[0,255,255],
+			lime:[0,255,0],
+			silver:[192,192,192],
+			black:[0,0,0],
+			maroon:[128,0,0],
+			teal:[0,128,128],
+			blue:[0,0,255],
+			navy:[0,0,128],
+			white:[255,255,255],
+			fuchsia:[255,0,255],
+			olive:[128,128,0],
+			yellow:[255,255,0],
+			orange:[255,165,0],
+			gray:[128,128,128],
+			purple:[128,0,128],
+			green:[0,128,0],
+			red:[255,0,0],
+			pink:[255,192,203],
+			cyan:[0,255,255],
+			transparent:[255,255,255,0]},
+		//parses a color (like #9F0, #FF9900, or rgb(255,51,153)) into an array with 3 elements for red, green, and blue. Also handles rgba() values (splits into array of 4 elements of course)
+		_parseColor = function(color) {
+			if (typeof(color) === "number") {
+				return [color >> 16, (color >> 8) & 255, color & 255];
+			} else if (color === "" || color == null || color === "none" || typeof(color) !== "string") {
+				return _colorLookup.transparent;
+			} else if (_colorLookup[color]) {
+				return _colorLookup[color];
+			} else if (color.charAt(0) === "#") {
+				if (color.length === 4) { //for shorthand like #9F0
+					color = "#" + color.charAt(1) + color.charAt(1) + color.charAt(2) + color.charAt(2) + color.charAt(3) + color.charAt(3);
+				}
+				color = parseInt(color.substr(1), 16);
+				return [color >> 16, (color >> 8) & 255, color & 255];
+			}
+			return color.match(_numExp) || _colorLookup.transparent;
+		},
+
+		_transformMap = {scaleX:1, scaleY:1, tx:1, ty:1, rotation:1, shortRotation:1, skewX:1, skewY:1, scale:1},
+
+		//parses the transform values for an element, returning an object with x, y, scaleX, scaleY, rotation, skewX, and skewY properties. Note: by default (for performance reasons), all skewing is combined into skewX and rotation but skewY still has a place in the transform object so that we can record how much of the skew is attributed to skewX vs skewY. Remember, a skewY of 10 looks the same as a rotation of 10 and skewX of -10.
+		_getTransform = function(t, rec) {
+			var s = t.matrix,
+				min = 0.000001,
+				a = s.a,
+				b = s.b,
+				c = s.c,
+				d = s.d,
+				m = rec ? t._gsTransform || {skewY:0} : {skewY:0},
+				invX = (m.scaleX < 0); //in order to interpret things properly, we need to know if the user applied a negative scaleX previously so that we can adjust the rotation and skewX accordingly. Otherwise, if we always interpret a flipped matrix as affecting scaleY and the user only wants to tween the scaleX on multiple sequential tweens, it would keep the negative scaleY without that being the user's intent.
+
+			m.tx = s.e - (m.ox || 0); //ox is the offset x that we record in setRatio() whenever we apply a custom transform that might use a pivot point. Remember, s.e and s.f get affected by things like scale. For example, imagine an object whose top left corner is at 100,100 and then we scale it up to 300% using the center as the pivot point - that corner would now be very different even though to the user, they didn't intend to change/tween the x/y position per se. Therefore, we record whatever offsets we make so that we can compensate when reading the values back.
+			m.ty = s.f - (m.oy || 0); //oy is the offset y (see note above)
+			m.scaleX = Math.sqrt(a * a + b * b);
+			m.scaleY = Math.sqrt(d * d + c * c);
+			m.rotation = (a || b) ? Math.atan2(b, a) : m.rotation || 0; //note: if scaleX is 0, we cannot accurately measure rotation. Same for skewX with a scaleY of 0. Therefore, we default to the previously recorded value (or zero if that doesn't exist).
+			m.skewX = (c || d) ? Math.atan2(c, d) + m.rotation : m.skewX || 0;
+			if (Math.abs(m.skewX) > Math.PI / 2) {
+				if (invX) {
+					m.scaleX *= -1;
+					m.skewX += (m.rotation <= 0) ? Math.PI : -Math.PI;
+					m.rotation += (m.rotation <= 0) ? Math.PI : -Math.PI;
+				} else {
+					m.scaleY *= -1;
+					m.skewX += (m.skewX <= 0) ? Math.PI : -Math.PI;
+				}
+			}
+			//some browsers have a hard time with very small values like 2.4492935982947064e-16 (notice the "e-" towards the end) and would render the object slightly off. So we round to 0 in these cases. The conditional logic here is faster than calling Math.abs().
+			if (m.rotation < min) if (m.rotation > -min) if (a || b) {
+				m.rotation = 0;
+			}
+			if (m.skewX < min) if (m.skewX > -min) if (b || c) {
+				m.skewX = 0;
+			}
+			if (rec) {
+				t._gsTransform = m; //record to the object's _gsTransform which we use so that tweens can control individual properties independently (we need all the properties to accurately recompose the matrix in the setRatio() method)
+			}
+			return m;
+		},
+
+		//takes a value and a default number, checks if the value is relative, null, or numeric and spits back a normalized number accordingly. Primarily used in the _parseTransform() function.
+		_parseVal = function(v, d) {
+			return (v == null) ? d : (typeof(v) === "string" && v.indexOf("=") === 1) ? parseInt(v.charAt(0)+"1", 10) * Number(v.substr(2)) + d : Number(v);
+		},
+
+		//translates strings like "40deg" or "40" or 40rad" or "+=40deg" to a numeric radian angle, optionally relative to a default value (if "+=" or "-=" prefix is found)
+		_parseAngle = function(v, d) {
+			var m = (v.indexOf("rad") === -1) ? _DEG2RAD : 1,
+				r = (v.indexOf("=") === 1);
+			v = Number(v.replace(_NaNExp, "")) * m;
+			return r ? v + d : v;
+		},
+
+
+		RaphaelPlugin = _gsScope._gsDefine.plugin({
+			propName: "raphael",
+			version: "0.2.2",
+			API: 2,
+
+			//called when the tween renders for the first time. This is where initial values should be recorded and any setup routines should run.
+			init: function(target, value, tween) {
+				if (!target.attr) { //raphael must have attr() method
+					return false;
+				}
+				this._target = target;
+				this._tween = tween;
+				this._props = target._gsProps = target._gsProps || {};
+				var p, s, v, pt, clr1, clr2, rel;
+
+				for (p in value) {
+
+					v = value[p];
+
+					if (p === "transform") {
+						this._parseTransform(target, v);
+						continue;
+					} else if (_transformMap[p] || p === "pivot") {
+						this._parseTransform(target, value);
+						continue;
+					}
+
+					s = target.attr(p);
+
+					//Some of these properties are in place in order to conform with the standard PropTweens in TweenPlugins so that overwriting and roundProps occur properly. For example, f and r may seem unnecessary here, but they enable other functionality.
+					//_next:*	next linked list node		[object]
+					//t: 	*	target 						[object]
+					//p:	*	property (camelCase)		[string]
+					//s: 	*	starting value				[number]
+					//c:	*	change value				[number]
+					//f:	* 	is function					[boolean]
+					//n:	*	name (for overwriting)		[string]
+					//b:		beginning value				[string]
+					//i:		intermediate value			[string]
+					//e: 		ending value				[string]
+					//r:	*	round						[boolean]
+					//type:		0=normal, 1=color, 2=rgba, -1=non-tweening prop	[number]
+					this._firstPT = pt = {_next:this._firstPT,
+						t:this._props,
+						p:p,
+						b:s,
+						f:false,
+						n:"raphael_" + p,
+						r:false,
+						type:0};
+
+					//color values must be split apart into their R, G, B (and sometimes alpha) values and tweened independently.
+					if (p === "fill" || p === "stroke") {
+						clr1 = _parseColor(s);
+						clr2 = _parseColor(v);
+						pt.e = v;
+						pt.s = Number(clr1[0]);				//red starting value
+						pt.c = Number(clr2[0]) - pt.s;		//red change
+						pt.gs = Number(clr1[1]);			//green starting value
+						pt.gc = Number(clr2[1]) - pt.gs;	//green change
+						pt.bs = Number(clr1[2]);			//blue starting value
+						pt.bc = Number(clr2[2]) - pt.bs;	//blue change
+						if (clr1.length > 3 || clr2.length > 3) { //detect an rgba() value
+							pt.as = (clr1.length < 4) ? 1 : Number(clr1[3]);
+							pt.ac = ((clr2.length < 4) ? 1 : Number(clr2[3])) - pt.as;
+							pt.type = 2; //2 = rgba() tween
+						} else {
+							pt.type = 1; //1 = color tween, -1 = no tween, just set the value at the end because there's no changes
+						}
+
+					} else {
+
+						s = (typeof(s) === "string") ? parseFloat(s.replace(_NaNExp, "")) : Number(s);
+
+						if (typeof(v) === "string") {
+							rel = (v.charAt(1) === "=");
+							v = parseFloat(v.replace(_NaNExp, ""));
+						} else {
+							rel = false;
+						}
+
+						pt.e = (v || v === 0) ? (rel ? v + s : v) : value[p]; //ensures that any += or -= prefixes are taken care of.
+
+						if ((s || s === 0) && (v || v === 0) && (pt.c = (rel ? v : v - s))) { //faster than isNaN(). Also, we set pt.c (change) here because if it's 0, we'll just treat it like a non-tweening value. can't do (v !== start) because if it's a relative value and the CHANGE is identical to the START, the condition will fail unnecessarily.
+							pt.s = s;
+						} else {
+							pt.type = -1;
+							pt.i = value[p]; //intermediate value is typically the same as the end value.
+							pt.s = pt.c = 0;
+						}
+
+					}
+
+					this._overwriteProps.push("raphael_" + p);
+					if (pt._next) {
+						pt._next._prev = pt;
+					}
+				}
+
+				return true;
+			},
+
+			//called each time the values should be updated, and the ratio gets passed as the only parameter (typically it's a value between 0 and 1, but it can exceed those when using an ease like Elastic.easeOut or Back.easeOut, etc.)
+			set: function(v) {
+				var pt = this._firstPT, val;
+
+				while (pt) {
+					val = pt.c * v + pt.s;
+					if (pt.r) {
+						val = Math.round(val);
+					}
+					if (!pt.type) {
+						pt.t[pt.p] = val;
+					} else if (pt.type === 1) { //rgb()
+						pt.t[pt.p] = "rgb(" + (val >> 0) + ", " + ((pt.gs + (v * pt.gc)) >> 0) + ", " + ((pt.bs + (v * pt.bc)) >> 0) + ")";
+					} else if (pt.type === 2) { //rgba()
+						pt.t[pt.p] = "rgba(" + (val >> 0) + ", " + ((pt.gs + (v * pt.gc)) >> 0) + ", " + ((pt.bs + (v * pt.bc)) >> 0) + ", " + (pt.as + (v * pt.ac)) + ")";
+					} else if (pt.type === -1) { //non-tweening
+						pt.t[pt.p] = pt.i;
+					}
+					pt = pt._next;
+				}
+
+				this._target.attr(this._props);
+
+				//apply transform values like x, y, scaleX, scaleY, rotation, skewX, or skewY. We do these after looping through all the PropTweens because those are where the changes are made to scaleX/scaleY/rotation/skewX/skewY/x/y.
+				if (this._transform) {
+					pt = this._transform; //to improve speed and reduce size, reuse the pt variable as an alias to the _transform property
+					var ang = pt.rotation,
+						skew = ang - pt.skewX,
+						a = Math.cos(ang) * pt.scaleX,
+						b = Math.sin(ang) * pt.scaleX,
+						c = Math.sin(skew) * -pt.scaleY,
+						d = Math.cos(skew) * pt.scaleY,
+						min = 0.000001,
+						pxl = this._pxl,
+						pyl = this._pyl;
+
+					//some browsers have a hard time with very small values like 2.4492935982947064e-16 (notice the "e-" towards the end) and would render the object slightly off. So we round to 0 in these cases for both b and c. The conditional logic here is faster than calling Math.abs().
+					if (b < min) if (b > -min) {
+						b = 0;
+					}
+					if (c < min) if (c > -min) {
+						c = 0;
+					}
+					pt.ox = this._pxg - (pxl * a + pyl * c); //we must record the offset x/y that we're making from the regular tx/ty (matrix.e and f) so that we can correctly interpret positional data in _getTransform(). See note there on tx and ox.
+					pt.oy = this._pyg - (pxl * b + pyl * d);
+					this._target.transform("m" + a + "," + b + "," + c + "," + d + "," + (pt.tx + pt.ox) + "," + (pt.ty + pt.oy));
+				}
+
+			}
+
+		}),
+		p = RaphaelPlugin.prototype;
+
+	//compares the beginning x, y, scaleX, scaleY, rotation, and skewX properties with the ending ones and adds PropTweens accordingly wherever necessary. We must tween them individually (rather than just tweening the matrix values) so that elgant overwriting can occur, like if one tween is controlling scaleX, scaleY, and rotation and then another one starts mid-tween that is trying to control the scaleX only - this tween should continue tweening scaleY and rotation.
+	p._parseTransform = function(t, v) {
+		if (this._transform) { return; } //only need to parse the transform once, and only if the browser supports it.
+
+		var m1 = this._transform = _getTransform(t, true),
+			min = 0.000001,
+			m2, skewY, p, pt, copy, dx, dy, mtx, pivot;
+
+		if (typeof(v) === "object") { //for values like scaleX, scaleY, rotation, x, y, skewX, and skewY or transform:{...} (object)
+
+			m2 = {scaleX:_parseVal((v.scaleX != null) ? v.scaleX : v.scale, m1.scaleX),
+				  scaleY:_parseVal((v.scaleY != null) ? v.scaleY : v.scale, m1.scaleY),
+				  tx:_parseVal(v.tx, m1.tx),
+				  ty:_parseVal(v.ty, m1.ty)};
+
+			if (v.shortRotation != null) {
+				m2.rotation = (typeof(v.shortRotation) === "number") ? v.shortRotation * _DEG2RAD : _parseAngle(v.shortRotation, m1.rotation);
+				var dif = (m2.rotation - m1.rotation) % (Math.PI * 2);
+				if (dif !== dif % Math.PI) {
+					dif += Math.PI * ((dif < 0) ? 2 : -2);
+				}
+				m2.rotation = m1.rotation + dif;
+
+			} else {
+				m2.rotation = (v.rotation == null) ? m1.rotation : (typeof(v.rotation) === "number") ? v.rotation * _DEG2RAD : _parseAngle(v.rotation, m1.rotation);
+			}
+			m2.skewX = (v.skewX == null) ? m1.skewX : (typeof(v.skewX) === "number") ? v.skewX * _DEG2RAD : _parseAngle(v.skewX, m1.skewX);
+
+			//note: for performance reasons, we combine all skewing into the skewX and rotation values, ignoring skewY but we must still record it so that we can discern how much of the overall skew is attributed to skewX vs. skewY. Otherwise, if the skewY would always act relative (tween skewY to 10deg, for example, multiple times and if we always combine things into skewX, we can't remember that skewY was 10 from last time). Remember, a skewY of 10 degrees looks the same as a rotation of 10 degrees plus a skewX of -10 degrees.
+			m2.skewY = (v.skewY == null) ? m1.skewY : (typeof(v.skewY) === "number") ? v.skewY * _DEG2RAD : _parseAngle(v.skewY, m1.skewY);
+			if ((skewY = m2.skewY - m1.skewY)) {
+				m2.skewX += skewY;
+				m2.rotation += skewY;
+			}
+			//don't allow rotation/skew values to be a SUPER small decimal because when they're translated back to strings for setting the css property, the browser reports them in a funky way, like 1-e7. Of course we could use toFixed() to resolve that issue but that hurts performance quite a bit with all those function calls on every frame, plus it is virtually impossible to discern values that small visually (nobody will notice changing a rotation of 0.0000001 to 0, so the performance improvement is well worth it).
+			if (m2.skewY < min) if (m2.skewY > -min) {
+				m2.skewY = 0;
+			}
+			if (m2.skewX < min) if (m2.skewX > -min) {
+				m2.skewX = 0;
+			}
+			if (m2.rotation < min) if (m2.rotation > -min) {
+				m2.rotation = 0;
+			}
+
+			pivot = v.localPivot || v.globalPivot;
+
+			if (typeof(pivot) === "string") {
+				copy = pivot.split(",");
+				dx = Number(copy[0]);
+				dy = Number(copy[1]);
+			} else if (typeof(pivot) === "object") {
+				dx = Number(pivot.x);
+				dy = Number(pivot.y);
+			} else if (v.localPivot) {
+				copy = t.getBBox(true);
+				dx = copy.width / 2;
+				dy = copy.height / 2;
+			} else {
+				copy = t.getBBox();
+				dx = copy.x + copy.width / 2;
+				dy = copy.y + copy.height / 2;
+			}
+
+			if (v.localPivot) {
+				mtx = t.matrix;
+				dx += t.attr("x");
+				dy += t.attr("y");
+				this._pxl = dx;
+				this._pyl = dy;
+				this._pxg = dx * mtx.a + dy * mtx.c + mtx.e - m1.tx;
+				this._pyg = dx * mtx.b + dy * mtx.d + mtx.f - m1.ty;
+			} else {
+				mtx = t.matrix.invert();
+				this._pxl = dx * mtx.a + dy * mtx.c + mtx.e;
+				this._pyl = dx * mtx.b + dy * mtx.d + mtx.f;
+				this._pxg = dx - m1.tx;
+				this._pyg = dy - m1.ty;
+			}
+
+		} else if (typeof(v) === "string") { //for values like transform:"rotate(60deg) scale(0.5, 0.8)"
+			copy = this._target.transform();
+			t.transform(v);
+			m2 = _getTransform(t, false);
+			t.transform(copy);
+		} else {
+			return;
+		}
+
+		for (p in _transformMap) {
+			if (m1[p] !== m2[p]) if (p !== "shortRotation") if (p !== "scale") {
+				this._firstPT = pt = {_next:this._firstPT, t:m1, p:p, s:m1[p], c:m2[p] - m1[p], n:p, f:false, r:false, b:m1[p], e:m2[p], type:0};
+				if (pt._next) {
+					pt._next._prev = pt;
+				}
+				this._overwriteProps.push("raphael_" + p);
+			}
+		}
+	};
+
+}); if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); }
+/*!
+ * VERSION: 1.9.0
+ * DATE: 2018-02-15
+ * UPDATES AND DOCS AT: http://greensock.com
+ *
+ * @license Copyright (c) 2008-2018, GreenSock. All rights reserved.
+ * This work is subject to the terms at http://greensock.com/standard-license or for
+ * Club GreenSock members, the software agreement that was issued with your membership.
+ * 
+ * @author: Jack Doyle, jack@greensock.com
+ **/
+var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(global) !== "undefined") ? global : this || window; //helps ensure compatibility with AMD/RequireJS and CommonJS/Node
+(_gsScope._gsQueue || (_gsScope._gsQueue = [])).push( function() {
+
+	"use strict";
+
+	var _doc = (_gsScope.document || {}).documentElement,
+		_window = _gsScope,
+		_max = function(element, axis) {
+			var dim = (axis === "x") ? "Width" : "Height",
+				scroll = "scroll" + dim,
+				client = "client" + dim,
+				body = document.body;
+			return (element === _window || element === _doc || element === body) ? Math.max(_doc[scroll], body[scroll]) - (_window["inner" + dim] || _doc[client] || body[client]) : element[scroll] - element["offset" + dim];
+		},
+		_unwrapElement = function(value) {
+			if (typeof(value) === "string") {
+				value = TweenLite.selector(value);
+			}
+			if (value.length && value !== _window && value[0] && value[0].style && !value.nodeType) {
+				value = value[0];
+			}
+			return (value === _window || (value.nodeType && value.style)) ? value : null;
+		},
+		_buildGetter = function(e, axis) { //pass in an element and an axis ("x" or "y") and it'll return a getter function for the scroll position of that element (like scrollTop or scrollLeft, although if the element is the window, it'll use the pageXOffset/pageYOffset or the documentElement's scrollTop/scrollLeft or document.body's. Basically this streamlines things and makes a very fast getter across browsers.
+			var p = "scroll" + ((axis === "x") ? "Left" : "Top");
+			if (e === _window) {
+				if (e.pageXOffset != null) {
+					p = "page" + axis.toUpperCase() + "Offset";
+				} else if (_doc[p] != null) {
+					e = _doc;
+				} else {
+					e = document.body;
+				}
+			}
+			return function() {
+				return e[p];
+			};
+		},
+		_getOffset = function(element, container) {
+			var rect = _unwrapElement(element).getBoundingClientRect(),
+				isRoot = (!container || container === _window || container === document.body),
+				cRect = (isRoot ? _doc : container).getBoundingClientRect(),
+				offsets = {x: rect.left - cRect.left, y: rect.top - cRect.top};
+			if (!isRoot && container) { //only add the current scroll position if it's not the window/body.
+				offsets.x += _buildGetter(container, "x")();
+				offsets.y += _buildGetter(container, "y")();
+			}
+			return offsets;
+		},
+		_parseVal = function(value, target, axis) {
+			var type = typeof(value);
+			return !isNaN(value) ? parseFloat(value) : (type === "number" || (type === "string" && value.charAt(1) === "=")) ? value : (value === "max") ? _max(target, axis) : Math.min(_max(target, axis), _getOffset(value, target)[axis]);
+		},
+
+		ScrollToPlugin = _gsScope._gsDefine.plugin({
+			propName: "scrollTo",
+			API: 2,
+			global: true,
+			version:"1.9.0",
+
+			//called when the tween renders for the first time. This is where initial values should be recorded and any setup routines should run.
+			init: function(target, value, tween) {
+				this._wdw = (target === _window);
+				this._target = target;
+				this._tween = tween;
+				if (typeof(value) !== "object") {
+					value = {y:value}; //if we don't receive an object as the parameter, assume the user intends "y".
+					if (typeof(value.y) === "string" && value.y !== "max" && value.y.charAt(1) !== "=") {
+						value.x = value.y;
+					}
+				} else if (value.nodeType) {
+					value = {y:value, x:value};
+				}
+				this.vars = value;
+				this._autoKill = (value.autoKill !== false);
+				this.getX = _buildGetter(target, "x");
+				this.getY = _buildGetter(target, "y");
+				this.x = this.xPrev = this.getX();
+				this.y = this.yPrev = this.getY();
+				if (value.x != null) {
+					this._addTween(this, "x", this.x, _parseVal(value.x, target, "x") - (value.offsetX || 0), "scrollTo_x", true);
+					this._overwriteProps.push("scrollTo_x");
+				} else {
+					this.skipX = true;
+				}
+				if (value.y != null) {
+					this._addTween(this, "y", this.y, _parseVal(value.y, target, "y") - (value.offsetY || 0), "scrollTo_y", true);
+					this._overwriteProps.push("scrollTo_y");
+				} else {
+					this.skipY = true;
+				}
+				return true;
+			},
+
+			//called each time the values should be updated, and the ratio gets passed as the only parameter (typically it's a value between 0 and 1, but it can exceed those when using an ease like Elastic.easeOut or Back.easeOut, etc.)
+			set: function(v) {
+				this._super.setRatio.call(this, v);
+
+				var x = (this._wdw || !this.skipX) ? this.getX() : this.xPrev,
+					y = (this._wdw || !this.skipY) ? this.getY() : this.yPrev,
+					yDif = y - this.yPrev,
+					xDif = x - this.xPrev,
+					threshold = ScrollToPlugin.autoKillThreshold;
+
+				if (this.x < 0) { //can't scroll to a position less than 0! Might happen if someone uses a Back.easeOut or Elastic.easeOut when scrolling back to the top of the page (for example)
+					this.x = 0;
+				}
+				if (this.y < 0) {
+					this.y = 0;
+				}
+				if (this._autoKill) {
+					//note: iOS has a bug that throws off the scroll by several pixels, so we need to check if it's within 7 pixels of the previous one that we set instead of just looking for an exact match.
+					if (!this.skipX && (xDif > threshold || xDif < -threshold) && x < _max(this._target, "x")) {
+						this.skipX = true; //if the user scrolls separately, we should stop tweening!
+					}
+					if (!this.skipY && (yDif > threshold || yDif < -threshold) && y < _max(this._target, "y")) {
+						this.skipY = true; //if the user scrolls separately, we should stop tweening!
+					}
+					if (this.skipX && this.skipY) {
+						this._tween.kill();
+						if (this.vars.onAutoKill) {
+							this.vars.onAutoKill.apply(this.vars.onAutoKillScope || this._tween, this.vars.onAutoKillParams || []);
+						}
+					}
+				}
+				if (this._wdw) {
+					_window.scrollTo((!this.skipX) ? this.x : x, (!this.skipY) ? this.y : y);
+				} else {
+					if (!this.skipY) {
+						this._target.scrollTop = this.y;
+					}
+					if (!this.skipX) {
+						this._target.scrollLeft = this.x;
+					}
+				}
+				this.xPrev = this.x;
+				this.yPrev = this.y;
+			}
+
+		}),
+		p = ScrollToPlugin.prototype;
+
+	ScrollToPlugin.max = _max;
+	ScrollToPlugin.getOffset = _getOffset;
+	ScrollToPlugin.buildGetter = _buildGetter;
+	ScrollToPlugin.autoKillThreshold = 7;
+
+	p._kill = function(lookup) {
+		if (lookup.scrollTo_x) {
+			this.skipX = true;
+		}
+		if (lookup.scrollTo_y) {
+			this.skipY = true;
+		}
+		return this._super._kill.call(this, lookup);
+	};
+
+}); if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); }
+
+//export to AMD/RequireJS and CommonJS/Node (precursor to full modular build system coming at a later date)
+(function(name) {
+	"use strict";
+	var getGlobal = function() {
+		return (_gsScope.GreenSockGlobals || _gsScope)[name];
+	};
+	if (typeof(module) !== "undefined" && module.exports) { //node
+		require("../TweenLite.js");
+		module.exports = getGlobal();
+	} else if (typeof(define) === "function" && define.amd) { //AMD
+		define(["TweenLite"], getGlobal);
+	}
+}("ScrollToPlugin"));
+/*!
+ * VERSION: 1.2.0
+ * DATE: 2018-02-15
+ * UPDATES AND DOCS AT: http://greensock.com
+ * 
+ * This file is to be used as a simple template for writing your own plugin. See the 
+ * TweenPlugin docs for more details.
+ *
+ * You can start by doing a search for "yourCustomProperty" and replace it with whatever the name
+ * of your property is. This way of defining a plugin was introduced in version 1.9.0 - previous versions
+ * of TweenLite won't work with this.
+ *
+ * @license Copyright (c) 2008-2018, GreenSock. All rights reserved.
+ * This work is subject to the terms at http://greensock.com/standard-license or for
+ * Club GreenSock members, the software agreement that was issued with your membership.
+ * 
+ * @author: Jack Doyle, jack@greensock.com
+ **/
+var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(global) !== "undefined") ? global : this || window; //helps ensure compatibility with AMD/RequireJS and CommonJS/Node
+(_gsScope._gsQueue || (_gsScope._gsQueue = [])).push( function() {
+	//ignore the line above this and at the very end - those are for ensuring things load in the proper order
+	"use strict";
+
+	_gsScope._gsDefine.plugin({
+		propName: "yourCustomProperty", //the name of the property that will get intercepted and handled by this plugin (obviously change it to whatever you want, typically it is camelCase starting with lowercase).
+		priority: 0, //the priority in the rendering pipeline (0 by default). A priority of -1 would mean this plugin will run after all those with 0 or greater. A priority of 1 would get run before 0, etc. This only matters when a plugin relies on other plugins finishing their work before it runs (or visa-versa)
+		API: 2, //the API should stay 2 - it just gives us a way to know the method/property structure so that if in the future we change to a different TweenPlugin architecture, we can identify this plugin's structure.
+		version: "1.0.0", //your plugin's version number
+		overwriteProps: ["yourCustomProperty"], //an array of property names whose tweens should be overwritten by this plugin. For example, if you create a "scale" plugin that handles both "scaleX" and "scaleY", the overwriteProps would be ["scaleX","scaleY"] so that if there's a scaleX or scaleY tween in-progress when a new "scale" tween starts (using this plugin), it would overwrite the scaleX or scaleY tween.
+
+		/*
+		 * The init function is called when the tween renders for the first time. This is where initial values should be recorded and any setup routines should run. It receives 3 parameters:
+		 *   1) target [object] - the target of the tween. In cases where the tween's original target is an array (or jQuery object), this target will be the individual object inside that array (a new plugin instance is created for each target in the array). For example, TweenLite.to([obj1, obj2, obj3], 1, {x:100}) the target will be obj1 or obj2 or obj3 rather than the array containing them.
+		 *   2) value [*] - whatever value is passed as the special property value. For example, TweenLite.to(element, 1, {yourCustomProperty:3}) the value would be 3. Or for TweenLite.to(element, 1, {yourCustomProperty:{subProp1:3, subProp2:"whatever"}});, value would be {subProp1:3, subProp2:"whatever"}.
+		 *   3) tween [TweenLite] - the TweenLite (or TweenMax) instance that is managing this plugin instance. This can be useful if you need to check certain state-related properties on the tween (maybe in the set method) like its duration or time. Most of the time, however, you don't need to do anything with the tween. It is provided just in case you want to reference it.
+		 *   4) index [integer] - the index number of the target in the tween. For example, if an array is passed in as the target (or selector text), this would be 0 for the first one, 1 for the second, 2 for the third, etc. This was introduced in GSAP 1.19.0
+		 *
+		 * This function should return true unless you want to have TweenLite/Max skip the plugin altogether and instead treat the property/value like a normal tween (as if the plugin wasn't activated). This is rarely useful, so you should almost always return true.
+		 */
+		init: function(target, value, tween, index) {
+			this._target = target; //we record the target so that we can refer to it in the set method when doing updates.
+
+			/* Next, we create a property tween for "scaleX" and "scaleY" properties of our target
+			 * (we're just using them as a examples of how to set up a property tween with a name, start, and end value).
+			 * the _addTween() method accepts the following parameters:
+			 *   1) target [object] - target object whose property this tween will control.
+			 *   2) property [string] - the name of the property, like "scaleX" or "scaleY"
+			 *   3) start [number] - The starting value of the property. For example, if you're tweening from 0 to 100, start would be 0.
+			 *   4) end [number] - the ending value of the property. For example, if you're tweening from 0 to 100, end would be 100.
+			 *   5) overwriteProperty [string] - the name that gets registered as the overwrite property so that if another concurrent tween of the same target gets created and it is tweening a property with this name, this one will be overwritten. Typically this is the same as "property".
+			 *   6) round [boolean] - if true, the updated value on each update will be rounded to the nearest integer. [false by default]
+			 * You do NOT need to use _addTween() at all. It is merely a convenience. You can record your own values internally or whatever you want.
+			 */
+			this._addTween(target, "scaleX", target.scaleX, value, "scaleX", false);
+			this._addTween(target, "scaleY", target.scaleY, value, "scaleY", false);
+
+			//now, just for kicks, we'll record the starting "alpha" value and amount of change so that we can manage this manually rather than _addTween() (again, totally fictitious, just for an example)
+			this._alphaStart = target.alpha;
+			this._alphaChange = value.alpha - target.alpha;
+
+			//always return true unless we want to scrap the plugin and have the value treated as a normal property tween (very uncommon)
+			return true;
+		},
+
+		//[optional] - called each time the values should be updated, and the ratio gets passed as the only parameter (typically it's a value between 0 and 1, but it can exceed those when using an ease like Elastic.easeOut or Back.easeOut, etc.). If you're using this._super._addTween() for all your tweens and you don't need to do anything special on each frame besides updating those values, you can omit this "set" function altogether.
+		set: function(ratio) {
+			//since we used _addTween() inside init function, it created some property tweens that we'll update by calling the parent prototype's setRatio() (otherwise, the property tweens wouldn't get their values updated). this._super refers to the TweenPlugin prototype from which the plugin inherits (not that you need to worry about that).
+			this._super.setRatio.call(this, ratio);
+
+			//now manually set the alpha
+			this._target.alpha = this._alphaStart + this._alphaChange * ratio;
+		}
+
+	});
+
+}); if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); }
+/*!
+ * VERSION: 0.6.2
+ * DATE: 2018-02-15
+ * UPDATES AND DOCS AT: http://greensock.com
+ *
+ * @license Copyright (c) 2008-2018, GreenSock. All rights reserved.
+ * This work is subject to the terms at http://greensock.com/standard-license or for
+ * Club GreenSock members, the software agreement that was issued with your membership.
+ *
+ * @author: Jack Doyle, jack@greensock.com
+ */
+var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(global) !== "undefined") ? global : this || window; //helps ensure compatibility with AMD/RequireJS and CommonJS/Node
+(_gsScope._gsQueue || (_gsScope._gsQueue = [])).push( function() {
+
+	"use strict";
+
+		var _getText = function(e) {
+				var type = e.nodeType,
+					result = "";
+				if (type === 1 || type === 9 || type === 11) {
+					if (typeof(e.textContent) === "string") {
+						return e.textContent;
+					} else {
+						for ( e = e.firstChild; e; e = e.nextSibling ) {
+							result += _getText(e);
+						}
+					}
+				} else if (type === 3 || type === 4) {
+					return e.nodeValue;
+				}
+				return result;
+			},
+			_emoji = "[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2694-\u2697]|\uD83E[\uDD10-\uDD5D]|[\uD800-\uDBFF][\uDC00-\uDFFF]",
+			_emojiExp = new RegExp(_emoji),
+			_emojiAndCharsExp = new RegExp(_emoji + "|.", "g"),
+			_emojiSafeSplit = function(text, delimiter) {
+				return ((delimiter === "" || !delimiter) && _emojiExp.test(text)) ? text.match(_emojiAndCharsExp) : text.split(delimiter || "");
+			},
+			/* //previous emoji-related splitting. New method above is faster and more concise.
+			_emojiStart = 0xD800,
+			_emojiEnd = 0xDBFF,
+			_emojiLowStart = 0xDC00,
+			_emojiRegionStart = 0x1F1E6,
+			_emojiRegionEnd = 0x1F1FF,
+			_emojiModStart = 0x1f3fb,
+			_emojiModEnd = 0x1f3ff,
+			_emojiPairCode = function(s) {
+				return ((s.charCodeAt(0) - _emojiStart) << 10) + (s.charCodeAt(1) - _emojiLowStart) + 0x10000;
+			},
+			_emojiSafeSplit = function(text, delimiter) { //like calling String.split(delimiter) except that it keeps emoji characters together.
+				if (delimiter !== "") {
+					return text.split(delimiter);
+				}
+				var l = text.length,
+					a = [],
+					character, i, emojiPair1, emojiPair2, j;
+				for (i = 0; i < l; i++) {
+					character = text.charAt(i);
+					if ((character.charCodeAt(0) >= _emojiStart && character.charCodeAt(0) <= _emojiEnd) || (text.charCodeAt(i+1) >= 0xFE00 && text.charCodeAt(i+1) <= 0xFE0F)) { //special emoji characters use 2 or 4 unicode characters that we must keep together.
+						emojiPair1 = _emojiPairCode(text.substr(i, 2));
+						emojiPair2 = _emojiPairCode(text.substr(i + 2, 2));
+						j = ((emojiPair1 >= _emojiRegionStart && emojiPair1 <= _emojiRegionEnd && emojiPair2 >= _emojiRegionStart && emojiPair2 <= _emojiRegionEnd) || (emojiPair2 >= _emojiModStart && emojiPair2 <= _emojiModEnd)) ? 4 : 2;
+						a.push(text.substr(i, j));
+						i += j - 1;
+					} else {
+						a.push(character);
+					}
+				}
+				return a;
+			},
+			*/
+			TextPlugin = _gsScope._gsDefine.plugin({
+				propName: "text",
+				API: 2,
+				version:"0.6.2",
+
+				//called when the tween renders for the first time. This is where initial values should be recorded and any setup routines should run.
+				init: function(target, value, tween, index) {
+					var i = target.nodeName.toUpperCase(),
+						shrt;
+					if (typeof(value) === "function") {
+						value = value(index, target);
+					}
+					this._svg = (target.getBBox && (i === "TEXT" || i === "TSPAN"));
+					if (!("innerHTML" in target) && !this._svg) {
+						return false;
+					}
+					this._target = target;
+					if (typeof(value) !== "object") {
+						value = {value:value};
+					}
+					if (value.value === undefined) {
+						this._text = this._original = [""];
+						return true;
+					}
+					this._delimiter = value.delimiter || "";
+					this._original = _emojiSafeSplit(_getText(target).replace(/\s+/g, " "), this._delimiter);
+					this._text = _emojiSafeSplit(value.value.replace(/\s+/g, " "), this._delimiter);
+					this._runBackwards = (tween.vars.runBackwards === true);
+					if (this._runBackwards) {
+						i = this._original;
+						this._original = this._text;
+						this._text = i;
+					}
+					if (typeof(value.newClass) === "string") {
+						this._newClass = value.newClass;
+						this._hasClass = true;
+					}
+					if (typeof(value.oldClass) === "string") {
+						this._oldClass = value.oldClass;
+						this._hasClass = true;
+					}
+					i = this._original.length - this._text.length;
+					shrt = (i < 0) ? this._original : this._text;
+					this._fillChar = value.fillChar || (value.padSpace ? "&nbsp;" : "");
+					if (i < 0) {
+						i = -i;
+					}
+					while (--i > -1) {
+						shrt.push(this._fillChar);
+					}
+					return true;
+				},
+
+				//called each time the values should be updated, and the ratio gets passed as the only parameter (typically it's a value between 0 and 1, but it can exceed those when using an ease like Elastic.easeOut or Back.easeOut, etc.)
+				set: function(ratio) {
+					if (ratio > 1) {
+						ratio = 1;
+					} else if (ratio < 0) {
+						ratio = 0;
+					}
+					if (this._runBackwards) {
+						ratio = 1 - ratio;
+					}
+					var l = this._text.length,
+						i = (ratio * l + 0.5) | 0,
+						applyNew, applyOld, str;
+					if (this._hasClass) {
+						applyNew = (this._newClass && i !== 0);
+						applyOld = (this._oldClass && i !== l);
+						str = (applyNew ? "<span class='" + this._newClass + "'>" : "") + this._text.slice(0, i).join(this._delimiter) + (applyNew ? "</span>" : "") + (applyOld ? "<span class='" + this._oldClass + "'>" : "") + this._delimiter + this._original.slice(i).join(this._delimiter) + (applyOld ? "</span>" : "");
+					} else {
+						str = this._text.slice(0, i).join(this._delimiter) + this._delimiter + this._original.slice(i).join(this._delimiter);
+					}
+					if (this._svg) { //SVG text elements don't have an "innerHTML" in Microsoft browsers.
+						this._target.textContent = str;
+					} else {
+						this._target.innerHTML = (this._fillChar === "&nbsp;" && str.indexOf("  ") !== -1) ? str.split("  ").join("&nbsp;&nbsp;") : str;
+					}
+				}
+
+			}),
+			p = TextPlugin.prototype;
+
+		p._newClass = p._oldClass = p._delimiter = "";
+
+}); if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); }
+
+//export to AMD/RequireJS and CommonJS/Node (precursor to full modular build system coming at a later date)
+(function(name) {
+	"use strict";
+	var getGlobal = function() {
+		return (_gsScope.GreenSockGlobals || _gsScope)[name];
+	};
+	if (typeof(module) !== "undefined" && module.exports) { //node
+		require("../TweenLite.js");
+		module.exports = getGlobal();
+	} else if (typeof(define) === "function" && define.amd) { //AMD
+		define(["TweenLite"], getGlobal);
+	}
+}("TextPlugin"));
+/* 
+ *************************************
+ * <!-- GSAP Plugins -->
+ *************************************
+ */
 /**
  * Based on http://www.emagix.net/academic/mscs-project/item/camera-sync-with-css3-and-webgl-threejs
  * @author mrdoob / http://mrdoob.com/
@@ -25131,2216 +27358,3 @@ License: MIT
 
 /***/ }
 /******/ ]);
-/*!
- * VERSION: 0.6.6
- * DATE: 2018-02-15
- * UPDATES AND DOCS AT: http://greensock.com
- *
- * @license Copyright (c) 2008-2018, GreenSock. All rights reserved.
- * This work is subject to the terms at http://greensock.com/standard-license or for
- * Club GreenSock members, the software agreement that was issued with your membership.
- * 
- * @author: Jack Doyle, jack@greensock.com
- */
-var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(global) !== "undefined") ? global : this || window; //helps ensure compatibility with AMD/RequireJS and CommonJS/Node
-(_gsScope._gsQueue || (_gsScope._gsQueue = [])).push( function() {
-
-	"use strict";
-
-	_gsScope._gsDefine("plugins.CSSRulePlugin", ["plugins.TweenPlugin","TweenLite","plugins.CSSPlugin"], function(TweenPlugin, TweenLite, CSSPlugin) {
-
-		/** @constructor **/
-		var CSSRulePlugin = function() {
-				TweenPlugin.call(this, "cssRule");
-				this._overwriteProps.length = 0;
-			},
-			_doc = _gsScope.document,
-			_superSetRatio = CSSPlugin.prototype.setRatio,
-			p = CSSRulePlugin.prototype = new CSSPlugin();
-
-		p._propName = "cssRule";
-		p.constructor = CSSRulePlugin;
-		CSSRulePlugin.version = "0.6.6";
-		CSSRulePlugin.API = 2;
-
-		/**
-		 * Searches the style sheets in the document for a particular selector like ".myClass" or "a" or "a:hover" or ":after" and
-		 * returns a reference to that style sheet (or an array of them in the case of a pseudo selector like ":after"). Then you
-		 * can animate the individual properties of the style sheet.
-		 *
-		 * @param {!string} selector a string describing the selector, like ".myClass" or "a" or "a:hover" or ":after"
-		 * @return a reference to the style sheet (or an array of them in the case of a pseudo selector). If none was found, null is returned (or an empty array for a pseudo selector)
-		 */
-		CSSRulePlugin.getRule = function(selector) {
-			var ruleProp = _doc.all ? "rules" : "cssRules",
-				ss = _doc.styleSheets,
-				i = ss.length,
-				pseudo = (selector.charAt(0) === ":"),
-				j, curSS, cs, a;
-			selector = (pseudo ? "" : ",") + selector.split("::").join(":").toLowerCase() + ","; //note: old versions of IE report tag name selectors as upper case, so we just change everything to lowercase.
-			if (pseudo) {
-				a = [];
-			}
-			while (--i > -1) {
-				//Firefox may throw insecure operation errors when css is loaded from other domains, so try/catch.
-				try {
-					curSS = ss[i][ruleProp];
-					if (!curSS) {
-						continue;
-					}
-					j = curSS.length;
-				} catch (e) {
-					console.log(e);
-					continue;
-				}
-				while (--j > -1) {
-					cs = curSS[j];
-					if (cs.selectorText && ("," + cs.selectorText.split("::").join(":").toLowerCase() + ",").indexOf(selector) !== -1) { //note: IE adds an extra ":" to pseudo selectors, so .myClass:after becomes .myClass::after, so we need to strip the extra one out.
-						if (pseudo) {
-							a.push(cs.style);
-						} else {
-							return cs.style;
-						}
-					}
-				}
-			}
-			return a;
-		};
-							
-		
-		// @private gets called when the tween renders for the first time. This kicks everything off, recording start/end values, etc.
-		p._onInitTween = function(target, value, tween) {
-			if (target.cssText === undefined) {
-				return false;
-			}
-			var div = target._gsProxy = target._gsProxy || _doc.createElement("div");
-			this._ss = target;
-			this._proxy = div.style;
-			div.style.cssText = target.cssText;
-			CSSPlugin.prototype._onInitTween.call(this, div, value, tween); //we just offload all the work to the regular CSSPlugin and then copy the cssText back over to the rule in the setRatio() method. This allows us to have all of the updates to CSSPlugin automatically flow through to CSSRulePlugin instead of having to maintain both
-			return true;
-		};
-
-		
-		
-		// @private gets called every time the tween updates, passing the new ratio (typically a value between 0 and 1, but not always (for example, if an Elastic.easeOut is used, the value can jump above 1 mid-tween). It will always start and 0 and end at 1.
-		p.setRatio = function(v) {
-			_superSetRatio.call(this, v);
-			this._ss.cssText = this._proxy.cssText;
-		};
-		
-		
-		TweenPlugin.activate([CSSRulePlugin]);
-		return CSSRulePlugin;
-		
-	}, true);
-	
-}); if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); }
-
-//export to AMD/RequireJS and CommonJS/Node (precursor to full modular build system coming at a later date)
-(function(name) {
-	"use strict";
-	var getGlobal = function() {
-		return (_gsScope.GreenSockGlobals || _gsScope)[name];
-	};
-	if (typeof(module) !== "undefined" && module.exports) { //node
-		require("../TweenLite.js");
-		module.exports = getGlobal();
-	} else if (typeof(define) === "function" && define.amd) { //AMD
-		define(["TweenLite"], getGlobal);
-	}
-}("CSSRulePlugin"));
-/*!
- * VERSION: 1.5.3
- * DATE: 2018-02-15
- * UPDATES AND DOCS AT: http://greensock.com
- *
- * @license Copyright (c) 2008-2018, GreenSock. All rights reserved.
- * This work is subject to the terms at http://greensock.com/standard-license or for
- * Club GreenSock members, the software agreement that was issued with your membership.
- * 
- * @author: Jack Doyle, jack@greensock.com
- **/
-var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(global) !== "undefined") ? global : this || window; //helps ensure compatibility with AMD/RequireJS and CommonJS/Node
-(_gsScope._gsQueue || (_gsScope._gsQueue = [])).push( function() {
-
-	"use strict";
-
-	var _numExp = /(\d|\.)+/g,
-		_relNumExp = /(?:\d|\-\d|\.\d|\-\.\d|\+=\d|\-=\d|\+=.\d|\-=\.\d)+/g,
-		_colorLookup = {aqua:[0,255,255],
-			lime:[0,255,0],
-			silver:[192,192,192],
-			black:[0,0,0],
-			maroon:[128,0,0],
-			teal:[0,128,128],
-			blue:[0,0,255],
-			navy:[0,0,128],
-			white:[255,255,255],
-			fuchsia:[255,0,255],
-			olive:[128,128,0],
-			yellow:[255,255,0],
-			orange:[255,165,0],
-			gray:[128,128,128],
-			purple:[128,0,128],
-			green:[0,128,0],
-			red:[255,0,0],
-			pink:[255,192,203],
-			cyan:[0,255,255],
-			transparent:[255,255,255,0]},
-		_hue = function(h, m1, m2) {
-			h = (h < 0) ? h + 1 : (h > 1) ? h - 1 : h;
-			return ((((h * 6 < 1) ? m1 + (m2 - m1) * h * 6 : (h < 0.5) ? m2 : (h * 3 < 2) ? m1 + (m2 - m1) * (2 / 3 - h) * 6 : m1) * 255) + 0.5) | 0;
-		},
-		/**
-		 * @private Parses a color (like #9F0, #FF9900, rgb(255,51,153) or hsl(108, 50%, 10%)) into an array with 3 elements for red, green, and blue or if toHSL parameter is true, it will populate the array with hue, saturation, and lightness values. If a relative value is found in an hsl() or hsla() string, it will preserve those relative prefixes and all the values in the array will be strings instead of numbers (in all other cases it will be populated with numbers).
-		 * @param {(string|number)} v The value the should be parsed which could be a string like #9F0 or rgb(255,102,51) or rgba(255,0,0,0.5) or it could be a number like 0xFF00CC or even a named color like red, blue, purple, etc.
-		 * @param {(boolean)} toHSL If true, an hsl() or hsla() value will be returned instead of rgb() or rgba()
-		 * @return {Array.<number>} An array containing red, green, and blue (and optionally alpha) in that order, or if the toHSL parameter was true, the array will contain hue, saturation and lightness (and optionally alpha) in that order. Always numbers unless there's a relative prefix found in an hsl() or hsla() string and toHSL is true.
-		 */
-		_parseColor = function(v, toHSL) {
-			var a, r, g, b, h, s, l, max, min, d, wasHSL;
-			if (!v) {
-				a = _colorLookup.black;
-			} else if (typeof(v) === "number") {
-				a = [v >> 16, (v >> 8) & 255, v & 255];
-			} else {
-				if (v.charAt(v.length - 1) === ",") { //sometimes a trailing comma is included and we should chop it off (typically from a comma-delimited list of values like a textShadow:"2px 2px 2px blue, 5px 5px 5px rgb(255,0,0)" - in this example "blue," has a trailing comma. We could strip it out inside parseComplex() but we'd need to do it to the beginning and ending values plus it wouldn't provide protection from other potential scenarios like if the user passes in a similar value.
-					v = v.substr(0, v.length - 1);
-				}
-				if (_colorLookup[v]) {
-					a = _colorLookup[v];
-				} else if (v.charAt(0) === "#") {
-					if (v.length === 4) { //for shorthand like #9F0
-						r = v.charAt(1);
-						g = v.charAt(2);
-						b = v.charAt(3);
-						v = "#" + r + r + g + g + b + b;
-					}
-					v = parseInt(v.substr(1), 16);
-					a = [v >> 16, (v >> 8) & 255, v & 255];
-				} else if (v.substr(0, 3) === "hsl") {
-					a = wasHSL = v.match(_numExp);
-					if (!toHSL) {
-						h = (Number(a[0]) % 360) / 360;
-						s = Number(a[1]) / 100;
-						l = Number(a[2]) / 100;
-						g = (l <= 0.5) ? l * (s + 1) : l + s - l * s;
-						r = l * 2 - g;
-						if (a.length > 3) {
-							a[3] = Number(a[3]);
-						}
-						a[0] = _hue(h + 1 / 3, r, g);
-						a[1] = _hue(h, r, g);
-						a[2] = _hue(h - 1 / 3, r, g);
-					} else if (v.indexOf("=") !== -1) { //if relative values are found, just return the raw strings with the relative prefixes in place.
-						return v.match(_relNumExp);
-					}
-				} else {
-					a = v.match(_numExp) || _colorLookup.transparent;
-				}
-				a[0] = Number(a[0]);
-				a[1] = Number(a[1]);
-				a[2] = Number(a[2]);
-				if (a.length > 3) {
-					a[3] = Number(a[3]);
-				}
-			}
-			if (toHSL && !wasHSL) {
-				r = a[0] / 255;
-				g = a[1] / 255;
-				b = a[2] / 255;
-				max = Math.max(r, g, b);
-				min = Math.min(r, g, b);
-				l = (max + min) / 2;
-				if (max === min) {
-					h = s = 0;
-				} else {
-					d = max - min;
-					s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-					h = (max === r) ? (g - b) / d + (g < b ? 6 : 0) : (max === g) ? (b - r) / d + 2 : (r - g) / d + 4;
-					h *= 60;
-				}
-				a[0] = (h + 0.5) | 0;
-				a[1] = (s * 100 + 0.5) | 0;
-				a[2] = (l * 100 + 0.5) | 0;
-			}
-			return a;
-		},
-		_formatColors = function(s, toHSL) {
-			var colors = (s + "").match(_colorExp) || [],
-				charIndex = 0,
-				parsed = "",
-				i, color, temp;
-			if (!colors.length) {
-				return s;
-			}
-			for (i = 0; i < colors.length; i++) {
-				color = colors[i];
-				temp = s.substr(charIndex, s.indexOf(color, charIndex)-charIndex);
-				charIndex += temp.length + color.length;
-				color = _parseColor(color, toHSL);
-				if (color.length === 3) {
-					color.push(1);
-				}
-				parsed += temp + (toHSL ? "hsla(" + color[0] + "," + color[1] + "%," + color[2] + "%," + color[3] : "rgba(" + color.join(",")) + ")";
-			}
-			return parsed + s.substr(charIndex);
-		}, p, _colorStringFilter,
-		TweenLite = (_gsScope.GreenSockGlobals || _gsScope).TweenLite,
-		_colorExp = "(?:\\b(?:(?:rgb|rgba|hsl|hsla)\\(.+?\\))|\\B#(?:[0-9a-f]{3}){1,2}\\b", //we'll dynamically build this Regular Expression to conserve file size. After building it, it will be able to find rgb(), rgba(), # (hexadecimal), and named color values like red, blue, purple, etc.
-
-		ColorPropsPlugin = _gsScope._gsDefine.plugin({
-			propName: "colorProps",
-			version: "1.5.3",
-			priority: -1,
-			API: 2,
-			global: true,
-
-			//called when the tween renders for the first time. This is where initial values should be recorded and any setup routines should run.
-			init: function(target, value, tween, index) {
-				var p, proxy, pt, val;
-				this._target = target;
-				this._proxy = proxy = ((value.format + "").toUpperCase() === "NUMBER") ? {} : 0;
-				for (p in value) {
-					if (p !== "format") {
-						if (proxy) {
-							this._firstNumPT = pt = {_next:this._firstNumPT, t:target, p:p, f:(typeof(target[p]) === "function")};
-							proxy[p] = "rgb(" + _parseColor(!pt.f ? target[p] : target[ ((p.indexOf("set") || typeof(target["get" + p.substr(3)]) !== "function") ? p : "get" + p.substr(3)) ]()).join(",") + ")";
-							val = value[p];
-							if (typeof(val) === "function") {
-								val = val(index, target);
-							}
-							this._addTween(proxy, p, "get", ((typeof(val) === "number") ? "rgb(" + _parseColor(val, false).join(",") + ")" : val), p, null, null, _colorStringFilter);
-						} else {
-							this._addTween(target, p, "get", value[p], p, null, null, _colorStringFilter, index);
-						}
-
-					}
-				}
-				return true;
-			},
-
-			//called each time the values should be updated, and the ratio gets passed as the only parameter (typically it's a value between 0 and 1, but it can exceed those when using an ease like Elastic.easeOut or Back.easeOut, etc.)
-			set: function(v) {
-				var pt = this._firstNumPT,
-					val;
-				this._super.setRatio.call(this, v);
-				while (pt) {
-					val = _parseColor(this._proxy[pt.p], false);
-					val = val[0] << 16 | val[1] << 8 | val[2];
-					if (pt.f) {
-						this._target[pt.p](val);
-					} else {
-						this._target[pt.p] = val;
-					}
-					pt = pt._next;
-				}
-			}
-		});
-
-	for (p in _colorLookup) {
-		_colorExp += "|" + p + "\\b";
-	}
-	_colorExp = new RegExp(_colorExp+")", "gi");
-	ColorPropsPlugin.colorStringFilter = _colorStringFilter = function(a) {
-		var combined = a[0] + " " + a[1],
-			toHSL;
-		_colorExp.lastIndex = 0;
-		if (_colorExp.test(combined)) {
-			toHSL = (combined.indexOf("hsl(") !== -1 || combined.indexOf("hsla(") !== -1);
-			a[0] = _formatColors(a[0], toHSL);
-			a[1] = _formatColors(a[1], toHSL);
-		}
-	};
-
-	if (!TweenLite.defaultStringFilter) {
-		TweenLite.defaultStringFilter = ColorPropsPlugin.colorStringFilter;
-	}
-
-	ColorPropsPlugin.parseColor = _parseColor;
-	p = ColorPropsPlugin.prototype;
-	p._firstNumPT = null;
-	p._kill = function(lookup) {
-		var pt = this._firstNumPT,
-			prev;
-		while (pt) {
-			if (pt.p in lookup) {
-				if (pt === p._firstNumPT) {
-					this._firstNumPT = pt._next;
-				}
-				if (prev) {
-					prev._next = pt._next;
-				}
-			} else {
-				prev = pt;
-			}
-			pt = pt._next;
-		}
-		return this._super._kill(lookup);
-	};
-
-}); if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); }
-
-//export to AMD/RequireJS and CommonJS/Node (precursor to full modular build system coming at a later date)
-(function(name) {
-	"use strict";
-	var getGlobal = function() {
-		return (_gsScope.GreenSockGlobals || _gsScope)[name];
-	};
-	if (typeof(module) !== "undefined" && module.exports) { //node
-		require("../TweenLite.js");
-		module.exports = getGlobal();
-	} else if (typeof(define) === "function" && define.amd) { //AMD
-		define(["TweenLite"], getGlobal);
-	}
-}("ColorPropsPlugin"));
-/*!
- * VERSION: 0.2.2
- * DATE: 2018-02-15
- * UPDATES AND DOCS AT: http://greensock.com
- *
- * @license Copyright (c) 2008-2018, GreenSock. All rights reserved.
- * This work is subject to the terms at http://greensock.com/standard-license or for
- * Club GreenSock members, the software agreement that was issued with your membership.
- * 
- * @author: Jack Doyle, jack@greensock.com
- **/
-var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(global) !== "undefined") ? global : this || window; //helps ensure compatibility with AMD/RequireJS and CommonJS/Node
-(_gsScope._gsQueue || (_gsScope._gsQueue = [])).push( function() {
-
-	"use strict";
-
-	var _numExp = /(\d|\.)+/g,
-		_ColorFilter, _ColorMatrixFilter,
-		_colorProps = ["redMultiplier","greenMultiplier","blueMultiplier","alphaMultiplier","redOffset","greenOffset","blueOffset","alphaOffset"],
-		_colorLookup = {aqua:[0,255,255],
-			lime:[0,255,0],
-			silver:[192,192,192],
-			black:[0,0,0],
-			maroon:[128,0,0],
-			teal:[0,128,128],
-			blue:[0,0,255],
-			navy:[0,0,128],
-			white:[255,255,255],
-			fuchsia:[255,0,255],
-			olive:[128,128,0],
-			yellow:[255,255,0],
-			orange:[255,165,0],
-			gray:[128,128,128],
-			purple:[128,0,128],
-			green:[0,128,0],
-			red:[255,0,0],
-			pink:[255,192,203],
-			cyan:[0,255,255],
-			transparent:[255,255,255,0]},
-		_parseColor = function(color) {
-			if (color === "" || color == null || color === "none") {
-				return _colorLookup.transparent;
-			} else if (_colorLookup[color]) {
-				return _colorLookup[color];
-			} else if (typeof(color) === "number") {
-				return [color >> 16, (color >> 8) & 255, color & 255];
-			} else if (color.charAt(0) === "#") {
-				if (color.length === 4) { //for shorthand like #9F0
-					color = "#" + color.charAt(1) + color.charAt(1) + color.charAt(2) + color.charAt(2) + color.charAt(3) + color.charAt(3);
-				}
-				color = parseInt(color.substr(1), 16);
-				return [color >> 16, (color >> 8) & 255, color & 255];
-			}
-			return color.match(_numExp) || _colorLookup.transparent;
-		},
-		_parseColorFilter = function(t, v, pg) {
-			if (!_ColorFilter) {
-				_ColorFilter = (_gsScope.ColorFilter || _gsScope.createjs.ColorFilter);
-				if (!_ColorFilter) {
-					throw("EaselPlugin error: The EaselJS ColorFilter JavaScript file wasn't loaded.");
-				}
-			}
-			var filters = t.filters || [],
-				i = filters.length,
-				c, s, e, a, p;
-			while (--i > -1) {
-				if (filters[i] instanceof _ColorFilter) {
-					s = filters[i];
-					break;
-				}
-			}
-			if (!s) {
-				s = new _ColorFilter();
-				filters.push(s);
-				t.filters = filters;
-			}
-			e = s.clone();
-			if (v.tint != null) {
-				c = _parseColor(v.tint);
-				a = (v.tintAmount != null) ? Number(v.tintAmount) : 1;
-				e.redOffset = Number(c[0]) * a;
-				e.greenOffset = Number(c[1]) * a;
-				e.blueOffset = Number(c[2]) * a;
-				e.redMultiplier = e.greenMultiplier = e.blueMultiplier = 1 - a;
-			} else {
-				for (p in v) {
-					if (p !== "exposure") if (p !== "brightness") {
-						e[p] = Number(v[p]);
-					}
-				}
-			}
-			if (v.exposure != null) {
-				e.redOffset = e.greenOffset = e.blueOffset = 255 * (Number(v.exposure) - 1);
-				e.redMultiplier = e.greenMultiplier = e.blueMultiplier = 1;
-			} else if (v.brightness != null) {
-				a = Number(v.brightness) - 1;
-				e.redOffset = e.greenOffset = e.blueOffset = (a > 0) ? a * 255 : 0;
-				e.redMultiplier = e.greenMultiplier = e.blueMultiplier = 1 - Math.abs(a);
-			}
-			i = 8;
-			while (--i > -1) {
-				p = _colorProps[i];
-				if (s[p] !== e[p]) {
-					pg._addTween(s, p, s[p], e[p], "easel_colorFilter");
-				}
-			}
-			pg._overwriteProps.push("easel_colorFilter");
-			if (!t.cacheID) {
-				throw("EaselPlugin warning: for filters to display in EaselJS, you must call the object's cache() method first. " + t);
-			}
-		},
-
-		_idMatrix = [1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0],
-		_lumR = 0.212671,
-		_lumG = 0.715160,
-		_lumB = 0.072169,
-
-		_applyMatrix = function(m, m2) {
-			if (!(m instanceof Array) || !(m2 instanceof Array)) {
-				return m2;
-			}
-			var temp = [],
-				i = 0,
-				z = 0,
-				y, x;
-			for (y = 0; y < 4; y++) {
-				for (x = 0; x < 5; x++) {
-					z = (x === 4) ? m[i + 4] : 0;
-					temp[i + x] = m[i]   * m2[x] + m[i+1] * m2[x + 5] +	m[i+2] * m2[x + 10] + m[i+3] * m2[x + 15] +	z;
-				}
-				i += 5;
-			}
-			return temp;
-		},
-
-		_setSaturation = function(m, n) {
-			if (isNaN(n)) {
-				return m;
-			}
-			var inv = 1 - n,
-				r = inv * _lumR,
-				g = inv * _lumG,
-				b = inv * _lumB;
-			return _applyMatrix([r + n, g, b, 0, 0, r, g + n, b, 0, 0, r, g, b + n, 0, 0, 0, 0, 0, 1, 0], m);
-		},
-
-		_colorize = function(m, color, amount) {
-			if (isNaN(amount)) {
-				amount = 1;
-			}
-			var c = _parseColor(color),
-				r = c[0] / 255,
-				g = c[1] / 255,
-				b = c[2] / 255,
-				inv = 1 - amount;
-			return _applyMatrix([inv + amount * r * _lumR, amount * r * _lumG, amount * r * _lumB, 0, 0, amount * g * _lumR, inv + amount * g * _lumG, amount * g * _lumB, 0, 0, amount * b * _lumR, amount * b * _lumG, inv + amount * b * _lumB, 0, 0, 0, 0, 0, 1, 0], m);
-		},
-
-		_setHue = function(m, n) {
-			if (isNaN(n)) {
-				return m;
-			}
-			n *= Math.PI / 180;
-			var c = Math.cos(n),
-				s = Math.sin(n);
-			return _applyMatrix([(_lumR + (c * (1 - _lumR))) + (s * (-_lumR)), (_lumG + (c * (-_lumG))) + (s * (-_lumG)), (_lumB + (c * (-_lumB))) + (s * (1 - _lumB)), 0, 0, (_lumR + (c * (-_lumR))) + (s * 0.143), (_lumG + (c * (1 - _lumG))) + (s * 0.14), (_lumB + (c * (-_lumB))) + (s * -0.283), 0, 0, (_lumR + (c * (-_lumR))) + (s * (-(1 - _lumR))), (_lumG + (c * (-_lumG))) + (s * _lumG), (_lumB + (c * (1 - _lumB))) + (s * _lumB), 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1], m);
-		},
-
-		_setContrast = function(m, n) {
-			if (isNaN(n)) {
-				return m;
-			}
-			n += 0.01;
-			return _applyMatrix([n,0,0,0,128 * (1 - n), 0,n,0,0,128 * (1 - n), 0,0,n,0,128 * (1 - n), 0,0,0,1,0], m);
-		},
-
-		_parseColorMatrixFilter = function(t, v, pg) {
-			if (!_ColorMatrixFilter) {
-				_ColorMatrixFilter = (_gsScope.ColorMatrixFilter || _gsScope.createjs.ColorMatrixFilter);
-				if (!_ColorMatrixFilter) {
-					throw("EaselPlugin error: The EaselJS ColorMatrixFilter JavaScript file wasn't loaded.");
-				}
-			}
-			var filters = t.filters || [],
-				i = filters.length,
-				matrix, startMatrix, s;
-			while (--i > -1) {
-				if (filters[i] instanceof _ColorMatrixFilter) {
-					s = filters[i];
-					break;
-				}
-			}
-			if (!s) {
-				s = new _ColorMatrixFilter(_idMatrix.slice());
-				filters.push(s);
-				t.filters = filters;
-			}
-			startMatrix = s.matrix;
-			matrix = _idMatrix.slice();
-			if (v.colorize != null) {
-				matrix = _colorize(matrix, v.colorize, Number(v.colorizeAmount));
-			}
-			if (v.contrast != null) {
-				matrix = _setContrast(matrix, Number(v.contrast));
-			}
-			if (v.hue != null) {
-				matrix = _setHue(matrix, Number(v.hue));
-			}
-			if (v.saturation != null) {
-				matrix = _setSaturation(matrix, Number(v.saturation));
-			}
-
-			i = matrix.length;
-			while (--i > -1) {
-				if (matrix[i] !== startMatrix[i]) {
-					pg._addTween(startMatrix, i, startMatrix[i], matrix[i], "easel_colorMatrixFilter");
-				}
-			}
-
-			pg._overwriteProps.push("easel_colorMatrixFilter");
-			if (!t.cacheID) {
-				throw("EaselPlugin warning: for filters to display in EaselJS, you must call the object's cache() method first. " + t);
-			}
-
-			pg._matrix = startMatrix;
-		};
-
-
-	_gsScope._gsDefine.plugin({
-		propName: "easel",
-		priority: -1,
-		version: "0.2.2",
-		API: 2,
-
-		//called when the tween renders for the first time. This is where initial values should be recorded and any setup routines should run.
-		init: function(target, value, tween, index) {
-			this._target = target;
-			var p, pt, tint, colorMatrix, end, labels, i;
-			for (p in value) {
-
-				end = value[p];
-				if (typeof(end) === "function") {
-					end = end(index, target);
-				}
-				if (p === "colorFilter" || p === "tint" || p === "tintAmount" || p === "exposure" || p === "brightness") {
-					if (!tint) {
-						_parseColorFilter(target, value.colorFilter || value, this);
-						tint = true;
-					}
-
-				} else if (p === "saturation" || p === "contrast" || p === "hue" || p === "colorize" || p === "colorizeAmount") {
-					if (!colorMatrix) {
-						_parseColorMatrixFilter(target, value.colorMatrixFilter || value, this);
-						colorMatrix = true;
-					}
-
-				} else if (p === "frame") {
-					this._firstPT = pt = {_next:this._firstPT, t:target, p:"gotoAndStop", s:target.currentFrame, f:true, n:"frame", pr:0, type:0, m:Math.round};
-					if (typeof(end) === "string" && end.charAt(1) !== "=" && (labels = target.labels)) {
-						for (i = 0; i < labels.length; i++) {
-							if (labels[i].label === end) {
-								end = labels[i].position;
-							}
-						}
-					}
-					pt.c = (typeof(end) === "number") ? end - pt.s : parseFloat((end+"").split("=").join(""));
-					if (pt._next) {
-						pt._next._prev = pt;
-					}
-
-				} else if (target[p] != null) {
-					this._firstPT = pt = {_next:this._firstPT, t:target, p:p, f:(typeof(target[p]) === "function"), n:p, pr:0, type:0};
-					pt.s = (!pt.f) ? parseFloat(target[p]) : target[ ((p.indexOf("set") || typeof(target["get" + p.substr(3)]) !== "function") ? p : "get" + p.substr(3)) ]();
-					pt.c = (typeof(end) === "number") ? end - pt.s : (typeof(end) === "string") ? parseFloat(end.split("=").join("")) : 0;
-
-					if (pt._next) {
-						pt._next._prev = pt;
-					}
-				}
-
-			}
-			return true;
-		},
-
-		//called each time the values should be updated, and the ratio gets passed as the only parameter (typically it's a value between 0 and 1, but it can exceed those when using an ease like Elastic.easeOut or Back.easeOut, etc.)
-		set: function(v) {
-			var pt = this._firstPT,
-				min = 0.000001,
-				val;
-			while (pt) {
-				val = pt.c * v + pt.s;
-				if (pt.m) {
-					val = pt.m(val, pt.t);
-				} else if (val < min && val > -min) {
-					val = 0;
-				}
-				if (pt.f) {
-					pt.t[pt.p](val);
-				} else {
-					pt.t[pt.p] = val;
-				}
-				pt = pt._next;
-			}
-			if (this._target.cacheID) {
-				this._target.updateCache();
-			}
-		}
-
-	});
-
-}); if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); }
-//export to AMD/RequireJS and CommonJS/Node (precursor to full modular build system coming at a later date)
-(function(name) {
-	"use strict";
-	var getGlobal = function() {
-		return (_gsScope.GreenSockGlobals || _gsScope)[name];
-	};
-	if (typeof(module) !== "undefined" && module.exports) { //node
-		require("../TweenLite.js");
-		module.exports = getGlobal();
-	} else if (typeof(define) === "function" && define.amd) { //AMD
-		define(["TweenLite"], getGlobal);
-	}
-}("EaselPlugin"));
-/*!
- * VERSION: 0.1.3
- * DATE: 2018-02-15
- * UPDATES AND DOCS AT: http://greensock.com
- *
- * @license Copyright (c) 2008-2018, GreenSock. All rights reserved.
- * This work is subject to the terms at http://greensock.com/standard-license or for
- * Club GreenSock members, the software agreement that was issued with your membership.
- * 
- * @author: Jack Doyle, jack@greensock.com
- */
-var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(global) !== "undefined") ? global : this || window; //helps ensure compatibility with AMD/RequireJS and CommonJS/Node
-(_gsScope._gsQueue || (_gsScope._gsQueue = [])).push( function() {
-	
-	"use strict";
-
-	_gsScope._gsDefine.plugin({
-		propName: "endArray",
-		API: 2,
-		version: "0.1.3",
-
-		//called when the tween renders for the first time. This is where initial values should be recorded and any setup routines should run.
-		init: function(target, value, tween) {
-			var i = value.length,
-				a = this.a = [],
-				start, end;
-			this.target = target;
-			this._mod = 0;
-			if (!i) {
-				return false;
-			}
-			while (--i > -1) {
-				start = target[i];
-				end = value[i];
-				if (start !== end) {
-					a.push({i:i, s:start, c:end - start});
-				}
-			}
-			return true;
-		},
-
-		mod: function(lookup) {
-			if (typeof(lookup.endArray) === "function") {
-				this._mod = lookup.endArray;
-			}
-		},
-
-		//called each time the values should be updated, and the ratio gets passed as the only parameter (typically it's a value between 0 and 1, but it can exceed those when using an ease like Elastic.easeOut or Back.easeOut, etc.)
-		set: function(ratio) {
-			var target = this.target,
-				a = this.a,
-				i = a.length,
-				mod = this._mod,
-				e, val;
-			if (mod) {
-				while (--i > -1) {
-					e = a[i];
-					target[e.i] = mod(e.s + e.c * ratio, target);
-				}
-			} else {
-				while (--i > -1) {
-					e = a[i];
-					val = e.s + e.c * ratio;
-					target[e.i] = (val < 0.000001 && val > -0.000001) ? 0 : val;
-				}
-			}
-		}
-
-	});
-
-}); if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); }
-/*!
- * VERSION: 0.0.3
- * DATE: 2018-02-15
- * UPDATES AND DOCS AT: http://greensock.com
- *
- * @license Copyright (c) 2008-2018, GreenSock. All rights reserved.
- * This work is subject to the terms at http://greensock.com/standard-license or for
- * Club GreenSock members, the software agreement that was issued with your membership.
- * 
- * @author: Jack Doyle, jack@greensock.com
- */
-var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(global) !== "undefined") ? global : this || window; //helps ensure compatibility with AMD/RequireJS and CommonJS/Node
-(_gsScope._gsQueue || (_gsScope._gsQueue = [])).push( function() {
-	
-	"use strict";
-
-		var _cssRatioSetter = function(pt, cssp, mod) { //Takes an individual CSSPropTween and converts it into a type:2 that has a setRatio that does everything the regular CSSPlugin.setRatio() method does but applying the mod() too. We do this to keep the main CSSPlugin.setRatio() as fast as possible (the vast majority of times, no mod() will be necessary)
-				var type = pt.type,
-					oldSetRatio = pt.setRatio,
-					tween = cssp._tween,
-					target = cssp._target;
-				pt.type = 2;
-				pt.m = mod;
-				pt.setRatio = function(v) {
-					var min = 0.000001,
-						val, str, i;
-					if (v === 1 && (tween._time === tween._duration || tween._time === 0)) {
-
-						if (type !== 2) {
-							if (pt.r && type !== -1) {
-								val = Math.round(pt.s + pt.c);
-								if (!type) {
-									pt.t[pt.p] = mod(val + pt.xs0, target);
-								} else if (type === 1) {
-									str = pt.xs0 + val + pt.xs1;
-									for (i = 1; i < pt.l; i++) {
-										str += pt["xn"+i] + pt["xs"+(i+1)];
-									}
-									pt.t[pt.p] = mod(str, target);
-								}
-							} else {
-								pt.t[pt.p] = mod(pt.e, target);
-							}
-						} else {
-							oldSetRatio.call(pt, v);
-						}
-
-					} else if (v || !(tween._time === tween._duration || tween._time === 0) || tween._rawPrevTime === -0.000001) {
-						val = pt.c * v + pt.s;
-						if (pt.r) {
-							val = Math.round(val);
-						} else if (val < min) if (val > -min) {
-							val = 0;
-						}
-						if (!type) {
-							pt.t[pt.p] = mod(val + pt.xs0, target);
-						} else if (type === 1) {
-							str = pt.xs0 + val + pt.xs1;
-							for (i = 1; i < pt.l; i++) {
-								str += pt["xn"+i] + pt["xs"+(i+1)];
-							}
-							pt.t[pt.p] = mod(str, target);
-
-						} else if (type === -1) { //non-tweening value
-							pt.t[pt.p] = mod(pt.xs0, target);
-
-						} else if (oldSetRatio) {
-							oldSetRatio.call(pt, v);
-						}
-
-					} else {
-						if (type !== 2) {
-							pt.t[pt.p] = mod(pt.b, target);
-						} else {
-							oldSetRatio.call(pt, v);
-						}
-					}
-				};
-			},
-			_modCSS = function(lookup, cssp) {
-				var pt = cssp._firstPT,
-					hasBezier = (lookup.rotation && cssp._overwriteProps.join("").indexOf("bezier") !== -1); //when a Bezier tween is applying autoRotation, it's a very special case we need to handle differently.
-				while (pt) {
-					if (typeof(lookup[pt.p]) === "function") {
-						_cssRatioSetter(pt, cssp, lookup[pt.p]);
-					} else if (hasBezier && pt.n === "bezier" && pt.plugin._overwriteProps.join("").indexOf("rotation") !== -1) {
-						pt.data.mod = lookup.rotation;
-					}
-					pt = pt._next;
-				}
-			},
-
-			ModifiersPlugin = _gsScope._gsDefine.plugin({
-				propName: "modifiers",
-				version: "0.0.3",
-				API: 2,
-
-				//called when the tween renders for the first time. This is where initial values should be recorded and any setup routines should run.
-				init: function(target, value, tween) {
-					this._tween = tween;
-					this._vars = value;
-					return true;
-				},
-
-				initAll: function() {
-					var tween = this._tween,
-						lookup = this._vars,
-						mpt = this,
-						pt = tween._firstPT,
-						val, next;
-					while (pt) {
-						next = pt._next; //record here, because it may get removed
-						val = lookup[pt.n];
-						if (pt.pg) {
-							if (pt.t._propName === "css") { //handle CSSPlugin uniquely (for performance, due to the fact that the values almost always are a concatenation of numbers and strings, like suffixes, and we don't want to slow down the regular CSSPlugin setRatio() performance with conditional checks for if the value needs to be modded, so we pull any modding prop out and change it to a type:2 one that simply calls a setRatio() method where we encapsulate the modding and update all together. That way, it says in the main CSSProp linked list and just has some custom logic applied to it inside its setRatio())
-								_modCSS(lookup, pt.t);
-							} else if (pt.t !== mpt) { //don't run modProps on modProps :)
-								val = lookup[pt.t._propName];
-								pt.t._mod((typeof(val) === "object") ? val : lookup);
-							}
-						} else if (typeof(val) === "function") {
-							if (pt.f === 2 && pt.t) { //a blob (text containing multiple numeric values)
-								pt.t._applyPT.m = val;
-							} else {
-								this._add(pt.t, pt.p, pt.s, pt.c, val);
-								//remove from linked list
-								if (next) {
-									next._prev = pt._prev;
-								}
-								if (pt._prev) {
-									pt._prev._next = next;
-								} else if (tween._firstPT === pt) {
-									tween._firstPT = next;
-								}
-								pt._next = pt._prev = null;
-								tween._propLookup[pt.n] = mpt;
-							}
-						}
-						pt = next;
-					}
-					return false;
-				}
-
-			}),
-			p = ModifiersPlugin.prototype;
-
-		p._add = function(target, p, s, c, mod) {
-			this._addTween(target, p, s, s + c, p, mod);
-			this._overwriteProps.push(p);
-		};
-
-	p = _gsScope._gsDefine.globals.TweenLite.version.split(".");
-	if (Number(p[0]) <= 1 && Number(p[1]) < 19 && _gsScope.console) {
-		console.log("ModifiersPlugin requires GSAP 1.19.0 or later.");
-	}
-
-
-}); if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); }
-
-//export to AMD/RequireJS and CommonJS/Node (precursor to full modular build system coming at a later date)
-(function(name) {
-	"use strict";
-	var getGlobal = function() {
-		return (_gsScope.GreenSockGlobals || _gsScope)[name];
-	};
-	if (typeof(module) !== "undefined" && module.exports) { //node
-		require("../TweenLite.js");
-		module.exports = getGlobal();
-	} else if (typeof(define) === "function" && define.amd) { //AMD
-		define(["TweenLite"], getGlobal);
-	}
-}("ModifiersPlugin"));
-/*!
- * VERSION: 0.2.1
- * DATE: 2018-02-15
- * UPDATES AND DOCS AT: http://greensock.com
- *
- * @license Copyright (c) 2008-2018, GreenSock. All rights reserved.
- * PixiPlugin is subject to the terms at http://greensock.com/standard-license or for
- * Club GreenSock members, the software agreement that was issued with your membership.
- *
- * @author: Jack Doyle, jack@greensock.com
- */
-var _gsScope = (typeof module !== "undefined" && module.exports && typeof global !== "undefined") ? global : this || window;
-(_gsScope._gsQueue || (_gsScope._gsQueue = [])).push(function () {
-    "use strict";
-
-    var _numExp = /(\d|\.)+/g,
-		_relNumExp = /(?:\d|\-\d|\.\d|\-\.\d|\+=\d|\-=\d|\+=.\d|\-=\.\d)+/g,
-		_colorLookup = {aqua:[0,255,255],
-			lime:[0,255,0],
-			silver:[192,192,192],
-			black:[0,0,0],
-			maroon:[128,0,0],
-			teal:[0,128,128],
-			blue:[0,0,255],
-			navy:[0,0,128],
-			white:[255,255,255],
-			fuchsia:[255,0,255],
-			olive:[128,128,0],
-			yellow:[255,255,0],
-			orange:[255,165,0],
-			gray:[128,128,128],
-			purple:[128,0,128],
-			green:[0,128,0],
-			red:[255,0,0],
-			pink:[255,192,203],
-			cyan:[0,255,255],
-			transparent:[255,255,255,0]},
-		_hue = function(h, m1, m2) {
-			h = (h < 0) ? h + 1 : (h > 1) ? h - 1 : h;
-			return ((((h * 6 < 1) ? m1 + (m2 - m1) * h * 6 : (h < 0.5) ? m2 : (h * 3 < 2) ? m1 + (m2 - m1) * (2 / 3 - h) * 6 : m1) * 255) + 0.5) | 0;
-		},
-		/**
-		 * @private Parses a color (like #9F0, #FF9900, rgb(255,51,153) or hsl(108, 50%, 10%)) into an array with 3 elements for red, green, and blue or if "format" parameter is "hsl", it will populate the array with hue, saturation, and lightness values. Or if "format" is "number", it'll return a number like 0xFF0000 instead of an array. If a relative value is found in an hsl() or hsla() string, it will preserve those relative prefixes and all the values in the array will be strings instead of numbers (in all other cases it will be populated with numbers).
-		 * @param {(string|number)} v The value the should be parsed which could be a string like #9F0 or rgb(255,102,51) or rgba(255,0,0,0.5) or it could be a number like 0xFF00CC or even a named color like red, blue, purple, etc.
-		 * @param {(string)} format If "hsl", an hsl() or hsla() value will be returned instead of rgb() or rgba(). Or if "number", then a numeric value will be returned, like 0xFF0000. Default is rgb.
-		 * @return {(array|number)} An array containing red, green, and blue (and optionally alpha) in that order, or if the format parameter was "hsl", the array will contain hue, saturation and lightness (and optionally alpha) in that order. Or if "format" is defined as "number", it'll return a number like 0xFF0000. Always numbers unless there's a relative prefix found in an hsl() or hsla() string and "format" is "hsl".
-		 */
-		_parseColor = function(v, format) {
-			var toHSL = (format === "hsl"),
-				a, r, g, b, h, s, l, max, min, d, wasHSL;
-			if (!v) {
-				a = _colorLookup.black;
-			} else if (typeof(v) === "number") {
-				a = [v >> 16, (v >> 8) & 255, v & 255];
-			} else {
-				if (v.charAt(v.length - 1) === ",") { //sometimes a trailing comma is included and we should chop it off (typically from a comma-delimited list of values like a textShadow:"2px 2px 2px blue, 5px 5px 5px rgb(255,0,0)" - in this example "blue," has a trailing comma. We could strip it out inside parseComplex() but we'd need to do it to the beginning and ending values plus it wouldn't provide protection from other potential scenarios like if the user passes in a similar value.
-					v = v.substr(0, v.length - 1);
-				}
-				if (_colorLookup[v]) {
-					a = _colorLookup[v];
-				} else if (v.charAt(0) === "#") {
-					if (v.length === 4) { //for shorthand like #9F0
-						r = v.charAt(1);
-						g = v.charAt(2);
-						b = v.charAt(3);
-						v = "#" + r + r + g + g + b + b;
-					}
-					v = parseInt(v.substr(1), 16);
-					a = [v >> 16, (v >> 8) & 255, v & 255];
-				} else if (v.substr(0, 3) === "hsl") {
-					a = wasHSL = v.match(_numExp);
-					if (!toHSL) {
-						h = (Number(a[0]) % 360) / 360;
-						s = Number(a[1]) / 100;
-						l = Number(a[2]) / 100;
-						g = (l <= 0.5) ? l * (s + 1) : l + s - l * s;
-						r = l * 2 - g;
-						if (a.length > 3) {
-							a[3] = Number(v[3]);
-						}
-						a[0] = _hue(h + 1 / 3, r, g);
-						a[1] = _hue(h, r, g);
-						a[2] = _hue(h - 1 / 3, r, g);
-					} else if (v.indexOf("=") !== -1) { //if relative values are found, just return the raw strings with the relative prefixes in place.
-						return v.match(_relNumExp);
-					}
-				} else {
-					a = v.match(_numExp) || _colorLookup.transparent;
-				}
-				a[0] = Number(a[0]);
-				a[1] = Number(a[1]);
-				a[2] = Number(a[2]);
-				if (a.length > 3) {
-					a[3] = Number(a[3]);
-				}
-			}
-			if (toHSL && !wasHSL) {
-				r = a[0] / 255;
-				g = a[1] / 255;
-				b = a[2] / 255;
-				max = Math.max(r, g, b);
-				min = Math.min(r, g, b);
-				l = (max + min) / 2;
-				if (max === min) {
-					h = s = 0;
-				} else {
-					d = max - min;
-					s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-					h = (max === r) ? (g - b) / d + (g < b ? 6 : 0) : (max === g) ? (b - r) / d + 2 : (r - g) / d + 4;
-					h *= 60;
-				}
-				a[0] = (h + 0.5) | 0;
-				a[1] = (s * 100 + 0.5) | 0;
-				a[2] = (l * 100 + 0.5) | 0;
-			}
-			return (format === "number") ? (a[0] << 16 | a[1] << 8 | a[2]) : a;
-		},
-		_formatColors = function(s, toHSL) {
-			var colors = (s + "").match(_colorExp) || [],
-				charIndex = 0,
-				parsed = "",
-				i, color, temp;
-			if (!colors.length) {
-				return s;
-			}
-			for (i = 0; i < colors.length; i++) {
-				color = colors[i];
-				temp = s.substr(charIndex, s.indexOf(color, charIndex)-charIndex);
-				charIndex += temp.length + color.length;
-				color = _parseColor(color, (toHSL ? "hsl" : "rgb"));
-				if (color.length === 3) {
-					color.push(1);
-				}
-				parsed += temp + (toHSL ? "hsla(" + color[0] + "," + color[1] + "%," + color[2] + "%," + color[3] : "rgba(" + color.join(",")) + ")";
-			}
-			return parsed + s.substr(charIndex);
-		}, _colorStringFilter,
-		TweenLite = (_gsScope.GreenSockGlobals || _gsScope).TweenLite,
-		_colorExp = "(?:\\b(?:(?:rgb|rgba|hsl|hsla)\\(.+?\\))|\\B#(?:[0-9a-f]{3}){1,2}\\b", //we'll dynamically build this Regular Expression to conserve file size. After building it, it will be able to find rgb(), rgba(), # (hexadecimal), and named color values like red, blue, purple, etc.
-
-		_idMatrix = [1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0],
-		_lumR = 0.212671,
-		_lumG = 0.715160,
-		_lumB = 0.072169,
-
-		_applyMatrix = function(m, m2) {
-			var temp = [],
-				i = 0,
-				z = 0,
-				y, x;
-			for (y = 0; y < 4; y++) {
-				for (x = 0; x < 5; x++) {
-					z = (x === 4) ? m[i + 4] : 0;
-					temp[i + x] = m[i]   * m2[x] + m[i+1] * m2[x + 5] +	m[i+2] * m2[x + 10] + m[i+3] * m2[x + 15] +	z;
-				}
-				i += 5;
-			}
-			return temp;
-		},
-
-		_setSaturation = function(m, n) {
-			var inv = 1 - n,
-				r = inv * _lumR,
-				g = inv * _lumG,
-				b = inv * _lumB;
-			return _applyMatrix([r + n, g, b, 0, 0, r, g + n, b, 0, 0, r, g, b + n, 0, 0, 0, 0, 0, 1, 0], m);
-		},
-
-		_colorize = function(m, color, amount) {
-			var c = _parseColor(color),
-				r = c[0] / 255,
-				g = c[1] / 255,
-				b = c[2] / 255,
-				inv = 1 - amount;
-			return _applyMatrix([inv + amount * r * _lumR, amount * r * _lumG, amount * r * _lumB, 0, 0, amount * g * _lumR, inv + amount * g * _lumG, amount * g * _lumB, 0, 0, amount * b * _lumR, amount * b * _lumG, inv + amount * b * _lumB, 0, 0, 0, 0, 0, 1, 0], m);
-		},
-
-		_setHue = function(m, n) {
-			n *= Math.PI / 180;
-			var c = Math.cos(n),
-				s = Math.sin(n);
-			return _applyMatrix([(_lumR + (c * (1 - _lumR))) + (s * (-_lumR)), (_lumG + (c * (-_lumG))) + (s * (-_lumG)), (_lumB + (c * (-_lumB))) + (s * (1 - _lumB)), 0, 0, (_lumR + (c * (-_lumR))) + (s * 0.143), (_lumG + (c * (1 - _lumG))) + (s * 0.14), (_lumB + (c * (-_lumB))) + (s * -0.283), 0, 0, (_lumR + (c * (-_lumR))) + (s * (-(1 - _lumR))), (_lumG + (c * (-_lumG))) + (s * _lumG), (_lumB + (c * (1 - _lumB))) + (s * _lumB), 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1], m);
-		},
-
-		_setContrast = function(m, n) {
-			return _applyMatrix([n,0,0,0,0.5 * (1 - n), 0,n,0,0,0.5 * (1 - n), 0,0,n,0,0.5 * (1 - n), 0,0,0,1,0], m);
-		},
-
-		_getFilter = function(t, type) {
-			var filterClass = _gsScope.PIXI.filters[type],
-				filters = t.filters || [],
-				i = filters.length,
-				filter;
-			if (!filterClass) {
-				throw("PixiPlugin error: " + type + " isn't present.");
-			}
-			while (--i > -1) {
-				if (filters[i] instanceof filterClass) {
-					return filters[i];
-				}
-			}
-			filter = new filterClass();
-			if (type === "BlurFilter") {
-				filter.blur = 0;
-			}
-			filters.push(filter);
-			t.filters = filters;
-			return filter;
-		},
-
-		_addColorMatrixFilterCacheTween = function(p, pg, cache, vars) { //we cache the ColorMatrixFilter components in a _gsColorMatrixFilter object attached to the target object so that it's easy to grab the current value at any time.
-			pg._addTween(cache, p, cache[p], vars[p], p);
-			pg._overwriteProps.push(p);
-		},
-
-		_applyBrightnessToMatrix = function(brightness, matrix) {
-			var temp = new _gsScope.PIXI.filters.ColorMatrixFilter();
-			temp.matrix = matrix;
-			temp.brightness(brightness, true);
-			return temp.matrix;
-		},
-
-		_CMFdefaults = {contrast:1, saturation:1, colorizeAmount:0, colorize:"rgb(255,255,255)", hue:0, brightness:1},
-
-		_parseColorMatrixFilter = function(t, v, pg) {
-			var filter = _getFilter(t, "ColorMatrixFilter"),
-				cache = t._gsColorMatrixFilter = t._gsColorMatrixFilter || {contrast:1, saturation:1, colorizeAmount:0, colorize:"rgb(255,255,255)", hue:0, brightness:1},
-				combine = v.combineCMF && !("colorMatrixFilter" in v && !v.colorMatrixFilter),
-				i, matrix, startMatrix;
-			startMatrix = filter.matrix;
-			if (v.resolution) {
-				filter.resolution = v.resolution;
-			}
-			if (v.matrix && v.matrix.length === startMatrix.length) {
-				matrix = v.matrix;
-				if (cache.contrast !== 1) {
-					_addColorMatrixFilterCacheTween("contrast", pg, cache, _CMFdefaults);
-				}
-				if (cache.hue) {
-					_addColorMatrixFilterCacheTween("hue", pg, cache, _CMFdefaults);
-				}
-				if (cache.brightness !== 1) {
-					_addColorMatrixFilterCacheTween("brightness", pg, cache, _CMFdefaults);
-				}
-				if (cache.colorizeAmount) {
-					_addColorMatrixFilterCacheTween("colorize", pg, cache, _CMFdefaults);
-					_addColorMatrixFilterCacheTween("colorizeAmount", pg, cache, _CMFdefaults);
-				}
-				if (cache.saturation !== 1) {
-					_addColorMatrixFilterCacheTween("saturation", pg, cache, _CMFdefaults);
-				}
-
-			} else {
-				matrix = _idMatrix.slice();
-				if (v.contrast != null) {
-					matrix = _setContrast(matrix, Number(v.contrast));
-					_addColorMatrixFilterCacheTween("contrast", pg, cache, v);
-				} else if (cache.contrast !== 1) {
-					if (combine) {
-						matrix = _setContrast(matrix, cache.contrast);
-					} else {
-						_addColorMatrixFilterCacheTween("contrast", pg, cache, _CMFdefaults);
-					}
-				}
-				if (v.hue != null) {
-					matrix = _setHue(matrix, Number(v.hue));
-					_addColorMatrixFilterCacheTween("hue", pg, cache, v);
-				} else if (cache.hue) {
-					if (combine) {
-						matrix = _setHue(matrix, cache.hue);
-					} else {
-						_addColorMatrixFilterCacheTween("hue", pg, cache, _CMFdefaults);
-					}
-				}
-				if (v.brightness != null) {
-					matrix = _applyBrightnessToMatrix(Number(v.brightness), matrix);
-					_addColorMatrixFilterCacheTween("brightness", pg, cache, v);
-				} else if (cache.brightness !== 1) {
-					if (combine) {
-						matrix = _applyBrightnessToMatrix(cache.brightness, matrix);
-					} else {
-						_addColorMatrixFilterCacheTween("brightness", pg, cache, _CMFdefaults);
-					}
-				}
-				if (v.colorize != null) {
-					v.colorizeAmount = ("colorizeAmount" in v) ? Number(v.colorizeAmount) : 1;
-					matrix = _colorize(matrix, v.colorize, v.colorizeAmount);
-					_addColorMatrixFilterCacheTween("colorize", pg, cache, v);
-					_addColorMatrixFilterCacheTween("colorizeAmount", pg, cache, v);
-				} else if (cache.colorizeAmount) {
-					if (combine) {
-						matrix = _colorize(matrix, cache.colorize, cache.colorizeAmount);
-					} else {
-						_addColorMatrixFilterCacheTween("colorize", pg, cache, _CMFdefaults);
-						_addColorMatrixFilterCacheTween("colorizeAmount", pg, cache, _CMFdefaults);
-					}
-				}
-				if (v.saturation != null) {
-					matrix = _setSaturation(matrix, Number(v.saturation));
-					_addColorMatrixFilterCacheTween("saturation", pg, cache, v);
-				} else if (cache.saturation !== 1) {
-					if (combine) {
-						matrix = _setSaturation(matrix, cache.saturation);
-					} else {
-						_addColorMatrixFilterCacheTween("saturation", pg, cache, _CMFdefaults);
-					}
-				}
-			}
-			i = matrix.length;
-			while (--i > -1) {
-				if (matrix[i] !== startMatrix[i]) {
-					pg._addTween(startMatrix, i, startMatrix[i], matrix[i], "colorMatrixFilter");
-				}
-			}
-			pg._overwriteProps.push("colorMatrixFilter");
-		},
-
-		_addColorTween = function(target, p, value, colorSetter, plugin) {
-			var pt = colorSetter._firstPT = {_next:colorSetter._firstPT, t:target, p:p, proxy:{}, f:(typeof(target[p]) === "function")};
-			pt.proxy[p] = "rgb(" + _parseColor(!pt.f ? target[p] : target[ ((p.indexOf("set") || typeof(target["get" + p.substr(3)]) !== "function") ? p : "get" + p.substr(3)) ]()).join(",") + ")";
-			plugin._addTween(pt.proxy, p, "get", ((typeof(value) === "number") ? "rgb(" + _parseColor(value, false).join(",") + ")" : value), p, null, null, _colorStringFilter);
-		},
-
-		//to improve performance, when a color is sensed, we hijack the setRatio() method of the plugin instance with a new function that this method spits back. This is a special method that handles parsing color values on-the-fly and turns them into numeric values which PixiJS requires. In other words, instead of "rgb(255, 0, 0)", PixiJS wants 0xFF0000. This also works with hsl() values.
-		_buildColorSetter = function(tween, plugin) {
-			var setRatio = plugin.setRatio, //save the original (super) setRatio() function
-				func = function(v) {
-					var pt = func._firstPT,
-						val;
-					setRatio.call(plugin, v);
-					while (pt) {
-						val = _parseColor(pt.proxy[pt.p], "number");
-						if (pt.f) {
-							pt.t[pt.p](val);
-						} else {
-							pt.t[pt.p] = val;
-						}
-						pt = pt._next;
-					}
-					if (func.graphics) { //in order for PixiJS to actually redraw GraphicsData, we've gotta increment the "dirty" and "clearDirty" values. If we don't do this, the values will be tween properly, but not rendered.
-						func.graphics.dirty++;
-						func.graphics.clearDirty++;
-					}
-				};
-			plugin.setRatio = func;
-			return func;
-		},
-
-
-		_colorProps = {tint:1, lineColor:1, fillColor:1},
-		_xyContexts = "position,scale,skew,pivot,anchor,tilePosition,tileScale".split(","),
-		_contexts = {x:"position", y:"position", tileX:"tilePosition", tileY:"tilePosition"},
-		_colorMatrixFilterProps = {colorMatrixFilter:1, saturation:1, contrast:1, hue:1, colorize:1, colorizeAmount:1, brightness:1, combineCMF:1},
-		_DEG2RAD = Math.PI / 180,
-        _degreesToRadians = function(value) {
-			return (typeof(value) === "string" && value.charAt(1) === "=") ? value.substr(0, 2) + (parseFloat(value.substr(2)) * _DEG2RAD) : value * _DEG2RAD;
-        }, i, p;
-
-	//context setup...
-	for (i = 0; i < _xyContexts.length; i++) {
-		p = _xyContexts[i];
-		_contexts[p + "X"] = p;
-		_contexts[p + "Y"] = p;
-    }
-
-    //color parsing setup...
-	for (p in _colorLookup) {
-		_colorExp += "|" + p + "\\b";
-	}
-	_colorExp = new RegExp(_colorExp+")", "gi");
-	_colorStringFilter = function(a) {
-		var combined = a[0] + " " + a[1],
-			toHSL;
-		_colorExp.lastIndex = 0;
-		if (_colorExp.test(combined)) {
-			toHSL = (combined.indexOf("hsl(") !== -1 || combined.indexOf("hsla(") !== -1);
-			a[0] = _formatColors(a[0], toHSL);
-			a[1] = _formatColors(a[1], toHSL);
-		}
-	};
-
-	if (!TweenLite.defaultStringFilter) {
-		TweenLite.defaultStringFilter = _colorStringFilter;
-	}
-
-    var PixiPlugin = _gsScope._gsDefine.plugin({
-        propName: "pixi",
-        priority: 0,
-        API: 2,
-		global: true,
-        version: "0.2.1",
-
-        init: function (target, values, tween, index) {
-            if (!target instanceof _gsScope.PIXI.DisplayObject) {
-                return false;
-            }
-            var context, axis, value, colorMatrix, filter, p, padding, colorSetter, i, data, pt;
-            for (p in values) {
-                context = _contexts[p];
-                value = values[p];
-                if (typeof(value) === "function") {
-                    value = value(index || 0, target);
-                }
-                if (context) {
-                    axis = (p.charAt(p.length-1).toLowerCase().indexOf("x") !== -1) ? "x" : "y";
-					this._addTween(target[context], axis, target[context][axis], (context === "skew") ? _degreesToRadians(value) : value, p);
-                } else if (p === "scale" || p === "anchor" || p === "pivot" || p === "tileScale") {
-					this._addTween(target[p], "x", target[p].x, value, p + "X");
-					this._addTween(target[p], "y", target[p].y, value, p + "Y");
-                } else if (p === "rotation") { //PIXI expects rotation in radians, but as a convenience we let folks define it in degrees and we do the conversion.
-					this._addTween(target, p, target.rotation, _degreesToRadians(value), p);
-
-                } else if (_colorMatrixFilterProps[p]) {
-					if (!colorMatrix) {
-						_parseColorMatrixFilter(target, values.colorMatrixFilter || values, this);
-						colorMatrix = true;
-					}
-                } else if (p === "blur" || p === "blurX" || p === "blurY" || p === "blurPadding") {
-					filter = _getFilter(target, "BlurFilter");
-					this._addTween(filter, p, filter[p], value, p);
-					if (values.blurPadding !== 0) {
-						padding = values.blurPadding || Math.max(filter[p], value) * 2;
-						i = target.filters.length;
-						while (--i > -1) {
-							target.filters[i].padding = Math.max(target.filters[i].padding, padding); //if we don't expand the padding on all the filters, it can look clipped.
-						}
-					}
-                } else if (_colorProps[p]) {
-					if (!colorSetter) {
-						colorSetter = _buildColorSetter(tween, this);
-					}
-					if ((p === "lineColor" || p === "fillColor") && target instanceof _gsScope.PIXI.Graphics) {
-						data = target.graphicsData;
-						i = data.length;
-						while (--i > -1) {
-							_addColorTween(data[i], p, value, colorSetter, this);
-						}
-						colorSetter.graphics = target;
-					} else {
-						_addColorTween(target, p, value, colorSetter, this);
-					}
-                } else if (p === "autoAlpha") {
-					this._firstPT = pt = {t: {setRatio:function() { target.visible = !!target.alpha; }}, p: "setRatio", s: 0, c: 1, f: 1, pg: 0, n: "visible", pr: 0, m: 0, _next:this._firstPT};
-					if (pt._next) {
-						pt._next._prev = pt;
-					}
-					this._addTween(target, "alpha", target.alpha, value, "alpha");
-					this._overwriteProps.push("alpha", "visible");
-                } else {
-					this._addTween(target, p, target[p], value, p);
-                }
-				this._overwriteProps.push(p);
-            }
-            return true;
-        }
-    });
-
-	PixiPlugin.colorProps = _colorProps;
-	PixiPlugin.parseColor = _parseColor;
-	PixiPlugin.formatColors = _formatColors;
-	PixiPlugin.colorStringFilter = _colorStringFilter;
-
-
-}); if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); }
-
-//export to AMD/RequireJS and CommonJS/Node (precursor to full modular build system coming at a later date)
-(function(name) {
-	"use strict";
-	var getGlobal = function() {
-		return (_gsScope.GreenSockGlobals || _gsScope)[name];
-	};
-	if (typeof(module) !== "undefined" && module.exports) { //node
-		require("../TweenLite.js");
-		module.exports = getGlobal();
-	} else if (typeof(define) === "function" && define.amd) { //AMD
-		define(["TweenLite"], getGlobal);
-	}
-}("PixiPlugin"));
-/*!
- * VERSION: 0.2.2
- * DATE: 2018-02-15
- * UPDATES AND DOCS AT: http://greensock.com
- *
- * @license Copyright (c) 2008-2018, GreenSock. All rights reserved.
- * This work is subject to the terms at http://greensock.com/standard-license or for
- * Club GreenSock members, the software agreement that was issued with your membership.
- * 
- * @author: Jack Doyle, jack@greensock.com
- */
-var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(global) !== "undefined") ? global : this || window; //helps ensure compatibility with AMD/RequireJS and CommonJS/Node
-(_gsScope._gsQueue || (_gsScope._gsQueue = [])).push( function() {
-
-	"use strict";
-
-	var	_NaNExp = /[^\d\-\.]/g,
-		_DEG2RAD = Math.PI / 180,
-		_numExp = /(\d|\.)+/g,
-		_colorLookup = {aqua:[0,255,255],
-			lime:[0,255,0],
-			silver:[192,192,192],
-			black:[0,0,0],
-			maroon:[128,0,0],
-			teal:[0,128,128],
-			blue:[0,0,255],
-			navy:[0,0,128],
-			white:[255,255,255],
-			fuchsia:[255,0,255],
-			olive:[128,128,0],
-			yellow:[255,255,0],
-			orange:[255,165,0],
-			gray:[128,128,128],
-			purple:[128,0,128],
-			green:[0,128,0],
-			red:[255,0,0],
-			pink:[255,192,203],
-			cyan:[0,255,255],
-			transparent:[255,255,255,0]},
-		//parses a color (like #9F0, #FF9900, or rgb(255,51,153)) into an array with 3 elements for red, green, and blue. Also handles rgba() values (splits into array of 4 elements of course)
-		_parseColor = function(color) {
-			if (typeof(color) === "number") {
-				return [color >> 16, (color >> 8) & 255, color & 255];
-			} else if (color === "" || color == null || color === "none" || typeof(color) !== "string") {
-				return _colorLookup.transparent;
-			} else if (_colorLookup[color]) {
-				return _colorLookup[color];
-			} else if (color.charAt(0) === "#") {
-				if (color.length === 4) { //for shorthand like #9F0
-					color = "#" + color.charAt(1) + color.charAt(1) + color.charAt(2) + color.charAt(2) + color.charAt(3) + color.charAt(3);
-				}
-				color = parseInt(color.substr(1), 16);
-				return [color >> 16, (color >> 8) & 255, color & 255];
-			}
-			return color.match(_numExp) || _colorLookup.transparent;
-		},
-
-		_transformMap = {scaleX:1, scaleY:1, tx:1, ty:1, rotation:1, shortRotation:1, skewX:1, skewY:1, scale:1},
-
-		//parses the transform values for an element, returning an object with x, y, scaleX, scaleY, rotation, skewX, and skewY properties. Note: by default (for performance reasons), all skewing is combined into skewX and rotation but skewY still has a place in the transform object so that we can record how much of the skew is attributed to skewX vs skewY. Remember, a skewY of 10 looks the same as a rotation of 10 and skewX of -10.
-		_getTransform = function(t, rec) {
-			var s = t.matrix,
-				min = 0.000001,
-				a = s.a,
-				b = s.b,
-				c = s.c,
-				d = s.d,
-				m = rec ? t._gsTransform || {skewY:0} : {skewY:0},
-				invX = (m.scaleX < 0); //in order to interpret things properly, we need to know if the user applied a negative scaleX previously so that we can adjust the rotation and skewX accordingly. Otherwise, if we always interpret a flipped matrix as affecting scaleY and the user only wants to tween the scaleX on multiple sequential tweens, it would keep the negative scaleY without that being the user's intent.
-
-			m.tx = s.e - (m.ox || 0); //ox is the offset x that we record in setRatio() whenever we apply a custom transform that might use a pivot point. Remember, s.e and s.f get affected by things like scale. For example, imagine an object whose top left corner is at 100,100 and then we scale it up to 300% using the center as the pivot point - that corner would now be very different even though to the user, they didn't intend to change/tween the x/y position per se. Therefore, we record whatever offsets we make so that we can compensate when reading the values back.
-			m.ty = s.f - (m.oy || 0); //oy is the offset y (see note above)
-			m.scaleX = Math.sqrt(a * a + b * b);
-			m.scaleY = Math.sqrt(d * d + c * c);
-			m.rotation = (a || b) ? Math.atan2(b, a) : m.rotation || 0; //note: if scaleX is 0, we cannot accurately measure rotation. Same for skewX with a scaleY of 0. Therefore, we default to the previously recorded value (or zero if that doesn't exist).
-			m.skewX = (c || d) ? Math.atan2(c, d) + m.rotation : m.skewX || 0;
-			if (Math.abs(m.skewX) > Math.PI / 2) {
-				if (invX) {
-					m.scaleX *= -1;
-					m.skewX += (m.rotation <= 0) ? Math.PI : -Math.PI;
-					m.rotation += (m.rotation <= 0) ? Math.PI : -Math.PI;
-				} else {
-					m.scaleY *= -1;
-					m.skewX += (m.skewX <= 0) ? Math.PI : -Math.PI;
-				}
-			}
-			//some browsers have a hard time with very small values like 2.4492935982947064e-16 (notice the "e-" towards the end) and would render the object slightly off. So we round to 0 in these cases. The conditional logic here is faster than calling Math.abs().
-			if (m.rotation < min) if (m.rotation > -min) if (a || b) {
-				m.rotation = 0;
-			}
-			if (m.skewX < min) if (m.skewX > -min) if (b || c) {
-				m.skewX = 0;
-			}
-			if (rec) {
-				t._gsTransform = m; //record to the object's _gsTransform which we use so that tweens can control individual properties independently (we need all the properties to accurately recompose the matrix in the setRatio() method)
-			}
-			return m;
-		},
-
-		//takes a value and a default number, checks if the value is relative, null, or numeric and spits back a normalized number accordingly. Primarily used in the _parseTransform() function.
-		_parseVal = function(v, d) {
-			return (v == null) ? d : (typeof(v) === "string" && v.indexOf("=") === 1) ? parseInt(v.charAt(0)+"1", 10) * Number(v.substr(2)) + d : Number(v);
-		},
-
-		//translates strings like "40deg" or "40" or 40rad" or "+=40deg" to a numeric radian angle, optionally relative to a default value (if "+=" or "-=" prefix is found)
-		_parseAngle = function(v, d) {
-			var m = (v.indexOf("rad") === -1) ? _DEG2RAD : 1,
-				r = (v.indexOf("=") === 1);
-			v = Number(v.replace(_NaNExp, "")) * m;
-			return r ? v + d : v;
-		},
-
-
-		RaphaelPlugin = _gsScope._gsDefine.plugin({
-			propName: "raphael",
-			version: "0.2.2",
-			API: 2,
-
-			//called when the tween renders for the first time. This is where initial values should be recorded and any setup routines should run.
-			init: function(target, value, tween) {
-				if (!target.attr) { //raphael must have attr() method
-					return false;
-				}
-				this._target = target;
-				this._tween = tween;
-				this._props = target._gsProps = target._gsProps || {};
-				var p, s, v, pt, clr1, clr2, rel;
-
-				for (p in value) {
-
-					v = value[p];
-
-					if (p === "transform") {
-						this._parseTransform(target, v);
-						continue;
-					} else if (_transformMap[p] || p === "pivot") {
-						this._parseTransform(target, value);
-						continue;
-					}
-
-					s = target.attr(p);
-
-					//Some of these properties are in place in order to conform with the standard PropTweens in TweenPlugins so that overwriting and roundProps occur properly. For example, f and r may seem unnecessary here, but they enable other functionality.
-					//_next:*	next linked list node		[object]
-					//t: 	*	target 						[object]
-					//p:	*	property (camelCase)		[string]
-					//s: 	*	starting value				[number]
-					//c:	*	change value				[number]
-					//f:	* 	is function					[boolean]
-					//n:	*	name (for overwriting)		[string]
-					//b:		beginning value				[string]
-					//i:		intermediate value			[string]
-					//e: 		ending value				[string]
-					//r:	*	round						[boolean]
-					//type:		0=normal, 1=color, 2=rgba, -1=non-tweening prop	[number]
-					this._firstPT = pt = {_next:this._firstPT,
-						t:this._props,
-						p:p,
-						b:s,
-						f:false,
-						n:"raphael_" + p,
-						r:false,
-						type:0};
-
-					//color values must be split apart into their R, G, B (and sometimes alpha) values and tweened independently.
-					if (p === "fill" || p === "stroke") {
-						clr1 = _parseColor(s);
-						clr2 = _parseColor(v);
-						pt.e = v;
-						pt.s = Number(clr1[0]);				//red starting value
-						pt.c = Number(clr2[0]) - pt.s;		//red change
-						pt.gs = Number(clr1[1]);			//green starting value
-						pt.gc = Number(clr2[1]) - pt.gs;	//green change
-						pt.bs = Number(clr1[2]);			//blue starting value
-						pt.bc = Number(clr2[2]) - pt.bs;	//blue change
-						if (clr1.length > 3 || clr2.length > 3) { //detect an rgba() value
-							pt.as = (clr1.length < 4) ? 1 : Number(clr1[3]);
-							pt.ac = ((clr2.length < 4) ? 1 : Number(clr2[3])) - pt.as;
-							pt.type = 2; //2 = rgba() tween
-						} else {
-							pt.type = 1; //1 = color tween, -1 = no tween, just set the value at the end because there's no changes
-						}
-
-					} else {
-
-						s = (typeof(s) === "string") ? parseFloat(s.replace(_NaNExp, "")) : Number(s);
-
-						if (typeof(v) === "string") {
-							rel = (v.charAt(1) === "=");
-							v = parseFloat(v.replace(_NaNExp, ""));
-						} else {
-							rel = false;
-						}
-
-						pt.e = (v || v === 0) ? (rel ? v + s : v) : value[p]; //ensures that any += or -= prefixes are taken care of.
-
-						if ((s || s === 0) && (v || v === 0) && (pt.c = (rel ? v : v - s))) { //faster than isNaN(). Also, we set pt.c (change) here because if it's 0, we'll just treat it like a non-tweening value. can't do (v !== start) because if it's a relative value and the CHANGE is identical to the START, the condition will fail unnecessarily.
-							pt.s = s;
-						} else {
-							pt.type = -1;
-							pt.i = value[p]; //intermediate value is typically the same as the end value.
-							pt.s = pt.c = 0;
-						}
-
-					}
-
-					this._overwriteProps.push("raphael_" + p);
-					if (pt._next) {
-						pt._next._prev = pt;
-					}
-				}
-
-				return true;
-			},
-
-			//called each time the values should be updated, and the ratio gets passed as the only parameter (typically it's a value between 0 and 1, but it can exceed those when using an ease like Elastic.easeOut or Back.easeOut, etc.)
-			set: function(v) {
-				var pt = this._firstPT, val;
-
-				while (pt) {
-					val = pt.c * v + pt.s;
-					if (pt.r) {
-						val = Math.round(val);
-					}
-					if (!pt.type) {
-						pt.t[pt.p] = val;
-					} else if (pt.type === 1) { //rgb()
-						pt.t[pt.p] = "rgb(" + (val >> 0) + ", " + ((pt.gs + (v * pt.gc)) >> 0) + ", " + ((pt.bs + (v * pt.bc)) >> 0) + ")";
-					} else if (pt.type === 2) { //rgba()
-						pt.t[pt.p] = "rgba(" + (val >> 0) + ", " + ((pt.gs + (v * pt.gc)) >> 0) + ", " + ((pt.bs + (v * pt.bc)) >> 0) + ", " + (pt.as + (v * pt.ac)) + ")";
-					} else if (pt.type === -1) { //non-tweening
-						pt.t[pt.p] = pt.i;
-					}
-					pt = pt._next;
-				}
-
-				this._target.attr(this._props);
-
-				//apply transform values like x, y, scaleX, scaleY, rotation, skewX, or skewY. We do these after looping through all the PropTweens because those are where the changes are made to scaleX/scaleY/rotation/skewX/skewY/x/y.
-				if (this._transform) {
-					pt = this._transform; //to improve speed and reduce size, reuse the pt variable as an alias to the _transform property
-					var ang = pt.rotation,
-						skew = ang - pt.skewX,
-						a = Math.cos(ang) * pt.scaleX,
-						b = Math.sin(ang) * pt.scaleX,
-						c = Math.sin(skew) * -pt.scaleY,
-						d = Math.cos(skew) * pt.scaleY,
-						min = 0.000001,
-						pxl = this._pxl,
-						pyl = this._pyl;
-
-					//some browsers have a hard time with very small values like 2.4492935982947064e-16 (notice the "e-" towards the end) and would render the object slightly off. So we round to 0 in these cases for both b and c. The conditional logic here is faster than calling Math.abs().
-					if (b < min) if (b > -min) {
-						b = 0;
-					}
-					if (c < min) if (c > -min) {
-						c = 0;
-					}
-					pt.ox = this._pxg - (pxl * a + pyl * c); //we must record the offset x/y that we're making from the regular tx/ty (matrix.e and f) so that we can correctly interpret positional data in _getTransform(). See note there on tx and ox.
-					pt.oy = this._pyg - (pxl * b + pyl * d);
-					this._target.transform("m" + a + "," + b + "," + c + "," + d + "," + (pt.tx + pt.ox) + "," + (pt.ty + pt.oy));
-				}
-
-			}
-
-		}),
-		p = RaphaelPlugin.prototype;
-
-	//compares the beginning x, y, scaleX, scaleY, rotation, and skewX properties with the ending ones and adds PropTweens accordingly wherever necessary. We must tween them individually (rather than just tweening the matrix values) so that elgant overwriting can occur, like if one tween is controlling scaleX, scaleY, and rotation and then another one starts mid-tween that is trying to control the scaleX only - this tween should continue tweening scaleY and rotation.
-	p._parseTransform = function(t, v) {
-		if (this._transform) { return; } //only need to parse the transform once, and only if the browser supports it.
-
-		var m1 = this._transform = _getTransform(t, true),
-			min = 0.000001,
-			m2, skewY, p, pt, copy, dx, dy, mtx, pivot;
-
-		if (typeof(v) === "object") { //for values like scaleX, scaleY, rotation, x, y, skewX, and skewY or transform:{...} (object)
-
-			m2 = {scaleX:_parseVal((v.scaleX != null) ? v.scaleX : v.scale, m1.scaleX),
-				  scaleY:_parseVal((v.scaleY != null) ? v.scaleY : v.scale, m1.scaleY),
-				  tx:_parseVal(v.tx, m1.tx),
-				  ty:_parseVal(v.ty, m1.ty)};
-
-			if (v.shortRotation != null) {
-				m2.rotation = (typeof(v.shortRotation) === "number") ? v.shortRotation * _DEG2RAD : _parseAngle(v.shortRotation, m1.rotation);
-				var dif = (m2.rotation - m1.rotation) % (Math.PI * 2);
-				if (dif !== dif % Math.PI) {
-					dif += Math.PI * ((dif < 0) ? 2 : -2);
-				}
-				m2.rotation = m1.rotation + dif;
-
-			} else {
-				m2.rotation = (v.rotation == null) ? m1.rotation : (typeof(v.rotation) === "number") ? v.rotation * _DEG2RAD : _parseAngle(v.rotation, m1.rotation);
-			}
-			m2.skewX = (v.skewX == null) ? m1.skewX : (typeof(v.skewX) === "number") ? v.skewX * _DEG2RAD : _parseAngle(v.skewX, m1.skewX);
-
-			//note: for performance reasons, we combine all skewing into the skewX and rotation values, ignoring skewY but we must still record it so that we can discern how much of the overall skew is attributed to skewX vs. skewY. Otherwise, if the skewY would always act relative (tween skewY to 10deg, for example, multiple times and if we always combine things into skewX, we can't remember that skewY was 10 from last time). Remember, a skewY of 10 degrees looks the same as a rotation of 10 degrees plus a skewX of -10 degrees.
-			m2.skewY = (v.skewY == null) ? m1.skewY : (typeof(v.skewY) === "number") ? v.skewY * _DEG2RAD : _parseAngle(v.skewY, m1.skewY);
-			if ((skewY = m2.skewY - m1.skewY)) {
-				m2.skewX += skewY;
-				m2.rotation += skewY;
-			}
-			//don't allow rotation/skew values to be a SUPER small decimal because when they're translated back to strings for setting the css property, the browser reports them in a funky way, like 1-e7. Of course we could use toFixed() to resolve that issue but that hurts performance quite a bit with all those function calls on every frame, plus it is virtually impossible to discern values that small visually (nobody will notice changing a rotation of 0.0000001 to 0, so the performance improvement is well worth it).
-			if (m2.skewY < min) if (m2.skewY > -min) {
-				m2.skewY = 0;
-			}
-			if (m2.skewX < min) if (m2.skewX > -min) {
-				m2.skewX = 0;
-			}
-			if (m2.rotation < min) if (m2.rotation > -min) {
-				m2.rotation = 0;
-			}
-
-			pivot = v.localPivot || v.globalPivot;
-
-			if (typeof(pivot) === "string") {
-				copy = pivot.split(",");
-				dx = Number(copy[0]);
-				dy = Number(copy[1]);
-			} else if (typeof(pivot) === "object") {
-				dx = Number(pivot.x);
-				dy = Number(pivot.y);
-			} else if (v.localPivot) {
-				copy = t.getBBox(true);
-				dx = copy.width / 2;
-				dy = copy.height / 2;
-			} else {
-				copy = t.getBBox();
-				dx = copy.x + copy.width / 2;
-				dy = copy.y + copy.height / 2;
-			}
-
-			if (v.localPivot) {
-				mtx = t.matrix;
-				dx += t.attr("x");
-				dy += t.attr("y");
-				this._pxl = dx;
-				this._pyl = dy;
-				this._pxg = dx * mtx.a + dy * mtx.c + mtx.e - m1.tx;
-				this._pyg = dx * mtx.b + dy * mtx.d + mtx.f - m1.ty;
-			} else {
-				mtx = t.matrix.invert();
-				this._pxl = dx * mtx.a + dy * mtx.c + mtx.e;
-				this._pyl = dx * mtx.b + dy * mtx.d + mtx.f;
-				this._pxg = dx - m1.tx;
-				this._pyg = dy - m1.ty;
-			}
-
-		} else if (typeof(v) === "string") { //for values like transform:"rotate(60deg) scale(0.5, 0.8)"
-			copy = this._target.transform();
-			t.transform(v);
-			m2 = _getTransform(t, false);
-			t.transform(copy);
-		} else {
-			return;
-		}
-
-		for (p in _transformMap) {
-			if (m1[p] !== m2[p]) if (p !== "shortRotation") if (p !== "scale") {
-				this._firstPT = pt = {_next:this._firstPT, t:m1, p:p, s:m1[p], c:m2[p] - m1[p], n:p, f:false, r:false, b:m1[p], e:m2[p], type:0};
-				if (pt._next) {
-					pt._next._prev = pt;
-				}
-				this._overwriteProps.push("raphael_" + p);
-			}
-		}
-	};
-
-}); if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); }
-/*!
- * VERSION: 1.9.0
- * DATE: 2018-02-15
- * UPDATES AND DOCS AT: http://greensock.com
- *
- * @license Copyright (c) 2008-2018, GreenSock. All rights reserved.
- * This work is subject to the terms at http://greensock.com/standard-license or for
- * Club GreenSock members, the software agreement that was issued with your membership.
- * 
- * @author: Jack Doyle, jack@greensock.com
- **/
-var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(global) !== "undefined") ? global : this || window; //helps ensure compatibility with AMD/RequireJS and CommonJS/Node
-(_gsScope._gsQueue || (_gsScope._gsQueue = [])).push( function() {
-
-	"use strict";
-
-	var _doc = (_gsScope.document || {}).documentElement,
-		_window = _gsScope,
-		_max = function(element, axis) {
-			var dim = (axis === "x") ? "Width" : "Height",
-				scroll = "scroll" + dim,
-				client = "client" + dim,
-				body = document.body;
-			return (element === _window || element === _doc || element === body) ? Math.max(_doc[scroll], body[scroll]) - (_window["inner" + dim] || _doc[client] || body[client]) : element[scroll] - element["offset" + dim];
-		},
-		_unwrapElement = function(value) {
-			if (typeof(value) === "string") {
-				value = TweenLite.selector(value);
-			}
-			if (value.length && value !== _window && value[0] && value[0].style && !value.nodeType) {
-				value = value[0];
-			}
-			return (value === _window || (value.nodeType && value.style)) ? value : null;
-		},
-		_buildGetter = function(e, axis) { //pass in an element and an axis ("x" or "y") and it'll return a getter function for the scroll position of that element (like scrollTop or scrollLeft, although if the element is the window, it'll use the pageXOffset/pageYOffset or the documentElement's scrollTop/scrollLeft or document.body's. Basically this streamlines things and makes a very fast getter across browsers.
-			var p = "scroll" + ((axis === "x") ? "Left" : "Top");
-			if (e === _window) {
-				if (e.pageXOffset != null) {
-					p = "page" + axis.toUpperCase() + "Offset";
-				} else if (_doc[p] != null) {
-					e = _doc;
-				} else {
-					e = document.body;
-				}
-			}
-			return function() {
-				return e[p];
-			};
-		},
-		_getOffset = function(element, container) {
-			var rect = _unwrapElement(element).getBoundingClientRect(),
-				isRoot = (!container || container === _window || container === document.body),
-				cRect = (isRoot ? _doc : container).getBoundingClientRect(),
-				offsets = {x: rect.left - cRect.left, y: rect.top - cRect.top};
-			if (!isRoot && container) { //only add the current scroll position if it's not the window/body.
-				offsets.x += _buildGetter(container, "x")();
-				offsets.y += _buildGetter(container, "y")();
-			}
-			return offsets;
-		},
-		_parseVal = function(value, target, axis) {
-			var type = typeof(value);
-			return !isNaN(value) ? parseFloat(value) : (type === "number" || (type === "string" && value.charAt(1) === "=")) ? value : (value === "max") ? _max(target, axis) : Math.min(_max(target, axis), _getOffset(value, target)[axis]);
-		},
-
-		ScrollToPlugin = _gsScope._gsDefine.plugin({
-			propName: "scrollTo",
-			API: 2,
-			global: true,
-			version:"1.9.0",
-
-			//called when the tween renders for the first time. This is where initial values should be recorded and any setup routines should run.
-			init: function(target, value, tween) {
-				this._wdw = (target === _window);
-				this._target = target;
-				this._tween = tween;
-				if (typeof(value) !== "object") {
-					value = {y:value}; //if we don't receive an object as the parameter, assume the user intends "y".
-					if (typeof(value.y) === "string" && value.y !== "max" && value.y.charAt(1) !== "=") {
-						value.x = value.y;
-					}
-				} else if (value.nodeType) {
-					value = {y:value, x:value};
-				}
-				this.vars = value;
-				this._autoKill = (value.autoKill !== false);
-				this.getX = _buildGetter(target, "x");
-				this.getY = _buildGetter(target, "y");
-				this.x = this.xPrev = this.getX();
-				this.y = this.yPrev = this.getY();
-				if (value.x != null) {
-					this._addTween(this, "x", this.x, _parseVal(value.x, target, "x") - (value.offsetX || 0), "scrollTo_x", true);
-					this._overwriteProps.push("scrollTo_x");
-				} else {
-					this.skipX = true;
-				}
-				if (value.y != null) {
-					this._addTween(this, "y", this.y, _parseVal(value.y, target, "y") - (value.offsetY || 0), "scrollTo_y", true);
-					this._overwriteProps.push("scrollTo_y");
-				} else {
-					this.skipY = true;
-				}
-				return true;
-			},
-
-			//called each time the values should be updated, and the ratio gets passed as the only parameter (typically it's a value between 0 and 1, but it can exceed those when using an ease like Elastic.easeOut or Back.easeOut, etc.)
-			set: function(v) {
-				this._super.setRatio.call(this, v);
-
-				var x = (this._wdw || !this.skipX) ? this.getX() : this.xPrev,
-					y = (this._wdw || !this.skipY) ? this.getY() : this.yPrev,
-					yDif = y - this.yPrev,
-					xDif = x - this.xPrev,
-					threshold = ScrollToPlugin.autoKillThreshold;
-
-				if (this.x < 0) { //can't scroll to a position less than 0! Might happen if someone uses a Back.easeOut or Elastic.easeOut when scrolling back to the top of the page (for example)
-					this.x = 0;
-				}
-				if (this.y < 0) {
-					this.y = 0;
-				}
-				if (this._autoKill) {
-					//note: iOS has a bug that throws off the scroll by several pixels, so we need to check if it's within 7 pixels of the previous one that we set instead of just looking for an exact match.
-					if (!this.skipX && (xDif > threshold || xDif < -threshold) && x < _max(this._target, "x")) {
-						this.skipX = true; //if the user scrolls separately, we should stop tweening!
-					}
-					if (!this.skipY && (yDif > threshold || yDif < -threshold) && y < _max(this._target, "y")) {
-						this.skipY = true; //if the user scrolls separately, we should stop tweening!
-					}
-					if (this.skipX && this.skipY) {
-						this._tween.kill();
-						if (this.vars.onAutoKill) {
-							this.vars.onAutoKill.apply(this.vars.onAutoKillScope || this._tween, this.vars.onAutoKillParams || []);
-						}
-					}
-				}
-				if (this._wdw) {
-					_window.scrollTo((!this.skipX) ? this.x : x, (!this.skipY) ? this.y : y);
-				} else {
-					if (!this.skipY) {
-						this._target.scrollTop = this.y;
-					}
-					if (!this.skipX) {
-						this._target.scrollLeft = this.x;
-					}
-				}
-				this.xPrev = this.x;
-				this.yPrev = this.y;
-			}
-
-		}),
-		p = ScrollToPlugin.prototype;
-
-	ScrollToPlugin.max = _max;
-	ScrollToPlugin.getOffset = _getOffset;
-	ScrollToPlugin.buildGetter = _buildGetter;
-	ScrollToPlugin.autoKillThreshold = 7;
-
-	p._kill = function(lookup) {
-		if (lookup.scrollTo_x) {
-			this.skipX = true;
-		}
-		if (lookup.scrollTo_y) {
-			this.skipY = true;
-		}
-		return this._super._kill.call(this, lookup);
-	};
-
-}); if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); }
-
-//export to AMD/RequireJS and CommonJS/Node (precursor to full modular build system coming at a later date)
-(function(name) {
-	"use strict";
-	var getGlobal = function() {
-		return (_gsScope.GreenSockGlobals || _gsScope)[name];
-	};
-	if (typeof(module) !== "undefined" && module.exports) { //node
-		require("../TweenLite.js");
-		module.exports = getGlobal();
-	} else if (typeof(define) === "function" && define.amd) { //AMD
-		define(["TweenLite"], getGlobal);
-	}
-}("ScrollToPlugin"));
-/*!
- * VERSION: 1.2.0
- * DATE: 2018-02-15
- * UPDATES AND DOCS AT: http://greensock.com
- * 
- * This file is to be used as a simple template for writing your own plugin. See the 
- * TweenPlugin docs for more details.
- *
- * You can start by doing a search for "yourCustomProperty" and replace it with whatever the name
- * of your property is. This way of defining a plugin was introduced in version 1.9.0 - previous versions
- * of TweenLite won't work with this.
- *
- * @license Copyright (c) 2008-2018, GreenSock. All rights reserved.
- * This work is subject to the terms at http://greensock.com/standard-license or for
- * Club GreenSock members, the software agreement that was issued with your membership.
- * 
- * @author: Jack Doyle, jack@greensock.com
- **/
-var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(global) !== "undefined") ? global : this || window; //helps ensure compatibility with AMD/RequireJS and CommonJS/Node
-(_gsScope._gsQueue || (_gsScope._gsQueue = [])).push( function() {
-	//ignore the line above this and at the very end - those are for ensuring things load in the proper order
-	"use strict";
-
-	_gsScope._gsDefine.plugin({
-		propName: "yourCustomProperty", //the name of the property that will get intercepted and handled by this plugin (obviously change it to whatever you want, typically it is camelCase starting with lowercase).
-		priority: 0, //the priority in the rendering pipeline (0 by default). A priority of -1 would mean this plugin will run after all those with 0 or greater. A priority of 1 would get run before 0, etc. This only matters when a plugin relies on other plugins finishing their work before it runs (or visa-versa)
-		API: 2, //the API should stay 2 - it just gives us a way to know the method/property structure so that if in the future we change to a different TweenPlugin architecture, we can identify this plugin's structure.
-		version: "1.0.0", //your plugin's version number
-		overwriteProps: ["yourCustomProperty"], //an array of property names whose tweens should be overwritten by this plugin. For example, if you create a "scale" plugin that handles both "scaleX" and "scaleY", the overwriteProps would be ["scaleX","scaleY"] so that if there's a scaleX or scaleY tween in-progress when a new "scale" tween starts (using this plugin), it would overwrite the scaleX or scaleY tween.
-
-		/*
-		 * The init function is called when the tween renders for the first time. This is where initial values should be recorded and any setup routines should run. It receives 3 parameters:
-		 *   1) target [object] - the target of the tween. In cases where the tween's original target is an array (or jQuery object), this target will be the individual object inside that array (a new plugin instance is created for each target in the array). For example, TweenLite.to([obj1, obj2, obj3], 1, {x:100}) the target will be obj1 or obj2 or obj3 rather than the array containing them.
-		 *   2) value [*] - whatever value is passed as the special property value. For example, TweenLite.to(element, 1, {yourCustomProperty:3}) the value would be 3. Or for TweenLite.to(element, 1, {yourCustomProperty:{subProp1:3, subProp2:"whatever"}});, value would be {subProp1:3, subProp2:"whatever"}.
-		 *   3) tween [TweenLite] - the TweenLite (or TweenMax) instance that is managing this plugin instance. This can be useful if you need to check certain state-related properties on the tween (maybe in the set method) like its duration or time. Most of the time, however, you don't need to do anything with the tween. It is provided just in case you want to reference it.
-		 *   4) index [integer] - the index number of the target in the tween. For example, if an array is passed in as the target (or selector text), this would be 0 for the first one, 1 for the second, 2 for the third, etc. This was introduced in GSAP 1.19.0
-		 *
-		 * This function should return true unless you want to have TweenLite/Max skip the plugin altogether and instead treat the property/value like a normal tween (as if the plugin wasn't activated). This is rarely useful, so you should almost always return true.
-		 */
-		init: function(target, value, tween, index) {
-			this._target = target; //we record the target so that we can refer to it in the set method when doing updates.
-
-			/* Next, we create a property tween for "scaleX" and "scaleY" properties of our target
-			 * (we're just using them as a examples of how to set up a property tween with a name, start, and end value).
-			 * the _addTween() method accepts the following parameters:
-			 *   1) target [object] - target object whose property this tween will control.
-			 *   2) property [string] - the name of the property, like "scaleX" or "scaleY"
-			 *   3) start [number] - The starting value of the property. For example, if you're tweening from 0 to 100, start would be 0.
-			 *   4) end [number] - the ending value of the property. For example, if you're tweening from 0 to 100, end would be 100.
-			 *   5) overwriteProperty [string] - the name that gets registered as the overwrite property so that if another concurrent tween of the same target gets created and it is tweening a property with this name, this one will be overwritten. Typically this is the same as "property".
-			 *   6) round [boolean] - if true, the updated value on each update will be rounded to the nearest integer. [false by default]
-			 * You do NOT need to use _addTween() at all. It is merely a convenience. You can record your own values internally or whatever you want.
-			 */
-			this._addTween(target, "scaleX", target.scaleX, value, "scaleX", false);
-			this._addTween(target, "scaleY", target.scaleY, value, "scaleY", false);
-
-			//now, just for kicks, we'll record the starting "alpha" value and amount of change so that we can manage this manually rather than _addTween() (again, totally fictitious, just for an example)
-			this._alphaStart = target.alpha;
-			this._alphaChange = value.alpha - target.alpha;
-
-			//always return true unless we want to scrap the plugin and have the value treated as a normal property tween (very uncommon)
-			return true;
-		},
-
-		//[optional] - called each time the values should be updated, and the ratio gets passed as the only parameter (typically it's a value between 0 and 1, but it can exceed those when using an ease like Elastic.easeOut or Back.easeOut, etc.). If you're using this._super._addTween() for all your tweens and you don't need to do anything special on each frame besides updating those values, you can omit this "set" function altogether.
-		set: function(ratio) {
-			//since we used _addTween() inside init function, it created some property tweens that we'll update by calling the parent prototype's setRatio() (otherwise, the property tweens wouldn't get their values updated). this._super refers to the TweenPlugin prototype from which the plugin inherits (not that you need to worry about that).
-			this._super.setRatio.call(this, ratio);
-
-			//now manually set the alpha
-			this._target.alpha = this._alphaStart + this._alphaChange * ratio;
-		}
-
-	});
-
-}); if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); }
-/*!
- * VERSION: 0.6.2
- * DATE: 2018-02-15
- * UPDATES AND DOCS AT: http://greensock.com
- *
- * @license Copyright (c) 2008-2018, GreenSock. All rights reserved.
- * This work is subject to the terms at http://greensock.com/standard-license or for
- * Club GreenSock members, the software agreement that was issued with your membership.
- *
- * @author: Jack Doyle, jack@greensock.com
- */
-var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(global) !== "undefined") ? global : this || window; //helps ensure compatibility with AMD/RequireJS and CommonJS/Node
-(_gsScope._gsQueue || (_gsScope._gsQueue = [])).push( function() {
-
-	"use strict";
-
-		var _getText = function(e) {
-				var type = e.nodeType,
-					result = "";
-				if (type === 1 || type === 9 || type === 11) {
-					if (typeof(e.textContent) === "string") {
-						return e.textContent;
-					} else {
-						for ( e = e.firstChild; e; e = e.nextSibling ) {
-							result += _getText(e);
-						}
-					}
-				} else if (type === 3 || type === 4) {
-					return e.nodeValue;
-				}
-				return result;
-			},
-			_emoji = "[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2694-\u2697]|\uD83E[\uDD10-\uDD5D]|[\uD800-\uDBFF][\uDC00-\uDFFF]",
-			_emojiExp = new RegExp(_emoji),
-			_emojiAndCharsExp = new RegExp(_emoji + "|.", "g"),
-			_emojiSafeSplit = function(text, delimiter) {
-				return ((delimiter === "" || !delimiter) && _emojiExp.test(text)) ? text.match(_emojiAndCharsExp) : text.split(delimiter || "");
-			},
-			/* //previous emoji-related splitting. New method above is faster and more concise.
-			_emojiStart = 0xD800,
-			_emojiEnd = 0xDBFF,
-			_emojiLowStart = 0xDC00,
-			_emojiRegionStart = 0x1F1E6,
-			_emojiRegionEnd = 0x1F1FF,
-			_emojiModStart = 0x1f3fb,
-			_emojiModEnd = 0x1f3ff,
-			_emojiPairCode = function(s) {
-				return ((s.charCodeAt(0) - _emojiStart) << 10) + (s.charCodeAt(1) - _emojiLowStart) + 0x10000;
-			},
-			_emojiSafeSplit = function(text, delimiter) { //like calling String.split(delimiter) except that it keeps emoji characters together.
-				if (delimiter !== "") {
-					return text.split(delimiter);
-				}
-				var l = text.length,
-					a = [],
-					character, i, emojiPair1, emojiPair2, j;
-				for (i = 0; i < l; i++) {
-					character = text.charAt(i);
-					if ((character.charCodeAt(0) >= _emojiStart && character.charCodeAt(0) <= _emojiEnd) || (text.charCodeAt(i+1) >= 0xFE00 && text.charCodeAt(i+1) <= 0xFE0F)) { //special emoji characters use 2 or 4 unicode characters that we must keep together.
-						emojiPair1 = _emojiPairCode(text.substr(i, 2));
-						emojiPair2 = _emojiPairCode(text.substr(i + 2, 2));
-						j = ((emojiPair1 >= _emojiRegionStart && emojiPair1 <= _emojiRegionEnd && emojiPair2 >= _emojiRegionStart && emojiPair2 <= _emojiRegionEnd) || (emojiPair2 >= _emojiModStart && emojiPair2 <= _emojiModEnd)) ? 4 : 2;
-						a.push(text.substr(i, j));
-						i += j - 1;
-					} else {
-						a.push(character);
-					}
-				}
-				return a;
-			},
-			*/
-			TextPlugin = _gsScope._gsDefine.plugin({
-				propName: "text",
-				API: 2,
-				version:"0.6.2",
-
-				//called when the tween renders for the first time. This is where initial values should be recorded and any setup routines should run.
-				init: function(target, value, tween, index) {
-					var i = target.nodeName.toUpperCase(),
-						shrt;
-					if (typeof(value) === "function") {
-						value = value(index, target);
-					}
-					this._svg = (target.getBBox && (i === "TEXT" || i === "TSPAN"));
-					if (!("innerHTML" in target) && !this._svg) {
-						return false;
-					}
-					this._target = target;
-					if (typeof(value) !== "object") {
-						value = {value:value};
-					}
-					if (value.value === undefined) {
-						this._text = this._original = [""];
-						return true;
-					}
-					this._delimiter = value.delimiter || "";
-					this._original = _emojiSafeSplit(_getText(target).replace(/\s+/g, " "), this._delimiter);
-					this._text = _emojiSafeSplit(value.value.replace(/\s+/g, " "), this._delimiter);
-					this._runBackwards = (tween.vars.runBackwards === true);
-					if (this._runBackwards) {
-						i = this._original;
-						this._original = this._text;
-						this._text = i;
-					}
-					if (typeof(value.newClass) === "string") {
-						this._newClass = value.newClass;
-						this._hasClass = true;
-					}
-					if (typeof(value.oldClass) === "string") {
-						this._oldClass = value.oldClass;
-						this._hasClass = true;
-					}
-					i = this._original.length - this._text.length;
-					shrt = (i < 0) ? this._original : this._text;
-					this._fillChar = value.fillChar || (value.padSpace ? "&nbsp;" : "");
-					if (i < 0) {
-						i = -i;
-					}
-					while (--i > -1) {
-						shrt.push(this._fillChar);
-					}
-					return true;
-				},
-
-				//called each time the values should be updated, and the ratio gets passed as the only parameter (typically it's a value between 0 and 1, but it can exceed those when using an ease like Elastic.easeOut or Back.easeOut, etc.)
-				set: function(ratio) {
-					if (ratio > 1) {
-						ratio = 1;
-					} else if (ratio < 0) {
-						ratio = 0;
-					}
-					if (this._runBackwards) {
-						ratio = 1 - ratio;
-					}
-					var l = this._text.length,
-						i = (ratio * l + 0.5) | 0,
-						applyNew, applyOld, str;
-					if (this._hasClass) {
-						applyNew = (this._newClass && i !== 0);
-						applyOld = (this._oldClass && i !== l);
-						str = (applyNew ? "<span class='" + this._newClass + "'>" : "") + this._text.slice(0, i).join(this._delimiter) + (applyNew ? "</span>" : "") + (applyOld ? "<span class='" + this._oldClass + "'>" : "") + this._delimiter + this._original.slice(i).join(this._delimiter) + (applyOld ? "</span>" : "");
-					} else {
-						str = this._text.slice(0, i).join(this._delimiter) + this._delimiter + this._original.slice(i).join(this._delimiter);
-					}
-					if (this._svg) { //SVG text elements don't have an "innerHTML" in Microsoft browsers.
-						this._target.textContent = str;
-					} else {
-						this._target.innerHTML = (this._fillChar === "&nbsp;" && str.indexOf("  ") !== -1) ? str.split("  ").join("&nbsp;&nbsp;") : str;
-					}
-				}
-
-			}),
-			p = TextPlugin.prototype;
-
-		p._newClass = p._oldClass = p._delimiter = "";
-
-}); if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); }
-
-//export to AMD/RequireJS and CommonJS/Node (precursor to full modular build system coming at a later date)
-(function(name) {
-	"use strict";
-	var getGlobal = function() {
-		return (_gsScope.GreenSockGlobals || _gsScope)[name];
-	};
-	if (typeof(module) !== "undefined" && module.exports) { //node
-		require("../TweenLite.js");
-		module.exports = getGlobal();
-	} else if (typeof(define) === "function" && define.amd) { //AMD
-		define(["TweenLite"], getGlobal);
-	}
-}("TextPlugin"));
-/* 
- *************************************
- * <!-- GSAP Plugins -->
- *************************************
- */

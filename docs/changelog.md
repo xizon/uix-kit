@@ -1,5 +1,14 @@
 # Changelog
 
+
+#### = 1.8.8 (July 12, 2018) =
+
+* New: Add align wide and full classes.
+* New: Add a new module "Blended Grid Layout".
+* Tweak: Optimized core stylesheet.
+
+
+
 #### = 1.8.7 (July 6, 2018) =
 
 * New: Add a new module "Wave Background".

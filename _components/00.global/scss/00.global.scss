@@ -264,7 +264,7 @@ $primary-bg-color      : transparent;
 // Adding Stroke to Web Text
 // ---------------------------
 //
-@mixin stroke-text( $color, $width: '1px', $fill: 'white' ){
+@mixin stroke-text( $color, $width: 1px, $fill: white ){
 	// @include stroke-text( $highlight-color1, 1px, white );
 	text-fill-color: #{$fill}; /* Will override color (regardless of order) */
 	text-stroke-width: #{$width};

@@ -139,12 +139,31 @@
 	  
 	    > .uix-menu__right-box {
 		    padding-left: .5rem;
+			
 		
 		    a {
 			    display: inline-block;
-			    font-size: 1.5rem;
+			    font-size: 1rem;
 			    margin-right: .3rem;
 		    }
+			
+			/* Social button for white color */
+			.uix-social-btn--white {
+				border-color: $primary-text-color1;
+				color: $primary-text-color1;
+
+				&:hover {
+
+					i {
+						color: $primary-text-color1;
+					}
+
+					&::after {
+						background-color: #fff;
+					}		
+
+				}		
+			}
 	    }
   
     }

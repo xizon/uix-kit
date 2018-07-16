@@ -24,7 +24,10 @@ APP = ( function ( APP, $, window, document ) {
         });
 		
 		//Add multilevel indicator arrow
-        $verticalMenuLi.find( '> a' ).append( '<span class="uix-vertical-menu__arrow"></span>' );
+		if ( $verticalMenuLi.find( '> a .uix-vertical-menu__arrow' ).length == 0 ) {
+			$verticalMenuLi.find( '> a' ).append( '<span class="uix-vertical-menu__arrow"></span>' );
+		}
+        
 		$verticalMenuLi.each( function() {
 			var len = $( this ).find( 'ul' ).length;
 			if ( len == 0 ) {
