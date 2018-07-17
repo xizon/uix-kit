@@ -151,9 +151,6 @@
     86. ToolTip 
     87. Vertical Menu 
     88. Vertical Separator 
-    89. Wave Background 
-    90. WordPress Core ( Do not use prefix "uix-" ) 
-    91. Ajax Page Loader (Loading A Page via Ajax Into Div)  
 
 
 
@@ -14677,6 +14674,19 @@ a img.aligncenter {
 
     50% {
         right: 2px;
+        left: 180px;
+    }
+
+    55% {
+        right: 2px;
+    }
+
+    100% {
+        right: 180px;
+        left: 2px;
+    }
+}
+   right: 2px;
         left: 180px;
     }
 

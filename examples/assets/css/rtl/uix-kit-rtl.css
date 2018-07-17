@@ -43,13 +43,6 @@
     16. Dropdown Menu 
     17. Flexslider 
     18. Form 
-    19. Brands List 
-    20. Bulleted List 
-    21. Maintain Aspect Ratio List 
-    22. Side by Side List 
-    23. Source Code 
-    24. ToolTip 
-    25. Vertical Menu (RTL) 
 
 
 
@@ -1068,6 +1061,17 @@ pre.prettyprint {
 }
 
 .uix-v-menu__container:not(.is-mobile) ul.uix-menu li.multi-column > ul > li ul {
+    left: auto;
+    right: 0;
+}
+
+.uix-v-menu__container:not(.is-mobile) .uix-menu__arrow {
+    right: auto;
+    left: .5rem;
+}
+
+/*# sourceMappingURL=uix-kit-rtl.css.map */
+{
     left: auto;
     right: 0;
 }

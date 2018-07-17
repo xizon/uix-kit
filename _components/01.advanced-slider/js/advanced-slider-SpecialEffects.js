@@ -1488,8 +1488,6 @@ APP = ( function ( APP, $, window, document ) {
 			if ( Modernizr.webgl ) {
 			
 				var $myRenderer           = $( '#' + rendererOuterID ),
-					elementIndex          = parseFloat( elementIndex ),
-					prevElementIndex      = parseFloat( prevElementIndex ),
 				    $current              = slider.find( '.uix-advanced-slider-sp__item' ).eq( elementIndex ),
 					imgSel                = $current.find( 'img' ),
 				    curImgURL             = imgSel.attr( 'src' ),
@@ -1498,7 +1496,8 @@ APP = ( function ( APP, $, window, document ) {
 					spTotal               = slider.find( '.uix-advanced-slider-sp__item' ).length;
 				
 				
-				
+				elementIndex              = parseFloat( elementIndex );
+				prevElementIndex          = parseFloat( prevElementIndex );
 				
 				
 				//----------------------------------------------------------------------------------

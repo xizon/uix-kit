@@ -23,13 +23,13 @@
 	
 	
 	1. Header Area 
-    2. Back to Top 
-    3. Loader 
+    2. Loader 
+    3. Back to Top 
     4. Get all custom attributes of an element like "data-*" 
     5. Navigation 
     6. Videos 
-    7. Mega Menu 
-    8. Common Height 
+    7. Common Height 
+    8. Mega Menu 
     9. Dropdown Categories 
     10. Pagination 
     11. Specify a background image 
@@ -39,50 +39,50 @@
     15. 3D Background 2 
     16. 3D Background 2 
     17. 3D Carousel 
-    18. 3D Pages 
-    19. 3D Model 
+    18. 3D Model 
+    19. 3D Pages 
     20. 3D Particle Effect 
     21. Accordion 
     22. Accordion Background Images 
     23. Advanced Content Slider 
-    24. Advanced Slider (Basic) 
+    24. Advanced Slider (Special Effects) 
     25. Counter 
-    26. Advanced Slider (Special Effects) 
+    26. Advanced Slider (Basic) 
     27. Dropdown Menu 
     28. Dropdown Menu 2 (Multi-level drop-down navigation) 
     29. Dynamic Drop Down List from JSON 
     30. Flexslider 
-    31. Form Progress 
-    32. Gallery 
-    33. Image Shapes 
-    34. Custom Core Scripts  
-    35. Custom Lightbox 
-    36. Bulleted List 
-    37. jQuery UI Datepicker 1.11.4 
-    38. Posts List With Ajax 
-    39. Fullwidth List of Split 
-    40. Multiple Items Carousel 
+    31. Form 
+    32. jQuery UI Datepicker 1.11.4 
+    33. Form Progress 
+    34. Gallery 
+    35. Image Shapes 
+    36. Custom Core Scripts  
+    37. Custom Lightbox 
+    38. Bulleted List 
+    39. Posts List With Ajax 
+    40. Fullwidth List of Split 
     41. Mousewheel Interaction 
-    42. Form 
+    42. Multiple Items Carousel 
     43. Full Page/One Page Transition 
     44. Full Page/One Page Transition 2 
     45. Parallax 
     46. Periodical Scroll 
     47. Pricing 
-    48. Retina Graphics for Website 
-    49. Rotating Elements 
-    50. Scroll Reveal 
-    51. Show More Less 
-    52. Progress Bar 
+    48. Progress Bar 
+    49. Retina Graphics for Website 
+    50. Rotating Elements 
+    51. Scroll Reveal 
+    52. Show More Less 
     53. Smooth Scrolling When Clicking An Anchor Link 
-    54. Sticky Elements 
-    55. Source Code View 
-    56. Text effect 
-    57. Testimonials Carousel 
-    58. Timeline 
-    59. Vertical Menu 
-    60. Team Focus 
-    61. Tabs 
+    54. Source Code View 
+    55. Sticky Elements 
+    56. Tabs 
+    57. Team Focus 
+    58. Testimonials Carousel 
+    59. Text effect 
+    60. Timeline 
+    61. Vertical Menu 
     62. Ajax Push Content  
     63. Ajax Page Loader (Loading A Page via Ajax Into Div)  
     64. GSAP Plugins 
@@ -5630,8 +5630,6 @@ APP = ( function ( APP, $, window, document ) {
 			if ( Modernizr.webgl ) {
 			
 				var $myRenderer           = $( '#' + rendererOuterID ),
-					elementIndex          = parseFloat( elementIndex ),
-					prevElementIndex      = parseFloat( prevElementIndex ),
 				    $current              = slider.find( '.uix-advanced-slider-sp__item' ).eq( elementIndex ),
 					imgSel                = $current.find( 'img' ),
 				    curImgURL             = imgSel.attr( 'src' ),
@@ -5640,7 +5638,8 @@ APP = ( function ( APP, $, window, document ) {
 					spTotal               = slider.find( '.uix-advanced-slider-sp__item' ).length;
 				
 				
-				
+				elementIndex              = parseFloat( elementIndex );
+				prevElementIndex          = parseFloat( prevElementIndex );
 				
 				
 				//----------------------------------------------------------------------------------
@@ -5800,7 +5799,6 @@ APP = ( function ( APP, $, window, document ) {
 	
 
 							}
-
 
 							//play current video
 							if ( curSp._texture.baseTexture.imageType == null ) {
@@ -7394,6 +7392,12 @@ APP = ( function ( APP, $, window, document ) {
 		
 		$verticalMenuLi.find( '> a' ).on( 'click', function( e ) {
 			e.preventDefault();
+			
+			//Hide other all sibling <ul> of the selected element
+			$( this ).parent( 'li' ).siblings()
+			                        .removeClass( 'active' )
+									.find( '> ul' ).slideUp( 500 );
+
 			
 			var $sub = $( this ).parent( 'li' ).children( 'ul' );
 

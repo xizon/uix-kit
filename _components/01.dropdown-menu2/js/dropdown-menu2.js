@@ -16,6 +16,12 @@ APP = ( function ( APP, $, window, document ) {
 		$verticalMenuLi.find( '> a' ).on( 'click', function( e ) {
 			e.preventDefault();
 			
+			//Hide other all sibling <ul> of the selected element
+			$( this ).parent( 'li' ).siblings()
+			                        .removeClass( 'active' )
+									.find( '> ul' ).slideUp( 500 );
+
+			
 			var $sub = $( this ).parent( 'li' ).children( 'ul' );
 
 			$sub.slideToggle( 500 );
