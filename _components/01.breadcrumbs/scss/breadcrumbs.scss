@@ -1,9 +1,16 @@
 /* ====================================================== 
    <!-- Breadcrumbs --> 
 /* ====================================================== */
-$crumbs-back: #efefef;
-$crumbs-size: 16px;
+$crumbs-back       : #fff;
+$crumbs-line-color : #d5d5d5;
+$crumbs-line-deg   : 2;
+$crumbs-size       : 27px;
 
+		
+
+.uix-breadcrumbs__container {
+	margin-top: -#{$crumbs-size};
+}
 
 .uix-breadcrumbs {
 
@@ -13,14 +20,15 @@ $crumbs-size: 16px;
 		font-size: 0; /*Fighting the Space Between Inline Block Elements*/
 
 		li {
+			font-size: 0.875rem;/*Fighting the Space Between Inline Block Elements*/
 			display: inline-block;
-			font-size: 1rem;/*Fighting the Space Between Inline Block Elements*/
-
+		    @include outer-shadow( 1 );
+			
 			a {
 				display: block;
 				background: $crumbs-back;
 				text-align: center;
-				padding: 0 #{$crumbs-size*2} 0 #{$crumbs-size*4};
+				padding: 0 #{$crumbs-size*1} 0 #{$crumbs-size*2};
 				position: relative;
 				text-decoration: none;
 				color: $primary-text-color1;
@@ -37,38 +45,39 @@ $crumbs-size: 16px;
 					}	
 				}
 
+				
+				&::before,
 				&::after {
-					content: "";
-					border-top: $crumbs-size solid transparent;
-					border-bottom: $crumbs-size solid transparent;
-					border-left: $crumbs-size solid $crumbs-back;
+					content: '';
 					position: absolute;
-					right: -$crumbs-size;
 					top: 0;
+					left: 100%;
 					z-index: 1;
+					display: block;
+					width: 0;
+					height: 0;
+					border-top: #{$crumbs-size} solid transparent;
+					border-bottom: #{$crumbs-size} solid transparent;
+					border-left: #{$crumbs-size/$crumbs-line-deg} solid transparent;
 					@include transition-default();
 				}
 
 				&::before {
-					content: "";
-					border-top: $crumbs-size solid transparent;
-					border-bottom: $crumbs-size solid transparent;
-					border-left: $crumbs-size solid rgba(0,0,0,.6);
-					position: absolute;
-					left: 0;
-					top: 0;
-					@include transition-default();
+					margin-left: 1px;
+					border-left-color: $crumbs-line-color;
 				}
+
+				&::after {
+				    border-left-color: #fff;
+				}
+
+
 			}
 
 			&:first-child a {
 				border-top-left-radius: 3px;
 				border-bottom-left-radius: 3px;
-				
 
-				&::before {
-					display: none;
-				}
 				
 			}	
 			
@@ -77,20 +86,30 @@ $crumbs-size: 16px;
 				border-top-right-radius: 3px;
 				border-bottom-right-radius: 3px;
 				
+				
 
+				&::before,
 				&::after {
 					display: none;
-				}
-				
+				}	
 			}	
 			
 		}
 		
 	}
 	
+	&.is-fullwidth {
+		
+		ul {
+			display: table;
+			width: 100%;	
+			
+			li {
+				display: table-cell;
+				width: auto;	
+			}
+		}
+		
+	}
+	
 }
-
-
-
-		
-		

@@ -748,7 +748,7 @@ $controls-merge-button-width: 20%;
 	text-align: left;
 	margin-right: .3rem;
 	
-	&.fullwidth {
+	&.is-fullwidth {
 		width: 100%;
 	}	
 
@@ -761,7 +761,7 @@ $controls-merge-button-width: 20%;
 	user-select: none;
 	min-height: 4.1rem;
 	
-	&.fullwidth {
+	&.is-fullwidth {
 		width: 100%;
 		
 		.uix-controls__select-trigger {

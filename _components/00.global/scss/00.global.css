@@ -1,0 +1,51 @@
+/*
+
+
+	FONT SIZE HIERARCHY
+	---------------------------
+	
+    Default font-size for HTML :    16px
+    blockquote                 :    1rem
+    body                       :    1rem
+    form                       :    0.875rem
+    h1                         :    3.5rem
+    h2                         :    2.5rem
+    h3                         :    1.75rem
+    h4                         :    1.25rem
+    h5                         :    1rem
+    h6                         :    0.75rem
+
+
+	GLOBAL SPACING HIERARCHY WITH <section>
+	---------------------------
+	
+    Default                    :    6.5625rem
+    Large                      :    11.375rem
+    Small                      :    4.8125rem
+    Default (mobile)           :    4.265625rem
+    Large (mobile)             :    4.265625rem
+    Small (mobile)             :    2.625rem
+
+
+
+	COLOR PALETTE
+	---------------------------
+
+    Placeholder Text Color     :    #E6E6E8
+	Primary Background Color   :    transparent
+	Highlight Color            :    #EC5E79, #E8588C
+	Primary Text Color         :    #212121, #474747
+    Heading Text Color         :    #212121
+	Subordinate Text Color     :    #AEAEAE
+	Dividing Line Color        :    #F4F4F4
+    Button Gradient Color      :    #EC5E79, #f60, #d83ba0
+
+
+
+	TABLE OF CONTENTS
+	---------------------------
+	
+    ${{TOC}}
+
+
+*/
