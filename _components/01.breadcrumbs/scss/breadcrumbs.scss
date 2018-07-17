@@ -34,16 +34,6 @@ $crumbs-size       : 27px;
 				color: $primary-text-color1;
 				height: #{$crumbs-size*2};
 				line-height: #{$crumbs-size*2};
-				
-				
-				&:hover {
-					background: $highlight-color1;
-					color: #fff;
-					
-					&::after {
-						border-left-color: $highlight-color1;
-					}	
-				}
 
 				
 				&::before,
@@ -70,6 +60,18 @@ $crumbs-size       : 27px;
 				&::after {
 				    border-left-color: #fff;
 				}
+				
+				
+				&:hover {
+					background: $crumbs-line-color;
+					color: #fff;
+					
+					&::after {
+						border-left-color: $crumbs-line-color;
+					}
+					
+				}
+
 
 
 			}
@@ -92,7 +94,22 @@ $crumbs-size       : 27px;
 				&::after {
 					display: none;
 				}	
-			}	
+			}
+			
+			
+			&.active {
+				
+				a {
+				
+					background: $highlight-color1;
+					color: #fff;
+					
+					&::after {
+						border-left-color: $highlight-color1;
+					}	
+				}
+			}
+			
 			
 		}
 		

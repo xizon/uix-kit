@@ -73,22 +73,22 @@
     8. Navigation 
     9. Header Area 
     10. Brand 
-    11. Loader 
-    12. Back to Top 
-    13. Video 
-    14. Footer 
+    11. Footer 
+    12. Video 
+    13. Back to Top 
+    14. Loader 
     15. Social Media Icons 
-    16. Sidebar  
-    17. Tags 
-    18. Entry 
-    19. Comments ( Synchronize to WordPress's class name ) 
-    20. Mobile Menu 
-    21. Onepage Menu 
-    22. Search 
-    23. Modal Dialog 
-    24. Filterable Navigation 
-    25. 3rd Party Plugins 
-    26. Pagination 
+    16. Pagination 
+    17. Filterable Navigation 
+    18. Sidebar  
+    19. Search 
+    20. Tags 
+    21. Entry 
+    22. Comments ( Synchronize to WordPress's class name ) 
+    23. Mobile Menu 
+    24. Onepage Menu 
+    25. Modal Dialog 
+    26. 3rd Party Plugins 
     27. 3D Background 
     28. 3D Carousel 
     29. Accordion 
@@ -99,8 +99,8 @@
     34. Badges 
     35. Blended Grid Layout 
     36. Breadcrumbs 
-    37. Button 
-    38. Cards 
+    37. Cards 
+    38. Button 
     39. Counter 
     40. Dividing Line 
     41. Dots 
@@ -5475,15 +5475,6 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
   line-height: 54px;
 }
 
-.uix-breadcrumbs ul li a:hover {
-  background: #EC5E79;
-  color: #fff;
-}
-
-.uix-breadcrumbs ul li a:hover::after {
-  border-left-color: #EC5E79;
-}
-
 .uix-breadcrumbs ul li a::before, .uix-breadcrumbs ul li a::after {
   content: '';
   position: absolute;
@@ -5508,6 +5499,15 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
   border-left-color: #fff;
 }
 
+.uix-breadcrumbs ul li a:hover {
+  background: #d5d5d5;
+  color: #fff;
+}
+
+.uix-breadcrumbs ul li a:hover::after {
+  border-left-color: #d5d5d5;
+}
+
 .uix-breadcrumbs ul li:first-child a {
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
@@ -5521,6 +5521,15 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
 
 .uix-breadcrumbs ul li:last-child a::before, .uix-breadcrumbs ul li:last-child a::after {
   display: none;
+}
+
+.uix-breadcrumbs ul li.active a {
+  background: #EC5E79;
+  color: #fff;
+}
+
+.uix-breadcrumbs ul li.active a::after {
+  border-left-color: #EC5E79;
 }
 
 .uix-breadcrumbs.is-fullwidth ul {
@@ -9679,13 +9688,6 @@ a.uix-lightbox__original__close::after {
 }
 
 /* ====================================================== 
-   <!-- Bulleted List --> 
-/* ====================================================== */
-.uix-list-bullet i {
-    margin-right: .5rem;
-}
-
-/* ====================================================== 
    <!-- Maintain Aspect Ratio List --> 
 /* ====================================================== */
 .uix-list-aspect-ratio {
@@ -9764,6 +9766,13 @@ a.uix-lightbox__original__close::after {
     .uix-list-aspect-ratio .uix-list-aspect-ratio__content {
         padding: .5rem;
     }
+}
+
+/* ====================================================== 
+   <!-- Bulleted List --> 
+/* ====================================================== */
+.uix-list-bullet i {
+    margin-right: .5rem;
 }
 
 /* ====================================================== 
@@ -10095,97 +10104,6 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
 }
 
 /* ====================================================== 
-    <!-- Fullwidth List of Split 2 --> 
-/* ====================================================== */
-.uix-list-split-full {
-    position: relative;
-}
-
-.uix-list-split-full::after {
-    content: '';
-    display: block;
-    clear: both;
-}
-
-.uix-list-split-full .uix-list-split-full__left {
-    position: relative;
-    width: 30%;
-    float: left;
-    padding-right: 5vw;
-    padding-left: calc(6.730769230769% + 15px);
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
-    min-height: 150px;
-}
-
-.uix-list-split-full .uix-list-split-full__right {
-    word-wrap: break-word;
-    box-sizing: border-box;
-    width: 70%;
-    float: left;
-    padding-left: 5vw;
-    padding-right: calc(6.730769230769% + 15px);
-    background: #EC5E79;
-    background: linear-gradient(to right, #EC5E79 0%, #E8588C 100%);
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
-    min-height: 150px;
-}
-
-/* New XL container for Bootstrap 3.x */
-@media all and (min-width: 1430px) {
-    .uix-list-split-full .uix-list-split-full__left {
-        padding-left: calc(5.189340813464% + 15px);
-    /* (1426-1278)/1426/2 * 100 */;
-    }
-
-    .uix-list-split-full .uix-list-split-full__right {
-        padding-right: calc(5.189340813464% + 15px);
-    /* (1426-1278)/1426/2 * 100 */;
-    }
-}
-
-/* New XXL container for Bootstrap 3.x */
-@media all and (min-width: 1600px) {
-    .uix-list-split-full .uix-list-split-full__left {
-        padding-left: calc(12.992125984252% + 15px);
-    /* (1905-1410)/1905/2 * 100 */;
-    }
-
-    .uix-list-split-full .uix-list-split-full__right {
-        padding-right: calc(12.992125984252% + 15px);
-    /* (1905-1410)/1905/2 * 100 */;
-    }
-}
-
-/* > 2560 */
-@media all and (min-width: 2400px) {
-    .uix-list-split-full .uix-list-split-full__left {
-        padding-left: calc(22.298624754421% + 15px);
-    /* (2545-1410)/2545/2 * 100 */
-        padding-right: 15px;
-    }
-
-    .uix-list-split-full .uix-list-split-full__right {
-        padding-right: calc(22.298624754421% + 15px);
-    /* (2545-1410)/2545/2 * 100 */
-        margin-left: 5vw;
-        width: calc( 70% - 5vw);
-    }
-}
-
-@media all and (max-width: 768px) {
-    .uix-list-split-full .uix-list-split-full__left {
-        width: 100%;
-        min-height: inherit;
-    }
-
-    .uix-list-split-full .uix-list-split-full__right {
-        min-height: inherit;
-        width: 100%;
-        padding: 0 15px;
-    }
-}
-
-/* ====================================================== 
     <!-- Fullwidth List of Split --> 
 /* ====================================================== */
 .uix-list-split-imagery {
@@ -10272,6 +10190,97 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
     .uix-list-split-imagery .uix-list-split-imagery__info,
   .uix-list-split-imagery.is-reversed .uix-list-split-imagery__info {
         text-align: center;
+        width: 100%;
+        padding: 0 15px;
+    }
+}
+
+/* ====================================================== 
+    <!-- Fullwidth List of Split 2 --> 
+/* ====================================================== */
+.uix-list-split-full {
+    position: relative;
+}
+
+.uix-list-split-full::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.uix-list-split-full .uix-list-split-full__left {
+    position: relative;
+    width: 30%;
+    float: left;
+    padding-right: 5vw;
+    padding-left: calc(6.730769230769% + 15px);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+    min-height: 150px;
+}
+
+.uix-list-split-full .uix-list-split-full__right {
+    word-wrap: break-word;
+    box-sizing: border-box;
+    width: 70%;
+    float: left;
+    padding-left: 5vw;
+    padding-right: calc(6.730769230769% + 15px);
+    background: #EC5E79;
+    background: linear-gradient(to right, #EC5E79 0%, #E8588C 100%);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+    min-height: 150px;
+}
+
+/* New XL container for Bootstrap 3.x */
+@media all and (min-width: 1430px) {
+    .uix-list-split-full .uix-list-split-full__left {
+        padding-left: calc(5.189340813464% + 15px);
+    /* (1426-1278)/1426/2 * 100 */;
+    }
+
+    .uix-list-split-full .uix-list-split-full__right {
+        padding-right: calc(5.189340813464% + 15px);
+    /* (1426-1278)/1426/2 * 100 */;
+    }
+}
+
+/* New XXL container for Bootstrap 3.x */
+@media all and (min-width: 1600px) {
+    .uix-list-split-full .uix-list-split-full__left {
+        padding-left: calc(12.992125984252% + 15px);
+    /* (1905-1410)/1905/2 * 100 */;
+    }
+
+    .uix-list-split-full .uix-list-split-full__right {
+        padding-right: calc(12.992125984252% + 15px);
+    /* (1905-1410)/1905/2 * 100 */;
+    }
+}
+
+/* > 2560 */
+@media all and (min-width: 2400px) {
+    .uix-list-split-full .uix-list-split-full__left {
+        padding-left: calc(22.298624754421% + 15px);
+    /* (2545-1410)/2545/2 * 100 */
+        padding-right: 15px;
+    }
+
+    .uix-list-split-full .uix-list-split-full__right {
+        padding-right: calc(22.298624754421% + 15px);
+    /* (2545-1410)/2545/2 * 100 */
+        margin-left: 5vw;
+        width: calc( 70% - 5vw);
+    }
+}
+
+@media all and (max-width: 768px) {
+    .uix-list-split-full .uix-list-split-full__left {
+        width: 100%;
+        min-height: inherit;
+    }
+
+    .uix-list-split-full .uix-list-split-full__right {
+        min-height: inherit;
         width: 100%;
         padding: 0 15px;
     }
@@ -13532,15 +13541,6 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
 }
 
 /* ====================================================== 
-   <!-- Text effect -->   
-/* ====================================================== */
-.uix-letter {
-    transform-origin: 50% 100%;
-    display: inline-block;
-    line-height: 1;
-}
-
-/* ====================================================== 
    <!-- Timeline -->     
 /* ====================================================== */
 /*
@@ -13949,6 +13949,15 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
     .uix-timeline__container-wrapper.is-horizontal.uix-timeline__container-wrapper--classic .uix-timeline__container.is-horizontal .uix-timeline.uix-timeline--to-center .uix-timeline__item .uix-timeline__item--info {
         transform: translateX(0);
     }
+}
+
+/* ====================================================== 
+   <!-- Text effect -->   
+/* ====================================================== */
+.uix-letter {
+    transform-origin: 50% 100%;
+    display: inline-block;
+    line-height: 1;
 }
 
 /* ====================================================== 
