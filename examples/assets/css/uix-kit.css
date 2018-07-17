@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.8.8
+ * ## Version             :  1.9.0
  * ## Last Update         :  July 17, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -86,75 +86,74 @@
     21. Entry 
     22. Comments ( Synchronize to WordPress's class name ) 
     23. Mobile Menu 
-    24. Mobile Menu 
-    25. Onepage Menu 
-    26. Modal Dialog 
-    27. 3rd Party Plugins 
-    28. 3D Background 
-    29. 3D Carousel 
-    30. Accordion 
-    31. Accordion Background Images 
-    32. Advanced Content Slider 
+    24. Onepage Menu 
+    25. Modal Dialog 
+    26. 3rd Party Plugins 
+    27. 3D Background 
+    28. 3D Carousel 
+    29. Accordion 
+    30. Accordion Background Images 
+    31. Advanced Content Slider 
+    32. Advanced Slider (Special Effects) 
     33. Advanced Slider (Basic) 
-    34. Advanced Slider (Special Effects) 
-    35. Badges 
-    36. Blended Grid Layout 
-    37. Breadcrumbs 
-    38. Button 
-    39. Cards 
-    40. Counter 
-    41. Dividing Line 
-    42. Dots 
-    43. Dotted Line 
-    44. Dropdown Menu 
-    45. Dropdown Menu 2 (Multi-level drop-down navigation) 
-    46. Equal-width Divs 
-    47. Features 
-    48. Flexslider 
-    49. Footer Templates 
-    50. Form 
-    51. Form Progress 
-    52. Gallery 
-    53. Heading 
-    54. Image Shapes 
-    55. Custom Core Scripts & Stylesheets 
-    56. Cutom Light Box 
-    57. Brands List 
-    58. Bulleted List 
-    59. Maintain Aspect Ratio List 
-    60. List of Posts 
-    61. List of Split Posts 
-    62. Side by Side List 
-    63. Side by Side List With Photo 
-    64. Fullwidth List of Split 2 
-    65. Fullwidth List of Split 
-    66. Mouse Animation Scroll 
-    67. Multiple Items Carousel 
-    68. Overlay 
-    69. Parallax 
-    70. Periodical Scroll 
-    71. Pricing 
-    72. Progress Bar 
-    73. Ribbon 
-    74. Services 
-    75. Shape Animation 
-    76. Show More Less 
-    77. Single Post 
-    78. Source Code 
-    79. Striking 
-    80. Tabs 
-    81. Team Focus 
-    82. Team Fullwidth (Style using the Side by Side List With Photo module) 
-    83. Team Gird 
-    84. Testimonials Carousel 
-    85. Text effect 
-    86. Timeline 
-    87. ToolTip 
-    88. Vertical Menu 
-    89. Vertical Separator 
-    90. Wave Background 
-    91. WordPress Core ( Do not use prefix "uix-" ) 
-    92. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    34. Badges 
+    35. Blended Grid Layout 
+    36. Breadcrumbs 
+    37. Button 
+    38. Cards 
+    39. Counter 
+    40. Dividing Line 
+    41. Dots 
+    42. Dotted Line 
+    43. Dropdown Menu 
+    44. Dropdown Menu 2 (Multi-level drop-down navigation) 
+    45. Equal-width Divs 
+    46. Features 
+    47. Flexslider 
+    48. Footer Templates 
+    49. Form 
+    50. Form Progress 
+    51. Gallery 
+    52. Heading 
+    53. Image Shapes 
+    54. Custom Core Scripts & Stylesheets 
+    55. Cutom Light Box 
+    56. Brands List 
+    57. Bulleted List 
+    58. Maintain Aspect Ratio List 
+    59. List of Posts 
+    60. List of Split Posts 
+    61. Side by Side List 
+    62. Side by Side List With Photo 
+    63. Fullwidth List of Split 2 
+    64. Fullwidth List of Split 
+    65. Mouse Animation Scroll 
+    66. Multiple Items Carousel 
+    67. Overlay 
+    68. Parallax 
+    69. Periodical Scroll 
+    70. Pricing 
+    71. Progress Bar 
+    72. Ribbon 
+    73. Services 
+    74. Shape Animation 
+    75. Show More Less 
+    76. Single Post 
+    77. Source Code 
+    78. Striking 
+    79. Tabs 
+    80. Team Focus 
+    81. Team Fullwidth (Style using the Side by Side List With Photo module) 
+    82. Team Gird 
+    83. Testimonials Carousel 
+    84. Text effect 
+    85. Timeline 
+    86. ToolTip 
+    87. Vertical Menu 
+    88. Vertical Separator 
+    89. Wave Background 
+    90. WordPress Core ( Do not use prefix "uix-" ) 
+    91. Ajax Page Loader (Loading A Page via Ajax Into Div)  
 
 
 
@@ -3922,10 +3921,6 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
 .uix-menu__container.is-mobile > .uix-menu__inner > .uix-menu__right-box {
   padding-left: .5rem;
   /* Social button for white color */
-}
-
-.uix-menu__container.is-mobile > .uix-menu__inner > .uix-menu__right-box i {
-  margin-right: 0;
 }
 
 .uix-menu__container.is-mobile > .uix-menu__inner > .uix-menu__right-box a {

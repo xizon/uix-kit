@@ -1,6 +1,13 @@
 # Changelog
 
 
+#### = 1.9.0 (July 17, 2018) =
+
+* Tweak: Changed PIXI's slider effect.
+
+
+
+
 #### = 1.8.8 (July 12, 2018) =
 
 * New: Add align wide and full classes.

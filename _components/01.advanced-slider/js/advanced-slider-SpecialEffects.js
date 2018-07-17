@@ -9,7 +9,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.ADVANCED_SLIDER_FILTER               = APP.ADVANCED_SLIDER_FILTER || {};
-	APP.ADVANCED_SLIDER_FILTER.version       = '0.0.2';
+	APP.ADVANCED_SLIDER_FILTER.version       = '0.0.3';
     APP.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 	
@@ -460,10 +460,6 @@ APP = ( function ( APP, $, window, document ) {
 						//Need to scale according to the screen
 						curSprite.scale.set( canvasRatio );
 
-						TweenMax.set( curSprite, {
-							alpha : 0
-						});	
-
 
 						items_container.addChild( curSprite );
 						// Enable interactions
@@ -499,23 +495,19 @@ APP = ( function ( APP, $, window, document ) {
 
 						stage_filter.addChild( displacementSprite );
 
+
 						//Animation Effects
 						//-------------------------------------
 						var ticker       = new PIXI.ticker.Ticker();
 						ticker.autoStart = true;
 						ticker.add( function( delta ) {
 
-	//								displacementSprite.x += 12.14 * delta;
-	//								displacementSprite.y += 42.24 * delta;
-	//
-	//								displacementSprite.scale.x += 0.2 * delta;
-	//								displacementSprite.scale.y += 0.2 * delta;
-
 							// Render updated scene
 							renderer_filter.render( stage_filter );
 
 						});
-
+						
+	
 
 					});
 
@@ -1155,7 +1147,8 @@ APP = ( function ( APP, $, window, document ) {
 
 				//Canvas Interactions
 				//-------------------------------------
-				transitionInteractions( 0, $this, 'in' );
+				transitionInteractions( 0, itemsTotal-1, $this, 'in' );
+				
 				
 				
 			}
@@ -1187,8 +1180,9 @@ APP = ( function ( APP, $, window, document ) {
 
 				if ( !$( this ).hasClass( 'active' ) ) {
 					
+					
 					//Canvas Interactions
-					transitionInteractions( $items.filter( '.active' ).index(), sliderWrapper, 'out' );
+					transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), sliderWrapper, 'out' );
 					
 					//Update the current and previous/next items
 					sliderUpdates( $( this ).attr( 'data-index' ), sliderWrapper );
@@ -1219,7 +1213,7 @@ APP = ( function ( APP, $, window, document ) {
 				e.preventDefault();
 
 				//Canvas Interactions
-				transitionInteractions( $items.filter( '.active' ).index(), sliderWrapper, 'out' );	
+				transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), sliderWrapper, 'out' );	
 
 				//Update the current and previous items
 				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, sliderWrapper );
@@ -1233,7 +1227,7 @@ APP = ( function ( APP, $, window, document ) {
 				e.preventDefault();
 
 				//Canvas Interactions
-				transitionInteractions( $items.filter( '.active' ).index(), sliderWrapper, 'out' );	
+				transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), sliderWrapper, 'out' );	
 
 				//Update the current and next items
 				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, sliderWrapper );
@@ -1411,7 +1405,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			//Canvas Interactions
 			//-------------------------------------
-			transitionInteractions( elementIndex, slider, 'in' );
+			transitionInteractions( elementIndex, $items.filter( '.leave' ).index(), slider, 'in' );
 			
 
 			
@@ -1482,23 +1476,29 @@ APP = ( function ( APP, $, window, document ) {
 		 * Canvas Transition Interactions
 		 * @http://pixijs.download/dev/docs/index.html
 		 *
-		 * @param  {number} elementIndex     - Index of current slider.
-		 * @param  {object} slider           - Selector of the slider.
-		 * @param  {string} goType           - The type of entry and exit between two items.  
-		                                       Optional values: in, out
-		 * @return {void}                    - The constructor.
+		 * @param  {number} elementIndex           - Index of current slider.
+		 * @param  {number} prevElementIndex       - Index of previous slider.
+		 * @param  {object} slider                 - Selector of the slider.
+		 * @param  {string} goType                 - The type of entry and exit between two items.  
+		                                             Optional values: in, out
+		 * @return {void}                          - The constructor.
 		 */
-        function transitionInteractions( elementIndex, slider, goType ) {
+        function transitionInteractions( elementIndex, prevElementIndex, slider, goType ) {
 			
 			if ( Modernizr.webgl ) {
 			
 				var $myRenderer           = $( '#' + rendererOuterID ),
+					elementIndex          = parseFloat( elementIndex ),
+					prevElementIndex      = parseFloat( prevElementIndex ),
 				    $current              = slider.find( '.uix-advanced-slider-sp__item' ).eq( elementIndex ),
 					imgSel                = $current.find( 'img' ),
 				    curImgURL             = imgSel.attr( 'src' ),
 					stageW                = slider.width(),
 					stageH                = slider.height(),
 					spTotal               = slider.find( '.uix-advanced-slider-sp__item' ).length;
+				
+				
+				
 				
 				
 				//----------------------------------------------------------------------------------
@@ -1599,7 +1599,6 @@ APP = ( function ( APP, $, window, document ) {
 
 
 				
-				
 
 				//----------------------------------------------------------------------------------
 				//--------------------------------- Liquid Distortion Effect -----------------------
@@ -1607,125 +1606,127 @@ APP = ( function ( APP, $, window, document ) {
 				if ( slider.hasClass( 'uix-advanced-slider-sp--eff-liquid' ) ) {
 					
 				
+					var curSp  = items_container.children[ elementIndex ],
+						prevSp = items_container.children[ prevElementIndex ];
+
+						
+					//Display the current item
+					//-------------------------------------
+					if ( !slider.hasClass( 'js-init-ok' ) ) {
+						for ( var k = 0; k < spTotal; k++ ) {
+
+							var obj = items_container.children[ k ];
+							
+							TweenMax.set( obj, {
+								alpha : 0
+							});
+						}
+
+						//Avoid repeated initialization
+						slider.addClass( 'js-init-ok' );	
+					}
+
+
+
 					
 					//Display wrapper of canvas (transitions between slides)
 					//-------------------------------------	
 					if ( goType == 'out' ) {
 						//Current item leaving action
-						
-						TweenMax.to( displacementSprite.scale, 1, { 
-							x: 10,
-							y: 10
-						} );
 
 						
 					} else {
-						//Current item entry action
 						
-						TweenMax.to( $myRenderer, animDuration/1000, {
-							alpha : 0,
-							onComplete    : function() {
+						
+						//Video sprite initialization
+						setTimeout( function() {
+							for ( var k = 0; k < spTotal; k++ ) {
 
-								var curSp = items_container.children[ elementIndex ];
+								var obj = items_container.children[ k ];
+								
+								//pause all videos
+								if ( obj._texture.baseTexture.imageType == null ) {
+									var videoSource = obj.texture.baseTexture.source;
 
-								TweenMax.to( this.target, animDuration/1000, {
-									alpha : 1
-								});	
-
-
-								//display the current item
-								for ( var k = 0; k < spTotal; k++ ) {
-
-									var obj = items_container.children[ k ];
-									TweenMax.set( obj, {
-										alpha : 0
-									});	
-
-									//pause all videos
-									if ( obj._texture.baseTexture.imageType == null ) {
-										var videoSource = obj.texture.baseTexture.source;
-
-										// play the video
-										videoSource.currentTime = 0;
-										videoSource.autoplay = false;
-										videoSource.pause();
-										videoSource.muted = true;
-									}		
-
-								}
-
-
-
-								//play current video
-								if ( curSp._texture.baseTexture.imageType == null ) {
-									var videoSource2 = curSp.texture.baseTexture.source;
 
 									// play the video
-									videoSource2.currentTime = 0;
-									videoSource2.autoplay = true;
-									videoSource2.play();
-									videoSource2.muted = false;
-								}
-
-
-								//display filters
-								TweenMax.set( curSp, {
-									alpha : 1
-								});	
-
-								displacementSprite.scale.set( 10, 10 );
-								var baseTimeline = TweenMax.to( displacementSprite.scale, 2, { 
-									x: 0,
-									y: 0,
-									onComplete: function() {
-
-
-									},
-									onUpdate: function() {
-										//console.log( baseTimeline.progress() );
-
-									}
-								} );
-
-
-
-
+									videoSource.currentTime = 0;
+									videoSource.autoplay = false;
+									videoSource.pause();
+									videoSource.muted = true;
+								}	
+	
 
 							}
-						});		
 
+							//play current video
+							if ( curSp._texture.baseTexture.imageType == null ) {
+								var videoSource2 = curSp.texture.baseTexture.source;
 
+								// play the video
+								videoSource2.currentTime = 0;
+								videoSource2.autoplay = true;
+								videoSource2.play();
+								videoSource2.muted = false;
+							}	
 
-						//Add new ripple each time mouse is clicked
-						//-------------------------------------
-						// @https://pixijs.download/v4.5.4/docs/PIXI.interaction.InteractionManager.html
-						var rafID, mouseX, mouseY;
-
-						stage_filter.pointerup = function( mouseData ) {
-							TweenMax.to( displacementSprite.scale, 1, { x: 0, y: 0 } );
-							cancelAnimationFrame( rafID );               
-
-						};
-
-						stage_filter.pointerdown = function( mouseData ) {
-							mouseX = mouseData.data.global.x;
-							mouseY = mouseData.data.global.y;   
-							TweenMax.to( displacementSprite.scale, 1, { x: "+=" + Math.sin( mouseX ) * 100 + "", y: "+=" + Math.cos( mouseY ) * 100 + ""  });   
-							rotateSpite();	
-
-						};     
-
-						var rotateSpite = function() {
-							displacementSprite.rotation += 0.001;
-							rafID = requestAnimationFrame( rotateSpite );
-						};
 	
-					}	
-					
-					
+						}, animDuration*2 );
+						
+						
 
-					
+						
+						
+						//Current item entry action
 				
+						var baseTimeline = new TimelineMax( { onComplete: function () {
+							displacementSprite.scale.set( 1 );       
+						 },onUpdate: function() {
+							displacementSprite.rotation += baseTimeline.progress() * 0.02;      
+							displacementSprite.scale.set( baseTimeline.progress() * 3 );
+
+						} });
+
+						baseTimeline.clear();
+
+						if ( baseTimeline.isActive() ) {
+						  return;
+						}        
+
+						
+						
+
+						baseTimeline
+						.to( displacementFilter.scale, 1, { x: 300, y: 300, ease: Power1.easeOut } )
+						.to( prevSp, 0.5, { alpha: 0, ease: Power2.easeOut }, 0.2 )
+						.to( curSp, 0.5, { alpha: 1, ease: Power2.easeOut }, 0.3)
+						.to( displacementFilter.scale, 1, { x: 0, y: 0, ease: Power2.easeOut }, 0.3 );
+
+						
+
+
+
+						//Add new ripple each time mouse
+						//-------------------------------------
+						document.addEventListener("mousedown", function(e) {
+					  
+							TweenMax.to( displacementFilter.scale, 1, { x: "+=" + Math.sin( e.pageX ) * 100 + "", y: "+=" + Math.cos( e.pageY ) * 100 + ""  });   
+							rotateSpite();
+						});
+						document.addEventListener("mouseup", function(e) {
+					
+							TweenMax.to( displacementFilter.scale, 1, { x: 0, y: 0 } );
+						});
+						
+						var rotateSpite = function() {
+							displacementFilter.rotation += 0.001;
+						};
+						
+						
+						
+						
+					}
+					
 
 				} // end effect
 				
@@ -1839,7 +1840,7 @@ APP = ( function ( APP, $, window, document ) {
 
 						
 
-						//Add new ripple each time mouse is clicked
+						//Add new ripple each time mouse is clicked/mousemoved
 						//-------------------------------------
 						document.addEventListener("mousemove", function(e) {
 					
