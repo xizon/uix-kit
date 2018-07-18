@@ -229,7 +229,7 @@ h6 {
 }
 
 .uix-typo--style-bold {
-    font-weight: 800 !important;
+    font-weight: 900 !important;
 }
 
 .uix-typo--style-italic {
@@ -315,6 +315,7 @@ h6 {
 
 .uix-typo--color-white {
 	color: white !important;
+	text-shadow: 0 2px 3px rgba(0,0,0,.3);
 	
 	p,
 	h1, 
@@ -330,6 +331,7 @@ h6 {
 	.uix-typo--h5, 
 	.uix-typo--h6 {
 	    color: white;
+		text-shadow: 0 2px 3px rgba(0,0,0,.3);
 	}
 }
 

@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.9.1
+ * ## Version             :  1.9.2
  * ## Last Update         :  July 19, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -83,48 +83,48 @@
     18. Sidebar  
     19. Search 
     20. Tags 
-    21. Entry 
-    22. Comments ( Synchronize to WordPress's class name ) 
-    23. Mobile Menu 
+    21. Comments ( Synchronize to WordPress's class name ) 
+    22. Mobile Menu 
+    23. Entry 
     24. Onepage Menu 
     25. Modal Dialog 
-    26. 3rd Party Plugins 
-    27. 3D Background 
+    26. 3D Background 
+    27. 3rd Party Plugins 
     28. 3D Carousel 
-    29. Accordion 
+    29. Advanced Content Slider 
     30. Accordion Background Images 
-    31. Advanced Content Slider 
+    31. Accordion 
     32. Advanced Slider (Special Effects) 
-    33. Advanced Slider (Basic) 
+    33. Blended Grid Layout 
     34. Badges 
-    35. Blended Grid Layout 
+    35. Advanced Slider (Basic) 
     36. Breadcrumbs 
-    37. Button 
-    38. Cards 
-    39. Counter 
-    40. Dividing Line 
-    41. Dots 
-    42. Dotted Line 
-    43. Dropdown Menu 
-    44. Dropdown Menu 2 (Multi-level drop-down navigation) 
-    45. Equal-width Divs 
-    46. Features 
-    47. Flexslider 
-    48. Footer Templates 
-    49. Form 
-    50. Form Progress 
-    51. Gallery 
-    52. Heading 
-    53. Image Shapes 
-    54. Custom Core Scripts & Stylesheets 
-    55. Cutom Light Box 
-    56. Brands List 
-    57. Bulleted List 
-    58. Maintain Aspect Ratio List 
-    59. List of Posts 
-    60. List of Split Posts 
-    61. Side by Side List 
-    62. Side by Side List With Photo 
+    37. Counter 
+    38. Dots 
+    39. Dotted Line 
+    40. Dropdown Menu 
+    41. Dropdown Menu 2 (Multi-level drop-down navigation) 
+    42. Equal-width Divs 
+    43. Features 
+    44. Flexslider 
+    45. Footer Templates 
+    46. Form 
+    47. Form Progress 
+    48. Gallery 
+    49. Heading 
+    50. Image Shapes 
+    51. Custom Core Scripts & Stylesheets 
+    52. Cutom Light Box 
+    53. Brands List 
+    54. Bulleted List 
+    55. Maintain Aspect Ratio List 
+    56. List of Posts 
+    57. List of Split Posts 
+    58. Side by Side List 
+    59. Side by Side List With Photo 
+    60. Cards 
+    61. Dividing Line 
+    62. Button 
     63. Fullwidth List of Split 2 
     64. Fullwidth List of Split 
     65. Mouse Animation Scroll 
@@ -153,6 +153,7 @@
     88. Vertical Separator 
     89. Wave Background 
     90. WordPress Core ( Do not use prefix "uix-" ) 
+    91. Ajax Page Loader (Loading A Page via Ajax Into Div)  
 
 
 
@@ -1386,7 +1387,7 @@ h6 {
 }
 
 .uix-typo--style-bold {
-  font-weight: 800 !important;
+  font-weight: 900 !important;
 }
 
 .uix-typo--style-italic {
@@ -1467,6 +1468,7 @@ h6 {
 
 .uix-typo--color-white {
   color: white !important;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
 }
 
 .uix-typo--color-white p,
@@ -1483,6 +1485,7 @@ h6 {
 .uix-typo--color-white .uix-typo--h5,
 .uix-typo--color-white .uix-typo--h6 {
   color: white;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
 }
 
 /* 
@@ -14703,13 +14706,6 @@ a img.aligncenter {
     55% {
         right: 2px;
     }
-
-    100% {
-        right: 180px;
-        left: 2px;
-    }
-}
-
 
     100% {
         right: 180px;
