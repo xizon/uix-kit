@@ -109,6 +109,23 @@ var APP = (function ( $, window, document ) {
 }( jQuery, window, document ) ); 
 
 
+/*
+ * Json Attribute Escaping
+ *
+ * @param  {string} ajaxPostList          - A string obtained from the "data-" attribute of HTML tag.
+ * @return {string}                        - Escaped string.
+ */
+var jsonStrEscape = function( str ) {
+	
+	if ( typeof( str ) == 'string' && str.length > 0 ) {
+		var newStr = str.replace(/&(lt|gt|quot|apos|\#39|\#34);/g, function (m, p) { 
+			return ( p == "lt") ? "<" : ((p == "gt") ? ">" : ((p == "quot") ? '"' : ((p == "apos") ? "'" : ((p == "#39") ? "'" : ((p == "#34") ? '"' : '"' )))));
+		});
+		
+		return newStr;
+	}
+
+};
 
 
 

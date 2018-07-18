@@ -15,6 +15,7 @@ APP = ( function ( APP, $, window, document ) {
 		$( '[data-3d-animate]' ).each( function( index, element ) {
 			var config      = $( element ).data( '3d-animate' );
 			
+			
 			if( typeof config === typeof undefined ) {
 				config = false;
 			}

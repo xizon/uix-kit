@@ -1,11 +1,14 @@
 # Changelog
 
+#### = 1.9.1 (July 19, 2018) =
+
+* New: Added a name hook of ajax loaded via variable.
+* Tweak: Added some data type judgments to enhance compatibility.
+
 
 #### = 1.9.0 (July 17, 2018) =
 
 * Tweak: Changed PIXI's slider effect.
-
-
 
 
 #### = 1.8.8 (July 12, 2018) =

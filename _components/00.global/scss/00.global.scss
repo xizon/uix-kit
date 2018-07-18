@@ -331,7 +331,7 @@ $primary-bg-color      : transparent;
 //       absolutely elements whose security width cannot be determined
 //
 @mixin securityWidthForElement( $classname: '.demo' ){
-	// @include securityWidthForAbsoluteEl( '.txt' );
+	// @include securityWidthForElement( '.txt' );
 
 	@if ( $classname != '' ) {
 		/* New XL container for Bootstrap 3.x */
@@ -371,5 +371,6 @@ $primary-bg-color      : transparent;
 	}
 	
 }
+
 
 

@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.9.0
- * ## Last Update         :  July 17, 2018
+ * ## Version             :  1.9.1
+ * ## Last Update         :  July 19, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -192,6 +192,23 @@ var APP = (function ( $, window, document ) {
 }( jQuery, window, document ) ); 
 
 
+/*
+ * Json Attribute Escaping
+ *
+ * @param  {string} ajaxPostList          - A string obtained from the "data-" attribute of HTML tag.
+ * @return {string}                        - Escaped string.
+ */
+var jsonStrEscape = function( str ) {
+	
+	if ( typeof( str ) == 'string' && str.length > 0 ) {
+		var newStr = str.replace(/&(lt|gt|quot|apos|\#39|\#34);/g, function (m, p) { 
+			return ( p == "lt") ? "<" : ((p == "gt") ? ">" : ((p == "quot") ? '"' : ((p == "apos") ? "'" : ((p == "#39") ? "'" : ((p == "#34") ? '"' : '"' )))));
+		});
+		
+		return newStr;
+	}
+
+};
 
 
 
@@ -1977,6 +1994,7 @@ APP = ( function ( APP, $, window, document ) {
 		$( '[data-3d-animate]' ).each( function( index, element ) {
 			var config      = $( element ).data( '3d-animate' );
 			
+			
 			if( typeof config === typeof undefined ) {
 				config = false;
 			}
@@ -2170,6 +2188,230 @@ APP = ( function ( APP, $, window, document ) {
 
 }( APP, jQuery, window, document ) );
 
+
+
+
+
+
+/* 
+ *************************************
+ * <!-- 3D Background 2 -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP._3D_BACKGROUND_THREE               = APP._3D_BACKGROUND_THREE || {};
+	APP._3D_BACKGROUND_THREE.version       = '0.0.1';
+    APP._3D_BACKGROUND_THREE.documentReady = function( $ ) {
+
+		
+		//Prevent this module from loading in other pages
+		if ( $( '#3D-background-three-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
+		
+		
+		var $window                   = $( window ),
+			windowWidth               = $window.width(),
+			windowHeight              = $window.height(),
+			rendererCanvasID          = '3D-background-three-canvas';
+		
+	
+
+		
+		// Generate one plane geometries mesh to scene
+		//-------------------------------------	
+		var camera,
+			controls,
+			scene,
+			light,
+			renderer,
+			displacementSprite,
+			clock = new THREE.Clock();
+
+		
+		init();
+		render();
+
+		function init() {
+			//camera
+			camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 1, 10000 );
+			camera.position.set(0, 0, -1000);
+
+			//controls
+			controls = new THREE.OrbitControls( camera );
+			controls.rotateSpeed = 0.5;
+			controls.zoomSpeed = 1.2;
+			controls.panSpeed = 0.8;
+			controls.enableZoom = true;
+			controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+			controls.dampingFactor = 0.25;
+			controls.screenSpacePanning = false;
+			controls.minDistance = 100;
+			controls.maxDistance = 500;
+			controls.maxPolarAngle = Math.PI / 2;
+
+			//Scene
+			scene = new THREE.Scene();
+
+			//HemisphereLight
+			scene.add( new THREE.AmbientLight( 0x555555 ) );
+
+			light = new THREE.SpotLight( 0xffffff, 1.5 );
+			light.position.set( 0, 500, 2000 );
+			scene.add( light );
+			
+			
+
+			//WebGL Renderer		
+			renderer = new THREE.WebGLRenderer( { 
+									canvas   : document.getElementById( rendererCanvasID ), //canvas
+									alpha    : true, 
+									antialias: true 
+								} );
+			renderer.setSize( windowWidth, windowHeight );
+
+			
+			// Immediately use the texture for material creation
+			var defaultMaterial    = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
+			
+			displacementSprite = new THREE.Mesh( generateGeometry( 'sphere', 200 ), defaultMaterial );
+			scene.add( displacementSprite );
+
+
+			// Fires when the window changes
+			window.addEventListener( 'resize', onWindowResize, false );
+			
+			
+		}
+
+		function render() {
+			requestAnimationFrame( render );
+			
+            var objVector = new THREE.Vector3(0,0.2,0.1),
+				delta     = clock.getDelta();
+			
+			displacementSprite.rotation.x += delta * objVector.x;
+			displacementSprite.rotation.y += delta * objVector.y;
+			displacementSprite.rotation.z += delta * objVector.z;
+
+			//To set a background color.
+			//renderer.setClearColor( 0x000000 );	
+			
+			controls.update();
+			
+			renderer.render( scene, camera );
+			
+			
+
+			
+		}
+
+
+		function onWindowResize() {
+			camera.aspect = window.innerWidth / window.innerHeight;
+			camera.updateProjectionMatrix();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+		}
+
+		
+
+		
+		/*
+		 * Batch generation of geometry
+		 *
+		 * @param  {string} objectType     - String of geometry type identifier.
+		 * @param  {number} numObjects       - The total number of generated objects.
+		 * @return {void}                  - The constructor.
+		 */
+		function generateGeometry( objectType, numObjects ) {
+
+			var geometry = new THREE.Geometry();
+
+			var applyVertexColors = function( g, c ) {
+
+				g.faces.forEach( function( f ) {
+
+					var n = ( f instanceof THREE.Face3 ) ? 3 : 4;
+
+					for ( var j = 0; j < n; j ++ ) {
+
+						f.vertexColors[ j ] = c;
+
+					}
+
+				} );
+
+			};
+
+			for ( var i = 0; i < numObjects; i ++ ) {
+
+				var position = new THREE.Vector3();
+
+				position.x = Math.random() * 10000 - 5000;
+				position.y = Math.random() * 6000 - 3000;
+				position.z = Math.random() * 8000 - 4000;
+
+				var rotation = new THREE.Euler();
+
+				rotation.x = Math.random() * 2 * Math.PI;
+				rotation.y = Math.random() * 2 * Math.PI;
+				rotation.z = Math.random() * 2 * Math.PI;
+
+				var scale = new THREE.Vector3();
+
+				var geom, color = new THREE.Color();
+
+				scale.x = Math.random() * 200 + 100;
+
+				if ( objectType == "cube" ) {
+
+					geom = new THREE.BoxGeometry( 1, 1, 1 );
+					scale.y = Math.random() * 200 + 100;
+					scale.z = Math.random() * 200 + 100;
+					color.setRGB( 0, 0, Math.random() + 0.1 );
+
+				} else if ( objectType == "sphere" ) {
+
+					geom = new THREE.IcosahedronGeometry( 1, 1 );
+					scale.y = scale.z = scale.x;
+					color.setRGB( Math.random() + 0.1, 0, 0 );
+
+				} else if ( objectType == "poly" ) {
+
+
+					geom = new THREE.CylinderGeometry( 3, 6, 3, 5, 1 );
+					scale.y = Math.random() * 30;
+					scale.z = Math.random() * 30;
+					color.setRGB( Math.random() + 0.1, 0, 0 );
+
+				}
+
+
+				// give the geom's vertices a random color, to be displayed
+				applyVertexColors( geom, color );
+
+				var object = new THREE.Mesh( geom );
+				object.position.copy( position );
+				object.rotation.copy( rotation );
+				object.scale.copy( scale );
+				object.updateMatrix();
+
+				geometry.merge( object.geometry, object.matrix );
+
+			}
+
+			return geometry;
+			
+
+		}
+
+		
+    };
+
+    APP.components.documentReady.push( APP._3D_BACKGROUND_THREE.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
 
 
 
@@ -2486,230 +2728,6 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
-
-
-
-
-
-/* 
- *************************************
- * <!-- 3D Background 2 -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP._3D_BACKGROUND_THREE               = APP._3D_BACKGROUND_THREE || {};
-	APP._3D_BACKGROUND_THREE.version       = '0.0.1';
-    APP._3D_BACKGROUND_THREE.documentReady = function( $ ) {
-
-		
-		//Prevent this module from loading in other pages
-		if ( $( '#3D-background-three-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
-		
-		
-		var $window                   = $( window ),
-			windowWidth               = $window.width(),
-			windowHeight              = $window.height(),
-			rendererCanvasID          = '3D-background-three-canvas';
-		
-	
-
-		
-		// Generate one plane geometries mesh to scene
-		//-------------------------------------	
-		var camera,
-			controls,
-			scene,
-			light,
-			renderer,
-			displacementSprite,
-			clock = new THREE.Clock();
-
-		
-		init();
-		render();
-
-		function init() {
-			//camera
-			camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 1, 10000 );
-			camera.position.set(0, 0, -1000);
-
-			//controls
-			controls = new THREE.OrbitControls( camera );
-			controls.rotateSpeed = 0.5;
-			controls.zoomSpeed = 1.2;
-			controls.panSpeed = 0.8;
-			controls.enableZoom = true;
-			controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-			controls.dampingFactor = 0.25;
-			controls.screenSpacePanning = false;
-			controls.minDistance = 100;
-			controls.maxDistance = 500;
-			controls.maxPolarAngle = Math.PI / 2;
-
-			//Scene
-			scene = new THREE.Scene();
-
-			//HemisphereLight
-			scene.add( new THREE.AmbientLight( 0x555555 ) );
-
-			light = new THREE.SpotLight( 0xffffff, 1.5 );
-			light.position.set( 0, 500, 2000 );
-			scene.add( light );
-			
-			
-
-			//WebGL Renderer		
-			renderer = new THREE.WebGLRenderer( { 
-									canvas   : document.getElementById( rendererCanvasID ), //canvas
-									alpha    : true, 
-									antialias: true 
-								} );
-			renderer.setSize( windowWidth, windowHeight );
-
-			
-			// Immediately use the texture for material creation
-			var defaultMaterial    = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
-			
-			displacementSprite = new THREE.Mesh( generateGeometry( 'sphere', 200 ), defaultMaterial );
-			scene.add( displacementSprite );
-
-
-			// Fires when the window changes
-			window.addEventListener( 'resize', onWindowResize, false );
-			
-			
-		}
-
-		function render() {
-			requestAnimationFrame( render );
-			
-            var objVector = new THREE.Vector3(0,0.2,0.1),
-				delta     = clock.getDelta();
-			
-			displacementSprite.rotation.x += delta * objVector.x;
-			displacementSprite.rotation.y += delta * objVector.y;
-			displacementSprite.rotation.z += delta * objVector.z;
-
-			//To set a background color.
-			//renderer.setClearColor( 0x000000 );	
-			
-			controls.update();
-			
-			renderer.render( scene, camera );
-			
-			
-
-			
-		}
-
-
-		function onWindowResize() {
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-			renderer.setSize( window.innerWidth, window.innerHeight );
-		}
-
-		
-
-		
-		/*
-		 * Batch generation of geometry
-		 *
-		 * @param  {string} objectType     - String of geometry type identifier.
-		 * @param  {number} numObjects       - The total number of generated objects.
-		 * @return {void}                  - The constructor.
-		 */
-		function generateGeometry( objectType, numObjects ) {
-
-			var geometry = new THREE.Geometry();
-
-			var applyVertexColors = function( g, c ) {
-
-				g.faces.forEach( function( f ) {
-
-					var n = ( f instanceof THREE.Face3 ) ? 3 : 4;
-
-					for ( var j = 0; j < n; j ++ ) {
-
-						f.vertexColors[ j ] = c;
-
-					}
-
-				} );
-
-			};
-
-			for ( var i = 0; i < numObjects; i ++ ) {
-
-				var position = new THREE.Vector3();
-
-				position.x = Math.random() * 10000 - 5000;
-				position.y = Math.random() * 6000 - 3000;
-				position.z = Math.random() * 8000 - 4000;
-
-				var rotation = new THREE.Euler();
-
-				rotation.x = Math.random() * 2 * Math.PI;
-				rotation.y = Math.random() * 2 * Math.PI;
-				rotation.z = Math.random() * 2 * Math.PI;
-
-				var scale = new THREE.Vector3();
-
-				var geom, color = new THREE.Color();
-
-				scale.x = Math.random() * 200 + 100;
-
-				if ( objectType == "cube" ) {
-
-					geom = new THREE.BoxGeometry( 1, 1, 1 );
-					scale.y = Math.random() * 200 + 100;
-					scale.z = Math.random() * 200 + 100;
-					color.setRGB( 0, 0, Math.random() + 0.1 );
-
-				} else if ( objectType == "sphere" ) {
-
-					geom = new THREE.IcosahedronGeometry( 1, 1 );
-					scale.y = scale.z = scale.x;
-					color.setRGB( Math.random() + 0.1, 0, 0 );
-
-				} else if ( objectType == "poly" ) {
-
-
-					geom = new THREE.CylinderGeometry( 3, 6, 3, 5, 1 );
-					scale.y = Math.random() * 30;
-					scale.z = Math.random() * 30;
-					color.setRGB( Math.random() + 0.1, 0, 0 );
-
-				}
-
-
-				// give the geom's vertices a random color, to be displayed
-				applyVertexColors( geom, color );
-
-				var object = new THREE.Mesh( geom );
-				object.position.copy( position );
-				object.rotation.copy( rotation );
-				object.scale.copy( scale );
-				object.updateMatrix();
-
-				geometry.merge( object.geometry, object.matrix );
-
-			}
-
-			return geometry;
-			
-
-		}
-
-		
-    };
-
-    APP.components.documentReady.push( APP._3D_BACKGROUND_THREE.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
 
 
 
@@ -3289,6 +3307,140 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
+ * <!-- 3D Pages -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP._3D_PAGES               = APP._3D_PAGES || {};
+	APP._3D_PAGES.version       = '0.0.1';
+    APP._3D_PAGES.documentReady = function( $ ) {
+
+		
+		//Prevent this module from loading in other pages
+		if ( $( '#3D-renderer' ).length == 0 || ! Modernizr.webgl ) return false;
+		
+		
+		
+		var $window                   = $( window ),
+			windowWidth               = $window.width(),
+			windowHeight              = $window.height(),
+			viewRenderer              = '3D-renderer';
+		
+		
+		// Generate one plane geometries mesh to scene
+		//-------------------------------------	
+		var camera,
+			controls,
+			scene,
+			light,
+			renderer,
+			clock = new THREE.Clock();
+
+		init();
+		render();
+
+		function init() {
+			//camera
+			camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 1, 10000 );
+			camera.position.set(0, 0, -1000);
+
+			//controls
+			controls = new THREE.OrbitControls( camera );
+			controls.rotateSpeed = 0.5;
+			controls.zoomSpeed = 1.2;
+			controls.panSpeed = 0.8;
+			controls.enableZoom = true;
+			controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+			controls.dampingFactor = 0.25;
+			controls.screenSpacePanning = false;
+			controls.minDistance = 1000;
+			controls.maxDistance = 1500;
+			controls.maxPolarAngle = Math.PI / 2;
+
+			//Scene
+			scene = new THREE.Scene();
+
+			//HemisphereLight
+			light = new THREE.HemisphereLight( 0xffbf67, 0x15c6ff );
+			scene.add( light );
+
+			//WebGL Renderer
+			renderer = new THREE.WebGLRenderer( { 
+									alpha    : true, 
+									antialias: true 
+								} );
+			renderer.setClearColor( 0xffffff, 0 );
+			renderer.setSize( windowWidth - 50, windowHeight - 50 );
+			renderer.domElement.style.zIndex = 5;
+			document.getElementById( viewRenderer ).appendChild( renderer.domElement );
+
+			
+			//Add HTML elements to scene
+			var target  = $( '#html3D-view' ).clone(),
+				pages   = target.find( '.html3D-view-content' );
+
+			pages.each( function() {
+				var el = new THREE.CSS3DObject( $.parseHTML( $( this )[0].outerHTML )[0] );
+
+				el.position.x = $( this ).data( 'position-x' ) || 0;
+				el.position.y = $( this ).data( 'position-y' ) || 0;
+				el.position.z = $( this ).data( 'position-z' ) || 0;
+				el.rotation.x = $( this ).data( 'rotation-x' ) || 0;
+				el.rotation.y = $( this ).data( 'rotation-y' ) || 3.14159265358979;
+				el.rotation.z = $( this ).data( 'rotation-z' ) || 0;
+
+				scene.add( el );
+			});
+			
+
+			
+			
+			//CSS3D Renderer
+			renderer = new THREE.CSS3DRenderer();
+			renderer.setSize( windowWidth, windowHeight );
+			renderer.domElement.style.position = 'absolute';
+			renderer.domElement.style.top = 0;
+			document.getElementById( viewRenderer ).appendChild( renderer.domElement );
+
+			// Fires when the window changes
+			window.addEventListener( 'resize', onWindowResize, false );
+			
+			
+		}
+
+		function render() {
+			requestAnimationFrame( render );
+
+            var delta = clock.getDelta();
+			
+			controls.update();
+			
+			renderer.render( scene, camera );
+			
+		}
+		
+		function onWindowResize() {
+			camera.aspect = window.innerWidth / window.innerHeight;
+			camera.updateProjectionMatrix();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+		}
+
+
+		
+    };
+
+    APP.components.documentReady.push( APP._3D_PAGES.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+/* 
+ *************************************
  * <!-- 3D Particle Effect -->
  *************************************
  */
@@ -3486,140 +3638,6 @@ APP = ( function ( APP, $, window, document ) {
     };
 
     APP.components.documentReady.push( APP._3D_PARTICLE.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
-/* 
- *************************************
- * <!-- 3D Pages -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP._3D_PAGES               = APP._3D_PAGES || {};
-	APP._3D_PAGES.version       = '0.0.1';
-    APP._3D_PAGES.documentReady = function( $ ) {
-
-		
-		//Prevent this module from loading in other pages
-		if ( $( '#3D-renderer' ).length == 0 || ! Modernizr.webgl ) return false;
-		
-		
-		
-		var $window                   = $( window ),
-			windowWidth               = $window.width(),
-			windowHeight              = $window.height(),
-			viewRenderer              = '3D-renderer';
-		
-		
-		// Generate one plane geometries mesh to scene
-		//-------------------------------------	
-		var camera,
-			controls,
-			scene,
-			light,
-			renderer,
-			clock = new THREE.Clock();
-
-		init();
-		render();
-
-		function init() {
-			//camera
-			camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 1, 10000 );
-			camera.position.set(0, 0, -1000);
-
-			//controls
-			controls = new THREE.OrbitControls( camera );
-			controls.rotateSpeed = 0.5;
-			controls.zoomSpeed = 1.2;
-			controls.panSpeed = 0.8;
-			controls.enableZoom = true;
-			controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-			controls.dampingFactor = 0.25;
-			controls.screenSpacePanning = false;
-			controls.minDistance = 1000;
-			controls.maxDistance = 1500;
-			controls.maxPolarAngle = Math.PI / 2;
-
-			//Scene
-			scene = new THREE.Scene();
-
-			//HemisphereLight
-			light = new THREE.HemisphereLight( 0xffbf67, 0x15c6ff );
-			scene.add( light );
-
-			//WebGL Renderer
-			renderer = new THREE.WebGLRenderer( { 
-									alpha    : true, 
-									antialias: true 
-								} );
-			renderer.setClearColor( 0xffffff, 0 );
-			renderer.setSize( windowWidth - 50, windowHeight - 50 );
-			renderer.domElement.style.zIndex = 5;
-			document.getElementById( viewRenderer ).appendChild( renderer.domElement );
-
-			
-			//Add HTML elements to scene
-			var target  = $( '#html3D-view' ).clone(),
-				pages   = target.find( '.html3D-view-content' );
-
-			pages.each( function() {
-				var el = new THREE.CSS3DObject( $.parseHTML( $( this )[0].outerHTML )[0] );
-
-				el.position.x = $( this ).data( 'position-x' ) || 0;
-				el.position.y = $( this ).data( 'position-y' ) || 0;
-				el.position.z = $( this ).data( 'position-z' ) || 0;
-				el.rotation.x = $( this ).data( 'rotation-x' ) || 0;
-				el.rotation.y = $( this ).data( 'rotation-y' ) || 3.14159265358979;
-				el.rotation.z = $( this ).data( 'rotation-z' ) || 0;
-
-				scene.add( el );
-			});
-			
-
-			
-			
-			//CSS3D Renderer
-			renderer = new THREE.CSS3DRenderer();
-			renderer.setSize( windowWidth, windowHeight );
-			renderer.domElement.style.position = 'absolute';
-			renderer.domElement.style.top = 0;
-			document.getElementById( viewRenderer ).appendChild( renderer.domElement );
-
-			// Fires when the window changes
-			window.addEventListener( 'resize', onWindowResize, false );
-			
-			
-		}
-
-		function render() {
-			requestAnimationFrame( render );
-
-            var delta = clock.getDelta();
-			
-			controls.update();
-			
-			renderer.render( scene, camera );
-			
-		}
-		
-		function onWindowResize() {
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-			renderer.setSize( window.innerWidth, window.innerHeight );
-		}
-
-
-		
-    };
-
-    APP.components.documentReady.push( APP._3D_PAGES.documentReady );
     return APP;
 
 }( APP, jQuery, window, document ) );
@@ -7837,7 +7855,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.FLEXSLIDER               = APP.FLEXSLIDER || {};
-	APP.FLEXSLIDER.version       = '0.0.1';
+	APP.FLEXSLIDER.version       = '0.0.2';
     APP.FLEXSLIDER.documentReady = function( $ ) {
 
 		var $window            = $( window ),
@@ -7867,9 +7885,12 @@ APP = ( function ( APP, $, window, document ) {
 		 * @return {number}                        - Index of current slider .
 		 */
         function initslides( sliderWrapper, thisSlider, fireState ) {
+			
+			var prefix            = 'uix-flexslider__';
+			
+			if ( thisSlider.find( '.'+prefix+'item' ).length == 0 ) return false;
 
-			var prefix            = 'uix-flexslider__',
-				curIndex          = thisSlider.currentSlide,
+			var curIndex          = thisSlider.currentSlide,
 				count             = thisSlider.count,
 				activeClass       = prefix + 'item--active',
 				prevClass         = activeClass + '-prev',
@@ -8059,8 +8080,14 @@ APP = ( function ( APP, $, window, document ) {
 				//-------------------------------------
 				if ( sliderWrapper.find( '.count' ).length == 0 ) {
 					if ( sliderWrapper.closest( 'section' ).find( '.count' ).length > 0 ) {
-						countTotalSelector.text( count );
-						countCurSelector.text( curIndex + 1 );		
+						var showCountTotal = count,
+							showCountCur   = curIndex + 1;
+						
+						if ( showCountTotal < 10 ) showCountTotal = '0' + showCountTotal;
+						if ( showCountCur < 10 ) showCountCur = '0' + showCountCur;
+						
+						countTotalSelector.text( showCountTotal );
+						countCurSelector.text( showCountCur );		
 					}
 				}
 

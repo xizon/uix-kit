@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.9.0
- * ## Last Update         :  July 17, 2018
+ * ## Version             :  1.9.1
+ * ## Last Update         :  July 19, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -99,8 +99,8 @@
     34. Badges 
     35. Blended Grid Layout 
     36. Breadcrumbs 
-    37. Cards 
-    38. Button 
+    37. Button 
+    38. Cards 
     39. Counter 
     40. Dividing Line 
     41. Dots 
@@ -153,7 +153,6 @@
     88. Vertical Separator 
     89. Wave Background 
     90. WordPress Core ( Do not use prefix "uix-" ) 
-    91. Ajax Page Loader (Loading A Page via Ajax Into Div)  
 
 
 
@@ -9688,6 +9687,13 @@ a.uix-lightbox__original__close::after {
 }
 
 /* ====================================================== 
+   <!-- Bulleted List --> 
+/* ====================================================== */
+.uix-list-bullet i {
+    margin-right: .5rem;
+}
+
+/* ====================================================== 
    <!-- Maintain Aspect Ratio List --> 
 /* ====================================================== */
 .uix-list-aspect-ratio {
@@ -9766,13 +9772,6 @@ a.uix-lightbox__original__close::after {
     .uix-list-aspect-ratio .uix-list-aspect-ratio__content {
         padding: .5rem;
     }
-}
-
-/* ====================================================== 
-   <!-- Bulleted List --> 
-/* ====================================================== */
-.uix-list-bullet i {
-    margin-right: .5rem;
 }
 
 /* ====================================================== 
@@ -10104,6 +10103,97 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
 }
 
 /* ====================================================== 
+    <!-- Fullwidth List of Split 2 --> 
+/* ====================================================== */
+.uix-list-split-full {
+    position: relative;
+}
+
+.uix-list-split-full::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.uix-list-split-full .uix-list-split-full__left {
+    position: relative;
+    width: 30%;
+    float: left;
+    padding-right: 5vw;
+    padding-left: calc(6.730769230769% + 15px);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+    min-height: 150px;
+}
+
+.uix-list-split-full .uix-list-split-full__right {
+    word-wrap: break-word;
+    box-sizing: border-box;
+    width: 70%;
+    float: left;
+    padding-left: 5vw;
+    padding-right: calc(6.730769230769% + 15px);
+    background: #EC5E79;
+    background: linear-gradient(to right, #EC5E79 0%, #E8588C 100%);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+    min-height: 150px;
+}
+
+/* New XL container for Bootstrap 3.x */
+@media all and (min-width: 1430px) {
+    .uix-list-split-full .uix-list-split-full__left {
+        padding-left: calc(5.189340813464% + 15px);
+    /* (1426-1278)/1426/2 * 100 */;
+    }
+
+    .uix-list-split-full .uix-list-split-full__right {
+        padding-right: calc(5.189340813464% + 15px);
+    /* (1426-1278)/1426/2 * 100 */;
+    }
+}
+
+/* New XXL container for Bootstrap 3.x */
+@media all and (min-width: 1600px) {
+    .uix-list-split-full .uix-list-split-full__left {
+        padding-left: calc(12.992125984252% + 15px);
+    /* (1905-1410)/1905/2 * 100 */;
+    }
+
+    .uix-list-split-full .uix-list-split-full__right {
+        padding-right: calc(12.992125984252% + 15px);
+    /* (1905-1410)/1905/2 * 100 */;
+    }
+}
+
+/* > 2560 */
+@media all and (min-width: 2400px) {
+    .uix-list-split-full .uix-list-split-full__left {
+        padding-left: calc(22.298624754421% + 15px);
+    /* (2545-1410)/2545/2 * 100 */
+        padding-right: 15px;
+    }
+
+    .uix-list-split-full .uix-list-split-full__right {
+        padding-right: calc(22.298624754421% + 15px);
+    /* (2545-1410)/2545/2 * 100 */
+        margin-left: 5vw;
+        width: calc( 70% - 5vw);
+    }
+}
+
+@media all and (max-width: 768px) {
+    .uix-list-split-full .uix-list-split-full__left {
+        width: 100%;
+        min-height: inherit;
+    }
+
+    .uix-list-split-full .uix-list-split-full__right {
+        min-height: inherit;
+        width: 100%;
+        padding: 0 15px;
+    }
+}
+
+/* ====================================================== 
     <!-- Fullwidth List of Split --> 
 /* ====================================================== */
 .uix-list-split-imagery {
@@ -10190,97 +10280,6 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
     .uix-list-split-imagery .uix-list-split-imagery__info,
   .uix-list-split-imagery.is-reversed .uix-list-split-imagery__info {
         text-align: center;
-        width: 100%;
-        padding: 0 15px;
-    }
-}
-
-/* ====================================================== 
-    <!-- Fullwidth List of Split 2 --> 
-/* ====================================================== */
-.uix-list-split-full {
-    position: relative;
-}
-
-.uix-list-split-full::after {
-    content: '';
-    display: block;
-    clear: both;
-}
-
-.uix-list-split-full .uix-list-split-full__left {
-    position: relative;
-    width: 30%;
-    float: left;
-    padding-right: 5vw;
-    padding-left: calc(6.730769230769% + 15px);
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
-    min-height: 150px;
-}
-
-.uix-list-split-full .uix-list-split-full__right {
-    word-wrap: break-word;
-    box-sizing: border-box;
-    width: 70%;
-    float: left;
-    padding-left: 5vw;
-    padding-right: calc(6.730769230769% + 15px);
-    background: #EC5E79;
-    background: linear-gradient(to right, #EC5E79 0%, #E8588C 100%);
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
-    min-height: 150px;
-}
-
-/* New XL container for Bootstrap 3.x */
-@media all and (min-width: 1430px) {
-    .uix-list-split-full .uix-list-split-full__left {
-        padding-left: calc(5.189340813464% + 15px);
-    /* (1426-1278)/1426/2 * 100 */;
-    }
-
-    .uix-list-split-full .uix-list-split-full__right {
-        padding-right: calc(5.189340813464% + 15px);
-    /* (1426-1278)/1426/2 * 100 */;
-    }
-}
-
-/* New XXL container for Bootstrap 3.x */
-@media all and (min-width: 1600px) {
-    .uix-list-split-full .uix-list-split-full__left {
-        padding-left: calc(12.992125984252% + 15px);
-    /* (1905-1410)/1905/2 * 100 */;
-    }
-
-    .uix-list-split-full .uix-list-split-full__right {
-        padding-right: calc(12.992125984252% + 15px);
-    /* (1905-1410)/1905/2 * 100 */;
-    }
-}
-
-/* > 2560 */
-@media all and (min-width: 2400px) {
-    .uix-list-split-full .uix-list-split-full__left {
-        padding-left: calc(22.298624754421% + 15px);
-    /* (2545-1410)/2545/2 * 100 */
-        padding-right: 15px;
-    }
-
-    .uix-list-split-full .uix-list-split-full__right {
-        padding-right: calc(22.298624754421% + 15px);
-    /* (2545-1410)/2545/2 * 100 */
-        margin-left: 5vw;
-        width: calc( 70% - 5vw);
-    }
-}
-
-@media all and (max-width: 768px) {
-    .uix-list-split-full .uix-list-split-full__left {
-        width: 100%;
-        min-height: inherit;
-    }
-
-    .uix-list-split-full .uix-list-split-full__right {
-        min-height: inherit;
         width: 100%;
         padding: 0 15px;
     }
@@ -13541,6 +13540,15 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
 }
 
 /* ====================================================== 
+   <!-- Text effect -->   
+/* ====================================================== */
+.uix-letter {
+    transform-origin: 50% 100%;
+    display: inline-block;
+    line-height: 1;
+}
+
+/* ====================================================== 
    <!-- Timeline -->     
 /* ====================================================== */
 /*
@@ -13949,15 +13957,6 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
     .uix-timeline__container-wrapper.is-horizontal.uix-timeline__container-wrapper--classic .uix-timeline__container.is-horizontal .uix-timeline.uix-timeline--to-center .uix-timeline__item .uix-timeline__item--info {
         transform: translateX(0);
     }
-}
-
-/* ====================================================== 
-   <!-- Text effect -->   
-/* ====================================================== */
-.uix-letter {
-    transform-origin: 50% 100%;
-    display: inline-block;
-    line-height: 1;
 }
 
 /* ====================================================== 
@@ -14704,6 +14703,13 @@ a img.aligncenter {
     55% {
         right: 2px;
     }
+
+    100% {
+        right: 180px;
+        left: 2px;
+    }
+}
+
 
     100% {
         right: 180px;

@@ -8,7 +8,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.FLEXSLIDER               = APP.FLEXSLIDER || {};
-	APP.FLEXSLIDER.version       = '0.0.1';
+	APP.FLEXSLIDER.version       = '0.1.0';
     APP.FLEXSLIDER.documentReady = function( $ ) {
 
 		var $window            = $( window ),
@@ -38,9 +38,12 @@ APP = ( function ( APP, $, window, document ) {
 		 * @return {number}                        - Index of current slider .
 		 */
         function initslides( sliderWrapper, thisSlider, fireState ) {
+			
+			var prefix            = 'uix-flexslider__';
+			
+			if ( thisSlider.find( '.'+prefix+'item' ).length == 0 ) return false;
 
-			var prefix            = 'uix-flexslider__',
-				curIndex          = thisSlider.currentSlide,
+			var curIndex          = thisSlider.currentSlide,
 				count             = thisSlider.count,
 				activeClass       = prefix + 'item--active',
 				prevClass         = activeClass + '-prev',
@@ -230,8 +233,14 @@ APP = ( function ( APP, $, window, document ) {
 				//-------------------------------------
 				if ( sliderWrapper.find( '.count' ).length == 0 ) {
 					if ( sliderWrapper.closest( 'section' ).find( '.count' ).length > 0 ) {
-						countTotalSelector.text( count );
-						countCurSelector.text( curIndex + 1 );		
+						var showCountTotal = count,
+							showCountCur   = curIndex + 1;
+						
+						if ( showCountTotal < 10 ) showCountTotal = '0' + showCountTotal;
+						if ( showCountCur < 10 ) showCountCur = '0' + showCountCur;
+						
+						countTotalSelector.text( showCountTotal );
+						countCurSelector.text( showCountCur );		
 					}
 				}
 
