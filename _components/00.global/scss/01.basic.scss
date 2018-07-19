@@ -78,6 +78,11 @@ body {
 	background-color: $primary-bg-color;
 }
 
+body.is-mobile {
+	padding-top: 0;
+}
+
+
 :active, :focus {
     outline: none !important;
 }

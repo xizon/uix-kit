@@ -1,9 +1,12 @@
 # Changelog
 
+
+
 #### = 1.9.2 (July 19, 2018) =
 
 * New: Added a name hook of ajax loaded via variable.
 * Tweak: Added some data type judgments to enhance compatibility.
+* Tweak: When using a mobile device to access a website, the &lt;body&gt; tag automatically adds the class "is-mobile".
 
 
 #### = 1.9.0 (July 17, 2018) =

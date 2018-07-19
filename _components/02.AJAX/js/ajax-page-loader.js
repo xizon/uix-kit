@@ -468,7 +468,7 @@ APP = ( function ( APP, $, window, document ) {
 			APP.MODAL_DIALOG.documentReady($); //Modal Dialog
 			APP.PARALLAX.documentReady($); //Parallax
 			APP.VIDEOS.documentReady($); //Videos
-			APP.HEADER.documentReady($); //Header Area
+			APP.BODY_AND_HEADER.documentReady($); //Header Area
 			APP.SET_BG.documentReady($); //Specify a background image
 			APP.GET_CUSTOM_ATTRS.documentReady($); //Get all custom attributes of an element like "data-*"
 			APP.PAGINATION.documentReady($); //Pagination

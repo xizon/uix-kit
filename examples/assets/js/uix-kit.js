@@ -22,8 +22,8 @@
 	---------------------------
 	
 	
-	1. Header Area 
-    2. Loader 
+	1. Loader 
+    2. Body And Header 
     3. Back to Top 
     4. Get all custom attributes of an element like "data-*" 
     5. Navigation 
@@ -41,8 +41,8 @@
     17. 3D Carousel 
     18. 3D Model 
     19. 3D Pages 
-    20. 3D Particle Effect 
-    21. Accordion 
+    20. Accordion 
+    21. 3D Particle Effect 
     22. Accordion Background Images 
     23. Advanced Content Slider 
     24. Advanced Slider (Special Effects) 
@@ -304,15 +304,15 @@ var APP = (function ( $, window, document ) {
 
 /* 
  *************************************
- * <!-- Header Area -->
+ * <!-- Body And Header -->
  *************************************
  */
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
-    APP.HEADER               = APP.HEADER || {};
-	APP.HEADER.version       = '0.0.2';
-    APP.HEADER.documentReady = function( $ ) {
+    APP.BODY_AND_HEADER               = APP.BODY_AND_HEADER || {};
+	APP.BODY_AND_HEADER.version       = '0.0.2';
+    APP.BODY_AND_HEADER.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
 		if ( $( 'body' ).hasClass( 'onepage' ) ) return false;
@@ -340,8 +340,14 @@ APP = ( function ( APP, $, window, document ) {
 			}
 		});
 		function headerInit( w ) {
-			if ( w > 768 ) $( '.uix-header__placeholder.uix-header__placeholder--auto-height' ).css( 'height', $( '.uix-header__container' ).outerHeight() + 'px' ); 
-			
+			if ( w > 768 ) {
+				
+				$( '.uix-header__placeholder.uix-header__placeholder--auto-height' ).css( 'height', $( '.uix-header__container' ).outerHeight() + 'px' ); 
+				
+				$( 'body' ).removeClass( 'is-mobile' );
+			} else {
+				$( 'body' ).addClass( 'is-mobile' );
+			}
 		}
 		
 		
@@ -367,7 +373,7 @@ APP = ( function ( APP, $, window, document ) {
 		
     };
 
-    APP.components.documentReady.push( APP.HEADER.documentReady );
+    APP.components.documentReady.push( APP.BODY_AND_HEADER.documentReady );
     return APP;
 
 }( APP, jQuery, window, document ) );
@@ -3289,6 +3295,140 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
+ * <!-- 3D Pages -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP._3D_PAGES               = APP._3D_PAGES || {};
+	APP._3D_PAGES.version       = '0.0.1';
+    APP._3D_PAGES.documentReady = function( $ ) {
+
+		
+		//Prevent this module from loading in other pages
+		if ( $( '#3D-renderer' ).length == 0 || ! Modernizr.webgl ) return false;
+		
+		
+		
+		var $window                   = $( window ),
+			windowWidth               = $window.width(),
+			windowHeight              = $window.height(),
+			viewRenderer              = '3D-renderer';
+		
+		
+		// Generate one plane geometries mesh to scene
+		//-------------------------------------	
+		var camera,
+			controls,
+			scene,
+			light,
+			renderer,
+			clock = new THREE.Clock();
+
+		init();
+		render();
+
+		function init() {
+			//camera
+			camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 1, 10000 );
+			camera.position.set(0, 0, -1000);
+
+			//controls
+			controls = new THREE.OrbitControls( camera );
+			controls.rotateSpeed = 0.5;
+			controls.zoomSpeed = 1.2;
+			controls.panSpeed = 0.8;
+			controls.enableZoom = true;
+			controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+			controls.dampingFactor = 0.25;
+			controls.screenSpacePanning = false;
+			controls.minDistance = 1000;
+			controls.maxDistance = 1500;
+			controls.maxPolarAngle = Math.PI / 2;
+
+			//Scene
+			scene = new THREE.Scene();
+
+			//HemisphereLight
+			light = new THREE.HemisphereLight( 0xffbf67, 0x15c6ff );
+			scene.add( light );
+
+			//WebGL Renderer
+			renderer = new THREE.WebGLRenderer( { 
+									alpha    : true, 
+									antialias: true 
+								} );
+			renderer.setClearColor( 0xffffff, 0 );
+			renderer.setSize( windowWidth - 50, windowHeight - 50 );
+			renderer.domElement.style.zIndex = 5;
+			document.getElementById( viewRenderer ).appendChild( renderer.domElement );
+
+			
+			//Add HTML elements to scene
+			var target  = $( '#html3D-view' ).clone(),
+				pages   = target.find( '.html3D-view-content' );
+
+			pages.each( function() {
+				var el = new THREE.CSS3DObject( $.parseHTML( $( this )[0].outerHTML )[0] );
+
+				el.position.x = $( this ).data( 'position-x' ) || 0;
+				el.position.y = $( this ).data( 'position-y' ) || 0;
+				el.position.z = $( this ).data( 'position-z' ) || 0;
+				el.rotation.x = $( this ).data( 'rotation-x' ) || 0;
+				el.rotation.y = $( this ).data( 'rotation-y' ) || 3.14159265358979;
+				el.rotation.z = $( this ).data( 'rotation-z' ) || 0;
+
+				scene.add( el );
+			});
+			
+
+			
+			
+			//CSS3D Renderer
+			renderer = new THREE.CSS3DRenderer();
+			renderer.setSize( windowWidth, windowHeight );
+			renderer.domElement.style.position = 'absolute';
+			renderer.domElement.style.top = 0;
+			document.getElementById( viewRenderer ).appendChild( renderer.domElement );
+
+			// Fires when the window changes
+			window.addEventListener( 'resize', onWindowResize, false );
+			
+			
+		}
+
+		function render() {
+			requestAnimationFrame( render );
+
+            var delta = clock.getDelta();
+			
+			controls.update();
+			
+			renderer.render( scene, camera );
+			
+		}
+		
+		function onWindowResize() {
+			camera.aspect = window.innerWidth / window.innerHeight;
+			camera.updateProjectionMatrix();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+		}
+
+
+		
+    };
+
+    APP.components.documentReady.push( APP._3D_PAGES.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+/* 
+ *************************************
  * <!-- 3D Particle Effect -->
  *************************************
  */
@@ -3667,140 +3807,6 @@ APP = ( function ( APP, $, window, document ) {
     };
 
     APP.components.documentReady.push( APP.ACCORDION_BG.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
-/* 
- *************************************
- * <!-- 3D Pages -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP._3D_PAGES               = APP._3D_PAGES || {};
-	APP._3D_PAGES.version       = '0.0.1';
-    APP._3D_PAGES.documentReady = function( $ ) {
-
-		
-		//Prevent this module from loading in other pages
-		if ( $( '#3D-renderer' ).length == 0 || ! Modernizr.webgl ) return false;
-		
-		
-		
-		var $window                   = $( window ),
-			windowWidth               = $window.width(),
-			windowHeight              = $window.height(),
-			viewRenderer              = '3D-renderer';
-		
-		
-		// Generate one plane geometries mesh to scene
-		//-------------------------------------	
-		var camera,
-			controls,
-			scene,
-			light,
-			renderer,
-			clock = new THREE.Clock();
-
-		init();
-		render();
-
-		function init() {
-			//camera
-			camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 1, 10000 );
-			camera.position.set(0, 0, -1000);
-
-			//controls
-			controls = new THREE.OrbitControls( camera );
-			controls.rotateSpeed = 0.5;
-			controls.zoomSpeed = 1.2;
-			controls.panSpeed = 0.8;
-			controls.enableZoom = true;
-			controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-			controls.dampingFactor = 0.25;
-			controls.screenSpacePanning = false;
-			controls.minDistance = 1000;
-			controls.maxDistance = 1500;
-			controls.maxPolarAngle = Math.PI / 2;
-
-			//Scene
-			scene = new THREE.Scene();
-
-			//HemisphereLight
-			light = new THREE.HemisphereLight( 0xffbf67, 0x15c6ff );
-			scene.add( light );
-
-			//WebGL Renderer
-			renderer = new THREE.WebGLRenderer( { 
-									alpha    : true, 
-									antialias: true 
-								} );
-			renderer.setClearColor( 0xffffff, 0 );
-			renderer.setSize( windowWidth - 50, windowHeight - 50 );
-			renderer.domElement.style.zIndex = 5;
-			document.getElementById( viewRenderer ).appendChild( renderer.domElement );
-
-			
-			//Add HTML elements to scene
-			var target  = $( '#html3D-view' ).clone(),
-				pages   = target.find( '.html3D-view-content' );
-
-			pages.each( function() {
-				var el = new THREE.CSS3DObject( $.parseHTML( $( this )[0].outerHTML )[0] );
-
-				el.position.x = $( this ).data( 'position-x' ) || 0;
-				el.position.y = $( this ).data( 'position-y' ) || 0;
-				el.position.z = $( this ).data( 'position-z' ) || 0;
-				el.rotation.x = $( this ).data( 'rotation-x' ) || 0;
-				el.rotation.y = $( this ).data( 'rotation-y' ) || 3.14159265358979;
-				el.rotation.z = $( this ).data( 'rotation-z' ) || 0;
-
-				scene.add( el );
-			});
-			
-
-			
-			
-			//CSS3D Renderer
-			renderer = new THREE.CSS3DRenderer();
-			renderer.setSize( windowWidth, windowHeight );
-			renderer.domElement.style.position = 'absolute';
-			renderer.domElement.style.top = 0;
-			document.getElementById( viewRenderer ).appendChild( renderer.domElement );
-
-			// Fires when the window changes
-			window.addEventListener( 'resize', onWindowResize, false );
-			
-			
-		}
-
-		function render() {
-			requestAnimationFrame( render );
-
-            var delta = clock.getDelta();
-			
-			controls.update();
-			
-			renderer.render( scene, camera );
-			
-		}
-		
-		function onWindowResize() {
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-			renderer.setSize( window.innerWidth, window.innerHeight );
-		}
-
-
-		
-    };
-
-    APP.components.documentReady.push( APP._3D_PAGES.documentReady );
     return APP;
 
 }( APP, jQuery, window, document ) );
@@ -7325,6 +7331,59 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
+ * <!-- Dropdown Menu -->
+ *************************************
+ */	
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.DROPDOWN_MENU               = APP.DROPDOWN_MENU || {};
+	APP.DROPDOWN_MENU.version       = '0.0.1';
+    APP.DROPDOWN_MENU.documentReady = function( $ ) {
+
+		//Create a trigger of Dropdown Menu on Click
+		$( '.uix-dropdown-menu' ).each( function() {
+			var $this = $( this );
+
+			//Close the target
+			$this.find( '> label' ).on( 'click', function( e ) {
+				e.preventDefault();
+				//Prevents further propagation of the current event in the capturing and bubbling phases.
+				e.stopPropagation();
+
+				$this.toggleClass( 'is-opened' );
+
+			});	
+
+			$this.find( 'li a' ).on( 'click', function() {
+				$this.removeClass( 'is-opened' );	
+				$this.find( 'input[type="hidden"]' ).val( $( this ).data( 'value' ) );
+				$this.find( '> label > span' ).html( $( this ).text() );
+ 
+			});		
+
+
+			$( 'html' ).on( 'click', function() {
+				$this.removeClass( 'is-opened' );	
+			});		
+
+
+
+		});
+
+		
+    };
+
+    APP.components.documentReady.push( APP.DROPDOWN_MENU.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+/* 
+ *************************************
  * <!-- Dropdown Menu 2 (Multi-level drop-down navigation) -->
  *************************************
  */	
@@ -7773,59 +7832,6 @@ APP = ( function ( APP, $, window, document ) {
     };
  
 }( jQuery ));
-
-
-/* 
- *************************************
- * <!-- Dropdown Menu -->
- *************************************
- */	
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.DROPDOWN_MENU               = APP.DROPDOWN_MENU || {};
-	APP.DROPDOWN_MENU.version       = '0.0.1';
-    APP.DROPDOWN_MENU.documentReady = function( $ ) {
-
-		//Create a trigger of Dropdown Menu on Click
-		$( '.uix-dropdown-menu' ).each( function() {
-			var $this = $( this );
-
-			//Close the target
-			$this.find( '> label' ).on( 'click', function( e ) {
-				e.preventDefault();
-				//Prevents further propagation of the current event in the capturing and bubbling phases.
-				e.stopPropagation();
-
-				$this.toggleClass( 'is-opened' );
-
-			});	
-
-			$this.find( 'li a' ).on( 'click', function() {
-				$this.removeClass( 'is-opened' );	
-				$this.find( 'input[type="hidden"]' ).val( $( this ).data( 'value' ) );
-				$this.find( '> label > span' ).html( $( this ).text() );
- 
-			});		
-
-
-			$( 'html' ).on( 'click', function() {
-				$this.removeClass( 'is-opened' );	
-			});		
-
-
-
-		});
-
-		
-    };
-
-    APP.components.documentReady.push( APP.DROPDOWN_MENU.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
 
 
 /* 
@@ -18513,7 +18519,7 @@ APP = ( function ( APP, $, window, document ) {
 			APP.MODAL_DIALOG.documentReady($); //Modal Dialog
 			APP.PARALLAX.documentReady($); //Parallax
 			APP.VIDEOS.documentReady($); //Videos
-			APP.HEADER.documentReady($); //Header Area
+			APP.BODY_AND_HEADER.documentReady($); //Header Area
 			APP.SET_BG.documentReady($); //Specify a background image
 			APP.GET_CUSTOM_ATTRS.documentReady($); //Get all custom attributes of an element like "data-*"
 			APP.PAGINATION.documentReady($); //Pagination

@@ -1,15 +1,15 @@
 
 /* 
  *************************************
- * <!-- Header Area -->
+ * <!-- Body And Header -->
  *************************************
  */
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
-    APP.HEADER               = APP.HEADER || {};
-	APP.HEADER.version       = '0.0.2';
-    APP.HEADER.documentReady = function( $ ) {
+    APP.BODY_AND_HEADER               = APP.BODY_AND_HEADER || {};
+	APP.BODY_AND_HEADER.version       = '0.0.2';
+    APP.BODY_AND_HEADER.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
 		if ( $( 'body' ).hasClass( 'onepage' ) ) return false;
@@ -37,8 +37,14 @@ APP = ( function ( APP, $, window, document ) {
 			}
 		});
 		function headerInit( w ) {
-			if ( w > 768 ) $( '.uix-header__placeholder.uix-header__placeholder--auto-height' ).css( 'height', $( '.uix-header__container' ).outerHeight() + 'px' ); 
-			
+			if ( w > 768 ) {
+				
+				$( '.uix-header__placeholder.uix-header__placeholder--auto-height' ).css( 'height', $( '.uix-header__container' ).outerHeight() + 'px' ); 
+				
+				$( 'body' ).removeClass( 'is-mobile' );
+			} else {
+				$( 'body' ).addClass( 'is-mobile' );
+			}
 		}
 		
 		
@@ -64,7 +70,7 @@ APP = ( function ( APP, $, window, document ) {
 		
     };
 
-    APP.components.documentReady.push( APP.HEADER.documentReady );
+    APP.components.documentReady.push( APP.BODY_AND_HEADER.documentReady );
     return APP;
 
 }( APP, jQuery, window, document ) );
