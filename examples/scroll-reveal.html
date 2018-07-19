@@ -53,11 +53,11 @@
         
        
         <!-- Theme  -->
-        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTUzMTk3MTgwNzU2Nw"/>
+        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTUzMTk5MTE0OTQ2NQ"/>
         
         
          <!--[if lt IE 10]>
-           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTUzMTk3MTgwNzU2Nw" />
+           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTUzMTk5MTE0OTQ2NQ" />
         <![endif]-->
         
         
@@ -180,6 +180,8 @@
 														<li><a href="modal-dialog.html">Modal Dialog</a></li>
 														<li><a href="shape-animation.html">Shape Animation</a></li>
 														<li><a href="ribbon.html">Ribbon</a></li>
+														<li><a href="responsive-images.html">Responsive Images</a></li>
+														
 													</ul>
 													
 													<!-- .sub-menu  end -->
@@ -390,6 +392,18 @@
         </header>
 
     
+             
+             
+        <style>
+			.demo-sr-active {
+				transition: all 1s ease;
+				transform: scale(0.7);
+			}
+			
+		</style>
+              
+       
+       
         <!-- Scroll Reveal
         ============================================= --> 
         <section class="uix-section--sm uix-height--50 uix-el--transparent" data-uix-anim='{"from":{"opacity":0,"x":100},"to":{"opacity":1,"x":0},"ease":"Power2.easeOut","duration":0.8,"delay":0,"infinite":false}' style="background: #cb60b3; background: linear-gradient(to bottom, #cb60b3 0%,#ad1283 100%);">
@@ -402,6 +416,8 @@
             </div>
         </section> 
         
+
+        
         <section class="uix-section--sm uix-height--50 uix-el--transparent" data-uix-anim='{"from":{"opacity":0,"scale":0.5,"transform":"translateX(50px) rotate(30deg)"},"to":{"opacity":1,"scale":1,"transform":"translateX(0) rotate(0deg)"},"ease":"Power2.easeOut","duration":0.8,"delay":0.5,"infinite":false}' style="background: #d2ff52; background: linear-gradient(to bottom, #d2ff52 0%,#91e842 100%);">
             <div class="container">
                 <div class="row">
@@ -412,6 +428,7 @@
             </div>
         </section>
         
+
         <section class="uix-section--sm uix-height--50 uix-el--transparent" data-uix-anim='{"from":{"opacity":0,"y":150},"to":{"opacity":1,"y":0},"ease":"Power2.easeOut","duration":0.8,"delay":0,"infinite":true}' style="background: #ffb76b; background: linear-gradient(to bottom, #ffb76b 0%,#ff7f04 100%);">
             <div class="container">
                 <div class="row">
@@ -433,7 +450,20 @@
             </div>
         </section>
            
-           
+        
+
+        <section class="uix-section--sm uix-height--50" data-uix-anim='{"from":"","to":".demo-sr-active","infinite":true}' style="background: #b5bdc8; background: linear-gradient(to bottom, #bb51dd 0%,#8b0cb1 100%);">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+						<h3>Add class <code>.demo-sr-active</code> when element becomes visible</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+               
+        
+          
     
         <section class="uix-section--sm uix-height--50 uix-el--zoom" data-uix-anim='{"from":{"scale":0},"to":{"scale":1},"ease":"Power2.easeOut","duration":0.8,"delay":0,"infinite":false}' style="background: #b5bdc8; background: linear-gradient(to bottom, #b5bdc8 0%,#28343b 100%);">
             <div class="container">
@@ -444,8 +474,9 @@
                 </div>
             </div>
         </section>
-              
-            
+             
+
+                        
             
                 <!-- Footer
         ============================================= -->    
@@ -523,14 +554,14 @@
 	============================================= -->
 	
 	<script>
-		var REVISION     = "1.9.2",
+		var REVISION     = "1.9.3",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
 				"homeUrl"     : "",  //Eg. https://uiux.cc
 				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
 			};
     </script>  
-    <script src="assets/js/uix-kit.min.js?ver=MTUzMTk3MTgwNzU2Nw"></script>
+    <script src="assets/js/uix-kit.min.js?ver=MTUzMTk5MTE0OTQ2NQ"></script>
 
 
 

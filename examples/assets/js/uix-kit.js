@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.9.2
+ * ## Version             :  1.9.3
  * ## Last Update         :  July 19, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -22,8 +22,8 @@
 	---------------------------
 	
 	
-	1. Loader 
-    2. Body And Header 
+	1. Body And Header 
+    2. Loader 
     3. Back to Top 
     4. Get all custom attributes of an element like "data-*" 
     5. Navigation 
@@ -41,12 +41,12 @@
     17. 3D Carousel 
     18. 3D Model 
     19. 3D Pages 
-    20. Accordion 
-    21. 3D Particle Effect 
+    20. 3D Particle Effect 
+    21. Accordion 
     22. Accordion Background Images 
     23. Advanced Content Slider 
-    24. Advanced Slider (Special Effects) 
-    25. Advanced Slider (Basic) 
+    24. Advanced Slider (Basic) 
+    25. Advanced Slider (Special Effects) 
     26. Counter 
     27. Dropdown Menu 
     28. Dropdown Menu 2 (Multi-level drop-down navigation) 
@@ -13574,7 +13574,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.POST_LIST_AJAX               = APP.POST_LIST_AJAX || {};
-	APP.POST_LIST_AJAX.version       = '0.0.4';
+	APP.POST_LIST_AJAX.version       = '0.0.5';
     APP.POST_LIST_AJAX.documentReady = function( $ ) {
 
 		$( '[data-ajax-list-json]' ).each( function() {
@@ -13590,10 +13590,23 @@ APP = ( function ( APP, $, window, document ) {
 				addition         = $this.data( 'ajax-list-addition' ),
 				template7ID      = $this.data( 'ajax-list-temp-id' ),
 				pushContainer    = $this.data( 'ajax-list-push-container-class' ),
-				triggerActive    = $this.data( 'ajax-list-trigger-active-class' );
+				triggerActive    = $this.data( 'ajax-list-trigger-active-class' ),
+				pageParmStr      = $this.data( 'ajax-list-page-parm-str' );
 	
+			
+			
 
 			$this.attr( 'id', wrapperID );
+			
+			
+
+			if( typeof pageParmStr === typeof undefined ) {
+				pageParmStr = {
+					'totalPage'     : 'total',
+					'currentPage'   : 'page',
+					'displayPerPage': 'per'
+				};
+			}
 			
 			if( typeof curPage === typeof undefined ) {
 				curPage = 1;
@@ -13720,9 +13733,9 @@ APP = ( function ( APP, $, window, document ) {
 							
 								//Perform dynamic loading
 								if ( customPostData != '' ) {
-									defaultPostData = JSON.parse( '{ "total": '+totalPage+', "per": '+perShow+', "page": '+curPage+', '+customPostData+' }' );
+									defaultPostData = JSON.parse( '{ "'+pageParmStr.totalPage+'": '+totalPage+', "'+pageParmStr.displayPerPage+'": '+perShow+', "'+pageParmStr.currentPage+'": '+curPage+', '+customPostData+' }' );
 								} else {
-									defaultPostData = JSON.parse( '{ "total": '+totalPage+', "per": '+perShow+', "page": '+curPage+' }' );
+									defaultPostData = JSON.parse( '{ "'+pageParmStr.totalPage+'": '+totalPage+', "'+pageParmStr.displayPerPage+'": '+perShow+', "'+pageParmStr.currentPage+'": '+curPage+' }' );
 								}
 
 
@@ -13792,9 +13805,9 @@ APP = ( function ( APP, $, window, document ) {
 
 							//Perform dynamic loading
 							if ( customPostData != '' ) {
-								defaultPostData = JSON.parse( '{ "total": '+totalPage+', "per": '+perShow+', "page": '+curPage+', '+customPostData+' }' );
+								defaultPostData = JSON.parse( '{ "'+pageParmStr.totalPage+'": '+totalPage+', "'+pageParmStr.displayPerPage+'": '+perShow+', "'+pageParmStr.currentPage+'": '+curPage+', '+customPostData+' }' );
 							} else {
-								defaultPostData = JSON.parse( '{ "total": '+totalPage+', "per": '+perShow+', "page": '+curPage+' }' );
+								defaultPostData = JSON.parse( '{ "'+pageParmStr.totalPage+'": '+totalPage+', "'+pageParmStr.displayPerPage+'": '+perShow+', "'+pageParmStr.currentPage+'": '+curPage+' }' );
 							}
 
 							ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition );
@@ -13835,9 +13848,9 @@ APP = ( function ( APP, $, window, document ) {
 
 							//Perform dynamic loading
 							if ( customPostData != '' ) {
-								defaultPostData = JSON.parse( '{ "total": '+totalPage+', "per": '+perShow+', "page": '+curPage+', '+customPostData+' }' );
+								defaultPostData = JSON.parse( '{ "'+pageParmStr.totalPage+'": '+totalPage+', "'+pageParmStr.displayPerPage+'": '+perShow+', "'+pageParmStr.currentPage+'": '+curPage+', '+customPostData+' }' );
 							} else {
-								defaultPostData = JSON.parse( '{ "total": '+totalPage+', "per": '+perShow+', "page": '+curPage+' }' );
+								defaultPostData = JSON.parse( '{ "'+pageParmStr.totalPage+'": '+totalPage+', "'+pageParmStr.displayPerPage+'": '+perShow+', "'+pageParmStr.currentPage+'": '+curPage+' }' );
 							}
 
 							ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition );
@@ -13881,9 +13894,9 @@ APP = ( function ( APP, $, window, document ) {
 
 							//Perform dynamic loading
 							if ( customPostData != '' ) {
-								defaultPostData = JSON.parse( '{ "total": '+totalPage+', "per": '+perShow+', "page": '+curPage+', '+customPostData+' }' );
+								defaultPostData = JSON.parse( '{ "'+pageParmStr.totalPage+'": '+totalPage+', "'+pageParmStr.displayPerPage+'": '+perShow+', "'+pageParmStr.currentPage+'": '+curPage+', '+customPostData+' }' );
 							} else {
-								defaultPostData = JSON.parse( '{ "total": '+totalPage+', "per": '+perShow+', "page": '+curPage+' }' );
+								defaultPostData = JSON.parse( '{ "'+pageParmStr.totalPage+'": '+totalPage+', "'+pageParmStr.displayPerPage+'": '+perShow+', "'+pageParmStr.currentPage+'": '+curPage+' }' );
 							}
 
 							ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition );
@@ -16622,7 +16635,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.SCROLL_REVEAL               = APP.SCROLL_REVEAL || {};
-	APP.SCROLL_REVEAL.version       = '0.0.8';
+	APP.SCROLL_REVEAL.version       = '0.1.0';
     APP.SCROLL_REVEAL.documentReady = function( $ ) {
 
 		
@@ -16652,34 +16665,51 @@ APP = ( function ( APP, $, window, document ) {
 					myDelay     = config.delay,
 					infinite    = config.infinite;
 				
-			
-				//Initialize the state of the element
-				if ( type == 'from' ) {
-					TweenMax.set( obj, {
-						css        : fromCSS
-					});	
-
-				}
 				
-				if ( type == 'from-anim' ) {
-					TweenMax.to( obj, myDuration, {
-						css        : fromCSS
-					});	
+				if( Object.prototype.toString.call( fromCSS ) == '[object String]' ) {
+					//Add class when element becomes visible
+					
+					toCSS = toCSS.replace(/\./, '' );
+					
+					if ( type == 'from' ) obj.removeClass( toCSS );
 
+					if ( type == 'from-anim' ) obj.removeClass( toCSS );
+
+					//Target animation
+					if ( type == 'to' ) obj.addClass( toCSS );
+
+					
+				} else {
+					//Using TweenMax to create animations
+					if ( type == 'from' ) {
+						TweenMax.set( obj, {
+							css        : fromCSS
+						});	
+
+					}
+
+					if ( type == 'from-anim' ) {
+						TweenMax.to( obj, myDuration, {
+							css        : fromCSS
+						});	
+
+					}
+
+					//Target animation
+					if ( type == 'to' ) {
+
+						TweenMax.to( obj, myDuration, {
+							css    : toCSS,
+							ease   : myEase,
+							delay  : myDelay
+						});		
+
+
+					}	
+
+
+					
 				}
-
-				//Target animation
-				if ( type == 'to' ) {
-					
-					TweenMax.to( obj, myDuration, {
-						css    : toCSS,
-						ease   : myEase,
-						delay  : myDelay
-					});		
-					
-
-				}	
-				
 				
 				//Reversing Scroll Animations for Loop  
 				if ( type == 'loop' ) {

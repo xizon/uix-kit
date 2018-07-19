@@ -2,8 +2,10 @@
 
 
 
-#### = 1.9.2 (July 19, 2018) =
+#### = 1.9.3 (July 19, 2018) =
 
+* New: Add a new module "Responsive Images" using srcset attribute.
+* New: Added the return value type of Scroll Reveal.
 * New: Added a name hook of ajax loaded via variable.
 * Tweak: Added some data type judgments to enhance compatibility.
 * Tweak: When using a mobile device to access a website, the &lt;body&gt; tag automatically adds the class "is-mobile".

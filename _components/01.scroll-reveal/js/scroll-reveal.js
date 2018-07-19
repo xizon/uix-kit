@@ -8,7 +8,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.SCROLL_REVEAL               = APP.SCROLL_REVEAL || {};
-	APP.SCROLL_REVEAL.version       = '0.0.8';
+	APP.SCROLL_REVEAL.version       = '0.1.0';
     APP.SCROLL_REVEAL.documentReady = function( $ ) {
 
 		
@@ -38,34 +38,51 @@ APP = ( function ( APP, $, window, document ) {
 					myDelay     = config.delay,
 					infinite    = config.infinite;
 				
-			
-				//Initialize the state of the element
-				if ( type == 'from' ) {
-					TweenMax.set( obj, {
-						css        : fromCSS
-					});	
-
-				}
 				
-				if ( type == 'from-anim' ) {
-					TweenMax.to( obj, myDuration, {
-						css        : fromCSS
-					});	
+				if( Object.prototype.toString.call( fromCSS ) == '[object String]' ) {
+					//Add class when element becomes visible
+					
+					toCSS = toCSS.replace(/\./, '' );
+					
+					if ( type == 'from' ) obj.removeClass( toCSS );
 
+					if ( type == 'from-anim' ) obj.removeClass( toCSS );
+
+					//Target animation
+					if ( type == 'to' ) obj.addClass( toCSS );
+
+					
+				} else {
+					//Using TweenMax to create animations
+					if ( type == 'from' ) {
+						TweenMax.set( obj, {
+							css        : fromCSS
+						});	
+
+					}
+
+					if ( type == 'from-anim' ) {
+						TweenMax.to( obj, myDuration, {
+							css        : fromCSS
+						});	
+
+					}
+
+					//Target animation
+					if ( type == 'to' ) {
+
+						TweenMax.to( obj, myDuration, {
+							css    : toCSS,
+							ease   : myEase,
+							delay  : myDelay
+						});		
+
+
+					}	
+
+
+					
 				}
-
-				//Target animation
-				if ( type == 'to' ) {
-					
-					TweenMax.to( obj, myDuration, {
-						css    : toCSS,
-						ease   : myEase,
-						delay  : myDelay
-					});		
-					
-
-				}	
-				
 				
 				//Reversing Scroll Animations for Loop  
 				if ( type == 'loop' ) {

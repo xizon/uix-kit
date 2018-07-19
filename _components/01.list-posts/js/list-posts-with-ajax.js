@@ -8,7 +8,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.POST_LIST_AJAX               = APP.POST_LIST_AJAX || {};
-	APP.POST_LIST_AJAX.version       = '0.0.4';
+	APP.POST_LIST_AJAX.version       = '0.0.5';
     APP.POST_LIST_AJAX.documentReady = function( $ ) {
 
 		$( '[data-ajax-list-json]' ).each( function() {
@@ -24,10 +24,23 @@ APP = ( function ( APP, $, window, document ) {
 				addition         = $this.data( 'ajax-list-addition' ),
 				template7ID      = $this.data( 'ajax-list-temp-id' ),
 				pushContainer    = $this.data( 'ajax-list-push-container-class' ),
-				triggerActive    = $this.data( 'ajax-list-trigger-active-class' );
+				triggerActive    = $this.data( 'ajax-list-trigger-active-class' ),
+				pageParmStr      = $this.data( 'ajax-list-page-parm-str' );
 	
+			
+			
 
 			$this.attr( 'id', wrapperID );
+			
+			
+
+			if( typeof pageParmStr === typeof undefined ) {
+				pageParmStr = {
+					'totalPage'     : 'total',
+					'currentPage'   : 'page',
+					'displayPerPage': 'per'
+				};
+			}
 			
 			if( typeof curPage === typeof undefined ) {
 				curPage = 1;
@@ -154,9 +167,9 @@ APP = ( function ( APP, $, window, document ) {
 							
 								//Perform dynamic loading
 								if ( customPostData != '' ) {
-									defaultPostData = JSON.parse( '{ "total": '+totalPage+', "per": '+perShow+', "page": '+curPage+', '+customPostData+' }' );
+									defaultPostData = JSON.parse( '{ "'+pageParmStr.totalPage+'": '+totalPage+', "'+pageParmStr.displayPerPage+'": '+perShow+', "'+pageParmStr.currentPage+'": '+curPage+', '+customPostData+' }' );
 								} else {
-									defaultPostData = JSON.parse( '{ "total": '+totalPage+', "per": '+perShow+', "page": '+curPage+' }' );
+									defaultPostData = JSON.parse( '{ "'+pageParmStr.totalPage+'": '+totalPage+', "'+pageParmStr.displayPerPage+'": '+perShow+', "'+pageParmStr.currentPage+'": '+curPage+' }' );
 								}
 
 
@@ -226,9 +239,9 @@ APP = ( function ( APP, $, window, document ) {
 
 							//Perform dynamic loading
 							if ( customPostData != '' ) {
-								defaultPostData = JSON.parse( '{ "total": '+totalPage+', "per": '+perShow+', "page": '+curPage+', '+customPostData+' }' );
+								defaultPostData = JSON.parse( '{ "'+pageParmStr.totalPage+'": '+totalPage+', "'+pageParmStr.displayPerPage+'": '+perShow+', "'+pageParmStr.currentPage+'": '+curPage+', '+customPostData+' }' );
 							} else {
-								defaultPostData = JSON.parse( '{ "total": '+totalPage+', "per": '+perShow+', "page": '+curPage+' }' );
+								defaultPostData = JSON.parse( '{ "'+pageParmStr.totalPage+'": '+totalPage+', "'+pageParmStr.displayPerPage+'": '+perShow+', "'+pageParmStr.currentPage+'": '+curPage+' }' );
 							}
 
 							ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition );
@@ -269,9 +282,9 @@ APP = ( function ( APP, $, window, document ) {
 
 							//Perform dynamic loading
 							if ( customPostData != '' ) {
-								defaultPostData = JSON.parse( '{ "total": '+totalPage+', "per": '+perShow+', "page": '+curPage+', '+customPostData+' }' );
+								defaultPostData = JSON.parse( '{ "'+pageParmStr.totalPage+'": '+totalPage+', "'+pageParmStr.displayPerPage+'": '+perShow+', "'+pageParmStr.currentPage+'": '+curPage+', '+customPostData+' }' );
 							} else {
-								defaultPostData = JSON.parse( '{ "total": '+totalPage+', "per": '+perShow+', "page": '+curPage+' }' );
+								defaultPostData = JSON.parse( '{ "'+pageParmStr.totalPage+'": '+totalPage+', "'+pageParmStr.displayPerPage+'": '+perShow+', "'+pageParmStr.currentPage+'": '+curPage+' }' );
 							}
 
 							ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition );
@@ -315,9 +328,9 @@ APP = ( function ( APP, $, window, document ) {
 
 							//Perform dynamic loading
 							if ( customPostData != '' ) {
-								defaultPostData = JSON.parse( '{ "total": '+totalPage+', "per": '+perShow+', "page": '+curPage+', '+customPostData+' }' );
+								defaultPostData = JSON.parse( '{ "'+pageParmStr.totalPage+'": '+totalPage+', "'+pageParmStr.displayPerPage+'": '+perShow+', "'+pageParmStr.currentPage+'": '+curPage+', '+customPostData+' }' );
 							} else {
-								defaultPostData = JSON.parse( '{ "total": '+totalPage+', "per": '+perShow+', "page": '+curPage+' }' );
+								defaultPostData = JSON.parse( '{ "'+pageParmStr.totalPage+'": '+totalPage+', "'+pageParmStr.displayPerPage+'": '+perShow+', "'+pageParmStr.currentPage+'": '+curPage+' }' );
 							}
 
 							ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition );
