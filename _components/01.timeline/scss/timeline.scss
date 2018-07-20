@@ -4,8 +4,10 @@
 
 /*
  * 1. Vertical
- * 2. Horizontal
- * 3. Horizontal ( Classic)
+ * 2. Vertical & Reversed
+ * 3. Horizontal
+ * 4. Horizontal & Reversed
+ * 5. Horizontal ( Classic)
 */
 
 
@@ -45,7 +47,7 @@
 				background: $highlight-color1;
 				position: absolute;
 				top: 40px;
-				left: 50%;
+				left: 20px;
 			}
 
 			.uix-timeline__item--img {
@@ -53,7 +55,7 @@
 				top: 0;
 				width: 40px;
 				height: 40px;
-				left: 50%;
+				left: 20px;
 				margin-left: -20px;
 				@include transition-default();
 
@@ -66,7 +68,11 @@
 			.uix-timeline__item--info {
 				position: relative;
 				padding: 1.4rem;
-				width: 45%;
+				width: calc(90% - 2.8rem);
+				margin-left: 120px;
+				
+				
+				
 				@include outer-shadow();
 				@include transition-default();
 
@@ -91,21 +97,14 @@
 					opacity: .7;
 					position: absolute;
 					width: 100%;
-					left: 122%;
+					left: -70px;
 					top: 0;
+					
+					
 				}
 
 			}
 
-			&:nth-child(even) .uix-timeline__item--info {
-				float: right;
-
-				.uix-timeline__item--date {
-					left: auto;
-					right: 122%;
-					text-align: right;
-				}
-			}
 
 		}
 	
@@ -145,6 +144,81 @@
 						text-align: left !important;
 					}
 				}
+			
+				
+			}
+
+		}
+
+	}
+
+}
+
+
+
+/* 
+ ---------------------------
+ 2. Vertical & Reversed
+ ---------------------------
+ */ 
+
+@media all and (min-width: 769px) {
+	
+	.uix-timeline__container.is-vertical.is-reversed {
+
+		.uix-timeline {
+
+			.uix-timeline__item {
+
+				.uix-timeline__line {
+					left: 50%;
+				}
+
+
+				.uix-timeline__item--img {
+					left: 50%;
+				}
+
+				.uix-timeline__item--info {
+					margin-left: 10px;
+					width: 45%;
+
+					.uix-timeline__item--date {
+						left: 122%;
+					}	
+
+				}
+
+				&:nth-child(even) .uix-timeline__item--info {
+					float: right;
+					margin-right: 10px;
+
+					.uix-timeline__item--date {
+						left: auto;
+						right: 122%;
+						text-align: right;
+					}
+				}
+
+			}
+
+
+		}
+
+
+	}	
+}
+
+
+
+@media all and (max-width: 768px) {
+	
+	.uix-timeline__container.is-vertical.is-reversed {
+
+		.uix-timeline {
+
+			.uix-timeline__item {
+
 				&:nth-child(even) .uix-timeline__item--info {
 					float: none;
 				}
@@ -158,13 +232,13 @@
 
 }
 
-
 /* 
  ---------------------------
- 2. Horizontal
+ 3. Horizontal
  ---------------------------
  */ 
 $horizontal-item-width: 250px;
+$horizontal-container-width: 1000px;
 
 .uix-timeline__container-wrapper.is-horizontal {
 	
@@ -200,7 +274,7 @@ $horizontal-item-width: 250px;
 	
 	.uix-timeline__container.is-horizontal {
 		padding: 3.5rem 0;
-		width: 1000px;
+		width: $horizontal-container-width;
 		margin: 0 auto;
 
 		&::after {
@@ -214,6 +288,7 @@ $horizontal-item-width: 250px;
 			height: 1px;
 			top: 161px;
 			left: 0;
+			
 		}
 
 
@@ -222,6 +297,7 @@ $horizontal-item-width: 250px;
 
 			width: 9999px;
 			transition: .5s ease-in-out; 
+			
 
 			&::after {
 				clear: both;
@@ -269,9 +345,8 @@ $horizontal-item-width: 250px;
 					/* Scrollbar width is 17px by default */
 					float: none;
 					top: 25px;
-					/* Vertical Center */
-					left: 50%;
 					transform: translateX(-50%);
+					left: 0;
 
 					.uix-timeline__item--date {
 						position: absolute;
@@ -305,9 +380,11 @@ $horizontal-item-width: 250px;
 
 
 
-			}
+			}//.uix-timeline__item end
 
+		
 
+			
 
 		}
 
@@ -363,6 +440,7 @@ $horizontal-item-width: 250px;
 						width: calc( 80% - 40px );
 						margin: 0;
 						margin-left: .5rem;
+						left: 50%;
 
 						.uix-timeline__item--date {
 							float: left;
@@ -393,11 +471,91 @@ $horizontal-item-width: 250px;
 	
 }
 
+/* 
+ ---------------------------
+ 4. Horizontal & Reversed
+ ---------------------------
+ */ 
+@media all and (min-width: 769px) {
+	.uix-timeline__container-wrapper.is-horizontal.is-reversed {
+
+		.uix-timeline__btn {
+			top: 50%;
+			transform: translateY(-50%);
+			margin-top: -45px;
+
+		}
+
+		.uix-timeline__container.is-horizontal.is-reversed {
+
+			&::after {
+				top: 50%;
+				margin-top: -44px;
+			}
+
+
+			.uix-timeline {
+
+				.uix-timeline__item:nth-child(odd) {
+
+
+					.uix-timeline__item--img {
+						position: relative;
+						margin-top: 0;
+					}
+
+					.uix-timeline__item--info {
+						position: absolute;
+					}
+
+
+
+
+				}//.uix-timeline__item end	
+
+				.uix-timeline__item:nth-child(even) {
+
+
+					.uix-timeline__item--img {
+						position: relative;
+						margin-top: 0;
+					}
+
+					.uix-timeline__item--info {
+						position: absolute;
+						transform: translate(-50%, -100%);/* Required */
+						margin-top: -50px;
+
+						.uix-timeline__item--date {
+							top: auto;
+							bottom: -90px;
+							
+						}
+						
+
+					}
+
+
+
+				}//.uix-timeline__item end
+
+
+			}
+
+
+		}
+
+	}
+	
+	
+}
+
+
 
 
 /* 
  ---------------------------
- 3. Horizontal ( Classic)
+ 5. Horizontal ( Classic)
  ---------------------------
  */ 
 

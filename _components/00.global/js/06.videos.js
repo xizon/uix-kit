@@ -24,7 +24,7 @@ APP = ( function ( APP, $, window, document ) {
 		 */  
 		$( '.uix-video' ).each( function()  {
 			var $this          = $( this ),
-				tempID         = 'video-' + Math.random()*1000000000000000000,
+				tempID         = 'video-' + UIX_GUID.newGuid(),
 			    curVideoID     = tempID,
 				coverPlayBtnID = 'videocover-' + curVideoID,
 				videoWrapperW  = $this.closest( '[data-embed-video-wrapper]' ).width(),

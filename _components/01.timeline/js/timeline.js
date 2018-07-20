@@ -28,16 +28,15 @@ APP = ( function ( APP, $, window, document ) {
 			$( '.uix-timeline__container-wrapper.is-horizontal' ).each( function()  {
 
 				var $this          = $( this ),
-					$timeline      = $this.find( '.uix-timeline__container.is-horizontal > .uix-timeline' ),
+					$container     = $this.find( '.uix-timeline__container.is-horizontal' ),
+					$timeline      = $container.find( '> .uix-timeline' ),
 					dateShowEle    = $timeline.data( 'show-ele' );
 
 				if ( typeof dateShowEle === typeof undefined ) {
 					dateShowEle = '#timeline-number-show';
 				}	
 		
-				
-				$this.css( 'height', $this.height() - 17 + 'px' ); //Scrollbar width is 17px by default
-
+			
 
 				$this.find( '.uix-timeline__btn--prev' ).on( 'click', function( e ) {
 					e.preventDefault();
@@ -51,9 +50,9 @@ APP = ( function ( APP, $, window, document ) {
 					return false;
 				});
 
-				$this.find( '.uix-timeline__item' ).on( 'click', function( e ) {
+				$this.find( '.uix-timeline__item .uix-timeline__item--img' ).on( 'click', function( e ) {
 					e.preventDefault();
-					timelineUpdate( $this, $( this ), dateShowEle, false );
+					timelineUpdate( $this, $( this ).parent(), dateShowEle, false );
 					return false;
 				});
 
@@ -66,9 +65,45 @@ APP = ( function ( APP, $, window, document ) {
 				
 
 				
+				if ( $this.hasClass( 'is-reversed' ) ) {
+					
+					// Set equal heights
+					var infoNewHeight = setEqualHeights( $timeline.find( '.uix-timeline__item--info' ) );
 
+					function setEqualHeights( el ) {
+						var counter = 0;
+
+						for ( var i = 0; i < el.length; i++) {
+
+							var singleHeight = $( el[i] )[0].offsetHeight;
+
+							if (counter < singleHeight) {
+								counter = singleHeight;
+							}
+						}
+
+						for ( var k = 0; k < el.length; k++) {
+							$( el[k] ).css( 'height', counter + 'px' );
+						}
+
+						return counter;
+
+					}	
+					
+			
+					// Reset container height
+					$container.css( {
+						'padding' : infoNewHeight + 'px 0'
+					} );	
+				}
+
+
+				
+				
 			});	
 		}
+		
+		
 
 		/*
 		 * Method that updates items of timeline
@@ -117,6 +152,7 @@ APP = ( function ( APP, $, window, document ) {
 					if ( tarIndex < 0 ) tarIndex = 0;
 					if ( tarIndex == 0 ) obj.find( '.uix-timeline__btn--prev' ).addClass( 'disabled' );
 					
+					 
 				}
 			} else {
 				
@@ -126,7 +162,7 @@ APP = ( function ( APP, $, window, document ) {
 				} else {
 					if ( tarIndex > itemTotal-1 ) tarIndex = itemTotal-1;
 					if ( tarIndex > itemTotal-2 ) obj.find( '.uix-timeline__btn--next' ).addClass( 'disabled' );
-					
+					if ( tarIndex == 0 ) obj.find( '.uix-timeline__btn--prev' ).addClass( 'disabled' );
 				}
 			}
 

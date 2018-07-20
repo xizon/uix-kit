@@ -96,7 +96,7 @@ APP = ( function ( APP, $, window, document ) {
 			} );
 
 
-			sidrmenuInit( windowWidth ); 
+			mobileMenuInit( windowWidth ); 
 
 			// Close the menu on window change
 			$window.on( 'resize', function() {
@@ -109,7 +109,7 @@ APP = ( function ( APP, $, window, document ) {
 					// Do stuff here
 					$toggleBody.removeClass( 'js-uix-menu-opened' );
 					$toggle.removeClass( 'is-opened' );
-					sidrmenuInit( windowWidth );
+					mobileMenuInit( windowWidth );
 
 
 				}
@@ -120,8 +120,13 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
-
-		function sidrmenuInit( w ) {
+		/*
+		 * Initialize mobile menu
+		 *
+		 * @param  {number} w                  - Returns width of browser viewport.
+		 * @return {void}                      - The constructor.
+		 */
+		function mobileMenuInit( w ) {
 
 			if ( w <= 768 ) {
 				$( '.uix-menu__container.is-mobile .uix-menu > li' ).each( function() {

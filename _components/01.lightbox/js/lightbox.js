@@ -24,7 +24,7 @@ APP = ( function ( APP, $, window, document ) {
 			lbCloseEl       = '.uix-lightbox__container .uix-lightbox__close',
 			lbCloseFixedEl  = '.uix-lightbox__close-fixed',
 			$lbContent      = $lbCon.find( '.uix-lightbox__html' ),
-			tempID          = 'lightbox-' + Math.random()*1000000000000000000;
+			tempID          = 'lightbox-' + UIX_GUID.newGuid();
 		
 		$( document ).on( 'click touchstart', '.uix-lightbox__trigger', function() { 
 

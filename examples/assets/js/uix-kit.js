@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.9.3
- * ## Last Update         :  July 19, 2018
+ * ## Version             :  1.9.4
+ * ## Last Update         :  July 21, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -45,16 +45,16 @@
     21. Accordion 
     22. Accordion Background Images 
     23. Advanced Content Slider 
-    24. Advanced Slider (Basic) 
-    25. Advanced Slider (Special Effects) 
-    26. Counter 
+    24. Advanced Slider (Special Effects) 
+    25. Counter 
+    26. Advanced Slider (Basic) 
     27. Dropdown Menu 
     28. Dropdown Menu 2 (Multi-level drop-down navigation) 
     29. Dynamic Drop Down List from JSON 
     30. Flexslider 
     31. Form 
-    32. jQuery UI Datepicker 1.11.4 
-    33. Form Progress 
+    32. Form Progress 
+    33. jQuery UI Datepicker 1.11.4 
     34. Gallery 
     35. Image Shapes 
     36. Custom Core Scripts  
@@ -191,6 +191,54 @@ var APP = (function ( $, window, document ) {
     return APP;
 }( jQuery, window, document ) ); 
 
+
+
+/*
+ * Create GUID / UUID
+ *
+ * @return {string}                        - The globally-unique identifiers.
+ */
+var crypto = window.crypto || window.msCrypto || null; // IE11 fix
+var UIX_GUID = UIX_GUID || (function() {
+
+    var EMPTY = '00000000-0000-0000-0000-000000000000';
+
+    var _padLeft = function(paddingString, width, replacementChar) {
+        return paddingString.length >= width ? paddingString: _padLeft(replacementChar + paddingString, width, replacementChar || ' ');
+    };
+
+    var _s4 = function(number) {
+        var hexadecimalResult = number.toString(16);
+        return _padLeft(hexadecimalResult, 4, '0');
+    };
+
+    var _cryptoGuid = function() {
+        var buffer = new window.Uint16Array(8);
+        window.crypto.getRandomValues(buffer);
+        return [_s4(buffer[0]) + _s4(buffer[1]), _s4(buffer[2]), _s4(buffer[3]), _s4(buffer[4]), _s4(buffer[5]) + _s4(buffer[6]) + _s4(buffer[7])].join('-');
+    };
+
+    var _guid = function() {
+        var currentDateMilliseconds = new Date().getTime();
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,
+        function(currentChar) {
+            var randomChar = (currentDateMilliseconds + Math.random() * 16) % 16 | 0;
+            currentDateMilliseconds = Math.floor(currentDateMilliseconds / 16);
+            return (currentChar === 'x' ? randomChar: (randomChar & 0x7 | 0x8)).toString(16);
+        });
+    };
+
+    var create = function() {
+        var hasCrypto = crypto != 'undefined' && crypto !== null,
+        hasRandomValues = typeof(window.crypto.getRandomValues) != 'undefined';
+        return (hasCrypto && hasRandomValues) ? _cryptoGuid() : _guid();
+    };
+
+    return {
+        newGuid: create,
+        empty: EMPTY
+    };
+})();
 
 
 
@@ -713,7 +761,7 @@ APP = ( function ( APP, $, window, document ) {
 		 */  
 		$( '.uix-video' ).each( function()  {
 			var $this          = $( this ),
-				tempID         = 'video-' + Math.random()*1000000000000000000,
+				tempID         = 'video-' + UIX_GUID.newGuid(),
 			    curVideoID     = tempID,
 				coverPlayBtnID = 'videocover-' + curVideoID,
 				videoWrapperW  = $this.closest( '[data-embed-video-wrapper]' ).width(),
@@ -1916,7 +1964,7 @@ APP = ( function ( APP, $, window, document ) {
 			} );
 
 
-			sidrmenuInit( windowWidth ); 
+			mobileMenuInit( windowWidth ); 
 
 			// Close the menu on window change
 			$window.on( 'resize', function() {
@@ -1929,7 +1977,7 @@ APP = ( function ( APP, $, window, document ) {
 					// Do stuff here
 					$toggleBody.removeClass( 'js-uix-menu-opened' );
 					$toggle.removeClass( 'is-opened' );
-					sidrmenuInit( windowWidth );
+					mobileMenuInit( windowWidth );
 
 
 				}
@@ -1940,8 +1988,13 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
-
-		function sidrmenuInit( w ) {
+		/*
+		 * Initialize mobile menu
+		 *
+		 * @param  {number} w                  - Returns width of browser viewport.
+		 * @return {void}                      - The constructor.
+		 */
+		function mobileMenuInit( w ) {
 
 			if ( w <= 768 ) {
 				$( '.uix-menu__container.is-mobile .uix-menu > li' ).each( function() {
@@ -4157,7 +4210,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.ADVANCED_SLIDER_FILTER               = APP.ADVANCED_SLIDER_FILTER || {};
-	APP.ADVANCED_SLIDER_FILTER.version       = '0.0.3';
+	APP.ADVANCED_SLIDER_FILTER.version       = '0.0.6';
     APP.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 	
@@ -4166,6 +4219,7 @@ APP = ( function ( APP, $, window, document ) {
 			windowHeight              = $window.height(),
 			animDuration              = 600,
 			$sliderWrapper            = $( '.uix-advanced-slider-sp' ),
+			tempID                    = 'video-' + UIX_GUID.newGuid(),
 
 			
 			//Autoplay global variables
@@ -4230,7 +4284,12 @@ APP = ( function ( APP, $, window, document ) {
 
 				//Initialize the first item container
 				//-------------------------------------		
-				$first.addClass( 'active' );
+				$items.addClass( 'next' );
+				
+				setTimeout( function() {
+					$first.addClass( 'active' );
+				}, animDuration );
+				
 
 				if ( $first.find( 'video' ).length > 0 ) {
 
@@ -4335,11 +4394,11 @@ APP = ( function ( APP, $, window, document ) {
 				
 			
 				if ( !loop ) {
-					if ( playTimes < total && playTimes >= 0 ) sliderUpdates( playTimes, $sliderWrapper );
+					if ( playTimes < total && playTimes >= 0 ) sliderUpdates( playTimes, $sliderWrapper, 'next' );
 				} else {
 					if ( playTimes == total ) playTimes = 0;
 					if ( playTimes < 0 ) playTimes = total-1;		
-					sliderUpdates( playTimes, $sliderWrapper );
+					sliderUpdates( playTimes, $sliderWrapper, 'next' );
 				}
 				
 
@@ -5332,8 +5391,16 @@ APP = ( function ( APP, $, window, document ) {
 					//Canvas Interactions
 					transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), sliderWrapper, 'out' );
 					
+					
+					//Determine the direction
+					var curDir = 'prev';
+					if ( $( this ).attr( 'data-index' ) > parseFloat( $items.filter( '.active' ).index() ) ) {
+						curDir = 'next';
+					}
+					
+					
 					//Update the current and previous/next items
-					sliderUpdates( $( this ).attr( 'data-index' ), sliderWrapper );
+					sliderUpdates( $( this ).attr( 'data-index' ), sliderWrapper, curDir );
 
 					//Pause the auto play event
 					clearInterval( timer );	
@@ -5364,7 +5431,7 @@ APP = ( function ( APP, $, window, document ) {
 				transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), sliderWrapper, 'out' );	
 
 				//Update the current and previous items
-				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, sliderWrapper );
+				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, sliderWrapper, 'prev' );
 
 				//Pause the auto play event
 				clearInterval( timer );
@@ -5378,7 +5445,7 @@ APP = ( function ( APP, $, window, document ) {
 				transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), sliderWrapper, 'out' );	
 
 				//Update the current and next items
-				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, sliderWrapper );
+				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, sliderWrapper, 'next' );
 
 
 				//Pause the auto play event
@@ -5413,7 +5480,7 @@ APP = ( function ( APP, $, window, document ) {
 								//--- swipe left
 
 
-								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, sliderWrapper );
+								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, sliderWrapper, 'prev' );
 
 
 								//Pause the auto play event
@@ -5423,7 +5490,7 @@ APP = ( function ( APP, $, window, document ) {
 							if ( deltaX <= -50) {
 								//--- swipe right
 
-								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, sliderWrapper );
+								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, sliderWrapper, 'next' );
 
 
 								//Pause the auto play event
@@ -5459,9 +5526,10 @@ APP = ( function ( APP, $, window, document ) {
 		 *
 		 * @param  {number} elementIndex     - Index of current slider.
 		 * @param  {object} slider           - Selector of the slider .
+		 * @param  {string} dir              - Switching direction indicator.
 		 * @return {void}                    - The constructor.
 		 */
-        function sliderUpdates( elementIndex, slider ) {
+        function sliderUpdates( elementIndex, slider, dir ) {
 			
 			var $items                   = slider.find( '.uix-advanced-slider-sp__item' ),
 				$current                 = $items.eq( elementIndex ),
@@ -5519,15 +5587,26 @@ APP = ( function ( APP, $, window, document ) {
 
 				
 			}
+			
+			//Determine the direction and add class to switching direction indicator.
+			var dirIndicatorClass = '';
+			if ( dir == 'prev' ) dirIndicatorClass = 'prev';
+			if ( dir == 'next' ) dirIndicatorClass = 'next';
+			
 
+
+			//Add transition class to Controls Pagination
 			$( dataControlsPagination ).find( 'li a' ).removeClass( 'leave' );
 			$( dataControlsPagination ).find( 'li a.active' ).removeClass( 'active' ).addClass( 'leave' );
 			$( dataControlsPagination ).find( 'li a[data-index="'+elementIndex+'"]' ).addClass( 'active' ).removeClass( 'leave' );
 			
 			
-			$items.removeClass( 'leave' );
-			slider.find( '.uix-advanced-slider-sp__item.active' ).removeClass( 'active' ).addClass( 'leave' );
-			$items.eq( elementIndex ).addClass( 'active' ).removeClass( 'leave' );
+			
+			//Add transition class to each item
+			$items.removeClass( 'leave prev next' );
+			$items.addClass( dirIndicatorClass );
+			slider.find( '.uix-advanced-slider-sp__item.active' ).removeClass( 'active' ).addClass( 'leave ' + dirIndicatorClass );
+			$items.eq( elementIndex ).addClass( 'active ' + dirIndicatorClass ).removeClass( 'leave' );
 
 			
 			
@@ -6238,7 +6317,6 @@ APP = ( function ( APP, $, window, document ) {
 				var $this          = $( this ),
 					videoWrapperW  = $this.closest( '.uix-advanced-slider__outline' ).width(),
 					videoWrapperH  = $this.closest( '.uix-advanced-slider__outline' ).height(),
-					tempID         = 'video-' + Math.random()*1000000000000000000,
 					curVideoID     = tempID,
 					coverPlayBtnID = 'videocover-' + curVideoID,
 					dataControls   = $this.data( 'embed-video-controls' ),
@@ -6471,7 +6549,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.ADVANCED_SLIDER               = APP.ADVANCED_SLIDER || {};
-	APP.ADVANCED_SLIDER.version       = '0.0.5';
+	APP.ADVANCED_SLIDER.version       = '0.0.6';
     APP.ADVANCED_SLIDER.pageLoaded    = function() {
 
 		var $window                   = $( window ),
@@ -6479,6 +6557,7 @@ APP = ( function ( APP, $, window, document ) {
 			windowHeight              = $window.height(),
 			animDuration              = 600,
 			$sliderWrapper            = $( '.uix-advanced-slider' ),
+			tempID                    = 'video-' + UIX_GUID.newGuid(),
 			
 			//Autoplay global variables
 			timer                     = null,
@@ -6521,7 +6600,12 @@ APP = ( function ( APP, $, window, document ) {
 
 				//Initialize the first item container
 				//-------------------------------------		
-				$first.addClass( 'active' );
+				$items.addClass( 'next' );
+				
+				setTimeout( function() {
+					$first.addClass( 'active' );
+				}, animDuration );
+				
 
 				if ( $first.find( 'video' ).length > 0 ) {
 
@@ -6626,11 +6710,11 @@ APP = ( function ( APP, $, window, document ) {
 				
 			
 				if ( !loop ) {
-					if ( playTimes < total && playTimes >= 0 ) sliderUpdates( playTimes, $sliderWrapper );
+					if ( playTimes < total && playTimes >= 0 ) sliderUpdates( playTimes, $sliderWrapper, 'next' );
 				} else {
 					if ( playTimes == total ) playTimes = 0;
 					if ( playTimes < 0 ) playTimes = total-1;		
-					sliderUpdates( playTimes, $sliderWrapper );
+					sliderUpdates( playTimes, $sliderWrapper, 'next' );
 				}
 				
 
@@ -6702,7 +6786,16 @@ APP = ( function ( APP, $, window, document ) {
 				e.preventDefault();
 
 				if ( !$( this ).hasClass( 'active' ) ) {
-					sliderUpdates( $( this ).attr( 'data-index' ), sliderWrapper );
+					
+
+					//Determine the direction
+					var curDir = 'prev';
+					if ( $( this ).attr( 'data-index' ) > parseFloat( $items.filter( '.active' ).index() ) ) {
+						curDir = 'next';
+					}
+					
+					
+					sliderUpdates( $( this ).attr( 'data-index' ), sliderWrapper, curDir );
 
 					//Pause the auto play event
 					clearInterval( timer );	
@@ -6729,7 +6822,7 @@ APP = ( function ( APP, $, window, document ) {
 			_prev.on( 'click', function( e ) {
 				e.preventDefault();
 
-				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, sliderWrapper );
+				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, sliderWrapper, 'prev' );
 
 				//Pause the auto play event
 				clearInterval( timer );
@@ -6739,7 +6832,7 @@ APP = ( function ( APP, $, window, document ) {
 			_next.on( 'click', function( e ) {
 				e.preventDefault();
 
-				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, sliderWrapper );
+				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, sliderWrapper, 'next' );
 
 
 				//Pause the auto play event
@@ -6774,7 +6867,7 @@ APP = ( function ( APP, $, window, document ) {
 								//--- swipe left
 
 
-								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, sliderWrapper );
+								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, sliderWrapper, 'prev' );
 
 
 								//Pause the auto play event
@@ -6784,7 +6877,7 @@ APP = ( function ( APP, $, window, document ) {
 							if ( deltaX <= -50) {
 								//--- swipe right
 
-								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, sliderWrapper );
+								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, sliderWrapper, 'next' );
 
 
 								//Pause the auto play event
@@ -6821,9 +6914,10 @@ APP = ( function ( APP, $, window, document ) {
 		 *
 		 * @param  {number} elementIndex     - Index of current slider.
 		 * @param  {object} slider           - Selector of the slider .
+		 * @param  {string} dir              - Switching direction indicator.
 		 * @return {void}                    - The constructor.
 		 */
-        function sliderUpdates( elementIndex, slider ) {
+        function sliderUpdates( elementIndex, slider, dir ) {
 			
 			var $items                   = slider.find( '.uix-advanced-slider__item' ),
 				$current                 = $items.eq( elementIndex ),
@@ -6882,15 +6976,25 @@ APP = ( function ( APP, $, window, document ) {
 
 				
 			}
+			
+			
+			//Determine the direction and add class to switching direction indicator.
+			var dirIndicatorClass = '';
+			if ( dir == 'prev' ) dirIndicatorClass = 'prev';
+			if ( dir == 'next' ) dirIndicatorClass = 'next';
+			
 
+			
+			//Add transition class to Controls Pagination
 			$( dataControlsPagination ).find( 'li a' ).removeClass( 'leave' );
-			$( dataControlsPagination ).find( 'li a.active' ).removeClass( 'active' ).addClass( 'leave' );
-			$( dataControlsPagination ).find( 'li a[data-index="'+elementIndex+'"]' ).addClass( 'active' ).removeClass( 'leave' );
+			$( dataControlsPagination ).find( 'li a.active' ).removeClass( 'active' ).addClass( 'leave');
+			$( dataControlsPagination ).find( 'li a[data-index="'+elementIndex+'"]' ).addClass( 'active').removeClass( 'leave' );
 			
-			
-			$items.removeClass( 'leave' );
-			slider.find( '.uix-advanced-slider__item.active' ).removeClass( 'active' ).addClass( 'leave' );
-			$items.eq( elementIndex ).addClass( 'active' ).removeClass( 'leave' );
+			//Add transition class to each item
+			$items.removeClass( 'leave prev next' );
+			$items.addClass( dirIndicatorClass );
+			slider.find( '.uix-advanced-slider__item.active' ).removeClass( 'active' ).addClass( 'leave ' + dirIndicatorClass );
+			$items.eq( elementIndex ).addClass( 'active ' + dirIndicatorClass ).removeClass( 'leave' );
 
 			
 			
@@ -6970,7 +7074,6 @@ APP = ( function ( APP, $, window, document ) {
 				var $this          = $( this ),
 					videoWrapperW  = $this.closest( '.uix-advanced-slider__outline' ).width(),
 					videoWrapperH  = $this.closest( '.uix-advanced-slider__outline' ).height(),
-					tempID         = 'video-' + Math.random()*1000000000000000000,
 					curVideoID     = tempID,
 					coverPlayBtnID = 'videocover-' + curVideoID,
 					dataControls   = $this.data( 'embed-video-controls' ),
@@ -7449,7 +7552,7 @@ APP = ( function ( APP, $, window, document ) {
 		$( '[data-ajax-dynamic-dd-json]' ).each( function() {
 			var $this            = $( this ),
 			    jsonFile         = $this.data( 'ajax-dynamic-dd-json' ),
-				ranID            = 'dynamic-dd-control-' + Math.random()*1000000000000000000,
+				ranID            = 'dynamic-dd-control-' + UIX_GUID.newGuid(),
 				method           = $this.data( 'ajax-dynamic-dd-method' ),
 				event            = $this.data( 'ajax-dynamic-dd-event' ),
 				associated       = $this.data( 'ajax-dynamic-dd-associated' ),
@@ -8167,7 +8270,7 @@ APP = ( function ( APP, $, window, document ) {
 				var $this          = $( this ),
 					videoWrapperW  = $this.closest( '[data-embed-video-wrapper]' ).width(),
 					videoWrapperH  = $this.closest( '[data-embed-video-wrapper]' ).height(),
-					tempID         = 'video-' + Math.random()*1000000000000000000,
+					tempID         = 'video-' + UIX_GUID.newGuid(),
 					curVideoID     = tempID,
 					coverPlayBtnID = 'videocover-' + curVideoID,
 					dataControls   = $this.data( 'embed-video-controls' ),
@@ -13092,7 +13195,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			$( '.uix-shape-img' ).each( function()  {
 				var $this          = $( this ),
-					ranID          = 'uix-shape-img-' + Math.random()*1000000000000000000,
+					ranID          = 'uix-shape-img-' + UIX_GUID.newGuid(),
 					svgPath        = $this.data( 'path' ),
 					svgW           = parseFloat( $this.data( 'svg-const-width' ) ),
 					svgH           = parseFloat( $this.data( 'svg-const-height' ) ),
@@ -13217,7 +13320,7 @@ APP = ( function ( APP, $, window, document ) {
 			lbCloseEl       = '.uix-lightbox__container .uix-lightbox__close',
 			lbCloseFixedEl  = '.uix-lightbox__close-fixed',
 			$lbContent      = $lbCon.find( '.uix-lightbox__html' ),
-			tempID          = 'lightbox-' + Math.random()*1000000000000000000;
+			tempID          = 'lightbox-' + UIX_GUID.newGuid();
 		
 		$( document ).on( 'click touchstart', '.uix-lightbox__trigger', function() { 
 
@@ -13579,7 +13682,7 @@ APP = ( function ( APP, $, window, document ) {
 
 		$( '[data-ajax-list-json]' ).each( function() {
 			var $this            = $( this ),
-				wrapperID        = 'refresh-all-waypoint-' + Math.random()*1000000000000000000,
+				wrapperID        = 'refresh-all-waypoint-' + UIX_GUID.newGuid(),
 			    curPage          = $this.data( 'ajax-list-page-now' ),
 				perShow          = $this.data( 'ajax-list-page-per' ),
 				totalPage        = $this.data( 'ajax-list-page-total' ),
@@ -17325,7 +17428,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 		$( teamFocusContent ).each( function() {
 			var $this           = $( this ),
-				thisID          = 'uix-team-focus-' + Math.random()*1000000000000000000,
+				thisID          = 'uix-team-focus-' + UIX_GUID.newGuid(),
 				hoverWidth      = $this.data( 'hover-width' ),
 				targetWidth     = $this.data( 'target-width' ), // Div over width as a percentage 
 				targetInfo      = $this.data( 'target-info' ), // Corresponding character details display
@@ -17751,16 +17854,15 @@ APP = ( function ( APP, $, window, document ) {
 			$( '.uix-timeline__container-wrapper.is-horizontal' ).each( function()  {
 
 				var $this          = $( this ),
-					$timeline      = $this.find( '.uix-timeline__container.is-horizontal > .uix-timeline' ),
+					$container     = $this.find( '.uix-timeline__container.is-horizontal' ),
+					$timeline      = $container.find( '> .uix-timeline' ),
 					dateShowEle    = $timeline.data( 'show-ele' );
 
 				if ( typeof dateShowEle === typeof undefined ) {
 					dateShowEle = '#timeline-number-show';
 				}	
 		
-				
-				$this.css( 'height', $this.height() - 17 + 'px' ); //Scrollbar width is 17px by default
-
+			
 
 				$this.find( '.uix-timeline__btn--prev' ).on( 'click', function( e ) {
 					e.preventDefault();
@@ -17774,9 +17876,9 @@ APP = ( function ( APP, $, window, document ) {
 					return false;
 				});
 
-				$this.find( '.uix-timeline__item' ).on( 'click', function( e ) {
+				$this.find( '.uix-timeline__item .uix-timeline__item--img' ).on( 'click', function( e ) {
 					e.preventDefault();
-					timelineUpdate( $this, $( this ), dateShowEle, false );
+					timelineUpdate( $this, $( this ).parent(), dateShowEle, false );
 					return false;
 				});
 
@@ -17789,9 +17891,45 @@ APP = ( function ( APP, $, window, document ) {
 				
 
 				
+				if ( $this.hasClass( 'is-reversed' ) ) {
+					
+					// Set equal heights
+					var infoNewHeight = setEqualHeights( $timeline.find( '.uix-timeline__item--info' ) );
 
+					function setEqualHeights( el ) {
+						var counter = 0;
+
+						for ( var i = 0; i < el.length; i++) {
+
+							var singleHeight = $( el[i] )[0].offsetHeight;
+
+							if (counter < singleHeight) {
+								counter = singleHeight;
+							}
+						}
+
+						for ( var k = 0; k < el.length; k++) {
+							$( el[k] ).css( 'height', counter + 'px' );
+						}
+
+						return counter;
+
+					}	
+					
+			
+					// Reset container height
+					$container.css( {
+						'padding' : infoNewHeight + 'px 0'
+					} );	
+				}
+
+
+				
+				
 			});	
 		}
+		
+		
 
 		/*
 		 * Method that updates items of timeline
@@ -17840,6 +17978,7 @@ APP = ( function ( APP, $, window, document ) {
 					if ( tarIndex < 0 ) tarIndex = 0;
 					if ( tarIndex == 0 ) obj.find( '.uix-timeline__btn--prev' ).addClass( 'disabled' );
 					
+					 
 				}
 			} else {
 				
@@ -17849,7 +17988,7 @@ APP = ( function ( APP, $, window, document ) {
 				} else {
 					if ( tarIndex > itemTotal-1 ) tarIndex = itemTotal-1;
 					if ( tarIndex > itemTotal-2 ) obj.find( '.uix-timeline__btn--next' ).addClass( 'disabled' );
-					
+					if ( tarIndex == 0 ) obj.find( '.uix-timeline__btn--prev' ).addClass( 'disabled' );
 				}
 			}
 

@@ -8,6 +8,7 @@
  * 3. Next/Prev buttons
 */
 
+$anim-duration: 0.6s;
 
 /* 
  ---------------------------
@@ -43,6 +44,7 @@
 			&.leave {
 				opacity: 0;
 			}
+			
 			&.active {
 				opacity: 1;
 			}
@@ -67,17 +69,48 @@
 				.uix-advanced-slider__item {
 					opacity: 0;
 					transform: scale(.8);
-
-					&.leave {
-						transition: all 0.6s ease;
-						opacity: 0;
-						transform: scale(.8);
+					
+					/* Default */
+					&.prev {
+						transform: translateX(200px) scale(.8);
 					}
+
+					&.next {
+						transform: translateX(-200px) scale(.8);
+					}
+					
+
+					
+					/* Leave  */
+					&.leave {
+						transition: all #{$anim-duration} ease;
+						opacity: 0;
+						
+						&.prev {
+							transform: translateX(-200px) scale(.8);
+						}
+
+						&.next {
+							transform: translateX(200px) scale(.8);
+						}
+						
+					}
+					
+					/* Active  */
 					&.active {
-						transition: all 0.6s ease;
-						transition-delay: 0.6s;
+						transition: all #{$anim-duration} ease;
+						transition-delay: #{$anim-duration};
 						opacity: 1;
-						transform: scale(1);
+						
+						&.prev {
+							transform: translateX(0) scale(1);
+						}
+
+						&.next {
+							transform: translateX(0) scale(1);
+						}
+
+						
 					}
 
 

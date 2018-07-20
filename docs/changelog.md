@@ -1,5 +1,11 @@
 # Changelog
 
+#### = 1.9.4 (July 20, 2018) =
+
+* Fix: Fixed a bug in Timeline.
+* Tweak: Removed the margin of the custom button, easy to center. And add two separate control classes.
+* Tweak: Increased the direction of the "Advanced Slider".
+* Tweak: Extended module of "Timeline".
 
 
 #### = 1.9.3 (July 19, 2018) =

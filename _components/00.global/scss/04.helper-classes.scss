@@ -320,12 +320,21 @@
  ---------------------------
  */ 
 
+
+.uix-mobile-el {
+	display: none;
+}
 @media all and (max-width: 768px) {
+	.uix-mobile-el {
+		display: block;
+	}
+	
 	.is-mobile-hide {
 		display: none;
 	}
-	
+
 }
+
 
 /* 
  ---------------------------

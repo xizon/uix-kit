@@ -59,6 +59,8 @@
 //    .is-vertical              --> Let the elements be laid out vertically.
 //    .is-fixed                 --> Let it be in a fixed position.
 //    .is-mobile                --> Execute when using a mobile device.
+//    .is-mobile-still          --> Do not change any style properties on mobile devices.
+//    .is-mobile-hide           --> Hide this element on mobile devices.
 //    .is-fill-white            --> Fill a white background.
 //    .is-fullscreen            --> Display in full screen.
 //    .is-fullwidth             --> Display in full width.
@@ -75,8 +77,6 @@
 //    .is-iconic                --> Elements and icons are used together.
 //    .is-success               --> Returns a style of success, often used in forms.
 //    .is-error                 --> Returns a style of error, often used in forms.
-//    .is-mobile-still          --> Do not change any style properties on mobile devices.
-//    .is-mobile-hide           --> Hide this element on mobile devices.
 //    .is-hide-IE               --> Hide this element in old IE (10-). Only IE is valid.
 //    
 

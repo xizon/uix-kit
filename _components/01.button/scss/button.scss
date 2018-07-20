@@ -9,11 +9,11 @@
  * 4. Icons
  * 5. Group
  * 6. Background
+ * 7. Margin
 */
 
-
-$button-margin-lr: 1rem;
-$button-margin-b: 1.5rem;
+$button-class-margin-lr: 1rem;
+$button-class-margin-b: 1.5rem;
 
 
 /* 
@@ -30,7 +30,7 @@ $button-margin-b: 1.5rem;
 	display: inline-block;
 	text-align: center;
 	min-width: 100px;
-	margin: 0 #{$button-margin-lr} #{$button-margin-b} 0;
+	margin: 0;
 	border: none;
 	background: none;
 	color: inherit;
@@ -98,18 +98,6 @@ $button-margin-b: 1.5rem;
 }
 
 
-.uix-t-c {
-	.uix-btn {
-		margin: 0 #{$button-margin-lr/2} #{$button-margin-b} #{$button-margin-lr/2};
-	}
-	
-	.uix-t-l {
-		.uix-btn {
-			margin: 0 #{$button-margin-lr} #{$button-margin-b} 0;
-		}	
-	}
-}
-
 
 @keyframes uix-cssAnim--moveWaitingStripes {
     0% {
@@ -126,13 +114,12 @@ $button-margin-b: 1.5rem;
 .uix-btn--full {
 	max-width: none;
 	width: 100%;
-	padding-left: $button-margin-lr !important;
-	padding-right: $button-margin-lr !important;
+}
+.uix-btn--full.is-pill {
+	padding-left: 35px;
+	padding-right: 35px;
 }
 
-.uix-t-c .uix-btn--full {
-	margin: 0 0 #{$button-margin-b} 0;
-}
 
 
 /* 
@@ -260,8 +247,6 @@ $button-margin-b: 1.5rem;
 .uix-btn__group {
 	
 	display: inline-block;
-	margin-bottom: $button-margin-b;
-
 	
 	&::after {
 		content: '';
@@ -388,3 +373,22 @@ $button-margin-b: 1.5rem;
 	
 }
 
+
+
+/* 
+ ---------------------------
+ 7. Margin
+ ---------------------------
+ */ 
+
+.uix-btn__margin--b {
+	margin-bottom: #{$button-class-margin-b};
+}
+
+.uix-btn__margin--l {
+	margin-left: #{$button-class-margin-lr};
+}
+
+.uix-btn__margin--r {
+	margin-right: #{$button-class-margin-lr};
+}

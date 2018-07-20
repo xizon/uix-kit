@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.9.3
- * ## Last Update         :  July 19, 2018
+ * ## Version             :  1.9.4
+ * ## Last Update         :  July 21, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -86,8 +86,8 @@
     21. Entry 
     22. Comments ( Synchronize to WordPress's class name ) 
     23. Mobile Menu 
-    24. Onepage Menu 
-    25. Modal Dialog 
+    24. Modal Dialog 
+    25. Onepage Menu 
     26. 3rd Party Plugins 
     27. 3D Background 
     28. 3D Carousel 
@@ -1020,7 +1020,15 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li::before,
  11. Hidden The Element on Mobile Device
  ---------------------------
  */
+.uix-mobile-el {
+    display: none;
+}
+
 @media all and (max-width: 768px) {
+    .uix-mobile-el {
+        display: block;
+    }
+
     .is-mobile-hide {
         display: none;
     }
@@ -5093,19 +5101,44 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
 .cssanimations .uix-advanced-slider.uix-advanced-slider--eff-scale .uix-advanced-slider__inner .uix-advanced-slider__item {
   opacity: 0;
   transform: scale(0.8);
+  /* Default */
+  /* Leave  */
+  /* Active  */
+}
+
+.cssanimations .uix-advanced-slider.uix-advanced-slider--eff-scale .uix-advanced-slider__inner .uix-advanced-slider__item.prev {
+  transform: translateX(200px) scale(0.8);
+}
+
+.cssanimations .uix-advanced-slider.uix-advanced-slider--eff-scale .uix-advanced-slider__inner .uix-advanced-slider__item.next {
+  transform: translateX(-200px) scale(0.8);
 }
 
 .cssanimations .uix-advanced-slider.uix-advanced-slider--eff-scale .uix-advanced-slider__inner .uix-advanced-slider__item.leave {
   transition: all 0.6s ease;
   opacity: 0;
-  transform: scale(0.8);
+}
+
+.cssanimations .uix-advanced-slider.uix-advanced-slider--eff-scale .uix-advanced-slider__inner .uix-advanced-slider__item.leave.prev {
+  transform: translateX(-200px) scale(0.8);
+}
+
+.cssanimations .uix-advanced-slider.uix-advanced-slider--eff-scale .uix-advanced-slider__inner .uix-advanced-slider__item.leave.next {
+  transform: translateX(200px) scale(0.8);
 }
 
 .cssanimations .uix-advanced-slider.uix-advanced-slider--eff-scale .uix-advanced-slider__inner .uix-advanced-slider__item.active {
   transition: all 0.6s ease;
   transition-delay: 0.6s;
   opacity: 1;
-  transform: scale(1);
+}
+
+.cssanimations .uix-advanced-slider.uix-advanced-slider--eff-scale .uix-advanced-slider__inner .uix-advanced-slider__item.active.prev {
+  transform: translateX(0) scale(1);
+}
+
+.cssanimations .uix-advanced-slider.uix-advanced-slider--eff-scale .uix-advanced-slider__inner .uix-advanced-slider__item.active.next {
+  transform: translateX(0) scale(1);
 }
 
 /* 
@@ -5566,6 +5599,7 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
  * 4. Icons
  * 5. Group
  * 6. Background
+ * 7. Margin
 */
 /* 
  ---------------------------
@@ -5580,7 +5614,7 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
   display: inline-block;
   text-align: center;
   min-width: 100px;
-  margin: 0 1rem 1.5rem 0;
+  margin: 0;
   border: none;
   background: none;
   color: inherit;
@@ -5638,14 +5672,6 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
   margin-right: .5rem;
 }
 
-.uix-t-c .uix-btn {
-  margin: 0 0.5rem 1.5rem 0.5rem;
-}
-
-.uix-t-c .uix-t-l .uix-btn {
-  margin: 0 1rem 1.5rem 0;
-}
-
 @keyframes uix-cssAnim--moveWaitingStripes {
   0% {
     background-position: 0 0;
@@ -5658,12 +5684,11 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
 .uix-btn--full {
   max-width: none;
   width: 100%;
-  padding-left: 1rem !important;
-  padding-right: 1rem !important;
 }
 
-.uix-t-c .uix-btn--full {
-  margin: 0 0 1.5rem 0;
+.uix-btn--full.is-pill {
+  padding-left: 35px;
+  padding-right: 35px;
 }
 
 /* 
@@ -5775,7 +5800,6 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
  */
 .uix-btn__group {
   display: inline-block;
-  margin-bottom: 1.5rem;
 }
 
 .uix-btn__group::after {
@@ -5879,6 +5903,23 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
 
 .uix-btn__bg--secondary.is-fill-white:hover {
   box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.6);
+}
+
+/* 
+ ---------------------------
+ 7. Margin
+ ---------------------------
+ */
+.uix-btn__margin--b {
+  margin-bottom: 1.5rem;
+}
+
+.uix-btn__margin--l {
+  margin-left: 1rem;
+}
+
+.uix-btn__margin--r {
+  margin-right: 1rem;
 }
 
 /* ====================================================== 
@@ -13568,8 +13609,10 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
 /* ====================================================== */
 /*
  * 1. Vertical
- * 2. Horizontal
- * 3. Horizontal ( Classic)
+ * 2. Vertical & Reversed
+ * 3. Horizontal
+ * 4. Horizontal & Reversed
+ * 5. Horizontal ( Classic)
 */
 /* 
  ---------------------------
@@ -13607,7 +13650,7 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
     background: #EC5E79;
     position: absolute;
     top: 40px;
-    left: 50%;
+    left: 20px;
 }
 
 .uix-timeline__container .uix-timeline .uix-timeline__item .uix-timeline__item--img {
@@ -13615,7 +13658,7 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
     top: 0;
     width: 40px;
     height: 40px;
-    left: 50%;
+    left: 20px;
     margin-left: -20px;
     transition: all 0.3s ease;
 }
@@ -13628,7 +13671,8 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
 .uix-timeline__container .uix-timeline .uix-timeline__item .uix-timeline__item--info {
     position: relative;
     padding: 1.4rem;
-    width: 45%;
+    width: calc(90% - 2.8rem);
+    margin-left: 120px;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
     transition: all 0.3s ease;
 }
@@ -13657,18 +13701,8 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
     opacity: .7;
     position: absolute;
     width: 100%;
-    left: 122%;
+    left: -70px;
     top: 0;
-}
-
-.uix-timeline__container .uix-timeline .uix-timeline__item:nth-child(even) .uix-timeline__item--info {
-    float: right;
-}
-
-.uix-timeline__container .uix-timeline .uix-timeline__item:nth-child(even) .uix-timeline__item--info .uix-timeline__item--date {
-    left: auto;
-    right: 122%;
-    text-align: right;
 }
 
 @media all and (max-width: 768px) {
@@ -13692,15 +13726,52 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
         right: auto !important;
         text-align: left !important;
     }
+}
 
-    .uix-timeline__container .uix-timeline .uix-timeline__item:nth-child(even) .uix-timeline__item--info {
+/* 
+ ---------------------------
+ 2. Vertical & Reversed
+ ---------------------------
+ */
+@media all and (min-width: 769px) {
+    .uix-timeline__container.is-vertical.is-reversed .uix-timeline .uix-timeline__item .uix-timeline__line {
+        left: 50%;
+    }
+
+    .uix-timeline__container.is-vertical.is-reversed .uix-timeline .uix-timeline__item .uix-timeline__item--img {
+        left: 50%;
+    }
+
+    .uix-timeline__container.is-vertical.is-reversed .uix-timeline .uix-timeline__item .uix-timeline__item--info {
+        margin-left: 10px;
+        width: 45%;
+    }
+
+    .uix-timeline__container.is-vertical.is-reversed .uix-timeline .uix-timeline__item .uix-timeline__item--info .uix-timeline__item--date {
+        left: 122%;
+    }
+
+    .uix-timeline__container.is-vertical.is-reversed .uix-timeline .uix-timeline__item:nth-child(even) .uix-timeline__item--info {
+        float: right;
+        margin-right: 10px;
+    }
+
+    .uix-timeline__container.is-vertical.is-reversed .uix-timeline .uix-timeline__item:nth-child(even) .uix-timeline__item--info .uix-timeline__item--date {
+        left: auto;
+        right: 122%;
+        text-align: right;
+    }
+}
+
+@media all and (max-width: 768px) {
+    .uix-timeline__container.is-vertical.is-reversed .uix-timeline .uix-timeline__item:nth-child(even) .uix-timeline__item--info {
         float: none;
     }
 }
 
 /* 
  ---------------------------
- 2. Horizontal
+ 3. Horizontal
  ---------------------------
  */
 .uix-timeline__container-wrapper.is-horizontal .uix-timeline__btn {
@@ -13801,9 +13872,8 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
   /* Scrollbar width is 17px by default */
     float: none;
     top: 25px;
-  /* Vertical Center */
-    left: 50%;
     transform: translateX(-50%);
+    left: 0;
 }
 
 .uix-timeline__container-wrapper.is-horizontal .uix-timeline__container.is-horizontal .uix-timeline .uix-timeline__item .uix-timeline__item--info .uix-timeline__item--date {
@@ -13873,6 +13943,7 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
         width: calc( 80% - 40px);
         margin: 0;
         margin-left: .5rem;
+        left: 50%;
     }
 
     .uix-timeline__container-wrapper.is-horizontal .uix-timeline__container.is-horizontal .uix-timeline .uix-timeline__item .uix-timeline__item--info .uix-timeline__item--date {
@@ -13889,7 +13960,51 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
 
 /* 
  ---------------------------
- 3. Horizontal ( Classic)
+ 4. Horizontal & Reversed
+ ---------------------------
+ */
+@media all and (min-width: 769px) {
+    .uix-timeline__container-wrapper.is-horizontal.is-reversed .uix-timeline__btn {
+        top: 50%;
+        transform: translateY(-50%);
+        margin-top: -45px;
+    }
+
+    .uix-timeline__container-wrapper.is-horizontal.is-reversed .uix-timeline__container.is-horizontal.is-reversed::after {
+        top: 50%;
+        margin-top: -44px;
+    }
+
+    .uix-timeline__container-wrapper.is-horizontal.is-reversed .uix-timeline__container.is-horizontal.is-reversed .uix-timeline .uix-timeline__item:nth-child(odd) .uix-timeline__item--img {
+        position: relative;
+        margin-top: 0;
+    }
+
+    .uix-timeline__container-wrapper.is-horizontal.is-reversed .uix-timeline__container.is-horizontal.is-reversed .uix-timeline .uix-timeline__item:nth-child(odd) .uix-timeline__item--info {
+        position: absolute;
+    }
+
+    .uix-timeline__container-wrapper.is-horizontal.is-reversed .uix-timeline__container.is-horizontal.is-reversed .uix-timeline .uix-timeline__item:nth-child(even) .uix-timeline__item--img {
+        position: relative;
+        margin-top: 0;
+    }
+
+    .uix-timeline__container-wrapper.is-horizontal.is-reversed .uix-timeline__container.is-horizontal.is-reversed .uix-timeline .uix-timeline__item:nth-child(even) .uix-timeline__item--info {
+        position: absolute;
+        transform: translate(-50%, -100%);
+    /* Required */
+        margin-top: -50px;
+    }
+
+    .uix-timeline__container-wrapper.is-horizontal.is-reversed .uix-timeline__container.is-horizontal.is-reversed .uix-timeline .uix-timeline__item:nth-child(even) .uix-timeline__item--info .uix-timeline__item--date {
+        top: auto;
+        bottom: -90px;
+    }
+}
+
+/* 
+ ---------------------------
+ 5. Horizontal ( Classic)
  ---------------------------
  */
 .uix-timeline__container-wrapper.is-horizontal.uix-timeline__container-wrapper--classic .uix-timeline__btn {

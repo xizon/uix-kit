@@ -9,7 +9,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.ADVANCED_SLIDER               = APP.ADVANCED_SLIDER || {};
-	APP.ADVANCED_SLIDER.version       = '0.0.5';
+	APP.ADVANCED_SLIDER.version       = '0.0.6';
     APP.ADVANCED_SLIDER.pageLoaded    = function() {
 
 		var $window                   = $( window ),
@@ -17,6 +17,7 @@ APP = ( function ( APP, $, window, document ) {
 			windowHeight              = $window.height(),
 			animDuration              = 600,
 			$sliderWrapper            = $( '.uix-advanced-slider' ),
+			tempID                    = 'video-' + UIX_GUID.newGuid(),
 			
 			//Autoplay global variables
 			timer                     = null,
@@ -59,7 +60,12 @@ APP = ( function ( APP, $, window, document ) {
 
 				//Initialize the first item container
 				//-------------------------------------		
-				$first.addClass( 'active' );
+				$items.addClass( 'next' );
+				
+				setTimeout( function() {
+					$first.addClass( 'active' );
+				}, animDuration );
+				
 
 				if ( $first.find( 'video' ).length > 0 ) {
 
@@ -164,11 +170,11 @@ APP = ( function ( APP, $, window, document ) {
 				
 			
 				if ( !loop ) {
-					if ( playTimes < total && playTimes >= 0 ) sliderUpdates( playTimes, $sliderWrapper );
+					if ( playTimes < total && playTimes >= 0 ) sliderUpdates( playTimes, $sliderWrapper, 'next' );
 				} else {
 					if ( playTimes == total ) playTimes = 0;
 					if ( playTimes < 0 ) playTimes = total-1;		
-					sliderUpdates( playTimes, $sliderWrapper );
+					sliderUpdates( playTimes, $sliderWrapper, 'next' );
 				}
 				
 
@@ -240,7 +246,16 @@ APP = ( function ( APP, $, window, document ) {
 				e.preventDefault();
 
 				if ( !$( this ).hasClass( 'active' ) ) {
-					sliderUpdates( $( this ).attr( 'data-index' ), sliderWrapper );
+					
+
+					//Determine the direction
+					var curDir = 'prev';
+					if ( $( this ).attr( 'data-index' ) > parseFloat( $items.filter( '.active' ).index() ) ) {
+						curDir = 'next';
+					}
+					
+					
+					sliderUpdates( $( this ).attr( 'data-index' ), sliderWrapper, curDir );
 
 					//Pause the auto play event
 					clearInterval( timer );	
@@ -267,7 +282,7 @@ APP = ( function ( APP, $, window, document ) {
 			_prev.on( 'click', function( e ) {
 				e.preventDefault();
 
-				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, sliderWrapper );
+				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, sliderWrapper, 'prev' );
 
 				//Pause the auto play event
 				clearInterval( timer );
@@ -277,7 +292,7 @@ APP = ( function ( APP, $, window, document ) {
 			_next.on( 'click', function( e ) {
 				e.preventDefault();
 
-				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, sliderWrapper );
+				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, sliderWrapper, 'next' );
 
 
 				//Pause the auto play event
@@ -312,7 +327,7 @@ APP = ( function ( APP, $, window, document ) {
 								//--- swipe left
 
 
-								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, sliderWrapper );
+								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, sliderWrapper, 'prev' );
 
 
 								//Pause the auto play event
@@ -322,7 +337,7 @@ APP = ( function ( APP, $, window, document ) {
 							if ( deltaX <= -50) {
 								//--- swipe right
 
-								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, sliderWrapper );
+								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, sliderWrapper, 'next' );
 
 
 								//Pause the auto play event
@@ -359,9 +374,10 @@ APP = ( function ( APP, $, window, document ) {
 		 *
 		 * @param  {number} elementIndex     - Index of current slider.
 		 * @param  {object} slider           - Selector of the slider .
+		 * @param  {string} dir              - Switching direction indicator.
 		 * @return {void}                    - The constructor.
 		 */
-        function sliderUpdates( elementIndex, slider ) {
+        function sliderUpdates( elementIndex, slider, dir ) {
 			
 			var $items                   = slider.find( '.uix-advanced-slider__item' ),
 				$current                 = $items.eq( elementIndex ),
@@ -420,15 +436,25 @@ APP = ( function ( APP, $, window, document ) {
 
 				
 			}
+			
+			
+			//Determine the direction and add class to switching direction indicator.
+			var dirIndicatorClass = '';
+			if ( dir == 'prev' ) dirIndicatorClass = 'prev';
+			if ( dir == 'next' ) dirIndicatorClass = 'next';
+			
 
+			
+			//Add transition class to Controls Pagination
 			$( dataControlsPagination ).find( 'li a' ).removeClass( 'leave' );
-			$( dataControlsPagination ).find( 'li a.active' ).removeClass( 'active' ).addClass( 'leave' );
-			$( dataControlsPagination ).find( 'li a[data-index="'+elementIndex+'"]' ).addClass( 'active' ).removeClass( 'leave' );
+			$( dataControlsPagination ).find( 'li a.active' ).removeClass( 'active' ).addClass( 'leave');
+			$( dataControlsPagination ).find( 'li a[data-index="'+elementIndex+'"]' ).addClass( 'active').removeClass( 'leave' );
 			
-			
-			$items.removeClass( 'leave' );
-			slider.find( '.uix-advanced-slider__item.active' ).removeClass( 'active' ).addClass( 'leave' );
-			$items.eq( elementIndex ).addClass( 'active' ).removeClass( 'leave' );
+			//Add transition class to each item
+			$items.removeClass( 'leave prev next' );
+			$items.addClass( dirIndicatorClass );
+			slider.find( '.uix-advanced-slider__item.active' ).removeClass( 'active' ).addClass( 'leave ' + dirIndicatorClass );
+			$items.eq( elementIndex ).addClass( 'active ' + dirIndicatorClass ).removeClass( 'leave' );
 
 			
 			
@@ -508,7 +534,6 @@ APP = ( function ( APP, $, window, document ) {
 				var $this          = $( this ),
 					videoWrapperW  = $this.closest( '.uix-advanced-slider__outline' ).width(),
 					videoWrapperH  = $this.closest( '.uix-advanced-slider__outline' ).height(),
-					tempID         = 'video-' + Math.random()*1000000000000000000,
 					curVideoID     = tempID,
 					coverPlayBtnID = 'videocover-' + curVideoID,
 					dataControls   = $this.data( 'embed-video-controls' ),

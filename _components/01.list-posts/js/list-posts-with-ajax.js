@@ -13,7 +13,7 @@ APP = ( function ( APP, $, window, document ) {
 
 		$( '[data-ajax-list-json]' ).each( function() {
 			var $this            = $( this ),
-				wrapperID        = 'refresh-all-waypoint-' + Math.random()*1000000000000000000,
+				wrapperID        = 'refresh-all-waypoint-' + UIX_GUID.newGuid(),
 			    curPage          = $this.data( 'ajax-list-page-now' ),
 				perShow          = $this.data( 'ajax-list-page-per' ),
 				totalPage        = $this.data( 'ajax-list-page-total' ),

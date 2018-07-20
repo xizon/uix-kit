@@ -14,7 +14,7 @@ APP = ( function ( APP, $, window, document ) {
 		$( '[data-ajax-dynamic-dd-json]' ).each( function() {
 			var $this            = $( this ),
 			    jsonFile         = $this.data( 'ajax-dynamic-dd-json' ),
-				ranID            = 'dynamic-dd-control-' + Math.random()*1000000000000000000,
+				ranID            = 'dynamic-dd-control-' + UIX_GUID.newGuid(),
 				method           = $this.data( 'ajax-dynamic-dd-method' ),
 				event            = $this.data( 'ajax-dynamic-dd-event' ),
 				associated       = $this.data( 'ajax-dynamic-dd-associated' ),
