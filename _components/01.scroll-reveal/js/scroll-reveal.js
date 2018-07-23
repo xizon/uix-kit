@@ -12,6 +12,8 @@ APP = ( function ( APP, $, window, document ) {
     APP.SCROLL_REVEAL.documentReady = function( $ ) {
 
 		
+		var viewport;
+		
 		//From JSON config in data attribute in HTML
 		var $scrollRevealElements = $( '[data-uix-anim]' ),
 			tmAnim = function( obj, type ) {
@@ -25,7 +27,8 @@ APP = ( function ( APP, $, window, document ) {
 						"ease"     : "Power2.easeOut",
 						"duration" : 0.8,
 						"delay"    : 0,
-						"infinite" : false
+						"infinite" : false,
+						"viewport" : '100%' //A percentage of the viewport's height.
 					};
 				}
 				
@@ -37,6 +40,9 @@ APP = ( function ( APP, $, window, document ) {
 					myDuration  = config.duration,
 					myDelay     = config.delay,
 					infinite    = config.infinite;
+				
+				//A percentage of the viewport's height.
+				viewport = config.viewport;
 				
 				
 				if( Object.prototype.toString.call( fromCSS ) == '[object String]' ) {
@@ -110,10 +116,12 @@ APP = ( function ( APP, $, window, document ) {
 			
 		});
 
+		
 					
 		//Prevent the location of page elements from being loaded incorrectly
 		//Invoking a jQuery function after .each() has completed
 		setTimeout( function() {
+		
 			var waypoints = $scrollRevealElements.waypoint({
 				handler: function( direction ) {
 
@@ -145,7 +153,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 				},
-				offset: '100%' //0~100%, bottom-in-view
+				offset: viewport //0~100%, bottom-in-view
 			});
 	
 		}, 500 );

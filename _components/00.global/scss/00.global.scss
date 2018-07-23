@@ -374,3 +374,27 @@ $primary-bg-color      : transparent;
 
 
 
+// Vertically Align Element 
+// ---------------------------
+// To vertically align an inline element's box inside its containing line box, 
+// it could be used to vertically position an <img> in a line of text.
+//
+@mixin center-vertically( $pseudo-el: 'before' ) {
+	//@include center-vertically();
+	
+    position: relative;
+
+    &:#{$pseudo-el} {
+        content: '';
+        position: relative;
+        height: 100%;
+        width: 0;
+    }
+
+    &:#{$pseudo-el},
+    > * {
+        vertical-align: middle;
+        display: inline-block;
+    }
+}
+  

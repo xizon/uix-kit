@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.9.4
- * ## Last Update         :  July 21, 2018
+ * ## Version             :  1.9.5
+ * ## Last Update         :  July 23, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -67,11 +67,11 @@
     2. Table 
     3. Bullet List 
     4. Helper Classes 
-    5. Typography 
-    6. Spacing 
-    7. Basic Layout Styles 
-    8. Navigation 
-    9. Header Area 
+    5. Spacing 
+    6. Typography 
+    7. Header Area 
+    8. Basic Layout Styles 
+    9. Navigation 
     10. Brand 
     11. Footer 
     12. Video 
@@ -86,8 +86,8 @@
     21. Entry 
     22. Comments ( Synchronize to WordPress's class name ) 
     23. Mobile Menu 
-    24. Modal Dialog 
-    25. Onepage Menu 
+    24. Onepage Menu 
+    25. Modal Dialog 
     26. 3rd Party Plugins 
     27. 3D Background 
     28. 3D Carousel 
@@ -115,45 +115,46 @@
     50. Form Progress 
     51. Gallery 
     52. Heading 
-    53. Image Shapes 
-    54. Custom Core Scripts & Stylesheets 
-    55. Cutom Light Box 
-    56. Brands List 
-    57. Bulleted List 
-    58. Maintain Aspect Ratio List 
-    59. List of Posts 
-    60. List of Split Posts 
-    61. Side by Side List 
-    62. Side by Side List With Photo 
-    63. Fullwidth List of Split 2 
-    64. Fullwidth List of Split 
-    65. Mouse Animation Scroll 
-    66. Multiple Items Carousel 
-    67. Overlay 
-    68. Parallax 
-    69. Periodical Scroll 
-    70. Pricing 
-    71. Progress Bar 
-    72. Ribbon 
-    73. Services 
-    74. Shape Animation 
-    75. Show More Less 
-    76. Single Post 
-    77. Source Code 
-    78. Striking 
-    79. Tabs 
-    80. Team Focus 
-    81. Team Fullwidth (Style using the Side by Side List With Photo module) 
-    82. Team Gird 
-    83. Testimonials Carousel 
-    84. Text effect 
-    85. Timeline 
-    86. ToolTip 
-    87. Vertical Menu 
-    88. Vertical Separator 
-    89. Wave Background 
-    90. WordPress Core ( Do not use prefix "uix-" ) 
-    91. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    53. Image Animation 
+    54. Image Shapes 
+    55. Custom Core Scripts & Stylesheets 
+    56. Cutom Light Box 
+    57. Brands List 
+    58. Bulleted List 
+    59. Maintain Aspect Ratio List 
+    60. List of Posts 
+    61. List of Split Posts 
+    62. Side by Side List 
+    63. Side by Side List With Photo 
+    64. Fullwidth List of Split 2 
+    65. Fullwidth List of Split 
+    66. Mouse Animation Scroll 
+    67. Multiple Items Carousel 
+    68. Overlay 
+    69. Parallax 
+    70. Periodical Scroll 
+    71. Pricing 
+    72. Progress Bar 
+    73. Ribbon 
+    74. Services 
+    75. Shape Animation 
+    76. Show More Less 
+    77. Single Post 
+    78. Source Code 
+    79. Striking 
+    80. Tabs 
+    81. Team Focus 
+    82. Team Fullwidth (Style using the Side by Side List With Photo module) 
+    83. Team Gird 
+    84. Testimonials Carousel 
+    85. Text effect 
+    86. Timeline 
+    87. ToolTip 
+    88. Vertical Menu 
+    89. Vertical Separator 
+    90. Wave Background 
+    91. WordPress Core ( Do not use prefix "uix-" ) 
+    92. Ajax Page Loader (Loading A Page via Ajax Into Div)  
 
 
 
@@ -9161,6 +9162,81 @@ html[xmlns] .uix-flexslider .uix-flexslider__inner {
 }
 
 /* ====================================================== 
+   <!-- Image Animation --> 
+/* ====================================================== */
+.uix-image-anim {
+    position: relative;
+    line-height: 0;
+    background-color: #f5f6fa;
+    overflow: hidden;
+    transform: rotate(0.0001deg);
+    display: inline-block;
+  /* Image overlay */
+  /*-- Effect 1 --*/
+  /*-- Effect 2 --*/
+  /*-- Effect 3 --*/;
+}
+
+.uix-image-anim img {
+    transform: scale(1.1);
+    transition: 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+}
+
+.uix-image-anim::after {
+    display: block;
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #f5f6fa;
+    transform-origin: right top;
+    backface-visibility: hidden;
+    transition: 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+}
+
+.uix-image-anim.uix-image-anim--x::after {
+    transform: translateX(0);
+}
+
+.uix-image-anim.uix-image-anim--x.active img {
+    transform: scale(1);
+    transition-delay: 0.1s;
+}
+
+.uix-image-anim.uix-image-anim--x.active::after {
+    transform: translateX(100%);
+}
+
+.uix-image-anim.uix-image-anim--y::after {
+    transform: translateY(0);
+}
+
+.uix-image-anim.uix-image-anim--y.active img {
+    transform: scale(1);
+    transition-delay: 0.1s;
+}
+
+.uix-image-anim.uix-image-anim--y.active::after {
+    transform: translateY(100%);
+}
+
+.uix-image-anim.uix-image-anim--z::after {
+    transform: scale(1);
+    transform-origin: center center;
+}
+
+.uix-image-anim.uix-image-anim--z.active img {
+    transform: scale(1);
+    transition-delay: 0.1s;
+}
+
+.uix-image-anim.uix-image-anim--z.active::after {
+    transform: scale(0);
+}
+
+/* ====================================================== 
         <!-- Image Shapes --> 
 /* ====================================================== */
 .uix-shape-img {
@@ -12830,8 +12906,6 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
     top: 0;
     left: 0px;
     background-color: #EC5E79;
-    transform: skew(-20deg, 0);
-    -webkit-transform: skew(-20deg, 0);
     transform: skew(-20deg, 0);
     z-index: 0;
 }

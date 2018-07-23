@@ -1,0 +1,108 @@
+/* ====================================================== 
+   <!-- Image Animation --> 
+/* ====================================================== */
+
+$img-overlay-bg: #f5f6fa;
+
+.uix-image-anim {
+	position: relative;
+	line-height: 0;
+	background-color: #{$img-overlay-bg};
+	overflow: hidden;
+	transform: rotate(.0001deg);
+	display: inline-block;
+	
+	
+	img {
+		transform: scale(1.1);
+		@include transition-cubic-bezier();
+	}
+
+	/* Image overlay */
+	&::after {
+		display: block;
+		content: '';
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background-color: #{$img-overlay-bg};
+		transform-origin: right top;
+		backface-visibility: hidden;
+		@include transition-cubic-bezier();
+	}
+	
+	/*-- Effect 1 --*/
+	&.uix-image-anim--x {
+		
+		&::after {
+			transform: translateX(0);
+		}
+		
+		
+		&.active {
+
+			img {
+				transform: scale(1);
+				transition-delay: 0.1s;
+			}
+
+			&::after {
+				transform: translateX(100%);
+			}	
+		}	
+		
+	}
+	
+	/*-- Effect 2 --*/
+	&.uix-image-anim--y {
+		
+		&::after {
+			transform: translateY(0);
+		}
+		
+		
+		&.active {
+
+			img {
+				transform: scale(1);
+				transition-delay: 0.1s;
+			}
+
+
+			&::after {
+				transform: translateY(100%);
+			}	
+		}	
+		
+	}
+	
+	
+	/*-- Effect 3 --*/
+	&.uix-image-anim--z {
+		
+		&::after {
+			transform: scale(1);
+			transform-origin: center center;
+		}
+		
+		
+		&.active {
+
+			img {
+				transform: scale(1);
+				transition-delay: 0.1s;
+			}
+
+
+			&::after {
+				transform: scale(0);
+			}	
+		}	
+		
+	}
+	
+
+	
+}
