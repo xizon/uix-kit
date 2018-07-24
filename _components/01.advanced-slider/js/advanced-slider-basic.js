@@ -24,7 +24,6 @@ APP = ( function ( APP, $, window, document ) {
 			playTimes;
 		
 		
-		
 		sliderInit( false );
 		
 		$window.on( 'resize', function() {

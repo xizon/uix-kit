@@ -14,10 +14,20 @@ $sp-anim-duration: 0.6s;
  1. Initialize the slider style
  ---------------------------
  */ 
+
+/* Prevent content overflow */
+.uix-advanced-slider-sp__wrapper,
+.uix-advanced-slider-sp__inner,
+.uix-advanced-slider-sp__canvas-container {
+	max-height: 100vh;
+	overflow: hidden;
+}
+
 .uix-advanced-slider-sp__canvas-container {
 	position: relative;
 	z-index: 2;
 	display: block;
+	height: 100%; /* Required, It will make the canvas fill up */
 }
 .uix-advanced-slider-sp {
 	position: relative;
@@ -38,15 +48,13 @@ $sp-anim-duration: 0.6s;
 
 	
 	.uix-advanced-slider-sp__inner {
-		
-		position: relative;
+		position: absolute;
+		left: 0;
+		top: 0;
 		z-index: 3;
+		height: 100%;/* Required */
 		
 		.uix-advanced-slider-sp__item {
-			position: absolute;
-			left: 0;
-			top: 0;
-			z-index: 1;
 			width: 100%;
 			opacity: 0;
 			
@@ -54,7 +62,7 @@ $sp-anim-duration: 0.6s;
 				position: absolute;
 				left: 50%;
 				top: 50%;
-				transform: translate(-50%,-50%);
+				transform: translate(-50%,-50%) !important;
 				z-index: 15;
 				
 				h3 {

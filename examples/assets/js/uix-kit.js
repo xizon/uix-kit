@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.9.5
+ * ## Version             :  1.9.6
  * ## Last Update         :  July 24, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -28,9 +28,9 @@
     4. Get all custom attributes of an element like "data-*" 
     5. Navigation 
     6. Videos 
-    7. Common Height 
-    8. Mega Menu 
-    9. Dropdown Categories 
+    7. Mega Menu 
+    8. Dropdown Categories 
+    9. Common Height 
     10. Pagination 
     11. Specify a background image 
     12. Modal Dialog 
@@ -42,30 +42,30 @@
     18. 3D Model 
     19. 3D Pages 
     20. 3D Particle Effect 
-    21. 3D Sphere Rotation 
-    22. Accordion 
-    23. Accordion Background Images 
-    24. Advanced Content Slider 
-    25. Advanced Slider (Special Effects) 
-    26. Advanced Slider (Basic) 
-    27. Counter 
-    28. Dropdown Menu 
-    29. Dropdown Menu 2 (Multi-level drop-down navigation) 
+    21. Accordion 
+    22. Accordion Background Images 
+    23. Advanced Content Slider 
+    24. Advanced Slider (Special Effects) 
+    25. Advanced Slider (Basic) 
+    26. Counter 
+    27. Dropdown Menu 
+    28. Dropdown Menu 2 (Multi-level drop-down navigation) 
+    29. Flexslider 
     30. Dynamic Drop Down List from JSON 
-    31. Flexslider 
-    32. Form 
+    31. Form 
+    32. jQuery UI Datepicker 1.11.4 
     33. Form Progress 
-    34. jQuery UI Datepicker 1.11.4 
-    35. Gallery 
-    36. Image Shapes 
-    37. Custom Core Scripts  
-    38. Custom Lightbox 
-    39. Bulleted List 
-    40. Posts List With Ajax 
-    41. Fullwidth List of Split 
-    42. Mousewheel Interaction 
-    43. Multiple Items Carousel 
-    44. Full Page/One Page Transition 
+    34. Gallery 
+    35. Image Shapes 
+    36. Custom Core Scripts  
+    37. Custom Lightbox 
+    38. Bulleted List 
+    39. Posts List With Ajax 
+    40. Fullwidth List of Split 
+    41. Mousewheel Interaction 
+    42. Multiple Items Carousel 
+    43. Full Page/One Page Transition 
+    44. 3D Sphere Rotation 
     45. Full Page/One Page Transition 2 
     46. Parallax 
     47. Periodical Scroll 
@@ -78,16 +78,15 @@
     54. Smooth Scrolling When Clicking An Anchor Link 
     55. Source Code View 
     56. Sticky Elements 
-    57. Tabs 
-    58. Team Focus 
-    59. Testimonials Carousel 
-    60. Text effect 
-    61. Timeline 
+    57. Team Focus 
+    58. Testimonials Carousel 
+    59. Tabs 
+    60. Timeline 
+    61. Text effect 
     62. Vertical Menu 
     63. Ajax Page Loader (Loading A Page via Ajax Into Div)  
     64. Ajax Push Content  
     65. GSAP Plugins 
-    66. Three.js Plugins 
 
 
 */
@@ -2021,6 +2020,222 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
+ * <!-- 3D Background -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP._3D_BACKGROUND               = APP._3D_BACKGROUND || {};
+	APP._3D_BACKGROUND.version       = '0.0.2';
+    APP._3D_BACKGROUND.documentReady = function( $ ) {
+
+
+		//grab each 3dAnimate element and pass it into the animate function along with the config data
+		$( '[data-3d-animate]' ).each( function( index, element ) {
+			var config      = $( element ).data( '3d-animate' );
+			
+			
+			if( typeof config === typeof undefined ) {
+				config = false;
+			}
+
+			if ( config ) {
+				
+				if ( Object.prototype.toString.call( config.offset ) == '[object Array]' ) {
+					animate3dMultiElement( config.offset[0], config.offset[1], element, config.reset );
+				} else {
+					animate3dElement( config.offset, element, config.reset );
+				}
+
+			}
+			
+			
+		});
+		
+		
+	
+		/*
+		 * Sets an animation for each element
+		 *
+		 * @param  {number} base           - Base offset value.
+		 * @param  {object} obj            - An HTML element.
+		 * @param  {boolean} reset         - Reset block on mouse leave
+		 * @return {void}                  - The constructor.
+		 */
+		function animate3dElement( base, obj, reset ) {
+
+			var $el      = $( obj ),
+				w        = $el.innerWidth(),
+				h        = $el.innerHeight();
+			
+
+//			TweenMax.set( $el, {
+//				perspective    : 500,
+//				transformStyle : "preserve-3d"
+//			});
+
+
+			
+			// mouse move on block
+			$( obj ).on( 'mousemove touchmove', function( e ) {
+				
+				var mX, 
+					mY,
+					rmX,
+					rmY,
+					touches = e.originalEvent.touches;
+			
+				if ( touches && touches.length ) {
+
+					mX = touches[0].pageX;
+					mY = touches[0].pageY;
+
+				} else {
+
+					mX = e.pageX;
+					mY = e.pageY;
+				}
+				
+				//Find mouse position relative to element
+				rmX = mX - $( this ).offset().left;
+				rmY = mY - $( this ).offset().top;	
+				
+				//console.log('X: ' + rmX + ' Y: ' + rmY );
+	
+				
+				// function to run matrix3D effect on block
+				var tX = mousePosition( rmX, w ),
+					tY = mousePosition( rmY, h );
+
+
+				TweenMax.to( $( this ), 0.2, {
+					rotationY          : tX,
+					rotationX          : tY,
+					backgroundPosition : ( tX + 120 ) + "% 50%",
+				});
+				
+				
+				
+			});
+				
+			
+			if ( reset ) {
+				$( obj ).on( 'mouseleave touchcancel', function() {
+					TweenMax.to( $( this ), 0.5, {
+						rotationY          : 0,
+						rotationX          : 0,
+						backgroundPosition : "120% 50%"
+					});
+				});	
+			}
+				
+
+
+			// make some calculations for mouse position
+			function mousePosition( mousePos, dimension ) {
+				return ( Math.floor( mousePos / dimension * (base*2) ) - base );
+			}
+
+			
+		}
+			
+		
+		
+		/*
+		 * Sets an animation with parallax for each element
+		 *
+		 * @param  {number} base           - Base offset value.
+		 * @param  {number} multiple       - The power of target number.
+		 * @param  {object} obj            - An HTML element.
+		 * @param  {boolean} reset         - Reset block on mouse leave
+		 * @return {void}                  - The constructor.
+		 */
+		function animate3dMultiElement( base, multiple, obj, reset ) {
+
+			//get the specs of the element
+			var divOffset = $( obj ).offset(),
+				divTop    = divOffset.top,
+				divLeft   = divOffset.left,
+				divWidth  = $( obj ).innerWidth(),
+				divHeight = $( obj ).innerHeight();
+
+			
+	
+			//set an onmousemove event on the element
+			$( obj ).on( 'mousemove touchmove', function( e ){
+
+				var pctX, 
+					pctY,
+					touches = e.originalEvent.touches;
+			
+				if ( touches && touches.length ) {
+
+					pctX = ( touches[0].pageX - divLeft )/divWidth;
+					pctY = ( touches[0].pageY - divTop )/divHeight;
+
+				} else {
+
+					pctX = ( e.pageX - divLeft )/divWidth;
+					pctY = ( e.pageY - divTop )/divHeight;
+				}
+
+				
+				
+
+				$( this ).children().each( function( index, elementSub ) {
+					var x         = pctX * ( base*Math.pow( multiple, index ) ),
+						y         = pctY * ( base*Math.pow( multiple, index ) ),
+						z         = 0,
+						deg       = pctY * ( 180 / Math.PI ),
+						rotateDeg = parseFloat( deg - 35 );
+					
+					
+					TweenMax.to( $( elementSub ), 0.2, {
+						css: {
+							'transform' : 'translate('+ x +'px ,'+ y +'px) rotate3d( -1, 1, 0, '+ rotateDeg +'deg )'
+						}
+					});
+			
+					
+				});
+
+			});
+			
+			if ( reset ) {
+				$( obj ).on( 'mouseleave touchcancel', function() {
+					
+					
+					$( this ).children().each( function( index, elementSub ) {
+
+						TweenMax.to( $( elementSub ), 0.5, {
+							css: {
+								'transform' : 'translate(0,0) rotate3d( -1, 1, 0, 0deg )'
+							}
+						});
+					});
+				});	
+			}
+						
+			
+
+		}
+		
+		
+    };
+
+    APP.components.documentReady.push( APP._3D_BACKGROUND.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+
+
+/* 
+ *************************************
  * <!-- 3D Background 2 -->
  *************************************
  */
@@ -2238,222 +2453,6 @@ APP = ( function ( APP, $, window, document ) {
     return APP;
 
 }( APP, jQuery, window, document ) );
-
-
-
-
-
-/* 
- *************************************
- * <!-- 3D Background -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP._3D_BACKGROUND               = APP._3D_BACKGROUND || {};
-	APP._3D_BACKGROUND.version       = '0.0.2';
-    APP._3D_BACKGROUND.documentReady = function( $ ) {
-
-
-		//grab each 3dAnimate element and pass it into the animate function along with the config data
-		$( '[data-3d-animate]' ).each( function( index, element ) {
-			var config      = $( element ).data( '3d-animate' );
-			
-			
-			if( typeof config === typeof undefined ) {
-				config = false;
-			}
-
-			if ( config ) {
-				
-				if ( Object.prototype.toString.call( config.offset ) == '[object Array]' ) {
-					animate3dMultiElement( config.offset[0], config.offset[1], element, config.reset );
-				} else {
-					animate3dElement( config.offset, element, config.reset );
-				}
-
-			}
-			
-			
-		});
-		
-		
-	
-		/*
-		 * Sets an animation for each element
-		 *
-		 * @param  {number} base           - Base offset value.
-		 * @param  {object} obj            - An HTML element.
-		 * @param  {boolean} reset         - Reset block on mouse leave
-		 * @return {void}                  - The constructor.
-		 */
-		function animate3dElement( base, obj, reset ) {
-
-			var $el      = $( obj ),
-				w        = $el.innerWidth(),
-				h        = $el.innerHeight();
-			
-
-//			TweenMax.set( $el, {
-//				perspective    : 500,
-//				transformStyle : "preserve-3d"
-//			});
-
-
-			
-			// mouse move on block
-			$( obj ).on( 'mousemove touchmove', function( e ) {
-				
-				var mX, 
-					mY,
-					rmX,
-					rmY,
-					touches = e.originalEvent.touches;
-			
-				if ( touches && touches.length ) {
-
-					mX = touches[0].pageX;
-					mY = touches[0].pageY;
-
-				} else {
-
-					mX = e.pageX;
-					mY = e.pageY;
-				}
-				
-				//Find mouse position relative to element
-				rmX = mX - $( this ).offset().left;
-				rmY = mY - $( this ).offset().top;	
-				
-				//console.log('X: ' + rmX + ' Y: ' + rmY );
-	
-				
-				// function to run matrix3D effect on block
-				var tX = mousePosition( rmX, w ),
-					tY = mousePosition( rmY, h );
-
-
-				TweenMax.to( $( this ), 0.2, {
-					rotationY          : tX,
-					rotationX          : tY,
-					backgroundPosition : ( tX + 120 ) + "% 50%",
-				});
-				
-				
-				
-			});
-				
-			
-			if ( reset ) {
-				$( obj ).on( 'mouseleave touchcancel', function() {
-					TweenMax.to( $( this ), 0.5, {
-						rotationY          : 0,
-						rotationX          : 0,
-						backgroundPosition : "120% 50%"
-					});
-				});	
-			}
-				
-
-
-			// make some calculations for mouse position
-			function mousePosition( mousePos, dimension ) {
-				return ( Math.floor( mousePos / dimension * (base*2) ) - base );
-			}
-
-			
-		}
-			
-		
-		
-		/*
-		 * Sets an animation with parallax for each element
-		 *
-		 * @param  {number} base           - Base offset value.
-		 * @param  {number} multiple       - The power of target number.
-		 * @param  {object} obj            - An HTML element.
-		 * @param  {boolean} reset         - Reset block on mouse leave
-		 * @return {void}                  - The constructor.
-		 */
-		function animate3dMultiElement( base, multiple, obj, reset ) {
-
-			//get the specs of the element
-			var divOffset = $( obj ).offset(),
-				divTop    = divOffset.top,
-				divLeft   = divOffset.left,
-				divWidth  = $( obj ).innerWidth(),
-				divHeight = $( obj ).innerHeight();
-
-			
-	
-			//set an onmousemove event on the element
-			$( obj ).on( 'mousemove touchmove', function( e ){
-
-				var pctX, 
-					pctY,
-					touches = e.originalEvent.touches;
-			
-				if ( touches && touches.length ) {
-
-					pctX = ( touches[0].pageX - divLeft )/divWidth;
-					pctY = ( touches[0].pageY - divTop )/divHeight;
-
-				} else {
-
-					pctX = ( e.pageX - divLeft )/divWidth;
-					pctY = ( e.pageY - divTop )/divHeight;
-				}
-
-				
-				
-
-				$( this ).children().each( function( index, elementSub ) {
-					var x         = pctX * ( base*Math.pow( multiple, index ) ),
-						y         = pctY * ( base*Math.pow( multiple, index ) ),
-						z         = 0,
-						deg       = pctY * ( 180 / Math.PI ),
-						rotateDeg = parseFloat( deg - 35 );
-					
-					
-					TweenMax.to( $( elementSub ), 0.2, {
-						css: {
-							'transform' : 'translate('+ x +'px ,'+ y +'px) rotate3d( -1, 1, 0, '+ rotateDeg +'deg )'
-						}
-					});
-			
-					
-				});
-
-			});
-			
-			if ( reset ) {
-				$( obj ).on( 'mouseleave touchcancel', function() {
-					
-					
-					$( this ).children().each( function( index, elementSub ) {
-
-						TweenMax.to( $( elementSub ), 0.5, {
-							css: {
-								'transform' : 'translate(0,0) rotate3d( -1, 1, 0, 0deg )'
-							}
-						});
-					});
-				});	
-			}
-						
-			
-
-		}
-		
-		
-    };
-
-    APP.components.documentReady.push( APP._3D_BACKGROUND.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
 
 
 
@@ -3687,70 +3686,6 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
-
-/* 
- *************************************
- * <!-- Accordion -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.ACCORDION               = APP.ACCORDION || {};
-	APP.ACCORDION.version       = '0.0.1';
-    APP.ACCORDION.documentReady = function( $ ) {
-
-		$( '.uix-accordion' ).each( function() {
-			var $this           = $( this ),
-				aEvent          = $this.data( 'event' ),
-				firstShow       = $this.data( 'first-show' ),
-				$li             = $this.children( 'dl' ),
-				$titlebox       = $this.find( 'dt' );
-			
-			if( typeof aEvent === typeof undefined ) {
-				aEvent = 'click';
-			}	
-			
-			if( typeof firstShow === typeof undefined ) {
-				firstShow = false;
-			}		
-			
-		
-			if ( firstShow ) {
-				$li.first().addClass( 'active' );
-			}
-			
-
-			$li.on( aEvent, function( e ) {
-				//Prevents further propagation of the current event in the capturing and bubbling phases.
-				e.stopPropagation();
-				
-				$( this ).find( 'dd' ).addClass( 'active' );
-				
-				
-				if ( !$( this ).hasClass( 'active' ) ) {
-					$li.removeClass( 'active' );
-
-					$( this ).addClass( 'active' );
-				} else {
-					$li.removeClass( 'active' );
-				}
-			
-			}); 
-						
-			
-			
-		});
-		
-    };
-
-    APP.components.documentReady.push( APP.ACCORDION.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
 /* 
  *************************************
  * <!-- 3D Sphere Rotation -->
@@ -4011,6 +3946,70 @@ APP = ( function ( APP, $, window, document ) {
 
 }( APP, jQuery, window, document ) );
 
+
+
+
+
+/* 
+ *************************************
+ * <!-- Accordion -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.ACCORDION               = APP.ACCORDION || {};
+	APP.ACCORDION.version       = '0.0.1';
+    APP.ACCORDION.documentReady = function( $ ) {
+
+		$( '.uix-accordion' ).each( function() {
+			var $this           = $( this ),
+				aEvent          = $this.data( 'event' ),
+				firstShow       = $this.data( 'first-show' ),
+				$li             = $this.children( 'dl' ),
+				$titlebox       = $this.find( 'dt' );
+			
+			if( typeof aEvent === typeof undefined ) {
+				aEvent = 'click';
+			}	
+			
+			if( typeof firstShow === typeof undefined ) {
+				firstShow = false;
+			}		
+			
+		
+			if ( firstShow ) {
+				$li.first().addClass( 'active' );
+			}
+			
+
+			$li.on( aEvent, function( e ) {
+				//Prevents further propagation of the current event in the capturing and bubbling phases.
+				e.stopPropagation();
+				
+				$( this ).find( 'dd' ).addClass( 'active' );
+				
+				
+				if ( !$( this ).hasClass( 'active' ) ) {
+					$li.removeClass( 'active' );
+
+					$( this ).addClass( 'active' );
+				} else {
+					$li.removeClass( 'active' );
+				}
+			
+			}); 
+						
+			
+			
+		});
+		
+    };
+
+    APP.components.documentReady.push( APP.ACCORDION.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
 
 
 
@@ -6711,7 +6710,6 @@ APP = ( function ( APP, $, window, document ) {
 			playTimes;
 		
 		
-		
 		sliderInit( false );
 		
 		$window.on( 'resize', function() {
@@ -7634,6 +7632,58 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
+ * <!-- Dropdown Menu 2 (Multi-level drop-down navigation) -->
+ *************************************
+ */	
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.DROPDOWN_MENU2               = APP.DROPDOWN_MENU2 || {};
+	APP.DROPDOWN_MENU2.version       = '0.0.1';
+    APP.DROPDOWN_MENU2.documentReady = function( $ ) {
+
+		var $verticalMenuLi = $( '.uix-vertical-menu li' );
+		
+		$verticalMenuLi.find( '> a' ).on( 'click', function( e ) {
+			e.preventDefault();
+			
+			//Hide other all sibling <ul> of the selected element
+			$( this ).parent( 'li' ).siblings()
+			                        .removeClass( 'active' )
+									.find( '> ul' ).slideUp( 500 );
+
+			
+			var $sub = $( this ).parent( 'li' ).children( 'ul' );
+
+			$sub.slideToggle( 500 );
+			$( this ).parent( 'li' ).toggleClass( 'active' );
+
+        });
+		
+		//Add multilevel indicator arrow
+		if ( $verticalMenuLi.find( '> a .uix-vertical-menu__arrow' ).length == 0 ) {
+			$verticalMenuLi.find( '> a' ).append( '<span class="uix-vertical-menu__arrow"></span>' );
+		}
+        
+		$verticalMenuLi.each( function() {
+			var len = $( this ).find( 'ul' ).length;
+			if ( len == 0 ) {
+				$( this ).children( 'a' ).children( '.uix-vertical-menu__arrow' ).hide();
+			}
+		});
+		
+    };
+
+    APP.components.documentReady.push( APP.DROPDOWN_MENU2.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+/* 
+ *************************************
  * <!-- Dynamic Drop Down List from JSON -->
  *************************************
  */
@@ -8030,58 +8080,6 @@ APP = ( function ( APP, $, window, document ) {
     };
  
 }( jQuery ));
-
-
-/* 
- *************************************
- * <!-- Dropdown Menu 2 (Multi-level drop-down navigation) -->
- *************************************
- */	
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.DROPDOWN_MENU2               = APP.DROPDOWN_MENU2 || {};
-	APP.DROPDOWN_MENU2.version       = '0.0.1';
-    APP.DROPDOWN_MENU2.documentReady = function( $ ) {
-
-		var $verticalMenuLi = $( '.uix-vertical-menu li' );
-		
-		$verticalMenuLi.find( '> a' ).on( 'click', function( e ) {
-			e.preventDefault();
-			
-			//Hide other all sibling <ul> of the selected element
-			$( this ).parent( 'li' ).siblings()
-			                        .removeClass( 'active' )
-									.find( '> ul' ).slideUp( 500 );
-
-			
-			var $sub = $( this ).parent( 'li' ).children( 'ul' );
-
-			$sub.slideToggle( 500 );
-			$( this ).parent( 'li' ).toggleClass( 'active' );
-
-        });
-		
-		//Add multilevel indicator arrow
-		if ( $verticalMenuLi.find( '> a .uix-vertical-menu__arrow' ).length == 0 ) {
-			$verticalMenuLi.find( '> a' ).append( '<span class="uix-vertical-menu__arrow"></span>' );
-		}
-        
-		$verticalMenuLi.each( function() {
-			var len = $( this ).find( 'ul' ).length;
-			if ( len == 0 ) {
-				$( this ).children( 'a' ).children( '.uix-vertical-menu__arrow' ).hide();
-			}
-		});
-		
-    };
-
-    APP.components.documentReady.push( APP.DROPDOWN_MENU2.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
 
 
 /* 
@@ -10251,317 +10249,6 @@ APP = ( function ( APP, $, window, document ) {
     }
   };
 })(jQuery);
-
-/* 
- *************************************
- * <!-- Form Progress -->
- *************************************
- */
-/*
-    Note:
-	
-	If you want to initialize the indicator to a location when the page is first run,
-	you need to call the following function:
-	
-	$( document ).formProgressNext({ 
-		'selector'         : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
-		'formTarget'       : $( '.uix-form-progress__target' ),
-		'indicator'        : '.uix-form-progress .uix-form-progress__indicator',
-		'index'            : 0 // 0 -> step 1, 1 -> step 2, 2 -> step 3, 3 -> step 4, 4 -> step 5 
-	});
-	
-*/
-
-
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-
-    APP.FORM_PROGRESS               = APP.FORM_PROGRESS || {};
-	APP.FORM_PROGRESS.version       = '0.0.1';
-    APP.FORM_PROGRESS.pageLoaded    = function() {
-
-		//Prevent this module from loading in other pages
-		if ( !$( 'body' ).hasClass( 'page-form-progress-eff' ) ) return false;
-		
-
-		var $progressBar   = $( '.uix-form-progress progress' ),
-			$formTarget    = $( '.uix-form-progress__target' ),
-			$indicator     = $( '.uix-form-progress .uix-form-progress__indicator' ),
-			formAreaH      = $formTarget.height(),
-			allStep        = $indicator.length,
-			stepPerValue   = 100/( allStep - 1 ),
-			value          = 0,
-			transitionEnd  = 'webkitTransitionEnd transitionend';
-		
-
-		//Get form transition speed
-		var dur = $formTarget.data( 'anime-speed' );
-		if( typeof dur === typeof undefined ) { 
-			dur = '0.5s';
-		}
-
-		var durString  = dur.toLowerCase(),
-			isMS       = durString.indexOf( 'ms' ) >= 0,
-			numberNum  = durString.replace( 'ms', '' ).replace( 's', '' ),
-			animeSpeed = isMS ? numberNum : numberNum * 1000;
-	
-		
-		//Gets the party started.
-		formReset();
-		
-		//Display the target
-		setTimeout( function() {
-			$formTarget.addClass( 'active' );
-		}, parseFloat( dur ) * 1000 );
-		
-
-		// Show next form on continue click
-		$( document ).on( 'click', '.uix-form-progress__target .go-step:not(.disable)', function( e ) {
-			e.preventDefault();
-			var $sections = $( this ).parents( '.uix-form-progress__target__step' );
-			$( document ).formProgressNext({ 
-				'selector'   : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
-				'formTarget' : $formTarget,
-				'indicator'  : '.uix-form-progress .uix-form-progress__indicator',
-				'index'      : $sections.index() + 1
-			});
-			
-		});
-		
-		
-
-		// Reset form on reset button click
-		$( document ).on( 'click', '.uix-form-progress__target .go-reset', function( e ) {
-			e.preventDefault();
-			formReset();
-		});
-		
-
-		/*
-		 * Resets the form back to the default state.
-		 *
-		 * @return {void}                   - The constructor.
-		 */
-		function formReset() {
-			
-			$( document ).formProgressNext({ 
-				'selector'         : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
-				'formTarget'       : $( '.uix-form-progress__target' ),
-				'indicator'        : '.uix-form-progress .uix-form-progress__indicator',
-				'index'            : 0 // 0 -> step 1, 1 -> step 2, 2 -> step 3, 3 -> step 4, 4 -> step 5 
-			});
-		
-			
-		}
-			    
-		
-    };
-
-    APP.components.pageLoaded.push( APP.FORM_PROGRESS.pageLoaded );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
-
-
-/* 
- *************************************
- * Associated Functions
- *************************************
- */
-
-/*
- * Shows the next form.
- *
- * @param  {object} selector        - Each target forms selector.
- * @param  {object} formTarget      - Wrapper of target forms selector.
- * @param  {string} indicator       - Indicator of timeline.
- * @param  {number} index           - Default index for initialization.
- * @return {void}                   - The constructor.
- */
-( function ( $ ) {
-    $.fn.formProgressNext = function( options ) {
- 
-        // This is the easiest way to have default options.
-        var settings = $.extend({
-			selector         : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
-			formTarget       : $( '.uix-form-progress__target' ),
-			indicator        : '.uix-form-progress .uix-form-progress__indicator',
-			index            : 0
-        }, options );
- 
-        this.each( function() {
-			
-			var $this            = $( this ),
-				transitionEnd    = 'webkitTransitionEnd transitionend',
-				$sections        = settings.selector,
-				$formTarget      = settings.formTarget,	
-				$indicator       = $( settings.indicator ),
-				allStep          = $indicator.length,
-				stepPerValue     = 100/( allStep - 1 ),
-				value            = 0,
-				tarIndex, curIndex;
-
-
-			//Returns current index
-			if ( settings.index > allStep - 1 ) {
-				curIndex = allStep - 1;
-			} else {
-				curIndex = settings.index;
-			}
-
-
-			tarIndex = curIndex - 1;
-
-
-			// Returns current index
-			if ( tarIndex > ( allStep - 2 ) ) {
-				value = stepPerValue * (allStep - 2);
-				curIndex = allStep - 2;
-			} else {
-				curIndex = tarIndex;
-
-			}
-
-
-			// Increment value (based on 4 steps 0 - 100)
-			value = stepPerValue * curIndex;
-
-			//Get form transition speed
-			var dur = $formTarget.data( 'anime-speed' );
-			if( typeof dur === typeof undefined ) { 
-				dur = '0.5s';
-			}
-
-			var durString  = dur.toLowerCase(),
-				isMS       = durString.indexOf( 'ms' ) >= 0,
-				numberNum  = durString.replace( 'ms', '' ).replace( 's', '' ),
-				animeSpeed = isMS ? numberNum : numberNum * 1000;
-
-
-
-			var currentFormStep  = parseInt($sections.eq( tarIndex ).attr( 'data-step' ) ) || false,
-				$nextForm        = $formTarget.find( '.uix-form-progress__target__step[data-step="' + (currentFormStep + 1) + '"]'),
-				currentFormIndex = $nextForm.attr( 'data-step' ) - 1;
-
-
-			if ( isNaN( currentFormIndex ) ) currentFormIndex = 0;
-
-			// Activate other unused modules
-			if ( currentFormIndex > 0 ) {
-				for ( var i = 0; i < curIndex; i++ ) {
-					$sections.eq( i ).addClass( 'leaving' );
-					$indicator.eq( i ).addClass( 'active' );
-				}
-				$indicator.eq( curIndex ).addClass( 'active' );
-				
-			}
-
-
-
-			// Hide current form fields
-			$sections.eq( tarIndex ).addClass( 'leaving' );
-			setTimeout(function() {
-				$indicator.eq( currentFormIndex ).addClass( 'active' );
-			}, animeSpeed );
-
-
-			// Show next form fields
-			$nextForm.addClass( 'coming' ).one( transitionEnd, function() {
-				$nextForm.removeClass( 'coming waiting' );
-			});
-			
-			// Active next form fields
-			$sections.removeClass( 'active' );
-			$sections.eq( currentFormIndex ).addClass( 'active' );
-
-			// Increment value (based on 4 steps 0 - 100)
-			value += stepPerValue;
-
-			//console.log( currentFormIndex );
-
-
-
-			//Initialize pointer and form location data
-			if ( currentFormIndex == 0 ) {
-
-				//Avoid initialization to always cover other same events
-				$( 'body' ).addClass( 'form-progress-initok' );
-
-
-				//so something
-				$indicator.removeClass( 'active' );
-				$indicator.each( function( index )  {
-					$( this ).css( 'left', index*stepPerValue + '%' );
-					$formTarget.find( '.uix-form-progress__target__step:eq('+index+')' ).attr( 'data-step', index+1 );
-				});
-
-				setTimeout(function() {
-					$formTarget.addClass( 'js-uix-show' );
-				}, animeSpeed );
-
-
-				$formTarget.find( '.uix-form-progress__target__step' )
-												.removeClass( 'left leaving' )
-												.css( {
-													'position'   : 'absolute'
-												} )
-												.not( ':eq(0)' )
-												.addClass( 'waiting' );
-
-
-			}
-
-
-			//Set wrapper height
-			var currentContentH  = $formTarget.find( '.uix-form-progress__target__step:eq('+currentFormIndex+') > .uix-form-progress__content' ).height() + 100;
-			$formTarget.css( 'height', currentContentH + 'px' );
-
-			var curText = $( '.uix-form-progress .uix-form-progress__indicator:eq('+currentFormIndex+') > span' ).html();
-			$( '#app-form-progress-text' ).text( curText );
-
-			//The current indicator class
-			$indicator.removeClass( 'current' );
-			$indicator.eq( currentFormIndex ).addClass( 'current' );
-
-			// Reset if we've reached the end
-			if (value >= 100) {
-				$formTarget.find( '.uix-form-progress__target__step' )
-											   .addClass( 'leaving' )
-											   .last()
-											   .removeClass( 'coming waiting leaving' );
-			} else {
-				$( '.uix-form-progress' ).find( '.uix-form-progress__indicator.active' ).next( '.uix-form-progress__indicator' ).addClass( 'active' );
-			}
-
-			// Set progress bar value
-			$( '.uix-form-progress .uix-form-progress__line span' ).css( 'width', value + '%' );
-
-
-			//Scroll Top
-			TweenMax.to( window, 0.5, {
-				scrollTo: {
-					y: 0
-				},
-				ease: Power2.easeOut
-			});	
-			
-			
-
-			return false;
-			
-			
-		});
- 
-    };
- 
-}( jQuery ));
-
-
 
 /* 
  *************************************
@@ -13191,6 +12878,317 @@ $.datepicker.uuid = new Date().getTime();
 $.datepicker.version = "1.11.4";
 
 var datepicker = $.datepicker;
+
+
+
+/* 
+ *************************************
+ * <!-- Form Progress -->
+ *************************************
+ */
+/*
+    Note:
+	
+	If you want to initialize the indicator to a location when the page is first run,
+	you need to call the following function:
+	
+	$( document ).formProgressNext({ 
+		'selector'         : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
+		'formTarget'       : $( '.uix-form-progress__target' ),
+		'indicator'        : '.uix-form-progress .uix-form-progress__indicator',
+		'index'            : 0 // 0 -> step 1, 1 -> step 2, 2 -> step 3, 3 -> step 4, 4 -> step 5 
+	});
+	
+*/
+
+
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+
+    APP.FORM_PROGRESS               = APP.FORM_PROGRESS || {};
+	APP.FORM_PROGRESS.version       = '0.0.1';
+    APP.FORM_PROGRESS.pageLoaded    = function() {
+
+		//Prevent this module from loading in other pages
+		if ( !$( 'body' ).hasClass( 'page-form-progress-eff' ) ) return false;
+		
+
+		var $progressBar   = $( '.uix-form-progress progress' ),
+			$formTarget    = $( '.uix-form-progress__target' ),
+			$indicator     = $( '.uix-form-progress .uix-form-progress__indicator' ),
+			formAreaH      = $formTarget.height(),
+			allStep        = $indicator.length,
+			stepPerValue   = 100/( allStep - 1 ),
+			value          = 0,
+			transitionEnd  = 'webkitTransitionEnd transitionend';
+		
+
+		//Get form transition speed
+		var dur = $formTarget.data( 'anime-speed' );
+		if( typeof dur === typeof undefined ) { 
+			dur = '0.5s';
+		}
+
+		var durString  = dur.toLowerCase(),
+			isMS       = durString.indexOf( 'ms' ) >= 0,
+			numberNum  = durString.replace( 'ms', '' ).replace( 's', '' ),
+			animeSpeed = isMS ? numberNum : numberNum * 1000;
+	
+		
+		//Gets the party started.
+		formReset();
+		
+		//Display the target
+		setTimeout( function() {
+			$formTarget.addClass( 'active' );
+		}, parseFloat( dur ) * 1000 );
+		
+
+		// Show next form on continue click
+		$( document ).on( 'click', '.uix-form-progress__target .go-step:not(.disable)', function( e ) {
+			e.preventDefault();
+			var $sections = $( this ).parents( '.uix-form-progress__target__step' );
+			$( document ).formProgressNext({ 
+				'selector'   : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
+				'formTarget' : $formTarget,
+				'indicator'  : '.uix-form-progress .uix-form-progress__indicator',
+				'index'      : $sections.index() + 1
+			});
+			
+		});
+		
+		
+
+		// Reset form on reset button click
+		$( document ).on( 'click', '.uix-form-progress__target .go-reset', function( e ) {
+			e.preventDefault();
+			formReset();
+		});
+		
+
+		/*
+		 * Resets the form back to the default state.
+		 *
+		 * @return {void}                   - The constructor.
+		 */
+		function formReset() {
+			
+			$( document ).formProgressNext({ 
+				'selector'         : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
+				'formTarget'       : $( '.uix-form-progress__target' ),
+				'indicator'        : '.uix-form-progress .uix-form-progress__indicator',
+				'index'            : 0 // 0 -> step 1, 1 -> step 2, 2 -> step 3, 3 -> step 4, 4 -> step 5 
+			});
+		
+			
+		}
+			    
+		
+    };
+
+    APP.components.pageLoaded.push( APP.FORM_PROGRESS.pageLoaded );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+
+
+/* 
+ *************************************
+ * Associated Functions
+ *************************************
+ */
+
+/*
+ * Shows the next form.
+ *
+ * @param  {object} selector        - Each target forms selector.
+ * @param  {object} formTarget      - Wrapper of target forms selector.
+ * @param  {string} indicator       - Indicator of timeline.
+ * @param  {number} index           - Default index for initialization.
+ * @return {void}                   - The constructor.
+ */
+( function ( $ ) {
+    $.fn.formProgressNext = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+			selector         : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
+			formTarget       : $( '.uix-form-progress__target' ),
+			indicator        : '.uix-form-progress .uix-form-progress__indicator',
+			index            : 0
+        }, options );
+ 
+        this.each( function() {
+			
+			var $this            = $( this ),
+				transitionEnd    = 'webkitTransitionEnd transitionend',
+				$sections        = settings.selector,
+				$formTarget      = settings.formTarget,	
+				$indicator       = $( settings.indicator ),
+				allStep          = $indicator.length,
+				stepPerValue     = 100/( allStep - 1 ),
+				value            = 0,
+				tarIndex, curIndex;
+
+
+			//Returns current index
+			if ( settings.index > allStep - 1 ) {
+				curIndex = allStep - 1;
+			} else {
+				curIndex = settings.index;
+			}
+
+
+			tarIndex = curIndex - 1;
+
+
+			// Returns current index
+			if ( tarIndex > ( allStep - 2 ) ) {
+				value = stepPerValue * (allStep - 2);
+				curIndex = allStep - 2;
+			} else {
+				curIndex = tarIndex;
+
+			}
+
+
+			// Increment value (based on 4 steps 0 - 100)
+			value = stepPerValue * curIndex;
+
+			//Get form transition speed
+			var dur = $formTarget.data( 'anime-speed' );
+			if( typeof dur === typeof undefined ) { 
+				dur = '0.5s';
+			}
+
+			var durString  = dur.toLowerCase(),
+				isMS       = durString.indexOf( 'ms' ) >= 0,
+				numberNum  = durString.replace( 'ms', '' ).replace( 's', '' ),
+				animeSpeed = isMS ? numberNum : numberNum * 1000;
+
+
+
+			var currentFormStep  = parseInt($sections.eq( tarIndex ).attr( 'data-step' ) ) || false,
+				$nextForm        = $formTarget.find( '.uix-form-progress__target__step[data-step="' + (currentFormStep + 1) + '"]'),
+				currentFormIndex = $nextForm.attr( 'data-step' ) - 1;
+
+
+			if ( isNaN( currentFormIndex ) ) currentFormIndex = 0;
+
+			// Activate other unused modules
+			if ( currentFormIndex > 0 ) {
+				for ( var i = 0; i < curIndex; i++ ) {
+					$sections.eq( i ).addClass( 'leaving' );
+					$indicator.eq( i ).addClass( 'active' );
+				}
+				$indicator.eq( curIndex ).addClass( 'active' );
+				
+			}
+
+
+
+			// Hide current form fields
+			$sections.eq( tarIndex ).addClass( 'leaving' );
+			setTimeout(function() {
+				$indicator.eq( currentFormIndex ).addClass( 'active' );
+			}, animeSpeed );
+
+
+			// Show next form fields
+			$nextForm.addClass( 'coming' ).one( transitionEnd, function() {
+				$nextForm.removeClass( 'coming waiting' );
+			});
+			
+			// Active next form fields
+			$sections.removeClass( 'active' );
+			$sections.eq( currentFormIndex ).addClass( 'active' );
+
+			// Increment value (based on 4 steps 0 - 100)
+			value += stepPerValue;
+
+			//console.log( currentFormIndex );
+
+
+
+			//Initialize pointer and form location data
+			if ( currentFormIndex == 0 ) {
+
+				//Avoid initialization to always cover other same events
+				$( 'body' ).addClass( 'form-progress-initok' );
+
+
+				//so something
+				$indicator.removeClass( 'active' );
+				$indicator.each( function( index )  {
+					$( this ).css( 'left', index*stepPerValue + '%' );
+					$formTarget.find( '.uix-form-progress__target__step:eq('+index+')' ).attr( 'data-step', index+1 );
+				});
+
+				setTimeout(function() {
+					$formTarget.addClass( 'js-uix-show' );
+				}, animeSpeed );
+
+
+				$formTarget.find( '.uix-form-progress__target__step' )
+												.removeClass( 'left leaving' )
+												.css( {
+													'position'   : 'absolute'
+												} )
+												.not( ':eq(0)' )
+												.addClass( 'waiting' );
+
+
+			}
+
+
+			//Set wrapper height
+			var currentContentH  = $formTarget.find( '.uix-form-progress__target__step:eq('+currentFormIndex+') > .uix-form-progress__content' ).height() + 100;
+			$formTarget.css( 'height', currentContentH + 'px' );
+
+			var curText = $( '.uix-form-progress .uix-form-progress__indicator:eq('+currentFormIndex+') > span' ).html();
+			$( '#app-form-progress-text' ).text( curText );
+
+			//The current indicator class
+			$indicator.removeClass( 'current' );
+			$indicator.eq( currentFormIndex ).addClass( 'current' );
+
+			// Reset if we've reached the end
+			if (value >= 100) {
+				$formTarget.find( '.uix-form-progress__target__step' )
+											   .addClass( 'leaving' )
+											   .last()
+											   .removeClass( 'coming waiting leaving' );
+			} else {
+				$( '.uix-form-progress' ).find( '.uix-form-progress__indicator.active' ).next( '.uix-form-progress__indicator' ).addClass( 'active' );
+			}
+
+			// Set progress bar value
+			$( '.uix-form-progress .uix-form-progress__line span' ).css( 'width', value + '%' );
+
+
+			//Scroll Top
+			TweenMax.to( window, 0.5, {
+				scrollTo: {
+					y: 0
+				},
+				ease: Power2.easeOut
+			});	
+			
+			
+
+			return false;
+			
+			
+		});
+ 
+    };
+ 
+}( jQuery ));
 
 
 
@@ -27700,6 +27698,9 @@ License: MIT
 /***/ function(module, exports) {
 
 	module.exports = "uniform float explodeRate;\nvarying vec2 vUv;\n\n\nfloat rand(vec2 co){\n  return fract(sin(dot(co.xy, vec2(12.8273, 67.245))) * 53726.17623);\n}\n\nvoid main() {\n  vec3 col;\n  col.g = rand(vec2(vUv.x, vUv.y + 1.0));\n  col.b = rand(vec2(vUv.x, vUv.y + 2.0));\n  col.r = rand(vec2(vUv.xy));\n  col = col - 0.5;\n  col *= explodeRate;\n\n  gl_FragColor = vec4(col, 1.0);\n}\n";
+
+/***/ }
+/******/ ]);\n";
 
 /***/ }
 /******/ ]);
