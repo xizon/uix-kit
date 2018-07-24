@@ -87,7 +87,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			pivot1.rotation.z = 0;
 			pivot2.rotation.z = 2 * Math.PI / 3;
-			pivot3.rotation.z = 4 * Math.PI / 3;;
+			pivot3.rotation.z = 4 * Math.PI / 3;
 			displacementSprite.add( pivot1 );
 			displacementSprite.add( pivot2 );
 			displacementSprite.add( pivot3 );

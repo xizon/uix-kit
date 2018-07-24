@@ -85,7 +85,7 @@ $ cd uix-kit
 **Step 2.** Before doing all dev stuff make sure you have node installed. After that, run the following code in the main directory to install the node module dependencies.
 
 ```sh
-$ npm install --dev
+$ npm install --only=dev
 ```
 
 
