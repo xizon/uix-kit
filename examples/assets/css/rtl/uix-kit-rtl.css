@@ -26,8 +26,8 @@
 	---------------------------
 	
     1. Basic 
-    2. Basic Layout Styles 
-    3. Helper Classes 
+    2. Helper Classes 
+    3. Basic Layout Styles 
     4. Navigation 
     5. Header Area 
     6. Brand 
@@ -47,6 +47,9 @@
     20. Bulleted List 
     21. Maintain Aspect Ratio List 
     22. Side by Side List 
+    23. Source Code 
+    24. ToolTip 
+    25. Vertical Menu (RTL) 
 
 
 
@@ -1071,11 +1074,6 @@ pre.prettyprint {
 
 .uix-v-menu__container:not(.is-mobile) .uix-menu__arrow {
     right: auto;
-    left: .5rem;
-}
-
-/*# sourceMappingURL=uix-kit-rtl.css.map */
-o;
     left: .5rem;
 }
 

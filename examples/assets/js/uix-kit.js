@@ -54,8 +54,8 @@
     30. Dynamic Drop Down List from JSON 
     31. Flexslider 
     32. Form 
-    33. jQuery UI Datepicker 1.11.4 
-    34. Form Progress 
+    33. Form Progress 
+    34. jQuery UI Datepicker 1.11.4 
     35. Gallery 
     36. Image Shapes 
     37. Custom Core Scripts  
@@ -79,8 +79,8 @@
     55. Source Code View 
     56. Sticky Elements 
     57. Tabs 
-    58. Testimonials Carousel 
-    59. Team Focus 
+    58. Team Focus 
+    59. Testimonials Carousel 
     60. Text effect 
     61. Timeline 
     62. Vertical Menu 
@@ -545,11 +545,15 @@ APP = ( function ( APP, $, window, document ) {
 
 			TweenMax.to( window, 0.5, {
 				scrollTo: {
-					y: 0
+					y: 0  //y: "max" --> vertical scroll to bottom
 				},
 				ease: Power2.easeOut
 			});	
 
+			
+			
+			
+			
 		});	
 			
 		

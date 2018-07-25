@@ -96,8 +96,8 @@
     31. Advanced Content Slider 
     32. Advanced Slider (Special Effects) 
     33. Advanced Slider (Basic) 
-    34. Blended Grid Layout 
-    35. Badges 
+    34. Badges 
+    35. Blended Grid Layout 
     36. Breadcrumbs 
     37. Button 
     38. Cards 
@@ -132,9 +132,9 @@
     67. Multiple Items Carousel 
     68. Overlay 
     69. Parallax 
-    70. Periodical Scroll 
+    70. Progress Bar 
     71. Pricing 
-    72. Progress Bar 
+    72. Periodical Scroll 
     73. Ribbon 
     74. Shape Animation 
     75. Show More Less 
@@ -5761,6 +5761,7 @@ pointer-events: auto;
 
 .uix-btn i {
     margin-right: .5rem;
+    margin-left: .5rem;
 }
 
 @keyframes uix-cssAnim--moveWaitingStripes {
@@ -14205,6 +14206,7 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
 
 .uix-tooltip .uix-tooltip__content img {
   height: auto !important;
+  margin: 0;
 }
 
 .uix-tooltip:hover .uix-tooltip__content {
