@@ -11,8 +11,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.9.6
- * ## Last Update         :  July 24, 2018
+ * ## Version             :  1.9.7
+ * ## Last Update         :  July 25, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -26,8 +26,8 @@
 	---------------------------
 	
     1. Basic 
-    2. Helper Classes 
-    3. Basic Layout Styles 
+    2. Basic Layout Styles 
+    3. Helper Classes 
     4. Navigation 
     5. Header Area 
     6. Brand 
@@ -35,6 +35,18 @@
     8. Sidebar 
     9. Search 
     10. Comments 
+    11. Mobile Menu 
+    12. Modal Dialog 
+    13. Advanced Slider (Special Effects) 
+    14. Advanced Slider (Basic) 
+    15. Cards 
+    16. Dropdown Menu 
+    17. Flexslider 
+    18. Form 
+    19. Brands List 
+    20. Bulleted List 
+    21. Maintain Aspect Ratio List 
+    22. Side by Side List 
 
 
 
@@ -1063,17 +1075,7 @@ pre.prettyprint {
 }
 
 /*# sourceMappingURL=uix-kit-rtl.css.map */
-menu__container:not(.is-mobile) ul.uix-menu li.multi-column > ul > li:first-child {
-    border-right: none;
-}
-
-.uix-v-menu__container:not(.is-mobile) ul.uix-menu li.multi-column > ul > li ul {
-    left: auto;
-    right: 0;
-}
-
-.uix-v-menu__container:not(.is-mobile) .uix-menu__arrow {
-    right: auto;
+o;
     left: .5rem;
 }
 

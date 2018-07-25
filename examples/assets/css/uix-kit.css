@@ -7,26 +7,14 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.9.6
- * ## Last Update         :  July 24, 2018
+ * ## Version             :  1.9.7
+ * ## Last Update         :  July 25, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Compatible With     :  Bootstrap 3.x
  * ## Released under the MIT license.
  */
-
-/* ====================================================== 
-    <!-- 3D Background -->  
-/* ====================================================== */
-.uix-3d-bg {
-  /* Require more than 500, compatible firefox height */
-    perspective: 700px;
-}
-
-.uix-3d-bg > span {
-    display: inline-block;
-}
 
 /*
 
@@ -108,8 +96,8 @@
     31. Advanced Content Slider 
     32. Advanced Slider (Special Effects) 
     33. Advanced Slider (Basic) 
-    34. Badges 
-    35. Blended Grid Layout 
+    34. Blended Grid Layout 
+    35. Badges 
     36. Breadcrumbs 
     37. Button 
     38. Cards 
@@ -119,11 +107,11 @@
     42. Dotted Line 
     43. Dropdown Menu 
     44. Dropdown Menu 2 (Multi-level drop-down navigation) 
-    45. Equal-width Divs 
+    45. Equal-width Columns 
     46. Features 
     47. Flexslider 
-    48. Form 
-    49. Footer Templates 
+    48. Footer Templates 
+    49. Form 
     50. Form Progress 
     51. Gallery 
     52. Heading 
@@ -143,30 +131,29 @@
     66. Mouse Animation Scroll 
     67. Multiple Items Carousel 
     68. Overlay 
-    69. Periodical Scroll 
-    70. Parallax 
+    69. Parallax 
+    70. Periodical Scroll 
     71. Pricing 
     72. Progress Bar 
     73. Ribbon 
-    74. Services 
-    75. Shape Animation 
-    76. Show More Less 
-    77. Single Post 
-    78. Source Code 
-    79. Striking 
-    80. Tabs 
-    81. Team Focus 
-    82. Team Fullwidth (Style using the Side by Side List With Photo module) 
-    83. Team Gird 
-    84. Testimonials Carousel 
-    85. Text effect 
-    86. Timeline 
-    87. ToolTip 
-    88. Vertical Menu 
-    89. Vertical Separator 
-    90. Wave Background 
-    91. WordPress Core ( Do not use prefix "uix-" ) 
-    92. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    74. Shape Animation 
+    75. Show More Less 
+    76. Single Post 
+    77. Source Code 
+    78. Striking 
+    79. Tabs 
+    80. Team Focus 
+    81. Team Fullwidth (Style using the Side by Side List With Photo module) 
+    82. Team Gird 
+    83. Testimonials Carousel 
+    84. Text effect 
+    85. Timeline 
+    86. ToolTip 
+    87. Vertical Menu 
+    88. Vertical Separator 
+    89. Wave Background 
+    90. WordPress Core ( Do not use prefix "uix-" ) 
+    91. Ajax Page Loader (Loading A Page via Ajax Into Div)  
 
 
 
@@ -940,7 +927,6 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li::before,
     .uix-v-align--relative {
         top: 0;
         transform: none;
-        padding-top: 1.5rem;
     }
 }
 
@@ -1428,6 +1414,10 @@ h6 {
 }
 
 .uix-typo--style-noitalic {
+  font-style: normal !important;
+}
+
+.uix-typo--style-noitalic em {
   font-style: normal !important;
 }
 
@@ -4426,6 +4416,18 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
 }
 
 /* ====================================================== 
+    <!-- 3D Background -->  
+/* ====================================================== */
+.uix-3d-bg {
+  /* Require more than 500, compatible firefox height */
+  perspective: 700px;
+}
+
+.uix-3d-bg > span {
+  display: inline-block;
+}
+
+/* ====================================================== 
     <!-- 3D Carousel --> 
 /* ====================================================== */
 .uix-3d-carousel {
@@ -4906,6 +4908,8 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
   top: 50%;
   transform: translate(-50%, -50%) !important;
   z-index: 15;
+  /* Allow button clicks */
+  pointer-events: all !important;
 }
 
 .uix-advanced-slider-sp .uix-advanced-slider-sp__inner .uix-advanced-slider-sp__item .uix-advanced-slider-sp__txt h3 {
@@ -5116,6 +5120,9 @@ left: 50%;
 top: 50%;
 transform: translate(-50%, -50%) !important;
 z-index: 15;
+transition: 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+margin-top: 100px;
+opacity: 0;
 }
 
 .uix-advanced-slider .uix-advanced-slider__inner .uix-advanced-slider__item .uix-advanced-slider__txt h3 {
@@ -5163,8 +5170,21 @@ pointer-events: auto;
     opacity: 0;
 }
 
+.uix-advanced-slider .uix-advanced-slider__inner .uix-advanced-slider__item.leave .uix-advanced-slider__txt {
+    margin-top: 100px;
+    opacity: 0;
+}
+
 .uix-advanced-slider .uix-advanced-slider__inner .uix-advanced-slider__item.active {
+  /* Allow button clicks */
+    z-index: 2;
     opacity: 1;
+}
+
+.uix-advanced-slider .uix-advanced-slider__inner .uix-advanced-slider__item.active .uix-advanced-slider__txt {
+    margin-top: 0;
+    opacity: 1;
+    transition-delay: 0.6s;
 }
 
 /* Tests native CSS3 and HTML5 features are available */
@@ -6668,7 +6688,7 @@ h3[data-counter-number] {
 }
 
 /* ====================================================== 
-   <!-- Equal-width Divs --> 
+   <!-- Equal-width Columns --> 
 /* ====================================================== */
 /**
  * Using only CSS, we can make a tabbed navigation whose tabs always
@@ -12917,29 +12937,6 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
 .uix-ribbon--triangle.uix-ribbon--triangle--left.uix-ribbon--triangle--style-2::after {
   transform: rotate(-135deg);
   left: -0.25rem;
-}
-
-/* ====================================================== 
-   <!-- Services --> 
-/* ====================================================== */
-.uix-services [class*='col-'],
-.uix-services [class*='uix-core-grid__col-'] {
-  position: relative;
-}
-
-.uix-services [class*='col-'] i,
-.uix-services [class*='uix-core-grid__col-'] i {
-  font-size: 10rem;
-  opacity: .2;
-  position: absolute;
-  right: -2rem;
-  bottom: -2rem;
-  z-index: 0;
-}
-
-.uix-services [class*='col-'] > div,
-.uix-services [class*='uix-core-grid__col-'] > div {
-  padding: 3rem;
 }
 
 /* ====================================================== 

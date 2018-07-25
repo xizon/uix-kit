@@ -65,6 +65,9 @@ $sp-anim-duration: 0.6s;
 				transform: translate(-50%,-50%) !important;
 				z-index: 15;
 				
+				/* Allow button clicks */
+				pointer-events: all !important;		
+				
 				h3 {
 					margin-bottom: 0;
 				}
@@ -94,7 +97,6 @@ $sp-anim-duration: 0.6s;
 		}	
 		
 	}
-	
 	
 
 	

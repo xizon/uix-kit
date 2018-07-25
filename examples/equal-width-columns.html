@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+	<head>
+		<meta charset="utf-8" />
+		<title>Uix Kit Demo</title>	
+        
+		<!-- Mobile Settings
+		============================================= -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <!-- Mobile Settings end -->
+        
+        
+		<!-- Core library
+		============================================= -->
+		<script src="assets/js/wp-jquery/jquery.min.js?ver=3.3.1"></script>
+		<script src="assets/js/wp-jquery/jquery.migrate.min.js?ver=1.4.1"></script>
+        <script src="assets/js/min/prefixfree.min.js?ver=1.0.7"></script>
+        <!-- Core library  end -->
+        
+        
+        
+        
+        
+		<!-- Compatibility
+		============================================= -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        
+        <script src="assets/js/min/modernizr.min.js?ver=3.5.0"></script>
+        
+        <!--[if lt IE 9]>
+            <script src='assets/js/min/respond.min.js?ver=1.4.2'></script>
+        <![endif]-->
+        
+        <!-- Compatibility  end -->
+
+
+
+		<!-- Web Fonts
+		============================================= -->
+        <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700,800" rel="stylesheet"> -->
+        <!-- Web Fonts  end -->
+        
+		<!-- Core & Theme CSS
+		============================================= -->
+        
+        <!-- Basic  -->
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css?ver=3.3.7" media="all"/>
+        <link rel="stylesheet" href="assets/css/video.min.css?ver=5.19" media="all"/>
+        
+        
+        <!-- Icons  -->
+        <link rel="stylesheet" href="assets/fonts/fontawesome/font-awesome.min.css?ver=4.7" media="all" /> 
+        
+       
+        <!-- Theme  -->
+        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTUzMjQ4NjQ3OTY0MQ"/>
+        
+        
+         <!--[if lt IE 10]>
+           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTUzMjQ4NjQ3OTY0MQ" />
+        <![endif]-->
+        
+        
+        <!-- Core & Theme CSS  end -->
+        
+            
+            
+		<!-- SEO
+		============================================= -->
+        <meta name="description" content="Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap">
+        <meta name="generator" content="Uix Kit" />  
+        <meta name="author" content="UIUX Lab"> 
+        <link rel="canonical" href="https://uiux.cc" />
+        <!-- SEO  end -->
+  
+        
+		<!-- Favicons
+		============================================= -->
+        <link rel="icon" href="assets/images/favicon/favicon-32x32.png" type="image/x-icon">
+        <link rel="shortcut icon" href="assets/images/favicon/favicon-32x32.png" sizes="32x32">
+        <link rel="apple-touch-icon" href="assets/images/favicon/apple-touch-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="assets/images/favicon/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="assets/images/favicon/apple-touch-icon-114x114.png">
+        <!-- Favicons  end -->
+     
+  
+  </head>  
+  
+     
+  <body class="page">
+  
+  
+          
+              
+    <!-- Loader
+    ============================================= -->      
+    <div class="uix-loader">
+        <!--[if lt IE 10]>
+            <span>Loading...</span>
+        <![endif]-->
+        <svg class="uix-loader__spinner is-hide-IE" viewBox="0 0 52 52">
+			<path d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"></path>
+        </svg>
+    </div>
+    <div class="uix-loader-progress"><span>0%</span></div>
+    <!-- .uix-loader end -->
+    
+
+    
+    <!-- Mobile Menu Toggle Trigger
+    ============================================= -->    
+	<div class="uix-menu-mobile__toggle">
+		<span></span>
+		<span></span>
+		<span></span>
+	</div>
+    <div class="uix-menu-mobile__mask"></div>
+	<!-- .uix-menu-mobile__toggle end -->
+
+
+    <!-- Back To Top Trigger
+    ============================================= -->    
+	<a href="#" id="uix-to-top"><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+
+
+
+
+
+			
+    
+    
+
+  
+  
+    <div class="uix-wrapper">
+    
+        <!-- Header Area
+        ============================================= -->      
+        <header class="uix-header__container">
+            
+             <div class="uix-header">
+                 <div class="container">
+                 
+                                                <div class="uix-brand">
+                            <a href="index.html"><img src="assets/images/logo.png" alt="Uix Kit Demo"></a>                       
+                        </div>
+                        <!-- .logo end -->
+                        
+                        
+                        
+                        <!-- Navigation Start-->
+                        
+                        <nav class="uix-menu__container">
+                               
+                               <div class="uix-menu__inner">
+                               
+									<span class="uix-brand--mobile"><img src="assets/images/logo-colorful.png" alt="Uix Kit Demo"></span>
+									<ul class="uix-menu"> 
+										<li class="multi-column current-menu-item"><a href="index.html">Components</a>
+											<ul class="sub-menu">
+
+												
+												<li>
+													<ul class="sub-menu">
+														<li><span class="multi-column-title">Web Elements (Basic)</span></li>
+														<li><a href="seamless-grid.html">Seamless Grid</a></li>
+														<li><a href="bootstrap-grid.html">Bootstrap Grid</a></li>
+														<li><a href="blended-grid-layout.html">Blended Grid</a><span class="uix-bubble">new</span></li>
+														<li><a href="section-layout.html">Section Layout</a></li>
+														<li><a href="material-container.html">Material Container</a></li>
+														<li><a href="striking.html">Striking</a></li>
+														<li><a href="button.html">Buttons</a></li>
+														<li><a href="overlay.html">Overlay</a></li>
+														<li><a href="video.html">Video</a></li>
+														<li><a href="video-background.html">Video BG</a></li>
+														<li><a href="heading.html">Heading</a></li>
+														<li><a href="dividing-line.html">Dividing Line</a></li>
+														<li><a href="modal-dialog.html">Modal Dialog</a></li>
+														<li><a href="responsive-images.html">Responsive Images</a></li>
+														<li><a href="parallax.html">Parallax</a></li>
+														<li><a href="parallax2.html">Parallax 2</a></li>
+														<li><a href="vertical-centering.html">Vertical Centering</a></li>
+														<li><a href="equal-width-columns.html">Equal-width Columns</a></li>
+														<li><a href="equal-height-columns.html">Equal-height Columns</a></li>		
+													</ul>
+													
+													<!-- .sub-menu  end -->
+												</li>
+												
+													
+												
+
+												<li>
+													<ul class="sub-menu">
+														<li><span class="multi-column-title">Web Elements (Part 1)</span></li>
+														<li><a href="social-meida-icons.html">Social Media Icons</a></li>
+														<li><a href="form.html">Form Elements</a></li>
+														<li><a href="form2.html">Form Elements 2</a></li>
+														<li><a href="form-progress.html">Form Progress</a></li>
+														<li><a href="timeline.html">Timeline</a></li>
+														<li><a href="tabs.html">Tabs</a></li>
+														<li><a href="accordion.html">Accordion</a></li>
+														<li><a href="accordion-img.html">Accordion Background Images</a></li>
+														<li><a href="counter.html">Counter</a></li>
+														<li><a href="progress-bar.html">Progress Bar</a></li>
+														<li><a href="breadcrumbs.html">Breadcrumbs</a></li>
+														<li><a href="vertical-text.html">Vertical Text</a></li>
+														<li><a href="tooltip.html">Tooltip</a></li>
+														<li><a href="dots.html">Dots</a></li>
+														<li><a href="vertical-separator.html">Vertical Separator</a></li>
+														<li><a href="wave-background.html">Wave Background</a></li>
+												        <li><a href="shape-animation.html">Shape Animation</a></li>
+													    <li><a href="image-animation.html">Image Animation</a><span class="uix-bubble">new</span></li>
+													   
+													   
+													   
+														
+													</ul>
+													<!-- .sub-menu  end -->
+												</li>
+												
+												
+												<li>
+													<ul class="sub-menu">
+														<li><span class="multi-column-title">Web Elements (Part 2)</span></li>
+														<li><a href="card.html">Cards</a></li>
+														<li><a href="ribbon.html">Ribbon</a></li>	
+														<li><a href="footer-templates.html">Footer Templates</a></li>
+														<li><a href="pagination.html">Pagination</a></li>
+														<li><a href="badges.html">Badges</a></li>
+														<li><a href="mouse-animation-scroll.html">Mouse Animation Scroll</a></li>
+														<li><a href="periodical-scroll.html">Periodical Scroll</a></li>	
+														<li><a href="image-shapes.html">Image Shapes</a></li>
+														<li><a href="rotating-elements.html">Rotating Elements</a></li>
+														<li><a href="dotted-line.html">Dotted Line</a></li>
+														<li><a href="flexslider.html">Flexslider</a></li>
+														<li><a href="flexslider2.html">Flexslider Fullscreen</a></li>
+														<li><a href="advanced-slider.html">Advanced Slider (Basic)</a></li>
+														<li><a href="advanced-slider-brightness.html">Advanced Slider Brightness</a></li>
+														<li><a href="advanced-slider-liquid.html">Advanced Slider Liquid</a></li>
+														<li><a href="advanced-slider-liquid2.html">Advanced Slider Liquid 2</a></li>
+														<li><a href="advanced-slider-liquid3.html">Advanced Slider Liquid 3</a><span class="uix-bubble">new</span></li>
+														<li><a href="advanced-slider-3D.html">Advanced Slider 3D Rotating</a><span class="uix-bubble">new</span></li>
+														<li><a href="advanced-content-slider.html">Advanced Content Slider</a><span class="uix-bubble">new</span></li>
+														
+														
+														
+														
+													</ul>
+													<!-- .sub-menu  end -->
+												</li>
+												
+
+			
+												<li>
+													<ul class="sub-menu">
+														<li><span class="multi-column-title">Contents (Part 1)</span></li>
+														<li><a href="list-posts.html">Posts List</a></li>
+														<li><a href="list-split-imagery.html">Fullwidth List of Split</a></li>
+														<li><a href="list-split-content.html">Fullwidth List of Split 2</a></li>
+														<li><a href="list-side-by-side.html">Side by Side List</a></li>
+														<li><a href="list-side-by-side-img.html">Side by Side List With Photo</a></li>
+														<li><a href="list-bulleted.html">Bulleted List</a></li>
+														<li><a href="list-brands.html">Brands List</a></li>
+														<li><a href="list-maintain-aspect-ratio.html">Maintain Aspect Ratio List</a></li>
+														<li><a href="single-post.html">Single Post</a></li>
+														<li><a href="sidebar.html">Sidebar</a></li>
+														<li><a href="contact.html">Contact Form With Map</a></li>
+														<li><a href="features.html">Features</a></li>
+														<li><a href="pricing.html">Pricing</a></li>
+														<li><a href="testimonials.html">Testimonials</a></li>
+														<li><a href="multi-items-carousel.html">Easy Multiple Items Carousel</a></li>
+														<li><a href="gallery.html">Gallery Normal</a></li>
+														<li><a href="gallery-filter.html">Gallery Filterable</a></li>
+														<li><a href="gallery-masonry.html">Gallery Masonry</a></li>
+														
+													</ul>
+													<!-- .sub-menu  end -->
+												</li>
+												
+												<li>
+													<ul class="sub-menu">
+														<li><span class="multi-column-title">Contents (Part 2)</span></li>
+														<li><a href="table-series.html">Table Series</a></li>
+														<li><a href="3D-carousel.html">3D Carousel</a></li>
+														<li><a href="team-fullwidth.html">Team Fullwidth</a></li>
+														<li><a href="team-grid.html">Team Grid</a></li>
+														<li><a href="team-focus.html">Team Focus</a></li>
+
+														
+													</ul>
+													<!-- .sub-menu  end -->
+												</li>	
+												
+													
+												
+												
+												<li>
+													<ul class="sub-menu">
+														<li><span class="multi-column-title">Interaction</span></li>
+														<li><a href="scroll-reveal.html">Scroll Reveal</a></li>
+														<li><a href="list-posts-with-ajax.html">Ajax Load Posts</a></li>
+														<li><a href="list-posts-with-ajax2.html">Ajax Load Posts 2</a></li>
+														<li><a href="list-posts-with-ajax-infinitescroll.html">Infinite Scroll Posts</a></li>
+														<li><a href="show-more-less.html">Show More Less</a></li>
+														<li><a href="mousewheel-interaction.html">Mousewheel Interaction</a></li>
+														<li><a href="lightbox.html">Lightbox</a></li>
+														<li><a href="dynamic-dropdown-list-json.html">Dynamic Drop Down List</a></li>
+														<li><a href="one-page.html">Full Page/One Page</a></li>
+														<li><a href="one-page2.html">Full Page/One Page 2</a></li>
+														<li><a href="3D-pages.html">3D Pages</a></li>
+														<li><a href="3D-background.html">3D Background</a></li>
+														<li><a href="3D-background-three.html">3D Background 2</a></li>
+														<li><a href="3D-background-three2.html">3D Background 3</a></li>
+														<li><a href="3D-model.html">3D Model</a></li>
+														<li><a href="3D-particle-effect.html">3D Particle Effect</a></li>
+														<li><a href="3D-sphere-three.html">3D Sphere Rotation</a><span class="uix-bubble">new</span></li>
+														<li><a href="ajax-page-loader.html">Ajax Page Loader</a><span class="uix-bubble">new</span></li>
+														<li><a href="ajax-push-content.html">Ajax Push Content</a><span class="uix-bubble">new</span></li>
+														
+														
+													</ul>
+													<!-- .sub-menu  end -->
+												</li>
+
+											
+											</ul>
+
+										</li>
+										<li><a href="#">Menu</a>
+											<ul class="sub-menu">
+												<li><a href="mega-menu.html">Mega Menu</a></li>
+												<li><a href="mega-menu-rtl.html">Mega Menu(RTL)</a></li>
+												<li><a href="secondary-responsive-menu.html">Secondary Responsive Menu</a></li>
+												<li><a href="dropdown-menu.html">Dropdown Menu</a></li>
+												<li><a href="dropdown-menu2.html">Dropdown Menu 2(Multi-level)</a></li>
+												<li><a href="vertical-menu.html" target="_blank">Vertical Menu</a><span class="uix-bubble">new</span></li>
+												
+
+											</ul>
+											<!-- .sub-menu  end -->
+										</li>
+
+										<li><a href="typography.html">Typography</a>
+											<ul class="sub-menu">
+												<li><a href="typography.html">LTR</a></li>
+												<li><a href="typography-rtl.html">RTL</a></li>
+												<li><a href="typography-cn.html">中文</a></li>
+
+											</ul>
+										</li>
+										
+										
+										<li><a href="sample-page-1.html">Sample Pages</a>
+											<ul class="sub-menu">
+												<li><a href="sample-page-1.html">Sample Page 1</a><span class="uix-bubble">new</span></li>
+												<li><a href="sample-page-2.html">Sample Page 2</a><span class="uix-bubble">new</span></li>
+
+											</ul>
+										</li>
+										
+										
+
+									</ul>
+									<div class="uix-menu__right-box">
+										<a class="uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin uix-social-btn--white" title="Follow us on Twitter" href="https://twitter.com/uiux_lab" target="_blank">
+											<i class="fa fa-twitter"></i>
+										</a>
+										<a class="uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin uix-social-btn--white" title="Follow us on Facebook" href="https://www.facebook.com/uiuxlabhome" target="_blank">
+											<i class="fa fa-facebook"></i>
+										</a>
+										<a class="uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin uix-social-btn--white" title="Fork on Github" href="https://github.com/xizon/uix-kit" target="_blank">
+											<i class="fa fa-github"></i>
+										</a>          
+									</div>
+                               
+							   </div><!-- /.uix-menu__inner -->
+        
+                        </nav>
+                        <!-- .uix-menu__container end -->
+                        
+                 
+                   
+                        
+                        
+                        
+                        
+                  </div>
+                  <!-- .container end -->
+                  
+                  <div class="uix-clear"></div>
+             </div>
+        
+        </header>
+        <div class="uix-header__placeholder"></div>
+      
+      
+        <!-- Content 01
+        ====================================================== -->
+        <section class="uix-section--no-spacing">
+            <div class="container uix-t-c">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <h2>Equal Width Columns</h2>
+							<p>Using only CSS, we can make a tabbed navigation whose tabs always occupy an equal share of the available width. No JS to interrogate the DOM, no server-side logic to count through items, no inline styles.</p>
+                        </div>
+                    </div>
+                    <!-- .row end -->
+              
+                    
+            </div>
+            <!-- .container end -->
+ 
+        </section>
+     
+       
+    
+       <!-- Content 02
+        ====================================================== -->
+        <section>
+            <div class="container">
+                   
+                
+					<div class="uix-equal-width-divs uix-t-c">
+						<ul>
+							<li><h3>223</h3><span>Web Design</span></li>
+							<li><h3>13</h3><span>UI</span></li>
+							<li><h3>5</h3><span>SEO</span></li>  
+							<li><h3>567</h3><span>Interaction</span></li>  
+						</ul>
+					</div>
+					<!-- .uix-breadcrumbs  end -->
+ 
+           
+                    
+                    
+                    
+            </div>
+            <!-- .container end -->
+            
+            
+        </section>
+     
+        
+        
+                <!-- Footer
+        ============================================= -->    
+        <footer class="uix-footer__container">
+            <div class="uix-footer">
+            
+				<div class="container">
+					<nav class="pull-left uix-t-l mobile-center">
+						<ul>
+							<li>
+								<a href="https://uiux.cc" target="_blank">
+									UIUX Lab
+								</a>
+							</li>
+							<li>
+								<a href="https://opensource.org/licenses/MIT" target="_blank">
+									Licenses
+								</a>
+							</li>
+							<li>
+								<a href="https://github.com/xizon/uix-kit" target="_blank">
+									Download
+								</a>
+							</li>
+
+							<li>
+								<a href="https://github.com/xizon/uix-kit/wiki/Getting-Started" target="_blank">
+									Documentation
+								</a>
+							</li>
+
+
+
+						</ul>
+					</nav>
+					<div class="pull-right uix-t-r mobile-center">
+						Copyright &copy; Uix Kit 2018.  |  All rights reserved. Created by UIUX Lab.
+					</div>
+
+				</div><!-- .container  end -->
+				
+			</div>
+        </footer>
+        
+        
+    </div>
+    <!-- .wrapper end -->
+       
+       
+      
+
+    <!-- Basic Script -->
+	<script src="assets/js/min/jquery.easing.min.js?ver=1.3"></script>
+    <script src="assets/js/min/jquery.waitforimages.min.js?ver=1.0"></script>
+    <script src="assets/js/min/video.min.js?ver=5.19"></script> 
+	<script src="assets/js/min/jquery.waypoints.min.js?ver=4.0.1"></script> 
+    <script src="assets/js/min/template7.min.js?ver=1.2.5"></script>
+    <script src="assets/js/min/TweenMax.min.js?ver=1.20.4"></script>
+    <script src="assets/js/min/pixi.min.js?ver=4.7.1"></script>
+    <script src="assets/js/min/three.min.js?ver=r92"></script>
+    <script src="assets/js/min/anime.min.js?ver=2.2.0"></script>
+    <script src="assets/js/min/jquery.pjax.new.min.js?ver=20180704"></script>
+    
+    
+    <!-- Masonry -->
+    <script src="assets/js/wp-jquery/masonry.min.js?ver=3.3.2"></script>
+    <script src="assets/js/wp-jquery/imagesloaded.min.js?ver=4.1.0"></script>
+
+    <!-- Filterable  -->
+    <script src="assets/js/min/jquery.shuffle.min.js?ver=3.1.1"></script> 
+    
+    
+    
+	<!-- Your Plugins & Theme Scripts
+	============================================= -->
+	
+	<script>
+		var REVISION     = "1.9.7",
+			APP_ROOTPATH = {
+				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
+				"homeUrl"     : "",  //Eg. https://uiux.cc
+				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
+			};
+    </script>  
+    <script src="assets/js/uix-kit.min.js?ver=MTUzMjQ4NjQ3OTY0MQ"></script>
+
+
+
+	<!-- Your Plugins & Theme Scripts  end -->
+    
+
+	<script>
+			/* Google analytics */
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-70658525-1', 'auto');
+			ga('send', 'pageview');
+
+	</script> 
+    
+ 
+
+  </body>
+</html>
+
+

@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.9.6
- * ## Last Update         :  July 24, 2018
+ * ## Version             :  1.9.7
+ * ## Last Update         :  July 25, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -28,9 +28,9 @@
     4. Get all custom attributes of an element like "data-*" 
     5. Navigation 
     6. Videos 
-    7. Mega Menu 
-    8. Dropdown Categories 
-    9. Common Height 
+    7. Common Height 
+    8. Mega Menu 
+    9. Dropdown Categories 
     10. Pagination 
     11. Specify a background image 
     12. Modal Dialog 
@@ -42,30 +42,30 @@
     18. 3D Model 
     19. 3D Pages 
     20. 3D Particle Effect 
-    21. Accordion 
-    22. Accordion Background Images 
-    23. Advanced Content Slider 
-    24. Advanced Slider (Special Effects) 
-    25. Advanced Slider (Basic) 
-    26. Counter 
-    27. Dropdown Menu 
-    28. Dropdown Menu 2 (Multi-level drop-down navigation) 
-    29. Flexslider 
+    21. 3D Sphere Rotation 
+    22. Accordion 
+    23. Accordion Background Images 
+    24. Advanced Content Slider 
+    25. Advanced Slider (Special Effects) 
+    26. Advanced Slider (Basic) 
+    27. Counter 
+    28. Dropdown Menu 
+    29. Dropdown Menu 2 (Multi-level drop-down navigation) 
     30. Dynamic Drop Down List from JSON 
-    31. Form 
-    32. jQuery UI Datepicker 1.11.4 
-    33. Form Progress 
-    34. Gallery 
-    35. Image Shapes 
-    36. Custom Core Scripts  
-    37. Custom Lightbox 
-    38. Bulleted List 
-    39. Posts List With Ajax 
-    40. Fullwidth List of Split 
-    41. Mousewheel Interaction 
-    42. Multiple Items Carousel 
-    43. Full Page/One Page Transition 
-    44. 3D Sphere Rotation 
+    31. Flexslider 
+    32. Form 
+    33. jQuery UI Datepicker 1.11.4 
+    34. Form Progress 
+    35. Gallery 
+    36. Image Shapes 
+    37. Custom Core Scripts  
+    38. Custom Lightbox 
+    39. Bulleted List 
+    40. Posts List With Ajax 
+    41. Fullwidth List of Split 
+    42. Mousewheel Interaction 
+    43. Multiple Items Carousel 
+    44. Full Page/One Page Transition 
     45. Full Page/One Page Transition 2 
     46. Parallax 
     47. Periodical Scroll 
@@ -78,15 +78,16 @@
     54. Smooth Scrolling When Clicking An Anchor Link 
     55. Source Code View 
     56. Sticky Elements 
-    57. Team Focus 
+    57. Tabs 
     58. Testimonials Carousel 
-    59. Tabs 
-    60. Timeline 
-    61. Text effect 
+    59. Team Focus 
+    60. Text effect 
+    61. Timeline 
     62. Vertical Menu 
     63. Ajax Page Loader (Loading A Page via Ajax Into Div)  
     64. Ajax Push Content  
     65. GSAP Plugins 
+    66. Three.js Plugins 
 
 
 */
@@ -3775,7 +3776,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			pivot1.rotation.z = 0;
 			pivot2.rotation.z = 2 * Math.PI / 3;
-			pivot3.rotation.z = 4 * Math.PI / 3;;
+			pivot3.rotation.z = 4 * Math.PI / 3;
 			displacementSprite.add( pivot1 );
 			displacementSprite.add( pivot2 );
 			displacementSprite.add( pivot3 );
@@ -3829,6 +3830,70 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
+
+
+
+
+/* 
+ *************************************
+ * <!-- Accordion -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.ACCORDION               = APP.ACCORDION || {};
+	APP.ACCORDION.version       = '0.0.1';
+    APP.ACCORDION.documentReady = function( $ ) {
+
+		$( '.uix-accordion' ).each( function() {
+			var $this           = $( this ),
+				aEvent          = $this.data( 'event' ),
+				firstShow       = $this.data( 'first-show' ),
+				$li             = $this.children( 'dl' ),
+				$titlebox       = $this.find( 'dt' );
+			
+			if( typeof aEvent === typeof undefined ) {
+				aEvent = 'click';
+			}	
+			
+			if( typeof firstShow === typeof undefined ) {
+				firstShow = false;
+			}		
+			
+		
+			if ( firstShow ) {
+				$li.first().addClass( 'active' );
+			}
+			
+
+			$li.on( aEvent, function( e ) {
+				//Prevents further propagation of the current event in the capturing and bubbling phases.
+				e.stopPropagation();
+				
+				$( this ).find( 'dd' ).addClass( 'active' );
+				
+				
+				if ( !$( this ).hasClass( 'active' ) ) {
+					$li.removeClass( 'active' );
+
+					$( this ).addClass( 'active' );
+				} else {
+					$li.removeClass( 'active' );
+				}
+			
+			}); 
+						
+			
+			
+		});
+		
+    };
+
+    APP.components.documentReady.push( APP.ACCORDION.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
 
 
 
@@ -3946,70 +4011,6 @@ APP = ( function ( APP, $, window, document ) {
 
 }( APP, jQuery, window, document ) );
 
-
-
-
-
-/* 
- *************************************
- * <!-- Accordion -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.ACCORDION               = APP.ACCORDION || {};
-	APP.ACCORDION.version       = '0.0.1';
-    APP.ACCORDION.documentReady = function( $ ) {
-
-		$( '.uix-accordion' ).each( function() {
-			var $this           = $( this ),
-				aEvent          = $this.data( 'event' ),
-				firstShow       = $this.data( 'first-show' ),
-				$li             = $this.children( 'dl' ),
-				$titlebox       = $this.find( 'dt' );
-			
-			if( typeof aEvent === typeof undefined ) {
-				aEvent = 'click';
-			}	
-			
-			if( typeof firstShow === typeof undefined ) {
-				firstShow = false;
-			}		
-			
-		
-			if ( firstShow ) {
-				$li.first().addClass( 'active' );
-			}
-			
-
-			$li.on( aEvent, function( e ) {
-				//Prevents further propagation of the current event in the capturing and bubbling phases.
-				e.stopPropagation();
-				
-				$( this ).find( 'dd' ).addClass( 'active' );
-				
-				
-				if ( !$( this ).hasClass( 'active' ) ) {
-					$li.removeClass( 'active' );
-
-					$( this ).addClass( 'active' );
-				} else {
-					$li.removeClass( 'active' );
-				}
-			
-			}); 
-						
-			
-			
-		});
-		
-    };
-
-    APP.components.documentReady.push( APP.ACCORDION.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
 
 
 
@@ -27698,9 +27699,6 @@ License: MIT
 /***/ function(module, exports) {
 
 	module.exports = "uniform float explodeRate;\nvarying vec2 vUv;\n\n\nfloat rand(vec2 co){\n  return fract(sin(dot(co.xy, vec2(12.8273, 67.245))) * 53726.17623);\n}\n\nvoid main() {\n  vec3 col;\n  col.g = rand(vec2(vUv.x, vUv.y + 1.0));\n  col.b = rand(vec2(vUv.x, vUv.y + 2.0));\n  col.r = rand(vec2(vUv.xy));\n  col = col - 0.5;\n  col *= explodeRate;\n\n  gl_FragColor = vec4(col, 1.0);\n}\n";
-
-/***/ }
-/******/ ]);\n";
 
 /***/ }
 /******/ ]);

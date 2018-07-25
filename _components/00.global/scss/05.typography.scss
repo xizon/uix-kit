@@ -238,6 +238,10 @@ h6 {
 
 .uix-typo--style-noitalic {
     font-style: normal !important;
+	
+	em {
+		font-style: normal !important;
+	}
 }
 
 .uix-typo--style-underline {

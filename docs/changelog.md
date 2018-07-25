@@ -1,8 +1,10 @@
 # Changelog
 
-#### = 1.9.6 (July 24, 2018) =
+#### = 1.9.7 (July 24, 2018) =
 
+* Fix: Solved the problem that the link in the Advanced Slider could not be clicked.
 * Fix: Fixed a error of Advanced Slider that prevent content overflow.
+* New: Add a new module "Vertical Centering".
 * New: Add a new module "Image Animation".
 * New: Add a new module "3D Sphere Rotation".
 * Tweak: Extended module of "Scroll Reveal". Added a parameter of percentage of the viewport's height.
