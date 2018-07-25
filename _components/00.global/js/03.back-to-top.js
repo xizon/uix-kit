@@ -40,11 +40,15 @@ APP = ( function ( APP, $, window, document ) {
 
 			TweenMax.to( window, 0.5, {
 				scrollTo: {
-					y: 0
+					y: 0  //y: "max" --> vertical scroll to bottom
 				},
 				ease: Power2.easeOut
 			});	
 
+			
+			
+			
+			
 		});	
 			
 		
