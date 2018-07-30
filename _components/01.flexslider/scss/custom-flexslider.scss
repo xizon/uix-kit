@@ -82,6 +82,16 @@
  2. Default Slideshow        
  ---------------------------
  */ 
+
+/* Prevent content overflow */
+.uix-flexslider,
+.uix-flexslider .uix-flexslider__inner,
+.uix-flexslider .uix-flexslider__inner > .uix-flexslider__item {
+    max-height: 100vh;
+	
+}
+
+
 .uix-flexslider, 
 .uix-flexslider__viewport {
 	transition: .1s ease;
@@ -102,6 +112,9 @@
 }
 
 .uix-flexslider .uix-flexslider__inner {
+	
+	height: 100%; /* Required */
+	
 	> .uix-flexslider__item {
 		display: none;
 		-webkit-backface-visibility: hidden;

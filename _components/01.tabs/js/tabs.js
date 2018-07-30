@@ -14,6 +14,8 @@ APP = ( function ( APP, $, window, document ) {
 		$( '.uix-tabs' ).each( function( id ) {
 			var $this             = $( this ),
 			    $li               = $this.find( 'ul > li' ),
+				liWidth           = $li.first().outerWidth(),
+				liHeight          = $li.first().outerHeight(),
 				liNum             = $li.length,
 				$contentbox       = $this.find( '.uix-tabs__content' ),
 				ulWidth           = $this.data( 'width' ),
@@ -21,6 +23,9 @@ APP = ( function ( APP, $, window, document ) {
 				rotation          = $this.data( 'rotation' ),
 				rotationRadius    = $this.data( 'rotation-radius' ),
 				rotationWapperDeg = $this.data( 'rotation-wrapper-angle' ),
+				rotationDisplay   = $this.data( 'rotation-display' ),
+				
+				
 				
 				tabBoxID          = id,
 				isNumeric         = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
@@ -38,7 +43,12 @@ APP = ( function ( APP, $, window, document ) {
 			
 			if( typeof rotationWapperDeg === typeof undefined ) {
 				rotationWapperDeg = 0;
+			}	
+			
+			if( typeof rotationDisplay === typeof undefined ) {
+				rotationDisplay = 5;
 			}		
+			
 			
 			
 			$li.each( function( index ) {
@@ -54,33 +64,56 @@ APP = ( function ( APP, $, window, document ) {
 			
 			// Tab Rotation Effect
 			if ( rotation ) {
-				
-				var increase   = Math.PI * 2 / liNum,
-					radius     = rotationRadius,
-					angle      = 0;
-				
-				//Initialize button position
-				$this.find( 'ul' ).css({
-							'transform'         : 'rotate('+ parseFloat( rotationWapperDeg ) +'deg)'
-						})
-						.find( '> li' )
-						.css({
-								'transform'         : 'rotate('+ -parseFloat( rotationWapperDeg )+'deg)'
-							});
-				
-				
-				$li.each( function( index ) {
-					$( this ).css( {
-						'left'              : Math.cos( - Math.PI / 2 + index * increase) * radius + 'px',
-						'top'               : Math.sin( - Math.PI / 2 + index * increase) * radius + 'px'
-					} );
-					
+		
+				$this.find( '.uix-tabs__nav' ).css( {
+					'width'      : rotationRadius * 2 + 'px'
+				} );
 
+		
+				$this.find( 'ul' ).css( {
+					'width'     : rotationRadius * 2 + 'px',
+					'height'    : rotationRadius * 2 + 'px',
+					'transform' : 'rotate('+parseFloat(rotationWapperDeg)+'deg)'
+				} );
+
+				
+
+				//Layout components in a circle layout
+				var angle           = 0,
+					step            = 2 * Math.PI / rotationDisplay,
+					transitionDelay = 0,
+					pad             = $this.find( 'ul' ).width();
+
+
+				$this.find( 'ul > li' ).each( function() { //Can'nt use arrow function here!!!
+					// 'this' works differently with arrow fucntions
+					var el          = $( this ),
+						x           = rotationRadius * Math.cos(angle) - liWidth / 2,
+						y           = rotationRadius * Math.sin(angle) - liHeight / 2;
+
+
+					el.css({
+						'transform'        : 'translate('+parseFloat( x )+'px,'+parseFloat( pad/2 + y )+'px)',
+						'transition-delay' : transitionDelay + "s"
+					})
+					.find( '> a' )
+					.css({
+						'transform'        : 'rotate('+parseFloat(-rotationWapperDeg)+'deg)'
+					});
+
+
+					angle += step;
+					transitionDelay += 0.15;
 					
-					$( this ).on( 'click', function( e ) {
+					
+					
+					//Click on the rotation effect
+					//----------------------- begin ----------------------
+					el.on( 'click', function( e ) {
 						
-						var n        = $(this).index(),
-							endAngle = n % liNum * increase; 
+						var increase   = Math.PI * 2 / rotationDisplay,
+							n          = $( this ).index(),
+							endAngle   = n % rotationDisplay * increase; 
 
 
 						( function turn() {
@@ -91,23 +124,35 @@ APP = ( function ( APP, $, window, document ) {
 							} else {
 								angle = endAngle;
 							}
+							
+							
+						
+							$this.find( 'ul > li' ).each( function( index ) {
+								var x2           = Math.cos( - Math.PI / 2 + index * increase - angle) * rotationRadius - liWidth / 2,
+									y2           = Math.sin( - Math.PI / 2 + index * increase - angle) * rotationRadius + liHeight;
 
+							
+								$( this ).css({
+									'transform'        : 'translate('+parseFloat( x2 )+'px,'+parseFloat( y2 )+'px)',
+									'transition'       : 'none',
+									'transition-delay' : 0
+								})
+								.find( '> a' )
+								.css({
+									'transform'        : 'rotate('+parseFloat(-rotationWapperDeg)+'deg)'
+								});
 
-							$li.each( function( index ) {
-								$( this ).css( {
-									'left'        : Math.cos( - Math.PI / 2 + index * increase - angle) * radius + 'px',
-									'top'         : Math.sin( - Math.PI / 2 + index * increase - angle) * radius + 'px'
-								} );
+							});
 
-							});	
-
-
+														 
 						})();	
 						
 					});
+					//----------------------- end ----------------------
+					
 					
 				});	
-				
+
 
 				
 			}

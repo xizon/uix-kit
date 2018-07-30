@@ -11,8 +11,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.9.7
- * ## Last Update         :  July 25, 2018
+ * ## Version             :  1.9.8
+ * ## Last Update         :  July 31, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -30,8 +30,8 @@
     3. Basic Layout Styles 
     4. Navigation 
     5. Header Area 
-    6. Brand 
-    7. Filterable Navigation 
+    6. Filterable Navigation 
+    7. Brand 
     8. Sidebar 
     9. Search 
     10. Comments 
@@ -48,8 +48,6 @@
     21. Maintain Aspect Ratio List 
     22. Side by Side List 
     23. Source Code 
-    24. ToolTip 
-    25. Vertical Menu (RTL) 
 
 
 
@@ -898,20 +896,6 @@ blockquote::before {
 }
 
 /* ====================================================== 
-   <!-- Maintain Aspect Ratio List -->
-/* ====================================================== */
-@media all and (max-width: 768px) {
-    .uix-list-aspect-ratio {
-        padding-right: auto;
-        padding-left: 15px;
-    }
-
-    .uix-list-aspect-ratio .uix-core-grid__col-4 {
-        float: right;
-    }
-}
-
-/* ====================================================== 
    <!-- Side by Side List -->
 /* ====================================================== */
 dl.uix-list-abreast dt {
@@ -925,6 +909,20 @@ dl.uix-list-abreast dd {
     text-align: right;
     padding-left: auto;
     padding-right: 1rem;
+}
+
+/* ====================================================== 
+   <!-- Maintain Aspect Ratio List -->
+/* ====================================================== */
+@media all and (max-width: 768px) {
+    .uix-list-aspect-ratio {
+        padding-right: auto;
+        padding-left: 15px;
+    }
+
+    .uix-list-aspect-ratio .uix-core-grid__col-4 {
+        float: right;
+    }
 }
 
 /* ====================================================== 
@@ -1076,5 +1074,8 @@ pre.prettyprint {
     right: auto;
     left: .5rem;
 }
+
+/*# sourceMappingURL=uix-kit-rtl.css.map */
+
 
 /*# sourceMappingURL=uix-kit-rtl.css.map */

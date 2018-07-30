@@ -1,5 +1,20 @@
 # Changelog
 
+#### = 1.9.8 (July 30, 2018) =
+
+* New: Add a new module "Circle Layout".
+* New: Add a new module "Lava-Lamp Style Menu".
+* New: Add a new module "Align Wide and Full Element".
+* New: Added a class of full-width trigger for overflow safe width of container.
+* Fix: Added filtering of json linkage data to enhance data compatibility.
+* Fix: Fixed a error of Custom FlexSlider that prevent content overflow.
+* Fix: Asynchronous loading support for scroll Reveal.
+* Tweak: Enhanced compatibility of the ajax callback module.
+* Tweak: Optimized alignment of tabs module rotation effects.
+
+
+
+
 #### = 1.9.7 (July 24, 2018) =
 
 * Fix: Solved the problem that the link in the Advanced Slider could not be clicked.

@@ -114,35 +114,40 @@
 	 */ 
 	&.uix-tabs--rotation {
 		
-		height: 400px;
-
 		.uix-tabs__content {
-			position: absolute;
-			top: 0;
-			left: 400px;
-			width: 300px;
+			position: relative;
 			@include outer-shadow();
 		}
 		.uix-tabs__nav {
-			width: 300px;
-			height: 300px;
 			position: relative;
 			margin: 0;
 			
 			> ul {
+				box-sizing: border-box;
 				position: relative;
-				display: block;
 				width: 300px;
 				height: 300px;
-
+				border: 1px solid #ccc;
+				border-radius: 50%;
+				margin: 0;
+				padding: 0;
+				display: inline-block;
+				
 				> li {
+					//transition: all 0.1s ease; //If you use a click effect, don't set it
+					margin: 0;
+					padding: 0;
+					box-sizing: border-box;
 					position: absolute;
 					width: 80px;
 					height: 80px;
 					background: none;
 					box-shadow: none;
-					transition: none;
-
+					z-index: 2;
+					top: 0;
+					left: 50%;
+					min-width: inherit; /* Required */
+				
 					> a {
 						width: 80px;
 						height: 80px;
@@ -166,6 +171,16 @@
 }
 
 
+/* Center alignment */ 
+.uix-t-c .uix-tabs.uix-tabs--rotation {
+	
+	.uix-tabs__nav {
+		margin: 0 auto;
+	}
+	
+}
+
+
 
 @media all and (max-width: 768px) { 
 	.uix-tabs {
@@ -177,23 +192,15 @@
 		/* Tab Rotation Effect */
 		&.uix-tabs--rotation {
 
-			height: 400px;
-
-			.uix-tabs__content {
-				position: relative;
-				left: 0;
-				width: 100%;
-			}
-
 			.uix-tabs__nav {
-				margin-top: 50px;
-				margin-left: 120px;
+			    width: auto !important;
 			}
+		
 			
 		}
 
 		
-
 	}	
 
 }
+

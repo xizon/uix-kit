@@ -213,12 +213,6 @@ h6 {
  4. Text Effect
  ---------------------------
  */ 
-/* Without spacing */
-.uix-typo--no-spacing {
-	margin: 0 !important;
-	padding: 0 !important;
-}
-
 .uix-typo--style-normal {
 	font-family: $font-stack;
 	font-weight: 400 !important;

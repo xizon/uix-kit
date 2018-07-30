@@ -19,8 +19,8 @@
 	GLOBAL SPACING HIERARCHY WITH <section>
 	---------------------------
 	
-    Default                    :    6.5625rem
     Large                      :    11.375rem
+    Medium                     :    6.5625rem
     Small                      :    4.8125rem
     Default (mobile)           :    4.265625rem
     Large (mobile)             :    4.265625rem
@@ -105,12 +105,12 @@ $font-size-h6          : 0.75rem;
 // ---------------------------
 // Files: 00.global/scss/06.spacing.scss
 //
-$spacing-default        : 6.5625rem;
 $spacing-large          : 11.375rem;
 $spacing-small          : 4.8125rem;
-$spacing-default-mobile : 4.265625rem;
+$spacing-medium         : 6.5625rem;
 $spacing-large-mobile   : 4.265625rem;
 $spacing-small-mobile   : 2.625rem;
+$spacing-medium-mobile  : 4.265625rem;
 
 
 // COLOR PALETTE

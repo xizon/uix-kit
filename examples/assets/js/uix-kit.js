@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.9.7
- * ## Last Update         :  July 25, 2018
+ * ## Version             :  1.9.8
+ * ## Last Update         :  July 31, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -27,8 +27,8 @@
     3. Back to Top 
     4. Get all custom attributes of an element like "data-*" 
     5. Navigation 
-    6. Videos 
-    7. Common Height 
+    6. Common Height 
+    7. Videos 
     8. Mega Menu 
     9. Dropdown Categories 
     10. Pagination 
@@ -48,27 +48,27 @@
     24. Advanced Content Slider 
     25. Advanced Slider (Special Effects) 
     26. Advanced Slider (Basic) 
-    27. Counter 
-    28. Dropdown Menu 
-    29. Dropdown Menu 2 (Multi-level drop-down navigation) 
-    30. Dynamic Drop Down List from JSON 
-    31. Flexslider 
-    32. Form 
-    33. Form Progress 
-    34. jQuery UI Datepicker 1.11.4 
-    35. Gallery 
-    36. Image Shapes 
-    37. Custom Core Scripts  
-    38. Custom Lightbox 
-    39. Bulleted List 
-    40. Posts List With Ajax 
-    41. Fullwidth List of Split 
-    42. Mousewheel Interaction 
-    43. Multiple Items Carousel 
-    44. Full Page/One Page Transition 
+    27. Dropdown Menu 
+    28. Dynamic Drop Down List from JSON 
+    29. Flexslider 
+    30. Form 
+    31. jQuery UI Datepicker 1.11.4 
+    32. Form Progress 
+    33. Gallery 
+    34. Image Shapes 
+    35. Theme Scripts  
+    36. Lava-Lamp Style Menu 
+    37. Custom Lightbox 
+    38. Bulleted List 
+    39. Posts List With Ajax 
+    40. Fullwidth List of Split 
+    41. Mousewheel Interaction 
+    42. Multiple Items Carousel 
+    43. Full Page/One Page Transition 
+    44. Dropdown Menu 2 (Multi-level drop-down navigation) 
     45. Full Page/One Page Transition 2 
-    46. Parallax 
-    47. Periodical Scroll 
+    46. Periodical Scroll 
+    47. Parallax 
     48. Pricing 
     49. Progress Bar 
     50. Retina Graphics for Website 
@@ -84,10 +84,12 @@
     60. Text effect 
     61. Timeline 
     62. Vertical Menu 
-    63. Ajax Page Loader (Loading A Page via Ajax Into Div)  
-    64. Ajax Push Content  
+    63. Ajax Push Content  
+    64. Ajax Page Loader (Loading A Page via Ajax Into Div)  
     65. GSAP Plugins 
     66. Three.js Plugins 
+    67. Counter 
+    68. Circle Layout 
 
 
 */
@@ -7451,6 +7453,115 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
+ * <!-- Circle Layout -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.CIRCLE_LAYOUT               = APP.CIRCLE_LAYOUT || {};
+	APP.CIRCLE_LAYOUT.version       = '0.0.1';
+    APP.CIRCLE_LAYOUT.documentReady = function( $ ) {
+
+		$( '.js-uix-circle-layout' ).each( function( id ) {
+			var $this             = $( this ),
+				$ul               = $this.find( '> ul' ),
+			    $li               = $ul.find( '> li' ),
+				liWidth           = $li.first().outerWidth(),
+				liHeight          = $li.first().outerHeight(),
+				display           = $this.data( 'circle-layout-display' ),
+				radius            = $this.data( 'circle-layout-radius' ),
+				radius2           = $this.data( 'circle-layout-radius-c' ),
+				rotation          = $this.data( 'circle-layout-rotation' );
+			
+			
+			
+			if( typeof display === typeof undefined ) {
+				display = 5;
+			}	
+			
+			if( typeof radius === typeof undefined ) {
+				radius = 180;
+			}	
+			
+			if( typeof radius2 === typeof undefined ) {
+				radius2 = 110;
+			}		
+			
+			if( typeof rotation === typeof undefined ) {
+				rotation = 0;
+			}			
+			
+			$this.css( {
+			    'width'      : radius * 2 + 'px'
+			} );
+
+			
+			
+			$ul.css( {
+			    'width'     : radius * 2 + 'px',
+			    'height'    : radius * 2 + 'px',
+				'transform' : 'rotate('+parseFloat(rotation)+'deg)'
+			} );
+
+			
+			$ul.next( 'div' ).css( {
+			    'width'      : radius2 * 2 + 'px',
+			    'height'     : radius2 * 2 + 'px'
+			} );	
+			
+			
+			
+
+			//Layout components in a circle layout
+			var angle           = 0,
+			    step            = 2 * Math.PI / display,
+			    transitionDelay = 0,
+				pad             = $ul.width();
+
+			
+			$li.each( function() { //Can'nt use arrow function here!!!
+				// 'this' works differently with arrow fucntions
+				var el          = $( this ),
+					x           = radius * Math.cos(angle) - liWidth / 2,
+					y           = radius * Math.sin(angle) - liHeight / 2;
+
+				
+				el.css({
+					'transform'        : 'translate('+parseFloat( x + liWidth/2 )+'px,'+parseFloat( pad/2 + y + liHeight/2 )+'px)',
+					'transition-delay' : transitionDelay + "s"
+				})
+				.find( '> a' )
+				.css({
+					'transform'        : 'rotate('+parseFloat(-rotation)+'deg)'
+				});
+				
+				
+				
+				
+				angle += step;
+				transitionDelay += 0.15;
+			});	
+
+			
+			
+		});
+		
+		
+    };
+
+    APP.components.documentReady.push( APP.CIRCLE_LAYOUT.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+
+
+/* 
+ *************************************
  * <!-- Counter -->
  *************************************
  */	
@@ -7845,7 +7956,9 @@ APP = ( function ( APP, $, window, document ) {
 
 													var addressesTxt = '';
 													for ( var k2 = 0; k2 < addresses.length; k2++ ) {
-														addressesTxt += JSON.stringify( addresses[k2] ) + ',';
+														
+														//Need to filter single quotes
+														addressesTxt += JSON.stringify( addresses[k2] ).replace(/'/g, '&apos;' ) + ',';
 													}
 
 													addressesTxt = addressesTxt.replace(/,\s*$/, '' );
@@ -12888,6 +13001,108 @@ var datepicker = $.datepicker;
 
 /* 
  *************************************
+ * <!-- Gallery -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.GALLERY               = APP.GALLERY || {};
+	APP.GALLERY.version       = '0.0.1';
+    APP.GALLERY.documentReady = function( $ ) {
+
+		$( '.uix-gallery' ).each( function() {
+			var type = $( this ).data( 'show-type' );
+			
+			// Masonry
+			if ( type.indexOf( 'masonry' ) >= 0  ) {
+				$( this ).addClass( 'masonry-container' );
+				$( this ).find( '.uix-gallery__item' ).addClass( 'masonry-item' );
+			}
+			
+			// Filterable
+			if ( type.indexOf( 'filter' ) >= 0  ) {
+				$( this ).addClass( 'filter-container' );
+				$( this ).find( '.uix-gallery__item' ).addClass( 'filter-item' );	
+			}	
+		
+		});
+	
+	    /*--  Function of Masonry  --*/
+		var masonryObj = $( '.masonry-container .uix-gallery-tiles' );
+		imagesLoaded( masonryObj ).on( 'always', function() {
+			  masonryObj.masonry({
+				itemSelector: '.masonry-item'
+			  });  
+		});
+		
+		
+	    /*--  Function of Filterable  --*/
+		if ( $( "[data-show-type]" ).length > 0 ) {
+			if ( $( "[data-show-type]" ).data( 'show-type' ).indexOf( 'filter' ) >= 0 ) {
+				
+				$( '.uix-gallery' ).each( function() {
+					var filterCat      = $( this ).data( 'filter-id' ),
+						$grid          = $( this ).find( '.uix-gallery-tiles' ),
+						$filterOptions = $( filterCat );
+						
+					imagesLoaded( $grid ).on( 'always', function() {
+						
+						 $grid.shuffle({
+							itemSelector : '.filter-item',
+							speed        : 550, // Transition/animation speed (milliseconds).
+							easing       : 'ease-out', // CSS easing function to use.
+							sizer        : null // Sizer element. Use an element to determine the size of columns and gutters.
+						  });
+						  
+						
+						$filterOptions.find( 'li > a' ).on( 'click', function() {
+							  var $this       = $( this ),
+								  activeClass = 'current-cat',
+								  isActive    = $this.hasClass( activeClass ),
+								  group       = isActive ? 'all' : $this.data( 'group' );
+						
+							  // Hide current label, show current label in title
+							  if ( !isActive ) {
+								$filterOptions.find( '.' + activeClass ).removeClass( activeClass );
+							  }
+						
+							  $this.toggleClass( activeClass );
+						
+							  // Filter elements
+							  $grid.shuffle( 'shuffle', group );
+							  
+							  return false;	
+						});
+					
+			
+					});
+	
+					
+				} );
+		
+				
+			} else {
+				$( '[data-group="all"]' ).parent( 'li' ).hide();
+			}
+	
+		}
+		
+		
+		
+    };
+
+    APP.components.documentReady.push( APP.GALLERY.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+
+/* 
+ *************************************
  * <!-- Form Progress -->
  *************************************
  */
@@ -13199,108 +13414,6 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
- * <!-- Gallery -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.GALLERY               = APP.GALLERY || {};
-	APP.GALLERY.version       = '0.0.1';
-    APP.GALLERY.documentReady = function( $ ) {
-
-		$( '.uix-gallery' ).each( function() {
-			var type = $( this ).data( 'show-type' );
-			
-			// Masonry
-			if ( type.indexOf( 'masonry' ) >= 0  ) {
-				$( this ).addClass( 'masonry-container' );
-				$( this ).find( '.uix-gallery__item' ).addClass( 'masonry-item' );
-			}
-			
-			// Filterable
-			if ( type.indexOf( 'filter' ) >= 0  ) {
-				$( this ).addClass( 'filter-container' );
-				$( this ).find( '.uix-gallery__item' ).addClass( 'filter-item' );	
-			}	
-		
-		});
-	
-	    /*--  Function of Masonry  --*/
-		var masonryObj = $( '.masonry-container .uix-gallery-tiles' );
-		imagesLoaded( masonryObj ).on( 'always', function() {
-			  masonryObj.masonry({
-				itemSelector: '.masonry-item'
-			  });  
-		});
-		
-		
-	    /*--  Function of Filterable  --*/
-		if ( $( "[data-show-type]" ).length > 0 ) {
-			if ( $( "[data-show-type]" ).data( 'show-type' ).indexOf( 'filter' ) >= 0 ) {
-				
-				$( '.uix-gallery' ).each( function() {
-					var filterCat      = $( this ).data( 'filter-id' ),
-						$grid          = $( this ).find( '.uix-gallery-tiles' ),
-						$filterOptions = $( filterCat );
-						
-					imagesLoaded( $grid ).on( 'always', function() {
-						
-						 $grid.shuffle({
-							itemSelector : '.filter-item',
-							speed        : 550, // Transition/animation speed (milliseconds).
-							easing       : 'ease-out', // CSS easing function to use.
-							sizer        : null // Sizer element. Use an element to determine the size of columns and gutters.
-						  });
-						  
-						
-						$filterOptions.find( 'li > a' ).on( 'click', function() {
-							  var $this       = $( this ),
-								  activeClass = 'current-cat',
-								  isActive    = $this.hasClass( activeClass ),
-								  group       = isActive ? 'all' : $this.data( 'group' );
-						
-							  // Hide current label, show current label in title
-							  if ( !isActive ) {
-								$filterOptions.find( '.' + activeClass ).removeClass( activeClass );
-							  }
-						
-							  $this.toggleClass( activeClass );
-						
-							  // Filter elements
-							  $grid.shuffle( 'shuffle', group );
-							  
-							  return false;	
-						});
-					
-			
-					});
-	
-					
-				} );
-		
-				
-			} else {
-				$( '[data-group="all"]' ).parent( 'li' ).hide();
-			}
-	
-		}
-		
-		
-		
-    };
-
-    APP.components.documentReady.push( APP.GALLERY.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
-
-/* 
- *************************************
  * <!-- Image Shapes -->
  *************************************
  */	
@@ -13410,7 +13523,7 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
- * <!-- Custom Core Scripts  -->
+ * <!-- Theme Scripts  -->
  *************************************
  */
 
@@ -13436,6 +13549,91 @@ APP = ( function ( APP, $, window, document ) {
     APP.components.pageLoaded.push( APP.INDEX.pageLoaded );
 	
 	
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+
+
+/* 
+ *************************************
+ * <!-- Lava-Lamp Style Menu -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.LAVA_LAMP_STYLE_MENU               = APP.LAVA_LAMP_STYLE_MENU || {};
+	APP.LAVA_LAMP_STYLE_MENU.version       = '0.0.1';
+    APP.LAVA_LAMP_STYLE_MENU.documentReady = function( $ ) {
+
+
+		
+		var $menuContainer = $( '.uix-lavalamp-menu__container' ),
+		    menu           = 'ul.uix-lavalamp-menu',
+			line           = menu + ' .uix-lavalamp-menu__slide-line';
+		
+		
+		//Prevent this module from loading in other pages
+		if ( $menuContainer.length == 0 ) return false;
+		
+
+		
+		// adds sliding underline HTML
+		$( menu ).append('<span class="uix-lavalamp-menu__slide-line"></span>');
+
+		// set initial position of slide line
+		TweenMax.set( line, {
+			css: {
+				width: 0,
+				x: 0,
+				y: 0
+			}
+		});
+		
+		
+		function nemuLineGo( index ) {
+			
+			var $this  = $( menu + ' > li' ).eq( index ).find( 'a' ),
+			    offset = $this.offset(),
+				
+			//find the offset of the wrapping div  
+			offsetBody = $( '.uix-lavalamp-menu__container' ).offset();
+
+			// GSAP animate to clicked menu item
+			TweenMax.to( line, 1, {
+				css: {
+					width  : $this.outerWidth() + 'px',
+					x      : ( offset.left - offsetBody.left ) + 'px'
+				},
+				ease: Elastic.easeOut.config(1, 0.5)
+			});
+			
+			
+			
+	
+		}
+
+		// animate slide-line on click
+		$( document ).on( 'mouseover', menu + ' > li a', function() {
+
+			nemuLineGo( $( this ).parent().index() );
+
+		});
+		
+
+		
+		nemuLineGo( 0 );
+		
+
+
+		
+    };
+
+    APP.components.documentReady.push( APP.LAVA_LAMP_STYLE_MENU.documentReady );
     return APP;
 
 }( APP, jQuery, window, document ) );
@@ -14266,7 +14464,7 @@ APP = ( function ( APP, $, window, document ) {
 							
 							//--------- Apply the original scripts
 							$( document ).applyOriginalSomeScripts({
-								scrollReveal : false,
+								scrollReveal : true,
 								ajaxPostList : false
 							});
 
@@ -17393,6 +17591,8 @@ APP = ( function ( APP, $, window, document ) {
 		$( '.uix-tabs' ).each( function( id ) {
 			var $this             = $( this ),
 			    $li               = $this.find( 'ul > li' ),
+				liWidth           = $li.first().outerWidth(),
+				liHeight          = $li.first().outerHeight(),
 				liNum             = $li.length,
 				$contentbox       = $this.find( '.uix-tabs__content' ),
 				ulWidth           = $this.data( 'width' ),
@@ -17400,6 +17600,9 @@ APP = ( function ( APP, $, window, document ) {
 				rotation          = $this.data( 'rotation' ),
 				rotationRadius    = $this.data( 'rotation-radius' ),
 				rotationWapperDeg = $this.data( 'rotation-wrapper-angle' ),
+				rotationDisplay   = $this.data( 'rotation-display' ),
+				
+				
 				
 				tabBoxID          = id,
 				isNumeric         = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
@@ -17417,7 +17620,12 @@ APP = ( function ( APP, $, window, document ) {
 			
 			if( typeof rotationWapperDeg === typeof undefined ) {
 				rotationWapperDeg = 0;
+			}	
+			
+			if( typeof rotationDisplay === typeof undefined ) {
+				rotationDisplay = 5;
 			}		
+			
 			
 			
 			$li.each( function( index ) {
@@ -17433,33 +17641,56 @@ APP = ( function ( APP, $, window, document ) {
 			
 			// Tab Rotation Effect
 			if ( rotation ) {
-				
-				var increase   = Math.PI * 2 / liNum,
-					radius     = rotationRadius,
-					angle      = 0;
-				
-				//Initialize button position
-				$this.find( 'ul' ).css({
-							'transform'         : 'rotate('+ parseFloat( rotationWapperDeg ) +'deg)'
-						})
-						.find( '> li' )
-						.css({
-								'transform'         : 'rotate('+ -parseFloat( rotationWapperDeg )+'deg)'
-							});
-				
-				
-				$li.each( function( index ) {
-					$( this ).css( {
-						'left'              : Math.cos( - Math.PI / 2 + index * increase) * radius + 'px',
-						'top'               : Math.sin( - Math.PI / 2 + index * increase) * radius + 'px'
-					} );
-					
+		
+				$this.find( '.uix-tabs__nav' ).css( {
+					'width'      : rotationRadius * 2 + 'px'
+				} );
 
+		
+				$this.find( 'ul' ).css( {
+					'width'     : rotationRadius * 2 + 'px',
+					'height'    : rotationRadius * 2 + 'px',
+					'transform' : 'rotate('+parseFloat(rotationWapperDeg)+'deg)'
+				} );
+
+				
+
+				//Layout components in a circle layout
+				var angle           = 0,
+					step            = 2 * Math.PI / rotationDisplay,
+					transitionDelay = 0,
+					pad             = $this.find( 'ul' ).width();
+
+
+				$this.find( 'ul > li' ).each( function() { //Can'nt use arrow function here!!!
+					// 'this' works differently with arrow fucntions
+					var el          = $( this ),
+						x           = rotationRadius * Math.cos(angle) - liWidth / 2,
+						y           = rotationRadius * Math.sin(angle) - liHeight / 2;
+
+
+					el.css({
+						'transform'        : 'translate('+parseFloat( x )+'px,'+parseFloat( pad/2 + y )+'px)',
+						'transition-delay' : transitionDelay + "s"
+					})
+					.find( '> a' )
+					.css({
+						'transform'        : 'rotate('+parseFloat(-rotationWapperDeg)+'deg)'
+					});
+
+
+					angle += step;
+					transitionDelay += 0.15;
 					
-					$( this ).on( 'click', function( e ) {
+					
+					
+					//Click on the rotation effect
+					//----------------------- begin ----------------------
+					el.on( 'click', function( e ) {
 						
-						var n        = $(this).index(),
-							endAngle = n % liNum * increase; 
+						var increase   = Math.PI * 2 / rotationDisplay,
+							n          = $( this ).index(),
+							endAngle   = n % rotationDisplay * increase; 
 
 
 						( function turn() {
@@ -17470,23 +17701,35 @@ APP = ( function ( APP, $, window, document ) {
 							} else {
 								angle = endAngle;
 							}
+							
+							
+						
+							$this.find( 'ul > li' ).each( function( index ) {
+								var x2           = Math.cos( - Math.PI / 2 + index * increase - angle) * rotationRadius - liWidth / 2,
+									y2           = Math.sin( - Math.PI / 2 + index * increase - angle) * rotationRadius + liHeight;
 
+							
+								$( this ).css({
+									'transform'        : 'translate('+parseFloat( x2 )+'px,'+parseFloat( y2 )+'px)',
+									'transition'       : 'none',
+									'transition-delay' : 0
+								})
+								.find( '> a' )
+								.css({
+									'transform'        : 'rotate('+parseFloat(-rotationWapperDeg)+'deg)'
+								});
 
-							$li.each( function( index ) {
-								$( this ).css( {
-									'left'        : Math.cos( - Math.PI / 2 + index * increase - angle) * radius + 'px',
-									'top'         : Math.sin( - Math.PI / 2 + index * increase - angle) * radius + 'px'
-								} );
+							});
 
-							});	
-
-
+														 
 						})();	
 						
 					});
+					//----------------------- end ----------------------
+					
 					
 				});	
-				
+
 
 				
 			}
@@ -18832,48 +19075,62 @@ APP = ( function ( APP, $, window, document ) {
 
 			
 			//----
-			APP.COMMON_HEIGHT.pageLoaded(); //Common Height
-			APP.LIGHTBOX.pageLoaded(); //Custom Lightbox
-			APP.ADVANCED_SLIDER.pageLoaded(); //Advanced Slider (Basic)
-			APP.ADVANCED_SLIDER_FILTER.pageLoaded(); //Advanced Slider (Special Effects)	
-			APP.POST_LIST_SPLIT_FULLWIDTH.pageLoaded(); //Fullwidth List of Split
-			APP.STICKY_EL.pageLoaded(); //Sticky Elements
-			APP.TEXT_EFFECT.pageLoaded(); //Text effect
-			APP.TIMELINE.pageLoaded(); //Timeline
+			if ( APP.INDEX ) APP.INDEX.pageLoaded(); //Theme Scripts
+			if ( APP.COMMON_HEIGHT ) APP.COMMON_HEIGHT.pageLoaded(); //Common Height
+			if ( APP.LIGHTBOX ) APP.LIGHTBOX.pageLoaded(); //Custom Lightbox
+			if ( APP.ADVANCED_SLIDER ) APP.ADVANCED_SLIDER.pageLoaded(); //Advanced Slider (Basic)
+			if ( APP.ADVANCED_SLIDER_FILTER ) APP.ADVANCED_SLIDER_FILTER.pageLoaded(); //Advanced Slider	
+			if ( APP.POST_LIST_SPLIT_FULLWIDTH ) APP.POST_LIST_SPLIT_FULLWIDTH.pageLoaded(); //Fullwidth List of Split
+			if ( APP.STICKY_EL ) APP.STICKY_EL.pageLoaded(); //Sticky Elements
+			if ( APP.TEXT_EFFECT ) APP.TEXT_EFFECT.pageLoaded(); //Text effect
+			if ( APP.TIMELINE ) APP.TIMELINE.pageLoaded(); //Timeline
 			
 		
 			//----
-			APP.MODAL_DIALOG.documentReady($); //Modal Dialog
-			APP.PARALLAX.documentReady($); //Parallax
-			APP.VIDEOS.documentReady($); //Videos
-			APP.BODY_AND_HEADER.documentReady($); //Header Area
-			APP.SET_BG.documentReady($); //Specify a background image
-			APP.GET_CUSTOM_ATTRS.documentReady($); //Get all custom attributes of an element like "data-*"
-			APP.PAGINATION.documentReady($); //Pagination
-			APP.FORM.documentReady($); //Form
-			APP.DYNAMIC_DD_LIST.documentReady($); //Dynamic Drop Down List from JSON
-			APP.FLEXSLIDER.documentReady($); //Flexslider
-			APP.RETINA.documentReady($); //Retina Graphics for Website
-			APP.SHOW_MORELESS.documentReady($); //Show More Less
-			APP.DROPDOWN_MENU.documentReady($); //Dropdown Menu
-			APP.DROPDOWN_MENU2.documentReady($); //Dropdown Menu2
-			APP.COUNTER.documentReady($); //Counter
-			APP._3D_BACKGROUND.documentReady($); //3D Background
-			APP.ACCORDION.documentReady($); //Accordion	
-			APP.ADVANCED_CONTENT_SLIDER.documentReady($); //Advanced Content Slider
-			APP.GALLERY.documentReady($); //Gallery
-			APP.IMAGE_SHAPES.documentReady($); //Image Shapes
-			APP.PERIODICAL_SCROLL.documentReady($); //Periodical Scroll
-			APP.PRICING.documentReady($); //Pricing
-			APP.PROGRESSBAR.documentReady($); //Progress Bar
-			APP.ROTATING_EL.documentReady($); //Rotating Elements
-			APP.SMOOTH_SCROLLING_ANCHORLINK.documentReady($); //Smooth Scrolling When Clicking An Anchor Link
-			APP.TABS.documentReady($); //Tabs
-			APP.TEAM_FOCUS.documentReady($); //Team Focus
-			APP.TESTIMONIALS.documentReady($); //Testimonials Carousel
+			if ( APP.INDEX ) APP.INDEX.documentReady($); //Theme Scripts
+			if ( APP.MODAL_DIALOG ) APP.MODAL_DIALOG.documentReady($); //Modal Dialog
+			if ( APP.PARALLAX ) APP.PARALLAX.documentReady($); //Parallax
+			if ( APP.VIDEOS ) APP.VIDEOS.documentReady($); //Videos
+			if ( APP.BODY_AND_HEADER ) APP.BODY_AND_HEADER.documentReady($); //Header Area
+			if ( APP.SET_BG ) APP.SET_BG.documentReady($); //Specify a background image
+			if ( APP.GET_CUSTOM_ATTRS ) APP.GET_CUSTOM_ATTRS.documentReady($); //Get all custom attributes of an element like "data-*"
+			if ( APP.PAGINATION ) APP.PAGINATION.documentReady($); //Pagination
+			if ( APP.FORM ) APP.FORM.documentReady($); //Form
+			if ( APP.DYNAMIC_DD_LIST ) APP.DYNAMIC_DD_LIST.documentReady($); //Dynamic Drop Down List from JSON
+			if ( APP.FLEXSLIDER ) APP.FLEXSLIDER.documentReady($); //Flexslider
+			if ( APP.RETINA ) APP.RETINA.documentReady($); //Retina Graphics for Website
+			if ( APP.SHOW_MORELESS ) APP.SHOW_MORELESS.documentReady($); //Show More Less
+			if ( APP.DROPDOWN_MENU ) APP.DROPDOWN_MENU.documentReady($); //Dropdown Menu
+			if ( APP.DROPDOWN_MENU2 ) APP.DROPDOWN_MENU2.documentReady($); //Dropdown Menu2
+			if ( APP.COUNTER ) APP.COUNTER.documentReady($); //Counter
+			if ( APP.ACCORDION ) APP.ACCORDION.documentReady($); //Accordion	
+			if ( APP.ADVANCED_CONTENT_SLIDER ) APP.ADVANCED_CONTENT_SLIDER.documentReady($); //Advanced Content Slider
+			if ( APP.GALLERY ) APP.GALLERY.documentReady($); //Gallery
+			if ( APP.IMAGE_SHAPES ) APP.IMAGE_SHAPES.documentReady($); //Image Shapes
+			if ( APP.PERIODICAL_SCROLL ) APP.PERIODICAL_SCROLL.documentReady($); //Periodical Scroll
+			if ( APP.PRICING ) APP.PRICING.documentReady($); //Pricing
+			if ( APP.PROGRESSBAR ) APP.PROGRESSBAR.documentReady($); //Progress Bar
+			if ( APP.ROTATING_EL ) APP.ROTATING_EL.documentReady($); //Rotating Elements
+			if ( APP.SMOOTH_SCROLLING_ANCHORLINK ) APP.SMOOTH_SCROLLING_ANCHORLINK.documentReady($); //Smooth Scrolling When Clicking An Anchor Link
+			if ( APP.TABS ) APP.TABS.documentReady($); //Tabs
+			if ( APP.TEAM_FOCUS ) APP.TEAM_FOCUS.documentReady($); //Team Focus
+			if ( APP.TESTIMONIALS ) APP.TESTIMONIALS.documentReady($); //Testimonials Carousel
+			if ( APP.LAVA_LAMP_STYLE_MENU ) APP.LAVA_LAMP_STYLE_MENU.documentReady($); //Lava-Lamp Style Menu
+			if ( APP.CIRCLE_LAYOUT ) APP.CIRCLE_LAYOUT.documentReady($); //Circle Layout
+			if ( APP.MULTI_ITEMS_CAROUSEL ) APP.MULTI_ITEMS_CAROUSEL.documentReady($); //Multiple Items Carousel
+			if ( APP._3D_BACKGROUND ) APP._3D_BACKGROUND.documentReady($); //3D Background
+			if ( APP._3D_CAROUSEL ) APP._3D_CAROUSEL.documentReady($); //3D Carousel
 			
-			if ( settings.scrollReveal ) APP.SCROLL_REVEAL.documentReady($); //Scroll Reveal
-			if ( settings.ajaxPostList ) APP.POST_LIST_AJAX.documentReady($); //Posts List With Ajax
+			
+			//Scroll Reveal
+			if ( settings.scrollReveal ) {
+				if ( APP.SCROLL_REVEAL ) APP.SCROLL_REVEAL.documentReady($); 
+			}
+			
+			//Posts List With Ajax
+			if ( settings.ajaxPostList ) {
+				if ( APP.POST_LIST_AJAX ) APP.POST_LIST_AJAX.documentReady($); 
+			}
 			
 			
 			
@@ -18881,7 +19138,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
-			//----Uix Shortcodes
+			//----Uix Shortcodes (WordPress Plugin)
 			if ( $.isFunction( $.uix_sc_init ) ) {
 				$.uix_sc_init();
 			}

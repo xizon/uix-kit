@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.9.7
- * ## Last Update         :  July 25, 2018
+ * ## Version             :  1.9.8
+ * ## Last Update         :  July 31, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -37,8 +37,8 @@
 	GLOBAL SPACING HIERARCHY WITH <section>
 	---------------------------
 	
-    Default                    :    6.5625rem
     Large                      :    11.375rem
+    Medium                     :    6.5625rem
     Small                      :    4.8125rem
     Default (mobile)           :    4.265625rem
     Large (mobile)             :    4.265625rem
@@ -101,59 +101,61 @@
     36. Breadcrumbs 
     37. Button 
     38. Cards 
-    39. Counter 
-    40. Dividing Line 
-    41. Dots 
-    42. Dotted Line 
-    43. Dropdown Menu 
+    39. Circle Layout 
+    40. Counter 
+    41. Dividing Line 
+    42. Dots 
+    43. Dotted Line 
     44. Dropdown Menu 2 (Multi-level drop-down navigation) 
-    45. Equal-width Columns 
-    46. Features 
-    47. Flexslider 
-    48. Footer Templates 
-    49. Form 
-    50. Form Progress 
-    51. Gallery 
-    52. Heading 
-    53. Image Animation 
-    54. Image Shapes 
-    55. Custom Core Scripts & Stylesheets 
-    56. Cutom Light Box 
-    57. Brands List 
-    58. Bulleted List 
-    59. Maintain Aspect Ratio List 
-    60. List of Posts 
-    61. List of Split Posts 
-    62. Side by Side List 
-    63. Side by Side List With Photo 
-    64. Fullwidth List of Split 2 
-    65. Fullwidth List of Split 
-    66. Mouse Animation Scroll 
-    67. Multiple Items Carousel 
-    68. Overlay 
-    69. Parallax 
-    70. Progress Bar 
-    71. Pricing 
+    45. Dropdown Menu 
+    46. Equal-width Columns 
+    47. Features 
+    48. Flexslider 
+    49. Footer Templates 
+    50. Form 
+    51. Form Progress 
+    52. Gallery 
+    53. Heading 
+    54. Image Animation 
+    55. Image Shapes 
+    56. Custom Core Scripts & Stylesheets 
+    57. Lava-Lamp Style Menu 
+    58. Cutom Light Box 
+    59. Brands List 
+    60. Bulleted List 
+    61. Maintain Aspect Ratio List 
+    62. List of Posts 
+    63. List of Split Posts 
+    64. Side by Side List 
+    65. Side by Side List With Photo 
+    66. Fullwidth List of Split 2 
+    67. Fullwidth List of Split 
+    68. Mouse Animation Scroll 
+    69. Multiple Items Carousel 
+    70. Overlay 
+    71. Parallax 
     72. Periodical Scroll 
-    73. Ribbon 
-    74. Shape Animation 
-    75. Show More Less 
-    76. Single Post 
-    77. Source Code 
-    78. Striking 
-    79. Tabs 
-    80. Team Focus 
-    81. Team Fullwidth (Style using the Side by Side List With Photo module) 
-    82. Team Gird 
-    83. Testimonials Carousel 
-    84. Text effect 
-    85. Timeline 
-    86. ToolTip 
-    87. Vertical Menu 
-    88. Vertical Separator 
-    89. Wave Background 
-    90. WordPress Core ( Do not use prefix "uix-" ) 
-    91. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    73. Pricing 
+    74. Progress Bar 
+    75. Ribbon 
+    76. Shape Animation 
+    77. Show More Less 
+    78. Single Post 
+    79. Source Code 
+    80. Striking 
+    81. Tabs 
+    82. Team Focus 
+    83. Team Fullwidth (Style using the Side by Side List With Photo module) 
+    84. Team Gird 
+    85. Testimonials Carousel 
+    86. Text effect 
+    87. Timeline 
+    88. ToolTip 
+    89. Vertical Menu 
+    90. Vertical Separator 
+    91. Wave Background 
+    92. WordPress Core ( Do not use prefix "uix-" ) 
+    93. Ajax Page Loader (Loading A Page via Ajax Into Div)  
 
 
 
@@ -1390,12 +1392,6 @@ h6 {
  4. Text Effect
  ---------------------------
  */
-/* Without spacing */
-.uix-typo--no-spacing {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
 .uix-typo--style-normal {
   font-family: "Helvetica Neue", Helvetica, "Microsoft YaHei", STXihei, "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
   font-weight: 400 !important;
@@ -1575,70 +1571,61 @@ h6 {
 /* ====================================================== 
    <!-- Spacing -->                                
 /* ====================================================== */
-section,
-.uix-section {
+.uix-spacing--s {
+  position: relative;
+  padding: 4.8125rem 0;
+}
+
+.uix-spacing--m {
   position: relative;
   padding: 6.5625rem 0;
 }
 
-section.uix-section--sm,
-.uix-section.uix-section--sm {
-  padding: 4.8125rem 0;
-}
-
-section.uix-section--lg,
-.uix-section.uix-section--lg {
+.uix-spacing--l {
+  position: relative;
   padding: 11.375rem 0;
 }
 
-section.uix-section--no-spacing,
-.uix-section.uix-section--no-spacing {
-  padding: 0 !important;
-}
-
-section.uix-section--no-spacing-top,
-.uix-section.uix-section--no-spacing-top {
+.uix-spacing--no-top {
   padding-top: 0 !important;
 }
 
-section.uix-section--no-spacing-bottom,
-.uix-section.uix-section--no-spacing-bottom {
+.uix-spacing--no-bottom {
   padding-bottom: 0 !important;
 }
 
-section.uix-section--googlemap,
-.uix-section.uix-section--googlemap {
+.uix-spacing--googlemap {
   padding-top: 0 !important;
 }
 
+/* Without spacing */
+.uix-spacing--no {
+  padding: 0 !important;
+  margin: 0 !important;
+  /* compatible with <p>, <h1>, <h2>, <h3>... */
+}
+
 @media all and (max-width: 768px) {
-  section,
-  .uix-section {
-    padding: 4.26562rem 0;
-  }
-  section.uix-section--sm,
-  .uix-section.uix-section--sm {
+  .uix-spacing--s {
     padding: 2.625rem 0;
   }
-  section.uix-section--lg,
-  .uix-section.uix-section--lg {
+  .uix-spacing--m {
     padding: 4.26562rem 0;
   }
-  section.uix-section--no-spacing,
-  .uix-section.uix-section--no-spacing {
-    padding: 0;
+  .uix-spacing--l {
+    padding: 4.26562rem 0;
   }
-  section.uix-section--no-spacing-top,
-  .uix-section.uix-section--no-spacing-top {
+  .uix-spacing--no-top {
     padding-top: 0;
   }
-  section.uix-section--no-spacing-bottom,
-  .uix-section.uix-section--no-spacing-bottom {
+  .uix-spacing--no-bottom {
     padding-bottom: 0;
   }
-  section.uix-section--googlemap,
-  .uix-section.uix-section--googlemap {
+  .uix-spacing--googlemap {
     padding-top: 0;
+  }
+  .uix-spacing--no {
+    padding: 0;
   }
 }
 
@@ -1651,6 +1638,7 @@ section.uix-section--googlemap,
  * 3. Main Wrapper                               
  * 4. Seamless Grid (Core Grid)
  * 5. Auxiliary Grid System for Inline Elements (Subordinate Grid)
+ * 6. Align Wide and Full Classes For Elements
 */
 /* 
  ---------------------------
@@ -2007,6 +1995,18 @@ section.uix-section--googlemap,
   .uix-el-grid__col-stack {
     width: 100%;
   }
+}
+
+/* 
+ ---------------------------
+ 6. Align Wide and Full Classes For Elements
+ ---------------------------
+ */
+.uix-alignfull {
+  margin-left: calc( -100vw / 2 + 100% / 2);
+  margin-right: calc( -100vw / 2 + 100% / 2);
+  max-width: 100vw;
+  width: 100vw;
 }
 
 /* ====================================================== 
@@ -6270,6 +6270,210 @@ h3[data-counter-number] {
 }
 
 /* ====================================================== 
+    <!-- Circle Layout -->      
+/* ====================================================== */
+/* Pure CSS */
+.uix-circle-layout:not(.js-uix-circle-layout) {
+    position: relative;
+    width: 300px;
+  /* Without JavaScript */;
+}
+
+.uix-circle-layout:not(.js-uix-circle-layout) ul {
+    box-sizing: border-box;
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+.uix-circle-layout:not(.js-uix-circle-layout) ul ~ div {
+    display: block;
+    position: absolute;
+    z-index: 1;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: #EC5E79;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(0) !important;
+  /* Prevent scripts from modifying values */;
+}
+
+.uix-circle-layout:not(.js-uix-circle-layout) ul ~ div > div {
+    padding: 2.5rem;
+    overflow: hidden;
+    height: calc(100% - 5rem);
+}
+
+.uix-circle-layout:not(.js-uix-circle-layout) li {
+    transition: all 0.1s ease;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 0;
+    left: 50%;
+    margin: -20px 0 0 -20px;
+    transform-origin: 20px 170px;
+    border-radius: 50%;
+    border: 1px solid gray;
+    list-style: none;
+    line-height: 40px;
+    background-color: #fff;
+    z-index: 2;
+}
+
+.uix-circle-layout:not(.js-uix-circle-layout) li > a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.uix-circle-layout:not(.js-uix-circle-layout) li:nth-child(1) {
+    transform: rotate(45deg);
+}
+
+.uix-circle-layout:not(.js-uix-circle-layout) li:nth-child(1) > a {
+    transform: rotate(-45deg);
+}
+
+.uix-circle-layout:not(.js-uix-circle-layout) li:nth-child(2) {
+    transform: rotate(90deg);
+}
+
+.uix-circle-layout:not(.js-uix-circle-layout) li:nth-child(2) > a {
+    transform: rotate(-90deg);
+}
+
+.uix-circle-layout:not(.js-uix-circle-layout) li:nth-child(3) {
+    transform: rotate(135deg);
+}
+
+.uix-circle-layout:not(.js-uix-circle-layout) li:nth-child(3) > a {
+    transform: rotate(-135deg);
+}
+
+.uix-circle-layout:not(.js-uix-circle-layout) li:nth-child(4) {
+    transform: rotate(180deg);
+}
+
+.uix-circle-layout:not(.js-uix-circle-layout) li:nth-child(4) > a {
+    transform: rotate(-180deg);
+}
+
+.uix-circle-layout:not(.js-uix-circle-layout) li:nth-child(5) {
+    transform: rotate(225deg);
+}
+
+.uix-circle-layout:not(.js-uix-circle-layout) li:nth-child(5) > a {
+    transform: rotate(-225deg);
+}
+
+.uix-circle-layout:not(.js-uix-circle-layout) li:nth-child(6) {
+    transform: rotate(270deg);
+}
+
+.uix-circle-layout:not(.js-uix-circle-layout) li:nth-child(6) > a {
+    transform: rotate(-270deg);
+}
+
+.uix-circle-layout:not(.js-uix-circle-layout) li:nth-child(7) {
+    transform: rotate(315deg);
+}
+
+.uix-circle-layout:not(.js-uix-circle-layout) li:nth-child(7) > a {
+    transform: rotate(-315deg);
+}
+
+.uix-circle-layout:not(.js-uix-circle-layout) li:nth-child(8) {
+    transform: rotate(360deg);
+}
+
+.uix-circle-layout:not(.js-uix-circle-layout) li:nth-child(8) > a {
+    transform: rotate(-360deg);
+}
+
+/* With Javascript, Support dynamically adding elements. */
+.uix-circle-layout.js-uix-circle-layout {
+    position: relative;
+    width: 300px;
+  /* Without JavaScript */;
+}
+
+.uix-circle-layout.js-uix-circle-layout ul {
+    box-sizing: border-box;
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+.uix-circle-layout.js-uix-circle-layout ul ~ div {
+    display: block;
+    position: absolute;
+    z-index: 1;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: #EC5E79;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(0) !important;
+  /* Prevent scripts from modifying values */;
+}
+
+.uix-circle-layout.js-uix-circle-layout ul ~ div > div {
+    padding: 2.5rem;
+    overflow: hidden;
+    height: calc(100% - 5rem);
+}
+
+.uix-circle-layout.js-uix-circle-layout li {
+    transition: all 0.1s ease;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 0;
+    left: 50%;
+    margin: -20px 0 0 -20px;
+    transform-origin: 20px 170px;
+    border-radius: 50%;
+    border: 1px solid gray;
+    list-style: none;
+    line-height: 40px;
+    background-color: #fff;
+    z-index: 2;
+}
+
+.uix-circle-layout.js-uix-circle-layout li > a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+/* Center alignment */
+.uix-t-c .uix-circle-layout {
+    margin: 0 auto;
+}
+
+/* ====================================================== 
    <!-- Dividing Line -->    
 /* ====================================================== */
 .uix-separator-base {
@@ -6346,6 +6550,90 @@ h3[data-counter-number] {
 
 .uix-separator-shadow.uix-separator-shadow--black span i {
     box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+}
+
+/* ====================================================== 
+   <!-- Dotted Line --> 
+/* ====================================================== */
+.uix-dotted-line {
+    display: inline-block;
+    margin: 1.5rem;
+    height: 300px;
+  /* Small Size */
+  /* Medium Size */
+  /* Large Size */;
+}
+
+.uix-dotted-line.uix-dotted-line--s {
+    width: 1px;
+    background: #212121;
+    background: linear-gradient(to bottom, #212121 10%, rgba(255, 255, 255, 0) 0%);
+    background-position: left;
+    background-size: 1px 8px;
+    background-repeat: repeat-y;
+}
+
+.uix-dotted-line.uix-dotted-line--s.is-horizontal {
+    background: linear-gradient(to right, #212121 10%, rgba(255, 255, 255, 0) 0%);
+    background-position: top;
+    background-size: 8px 1px;
+    background-repeat: repeat-x;
+    width: 300px;
+    height: 1px;
+}
+
+.uix-dotted-line.uix-dotted-line--s.is-circle {
+    background: radial-gradient(circle, #212121 1.5px, transparent 2px);
+    background-position: top;
+    background-size: 12px 6px;
+}
+
+.uix-dotted-line.uix-dotted-line--m {
+    width: 3px;
+    background: #212121;
+    background: linear-gradient(to bottom, #212121 20%, rgba(255, 255, 255, 0) 0%);
+    background-position: left;
+    background-size: 3px 10px;
+    background-repeat: repeat-y;
+}
+
+.uix-dotted-line.uix-dotted-line--m.is-horizontal {
+    background: linear-gradient(to right, #212121 20%, rgba(255, 255, 255, 0) 0%);
+    background-position: top;
+    background-size: 10px 3px;
+    background-repeat: repeat-x;
+    width: 300px;
+    height: 3px;
+}
+
+.uix-dotted-line.uix-dotted-line--m.is-circle {
+    background: radial-gradient(circle, #212121 1.5px, transparent 2px);
+    background-position: top;
+    background-size: 12px 6px;
+}
+
+.uix-dotted-line.uix-dotted-line--l {
+    width: 6px;
+    background: #212121;
+    background: linear-gradient(to bottom, #212121 30%, rgba(255, 255, 255, 0) 0%);
+    background-position: left;
+    background-size: 6px 12px;
+    background-repeat: repeat-y;
+}
+
+.uix-dotted-line.uix-dotted-line--l.is-horizontal {
+    background: linear-gradient(to right, #212121 30%, rgba(255, 255, 255, 0) 0%);
+    background-position: top;
+    background-size: 12px 6px;
+    background-repeat: repeat-x;
+    width: 300px;
+    height: 6px;
+}
+
+.uix-dotted-line.uix-dotted-line--l.is-circle {
+    background: radial-gradient(circle, #212121 1.5px, transparent 2px);
+    background-position: top;
+    background-size: 12px 6px;
 }
 
 /* ====================================================== 
@@ -6468,90 +6756,6 @@ h3[data-counter-number] {
     100% {
         box-shadow: 0 0 0 25px rgba(236, 94, 121, 0), 0 0 0 30px rgba(236, 94, 121, 0);
     }
-}
-
-/* ====================================================== 
-   <!-- Dotted Line --> 
-/* ====================================================== */
-.uix-dotted-line {
-    display: inline-block;
-    margin: 1.5rem;
-    height: 300px;
-  /* Small Size */
-  /* Medium Size */
-  /* Large Size */;
-}
-
-.uix-dotted-line.uix-dotted-line--s {
-    width: 1px;
-    background: #212121;
-    background: linear-gradient(to bottom, #212121 10%, rgba(255, 255, 255, 0) 0%);
-    background-position: left;
-    background-size: 1px 8px;
-    background-repeat: repeat-y;
-}
-
-.uix-dotted-line.uix-dotted-line--s.is-horizontal {
-    background: linear-gradient(to right, #212121 10%, rgba(255, 255, 255, 0) 0%);
-    background-position: top;
-    background-size: 8px 1px;
-    background-repeat: repeat-x;
-    width: 300px;
-    height: 1px;
-}
-
-.uix-dotted-line.uix-dotted-line--s.is-circle {
-    background: radial-gradient(circle, #212121 1.5px, transparent 2px);
-    background-position: top;
-    background-size: 12px 6px;
-}
-
-.uix-dotted-line.uix-dotted-line--m {
-    width: 3px;
-    background: #212121;
-    background: linear-gradient(to bottom, #212121 20%, rgba(255, 255, 255, 0) 0%);
-    background-position: left;
-    background-size: 3px 10px;
-    background-repeat: repeat-y;
-}
-
-.uix-dotted-line.uix-dotted-line--m.is-horizontal {
-    background: linear-gradient(to right, #212121 20%, rgba(255, 255, 255, 0) 0%);
-    background-position: top;
-    background-size: 10px 3px;
-    background-repeat: repeat-x;
-    width: 300px;
-    height: 3px;
-}
-
-.uix-dotted-line.uix-dotted-line--m.is-circle {
-    background: radial-gradient(circle, #212121 1.5px, transparent 2px);
-    background-position: top;
-    background-size: 12px 6px;
-}
-
-.uix-dotted-line.uix-dotted-line--l {
-    width: 6px;
-    background: #212121;
-    background: linear-gradient(to bottom, #212121 30%, rgba(255, 255, 255, 0) 0%);
-    background-position: left;
-    background-size: 6px 12px;
-    background-repeat: repeat-y;
-}
-
-.uix-dotted-line.uix-dotted-line--l.is-horizontal {
-    background: linear-gradient(to right, #212121 30%, rgba(255, 255, 255, 0) 0%);
-    background-position: top;
-    background-size: 12px 6px;
-    background-repeat: repeat-x;
-    width: 300px;
-    height: 6px;
-}
-
-.uix-dotted-line.uix-dotted-line--l.is-circle {
-    background: radial-gradient(circle, #212121 1.5px, transparent 2px);
-    background-position: top;
-    background-size: 12px 6px;
 }
 
 /* ====================================================== 
@@ -6956,6 +7160,13 @@ h3[data-counter-number] {
  2. Default Slideshow        
  ---------------------------
  */
+/* Prevent content overflow */
+.uix-flexslider,
+.uix-flexslider .uix-flexslider__inner,
+.uix-flexslider .uix-flexslider__inner > .uix-flexslider__item {
+    max-height: 100vh;
+}
+
 .uix-flexslider,
 .uix-flexslider__viewport {
     transition: .1s ease;
@@ -6973,6 +7184,11 @@ h3[data-counter-number] {
 
 .uix-flexslider__viewport {
     max-height: 200vh;
+}
+
+.uix-flexslider .uix-flexslider__inner {
+    height: 100%;
+  /* Required */;
 }
 
 .uix-flexslider .uix-flexslider__inner > .uix-flexslider__item {
@@ -9003,6 +9219,8 @@ html[xmlns] .uix-flexslider .uix-flexslider__inner {
     transition: none;
     position: relative;
     text-align: left;
+    margin-bottom: 0;
+  /* Cover the bottom spacing of the grid system */;
 }
 
 .uix-gallery .uix-gallery__item .uix-gallery__image {
@@ -9371,6 +9589,55 @@ html[xmlns] .uix-flexslider .uix-flexslider__inner {
 /* ====================================================== 
    <!-- Custom Core Scripts & Stylesheets --> 
 /* ====================================================== */
+/* ====================================================== 
+   <!-- Lava-Lamp Style Menu -->     
+/* ====================================================== */
+.uix-lavalamp-menu__container {
+  position: relative;
+  /* Required*/
+  margin: 0 auto;
+}
+
+.uix-lavalamp-menu__container ul.uix-lavalamp-menu {
+  padding: 0;
+  margin: 0;
+  /* Required*/
+  font-size: 0;
+  /*Fighting the Space Between Inline Block Elements*/
+}
+
+.uix-lavalamp-menu__container ul.uix-lavalamp-menu li {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  padding: 0 1.159375rem;
+  font-size: 1rem;
+  display: inline-block;
+  margin-right: 1.6875rem;
+  white-space: nowrap;
+  /* Required*/
+  font-size: 1rem;
+  /*Fighting the Space Between Inline Block Elements*/
+}
+
+.uix-lavalamp-menu__container ul.uix-lavalamp-menu li a {
+  display: block;
+}
+
+.uix-lavalamp-menu__container ul.uix-lavalamp-menu .uix-lavalamp-menu__slide-line {
+  display: block;
+  padding: 0;
+  margin: 0;
+  background: #EC5E79;
+  z-index: 0;
+  position: absolute;
+  top: 105%;
+  border-radius: 3px;
+  width: auto;
+  height: 5px;
+  left: 0;
+}
+
 /* ====================================================== 
    <!-- Cutom Light Box -->   
 /* ====================================================== */
@@ -9924,84 +10191,6 @@ a.uix-lightbox__original__close::after {
 }
 
 /* ====================================================== 
-   <!-- Maintain Aspect Ratio List --> 
-/* ====================================================== */
-.uix-list-aspect-ratio {
-  padding: 0 3rem;
-}
-
-.uix-list-aspect-ratio .uix-list-aspect-ratio__content {
-  padding: 3rem;
-}
-
-.uix-list-aspect-ratio .uix-list-aspect-ratio__item {
-  display: block;
-  transition: all 0.3s ease;
-  background: #212121;
-  /* Maintain Aspect Ratio 1:1*/
-  width: 100%;
-  padding-top: 100%;
-  /* 1:1 Aspect Ratio */
-  position: relative;
-  /* If you want text inside of it */
-}
-
-.uix-list-aspect-ratio .uix-list-aspect-ratio__item img,
-.uix-list-aspect-ratio .uix-list-aspect-ratio__item i,
-.uix-list-aspect-ratio .uix-list-aspect-ratio__item .disabled {
-  transition: all 0.3s ease;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 1;
-  opacity: 0;
-  width: 5rem;
-  height: auto;
-  transform: translate(-50%, -50%);
-  font-size: 5rem;
-  color: white;
-}
-
-.uix-list-aspect-ratio .uix-list-aspect-ratio__item .disabled {
-  opacity: 1;
-  z-index: 2;
-  color: rgba(255, 255, 255, 0.3);
-}
-
-.uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover {
-  background: #EC5E79;
-}
-
-.uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover img,
-.uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover i {
-  opacity: 1;
-}
-
-.uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover .disabled {
-  opacity: 0;
-}
-
-@media all and (max-width: 768px) {
-  .uix-list-aspect-ratio {
-    padding: 0;
-    padding-right: 15px;
-  }
-  .uix-list-aspect-ratio .uix-list-aspect-ratio__item img,
-  .uix-list-aspect-ratio .uix-list-aspect-ratio__item i,
-  .uix-list-aspect-ratio .uix-list-aspect-ratio__item .disabled {
-    width: 2.5rem;
-    font-size: 2.5rem;
-  }
-  .uix-list-aspect-ratio .uix-core-grid__col-4 {
-    width: 33.333333333333%;
-    float: left;
-  }
-  .uix-list-aspect-ratio .uix-list-aspect-ratio__content {
-    padding: .5rem;
-  }
-}
-
-/* ====================================================== 
    <!-- List of Posts --> 
 /* ====================================================== */
 .uix-list-topic .uix-list-topic__item {
@@ -10207,6 +10396,84 @@ a.uix-lightbox__original__close::after {
   }
   .uix-list-split .uix-list-split__item .uix-list-split__item__info > div {
     padding: 0;
+  }
+}
+
+/* ====================================================== 
+   <!-- Maintain Aspect Ratio List --> 
+/* ====================================================== */
+.uix-list-aspect-ratio {
+  padding: 0 3rem;
+}
+
+.uix-list-aspect-ratio .uix-list-aspect-ratio__content {
+  padding: 3rem;
+}
+
+.uix-list-aspect-ratio .uix-list-aspect-ratio__item {
+  display: block;
+  transition: all 0.3s ease;
+  background: #212121;
+  /* Maintain Aspect Ratio 1:1*/
+  width: 100%;
+  padding-top: 100%;
+  /* 1:1 Aspect Ratio */
+  position: relative;
+  /* If you want text inside of it */
+}
+
+.uix-list-aspect-ratio .uix-list-aspect-ratio__item img,
+.uix-list-aspect-ratio .uix-list-aspect-ratio__item i,
+.uix-list-aspect-ratio .uix-list-aspect-ratio__item .disabled {
+  transition: all 0.3s ease;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  opacity: 0;
+  width: 5rem;
+  height: auto;
+  transform: translate(-50%, -50%);
+  font-size: 5rem;
+  color: white;
+}
+
+.uix-list-aspect-ratio .uix-list-aspect-ratio__item .disabled {
+  opacity: 1;
+  z-index: 2;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover {
+  background: #EC5E79;
+}
+
+.uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover img,
+.uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover i {
+  opacity: 1;
+}
+
+.uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover .disabled {
+  opacity: 0;
+}
+
+@media all and (max-width: 768px) {
+  .uix-list-aspect-ratio {
+    padding: 0;
+    padding-right: 15px;
+  }
+  .uix-list-aspect-ratio .uix-list-aspect-ratio__item img,
+  .uix-list-aspect-ratio .uix-list-aspect-ratio__item i,
+  .uix-list-aspect-ratio .uix-list-aspect-ratio__item .disabled {
+    width: 2.5rem;
+    font-size: 2.5rem;
+  }
+  .uix-list-aspect-ratio .uix-core-grid__col-4 {
+    width: 33.333333333333%;
+    float: left;
+  }
+  .uix-list-aspect-ratio .uix-list-aspect-ratio__content {
+    padding: .5rem;
   }
 }
 
@@ -13332,39 +13599,42 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
   float: none;
 }
 
-.uix-tabs.uix-tabs--rotation {
-  height: 400px;
-}
-
 .uix-tabs.uix-tabs--rotation .uix-tabs__content {
-  position: absolute;
-  top: 0;
-  left: 400px;
-  width: 300px;
+  position: relative;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
 }
 
 .uix-tabs.uix-tabs--rotation .uix-tabs__nav {
-  width: 300px;
-  height: 300px;
   position: relative;
   margin: 0;
 }
 
 .uix-tabs.uix-tabs--rotation .uix-tabs__nav > ul {
+  box-sizing: border-box;
   position: relative;
-  display: block;
   width: 300px;
   height: 300px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
 }
 
 .uix-tabs.uix-tabs--rotation .uix-tabs__nav > ul > li {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   position: absolute;
   width: 80px;
   height: 80px;
   background: none;
   box-shadow: none;
-  transition: none;
+  z-index: 2;
+  top: 0;
+  left: 50%;
+  min-width: inherit;
+  /* Required */
 }
 
 .uix-tabs.uix-tabs--rotation .uix-tabs__nav > ul > li > a {
@@ -13381,6 +13651,11 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
   color: #fff;
 }
 
+/* Center alignment */
+.uix-t-c .uix-tabs.uix-tabs--rotation .uix-tabs__nav {
+  margin: 0 auto;
+}
+
 @media all and (max-width: 768px) {
   .uix-tabs {
     /* Tab Rotation Effect */
@@ -13388,17 +13663,8 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
   .uix-tabs:not(.uix-tabs--rotation) li {
     width: 100% !important;
   }
-  .uix-tabs.uix-tabs--rotation {
-    height: 400px;
-  }
-  .uix-tabs.uix-tabs--rotation .uix-tabs__content {
-    position: relative;
-    left: 0;
-    width: 100%;
-  }
   .uix-tabs.uix-tabs--rotation .uix-tabs__nav {
-    margin-top: 50px;
-    margin-left: 120px;
+    width: auto !important;
   }
 }
 

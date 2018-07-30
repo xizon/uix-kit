@@ -7,6 +7,7 @@
 		transition: none;
 		position: relative;
 		text-align: left;	
+		margin-bottom: 0; /* Cover the bottom spacing of the grid system */
 
 		.uix-gallery__image {
 			width: 100%;

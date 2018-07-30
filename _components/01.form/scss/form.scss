@@ -1344,7 +1344,7 @@ $controls-merge-button-width: 20%;
 		&.ui-datepicker-year {
 			 width: 90px;
 			 margin-left: 10px;
-			 border-color: #dce4e8;
+			 border-color: $control-sub-color;
 			 font-size: 12px;
 		}
 	}

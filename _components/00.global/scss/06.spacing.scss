@@ -2,63 +2,67 @@
    <!-- Spacing -->                                
 /* ====================================================== */
 
-section,
-.uix-section {
-    position: relative;
-	padding: $spacing-default 0;
-	
+.uix-spacing--s {
+	position: relative;
+	padding: $spacing-small 0;
+}
 
-	&.uix-section--sm {
-		padding: $spacing-small 0;
-	}
-
-	&.uix-section--lg {
-		padding: $spacing-large 0;
-	}
-
-	&.uix-section--no-spacing {
-		padding: 0 !important;
-	}
-
-	&.uix-section--no-spacing-top {
-		padding-top: 0 !important;
-	}
-
-	&.uix-section--no-spacing-bottom {
-		padding-bottom: 0 !important;
-	}
-
-	&.uix-section--googlemap {
-		padding-top: 0 !important;
-	}
-	
+.uix-spacing--m {
+	position: relative;
+	padding: $spacing-medium 0;
 }
 
 
+.uix-spacing--l {
+	position: relative;
+	padding: $spacing-large 0;
+}
+
+.uix-spacing--no-top {
+	padding-top: 0 !important;
+}
+
+.uix-spacing--no-bottom {
+	padding-bottom: 0 !important;
+}
+
+.uix-spacing--googlemap {
+	padding-top: 0 !important;
+}
+
+/* Without spacing */
+.uix-spacing--no {
+	padding: 0 !important;
+	margin: 0 !important;/* compatible with <p>, <h1>, <h2>, <h3>... */
+}
+
+
+
 @media all and (max-width: 768px) {
-	section,
-	.uix-section {
-		padding: $spacing-default-mobile 0;
-		
-		&.uix-section--sm {
-			padding: $spacing-small-mobile 0;
-		}
-		
-		&.uix-section--lg {
-			padding: $spacing-large-mobile 0;
-		}
-		&.uix-section--no-spacing {
-			padding: 0;
-		}
-		&.uix-section--no-spacing-top {
-			padding-top: 0;
-		}
-		&.uix-section--no-spacing-bottom {
-			padding-bottom: 0;
-		}
-		&.uix-section--googlemap {
-			padding-top: 0;
-		}		
+
+	.uix-spacing--s {
+		padding: $spacing-small-mobile 0;
+	}
+	
+	.uix-spacing--m {
+		padding: $spacing-medium-mobile 0;
+	}
+
+	.uix-spacing--l {
+		padding: $spacing-large-mobile 0;
+	}
+
+	.uix-spacing--no-top {
+		padding-top: 0;
+	}
+	.uix-spacing--no-bottom {
+		padding-bottom: 0;
+	}
+	.uix-spacing--googlemap {
+		padding-top: 0;
+	}
+	.uix-spacing--no {
+		padding: 0;
 	}
 
 }

@@ -157,7 +157,9 @@ APP = ( function ( APP, $, window, document ) {
 
 													var addressesTxt = '';
 													for ( var k2 = 0; k2 < addresses.length; k2++ ) {
-														addressesTxt += JSON.stringify( addresses[k2] ) + ',';
+														
+														//Need to filter single quotes
+														addressesTxt += JSON.stringify( addresses[k2] ).replace(/'/g, '&apos;' ) + ',';
 													}
 
 													addressesTxt = addressesTxt.replace(/,\s*$/, '' );

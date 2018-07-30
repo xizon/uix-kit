@@ -447,7 +447,7 @@ APP = ( function ( APP, $, window, document ) {
 							
 							//--------- Apply the original scripts
 							$( document ).applyOriginalSomeScripts({
-								scrollReveal : false,
+								scrollReveal : true,
 								ajaxPostList : false
 							});
 
