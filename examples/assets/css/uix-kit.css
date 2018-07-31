@@ -67,9 +67,9 @@
     2. Table 
     3. Bullet List 
     4. Helper Classes 
-    5. Typography 
-    6. Spacing 
-    7. Basic Layout Styles 
+    5. Spacing 
+    6. Basic Layout Styles 
+    7. Typography 
     8. Navigation 
     9. Header Area 
     10. Brand 
@@ -86,8 +86,8 @@
     21. Entry 
     22. Comments ( Synchronize to WordPress's class name ) 
     23. Mobile Menu 
-    24. Modal Dialog 
-    25. Onepage Menu 
+    24. Onepage Menu 
+    25. Modal Dialog 
     26. 3rd Party Plugins 
     27. 3D Background 
     28. 3D Carousel 
@@ -111,25 +111,25 @@
     46. Equal-width Columns 
     47. Features 
     48. Flexslider 
-    49. Form 
-    50. Footer Templates 
+    49. Footer Templates 
+    50. Form 
     51. Form Progress 
     52. Gallery 
     53. Heading 
     54. Image Animation 
     55. Image Shapes 
-    56. Lava-Lamp Style Menu 
-    57. Custom Core Scripts & Stylesheets 
+    56. Custom Core Scripts & Stylesheets 
+    57. Lava-Lamp Style Menu 
     58. Cutom Light Box 
     59. Brands List 
     60. Bulleted List 
-    61. List of Posts 
-    62. Maintain Aspect Ratio List 
+    61. Maintain Aspect Ratio List 
+    62. List of Posts 
     63. List of Split Posts 
     64. Side by Side List 
     65. Side by Side List With Photo 
-    66. Fullwidth List of Split 
-    67. Fullwidth List of Split 2 
+    66. Fullwidth List of Split 2 
+    67. Fullwidth List of Split 
     68. Mouse Animation Scroll 
     69. Multiple Items Carousel 
     70. Overlay 
@@ -9591,6 +9591,55 @@ html[xmlns] .uix-flexslider .uix-flexslider__inner {
    <!-- Custom Core Scripts & Stylesheets --> 
 /* ====================================================== */
 /* ====================================================== 
+   <!-- Lava-Lamp Style Menu -->     
+/* ====================================================== */
+.uix-lavalamp-menu__container {
+  position: relative;
+  /* Required*/
+  margin: 0 auto;
+}
+
+.uix-lavalamp-menu__container ul.uix-lavalamp-menu {
+  padding: 0;
+  margin: 0;
+  /* Required*/
+  font-size: 0;
+  /*Fighting the Space Between Inline Block Elements*/
+}
+
+.uix-lavalamp-menu__container ul.uix-lavalamp-menu li {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  padding: 0 1.159375rem;
+  font-size: 1rem;
+  display: inline-block;
+  margin-right: 1.6875rem;
+  white-space: nowrap;
+  /* Required*/
+  font-size: 1rem;
+  /*Fighting the Space Between Inline Block Elements*/
+}
+
+.uix-lavalamp-menu__container ul.uix-lavalamp-menu li a {
+  display: block;
+}
+
+.uix-lavalamp-menu__container ul.uix-lavalamp-menu .uix-lavalamp-menu__slide-line {
+  display: block;
+  padding: 0;
+  margin: 0;
+  background: #EC5E79;
+  z-index: 0;
+  position: absolute;
+  top: 105%;
+  border-radius: 3px;
+  width: auto;
+  height: 5px;
+  left: 0;
+}
+
+/* ====================================================== 
    <!-- Cutom Light Box -->   
 /* ====================================================== */
 /*
@@ -10046,55 +10095,6 @@ a.uix-lightbox__original__close::after {
 
 .uix-lightbox__original__target:target a.uix-lightbox__original__close {
   top: 0px;
-}
-
-/* ====================================================== 
-   <!-- Lava-Lamp Style Menu -->     
-/* ====================================================== */
-.uix-lavalamp-menu__container {
-  position: relative;
-  /* Required*/
-  margin: 0 auto;
-}
-
-.uix-lavalamp-menu__container ul.uix-lavalamp-menu {
-  padding: 0;
-  margin: 0;
-  /* Required*/
-  font-size: 0;
-  /*Fighting the Space Between Inline Block Elements*/
-}
-
-.uix-lavalamp-menu__container ul.uix-lavalamp-menu li {
-  margin: 0;
-  padding: 0;
-  position: relative;
-  padding: 0 1.159375rem;
-  font-size: 1rem;
-  display: inline-block;
-  margin-right: 1.6875rem;
-  white-space: nowrap;
-  /* Required*/
-  font-size: 1rem;
-  /*Fighting the Space Between Inline Block Elements*/
-}
-
-.uix-lavalamp-menu__container ul.uix-lavalamp-menu li a {
-  display: block;
-}
-
-.uix-lavalamp-menu__container ul.uix-lavalamp-menu .uix-lavalamp-menu__slide-line {
-  display: block;
-  padding: 0;
-  margin: 0;
-  background: #EC5E79;
-  z-index: 0;
-  position: absolute;
-  top: 105%;
-  border-radius: 3px;
-  width: auto;
-  height: 5px;
-  left: 0;
 }
 
 /* ====================================================== 
@@ -13646,6 +13646,84 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
 }
 
 /* ====================================================== 
+   <!-- Team Focus --> 
+/* ====================================================== */
+.uix-team-focus__info {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 12;
+  width: 300px;
+  padding-left: 2rem;
+  cursor: pointer;
+  opacity: 0;
+  display: none;
+}
+
+.uix-team-focus__info h4 em {
+  display: block;
+  font-size: 0.75rem !important;
+}
+
+.uix-team-focus__info h4 span {
+  display: block;
+}
+
+.uix-team-focus__info h4::after {
+  content: '';
+  display: block;
+  height: 3px;
+  width: 35px;
+  background: #EC5E79;
+  margin: .5rem 0;
+}
+
+.uix-team-focus__mask {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 11;
+  content: '';
+  width: 100vw;
+  height: 100vh;
+  background-color: transparent;
+  display: none;
+}
+
+.uix-team-focus {
+  position: relative;
+  z-index: 10;
+}
+
+.uix-team-focus > div {
+  float: left;
+  cursor: pointer;
+  z-index: 4;
+  text-align: center;
+}
+
+.uix-team-focus > div img {
+  width: 90%;
+}
+
+.uix-team-focus > div.focus {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 100px;
+  transform: translateX(-50%);
+  z-index: 5;
+  margin-left: -300px;
+}
+
+.uix-team-focus > div.focus img {
+  transform: scale(1.3);
+  box-shadow: 0 1.8vw 4vw -.7vw #cbdfee;
+}
+
+/* ====================================================== 
     <!-- Tabs -->      
 /* ====================================================== */
 /*
@@ -13807,84 +13885,6 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
   .uix-tabs.uix-tabs--rotation .uix-tabs__nav {
     width: auto !important;
   }
-}
-
-/* ====================================================== 
-   <!-- Team Focus --> 
-/* ====================================================== */
-.uix-team-focus__info {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 12;
-  width: 300px;
-  padding-left: 2rem;
-  cursor: pointer;
-  opacity: 0;
-  display: none;
-}
-
-.uix-team-focus__info h4 em {
-  display: block;
-  font-size: 0.75rem !important;
-}
-
-.uix-team-focus__info h4 span {
-  display: block;
-}
-
-.uix-team-focus__info h4::after {
-  content: '';
-  display: block;
-  height: 3px;
-  width: 35px;
-  background: #EC5E79;
-  margin: .5rem 0;
-}
-
-.uix-team-focus__mask {
-  display: block;
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 11;
-  content: '';
-  width: 100vw;
-  height: 100vh;
-  background-color: transparent;
-  display: none;
-}
-
-.uix-team-focus {
-  position: relative;
-  z-index: 10;
-}
-
-.uix-team-focus > div {
-  float: left;
-  cursor: pointer;
-  z-index: 4;
-  text-align: center;
-}
-
-.uix-team-focus > div img {
-  width: 90%;
-}
-
-.uix-team-focus > div.focus {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  height: 100px;
-  transform: translateX(-50%);
-  z-index: 5;
-  margin-left: -300px;
-}
-
-.uix-team-focus > div.focus img {
-  transform: scale(1.3);
-  box-shadow: 0 1.8vw 4vw -.7vw #cbdfee;
 }
 
 /* ====================================================== 

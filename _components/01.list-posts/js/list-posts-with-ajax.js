@@ -8,7 +8,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.POST_LIST_AJAX               = APP.POST_LIST_AJAX || {};
-	APP.POST_LIST_AJAX.version       = '0.0.5';
+	APP.POST_LIST_AJAX.version       = '0.0.6';
     APP.POST_LIST_AJAX.documentReady = function( $ ) {
 
 		$( '[data-ajax-list-json]' ).each( function() {
@@ -25,7 +25,8 @@ APP = ( function ( APP, $, window, document ) {
 				template7ID      = $this.data( 'ajax-list-temp-id' ),
 				pushContainer    = $this.data( 'ajax-list-push-container-class' ),
 				triggerActive    = $this.data( 'ajax-list-trigger-active-class' ),
-				pageParmStr      = $this.data( 'ajax-list-page-parm-str' );
+				pageParmStr      = $this.data( 'ajax-list-page-parm-str' ),
+				noneInfo         = $this.data( 'ajax-list-none-info' );
 	
 			
 			
@@ -87,6 +88,9 @@ APP = ( function ( APP, $, window, document ) {
 			if( typeof method === typeof undefined ) {
 				method = 'POST';
 			}		
+			if( typeof noneInfo === typeof undefined ) {
+				noneInfo = '{"none":"","error":""}';
+			}
 			
 			
 			
@@ -173,7 +177,7 @@ APP = ( function ( APP, $, window, document ) {
 								}
 
 
-								ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition );
+								ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition, noneInfo );
 
 
 							
@@ -244,7 +248,7 @@ APP = ( function ( APP, $, window, document ) {
 								defaultPostData = JSON.parse( '{ "'+pageParmStr.totalPage+'": '+totalPage+', "'+pageParmStr.displayPerPage+'": '+perShow+', "'+pageParmStr.currentPage+'": '+curPage+' }' );
 							}
 
-							ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition );
+							ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition, noneInfo );
 							
 							return false;
 
@@ -287,7 +291,7 @@ APP = ( function ( APP, $, window, document ) {
 								defaultPostData = JSON.parse( '{ "'+pageParmStr.totalPage+'": '+totalPage+', "'+pageParmStr.displayPerPage+'": '+perShow+', "'+pageParmStr.currentPage+'": '+curPage+' }' );
 							}
 
-							ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition );
+							ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition, noneInfo );
 
 							
 							return false;
@@ -306,6 +310,7 @@ APP = ( function ( APP, $, window, document ) {
 						//Hide the next button 
 						if ( totalPage == 1 ) {
 							$( trigger ).addClass( 'hide' );	
+
 						}
 
 						//Avoid using $( document ) to cause an asynchronous load without counting from 1
@@ -333,7 +338,7 @@ APP = ( function ( APP, $, window, document ) {
 								defaultPostData = JSON.parse( '{ "'+pageParmStr.totalPage+'": '+totalPage+', "'+pageParmStr.displayPerPage+'": '+perShow+', "'+pageParmStr.currentPage+'": '+curPage+' }' );
 							}
 
-							ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition );
+							ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition, noneInfo );
 
 							
 							return false;
@@ -367,10 +372,11 @@ APP = ( function ( APP, $, window, document ) {
 		 * @param  {string} pushContainer   - This container is used to display the loaded dynamic data.
 		 * @param  {string} method          - The type of request to make, which can be either "POST" or "GET".
 		 * @param  {boolean} addition       - Do or not append to the original content.
+		 * @param  {string} noneInfo        - Returns information of ajax asynchronous callback when the content is empty.
 		 * @return {void}                   - The constructor.
 		 */
 		
-		function ajaxLoadInit( ajaxWrapper, defaultPostData, trigger, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition ) {
+		function ajaxLoadInit( ajaxWrapper, defaultPostData, trigger, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition, noneInfo ) {
 
 			var $divRoot         = ajaxWrapper,
 				template         = document.getElementById( template7ID ).innerHTML,
@@ -385,9 +391,14 @@ APP = ( function ( APP, $, window, document ) {
 				dataType : 'json',
 				success  : function (data) { 
 					
+					
 					//If the data is empty
 					if ( data && ( data == null || Object.prototype.toString.call( data.items )=='[object String]' ) ) {
 						$button.addClass( 'hide' );
+						
+						//callback information
+						$divRoot.find( pushContainer ).after( noneInfo.none );
+						
 					}
 					
 				
@@ -463,27 +474,39 @@ APP = ( function ( APP, $, window, document ) {
 								totalPage != 1
 							) {
 								$button.addClass( 'hide' );
+								//callback information
+								$divRoot.find( pushContainer ).after( noneInfo.none );
 							}		
 							
-							if ( 
-								curPage == 1
-							) {
+							if ( curPage == 1 ) {
 								$button.addClass( 'hide' );
+								//callback information
+								$divRoot.find( pushContainer ).after( noneInfo.none );
 							}			
 							
 
 						} catch ( err ) {
 							console.log( err.message );
 							$button.addClass( 'hide' );
+							//callback information
+							$divRoot.find( pushContainer ).after( noneInfo.error );
+
 
 						}
+						
 
 						
 					}
 
 				 },
 				 error : function( XMLHttpRequest, textStatus, errorThrown ) {
+					 
+					 //The current data is empty
 					 $button.addClass( 'hide' );
+					 
+					//callback information
+					$divRoot.find( pushContainer ).after( noneInfo.none );
+					 
 					 
 				 }
 			});

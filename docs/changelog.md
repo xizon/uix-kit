@@ -5,7 +5,7 @@
 
 * New: Add a new module "SVG Map".
 * New: Add a new effect flyInOut for text animation.
-
+* New: Added return information of ajax asynchronous callback when the content is empty.
 
 
 #### = 1.9.8 (July 30, 2018) =
