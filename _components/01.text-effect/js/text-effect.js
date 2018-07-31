@@ -60,7 +60,7 @@ APP = ( function ( APP, $, window, document ) {
 				$( customControls ).html( $( customControls ).text().replace(/([^\x00-\x80]|\w)/g, "<span class='uix-letter'>$&</span>") );
 			
 			
-			
+			    //--------------
 				if( customControls.indexOf( 'fadeInRight' ) >= 0 ) {
 					txtEff = anime.timeline({loop: false})
 						  .add({
@@ -77,7 +77,7 @@ APP = ( function ( APP, $, window, document ) {
 
 				}
 			
-			
+			    //--------------
 				if( customControls.indexOf( 'zoomInDown' ) >= 0 ) {
 					txtEff = anime.timeline({loop: false})
 						  .add({
@@ -92,6 +92,23 @@ APP = ( function ( APP, $, window, document ) {
 
 				}	
 			
+			    //--------------
+				if( customControls.indexOf( 'flyInOut' ) >= 0 ) {
+					txtEff = anime.timeline({loop: false})
+					        .add({
+							targets: customControls + ' .uix-letter',
+							translateX: [40,0],
+							translateZ: 0,
+							opacity: [0,1],
+							easing: "easeOutExpo",
+							duration: speed,
+							delay: function(el, i) {
+							  return 500 + 30 * i;
+							}
+						  });
+					
+				}	
+					
 			
 
 

@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.9.8
+ * ## Version             :  2.0.0
  * ## Last Update         :  July 31, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -86,8 +86,8 @@
     21. Entry 
     22. Comments ( Synchronize to WordPress's class name ) 
     23. Mobile Menu 
-    24. Onepage Menu 
-    25. Modal Dialog 
+    24. Modal Dialog 
+    25. Onepage Menu 
     26. 3rd Party Plugins 
     27. 3D Background 
     28. 3D Carousel 
@@ -106,30 +106,30 @@
     41. Dividing Line 
     42. Dots 
     43. Dotted Line 
-    44. Dropdown Menu 2 (Multi-level drop-down navigation) 
-    45. Dropdown Menu 
+    44. Dropdown Menu 
+    45. Dropdown Menu 2 (Multi-level drop-down navigation) 
     46. Equal-width Columns 
     47. Features 
     48. Flexslider 
-    49. Footer Templates 
-    50. Form 
+    49. Form 
+    50. Footer Templates 
     51. Form Progress 
     52. Gallery 
     53. Heading 
     54. Image Animation 
     55. Image Shapes 
-    56. Custom Core Scripts & Stylesheets 
-    57. Lava-Lamp Style Menu 
+    56. Lava-Lamp Style Menu 
+    57. Custom Core Scripts & Stylesheets 
     58. Cutom Light Box 
     59. Brands List 
     60. Bulleted List 
-    61. Maintain Aspect Ratio List 
-    62. List of Posts 
+    61. List of Posts 
+    62. Maintain Aspect Ratio List 
     63. List of Split Posts 
     64. Side by Side List 
     65. Side by Side List With Photo 
-    66. Fullwidth List of Split 2 
-    67. Fullwidth List of Split 
+    66. Fullwidth List of Split 
+    67. Fullwidth List of Split 2 
     68. Mouse Animation Scroll 
     69. Multiple Items Carousel 
     70. Overlay 
@@ -143,19 +143,20 @@
     78. Single Post 
     79. Source Code 
     80. Striking 
-    81. Tabs 
-    82. Team Focus 
-    83. Team Fullwidth (Style using the Side by Side List With Photo module) 
-    84. Team Gird 
-    85. Testimonials Carousel 
-    86. Text effect 
-    87. Timeline 
-    88. ToolTip 
-    89. Vertical Menu 
-    90. Vertical Separator 
-    91. Wave Background 
-    92. WordPress Core ( Do not use prefix "uix-" ) 
-    93. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    81. SVG Map 
+    82. Tabs 
+    83. Team Focus 
+    84. Team Fullwidth (Style using the Side by Side List With Photo module) 
+    85. Team Gird 
+    86. Testimonials Carousel 
+    87. Text effect 
+    88. Timeline 
+    89. ToolTip 
+    90. Vertical Menu 
+    91. Vertical Separator 
+    92. Wave Background 
+    93. WordPress Core ( Do not use prefix "uix-" ) 
+    94. Ajax Page Loader (Loading A Page via Ajax Into Div)  
 
 
 
@@ -6263,13 +6264,6 @@ pointer-events: auto;
 }
 
 /* ====================================================== 
-       <!-- Counter --> 
-/* ====================================================== */
-h3[data-counter-number] {
-    padding: 2rem;
-}
-
-/* ====================================================== 
     <!-- Circle Layout -->      
 /* ====================================================== */
 /* Pure CSS */
@@ -6474,6 +6468,13 @@ h3[data-counter-number] {
 }
 
 /* ====================================================== 
+       <!-- Counter --> 
+/* ====================================================== */
+h3[data-counter-number] {
+    padding: 2rem;
+}
+
+/* ====================================================== 
    <!-- Dividing Line -->    
 /* ====================================================== */
 .uix-separator-base {
@@ -6550,90 +6551,6 @@ h3[data-counter-number] {
 
 .uix-separator-shadow.uix-separator-shadow--black span i {
     box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
-}
-
-/* ====================================================== 
-   <!-- Dotted Line --> 
-/* ====================================================== */
-.uix-dotted-line {
-    display: inline-block;
-    margin: 1.5rem;
-    height: 300px;
-  /* Small Size */
-  /* Medium Size */
-  /* Large Size */;
-}
-
-.uix-dotted-line.uix-dotted-line--s {
-    width: 1px;
-    background: #212121;
-    background: linear-gradient(to bottom, #212121 10%, rgba(255, 255, 255, 0) 0%);
-    background-position: left;
-    background-size: 1px 8px;
-    background-repeat: repeat-y;
-}
-
-.uix-dotted-line.uix-dotted-line--s.is-horizontal {
-    background: linear-gradient(to right, #212121 10%, rgba(255, 255, 255, 0) 0%);
-    background-position: top;
-    background-size: 8px 1px;
-    background-repeat: repeat-x;
-    width: 300px;
-    height: 1px;
-}
-
-.uix-dotted-line.uix-dotted-line--s.is-circle {
-    background: radial-gradient(circle, #212121 1.5px, transparent 2px);
-    background-position: top;
-    background-size: 12px 6px;
-}
-
-.uix-dotted-line.uix-dotted-line--m {
-    width: 3px;
-    background: #212121;
-    background: linear-gradient(to bottom, #212121 20%, rgba(255, 255, 255, 0) 0%);
-    background-position: left;
-    background-size: 3px 10px;
-    background-repeat: repeat-y;
-}
-
-.uix-dotted-line.uix-dotted-line--m.is-horizontal {
-    background: linear-gradient(to right, #212121 20%, rgba(255, 255, 255, 0) 0%);
-    background-position: top;
-    background-size: 10px 3px;
-    background-repeat: repeat-x;
-    width: 300px;
-    height: 3px;
-}
-
-.uix-dotted-line.uix-dotted-line--m.is-circle {
-    background: radial-gradient(circle, #212121 1.5px, transparent 2px);
-    background-position: top;
-    background-size: 12px 6px;
-}
-
-.uix-dotted-line.uix-dotted-line--l {
-    width: 6px;
-    background: #212121;
-    background: linear-gradient(to bottom, #212121 30%, rgba(255, 255, 255, 0) 0%);
-    background-position: left;
-    background-size: 6px 12px;
-    background-repeat: repeat-y;
-}
-
-.uix-dotted-line.uix-dotted-line--l.is-horizontal {
-    background: linear-gradient(to right, #212121 30%, rgba(255, 255, 255, 0) 0%);
-    background-position: top;
-    background-size: 12px 6px;
-    background-repeat: repeat-x;
-    width: 300px;
-    height: 6px;
-}
-
-.uix-dotted-line.uix-dotted-line--l.is-circle {
-    background: radial-gradient(circle, #212121 1.5px, transparent 2px);
-    background-position: top;
-    background-size: 12px 6px;
 }
 
 /* ====================================================== 
@@ -6756,6 +6673,90 @@ h3[data-counter-number] {
     100% {
         box-shadow: 0 0 0 25px rgba(236, 94, 121, 0), 0 0 0 30px rgba(236, 94, 121, 0);
     }
+}
+
+/* ====================================================== 
+   <!-- Dotted Line --> 
+/* ====================================================== */
+.uix-dotted-line {
+    display: inline-block;
+    margin: 1.5rem;
+    height: 300px;
+  /* Small Size */
+  /* Medium Size */
+  /* Large Size */;
+}
+
+.uix-dotted-line.uix-dotted-line--s {
+    width: 1px;
+    background: #212121;
+    background: linear-gradient(to bottom, #212121 10%, rgba(255, 255, 255, 0) 0%);
+    background-position: left;
+    background-size: 1px 8px;
+    background-repeat: repeat-y;
+}
+
+.uix-dotted-line.uix-dotted-line--s.is-horizontal {
+    background: linear-gradient(to right, #212121 10%, rgba(255, 255, 255, 0) 0%);
+    background-position: top;
+    background-size: 8px 1px;
+    background-repeat: repeat-x;
+    width: 300px;
+    height: 1px;
+}
+
+.uix-dotted-line.uix-dotted-line--s.is-circle {
+    background: radial-gradient(circle, #212121 1.5px, transparent 2px);
+    background-position: top;
+    background-size: 12px 6px;
+}
+
+.uix-dotted-line.uix-dotted-line--m {
+    width: 3px;
+    background: #212121;
+    background: linear-gradient(to bottom, #212121 20%, rgba(255, 255, 255, 0) 0%);
+    background-position: left;
+    background-size: 3px 10px;
+    background-repeat: repeat-y;
+}
+
+.uix-dotted-line.uix-dotted-line--m.is-horizontal {
+    background: linear-gradient(to right, #212121 20%, rgba(255, 255, 255, 0) 0%);
+    background-position: top;
+    background-size: 10px 3px;
+    background-repeat: repeat-x;
+    width: 300px;
+    height: 3px;
+}
+
+.uix-dotted-line.uix-dotted-line--m.is-circle {
+    background: radial-gradient(circle, #212121 1.5px, transparent 2px);
+    background-position: top;
+    background-size: 12px 6px;
+}
+
+.uix-dotted-line.uix-dotted-line--l {
+    width: 6px;
+    background: #212121;
+    background: linear-gradient(to bottom, #212121 30%, rgba(255, 255, 255, 0) 0%);
+    background-position: left;
+    background-size: 6px 12px;
+    background-repeat: repeat-y;
+}
+
+.uix-dotted-line.uix-dotted-line--l.is-horizontal {
+    background: linear-gradient(to right, #212121 30%, rgba(255, 255, 255, 0) 0%);
+    background-position: top;
+    background-size: 12px 6px;
+    background-repeat: repeat-x;
+    width: 300px;
+    height: 6px;
+}
+
+.uix-dotted-line.uix-dotted-line--l.is-circle {
+    background: radial-gradient(circle, #212121 1.5px, transparent 2px);
+    background-position: top;
+    background-size: 12px 6px;
 }
 
 /* ====================================================== 
@@ -9590,55 +9591,6 @@ html[xmlns] .uix-flexslider .uix-flexslider__inner {
    <!-- Custom Core Scripts & Stylesheets --> 
 /* ====================================================== */
 /* ====================================================== 
-   <!-- Lava-Lamp Style Menu -->     
-/* ====================================================== */
-.uix-lavalamp-menu__container {
-  position: relative;
-  /* Required*/
-  margin: 0 auto;
-}
-
-.uix-lavalamp-menu__container ul.uix-lavalamp-menu {
-  padding: 0;
-  margin: 0;
-  /* Required*/
-  font-size: 0;
-  /*Fighting the Space Between Inline Block Elements*/
-}
-
-.uix-lavalamp-menu__container ul.uix-lavalamp-menu li {
-  margin: 0;
-  padding: 0;
-  position: relative;
-  padding: 0 1.159375rem;
-  font-size: 1rem;
-  display: inline-block;
-  margin-right: 1.6875rem;
-  white-space: nowrap;
-  /* Required*/
-  font-size: 1rem;
-  /*Fighting the Space Between Inline Block Elements*/
-}
-
-.uix-lavalamp-menu__container ul.uix-lavalamp-menu li a {
-  display: block;
-}
-
-.uix-lavalamp-menu__container ul.uix-lavalamp-menu .uix-lavalamp-menu__slide-line {
-  display: block;
-  padding: 0;
-  margin: 0;
-  background: #EC5E79;
-  z-index: 0;
-  position: absolute;
-  top: 105%;
-  border-radius: 3px;
-  width: auto;
-  height: 5px;
-  left: 0;
-}
-
-/* ====================================================== 
    <!-- Cutom Light Box -->   
 /* ====================================================== */
 /*
@@ -10097,6 +10049,55 @@ a.uix-lightbox__original__close::after {
 }
 
 /* ====================================================== 
+   <!-- Lava-Lamp Style Menu -->     
+/* ====================================================== */
+.uix-lavalamp-menu__container {
+  position: relative;
+  /* Required*/
+  margin: 0 auto;
+}
+
+.uix-lavalamp-menu__container ul.uix-lavalamp-menu {
+  padding: 0;
+  margin: 0;
+  /* Required*/
+  font-size: 0;
+  /*Fighting the Space Between Inline Block Elements*/
+}
+
+.uix-lavalamp-menu__container ul.uix-lavalamp-menu li {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  padding: 0 1.159375rem;
+  font-size: 1rem;
+  display: inline-block;
+  margin-right: 1.6875rem;
+  white-space: nowrap;
+  /* Required*/
+  font-size: 1rem;
+  /*Fighting the Space Between Inline Block Elements*/
+}
+
+.uix-lavalamp-menu__container ul.uix-lavalamp-menu li a {
+  display: block;
+}
+
+.uix-lavalamp-menu__container ul.uix-lavalamp-menu .uix-lavalamp-menu__slide-line {
+  display: block;
+  padding: 0;
+  margin: 0;
+  background: #EC5E79;
+  z-index: 0;
+  position: absolute;
+  top: 105%;
+  border-radius: 3px;
+  width: auto;
+  height: 5px;
+  left: 0;
+}
+
+/* ====================================================== 
     <!-- Brands List --> 
 /* ====================================================== */
 .uix-list-brands {
@@ -10188,6 +10189,84 @@ a.uix-lightbox__original__close::after {
 /* ====================================================== */
 .uix-list-bullet i {
   margin-right: .5rem;
+}
+
+/* ====================================================== 
+   <!-- Maintain Aspect Ratio List --> 
+/* ====================================================== */
+.uix-list-aspect-ratio {
+  padding: 0 3rem;
+}
+
+.uix-list-aspect-ratio .uix-list-aspect-ratio__content {
+  padding: 3rem;
+}
+
+.uix-list-aspect-ratio .uix-list-aspect-ratio__item {
+  display: block;
+  transition: all 0.3s ease;
+  background: #212121;
+  /* Maintain Aspect Ratio 1:1*/
+  width: 100%;
+  padding-top: 100%;
+  /* 1:1 Aspect Ratio */
+  position: relative;
+  /* If you want text inside of it */
+}
+
+.uix-list-aspect-ratio .uix-list-aspect-ratio__item img,
+.uix-list-aspect-ratio .uix-list-aspect-ratio__item i,
+.uix-list-aspect-ratio .uix-list-aspect-ratio__item .disabled {
+  transition: all 0.3s ease;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  opacity: 0;
+  width: 5rem;
+  height: auto;
+  transform: translate(-50%, -50%);
+  font-size: 5rem;
+  color: white;
+}
+
+.uix-list-aspect-ratio .uix-list-aspect-ratio__item .disabled {
+  opacity: 1;
+  z-index: 2;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover {
+  background: #EC5E79;
+}
+
+.uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover img,
+.uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover i {
+  opacity: 1;
+}
+
+.uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover .disabled {
+  opacity: 0;
+}
+
+@media all and (max-width: 768px) {
+  .uix-list-aspect-ratio {
+    padding: 0;
+    padding-right: 15px;
+  }
+  .uix-list-aspect-ratio .uix-list-aspect-ratio__item img,
+  .uix-list-aspect-ratio .uix-list-aspect-ratio__item i,
+  .uix-list-aspect-ratio .uix-list-aspect-ratio__item .disabled {
+    width: 2.5rem;
+    font-size: 2.5rem;
+  }
+  .uix-list-aspect-ratio .uix-core-grid__col-4 {
+    width: 33.333333333333%;
+    float: left;
+  }
+  .uix-list-aspect-ratio .uix-list-aspect-ratio__content {
+    padding: .5rem;
+  }
 }
 
 /* ====================================================== 
@@ -10396,84 +10475,6 @@ a.uix-lightbox__original__close::after {
   }
   .uix-list-split .uix-list-split__item .uix-list-split__item__info > div {
     padding: 0;
-  }
-}
-
-/* ====================================================== 
-   <!-- Maintain Aspect Ratio List --> 
-/* ====================================================== */
-.uix-list-aspect-ratio {
-  padding: 0 3rem;
-}
-
-.uix-list-aspect-ratio .uix-list-aspect-ratio__content {
-  padding: 3rem;
-}
-
-.uix-list-aspect-ratio .uix-list-aspect-ratio__item {
-  display: block;
-  transition: all 0.3s ease;
-  background: #212121;
-  /* Maintain Aspect Ratio 1:1*/
-  width: 100%;
-  padding-top: 100%;
-  /* 1:1 Aspect Ratio */
-  position: relative;
-  /* If you want text inside of it */
-}
-
-.uix-list-aspect-ratio .uix-list-aspect-ratio__item img,
-.uix-list-aspect-ratio .uix-list-aspect-ratio__item i,
-.uix-list-aspect-ratio .uix-list-aspect-ratio__item .disabled {
-  transition: all 0.3s ease;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 1;
-  opacity: 0;
-  width: 5rem;
-  height: auto;
-  transform: translate(-50%, -50%);
-  font-size: 5rem;
-  color: white;
-}
-
-.uix-list-aspect-ratio .uix-list-aspect-ratio__item .disabled {
-  opacity: 1;
-  z-index: 2;
-  color: rgba(255, 255, 255, 0.3);
-}
-
-.uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover {
-  background: #EC5E79;
-}
-
-.uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover img,
-.uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover i {
-  opacity: 1;
-}
-
-.uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover .disabled {
-  opacity: 0;
-}
-
-@media all and (max-width: 768px) {
-  .uix-list-aspect-ratio {
-    padding: 0;
-    padding-right: 15px;
-  }
-  .uix-list-aspect-ratio .uix-list-aspect-ratio__item img,
-  .uix-list-aspect-ratio .uix-list-aspect-ratio__item i,
-  .uix-list-aspect-ratio .uix-list-aspect-ratio__item .disabled {
-    width: 2.5rem;
-    font-size: 2.5rem;
-  }
-  .uix-list-aspect-ratio .uix-core-grid__col-4 {
-    width: 33.333333333333%;
-    float: left;
-  }
-  .uix-list-aspect-ratio .uix-list-aspect-ratio__content {
-    padding: .5rem;
   }
 }
 
@@ -13502,6 +13503,146 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
 .uix-striking-msg.uix-striking-msg--info {
   background-color: #d8f5fe;
   box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.1), 0 5px 10px -7px rgba(216, 245, 254, 0.3);
+}
+
+/* ====================================================== 
+   <!-- SVG Map -->     
+/* ====================================================== */
+/*
+ * 1. World Map
+ * 2. China Map
+*/
+/* 
+ ---------------------------
+ 1. World Map
+ ---------------------------
+ */
+.uix-svgmap--world svg {
+  width: 100%;
+  height: 100%;
+}
+
+.uix-svgmap--world path {
+  fill: rgba(236, 94, 121, 0.2);
+  stroke: #ffffff;
+  opacity: 1;
+  stroke-opacity: 1;
+  stroke-width: 1;
+  stroke-linejoin: round;
+  transform: matrix(0.3474, 0, 0, 0.3474, 0, 0);
+  cursor: pointer;
+  fill-opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.uix-svgmap--world path:hover {
+  fill: rgba(236, 94, 121, 0.3);
+}
+
+.uix-svgmap--world text {
+  font-size: 3px;
+  fill: #212121;
+  display: none;
+  transition: all 0.3s ease;
+  text-anchor: middle;
+  font-family: Arial;
+}
+
+.uix-svgmap--world text.uix-svgmap--world__num {
+  font-size: 6px;
+  transform: translate(0, 3px);
+  fill: #fff;
+  font-family: Arial;
+}
+
+.uix-svgmap--world path,
+.uix-svgmap--world text {
+  opacity: 1;
+  display: block;
+  z-index: 1;
+}
+
+.uix-svgmap--world path.is-show,
+.uix-svgmap--world text.is-show {
+  opacity: 1;
+}
+
+/* 
+ ---------------------------
+ 2. China Map
+ ---------------------------
+ */
+.uix-svgmap--china svg {
+  width: 100%;
+  height: 100%;
+}
+
+.uix-svgmap--china polygon {
+  cursor: pointer;
+  fill: rgba(236, 94, 121, 0.2);
+  stroke: #fff;
+  stroke-width: 1;
+  transition: all 0.3s ease;
+}
+
+.uix-svgmap--china polygon:hover {
+  fill: rgba(236, 94, 121, 0.3);
+}
+
+.uix-svgmap--china text {
+  font-size: 7px;
+  fill: #212121;
+  display: none;
+  transition: all 0.3s ease;
+  text-anchor: middle;
+}
+
+.uix-svgmap--china text.uix-svgmap--china__name {
+  transform: translate(0, 15px);
+}
+
+.uix-svgmap--china text.uix-svgmap--china__num {
+  font-size: 6px;
+  transform: translate(0, 3px);
+  fill: #fff;
+  font-family: Arial;
+}
+
+.uix-svgmap--china circle {
+  fill: #e8588c;
+  stroke: rgba(232, 88, 140, 0.2);
+  stroke-width: 7;
+  r: 6;
+  animation: uix-cssAnim--map-dot ease 1s infinite;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  position: relative;
+  filter: drop-shadow(-5px -5px 5px #000);
+}
+
+.uix-svgmap--china circle,
+.uix-svgmap--china text {
+  opacity: 1;
+  display: block;
+  z-index: 1;
+  position: relative;
+}
+
+.uix-svgmap--china circle.is-show,
+.uix-svgmap--china text.is-show {
+  opacity: 1;
+}
+
+@keyframes uix-cssAnim--map-dot {
+  0% {
+    stroke-width: 5;
+  }
+  50% {
+    stroke-width: 0;
+  }
+  100% {
+    stroke-width: 5;
+  }
 }
 
 /* ====================================================== 

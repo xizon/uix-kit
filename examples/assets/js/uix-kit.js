@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  1.9.8
+ * ## Version             :  2.0.0
  * ## Last Update         :  July 31, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -24,11 +24,11 @@
 	
 	1. Body And Header 
     2. Loader 
-    3. Back to Top 
-    4. Get all custom attributes of an element like "data-*" 
+    3. Get all custom attributes of an element like "data-*" 
+    4. Back to Top 
     5. Navigation 
-    6. Common Height 
-    7. Videos 
+    6. Videos 
+    7. Common Height 
     8. Mega Menu 
     9. Dropdown Categories 
     10. Pagination 
@@ -45,51 +45,53 @@
     21. 3D Sphere Rotation 
     22. Accordion 
     23. Accordion Background Images 
-    24. Advanced Content Slider 
-    25. Advanced Slider (Special Effects) 
-    26. Advanced Slider (Basic) 
-    27. Dropdown Menu 
-    28. Dynamic Drop Down List from JSON 
-    29. Flexslider 
-    30. Form 
-    31. jQuery UI Datepicker 1.11.4 
-    32. Form Progress 
-    33. Gallery 
-    34. Image Shapes 
-    35. Theme Scripts  
-    36. Lava-Lamp Style Menu 
-    37. Custom Lightbox 
-    38. Bulleted List 
-    39. Posts List With Ajax 
-    40. Fullwidth List of Split 
-    41. Mousewheel Interaction 
-    42. Multiple Items Carousel 
-    43. Full Page/One Page Transition 
-    44. Dropdown Menu 2 (Multi-level drop-down navigation) 
-    45. Full Page/One Page Transition 2 
-    46. Periodical Scroll 
+    24. Advanced Slider (Special Effects) 
+    25. Advanced Slider (Basic) 
+    26. Circle Layout 
+    27. Advanced Content Slider 
+    28. Counter 
+    29. Dropdown Menu 
+    30. Dropdown Menu 2 (Multi-level drop-down navigation) 
+    31. Dynamic Drop Down List from JSON 
+    32. Flexslider 
+    33. Form 
+    34. jQuery UI Datepicker 1.11.4 
+    35. Form Progress 
+    36. Gallery 
+    37. Image Shapes 
+    38. Theme Scripts  
+    39. Lava-Lamp Style Menu 
+    40. Custom Lightbox 
+    41. Posts List With Ajax 
+    42. Bulleted List 
+    43. Fullwidth List of Split 
+    44. Mousewheel Interaction 
+    45. Full Page/One Page Transition 
+    46. Full Page/One Page Transition 2 
     47. Parallax 
-    48. Pricing 
-    49. Progress Bar 
-    50. Retina Graphics for Website 
-    51. Rotating Elements 
-    52. Scroll Reveal 
-    53. Show More Less 
-    54. Smooth Scrolling When Clicking An Anchor Link 
-    55. Source Code View 
-    56. Sticky Elements 
-    57. Tabs 
-    58. Team Focus 
-    59. Testimonials Carousel 
-    60. Text effect 
-    61. Timeline 
-    62. Vertical Menu 
-    63. Ajax Push Content  
-    64. Ajax Page Loader (Loading A Page via Ajax Into Div)  
-    65. GSAP Plugins 
-    66. Three.js Plugins 
-    67. Counter 
-    68. Circle Layout 
+    48. Periodical Scroll 
+    49. Pricing 
+    50. Multiple Items Carousel 
+    51. Progress Bar 
+    52. Retina Graphics for Website 
+    53. Rotating Elements 
+    54. Scroll Reveal 
+    55. Show More Less 
+    56. Smooth Scrolling When Clicking An Anchor Link 
+    57. Source Code View 
+    58. Sticky Elements 
+    59. SVG Map (China) 
+    60. SVG Map (World) 
+    61. Tabs 
+    62. Team Focus 
+    63. Testimonials Carousel 
+    64. Text effect 
+    65. Timeline 
+    66. Vertical Menu 
+    67. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    68. Ajax Push Content  
+    69. GSAP Plugins 
+    70. Three.js Plugins 
 
 
 */
@@ -10370,6 +10372,317 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
+ * <!-- Form Progress -->
+ *************************************
+ */
+/*
+    Note:
+	
+	If you want to initialize the indicator to a location when the page is first run,
+	you need to call the following function:
+	
+	$( document ).formProgressNext({ 
+		'selector'         : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
+		'formTarget'       : $( '.uix-form-progress__target' ),
+		'indicator'        : '.uix-form-progress .uix-form-progress__indicator',
+		'index'            : 0 // 0 -> step 1, 1 -> step 2, 2 -> step 3, 3 -> step 4, 4 -> step 5 
+	});
+	
+*/
+
+
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+
+    APP.FORM_PROGRESS               = APP.FORM_PROGRESS || {};
+	APP.FORM_PROGRESS.version       = '0.0.1';
+    APP.FORM_PROGRESS.pageLoaded    = function() {
+
+		//Prevent this module from loading in other pages
+		if ( !$( 'body' ).hasClass( 'page-form-progress-eff' ) ) return false;
+		
+
+		var $progressBar   = $( '.uix-form-progress progress' ),
+			$formTarget    = $( '.uix-form-progress__target' ),
+			$indicator     = $( '.uix-form-progress .uix-form-progress__indicator' ),
+			formAreaH      = $formTarget.height(),
+			allStep        = $indicator.length,
+			stepPerValue   = 100/( allStep - 1 ),
+			value          = 0,
+			transitionEnd  = 'webkitTransitionEnd transitionend';
+		
+
+		//Get form transition speed
+		var dur = $formTarget.data( 'anime-speed' );
+		if( typeof dur === typeof undefined ) { 
+			dur = '0.5s';
+		}
+
+		var durString  = dur.toLowerCase(),
+			isMS       = durString.indexOf( 'ms' ) >= 0,
+			numberNum  = durString.replace( 'ms', '' ).replace( 's', '' ),
+			animeSpeed = isMS ? numberNum : numberNum * 1000;
+	
+		
+		//Gets the party started.
+		formReset();
+		
+		//Display the target
+		setTimeout( function() {
+			$formTarget.addClass( 'active' );
+		}, parseFloat( dur ) * 1000 );
+		
+
+		// Show next form on continue click
+		$( document ).on( 'click', '.uix-form-progress__target .go-step:not(.disable)', function( e ) {
+			e.preventDefault();
+			var $sections = $( this ).parents( '.uix-form-progress__target__step' );
+			$( document ).formProgressNext({ 
+				'selector'   : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
+				'formTarget' : $formTarget,
+				'indicator'  : '.uix-form-progress .uix-form-progress__indicator',
+				'index'      : $sections.index() + 1
+			});
+			
+		});
+		
+		
+
+		// Reset form on reset button click
+		$( document ).on( 'click', '.uix-form-progress__target .go-reset', function( e ) {
+			e.preventDefault();
+			formReset();
+		});
+		
+
+		/*
+		 * Resets the form back to the default state.
+		 *
+		 * @return {void}                   - The constructor.
+		 */
+		function formReset() {
+			
+			$( document ).formProgressNext({ 
+				'selector'         : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
+				'formTarget'       : $( '.uix-form-progress__target' ),
+				'indicator'        : '.uix-form-progress .uix-form-progress__indicator',
+				'index'            : 0 // 0 -> step 1, 1 -> step 2, 2 -> step 3, 3 -> step 4, 4 -> step 5 
+			});
+		
+			
+		}
+			    
+		
+    };
+
+    APP.components.pageLoaded.push( APP.FORM_PROGRESS.pageLoaded );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+
+
+/* 
+ *************************************
+ * Associated Functions
+ *************************************
+ */
+
+/*
+ * Shows the next form.
+ *
+ * @param  {object} selector        - Each target forms selector.
+ * @param  {object} formTarget      - Wrapper of target forms selector.
+ * @param  {string} indicator       - Indicator of timeline.
+ * @param  {number} index           - Default index for initialization.
+ * @return {void}                   - The constructor.
+ */
+( function ( $ ) {
+    $.fn.formProgressNext = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+			selector         : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
+			formTarget       : $( '.uix-form-progress__target' ),
+			indicator        : '.uix-form-progress .uix-form-progress__indicator',
+			index            : 0
+        }, options );
+ 
+        this.each( function() {
+			
+			var $this            = $( this ),
+				transitionEnd    = 'webkitTransitionEnd transitionend',
+				$sections        = settings.selector,
+				$formTarget      = settings.formTarget,	
+				$indicator       = $( settings.indicator ),
+				allStep          = $indicator.length,
+				stepPerValue     = 100/( allStep - 1 ),
+				value            = 0,
+				tarIndex, curIndex;
+
+
+			//Returns current index
+			if ( settings.index > allStep - 1 ) {
+				curIndex = allStep - 1;
+			} else {
+				curIndex = settings.index;
+			}
+
+
+			tarIndex = curIndex - 1;
+
+
+			// Returns current index
+			if ( tarIndex > ( allStep - 2 ) ) {
+				value = stepPerValue * (allStep - 2);
+				curIndex = allStep - 2;
+			} else {
+				curIndex = tarIndex;
+
+			}
+
+
+			// Increment value (based on 4 steps 0 - 100)
+			value = stepPerValue * curIndex;
+
+			//Get form transition speed
+			var dur = $formTarget.data( 'anime-speed' );
+			if( typeof dur === typeof undefined ) { 
+				dur = '0.5s';
+			}
+
+			var durString  = dur.toLowerCase(),
+				isMS       = durString.indexOf( 'ms' ) >= 0,
+				numberNum  = durString.replace( 'ms', '' ).replace( 's', '' ),
+				animeSpeed = isMS ? numberNum : numberNum * 1000;
+
+
+
+			var currentFormStep  = parseInt($sections.eq( tarIndex ).attr( 'data-step' ) ) || false,
+				$nextForm        = $formTarget.find( '.uix-form-progress__target__step[data-step="' + (currentFormStep + 1) + '"]'),
+				currentFormIndex = $nextForm.attr( 'data-step' ) - 1;
+
+
+			if ( isNaN( currentFormIndex ) ) currentFormIndex = 0;
+
+			// Activate other unused modules
+			if ( currentFormIndex > 0 ) {
+				for ( var i = 0; i < curIndex; i++ ) {
+					$sections.eq( i ).addClass( 'leaving' );
+					$indicator.eq( i ).addClass( 'active' );
+				}
+				$indicator.eq( curIndex ).addClass( 'active' );
+				
+			}
+
+
+
+			// Hide current form fields
+			$sections.eq( tarIndex ).addClass( 'leaving' );
+			setTimeout(function() {
+				$indicator.eq( currentFormIndex ).addClass( 'active' );
+			}, animeSpeed );
+
+
+			// Show next form fields
+			$nextForm.addClass( 'coming' ).one( transitionEnd, function() {
+				$nextForm.removeClass( 'coming waiting' );
+			});
+			
+			// Active next form fields
+			$sections.removeClass( 'active' );
+			$sections.eq( currentFormIndex ).addClass( 'active' );
+
+			// Increment value (based on 4 steps 0 - 100)
+			value += stepPerValue;
+
+			//console.log( currentFormIndex );
+
+
+
+			//Initialize pointer and form location data
+			if ( currentFormIndex == 0 ) {
+
+				//Avoid initialization to always cover other same events
+				$( 'body' ).addClass( 'form-progress-initok' );
+
+
+				//so something
+				$indicator.removeClass( 'active' );
+				$indicator.each( function( index )  {
+					$( this ).css( 'left', index*stepPerValue + '%' );
+					$formTarget.find( '.uix-form-progress__target__step:eq('+index+')' ).attr( 'data-step', index+1 );
+				});
+
+				setTimeout(function() {
+					$formTarget.addClass( 'js-uix-show' );
+				}, animeSpeed );
+
+
+				$formTarget.find( '.uix-form-progress__target__step' )
+												.removeClass( 'left leaving' )
+												.css( {
+													'position'   : 'absolute'
+												} )
+												.not( ':eq(0)' )
+												.addClass( 'waiting' );
+
+
+			}
+
+
+			//Set wrapper height
+			var currentContentH  = $formTarget.find( '.uix-form-progress__target__step:eq('+currentFormIndex+') > .uix-form-progress__content' ).height() + 100;
+			$formTarget.css( 'height', currentContentH + 'px' );
+
+			var curText = $( '.uix-form-progress .uix-form-progress__indicator:eq('+currentFormIndex+') > span' ).html();
+			$( '#app-form-progress-text' ).text( curText );
+
+			//The current indicator class
+			$indicator.removeClass( 'current' );
+			$indicator.eq( currentFormIndex ).addClass( 'current' );
+
+			// Reset if we've reached the end
+			if (value >= 100) {
+				$formTarget.find( '.uix-form-progress__target__step' )
+											   .addClass( 'leaving' )
+											   .last()
+											   .removeClass( 'coming waiting leaving' );
+			} else {
+				$( '.uix-form-progress' ).find( '.uix-form-progress__indicator.active' ).next( '.uix-form-progress__indicator' ).addClass( 'active' );
+			}
+
+			// Set progress bar value
+			$( '.uix-form-progress .uix-form-progress__line span' ).css( 'width', value + '%' );
+
+
+			//Scroll Top
+			TweenMax.to( window, 0.5, {
+				scrollTo: {
+					y: 0
+				},
+				ease: Power2.easeOut
+			});	
+			
+			
+
+			return false;
+			
+			
+		});
+ 
+    };
+ 
+}( jQuery ));
+
+
+
+/* 
+ *************************************
  * <!-- Form -->
  *************************************
  */
@@ -13098,317 +13411,6 @@ APP = ( function ( APP, $, window, document ) {
 }( APP, jQuery, window, document ) );
 
 
-
-
-
-/* 
- *************************************
- * <!-- Form Progress -->
- *************************************
- */
-/*
-    Note:
-	
-	If you want to initialize the indicator to a location when the page is first run,
-	you need to call the following function:
-	
-	$( document ).formProgressNext({ 
-		'selector'         : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
-		'formTarget'       : $( '.uix-form-progress__target' ),
-		'indicator'        : '.uix-form-progress .uix-form-progress__indicator',
-		'index'            : 0 // 0 -> step 1, 1 -> step 2, 2 -> step 3, 3 -> step 4, 4 -> step 5 
-	});
-	
-*/
-
-
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-
-    APP.FORM_PROGRESS               = APP.FORM_PROGRESS || {};
-	APP.FORM_PROGRESS.version       = '0.0.1';
-    APP.FORM_PROGRESS.pageLoaded    = function() {
-
-		//Prevent this module from loading in other pages
-		if ( !$( 'body' ).hasClass( 'page-form-progress-eff' ) ) return false;
-		
-
-		var $progressBar   = $( '.uix-form-progress progress' ),
-			$formTarget    = $( '.uix-form-progress__target' ),
-			$indicator     = $( '.uix-form-progress .uix-form-progress__indicator' ),
-			formAreaH      = $formTarget.height(),
-			allStep        = $indicator.length,
-			stepPerValue   = 100/( allStep - 1 ),
-			value          = 0,
-			transitionEnd  = 'webkitTransitionEnd transitionend';
-		
-
-		//Get form transition speed
-		var dur = $formTarget.data( 'anime-speed' );
-		if( typeof dur === typeof undefined ) { 
-			dur = '0.5s';
-		}
-
-		var durString  = dur.toLowerCase(),
-			isMS       = durString.indexOf( 'ms' ) >= 0,
-			numberNum  = durString.replace( 'ms', '' ).replace( 's', '' ),
-			animeSpeed = isMS ? numberNum : numberNum * 1000;
-	
-		
-		//Gets the party started.
-		formReset();
-		
-		//Display the target
-		setTimeout( function() {
-			$formTarget.addClass( 'active' );
-		}, parseFloat( dur ) * 1000 );
-		
-
-		// Show next form on continue click
-		$( document ).on( 'click', '.uix-form-progress__target .go-step:not(.disable)', function( e ) {
-			e.preventDefault();
-			var $sections = $( this ).parents( '.uix-form-progress__target__step' );
-			$( document ).formProgressNext({ 
-				'selector'   : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
-				'formTarget' : $formTarget,
-				'indicator'  : '.uix-form-progress .uix-form-progress__indicator',
-				'index'      : $sections.index() + 1
-			});
-			
-		});
-		
-		
-
-		// Reset form on reset button click
-		$( document ).on( 'click', '.uix-form-progress__target .go-reset', function( e ) {
-			e.preventDefault();
-			formReset();
-		});
-		
-
-		/*
-		 * Resets the form back to the default state.
-		 *
-		 * @return {void}                   - The constructor.
-		 */
-		function formReset() {
-			
-			$( document ).formProgressNext({ 
-				'selector'         : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
-				'formTarget'       : $( '.uix-form-progress__target' ),
-				'indicator'        : '.uix-form-progress .uix-form-progress__indicator',
-				'index'            : 0 // 0 -> step 1, 1 -> step 2, 2 -> step 3, 3 -> step 4, 4 -> step 5 
-			});
-		
-			
-		}
-			    
-		
-    };
-
-    APP.components.pageLoaded.push( APP.FORM_PROGRESS.pageLoaded );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
-
-
-/* 
- *************************************
- * Associated Functions
- *************************************
- */
-
-/*
- * Shows the next form.
- *
- * @param  {object} selector        - Each target forms selector.
- * @param  {object} formTarget      - Wrapper of target forms selector.
- * @param  {string} indicator       - Indicator of timeline.
- * @param  {number} index           - Default index for initialization.
- * @return {void}                   - The constructor.
- */
-( function ( $ ) {
-    $.fn.formProgressNext = function( options ) {
- 
-        // This is the easiest way to have default options.
-        var settings = $.extend({
-			selector         : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
-			formTarget       : $( '.uix-form-progress__target' ),
-			indicator        : '.uix-form-progress .uix-form-progress__indicator',
-			index            : 0
-        }, options );
- 
-        this.each( function() {
-			
-			var $this            = $( this ),
-				transitionEnd    = 'webkitTransitionEnd transitionend',
-				$sections        = settings.selector,
-				$formTarget      = settings.formTarget,	
-				$indicator       = $( settings.indicator ),
-				allStep          = $indicator.length,
-				stepPerValue     = 100/( allStep - 1 ),
-				value            = 0,
-				tarIndex, curIndex;
-
-
-			//Returns current index
-			if ( settings.index > allStep - 1 ) {
-				curIndex = allStep - 1;
-			} else {
-				curIndex = settings.index;
-			}
-
-
-			tarIndex = curIndex - 1;
-
-
-			// Returns current index
-			if ( tarIndex > ( allStep - 2 ) ) {
-				value = stepPerValue * (allStep - 2);
-				curIndex = allStep - 2;
-			} else {
-				curIndex = tarIndex;
-
-			}
-
-
-			// Increment value (based on 4 steps 0 - 100)
-			value = stepPerValue * curIndex;
-
-			//Get form transition speed
-			var dur = $formTarget.data( 'anime-speed' );
-			if( typeof dur === typeof undefined ) { 
-				dur = '0.5s';
-			}
-
-			var durString  = dur.toLowerCase(),
-				isMS       = durString.indexOf( 'ms' ) >= 0,
-				numberNum  = durString.replace( 'ms', '' ).replace( 's', '' ),
-				animeSpeed = isMS ? numberNum : numberNum * 1000;
-
-
-
-			var currentFormStep  = parseInt($sections.eq( tarIndex ).attr( 'data-step' ) ) || false,
-				$nextForm        = $formTarget.find( '.uix-form-progress__target__step[data-step="' + (currentFormStep + 1) + '"]'),
-				currentFormIndex = $nextForm.attr( 'data-step' ) - 1;
-
-
-			if ( isNaN( currentFormIndex ) ) currentFormIndex = 0;
-
-			// Activate other unused modules
-			if ( currentFormIndex > 0 ) {
-				for ( var i = 0; i < curIndex; i++ ) {
-					$sections.eq( i ).addClass( 'leaving' );
-					$indicator.eq( i ).addClass( 'active' );
-				}
-				$indicator.eq( curIndex ).addClass( 'active' );
-				
-			}
-
-
-
-			// Hide current form fields
-			$sections.eq( tarIndex ).addClass( 'leaving' );
-			setTimeout(function() {
-				$indicator.eq( currentFormIndex ).addClass( 'active' );
-			}, animeSpeed );
-
-
-			// Show next form fields
-			$nextForm.addClass( 'coming' ).one( transitionEnd, function() {
-				$nextForm.removeClass( 'coming waiting' );
-			});
-			
-			// Active next form fields
-			$sections.removeClass( 'active' );
-			$sections.eq( currentFormIndex ).addClass( 'active' );
-
-			// Increment value (based on 4 steps 0 - 100)
-			value += stepPerValue;
-
-			//console.log( currentFormIndex );
-
-
-
-			//Initialize pointer and form location data
-			if ( currentFormIndex == 0 ) {
-
-				//Avoid initialization to always cover other same events
-				$( 'body' ).addClass( 'form-progress-initok' );
-
-
-				//so something
-				$indicator.removeClass( 'active' );
-				$indicator.each( function( index )  {
-					$( this ).css( 'left', index*stepPerValue + '%' );
-					$formTarget.find( '.uix-form-progress__target__step:eq('+index+')' ).attr( 'data-step', index+1 );
-				});
-
-				setTimeout(function() {
-					$formTarget.addClass( 'js-uix-show' );
-				}, animeSpeed );
-
-
-				$formTarget.find( '.uix-form-progress__target__step' )
-												.removeClass( 'left leaving' )
-												.css( {
-													'position'   : 'absolute'
-												} )
-												.not( ':eq(0)' )
-												.addClass( 'waiting' );
-
-
-			}
-
-
-			//Set wrapper height
-			var currentContentH  = $formTarget.find( '.uix-form-progress__target__step:eq('+currentFormIndex+') > .uix-form-progress__content' ).height() + 100;
-			$formTarget.css( 'height', currentContentH + 'px' );
-
-			var curText = $( '.uix-form-progress .uix-form-progress__indicator:eq('+currentFormIndex+') > span' ).html();
-			$( '#app-form-progress-text' ).text( curText );
-
-			//The current indicator class
-			$indicator.removeClass( 'current' );
-			$indicator.eq( currentFormIndex ).addClass( 'current' );
-
-			// Reset if we've reached the end
-			if (value >= 100) {
-				$formTarget.find( '.uix-form-progress__target__step' )
-											   .addClass( 'leaving' )
-											   .last()
-											   .removeClass( 'coming waiting leaving' );
-			} else {
-				$( '.uix-form-progress' ).find( '.uix-form-progress__indicator.active' ).next( '.uix-form-progress__indicator' ).addClass( 'active' );
-			}
-
-			// Set progress bar value
-			$( '.uix-form-progress .uix-form-progress__line span' ).css( 'width', value + '%' );
-
-
-			//Scroll Top
-			TweenMax.to( window, 0.5, {
-				scrollTo: {
-					y: 0
-				},
-				ease: Power2.easeOut
-			});	
-			
-			
-
-			return false;
-			
-			
-		});
- 
-    };
- 
-}( jQuery ));
 
 
 
@@ -17578,6 +17580,256 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
+ * <!-- SVG Map (China) -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.SVG_MAP_CHINA               = APP.SVG_MAP_CHINA || {};
+	APP.SVG_MAP_CHINA.version       = '0.0.1';
+    APP.SVG_MAP_CHINA.documentReady = function( $ ) {
+
+
+		
+		var $svgEl = $( '.uix-svgmap--china' );
+		
+		$( '.uix-svgmap--china__trigger a' ).on( 'click', function( e ) {
+			
+			// stop propagation of this event, it will never reach body in bubbling phase.
+			e.stopPropagation();
+
+			var goName       = $( this ).data( 'title' ),
+				goText       = $( this ).text(),
+				svgCurName   = '',
+				svgNameIndex = 0;
+			
+			$( '.uix-svgmap--china .uix-svgmap--china__name' ).each( function()  {
+				
+				if ( goName == $( this ).data( 'title' ) ) {
+					svgCurName = $( this ).data( 'title' );
+					return false;
+				}
+			});
+			
+			svgNameIndex = $( '.uix-svgmap--china .uix-svgmap--china__name[data-title="'+svgCurName+'"]' ).index();
+			
+			//Hide all elements
+			svgMapRestore(1);
+
+			
+			//Display current element
+			svgMapActive( svgNameIndex, goText );
+			
+			
+
+		});
+		
+		
+		//Restore all elements
+		$( 'body' ).on( 'click', function( e ) {
+			svgMapRestore(2);
+		});
+
+		function svgMapRestore( type ) {
+
+			var alpha = ( type == 1 ) ? 0.3 : 1;
+
+			$svgEl.children().removeClass( 'is-show' );
+			$svgEl.find( 'circle' ).css({
+				'r'         : 6,
+				'font-size' : '6px',
+				'z-index'   : 1,
+				'opacity'   : alpha
+			});
+
+
+			$svgEl.find( '.uix-svgmap--china__name' ).each( function()  {
+				$( this ).css({
+					'transform' : 'translate(0,15px)',
+					'z-index'   : 1,
+					'opacity'   : alpha
+				})
+				.text( $( this ).data( 'title' ) );
+
+			});
+
+			$svgEl.find( '.uix-svgmap--china__num' ).css({
+				'font-size' : '6px',
+				'z-index'   : 1,
+				'opacity'   : alpha
+			});	
+
+
+		}
+
+
+		function svgMapActive( index, text ) {
+			$svgEl.each( function()  {
+				$( this ).children().eq( index ).addClass( 'is-show' );
+				$( this ).find( 'circle' ).eq( index ).css({
+					'r'         : 15,
+					'z-index'   : 2,
+					'opacity'   : 1
+				});
+				$( this ).find( '.uix-svgmap--china__name' ).eq( index ).css({
+					'transform' : 'translate(0,25px)',
+					'z-index'   : 2,
+					'opacity'   : 1
+				})
+				.text( text );
+
+				$( this ).find( '.uix-svgmap--china__num' ).eq( index ).css({
+					'font-size' : '10px',
+					'z-index'   : 2,
+					'opacity'   : 1
+				});	
+
+
+			});
+
+		}
+
+		
+    };
+
+    APP.components.documentReady.push( APP.SVG_MAP_CHINA.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+
+
+/* 
+ *************************************
+ * <!-- SVG Map (World) -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.SVG_MAP_WORLD               = APP.SVG_MAP_WORLD || {};
+	APP.SVG_MAP_WORLD.version       = '0.0.1';
+    APP.SVG_MAP_WORLD.documentReady = function( $ ) {
+
+
+		var $svgEl = $( '.uix-svgmap--world' );
+		
+
+		$( '.uix-svgmap--world__trigger a' ).on( 'click', function( e ) {
+			
+			// stop propagation of this event, it will never reach body in bubbling phase.
+			e.stopPropagation();
+
+			var goName       = $( this ).data( 'title' ),
+				goText       = $( this ).text(),
+				svgCurName   = '',
+				svgNameIndex = 0;
+			
+			$( '.uix-svgmap--world .uix-svgmap--world__name' ).each( function( index )  {
+				
+				if ( goName == $( this ).data( 'title' ) ) {
+					svgCurName = $( this ).data( 'title' );
+				    svgNameIndex = index;
+					return false;
+				}
+			});
+		
+			//Hide all elements
+			svgMapRestore(1);
+
+			
+			//Display current element
+			svgMapActive( svgNameIndex, goText );
+			
+			
+	
+		});
+		
+			
+			
+		//Restore all elements
+		$( 'body' ).on( 'click', function( e ) {
+			svgMapRestore(2);
+		});
+
+		
+		function svgMapRestore( type ) {
+
+			var alpha = ( type == 1 ) ? 0.3 : 1;
+
+			$svgEl.children().removeClass( 'is-show' );
+			$svgEl.find( 'path' ).css({
+				'z-index'   : 1,
+				'opacity'   : alpha
+			});
+
+
+
+			$svgEl.find( '.uix-svgmap--world__name' ).each( function()  {
+				$( this ).css({
+					'z-index'   : 1,
+					'opacity'   : alpha,
+					'font-size' : '3px'
+				})
+				.text( $( this ).data( 'title' ) );
+
+			});
+
+
+
+			$svgEl.find( '.uix-svgmap--world__num' ).css({
+				'font-size' : '6px',
+				'z-index'   : 1,
+				'opacity'   : alpha
+			});	
+
+
+		}
+
+
+		function svgMapActive( index, text ) {
+			$svgEl.each( function()  {
+				$( this ).children().eq( index ).addClass( 'is-show' );
+				$( this ).find( 'path' ).eq( index ).css({
+					'z-index'   : 2,
+					'opacity'   : 1
+				});
+				$( this ).find( '.uix-svgmap--world__name' ).eq( index ).css({
+					'z-index'   : 2,
+					'opacity'   : 1,
+					'font-size' : '10px'
+				})
+				.text( text );
+
+				$( this ).find( '.uix-svgmap--world__num' ).eq( index ).css({
+					'font-size' : '10px',
+					'z-index'   : 2,
+					'opacity'   : 1
+				});	
+
+
+			});
+
+		}
+		
+    };
+
+    APP.components.documentReady.push( APP.SVG_MAP_WORLD.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+
+
+/* 
+ *************************************
  * <!-- Tabs -->
  *************************************
  */
@@ -18182,7 +18434,7 @@ APP = ( function ( APP, $, window, document ) {
 				$( customControls ).html( $( customControls ).text().replace(/([^\x00-\x80]|\w)/g, "<span class='uix-letter'>$&</span>") );
 			
 			
-			
+			    //--------------
 				if( customControls.indexOf( 'fadeInRight' ) >= 0 ) {
 					txtEff = anime.timeline({loop: false})
 						  .add({
@@ -18199,7 +18451,7 @@ APP = ( function ( APP, $, window, document ) {
 
 				}
 			
-			
+			    //--------------
 				if( customControls.indexOf( 'zoomInDown' ) >= 0 ) {
 					txtEff = anime.timeline({loop: false})
 						  .add({
@@ -18214,6 +18466,23 @@ APP = ( function ( APP, $, window, document ) {
 
 				}	
 			
+			    //--------------
+				if( customControls.indexOf( 'flyInOut' ) >= 0 ) {
+					txtEff = anime.timeline({loop: false})
+					        .add({
+							targets: customControls + ' .uix-letter',
+							translateX: [40,0],
+							translateZ: 0,
+							opacity: [0,1],
+							easing: "easeOutExpo",
+							duration: speed,
+							delay: function(el, i) {
+							  return 500 + 30 * i;
+							}
+						  });
+					
+				}	
+					
 			
 
 

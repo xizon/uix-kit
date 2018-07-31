@@ -1,5 +1,13 @@
 # Changelog
 
+
+#### = 2.0.0 (July 31, 2018) =
+
+* New: Add a new module "SVG Map".
+* New: Add a new effect flyInOut for text animation.
+
+
+
 #### = 1.9.8 (July 30, 2018) =
 
 * New: Add a new module "Circle Layout".
