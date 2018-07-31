@@ -35,21 +35,6 @@
     8. Sidebar 
     9. Search 
     10. Comments 
-    11. Mobile Menu 
-    12. Modal Dialog 
-    13. Advanced Slider (Special Effects) 
-    14. Advanced Slider (Basic) 
-    15. Cards 
-    16. Dropdown Menu 
-    17. Flexslider 
-    18. Form 
-    19. Brands List 
-    20. Bulleted List 
-    21. Maintain Aspect Ratio List 
-    22. Side by Side List 
-    23. Source Code 
-    24. Vertical Menu (RTL) 
-    25. ToolTip 
 
 
 
@@ -1076,5 +1061,23 @@ pre.prettyprint {
     right: auto;
     left: .5rem;
 }
+
+/*# sourceMappingURL=uix-kit-rtl.css.map */
+.multi-column > ul > li:first-child {
+    border-right: none;
+}
+
+.uix-v-menu__container:not(.is-mobile) ul.uix-menu li.multi-column > ul > li ul {
+    left: auto;
+    right: 0;
+}
+
+.uix-v-menu__container:not(.is-mobile) .uix-menu__arrow {
+    right: auto;
+    left: .5rem;
+}
+
+/*# sourceMappingURL=uix-kit-rtl.css.map */
+
 
 /*# sourceMappingURL=uix-kit-rtl.css.map */

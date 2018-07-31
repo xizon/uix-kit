@@ -67,19 +67,19 @@
     2. Table 
     3. Bullet List 
     4. Helper Classes 
-    5. Spacing 
-    6. Basic Layout Styles 
-    7. Typography 
-    8. Navigation 
-    9. Header Area 
-    10. Brand 
-    11. Footer 
+    5. Basic Layout Styles 
+    6. Typography 
+    7. Spacing 
+    8. Header Area 
+    9. Footer 
+    10. Navigation 
+    11. Brand 
     12. Video 
     13. Back to Top 
-    14. Loader 
-    15. Social Media Icons 
-    16. Pagination 
-    17. Filterable Navigation 
+    14. Pagination 
+    15. Filterable Navigation 
+    16. Social Media Icons 
+    17. Loader 
     18. Sidebar  
     19. Search 
     20. Tags 
@@ -95,8 +95,8 @@
     30. Accordion Background Images 
     31. Advanced Content Slider 
     32. Advanced Slider (Special Effects) 
-    33. Advanced Slider (Basic) 
-    34. Badges 
+    33. Badges 
+    34. Advanced Slider (Basic) 
     35. Blended Grid Layout 
     36. Breadcrumbs 
     37. Button 
@@ -113,8 +113,8 @@
     48. Flexslider 
     49. Footer Templates 
     50. Form 
-    51. Form Progress 
-    52. Gallery 
+    51. Gallery 
+    52. Form Progress 
     53. Heading 
     54. Image Animation 
     55. Image Shapes 
@@ -139,8 +139,8 @@
     74. Progress Bar 
     75. Ribbon 
     76. Shape Animation 
-    77. Show More Less 
-    78. Single Post 
+    77. Single Post 
+    78. Show More Less 
     79. Source Code 
     80. Striking 
     81. SVG Map 
@@ -13646,84 +13646,6 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
 }
 
 /* ====================================================== 
-   <!-- Team Focus --> 
-/* ====================================================== */
-.uix-team-focus__info {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 12;
-  width: 300px;
-  padding-left: 2rem;
-  cursor: pointer;
-  opacity: 0;
-  display: none;
-}
-
-.uix-team-focus__info h4 em {
-  display: block;
-  font-size: 0.75rem !important;
-}
-
-.uix-team-focus__info h4 span {
-  display: block;
-}
-
-.uix-team-focus__info h4::after {
-  content: '';
-  display: block;
-  height: 3px;
-  width: 35px;
-  background: #EC5E79;
-  margin: .5rem 0;
-}
-
-.uix-team-focus__mask {
-  display: block;
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 11;
-  content: '';
-  width: 100vw;
-  height: 100vh;
-  background-color: transparent;
-  display: none;
-}
-
-.uix-team-focus {
-  position: relative;
-  z-index: 10;
-}
-
-.uix-team-focus > div {
-  float: left;
-  cursor: pointer;
-  z-index: 4;
-  text-align: center;
-}
-
-.uix-team-focus > div img {
-  width: 90%;
-}
-
-.uix-team-focus > div.focus {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  height: 100px;
-  transform: translateX(-50%);
-  z-index: 5;
-  margin-left: -300px;
-}
-
-.uix-team-focus > div.focus img {
-  transform: scale(1.3);
-  box-shadow: 0 1.8vw 4vw -.7vw #cbdfee;
-}
-
-/* ====================================================== 
     <!-- Tabs -->      
 /* ====================================================== */
 /*
@@ -13885,6 +13807,84 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
   .uix-tabs.uix-tabs--rotation .uix-tabs__nav {
     width: auto !important;
   }
+}
+
+/* ====================================================== 
+   <!-- Team Focus --> 
+/* ====================================================== */
+.uix-team-focus__info {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 12;
+  width: 300px;
+  padding-left: 2rem;
+  cursor: pointer;
+  opacity: 0;
+  display: none;
+}
+
+.uix-team-focus__info h4 em {
+  display: block;
+  font-size: 0.75rem !important;
+}
+
+.uix-team-focus__info h4 span {
+  display: block;
+}
+
+.uix-team-focus__info h4::after {
+  content: '';
+  display: block;
+  height: 3px;
+  width: 35px;
+  background: #EC5E79;
+  margin: .5rem 0;
+}
+
+.uix-team-focus__mask {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 11;
+  content: '';
+  width: 100vw;
+  height: 100vh;
+  background-color: transparent;
+  display: none;
+}
+
+.uix-team-focus {
+  position: relative;
+  z-index: 10;
+}
+
+.uix-team-focus > div {
+  float: left;
+  cursor: pointer;
+  z-index: 4;
+  text-align: center;
+}
+
+.uix-team-focus > div img {
+  width: 90%;
+}
+
+.uix-team-focus > div.focus {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 100px;
+  transform: translateX(-50%);
+  z-index: 5;
+  margin-left: -300px;
+}
+
+.uix-team-focus > div.focus img {
+  transform: scale(1.3);
+  box-shadow: 0 1.8vw 4vw -.7vw #cbdfee;
 }
 
 /* ====================================================== 

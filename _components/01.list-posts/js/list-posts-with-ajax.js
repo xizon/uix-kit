@@ -397,7 +397,7 @@ APP = ( function ( APP, $, window, document ) {
 						$button.addClass( 'hide' );
 						
 						//callback information
-						$divRoot.find( pushContainer ).after( noneInfo.none );
+						$divRoot.after( noneInfo.none );
 						
 					}
 					
@@ -475,13 +475,13 @@ APP = ( function ( APP, $, window, document ) {
 							) {
 								$button.addClass( 'hide' );
 								//callback information
-								$divRoot.find( pushContainer ).after( noneInfo.none );
+								$divRoot.after( noneInfo.none );
 							}		
 							
 							if ( curPage == 1 ) {
 								$button.addClass( 'hide' );
 								//callback information
-								$divRoot.find( pushContainer ).after( noneInfo.none );
+								$divRoot.after( noneInfo.none );
 							}			
 							
 
@@ -489,7 +489,7 @@ APP = ( function ( APP, $, window, document ) {
 							console.log( err.message );
 							$button.addClass( 'hide' );
 							//callback information
-							$divRoot.find( pushContainer ).after( noneInfo.error );
+							$divRoot.after( noneInfo.error );
 
 
 						}
@@ -505,7 +505,7 @@ APP = ( function ( APP, $, window, document ) {
 					 $button.addClass( 'hide' );
 					 
 					//callback information
-					$divRoot.find( pushContainer ).after( noneInfo.none );
+					$divRoot.after( noneInfo.none );
 					 
 					 
 				 }
