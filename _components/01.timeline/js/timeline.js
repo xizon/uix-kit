@@ -68,9 +68,7 @@ APP = ( function ( APP, $, window, document ) {
 				if ( $this.hasClass( 'is-reversed' ) ) {
 					
 					// Set equal heights
-					var infoNewHeight = setEqualHeights( $timeline.find( '.uix-timeline__item--info' ) );
-
-					function setEqualHeights( el ) {
+					var setEqualHeights = function( el ) {
 						var counter = 0;
 
 						for ( var i = 0; i < el.length; i++) {
@@ -88,12 +86,15 @@ APP = ( function ( APP, $, window, document ) {
 
 						return counter;
 
-					}	
+					};
+					
+					var infoNewHeight = setEqualHeights( $timeline.find( '.uix-timeline__item--info' ) );
+					
 					
 			
 					// Reset container height
 					$container.css( {
-						'padding' : infoNewHeight + 'px 0'
+						'padding' : parseFloat( infoNewHeight + 64 ) + 'px 0'
 					} );	
 				}
 

@@ -1,11 +1,17 @@
 # Changelog
 
 
+
+#### = 2.0.1 (August 1, 2018) =
+
+* Fix: Fixed bubbling issue with Dropdown Menu module.
+* Tweak: Added return information of ajax asynchronous callback when the content is empty.
+
+
 #### = 2.0.0 (July 31, 2018) =
 
 * New: Add a new module "SVG Map".
 * New: Add a new effect flyInOut for text animation.
-* New: Added return information of ajax asynchronous callback when the content is empty.
 
 
 #### = 1.9.8 (July 30, 2018) =

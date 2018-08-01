@@ -8,7 +8,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.POST_LIST_AJAX               = APP.POST_LIST_AJAX || {};
-	APP.POST_LIST_AJAX.version       = '0.0.6';
+	APP.POST_LIST_AJAX.version       = '0.0.7';
     APP.POST_LIST_AJAX.documentReady = function( $ ) {
 
 		$( '[data-ajax-list-json]' ).each( function() {
@@ -384,6 +384,19 @@ APP = ( function ( APP, $, window, document ) {
 				$button          = $( trigger );
 
 			
+			//hide the button and callback the information
+			var returnEmptyInfo = function() {
+				$button.addClass( 'hide' );
+				$divRoot.after( noneInfo.none );		
+			}
+			
+			var returnDataError = function() {
+				$button.addClass( 'hide' );
+				$divRoot.after( noneInfo.error );	
+			}
+			
+							
+			
 			$.ajax({
 				url      : jsonFile, //Be careful about the format of the JSON file
 				method   : method,
@@ -394,14 +407,9 @@ APP = ( function ( APP, $, window, document ) {
 					
 					//If the data is empty
 					if ( data && ( data == null || Object.prototype.toString.call( data.items )=='[object String]' ) ) {
-						$button.addClass( 'hide' );
-						
-						//callback information
-						$divRoot.after( noneInfo.none );
-						
+						returnEmptyInfo();
 					}
 					
-				
 					
 					//Check if a key exists inside a json object
 					if ( data && data.hasOwnProperty( 'items' ) && Object.prototype.toString.call( data.items )=='[object Array]' ) {
@@ -473,40 +481,32 @@ APP = ( function ( APP, $, window, document ) {
 								totalPage != -1 &&
 								totalPage != 1
 							) {
-								$button.addClass( 'hide' );
-								//callback information
-								$divRoot.after( noneInfo.none );
+								returnEmptyInfo();
+								
 							}		
 							
 							if ( curPage == 1 ) {
-								$button.addClass( 'hide' );
-								//callback information
-								$divRoot.after( noneInfo.none );
+								returnEmptyInfo();
+								
 							}			
 							
 
 						} catch ( err ) {
 							console.log( err.message );
-							$button.addClass( 'hide' );
-							//callback information
-							$divRoot.after( noneInfo.error );
-
-
+							returnDataError();
+							
 						}
 						
 
 						
+					} else {
+						//if not array
+						returnEmptyInfo();
 					}
 
 				 },
 				 error : function( XMLHttpRequest, textStatus, errorThrown ) {
-					 
-					 //The current data is empty
-					 $button.addClass( 'hide' );
-					 
-					//callback information
-					$divRoot.after( noneInfo.none );
-					 
+					 returnEmptyInfo();
 					 
 				 }
 			});
