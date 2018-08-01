@@ -283,7 +283,7 @@ $horizontal-container-width: 1000px;
 			position: absolute;
 			z-index: 0;
 			background-color: $highlight-color1;
-			background-image: linear-gradient(to right, $highlight-color1 0%, #f60 20%, #d83ba0 100%);
+			background-image: linear-gradient(to right, $btn-gradient-color1 0%, $btn-gradient-color2 20%, $btn-gradient-color3 100%);
 			width: 100%;
 			height: 1px;
 			top: 161px;
