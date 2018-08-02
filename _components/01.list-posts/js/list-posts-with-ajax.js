@@ -388,12 +388,12 @@ APP = ( function ( APP, $, window, document ) {
 			var returnEmptyInfo = function() {
 				$button.addClass( 'hide' );
 				$divRoot.after( noneInfo.none );		
-			}
+			};
 			
 			var returnDataError = function() {
 				$button.addClass( 'hide' );
 				$divRoot.after( noneInfo.error );	
-			}
+			};
 			
 							
 			

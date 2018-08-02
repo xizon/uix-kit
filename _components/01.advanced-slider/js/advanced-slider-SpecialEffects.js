@@ -9,7 +9,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.ADVANCED_SLIDER_FILTER               = APP.ADVANCED_SLIDER_FILTER || {};
-	APP.ADVANCED_SLIDER_FILTER.version       = '0.0.6';
+	APP.ADVANCED_SLIDER_FILTER.version       = '0.0.7';
     APP.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 	
@@ -32,10 +32,10 @@ APP = ( function ( APP, $, window, document ) {
 			renderer,
 		    
 			//PIXI
-			renderer_filter,
-		    rendererCanvasID_filter   = rendererCanvasID,
-		    stage_filter,
-			items_container,
+			renderer__filter,
+		    rendererCanvasID__filter  = rendererCanvasID,
+		    stage__filter,
+			container__items,
 			displacementSprite,
 			displacementFilter,
 			
@@ -232,7 +232,7 @@ APP = ( function ( APP, $, window, document ) {
 			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider-sp__pagination';
 			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
 			if( typeof dataLoop === typeof undefined ) dataLoop = false;
-			if( typeof dataFilterTexture === typeof undefined ) dataFilterTexture = '';
+			if( typeof dataFilterTexture === typeof undefined || !dataFilterTexture || dataFilterTexture == '' ) dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
 
 				
@@ -260,15 +260,15 @@ APP = ( function ( APP, $, window, document ) {
 														view            : document.getElementById( rendererCanvasID )
 													});
 
-				renderer_filter       = new PIXI.autoDetectRenderer( $this.width(), $this.height(), {
+				renderer__filter       = new PIXI.autoDetectRenderer( $this.width(), $this.height(), {
 														//backgroundColor : 0x000000, 
 														transparent     : true,
-														view            : document.getElementById( rendererCanvasID_filter )
+														view            : document.getElementById( rendererCanvasID__filter )
 													});
 
 
-				stage_filter          = new PIXI.Container();
-				items_container       = new PIXI.Container();
+				stage__filter          = new PIXI.Container();
+				container__items       = new PIXI.Container();
 				displacementSprite    = ( dataFilterTexture.indexOf( '.mp4' ) >= 0 ) ? new PIXI.Sprite( PIXI.Texture.fromVideo( dataFilterTexture ) ) : new PIXI.Sprite.fromImage( dataFilterTexture );
 				displacementFilter    = new PIXI.filters.DisplacementFilter( displacementSprite );
 
@@ -383,7 +383,7 @@ APP = ( function ( APP, $, window, document ) {
 				//----------------------------------------------------------------------------------
 				//--------------------------------- Liquid Distortion Effect -----------------------
 				//----------------------------------------------------------------------------------
-				//Usage of returning sprite object: items_container.children[index]
+				//Usage of returning sprite object: container__items.children[index]
 				if ( $this.hasClass( 'uix-advanced-slider-sp--eff-liquid' ) ) {
 
 					$this.find( '.uix-advanced-slider-sp__item' ).each( function( index )  {
@@ -467,31 +467,30 @@ APP = ( function ( APP, $, window, document ) {
 						curSprite.scale.set( canvasRatio );
 
 
-						items_container.addChild( curSprite );
-						// Enable interactions
-						items_container.interactive = true;
+						container__items.addChild( curSprite );
 
 
 						//Add child container to the main container 
 						//-------------------------------------
-						stage_filter.addChild( items_container );
+						stage__filter.addChild( container__items );
 						// Enable Interactions
-						stage_filter.interactive = true;
+						stage__filter.interactive = true;
 
+						
+						//Set the filter to stage and set some default values for the animation
+						//-------------------------------------
+						
 						//A texture stores the information that represents an image
 						displacementSprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
 
-
-						//Set the filter to stage and set some default values for the animation
-						//-------------------------------------
-						stage_filter.filters = [ displacementFilter ];    
+						stage__filter.filters = [ displacementFilter ];    
 
 
 						//Add filter container to the main container
 						//-------------------------------------				
 						displacementSprite.anchor.set( 0.5 );
-						displacementSprite.x = renderer_filter.width / 2;
-						displacementSprite.y = renderer_filter.height / 2; 
+						displacementSprite.x = renderer__filter.width / 2;
+						displacementSprite.y = renderer__filter.height / 2; 
 
 						displacementSprite.scale.x = 1;
 						displacementSprite.scale.y = 1;
@@ -499,7 +498,7 @@ APP = ( function ( APP, $, window, document ) {
 						// PIXI tries to fit the filter bounding box to the renderer so we optionally bypass
 						displacementFilter.autoFit = false;
 
-						stage_filter.addChild( displacementSprite );
+						stage__filter.addChild( displacementSprite );
 
 
 						//Animation Effects
@@ -509,7 +508,7 @@ APP = ( function ( APP, $, window, document ) {
 						ticker.add( function( delta ) {
 
 							// Render updated scene
-							renderer_filter.render( stage_filter );
+							renderer__filter.render( stage__filter );
 
 						});
 						
@@ -531,7 +530,7 @@ APP = ( function ( APP, $, window, document ) {
 				//----------------------------------------------------------------------------------
 				//--------------------------------- Liquid Distortion Effect 2 -----------------------
 				//----------------------------------------------------------------------------------
-				//Usage of returning sprite object: items_container.children[index]
+				//Usage of returning sprite object: container__items.children[index]
 				if ( $this.hasClass( 'uix-advanced-slider-sp--eff-liquid2' ) ) {
 
 					$this.find( '.uix-advanced-slider-sp__item' ).each( function( index )  {
@@ -619,39 +618,37 @@ APP = ( function ( APP, $, window, document ) {
 						});	
 
 
-						items_container.addChild( curSprite );
-						// Enable interactions
-						items_container.interactive = true;
+						container__items.addChild( curSprite );
 
 
 						//Add child container to the main container 
 						//-------------------------------------
-						stage_filter.addChild( items_container );
+						stage__filter.addChild( container__items );
 						// Enable Interactions
-						stage_filter.interactive = true;
+						stage__filter.interactive = true;
 
+						
+						//Set the filter to stage and set some default values for the animation
+						//-------------------------------------
+						
 						//A texture stores the information that represents an image
 						displacementSprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.CLAMP;
 						
-
-
-						//Set the filter to stage and set some default values for the animation
-						//-------------------------------------
-						stage_filter.filters = [ displacementFilter ];    
+						stage__filter.filters = [ displacementFilter ];    
 
 
 						//Add filter container to the main container
 						//-------------------------------------				
 						displacementSprite.anchor.set( 0.5 );
-						displacementSprite.x = renderer_filter.width / 2;
-						displacementSprite.y = renderer_filter.height / 2;
+						displacementSprite.x = renderer__filter.width / 2;
+						displacementSprite.y = renderer__filter.height / 2;
 					
 
 
 						// PIXI tries to fit the filter bounding box to the renderer so we optionally bypass
 						displacementFilter.autoFit = false;
 
-						stage_filter.addChild( displacementSprite );
+						stage__filter.addChild( displacementSprite );
 
 						//Animation Effects
 						//-------------------------------------
@@ -661,7 +658,7 @@ APP = ( function ( APP, $, window, document ) {
 							
           
 							// Render updated scene
-							renderer_filter.render( stage_filter );
+							renderer__filter.render( stage__filter );
 
 						});
 
@@ -681,7 +678,7 @@ APP = ( function ( APP, $, window, document ) {
 				//----------------------------------------------------------------------------------
 				//--------------------------------- Liquid Distortion Effect 3 -----------------------
 				//----------------------------------------------------------------------------------
-				//Usage of returning sprite object: items_container.children[index]
+				//Usage of returning sprite object: container__items.children[index]
 				if ( $this.hasClass( 'uix-advanced-slider-sp--eff-liquid3' ) ) {
 
 					$this.find( '.uix-advanced-slider-sp__item' ).each( function( index )  {
@@ -769,39 +766,37 @@ APP = ( function ( APP, $, window, document ) {
 						});	
 
 
-						items_container.addChild( curSprite );
-						// Enable interactions
-						items_container.interactive = true;
+						container__items.addChild( curSprite );
 
 
 						//Add child container to the main container 
 						//-------------------------------------
-						stage_filter.addChild( items_container );
+						stage__filter.addChild( container__items );
 						// Enable Interactions
-						stage_filter.interactive = true;
+						stage__filter.interactive = true;
+						
+						
+						//Set the filter to stage and set some default values for the animation
+						//-------------------------------------
 
 						//A texture stores the information that represents an image
 						displacementSprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
 						
-
-
-						//Set the filter to stage and set some default values for the animation
-						//-------------------------------------
-						stage_filter.filters = [ displacementFilter ];    
+						stage__filter.filters = [ displacementFilter ];    
 
 
 						//Add filter container to the main container
 						//-------------------------------------				
 						displacementSprite.anchor.set( 0.5 );
-						displacementSprite.x = renderer_filter.width / 2;
-						displacementSprite.y = renderer_filter.height / 2;
+						displacementSprite.x = renderer__filter.width / 2;
+						displacementSprite.y = renderer__filter.height / 2;
 					
 
 
 						// PIXI tries to fit the filter bounding box to the renderer so we optionally bypass
 						displacementFilter.autoFit = false;
 
-						stage_filter.addChild( displacementSprite );
+						stage__filter.addChild( displacementSprite );
 
 						//Animation Effects
 						//-------------------------------------
@@ -814,7 +809,7 @@ APP = ( function ( APP, $, window, document ) {
 							displacementSprite.y += 0.3;
 							
 							// Render updated scene
-							renderer_filter.render( stage_filter );
+							renderer__filter.render( stage__filter );
 
 						});
 
@@ -829,6 +824,176 @@ APP = ( function ( APP, $, window, document ) {
 
 
 				}// end effect
+				
+				
+				
+				//----------------------------------------------------------------------------------
+				//--------------------------------- Liquid Distortion Effect 4 -----------------------
+				//----------------------------------------------------------------------------------
+				//Usage of returning sprite object: container__items.children[index]
+				if ( $this.hasClass( 'uix-advanced-slider-sp--eff-parallax' ) ) {
+
+					$this.find( '.uix-advanced-slider-sp__item' ).each( function( index )  {
+
+						var $thisItem = $( this );
+
+
+
+						//Load sprite from each slider to canvas
+						//-------------------------------------
+						var curSprite, 
+							canvasRatio = $this.width()/nativeItemW;
+
+						if ( $thisItem.find( 'video' ).length > 0 ) {
+
+
+							// create a video texture from a path
+							var videoURL = $thisItem.find( 'source:first' ).attr( 'src' ),
+								texture  = PIXI.Texture.fromVideo( videoURL );
+
+							curSprite = new PIXI.Sprite( texture );
+
+							// pause the video
+							var videoSource = texture.baseTexture.source;
+							videoSource.autoplay = false;
+							videoSource.pause();
+							videoSource.currentTime = 0;
+							videoSource.muted = true;
+
+
+							//Returns the dimensions (intrinsic height and width ) of the video
+							var video = document.getElementById( $thisItem.find( 'video' ).attr( 'id' ) );
+							video.addEventListener( 'loadedmetadata', function( e ) {
+
+								var	curW    = this.videoWidth,
+									curH    = this.videoHeight,
+									newW    = curW,
+									newH    = curH;
+
+								newW = $this.width();
+
+								//Scaled/Proportional Content 
+								newH = curH*(newW/curW);
+
+								//At the same time change the height of the canvas
+								renderer.view.style.width = newW + 'px';
+								renderer.view.style.height = newH + 'px';	
+
+
+							}, false);	
+
+							video.src = videoURL;
+
+
+
+						} else {
+
+							var imgURL   = $thisItem.find( 'img' ).attr( 'src' ),
+								imgCur   = new Image();
+
+							curSprite = new PIXI.Sprite.fromImage( imgURL );
+
+							imgCur.onload = function() {
+
+								//At the same time change the height of the canvas
+								renderer.view.style.width = $thisItem.find( 'img' ).width() + 'px';
+								renderer.view.style.height =$thisItem.find( 'img' ).height() + 'px';
+
+							};
+
+							imgCur.src = imgURL;
+
+
+						}
+
+						curSprite.width  = $this.width();
+						curSprite.height = $this.height();	
+
+
+						//Need to scale according to the screen
+						curSprite.scale.set( canvasRatio );
+						
+
+						container__items.addChild( curSprite );
+
+
+						
+						//Add child container to the main container 
+						//-------------------------------------
+						stage__filter.addChild( container__items );
+						// Enable Interactions
+						stage__filter.interactive = true;
+
+						
+						
+						
+						// Create mask
+						//-------------------------------------
+						//current mask
+						var curSpriteMask = new PIXI.Graphics();
+						curSpriteMask.lineStyle( 0 );
+						curSpriteMask.beginFill( 0xFFFFFF );
+						curSpriteMask.moveTo(0,0);
+						curSpriteMask.lineTo( renderer.view.width, 0 );
+						curSpriteMask.lineTo( renderer.view.width, renderer.view.height );
+						curSpriteMask.lineTo( 0, renderer.view.height );
+						curSpriteMask.endFill();
+						
+						
+						curSpriteMask.position.x = 0;
+						curSpriteMask.position.y = 0;
+						
+						
+						curSprite.mask = curSpriteMask;
+						stage__filter.addChild( curSpriteMask ); //Do not add to the container
+						
+
+						//next mask
+//						var curSpriteMaskNext = new PIXI.Graphics();
+//						curSpriteMaskNext.lineStyle( 0 );
+//						curSpriteMaskNext.beginFill( 0xFFFFFF );
+//						curSpriteMaskNext.moveTo(0,0);
+//						curSpriteMaskNext.lineTo( renderer.view.width, 0 );
+//						curSpriteMaskNext.lineTo( renderer.view.width, renderer.view.height );
+//						curSpriteMaskNext.lineTo( 0, renderer.view.height );
+//						curSpriteMaskNext.endFill();
+//						
+//						curSpriteMaskNext.position.x = 0;
+//						curSpriteMaskNext.position.y = 0;
+//						
+//						
+//						container__items.mask = curSpriteMaskNext;
+//						stage__filter.addChild( curSpriteMaskNext ); //Do not add to the container
+//						
+//
+//						
+						
+						
+
+						//Animation Effects
+						//-------------------------------------
+						var ticker       = new PIXI.ticker.Ticker();
+						ticker.autoStart = true;
+						ticker.add( function( delta ) {
+
+							// Render updated scene
+							renderer__filter.render( stage__filter );
+
+						});
+						
+	
+
+					});
+
+					//Initialize the default height of canvas
+					//-------------------------------------	
+					setTimeout( function() {
+						canvasDefaultInit( $first );
+					}, animDuration );
+
+
+				}// end effect
+				
 				
 
 				//----------------------------------------------------------------------------------
@@ -1153,7 +1318,7 @@ APP = ( function ( APP, $, window, document ) {
 
 				//Canvas Interactions
 				//-------------------------------------
-				transitionInteractions( 0, itemsTotal-1, $this, 'in' );
+				transitionInteractions( 0, itemsTotal-1, $this, 'in', 'next' );
 				
 				
 				
@@ -1185,17 +1350,18 @@ APP = ( function ( APP, $, window, document ) {
 				e.preventDefault();
 
 				if ( !$( this ).hasClass( 'active' ) ) {
-					
-					
-					//Canvas Interactions
-					transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), sliderWrapper, 'out' );
-					
+
 					
 					//Determine the direction
 					var curDir = 'prev';
 					if ( $( this ).attr( 'data-index' ) > parseFloat( $items.filter( '.active' ).index() ) ) {
 						curDir = 'next';
 					}
+					
+					
+					//Canvas Interactions
+					transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), sliderWrapper, 'out', curDir );
+						
 					
 					
 					//Update the current and previous/next items
@@ -1227,7 +1393,7 @@ APP = ( function ( APP, $, window, document ) {
 				e.preventDefault();
 
 				//Canvas Interactions
-				transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), sliderWrapper, 'out' );	
+				transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), sliderWrapper, 'out', 'prev' );	
 
 				//Update the current and previous items
 				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, sliderWrapper, 'prev' );
@@ -1241,7 +1407,7 @@ APP = ( function ( APP, $, window, document ) {
 				e.preventDefault();
 
 				//Canvas Interactions
-				transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), sliderWrapper, 'out' );	
+				transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), sliderWrapper, 'out', 'next' );	
 
 				//Update the current and next items
 				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, sliderWrapper, 'next' );
@@ -1431,7 +1597,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			//Canvas Interactions
 			//-------------------------------------
-			transitionInteractions( elementIndex, $items.filter( '.leave' ).index(), slider, 'in' );
+			transitionInteractions( elementIndex, $items.filter( '.leave' ).index(), slider, 'in', dir );
 			
 
 			
@@ -1507,9 +1673,10 @@ APP = ( function ( APP, $, window, document ) {
 		 * @param  {object} slider                 - Selector of the slider.
 		 * @param  {string} goType                 - The type of entry and exit between two items.  
 		                                             Optional values: in, out
+		 * @param  {string} dir                    - Switching direction indicator.	 
 		 * @return {void}                          - The constructor.
 		 */
-        function transitionInteractions( elementIndex, prevElementIndex, slider, goType ) {
+        function transitionInteractions( elementIndex, prevElementIndex, slider, goType, dir ) {
 			
 			if ( Modernizr.webgl ) {
 			
@@ -1631,8 +1798,8 @@ APP = ( function ( APP, $, window, document ) {
 				if ( slider.hasClass( 'uix-advanced-slider-sp--eff-liquid' ) ) {
 					
 				
-					var curSp  = items_container.children[ elementIndex ],
-						prevSp = items_container.children[ prevElementIndex ];
+					var curSp  = container__items.children[ elementIndex ],
+						prevSp = container__items.children[ prevElementIndex ];
 
 						
 					//Display the current item
@@ -1640,7 +1807,7 @@ APP = ( function ( APP, $, window, document ) {
 					if ( !slider.hasClass( 'js-init-ok' ) ) {
 						for ( var k = 0; k < spTotal; k++ ) {
 
-							var obj = items_container.children[ k ];
+							var obj = container__items.children[ k ];
 							
 							TweenMax.set( obj, {
 								alpha : 0
@@ -1667,7 +1834,7 @@ APP = ( function ( APP, $, window, document ) {
 						setTimeout( function() {
 							for ( var k = 0; k < spTotal; k++ ) {
 
-								var obj = items_container.children[ k ];
+								var obj = container__items.children[ k ];
 								
 								//pause all videos
 								if ( obj._texture.baseTexture.imageType == null ) {
@@ -1782,7 +1949,7 @@ APP = ( function ( APP, $, window, document ) {
 							alpha : 0,
 							onComplete    : function() {
 
-								var curSp = items_container.children[ elementIndex ];
+								var curSp = container__items.children[ elementIndex ];
 
 								TweenMax.to( this.target, animDuration/1000, {
 									alpha : 1
@@ -1792,7 +1959,7 @@ APP = ( function ( APP, $, window, document ) {
 								//display the current item
 								for ( var k = 0; k < spTotal; k++ ) {
 
-									var obj = items_container.children[ k ];
+									var obj = container__items.children[ k ];
 									TweenMax.set( obj, {
 										alpha : 0
 									});	
@@ -1910,7 +2077,7 @@ APP = ( function ( APP, $, window, document ) {
 							alpha : 0,
 							onComplete    : function() {
 
-								var curSp = items_container.children[ elementIndex ];
+								var curSp = container__items.children[ elementIndex ];
 
 								TweenMax.to( this.target, animDuration/1000, {
 									alpha : 1
@@ -1920,7 +2087,7 @@ APP = ( function ( APP, $, window, document ) {
 								//display the current item
 								for ( var k = 0; k < spTotal; k++ ) {
 
-									var obj = items_container.children[ k ];
+									var obj = container__items.children[ k ];
 									TweenMax.set( obj, {
 										alpha : 0
 									});	
@@ -1998,7 +2165,164 @@ APP = ( function ( APP, $, window, document ) {
 				} // end effect
 				
 				
+				//----------------------------------------------------------------------------------
+				//--------------------------------- Liquid Distortion Effect 4 -----------------------
+				//----------------------------------------------------------------------------------
+				if ( slider.hasClass( 'uix-advanced-slider-sp--eff-parallax' ) ) {
+					
 				
+					var curSpParallax  = container__items.children[ elementIndex ],
+						prevSpParallax = container__items.children[ prevElementIndex ];
+
+					//Display the current item
+					//-------------------------------------
+					if ( !slider.hasClass( 'js-init-ok' ) ) {
+						for ( var m = 0; m < spTotal; m++ ) {
+
+							var objParallax = container__items.children[ m ];
+							
+							TweenMax.set( objParallax.mask, {
+								x : renderer.view.width
+							});
+						}
+
+						//Avoid repeated initialization
+						slider.addClass( 'js-init-ok' );	
+					}
+
+					
+
+
+					
+					//Display wrapper of canvas (transitions between slides)
+					//-------------------------------------	
+					if ( goType == 'out' ) {
+						//Current item leaving action
+
+						
+					} else {
+						
+						
+						//Video sprite initialization
+						setTimeout( function() {
+							for ( var m = 0; m < spTotal; m++ ) {
+
+								var obj = container__items.children[ m ];
+								
+								//pause all videos
+								if ( obj._texture.baseTexture.imageType == null ) {
+									var videoSource = obj.texture.baseTexture.source;
+
+
+									// play the video
+									videoSource.currentTime = 0;
+									videoSource.autoplay = false;
+									videoSource.pause();
+									videoSource.muted = true;
+								}	
+	
+
+							}
+
+							//play current video
+							if ( curSpParallax._texture.baseTexture.imageType == null ) {
+								var videoSource2 = curSpParallax.texture.baseTexture.source;
+
+								// play the video
+								videoSource2.currentTime = 0;
+								videoSource2.autoplay = true;
+								videoSource2.play();
+								videoSource2.muted = false;
+							}	
+
+	
+						}, animDuration*2 );
+						
+						
+						
+					
+						
+						var restoreX,
+							offsetX       = renderer.view.width / 6,
+							parallaxSpeed = 1.2,
+							restoreItems  = function() {
+								//restore other items besides the current item
+								for ( var n = 0; n < spTotal; n++ ) {
+
+									var objParallax = container__items.children[ n ];
+									if ( elementIndex != n ) objParallax.mask.x = restoreX;
+								}
+	
+							},
+							goNextItem    = function() {
+								
+								// Paralax effect on current slide
+								TweenMax.to( curSpParallax, parallaxSpeed, { 
+									x      : 0, 
+									ease   : Power2.easeInOut 
+								});
+
+								// Current Mask animation
+								TweenMax.to( curSpParallax.mask, parallaxSpeed, { 
+									x          : 0, 
+									ease       : Power4.easeInOut, 
+									onComplete : function() {
+										restoreItems();
+									}
+								});		
+								
+								//text effect
+								setTimeout( function() {
+									if ( APP.TEXT_EFFECT ) APP.TEXT_EFFECT.pageLoaded();
+								}, parallaxSpeed*1000 / 2 );
+								
+								
+							};
+						
+						
+						// Direction handler
+						if ( dir == 'next' ){
+							
+							curSpParallax.x = offsetX;
+							curSpParallax.mask.x = renderer.view.width;
+							restoreX = renderer.view.width;
+				
+							// Paralax effect on current slide
+							TweenMax.to( prevSpParallax, parallaxSpeed, { 
+								x      : -offsetX, 
+								ease   : Power2.easeInOut
+							});
+							
+						} else { 
+							
+							curSpParallax.x = -offsetX;
+							curSpParallax.mask.x = - ( renderer.view.width + curSpParallax.x );
+							restoreX = -renderer.view.width;
+							
+							// Paralax effect on previous slide
+							TweenMax.to( prevSpParallax, parallaxSpeed, { 
+								x      : offsetX, 
+								ease   : Power2.easeInOut
+							});
+
+							// Previous Mask animation
+							TweenMax.to( prevSpParallax.mask, parallaxSpeed, { 
+								x      : renderer.view.width, 
+								ease   : Power4.easeInOut
+							});
+
+							
+						}
+						
+						goNextItem();
+						
+
+
+					}
+					
+				
+
+				} // end effect		
 				
 				
 				//----------------------------------------------------------------------------------

@@ -1,6 +1,11 @@
 # Changelog
 
 
+#### = 2.0.2 (August 2, 2018) =
+
+* Tweak: Extended the parallax effect of the "Advanced Slider".
+
+
 
 #### = 2.0.1 (August 1, 2018) =
 
