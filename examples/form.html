@@ -53,11 +53,11 @@
         
        
         <!-- Theme  -->
-        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTUzMzIwNTIyNDA5Mg"/>
+        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTUzMzU0ODUxMDE0OA"/>
         
         
          <!--[if lt IE 10]>
-           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTUzMzIwNTIyNDA5Mg" />
+           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTUzMzU0ODUxMDE0OA" />
         <![endif]-->
         
         
@@ -195,17 +195,15 @@
 												<li>
 													<ul class="sub-menu">
 														<li><span class="multi-column-title">Web Elements (Part 1)</span></li>
+														<li><a href="lightbox.html">Lightbox</a></li>
 														<li><a href="modal-dialog.html">Modal Dialog</a></li>
 														<li><a href="social-meida-icons.html">Social Media Icons</a></li>
 														<li><a href="form.html">Form Elements</a></li>
 														<li><a href="form2.html">Form Elements 2</a></li>
 														<li><a href="form-progress.html">Form Progress</a></li>
-														<li><a href="timeline.html">Timeline</a></li>
-														<li><a href="tabs.html">Tabs</a></li>
-														<li><a href="accordion.html">Accordion</a></li>
-														<li><a href="accordion-img.html">Accordion Background Images</a></li>
 														<li><a href="counter.html">Counter</a></li>
 														<li><a href="progress-bar.html">Progress Bar</a></li>
+														<li><a href="progress-line.html">Progress Line</a><span class="uix-bubble">new</span></li>
 														<li><a href="vertical-text.html">Vertical Text</a></li>
 														<li><a href="tooltip.html">Tooltip</a></li>
 														<li><a href="dots.html">Dots</a></li>
@@ -214,6 +212,7 @@
 												        <li><a href="shape-animation.html">Shape Animation</a></li>
 													    <li><a href="image-animation.html">Image Animation</a><span class="uix-bubble">new</span></li>
 													    <li><a href="svg-map.html">SVG Map</a><span class="uix-bubble">new</span></li>
+													    <li><a href="floating-side-element.html">Floating Side Element</a><span class="uix-bubble">new</span></li>
 													   
 													   
 														
@@ -290,7 +289,10 @@
 														<li><a href="team-grid.html">Team Grid</a></li>
 														<li><a href="team-focus.html">Team Focus</a></li>
 														<li><a href="card.html">Cards</a></li>
-
+														<li><a href="timeline.html">Timeline</a></li>
+														<li><a href="tabs.html">Tabs</a></li>
+														<li><a href="accordion.html">Accordion</a></li>
+														<li><a href="accordion-img.html">Accordion Background Images</a></li>
 														
 													</ul>
 													<!-- .sub-menu  end -->
@@ -308,7 +310,7 @@
 														<li><a href="list-posts-with-ajax-infinitescroll.html">Infinite Scroll Posts</a></li>
 														<li><a href="show-more-less.html">Show More Less</a></li>
 														<li><a href="mousewheel-interaction.html">Mousewheel Interaction</a></li>
-														<li><a href="lightbox.html">Lightbox</a></li>
+														<li><a href="hover-delay-interaction.html">Hover Delay Interaction</a></li>
 														<li><a href="dynamic-dropdown-list-json.html">Dynamic Drop Down List</a></li>
 														<li><a href="one-page.html">Full Page/One Page</a></li>
 														<li><a href="one-page2.html">Full Page/One Page 2</a></li>
@@ -423,7 +425,7 @@
        <!-- Content 02
         ====================================================== -->
         <section class="uix-spacing--m">
-            <div class="container uix-t-c">
+            <div class="container">
                    
                    
                     <div class="row">
@@ -433,10 +435,38 @@
                         
                                  <form method="post" action="#">
                
+               
+                                 
+								   <div class="row">
+										<div class="col-sm-12">
+
+											Text: 
+										    <div class="uix-controls">
+											  <input type="text" class="float-label" value="" name="sname">
+											  <label>Input Normal</label>
+											  
+											</div>
+											
+											Text: 
+											<div class="uix-controls">
+											  <input type="text" class="float-label" value="" name="ename">
+											  <label>Input Normal</label>
+											</div>
+
+											
+
+										</div>  
+										   
+
+									</div>
+									<!-- .row end -->  
+                                   
+               
+               
 								   <div class="row">
 										<div class="col-sm-6">
 
-											<div class="uix-controls is-success">
+											<div class="uix-controls is-fullwidth is-success">
 											  <input type="text" class="float-label" value="Success" name="sname">
 											  <label>Input Name</label>
 											  
@@ -446,7 +476,7 @@
 										   
 										<div class="col-sm-6">
 
-											<div class="uix-controls is-error">
+											<div class="uix-controls is-fullwidth is-error">
 											  <input type="text" class="float-label" value="Error" name="ename">
 											  <label>Input Name</label>
 											</div>
@@ -461,7 +491,7 @@
 								   <div class="row">
 										<div class="col-sm-6">
 
-											<div class="uix-controls disabled">
+											<div class="uix-controls is-fullwidth disabled">
 											  <input type="text" class="float-label" value="Text" name="d-name" disabled>
 											  <label>Disabled Input</label>
 											  
@@ -496,7 +526,7 @@
 								   <div class="row">
 										<div class="col-sm-6">
 
-											<div class="uix-controls">
+											<div class="uix-controls is-fullwidth">
 											  <input type="text" class="float-label" name="first-name">
 											  <label>First Name<span class="uix-controls__im">*</span></label>
 											</div>
@@ -505,7 +535,7 @@
 										   
 										<div class="col-sm-6">
 
-											<div class="uix-controls">
+											<div class="uix-controls is-fullwidth">
 											  <input type="text" class="float-label" name="last-name">
 											  <label>Last Name</label>
 											</div>
@@ -518,7 +548,7 @@
 								   <div class="row">
 										<div class="col-sm-6">
 
-											<div class="uix-controls is-pill">
+											<div class="uix-controls is-fullwidth is-pill">
 											  <input type="text" class="float-label" name="first-name2">
 											  <label>First Name<span class="uix-controls__im">*</span></label>
 											</div>
@@ -527,7 +557,7 @@
 										   
 										<div class="col-sm-6">
 
-											<div class="uix-controls is-pill">
+											<div class="uix-controls is-fullwidth is-pill">
 											  <input type="text" class="float-label" name="last-name2">
 											  <label>Last Name</label>
 											</div>
@@ -544,7 +574,7 @@
 								   <div class="row">
 										<div class="col-sm-6">
 
-											<div class="uix-controls is-iconic">
+											<div class="uix-controls is-fullwidth is-iconic">
 										      <i class="fa fa-cogs" aria-hidden="true"></i>
 											  <input type="text" class="float-label" name="first-name">
 											  <label>With Icons<span class="uix-controls__im">*</span></label>
@@ -554,7 +584,7 @@
 										   
 										<div class="col-sm-6">
 
-											<div class="uix-controls is-iconic">
+											<div class="uix-controls is-fullwidth is-iconic">
 										      <i class="fa fa-feed" aria-hidden="true"></i>
 											  <input type="text" class="float-label" name="last-name">
 											  <label>With Icons</label>
@@ -601,7 +631,7 @@
 								   <div class="row">
 										<div class="col-sm-12 uix-t-l">
 
-											<div class="uix-controls">
+											<div class="uix-controls is-fullwidth">
 												<span class="uix-controls__arrow"><i class="fa fa-sort"></i></span>
 												<select class="float-label">
 													<option value="blank"></option>
@@ -702,13 +732,29 @@
 
 									</div>
 									<!-- .row end -->
+                                  
+                             
+                                         
+								   <div class="row">
+										<div class="col-sm-12 uix-t-l">
+											<div class="uix-controls uix-controls__short-m">
+											  <input type="text" class="float-label" name="shortinput1">
+											  <label>Short Input 2</label>unit
+											</div>
+										</div>  
+
+									</div>
+									<!-- .row end -->
+                                   
+                                  
+                                  
                                    
                                           
 								   <div class="row">
 										<div class="col-sm-12 uix-t-l">
 											<div class="uix-controls uix-controls__short-l">
 											  <input type="text" class="float-label" name="shortinput2">
-											  <label>Short Input 2</label>unit
+											  <label>Short Input 3</label>unit
 											</div>
 										</div>  
 
@@ -738,7 +784,7 @@
 								   <div class="row">
 										<div class="col-sm-12 uix-t-l">
 
-											<div class="uix-controls">
+											<div class="uix-controls is-fullwidth">
 												<input type="text" class="float-label" name="name">
 												<label>Name</label>
 											</div>
@@ -750,7 +796,7 @@
                                           
 								   <div class="row">
 										<div class="col-sm-12 uix-t-l">
-											<div class="uix-controls">
+											<div class="uix-controls is-fullwidth">
 												<input type="tel" class="float-label" name="cell">
 												<label>Celly</label>
 											</div>
@@ -762,7 +808,7 @@
                                           
 								   <div class="row">
 										<div class="col-sm-12 uix-t-l">
-											<div class="uix-controls uix-controls__textarea">
+											<div class="uix-controls uix-controls__textarea is-fullwidth">
 											  <textarea name="comments" class="float-label"></textarea>
 											  <label>Comments</label>
 											</div>
@@ -1082,14 +1128,14 @@
 	============================================= -->
 	
 	<script>
-		var REVISION     = "2.0.2",
+		var REVISION     = "2.0.3",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
 				"homeUrl"     : "",  //Eg. https://uiux.cc
 				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
 			};
     </script>  
-    <script src="assets/js/uix-kit.min.js?ver=MTUzMzIwNTIyNDA5Mg"></script>
+    <script src="assets/js/uix-kit.min.js?ver=MTUzMzU0ODUxMDE0OA"></script>
 
 
 

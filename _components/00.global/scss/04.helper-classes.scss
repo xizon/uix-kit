@@ -19,6 +19,7 @@
  * 14. Position
  * 15. Element Hidden Style
  * 16. Border Radius
+ * 17. Set the value of <section> z-index to solve the hierarchy problem of the module
 */
 
 
@@ -101,6 +102,10 @@
     @include outer-shadow( 2 );
 }
 
+.uix-none-shadow {
+	box-shadow: none !important;
+	text-shadow: none !important;
+}
 
 /* 
  ---------------------------
@@ -496,4 +501,17 @@ img.uix-filter-hover--color,
 	}	
 }
 
+/* 
+ ---------------------------
+  17. Set the value of <section> z-index to solve the hierarchy problem of the module
+ ---------------------------
+ */ 
+.uix-section-index-1 {
+	position: relative;
+	z-index: 1;
+}
 
+.uix-section-index-2 {
+	position: relative;
+	z-index: 2;
+}

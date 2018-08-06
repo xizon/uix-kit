@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  2.0.2
- * ## Last Update         :  August 2, 2018
+ * ## Version             :  2.0.3
+ * ## Last Update         :  August 6, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -63,62 +63,62 @@
 	TABLE OF CONTENTS
 	---------------------------
 	
-    1. Basic 
-    2. Table 
-    3. Bullet List 
-    4. Helper Classes 
+    1. Table 
+    2. Bullet List 
+    3. Helper Classes 
+    4. Basic 
     5. Typography 
     6. Spacing 
-    7. Basic Layout Styles 
-    8. Navigation 
-    9. Header Area 
-    10. Brand 
-    11. Footer 
-    12. Video 
-    13. Back to Top 
-    14. Loader 
-    15. Social Media Icons 
-    16. Pagination 
-    17. Filterable Navigation 
-    18. Sidebar  
-    19. Search 
-    20. Tags 
+    7. Brand 
+    8. Header Area 
+    9. Navigation 
+    10. Basic Layout Styles 
+    11. Video 
+    12. Footer 
+    13. Social Media Icons 
+    14. Pagination 
+    15. Loader 
+    16. Filterable Navigation 
+    17. Back to Top 
+    18. Search 
+    19. Tags 
+    20. Sidebar  
     21. Entry 
     22. Comments ( Synchronize to WordPress's class name ) 
-    23. Mobile Menu 
-    24. Onepage Menu 
-    25. Modal Dialog 
-    26. 3rd Party Plugins 
-    27. 3D Background 
-    28. 3D Carousel 
-    29. Accordion 
-    30. Accordion Background Images 
-    31. Advanced Content Slider 
-    32. Advanced Slider (Special Effects) 
+    23. Modal Dialog 
+    24. 3rd Party Plugins 
+    25. Onepage Menu 
+    26. 3D Carousel 
+    27. Accordion 
+    28. Accordion 
+    29. Accordion Background Images 
+    30. Mobile Menu 
+    31. 3D Background 
+    32. Advanced Content Slider 
     33. Advanced Slider (Basic) 
-    34. Badges 
-    35. Blended Grid Layout 
-    36. Breadcrumbs 
-    37. Button 
-    38. Cards 
-    39. Circle Layout 
-    40. Counter 
+    34. Blended Grid Layout 
+    35. Breadcrumbs 
+    36. Badges 
+    37. Advanced Slider (Special Effects) 
+    38. Circle Layout 
+    39. Counter 
+    40. Button 
     41. Dividing Line 
-    42. Dots 
-    43. Dotted Line 
-    44. Dropdown Menu 
-    45. Dropdown Menu 2 (Multi-level drop-down navigation) 
-    46. Equal-width Columns 
-    47. Features 
-    48. Flexslider 
-    49. Footer Templates 
-    50. Form 
-    51. Form Progress 
-    52. Gallery 
-    53. Heading 
+    42. Dotted Line 
+    43. Cards 
+    44. Dots 
+    45. Equal-width Columns 
+    46. Dropdown Menu 2 (Multi-level drop-down navigation) 
+    47. Dropdown Menu 
+    48. Footer Templates 
+    49. Form 
+    50. Form Progress 
+    51. Gallery 
+    52. Heading 
+    53. Image Shapes 
     54. Image Animation 
-    55. Image Shapes 
-    56. Custom Core Scripts & Stylesheets 
+    55. Custom Core Scripts & Stylesheets 
+    56. Floating Side Element 
     57. Lava-Lamp Style Menu 
     58. Cutom Light Box 
     59. Brands List 
@@ -137,26 +137,28 @@
     72. Periodical Scroll 
     73. Pricing 
     74. Progress Bar 
-    75. Ribbon 
-    76. Shape Animation 
-    77. Show More Less 
-    78. Single Post 
-    79. Source Code 
-    80. Striking 
-    81. SVG Map 
-    82. Tabs 
-    83. Team Focus 
-    84. Team Fullwidth (Style using the Side by Side List With Photo module) 
-    85. Team Gird 
-    86. Testimonials Carousel 
-    87. Text effect 
-    88. Timeline 
-    89. ToolTip 
-    90. Vertical Menu 
-    91. Vertical Separator 
-    92. Wave Background 
-    93. WordPress Core ( Do not use prefix "uix-" ) 
-    94. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    75. Progress Line 
+    76. Ribbon 
+    77. Shape Animation 
+    78. Show More Less 
+    79. Single Post 
+    80. Source Code 
+    81. Striking 
+    82. SVG Map 
+    83. Tabs 
+    84. Team Focus 
+    85. Team Fullwidth (Style using the Side by Side List With Photo module) 
+    86. Team Gird 
+    87. Testimonials Carousel 
+    88. Text effect 
+    89. Timeline 
+    90. ToolTip 
+    91. Vertical Menu 
+    92. Vertical Separator 
+    93. Wave Background 
+    94. WordPress Core ( Do not use prefix "uix-" ) 
+    95. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    96. Features 
 
 
 
@@ -746,6 +748,7 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li::before,
  * 14. Position
  * 15. Element Hidden Style
  * 16. Border Radius
+ * 17. Set the value of <section> z-index to solve the hierarchy problem of the module
 */
 /* 
  ---------------------------
@@ -814,6 +817,11 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li::before,
 
 .uix-outer-shadow--l {
     box-shadow: 0 1.8vw 4vw -.7vw #cbdfee;
+}
+
+.uix-none-shadow {
+    box-shadow: none !important;
+    text-shadow: none !important;
 }
 
 /* 
@@ -1193,6 +1201,21 @@ img.uix-filter-hover--color:hover,
 
 .uix-border--circle.uix-border--circle-only-img > img {
   border-radius: 50%;
+}
+
+/* 
+ ---------------------------
+  17. Set the value of <section> z-index to solve the hierarchy problem of the module
+ ---------------------------
+ */
+.uix-section-index-1 {
+  position: relative;
+  z-index: 1;
+}
+
+.uix-section-index-2 {
+  position: relative;
+  z-index: 2;
 }
 
 /* ====================================================== 
@@ -2278,8 +2301,8 @@ h6 {
     z-index: 90000;
     border-bottom: 2.15px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0px 5px 40px 0px rgba(0, 0, 0, 0.08);
-    background: #F3556D;
-    background: linear-gradient(to right, #F3556D 0%, #E22444 100%);
+    background-color: #EC5E79;
+    background-image: linear-gradient(to right, #EC5E79 0%, #f60 20%, #d83ba0 100%);
   /* 
 	 ---------------------------
 	 2. Overlay Header
@@ -2293,8 +2316,8 @@ h6 {
 }
 
 .uix-header__container.uix-header__container--overlay.is-fixed {
-    background: #F3556D;
-    background: linear-gradient(to right, #F3556D 0%, #E22444 100%);
+    background-color: #EC5E79;
+    background-image: linear-gradient(to right, #EC5E79 0%, #f60 20%, #d83ba0 100%);
 }
 
 /* Don't use "margin" or "padding" to set up ".uix-header" */
@@ -2322,8 +2345,8 @@ h6 {
     position: relative;
   }
   .uix-header__container.uix-header__container--overlay {
-    background: #F3556D;
-    background: linear-gradient(to right, #F3556D 0%, #E22444 100%);
+    background-color: #EC5E79;
+    background-image: linear-gradient(to right, #EC5E79 0%, #f60 20%, #d83ba0 100%);
     position: relative;
   }
   .uix-header__placeholder {
@@ -4540,6 +4563,7 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
   top: .5rem;
   transition: .1s ease-in-out;
   color: rgba(0, 0, 0, 0.54);
+  font-weight: 100;
 }
 
 .uix-accordion dl dd {
@@ -4582,7 +4606,7 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
 }
 
 .uix-accordion dl.active dd {
-  max-height: 9999px;
+  max-height: 1000px;
   transition-timing-function: cubic-bezier(0.5, 0, 1, 0);
   transition-delay: 0s;
 }
@@ -5410,7 +5434,8 @@ pointer-events: auto;
   /*--- 2 Rows, Large image on the left ---*/
   /*--- 2 Rows, Large image on the right ---*/
   /*--- 3 Rows, Large image on the left ---*/
-  /*--- 3 Rows, Large image on the right ---*/;
+  /*--- 3 Rows, Large image on the right ---*/
+  /*--- 2 Rows, 3 Columns Large image on the left and right ---*/;
 }
 
 .uix-blended-grid > ul {
@@ -5434,6 +5459,7 @@ pointer-events: auto;
     background-size: cover;
     width: 100%;
     height: 100%;
+    position: relative;
 }
 
 .uix-blended-grid .uix-blended-grid__col-two-left > li:nth-child(1) {
@@ -5560,6 +5586,34 @@ pointer-events: auto;
     left: 66.6%;
     width: 33.3%;
     height: 33.3%;
+}
+
+.uix-blended-grid .uix-blended-grid__col-three-left-right > li:nth-child(1) {
+    top: 0;
+    left: 0;
+    width: 41.666666666667%;
+    height: 100%;
+}
+
+.uix-blended-grid .uix-blended-grid__col-three-left-right > li:nth-child(2) {
+    top: 0;
+    left: 41.666666666667%;
+    width: 33.333333333333%;
+    height: 50%;
+}
+
+.uix-blended-grid .uix-blended-grid__col-three-left-right > li:nth-child(3) {
+    top: 50%;
+    left: 41.666666666667%;
+    width: 33.333333333333%;
+    height: 50%;
+}
+
+.uix-blended-grid .uix-blended-grid__col-three-left-right > li:nth-child(4) {
+    top: 0;
+    left: 75%;
+    width: 25%;
+    height: 100%;
 }
 
 @media all and (max-width: 768px) {
@@ -6302,7 +6356,18 @@ pointer-events: auto;
 .uix-circle-layout:not(.js-uix-circle-layout) ul ~ div > div {
     padding: 2.5rem;
     overflow: hidden;
-    height: calc(100% - 5rem);
+    height: 100%;
+    width: calc(100% - 2.5rem);
+    position: relative;
+}
+
+.uix-circle-layout:not(.js-uix-circle-layout) ul ~ div > div p {
+    display: block;
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    width: calc(100% - 2.5rem);
+    text-align: center;
 }
 
 .uix-circle-layout:not(.js-uix-circle-layout) li {
@@ -6432,7 +6497,18 @@ pointer-events: auto;
 .uix-circle-layout.js-uix-circle-layout ul ~ div > div {
     padding: 2.5rem;
     overflow: hidden;
-    height: calc(100% - 5rem);
+    height: 100%;
+    width: calc(100% - 2.5rem);
+    position: relative;
+}
+
+.uix-circle-layout.js-uix-circle-layout ul ~ div > div p {
+    display: block;
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    width: calc(100% - 2.5rem);
+    text-align: center;
 }
 
 .uix-circle-layout.js-uix-circle-layout li {
@@ -7451,6 +7527,12 @@ html[xmlns] .uix-flexslider .uix-flexslider__inner {
     text-align: center;
     display: inline-block;
     line-height: 55px;
+    visibility: visible;
+  /* Required */
+    left: 0 !important;
+  /* Required */
+    right: 0 !important;
+  /* Required */;
 }
 
 .uix-flexslider__arrows.uix-flexslider__arrows--style-1 .uix-flexslider__prev i,
@@ -7604,46 +7686,46 @@ html[xmlns] .uix-flexslider .uix-flexslider__inner {
     transform: translateY(-50%);
 }
 
-.uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item .uix-flexslider__desc .container .uix-flexslider__el-level {
+.uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item .uix-flexslider__desc .uix-flexslider__el-level {
     animation-delay: .5s;
     animation-duration: .6s;
     animation-fill-mode: both;
     animation-name: uix-cssAnim--fadeOutLeft;
 }
 
-.uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item .uix-flexslider__desc .container .uix-flexslider__el-level-1,
-.uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item .uix-flexslider__desc .container .uix-flexslider__el-level-2 {
+.uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item .uix-flexslider__desc .uix-flexslider__el-level-1,
+.uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item .uix-flexslider__desc .uix-flexslider__el-level-2 {
     color: #fff;
 }
 
-.uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item.uix-flexslider__active-slide .uix-flexslider__desc .container .uix-flexslider__el-level {
+.uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item.uix-flexslider__active-slide .uix-flexslider__desc .uix-flexslider__el-level {
     animation-delay: .4s;
     animation-duration: .6s;
     animation-fill-mode: both;
     animation-name: uix-cssAnim--fadeInLeft;
 }
 
-.uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item.uix-flexslider__active-slide .uix-flexslider__desc .container .uix-flexslider__el-level-1 {
+.uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item.uix-flexslider__active-slide .uix-flexslider__desc .uix-flexslider__el-level-1 {
     animation-delay: .4s;
 }
 
-.uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item.uix-flexslider__active-slide .uix-flexslider__desc .container .uix-flexslider__el-level-2 {
+.uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item.uix-flexslider__active-slide .uix-flexslider__desc .uix-flexslider__el-level-2 {
     animation-delay: .5s;
 }
 
-.uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item.uix-flexslider__active-slide .uix-flexslider__desc .container .uix-flexslider__el-level-3 {
+.uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item.uix-flexslider__active-slide .uix-flexslider__desc .uix-flexslider__el-level-3 {
     animation-delay: .6s;
 }
 
 @media all and (max-width: 991px) {
-    .uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item .uix-flexslider__desc .container .uix-flexslider__el-level-1 {
+    .uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item .uix-flexslider__desc .uix-flexslider__el-level-1 {
         font-size: 7vw !important;
         line-height: 7vw !important;
         margin-bottom: 0;
         line-height: 1.2 !important;
     }
 
-    .uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item .uix-flexslider__desc .container .uix-flexslider__el-level-2 {
+    .uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item .uix-flexslider__desc .uix-flexslider__el-level-2 {
         font-size: 4vw !important;
         line-height: 4vw !important;
     }
@@ -7748,6 +7830,55 @@ html[xmlns] .uix-flexslider .uix-flexslider__inner {
 }
 
 /* ====================================================== 
+   <!-- Floating Side Element -->     
+/* ====================================================== */
+.uix-floating-side-el {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 25;
+    width: 138px;
+    height: 428px;
+    background: #EC5E79;
+    background: linear-gradient(to bottom, #EC5E79 0%, #E8588C 100%);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+}
+
+.uix-floating-side-el a {
+    font-size: 0.875rem;
+    color: #fff;
+    display: block;
+    width: 75px;
+    margin-left: 30px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: .5rem;
+    padding-top: .5rem;
+}
+
+.uix-floating-side-el a:last-child {
+    border-bottom: none;
+}
+
+.uix-floating-side-el a:hover {
+    transform: scale(1.1);
+}
+
+.uix-floating-side-el a:first-child {
+    margin-top: 50px;
+}
+
+.uix-floating-side-el a span {
+    display: block;
+}
+
+.uix-floating-side-el a span i {
+    color: #fff;
+    font-size: 30px;
+}
+
+/* ====================================================== 
    <!-- Footer Templates -->  
 /* ====================================================== */
 .uix-special-footer__container {
@@ -7781,12 +7912,12 @@ html[xmlns] .uix-flexslider .uix-flexslider__inner {
     width: 100%;
 }
 
-.uix-special-footer__container .uix-special-footer__menus > .list {
+.uix-special-footer__container .uix-special-footer__menus > .uix-special-footer__menus__list {
     width: 12rem;
     float: left;
 }
 
-.uix-special-footer__container .uix-special-footer__menus > .list li {
+.uix-special-footer__container .uix-special-footer__menus > .uix-special-footer__menus__list li {
     margin: .5rem 0;
     display: block;
 }
@@ -7815,7 +7946,7 @@ html[xmlns] .uix-flexslider .uix-flexslider__inner {
         text-align: center;
     }
 
-    .uix-special-footer__container .uix-special-footer__menus > .list {
+    .uix-special-footer__container .uix-special-footer__menus > .uix-special-footer__menus__list {
         width: 33.3%;
     }
 }
@@ -7850,6 +7981,8 @@ html[xmlns] .uix-flexslider .uix-flexslider__inner {
     text-align: left;
     position: relative;
     margin-bottom: 1.09375rem;
+    display: inline-block;
+  /* Avoid line breaks */
   /*-- Radio --*/
   /*-- Select --*/
   /*-- Form With Icon --*/
@@ -7858,6 +7991,10 @@ html[xmlns] .uix-flexslider .uix-flexslider__inner {
   /*-- Form Status: Disable --*/
   /*-- Other --*/
   /* WordPress Style */;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-fullwidth {
+    display: block;
 }
 
 .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__side {
@@ -7938,6 +8075,15 @@ html[xmlns] .uix-flexslider .uix-flexslider__inner {
 
 .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__short-s .uix-controls__bar {
     width: calc( 120px + 1.09375rem + 2px);
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__short-m input:not([type="checkbox"]):not([type="radio"]) {
+    width: 155px;
+    margin-right: .5rem;
+}
+
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__short-m .uix-controls__bar {
+    width: calc( 155px + 1.09375rem + 2px);
 }
 
 .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__short-l input:not([type="checkbox"]):not([type="radio"]) {
@@ -8251,7 +8397,7 @@ html[xmlns] .uix-flexslider .uix-flexslider__inner {
     transform: translateX(-4.09375rem) scale(0.8);
 }
 
-.col-sm-12 .uix-controls.uix-controls--line:not(.uix-controls__short-s):not(.uix-controls__short-l) .uix-controls__bar {
+.col-sm-12 .uix-controls.uix-controls--line:not(.uix-controls__short-s):not(.uix-controls__short-m):not(.uix-controls__short-l) .uix-controls__bar {
     left: -8px;
 }
 
@@ -8332,7 +8478,7 @@ html[xmlns] .uix-flexslider .uix-flexslider__inner {
 }
 
 .uix-controls__merge button {
-    padding: 0.546875rem 0 !important;
+    padding: 0.609375rem 0 !important;
     width: calc(20% + 5px) !important;
     margin-left: -5px;
     text-transform: uppercase;
@@ -9590,6 +9736,12 @@ html[xmlns] .uix-flexslider .uix-flexslider__inner {
 /* ====================================================== 
    <!-- Custom Core Scripts & Stylesheets --> 
 /* ====================================================== */
+/*
+ * 1. Title  
+ * 2. Title
+ * 3. Title
+
+*/
 /* ====================================================== 
    <!-- Lava-Lamp Style Menu -->     
 /* ====================================================== */
@@ -9612,7 +9764,6 @@ html[xmlns] .uix-flexslider .uix-flexslider__inner {
   padding: 0;
   position: relative;
   padding: 0 1.159375rem;
-  font-size: 1rem;
   display: inline-block;
   margin-right: 1.6875rem;
   white-space: nowrap;
@@ -9625,12 +9776,16 @@ html[xmlns] .uix-flexslider .uix-flexslider__inner {
   display: block;
 }
 
+.uix-lavalamp-menu__container ul.uix-lavalamp-menu li.active a {
+  font-weight: bold;
+}
+
 .uix-lavalamp-menu__container ul.uix-lavalamp-menu .uix-lavalamp-menu__slide-line {
   display: block;
   padding: 0;
   margin: 0;
   background: #EC5E79;
-  z-index: 0;
+  z-index: -1;
   position: absolute;
   top: 105%;
   border-radius: 3px;
@@ -9724,6 +9879,48 @@ html[xmlns] .uix-flexslider .uix-flexslider__inner {
   position: relative;
 }
 
+.uix-lightbox__container .uix-lightbox__inner .uix-lightbox__html .uix-lightbox__photo-container .uix-lightbox__photo-sets__prev,
+.uix-lightbox__container .uix-lightbox__inner .uix-lightbox__html .uix-lightbox__photo-container .uix-lightbox__photo-sets__next {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-block;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  opacity: .7;
+}
+
+.uix-lightbox__container .uix-lightbox__inner .uix-lightbox__html .uix-lightbox__photo-container .uix-lightbox__photo-sets__prev::before,
+.uix-lightbox__container .uix-lightbox__inner .uix-lightbox__html .uix-lightbox__photo-container .uix-lightbox__photo-sets__next::before {
+  display: block;
+  font-family: 'FontAwesome';
+  font-size: 2.5rem;
+  color: #fff;
+}
+
+.uix-lightbox__container .uix-lightbox__inner .uix-lightbox__html .uix-lightbox__photo-container .uix-lightbox__photo-sets__prev:hover,
+.uix-lightbox__container .uix-lightbox__inner .uix-lightbox__html .uix-lightbox__photo-container .uix-lightbox__photo-sets__next:hover {
+  opacity: 1;
+}
+
+.uix-lightbox__container .uix-lightbox__inner .uix-lightbox__html .uix-lightbox__photo-container .uix-lightbox__photo-sets__prev {
+  left: 0;
+}
+
+.uix-lightbox__container .uix-lightbox__inner .uix-lightbox__html .uix-lightbox__photo-container .uix-lightbox__photo-sets__prev::before {
+  content: "\f104";
+}
+
+.uix-lightbox__container .uix-lightbox__inner .uix-lightbox__html .uix-lightbox__photo-container .uix-lightbox__photo-sets__next {
+  right: 0;
+}
+
+.uix-lightbox__container .uix-lightbox__inner .uix-lightbox__html .uix-lightbox__photo-container .uix-lightbox__photo-sets__next::before {
+  content: "\f105";
+}
+
 .uix-lightbox__container .uix-lightbox__inner .uix-lightbox__html .uix-lightbox__photo-container ul {
   margin: 0;
   padding: 0;
@@ -9741,6 +9938,10 @@ html[xmlns] .uix-flexslider .uix-flexslider__inner {
   transition: all 0.3s ease;
 }
 
+.uix-lightbox__container .uix-lightbox__inner .uix-lightbox__html .uix-lightbox__photo-container ul li img {
+  max-width: calc(100% - 6rem);
+}
+
 .uix-lightbox__container .uix-lightbox__inner .uix-lightbox__html .uix-lightbox__photo-container ul li:first-child {
   display: block;
 }
@@ -9755,21 +9956,6 @@ html[xmlns] .uix-flexslider .uix-flexslider__inner {
   overflow: hidden;
   overflow-x: auto;
   white-space: nowrap;
-}
-
-.uix-lightbox__container .uix-lightbox__inner .uix-lightbox__html .uix-lightbox__thumb-container::-webkit-scrollbar-track {
-  border-radius: 0px;
-  background-color: #E6E3E3;
-}
-
-.uix-lightbox__container .uix-lightbox__inner .uix-lightbox__html .uix-lightbox__thumb-container::-webkit-scrollbar {
-  height: 5px;
-  background-color: #EC5E79;
-}
-
-.uix-lightbox__container .uix-lightbox__inner .uix-lightbox__html .uix-lightbox__thumb-container::-webkit-scrollbar-thumb {
-  border-radius: 0px;
-  background-color: #EC5E79;
 }
 
 .uix-lightbox__container .uix-lightbox__inner .uix-lightbox__html .uix-lightbox__thumb-container ul {
@@ -9833,21 +10019,6 @@ html[xmlns] .uix-flexslider .uix-flexslider__inner {
   max-height: 60vh;
   overflow-y: auto;
   text-align: left;
-}
-
-.uix-lightbox__container .uix-lightbox__inner .uix-lightbox__html > .uix-lightbox__content::-webkit-scrollbar-track {
-  border-radius: 0px;
-  background-color: #E6E3E3;
-}
-
-.uix-lightbox__container .uix-lightbox__inner .uix-lightbox__html > .uix-lightbox__content::-webkit-scrollbar {
-  width: 5px;
-  background-color: #EC5E79;
-}
-
-.uix-lightbox__container .uix-lightbox__inner .uix-lightbox__html > .uix-lightbox__content::-webkit-scrollbar-thumb {
-  border-radius: 0px;
-  background-color: #EC5E79;
 }
 
 .uix-lightbox__container .uix-lightbox__inner .uix-lightbox__html > .uix-lightbox__content > div {
@@ -9938,6 +10109,36 @@ html[xmlns] .uix-flexslider .uix-flexslider__inner {
 .uix-lightbox__container.js-uix-no-fixed .uix-lightbox__inner.js-uix-custom .uix-lightbox__html > .uix-lightbox__content {
   width: 1000px;
   max-height: inherit;
+}
+
+.uix-lightbox__content::-webkit-scrollbar-track {
+  border-radius: 0px;
+  background-color: #e9ecee;
+}
+
+.uix-lightbox__content::-webkit-scrollbar {
+  width: 5px;
+  background-color: #EC5E79;
+}
+
+.uix-lightbox__content::-webkit-scrollbar-thumb {
+  border-radius: 0px;
+  background-color: #EC5E79;
+}
+
+.uix-lightbox__thumb-container::-webkit-scrollbar-track {
+  border-radius: 0px;
+  background-color: #e9ecee;
+}
+
+.uix-lightbox__thumb-container::-webkit-scrollbar {
+  height: 5px;
+  background-color: #EC5E79;
+}
+
+.uix-lightbox__thumb-container::-webkit-scrollbar-thumb {
+  border-radius: 0px;
+  background-color: #EC5E79;
 }
 
 @media all and (max-width: 768px) {
@@ -13147,6 +13348,120 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
 }
 
 /* ====================================================== 
+   <!-- Progress Line --> 
+/* ====================================================== */
+.uix-progress-line {
+  width: 100%;
+}
+
+.uix-progress-line .uix-progress-line__circle,
+.uix-progress-line .uix-progress-line__bar {
+  display: inline-block;
+  background: #fff;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.uix-progress-line .uix-progress-line__bar {
+  position: relative;
+  width: 45px;
+  height: 1px;
+  top: -100px;
+  margin-left: -5px;
+  margin-right: -5px;
+  background: #ECECEC;
+  overflow: hidden;
+  border-radius: 0;
+}
+
+.uix-progress-line .uix-progress-line__bar::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '';
+  display: block;
+  width: 45px;
+  height: 100%;
+  background: #EC5E79;
+  transform: translateX(-100%);
+  transition: all 0.3s ease;
+}
+
+.uix-progress-line .uix-progress-line__bar:last-child {
+  display: none;
+}
+
+.uix-progress-line .uix-progress-line__bar.active::after {
+  transform: translateX(0);
+}
+
+.uix-progress-line .uix-progress-line__circle__label {
+  display: inline-block;
+  width: 85px;
+  height: 85px;
+  border-radius: 50%;
+  margin-top: 3px;
+  color: #fff;
+  font-size: 1rem;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.uix-progress-line .uix-progress-line__circle__label i {
+  font-size: 40px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+}
+
+.uix-progress-line .uix-progress-line__circle__title {
+  margin-left: -5px;
+  font-size: 1rem;
+  font-weight: bold;
+  display: block;
+  padding-top: 1.5rem;
+  color: #212121;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.uix-progress-line .uix-progress-line__circle__num {
+  position: absolute;
+  font-size: 1.875rem;
+  color: #e8edee;
+  top: 142%;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: all 0.3s ease;
+}
+
+.uix-progress-line .uix-progress-line__circle {
+  background: rgba(0, 0, 0, 0.2);
+  opacity: .6;
+  text-align: center;
+}
+
+.uix-progress-line .uix-progress-line__circle.active {
+  opacity: 1;
+  border: 1px solid #EC5E79;
+  background: #fff;
+}
+
+.uix-progress-line .uix-progress-line__circle.active .uix-progress-line__circle__label {
+  color: #fff;
+  background: #EC5E79;
+  margin-top: 6px;
+}
+
+/* ====================================================== 
    <!-- Ribbon --> 
 /* ====================================================== */
 .uix-ribbon--triangle {
@@ -15036,6 +15351,94 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
 }
 
 /* ====================================================== 
+   <!-- Ajax Page Loader (Loading A Page via Ajax Into Div)  --> 
+/* ====================================================== */
+.uix-ajax-load__container {
+  padding: 7rem 0;
+  position: relative;
+}
+
+@media all and (max-width: 768px) {
+  .uix-ajax-load__container {
+    padding: 2rem 0;
+  }
+}
+
+/* Used for full page */
+.uix-ajax-load__fullpage-container {
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.uix-ajax-load__fullpage-container > section {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+}
+
+.uix-ajax-load__loader {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  z-index: 99999;
+  display: none;
+  opacity: 0;
+}
+
+.uix-ajax-load__loader > span {
+  display: inline-block;
+  width: 200px;
+  height: 20px;
+  top: 50%;
+  left: 50%;
+  background-color: #ddd;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  border-radius: 100px;
+}
+
+.uix-ajax-load__loader > span::after {
+  border-radius: 100px;
+  content: "";
+  position: absolute;
+  background-color: #333;
+  left: 2px;
+  top: 2px;
+  bottom: 2px;
+  right: 180px;
+  animation: uix-cssAnim--loaderSlide 2s linear infinite;
+}
+
+@keyframes uix-cssAnim--loaderSlide {
+  0% {
+    right: 180px;
+    left: 2px;
+  }
+  5% {
+    left: 2px;
+  }
+  50% {
+    right: 2px;
+    left: 180px;
+  }
+  55% {
+    right: 2px;
+  }
+  100% {
+    right: 180px;
+    left: 2px;
+  }
+}
+
+/* ====================================================== 
    <!-- WordPress Core ( Do not use prefix "uix-" ) -->              
 /* ====================================================== */
 /*
@@ -15245,91 +15648,6 @@ a img.aligncenter {
 .sticky {
   opacity: 1;
 }
-
-/* ====================================================== 
-   <!-- Ajax Page Loader (Loading A Page via Ajax Into Div)  --> 
-/* ====================================================== */
-.uix-ajax-load__container {
-  padding: 7rem 0;
-  position: relative;
-}
-
-@media all and (max-width: 768px) {
-  .uix-ajax-load__container {
-    padding: 2rem 0;
-  }
-}
-
-/* Used for full page */
-.uix-ajax-load__fullpage-container {
-  height: 100vh;
-  overflow: hidden;
-  position: relative;
-}
-
-.uix-ajax-load__fullpage-container > section {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  z-index: 1;
-}
-
-.uix-ajax-load__loader {
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  position: fixed;
-  z-index: 99999;
-  display: none;
-  opacity: 0;
-}
-
-.uix-ajax-load__loader > span {
-  display: inline-block;
-  width: 200px;
-  height: 20px;
-  top: 50%;
-  left: 50%;
-  background-color: #ddd;
-  transform: translate(-50%, -50%);
-  position: absolute;
-  border-radius: 100px;
-}
-
-.uix-ajax-load__loader > span::after {
-  border-radius: 100px;
-  content: "";
-  position: absolute;
-  background-color: #333;
-  left: 2px;
-  top: 2px;
-  bottom: 2px;
-  right: 180px;
-  animation: uix-cssAnim--loaderSlide 2s linear infinite;
-}
-
-@keyframes uix-cssAnim--loaderSlide {
-  0% {
-    right: 180px;
-    left: 2px;
-  }
-  5% {
-    left: 2px;
-  }
-  50% {
-    right: 2px;
-    left: 180px;
-  }
-  55% {
-    right: 2px;
-  }
-  100% {
-    right: 180px;
-    left: 2px;
-  }
+y {
+  opacity: 1;
 }

@@ -8,7 +8,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.PARALLAX               = APP.PARALLAX || {};
-	APP.PARALLAX.version       = '0.0.3';
+	APP.PARALLAX.version       = '0.0.4';
     APP.PARALLAX.documentReady = function( $ ) {
 
         var $window      = $( window ),
@@ -151,35 +151,31 @@ APP = ( function ( APP, $, window, document ) {
 
 					}
 
-
-					if ( w > 768 ) {
-
-						//Enable parallax only desktop
-						$this.bgParallax( "50%", dataSpeed );
+					//Use parallax to background
+					$this.bgParallax( "50%", dataSpeed );
 
 
-						//Resize the background image to cover the entire container and
-						//Resize the background image to make sure the image is fully visible
-						if ( curImgW > w ) {
-							curSize = 'contain';
-						} else {
-							curSize = 'cover';
-						}
-
-						curAtt = 'fixed';
-
-					} else {
+					//Resize the background image to cover the entire container and
+					//Resize the background image to make sure the image is fully visible
+					if ( curImgW > w ) {
 						curSize = 'contain';
-						curAtt  = 'scroll';
-					}
-
-					//Determine image height and parallax container height
-					//If the height is the same, higher or lower than the height of the container height, 
-					//be sure to use the cover attribute
-					if ( curImgH <= $this.height() ) {
+					} else {
 						curSize = 'cover';
 					}
 
+					curAtt = 'fixed';
+
+
+					
+					//Determine image height and parallax container height
+					//If the height is the same, higher or lower than the height of the container height, 
+					//be sure to use the cover attribute
+					//*** Must be placed before the "dataFullyVisible" condition
+					if ( curImgH <= $this.height() ) {
+						curSize = 'cover';
+					}	
+					
+					
 					//Whether to display all pictures, including the edges
 					if ( dataFullyVisible ) {
 
@@ -188,7 +184,6 @@ APP = ( function ( APP, $, window, document ) {
 						} else {
 							curSize = 'contain';
 						}
-
 					}
 
 
@@ -257,76 +252,5 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
-
-
-/*
-Plugin: jQuery Parallax
-Version 1.1.3
-Author: Ian Lunn
-Twitter: @IanLunn
-Author URL: http://www.ianlunn.co.uk/
-Plugin URL: http://www.ianlunn.co.uk/plugins/jquery-parallax/
-
-Dual licensed under the MIT and GPL licenses:
-http://www.opensource.org/licenses/mit-license.php
-http://www.gnu.org/licenses/gpl.html
-*/
-
-(function( $ ){
-	var $window = $(window);
-	var windowHeight = $window.height();
-
-	$window.resize(function () {
-		windowHeight = $window.height();
-	});
-
-	$.fn.bgParallax = function(xpos, speedFactor, outerHeight) {
-		var $this = $(this);
-		var getHeight;
-		var firstTop;
-		var paddingTop = 0;
-		
-		//get the starting position of each element to have parallax applied to it		
-		$this.each( function(){
-		    firstTop = $this.offset().top;
-		});
-
-		if (outerHeight) {
-			getHeight = function(jqo) {
-				return jqo.outerHeight(true);
-			};
-		} else {
-			getHeight = function(jqo) {
-				return jqo.height();
-			};
-		}
-			
-		// setup defaults if arguments aren't specified
-		if (arguments.length < 1 || xpos === null) xpos = "50%";
-		if (arguments.length < 2 || speedFactor === null) speedFactor = 0.1;
-		if (arguments.length < 3 || outerHeight === null) outerHeight = true;
-		
-		// function to be called whenever the window is scrolled or resized
-		function update(){
-			var pos = $window.scrollTop();				
-
-			$this.each( function(){
-				var $element = $(this);
-				var top = $element.offset().top;
-				var height = getHeight($element);
-
-				// Check if totally above or totally below viewport
-				if (top + height < pos || top > pos + windowHeight) {
-					return;
-				}
-
-				$this.css('backgroundPosition', xpos + " " + Math.round((firstTop - pos) * speedFactor) + "px");
-			});
-		}		
-
-		$window.bind('scroll', update).resize(update);
-		update();
-	};
-})(jQuery);
 
 

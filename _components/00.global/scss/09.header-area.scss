@@ -25,8 +25,8 @@
 	z-index: 90000;
 	border-bottom: 2.15px solid rgba(255, 255, 255, .2);
 	box-shadow: 0px 5px 40px 0px rgba(0, 0, 0, 0.08);
-	background: #F3556D; 
-	background: linear-gradient(to right, #F3556D 0%,#E22444 100%);	
+	background-color: $highlight-color1;
+	background-image: linear-gradient(to right, $btn-gradient-color1 0%, $btn-gradient-color2 20%, $btn-gradient-color3 100%);
 	
 	
 	&.is-fixed {
@@ -44,8 +44,8 @@
 		background: linear-gradient(to right, rgba(255, 255, 255, 0.15) 0%,rgba(255, 255, 255, 0.15) 100%);	
 
 		&.is-fixed {
-			background: #F3556D; 
-			background: linear-gradient(to right, #F3556D 0%,#E22444 100%);	
+			background-color: $highlight-color1;
+			background-image: linear-gradient(to right, $btn-gradient-color1 0%, $btn-gradient-color2 20%, $btn-gradient-color3 100%);
 		}
 
 	}
@@ -89,8 +89,8 @@
 		
 		&.uix-header__container--overlay {
 
-			background: #F3556D; 
-			background: linear-gradient(to right, #F3556D 0%,#E22444 100%);	
+			background-color: $highlight-color1;
+			background-image: linear-gradient(to right, $btn-gradient-color1 0%, $btn-gradient-color2 20%, $btn-gradient-color3 100%);
 			position: relative;
 
 		}

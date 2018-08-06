@@ -197,7 +197,14 @@ APP = ( function ( APP, $, window, document ) {
 				} else {
 					if ( playTimes == total ) playTimes = 0;
 					if ( playTimes < 0 ) playTimes = total-1;		
-					sliderUpdates( playTimes, $sliderWrapper, 'next' );
+					
+					//Prevent problems with styles when switching in positive order
+					if ( playTimes == 0 ) {
+						sliderUpdates( playTimes, $sliderWrapper, 'prev' );
+					} else {
+						sliderUpdates( playTimes, $sliderWrapper, 'next' );
+					}
+					
 				}
 				
 

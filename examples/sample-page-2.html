@@ -53,11 +53,11 @@
         
        
         <!-- Theme  -->
-        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTUzMzIwNTIyNDA5Mg"/>
+        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTUzMzU0ODUxMDE0OA"/>
         
         
          <!--[if lt IE 10]>
-           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTUzMzIwNTIyNDA5Mg" />
+           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTUzMzU0ODUxMDE0OA" />
         <![endif]-->
         
         
@@ -194,17 +194,15 @@
 												<li>
 													<ul class="sub-menu">
 														<li><span class="multi-column-title">Web Elements (Part 1)</span></li>
+														<li><a href="lightbox.html">Lightbox</a></li>
 														<li><a href="modal-dialog.html">Modal Dialog</a></li>
 														<li><a href="social-meida-icons.html">Social Media Icons</a></li>
 														<li><a href="form.html">Form Elements</a></li>
 														<li><a href="form2.html">Form Elements 2</a></li>
 														<li><a href="form-progress.html">Form Progress</a></li>
-														<li><a href="timeline.html">Timeline</a></li>
-														<li><a href="tabs.html">Tabs</a></li>
-														<li><a href="accordion.html">Accordion</a></li>
-														<li><a href="accordion-img.html">Accordion Background Images</a></li>
 														<li><a href="counter.html">Counter</a></li>
 														<li><a href="progress-bar.html">Progress Bar</a></li>
+														<li><a href="progress-line.html">Progress Line</a><span class="uix-bubble">new</span></li>
 														<li><a href="vertical-text.html">Vertical Text</a></li>
 														<li><a href="tooltip.html">Tooltip</a></li>
 														<li><a href="dots.html">Dots</a></li>
@@ -213,6 +211,7 @@
 												        <li><a href="shape-animation.html">Shape Animation</a></li>
 													    <li><a href="image-animation.html">Image Animation</a><span class="uix-bubble">new</span></li>
 													    <li><a href="svg-map.html">SVG Map</a><span class="uix-bubble">new</span></li>
+													    <li><a href="floating-side-element.html">Floating Side Element</a><span class="uix-bubble">new</span></li>
 													   
 													   
 														
@@ -289,7 +288,10 @@
 														<li><a href="team-grid.html">Team Grid</a></li>
 														<li><a href="team-focus.html">Team Focus</a></li>
 														<li><a href="card.html">Cards</a></li>
-
+														<li><a href="timeline.html">Timeline</a></li>
+														<li><a href="tabs.html">Tabs</a></li>
+														<li><a href="accordion.html">Accordion</a></li>
+														<li><a href="accordion-img.html">Accordion Background Images</a></li>
 														
 													</ul>
 													<!-- .sub-menu  end -->
@@ -307,7 +309,7 @@
 														<li><a href="list-posts-with-ajax-infinitescroll.html">Infinite Scroll Posts</a></li>
 														<li><a href="show-more-less.html">Show More Less</a></li>
 														<li><a href="mousewheel-interaction.html">Mousewheel Interaction</a></li>
-														<li><a href="lightbox.html">Lightbox</a></li>
+														<li><a href="hover-delay-interaction.html">Hover Delay Interaction</a></li>
 														<li><a href="dynamic-dropdown-list-json.html">Dynamic Drop Down List</a></li>
 														<li><a href="one-page.html">Full Page/One Page</a></li>
 														<li><a href="one-page2.html">Full Page/One Page 2</a></li>
@@ -419,67 +421,77 @@
 
             <div class="container-fluid">
 				<div class="row">
-
+					
+					
 					<div class="js-uix-common-height uix-typo--color-white uix-services">
 
 
-						<div class="col-md-4" style="background-color: #d778e8;">
+						<div class="col-md-4 uix-relative" style="background-color: #d778e8;">
 
-							<div class="uix-v-align--table">
-								<div>
-								  <h3 class="uix-typo--style-uppercase" style="font-weight: 600;">Why choose Us</h3>
+							<div style="padding: 2rem;">
 
-								  <p>Transform, agency working families thinkers who make change happen communities.</p>
+								<h3 class="uix-typo--style-uppercase" style="font-weight: 600;">Why choose Us</h3>
 
-								</div>
-						  </div>
+								<p>Transform, agency working families thinkers who make change happen communities.</p>
 
-							<i class="fa fa-bullhorn" aria-hidden="true"></i>
+								<a href="#" class="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--secondary">Read More</a>
 
-						</div>
-						<div class="col-md-4" style="background-color: #e287f2;">
+							</div>
 
-							<div class="uix-v-align--table">
-								<div>
-								  <h3 class="uix-typo--style-uppercase" style="font-weight: 600;">Our Mission</h3>
-
-								  <p>Frontline respond, visionary collaborative cities advancement overcome injustice, UNHCR public-private partnerships cause. Giving, country educate rights-based approach; leverage disrupt solution.</p>
-
-
-								</div>
-						  </div>
-								
-						  <i class="fa fa-cogs" aria-hidden="true"></i>
+							<i class="fa fa-bullhorn" aria-hidden="true" style="font-size: 10rem; opacity: .2;
+    position: absolute; right: -2rem; bottom: -2rem; z-index: 0;"></i>
 
 						</div>
 
 
 
-						<div class="col-md-4" style="background-color: #e895f7;">
+						<div class="col-md-4 uix-relative" style="background-color: #e287f2;">
 
-							<div class="uix-v-align--table">
-								<div>
-								  <h3 class="uix-typo--style-uppercase" style="font-weight: 600;">What you get</h3>
+							<div style="padding: 2rem;">
 
-								  <p>Sustainability involvement fundraising campaign connect carbon rights, collaborative cities convener truth.</p>
+								<h3 class="uix-typo--style-uppercase" style="font-weight: 600;">Our Mission</h3>
 
-								</div>
-						  </div>
+								<p>Frontline respond, visionary collaborative cities advancement overcome injustice, UNHCR public-private partnerships cause. Giving, country educate rights-based approach; leverage disrupt solution.</p>
 
-							<i class="fa fa-flask" aria-hidden="true"></i>
+								<a href="#" class="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--secondary">Read More</a>
+
+							</div>
+
+							<i class="fa fa-cogs" aria-hidden="true" style="font-size: 10rem; opacity: .2;
+    position: absolute; right: -2rem; bottom: -2rem; z-index: 0;"></i>
 
 						</div>
 
 
 
+						<div class="col-md-4 uix-relative" style="background-color: #e895f7;">
 
-					  <div class="uix-clear"></div>
+							<div style="padding: 2rem;">
+
+								<h3 class="uix-typo--style-uppercase" style="font-weight: 600;">What you get</h3>
+
+								<p>Sustainability involvement fundraising campaign connect carbon rights, collaborative cities convener truth.</p>
+
+								<a href="#" class="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--secondary">Read More</a>
+
+
+							</div>
+
+							<i class="fa fa-flask" aria-hidden="true" style="font-size: 10rem; opacity: .2;
+    position: absolute; right: -2rem; bottom: -2rem; z-index: 0;"></i>
+
+						</div>
+
+
+
+						<div class="uix-clear"></div>
 
 
 
 					</div>
 					<!-- /.js-uix-common-height -->
-
+					
+						
 
 
 				</div>
@@ -618,7 +630,7 @@
 
 							<div class="row">
 								<div class="col-md-6">
-									<div class="uix-card2" data-bg='{"src":"assets/images/demo/test-img-big-1.jpg","position":"top left","size":"cover","repeat":"no-repeat","fill":false}'>
+									<div class="uix-card2" data-bg='{"src":"assets/images/demo/test-img-big-1.jpg","position":"top left","size":"cover","repeat":"no-repeat","fill":false,"parallax":0}'>
 										<div class="uix-card2__content">
 											<div class="uix-card2__tagline">Full-stack Designer</div>
 											<h3 class="uix-card2__headline">Focus on user interface, user experience, awesome websites, front-end and WordPress development.</h3>
@@ -631,7 +643,7 @@
 
 							
 								<div class="col-md-6">
-									<div class="uix-card2" data-bg='{"src":"assets/images/demo/test-img-big-2.jpg","position":"top left","size":"cover","repeat":"no-repeat","fill":false}'>
+									<div class="uix-card2" data-bg='{"src":"assets/images/demo/test-img-big-2.jpg","position":"top left","size":"cover","repeat":"no-repeat","fill":false,"parallax":0}'>
 										<div class="uix-card2__content">
 											<div class="uix-card2__tagline">Full-stack Designer</div>
 											<h3 class="uix-card2__headline">I want to build things I can be proud of. </h3>
@@ -875,45 +887,85 @@
         		    	    	    	    
        <!-- Footer Demo
         ====================================================== -->
-        <footer class="uix-special-footer__container" style="background: url(assets/images/demo/test-img-big-5.jpg); background-size: cover;">
-            <div class="container uix-typo--color-white">
-                
-				<div class="row">
-					  <div class="col-md-3">
-					       <img class="logo" src="assets/images/logo.png" alt="Uix Kit Demo">
-				      </div>
-					  <div class="col-md-6">
+        <footer class="uix-special-footer__container is-transparent">
+            <div class="uix-special-footer">
+                <div class="container">
 
-						  <p>Copyright &copy; Uix Kit 2018.  |  All rights reserved. Created by UIUX Lab.</p> 			  			  			  
-					  </div>
-					  <div class="col-md-3 uix-t-r">
-					  
-							<div class="uix-tooltip">
-								<a class="uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin uix-social-btn--white" href="javascript:">
-									<i class="fa fa-qrcode"></i>
+					<div class="row">
+						  <div class="col-md-3">
+							   <img class="logo" src="assets/images/logo-colorful.png" alt="Uix Kit Demo">
+						  </div>
+						  <div class="col-md-6">
+
+
+								<div class="uix-special-footer__menus">
+									<div class="uix-special-footer__menus__list">
+										<h3>About</h3>
+										<ul>
+											<li><a href="#">About us</a></li>
+											<li><a href="#">Careers</a></li>
+											<li><a href="#">Press</a></li>
+											<li><a href="#">Policies</a></li>
+											<li><a href="#">Help</a></li>
+											<li><a href="#">Diversity & Belonging</a></li>
+										</ul>
+									</div>
+
+									<div class="uix-special-footer__menus__list">
+										<h3>Discover</h3>
+										<ul>
+											<li><a href="#">Trust & Safety</a></li>
+											<li><a href="#">Travel Credit</a></li>
+											<li><a href="#">Gift Cards</a></li>
+											<li><a href="#">Airbnb Citizen</a></li>
+											<li><a href="#">Business Travel</a></li>
+											<li><a href="#">Guidebooks</a></li>
+											<li><a href="#">Airbnbmag</a></li>
+										</ul>
+									</div>
+
+									<div class="uix-special-footer__menus__list">
+										<h3>Works</h3>
+										<ul>
+											<li><a href="#">Why Host</a></li>
+											<li><a href="#">Hospitality</a></li>
+											<li><a href="#">Responsible Hosting</a></li>
+											<li><a href="#">Community Center</a></li>
+										</ul>
+									</div>
+								</div><!-- /.uix-special-footer__menus -->     			  
+
+						  </div>
+						  <div class="col-md-3 uix-t-r">
+
+								<div class="uix-tooltip">
+									<a class="uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin is-fill-white" href="javascript:">
+										<i class="fa fa-qrcode"></i>
+									</a>
+
+									<span class="uix-tooltip__content uix-tooltip__content--top"><img src="assets/images/demo/qr-code.png" alt="" width="150" height="150" /></span> 
+								</div>
+
+								<a class="uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin is-fill-white" title="Follow us on Twitter" href="https://twitter.com/uiux_lab" target="_blank">
+									<i class="fa fa-twitter"></i>
 								</a>
+								<a class="uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin is-fill-white" title="Follow us on Facebook" href="https://www.facebook.com/uiuxlabhome" target="_blank">
+									<i class="fa fa-facebook"></i>
+								</a>
+								<a class="uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin is-fill-white" title="Fork on Github" href="https://github.com/xizon/uix-kit" target="_blank">
+									<i class="fa fa-github"></i>
+								</a>   
 
-								<span class="uix-tooltip__content uix-tooltip__content--top"><img src="assets/images/demo/qr-code.png" alt="" width="150" height="150" /></span> 
-							</div>
-					  
-							<a class="uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin uix-social-btn--white" title="Follow us on Twitter" href="https://twitter.com/uiux_lab" target="_blank">
-								<i class="fa fa-twitter"></i>
-							</a>
-							<a class="uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin uix-social-btn--white" title="Follow us on Facebook" href="https://www.facebook.com/uiuxlabhome" target="_blank">
-								<i class="fa fa-facebook"></i>
-							</a>
-							<a class="uix-social-btn uix-social-btn--small uix-social-btn--circle uix-social-btn--thin uix-social-btn--white" title="Fork on Github" href="https://github.com/xizon/uix-kit" target="_blank">
-								<i class="fa fa-github"></i>
-							</a>   
+						  </div>
+					</div>
 
-					  </div>
-				</div>
-     
-              
-            </div><!-- .container  end -->
+
+				</div><!-- .container  end -->
             
-            
+			</div>
+				
         </footer> 
+        
         
         
         
@@ -949,14 +1001,14 @@
 	============================================= -->
 	
 	<script>
-		var REVISION     = "2.0.2",
+		var REVISION     = "2.0.3",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
 				"homeUrl"     : "",  //Eg. https://uiux.cc
 				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
 			};
     </script>  
-    <script src="assets/js/uix-kit.min.js?ver=MTUzMzIwNTIyNDA5Mg"></script>
+    <script src="assets/js/uix-kit.min.js?ver=MTUzMzU0ODUxMDE0OA"></script>
 
 
 

@@ -25,6 +25,7 @@
 				top: .5rem;
 				transition: .1s ease-in-out;
 				color: rgba(0, 0, 0, 0.54);
+				font-weight: 100;
 			}
 		}
 
@@ -73,7 +74,7 @@
 			}
 			
 			dd {
-				max-height: 9999px;
+				max-height: 1000px;
 				transition-timing-function: cubic-bezier(0.5, 0, 1, 0); 
 				transition-delay: 0s;
 

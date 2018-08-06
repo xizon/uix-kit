@@ -439,6 +439,8 @@ APP = ( function ( APP, $, window, document ) {
  *                                           load asynchronous information
  * @param  {boolean} ajaxPostList          - Run script of module "Posts List With Ajax". a page commonly used to 
  *                                           load asynchronous information
+ * @param  {boolean} ajaxDDList            - Run script of module "Dynamic Drop Down List from JSON".
+ * @param  {boolean} counterAnim           - Run script of module "Counter".
  * @return {void}  - The constructor.
  */
 ( function ( $ ) {
@@ -447,7 +449,9 @@ APP = ( function ( APP, $, window, document ) {
         // This is the easiest way to have default options.
         var settings = $.extend({
 			scrollReveal    : true,
-			ajaxPostList    : true
+			ajaxPostList    : true,
+			ajaxDDList      : true,
+			counterAnim     : true
         }, options );
  
         this.each( function() {
@@ -475,13 +479,11 @@ APP = ( function ( APP, $, window, document ) {
 			if ( APP.GET_CUSTOM_ATTRS ) APP.GET_CUSTOM_ATTRS.documentReady($); //Get all custom attributes of an element like "data-*"
 			if ( APP.PAGINATION ) APP.PAGINATION.documentReady($); //Pagination
 			if ( APP.FORM ) APP.FORM.documentReady($); //Form
-			if ( APP.DYNAMIC_DD_LIST ) APP.DYNAMIC_DD_LIST.documentReady($); //Dynamic Drop Down List from JSON
 			if ( APP.FLEXSLIDER ) APP.FLEXSLIDER.documentReady($); //Flexslider
 			if ( APP.RETINA ) APP.RETINA.documentReady($); //Retina Graphics for Website
 			if ( APP.SHOW_MORELESS ) APP.SHOW_MORELESS.documentReady($); //Show More Less
 			if ( APP.DROPDOWN_MENU ) APP.DROPDOWN_MENU.documentReady($); //Dropdown Menu
 			if ( APP.DROPDOWN_MENU2 ) APP.DROPDOWN_MENU2.documentReady($); //Dropdown Menu2
-			if ( APP.COUNTER ) APP.COUNTER.documentReady($); //Counter
 			if ( APP.ACCORDION ) APP.ACCORDION.documentReady($); //Accordion	
 			if ( APP.ADVANCED_CONTENT_SLIDER ) APP.ADVANCED_CONTENT_SLIDER.documentReady($); //Advanced Content Slider
 			if ( APP.GALLERY ) APP.GALLERY.documentReady($); //Gallery
@@ -489,6 +491,7 @@ APP = ( function ( APP, $, window, document ) {
 			if ( APP.PERIODICAL_SCROLL ) APP.PERIODICAL_SCROLL.documentReady($); //Periodical Scroll
 			if ( APP.PRICING ) APP.PRICING.documentReady($); //Pricing
 			if ( APP.PROGRESSBAR ) APP.PROGRESSBAR.documentReady($); //Progress Bar
+			if ( APP.PROGRESSLINE ) APP.PROGRESSLINE.documentReady($); //Progress Line
 			if ( APP.ROTATING_EL ) APP.ROTATING_EL.documentReady($); //Rotating Elements
 			if ( APP.SMOOTH_SCROLLING_ANCHORLINK ) APP.SMOOTH_SCROLLING_ANCHORLINK.documentReady($); //Smooth Scrolling When Clicking An Anchor Link
 			if ( APP.TABS ) APP.TABS.documentReady($); //Tabs
@@ -511,6 +514,18 @@ APP = ( function ( APP, $, window, document ) {
 				if ( APP.POST_LIST_AJAX ) APP.POST_LIST_AJAX.documentReady($); 
 			}
 			
+			//Dynamic Drop Down List from JSON
+			if ( settings.ajaxDDList ) {
+				if ( APP.DYNAMIC_DD_LIST ) APP.DYNAMIC_DD_LIST.documentReady($);
+			}
+				
+			
+			//Counter
+			if ( settings.counterAnim ) {
+				if ( APP.COUNTER ) APP.COUNTER.documentReady($);
+			}
+						
+			
 			
 			
 			//----Other functions here
@@ -528,10 +543,6 @@ APP = ( function ( APP, $, window, document ) {
     };
  
 }( jQuery ));
-
-
-
-		
 
 		
 /*

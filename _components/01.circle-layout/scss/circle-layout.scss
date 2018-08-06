@@ -30,7 +30,19 @@
 			> div {
 				padding: 2.5rem;
 				overflow: hidden;
-				height: calc(100% - 5rem);
+				height: 100%;
+				width: calc(100% - 2.5rem);
+				position: relative;
+		
+				p {
+					display: block;
+					position: absolute;
+					transform: translateY(-50%);
+					top: 50%;
+					width: calc(100% - 2.5rem);
+					text-align: center;
+				
+				}
 			}
 		}
 	}

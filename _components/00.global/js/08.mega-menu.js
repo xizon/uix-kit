@@ -84,8 +84,7 @@ APP = ( function ( APP, $, window, document ) {
 
 				$menuWrap.find( 'li.multi-column' ).each( function() {
 					var root_li          = $( this ),
-						col_total        = root_li.find( '> ul .multi-column-title' ).length,
-						col_div          = root_li.find( '> ul .multi-column-title' ).closest( 'li' ),
+						col_total        = root_li.find( '> ul > li' ).length,
 						mega_div         = root_li.find( ' > ul.sub-menu' ),
 						mega_div_w       = mega_div.width(),
 						mega_single_w    = null,
@@ -162,6 +161,23 @@ APP = ( function ( APP, $, window, document ) {
 										'margin-right' : - ( chkWidth - w ) + 'px'
 									} );
 								}	
+								
+								
+								//If the CSS sets the offset of ul::before
+//								var mega_div_offset = mega_div_w/2 - 0;
+//								
+//								if ( ! $( 'body' ).hasClass( 'rtl' ) ) {
+//									mega_div.css( {
+//										'margin-left' : - ( chkWidth - w ) + mega_div_offset + 'px'
+//									} );
+//								} else {
+//									mega_div.css( {
+//										'margin-right' : - ( chkWidth - w ) + mega_div_offset + 'px'
+//									} );
+//								}	
+								
+								
+								
 
 							}	
 							

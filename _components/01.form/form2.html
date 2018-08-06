@@ -59,7 +59,7 @@
        <!-- Content 02
         ====================================================== -->
         <section class="uix-spacing--m">
-            <div class="container uix-t-c">
+            <div class="container">
                    
                    
                     <div class="row">
@@ -68,11 +68,38 @@
                         
                         
                                  <form method="post" action="#">
+                                 
+                                 
+								   <div class="row">
+										<div class="col-sm-12">
+
+											Text: 
+										    <div class="uix-controls uix-controls--line">
+											  <input type="text" class="float-label" value="" name="sname">
+											  <label>Input Normal</label>
+											  
+											</div>
+											
+											Text: 
+											<div class="uix-controls uix-controls--line">
+											  <input type="text" class="float-label" value="" name="ename">
+											  <label>Input Normal</label>
+											</div>
+
+											
+
+										</div>  
+										   
+
+									</div>
+									<!-- .row end -->  
+                                   
+                                 
                
 								   <div class="row">
 										<div class="col-sm-6">
 
-											<div class="uix-controls uix-controls--line is-success">
+											<div class="uix-controls uix-controls--line is-fullwidth is-success">
 											  <input type="text" class="float-label" value="Success" name="sname">
 											  <label>Input Name</label>
 											  
@@ -82,7 +109,7 @@
 										   
 										<div class="col-sm-6">
 
-											<div class="uix-controls uix-controls--line is-error">
+											<div class="uix-controls uix-controls--line is-fullwidth is-error">
 											  <input type="text" class="float-label" value="Error" name="ename">
 											  <label>Input Name</label>
 											</div>
@@ -97,7 +124,7 @@
 								   <div class="row">
 										<div class="col-sm-6">
 
-											<div class="uix-controls uix-controls--line disabled">
+											<div class="uix-controls uix-controls--line is-fullwidth disabled">
 											  <input type="text" class="float-label" value="Text" name="d-name" disabled>
 											  <label>Disabled Input</label>
 											  
@@ -130,7 +157,7 @@
 								   <div class="row">
 										<div class="col-sm-6">
 
-											<div class="uix-controls uix-controls--line">
+											<div class="uix-controls uix-controls--line is-fullwidth">
 											  <input type="text" class="float-label" name="first-name">
 											  <label>First Name<span class="uix-controls__im">*</span></label>
 											</div>
@@ -139,7 +166,7 @@
 										   
 										<div class="col-sm-6">
 
-											<div class="uix-controls uix-controls--line">
+											<div class="uix-controls uix-controls--line is-fullwidth">
 											  <input type="text" class="float-label" name="last-name">
 											  <label>Last Name</label>
 											</div>
@@ -153,7 +180,7 @@
 								   <div class="row">
 										<div class="col-sm-6">
 
-											<div class="uix-controls uix-controls--line is-iconic">
+											<div class="uix-controls uix-controls--line is-fullwidth is-iconic">
 										      <i class="fa fa-cogs" aria-hidden="true"></i>
 											  <input type="text" class="float-label" name="first-name">
 											  <label>With Icons<span class="uix-controls__im">*</span></label>
@@ -163,7 +190,7 @@
 										   
 										<div class="col-sm-6">
 
-											<div class="uix-controls uix-controls--line is-iconic">
+											<div class="uix-controls uix-controls--line is-fullwidth is-iconic">
 										      <i class="fa fa-feed" aria-hidden="true"></i>
 											  <input type="text" class="float-label" name="last-name">
 											  <label>With Icons</label>
@@ -254,12 +281,25 @@
 									</div>
 									<!-- .row end -->
                                    
+                                         
+                                         
+								   <div class="row">
+										<div class="col-sm-12 uix-t-m">
+											<div class="uix-controls uix-controls--line uix-controls__short-m">
+											  <input type="text" class="float-label" name="shortinput1">
+											  <label>Short Input 2</label>unit
+											</div>
+										</div>  
+
+									</div>
+									<!-- .row end -->         
+                                         
                                           
 								   <div class="row">
 										<div class="col-sm-12 uix-t-l">
 											<div class="uix-controls uix-controls--line uix-controls__short-l">
 											  <input type="text" class="float-label" name="shortinput2">
-											  <label>Short Input 2</label>unit
+											  <label>Short Input 3</label>unit
 											</div>
 										</div>  
 
@@ -289,7 +329,7 @@
 								   <div class="row">
 										<div class="col-sm-12 uix-t-l">
 
-											<div class="uix-controls uix-controls--line">
+											<div class="uix-controls uix-controls--line is-fullwidth">
 												<input type="text" class="float-label" name="name">
 												<label>Name</label>
 											</div>
@@ -301,7 +341,7 @@
                                           
 								   <div class="row">
 										<div class="col-sm-12 uix-t-l">
-											<div class="uix-controls uix-controls--line">
+											<div class="uix-controls uix-controls--line is-fullwidth">
 												<input type="tel" class="float-label" name="cell">
 												<label>Celly</label>
 											</div>
@@ -313,7 +353,7 @@
                                           
 								   <div class="row">
 										<div class="col-sm-12 uix-t-l">
-											<div class="uix-controls uix-controls--line uix-controls__textarea">
+											<div class="uix-controls uix-controls--line uix-controls__textarea is-fullwidth">
 											  <textarea name="comments" class="float-label"></textarea>
 											  <label>Comments</label>
 											</div>

@@ -67,6 +67,12 @@ $control-focus-bordercolor2: transparent;
 	text-align: left;
 	position: relative;
 	margin-bottom: 1.09375rem;
+	display: inline-block;/* Avoid line breaks */
+	
+	&.is-fullwidth {
+		display: block;
+	}
+	
 
 	&.uix-controls__side {
 		margin-left: .2rem;
@@ -165,6 +171,20 @@ $control-focus-bordercolor2: transparent;
 		}
 
 	}  	
+	
+	&.uix-controls__short-m {
+		
+		input:not([type="checkbox"]):not([type="radio"]) {
+			width: 155px;
+			margin-right: .5rem;	
+		}
+		
+		.uix-controls__bar {
+			width: calc( 155px + 1.09375rem + 2px );
+		}
+
+	}  
+	
 
 	&.uix-controls__short-l {
 		input:not([type="checkbox"]):not([type="radio"]) {
@@ -573,7 +593,7 @@ $control-focus-bordercolor2: transparent;
 	
 	.uix-controls.uix-controls--line {
 		
-		&:not(.uix-controls__short-s):not(.uix-controls__short-l) {
+		&:not(.uix-controls__short-s):not(.uix-controls__short-m):not(.uix-controls__short-l) {
 			.uix-controls__bar {
 				left: -8px;
 
@@ -677,7 +697,7 @@ $controls-merge-button-width: 20%;
 	}
 	
 	button {
-		padding: 0.546875rem 0 !important;
+		padding: 0.609375rem 0 !important;
 		width: calc(#{$controls-merge-button-width} + 5px) !important;
 		margin-left: -5px;
 		text-transform: uppercase;

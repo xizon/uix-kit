@@ -44,10 +44,15 @@ APP = ( function ( APP, $, window, document ) {
 			//find the offset of the wrapping div  
 			offsetBody = $( '.uix-lavalamp-menu__container' ).offset();
 
+			
+			//Activate navigation style
+			$( menu + ' > li' ).removeClass( 'active' );
+			$this.parent().addClass( 'active' );
+			
 			// GSAP animate to clicked menu item
 			TweenMax.to( line, 1, {
 				css: {
-					width  : $this.outerWidth() + 'px',
+					width  : parseFloat( $this.outerWidth() + 0 ) + 'px',
 					x      : ( offset.left - offsetBody.left ) + 'px'
 				},
 				ease: Elastic.easeOut.config(1, 0.5)

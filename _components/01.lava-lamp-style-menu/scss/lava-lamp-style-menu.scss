@@ -20,7 +20,6 @@
 			padding: 0;
 			position: relative;
 			padding: 0 1.159375rem;
-			font-size: 1rem;
 			display: inline-block;
 			margin-right: 1.6875rem;
 			white-space: nowrap; /* Required*/
@@ -31,6 +30,12 @@
 				display: block;
 			}
 			
+			&.active {
+				a {
+					font-weight: bold;
+				}
+			}
+			
 		}
 		
 		
@@ -39,7 +44,7 @@
 			padding: 0;
 			margin: 0;
 			background: $highlight-color1;
-			z-index: 0;
+			z-index: -1;
 			position: absolute;
 			top: 105%;
 			border-radius: 3px;

@@ -35,6 +35,7 @@
 						background-size: cover;		
 						width: 100%;
 						height: 100%;
+						position: relative;
 					}
 
 				}		
@@ -201,6 +202,48 @@
 
 
 			}
+			
+			
+			
+			/*--- 2 Rows, 3 Columns Large image on the left and right ---*/
+			.uix-blended-grid__col-three-left-right {
+
+
+				> li:nth-child(1) {
+					top: 0;	
+					left: 0;
+					width: 41.666666666667%;
+					height: 100%;
+				}
+
+
+				> li:nth-child(2) {
+					top: 0;
+					left: 41.666666666667%;
+					width: 33.333333333333%;
+					height: 50%;
+
+				}
+
+				> li:nth-child(3) {
+					top: 50%;
+					left: 41.666666666667%;
+					width: 33.333333333333%;
+					height: 50%;
+				}
+
+
+				> li:nth-child(4) {
+					top: 0;	
+					left: 75%;
+					width: 25%;
+					height: 100%;
+				}
+		
+
+			}
+						
+			
 
 		}
 		

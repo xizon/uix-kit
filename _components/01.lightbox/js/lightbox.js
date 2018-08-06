@@ -10,7 +10,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.LIGHTBOX               = APP.LIGHTBOX || {};
-	APP.LIGHTBOX.version       = '0.0.8';
+	APP.LIGHTBOX.version       = '0.0.9';
     APP.LIGHTBOX.pageLoaded    = function() {
 
 		if ( $( '.uix-lightbox__container' ).length == 0 ) {
@@ -102,7 +102,7 @@ APP = ( function ( APP, $, window, document ) {
 					imgSrcStrToW = imgSrcStr[0].large;
 					
 					//push the large photos
-					largePhotos += '<div class="uix-lightbox__photo-container uix-lightbox__photo-sets-container"><ul>';
+					largePhotos += '<div class="uix-lightbox__photo-container uix-lightbox__photo-sets-container"><a href="javascript:" class="uix-lightbox__photo-sets__prev"></a><a href="javascript:" class="uix-lightbox__photo-sets__next"></a><ul>';
 					for ( var i = 0; i < imgSrcStr.length; i++ ) {
 						
 						
@@ -122,7 +122,10 @@ APP = ( function ( APP, $, window, document ) {
 					//push the thumbs
 					thumbs += '<div class="uix-lightbox__thumb-container"><ul>';
 					for ( var k = 0; k < imgSrcStr.length; k++ ) {
-						thumbs += '<li><img src="'+ imgSrcStr[k].thumb +'" alt=""></li>';
+						
+						var active = ( k == 0 ) ? 'class="active"' : '';
+						
+						thumbs += '<li '+active+'><img src="'+ imgSrcStr[k].thumb +'" alt=""></li>';
 					}
 					thumbs += '</ul></div>';
 					
@@ -163,6 +166,10 @@ APP = ( function ( APP, $, window, document ) {
 						if ( w > sw ) w = sw;
 						
 						h = w * ( this.height/this.width );
+						
+					
+						//Prevent height overflow
+						if ( h > $( window ).height() ) h = $( window ).height() * 0.95;
 						
 					
 						$lbCon.css( {
@@ -260,30 +267,58 @@ APP = ( function ( APP, $, window, document ) {
 		
 
 		//Click thumbnail to switch large photo
-		$( document ).on( 'click', '.uix-lightbox__thumb-container li', function() {
-			
-			var $largePhoto = $( this ).closest( '.uix-lightbox__html' ).find( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' ),
-				$thumb      = $( '.uix-lightbox__thumb-container li' ),
+		
+		function lightboxThumbSwitch( index, obj ) {
+			var $largePhoto = obj.closest( '.uix-lightbox__html' ).find( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' ),
+				$thumb      = obj.closest( '.uix-lightbox__html' ).find( '.uix-lightbox__thumb-container li' ),
 				curImgH     = 0;
 
 			
 			$thumb.removeClass( 'active' );
-			$( this ).addClass( 'active' );
+			obj.addClass( 'active' );
 			
 			$largePhoto.find( 'li' ).fadeOut( 300 ).removeClass( 'active' );
-			$largePhoto.find( 'li' ).eq( $( this ).index() ).addClass( 'active' ).fadeIn( 300, function() {
+			$largePhoto.find( 'li' ).eq( index ).addClass( 'active' ).fadeIn( 300, function() {
 				
 				//Reset the container height
-				curImgH = $largePhoto.find( 'li' ).eq( $( this ).index() ).find( 'img' ).height();
+				curImgH = $largePhoto.find( 'li' ).eq( index ).find( 'img' ).height();
 				
 				$largePhoto.css( {
 					'height': curImgH + 'px'
 				} );
-			});
-
-				
+			});	
+		}
+		
+		
+		
+		$( document ).on( 'click', '.uix-lightbox__thumb-container li', function() {
+			lightboxThumbSwitch( $( this ).index(), $( this ) );
+		});		
+		
+		$( document ).on( 'click', '.uix-lightbox__photo-sets-container > a', function() {
+			var $largePhoto = $( this ).closest( '.uix-lightbox__html' ).find( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' ),
+				$thumb      = $( this ).closest( '.uix-lightbox__html' ).find( '.uix-lightbox__thumb-container li' ),
+				total       = $thumb.length,
+				curIndex    = $thumb.filter( '.active' ).index(),
+				prevIndex   = curIndex - 1,
+				nextIndex   = curIndex + 1;
+			
+			
+			if ( prevIndex < 0 ) prevIndex = total - 1;
+			if ( nextIndex > total - 1 ) nextIndex = 0;
+			
+			
+			if ( $( this ).hasClass( 'uix-lightbox__photo-sets__prev' ) ) {
+				lightboxThumbSwitch( prevIndex, $thumb.eq( prevIndex ) );
+			}
+			
+			if ( $( this ).hasClass( 'uix-lightbox__photo-sets__next' ) ) {
+				lightboxThumbSwitch( nextIndex, $thumb.eq( nextIndex ) );
+			}
+			
 			
 		});		
+		
 		
 		
 		

@@ -296,20 +296,20 @@ $primary-bg-color      : transparent;
 // Custom Scrollbar
 // ---------------------------
 //
-@mixin customScrollbar( $dir ){
-	// @include customScrollbar( 'vertical' );
-	&::-webkit-scrollbar-track {
+@mixin customScrollbar( $dir, $classname ){
+	// @include customScrollbar( 'vertical', '.classname' );
+	#{$classname}::-webkit-scrollbar-track {
 		border-radius: 0px;
-		background-color: #E6E3E3;
+		background-color: #e9ecee;
 	}
 
 	@if ( $dir == 'vertical' ) {
-		&::-webkit-scrollbar {
+		#{$classname}::-webkit-scrollbar {
 			width: 5px;
 			background-color: #{$highlight-color1};
 		}
 	} @else {
-		&::-webkit-scrollbar {
+		#{$classname}::-webkit-scrollbar {
 			height: 5px;
 			background-color: #{$highlight-color1};
 		}
@@ -317,7 +317,7 @@ $primary-bg-color      : transparent;
 	}
 	
 
-	&::-webkit-scrollbar-thumb {
+	#{$classname}::-webkit-scrollbar-thumb {
 		border-radius: 0px;
 		background-color: #{$highlight-color1};
 	}

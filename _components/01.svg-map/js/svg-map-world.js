@@ -15,7 +15,7 @@ APP = ( function ( APP, $, window, document ) {
 		var $svgEl = $( '.uix-svgmap--world' );
 		
 
-		$( '.uix-svgmap--world__trigger a' ).on( 'click', function( e ) {
+		$( document ).on( 'click', '.uix-svgmap--world__trigger a', function( e ) {
 			
 			// stop propagation of this event, it will never reach body in bubbling phase.
 			e.stopPropagation();

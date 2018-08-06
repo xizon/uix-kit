@@ -1,5 +1,21 @@
 # Changelog
 
+#### = 2.0.3 (August 6, 2018) =
+
+* New: Added parallax parameters to the "Specify a background image" module.
+* New: Add a new module "Hover Delay Interaction".
+* New: Add a new module "Floating Side Element".
+* New: Add a new module "Progress Line".
+* New: Add a new layout for "Blended Grid Layout".
+* Fix: Fixed alignment judgment for mega menu.
+* Fix: Prevent problems with styles of Advanced Slider when switching in positive order.
+* Fix: Prevent height overflow for Custom Lightbox.
+* Tweak: Extended callback parameters for ajax return function.
+* Tweak: Optimized style of the form.
+* Tweak: Added left and right control arrows for Custom Lightbox.
+* Tweak: Enhanced parallax effect compatibility.
+
+
 
 #### = 2.0.2 (August 2, 2018) =
 

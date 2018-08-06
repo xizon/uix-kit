@@ -207,7 +207,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 				
 				//The target select event
-				$( document ).on( 'change.cusSelectDynamicDD', associated, function( e ) {
+				$( document ).on( 'change.DYNAMIC_DD_LIST', associated, function( e ) {
 
 					e.preventDefault();
 					
