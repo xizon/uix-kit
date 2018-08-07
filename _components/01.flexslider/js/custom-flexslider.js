@@ -60,6 +60,7 @@ APP = ( function ( APP, $, window, document ) {
 				dataCountTotal    = thisSlider.data( 'my-count-total' ),
 				dataCountCur      = thisSlider.data( 'my-count-now' ),
 				dataShowItems     = thisSlider.data( 'my-multiple-items' ),
+				dataShowItemsMove = thisSlider.data( 'my-multiple-items-move' ),
 				dataParallax      = thisSlider.data( 'my-parallax' );
 			
 			
@@ -67,7 +68,8 @@ APP = ( function ( APP, $, window, document ) {
 			if( typeof dataTimeline === typeof undefined ) dataTimeline = false;
 			if( typeof dataCountTotal === typeof undefined ) dataCountTotal = false;
 			if( typeof dataCountCur === typeof undefined ) dataCountCur = false;
-			if( typeof dataParallax === typeof undefined ) dataParallax = false;	
+			if( typeof dataParallax === typeof undefined ) dataParallax = false;
+			if( typeof dataShowItemsMove === typeof undefined ) dataShowItemsMove = 1;
 			
 			
 			//Total counter selector
@@ -203,28 +205,42 @@ APP = ( function ( APP, $, window, document ) {
 				//Return an event from callback function to each slider 
 				//with dynamic min/max ranges.
 				//-------------------------------------
-				if( typeof dataShowItems != typeof undefined && dataShowItems != '' && dataShowItems != 0 ) {
+				
+				
+				if( 
+					typeof dataShowItems != typeof undefined && 
+					dataShowItems != '' && 
+					dataShowItems != 0
+				) {
 
-
-					$items.removeClass( activeClass );
-					$items.removeClass( prevClass );
-					$items.removeClass( nextClass );
-
-					if ( windowWidth <= 768 ) {
+					
+					if ( dataShowItemsMove == 1 ) {
 						
-						//Focus slider
-						$items.eq( parseFloat( curIndex ) ).addClass( activeClass );	
+						$items.removeClass( activeClass );
+						$items.removeClass( prevClass );
+						$items.removeClass( nextClass );
+
+						if ( windowWidth <= 768 ) {
+
+							//Focus slider
+							$items.eq( parseFloat( curIndex ) ).addClass( activeClass );	
+
+						} else {
+							//Focus slider
+							$items.eq( parseFloat( curIndex+1 ) ).addClass( activeClass );
+
+							//Previous slider
+							$items.eq( parseFloat( curIndex ) ).addClass( prevClass );
+
+							//Next slider
+							$items.eq( parseFloat( curIndex+2 ) ).addClass( nextClass );	
+						}
 						
 					} else {
-						//Focus slider
-						$items.eq( parseFloat( curIndex+1 ) ).addClass( activeClass );
-
-						//Previous slider
-						$items.eq( parseFloat( curIndex ) ).addClass( prevClass );
-
-						//Next slider
-						$items.eq( parseFloat( curIndex+2 ) ).addClass( nextClass );	
+						$items.addClass( activeClass );
 					}
+
+
 					
 				}
 
