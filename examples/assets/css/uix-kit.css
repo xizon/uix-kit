@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  2.0.3
+ * ## Version             :  2.0.4
  * ## Last Update         :  August 7, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -158,6 +158,7 @@
     93. Vertical Separator 
     94. Wave Background 
     95. WordPress Core ( Do not use prefix "uix-" ) 
+    96. Ajax Page Loader (Loading A Page via Ajax Into Div)  
 
 
 
@@ -15641,13 +15642,6 @@ a img.aligncenter {
   }
   55% {
     right: 2px;
-  }
-  100% {
-    right: 180px;
-    left: 2px;
-  }
-}
-ght: 2px;
   }
   100% {
     right: 180px;

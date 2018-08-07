@@ -8,7 +8,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.SMOOTH_SCROLLING_ANCHORLINK               = APP.SMOOTH_SCROLLING_ANCHORLINK || {};
-	APP.SMOOTH_SCROLLING_ANCHORLINK.version       = '0.0.3';
+	APP.SMOOTH_SCROLLING_ANCHORLINK.version       = '0.0.4';
     APP.SMOOTH_SCROLLING_ANCHORLINK.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -46,18 +46,30 @@ APP = ( function ( APP, $, window, document ) {
 		//Page automatically slide to jump to the corresponding position
 		if ( browserURL.indexOf( '#!!' ) >= 0 ) {
 			
+
 			var curndex = browserURL.split( '#!!' ),
 				$target = $( '#' + curndex[1] );
-
+			
 			//Smooth scrolling
 			TweenMax.to( window, 0.5, {
 				scrollTo: {
 					y: $target.offset().top
 				},
-				ease: Power2.easeOut
-			});		
-	
-			
+				ease: Power2.easeOut,
+				onComplete : function() {
+					
+					
+					//Fixed an error that offset().top returns wrong value
+					if ( parseFloat( $target.offset().top - $( window ).scrollTop() ) < 50 ) {
+						
+						$( 'a[href*="#' + curndex[1] +'"]' ).trigger( 'click' );	
+						
+					}
+
+
+				}
+			});			
+
 		}
 		
 		

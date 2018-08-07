@@ -1,5 +1,11 @@
 # Changelog
 
+#### = 2.0.4 (August 7, 2018) =
+
+* Fix: Fixed an error that offset().top returns wrong value for Smooth Scrolling Method.
+* Tweak: Optimized FlexSlider module.
+
+
 #### = 2.0.3 (August 6, 2018) =
 
 * New: Added parallax parameters to the "Specify a background image" module.
@@ -14,7 +20,7 @@
 * Tweak: Optimized style of the form.
 * Tweak: Added left and right control arrows for Custom Lightbox.
 * Tweak: Enhanced parallax effect compatibility.
-* Tweak: Optimized FlexSlider module.
+
 
 
 

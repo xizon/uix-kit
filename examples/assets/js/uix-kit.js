@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  2.0.3
+ * ## Version             :  2.0.4
  * ## Last Update         :  August 7, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -28,8 +28,8 @@
     4. Get all custom attributes of an element like "data-*" 
     5. Navigation 
     6. Videos 
-    7. Mega Menu 
-    8. Common Height 
+    7. Common Height 
+    8. Mega Menu 
     9. Dropdown Categories 
     10. Pagination 
     11. Specify a background image 
@@ -51,34 +51,34 @@
     27. Circle Layout 
     28. Counter 
     29. Dropdown Menu 
-    30. Dropdown Menu 2 (Multi-level drop-down navigation) 
-    31. Dynamic Drop Down List from JSON 
-    32. Flexslider 
-    33. Floating Side Element 
-    34. Form 
+    30. Dynamic Drop Down List from JSON 
+    31. Flexslider 
+    32. Floating Side Element 
+    33. Form 
+    34. jQuery UI Datepicker 1.11.4 
     35. Form Progress 
-    36. jQuery UI Datepicker 1.11.4 
-    37. Gallery 
-    38. Hover Delay Interaction 
-    39. Image Shapes 
-    40. Theme Scripts  
-    41. Lava-Lamp Style Menu 
-    42. Custom Lightbox 
-    43. Bulleted List 
-    44. Posts List With Ajax 
-    45. Fullwidth List of Split 
-    46. Mousewheel Interaction 
-    47. Multiple Items Carousel 
-    48. Full Page/One Page Transition 
-    49. Full Page/One Page Transition 2 
-    50. Parallax 
-    51. Periodical Scroll 
-    52. Pricing 
-    53. Progress Bar 
-    54. Progress Line 
-    55. Retina Graphics for Website 
-    56. Rotating Elements 
-    57. Scroll Reveal 
+    36. Gallery 
+    37. Hover Delay Interaction 
+    38. Image Shapes 
+    39. Theme Scripts  
+    40. Lava-Lamp Style Menu 
+    41. Custom Lightbox 
+    42. Bulleted List 
+    43. Posts List With Ajax 
+    44. Fullwidth List of Split 
+    45. Mousewheel Interaction 
+    46. Multiple Items Carousel 
+    47. Full Page/One Page Transition 
+    48. Full Page/One Page Transition 2 
+    49. Parallax 
+    50. Periodical Scroll 
+    51. Pricing 
+    52. Progress Bar 
+    53. Progress Line 
+    54. Retina Graphics for Website 
+    55. Rotating Elements 
+    56. Scroll Reveal 
+    57. Dropdown Menu 2 (Multi-level drop-down navigation) 
     58. Show More Less 
     59. Smooth Scrolling When Clicking An Anchor Link 
     60. Source Code View 
@@ -89,10 +89,10 @@
     65. Team Focus 
     66. Testimonials Carousel 
     67. Text effect 
-    68. Timeline 
-    69. Vertical Menu 
-    70. Ajax Page Loader (Loading A Page via Ajax Into Div)  
-    71. Ajax Push Content  
+    68. Vertical Menu 
+    69. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    70. Ajax Push Content  
+    71. Timeline 
     72. GSAP Plugins 
     73. Three.js Plugins 
 
@@ -3636,152 +3636,6 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
- * <!-- 3D Sphere Rotation -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP._3D_SPHERE_THREE               = APP._3D_SPHERE_THREE || {};
-	APP._3D_SPHERE_THREE.version       = '0.0.1';
-    APP._3D_SPHERE_THREE.documentReady = function( $ ) {
-
-		//Prevent this module from loading in other pages
-		if ( $( '#3D-sphere-three-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
-		
-		
-		var $window                   = $( window ),
-			windowWidth               = $window.width(),
-			windowHeight              = $window.height(),
-			rendererCanvasID          = '3D-sphere-three-canvas';
-		
-	
-
-		
-		// Generate one plane geometries mesh to scene
-		//-------------------------------------	
-		var camera,
-			controls,
-			scene,
-			light,
-			renderer,
-			displacementSprite;
-
-		
-		init();
-		render();
-
-		function init() {
-			// camera
-			camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 100 );
-			camera.position.set( 0, -46, 18 );
-
-			// controls
-			controls = new THREE.OrbitControls( camera );
-			controls.minDistance = 10;
-			controls.maxDistance = 50;
-
-			//Scene
-			scene = new THREE.Scene();
-
-			//HemisphereLight
-			scene.add( new THREE.AmbientLight( 0x555555 ) );
-
-			light = new THREE.SpotLight( 0xffffff, 1.5 );
-			light.position.set( 0, 500, 2000 );
-			scene.add( light );
-			
-			
-
-			//WebGL Renderer		
-			renderer = new THREE.WebGLRenderer( { 
-									canvas   : document.getElementById( rendererCanvasID ), //canvas
-									alpha    : true, 
-									antialias: true 
-								} );
-			renderer.setSize( windowWidth, windowHeight );
-
-			
-			// axes
-			//scene.add( new THREE.AxisHelper( 20 ) );
-
-			// geometry
-			var geometry = new THREE.SphereGeometry( 3, 32, 32 );
-
-			// material, we create the material when the texture is loaded
-			var texture = new THREE.TextureLoader().load( templateUrl + '/assets/images/demo/test-img-big-1.jpg' ),
-				material = new THREE.MeshBasicMaterial( { map: texture } );
-
-			// parent
-			displacementSprite = new THREE.Object3D();
-			scene.add( displacementSprite );
-
-			// pivots
-			var pivot1 = new THREE.Object3D(),
-				pivot2 = new THREE.Object3D(),
-				pivot3 = new THREE.Object3D();
-			
-			pivot1.rotation.z = 0;
-			pivot2.rotation.z = 2 * Math.PI / 3;
-			pivot3.rotation.z = 4 * Math.PI / 3;
-			displacementSprite.add( pivot1 );
-			displacementSprite.add( pivot2 );
-			displacementSprite.add( pivot3 );
-
-			// mesh
-			var mesh1 = new THREE.Mesh( geometry, material ),
-				mesh2 = new THREE.Mesh( geometry, material ),
-				mesh3 = new THREE.Mesh( geometry, material );
-			
-			mesh1.position.y = 5;
-			mesh2.position.y = 15;
-			mesh3.position.y = 25;
-			pivot1.add( mesh1 );
-			pivot2.add( mesh2 );
-			pivot3.add( mesh3 );
-			
-			
-			// Fires when the window changes
-			window.addEventListener( 'resize', onWindowResize, false );
-			
-			
-		}
-
-		function render() {
-			requestAnimationFrame( render );
-			
-			displacementSprite.rotation.z += 0.01;
-			controls.update();
-			
-			renderer.render( scene, camera );
-			
-		}
-
-
-		function onWindowResize() {
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-			renderer.setSize( window.innerWidth, window.innerHeight );
-		}
-
-
-		
-    };
-	
-    APP.components.documentReady.push( APP._3D_SPHERE_THREE.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
-
-
-
-
-/* 
- *************************************
  * <!-- 3D Particle Effect -->
  *************************************
  */
@@ -3986,6 +3840,152 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
+/* 
+ *************************************
+ * <!-- 3D Sphere Rotation -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP._3D_SPHERE_THREE               = APP._3D_SPHERE_THREE || {};
+	APP._3D_SPHERE_THREE.version       = '0.0.1';
+    APP._3D_SPHERE_THREE.documentReady = function( $ ) {
+
+		//Prevent this module from loading in other pages
+		if ( $( '#3D-sphere-three-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
+		
+		
+		var $window                   = $( window ),
+			windowWidth               = $window.width(),
+			windowHeight              = $window.height(),
+			rendererCanvasID          = '3D-sphere-three-canvas';
+		
+	
+
+		
+		// Generate one plane geometries mesh to scene
+		//-------------------------------------	
+		var camera,
+			controls,
+			scene,
+			light,
+			renderer,
+			displacementSprite;
+
+		
+		init();
+		render();
+
+		function init() {
+			// camera
+			camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 100 );
+			camera.position.set( 0, -46, 18 );
+
+			// controls
+			controls = new THREE.OrbitControls( camera );
+			controls.minDistance = 10;
+			controls.maxDistance = 50;
+
+			//Scene
+			scene = new THREE.Scene();
+
+			//HemisphereLight
+			scene.add( new THREE.AmbientLight( 0x555555 ) );
+
+			light = new THREE.SpotLight( 0xffffff, 1.5 );
+			light.position.set( 0, 500, 2000 );
+			scene.add( light );
+			
+			
+
+			//WebGL Renderer		
+			renderer = new THREE.WebGLRenderer( { 
+									canvas   : document.getElementById( rendererCanvasID ), //canvas
+									alpha    : true, 
+									antialias: true 
+								} );
+			renderer.setSize( windowWidth, windowHeight );
+
+			
+			// axes
+			//scene.add( new THREE.AxisHelper( 20 ) );
+
+			// geometry
+			var geometry = new THREE.SphereGeometry( 3, 32, 32 );
+
+			// material, we create the material when the texture is loaded
+			var texture = new THREE.TextureLoader().load( templateUrl + '/assets/images/demo/test-img-big-1.jpg' ),
+				material = new THREE.MeshBasicMaterial( { map: texture } );
+
+			// parent
+			displacementSprite = new THREE.Object3D();
+			scene.add( displacementSprite );
+
+			// pivots
+			var pivot1 = new THREE.Object3D(),
+				pivot2 = new THREE.Object3D(),
+				pivot3 = new THREE.Object3D();
+			
+			pivot1.rotation.z = 0;
+			pivot2.rotation.z = 2 * Math.PI / 3;
+			pivot3.rotation.z = 4 * Math.PI / 3;
+			displacementSprite.add( pivot1 );
+			displacementSprite.add( pivot2 );
+			displacementSprite.add( pivot3 );
+
+			// mesh
+			var mesh1 = new THREE.Mesh( geometry, material ),
+				mesh2 = new THREE.Mesh( geometry, material ),
+				mesh3 = new THREE.Mesh( geometry, material );
+			
+			mesh1.position.y = 5;
+			mesh2.position.y = 15;
+			mesh3.position.y = 25;
+			pivot1.add( mesh1 );
+			pivot2.add( mesh2 );
+			pivot3.add( mesh3 );
+			
+			
+			// Fires when the window changes
+			window.addEventListener( 'resize', onWindowResize, false );
+			
+			
+		}
+
+		function render() {
+			requestAnimationFrame( render );
+			
+			displacementSprite.rotation.z += 0.01;
+			controls.update();
+			
+			renderer.render( scene, camera );
+			
+		}
+
+
+		function onWindowResize() {
+			camera.aspect = window.innerWidth / window.innerHeight;
+			camera.updateProjectionMatrix();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+		}
+
+
+		
+    };
+	
+    APP.components.documentReady.push( APP._3D_SPHERE_THREE.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+
+
+
+
 
 /* 
  *************************************
@@ -4164,6 +4164,338 @@ APP = ( function ( APP, $, window, document ) {
 
 }( APP, jQuery, window, document ) );
 
+
+
+
+
+/* 
+ *************************************
+ * <!-- Advanced Content Slider -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.ADVANCED_CONTENT_SLIDER               = APP.ADVANCED_CONTENT_SLIDER || {};
+	APP.ADVANCED_CONTENT_SLIDER.version       = '0.0.2';
+    APP.ADVANCED_CONTENT_SLIDER.documentReady = function( $ ) {
+
+		var $window                   = $( window ),
+			windowWidth               = $window.width(),
+			windowHeight              = $window.height(),
+			animDuration              = 1200;
+		
+		
+		
+		sliderInit();
+		
+		$window.on( 'resize', function() {
+			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+			if ( $window.width() != windowWidth ) {
+
+				// Update the window width for next time
+				windowWidth = $window.width();
+
+				sliderInit();
+				
+			}
+		});
+		
+		
+		/*
+		 * Initialize slideshow
+		 *
+		 * @return {void}                   - The constructor.
+		 */
+        function sliderInit() {
+			
+			$( '.uix-advanced-content-slider' ).each( function() {
+				var $this                      = $( this ),
+					$items                     = $this.find( '.uix-advanced-content-slider__item' ),
+					$itemsWrapper              = $this.children( '.uix-advanced-content-slider__inner' ),
+					$first                     = $items.first(),
+					itemWidth                  = $this.width(),
+					itemsTotal                 = $items.length,
+					totalWidth                 = itemWidth*itemsTotal,
+					dataControlsPagination     = $this.data( 'controls-pagination' ),
+					dataControlsArrows         = $this.data( 'controls-arrows' ),
+					dataDraggable              = $this.data( 'draggable' ),
+					dataDraggableCursor        = $this.data( 'draggable-cursor' ),
+					dataControlsPaginationAuto = false;
+
+				
+				
+
+				if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-content-slider-sp-pagination';
+				if ( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-content-slider-sp-arrows';
+				if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
+				if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
+				
+				if ( $( dataControlsPagination ).html().length == 0 ) dataControlsPaginationAuto = true;
+
+				
+
+				//Initialize the width of each item
+				//-------------------------------------		
+				$first.addClass( 'active' );
+				
+				$items.css( 'width', itemWidth + 'px' );
+				
+				TweenMax.set( $itemsWrapper, { 
+					width: totalWidth,
+					onComplete  : function() {
+						$this.css( 'height', 'auto' );
+						
+					}
+				} );	
+				
+
+				//Pagination dots 
+				//-------------------------------------	
+				if ( dataControlsPaginationAuto ) {
+					var _dot       = '',
+						_dotActive = '';
+					_dot += '<ul class="uix-advanced-content-slider__pagination--default">';
+					for ( var i = 0; i < itemsTotal; i++ ) {
+
+						_dotActive = ( i == 0 ) ? 'class="active"' : '';
+
+						_dot += '<li><a '+_dotActive+' data-index="'+i+'" href="javascript:"></a></li>';
+					}
+					_dot += '</ul>';
+
+					if ( $( dataControlsPagination ).html() == '' ) $( dataControlsPagination ).html( _dot );	
+				} else {
+					$( dataControlsPagination ).find( 'li' ).first().find( 'a' ).addClass( 'active' );
+					$( dataControlsPagination ).find( 'li' ).first().addClass( 'active' );
+				}
+
+
+				$( dataControlsPagination ).find( 'li a' ).on( 'click', function( e ) {
+					e.preventDefault();
+
+					if ( !$( this ).hasClass( 'active' ) ) {
+						
+						sliderUpdates( $( this ).attr( 'data-index' ), $this, dataControlsArrows, dataControlsPagination );
+					}
+
+
+
+				});
+
+				
+				//Next/Prev buttons
+				//-------------------------------------		
+				var _prev = $( dataControlsArrows ).find( '.uix-advanced-content-slider__arrows--prev' ),
+					_next = $( dataControlsArrows ).find( '.uix-advanced-content-slider__arrows--next' );
+				
+				
+
+				$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
+				
+				_prev.addClass( 'disabled' );
+
+				_prev.on( 'click', function( e ) {
+					e.preventDefault();
+
+					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
+
+				});
+
+				_next.on( 'click', function( e ) {
+					e.preventDefault();
+
+					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
+
+				});
+				
+				
+				//Drag and Drop
+				//-------------------------------------	
+				var $dragDropTrigger = $items;
+
+				//Make the cursor a move icon when a user hovers over an item
+				if ( dataDraggable && dataDraggableCursor != '' && dataDraggableCursor != false ) $dragDropTrigger.css( 'cursor', dataDraggableCursor );
+				
+
+
+				//Mouse event
+				$dragDropTrigger.on( 'mousedown.ADVANCED_CONTENT_SLIDER touchstart.ADVANCED_CONTENT_SLIDER', function( e ) {
+					e.preventDefault();
+
+					var touches = e.originalEvent.touches;
+					
+					$( this ).addClass( 'dragging' );
+					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
+					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
+					
+					
+					if ( touches && touches.length ) {	
+						$( this ).data( 'origin_mouse_x', parseInt( touches[0].pageX ) );
+						$( this ).data( 'origin_mouse_y', parseInt( touches[0].pageY ) );
+
+					} else {
+						
+						if ( dataDraggable ) {
+							$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
+							$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );	
+						}
+
+
+					}
+					
+					$dragDropTrigger.on( 'mouseup.ADVANCED_CONTENT_SLIDER touchmove.ADVANCED_CONTENT_SLIDER', function( e ) {
+						e.preventDefault();
+
+						$( this ).removeClass( 'dragging' );
+						var touches        = e.originalEvent.touches,
+							origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
+							origin_mouse_y = $( this ).data( 'origin_mouse_y' );
+
+						if ( touches && touches.length ) {
+
+							var deltaX = origin_mouse_x - touches[0].pageX,
+								deltaY = origin_mouse_y - touches[0].pageY;
+
+							if ( deltaX >= 50) {
+								//--- left
+								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
+
+
+							}
+							if ( deltaX <= -50) {
+								//--- right
+								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
+
+
+							}
+							if ( deltaY >= 50) {
+								//--- up
+
+
+							}
+							if ( deltaY <= -50) {
+								//--- down
+
+							}
+
+							if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
+								$dragDropTrigger.off( 'touchmove.ADVANCED_CONTENT_SLIDER' );
+							}	
+
+
+						} else {
+							
+							if ( dataDraggable ) {
+								//right
+								if ( e.pageX > origin_mouse_x ) {
+									sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
+								}
+
+								//left
+								if ( e.pageX < origin_mouse_x ) {
+									sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
+								}
+
+								//down
+								if ( e.pageY > origin_mouse_y ) {
+
+								}
+
+								//up
+								if ( e.pageY < origin_mouse_y ) {
+
+								}	
+
+								$dragDropTrigger.off( 'mouseup.ADVANCED_CONTENT_SLIDER' );
+								
+							}	
+							
+							
+							
+						}
+
+
+
+					} );
+
+					
+					
+
+				} );
+
+			
+				
+			});	
+			
+		}
+		
+		/*
+		 * Transition Between Slides
+		 *
+		 * @param  {number} elementIndex     - Index of current slider.
+		 * @param  {object} slider           - Selector of the slider .
+		 * @param  {string} arrows           - Controller name of prev/next buttons.
+		 * @param  {string} pagination       - Controller name of pagination buttons.
+		 * @return {void}                    - The constructor.
+		 */
+        function sliderUpdates( elementIndex, slider, arrows, pagination ) {
+			
+			var $items        = slider.find( '.uix-advanced-content-slider__item' ),
+				itemsTotal    = $items.length,
+				$prev         = $( arrows ).find( '.uix-advanced-content-slider__arrows--prev' ),
+				$next         = $( arrows ).find( '.uix-advanced-content-slider__arrows--next' ),
+				$pagination   = $( pagination ).find( 'li a' );
+				
+			if ( elementIndex <= itemsTotal - 1 && elementIndex >= 0 ) {
+
+				if ( elementIndex > parseFloat( itemsTotal - 1 ) ) elementIndex = parseFloat( itemsTotal - 1 );
+				if ( elementIndex < 0 ) elementIndex = 0;
+				
+				$next.removeClass( 'disabled' );
+				$prev.removeClass( 'disabled' );
+				$pagination.removeClass( 'active' );
+				$pagination.parent().removeClass( 'active' );
+
+				if ( elementIndex == itemsTotal - 1 ) {
+					$next.addClass( 'disabled' );
+				}
+
+				if ( elementIndex == 0 ) {
+					$prev.addClass( 'disabled' );
+				}
+
+				
+
+				$items.removeClass( 'active' );
+				$items.eq( elementIndex ).addClass( 'active' );	
+				$pagination.eq( elementIndex ).addClass( 'active' );
+				$pagination.eq( elementIndex ).parent().addClass( 'active' );
+				
+				
+				
+				TweenMax.to( slider.children( '.uix-advanced-content-slider__inner' ), animDuration/1000, { 
+					x: '-' + ( slider.width() * elementIndex ),
+					onComplete  : function() {
+
+					},
+					ease: Power3.easeOut
+				} );
+				
+	
+			}
+			
+
+			
+		}
+		
+		
+    };
+
+    APP.components.documentReady.push( APP.ADVANCED_CONTENT_SLIDER.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
 
 
 
@@ -7593,338 +7925,6 @@ APP = ( function ( APP, $, window, document ) {
 
 }( APP, jQuery, window, document ) );
 
-
-
-
-
-/* 
- *************************************
- * <!-- Advanced Content Slider -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.ADVANCED_CONTENT_SLIDER               = APP.ADVANCED_CONTENT_SLIDER || {};
-	APP.ADVANCED_CONTENT_SLIDER.version       = '0.0.2';
-    APP.ADVANCED_CONTENT_SLIDER.documentReady = function( $ ) {
-
-		var $window                   = $( window ),
-			windowWidth               = $window.width(),
-			windowHeight              = $window.height(),
-			animDuration              = 1200;
-		
-		
-		
-		sliderInit();
-		
-		$window.on( 'resize', function() {
-			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( $window.width() != windowWidth ) {
-
-				// Update the window width for next time
-				windowWidth = $window.width();
-
-				sliderInit();
-				
-			}
-		});
-		
-		
-		/*
-		 * Initialize slideshow
-		 *
-		 * @return {void}                   - The constructor.
-		 */
-        function sliderInit() {
-			
-			$( '.uix-advanced-content-slider' ).each( function() {
-				var $this                      = $( this ),
-					$items                     = $this.find( '.uix-advanced-content-slider__item' ),
-					$itemsWrapper              = $this.children( '.uix-advanced-content-slider__inner' ),
-					$first                     = $items.first(),
-					itemWidth                  = $this.width(),
-					itemsTotal                 = $items.length,
-					totalWidth                 = itemWidth*itemsTotal,
-					dataControlsPagination     = $this.data( 'controls-pagination' ),
-					dataControlsArrows         = $this.data( 'controls-arrows' ),
-					dataDraggable              = $this.data( 'draggable' ),
-					dataDraggableCursor        = $this.data( 'draggable-cursor' ),
-					dataControlsPaginationAuto = false;
-
-				
-				
-
-				if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-content-slider-sp-pagination';
-				if ( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-content-slider-sp-arrows';
-				if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
-				if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
-				
-				if ( $( dataControlsPagination ).html().length == 0 ) dataControlsPaginationAuto = true;
-
-				
-
-				//Initialize the width of each item
-				//-------------------------------------		
-				$first.addClass( 'active' );
-				
-				$items.css( 'width', itemWidth + 'px' );
-				
-				TweenMax.set( $itemsWrapper, { 
-					width: totalWidth,
-					onComplete  : function() {
-						$this.css( 'height', 'auto' );
-						
-					}
-				} );	
-				
-
-				//Pagination dots 
-				//-------------------------------------	
-				if ( dataControlsPaginationAuto ) {
-					var _dot       = '',
-						_dotActive = '';
-					_dot += '<ul class="uix-advanced-content-slider__pagination--default">';
-					for ( var i = 0; i < itemsTotal; i++ ) {
-
-						_dotActive = ( i == 0 ) ? 'class="active"' : '';
-
-						_dot += '<li><a '+_dotActive+' data-index="'+i+'" href="javascript:"></a></li>';
-					}
-					_dot += '</ul>';
-
-					if ( $( dataControlsPagination ).html() == '' ) $( dataControlsPagination ).html( _dot );	
-				} else {
-					$( dataControlsPagination ).find( 'li' ).first().find( 'a' ).addClass( 'active' );
-					$( dataControlsPagination ).find( 'li' ).first().addClass( 'active' );
-				}
-
-
-				$( dataControlsPagination ).find( 'li a' ).on( 'click', function( e ) {
-					e.preventDefault();
-
-					if ( !$( this ).hasClass( 'active' ) ) {
-						
-						sliderUpdates( $( this ).attr( 'data-index' ), $this, dataControlsArrows, dataControlsPagination );
-					}
-
-
-
-				});
-
-				
-				//Next/Prev buttons
-				//-------------------------------------		
-				var _prev = $( dataControlsArrows ).find( '.uix-advanced-content-slider__arrows--prev' ),
-					_next = $( dataControlsArrows ).find( '.uix-advanced-content-slider__arrows--next' );
-				
-				
-
-				$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
-				
-				_prev.addClass( 'disabled' );
-
-				_prev.on( 'click', function( e ) {
-					e.preventDefault();
-
-					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
-
-				});
-
-				_next.on( 'click', function( e ) {
-					e.preventDefault();
-
-					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
-
-				});
-				
-				
-				//Drag and Drop
-				//-------------------------------------	
-				var $dragDropTrigger = $items;
-
-				//Make the cursor a move icon when a user hovers over an item
-				if ( dataDraggable && dataDraggableCursor != '' && dataDraggableCursor != false ) $dragDropTrigger.css( 'cursor', dataDraggableCursor );
-				
-
-
-				//Mouse event
-				$dragDropTrigger.on( 'mousedown.ADVANCED_CONTENT_SLIDER touchstart.ADVANCED_CONTENT_SLIDER', function( e ) {
-					e.preventDefault();
-
-					var touches = e.originalEvent.touches;
-					
-					$( this ).addClass( 'dragging' );
-					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
-					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
-					
-					
-					if ( touches && touches.length ) {	
-						$( this ).data( 'origin_mouse_x', parseInt( touches[0].pageX ) );
-						$( this ).data( 'origin_mouse_y', parseInt( touches[0].pageY ) );
-
-					} else {
-						
-						if ( dataDraggable ) {
-							$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
-							$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );	
-						}
-
-
-					}
-					
-					$dragDropTrigger.on( 'mouseup.ADVANCED_CONTENT_SLIDER touchmove.ADVANCED_CONTENT_SLIDER', function( e ) {
-						e.preventDefault();
-
-						$( this ).removeClass( 'dragging' );
-						var touches        = e.originalEvent.touches,
-							origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
-							origin_mouse_y = $( this ).data( 'origin_mouse_y' );
-
-						if ( touches && touches.length ) {
-
-							var deltaX = origin_mouse_x - touches[0].pageX,
-								deltaY = origin_mouse_y - touches[0].pageY;
-
-							if ( deltaX >= 50) {
-								//--- left
-								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
-
-
-							}
-							if ( deltaX <= -50) {
-								//--- right
-								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
-
-
-							}
-							if ( deltaY >= 50) {
-								//--- up
-
-
-							}
-							if ( deltaY <= -50) {
-								//--- down
-
-							}
-
-							if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
-								$dragDropTrigger.off( 'touchmove.ADVANCED_CONTENT_SLIDER' );
-							}	
-
-
-						} else {
-							
-							if ( dataDraggable ) {
-								//right
-								if ( e.pageX > origin_mouse_x ) {
-									sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
-								}
-
-								//left
-								if ( e.pageX < origin_mouse_x ) {
-									sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
-								}
-
-								//down
-								if ( e.pageY > origin_mouse_y ) {
-
-								}
-
-								//up
-								if ( e.pageY < origin_mouse_y ) {
-
-								}	
-
-								$dragDropTrigger.off( 'mouseup.ADVANCED_CONTENT_SLIDER' );
-								
-							}	
-							
-							
-							
-						}
-
-
-
-					} );
-
-					
-					
-
-				} );
-
-			
-				
-			});	
-			
-		}
-		
-		/*
-		 * Transition Between Slides
-		 *
-		 * @param  {number} elementIndex     - Index of current slider.
-		 * @param  {object} slider           - Selector of the slider .
-		 * @param  {string} arrows           - Controller name of prev/next buttons.
-		 * @param  {string} pagination       - Controller name of pagination buttons.
-		 * @return {void}                    - The constructor.
-		 */
-        function sliderUpdates( elementIndex, slider, arrows, pagination ) {
-			
-			var $items        = slider.find( '.uix-advanced-content-slider__item' ),
-				itemsTotal    = $items.length,
-				$prev         = $( arrows ).find( '.uix-advanced-content-slider__arrows--prev' ),
-				$next         = $( arrows ).find( '.uix-advanced-content-slider__arrows--next' ),
-				$pagination   = $( pagination ).find( 'li a' );
-				
-			if ( elementIndex <= itemsTotal - 1 && elementIndex >= 0 ) {
-
-				if ( elementIndex > parseFloat( itemsTotal - 1 ) ) elementIndex = parseFloat( itemsTotal - 1 );
-				if ( elementIndex < 0 ) elementIndex = 0;
-				
-				$next.removeClass( 'disabled' );
-				$prev.removeClass( 'disabled' );
-				$pagination.removeClass( 'active' );
-				$pagination.parent().removeClass( 'active' );
-
-				if ( elementIndex == itemsTotal - 1 ) {
-					$next.addClass( 'disabled' );
-				}
-
-				if ( elementIndex == 0 ) {
-					$prev.addClass( 'disabled' );
-				}
-
-				
-
-				$items.removeClass( 'active' );
-				$items.eq( elementIndex ).addClass( 'active' );	
-				$pagination.eq( elementIndex ).addClass( 'active' );
-				$pagination.eq( elementIndex ).parent().addClass( 'active' );
-				
-				
-				
-				TweenMax.to( slider.children( '.uix-advanced-content-slider__inner' ), animDuration/1000, { 
-					x: '-' + ( slider.width() * elementIndex ),
-					onComplete  : function() {
-
-					},
-					ease: Power3.easeOut
-				} );
-				
-	
-			}
-			
-
-			
-		}
-		
-		
-    };
-
-    APP.components.documentReady.push( APP.ADVANCED_CONTENT_SLIDER.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
 
 
 
@@ -17966,7 +17966,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.SMOOTH_SCROLLING_ANCHORLINK               = APP.SMOOTH_SCROLLING_ANCHORLINK || {};
-	APP.SMOOTH_SCROLLING_ANCHORLINK.version       = '0.0.3';
+	APP.SMOOTH_SCROLLING_ANCHORLINK.version       = '0.0.4';
     APP.SMOOTH_SCROLLING_ANCHORLINK.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -18004,18 +18004,30 @@ APP = ( function ( APP, $, window, document ) {
 		//Page automatically slide to jump to the corresponding position
 		if ( browserURL.indexOf( '#!!' ) >= 0 ) {
 			
+
 			var curndex = browserURL.split( '#!!' ),
 				$target = $( '#' + curndex[1] );
-
+			
 			//Smooth scrolling
 			TweenMax.to( window, 0.5, {
 				scrollTo: {
 					y: $target.offset().top
 				},
-				ease: Power2.easeOut
-			});		
-	
-			
+				ease: Power2.easeOut,
+				onComplete : function() {
+					
+					
+					//Fixed an error that offset().top returns wrong value
+					if ( parseFloat( $target.offset().top - $( window ).scrollTop() ) < 50 ) {
+						
+						$( 'a[href*="#' + curndex[1] +'"]' ).trigger( 'click' );	
+						
+					}
+
+
+				}
+			});			
+
 		}
 		
 		
