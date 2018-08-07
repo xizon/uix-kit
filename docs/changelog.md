@@ -14,6 +14,7 @@
 * Tweak: Optimized style of the form.
 * Tweak: Added left and right control arrows for Custom Lightbox.
 * Tweak: Enhanced parallax effect compatibility.
+* Tweak: Optimized FlexSlider module.
 
 
 

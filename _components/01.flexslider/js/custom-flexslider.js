@@ -8,7 +8,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.FLEXSLIDER               = APP.FLEXSLIDER || {};
-	APP.FLEXSLIDER.version       = '0.1.0';
+	APP.FLEXSLIDER.version       = '0.1.2';
     APP.FLEXSLIDER.documentReady = function( $ ) {
 
 		var $window            = $( window ),
@@ -737,6 +737,7 @@ APP = ( function ( APP, $, window, document ) {
 				dataCountCur      = $this.data( 'my-count-now' ),
 				customConID       = $this.data( 'my-controls' ),
 				dataShowItems     = $this.data( 'my-multiple-items' ),
+				dataShowItemsMove = $this.data( 'my-multiple-items-move' ),
 				dataParallax      = $this.data( 'my-parallax' ),
 				dataSync          = $this.data( 'my-sync' );
 			
@@ -774,7 +775,8 @@ APP = ( function ( APP, $, window, document ) {
 			if( typeof dataCountTotal === typeof undefined ) dataCountTotal = false;
 			if( typeof dataCountCur === typeof undefined ) dataCountCur = false;
 			if( typeof dataParallax === typeof undefined ) dataParallax = false;
-		
+		    if( typeof dataShowItemsMove === typeof undefined ) dataShowItemsMove = 1;
+			
 			
 
 			
@@ -796,14 +798,13 @@ APP = ( function ( APP, $, window, document ) {
 			
 			//Show number of items
 			var my_itemWidth = 0, 
-				my_move      = 0,
+				my_move      = dataShowItemsMove,
 				my_minItems  = 0,
 				my_maxItems  = 0;
 			
 			if( typeof dataShowItems != typeof undefined && dataShowItems != '' && dataShowItems != 0 ) {
 				
 			    my_itemWidth = 1;
-				my_move      = 1;
 				my_minItems  = getGridSize( dataShowItems );
 				my_maxItems  = getGridSize( dataShowItems );
 				
