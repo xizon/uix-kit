@@ -51,24 +51,27 @@ APP = ( function ( APP, $, window, document ) {
 				$target = $( '#' + curndex[1] );
 			
 			//Smooth scrolling
-			TweenMax.to( window, 0.5, {
-				scrollTo: {
-					y: $target.offset().top
-				},
-				ease: Power2.easeOut,
-				onComplete : function() {
-					
-					
-					//Fixed an error that offset().top returns wrong value
-					if ( parseFloat( $target.offset().top - $( window ).scrollTop() ) < 50 ) {
-						
-						$( 'a[href*="#' + curndex[1] +'"]' ).trigger( 'click' );	
-						
+			if ( $target.length ) {
+				TweenMax.to( window, 0.5, {
+					scrollTo: {
+						y: $target.offset().top
+					},
+					ease: Power2.easeOut,
+					onComplete : function() {
+
+
+						//Fixed an error that offset().top returns wrong value
+						if ( parseFloat( $target.offset().top - $( window ).scrollTop() ) < 50 ) {
+
+							$( 'a[href*="#' + curndex[1] +'"]' ).trigger( 'click' );	
+
+						}
+
+
 					}
-
-
-				}
-			});			
+				});			
+			}
+	
 
 		}
 		

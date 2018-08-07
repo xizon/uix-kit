@@ -30,8 +30,9 @@
 			> div {
 				padding: 2.5rem;
 				overflow: hidden;
-				height: 100%;
+				height: calc(100% - 5rem);
 				width: calc(100% - 2.5rem);
+				margin-top: 2.5rem;
 				position: relative;
 		
 				p {

@@ -10,11 +10,8 @@ APP = ( function ( APP, $, window, document ) {
 	APP.PROGRESSLINE.version       = '0.0.1';
     APP.PROGRESSLINE.documentReady = function( $ ) {
 
-		var $progressLineCircle = $('.uix-progress-line .uix-progress-line__circle' );
-		
-		var waypoints = $('.uix-progress-line' ).waypoint({
-			handler: function( direction ) {
-
+		var $progressLineCircle = $('.uix-progress-line .uix-progress-line__circle' ),
+			progressLineRestore = function() {
 				var k = 0;
 				var progressLineAnimGo = setInterval( function() {
 					$progressLineCircle.eq( k ).addClass( 'active' );
@@ -28,7 +25,12 @@ APP = ( function ( APP, $, window, document ) {
 
 
 				}, 50 );
+			};
+		
+		var waypoints = $('.uix-progress-line' ).waypoint({
+			handler: function( direction ) {
 
+				progressLineRestore();
 
 				//Prevents front-end javascripts that are activated in the background to repeat loading.
 				this.disable();
@@ -52,6 +54,11 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
+		} );
+
+		
+		$progressLineCircle.parent().on( 'mouseleave', function() {
+			progressLineRestore();
 		} );
 
 		

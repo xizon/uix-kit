@@ -46,39 +46,39 @@
     22. Accordion 
     23. Accordion Background Images 
     24. Advanced Content Slider 
-    25. Advanced Slider (Special Effects) 
-    26. Advanced Slider (Basic) 
-    27. Circle Layout 
+    25. Advanced Slider (Basic) 
+    26. Circle Layout 
+    27. Advanced Slider (Special Effects) 
     28. Counter 
     29. Dropdown Menu 
-    30. Dynamic Drop Down List from JSON 
-    31. Flexslider 
-    32. Floating Side Element 
-    33. Form 
-    34. jQuery UI Datepicker 1.11.4 
-    35. Form Progress 
-    36. Gallery 
-    37. Hover Delay Interaction 
-    38. Image Shapes 
-    39. Theme Scripts  
-    40. Lava-Lamp Style Menu 
-    41. Custom Lightbox 
-    42. Bulleted List 
-    43. Posts List With Ajax 
-    44. Fullwidth List of Split 
-    45. Mousewheel Interaction 
-    46. Multiple Items Carousel 
-    47. Full Page/One Page Transition 
-    48. Full Page/One Page Transition 2 
-    49. Parallax 
-    50. Periodical Scroll 
-    51. Pricing 
-    52. Progress Bar 
-    53. Progress Line 
-    54. Retina Graphics for Website 
-    55. Rotating Elements 
-    56. Scroll Reveal 
-    57. Dropdown Menu 2 (Multi-level drop-down navigation) 
+    30. Dropdown Menu 2 (Multi-level drop-down navigation) 
+    31. Dynamic Drop Down List from JSON 
+    32. Flexslider 
+    33. Floating Side Element 
+    34. Form 
+    35. jQuery UI Datepicker 1.11.4 
+    36. Form Progress 
+    37. Gallery 
+    38. Hover Delay Interaction 
+    39. Image Shapes 
+    40. Theme Scripts  
+    41. Lava-Lamp Style Menu 
+    42. Custom Lightbox 
+    43. Bulleted List 
+    44. Posts List With Ajax 
+    45. Fullwidth List of Split 
+    46. Mousewheel Interaction 
+    47. Multiple Items Carousel 
+    48. Full Page/One Page Transition 
+    49. Full Page/One Page Transition 2 
+    50. Parallax 
+    51. Periodical Scroll 
+    52. Pricing 
+    53. Progress Bar 
+    54. Progress Line 
+    55. Retina Graphics for Website 
+    56. Rotating Elements 
+    57. Scroll Reveal 
     58. Show More Less 
     59. Smooth Scrolling When Clicking An Anchor Link 
     60. Source Code View 
@@ -89,10 +89,10 @@
     65. Team Focus 
     66. Testimonials Carousel 
     67. Text effect 
-    68. Vertical Menu 
-    69. Ajax Page Loader (Loading A Page via Ajax Into Div)  
-    70. Ajax Push Content  
-    71. Timeline 
+    68. Timeline 
+    69. Vertical Menu 
+    70. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    71. Ajax Push Content  
     72. GSAP Plugins 
     73. Three.js Plugins 
 
@@ -13578,6 +13578,108 @@ var datepicker = $.datepicker;
 
 /* 
  *************************************
+ * <!-- Gallery -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.GALLERY               = APP.GALLERY || {};
+	APP.GALLERY.version       = '0.0.1';
+    APP.GALLERY.documentReady = function( $ ) {
+
+		$( '.uix-gallery' ).each( function() {
+			var type = $( this ).data( 'show-type' );
+			
+			// Masonry
+			if ( type.indexOf( 'masonry' ) >= 0  ) {
+				$( this ).addClass( 'masonry-container' );
+				$( this ).find( '.uix-gallery__item' ).addClass( 'masonry-item' );
+			}
+			
+			// Filterable
+			if ( type.indexOf( 'filter' ) >= 0  ) {
+				$( this ).addClass( 'filter-container' );
+				$( this ).find( '.uix-gallery__item' ).addClass( 'filter-item' );	
+			}	
+		
+		});
+	
+	    /*--  Function of Masonry  --*/
+		var masonryObj = $( '.masonry-container .uix-gallery-tiles' );
+		imagesLoaded( masonryObj ).on( 'always', function() {
+			  masonryObj.masonry({
+				itemSelector: '.masonry-item'
+			  });  
+		});
+		
+		
+	    /*--  Function of Filterable  --*/
+		if ( $( "[data-show-type]" ).length > 0 ) {
+			if ( $( "[data-show-type]" ).data( 'show-type' ).indexOf( 'filter' ) >= 0 ) {
+				
+				$( '.uix-gallery' ).each( function() {
+					var filterCat      = $( this ).data( 'filter-id' ),
+						$grid          = $( this ).find( '.uix-gallery-tiles' ),
+						$filterOptions = $( filterCat );
+						
+					imagesLoaded( $grid ).on( 'always', function() {
+						
+						 $grid.shuffle({
+							itemSelector : '.filter-item',
+							speed        : 550, // Transition/animation speed (milliseconds).
+							easing       : 'ease-out', // CSS easing function to use.
+							sizer        : null // Sizer element. Use an element to determine the size of columns and gutters.
+						  });
+						  
+						
+						$filterOptions.find( 'li > a' ).on( 'click', function() {
+							  var $this       = $( this ),
+								  activeClass = 'current-cat',
+								  isActive    = $this.hasClass( activeClass ),
+								  group       = isActive ? 'all' : $this.data( 'group' );
+						
+							  // Hide current label, show current label in title
+							  if ( !isActive ) {
+								$filterOptions.find( '.' + activeClass ).removeClass( activeClass );
+							  }
+						
+							  $this.toggleClass( activeClass );
+						
+							  // Filter elements
+							  $grid.shuffle( 'shuffle', group );
+							  
+							  return false;	
+						});
+					
+			
+					});
+	
+					
+				} );
+		
+				
+			} else {
+				$( '[data-group="all"]' ).parent( 'li' ).hide();
+			}
+	
+		}
+		
+		
+		
+    };
+
+    APP.components.documentReady.push( APP.GALLERY.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+
+/* 
+ *************************************
  * <!-- Form Progress -->
  *************************************
  */
@@ -13884,108 +13986,6 @@ APP = ( function ( APP, $, window, document ) {
     };
  
 }( jQuery ));
-
-
-
-/* 
- *************************************
- * <!-- Gallery -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.GALLERY               = APP.GALLERY || {};
-	APP.GALLERY.version       = '0.0.1';
-    APP.GALLERY.documentReady = function( $ ) {
-
-		$( '.uix-gallery' ).each( function() {
-			var type = $( this ).data( 'show-type' );
-			
-			// Masonry
-			if ( type.indexOf( 'masonry' ) >= 0  ) {
-				$( this ).addClass( 'masonry-container' );
-				$( this ).find( '.uix-gallery__item' ).addClass( 'masonry-item' );
-			}
-			
-			// Filterable
-			if ( type.indexOf( 'filter' ) >= 0  ) {
-				$( this ).addClass( 'filter-container' );
-				$( this ).find( '.uix-gallery__item' ).addClass( 'filter-item' );	
-			}	
-		
-		});
-	
-	    /*--  Function of Masonry  --*/
-		var masonryObj = $( '.masonry-container .uix-gallery-tiles' );
-		imagesLoaded( masonryObj ).on( 'always', function() {
-			  masonryObj.masonry({
-				itemSelector: '.masonry-item'
-			  });  
-		});
-		
-		
-	    /*--  Function of Filterable  --*/
-		if ( $( "[data-show-type]" ).length > 0 ) {
-			if ( $( "[data-show-type]" ).data( 'show-type' ).indexOf( 'filter' ) >= 0 ) {
-				
-				$( '.uix-gallery' ).each( function() {
-					var filterCat      = $( this ).data( 'filter-id' ),
-						$grid          = $( this ).find( '.uix-gallery-tiles' ),
-						$filterOptions = $( filterCat );
-						
-					imagesLoaded( $grid ).on( 'always', function() {
-						
-						 $grid.shuffle({
-							itemSelector : '.filter-item',
-							speed        : 550, // Transition/animation speed (milliseconds).
-							easing       : 'ease-out', // CSS easing function to use.
-							sizer        : null // Sizer element. Use an element to determine the size of columns and gutters.
-						  });
-						  
-						
-						$filterOptions.find( 'li > a' ).on( 'click', function() {
-							  var $this       = $( this ),
-								  activeClass = 'current-cat',
-								  isActive    = $this.hasClass( activeClass ),
-								  group       = isActive ? 'all' : $this.data( 'group' );
-						
-							  // Hide current label, show current label in title
-							  if ( !isActive ) {
-								$filterOptions.find( '.' + activeClass ).removeClass( activeClass );
-							  }
-						
-							  $this.toggleClass( activeClass );
-						
-							  // Filter elements
-							  $grid.shuffle( 'shuffle', group );
-							  
-							  return false;	
-						});
-					
-			
-					});
-	
-					
-				} );
-		
-				
-			} else {
-				$( '[data-group="all"]' ).parent( 'li' ).hide();
-			}
-	
-		}
-		
-		
-		
-    };
-
-    APP.components.documentReady.push( APP.GALLERY.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
 
 
 
@@ -17571,11 +17571,8 @@ APP = ( function ( APP, $, window, document ) {
 	APP.PROGRESSLINE.version       = '0.0.1';
     APP.PROGRESSLINE.documentReady = function( $ ) {
 
-		var $progressLineCircle = $('.uix-progress-line .uix-progress-line__circle' );
-		
-		var waypoints = $('.uix-progress-line' ).waypoint({
-			handler: function( direction ) {
-
+		var $progressLineCircle = $('.uix-progress-line .uix-progress-line__circle' ),
+			progressLineRestore = function() {
 				var k = 0;
 				var progressLineAnimGo = setInterval( function() {
 					$progressLineCircle.eq( k ).addClass( 'active' );
@@ -17589,7 +17586,12 @@ APP = ( function ( APP, $, window, document ) {
 
 
 				}, 50 );
+			};
+		
+		var waypoints = $('.uix-progress-line' ).waypoint({
+			handler: function( direction ) {
 
+				progressLineRestore();
 
 				//Prevents front-end javascripts that are activated in the background to repeat loading.
 				this.disable();
@@ -17613,6 +17615,11 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
+		} );
+
+		
+		$progressLineCircle.parent().on( 'mouseleave', function() {
+			progressLineRestore();
 		} );
 
 		
@@ -18009,24 +18016,27 @@ APP = ( function ( APP, $, window, document ) {
 				$target = $( '#' + curndex[1] );
 			
 			//Smooth scrolling
-			TweenMax.to( window, 0.5, {
-				scrollTo: {
-					y: $target.offset().top
-				},
-				ease: Power2.easeOut,
-				onComplete : function() {
-					
-					
-					//Fixed an error that offset().top returns wrong value
-					if ( parseFloat( $target.offset().top - $( window ).scrollTop() ) < 50 ) {
-						
-						$( 'a[href*="#' + curndex[1] +'"]' ).trigger( 'click' );	
-						
+			if ( $target.length ) {
+				TweenMax.to( window, 0.5, {
+					scrollTo: {
+						y: $target.offset().top
+					},
+					ease: Power2.easeOut,
+					onComplete : function() {
+
+
+						//Fixed an error that offset().top returns wrong value
+						if ( parseFloat( $target.offset().top - $( window ).scrollTop() ) < 50 ) {
+
+							$( 'a[href*="#' + curndex[1] +'"]' ).trigger( 'click' );	
+
+						}
+
+
 					}
-
-
-				}
-			});			
+				});			
+			}
+	
 
 		}
 		
