@@ -12,7 +12,7 @@
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
  * ## Version             :  2.0.3
- * ## Last Update         :  August 6, 2018
+ * ## Last Update         :  August 7, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -47,6 +47,9 @@
     20. Bulleted List 
     21. Maintain Aspect Ratio List 
     22. Side by Side List 
+    23. Source Code 
+    24. ToolTip 
+    25. Vertical Menu (RTL) 
 
 
 
@@ -1071,11 +1074,6 @@ pre.prettyprint {
 
 .uix-v-menu__container:not(.is-mobile) .uix-menu__arrow {
     right: auto;
-    left: .5rem;
-}
-
-/*# sourceMappingURL=uix-kit-rtl.css.map */
-o;
     left: .5rem;
 }
 

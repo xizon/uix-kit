@@ -8,7 +8,7 @@
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
  * ## Version             :  2.0.3
- * ## Last Update         :  August 6, 2018
+ * ## Last Update         :  August 7, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -63,102 +63,101 @@
 	TABLE OF CONTENTS
 	---------------------------
 	
-    1. Table 
-    2. Bullet List 
-    3. Helper Classes 
-    4. Basic 
+    1. Basic 
+    2. Table 
+    3. Bullet List 
+    4. Helper Classes 
     5. Typography 
     6. Spacing 
-    7. Brand 
-    8. Header Area 
-    9. Navigation 
-    10. Basic Layout Styles 
-    11. Video 
-    12. Footer 
-    13. Social Media Icons 
-    14. Pagination 
-    15. Loader 
-    16. Filterable Navigation 
-    17. Back to Top 
-    18. Search 
-    19. Tags 
-    20. Sidebar  
+    7. Basic Layout Styles 
+    8. Navigation 
+    9. Header Area 
+    10. Brand 
+    11. Footer 
+    12. Video 
+    13. Back to Top 
+    14. Loader 
+    15. Social Media Icons 
+    16. Pagination 
+    17. Filterable Navigation 
+    18. Sidebar  
+    19. Search 
+    20. Tags 
     21. Entry 
     22. Comments ( Synchronize to WordPress's class name ) 
-    23. Modal Dialog 
-    24. 3rd Party Plugins 
-    25. Onepage Menu 
-    26. 3D Carousel 
-    27. Accordion 
-    28. Accordion 
-    29. Accordion Background Images 
-    30. Mobile Menu 
-    31. 3D Background 
-    32. Advanced Content Slider 
+    23. Mobile Menu 
+    24. Onepage Menu 
+    25. Modal Dialog 
+    26. 3rd Party Plugins 
+    27. 3D Background 
+    28. 3D Carousel 
+    29. Accordion 
+    30. Accordion Background Images 
+    31. Advanced Content Slider 
+    32. Advanced Slider (Special Effects) 
     33. Advanced Slider (Basic) 
-    34. Blended Grid Layout 
-    35. Breadcrumbs 
-    36. Badges 
-    37. Advanced Slider (Special Effects) 
-    38. Circle Layout 
-    39. Counter 
-    40. Button 
+    34. Badges 
+    35. Blended Grid Layout 
+    36. Breadcrumbs 
+    37. Button 
+    38. Cards 
+    39. Circle Layout 
+    40. Counter 
     41. Dividing Line 
-    42. Dotted Line 
-    43. Cards 
-    44. Dots 
-    45. Equal-width Columns 
-    46. Dropdown Menu 2 (Multi-level drop-down navigation) 
-    47. Dropdown Menu 
-    48. Footer Templates 
-    49. Form 
-    50. Form Progress 
-    51. Gallery 
-    52. Heading 
-    53. Image Shapes 
-    54. Image Animation 
-    55. Custom Core Scripts & Stylesheets 
-    56. Floating Side Element 
-    57. Lava-Lamp Style Menu 
-    58. Cutom Light Box 
-    59. Brands List 
-    60. Bulleted List 
-    61. Maintain Aspect Ratio List 
-    62. List of Posts 
-    63. List of Split Posts 
-    64. Side by Side List 
-    65. Side by Side List With Photo 
-    66. Fullwidth List of Split 2 
-    67. Fullwidth List of Split 
-    68. Mouse Animation Scroll 
-    69. Multiple Items Carousel 
-    70. Overlay 
-    71. Parallax 
-    72. Periodical Scroll 
-    73. Pricing 
-    74. Progress Bar 
-    75. Progress Line 
-    76. Ribbon 
-    77. Shape Animation 
-    78. Show More Less 
-    79. Single Post 
-    80. Source Code 
-    81. Striking 
-    82. SVG Map 
-    83. Tabs 
-    84. Team Focus 
-    85. Team Fullwidth (Style using the Side by Side List With Photo module) 
-    86. Team Gird 
-    87. Testimonials Carousel 
-    88. Text effect 
-    89. Timeline 
-    90. ToolTip 
-    91. Vertical Menu 
-    92. Vertical Separator 
-    93. Wave Background 
-    94. WordPress Core ( Do not use prefix "uix-" ) 
-    95. Ajax Page Loader (Loading A Page via Ajax Into Div)  
-    96. Features 
+    42. Dots 
+    43. Dotted Line 
+    44. Dropdown Menu 
+    45. Dropdown Menu 2 (Multi-level drop-down navigation) 
+    46. Equal-width Columns 
+    47. Features 
+    48. Flexslider 
+    49. Floating Side Element 
+    50. Footer Templates 
+    51. Form 
+    52. Form Progress 
+    53. Gallery 
+    54. Heading 
+    55. Image Animation 
+    56. Image Shapes 
+    57. Custom Core Scripts & Stylesheets 
+    58. Lava-Lamp Style Menu 
+    59. Cutom Light Box 
+    60. Brands List 
+    61. Bulleted List 
+    62. Maintain Aspect Ratio List 
+    63. List of Posts 
+    64. List of Split Posts 
+    65. Side by Side List 
+    66. Side by Side List With Photo 
+    67. Fullwidth List of Split 2 
+    68. Fullwidth List of Split 
+    69. Mouse Animation Scroll 
+    70. Multiple Items Carousel 
+    71. Overlay 
+    72. Parallax 
+    73. Periodical Scroll 
+    74. Pricing 
+    75. Progress Bar 
+    76. Progress Line 
+    77. Ribbon 
+    78. Shape Animation 
+    79. Show More Less 
+    80. Single Post 
+    81. Source Code 
+    82. Striking 
+    83. SVG Map 
+    84. Tabs 
+    85. Team Focus 
+    86. Team Fullwidth (Style using the Side by Side List With Photo module) 
+    87. Team Gird 
+    88. Testimonials Carousel 
+    89. Text effect 
+    90. Timeline 
+    91. ToolTip 
+    92. Vertical Menu 
+    93. Vertical Separator 
+    94. Wave Background 
+    95. WordPress Core ( Do not use prefix "uix-" ) 
 
 
 
@@ -15351,94 +15350,6 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
 }
 
 /* ====================================================== 
-   <!-- Ajax Page Loader (Loading A Page via Ajax Into Div)  --> 
-/* ====================================================== */
-.uix-ajax-load__container {
-  padding: 7rem 0;
-  position: relative;
-}
-
-@media all and (max-width: 768px) {
-  .uix-ajax-load__container {
-    padding: 2rem 0;
-  }
-}
-
-/* Used for full page */
-.uix-ajax-load__fullpage-container {
-  height: 100vh;
-  overflow: hidden;
-  position: relative;
-}
-
-.uix-ajax-load__fullpage-container > section {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  z-index: 1;
-}
-
-.uix-ajax-load__loader {
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  position: fixed;
-  z-index: 99999;
-  display: none;
-  opacity: 0;
-}
-
-.uix-ajax-load__loader > span {
-  display: inline-block;
-  width: 200px;
-  height: 20px;
-  top: 50%;
-  left: 50%;
-  background-color: #ddd;
-  transform: translate(-50%, -50%);
-  position: absolute;
-  border-radius: 100px;
-}
-
-.uix-ajax-load__loader > span::after {
-  border-radius: 100px;
-  content: "";
-  position: absolute;
-  background-color: #333;
-  left: 2px;
-  top: 2px;
-  bottom: 2px;
-  right: 180px;
-  animation: uix-cssAnim--loaderSlide 2s linear infinite;
-}
-
-@keyframes uix-cssAnim--loaderSlide {
-  0% {
-    right: 180px;
-    left: 2px;
-  }
-  5% {
-    left: 2px;
-  }
-  50% {
-    right: 2px;
-    left: 180px;
-  }
-  55% {
-    right: 2px;
-  }
-  100% {
-    right: 180px;
-    left: 2px;
-  }
-}
-
-/* ====================================================== 
    <!-- WordPress Core ( Do not use prefix "uix-" ) -->              
 /* ====================================================== */
 /*
@@ -15648,6 +15559,98 @@ a img.aligncenter {
 .sticky {
   opacity: 1;
 }
-y {
-  opacity: 1;
+
+/* ====================================================== 
+   <!-- Ajax Page Loader (Loading A Page via Ajax Into Div)  --> 
+/* ====================================================== */
+.uix-ajax-load__container {
+  padding: 7rem 0;
+  position: relative;
+}
+
+@media all and (max-width: 768px) {
+  .uix-ajax-load__container {
+    padding: 2rem 0;
+  }
+}
+
+/* Used for full page */
+.uix-ajax-load__fullpage-container {
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.uix-ajax-load__fullpage-container > section {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+}
+
+.uix-ajax-load__loader {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  z-index: 99999;
+  display: none;
+  opacity: 0;
+}
+
+.uix-ajax-load__loader > span {
+  display: inline-block;
+  width: 200px;
+  height: 20px;
+  top: 50%;
+  left: 50%;
+  background-color: #ddd;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  border-radius: 100px;
+}
+
+.uix-ajax-load__loader > span::after {
+  border-radius: 100px;
+  content: "";
+  position: absolute;
+  background-color: #333;
+  left: 2px;
+  top: 2px;
+  bottom: 2px;
+  right: 180px;
+  animation: uix-cssAnim--loaderSlide 2s linear infinite;
+}
+
+@keyframes uix-cssAnim--loaderSlide {
+  0% {
+    right: 180px;
+    left: 2px;
+  }
+  5% {
+    left: 2px;
+  }
+  50% {
+    right: 2px;
+    left: 180px;
+  }
+  55% {
+    right: 2px;
+  }
+  100% {
+    right: 180px;
+    left: 2px;
+  }
+}
+ght: 2px;
+  }
+  100% {
+    right: 180px;
+    left: 2px;
+  }
 }
