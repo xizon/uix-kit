@@ -6,6 +6,7 @@ $line-bar-w: 45px;
 
 .uix-progress-line {
 	width: 100%;
+	position: relative;
 	
 	.uix-progress-line__circle,
 	.uix-progress-line__bar {
@@ -20,10 +21,10 @@ $line-bar-w: 45px;
 
 
 	.uix-progress-line__bar {
-		position: relative;
+		position: absolute;
 		width: $line-bar-w;
 		height: 1px;
-		top: -100px;
+		top: 50px;
 		margin-left: -5px;
 		margin-right: -5px;
 		background: #ECECEC;
@@ -104,6 +105,11 @@ $line-bar-w: 45px;
 		background: rgba(0,0,0,.2);
 		opacity: .6;
 		text-align: center;
+		margin-left: #{$line-bar-w - 5px};
+		
+		&:first-child {
+			margin-left: 0;
+		}
 		
 		&.active {
 			

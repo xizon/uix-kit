@@ -147,9 +147,13 @@ var UIX_GUID = UIX_GUID || (function() {
     };
 
     var create = function() {
-        var hasCrypto = crypto != 'undefined' && crypto !== null,
-        hasRandomValues = typeof(window.crypto.getRandomValues) != 'undefined';
-        return (hasCrypto && hasRandomValues) ? _cryptoGuid() : _guid();
+		if ( browser.isIE ) {
+			return _guid();
+		} else {
+			var hasCrypto = crypto != 'undefined' && crypto !== null,
+			hasRandomValues = typeof(window.crypto.getRandomValues) != 'undefined';
+			return (hasCrypto && hasRandomValues) ? _cryptoGuid() : _guid();	
+		}
     };
 
     return {

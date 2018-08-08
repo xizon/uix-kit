@@ -7,14 +7,26 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  2.0.5
- * ## Last Update         :  August 8, 2018
+ * ## Version             :  2.0.6
+ * ## Last Update         :  August 9, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Compatible With     :  Bootstrap 3.x
  * ## Released under the MIT license.
  */
+
+/* ====================================================== 
+    <!-- 3D Background -->  
+/* ====================================================== */
+.uix-3d-bg {
+  /* Require more than 500, compatible firefox height */
+    perspective: 700px;
+}
+
+.uix-3d-bg > span {
+    display: inline-block;
+}
 
 /*
 
@@ -154,9 +166,9 @@
     89. Text effect 
     90. Timeline 
     91. ToolTip 
-    92. Vertical Separator 
-    93. Wave Background 
-    94. Vertical Menu 
+    92. Vertical Menu 
+    93. Vertical Separator 
+    94. Wave Background 
     95. WordPress Core ( Do not use prefix "uix-" ) 
     96. Ajax Page Loader (Loading A Page via Ajax Into Div)  
 
@@ -4440,18 +4452,6 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
 }
 
 /* ====================================================== 
-    <!-- 3D Background -->  
-/* ====================================================== */
-.uix-3d-bg {
-  /* Require more than 500, compatible firefox height */
-  perspective: 700px;
-}
-
-.uix-3d-bg > span {
-  display: inline-block;
-}
-
-/* ====================================================== 
     <!-- 3D Carousel --> 
 /* ====================================================== */
 .uix-3d-carousel {
@@ -4996,7 +4996,18 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
 }
 
 .no-webgl .uix-advanced-slider-sp canvas {
-  display: none !important;
+  display: none;
+}
+
+.no-webgl .uix-advanced-slider-sp .uix-advanced-slider-sp__inner {
+  position: relative;
+}
+
+.no-webgl .uix-advanced-slider-sp .uix-advanced-slider-sp__inner .uix-advanced-slider-sp__item {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .no-webgl .uix-advanced-slider-sp .uix-advanced-slider-sp__inner .uix-advanced-slider-sp__item img {
@@ -6754,90 +6765,6 @@ h3[data-counter-number] {
 }
 
 /* ====================================================== 
-   <!-- Dotted Line --> 
-/* ====================================================== */
-.uix-dotted-line {
-    display: inline-block;
-    margin: 1.5rem;
-    height: 300px;
-  /* Small Size */
-  /* Medium Size */
-  /* Large Size */;
-}
-
-.uix-dotted-line.uix-dotted-line--s {
-    width: 1px;
-    background: #212121;
-    background: linear-gradient(to bottom, #212121 10%, rgba(255, 255, 255, 0) 0%);
-    background-position: left;
-    background-size: 1px 8px;
-    background-repeat: repeat-y;
-}
-
-.uix-dotted-line.uix-dotted-line--s.is-horizontal {
-    background: linear-gradient(to right, #212121 10%, rgba(255, 255, 255, 0) 0%);
-    background-position: top;
-    background-size: 8px 1px;
-    background-repeat: repeat-x;
-    width: 300px;
-    height: 1px;
-}
-
-.uix-dotted-line.uix-dotted-line--s.is-circle {
-    background: radial-gradient(circle, #212121 1.5px, transparent 2px);
-    background-position: top;
-    background-size: 12px 6px;
-}
-
-.uix-dotted-line.uix-dotted-line--m {
-    width: 3px;
-    background: #212121;
-    background: linear-gradient(to bottom, #212121 20%, rgba(255, 255, 255, 0) 0%);
-    background-position: left;
-    background-size: 3px 10px;
-    background-repeat: repeat-y;
-}
-
-.uix-dotted-line.uix-dotted-line--m.is-horizontal {
-    background: linear-gradient(to right, #212121 20%, rgba(255, 255, 255, 0) 0%);
-    background-position: top;
-    background-size: 10px 3px;
-    background-repeat: repeat-x;
-    width: 300px;
-    height: 3px;
-}
-
-.uix-dotted-line.uix-dotted-line--m.is-circle {
-    background: radial-gradient(circle, #212121 1.5px, transparent 2px);
-    background-position: top;
-    background-size: 12px 6px;
-}
-
-.uix-dotted-line.uix-dotted-line--l {
-    width: 6px;
-    background: #212121;
-    background: linear-gradient(to bottom, #212121 30%, rgba(255, 255, 255, 0) 0%);
-    background-position: left;
-    background-size: 6px 12px;
-    background-repeat: repeat-y;
-}
-
-.uix-dotted-line.uix-dotted-line--l.is-horizontal {
-    background: linear-gradient(to right, #212121 30%, rgba(255, 255, 255, 0) 0%);
-    background-position: top;
-    background-size: 12px 6px;
-    background-repeat: repeat-x;
-    width: 300px;
-    height: 6px;
-}
-
-.uix-dotted-line.uix-dotted-line--l.is-circle {
-    background: radial-gradient(circle, #212121 1.5px, transparent 2px);
-    background-position: top;
-    background-size: 12px 6px;
-}
-
-/* ====================================================== 
    <!-- Dropdown Menu --> 
 /* ====================================================== */
 /* Do not use <a> tag */
@@ -6919,6 +6846,90 @@ h3[data-counter-number] {
 .uix-dropdown-menu.is-opened > ul {
     display: block;
     opacity: 1;
+}
+
+/* ====================================================== 
+   <!-- Dotted Line --> 
+/* ====================================================== */
+.uix-dotted-line {
+    display: inline-block;
+    margin: 1.5rem;
+    height: 300px;
+  /* Small Size */
+  /* Medium Size */
+  /* Large Size */;
+}
+
+.uix-dotted-line.uix-dotted-line--s {
+    width: 1px;
+    background: #212121;
+    background: linear-gradient(to bottom, #212121 10%, rgba(255, 255, 255, 0) 0%);
+    background-position: left;
+    background-size: 1px 8px;
+    background-repeat: repeat-y;
+}
+
+.uix-dotted-line.uix-dotted-line--s.is-horizontal {
+    background: linear-gradient(to right, #212121 10%, rgba(255, 255, 255, 0) 0%);
+    background-position: top;
+    background-size: 8px 1px;
+    background-repeat: repeat-x;
+    width: 300px;
+    height: 1px;
+}
+
+.uix-dotted-line.uix-dotted-line--s.is-circle {
+    background: radial-gradient(circle, #212121 1.5px, transparent 2px);
+    background-position: top;
+    background-size: 12px 6px;
+}
+
+.uix-dotted-line.uix-dotted-line--m {
+    width: 3px;
+    background: #212121;
+    background: linear-gradient(to bottom, #212121 20%, rgba(255, 255, 255, 0) 0%);
+    background-position: left;
+    background-size: 3px 10px;
+    background-repeat: repeat-y;
+}
+
+.uix-dotted-line.uix-dotted-line--m.is-horizontal {
+    background: linear-gradient(to right, #212121 20%, rgba(255, 255, 255, 0) 0%);
+    background-position: top;
+    background-size: 10px 3px;
+    background-repeat: repeat-x;
+    width: 300px;
+    height: 3px;
+}
+
+.uix-dotted-line.uix-dotted-line--m.is-circle {
+    background: radial-gradient(circle, #212121 1.5px, transparent 2px);
+    background-position: top;
+    background-size: 12px 6px;
+}
+
+.uix-dotted-line.uix-dotted-line--l {
+    width: 6px;
+    background: #212121;
+    background: linear-gradient(to bottom, #212121 30%, rgba(255, 255, 255, 0) 0%);
+    background-position: left;
+    background-size: 6px 12px;
+    background-repeat: repeat-y;
+}
+
+.uix-dotted-line.uix-dotted-line--l.is-horizontal {
+    background: linear-gradient(to right, #212121 30%, rgba(255, 255, 255, 0) 0%);
+    background-position: top;
+    background-size: 12px 6px;
+    background-repeat: repeat-x;
+    width: 300px;
+    height: 6px;
+}
+
+.uix-dotted-line.uix-dotted-line--l.is-circle {
+    background: radial-gradient(circle, #212121 1.5px, transparent 2px);
+    background-position: top;
+    background-size: 12px 6px;
 }
 
 /* ====================================================== 
@@ -13343,6 +13354,7 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
 /* ====================================================== */
 .uix-progress-line {
   width: 100%;
+  position: relative;
 }
 
 .uix-progress-line .uix-progress-line__circle,
@@ -13357,10 +13369,10 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
 }
 
 .uix-progress-line .uix-progress-line__bar {
-  position: relative;
+  position: absolute;
   width: 45px;
   height: 1px;
-  top: -100px;
+  top: 50px;
   margin-left: -5px;
   margin-right: -5px;
   background: #ECECEC;
@@ -13438,6 +13450,11 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
   background: rgba(0, 0, 0, 0.2);
   opacity: .6;
   text-align: center;
+  margin-left: 40px;
+}
+
+.uix-progress-line .uix-progress-line__circle:first-child {
+  margin-left: 0;
 }
 
 .uix-progress-line .uix-progress-line__circle.active {

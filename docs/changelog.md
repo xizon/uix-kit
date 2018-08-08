@@ -1,17 +1,19 @@
 # Changelog
 
+#### = 2.0.6 (August 9, 2018) =
 
-
-#### = 2.0.5 (August 8, 2018) =
-
-* Tweak: Optimized Easy Multiple Items Carousel module.
-* Tweak: Optimized class names of Custom Flexslider module.
+* Fix: Solved the problem of creating GUID / UUID in IE(9+) browser.
+* Fix: Solved the display problem of Advanced Slider in IE(9+) browser.
+* Tweak: Optimized Progress Line module.
 
 
 #### = 2.0.4 (August 7, 2018) =
 
 * Fix: Fixed an error that offset().top returns wrong value for Smooth Scrolling Method.
 * Tweak: Optimized FlexSlider module.
+* Tweak: Optimized Easy Multiple Items Carousel module.
+* Tweak: Optimized class names of Custom Flexslider module.
+
 
 
 #### = 2.0.3 (August 6, 2018) =

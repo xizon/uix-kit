@@ -9,7 +9,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.ADVANCED_SLIDER_FILTER               = APP.ADVANCED_SLIDER_FILTER || {};
-	APP.ADVANCED_SLIDER_FILTER.version       = '0.0.7';
+	APP.ADVANCED_SLIDER_FILTER.version       = '0.0.8';
     APP.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 	
@@ -43,6 +43,7 @@ APP = ( function ( APP, $, window, document ) {
 			scenesAll                 = [],
 			texturesAll               = [],
 			webGLRenderer;
+		
 		
 		
 		
@@ -80,6 +81,15 @@ APP = ( function ( APP, $, window, document ) {
 					nativeItemH;
 				
 				
+
+
+				//Display all images
+				//-------------------------------------	
+				if ( !Modernizr.webgl ) {
+				    $this.find( 'img' ).css( 'visibility', 'visible' );
+				}
+
+
 
 				//Initialize the first item container
 				//-------------------------------------		

@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  2.0.5
- * ## Last Update         :  August 8, 2018
+ * ## Version             :  2.0.6
+ * ## Last Update         :  August 9, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -23,17 +23,17 @@
 	
 	
 	1. Loader 
-    2. Body And Header 
-    3. Back to Top 
-    4. Get all custom attributes of an element like "data-*" 
+    2. Get all custom attributes of an element like "data-*" 
+    3. Body And Header 
+    4. Back to Top 
     5. Navigation 
     6. Videos 
     7. Common Height 
     8. Mega Menu 
     9. Dropdown Categories 
     10. Pagination 
-    11. Modal Dialog 
-    12. Specify a background image 
+    11. Specify a background image 
+    12. Modal Dialog 
     13. Mobile Menu 
     14. 3D Background 
     15. 3D Background 2 
@@ -46,9 +46,9 @@
     22. Accordion 
     23. Accordion Background Images 
     24. Advanced Content Slider 
-    25. Advanced Slider (Basic) 
-    26. Circle Layout 
-    27. Advanced Slider (Special Effects) 
+    25. Advanced Slider (Special Effects) 
+    26. Advanced Slider (Basic) 
+    27. Circle Layout 
     28. Counter 
     29. Dropdown Menu 
     30. Dropdown Menu 2 (Multi-level drop-down navigation) 
@@ -56,8 +56,8 @@
     32. Flexslider 
     33. Floating Side Element 
     34. Form 
-    35. jQuery UI Datepicker 1.11.4 
-    36. Form Progress 
+    35. Form Progress 
+    36. jQuery UI Datepicker 1.11.4 
     37. Gallery 
     38. Hover Delay Interaction 
     39. Image Shapes 
@@ -79,9 +79,9 @@
     55. Retina Graphics for Website 
     56. Rotating Elements 
     57. Scroll Reveal 
-    58. Smooth Scrolling When Clicking An Anchor Link 
-    59. Source Code View 
-    60. Show More Less 
+    58. Show More Less 
+    59. Smooth Scrolling When Clicking An Anchor Link 
+    60. Source Code View 
     61. Sticky Elements 
     62. SVG Map (China) 
     63. SVG Map (World) 
@@ -94,7 +94,6 @@
     70. Ajax Page Loader (Loading A Page via Ajax Into Div)  
     71. Ajax Push Content  
     72. GSAP Plugins 
-    73. Three.js Plugins 
 
 
 */
@@ -238,9 +237,13 @@ var UIX_GUID = UIX_GUID || (function() {
     };
 
     var create = function() {
-        var hasCrypto = crypto != 'undefined' && crypto !== null,
-        hasRandomValues = typeof(window.crypto.getRandomValues) != 'undefined';
-        return (hasCrypto && hasRandomValues) ? _cryptoGuid() : _guid();
+		if ( browser.isIE ) {
+			return _guid();
+		} else {
+			var hasCrypto = crypto != 'undefined' && crypto !== null,
+			hasRandomValues = typeof(window.crypto.getRandomValues) != 'undefined';
+			return (hasCrypto && hasRandomValues) ? _cryptoGuid() : _guid();	
+		}
     };
 
     return {
@@ -2174,222 +2177,6 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
- * <!-- 3D Background -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP._3D_BACKGROUND               = APP._3D_BACKGROUND || {};
-	APP._3D_BACKGROUND.version       = '0.0.2';
-    APP._3D_BACKGROUND.documentReady = function( $ ) {
-
-
-		//grab each 3dAnimate element and pass it into the animate function along with the config data
-		$( '[data-3d-animate]' ).each( function( index, element ) {
-			var config      = $( element ).data( '3d-animate' );
-			
-			
-			if( typeof config === typeof undefined ) {
-				config = false;
-			}
-
-			if ( config ) {
-				
-				if ( Object.prototype.toString.call( config.offset ) == '[object Array]' ) {
-					animate3dMultiElement( config.offset[0], config.offset[1], element, config.reset );
-				} else {
-					animate3dElement( config.offset, element, config.reset );
-				}
-
-			}
-			
-			
-		});
-		
-		
-	
-		/*
-		 * Sets an animation for each element
-		 *
-		 * @param  {number} base           - Base offset value.
-		 * @param  {object} obj            - An HTML element.
-		 * @param  {boolean} reset         - Reset block on mouse leave
-		 * @return {void}                  - The constructor.
-		 */
-		function animate3dElement( base, obj, reset ) {
-
-			var $el      = $( obj ),
-				w        = $el.innerWidth(),
-				h        = $el.innerHeight();
-			
-
-//			TweenMax.set( $el, {
-//				perspective    : 500,
-//				transformStyle : "preserve-3d"
-//			});
-
-
-			
-			// mouse move on block
-			$( obj ).on( 'mousemove touchmove', function( e ) {
-				
-				var mX, 
-					mY,
-					rmX,
-					rmY,
-					touches = e.originalEvent.touches;
-			
-				if ( touches && touches.length ) {
-
-					mX = touches[0].pageX;
-					mY = touches[0].pageY;
-
-				} else {
-
-					mX = e.pageX;
-					mY = e.pageY;
-				}
-				
-				//Find mouse position relative to element
-				rmX = mX - $( this ).offset().left;
-				rmY = mY - $( this ).offset().top;	
-				
-				//console.log('X: ' + rmX + ' Y: ' + rmY );
-	
-				
-				// function to run matrix3D effect on block
-				var tX = mousePosition( rmX, w ),
-					tY = mousePosition( rmY, h );
-
-
-				TweenMax.to( $( this ), 0.2, {
-					rotationY          : tX,
-					rotationX          : tY,
-					backgroundPosition : ( tX + 120 ) + "% 50%",
-				});
-				
-				
-				
-			});
-				
-			
-			if ( reset ) {
-				$( obj ).on( 'mouseleave touchcancel', function() {
-					TweenMax.to( $( this ), 0.5, {
-						rotationY          : 0,
-						rotationX          : 0,
-						backgroundPosition : "120% 50%"
-					});
-				});	
-			}
-				
-
-
-			// make some calculations for mouse position
-			function mousePosition( mousePos, dimension ) {
-				return ( Math.floor( mousePos / dimension * (base*2) ) - base );
-			}
-
-			
-		}
-			
-		
-		
-		/*
-		 * Sets an animation with parallax for each element
-		 *
-		 * @param  {number} base           - Base offset value.
-		 * @param  {number} multiple       - The power of target number.
-		 * @param  {object} obj            - An HTML element.
-		 * @param  {boolean} reset         - Reset block on mouse leave
-		 * @return {void}                  - The constructor.
-		 */
-		function animate3dMultiElement( base, multiple, obj, reset ) {
-
-			//get the specs of the element
-			var divOffset = $( obj ).offset(),
-				divTop    = divOffset.top,
-				divLeft   = divOffset.left,
-				divWidth  = $( obj ).innerWidth(),
-				divHeight = $( obj ).innerHeight();
-
-			
-	
-			//set an onmousemove event on the element
-			$( obj ).on( 'mousemove touchmove', function( e ){
-
-				var pctX, 
-					pctY,
-					touches = e.originalEvent.touches;
-			
-				if ( touches && touches.length ) {
-
-					pctX = ( touches[0].pageX - divLeft )/divWidth;
-					pctY = ( touches[0].pageY - divTop )/divHeight;
-
-				} else {
-
-					pctX = ( e.pageX - divLeft )/divWidth;
-					pctY = ( e.pageY - divTop )/divHeight;
-				}
-
-				
-				
-
-				$( this ).children().each( function( index, elementSub ) {
-					var x         = pctX * ( base*Math.pow( multiple, index ) ),
-						y         = pctY * ( base*Math.pow( multiple, index ) ),
-						z         = 0,
-						deg       = pctY * ( 180 / Math.PI ),
-						rotateDeg = parseFloat( deg - 35 );
-					
-					
-					TweenMax.to( $( elementSub ), 0.2, {
-						css: {
-							'transform' : 'translate('+ x +'px ,'+ y +'px) rotate3d( -1, 1, 0, '+ rotateDeg +'deg )'
-						}
-					});
-			
-					
-				});
-
-			});
-			
-			if ( reset ) {
-				$( obj ).on( 'mouseleave touchcancel', function() {
-					
-					
-					$( this ).children().each( function( index, elementSub ) {
-
-						TweenMax.to( $( elementSub ), 0.5, {
-							css: {
-								'transform' : 'translate(0,0) rotate3d( -1, 1, 0, 0deg )'
-							}
-						});
-					});
-				});	
-			}
-						
-			
-
-		}
-		
-		
-    };
-
-    APP.components.documentReady.push( APP._3D_BACKGROUND.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
-
-
-/* 
- *************************************
  * <!-- 3D Background 2 -->
  *************************************
  */
@@ -2607,6 +2394,222 @@ APP = ( function ( APP, $, window, document ) {
     return APP;
 
 }( APP, jQuery, window, document ) );
+
+
+
+
+
+/* 
+ *************************************
+ * <!-- 3D Background -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP._3D_BACKGROUND               = APP._3D_BACKGROUND || {};
+	APP._3D_BACKGROUND.version       = '0.0.2';
+    APP._3D_BACKGROUND.documentReady = function( $ ) {
+
+
+		//grab each 3dAnimate element and pass it into the animate function along with the config data
+		$( '[data-3d-animate]' ).each( function( index, element ) {
+			var config      = $( element ).data( '3d-animate' );
+			
+			
+			if( typeof config === typeof undefined ) {
+				config = false;
+			}
+
+			if ( config ) {
+				
+				if ( Object.prototype.toString.call( config.offset ) == '[object Array]' ) {
+					animate3dMultiElement( config.offset[0], config.offset[1], element, config.reset );
+				} else {
+					animate3dElement( config.offset, element, config.reset );
+				}
+
+			}
+			
+			
+		});
+		
+		
+	
+		/*
+		 * Sets an animation for each element
+		 *
+		 * @param  {number} base           - Base offset value.
+		 * @param  {object} obj            - An HTML element.
+		 * @param  {boolean} reset         - Reset block on mouse leave
+		 * @return {void}                  - The constructor.
+		 */
+		function animate3dElement( base, obj, reset ) {
+
+			var $el      = $( obj ),
+				w        = $el.innerWidth(),
+				h        = $el.innerHeight();
+			
+
+//			TweenMax.set( $el, {
+//				perspective    : 500,
+//				transformStyle : "preserve-3d"
+//			});
+
+
+			
+			// mouse move on block
+			$( obj ).on( 'mousemove touchmove', function( e ) {
+				
+				var mX, 
+					mY,
+					rmX,
+					rmY,
+					touches = e.originalEvent.touches;
+			
+				if ( touches && touches.length ) {
+
+					mX = touches[0].pageX;
+					mY = touches[0].pageY;
+
+				} else {
+
+					mX = e.pageX;
+					mY = e.pageY;
+				}
+				
+				//Find mouse position relative to element
+				rmX = mX - $( this ).offset().left;
+				rmY = mY - $( this ).offset().top;	
+				
+				//console.log('X: ' + rmX + ' Y: ' + rmY );
+	
+				
+				// function to run matrix3D effect on block
+				var tX = mousePosition( rmX, w ),
+					tY = mousePosition( rmY, h );
+
+
+				TweenMax.to( $( this ), 0.2, {
+					rotationY          : tX,
+					rotationX          : tY,
+					backgroundPosition : ( tX + 120 ) + "% 50%",
+				});
+				
+				
+				
+			});
+				
+			
+			if ( reset ) {
+				$( obj ).on( 'mouseleave touchcancel', function() {
+					TweenMax.to( $( this ), 0.5, {
+						rotationY          : 0,
+						rotationX          : 0,
+						backgroundPosition : "120% 50%"
+					});
+				});	
+			}
+				
+
+
+			// make some calculations for mouse position
+			function mousePosition( mousePos, dimension ) {
+				return ( Math.floor( mousePos / dimension * (base*2) ) - base );
+			}
+
+			
+		}
+			
+		
+		
+		/*
+		 * Sets an animation with parallax for each element
+		 *
+		 * @param  {number} base           - Base offset value.
+		 * @param  {number} multiple       - The power of target number.
+		 * @param  {object} obj            - An HTML element.
+		 * @param  {boolean} reset         - Reset block on mouse leave
+		 * @return {void}                  - The constructor.
+		 */
+		function animate3dMultiElement( base, multiple, obj, reset ) {
+
+			//get the specs of the element
+			var divOffset = $( obj ).offset(),
+				divTop    = divOffset.top,
+				divLeft   = divOffset.left,
+				divWidth  = $( obj ).innerWidth(),
+				divHeight = $( obj ).innerHeight();
+
+			
+	
+			//set an onmousemove event on the element
+			$( obj ).on( 'mousemove touchmove', function( e ){
+
+				var pctX, 
+					pctY,
+					touches = e.originalEvent.touches;
+			
+				if ( touches && touches.length ) {
+
+					pctX = ( touches[0].pageX - divLeft )/divWidth;
+					pctY = ( touches[0].pageY - divTop )/divHeight;
+
+				} else {
+
+					pctX = ( e.pageX - divLeft )/divWidth;
+					pctY = ( e.pageY - divTop )/divHeight;
+				}
+
+				
+				
+
+				$( this ).children().each( function( index, elementSub ) {
+					var x         = pctX * ( base*Math.pow( multiple, index ) ),
+						y         = pctY * ( base*Math.pow( multiple, index ) ),
+						z         = 0,
+						deg       = pctY * ( 180 / Math.PI ),
+						rotateDeg = parseFloat( deg - 35 );
+					
+					
+					TweenMax.to( $( elementSub ), 0.2, {
+						css: {
+							'transform' : 'translate('+ x +'px ,'+ y +'px) rotate3d( -1, 1, 0, '+ rotateDeg +'deg )'
+						}
+					});
+			
+					
+				});
+
+			});
+			
+			if ( reset ) {
+				$( obj ).on( 'mouseleave touchcancel', function() {
+					
+					
+					$( this ).children().each( function( index, elementSub ) {
+
+						TweenMax.to( $( elementSub ), 0.5, {
+							css: {
+								'transform' : 'translate(0,0) rotate3d( -1, 1, 0, 0deg )'
+							}
+						});
+					});
+				});	
+			}
+						
+			
+
+		}
+		
+		
+    };
+
+    APP.components.documentReady.push( APP._3D_BACKGROUND.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
 
 
 
@@ -4510,7 +4513,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.ADVANCED_SLIDER_FILTER               = APP.ADVANCED_SLIDER_FILTER || {};
-	APP.ADVANCED_SLIDER_FILTER.version       = '0.0.7';
+	APP.ADVANCED_SLIDER_FILTER.version       = '0.0.8';
     APP.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 	
@@ -4544,6 +4547,7 @@ APP = ( function ( APP, $, window, document ) {
 			scenesAll                 = [],
 			texturesAll               = [],
 			webGLRenderer;
+		
 		
 		
 		
@@ -4581,6 +4585,15 @@ APP = ( function ( APP, $, window, document ) {
 					nativeItemH;
 				
 				
+
+
+				//Display all images
+				//-------------------------------------	
+				if ( !Modernizr.webgl ) {
+				    $this.find( 'img' ).css( 'visibility', 'visible' );
+				}
+
+
 
 				//Initialize the first item container
 				//-------------------------------------		
@@ -29103,6 +29116,9 @@ License: MIT
 /***/ function(module, exports) {
 
 	module.exports = "uniform float explodeRate;\nvarying vec2 vUv;\n\n\nfloat rand(vec2 co){\n  return fract(sin(dot(co.xy, vec2(12.8273, 67.245))) * 53726.17623);\n}\n\nvoid main() {\n  vec3 col;\n  col.g = rand(vec2(vUv.x, vUv.y + 1.0));\n  col.b = rand(vec2(vUv.x, vUv.y + 2.0));\n  col.r = rand(vec2(vUv.xy));\n  col = col - 0.5;\n  col *= explodeRate;\n\n  gl_FragColor = vec4(col, 1.0);\n}\n";
+
+/***/ }
+/******/ ]);\n";
 
 /***/ }
 /******/ ]);
