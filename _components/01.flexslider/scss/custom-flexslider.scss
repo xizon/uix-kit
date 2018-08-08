@@ -6,11 +6,24 @@
 
 /*
  * 1. Thumbnail ControlNav Pattern 
- * 2. Default Slideshow        
- * 3. Primary Slideshow  (with dynamic min/max ranges )      
- * 4. Primary Slideshow       
- * 5. Parallax Slideshow    
+ * 2. Default Slideshow & Default  Controls
+ *    2.1. Prevent content overflow 
+ *    2.2. Left and right arrows by default
+ *    2.3. Pagination Dot by default
+ *    2.4. Thumbnail
+
+ * 3. Custom Controls
+ *    3.1. Left and right arrows by Custom Controls
+ *    3.2. Pagination by Custom Controls
+ *    3.3. Custom Next/Prev and Pagination Styles
+ *    3.4. Next/Prev Image Thumbnail In Navigation
+ *    3.5. Timeline Indicator
+
+ * 4. Primary Slideshow  (with dynamic min/max ranges )      
+ * 5. Primary Slideshow       
+ * 6. Parallax Slideshow    
 */
+
 
 
 /* 
@@ -77,13 +90,14 @@
 
 }
 
+
+
 /* 
  ---------------------------
- 2. Default Slideshow        
+ 2. Default Slideshow & Default  Controls
  ---------------------------
  */ 
-
-/* Prevent content overflow */
+/*---- 2.1. Prevent content overflow ----*/
 .uix-flexslider,
 .uix-flexslider .uix-flexslider__inner,
 .uix-flexslider .uix-flexslider__inner > .uix-flexslider__item {
@@ -152,8 +166,9 @@ html[xmlns] .uix-flexslider .uix-flexslider__inner {
 	}
 }
 
-/*----- Left and right arrows by default -----*/
-.uix-flexslider__direction-nav {
+
+/*---- 2.2. Left and right arrows by default ----*/
+ul.uix-flexslider__direction-nav {
 	
 	position: absolute;
 	top: 50%;
@@ -163,27 +178,7 @@ html[xmlns] .uix-flexslider .uix-flexslider__inner {
 	margin: 0;
 	padding: 0;
 	list-style: none;
-	
-
-	.uix-flexslider__prev {
-	    left: -100px;
-		
-		&.uix-flexslider__disabled {
-			visibility: hidden;
-		}	
-		
-	}
-	.uix-flexslider__next {
-		right: -100px;
-		text-align: right;
-		
-		&.uix-flexslider__disabled {
-			visibility: hidden;
-		}
-		
-	}
-	
-	
+	background: #f00;
 	
 	li {
 		margin: 0;
@@ -211,21 +206,47 @@ html[xmlns] .uix-flexslider .uix-flexslider__inner {
 				color: #fff;
 				text-decoration: none;
 			}
+			
+			&.uix-flexslider__prev {
+				left: -100px;
+
+				&.uix-flexslider__disabled {
+					visibility: hidden;
+				}	
+
+			}
+			&.uix-flexslider__next {
+				right: -100px;
+				text-align: right;
+
+				&.uix-flexslider__disabled {
+					visibility: hidden;
+				}
+
+			}		
+			
+			
 		}
 	}
+
+	
 }
 
-.uix-flexslider:hover a {
-	&.uix-flexslider__prev {
-	    left: 0;
+.uix-flexslider:hover { 
+	
+	a {
+		&.uix-flexslider__prev {
+			left: 0;
+		}
+		&.uix-flexslider__next {
+			right: 20px;
+		}	
 	}
-	&.uix-flexslider__next {
-	    right: 20px;
-	}
+
 }
 
-/*----- Pagination dots -----*/
-.uix-flexslider__control-nav.uix-flexslider__control-paging {
+/*----- 2.3. Pagination Dot by default -----*/
+ol.uix-flexslider__control-paging {
 	list-style: none;
 	left: 0;
 	bottom: 0;
@@ -261,61 +282,7 @@ html[xmlns] .uix-flexslider .uix-flexslider__inner {
 
 }
 
-/* Custom Style of Pagination */
-.uix-flexslider__controls {
-	
-	.uix-flexslider__control-nav.uix-flexslider__control-paging {
-		
-		position: relative;
-		transform: translateY(.5rem);
-		
-		li {
-			a {
-				background: rgba(233, 47, 22, 0.5);
-
-				&:hover, 
-				&.uix-flexslider__active {
-					background: rgba(233, 47, 22, 1);
-				}
-			}	
-			
-	    }
-
-	}
-	
-	/*---- Custom Styles ----*/
-	&.uix-flexslider__controls--style-2 {
-		
-		.uix-flexslider__control-nav.uix-flexslider__control-paging {
-
-			position: absolute;
-			transform: translateY(0);
-			top: calc(100% - 30px);
-			text-align: center;
-			z-index: 2;
-
-			li {
-				a {
-					background: #a3a3a3;
-
-					&:hover, 
-					&.uix-flexslider__active {
-						background: #333;
-					}
-				}	
-
-			}
-
-		}	
-		
-	}
-	
-	
-	
-}
-
-
-/*----- Thumbnail -----*/
+/*----- 2.4. Thumbnail -----*/
 .uix-flexslider__control-thumbs {
 	margin: 5px 0 0;
 	position: static;
@@ -345,107 +312,137 @@ html[xmlns] .uix-flexslider .uix-flexslider__inner {
 }
 
 
-/*----- Left and right arrows by Custom Controls -----*/
-.uix-flexslider__arrows {
+
+/* 
+ ---------------------------
+ 3. Custom Controls
+ ---------------------------
+ */ 
+.uix-flexslider__mycontrols {
 	display: table;
 	width: 100%;
 	table-layout: fixed;
 	margin-top: 1.75rem;
 	
-	
-	
-	&.uix-flexslider__arrows-thumb {
-		position: absolute;
-		top: 50%;
-		transform: translateY(-50%);
-		width: calc(100% - 30px);
+
+	/*----- 3.1. Left and right arrows by Custom Controls -----*/
+	> a {
+		position: relative;
+		display: table-cell;
+		color: rgba(233, 47, 22, 1);
+		opacity: .7;
+		width: 30px;
+		line-height: 30px;
+		text-align: center;
 		
-		
-	}
-	
-	
-	
-	> {
-		* {
-			display: table-cell;
+		&::after {
+			content: '';
+			width: 30px;
+			height: 30px;
+			border: 1px solid rgba(233, 47, 22, 1);
+			position: absolute;
+			display: block;
+			top: 0;
+			border-radius: 50%;
 		}
-		a {
-			width: 50px;
+		
+
+		&:hover {
+			opacity: 1;
+		}	
+		
+		&.uix-flexslider__mycontrols__prev {
 			
-			&:hover {
-				.thumb {
-					transform: scale(1);
-					opacity: 1;
-				}
+			&::after {
+				left: 0;
+			}
+			
+			
+			&.uix-flexslider__disabled {
+				visibility: hidden;
+
+			}
+		}
+		&.uix-flexslider__mycontrols__next {
+
+			&::after {
+				right: 0;
+			}
+			
+			&.uix-flexslider__disabled {
+				visibility: hidden;
 			}	
 
 		}
-	}
-	
-	.uix-flexslider__prev {
-		&.uix-flexslider__disabled {
-			visibility: hidden;
-			
-		}
-		
-	}
-	.uix-flexslider__next {
-		
-		text-align: right;
-		
-		&.uix-flexslider__disabled {
-			visibility: hidden;
-		}	
-		
-	
-		
-	}
-	
-	
-	/*---- Custom Styles ----*/
-	&.uix-flexslider__arrows--style-1 {
-		
-		text-align: right;
-		
-		.uix-flexslider__prev,
-		.uix-flexslider__next {
-			position: relative;
-			width: 50px;
-			height: 50px;
-			border: 1px solid #999999;
-			text-align: center;
-			display: inline-block;
-			line-height: 55px;
-			visibility: visible; /* Required */
-			left: 0 !important; /* Required */
-			right: 0 !important; /* Required */
-			
-			i {
-				color: #999999;
-				font-size: 2rem;
-			}
-			
-			&:hover {
-				background: $highlight-color1;
-				border-color: $highlight-color1;
-				
-				i {
-					color: #fff;
-				}
-			}
-			
-		}
-		
-		.uix-flexslider__prev {
-			margin-right: 1.5rem;
-		}
+
+
 	}
 
+
+	/*----- 3.2. Pagination by Custom Controls  -----*/
+	.uix-flexslider__mycontrols__control-paging {
+
+		> ol {
+
+			position: relative;
+			transform: translateY(.5rem);
+
+			li {
+
+				margin: 0 .5rem;
+
+
+				a {
+					background: rgba(233, 47, 22, 0.5);
+					position: relative;
+
+					&::after {
+						content: '';
+						display: block;
+						width: 20px;
+						height: 20px;
+						border: 1px solid rgba(233, 47, 22, 1);
+						border-radius: 100%;
+						position: absolute;
+						top: -4px;
+						left: -4px;
+						transform: scale(0);
+						@include transition-default();
+					}	
+
+
+					&:hover, 
+					&.uix-flexslider__active {
+						background: rgba(233, 47, 22, 1);
+						width: 12px;
+
+						&::after {
+							transform: scale(1);
+						}	
+
+					}
+				}	
+
+			}
+
+		}
+
+
+	}
+	
 }
 
 
-/*----- Next/Prev Image Thumbnail In Navigation -----*/
-.uix-flexslider__arrows-thumb {
+/*---- 3.3. Custom Next/Prev and Pagination Styles ----*/
+.uix-flexslider__mycontrols.uix-flexslider__mycontrols--style-1 {
+	
+	
+}
+
+
+
+/*----- 3.4. Next/Prev Image Thumbnail In Navigation -----*/
+.uix-flexslider__mycontrols--thumb {
 	display: table;
 	width: 100%;
 	table-layout: fixed;
@@ -491,13 +488,13 @@ html[xmlns] .uix-flexslider .uix-flexslider__inner {
 		}
 	}
 	
-	.uix-flexslider__arrows-thumb--prev {
+	.uix-flexslider__mycontrols--thumb__prev {
 		&.disabled {
 			display: none;
 		}
 		
 	}
-	.uix-flexslider__arrows-thumb--next {
+	.uix-flexslider__mycontrols--thumb__next {
 		
 		text-align: right;
 		
@@ -513,7 +510,7 @@ html[xmlns] .uix-flexslider .uix-flexslider__inner {
 
 
 
-/*----- Timeline -----*/
+/*----- 3.5. Timeline Indicator -----*/
 .uix-flexslider__timeline-nav {
 	
 	height: 3px;
@@ -533,9 +530,11 @@ html[xmlns] .uix-flexslider .uix-flexslider__inner {
 }
 
 
+
+
 /* 
  ---------------------------
- 3. Primary Slideshow  (with dynamic min/max ranges )      
+ 4. Primary Slideshow  (with dynamic min/max ranges )      
  ---------------------------
  */ 
 .uix-flexslider.uix-flexslider--itemgrid {
@@ -576,7 +575,7 @@ html[xmlns] .uix-flexslider .uix-flexslider__inner {
 	
 /* 
  ---------------------------
- 4. Primary Slideshow    
+ 5. Primary Slideshow    
  ---------------------------
  */ 
 .uix-flexslider.uix-flexslider--primary {
@@ -725,7 +724,7 @@ html[xmlns] .uix-flexslider .uix-flexslider__inner {
 
 /* 
  ---------------------------
- 5. Parallax Slideshow                
+ 6. Parallax Slideshow                
  ---------------------------
  */ 
 .uix-flexslider.uix-flexslider--parallax {

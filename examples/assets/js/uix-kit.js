@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  2.0.4
- * ## Last Update         :  August 7, 2018
+ * ## Version             :  2.0.5
+ * ## Last Update         :  August 8, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -22,8 +22,8 @@
 	---------------------------
 	
 	
-	1. Body And Header 
-    2. Loader 
+	1. Loader 
+    2. Body And Header 
     3. Back to Top 
     4. Get all custom attributes of an element like "data-*" 
     5. Navigation 
@@ -32,8 +32,8 @@
     8. Mega Menu 
     9. Dropdown Categories 
     10. Pagination 
-    11. Specify a background image 
-    12. Modal Dialog 
+    11. Modal Dialog 
+    12. Specify a background image 
     13. Mobile Menu 
     14. 3D Background 
     15. 3D Background 2 
@@ -79,9 +79,9 @@
     55. Retina Graphics for Website 
     56. Rotating Elements 
     57. Scroll Reveal 
-    58. Show More Less 
-    59. Smooth Scrolling When Clicking An Anchor Link 
-    60. Source Code View 
+    58. Smooth Scrolling When Clicking An Anchor Link 
+    59. Source Code View 
+    60. Show More Less 
     61. Sticky Elements 
     62. SVG Map (China) 
     63. SVG Map (World) 
@@ -8705,7 +8705,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.FLEXSLIDER               = APP.FLEXSLIDER || {};
-	APP.FLEXSLIDER.version       = '0.1.2';
+	APP.FLEXSLIDER.version       = '0.1.3';
     APP.FLEXSLIDER.documentReady = function( $ ) {
 
 		var $window            = $( window ),
@@ -8814,8 +8814,8 @@ APP = ( function ( APP, $, window, document ) {
 						pimg       = '',
 						nimg       = '',
 						$plink     = $( dataPNThumbs+'> a' ),
-						$plinkPrev = $plink.filter( '.uix-flexslider__arrows-thumb--prev' ),
-						$plinkNext = $plink.filter( '.uix-flexslider__arrows-thumb--next' );
+						$plinkPrev = $plink.filter( '.uix-flexslider__mycontrols--thumb__prev' ),
+						$plinkNext = $plink.filter( '.uix-flexslider__mycontrols--thumb__next' );
 
 					$plinkPrev.removeClass( 'disabled' );
 					$plinkNext.removeClass( 'disabled' );
@@ -9465,8 +9465,8 @@ APP = ( function ( APP, $, window, document ) {
 				myControlsContainer  = '';
 				myCustomDirectionNav = '';
 			} else {
-				myControlsContainer  = $( '.uix-flexslider__controls' + customConID );
-				myCustomDirectionNav = $( '.uix-flexslider__arrows'+customConID+' a' );	
+				myControlsContainer  = $( '.uix-flexslider__mycontrols'+customConID+' .uix-flexslider__mycontrols__control-paging' );
+				myCustomDirectionNav = $( '.uix-flexslider__mycontrols'+customConID+' a' );	
 			}
 
 			
@@ -13578,108 +13578,6 @@ var datepicker = $.datepicker;
 
 /* 
  *************************************
- * <!-- Gallery -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.GALLERY               = APP.GALLERY || {};
-	APP.GALLERY.version       = '0.0.1';
-    APP.GALLERY.documentReady = function( $ ) {
-
-		$( '.uix-gallery' ).each( function() {
-			var type = $( this ).data( 'show-type' );
-			
-			// Masonry
-			if ( type.indexOf( 'masonry' ) >= 0  ) {
-				$( this ).addClass( 'masonry-container' );
-				$( this ).find( '.uix-gallery__item' ).addClass( 'masonry-item' );
-			}
-			
-			// Filterable
-			if ( type.indexOf( 'filter' ) >= 0  ) {
-				$( this ).addClass( 'filter-container' );
-				$( this ).find( '.uix-gallery__item' ).addClass( 'filter-item' );	
-			}	
-		
-		});
-	
-	    /*--  Function of Masonry  --*/
-		var masonryObj = $( '.masonry-container .uix-gallery-tiles' );
-		imagesLoaded( masonryObj ).on( 'always', function() {
-			  masonryObj.masonry({
-				itemSelector: '.masonry-item'
-			  });  
-		});
-		
-		
-	    /*--  Function of Filterable  --*/
-		if ( $( "[data-show-type]" ).length > 0 ) {
-			if ( $( "[data-show-type]" ).data( 'show-type' ).indexOf( 'filter' ) >= 0 ) {
-				
-				$( '.uix-gallery' ).each( function() {
-					var filterCat      = $( this ).data( 'filter-id' ),
-						$grid          = $( this ).find( '.uix-gallery-tiles' ),
-						$filterOptions = $( filterCat );
-						
-					imagesLoaded( $grid ).on( 'always', function() {
-						
-						 $grid.shuffle({
-							itemSelector : '.filter-item',
-							speed        : 550, // Transition/animation speed (milliseconds).
-							easing       : 'ease-out', // CSS easing function to use.
-							sizer        : null // Sizer element. Use an element to determine the size of columns and gutters.
-						  });
-						  
-						
-						$filterOptions.find( 'li > a' ).on( 'click', function() {
-							  var $this       = $( this ),
-								  activeClass = 'current-cat',
-								  isActive    = $this.hasClass( activeClass ),
-								  group       = isActive ? 'all' : $this.data( 'group' );
-						
-							  // Hide current label, show current label in title
-							  if ( !isActive ) {
-								$filterOptions.find( '.' + activeClass ).removeClass( activeClass );
-							  }
-						
-							  $this.toggleClass( activeClass );
-						
-							  // Filter elements
-							  $grid.shuffle( 'shuffle', group );
-							  
-							  return false;	
-						});
-					
-			
-					});
-	
-					
-				} );
-		
-				
-			} else {
-				$( '[data-group="all"]' ).parent( 'li' ).hide();
-			}
-	
-		}
-		
-		
-		
-    };
-
-    APP.components.documentReady.push( APP.GALLERY.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
-
-/* 
- *************************************
  * <!-- Form Progress -->
  *************************************
  */
@@ -13986,6 +13884,108 @@ APP = ( function ( APP, $, window, document ) {
     };
  
 }( jQuery ));
+
+
+
+/* 
+ *************************************
+ * <!-- Gallery -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.GALLERY               = APP.GALLERY || {};
+	APP.GALLERY.version       = '0.0.1';
+    APP.GALLERY.documentReady = function( $ ) {
+
+		$( '.uix-gallery' ).each( function() {
+			var type = $( this ).data( 'show-type' );
+			
+			// Masonry
+			if ( type.indexOf( 'masonry' ) >= 0  ) {
+				$( this ).addClass( 'masonry-container' );
+				$( this ).find( '.uix-gallery__item' ).addClass( 'masonry-item' );
+			}
+			
+			// Filterable
+			if ( type.indexOf( 'filter' ) >= 0  ) {
+				$( this ).addClass( 'filter-container' );
+				$( this ).find( '.uix-gallery__item' ).addClass( 'filter-item' );	
+			}	
+		
+		});
+	
+	    /*--  Function of Masonry  --*/
+		var masonryObj = $( '.masonry-container .uix-gallery-tiles' );
+		imagesLoaded( masonryObj ).on( 'always', function() {
+			  masonryObj.masonry({
+				itemSelector: '.masonry-item'
+			  });  
+		});
+		
+		
+	    /*--  Function of Filterable  --*/
+		if ( $( "[data-show-type]" ).length > 0 ) {
+			if ( $( "[data-show-type]" ).data( 'show-type' ).indexOf( 'filter' ) >= 0 ) {
+				
+				$( '.uix-gallery' ).each( function() {
+					var filterCat      = $( this ).data( 'filter-id' ),
+						$grid          = $( this ).find( '.uix-gallery-tiles' ),
+						$filterOptions = $( filterCat );
+						
+					imagesLoaded( $grid ).on( 'always', function() {
+						
+						 $grid.shuffle({
+							itemSelector : '.filter-item',
+							speed        : 550, // Transition/animation speed (milliseconds).
+							easing       : 'ease-out', // CSS easing function to use.
+							sizer        : null // Sizer element. Use an element to determine the size of columns and gutters.
+						  });
+						  
+						
+						$filterOptions.find( 'li > a' ).on( 'click', function() {
+							  var $this       = $( this ),
+								  activeClass = 'current-cat',
+								  isActive    = $this.hasClass( activeClass ),
+								  group       = isActive ? 'all' : $this.data( 'group' );
+						
+							  // Hide current label, show current label in title
+							  if ( !isActive ) {
+								$filterOptions.find( '.' + activeClass ).removeClass( activeClass );
+							  }
+						
+							  $this.toggleClass( activeClass );
+						
+							  // Filter elements
+							  $grid.shuffle( 'shuffle', group );
+							  
+							  return false;	
+						});
+					
+			
+					});
+	
+					
+				} );
+		
+				
+			} else {
+				$( '[data-group="all"]' ).parent( 'li' ).hide();
+			}
+	
+		}
+		
+		
+		
+    };
+
+    APP.components.documentReady.push( APP.GALLERY.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
 
 
 
@@ -15378,48 +15378,48 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.MULTI_ITEMS_CAROUSEL               = APP.MULTI_ITEMS_CAROUSEL || {};
-	APP.MULTI_ITEMS_CAROUSEL.version       = '0.0.2';
+	APP.MULTI_ITEMS_CAROUSEL.version       = '0.0.3';
     APP.MULTI_ITEMS_CAROUSEL.documentReady = function( $ ) {
 
 		$( '.uix-multi-carousel' ).each( function()  {
 
-			var $carouselWrapper   = $( this ),
-				goSteps            = 0,
-				$carousel          = $carouselWrapper.find( '.uix-multi-carousel__items' ),
-				$carouselItem      = $carouselWrapper.find( '.uix-multi-carousel__items > div' ),
-				itemTotal          = $carouselItem.length,
-				amountVisible      = $carouselWrapper.data( 'cus-carousel-show' ),
-				carouselItemWidth  = $carousel.width()/amountVisible,
-				carouselItemHeight = $carousel.height()/amountVisible,
-				carouselDir        = $carouselWrapper.data( 'cus-carousel-dir' ),
-				carouselLoop       = $carouselWrapper.data( 'cus-carousel-loop' ),
-				carouselSpeed      = $carouselWrapper.data( 'cus-carousel-speed' ),
-				carouselNext       = $carouselWrapper.data( 'cus-carousel-next' ),
-				carouselPrev       = $carouselWrapper.data( 'cus-carousel-prev' ),
-				carouselPaging     = $carouselWrapper.data( 'cus-carousel-paging' );
+			var $carouselWrapper        = $( this ),
+				goSteps                 = 0,
+				$carousel               = $carouselWrapper.find( '.uix-multi-carousel__items' ),
+				$carouselItem           = $carouselWrapper.find( '.uix-multi-carousel__items > div' ),
+				itemTotal               = $carouselItem.length,
+				amountVisible           = $carouselWrapper.data( 'cus-carousel-show' ),
+				carouselItemWidth       = null,
+				carouselItemHeight      = null,
+				carouselDir             = $carouselWrapper.data( 'cus-carousel-dir' ),
+				carouselLoop            = $carouselWrapper.data( 'cus-carousel-loop' ),
+				carouselSpeed           = $carouselWrapper.data( 'cus-carousel-speed' ),
+				carouselNext            = $carouselWrapper.data( 'cus-carousel-next' ),
+				carouselPrev            = $carouselWrapper.data( 'cus-carousel-prev' ),
+				carouselPaging          = $carouselWrapper.data( 'cus-carousel-paging' ),
+				carouseDraggable        = $carouselWrapper.data( 'cus-carousel-draggable' ),
+				carouseDraggableCursor  = $carouselWrapper.data( 'cus-carousel-draggable-cursor' );
 
 			
-			if( typeof carouselDir === typeof undefined ) {
-				carouselDir = 'horizontal';
-			}
 			
-			if( typeof carouselLoop === typeof undefined ) {
-				carouselLoop = false;
-			}
-			if( typeof amountVisible === typeof undefined ) {
-				amountVisible = 3;
-			}
-			if( typeof carouselSpeed === typeof undefined ) {
-				carouselSpeed = 250;
-			}
-			if( typeof carouselNext === typeof undefined ) {
-				carouselNext = '.uix-multi-carousel__controls--next';
-			}
-			if( typeof carouselPrev === typeof undefined ) {
-				carouselPrev = '.uix-multi-carousel__controls--prev';
-			}
-			
+			if( typeof carouselDir === typeof undefined ) carouselDir = 'horizontal';
+			if( typeof carouselLoop === typeof undefined ) carouselLoop = false;
+			if( typeof amountVisible === typeof undefined ) amountVisible = 3;
+			if( typeof carouselSpeed === typeof undefined ) carouselSpeed = 250;
+			if( typeof carouselNext === typeof undefined ) carouselNext = '.uix-multi-carousel__controls--next';
+			if( typeof carouselPrev === typeof undefined ) carouselPrev = '.uix-multi-carousel__controls--prev';
+			if ( typeof carouseDraggable === typeof undefined ) carouseDraggable = false;
+			if ( typeof carouseDraggableCursor === typeof undefined ) carouseDraggableCursor = 'move';
 
+			
+			
+			if ( $( window ).width() <= 768 ) amountVisible = 3;
+
+			
+			carouselItemWidth  = $carousel.width()/amountVisible;
+			carouselItemHeight = $carousel.height()/amountVisible;
+
+			
 			/* 
 			 ---------------------------
 			 Get the number of steps to the last visible element
@@ -15588,6 +15588,160 @@ APP = ( function ( APP, $, window, document ) {
 
 			});
 			
+			
+			//Drag and Drop
+			//-------------------------------------	
+			var $dragDropTrigger = $carouselItem;
+
+			//Make the cursor a move icon when a user hovers over an item
+			if ( carouseDraggable && carouseDraggableCursor != '' && carouseDraggableCursor != false ) $dragDropTrigger.css( 'cursor', carouseDraggableCursor );
+
+
+
+			//Mouse event
+			$dragDropTrigger.on( 'mousedown.MULTI_ITEMS_CAROUSEL touchstart.MULTI_ITEMS_CAROUSEL', function( e ) {
+				e.preventDefault();
+
+				var touches = e.originalEvent.touches;
+
+				$( this ).addClass( 'dragging' );
+				$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
+				$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
+
+
+				if ( touches && touches.length ) {	
+					$( this ).data( 'origin_mouse_x', parseInt( touches[0].pageX ) );
+					$( this ).data( 'origin_mouse_y', parseInt( touches[0].pageY ) );
+
+				} else {
+
+					if ( carouseDraggable ) {
+						$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
+						$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );	
+					}
+
+
+				}
+
+				$dragDropTrigger.on( 'mouseup.MULTI_ITEMS_CAROUSEL touchmove.MULTI_ITEMS_CAROUSEL', function( e ) {
+					e.preventDefault();
+
+					$( this ).removeClass( 'dragging' );
+					var touches        = e.originalEvent.touches,
+						origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
+						origin_mouse_y = $( this ).data( 'origin_mouse_y' );
+
+					if ( touches && touches.length ) {
+
+						var deltaX = origin_mouse_x - touches[0].pageX,
+							deltaY = origin_mouse_y - touches[0].pageY;
+
+						if ( deltaX >= 50) {
+							//--- left
+
+							goSteps++;
+
+							//Loop items
+							if ( carouselLoop ) {
+								if ( goSteps > lastSteps ) goSteps = 0;
+							} else {
+								if ( goSteps > lastSteps ) goSteps = lastSteps;
+							}
+
+							itemUpdates( $carouselWrapper, false, carouselNext, carouselPrev, goSteps );
+
+
+						}
+						if ( deltaX <= -50) {
+							//--- right
+
+							goSteps--;
+
+							//Loop items
+							if ( carouselLoop ) {
+								if ( goSteps < 0 ) goSteps = lastSteps;
+							} else {
+								if ( goSteps < 0 ) goSteps = 0;
+							}
+
+							itemUpdates( $carouselWrapper, false, carouselNext, carouselPrev, goSteps );
+
+						}
+						if ( deltaY >= 50) {
+							//--- up
+
+
+						}
+						if ( deltaY <= -50) {
+							//--- down
+
+						}
+
+						if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
+							$dragDropTrigger.off( 'touchmove.MULTI_ITEMS_CAROUSEL' );
+						}	
+
+
+					} else {
+
+						if ( carouseDraggable ) {
+							//right
+							if ( e.pageX > origin_mouse_x ) {
+
+
+								goSteps--;
+
+								//Loop items
+								if ( carouselLoop ) {
+									if ( goSteps < 0 ) goSteps = lastSteps;
+								} else {
+									if ( goSteps < 0 ) goSteps = 0;
+								}
+
+								itemUpdates( $carouselWrapper, false, carouselNext, carouselPrev, goSteps );	
+
+							}
+
+							//left
+							if ( e.pageX < origin_mouse_x ) {
+
+								goSteps++;
+
+								//Loop items
+								if ( carouselLoop ) {
+									if ( goSteps > lastSteps ) goSteps = 0;
+								} else {
+									if ( goSteps > lastSteps ) goSteps = lastSteps;
+								}
+
+								itemUpdates( $carouselWrapper, false, carouselNext, carouselPrev, goSteps );		
+
+							}
+
+							//down
+							if ( e.pageY > origin_mouse_y ) {
+
+							}
+
+							//up
+							if ( e.pageY < origin_mouse_y ) {
+
+							}	
+
+							$dragDropTrigger.off( 'mouseup.MULTI_ITEMS_CAROUSEL' );
+
+						}	
+
+
+
+					}
+
+
+
+				} );
+
+
+			} );
 			
 			
 			/*

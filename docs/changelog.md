@@ -1,5 +1,13 @@
 # Changelog
 
+
+
+#### = 2.0.5 (August 8, 2018) =
+
+* Tweak: Optimized Easy Multiple Items Carousel module.
+* Tweak: Optimized class names of Custom Flexslider module.
+
+
 #### = 2.0.4 (August 7, 2018) =
 
 * Fix: Fixed an error that offset().top returns wrong value for Smooth Scrolling Method.

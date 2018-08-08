@@ -7,48 +7,48 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.MULTI_ITEMS_CAROUSEL               = APP.MULTI_ITEMS_CAROUSEL || {};
-	APP.MULTI_ITEMS_CAROUSEL.version       = '0.0.2';
+	APP.MULTI_ITEMS_CAROUSEL.version       = '0.0.3';
     APP.MULTI_ITEMS_CAROUSEL.documentReady = function( $ ) {
 
 		$( '.uix-multi-carousel' ).each( function()  {
 
-			var $carouselWrapper   = $( this ),
-				goSteps            = 0,
-				$carousel          = $carouselWrapper.find( '.uix-multi-carousel__items' ),
-				$carouselItem      = $carouselWrapper.find( '.uix-multi-carousel__items > div' ),
-				itemTotal          = $carouselItem.length,
-				amountVisible      = $carouselWrapper.data( 'cus-carousel-show' ),
-				carouselItemWidth  = $carousel.width()/amountVisible,
-				carouselItemHeight = $carousel.height()/amountVisible,
-				carouselDir        = $carouselWrapper.data( 'cus-carousel-dir' ),
-				carouselLoop       = $carouselWrapper.data( 'cus-carousel-loop' ),
-				carouselSpeed      = $carouselWrapper.data( 'cus-carousel-speed' ),
-				carouselNext       = $carouselWrapper.data( 'cus-carousel-next' ),
-				carouselPrev       = $carouselWrapper.data( 'cus-carousel-prev' ),
-				carouselPaging     = $carouselWrapper.data( 'cus-carousel-paging' );
+			var $carouselWrapper        = $( this ),
+				goSteps                 = 0,
+				$carousel               = $carouselWrapper.find( '.uix-multi-carousel__items' ),
+				$carouselItem           = $carouselWrapper.find( '.uix-multi-carousel__items > div' ),
+				itemTotal               = $carouselItem.length,
+				amountVisible           = $carouselWrapper.data( 'cus-carousel-show' ),
+				carouselItemWidth       = null,
+				carouselItemHeight      = null,
+				carouselDir             = $carouselWrapper.data( 'cus-carousel-dir' ),
+				carouselLoop            = $carouselWrapper.data( 'cus-carousel-loop' ),
+				carouselSpeed           = $carouselWrapper.data( 'cus-carousel-speed' ),
+				carouselNext            = $carouselWrapper.data( 'cus-carousel-next' ),
+				carouselPrev            = $carouselWrapper.data( 'cus-carousel-prev' ),
+				carouselPaging          = $carouselWrapper.data( 'cus-carousel-paging' ),
+				carouseDraggable        = $carouselWrapper.data( 'cus-carousel-draggable' ),
+				carouseDraggableCursor  = $carouselWrapper.data( 'cus-carousel-draggable-cursor' );
 
 			
-			if( typeof carouselDir === typeof undefined ) {
-				carouselDir = 'horizontal';
-			}
 			
-			if( typeof carouselLoop === typeof undefined ) {
-				carouselLoop = false;
-			}
-			if( typeof amountVisible === typeof undefined ) {
-				amountVisible = 3;
-			}
-			if( typeof carouselSpeed === typeof undefined ) {
-				carouselSpeed = 250;
-			}
-			if( typeof carouselNext === typeof undefined ) {
-				carouselNext = '.uix-multi-carousel__controls--next';
-			}
-			if( typeof carouselPrev === typeof undefined ) {
-				carouselPrev = '.uix-multi-carousel__controls--prev';
-			}
-			
+			if( typeof carouselDir === typeof undefined ) carouselDir = 'horizontal';
+			if( typeof carouselLoop === typeof undefined ) carouselLoop = false;
+			if( typeof amountVisible === typeof undefined ) amountVisible = 3;
+			if( typeof carouselSpeed === typeof undefined ) carouselSpeed = 250;
+			if( typeof carouselNext === typeof undefined ) carouselNext = '.uix-multi-carousel__controls--next';
+			if( typeof carouselPrev === typeof undefined ) carouselPrev = '.uix-multi-carousel__controls--prev';
+			if ( typeof carouseDraggable === typeof undefined ) carouseDraggable = false;
+			if ( typeof carouseDraggableCursor === typeof undefined ) carouseDraggableCursor = 'move';
 
+			
+			
+			if ( $( window ).width() <= 768 ) amountVisible = 3;
+
+			
+			carouselItemWidth  = $carousel.width()/amountVisible;
+			carouselItemHeight = $carousel.height()/amountVisible;
+
+			
 			/* 
 			 ---------------------------
 			 Get the number of steps to the last visible element
@@ -217,6 +217,160 @@ APP = ( function ( APP, $, window, document ) {
 
 			});
 			
+			
+			//Drag and Drop
+			//-------------------------------------	
+			var $dragDropTrigger = $carouselItem;
+
+			//Make the cursor a move icon when a user hovers over an item
+			if ( carouseDraggable && carouseDraggableCursor != '' && carouseDraggableCursor != false ) $dragDropTrigger.css( 'cursor', carouseDraggableCursor );
+
+
+
+			//Mouse event
+			$dragDropTrigger.on( 'mousedown.MULTI_ITEMS_CAROUSEL touchstart.MULTI_ITEMS_CAROUSEL', function( e ) {
+				e.preventDefault();
+
+				var touches = e.originalEvent.touches;
+
+				$( this ).addClass( 'dragging' );
+				$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
+				$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
+
+
+				if ( touches && touches.length ) {	
+					$( this ).data( 'origin_mouse_x', parseInt( touches[0].pageX ) );
+					$( this ).data( 'origin_mouse_y', parseInt( touches[0].pageY ) );
+
+				} else {
+
+					if ( carouseDraggable ) {
+						$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
+						$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );	
+					}
+
+
+				}
+
+				$dragDropTrigger.on( 'mouseup.MULTI_ITEMS_CAROUSEL touchmove.MULTI_ITEMS_CAROUSEL', function( e ) {
+					e.preventDefault();
+
+					$( this ).removeClass( 'dragging' );
+					var touches        = e.originalEvent.touches,
+						origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
+						origin_mouse_y = $( this ).data( 'origin_mouse_y' );
+
+					if ( touches && touches.length ) {
+
+						var deltaX = origin_mouse_x - touches[0].pageX,
+							deltaY = origin_mouse_y - touches[0].pageY;
+
+						if ( deltaX >= 50) {
+							//--- left
+
+							goSteps++;
+
+							//Loop items
+							if ( carouselLoop ) {
+								if ( goSteps > lastSteps ) goSteps = 0;
+							} else {
+								if ( goSteps > lastSteps ) goSteps = lastSteps;
+							}
+
+							itemUpdates( $carouselWrapper, false, carouselNext, carouselPrev, goSteps );
+
+
+						}
+						if ( deltaX <= -50) {
+							//--- right
+
+							goSteps--;
+
+							//Loop items
+							if ( carouselLoop ) {
+								if ( goSteps < 0 ) goSteps = lastSteps;
+							} else {
+								if ( goSteps < 0 ) goSteps = 0;
+							}
+
+							itemUpdates( $carouselWrapper, false, carouselNext, carouselPrev, goSteps );
+
+						}
+						if ( deltaY >= 50) {
+							//--- up
+
+
+						}
+						if ( deltaY <= -50) {
+							//--- down
+
+						}
+
+						if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
+							$dragDropTrigger.off( 'touchmove.MULTI_ITEMS_CAROUSEL' );
+						}	
+
+
+					} else {
+
+						if ( carouseDraggable ) {
+							//right
+							if ( e.pageX > origin_mouse_x ) {
+
+
+								goSteps--;
+
+								//Loop items
+								if ( carouselLoop ) {
+									if ( goSteps < 0 ) goSteps = lastSteps;
+								} else {
+									if ( goSteps < 0 ) goSteps = 0;
+								}
+
+								itemUpdates( $carouselWrapper, false, carouselNext, carouselPrev, goSteps );	
+
+							}
+
+							//left
+							if ( e.pageX < origin_mouse_x ) {
+
+								goSteps++;
+
+								//Loop items
+								if ( carouselLoop ) {
+									if ( goSteps > lastSteps ) goSteps = 0;
+								} else {
+									if ( goSteps > lastSteps ) goSteps = lastSteps;
+								}
+
+								itemUpdates( $carouselWrapper, false, carouselNext, carouselPrev, goSteps );		
+
+							}
+
+							//down
+							if ( e.pageY > origin_mouse_y ) {
+
+							}
+
+							//up
+							if ( e.pageY < origin_mouse_y ) {
+
+							}	
+
+							$dragDropTrigger.off( 'mouseup.MULTI_ITEMS_CAROUSEL' );
+
+						}	
+
+
+
+					}
+
+
+
+				} );
+
+
+			} );
 			
 			
 			/*

@@ -8,7 +8,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.FLEXSLIDER               = APP.FLEXSLIDER || {};
-	APP.FLEXSLIDER.version       = '0.1.2';
+	APP.FLEXSLIDER.version       = '0.1.3';
     APP.FLEXSLIDER.documentReady = function( $ ) {
 
 		var $window            = $( window ),
@@ -117,8 +117,8 @@ APP = ( function ( APP, $, window, document ) {
 						pimg       = '',
 						nimg       = '',
 						$plink     = $( dataPNThumbs+'> a' ),
-						$plinkPrev = $plink.filter( '.uix-flexslider__arrows-thumb--prev' ),
-						$plinkNext = $plink.filter( '.uix-flexslider__arrows-thumb--next' );
+						$plinkPrev = $plink.filter( '.uix-flexslider__mycontrols--thumb__prev' ),
+						$plinkNext = $plink.filter( '.uix-flexslider__mycontrols--thumb__next' );
 
 					$plinkPrev.removeClass( 'disabled' );
 					$plinkNext.removeClass( 'disabled' );
@@ -768,8 +768,8 @@ APP = ( function ( APP, $, window, document ) {
 				myControlsContainer  = '';
 				myCustomDirectionNav = '';
 			} else {
-				myControlsContainer  = $( '.uix-flexslider__controls' + customConID );
-				myCustomDirectionNav = $( '.uix-flexslider__arrows'+customConID+' a' );	
+				myControlsContainer  = $( '.uix-flexslider__mycontrols'+customConID+' .uix-flexslider__mycontrols__control-paging' );
+				myCustomDirectionNav = $( '.uix-flexslider__mycontrols'+customConID+' a' );	
 			}
 
 			
