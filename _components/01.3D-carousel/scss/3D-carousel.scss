@@ -19,6 +19,11 @@ $carousel-3d-item-m-gutter: 1rem;
 	text-align: left;
 	transform: translateX( #{$carousel-3d-item-offset} );
 	
+	
+	img {
+		pointer-events: none !important; /* Fix an error fot swipe event not working on images */
+	}
+	
 	ul {
 		padding: 0;
 		margin: 0;

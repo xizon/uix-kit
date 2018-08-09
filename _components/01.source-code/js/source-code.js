@@ -14,16 +14,21 @@ APP = ( function ( APP, $, window, document ) {
 		//Add view source code to body
 		$( 'body' ).prepend( '<a href="#uix-source-code" id="uix-view-source"><i class="fa fa-code" aria-hidden="true"></i></a><div id="uix-source-code"><a href="javascript:void(0);" id="uix-source-code__close"></a></div>' );
 				
-		
-		
+
 		//View source button event
 		$( '#uix-view-source' ).on( 'click', function() {
-			$( 'html' ).css( 'overflow-y', 'hidden' );
+			// Locks the page
+			$.scrollLock( true );
 			$( '#uix-source-code' ).show();
+			
+
+			
 		});
 		
 		$( '#uix-source-code > #uix-source-code__close' ).on( 'click', function() {
-			$( 'html' ).css( 'overflow-y', 'auto' );
+			// Unlocks the page
+			$.scrollLock( false );
+			
 			var uri = window.location.toString();
 			if ( uri.indexOf( '#' ) > 0 ) {
 				var clean_uri = uri.substring(0, uri.indexOf( '#' ) );
@@ -59,6 +64,12 @@ APP = ( function ( APP, $, window, document ) {
 				"html":   pageHeaderCode + '&lt;/head&gt;\n&lt;'+sourceCodeBodyClassCode+'&gt;\n' + pageBodyCode + '\n&lt;/body&gt;\n&lt;/html&gt;',
 				"class": 'highlightBlock-print html'
 			}).appendTo( '#uix-source-code' );	
+			
+			$( 'pre.highlightBlock-print' ).each( function( i, block ) {
+				hljs.highlightBlock( block );
+			});	
+
+
 			
 		});
 		

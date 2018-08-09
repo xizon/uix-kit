@@ -220,158 +220,72 @@ APP = ( function ( APP, $, window, document ) {
 			
 			//Drag and Drop
 			//-------------------------------------	
-			var $dragDropTrigger = $carouselItem;
+			var $dragDropTrigger = $carouselWrapper,
+				hammerProps      = {};
 
 			//Make the cursor a move icon when a user hovers over an item
 			if ( carouseDraggable && carouseDraggableCursor != '' && carouseDraggableCursor != false ) $dragDropTrigger.css( 'cursor', carouseDraggableCursor );
 
-
+			if ( !carouseDraggable ) {
+				hammerProps = {
+					inputClass: Hammer.TouchInput
+				};
+			}
 
 			//Mouse event
-			$dragDropTrigger.on( 'mousedown.MULTI_ITEMS_CAROUSEL touchstart.MULTI_ITEMS_CAROUSEL', function( e ) {
-				e.preventDefault();
+			//Hammer.js pan event only for touch devices and not for desktop computer Click+Drag
+			var direction,
+				dragDropElement = $dragDropTrigger[0],
+				dragDropMC      = new Hammer( dragDropElement, hammerProps );
+			
+			
+			dragDropMC.on( 'panright press panleft panup pandown', function( ev ) {
 
-				var touches = e.originalEvent.touches;
+				//Set the direction in here
+				direction = ev.type;
+			});
 
-				$( this ).addClass( 'dragging' );
-				$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
-				$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
+			
 
 
-				if ( touches && touches.length ) {	
-					$( this ).data( 'origin_mouse_x', parseInt( touches[0].pageX ) );
-					$( this ).data( 'origin_mouse_y', parseInt( touches[0].pageY ) );
+			dragDropMC.on( 'panend', function( ev ) {
 
-				} else {
+			
+				//Use the direction in here
+				//You know the pan has ended
+				//and you know which action they were taking
+				if ( direction == 'panleft' || direction == 'panup' ) {
+					goSteps++;
 
-					if ( carouseDraggable ) {
-						$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
-						$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );	
+					//Loop items
+					if ( carouselLoop ) {
+						if ( goSteps > lastSteps ) goSteps = 0;
+					} else {
+						if ( goSteps > lastSteps ) goSteps = lastSteps;
 					}
 
-
+					itemUpdates( $carouselWrapper, false, carouselNext, carouselPrev, goSteps );
 				}
 
-				$dragDropTrigger.on( 'mouseup.MULTI_ITEMS_CAROUSEL touchmove.MULTI_ITEMS_CAROUSEL', function( e ) {
-					e.preventDefault();
+				if ( direction == 'panright' || direction == 'pandown' ) {
+					goSteps--;
 
-					$( this ).removeClass( 'dragging' );
-					var touches        = e.originalEvent.touches,
-						origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
-						origin_mouse_y = $( this ).data( 'origin_mouse_y' );
-
-					if ( touches && touches.length ) {
-
-						var deltaX = origin_mouse_x - touches[0].pageX,
-							deltaY = origin_mouse_y - touches[0].pageY;
-
-						if ( deltaX >= 50) {
-							//--- left
-
-							goSteps++;
-
-							//Loop items
-							if ( carouselLoop ) {
-								if ( goSteps > lastSteps ) goSteps = 0;
-							} else {
-								if ( goSteps > lastSteps ) goSteps = lastSteps;
-							}
-
-							itemUpdates( $carouselWrapper, false, carouselNext, carouselPrev, goSteps );
-
-
-						}
-						if ( deltaX <= -50) {
-							//--- right
-
-							goSteps--;
-
-							//Loop items
-							if ( carouselLoop ) {
-								if ( goSteps < 0 ) goSteps = lastSteps;
-							} else {
-								if ( goSteps < 0 ) goSteps = 0;
-							}
-
-							itemUpdates( $carouselWrapper, false, carouselNext, carouselPrev, goSteps );
-
-						}
-						if ( deltaY >= 50) {
-							//--- up
-
-
-						}
-						if ( deltaY <= -50) {
-							//--- down
-
-						}
-
-						if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
-							$dragDropTrigger.off( 'touchmove.MULTI_ITEMS_CAROUSEL' );
-						}	
-
-
+					//Loop items
+					if ( carouselLoop ) {
+						if ( goSteps < 0 ) goSteps = lastSteps;
 					} else {
-
-						if ( carouseDraggable ) {
-							//right
-							if ( e.pageX > origin_mouse_x ) {
-
-
-								goSteps--;
-
-								//Loop items
-								if ( carouselLoop ) {
-									if ( goSteps < 0 ) goSteps = lastSteps;
-								} else {
-									if ( goSteps < 0 ) goSteps = 0;
-								}
-
-								itemUpdates( $carouselWrapper, false, carouselNext, carouselPrev, goSteps );	
-
-							}
-
-							//left
-							if ( e.pageX < origin_mouse_x ) {
-
-								goSteps++;
-
-								//Loop items
-								if ( carouselLoop ) {
-									if ( goSteps > lastSteps ) goSteps = 0;
-								} else {
-									if ( goSteps > lastSteps ) goSteps = lastSteps;
-								}
-
-								itemUpdates( $carouselWrapper, false, carouselNext, carouselPrev, goSteps );		
-
-							}
-
-							//down
-							if ( e.pageY > origin_mouse_y ) {
-
-							}
-
-							//up
-							if ( e.pageY < origin_mouse_y ) {
-
-							}	
-
-							$dragDropTrigger.off( 'mouseup.MULTI_ITEMS_CAROUSEL' );
-
-						}	
-
-
-
+						if ( goSteps < 0 ) goSteps = 0;
 					}
 
+					itemUpdates( $carouselWrapper, false, carouselNext, carouselPrev, goSteps );
+				}			
 
 
-				} );
 
+			});	
 
-			} );
-			
+		
+		
 			
 			/*
 			 * Transition Between Items

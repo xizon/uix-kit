@@ -13,21 +13,6 @@
 	/* Required */
 	overflow: hidden;
 
-	
-	/* Default Flexslider class name */
-	.slides {
-		margin: 0;
-		padding: 0;
-		list-style: none;
-
-		li {
-			margin: 0;
-			padding: 0;
-			list-style: none;
-			cursor: move;
-		}
-	}
-
 
 	.uix-testimonials__content {
 		position: relative;
@@ -63,7 +48,7 @@
 		strong {
 			font-weight: 700;
 
-			&.pure-text {
+			&.uix-testimonials__signature__shorttext {
 				display: inline-block;
 			}
 		}
@@ -82,32 +67,3 @@
 
 }
 
-
-/* Custom controls */
-.uix-testimonials__controls {
-	font-size: 0;
-	position: absolute;
-	text-align: center;
-	position: relative;
-	width: 100%;
-	display: block;
-	height: 20px;
-	margin-top: -88px;
-	z-index: 5;
-
-	li {
-		display: inline-block;
-		width: 10px;
-		height: 10px;
-		margin: .3rem;
-		border-radius: 100%; 
-		background: $sub-text-color; 
-		
-		/* Default Flexslider class name */
-		&.flex-active {
-			background: $highlight-color1;
-		}
-	}
-
-
-}

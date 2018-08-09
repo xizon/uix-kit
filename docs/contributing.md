@@ -38,6 +38,7 @@ Uix Kit bundles the following third-party resources:
 - [GSAP - Standard "No Charge" GreenSock License](https://greensock.com)
 - [three.js](https://github.com/mrdoob/three.js/)
 - [PJAX](https://github.com/defunkt/jquery-pjax)
+- [Hammer.JS](http://hammerjs.github.io/)
 
 
 

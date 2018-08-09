@@ -114,113 +114,48 @@ APP = ( function ( APP, $, window, document ) {
 
 			//Drag and Drop
 			//-------------------------------------	
-			var $dragDropTrigger = $wrapper;
+			var $dragDropTrigger = $wrapper,
+				hammerProps      = {};
+
+			
+			if ( !dataDraggable ) {
+				hammerProps = {
+					inputClass: Hammer.TouchInput
+				};
+			}
 
 			//Mouse event
-			$dragDropTrigger.on( 'mousedown._3D_CAROUSEL touchstart._3D_CAROUSEL', function( e ) {
-				e.preventDefault();
+			//Hammer.js pan event only for touch devices and not for desktop computer Click+Drag
+			var direction,
+				dragDropElement = $dragDropTrigger[0],
+				dragDropMC      = new Hammer( dragDropElement, hammerProps );
+			
+			
+			dragDropMC.on( 'panright press panleft', function( ev ) {
 
-				var touches = e.originalEvent.touches;
-
-				$( this ).addClass( 'dragging' );
-				$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
-				$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
-
-
-				if ( touches && touches.length ) {	
-					$( this ).data( 'origin_mouse_x', parseInt( touches[0].pageX ) );
-					$( this ).data( 'origin_mouse_y', parseInt( touches[0].pageY ) );
-
-				} else {
-
-					if ( dataDraggable ) {
-						$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
-						$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );	
-					}
+				//Set the direction in here
+				direction = ev.type;
+			});
 
 
+
+			dragDropMC.on( 'panend', function( ev ) {
+
+				//Use the direction in here
+				//You know the pan has ended
+				//and you know which action they were taking
+				if ( direction == 'panleft' ) {
+					itemUpdates( 'clockwise' );
 				}
 
-				$dragDropTrigger.on( 'mouseup._3D_CAROUSEL touchmove._3D_CAROUSEL', function( e ) {
-					e.preventDefault();
-
-					$( this ).removeClass( 'dragging' );
-					var touches        = e.originalEvent.touches,
-						origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
-						origin_mouse_y = $( this ).data( 'origin_mouse_y' );
-
-					if ( touches && touches.length ) {
-
-						var deltaX = origin_mouse_x - touches[0].pageX,
-							deltaY = origin_mouse_y - touches[0].pageY;
-
-						if ( deltaX >= 50) {
-							//--- left
-							itemUpdates( 'clockwise' );
-
-
-						}
-						if ( deltaX <= -50) {
-							//--- right
-							itemUpdates( 'counter-clockwise' );
-
-
-						}
-						if ( deltaY >= 50) {
-							//--- up
-
-
-						}
-						if ( deltaY <= -50) {
-							//--- down
-
-						}
-
-						if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
-							$dragDropTrigger.off( 'touchmove._3D_CAROUSEL' );
-						}	
-
-
-					} else {
-
-						if ( dataDraggable ) {
-							//right
-							if ( e.pageX > origin_mouse_x ) {
-								itemUpdates( 'counter-clockwise' );
-							}
-
-							//left
-							if ( e.pageX < origin_mouse_x ) {
-								itemUpdates( 'clockwise' );
-								
-							}
-
-							//down
-							if ( e.pageY > origin_mouse_y ) {
-
-							}
-
-							//up
-							if ( e.pageY < origin_mouse_y ) {
-
-							}	
-
-							$dragDropTrigger.off( 'mouseup._3D_CAROUSEL' );
-
-						}	
+				if ( direction == 'panright' ) {
+					itemUpdates( 'counter-clockwise' );
+				}			
 
 
 
-					}
+			});	
 
-
-
-				} );
-
-
-
-
-			} );
 			
 
 			/*

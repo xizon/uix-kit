@@ -120,8 +120,8 @@ $spacing-medium-mobile  : 4.265625rem;
 $placeholder-text-color: #E6E6E8;
 
 //Highlight Color
-$highlight-color1      : #EC5E79; //rgba(236, 94, 121, 1)
-$highlight-color2      : #E8588C; //rgba(232, 88, 140, 1)
+$highlight-color1      : #EC5E79; //rgba($highlight-color1, 1)
+$highlight-color2      : #E8588C; //rgba($highlight-color2, 1)
 
 //Primary Text Color
 $primary-text-color1   : #212121;
@@ -134,7 +134,7 @@ $heading-text-color    : #212121;
 $sub-text-color        : #AEAEAE;
 
 //Dividing Line Color
-$dividing-line-color   : #DCDCDC; //rgba(220, 220, 220, 1)
+$dividing-line-color   : #DCDCDC; //rgba($dividing-line-color, 1)
 
 //Button Gradient Color
 $btn-gradient-color1   : #EC5E79;

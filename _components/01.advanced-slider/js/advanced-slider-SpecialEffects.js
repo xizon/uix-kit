@@ -9,7 +9,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.ADVANCED_SLIDER_FILTER               = APP.ADVANCED_SLIDER_FILTER || {};
-	APP.ADVANCED_SLIDER_FILTER.version       = '0.0.8';
+	APP.ADVANCED_SLIDER_FILTER.version       = '0.0.9';
     APP.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 	
@@ -242,15 +242,17 @@ APP = ( function ( APP, $, window, document ) {
 				dataControlsPagination   = $this.data( 'controls-pagination' ),
 				dataControlsArrows       = $this.data( 'controls-arrows' ),
 				dataLoop                 = $this.data( 'loop' ),
-				dataFilterTexture        = $this.data( 'filter-texture' );
-
+				dataFilterTexture        = $this.data( 'filter-texture' ),
+				dataDraggable            = $this.data( 'draggable' ),
+				dataDraggableCursor      = $this.data( 'draggable-cursor' );
 	
 			
 			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider-sp__pagination';
 			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
 			if( typeof dataLoop === typeof undefined ) dataLoop = false;
 			if( typeof dataFilterTexture === typeof undefined || !dataFilterTexture || dataFilterTexture == '' ) dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
-
+			if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
+			if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
 
 				
 
@@ -845,11 +847,12 @@ APP = ( function ( APP, $, window, document ) {
 				
 				
 				//----------------------------------------------------------------------------------
-				//--------------------------------- Liquid Distortion Effect 4 -----------------------
+				//--------------------------------- Parallax Effect -------------------------------
 				//----------------------------------------------------------------------------------
 				//Usage of returning sprite object: container__items.children[index]
 				if ( $this.hasClass( 'uix-advanced-slider-sp--eff-parallax' ) ) {
 
+					
 					$this.find( '.uix-advanced-slider-sp__item' ).each( function( index )  {
 
 						var $thisItem = $( this );
@@ -965,27 +968,6 @@ APP = ( function ( APP, $, window, document ) {
 						stage__filter.addChild( curSpriteMask ); //Do not add to the container
 						
 
-						//next mask
-//						var curSpriteMaskNext = new PIXI.Graphics();
-//						curSpriteMaskNext.lineStyle( 0 );
-//						curSpriteMaskNext.beginFill( 0xFFFFFF );
-//						curSpriteMaskNext.moveTo(0,0);
-//						curSpriteMaskNext.lineTo( renderer.view.width, 0 );
-//						curSpriteMaskNext.lineTo( renderer.view.width, renderer.view.height );
-//						curSpriteMaskNext.lineTo( 0, renderer.view.height );
-//						curSpriteMaskNext.endFill();
-//						
-//						curSpriteMaskNext.position.x = 0;
-//						curSpriteMaskNext.position.y = 0;
-//						
-//						
-//						container__items.mask = curSpriteMaskNext;
-//						stage__filter.addChild( curSpriteMaskNext ); //Do not add to the container
-//						
-//
-//						
-						
-						
 
 						//Animation Effects
 						//-------------------------------------
@@ -1438,66 +1420,123 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
-			//Added touch method to mobile device
+			//Added touch method to mobile device and desktop
 			//-------------------------------------	
-			var startX,
-				startY;
-
-
-			$this.on( 'touchstart.ADVANCED_SLIDER_FILTER', function( event ) {
-				var touches = event.originalEvent.touches;
-				if ( touches && touches.length ) {
-					startX = touches[0].pageX;
-					startY = touches[0].pageY;
-
-
-					$this.on( 'touchmove.ADVANCED_SLIDER_FILTER', function( event ) {
-
-						var touches = event.originalEvent.touches;
-						if ( touches && touches.length ) {
-							var deltaX = startX - touches[0].pageX,
-								deltaY = startY - touches[0].pageY;
-
-							if ( deltaX >= 50) {
-								//--- swipe left
-
-
-								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, sliderWrapper, 'prev' );
-
-
-								//Pause the auto play event
-								clearInterval( timer );
-
-							}
-							if ( deltaX <= -50) {
-								//--- swipe right
-
-								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, sliderWrapper, 'next' );
-
-
-								//Pause the auto play event
-								clearInterval( timer );							
-
-
-							}
-							if ( deltaY >= 50) {
-								//--- swipe up
-
-
-							}
-							if ( deltaY <= -50) {
-								//--- swipe down
-
-							}
-							if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
-								$this.off( 'touchmove.ADVANCED_SLIDER_FILTER' );
-							}
-						}
-
-					});
-				}	
-			});
+			var $dragDropTrigger = $items;
 			
+
+			//Make the cursor a move icon when a user hovers over an item
+			if ( dataDraggable && dataDraggableCursor != '' && dataDraggableCursor != false ) $dragDropTrigger.css( 'cursor', dataDraggableCursor );
+
+
+			//Mouse event
+			$dragDropTrigger.on( 'mousedown.ADVANCED_SLIDER_FILTER touchstart.ADVANCED_SLIDER_FILTER', function( e ) {
+				e.preventDefault();
+
+				var touches = e.originalEvent.touches;
+
+				$( this ).addClass( 'dragging' );
+				$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
+				$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
+
+
+				if ( touches && touches.length ) {	
+					$( this ).data( 'origin_mouse_x', parseInt( touches[0].pageX ) );
+					$( this ).data( 'origin_mouse_y', parseInt( touches[0].pageY ) );
+
+				} else {
+
+					if ( dataDraggable ) {
+						$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
+						$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );	
+					}
+
+
+				}
+
+				$dragDropTrigger.on( 'mouseup.ADVANCED_SLIDER_FILTER touchmove.ADVANCED_SLIDER_FILTER', function( e ) {
+					e.preventDefault();
+
+					$( this ).removeClass( 'dragging' );
+					var touches        = e.originalEvent.touches,
+						origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
+						origin_mouse_y = $( this ).data( 'origin_mouse_y' );
+
+					if ( touches && touches.length ) {
+
+						var deltaX = origin_mouse_x - touches[0].pageX,
+							deltaY = origin_mouse_y - touches[0].pageY;
+
+						//--- left
+						if ( deltaX >= 50) {
+							if ( $items.filter( '.active' ).index() < itemsTotal - 1 ) _next.trigger( 'click' );
+						}
+						
+						//--- right
+						if ( deltaX <= -50) {
+							if ( $items.filter( '.active' ).index() > 0 ) _prev.trigger( 'click' );
+						}
+						
+						//--- up
+						if ( deltaY >= 50) {
+							
+
+						}
+						
+						//--- down
+						if ( deltaY <= -50) {
+							
+
+						}
+						
+
+						if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
+							$dragDropTrigger.off( 'touchmove.ADVANCED_SLIDER_FILTER' );
+						}	
+
+
+					} else {
+
+						
+						if ( dataDraggable ) {
+							//right
+							if ( e.pageX > origin_mouse_x ) {				
+								if ( $items.filter( '.active' ).index() > 0 ) _prev.trigger( 'click' );
+							}
+
+							//left
+							if ( e.pageX < origin_mouse_x ) {
+								if ( $items.filter( '.active' ).index() < itemsTotal - 1 ) _next.trigger( 'click' );
+							}
+
+							//down
+							if ( e.pageY > origin_mouse_y ) {
+
+							}
+
+							//up
+							if ( e.pageY < origin_mouse_y ) {
+
+							}	
+
+							$dragDropTrigger.off( 'mouseup.ADVANCED_SLIDER_FILTER' );
+
+						}	
+
+
+
+					}
+
+
+
+				} );//end: mouseup.ADVANCED_SLIDER_FILTER touchmove.ADVANCED_SLIDER_FILTER
+
+
+
+
+			} );// end: mousedown.ADVANCED_SLIDER_FILTER touchstart.ADVANCED_SLIDER_FILTER
+
+		
 
 		}
 		
@@ -1549,7 +1588,10 @@ APP = ( function ( APP, $, window, document ) {
 				if ( elementIndex == 0 ) $( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--prev' ).addClass( 'disabled' );
 			}
 
+
+
 			// To determine if it is a touch screen.
+			//-------------------------------------
 			if ( Modernizr.touchevents ) {
 				if ( elementIndex == total ) elementIndex = total-1;
 				if ( elementIndex < 0 ) elementIndex = 0;	
@@ -1571,13 +1613,14 @@ APP = ( function ( APP, $, window, document ) {
 			}
 			
 			//Determine the direction and add class to switching direction indicator.
+			//-------------------------------------
 			var dirIndicatorClass = '';
 			if ( dir == 'prev' ) dirIndicatorClass = 'prev';
 			if ( dir == 'next' ) dirIndicatorClass = 'next';
 			
 
-
 			//Add transition class to Controls Pagination
+			//-------------------------------------
 			$( dataControlsPagination ).find( 'li a' ).removeClass( 'leave' );
 			$( dataControlsPagination ).find( 'li a.active' ).removeClass( 'active' ).addClass( 'leave' );
 			$( dataControlsPagination ).find( 'li a[data-index="'+elementIndex+'"]' ).addClass( 'active' ).removeClass( 'leave' );
@@ -1585,6 +1628,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			//Add transition class to each item
+			//-------------------------------------	
 			$items.removeClass( 'leave prev next' );
 			$items.addClass( dirIndicatorClass );
 			slider.find( '.uix-advanced-slider-sp__item.active' ).removeClass( 'active' ).addClass( 'leave ' + dirIndicatorClass );
@@ -1612,8 +1656,53 @@ APP = ( function ( APP, $, window, document ) {
 				canvasDefaultInit( $current );
 			}, animDuration );
 			
+			
 			//Canvas Interactions
 			//-------------------------------------
+			
+			//-- Brightness Effect
+			if ( slider.hasClass( 'uix-advanced-slider-sp--eff-brightness' ) ) {
+
+			}
+
+
+
+			//-- Liquid Distortion Effect
+			if ( slider.hasClass( 'uix-advanced-slider-sp--eff-liquid' ) ) {
+
+			}
+
+
+
+			//-- Liquid Distortion Effect 2
+			if ( slider.hasClass( 'uix-advanced-slider-sp--eff-liquid2' ) ) {
+
+			}
+
+
+			//-- Liquid Distortion Effect 3
+			if ( slider.hasClass( 'uix-advanced-slider-sp--eff-liquid3' ) ) {
+
+			}
+
+
+
+			//-- Parallax Effect 
+			if ( slider.hasClass( 'uix-advanced-slider-sp--eff-parallax' ) ) {
+
+				if ( dataLoop ) {
+					if ( elementIndex == 0 ) dir = 'prev';
+				}
+
+			}
+
+			//-- 3D Rotating Effect
+			if ( slider.hasClass( 'uix-advanced-slider-sp--eff-3d-rotating' ) ) {
+
+			}
+			
+			
+			
 			transitionInteractions( elementIndex, $items.filter( '.leave' ).index(), slider, 'in', dir );
 			
 
@@ -2183,7 +2272,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 				
 				//----------------------------------------------------------------------------------
-				//--------------------------------- Liquid Distortion Effect 4 -----------------------
+				//--------------------------------- Parallax Effect -----------------------------
 				//----------------------------------------------------------------------------------
 				if ( slider.hasClass( 'uix-advanced-slider-sp--eff-parallax' ) ) {
 					

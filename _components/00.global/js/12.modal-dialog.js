@@ -8,7 +8,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.MODAL_DIALOG               = APP.MODAL_DIALOG || {};
-	APP.MODAL_DIALOG.version       = '0.0.1';
+	APP.MODAL_DIALOG.version       = '0.0.2';
     APP.MODAL_DIALOG.documentReady = function( $ ) {
 
 		function getTransitionDuration( elementOrSelector ){
@@ -62,6 +62,12 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			if ( $obj.length > 0 ) {
+				
+				
+				// Locks the page
+				$.scrollLock( true );
+					
+
 				if( typeof dataH != typeof undefined && dataH != '' ) {
 					$obj.css( {'height': dataH } );
 				}
@@ -92,8 +98,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			if ( $obj.hasClass( 'is-fullscreen' ) ) {
 				setTimeout( function() {
-					$( 'html' ).css( 'overflow-y', 'hidden' );
-					
+
 					if ( !$obj.hasClass( 'is-video' ) ) {
 						$obj.find( '.uix-modal-box__content' ).css( 'overflow-y', 'scroll' );
 					}
@@ -118,7 +123,8 @@ APP = ( function ( APP, $, window, document ) {
 			});
 				
 			$( '.uix-modal-box' ).find( '.uix-modal-box__content' ).removeClass( 'js-uix-no-fullscreen' );
-			$( 'html' ).css( 'overflow-y', 'auto' );
+			// Unlocks the page
+			$.scrollLock( false );
 			setTimeout( function() {
 	
 			}, getTransitionDuration( '.uix-modal-box:first' ) );

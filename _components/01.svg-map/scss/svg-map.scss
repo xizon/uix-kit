@@ -21,7 +21,7 @@
 		height: 100%;
 	}
 	path {
-		fill: rgba(236, 94, 121, .2);
+		fill: rgba($highlight-color1, .2);
 		stroke: #ffffff;
 		opacity: 1;
 		stroke-opacity: 1;
@@ -33,7 +33,7 @@
 		@include transition-default();
 		
 		&:hover {
-			fill: rgba(236, 94, 121, .3);
+			fill: rgba($highlight-color1, .3);
 		}
 	}
 
@@ -87,13 +87,13 @@
 	}
 	polygon {
 		cursor: pointer;
-		fill: rgba(236, 94, 121, .2);
+		fill: rgba($highlight-color1, .2);
 		stroke: #fff;
 		stroke-width: 1;
 		@include transition-default();
 		
 		&:hover {
-			fill: rgba(236, 94, 121, .3);
+			fill: rgba($highlight-color1, .3);
 		}
 	}
 
@@ -118,8 +118,8 @@
 	}
 
 	circle {
-		fill: rgba(232, 88, 140, 1);
-		stroke: rgba(232, 88, 140, .2);
+		fill: rgba($highlight-color2, 1);
+		stroke: rgba($highlight-color2, .2);
 		stroke-width: 7;
 		r: 6;
 		animation: uix-cssAnim--map-dot ease 1s infinite;

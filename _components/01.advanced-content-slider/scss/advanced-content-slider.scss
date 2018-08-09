@@ -35,8 +35,13 @@
 			float: left;
 
 
+			a {
+				box-shadow: inset 0px -6px 0px 0px $highlight-color1;
+			}
+			
 			img {
 				width: 100%;
+				pointer-events: none !important; /* Fix an error fot swipe event not working on images */
 			}
 			
 

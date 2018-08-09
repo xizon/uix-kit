@@ -13,8 +13,11 @@ if ( typeof jQuery === 'undefined' || typeof TweenMax === 'undefined' || typeof 
 }
 
 
-
-//Global variables from front pages
+/* 
+ *************************************
+ * Global variables from front pages
+ *************************************
+ */
 var 
 	//If the file is in the root directory, you can leave it empty. 
 	//If in another directory, you can write: "/blog"
@@ -44,7 +47,12 @@ if ( location.hostname === 'localhost' || location.hostname === '127.0.0.1' ) {
 }
 
 
-//Determine whether it is a special browser
+
+/* 
+ *************************************
+ * Determine whether it is a special browser
+ *************************************
+ */
 var browser = {
 	isAndroid : /(android)/i.test(navigator.userAgent),
 	isPC      : !navigator.userAgent.match(/(iPhone|iPod|Android|ios|Mobile)/i),
@@ -54,7 +62,11 @@ var browser = {
 
 
 
-//Core scripts for current site
+/* 
+ *************************************
+ * Core scripts for current site
+ *************************************
+ */
 var APP = (function ( $, window, document ) {
     'use strict';
 
@@ -111,10 +123,12 @@ var APP = (function ( $, window, document ) {
 
 
 
-/*
+/* 
+ *************************************
  * Create GUID / UUID
  *
  * @return {string}                        - The globally-unique identifiers.
+ *************************************
  */
 var crypto = window.crypto || window.msCrypto || null; // IE11 fix
 var UIX_GUID = UIX_GUID || (function() {
@@ -163,11 +177,12 @@ var UIX_GUID = UIX_GUID || (function() {
 })();
 
 
-
-/*
+/* 
+ *************************************
  * Hash Change Event
  *
  * @return {void}                        - The constructor.
+ *************************************
  */
 ( function($){
 
@@ -242,14 +257,15 @@ var UIX_GUID = UIX_GUID || (function() {
     clearTimeout( timeout_id );
   };
 
-})(jQuery);
+} ) ( jQuery );
 
 
-
-/*
+/* 
+ *************************************
  * Get all attributes of an element using jQuery
  *
  * @return {array}                        - Returns a new array.
+ *************************************
  */
 ( function( old ) {
   $.fn.attr = function() {
@@ -270,3 +286,148 @@ var UIX_GUID = UIX_GUID || (function() {
     return old.apply(this, arguments);
   };
 } )( $.fn.attr );
+
+
+
+/* 
+ *************************************
+ * Scroll Lock
+ * @https://gist.github.com/barneycarroll/6550066
+ * @return {void}                        - The constructor.
+ *************************************
+ */
+/*
+	 // Locks the page
+	$.scrollLock( true );
+	
+	// Unlocks the page
+	$.scrollLock( false );
+*/
+
+( function($) {
+    'use strict';
+	$.scrollLock = ( function scrollLockClosure() {
+	   
+		var $html      = $( 'html' ),
+			// State: unlocked by default
+			locked     = false,
+			// State: scroll to revert to
+			prevScroll = {
+				scrollLeft : $( window ).scrollLeft(),
+				scrollTop  : $( window ).scrollTop()
+			},
+			// State: styles to revert to
+			prevStyles = {},
+			lockStyles = {
+				'overflow-y' : 'scroll',
+				'position'   : 'fixed',
+				'width'      : '100%'
+			};
+	
+		// Instantiate cache in case someone tries to unlock before locking
+		saveStyles();
+	
+		// Save context's inline styles in cache
+		function saveStyles() {
+			var styleAttr = $html.attr( 'style' ),
+				styleStrs = [],
+				styleHash = {};
+	
+			if( !styleAttr ){
+				return;
+			}
+	
+			styleStrs = styleAttr.split( /;\s/ );
+	
+			$.each( styleStrs, function serializeStyleProp( styleString ){
+				if( !styleString ) {
+					return;
+				}
+	
+				var keyValue = styleString.split( /\s:\s/ );
+	
+				if( keyValue.length < 2 ) {
+					return;
+				}
+	
+				styleHash[ keyValue[ 0 ] ] = keyValue[ 1 ];
+			} );
+	
+			$.extend( prevStyles, styleHash );
+		}
+	
+		function lock() {
+			var appliedLock = {};
+	
+			// Duplicate execution will break DOM statefulness
+			if( locked ) {
+				return;
+			}
+	
+			// Save scroll state...
+			prevScroll = {
+				scrollLeft : $( window ).scrollLeft(),
+				scrollTop  : $( window ).scrollTop()
+			};
+	
+			// ...and styles
+			saveStyles();
+	
+			// Compose our applied CSS
+			$.extend( appliedLock, lockStyles, {
+				// And apply scroll state as styles
+				'left' : - prevScroll.scrollLeft + 'px',
+				'top'  : - prevScroll.scrollTop  + 'px'
+			} );
+	
+			// Then lock styles...
+			$html.css( appliedLock );
+	
+			// ...and scroll state
+			$( window )
+				.scrollLeft( 0 )
+				.scrollTop( 0 );
+	
+			locked = true;
+		}
+	
+		function unlock() {
+			// Duplicate execution will break DOM statefulness
+			if( !locked ) {
+				return;
+			}
+	
+			// Revert styles
+			$html.attr( 'style', $( '<x>' ).css( prevStyles ).attr( 'style' ) || '' );
+	
+			// Revert scroll values
+			$( window )
+				.scrollLeft( prevScroll.scrollLeft )
+				.scrollTop(  prevScroll.scrollTop );
+	
+			locked = false;
+		}
+	
+		return function scrollLock( on ) {
+			// If an argument is passed, lock or unlock depending on truthiness
+			if( arguments.length ) {
+				if( on ) {
+					lock();
+				}
+				else {
+					unlock();
+				}
+			}
+			// Otherwise, toggle
+			else {
+				if( locked ){
+					unlock();
+				}
+				else {
+					lock();
+				}
+			}
+		};
+	}() );
+
+} ) ( jQuery );

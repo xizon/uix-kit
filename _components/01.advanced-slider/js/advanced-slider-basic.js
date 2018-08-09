@@ -9,7 +9,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.ADVANCED_SLIDER               = APP.ADVANCED_SLIDER || {};
-	APP.ADVANCED_SLIDER.version       = '0.0.6';
+	APP.ADVANCED_SLIDER.version       = '0.0.7';
     APP.ADVANCED_SLIDER.pageLoaded    = function() {
 
 		var $window                   = $( window ),
@@ -201,14 +201,16 @@ APP = ( function ( APP, $, window, document ) {
 				itemsTotal               = $items.length,
 				dataControlsPagination   = $this.data( 'controls-pagination' ),
 				dataControlsArrows       = $this.data( 'controls-arrows' ),
-				dataLoop                 = $this.data( 'loop' );
-
+				dataLoop                 = $this.data( 'loop' ),
+				dataDraggable            = $this.data( 'draggable' ),
+				dataDraggableCursor      = $this.data( 'draggable-cursor' );
 	
 			
 			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider-sp__pagination';
 			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
 			if( typeof dataLoop === typeof undefined ) dataLoop = false;
-
+			if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
+			if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
 				
 
 		    //Prevent bubbling
@@ -302,67 +304,122 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
-			//Added touch method to mobile device
+			//Added touch method to mobile device and desktop
 			//-------------------------------------	
-			var startX,
-				startY;
-
-
-			$this.on( 'touchstart.ADVANCED_SLIDER', function( event ) {
-				var touches = event.originalEvent.touches;
-				if ( touches && touches.length ) {
-					startX = touches[0].pageX;
-					startY = touches[0].pageY;
-
-
-					$this.on( 'touchmove.ADVANCED_SLIDER', function( event ) {
-
-						var touches = event.originalEvent.touches;
-						if ( touches && touches.length ) {
-							var deltaX = startX - touches[0].pageX,
-								deltaY = startY - touches[0].pageY;
-
-							if ( deltaX >= 50) {
-								//--- swipe left
-
-
-								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, sliderWrapper, 'prev' );
-
-
-								//Pause the auto play event
-								clearInterval( timer );
-
-							}
-							if ( deltaX <= -50) {
-								//--- swipe right
-
-								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, sliderWrapper, 'next' );
-
-
-								//Pause the auto play event
-								clearInterval( timer );							
-
-
-							}
-							if ( deltaY >= 50) {
-								//--- swipe up
-
-
-							}
-							if ( deltaY <= -50) {
-								//--- swipe down
-
-							}
-							if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
-								$this.off( 'touchmove.ADVANCED_SLIDER' );
-							}
-						}
-
-					});
-				}	
-			});
+			var $dragDropTrigger = $items;
 			
 
+			//Make the cursor a move icon when a user hovers over an item
+			if ( dataDraggable && dataDraggableCursor != '' && dataDraggableCursor != false ) $dragDropTrigger.css( 'cursor', dataDraggableCursor );
+
+
+			//Mouse event
+			$dragDropTrigger.on( 'mousedown.ADVANCED_SLIDER touchstart.ADVANCED_SLIDER', function( e ) {
+				e.preventDefault();
+
+				var touches = e.originalEvent.touches;
+
+				$( this ).addClass( 'dragging' );
+				$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
+				$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
+
+
+				if ( touches && touches.length ) {	
+					$( this ).data( 'origin_mouse_x', parseInt( touches[0].pageX ) );
+					$( this ).data( 'origin_mouse_y', parseInt( touches[0].pageY ) );
+
+				} else {
+
+					if ( dataDraggable ) {
+						$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
+						$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );	
+					}
+
+
+				}
+
+				$dragDropTrigger.on( 'mouseup.ADVANCED_SLIDER touchmove.ADVANCED_SLIDER', function( e ) {
+					e.preventDefault();
+
+					$( this ).removeClass( 'dragging' );
+					var touches        = e.originalEvent.touches,
+						origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
+						origin_mouse_y = $( this ).data( 'origin_mouse_y' );
+
+					if ( touches && touches.length ) {
+
+						var deltaX = origin_mouse_x - touches[0].pageX,
+							deltaY = origin_mouse_y - touches[0].pageY;
+
+						//--- left
+						if ( deltaX >= 50) {
+							if ( $items.filter( '.active' ).index() < itemsTotal - 1 ) _next.trigger( 'click' );
+						}
+						
+						//--- right
+						if ( deltaX <= -50) {
+							if ( $items.filter( '.active' ).index() > 0 ) _prev.trigger( 'click' );
+						}
+						
+						//--- up
+						if ( deltaY >= 50) {
+							
+
+						}
+						
+						//--- down
+						if ( deltaY <= -50) {
+							
+
+						}
+						
+
+						if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
+							$dragDropTrigger.off( 'touchmove.ADVANCED_SLIDER' );
+						}	
+
+
+					} else {
+
+						
+						if ( dataDraggable ) {
+							//right
+							if ( e.pageX > origin_mouse_x ) {				
+								if ( $items.filter( '.active' ).index() > 0 ) _prev.trigger( 'click' );
+							}
+
+							//left
+							if ( e.pageX < origin_mouse_x ) {
+								if ( $items.filter( '.active' ).index() < itemsTotal - 1 ) _next.trigger( 'click' );
+							}
+
+							//down
+							if ( e.pageY > origin_mouse_y ) {
+
+							}
+
+							//up
+							if ( e.pageY < origin_mouse_y ) {
+
+							}	
+
+							$dragDropTrigger.off( 'mouseup.ADVANCED_SLIDER' );
+
+						}	
+
+
+
+					}
+
+
+
+				} );//end: mouseup.ADVANCED_SLIDER touchmove.ADVANCED_SLIDER
+
+
+
+
+			} );// end: mousedown.ADVANCED_SLIDER touchstart.ADVANCED_SLIDER
+			
 		}
 		
 		

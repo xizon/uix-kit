@@ -44,7 +44,7 @@
     position: relative;
     height: 1px;
     background: $dividing-line-color;
-    background: linear-gradient(to right,rgba(220, 220, 220,0) 0,rgba(220, 220, 220,1) 35%,rgba(220, 220, 220,1) 70%,rgba(220, 220, 220,0) 100%);
+    background: linear-gradient(to right,rgba($dividing-line-color,0) 0,rgba($dividing-line-color,1) 35%,rgba($dividing-line-color,1) 70%,rgba($dividing-line-color,0) 100%);
 	
 	&.uix-separator-gradient--black {
 		background: rgba(255,255,255,.1);

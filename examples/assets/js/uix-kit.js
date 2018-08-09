@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  2.0.6
- * ## Last Update         :  August 9, 2018
+ * ## Version             :  2.0.7
+ * ## Last Update         :  August 10, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -22,10 +22,10 @@
 	---------------------------
 	
 	
-	1. Loader 
-    2. Get all custom attributes of an element like "data-*" 
-    3. Body And Header 
-    4. Back to Top 
+	1. Body And Header 
+    2. Loader 
+    3. Back to Top 
+    4. Get all custom attributes of an element like "data-*" 
     5. Navigation 
     6. Videos 
     7. Common Height 
@@ -56,8 +56,8 @@
     32. Flexslider 
     33. Floating Side Element 
     34. Form 
-    35. Form Progress 
-    36. jQuery UI Datepicker 1.11.4 
+    35. jQuery UI Datepicker 1.11.4 
+    36. Form Progress 
     37. Gallery 
     38. Hover Delay Interaction 
     39. Image Shapes 
@@ -81,19 +81,20 @@
     57. Scroll Reveal 
     58. Show More Less 
     59. Smooth Scrolling When Clicking An Anchor Link 
-    60. Source Code View 
-    61. Sticky Elements 
-    62. SVG Map (China) 
-    63. SVG Map (World) 
-    64. Tabs 
-    65. Team Focus 
-    66. Testimonials Carousel 
+    60.","
+    61. Source Code View 
+    62. Sticky Elements 
+    63. SVG Map (China) 
+    64. SVG Map (World) 
+    65. Tabs 
+    66. Team Focus 
     67. Text effect 
     68. Timeline 
     69. Vertical Menu 
     70. Ajax Page Loader (Loading A Page via Ajax Into Div)  
     71. Ajax Push Content  
     72. GSAP Plugins 
+    73. Three.js Plugins 
 
 
 */
@@ -103,8 +104,11 @@ if ( typeof jQuery === 'undefined' || typeof TweenMax === 'undefined' || typeof 
 }
 
 
-
-//Global variables from front pages
+/* 
+ *************************************
+ * Global variables from front pages
+ *************************************
+ */
 var 
 	//If the file is in the root directory, you can leave it empty. 
 	//If in another directory, you can write: "/blog"
@@ -134,7 +138,12 @@ if ( location.hostname === 'localhost' || location.hostname === '127.0.0.1' ) {
 }
 
 
-//Determine whether it is a special browser
+
+/* 
+ *************************************
+ * Determine whether it is a special browser
+ *************************************
+ */
 var browser = {
 	isAndroid : /(android)/i.test(navigator.userAgent),
 	isPC      : !navigator.userAgent.match(/(iPhone|iPod|Android|ios|Mobile)/i),
@@ -144,7 +153,11 @@ var browser = {
 
 
 
-//Core scripts for current site
+/* 
+ *************************************
+ * Core scripts for current site
+ *************************************
+ */
 var APP = (function ( $, window, document ) {
     'use strict';
 
@@ -201,10 +214,12 @@ var APP = (function ( $, window, document ) {
 
 
 
-/*
+/* 
+ *************************************
  * Create GUID / UUID
  *
  * @return {string}                        - The globally-unique identifiers.
+ *************************************
  */
 var crypto = window.crypto || window.msCrypto || null; // IE11 fix
 var UIX_GUID = UIX_GUID || (function() {
@@ -253,11 +268,12 @@ var UIX_GUID = UIX_GUID || (function() {
 })();
 
 
-
-/*
+/* 
+ *************************************
  * Hash Change Event
  *
  * @return {void}                        - The constructor.
+ *************************************
  */
 ( function($){
 
@@ -332,14 +348,15 @@ var UIX_GUID = UIX_GUID || (function() {
     clearTimeout( timeout_id );
   };
 
-})(jQuery);
+} ) ( jQuery );
 
 
-
-/*
+/* 
+ *************************************
  * Get all attributes of an element using jQuery
  *
  * @return {array}                        - Returns a new array.
+ *************************************
  */
 ( function( old ) {
   $.fn.attr = function() {
@@ -360,6 +377,151 @@ var UIX_GUID = UIX_GUID || (function() {
     return old.apply(this, arguments);
   };
 } )( $.fn.attr );
+
+
+
+/* 
+ *************************************
+ * Scroll Lock
+ * @https://gist.github.com/barneycarroll/6550066
+ * @return {void}                        - The constructor.
+ *************************************
+ */
+/*
+	 // Locks the page
+	$.scrollLock( true );
+	
+	// Unlocks the page
+	$.scrollLock( false );
+*/
+
+( function($) {
+    'use strict';
+	$.scrollLock = ( function scrollLockClosure() {
+	   
+		var $html      = $( 'html' ),
+			// State: unlocked by default
+			locked     = false,
+			// State: scroll to revert to
+			prevScroll = {
+				scrollLeft : $( window ).scrollLeft(),
+				scrollTop  : $( window ).scrollTop()
+			},
+			// State: styles to revert to
+			prevStyles = {},
+			lockStyles = {
+				'overflow-y' : 'scroll',
+				'position'   : 'fixed',
+				'width'      : '100%'
+			};
+	
+		// Instantiate cache in case someone tries to unlock before locking
+		saveStyles();
+	
+		// Save context's inline styles in cache
+		function saveStyles() {
+			var styleAttr = $html.attr( 'style' ),
+				styleStrs = [],
+				styleHash = {};
+	
+			if( !styleAttr ){
+				return;
+			}
+	
+			styleStrs = styleAttr.split( /;\s/ );
+	
+			$.each( styleStrs, function serializeStyleProp( styleString ){
+				if( !styleString ) {
+					return;
+				}
+	
+				var keyValue = styleString.split( /\s:\s/ );
+	
+				if( keyValue.length < 2 ) {
+					return;
+				}
+	
+				styleHash[ keyValue[ 0 ] ] = keyValue[ 1 ];
+			} );
+	
+			$.extend( prevStyles, styleHash );
+		}
+	
+		function lock() {
+			var appliedLock = {};
+	
+			// Duplicate execution will break DOM statefulness
+			if( locked ) {
+				return;
+			}
+	
+			// Save scroll state...
+			prevScroll = {
+				scrollLeft : $( window ).scrollLeft(),
+				scrollTop  : $( window ).scrollTop()
+			};
+	
+			// ...and styles
+			saveStyles();
+	
+			// Compose our applied CSS
+			$.extend( appliedLock, lockStyles, {
+				// And apply scroll state as styles
+				'left' : - prevScroll.scrollLeft + 'px',
+				'top'  : - prevScroll.scrollTop  + 'px'
+			} );
+	
+			// Then lock styles...
+			$html.css( appliedLock );
+	
+			// ...and scroll state
+			$( window )
+				.scrollLeft( 0 )
+				.scrollTop( 0 );
+	
+			locked = true;
+		}
+	
+		function unlock() {
+			// Duplicate execution will break DOM statefulness
+			if( !locked ) {
+				return;
+			}
+	
+			// Revert styles
+			$html.attr( 'style', $( '<x>' ).css( prevStyles ).attr( 'style' ) || '' );
+	
+			// Revert scroll values
+			$( window )
+				.scrollLeft( prevScroll.scrollLeft )
+				.scrollTop(  prevScroll.scrollTop );
+	
+			locked = false;
+		}
+	
+		return function scrollLock( on ) {
+			// If an argument is passed, lock or unlock depending on truthiness
+			if( arguments.length ) {
+				if( on ) {
+					lock();
+				}
+				else {
+					unlock();
+				}
+			}
+			// Otherwise, toggle
+			else {
+				if( locked ){
+					unlock();
+				}
+				else {
+					lock();
+				}
+			}
+		};
+	}() );
+
+} ) ( jQuery );
 
 
 /* 
@@ -1895,7 +2057,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.MODAL_DIALOG               = APP.MODAL_DIALOG || {};
-	APP.MODAL_DIALOG.version       = '0.0.1';
+	APP.MODAL_DIALOG.version       = '0.0.2';
     APP.MODAL_DIALOG.documentReady = function( $ ) {
 
 		function getTransitionDuration( elementOrSelector ){
@@ -1949,6 +2111,12 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			if ( $obj.length > 0 ) {
+				
+				
+				// Locks the page
+				$.scrollLock( true );
+					
+
 				if( typeof dataH != typeof undefined && dataH != '' ) {
 					$obj.css( {'height': dataH } );
 				}
@@ -1979,8 +2147,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			if ( $obj.hasClass( 'is-fullscreen' ) ) {
 				setTimeout( function() {
-					$( 'html' ).css( 'overflow-y', 'hidden' );
-					
+
 					if ( !$obj.hasClass( 'is-video' ) ) {
 						$obj.find( '.uix-modal-box__content' ).css( 'overflow-y', 'scroll' );
 					}
@@ -2005,7 +2172,8 @@ APP = ( function ( APP, $, window, document ) {
 			});
 				
 			$( '.uix-modal-box' ).find( '.uix-modal-box__content' ).removeClass( 'js-uix-no-fullscreen' );
-			$( 'html' ).css( 'overflow-y', 'auto' );
+			// Unlocks the page
+			$.scrollLock( false );
 			setTimeout( function() {
 	
 			}, getTransitionDuration( '.uix-modal-box:first' ) );
@@ -2172,6 +2340,222 @@ APP = ( function ( APP, $, window, document ) {
     return APP;
 
 }( APP, jQuery, window, document ) );
+
+
+
+/* 
+ *************************************
+ * <!-- 3D Background -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP._3D_BACKGROUND               = APP._3D_BACKGROUND || {};
+	APP._3D_BACKGROUND.version       = '0.0.2';
+    APP._3D_BACKGROUND.documentReady = function( $ ) {
+
+
+		//grab each 3dAnimate element and pass it into the animate function along with the config data
+		$( '[data-3d-animate]' ).each( function( index, element ) {
+			var config      = $( element ).data( '3d-animate' );
+			
+			
+			if( typeof config === typeof undefined ) {
+				config = false;
+			}
+
+			if ( config ) {
+				
+				if ( Object.prototype.toString.call( config.offset ) == '[object Array]' ) {
+					animate3dMultiElement( config.offset[0], config.offset[1], element, config.reset );
+				} else {
+					animate3dElement( config.offset, element, config.reset );
+				}
+
+			}
+			
+			
+		});
+		
+		
+	
+		/*
+		 * Sets an animation for each element
+		 *
+		 * @param  {number} base           - Base offset value.
+		 * @param  {object} obj            - An HTML element.
+		 * @param  {boolean} reset         - Reset block on mouse leave
+		 * @return {void}                  - The constructor.
+		 */
+		function animate3dElement( base, obj, reset ) {
+
+			var $el      = $( obj ),
+				w        = $el.innerWidth(),
+				h        = $el.innerHeight();
+			
+
+//			TweenMax.set( $el, {
+//				perspective    : 500,
+//				transformStyle : "preserve-3d"
+//			});
+
+
+			
+			// mouse move on block
+			$( obj ).on( 'mousemove touchmove', function( e ) {
+				
+				var mX, 
+					mY,
+					rmX,
+					rmY,
+					touches = e.originalEvent.touches;
+			
+				if ( touches && touches.length ) {
+
+					mX = touches[0].pageX;
+					mY = touches[0].pageY;
+
+				} else {
+
+					mX = e.pageX;
+					mY = e.pageY;
+				}
+				
+				//Find mouse position relative to element
+				rmX = mX - $( this ).offset().left;
+				rmY = mY - $( this ).offset().top;	
+				
+				//console.log('X: ' + rmX + ' Y: ' + rmY );
+	
+				
+				// function to run matrix3D effect on block
+				var tX = mousePosition( rmX, w ),
+					tY = mousePosition( rmY, h );
+
+
+				TweenMax.to( $( this ), 0.2, {
+					rotationY          : tX,
+					rotationX          : tY,
+					backgroundPosition : ( tX + 120 ) + "% 50%",
+				});
+				
+				
+				
+			});
+				
+			
+			if ( reset ) {
+				$( obj ).on( 'mouseleave touchcancel', function() {
+					TweenMax.to( $( this ), 0.5, {
+						rotationY          : 0,
+						rotationX          : 0,
+						backgroundPosition : "120% 50%"
+					});
+				});	
+			}
+				
+
+
+			// make some calculations for mouse position
+			function mousePosition( mousePos, dimension ) {
+				return ( Math.floor( mousePos / dimension * (base*2) ) - base );
+			}
+
+			
+		}
+			
+		
+		
+		/*
+		 * Sets an animation with parallax for each element
+		 *
+		 * @param  {number} base           - Base offset value.
+		 * @param  {number} multiple       - The power of target number.
+		 * @param  {object} obj            - An HTML element.
+		 * @param  {boolean} reset         - Reset block on mouse leave
+		 * @return {void}                  - The constructor.
+		 */
+		function animate3dMultiElement( base, multiple, obj, reset ) {
+
+			//get the specs of the element
+			var divOffset = $( obj ).offset(),
+				divTop    = divOffset.top,
+				divLeft   = divOffset.left,
+				divWidth  = $( obj ).innerWidth(),
+				divHeight = $( obj ).innerHeight();
+
+			
+	
+			//set an onmousemove event on the element
+			$( obj ).on( 'mousemove touchmove', function( e ){
+
+				var pctX, 
+					pctY,
+					touches = e.originalEvent.touches;
+			
+				if ( touches && touches.length ) {
+
+					pctX = ( touches[0].pageX - divLeft )/divWidth;
+					pctY = ( touches[0].pageY - divTop )/divHeight;
+
+				} else {
+
+					pctX = ( e.pageX - divLeft )/divWidth;
+					pctY = ( e.pageY - divTop )/divHeight;
+				}
+
+				
+				
+
+				$( this ).children().each( function( index, elementSub ) {
+					var x         = pctX * ( base*Math.pow( multiple, index ) ),
+						y         = pctY * ( base*Math.pow( multiple, index ) ),
+						z         = 0,
+						deg       = pctY * ( 180 / Math.PI ),
+						rotateDeg = parseFloat( deg - 35 );
+					
+					
+					TweenMax.to( $( elementSub ), 0.2, {
+						css: {
+							'transform' : 'translate('+ x +'px ,'+ y +'px) rotate3d( -1, 1, 0, '+ rotateDeg +'deg )'
+						}
+					});
+			
+					
+				});
+
+			});
+			
+			if ( reset ) {
+				$( obj ).on( 'mouseleave touchcancel', function() {
+					
+					
+					$( this ).children().each( function( index, elementSub ) {
+
+						TweenMax.to( $( elementSub ), 0.5, {
+							css: {
+								'transform' : 'translate(0,0) rotate3d( -1, 1, 0, 0deg )'
+							}
+						});
+					});
+				});	
+			}
+						
+			
+
+		}
+		
+		
+    };
+
+    APP.components.documentReady.push( APP._3D_BACKGROUND.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
 
 
 
@@ -2394,222 +2778,6 @@ APP = ( function ( APP, $, window, document ) {
     return APP;
 
 }( APP, jQuery, window, document ) );
-
-
-
-
-
-/* 
- *************************************
- * <!-- 3D Background -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP._3D_BACKGROUND               = APP._3D_BACKGROUND || {};
-	APP._3D_BACKGROUND.version       = '0.0.2';
-    APP._3D_BACKGROUND.documentReady = function( $ ) {
-
-
-		//grab each 3dAnimate element and pass it into the animate function along with the config data
-		$( '[data-3d-animate]' ).each( function( index, element ) {
-			var config      = $( element ).data( '3d-animate' );
-			
-			
-			if( typeof config === typeof undefined ) {
-				config = false;
-			}
-
-			if ( config ) {
-				
-				if ( Object.prototype.toString.call( config.offset ) == '[object Array]' ) {
-					animate3dMultiElement( config.offset[0], config.offset[1], element, config.reset );
-				} else {
-					animate3dElement( config.offset, element, config.reset );
-				}
-
-			}
-			
-			
-		});
-		
-		
-	
-		/*
-		 * Sets an animation for each element
-		 *
-		 * @param  {number} base           - Base offset value.
-		 * @param  {object} obj            - An HTML element.
-		 * @param  {boolean} reset         - Reset block on mouse leave
-		 * @return {void}                  - The constructor.
-		 */
-		function animate3dElement( base, obj, reset ) {
-
-			var $el      = $( obj ),
-				w        = $el.innerWidth(),
-				h        = $el.innerHeight();
-			
-
-//			TweenMax.set( $el, {
-//				perspective    : 500,
-//				transformStyle : "preserve-3d"
-//			});
-
-
-			
-			// mouse move on block
-			$( obj ).on( 'mousemove touchmove', function( e ) {
-				
-				var mX, 
-					mY,
-					rmX,
-					rmY,
-					touches = e.originalEvent.touches;
-			
-				if ( touches && touches.length ) {
-
-					mX = touches[0].pageX;
-					mY = touches[0].pageY;
-
-				} else {
-
-					mX = e.pageX;
-					mY = e.pageY;
-				}
-				
-				//Find mouse position relative to element
-				rmX = mX - $( this ).offset().left;
-				rmY = mY - $( this ).offset().top;	
-				
-				//console.log('X: ' + rmX + ' Y: ' + rmY );
-	
-				
-				// function to run matrix3D effect on block
-				var tX = mousePosition( rmX, w ),
-					tY = mousePosition( rmY, h );
-
-
-				TweenMax.to( $( this ), 0.2, {
-					rotationY          : tX,
-					rotationX          : tY,
-					backgroundPosition : ( tX + 120 ) + "% 50%",
-				});
-				
-				
-				
-			});
-				
-			
-			if ( reset ) {
-				$( obj ).on( 'mouseleave touchcancel', function() {
-					TweenMax.to( $( this ), 0.5, {
-						rotationY          : 0,
-						rotationX          : 0,
-						backgroundPosition : "120% 50%"
-					});
-				});	
-			}
-				
-
-
-			// make some calculations for mouse position
-			function mousePosition( mousePos, dimension ) {
-				return ( Math.floor( mousePos / dimension * (base*2) ) - base );
-			}
-
-			
-		}
-			
-		
-		
-		/*
-		 * Sets an animation with parallax for each element
-		 *
-		 * @param  {number} base           - Base offset value.
-		 * @param  {number} multiple       - The power of target number.
-		 * @param  {object} obj            - An HTML element.
-		 * @param  {boolean} reset         - Reset block on mouse leave
-		 * @return {void}                  - The constructor.
-		 */
-		function animate3dMultiElement( base, multiple, obj, reset ) {
-
-			//get the specs of the element
-			var divOffset = $( obj ).offset(),
-				divTop    = divOffset.top,
-				divLeft   = divOffset.left,
-				divWidth  = $( obj ).innerWidth(),
-				divHeight = $( obj ).innerHeight();
-
-			
-	
-			//set an onmousemove event on the element
-			$( obj ).on( 'mousemove touchmove', function( e ){
-
-				var pctX, 
-					pctY,
-					touches = e.originalEvent.touches;
-			
-				if ( touches && touches.length ) {
-
-					pctX = ( touches[0].pageX - divLeft )/divWidth;
-					pctY = ( touches[0].pageY - divTop )/divHeight;
-
-				} else {
-
-					pctX = ( e.pageX - divLeft )/divWidth;
-					pctY = ( e.pageY - divTop )/divHeight;
-				}
-
-				
-				
-
-				$( this ).children().each( function( index, elementSub ) {
-					var x         = pctX * ( base*Math.pow( multiple, index ) ),
-						y         = pctY * ( base*Math.pow( multiple, index ) ),
-						z         = 0,
-						deg       = pctY * ( 180 / Math.PI ),
-						rotateDeg = parseFloat( deg - 35 );
-					
-					
-					TweenMax.to( $( elementSub ), 0.2, {
-						css: {
-							'transform' : 'translate('+ x +'px ,'+ y +'px) rotate3d( -1, 1, 0, '+ rotateDeg +'deg )'
-						}
-					});
-			
-					
-				});
-
-			});
-			
-			if ( reset ) {
-				$( obj ).on( 'mouseleave touchcancel', function() {
-					
-					
-					$( this ).children().each( function( index, elementSub ) {
-
-						TweenMax.to( $( elementSub ), 0.5, {
-							css: {
-								'transform' : 'translate(0,0) rotate3d( -1, 1, 0, 0deg )'
-							}
-						});
-					});
-				});	
-			}
-						
-			
-
-		}
-		
-		
-    };
-
-    APP.components.documentReady.push( APP._3D_BACKGROUND.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
 
 
 
@@ -3047,113 +3215,48 @@ APP = ( function ( APP, $, window, document ) {
 
 			//Drag and Drop
 			//-------------------------------------	
-			var $dragDropTrigger = $wrapper;
+			var $dragDropTrigger = $wrapper,
+				hammerProps      = {};
+
+			
+			if ( !dataDraggable ) {
+				hammerProps = {
+					inputClass: Hammer.TouchInput
+				};
+			}
 
 			//Mouse event
-			$dragDropTrigger.on( 'mousedown._3D_CAROUSEL touchstart._3D_CAROUSEL', function( e ) {
-				e.preventDefault();
+			//Hammer.js pan event only for touch devices and not for desktop computer Click+Drag
+			var direction,
+				dragDropElement = $dragDropTrigger[0],
+				dragDropMC      = new Hammer( dragDropElement, hammerProps );
+			
+			
+			dragDropMC.on( 'panright press panleft', function( ev ) {
 
-				var touches = e.originalEvent.touches;
-
-				$( this ).addClass( 'dragging' );
-				$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
-				$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
-
-
-				if ( touches && touches.length ) {	
-					$( this ).data( 'origin_mouse_x', parseInt( touches[0].pageX ) );
-					$( this ).data( 'origin_mouse_y', parseInt( touches[0].pageY ) );
-
-				} else {
-
-					if ( dataDraggable ) {
-						$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
-						$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );	
-					}
+				//Set the direction in here
+				direction = ev.type;
+			});
 
 
+
+			dragDropMC.on( 'panend', function( ev ) {
+
+				//Use the direction in here
+				//You know the pan has ended
+				//and you know which action they were taking
+				if ( direction == 'panleft' ) {
+					itemUpdates( 'clockwise' );
 				}
 
-				$dragDropTrigger.on( 'mouseup._3D_CAROUSEL touchmove._3D_CAROUSEL', function( e ) {
-					e.preventDefault();
-
-					$( this ).removeClass( 'dragging' );
-					var touches        = e.originalEvent.touches,
-						origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
-						origin_mouse_y = $( this ).data( 'origin_mouse_y' );
-
-					if ( touches && touches.length ) {
-
-						var deltaX = origin_mouse_x - touches[0].pageX,
-							deltaY = origin_mouse_y - touches[0].pageY;
-
-						if ( deltaX >= 50) {
-							//--- left
-							itemUpdates( 'clockwise' );
-
-
-						}
-						if ( deltaX <= -50) {
-							//--- right
-							itemUpdates( 'counter-clockwise' );
-
-
-						}
-						if ( deltaY >= 50) {
-							//--- up
-
-
-						}
-						if ( deltaY <= -50) {
-							//--- down
-
-						}
-
-						if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
-							$dragDropTrigger.off( 'touchmove._3D_CAROUSEL' );
-						}	
-
-
-					} else {
-
-						if ( dataDraggable ) {
-							//right
-							if ( e.pageX > origin_mouse_x ) {
-								itemUpdates( 'counter-clockwise' );
-							}
-
-							//left
-							if ( e.pageX < origin_mouse_x ) {
-								itemUpdates( 'clockwise' );
-								
-							}
-
-							//down
-							if ( e.pageY > origin_mouse_y ) {
-
-							}
-
-							//up
-							if ( e.pageY < origin_mouse_y ) {
-
-							}	
-
-							$dragDropTrigger.off( 'mouseup._3D_CAROUSEL' );
-
-						}	
+				if ( direction == 'panright' ) {
+					itemUpdates( 'counter-clockwise' );
+				}			
 
 
 
-					}
+			});	
 
-
-
-				} );
-
-
-
-
-			} );
 			
 
 			/*
@@ -4315,120 +4418,49 @@ APP = ( function ( APP, $, window, document ) {
 				
 				//Drag and Drop
 				//-------------------------------------	
-				var $dragDropTrigger = $items;
+				var $dragDropTrigger = $this,
+					hammerProps      = {};
 
 				//Make the cursor a move icon when a user hovers over an item
 				if ( dataDraggable && dataDraggableCursor != '' && dataDraggableCursor != false ) $dragDropTrigger.css( 'cursor', dataDraggableCursor );
 				
-
+				if ( !dataDraggable ) {
+					hammerProps = {
+						inputClass: Hammer.TouchInput
+					};
+				}
 
 				//Mouse event
-				$dragDropTrigger.on( 'mousedown.ADVANCED_CONTENT_SLIDER touchstart.ADVANCED_CONTENT_SLIDER', function( e ) {
-					e.preventDefault();
+				//Hammer.js pan event only for touch devices and not for desktop computer Click+Drag
+				var direction,
+					dragDropElement = $dragDropTrigger[0],
+					dragDropMC      = new Hammer( dragDropElement, hammerProps );
+				
+				dragDropMC.on( 'panright press panleft', function( ev ) {
 
-					var touches = e.originalEvent.touches;
+					//Set the direction in here
+					direction = ev.type;
+				});
+
+				
+				
+				dragDropMC.on( 'panend', function( ev ) {
 					
-					$( this ).addClass( 'dragging' );
-					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
-					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
-					
-					
-					if ( touches && touches.length ) {	
-						$( this ).data( 'origin_mouse_x', parseInt( touches[0].pageX ) );
-						$( this ).data( 'origin_mouse_y', parseInt( touches[0].pageY ) );
-
-					} else {
-						
-						if ( dataDraggable ) {
-							$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
-							$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );	
-						}
-
-
+					//Use the direction in here
+					//You know the pan has ended
+					//and you know which action they were taking
+					if ( direction == 'panleft' ) {
+						sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );	
 					}
 					
-					$dragDropTrigger.on( 'mouseup.ADVANCED_CONTENT_SLIDER touchmove.ADVANCED_CONTENT_SLIDER', function( e ) {
-						e.preventDefault();
-
-						$( this ).removeClass( 'dragging' );
-						var touches        = e.originalEvent.touches,
-							origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
-							origin_mouse_y = $( this ).data( 'origin_mouse_y' );
-
-						if ( touches && touches.length ) {
-
-							var deltaX = origin_mouse_x - touches[0].pageX,
-								deltaY = origin_mouse_y - touches[0].pageY;
-
-							if ( deltaX >= 50) {
-								//--- left
-								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
-
-
-							}
-							if ( deltaX <= -50) {
-								//--- right
-								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
-
-
-							}
-							if ( deltaY >= 50) {
-								//--- up
-
-
-							}
-							if ( deltaY <= -50) {
-								//--- down
-
-							}
-
-							if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
-								$dragDropTrigger.off( 'touchmove.ADVANCED_CONTENT_SLIDER' );
-							}	
-
-
-						} else {
-							
-							if ( dataDraggable ) {
-								//right
-								if ( e.pageX > origin_mouse_x ) {
-									sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
-								}
-
-								//left
-								if ( e.pageX < origin_mouse_x ) {
-									sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
-								}
-
-								//down
-								if ( e.pageY > origin_mouse_y ) {
-
-								}
-
-								//up
-								if ( e.pageY < origin_mouse_y ) {
-
-								}	
-
-								$dragDropTrigger.off( 'mouseup.ADVANCED_CONTENT_SLIDER' );
-								
-							}	
-							
-							
-							
-						}
-
-
-
-					} );
+					if ( direction == 'panright' ) {
+						sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
+					}			
 
 					
-					
 
-				} );
-
+				});	
 			
-				
 			});	
 			
 		}
@@ -4513,7 +4545,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.ADVANCED_SLIDER_FILTER               = APP.ADVANCED_SLIDER_FILTER || {};
-	APP.ADVANCED_SLIDER_FILTER.version       = '0.0.8';
+	APP.ADVANCED_SLIDER_FILTER.version       = '0.0.9';
     APP.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 	
@@ -4746,15 +4778,17 @@ APP = ( function ( APP, $, window, document ) {
 				dataControlsPagination   = $this.data( 'controls-pagination' ),
 				dataControlsArrows       = $this.data( 'controls-arrows' ),
 				dataLoop                 = $this.data( 'loop' ),
-				dataFilterTexture        = $this.data( 'filter-texture' );
-
+				dataFilterTexture        = $this.data( 'filter-texture' ),
+				dataDraggable            = $this.data( 'draggable' ),
+				dataDraggableCursor      = $this.data( 'draggable-cursor' );
 	
 			
 			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider-sp__pagination';
 			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
 			if( typeof dataLoop === typeof undefined ) dataLoop = false;
 			if( typeof dataFilterTexture === typeof undefined || !dataFilterTexture || dataFilterTexture == '' ) dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
-
+			if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
+			if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
 
 				
 
@@ -5349,11 +5383,12 @@ APP = ( function ( APP, $, window, document ) {
 				
 				
 				//----------------------------------------------------------------------------------
-				//--------------------------------- Liquid Distortion Effect 4 -----------------------
+				//--------------------------------- Parallax Effect -------------------------------
 				//----------------------------------------------------------------------------------
 				//Usage of returning sprite object: container__items.children[index]
 				if ( $this.hasClass( 'uix-advanced-slider-sp--eff-parallax' ) ) {
 
+					
 					$this.find( '.uix-advanced-slider-sp__item' ).each( function( index )  {
 
 						var $thisItem = $( this );
@@ -5469,27 +5504,6 @@ APP = ( function ( APP, $, window, document ) {
 						stage__filter.addChild( curSpriteMask ); //Do not add to the container
 						
 
-						//next mask
-//						var curSpriteMaskNext = new PIXI.Graphics();
-//						curSpriteMaskNext.lineStyle( 0 );
-//						curSpriteMaskNext.beginFill( 0xFFFFFF );
-//						curSpriteMaskNext.moveTo(0,0);
-//						curSpriteMaskNext.lineTo( renderer.view.width, 0 );
-//						curSpriteMaskNext.lineTo( renderer.view.width, renderer.view.height );
-//						curSpriteMaskNext.lineTo( 0, renderer.view.height );
-//						curSpriteMaskNext.endFill();
-//						
-//						curSpriteMaskNext.position.x = 0;
-//						curSpriteMaskNext.position.y = 0;
-//						
-//						
-//						container__items.mask = curSpriteMaskNext;
-//						stage__filter.addChild( curSpriteMaskNext ); //Do not add to the container
-//						
-//
-//						
-						
-						
 
 						//Animation Effects
 						//-------------------------------------
@@ -5942,66 +5956,123 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
-			//Added touch method to mobile device
+			//Added touch method to mobile device and desktop
 			//-------------------------------------	
-			var startX,
-				startY;
-
-
-			$this.on( 'touchstart.ADVANCED_SLIDER_FILTER', function( event ) {
-				var touches = event.originalEvent.touches;
-				if ( touches && touches.length ) {
-					startX = touches[0].pageX;
-					startY = touches[0].pageY;
-
-
-					$this.on( 'touchmove.ADVANCED_SLIDER_FILTER', function( event ) {
-
-						var touches = event.originalEvent.touches;
-						if ( touches && touches.length ) {
-							var deltaX = startX - touches[0].pageX,
-								deltaY = startY - touches[0].pageY;
-
-							if ( deltaX >= 50) {
-								//--- swipe left
-
-
-								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, sliderWrapper, 'prev' );
-
-
-								//Pause the auto play event
-								clearInterval( timer );
-
-							}
-							if ( deltaX <= -50) {
-								//--- swipe right
-
-								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, sliderWrapper, 'next' );
-
-
-								//Pause the auto play event
-								clearInterval( timer );							
-
-
-							}
-							if ( deltaY >= 50) {
-								//--- swipe up
-
-
-							}
-							if ( deltaY <= -50) {
-								//--- swipe down
-
-							}
-							if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
-								$this.off( 'touchmove.ADVANCED_SLIDER_FILTER' );
-							}
-						}
-
-					});
-				}	
-			});
+			var $dragDropTrigger = $items;
 			
+
+			//Make the cursor a move icon when a user hovers over an item
+			if ( dataDraggable && dataDraggableCursor != '' && dataDraggableCursor != false ) $dragDropTrigger.css( 'cursor', dataDraggableCursor );
+
+
+			//Mouse event
+			$dragDropTrigger.on( 'mousedown.ADVANCED_SLIDER_FILTER touchstart.ADVANCED_SLIDER_FILTER', function( e ) {
+				e.preventDefault();
+
+				var touches = e.originalEvent.touches;
+
+				$( this ).addClass( 'dragging' );
+				$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
+				$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
+
+
+				if ( touches && touches.length ) {	
+					$( this ).data( 'origin_mouse_x', parseInt( touches[0].pageX ) );
+					$( this ).data( 'origin_mouse_y', parseInt( touches[0].pageY ) );
+
+				} else {
+
+					if ( dataDraggable ) {
+						$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
+						$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );	
+					}
+
+
+				}
+
+				$dragDropTrigger.on( 'mouseup.ADVANCED_SLIDER_FILTER touchmove.ADVANCED_SLIDER_FILTER', function( e ) {
+					e.preventDefault();
+
+					$( this ).removeClass( 'dragging' );
+					var touches        = e.originalEvent.touches,
+						origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
+						origin_mouse_y = $( this ).data( 'origin_mouse_y' );
+
+					if ( touches && touches.length ) {
+
+						var deltaX = origin_mouse_x - touches[0].pageX,
+							deltaY = origin_mouse_y - touches[0].pageY;
+
+						//--- left
+						if ( deltaX >= 50) {
+							if ( $items.filter( '.active' ).index() < itemsTotal - 1 ) _next.trigger( 'click' );
+						}
+						
+						//--- right
+						if ( deltaX <= -50) {
+							if ( $items.filter( '.active' ).index() > 0 ) _prev.trigger( 'click' );
+						}
+						
+						//--- up
+						if ( deltaY >= 50) {
+							
+
+						}
+						
+						//--- down
+						if ( deltaY <= -50) {
+							
+
+						}
+						
+
+						if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
+							$dragDropTrigger.off( 'touchmove.ADVANCED_SLIDER_FILTER' );
+						}	
+
+
+					} else {
+
+						
+						if ( dataDraggable ) {
+							//right
+							if ( e.pageX > origin_mouse_x ) {				
+								if ( $items.filter( '.active' ).index() > 0 ) _prev.trigger( 'click' );
+							}
+
+							//left
+							if ( e.pageX < origin_mouse_x ) {
+								if ( $items.filter( '.active' ).index() < itemsTotal - 1 ) _next.trigger( 'click' );
+							}
+
+							//down
+							if ( e.pageY > origin_mouse_y ) {
+
+							}
+
+							//up
+							if ( e.pageY < origin_mouse_y ) {
+
+							}	
+
+							$dragDropTrigger.off( 'mouseup.ADVANCED_SLIDER_FILTER' );
+
+						}	
+
+
+
+					}
+
+
+
+				} );//end: mouseup.ADVANCED_SLIDER_FILTER touchmove.ADVANCED_SLIDER_FILTER
+
+
+
+
+			} );// end: mousedown.ADVANCED_SLIDER_FILTER touchstart.ADVANCED_SLIDER_FILTER
+
+		
 
 		}
 		
@@ -6053,7 +6124,10 @@ APP = ( function ( APP, $, window, document ) {
 				if ( elementIndex == 0 ) $( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--prev' ).addClass( 'disabled' );
 			}
 
+
+
 			// To determine if it is a touch screen.
+			//-------------------------------------
 			if ( Modernizr.touchevents ) {
 				if ( elementIndex == total ) elementIndex = total-1;
 				if ( elementIndex < 0 ) elementIndex = 0;	
@@ -6075,13 +6149,14 @@ APP = ( function ( APP, $, window, document ) {
 			}
 			
 			//Determine the direction and add class to switching direction indicator.
+			//-------------------------------------
 			var dirIndicatorClass = '';
 			if ( dir == 'prev' ) dirIndicatorClass = 'prev';
 			if ( dir == 'next' ) dirIndicatorClass = 'next';
 			
 
-
 			//Add transition class to Controls Pagination
+			//-------------------------------------
 			$( dataControlsPagination ).find( 'li a' ).removeClass( 'leave' );
 			$( dataControlsPagination ).find( 'li a.active' ).removeClass( 'active' ).addClass( 'leave' );
 			$( dataControlsPagination ).find( 'li a[data-index="'+elementIndex+'"]' ).addClass( 'active' ).removeClass( 'leave' );
@@ -6089,6 +6164,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			//Add transition class to each item
+			//-------------------------------------	
 			$items.removeClass( 'leave prev next' );
 			$items.addClass( dirIndicatorClass );
 			slider.find( '.uix-advanced-slider-sp__item.active' ).removeClass( 'active' ).addClass( 'leave ' + dirIndicatorClass );
@@ -6116,8 +6192,53 @@ APP = ( function ( APP, $, window, document ) {
 				canvasDefaultInit( $current );
 			}, animDuration );
 			
+			
 			//Canvas Interactions
 			//-------------------------------------
+			
+			//-- Brightness Effect
+			if ( slider.hasClass( 'uix-advanced-slider-sp--eff-brightness' ) ) {
+
+			}
+
+
+
+			//-- Liquid Distortion Effect
+			if ( slider.hasClass( 'uix-advanced-slider-sp--eff-liquid' ) ) {
+
+			}
+
+
+
+			//-- Liquid Distortion Effect 2
+			if ( slider.hasClass( 'uix-advanced-slider-sp--eff-liquid2' ) ) {
+
+			}
+
+
+			//-- Liquid Distortion Effect 3
+			if ( slider.hasClass( 'uix-advanced-slider-sp--eff-liquid3' ) ) {
+
+			}
+
+
+
+			//-- Parallax Effect 
+			if ( slider.hasClass( 'uix-advanced-slider-sp--eff-parallax' ) ) {
+
+				if ( dataLoop ) {
+					if ( elementIndex == 0 ) dir = 'prev';
+				}
+
+			}
+
+			//-- 3D Rotating Effect
+			if ( slider.hasClass( 'uix-advanced-slider-sp--eff-3d-rotating' ) ) {
+
+			}
+			
+			
+			
 			transitionInteractions( elementIndex, $items.filter( '.leave' ).index(), slider, 'in', dir );
 			
 
@@ -6687,7 +6808,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 				
 				//----------------------------------------------------------------------------------
-				//--------------------------------- Liquid Distortion Effect 4 -----------------------
+				//--------------------------------- Parallax Effect -----------------------------
 				//----------------------------------------------------------------------------------
 				if ( slider.hasClass( 'uix-advanced-slider-sp--eff-parallax' ) ) {
 					
@@ -7193,7 +7314,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.ADVANCED_SLIDER               = APP.ADVANCED_SLIDER || {};
-	APP.ADVANCED_SLIDER.version       = '0.0.6';
+	APP.ADVANCED_SLIDER.version       = '0.0.7';
     APP.ADVANCED_SLIDER.pageLoaded    = function() {
 
 		var $window                   = $( window ),
@@ -7385,14 +7506,16 @@ APP = ( function ( APP, $, window, document ) {
 				itemsTotal               = $items.length,
 				dataControlsPagination   = $this.data( 'controls-pagination' ),
 				dataControlsArrows       = $this.data( 'controls-arrows' ),
-				dataLoop                 = $this.data( 'loop' );
-
+				dataLoop                 = $this.data( 'loop' ),
+				dataDraggable            = $this.data( 'draggable' ),
+				dataDraggableCursor      = $this.data( 'draggable-cursor' );
 	
 			
 			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider-sp__pagination';
 			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
 			if( typeof dataLoop === typeof undefined ) dataLoop = false;
-
+			if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
+			if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
 				
 
 		    //Prevent bubbling
@@ -7486,67 +7609,122 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
-			//Added touch method to mobile device
+			//Added touch method to mobile device and desktop
 			//-------------------------------------	
-			var startX,
-				startY;
-
-
-			$this.on( 'touchstart.ADVANCED_SLIDER', function( event ) {
-				var touches = event.originalEvent.touches;
-				if ( touches && touches.length ) {
-					startX = touches[0].pageX;
-					startY = touches[0].pageY;
-
-
-					$this.on( 'touchmove.ADVANCED_SLIDER', function( event ) {
-
-						var touches = event.originalEvent.touches;
-						if ( touches && touches.length ) {
-							var deltaX = startX - touches[0].pageX,
-								deltaY = startY - touches[0].pageY;
-
-							if ( deltaX >= 50) {
-								//--- swipe left
-
-
-								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, sliderWrapper, 'prev' );
-
-
-								//Pause the auto play event
-								clearInterval( timer );
-
-							}
-							if ( deltaX <= -50) {
-								//--- swipe right
-
-								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, sliderWrapper, 'next' );
-
-
-								//Pause the auto play event
-								clearInterval( timer );							
-
-
-							}
-							if ( deltaY >= 50) {
-								//--- swipe up
-
-
-							}
-							if ( deltaY <= -50) {
-								//--- swipe down
-
-							}
-							if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
-								$this.off( 'touchmove.ADVANCED_SLIDER' );
-							}
-						}
-
-					});
-				}	
-			});
+			var $dragDropTrigger = $items;
 			
 
+			//Make the cursor a move icon when a user hovers over an item
+			if ( dataDraggable && dataDraggableCursor != '' && dataDraggableCursor != false ) $dragDropTrigger.css( 'cursor', dataDraggableCursor );
+
+
+			//Mouse event
+			$dragDropTrigger.on( 'mousedown.ADVANCED_SLIDER touchstart.ADVANCED_SLIDER', function( e ) {
+				e.preventDefault();
+
+				var touches = e.originalEvent.touches;
+
+				$( this ).addClass( 'dragging' );
+				$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
+				$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
+
+
+				if ( touches && touches.length ) {	
+					$( this ).data( 'origin_mouse_x', parseInt( touches[0].pageX ) );
+					$( this ).data( 'origin_mouse_y', parseInt( touches[0].pageY ) );
+
+				} else {
+
+					if ( dataDraggable ) {
+						$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
+						$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );	
+					}
+
+
+				}
+
+				$dragDropTrigger.on( 'mouseup.ADVANCED_SLIDER touchmove.ADVANCED_SLIDER', function( e ) {
+					e.preventDefault();
+
+					$( this ).removeClass( 'dragging' );
+					var touches        = e.originalEvent.touches,
+						origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
+						origin_mouse_y = $( this ).data( 'origin_mouse_y' );
+
+					if ( touches && touches.length ) {
+
+						var deltaX = origin_mouse_x - touches[0].pageX,
+							deltaY = origin_mouse_y - touches[0].pageY;
+
+						//--- left
+						if ( deltaX >= 50) {
+							if ( $items.filter( '.active' ).index() < itemsTotal - 1 ) _next.trigger( 'click' );
+						}
+						
+						//--- right
+						if ( deltaX <= -50) {
+							if ( $items.filter( '.active' ).index() > 0 ) _prev.trigger( 'click' );
+						}
+						
+						//--- up
+						if ( deltaY >= 50) {
+							
+
+						}
+						
+						//--- down
+						if ( deltaY <= -50) {
+							
+
+						}
+						
+
+						if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
+							$dragDropTrigger.off( 'touchmove.ADVANCED_SLIDER' );
+						}	
+
+
+					} else {
+
+						
+						if ( dataDraggable ) {
+							//right
+							if ( e.pageX > origin_mouse_x ) {				
+								if ( $items.filter( '.active' ).index() > 0 ) _prev.trigger( 'click' );
+							}
+
+							//left
+							if ( e.pageX < origin_mouse_x ) {
+								if ( $items.filter( '.active' ).index() < itemsTotal - 1 ) _next.trigger( 'click' );
+							}
+
+							//down
+							if ( e.pageY > origin_mouse_y ) {
+
+							}
+
+							//up
+							if ( e.pageY < origin_mouse_y ) {
+
+							}	
+
+							$dragDropTrigger.off( 'mouseup.ADVANCED_SLIDER' );
+
+						}	
+
+
+
+					}
+
+
+
+				} );//end: mouseup.ADVANCED_SLIDER touchmove.ADVANCED_SLIDER
+
+
+
+
+			} );// end: mousedown.ADVANCED_SLIDER touchstart.ADVANCED_SLIDER
+			
 		}
 		
 		
@@ -8784,11 +8962,10 @@ APP = ( function ( APP, $, window, document ) {
 			
 			//Total counter selector
 			//Current counter selector.
-			var countTotalSelector = ( dataCountTotal ) ? $( dataCountTotal ) : $( 'p.count em.count' ), 
-				countCurSelector   = ( dataCountCur ) ? $( dataCountCur ) : $( 'p.count em.current' );
+			var countTotalSelector = ( dataCountTotal ) ? $( dataCountTotal ) : $( '.uix-flexslider__mycontrols__count em.count' ), 
+				countCurSelector   = ( dataCountCur ) ? $( dataCountCur ) : $( '.uix-flexslider__mycontrols__count em.current' );
 			
 			
-
 			
 			// Fires when the slider loads the first slide.
 			// Fires after each slider animation completes.
@@ -8957,8 +9134,8 @@ APP = ( function ( APP, $, window, document ) {
 
 				//Display counter
 				//-------------------------------------
-				if ( sliderWrapper.find( '.count' ).length == 0 ) {
-					if ( sliderWrapper.closest( 'section' ).find( '.count' ).length > 0 ) {
+				if ( sliderWrapper.find( '.uix-flexslider__mycontrols__count' ).length == 0 ) {
+					if ( sliderWrapper.closest( 'section' ).find( '.uix-flexslider__mycontrols__count' ).length > 0 ) {
 						var showCountTotal = count,
 							showCountCur   = curIndex + 1;
 						
@@ -15299,9 +15476,9 @@ APP = ( function ( APP, $, window, document ) {
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
-    APP.MOUSEWHEEL_INTERACTION               = APP.MOUSEWHEEL_INTERACTION || {};
-	APP.MOUSEWHEEL_INTERACTION.version       = '0.0.1';
-    APP.MOUSEWHEEL_INTERACTION.documentReady = function( $ ) {
+    APP.SCROLL_LOCK               = APP.SCROLL_LOCK || {};
+	APP.SCROLL_LOCK.version       = '0.0.1';
+    APP.SCROLL_LOCK.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
 		if ( !$( 'body' ).hasClass( 'page-mousewheel-eff' ) ) return false;
@@ -15374,7 +15551,7 @@ APP = ( function ( APP, $, window, document ) {
 		
     };
 
-    APP.components.documentReady.push( APP.MOUSEWHEEL_INTERACTION.documentReady );
+    APP.components.documentReady.push( APP.SCROLL_LOCK.documentReady );
     return APP;
 
 }( APP, jQuery, window, document ) );
@@ -15604,158 +15781,72 @@ APP = ( function ( APP, $, window, document ) {
 			
 			//Drag and Drop
 			//-------------------------------------	
-			var $dragDropTrigger = $carouselItem;
+			var $dragDropTrigger = $carouselWrapper,
+				hammerProps      = {};
 
 			//Make the cursor a move icon when a user hovers over an item
 			if ( carouseDraggable && carouseDraggableCursor != '' && carouseDraggableCursor != false ) $dragDropTrigger.css( 'cursor', carouseDraggableCursor );
 
-
+			if ( !carouseDraggable ) {
+				hammerProps = {
+					inputClass: Hammer.TouchInput
+				};
+			}
 
 			//Mouse event
-			$dragDropTrigger.on( 'mousedown.MULTI_ITEMS_CAROUSEL touchstart.MULTI_ITEMS_CAROUSEL', function( e ) {
-				e.preventDefault();
+			//Hammer.js pan event only for touch devices and not for desktop computer Click+Drag
+			var direction,
+				dragDropElement = $dragDropTrigger[0],
+				dragDropMC      = new Hammer( dragDropElement, hammerProps );
+			
+			
+			dragDropMC.on( 'panright press panleft panup pandown', function( ev ) {
 
-				var touches = e.originalEvent.touches;
+				//Set the direction in here
+				direction = ev.type;
+			});
 
-				$( this ).addClass( 'dragging' );
-				$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
-				$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
+			
 
 
-				if ( touches && touches.length ) {	
-					$( this ).data( 'origin_mouse_x', parseInt( touches[0].pageX ) );
-					$( this ).data( 'origin_mouse_y', parseInt( touches[0].pageY ) );
+			dragDropMC.on( 'panend', function( ev ) {
 
-				} else {
+			
+				//Use the direction in here
+				//You know the pan has ended
+				//and you know which action they were taking
+				if ( direction == 'panleft' || direction == 'panup' ) {
+					goSteps++;
 
-					if ( carouseDraggable ) {
-						$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
-						$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );	
+					//Loop items
+					if ( carouselLoop ) {
+						if ( goSteps > lastSteps ) goSteps = 0;
+					} else {
+						if ( goSteps > lastSteps ) goSteps = lastSteps;
 					}
 
-
+					itemUpdates( $carouselWrapper, false, carouselNext, carouselPrev, goSteps );
 				}
 
-				$dragDropTrigger.on( 'mouseup.MULTI_ITEMS_CAROUSEL touchmove.MULTI_ITEMS_CAROUSEL', function( e ) {
-					e.preventDefault();
+				if ( direction == 'panright' || direction == 'pandown' ) {
+					goSteps--;
 
-					$( this ).removeClass( 'dragging' );
-					var touches        = e.originalEvent.touches,
-						origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
-						origin_mouse_y = $( this ).data( 'origin_mouse_y' );
-
-					if ( touches && touches.length ) {
-
-						var deltaX = origin_mouse_x - touches[0].pageX,
-							deltaY = origin_mouse_y - touches[0].pageY;
-
-						if ( deltaX >= 50) {
-							//--- left
-
-							goSteps++;
-
-							//Loop items
-							if ( carouselLoop ) {
-								if ( goSteps > lastSteps ) goSteps = 0;
-							} else {
-								if ( goSteps > lastSteps ) goSteps = lastSteps;
-							}
-
-							itemUpdates( $carouselWrapper, false, carouselNext, carouselPrev, goSteps );
-
-
-						}
-						if ( deltaX <= -50) {
-							//--- right
-
-							goSteps--;
-
-							//Loop items
-							if ( carouselLoop ) {
-								if ( goSteps < 0 ) goSteps = lastSteps;
-							} else {
-								if ( goSteps < 0 ) goSteps = 0;
-							}
-
-							itemUpdates( $carouselWrapper, false, carouselNext, carouselPrev, goSteps );
-
-						}
-						if ( deltaY >= 50) {
-							//--- up
-
-
-						}
-						if ( deltaY <= -50) {
-							//--- down
-
-						}
-
-						if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
-							$dragDropTrigger.off( 'touchmove.MULTI_ITEMS_CAROUSEL' );
-						}	
-
-
+					//Loop items
+					if ( carouselLoop ) {
+						if ( goSteps < 0 ) goSteps = lastSteps;
 					} else {
-
-						if ( carouseDraggable ) {
-							//right
-							if ( e.pageX > origin_mouse_x ) {
-
-
-								goSteps--;
-
-								//Loop items
-								if ( carouselLoop ) {
-									if ( goSteps < 0 ) goSteps = lastSteps;
-								} else {
-									if ( goSteps < 0 ) goSteps = 0;
-								}
-
-								itemUpdates( $carouselWrapper, false, carouselNext, carouselPrev, goSteps );	
-
-							}
-
-							//left
-							if ( e.pageX < origin_mouse_x ) {
-
-								goSteps++;
-
-								//Loop items
-								if ( carouselLoop ) {
-									if ( goSteps > lastSteps ) goSteps = 0;
-								} else {
-									if ( goSteps > lastSteps ) goSteps = lastSteps;
-								}
-
-								itemUpdates( $carouselWrapper, false, carouselNext, carouselPrev, goSteps );		
-
-							}
-
-							//down
-							if ( e.pageY > origin_mouse_y ) {
-
-							}
-
-							//up
-							if ( e.pageY < origin_mouse_y ) {
-
-							}	
-
-							$dragDropTrigger.off( 'mouseup.MULTI_ITEMS_CAROUSEL' );
-
-						}	
-
-
-
+						if ( goSteps < 0 ) goSteps = 0;
 					}
 
+					itemUpdates( $carouselWrapper, false, carouselNext, carouselPrev, goSteps );
+				}			
 
 
-				} );
 
+			});	
 
-			} );
-			
+		
+		
 			
 			/*
 			 * Transition Between Items
@@ -18267,6 +18358,8 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
+/*! highlight.js v9.12.0 | BSD3 License | git.io/hljslicense */
+!function(e){var n="object"==typeof window&&window||"object"==typeof self&&self;"undefined"!=typeof exports?e(exports):n&&(n.hljs=e({}),"function"==typeof define&&define.amd&&define([],function(){return n.hljs}))}(function(e){function n(e){return e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}function t(e){return e.nodeName.toLowerCase()}function r(e,n){var t=e&&e.exec(n);return t&&0===t.index}function a(e){return k.test(e)}function i(e){var n,t,r,i,o=e.className+" ";if(o+=e.parentNode?e.parentNode.className:"",t=B.exec(o))return w(t[1])?t[1]:"no-highlight";for(o=o.split(/\s+/),n=0,r=o.length;r>n;n++)if(i=o[n],a(i)||w(i))return i}function o(e){var n,t={},r=Array.prototype.slice.call(arguments,1);for(n in e)t[n]=e[n];return r.forEach(function(e){for(n in e)t[n]=e[n]}),t}function u(e){var n=[];return function r(e,a){for(var i=e.firstChild;i;i=i.nextSibling)3===i.nodeType?a+=i.nodeValue.length:1===i.nodeType&&(n.push({event:"start",offset:a,node:i}),a=r(i,a),t(i).match(/br|hr|img|input/)||n.push({event:"stop",offset:a,node:i}));return a}(e,0),n}function c(e,r,a){function i(){return e.length&&r.length?e[0].offset!==r[0].offset?e[0].offset<r[0].offset?e:r:"start"===r[0].event?e:r:e.length?e:r}function o(e){function r(e){return" "+e.nodeName+'="'+n(e.value).replace('"',"&quot;")+'"'}s+="<"+t(e)+E.map.call(e.attributes,r).join("")+">"}function u(e){s+="</"+t(e)+">"}function c(e){("start"===e.event?o:u)(e.node)}for(var l=0,s="",f=[];e.length||r.length;){var g=i();if(s+=n(a.substring(l,g[0].offset)),l=g[0].offset,g===e){f.reverse().forEach(u);do c(g.splice(0,1)[0]),g=i();while(g===e&&g.length&&g[0].offset===l);f.reverse().forEach(o)}else"start"===g[0].event?f.push(g[0].node):f.pop(),c(g.splice(0,1)[0])}return s+n(a.substr(l))}function l(e){return e.v&&!e.cached_variants&&(e.cached_variants=e.v.map(function(n){return o(e,{v:null},n)})),e.cached_variants||e.eW&&[o(e)]||[e]}function s(e){function n(e){return e&&e.source||e}function t(t,r){return new RegExp(n(t),"m"+(e.cI?"i":"")+(r?"g":""))}function r(a,i){if(!a.compiled){if(a.compiled=!0,a.k=a.k||a.bK,a.k){var o={},u=function(n,t){e.cI&&(t=t.toLowerCase()),t.split(" ").forEach(function(e){var t=e.split("|");o[t[0]]=[n,t[1]?Number(t[1]):1]})};"string"==typeof a.k?u("keyword",a.k):x(a.k).forEach(function(e){u(e,a.k[e])}),a.k=o}a.lR=t(a.l||/\w+/,!0),i&&(a.bK&&(a.b="\\b("+a.bK.split(" ").join("|")+")\\b"),a.b||(a.b=/\B|\b/),a.bR=t(a.b),a.e||a.eW||(a.e=/\B|\b/),a.e&&(a.eR=t(a.e)),a.tE=n(a.e)||"",a.eW&&i.tE&&(a.tE+=(a.e?"|":"")+i.tE)),a.i&&(a.iR=t(a.i)),null==a.r&&(a.r=1),a.c||(a.c=[]),a.c=Array.prototype.concat.apply([],a.c.map(function(e){return l("self"===e?a:e)})),a.c.forEach(function(e){r(e,a)}),a.starts&&r(a.starts,i);var c=a.c.map(function(e){return e.bK?"\\.?("+e.b+")\\.?":e.b}).concat([a.tE,a.i]).map(n).filter(Boolean);a.t=c.length?t(c.join("|"),!0):{exec:function(){return null}}}}r(e)}function f(e,t,a,i){function o(e,n){var t,a;for(t=0,a=n.c.length;a>t;t++)if(r(n.c[t].bR,e))return n.c[t]}function u(e,n){if(r(e.eR,n)){for(;e.endsParent&&e.parent;)e=e.parent;return e}return e.eW?u(e.parent,n):void 0}function c(e,n){return!a&&r(n.iR,e)}function l(e,n){var t=N.cI?n[0].toLowerCase():n[0];return e.k.hasOwnProperty(t)&&e.k[t]}function p(e,n,t,r){var a=r?"":I.classPrefix,i='<span class="'+a,o=t?"":C;return i+=e+'">',i+n+o}function h(){var e,t,r,a;if(!E.k)return n(k);for(a="",t=0,E.lR.lastIndex=0,r=E.lR.exec(k);r;)a+=n(k.substring(t,r.index)),e=l(E,r),e?(B+=e[1],a+=p(e[0],n(r[0]))):a+=n(r[0]),t=E.lR.lastIndex,r=E.lR.exec(k);return a+n(k.substr(t))}function d(){var e="string"==typeof E.sL;if(e&&!y[E.sL])return n(k);var t=e?f(E.sL,k,!0,x[E.sL]):g(k,E.sL.length?E.sL:void 0);return E.r>0&&(B+=t.r),e&&(x[E.sL]=t.top),p(t.language,t.value,!1,!0)}function b(){L+=null!=E.sL?d():h(),k=""}function v(e){L+=e.cN?p(e.cN,"",!0):"",E=Object.create(e,{parent:{value:E}})}function m(e,n){if(k+=e,null==n)return b(),0;var t=o(n,E);if(t)return t.skip?k+=n:(t.eB&&(k+=n),b(),t.rB||t.eB||(k=n)),v(t,n),t.rB?0:n.length;var r=u(E,n);if(r){var a=E;a.skip?k+=n:(a.rE||a.eE||(k+=n),b(),a.eE&&(k=n));do E.cN&&(L+=C),E.skip||(B+=E.r),E=E.parent;while(E!==r.parent);return r.starts&&v(r.starts,""),a.rE?0:n.length}if(c(n,E))throw new Error('Illegal lexeme "'+n+'" for mode "'+(E.cN||"<unnamed>")+'"');return k+=n,n.length||1}var N=w(e);if(!N)throw new Error('Unknown language: "'+e+'"');s(N);var R,E=i||N,x={},L="";for(R=E;R!==N;R=R.parent)R.cN&&(L=p(R.cN,"",!0)+L);var k="",B=0;try{for(var M,j,O=0;;){if(E.t.lastIndex=O,M=E.t.exec(t),!M)break;j=m(t.substring(O,M.index),M[0]),O=M.index+j}for(m(t.substr(O)),R=E;R.parent;R=R.parent)R.cN&&(L+=C);return{r:B,value:L,language:e,top:E}}catch(T){if(T.message&&-1!==T.message.indexOf("Illegal"))return{r:0,value:n(t)};throw T}}function g(e,t){t=t||I.languages||x(y);var r={r:0,value:n(e)},a=r;return t.filter(w).forEach(function(n){var t=f(n,e,!1);t.language=n,t.r>a.r&&(a=t),t.r>r.r&&(a=r,r=t)}),a.language&&(r.second_best=a),r}function p(e){return I.tabReplace||I.useBR?e.replace(M,function(e,n){return I.useBR&&"\n"===e?"<br>":I.tabReplace?n.replace(/\t/g,I.tabReplace):""}):e}function h(e,n,t){var r=n?L[n]:t,a=[e.trim()];return e.match(/\bhljs\b/)||a.push("hljs"),-1===e.indexOf(r)&&a.push(r),a.join(" ").trim()}function d(e){var n,t,r,o,l,s=i(e);a(s)||(I.useBR?(n=document.createElementNS("http://www.w3.org/1999/xhtml","div"),n.innerHTML=e.innerHTML.replace(/\n/g,"").replace(/<br[ \/]*>/g,"\n")):n=e,l=n.textContent,r=s?f(s,l,!0):g(l),t=u(n),t.length&&(o=document.createElementNS("http://www.w3.org/1999/xhtml","div"),o.innerHTML=r.value,r.value=c(t,u(o),l)),r.value=p(r.value),e.innerHTML=r.value,e.className=h(e.className,s,r.language),e.result={language:r.language,re:r.r},r.second_best&&(e.second_best={language:r.second_best.language,re:r.second_best.r}))}function b(e){I=o(I,e)}function v(){if(!v.called){v.called=!0;var e=document.querySelectorAll("pre code");E.forEach.call(e,d)}}function m(){addEventListener("DOMContentLoaded",v,!1),addEventListener("load",v,!1)}function N(n,t){var r=y[n]=t(e);r.aliases&&r.aliases.forEach(function(e){L[e]=n})}function R(){return x(y)}function w(e){return e=(e||"").toLowerCase(),y[e]||y[L[e]]}var E=[],x=Object.keys,y={},L={},k=/^(no-?highlight|plain|text)$/i,B=/\blang(?:uage)?-([\w-]+)\b/i,M=/((^(<[^>]+>|\t|)+|(?:\n)))/gm,C="</span>",I={classPrefix:"hljs-",tabReplace:null,useBR:!1,languages:void 0};return e.highlight=f,e.highlightAuto=g,e.fixMarkup=p,e.highlightBlock=d,e.configure=b,e.initHighlighting=v,e.initHighlightingOnLoad=m,e.registerLanguage=N,e.listLanguages=R,e.getLanguage=w,e.inherit=o,e.IR="[a-zA-Z]\\w*",e.UIR="[a-zA-Z_]\\w*",e.NR="\\b\\d+(\\.\\d+)?",e.CNR="(-?)(\\b0[xX][a-fA-F0-9]+|(\\b\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)",e.BNR="\\b(0b[01]+)",e.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|-|-=|/=|/|:|;|<<|<<=|<=|<|===|==|=|>>>=|>>=|>=|>>>|>>|>|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~",e.BE={b:"\\\\[\\s\\S]",r:0},e.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[e.BE]},e.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[e.BE]},e.PWM={b:/\b(a|an|the|are|I'm|isn't|don't|doesn't|won't|but|just|should|pretty|simply|enough|gonna|going|wtf|so|such|will|you|your|they|like|more)\b/},e.C=function(n,t,r){var a=e.inherit({cN:"comment",b:n,e:t,c:[]},r||{});return a.c.push(e.PWM),a.c.push({cN:"doctag",b:"(?:TODO|FIXME|NOTE|BUG|XXX):",r:0}),a},e.CLCM=e.C("//","$"),e.CBCM=e.C("/\\*","\\*/"),e.HCM=e.C("#","$"),e.NM={cN:"number",b:e.NR,r:0},e.CNM={cN:"number",b:e.CNR,r:0},e.BNM={cN:"number",b:e.BNR,r:0},e.CSSNM={cN:"number",b:e.NR+"(%|em|ex|ch|rem|vw|vh|vmin|vmax|cm|mm|in|pt|pc|px|deg|grad|rad|turn|s|ms|Hz|kHz|dpi|dpcm|dppx)?",r:0},e.RM={cN:"regexp",b:/\//,e:/\/[gimuy]*/,i:/\n/,c:[e.BE,{b:/\[/,e:/\]/,r:0,c:[e.BE]}]},e.TM={cN:"title",b:e.IR,r:0},e.UTM={cN:"title",b:e.UIR,r:0},e.METHOD_GUARD={b:"\\.\\s*"+e.UIR,r:0},e});hljs.registerLanguage("xml",function(s){var e="[A-Za-z0-9\\._:-]+",t={eW:!0,i:/</,r:0,c:[{cN:"attr",b:e,r:0},{b:/=\s*/,r:0,c:[{cN:"string",endsParent:!0,v:[{b:/"/,e:/"/},{b:/'/,e:/'/},{b:/[^\s"'=<>`]+/}]}]}]};return{aliases:["html","xhtml","rss","atom","xjb","xsd","xsl","plist"],cI:!0,c:[{cN:"meta",b:"<!DOCTYPE",e:">",r:10,c:[{b:"\\[",e:"\\]"}]},s.C("<!--","-->",{r:10}),{b:"<\\!\\[CDATA\\[",e:"\\]\\]>",r:10},{b:/<\?(php)?/,e:/\?>/,sL:"php",c:[{b:"/\\*",e:"\\*/",skip:!0}]},{cN:"tag",b:"<style(?=\\s|>|$)",e:">",k:{name:"style"},c:[t],starts:{e:"</style>",rE:!0,sL:["css","xml"]}},{cN:"tag",b:"<script(?=\\s|>|$)",e:">",k:{name:"script"},c:[t],starts:{e:"</script>",rE:!0,sL:["actionscript","javascript","handlebars","xml"]}},{cN:"meta",v:[{b:/<\?xml/,e:/\?>/,r:10},{b:/<\?\w+/,e:/\?>/}]},{cN:"tag",b:"</?",e:"/?>",c:[{cN:"name",b:/[^\/><\s]+/,r:0},t]}]}});
 
 /* 
  *************************************
@@ -18283,16 +18376,21 @@ APP = ( function ( APP, $, window, document ) {
 		//Add view source code to body
 		$( 'body' ).prepend( '<a href="#uix-source-code" id="uix-view-source"><i class="fa fa-code" aria-hidden="true"></i></a><div id="uix-source-code"><a href="javascript:void(0);" id="uix-source-code__close"></a></div>' );
 				
-		
-		
+
 		//View source button event
 		$( '#uix-view-source' ).on( 'click', function() {
-			$( 'html' ).css( 'overflow-y', 'hidden' );
+			// Locks the page
+			$.scrollLock( true );
 			$( '#uix-source-code' ).show();
+			
+
+			
 		});
 		
 		$( '#uix-source-code > #uix-source-code__close' ).on( 'click', function() {
-			$( 'html' ).css( 'overflow-y', 'auto' );
+			// Unlocks the page
+			$.scrollLock( false );
+			
 			var uri = window.location.toString();
 			if ( uri.indexOf( '#' ) > 0 ) {
 				var clean_uri = uri.substring(0, uri.indexOf( '#' ) );
@@ -18328,6 +18426,12 @@ APP = ( function ( APP, $, window, document ) {
 				"html":   pageHeaderCode + '&lt;/head&gt;\n&lt;'+sourceCodeBodyClassCode+'&gt;\n' + pageBodyCode + '\n&lt;/body&gt;\n&lt;/html&gt;',
 				"class": 'highlightBlock-print html'
 			}).appendTo( '#uix-source-code' );	
+			
+			$( 'pre.highlightBlock-print' ).each( function( i, block ) {
+				hljs.highlightBlock( block );
+			});	
+
+
 			
 		});
 		
@@ -19134,103 +19238,6 @@ APP = ( function ( APP, $, window, document ) {
     };
 
     APP.components.documentReady.push( APP.TEAM_FOCUS.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
-
-/* 
- *************************************
- * <!-- Testimonials Carousel -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.TESTIMONIALS               = APP.TESTIMONIALS || {};
-	APP.TESTIMONIALS.version       = '0.0.1';
-    APP.TESTIMONIALS.documentReady = function( $ ) {
-
-		var $obj                 = $( '.uix-testimonials .flexslider' ),
-			testimonialsControls = '';
-		
-		
-		for ( var i = 0; i < $obj.find( '.slides > li' ).length; i++ ) {
-			testimonialsControls += '<li></li>';
-		}
-		$( '.uix-testimonials__controls' ).html( testimonialsControls );
-    	
-		
-		
-		$obj.flexslider({
-			animation         : 'slide',
-			slideshow         : true,
-			smoothHeight      : true,
-			controlNav        : true,
-			manualControls    : '.uix-testimonials__controls li',
-			directionNav      : false,
-			animationSpeed    : 600,
-			slideshowSpeed    : 7000,
-			selector          : ".slides > li",
-			start: function(slider){
-				$obj.on( 'mousedown', function( e ) {
-					if ( $obj.data( 'flexslider' ).animating ) {
-						return;
-					}
-						
-					$( this ).addClass('dragging');
-					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
-					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
-					$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
-					$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );
-				} );
-			
-				$obj.on( 'mouseup', function( e ) {
-					if ( $obj.data('flexslider').animating ) {
-						return;
-					}
-						
-					$( this ).removeClass('dragging');
-					var origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
-					    origin_mouse_y = $( this ).data( 'origin_mouse_y' );
-					
-					if ( 'horizontal' === $obj.data('flexslider').vars.direction ) {
-						if ( e.pageX > origin_mouse_x ) {
-							$obj.flexslider('prev');
-						}
-						if ( e.pageX < origin_mouse_x ) {
-							$obj.flexslider('next');
-						}
-					} else {
-						if ( e.pageY > origin_mouse_y ) {
-							$obj.flexslider('prev');
-						}
-						if ( e.pageY < origin_mouse_y ) {
-							$obj.flexslider('next');
-						}
-					}
-				} );
-				
-				
-				$( '.uix-testimonials__count .total' ).text( '0' + slider.count );
-				$( '.uix-testimonials__count .cur' ).text( '0' + parseFloat( slider.currentSlide + 1 ) );
-				
-			},
-			after: function(slider){
-				
-				$( '.uix-testimonials__count .total' ).text( '0' + slider.count );
-				$( '.uix-testimonials__count .cur' ).text( '0' + parseFloat( slider.currentSlide + 1 ) );
-				
-			}
-		});
-		
-		
-    };
-
-    APP.components.documentReady.push( APP.TESTIMONIALS.documentReady );
     return APP;
 
 }( APP, jQuery, window, document ) );
@@ -20262,7 +20269,6 @@ APP = ( function ( APP, $, window, document ) {
 			if ( APP.SMOOTH_SCROLLING_ANCHORLINK ) APP.SMOOTH_SCROLLING_ANCHORLINK.documentReady($); //Smooth Scrolling When Clicking An Anchor Link
 			if ( APP.TABS ) APP.TABS.documentReady($); //Tabs
 			if ( APP.TEAM_FOCUS ) APP.TEAM_FOCUS.documentReady($); //Team Focus
-			if ( APP.TESTIMONIALS ) APP.TESTIMONIALS.documentReady($); //Testimonials Carousel
 			if ( APP.LAVA_LAMP_STYLE_MENU ) APP.LAVA_LAMP_STYLE_MENU.documentReady($); //Lava-Lamp Style Menu
 			if ( APP.CIRCLE_LAYOUT ) APP.CIRCLE_LAYOUT.documentReady($); //Circle Layout
 			if ( APP.MULTI_ITEMS_CAROUSEL ) APP.MULTI_ITEMS_CAROUSEL.documentReady($); //Multiple Items Carousel
@@ -29116,9 +29122,6 @@ License: MIT
 /***/ function(module, exports) {
 
 	module.exports = "uniform float explodeRate;\nvarying vec2 vUv;\n\n\nfloat rand(vec2 co){\n  return fract(sin(dot(co.xy, vec2(12.8273, 67.245))) * 53726.17623);\n}\n\nvoid main() {\n  vec3 col;\n  col.g = rand(vec2(vUv.x, vUv.y + 1.0));\n  col.b = rand(vec2(vUv.x, vUv.y + 2.0));\n  col.r = rand(vec2(vUv.xy));\n  col = col - 0.5;\n  col *= explodeRate;\n\n  gl_FragColor = vec4(col, 1.0);\n}\n";
-
-/***/ }
-/******/ ]);\n";
 
 /***/ }
 /******/ ]);

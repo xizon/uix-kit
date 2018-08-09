@@ -74,11 +74,10 @@ APP = ( function ( APP, $, window, document ) {
 			
 			//Total counter selector
 			//Current counter selector.
-			var countTotalSelector = ( dataCountTotal ) ? $( dataCountTotal ) : $( 'p.count em.count' ), 
-				countCurSelector   = ( dataCountCur ) ? $( dataCountCur ) : $( 'p.count em.current' );
+			var countTotalSelector = ( dataCountTotal ) ? $( dataCountTotal ) : $( '.uix-flexslider__mycontrols__count em.count' ), 
+				countCurSelector   = ( dataCountCur ) ? $( dataCountCur ) : $( '.uix-flexslider__mycontrols__count em.current' );
 			
 			
-
 			
 			// Fires when the slider loads the first slide.
 			// Fires after each slider animation completes.
@@ -247,8 +246,8 @@ APP = ( function ( APP, $, window, document ) {
 
 				//Display counter
 				//-------------------------------------
-				if ( sliderWrapper.find( '.count' ).length == 0 ) {
-					if ( sliderWrapper.closest( 'section' ).find( '.count' ).length > 0 ) {
+				if ( sliderWrapper.find( '.uix-flexslider__mycontrols__count' ).length == 0 ) {
+					if ( sliderWrapper.closest( 'section' ).find( '.uix-flexslider__mycontrols__count' ).length > 0 ) {
 						var showCountTotal = count,
 							showCountCur   = curIndex + 1;
 						

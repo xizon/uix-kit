@@ -143,120 +143,49 @@ APP = ( function ( APP, $, window, document ) {
 				
 				//Drag and Drop
 				//-------------------------------------	
-				var $dragDropTrigger = $items;
+				var $dragDropTrigger = $this,
+					hammerProps      = {};
 
 				//Make the cursor a move icon when a user hovers over an item
 				if ( dataDraggable && dataDraggableCursor != '' && dataDraggableCursor != false ) $dragDropTrigger.css( 'cursor', dataDraggableCursor );
 				
-
+				if ( !dataDraggable ) {
+					hammerProps = {
+						inputClass: Hammer.TouchInput
+					};
+				}
 
 				//Mouse event
-				$dragDropTrigger.on( 'mousedown.ADVANCED_CONTENT_SLIDER touchstart.ADVANCED_CONTENT_SLIDER', function( e ) {
-					e.preventDefault();
+				//Hammer.js pan event only for touch devices and not for desktop computer Click+Drag
+				var direction,
+					dragDropElement = $dragDropTrigger[0],
+					dragDropMC      = new Hammer( dragDropElement, hammerProps );
+				
+				dragDropMC.on( 'panright press panleft', function( ev ) {
 
-					var touches = e.originalEvent.touches;
+					//Set the direction in here
+					direction = ev.type;
+				});
+
+				
+				
+				dragDropMC.on( 'panend', function( ev ) {
 					
-					$( this ).addClass( 'dragging' );
-					$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
-					$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
-					
-					
-					if ( touches && touches.length ) {	
-						$( this ).data( 'origin_mouse_x', parseInt( touches[0].pageX ) );
-						$( this ).data( 'origin_mouse_y', parseInt( touches[0].pageY ) );
-
-					} else {
-						
-						if ( dataDraggable ) {
-							$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
-							$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );	
-						}
-
-
+					//Use the direction in here
+					//You know the pan has ended
+					//and you know which action they were taking
+					if ( direction == 'panleft' ) {
+						sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );	
 					}
 					
-					$dragDropTrigger.on( 'mouseup.ADVANCED_CONTENT_SLIDER touchmove.ADVANCED_CONTENT_SLIDER', function( e ) {
-						e.preventDefault();
-
-						$( this ).removeClass( 'dragging' );
-						var touches        = e.originalEvent.touches,
-							origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
-							origin_mouse_y = $( this ).data( 'origin_mouse_y' );
-
-						if ( touches && touches.length ) {
-
-							var deltaX = origin_mouse_x - touches[0].pageX,
-								deltaY = origin_mouse_y - touches[0].pageY;
-
-							if ( deltaX >= 50) {
-								//--- left
-								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
-
-
-							}
-							if ( deltaX <= -50) {
-								//--- right
-								sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
-
-
-							}
-							if ( deltaY >= 50) {
-								//--- up
-
-
-							}
-							if ( deltaY <= -50) {
-								//--- down
-
-							}
-
-							if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
-								$dragDropTrigger.off( 'touchmove.ADVANCED_CONTENT_SLIDER' );
-							}	
-
-
-						} else {
-							
-							if ( dataDraggable ) {
-								//right
-								if ( e.pageX > origin_mouse_x ) {
-									sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
-								}
-
-								//left
-								if ( e.pageX < origin_mouse_x ) {
-									sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
-								}
-
-								//down
-								if ( e.pageY > origin_mouse_y ) {
-
-								}
-
-								//up
-								if ( e.pageY < origin_mouse_y ) {
-
-								}	
-
-								$dragDropTrigger.off( 'mouseup.ADVANCED_CONTENT_SLIDER' );
-								
-							}	
-							
-							
-							
-						}
-
-
-
-					} );
+					if ( direction == 'panright' ) {
+						sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
+					}			
 
 					
-					
 
-				} );
-
+				});	
 			
-				
 			});	
 			
 		}

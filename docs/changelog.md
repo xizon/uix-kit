@@ -1,10 +1,14 @@
 # Changelog
 
-#### = 2.0.6 (August 9, 2018) =
+#### = 2.0.7 (August 10, 2018) =
 
+
+* New: Introducing Hammer.JS to reduce the amount of script.
 * Fix: Solved the problem of creating GUID / UUID in IE(9+) browser.
 * Fix: Solved the display problem of Advanced Slider in IE(9+) browser.
 * Tweak: Optimized Progress Line module.
+* Tweak: Enhanced drag and drop for Advanced Slider.
+* Tweak: Enhance a better page experience with pop-win.
 
 
 #### = 2.0.4 (August 7, 2018) =

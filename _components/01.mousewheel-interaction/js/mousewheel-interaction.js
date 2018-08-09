@@ -7,9 +7,9 @@
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
-    APP.MOUSEWHEEL_INTERACTION               = APP.MOUSEWHEEL_INTERACTION || {};
-	APP.MOUSEWHEEL_INTERACTION.version       = '0.0.1';
-    APP.MOUSEWHEEL_INTERACTION.documentReady = function( $ ) {
+    APP.SCROLL_LOCK               = APP.SCROLL_LOCK || {};
+	APP.SCROLL_LOCK.version       = '0.0.1';
+    APP.SCROLL_LOCK.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
 		if ( !$( 'body' ).hasClass( 'page-mousewheel-eff' ) ) return false;
@@ -82,7 +82,7 @@ APP = ( function ( APP, $, window, document ) {
 		
     };
 
-    APP.components.documentReady.push( APP.MOUSEWHEEL_INTERACTION.documentReady );
+    APP.components.documentReady.push( APP.SCROLL_LOCK.documentReady );
     return APP;
 
 }( APP, jQuery, window, document ) );
