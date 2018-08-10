@@ -170,7 +170,7 @@ APP = ( function ( APP, $, window, document ) {
 		 Input Validation 
 		 ---------------------------
 		 */ 
-//		$(document).on( 'submit', '.app-general-form-container form', function(e) {
+//		$(document).on( 'submit', '#app-jion-form', function(e) {
 //
 //			var $form        = $( this ),
 //				validationOK = true,
@@ -180,9 +180,13 @@ APP = ( function ( APP, $, window, document ) {
 //
 //
 //			//Email
-//			var emailVal = $form.find( '[name="name5"]' ).val();
+//			var emailVal = $form.find( '[name="email"]' ).val();
 //			if ( emailVal != '' && !emailRe.test( emailVal ) ) {
-//				$form.find( '.response' ).html( '<span class="no"><i class="fa fa-times" aria-hidden="true"></i> A valid email address.</span>' );
+//				$form.find( '.response' ).html( '<p class="uix-striking-msg uix-striking-msg--danger"><i class="fa fa-times" aria-hidden="true"></i> A valid email address.</p>' );
+//
+//				setTimeout( function(){
+//					$form.find( '.response' ).html( '' );
+//				}, 3000 );
 //
 //				validationOK = false;
 //			}
@@ -193,13 +197,28 @@ APP = ( function ( APP, $, window, document ) {
 //
 //				if ( $( this ).val() == '' ) {
 //
-//					var info = $( this )
+//					var _ft = $( this )
 //									.closest( '.row' )
-//									.find( '.col-sm-4' )
-//									.html()
-//									.replace(/(&nbsp;|<([^>]+)>|\*)/ig, '' );
+//									.find( '[class*=col-]' )
+//									.html();
 //
-//					$form.find( '.response' ).html( '<span class="no"><i class="fa fa-times" aria-hidden="true"></i> "'+info+'" Can not be empty.</span>' );
+//
+//					if ( _ft.indexOf( '</select>' ) >= 0 ) {
+//						_ft = _ft.replace(/\<select[\s\S]*\<\/select\>/ig, '' )
+//								 .replace(/\<span\sclass=\"uix-controls\_\_select\-trigger\"\>[\s\S]*\<\/span\>/ig, '' );
+//
+//
+//					}
+//
+//					console.log( _ft );
+//
+//					var info = _ft.replace(/(&nbsp;|<([^>]+)>|\*)/ig, '' );
+//
+//					$form.find( '.response' ).html( '<p class="uix-striking-msg uix-striking-msg--danger"><i class="fa fa-times" aria-hidden="true"></i> "'+info+'" Can not be empty.</p>' );
+//
+//					setTimeout( function(){
+//						$form.find( '.response' ).html( '' );
+//					}, 3000 );
 //
 //					validationOK = false;
 //					return false;
@@ -217,9 +236,9 @@ APP = ( function ( APP, $, window, document ) {
 //				return false;
 //			}
 //
-//		});
-		
-		
+//		});  	
+
+	
 		
     };
 

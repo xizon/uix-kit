@@ -101,6 +101,8 @@
 	
 	.uix-container__bg {
 		margin-bottom: 3rem;
+		margin-left: 15px;
+		width: calc(100% - 30px);
 		
 		&.uix-container__bg--totop-large {
 			margin-top: -7rem;

@@ -70,95 +70,95 @@
     5. Typography 
     6. Spacing 
     7. Basic Layout Styles 
-    8. Navigation 
-    9. Header Area 
-    10. Brand 
-    11. Footer 
-    12. Video 
-    13. Back to Top 
-    14. Loader 
-    15. Social Media Icons 
-    16. Pagination 
-    17. Filterable Navigation 
-    18. Sidebar  
-    19. Search 
-    20. Tags 
-    21. Entry 
-    22. Comments ( Synchronize to WordPress's class name ) 
-    23. Mobile Menu 
-    24. Onepage Menu 
-    25. Modal Dialog 
-    26. 3rd Party Plugins 
-    27. 3D Background 
-    28. 3D Carousel 
-    29. Accordion 
-    30. Accordion Background Images 
-    31. Advanced Content Slider 
-    32. Advanced Slider (Special Effects) 
-    33. Advanced Slider (Basic) 
-    34. Badges 
-    35. Blended Grid Layout 
-    36. Breadcrumbs 
-    37. Button 
-    38. Cards 
-    39. Circle Layout 
-    40. Counter 
-    41. Dividing Line 
-    42. Dots 
-    43. Dotted Line 
-    44. Dropdown Menu 
-    45. Dropdown Menu 2 (Multi-level drop-down navigation) 
-    46. Equal-width Columns 
-    47. Features 
-    48. Flexslider 
-    49. Floating Side Element 
-    50. Footer Templates 
-    51. Form Progress 
-    52. Gallery 
-    53. Form 
-    54. Heading 
-    55. Image Animation 
-    56. Image Shapes 
-    57. Custom Core Scripts & Stylesheets 
-    58. Lava-Lamp Style Menu 
-    59. Cutom Light Box 
-    60. Brands List 
-    61. Bulleted List 
-    62. Maintain Aspect Ratio List 
-    63. List of Posts 
-    64. List of Split Posts 
-    65. Side by Side List 
-    66. Side by Side List With Photo 
-    67. Fullwidth List of Split 2 
-    68. Fullwidth List of Split 
-    69. Mouse Animation Scroll 
-    70. Multiple Items Carousel 
-    71. Overlay 
-    72. Parallax 
-    73. Periodical Scroll 
-    74. Pricing 
-    75. Progress Bar 
-    76. Progress Line 
-    77. Ribbon 
-    78. Shape Animation 
-    79. Show More Less 
-    80. Single Post 
-    81. Source Code 
-    82. Striking 
-    83. SVG Map 
-    84. Tabs 
-    85. Team Focus 
-    86. Team Fullwidth (Style using the Side by Side List With Photo module) 
-    87. Team Gird 
-    88. Testimonials Carousel 
-    89. Text effect 
-    90. Timeline 
-    91. ToolTip 
-    92. Vertical Menu 
-    93. Vertical Separator 
-    94. Wave Background 
-    95. WordPress Core ( Do not use prefix "uix-" ) 
-    96. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    8. Basic Layout Styles 
+    9. Navigation 
+    10. Header Area 
+    11. Brand 
+    12. Footer 
+    13. Video 
+    14. Back to Top 
+    15. Loader 
+    16. Social Media Icons 
+    17. Pagination 
+    18. Filterable Navigation 
+    19. Sidebar  
+    20. Search 
+    21. Tags 
+    22. Entry 
+    23. Comments ( Synchronize to WordPress's class name ) 
+    24. Mobile Menu 
+    25. Onepage Menu 
+    26. Modal Dialog 
+    27. 3rd Party Plugins 
+    28. 3D Background 
+    29. 3D Carousel 
+    30. Accordion 
+    31. Accordion Background Images 
+    32. Advanced Content Slider 
+    33. Advanced Slider (Special Effects) 
+    34. Advanced Slider (Basic) 
+    35. Badges 
+    36. Blended Grid Layout 
+    37. Breadcrumbs 
+    38. Button 
+    39. Cards 
+    40. Circle Layout 
+    41. Counter 
+    42. Dividing Line 
+    43. Dots 
+    44. Dotted Line 
+    45. Dropdown Menu 
+    46. Dropdown Menu 2 (Multi-level drop-down navigation) 
+    47. Equal-width Columns 
+    48. Features 
+    49. Flexslider 
+    50. Floating Side Element 
+    51. Footer Templates 
+    52. Form 
+    53. Form Progress 
+    54. Gallery 
+    55. Heading 
+    56. Image Animation 
+    57. Image Shapes 
+    58. Custom Core Scripts & Stylesheets 
+    59. Lava-Lamp Style Menu 
+    60. Cutom Light Box 
+    61. Brands List 
+    62. Bulleted List 
+    63. Maintain Aspect Ratio List 
+    64. List of Posts 
+    65. List of Split Posts 
+    66. Side by Side List 
+    67. Side by Side List With Photo 
+    68. Fullwidth List of Split 2 
+    69. Fullwidth List of Split 
+    70. Mouse Animation Scroll 
+    71. Multiple Items Carousel 
+    72. Overlay 
+    73. Parallax 
+    74. Periodical Scroll 
+    75. Pricing 
+    76. Progress Bar 
+    77. Progress Line 
+    78. Ribbon 
+    79. Shape Animation 
+    80. Show More Less 
+    81. Single Post 
+    82. Source Code 
+    83. Striking 
+    84. SVG Map 
+    85. Tabs 
+    86. Team Focus 
+    87. Team Fullwidth (Style using the Side by Side List With Photo module) 
+    88. Team Gird 
+    89. Testimonials Carousel 
+    90. Text effect 
+    91. Timeline 
+    92. ToolTip 
+    93. Vertical Menu 
+    94. Vertical Separator 
+    95. Wave Background 
+    96. WordPress Core ( Do not use prefix "uix-" ) 
 
 
 
@@ -1745,6 +1745,8 @@ h6 {
 @media all and (max-width: 768px) {
   .uix-container__bg {
     margin-bottom: 3rem;
+    margin-left: 15px;
+    width: calc(100% - 30px);
   }
   .uix-container__bg.uix-container__bg--totop-large {
     margin-top: -7rem;
@@ -14064,87 +14066,6 @@ Style with support for rainbow parens
 }
 
 /* ====================================================== 
-   <!-- Team Fullwidth (Style using the Side by Side List With Photo module) -->    
-/* ====================================================== */
-/* ====================================================== 
-   <!-- Team Focus --> 
-/* ====================================================== */
-.uix-team-focus__info {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 12;
-  width: 300px;
-  padding-left: 2rem;
-  cursor: pointer;
-  opacity: 0;
-  display: none;
-}
-
-.uix-team-focus__info h4 em {
-  display: block;
-  font-size: 0.75rem !important;
-}
-
-.uix-team-focus__info h4 span {
-  display: block;
-}
-
-.uix-team-focus__info h4::after {
-  content: '';
-  display: block;
-  height: 3px;
-  width: 35px;
-  background: #EC5E79;
-  margin: .5rem 0;
-}
-
-.uix-team-focus__mask {
-  display: block;
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 11;
-  content: '';
-  width: 100vw;
-  height: 100vh;
-  background-color: transparent;
-  display: none;
-}
-
-.uix-team-focus {
-  position: relative;
-  z-index: 10;
-}
-
-.uix-team-focus > div {
-  float: left;
-  cursor: pointer;
-  z-index: 4;
-  text-align: center;
-}
-
-.uix-team-focus > div img {
-  width: 90%;
-}
-
-.uix-team-focus > div.focus {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  height: 100px;
-  transform: translateX(-50%);
-  z-index: 5;
-  margin-left: -300px;
-}
-
-.uix-team-focus > div.focus img {
-  transform: scale(1.3);
-  box-shadow: 0 1.8vw 4vw -.7vw #cbdfee;
-}
-
-/* ====================================================== 
     <!-- Tabs -->      
 /* ====================================================== */
 /*
@@ -14308,6 +14229,87 @@ Style with support for rainbow parens
   }
 }
 
+/* ====================================================== 
+   <!-- Team Focus --> 
+/* ====================================================== */
+.uix-team-focus__info {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 12;
+  width: 300px;
+  padding-left: 2rem;
+  cursor: pointer;
+  opacity: 0;
+  display: none;
+}
+
+.uix-team-focus__info h4 em {
+  display: block;
+  font-size: 0.75rem !important;
+}
+
+.uix-team-focus__info h4 span {
+  display: block;
+}
+
+.uix-team-focus__info h4::after {
+  content: '';
+  display: block;
+  height: 3px;
+  width: 35px;
+  background: #EC5E79;
+  margin: .5rem 0;
+}
+
+.uix-team-focus__mask {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 11;
+  content: '';
+  width: 100vw;
+  height: 100vh;
+  background-color: transparent;
+  display: none;
+}
+
+.uix-team-focus {
+  position: relative;
+  z-index: 10;
+}
+
+.uix-team-focus > div {
+  float: left;
+  cursor: pointer;
+  z-index: 4;
+  text-align: center;
+}
+
+.uix-team-focus > div img {
+  width: 90%;
+}
+
+.uix-team-focus > div.focus {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 100px;
+  transform: translateX(-50%);
+  z-index: 5;
+  margin-left: -300px;
+}
+
+.uix-team-focus > div.focus img {
+  transform: scale(1.3);
+  box-shadow: 0 1.8vw 4vw -.7vw #cbdfee;
+}
+
+/* ====================================================== 
+   <!-- Team Fullwidth (Style using the Side by Side List With Photo module) -->    
+/* ====================================================== */
 /* ====================================================== 
    <!-- Team Gird -->    
 /* ====================================================== */
@@ -14965,6 +14967,156 @@ Style with support for rainbow parens
 }
 
 /* ====================================================== 
+   <!-- ToolTip --> 
+/* ====================================================== */
+.uix-tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.uix-tooltip .uix-tooltip__content {
+  font-size: 0.75rem;
+  visibility: hidden;
+  position: absolute;
+  min-width: 120px;
+  background-color: #fff;
+  color: #333;
+  text-align: center;
+  padding: 0.75rem;
+  border-radius: 3px;
+  z-index: 1;
+  opacity: 0;
+  transition: all 0.3s ease;
+  box-shadow: 0px 0px 21px 0px rgba(0, 0, 0, 0.27);
+}
+
+.uix-tooltip .uix-tooltip__content img {
+  height: auto !important;
+  margin: 0;
+}
+
+.uix-tooltip:hover .uix-tooltip__content {
+  visibility: visible;
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+.uix-tooltip .uix-tooltip__content--right {
+  top: -5px;
+  left: 125%;
+  transform: translate(10px, 0);
+}
+
+.uix-tooltip .uix-tooltip__content--right::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent #fff transparent transparent;
+}
+
+.uix-tooltip .uix-tooltip__content--right::after {
+  content: "";
+  height: 100%;
+  top: 0;
+  right: 100%;
+  position: absolute;
+  display: block;
+  width: 1rem;
+  background-color: transparent;
+}
+
+.uix-tooltip .uix-tooltip__content--bottom {
+  top: 125%;
+  left: 50%;
+  margin-left: -60px;
+  transform: translate(0, 10px);
+}
+
+.uix-tooltip .uix-tooltip__content--bottom::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent #fff transparent;
+}
+
+.uix-tooltip .uix-tooltip__content--bottom::after {
+  content: "";
+  width: 100%;
+  left: 0;
+  bottom: 100%;
+  position: absolute;
+  display: block;
+  height: 1rem;
+  background-color: transparent;
+}
+
+.uix-tooltip .uix-tooltip__content--top {
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  transform: translate(0, -10px);
+}
+
+.uix-tooltip .uix-tooltip__content--top::before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #fff transparent transparent transparent;
+}
+
+.uix-tooltip .uix-tooltip__content--top::after {
+  content: "";
+  width: 100%;
+  left: 0;
+  top: 100%;
+  position: absolute;
+  display: block;
+  height: 1rem;
+  background-color: transparent;
+}
+
+.uix-tooltip .uix-tooltip__content--left {
+  top: -5px;
+  bottom: auto;
+  right: 125%;
+  transform: translate(-10px, 0);
+}
+
+.uix-tooltip .uix-tooltip__content--left::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent #fff;
+}
+
+.uix-tooltip .uix-tooltip__content--left::after {
+  content: "";
+  height: 100%;
+  top: 0;
+  left: 100%;
+  position: absolute;
+  display: block;
+  width: 1rem;
+  background-color: transparent;
+}
+
+/* ====================================================== 
    <!-- Vertical Menu -->     
 /* ====================================================== */
 /*
@@ -15187,156 +15339,6 @@ Style with support for rainbow parens
   width: 3px;
   height: 3px;
   border-radius: 100%;
-}
-
-/* ====================================================== 
-   <!-- ToolTip --> 
-/* ====================================================== */
-.uix-tooltip {
-  position: relative;
-  display: inline-block;
-}
-
-.uix-tooltip .uix-tooltip__content {
-  font-size: 0.75rem;
-  visibility: hidden;
-  position: absolute;
-  min-width: 120px;
-  background-color: #fff;
-  color: #333;
-  text-align: center;
-  padding: 0.75rem;
-  border-radius: 3px;
-  z-index: 1;
-  opacity: 0;
-  transition: all 0.3s ease;
-  box-shadow: 0px 0px 21px 0px rgba(0, 0, 0, 0.27);
-}
-
-.uix-tooltip .uix-tooltip__content img {
-  height: auto !important;
-  margin: 0;
-}
-
-.uix-tooltip:hover .uix-tooltip__content {
-  visibility: visible;
-  opacity: 1;
-  transform: translate(0, 0);
-}
-
-.uix-tooltip .uix-tooltip__content--right {
-  top: -5px;
-  left: 125%;
-  transform: translate(10px, 0);
-}
-
-.uix-tooltip .uix-tooltip__content--right::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  right: 100%;
-  margin-top: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent #fff transparent transparent;
-}
-
-.uix-tooltip .uix-tooltip__content--right::after {
-  content: "";
-  height: 100%;
-  top: 0;
-  right: 100%;
-  position: absolute;
-  display: block;
-  width: 1rem;
-  background-color: transparent;
-}
-
-.uix-tooltip .uix-tooltip__content--bottom {
-  top: 125%;
-  left: 50%;
-  margin-left: -60px;
-  transform: translate(0, 10px);
-}
-
-.uix-tooltip .uix-tooltip__content--bottom::before {
-  content: "";
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent transparent #fff transparent;
-}
-
-.uix-tooltip .uix-tooltip__content--bottom::after {
-  content: "";
-  width: 100%;
-  left: 0;
-  bottom: 100%;
-  position: absolute;
-  display: block;
-  height: 1rem;
-  background-color: transparent;
-}
-
-.uix-tooltip .uix-tooltip__content--top {
-  bottom: 125%;
-  left: 50%;
-  margin-left: -60px;
-  transform: translate(0, -10px);
-}
-
-.uix-tooltip .uix-tooltip__content--top::before {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #fff transparent transparent transparent;
-}
-
-.uix-tooltip .uix-tooltip__content--top::after {
-  content: "";
-  width: 100%;
-  left: 0;
-  top: 100%;
-  position: absolute;
-  display: block;
-  height: 1rem;
-  background-color: transparent;
-}
-
-.uix-tooltip .uix-tooltip__content--left {
-  top: -5px;
-  bottom: auto;
-  right: 125%;
-  transform: translate(-10px, 0);
-}
-
-.uix-tooltip .uix-tooltip__content--left::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 100%;
-  margin-top: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent transparent transparent #fff;
-}
-
-.uix-tooltip .uix-tooltip__content--left::after {
-  content: "";
-  height: 100%;
-  top: 0;
-  left: 100%;
-  position: absolute;
-  display: block;
-  width: 1rem;
-  background-color: transparent;
 }
 
 /* ====================================================== 
@@ -15704,6 +15706,13 @@ a img.aligncenter {
   }
   55% {
     right: 2px;
+  }
+  100% {
+    right: 180px;
+    left: 2px;
+  }
+}
+ght: 2px;
   }
   100% {
     right: 180px;
