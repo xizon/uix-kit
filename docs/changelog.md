@@ -1,6 +1,17 @@
 # Changelog
 
-#### = 2.0.7 (August 10, 2018) =
+
+
+#### = 2.0.8 (August 10, 2018) =
+
+* Fix: Fixed image width adaptation problem for Advanced Slider.
+* Fix: Fixed an issue where the Common Height script was invalid for some grids.
+* Tweak: Optimized the extension style of the container.
+* Tweak: JavaScript code reserved for Input Validation with Form module.
+
+
+
+#### = 2.0.7 (August 9, 2018) =
 
 
 * New: Introducing Hammer.JS to reduce the amount of script.

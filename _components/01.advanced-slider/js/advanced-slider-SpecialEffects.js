@@ -9,7 +9,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.ADVANCED_SLIDER_FILTER               = APP.ADVANCED_SLIDER_FILTER || {};
-	APP.ADVANCED_SLIDER_FILTER.version       = '0.0.9';
+	APP.ADVANCED_SLIDER_FILTER.version       = '0.1.0';
     APP.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 	
@@ -268,6 +268,15 @@ APP = ( function ( APP, $, window, document ) {
 				//-------------------------------------	
 				if ( $( '#' + rendererCanvasID ).length == 0 ) {
 					$this.prepend( '<div id="'+rendererOuterID+'" class="uix-advanced-slider-sp__canvas-container"><canvas id="'+rendererCanvasID+'"></canvas></div>' );
+					
+					
+					//Fixed image width adaptation problem for Advanced Slider
+					//-------------------------------------
+					setTimeout( function(){
+						$( '#' + rendererCanvasID ).css( 'width', $sliderWrapper.width() + 'px' );
+					}, animDuration );
+				
+					
 				}
 
 				//Basic webGL renderers 
@@ -291,6 +300,7 @@ APP = ( function ( APP, $, window, document ) {
 				displacementSprite    = ( dataFilterTexture.indexOf( '.mp4' ) >= 0 ) ? new PIXI.Sprite( PIXI.Texture.fromVideo( dataFilterTexture ) ) : new PIXI.Sprite.fromImage( dataFilterTexture );
 				displacementFilter    = new PIXI.filters.DisplacementFilter( displacementSprite );
 
+				
 
 				//----------------------------------------------------------------------------------
 				//--------------------------------- Brightness Effect -------------------------------	
@@ -1315,6 +1325,7 @@ APP = ( function ( APP, $, window, document ) {
 				}// end effect
 
 
+
 				//Canvas Interactions
 				//-------------------------------------
 				transitionInteractions( 0, itemsTotal-1, $this, 'in', 'next' );
@@ -1417,6 +1428,8 @@ APP = ( function ( APP, $, window, document ) {
 
 
 			});
+
+			
 
 
 
@@ -1575,7 +1588,6 @@ APP = ( function ( APP, $, window, document ) {
 				return false;
 			}
 	
-			
 			
 			//Transition Interception
 			//-------------------------------------

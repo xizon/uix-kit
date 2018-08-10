@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  2.0.7
+ * ## Version             :  2.0.8
  * ## Last Update         :  August 10, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -46,8 +46,8 @@
     22. Accordion 
     23. Accordion Background Images 
     24. Advanced Content Slider 
-    25. Advanced Slider (Special Effects) 
-    26. Advanced Slider (Basic) 
+    25. Advanced Slider (Basic) 
+    26. Advanced Slider (Special Effects) 
     27. Circle Layout 
     28. Counter 
     29. Dropdown Menu 
@@ -56,8 +56,8 @@
     32. Flexslider 
     33. Floating Side Element 
     34. Form 
-    35. Form Progress 
-    36. jQuery UI Datepicker 1.11.4 
+    35. jQuery UI Datepicker 1.11.4 
+    36. Form Progress 
     37. Gallery 
     38. Hover Delay Interaction 
     39. Image Shapes 
@@ -4545,7 +4545,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.ADVANCED_SLIDER_FILTER               = APP.ADVANCED_SLIDER_FILTER || {};
-	APP.ADVANCED_SLIDER_FILTER.version       = '0.0.9';
+	APP.ADVANCED_SLIDER_FILTER.version       = '0.1.0';
     APP.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 	
@@ -4804,6 +4804,15 @@ APP = ( function ( APP, $, window, document ) {
 				//-------------------------------------	
 				if ( $( '#' + rendererCanvasID ).length == 0 ) {
 					$this.prepend( '<div id="'+rendererOuterID+'" class="uix-advanced-slider-sp__canvas-container"><canvas id="'+rendererCanvasID+'"></canvas></div>' );
+					
+					
+					//Fixed image width adaptation problem for Advanced Slider
+					//-------------------------------------
+					setTimeout( function(){
+						$( '#' + rendererCanvasID ).css( 'width', $sliderWrapper.width() + 'px' );
+					}, animDuration );
+				
+					
 				}
 
 				//Basic webGL renderers 
@@ -4827,6 +4836,7 @@ APP = ( function ( APP, $, window, document ) {
 				displacementSprite    = ( dataFilterTexture.indexOf( '.mp4' ) >= 0 ) ? new PIXI.Sprite( PIXI.Texture.fromVideo( dataFilterTexture ) ) : new PIXI.Sprite.fromImage( dataFilterTexture );
 				displacementFilter    = new PIXI.filters.DisplacementFilter( displacementSprite );
 
+				
 
 				//----------------------------------------------------------------------------------
 				//--------------------------------- Brightness Effect -------------------------------	
@@ -5851,6 +5861,7 @@ APP = ( function ( APP, $, window, document ) {
 				}// end effect
 
 
+
 				//Canvas Interactions
 				//-------------------------------------
 				transitionInteractions( 0, itemsTotal-1, $this, 'in', 'next' );
@@ -5953,6 +5964,8 @@ APP = ( function ( APP, $, window, document ) {
 
 
 			});
+
+			
 
 
 
@@ -6111,7 +6124,6 @@ APP = ( function ( APP, $, window, document ) {
 				return false;
 			}
 	
-			
 			
 			//Transition Interception
 			//-------------------------------------
