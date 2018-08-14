@@ -83,6 +83,15 @@ $button-class-margin-b: 1.5rem;
 		border-radius: 4px;
 	}
 	
+	&.is-fullwidth {
+		max-width: none;
+		width: 100%;
+	}
+	&.is-fullwidth.is-pill {
+		padding-left: 35px;
+		padding-right: 35px;
+	}
+
 	
 	&:focus {
 	    outline: none;
@@ -112,15 +121,6 @@ $button-class-margin-b: 1.5rem;
 }
 
 
-
-.uix-btn--full {
-	max-width: none;
-	width: 100%;
-}
-.uix-btn--full.is-pill {
-	padding-left: 35px;
-	padding-right: 35px;
-}
 
 
 
@@ -322,11 +322,7 @@ $button-class-margin-b: 1.5rem;
 	background-image: linear-gradient(to right, $btn-gradient-color1 0%, $btn-gradient-color2 20%, $btn-gradient-color3 100%);
 	box-shadow: 0 4px 15px 0 rgba($highlight-color1, 0.75);
 	color: #fff;
-	width: auto; 
-	
-	&.uix-btn--full {
-		width: 100%;
-	}
+
 	
 	&.is-transparent {
 		background: none;
@@ -343,12 +339,7 @@ $button-class-margin-b: 1.5rem;
 
 
 .uix-btn__bg--secondary {
-	width: auto; 
-	
-	&.uix-btn--full {
-		width: 100%;
-	}	
-	
+
 	&:not(.is-fill-white) {
 		border-color: #fff;
 		background-color: transparent;

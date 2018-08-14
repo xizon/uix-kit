@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  2.0.8
- * ## Last Update         :  August 10, 2018
+ * ## Version             :  2.1.0
+ * ## Last Update         :  August 14, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -70,95 +70,94 @@
     5. Typography 
     6. Spacing 
     7. Basic Layout Styles 
-    8. Basic Layout Styles 
-    9. Navigation 
-    10. Header Area 
-    11. Brand 
-    12. Footer 
-    13. Video 
-    14. Back to Top 
-    15. Loader 
-    16. Social Media Icons 
-    17. Pagination 
-    18. Filterable Navigation 
-    19. Sidebar  
-    20. Search 
-    21. Tags 
-    22. Entry 
-    23. Comments ( Synchronize to WordPress's class name ) 
-    24. Mobile Menu 
-    25. Onepage Menu 
-    26. Modal Dialog 
-    27. 3rd Party Plugins 
-    28. 3D Background 
-    29. 3D Carousel 
-    30. Accordion 
-    31. Accordion Background Images 
-    32. Advanced Content Slider 
-    33. Advanced Slider (Special Effects) 
-    34. Advanced Slider (Basic) 
-    35. Badges 
-    36. Blended Grid Layout 
-    37. Breadcrumbs 
-    38. Button 
-    39. Cards 
-    40. Circle Layout 
-    41. Counter 
-    42. Dividing Line 
-    43. Dots 
-    44. Dotted Line 
-    45. Dropdown Menu 
-    46. Dropdown Menu 2 (Multi-level drop-down navigation) 
-    47. Equal-width Columns 
-    48. Features 
-    49. Flexslider 
-    50. Floating Side Element 
-    51. Footer Templates 
-    52. Form 
-    53. Form Progress 
-    54. Gallery 
-    55. Heading 
-    56. Image Animation 
-    57. Image Shapes 
-    58. Custom Core Scripts & Stylesheets 
-    59. Lava-Lamp Style Menu 
-    60. Cutom Light Box 
-    61. Brands List 
-    62. Bulleted List 
-    63. Maintain Aspect Ratio List 
-    64. List of Posts 
-    65. List of Split Posts 
-    66. Side by Side List 
-    67. Side by Side List With Photo 
-    68. Fullwidth List of Split 2 
-    69. Fullwidth List of Split 
-    70. Mouse Animation Scroll 
-    71. Multiple Items Carousel 
-    72. Overlay 
-    73. Parallax 
-    74. Periodical Scroll 
-    75. Pricing 
-    76. Progress Bar 
-    77. Progress Line 
-    78. Ribbon 
-    79. Shape Animation 
-    80. Show More Less 
-    81. Single Post 
-    82. Source Code 
-    83. Striking 
-    84. SVG Map 
-    85. Tabs 
-    86. Team Focus 
-    87. Team Fullwidth (Style using the Side by Side List With Photo module) 
-    88. Team Gird 
-    89. Testimonials Carousel 
-    90. Text effect 
-    91. Timeline 
-    92. ToolTip 
-    93. Vertical Menu 
-    94. Vertical Separator 
-    95. Wave Background 
-    96. WordPress Core ( Do not use prefix "uix-" ) 
+    8. Navigation 
+    9. Header Area 
+    10. Brand 
+    11. Footer 
+    12. Video 
+    13. Back to Top 
+    14. Loader 
+    15. Social Media Icons 
+    16. Pagination 
+    17. Filterable Navigation 
+    18. Sidebar  
+    19. Search 
+    20. Tags 
+    21. Entry 
+    22. Comments ( Synchronize to WordPress's class name ) 
+    23. Mobile Menu 
+    24. Onepage Menu 
+    25. Modal Dialog 
+    26. 3rd Party Plugins 
+    27. 3D Background 
+    28. 3D Carousel 
+    29. Accordion 
+    30. Accordion Background Images 
+    31. Advanced Content Slider 
+    32. Advanced Slider (Special Effects) 
+    33. Advanced Slider (Basic) 
+    34. Badges 
+    35. Blended Grid Layout 
+    36. Breadcrumbs 
+    37. Button 
+    38. Cards 
+    39. Circle Layout 
+    40. Counter 
+    41. Dividing Line 
+    42. Dots 
+    43. Dotted Line 
+    44. Dropdown Menu 
+    45. Dropdown Menu 2 (Multi-level drop-down navigation) 
+    46. Equal-width Columns 
+    47. Features 
+    48. Flexslider 
+    49. Floating Side Element 
+    50. Footer Templates 
+    51. Form 
+    52. Form Progress 
+    53. Gallery 
+    54. Heading 
+    55. Image Animation 
+    56. Image Shapes 
+    57. Custom Core Scripts & Stylesheets 
+    58. Lava-Lamp Style Menu 
+    59. Cutom Light Box 
+    60. Brands List 
+    61. Bulleted List 
+    62. Maintain Aspect Ratio List 
+    63. List of Posts 
+    64. List of Split Posts 
+    65. Side by Side List 
+    66. Side by Side List With Photo 
+    67. Fullwidth List of Split 2 
+    68. Fullwidth List of Split 
+    69. Mouse Animation Scroll 
+    70. Multiple Items Carousel 
+    71. Overlay 
+    72. Parallax 
+    73. Periodical Scroll 
+    74. Pricing 
+    75. Progress Bar 
+    76. Progress Line 
+    77. Ribbon 
+    78. Shape Animation 
+    79. Show More Less 
+    80. Single Post 
+    81. Source Code 
+    82. Striking 
+    83. SVG Map 
+    84. Tabs 
+    85. Team Focus 
+    86. Team Fullwidth (Style using the Side by Side List With Photo module) 
+    87. Team Gird 
+    88. Testimonials Carousel 
+    89. Text effect 
+    90. Timeline 
+    91. ToolTip 
+    92. Vertical Menu 
+    93. Vertical Separator 
+    94. Wave Background 
+    95. WordPress Core ( Do not use prefix "uix-" ) 
 
 
 
@@ -311,6 +310,8 @@ iframe {
 /* ====================================================== */
 table.uix-table,
 .uix-table table {
+    margin: 0;
+    padding: 0;
     border-collapse: collapse;
     border-spacing: 0;
     empty-cells: show;
@@ -322,7 +323,6 @@ table.uix-table,
 table.uix-table caption,
 .uix-table table caption {
     padding: 0.875rem 0;
-    text-align: center;
 }
 
 table.uix-table th,
@@ -346,8 +346,13 @@ table.uix-table th,
 table.uix-table thead,
 .uix-table table thead {
     background: #f2f2f2;
-    text-align: left;
     vertical-align: bottom;
+}
+
+table.uix-table thead th,
+.uix-table table thead th {
+    text-align: inherit;
+  /* Required */;
 }
 
 table.uix-table tfoot,
@@ -355,14 +360,44 @@ table.uix-table tfoot,
     border: 1px solid #d6d5d5;
 }
 
-table.uix-table tr th,
-.uix-table table tr th {
-    text-align: left;
-}
-
 table.uix-table td,
 .uix-table table td {
     background-color: transparent;
+}
+
+@media all and (max-width: 768px) {
+    table.uix-table.is-responsive thead,
+  .uix-table.is-responsive table thead {
+        display: none;
+    }
+
+    table.uix-table.is-responsive tbody tr:nth-of-type(even),
+  .uix-table.is-responsive table tbody tr:nth-of-type(even) {
+        background-color: #f2f2f2;
+    }
+
+    table.uix-table.is-responsive tbody td,
+  .uix-table.is-responsive table tbody td {
+        display: block;
+    }
+
+    table.uix-table.is-responsive tbody td::before,
+  .uix-table.is-responsive table tbody td::before {
+        content: attr(data-table);
+        display: block;
+        float: left;
+        width: 40%;
+        font-weight: bold;
+        border-right: 1px solid #d6d5d5;
+        margin-right: 0.5rem;
+    }
+
+    table.uix-table.is-responsive tbody td::after,
+  .uix-table.is-responsive table tbody td::after {
+        content: '';
+        display: block;
+        clear: both;
+    }
 }
 
 table.uix-table--bordered,
@@ -370,11 +405,6 @@ table.uix-table--bordered,
     border: 1px solid #d6d5d5;
     border-collapse: collapse;
     width: 100%;
-}
-
-table.uix-table--bordered th,
-.uix-table--bordered table th {
-    text-align: left;
 }
 
 table.uix-table--bordered td,
@@ -850,20 +880,8 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li::before,
     float: left;
 }
 
-@media all and (max-width: 768px) {
-    .uix-f-l.mobile-none {
-        float: none;
-    }
-}
-
 .uix-f-r {
     float: right;
-}
-
-@media all and (max-width: 768px) {
-    .uix-f-r.mobile-none {
-        float: none;
-    }
 }
 
 /* 
@@ -875,32 +893,26 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li::before,
     text-align: right;
 }
 
-@media all and (max-width: 768px) {
-    .uix-t-r.mobile-center {
-        text-align: center;
-    }
-
-    .uix-t-r.mobile-left {
-        text-align: left;
-    }
-}
-
 .uix-t-l {
     text-align: left;
 }
 
+.uix-t-c {
+    text-align: center;
+}
+
 @media all and (max-width: 768px) {
-    .uix-t-l.mobile-center {
+    .uix-mobile-tc {
         text-align: center;
     }
 
-    .uix-t-l.mobile-right {
+    .uix-mobile-tl {
+        text-align: left;
+    }
+
+    .uix-mobile-tr {
         text-align: right;
     }
-}
-
-.uix-t-c {
-    text-align: center;
 }
 
 /* 
@@ -1712,13 +1724,21 @@ h6 {
 .uix-container__bg {
   position: relative;
   z-index: 2;
-  background: #fff;
   overflow: hidden;
 }
 
 .uix-container__bg .row {
   margin-left: 0;
   margin-right: 0;
+}
+
+.uix-container__bg.uix-container__bg--no-gutter {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.uix-container__bg.uix-container__bg--white {
+  background: #fff;
 }
 
 .uix-container__bg.uix-container__bg--shadow {
@@ -4243,6 +4263,19 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
 /* ====================================================== 
     <!-- Modal Dialog --> 
 /* ====================================================== */
+.uix-modal-mask {
+  background: transparent;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  z-index: 99997;
+  display: none;
+  content: '';
+  background: rgba(0, 0, 0, 0.7);
+}
+
 .uix-modal-box {
   position: fixed;
   top: calc( -100vh - 71px);
@@ -4260,8 +4293,14 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
   /* Video container */
 }
 
+.uix-modal-box:not(.is-fullscreen) {
+  max-width: calc(100vw - 100px);
+  max-height: calc(100vh - 100px);
+}
+
 .uix-modal-box .uix-modal-box__video-container > div.video-js {
   margin: 0 auto;
+  transform: translateY(15px);
 }
 
 .uix-modal-box .uix-modal-box__video-waiting {
@@ -4288,8 +4327,13 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
 }
 
 .uix-modal-box .uix-modal-box__content {
-  padding: 1.5rem 2.1875rem 1.5rem 1.5rem;
+  padding: 1.5rem 1.625rem 1.5rem 1.5rem;
   word-wrap: break-word;
+  height: 100%;
+}
+
+.uix-modal-box .uix-modal-box__content > div {
+  position: relative;
   height: 100%;
   overflow: hidden;
 }
@@ -4320,7 +4364,8 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
   font-family: 'FontAwesome';
   content: "\f067";
   color: #fff;
-  font-size: 1.25rem;
+  font-size: 16px;
+  margin: 0;
 }
 
 .uix-modal-box .uix-modal-box__close:hover {
@@ -4354,7 +4399,7 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
   opacity: 1;
 }
 
-.uix-modal-box.active .uix-modal-box__content {
+.uix-modal-box.active .uix-modal-box__content > div {
   overflow-y: auto;
 }
 
@@ -4366,10 +4411,6 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
   border-radius: 0;
 }
 
-.uix-modal-box.is-fullscreen .uix-modal-box__close {
-  right: 26px;
-}
-
 .uix-modal-box.is-fullscreen .uix-modal-box__close::after {
   font-size: 1rem;
 }
@@ -4379,18 +4420,33 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
   background: none;
 }
 
-.uix-modal-box:not(.is-fullscreen).active .uix-modal-box__close {
-  background: none;
-  box-shadow: none;
+.uix-modal-box__content > div::-webkit-scrollbar-track {
+  border-radius: 0px;
+  background-color: #e9ecee;
 }
 
-.uix-modal-box:not(.is-fullscreen) .uix-modal-box__close:hover {
-  background: none;
+.uix-modal-box__content > div::-webkit-scrollbar-corner {
+  background-color: transparent;
 }
 
-.uix-modal-box:not(.is-fullscreen).active .uix-modal-box__close::after {
-  color: #929292;
-  font-size: 1.875rem;
+.uix-modal-box__content > div::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+.uix-modal-box__content > div::-webkit-scrollbar {
+  width: 8px;
+}
+
+.uix-modal-box__content > div::-webkit-scrollbar-thumb {
+  border-radius: 0px;
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.07);
+}
+
+.uix-modal-box__content > div::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 @media all and (max-width: 991px) {
@@ -4402,20 +4458,8 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
 @media all and (max-width: 768px) {
   .uix-modal-box:not(.is-fullscreen) {
     width: 90% !important;
+    height: 60vh !important;
   }
-}
-
-.uix-modal-mask {
-  background: transparent;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  position: fixed;
-  z-index: 99997;
-  display: none;
-  content: '';
-  background: rgba(0, 0, 0, 0.7);
 }
 
 /* ====================================================== 
@@ -5832,6 +5876,16 @@ pointer-events: auto;
     border-radius: 4px;
 }
 
+.uix-btn.is-fullwidth {
+    max-width: none;
+    width: 100%;
+}
+
+.uix-btn.is-fullwidth.is-pill {
+    padding-left: 35px;
+    padding-right: 35px;
+}
+
 .uix-btn:focus {
     outline: none;
 }
@@ -5853,16 +5907,6 @@ pointer-events: auto;
     100% {
         background-position: 30px 0px;
     }
-}
-
-.uix-btn--full {
-    max-width: none;
-    width: 100%;
-}
-
-.uix-btn--full.is-pill {
-    padding-left: 35px;
-    padding-right: 35px;
 }
 
 /* 
@@ -6029,11 +6073,6 @@ pointer-events: auto;
     background-image: linear-gradient(to right, #EC5E79 0%, #f60 20%, #d83ba0 100%);
     box-shadow: 0 4px 15px 0 rgba(236, 94, 121, 0.75);
     color: #fff;
-    width: auto;
-}
-
-.uix-btn__bg--primary.uix-btn--full {
-    width: 100%;
 }
 
 .uix-btn__bg--primary.is-transparent {
@@ -6046,14 +6085,6 @@ pointer-events: auto;
     background-color: #EC5E79;
     background-image: linear-gradient(to right, #EC5E79 0%, #f60 20%, #d83ba0 100%);
     color: #fff;
-}
-
-.uix-btn__bg--secondary {
-    width: auto;
-}
-
-.uix-btn__bg--secondary.uix-btn--full {
-    width: 100%;
 }
 
 .uix-btn__bg--secondary:not(.is-fill-white) {
@@ -10133,14 +10164,28 @@ ol.uix-flexslider__control-paging li a:hover, ol.uix-flexslider__control-paging 
   background-color: #e9ecee;
 }
 
+.uix-lightbox__content::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+.uix-lightbox__content::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
 .uix-lightbox__content::-webkit-scrollbar {
-  width: 5px;
-  background-color: #EC5E79;
+  width: 8px;
 }
 
 .uix-lightbox__content::-webkit-scrollbar-thumb {
   border-radius: 0px;
-  background-color: #EC5E79;
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.07);
+}
+
+.uix-lightbox__content::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .uix-lightbox__thumb-container::-webkit-scrollbar-track {
@@ -10148,14 +10193,28 @@ ol.uix-flexslider__control-paging li a:hover, ol.uix-flexslider__control-paging 
   background-color: #e9ecee;
 }
 
+.uix-lightbox__thumb-container::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+.uix-lightbox__thumb-container::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
 .uix-lightbox__thumb-container::-webkit-scrollbar {
-  height: 5px;
-  background-color: #EC5E79;
+  height: 8px;
 }
 
 .uix-lightbox__thumb-container::-webkit-scrollbar-thumb {
   border-radius: 0px;
-  background-color: #EC5E79;
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.07);
+}
+
+.uix-lightbox__thumb-container::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 @media all and (max-width: 768px) {
@@ -14313,69 +14372,6 @@ Style with support for rainbow parens
    <!-- Team Fullwidth (Style using the Side by Side List With Photo module) -->    
 /* ====================================================== */
 /* ====================================================== 
-   <!-- Testimonials Carousel -->  
-/* ====================================================== */
-.uix-testimonials__count {
-  font-size: 0.75rem;
-  letter-spacing: 1px;
-  text-align: center;
-}
-
-.uix-testimonials {
-  /* Required */
-  overflow: hidden;
-}
-
-.uix-testimonials .uix-testimonials__content {
-  position: relative;
-  margin: 0 auto;
-  max-width: calc(100% - 176px);
-  box-shadow: 0 22px 40px 0 #eef4fc;
-  border-radius: 10px;
-  margin-bottom: 100px;
-  padding: 1rem 44px;
-}
-
-.uix-testimonials .uix-testimonials__signature {
-  font-size: 0.75rem;
-  text-align: center;
-  height: 40px;
-  width: 100%;
-  display: block;
-  font-style: italic;
-}
-
-.uix-testimonials .uix-testimonials__signature .uix-testimonials__signature--avatar img {
-  width: 32px;
-  height: 32px;
-  margin: .3rem 0 0.875rem 0.875rem;
-  vertical-align: middle;
-  display: inline-block;
-}
-
-.uix-testimonials .uix-testimonials__signature .uix-testimonials__signature--no-avatar {
-  width: 1px;
-  height: 1px;
-  border: none;
-}
-
-.uix-testimonials .uix-testimonials__signature strong {
-  font-weight: 700;
-}
-
-.uix-testimonials .uix-testimonials__signature strong.uix-testimonials__signature__shorttext {
-  display: inline-block;
-}
-
-@media all and (max-width: 768px) {
-  .uix-testimonials .uix-testimonials__content {
-    max-width: 100%;
-    margin-bottom: 50px;
-    padding: 1rem 0;
-  }
-}
-
-/* ====================================================== 
    <!-- Team Gird -->    
 /* ====================================================== */
 .uix-team--grid .uix-team--grid__item {
@@ -14500,6 +14496,69 @@ Style with support for rainbow parens
 
 .uix-team--grid .uix-team--grid__item:hover .uix-team--grid__detail.uix-team--grid__detail--toggle {
   opacity: 1;
+}
+
+/* ====================================================== 
+   <!-- Testimonials Carousel -->  
+/* ====================================================== */
+.uix-testimonials__count {
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.uix-testimonials {
+  /* Required */
+  overflow: hidden;
+}
+
+.uix-testimonials .uix-testimonials__content {
+  position: relative;
+  margin: 0 auto;
+  max-width: calc(100% - 176px);
+  box-shadow: 0 22px 40px 0 #eef4fc;
+  border-radius: 10px;
+  margin-bottom: 100px;
+  padding: 1rem 44px;
+}
+
+.uix-testimonials .uix-testimonials__signature {
+  font-size: 0.75rem;
+  text-align: center;
+  height: 40px;
+  width: 100%;
+  display: block;
+  font-style: italic;
+}
+
+.uix-testimonials .uix-testimonials__signature .uix-testimonials__signature--avatar img {
+  width: 32px;
+  height: 32px;
+  margin: .3rem 0 0.875rem 0.875rem;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.uix-testimonials .uix-testimonials__signature .uix-testimonials__signature--no-avatar {
+  width: 1px;
+  height: 1px;
+  border: none;
+}
+
+.uix-testimonials .uix-testimonials__signature strong {
+  font-weight: 700;
+}
+
+.uix-testimonials .uix-testimonials__signature strong.uix-testimonials__signature__shorttext {
+  display: inline-block;
+}
+
+@media all and (max-width: 768px) {
+  .uix-testimonials .uix-testimonials__content {
+    max-width: 100%;
+    margin-bottom: 50px;
+    padding: 1rem 0;
+  }
 }
 
 /* ====================================================== 

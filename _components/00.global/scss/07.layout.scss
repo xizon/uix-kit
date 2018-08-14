@@ -64,12 +64,20 @@
 .uix-container__bg {
 	position: relative;
 	z-index: 2;
-	background: #fff;
 	overflow: hidden;
 	
 	.row {
 		margin-left: 0;
 		margin-right: 0;
+	}
+	
+	&.uix-container__bg--no-gutter {
+		padding-left: 0;
+		padding-right: 0;
+	}
+	
+	&.uix-container__bg--white {
+		background: #fff;
 	}
 	
 	&.uix-container__bg--shadow {

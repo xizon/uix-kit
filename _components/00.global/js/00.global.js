@@ -250,12 +250,12 @@ var UIX_GUID = UIX_GUID || (function() {
 
     // Poll, setting timeout_id so the polling loop can be canceled.
     timeout_id = setTimeout( start, 100 );
-  };
+  }
 
   // Stop the polling loop.
   function stop() {
     clearTimeout( timeout_id );
-  };
+  }
 
 } ) ( jQuery );
 

@@ -471,6 +471,7 @@ APP = ( function ( APP, $, window, document ) {
 		
 			//----
 			if ( APP.INDEX ) APP.INDEX.documentReady($); //Theme Scripts
+			if ( APP.TABLE ) APP.TABLE.documentReady($); //Responsive Table
 			if ( APP.MODAL_DIALOG ) APP.MODAL_DIALOG.documentReady($); //Modal Dialog
 			if ( APP.PARALLAX ) APP.PARALLAX.documentReady($); //Parallax
 			if ( APP.VIDEOS ) APP.VIDEOS.documentReady($); //Videos

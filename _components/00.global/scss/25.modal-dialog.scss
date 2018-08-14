@@ -2,6 +2,24 @@
     <!-- Modal Dialog --> 
 /* ====================================================== */
 
+$modal-box-radius: 8px;
+
+
+.uix-modal-mask {
+	background: rgba(0, 0, 0, 0);
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	position: fixed;
+	z-index: 99997;
+	display: none;
+	content: '';
+	background: rgba(0, 0, 0, 0.7);
+}
+
+
+
 .uix-modal-box {
 	position: fixed;
 	top: calc( -100vh - 71px ); /* For compatibility with mobile devices, do not use percentages "%" */
@@ -10,18 +28,25 @@
 	transition: all .5s ease-out;
 	width: 850px;
 	height: 60vh;
-	border-radius: 8px;
+	border-radius: $modal-box-radius;
 	background: #fff;
 	box-shadow: 0px 0px 71px 0px rgba(0, 0, 0, 0.47);
 	left: 50%;
 	transform: translate(-50%, -50%);
 	
+	
+	&:not(.is-fullscreen) {
+		max-width: calc(100vw - 100px);
+		max-height: calc(100vh - 100px);
+	}
 
 	
 	/* Video container */
 	.uix-modal-box__video-container {
+	
 		> div.video-js {
 			margin: 0 auto;
+			transform: translateY(15px);
 		}
 		
 	}
@@ -52,10 +77,15 @@
 	
 	
 	.uix-modal-box__content {
-		padding: 1.5rem 2.1875rem 1.5rem 1.5rem;
+		padding: 1.5rem 1.625rem 1.5rem 1.5rem;
 		word-wrap: break-word;
 		height: 100%;
-		overflow: hidden;
+		
+		> div {
+			position: relative;
+			height: 100%;
+			overflow: hidden;
+		}
 		
 		img {
 			@include transition-default(); 
@@ -83,7 +113,9 @@
 			font-family: 'FontAwesome';
 			content: "\f067";
 			color: #fff;
-			font-size: 1.25rem;
+			font-size: 16px;
+			margin: 0;
+			
 		}	
 		
 		&:hover {
@@ -120,7 +152,11 @@
 	}
 	
 	&.active .uix-modal-box__content {
-	    overflow-y: auto;
+		
+		> div {
+			overflow-y: auto;
+		}
+	    
 	}
 
 	
@@ -134,8 +170,7 @@
 		
 		
 		.uix-modal-box__close {
-			right: 26px;
-
+			
 			&::after {
 				font-size: 1rem;
 			}
@@ -149,23 +184,15 @@
 		}
 	}
 	
-	&:not(.is-fullscreen).active .uix-modal-box__close {
-		background: none;
-		box-shadow: none;
-	}
 
-	&:not(.is-fullscreen) .uix-modal-box__close:hover {
-	    background: none;
-	}
-
-	&:not(.is-fullscreen).active .uix-modal-box__close::after {
-		color: #929292;
-		font-size: 1.875rem;
-	}
-	
-	
 	
 }
+
+@include customScrollbar( 'vertical', '.uix-modal-box__content > div' );
+
+
+
+	
 
 @media all and (max-width: 991px) {
 	.uix-modal-box:not(.is-fullscreen) {
@@ -176,20 +203,10 @@
 @media all and (max-width: 768px) {
 	.uix-modal-box:not(.is-fullscreen) {
 	    width: 90% !important;
+		height: 60vh !important;
 	}
 }
 
-.uix-modal-mask {
-	background: rgba(0, 0, 0, 0);
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	position: fixed;
-	z-index: 99997;
-	display: none;
-	content: '';
-	background: rgba(0, 0, 0, 0.7);
-}
+
 
 

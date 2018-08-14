@@ -8,7 +8,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.MODAL_DIALOG               = APP.MODAL_DIALOG || {};
-	APP.MODAL_DIALOG.version       = '0.0.2';
+	APP.MODAL_DIALOG.version       = '0.0.3';
     APP.MODAL_DIALOG.documentReady = function( $ ) {
 
 		function getTransitionDuration( elementOrSelector ){
@@ -57,7 +57,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			if ( $( this ).data( 'video-win' ) ) {
-				$obj.find( '.uix-modal-box__content' ).css( 'overflow-y', 'hidden' );
+				$obj.find( '.uix-modal-box__content > div' ).css( 'overflow-y', 'hidden' );
 			}
 			
 			
@@ -100,7 +100,7 @@ APP = ( function ( APP, $, window, document ) {
 				setTimeout( function() {
 
 					if ( !$obj.hasClass( 'is-video' ) ) {
-						$obj.find( '.uix-modal-box__content' ).css( 'overflow-y', 'scroll' );
+						$obj.find( '.uix-modal-box__content > div' ).css( 'overflow-y', 'scroll' );
 					}
 					
 				}, getTransitionDuration( '.uix-modal-box#'+dataID ) );

@@ -134,22 +134,10 @@
  */ 
 .uix-f-l {
     float: left;
-	
-	@media all and (max-width: 768px) {
-		&.mobile-none {
-			float: none;
-		}
-	}
 }
 
 .uix-f-r {
     float: right;
-	
-	@media all and (max-width: 768px) {
-		&.mobile-none {
-			float: none;
-		}
-	}
 }
 
 
@@ -160,36 +148,30 @@
  */ 
 .uix-t-r {
     text-align: right;
-	
-	@media all and (max-width: 768px) {
-		&.mobile-center {
-			text-align: center;
-		}	
-		
-		&.mobile-left {
-			text-align: left;
-		}			
-		
-	}
 }
 
 .uix-t-l {
     text-align: left;
-	
-	@media all and (max-width: 768px) {
-		&.mobile-center {
-			text-align: center;
-		}
-		&.mobile-right {
-			text-align: right;
-		}		
-		
-	}
 }
 
 
 .uix-t-c {
     text-align: center;
+}
+
+@media all and (max-width: 768px) {
+	&.uix-mobile-tc {
+		text-align: center;
+	}	
+
+	&.uix-mobile-tl {
+		text-align: left;
+	}	
+	
+	&.uix-mobile-tr {
+		text-align: right;
+	}
+
 }
 
 

@@ -1,6 +1,13 @@
 # Changelog
 
 
+#### = 2.1.0 (August 14, 2018) =
+
+* Tweak: Optimized table styles and support responsive layout.
+* Tweak: Optimized the extension style of the container.
+* Tweak: Enhanced compatibility of Modal Dialog.
+* Tweak: Simplified some module styles.
+
 
 #### = 2.0.8 (August 10, 2018) =
 
