@@ -1,7 +1,13 @@
 # Changelog
 
 
-#### = 2.1.0 (August 14, 2018) =
+#### = 2.1.1 (August 14, 2018) =
+
+* Tweak: Expanded form styles with icons.
+
+
+
+#### = 2.1.0 (August 13, 2018) =
 
 * Tweak: Optimized table styles and support responsive layout.
 * Tweak: Optimized the extension style of the container.

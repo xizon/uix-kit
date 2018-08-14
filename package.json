@@ -1,7 +1,7 @@
 {
   "author": "UIUX Lab",
   "name": "uix-kit",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Uix Kit (https://github.com/xizon/uix-kit)",
   "main": "gulpfile.js",
   "dependencies": {

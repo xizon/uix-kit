@@ -373,7 +373,7 @@ $control-focus-bordercolor2: transparent;
 		}
 
 		input:not([type="checkbox"]):not([type="radio"]) {
-			padding-left: 3.5rem;
+			padding-left: calc(3.5rem - 0.546875rem);
 			width: calc(100% - 1.09375rem - 2px - 2.5rem );
 
 		}
@@ -381,9 +381,47 @@ $control-focus-bordercolor2: transparent;
 		textarea, 
 		button, 
 		select {
-			padding-left: 3.5rem;
+			padding-left: calc(3.5rem - 0.546875rem);
 			width: calc(100% - 1.09375rem - 2px - 2.5rem );
 		}
+		
+		
+		
+		&.is-reversed {
+
+			label {
+				left: 0.546875rem !important;
+
+			}
+
+			i {
+				left: auto;
+				right: 1rem;
+				
+				&::after {
+					left: auto;
+					right: 1.4rem;
+				}
+
+			}	
+			
+			
+			input:not([type="checkbox"]):not([type="radio"]) {
+				padding-left: 0.546875rem;
+				padding-right: calc(3.5rem - 0.546875rem);
+
+			}
+
+			textarea, 
+			button, 
+			select {
+				padding-left: 0.546875rem;
+				padding-right: calc(3.5rem - 0.546875rem);
+			}	
+			
+		}
+
+		
 
 	}
 	
@@ -583,6 +621,17 @@ $control-focus-bordercolor2: transparent;
 				transform: translateX(-4.09375rem) scale(.8);
 			}	
 		}	
+		
+		&.is-reversed {
+			
+			label {
+				&.active {
+					transform: translateX(-1.75rem) scale(.8);
+				}	
+			}		
+		}
+		
+		
 	}
 	
 
@@ -753,6 +802,28 @@ $controls-merge-button-width: 20%;
 			}
 			
 		}
+
+		&.is-reversed {
+			input {
+				padding-left: auto;
+				padding-left: calc(3rem - 0.546875rem);
+
+			}
+
+
+			i {
+				left: auto;
+				right: 1rem;
+				
+				&::after {
+					left: auto;
+					right: 1.4rem;
+				}
+
+			}
+
+		}
+
 
 	}
 	
