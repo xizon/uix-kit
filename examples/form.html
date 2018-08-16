@@ -53,11 +53,11 @@
         
        
         <!-- Theme  -->
-        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTUzNDQwMjYxNDMxOA"/>
+        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTUzNDQwOTM3OTUzMA"/>
         
         
          <!--[if lt IE 10]>
-           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTUzNDQwMjYxNDMxOA" />
+           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTUzNDQwOTM3OTUzMA" />
         <![endif]-->
         
         
@@ -433,7 +433,7 @@
                            
                         
                         
-                                 <form method="post" action="#">
+                                 <form method="post" action="#" id="app-my-form">
                
                
                                  
@@ -527,7 +527,7 @@
 										<div class="col-sm-6">
 
 											<div class="uix-controls is-fullwidth">
-											  <input type="text" class="float-label" name="first-name">
+											  <input type="text" class="float-label reqiured" name="first-name">
 											  <label>First Name<span class="uix-controls__im">*</span></label>
 											</div>
 
@@ -550,7 +550,7 @@
 
 											<div class="uix-controls is-fullwidth is-pill">
 											  <input type="text" class="float-label" name="first-name2">
-											  <label>First Name<span class="uix-controls__im">*</span></label>
+											  <label>First Name</label>
 											</div>
 
 										</div>  
@@ -576,7 +576,7 @@
 
 											<div class="uix-controls is-fullwidth is-iconic">
 										      <i class="fa fa-cogs" aria-hidden="true"></i>
-											  <input type="text" class="float-label" name="first-name">
+											  <input type="text" class="float-label reqiured" name="first-name">
 											  <label>With Icons<span class="uix-controls__im">*</span></label>
 											</div>
 
@@ -601,7 +601,7 @@
 											<div class="uix-controls is-fullwidth is-iconic is-reversed">
 										      <i class="fa fa-cogs" aria-hidden="true"></i>
 											  <input type="text" class="float-label" name="first-name">
-											  <label>With Icons<span class="uix-controls__im">*</span></label>
+											  <label>With Icons</label>
 											</div>
 
 										</div>  
@@ -871,7 +871,7 @@
 								   <div class="row">
 										<div class="col-sm-12 uix-t-l">
 											<div class="uix-controls uix-controls__textarea is-fullwidth">
-											  <textarea name="comments" class="float-label"></textarea>
+											  <textarea rows="5" name="comments" class="float-label"></textarea>
 											  <label>Comments</label>
 											</div>
 										</div>  
@@ -966,7 +966,11 @@
 										</div>  
 
 									</div>
-									<!-- .row end -->   
+									<!-- .row end --> 
+									 
+                            
+                            
+									<span class="response"></span>
                              
                                     
                                 </form>
@@ -986,6 +990,118 @@
  
         </section>
         
+        
+        <script>
+		( function( $ ) {
+		"use strict";
+
+			$( function() {
+
+				/* 
+				 ---------------------------
+				 Input Validation 
+				 ---------------------------
+				 */ 
+				$(document).on( 'submit', '#app-my-form', function(e) {
+
+					var $form        = $( this ),
+						validationOK = true,
+						emailRe      = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm,
+						numReg       = /^\d+$/;
+
+
+
+					//Checkbox
+					if ( !$form.find( '[name="checkboxname"]' ).get(0).checked ) {
+						$form.find( '.response' ).html( '<p class="uix-striking-msg uix-striking-msg--danger"><i class="fa fa-times" aria-hidden="true"></i> This value of checkbox cannot be left blank.</p>' );
+
+						setTimeout( function(){
+							$form.find( '.response' ).html( '' );
+						}, 3000 );	
+
+						validationOK = false;
+					}
+
+
+					//Radio
+					var radioVal = $form.find( '[name="radioname"]:checked' ).val();
+
+					if ( radioVal == '' || typeof radioVal == typeof undefined ) {
+						$form.find( '.response' ).html( '<p class="uix-striking-msg uix-striking-msg--danger"><i class="fa fa-times" aria-hidden="true"></i> This value of radio cannot be left blank.</p>' );
+
+						setTimeout( function(){
+							$form.find( '.response' ).html( '' );
+						}, 3000 );	
+
+						validationOK = false;
+					}
+
+
+					//Email
+					var emailVal = $form.find( '[name="email"]' ).val();
+					if ( emailVal != '' && !emailRe.test( emailVal ) && typeof emailVal != typeof undefined ) {
+						$form.find( '.response' ).html( '<p class="uix-striking-msg uix-striking-msg--danger"><i class="fa fa-times" aria-hidden="true"></i> A valid email address.</p>' );
+
+						setTimeout( function(){
+							$form.find( '.response' ).html( '' );
+						}, 3000 );
+
+						validationOK = false;
+					}
+
+
+					$form.find( '.reqiured' ).each( function()  {
+
+
+						if ( $( this ).val() == '' ) {
+
+							var _ft = $( this )
+											.closest( '.row' )
+											.find( '[class*=col-]' )
+											.html();
+
+
+							if ( _ft.indexOf( '</select>' ) >= 0 ) {
+								_ft = _ft.replace(/<select[\s\S]*<\/select>/ig, '' )
+										 .replace(/<span\sclass=\"uix-controls\_\_select\-trigger\">[\s\S]*<\/span>/ig, '' );
+
+
+							}
+
+
+							var info = _ft.replace(/(&nbsp;|<([^>]+)>|\*)/ig, '' );
+
+							$form.find( '.response' ).html( '<p class="uix-striking-msg uix-striking-msg--danger"><i class="fa fa-times" aria-hidden="true"></i> "'+info+'" Can not be empty.</p>' );
+
+							setTimeout( function(){
+								$form.find( '.response' ).html( '' );
+							}, 3000 );
+
+							validationOK = false;
+							return false;
+
+						}
+
+
+
+					});
+
+
+					if ( validationOK ) {
+						return true;
+					} else {
+						return false;
+					}
+
+				});  	
+
+	
+			} );
+
+
+		} ) ( jQuery );	
+			
+		</script>
         
     
         <!-- Content 01
@@ -1191,14 +1307,14 @@
 	============================================= -->
 	
 	<script>
-		var REVISION     = "2.1.2",
+		var REVISION     = "2.1.3",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
 				"homeUrl"     : "",  //Eg. https://uiux.cc
 				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
 			};
     </script>  
-    <script src="assets/js/uix-kit.min.js?ver=MTUzNDQwMjYxNDMxOA"></script>
+    <script src="assets/js/uix-kit.min.js?ver=MTUzNDQwOTM3OTUzMA"></script>
 
 
 

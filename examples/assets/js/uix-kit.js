@@ -7,7 +7,7 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  2.1.2
+ * ## Version             :  2.1.3
  * ## Last Update         :  August 16, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -27,8 +27,8 @@
     3. Back to Top 
     4. Get all custom attributes of an element like "data-*" 
     5. Navigation 
-    6. Videos 
-    7. Common Height 
+    6. Common Height 
+    7. Videos 
     8. Mega Menu 
     9. Dropdown Categories 
     10. Pagination 
@@ -37,34 +37,34 @@
     13. Mobile Menu 
     14. Responsive Table 
     15. 3D Background 
-    16. 3D Model 
+    16. 3D Background 2 
     17. 3D Background 2 
     18. 3D Carousel 
-    19. 3D Background 2 
+    19. 3D Model 
     20. 3D Pages 
-    21. 3D Sphere Rotation 
-    22. Accordion 
-    23. 3D Particle Effect 
-    24. Advanced Slider (Special Effects) 
+    21. 3D Particle Effect 
+    22. 3D Sphere Rotation 
+    23. Accordion 
+    24. Accordion Background Images 
     25. Advanced Content Slider 
-    26. Advanced Slider (Basic) 
-    27. Accordion Background Images 
+    26. Advanced Slider (Special Effects) 
+    27. Advanced Slider (Basic) 
     28. Circle Layout 
     29. Counter 
     30. Dropdown Menu 
-    31. Flexslider 
+    31. Dropdown Menu 2 (Multi-level drop-down navigation) 
     32. Dynamic Drop Down List from JSON 
-    33. Dropdown Menu 2 (Multi-level drop-down navigation) 
+    33. Flexslider 
     34. Floating Side Element 
     35. Form 
-    36. jQuery UI Datepicker 1.11.4 
-    37. Form Progress 
-    38. Gallery 
+    36. Form Progress 
+    37. Gallery 
+    38. jQuery UI Datepicker 1.11.4 
     39. Hover Delay Interaction 
     40. Image Shapes 
     41. Theme Scripts  
-    42. Custom Lightbox 
-    43. Lava-Lamp Style Menu 
+    42. Lava-Lamp Style Menu 
+    43. Custom Lightbox 
     44. Bulleted List 
     45. Posts List With Ajax 
     46. Fullwidth List of Split 
@@ -2607,230 +2607,6 @@ APP = ( function ( APP, $, window, document ) {
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
-    APP._3D_BACKGROUND_THREE               = APP._3D_BACKGROUND_THREE || {};
-	APP._3D_BACKGROUND_THREE.version       = '0.0.1';
-    APP._3D_BACKGROUND_THREE.documentReady = function( $ ) {
-
-		
-		//Prevent this module from loading in other pages
-		if ( $( '#3D-background-three-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
-		
-		
-		var $window                   = $( window ),
-			windowWidth               = $window.width(),
-			windowHeight              = $window.height(),
-			rendererCanvasID          = '3D-background-three-canvas';
-		
-	
-
-		
-		// Generate one plane geometries mesh to scene
-		//-------------------------------------	
-		var camera,
-			controls,
-			scene,
-			light,
-			renderer,
-			displacementSprite,
-			clock = new THREE.Clock();
-
-		
-		init();
-		render();
-
-		function init() {
-			//camera
-			camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 1, 10000 );
-			camera.position.set(0, 0, -1000);
-
-			//controls
-			controls = new THREE.OrbitControls( camera );
-			controls.rotateSpeed = 0.5;
-			controls.zoomSpeed = 1.2;
-			controls.panSpeed = 0.8;
-			controls.enableZoom = true;
-			controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-			controls.dampingFactor = 0.25;
-			controls.screenSpacePanning = false;
-			controls.minDistance = 100;
-			controls.maxDistance = 500;
-			controls.maxPolarAngle = Math.PI / 2;
-
-			//Scene
-			scene = new THREE.Scene();
-
-			//HemisphereLight
-			scene.add( new THREE.AmbientLight( 0x555555 ) );
-
-			light = new THREE.SpotLight( 0xffffff, 1.5 );
-			light.position.set( 0, 500, 2000 );
-			scene.add( light );
-			
-			
-
-			//WebGL Renderer		
-			renderer = new THREE.WebGLRenderer( { 
-									canvas   : document.getElementById( rendererCanvasID ), //canvas
-									alpha    : true, 
-									antialias: true 
-								} );
-			renderer.setSize( windowWidth, windowHeight );
-
-			
-			// Immediately use the texture for material creation
-			var defaultMaterial    = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
-			
-			displacementSprite = new THREE.Mesh( generateGeometry( 'sphere', 200 ), defaultMaterial );
-			scene.add( displacementSprite );
-
-
-			// Fires when the window changes
-			window.addEventListener( 'resize', onWindowResize, false );
-			
-			
-		}
-
-		function render() {
-			requestAnimationFrame( render );
-			
-            var objVector = new THREE.Vector3(0,0.2,0.1),
-				delta     = clock.getDelta();
-			
-			displacementSprite.rotation.x += delta * objVector.x;
-			displacementSprite.rotation.y += delta * objVector.y;
-			displacementSprite.rotation.z += delta * objVector.z;
-
-			//To set a background color.
-			//renderer.setClearColor( 0x000000 );	
-			
-			controls.update();
-			
-			renderer.render( scene, camera );
-			
-			
-
-			
-		}
-
-
-		function onWindowResize() {
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-			renderer.setSize( window.innerWidth, window.innerHeight );
-		}
-
-		
-
-		
-		/*
-		 * Batch generation of geometry
-		 *
-		 * @param  {string} objectType     - String of geometry type identifier.
-		 * @param  {number} numObjects       - The total number of generated objects.
-		 * @return {void}                  - The constructor.
-		 */
-		function generateGeometry( objectType, numObjects ) {
-
-			var geometry = new THREE.Geometry();
-
-			var applyVertexColors = function( g, c ) {
-
-				g.faces.forEach( function( f ) {
-
-					var n = ( f instanceof THREE.Face3 ) ? 3 : 4;
-
-					for ( var j = 0; j < n; j ++ ) {
-
-						f.vertexColors[ j ] = c;
-
-					}
-
-				} );
-
-			};
-
-			for ( var i = 0; i < numObjects; i ++ ) {
-
-				var position = new THREE.Vector3();
-
-				position.x = Math.random() * 10000 - 5000;
-				position.y = Math.random() * 6000 - 3000;
-				position.z = Math.random() * 8000 - 4000;
-
-				var rotation = new THREE.Euler();
-
-				rotation.x = Math.random() * 2 * Math.PI;
-				rotation.y = Math.random() * 2 * Math.PI;
-				rotation.z = Math.random() * 2 * Math.PI;
-
-				var scale = new THREE.Vector3();
-
-				var geom, color = new THREE.Color();
-
-				scale.x = Math.random() * 200 + 100;
-
-				if ( objectType == "cube" ) {
-
-					geom = new THREE.BoxGeometry( 1, 1, 1 );
-					scale.y = Math.random() * 200 + 100;
-					scale.z = Math.random() * 200 + 100;
-					color.setRGB( 0, 0, Math.random() + 0.1 );
-
-				} else if ( objectType == "sphere" ) {
-
-					geom = new THREE.IcosahedronGeometry( 1, 1 );
-					scale.y = scale.z = scale.x;
-					color.setRGB( Math.random() + 0.1, 0, 0 );
-
-				} else if ( objectType == "poly" ) {
-
-
-					geom = new THREE.CylinderGeometry( 3, 6, 3, 5, 1 );
-					scale.y = Math.random() * 30;
-					scale.z = Math.random() * 30;
-					color.setRGB( Math.random() + 0.1, 0, 0 );
-
-				}
-
-
-				// give the geom's vertices a random color, to be displayed
-				applyVertexColors( geom, color );
-
-				var object = new THREE.Mesh( geom );
-				object.position.copy( position );
-				object.rotation.copy( rotation );
-				object.scale.copy( scale );
-				object.updateMatrix();
-
-				geometry.merge( object.geometry, object.matrix );
-
-			}
-
-			return geometry;
-			
-
-		}
-
-		
-    };
-
-    APP.components.documentReady.push( APP._3D_BACKGROUND_THREE.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
-
-/* 
- *************************************
- * <!-- 3D Background 2 -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
     APP._3D_BACKGROUND_THREE2               = APP._3D_BACKGROUND_THREE2 || {};
 	APP._3D_BACKGROUND_THREE2.version       = '0.0.1';
     APP._3D_BACKGROUND_THREE2.documentReady = function( $ ) {
@@ -3134,6 +2910,230 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
+
+
+
+
+
+/* 
+ *************************************
+ * <!-- 3D Background 2 -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP._3D_BACKGROUND_THREE               = APP._3D_BACKGROUND_THREE || {};
+	APP._3D_BACKGROUND_THREE.version       = '0.0.1';
+    APP._3D_BACKGROUND_THREE.documentReady = function( $ ) {
+
+		
+		//Prevent this module from loading in other pages
+		if ( $( '#3D-background-three-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
+		
+		
+		var $window                   = $( window ),
+			windowWidth               = $window.width(),
+			windowHeight              = $window.height(),
+			rendererCanvasID          = '3D-background-three-canvas';
+		
+	
+
+		
+		// Generate one plane geometries mesh to scene
+		//-------------------------------------	
+		var camera,
+			controls,
+			scene,
+			light,
+			renderer,
+			displacementSprite,
+			clock = new THREE.Clock();
+
+		
+		init();
+		render();
+
+		function init() {
+			//camera
+			camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 1, 10000 );
+			camera.position.set(0, 0, -1000);
+
+			//controls
+			controls = new THREE.OrbitControls( camera );
+			controls.rotateSpeed = 0.5;
+			controls.zoomSpeed = 1.2;
+			controls.panSpeed = 0.8;
+			controls.enableZoom = true;
+			controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+			controls.dampingFactor = 0.25;
+			controls.screenSpacePanning = false;
+			controls.minDistance = 100;
+			controls.maxDistance = 500;
+			controls.maxPolarAngle = Math.PI / 2;
+
+			//Scene
+			scene = new THREE.Scene();
+
+			//HemisphereLight
+			scene.add( new THREE.AmbientLight( 0x555555 ) );
+
+			light = new THREE.SpotLight( 0xffffff, 1.5 );
+			light.position.set( 0, 500, 2000 );
+			scene.add( light );
+			
+			
+
+			//WebGL Renderer		
+			renderer = new THREE.WebGLRenderer( { 
+									canvas   : document.getElementById( rendererCanvasID ), //canvas
+									alpha    : true, 
+									antialias: true 
+								} );
+			renderer.setSize( windowWidth, windowHeight );
+
+			
+			// Immediately use the texture for material creation
+			var defaultMaterial    = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
+			
+			displacementSprite = new THREE.Mesh( generateGeometry( 'sphere', 200 ), defaultMaterial );
+			scene.add( displacementSprite );
+
+
+			// Fires when the window changes
+			window.addEventListener( 'resize', onWindowResize, false );
+			
+			
+		}
+
+		function render() {
+			requestAnimationFrame( render );
+			
+            var objVector = new THREE.Vector3(0,0.2,0.1),
+				delta     = clock.getDelta();
+			
+			displacementSprite.rotation.x += delta * objVector.x;
+			displacementSprite.rotation.y += delta * objVector.y;
+			displacementSprite.rotation.z += delta * objVector.z;
+
+			//To set a background color.
+			//renderer.setClearColor( 0x000000 );	
+			
+			controls.update();
+			
+			renderer.render( scene, camera );
+			
+			
+
+			
+		}
+
+
+		function onWindowResize() {
+			camera.aspect = window.innerWidth / window.innerHeight;
+			camera.updateProjectionMatrix();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+		}
+
+		
+
+		
+		/*
+		 * Batch generation of geometry
+		 *
+		 * @param  {string} objectType     - String of geometry type identifier.
+		 * @param  {number} numObjects       - The total number of generated objects.
+		 * @return {void}                  - The constructor.
+		 */
+		function generateGeometry( objectType, numObjects ) {
+
+			var geometry = new THREE.Geometry();
+
+			var applyVertexColors = function( g, c ) {
+
+				g.faces.forEach( function( f ) {
+
+					var n = ( f instanceof THREE.Face3 ) ? 3 : 4;
+
+					for ( var j = 0; j < n; j ++ ) {
+
+						f.vertexColors[ j ] = c;
+
+					}
+
+				} );
+
+			};
+
+			for ( var i = 0; i < numObjects; i ++ ) {
+
+				var position = new THREE.Vector3();
+
+				position.x = Math.random() * 10000 - 5000;
+				position.y = Math.random() * 6000 - 3000;
+				position.z = Math.random() * 8000 - 4000;
+
+				var rotation = new THREE.Euler();
+
+				rotation.x = Math.random() * 2 * Math.PI;
+				rotation.y = Math.random() * 2 * Math.PI;
+				rotation.z = Math.random() * 2 * Math.PI;
+
+				var scale = new THREE.Vector3();
+
+				var geom, color = new THREE.Color();
+
+				scale.x = Math.random() * 200 + 100;
+
+				if ( objectType == "cube" ) {
+
+					geom = new THREE.BoxGeometry( 1, 1, 1 );
+					scale.y = Math.random() * 200 + 100;
+					scale.z = Math.random() * 200 + 100;
+					color.setRGB( 0, 0, Math.random() + 0.1 );
+
+				} else if ( objectType == "sphere" ) {
+
+					geom = new THREE.IcosahedronGeometry( 1, 1 );
+					scale.y = scale.z = scale.x;
+					color.setRGB( Math.random() + 0.1, 0, 0 );
+
+				} else if ( objectType == "poly" ) {
+
+
+					geom = new THREE.CylinderGeometry( 3, 6, 3, 5, 1 );
+					scale.y = Math.random() * 30;
+					scale.z = Math.random() * 30;
+					color.setRGB( Math.random() + 0.1, 0, 0 );
+
+				}
+
+
+				// give the geom's vertices a random color, to be displayed
+				applyVertexColors( geom, color );
+
+				var object = new THREE.Mesh( geom );
+				object.position.copy( position );
+				object.rotation.copy( rotation );
+				object.scale.copy( scale );
+				object.updateMatrix();
+
+				geometry.merge( object.geometry, object.matrix );
+
+			}
+
+			return geometry;
+			
+
+		}
+
+		
+    };
+
+    APP.components.documentReady.push( APP._3D_BACKGROUND_THREE.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
 
 
 
@@ -3648,140 +3648,6 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
- * <!-- 3D Pages -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP._3D_PAGES               = APP._3D_PAGES || {};
-	APP._3D_PAGES.version       = '0.0.1';
-    APP._3D_PAGES.documentReady = function( $ ) {
-
-		
-		//Prevent this module from loading in other pages
-		if ( $( '#3D-renderer' ).length == 0 || ! Modernizr.webgl ) return false;
-		
-		
-		
-		var $window                   = $( window ),
-			windowWidth               = $window.width(),
-			windowHeight              = $window.height(),
-			viewRenderer              = '3D-renderer';
-		
-		
-		// Generate one plane geometries mesh to scene
-		//-------------------------------------	
-		var camera,
-			controls,
-			scene,
-			light,
-			renderer,
-			clock = new THREE.Clock();
-
-		init();
-		render();
-
-		function init() {
-			//camera
-			camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 1, 10000 );
-			camera.position.set(0, 0, -1000);
-
-			//controls
-			controls = new THREE.OrbitControls( camera );
-			controls.rotateSpeed = 0.5;
-			controls.zoomSpeed = 1.2;
-			controls.panSpeed = 0.8;
-			controls.enableZoom = true;
-			controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-			controls.dampingFactor = 0.25;
-			controls.screenSpacePanning = false;
-			controls.minDistance = 1000;
-			controls.maxDistance = 1500;
-			controls.maxPolarAngle = Math.PI / 2;
-
-			//Scene
-			scene = new THREE.Scene();
-
-			//HemisphereLight
-			light = new THREE.HemisphereLight( 0xffbf67, 0x15c6ff );
-			scene.add( light );
-
-			//WebGL Renderer
-			renderer = new THREE.WebGLRenderer( { 
-									alpha    : true, 
-									antialias: true 
-								} );
-			renderer.setClearColor( 0xffffff, 0 );
-			renderer.setSize( windowWidth - 50, windowHeight - 50 );
-			renderer.domElement.style.zIndex = 5;
-			document.getElementById( viewRenderer ).appendChild( renderer.domElement );
-
-			
-			//Add HTML elements to scene
-			var target  = $( '#html3D-view' ).clone(),
-				pages   = target.find( '.html3D-view-content' );
-
-			pages.each( function() {
-				var el = new THREE.CSS3DObject( $.parseHTML( $( this )[0].outerHTML )[0] );
-
-				el.position.x = $( this ).data( 'position-x' ) || 0;
-				el.position.y = $( this ).data( 'position-y' ) || 0;
-				el.position.z = $( this ).data( 'position-z' ) || 0;
-				el.rotation.x = $( this ).data( 'rotation-x' ) || 0;
-				el.rotation.y = $( this ).data( 'rotation-y' ) || 3.14159265358979;
-				el.rotation.z = $( this ).data( 'rotation-z' ) || 0;
-
-				scene.add( el );
-			});
-			
-
-			
-			
-			//CSS3D Renderer
-			renderer = new THREE.CSS3DRenderer();
-			renderer.setSize( windowWidth, windowHeight );
-			renderer.domElement.style.position = 'absolute';
-			renderer.domElement.style.top = 0;
-			document.getElementById( viewRenderer ).appendChild( renderer.domElement );
-
-			// Fires when the window changes
-			window.addEventListener( 'resize', onWindowResize, false );
-			
-			
-		}
-
-		function render() {
-			requestAnimationFrame( render );
-
-            var delta = clock.getDelta();
-			
-			controls.update();
-			
-			renderer.render( scene, camera );
-			
-		}
-		
-		function onWindowResize() {
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-			renderer.setSize( window.innerWidth, window.innerHeight );
-		}
-
-
-		
-    };
-
-    APP.components.documentReady.push( APP._3D_PAGES.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
-/* 
- *************************************
  * <!-- 3D Particle Effect -->
  *************************************
  */
@@ -3979,6 +3845,140 @@ APP = ( function ( APP, $, window, document ) {
     };
 
     APP.components.documentReady.push( APP._3D_PARTICLE.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+/* 
+ *************************************
+ * <!-- 3D Pages -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP._3D_PAGES               = APP._3D_PAGES || {};
+	APP._3D_PAGES.version       = '0.0.1';
+    APP._3D_PAGES.documentReady = function( $ ) {
+
+		
+		//Prevent this module from loading in other pages
+		if ( $( '#3D-renderer' ).length == 0 || ! Modernizr.webgl ) return false;
+		
+		
+		
+		var $window                   = $( window ),
+			windowWidth               = $window.width(),
+			windowHeight              = $window.height(),
+			viewRenderer              = '3D-renderer';
+		
+		
+		// Generate one plane geometries mesh to scene
+		//-------------------------------------	
+		var camera,
+			controls,
+			scene,
+			light,
+			renderer,
+			clock = new THREE.Clock();
+
+		init();
+		render();
+
+		function init() {
+			//camera
+			camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 1, 10000 );
+			camera.position.set(0, 0, -1000);
+
+			//controls
+			controls = new THREE.OrbitControls( camera );
+			controls.rotateSpeed = 0.5;
+			controls.zoomSpeed = 1.2;
+			controls.panSpeed = 0.8;
+			controls.enableZoom = true;
+			controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+			controls.dampingFactor = 0.25;
+			controls.screenSpacePanning = false;
+			controls.minDistance = 1000;
+			controls.maxDistance = 1500;
+			controls.maxPolarAngle = Math.PI / 2;
+
+			//Scene
+			scene = new THREE.Scene();
+
+			//HemisphereLight
+			light = new THREE.HemisphereLight( 0xffbf67, 0x15c6ff );
+			scene.add( light );
+
+			//WebGL Renderer
+			renderer = new THREE.WebGLRenderer( { 
+									alpha    : true, 
+									antialias: true 
+								} );
+			renderer.setClearColor( 0xffffff, 0 );
+			renderer.setSize( windowWidth - 50, windowHeight - 50 );
+			renderer.domElement.style.zIndex = 5;
+			document.getElementById( viewRenderer ).appendChild( renderer.domElement );
+
+			
+			//Add HTML elements to scene
+			var target  = $( '#html3D-view' ).clone(),
+				pages   = target.find( '.html3D-view-content' );
+
+			pages.each( function() {
+				var el = new THREE.CSS3DObject( $.parseHTML( $( this )[0].outerHTML )[0] );
+
+				el.position.x = $( this ).data( 'position-x' ) || 0;
+				el.position.y = $( this ).data( 'position-y' ) || 0;
+				el.position.z = $( this ).data( 'position-z' ) || 0;
+				el.rotation.x = $( this ).data( 'rotation-x' ) || 0;
+				el.rotation.y = $( this ).data( 'rotation-y' ) || 3.14159265358979;
+				el.rotation.z = $( this ).data( 'rotation-z' ) || 0;
+
+				scene.add( el );
+			});
+			
+
+			
+			
+			//CSS3D Renderer
+			renderer = new THREE.CSS3DRenderer();
+			renderer.setSize( windowWidth, windowHeight );
+			renderer.domElement.style.position = 'absolute';
+			renderer.domElement.style.top = 0;
+			document.getElementById( viewRenderer ).appendChild( renderer.domElement );
+
+			// Fires when the window changes
+			window.addEventListener( 'resize', onWindowResize, false );
+			
+			
+		}
+
+		function render() {
+			requestAnimationFrame( render );
+
+            var delta = clock.getDelta();
+			
+			controls.update();
+			
+			renderer.render( scene, camera );
+			
+		}
+		
+		function onWindowResize() {
+			camera.aspect = window.innerWidth / window.innerHeight;
+			camera.updateProjectionMatrix();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+		}
+
+
+		
+    };
+
+    APP.components.documentReady.push( APP._3D_PAGES.documentReady );
     return APP;
 
 }( APP, jQuery, window, document ) );
@@ -4193,6 +4193,123 @@ APP = ( function ( APP, $, window, document ) {
     return APP;
 
 }( APP, jQuery, window, document ) );
+
+
+
+
+/* 
+ *************************************
+ * <!-- Accordion Background Images -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.ACCORDION_BG               = APP.ACCORDION_BG || {};
+	APP.ACCORDION_BG.version       = '0.0.4';
+    APP.ACCORDION_BG.documentReady = function( $ ) {
+		
+		
+        var $window      = $( window ),
+		    windowWidth  = $window.width(),
+		    windowHeight = $window.height();
+		
+		
+		if ( windowWidth <= 768 ) return false;
+		
+		
+		$( '.uix-accordion-img' ).each( function() {
+			var $this           = $( this ),
+				aEvent          = $this.data( 'event' ),
+				outReset        = $this.data( 'out-reset' ),
+				widthShow       = $this.data( 'width-show' ),
+				closeBtn        = $this.data( 'close-btn' ),
+				$li             = $this.find( 'ul' ).children( 'li' ),
+				total           = $li.length;
+			
+			
+			
+			
+			if( typeof aEvent === typeof undefined ) {
+				aEvent = 'click';
+			}	
+			
+			if( typeof outReset === typeof undefined ) {
+				outReset = true;
+			}	
+			
+			if( typeof widthShow === typeof undefined ) {
+				widthShow = '60%';
+			}		
+			
+			//Initialize the width of each item
+			itemInit();
+			
+			
+
+			$li.on( aEvent, function( e ) {
+				//Prevents further propagation of the current event in the capturing and bubbling phases.
+				e.stopPropagation();
+			
+				
+				//Apply click method to outer div but not inner div
+				if ( e.target.className == 'uix-accordion-img__content' ) {
+					
+					if ( $( this ).hasClass( 'active' ) ) {
+						$( this ).addClass( 'active' );
+
+					} else {
+						
+						$li.addClass( 'sub-active' );
+						$( this ).addClass( 'active' );
+						$( this ).siblings().removeClass( 'active' );
+
+						$li.css( 'width', ( 100 - parseFloat( widthShow ) )/(total - 1) + '%' );
+						$( this ).css( 'width', widthShow );
+
+					}	
+				}
+			
+			}); 
+			
+			if ( outReset ) {
+				$this.on( 'mouseleave', function( e ) {
+					itemInit();
+				}); 	
+			}
+			
+			if( typeof closeBtn != typeof undefined && closeBtn != false && closeBtn != '' ) {
+				$( closeBtn ).on( 'click', function( e ) {
+					e.preventDefault();
+					itemInit();
+				}); 		
+				
+			}	
+			
+			
+	
+			/*
+			 * Initialize the width of each item
+			 *
+			 * @return {void}             - The constructor.
+			 */
+			function itemInit() {
+				$li.removeClass( 'active sub-active' ).css( 'width', 100/total + '%' );
+			}
+			
+			
+			
+		});
+		
+	
+		
+    };
+
+    APP.components.documentReady.push( APP.ACCORDION_BG.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
 
 
 
@@ -4454,123 +4571,6 @@ APP = ( function ( APP, $, window, document ) {
     return APP;
 
 }( APP, jQuery, window, document ) );
-
-
-
-
-/* 
- *************************************
- * <!-- Accordion Background Images -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.ACCORDION_BG               = APP.ACCORDION_BG || {};
-	APP.ACCORDION_BG.version       = '0.0.4';
-    APP.ACCORDION_BG.documentReady = function( $ ) {
-		
-		
-        var $window      = $( window ),
-		    windowWidth  = $window.width(),
-		    windowHeight = $window.height();
-		
-		
-		if ( windowWidth <= 768 ) return false;
-		
-		
-		$( '.uix-accordion-img' ).each( function() {
-			var $this           = $( this ),
-				aEvent          = $this.data( 'event' ),
-				outReset        = $this.data( 'out-reset' ),
-				widthShow       = $this.data( 'width-show' ),
-				closeBtn        = $this.data( 'close-btn' ),
-				$li             = $this.find( 'ul' ).children( 'li' ),
-				total           = $li.length;
-			
-			
-			
-			
-			if( typeof aEvent === typeof undefined ) {
-				aEvent = 'click';
-			}	
-			
-			if( typeof outReset === typeof undefined ) {
-				outReset = true;
-			}	
-			
-			if( typeof widthShow === typeof undefined ) {
-				widthShow = '60%';
-			}		
-			
-			//Initialize the width of each item
-			itemInit();
-			
-			
-
-			$li.on( aEvent, function( e ) {
-				//Prevents further propagation of the current event in the capturing and bubbling phases.
-				e.stopPropagation();
-			
-				
-				//Apply click method to outer div but not inner div
-				if ( e.target.className == 'uix-accordion-img__content' ) {
-					
-					if ( $( this ).hasClass( 'active' ) ) {
-						$( this ).addClass( 'active' );
-
-					} else {
-						
-						$li.addClass( 'sub-active' );
-						$( this ).addClass( 'active' );
-						$( this ).siblings().removeClass( 'active' );
-
-						$li.css( 'width', ( 100 - parseFloat( widthShow ) )/(total - 1) + '%' );
-						$( this ).css( 'width', widthShow );
-
-					}	
-				}
-			
-			}); 
-			
-			if ( outReset ) {
-				$this.on( 'mouseleave', function( e ) {
-					itemInit();
-				}); 	
-			}
-			
-			if( typeof closeBtn != typeof undefined && closeBtn != false && closeBtn != '' ) {
-				$( closeBtn ).on( 'click', function( e ) {
-					e.preventDefault();
-					itemInit();
-				}); 		
-				
-			}	
-			
-			
-	
-			/*
-			 * Initialize the width of each item
-			 *
-			 * @return {void}             - The constructor.
-			 */
-			function itemInit() {
-				$li.removeClass( 'active sub-active' ).css( 'width', 100/total + '%' );
-			}
-			
-			
-			
-		});
-		
-	
-		
-    };
-
-    APP.components.documentReady.push( APP.ACCORDION_BG.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
 
 
 
@@ -11233,80 +11233,9 @@ APP = ( function ( APP, $, window, document ) {
 		
 		
 		
-		/* 
-		 ---------------------------
-		 Input Validation 
-		 ---------------------------
-		 */ 
-//		$(document).on( 'submit', '#app-jion-form', function(e) {
-//
-//			var $form        = $( this ),
-//				validationOK = true,
-//				emailRe      = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm,
-//				numReg       = /^\d+$/;
-//
-//
-//
-//			//Email
-//			var emailVal = $form.find( '[name="email"]' ).val();
-//			if ( emailVal != '' && !emailRe.test( emailVal ) ) {
-//				$form.find( '.response' ).html( '<p class="uix-striking-msg uix-striking-msg--danger"><i class="fa fa-times" aria-hidden="true"></i> A valid email address.</p>' );
-//
-//				setTimeout( function(){
-//					$form.find( '.response' ).html( '' );
-//				}, 3000 );
-//
-//				validationOK = false;
-//			}
-//
-//
-//			$form.find( '.reqiured' ).each( function()  {
-//
-//
-//				if ( $( this ).val() == '' ) {
-//
-//					var _ft = $( this )
-//									.closest( '.row' )
-//									.find( '[class*=col-]' )
-//									.html();
-//
-//
-//					if ( _ft.indexOf( '</select>' ) >= 0 ) {
-//						_ft = _ft.replace(/\<select[\s\S]*\<\/select\>/ig, '' )
-//								 .replace(/\<span\sclass=\"uix-controls\_\_select\-trigger\"\>[\s\S]*\<\/span\>/ig, '' );
-//
-//
-//					}
-//
-//					console.log( _ft );
-//
-//					var info = _ft.replace(/(&nbsp;|<([^>]+)>|\*)/ig, '' );
-//
-//					$form.find( '.response' ).html( '<p class="uix-striking-msg uix-striking-msg--danger"><i class="fa fa-times" aria-hidden="true"></i> "'+info+'" Can not be empty.</p>' );
-//
-//					setTimeout( function(){
-//						$form.find( '.response' ).html( '' );
-//					}, 3000 );
-//
-//					validationOK = false;
-//					return false;
-//
-//				}
-//
-//
-//
-//			});
-//
-//
-//			if ( validationOK ) {
-//				return true;
-//			} else {
-//				return false;
-//			}
-//
-//		});  	
+		
+		
 
-	
 		
     };
 

@@ -46,80 +46,9 @@ APP = ( function ( APP, $, window, document ) {
 		
 		
 		
-		/* 
-		 ---------------------------
-		 Input Validation 
-		 ---------------------------
-		 */ 
-//		$(document).on( 'submit', '#app-jion-form', function(e) {
-//
-//			var $form        = $( this ),
-//				validationOK = true,
-//				emailRe      = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm,
-//				numReg       = /^\d+$/;
-//
-//
-//
-//			//Email
-//			var emailVal = $form.find( '[name="email"]' ).val();
-//			if ( emailVal != '' && !emailRe.test( emailVal ) ) {
-//				$form.find( '.response' ).html( '<p class="uix-striking-msg uix-striking-msg--danger"><i class="fa fa-times" aria-hidden="true"></i> A valid email address.</p>' );
-//
-//				setTimeout( function(){
-//					$form.find( '.response' ).html( '' );
-//				}, 3000 );
-//
-//				validationOK = false;
-//			}
-//
-//
-//			$form.find( '.reqiured' ).each( function()  {
-//
-//
-//				if ( $( this ).val() == '' ) {
-//
-//					var _ft = $( this )
-//									.closest( '.row' )
-//									.find( '[class*=col-]' )
-//									.html();
-//
-//
-//					if ( _ft.indexOf( '</select>' ) >= 0 ) {
-//						_ft = _ft.replace(/\<select[\s\S]*\<\/select\>/ig, '' )
-//								 .replace(/\<span\sclass=\"uix-controls\_\_select\-trigger\"\>[\s\S]*\<\/span\>/ig, '' );
-//
-//
-//					}
-//
-//					console.log( _ft );
-//
-//					var info = _ft.replace(/(&nbsp;|<([^>]+)>|\*)/ig, '' );
-//
-//					$form.find( '.response' ).html( '<p class="uix-striking-msg uix-striking-msg--danger"><i class="fa fa-times" aria-hidden="true"></i> "'+info+'" Can not be empty.</p>' );
-//
-//					setTimeout( function(){
-//						$form.find( '.response' ).html( '' );
-//					}, 3000 );
-//
-//					validationOK = false;
-//					return false;
-//
-//				}
-//
-//
-//
-//			});
-//
-//
-//			if ( validationOK ) {
-//				return true;
-//			} else {
-//				return false;
-//			}
-//
-//		});  	
+		
+		
 
-	
 		
     };
 

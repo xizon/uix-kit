@@ -66,7 +66,7 @@ $control-focus-bordercolor2: transparent;
 
 /* Default Controls */
 .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) {
-	text-align: left;
+	
 	position: relative;
 	margin-bottom: 1.09375rem;
 	display: inline-block;/* Avoid line breaks */
@@ -228,7 +228,6 @@ $control-focus-bordercolor2: transparent;
 	textarea {
 
 		resize: none;
-		height: 20vh; 
 
 		&:focus ~ label {
 			color: $control-focus-color;
@@ -838,8 +837,11 @@ $controls-merge-button-width: 20%;
  */ 
 .uix-controls__select {
 	position: relative;
-	text-align: left;
 	margin-right: .3rem;
+	
+	&.js-uix-new {
+		text-align: left; /* Required */
+	}
 	
 	&.is-fullwidth {
 		width: 100%;
@@ -1151,7 +1153,6 @@ $controls-merge-button-width: 20%;
 .uix-controls__radio {
   
 	position: relative;
-	text-align: left;
 
 	label {
 		margin: 0.546875rem .5rem 0.546875rem 0;
@@ -1202,7 +1203,7 @@ $controls-merge-button-width: 20%;
 .uix-controls__toggle {
 	
 	position: relative;
-	text-align: left;
+	
 
 	label {
 		display: inline-block;
@@ -1212,6 +1213,7 @@ $controls-merge-button-width: 20%;
 		overflow: hidden;
 		cursor: pointer;
 		margin-top: .5rem;
+		text-align: left; /* Required */
 	}	
 	
 	&.is-pill {
@@ -1269,11 +1271,11 @@ $controls-merge-button-width: 20%;
 .uix-controls__checkbox {
 
 	position: relative;
-	text-align: left;
 
 	label {
 	    @include control-label-text();
 		cursor: pointer;
+		text-align: left; /* Required */
 	}
 
 

@@ -1,10 +1,10 @@
 # Changelog
 
 
-#### = 2.1.2 (August 16, 2018) =
+#### = 2.1.3 (August 16, 2018) =
 
 * Add: Expanded form to support Multiple Selector and Single Selector.
-
+* Tweak: Optimized form alignment and other styles.
 
 
 #### = 2.1.1 (August 14, 2018) =
