@@ -1,6 +1,12 @@
 # Changelog
 
 
+#### = 2.1.2 (August 16, 2018) =
+
+* Add: Expanded form to support Multiple Selector and Single Selector.
+
+
+
 #### = 2.1.1 (August 14, 2018) =
 
 * Tweak: Expanded form styles with icons.

@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  2.1.1
- * ## Last Update         :  August 14, 2018
+ * ## Version             :  2.1.2
+ * ## Last Update         :  August 16, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -37,24 +37,24 @@
     13. Mobile Menu 
     14. Responsive Table 
     15. 3D Background 
-    16. 3D Background 2 
+    16. 3D Model 
     17. 3D Background 2 
     18. 3D Carousel 
-    19. 3D Model 
+    19. 3D Background 2 
     20. 3D Pages 
-    21. 3D Particle Effect 
-    22. 3D Sphere Rotation 
-    23. Accordion 
-    24. Accordion Background Images 
+    21. 3D Sphere Rotation 
+    22. Accordion 
+    23. 3D Particle Effect 
+    24. Advanced Slider (Special Effects) 
     25. Advanced Content Slider 
-    26. Advanced Slider (Special Effects) 
-    27. Advanced Slider (Basic) 
+    26. Advanced Slider (Basic) 
+    27. Accordion Background Images 
     28. Circle Layout 
     29. Counter 
     30. Dropdown Menu 
-    31. Dropdown Menu 2 (Multi-level drop-down navigation) 
+    31. Flexslider 
     32. Dynamic Drop Down List from JSON 
-    33. Flexslider 
+    33. Dropdown Menu 2 (Multi-level drop-down navigation) 
     34. Floating Side Element 
     35. Form 
     36. jQuery UI Datepicker 1.11.4 
@@ -63,8 +63,8 @@
     39. Hover Delay Interaction 
     40. Image Shapes 
     41. Theme Scripts  
-    42. Lava-Lamp Style Menu 
-    43. Custom Lightbox 
+    42. Custom Lightbox 
+    43. Lava-Lamp Style Menu 
     44. Bulleted List 
     45. Posts List With Ajax 
     46. Fullwidth List of Split 
@@ -4199,123 +4199,6 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
- * <!-- Accordion Background Images -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.ACCORDION_BG               = APP.ACCORDION_BG || {};
-	APP.ACCORDION_BG.version       = '0.0.4';
-    APP.ACCORDION_BG.documentReady = function( $ ) {
-		
-		
-        var $window      = $( window ),
-		    windowWidth  = $window.width(),
-		    windowHeight = $window.height();
-		
-		
-		if ( windowWidth <= 768 ) return false;
-		
-		
-		$( '.uix-accordion-img' ).each( function() {
-			var $this           = $( this ),
-				aEvent          = $this.data( 'event' ),
-				outReset        = $this.data( 'out-reset' ),
-				widthShow       = $this.data( 'width-show' ),
-				closeBtn        = $this.data( 'close-btn' ),
-				$li             = $this.find( 'ul' ).children( 'li' ),
-				total           = $li.length;
-			
-			
-			
-			
-			if( typeof aEvent === typeof undefined ) {
-				aEvent = 'click';
-			}	
-			
-			if( typeof outReset === typeof undefined ) {
-				outReset = true;
-			}	
-			
-			if( typeof widthShow === typeof undefined ) {
-				widthShow = '60%';
-			}		
-			
-			//Initialize the width of each item
-			itemInit();
-			
-			
-
-			$li.on( aEvent, function( e ) {
-				//Prevents further propagation of the current event in the capturing and bubbling phases.
-				e.stopPropagation();
-			
-				
-				//Apply click method to outer div but not inner div
-				if ( e.target.className == 'uix-accordion-img__content' ) {
-					
-					if ( $( this ).hasClass( 'active' ) ) {
-						$( this ).addClass( 'active' );
-
-					} else {
-						
-						$li.addClass( 'sub-active' );
-						$( this ).addClass( 'active' );
-						$( this ).siblings().removeClass( 'active' );
-
-						$li.css( 'width', ( 100 - parseFloat( widthShow ) )/(total - 1) + '%' );
-						$( this ).css( 'width', widthShow );
-
-					}	
-				}
-			
-			}); 
-			
-			if ( outReset ) {
-				$this.on( 'mouseleave', function( e ) {
-					itemInit();
-				}); 	
-			}
-			
-			if( typeof closeBtn != typeof undefined && closeBtn != false && closeBtn != '' ) {
-				$( closeBtn ).on( 'click', function( e ) {
-					e.preventDefault();
-					itemInit();
-				}); 		
-				
-			}	
-			
-			
-	
-			/*
-			 * Initialize the width of each item
-			 *
-			 * @return {void}             - The constructor.
-			 */
-			function itemInit() {
-				$li.removeClass( 'active sub-active' ).css( 'width', 100/total + '%' );
-			}
-			
-			
-			
-		});
-		
-	
-		
-    };
-
-    APP.components.documentReady.push( APP.ACCORDION_BG.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
-
-/* 
- *************************************
  * <!-- Advanced Content Slider -->
  *************************************
  */
@@ -4571,6 +4454,123 @@ APP = ( function ( APP, $, window, document ) {
     return APP;
 
 }( APP, jQuery, window, document ) );
+
+
+
+
+/* 
+ *************************************
+ * <!-- Accordion Background Images -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.ACCORDION_BG               = APP.ACCORDION_BG || {};
+	APP.ACCORDION_BG.version       = '0.0.4';
+    APP.ACCORDION_BG.documentReady = function( $ ) {
+		
+		
+        var $window      = $( window ),
+		    windowWidth  = $window.width(),
+		    windowHeight = $window.height();
+		
+		
+		if ( windowWidth <= 768 ) return false;
+		
+		
+		$( '.uix-accordion-img' ).each( function() {
+			var $this           = $( this ),
+				aEvent          = $this.data( 'event' ),
+				outReset        = $this.data( 'out-reset' ),
+				widthShow       = $this.data( 'width-show' ),
+				closeBtn        = $this.data( 'close-btn' ),
+				$li             = $this.find( 'ul' ).children( 'li' ),
+				total           = $li.length;
+			
+			
+			
+			
+			if( typeof aEvent === typeof undefined ) {
+				aEvent = 'click';
+			}	
+			
+			if( typeof outReset === typeof undefined ) {
+				outReset = true;
+			}	
+			
+			if( typeof widthShow === typeof undefined ) {
+				widthShow = '60%';
+			}		
+			
+			//Initialize the width of each item
+			itemInit();
+			
+			
+
+			$li.on( aEvent, function( e ) {
+				//Prevents further propagation of the current event in the capturing and bubbling phases.
+				e.stopPropagation();
+			
+				
+				//Apply click method to outer div but not inner div
+				if ( e.target.className == 'uix-accordion-img__content' ) {
+					
+					if ( $( this ).hasClass( 'active' ) ) {
+						$( this ).addClass( 'active' );
+
+					} else {
+						
+						$li.addClass( 'sub-active' );
+						$( this ).addClass( 'active' );
+						$( this ).siblings().removeClass( 'active' );
+
+						$li.css( 'width', ( 100 - parseFloat( widthShow ) )/(total - 1) + '%' );
+						$( this ).css( 'width', widthShow );
+
+					}	
+				}
+			
+			}); 
+			
+			if ( outReset ) {
+				$this.on( 'mouseleave', function( e ) {
+					itemInit();
+				}); 	
+			}
+			
+			if( typeof closeBtn != typeof undefined && closeBtn != false && closeBtn != '' ) {
+				$( closeBtn ).on( 'click', function( e ) {
+					e.preventDefault();
+					itemInit();
+				}); 		
+				
+			}	
+			
+			
+	
+			/*
+			 * Initialize the width of each item
+			 *
+			 * @return {void}             - The constructor.
+			 */
+			function itemInit() {
+				$li.removeClass( 'active sub-active' ).css( 'width', 100/total + '%' );
+			}
+			
+			
+			
+		});
+		
+	
+		
+    };
+
+    APP.components.documentReady.push( APP.ACCORDION_BG.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
 
 
 
@@ -11206,7 +11206,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.FORM               = APP.FORM || {};
-	APP.FORM.version       = '0.0.1';
+	APP.FORM.version       = '0.0.2';
     APP.FORM.documentReady = function( $ ) {
 
 		/* 
@@ -11218,139 +11218,20 @@ APP = ( function ( APP, $, window, document ) {
 		// the form externally with other scripts
 		$( document ).customSpecialFormsInit();
 		
-		/* 
-		 ---------------------------
-		 Disabled Status
-		 ---------------------------
-		 */ 	
 		
-		$( 'input.disabled' ).each( function(){
-			$( this ).prop('disabled', true);
-		});
-		
-		
+	
 		
 		/* 
 		 ---------------------------
-		 Input File
+		 Submit Event
 		 ---------------------------
 		 */ 
-		$( '.uix-controls__file-container' ).each( function()  {
-			var fileInput  = $( this ).find( 'input[type="file"]' ),
-				fileBtn    = $( this ).find( '.uix-controls__file-trigger' ),
-				filePath   = $( this ).next( '.uix-controls__file-return' );
-			
-			fileBtn.on( 'click', function() {
-				fileInput.focusin();
-				
-			});	
-			
-			fileInput.on( 'change', function() {
-				filePath.text( $( this ).val() );
-			});	
-			
-		});
-
-		
-		/* 
-		 ---------------------------
-		 Hover Effect
-		 ---------------------------
-		 */ 
-		$( '.float-label' ).each( function(){
-			
-			var $this = $( this );
-			
-
-			// on focus add cladd active to label
-			$this.on( 'focus', function() {
-				$( this ).closest( 'div' ).find( 'label, .uix-controls__bar' ).addClass( 'active' );
-			});
-			
-			
-			//on blur check field and remove class if needed
-			$this.on( 'blur change', function( e ) {
-				if( $this.val() === '' || $this.val() === 'blank') {
-					$( this ).closest( 'div' ).find( 'label, .uix-controls__bar' ).removeClass( 'active' );
-				}	
-				
-			});
-			
-			// if exist cookie value
-			if( $this.val() != '' && $this.val() != 'blank') { 
-			   $( this ).closest( 'div' ).find( 'label, .uix-controls__bar' ).addClass( 'active' );
-			}
-			
-			
-		});
-		
-		
 		//Search Submit Event in WordPress
 		$( '.uix-search-box__submit' ).on( 'click', function() {
 			$( this ).parent().parent( 'form' ).submit();
 		});
 		
 		
-		
-		/* 
-		 ---------------------------
-		 Date Picker
-		 ---------------------------
-		 */ 
-		if ( $.isFunction( $.fn.datepicker ) ) {
-
-			$( '[data-picker]' ).each( function() {
-
-				var $this            = $( this ),
-					dateFormat       = $this.data( 'picker-format' ),
-					monthNames       = $this.data( 'picker-month' ),
-					nextText         = $this.data( 'picker-next' ),
-					prevText         = $this.data( 'picker-prev' ),
-					dayNames         = $this.data( 'picker-day' ),
-					myminDate        = $this.data( 'picker-min-date' ),
-					mymaxDate        = $this.data( 'picker-max-date' );
-				
-				
-				
-				// If there is no data-xxx, save current source to it
-				if( typeof dateFormat === typeof undefined ) dateFormat = 'MM d, yy';
-				if( typeof monthNames === typeof undefined ) monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-				if( typeof nextText === typeof undefined ) nextText = '&#8594;';
-				if( typeof prevText === typeof undefined ) prevText = '&#8592;';
-				if( typeof dayNames === typeof undefined ) dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-				if( typeof myminDate === typeof undefined ) myminDate = -1825;
-				if( typeof mymaxDate === typeof undefined ) mymaxDate = 0;
-		
-				$this.datepicker({
-					"monthNamesShort" : monthNames,
-					"nextText"        : nextText,
-					"prevText"        : prevText,
-					"dayNamesShort"   : dayNames,
-					"dateFormat"      : dateFormat,
-					"changeMonth"     : true,
-					"changeYear"      : true,
-					"yearRange"       : "1930:2092",
-					"minDate"         : myminDate,
-					"maxDate"         : mymaxDate
-				});
-				
-
-
-			} );
-			
-			
-		
-			//Dynamic listening for the latest value
-			$( document ).on( 'mouseleave', '[data-handler]', function() {
-				$( '[data-picker]' ).each( function() {
-					$( this ).closest( 'div' ).find( 'label, .uix-controls__bar' ).addClass( 'active' );
-				});
-
-			});	
-			
-			
-
-		}
 		
 		/* 
 		 ---------------------------
@@ -11456,16 +11337,255 @@ APP = ( function ( APP, $, window, document ) {
  
         this.each( function() {
 			
-			//Custom Select
+			/* 
+			 ---------------------------
+			 Custom Select
+			 ---------------------------
+			 */ 	
 			$( document ).customSelectInit();
 
 
-			//Custom Radio, Toggle And Checkbox
+			/* 
+			 ---------------------------
+			 Custom Radio, Toggle And Checkbox
+			 ---------------------------
+			 */ 		
 			$( document ).customRadioCheckboxInit();
 
 
-			//Create Line Effect on Click
+			/* 
+			 ---------------------------
+			 Create Line Effect on Click
+			 ---------------------------
+			 */ 			
 			$( document ).customControlsLineEffInit();
+			
+			/* 
+			 ---------------------------
+			 Multiple Selector
+			 ---------------------------
+			 */ 
+			//Control Status
+			var multiSel = '.uix-controls__multi-sel > span';
+			
+			$( multiSel ).each( function()  {
+				
+				var targetID = '#' + $( this ).parent().attr( "data-targetid" );
+			
+				if ( $( targetID ).val().indexOf( $( this ).data( 'value' ) ) >= 0 ) {
+					$( this ).addClass( 'active' );
+				} else {
+					$( this ).removeClass( 'active' );
+				}	
+			
+				
+			});
+			
+			
+			$( document ).on( 'click', multiSel, function( e ) {
+				e.preventDefault();
+
+				var $selector     = $( this ).parent(),
+					$option       = $( this ),
+					targetID      = '#' + $selector.data( "targetid" ),
+					curVal        = $option.data( 'value' ),
+					tarVal        = $( targetID ).val() + ',',
+					resVal        = '';
+
+				$option.toggleClass( 'active' );
+
+				if ( tarVal.indexOf( curVal + ',' ) < 0 ) {
+					resVal = tarVal + curVal + ',';
+				} else {
+					resVal = tarVal.replace( curVal + ',', '' );
+				}
+
+				resVal = resVal
+								.replace(/,\s*$/, '' )
+								.replace(/^,/, '' );
+
+				$( targetID ).val( resVal );
+
+
+				//Dynamic listening for the latest value
+				$( targetID ).focus().blur();
+
+			} );
+
+
+			/* 
+			 ---------------------------
+			 Single Selector
+			 ---------------------------
+			 */ 
+			//Control Status
+			var singleSel = '.uix-controls__single-sel > span';
+			
+			$( singleSel ).each( function()  {
+				
+				var targetID = '#' + $( this ).parent().attr( "data-targetid" );
+			
+				if ( $( targetID ).val() == $( this ).data( 'value' ) ) {
+					$( this ).addClass( 'active' );
+				} else {
+					$( this ).removeClass( 'active' );
+				}	
+			
+				
+			});
+					
+			
+			$( document ).on( 'click', singleSel, function( e ) {
+				e.preventDefault();
+
+				var $selector     = $( this ).parent(),
+					$option       = $( this ),
+					targetID      = '#' + $selector.data( "targetid" ),
+					curVal        = $option.data( 'value' );
+
+
+				//Radio Selector
+				$selector.find( '> span' ).removeClass( 'active' );
+				$( targetID ).val( curVal );
+				$option.addClass( 'active' );
+
+
+
+				//Dynamic listening for the latest value
+				$( targetID ).focus().blur();
+
+			} );
+
+
+
+			/* 
+			 ---------------------------
+			 Disabled Status
+			 ---------------------------
+			 */ 	
+
+			$( 'input.disabled' ).each( function(){
+				$( this ).prop('disabled', true);
+			});
+
+
+
+			/* 
+			 ---------------------------
+			 Input File
+			 ---------------------------
+			 */ 
+			$( '.uix-controls__file-container' ).each( function()  {
+				var fileInput  = $( this ).find( 'input[type="file"]' ),
+					fileBtn    = $( this ).find( '.uix-controls__file-trigger' ),
+					filePath   = $( this ).next( '.uix-controls__file-return' );
+
+				fileBtn.on( 'click', function() {
+					fileInput.focusin();
+
+				});	
+
+				fileInput.on( 'change', function() {
+					filePath.text( $( this ).val() );
+				});	
+
+			});
+
+
+			/* 
+			 ---------------------------
+			 Hover Effect
+			 ---------------------------
+			 */ 
+			$( '.float-label' ).each( function(){
+
+				var $this = $( this );
+
+
+				// on focus add cladd active to label
+				$this.on( 'focus', function() {
+					$( this ).closest( 'div' ).find( 'label, .uix-controls__bar' ).addClass( 'active' );
+				});
+
+
+				//on blur check field and remove class if needed
+				$this.on( 'blur change', function( e ) {
+					if( $this.val() === '' || $this.val() === 'blank') {
+						$( this ).closest( 'div' ).find( 'label, .uix-controls__bar' ).removeClass( 'active' );
+					}	
+
+				});
+
+				// if exist cookie value
+				if( $this.val() != '' && $this.val() != 'blank') { 
+				   $( this ).closest( 'div' ).find( 'label, .uix-controls__bar' ).addClass( 'active' );
+				}
+
+
+			});
+
+
+
+			/* 
+			 ---------------------------
+			 Date Picker
+			 ---------------------------
+			 */ 
+			if ( $.isFunction( $.fn.datepicker ) ) {
+
+				$( '[data-picker]' ).each( function() {
+
+					var $this            = $( this ),
+						dateFormat       = $this.data( 'picker-format' ),
+						monthNames       = $this.data( 'picker-month' ),
+						nextText         = $this.data( 'picker-next' ),
+						prevText         = $this.data( 'picker-prev' ),
+						dayNames         = $this.data( 'picker-day' ),
+						myminDate        = $this.data( 'picker-min-date' ),
+						mymaxDate        = $this.data( 'picker-max-date' );
+
+
+
+					// If there is no data-xxx, save current source to it
+					if( typeof dateFormat === typeof undefined ) dateFormat = 'MM d, yy';
+					if( typeof monthNames === typeof undefined ) monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+					if( typeof nextText === typeof undefined ) nextText = '&#8594;';
+					if( typeof prevText === typeof undefined ) prevText = '&#8592;';
+					if( typeof dayNames === typeof undefined ) dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+					if( typeof myminDate === typeof undefined ) myminDate = -1825;
+					if( typeof mymaxDate === typeof undefined ) mymaxDate = 0;
+
+					$this.datepicker({
+						"monthNamesShort" : monthNames,
+						"nextText"        : nextText,
+						"prevText"        : prevText,
+						"dayNamesShort"   : dayNames,
+						"dateFormat"      : dateFormat,
+						"changeMonth"     : true,
+						"changeYear"      : true,
+						"yearRange"       : "1930:2092",
+						"minDate"         : myminDate,
+						"maxDate"         : mymaxDate
+					});
+
+
+
+				} );
+
+
+
+				//Dynamic listening for the latest value
+				$( document ).on( 'mouseleave', '[data-handler]', function() {
+					$( '[data-picker]' ).each( function() {
+						$( this ).closest( 'div' ).find( 'label, .uix-controls__bar' ).addClass( 'active' );
+					});
+
+				});	
+
+
+
+			}
+
 
 
 			
@@ -11739,6 +11859,17 @@ APP = ( function ( APP, $, window, document ) {
 				var dataExist = $( this ).data( 'exist' );
 				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
 					$( '<span class="uix-controls__bar"></span>' ).insertAfter( $( this ).find( 'label' ) );
+					
+					
+					//Multiple Selector or Single Selector
+					if ( $( this ).hasClass( 'uix-controls__multi-sel' ) || $( this ).hasClass( 'uix-controls__single-sel' ) ) {
+						
+						$( this ).find( '> span' ).each( function()  {
+							$( this ).prepend( '<span class="uix-controls__bar"></span>' );
+						});
+						
+					}
+					
 
 					//Prevent the form from being initialized again
 					$( this ).data( 'exist', 1 );	
@@ -14408,6 +14539,42 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
+/* 
+ *************************************
+ * <!-- Theme Scripts  -->
+ *************************************
+ */
+
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+    
+    APP.INDEX               = APP.INDEX || {};
+	APP.INDEX.version       = '0.0.1';
+    APP.INDEX.documentReady = function( $ ) {
+
+	    //your code here...
+		
+    };
+	
+    APP.INDEX.pageLoaded    = function() {
+
+	    //your code here...
+		
+    };
+	
+
+    APP.components.documentReady.push( APP.INDEX.documentReady );
+    APP.components.pageLoaded.push( APP.INDEX.pageLoaded );
+	
+	
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+
 
 /* 
  *************************************
@@ -14490,42 +14657,6 @@ APP = ( function ( APP, $, window, document ) {
     };
 
     APP.components.documentReady.push( APP.LAVA_LAMP_STYLE_MENU.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
-
-/* 
- *************************************
- * <!-- Theme Scripts  -->
- *************************************
- */
-
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-    
-    APP.INDEX               = APP.INDEX || {};
-	APP.INDEX.version       = '0.0.1';
-    APP.INDEX.documentReady = function( $ ) {
-
-	    //your code here...
-		
-    };
-	
-    APP.INDEX.pageLoaded    = function() {
-
-	    //your code here...
-		
-    };
-	
-
-    APP.components.documentReady.push( APP.INDEX.documentReady );
-    APP.components.pageLoaded.push( APP.INDEX.pageLoaded );
-	
-	
     return APP;
 
 }( APP, jQuery, window, document ) );

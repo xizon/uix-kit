@@ -19,7 +19,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.FORM               = APP.FORM || {};
-	APP.FORM.version       = '0.0.1';
+	APP.FORM.version       = '0.0.2';
     APP.FORM.documentReady = function( $ ) {
 
 		/* 
@@ -31,139 +31,20 @@ APP = ( function ( APP, $, window, document ) {
 		// the form externally with other scripts
 		$( document ).customSpecialFormsInit();
 		
-		/* 
-		 ---------------------------
-		 Disabled Status
-		 ---------------------------
-		 */ 	
 		
-		$( 'input.disabled' ).each( function(){
-			$( this ).prop('disabled', true);
-		});
-		
-		
+	
 		
 		/* 
 		 ---------------------------
-		 Input File
+		 Submit Event
 		 ---------------------------
 		 */ 
-		$( '.uix-controls__file-container' ).each( function()  {
-			var fileInput  = $( this ).find( 'input[type="file"]' ),
-				fileBtn    = $( this ).find( '.uix-controls__file-trigger' ),
-				filePath   = $( this ).next( '.uix-controls__file-return' );
-			
-			fileBtn.on( 'click', function() {
-				fileInput.focusin();
-				
-			});	
-			
-			fileInput.on( 'change', function() {
-				filePath.text( $( this ).val() );
-			});	
-			
-		});
-
-		
-		/* 
-		 ---------------------------
-		 Hover Effect
-		 ---------------------------
-		 */ 
-		$( '.float-label' ).each( function(){
-			
-			var $this = $( this );
-			
-
-			// on focus add cladd active to label
-			$this.on( 'focus', function() {
-				$( this ).closest( 'div' ).find( 'label, .uix-controls__bar' ).addClass( 'active' );
-			});
-			
-			
-			//on blur check field and remove class if needed
-			$this.on( 'blur change', function( e ) {
-				if( $this.val() === '' || $this.val() === 'blank') {
-					$( this ).closest( 'div' ).find( 'label, .uix-controls__bar' ).removeClass( 'active' );
-				}	
-				
-			});
-			
-			// if exist cookie value
-			if( $this.val() != '' && $this.val() != 'blank') { 
-			   $( this ).closest( 'div' ).find( 'label, .uix-controls__bar' ).addClass( 'active' );
-			}
-			
-			
-		});
-		
-		
 		//Search Submit Event in WordPress
 		$( '.uix-search-box__submit' ).on( 'click', function() {
 			$( this ).parent().parent( 'form' ).submit();
 		});
 		
 		
-		
-		/* 
-		 ---------------------------
-		 Date Picker
-		 ---------------------------
-		 */ 
-		if ( $.isFunction( $.fn.datepicker ) ) {
-
-			$( '[data-picker]' ).each( function() {
-
-				var $this            = $( this ),
-					dateFormat       = $this.data( 'picker-format' ),
-					monthNames       = $this.data( 'picker-month' ),
-					nextText         = $this.data( 'picker-next' ),
-					prevText         = $this.data( 'picker-prev' ),
-					dayNames         = $this.data( 'picker-day' ),
-					myminDate        = $this.data( 'picker-min-date' ),
-					mymaxDate        = $this.data( 'picker-max-date' );
-				
-				
-				
-				// If there is no data-xxx, save current source to it
-				if( typeof dateFormat === typeof undefined ) dateFormat = 'MM d, yy';
-				if( typeof monthNames === typeof undefined ) monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-				if( typeof nextText === typeof undefined ) nextText = '&#8594;';
-				if( typeof prevText === typeof undefined ) prevText = '&#8592;';
-				if( typeof dayNames === typeof undefined ) dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-				if( typeof myminDate === typeof undefined ) myminDate = -1825;
-				if( typeof mymaxDate === typeof undefined ) mymaxDate = 0;
-		
-				$this.datepicker({
-					"monthNamesShort" : monthNames,
-					"nextText"        : nextText,
-					"prevText"        : prevText,
-					"dayNamesShort"   : dayNames,
-					"dateFormat"      : dateFormat,
-					"changeMonth"     : true,
-					"changeYear"      : true,
-					"yearRange"       : "1930:2092",
-					"minDate"         : myminDate,
-					"maxDate"         : mymaxDate
-				});
-				
-
-
-			} );
-			
-			
-		
-			//Dynamic listening for the latest value
-			$( document ).on( 'mouseleave', '[data-handler]', function() {
-				$( '[data-picker]' ).each( function() {
-					$( this ).closest( 'div' ).find( 'label, .uix-controls__bar' ).addClass( 'active' );
-				});
-
-			});	
-			
-			
-
-		}
 		
 		/* 
 		 ---------------------------
@@ -269,16 +150,255 @@ APP = ( function ( APP, $, window, document ) {
  
         this.each( function() {
 			
-			//Custom Select
+			/* 
+			 ---------------------------
+			 Custom Select
+			 ---------------------------
+			 */ 	
 			$( document ).customSelectInit();
 
 
-			//Custom Radio, Toggle And Checkbox
+			/* 
+			 ---------------------------
+			 Custom Radio, Toggle And Checkbox
+			 ---------------------------
+			 */ 		
 			$( document ).customRadioCheckboxInit();
 
 
-			//Create Line Effect on Click
+			/* 
+			 ---------------------------
+			 Create Line Effect on Click
+			 ---------------------------
+			 */ 			
 			$( document ).customControlsLineEffInit();
+			
+			/* 
+			 ---------------------------
+			 Multiple Selector
+			 ---------------------------
+			 */ 
+			//Control Status
+			var multiSel = '.uix-controls__multi-sel > span';
+			
+			$( multiSel ).each( function()  {
+				
+				var targetID = '#' + $( this ).parent().attr( "data-targetid" );
+			
+				if ( $( targetID ).val().indexOf( $( this ).data( 'value' ) ) >= 0 ) {
+					$( this ).addClass( 'active' );
+				} else {
+					$( this ).removeClass( 'active' );
+				}	
+			
+				
+			});
+			
+			
+			$( document ).on( 'click', multiSel, function( e ) {
+				e.preventDefault();
+
+				var $selector     = $( this ).parent(),
+					$option       = $( this ),
+					targetID      = '#' + $selector.data( "targetid" ),
+					curVal        = $option.data( 'value' ),
+					tarVal        = $( targetID ).val() + ',',
+					resVal        = '';
+
+				$option.toggleClass( 'active' );
+
+				if ( tarVal.indexOf( curVal + ',' ) < 0 ) {
+					resVal = tarVal + curVal + ',';
+				} else {
+					resVal = tarVal.replace( curVal + ',', '' );
+				}
+
+				resVal = resVal
+								.replace(/,\s*$/, '' )
+								.replace(/^,/, '' );
+
+				$( targetID ).val( resVal );
+
+
+				//Dynamic listening for the latest value
+				$( targetID ).focus().blur();
+
+			} );
+
+
+			/* 
+			 ---------------------------
+			 Single Selector
+			 ---------------------------
+			 */ 
+			//Control Status
+			var singleSel = '.uix-controls__single-sel > span';
+			
+			$( singleSel ).each( function()  {
+				
+				var targetID = '#' + $( this ).parent().attr( "data-targetid" );
+			
+				if ( $( targetID ).val() == $( this ).data( 'value' ) ) {
+					$( this ).addClass( 'active' );
+				} else {
+					$( this ).removeClass( 'active' );
+				}	
+			
+				
+			});
+					
+			
+			$( document ).on( 'click', singleSel, function( e ) {
+				e.preventDefault();
+
+				var $selector     = $( this ).parent(),
+					$option       = $( this ),
+					targetID      = '#' + $selector.data( "targetid" ),
+					curVal        = $option.data( 'value' );
+
+
+				//Radio Selector
+				$selector.find( '> span' ).removeClass( 'active' );
+				$( targetID ).val( curVal );
+				$option.addClass( 'active' );
+
+
+
+				//Dynamic listening for the latest value
+				$( targetID ).focus().blur();
+
+			} );
+
+
+
+			/* 
+			 ---------------------------
+			 Disabled Status
+			 ---------------------------
+			 */ 	
+
+			$( 'input.disabled' ).each( function(){
+				$( this ).prop('disabled', true);
+			});
+
+
+
+			/* 
+			 ---------------------------
+			 Input File
+			 ---------------------------
+			 */ 
+			$( '.uix-controls__file-container' ).each( function()  {
+				var fileInput  = $( this ).find( 'input[type="file"]' ),
+					fileBtn    = $( this ).find( '.uix-controls__file-trigger' ),
+					filePath   = $( this ).next( '.uix-controls__file-return' );
+
+				fileBtn.on( 'click', function() {
+					fileInput.focusin();
+
+				});	
+
+				fileInput.on( 'change', function() {
+					filePath.text( $( this ).val() );
+				});	
+
+			});
+
+
+			/* 
+			 ---------------------------
+			 Hover Effect
+			 ---------------------------
+			 */ 
+			$( '.float-label' ).each( function(){
+
+				var $this = $( this );
+
+
+				// on focus add cladd active to label
+				$this.on( 'focus', function() {
+					$( this ).closest( 'div' ).find( 'label, .uix-controls__bar' ).addClass( 'active' );
+				});
+
+
+				//on blur check field and remove class if needed
+				$this.on( 'blur change', function( e ) {
+					if( $this.val() === '' || $this.val() === 'blank') {
+						$( this ).closest( 'div' ).find( 'label, .uix-controls__bar' ).removeClass( 'active' );
+					}	
+
+				});
+
+				// if exist cookie value
+				if( $this.val() != '' && $this.val() != 'blank') { 
+				   $( this ).closest( 'div' ).find( 'label, .uix-controls__bar' ).addClass( 'active' );
+				}
+
+
+			});
+
+
+
+			/* 
+			 ---------------------------
+			 Date Picker
+			 ---------------------------
+			 */ 
+			if ( $.isFunction( $.fn.datepicker ) ) {
+
+				$( '[data-picker]' ).each( function() {
+
+					var $this            = $( this ),
+						dateFormat       = $this.data( 'picker-format' ),
+						monthNames       = $this.data( 'picker-month' ),
+						nextText         = $this.data( 'picker-next' ),
+						prevText         = $this.data( 'picker-prev' ),
+						dayNames         = $this.data( 'picker-day' ),
+						myminDate        = $this.data( 'picker-min-date' ),
+						mymaxDate        = $this.data( 'picker-max-date' );
+
+
+
+					// If there is no data-xxx, save current source to it
+					if( typeof dateFormat === typeof undefined ) dateFormat = 'MM d, yy';
+					if( typeof monthNames === typeof undefined ) monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+					if( typeof nextText === typeof undefined ) nextText = '&#8594;';
+					if( typeof prevText === typeof undefined ) prevText = '&#8592;';
+					if( typeof dayNames === typeof undefined ) dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+					if( typeof myminDate === typeof undefined ) myminDate = -1825;
+					if( typeof mymaxDate === typeof undefined ) mymaxDate = 0;
+
+					$this.datepicker({
+						"monthNamesShort" : monthNames,
+						"nextText"        : nextText,
+						"prevText"        : prevText,
+						"dayNamesShort"   : dayNames,
+						"dateFormat"      : dateFormat,
+						"changeMonth"     : true,
+						"changeYear"      : true,
+						"yearRange"       : "1930:2092",
+						"minDate"         : myminDate,
+						"maxDate"         : mymaxDate
+					});
+
+
+
+				} );
+
+
+
+				//Dynamic listening for the latest value
+				$( document ).on( 'mouseleave', '[data-handler]', function() {
+					$( '[data-picker]' ).each( function() {
+						$( this ).closest( 'div' ).find( 'label, .uix-controls__bar' ).addClass( 'active' );
+					});
+
+				});	
+
+
+
+			}
+
 
 
 			
@@ -552,6 +672,17 @@ APP = ( function ( APP, $, window, document ) {
 				var dataExist = $( this ).data( 'exist' );
 				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
 					$( '<span class="uix-controls__bar"></span>' ).insertAfter( $( this ).find( 'label' ) );
+					
+					
+					//Multiple Selector or Single Selector
+					if ( $( this ).hasClass( 'uix-controls__multi-sel' ) || $( this ).hasClass( 'uix-controls__single-sel' ) ) {
+						
+						$( this ).find( '> span' ).each( function()  {
+							$( this ).prepend( '<span class="uix-controls__bar"></span>' );
+						});
+						
+					}
+					
 
 					//Prevent the form from being initialized again
 					$( this ).data( 'exist', 1 );	

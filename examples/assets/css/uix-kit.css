@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  2.1.1
- * ## Last Update         :  August 14, 2018
+ * ## Version             :  2.1.2
+ * ## Last Update         :  August 16, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -2741,11 +2741,11 @@ h6 {
   z-index: -1;
 }
 
-.uix-social-btn:hover i {
+.uix-social-btn:hover i, .uix-controls__multi-sel > span.uix-social-btn.active:not(.uix-controls__bar) i {
   color: #fff;
 }
 
-.uix-social-btn:hover::after {
+.uix-social-btn:hover::after, .uix-controls__multi-sel > span.uix-social-btn.active:not(.uix-controls__bar)::after {
   visibility: visible;
   opacity: 1;
   transform: scale(1, 1);
@@ -2756,11 +2756,11 @@ h6 {
   color: #fff;
 }
 
-.uix-social-btn.uix-social-btn--white:hover i {
+.uix-social-btn.uix-social-btn--white:hover i, .uix-controls__multi-sel > span.uix-social-btn.uix-social-btn--white.active:not(.uix-controls__bar) i {
   color: #212121;
 }
 
-.uix-social-btn.uix-social-btn--white:hover::after {
+.uix-social-btn.uix-social-btn--white:hover::after, .uix-controls__multi-sel > span.uix-social-btn.uix-social-btn--white.active:not(.uix-controls__bar)::after {
   background-color: #fff;
 }
 
@@ -3570,7 +3570,7 @@ h6 {
     color: #CCC;
 }
 
-.uix-search-box .uix-search-box__submit:hover {
+.uix-search-box .uix-search-box__submit:hover, .uix-search-box .uix-controls__multi-sel > span.uix-search-box__submit.active:not(.uix-controls__bar) {
     color: #212121;
 }
 
@@ -4008,11 +4008,11 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
   color: #212121;
 }
 
-.uix-menu__container.is-mobile > .uix-menu__inner > .uix-menu__right-box .uix-social-btn--white:hover i {
+.uix-menu__container.is-mobile > .uix-menu__inner > .uix-menu__right-box .uix-social-btn--white:hover i, .uix-menu__container.is-mobile > .uix-menu__inner > .uix-menu__right-box .uix-controls__multi-sel > span.uix-social-btn--white.active:not(.uix-controls__bar) i {
   color: #212121;
 }
 
-.uix-menu__container.is-mobile > .uix-menu__inner > .uix-menu__right-box .uix-social-btn--white:hover::after {
+.uix-menu__container.is-mobile > .uix-menu__inner > .uix-menu__right-box .uix-social-btn--white:hover::after, .uix-menu__container.is-mobile > .uix-menu__inner > .uix-menu__right-box .uix-controls__multi-sel > span.uix-social-btn--white.active:not(.uix-controls__bar)::after {
   background-color: #fff;
 }
 
@@ -4369,7 +4369,7 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
   margin: 0;
 }
 
-.uix-modal-box .uix-modal-box__close:hover {
+.uix-modal-box .uix-modal-box__close:hover, .uix-modal-box .uix-controls__multi-sel > span.uix-modal-box__close.active:not(.uix-controls__bar) {
   background: #b50d14;
 }
 
@@ -5861,11 +5861,11 @@ pointer-events: auto;
     cursor: wait !important;
 }
 
-.uix-btn:hover {
+.uix-btn:hover, .uix-controls__multi-sel > span.uix-btn.active:not(.uix-controls__bar) {
     background-position: 100% 0;
 }
 
-.uix-btn:hover, .uix-btn:focus {
+.uix-btn:hover, .uix-controls__multi-sel > span.uix-btn.active:not(.uix-controls__bar), .uix-btn:focus {
     color: #fff;
 }
 
@@ -6082,7 +6082,7 @@ pointer-events: auto;
     box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.2);
 }
 
-.uix-btn__bg--primary.is-transparent:hover {
+.uix-btn__bg--primary.is-transparent:hover, .uix-controls__multi-sel > span.uix-btn__bg--primary.is-transparent.active:not(.uix-controls__bar) {
     background-color: #EC5E79;
     background-image: linear-gradient(to right, #EC5E79 0%, #f60 20%, #d83ba0 100%);
     color: #fff;
@@ -6102,12 +6102,12 @@ pointer-events: auto;
     color: #474747;
 }
 
-.uix-btn__bg--secondary:hover {
+.uix-btn__bg--secondary:hover, .uix-controls__multi-sel > span.uix-btn__bg--secondary.active:not(.uix-controls__bar) {
     background-color: #fff;
     color: #474747;
 }
 
-.uix-btn__bg--secondary.is-fill-white:hover {
+.uix-btn__bg--secondary.is-fill-white:hover, .uix-controls__multi-sel > span.uix-btn__bg--secondary.is-fill-white.active:not(.uix-controls__bar) {
     box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.6);
 }
 
@@ -7116,12 +7116,12 @@ h3[data-counter-number] {
     font-size: 1.5rem;
 }
 
-.uix-feature .uix-feature__icon:hover {
+.uix-feature .uix-feature__icon:hover, .uix-feature .uix-controls__multi-sel > span.uix-feature__icon.active:not(.uix-controls__bar) {
     background: #212121;
     border-color: #212121;
 }
 
-.uix-feature .uix-feature__icon:hover i {
+.uix-feature .uix-feature__icon:hover i, .uix-feature .uix-controls__multi-sel > span.uix-feature__icon.active:not(.uix-controls__bar) i {
     color: #fff;
     transform: rotate(30deg);
 }
@@ -7141,7 +7141,7 @@ h3[data-counter-number] {
     transition: all 0.3s ease;
 }
 
-.uix-feature .uix-feature__icon--side:hover i {
+.uix-feature .uix-feature__icon--side:hover i, .uix-feature .uix-controls__multi-sel > span.uix-feature__icon--side.active:not(.uix-controls__bar) i {
     transform: rotate(30deg);
 }
 
@@ -7191,7 +7191,7 @@ h3[data-counter-number] {
     letter-spacing: 0;
 }
 
-.uix-feature .uix-feature__title:hover i {
+.uix-feature .uix-feature__title:hover i, .uix-feature .uix-controls__multi-sel > span.uix-feature__title.active:not(.uix-controls__bar) i {
     transform: rotate(30deg);
 }
 
@@ -7435,11 +7435,11 @@ ul.uix-flexslider__direction-nav li a.uix-flexslider__next.uix-flexslider__disab
     visibility: hidden;
 }
 
-.uix-flexslider:hover a.uix-flexslider__prev {
+.uix-flexslider:hover a.uix-flexslider__prev, .uix-controls__multi-sel > span.uix-flexslider.active:not(.uix-controls__bar) a.uix-flexslider__prev {
     left: 0;
 }
 
-.uix-flexslider:hover a.uix-flexslider__next {
+.uix-flexslider:hover a.uix-flexslider__next, .uix-controls__multi-sel > span.uix-flexslider.active:not(.uix-controls__bar) a.uix-flexslider__next {
     right: 20px;
 }
 
@@ -8009,7 +8009,9 @@ ol.uix-flexslider__control-paging li a:hover, ol.uix-flexslider__control-paging 
  * 3. Group
  * 4. Custom Select
  * 5. Custom Radio, Toggle And Checkbox
- * 6. Date Picker (With Jquery UI Widget)
+ * 6. Multiple Selector
+ * 7. Single Selector
+ * 8. Date Picker (With Jquery UI Widget)
 */
 /* 
  ---------------------------
@@ -8503,7 +8505,7 @@ ol.uix-flexslider__control-paging li a:hover, ol.uix-flexslider__control-paging 
     margin-right: .5rem;
 }
 
-.uix-controls__file-container:hover {
+.uix-controls__file-container:hover, .uix-controls__multi-sel > span.uix-controls__file-container.active:not(.uix-controls__bar) {
     color: #000;
 }
 
@@ -8874,7 +8876,7 @@ ol.uix-flexslider__control-paging li a:hover, ol.uix-flexslider__control-paging 
     border-radius: 0 0 2px 2px;
 }
 
-.uix-controls__select-wrapper .uix-controls__select__option:hover, .uix-controls__select-wrapper .uix-controls__select__option.active {
+.uix-controls__select-wrapper .uix-controls__select__option:hover, .uix-controls__select-wrapper .uix-controls__multi-sel > span.uix-controls__select__option.active:not(.uix-controls__bar), .uix-controls__select-wrapper .uix-controls__select__option.active {
     background: #f9f9f9;
 }
 
@@ -9079,7 +9081,126 @@ ol.uix-flexslider__control-paging li a:hover, ol.uix-flexslider__control-paging 
 
 /* 
  ---------------------------
- 6. Date Picker (With Jquery UI Widget)
+ 6. Multiple Selector
+ ---------------------------
+ */
+.uix-controls__multi-sel {
+  /* Create Line Effect on Click */;
+}
+
+.uix-controls__multi-sel > span:not(.uix-controls__bar) {
+    position: relative;
+    display: inline-block;
+    margin-right: 1rem;
+    border: 1px solid #dce4e8;
+    color: #888;
+    padding: .3rem .7rem;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 1rem;
+    background: #fff;
+    transition: all 0.3s ease;
+}
+
+.uix-controls__multi-sel > span:not(.uix-controls__bar) i {
+    position: absolute;
+    top: -5px;
+    right: -8px;
+    background: #F1F1F1;
+    border: 1px solid #E0E0E0;
+    font-size: 0.75rem;
+    transition: all 0.3s ease;
+}
+
+.uix-controls__multi-sel > span:not(.uix-controls__bar):hover, .uix-controls__multi-sel > span.active:not(.uix-controls__bar) {
+    border-color: #d7d7d7;
+    background: #EEEEEE;
+}
+
+.uix-controls__multi-sel > span:not(.uix-controls__bar).active i {
+    background: #EC5E79;
+    border-color: #EC5E79;
+    color: #fff;
+}
+
+.uix-controls__multi-sel.uix-controls--line > span:not(.uix-controls__bar) {
+    border-top-color: transparent !important;
+    border-left-color: transparent !important;
+    border-right-color: transparent !important;
+    background: #fff !important;
+}
+
+.uix-controls__multi-sel.uix-controls--line > span:not(.uix-controls__bar) .uix-controls__bar {
+    left: 0 !important;
+    bottom: -1px !important;
+}
+
+.uix-controls__multi-sel.uix-controls--line > span:not(.uix-controls__bar).active {
+    color: #888 !important;
+}
+
+.uix-controls__multi-sel.uix-controls--line > span:not(.uix-controls__bar).active .uix-controls__bar::before, .uix-controls__multi-sel.uix-controls--line > span:not(.uix-controls__bar).active .uix-controls__bar::after {
+    width: 50% !important;
+}
+
+/* 
+ ---------------------------
+ 7. Single Selector
+ ---------------------------
+ */
+.uix-controls__single-sel {
+  /* Create Line Effect on Click */;
+}
+
+.uix-controls__single-sel > span:not(.uix-controls__bar) {
+    position: relative;
+    display: inline-block;
+    margin-right: 1rem;
+    border: 1px solid #dce4e8;
+    color: #888;
+    padding: .3rem .7rem;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 1rem;
+    background: #fff;
+    transition: all 0.3s ease;
+}
+
+.uix-controls__single-sel > span:not(.uix-controls__bar):hover, .uix-controls__multi-sel.uix-controls__single-sel > span.active:not(.uix-controls__bar) {
+    border-color: #d7d7d7;
+    background: #EEEEEE;
+}
+
+.uix-controls__single-sel > span:not(.uix-controls__bar).active {
+    border-color: #EC5E79;
+    background: #EC5E79;
+    color: #fff;
+}
+
+.uix-controls__single-sel.uix-controls--line > span:not(.uix-controls__bar) {
+    border-top-color: transparent !important;
+    border-left-color: transparent !important;
+    border-right-color: transparent !important;
+    background: #fff !important;
+}
+
+.uix-controls__single-sel.uix-controls--line > span:not(.uix-controls__bar) .uix-controls__bar {
+    left: 0 !important;
+    bottom: -1px !important;
+}
+
+.uix-controls__single-sel.uix-controls--line > span:not(.uix-controls__bar).active {
+    border-bottom-color: #dce4e8 !important;
+    color: #888 !important;
+}
+
+.uix-controls__single-sel.uix-controls--line > span:not(.uix-controls__bar).active .uix-controls__bar::before, .uix-controls__single-sel.uix-controls--line > span:not(.uix-controls__bar).active .uix-controls__bar::after {
+    width: 50% !important;
+}
+
+/* 
+ ---------------------------
+ 8. Date Picker (With Jquery UI Widget)
  ---------------------------
  */
 /* jQuery UI - v1.12.1 - 2016-09-14
@@ -9305,12 +9426,12 @@ ol.uix-flexslider__control-paging li a:hover, ol.uix-flexslider__control-paging 
     right: auto;
 }
 
-.ui-datepicker-rtl .ui-datepicker-prev:hover {
+.ui-datepicker-rtl .ui-datepicker-prev:hover, .ui-datepicker-rtl .uix-controls__multi-sel > span.ui-datepicker-prev.active:not(.uix-controls__bar) {
     right: 1px;
     left: auto;
 }
 
-.ui-datepicker-rtl .ui-datepicker-next:hover {
+.ui-datepicker-rtl .ui-datepicker-next:hover, .ui-datepicker-rtl .uix-controls__multi-sel > span.ui-datepicker-next.active:not(.uix-controls__bar) {
     left: 1px;
     right: auto;
 }
@@ -9531,11 +9652,11 @@ ol.uix-flexslider__control-paging li a:hover, ol.uix-flexslider__control-paging 
     color: #fff;
 }
 
-.uix-gallery .uix-gallery__item .uix-gallery__cat:hover {
+.uix-gallery .uix-gallery__item .uix-gallery__cat:hover, .uix-gallery .uix-gallery__item .uix-controls__multi-sel > span.uix-gallery__cat.active:not(.uix-controls__bar) {
     background: #C56263;
 }
 
-.uix-gallery .uix-gallery__item:hover .uix-gallery__image-cover::before {
+.uix-gallery .uix-gallery__item:hover .uix-gallery__image-cover::before, .uix-gallery .uix-controls__multi-sel > span.uix-gallery__item.active:not(.uix-controls__bar) .uix-gallery__image-cover::before {
     background: rgba(255, 255, 255, 0.95);
 }
 
@@ -9678,11 +9799,11 @@ ol.uix-flexslider__control-paging li a:hover, ol.uix-flexslider__control-paging 
     margin-left: .6rem;
 }
 
-.uix-heading--overlay.uix-heading--overlay--sub:hover {
+.uix-heading--overlay.uix-heading--overlay--sub:hover, .uix-controls__multi-sel > span.uix-heading--overlay.uix-heading--overlay--sub.active:not(.uix-controls__bar) {
     box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.1), 0 -4px 0px 0px #EC5E79;
 }
 
-.uix-heading--overlay.uix-heading--overlay--sub:hover i {
+.uix-heading--overlay.uix-heading--overlay--sub:hover i, .uix-controls__multi-sel > span.uix-heading--overlay.uix-heading--overlay--sub.active:not(.uix-controls__bar) i {
     margin-left: 1rem;
 }
 
@@ -9716,7 +9837,7 @@ ol.uix-flexslider__control-paging li a:hover, ol.uix-flexslider__control-paging 
     background-position: 0 88%;
 }
 
-.uix-heading--underline span:hover {
+.uix-heading--underline span:hover, .uix-heading--underline .uix-controls__multi-sel > span.active:not(.uix-controls__bar) {
     background-size: 100% 88%;
 }
 
@@ -9994,8 +10115,9 @@ ol.uix-flexslider__control-paging li a:hover, ol.uix-flexslider__control-paging 
   color: #fff;
 }
 
-.uix-lightbox__container .uix-lightbox__inner .uix-lightbox__html .uix-lightbox__photo-container .uix-lightbox__photo-sets__prev:hover,
-.uix-lightbox__container .uix-lightbox__inner .uix-lightbox__html .uix-lightbox__photo-container .uix-lightbox__photo-sets__next:hover {
+.uix-lightbox__container .uix-lightbox__inner .uix-lightbox__html .uix-lightbox__photo-container .uix-lightbox__photo-sets__prev:hover, .uix-lightbox__container .uix-lightbox__inner .uix-lightbox__html .uix-lightbox__photo-container .uix-controls__multi-sel > span.uix-lightbox__photo-sets__prev.active:not(.uix-controls__bar),
+.uix-lightbox__container .uix-lightbox__inner .uix-lightbox__html .uix-lightbox__photo-container .uix-lightbox__photo-sets__next:hover,
+.uix-lightbox__container .uix-lightbox__inner .uix-lightbox__html .uix-lightbox__photo-container .uix-controls__multi-sel > span.uix-lightbox__photo-sets__next.active:not(.uix-controls__bar) {
   opacity: 1;
 }
 
@@ -10230,7 +10352,7 @@ ol.uix-flexslider__control-paging li a:hover, ol.uix-flexslider__control-paging 
   box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.07);
 }
 
-.uix-lightbox__content::-webkit-scrollbar-thumb:hover {
+.uix-lightbox__content::-webkit-scrollbar-thumb:hover, .uix-controls__multi-sel > span.uix-lightbox__content.active:not(.uix-controls__bar)::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
@@ -10259,7 +10381,7 @@ ol.uix-flexslider__control-paging li a:hover, ol.uix-flexslider__control-paging 
   box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.07);
 }
 
-.uix-lightbox__thumb-container::-webkit-scrollbar-thumb:hover {
+.uix-lightbox__thumb-container::-webkit-scrollbar-thumb:hover, .uix-controls__multi-sel > span.uix-lightbox__thumb-container.active:not(.uix-controls__bar)::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
@@ -10559,16 +10681,17 @@ a.uix-lightbox__original__close::after {
   color: rgba(255, 255, 255, 0.3);
 }
 
-.uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover {
+.uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover, .uix-list-aspect-ratio .uix-controls__multi-sel > span.uix-list-aspect-ratio__item.active:not(.uix-controls__bar) {
   background: #EC5E79;
 }
 
-.uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover img,
-.uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover i {
+.uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover img, .uix-list-aspect-ratio .uix-controls__multi-sel > span.uix-list-aspect-ratio__item.active:not(.uix-controls__bar) img,
+.uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover i,
+.uix-list-aspect-ratio .uix-controls__multi-sel > span.uix-list-aspect-ratio__item.active:not(.uix-controls__bar) i {
   opacity: 1;
 }
 
-.uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover .disabled {
+.uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover .disabled, .uix-list-aspect-ratio .uix-controls__multi-sel > span.uix-list-aspect-ratio__item.active:not(.uix-controls__bar) .disabled {
   opacity: 0;
 }
 
@@ -10719,15 +10842,15 @@ a.uix-lightbox__original__close::after {
   transform: rotate(0) skew(-45deg);
 }
 
-.uix-list-topic .uix-list-topic__item:hover a.uix-list-topic__item__more {
+.uix-list-topic .uix-list-topic__item:hover a.uix-list-topic__item__more, .uix-list-topic .uix-controls__multi-sel > span.uix-list-topic__item.active:not(.uix-controls__bar) a.uix-list-topic__item__more {
   color: #fff;
 }
 
-.uix-list-topic .uix-list-topic__item:hover .uix-list-topic__item__more-bg {
+.uix-list-topic .uix-list-topic__item:hover .uix-list-topic__item__more-bg, .uix-list-topic .uix-controls__multi-sel > span.uix-list-topic__item.active:not(.uix-controls__bar) .uix-list-topic__item__more-bg {
   right: -30px;
 }
 
-.uix-list-topic .uix-list-topic__item:hover .uix-list-topic__item__info {
+.uix-list-topic .uix-list-topic__item:hover .uix-list-topic__item__info, .uix-list-topic .uix-controls__multi-sel > span.uix-list-topic__item.active:not(.uix-controls__bar) .uix-list-topic__item__info {
   background: #F3F3F3;
 }
 
@@ -11478,7 +11601,7 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
   transition: .1s ease-in-out;
 }
 
-.uix-price .uix-price__outline:hover {
+.uix-price .uix-price__outline:hover, .uix-price .uix-controls__multi-sel > span.uix-price__outline.active:not(.uix-controls__bar) {
   box-shadow: 0 1.8vw 4vw -.7vw #cbdfee;
 }
 
@@ -13888,12 +14011,12 @@ Style with support for rainbow parens
   z-index: -1;
 }
 
-#uix-view-source:hover {
+#uix-view-source:hover, .uix-controls__multi-sel > span#uix-view-source.active:not(.uix-controls__bar) {
   color: #fff;
   box-shadow: 0 4px 15px 0 rgba(236, 94, 121, 0.75);
 }
 
-#uix-view-source:hover::before {
+#uix-view-source:hover::before, .uix-controls__multi-sel > span#uix-view-source.active:not(.uix-controls__bar)::before {
   box-shadow: inset 0 0 0 4rem #EC5E79;
 }
 
@@ -14532,15 +14655,15 @@ Style with support for rainbow parens
   transition: all 0.3s ease;
 }
 
-.uix-team--grid .uix-team--grid__item .uix-team--grid__img:hover::after {
+.uix-team--grid .uix-team--grid__item .uix-team--grid__img:hover::after, .uix-team--grid .uix-team--grid__item .uix-controls__multi-sel > span.uix-team--grid__img.active:not(.uix-controls__bar)::after {
   opacity: 1;
 }
 
-.uix-team--grid .uix-team--grid__item .uix-team--grid__img:hover ul {
+.uix-team--grid .uix-team--grid__item .uix-team--grid__img:hover ul, .uix-team--grid .uix-team--grid__item .uix-controls__multi-sel > span.uix-team--grid__img.active:not(.uix-controls__bar) ul {
   opacity: 1;
 }
 
-.uix-team--grid .uix-team--grid__item:hover .uix-team--grid__detail.uix-team--grid__detail--toggle {
+.uix-team--grid .uix-team--grid__item:hover .uix-team--grid__detail.uix-team--grid__detail--toggle, .uix-team--grid .uix-controls__multi-sel > span.uix-team--grid__item.active:not(.uix-controls__bar) .uix-team--grid__detail.uix-team--grid__detail--toggle {
   opacity: 1;
 }
 
@@ -14798,11 +14921,11 @@ Style with support for rainbow parens
   right: 8%;
 }
 
-.uix-timeline__container-wrapper.is-horizontal .uix-timeline__btn.uix-timeline__btn--prev:hover {
+.uix-timeline__container-wrapper.is-horizontal .uix-timeline__btn.uix-timeline__btn--prev:hover, .uix-timeline__container-wrapper.is-horizontal .uix-controls__multi-sel > span.uix-timeline__btn.uix-timeline__btn--prev.active:not(.uix-controls__bar) {
   margin-left: -0.3125rem;
 }
 
-.uix-timeline__container-wrapper.is-horizontal .uix-timeline__btn.uix-timeline__btn--next:hover {
+.uix-timeline__container-wrapper.is-horizontal .uix-timeline__btn.uix-timeline__btn--next:hover, .uix-timeline__container-wrapper.is-horizontal .uix-controls__multi-sel > span.uix-timeline__btn.uix-timeline__btn--next.active:not(.uix-controls__bar) {
   margin-right: -0.3125rem;
 }
 
@@ -15102,7 +15225,7 @@ Style with support for rainbow parens
   margin: 0;
 }
 
-.uix-tooltip:hover .uix-tooltip__content {
+.uix-tooltip:hover .uix-tooltip__content, .uix-controls__multi-sel > span.uix-tooltip.active:not(.uix-controls__bar) .uix-tooltip__content {
   visibility: visible;
   opacity: 1;
   transform: translate(0, 0);

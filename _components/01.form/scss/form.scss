@@ -8,7 +8,9 @@
  * 3. Group
  * 4. Custom Select
  * 5. Custom Radio, Toggle And Checkbox
- * 6. Date Picker (With Jquery UI Widget)
+ * 6. Multiple Selector
+ * 7. Single Selector
+ * 8. Date Picker (With Jquery UI Widget)
 */
 
 
@@ -1325,11 +1327,171 @@ $controls-merge-button-width: 20%;
 }
 
 
+/* 
+ ---------------------------
+ 6. Multiple Selector
+ ---------------------------
+ */ 
+.uix-controls__multi-sel {
+	
+	> span:not(.uix-controls__bar) {
+		position: relative;
+		display: inline-block;
+		margin-right: 1rem;
+		border: 1px solid $control-sub-color;
+		color: $control-text-color;
+		padding: .3rem .7rem;
+		text-decoration: none;
+		cursor: pointer;
+		font-size: 1rem;
+		background: #fff;	
+		@include transition-default();
+		
+		i {
+			position: absolute;
+			top: -5px;
+			right: -8px;
+			background: #F1F1F1;
+			border: 1px solid #E0E0E0;
+			font-size: 0.75rem;
+			@include transition-default();
+		}
+	
+		
+		&:hover {
+			border-color: #d7d7d7;
+			background: #EEEEEE;
+		}
+		
+		&.active {
+		
+			@extend :hover;
+			
+			i {
+				background: $highlight-color1;
+				border-color: $highlight-color1;
+				color: #fff;
+			}
+		}
+		
+	}
+	
+	
+	/* Create Line Effect on Click */
+	&.uix-controls--line {
+		
+		> span:not(.uix-controls__bar) {
+			border-top-color: transparent !important;
+			border-left-color: transparent !important;
+			border-right-color: transparent !important;
+			background: #fff !important;
+
+			.uix-controls__bar {
+				left: 0 !important;
+				bottom: -1px !important;
+			}
+
+			&.active {
+
+				color: $control-text-color !important;
+				
+				.uix-controls__bar {
+					
+					&::before,
+					&::after {
+						width: 50% !important;
+					}
+				}	
+				
+			}	
+		}
+
+		
+	}
+
+}
+
+
 
 
 /* 
  ---------------------------
- 6. Date Picker (With Jquery UI Widget)
+ 7. Single Selector
+ ---------------------------
+ */ 
+
+.uix-controls__single-sel {
+	
+	> span:not(.uix-controls__bar) {
+		position: relative;
+		display: inline-block;
+		margin-right: 1rem;
+		border: 1px solid $control-sub-color;
+		color: $control-text-color;
+		padding: .3rem .7rem;
+		text-decoration: none;
+		cursor: pointer;
+		font-size: 1rem;
+		background: #fff;	
+		@include transition-default();
+		
+		
+		&:hover {
+			border-color: #d7d7d7;
+			background: #EEEEEE;
+		}
+		
+		&.active {
+		
+			border-color: $highlight-color1;
+			background: $highlight-color1;
+			color: #fff;
+			
+		}
+		
+	}
+	
+	/* Create Line Effect on Click */
+	&.uix-controls--line {
+		
+
+		> span:not(.uix-controls__bar) {
+			border-top-color: transparent !important;
+			border-left-color: transparent !important;
+			border-right-color: transparent !important;
+			background: #fff !important;
+
+			.uix-controls__bar {
+				left: 0 !important;
+				bottom: -1px !important;
+			}
+
+			&.active {
+
+				border-bottom-color: $control-sub-color !important;
+				color: $control-text-color !important;
+
+				.uix-controls__bar {
+				
+					&::before,
+					&::after {
+						width: 50% !important;
+					}
+				}		
+				
+			}	
+		}
+
+		
+	}
+
+}
+
+
+
+/* 
+ ---------------------------
+ 8. Date Picker (With Jquery UI Widget)
  ---------------------------
  */ 
 /* jQuery UI - v1.12.1 - 2016-09-14
