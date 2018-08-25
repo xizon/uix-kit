@@ -19,7 +19,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.FORM               = APP.FORM || {};
-	APP.FORM.version       = '0.0.2';
+	APP.FORM.version       = '0.0.3';
     APP.FORM.documentReady = function( $ ) {
 
 		/* 
@@ -422,10 +422,22 @@ APP = ( function ( APP, $, window, document ) {
 
 			});
 
-			$( document.body ).on( 'click touchstart', function( e ) {
-				$( settings.selector + '.js-uix-new' ).removeClass( 'is-opened' );
-			});		
+			
+			$( document.body ).on( 'click', function( e ) {
+				
+				if ( 
+					e.target.className != '' && 
+					typeof e.target.className != typeof undefined && 
+					Object.prototype.toString.call( e.target.className ) != '[object SVGAnimatedString]' 
+				) {
+	
+					if ( e.target.className.indexOf( 'uix-controls__select__option' ) < 0 ) {
+						$( settings.selector + '.js-uix-new' ).removeClass( 'is-opened' );
+					}	
+				}
 
+				
+			});		
 
 
 
@@ -449,7 +461,7 @@ APP = ( function ( APP, $, window, document ) {
 				$selectCurWrapper.removeClass( 'is-opened' );
 
 				//Set the selector text
-				$selectCurWrapper.find( settings.trigger ).text( $( this ).html() );
+				$selectCurWrapper.find( settings.trigger ).text( $( this ).html() ).addClass( 'active' );
 
 				//Activate this option
 				$selectCurWrapper.find( settings.item ).removeClass( 'active' );

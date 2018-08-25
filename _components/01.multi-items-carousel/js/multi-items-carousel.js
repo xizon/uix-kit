@@ -218,6 +218,17 @@ APP = ( function ( APP, $, window, document ) {
 			});
 			
 			
+			
+			//Solve the activation problem of touch events
+			//-------------------------------------	
+			$carouselItem.on( 'click touchstart', function() {
+				$carouselItem.removeClass( 'active-item' );
+				$( this ).addClass( 'active-item' );
+			});
+			
+			
+			
+			
 			//Drag and Drop
 			//-------------------------------------	
 			var $dragDropTrigger = $carouselWrapper,

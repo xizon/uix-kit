@@ -650,28 +650,6 @@ ol.uix-flexslider__control-paging {
 	}
 }
 
-@media all and (max-width: 991px) {
-	
-	.uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item {
-
-		.uix-flexslider__desc {
-
-			.uix-flexslider__el-level-1 {
-				font-size: 7vw !important;
-				line-height: 7vw !important;
-				margin-bottom: 0;
-				line-height: 1.2 !important;
-
-			}
-			.uix-flexslider__el-level-2 {
-				font-size: 4vw !important;
-				line-height: 4vw !important;
-			}
-
-		}
-
-	}
-}
 
 @media all and (max-width: 768px) {
 
@@ -686,8 +664,33 @@ ol.uix-flexslider__control-paging {
 		}	
 			
 		
-		.uix-flexslider__inner > .uix-flexslider__item .uix-btn {
-			font-size: 2vw !important;
+		.uix-flexslider__inner > .uix-flexslider__item {
+			.uix-flexslider__desc {
+
+				h2,
+				h3 {
+					font-size: 1rem;
+				}
+
+				p {
+					font-size: 0.875rem;
+				}
+
+				h2,
+				h3,
+				p {
+					margin-bottom: 0;
+					padding-bottom: 0;
+					line-height: 1.2;
+				}
+
+				.uix-btn {
+					margin-top: .3rem;
+					padding: .3rem 1rem;
+					font-size: 0.75rem;
+				}	
+
+			}
 		}
 
 		

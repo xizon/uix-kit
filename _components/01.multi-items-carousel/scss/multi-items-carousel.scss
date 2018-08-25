@@ -18,6 +18,11 @@
 			height: 100%;
 			visibility: hidden;
 			box-sizing: border-box;
+			
+			&.active-item,
+			&:hover {
+				
+			}
 
 
 			/* Demo Style */
@@ -46,6 +51,7 @@
 .uix-multi-carousel__controls {
 	margin-top: 30px;
 	text-align: center;
+	pointer-events: none;
 	
 	.uix-multi-carousel__controls--prev {
 	    padding-left: 2px;
@@ -54,6 +60,7 @@
 	    padding-right: 2px;
 	}
 	a {
+		pointer-events: all;
 		margin-left: 10px;
 		margin-right: 10px;
 		outline: 0;

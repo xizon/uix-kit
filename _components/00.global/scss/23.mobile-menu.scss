@@ -209,11 +209,14 @@
             border-top: none;
             border-bottom: 1px solid #dfdfdf;
             position: relative;
-            &:hover, 
-			&.active, 
-			&.active {
-				
-			}
+
+			
+            a, span {
+                padding: 0 15px;
+                display: block;
+                text-decoration: none;
+                color: $primary-text-color1;
+            }
 			
             &:hover > {
                 a, 
@@ -227,20 +230,7 @@
                     box-shadow: 0 0 15px 3px #ebebeb inset;
                 }
             }
-			
-			
-            &.active > {
-                a, span {
-                    box-shadow: 0 0 15px 3px #ebebeb inset;
-                }
-            }
-			
-            a, span {
-                padding: 0 15px;
-                display: block;
-                text-decoration: none;
-                color: $primary-text-color1;
-            }
+
 			
 			
             ul {
@@ -324,9 +314,25 @@
 	    font-weight: 100;
 	    font-family: serif;
 	    color: #ABABAB;
+		
+		&::after {
+			content: '+';
+			display: inline-block;
+			font-size: 1rem;
+		}
+
 	}
 
+	.is-opened {
+		.uix-menu__arrow-mobile {
+			
+			&::after {
+				content: '-';
+			}
 
+		}
+
+	}
 	
 	
 	/* Form Elements */

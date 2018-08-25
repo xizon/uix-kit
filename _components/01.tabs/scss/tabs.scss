@@ -20,8 +20,9 @@
 	&:not(.uix-tabs--rotation) {
 	    @include outer-shadow();
 		
+		$maker-w: 100%;
+		
 		.uix-tabs__marker {
-			background: $primary-text-color1;
 			height: 2px;
 			width: 100%;
 			position: absolute;
@@ -29,6 +30,18 @@
 			left: 0;
 			z-index: 1;
 			transition: .1s ease-in-out;
+			
+			&::after {
+				position: absolute;
+				left: calc(50% - #{$maker-w/2});
+				top: 0;
+				display: block;
+				content: '';
+				background: $primary-text-color1;
+				height: 100%;
+				width: $maker-w;
+				z-index: 1;
+			}
 		}	
 		
 	}

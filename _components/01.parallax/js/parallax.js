@@ -8,7 +8,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.PARALLAX               = APP.PARALLAX || {};
-	APP.PARALLAX.version       = '0.0.4';
+	APP.PARALLAX.version       = '0.0.5';
     APP.PARALLAX.documentReady = function( $ ) {
 
         var $window      = $( window ),
@@ -209,12 +209,16 @@ APP = ( function ( APP, $, window, document ) {
 					}
 
 
+
 					//Apply tilt effect
-					if( typeof dataSkew != typeof undefined ) {
+					if( typeof dataSkew != typeof undefined && dataSkew != 0 ) {
+						
+						//Firefox browser will affect parallax effect due to transform
 						$this.css( {
 							'transform'  : 'skew(0deg, '+dataSkew+'deg)'
 						} );
 					}
+
 
 
 					//Embedded parent disparity elements

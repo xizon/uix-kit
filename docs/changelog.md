@@ -1,5 +1,16 @@
 # Changelog
 
+#### = 2.1.4 (August 25, 2018) =
+
+* Fix: Fixed issue with parallax effect in Firefox and IE browser.
+* Fix: Optimized the display effect of the Custom Lightbox.
+* Fix: Fix a bug of Dynamic Drop Down List from JSON.
+* Fix: Solve the activation problem of touch events for Multiple Items Carousel.
+* Fix: Fix a bug to avoid prevention page scroll on drag in IOS and Android for Advanced Slider.
+* Fix: Fixed a bug where the custom selection could not confirm the click on the mobile device.
+* Tweak: Optimized the display of tabs.
+* Tweak: Optimized the experience of the Mobile Menu.
+
 
 #### = 2.1.3 (August 16, 2018) =
 

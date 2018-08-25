@@ -180,6 +180,53 @@ $anim-duration: 0.6s;
 }
 
 
+@media all and (max-width: 768px) {
+	
+
+	.uix-advanced-slider {
+		
+		.uix-advanced-slider__inner {
+			
+			.uix-advanced-slider__item {
+				
+				.uix-advanced-slider__txt {
+					
+					h3 {
+						font-size: 1rem;
+						
+					}
+					
+					p {
+						font-size: 0.875rem;
+					}
+					
+					h3,
+					p {
+						margin-bottom: 0;
+						padding-bottom: 0;
+						line-height: 1.2;
+					}
+					
+					[class*='uix-el-grid__col-'] {
+						width: 100%;
+					}
+					
+					.uix-btn {
+						margin-top: .3rem;
+						padding: .3rem 1rem;
+						font-size: 0.75rem;
+					}
+
+				}
+
+			}	
+
+		}
+
+
+	}
+
+}
 /* 
  ---------------------------
  2. Pagination dots 

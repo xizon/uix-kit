@@ -60,6 +60,21 @@ $lb-radius: 3px;
 	}	
 }
 
+.uix-lightbox__loading {
+	position: fixed;
+	z-index: 99998;
+	left: 50vw;
+	top: 50vh;
+	transform: translate(-50%,-50%);
+	color: #fff;
+	
+	&.is-loaded {
+		display: none;
+	}
+}
+
+
+
 .uix-lightbox__container {
 	display: none;
 	position: fixed;
@@ -82,9 +97,12 @@ $lb-radius: 3px;
 		
 		
 		.uix-lightbox__html {
+			
+			text-align: center;
 
 			.uix-lightbox__photo-container {
 				transition: all 0.1s ease;	
+				display: inline-block;
 				
 				&.uix-lightbox__photo-sets-container {
 					overflow: hidden;
@@ -492,14 +510,15 @@ $lb-radius: 3px;
  ---------------------------
  */ 
 
-.uix-lightbox__original__link {
+a.uix-lightbox__original__link {
 	cursor: zoom-in;
+	display: block;
 }
 
 /* Styles the close link, adds the slide down transition */
 
 a.uix-lightbox__original__close {
-    display: block;
+    display: none;
     width: 50px;
     height: 50px;
     box-sizing: border-box;
@@ -507,11 +526,14 @@ a.uix-lightbox__original__close {
     color: black;
     text-decoration: none;
     position: fixed;
-    top: -80px;
+    top: 0;
     right: 0;
 	z-index: 100001;
     @include transition-default(); 
 	
+	&.active {
+		display: block;
+	}
 
 	/* Provides part of the "X" to eliminate an image from the close link */
 	&::before {
@@ -578,7 +600,9 @@ a.uix-lightbox__original__close {
 
 	
 	img {
-		margin: auto;
+		width: auto !important; /* Protected from js */
+		height: auto !important; /* Protected from js */
+		margin: auto !important; /* Protected from js */
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -589,6 +613,12 @@ a.uix-lightbox__original__close {
 		box-shadow: 0px 0px 8px rgba(0,0,0,.3);
 		box-sizing: border-box;
 		@include transition-default(); 
+	}
+	
+	&.uix-lightbox__original__target--imgfull {
+		img {
+			margin: 0 auto !important; /* Protected from js */
+		}
 	}
 	
 	/* Uses the :target pseudo-class to perform the animations upon clicking the .uix-lightbox__original__target anchor */

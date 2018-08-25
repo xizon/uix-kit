@@ -9,7 +9,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.ADVANCED_SLIDER_FILTER               = APP.ADVANCED_SLIDER_FILTER || {};
-	APP.ADVANCED_SLIDER_FILTER.version       = '0.1.0';
+	APP.ADVANCED_SLIDER_FILTER.version       = '0.1.1';
     APP.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 	
@@ -255,7 +255,15 @@ APP = ( function ( APP, $, window, document ) {
 			if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
 
 				
-
+			
+			//If arrows does not exist on the page, it will be added by default, 
+			//and the drag and drop function will be activated.
+			if ( $( dataControlsArrows ).length == 0 ) {
+				$( 'body' ).prepend( '<div style="display:none;" class="uix-advanced-slider-sp__arrows '+dataControlsArrows.replace('#','').replace('.','')+'"><a href="#" class="uix-advanced-slider-sp__arrows--prev"></a><a href="#" class="uix-advanced-slider-sp__arrows--next"></a></div>' );
+			}
+			
+			
+        
 		    //Prevent bubbling
 			if ( itemsTotal == 1 ) {
 				$( dataControlsPagination ).hide();
@@ -1444,7 +1452,7 @@ APP = ( function ( APP, $, window, document ) {
 
 			//Mouse event
 			$dragDropTrigger.on( 'mousedown.ADVANCED_SLIDER_FILTER touchstart.ADVANCED_SLIDER_FILTER', function( e ) {
-				e.preventDefault();
+				//Do not use "e.preventDefault()" to avoid prevention page scroll on drag in IOS and Android
 
 				var touches = e.originalEvent.touches;
 
@@ -1468,7 +1476,7 @@ APP = ( function ( APP, $, window, document ) {
 				}
 
 				$dragDropTrigger.on( 'mouseup.ADVANCED_SLIDER_FILTER touchmove.ADVANCED_SLIDER_FILTER', function( e ) {
-					e.preventDefault();
+					
 
 					$( this ).removeClass( 'dragging' );
 					var touches        = e.originalEvent.touches,

@@ -7,9 +7,10 @@
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
+
     APP.MEGAMENU               = APP.MEGAMENU || {};
 	APP.MEGAMENU.version       = '0.0.1';
-    APP.MEGAMENU.documentReady = function( $ ) {
+    APP.MEGAMENU.pageLoaded    = function() {
 
 		var $window      = $( window ),
 			windowWidth  = $window.width(),
@@ -193,13 +194,11 @@ APP = ( function ( APP, $, window, document ) {
 				} );	
 
 			}
-		}
-			
+		}	
 		
     };
 
-    APP.components.documentReady.push( APP.MEGAMENU.documentReady );
+    APP.components.pageLoaded.push( APP.MEGAMENU.pageLoaded );
     return APP;
 
 }( APP, jQuery, window, document ) );
-

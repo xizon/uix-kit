@@ -146,6 +146,26 @@ Plugin URL: http://www.ianlunn.co.uk/plugins/jquery-parallax/
 Dual licensed under the MIT and GPL licenses:
 http://www.opensource.org/licenses/mit-license.php
 http://www.gnu.org/licenses/gpl.html
+
+ *
+ *
+ *
+ *
+ *
+ * ============================================================
+ * ============================================================
+ * Warning: This is a modified version of extension.
+ * Last revision that was still released under the MIT license. 
+ *
+ * Last revision author   : UIUX Lab (https://uiux.cc)
+ * Last revision date     : August 21, 2018
+ * 
+ * Version added:
+ *
+ *    - Tweak: Enhance performance with TweenMax.
+ *
+ *
+
 */
 
 (function( $ ){
@@ -161,7 +181,10 @@ http://www.gnu.org/licenses/gpl.html
 		var getHeight;
 		var firstTop;
 		var paddingTop = 0;
-		
+
+		var isFirefox = (/Firefox/i.test(navigator.userAgent));
+		var isIe = (/MSIE/i.test(navigator.userAgent)) || (/Trident.*rv\:11\./i.test(navigator.userAgent));
+
 		//get the starting position of each element to have parallax applied to it		
 		$this.each( function(){
 		    firstTop = $this.offset().top;
@@ -182,6 +205,9 @@ http://www.gnu.org/licenses/gpl.html
 		if (arguments.length < 2 || speedFactor === null) speedFactor = 0.1;
 		if (arguments.length < 3 || outerHeight === null) outerHeight = true;
 		
+
+		
+		
 		// function to be called whenever the window is scrolled or resized
 		function update(){
 			var pos = $window.scrollTop();				
@@ -191,18 +217,36 @@ http://www.gnu.org/licenses/gpl.html
 				var top = $element.offset().top;
 				var height = getHeight($element);
 
+				
 				// Check if totally above or totally below viewport
 				if (top + height < pos || top > pos + windowHeight) {
 					return;
 				}
 
-				$this.css('backgroundPosition', xpos + " " + Math.round((firstTop - pos) * speedFactor) + "px");
+				TweenMax.set( $this, {
+					backgroundPosition: xpos + " " + Math.round((firstTop - pos ) * speedFactor) + "px"
+				});
+
+				
+				if (isFirefox) {
+				    //Set delta for Firefox
+
+				} else if (isIe) {
+				    //Set delta for IE
+
+				} else {
+				    //Set delta for all other browsers
+
+				}
+				
 			});
 		}		
 
 		$window.bind('scroll', update).resize(update);
 		update();
+	
+			
+		
 	};
 })(jQuery);
-
 

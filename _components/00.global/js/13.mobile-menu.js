@@ -8,7 +8,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.MOBILE_MENU               = APP.MOBILE_MENU || {};
-	APP.MOBILE_MENU.version       = '0.0.2';
+	APP.MOBILE_MENU.version       = '0.0.3';
     APP.MOBILE_MENU.documentReady = function( $ ) {
 
 		var $window      = $( window ),
@@ -83,15 +83,19 @@ APP = ( function ( APP, $, window, document ) {
 			// Menu click event
 			$( '.uix-menu__container.is-mobile ul li' ).on( 'click', function( e ) {
 
-				  var arrowText = $( this ).find( '.uix-menu__arrow-mobile' ).text().replace( /(.).*\1/g, "$1" );
-				  $( this ).find( '> .sub-menu:not(.sub-sub)' ).toggle();
+				var arrowText = $( this ).find( '.uix-menu__arrow-mobile' ).text().replace( /(.).*\1/g, "$1" );
 
-				  if ( arrowText != '-' ) {
-					  $( this ).find( '.uix-menu__arrow-mobile' ).text( '-' );
-				  } else {
-					  $( this ).find( '.uix-menu__arrow-mobile' ).text( '+' );
-				  }
+				//Hide other all sibling <ul> of the selected element
+				$( this ).siblings()
+						.removeClass( 'is-opened' )
+						.find( '> .sub-menu:not(.sub-sub)' ).slideUp( 500 );
 
+
+				var $sub = $( this ).children( 'ul' );
+
+				$sub.slideToggle( 500 );
+				$( this ).toggleClass( 'is-opened' );
+			
 
 			} );
 
@@ -131,7 +135,7 @@ APP = ( function ( APP, $, window, document ) {
 			if ( w <= 768 ) {
 				$( '.uix-menu__container.is-mobile .uix-menu > li' ).each( function() {
 					if ( $( this ).find( 'ul' ).length > 0 ) {
-						if ( $( this ).find( '.uix-menu__arrow-mobile' ).length < 1 ) $( this ).prepend( '<em class="uix-menu__arrow-mobile">+</em>' );
+						if ( $( this ).find( '.uix-menu__arrow-mobile' ).length < 1 ) $( this ).prepend( '<em class="uix-menu__arrow-mobile"></em>' );
 						$( this ).find( 'ul ul' ).addClass( 'sub-sub' );
 						$( this ).find( ' > a' ).attr( 'href', 'javascript:void(0);' );
 					}

@@ -9,7 +9,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.ADVANCED_SLIDER               = APP.ADVANCED_SLIDER || {};
-	APP.ADVANCED_SLIDER.version       = '0.0.7';
+	APP.ADVANCED_SLIDER.version       = '0.0.8';
     APP.ADVANCED_SLIDER.pageLoaded    = function() {
 
 		var $window                   = $( window ),
@@ -206,13 +206,22 @@ APP = ( function ( APP, $, window, document ) {
 				dataDraggableCursor      = $this.data( 'draggable-cursor' );
 	
 			
-			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider-sp__pagination';
-			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
+			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider__pagination';
+			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-slider__arrows';
 			if( typeof dataLoop === typeof undefined ) dataLoop = false;
 			if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
 			if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
 				
 
+			//If arrows does not exist on the page, it will be added by default, 
+			//and the drag and drop function will be activated.
+			if ( $( dataControlsArrows ).length == 0 ) {
+				$( 'body' ).prepend( '<div style="display:none;" class="uix-advanced-slider__arrows '+dataControlsArrows.replace('#','').replace('.','')+'"><a href="#" class="uix-advanced-slider__arrows--prev"></a><a href="#" class="uix-advanced-slider__arrows--next"></a></div>' );
+			}
+			
+			
+			
+			
 		    //Prevent bubbling
 			if ( itemsTotal == 1 ) {
 				$( dataControlsPagination ).hide();
@@ -315,7 +324,8 @@ APP = ( function ( APP, $, window, document ) {
 
 			//Mouse event
 			$dragDropTrigger.on( 'mousedown.ADVANCED_SLIDER touchstart.ADVANCED_SLIDER', function( e ) {
-				e.preventDefault();
+				
+				//Do not use "e.preventDefault()" to avoid prevention page scroll on drag in IOS and Android
 
 				var touches = e.originalEvent.touches;
 
@@ -339,7 +349,7 @@ APP = ( function ( APP, $, window, document ) {
 				}
 
 				$dragDropTrigger.on( 'mouseup.ADVANCED_SLIDER touchmove.ADVANCED_SLIDER', function( e ) {
-					e.preventDefault();
+					
 
 					$( this ).removeClass( 'dragging' );
 					var touches        = e.originalEvent.touches,
@@ -447,8 +457,8 @@ APP = ( function ( APP, $, window, document ) {
 
 			if( typeof dataCountTotal === typeof undefined ) dataCountTotal = 'p.count em.count';
 			if( typeof dataCountCur === typeof undefined ) dataCountCur = 'p.count em.current';
-			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider-sp__pagination';
-			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
+			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider__pagination';
+			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-slider__arrows';
 			if( typeof dataLoop === typeof undefined ) dataLoop = false;
 					
 		

@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  2.1.3
- * ## Last Update         :  August 16, 2018
+ * ## Version             :  2.1.4
+ * ## Last Update         :  August 25, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -27,8 +27,8 @@
     3. Back to Top 
     4. Get all custom attributes of an element like "data-*" 
     5. Navigation 
-    6. Common Height 
-    7. Videos 
+    6. Videos 
+    7. Common Height 
     8. Mega Menu 
     9. Dropdown Categories 
     10. Pagination 
@@ -47,8 +47,8 @@
     23. Accordion 
     24. Accordion Background Images 
     25. Advanced Content Slider 
-    26. Advanced Slider (Special Effects) 
-    27. Advanced Slider (Basic) 
+    26. Advanced Slider (Basic) 
+    27. Advanced Slider (Special Effects) 
     28. Circle Layout 
     29. Counter 
     30. Dropdown Menu 
@@ -58,8 +58,8 @@
     34. Floating Side Element 
     35. Form 
     36. Form Progress 
-    37. Gallery 
-    38. jQuery UI Datepicker 1.11.4 
+    37. jQuery UI Datepicker 1.11.4 
+    38. Gallery 
     39. Hover Delay Interaction 
     40. Image Shapes 
     41. Theme Scripts  
@@ -1581,9 +1581,10 @@ APP = ( function ( APP, $, window, document ) {
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
+
     APP.MEGAMENU               = APP.MEGAMENU || {};
 	APP.MEGAMENU.version       = '0.0.1';
-    APP.MEGAMENU.documentReady = function( $ ) {
+    APP.MEGAMENU.pageLoaded    = function() {
 
 		var $window      = $( window ),
 			windowWidth  = $window.width(),
@@ -1767,16 +1768,14 @@ APP = ( function ( APP, $, window, document ) {
 				} );	
 
 			}
-		}
-			
+		}	
 		
     };
 
-    APP.components.documentReady.push( APP.MEGAMENU.documentReady );
+    APP.components.pageLoaded.push( APP.MEGAMENU.pageLoaded );
     return APP;
 
 }( APP, jQuery, window, document ) );
-
 
 
 /* 
@@ -1986,6 +1985,26 @@ Plugin URL: http://www.ianlunn.co.uk/plugins/jquery-parallax/
 Dual licensed under the MIT and GPL licenses:
 http://www.opensource.org/licenses/mit-license.php
 http://www.gnu.org/licenses/gpl.html
+
+ *
+ *
+ *
+ *
+ *
+ * ============================================================
+ * ============================================================
+ * Warning: This is a modified version of extension.
+ * Last revision that was still released under the MIT license. 
+ *
+ * Last revision author   : UIUX Lab (https://uiux.cc)
+ * Last revision date     : August 21, 2018
+ * 
+ * Version added:
+ *
+ *    - Tweak: Enhance performance with TweenMax.
+ *
+ *
+
 */
 
 (function( $ ){
@@ -2001,7 +2020,10 @@ http://www.gnu.org/licenses/gpl.html
 		var getHeight;
 		var firstTop;
 		var paddingTop = 0;
-		
+
+		var isFirefox = (/Firefox/i.test(navigator.userAgent));
+		var isIe = (/MSIE/i.test(navigator.userAgent)) || (/Trident.*rv\:11\./i.test(navigator.userAgent));
+
 		//get the starting position of each element to have parallax applied to it		
 		$this.each( function(){
 		    firstTop = $this.offset().top;
@@ -2022,6 +2044,9 @@ http://www.gnu.org/licenses/gpl.html
 		if (arguments.length < 2 || speedFactor === null) speedFactor = 0.1;
 		if (arguments.length < 3 || outerHeight === null) outerHeight = true;
 		
+
+		
+		
 		// function to be called whenever the window is scrolled or resized
 		function update(){
 			var pos = $window.scrollTop();				
@@ -2031,20 +2056,38 @@ http://www.gnu.org/licenses/gpl.html
 				var top = $element.offset().top;
 				var height = getHeight($element);
 
+				
 				// Check if totally above or totally below viewport
 				if (top + height < pos || top > pos + windowHeight) {
 					return;
 				}
 
-				$this.css('backgroundPosition', xpos + " " + Math.round((firstTop - pos) * speedFactor) + "px");
+				TweenMax.set( $this, {
+					backgroundPosition: xpos + " " + Math.round((firstTop - pos ) * speedFactor) + "px"
+				});
+
+				
+				if (isFirefox) {
+				    //Set delta for Firefox
+
+				} else if (isIe) {
+				    //Set delta for IE
+
+				} else {
+				    //Set delta for all other browsers
+
+				}
+				
 			});
 		}		
 
 		$window.bind('scroll', update).resize(update);
 		update();
+	
+			
+		
 	};
 })(jQuery);
-
 
 
 
@@ -2201,7 +2244,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.MOBILE_MENU               = APP.MOBILE_MENU || {};
-	APP.MOBILE_MENU.version       = '0.0.2';
+	APP.MOBILE_MENU.version       = '0.0.3';
     APP.MOBILE_MENU.documentReady = function( $ ) {
 
 		var $window      = $( window ),
@@ -2276,15 +2319,19 @@ APP = ( function ( APP, $, window, document ) {
 			// Menu click event
 			$( '.uix-menu__container.is-mobile ul li' ).on( 'click', function( e ) {
 
-				  var arrowText = $( this ).find( '.uix-menu__arrow-mobile' ).text().replace( /(.).*\1/g, "$1" );
-				  $( this ).find( '> .sub-menu:not(.sub-sub)' ).toggle();
+				var arrowText = $( this ).find( '.uix-menu__arrow-mobile' ).text().replace( /(.).*\1/g, "$1" );
 
-				  if ( arrowText != '-' ) {
-					  $( this ).find( '.uix-menu__arrow-mobile' ).text( '-' );
-				  } else {
-					  $( this ).find( '.uix-menu__arrow-mobile' ).text( '+' );
-				  }
+				//Hide other all sibling <ul> of the selected element
+				$( this ).siblings()
+						.removeClass( 'is-opened' )
+						.find( '> .sub-menu:not(.sub-sub)' ).slideUp( 500 );
 
+
+				var $sub = $( this ).children( 'ul' );
+
+				$sub.slideToggle( 500 );
+				$( this ).toggleClass( 'is-opened' );
+			
 
 			} );
 
@@ -2324,7 +2371,7 @@ APP = ( function ( APP, $, window, document ) {
 			if ( w <= 768 ) {
 				$( '.uix-menu__container.is-mobile .uix-menu > li' ).each( function() {
 					if ( $( this ).find( 'ul' ).length > 0 ) {
-						if ( $( this ).find( '.uix-menu__arrow-mobile' ).length < 1 ) $( this ).prepend( '<em class="uix-menu__arrow-mobile">+</em>' );
+						if ( $( this ).find( '.uix-menu__arrow-mobile' ).length < 1 ) $( this ).prepend( '<em class="uix-menu__arrow-mobile"></em>' );
 						$( this ).find( 'ul ul' ).addClass( 'sub-sub' );
 						$( this ).find( ' > a' ).attr( 'href', 'javascript:void(0);' );
 					}
@@ -2594,6 +2641,230 @@ APP = ( function ( APP, $, window, document ) {
 
 }( APP, jQuery, window, document ) );
 
+
+
+
+
+
+/* 
+ *************************************
+ * <!-- 3D Background 2 -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP._3D_BACKGROUND_THREE               = APP._3D_BACKGROUND_THREE || {};
+	APP._3D_BACKGROUND_THREE.version       = '0.0.1';
+    APP._3D_BACKGROUND_THREE.documentReady = function( $ ) {
+
+		
+		//Prevent this module from loading in other pages
+		if ( $( '#3D-background-three-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
+		
+		
+		var $window                   = $( window ),
+			windowWidth               = $window.width(),
+			windowHeight              = $window.height(),
+			rendererCanvasID          = '3D-background-three-canvas';
+		
+	
+
+		
+		// Generate one plane geometries mesh to scene
+		//-------------------------------------	
+		var camera,
+			controls,
+			scene,
+			light,
+			renderer,
+			displacementSprite,
+			clock = new THREE.Clock();
+
+		
+		init();
+		render();
+
+		function init() {
+			//camera
+			camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 1, 10000 );
+			camera.position.set(0, 0, -1000);
+
+			//controls
+			controls = new THREE.OrbitControls( camera );
+			controls.rotateSpeed = 0.5;
+			controls.zoomSpeed = 1.2;
+			controls.panSpeed = 0.8;
+			controls.enableZoom = true;
+			controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+			controls.dampingFactor = 0.25;
+			controls.screenSpacePanning = false;
+			controls.minDistance = 100;
+			controls.maxDistance = 500;
+			controls.maxPolarAngle = Math.PI / 2;
+
+			//Scene
+			scene = new THREE.Scene();
+
+			//HemisphereLight
+			scene.add( new THREE.AmbientLight( 0x555555 ) );
+
+			light = new THREE.SpotLight( 0xffffff, 1.5 );
+			light.position.set( 0, 500, 2000 );
+			scene.add( light );
+			
+			
+
+			//WebGL Renderer		
+			renderer = new THREE.WebGLRenderer( { 
+									canvas   : document.getElementById( rendererCanvasID ), //canvas
+									alpha    : true, 
+									antialias: true 
+								} );
+			renderer.setSize( windowWidth, windowHeight );
+
+			
+			// Immediately use the texture for material creation
+			var defaultMaterial    = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
+			
+			displacementSprite = new THREE.Mesh( generateGeometry( 'sphere', 200 ), defaultMaterial );
+			scene.add( displacementSprite );
+
+
+			// Fires when the window changes
+			window.addEventListener( 'resize', onWindowResize, false );
+			
+			
+		}
+
+		function render() {
+			requestAnimationFrame( render );
+			
+            var objVector = new THREE.Vector3(0,0.2,0.1),
+				delta     = clock.getDelta();
+			
+			displacementSprite.rotation.x += delta * objVector.x;
+			displacementSprite.rotation.y += delta * objVector.y;
+			displacementSprite.rotation.z += delta * objVector.z;
+
+			//To set a background color.
+			//renderer.setClearColor( 0x000000 );	
+			
+			controls.update();
+			
+			renderer.render( scene, camera );
+			
+			
+
+			
+		}
+
+
+		function onWindowResize() {
+			camera.aspect = window.innerWidth / window.innerHeight;
+			camera.updateProjectionMatrix();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+		}
+
+		
+
+		
+		/*
+		 * Batch generation of geometry
+		 *
+		 * @param  {string} objectType     - String of geometry type identifier.
+		 * @param  {number} numObjects       - The total number of generated objects.
+		 * @return {void}                  - The constructor.
+		 */
+		function generateGeometry( objectType, numObjects ) {
+
+			var geometry = new THREE.Geometry();
+
+			var applyVertexColors = function( g, c ) {
+
+				g.faces.forEach( function( f ) {
+
+					var n = ( f instanceof THREE.Face3 ) ? 3 : 4;
+
+					for ( var j = 0; j < n; j ++ ) {
+
+						f.vertexColors[ j ] = c;
+
+					}
+
+				} );
+
+			};
+
+			for ( var i = 0; i < numObjects; i ++ ) {
+
+				var position = new THREE.Vector3();
+
+				position.x = Math.random() * 10000 - 5000;
+				position.y = Math.random() * 6000 - 3000;
+				position.z = Math.random() * 8000 - 4000;
+
+				var rotation = new THREE.Euler();
+
+				rotation.x = Math.random() * 2 * Math.PI;
+				rotation.y = Math.random() * 2 * Math.PI;
+				rotation.z = Math.random() * 2 * Math.PI;
+
+				var scale = new THREE.Vector3();
+
+				var geom, color = new THREE.Color();
+
+				scale.x = Math.random() * 200 + 100;
+
+				if ( objectType == "cube" ) {
+
+					geom = new THREE.BoxGeometry( 1, 1, 1 );
+					scale.y = Math.random() * 200 + 100;
+					scale.z = Math.random() * 200 + 100;
+					color.setRGB( 0, 0, Math.random() + 0.1 );
+
+				} else if ( objectType == "sphere" ) {
+
+					geom = new THREE.IcosahedronGeometry( 1, 1 );
+					scale.y = scale.z = scale.x;
+					color.setRGB( Math.random() + 0.1, 0, 0 );
+
+				} else if ( objectType == "poly" ) {
+
+
+					geom = new THREE.CylinderGeometry( 3, 6, 3, 5, 1 );
+					scale.y = Math.random() * 30;
+					scale.z = Math.random() * 30;
+					color.setRGB( Math.random() + 0.1, 0, 0 );
+
+				}
+
+
+				// give the geom's vertices a random color, to be displayed
+				applyVertexColors( geom, color );
+
+				var object = new THREE.Mesh( geom );
+				object.position.copy( position );
+				object.rotation.copy( rotation );
+				object.scale.copy( scale );
+				object.updateMatrix();
+
+				geometry.merge( object.geometry, object.matrix );
+
+			}
+
+			return geometry;
+			
+
+		}
+
+		
+    };
+
+    APP.components.documentReady.push( APP._3D_BACKGROUND_THREE.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
 
 
 
@@ -2910,230 +3181,6 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
-
-
-
-
-
-/* 
- *************************************
- * <!-- 3D Background 2 -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP._3D_BACKGROUND_THREE               = APP._3D_BACKGROUND_THREE || {};
-	APP._3D_BACKGROUND_THREE.version       = '0.0.1';
-    APP._3D_BACKGROUND_THREE.documentReady = function( $ ) {
-
-		
-		//Prevent this module from loading in other pages
-		if ( $( '#3D-background-three-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
-		
-		
-		var $window                   = $( window ),
-			windowWidth               = $window.width(),
-			windowHeight              = $window.height(),
-			rendererCanvasID          = '3D-background-three-canvas';
-		
-	
-
-		
-		// Generate one plane geometries mesh to scene
-		//-------------------------------------	
-		var camera,
-			controls,
-			scene,
-			light,
-			renderer,
-			displacementSprite,
-			clock = new THREE.Clock();
-
-		
-		init();
-		render();
-
-		function init() {
-			//camera
-			camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 1, 10000 );
-			camera.position.set(0, 0, -1000);
-
-			//controls
-			controls = new THREE.OrbitControls( camera );
-			controls.rotateSpeed = 0.5;
-			controls.zoomSpeed = 1.2;
-			controls.panSpeed = 0.8;
-			controls.enableZoom = true;
-			controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-			controls.dampingFactor = 0.25;
-			controls.screenSpacePanning = false;
-			controls.minDistance = 100;
-			controls.maxDistance = 500;
-			controls.maxPolarAngle = Math.PI / 2;
-
-			//Scene
-			scene = new THREE.Scene();
-
-			//HemisphereLight
-			scene.add( new THREE.AmbientLight( 0x555555 ) );
-
-			light = new THREE.SpotLight( 0xffffff, 1.5 );
-			light.position.set( 0, 500, 2000 );
-			scene.add( light );
-			
-			
-
-			//WebGL Renderer		
-			renderer = new THREE.WebGLRenderer( { 
-									canvas   : document.getElementById( rendererCanvasID ), //canvas
-									alpha    : true, 
-									antialias: true 
-								} );
-			renderer.setSize( windowWidth, windowHeight );
-
-			
-			// Immediately use the texture for material creation
-			var defaultMaterial    = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
-			
-			displacementSprite = new THREE.Mesh( generateGeometry( 'sphere', 200 ), defaultMaterial );
-			scene.add( displacementSprite );
-
-
-			// Fires when the window changes
-			window.addEventListener( 'resize', onWindowResize, false );
-			
-			
-		}
-
-		function render() {
-			requestAnimationFrame( render );
-			
-            var objVector = new THREE.Vector3(0,0.2,0.1),
-				delta     = clock.getDelta();
-			
-			displacementSprite.rotation.x += delta * objVector.x;
-			displacementSprite.rotation.y += delta * objVector.y;
-			displacementSprite.rotation.z += delta * objVector.z;
-
-			//To set a background color.
-			//renderer.setClearColor( 0x000000 );	
-			
-			controls.update();
-			
-			renderer.render( scene, camera );
-			
-			
-
-			
-		}
-
-
-		function onWindowResize() {
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-			renderer.setSize( window.innerWidth, window.innerHeight );
-		}
-
-		
-
-		
-		/*
-		 * Batch generation of geometry
-		 *
-		 * @param  {string} objectType     - String of geometry type identifier.
-		 * @param  {number} numObjects       - The total number of generated objects.
-		 * @return {void}                  - The constructor.
-		 */
-		function generateGeometry( objectType, numObjects ) {
-
-			var geometry = new THREE.Geometry();
-
-			var applyVertexColors = function( g, c ) {
-
-				g.faces.forEach( function( f ) {
-
-					var n = ( f instanceof THREE.Face3 ) ? 3 : 4;
-
-					for ( var j = 0; j < n; j ++ ) {
-
-						f.vertexColors[ j ] = c;
-
-					}
-
-				} );
-
-			};
-
-			for ( var i = 0; i < numObjects; i ++ ) {
-
-				var position = new THREE.Vector3();
-
-				position.x = Math.random() * 10000 - 5000;
-				position.y = Math.random() * 6000 - 3000;
-				position.z = Math.random() * 8000 - 4000;
-
-				var rotation = new THREE.Euler();
-
-				rotation.x = Math.random() * 2 * Math.PI;
-				rotation.y = Math.random() * 2 * Math.PI;
-				rotation.z = Math.random() * 2 * Math.PI;
-
-				var scale = new THREE.Vector3();
-
-				var geom, color = new THREE.Color();
-
-				scale.x = Math.random() * 200 + 100;
-
-				if ( objectType == "cube" ) {
-
-					geom = new THREE.BoxGeometry( 1, 1, 1 );
-					scale.y = Math.random() * 200 + 100;
-					scale.z = Math.random() * 200 + 100;
-					color.setRGB( 0, 0, Math.random() + 0.1 );
-
-				} else if ( objectType == "sphere" ) {
-
-					geom = new THREE.IcosahedronGeometry( 1, 1 );
-					scale.y = scale.z = scale.x;
-					color.setRGB( Math.random() + 0.1, 0, 0 );
-
-				} else if ( objectType == "poly" ) {
-
-
-					geom = new THREE.CylinderGeometry( 3, 6, 3, 5, 1 );
-					scale.y = Math.random() * 30;
-					scale.z = Math.random() * 30;
-					color.setRGB( Math.random() + 0.1, 0, 0 );
-
-				}
-
-
-				// give the geom's vertices a random color, to be displayed
-				applyVertexColors( geom, color );
-
-				var object = new THREE.Mesh( geom );
-				object.position.copy( position );
-				object.rotation.copy( rotation );
-				object.scale.copy( scale );
-				object.updateMatrix();
-
-				geometry.merge( object.geometry, object.matrix );
-
-			}
-
-			return geometry;
-			
-
-		}
-
-		
-    };
-
-    APP.components.documentReady.push( APP._3D_BACKGROUND_THREE.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
 
 
 
@@ -3648,6 +3695,140 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
+ * <!-- 3D Pages -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP._3D_PAGES               = APP._3D_PAGES || {};
+	APP._3D_PAGES.version       = '0.0.1';
+    APP._3D_PAGES.documentReady = function( $ ) {
+
+		
+		//Prevent this module from loading in other pages
+		if ( $( '#3D-renderer' ).length == 0 || ! Modernizr.webgl ) return false;
+		
+		
+		
+		var $window                   = $( window ),
+			windowWidth               = $window.width(),
+			windowHeight              = $window.height(),
+			viewRenderer              = '3D-renderer';
+		
+		
+		// Generate one plane geometries mesh to scene
+		//-------------------------------------	
+		var camera,
+			controls,
+			scene,
+			light,
+			renderer,
+			clock = new THREE.Clock();
+
+		init();
+		render();
+
+		function init() {
+			//camera
+			camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 1, 10000 );
+			camera.position.set(0, 0, -1000);
+
+			//controls
+			controls = new THREE.OrbitControls( camera );
+			controls.rotateSpeed = 0.5;
+			controls.zoomSpeed = 1.2;
+			controls.panSpeed = 0.8;
+			controls.enableZoom = true;
+			controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+			controls.dampingFactor = 0.25;
+			controls.screenSpacePanning = false;
+			controls.minDistance = 1000;
+			controls.maxDistance = 1500;
+			controls.maxPolarAngle = Math.PI / 2;
+
+			//Scene
+			scene = new THREE.Scene();
+
+			//HemisphereLight
+			light = new THREE.HemisphereLight( 0xffbf67, 0x15c6ff );
+			scene.add( light );
+
+			//WebGL Renderer
+			renderer = new THREE.WebGLRenderer( { 
+									alpha    : true, 
+									antialias: true 
+								} );
+			renderer.setClearColor( 0xffffff, 0 );
+			renderer.setSize( windowWidth - 50, windowHeight - 50 );
+			renderer.domElement.style.zIndex = 5;
+			document.getElementById( viewRenderer ).appendChild( renderer.domElement );
+
+			
+			//Add HTML elements to scene
+			var target  = $( '#html3D-view' ).clone(),
+				pages   = target.find( '.html3D-view-content' );
+
+			pages.each( function() {
+				var el = new THREE.CSS3DObject( $.parseHTML( $( this )[0].outerHTML )[0] );
+
+				el.position.x = $( this ).data( 'position-x' ) || 0;
+				el.position.y = $( this ).data( 'position-y' ) || 0;
+				el.position.z = $( this ).data( 'position-z' ) || 0;
+				el.rotation.x = $( this ).data( 'rotation-x' ) || 0;
+				el.rotation.y = $( this ).data( 'rotation-y' ) || 3.14159265358979;
+				el.rotation.z = $( this ).data( 'rotation-z' ) || 0;
+
+				scene.add( el );
+			});
+			
+
+			
+			
+			//CSS3D Renderer
+			renderer = new THREE.CSS3DRenderer();
+			renderer.setSize( windowWidth, windowHeight );
+			renderer.domElement.style.position = 'absolute';
+			renderer.domElement.style.top = 0;
+			document.getElementById( viewRenderer ).appendChild( renderer.domElement );
+
+			// Fires when the window changes
+			window.addEventListener( 'resize', onWindowResize, false );
+			
+			
+		}
+
+		function render() {
+			requestAnimationFrame( render );
+
+            var delta = clock.getDelta();
+			
+			controls.update();
+			
+			renderer.render( scene, camera );
+			
+		}
+		
+		function onWindowResize() {
+			camera.aspect = window.innerWidth / window.innerHeight;
+			camera.updateProjectionMatrix();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+		}
+
+
+		
+    };
+
+    APP.components.documentReady.push( APP._3D_PAGES.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+/* 
+ *************************************
  * <!-- 3D Particle Effect -->
  *************************************
  */
@@ -3845,140 +4026,6 @@ APP = ( function ( APP, $, window, document ) {
     };
 
     APP.components.documentReady.push( APP._3D_PARTICLE.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
-/* 
- *************************************
- * <!-- 3D Pages -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP._3D_PAGES               = APP._3D_PAGES || {};
-	APP._3D_PAGES.version       = '0.0.1';
-    APP._3D_PAGES.documentReady = function( $ ) {
-
-		
-		//Prevent this module from loading in other pages
-		if ( $( '#3D-renderer' ).length == 0 || ! Modernizr.webgl ) return false;
-		
-		
-		
-		var $window                   = $( window ),
-			windowWidth               = $window.width(),
-			windowHeight              = $window.height(),
-			viewRenderer              = '3D-renderer';
-		
-		
-		// Generate one plane geometries mesh to scene
-		//-------------------------------------	
-		var camera,
-			controls,
-			scene,
-			light,
-			renderer,
-			clock = new THREE.Clock();
-
-		init();
-		render();
-
-		function init() {
-			//camera
-			camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 1, 10000 );
-			camera.position.set(0, 0, -1000);
-
-			//controls
-			controls = new THREE.OrbitControls( camera );
-			controls.rotateSpeed = 0.5;
-			controls.zoomSpeed = 1.2;
-			controls.panSpeed = 0.8;
-			controls.enableZoom = true;
-			controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-			controls.dampingFactor = 0.25;
-			controls.screenSpacePanning = false;
-			controls.minDistance = 1000;
-			controls.maxDistance = 1500;
-			controls.maxPolarAngle = Math.PI / 2;
-
-			//Scene
-			scene = new THREE.Scene();
-
-			//HemisphereLight
-			light = new THREE.HemisphereLight( 0xffbf67, 0x15c6ff );
-			scene.add( light );
-
-			//WebGL Renderer
-			renderer = new THREE.WebGLRenderer( { 
-									alpha    : true, 
-									antialias: true 
-								} );
-			renderer.setClearColor( 0xffffff, 0 );
-			renderer.setSize( windowWidth - 50, windowHeight - 50 );
-			renderer.domElement.style.zIndex = 5;
-			document.getElementById( viewRenderer ).appendChild( renderer.domElement );
-
-			
-			//Add HTML elements to scene
-			var target  = $( '#html3D-view' ).clone(),
-				pages   = target.find( '.html3D-view-content' );
-
-			pages.each( function() {
-				var el = new THREE.CSS3DObject( $.parseHTML( $( this )[0].outerHTML )[0] );
-
-				el.position.x = $( this ).data( 'position-x' ) || 0;
-				el.position.y = $( this ).data( 'position-y' ) || 0;
-				el.position.z = $( this ).data( 'position-z' ) || 0;
-				el.rotation.x = $( this ).data( 'rotation-x' ) || 0;
-				el.rotation.y = $( this ).data( 'rotation-y' ) || 3.14159265358979;
-				el.rotation.z = $( this ).data( 'rotation-z' ) || 0;
-
-				scene.add( el );
-			});
-			
-
-			
-			
-			//CSS3D Renderer
-			renderer = new THREE.CSS3DRenderer();
-			renderer.setSize( windowWidth, windowHeight );
-			renderer.domElement.style.position = 'absolute';
-			renderer.domElement.style.top = 0;
-			document.getElementById( viewRenderer ).appendChild( renderer.domElement );
-
-			// Fires when the window changes
-			window.addEventListener( 'resize', onWindowResize, false );
-			
-			
-		}
-
-		function render() {
-			requestAnimationFrame( render );
-
-            var delta = clock.getDelta();
-			
-			controls.update();
-			
-			renderer.render( scene, camera );
-			
-		}
-		
-		function onWindowResize() {
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-			renderer.setSize( window.innerWidth, window.innerHeight );
-		}
-
-
-		
-    };
-
-    APP.components.documentReady.push( APP._3D_PAGES.documentReady );
     return APP;
 
 }( APP, jQuery, window, document ) );
@@ -4585,7 +4632,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.ADVANCED_SLIDER_FILTER               = APP.ADVANCED_SLIDER_FILTER || {};
-	APP.ADVANCED_SLIDER_FILTER.version       = '0.1.0';
+	APP.ADVANCED_SLIDER_FILTER.version       = '0.1.1';
     APP.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 	
@@ -4831,7 +4878,15 @@ APP = ( function ( APP, $, window, document ) {
 			if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
 
 				
-
+			
+			//If arrows does not exist on the page, it will be added by default, 
+			//and the drag and drop function will be activated.
+			if ( $( dataControlsArrows ).length == 0 ) {
+				$( 'body' ).prepend( '<div style="display:none;" class="uix-advanced-slider-sp__arrows '+dataControlsArrows.replace('#','').replace('.','')+'"><a href="#" class="uix-advanced-slider-sp__arrows--prev"></a><a href="#" class="uix-advanced-slider-sp__arrows--next"></a></div>' );
+			}
+			
+			
+        
 		    //Prevent bubbling
 			if ( itemsTotal == 1 ) {
 				$( dataControlsPagination ).hide();
@@ -6020,7 +6075,7 @@ APP = ( function ( APP, $, window, document ) {
 
 			//Mouse event
 			$dragDropTrigger.on( 'mousedown.ADVANCED_SLIDER_FILTER touchstart.ADVANCED_SLIDER_FILTER', function( e ) {
-				e.preventDefault();
+				//Do not use "e.preventDefault()" to avoid prevention page scroll on drag in IOS and Android
 
 				var touches = e.originalEvent.touches;
 
@@ -6044,7 +6099,7 @@ APP = ( function ( APP, $, window, document ) {
 				}
 
 				$dragDropTrigger.on( 'mouseup.ADVANCED_SLIDER_FILTER touchmove.ADVANCED_SLIDER_FILTER', function( e ) {
-					e.preventDefault();
+					
 
 					$( this ).removeClass( 'dragging' );
 					var touches        = e.originalEvent.touches,
@@ -7366,7 +7421,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.ADVANCED_SLIDER               = APP.ADVANCED_SLIDER || {};
-	APP.ADVANCED_SLIDER.version       = '0.0.7';
+	APP.ADVANCED_SLIDER.version       = '0.0.8';
     APP.ADVANCED_SLIDER.pageLoaded    = function() {
 
 		var $window                   = $( window ),
@@ -7563,13 +7618,22 @@ APP = ( function ( APP, $, window, document ) {
 				dataDraggableCursor      = $this.data( 'draggable-cursor' );
 	
 			
-			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider-sp__pagination';
-			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
+			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider__pagination';
+			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-slider__arrows';
 			if( typeof dataLoop === typeof undefined ) dataLoop = false;
 			if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
 			if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
 				
 
+			//If arrows does not exist on the page, it will be added by default, 
+			//and the drag and drop function will be activated.
+			if ( $( dataControlsArrows ).length == 0 ) {
+				$( 'body' ).prepend( '<div style="display:none;" class="uix-advanced-slider__arrows '+dataControlsArrows.replace('#','').replace('.','')+'"><a href="#" class="uix-advanced-slider__arrows--prev"></a><a href="#" class="uix-advanced-slider__arrows--next"></a></div>' );
+			}
+			
+			
+			
+			
 		    //Prevent bubbling
 			if ( itemsTotal == 1 ) {
 				$( dataControlsPagination ).hide();
@@ -7672,7 +7736,8 @@ APP = ( function ( APP, $, window, document ) {
 
 			//Mouse event
 			$dragDropTrigger.on( 'mousedown.ADVANCED_SLIDER touchstart.ADVANCED_SLIDER', function( e ) {
-				e.preventDefault();
+				
+				//Do not use "e.preventDefault()" to avoid prevention page scroll on drag in IOS and Android
 
 				var touches = e.originalEvent.touches;
 
@@ -7696,7 +7761,7 @@ APP = ( function ( APP, $, window, document ) {
 				}
 
 				$dragDropTrigger.on( 'mouseup.ADVANCED_SLIDER touchmove.ADVANCED_SLIDER', function( e ) {
-					e.preventDefault();
+					
 
 					$( this ).removeClass( 'dragging' );
 					var touches        = e.originalEvent.touches,
@@ -7804,8 +7869,8 @@ APP = ( function ( APP, $, window, document ) {
 
 			if( typeof dataCountTotal === typeof undefined ) dataCountTotal = 'p.count em.count';
 			if( typeof dataCountCur === typeof undefined ) dataCountCur = 'p.count em.current';
-			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider-sp__pagination';
-			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
+			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider__pagination';
+			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-slider__arrows';
 			if( typeof dataLoop === typeof undefined ) dataLoop = false;
 					
 		
@@ -8591,33 +8656,42 @@ APP = ( function ( APP, $, window, document ) {
 			if ( jsonFile != '' ) {
 				
 				//Initialize dependent/chained dropdown list
-				$.ajax({
-					url      : jsonFile,
-					method   : method,
-					data     : toData,
-					dataType : 'json',
-					success  : function ( data ) { 
+				var dataExist = $this.data( 'exist' );
+				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
+				
+					$.ajax({
+						url      : jsonFile,
+						method   : method,
+						data     : toData,
+						dataType : 'json',
+						success  : function ( data ) { 
 
-						var firstOptionsHtml = '';
-						
-						//Push the options to target select
-						for ( var m = 0; m < data.length; m++ ) {
-							firstOptionsHtml += "<option value='"+data[m].name+"'>"+data[m].name+"</option>";
-						}	
-						
-						$( firstOptionsHtml ).insertAfter( $this.find( 'option' ).first() );
+							var firstOptionsHtml = '';
+
+							//Push the options to target select
+							for ( var m = 0; m < data.length; m++ ) {
+								firstOptionsHtml += "<option value='"+data[m].name+"'>"+data[m].name+"</option>";
+							}	
+
+							$( firstOptionsHtml ).insertAfter( $this.find( 'option' ).first() );
 
 
-						//Initialize the custom select
-						$( document ).customSelectInit();
+							//Initialize the custom select
+							$( document ).customSelectInit();
+
+
+						 },
+						 error  : function() {
+
+
+						 }
+					});
+
 					
-
-					 },
-					 error  : function() {
-
-
-					 }
-				});
+					
+					//Prevent the form from being initialized again
+					$this.data( 'exist', 1 );	
+				}
 				
 				
 				
@@ -8633,6 +8707,24 @@ APP = ( function ( APP, $, window, document ) {
 						
 						var curVal = $( '#' + curID + ' option:selected' ).val();
 
+						
+						//Clear all options
+						if ( curVal == '' ) {
+							
+							
+							$( '#' + curID ).find( 'option[value=""]' ).attr( 'selected', 'selected' );
+							$( associated ).find( 'option:selected' ).removeAttr( 'selected' );
+							
+							//Initialize the custom select
+							$( document ).customSelectInit();
+							$( associated ).attr( 'selected', 'selected' ).change();	
+							
+							APP.DYNAMIC_DD_LIST.documentReady($);
+							
+							
+						}
+						
+						
 						
 						if ( curVal != '' ) {
 							
@@ -8710,6 +8802,7 @@ APP = ( function ( APP, $, window, document ) {
 											}
 
 											$( associated ).html( optionsHtml );
+											$( associated ).closest( '.uix-controls__select-wrapper' ).find( '.uix-controls__select-trigger' ).addClass( 'active' );
 
 
 											//Initialize the custom select
@@ -8755,6 +8848,7 @@ APP = ( function ( APP, $, window, document ) {
 						curLatitude  = $this.data( 'latitude' ),
 						curAddresses = $this.data( 'addresses' ),
 						curContents  = '';
+
 					
 					if ( Object.prototype.toString.call( curAddresses ) =='[object Array]' ) {
 						for ( var k = 0; k < curAddresses.length; k++ ) {
@@ -11206,7 +11300,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.FORM               = APP.FORM || {};
-	APP.FORM.version       = '0.0.2';
+	APP.FORM.version       = '0.0.3';
     APP.FORM.documentReady = function( $ ) {
 
 		/* 
@@ -11609,10 +11703,22 @@ APP = ( function ( APP, $, window, document ) {
 
 			});
 
-			$( document.body ).on( 'click touchstart', function( e ) {
-				$( settings.selector + '.js-uix-new' ).removeClass( 'is-opened' );
-			});		
+			
+			$( document.body ).on( 'click', function( e ) {
+				
+				if ( 
+					e.target.className != '' && 
+					typeof e.target.className != typeof undefined && 
+					Object.prototype.toString.call( e.target.className ) != '[object SVGAnimatedString]' 
+				) {
+	
+					if ( e.target.className.indexOf( 'uix-controls__select__option' ) < 0 ) {
+						$( settings.selector + '.js-uix-new' ).removeClass( 'is-opened' );
+					}	
+				}
 
+				
+			});		
 
 
 
@@ -11636,7 +11742,7 @@ APP = ( function ( APP, $, window, document ) {
 				$selectCurWrapper.removeClass( 'is-opened' );
 
 				//Set the selector text
-				$selectCurWrapper.find( settings.trigger ).text( $( this ).html() );
+				$selectCurWrapper.find( settings.trigger ).text( $( this ).html() ).addClass( 'active' );
 
 				//Activate this option
 				$selectCurWrapper.find( settings.item ).removeClass( 'active' );
@@ -14606,21 +14712,23 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.LIGHTBOX               = APP.LIGHTBOX || {};
-	APP.LIGHTBOX.version       = '0.0.9';
+	APP.LIGHTBOX.version       = '0.1.0';
     APP.LIGHTBOX.pageLoaded    = function() {
 
 		if ( $( '.uix-lightbox__container' ).length == 0 ) {
-			$( 'body' ).prepend( '<div class="uix-lightbox__container"><div class="uix-lightbox__inner"><div class="uix-lightbox__html"></div><span class="uix-lightbox__close"></span><p class="title"></p></div></div><div class="uix-lightbox__container-mask"></div><div class="uix-lightbox__close-fixed"></div>' );
+			$( 'body' ).prepend( '<div class="uix-lightbox__loading is-loaded uix-t-c"><i class="fa fa-spinner fa-spin"></i> Loading...</div><a class="uix-lightbox__original__close" href="#"></a><div class="uix-lightbox__container"><div class="uix-lightbox__inner"><div class="uix-lightbox__html"></div><span class="uix-lightbox__close"></span><p class="title"></p></div></div><div class="uix-lightbox__container-mask"></div><div class="uix-lightbox__close-fixed"></div>' );
 		}
 		
 
-		var	$lbCon          = $( '.uix-lightbox__inner' ),
-			$lbWrapper      = $( '.uix-lightbox__container' ),
-			$lbMask         = $( '.uix-lightbox__container-mask' ),
-			lbCloseEl       = '.uix-lightbox__container .uix-lightbox__close',
-			lbCloseFixedEl  = '.uix-lightbox__close-fixed',
-			$lbContent      = $lbCon.find( '.uix-lightbox__html' ),
-			tempID          = 'lightbox-' + UIX_GUID.newGuid();
+		var	$lbCon           = $( '.uix-lightbox__inner' ),
+			$lbWrapper       = $( '.uix-lightbox__container' ),
+			$lbMask          = $( '.uix-lightbox__container-mask' ),
+			lbCloseEl        = '.uix-lightbox__container .uix-lightbox__close',
+			lbCloseFixedEl   = '.uix-lightbox__close-fixed',
+			$lbLoader        = $( '.uix-lightbox__loading' ),
+			$lbLargeImgClose = $( '.uix-lightbox__original__close' ),
+			$lbContent       = $lbCon.find( '.uix-lightbox__html' ),
+			tempID           = 'lightbox-' + UIX_GUID.newGuid();
 		
 		$( document ).on( 'click touchstart', '.uix-lightbox__trigger', function() { 
 
@@ -14649,8 +14757,9 @@ APP = ( function ( APP, $, window, document ) {
 				dataMethod = 'POST';
 			}		
 			
-			
-			
+			//Display loading
+			$lbLoader.removeClass( 'is-loaded' );	
+	
 			//Reset the wrapper position
 			$lbWrapper.css( 'margin-top', 0 );	
 			
@@ -14668,6 +14777,12 @@ APP = ( function ( APP, $, window, document ) {
 			
 			//Reset current container type
 			$lbCon.removeClass( 'js-uix-custom js-uix-pure-image' );
+			
+		
+			// Locks the page
+			if ( !$lbWrapper.hasClass( 'js-uix-no-fixed' ) ) {
+				$.scrollLock( true );
+			}
 			
 			
 
@@ -14708,7 +14823,6 @@ APP = ( function ( APP, $, window, document ) {
 						largePhotos += '	</a>';
 						largePhotos += '	<div class="uix-lightbox__original__target" id="'+tempID+'-sets-'+i+'">';
 						largePhotos += '	   <img src="'+ imgSrcStr[i].large +'" alt="">';
-						largePhotos += '	   <a class="uix-lightbox__original__close" href="#"></a>';
 						largePhotos += '	</div>';
 						largePhotos += '</li>'; 
 
@@ -14739,7 +14853,6 @@ APP = ( function ( APP, $, window, document ) {
 					htmlContent += '	</a>';
 					htmlContent += '	<div class="uix-lightbox__original__target" id="'+tempID+'">';
 					htmlContent += '	   <img src="'+ imgSrcStr +'" alt="">';
-					htmlContent += '	   <a class="uix-lightbox__original__close" href="#"></a>';
 					htmlContent += '	</div>';
 					htmlContent += '</div>'; 
 					
@@ -14755,13 +14868,20 @@ APP = ( function ( APP, $, window, document ) {
 					img.src = imgSrcStrToW;
 					img.onload = function() {
 						
-						var sw = $( window ).width() - 30,
-							w  = ( this.width > 1000 ) ? 1000 : this.width,
+						//remove loading
+						$lbLoader.addClass( 'is-loaded' );
+						
+						var sw     = $( window ).width() - 30,
+							ow     = this.width,
+							oh     = this.height,
+							ratioH = oh/ow,
+							ratioW = ow/oh,
+							w      = ( ow > 1000 ) ? 1000 : ow,
 							h;
 				
 						if ( w > sw ) w = sw;
 						
-						h = w * ( this.height/this.width );
+						h = w * ratioH;
 						
 					
 						//Prevent height overflow
@@ -14772,10 +14892,45 @@ APP = ( function ( APP, $, window, document ) {
 							'width': w + 'px'
 						} );
 						
-						
-						$( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' ).css( {
+
+						//Don't write variables outside
+						var $lbSetsContainer = $( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' );
+						$lbSetsContainer.css( {
 							'height': h + 'px'
-						} );	
+						} );
+						
+						
+						//Set a new height & width of inside images
+						$lbContent.find( '.uix-lightbox__photo-sets-container ul > li img' ).css( {
+							'height': h + 'px'
+						} );
+
+						
+						if ( ! $( 'body' ).hasClass( 'rtl' ) ) {
+							$lbContent.find( '.uix-lightbox__photo-sets-container' ).css( {
+								'width': 'calc('+ h*ratioW +'px + 6rem)',
+								'margin-left': '-3rem'
+							} );
+	
+						} else {
+							$lbContent.find( '.uix-lightbox__photo-sets-container' ).css( {
+								'width': 'calc('+ h*ratioW +'px + 6rem)',
+								'margin-right': '-3rem'
+							} );
+	
+						}
+						
+						
+						//If the image is larger than the current window, it will display at the top.
+						//Don't write variables outside
+						var $lbTarImg = $( '.uix-lightbox__photo-container > .uix-lightbox__original__target' );
+						if ( oh > $( window ).height() ) {
+							$lbTarImg.addClass( 'uix-lightbox__original__target--imgfull' );
+						} else {
+							$lbTarImg.removeClass( 'uix-lightbox__original__target--imgfull' );
+						}
+						
+					
 						
 						
 					};
@@ -14877,11 +15032,55 @@ APP = ( function ( APP, $, window, document ) {
 			$largePhoto.find( 'li' ).eq( index ).addClass( 'active' ).fadeIn( 300, function() {
 				
 				//Reset the container height
-				curImgH = $largePhoto.find( 'li' ).eq( index ).find( 'img' ).height();
+				var imgClick = new Image();
+				imgClick.src = $largePhoto.find( 'li' ).eq( index ).find( 'img' ).attr( 'src' );
+				imgClick.onload = function() {
+					
+					//remove loading
+					$lbLoader.addClass( 'is-loaded' );
+
+
+					
+					var sw     = $( window ).width() - 30,
+						ow     = this.width,
+						oh     = this.height,
+						ratioH = oh/ow,
+						w      = ( ow > 1000 ) ? 1000 : ow,
+						h;
+					
+
+					if ( w > sw ) w = sw;
+
+					h = w * ratioH;
+
+
+					//Prevent height overflow
+					if ( h > $( window ).height() ) h = $( window ).height() * 0.95;
+
+					
+					$largePhoto.css( {
+						'height': h + 'px'
+					} )
+					.find( 'img' ).css( {
+						'height': h + 'px'
+					} );	
+					
+
+					//If the image is larger than the current window, it will display at the top.
+					//Don't write variables outside
+					var $lbTarImg = $largePhoto.find( 'li' ).eq( index ).find( '.uix-lightbox__original__target' );
+					if ( oh > $( window ).height() ) {
+						$lbTarImg.addClass( 'uix-lightbox__original__target--imgfull' );
+					} else {
+						$lbTarImg.removeClass( 'uix-lightbox__original__target--imgfull' );
+					}
+
+					
+
+				};
+
 				
-				$largePhoto.css( {
-					'height': curImgH + 'px'
-				} );
+
 			});	
 		}
 		
@@ -14889,6 +15088,7 @@ APP = ( function ( APP, $, window, document ) {
 		
 		$( document ).on( 'click', '.uix-lightbox__thumb-container li', function() {
 			lightboxThumbSwitch( $( this ).index(), $( this ) );
+			
 		});		
 		
 		$( document ).on( 'click', '.uix-lightbox__photo-sets-container > a', function() {
@@ -14938,6 +15138,9 @@ APP = ( function ( APP, $, window, document ) {
 			//Changing The Site URL
 			var href = window.location.href.substr( 0, window.location.href.indexOf( '#' ) );
 			history.pushState( '', document.title, href );
+			
+			// Unlocks the page
+			$.scrollLock( false );
 	
 			
 		}
@@ -14950,11 +15153,12 @@ APP = ( function ( APP, $, window, document ) {
 		//Close/Open enlarge image
 		$( document ).on( 'click', '.uix-lightbox__original__link', function( e ) {
 			$( 'html' ).css( 'overflow-y', 'hidden' );
+			$lbLargeImgClose.addClass( 'active' );
 
 		});	
 		
 		$( document ).on( 'click', '.uix-lightbox__original__close', function( e ) {
-
+            $lbLargeImgClose.removeClass( 'active' );
 			$( 'html' ).css( 'overflow-y', 'auto' );
 		});
 
@@ -15907,6 +16111,17 @@ APP = ( function ( APP, $, window, document ) {
 
 
 			});
+			
+			
+			
+			//Solve the activation problem of touch events
+			//-------------------------------------	
+			$carouselItem.on( 'click touchstart', function() {
+				$carouselItem.removeClass( 'active-item' );
+				$( this ).addClass( 'active-item' );
+			});
+			
+			
 			
 			
 			//Drag and Drop
@@ -17447,7 +17662,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.PARALLAX               = APP.PARALLAX || {};
-	APP.PARALLAX.version       = '0.0.4';
+	APP.PARALLAX.version       = '0.0.5';
     APP.PARALLAX.documentReady = function( $ ) {
 
         var $window      = $( window ),
@@ -17648,12 +17863,16 @@ APP = ( function ( APP, $, window, document ) {
 					}
 
 
+
 					//Apply tilt effect
-					if( typeof dataSkew != typeof undefined ) {
+					if( typeof dataSkew != typeof undefined && dataSkew != 0 ) {
+						
+						//Firefox browser will affect parallax effect due to transform
 						$this.css( {
 							'transform'  : 'skew(0deg, '+dataSkew+'deg)'
 						} );
 					}
+
 
 
 					//Embedded parent disparity elements

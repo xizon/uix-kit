@@ -53,33 +53,42 @@ APP = ( function ( APP, $, window, document ) {
 			if ( jsonFile != '' ) {
 				
 				//Initialize dependent/chained dropdown list
-				$.ajax({
-					url      : jsonFile,
-					method   : method,
-					data     : toData,
-					dataType : 'json',
-					success  : function ( data ) { 
+				var dataExist = $this.data( 'exist' );
+				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
+				
+					$.ajax({
+						url      : jsonFile,
+						method   : method,
+						data     : toData,
+						dataType : 'json',
+						success  : function ( data ) { 
 
-						var firstOptionsHtml = '';
-						
-						//Push the options to target select
-						for ( var m = 0; m < data.length; m++ ) {
-							firstOptionsHtml += "<option value='"+data[m].name+"'>"+data[m].name+"</option>";
-						}	
-						
-						$( firstOptionsHtml ).insertAfter( $this.find( 'option' ).first() );
+							var firstOptionsHtml = '';
+
+							//Push the options to target select
+							for ( var m = 0; m < data.length; m++ ) {
+								firstOptionsHtml += "<option value='"+data[m].name+"'>"+data[m].name+"</option>";
+							}	
+
+							$( firstOptionsHtml ).insertAfter( $this.find( 'option' ).first() );
 
 
-						//Initialize the custom select
-						$( document ).customSelectInit();
+							//Initialize the custom select
+							$( document ).customSelectInit();
+
+
+						 },
+						 error  : function() {
+
+
+						 }
+					});
+
 					
-
-					 },
-					 error  : function() {
-
-
-					 }
-				});
+					
+					//Prevent the form from being initialized again
+					$this.data( 'exist', 1 );	
+				}
 				
 				
 				
@@ -95,6 +104,24 @@ APP = ( function ( APP, $, window, document ) {
 						
 						var curVal = $( '#' + curID + ' option:selected' ).val();
 
+						
+						//Clear all options
+						if ( curVal == '' ) {
+							
+							
+							$( '#' + curID ).find( 'option[value=""]' ).attr( 'selected', 'selected' );
+							$( associated ).find( 'option:selected' ).removeAttr( 'selected' );
+							
+							//Initialize the custom select
+							$( document ).customSelectInit();
+							$( associated ).attr( 'selected', 'selected' ).change();	
+							
+							APP.DYNAMIC_DD_LIST.documentReady($);
+							
+							
+						}
+						
+						
 						
 						if ( curVal != '' ) {
 							
@@ -172,6 +199,7 @@ APP = ( function ( APP, $, window, document ) {
 											}
 
 											$( associated ).html( optionsHtml );
+											$( associated ).closest( '.uix-controls__select-wrapper' ).find( '.uix-controls__select-trigger' ).addClass( 'active' );
 
 
 											//Initialize the custom select
@@ -217,6 +245,7 @@ APP = ( function ( APP, $, window, document ) {
 						curLatitude  = $this.data( 'latitude' ),
 						curAddresses = $this.data( 'addresses' ),
 						curContents  = '';
+
 					
 					if ( Object.prototype.toString.call( curAddresses ) =='[object Array]' ) {
 						for ( var k = 0; k < curAddresses.length; k++ ) {
