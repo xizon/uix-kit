@@ -154,7 +154,8 @@ APP = ( function ( APP, $, window, document ) {
 				if ( $next.length > 0 ) {
 					TweenMax.to( window, animationTime/1000, {
 						scrollTo: {
-							y: $next.offset().top - topSectionSpacing
+							y: $next.offset().top - topSectionSpacing,
+							autoKill : false
 						},
 						ease: Power2.easeOut,
 						onComplete: function() {

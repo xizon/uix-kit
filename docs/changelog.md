@@ -1,5 +1,12 @@
 # Changelog
 
+#### = 2.1.5 (August 27, 2018) =
+
+* Fix: Solved the display problem of Advanced Slider under retina widescreen
+* Fix: Fix scrollTo plugin of GSAP bug with iOS.
+
+
+
 #### = 2.1.4 (August 25, 2018) =
 
 * Fix: Fixed issue with parallax effect in Firefox and IE browser.

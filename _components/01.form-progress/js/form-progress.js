@@ -292,7 +292,8 @@ APP = ( function ( APP, $, window, document ) {
 			//Scroll Top
 			TweenMax.to( window, 0.5, {
 				scrollTo: {
-					y: 0
+					y        : 0,
+					autoKill : false
 				},
 				ease: Power2.easeOut
 			});	

@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  2.1.4
- * ## Last Update         :  August 25, 2018
+ * ## Version             :  2.1.5
+ * ## Last Update         :  August 27, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -22,8 +22,8 @@
 	---------------------------
 	
 	
-	1. Body And Header 
-    2. Loader 
+	1. Loader 
+    2. Body And Header 
     3. Back to Top 
     4. Get all custom attributes of an element like "data-*" 
     5. Navigation 
@@ -43,13 +43,13 @@
     19. 3D Model 
     20. 3D Pages 
     21. 3D Particle Effect 
-    22. 3D Sphere Rotation 
-    23. Accordion 
+    22. Accordion 
+    23. 3D Sphere Rotation 
     24. Accordion Background Images 
     25. Advanced Content Slider 
-    26. Advanced Slider (Basic) 
-    27. Advanced Slider (Special Effects) 
-    28. Circle Layout 
+    26. Advanced Slider (Special Effects) 
+    27. Circle Layout 
+    28. Advanced Slider (Basic) 
     29. Counter 
     30. Dropdown Menu 
     31. Dropdown Menu 2 (Multi-level drop-down navigation) 
@@ -57,8 +57,8 @@
     33. Flexslider 
     34. Floating Side Element 
     35. Form 
-    36. Form Progress 
-    37. jQuery UI Datepicker 1.11.4 
+    36. jQuery UI Datepicker 1.11.4 
+    37. Form Progress 
     38. Gallery 
     39. Hover Delay Interaction 
     40. Image Shapes 
@@ -72,27 +72,27 @@
     48. Multiple Items Carousel 
     49. Full Page/One Page Transition 
     50. Full Page/One Page Transition 2 
-    51. Parallax 
-    52. Periodical Scroll 
+    51. Periodical Scroll 
+    52. Parallax 
     53. Pricing 
     54. Progress Bar 
     55. Progress Line 
     56. Retina Graphics for Website 
     57. Rotating Elements 
     58. Scroll Reveal 
-    59. Show More Less 
-    60. Smooth Scrolling When Clicking An Anchor Link 
+    59. Smooth Scrolling When Clicking An Anchor Link 
+    60. Show More Less 
     61. Source Code View 
     62. Sticky Elements 
     63. SVG Map (China) 
     64. SVG Map (World) 
-    65. Tabs 
-    66. Team Focus 
-    67. Text effect 
+    65. Text effect 
+    66. Tabs 
+    67. Vertical Menu 
     68. Timeline 
-    69. Vertical Menu 
-    70. Ajax Page Loader (Loading A Page via Ajax Into Div)  
-    71. Ajax Push Content  
+    69. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    70. Ajax Push Content  
+    71. Team Focus 
     72. GSAP Plugins 
     73. Three.js Plugins 
 
@@ -718,7 +718,8 @@ APP = ( function ( APP, $, window, document ) {
 
 			TweenMax.to( window, 0.5, {
 				scrollTo: {
-					y: 0  //y: "max" --> vertical scroll to bottom
+					y        : 0, //y: "max" --> vertical scroll to bottom
+					autoKill : false
 				},
 				ease: Power2.easeOut
 			});	
@@ -4900,14 +4901,6 @@ APP = ( function ( APP, $, window, document ) {
 				if ( $( '#' + rendererCanvasID ).length == 0 ) {
 					$this.prepend( '<div id="'+rendererOuterID+'" class="uix-advanced-slider-sp__canvas-container"><canvas id="'+rendererCanvasID+'"></canvas></div>' );
 					
-					
-					//Fixed image width adaptation problem for Advanced Slider
-					//-------------------------------------
-					setTimeout( function(){
-						$( '#' + rendererCanvasID ).css( 'width', $sliderWrapper.width() + 'px' );
-					}, animDuration );
-				
-					
 				}
 
 				//Basic webGL renderers 
@@ -5176,12 +5169,15 @@ APP = ( function ( APP, $, window, document ) {
 
 					});
 
+					
 					//Initialize the default height of canvas
 					//-------------------------------------	
 					setTimeout( function() {
 						canvasDefaultInit( $first );
 					}, animDuration );
 
+	
+					
 
 				}// end effect
 
@@ -5964,7 +5960,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 				
 			}
-			
+
 
 			// Fires local videos asynchronously with slider switch.
 			//-------------------------------------
@@ -6220,6 +6216,8 @@ APP = ( function ( APP, $, window, document ) {
 			}
 	
 			
+			
+			
 			//Transition Interception
 			//-------------------------------------
 			if ( dataLoop ) {
@@ -6352,8 +6350,23 @@ APP = ( function ( APP, $, window, document ) {
 			
 		}
 		
-	
+			
 
+		
+	
+		/*
+		 * Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
+		 *
+		 * @return {void}                    - The constructor.
+		 */
+        function fixCanvasTagSize() {
+			
+			TweenMax.to( '#' + rendererCanvasID, 1, { 
+				width : $sliderWrapper.width(),
+				height: $sliderWrapper.height()
+			} );
+
+		}
 		
 
 		/*
@@ -6363,6 +6376,8 @@ APP = ( function ( APP, $, window, document ) {
 		 * @return {void}                    - The constructor.
 		 */
         function canvasDefaultInit( slider ) {
+			
+
 			
 			if ( slider.find( 'video' ).length > 0 ) {
 
@@ -6440,7 +6455,8 @@ APP = ( function ( APP, $, window, document ) {
 				
 				elementIndex              = parseFloat( elementIndex );
 				prevElementIndex          = parseFloat( prevElementIndex );
-				
+
+
 				
 				//----------------------------------------------------------------------------------
 				//--------------------------------- Brightness Effect -------------------------------	
@@ -6461,8 +6477,14 @@ APP = ( function ( APP, $, window, document ) {
 						});	
 						
 					} else {
-						//Current item entry action
 						
+						
+						//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
+						fixCanvasTagSize();
+							
+						
+						
+						//Current item entry action
 						TweenMax.to( $myRenderer, animDuration/1000, {
 							alpha : 0,
 							onComplete    : function() {
@@ -6562,7 +6584,7 @@ APP = ( function ( APP, $, window, document ) {
 								alpha : 0
 							});
 						}
-
+						
 						//Avoid repeated initialization
 						slider.addClass( 'js-init-ok' );	
 					}
@@ -6615,11 +6637,12 @@ APP = ( function ( APP, $, window, document ) {
 						}, animDuration*2 );
 						
 						
-
+						//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
+						fixCanvasTagSize();
 						
+					
 						
 						//Current item entry action
-				
 						var baseTimeline = new TimelineMax( { onComplete: function () {
 							displacementSprite.scale.set( 1 );       
 						 },onUpdate: function() {
@@ -6692,8 +6715,13 @@ APP = ( function ( APP, $, window, document ) {
 
 						
 					} else {
-						//Current item entry action
 						
+						//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
+						fixCanvasTagSize();
+								
+						
+						
+						//Current item entry action
 						TweenMax.to( $myRenderer, animDuration/1000, {
 							alpha : 0,
 							onComplete    : function() {
@@ -6820,8 +6848,13 @@ APP = ( function ( APP, $, window, document ) {
 						
 						
 					} else {
-						//Current item entry action
 						
+						
+						//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
+						fixCanvasTagSize();
+								
+						
+						//Current item entry action
 						TweenMax.to( $myRenderer, animDuration/1000, {
 							alpha : 0,
 							onComplete    : function() {
@@ -6988,9 +7021,13 @@ APP = ( function ( APP, $, window, document ) {
 						}, animDuration*2 );
 						
 						
-						
+
+						//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
+						fixCanvasTagSize();
+							
 					
 						
+						//Current item entry action
 						var restoreX,
 							offsetX       = renderer.view.width / 6,
 							parallaxSpeed = 1.2,
@@ -7095,8 +7132,13 @@ APP = ( function ( APP, $, window, document ) {
 						
 	
 					} else {
-						//Current item entry action
 						
+						//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
+						fixCanvasTagSize();
+								
+						
+						
+						//Current item entry action
 						TweenMax.to( $myRenderer, animDuration/1000, {
 							alpha : 0,
 							onComplete    : function() {
@@ -14295,7 +14337,8 @@ APP = ( function ( APP, $, window, document ) {
 			//Scroll Top
 			TweenMax.to( window, 0.5, {
 				scrollTo: {
-					y: 0
+					y        : 0,
+					autoKill : false
 				},
 				ease: Power2.easeOut
 			});	
@@ -16948,7 +16991,8 @@ APP = ( function ( APP, $, window, document ) {
 				if ( $next.length > 0 ) {
 					TweenMax.to( window, animationTime/1000, {
 						scrollTo: {
-							y: $next.offset().top - topSectionSpacing
+							y: $next.offset().top - topSectionSpacing,
+							autoKill : false
 						},
 						ease: Power2.easeOut,
 						onComplete: function() {
@@ -18626,7 +18670,8 @@ APP = ( function ( APP, $, window, document ) {
 			if ( $target.length ) {
 				TweenMax.to( window, 0.5, {
 					scrollTo: {
-						y: $target.offset().top
+						y: $target.offset().top,
+						autoKill : false
 					},
 					ease: Power2.easeOut,
 					onComplete : function() {
@@ -18673,7 +18718,8 @@ APP = ( function ( APP, $, window, document ) {
 
 					TweenMax.to( window, 0.5, {
 						scrollTo: {
-							y: target.offset().top
+							y: target.offset().top,
+							autoKill : false
 						},
 						ease: Power2.easeOut,
 						onComplete : function() {

@@ -54,7 +54,8 @@ APP = ( function ( APP, $, window, document ) {
 			if ( $target.length ) {
 				TweenMax.to( window, 0.5, {
 					scrollTo: {
-						y: $target.offset().top
+						y: $target.offset().top,
+						autoKill : false
 					},
 					ease: Power2.easeOut,
 					onComplete : function() {
@@ -101,7 +102,8 @@ APP = ( function ( APP, $, window, document ) {
 
 					TweenMax.to( window, 0.5, {
 						scrollTo: {
-							y: target.offset().top
+							y: target.offset().top,
+							autoKill : false
 						},
 						ease: Power2.easeOut,
 						onComplete : function() {

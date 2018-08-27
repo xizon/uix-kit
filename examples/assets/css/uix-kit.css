@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  2.1.4
- * ## Last Update         :  August 25, 2018
+ * ## Version             :  2.1.5
+ * ## Last Update         :  August 27, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -8062,122 +8062,6 @@ ol.uix-flexslider__control-paging li a:hover, ol.uix-flexslider__control-paging 
 }
 
 /* ====================================================== 
-   <!-- Form Progress -->     
-/* ====================================================== */
-.uix-form-progress {
-    position: relative;
-    display: block;
-    margin: 3rem 0;
-    width: calc(100% - 60px);
-}
-
-.uix-form-progress .uix-form-progress__line {
-    display: block;
-    position: relative;
-    top: 5px;
-    left: 5px;
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100%;
-    height: 5px;
-    background-color: #ddd;
-}
-
-.uix-form-progress .uix-form-progress__line > span {
-    display: block;
-    width: 0;
-    height: 100%;
-    transition: all 0.5s ease-in-out;
-    background-color: #EC5E79;
-}
-
-.uix-form-progress .uix-form-progress__indicator {
-    position: absolute;
-    top: -2px;
-    left: 0;
-    z-index: 1;
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    background: #fff;
-    border: 3px solid #ddd;
-    border-radius: 50%;
-    transition: all 0.3s ease;
-}
-
-.uix-form-progress .uix-form-progress__indicator > span {
-    font-size: 0.75rem;
-    color: #AEAEAE;
-    display: inline-block;
-    position: absolute;
-    background: #fff;
-    margin-top: -3px;
-    margin-left: 17px;
-    padding: 0 .5rem;
-    min-width: 60px;
-}
-
-.uix-form-progress .uix-form-progress__indicator.active {
-    animation: uix-cssAnim--indicatorOK .5s forwards;
-    border-color: #EC5E79;
-}
-
-.uix-form-progress .uix-form-progress__indicator.current {
-    background: #EC5E79;
-}
-
-/* Form animations */
-.uix-form-progress__target {
-    transition: all 0.3s ease;
-    position: relative;
-    width: 100%;
-    height: 0;
-    transition: .3s;
-    overflow: hidden;
-    opacity: 0;
-}
-
-.uix-form-progress__target.active {
-    opacity: 1;
-}
-
-.uix-form-progress__target.js-uix-show {
-    height: auto;
-}
-
-.uix-form-progress__target .uix-form-progress__target__step {
-    width: 100%;
-    position: absolute;
-    transition: all 0.3s ease;
-}
-
-.uix-form-progress__target .uix-form-progress__target__step:first-child {
-    position: relative;
-}
-
-.uix-form-progress__target .uix-form-progress__target__step.leaving {
-    transform: translateX(-110%);
-}
-
-.uix-form-progress__target .uix-form-progress__target__step.waiting {
-    transform: translateX(110%);
-}
-
-.uix-form-progress__target .uix-form-progress__target__step.coming {
-    transform: translateX(0);
-}
-
-@keyframes uix-cssAnim--indicatorOK {
-    50% {
-        transform: scale(1.5);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
-/* ====================================================== 
     <!-- Form -->                                         
 /* ====================================================== */
 /*
@@ -9643,6 +9527,122 @@ ol.uix-flexslider__control-paging li a:hover, ol.uix-flexslider__control-paging 
 }
 
 /* ====================================================== 
+   <!-- Form Progress -->     
+/* ====================================================== */
+.uix-form-progress {
+    position: relative;
+    display: block;
+    margin: 3rem 0;
+    width: calc(100% - 60px);
+}
+
+.uix-form-progress .uix-form-progress__line {
+    display: block;
+    position: relative;
+    top: 5px;
+    left: 5px;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 5px;
+    background-color: #ddd;
+}
+
+.uix-form-progress .uix-form-progress__line > span {
+    display: block;
+    width: 0;
+    height: 100%;
+    transition: all 0.5s ease-in-out;
+    background-color: #EC5E79;
+}
+
+.uix-form-progress .uix-form-progress__indicator {
+    position: absolute;
+    top: -2px;
+    left: 0;
+    z-index: 1;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border: 3px solid #ddd;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.uix-form-progress .uix-form-progress__indicator > span {
+    font-size: 0.75rem;
+    color: #AEAEAE;
+    display: inline-block;
+    position: absolute;
+    background: #fff;
+    margin-top: -3px;
+    margin-left: 17px;
+    padding: 0 .5rem;
+    min-width: 60px;
+}
+
+.uix-form-progress .uix-form-progress__indicator.active {
+    animation: uix-cssAnim--indicatorOK .5s forwards;
+    border-color: #EC5E79;
+}
+
+.uix-form-progress .uix-form-progress__indicator.current {
+    background: #EC5E79;
+}
+
+/* Form animations */
+.uix-form-progress__target {
+    transition: all 0.3s ease;
+    position: relative;
+    width: 100%;
+    height: 0;
+    transition: .3s;
+    overflow: hidden;
+    opacity: 0;
+}
+
+.uix-form-progress__target.active {
+    opacity: 1;
+}
+
+.uix-form-progress__target.js-uix-show {
+    height: auto;
+}
+
+.uix-form-progress__target .uix-form-progress__target__step {
+    width: 100%;
+    position: absolute;
+    transition: all 0.3s ease;
+}
+
+.uix-form-progress__target .uix-form-progress__target__step:first-child {
+    position: relative;
+}
+
+.uix-form-progress__target .uix-form-progress__target__step.leaving {
+    transform: translateX(-110%);
+}
+
+.uix-form-progress__target .uix-form-progress__target__step.waiting {
+    transform: translateX(110%);
+}
+
+.uix-form-progress__target .uix-form-progress__target__step.coming {
+    transform: translateX(0);
+}
+
+@keyframes uix-cssAnim--indicatorOK {
+    50% {
+        transform: scale(1.5);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* ====================================================== 
         <!-- Gallery --> 
 /* ====================================================== */
 .uix-gallery .uix-gallery__item {
@@ -10075,93 +10075,6 @@ ol.uix-flexslider__control-paging li a:hover, ol.uix-flexslider__control-paging 
   width: auto;
   height: 5px;
   left: 0;
-}
-
-/* ====================================================== 
-    <!-- Brands List --> 
-/* ====================================================== */
-.uix-list-brands {
-  display: block;
-  background: #fff;
-  padding: 1.5rem 0;
-  margin: 3rem 0;
-  overflow: auto;
-  /* CSS background disappears when using float:left */
-  /* Default */
-}
-
-.uix-list-brands::after {
-  content: '';
-  display: block;
-  clear: both;
-}
-
-.uix-list-brands li {
-  text-align: center;
-  display: inline-block;
-  padding: 1rem 0;
-  text-align: center;
-  margin: 0;
-  box-sizing: border-box;
-  float: left;
-  /* When using inline-block elements, there will always be an whitespace issue between those elements (that space is about ~ 4px wide). */
-}
-
-.uix-list-brands li span {
-  font-size: 0.875rem;
-  display: block;
-  padding: 1.5rem;
-}
-
-.uix-list-brands.uix-list-brands--tiny li {
-  width: 16.66666666666667%;
-}
-
-.uix-list-brands.uix-list-brands--tiny li:nth-child(6n+1) {
-  clear: both;
-}
-
-.uix-list-brands.uix-list-brands--small li {
-  width: 20%;
-}
-
-.uix-list-brands.uix-list-brands--small li:nth-child(5n+1) {
-  clear: both;
-}
-
-.uix-list-brands.uix-list-brands--medium li {
-  width: 25%;
-}
-
-.uix-list-brands.uix-list-brands--medium li:nth-child(4n+1) {
-  clear: both;
-}
-
-.uix-list-brands.uix-list-brands--large li {
-  width: 33.33333333333333%;
-}
-
-.uix-list-brands.uix-list-brands--large li:nth-child(3n+1) {
-  clear: both;
-}
-
-@media all and (max-width: 768px) {
-  .uix-list-brands {
-    margin: 1.5rem 0;
-    min-height: inherit;
-  }
-  .uix-list-brands li {
-    width: 50%;
-  }
-  .uix-list-brands li:nth-child(2n+1) {
-    clear: both;
-  }
-  .uix-list-brands.uix-list-brands--tiny li,
-  .uix-list-brands.uix-list-brands--small li,
-  .uix-list-brands.uix-list-brands--medium li,
-  .uix-list-brands.uix-list-brands--large li {
-    width: 50%;
-  }
 }
 
 /* ====================================================== 
@@ -10728,6 +10641,93 @@ a.uix-lightbox__original__close::after {
 
 .uix-lightbox__original__target:target a.uix-lightbox__original__close {
   top: 0px;
+}
+
+/* ====================================================== 
+    <!-- Brands List --> 
+/* ====================================================== */
+.uix-list-brands {
+  display: block;
+  background: #fff;
+  padding: 1.5rem 0;
+  margin: 3rem 0;
+  overflow: auto;
+  /* CSS background disappears when using float:left */
+  /* Default */
+}
+
+.uix-list-brands::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.uix-list-brands li {
+  text-align: center;
+  display: inline-block;
+  padding: 1rem 0;
+  text-align: center;
+  margin: 0;
+  box-sizing: border-box;
+  float: left;
+  /* When using inline-block elements, there will always be an whitespace issue between those elements (that space is about ~ 4px wide). */
+}
+
+.uix-list-brands li span {
+  font-size: 0.875rem;
+  display: block;
+  padding: 1.5rem;
+}
+
+.uix-list-brands.uix-list-brands--tiny li {
+  width: 16.66666666666667%;
+}
+
+.uix-list-brands.uix-list-brands--tiny li:nth-child(6n+1) {
+  clear: both;
+}
+
+.uix-list-brands.uix-list-brands--small li {
+  width: 20%;
+}
+
+.uix-list-brands.uix-list-brands--small li:nth-child(5n+1) {
+  clear: both;
+}
+
+.uix-list-brands.uix-list-brands--medium li {
+  width: 25%;
+}
+
+.uix-list-brands.uix-list-brands--medium li:nth-child(4n+1) {
+  clear: both;
+}
+
+.uix-list-brands.uix-list-brands--large li {
+  width: 33.33333333333333%;
+}
+
+.uix-list-brands.uix-list-brands--large li:nth-child(3n+1) {
+  clear: both;
+}
+
+@media all and (max-width: 768px) {
+  .uix-list-brands {
+    margin: 1.5rem 0;
+    min-height: inherit;
+  }
+  .uix-list-brands li {
+    width: 50%;
+  }
+  .uix-list-brands li:nth-child(2n+1) {
+    clear: both;
+  }
+  .uix-list-brands.uix-list-brands--tiny li,
+  .uix-list-brands.uix-list-brands--small li,
+  .uix-list-brands.uix-list-brands--medium li,
+  .uix-list-brands.uix-list-brands--large li {
+    width: 50%;
+  }
 }
 
 /* ====================================================== 

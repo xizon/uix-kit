@@ -277,14 +277,6 @@ APP = ( function ( APP, $, window, document ) {
 				if ( $( '#' + rendererCanvasID ).length == 0 ) {
 					$this.prepend( '<div id="'+rendererOuterID+'" class="uix-advanced-slider-sp__canvas-container"><canvas id="'+rendererCanvasID+'"></canvas></div>' );
 					
-					
-					//Fixed image width adaptation problem for Advanced Slider
-					//-------------------------------------
-					setTimeout( function(){
-						$( '#' + rendererCanvasID ).css( 'width', $sliderWrapper.width() + 'px' );
-					}, animDuration );
-				
-					
 				}
 
 				//Basic webGL renderers 
@@ -553,12 +545,15 @@ APP = ( function ( APP, $, window, document ) {
 
 					});
 
+					
 					//Initialize the default height of canvas
 					//-------------------------------------	
 					setTimeout( function() {
 						canvasDefaultInit( $first );
 					}, animDuration );
 
+	
+					
 
 				}// end effect
 
@@ -1341,7 +1336,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 				
 			}
-			
+
 
 			// Fires local videos asynchronously with slider switch.
 			//-------------------------------------
@@ -1597,6 +1592,8 @@ APP = ( function ( APP, $, window, document ) {
 			}
 	
 			
+			
+			
 			//Transition Interception
 			//-------------------------------------
 			if ( dataLoop ) {
@@ -1729,8 +1726,23 @@ APP = ( function ( APP, $, window, document ) {
 			
 		}
 		
-	
+			
 
+		
+	
+		/*
+		 * Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
+		 *
+		 * @return {void}                    - The constructor.
+		 */
+        function fixCanvasTagSize() {
+			
+			TweenMax.to( '#' + rendererCanvasID, 1, { 
+				width : $sliderWrapper.width(),
+				height: $sliderWrapper.height()
+			} );
+
+		}
 		
 
 		/*
@@ -1740,6 +1752,8 @@ APP = ( function ( APP, $, window, document ) {
 		 * @return {void}                    - The constructor.
 		 */
         function canvasDefaultInit( slider ) {
+			
+
 			
 			if ( slider.find( 'video' ).length > 0 ) {
 
@@ -1817,7 +1831,8 @@ APP = ( function ( APP, $, window, document ) {
 				
 				elementIndex              = parseFloat( elementIndex );
 				prevElementIndex          = parseFloat( prevElementIndex );
-				
+
+
 				
 				//----------------------------------------------------------------------------------
 				//--------------------------------- Brightness Effect -------------------------------	
@@ -1838,8 +1853,14 @@ APP = ( function ( APP, $, window, document ) {
 						});	
 						
 					} else {
-						//Current item entry action
 						
+						
+						//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
+						fixCanvasTagSize();
+							
+						
+						
+						//Current item entry action
 						TweenMax.to( $myRenderer, animDuration/1000, {
 							alpha : 0,
 							onComplete    : function() {
@@ -1939,7 +1960,7 @@ APP = ( function ( APP, $, window, document ) {
 								alpha : 0
 							});
 						}
-
+						
 						//Avoid repeated initialization
 						slider.addClass( 'js-init-ok' );	
 					}
@@ -1992,11 +2013,12 @@ APP = ( function ( APP, $, window, document ) {
 						}, animDuration*2 );
 						
 						
-
+						//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
+						fixCanvasTagSize();
 						
+					
 						
 						//Current item entry action
-				
 						var baseTimeline = new TimelineMax( { onComplete: function () {
 							displacementSprite.scale.set( 1 );       
 						 },onUpdate: function() {
@@ -2069,8 +2091,13 @@ APP = ( function ( APP, $, window, document ) {
 
 						
 					} else {
-						//Current item entry action
 						
+						//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
+						fixCanvasTagSize();
+								
+						
+						
+						//Current item entry action
 						TweenMax.to( $myRenderer, animDuration/1000, {
 							alpha : 0,
 							onComplete    : function() {
@@ -2197,8 +2224,13 @@ APP = ( function ( APP, $, window, document ) {
 						
 						
 					} else {
-						//Current item entry action
 						
+						
+						//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
+						fixCanvasTagSize();
+								
+						
+						//Current item entry action
 						TweenMax.to( $myRenderer, animDuration/1000, {
 							alpha : 0,
 							onComplete    : function() {
@@ -2365,9 +2397,13 @@ APP = ( function ( APP, $, window, document ) {
 						}, animDuration*2 );
 						
 						
-						
+
+						//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
+						fixCanvasTagSize();
+							
 					
 						
+						//Current item entry action
 						var restoreX,
 							offsetX       = renderer.view.width / 6,
 							parallaxSpeed = 1.2,
@@ -2472,8 +2508,13 @@ APP = ( function ( APP, $, window, document ) {
 						
 	
 					} else {
-						//Current item entry action
 						
+						//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
+						fixCanvasTagSize();
+								
+						
+						
+						//Current item entry action
 						TweenMax.to( $myRenderer, animDuration/1000, {
 							alpha : 0,
 							onComplete    : function() {

@@ -2,7 +2,7 @@
 
 
 [![Travis CI](https://api.travis-ci.org/xizon/uix-kit.svg?branch=master)](https://travis-ci.org/xizon/uix-kit/)
-[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=2.1.4&x2=0)](https://www.npmjs.com/package/uix-kit)
+[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=2.1.5&x2=0)](https://www.npmjs.com/package/uix-kit)
 [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
 
 
