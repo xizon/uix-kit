@@ -1,5 +1,12 @@
 # Changelog
 
+#### = 2.1.6 (August 29, 2018) =
+
+* Fix: Fixed a minor bug in Advanced Slider.
+* Fix: Fixed an issue with video type in Advanced Slider.
+* Tweak: Added a transition time parameter to the Advanced Slider.
+
+
 #### = 2.1.5 (August 27, 2018) =
 
 * Fix: Solved the display problem of Advanced Slider under retina widescreen

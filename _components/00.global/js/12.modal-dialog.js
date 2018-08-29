@@ -8,27 +8,39 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.MODAL_DIALOG               = APP.MODAL_DIALOG || {};
-	APP.MODAL_DIALOG.version       = '0.0.3';
+	APP.MODAL_DIALOG.version       = '0.0.4';
     APP.MODAL_DIALOG.documentReady = function( $ ) {
 
-		function getTransitionDuration( elementOrSelector ){
-			var $el, durString, isMS, numberStr, numberNum;
-			$el = $( elementOrSelector );
-			if( $el.length === 0 ){
-				return false;
-			}
-			$el = $($el[0]); // Force just the first item.  need more?  use .each
+		//Get the -webkit-transition-duration property
+		var getTransitionDuration = function( el, withDelay ) {
 			
-			var dur = $el.css('transition-duration');
-			if( typeof dur === typeof undefined ) { 
-				dur = '0.5s';
+			if ( typeof el === typeof undefined ) {
+				return 0;
 			}
 			
-			durString = dur.toLowerCase();
-			isMS = durString.indexOf( 'ms' ) >= 0;
-			numberNum = durString.replace( 'ms', '' ).replace( 's', '' );
-			return isMS ? numberNum : numberNum * 1000;
-		}
+			var style    = window.getComputedStyle(el),
+				duration = style.webkitTransitionDuration,
+				delay    = style.webkitTransitionDelay; 
+
+			if ( typeof duration != typeof undefined ) {
+				// fix miliseconds vs seconds
+				duration = (duration.indexOf("ms")>-1) ? parseFloat(duration) : parseFloat(duration)*1000;
+				delay = (delay.indexOf("ms")>-1) ? parseFloat(delay) : parseFloat(delay)*1000;
+
+				if ( withDelay ) {
+					 return (duration + delay);
+				} else {
+					return duration;
+				}	
+			} else {
+				return 0;
+			}
+			
+
+		};
+		
+		var modalSpeed = getTransitionDuration( $( '.uix-modal-box:first' )[0] );
+		
 		
 		
 		/*
@@ -103,7 +115,7 @@ APP = ( function ( APP, $, window, document ) {
 						$obj.find( '.uix-modal-box__content > div' ).css( 'overflow-y', 'scroll' );
 					}
 					
-				}, getTransitionDuration( '.uix-modal-box#'+dataID ) );
+				}, modalSpeed );
 				
 			}
 		
@@ -127,7 +139,7 @@ APP = ( function ( APP, $, window, document ) {
 			$.scrollLock( false );
 			setTimeout( function() {
 	
-			}, getTransitionDuration( '.uix-modal-box:first' ) );
+			}, modalSpeed );
 			
 		});
 		

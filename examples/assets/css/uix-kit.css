@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  2.1.5
- * ## Last Update         :  August 27, 2018
+ * ## Version             :  2.1.6
+ * ## Last Update         :  August 30, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -5046,13 +5046,10 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
 }
 
 .uix-advanced-slider-sp .uix-advanced-slider-sp__inner .uix-advanced-slider-sp__item.leave {
-  transition: all 0.6s ease;
   opacity: 0;
 }
 
 .uix-advanced-slider-sp .uix-advanced-slider-sp__inner .uix-advanced-slider-sp__item.active {
-  transition: all 0.6s ease;
-  transition-delay: 0.6s;
   opacity: 1;
 }
 
@@ -5235,6 +5232,8 @@ top: 0;
 z-index: 1;
 width: 100%;
 opacity: 0;
+  /* Javascript will automatically get this value, please do not delete */
+transition: all 0.6s ease;
   /* New XL container for Bootstrap 3.x */
   /* New XXL container for Bootstrap 3.x */;
 }
@@ -5330,7 +5329,6 @@ pointer-events: auto;
 }
 
 .cssanimations .uix-advanced-slider.uix-advanced-slider--eff-scale .uix-advanced-slider__inner .uix-advanced-slider__item.leave {
-    transition: all 0.6s ease;
     opacity: 0;
 }
 
@@ -5343,7 +5341,6 @@ pointer-events: auto;
 }
 
 .cssanimations .uix-advanced-slider.uix-advanced-slider--eff-scale .uix-advanced-slider__inner .uix-advanced-slider__item.active {
-    transition: all 0.6s ease;
     transition-delay: 0.6s;
     opacity: 1;
 }

@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  2.1.5
- * ## Last Update         :  August 27, 2018
+ * ## Version             :  2.1.6
+ * ## Last Update         :  August 30, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -22,12 +22,12 @@
 	---------------------------
 	
 	
-	1. Loader 
-    2. Body And Header 
+	1. Body And Header 
+    2. Loader 
     3. Back to Top 
     4. Get all custom attributes of an element like "data-*" 
-    5. Navigation 
-    6. Videos 
+    5. Videos 
+    6. Navigation 
     7. Common Height 
     8. Mega Menu 
     9. Dropdown Categories 
@@ -43,13 +43,13 @@
     19. 3D Model 
     20. 3D Pages 
     21. 3D Particle Effect 
-    22. Accordion 
-    23. 3D Sphere Rotation 
+    22. 3D Sphere Rotation 
+    23. Accordion 
     24. Accordion Background Images 
     25. Advanced Content Slider 
     26. Advanced Slider (Special Effects) 
-    27. Circle Layout 
-    28. Advanced Slider (Basic) 
+    27. Advanced Slider (Basic) 
+    28. Circle Layout 
     29. Counter 
     30. Dropdown Menu 
     31. Dropdown Menu 2 (Multi-level drop-down navigation) 
@@ -57,8 +57,8 @@
     33. Flexslider 
     34. Floating Side Element 
     35. Form 
-    36. jQuery UI Datepicker 1.11.4 
-    37. Form Progress 
+    36. Form Progress 
+    37. jQuery UI Datepicker 1.11.4 
     38. Gallery 
     39. Hover Delay Interaction 
     40. Image Shapes 
@@ -68,31 +68,31 @@
     44. Bulleted List 
     45. Posts List With Ajax 
     46. Fullwidth List of Split 
-    47. Mousewheel Interaction 
-    48. Multiple Items Carousel 
+    47. Multiple Items Carousel 
+    48. Mousewheel Interaction 
     49. Full Page/One Page Transition 
     50. Full Page/One Page Transition 2 
-    51. Periodical Scroll 
-    52. Parallax 
+    51. Parallax 
+    52. Periodical Scroll 
     53. Pricing 
     54. Progress Bar 
     55. Progress Line 
     56. Retina Graphics for Website 
     57. Rotating Elements 
     58. Scroll Reveal 
-    59. Smooth Scrolling When Clicking An Anchor Link 
-    60. Show More Less 
+    59. Show More Less 
+    60. Smooth Scrolling When Clicking An Anchor Link 
     61. Source Code View 
     62. Sticky Elements 
     63. SVG Map (China) 
     64. SVG Map (World) 
-    65. Text effect 
-    66. Tabs 
-    67. Vertical Menu 
+    65. Tabs 
+    66. Team Focus 
+    67. Text effect 
     68. Timeline 
-    69. Ajax Page Loader (Loading A Page via Ajax Into Div)  
-    70. Ajax Push Content  
-    71. Team Focus 
+    69. Vertical Menu 
+    70. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    71. Ajax Push Content  
     72. GSAP Plugins 
     73. Three.js Plugins 
 
@@ -2101,27 +2101,39 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.MODAL_DIALOG               = APP.MODAL_DIALOG || {};
-	APP.MODAL_DIALOG.version       = '0.0.3';
+	APP.MODAL_DIALOG.version       = '0.0.4';
     APP.MODAL_DIALOG.documentReady = function( $ ) {
 
-		function getTransitionDuration( elementOrSelector ){
-			var $el, durString, isMS, numberStr, numberNum;
-			$el = $( elementOrSelector );
-			if( $el.length === 0 ){
-				return false;
-			}
-			$el = $($el[0]); // Force just the first item.  need more?  use .each
+		//Get the -webkit-transition-duration property
+		var getTransitionDuration = function( el, withDelay ) {
 			
-			var dur = $el.css('transition-duration');
-			if( typeof dur === typeof undefined ) { 
-				dur = '0.5s';
+			if ( typeof el === typeof undefined ) {
+				return 0;
 			}
 			
-			durString = dur.toLowerCase();
-			isMS = durString.indexOf( 'ms' ) >= 0;
-			numberNum = durString.replace( 'ms', '' ).replace( 's', '' );
-			return isMS ? numberNum : numberNum * 1000;
-		}
+			var style    = window.getComputedStyle(el),
+				duration = style.webkitTransitionDuration,
+				delay    = style.webkitTransitionDelay; 
+
+			if ( typeof duration != typeof undefined ) {
+				// fix miliseconds vs seconds
+				duration = (duration.indexOf("ms")>-1) ? parseFloat(duration) : parseFloat(duration)*1000;
+				delay = (delay.indexOf("ms")>-1) ? parseFloat(delay) : parseFloat(delay)*1000;
+
+				if ( withDelay ) {
+					 return (duration + delay);
+				} else {
+					return duration;
+				}	
+			} else {
+				return 0;
+			}
+			
+
+		};
+		
+		var modalSpeed = getTransitionDuration( $( '.uix-modal-box:first' )[0] );
+		
 		
 		
 		/*
@@ -2196,7 +2208,7 @@ APP = ( function ( APP, $, window, document ) {
 						$obj.find( '.uix-modal-box__content > div' ).css( 'overflow-y', 'scroll' );
 					}
 					
-				}, getTransitionDuration( '.uix-modal-box#'+dataID ) );
+				}, modalSpeed );
 				
 			}
 		
@@ -2220,7 +2232,7 @@ APP = ( function ( APP, $, window, document ) {
 			$.scrollLock( false );
 			setTimeout( function() {
 	
-			}, getTransitionDuration( '.uix-modal-box:first' ) );
+			}, modalSpeed );
 			
 		});
 		
@@ -4640,7 +4652,7 @@ APP = ( function ( APP, $, window, document ) {
 		var $window                   = $( window ),
 			windowWidth               = $window.width(),
 			windowHeight              = $window.height(),
-			animDuration              = 600,
+			animSpeed                 = 1000,
 			$sliderWrapper            = $( '.uix-advanced-slider-sp' ),
 			tempID                    = 'video-' + UIX_GUID.newGuid(),
 
@@ -4648,7 +4660,6 @@ APP = ( function ( APP, $, window, document ) {
 			//Autoplay global variables
 			timer                     = null,
 			playTimes,
-			
 			
 			//Basic webGL renderers 
 			rendererOuterID           = 'uix-advanced-slider-sp__canvas-container',
@@ -4705,8 +4716,14 @@ APP = ( function ( APP, $, window, document ) {
 					nativeItemH;
 				
 				
-
-
+				//Get the animation speed
+				//-------------------------------------	
+				if ( typeof $this.data( 'speed' ) != typeof undefined && $this.data( 'speed' ) != false ) {
+					animSpeed = $this.data( 'speed' );
+				}
+				
+		
+			
 				//Display all images
 				//-------------------------------------	
 				if ( !Modernizr.webgl ) {
@@ -4719,9 +4736,21 @@ APP = ( function ( APP, $, window, document ) {
 				//-------------------------------------		
 				$items.addClass( 'next' );
 				
-				setTimeout( function() {
-					$first.addClass( 'active' );
-				}, animDuration );
+				$first.addClass( 'active' );
+				
+				
+				TweenMax.set( $items, {
+					alpha      : 0,
+					onComplete : function() {
+
+						TweenMax.to( $first, animSpeed/1000, {
+							alpha : 1,
+							delay : animSpeed/1000
+						});		
+					}
+					
+				});			
+
 				
 
 				if ( $first.find( 'video' ).length > 0 ) {
@@ -4746,21 +4775,28 @@ APP = ( function ( APP, $, window, document ) {
 
 				} else {
 
-					var imgURL   = $first.find( 'img' ).attr( 'src' ),
-						img      = new Image();
+					var imgURL   = $first.find( 'img' ).attr( 'src' );
 
-					img.onload = function() {
-						$this.css( 'height', $this.width()*(this.height/this.width) + 'px' );		
+					if ( typeof imgURL != typeof undefined ) {
+						
+						var img = new Image();
+						
+						img.onload = function() {
+							$this.css( 'height', $this.width()*(this.height/this.width) + 'px' );		
 
-						nativeItemW = this.width;
-						nativeItemH = this.height;	
+							nativeItemW = this.width;
+							nativeItemH = this.height;	
 
-						//Initialize all the items to the stage
-						addItemsToStage( $this, $sliderWrapper, nativeItemW, nativeItemH );
+							//Initialize all the items to the stage
+							addItemsToStage( $this, $sliderWrapper, nativeItemW, nativeItemH );
 
-					};
+						};
 
-					img.src = imgURL;
+						img.src = imgURL;
+					}
+
+					
+
 
 				}	
 				
@@ -4872,7 +4908,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 			
 			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider-sp__pagination';
-			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
+			if( typeof dataControlsArrows === typeof undefined || dataControlsArrows == false ) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
 			if( typeof dataLoop === typeof undefined ) dataLoop = false;
 			if( typeof dataFilterTexture === typeof undefined || !dataFilterTexture || dataFilterTexture == '' ) dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 			if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
@@ -4951,6 +4987,7 @@ APP = ( function ( APP, $, window, document ) {
 
 							// pause the video
 							var videoSource = texture.baseTexture.source;
+							
 							videoSource.autoplay = false;
 							videoSource.pause();
 							videoSource.currentTime = 0;
@@ -5023,7 +5060,7 @@ APP = ( function ( APP, $, window, document ) {
 					//-------------------------------------	
 					setTimeout( function() {
 						canvasDefaultInit( $first );
-					}, animDuration );
+					}, animSpeed );
 
 
 
@@ -5169,12 +5206,12 @@ APP = ( function ( APP, $, window, document ) {
 
 					});
 
-					
+			
 					//Initialize the default height of canvas
 					//-------------------------------------	
 					setTimeout( function() {
 						canvasDefaultInit( $first );
-					}, animDuration );
+					}, animSpeed );
 
 	
 					
@@ -5321,11 +5358,12 @@ APP = ( function ( APP, $, window, document ) {
 
 					});
 
+				
 					//Initialize the default height of canvas
 					//-------------------------------------	
 					setTimeout( function() {
 						canvasDefaultInit( $first );
-					}, animDuration );
+					}, animSpeed );
 
 
 				}// end effect
@@ -5472,11 +5510,13 @@ APP = ( function ( APP, $, window, document ) {
 
 					});
 
+				
+					
 					//Initialize the default height of canvas
 					//-------------------------------------	
 					setTimeout( function() {
 						canvasDefaultInit( $first );
-					}, animDuration );
+					}, animSpeed );
 
 
 				}// end effect
@@ -5621,11 +5661,13 @@ APP = ( function ( APP, $, window, document ) {
 
 					});
 
+					
+					
 					//Initialize the default height of canvas
 					//-------------------------------------	
 					setTimeout( function() {
 						canvasDefaultInit( $first );
-					}, animDuration );
+					}, animSpeed );
 
 
 				}// end effect
@@ -5946,7 +5988,7 @@ APP = ( function ( APP, $, window, document ) {
 					//-------------------------------------	
 					setTimeout( function() {
 						canvasDefaultInit( $first );
-					}, animDuration );
+					}, animSpeed );
 
 
 				}// end effect
@@ -6295,7 +6337,7 @@ APP = ( function ( APP, $, window, document ) {
 			//-------------------------------------	
 			setTimeout( function() {
 				canvasDefaultInit( $current );
-			}, animDuration );
+			}, animSpeed );
 			
 			
 			//Canvas Interactions
@@ -6404,21 +6446,25 @@ APP = ( function ( APP, $, window, document ) {
 
 			} else {
 
-				var imgURL   = slider.find( 'img' ).attr( 'src' ),
-					img      = new Image();
+				var imgURL   = slider.find( 'img' ).attr( 'src' );
 				
+				if ( typeof imgURL != typeof undefined ) {
+					
+					var img = new Image();
+					
+					img.onload = function() {
 
-				img.onload = function() {
+						if ( Modernizr.webgl ) {
+							renderer.view.style.height = slider.find( 'img' ).height() + 'px';		
+						}
+						//---
+						$sliderWrapper.css( 'height', slider.closest( '.uix-advanced-slider__outline' ).width()*(this.height/this.width) + 'px' );		
 
-					if ( Modernizr.webgl ) {
-					    renderer.view.style.height = slider.find( 'img' ).height() + 'px';		
-					}
-					//---
-					$sliderWrapper.css( 'height', slider.closest( '.uix-advanced-slider__outline' ).width()*(this.height/this.width) + 'px' );		
+					};
 
-				};
+					img.src = imgURL;
+				}
 
-				img.src = imgURL;
 
 			}	
 			
@@ -6446,6 +6492,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 				var $myRenderer           = $( '#' + rendererOuterID ),
 				    $current              = slider.find( '.uix-advanced-slider-sp__item' ).eq( elementIndex ),
+					$first                = slider.find( '.uix-advanced-slider-sp__item' ).eq( 0 ),
 					imgSel                = $current.find( 'img' ),
 				    curImgURL             = imgSel.attr( 'src' ),
 					stageW                = slider.width(),
@@ -6469,12 +6516,20 @@ APP = ( function ( APP, $, window, document ) {
 					if ( goType == 'out' ) {
 						//Current item leaving action
 						
-						TweenMax.to( renderer.stage.children[ elementIndex ], 1, {
+						TweenMax.to( renderer.stage.children[ elementIndex ], animSpeed/1000, {
 							pixi: {
 								brightness: 5
 							},
 							alpha : 1
 						});	
+						
+				
+						TweenMax.to( [$current, $first], animSpeed/1000, {
+							alpha : 0
+						});			
+
+						
+						
 						
 					} else {
 						
@@ -6483,15 +6538,14 @@ APP = ( function ( APP, $, window, document ) {
 						fixCanvasTagSize();
 							
 						
-						
 						//Current item entry action
-						TweenMax.to( $myRenderer, animDuration/1000, {
+						TweenMax.to( $myRenderer, animSpeed/1000, {
 							alpha : 0,
 							onComplete    : function() {
 
 								var curSp = renderer.stage.children[ elementIndex ];
 
-								TweenMax.to( this.target, animDuration/1000, {
+								TweenMax.to( this.target, animSpeed/1000, {
 									alpha : 1
 								});			
 
@@ -6511,7 +6565,7 @@ APP = ( function ( APP, $, window, document ) {
 										// play the video
 										videoSource.currentTime = 0;
 										videoSource.autoplay = false;
-										videoSource.pause();
+										if ( Object.prototype.toString.call( videoSource.pause ) == '[object Function]' ) videoSource.pause();
 										videoSource.muted = true;
 									}		
 
@@ -6526,11 +6580,12 @@ APP = ( function ( APP, $, window, document ) {
 									// play the video
 									videoSource2.currentTime = 0;
 									videoSource2.autoplay = true;
-									videoSource2.play();
+									if ( Object.prototype.toString.call( videoSource2.play ) == '[object Function]' ) videoSource2.play();
 									videoSource2.muted = false;
 								}
 
 
+								
 								//display filters
 								TweenMax.set( curSp, {
 									pixi: {
@@ -6538,11 +6593,18 @@ APP = ( function ( APP, $, window, document ) {
 									},
 									alpha : 1,
 									onComplete    : function() {
-										TweenMax.to( this.target, animDuration/1000, {
+										TweenMax.to( this.target, animSpeed/1000, {
 											pixi: {
 												brightness: 1
 											}
-										});				
+										});	
+
+										TweenMax.to( $current, animSpeed/1000, {
+											alpha : 1
+										});			
+								
+										
+										
 									}
 								});		
 	
@@ -6569,8 +6631,8 @@ APP = ( function ( APP, $, window, document ) {
 				if ( slider.hasClass( 'uix-advanced-slider-sp--eff-liquid' ) ) {
 					
 				
-					var curSp  = container__items.children[ elementIndex ],
-						prevSp = container__items.children[ prevElementIndex ];
+					var curSp    = container__items.children[ elementIndex ],
+						prevSp   = container__items.children[ prevElementIndex ];
 
 						
 					//Display the current item
@@ -6590,14 +6652,16 @@ APP = ( function ( APP, $, window, document ) {
 					}
 
 
-
 					
 					//Display wrapper of canvas (transitions between slides)
 					//-------------------------------------	
 					if ( goType == 'out' ) {
 						//Current item leaving action
 
-						
+						TweenMax.to( [$current, $first], animSpeed/1000, {
+							alpha : 0
+						});			
+	
 					} else {
 						
 						
@@ -6615,7 +6679,7 @@ APP = ( function ( APP, $, window, document ) {
 									// play the video
 									videoSource.currentTime = 0;
 									videoSource.autoplay = false;
-									videoSource.pause();
+									if ( Object.prototype.toString.call( videoSource.pause ) == '[object Function]' ) videoSource.pause();
 									videoSource.muted = true;
 								}	
 	
@@ -6629,12 +6693,12 @@ APP = ( function ( APP, $, window, document ) {
 								// play the video
 								videoSource2.currentTime = 0;
 								videoSource2.autoplay = true;
-								videoSource2.play();
+								if ( Object.prototype.toString.call( videoSource2.play ) == '[object Function]' ) videoSource2.play();
 								videoSource2.muted = false;
 							}	
 
 	
-						}, animDuration*2 );
+						}, animSpeed*2 );
 						
 						
 						//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
@@ -6661,14 +6725,13 @@ APP = ( function ( APP, $, window, document ) {
 						
 
 						baseTimeline
-						.to( displacementFilter.scale, 1, { x: 300, y: 300, ease: Power1.easeOut } )
-						.to( prevSp, 0.5, { alpha: 0, ease: Power2.easeOut }, 0.2 )
-						.to( curSp, 0.5, { alpha: 1, ease: Power2.easeOut }, 0.3)
-						.to( displacementFilter.scale, 1, { x: 0, y: 0, ease: Power2.easeOut }, 0.3 );
+						.to( displacementFilter.scale, animSpeed/1000, { x: 300, y: 300, ease: Power1.easeOut } )
+						.to( prevSp, (animSpeed/2)/1000, { alpha: 0, ease: Power2.easeOut }, (animSpeed/3)/1000 )
+						.to( curSp, (animSpeed/2)/1000, { alpha: 1, ease: Power2.easeOut }, (animSpeed/2)/1000 )
+						.to( displacementFilter.scale, animSpeed/1000, { x: 0, y: 0, ease: Power2.easeOut }, (animSpeed/2)/1000 )
+						.to( $current, animSpeed/1000, { alpha: 1, ease: Power2.easeOut }, 'final' );
 
 						
-
-
 
 						//Add new ripple each time mouse
 						//-------------------------------------
@@ -6712,6 +6775,10 @@ APP = ( function ( APP, $, window, document ) {
 						TweenMax.to( displacementSprite.scale, 1, { 
 							x: 10
 						} );
+						
+						TweenMax.to( [$current, $first], animSpeed/1000, {
+							alpha : 0
+						});	
 
 						
 					} else {
@@ -6720,15 +6787,14 @@ APP = ( function ( APP, $, window, document ) {
 						fixCanvasTagSize();
 								
 						
-						
 						//Current item entry action
-						TweenMax.to( $myRenderer, animDuration/1000, {
+						TweenMax.to( $myRenderer, animSpeed/1000, {
 							alpha : 0,
 							onComplete    : function() {
 
 								var curSp = container__items.children[ elementIndex ];
 
-								TweenMax.to( this.target, animDuration/1000, {
+								TweenMax.to( this.target, animSpeed/1000, {
 									alpha : 1
 								});	
 
@@ -6748,7 +6814,7 @@ APP = ( function ( APP, $, window, document ) {
 										// play the video
 										videoSource.currentTime = 0;
 										videoSource.autoplay = false;
-										videoSource.pause();
+										if ( Object.prototype.toString.call( videoSource.pause ) == '[object Function]' ) videoSource.pause();
 										videoSource.muted = true;
 									}		
 
@@ -6763,7 +6829,7 @@ APP = ( function ( APP, $, window, document ) {
 									// play the video
 									videoSource2.currentTime = 0;
 									videoSource2.autoplay = true;
-									videoSource2.play();
+									if ( Object.prototype.toString.call( videoSource2.play ) == '[object Function]' ) videoSource2.play();
 									videoSource2.muted = false;
 								}
 
@@ -6795,12 +6861,10 @@ APP = ( function ( APP, $, window, document ) {
 
 								//filter
 								baseTimeline
-								  .to( displacementFilter.scale, 1, { y: "+=" + 200 + "", ease: Power3.easeOut } )
-								  .to( curSp, 0.5, { alpha: 1, ease: Power3.easeOut }, 0.4 )     
-								  .to( displacementFilter.scale, 1, { y: 0,  ease: Power3.easeOut }, 1 );      		
-
-								
-								
+								  .to( displacementFilter.scale, animSpeed/1000, { y: "+=" + 200 + "", ease: Power3.easeOut } )
+								  .to( curSp, (animSpeed/2)/1000, { alpha: 1, ease: Power3.easeOut }, (animSpeed/2)/1000 )     
+								  .to( displacementFilter.scale, animSpeed/1000, { y: 0,  ease: Power3.easeOut }, (animSpeed/2)/1000 )
+								  .to( $current, animSpeed/1000, { alpha: 1, ease: Power2.easeOut }, 'final' );
 
 								
 
@@ -6846,6 +6910,10 @@ APP = ( function ( APP, $, window, document ) {
 							y: 10
 						} );
 						
+						TweenMax.to( [$current, $first], animSpeed/1000, {
+							alpha : 0
+						});	
+						
 						
 					} else {
 						
@@ -6855,13 +6923,13 @@ APP = ( function ( APP, $, window, document ) {
 								
 						
 						//Current item entry action
-						TweenMax.to( $myRenderer, animDuration/1000, {
+						TweenMax.to( $myRenderer, animSpeed/1000, {
 							alpha : 0,
 							onComplete    : function() {
 
 								var curSp = container__items.children[ elementIndex ];
 
-								TweenMax.to( this.target, animDuration/1000, {
+								TweenMax.to( this.target, animSpeed/1000, {
 									alpha : 1
 								});	
 
@@ -6881,7 +6949,7 @@ APP = ( function ( APP, $, window, document ) {
 										// play the video
 										videoSource.currentTime = 0;
 										videoSource.autoplay = false;
-										videoSource.pause();
+										if ( Object.prototype.toString.call( videoSource.pause ) == '[object Function]' ) videoSource.pause();
 										videoSource.muted = true;
 									}		
 
@@ -6896,7 +6964,7 @@ APP = ( function ( APP, $, window, document ) {
 									// play the video
 									videoSource2.currentTime = 0;
 									videoSource2.autoplay = true;
-									videoSource2.play();
+									if ( Object.prototype.toString.call( videoSource2.play ) == '[object Function]' ) videoSource2.play();
 									videoSource2.muted = false;
 								}
 
@@ -6922,15 +6990,12 @@ APP = ( function ( APP, $, window, document ) {
 
 								//filter
 								baseTimeline
-								  .to( displacementFilter.scale, 1, { y: "+=" + 50 + "", ease: Power3.easeOut } )
-								  .to( curSp, 0.5, { alpha: 1, ease: Power3.easeOut }, 0.4 )     
-								  .to( displacementFilter.scale, 1, { y: 0,  ease: Power3.easeOut }, 1 );  
+								  .to( displacementFilter.scale, animSpeed/1000, { y: "+=" + 50 + "", ease: Power3.easeOut } )
+								  .to( curSp, (animSpeed/2)/1000, { alpha: 1, ease: Power3.easeOut }, (animSpeed/2)/1000 )     
+								  .to( displacementFilter.scale, animSpeed/1000, { y: 0,  ease: Power3.easeOut }, (animSpeed/2)/1000 )
+								  .to( $current, animSpeed/1000, { alpha: 1, ease: Power2.easeOut }, 'final' );
 
 								
-								
-								
-								
-
 								
 
 							}
@@ -6981,9 +7046,11 @@ APP = ( function ( APP, $, window, document ) {
 					if ( goType == 'out' ) {
 						//Current item leaving action
 
+						TweenMax.to( [$current, $first], animSpeed/1000, {
+							alpha : 0
+						});		
 						
 					} else {
-						
 						
 						//Video sprite initialization
 						setTimeout( function() {
@@ -6999,7 +7066,7 @@ APP = ( function ( APP, $, window, document ) {
 									// play the video
 									videoSource.currentTime = 0;
 									videoSource.autoplay = false;
-									videoSource.pause();
+									if ( Object.prototype.toString.call( videoSource.pause ) == '[object Function]' ) videoSource.pause();
 									videoSource.muted = true;
 								}	
 	
@@ -7013,12 +7080,12 @@ APP = ( function ( APP, $, window, document ) {
 								// play the video
 								videoSource2.currentTime = 0;
 								videoSource2.autoplay = true;
-								videoSource2.play();
+								if ( Object.prototype.toString.call( videoSource2.play ) == '[object Function]' ) videoSource2.play();
 								videoSource2.muted = false;
 							}	
 
 	
-						}, animDuration*2 );
+						}, animSpeed*2 );
 						
 						
 
@@ -7030,7 +7097,7 @@ APP = ( function ( APP, $, window, document ) {
 						//Current item entry action
 						var restoreX,
 							offsetX       = renderer.view.width / 6,
-							parallaxSpeed = 1.2,
+							parallaxSpeed = animSpeed/1000,
 							restoreItems  = function() {
 								//restore other items besides the current item
 								for ( var n = 0; n < spTotal; n++ ) {
@@ -7060,7 +7127,14 @@ APP = ( function ( APP, $, window, document ) {
 								//text effect
 								setTimeout( function() {
 									if ( APP.TEXT_EFFECT ) APP.TEXT_EFFECT.pageLoaded();
+
+									TweenMax.to( $current, parallaxSpeed, {
+										alpha : 1,
+										delay : parallaxSpeed/2
+									});		
+									
 								}, parallaxSpeed*1000 / 2 );
+								
 								
 								
 							};
@@ -7116,6 +7190,8 @@ APP = ( function ( APP, $, window, document ) {
 				//----------------------------------------------------------------------------------
 				if ( slider.hasClass( 'uix-advanced-slider-sp--eff-3d-rotating' ) ) {
 					
+					
+					
 					//Display wrapper of canvas (transitions between slides)
 					//-------------------------------------	
 					
@@ -7124,11 +7200,14 @@ APP = ( function ( APP, $, window, document ) {
 						
 						
 						//rotation transition
-						TweenMax.to( scenesAll[ elementIndex ].children[ 0 ].rotation, animDuration/1000, {
+						TweenMax.to( scenesAll[ elementIndex ].children[ 0 ].rotation, animSpeed/1000, {
 							x: '+=2',
 							y: '+=2'
 						});	
 						
+						TweenMax.to( [$current, $first], animSpeed/1000, {
+							alpha : 0
+						});		
 						
 	
 					} else {
@@ -7137,15 +7216,14 @@ APP = ( function ( APP, $, window, document ) {
 						fixCanvasTagSize();
 								
 						
-						
 						//Current item entry action
-						TweenMax.to( $myRenderer, animDuration/1000, {
+						TweenMax.to( $myRenderer, animSpeed/1000, {
 							alpha : 0,
 							onComplete    : function() {
 
 								var curSp = $myRenderer.find( '.list-item' ).eq( elementIndex );
 
-								TweenMax.to( this.target, animDuration/1000, {
+								TweenMax.to( this.target, animSpeed/1000, {
 									alpha : 1
 								});
 
@@ -7188,10 +7266,15 @@ APP = ( function ( APP, $, window, document ) {
 
 
 								//display filters
-								TweenMax.to( curSp, animDuration/1000, {
+								TweenMax.to( curSp, animSpeed/1000, {
 									alpha: 1,
 									css : {
 										display: 'block'
+									},
+									onComplete : function() {
+										TweenMax.to( $current, animSpeed/1000, {
+											alpha : 1
+										});		
 									}
 								});	
 
@@ -7469,7 +7552,7 @@ APP = ( function ( APP, $, window, document ) {
 		var $window                   = $( window ),
 			windowWidth               = $window.width(),
 			windowHeight              = $window.height(),
-			animDuration              = 600,
+			animDelay                 = 0,
 			$sliderWrapper            = $( '.uix-advanced-slider' ),
 			tempID                    = 'video-' + UIX_GUID.newGuid(),
 			
@@ -7509,15 +7592,44 @@ APP = ( function ( APP, $, window, document ) {
 					nativeItemW,
 					nativeItemH;
 				
-				
+				//Get the -webkit-transition-duration property
+				//-------------------------------------	
+				var getTransitionDuration = function( el, withDelay ) {
 
+					if ( typeof el === typeof undefined ) {
+						return 0;
+					}
+
+					var style    = window.getComputedStyle(el),
+						duration = style.webkitTransitionDuration,
+						delay    = style.webkitTransitionDelay; 
+
+					if ( typeof duration != typeof undefined ) {
+						// fix miliseconds vs seconds
+						duration = (duration.indexOf("ms")>-1) ? parseFloat(duration) : parseFloat(duration)*1000;
+						delay = (delay.indexOf("ms")>-1) ? parseFloat(delay) : parseFloat(delay)*1000;
+
+						if ( withDelay ) {
+							 return (duration + delay);
+						} else {
+							return duration;
+						}	
+					} else {
+						return 0;
+					}
+				};
+
+				animDelay = getTransitionDuration( $first[0] );
+
+
+				
 				//Initialize the first item container
 				//-------------------------------------		
 				$items.addClass( 'next' );
 				
 				setTimeout( function() {
 					$first.addClass( 'active' );
-				}, animDuration );
+				}, animDelay );
 				
 
 				if ( $first.find( 'video' ).length > 0 ) {
@@ -7542,21 +7654,26 @@ APP = ( function ( APP, $, window, document ) {
 
 				} else {
 
-					var imgURL   = $first.find( 'img' ).attr( 'src' ),
-						img      = new Image();
+					var imgURL   = $first.find( 'img' ).attr( 'src' );
+					
+					if ( typeof imgURL != typeof undefined ) {
+						var img = new Image();
 
-					img.onload = function() {
-						$this.css( 'height', $this.width()*(this.height/this.width) + 'px' );		
+						img.onload = function() {
+							$this.css( 'height', $this.width()*(this.height/this.width) + 'px' );		
 
-						nativeItemW = this.width;
-						nativeItemH = this.height;	
+							nativeItemW = this.width;
+							nativeItemH = this.height;	
 
-						//Initialize all the items to the stage
-						addItemsToStage( $this, $sliderWrapper, nativeItemW, nativeItemH );
+							//Initialize all the items to the stage
+							addItemsToStage( $this, $sliderWrapper, nativeItemW, nativeItemH );
 
-					};
+						};
 
-					img.src = imgURL;
+						img.src = imgURL;
+					}
+
+
 
 				}	
 				
@@ -7661,7 +7778,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 			
 			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider__pagination';
-			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-slider__arrows';
+			if( typeof dataControlsArrows === typeof undefined || dataControlsArrows == false ) dataControlsArrows = '.uix-advanced-slider__arrows';
 			if( typeof dataLoop === typeof undefined ) dataLoop = false;
 			if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
 			if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
@@ -8023,17 +8140,22 @@ APP = ( function ( APP, $, window, document ) {
 
 			} else {
 
-				var imgURL   = slider.find( 'img' ).attr( 'src' ),
-					img      = new Image();
+				var imgURL   = slider.find( 'img' ).attr( 'src' );
 				
 
-				img.onload = function() {
+				if ( typeof imgURL != typeof undefined ) {
+					var img = new Image();
 
-					$sliderWrapper.css( 'height', slider.closest( '.uix-advanced-slider__outline' ).width()*(this.height/this.width) + 'px' );		
+					img.onload = function() {
 
-				};
+						$sliderWrapper.css( 'height', slider.closest( '.uix-advanced-slider__outline' ).width()*(this.height/this.width) + 'px' );		
 
-				img.src = imgURL;
+					};
+
+					img.src = imgURL;	
+				}
+			
+
 
 			}	
 			

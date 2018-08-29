@@ -15,7 +15,7 @@ APP = ( function ( APP, $, window, document ) {
 		var $window                   = $( window ),
 			windowWidth               = $window.width(),
 			windowHeight              = $window.height(),
-			animDuration              = 600,
+			animDelay                 = 0,
 			$sliderWrapper            = $( '.uix-advanced-slider' ),
 			tempID                    = 'video-' + UIX_GUID.newGuid(),
 			
@@ -55,15 +55,44 @@ APP = ( function ( APP, $, window, document ) {
 					nativeItemW,
 					nativeItemH;
 				
-				
+				//Get the -webkit-transition-duration property
+				//-------------------------------------	
+				var getTransitionDuration = function( el, withDelay ) {
 
+					if ( typeof el === typeof undefined ) {
+						return 0;
+					}
+
+					var style    = window.getComputedStyle(el),
+						duration = style.webkitTransitionDuration,
+						delay    = style.webkitTransitionDelay; 
+
+					if ( typeof duration != typeof undefined ) {
+						// fix miliseconds vs seconds
+						duration = (duration.indexOf("ms")>-1) ? parseFloat(duration) : parseFloat(duration)*1000;
+						delay = (delay.indexOf("ms")>-1) ? parseFloat(delay) : parseFloat(delay)*1000;
+
+						if ( withDelay ) {
+							 return (duration + delay);
+						} else {
+							return duration;
+						}	
+					} else {
+						return 0;
+					}
+				};
+
+				animDelay = getTransitionDuration( $first[0] );
+
+
+				
 				//Initialize the first item container
 				//-------------------------------------		
 				$items.addClass( 'next' );
 				
 				setTimeout( function() {
 					$first.addClass( 'active' );
-				}, animDuration );
+				}, animDelay );
 				
 
 				if ( $first.find( 'video' ).length > 0 ) {
@@ -88,21 +117,26 @@ APP = ( function ( APP, $, window, document ) {
 
 				} else {
 
-					var imgURL   = $first.find( 'img' ).attr( 'src' ),
-						img      = new Image();
+					var imgURL   = $first.find( 'img' ).attr( 'src' );
+					
+					if ( typeof imgURL != typeof undefined ) {
+						var img = new Image();
 
-					img.onload = function() {
-						$this.css( 'height', $this.width()*(this.height/this.width) + 'px' );		
+						img.onload = function() {
+							$this.css( 'height', $this.width()*(this.height/this.width) + 'px' );		
 
-						nativeItemW = this.width;
-						nativeItemH = this.height;	
+							nativeItemW = this.width;
+							nativeItemH = this.height;	
 
-						//Initialize all the items to the stage
-						addItemsToStage( $this, $sliderWrapper, nativeItemW, nativeItemH );
+							//Initialize all the items to the stage
+							addItemsToStage( $this, $sliderWrapper, nativeItemW, nativeItemH );
 
-					};
+						};
 
-					img.src = imgURL;
+						img.src = imgURL;
+					}
+
+
 
 				}	
 				
@@ -207,7 +241,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 			
 			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider__pagination';
-			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-slider__arrows';
+			if( typeof dataControlsArrows === typeof undefined || dataControlsArrows == false ) dataControlsArrows = '.uix-advanced-slider__arrows';
 			if( typeof dataLoop === typeof undefined ) dataLoop = false;
 			if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
 			if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
@@ -569,17 +603,22 @@ APP = ( function ( APP, $, window, document ) {
 
 			} else {
 
-				var imgURL   = slider.find( 'img' ).attr( 'src' ),
-					img      = new Image();
+				var imgURL   = slider.find( 'img' ).attr( 'src' );
 				
 
-				img.onload = function() {
+				if ( typeof imgURL != typeof undefined ) {
+					var img = new Image();
 
-					$sliderWrapper.css( 'height', slider.closest( '.uix-advanced-slider__outline' ).width()*(this.height/this.width) + 'px' );		
+					img.onload = function() {
 
-				};
+						$sliderWrapper.css( 'height', slider.closest( '.uix-advanced-slider__outline' ).width()*(this.height/this.width) + 'px' );		
 
-				img.src = imgURL;
+					};
+
+					img.src = imgURL;	
+				}
+			
+
 
 			}	
 			

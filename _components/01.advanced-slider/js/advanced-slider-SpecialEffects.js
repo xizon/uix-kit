@@ -16,7 +16,7 @@ APP = ( function ( APP, $, window, document ) {
 		var $window                   = $( window ),
 			windowWidth               = $window.width(),
 			windowHeight              = $window.height(),
-			animDuration              = 600,
+			animSpeed                 = 1000,
 			$sliderWrapper            = $( '.uix-advanced-slider-sp' ),
 			tempID                    = 'video-' + UIX_GUID.newGuid(),
 
@@ -24,7 +24,6 @@ APP = ( function ( APP, $, window, document ) {
 			//Autoplay global variables
 			timer                     = null,
 			playTimes,
-			
 			
 			//Basic webGL renderers 
 			rendererOuterID           = 'uix-advanced-slider-sp__canvas-container',
@@ -81,8 +80,14 @@ APP = ( function ( APP, $, window, document ) {
 					nativeItemH;
 				
 				
-
-
+				//Get the animation speed
+				//-------------------------------------	
+				if ( typeof $this.data( 'speed' ) != typeof undefined && $this.data( 'speed' ) != false ) {
+					animSpeed = $this.data( 'speed' );
+				}
+				
+		
+			
 				//Display all images
 				//-------------------------------------	
 				if ( !Modernizr.webgl ) {
@@ -95,9 +100,21 @@ APP = ( function ( APP, $, window, document ) {
 				//-------------------------------------		
 				$items.addClass( 'next' );
 				
-				setTimeout( function() {
-					$first.addClass( 'active' );
-				}, animDuration );
+				$first.addClass( 'active' );
+				
+				
+				TweenMax.set( $items, {
+					alpha      : 0,
+					onComplete : function() {
+
+						TweenMax.to( $first, animSpeed/1000, {
+							alpha : 1,
+							delay : animSpeed/1000
+						});		
+					}
+					
+				});			
+
 				
 
 				if ( $first.find( 'video' ).length > 0 ) {
@@ -122,21 +139,28 @@ APP = ( function ( APP, $, window, document ) {
 
 				} else {
 
-					var imgURL   = $first.find( 'img' ).attr( 'src' ),
-						img      = new Image();
+					var imgURL   = $first.find( 'img' ).attr( 'src' );
 
-					img.onload = function() {
-						$this.css( 'height', $this.width()*(this.height/this.width) + 'px' );		
+					if ( typeof imgURL != typeof undefined ) {
+						
+						var img = new Image();
+						
+						img.onload = function() {
+							$this.css( 'height', $this.width()*(this.height/this.width) + 'px' );		
 
-						nativeItemW = this.width;
-						nativeItemH = this.height;	
+							nativeItemW = this.width;
+							nativeItemH = this.height;	
 
-						//Initialize all the items to the stage
-						addItemsToStage( $this, $sliderWrapper, nativeItemW, nativeItemH );
+							//Initialize all the items to the stage
+							addItemsToStage( $this, $sliderWrapper, nativeItemW, nativeItemH );
 
-					};
+						};
 
-					img.src = imgURL;
+						img.src = imgURL;
+					}
+
+					
+
 
 				}	
 				
@@ -248,7 +272,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 			
 			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider-sp__pagination';
-			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
+			if( typeof dataControlsArrows === typeof undefined || dataControlsArrows == false ) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
 			if( typeof dataLoop === typeof undefined ) dataLoop = false;
 			if( typeof dataFilterTexture === typeof undefined || !dataFilterTexture || dataFilterTexture == '' ) dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 			if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
@@ -327,6 +351,7 @@ APP = ( function ( APP, $, window, document ) {
 
 							// pause the video
 							var videoSource = texture.baseTexture.source;
+							
 							videoSource.autoplay = false;
 							videoSource.pause();
 							videoSource.currentTime = 0;
@@ -399,7 +424,7 @@ APP = ( function ( APP, $, window, document ) {
 					//-------------------------------------	
 					setTimeout( function() {
 						canvasDefaultInit( $first );
-					}, animDuration );
+					}, animSpeed );
 
 
 
@@ -545,12 +570,12 @@ APP = ( function ( APP, $, window, document ) {
 
 					});
 
-					
+			
 					//Initialize the default height of canvas
 					//-------------------------------------	
 					setTimeout( function() {
 						canvasDefaultInit( $first );
-					}, animDuration );
+					}, animSpeed );
 
 	
 					
@@ -697,11 +722,12 @@ APP = ( function ( APP, $, window, document ) {
 
 					});
 
+				
 					//Initialize the default height of canvas
 					//-------------------------------------	
 					setTimeout( function() {
 						canvasDefaultInit( $first );
-					}, animDuration );
+					}, animSpeed );
 
 
 				}// end effect
@@ -848,11 +874,13 @@ APP = ( function ( APP, $, window, document ) {
 
 					});
 
+				
+					
 					//Initialize the default height of canvas
 					//-------------------------------------	
 					setTimeout( function() {
 						canvasDefaultInit( $first );
-					}, animDuration );
+					}, animSpeed );
 
 
 				}// end effect
@@ -997,11 +1025,13 @@ APP = ( function ( APP, $, window, document ) {
 
 					});
 
+					
+					
 					//Initialize the default height of canvas
 					//-------------------------------------	
 					setTimeout( function() {
 						canvasDefaultInit( $first );
-					}, animDuration );
+					}, animSpeed );
 
 
 				}// end effect
@@ -1322,7 +1352,7 @@ APP = ( function ( APP, $, window, document ) {
 					//-------------------------------------	
 					setTimeout( function() {
 						canvasDefaultInit( $first );
-					}, animDuration );
+					}, animSpeed );
 
 
 				}// end effect
@@ -1671,7 +1701,7 @@ APP = ( function ( APP, $, window, document ) {
 			//-------------------------------------	
 			setTimeout( function() {
 				canvasDefaultInit( $current );
-			}, animDuration );
+			}, animSpeed );
 			
 			
 			//Canvas Interactions
@@ -1780,21 +1810,25 @@ APP = ( function ( APP, $, window, document ) {
 
 			} else {
 
-				var imgURL   = slider.find( 'img' ).attr( 'src' ),
-					img      = new Image();
+				var imgURL   = slider.find( 'img' ).attr( 'src' );
 				
+				if ( typeof imgURL != typeof undefined ) {
+					
+					var img = new Image();
+					
+					img.onload = function() {
 
-				img.onload = function() {
+						if ( Modernizr.webgl ) {
+							renderer.view.style.height = slider.find( 'img' ).height() + 'px';		
+						}
+						//---
+						$sliderWrapper.css( 'height', slider.closest( '.uix-advanced-slider__outline' ).width()*(this.height/this.width) + 'px' );		
 
-					if ( Modernizr.webgl ) {
-					    renderer.view.style.height = slider.find( 'img' ).height() + 'px';		
-					}
-					//---
-					$sliderWrapper.css( 'height', slider.closest( '.uix-advanced-slider__outline' ).width()*(this.height/this.width) + 'px' );		
+					};
 
-				};
+					img.src = imgURL;
+				}
 
-				img.src = imgURL;
 
 			}	
 			
@@ -1822,6 +1856,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 				var $myRenderer           = $( '#' + rendererOuterID ),
 				    $current              = slider.find( '.uix-advanced-slider-sp__item' ).eq( elementIndex ),
+					$first                = slider.find( '.uix-advanced-slider-sp__item' ).eq( 0 ),
 					imgSel                = $current.find( 'img' ),
 				    curImgURL             = imgSel.attr( 'src' ),
 					stageW                = slider.width(),
@@ -1845,12 +1880,20 @@ APP = ( function ( APP, $, window, document ) {
 					if ( goType == 'out' ) {
 						//Current item leaving action
 						
-						TweenMax.to( renderer.stage.children[ elementIndex ], 1, {
+						TweenMax.to( renderer.stage.children[ elementIndex ], animSpeed/1000, {
 							pixi: {
 								brightness: 5
 							},
 							alpha : 1
 						});	
+						
+				
+						TweenMax.to( [$current, $first], animSpeed/1000, {
+							alpha : 0
+						});			
+
+						
+						
 						
 					} else {
 						
@@ -1859,15 +1902,14 @@ APP = ( function ( APP, $, window, document ) {
 						fixCanvasTagSize();
 							
 						
-						
 						//Current item entry action
-						TweenMax.to( $myRenderer, animDuration/1000, {
+						TweenMax.to( $myRenderer, animSpeed/1000, {
 							alpha : 0,
 							onComplete    : function() {
 
 								var curSp = renderer.stage.children[ elementIndex ];
 
-								TweenMax.to( this.target, animDuration/1000, {
+								TweenMax.to( this.target, animSpeed/1000, {
 									alpha : 1
 								});			
 
@@ -1887,7 +1929,7 @@ APP = ( function ( APP, $, window, document ) {
 										// play the video
 										videoSource.currentTime = 0;
 										videoSource.autoplay = false;
-										videoSource.pause();
+										if ( Object.prototype.toString.call( videoSource.pause ) == '[object Function]' ) videoSource.pause();
 										videoSource.muted = true;
 									}		
 
@@ -1902,11 +1944,12 @@ APP = ( function ( APP, $, window, document ) {
 									// play the video
 									videoSource2.currentTime = 0;
 									videoSource2.autoplay = true;
-									videoSource2.play();
+									if ( Object.prototype.toString.call( videoSource2.play ) == '[object Function]' ) videoSource2.play();
 									videoSource2.muted = false;
 								}
 
 
+								
 								//display filters
 								TweenMax.set( curSp, {
 									pixi: {
@@ -1914,11 +1957,18 @@ APP = ( function ( APP, $, window, document ) {
 									},
 									alpha : 1,
 									onComplete    : function() {
-										TweenMax.to( this.target, animDuration/1000, {
+										TweenMax.to( this.target, animSpeed/1000, {
 											pixi: {
 												brightness: 1
 											}
-										});				
+										});	
+
+										TweenMax.to( $current, animSpeed/1000, {
+											alpha : 1
+										});			
+								
+										
+										
 									}
 								});		
 	
@@ -1945,8 +1995,8 @@ APP = ( function ( APP, $, window, document ) {
 				if ( slider.hasClass( 'uix-advanced-slider-sp--eff-liquid' ) ) {
 					
 				
-					var curSp  = container__items.children[ elementIndex ],
-						prevSp = container__items.children[ prevElementIndex ];
+					var curSp    = container__items.children[ elementIndex ],
+						prevSp   = container__items.children[ prevElementIndex ];
 
 						
 					//Display the current item
@@ -1966,14 +2016,16 @@ APP = ( function ( APP, $, window, document ) {
 					}
 
 
-
 					
 					//Display wrapper of canvas (transitions between slides)
 					//-------------------------------------	
 					if ( goType == 'out' ) {
 						//Current item leaving action
 
-						
+						TweenMax.to( [$current, $first], animSpeed/1000, {
+							alpha : 0
+						});			
+	
 					} else {
 						
 						
@@ -1991,7 +2043,7 @@ APP = ( function ( APP, $, window, document ) {
 									// play the video
 									videoSource.currentTime = 0;
 									videoSource.autoplay = false;
-									videoSource.pause();
+									if ( Object.prototype.toString.call( videoSource.pause ) == '[object Function]' ) videoSource.pause();
 									videoSource.muted = true;
 								}	
 	
@@ -2005,12 +2057,12 @@ APP = ( function ( APP, $, window, document ) {
 								// play the video
 								videoSource2.currentTime = 0;
 								videoSource2.autoplay = true;
-								videoSource2.play();
+								if ( Object.prototype.toString.call( videoSource2.play ) == '[object Function]' ) videoSource2.play();
 								videoSource2.muted = false;
 							}	
 
 	
-						}, animDuration*2 );
+						}, animSpeed*2 );
 						
 						
 						//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
@@ -2037,14 +2089,13 @@ APP = ( function ( APP, $, window, document ) {
 						
 
 						baseTimeline
-						.to( displacementFilter.scale, 1, { x: 300, y: 300, ease: Power1.easeOut } )
-						.to( prevSp, 0.5, { alpha: 0, ease: Power2.easeOut }, 0.2 )
-						.to( curSp, 0.5, { alpha: 1, ease: Power2.easeOut }, 0.3)
-						.to( displacementFilter.scale, 1, { x: 0, y: 0, ease: Power2.easeOut }, 0.3 );
+						.to( displacementFilter.scale, animSpeed/1000, { x: 300, y: 300, ease: Power1.easeOut } )
+						.to( prevSp, (animSpeed/2)/1000, { alpha: 0, ease: Power2.easeOut }, (animSpeed/3)/1000 )
+						.to( curSp, (animSpeed/2)/1000, { alpha: 1, ease: Power2.easeOut }, (animSpeed/2)/1000 )
+						.to( displacementFilter.scale, animSpeed/1000, { x: 0, y: 0, ease: Power2.easeOut }, (animSpeed/2)/1000 )
+						.to( $current, animSpeed/1000, { alpha: 1, ease: Power2.easeOut }, 'final' );
 
 						
-
-
 
 						//Add new ripple each time mouse
 						//-------------------------------------
@@ -2088,6 +2139,10 @@ APP = ( function ( APP, $, window, document ) {
 						TweenMax.to( displacementSprite.scale, 1, { 
 							x: 10
 						} );
+						
+						TweenMax.to( [$current, $first], animSpeed/1000, {
+							alpha : 0
+						});	
 
 						
 					} else {
@@ -2096,15 +2151,14 @@ APP = ( function ( APP, $, window, document ) {
 						fixCanvasTagSize();
 								
 						
-						
 						//Current item entry action
-						TweenMax.to( $myRenderer, animDuration/1000, {
+						TweenMax.to( $myRenderer, animSpeed/1000, {
 							alpha : 0,
 							onComplete    : function() {
 
 								var curSp = container__items.children[ elementIndex ];
 
-								TweenMax.to( this.target, animDuration/1000, {
+								TweenMax.to( this.target, animSpeed/1000, {
 									alpha : 1
 								});	
 
@@ -2124,7 +2178,7 @@ APP = ( function ( APP, $, window, document ) {
 										// play the video
 										videoSource.currentTime = 0;
 										videoSource.autoplay = false;
-										videoSource.pause();
+										if ( Object.prototype.toString.call( videoSource.pause ) == '[object Function]' ) videoSource.pause();
 										videoSource.muted = true;
 									}		
 
@@ -2139,7 +2193,7 @@ APP = ( function ( APP, $, window, document ) {
 									// play the video
 									videoSource2.currentTime = 0;
 									videoSource2.autoplay = true;
-									videoSource2.play();
+									if ( Object.prototype.toString.call( videoSource2.play ) == '[object Function]' ) videoSource2.play();
 									videoSource2.muted = false;
 								}
 
@@ -2171,12 +2225,10 @@ APP = ( function ( APP, $, window, document ) {
 
 								//filter
 								baseTimeline
-								  .to( displacementFilter.scale, 1, { y: "+=" + 200 + "", ease: Power3.easeOut } )
-								  .to( curSp, 0.5, { alpha: 1, ease: Power3.easeOut }, 0.4 )     
-								  .to( displacementFilter.scale, 1, { y: 0,  ease: Power3.easeOut }, 1 );      		
-
-								
-								
+								  .to( displacementFilter.scale, animSpeed/1000, { y: "+=" + 200 + "", ease: Power3.easeOut } )
+								  .to( curSp, (animSpeed/2)/1000, { alpha: 1, ease: Power3.easeOut }, (animSpeed/2)/1000 )     
+								  .to( displacementFilter.scale, animSpeed/1000, { y: 0,  ease: Power3.easeOut }, (animSpeed/2)/1000 )
+								  .to( $current, animSpeed/1000, { alpha: 1, ease: Power2.easeOut }, 'final' );
 
 								
 
@@ -2222,6 +2274,10 @@ APP = ( function ( APP, $, window, document ) {
 							y: 10
 						} );
 						
+						TweenMax.to( [$current, $first], animSpeed/1000, {
+							alpha : 0
+						});	
+						
 						
 					} else {
 						
@@ -2231,13 +2287,13 @@ APP = ( function ( APP, $, window, document ) {
 								
 						
 						//Current item entry action
-						TweenMax.to( $myRenderer, animDuration/1000, {
+						TweenMax.to( $myRenderer, animSpeed/1000, {
 							alpha : 0,
 							onComplete    : function() {
 
 								var curSp = container__items.children[ elementIndex ];
 
-								TweenMax.to( this.target, animDuration/1000, {
+								TweenMax.to( this.target, animSpeed/1000, {
 									alpha : 1
 								});	
 
@@ -2257,7 +2313,7 @@ APP = ( function ( APP, $, window, document ) {
 										// play the video
 										videoSource.currentTime = 0;
 										videoSource.autoplay = false;
-										videoSource.pause();
+										if ( Object.prototype.toString.call( videoSource.pause ) == '[object Function]' ) videoSource.pause();
 										videoSource.muted = true;
 									}		
 
@@ -2272,7 +2328,7 @@ APP = ( function ( APP, $, window, document ) {
 									// play the video
 									videoSource2.currentTime = 0;
 									videoSource2.autoplay = true;
-									videoSource2.play();
+									if ( Object.prototype.toString.call( videoSource2.play ) == '[object Function]' ) videoSource2.play();
 									videoSource2.muted = false;
 								}
 
@@ -2298,15 +2354,12 @@ APP = ( function ( APP, $, window, document ) {
 
 								//filter
 								baseTimeline
-								  .to( displacementFilter.scale, 1, { y: "+=" + 50 + "", ease: Power3.easeOut } )
-								  .to( curSp, 0.5, { alpha: 1, ease: Power3.easeOut }, 0.4 )     
-								  .to( displacementFilter.scale, 1, { y: 0,  ease: Power3.easeOut }, 1 );  
+								  .to( displacementFilter.scale, animSpeed/1000, { y: "+=" + 50 + "", ease: Power3.easeOut } )
+								  .to( curSp, (animSpeed/2)/1000, { alpha: 1, ease: Power3.easeOut }, (animSpeed/2)/1000 )     
+								  .to( displacementFilter.scale, animSpeed/1000, { y: 0,  ease: Power3.easeOut }, (animSpeed/2)/1000 )
+								  .to( $current, animSpeed/1000, { alpha: 1, ease: Power2.easeOut }, 'final' );
 
 								
-								
-								
-								
-
 								
 
 							}
@@ -2357,9 +2410,11 @@ APP = ( function ( APP, $, window, document ) {
 					if ( goType == 'out' ) {
 						//Current item leaving action
 
+						TweenMax.to( [$current, $first], animSpeed/1000, {
+							alpha : 0
+						});		
 						
 					} else {
-						
 						
 						//Video sprite initialization
 						setTimeout( function() {
@@ -2375,7 +2430,7 @@ APP = ( function ( APP, $, window, document ) {
 									// play the video
 									videoSource.currentTime = 0;
 									videoSource.autoplay = false;
-									videoSource.pause();
+									if ( Object.prototype.toString.call( videoSource.pause ) == '[object Function]' ) videoSource.pause();
 									videoSource.muted = true;
 								}	
 	
@@ -2389,12 +2444,12 @@ APP = ( function ( APP, $, window, document ) {
 								// play the video
 								videoSource2.currentTime = 0;
 								videoSource2.autoplay = true;
-								videoSource2.play();
+								if ( Object.prototype.toString.call( videoSource2.play ) == '[object Function]' ) videoSource2.play();
 								videoSource2.muted = false;
 							}	
 
 	
-						}, animDuration*2 );
+						}, animSpeed*2 );
 						
 						
 
@@ -2406,7 +2461,7 @@ APP = ( function ( APP, $, window, document ) {
 						//Current item entry action
 						var restoreX,
 							offsetX       = renderer.view.width / 6,
-							parallaxSpeed = 1.2,
+							parallaxSpeed = animSpeed/1000,
 							restoreItems  = function() {
 								//restore other items besides the current item
 								for ( var n = 0; n < spTotal; n++ ) {
@@ -2436,7 +2491,14 @@ APP = ( function ( APP, $, window, document ) {
 								//text effect
 								setTimeout( function() {
 									if ( APP.TEXT_EFFECT ) APP.TEXT_EFFECT.pageLoaded();
+
+									TweenMax.to( $current, parallaxSpeed, {
+										alpha : 1,
+										delay : parallaxSpeed/2
+									});		
+									
 								}, parallaxSpeed*1000 / 2 );
+								
 								
 								
 							};
@@ -2492,6 +2554,8 @@ APP = ( function ( APP, $, window, document ) {
 				//----------------------------------------------------------------------------------
 				if ( slider.hasClass( 'uix-advanced-slider-sp--eff-3d-rotating' ) ) {
 					
+					
+					
 					//Display wrapper of canvas (transitions between slides)
 					//-------------------------------------	
 					
@@ -2500,11 +2564,14 @@ APP = ( function ( APP, $, window, document ) {
 						
 						
 						//rotation transition
-						TweenMax.to( scenesAll[ elementIndex ].children[ 0 ].rotation, animDuration/1000, {
+						TweenMax.to( scenesAll[ elementIndex ].children[ 0 ].rotation, animSpeed/1000, {
 							x: '+=2',
 							y: '+=2'
 						});	
 						
+						TweenMax.to( [$current, $first], animSpeed/1000, {
+							alpha : 0
+						});		
 						
 	
 					} else {
@@ -2513,15 +2580,14 @@ APP = ( function ( APP, $, window, document ) {
 						fixCanvasTagSize();
 								
 						
-						
 						//Current item entry action
-						TweenMax.to( $myRenderer, animDuration/1000, {
+						TweenMax.to( $myRenderer, animSpeed/1000, {
 							alpha : 0,
 							onComplete    : function() {
 
 								var curSp = $myRenderer.find( '.list-item' ).eq( elementIndex );
 
-								TweenMax.to( this.target, animDuration/1000, {
+								TweenMax.to( this.target, animSpeed/1000, {
 									alpha : 1
 								});
 
@@ -2564,10 +2630,15 @@ APP = ( function ( APP, $, window, document ) {
 
 
 								//display filters
-								TweenMax.to( curSp, animDuration/1000, {
+								TweenMax.to( curSp, animSpeed/1000, {
 									alpha: 1,
 									css : {
 										display: 'block'
+									},
+									onComplete : function() {
+										TweenMax.to( $current, animSpeed/1000, {
+											alpha : 1
+										});		
 									}
 								});	
 
