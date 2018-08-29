@@ -1767,7 +1767,7 @@ APP = ( function ( APP, $, window, document ) {
 		 */
         function fixCanvasTagSize() {
 			
-			TweenMax.to( '#' + rendererCanvasID, 1, { 
+			TweenMax.to( '#' + rendererCanvasID, animSpeed/1000, { 
 				width : $sliderWrapper.width(),
 				height: $sliderWrapper.height()
 			} );
@@ -1856,7 +1856,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 				var $myRenderer           = $( '#' + rendererOuterID ),
 				    $current              = slider.find( '.uix-advanced-slider-sp__item' ).eq( elementIndex ),
-					$first                = slider.find( '.uix-advanced-slider-sp__item' ).eq( 0 ),
+					$allItems             = slider.find( '.uix-advanced-slider-sp__item' ),
 					imgSel                = $current.find( 'img' ),
 				    curImgURL             = imgSel.attr( 'src' ),
 					stageW                = slider.width(),
@@ -1875,6 +1875,13 @@ APP = ( function ( APP, $, window, document ) {
 				if ( slider.hasClass( 'uix-advanced-slider-sp--eff-brightness' ) ) {
 				
 			
+					//Hide description container of item
+					//-------------------------------------
+					TweenMax.to( $allItems, animSpeed/1000, {
+						alpha : 0
+					});			
+
+					
 					//Display wrapper of canvas (transitions between slides)
 					//-------------------------------------	
 					if ( goType == 'out' ) {
@@ -1888,12 +1895,6 @@ APP = ( function ( APP, $, window, document ) {
 						});	
 						
 				
-						TweenMax.to( [$current, $first], animSpeed/1000, {
-							alpha : 0
-						});			
-
-						
-						
 						
 					} else {
 						
@@ -1995,6 +1996,14 @@ APP = ( function ( APP, $, window, document ) {
 				if ( slider.hasClass( 'uix-advanced-slider-sp--eff-liquid' ) ) {
 					
 				
+			
+					//Hide description container of item
+					//-------------------------------------
+					TweenMax.to( $allItems, animSpeed/1000, {
+						alpha : 0
+					});			
+
+					
 					var curSp    = container__items.children[ elementIndex ],
 						prevSp   = container__items.children[ prevElementIndex ];
 
@@ -2021,10 +2030,7 @@ APP = ( function ( APP, $, window, document ) {
 					//-------------------------------------	
 					if ( goType == 'out' ) {
 						//Current item leaving action
-
-						TweenMax.to( [$current, $first], animSpeed/1000, {
-							alpha : 0
-						});			
+	
 	
 					} else {
 						
@@ -2130,6 +2136,14 @@ APP = ( function ( APP, $, window, document ) {
 				if ( slider.hasClass( 'uix-advanced-slider-sp--eff-liquid2' ) ) {
 					
 				
+			
+					//Hide description container of item
+					//-------------------------------------
+					TweenMax.to( $allItems, animSpeed/1000, {
+						alpha : 0
+					});			
+
+					
 					
 					//Display wrapper of canvas (transitions between slides)
 					//-------------------------------------	
@@ -2139,11 +2153,7 @@ APP = ( function ( APP, $, window, document ) {
 						TweenMax.to( displacementSprite.scale, 1, { 
 							x: 10
 						} );
-						
-						TweenMax.to( [$current, $first], animSpeed/1000, {
-							alpha : 0
-						});	
-
+			
 						
 					} else {
 						
@@ -2262,6 +2272,14 @@ APP = ( function ( APP, $, window, document ) {
 				if ( slider.hasClass( 'uix-advanced-slider-sp--eff-liquid3' ) ) {
 					
 				
+			
+					//Hide description container of item
+					//-------------------------------------
+					TweenMax.to( $allItems, animSpeed/1000, {
+						alpha : 0
+					});			
+
+					
 					
 					//Display wrapper of canvas (transitions between slides)
 					//-------------------------------------	
@@ -2273,10 +2291,6 @@ APP = ( function ( APP, $, window, document ) {
 							x: 23,
 							y: 10
 						} );
-						
-						TweenMax.to( [$current, $first], animSpeed/1000, {
-							alpha : 0
-						});	
 						
 						
 					} else {
@@ -2381,6 +2395,15 @@ APP = ( function ( APP, $, window, document ) {
 				//----------------------------------------------------------------------------------
 				if ( slider.hasClass( 'uix-advanced-slider-sp--eff-parallax' ) ) {
 					
+					
+			
+					//Hide description container of item
+					//-------------------------------------
+					TweenMax.to( $allItems, animSpeed/1000, {
+						alpha : 0
+					});			
+
+					
 				
 					var curSpParallax  = container__items.children[ elementIndex ],
 						prevSpParallax = container__items.children[ prevElementIndex ];
@@ -2410,10 +2433,6 @@ APP = ( function ( APP, $, window, document ) {
 					if ( goType == 'out' ) {
 						//Current item leaving action
 
-						TweenMax.to( [$current, $first], animSpeed/1000, {
-							alpha : 0
-						});		
-						
 					} else {
 						
 						//Video sprite initialization
@@ -2555,6 +2574,13 @@ APP = ( function ( APP, $, window, document ) {
 				if ( slider.hasClass( 'uix-advanced-slider-sp--eff-3d-rotating' ) ) {
 					
 					
+			
+					//Hide description container of item
+					//-------------------------------------
+					TweenMax.to( $allItems, animSpeed/1000, {
+						alpha : 0
+					});			
+
 					
 					//Display wrapper of canvas (transitions between slides)
 					//-------------------------------------	
@@ -2569,9 +2595,6 @@ APP = ( function ( APP, $, window, document ) {
 							y: '+=2'
 						});	
 						
-						TweenMax.to( [$current, $first], animSpeed/1000, {
-							alpha : 0
-						});		
 						
 	
 					} else {

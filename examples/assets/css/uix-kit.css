@@ -96,8 +96,8 @@
     31. Advanced Content Slider 
     32. Advanced Slider (Special Effects) 
     33. Advanced Slider (Basic) 
-    34. Badges 
-    35. Blended Grid Layout 
+    34. Blended Grid Layout 
+    35. Badges 
     36. Breadcrumbs 
     37. Button 
     38. Cards 
@@ -116,8 +116,8 @@
     51. Form 
     52. Form Progress 
     53. Gallery 
-    54. Heading 
-    55. Image Animation 
+    54. Image Animation 
+    55. Heading 
     56. Image Shapes 
     57. Custom Core Scripts & Stylesheets 
     58. Lava-Lamp Style Menu 
@@ -147,18 +147,6 @@
     82. Striking 
     83. SVG Map 
     84. Tabs 
-    85. Team Focus 
-    86. Team Fullwidth (Style using the Side by Side List With Photo module) 
-    87. Team Gird 
-    88. Testimonials Carousel 
-    89. Text effect 
-    90. Timeline 
-    91. ToolTip 
-    92. Vertical Menu 
-    93. Vertical Separator 
-    94. Wave Background 
-    95. WordPress Core ( Do not use prefix "uix-" ) 
-    96. Ajax Page Loader (Loading A Page via Ajax Into Div)  
 
 
 
@@ -16031,6 +16019,43 @@ a img.aligncenter {
   bottom: 2px;
   right: 180px;
   animation: uix-cssAnim--loaderSlide 2s linear infinite;
+}
+
+@keyframes uix-cssAnim--loaderSlide {
+  0% {
+    right: 180px;
+    left: 2px;
+  }
+  5% {
+    left: 2px;
+  }
+  50% {
+    right: 2px;
+    left: 180px;
+  }
+  55% {
+    right: 2px;
+  }
+  100% {
+    right: 180px;
+    left: 2px;
+  }
+}
+
+    left: 180px;
+  }
+  55% {
+    right: 2px;
+  }
+  100% {
+    right: 180px;
+    left: 2px;
+  }
+}
+  left: 2px;
+  }
+}
+ uix-cssAnim--loaderSlide 2s linear infinite;
 }
 
 @keyframes uix-cssAnim--loaderSlide {
