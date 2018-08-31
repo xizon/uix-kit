@@ -45,26 +45,16 @@ APP = ( function ( APP, $, window, document ) {
 		function parallaxInit( w, h ) {
 			
 			/* Pure parallax scrolling effect without other embedded HTML elements */
-			$( '.uix-parallax--pure-bg' ).each( function() {
+			$( '.uix-parallax--el' ).each( function() {
 				var $this       = $( this ),
-					dataImg     = $this.data( 'parallax-bg' ),
 					dataSpeed   = $this.data( 'parallax' );
 				
 				if( typeof dataSpeed === typeof undefined ) {
 					dataSpeed = 0;
 				}
 				
-				if( typeof dataImg != typeof undefined && dataImg != '' ) {
-					$this.css( 'background-image', 'url('+dataImg+')' );
-				}
 				
-				$window.on( 'scroll touchmove', function() {
-					var scrolled = $window.scrollTop();
-					$this.css( {
-							'margin-top': Math.round( scrolled * dataSpeed ) + 'px',
-							'transition': 'none'
-						} );
-				});	
+				$this.uixParallax( { 'speed': dataSpeed, 'bg': false } );	
 				
 		
 			});
@@ -79,11 +69,9 @@ APP = ( function ( APP, $, window, document ) {
 					dataSpeed        = $this.data( 'speed' ),
 					dataOverlay      = $this.data( 'overlay-bg' ),
 					dataFullyVisible = $this.data( 'fully-visible' ),
-					dataElSpeed      = $this.find( '.uix-parallax__el' ).data( 'el-speed' ),	
 					curImgH          = null,
 					curImgW          = null,
-					curSize          = 'cover',
-				    curAtt           = 'fixed';
+					curSize          = 'cover';
 				
 				
 				if( 
@@ -99,9 +87,6 @@ APP = ( function ( APP, $, window, document ) {
 					dataSpeed = 0;
 				}	
 				
-				if( typeof dataElSpeed === typeof undefined ) {
-					dataElSpeed = 0;
-				}	
 				
 				if( typeof dataFullyVisible === typeof undefined ) {
 					dataFullyVisible = false;
@@ -151,9 +136,6 @@ APP = ( function ( APP, $, window, document ) {
 
 					}
 
-					//Use parallax to background
-					$this.bgParallax( "50%", dataSpeed );
-
 
 					//Resize the background image to cover the entire container and
 					//Resize the background image to make sure the image is fully visible
@@ -162,9 +144,6 @@ APP = ( function ( APP, $, window, document ) {
 					} else {
 						curSize = 'cover';
 					}
-
-					curAtt = 'fixed';
-
 
 					
 					//Determine image height and parallax container height
@@ -196,13 +175,13 @@ APP = ( function ( APP, $, window, document ) {
 							// supported
 
 							$this.css( {
-								'background' : 'linear-gradient('+dataOverlay+', '+dataOverlay+'), url(' + dataImg + ') 50% 0/'+curSize+' no-repeat ' + curAtt
+								'background' : 'linear-gradient('+dataOverlay+', '+dataOverlay+'), url(' + dataImg + ') 50% 0/'+curSize+' no-repeat fixed'
 							} );
 						} else {
 							// not-supported
 
 							$this.css( {
-								'background' : 'url(' + dataImg + ') 50% 0/'+curSize+' no-repeat ' + curAtt
+								'background' : 'url(' + dataImg + ') 50% 0/'+curSize+' no-repeat fixed'
 							} );
 						}
 
@@ -220,18 +199,10 @@ APP = ( function ( APP, $, window, document ) {
 					}
 
 
+					//Use parallax to background
+					$this.uixParallax( { 'speed': dataSpeed, 'bg': { enable: true, xPos: '50%' } } );
 
-					//Embedded parent disparity elements
-					if ( $this.find( '.uix-parallax__el' ).length > 0 ) {
-						$window.on( 'scroll touchmove', function() {
-							var scrolled = $window.scrollTop();
-							$this.find( '.uix-parallax__el' ).css( {
-								'transform' : 'translateY('+Math.round( ( $this.offset().top - scrolled ) * dataElSpeed )+'px)',
-								'transition': 'none'
-							} );
-						});			
-					}
-	
+
 					
 					
 				};

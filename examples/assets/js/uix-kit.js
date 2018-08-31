@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  2.1.6
- * ## Last Update         :  August 30, 2018
+ * ## Version             :  2.1.7
+ * ## Last Update         :  August 31, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -32,10 +32,10 @@
     8. Mega Menu 
     9. Dropdown Categories 
     10. Pagination 
-    11. Specify a background image 
-    12. Modal Dialog 
-    13. Mobile Menu 
-    14. Responsive Table 
+    11. Responsive Table 
+    12. Specify a background image 
+    13. Modal Dialog 
+    14. Mobile Menu 
     15. 3D Background 
     16. 3D Background 2 
     17. 3D Background 2 
@@ -47,8 +47,8 @@
     23. Accordion 
     24. Accordion Background Images 
     25. Advanced Content Slider 
-    26. Advanced Slider (Basic) 
-    27. Advanced Slider (Special Effects) 
+    26. Advanced Slider (Special Effects) 
+    27. Advanced Slider (Basic) 
     28. Circle Layout 
     29. Counter 
     30. Dropdown Menu 
@@ -522,6 +522,95 @@ var UIX_GUID = UIX_GUID || (function() {
 	}() );
 
 } ) ( jQuery );
+
+
+
+/* 
+ *************************************
+ * Parallax Effect
+ *
+ * @return {void}                        - The constructor.
+ *************************************
+ */
+
+( function ( $ ) {
+    $.fn.uixParallax = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+			speed    : 0.25,
+			bg       : { enable: true, xPos: '50%' }
+        }, options );
+ 
+        this.each( function() {
+			
+			var bgEff      = settings.bg,
+				$this      = $( this ),
+				bgXpos     = '50%',
+				speed      = -parseFloat( settings.speed );
+			
+			
+			
+			if ( bgEff ) {
+				bgEff      = settings.bg.enable;
+				bgXpos     = settings.bg.xPos;
+			}
+			
+	
+			//Prohibit transition delay
+			$this.css( {
+				'transition': 'none'
+			} );
+
+		    $( window ).on( 'scroll touchmove', function( e ){
+				scrollUpdate();
+			});
+			
+			
+			//Initialize the position of the background
+			if ( bgEff ) {
+				//background parallax
+				TweenMax.set( $this, {
+					backgroundPosition: bgXpos + ' ' + (-$this.offset().top*speed) + 'px'
+				});
+			} else {
+				//element parallax
+				TweenMax.set( $this, {
+					y: 0
+				});	
+			}
+			
+			
+			function scrollUpdate() {
+				var scrolled = $( window ).scrollTop(),
+					st       = $this.offset().top - scrolled;
+				
+
+				
+				if ( bgEff ) {
+					//background parallax
+					TweenMax.set( $this, {
+						backgroundPosition: bgXpos + ' ' + ( 0 - ( st * speed ) ) + 'px'
+					});
+				} else {
+					//element parallax
+					TweenMax.set( $this, {
+						y: ( 0 - ( scrolled * speed ) )
+					});
+					
+					
+				}
+				
+			}
+
+			
+			
+		});
+ 
+    };
+ 
+}( jQuery ));
+
 
 
 /* 
@@ -1838,6 +1927,46 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
+/* 
+ *************************************
+ * <!-- Responsive Table -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.TABLE               = APP.TABLE || {};
+	APP.TABLE.version       = '0.0.1';
+    APP.TABLE.documentReady = function( $ ) {
+
+		var $resTable = $('table.uix-table.is-responsive, .uix-table.is-responsive table'),
+			$thead    = $resTable.find( 'thead' ),
+			$tbody    = $resTable.find( 'tbody' );
+
+        $thead.find( 'th' ).each(function() {
+            var data = $(this).text();
+            if ( !$( this ).attr( 'data-table' ) ) {
+                $( this ).attr( 'data-table', data );
+            }
+        });
+
+        $tbody.find( 'td' ).each(function() {
+            var index = $(this).index();
+            var data = $thead.find( 'th:eq(' + index + ')' ).attr( 'data-table' );
+            $( this ).attr( 'data-table', data );
+        });
+		
+		
+    };
+
+    APP.components.documentReady.push( APP.TABLE.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
 
 /* 
  *************************************
@@ -1914,6 +2043,13 @@ APP = ( function ( APP, $, window, document ) {
 					if( typeof dataRepeat === typeof undefined ) dataRepeat = 'no-repeat';
 
 
+					//Using parallax
+					if ( dataParallax && typeof dataParallax != typeof undefined && dataParallax != 0 ) {
+						dataPos = dataPos.replace( 'top', '50%' );
+					}
+
+					
+					
 					if ( typeof dataImg != typeof undefined && dataImg != '' ) {
 
 						if ( config.fill ) {
@@ -1943,7 +2079,7 @@ APP = ( function ( APP, $, window, document ) {
 						//Using parallax
 						if ( dataParallax && typeof dataParallax != typeof undefined && dataParallax != 0 ) {
 
-							$this.bgParallax( "50%", dataParallax );	
+							$this.uixParallax( { 'speed': dataParallax, 'bg': { enable: true, xPos: '50%' } } );
 						}
 
 
@@ -1970,125 +2106,6 @@ APP = ( function ( APP, $, window, document ) {
 
 }( APP, jQuery, window, document ) );
 
-
-
-
-
-
-/*
-Plugin: jQuery Parallax
-Version 1.1.3
-Author: Ian Lunn
-Twitter: @IanLunn
-Author URL: http://www.ianlunn.co.uk/
-Plugin URL: http://www.ianlunn.co.uk/plugins/jquery-parallax/
-
-Dual licensed under the MIT and GPL licenses:
-http://www.opensource.org/licenses/mit-license.php
-http://www.gnu.org/licenses/gpl.html
-
- *
- *
- *
- *
- *
- * ============================================================
- * ============================================================
- * Warning: This is a modified version of extension.
- * Last revision that was still released under the MIT license. 
- *
- * Last revision author   : UIUX Lab (https://uiux.cc)
- * Last revision date     : August 21, 2018
- * 
- * Version added:
- *
- *    - Tweak: Enhance performance with TweenMax.
- *
- *
-
-*/
-
-(function( $ ){
-	var $window = $(window);
-	var windowHeight = $window.height();
-
-	$window.resize(function () {
-		windowHeight = $window.height();
-	});
-
-	$.fn.bgParallax = function(xpos, speedFactor, outerHeight) {
-		var $this = $(this);
-		var getHeight;
-		var firstTop;
-		var paddingTop = 0;
-
-		var isFirefox = (/Firefox/i.test(navigator.userAgent));
-		var isIe = (/MSIE/i.test(navigator.userAgent)) || (/Trident.*rv\:11\./i.test(navigator.userAgent));
-
-		//get the starting position of each element to have parallax applied to it		
-		$this.each( function(){
-		    firstTop = $this.offset().top;
-		});
-
-		if (outerHeight) {
-			getHeight = function(jqo) {
-				return jqo.outerHeight(true);
-			};
-		} else {
-			getHeight = function(jqo) {
-				return jqo.height();
-			};
-		}
-			
-		// setup defaults if arguments aren't specified
-		if (arguments.length < 1 || xpos === null) xpos = "50%";
-		if (arguments.length < 2 || speedFactor === null) speedFactor = 0.1;
-		if (arguments.length < 3 || outerHeight === null) outerHeight = true;
-		
-
-		
-		
-		// function to be called whenever the window is scrolled or resized
-		function update(){
-			var pos = $window.scrollTop();				
-
-			$this.each( function(){
-				var $element = $(this);
-				var top = $element.offset().top;
-				var height = getHeight($element);
-
-				
-				// Check if totally above or totally below viewport
-				if (top + height < pos || top > pos + windowHeight) {
-					return;
-				}
-
-				TweenMax.set( $this, {
-					backgroundPosition: xpos + " " + Math.round((firstTop - pos ) * speedFactor) + "px"
-				});
-
-				
-				if (isFirefox) {
-				    //Set delta for Firefox
-
-				} else if (isIe) {
-				    //Set delta for IE
-
-				} else {
-				    //Set delta for all other browsers
-
-				}
-				
-			});
-		}		
-
-		$window.bind('scroll', update).resize(update);
-		update();
-	
-			
-		
-	};
-})(jQuery);
 
 
 
@@ -2400,46 +2417,6 @@ APP = ( function ( APP, $, window, document ) {
     return APP;
 
 }( APP, jQuery, window, document ) );
-
-
-
-/* 
- *************************************
- * <!-- Responsive Table -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.TABLE               = APP.TABLE || {};
-	APP.TABLE.version       = '0.0.1';
-    APP.TABLE.documentReady = function( $ ) {
-
-		var $resTable = $('table.uix-table.is-responsive, .uix-table.is-responsive table'),
-			$thead    = $resTable.find( 'thead' ),
-			$tbody    = $resTable.find( 'tbody' );
-
-        $thead.find( 'th' ).each(function() {
-            var data = $(this).text();
-            if ( !$( this ).attr( 'data-table' ) ) {
-                $( this ).attr( 'data-table', data );
-            }
-        });
-
-        $tbody.find( 'td' ).each(function() {
-            var index = $(this).index();
-            var data = $thead.find( 'th:eq(' + index + ')' ).attr( 'data-table' );
-            $( this ).attr( 'data-table', data );
-        });
-		
-		
-    };
-
-    APP.components.documentReady.push( APP.TABLE.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
 
 
 
@@ -8668,6 +8645,58 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
+ * <!-- Dropdown Menu 2 (Multi-level drop-down navigation) -->
+ *************************************
+ */	
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.DROPDOWN_MENU2               = APP.DROPDOWN_MENU2 || {};
+	APP.DROPDOWN_MENU2.version       = '0.0.1';
+    APP.DROPDOWN_MENU2.documentReady = function( $ ) {
+
+		var $verticalMenuLi = $( '.uix-vertical-menu li' );
+		
+		$verticalMenuLi.find( '> a' ).on( 'click', function( e ) {
+			e.preventDefault();
+			
+			//Hide other all sibling <ul> of the selected element
+			$( this ).parent( 'li' ).siblings()
+			                        .removeClass( 'active' )
+									.find( '> ul' ).slideUp( 500 );
+
+			
+			var $sub = $( this ).parent( 'li' ).children( 'ul' );
+
+			$sub.slideToggle( 500 );
+			$( this ).parent( 'li' ).toggleClass( 'active' );
+
+        });
+		
+		//Add multilevel indicator arrow
+		if ( $verticalMenuLi.find( '> a .uix-vertical-menu__arrow' ).length == 0 ) {
+			$verticalMenuLi.find( '> a' ).append( '<span class="uix-vertical-menu__arrow"></span>' );
+		}
+        
+		$verticalMenuLi.each( function() {
+			var len = $( this ).find( 'ul' ).length;
+			if ( len == 0 ) {
+				$( this ).children( 'a' ).children( '.uix-vertical-menu__arrow' ).hide();
+			}
+		});
+		
+    };
+
+    APP.components.documentReady.push( APP.DROPDOWN_MENU2.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+/* 
+ *************************************
  * <!-- Dropdown Menu -->
  *************************************
  */	
@@ -8730,58 +8759,6 @@ APP = ( function ( APP, $, window, document ) {
     };
 
     APP.components.documentReady.push( APP.DROPDOWN_MENU.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
-/* 
- *************************************
- * <!-- Dropdown Menu 2 (Multi-level drop-down navigation) -->
- *************************************
- */	
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.DROPDOWN_MENU2               = APP.DROPDOWN_MENU2 || {};
-	APP.DROPDOWN_MENU2.version       = '0.0.1';
-    APP.DROPDOWN_MENU2.documentReady = function( $ ) {
-
-		var $verticalMenuLi = $( '.uix-vertical-menu li' );
-		
-		$verticalMenuLi.find( '> a' ).on( 'click', function( e ) {
-			e.preventDefault();
-			
-			//Hide other all sibling <ul> of the selected element
-			$( this ).parent( 'li' ).siblings()
-			                        .removeClass( 'active' )
-									.find( '> ul' ).slideUp( 500 );
-
-			
-			var $sub = $( this ).parent( 'li' ).children( 'ul' );
-
-			$sub.slideToggle( 500 );
-			$( this ).parent( 'li' ).toggleClass( 'active' );
-
-        });
-		
-		//Add multilevel indicator arrow
-		if ( $verticalMenuLi.find( '> a .uix-vertical-menu__arrow' ).length == 0 ) {
-			$verticalMenuLi.find( '> a' ).append( '<span class="uix-vertical-menu__arrow"></span>' );
-		}
-        
-		$verticalMenuLi.each( function() {
-			var len = $( this ).find( 'ul' ).length;
-			if ( len == 0 ) {
-				$( this ).children( 'a' ).children( '.uix-vertical-menu__arrow' ).hide();
-			}
-		});
-		
-    };
-
-    APP.components.documentReady.push( APP.DROPDOWN_MENU2.documentReady );
     return APP;
 
 }( APP, jQuery, window, document ) );
@@ -14652,6 +14629,42 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
+/* 
+ *************************************
+ * <!-- Theme Scripts  -->
+ *************************************
+ */
+
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+    
+    APP.INDEX               = APP.INDEX || {};
+	APP.INDEX.version       = '0.0.1';
+    APP.INDEX.documentReady = function( $ ) {
+
+	    //your code here...
+		
+    };
+	
+    APP.INDEX.pageLoaded    = function() {
+
+	    //your code here...
+		
+    };
+	
+
+    APP.components.documentReady.push( APP.INDEX.documentReady );
+    APP.components.pageLoaded.push( APP.INDEX.pageLoaded );
+	
+	
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+
 
 /* 
  *************************************
@@ -14762,42 +14775,6 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
-/* 
- *************************************
- * <!-- Theme Scripts  -->
- *************************************
- */
-
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-    
-    APP.INDEX               = APP.INDEX || {};
-	APP.INDEX.version       = '0.0.1';
-    APP.INDEX.documentReady = function( $ ) {
-
-	    //your code here...
-		
-    };
-	
-    APP.INDEX.pageLoaded    = function() {
-
-	    //your code here...
-		
-    };
-	
-
-    APP.components.documentReady.push( APP.INDEX.documentReady );
-    APP.components.pageLoaded.push( APP.INDEX.pageLoaded );
-	
-	
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
-
 
 /* 
  *************************************
@@ -14885,482 +14862,6 @@ APP = ( function ( APP, $, window, document ) {
 }( APP, jQuery, window, document ) );
 
 
-
-
-
-
-/* 
- *************************************
- * <!-- Custom Lightbox -->
- *************************************
- */
-
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-
-    APP.LIGHTBOX               = APP.LIGHTBOX || {};
-	APP.LIGHTBOX.version       = '0.1.0';
-    APP.LIGHTBOX.pageLoaded    = function() {
-
-		if ( $( '.uix-lightbox__container' ).length == 0 ) {
-			$( 'body' ).prepend( '<div class="uix-lightbox__loading is-loaded uix-t-c"><i class="fa fa-spinner fa-spin"></i> Loading...</div><a class="uix-lightbox__original__close" href="#"></a><div class="uix-lightbox__container"><div class="uix-lightbox__inner"><div class="uix-lightbox__html"></div><span class="uix-lightbox__close"></span><p class="title"></p></div></div><div class="uix-lightbox__container-mask"></div><div class="uix-lightbox__close-fixed"></div>' );
-		}
-		
-
-		var	$lbCon           = $( '.uix-lightbox__inner' ),
-			$lbWrapper       = $( '.uix-lightbox__container' ),
-			$lbMask          = $( '.uix-lightbox__container-mask' ),
-			lbCloseEl        = '.uix-lightbox__container .uix-lightbox__close',
-			lbCloseFixedEl   = '.uix-lightbox__close-fixed',
-			$lbLoader        = $( '.uix-lightbox__loading' ),
-			$lbLargeImgClose = $( '.uix-lightbox__original__close' ),
-			$lbContent       = $lbCon.find( '.uix-lightbox__html' ),
-			tempID           = 'lightbox-' + UIX_GUID.newGuid();
-		
-		$( document ).on( 'click touchstart', '.uix-lightbox__trigger', function() { 
-
-			var $this         = $( this ),
-				dataPhoto     = $this.data( 'lb-src' ),
-				dataHtmlID    = $this.data( 'lb-html' ),
-				dataFixed     = $this.data( 'lb-fixed' ),
-				dataMaskClose = $this.data( 'lb-mask-close' ),
-				dataMethod    = $this.data( 'lb-ajax-method' ),
-				dataAjaxCon   = $this.data( 'lb-ajax-content' ),
-				htmlContent   = '',
-				imgSrcStr     = '',
-				imgSrcStrToW  = '';
-			
-
-			
-		
-			if( typeof dataFixed === typeof undefined ) {
-				dataFixed = true;
-			}
-			if( typeof dataMaskClose === typeof undefined ) {
-				dataMaskClose = false;
-			}	
-			
-			if( typeof dataMethod === typeof undefined ) {
-				dataMethod = 'POST';
-			}		
-			
-			//Display loading
-			$lbLoader.removeClass( 'is-loaded' );	
-	
-			//Reset the wrapper position
-			$lbWrapper.css( 'margin-top', 0 );	
-			
-
-			if ( !dataFixed ) {
-				$lbWrapper.addClass( 'js-uix-no-fixed' );
-				$( lbCloseEl ).addClass( 'js-uix-no-fixed' );
-				$( lbCloseFixedEl ).addClass( 'active' );
-				
-				//Initialize the wrapper position
-				$lbWrapper.css( 'margin-top', $( window ).scrollTop() + 'px' );	
-				
-			}
-			
-			
-			//Reset current container type
-			$lbCon.removeClass( 'js-uix-custom js-uix-pure-image' );
-			
-		
-			// Locks the page
-			if ( !$lbWrapper.hasClass( 'js-uix-no-fixed' ) ) {
-				$.scrollLock( true );
-			}
-			
-			
-
-			//-------- If it is photo
-			//-----------------------------
-			if( typeof dataPhoto != typeof undefined && dataPhoto != '' ) {
-				
-				
-				$( lbCloseEl ).show();
-				$lbWrapper.show();
-				$lbMask.show();
-				$lbCon.show();
-				
-				if ( dataPhoto.indexOf( '[' ) >= 0 &&  dataPhoto.indexOf( ']' ) >= 0 ) {
-					imgSrcStr = JSON.parse( dataPhoto.replace(/([a-zA-Z0-9]+?):/g, '"$1":').replace(/'/g,'"') );
-				} else {
-					imgSrcStr = dataPhoto;
-					
-				}
-				
-				
-				//Judging whether multiple image sets
-				if ( Object.prototype.toString.call( imgSrcStr ) =='[object Array]' ) {
-					
-					var largePhotos = '',
-						thumbs      = '';
-					
-					imgSrcStrToW = imgSrcStr[0].large;
-					
-					//push the large photos
-					largePhotos += '<div class="uix-lightbox__photo-container uix-lightbox__photo-sets-container"><a href="javascript:" class="uix-lightbox__photo-sets__prev"></a><a href="javascript:" class="uix-lightbox__photo-sets__next"></a><ul>';
-					for ( var i = 0; i < imgSrcStr.length; i++ ) {
-						
-						
-						largePhotos += '<li>';
-						largePhotos += '	<a class="uix-lightbox__original__link" href="#'+tempID+'-sets-'+i+'">';
-						largePhotos += '	   <img src="'+ imgSrcStr[i].large +'" alt="">';
-						largePhotos += '	</a>';
-						largePhotos += '	<div class="uix-lightbox__original__target" id="'+tempID+'-sets-'+i+'">';
-						largePhotos += '	   <img src="'+ imgSrcStr[i].large +'" alt="">';
-						largePhotos += '	</div>';
-						largePhotos += '</li>'; 
-
-					}
-					largePhotos += '</ul></div>';
-					
-					//push the thumbs
-					thumbs += '<div class="uix-lightbox__thumb-container"><ul>';
-					for ( var k = 0; k < imgSrcStr.length; k++ ) {
-						
-						var active = ( k == 0 ) ? 'class="active"' : '';
-						
-						thumbs += '<li '+active+'><img src="'+ imgSrcStr[k].thumb +'" alt=""></li>';
-					}
-					thumbs += '</ul></div>';
-					
-					htmlContent = largePhotos + thumbs;
-					
-
-					
-				} else {
-
-					//Only one image
-					imgSrcStrToW = imgSrcStr;
-					htmlContent += '<div class="uix-lightbox__photo-container">';
-					htmlContent += '	<a class="uix-lightbox__original__link" href="#'+tempID+'">';
-					htmlContent += '	   <img src="'+ imgSrcStr +'" alt="">';
-					htmlContent += '	</a>';
-					htmlContent += '	<div class="uix-lightbox__original__target" id="'+tempID+'">';
-					htmlContent += '	   <img src="'+ imgSrcStr +'" alt="">';
-					htmlContent += '	</div>';
-					htmlContent += '</div>'; 
-					
-				}
-						
-				$lbContent.html( htmlContent ).promise().done( function(){
-
-					//Set current container type
-					$lbCon.addClass( 'js-uix-pure-image' );
-
-					//Set container width
-					var img = new Image();
-					img.src = imgSrcStrToW;
-					img.onload = function() {
-						
-						//remove loading
-						$lbLoader.addClass( 'is-loaded' );
-						
-						var sw     = $( window ).width() - 30,
-							ow     = this.width,
-							oh     = this.height,
-							ratioH = oh/ow,
-							ratioW = ow/oh,
-							w      = ( ow > 1000 ) ? 1000 : ow,
-							h;
-				
-						if ( w > sw ) w = sw;
-						
-						h = w * ratioH;
-						
-					
-						//Prevent height overflow
-						if ( h > $( window ).height() ) h = $( window ).height() * 0.95;
-						
-					
-						$lbCon.css( {
-							'width': w + 'px'
-						} );
-						
-
-						//Don't write variables outside
-						var $lbSetsContainer = $( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' );
-						$lbSetsContainer.css( {
-							'height': h + 'px'
-						} );
-						
-						
-						//Set a new height & width of inside images
-						$lbContent.find( '.uix-lightbox__photo-sets-container ul > li img' ).css( {
-							'height': h + 'px'
-						} );
-
-						
-						if ( ! $( 'body' ).hasClass( 'rtl' ) ) {
-							$lbContent.find( '.uix-lightbox__photo-sets-container' ).css( {
-								'width': 'calc('+ h*ratioW +'px + 6rem)',
-								'margin-left': '-3rem'
-							} );
-	
-						} else {
-							$lbContent.find( '.uix-lightbox__photo-sets-container' ).css( {
-								'width': 'calc('+ h*ratioW +'px + 6rem)',
-								'margin-right': '-3rem'
-							} );
-	
-						}
-						
-						
-						//If the image is larger than the current window, it will display at the top.
-						//Don't write variables outside
-						var $lbTarImg = $( '.uix-lightbox__photo-container > .uix-lightbox__original__target' );
-						if ( oh > $( window ).height() ) {
-							$lbTarImg.addClass( 'uix-lightbox__original__target--imgfull' );
-						} else {
-							$lbTarImg.removeClass( 'uix-lightbox__original__target--imgfull' );
-						}
-						
-					
-						
-						
-					};
-					
-					
-					$lbCon.find( '> .uix-lightbox__html' ).removeClass( 'js-uix-no-img' );
-
-				});		
-
-				
-			}	
-			
-			
-			//-------- If it is not photo
-			//-----------------------------
-			if( typeof dataHtmlID != typeof undefined && dataHtmlID != '' ) {
-				dataHtmlID = dataHtmlID.replace( '#', '' );
-
-				$( lbCloseEl ).show();
-				$lbWrapper.show();
-				$lbMask.show();
-				$lbCon.show();
-				$lbContent.html( $( '#' + dataHtmlID ).html() ).promise().done( function(){
-					
-					//Set current container type
-					$lbCon.addClass( 'js-uix-custom' );
-					
-					//Set container width
-					if ( $lbCon.find( '> .uix-lightbox__html .uix-lightbox__content' ).length > 0 ) {
-						
-						if ( $( window ).width() <= 768 ) {
-							$lbCon.css( 'width', $( window ).width() - 10 + 'px' );
-						} else {
-							$lbCon.css( 'width', $lbCon.find( '> .uix-lightbox__html .uix-lightbox__content' ).width() + 'px' );
-						}
-						
-						
-						$lbCon.find( '> .uix-lightbox__html' ).addClass( 'js-uix-no-img' );
-						
-						
-						//Ajax-loaded content
-						if( typeof dataAjaxCon != typeof undefined && dataAjaxCon != '' ) {
-							
-							var $ajaxContentContainer = $lbCon.find( '> .uix-lightbox__html .uix-lightbox__content > div' );
-							
-							$ajaxContentContainer.html( $ajaxContentContainer.data( 'loading-text' ) );
-							
-							$.ajax({
-								url      : dataAjaxCon,
-								method   : dataMethod,
-								dataType : 'html',
-								success  : function( response ) { 
-									$ajaxContentContainer.html( $( response ).find( '.uix-entry__content' ).html() );
-
-								 },
-								 error : function( XMLHttpRequest, textStatus, errorThrown ) {
-
-								 }
-							});
-
-						}
-						
-						
-					}
-
-				});
-				
-				
-
-			}	
-			
-
-		});
-
-		
-		//Close the window
-		$( document ).on( 'click', lbCloseEl, function() {
-			customLBCloseEvent();
-		});
-
-		
-		$( document ).on( 'click', lbCloseFixedEl, function() {
-			customLBCloseEvent();
-		});	
-		
-
-		//Click thumbnail to switch large photo
-		
-		function lightboxThumbSwitch( index, obj ) {
-			var $largePhoto = obj.closest( '.uix-lightbox__html' ).find( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' ),
-				$thumb      = obj.closest( '.uix-lightbox__html' ).find( '.uix-lightbox__thumb-container li' ),
-				curImgH     = 0;
-
-			
-			$thumb.removeClass( 'active' );
-			obj.addClass( 'active' );
-			
-			$largePhoto.find( 'li' ).fadeOut( 300 ).removeClass( 'active' );
-			$largePhoto.find( 'li' ).eq( index ).addClass( 'active' ).fadeIn( 300, function() {
-				
-				//Reset the container height
-				var imgClick = new Image();
-				imgClick.src = $largePhoto.find( 'li' ).eq( index ).find( 'img' ).attr( 'src' );
-				imgClick.onload = function() {
-					
-					//remove loading
-					$lbLoader.addClass( 'is-loaded' );
-
-
-					
-					var sw     = $( window ).width() - 30,
-						ow     = this.width,
-						oh     = this.height,
-						ratioH = oh/ow,
-						w      = ( ow > 1000 ) ? 1000 : ow,
-						h;
-					
-
-					if ( w > sw ) w = sw;
-
-					h = w * ratioH;
-
-
-					//Prevent height overflow
-					if ( h > $( window ).height() ) h = $( window ).height() * 0.95;
-
-					
-					$largePhoto.css( {
-						'height': h + 'px'
-					} )
-					.find( 'img' ).css( {
-						'height': h + 'px'
-					} );	
-					
-
-					//If the image is larger than the current window, it will display at the top.
-					//Don't write variables outside
-					var $lbTarImg = $largePhoto.find( 'li' ).eq( index ).find( '.uix-lightbox__original__target' );
-					if ( oh > $( window ).height() ) {
-						$lbTarImg.addClass( 'uix-lightbox__original__target--imgfull' );
-					} else {
-						$lbTarImg.removeClass( 'uix-lightbox__original__target--imgfull' );
-					}
-
-					
-
-				};
-
-				
-
-			});	
-		}
-		
-		
-		
-		$( document ).on( 'click', '.uix-lightbox__thumb-container li', function() {
-			lightboxThumbSwitch( $( this ).index(), $( this ) );
-			
-		});		
-		
-		$( document ).on( 'click', '.uix-lightbox__photo-sets-container > a', function() {
-			var $largePhoto = $( this ).closest( '.uix-lightbox__html' ).find( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' ),
-				$thumb      = $( this ).closest( '.uix-lightbox__html' ).find( '.uix-lightbox__thumb-container li' ),
-				total       = $thumb.length,
-				curIndex    = $thumb.filter( '.active' ).index(),
-				prevIndex   = curIndex - 1,
-				nextIndex   = curIndex + 1;
-			
-			
-			if ( prevIndex < 0 ) prevIndex = total - 1;
-			if ( nextIndex > total - 1 ) nextIndex = 0;
-			
-			
-			if ( $( this ).hasClass( 'uix-lightbox__photo-sets__prev' ) ) {
-				lightboxThumbSwitch( prevIndex, $thumb.eq( prevIndex ) );
-			}
-			
-			if ( $( this ).hasClass( 'uix-lightbox__photo-sets__next' ) ) {
-				lightboxThumbSwitch( nextIndex, $thumb.eq( nextIndex ) );
-			}
-			
-			
-		});		
-		
-		
-		
-		
-		function customLBCloseEvent() {
-			//Remove all dynamic classes
-			$lbWrapper.removeClass( 'js-uix-no-fixed' );
-			$( lbCloseEl ).removeClass( 'js-uix-no-fixed' );
-			$( lbCloseFixedEl ).removeClass( 'active' );
-			
-			$( 'html' ).css( 'overflow-y', 'auto' );
-			
-			//Reset current container type
-			$lbCon.removeClass( 'js-uix-custom js-uix-pure-image' );
-			
-			
-			//close windows
-			$lbWrapper.hide();
-			$lbMask.hide();
-			
-			
-			//Changing The Site URL
-			var href = window.location.href.substr( 0, window.location.href.indexOf( '#' ) );
-			history.pushState( '', document.title, href );
-			
-			// Unlocks the page
-			$.scrollLock( false );
-	
-			
-		}
-		
-		
-		
-		
-		
-		
-		//Close/Open enlarge image
-		$( document ).on( 'click', '.uix-lightbox__original__link', function( e ) {
-			$( 'html' ).css( 'overflow-y', 'hidden' );
-			$lbLargeImgClose.addClass( 'active' );
-
-		});	
-		
-		$( document ).on( 'click', '.uix-lightbox__original__close', function( e ) {
-            $lbLargeImgClose.removeClass( 'active' );
-			$( 'html' ).css( 'overflow-y', 'auto' );
-		});
-
-		
-		
-		
-		    
-		
-    };
-
-    APP.components.pageLoaded.push( APP.LIGHTBOX.pageLoaded );
-    return APP;
-
-}( APP, jQuery, window, document ) );
 
 
 
@@ -15921,6 +15422,482 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
+
+
+
+
+/* 
+ *************************************
+ * <!-- Custom Lightbox -->
+ *************************************
+ */
+
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+
+    APP.LIGHTBOX               = APP.LIGHTBOX || {};
+	APP.LIGHTBOX.version       = '0.1.0';
+    APP.LIGHTBOX.pageLoaded    = function() {
+
+		if ( $( '.uix-lightbox__container' ).length == 0 ) {
+			$( 'body' ).prepend( '<div class="uix-lightbox__loading is-loaded uix-t-c"><i class="fa fa-spinner fa-spin"></i> Loading...</div><a class="uix-lightbox__original__close" href="#"></a><div class="uix-lightbox__container"><div class="uix-lightbox__inner"><div class="uix-lightbox__html"></div><span class="uix-lightbox__close"></span><p class="title"></p></div></div><div class="uix-lightbox__container-mask"></div><div class="uix-lightbox__close-fixed"></div>' );
+		}
+		
+
+		var	$lbCon           = $( '.uix-lightbox__inner' ),
+			$lbWrapper       = $( '.uix-lightbox__container' ),
+			$lbMask          = $( '.uix-lightbox__container-mask' ),
+			lbCloseEl        = '.uix-lightbox__container .uix-lightbox__close',
+			lbCloseFixedEl   = '.uix-lightbox__close-fixed',
+			$lbLoader        = $( '.uix-lightbox__loading' ),
+			$lbLargeImgClose = $( '.uix-lightbox__original__close' ),
+			$lbContent       = $lbCon.find( '.uix-lightbox__html' ),
+			tempID           = 'lightbox-' + UIX_GUID.newGuid();
+		
+		$( document ).on( 'click touchstart', '.uix-lightbox__trigger', function() { 
+
+			var $this         = $( this ),
+				dataPhoto     = $this.data( 'lb-src' ),
+				dataHtmlID    = $this.data( 'lb-html' ),
+				dataFixed     = $this.data( 'lb-fixed' ),
+				dataMaskClose = $this.data( 'lb-mask-close' ),
+				dataMethod    = $this.data( 'lb-ajax-method' ),
+				dataAjaxCon   = $this.data( 'lb-ajax-content' ),
+				htmlContent   = '',
+				imgSrcStr     = '',
+				imgSrcStrToW  = '';
+			
+
+			
+		
+			if( typeof dataFixed === typeof undefined ) {
+				dataFixed = true;
+			}
+			if( typeof dataMaskClose === typeof undefined ) {
+				dataMaskClose = false;
+			}	
+			
+			if( typeof dataMethod === typeof undefined ) {
+				dataMethod = 'POST';
+			}		
+			
+			//Display loading
+			$lbLoader.removeClass( 'is-loaded' );	
+	
+			//Reset the wrapper position
+			$lbWrapper.css( 'margin-top', 0 );	
+			
+
+			if ( !dataFixed ) {
+				$lbWrapper.addClass( 'js-uix-no-fixed' );
+				$( lbCloseEl ).addClass( 'js-uix-no-fixed' );
+				$( lbCloseFixedEl ).addClass( 'active' );
+				
+				//Initialize the wrapper position
+				$lbWrapper.css( 'margin-top', $( window ).scrollTop() + 'px' );	
+				
+			}
+			
+			
+			//Reset current container type
+			$lbCon.removeClass( 'js-uix-custom js-uix-pure-image' );
+			
+		
+			// Locks the page
+			if ( !$lbWrapper.hasClass( 'js-uix-no-fixed' ) ) {
+				$.scrollLock( true );
+			}
+			
+			
+
+			//-------- If it is photo
+			//-----------------------------
+			if( typeof dataPhoto != typeof undefined && dataPhoto != '' ) {
+				
+				
+				$( lbCloseEl ).show();
+				$lbWrapper.show();
+				$lbMask.show();
+				$lbCon.show();
+				
+				if ( dataPhoto.indexOf( '[' ) >= 0 &&  dataPhoto.indexOf( ']' ) >= 0 ) {
+					imgSrcStr = JSON.parse( dataPhoto.replace(/([a-zA-Z0-9]+?):/g, '"$1":').replace(/'/g,'"') );
+				} else {
+					imgSrcStr = dataPhoto;
+					
+				}
+				
+				
+				//Judging whether multiple image sets
+				if ( Object.prototype.toString.call( imgSrcStr ) =='[object Array]' ) {
+					
+					var largePhotos = '',
+						thumbs      = '';
+					
+					imgSrcStrToW = imgSrcStr[0].large;
+					
+					//push the large photos
+					largePhotos += '<div class="uix-lightbox__photo-container uix-lightbox__photo-sets-container"><a href="javascript:" class="uix-lightbox__photo-sets__prev"></a><a href="javascript:" class="uix-lightbox__photo-sets__next"></a><ul>';
+					for ( var i = 0; i < imgSrcStr.length; i++ ) {
+						
+						
+						largePhotos += '<li>';
+						largePhotos += '	<a class="uix-lightbox__original__link" href="#'+tempID+'-sets-'+i+'">';
+						largePhotos += '	   <img src="'+ imgSrcStr[i].large +'" alt="">';
+						largePhotos += '	</a>';
+						largePhotos += '	<div class="uix-lightbox__original__target" id="'+tempID+'-sets-'+i+'">';
+						largePhotos += '	   <img src="'+ imgSrcStr[i].large +'" alt="">';
+						largePhotos += '	</div>';
+						largePhotos += '</li>'; 
+
+					}
+					largePhotos += '</ul></div>';
+					
+					//push the thumbs
+					thumbs += '<div class="uix-lightbox__thumb-container"><ul>';
+					for ( var k = 0; k < imgSrcStr.length; k++ ) {
+						
+						var active = ( k == 0 ) ? 'class="active"' : '';
+						
+						thumbs += '<li '+active+'><img src="'+ imgSrcStr[k].thumb +'" alt=""></li>';
+					}
+					thumbs += '</ul></div>';
+					
+					htmlContent = largePhotos + thumbs;
+					
+
+					
+				} else {
+
+					//Only one image
+					imgSrcStrToW = imgSrcStr;
+					htmlContent += '<div class="uix-lightbox__photo-container">';
+					htmlContent += '	<a class="uix-lightbox__original__link" href="#'+tempID+'">';
+					htmlContent += '	   <img src="'+ imgSrcStr +'" alt="">';
+					htmlContent += '	</a>';
+					htmlContent += '	<div class="uix-lightbox__original__target" id="'+tempID+'">';
+					htmlContent += '	   <img src="'+ imgSrcStr +'" alt="">';
+					htmlContent += '	</div>';
+					htmlContent += '</div>'; 
+					
+				}
+						
+				$lbContent.html( htmlContent ).promise().done( function(){
+
+					//Set current container type
+					$lbCon.addClass( 'js-uix-pure-image' );
+
+					//Set container width
+					var img = new Image();
+					img.src = imgSrcStrToW;
+					img.onload = function() {
+						
+						//remove loading
+						$lbLoader.addClass( 'is-loaded' );
+						
+						var sw     = $( window ).width() - 30,
+							ow     = this.width,
+							oh     = this.height,
+							ratioH = oh/ow,
+							ratioW = ow/oh,
+							w      = ( ow > 1000 ) ? 1000 : ow,
+							h;
+				
+						if ( w > sw ) w = sw;
+						
+						h = w * ratioH;
+						
+					
+						//Prevent height overflow
+						if ( h > $( window ).height() ) h = $( window ).height() * 0.95;
+						
+					
+						$lbCon.css( {
+							'width': w + 'px'
+						} );
+						
+
+						//Don't write variables outside
+						var $lbSetsContainer = $( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' );
+						$lbSetsContainer.css( {
+							'height': h + 'px'
+						} );
+						
+						
+						//Set a new height & width of inside images
+						$lbContent.find( '.uix-lightbox__photo-sets-container ul > li img' ).css( {
+							'height': h + 'px'
+						} );
+
+						
+						if ( ! $( 'body' ).hasClass( 'rtl' ) ) {
+							$lbContent.find( '.uix-lightbox__photo-sets-container' ).css( {
+								'width': 'calc('+ h*ratioW +'px + 6rem)',
+								'margin-left': '-3rem'
+							} );
+	
+						} else {
+							$lbContent.find( '.uix-lightbox__photo-sets-container' ).css( {
+								'width': 'calc('+ h*ratioW +'px + 6rem)',
+								'margin-right': '-3rem'
+							} );
+	
+						}
+						
+						
+						//If the image is larger than the current window, it will display at the top.
+						//Don't write variables outside
+						var $lbTarImg = $( '.uix-lightbox__photo-container > .uix-lightbox__original__target' );
+						if ( oh > $( window ).height() ) {
+							$lbTarImg.addClass( 'uix-lightbox__original__target--imgfull' );
+						} else {
+							$lbTarImg.removeClass( 'uix-lightbox__original__target--imgfull' );
+						}
+						
+					
+						
+						
+					};
+					
+					
+					$lbCon.find( '> .uix-lightbox__html' ).removeClass( 'js-uix-no-img' );
+
+				});		
+
+				
+			}	
+			
+			
+			//-------- If it is not photo
+			//-----------------------------
+			if( typeof dataHtmlID != typeof undefined && dataHtmlID != '' ) {
+				dataHtmlID = dataHtmlID.replace( '#', '' );
+
+				$( lbCloseEl ).show();
+				$lbWrapper.show();
+				$lbMask.show();
+				$lbCon.show();
+				$lbContent.html( $( '#' + dataHtmlID ).html() ).promise().done( function(){
+					
+					//Set current container type
+					$lbCon.addClass( 'js-uix-custom' );
+					
+					//Set container width
+					if ( $lbCon.find( '> .uix-lightbox__html .uix-lightbox__content' ).length > 0 ) {
+						
+						if ( $( window ).width() <= 768 ) {
+							$lbCon.css( 'width', $( window ).width() - 10 + 'px' );
+						} else {
+							$lbCon.css( 'width', $lbCon.find( '> .uix-lightbox__html .uix-lightbox__content' ).width() + 'px' );
+						}
+						
+						
+						$lbCon.find( '> .uix-lightbox__html' ).addClass( 'js-uix-no-img' );
+						
+						
+						//Ajax-loaded content
+						if( typeof dataAjaxCon != typeof undefined && dataAjaxCon != '' ) {
+							
+							var $ajaxContentContainer = $lbCon.find( '> .uix-lightbox__html .uix-lightbox__content > div' );
+							
+							$ajaxContentContainer.html( $ajaxContentContainer.data( 'loading-text' ) );
+							
+							$.ajax({
+								url      : dataAjaxCon,
+								method   : dataMethod,
+								dataType : 'html',
+								success  : function( response ) { 
+									$ajaxContentContainer.html( $( response ).find( '.uix-entry__content' ).html() );
+
+								 },
+								 error : function( XMLHttpRequest, textStatus, errorThrown ) {
+
+								 }
+							});
+
+						}
+						
+						
+					}
+
+				});
+				
+				
+
+			}	
+			
+
+		});
+
+		
+		//Close the window
+		$( document ).on( 'click', lbCloseEl, function() {
+			customLBCloseEvent();
+		});
+
+		
+		$( document ).on( 'click', lbCloseFixedEl, function() {
+			customLBCloseEvent();
+		});	
+		
+
+		//Click thumbnail to switch large photo
+		
+		function lightboxThumbSwitch( index, obj ) {
+			var $largePhoto = obj.closest( '.uix-lightbox__html' ).find( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' ),
+				$thumb      = obj.closest( '.uix-lightbox__html' ).find( '.uix-lightbox__thumb-container li' ),
+				curImgH     = 0;
+
+			
+			$thumb.removeClass( 'active' );
+			obj.addClass( 'active' );
+			
+			$largePhoto.find( 'li' ).fadeOut( 300 ).removeClass( 'active' );
+			$largePhoto.find( 'li' ).eq( index ).addClass( 'active' ).fadeIn( 300, function() {
+				
+				//Reset the container height
+				var imgClick = new Image();
+				imgClick.src = $largePhoto.find( 'li' ).eq( index ).find( 'img' ).attr( 'src' );
+				imgClick.onload = function() {
+					
+					//remove loading
+					$lbLoader.addClass( 'is-loaded' );
+
+
+					
+					var sw     = $( window ).width() - 30,
+						ow     = this.width,
+						oh     = this.height,
+						ratioH = oh/ow,
+						w      = ( ow > 1000 ) ? 1000 : ow,
+						h;
+					
+
+					if ( w > sw ) w = sw;
+
+					h = w * ratioH;
+
+
+					//Prevent height overflow
+					if ( h > $( window ).height() ) h = $( window ).height() * 0.95;
+
+					
+					$largePhoto.css( {
+						'height': h + 'px'
+					} )
+					.find( 'img' ).css( {
+						'height': h + 'px'
+					} );	
+					
+
+					//If the image is larger than the current window, it will display at the top.
+					//Don't write variables outside
+					var $lbTarImg = $largePhoto.find( 'li' ).eq( index ).find( '.uix-lightbox__original__target' );
+					if ( oh > $( window ).height() ) {
+						$lbTarImg.addClass( 'uix-lightbox__original__target--imgfull' );
+					} else {
+						$lbTarImg.removeClass( 'uix-lightbox__original__target--imgfull' );
+					}
+
+					
+
+				};
+
+				
+
+			});	
+		}
+		
+		
+		
+		$( document ).on( 'click', '.uix-lightbox__thumb-container li', function() {
+			lightboxThumbSwitch( $( this ).index(), $( this ) );
+			
+		});		
+		
+		$( document ).on( 'click', '.uix-lightbox__photo-sets-container > a', function() {
+			var $largePhoto = $( this ).closest( '.uix-lightbox__html' ).find( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' ),
+				$thumb      = $( this ).closest( '.uix-lightbox__html' ).find( '.uix-lightbox__thumb-container li' ),
+				total       = $thumb.length,
+				curIndex    = $thumb.filter( '.active' ).index(),
+				prevIndex   = curIndex - 1,
+				nextIndex   = curIndex + 1;
+			
+			
+			if ( prevIndex < 0 ) prevIndex = total - 1;
+			if ( nextIndex > total - 1 ) nextIndex = 0;
+			
+			
+			if ( $( this ).hasClass( 'uix-lightbox__photo-sets__prev' ) ) {
+				lightboxThumbSwitch( prevIndex, $thumb.eq( prevIndex ) );
+			}
+			
+			if ( $( this ).hasClass( 'uix-lightbox__photo-sets__next' ) ) {
+				lightboxThumbSwitch( nextIndex, $thumb.eq( nextIndex ) );
+			}
+			
+			
+		});		
+		
+		
+		
+		
+		function customLBCloseEvent() {
+			//Remove all dynamic classes
+			$lbWrapper.removeClass( 'js-uix-no-fixed' );
+			$( lbCloseEl ).removeClass( 'js-uix-no-fixed' );
+			$( lbCloseFixedEl ).removeClass( 'active' );
+			
+			$( 'html' ).css( 'overflow-y', 'auto' );
+			
+			//Reset current container type
+			$lbCon.removeClass( 'js-uix-custom js-uix-pure-image' );
+			
+			
+			//close windows
+			$lbWrapper.hide();
+			$lbMask.hide();
+			
+			
+			//Changing The Site URL
+			var href = window.location.href.substr( 0, window.location.href.indexOf( '#' ) );
+			history.pushState( '', document.title, href );
+			
+			// Unlocks the page
+			$.scrollLock( false );
+	
+			
+		}
+		
+		
+		
+		
+		
+		
+		//Close/Open enlarge image
+		$( document ).on( 'click', '.uix-lightbox__original__link', function( e ) {
+			$( 'html' ).css( 'overflow-y', 'hidden' );
+			$lbLargeImgClose.addClass( 'active' );
+
+		});	
+		
+		$( document ).on( 'click', '.uix-lightbox__original__close', function( e ) {
+            $lbLargeImgClose.removeClass( 'active' );
+			$( 'html' ).css( 'overflow-y', 'auto' );
+		});
+
+		
+		
+		
+		    
+		
+    };
+
+    APP.components.pageLoaded.push( APP.LIGHTBOX.pageLoaded );
+    return APP;
+
+}( APP, jQuery, window, document ) );
 
 
 
@@ -16982,429 +16959,6 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
- * <!-- Full Page/One Page Transition -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.ONEPAGE               = APP.ONEPAGE || {};
-	APP.ONEPAGE.version       = '0.0.2';
-    APP.ONEPAGE.documentReady = function( $ ) {
-
-        var $window      = $( window ),
-		    windowWidth  = $window.width(),
-		    windowHeight = $window.height();
-		
-
-	    //Determine the direction of a jQuery scroll event
-		//Fix an issue for mousewheel event is too fast.
-		var lastAnimation      = 0,
-			quietPeriod        = 500, //Do not change it
-			animationTime      = 1000,//According to page transition animation changes
-			$sectionsContainer = $( '.uix-noemal-load__onepage-container' ),
-			$sections          = $sectionsContainer.find( '> section' ),
-			sectionTotal       = $sections.length,
-			topSectionSpacing  = 0,
-			$primaryMenu       = $( '.uix-menu' ),
-			$sidefixedMenu     = $( '.uix-menu-sidefixed' );
-		
-		
-		//Prevent this module from loading in other pages
-		if ( $sectionsContainer.length == 0 ) return false;
-		
-
-
-		// Prepare everything before binding wheel scroll
-		$.each( $sections, function( i ) {
-			$( this ).attr( 'data-index', i );
-			if ( i == 0 ) {
-				$( this ).addClass( 'active' );
-
-			}
-			
-		});
-		
-
-		
-		//Init the section location
-		sectionStart();
-		
-		
-		$( window ).on( 'hashchange', function(){
-			console.log( 'hash changed!' );
-		} );
-		
-
-		
-		/*
-		 * Init the section location
-		 *
-		 * @return {void}                - The constructor.
-		 */
-		function sectionStart() {
-	
-			setTimeout( function() {
-				var hash = window.location.hash,
-					locArr,
-					loc, 
-					curTab;
-
-				if ( hash ) {
-					
-					//Add hashchange event
-					locArr = hash.split( 'section-' );
-					loc    = locArr[1];
-					moveTo( $sectionsContainer, false, loc );
-				} else {
-					moveTo( $sectionsContainer, false, 1 );
-				}
-
-			}, quietPeriod );
-
-		}
-			
-		
-		/*
-		 * Scroll initialize
-		 *
-		 * @param  {object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
-		 * @param  {string} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
-		 * @return {void}                - The constructor.
-		 */
-		function scrollMoveInit( event, dir ) {
-	
-			var timeNow = new Date().getTime();
-			// Cancel scroll if currently animating or within quiet period
-			if( timeNow - lastAnimation < quietPeriod + animationTime) {
-				event.preventDefault();
-				return;
-			}
-
-			if ( dir == 'down' ) {
-				//scroll down
-				moveTo( $sectionsContainer, 'down', false );
-				
-			} else {
-				//scroll up
-				moveTo( $sectionsContainer, 'up', false );
-				
-			  
-			}
-			lastAnimation = timeNow;
-		}
-		
-      
-		
-		/*
-		 * Move Animation
-		 *
-		 * @param  {object} el           - The container of each sections.
-		 * @param  {string} dir          - Rolling direction indicator.
-		 * @param  {number} hashID       - ID of custom hashchange event.
-		 * @return {void}                - The constructor.
-		 */
-		function moveTo( el, dir, hashID ) {
-			var index     = parseFloat( $sections.filter( '.active' ).attr( 'data-index' ) ),
-				nextIndex = null,
-				$next     = null,
-				isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
-			
-			
-			 
-			if ( dir == 'down' || dir === false ) {
-				nextIndex = index + 1;
-			} else {
-				nextIndex = index - 1;
-			}
-			
-
-			//ID of custom hashchange event
-			if ( isNumeric.test( hashID ) ) nextIndex = parseFloat( hashID - 1 );
-			
-			
-			if ( nextIndex <= parseFloat( sectionTotal-1 ) && nextIndex >= 0 ) {
-				
-				if ( nextIndex > parseFloat( sectionTotal-1 ) ) nextIndex = parseFloat( sectionTotal-1 );
-				if ( nextIndex < 0 ) nextIndex = 0;
-
-
-				//Returns the target section
-				$next = $sections.eq( nextIndex );
-
-				//Smooth scroll to content
-				if ( $next.length > 0 ) {
-					TweenMax.to( window, animationTime/1000, {
-						scrollTo: {
-							y: $next.offset().top - topSectionSpacing,
-							autoKill : false
-						},
-						ease: Power2.easeOut,
-						onComplete: function() {
-
-							$sections.removeClass( 'leave' );
-							$sections.eq( index ).addClass( 'leave' );
-
-							$sections.removeClass( 'active' );
-							$next.addClass( 'active' ).removeClass( 'leave' );
-
-
-
-							//Changing The Site URL
-							var curSectionIndex = $sections.filter( '.active' ).index() + 1,
-								href            = window.location.href.substr( 0, window.location.href.indexOf( '#' ) ) + '#' + $sections.filter( '.active' ).attr( 'id' );
-
-							// Save state on history stack
-							// - First argument is any object that will let you restore state
-							// - Second argument is a title (not the page title, and not currently used)
-							// - Third argument is the URL - this will appear in the browser address bar
-							history.pushState( {}, document.title, href );
-							console.log( 'Section ' + curSectionIndex + ' loaded!' );
-
-
-						}
-					});			
-				}	
-				
-			}
-			
-
-	
-
-			
-		}
-		
-		
-
-		/* 
-		 ====================================================
-		 *  Navigation Interaction
-		 ====================================================
-		 */
-		goPageSection( $primaryMenu );
-		goPageSection( $sidefixedMenu );
-
-        
-	
-		//Activate the first item
-		$primaryMenu.find( 'li:first' ).addClass( 'active' );
-		$sidefixedMenu.find( 'li:first' ).addClass( 'active' );
-		
-		
-		/*
-		 * Get section or article by href
-		 *
-		 * @param  {string, object} el  - The current selector or selector ID
-		 * @return {object}             - A new selector.
-		 */
-        function getRelatedContent( el ) {
-            return $( $( el ).attr( 'href' ) );
-        }
-		
-		
-		/*
-		 * Get link by section or article id
-		 *
-		 * @param  {string, object} el    - The current selector or selector ID
-		 * @param  {object} menuObj       - Returns the menu element within the document.
-		 * @param  {boolean} echoIndex    - Whether to return the current index.
-		 * @return {object}               - A new selector.
-		 */
-        function getRelatedNavigation( el, menuObj, echoIndex ) {
-			
-			if ( echoIndex ) {
-				return menuObj.find( 'li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' ).index();
-			} else {
-			    return menuObj.find( 'li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' );	
-			}
-            
-        } 
-		
-		/*
-		 * Get all links by section or article
-		 *
-		 * @param  {object} menuObj     - Returns the menu element within the document.
-		 * @return {object}             - A new selector.
-		 */
-        function getAllNavigation( menuObj ) {
-            return menuObj.find( 'li' );
-        } 	
-		
-		
-		/*
-		 * Smooth scroll to content
-		 *
-		 * @param  {object} menuObj     - Returns the menu element within the document.
-		 * @return {void}               - The constructor.
-		 */
-        function goPageSection( menuObj ) {
-			menuObj.find( 'li > a' ).on( 'click', function(e) {
-				e.preventDefault();
-				
-				if ( $( this ).parent().hasClass( 'active' ) ) return false;
-				
-				
-				moveTo( $sectionsContainer, false, $( this ).parent( 'li' ).index() + 1 );
-			});	
-	
-        } 	
-
-
-
-		var navMinTop      = ( $sidefixedMenu.length > 0 ) ? $sidefixedMenu.offset().top : 0,
-			navMaxTop      = parseFloat( $( document ).height() - $( '.uix-footer__container' ).height() ) - windowHeight/3;
-
-		$window.on( 'scroll touchmove', function() {
-			var scrollTop = $( this ).scrollTop(),
-				spyTop    = parseFloat( scrollTop + topSectionSpacing ),
-				minTop    = $( '[data-highlight-section="true"]' ).first().offset().top,
-				maxTop    = $( '[data-highlight-section="true"]' ).last().offset().top + $( '[data-highlight-section="true"]' ).last().height();
-
-			$( '[data-highlight-section="true"]' ).each( function()  {
-				var block     = $( this ),
-					eleTop    = block.offset().top;
-				
-
-				// The 1 pixel in order to solve inaccurate value of outerHeight() 
-				// in Safari and Firefox browsers.
-				if ( eleTop < spyTop + 1 ) {
-
-					// Highlight element when related content
-					getAllNavigation( $primaryMenu ).removeClass( 'active' );
-					getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
-					getRelatedNavigation( block, $primaryMenu, false ).addClass( 'active' );
-					getRelatedNavigation( block, $sidefixedMenu, false ).addClass( 'active' );
-					
-					
-				} 
-			});
-
-
-
-			//Cancel the current highlight element
-			// The 1 pixel in order to solve inaccurate value of outerHeight() 
-			// in Safari and Firefox browsers.
-			if ( spyTop > maxTop || spyTop < minTop - 1 ) {
-				getAllNavigation( $primaryMenu ).removeClass( 'active' );
-				getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
-			}
-
-
-			//Detecting when user scrolls to bottom of div
-			if ( spyTop > navMaxTop || spyTop < navMinTop ) {
-				$sidefixedMenu.removeClass( 'is-fixed' );
-			} else {
-				$sidefixedMenu.addClass( 'is-fixed' );
-			}	
-
-
-
-
-		});	
-	
-		
-
-		
-		
-		/* 
-		 ====================================================
-		 *  Mouse Wheel Method
-		 ====================================================
-		 */
-		$( document ).on( 'wheel', function( e ) { 
-
-			var dir;
-			//Gets a value that indicates the amount that the mouse wheel has changed.
-			var delta = e.originalEvent.deltaY;
-			
-			if( delta > 0 ) { 
-				//scroll down
-				dir = 'down';
-				
-			} else {
-				//scroll up
-				dir = 'up';
-			}
-			
-			scrollMoveInit( e, dir );
-			
-			//prevent page fom scrolling
-			return false;
-
-		});
-		
-		
-		
-		/* 
-		 ====================================================
-		 *  Touch Method
-		 ====================================================
-		 */
-			
-		var startX,
-			startY;
-
-
-		$sectionsContainer.on( 'touchstart.ONEPAGE', function( event ) {
-			var touches = event.originalEvent.touches;
-			if ( touches && touches.length ) {
-				startX = touches[0].pageX;
-				startY = touches[0].pageY;
-
-
-				$sectionsContainer.on( 'touchmove.ONEPAGE', function( event ) {
-
-					var touches = event.originalEvent.touches;
-					if ( touches && touches.length ) {
-						var deltaX = startX - touches[0].pageX,
-							deltaY = startY - touches[0].pageY;
-
-						if ( deltaX >= 50) {
-							//--- swipe left
-
-
-						}
-						if ( deltaX <= -50) {
-							//--- swipe right
-						
-
-
-						}
-						if ( deltaY >= 50) {
-							//--- swipe up
-							moveTo( $sectionsContainer, 'down', false );
-
-						}
-						if ( deltaY <= -50) {
-							//--- swipe down
-							moveTo( $sectionsContainer, 'up', false );
-							
-
-						}
-						if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
-							$sectionsContainer.off( 'touchmove.ONEPAGE' );
-						}
-					}
-
-				});
-			}	
-		});
-
-		
-		
-
-		
-    };
-
-    APP.components.documentReady.push( APP.ONEPAGE.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-/* 
- *************************************
  * <!-- Full Page/One Page Transition 2 -->
  *************************************
  */
@@ -17841,6 +17395,429 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
+/* 
+ *************************************
+ * <!-- Full Page/One Page Transition -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.ONEPAGE               = APP.ONEPAGE || {};
+	APP.ONEPAGE.version       = '0.0.2';
+    APP.ONEPAGE.documentReady = function( $ ) {
+
+        var $window      = $( window ),
+		    windowWidth  = $window.width(),
+		    windowHeight = $window.height();
+		
+
+	    //Determine the direction of a jQuery scroll event
+		//Fix an issue for mousewheel event is too fast.
+		var lastAnimation      = 0,
+			quietPeriod        = 500, //Do not change it
+			animationTime      = 1000,//According to page transition animation changes
+			$sectionsContainer = $( '.uix-noemal-load__onepage-container' ),
+			$sections          = $sectionsContainer.find( '> section' ),
+			sectionTotal       = $sections.length,
+			topSectionSpacing  = 0,
+			$primaryMenu       = $( '.uix-menu' ),
+			$sidefixedMenu     = $( '.uix-menu-sidefixed' );
+		
+		
+		//Prevent this module from loading in other pages
+		if ( $sectionsContainer.length == 0 ) return false;
+		
+
+
+		// Prepare everything before binding wheel scroll
+		$.each( $sections, function( i ) {
+			$( this ).attr( 'data-index', i );
+			if ( i == 0 ) {
+				$( this ).addClass( 'active' );
+
+			}
+			
+		});
+		
+
+		
+		//Init the section location
+		sectionStart();
+		
+		
+		$( window ).on( 'hashchange', function(){
+			console.log( 'hash changed!' );
+		} );
+		
+
+		
+		/*
+		 * Init the section location
+		 *
+		 * @return {void}                - The constructor.
+		 */
+		function sectionStart() {
+	
+			setTimeout( function() {
+				var hash = window.location.hash,
+					locArr,
+					loc, 
+					curTab;
+
+				if ( hash ) {
+					
+					//Add hashchange event
+					locArr = hash.split( 'section-' );
+					loc    = locArr[1];
+					moveTo( $sectionsContainer, false, loc );
+				} else {
+					moveTo( $sectionsContainer, false, 1 );
+				}
+
+			}, quietPeriod );
+
+		}
+			
+		
+		/*
+		 * Scroll initialize
+		 *
+		 * @param  {object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
+		 * @param  {string} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
+		 * @return {void}                - The constructor.
+		 */
+		function scrollMoveInit( event, dir ) {
+	
+			var timeNow = new Date().getTime();
+			// Cancel scroll if currently animating or within quiet period
+			if( timeNow - lastAnimation < quietPeriod + animationTime) {
+				event.preventDefault();
+				return;
+			}
+
+			if ( dir == 'down' ) {
+				//scroll down
+				moveTo( $sectionsContainer, 'down', false );
+				
+			} else {
+				//scroll up
+				moveTo( $sectionsContainer, 'up', false );
+				
+			  
+			}
+			lastAnimation = timeNow;
+		}
+		
+      
+		
+		/*
+		 * Move Animation
+		 *
+		 * @param  {object} el           - The container of each sections.
+		 * @param  {string} dir          - Rolling direction indicator.
+		 * @param  {number} hashID       - ID of custom hashchange event.
+		 * @return {void}                - The constructor.
+		 */
+		function moveTo( el, dir, hashID ) {
+			var index     = parseFloat( $sections.filter( '.active' ).attr( 'data-index' ) ),
+				nextIndex = null,
+				$next     = null,
+				isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
+			
+			
+			 
+			if ( dir == 'down' || dir === false ) {
+				nextIndex = index + 1;
+			} else {
+				nextIndex = index - 1;
+			}
+			
+
+			//ID of custom hashchange event
+			if ( isNumeric.test( hashID ) ) nextIndex = parseFloat( hashID - 1 );
+			
+			
+			if ( nextIndex <= parseFloat( sectionTotal-1 ) && nextIndex >= 0 ) {
+				
+				if ( nextIndex > parseFloat( sectionTotal-1 ) ) nextIndex = parseFloat( sectionTotal-1 );
+				if ( nextIndex < 0 ) nextIndex = 0;
+
+
+				//Returns the target section
+				$next = $sections.eq( nextIndex );
+
+				//Smooth scroll to content
+				if ( $next.length > 0 ) {
+					TweenMax.to( window, animationTime/1000, {
+						scrollTo: {
+							y: $next.offset().top - topSectionSpacing,
+							autoKill : false
+						},
+						ease: Power2.easeOut,
+						onComplete: function() {
+
+							$sections.removeClass( 'leave' );
+							$sections.eq( index ).addClass( 'leave' );
+
+							$sections.removeClass( 'active' );
+							$next.addClass( 'active' ).removeClass( 'leave' );
+
+
+
+							//Changing The Site URL
+							var curSectionIndex = $sections.filter( '.active' ).index() + 1,
+								href            = window.location.href.substr( 0, window.location.href.indexOf( '#' ) ) + '#' + $sections.filter( '.active' ).attr( 'id' );
+
+							// Save state on history stack
+							// - First argument is any object that will let you restore state
+							// - Second argument is a title (not the page title, and not currently used)
+							// - Third argument is the URL - this will appear in the browser address bar
+							history.pushState( {}, document.title, href );
+							console.log( 'Section ' + curSectionIndex + ' loaded!' );
+
+
+						}
+					});			
+				}	
+				
+			}
+			
+
+	
+
+			
+		}
+		
+		
+
+		/* 
+		 ====================================================
+		 *  Navigation Interaction
+		 ====================================================
+		 */
+		goPageSection( $primaryMenu );
+		goPageSection( $sidefixedMenu );
+
+        
+	
+		//Activate the first item
+		$primaryMenu.find( 'li:first' ).addClass( 'active' );
+		$sidefixedMenu.find( 'li:first' ).addClass( 'active' );
+		
+		
+		/*
+		 * Get section or article by href
+		 *
+		 * @param  {string, object} el  - The current selector or selector ID
+		 * @return {object}             - A new selector.
+		 */
+        function getRelatedContent( el ) {
+            return $( $( el ).attr( 'href' ) );
+        }
+		
+		
+		/*
+		 * Get link by section or article id
+		 *
+		 * @param  {string, object} el    - The current selector or selector ID
+		 * @param  {object} menuObj       - Returns the menu element within the document.
+		 * @param  {boolean} echoIndex    - Whether to return the current index.
+		 * @return {object}               - A new selector.
+		 */
+        function getRelatedNavigation( el, menuObj, echoIndex ) {
+			
+			if ( echoIndex ) {
+				return menuObj.find( 'li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' ).index();
+			} else {
+			    return menuObj.find( 'li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' );	
+			}
+            
+        } 
+		
+		/*
+		 * Get all links by section or article
+		 *
+		 * @param  {object} menuObj     - Returns the menu element within the document.
+		 * @return {object}             - A new selector.
+		 */
+        function getAllNavigation( menuObj ) {
+            return menuObj.find( 'li' );
+        } 	
+		
+		
+		/*
+		 * Smooth scroll to content
+		 *
+		 * @param  {object} menuObj     - Returns the menu element within the document.
+		 * @return {void}               - The constructor.
+		 */
+        function goPageSection( menuObj ) {
+			menuObj.find( 'li > a' ).on( 'click', function(e) {
+				e.preventDefault();
+				
+				if ( $( this ).parent().hasClass( 'active' ) ) return false;
+				
+				
+				moveTo( $sectionsContainer, false, $( this ).parent( 'li' ).index() + 1 );
+			});	
+	
+        } 	
+
+
+
+		var navMinTop      = ( $sidefixedMenu.length > 0 ) ? $sidefixedMenu.offset().top : 0,
+			navMaxTop      = parseFloat( $( document ).height() - $( '.uix-footer__container' ).height() ) - windowHeight/3;
+
+		$window.on( 'scroll touchmove', function() {
+			var scrollTop = $( this ).scrollTop(),
+				spyTop    = parseFloat( scrollTop + topSectionSpacing ),
+				minTop    = $( '[data-highlight-section="true"]' ).first().offset().top,
+				maxTop    = $( '[data-highlight-section="true"]' ).last().offset().top + $( '[data-highlight-section="true"]' ).last().height();
+
+			$( '[data-highlight-section="true"]' ).each( function()  {
+				var block     = $( this ),
+					eleTop    = block.offset().top;
+				
+
+				// The 1 pixel in order to solve inaccurate value of outerHeight() 
+				// in Safari and Firefox browsers.
+				if ( eleTop < spyTop + 1 ) {
+
+					// Highlight element when related content
+					getAllNavigation( $primaryMenu ).removeClass( 'active' );
+					getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
+					getRelatedNavigation( block, $primaryMenu, false ).addClass( 'active' );
+					getRelatedNavigation( block, $sidefixedMenu, false ).addClass( 'active' );
+					
+					
+				} 
+			});
+
+
+
+			//Cancel the current highlight element
+			// The 1 pixel in order to solve inaccurate value of outerHeight() 
+			// in Safari and Firefox browsers.
+			if ( spyTop > maxTop || spyTop < minTop - 1 ) {
+				getAllNavigation( $primaryMenu ).removeClass( 'active' );
+				getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
+			}
+
+
+			//Detecting when user scrolls to bottom of div
+			if ( spyTop > navMaxTop || spyTop < navMinTop ) {
+				$sidefixedMenu.removeClass( 'is-fixed' );
+			} else {
+				$sidefixedMenu.addClass( 'is-fixed' );
+			}	
+
+
+
+
+		});	
+	
+		
+
+		
+		
+		/* 
+		 ====================================================
+		 *  Mouse Wheel Method
+		 ====================================================
+		 */
+		$( document ).on( 'wheel', function( e ) { 
+
+			var dir;
+			//Gets a value that indicates the amount that the mouse wheel has changed.
+			var delta = e.originalEvent.deltaY;
+			
+			if( delta > 0 ) { 
+				//scroll down
+				dir = 'down';
+				
+			} else {
+				//scroll up
+				dir = 'up';
+			}
+			
+			scrollMoveInit( e, dir );
+			
+			//prevent page fom scrolling
+			return false;
+
+		});
+		
+		
+		
+		/* 
+		 ====================================================
+		 *  Touch Method
+		 ====================================================
+		 */
+			
+		var startX,
+			startY;
+
+
+		$sectionsContainer.on( 'touchstart.ONEPAGE', function( event ) {
+			var touches = event.originalEvent.touches;
+			if ( touches && touches.length ) {
+				startX = touches[0].pageX;
+				startY = touches[0].pageY;
+
+
+				$sectionsContainer.on( 'touchmove.ONEPAGE', function( event ) {
+
+					var touches = event.originalEvent.touches;
+					if ( touches && touches.length ) {
+						var deltaX = startX - touches[0].pageX,
+							deltaY = startY - touches[0].pageY;
+
+						if ( deltaX >= 50) {
+							//--- swipe left
+
+
+						}
+						if ( deltaX <= -50) {
+							//--- swipe right
+						
+
+
+						}
+						if ( deltaY >= 50) {
+							//--- swipe up
+							moveTo( $sectionsContainer, 'down', false );
+
+						}
+						if ( deltaY <= -50) {
+							//--- swipe down
+							moveTo( $sectionsContainer, 'up', false );
+							
+
+						}
+						if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
+							$sectionsContainer.off( 'touchmove.ONEPAGE' );
+						}
+					}
+
+				});
+			}	
+		});
+
+		
+		
+
+		
+    };
+
+    APP.components.documentReady.push( APP.ONEPAGE.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
 
 /* 
  *************************************
@@ -17888,26 +17865,16 @@ APP = ( function ( APP, $, window, document ) {
 		function parallaxInit( w, h ) {
 			
 			/* Pure parallax scrolling effect without other embedded HTML elements */
-			$( '.uix-parallax--pure-bg' ).each( function() {
+			$( '.uix-parallax--el' ).each( function() {
 				var $this       = $( this ),
-					dataImg     = $this.data( 'parallax-bg' ),
 					dataSpeed   = $this.data( 'parallax' );
 				
 				if( typeof dataSpeed === typeof undefined ) {
 					dataSpeed = 0;
 				}
 				
-				if( typeof dataImg != typeof undefined && dataImg != '' ) {
-					$this.css( 'background-image', 'url('+dataImg+')' );
-				}
 				
-				$window.on( 'scroll touchmove', function() {
-					var scrolled = $window.scrollTop();
-					$this.css( {
-							'margin-top': Math.round( scrolled * dataSpeed ) + 'px',
-							'transition': 'none'
-						} );
-				});	
+				$this.uixParallax( { 'speed': dataSpeed, 'bg': false } );	
 				
 		
 			});
@@ -17922,11 +17889,9 @@ APP = ( function ( APP, $, window, document ) {
 					dataSpeed        = $this.data( 'speed' ),
 					dataOverlay      = $this.data( 'overlay-bg' ),
 					dataFullyVisible = $this.data( 'fully-visible' ),
-					dataElSpeed      = $this.find( '.uix-parallax__el' ).data( 'el-speed' ),	
 					curImgH          = null,
 					curImgW          = null,
-					curSize          = 'cover',
-				    curAtt           = 'fixed';
+					curSize          = 'cover';
 				
 				
 				if( 
@@ -17942,9 +17907,6 @@ APP = ( function ( APP, $, window, document ) {
 					dataSpeed = 0;
 				}	
 				
-				if( typeof dataElSpeed === typeof undefined ) {
-					dataElSpeed = 0;
-				}	
 				
 				if( typeof dataFullyVisible === typeof undefined ) {
 					dataFullyVisible = false;
@@ -17994,9 +17956,6 @@ APP = ( function ( APP, $, window, document ) {
 
 					}
 
-					//Use parallax to background
-					$this.bgParallax( "50%", dataSpeed );
-
 
 					//Resize the background image to cover the entire container and
 					//Resize the background image to make sure the image is fully visible
@@ -18005,9 +17964,6 @@ APP = ( function ( APP, $, window, document ) {
 					} else {
 						curSize = 'cover';
 					}
-
-					curAtt = 'fixed';
-
 
 					
 					//Determine image height and parallax container height
@@ -18039,13 +17995,13 @@ APP = ( function ( APP, $, window, document ) {
 							// supported
 
 							$this.css( {
-								'background' : 'linear-gradient('+dataOverlay+', '+dataOverlay+'), url(' + dataImg + ') 50% 0/'+curSize+' no-repeat ' + curAtt
+								'background' : 'linear-gradient('+dataOverlay+', '+dataOverlay+'), url(' + dataImg + ') 50% 0/'+curSize+' no-repeat fixed'
 							} );
 						} else {
 							// not-supported
 
 							$this.css( {
-								'background' : 'url(' + dataImg + ') 50% 0/'+curSize+' no-repeat ' + curAtt
+								'background' : 'url(' + dataImg + ') 50% 0/'+curSize+' no-repeat fixed'
 							} );
 						}
 
@@ -18063,18 +18019,10 @@ APP = ( function ( APP, $, window, document ) {
 					}
 
 
+					//Use parallax to background
+					$this.uixParallax( { 'speed': dataSpeed, 'bg': { enable: true, xPos: '50%' } } );
 
-					//Embedded parent disparity elements
-					if ( $this.find( '.uix-parallax__el' ).length > 0 ) {
-						$window.on( 'scroll touchmove', function() {
-							var scrolled = $window.scrollTop();
-							$this.find( '.uix-parallax__el' ).css( {
-								'transform' : 'translateY('+Math.round( ( $this.offset().top - scrolled ) * dataElSpeed )+'px)',
-								'transition': 'none'
-							} );
-						});			
-					}
-	
+
 					
 					
 				};

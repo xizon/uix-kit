@@ -431,3 +431,92 @@ var UIX_GUID = UIX_GUID || (function() {
 	}() );
 
 } ) ( jQuery );
+
+
+
+/* 
+ *************************************
+ * Parallax Effect
+ *
+ * @return {void}                        - The constructor.
+ *************************************
+ */
+
+( function ( $ ) {
+    $.fn.uixParallax = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+			speed    : 0.25,
+			bg       : { enable: true, xPos: '50%' }
+        }, options );
+ 
+        this.each( function() {
+			
+			var bgEff      = settings.bg,
+				$this      = $( this ),
+				bgXpos     = '50%',
+				speed      = -parseFloat( settings.speed );
+			
+			
+			
+			if ( bgEff ) {
+				bgEff      = settings.bg.enable;
+				bgXpos     = settings.bg.xPos;
+			}
+			
+	
+			//Prohibit transition delay
+			$this.css( {
+				'transition': 'none'
+			} );
+
+		    $( window ).on( 'scroll touchmove', function( e ){
+				scrollUpdate();
+			});
+			
+			
+			//Initialize the position of the background
+			if ( bgEff ) {
+				//background parallax
+				TweenMax.set( $this, {
+					backgroundPosition: bgXpos + ' ' + (-$this.offset().top*speed) + 'px'
+				});
+			} else {
+				//element parallax
+				TweenMax.set( $this, {
+					y: 0
+				});	
+			}
+			
+			
+			function scrollUpdate() {
+				var scrolled = $( window ).scrollTop(),
+					st       = $this.offset().top - scrolled;
+				
+
+				
+				if ( bgEff ) {
+					//background parallax
+					TweenMax.set( $this, {
+						backgroundPosition: bgXpos + ' ' + ( 0 - ( st * speed ) ) + 'px'
+					});
+				} else {
+					//element parallax
+					TweenMax.set( $this, {
+						y: ( 0 - ( scrolled * speed ) )
+					});
+					
+					
+				}
+				
+			}
+
+			
+			
+		});
+ 
+    };
+ 
+}( jQuery ));
+

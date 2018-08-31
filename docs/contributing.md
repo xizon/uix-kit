@@ -23,7 +23,6 @@ Uix Kit bundles the following third-party resources:
 - [jQuery Easing](http://gsgd.co.uk/sandbox/jquery/easing/)
 - [Flexslider](https://github.com/woocommerce/FlexSlider)
 - [Bootstrap v3.3.7](http://getbootstrap.com)
-- [jQuery Parallax](http://www.ianlunn.co.uk/plugins/jquery-parallax/)
 - [Shuffle.js](https://vestride.github.io/Shuffle/)
 - [waitForImages](https://github.com/alexanderdickson/waitForImages)
 - [modernizr](https://modernizr.com/)

@@ -1,5 +1,12 @@
 # Changelog
 
+
+#### = 2.1.7 (August 30, 2018) =
+
+* Tweak: Removed jQuery Parallax plugin and used a simpler method instead.
+
+
+
 #### = 2.1.6 (August 29, 2018) =
 
 * Fix: Fixed a minor bug in Advanced Slider.
