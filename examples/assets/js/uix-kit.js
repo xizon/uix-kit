@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  2.1.7
- * ## Last Update         :  August 31, 2018
+ * ## Version             :  2.1.8
+ * ## Last Update         :  September 4, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -49,8 +49,8 @@
     25. Advanced Content Slider 
     26. Advanced Slider (Special Effects) 
     27. Advanced Slider (Basic) 
-    28. Circle Layout 
-    29. Counter 
+    28. Counter 
+    29. Circle Layout 
     30. Dropdown Menu 
     31. Dropdown Menu 2 (Multi-level drop-down navigation) 
     32. Dynamic Drop Down List from JSON 
@@ -58,8 +58,8 @@
     34. Floating Side Element 
     35. Form 
     36. Form Progress 
-    37. jQuery UI Datepicker 1.11.4 
-    38. Gallery 
+    37. Gallery 
+    38. jQuery UI Datepicker 1.11.4 
     39. Hover Delay Interaction 
     40. Image Shapes 
     41. Theme Scripts  
@@ -2860,6 +2860,248 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
+
+/* 
+ *************************************
+ * <!-- 3D Carousel -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP._3D_CAROUSEL               = APP._3D_CAROUSEL || {};
+	APP._3D_CAROUSEL.version       = '0.0.1';
+    APP._3D_CAROUSEL.documentReady = function( $ ) {
+
+		$( '.uix-3d-carousel' ).each( function() {
+			var $this             = $( this ),
+				dataTiming        = $this.data( 'timing' ),
+				dataPrevBtn       = $this.data( 'prev-btn' ),
+				dataNextBtn       = $this.data( 'next-btn' ),
+				dataDraggable     = $this.data( 'draggable' ),
+			    autoSwap          = null,
+				$wrapper          = $this.find( '> ul' ),
+				$items            = $wrapper.find( '> li' ),
+				items             = [],
+				startItem         = 1,
+				position          = 0,
+				itemCount         = $items.length,
+				leftpos           = itemCount,
+				resetCount        = itemCount;
+
+			if( typeof dataTiming === typeof undefined ) dataTiming = 5000;
+			if( typeof dataPrevBtn === typeof undefined ) dataPrevBtn = ".my-carousel-3d-prev";
+			if( typeof dataNextBtn === typeof undefined ) dataNextBtn = ".my-carousel-3d-next";
+			if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
+			
+
+			//Avoid problems caused by insufficient quantity
+			//-------------------------------------		
+			if ( itemCount == 3 ) {
+				var $clone3 = $items.eq(1).clone();
+				$items.last().after( $clone3 );
+			}
+			
+			if ( itemCount == 2 ) {
+				var $clone2_1 = $items.eq(0).clone(),
+					$clone2_2 = $items.eq(1).clone();
+				$items.last().after( [$clone2_1, $clone2_2 ] );
+			}
+			
+			if ( itemCount == 1 ) {
+				var $clone1_1 = $items.eq(0).clone(),
+					$clone1_2 = $items.eq(0).clone(),
+					$clone1_3 = $items.eq(0).clone();
+					
+				$items.last().after( [$clone1_1, $clone1_2, $clone1_3 ] );
+			}		
+			
+
+			//New objects of items and wrapper
+			$wrapper  = $this.find( '> ul' );
+			$items = $wrapper.find( '> li' );
+			itemCount = $items.length;
+			leftpos  = itemCount;
+			resetCount = itemCount;
+
+			//Adding an index to an element makes it easy to query
+			//-------------------------------------	
+			$items.each( function( index ) {
+				items[index] = $( this ).text();
+				$( this ).attr( 'id', index+1 );
+
+			});
+
+			//Pause slideshow and reinstantiate on mouseout
+			//-------------------------------------	
+			$wrapper.on( 'mouseenter', function() {
+				clearInterval( autoSwap );
+			} ).on( 'mouseleave' , function() {
+				autoSwap = setInterval( itemUpdates, dataTiming );
+			} );
+
+
+			
+			//Initialize the default effect
+			//-------------------------------------	
+			itemUpdates( 'clockwise' );
+			
+			
+			//The matched click events for the element.
+			//-------------------------------------	
+			$( dataPrevBtn ).on( 'click', function( e ) {
+				e.preventDefault();
+				itemUpdates( 'clockwise' );
+				return false;
+				
+			});
+			$( dataNextBtn ).on( 'click', function( e ) {
+				e.preventDefault();
+				itemUpdates( 'counter-clockwise' );
+				return false;
+				
+			});
+			
+			
+			$items.on( 'click', function( e ) {
+				e.preventDefault();
+
+				if ( $( this ).attr( 'class' ) == 'uix-3d-carousel__item uix-3d-carousel__item--left-pos' ) {
+					itemUpdates( 'counter-clockwise' );
+				} else {
+					itemUpdates( 'clockwise' );
+				}
+			});
+
+
+			//Drag and Drop
+			//-------------------------------------	
+			var $dragDropTrigger = $wrapper,
+				hammerProps      = {};
+
+			
+			if ( !dataDraggable ) {
+				hammerProps = {
+					inputClass: Hammer.TouchInput
+				};
+			}
+
+			//Mouse event
+			//Hammer.js pan event only for touch devices and not for desktop computer Click+Drag
+			var direction,
+				dragDropElement = $dragDropTrigger[0],
+				dragDropMC      = new Hammer( dragDropElement, hammerProps );
+			
+			
+			dragDropMC.on( 'panright press panleft', function( ev ) {
+
+				//Set the direction in here
+				direction = ev.type;
+			});
+
+
+
+			dragDropMC.on( 'panend', function( ev ) {
+
+				//Use the direction in here
+				//You know the pan has ended
+				//and you know which action they were taking
+				if ( direction == 'panleft' ) {
+					itemUpdates( 'clockwise' );
+				}
+
+				if ( direction == 'panright' ) {
+					itemUpdates( 'counter-clockwise' );
+				}			
+
+
+
+			});	
+
+			
+
+			/*
+			 * Swap Between Images
+			 *
+			 * @param  {string} action           - Direction of movement, optional: clockwise, counter-clockwise
+			 * @return {void}                    - The constructor.
+			 */
+			function itemUpdates( action ) {
+				var direction = action;
+
+				//moving carousel backwards
+				if ( direction == 'counter-clockwise' ) {
+					var leftitem = parseFloat( $wrapper.find( '> li.uix-3d-carousel__item--left-pos' ).attr( 'id' ) - 1 );
+					if ( leftitem == 0 ) {
+						leftitem = itemCount;
+					}
+
+					$wrapper.find( '> li.uix-3d-carousel__item--right-pos' ).removeClass( 'uix-3d-carousel__item--right-pos' ).addClass( 'uix-3d-carousel__item--back-pos' );
+					$wrapper.find( '> li.uix-3d-carousel__item--main-pos' ).removeClass( 'uix-3d-carousel__item--main-pos' ).addClass( 'uix-3d-carousel__item--right-pos' );
+					$wrapper.find( '> li.uix-3d-carousel__item--left-pos' ).removeClass( 'uix-3d-carousel__item--left-pos' ).addClass( 'uix-3d-carousel__item--main-pos' );
+					$wrapper.find( '> li#' + leftitem + '').removeClass( 'uix-3d-carousel__item--back-pos' ).addClass( 'uix-3d-carousel__item--left-pos' );
+
+					startItem--;
+
+					if ( startItem < 1 ) {
+						startItem = itemCount;
+					}
+				}
+
+				//moving carousel forward
+				if ( direction == 'clockwise' || direction == '' || direction == null ) {
+					var carousel3DPos = function( dir ) {
+						if ( dir != 'leftposition' ) {
+							//increment image list id
+							position++;
+
+							//if final result is greater than image count, reset position.
+							if ( startItem + position > resetCount ) {
+								position = 1 - startItem;
+							}
+						}
+
+						//setting the left positioned item
+						if (dir == 'leftposition') {
+							//left positioned image should always be one left than main positioned image.
+							position = startItem - 1;
+
+							//reset last image in list to left position if first image is in main position
+							if (position < 1) {
+								position = itemCount;
+							}
+						}
+
+						return position;
+					};
+
+					$wrapper.find( '> li#' + startItem + '').removeClass( 'uix-3d-carousel__item--main-pos' ).addClass( 'uix-3d-carousel__item--left-pos' );
+					$wrapper.find( '> li#' + (startItem + carousel3DPos()) + '').removeClass( 'uix-3d-carousel__item--right-pos' ).addClass( 'uix-3d-carousel__item--main-pos' );
+					$wrapper.find( '> li#' + (startItem + carousel3DPos()) + '').removeClass( 'uix-3d-carousel__item--back-pos' ).addClass( 'uix-3d-carousel__item--right-pos' );
+					$wrapper.find( '> li#' + carousel3DPos( 'leftposition' ) + '').removeClass( 'uix-3d-carousel__item--left-pos' ).addClass( 'uix-3d-carousel__item--back-pos' );
+
+					startItem++;
+					position = 0;
+					if ( startItem > itemCount ) {
+						startItem = 1;
+					}
+				}
+			}
+
+			
+
+		});
+
+		
+    };
+
+    APP.components.documentReady.push( APP._3D_CAROUSEL.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
 /* 
  *************************************
  * <!-- 3D Background 2 -->
@@ -3173,248 +3415,6 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
-
-
-
-
-/* 
- *************************************
- * <!-- 3D Carousel -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP._3D_CAROUSEL               = APP._3D_CAROUSEL || {};
-	APP._3D_CAROUSEL.version       = '0.0.1';
-    APP._3D_CAROUSEL.documentReady = function( $ ) {
-
-		$( '.uix-3d-carousel' ).each( function() {
-			var $this             = $( this ),
-				dataTiming        = $this.data( 'timing' ),
-				dataPrevBtn       = $this.data( 'prev-btn' ),
-				dataNextBtn       = $this.data( 'next-btn' ),
-				dataDraggable     = $this.data( 'draggable' ),
-			    autoSwap          = null,
-				$wrapper          = $this.find( '> ul' ),
-				$items            = $wrapper.find( '> li' ),
-				items             = [],
-				startItem         = 1,
-				position          = 0,
-				itemCount         = $items.length,
-				leftpos           = itemCount,
-				resetCount        = itemCount;
-
-			if( typeof dataTiming === typeof undefined ) dataTiming = 5000;
-			if( typeof dataPrevBtn === typeof undefined ) dataPrevBtn = ".my-carousel-3d-prev";
-			if( typeof dataNextBtn === typeof undefined ) dataNextBtn = ".my-carousel-3d-next";
-			if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
-			
-
-			//Avoid problems caused by insufficient quantity
-			//-------------------------------------		
-			if ( itemCount == 3 ) {
-				var $clone3 = $items.eq(1).clone();
-				$items.last().after( $clone3 );
-			}
-			
-			if ( itemCount == 2 ) {
-				var $clone2_1 = $items.eq(0).clone(),
-					$clone2_2 = $items.eq(1).clone();
-				$items.last().after( [$clone2_1, $clone2_2 ] );
-			}
-			
-			if ( itemCount == 1 ) {
-				var $clone1_1 = $items.eq(0).clone(),
-					$clone1_2 = $items.eq(0).clone(),
-					$clone1_3 = $items.eq(0).clone();
-					
-				$items.last().after( [$clone1_1, $clone1_2, $clone1_3 ] );
-			}		
-			
-
-			//New objects of items and wrapper
-			$wrapper  = $this.find( '> ul' );
-			$items = $wrapper.find( '> li' );
-			itemCount = $items.length;
-			leftpos  = itemCount;
-			resetCount = itemCount;
-
-			//Adding an index to an element makes it easy to query
-			//-------------------------------------	
-			$items.each( function( index ) {
-				items[index] = $( this ).text();
-				$( this ).attr( 'id', index+1 );
-
-			});
-
-			//Pause slideshow and reinstantiate on mouseout
-			//-------------------------------------	
-			$wrapper.on( 'mouseenter', function() {
-				clearInterval( autoSwap );
-			} ).on( 'mouseleave' , function() {
-				autoSwap = setInterval( itemUpdates, dataTiming );
-			} );
-
-
-			
-			//Initialize the default effect
-			//-------------------------------------	
-			itemUpdates( 'clockwise' );
-			
-			
-			//The matched click events for the element.
-			//-------------------------------------	
-			$( dataPrevBtn ).on( 'click', function( e ) {
-				e.preventDefault();
-				itemUpdates( 'clockwise' );
-				return false;
-				
-			});
-			$( dataNextBtn ).on( 'click', function( e ) {
-				e.preventDefault();
-				itemUpdates( 'counter-clockwise' );
-				return false;
-				
-			});
-			
-			
-			$items.on( 'click', function( e ) {
-				e.preventDefault();
-
-				if ( $( this ).attr( 'class' ) == 'uix-3d-carousel__item uix-3d-carousel__item--left-pos' ) {
-					itemUpdates( 'counter-clockwise' );
-				} else {
-					itemUpdates( 'clockwise' );
-				}
-			});
-
-
-			//Drag and Drop
-			//-------------------------------------	
-			var $dragDropTrigger = $wrapper,
-				hammerProps      = {};
-
-			
-			if ( !dataDraggable ) {
-				hammerProps = {
-					inputClass: Hammer.TouchInput
-				};
-			}
-
-			//Mouse event
-			//Hammer.js pan event only for touch devices and not for desktop computer Click+Drag
-			var direction,
-				dragDropElement = $dragDropTrigger[0],
-				dragDropMC      = new Hammer( dragDropElement, hammerProps );
-			
-			
-			dragDropMC.on( 'panright press panleft', function( ev ) {
-
-				//Set the direction in here
-				direction = ev.type;
-			});
-
-
-
-			dragDropMC.on( 'panend', function( ev ) {
-
-				//Use the direction in here
-				//You know the pan has ended
-				//and you know which action they were taking
-				if ( direction == 'panleft' ) {
-					itemUpdates( 'clockwise' );
-				}
-
-				if ( direction == 'panright' ) {
-					itemUpdates( 'counter-clockwise' );
-				}			
-
-
-
-			});	
-
-			
-
-			/*
-			 * Swap Between Images
-			 *
-			 * @param  {string} action           - Direction of movement, optional: clockwise, counter-clockwise
-			 * @return {void}                    - The constructor.
-			 */
-			function itemUpdates( action ) {
-				var direction = action;
-
-				//moving carousel backwards
-				if ( direction == 'counter-clockwise' ) {
-					var leftitem = parseFloat( $wrapper.find( '> li.uix-3d-carousel__item--left-pos' ).attr( 'id' ) - 1 );
-					if ( leftitem == 0 ) {
-						leftitem = itemCount;
-					}
-
-					$wrapper.find( '> li.uix-3d-carousel__item--right-pos' ).removeClass( 'uix-3d-carousel__item--right-pos' ).addClass( 'uix-3d-carousel__item--back-pos' );
-					$wrapper.find( '> li.uix-3d-carousel__item--main-pos' ).removeClass( 'uix-3d-carousel__item--main-pos' ).addClass( 'uix-3d-carousel__item--right-pos' );
-					$wrapper.find( '> li.uix-3d-carousel__item--left-pos' ).removeClass( 'uix-3d-carousel__item--left-pos' ).addClass( 'uix-3d-carousel__item--main-pos' );
-					$wrapper.find( '> li#' + leftitem + '').removeClass( 'uix-3d-carousel__item--back-pos' ).addClass( 'uix-3d-carousel__item--left-pos' );
-
-					startItem--;
-
-					if ( startItem < 1 ) {
-						startItem = itemCount;
-					}
-				}
-
-				//moving carousel forward
-				if ( direction == 'clockwise' || direction == '' || direction == null ) {
-					var carousel3DPos = function( dir ) {
-						if ( dir != 'leftposition' ) {
-							//increment image list id
-							position++;
-
-							//if final result is greater than image count, reset position.
-							if ( startItem + position > resetCount ) {
-								position = 1 - startItem;
-							}
-						}
-
-						//setting the left positioned item
-						if (dir == 'leftposition') {
-							//left positioned image should always be one left than main positioned image.
-							position = startItem - 1;
-
-							//reset last image in list to left position if first image is in main position
-							if (position < 1) {
-								position = itemCount;
-							}
-						}
-
-						return position;
-					};
-
-					$wrapper.find( '> li#' + startItem + '').removeClass( 'uix-3d-carousel__item--main-pos' ).addClass( 'uix-3d-carousel__item--left-pos' );
-					$wrapper.find( '> li#' + (startItem + carousel3DPos()) + '').removeClass( 'uix-3d-carousel__item--right-pos' ).addClass( 'uix-3d-carousel__item--main-pos' );
-					$wrapper.find( '> li#' + (startItem + carousel3DPos()) + '').removeClass( 'uix-3d-carousel__item--back-pos' ).addClass( 'uix-3d-carousel__item--right-pos' );
-					$wrapper.find( '> li#' + carousel3DPos( 'leftposition' ) + '').removeClass( 'uix-3d-carousel__item--left-pos' ).addClass( 'uix-3d-carousel__item--back-pos' );
-
-					startItem++;
-					position = 0;
-					if ( startItem > itemCount ) {
-						startItem = 1;
-					}
-				}
-			}
-
-			
-
-		});
-
-		
-    };
-
-    APP.components.documentReady.push( APP._3D_CAROUSEL.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
 
 
 
@@ -4622,7 +4622,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.ADVANCED_SLIDER_FILTER               = APP.ADVANCED_SLIDER_FILTER || {};
-	APP.ADVANCED_SLIDER_FILTER.version       = '0.1.1';
+	APP.ADVANCED_SLIDER_FILTER.version       = '0.1.2';
     APP.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 	
@@ -4632,6 +4632,9 @@ APP = ( function ( APP, $, window, document ) {
 			animSpeed                 = 1000,
 			$sliderWrapper            = $( '.uix-advanced-slider-sp' ),
 			tempID                    = 'video-' + UIX_GUID.newGuid(),
+			
+			//Save different canvas heights as an array
+			canvasHeights             = [],
 
 			
 			//Autoplay global variables
@@ -4735,19 +4738,24 @@ APP = ( function ( APP, $, window, document ) {
 					//Returns the dimensions (intrinsic height and width ) of the video
 					var video    = document.getElementById( $first.find( 'video' ).attr( 'id' ) ),
 						videoURL = $first.find( 'source:first' ).attr( 'src' );
+					
+					if ( typeof videoURL != typeof undefined ) {
+						video.addEventListener( 'loadedmetadata', function( e ) {
+							$this.css( 'height', this.videoHeight*($this.width()/this.videoWidth) + 'px' );	
 
-					video.addEventListener( 'loadedmetadata', function( e ) {
-						$this.css( 'height', this.videoHeight*($this.width()/this.videoWidth) + 'px' );	
+							nativeItemW = this.videoWidth;
+							nativeItemH = this.videoHeight;	
 
-						nativeItemW = this.videoWidth;
-						nativeItemH = this.videoHeight;	
+							//Initialize all the items to the stage
+							addItemsToStage( $this, $sliderWrapper, nativeItemW, nativeItemH );
 
-						//Initialize all the items to the stage
-						addItemsToStage( $this, $sliderWrapper, nativeItemW, nativeItemH );
 
-					}, false);	
+						}, false);	
 
-					video.src = videoURL;
+						video.src = videoURL;
+					}
+
+
 
 
 				} else {
@@ -4766,13 +4774,13 @@ APP = ( function ( APP, $, window, document ) {
 
 							//Initialize all the items to the stage
 							addItemsToStage( $this, $sliderWrapper, nativeItemW, nativeItemH );
+							
 
+							
 						};
 
 						img.src = imgURL;
 					}
-
-					
 
 
 				}	
@@ -4915,6 +4923,84 @@ APP = ( function ( APP, $, window, document ) {
 					$this.prepend( '<div id="'+rendererOuterID+'" class="uix-advanced-slider-sp__canvas-container"><canvas id="'+rendererCanvasID+'"></canvas></div>' );
 					
 				}
+				
+				
+
+				//Save different canvas heights as an array
+				//-------------------------------------	
+				$this.find( '.uix-advanced-slider-sp__item' ).each( function( index )  {
+
+					var $thisItem = $( this );
+					
+					
+
+					if ( $thisItem.find( 'video' ).length > 0 ) {
+
+
+						//Returns the dimensions (intrinsic height and width ) of the video
+						var video    = document.getElementById( $thisItem.find( 'video' ).attr( 'id' ) ),
+							videoURL = $thisItem.find( 'video source:first' ).attr( 'src' );
+						
+					
+						video.addEventListener( 'loadedmetadata', function( e ) {
+
+							var	curW    = this.videoWidth,
+								curH    = this.videoHeight,
+								newW    = curW,
+								newH    = curH;
+
+							newW = $this.width();
+
+							//Scaled/Proportional Content 
+							newH = curH*(newW/curW);
+
+							//Save different canvas heights as an array
+							if ( canvasHeights.length < itemsTotal ) {
+								canvasHeights.push( newH );
+							}
+					
+
+						}, false);	
+
+						video.src = videoURL;
+
+
+
+					} else {
+
+						var imgURL   = $thisItem.find( 'img' ).attr( 'src' ),
+							imgCur   = new Image();
+
+						imgCur.onload = function() {
+
+							var	curW_img    = this.width,
+								curH_img    = this.height,
+								newW_img    = curW_img,
+								newH_img    = curH_img;	
+
+							newW_img = $this.width();
+
+
+							//Scaled/Proportional Content 
+							newH_img = curH_img*(newW_img/curW_img);	
+
+							
+							//Save different canvas heights as an array
+							if ( canvasHeights.length < itemsTotal ) {
+								canvasHeights.push( newH_img );
+							}
+
+							
+						};
+
+						imgCur.src = imgURL;
+
+
+					}	
+					
+				});
+				
+				
 
 				//Basic webGL renderers 
 				//-------------------------------------
@@ -4974,19 +5060,10 @@ APP = ( function ( APP, $, window, document ) {
 							var video = document.getElementById( $thisItem.find( 'video' ).attr( 'id' ) );
 							video.addEventListener( 'loadedmetadata', function( e ) {
 
-								var	curW    = this.videoWidth,
-									curH    = this.videoHeight,
-									newW    = curW,
-									newH    = curH;
-
-								newW = $this.width();
-
-								//Scaled/Proportional Content 
-								newH = curH*(newW/curW);
-
 								//At the same time change the height of the canvas
-								renderer.view.style.width = newW + 'px';
-								renderer.view.style.height = newH + 'px';	
+								renderer.view.style.width = $this.width() + 'px';
+								renderer.view.style.height = canvasHeights[index] + 'px';	
+
 
 
 							}, false);	
@@ -5005,10 +5082,10 @@ APP = ( function ( APP, $, window, document ) {
 							imgCur.onload = function() {
 
 								//At the same time change the height of the canvas
-								renderer.view.style.width = $thisItem.find( 'img' ).width() + 'px';
-								renderer.view.style.height = $thisItem.find( 'img' ).height() + 'px';
-
-
+								renderer.view.style.width = $this.width() + 'px';
+								renderer.view.style.height = canvasHeights[index] + 'px';	
+								
+		
 							};
 
 							imgCur.src = imgURL;
@@ -5039,6 +5116,7 @@ APP = ( function ( APP, $, window, document ) {
 						canvasDefaultInit( $first );
 					}, animSpeed );
 
+					
 
 
 				}// end effect
@@ -5085,19 +5163,9 @@ APP = ( function ( APP, $, window, document ) {
 							var video = document.getElementById( $thisItem.find( 'video' ).attr( 'id' ) );
 							video.addEventListener( 'loadedmetadata', function( e ) {
 
-								var	curW    = this.videoWidth,
-									curH    = this.videoHeight,
-									newW    = curW,
-									newH    = curH;
-
-								newW = $this.width();
-
-								//Scaled/Proportional Content 
-								newH = curH*(newW/curW);
-
 								//At the same time change the height of the canvas
-								renderer.view.style.width = newW + 'px';
-								renderer.view.style.height = newH + 'px';	
+								renderer.view.style.width = $this.width() + 'px';
+								renderer.view.style.height = canvasHeights[index] + 'px';	
 
 
 							}, false);	
@@ -5116,8 +5184,9 @@ APP = ( function ( APP, $, window, document ) {
 							imgCur.onload = function() {
 
 								//At the same time change the height of the canvas
-								renderer.view.style.width = $thisItem.find( 'img' ).width() + 'px';
-								renderer.view.style.height =$thisItem.find( 'img' ).height() + 'px';
+								renderer.view.style.width = $this.width() + 'px';
+								renderer.view.style.height = canvasHeights[index] + 'px';	
+
 
 							};
 
@@ -5235,20 +5304,9 @@ APP = ( function ( APP, $, window, document ) {
 							var video = document.getElementById( $thisItem.find( 'video' ).attr( 'id' ) );
 							video.addEventListener( 'loadedmetadata', function( e ) {
 
-								var	curW    = this.videoWidth,
-									curH    = this.videoHeight,
-									newW    = curW,
-									newH    = curH;
-
-								newW = $this.width();
-
-								//Scaled/Proportional Content 
-								newH = curH*(newW/curW);
-
 								//At the same time change the height of the canvas
-								renderer.view.style.width = newW + 'px';
-								renderer.view.style.height = newH + 'px';	
-
+								renderer.view.style.width = $this.width() + 'px';
+								renderer.view.style.height = canvasHeights[index] + 'px';	
 
 							}, false);	
 
@@ -5266,9 +5324,8 @@ APP = ( function ( APP, $, window, document ) {
 							imgCur.onload = function() {
 
 								//At the same time change the height of the canvas
-								renderer.view.style.width = $thisItem.find( 'img' ).width() + 'px';
-								renderer.view.style.height =$thisItem.find( 'img' ).height() + 'px';
-
+								renderer.view.style.width = $this.width() + 'px';
+								renderer.view.style.height = canvasHeights[index] + 'px';	
 							};
 
 							imgCur.src = imgURL;
@@ -5384,19 +5441,9 @@ APP = ( function ( APP, $, window, document ) {
 							var video = document.getElementById( $thisItem.find( 'video' ).attr( 'id' ) );
 							video.addEventListener( 'loadedmetadata', function( e ) {
 
-								var	curW    = this.videoWidth,
-									curH    = this.videoHeight,
-									newW    = curW,
-									newH    = curH;
-
-								newW = $this.width();
-
-								//Scaled/Proportional Content 
-								newH = curH*(newW/curW);
-
 								//At the same time change the height of the canvas
-								renderer.view.style.width = newW + 'px';
-								renderer.view.style.height = newH + 'px';	
+								renderer.view.style.width = $this.width() + 'px';
+								renderer.view.style.height = canvasHeights[index] + 'px';	
 
 
 							}, false);	
@@ -5415,8 +5462,8 @@ APP = ( function ( APP, $, window, document ) {
 							imgCur.onload = function() {
 
 								//At the same time change the height of the canvas
-								renderer.view.style.width = $thisItem.find( 'img' ).width() + 'px';
-								renderer.view.style.height =$thisItem.find( 'img' ).height() + 'px';
+								renderer.view.style.width = $this.width() + 'px';
+								renderer.view.style.height = canvasHeights[index] + 'px';	
 
 							};
 
@@ -5539,19 +5586,9 @@ APP = ( function ( APP, $, window, document ) {
 							var video = document.getElementById( $thisItem.find( 'video' ).attr( 'id' ) );
 							video.addEventListener( 'loadedmetadata', function( e ) {
 
-								var	curW    = this.videoWidth,
-									curH    = this.videoHeight,
-									newW    = curW,
-									newH    = curH;
-
-								newW = $this.width();
-
-								//Scaled/Proportional Content 
-								newH = curH*(newW/curW);
-
 								//At the same time change the height of the canvas
-								renderer.view.style.width = newW + 'px';
-								renderer.view.style.height = newH + 'px';	
+								renderer.view.style.width = $this.width() + 'px';
+								renderer.view.style.height = canvasHeights[index] + 'px';	
 
 
 							}, false);	
@@ -5570,8 +5607,8 @@ APP = ( function ( APP, $, window, document ) {
 							imgCur.onload = function() {
 
 								//At the same time change the height of the canvas
-								renderer.view.style.width = $thisItem.find( 'img' ).width() + 'px';
-								renderer.view.style.height =$thisItem.find( 'img' ).height() + 'px';
+								renderer.view.style.width = $this.width() + 'px';
+								renderer.view.style.height = canvasHeights[index] + 'px';	
 
 							};
 
@@ -5650,6 +5687,7 @@ APP = ( function ( APP, $, window, document ) {
 				}// end effect
 				
 				
+				
 
 				//----------------------------------------------------------------------------------
 				//--------------------------------- 3D Rotating Effect -----------------------------
@@ -5677,13 +5715,16 @@ APP = ( function ( APP, $, window, document ) {
 						windowHalfY                 = $this.height() / 2;
 
 
+					
+					
 
 					//Add Geometries and Lights to the main container 
 					//-------------------------------------					
 					var init = function() {
 						$this.find( '.uix-advanced-slider-sp__item' ).each( function( index )  {
 
-							var $thisItem = $( this );
+							var $thisItem      = $( this ),
+								imgVideoHeight = null;
 
 							// create a scene, that will hold all our elements such as objects, cameras and lights.
 							var scene  = new THREE.Scene();
@@ -5722,7 +5763,6 @@ APP = ( function ( APP, $, window, document ) {
 							// Generate one plane geometries mesh to each scene
 							if ( $thisItem.find( 'video' ).length > 0 ) {
 
-
 								texture = new THREE.VideoTexture( document.getElementById( $thisItem.find( 'video' ).attr( 'id' ) ) );
 								texture.minFilter = THREE.LinearFilter;
 								texture.magFilter = THREE.LinearFilter;
@@ -5733,28 +5773,33 @@ APP = ( function ( APP, $, window, document ) {
 								texture.image.currentTime = 0;
 								texture.image.muted = false;
 								texture.image.pause();
-
-
+								
+							
 
 							} else {
+								
 								texture = new THREE.TextureLoader().load( $thisItem.find( 'img' ).attr( 'src' ) );
 								texture.generateMipmaps = false;
 								texture.wrapS = texture.wrapT = THREE.ClampToEdgeWrapping;
 								texture.minFilter = THREE.LinearFilter;
-							}
+								
+								
 
+							}
+						
 							// texture controller
 							texturesAll.push( texture );
-
-
-
+							
+							
+					
 
 							// Immediately use the texture for material creation
 							var spriteMat            = new THREE.MeshPhongMaterial( { map: texture } ),
-								imgRatio             = $this.width() / $this.height(),
-								geometry             = new THREE.BoxGeometry( imgRatio*15, 15, 2 ),
+								geometry             = new THREE.BoxGeometry( aspect*15, 15, 2 ),
 								displacementSprite   = new THREE.Mesh( geometry, spriteMat );
 
+							
+							
 							displacementSprite.position.set( -0.01, -0.01, 0 );
 							displacementSprite.rotation.set( 0, 0, 0 );
 							scene.add( displacementSprite );
@@ -6360,29 +6405,31 @@ APP = ( function ( APP, $, window, document ) {
 			if ( slider.hasClass( 'uix-advanced-slider-sp--eff-3d-rotating' ) ) {
 
 			}
-			
-			
-			
+
+
 			transitionInteractions( elementIndex, $items.filter( '.leave' ).index(), slider, 'in', dir );
 			
 
 			
 		}
 		
-			
 
-		
+								
+							
 	
 		/*
 		 * Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
 		 *
+		 * @param  {number} w                - The width that the canvas will be set.
+		 * @param  {number} h                - The height that the canvas will be set.
 		 * @return {void}                    - The constructor.
 		 */
-        function fixCanvasTagSize() {
+        function fixCanvasTagSize( w, h ) {
+
 			
-			TweenMax.to( '#' + rendererCanvasID, animSpeed/1000, { 
-				width : $sliderWrapper.width(),
-				height: $sliderWrapper.height()
+			TweenMax.to( ['#' + rendererCanvasID, '.uix-advanced-slider-sp__wrapper', '.uix-advanced-slider-sp__inner', '.uix-advanced-slider-sp__canvas-container' ], animSpeed/1000, { 
+				width : w,
+				height: h
 			} );
 
 		}
@@ -6465,6 +6512,7 @@ APP = ( function ( APP, $, window, document ) {
 		 */
         function transitionInteractions( elementIndex, prevElementIndex, slider, goType, dir ) {
 			
+			
 			if ( Modernizr.webgl ) {
 			
 				var $myRenderer           = $( '#' + rendererOuterID ),
@@ -6512,10 +6560,6 @@ APP = ( function ( APP, $, window, document ) {
 					} else {
 						
 						
-						//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
-						fixCanvasTagSize();
-							
-						
 						//Current item entry action
 						TweenMax.to( $myRenderer, animSpeed/1000, {
 							alpha : 0,
@@ -6526,6 +6570,7 @@ APP = ( function ( APP, $, window, document ) {
 								TweenMax.to( this.target, animSpeed/1000, {
 									alpha : 1
 								});			
+
 
 
 								//display the current item
@@ -6563,7 +6608,14 @@ APP = ( function ( APP, $, window, document ) {
 								}
 
 
-								
+
+
+								//Reset the height of the canvas when each item is switched
+								//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
+								//console.log( 'width: ' + windowWidth + ' | height: ' + canvasHeights[ elementIndex ] + ' | index: ' + elementIndex );
+								fixCanvasTagSize( windowWidth, canvasHeights[ elementIndex ] );
+
+
 								//display filters
 								TweenMax.set( curSp, {
 									pixi: {
@@ -6571,6 +6623,9 @@ APP = ( function ( APP, $, window, document ) {
 									},
 									alpha : 1,
 									onComplete    : function() {
+										
+
+										
 										TweenMax.to( this.target, animSpeed/1000, {
 											pixi: {
 												brightness: 1
@@ -6585,7 +6640,7 @@ APP = ( function ( APP, $, window, document ) {
 										
 									}
 								});		
-	
+
 
 
 
@@ -6648,7 +6703,9 @@ APP = ( function ( APP, $, window, document ) {
 					} else {
 						
 						
+						
 						//Video sprite initialization
+						//Need to ensure that the video tag exists
 						setTimeout( function() {
 							for ( var k = 0; k < spTotal; k++ ) {
 
@@ -6680,14 +6737,15 @@ APP = ( function ( APP, $, window, document ) {
 								videoSource2.muted = false;
 							}	
 
+							
+							//Reset the height of the canvas when each item is switched
+							//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
+							//console.log( 'width: ' + windowWidth + ' | height: ' + canvasHeights[ elementIndex ] + ' | index: ' + elementIndex );
+							fixCanvasTagSize( windowWidth, canvasHeights[ elementIndex ] );
 	
-						}, animSpeed*2 );
+						}, 100 );
 						
-						
-						//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
-						fixCanvasTagSize();
-						
-					
+
 						
 						//Current item entry action
 						var baseTimeline = new TimelineMax( { onComplete: function () {
@@ -6714,6 +6772,8 @@ APP = ( function ( APP, $, window, document ) {
 						.to( displacementFilter.scale, animSpeed/1000, { x: 0, y: 0, ease: Power2.easeOut }, (animSpeed/2)/1000 )
 						.to( $current, animSpeed/1000, { alpha: 1, ease: Power2.easeOut }, 'final' );
 
+						
+						
 						
 
 						//Add new ripple each time mouse
@@ -6770,9 +6830,6 @@ APP = ( function ( APP, $, window, document ) {
 						
 					} else {
 						
-						//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
-						fixCanvasTagSize();
-								
 						
 						//Current item entry action
 						TweenMax.to( $myRenderer, animSpeed/1000, {
@@ -6821,6 +6878,12 @@ APP = ( function ( APP, $, window, document ) {
 								}
 
 
+								//Reset the height of the canvas when each item is switched
+								//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
+								//console.log( 'width: ' + windowWidth + ' | height: ' + canvasHeights[ elementIndex ] + ' | index: ' + elementIndex );
+								fixCanvasTagSize( windowWidth, canvasHeights[ elementIndex ] );	
+
+								
 								//display filters
 								
 								//sprite
@@ -6909,10 +6972,6 @@ APP = ( function ( APP, $, window, document ) {
 					} else {
 						
 						
-						//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
-						fixCanvasTagSize();
-								
-						
 						//Current item entry action
 						TweenMax.to( $myRenderer, animSpeed/1000, {
 							alpha : 0,
@@ -6958,7 +7017,14 @@ APP = ( function ( APP, $, window, document ) {
 									if ( Object.prototype.toString.call( videoSource2.play ) == '[object Function]' ) videoSource2.play();
 									videoSource2.muted = false;
 								}
+								
+								
+								//Reset the height of the canvas when each item is switched
+								//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
+								//console.log( 'width: ' + windowWidth + ' | height: ' + canvasHeights[ elementIndex ] + ' | index: ' + elementIndex );
+								fixCanvasTagSize( windowWidth, canvasHeights[ elementIndex ] );	
 
+								
 
 								//display filters
 								
@@ -7049,6 +7115,7 @@ APP = ( function ( APP, $, window, document ) {
 					} else {
 						
 						//Video sprite initialization
+						//Need to ensure that the video tag exists
 						setTimeout( function() {
 							for ( var m = 0; m < spTotal; m++ ) {
 
@@ -7080,15 +7147,16 @@ APP = ( function ( APP, $, window, document ) {
 								videoSource2.muted = false;
 							}	
 
-	
-						}, animSpeed*2 );
-						
-						
+							//Reset the height of the canvas when each item is switched
+							//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
+							//console.log( 'width: ' + windowWidth + ' | height: ' + canvasHeights[ elementIndex ] + ' | index: ' + elementIndex );
+							fixCanvasTagSize( windowWidth, canvasHeights[ elementIndex ] );		
 
-						//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
-						fixCanvasTagSize();
-							
-					
+
+						}, 100 );
+						
+						
+						
 						
 						//Current item entry action
 						var restoreX,
@@ -7211,10 +7279,6 @@ APP = ( function ( APP, $, window, document ) {
 						
 	
 					} else {
-						
-						//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
-						fixCanvasTagSize();
-								
 						
 						//Current item entry action
 						TweenMax.to( $myRenderer, animSpeed/1000, {
@@ -8645,58 +8709,6 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
- * <!-- Dropdown Menu 2 (Multi-level drop-down navigation) -->
- *************************************
- */	
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.DROPDOWN_MENU2               = APP.DROPDOWN_MENU2 || {};
-	APP.DROPDOWN_MENU2.version       = '0.0.1';
-    APP.DROPDOWN_MENU2.documentReady = function( $ ) {
-
-		var $verticalMenuLi = $( '.uix-vertical-menu li' );
-		
-		$verticalMenuLi.find( '> a' ).on( 'click', function( e ) {
-			e.preventDefault();
-			
-			//Hide other all sibling <ul> of the selected element
-			$( this ).parent( 'li' ).siblings()
-			                        .removeClass( 'active' )
-									.find( '> ul' ).slideUp( 500 );
-
-			
-			var $sub = $( this ).parent( 'li' ).children( 'ul' );
-
-			$sub.slideToggle( 500 );
-			$( this ).parent( 'li' ).toggleClass( 'active' );
-
-        });
-		
-		//Add multilevel indicator arrow
-		if ( $verticalMenuLi.find( '> a .uix-vertical-menu__arrow' ).length == 0 ) {
-			$verticalMenuLi.find( '> a' ).append( '<span class="uix-vertical-menu__arrow"></span>' );
-		}
-        
-		$verticalMenuLi.each( function() {
-			var len = $( this ).find( 'ul' ).length;
-			if ( len == 0 ) {
-				$( this ).children( 'a' ).children( '.uix-vertical-menu__arrow' ).hide();
-			}
-		});
-		
-    };
-
-    APP.components.documentReady.push( APP.DROPDOWN_MENU2.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
-/* 
- *************************************
  * <!-- Dropdown Menu -->
  *************************************
  */	
@@ -8759,6 +8771,58 @@ APP = ( function ( APP, $, window, document ) {
     };
 
     APP.components.documentReady.push( APP.DROPDOWN_MENU.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+/* 
+ *************************************
+ * <!-- Dropdown Menu 2 (Multi-level drop-down navigation) -->
+ *************************************
+ */	
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.DROPDOWN_MENU2               = APP.DROPDOWN_MENU2 || {};
+	APP.DROPDOWN_MENU2.version       = '0.0.1';
+    APP.DROPDOWN_MENU2.documentReady = function( $ ) {
+
+		var $verticalMenuLi = $( '.uix-vertical-menu li' );
+		
+		$verticalMenuLi.find( '> a' ).on( 'click', function( e ) {
+			e.preventDefault();
+			
+			//Hide other all sibling <ul> of the selected element
+			$( this ).parent( 'li' ).siblings()
+			                        .removeClass( 'active' )
+									.find( '> ul' ).slideUp( 500 );
+
+			
+			var $sub = $( this ).parent( 'li' ).children( 'ul' );
+
+			$sub.slideToggle( 500 );
+			$( this ).parent( 'li' ).toggleClass( 'active' );
+
+        });
+		
+		//Add multilevel indicator arrow
+		if ( $verticalMenuLi.find( '> a .uix-vertical-menu__arrow' ).length == 0 ) {
+			$verticalMenuLi.find( '> a' ).append( '<span class="uix-vertical-menu__arrow"></span>' );
+		}
+        
+		$verticalMenuLi.each( function() {
+			var len = $( this ).find( 'ul' ).length;
+			if ( len == 0 ) {
+				$( this ).children( 'a' ).children( '.uix-vertical-menu__arrow' ).hide();
+			}
+		});
+		
+    };
+
+    APP.components.documentReady.push( APP.DROPDOWN_MENU2.documentReady );
     return APP;
 
 }( APP, jQuery, window, document ) );
@@ -14629,42 +14693,6 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
-/* 
- *************************************
- * <!-- Theme Scripts  -->
- *************************************
- */
-
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-    
-    APP.INDEX               = APP.INDEX || {};
-	APP.INDEX.version       = '0.0.1';
-    APP.INDEX.documentReady = function( $ ) {
-
-	    //your code here...
-		
-    };
-	
-    APP.INDEX.pageLoaded    = function() {
-
-	    //your code here...
-		
-    };
-	
-
-    APP.components.documentReady.push( APP.INDEX.documentReady );
-    APP.components.pageLoaded.push( APP.INDEX.pageLoaded );
-	
-	
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
-
 
 /* 
  *************************************
@@ -14775,6 +14803,42 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
+/* 
+ *************************************
+ * <!-- Theme Scripts  -->
+ *************************************
+ */
+
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+    
+    APP.INDEX               = APP.INDEX || {};
+	APP.INDEX.version       = '0.0.1';
+    APP.INDEX.documentReady = function( $ ) {
+
+	    //your code here...
+		
+    };
+	
+    APP.INDEX.pageLoaded    = function() {
+
+	    //your code here...
+		
+    };
+	
+
+    APP.components.documentReady.push( APP.INDEX.documentReady );
+    APP.components.pageLoaded.push( APP.INDEX.pageLoaded );
+	
+	
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+
 
 /* 
  *************************************
@@ -14862,6 +14926,482 @@ APP = ( function ( APP, $, window, document ) {
 }( APP, jQuery, window, document ) );
 
 
+
+
+
+
+/* 
+ *************************************
+ * <!-- Custom Lightbox -->
+ *************************************
+ */
+
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+
+    APP.LIGHTBOX               = APP.LIGHTBOX || {};
+	APP.LIGHTBOX.version       = '0.1.0';
+    APP.LIGHTBOX.pageLoaded    = function() {
+
+		if ( $( '.uix-lightbox__container' ).length == 0 ) {
+			$( 'body' ).prepend( '<div class="uix-lightbox__loading is-loaded uix-t-c"><i class="fa fa-spinner fa-spin"></i> Loading...</div><a class="uix-lightbox__original__close" href="#"></a><div class="uix-lightbox__container"><div class="uix-lightbox__inner"><div class="uix-lightbox__html"></div><span class="uix-lightbox__close"></span><p class="title"></p></div></div><div class="uix-lightbox__container-mask"></div><div class="uix-lightbox__close-fixed"></div>' );
+		}
+		
+
+		var	$lbCon           = $( '.uix-lightbox__inner' ),
+			$lbWrapper       = $( '.uix-lightbox__container' ),
+			$lbMask          = $( '.uix-lightbox__container-mask' ),
+			lbCloseEl        = '.uix-lightbox__container .uix-lightbox__close',
+			lbCloseFixedEl   = '.uix-lightbox__close-fixed',
+			$lbLoader        = $( '.uix-lightbox__loading' ),
+			$lbLargeImgClose = $( '.uix-lightbox__original__close' ),
+			$lbContent       = $lbCon.find( '.uix-lightbox__html' ),
+			tempID           = 'lightbox-' + UIX_GUID.newGuid();
+		
+		$( document ).on( 'click touchstart', '.uix-lightbox__trigger', function() { 
+
+			var $this         = $( this ),
+				dataPhoto     = $this.data( 'lb-src' ),
+				dataHtmlID    = $this.data( 'lb-html' ),
+				dataFixed     = $this.data( 'lb-fixed' ),
+				dataMaskClose = $this.data( 'lb-mask-close' ),
+				dataMethod    = $this.data( 'lb-ajax-method' ),
+				dataAjaxCon   = $this.data( 'lb-ajax-content' ),
+				htmlContent   = '',
+				imgSrcStr     = '',
+				imgSrcStrToW  = '';
+			
+
+			
+		
+			if( typeof dataFixed === typeof undefined ) {
+				dataFixed = true;
+			}
+			if( typeof dataMaskClose === typeof undefined ) {
+				dataMaskClose = false;
+			}	
+			
+			if( typeof dataMethod === typeof undefined ) {
+				dataMethod = 'POST';
+			}		
+			
+			//Display loading
+			$lbLoader.removeClass( 'is-loaded' );	
+	
+			//Reset the wrapper position
+			$lbWrapper.css( 'margin-top', 0 );	
+			
+
+			if ( !dataFixed ) {
+				$lbWrapper.addClass( 'js-uix-no-fixed' );
+				$( lbCloseEl ).addClass( 'js-uix-no-fixed' );
+				$( lbCloseFixedEl ).addClass( 'active' );
+				
+				//Initialize the wrapper position
+				$lbWrapper.css( 'margin-top', $( window ).scrollTop() + 'px' );	
+				
+			}
+			
+			
+			//Reset current container type
+			$lbCon.removeClass( 'js-uix-custom js-uix-pure-image' );
+			
+		
+			// Locks the page
+			if ( !$lbWrapper.hasClass( 'js-uix-no-fixed' ) ) {
+				$.scrollLock( true );
+			}
+			
+			
+
+			//-------- If it is photo
+			//-----------------------------
+			if( typeof dataPhoto != typeof undefined && dataPhoto != '' ) {
+				
+				
+				$( lbCloseEl ).show();
+				$lbWrapper.show();
+				$lbMask.show();
+				$lbCon.show();
+				
+				if ( dataPhoto.indexOf( '[' ) >= 0 &&  dataPhoto.indexOf( ']' ) >= 0 ) {
+					imgSrcStr = JSON.parse( dataPhoto.replace(/([a-zA-Z0-9]+?):/g, '"$1":').replace(/'/g,'"') );
+				} else {
+					imgSrcStr = dataPhoto;
+					
+				}
+				
+				
+				//Judging whether multiple image sets
+				if ( Object.prototype.toString.call( imgSrcStr ) =='[object Array]' ) {
+					
+					var largePhotos = '',
+						thumbs      = '';
+					
+					imgSrcStrToW = imgSrcStr[0].large;
+					
+					//push the large photos
+					largePhotos += '<div class="uix-lightbox__photo-container uix-lightbox__photo-sets-container"><a href="javascript:" class="uix-lightbox__photo-sets__prev"></a><a href="javascript:" class="uix-lightbox__photo-sets__next"></a><ul>';
+					for ( var i = 0; i < imgSrcStr.length; i++ ) {
+						
+						
+						largePhotos += '<li>';
+						largePhotos += '	<a class="uix-lightbox__original__link" href="#'+tempID+'-sets-'+i+'">';
+						largePhotos += '	   <img src="'+ imgSrcStr[i].large +'" alt="">';
+						largePhotos += '	</a>';
+						largePhotos += '	<div class="uix-lightbox__original__target" id="'+tempID+'-sets-'+i+'">';
+						largePhotos += '	   <img src="'+ imgSrcStr[i].large +'" alt="">';
+						largePhotos += '	</div>';
+						largePhotos += '</li>'; 
+
+					}
+					largePhotos += '</ul></div>';
+					
+					//push the thumbs
+					thumbs += '<div class="uix-lightbox__thumb-container"><ul>';
+					for ( var k = 0; k < imgSrcStr.length; k++ ) {
+						
+						var active = ( k == 0 ) ? 'class="active"' : '';
+						
+						thumbs += '<li '+active+'><img src="'+ imgSrcStr[k].thumb +'" alt=""></li>';
+					}
+					thumbs += '</ul></div>';
+					
+					htmlContent = largePhotos + thumbs;
+					
+
+					
+				} else {
+
+					//Only one image
+					imgSrcStrToW = imgSrcStr;
+					htmlContent += '<div class="uix-lightbox__photo-container">';
+					htmlContent += '	<a class="uix-lightbox__original__link" href="#'+tempID+'">';
+					htmlContent += '	   <img src="'+ imgSrcStr +'" alt="">';
+					htmlContent += '	</a>';
+					htmlContent += '	<div class="uix-lightbox__original__target" id="'+tempID+'">';
+					htmlContent += '	   <img src="'+ imgSrcStr +'" alt="">';
+					htmlContent += '	</div>';
+					htmlContent += '</div>'; 
+					
+				}
+						
+				$lbContent.html( htmlContent ).promise().done( function(){
+
+					//Set current container type
+					$lbCon.addClass( 'js-uix-pure-image' );
+
+					//Set container width
+					var img = new Image();
+					img.src = imgSrcStrToW;
+					img.onload = function() {
+						
+						//remove loading
+						$lbLoader.addClass( 'is-loaded' );
+						
+						var sw     = $( window ).width() - 30,
+							ow     = this.width,
+							oh     = this.height,
+							ratioH = oh/ow,
+							ratioW = ow/oh,
+							w      = ( ow > 1000 ) ? 1000 : ow,
+							h;
+				
+						if ( w > sw ) w = sw;
+						
+						h = w * ratioH;
+						
+					
+						//Prevent height overflow
+						if ( h > $( window ).height() ) h = $( window ).height() * 0.95;
+						
+					
+						$lbCon.css( {
+							'width': w + 'px'
+						} );
+						
+
+						//Don't write variables outside
+						var $lbSetsContainer = $( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' );
+						$lbSetsContainer.css( {
+							'height': h + 'px'
+						} );
+						
+						
+						//Set a new height & width of inside images
+						$lbContent.find( '.uix-lightbox__photo-sets-container ul > li img' ).css( {
+							'height': h + 'px'
+						} );
+
+						
+						if ( ! $( 'body' ).hasClass( 'rtl' ) ) {
+							$lbContent.find( '.uix-lightbox__photo-sets-container' ).css( {
+								'width': 'calc('+ h*ratioW +'px + 6rem)',
+								'margin-left': '-3rem'
+							} );
+	
+						} else {
+							$lbContent.find( '.uix-lightbox__photo-sets-container' ).css( {
+								'width': 'calc('+ h*ratioW +'px + 6rem)',
+								'margin-right': '-3rem'
+							} );
+	
+						}
+						
+						
+						//If the image is larger than the current window, it will display at the top.
+						//Don't write variables outside
+						var $lbTarImg = $( '.uix-lightbox__photo-container > .uix-lightbox__original__target' );
+						if ( oh > $( window ).height() ) {
+							$lbTarImg.addClass( 'uix-lightbox__original__target--imgfull' );
+						} else {
+							$lbTarImg.removeClass( 'uix-lightbox__original__target--imgfull' );
+						}
+						
+					
+						
+						
+					};
+					
+					
+					$lbCon.find( '> .uix-lightbox__html' ).removeClass( 'js-uix-no-img' );
+
+				});		
+
+				
+			}	
+			
+			
+			//-------- If it is not photo
+			//-----------------------------
+			if( typeof dataHtmlID != typeof undefined && dataHtmlID != '' ) {
+				dataHtmlID = dataHtmlID.replace( '#', '' );
+
+				$( lbCloseEl ).show();
+				$lbWrapper.show();
+				$lbMask.show();
+				$lbCon.show();
+				$lbContent.html( $( '#' + dataHtmlID ).html() ).promise().done( function(){
+					
+					//Set current container type
+					$lbCon.addClass( 'js-uix-custom' );
+					
+					//Set container width
+					if ( $lbCon.find( '> .uix-lightbox__html .uix-lightbox__content' ).length > 0 ) {
+						
+						if ( $( window ).width() <= 768 ) {
+							$lbCon.css( 'width', $( window ).width() - 10 + 'px' );
+						} else {
+							$lbCon.css( 'width', $lbCon.find( '> .uix-lightbox__html .uix-lightbox__content' ).width() + 'px' );
+						}
+						
+						
+						$lbCon.find( '> .uix-lightbox__html' ).addClass( 'js-uix-no-img' );
+						
+						
+						//Ajax-loaded content
+						if( typeof dataAjaxCon != typeof undefined && dataAjaxCon != '' ) {
+							
+							var $ajaxContentContainer = $lbCon.find( '> .uix-lightbox__html .uix-lightbox__content > div' );
+							
+							$ajaxContentContainer.html( $ajaxContentContainer.data( 'loading-text' ) );
+							
+							$.ajax({
+								url      : dataAjaxCon,
+								method   : dataMethod,
+								dataType : 'html',
+								success  : function( response ) { 
+									$ajaxContentContainer.html( $( response ).find( '.uix-entry__content' ).html() );
+
+								 },
+								 error : function( XMLHttpRequest, textStatus, errorThrown ) {
+
+								 }
+							});
+
+						}
+						
+						
+					}
+
+				});
+				
+				
+
+			}	
+			
+
+		});
+
+		
+		//Close the window
+		$( document ).on( 'click', lbCloseEl, function() {
+			customLBCloseEvent();
+		});
+
+		
+		$( document ).on( 'click', lbCloseFixedEl, function() {
+			customLBCloseEvent();
+		});	
+		
+
+		//Click thumbnail to switch large photo
+		
+		function lightboxThumbSwitch( index, obj ) {
+			var $largePhoto = obj.closest( '.uix-lightbox__html' ).find( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' ),
+				$thumb      = obj.closest( '.uix-lightbox__html' ).find( '.uix-lightbox__thumb-container li' ),
+				curImgH     = 0;
+
+			
+			$thumb.removeClass( 'active' );
+			obj.addClass( 'active' );
+			
+			$largePhoto.find( 'li' ).fadeOut( 300 ).removeClass( 'active' );
+			$largePhoto.find( 'li' ).eq( index ).addClass( 'active' ).fadeIn( 300, function() {
+				
+				//Reset the container height
+				var imgClick = new Image();
+				imgClick.src = $largePhoto.find( 'li' ).eq( index ).find( 'img' ).attr( 'src' );
+				imgClick.onload = function() {
+					
+					//remove loading
+					$lbLoader.addClass( 'is-loaded' );
+
+
+					
+					var sw     = $( window ).width() - 30,
+						ow     = this.width,
+						oh     = this.height,
+						ratioH = oh/ow,
+						w      = ( ow > 1000 ) ? 1000 : ow,
+						h;
+					
+
+					if ( w > sw ) w = sw;
+
+					h = w * ratioH;
+
+
+					//Prevent height overflow
+					if ( h > $( window ).height() ) h = $( window ).height() * 0.95;
+
+					
+					$largePhoto.css( {
+						'height': h + 'px'
+					} )
+					.find( 'img' ).css( {
+						'height': h + 'px'
+					} );	
+					
+
+					//If the image is larger than the current window, it will display at the top.
+					//Don't write variables outside
+					var $lbTarImg = $largePhoto.find( 'li' ).eq( index ).find( '.uix-lightbox__original__target' );
+					if ( oh > $( window ).height() ) {
+						$lbTarImg.addClass( 'uix-lightbox__original__target--imgfull' );
+					} else {
+						$lbTarImg.removeClass( 'uix-lightbox__original__target--imgfull' );
+					}
+
+					
+
+				};
+
+				
+
+			});	
+		}
+		
+		
+		
+		$( document ).on( 'click', '.uix-lightbox__thumb-container li', function() {
+			lightboxThumbSwitch( $( this ).index(), $( this ) );
+			
+		});		
+		
+		$( document ).on( 'click', '.uix-lightbox__photo-sets-container > a', function() {
+			var $largePhoto = $( this ).closest( '.uix-lightbox__html' ).find( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' ),
+				$thumb      = $( this ).closest( '.uix-lightbox__html' ).find( '.uix-lightbox__thumb-container li' ),
+				total       = $thumb.length,
+				curIndex    = $thumb.filter( '.active' ).index(),
+				prevIndex   = curIndex - 1,
+				nextIndex   = curIndex + 1;
+			
+			
+			if ( prevIndex < 0 ) prevIndex = total - 1;
+			if ( nextIndex > total - 1 ) nextIndex = 0;
+			
+			
+			if ( $( this ).hasClass( 'uix-lightbox__photo-sets__prev' ) ) {
+				lightboxThumbSwitch( prevIndex, $thumb.eq( prevIndex ) );
+			}
+			
+			if ( $( this ).hasClass( 'uix-lightbox__photo-sets__next' ) ) {
+				lightboxThumbSwitch( nextIndex, $thumb.eq( nextIndex ) );
+			}
+			
+			
+		});		
+		
+		
+		
+		
+		function customLBCloseEvent() {
+			//Remove all dynamic classes
+			$lbWrapper.removeClass( 'js-uix-no-fixed' );
+			$( lbCloseEl ).removeClass( 'js-uix-no-fixed' );
+			$( lbCloseFixedEl ).removeClass( 'active' );
+			
+			$( 'html' ).css( 'overflow-y', 'auto' );
+			
+			//Reset current container type
+			$lbCon.removeClass( 'js-uix-custom js-uix-pure-image' );
+			
+			
+			//close windows
+			$lbWrapper.hide();
+			$lbMask.hide();
+			
+			
+			//Changing The Site URL
+			var href = window.location.href.substr( 0, window.location.href.indexOf( '#' ) );
+			history.pushState( '', document.title, href );
+			
+			// Unlocks the page
+			$.scrollLock( false );
+	
+			
+		}
+		
+		
+		
+		
+		
+		
+		//Close/Open enlarge image
+		$( document ).on( 'click', '.uix-lightbox__original__link', function( e ) {
+			$( 'html' ).css( 'overflow-y', 'hidden' );
+			$lbLargeImgClose.addClass( 'active' );
+
+		});	
+		
+		$( document ).on( 'click', '.uix-lightbox__original__close', function( e ) {
+            $lbLargeImgClose.removeClass( 'active' );
+			$( 'html' ).css( 'overflow-y', 'auto' );
+		});
+
+		
+		
+		
+		    
+		
+    };
+
+    APP.components.pageLoaded.push( APP.LIGHTBOX.pageLoaded );
+    return APP;
+
+}( APP, jQuery, window, document ) );
 
 
 
@@ -15422,482 +15962,6 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
-
-
-
-
-/* 
- *************************************
- * <!-- Custom Lightbox -->
- *************************************
- */
-
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-
-    APP.LIGHTBOX               = APP.LIGHTBOX || {};
-	APP.LIGHTBOX.version       = '0.1.0';
-    APP.LIGHTBOX.pageLoaded    = function() {
-
-		if ( $( '.uix-lightbox__container' ).length == 0 ) {
-			$( 'body' ).prepend( '<div class="uix-lightbox__loading is-loaded uix-t-c"><i class="fa fa-spinner fa-spin"></i> Loading...</div><a class="uix-lightbox__original__close" href="#"></a><div class="uix-lightbox__container"><div class="uix-lightbox__inner"><div class="uix-lightbox__html"></div><span class="uix-lightbox__close"></span><p class="title"></p></div></div><div class="uix-lightbox__container-mask"></div><div class="uix-lightbox__close-fixed"></div>' );
-		}
-		
-
-		var	$lbCon           = $( '.uix-lightbox__inner' ),
-			$lbWrapper       = $( '.uix-lightbox__container' ),
-			$lbMask          = $( '.uix-lightbox__container-mask' ),
-			lbCloseEl        = '.uix-lightbox__container .uix-lightbox__close',
-			lbCloseFixedEl   = '.uix-lightbox__close-fixed',
-			$lbLoader        = $( '.uix-lightbox__loading' ),
-			$lbLargeImgClose = $( '.uix-lightbox__original__close' ),
-			$lbContent       = $lbCon.find( '.uix-lightbox__html' ),
-			tempID           = 'lightbox-' + UIX_GUID.newGuid();
-		
-		$( document ).on( 'click touchstart', '.uix-lightbox__trigger', function() { 
-
-			var $this         = $( this ),
-				dataPhoto     = $this.data( 'lb-src' ),
-				dataHtmlID    = $this.data( 'lb-html' ),
-				dataFixed     = $this.data( 'lb-fixed' ),
-				dataMaskClose = $this.data( 'lb-mask-close' ),
-				dataMethod    = $this.data( 'lb-ajax-method' ),
-				dataAjaxCon   = $this.data( 'lb-ajax-content' ),
-				htmlContent   = '',
-				imgSrcStr     = '',
-				imgSrcStrToW  = '';
-			
-
-			
-		
-			if( typeof dataFixed === typeof undefined ) {
-				dataFixed = true;
-			}
-			if( typeof dataMaskClose === typeof undefined ) {
-				dataMaskClose = false;
-			}	
-			
-			if( typeof dataMethod === typeof undefined ) {
-				dataMethod = 'POST';
-			}		
-			
-			//Display loading
-			$lbLoader.removeClass( 'is-loaded' );	
-	
-			//Reset the wrapper position
-			$lbWrapper.css( 'margin-top', 0 );	
-			
-
-			if ( !dataFixed ) {
-				$lbWrapper.addClass( 'js-uix-no-fixed' );
-				$( lbCloseEl ).addClass( 'js-uix-no-fixed' );
-				$( lbCloseFixedEl ).addClass( 'active' );
-				
-				//Initialize the wrapper position
-				$lbWrapper.css( 'margin-top', $( window ).scrollTop() + 'px' );	
-				
-			}
-			
-			
-			//Reset current container type
-			$lbCon.removeClass( 'js-uix-custom js-uix-pure-image' );
-			
-		
-			// Locks the page
-			if ( !$lbWrapper.hasClass( 'js-uix-no-fixed' ) ) {
-				$.scrollLock( true );
-			}
-			
-			
-
-			//-------- If it is photo
-			//-----------------------------
-			if( typeof dataPhoto != typeof undefined && dataPhoto != '' ) {
-				
-				
-				$( lbCloseEl ).show();
-				$lbWrapper.show();
-				$lbMask.show();
-				$lbCon.show();
-				
-				if ( dataPhoto.indexOf( '[' ) >= 0 &&  dataPhoto.indexOf( ']' ) >= 0 ) {
-					imgSrcStr = JSON.parse( dataPhoto.replace(/([a-zA-Z0-9]+?):/g, '"$1":').replace(/'/g,'"') );
-				} else {
-					imgSrcStr = dataPhoto;
-					
-				}
-				
-				
-				//Judging whether multiple image sets
-				if ( Object.prototype.toString.call( imgSrcStr ) =='[object Array]' ) {
-					
-					var largePhotos = '',
-						thumbs      = '';
-					
-					imgSrcStrToW = imgSrcStr[0].large;
-					
-					//push the large photos
-					largePhotos += '<div class="uix-lightbox__photo-container uix-lightbox__photo-sets-container"><a href="javascript:" class="uix-lightbox__photo-sets__prev"></a><a href="javascript:" class="uix-lightbox__photo-sets__next"></a><ul>';
-					for ( var i = 0; i < imgSrcStr.length; i++ ) {
-						
-						
-						largePhotos += '<li>';
-						largePhotos += '	<a class="uix-lightbox__original__link" href="#'+tempID+'-sets-'+i+'">';
-						largePhotos += '	   <img src="'+ imgSrcStr[i].large +'" alt="">';
-						largePhotos += '	</a>';
-						largePhotos += '	<div class="uix-lightbox__original__target" id="'+tempID+'-sets-'+i+'">';
-						largePhotos += '	   <img src="'+ imgSrcStr[i].large +'" alt="">';
-						largePhotos += '	</div>';
-						largePhotos += '</li>'; 
-
-					}
-					largePhotos += '</ul></div>';
-					
-					//push the thumbs
-					thumbs += '<div class="uix-lightbox__thumb-container"><ul>';
-					for ( var k = 0; k < imgSrcStr.length; k++ ) {
-						
-						var active = ( k == 0 ) ? 'class="active"' : '';
-						
-						thumbs += '<li '+active+'><img src="'+ imgSrcStr[k].thumb +'" alt=""></li>';
-					}
-					thumbs += '</ul></div>';
-					
-					htmlContent = largePhotos + thumbs;
-					
-
-					
-				} else {
-
-					//Only one image
-					imgSrcStrToW = imgSrcStr;
-					htmlContent += '<div class="uix-lightbox__photo-container">';
-					htmlContent += '	<a class="uix-lightbox__original__link" href="#'+tempID+'">';
-					htmlContent += '	   <img src="'+ imgSrcStr +'" alt="">';
-					htmlContent += '	</a>';
-					htmlContent += '	<div class="uix-lightbox__original__target" id="'+tempID+'">';
-					htmlContent += '	   <img src="'+ imgSrcStr +'" alt="">';
-					htmlContent += '	</div>';
-					htmlContent += '</div>'; 
-					
-				}
-						
-				$lbContent.html( htmlContent ).promise().done( function(){
-
-					//Set current container type
-					$lbCon.addClass( 'js-uix-pure-image' );
-
-					//Set container width
-					var img = new Image();
-					img.src = imgSrcStrToW;
-					img.onload = function() {
-						
-						//remove loading
-						$lbLoader.addClass( 'is-loaded' );
-						
-						var sw     = $( window ).width() - 30,
-							ow     = this.width,
-							oh     = this.height,
-							ratioH = oh/ow,
-							ratioW = ow/oh,
-							w      = ( ow > 1000 ) ? 1000 : ow,
-							h;
-				
-						if ( w > sw ) w = sw;
-						
-						h = w * ratioH;
-						
-					
-						//Prevent height overflow
-						if ( h > $( window ).height() ) h = $( window ).height() * 0.95;
-						
-					
-						$lbCon.css( {
-							'width': w + 'px'
-						} );
-						
-
-						//Don't write variables outside
-						var $lbSetsContainer = $( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' );
-						$lbSetsContainer.css( {
-							'height': h + 'px'
-						} );
-						
-						
-						//Set a new height & width of inside images
-						$lbContent.find( '.uix-lightbox__photo-sets-container ul > li img' ).css( {
-							'height': h + 'px'
-						} );
-
-						
-						if ( ! $( 'body' ).hasClass( 'rtl' ) ) {
-							$lbContent.find( '.uix-lightbox__photo-sets-container' ).css( {
-								'width': 'calc('+ h*ratioW +'px + 6rem)',
-								'margin-left': '-3rem'
-							} );
-	
-						} else {
-							$lbContent.find( '.uix-lightbox__photo-sets-container' ).css( {
-								'width': 'calc('+ h*ratioW +'px + 6rem)',
-								'margin-right': '-3rem'
-							} );
-	
-						}
-						
-						
-						//If the image is larger than the current window, it will display at the top.
-						//Don't write variables outside
-						var $lbTarImg = $( '.uix-lightbox__photo-container > .uix-lightbox__original__target' );
-						if ( oh > $( window ).height() ) {
-							$lbTarImg.addClass( 'uix-lightbox__original__target--imgfull' );
-						} else {
-							$lbTarImg.removeClass( 'uix-lightbox__original__target--imgfull' );
-						}
-						
-					
-						
-						
-					};
-					
-					
-					$lbCon.find( '> .uix-lightbox__html' ).removeClass( 'js-uix-no-img' );
-
-				});		
-
-				
-			}	
-			
-			
-			//-------- If it is not photo
-			//-----------------------------
-			if( typeof dataHtmlID != typeof undefined && dataHtmlID != '' ) {
-				dataHtmlID = dataHtmlID.replace( '#', '' );
-
-				$( lbCloseEl ).show();
-				$lbWrapper.show();
-				$lbMask.show();
-				$lbCon.show();
-				$lbContent.html( $( '#' + dataHtmlID ).html() ).promise().done( function(){
-					
-					//Set current container type
-					$lbCon.addClass( 'js-uix-custom' );
-					
-					//Set container width
-					if ( $lbCon.find( '> .uix-lightbox__html .uix-lightbox__content' ).length > 0 ) {
-						
-						if ( $( window ).width() <= 768 ) {
-							$lbCon.css( 'width', $( window ).width() - 10 + 'px' );
-						} else {
-							$lbCon.css( 'width', $lbCon.find( '> .uix-lightbox__html .uix-lightbox__content' ).width() + 'px' );
-						}
-						
-						
-						$lbCon.find( '> .uix-lightbox__html' ).addClass( 'js-uix-no-img' );
-						
-						
-						//Ajax-loaded content
-						if( typeof dataAjaxCon != typeof undefined && dataAjaxCon != '' ) {
-							
-							var $ajaxContentContainer = $lbCon.find( '> .uix-lightbox__html .uix-lightbox__content > div' );
-							
-							$ajaxContentContainer.html( $ajaxContentContainer.data( 'loading-text' ) );
-							
-							$.ajax({
-								url      : dataAjaxCon,
-								method   : dataMethod,
-								dataType : 'html',
-								success  : function( response ) { 
-									$ajaxContentContainer.html( $( response ).find( '.uix-entry__content' ).html() );
-
-								 },
-								 error : function( XMLHttpRequest, textStatus, errorThrown ) {
-
-								 }
-							});
-
-						}
-						
-						
-					}
-
-				});
-				
-				
-
-			}	
-			
-
-		});
-
-		
-		//Close the window
-		$( document ).on( 'click', lbCloseEl, function() {
-			customLBCloseEvent();
-		});
-
-		
-		$( document ).on( 'click', lbCloseFixedEl, function() {
-			customLBCloseEvent();
-		});	
-		
-
-		//Click thumbnail to switch large photo
-		
-		function lightboxThumbSwitch( index, obj ) {
-			var $largePhoto = obj.closest( '.uix-lightbox__html' ).find( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' ),
-				$thumb      = obj.closest( '.uix-lightbox__html' ).find( '.uix-lightbox__thumb-container li' ),
-				curImgH     = 0;
-
-			
-			$thumb.removeClass( 'active' );
-			obj.addClass( 'active' );
-			
-			$largePhoto.find( 'li' ).fadeOut( 300 ).removeClass( 'active' );
-			$largePhoto.find( 'li' ).eq( index ).addClass( 'active' ).fadeIn( 300, function() {
-				
-				//Reset the container height
-				var imgClick = new Image();
-				imgClick.src = $largePhoto.find( 'li' ).eq( index ).find( 'img' ).attr( 'src' );
-				imgClick.onload = function() {
-					
-					//remove loading
-					$lbLoader.addClass( 'is-loaded' );
-
-
-					
-					var sw     = $( window ).width() - 30,
-						ow     = this.width,
-						oh     = this.height,
-						ratioH = oh/ow,
-						w      = ( ow > 1000 ) ? 1000 : ow,
-						h;
-					
-
-					if ( w > sw ) w = sw;
-
-					h = w * ratioH;
-
-
-					//Prevent height overflow
-					if ( h > $( window ).height() ) h = $( window ).height() * 0.95;
-
-					
-					$largePhoto.css( {
-						'height': h + 'px'
-					} )
-					.find( 'img' ).css( {
-						'height': h + 'px'
-					} );	
-					
-
-					//If the image is larger than the current window, it will display at the top.
-					//Don't write variables outside
-					var $lbTarImg = $largePhoto.find( 'li' ).eq( index ).find( '.uix-lightbox__original__target' );
-					if ( oh > $( window ).height() ) {
-						$lbTarImg.addClass( 'uix-lightbox__original__target--imgfull' );
-					} else {
-						$lbTarImg.removeClass( 'uix-lightbox__original__target--imgfull' );
-					}
-
-					
-
-				};
-
-				
-
-			});	
-		}
-		
-		
-		
-		$( document ).on( 'click', '.uix-lightbox__thumb-container li', function() {
-			lightboxThumbSwitch( $( this ).index(), $( this ) );
-			
-		});		
-		
-		$( document ).on( 'click', '.uix-lightbox__photo-sets-container > a', function() {
-			var $largePhoto = $( this ).closest( '.uix-lightbox__html' ).find( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' ),
-				$thumb      = $( this ).closest( '.uix-lightbox__html' ).find( '.uix-lightbox__thumb-container li' ),
-				total       = $thumb.length,
-				curIndex    = $thumb.filter( '.active' ).index(),
-				prevIndex   = curIndex - 1,
-				nextIndex   = curIndex + 1;
-			
-			
-			if ( prevIndex < 0 ) prevIndex = total - 1;
-			if ( nextIndex > total - 1 ) nextIndex = 0;
-			
-			
-			if ( $( this ).hasClass( 'uix-lightbox__photo-sets__prev' ) ) {
-				lightboxThumbSwitch( prevIndex, $thumb.eq( prevIndex ) );
-			}
-			
-			if ( $( this ).hasClass( 'uix-lightbox__photo-sets__next' ) ) {
-				lightboxThumbSwitch( nextIndex, $thumb.eq( nextIndex ) );
-			}
-			
-			
-		});		
-		
-		
-		
-		
-		function customLBCloseEvent() {
-			//Remove all dynamic classes
-			$lbWrapper.removeClass( 'js-uix-no-fixed' );
-			$( lbCloseEl ).removeClass( 'js-uix-no-fixed' );
-			$( lbCloseFixedEl ).removeClass( 'active' );
-			
-			$( 'html' ).css( 'overflow-y', 'auto' );
-			
-			//Reset current container type
-			$lbCon.removeClass( 'js-uix-custom js-uix-pure-image' );
-			
-			
-			//close windows
-			$lbWrapper.hide();
-			$lbMask.hide();
-			
-			
-			//Changing The Site URL
-			var href = window.location.href.substr( 0, window.location.href.indexOf( '#' ) );
-			history.pushState( '', document.title, href );
-			
-			// Unlocks the page
-			$.scrollLock( false );
-	
-			
-		}
-		
-		
-		
-		
-		
-		
-		//Close/Open enlarge image
-		$( document ).on( 'click', '.uix-lightbox__original__link', function( e ) {
-			$( 'html' ).css( 'overflow-y', 'hidden' );
-			$lbLargeImgClose.addClass( 'active' );
-
-		});	
-		
-		$( document ).on( 'click', '.uix-lightbox__original__close', function( e ) {
-            $lbLargeImgClose.removeClass( 'active' );
-			$( 'html' ).css( 'overflow-y', 'auto' );
-		});
-
-		
-		
-		
-		    
-		
-    };
-
-    APP.components.pageLoaded.push( APP.LIGHTBOX.pageLoaded );
-    return APP;
-
-}( APP, jQuery, window, document ) );
 
 
 
@@ -16959,6 +17023,429 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
+ * <!-- Full Page/One Page Transition -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.ONEPAGE               = APP.ONEPAGE || {};
+	APP.ONEPAGE.version       = '0.0.2';
+    APP.ONEPAGE.documentReady = function( $ ) {
+
+        var $window      = $( window ),
+		    windowWidth  = $window.width(),
+		    windowHeight = $window.height();
+		
+
+	    //Determine the direction of a jQuery scroll event
+		//Fix an issue for mousewheel event is too fast.
+		var lastAnimation      = 0,
+			quietPeriod        = 500, //Do not change it
+			animationTime      = 1000,//According to page transition animation changes
+			$sectionsContainer = $( '.uix-noemal-load__onepage-container' ),
+			$sections          = $sectionsContainer.find( '> section' ),
+			sectionTotal       = $sections.length,
+			topSectionSpacing  = 0,
+			$primaryMenu       = $( '.uix-menu' ),
+			$sidefixedMenu     = $( '.uix-menu-sidefixed' );
+		
+		
+		//Prevent this module from loading in other pages
+		if ( $sectionsContainer.length == 0 ) return false;
+		
+
+
+		// Prepare everything before binding wheel scroll
+		$.each( $sections, function( i ) {
+			$( this ).attr( 'data-index', i );
+			if ( i == 0 ) {
+				$( this ).addClass( 'active' );
+
+			}
+			
+		});
+		
+
+		
+		//Init the section location
+		sectionStart();
+		
+		
+		$( window ).on( 'hashchange', function(){
+			console.log( 'hash changed!' );
+		} );
+		
+
+		
+		/*
+		 * Init the section location
+		 *
+		 * @return {void}                - The constructor.
+		 */
+		function sectionStart() {
+	
+			setTimeout( function() {
+				var hash = window.location.hash,
+					locArr,
+					loc, 
+					curTab;
+
+				if ( hash ) {
+					
+					//Add hashchange event
+					locArr = hash.split( 'section-' );
+					loc    = locArr[1];
+					moveTo( $sectionsContainer, false, loc );
+				} else {
+					moveTo( $sectionsContainer, false, 1 );
+				}
+
+			}, quietPeriod );
+
+		}
+			
+		
+		/*
+		 * Scroll initialize
+		 *
+		 * @param  {object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
+		 * @param  {string} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
+		 * @return {void}                - The constructor.
+		 */
+		function scrollMoveInit( event, dir ) {
+	
+			var timeNow = new Date().getTime();
+			// Cancel scroll if currently animating or within quiet period
+			if( timeNow - lastAnimation < quietPeriod + animationTime) {
+				event.preventDefault();
+				return;
+			}
+
+			if ( dir == 'down' ) {
+				//scroll down
+				moveTo( $sectionsContainer, 'down', false );
+				
+			} else {
+				//scroll up
+				moveTo( $sectionsContainer, 'up', false );
+				
+			  
+			}
+			lastAnimation = timeNow;
+		}
+		
+      
+		
+		/*
+		 * Move Animation
+		 *
+		 * @param  {object} el           - The container of each sections.
+		 * @param  {string} dir          - Rolling direction indicator.
+		 * @param  {number} hashID       - ID of custom hashchange event.
+		 * @return {void}                - The constructor.
+		 */
+		function moveTo( el, dir, hashID ) {
+			var index     = parseFloat( $sections.filter( '.active' ).attr( 'data-index' ) ),
+				nextIndex = null,
+				$next     = null,
+				isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
+			
+			
+			 
+			if ( dir == 'down' || dir === false ) {
+				nextIndex = index + 1;
+			} else {
+				nextIndex = index - 1;
+			}
+			
+
+			//ID of custom hashchange event
+			if ( isNumeric.test( hashID ) ) nextIndex = parseFloat( hashID - 1 );
+			
+			
+			if ( nextIndex <= parseFloat( sectionTotal-1 ) && nextIndex >= 0 ) {
+				
+				if ( nextIndex > parseFloat( sectionTotal-1 ) ) nextIndex = parseFloat( sectionTotal-1 );
+				if ( nextIndex < 0 ) nextIndex = 0;
+
+
+				//Returns the target section
+				$next = $sections.eq( nextIndex );
+
+				//Smooth scroll to content
+				if ( $next.length > 0 ) {
+					TweenMax.to( window, animationTime/1000, {
+						scrollTo: {
+							y: $next.offset().top - topSectionSpacing,
+							autoKill : false
+						},
+						ease: Power2.easeOut,
+						onComplete: function() {
+
+							$sections.removeClass( 'leave' );
+							$sections.eq( index ).addClass( 'leave' );
+
+							$sections.removeClass( 'active' );
+							$next.addClass( 'active' ).removeClass( 'leave' );
+
+
+
+							//Changing The Site URL
+							var curSectionIndex = $sections.filter( '.active' ).index() + 1,
+								href            = window.location.href.substr( 0, window.location.href.indexOf( '#' ) ) + '#' + $sections.filter( '.active' ).attr( 'id' );
+
+							// Save state on history stack
+							// - First argument is any object that will let you restore state
+							// - Second argument is a title (not the page title, and not currently used)
+							// - Third argument is the URL - this will appear in the browser address bar
+							history.pushState( {}, document.title, href );
+							console.log( 'Section ' + curSectionIndex + ' loaded!' );
+
+
+						}
+					});			
+				}	
+				
+			}
+			
+
+	
+
+			
+		}
+		
+		
+
+		/* 
+		 ====================================================
+		 *  Navigation Interaction
+		 ====================================================
+		 */
+		goPageSection( $primaryMenu );
+		goPageSection( $sidefixedMenu );
+
+        
+	
+		//Activate the first item
+		$primaryMenu.find( 'li:first' ).addClass( 'active' );
+		$sidefixedMenu.find( 'li:first' ).addClass( 'active' );
+		
+		
+		/*
+		 * Get section or article by href
+		 *
+		 * @param  {string, object} el  - The current selector or selector ID
+		 * @return {object}             - A new selector.
+		 */
+        function getRelatedContent( el ) {
+            return $( $( el ).attr( 'href' ) );
+        }
+		
+		
+		/*
+		 * Get link by section or article id
+		 *
+		 * @param  {string, object} el    - The current selector or selector ID
+		 * @param  {object} menuObj       - Returns the menu element within the document.
+		 * @param  {boolean} echoIndex    - Whether to return the current index.
+		 * @return {object}               - A new selector.
+		 */
+        function getRelatedNavigation( el, menuObj, echoIndex ) {
+			
+			if ( echoIndex ) {
+				return menuObj.find( 'li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' ).index();
+			} else {
+			    return menuObj.find( 'li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' );	
+			}
+            
+        } 
+		
+		/*
+		 * Get all links by section or article
+		 *
+		 * @param  {object} menuObj     - Returns the menu element within the document.
+		 * @return {object}             - A new selector.
+		 */
+        function getAllNavigation( menuObj ) {
+            return menuObj.find( 'li' );
+        } 	
+		
+		
+		/*
+		 * Smooth scroll to content
+		 *
+		 * @param  {object} menuObj     - Returns the menu element within the document.
+		 * @return {void}               - The constructor.
+		 */
+        function goPageSection( menuObj ) {
+			menuObj.find( 'li > a' ).on( 'click', function(e) {
+				e.preventDefault();
+				
+				if ( $( this ).parent().hasClass( 'active' ) ) return false;
+				
+				
+				moveTo( $sectionsContainer, false, $( this ).parent( 'li' ).index() + 1 );
+			});	
+	
+        } 	
+
+
+
+		var navMinTop      = ( $sidefixedMenu.length > 0 ) ? $sidefixedMenu.offset().top : 0,
+			navMaxTop      = parseFloat( $( document ).height() - $( '.uix-footer__container' ).height() ) - windowHeight/3;
+
+		$window.on( 'scroll touchmove', function() {
+			var scrollTop = $( this ).scrollTop(),
+				spyTop    = parseFloat( scrollTop + topSectionSpacing ),
+				minTop    = $( '[data-highlight-section="true"]' ).first().offset().top,
+				maxTop    = $( '[data-highlight-section="true"]' ).last().offset().top + $( '[data-highlight-section="true"]' ).last().height();
+
+			$( '[data-highlight-section="true"]' ).each( function()  {
+				var block     = $( this ),
+					eleTop    = block.offset().top;
+				
+
+				// The 1 pixel in order to solve inaccurate value of outerHeight() 
+				// in Safari and Firefox browsers.
+				if ( eleTop < spyTop + 1 ) {
+
+					// Highlight element when related content
+					getAllNavigation( $primaryMenu ).removeClass( 'active' );
+					getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
+					getRelatedNavigation( block, $primaryMenu, false ).addClass( 'active' );
+					getRelatedNavigation( block, $sidefixedMenu, false ).addClass( 'active' );
+					
+					
+				} 
+			});
+
+
+
+			//Cancel the current highlight element
+			// The 1 pixel in order to solve inaccurate value of outerHeight() 
+			// in Safari and Firefox browsers.
+			if ( spyTop > maxTop || spyTop < minTop - 1 ) {
+				getAllNavigation( $primaryMenu ).removeClass( 'active' );
+				getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
+			}
+
+
+			//Detecting when user scrolls to bottom of div
+			if ( spyTop > navMaxTop || spyTop < navMinTop ) {
+				$sidefixedMenu.removeClass( 'is-fixed' );
+			} else {
+				$sidefixedMenu.addClass( 'is-fixed' );
+			}	
+
+
+
+
+		});	
+	
+		
+
+		
+		
+		/* 
+		 ====================================================
+		 *  Mouse Wheel Method
+		 ====================================================
+		 */
+		$( document ).on( 'wheel', function( e ) { 
+
+			var dir;
+			//Gets a value that indicates the amount that the mouse wheel has changed.
+			var delta = e.originalEvent.deltaY;
+			
+			if( delta > 0 ) { 
+				//scroll down
+				dir = 'down';
+				
+			} else {
+				//scroll up
+				dir = 'up';
+			}
+			
+			scrollMoveInit( e, dir );
+			
+			//prevent page fom scrolling
+			return false;
+
+		});
+		
+		
+		
+		/* 
+		 ====================================================
+		 *  Touch Method
+		 ====================================================
+		 */
+			
+		var startX,
+			startY;
+
+
+		$sectionsContainer.on( 'touchstart.ONEPAGE', function( event ) {
+			var touches = event.originalEvent.touches;
+			if ( touches && touches.length ) {
+				startX = touches[0].pageX;
+				startY = touches[0].pageY;
+
+
+				$sectionsContainer.on( 'touchmove.ONEPAGE', function( event ) {
+
+					var touches = event.originalEvent.touches;
+					if ( touches && touches.length ) {
+						var deltaX = startX - touches[0].pageX,
+							deltaY = startY - touches[0].pageY;
+
+						if ( deltaX >= 50) {
+							//--- swipe left
+
+
+						}
+						if ( deltaX <= -50) {
+							//--- swipe right
+						
+
+
+						}
+						if ( deltaY >= 50) {
+							//--- swipe up
+							moveTo( $sectionsContainer, 'down', false );
+
+						}
+						if ( deltaY <= -50) {
+							//--- swipe down
+							moveTo( $sectionsContainer, 'up', false );
+							
+
+						}
+						if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
+							$sectionsContainer.off( 'touchmove.ONEPAGE' );
+						}
+					}
+
+				});
+			}	
+		});
+
+		
+		
+
+		
+    };
+
+    APP.components.documentReady.push( APP.ONEPAGE.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+/* 
+ *************************************
  * <!-- Full Page/One Page Transition 2 -->
  *************************************
  */
@@ -17389,429 +17876,6 @@ APP = ( function ( APP, $, window, document ) {
     };
 
     APP.components.documentReady.push( APP.ONEPAGE2.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-/* 
- *************************************
- * <!-- Full Page/One Page Transition -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.ONEPAGE               = APP.ONEPAGE || {};
-	APP.ONEPAGE.version       = '0.0.2';
-    APP.ONEPAGE.documentReady = function( $ ) {
-
-        var $window      = $( window ),
-		    windowWidth  = $window.width(),
-		    windowHeight = $window.height();
-		
-
-	    //Determine the direction of a jQuery scroll event
-		//Fix an issue for mousewheel event is too fast.
-		var lastAnimation      = 0,
-			quietPeriod        = 500, //Do not change it
-			animationTime      = 1000,//According to page transition animation changes
-			$sectionsContainer = $( '.uix-noemal-load__onepage-container' ),
-			$sections          = $sectionsContainer.find( '> section' ),
-			sectionTotal       = $sections.length,
-			topSectionSpacing  = 0,
-			$primaryMenu       = $( '.uix-menu' ),
-			$sidefixedMenu     = $( '.uix-menu-sidefixed' );
-		
-		
-		//Prevent this module from loading in other pages
-		if ( $sectionsContainer.length == 0 ) return false;
-		
-
-
-		// Prepare everything before binding wheel scroll
-		$.each( $sections, function( i ) {
-			$( this ).attr( 'data-index', i );
-			if ( i == 0 ) {
-				$( this ).addClass( 'active' );
-
-			}
-			
-		});
-		
-
-		
-		//Init the section location
-		sectionStart();
-		
-		
-		$( window ).on( 'hashchange', function(){
-			console.log( 'hash changed!' );
-		} );
-		
-
-		
-		/*
-		 * Init the section location
-		 *
-		 * @return {void}                - The constructor.
-		 */
-		function sectionStart() {
-	
-			setTimeout( function() {
-				var hash = window.location.hash,
-					locArr,
-					loc, 
-					curTab;
-
-				if ( hash ) {
-					
-					//Add hashchange event
-					locArr = hash.split( 'section-' );
-					loc    = locArr[1];
-					moveTo( $sectionsContainer, false, loc );
-				} else {
-					moveTo( $sectionsContainer, false, 1 );
-				}
-
-			}, quietPeriod );
-
-		}
-			
-		
-		/*
-		 * Scroll initialize
-		 *
-		 * @param  {object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
-		 * @param  {string} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
-		 * @return {void}                - The constructor.
-		 */
-		function scrollMoveInit( event, dir ) {
-	
-			var timeNow = new Date().getTime();
-			// Cancel scroll if currently animating or within quiet period
-			if( timeNow - lastAnimation < quietPeriod + animationTime) {
-				event.preventDefault();
-				return;
-			}
-
-			if ( dir == 'down' ) {
-				//scroll down
-				moveTo( $sectionsContainer, 'down', false );
-				
-			} else {
-				//scroll up
-				moveTo( $sectionsContainer, 'up', false );
-				
-			  
-			}
-			lastAnimation = timeNow;
-		}
-		
-      
-		
-		/*
-		 * Move Animation
-		 *
-		 * @param  {object} el           - The container of each sections.
-		 * @param  {string} dir          - Rolling direction indicator.
-		 * @param  {number} hashID       - ID of custom hashchange event.
-		 * @return {void}                - The constructor.
-		 */
-		function moveTo( el, dir, hashID ) {
-			var index     = parseFloat( $sections.filter( '.active' ).attr( 'data-index' ) ),
-				nextIndex = null,
-				$next     = null,
-				isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
-			
-			
-			 
-			if ( dir == 'down' || dir === false ) {
-				nextIndex = index + 1;
-			} else {
-				nextIndex = index - 1;
-			}
-			
-
-			//ID of custom hashchange event
-			if ( isNumeric.test( hashID ) ) nextIndex = parseFloat( hashID - 1 );
-			
-			
-			if ( nextIndex <= parseFloat( sectionTotal-1 ) && nextIndex >= 0 ) {
-				
-				if ( nextIndex > parseFloat( sectionTotal-1 ) ) nextIndex = parseFloat( sectionTotal-1 );
-				if ( nextIndex < 0 ) nextIndex = 0;
-
-
-				//Returns the target section
-				$next = $sections.eq( nextIndex );
-
-				//Smooth scroll to content
-				if ( $next.length > 0 ) {
-					TweenMax.to( window, animationTime/1000, {
-						scrollTo: {
-							y: $next.offset().top - topSectionSpacing,
-							autoKill : false
-						},
-						ease: Power2.easeOut,
-						onComplete: function() {
-
-							$sections.removeClass( 'leave' );
-							$sections.eq( index ).addClass( 'leave' );
-
-							$sections.removeClass( 'active' );
-							$next.addClass( 'active' ).removeClass( 'leave' );
-
-
-
-							//Changing The Site URL
-							var curSectionIndex = $sections.filter( '.active' ).index() + 1,
-								href            = window.location.href.substr( 0, window.location.href.indexOf( '#' ) ) + '#' + $sections.filter( '.active' ).attr( 'id' );
-
-							// Save state on history stack
-							// - First argument is any object that will let you restore state
-							// - Second argument is a title (not the page title, and not currently used)
-							// - Third argument is the URL - this will appear in the browser address bar
-							history.pushState( {}, document.title, href );
-							console.log( 'Section ' + curSectionIndex + ' loaded!' );
-
-
-						}
-					});			
-				}	
-				
-			}
-			
-
-	
-
-			
-		}
-		
-		
-
-		/* 
-		 ====================================================
-		 *  Navigation Interaction
-		 ====================================================
-		 */
-		goPageSection( $primaryMenu );
-		goPageSection( $sidefixedMenu );
-
-        
-	
-		//Activate the first item
-		$primaryMenu.find( 'li:first' ).addClass( 'active' );
-		$sidefixedMenu.find( 'li:first' ).addClass( 'active' );
-		
-		
-		/*
-		 * Get section or article by href
-		 *
-		 * @param  {string, object} el  - The current selector or selector ID
-		 * @return {object}             - A new selector.
-		 */
-        function getRelatedContent( el ) {
-            return $( $( el ).attr( 'href' ) );
-        }
-		
-		
-		/*
-		 * Get link by section or article id
-		 *
-		 * @param  {string, object} el    - The current selector or selector ID
-		 * @param  {object} menuObj       - Returns the menu element within the document.
-		 * @param  {boolean} echoIndex    - Whether to return the current index.
-		 * @return {object}               - A new selector.
-		 */
-        function getRelatedNavigation( el, menuObj, echoIndex ) {
-			
-			if ( echoIndex ) {
-				return menuObj.find( 'li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' ).index();
-			} else {
-			    return menuObj.find( 'li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' );	
-			}
-            
-        } 
-		
-		/*
-		 * Get all links by section or article
-		 *
-		 * @param  {object} menuObj     - Returns the menu element within the document.
-		 * @return {object}             - A new selector.
-		 */
-        function getAllNavigation( menuObj ) {
-            return menuObj.find( 'li' );
-        } 	
-		
-		
-		/*
-		 * Smooth scroll to content
-		 *
-		 * @param  {object} menuObj     - Returns the menu element within the document.
-		 * @return {void}               - The constructor.
-		 */
-        function goPageSection( menuObj ) {
-			menuObj.find( 'li > a' ).on( 'click', function(e) {
-				e.preventDefault();
-				
-				if ( $( this ).parent().hasClass( 'active' ) ) return false;
-				
-				
-				moveTo( $sectionsContainer, false, $( this ).parent( 'li' ).index() + 1 );
-			});	
-	
-        } 	
-
-
-
-		var navMinTop      = ( $sidefixedMenu.length > 0 ) ? $sidefixedMenu.offset().top : 0,
-			navMaxTop      = parseFloat( $( document ).height() - $( '.uix-footer__container' ).height() ) - windowHeight/3;
-
-		$window.on( 'scroll touchmove', function() {
-			var scrollTop = $( this ).scrollTop(),
-				spyTop    = parseFloat( scrollTop + topSectionSpacing ),
-				minTop    = $( '[data-highlight-section="true"]' ).first().offset().top,
-				maxTop    = $( '[data-highlight-section="true"]' ).last().offset().top + $( '[data-highlight-section="true"]' ).last().height();
-
-			$( '[data-highlight-section="true"]' ).each( function()  {
-				var block     = $( this ),
-					eleTop    = block.offset().top;
-				
-
-				// The 1 pixel in order to solve inaccurate value of outerHeight() 
-				// in Safari and Firefox browsers.
-				if ( eleTop < spyTop + 1 ) {
-
-					// Highlight element when related content
-					getAllNavigation( $primaryMenu ).removeClass( 'active' );
-					getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
-					getRelatedNavigation( block, $primaryMenu, false ).addClass( 'active' );
-					getRelatedNavigation( block, $sidefixedMenu, false ).addClass( 'active' );
-					
-					
-				} 
-			});
-
-
-
-			//Cancel the current highlight element
-			// The 1 pixel in order to solve inaccurate value of outerHeight() 
-			// in Safari and Firefox browsers.
-			if ( spyTop > maxTop || spyTop < minTop - 1 ) {
-				getAllNavigation( $primaryMenu ).removeClass( 'active' );
-				getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
-			}
-
-
-			//Detecting when user scrolls to bottom of div
-			if ( spyTop > navMaxTop || spyTop < navMinTop ) {
-				$sidefixedMenu.removeClass( 'is-fixed' );
-			} else {
-				$sidefixedMenu.addClass( 'is-fixed' );
-			}	
-
-
-
-
-		});	
-	
-		
-
-		
-		
-		/* 
-		 ====================================================
-		 *  Mouse Wheel Method
-		 ====================================================
-		 */
-		$( document ).on( 'wheel', function( e ) { 
-
-			var dir;
-			//Gets a value that indicates the amount that the mouse wheel has changed.
-			var delta = e.originalEvent.deltaY;
-			
-			if( delta > 0 ) { 
-				//scroll down
-				dir = 'down';
-				
-			} else {
-				//scroll up
-				dir = 'up';
-			}
-			
-			scrollMoveInit( e, dir );
-			
-			//prevent page fom scrolling
-			return false;
-
-		});
-		
-		
-		
-		/* 
-		 ====================================================
-		 *  Touch Method
-		 ====================================================
-		 */
-			
-		var startX,
-			startY;
-
-
-		$sectionsContainer.on( 'touchstart.ONEPAGE', function( event ) {
-			var touches = event.originalEvent.touches;
-			if ( touches && touches.length ) {
-				startX = touches[0].pageX;
-				startY = touches[0].pageY;
-
-
-				$sectionsContainer.on( 'touchmove.ONEPAGE', function( event ) {
-
-					var touches = event.originalEvent.touches;
-					if ( touches && touches.length ) {
-						var deltaX = startX - touches[0].pageX,
-							deltaY = startY - touches[0].pageY;
-
-						if ( deltaX >= 50) {
-							//--- swipe left
-
-
-						}
-						if ( deltaX <= -50) {
-							//--- swipe right
-						
-
-
-						}
-						if ( deltaY >= 50) {
-							//--- swipe up
-							moveTo( $sectionsContainer, 'down', false );
-
-						}
-						if ( deltaY <= -50) {
-							//--- swipe down
-							moveTo( $sectionsContainer, 'up', false );
-							
-
-						}
-						if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
-							$sectionsContainer.off( 'touchmove.ONEPAGE' );
-						}
-					}
-
-				});
-			}	
-		});
-
-		
-		
-
-		
-    };
-
-    APP.components.documentReady.push( APP.ONEPAGE.documentReady );
     return APP;
 
 }( APP, jQuery, window, document ) );

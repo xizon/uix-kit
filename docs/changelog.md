@@ -1,5 +1,9 @@
 # Changelog
 
+#### = 2.1.8 (September 3, 2018) =
+
+* Fix: Fixed an issue with Advanced Slider adaptation on large screens.
+
 
 #### = 2.1.7 (August 30, 2018) =
 

@@ -9,7 +9,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.ADVANCED_SLIDER_FILTER               = APP.ADVANCED_SLIDER_FILTER || {};
-	APP.ADVANCED_SLIDER_FILTER.version       = '0.1.1';
+	APP.ADVANCED_SLIDER_FILTER.version       = '0.1.2';
     APP.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 	
@@ -19,6 +19,9 @@ APP = ( function ( APP, $, window, document ) {
 			animSpeed                 = 1000,
 			$sliderWrapper            = $( '.uix-advanced-slider-sp' ),
 			tempID                    = 'video-' + UIX_GUID.newGuid(),
+			
+			//Save different canvas heights as an array
+			canvasHeights             = [],
 
 			
 			//Autoplay global variables
@@ -122,19 +125,24 @@ APP = ( function ( APP, $, window, document ) {
 					//Returns the dimensions (intrinsic height and width ) of the video
 					var video    = document.getElementById( $first.find( 'video' ).attr( 'id' ) ),
 						videoURL = $first.find( 'source:first' ).attr( 'src' );
+					
+					if ( typeof videoURL != typeof undefined ) {
+						video.addEventListener( 'loadedmetadata', function( e ) {
+							$this.css( 'height', this.videoHeight*($this.width()/this.videoWidth) + 'px' );	
 
-					video.addEventListener( 'loadedmetadata', function( e ) {
-						$this.css( 'height', this.videoHeight*($this.width()/this.videoWidth) + 'px' );	
+							nativeItemW = this.videoWidth;
+							nativeItemH = this.videoHeight;	
 
-						nativeItemW = this.videoWidth;
-						nativeItemH = this.videoHeight;	
+							//Initialize all the items to the stage
+							addItemsToStage( $this, $sliderWrapper, nativeItemW, nativeItemH );
 
-						//Initialize all the items to the stage
-						addItemsToStage( $this, $sliderWrapper, nativeItemW, nativeItemH );
 
-					}, false);	
+						}, false);	
 
-					video.src = videoURL;
+						video.src = videoURL;
+					}
+
+
 
 
 				} else {
@@ -153,13 +161,13 @@ APP = ( function ( APP, $, window, document ) {
 
 							//Initialize all the items to the stage
 							addItemsToStage( $this, $sliderWrapper, nativeItemW, nativeItemH );
+							
 
+							
 						};
 
 						img.src = imgURL;
 					}
-
-					
 
 
 				}	
@@ -302,6 +310,84 @@ APP = ( function ( APP, $, window, document ) {
 					$this.prepend( '<div id="'+rendererOuterID+'" class="uix-advanced-slider-sp__canvas-container"><canvas id="'+rendererCanvasID+'"></canvas></div>' );
 					
 				}
+				
+				
+
+				//Save different canvas heights as an array
+				//-------------------------------------	
+				$this.find( '.uix-advanced-slider-sp__item' ).each( function( index )  {
+
+					var $thisItem = $( this );
+					
+					
+
+					if ( $thisItem.find( 'video' ).length > 0 ) {
+
+
+						//Returns the dimensions (intrinsic height and width ) of the video
+						var video    = document.getElementById( $thisItem.find( 'video' ).attr( 'id' ) ),
+							videoURL = $thisItem.find( 'video source:first' ).attr( 'src' );
+						
+					
+						video.addEventListener( 'loadedmetadata', function( e ) {
+
+							var	curW    = this.videoWidth,
+								curH    = this.videoHeight,
+								newW    = curW,
+								newH    = curH;
+
+							newW = $this.width();
+
+							//Scaled/Proportional Content 
+							newH = curH*(newW/curW);
+
+							//Save different canvas heights as an array
+							if ( canvasHeights.length < itemsTotal ) {
+								canvasHeights.push( newH );
+							}
+					
+
+						}, false);	
+
+						video.src = videoURL;
+
+
+
+					} else {
+
+						var imgURL   = $thisItem.find( 'img' ).attr( 'src' ),
+							imgCur   = new Image();
+
+						imgCur.onload = function() {
+
+							var	curW_img    = this.width,
+								curH_img    = this.height,
+								newW_img    = curW_img,
+								newH_img    = curH_img;	
+
+							newW_img = $this.width();
+
+
+							//Scaled/Proportional Content 
+							newH_img = curH_img*(newW_img/curW_img);	
+
+							
+							//Save different canvas heights as an array
+							if ( canvasHeights.length < itemsTotal ) {
+								canvasHeights.push( newH_img );
+							}
+
+							
+						};
+
+						imgCur.src = imgURL;
+
+
+					}	
+					
+				});
+				
+				
 
 				//Basic webGL renderers 
 				//-------------------------------------
@@ -361,19 +447,10 @@ APP = ( function ( APP, $, window, document ) {
 							var video = document.getElementById( $thisItem.find( 'video' ).attr( 'id' ) );
 							video.addEventListener( 'loadedmetadata', function( e ) {
 
-								var	curW    = this.videoWidth,
-									curH    = this.videoHeight,
-									newW    = curW,
-									newH    = curH;
-
-								newW = $this.width();
-
-								//Scaled/Proportional Content 
-								newH = curH*(newW/curW);
-
 								//At the same time change the height of the canvas
-								renderer.view.style.width = newW + 'px';
-								renderer.view.style.height = newH + 'px';	
+								renderer.view.style.width = $this.width() + 'px';
+								renderer.view.style.height = canvasHeights[index] + 'px';	
+
 
 
 							}, false);	
@@ -392,10 +469,10 @@ APP = ( function ( APP, $, window, document ) {
 							imgCur.onload = function() {
 
 								//At the same time change the height of the canvas
-								renderer.view.style.width = $thisItem.find( 'img' ).width() + 'px';
-								renderer.view.style.height = $thisItem.find( 'img' ).height() + 'px';
-
-
+								renderer.view.style.width = $this.width() + 'px';
+								renderer.view.style.height = canvasHeights[index] + 'px';	
+								
+		
 							};
 
 							imgCur.src = imgURL;
@@ -426,6 +503,7 @@ APP = ( function ( APP, $, window, document ) {
 						canvasDefaultInit( $first );
 					}, animSpeed );
 
+					
 
 
 				}// end effect
@@ -472,19 +550,9 @@ APP = ( function ( APP, $, window, document ) {
 							var video = document.getElementById( $thisItem.find( 'video' ).attr( 'id' ) );
 							video.addEventListener( 'loadedmetadata', function( e ) {
 
-								var	curW    = this.videoWidth,
-									curH    = this.videoHeight,
-									newW    = curW,
-									newH    = curH;
-
-								newW = $this.width();
-
-								//Scaled/Proportional Content 
-								newH = curH*(newW/curW);
-
 								//At the same time change the height of the canvas
-								renderer.view.style.width = newW + 'px';
-								renderer.view.style.height = newH + 'px';	
+								renderer.view.style.width = $this.width() + 'px';
+								renderer.view.style.height = canvasHeights[index] + 'px';	
 
 
 							}, false);	
@@ -503,8 +571,9 @@ APP = ( function ( APP, $, window, document ) {
 							imgCur.onload = function() {
 
 								//At the same time change the height of the canvas
-								renderer.view.style.width = $thisItem.find( 'img' ).width() + 'px';
-								renderer.view.style.height =$thisItem.find( 'img' ).height() + 'px';
+								renderer.view.style.width = $this.width() + 'px';
+								renderer.view.style.height = canvasHeights[index] + 'px';	
+
 
 							};
 
@@ -622,20 +691,9 @@ APP = ( function ( APP, $, window, document ) {
 							var video = document.getElementById( $thisItem.find( 'video' ).attr( 'id' ) );
 							video.addEventListener( 'loadedmetadata', function( e ) {
 
-								var	curW    = this.videoWidth,
-									curH    = this.videoHeight,
-									newW    = curW,
-									newH    = curH;
-
-								newW = $this.width();
-
-								//Scaled/Proportional Content 
-								newH = curH*(newW/curW);
-
 								//At the same time change the height of the canvas
-								renderer.view.style.width = newW + 'px';
-								renderer.view.style.height = newH + 'px';	
-
+								renderer.view.style.width = $this.width() + 'px';
+								renderer.view.style.height = canvasHeights[index] + 'px';	
 
 							}, false);	
 
@@ -653,9 +711,8 @@ APP = ( function ( APP, $, window, document ) {
 							imgCur.onload = function() {
 
 								//At the same time change the height of the canvas
-								renderer.view.style.width = $thisItem.find( 'img' ).width() + 'px';
-								renderer.view.style.height =$thisItem.find( 'img' ).height() + 'px';
-
+								renderer.view.style.width = $this.width() + 'px';
+								renderer.view.style.height = canvasHeights[index] + 'px';	
 							};
 
 							imgCur.src = imgURL;
@@ -771,19 +828,9 @@ APP = ( function ( APP, $, window, document ) {
 							var video = document.getElementById( $thisItem.find( 'video' ).attr( 'id' ) );
 							video.addEventListener( 'loadedmetadata', function( e ) {
 
-								var	curW    = this.videoWidth,
-									curH    = this.videoHeight,
-									newW    = curW,
-									newH    = curH;
-
-								newW = $this.width();
-
-								//Scaled/Proportional Content 
-								newH = curH*(newW/curW);
-
 								//At the same time change the height of the canvas
-								renderer.view.style.width = newW + 'px';
-								renderer.view.style.height = newH + 'px';	
+								renderer.view.style.width = $this.width() + 'px';
+								renderer.view.style.height = canvasHeights[index] + 'px';	
 
 
 							}, false);	
@@ -802,8 +849,8 @@ APP = ( function ( APP, $, window, document ) {
 							imgCur.onload = function() {
 
 								//At the same time change the height of the canvas
-								renderer.view.style.width = $thisItem.find( 'img' ).width() + 'px';
-								renderer.view.style.height =$thisItem.find( 'img' ).height() + 'px';
+								renderer.view.style.width = $this.width() + 'px';
+								renderer.view.style.height = canvasHeights[index] + 'px';	
 
 							};
 
@@ -926,19 +973,9 @@ APP = ( function ( APP, $, window, document ) {
 							var video = document.getElementById( $thisItem.find( 'video' ).attr( 'id' ) );
 							video.addEventListener( 'loadedmetadata', function( e ) {
 
-								var	curW    = this.videoWidth,
-									curH    = this.videoHeight,
-									newW    = curW,
-									newH    = curH;
-
-								newW = $this.width();
-
-								//Scaled/Proportional Content 
-								newH = curH*(newW/curW);
-
 								//At the same time change the height of the canvas
-								renderer.view.style.width = newW + 'px';
-								renderer.view.style.height = newH + 'px';	
+								renderer.view.style.width = $this.width() + 'px';
+								renderer.view.style.height = canvasHeights[index] + 'px';	
 
 
 							}, false);	
@@ -957,8 +994,8 @@ APP = ( function ( APP, $, window, document ) {
 							imgCur.onload = function() {
 
 								//At the same time change the height of the canvas
-								renderer.view.style.width = $thisItem.find( 'img' ).width() + 'px';
-								renderer.view.style.height =$thisItem.find( 'img' ).height() + 'px';
+								renderer.view.style.width = $this.width() + 'px';
+								renderer.view.style.height = canvasHeights[index] + 'px';	
 
 							};
 
@@ -1037,6 +1074,7 @@ APP = ( function ( APP, $, window, document ) {
 				}// end effect
 				
 				
+				
 
 				//----------------------------------------------------------------------------------
 				//--------------------------------- 3D Rotating Effect -----------------------------
@@ -1064,13 +1102,16 @@ APP = ( function ( APP, $, window, document ) {
 						windowHalfY                 = $this.height() / 2;
 
 
+					
+					
 
 					//Add Geometries and Lights to the main container 
 					//-------------------------------------					
 					var init = function() {
 						$this.find( '.uix-advanced-slider-sp__item' ).each( function( index )  {
 
-							var $thisItem = $( this );
+							var $thisItem      = $( this ),
+								imgVideoHeight = null;
 
 							// create a scene, that will hold all our elements such as objects, cameras and lights.
 							var scene  = new THREE.Scene();
@@ -1109,7 +1150,6 @@ APP = ( function ( APP, $, window, document ) {
 							// Generate one plane geometries mesh to each scene
 							if ( $thisItem.find( 'video' ).length > 0 ) {
 
-
 								texture = new THREE.VideoTexture( document.getElementById( $thisItem.find( 'video' ).attr( 'id' ) ) );
 								texture.minFilter = THREE.LinearFilter;
 								texture.magFilter = THREE.LinearFilter;
@@ -1120,28 +1160,33 @@ APP = ( function ( APP, $, window, document ) {
 								texture.image.currentTime = 0;
 								texture.image.muted = false;
 								texture.image.pause();
-
-
+								
+							
 
 							} else {
+								
 								texture = new THREE.TextureLoader().load( $thisItem.find( 'img' ).attr( 'src' ) );
 								texture.generateMipmaps = false;
 								texture.wrapS = texture.wrapT = THREE.ClampToEdgeWrapping;
 								texture.minFilter = THREE.LinearFilter;
-							}
+								
+								
 
+							}
+						
 							// texture controller
 							texturesAll.push( texture );
-
-
-
+							
+							
+					
 
 							// Immediately use the texture for material creation
 							var spriteMat            = new THREE.MeshPhongMaterial( { map: texture } ),
-								imgRatio             = $this.width() / $this.height(),
-								geometry             = new THREE.BoxGeometry( imgRatio*15, 15, 2 ),
+								geometry             = new THREE.BoxGeometry( aspect*15, 15, 2 ),
 								displacementSprite   = new THREE.Mesh( geometry, spriteMat );
 
+							
+							
 							displacementSprite.position.set( -0.01, -0.01, 0 );
 							displacementSprite.rotation.set( 0, 0, 0 );
 							scene.add( displacementSprite );
@@ -1747,29 +1792,31 @@ APP = ( function ( APP, $, window, document ) {
 			if ( slider.hasClass( 'uix-advanced-slider-sp--eff-3d-rotating' ) ) {
 
 			}
-			
-			
-			
+
+
 			transitionInteractions( elementIndex, $items.filter( '.leave' ).index(), slider, 'in', dir );
 			
 
 			
 		}
 		
-			
 
-		
+								
+							
 	
 		/*
 		 * Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
 		 *
+		 * @param  {number} w                - The width that the canvas will be set.
+		 * @param  {number} h                - The height that the canvas will be set.
 		 * @return {void}                    - The constructor.
 		 */
-        function fixCanvasTagSize() {
+        function fixCanvasTagSize( w, h ) {
+
 			
-			TweenMax.to( '#' + rendererCanvasID, animSpeed/1000, { 
-				width : $sliderWrapper.width(),
-				height: $sliderWrapper.height()
+			TweenMax.to( ['#' + rendererCanvasID, '.uix-advanced-slider-sp__wrapper', '.uix-advanced-slider-sp__inner', '.uix-advanced-slider-sp__canvas-container' ], animSpeed/1000, { 
+				width : w,
+				height: h
 			} );
 
 		}
@@ -1852,6 +1899,7 @@ APP = ( function ( APP, $, window, document ) {
 		 */
         function transitionInteractions( elementIndex, prevElementIndex, slider, goType, dir ) {
 			
+			
 			if ( Modernizr.webgl ) {
 			
 				var $myRenderer           = $( '#' + rendererOuterID ),
@@ -1899,10 +1947,6 @@ APP = ( function ( APP, $, window, document ) {
 					} else {
 						
 						
-						//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
-						fixCanvasTagSize();
-							
-						
 						//Current item entry action
 						TweenMax.to( $myRenderer, animSpeed/1000, {
 							alpha : 0,
@@ -1913,6 +1957,7 @@ APP = ( function ( APP, $, window, document ) {
 								TweenMax.to( this.target, animSpeed/1000, {
 									alpha : 1
 								});			
+
 
 
 								//display the current item
@@ -1950,7 +1995,14 @@ APP = ( function ( APP, $, window, document ) {
 								}
 
 
-								
+
+
+								//Reset the height of the canvas when each item is switched
+								//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
+								//console.log( 'width: ' + windowWidth + ' | height: ' + canvasHeights[ elementIndex ] + ' | index: ' + elementIndex );
+								fixCanvasTagSize( windowWidth, canvasHeights[ elementIndex ] );
+
+
 								//display filters
 								TweenMax.set( curSp, {
 									pixi: {
@@ -1958,6 +2010,9 @@ APP = ( function ( APP, $, window, document ) {
 									},
 									alpha : 1,
 									onComplete    : function() {
+										
+
+										
 										TweenMax.to( this.target, animSpeed/1000, {
 											pixi: {
 												brightness: 1
@@ -1972,7 +2027,7 @@ APP = ( function ( APP, $, window, document ) {
 										
 									}
 								});		
-	
+
 
 
 
@@ -2035,7 +2090,9 @@ APP = ( function ( APP, $, window, document ) {
 					} else {
 						
 						
+						
 						//Video sprite initialization
+						//Need to ensure that the video tag exists
 						setTimeout( function() {
 							for ( var k = 0; k < spTotal; k++ ) {
 
@@ -2067,14 +2124,15 @@ APP = ( function ( APP, $, window, document ) {
 								videoSource2.muted = false;
 							}	
 
+							
+							//Reset the height of the canvas when each item is switched
+							//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
+							//console.log( 'width: ' + windowWidth + ' | height: ' + canvasHeights[ elementIndex ] + ' | index: ' + elementIndex );
+							fixCanvasTagSize( windowWidth, canvasHeights[ elementIndex ] );
 	
-						}, animSpeed*2 );
+						}, 100 );
 						
-						
-						//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
-						fixCanvasTagSize();
-						
-					
+
 						
 						//Current item entry action
 						var baseTimeline = new TimelineMax( { onComplete: function () {
@@ -2101,6 +2159,8 @@ APP = ( function ( APP, $, window, document ) {
 						.to( displacementFilter.scale, animSpeed/1000, { x: 0, y: 0, ease: Power2.easeOut }, (animSpeed/2)/1000 )
 						.to( $current, animSpeed/1000, { alpha: 1, ease: Power2.easeOut }, 'final' );
 
+						
+						
 						
 
 						//Add new ripple each time mouse
@@ -2157,9 +2217,6 @@ APP = ( function ( APP, $, window, document ) {
 						
 					} else {
 						
-						//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
-						fixCanvasTagSize();
-								
 						
 						//Current item entry action
 						TweenMax.to( $myRenderer, animSpeed/1000, {
@@ -2208,6 +2265,12 @@ APP = ( function ( APP, $, window, document ) {
 								}
 
 
+								//Reset the height of the canvas when each item is switched
+								//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
+								//console.log( 'width: ' + windowWidth + ' | height: ' + canvasHeights[ elementIndex ] + ' | index: ' + elementIndex );
+								fixCanvasTagSize( windowWidth, canvasHeights[ elementIndex ] );	
+
+								
 								//display filters
 								
 								//sprite
@@ -2296,10 +2359,6 @@ APP = ( function ( APP, $, window, document ) {
 					} else {
 						
 						
-						//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
-						fixCanvasTagSize();
-								
-						
 						//Current item entry action
 						TweenMax.to( $myRenderer, animSpeed/1000, {
 							alpha : 0,
@@ -2345,7 +2404,14 @@ APP = ( function ( APP, $, window, document ) {
 									if ( Object.prototype.toString.call( videoSource2.play ) == '[object Function]' ) videoSource2.play();
 									videoSource2.muted = false;
 								}
+								
+								
+								//Reset the height of the canvas when each item is switched
+								//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
+								//console.log( 'width: ' + windowWidth + ' | height: ' + canvasHeights[ elementIndex ] + ' | index: ' + elementIndex );
+								fixCanvasTagSize( windowWidth, canvasHeights[ elementIndex ] );	
 
+								
 
 								//display filters
 								
@@ -2436,6 +2502,7 @@ APP = ( function ( APP, $, window, document ) {
 					} else {
 						
 						//Video sprite initialization
+						//Need to ensure that the video tag exists
 						setTimeout( function() {
 							for ( var m = 0; m < spTotal; m++ ) {
 
@@ -2467,15 +2534,16 @@ APP = ( function ( APP, $, window, document ) {
 								videoSource2.muted = false;
 							}	
 
-	
-						}, animSpeed*2 );
-						
-						
+							//Reset the height of the canvas when each item is switched
+							//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
+							//console.log( 'width: ' + windowWidth + ' | height: ' + canvasHeights[ elementIndex ] + ' | index: ' + elementIndex );
+							fixCanvasTagSize( windowWidth, canvasHeights[ elementIndex ] );		
 
-						//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
-						fixCanvasTagSize();
-							
-					
+
+						}, 100 );
+						
+						
+						
 						
 						//Current item entry action
 						var restoreX,
@@ -2598,10 +2666,6 @@ APP = ( function ( APP, $, window, document ) {
 						
 	
 					} else {
-						
-						//Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
-						fixCanvasTagSize();
-								
 						
 						//Current item entry action
 						TweenMax.to( $myRenderer, animSpeed/1000, {
