@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  2.1.8
- * ## Last Update         :  September 4, 2018
+ * ## Version             :  2.2.0
+ * ## Last Update         :  September 6, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -49,17 +49,17 @@
     25. Advanced Content Slider 
     26. Advanced Slider (Special Effects) 
     27. Advanced Slider (Basic) 
-    28. Counter 
-    29. Circle Layout 
+    28. Circle Layout 
+    29. Counter 
     30. Dropdown Menu 
     31. Dropdown Menu 2 (Multi-level drop-down navigation) 
     32. Dynamic Drop Down List from JSON 
     33. Flexslider 
     34. Floating Side Element 
     35. Form 
-    36. Form Progress 
-    37. Gallery 
-    38. jQuery UI Datepicker 1.11.4 
+    36. jQuery UI Datepicker 1.11.4 
+    37. Form Progress 
+    38. Gallery 
     39. Hover Delay Interaction 
     40. Image Shapes 
     41. Theme Scripts  
@@ -2860,248 +2860,6 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
-
-/* 
- *************************************
- * <!-- 3D Carousel -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP._3D_CAROUSEL               = APP._3D_CAROUSEL || {};
-	APP._3D_CAROUSEL.version       = '0.0.1';
-    APP._3D_CAROUSEL.documentReady = function( $ ) {
-
-		$( '.uix-3d-carousel' ).each( function() {
-			var $this             = $( this ),
-				dataTiming        = $this.data( 'timing' ),
-				dataPrevBtn       = $this.data( 'prev-btn' ),
-				dataNextBtn       = $this.data( 'next-btn' ),
-				dataDraggable     = $this.data( 'draggable' ),
-			    autoSwap          = null,
-				$wrapper          = $this.find( '> ul' ),
-				$items            = $wrapper.find( '> li' ),
-				items             = [],
-				startItem         = 1,
-				position          = 0,
-				itemCount         = $items.length,
-				leftpos           = itemCount,
-				resetCount        = itemCount;
-
-			if( typeof dataTiming === typeof undefined ) dataTiming = 5000;
-			if( typeof dataPrevBtn === typeof undefined ) dataPrevBtn = ".my-carousel-3d-prev";
-			if( typeof dataNextBtn === typeof undefined ) dataNextBtn = ".my-carousel-3d-next";
-			if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
-			
-
-			//Avoid problems caused by insufficient quantity
-			//-------------------------------------		
-			if ( itemCount == 3 ) {
-				var $clone3 = $items.eq(1).clone();
-				$items.last().after( $clone3 );
-			}
-			
-			if ( itemCount == 2 ) {
-				var $clone2_1 = $items.eq(0).clone(),
-					$clone2_2 = $items.eq(1).clone();
-				$items.last().after( [$clone2_1, $clone2_2 ] );
-			}
-			
-			if ( itemCount == 1 ) {
-				var $clone1_1 = $items.eq(0).clone(),
-					$clone1_2 = $items.eq(0).clone(),
-					$clone1_3 = $items.eq(0).clone();
-					
-				$items.last().after( [$clone1_1, $clone1_2, $clone1_3 ] );
-			}		
-			
-
-			//New objects of items and wrapper
-			$wrapper  = $this.find( '> ul' );
-			$items = $wrapper.find( '> li' );
-			itemCount = $items.length;
-			leftpos  = itemCount;
-			resetCount = itemCount;
-
-			//Adding an index to an element makes it easy to query
-			//-------------------------------------	
-			$items.each( function( index ) {
-				items[index] = $( this ).text();
-				$( this ).attr( 'id', index+1 );
-
-			});
-
-			//Pause slideshow and reinstantiate on mouseout
-			//-------------------------------------	
-			$wrapper.on( 'mouseenter', function() {
-				clearInterval( autoSwap );
-			} ).on( 'mouseleave' , function() {
-				autoSwap = setInterval( itemUpdates, dataTiming );
-			} );
-
-
-			
-			//Initialize the default effect
-			//-------------------------------------	
-			itemUpdates( 'clockwise' );
-			
-			
-			//The matched click events for the element.
-			//-------------------------------------	
-			$( dataPrevBtn ).on( 'click', function( e ) {
-				e.preventDefault();
-				itemUpdates( 'clockwise' );
-				return false;
-				
-			});
-			$( dataNextBtn ).on( 'click', function( e ) {
-				e.preventDefault();
-				itemUpdates( 'counter-clockwise' );
-				return false;
-				
-			});
-			
-			
-			$items.on( 'click', function( e ) {
-				e.preventDefault();
-
-				if ( $( this ).attr( 'class' ) == 'uix-3d-carousel__item uix-3d-carousel__item--left-pos' ) {
-					itemUpdates( 'counter-clockwise' );
-				} else {
-					itemUpdates( 'clockwise' );
-				}
-			});
-
-
-			//Drag and Drop
-			//-------------------------------------	
-			var $dragDropTrigger = $wrapper,
-				hammerProps      = {};
-
-			
-			if ( !dataDraggable ) {
-				hammerProps = {
-					inputClass: Hammer.TouchInput
-				};
-			}
-
-			//Mouse event
-			//Hammer.js pan event only for touch devices and not for desktop computer Click+Drag
-			var direction,
-				dragDropElement = $dragDropTrigger[0],
-				dragDropMC      = new Hammer( dragDropElement, hammerProps );
-			
-			
-			dragDropMC.on( 'panright press panleft', function( ev ) {
-
-				//Set the direction in here
-				direction = ev.type;
-			});
-
-
-
-			dragDropMC.on( 'panend', function( ev ) {
-
-				//Use the direction in here
-				//You know the pan has ended
-				//and you know which action they were taking
-				if ( direction == 'panleft' ) {
-					itemUpdates( 'clockwise' );
-				}
-
-				if ( direction == 'panright' ) {
-					itemUpdates( 'counter-clockwise' );
-				}			
-
-
-
-			});	
-
-			
-
-			/*
-			 * Swap Between Images
-			 *
-			 * @param  {string} action           - Direction of movement, optional: clockwise, counter-clockwise
-			 * @return {void}                    - The constructor.
-			 */
-			function itemUpdates( action ) {
-				var direction = action;
-
-				//moving carousel backwards
-				if ( direction == 'counter-clockwise' ) {
-					var leftitem = parseFloat( $wrapper.find( '> li.uix-3d-carousel__item--left-pos' ).attr( 'id' ) - 1 );
-					if ( leftitem == 0 ) {
-						leftitem = itemCount;
-					}
-
-					$wrapper.find( '> li.uix-3d-carousel__item--right-pos' ).removeClass( 'uix-3d-carousel__item--right-pos' ).addClass( 'uix-3d-carousel__item--back-pos' );
-					$wrapper.find( '> li.uix-3d-carousel__item--main-pos' ).removeClass( 'uix-3d-carousel__item--main-pos' ).addClass( 'uix-3d-carousel__item--right-pos' );
-					$wrapper.find( '> li.uix-3d-carousel__item--left-pos' ).removeClass( 'uix-3d-carousel__item--left-pos' ).addClass( 'uix-3d-carousel__item--main-pos' );
-					$wrapper.find( '> li#' + leftitem + '').removeClass( 'uix-3d-carousel__item--back-pos' ).addClass( 'uix-3d-carousel__item--left-pos' );
-
-					startItem--;
-
-					if ( startItem < 1 ) {
-						startItem = itemCount;
-					}
-				}
-
-				//moving carousel forward
-				if ( direction == 'clockwise' || direction == '' || direction == null ) {
-					var carousel3DPos = function( dir ) {
-						if ( dir != 'leftposition' ) {
-							//increment image list id
-							position++;
-
-							//if final result is greater than image count, reset position.
-							if ( startItem + position > resetCount ) {
-								position = 1 - startItem;
-							}
-						}
-
-						//setting the left positioned item
-						if (dir == 'leftposition') {
-							//left positioned image should always be one left than main positioned image.
-							position = startItem - 1;
-
-							//reset last image in list to left position if first image is in main position
-							if (position < 1) {
-								position = itemCount;
-							}
-						}
-
-						return position;
-					};
-
-					$wrapper.find( '> li#' + startItem + '').removeClass( 'uix-3d-carousel__item--main-pos' ).addClass( 'uix-3d-carousel__item--left-pos' );
-					$wrapper.find( '> li#' + (startItem + carousel3DPos()) + '').removeClass( 'uix-3d-carousel__item--right-pos' ).addClass( 'uix-3d-carousel__item--main-pos' );
-					$wrapper.find( '> li#' + (startItem + carousel3DPos()) + '').removeClass( 'uix-3d-carousel__item--back-pos' ).addClass( 'uix-3d-carousel__item--right-pos' );
-					$wrapper.find( '> li#' + carousel3DPos( 'leftposition' ) + '').removeClass( 'uix-3d-carousel__item--left-pos' ).addClass( 'uix-3d-carousel__item--back-pos' );
-
-					startItem++;
-					position = 0;
-					if ( startItem > itemCount ) {
-						startItem = 1;
-					}
-				}
-			}
-
-			
-
-		});
-
-		
-    };
-
-    APP.components.documentReady.push( APP._3D_CAROUSEL.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
 /* 
  *************************************
  * <!-- 3D Background 2 -->
@@ -3415,6 +3173,248 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
+
+
+
+
+/* 
+ *************************************
+ * <!-- 3D Carousel -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP._3D_CAROUSEL               = APP._3D_CAROUSEL || {};
+	APP._3D_CAROUSEL.version       = '0.0.1';
+    APP._3D_CAROUSEL.documentReady = function( $ ) {
+
+		$( '.uix-3d-carousel' ).each( function() {
+			var $this             = $( this ),
+				dataTiming        = $this.data( 'timing' ),
+				dataPrevBtn       = $this.data( 'prev-btn' ),
+				dataNextBtn       = $this.data( 'next-btn' ),
+				dataDraggable     = $this.data( 'draggable' ),
+			    autoSwap          = null,
+				$wrapper          = $this.find( '> ul' ),
+				$items            = $wrapper.find( '> li' ),
+				items             = [],
+				startItem         = 1,
+				position          = 0,
+				itemCount         = $items.length,
+				leftpos           = itemCount,
+				resetCount        = itemCount;
+
+			if( typeof dataTiming === typeof undefined ) dataTiming = 5000;
+			if( typeof dataPrevBtn === typeof undefined ) dataPrevBtn = ".my-carousel-3d-prev";
+			if( typeof dataNextBtn === typeof undefined ) dataNextBtn = ".my-carousel-3d-next";
+			if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
+			
+
+			//Avoid problems caused by insufficient quantity
+			//-------------------------------------		
+			if ( itemCount == 3 ) {
+				var $clone3 = $items.eq(1).clone();
+				$items.last().after( $clone3 );
+			}
+			
+			if ( itemCount == 2 ) {
+				var $clone2_1 = $items.eq(0).clone(),
+					$clone2_2 = $items.eq(1).clone();
+				$items.last().after( [$clone2_1, $clone2_2 ] );
+			}
+			
+			if ( itemCount == 1 ) {
+				var $clone1_1 = $items.eq(0).clone(),
+					$clone1_2 = $items.eq(0).clone(),
+					$clone1_3 = $items.eq(0).clone();
+					
+				$items.last().after( [$clone1_1, $clone1_2, $clone1_3 ] );
+			}		
+			
+
+			//New objects of items and wrapper
+			$wrapper  = $this.find( '> ul' );
+			$items = $wrapper.find( '> li' );
+			itemCount = $items.length;
+			leftpos  = itemCount;
+			resetCount = itemCount;
+
+			//Adding an index to an element makes it easy to query
+			//-------------------------------------	
+			$items.each( function( index ) {
+				items[index] = $( this ).text();
+				$( this ).attr( 'id', index+1 );
+
+			});
+
+			//Pause slideshow and reinstantiate on mouseout
+			//-------------------------------------	
+			$wrapper.on( 'mouseenter', function() {
+				clearInterval( autoSwap );
+			} ).on( 'mouseleave' , function() {
+				autoSwap = setInterval( itemUpdates, dataTiming );
+			} );
+
+
+			
+			//Initialize the default effect
+			//-------------------------------------	
+			itemUpdates( 'clockwise' );
+			
+			
+			//The matched click events for the element.
+			//-------------------------------------	
+			$( dataPrevBtn ).on( 'click', function( e ) {
+				e.preventDefault();
+				itemUpdates( 'clockwise' );
+				return false;
+				
+			});
+			$( dataNextBtn ).on( 'click', function( e ) {
+				e.preventDefault();
+				itemUpdates( 'counter-clockwise' );
+				return false;
+				
+			});
+			
+			
+			$items.on( 'click', function( e ) {
+				e.preventDefault();
+
+				if ( $( this ).attr( 'class' ) == 'uix-3d-carousel__item uix-3d-carousel__item--left-pos' ) {
+					itemUpdates( 'counter-clockwise' );
+				} else {
+					itemUpdates( 'clockwise' );
+				}
+			});
+
+
+			//Drag and Drop
+			//-------------------------------------	
+			var $dragDropTrigger = $wrapper,
+				hammerProps      = {};
+
+			
+			if ( !dataDraggable ) {
+				hammerProps = {
+					inputClass: Hammer.TouchInput
+				};
+			}
+
+			//Mouse event
+			//Hammer.js pan event only for touch devices and not for desktop computer Click+Drag
+			var direction,
+				dragDropElement = $dragDropTrigger[0],
+				dragDropMC      = new Hammer( dragDropElement, hammerProps );
+			
+			
+			dragDropMC.on( 'panright press panleft', function( ev ) {
+
+				//Set the direction in here
+				direction = ev.type;
+			});
+
+
+
+			dragDropMC.on( 'panend', function( ev ) {
+
+				//Use the direction in here
+				//You know the pan has ended
+				//and you know which action they were taking
+				if ( direction == 'panleft' ) {
+					itemUpdates( 'clockwise' );
+				}
+
+				if ( direction == 'panright' ) {
+					itemUpdates( 'counter-clockwise' );
+				}			
+
+
+
+			});	
+
+			
+
+			/*
+			 * Swap Between Images
+			 *
+			 * @param  {string} action           - Direction of movement, optional: clockwise, counter-clockwise
+			 * @return {void}                    - The constructor.
+			 */
+			function itemUpdates( action ) {
+				var direction = action;
+
+				//moving carousel backwards
+				if ( direction == 'counter-clockwise' ) {
+					var leftitem = parseFloat( $wrapper.find( '> li.uix-3d-carousel__item--left-pos' ).attr( 'id' ) - 1 );
+					if ( leftitem == 0 ) {
+						leftitem = itemCount;
+					}
+
+					$wrapper.find( '> li.uix-3d-carousel__item--right-pos' ).removeClass( 'uix-3d-carousel__item--right-pos' ).addClass( 'uix-3d-carousel__item--back-pos' );
+					$wrapper.find( '> li.uix-3d-carousel__item--main-pos' ).removeClass( 'uix-3d-carousel__item--main-pos' ).addClass( 'uix-3d-carousel__item--right-pos' );
+					$wrapper.find( '> li.uix-3d-carousel__item--left-pos' ).removeClass( 'uix-3d-carousel__item--left-pos' ).addClass( 'uix-3d-carousel__item--main-pos' );
+					$wrapper.find( '> li#' + leftitem + '').removeClass( 'uix-3d-carousel__item--back-pos' ).addClass( 'uix-3d-carousel__item--left-pos' );
+
+					startItem--;
+
+					if ( startItem < 1 ) {
+						startItem = itemCount;
+					}
+				}
+
+				//moving carousel forward
+				if ( direction == 'clockwise' || direction == '' || direction == null ) {
+					var carousel3DPos = function( dir ) {
+						if ( dir != 'leftposition' ) {
+							//increment image list id
+							position++;
+
+							//if final result is greater than image count, reset position.
+							if ( startItem + position > resetCount ) {
+								position = 1 - startItem;
+							}
+						}
+
+						//setting the left positioned item
+						if (dir == 'leftposition') {
+							//left positioned image should always be one left than main positioned image.
+							position = startItem - 1;
+
+							//reset last image in list to left position if first image is in main position
+							if (position < 1) {
+								position = itemCount;
+							}
+						}
+
+						return position;
+					};
+
+					$wrapper.find( '> li#' + startItem + '').removeClass( 'uix-3d-carousel__item--main-pos' ).addClass( 'uix-3d-carousel__item--left-pos' );
+					$wrapper.find( '> li#' + (startItem + carousel3DPos()) + '').removeClass( 'uix-3d-carousel__item--right-pos' ).addClass( 'uix-3d-carousel__item--main-pos' );
+					$wrapper.find( '> li#' + (startItem + carousel3DPos()) + '').removeClass( 'uix-3d-carousel__item--back-pos' ).addClass( 'uix-3d-carousel__item--right-pos' );
+					$wrapper.find( '> li#' + carousel3DPos( 'leftposition' ) + '').removeClass( 'uix-3d-carousel__item--left-pos' ).addClass( 'uix-3d-carousel__item--back-pos' );
+
+					startItem++;
+					position = 0;
+					if ( startItem > itemCount ) {
+						startItem = 1;
+					}
+				}
+			}
+
+			
+
+		});
+
+		
+    };
+
+    APP.components.documentReady.push( APP._3D_CAROUSEL.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
 
 
 
@@ -4236,123 +4236,6 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
- * <!-- Accordion Background Images -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.ACCORDION_BG               = APP.ACCORDION_BG || {};
-	APP.ACCORDION_BG.version       = '0.0.4';
-    APP.ACCORDION_BG.documentReady = function( $ ) {
-		
-		
-        var $window      = $( window ),
-		    windowWidth  = $window.width(),
-		    windowHeight = $window.height();
-		
-		
-		if ( windowWidth <= 768 ) return false;
-		
-		
-		$( '.uix-accordion-img' ).each( function() {
-			var $this           = $( this ),
-				aEvent          = $this.data( 'event' ),
-				outReset        = $this.data( 'out-reset' ),
-				widthShow       = $this.data( 'width-show' ),
-				closeBtn        = $this.data( 'close-btn' ),
-				$li             = $this.find( 'ul' ).children( 'li' ),
-				total           = $li.length;
-			
-			
-			
-			
-			if( typeof aEvent === typeof undefined ) {
-				aEvent = 'click';
-			}	
-			
-			if( typeof outReset === typeof undefined ) {
-				outReset = true;
-			}	
-			
-			if( typeof widthShow === typeof undefined ) {
-				widthShow = '60%';
-			}		
-			
-			//Initialize the width of each item
-			itemInit();
-			
-			
-
-			$li.on( aEvent, function( e ) {
-				//Prevents further propagation of the current event in the capturing and bubbling phases.
-				e.stopPropagation();
-			
-				
-				//Apply click method to outer div but not inner div
-				if ( e.target.className == 'uix-accordion-img__content' ) {
-					
-					if ( $( this ).hasClass( 'active' ) ) {
-						$( this ).addClass( 'active' );
-
-					} else {
-						
-						$li.addClass( 'sub-active' );
-						$( this ).addClass( 'active' );
-						$( this ).siblings().removeClass( 'active' );
-
-						$li.css( 'width', ( 100 - parseFloat( widthShow ) )/(total - 1) + '%' );
-						$( this ).css( 'width', widthShow );
-
-					}	
-				}
-			
-			}); 
-			
-			if ( outReset ) {
-				$this.on( 'mouseleave', function( e ) {
-					itemInit();
-				}); 	
-			}
-			
-			if( typeof closeBtn != typeof undefined && closeBtn != false && closeBtn != '' ) {
-				$( closeBtn ).on( 'click', function( e ) {
-					e.preventDefault();
-					itemInit();
-				}); 		
-				
-			}	
-			
-			
-	
-			/*
-			 * Initialize the width of each item
-			 *
-			 * @return {void}             - The constructor.
-			 */
-			function itemInit() {
-				$li.removeClass( 'active sub-active' ).css( 'width', 100/total + '%' );
-			}
-			
-			
-			
-		});
-		
-	
-		
-    };
-
-    APP.components.documentReady.push( APP.ACCORDION_BG.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
-
-/* 
- *************************************
  * <!-- Advanced Content Slider -->
  *************************************
  */
@@ -4614,6 +4497,123 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
+ * <!-- Accordion Background Images -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.ACCORDION_BG               = APP.ACCORDION_BG || {};
+	APP.ACCORDION_BG.version       = '0.0.4';
+    APP.ACCORDION_BG.documentReady = function( $ ) {
+		
+		
+        var $window      = $( window ),
+		    windowWidth  = $window.width(),
+		    windowHeight = $window.height();
+		
+		
+		if ( windowWidth <= 768 ) return false;
+		
+		
+		$( '.uix-accordion-img' ).each( function() {
+			var $this           = $( this ),
+				aEvent          = $this.data( 'event' ),
+				outReset        = $this.data( 'out-reset' ),
+				widthShow       = $this.data( 'width-show' ),
+				closeBtn        = $this.data( 'close-btn' ),
+				$li             = $this.find( 'ul' ).children( 'li' ),
+				total           = $li.length;
+			
+			
+			
+			
+			if( typeof aEvent === typeof undefined ) {
+				aEvent = 'click';
+			}	
+			
+			if( typeof outReset === typeof undefined ) {
+				outReset = true;
+			}	
+			
+			if( typeof widthShow === typeof undefined ) {
+				widthShow = '60%';
+			}		
+			
+			//Initialize the width of each item
+			itemInit();
+			
+			
+
+			$li.on( aEvent, function( e ) {
+				//Prevents further propagation of the current event in the capturing and bubbling phases.
+				e.stopPropagation();
+			
+				
+				//Apply click method to outer div but not inner div
+				if ( e.target.className == 'uix-accordion-img__content' ) {
+					
+					if ( $( this ).hasClass( 'active' ) ) {
+						$( this ).addClass( 'active' );
+
+					} else {
+						
+						$li.addClass( 'sub-active' );
+						$( this ).addClass( 'active' );
+						$( this ).siblings().removeClass( 'active' );
+
+						$li.css( 'width', ( 100 - parseFloat( widthShow ) )/(total - 1) + '%' );
+						$( this ).css( 'width', widthShow );
+
+					}	
+				}
+			
+			}); 
+			
+			if ( outReset ) {
+				$this.on( 'mouseleave', function( e ) {
+					itemInit();
+				}); 	
+			}
+			
+			if( typeof closeBtn != typeof undefined && closeBtn != false && closeBtn != '' ) {
+				$( closeBtn ).on( 'click', function( e ) {
+					e.preventDefault();
+					itemInit();
+				}); 		
+				
+			}	
+			
+			
+	
+			/*
+			 * Initialize the width of each item
+			 *
+			 * @return {void}             - The constructor.
+			 */
+			function itemInit() {
+				$li.removeClass( 'active sub-active' ).css( 'width', 100/total + '%' );
+			}
+			
+			
+			
+		});
+		
+	
+		
+    };
+
+    APP.components.documentReady.push( APP.ACCORDION_BG.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+
+/* 
+ *************************************
  * <!-- Advanced Slider (Special Effects) -->
  *************************************
  */
@@ -4622,7 +4622,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.ADVANCED_SLIDER_FILTER               = APP.ADVANCED_SLIDER_FILTER || {};
-	APP.ADVANCED_SLIDER_FILTER.version       = '0.1.2';
+	APP.ADVANCED_SLIDER_FILTER.version       = '0.1.3';
     APP.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 	
@@ -7081,6 +7081,10 @@ APP = ( function ( APP, $, window, document ) {
 					TweenMax.to( $allItems, animSpeed/1000, {
 						alpha : 0
 					});			
+					
+					//Prevent text overlap when switching quickly
+					$allItems.attr( 'data-text-eff-enable', 0 );
+					$current.attr( 'data-text-eff-enable', 1 );	
 
 					
 				
@@ -7188,14 +7192,36 @@ APP = ( function ( APP, $, window, document ) {
 									}
 								});		
 								
-								//text effect
+								
 								setTimeout( function() {
-									if ( APP.TEXT_EFFECT ) APP.TEXT_EFFECT.pageLoaded();
+									
+									//text effect
+									if ( $.isFunction( $.fn.customTextEffInit ) ) {
+										$current.find( '[data-text-eff]' ).each( function( index )  {
+											$( document ).customTextEffInit( { selectors: '[data-text-eff="'+$( this ).data( 'text-eff' )+'"]' } );
+										});
 
-									TweenMax.to( $current, parallaxSpeed, {
-										alpha : 1,
-										delay : parallaxSpeed/2
-									});		
+									}	
+
+
+									//Prevent text overlap when switching quickly
+									$allItems.each( function()  {
+										if ( $( this ).attr( 'data-text-eff-enable' ) == 1 ) {
+
+											TweenMax.to( $( this ), parallaxSpeed, {
+												alpha : 1,
+												delay : parallaxSpeed/2
+											});	
+
+										} else {
+
+											TweenMax.to( $( this ), parallaxSpeed, {
+												alpha : 0,
+												delay : parallaxSpeed/2
+											});				
+										}
+									});
+
 									
 								}, parallaxSpeed*1000 / 2 );
 								

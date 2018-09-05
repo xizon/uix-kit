@@ -11,8 +11,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  2.1.8
- * ## Last Update         :  September 4, 2018
+ * ## Version             :  2.2.0
+ * ## Last Update         :  September 6, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -32,24 +32,6 @@
     5. Header Area 
     6. Brand 
     7. Filterable Navigation 
-    8. Sidebar 
-    9. Search 
-    10. Comments 
-    11. Mobile Menu 
-    12. Modal Dialog 
-    13. Advanced Slider (Special Effects) 
-    14. Advanced Slider (Basic) 
-    15. Cards 
-    16. Dropdown Menu 
-    17. Flexslider 
-    18. Form 
-    19. Brands List 
-    20. Bulleted List 
-    21. Maintain Aspect Ratio List 
-    22. Side by Side List 
-    23. Source Code 
-    24. ToolTip 
-    25. Vertical Menu (RTL) 
 
 
 
@@ -1061,6 +1043,25 @@ pre.prettyprint {
 .uix-v-menu__container:not(.is-mobile) ul.uix-menu li.multi-column > ul > li {
     border-left: none;
     border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.uix-v-menu__container:not(.is-mobile) ul.uix-menu li.multi-column > ul > li:first-child {
+    border-right: none;
+}
+
+.uix-v-menu__container:not(.is-mobile) ul.uix-menu li.multi-column > ul > li ul {
+    left: auto;
+    right: 0;
+}
+
+.uix-v-menu__container:not(.is-mobile) .uix-menu__arrow {
+    right: auto;
+    left: .5rem;
+}
+
+/*# sourceMappingURL=uix-kit-rtl.css.map */
+-rtl.css.map */
+a(255, 255, 255, 0.2);
 }
 
 .uix-v-menu__container:not(.is-mobile) ul.uix-menu li.multi-column > ul > li:first-child {

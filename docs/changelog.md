@@ -1,5 +1,10 @@
 # Changelog
 
+#### = 2.2.0 (September 5, 2018) =
+
+* Fix: Fixed text overlay problem with Parallax effect of Advanced Slider.
+
+
 #### = 2.1.8 (September 3, 2018) =
 
 * Fix: Fixed an issue with Advanced Slider adaptation on large screens.

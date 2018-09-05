@@ -9,7 +9,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.ADVANCED_SLIDER_FILTER               = APP.ADVANCED_SLIDER_FILTER || {};
-	APP.ADVANCED_SLIDER_FILTER.version       = '0.1.2';
+	APP.ADVANCED_SLIDER_FILTER.version       = '0.1.3';
     APP.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 	
@@ -2468,6 +2468,10 @@ APP = ( function ( APP, $, window, document ) {
 					TweenMax.to( $allItems, animSpeed/1000, {
 						alpha : 0
 					});			
+					
+					//Prevent text overlap when switching quickly
+					$allItems.attr( 'data-text-eff-enable', 0 );
+					$current.attr( 'data-text-eff-enable', 1 );	
 
 					
 				
@@ -2575,14 +2579,36 @@ APP = ( function ( APP, $, window, document ) {
 									}
 								});		
 								
-								//text effect
+								
 								setTimeout( function() {
-									if ( APP.TEXT_EFFECT ) APP.TEXT_EFFECT.pageLoaded();
+									
+									//text effect
+									if ( $.isFunction( $.fn.customTextEffInit ) ) {
+										$current.find( '[data-text-eff]' ).each( function( index )  {
+											$( document ).customTextEffInit( { selectors: '[data-text-eff="'+$( this ).data( 'text-eff' )+'"]' } );
+										});
 
-									TweenMax.to( $current, parallaxSpeed, {
-										alpha : 1,
-										delay : parallaxSpeed/2
-									});		
+									}	
+
+
+									//Prevent text overlap when switching quickly
+									$allItems.each( function()  {
+										if ( $( this ).attr( 'data-text-eff-enable' ) == 1 ) {
+
+											TweenMax.to( $( this ), parallaxSpeed, {
+												alpha : 1,
+												delay : parallaxSpeed/2
+											});	
+
+										} else {
+
+											TweenMax.to( $( this ), parallaxSpeed, {
+												alpha : 0,
+												delay : parallaxSpeed/2
+											});				
+										}
+									});
+
 									
 								}, parallaxSpeed*1000 / 2 );
 								
