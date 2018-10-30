@@ -7,10 +7,11 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.PROGRESSLINE               = APP.PROGRESSLINE || {};
-	APP.PROGRESSLINE.version       = '0.0.1';
+	APP.PROGRESSLINE.version       = '0.0.2';
     APP.PROGRESSLINE.documentReady = function( $ ) {
 
-		var $progressLineCircle = $('.uix-progress-line .uix-progress-line__circle' ),
+		var $obj                = $( '.uix-progress-line' ),
+			$progressLineCircle = $obj.find( '.uix-progress-line__circle' ),
 			progressLineRestore = function() {
 				var k = 0;
 				var progressLineAnimGo = setInterval( function() {
@@ -60,6 +61,15 @@ APP = ( function ( APP, $, window, document ) {
 		$progressLineCircle.parent().on( 'mouseleave', function() {
 			progressLineRestore();
 		} );
+		
+		
+		//Adapt line width for different resolution
+//		var plLength     = $progressLineCircle.length,
+//			newPlW       = $obj.find( '.uix-progress-line__circle' ).first().width(),
+//			plWrapperW   = $obj.width();
+//
+//		$obj.find( '.uix-progress-line__bar' ).css( 'width', parseFloat( plWrapperW - newPlW*plLength )/(plLength-1) + 'px' );
+//		
 
 		
     };

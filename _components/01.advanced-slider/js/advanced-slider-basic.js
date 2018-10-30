@@ -364,8 +364,6 @@ APP = ( function ( APP, $, window, document ) {
 				var touches = e.originalEvent.touches;
 
 				$( this ).addClass( 'dragging' );
-				$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
-				$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
 
 
 				if ( touches && touches.length ) {	
