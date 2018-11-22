@@ -393,6 +393,7 @@ APP = ( function ( APP, $, window, document ) {
 				//-------------------------------------
 				renderer              = new PIXI.Application( $this.width(), $this.height(), {
 														//backgroundColor : 0x000000, 
+					                                    antialias       : true,
 					                                    transparent     : true,
 														autoResize      : true, 
 														view            : document.getElementById( rendererCanvasID )

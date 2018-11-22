@@ -1,5 +1,12 @@
 # Changelog
 
+#### = 2.2.2 (November 22, 2018) =
+
+* New: Add a new module "Scrollspy Animate".
+* New: Increase the RTL style of some components.
+* Tweak: Adjusted the structure of some components to make it more concise and clear.
+
+
 
 #### = 2.2.1 (September 5, 2018) =
 

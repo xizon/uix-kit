@@ -8,6 +8,7 @@
  * 3. Group
  * 4. Custom Select
  * 5. Custom Radio, Toggle And Checkbox
+ * 6. Search of Widget
 */
 
 
@@ -416,3 +417,17 @@
 	}
 }
 
+
+/* 
+ ---------------------------
+ 6. Search of Widget
+ ---------------------------
+ */
+.uix-search-box {
+	
+	.uix-search-box__submit {
+		right: auto;
+		left: 0.875rem;	
+	}
+
+}

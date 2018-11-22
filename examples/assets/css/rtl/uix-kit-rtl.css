@@ -11,8 +11,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  2.2.0
- * ## Last Update         :  September 6, 2018
+ * ## Version             :  2.2.2
+ * ## Last Update         :  November 22, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -31,7 +31,25 @@
     4. Navigation 
     5. Header Area 
     6. Brand 
-    7. Filterable Navigation 
+    7. Sidebar 
+    8. Filterable Navigation 
+    9. Mobile Menu 
+    10. Modal Dialog 
+    11. Advanced Slider (Special Effects) 
+    12. Advanced Slider (Basic) 
+    13. Cards 
+    14. Dropdown Menu 
+    15. Flexslider 
+    16. Form 
+    17. Brands List 
+    18. Bulleted List 
+    19. Maintain Aspect Ratio List 
+    20. Side by Side List 
+    21. Comments 
+    22. Source Code 
+    23. ToolTip 
+    24. Vertical Menu (RTL) 
+    25. WordPress Core ( Do not use prefix "uix-" ) 
 
 
 
@@ -337,46 +355,6 @@ blockquote::before {
 }
 
 /* ====================================================== 
-   <!-- Search -->              
-/* ====================================================== */
-.uix-search-box .uix-search-box__submit {
-    right: auto;
-    left: 0.875rem;
-}
-
-/* ====================================================== 
-   <!-- Comments -->         
-/* ====================================================== */
-.comment-avatar {
-    float: right;
-    margin: 0 0 0 1.3125rem;
-}
-
-.comment .comment {
-    margin-left: auto;
-    margin-right: 2.625rem;
-}
-
-.comment-meta .comment-avatar {
-    margin: 0 0 0 1.3125rem;
-    float: right;
-}
-
-.comment-meta .comment-text {
-    float: right;
-}
-
-.comment-content {
-    margin-left: auto;
-    margin-right: calc(2.8125rem + 1.3125rem);
-}
-
-.comment-content a.respond {
-    right: auto;
-    left: 0;
-}
-
-/* ====================================================== 
    <!-- Mobile Menu -->
 /* ====================================================== */
 /* Mobile Menu Toggle */
@@ -583,6 +561,7 @@ blockquote::before {
  * 3. Group
  * 4. Custom Select
  * 5. Custom Radio, Toggle And Checkbox
+ * 6. Search of Widget
 */
 /* 
  ---------------------------
@@ -864,6 +843,16 @@ blockquote::before {
     right: 4px;
 }
 
+/* 
+ ---------------------------
+ 6. Search of Widget
+ ---------------------------
+ */
+.uix-search-box .uix-search-box__submit {
+    right: auto;
+    left: 0.875rem;
+}
+
 /* ====================================================== 
    <!-- Brands List -->       
 /* ====================================================== */
@@ -907,6 +896,38 @@ dl.uix-list-abreast dd {
     text-align: right;
     padding-left: auto;
     padding-right: 1rem;
+}
+
+/* ====================================================== 
+   <!-- Comments -->         
+/* ====================================================== */
+.comment-avatar {
+    float: right;
+    margin: 0 0 0 1.3125rem;
+}
+
+.comment .comment {
+    margin-left: auto;
+    margin-right: 2.625rem;
+}
+
+.comment-meta .comment-avatar {
+    margin: 0 0 0 1.3125rem;
+    float: right;
+}
+
+.comment-meta .comment-text {
+    float: right;
+}
+
+.comment-content {
+    margin-left: auto;
+    margin-right: calc(2.8125rem + 1.3125rem);
+}
+
+.comment-content a.respond {
+    right: auto;
+    left: 0;
 }
 
 /* ====================================================== 
@@ -1059,23 +1080,62 @@ pre.prettyprint {
     left: .5rem;
 }
 
-/*# sourceMappingURL=uix-kit-rtl.css.map */
--rtl.css.map */
-a(255, 255, 255, 0.2);
+/* ====================================================== 
+   <!-- WordPress Core ( Do not use prefix "uix-" ) -->              
+/* ====================================================== */
+/*
+ * 1. General
+ * 2. Text meant only for screen readers.
+*/
+/* 
+ ---------------------------
+ 1. General
+ ---------------------------
+ */
+.alignnone {
+    margin: 0.4375rem 0 1.27624999994rem 1.27624999994rem;
 }
 
-.uix-v-menu__container:not(.is-mobile) ul.uix-menu li.multi-column > ul > li:first-child {
-    border-right: none;
+.alignright {
+    float: left;
+    margin: 0.4375rem 1.27624999994rem 1.27624999994rem 0;
 }
 
-.uix-v-menu__container:not(.is-mobile) ul.uix-menu li.multi-column > ul > li ul {
+.alignleft {
+    float: right;
+    margin: 0.4375rem 0 1.27624999994rem 1.27624999994rem;
+}
+
+a img.alignright {
+    float: left;
+    margin: 0.4375rem 1.27624999994rem 1.27624999994rem 0;
+}
+
+a img.alignnone {
+    margin: 0.4375rem 0 1.27624999994rem 1.27624999994rem;
+}
+
+a img.alignleft {
+    float: right;
+    margin: 0.4375rem 0 1.27624999994rem 1.27624999994rem;
+}
+
+.wp-caption.alignnone, .wp-caption.alignleft {
+    margin: 0.4375rem 0 1.27624999994rem 1.27624999994rem;
+}
+
+.wp-caption.alignright {
+    margin: 0.4375rem 1.27624999994rem 1.27624999994rem 0;
+}
+
+/* 
+ ---------------------------
+ 2. Text meant only for screen readers.
+ ---------------------------
+ */
+.screen-reader-text:focus {
     left: auto;
-    right: 0;
-}
-
-.uix-v-menu__container:not(.is-mobile) .uix-menu__arrow {
-    right: auto;
-    left: .5rem;
+    right: 0.4375rem;
 }
 
 /*# sourceMappingURL=uix-kit-rtl.css.map */

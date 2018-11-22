@@ -1,0 +1,73 @@
+/* ====================================================== 
+   <!-- WordPress Core ( Do not use prefix "uix-" ) -->              
+/* ====================================================== */
+
+/*
+ * 1. General
+ * 2. Text meant only for screen readers.
+*/
+
+
+/* 
+ ---------------------------
+ 1. General
+ ---------------------------
+ */ 
+
+.alignnone {
+    margin: 0.4375rem 0 1.27624999994rem 1.27624999994rem;
+}
+
+
+.alignright {
+    float: left;
+    margin: 0.4375rem 1.27624999994rem 1.27624999994rem 0;
+}
+
+.alignleft {
+    float: right;
+    margin: 0.4375rem 0 1.27624999994rem 1.27624999994rem;
+}
+
+a img {
+	&.alignright {
+		float: left;
+		margin: 0.4375rem 1.27624999994rem 1.27624999994rem 0;
+	}
+	&.alignnone {
+	    margin: 0.4375rem 0 1.27624999994rem 1.27624999994rem;
+	}
+	&.alignleft {
+		float: right;
+		margin: 0.4375rem 0 1.27624999994rem 1.27624999994rem;
+	}
+
+}
+
+.wp-caption {
+
+	&.alignnone, 
+	&.alignleft {
+	    margin: 0.4375rem 0 1.27624999994rem 1.27624999994rem;
+	}
+	&.alignright {
+	    margin: 0.4375rem 1.27624999994rem 1.27624999994rem 0;
+	}
+
+}
+
+
+/* 
+ ---------------------------
+ 2. Text meant only for screen readers.
+ ---------------------------
+ */ 
+
+.screen-reader-text {
+	
+	&:focus {
+		left: auto;
+		right: 0.4375rem;
+	}
+}
+

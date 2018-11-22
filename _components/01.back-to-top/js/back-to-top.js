@@ -51,6 +51,12 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 		});	
+		
+		//-------- Back To Top Trigger
+		if ( $( '#uix-to-top' ).length == 0 ) {
+			$( 'body' ).prepend( '<a href="#" id="uix-to-top"><i class="fa fa-level-up" aria-hidden="true"></i></a>' );
+		}
+		
 			
 		
 		

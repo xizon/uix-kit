@@ -70,6 +70,7 @@
 			&.active {
 
 				a {
+					
 					color: #989898;
 					font-style: italic;
 					&:hover {
@@ -79,7 +80,8 @@
 				}
 
 				> span {
-					color: #989898;
+					@include bg-gradient( 'to bottom' );
+					color: #fff;
 					font-style: italic;
 				}
 			}	

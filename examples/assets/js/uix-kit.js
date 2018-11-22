@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  2.2.0
- * ## Last Update         :  September 6, 2018
+ * ## Version             :  2.2.2
+ * ## Last Update         :  November 22, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -22,64 +22,64 @@
 	---------------------------
 	
 	
-	1. Body And Header 
-    2. Loader 
-    3. Back to Top 
-    4. Get all custom attributes of an element like "data-*" 
+	1. Loader 
+    2. Get all custom attributes of an element like "data-*" 
+    3. Body And Header 
+    4. Videos 
     5. Navigation 
-    6. Videos 
-    7. Common Height 
-    8. Mega Menu 
-    9. Dropdown Categories 
-    10. Pagination 
-    11. Responsive Table 
-    12. Specify a background image 
-    13. Modal Dialog 
-    14. Mobile Menu 
-    15. 3D Background 
-    16. 3D Background 2 
-    17. 3D Background 2 
-    18. 3D Carousel 
-    19. 3D Model 
-    20. 3D Pages 
-    21. 3D Particle Effect 
-    22. 3D Sphere Rotation 
-    23. Accordion 
-    24. Accordion Background Images 
-    25. Advanced Content Slider 
-    26. Advanced Slider (Special Effects) 
-    27. Advanced Slider (Basic) 
-    28. Circle Layout 
-    29. Counter 
-    30. Dropdown Menu 
-    31. Dropdown Menu 2 (Multi-level drop-down navigation) 
-    32. Dynamic Drop Down List from JSON 
-    33. Flexslider 
-    34. Floating Side Element 
-    35. Form 
-    36. jQuery UI Datepicker 1.11.4 
-    37. Form Progress 
-    38. Gallery 
-    39. Hover Delay Interaction 
-    40. Image Shapes 
-    41. Theme Scripts  
-    42. Lava-Lamp Style Menu 
-    43. Custom Lightbox 
-    44. Bulleted List 
-    45. Posts List With Ajax 
-    46. Fullwidth List of Split 
-    47. Mousewheel Interaction 
-    48. Multiple Items Carousel 
-    49. Full Page/One Page Transition 
-    50. Full Page/One Page Transition 2 
-    51. Parallax 
-    52. Periodical Scroll 
-    53. Pricing 
-    54. Progress Bar 
-    55. Progress Line 
-    56. Retina Graphics for Website 
-    57. Rotating Elements 
-    58. Scroll Reveal 
+    6. Common Height 
+    7. Mega Menu 
+    8. Responsive Table 
+    9. Specify a background image 
+    10. Modal Dialog 
+    11. Mobile Menu 
+    12. WordPress Core Scripts 
+    13. 3D Background 
+    14. 3D Background 2 
+    15. 3D Background 2 
+    16. 3D Carousel 
+    17. 3D Model 
+    18. 3D Pages 
+    19. 3D Particle Effect 
+    20. 3D Sphere Rotation 
+    21. Accordion 
+    22. Accordion Background Images 
+    23. Advanced Content Slider 
+    24. Advanced Slider (Special Effects) 
+    25. Advanced Slider (Basic) 
+    26. Back to Top 
+    27. Circle Layout 
+    28. Counter 
+    29. Dropdown Menu 
+    30. Dropdown Menu 2 (Multi-level drop-down navigation) 
+    31. Dynamic Drop Down List from JSON 
+    32. Flexslider 
+    33. Floating Side Element 
+    34. Form 
+    35. jQuery UI Datepicker 1.11.4 
+    36. Form Progress 
+    37. Gallery 
+    38. Hover Delay Interaction 
+    39. Image Shapes 
+    40. Theme Scripts  
+    41. Lava-Lamp Style Menu 
+    42. Custom Lightbox 
+    43. Bulleted List 
+    44. Posts List With Ajax 
+    45. Fullwidth List of Split 
+    46. Mousewheel Interaction 
+    47. Multiple Items Carousel 
+    48. Full Page/One Page Transition 
+    49. Full Page/One Page Transition 2 
+    50. Parallax 
+    51. Periodical Scroll 
+    52. Pricing 
+    53. Progress Bar 
+    54. Progress Line 
+    55. Retina Graphics for Website 
+    56. Rotating Elements 
+    57. Scroll Reveal 
+    58. Scrollspy Animate 
     59. Show More Less 
     60. Smooth Scrolling When Clicking An Anchor Link 
     61. Source Code View 
@@ -91,10 +91,11 @@
     67. Text effect 
     68. Timeline 
     69. Vertical Menu 
-    70. Ajax Page Loader (Loading A Page via Ajax Into Div)  
-    71. Ajax Push Content  
-    72. GSAP Plugins 
-    73. Three.js Plugins 
+    70. WordPress Core Scripts 
+    71. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    72. Ajax Push Content  
+    73. GSAP Plugins 
+    74. Three.js Plugins 
 
 
 */
@@ -765,72 +766,6 @@ APP = ( function ( APP, $, window, document ) {
 
 
 			
-/* 
- *************************************
- * <!-- Back to Top -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.BACK_TO_TOP               = APP.BACK_TO_TOP || {};
-	APP.BACK_TO_TOP.version       = '0.0.2';
-    APP.BACK_TO_TOP.documentReady = function( $ ) {
-
-		
-		var $window      = $( window ),
-			windowWidth  = $window.width(),
-			windowHeight = $window.height(),
-			$el          = $( '#uix-to-top' );
-
-
-		//-------- Sticky button of back to top 
-		//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
-		$( window ).on('scroll touchmove', function() {
-
-			var scrollTop = $( this ).scrollTop(),
-				spyTop    = windowHeight/2;
-
-		
-			if ( scrollTop >= spyTop ) {
-				$el.addClass( 'active' );
-			} else {
-				$el.removeClass( 'active' );	
-			}
-
-		});
-
-
-		//-------- Click event of back button
-		$el.on( 'click', function( e ) {
-			e.preventDefault();
-
-			TweenMax.to( window, 0.5, {
-				scrollTo: {
-					y        : 0, //y: "max" --> vertical scroll to bottom
-					autoKill : false
-				},
-				ease: Power2.easeOut
-			});	
-
-			
-			
-			
-			
-		});	
-			
-		
-		
-    };
-
-    APP.components.documentReady.push( APP.BACK_TO_TOP.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
 
 /* 
  *************************************
@@ -1867,66 +1802,6 @@ APP = ( function ( APP, $, window, document ) {
 
 }( APP, jQuery, window, document ) );
 
-
-/* 
- *************************************
- * <!-- Dropdown Categories -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.DROPDOWN_CAT               = APP.DROPDOWN_CAT || {};
-	APP.DROPDOWN_CAT.version       = '0.0.1';
-    APP.DROPDOWN_CAT.documentReady = function( $ ) {
-
-		
-		  $( '#cat' ).on( 'change', function () {
-			  var cvalue = $( this ).val();
-			  if ( cvalue ) {
-				  location.href = homeUrl + "/?cat=" + cvalue;
-			  }
-			  return false;
-		  });
-		
-    };
-
-    APP.components.documentReady.push( APP.DROPDOWN_CAT.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
-
-
-/* 
- *************************************
- * <!-- Pagination -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.PAGINATION               = APP.PAGINATION || {};
-	APP.PAGINATION.version       = '0.0.1';
-    APP.PAGINATION.documentReady = function( $ ) {
-
-		$( '.uix-pagination__container li > span.current' ).each( function()  {
-			$( this ).parent( 'li' ).addClass( 'active' );
-		});
-		
-    };
-
-    APP.components.documentReady.push( APP.PAGINATION.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
 /* 
  *************************************
  * <!-- Responsive Table -->
@@ -2417,6 +2292,35 @@ APP = ( function ( APP, $, window, document ) {
     return APP;
 
 }( APP, jQuery, window, document ) );
+
+
+
+
+/* 
+ *************************************
+ * <!-- WordPress Core Scripts -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.PAGINATION               = APP.PAGINATION || {};
+	APP.PAGINATION.version       = '0.0.1';
+    APP.PAGINATION.documentReady = function( $ ) {
+
+		
+		$( '.uix-pagination__container li > span.current' ).each( function()  {
+			$( this ).parent( 'li' ).addClass( 'active' );
+		});
+		
+		
+    };
+
+    APP.components.documentReady.push( APP.PAGINATION.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
 
 
 
@@ -4236,6 +4140,123 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
+ * <!-- Accordion Background Images -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.ACCORDION_BG               = APP.ACCORDION_BG || {};
+	APP.ACCORDION_BG.version       = '0.0.4';
+    APP.ACCORDION_BG.documentReady = function( $ ) {
+		
+		
+        var $window      = $( window ),
+		    windowWidth  = $window.width(),
+		    windowHeight = $window.height();
+		
+		
+		if ( windowWidth <= 768 ) return false;
+		
+		
+		$( '.uix-accordion-img' ).each( function() {
+			var $this           = $( this ),
+				aEvent          = $this.data( 'event' ),
+				outReset        = $this.data( 'out-reset' ),
+				widthShow       = $this.data( 'width-show' ),
+				closeBtn        = $this.data( 'close-btn' ),
+				$li             = $this.find( 'ul' ).children( 'li' ),
+				total           = $li.length;
+			
+			
+			
+			
+			if( typeof aEvent === typeof undefined ) {
+				aEvent = 'click';
+			}	
+			
+			if( typeof outReset === typeof undefined ) {
+				outReset = true;
+			}	
+			
+			if( typeof widthShow === typeof undefined ) {
+				widthShow = '60%';
+			}		
+			
+			//Initialize the width of each item
+			itemInit();
+			
+			
+
+			$li.on( aEvent, function( e ) {
+				//Prevents further propagation of the current event in the capturing and bubbling phases.
+				e.stopPropagation();
+			
+				
+				//Apply click method to outer div but not inner div
+				if ( e.target.className == 'uix-accordion-img__content' ) {
+					
+					if ( $( this ).hasClass( 'active' ) ) {
+						$( this ).addClass( 'active' );
+
+					} else {
+						
+						$li.addClass( 'sub-active' );
+						$( this ).addClass( 'active' );
+						$( this ).siblings().removeClass( 'active' );
+
+						$li.css( 'width', ( 100 - parseFloat( widthShow ) )/(total - 1) + '%' );
+						$( this ).css( 'width', widthShow );
+
+					}	
+				}
+			
+			}); 
+			
+			if ( outReset ) {
+				$this.on( 'mouseleave', function( e ) {
+					itemInit();
+				}); 	
+			}
+			
+			if( typeof closeBtn != typeof undefined && closeBtn != false && closeBtn != '' ) {
+				$( closeBtn ).on( 'click', function( e ) {
+					e.preventDefault();
+					itemInit();
+				}); 		
+				
+			}	
+			
+			
+	
+			/*
+			 * Initialize the width of each item
+			 *
+			 * @return {void}             - The constructor.
+			 */
+			function itemInit() {
+				$li.removeClass( 'active sub-active' ).css( 'width', 100/total + '%' );
+			}
+			
+			
+			
+		});
+		
+	
+		
+    };
+
+    APP.components.documentReady.push( APP.ACCORDION_BG.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+
+/* 
+ *************************************
  * <!-- Advanced Content Slider -->
  *************************************
  */
@@ -4491,123 +4512,6 @@ APP = ( function ( APP, $, window, document ) {
     return APP;
 
 }( APP, jQuery, window, document ) );
-
-
-
-
-/* 
- *************************************
- * <!-- Accordion Background Images -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.ACCORDION_BG               = APP.ACCORDION_BG || {};
-	APP.ACCORDION_BG.version       = '0.0.4';
-    APP.ACCORDION_BG.documentReady = function( $ ) {
-		
-		
-        var $window      = $( window ),
-		    windowWidth  = $window.width(),
-		    windowHeight = $window.height();
-		
-		
-		if ( windowWidth <= 768 ) return false;
-		
-		
-		$( '.uix-accordion-img' ).each( function() {
-			var $this           = $( this ),
-				aEvent          = $this.data( 'event' ),
-				outReset        = $this.data( 'out-reset' ),
-				widthShow       = $this.data( 'width-show' ),
-				closeBtn        = $this.data( 'close-btn' ),
-				$li             = $this.find( 'ul' ).children( 'li' ),
-				total           = $li.length;
-			
-			
-			
-			
-			if( typeof aEvent === typeof undefined ) {
-				aEvent = 'click';
-			}	
-			
-			if( typeof outReset === typeof undefined ) {
-				outReset = true;
-			}	
-			
-			if( typeof widthShow === typeof undefined ) {
-				widthShow = '60%';
-			}		
-			
-			//Initialize the width of each item
-			itemInit();
-			
-			
-
-			$li.on( aEvent, function( e ) {
-				//Prevents further propagation of the current event in the capturing and bubbling phases.
-				e.stopPropagation();
-			
-				
-				//Apply click method to outer div but not inner div
-				if ( e.target.className == 'uix-accordion-img__content' ) {
-					
-					if ( $( this ).hasClass( 'active' ) ) {
-						$( this ).addClass( 'active' );
-
-					} else {
-						
-						$li.addClass( 'sub-active' );
-						$( this ).addClass( 'active' );
-						$( this ).siblings().removeClass( 'active' );
-
-						$li.css( 'width', ( 100 - parseFloat( widthShow ) )/(total - 1) + '%' );
-						$( this ).css( 'width', widthShow );
-
-					}	
-				}
-			
-			}); 
-			
-			if ( outReset ) {
-				$this.on( 'mouseleave', function( e ) {
-					itemInit();
-				}); 	
-			}
-			
-			if( typeof closeBtn != typeof undefined && closeBtn != false && closeBtn != '' ) {
-				$( closeBtn ).on( 'click', function( e ) {
-					e.preventDefault();
-					itemInit();
-				}); 		
-				
-			}	
-			
-			
-	
-			/*
-			 * Initialize the width of each item
-			 *
-			 * @return {void}             - The constructor.
-			 */
-			function itemInit() {
-				$li.removeClass( 'active sub-active' ).css( 'width', 100/total + '%' );
-			}
-			
-			
-			
-		});
-		
-	
-		
-    };
-
-    APP.components.documentReady.push( APP.ACCORDION_BG.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
 
 
 
@@ -5006,6 +4910,7 @@ APP = ( function ( APP, $, window, document ) {
 				//-------------------------------------
 				renderer              = new PIXI.Application( $this.width(), $this.height(), {
 														//backgroundColor : 0x000000, 
+					                                    antialias       : true,
 					                                    transparent     : true,
 														autoResize      : true, 
 														view            : document.getElementById( rendererCanvasID )
@@ -6140,10 +6045,7 @@ APP = ( function ( APP, $, window, document ) {
 				var touches = e.originalEvent.touches;
 
 				$( this ).addClass( 'dragging' );
-				$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
-				$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
-
-
+	
 				if ( touches && touches.length ) {	
 					$( this ).data( 'origin_mouse_x', parseInt( touches[0].pageX ) );
 					$( this ).data( 'origin_mouse_y', parseInt( touches[0].pageY ) );
@@ -7991,8 +7893,6 @@ APP = ( function ( APP, $, window, document ) {
 				var touches = e.originalEvent.touches;
 
 				$( this ).addClass( 'dragging' );
-				$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
-				$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
 
 
 				if ( touches && touches.length ) {	
@@ -8483,6 +8383,78 @@ APP = ( function ( APP, $, window, document ) {
     };
 
     APP.components.pageLoaded.push( APP.ADVANCED_SLIDER.pageLoaded );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+/* 
+ *************************************
+ * <!-- Back to Top -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.BACK_TO_TOP               = APP.BACK_TO_TOP || {};
+	APP.BACK_TO_TOP.version       = '0.0.2';
+    APP.BACK_TO_TOP.documentReady = function( $ ) {
+
+		
+		var $window      = $( window ),
+			windowWidth  = $window.width(),
+			windowHeight = $window.height(),
+			$el          = $( '#uix-to-top' );
+
+
+		//-------- Sticky button of back to top 
+		//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
+		$( window ).on('scroll touchmove', function() {
+
+			var scrollTop = $( this ).scrollTop(),
+				spyTop    = windowHeight/2;
+
+		
+			if ( scrollTop >= spyTop ) {
+				$el.addClass( 'active' );
+			} else {
+				$el.removeClass( 'active' );	
+			}
+
+		});
+
+
+		//-------- Click event of back button
+		$el.on( 'click', function( e ) {
+			e.preventDefault();
+
+			TweenMax.to( window, 0.5, {
+				scrollTo: {
+					y        : 0, //y: "max" --> vertical scroll to bottom
+					autoKill : false
+				},
+				ease: Power2.easeOut
+			});	
+
+			
+			
+			
+			
+		});	
+		
+		//-------- Back To Top Trigger
+		if ( $( '#uix-to-top' ).length == 0 ) {
+			$( 'body' ).prepend( '<a href="#" id="uix-to-top"><i class="fa fa-level-up" aria-hidden="true"></i></a>' );
+		}
+		
+			
+		
+		
+    };
+
+    APP.components.documentReady.push( APP.BACK_TO_TOP.documentReady );
     return APP;
 
 }( APP, jQuery, window, document ) );
@@ -9868,8 +9840,6 @@ APP = ( function ( APP, $, window, document ) {
 				}
 
 				$( this ).addClass( 'dragging' );
-				$( this ).data( 'origin_offset_x', parseInt( $( this ).css( 'margin-left' ) ) );
-				$( this ).data( 'origin_offset_y', parseInt( $( this ).css( 'margin-top' ) ) );
 				$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
 				$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );
 				
@@ -18402,10 +18372,11 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.PROGRESSLINE               = APP.PROGRESSLINE || {};
-	APP.PROGRESSLINE.version       = '0.0.1';
+	APP.PROGRESSLINE.version       = '0.0.2';
     APP.PROGRESSLINE.documentReady = function( $ ) {
 
-		var $progressLineCircle = $('.uix-progress-line .uix-progress-line__circle' ),
+		var $obj                = $( '.uix-progress-line' ),
+			$progressLineCircle = $obj.find( '.uix-progress-line__circle' ),
 			progressLineRestore = function() {
 				var k = 0;
 				var progressLineAnimGo = setInterval( function() {
@@ -18455,6 +18426,15 @@ APP = ( function ( APP, $, window, document ) {
 		$progressLineCircle.parent().on( 'mouseleave', function() {
 			progressLineRestore();
 		} );
+		
+		
+		//Adapt line width for different resolution
+//		var plLength     = $progressLineCircle.length,
+//			newPlW       = $obj.find( '.uix-progress-line__circle' ).first().width(),
+//			plWrapperW   = $obj.width();
+//
+//		$obj.find( '.uix-progress-line__bar' ).css( 'width', parseFloat( plWrapperW - newPlW*plLength )/(plLength-1) + 'px' );
+//		
 
 		
     };
@@ -18503,94 +18483,6 @@ APP = ( function ( APP, $, window, document ) {
     };
 
     APP.components.documentReady.push( APP.RETINA.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-/* 
- *************************************
- * <!-- Rotating Elements -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.ROTATING_EL               = APP.ROTATING_EL || {};
-	APP.ROTATING_EL.version       = '0.0.1';
-    APP.ROTATING_EL.documentReady = function( $ ) {
-
-
-		$( '[data-pointer-to-deg]' ).each( function()  {
-
-			var $this  = $( this ),
-				config = $this.data( 'pointer-to-deg' );
-
-
-			if( typeof config === typeof undefined ) {
-				config = false;
-			}
-
-			if ( config ) {
-
-				if ( $( config.target ).length == 0 ) return false;
-				
-				
-				var pointer      = $( config.target )[0],
-					pointerBox   = pointer.getBoundingClientRect(),
-					centerPoint  = window.getComputedStyle( pointer ).transformOrigin,
-					centers      = centerPoint.split( ' ' ),
-					mouseX,
-					mouseY;
-
-
-				if ( config.mouseSpy ) {
-					$( document ).on( 'mousemove touchstart touchmove', function( e ) {
-						var pointerEvent = e;
-						if ( e.targetTouches && e.targetTouches[0] ) {
-							e.preventDefault();
-							pointerEvent = e.targetTouches[0];
-							mouseX = pointerEvent.pageX;
-							mouseY = pointerEvent.pageY;
-						} else {
-							mouseX = e.clientX;
-							mouseY = e.clientY;
-						}
-
-
-						var centerY = pointerBox.top + parseInt(centers[1]) - window.pageYOffset,
-							centerX = pointerBox.left + parseInt(centers[0]) - window.pageXOffset,
-							radians = Math.atan2(mouseX - centerX, mouseY - centerY),
-							degrees = (radians * (180 / Math.PI) * -1) + 180;
-
-
-						pointer.style.transform = 'rotate(' + degrees + 'deg)';
-
-					});
-
-				}
-
-				
-				$this.on( 'click', function( e ) {
-					e.preventDefault();
-
-					pointer.style.transform = 'rotate(' + config.deg + 'deg)';
-
-				});
-				
-
-			}
-			
-			
-		});
-		
-
-			
-		
-    };
-
-    APP.components.documentReady.push( APP.ROTATING_EL.documentReady );
     return APP;
 
 }( APP, jQuery, window, document ) );
@@ -18760,6 +18652,265 @@ APP = ( function ( APP, $, window, document ) {
     };
 
     APP.components.documentReady.push( APP.SCROLL_REVEAL.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+/* 
+ *************************************
+ * <!-- Rotating Elements -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.ROTATING_EL               = APP.ROTATING_EL || {};
+	APP.ROTATING_EL.version       = '0.0.1';
+    APP.ROTATING_EL.documentReady = function( $ ) {
+
+
+		$( '[data-pointer-to-deg]' ).each( function()  {
+
+			var $this  = $( this ),
+				config = $this.data( 'pointer-to-deg' );
+
+
+			if( typeof config === typeof undefined ) {
+				config = false;
+			}
+
+			if ( config ) {
+
+				if ( $( config.target ).length == 0 ) return false;
+				
+				
+				var pointer      = $( config.target )[0],
+					pointerBox   = pointer.getBoundingClientRect(),
+					centerPoint  = window.getComputedStyle( pointer ).transformOrigin,
+					centers      = centerPoint.split( ' ' ),
+					mouseX,
+					mouseY;
+
+
+				if ( config.mouseSpy ) {
+					$( document ).on( 'mousemove touchstart touchmove', function( e ) {
+						var pointerEvent = e;
+						if ( e.targetTouches && e.targetTouches[0] ) {
+							e.preventDefault();
+							pointerEvent = e.targetTouches[0];
+							mouseX = pointerEvent.pageX;
+							mouseY = pointerEvent.pageY;
+						} else {
+							mouseX = e.clientX;
+							mouseY = e.clientY;
+						}
+
+
+						var centerY = pointerBox.top + parseInt(centers[1]) - window.pageYOffset,
+							centerX = pointerBox.left + parseInt(centers[0]) - window.pageXOffset,
+							radians = Math.atan2(mouseX - centerX, mouseY - centerY),
+							degrees = (radians * (180 / Math.PI) * -1) + 180;
+
+
+						pointer.style.transform = 'rotate(' + degrees + 'deg)';
+
+					});
+
+				}
+
+				
+				$this.on( 'click', function( e ) {
+					e.preventDefault();
+
+					pointer.style.transform = 'rotate(' + config.deg + 'deg)';
+
+				});
+				
+
+			}
+			
+			
+		});
+		
+
+			
+		
+    };
+
+    APP.components.documentReady.push( APP.ROTATING_EL.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+/* 
+ *************************************
+ * <!-- Scrollspy Animate -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.SCROLLSPY_ANIM               = APP.SCROLLSPY_ANIM || {};
+	APP.SCROLLSPY_ANIM.version       = '0.0.1';
+    APP.SCROLLSPY_ANIM.documentReady = function( $ ) {
+
+		
+		var $el         = $( '#scrollspy-animate-demo' ),
+			panelHeight = 0;	
+		
+
+		//Prevent this module from loading in other pages
+		if ( $el.length == 0 ) return false;
+		
+		
+		
+        $( window ).on( 'ready load resizeEnd', function() {
+			
+            window.elHeight = $el.height();
+            window.windowHeight = $( window ).height();
+            window.elOffsetTop = $el.offset().top - panelHeight;
+			
+        });
+		
+		
+		//-------- Text Affect
+		if ( Modernizr.webgl ) {
+			
+			var $txtContainer    = $el.find( '.row canvas' ),
+				count            = 0,
+				curSprite,
+				text             = $txtContainer.data( 'txt' ).split( '' ),
+				tHeight          = 45,
+				tWidth           = 25,
+				renderer         = new PIXI.Application( tWidth*(text.length+2), tHeight*2, {
+					antialias    : true,
+					transparent  : true,
+					resolution   : 1,
+					autoResize   : 1,
+					view         : document.getElementById( 'scrollspy-animate-demo--txt' )
+				});
+			
+			
+
+			var stage        = new PIXI.Container(),
+				filterSprite = PIXI.Sprite.fromImage( $txtContainer.data( 'filter-texture' ) );
+			
+			filterSprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
+			var filter = new PIXI.filters.DisplacementFilter( filterSprite );
+
+
+			var txtStyle = new PIXI.TextStyle({
+				fontSize        : tHeight,
+				letterSpacing   : 0,
+				breakWords      : true,
+				dropShadow      : true,
+				dropShadowAngle : Math.PI / 6,
+				dropShadowAlpha : 0.5,
+				dropShadowColor : '#333',
+				dropShadowBlur  : 1,
+				fill            : 'white',
+				fontFamily      : 'Arial Black',
+				fontStyle       : 'normal',
+				fontWeight      : 'bold',
+				wordWrap        : false,
+				align           : 'left'
+			});	
+
+			curSprite = new PIXI.Text( $txtContainer.data( 'txt' ), txtStyle );
+			curSprite.x = 0;
+			curSprite.y = 0;
+			
+			renderer.stage.addChild( curSprite );
+			
+
+			curSprite.anchor.set( 0 );
+			curSprite.scale.set( 1 );
+
+		
+
+			filterSprite.anchor.set( 0 );
+			filterSprite.scale.set( 0.3 );  
+			filterSprite.x = -50;
+			filterSprite.y = 0;
+
+			renderer.stage.filterArea = renderer.screen;
+			renderer.stage.addChild( curSprite, filterSprite );
+			renderer.stage.filters = [filter];
+
+			
+			var ticker       = new PIXI.ticker.Ticker();
+			ticker.autoStart = true;
+			ticker.add( function( delta ) {
+
+				filterSprite.y += 0.2 * delta;
+				
+				// Render updated scene
+				renderer.render( stage );
+
+			});
+
+					
+		}
+
+
+        $( window ).on( 'scroll ready load resize resizeEnd touchmove', function( event ) {
+		
+            var scrollTop           = $( window ).scrollTop(),
+				translateTitle      = scrollTop / 2,
+				translateBackground = scrollTop / 3,
+				scale               = scrollTop / window.elHeight,
+				backgroundScale     = 1, // + scale / 10
+				titleScale          = 1 - scale * .1,
+				titleOpacity        = 1 - scale,
+				scrollProgress      = ((scrollTop - window.elOffsetTop) / (window.elHeight - window.windowHeight / 6));
+
+			
+			
+            //-------- Animation
+            if ( scrollTop < window.elHeight ) {
+     
+                $el.find( '.row' ).css({
+                    'transition': 'none',
+                    'transform': 'translateY(' + translateTitle + 'px) scale(' + titleScale + ')',
+                    'opacity': titleOpacity
+                });
+				
+                $( 'body' ).removeClass( 'js-uix-content-part' ).removeClass( 'js-uix-bottom-part' );
+            } else if (scrollTop >= window.elHeight) {
+                $( 'body' ).addClass( 'js-uix-content-part' ).removeClass( 'js-uix-bottom-part' );
+				
+				
+            }
+			
+			
+			//-------- Display progress
+			$el.find( '.row h3 em' ).text( scrollProgress.toFixed(2) );
+
+			if ( Modernizr.webgl ) {
+				TweenMax.set( filterSprite, {
+					x: window.windowHeight*scrollProgress
+				});
+	
+			}
+
+			
+			
+			
+        });
+
+
+		
+
+
+		
+    };
+
+    APP.components.documentReady.push( APP.SCROLLSPY_ANIM.documentReady );
     return APP;
 
 }( APP, jQuery, window, document ) );
@@ -21256,6 +21407,46 @@ APP = ( function ( APP, $, window, document ) {
 
 }( APP, jQuery, window, document ) );
 
+
+
+
+
+
+/* 
+ *************************************
+ * <!-- WordPress Core Scripts -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.WP_CORE               = APP.WP_CORE || {};
+	APP.WP_CORE.version       = '0.0.1';
+    APP.WP_CORE.documentReady = function( $ ) {
+
+		
+		/* 
+		 ---------------------------
+		 Dropdown Categories
+		 ---------------------------
+		 */  
+		  $( '#cat' ).on( 'change', function () {
+			  var cvalue = $( this ).val();
+			  if ( cvalue ) {
+				  location.href = homeUrl + "/?cat=" + cvalue;
+			  }
+			  return false;
+		  });
+		
+
+		
+		
+    };
+
+    APP.components.documentReady.push( APP.WP_CORE.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
 
 
 
