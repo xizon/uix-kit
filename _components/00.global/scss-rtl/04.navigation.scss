@@ -18,6 +18,12 @@
 		    margin-right: auto;
 		    margin-left: 1.6875rem;
 			
+
+			.uix-bubble {
+				right: auto;
+				left: 1rem;
+			}
+			
 		    &:not(.multi-column) > ul ul {
 		        margin-left: auto;
 				margin-right: -0.071875rem;
@@ -81,6 +87,12 @@
 	li.multi-column > ul li {
 	    padding-left: auto !important;
 	    padding-right: 1.159375rem !important;
+		
+		.uix-bubble {
+			right: auto;
+			left: 1rem;
+		}
+		
 	}
 
 	ul.uix-menu ul.sub-menu .uix-menu__arrow {

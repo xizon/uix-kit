@@ -27,29 +27,29 @@
 	
     1. Basic 
     2. Helper Classes 
-    3. Basic Layout Styles 
-    4. Navigation 
-    5. Header Area 
-    6. Brand 
-    7. Sidebar 
-    8. Filterable Navigation 
-    9. Mobile Menu 
-    10. Modal Dialog 
-    11. Advanced Slider (Special Effects) 
-    12. Advanced Slider (Basic) 
-    13. Cards 
-    14. Dropdown Menu 
-    15. Flexslider 
-    16. Form 
-    17. Brands List 
-    18. Bulleted List 
-    19. Maintain Aspect Ratio List 
-    20. Side by Side List 
-    21. Comments 
-    22. Source Code 
-    23. ToolTip 
-    24. Vertical Menu (RTL) 
-    25. WordPress Core ( Do not use prefix "uix-" ) 
+    3. Helper Classes 
+    4. Basic Layout Styles 
+    5. Navigation 
+    6. Navigation 
+    7. Header Area 
+    8. Brand 
+    9. Filterable Navigation 
+    10. Sidebar 
+    11. Mobile Menu 
+    12. Modal Dialog 
+    13. Advanced Slider (Special Effects) 
+    14. Advanced Slider (Basic) 
+    15. Cards 
+    16. Dropdown Menu 
+    17. Flexslider 
+    18. Form 
+    19. Brands List 
+    20. Bulleted List 
+    21. Maintain Aspect Ratio List 
+    22. Side by Side List 
+    23. Comments 
+    24. Source Code 
+    25. ToolTip 
 
 
 
@@ -100,6 +100,16 @@ blockquote::before {
 /* ====================================================== 
    <!-- Helper Classes -->                                 
 /* ====================================================== */
+/*
+ * 5. Element Floating
+ * 6. Element Alignment
+ * 12. Tip Bubble
+*/
+/* 
+ ---------------------------
+ 5. Element Floating
+ ---------------------------
+ */
 .uix-f-l {
     float: right;
 }
@@ -108,12 +118,36 @@ blockquote::before {
     float: left;
 }
 
+/* 
+ ---------------------------
+ 6. Element Alignment
+ ---------------------------
+ */
 .uix-t-r {
     text-align: left;
 }
 
 .uix-t-l {
     text-align: right;
+}
+
+/* 
+ ---------------------------
+ 12. Tip Bubble
+ ---------------------------
+ */
+.uix-bubble {
+    margin-left: auto;
+    margin-right: .5rem;
+    right: auto;
+    left: 2.3rem;
+}
+
+@media all and (max-width: 768px) {
+    .uix-bubble {
+        right: auto;
+        left: 1rem;
+    }
 }
 
 /* ====================================================== 
@@ -216,6 +250,11 @@ blockquote::before {
     margin-left: 1.6875rem;
 }
 
+.uix-menu__container:not(.mobile) ul.uix-menu > li .uix-bubble {
+    right: auto;
+    left: 1rem;
+}
+
 .uix-menu__container:not(.mobile) ul.uix-menu > li:not(.multi-column) > ul ul {
     margin-left: auto;
     margin-right: -0.071875rem;
@@ -260,6 +299,11 @@ blockquote::before {
 .uix-menu__container:not(.mobile) li.multi-column > ul li {
     padding-left: auto !important;
     padding-right: 1.159375rem !important;
+}
+
+.uix-menu__container:not(.mobile) li.multi-column > ul li .uix-bubble {
+    right: auto;
+    left: 1rem;
 }
 
 .uix-menu__container:not(.mobile) ul.uix-menu ul.sub-menu .uix-menu__arrow {
@@ -1135,6 +1179,11 @@ a img.alignleft {
  */
 .screen-reader-text:focus {
     left: auto;
+    right: 0.4375rem;
+}
+
+/*# sourceMappingURL=uix-kit-rtl.css.map */
+ left: auto;
     right: 0.4375rem;
 }
 

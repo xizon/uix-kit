@@ -1,58 +1,45 @@
 /* ====================================================== 
    <!-- Helper Classes -->                                 
 /* ====================================================== */
-
-
 /*
  * 5. Element Floating
  * 6. Element Alignment
  * 12. Tip Bubble
 */
-
-
-
 /* 
  ---------------------------
  5. Element Floating
  ---------------------------
- */ 
+ */
 .uix-f-l {
-    float: right;
-}
+  float: right; }
 
 .uix-f-r {
-    float: left;
-}
+  float: left; }
+
 /* 
  ---------------------------
  6. Element Alignment
  ---------------------------
- */ 
-
+ */
 .uix-t-r {
-    text-align: left;
-}
+  text-align: left; }
 
 .uix-t-l {
-    text-align: right;
-}
+  text-align: right; }
 
 /* 
  ---------------------------
  12. Tip Bubble
  ---------------------------
- */ 
+ */
 .uix-bubble {
-	margin-left: auto;
-	margin-right: .5rem;
-	right: auto;
-	left: 2.3rem;
-}
+  margin-left: auto;
+  margin-right: .5rem;
+  right: auto;
+  left: 2.3rem; }
 
 @media all and (max-width: 768px) {
-	.uix-bubble {
-		right: auto;
-		left: 1rem;
-	}
-
-}
+  .uix-bubble {
+    right: auto;
+    left: 1rem; } }
