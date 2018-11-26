@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  2.2.2
- * ## Last Update         :  November 22, 2018
+ * ## Version             :  2.2.3
+ * ## Last Update         :  November 26, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -47,8 +47,8 @@
     23. Advanced Content Slider 
     24. Advanced Slider (Basic) 
     25. Advanced Slider (Special Effects) 
-    26. Circle Layout 
-    27. Back to Top 
+    26. Back to Top 
+    27. Circle Layout 
     28. Counter 
     29. Dropdown Menu 
     30. Dropdown Menu 2 (Multi-level drop-down navigation) 
@@ -269,87 +269,327 @@ var UIX_GUID = UIX_GUID || (function() {
 })();
 
 
+
+
 /* 
  *************************************
- * Hash Change Event
- *
- * @return {void}                        - The constructor.
+ * jQuery hashchange event
+ * 
  *************************************
  */
-( function($){
+/*!
+ * jQuery hashchange event - v1.3 - 7/21/2010
+ * http://benalman.com/projects/jquery-hashchange-plugin/
+ * 
+ * Copyright (c) 2010 "Cowboy" Ben Alman
+ * Dual licensed under the MIT and GPL licenses.
+ * http://benalman.com/about/license/
+ */
 
-  // Store the initial location.hash so that the event isn't triggered when
-  // the page is first loaded.
-  var last_hash = location.hash,
-
-    // An id with which the polling loop can be canceled.
-    timeout_id;
-
-  // Special event definition.
-  $.event.special.hashchange = {
-    setup: function() {
-      // If the event is supported natively, return false so that jQuery
-      // will bind to the event using DOM methods instead of using the
-      //  polling loop.
-      if ( 'onhashchange' in window ) { return false; }
-
-      // Start the polling loop if it's not already running.
-      start();
-    },
-    teardown: function() {
-      // If the event is supported natively, return false so that jQuery
-      // will bind to the event using DOM methods instead of using the
-      // polling loop.
-      if ( 'onhashchange' in window ) { return false; }
-
-      // Stop the polling loop. Since this event is only evern bound to
-      // the `window` object, multiple-element tracking is unnecessary.
-      stop();
-    },
-    add: function( handleObj ) {
-      // Save a reference to the bound event handler.
-      var old_handler = handleObj.handler;
-
-      // This function will now be called when the event is triggered,
-      // instead of the bound event handler.
-      handleObj.handler = function(event) {
-
-        // Augment the event object with the location.hash at the time
-        // the event was triggered.
-        event.fragment = location.hash.replace( /^#/, '' );
-
-        // Call the originally-bound event handler, complete with modified
-        // event object! The result from this call doesn't need to be
-        // returned, because there is no default action to prevent, and 
-        // nothing to propagate to.
-        old_handler.apply( this, arguments );
-      };
-    }
+(function($,window,undefined){
+  '$:nomunge'; // Used by YUI compressor.
+  
+  // Reused string.
+  var str_hashchange = 'hashchange',
+    
+    // Method / object references.
+    doc = document,
+    fake_onhashchange,
+    special = $.event.special,
+    
+    // Does the browser support window.onhashchange? Note that IE8 running in
+    // IE7 compatibility mode reports true for 'onhashchange' in window, even
+    // though the event isn't supported, so also test document.documentMode.
+    doc_mode = doc.documentMode,
+    supports_onhashchange = 'on' + str_hashchange in window && ( doc_mode === undefined || doc_mode > 7 );
+  
+  // Get location.hash (or what you'd expect location.hash to be) sans any
+  // leading #. Thanks for making this necessary, Firefox!
+  function get_fragment( url ) {
+    url = url || location.href;
+    return '#' + url.replace( /^[^#]*#?(.*)$/, '$1' );
   };
-
-  // Start (or continue) the polling loop.
-  function start() {
-    // Stop the polling loop if it has already started.
-    stop();
-
-    // Get the current location.hash. If is has changed since the last loop
-    // iteration, store that value and trigger the hashchange event.
-    var hash = location.hash;
-    if ( hash !== last_hash ) {
-      $(window).trigger( 'hashchange' );
-      last_hash = hash;
+  
+  // Method: jQuery.fn.hashchange
+  // 
+  // Bind a handler to the window.onhashchange event or trigger all bound
+  // window.onhashchange event handlers. This behavior is consistent with
+  // jQuery's built-in event handlers.
+  // 
+  // Usage:
+  // 
+  // > jQuery(window).hashchange( [ handler ] );
+  // 
+  // Arguments:
+  // 
+  //  handler - (Function) Optional handler to be bound to the hashchange
+  //    event. This is a "shortcut" for the more verbose form:
+  //    jQuery(window).bind( 'hashchange', handler ). If handler is omitted,
+  //    all bound window.onhashchange event handlers will be triggered. This
+  //    is a shortcut for the more verbose
+  //    jQuery(window).trigger( 'hashchange' ). These forms are described in
+  //    the <hashchange event> section.
+  // 
+  // Returns:
+  // 
+  //  (jQuery) The initial jQuery collection of elements.
+  
+  // Allow the "shortcut" format $(elem).hashchange( fn ) for binding and
+  // $(elem).hashchange() for triggering, like jQuery does for built-in events.
+  $.fn[ str_hashchange ] = function( fn ) {
+    return fn ? this.bind( str_hashchange, fn ) : this.trigger( str_hashchange );
+  };
+  
+  // Property: jQuery.fn.hashchange.delay
+  // 
+  // The numeric interval (in milliseconds) at which the <hashchange event>
+  // polling loop executes. Defaults to 50.
+  
+  // Property: jQuery.fn.hashchange.domain
+  // 
+  // If you're setting document.domain in your JavaScript, and you want hash
+  // history to work in IE6/7, not only must this property be set, but you must
+  // also set document.domain BEFORE jQuery is loaded into the page. This
+  // property is only applicable if you are supporting IE6/7 (or IE8 operating
+  // in "IE7 compatibility" mode).
+  // 
+  // In addition, the <jQuery.fn.hashchange.src> property must be set to the
+  // path of the included "document-domain.html" file, which can be renamed or
+  // modified if necessary (note that the document.domain specified must be the
+  // same in both your main JavaScript as well as in this file).
+  // 
+  // Usage:
+  // 
+  // jQuery.fn.hashchange.domain = document.domain;
+  
+  // Property: jQuery.fn.hashchange.src
+  // 
+  // If, for some reason, you need to specify an Iframe src file (for example,
+  // when setting document.domain as in <jQuery.fn.hashchange.domain>), you can
+  // do so using this property. Note that when using this property, history
+  // won't be recorded in IE6/7 until the Iframe src file loads. This property
+  // is only applicable if you are supporting IE6/7 (or IE8 operating in "IE7
+  // compatibility" mode).
+  // 
+  // Usage:
+  // 
+  // jQuery.fn.hashchange.src = 'path/to/file.html';
+  
+  $.fn[ str_hashchange ].delay = 50;
+  /*
+  $.fn[ str_hashchange ].domain = null;
+  $.fn[ str_hashchange ].src = null;
+  */
+  
+  // Event: hashchange event
+  // 
+  // Fired when location.hash changes. In browsers that support it, the native
+  // HTML5 window.onhashchange event is used, otherwise a polling loop is
+  // initialized, running every <jQuery.fn.hashchange.delay> milliseconds to
+  // see if the hash has changed. In IE6/7 (and IE8 operating in "IE7
+  // compatibility" mode), a hidden Iframe is created to allow the back button
+  // and hash-based history to work.
+  // 
+  // Usage as described in <jQuery.fn.hashchange>:
+  // 
+  // > // Bind an event handler.
+  // > jQuery(window).hashchange( function(e) {
+  // >   var hash = location.hash;
+  // >   ...
+  // > });
+  // > 
+  // > // Manually trigger the event handler.
+  // > jQuery(window).hashchange();
+  // 
+  // A more verbose usage that allows for event namespacing:
+  // 
+  // > // Bind an event handler.
+  // > jQuery(window).bind( 'hashchange', function(e) {
+  // >   var hash = location.hash;
+  // >   ...
+  // > });
+  // > 
+  // > // Manually trigger the event handler.
+  // > jQuery(window).trigger( 'hashchange' );
+  // 
+  // Additional Notes:
+  // 
+  // * The polling loop and Iframe are not created until at least one handler
+  //   is actually bound to the 'hashchange' event.
+  // * If you need the bound handler(s) to execute immediately, in cases where
+  //   a location.hash exists on page load, via bookmark or page refresh for
+  //   example, use jQuery(window).hashchange() or the more verbose 
+  //   jQuery(window).trigger( 'hashchange' ).
+  // * The event can be bound before DOM ready, but since it won't be usable
+  //   before then in IE6/7 (due to the necessary Iframe), recommended usage is
+  //   to bind it inside a DOM ready handler.
+  
+  // Override existing $.event.special.hashchange methods (allowing this plugin
+  // to be defined after jQuery BBQ in BBQ's source code).
+  special[ str_hashchange ] = $.extend( special[ str_hashchange ], {
+    
+    // Called only when the first 'hashchange' event is bound to window.
+    setup: function() {
+      // If window.onhashchange is supported natively, there's nothing to do..
+      if ( supports_onhashchange ) { return false; }
+      
+      // Otherwise, we need to create our own. And we don't want to call this
+      // until the user binds to the event, just in case they never do, since it
+      // will create a polling loop and possibly even a hidden Iframe.
+      $( fake_onhashchange.start );
+    },
+    
+    // Called only when the last 'hashchange' event is unbound from window.
+    teardown: function() {
+      // If window.onhashchange is supported natively, there's nothing to do..
+      if ( supports_onhashchange ) { return false; }
+      
+      // Otherwise, we need to stop ours (if possible).
+      $( fake_onhashchange.stop );
     }
+    
+  });
+  
+  // fake_onhashchange does all the work of triggering the window.onhashchange
+  // event for browsers that don't natively support it, including creating a
+  // polling loop to watch for hash changes and in IE 6/7 creating a hidden
+  // Iframe to enable back and forward.
+  fake_onhashchange = (function(){
+    var self = {},
+      timeout_id,
+      
+      // Remember the initial hash so it doesn't get triggered immediately.
+      last_hash = get_fragment(),
+      
+      fn_retval = function(val){ return val; },
+      history_set = fn_retval,
+      history_get = fn_retval;
+    
+    // Start the polling loop.
+    self.start = function() {
+      timeout_id || poll();
+    };
+    
+    // Stop the polling loop.
+    self.stop = function() {
+      timeout_id && clearTimeout( timeout_id );
+      timeout_id = undefined;
+    };
+    
+    // This polling loop checks every $.fn.hashchange.delay milliseconds to see
+    // if location.hash has changed, and triggers the 'hashchange' event on
+    // window when necessary.
+    function poll() {
+      var hash = get_fragment(),
+        history_hash = history_get( last_hash );
+      
+      if ( hash !== last_hash ) {
+        history_set( last_hash = hash, history_hash );
+        
+        $(window).trigger( str_hashchange );
+        
+      } else if ( history_hash !== last_hash ) {
+        location.href = location.href.replace( /#.*/, '' ) + history_hash;
+      }
+      
+      timeout_id = setTimeout( poll, $.fn[ str_hashchange ].delay );
+    };
+    
+    // vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+    // vvvvvvvvvvvvvvvvvvv REMOVE IF NOT SUPPORTING IE6/7/8 vvvvvvvvvvvvvvvvvvv
+    // vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+    $.browser.msie && !supports_onhashchange && (function(){
+      // Not only do IE6/7 need the "magical" Iframe treatment, but so does IE8
+      // when running in "IE7 compatibility" mode.
+      
+      var iframe,
+        iframe_src;
+      
+      // When the event is bound and polling starts in IE 6/7, create a hidden
+      // Iframe for history handling.
+      self.start = function(){
+        if ( !iframe ) {
+          iframe_src = $.fn[ str_hashchange ].src;
+          iframe_src = iframe_src && iframe_src + get_fragment();
+          
+          // Create hidden Iframe. Attempt to make Iframe as hidden as possible
+          // by using techniques from http://www.paciellogroup.com/blog/?p=604.
+          iframe = $('<iframe tabindex="-1" title="empty"/>').hide()
+            
+            // When Iframe has completely loaded, initialize the history and
+            // start polling.
+            .one( 'load', function(){
+              iframe_src || history_set( get_fragment() );
+              poll();
+            })
+            
+            // Load Iframe src if specified, otherwise nothing.
+            .attr( 'src', iframe_src || 'javascript:0' )
+            
+            // Append Iframe after the end of the body to prevent unnecessary
+            // initial page scrolling (yes, this works).
+            .insertAfter( 'body' )[0].contentWindow;
+          
+          // Whenever `document.title` changes, update the Iframe's title to
+          // prettify the back/next history menu entries. Since IE sometimes
+          // errors with "Unspecified error" the very first time this is set
+          // (yes, very useful) wrap this with a try/catch block.
+          doc.onpropertychange = function(){
+            try {
+              if ( event.propertyName === 'title' ) {
+                iframe.document.title = doc.title;
+              }
+            } catch(e) {}
+          };
+          
+        }
+      };
+      
+      // Override the "stop" method since an IE6/7 Iframe was created. Even
+      // if there are no longer any bound event handlers, the polling loop
+      // is still necessary for back/next to work at all!
+      self.stop = fn_retval;
+      
+      // Get history by looking at the hidden Iframe's location.hash.
+      history_get = function() {
+        return get_fragment( iframe.location.href );
+      };
+      
+      // Set a new history item by opening and then closing the Iframe
+      // document, *then* setting its location.hash. If document.domain has
+      // been set, update that as well.
+      history_set = function( hash, history_hash ) {
+        var iframe_doc = iframe.document,
+          domain = $.fn[ str_hashchange ].domain;
+        
+        if ( hash !== history_hash ) {
+          // Update Iframe with any initial `document.title` that might be set.
+          iframe_doc.title = doc.title;
+          
+          // Opening the Iframe's document after it has been closed is what
+          // actually adds a history entry.
+          iframe_doc.open();
+          
+          // Set document.domain for the Iframe document as well, if necessary.
+          domain && iframe_doc.write( '<script>document.domain="' + domain + '"</script>' );
+          
+          iframe_doc.close();
+          
+          // Update the Iframe's hash, for great justice.
+          iframe.location.hash = hash;
+        }
+      };
+      
+    })();
+    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    // ^^^^^^^^^^^^^^^^^^^ REMOVE IF NOT SUPPORTING IE6/7/8 ^^^^^^^^^^^^^^^^^^^
+    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    
+    return self;
+  })();
+  
+})(jQuery,this);
 
-    // Poll, setting timeout_id so the polling loop can be canceled.
-    timeout_id = setTimeout( start, 100 );
-  }
-
-  // Stop the polling loop.
-  function stop() {
-    clearTimeout( timeout_id );
-  }
-
-} ) ( jQuery );
 
 
 /* 
@@ -4251,6 +4491,267 @@ APP = ( function ( APP, $, window, document ) {
 
 }( APP, jQuery, window, document ) );
 
+
+
+
+
+/* 
+ *************************************
+ * <!-- Advanced Content Slider -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.ADVANCED_CONTENT_SLIDER               = APP.ADVANCED_CONTENT_SLIDER || {};
+	APP.ADVANCED_CONTENT_SLIDER.version       = '0.0.2';
+    APP.ADVANCED_CONTENT_SLIDER.documentReady = function( $ ) {
+
+		var $window                   = $( window ),
+			windowWidth               = $window.width(),
+			windowHeight              = $window.height(),
+			animDuration              = 1200;
+		
+		
+		
+		sliderInit();
+		
+		$window.on( 'resize', function() {
+			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+			if ( $window.width() != windowWidth ) {
+
+				// Update the window width for next time
+				windowWidth = $window.width();
+
+				sliderInit();
+				
+			}
+		});
+		
+		
+		/*
+		 * Initialize slideshow
+		 *
+		 * @return {void}                   - The constructor.
+		 */
+        function sliderInit() {
+			
+			$( '.uix-advanced-content-slider' ).each( function() {
+				var $this                      = $( this ),
+					$items                     = $this.find( '.uix-advanced-content-slider__item' ),
+					$itemsWrapper              = $this.children( '.uix-advanced-content-slider__inner' ),
+					$first                     = $items.first(),
+					itemWidth                  = $this.width(),
+					itemsTotal                 = $items.length,
+					totalWidth                 = itemWidth*itemsTotal,
+					dataControlsPagination     = $this.data( 'controls-pagination' ),
+					dataControlsArrows         = $this.data( 'controls-arrows' ),
+					dataDraggable              = $this.data( 'draggable' ),
+					dataDraggableCursor        = $this.data( 'draggable-cursor' ),
+					dataControlsPaginationAuto = false;
+
+				
+				
+
+				if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-content-slider-sp-pagination';
+				if ( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-content-slider-sp-arrows';
+				if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
+				if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
+				
+				if ( $( dataControlsPagination ).html().length == 0 ) dataControlsPaginationAuto = true;
+
+				
+
+				//Initialize the width of each item
+				//-------------------------------------		
+				$first.addClass( 'active' );
+				
+				$items.css( 'width', itemWidth + 'px' );
+				
+				TweenMax.set( $itemsWrapper, { 
+					width: totalWidth,
+					onComplete  : function() {
+						$this.css( 'height', 'auto' );
+						
+					}
+				} );	
+				
+
+				//Pagination dots 
+				//-------------------------------------	
+				if ( dataControlsPaginationAuto ) {
+					var _dot       = '',
+						_dotActive = '';
+					_dot += '<ul class="uix-advanced-content-slider__pagination--default">';
+					for ( var i = 0; i < itemsTotal; i++ ) {
+
+						_dotActive = ( i == 0 ) ? 'class="active"' : '';
+
+						_dot += '<li><a '+_dotActive+' data-index="'+i+'" href="javascript:"></a></li>';
+					}
+					_dot += '</ul>';
+
+					if ( $( dataControlsPagination ).html() == '' ) $( dataControlsPagination ).html( _dot );	
+				} else {
+					$( dataControlsPagination ).find( 'li' ).first().find( 'a' ).addClass( 'active' );
+					$( dataControlsPagination ).find( 'li' ).first().addClass( 'active' );
+				}
+
+
+				$( dataControlsPagination ).find( 'li a' ).on( 'click', function( e ) {
+					e.preventDefault();
+
+					if ( !$( this ).hasClass( 'active' ) ) {
+						
+						sliderUpdates( $( this ).attr( 'data-index' ), $this, dataControlsArrows, dataControlsPagination );
+					}
+
+
+
+				});
+
+				
+				//Next/Prev buttons
+				//-------------------------------------		
+				var _prev = $( dataControlsArrows ).find( '.uix-advanced-content-slider__arrows--prev' ),
+					_next = $( dataControlsArrows ).find( '.uix-advanced-content-slider__arrows--next' );
+				
+				
+
+				$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
+				
+				_prev.addClass( 'disabled' );
+
+				_prev.on( 'click', function( e ) {
+					e.preventDefault();
+
+					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
+
+				});
+
+				_next.on( 'click', function( e ) {
+					e.preventDefault();
+
+					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
+
+				});
+				
+				
+				//Drag and Drop
+				//-------------------------------------	
+				var $dragDropTrigger = $this,
+					hammerProps      = {};
+
+				//Make the cursor a move icon when a user hovers over an item
+				if ( dataDraggable && dataDraggableCursor != '' && dataDraggableCursor != false ) $dragDropTrigger.css( 'cursor', dataDraggableCursor );
+				
+				if ( !dataDraggable ) {
+					hammerProps = {
+						inputClass: Hammer.TouchInput
+					};
+				}
+
+				//Mouse event
+				//Hammer.js pan event only for touch devices and not for desktop computer Click+Drag
+				var direction,
+					dragDropElement = $dragDropTrigger[0],
+					dragDropMC      = new Hammer( dragDropElement, hammerProps );
+				
+				dragDropMC.on( 'panright press panleft', function( ev ) {
+
+					//Set the direction in here
+					direction = ev.type;
+				});
+
+				
+				
+				dragDropMC.on( 'panend', function( ev ) {
+					
+					//Use the direction in here
+					//You know the pan has ended
+					//and you know which action they were taking
+					if ( direction == 'panleft' ) {
+						sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );	
+					}
+					
+					if ( direction == 'panright' ) {
+						sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
+					}			
+
+					
+
+				});	
+			
+			});	
+			
+		}
+		
+		/*
+		 * Transition Between Slides
+		 *
+		 * @param  {number} elementIndex     - Index of current slider.
+		 * @param  {object} slider           - Selector of the slider .
+		 * @param  {string} arrows           - Controller name of prev/next buttons.
+		 * @param  {string} pagination       - Controller name of pagination buttons.
+		 * @return {void}                    - The constructor.
+		 */
+        function sliderUpdates( elementIndex, slider, arrows, pagination ) {
+			
+			var $items        = slider.find( '.uix-advanced-content-slider__item' ),
+				itemsTotal    = $items.length,
+				$prev         = $( arrows ).find( '.uix-advanced-content-slider__arrows--prev' ),
+				$next         = $( arrows ).find( '.uix-advanced-content-slider__arrows--next' ),
+				$pagination   = $( pagination ).find( 'li a' );
+				
+			if ( elementIndex <= itemsTotal - 1 && elementIndex >= 0 ) {
+
+				if ( elementIndex > parseFloat( itemsTotal - 1 ) ) elementIndex = parseFloat( itemsTotal - 1 );
+				if ( elementIndex < 0 ) elementIndex = 0;
+				
+				$next.removeClass( 'disabled' );
+				$prev.removeClass( 'disabled' );
+				$pagination.removeClass( 'active' );
+				$pagination.parent().removeClass( 'active' );
+
+				if ( elementIndex == itemsTotal - 1 ) {
+					$next.addClass( 'disabled' );
+				}
+
+				if ( elementIndex == 0 ) {
+					$prev.addClass( 'disabled' );
+				}
+
+				
+
+				$items.removeClass( 'active' );
+				$items.eq( elementIndex ).addClass( 'active' );	
+				$pagination.eq( elementIndex ).addClass( 'active' );
+				$pagination.eq( elementIndex ).parent().addClass( 'active' );
+				
+				
+				
+				TweenMax.to( slider.children( '.uix-advanced-content-slider__inner' ), animDuration/1000, { 
+					x: '-' + ( slider.width() * elementIndex ),
+					onComplete  : function() {
+
+					},
+					ease: Power3.easeOut
+				} );
+				
+	
+			}
+			
+
+			
+		}
+		
+		
+    };
+
+    APP.components.documentReady.push( APP.ADVANCED_CONTENT_SLIDER.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
 
 
 
@@ -8198,267 +8699,6 @@ APP = ( function ( APP, $, window, document ) {
 
 }( APP, jQuery, window, document ) );
 
-
-
-
-
-/* 
- *************************************
- * <!-- Advanced Content Slider -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.ADVANCED_CONTENT_SLIDER               = APP.ADVANCED_CONTENT_SLIDER || {};
-	APP.ADVANCED_CONTENT_SLIDER.version       = '0.0.2';
-    APP.ADVANCED_CONTENT_SLIDER.documentReady = function( $ ) {
-
-		var $window                   = $( window ),
-			windowWidth               = $window.width(),
-			windowHeight              = $window.height(),
-			animDuration              = 1200;
-		
-		
-		
-		sliderInit();
-		
-		$window.on( 'resize', function() {
-			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( $window.width() != windowWidth ) {
-
-				// Update the window width for next time
-				windowWidth = $window.width();
-
-				sliderInit();
-				
-			}
-		});
-		
-		
-		/*
-		 * Initialize slideshow
-		 *
-		 * @return {void}                   - The constructor.
-		 */
-        function sliderInit() {
-			
-			$( '.uix-advanced-content-slider' ).each( function() {
-				var $this                      = $( this ),
-					$items                     = $this.find( '.uix-advanced-content-slider__item' ),
-					$itemsWrapper              = $this.children( '.uix-advanced-content-slider__inner' ),
-					$first                     = $items.first(),
-					itemWidth                  = $this.width(),
-					itemsTotal                 = $items.length,
-					totalWidth                 = itemWidth*itemsTotal,
-					dataControlsPagination     = $this.data( 'controls-pagination' ),
-					dataControlsArrows         = $this.data( 'controls-arrows' ),
-					dataDraggable              = $this.data( 'draggable' ),
-					dataDraggableCursor        = $this.data( 'draggable-cursor' ),
-					dataControlsPaginationAuto = false;
-
-				
-				
-
-				if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-content-slider-sp-pagination';
-				if ( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-content-slider-sp-arrows';
-				if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
-				if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
-				
-				if ( $( dataControlsPagination ).html().length == 0 ) dataControlsPaginationAuto = true;
-
-				
-
-				//Initialize the width of each item
-				//-------------------------------------		
-				$first.addClass( 'active' );
-				
-				$items.css( 'width', itemWidth + 'px' );
-				
-				TweenMax.set( $itemsWrapper, { 
-					width: totalWidth,
-					onComplete  : function() {
-						$this.css( 'height', 'auto' );
-						
-					}
-				} );	
-				
-
-				//Pagination dots 
-				//-------------------------------------	
-				if ( dataControlsPaginationAuto ) {
-					var _dot       = '',
-						_dotActive = '';
-					_dot += '<ul class="uix-advanced-content-slider__pagination--default">';
-					for ( var i = 0; i < itemsTotal; i++ ) {
-
-						_dotActive = ( i == 0 ) ? 'class="active"' : '';
-
-						_dot += '<li><a '+_dotActive+' data-index="'+i+'" href="javascript:"></a></li>';
-					}
-					_dot += '</ul>';
-
-					if ( $( dataControlsPagination ).html() == '' ) $( dataControlsPagination ).html( _dot );	
-				} else {
-					$( dataControlsPagination ).find( 'li' ).first().find( 'a' ).addClass( 'active' );
-					$( dataControlsPagination ).find( 'li' ).first().addClass( 'active' );
-				}
-
-
-				$( dataControlsPagination ).find( 'li a' ).on( 'click', function( e ) {
-					e.preventDefault();
-
-					if ( !$( this ).hasClass( 'active' ) ) {
-						
-						sliderUpdates( $( this ).attr( 'data-index' ), $this, dataControlsArrows, dataControlsPagination );
-					}
-
-
-
-				});
-
-				
-				//Next/Prev buttons
-				//-------------------------------------		
-				var _prev = $( dataControlsArrows ).find( '.uix-advanced-content-slider__arrows--prev' ),
-					_next = $( dataControlsArrows ).find( '.uix-advanced-content-slider__arrows--next' );
-				
-				
-
-				$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
-				
-				_prev.addClass( 'disabled' );
-
-				_prev.on( 'click', function( e ) {
-					e.preventDefault();
-
-					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
-
-				});
-
-				_next.on( 'click', function( e ) {
-					e.preventDefault();
-
-					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
-
-				});
-				
-				
-				//Drag and Drop
-				//-------------------------------------	
-				var $dragDropTrigger = $this,
-					hammerProps      = {};
-
-				//Make the cursor a move icon when a user hovers over an item
-				if ( dataDraggable && dataDraggableCursor != '' && dataDraggableCursor != false ) $dragDropTrigger.css( 'cursor', dataDraggableCursor );
-				
-				if ( !dataDraggable ) {
-					hammerProps = {
-						inputClass: Hammer.TouchInput
-					};
-				}
-
-				//Mouse event
-				//Hammer.js pan event only for touch devices and not for desktop computer Click+Drag
-				var direction,
-					dragDropElement = $dragDropTrigger[0],
-					dragDropMC      = new Hammer( dragDropElement, hammerProps );
-				
-				dragDropMC.on( 'panright press panleft', function( ev ) {
-
-					//Set the direction in here
-					direction = ev.type;
-				});
-
-				
-				
-				dragDropMC.on( 'panend', function( ev ) {
-					
-					//Use the direction in here
-					//You know the pan has ended
-					//and you know which action they were taking
-					if ( direction == 'panleft' ) {
-						sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );	
-					}
-					
-					if ( direction == 'panright' ) {
-						sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
-					}			
-
-					
-
-				});	
-			
-			});	
-			
-		}
-		
-		/*
-		 * Transition Between Slides
-		 *
-		 * @param  {number} elementIndex     - Index of current slider.
-		 * @param  {object} slider           - Selector of the slider .
-		 * @param  {string} arrows           - Controller name of prev/next buttons.
-		 * @param  {string} pagination       - Controller name of pagination buttons.
-		 * @return {void}                    - The constructor.
-		 */
-        function sliderUpdates( elementIndex, slider, arrows, pagination ) {
-			
-			var $items        = slider.find( '.uix-advanced-content-slider__item' ),
-				itemsTotal    = $items.length,
-				$prev         = $( arrows ).find( '.uix-advanced-content-slider__arrows--prev' ),
-				$next         = $( arrows ).find( '.uix-advanced-content-slider__arrows--next' ),
-				$pagination   = $( pagination ).find( 'li a' );
-				
-			if ( elementIndex <= itemsTotal - 1 && elementIndex >= 0 ) {
-
-				if ( elementIndex > parseFloat( itemsTotal - 1 ) ) elementIndex = parseFloat( itemsTotal - 1 );
-				if ( elementIndex < 0 ) elementIndex = 0;
-				
-				$next.removeClass( 'disabled' );
-				$prev.removeClass( 'disabled' );
-				$pagination.removeClass( 'active' );
-				$pagination.parent().removeClass( 'active' );
-
-				if ( elementIndex == itemsTotal - 1 ) {
-					$next.addClass( 'disabled' );
-				}
-
-				if ( elementIndex == 0 ) {
-					$prev.addClass( 'disabled' );
-				}
-
-				
-
-				$items.removeClass( 'active' );
-				$items.eq( elementIndex ).addClass( 'active' );	
-				$pagination.eq( elementIndex ).addClass( 'active' );
-				$pagination.eq( elementIndex ).parent().addClass( 'active' );
-				
-				
-				
-				TweenMax.to( slider.children( '.uix-advanced-content-slider__inner' ), animDuration/1000, { 
-					x: '-' + ( slider.width() * elementIndex ),
-					onComplete  : function() {
-
-					},
-					ease: Power3.easeOut
-				} );
-				
-	
-			}
-			
-
-			
-		}
-		
-		
-    };
-
-    APP.components.documentReady.push( APP.ADVANCED_CONTENT_SLIDER.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
 
 
 
@@ -17067,9 +17307,20 @@ APP = ( function ( APP, $, window, document ) {
 		//Init the section location
 		sectionStart();
 		
-		
+		//Detect URL change
 		$( window ).on( 'hashchange', function(){
-			console.log( 'hash changed!' );
+			var hash = window.location.hash,
+				locArr,
+				loc;
+
+			if ( hash ) {
+
+				//Add hashchange event
+				locArr = hash.split( 'section-' );
+				loc    = locArr[1];
+				moveTo( $sectionsContainer, false, loc );
+			}
+			
 		} );
 		
 
@@ -17512,9 +17763,23 @@ APP = ( function ( APP, $, window, document ) {
 		//Init the section location
 		sectionStart();
 
+		//Detect URL change
 		$( window ).on( 'hashchange', function(){
-			console.log( 'hash changed!' );
+			var hash = window.location.hash,
+				locArr,
+				loc;
+
+			if ( hash ) {
+
+				//Add hashchange event
+				locArr = hash.split( 'section-' );
+				loc    = locArr[1];
+				moveTo( $sectionsContainer, false, loc );
+			}
+			
 		} );
+		
+		
 		
 		
 		
@@ -18865,7 +19130,7 @@ APP = ( function ( APP, $, window, document ) {
 				translateBackground = scrollTop / 3,
 				scale               = scrollTop / window.elHeight,
 				backgroundScale     = 1, // + scale / 10
-				titleScale          = 1 - scale * .1,
+				titleScale          = 1 - scale * 0.1,
 				titleOpacity        = 1 - scale,
 				scrollProgress      = ((scrollTop - window.elOffsetTop) / (window.elHeight - window.windowHeight / 6));
 
@@ -21503,6 +21768,14 @@ APP = ( function ( APP, $, window, document ) {
 
 		
 		
+		
+		//Detect URL change
+		window.addEventListener( 'popstate', function( e ) {
+			moveTo( $( ajaxContainer ), false, 'down', 0 );
+		});
+
+		
+		
 
 		/* 
 		 ====================================================
@@ -21675,7 +21948,7 @@ APP = ( function ( APP, $, window, document ) {
 					success  : function( response ) {
 						
 						//A function to be called if the request succeeds
-						ajaxSucceeds( dir, container, url, $( response ).find( '.js-uix-ajax-load__container' ).html() );
+						ajaxSucceeds( dir, container, url, $( response ).find( '.js-uix-ajax-load__container' ).html(), $( response ).filter( 'title' ).text() );
 
 					},
 					error: function(){
@@ -21719,9 +21992,10 @@ APP = ( function ( APP, $, window, document ) {
 		 * @param  {object} container - The instance returned from the request succeeds
 		 * @param  {string} url       - Current URL after click
 		 * @param  {string} content   - The data returned from the server
+		 * @param  {string} title        - The title of a requested page.
 		 * @return {void}             - The constructor.
 		 */
-		function ajaxSucceeds( dir, container, url, content ) {
+		function ajaxSucceeds( dir, container, url, content, title ) {
 			
 			var oldContent = container.html();
 		
@@ -21745,15 +22019,18 @@ APP = ( function ( APP, $, window, document ) {
 						// Modify the URL without reloading the page
 						if( history.pushState ) {
 							history.pushState( null, null, url );
-						}
-						else {
+						} else {
 							location.hash = url;
 						}
+				
+						//Change the page title
+						document.title = title;	
+						
 						
 						//Change URL without refresh the page
-						if ( url == 'home.html' ) {
-							history.pushState(null, null, window.location.href.replace( 'home.html', '' ) );
-						}	
+//						if ( url == 'home.html' ) {
+//							history.pushState(null, null, window.location.href.replace( 'home.html', '' ) );
+//						}	
 						
 						
 
@@ -22042,39 +22319,6 @@ APP = ( function ( APP, $, window, document ) {
 }( jQuery ));
 
 
-		
-/*
- * Back to History URL 
- *
- * @return {void}  - The constructor.
- */	
-( function ( $ ) {
-    $.fn.backToHisroryURL = function( options ) {
- 
-        // This is the easiest way to have default options.
-        var settings = $.extend({
-			url    : false
-        }, options );
- 
-        this.each( function() {
-			
-			var baseFullURL = window.location.protocol+'//'+window.location.hostname+window.location.pathname;
-			
-			if ( settings.url && settings.url != '' ) {
-				baseFullURL = settings.url;
-			}
-			
-			if ( $.support.pjax ) {
-				history.pushState( {},'', baseFullURL );
-			}
-		
-		});
- 
-    };
- 
-}( jQuery ));
-
-
 /* 
  *************************************
  * <!-- Ajax Push Content  -->
@@ -22084,7 +22328,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.AJAX_PUSH_CONTENT               = APP.AJAX_PUSH_CONTENT || {};
-	APP.AJAX_PUSH_CONTENT.version       = '0.0.2';
+	APP.AJAX_PUSH_CONTENT.version       = '0.0.3';
     APP.AJAX_PUSH_CONTENT.documentReady = function( $ ) {
 
         var $window                  = $( window ),
@@ -22097,54 +22341,28 @@ APP = ( function ( APP, $, window, document ) {
 		//Fix an issue for mousewheel event is too fast.
 		var loaderRemoveDelay   = 500,
 			AJAXPageLinks       = '[data-ajax-push-content]',
-			historyEnable       = false;
+			ajaxConfig          = {
+									"container" :"#my-ajax-demo-push-container",
+									"target"    :"#my-ajax-demo-target-container",
+									"loading"   :"<div class=\"my-loader\"><span><i class=\"fa fa-spinner fa-spin\"></i> loading...</span></div>",
+									"method"    :"POST"
+								};
 
-
+		//Fire click event
+		var pushState = history.pushState;
+		history.pushState = function() {
+			pushState.apply( history, arguments );
+			fireClickEvents('pushState', arguments );
+		};
 		
-		/*
-		 * Call AJAX on click event for "single pages links"
-		 *
-		 */
-		
-		if ( historyEnable ) {
-			//Detect URL change in JavaScript
-			var History = window.History;
-
-			if ( History.enabled ) {
-
-				// Load the page
-				if ( $( '#my-ajax-demo-push-container' ).length > 0 ) {
-					pushAction( $( '#my-ajax-demo-push-container' ), '#my-ajax-demo-target-container', "<div class=\"my-loader\"><span><i class=\"fa fa-spinner fa-spin\"></i> loading...</span></div>", window.location.href, 'POST', false );
-
-
-					// Apply the original scripts
-					$( document ).applyOriginalSomeScripts();		
-
-				}	
-
-			} else {
-				return false;
-			}
-
-
-			// Content update and back/forward button handler
-			History.Adapter.bind(window, 'statechange', function() {
-				var State = History.getState();	
-				// Do ajax
-				if ( $( '#my-ajax-demo-push-container' ).length > 0 ) {
-					pushAction( $( '#my-ajax-demo-push-container' ), '#my-ajax-demo-target-container', "<div class=\"my-loader\"><span><i class=\"fa fa-spinner fa-spin\"></i> loading...</span></div>", State.data.path, 'POST', false );
-
-				}	
-
-
-				// Log the history object to your browser's console
-				History.log(State);
-			});
-	
+		function fireClickEvents() {
+			//do something...
 		}
 
-
-
+		//Detect URL change
+		window.addEventListener( 'popstate', function( e ) {
+			pushAction( $( ajaxConfig.container ), ajaxConfig.target, ajaxConfig.loading, document.location.href, ajaxConfig.method );
+		});
 
 		
 		$( document ).on( 'click', AJAXPageLinks, function( event ) {
@@ -22153,41 +22371,24 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			var $this            = $( this ),
-				config           = $this.data( 'ajax-push-content' ),
 			    curURL           = $this.attr( 'href' ); 
 
-			if( typeof config === typeof undefined ) {
-				config = false;
+			//The currently URL of link
+			if ( typeof curURL === typeof undefined ) {
+				curURL = $this.closest( 'a' ).attr( 'href' );
 			}
-				
-			if ( config ) {
-			
-				//The currently URL of link
-				if ( typeof curURL === typeof undefined ) {
-					curURL = $this.closest( 'a' ).attr( 'href' );
-				}
 
 
-				//Prevent multiple request on click
-				if ( $( AJAXPageLinks ).data( 'request-running' ) ) {
-					return;
-				}
-				$( AJAXPageLinks ).data( 'request-running', true );
-
-			
-				if ( historyEnable ) {
-					//Click on this link element using an AJAX request
-					// When we do this, History.Adapter will also execute its contents. 	
-					History.pushState({path: curURL}, document.title, curURL ); 	
-				} else {
-					
-					//Click on this link element using an AJAX request
-					pushAction( $( config.container ), config.target, config.loading, curURL, config.method, event );
-	
-				}
-
-				
+			//Prevent multiple request on click
+			if ( $( AJAXPageLinks ).data( 'request-running' ) ) {
+				return;
 			}
+			$( AJAXPageLinks ).data( 'request-running', true );
+
+
+			//Click on this link element using an AJAX request
+			pushAction( $( ajaxConfig.container ), ajaxConfig.target, ajaxConfig.loading, curURL, ajaxConfig.method );
+
 			
 
 			return false;
@@ -22208,37 +22409,15 @@ APP = ( function ( APP, $, window, document ) {
 		 * @param  {string} loading      - Content of loading area.
 		 * @param  {string} url          - The target URL via AJAX.
 		 * @param  {string} method       - The HTTP method to use for the request (e.g. "POST", "GET", "PUT")
-		 * @param  {object} event        - An object containing data that will be passed to the event handler.
 		 * @return {void}                - The constructor.
 		 */
-		function pushAction( container, target, loading, url, method, event ) {
-		
+		function pushAction( container, target, loading, url, method ) {
+
+			if ( container.length == 0 ) return false;
 
 			if ( typeof method === typeof undefined || method == '' ) {
 			    method = 'POST';
 			}
-			
-			//Click on this link element using an PJAX request
-			//This is a lower level function used by $.fn.pjax itself. 
-			//It allows you to get a little more control over the pjax event handling.
-			if ( event ) {
-				
-				
-//				$.pjax.click( event, container,  {
-//					showHTMLdelay : 0, 
-//					startEvent    : function() {
-//
-//
-//
-//					}, 
-//					endEvent      : function() {
-//
-//
-//					}
-//				} );
-
-			}
-
 		
 			$.ajax({
 				timeout  : 15000,
@@ -22250,9 +22429,8 @@ APP = ( function ( APP, $, window, document ) {
 				},	
 				success  : function( response ) {
 					
-
 					//A function to be called if the request succeeds
-					ajaxSucceeds( container, url, $( response ).find( target ).html() );
+					ajaxSucceeds( container, url, $( response ).find( target ).html(), $( response ).filter( 'title' ).text() );
 
 				},
 				error: function(){
@@ -22306,9 +22484,10 @@ APP = ( function ( APP, $, window, document ) {
 		 * @param  {string} container    - The target container to which the content will be added.
 		 * @param  {string} url          - Current URL after click
 		 * @param  {string} content      - The data returned from the server
+		 * @param  {string} title        - The title of a requested page.
 		 * @return {void}                - The constructor.
 		 */
-		function ajaxSucceeds( container, url, content ) {
+		function ajaxSucceeds( container, url, content, title ) {
 			
 		
 			//Remove loader
@@ -22330,20 +22509,17 @@ APP = ( function ( APP, $, window, document ) {
 						$( document ).applyOriginalSomeScripts();
 	
 						
-						if ( ! historyEnable ) {
-							
-							// Modify the URL without reloading the page
-							if( history.pushState ) {
-								history.pushState( null, null, url );
-							}
-							else {
-								location.hash = url;
-							}
-	
+						// Modify the URL without reloading the page
+						if( history.pushState ) {
+							history.pushState( null, null, url );
+						} else {
+							location.hash = url;
 						}
-
-					
-
+						
+						//Change the page title
+						document.title = title;
+						
+						
 						//Prevent multiple request on click
 						$( AJAXPageLinks ).data( 'request-running', false );	
 						

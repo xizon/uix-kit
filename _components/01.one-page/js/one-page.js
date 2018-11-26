@@ -48,9 +48,20 @@ APP = ( function ( APP, $, window, document ) {
 		//Init the section location
 		sectionStart();
 		
-		
+		//Detect URL change
 		$( window ).on( 'hashchange', function(){
-			console.log( 'hash changed!' );
+			var hash = window.location.hash,
+				locArr,
+				loc;
+
+			if ( hash ) {
+
+				//Add hashchange event
+				locArr = hash.split( 'section-' );
+				loc    = locArr[1];
+				moveTo( $sectionsContainer, false, loc );
+			}
+			
 		} );
 		
 

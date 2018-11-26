@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  2.2.2
- * ## Last Update         :  November 22, 2018
+ * ## Version             :  2.2.3
+ * ## Last Update         :  November 26, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -147,8 +147,8 @@
     82. Tabs 
     83. Team Focus 
     84. Team Fullwidth (Style using the Side by Side List With Photo module) 
-    85. Testimonials Carousel 
-    86. Team Gird 
+    85. Team Gird 
+    86. Testimonials Carousel 
     87. Text effect 
     88. Timeline 
     89. ToolTip 
@@ -157,6 +157,7 @@
     92. Wave Background 
     93. 3rd Party Plugins 
     94. WordPress Core ( Do not use prefix "uix-" ) 
+    95. Ajax Page Loader (Loading A Page via Ajax Into Div)  
 
 
 
@@ -2170,7 +2171,7 @@ h6 {
   top: 0;
   left: 0;
   margin-top: 0.75rem;
-  border: 1.15px solid #212121;
+  border: 1.15px solid rgba(33, 33, 33, 0.1);
   background: #fff;
   border-radius: 8px;
 }
@@ -9902,96 +9903,6 @@ ol.uix-flexslider__control-paging li a:hover, ol.uix-flexslider__control-paging 
 }
 
 /* ====================================================== 
-    <!-- Brands List --> 
-/* ====================================================== */
-.uix-list-brands {
-    display: block;
-    background: #fff;
-    padding: 1.5rem 0;
-    margin: 3rem 0;
-    overflow: auto;
-  /* CSS background disappears when using float:left */
-  /* Default */;
-}
-
-.uix-list-brands::after {
-    content: '';
-    display: block;
-    clear: both;
-}
-
-.uix-list-brands li {
-    text-align: center;
-    display: inline-block;
-    padding: 1rem 0;
-    text-align: center;
-    margin: 0;
-    box-sizing: border-box;
-    float: left;
-  /* When using inline-block elements, there will always be an whitespace issue between those elements (that space is about ~ 4px wide). */;
-}
-
-.uix-list-brands li span {
-    font-size: 0.875rem;
-    display: block;
-    padding: 1.5rem;
-}
-
-.uix-list-brands.uix-list-brands--tiny li {
-    width: 16.66666666666667%;
-}
-
-.uix-list-brands.uix-list-brands--tiny li:nth-child(6n+1) {
-    clear: both;
-}
-
-.uix-list-brands.uix-list-brands--small li {
-    width: 20%;
-}
-
-.uix-list-brands.uix-list-brands--small li:nth-child(5n+1) {
-    clear: both;
-}
-
-.uix-list-brands.uix-list-brands--medium li {
-    width: 25%;
-}
-
-.uix-list-brands.uix-list-brands--medium li:nth-child(4n+1) {
-    clear: both;
-}
-
-.uix-list-brands.uix-list-brands--large li {
-    width: 33.33333333333333%;
-}
-
-.uix-list-brands.uix-list-brands--large li:nth-child(3n+1) {
-    clear: both;
-}
-
-@media all and (max-width: 768px) {
-    .uix-list-brands {
-        margin: 1.5rem 0;
-        min-height: inherit;
-    }
-
-    .uix-list-brands li {
-        width: 50%;
-    }
-
-    .uix-list-brands li:nth-child(2n+1) {
-        clear: both;
-    }
-
-    .uix-list-brands.uix-list-brands--tiny li,
-  .uix-list-brands.uix-list-brands--small li,
-  .uix-list-brands.uix-list-brands--medium li,
-  .uix-list-brands.uix-list-brands--large li {
-        width: 50%;
-    }
-}
-
-/* ====================================================== 
    <!-- Cutom Light Box -->   
 /* ====================================================== */
 /*
@@ -10569,6 +10480,96 @@ a.uix-lightbox__original__close::after {
 }
 
 /* ====================================================== 
+    <!-- Brands List --> 
+/* ====================================================== */
+.uix-list-brands {
+    display: block;
+    background: #fff;
+    padding: 1.5rem 0;
+    margin: 3rem 0;
+    overflow: auto;
+  /* CSS background disappears when using float:left */
+  /* Default */;
+}
+
+.uix-list-brands::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.uix-list-brands li {
+    text-align: center;
+    display: inline-block;
+    padding: 1rem 0;
+    text-align: center;
+    margin: 0;
+    box-sizing: border-box;
+    float: left;
+  /* When using inline-block elements, there will always be an whitespace issue between those elements (that space is about ~ 4px wide). */;
+}
+
+.uix-list-brands li span {
+    font-size: 0.875rem;
+    display: block;
+    padding: 1.5rem;
+}
+
+.uix-list-brands.uix-list-brands--tiny li {
+    width: 16.66666666666667%;
+}
+
+.uix-list-brands.uix-list-brands--tiny li:nth-child(6n+1) {
+    clear: both;
+}
+
+.uix-list-brands.uix-list-brands--small li {
+    width: 20%;
+}
+
+.uix-list-brands.uix-list-brands--small li:nth-child(5n+1) {
+    clear: both;
+}
+
+.uix-list-brands.uix-list-brands--medium li {
+    width: 25%;
+}
+
+.uix-list-brands.uix-list-brands--medium li:nth-child(4n+1) {
+    clear: both;
+}
+
+.uix-list-brands.uix-list-brands--large li {
+    width: 33.33333333333333%;
+}
+
+.uix-list-brands.uix-list-brands--large li:nth-child(3n+1) {
+    clear: both;
+}
+
+@media all and (max-width: 768px) {
+    .uix-list-brands {
+        margin: 1.5rem 0;
+        min-height: inherit;
+    }
+
+    .uix-list-brands li {
+        width: 50%;
+    }
+
+    .uix-list-brands li:nth-child(2n+1) {
+        clear: both;
+    }
+
+    .uix-list-brands.uix-list-brands--tiny li,
+  .uix-list-brands.uix-list-brands--small li,
+  .uix-list-brands.uix-list-brands--medium li,
+  .uix-list-brands.uix-list-brands--large li {
+        width: 50%;
+    }
+}
+
+/* ====================================================== 
    <!-- Bulleted List --> 
 /* ====================================================== */
 .uix-list-bullet i {
@@ -10986,6 +10987,97 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
 }
 
 /* ====================================================== 
+    <!-- Fullwidth List of Split 2 --> 
+/* ====================================================== */
+.uix-list-split-full {
+    position: relative;
+}
+
+.uix-list-split-full::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.uix-list-split-full .uix-list-split-full__left {
+    position: relative;
+    width: 30%;
+    float: left;
+    padding-right: 5vw;
+    padding-left: calc(6.730769230769% + 15px);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+    min-height: 150px;
+}
+
+.uix-list-split-full .uix-list-split-full__right {
+    word-wrap: break-word;
+    box-sizing: border-box;
+    width: 70%;
+    float: left;
+    padding-left: 5vw;
+    padding-right: calc(6.730769230769% + 15px);
+    background: #EC5E79;
+    background: linear-gradient(to right, #EC5E79 0%, #E8588C 100%);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+    min-height: 150px;
+}
+
+/* New XL container for Bootstrap 3.x */
+@media all and (min-width: 1430px) {
+    .uix-list-split-full .uix-list-split-full__left {
+        padding-left: calc(5.189340813464% + 15px);
+    /* (1426-1278)/1426/2 * 100 */;
+    }
+
+    .uix-list-split-full .uix-list-split-full__right {
+        padding-right: calc(5.189340813464% + 15px);
+    /* (1426-1278)/1426/2 * 100 */;
+    }
+}
+
+/* New XXL container for Bootstrap 3.x */
+@media all and (min-width: 1600px) {
+    .uix-list-split-full .uix-list-split-full__left {
+        padding-left: calc(12.992125984252% + 15px);
+    /* (1905-1410)/1905/2 * 100 */;
+    }
+
+    .uix-list-split-full .uix-list-split-full__right {
+        padding-right: calc(12.992125984252% + 15px);
+    /* (1905-1410)/1905/2 * 100 */;
+    }
+}
+
+/* > 2560 */
+@media all and (min-width: 2400px) {
+    .uix-list-split-full .uix-list-split-full__left {
+        padding-left: calc(22.298624754421% + 15px);
+    /* (2545-1410)/2545/2 * 100 */
+        padding-right: 15px;
+    }
+
+    .uix-list-split-full .uix-list-split-full__right {
+        padding-right: calc(22.298624754421% + 15px);
+    /* (2545-1410)/2545/2 * 100 */
+        margin-left: 5vw;
+        width: calc( 70% - 5vw);
+    }
+}
+
+@media all and (max-width: 768px) {
+    .uix-list-split-full .uix-list-split-full__left {
+        width: 100%;
+        min-height: inherit;
+    }
+
+    .uix-list-split-full .uix-list-split-full__right {
+        min-height: inherit;
+        width: 100%;
+        padding: 0 15px;
+    }
+}
+
+/* ====================================================== 
     <!-- Fullwidth List of Split --> 
 /* ====================================================== */
 .uix-list-split-imagery {
@@ -11072,97 +11164,6 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
     .uix-list-split-imagery .uix-list-split-imagery__info,
   .uix-list-split-imagery.is-reversed .uix-list-split-imagery__info {
         text-align: center;
-        width: 100%;
-        padding: 0 15px;
-    }
-}
-
-/* ====================================================== 
-    <!-- Fullwidth List of Split 2 --> 
-/* ====================================================== */
-.uix-list-split-full {
-    position: relative;
-}
-
-.uix-list-split-full::after {
-    content: '';
-    display: block;
-    clear: both;
-}
-
-.uix-list-split-full .uix-list-split-full__left {
-    position: relative;
-    width: 30%;
-    float: left;
-    padding-right: 5vw;
-    padding-left: calc(6.730769230769% + 15px);
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
-    min-height: 150px;
-}
-
-.uix-list-split-full .uix-list-split-full__right {
-    word-wrap: break-word;
-    box-sizing: border-box;
-    width: 70%;
-    float: left;
-    padding-left: 5vw;
-    padding-right: calc(6.730769230769% + 15px);
-    background: #EC5E79;
-    background: linear-gradient(to right, #EC5E79 0%, #E8588C 100%);
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
-    min-height: 150px;
-}
-
-/* New XL container for Bootstrap 3.x */
-@media all and (min-width: 1430px) {
-    .uix-list-split-full .uix-list-split-full__left {
-        padding-left: calc(5.189340813464% + 15px);
-    /* (1426-1278)/1426/2 * 100 */;
-    }
-
-    .uix-list-split-full .uix-list-split-full__right {
-        padding-right: calc(5.189340813464% + 15px);
-    /* (1426-1278)/1426/2 * 100 */;
-    }
-}
-
-/* New XXL container for Bootstrap 3.x */
-@media all and (min-width: 1600px) {
-    .uix-list-split-full .uix-list-split-full__left {
-        padding-left: calc(12.992125984252% + 15px);
-    /* (1905-1410)/1905/2 * 100 */;
-    }
-
-    .uix-list-split-full .uix-list-split-full__right {
-        padding-right: calc(12.992125984252% + 15px);
-    /* (1905-1410)/1905/2 * 100 */;
-    }
-}
-
-/* > 2560 */
-@media all and (min-width: 2400px) {
-    .uix-list-split-full .uix-list-split-full__left {
-        padding-left: calc(22.298624754421% + 15px);
-    /* (2545-1410)/2545/2 * 100 */
-        padding-right: 15px;
-    }
-
-    .uix-list-split-full .uix-list-split-full__right {
-        padding-right: calc(22.298624754421% + 15px);
-    /* (2545-1410)/2545/2 * 100 */
-        margin-left: 5vw;
-        width: calc( 70% - 5vw);
-    }
-}
-
-@media all and (max-width: 768px) {
-    .uix-list-split-full .uix-list-split-full__left {
-        width: 100%;
-        min-height: inherit;
-    }
-
-    .uix-list-split-full .uix-list-split-full__right {
-        min-height: inherit;
         width: 100%;
         padding: 0 15px;
     }
@@ -11498,6 +11499,130 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: 2px;
+}
+
+/* ====================================================== 
+   <!-- Pricing --> 
+/* ====================================================== */
+.uix-price {
+    text-align: center;
+    position: relative;
+}
+
+.uix-price::before {
+    padding-top: 2.25rem;
+}
+
+.uix-price::after {
+    padding-bottom: 0;
+}
+
+.uix-price ul,
+.uix-price ol {
+  /*default*/
+    display: block;
+    list-style-type: disc;
+    margin-top: 0.875rem;
+    margin-bottom: 0.875rem;
+    margin-left: 0;
+    margin-right: 0;
+    padding-bottom: 1.7rem;
+  /*custom*/
+    line-height: 2;
+}
+
+.uix-price li {
+  /*default*/
+    list-style: none;
+}
+
+.uix-price li::before {
+    font-family: 'FontAwesome';
+    content: "\f00c";
+    display: inline-block;
+    margin-right: .4rem;
+}
+
+.uix-price .uix-price__hr {
+    margin: 1.5rem 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.uix-price .uix-price__outline--hover {
+    margin-bottom: 1.5rem;
+}
+
+.uix-price .uix-price__outline {
+    padding-top: 0.875rem;
+    position: relative;
+    box-shadow: 0 22px 40px 0 #eef4fc;
+    border-radius: 10px;
+    background: #fff;
+    transition: .1s ease-in-out;
+}
+
+.uix-price .uix-price__outline:hover, .uix-price .uix-controls__multi-sel > span.uix-price__outline.active:not(.uix-controls__bar) {
+    box-shadow: 0 1.8vw 4vw -.7vw #cbdfee;
+}
+
+.uix-price .uix-price__level {
+    font-size: 0.7rem;
+    text-align: center;
+    text-indent: 0.875rem;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 3;
+    font-weight: 700;
+    opacity: 0.35;
+}
+
+.uix-price .uix-price__num {
+    color: #EC5E79;
+    font-weight: 700;
+    font-size: 3.5rem;
+    margin-top: 0.875rem;
+}
+
+.uix-price .uix-price__currency {
+    font-size: 0.875rem;
+}
+
+.uix-price .uix-price__period {
+    font-size: 12px;
+}
+
+.uix-price .uix-price__period::before {
+    content: '/';
+    padding-right: .1rem;
+}
+
+.uix-price .uix-price__detail {
+    text-align: left;
+    padding-bottom: 1.125rem;
+    padding-left: 1rem;
+    font-size: 0.875rem;
+}
+
+.uix-price .uix-price__excerpt {
+    height: auto;
+    padding: 0 0.875rem;
+    font-size: 0.875rem;
+    opacity: 0.65;
+}
+
+.uix-price .uix-price__excerpt p {
+    line-height: 1.5;
+}
+
+.uix-price .uix-price__outline.active .uix-price__num,
+.uix-price .uix-price__outline.active .uix-price__excerpt,
+.uix-price .uix-price__outline.active .uix-price__detail,
+.uix-price .uix-price__outline.active .uix-price__level {
+    color: #fff !important;
+}
+
+.uix-price .uix-price__outline.active .uix-price__excerpt {
+    opacity: 0.65;
 }
 
 /* ====================================================== 
@@ -13425,130 +13550,6 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
 
 .uix-progressbar--rectangle.uix-progressbar--progress-100 .uix-progressbar__track {
     width: 100%;
-}
-
-/* ====================================================== 
-   <!-- Pricing --> 
-/* ====================================================== */
-.uix-price {
-    text-align: center;
-    position: relative;
-}
-
-.uix-price::before {
-    padding-top: 2.25rem;
-}
-
-.uix-price::after {
-    padding-bottom: 0;
-}
-
-.uix-price ul,
-.uix-price ol {
-  /*default*/
-    display: block;
-    list-style-type: disc;
-    margin-top: 0.875rem;
-    margin-bottom: 0.875rem;
-    margin-left: 0;
-    margin-right: 0;
-    padding-bottom: 1.7rem;
-  /*custom*/
-    line-height: 2;
-}
-
-.uix-price li {
-  /*default*/
-    list-style: none;
-}
-
-.uix-price li::before {
-    font-family: 'FontAwesome';
-    content: "\f00c";
-    display: inline-block;
-    margin-right: .4rem;
-}
-
-.uix-price .uix-price__hr {
-    margin: 1.5rem 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.uix-price .uix-price__outline--hover {
-    margin-bottom: 1.5rem;
-}
-
-.uix-price .uix-price__outline {
-    padding-top: 0.875rem;
-    position: relative;
-    box-shadow: 0 22px 40px 0 #eef4fc;
-    border-radius: 10px;
-    background: #fff;
-    transition: .1s ease-in-out;
-}
-
-.uix-price .uix-price__outline:hover, .uix-price .uix-controls__multi-sel > span.uix-price__outline.active:not(.uix-controls__bar) {
-    box-shadow: 0 1.8vw 4vw -.7vw #cbdfee;
-}
-
-.uix-price .uix-price__level {
-    font-size: 0.7rem;
-    text-align: center;
-    text-indent: 0.875rem;
-    text-transform: uppercase;
-    position: relative;
-    z-index: 3;
-    font-weight: 700;
-    opacity: 0.35;
-}
-
-.uix-price .uix-price__num {
-    color: #EC5E79;
-    font-weight: 700;
-    font-size: 3.5rem;
-    margin-top: 0.875rem;
-}
-
-.uix-price .uix-price__currency {
-    font-size: 0.875rem;
-}
-
-.uix-price .uix-price__period {
-    font-size: 12px;
-}
-
-.uix-price .uix-price__period::before {
-    content: '/';
-    padding-right: .1rem;
-}
-
-.uix-price .uix-price__detail {
-    text-align: left;
-    padding-bottom: 1.125rem;
-    padding-left: 1rem;
-    font-size: 0.875rem;
-}
-
-.uix-price .uix-price__excerpt {
-    height: auto;
-    padding: 0 0.875rem;
-    font-size: 0.875rem;
-    opacity: 0.65;
-}
-
-.uix-price .uix-price__excerpt p {
-    line-height: 1.5;
-}
-
-.uix-price .uix-price__outline.active .uix-price__num,
-.uix-price .uix-price__outline.active .uix-price__excerpt,
-.uix-price .uix-price__outline.active .uix-price__detail,
-.uix-price .uix-price__outline.active .uix-price__level {
-    color: #fff !important;
-}
-
-.uix-price .uix-price__outline.active .uix-price__excerpt {
-    opacity: 0.65;
 }
 
 /* ====================================================== 
@@ -16059,13 +16060,6 @@ a img.aligncenter {
   }
   55% {
     right: 2px;
-  }
-  100% {
-    right: 180px;
-    left: 2px;
-  }
-}
-ght: 2px;
   }
   100% {
     right: 180px;

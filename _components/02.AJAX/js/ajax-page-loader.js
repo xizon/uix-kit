@@ -50,6 +50,14 @@ APP = ( function ( APP, $, window, document ) {
 
 		
 		
+		
+		//Detect URL change
+		window.addEventListener( 'popstate', function( e ) {
+			moveTo( $( ajaxContainer ), false, 'down', 0 );
+		});
+
+		
+		
 
 		/* 
 		 ====================================================
@@ -222,7 +230,7 @@ APP = ( function ( APP, $, window, document ) {
 					success  : function( response ) {
 						
 						//A function to be called if the request succeeds
-						ajaxSucceeds( dir, container, url, $( response ).find( '.js-uix-ajax-load__container' ).html() );
+						ajaxSucceeds( dir, container, url, $( response ).find( '.js-uix-ajax-load__container' ).html(), $( response ).filter( 'title' ).text() );
 
 					},
 					error: function(){
@@ -266,9 +274,10 @@ APP = ( function ( APP, $, window, document ) {
 		 * @param  {object} container - The instance returned from the request succeeds
 		 * @param  {string} url       - Current URL after click
 		 * @param  {string} content   - The data returned from the server
+		 * @param  {string} title        - The title of a requested page.
 		 * @return {void}             - The constructor.
 		 */
-		function ajaxSucceeds( dir, container, url, content ) {
+		function ajaxSucceeds( dir, container, url, content, title ) {
 			
 			var oldContent = container.html();
 		
@@ -292,15 +301,18 @@ APP = ( function ( APP, $, window, document ) {
 						// Modify the URL without reloading the page
 						if( history.pushState ) {
 							history.pushState( null, null, url );
-						}
-						else {
+						} else {
 							location.hash = url;
 						}
+				
+						//Change the page title
+						document.title = title;	
+						
 						
 						//Change URL without refresh the page
-						if ( url == 'home.html' ) {
-							history.pushState(null, null, window.location.href.replace( 'home.html', '' ) );
-						}	
+//						if ( url == 'home.html' ) {
+//							history.pushState(null, null, window.location.href.replace( 'home.html', '' ) );
+//						}	
 						
 						
 
@@ -582,39 +594,6 @@ APP = ( function ( APP, $, window, document ) {
 			}
 
 			
-		});
- 
-    };
- 
-}( jQuery ));
-
-
-		
-/*
- * Back to History URL 
- *
- * @return {void}  - The constructor.
- */	
-( function ( $ ) {
-    $.fn.backToHisroryURL = function( options ) {
- 
-        // This is the easiest way to have default options.
-        var settings = $.extend({
-			url    : false
-        }, options );
- 
-        this.each( function() {
-			
-			var baseFullURL = window.location.protocol+'//'+window.location.hostname+window.location.pathname;
-			
-			if ( settings.url && settings.url != '' ) {
-				baseFullURL = settings.url;
-			}
-			
-			if ( $.support.pjax ) {
-				history.pushState( {},'', baseFullURL );
-			}
-		
 		});
  
     };

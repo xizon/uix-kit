@@ -117,7 +117,7 @@ APP = ( function ( APP, $, window, document ) {
 				translateBackground = scrollTop / 3,
 				scale               = scrollTop / window.elHeight,
 				backgroundScale     = 1, // + scale / 10
-				titleScale          = 1 - scale * .1,
+				titleScale          = 1 - scale * 0.1,
 				titleOpacity        = 1 - scale,
 				scrollProgress      = ((scrollTop - window.elOffsetTop) / (window.elHeight - window.windowHeight / 6));
 

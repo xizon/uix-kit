@@ -1,5 +1,12 @@
 # Changelog
 
+#### = 2.2.3 (November 26, 2018) =
+
+* Fix: Fixed history error in Ajax modules.
+* Tweak: Removed jQuery Pjax plugin.
+* Tweak: Optimized some default styles.
+
+
 #### = 2.2.2 (November 22, 2018) =
 
 * New: Add a new module "Scrollspy Animate".
