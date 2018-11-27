@@ -4,6 +4,16 @@
  * <!-- Posts List With Ajax -->
  *************************************
  */
+
+/**
+ * APP.POST_LIST_AJAX 
+ * @global
+ * @requires examples/assets/js/min/template7.min.js
+ * @requires examples/assets/js/wp-jquery/masonry.min.js
+ * @requires examples/assets/js/wp-jquery/imagesloaded.min.js
+ */
+
+
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
@@ -360,20 +370,20 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Ajax with JSON data
 		 *
-		 * @param  {object} ajaxWrapper     - The outermost container of list.
-		 * @param  {object} defaultPostData - Data to be sent to the server which is custom JSON fields.
-		 * @param  {object} trigger         - Trigger ajax loaded button object.
-		 * @param  {number} curPage         - The current page to load.
-		 * @param  {number} perShow         - The amount to load each time.
-		 * @param  {number} totalPage       - The total page to load.
-		 * @param  {string} template7ID     - HTML template ID
-		 * @param  {string} jsonFile        - JSON file path to docking data
-		 * @param  {string} triggerActive   - The class name of trigger button actived.
-		 * @param  {string} pushContainer   - This container is used to display the loaded dynamic data.
-		 * @param  {string} method          - The type of request to make, which can be either "POST" or "GET".
-		 * @param  {boolean} addition       - Do or not append to the original content.
-		 * @param  {string} noneInfo        - Returns information of ajax asynchronous callback when the content is empty.
-		 * @return {void}                   - The constructor.
+		 * @param  {Object} ajaxWrapper     - The outermost container of list.
+		 * @param  {Object} defaultPostData - Data to be sent to the server which is custom JSON fields.
+		 * @param  {Object} trigger         - Trigger ajax loaded button object.
+		 * @param  {Number} curPage         - The current page to load.
+		 * @param  {Number} perShow         - The amount to load each time.
+		 * @param  {Number} totalPage       - The total page to load.
+		 * @param  {String} template7ID     - HTML template ID
+		 * @param  {String} jsonFile        - JSON file path to docking data
+		 * @param  {String} triggerActive   - The class name of trigger button actived.
+		 * @param  {String} pushContainer   - This container is used to display the loaded dynamic data.
+		 * @param  {String} method          - The type of request to make, which can be either "POST" or "GET".
+		 * @param  {Boolean} addition       - Do or not append to the original content.
+		 * @param  {String} noneInfo        - Returns information of ajax asynchronous callback when the content is empty.
+		 * @return {Void}                   - The constructor.
 		 */
 		
 		function ajaxLoadInit( ajaxWrapper, defaultPostData, trigger, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition, noneInfo ) {

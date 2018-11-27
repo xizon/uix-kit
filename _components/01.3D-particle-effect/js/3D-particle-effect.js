@@ -3,6 +3,15 @@
  * <!-- 3D Particle Effect -->
  *************************************
  */
+
+/**
+ * APP._3D_PARTICLE
+ * @global
+ * @requires examples/assets/js/min/three.min.js
+ * @requires _components/03.plugins-THREE
+ */
+
+
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
@@ -151,11 +160,11 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Returns a random number between two other numbers
 		 *
-		 * @param  {string} src                 - The URL of the image.
-		 * @param  {number} width               - The width of the image.
-		 * @param  {number} height              - The height of the image.
-		 * @param  {function} callback          - Callback function when the image is loaded.
-		 * @return {object}                     - The image element.
+		 * @param  {String} src                 - The URL of the image.
+		 * @param  {Number} width               - The width of the image.
+		 * @param  {Number} height              - The height of the image.
+		 * @param  {Function} callback          - Callback function when the image is loaded.
+		 * @return {Object}                     - The image element.
 		 */
 		function loadImage( src, width, height, callback ) {
 			var image = new Image( width, height ); 
@@ -171,9 +180,9 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Draw Image To Canvas
 		 *
-		 * @param  {object} canvasID         - The ID of a canvas.
-		 * @param  {string} img              - Image URL.
-		 * @return {void}                    - The constructor.
+		 * @param  {Object} canvasID         - The ID of a canvas.
+		 * @param  {String} img              - Image URL.
+		 * @return {Void}                    - The constructor.
 		 */
 		function drawImageToCanvas( canvasID, img ) {
 			

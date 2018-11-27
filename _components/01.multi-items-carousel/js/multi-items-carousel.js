@@ -3,6 +3,13 @@
  * <!-- Multiple Items Carousel -->
  *************************************
  */
+/**
+ * APP.MULTI_ITEMS_CAROUSEL
+ * @global
+ * @requires examples/assets/js/min/hammer.min.js
+ */
+
+
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
@@ -301,12 +308,12 @@ APP = ( function ( APP, $, window, document ) {
 			/*
 			 * Transition Between Items
 			 *
-			 * @param  {object} wrapper         - Wrapper of carousel.
-			 * @param  {object} curBtn          - The button that currently triggers the move.
-			 * @param  {string} nextBtnStr      - The button ID or class that triggers the next move.
-			 * @param  {string} prevBtnStr      - The button ID or class that triggers the previous move.
-			 * @param  {number} steps           - The number of steps per move.
-			 * @return {void}                   - The constructor.
+			 * @param  {Object} wrapper         - Wrapper of carousel.
+			 * @param  {Object} curBtn          - The button that currently triggers the move.
+			 * @param  {String} nextBtnStr      - The button ID or class that triggers the next move.
+			 * @param  {String} prevBtnStr      - The button ID or class that triggers the previous move.
+			 * @param  {Number} steps           - The number of steps per move.
+			 * @return {Void}                   - The constructor.
 			 */
 			function itemUpdates( wrapper, curBtn, nextBtnStr, prevBtnStr, steps ) {
 
@@ -602,12 +609,12 @@ APP = ( function ( APP, $, window, document ) {
 //			/*
 //			 * Transition between items next (left/up)
 //			 *
-//			 * @param  {object} wrapper         - Wrapper of carousel.
-//			 * @param  {object} items           - Items of carousel.
-//			 * @param  {object} curBtn          - The button that currently triggers the move.
-//			 * @param  {string} nextBtnStr      - The button ID or class that triggers the next move.
-//			 * @param  {string} prevBtnStr      - The button ID or class that triggers the previous move.
-//			 * @return {void}                   - The constructor.
+//			 * @param  {Object} wrapper         - Wrapper of carousel.
+//			 * @param  {Object} items           - Items of carousel.
+//			 * @param  {Object} curBtn          - The button that currently triggers the move.
+//			 * @param  {String} nextBtnStr      - The button ID or class that triggers the next move.
+//			 * @param  {String} prevBtnStr      - The button ID or class that triggers the previous move.
+//			 * @return {Void}                   - The constructor.
 //			 */
 //			function moveNext( wrapper, items, curBtn, nextBtnStr, prevBtnStr ) {
 //
@@ -741,12 +748,12 @@ APP = ( function ( APP, $, window, document ) {
 //			/*
 //			 * Transition between items previously (right/down)
 //			 *
-//			 * @param  {object} wrapper         - Wrapper of carousel.
-//			 * @param  {object} items           - Items of carousel.
-//			 * @param  {object} curBtn          - The button that currently triggers the move.
-//			 * @param  {string} nextBtnStr      - The button ID or class that triggers the next move.
-//			 * @param  {string} prevBtnStr      - The button ID or class that triggers the previous move.
-//			 * @return {void}                   - The constructor.
+//			 * @param  {Object} wrapper         - Wrapper of carousel.
+//			 * @param  {Object} items           - Items of carousel.
+//			 * @param  {Object} curBtn          - The button that currently triggers the move.
+//			 * @param  {String} nextBtnStr      - The button ID or class that triggers the next move.
+//			 * @param  {String} prevBtnStr      - The button ID or class that triggers the previous move.
+//			 * @return {Void}                   - The constructor.
 //			 */
 //			function movePrev( wrapper, items, curBtn, nextBtnStr, prevBtnStr ) {
 //

@@ -4,6 +4,14 @@
  * <!-- Scrollspy Animate -->
  *************************************
  */
+
+/**
+ * APP.SCROLLSPY_ANIM
+ * @global
+ * @requires examples/assets/js/min/pixi.min.js
+ * @requires _components/03.plugins-GSAP
+ */
+
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	

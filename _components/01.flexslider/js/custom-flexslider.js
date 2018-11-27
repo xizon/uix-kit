@@ -4,6 +4,15 @@
  * <!-- Flexslider -->
  *************************************
  */
+
+/**
+ * APP.FLEXSLIDER
+ * @global
+ * @requires examples/assets/js/min/jquery.easing.min.js
+ */
+
+
+
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
@@ -21,8 +30,8 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Tiny helper function to add breakpoints.
 		 *
-		 * @param  {number} number           - Number of carousel items that should be visible.
-		 * @return {void}                    - The constructor.
+		 * @param  {Number} number           - Number of carousel items that should be visible.
+		 * @return {Void}                    - The constructor.
 		 */
         function getGridSize( number ) {
             return ( $window.width() <= 768 ) ? 1 : number;
@@ -32,10 +41,10 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Return an event from callback function to each slider.
 		 *
-		 * @param  {object} thisSlider             - The current slider.
-		 * @param  {object} sliderWrapper          - The current slider wrapper.
-		 * @param  {string} fireState              - State of fire asynchronously.
-		 * @return {number}                        - Index of current slider .
+		 * @param  {Object} thisSlider             - The current slider.
+		 * @param  {Object} sliderWrapper          - The current slider wrapper.
+		 * @param  {String} fireState              - State of fire asynchronously.
+		 * @return {Number}                        - Index of current slider .
 		 */
         function initslides( sliderWrapper, thisSlider, fireState ) {
 			
@@ -338,9 +347,9 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Initialize embedded local video.
 		 *
-		 * @param  {object} wrapper          - The outermost video container, which can contain multiple videos
-		 * @param  {boolean} play            - Forced to trigger pause or play events.
-		 * @return {void}                    - The constructor.
+		 * @param  {Object} wrapper          - The outermost video container, which can contain multiple videos
+		 * @param  {Boolean} play            - Forced to trigger pause or play events.
+		 * @return {Void}                    - The constructor.
 		 */
 		function videoEmbedInit( wrapper, play ) {
 			wrapper.find( '.uix-video__slider' ).each( function()  {
@@ -560,8 +569,8 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Make slider image draggable 
 		 *
-		 * @param  {object} $obj             - The current FlexSlider setup using custom selector.
-		 * @return {void}                   - The constructor.
+		 * @param  {Object} $obj             - The current FlexSlider setup using custom selector.
+		 * @return {Void}                   - The constructor.
 		 */
         function slidesExDraggable( $obj ) {
 			
@@ -629,8 +638,8 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 *  Scroll The Slider With Mousewheel
 		 *
-		 * @param  {object} $obj            - The current FlexSlider setup using custom selector.
-		 * @return {void}                   - The constructor.
+		 * @param  {Object} $obj            - The current FlexSlider setup using custom selector.
+		 * @return {Void}                   - The constructor.
 		 */
         function slidesExMousewheel( $obj ) {
 
@@ -671,9 +680,9 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Slider With Thumbnail ControlNav Pattern
 		 *
-		 * @param  {object} slider           - The current slider.
-		 * @param  {string} navThumbClass    - Class name of thumbnail controlNav.
-		 * @return {void}                    - The constructor.
+		 * @param  {Object} slider           - The current slider.
+		 * @param  {String} navThumbClass    - Class name of thumbnail controlNav.
+		 * @return {Void}                    - The constructor.
 		 */
         function initslidesWithNavThumb( slider, navThumbClass ) {
 
@@ -694,12 +703,12 @@ APP = ( function ( APP, $, window, document ) {
 		* fortunately, since all the children are not animating,
 		* they will only update if the main flexslider updates. 
 		 *
-		 * @param  {number} slideNumber          - The current slider index.
-		 * @param  {object} childrenSlidesObj    - Target slider.
-		 * @param  {boolean} loop                - Gives the slider a seamless infinite loop.
-		 * @param  {number} speed                - Set the speed of animations, in milliseconds.
-		 * @param  {number} timing               - Set the speed of the slideshow cycling, in milliseconds.
-		 * @return {void}                        - The constructor.
+		 * @param  {Number} slideNumber          - The current slider index.
+		 * @param  {Object} childrenSlidesObj    - Target slider.
+		 * @param  {Boolean} loop                - Gives the slider a seamless infinite loop.
+		 * @param  {Number} speed                - Set the speed of animations, in milliseconds.
+		 * @param  {Number} timing               - Set the speed of the slideshow cycling, in milliseconds.
+		 * @return {Void}                        - The constructor.
 		 */
 		function updateChildrenSlides( slideNumber, childrenSlidesObj, loop, speed, timing ) {
 			

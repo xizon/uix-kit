@@ -67,7 +67,7 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Initialize the clickable ajax links
 		 *
-		 * @return {void}  - The constructor.
+		 * @return {Void}  - The constructor.
 		 */
 		function ajaxInit() {
 			if ( windowWidth <= 768 ) {
@@ -139,9 +139,9 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Scroll initialize
 		 *
-		 * @param  {object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
-		 * @param  {string} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
-		 * @return {void}                - The constructor.
+		 * @param  {Object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
+		 * @param  {String} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
+		 * @return {Void}                - The constructor.
 		 */
 		function scrollMoveInit( event, dir ) {
 	
@@ -169,11 +169,11 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Move Animation
 		 *
-		 * @param  {object} container    - The instance returned from the request succeeds 
-		 * @param  {string} url          - The target URL via AJAX.
-		 * @param  {string} dir          - Rolling direction indicator.
-		 * @param  {number} customIndex  - User-specified index value, located on the corresponding AJAX hyperlink.
-		 * @return {void}                - The constructor.
+		 * @param  {Object} container    - The instance returned from the request succeeds 
+		 * @param  {String} url          - The target URL via AJAX.
+		 * @param  {String} dir          - Rolling direction indicator.
+		 * @param  {Number} customIndex  - User-specified index value, located on the corresponding AJAX hyperlink.
+		 * @return {Void}                - The constructor.
 		 */
 		function moveTo( container, url, dir, customIndex ) {
 			var index     = parseFloat( $navs.filter( '.active' ).find( '> a' ).attr( 'data-index' ) ),
@@ -270,12 +270,12 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * A function to be called if the request succeeds
 		 *
-		 * @param  {string} dir       - Gets a value that indicates the amount that the mouse wheel has changed.
-		 * @param  {object} container - The instance returned from the request succeeds
-		 * @param  {string} url       - Current URL after click
-		 * @param  {string} content   - The data returned from the server
-		 * @param  {string} title        - The title of a requested page.
-		 * @return {void}             - The constructor.
+		 * @param  {String} dir       - Gets a value that indicates the amount that the mouse wheel has changed.
+		 * @param  {Object} container - The instance returned from the request succeeds
+		 * @param  {String} url       - Current URL after click
+		 * @param  {String} content   - The data returned from the server
+		 * @param  {String} title        - The title of a requested page.
+		 * @return {Void}             - The constructor.
 		 */
 		function ajaxSucceeds( dir, container, url, content, title ) {
 			
@@ -338,10 +338,10 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Transition effect between two elements.
 		 *
-		 * @param  {string} dir            - Gets a value that indicates the amount that the mouse wheel has changed.
-		 * @param  {string} oldContent     - A string of HTML to set as the content of matched old element.
-		 * @param  {string} newContent     - A string of HTML to set as the content of matched new element.
-		 * @return {void}                  - The constructor.
+		 * @param  {String} dir            - Gets a value that indicates the amount that the mouse wheel has changed.
+		 * @param  {String} oldContent     - A string of HTML to set as the content of matched old element.
+		 * @param  {String} newContent     - A string of HTML to set as the content of matched new element.
+		 * @return {Void}                  - The constructor.
 		 */
 		function eleTransitionEff( dir, oldContent, newContent ) {
 			
@@ -447,13 +447,13 @@ APP = ( function ( APP, $, window, document ) {
 /*
  * Apply some original scripts
  *
- * @param  {boolean} scrollReveal          - Run script of module "Scroll Reveal". a page commonly used to 
+ * @param  {Boolean} scrollReveal          - Run script of module "Scroll Reveal". a page commonly used to 
  *                                           load asynchronous information
- * @param  {boolean} ajaxPostList          - Run script of module "Posts List With Ajax". a page commonly used to 
+ * @param  {Boolean} ajaxPostList          - Run script of module "Posts List With Ajax". a page commonly used to 
  *                                           load asynchronous information
- * @param  {boolean} ajaxDDList            - Run script of module "Dynamic Drop Down List from JSON".
- * @param  {boolean} counterAnim           - Run script of module "Counter".
- * @return {void}  - The constructor.
+ * @param  {Boolean} ajaxDDList            - Run script of module "Dynamic Drop Down List from JSON".
+ * @param  {Boolean} counterAnim           - Run script of module "Counter".
+ * @return {Void}  - The constructor.
  */
 ( function ( $ ) {
     $.fn.applyOriginalSomeScripts = function( options ) {
@@ -560,8 +560,8 @@ APP = ( function ( APP, $, window, document ) {
 /*
  * Apply all the original scripts
  *
- * @param  {boolean} runAll          - Run all module scripts.
- * @return {void}  - The constructor.
+ * @param  {Boolean} runAll          - Run all module scripts.
+ * @return {Void}  - The constructor.
  */	
 ( function ( $ ) {
     $.fn.applyOriginalAllScripts = function( options ) {

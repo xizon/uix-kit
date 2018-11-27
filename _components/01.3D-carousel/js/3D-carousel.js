@@ -4,6 +4,13 @@
  * <!-- 3D Carousel -->
  *************************************
  */
+/**
+ * APP._3D_CAROUSEL
+ * @global
+ * @requires examples/assets/js/min/hammer.min.js
+ */
+
+
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
@@ -161,8 +168,8 @@ APP = ( function ( APP, $, window, document ) {
 			/*
 			 * Swap Between Images
 			 *
-			 * @param  {string} action           - Direction of movement, optional: clockwise, counter-clockwise
-			 * @return {void}                    - The constructor.
+			 * @param  {String} action           - Direction of movement, optional: clockwise, counter-clockwise
+			 * @return {Void}                    - The constructor.
 			 */
 			function itemUpdates( action ) {
 				var direction = action;

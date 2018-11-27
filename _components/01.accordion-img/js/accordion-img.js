@@ -93,7 +93,7 @@ APP = ( function ( APP, $, window, document ) {
 			/*
 			 * Initialize the width of each item
 			 *
-			 * @return {void}             - The constructor.
+			 * @return {Void}             - The constructor.
 			 */
 			function itemInit() {
 				$li.removeClass( 'active sub-active' ).css( 'width', 100/total + '%' );

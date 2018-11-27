@@ -69,7 +69,7 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Init the section location
 		 *
-		 * @return {void}                - The constructor.
+		 * @return {Void}                - The constructor.
 		 */
 		function sectionStart() {
 	
@@ -97,9 +97,9 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Scroll initialize
 		 *
-		 * @param  {object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
-		 * @param  {string} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
-		 * @return {void}                - The constructor.
+		 * @param  {Object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
+		 * @param  {String} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
+		 * @return {Void}                - The constructor.
 		 */
 		function scrollMoveInit( event, dir ) {
 	
@@ -128,10 +128,10 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Move Animation
 		 *
-		 * @param  {object} el           - The container of each sections.
-		 * @param  {string} dir          - Rolling direction indicator.
-		 * @param  {number} hashID       - ID of custom hashchange event.
-		 * @return {void}                - The constructor.
+		 * @param  {Object} el           - The container of each sections.
+		 * @param  {String} dir          - Rolling direction indicator.
+		 * @param  {Number} hashID       - ID of custom hashchange event.
+		 * @return {Void}                - The constructor.
 		 */
 		function moveTo( el, dir, hashID ) {
 			var index     = parseFloat( $sections.filter( '.active' ).attr( 'data-index' ) ),
@@ -223,8 +223,8 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Get section or article by href
 		 *
-		 * @param  {string, object} el  - The current selector or selector ID
-		 * @return {object}             - A new selector.
+		 * @param  {String|Object} el  - The current selector or selector ID
+		 * @return {Object}             - A new selector.
 		 */
         function getRelatedContent( el ) {
             return $( $( el ).attr( 'href' ) );
@@ -234,10 +234,10 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Get link by section or article id
 		 *
-		 * @param  {string, object} el    - The current selector or selector ID
-		 * @param  {object} menuObj       - Returns the menu element within the document.
-		 * @param  {boolean} echoIndex    - Whether to return the current index.
-		 * @return {object}               - A new selector.
+		 * @param  {String|Object} el    - The current selector or selector ID
+		 * @param  {Object} menuObj       - Returns the menu element within the document.
+		 * @param  {Boolean} echoIndex    - Whether to return the current index.
+		 * @return {Object}               - A new selector.
 		 */
         function getRelatedNavigation( el, menuObj, echoIndex ) {
 			
@@ -252,8 +252,8 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Get all links by section or article
 		 *
-		 * @param  {object} menuObj     - Returns the menu element within the document.
-		 * @return {object}             - A new selector.
+		 * @param  {Object} menuObj     - Returns the menu element within the document.
+		 * @return {Object}             - A new selector.
 		 */
         function getAllNavigation( menuObj ) {
             return menuObj.find( 'li' );
@@ -263,8 +263,8 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Smooth scroll to content
 		 *
-		 * @param  {object} menuObj     - Returns the menu element within the document.
-		 * @return {void}               - The constructor.
+		 * @param  {Object} menuObj     - Returns the menu element within the document.
+		 * @return {Void}               - The constructor.
 		 */
         function goPageSection( menuObj ) {
 			menuObj.find( 'li > a' ).on( 'click', function(e) {

@@ -5,14 +5,21 @@
  * <!-- Text effect -->
  *************************************
  */
-/*
-Usage:
+/**
+ * APP.TEXT_EFFECT
+ * @global
+ * @requires examples/assets/js/min/anime.min.js
+ * @example 
+
+ //The data-text-eff attribute on the same page cannot be duplicated.
 
 <h3 data-text-eff="letters-eff-flyInOut1" data-text-eff-speed="800">Text Text</h3>
 <h3 data-text-eff="letters-eff-flyInOut2" data-text-eff-speed="800">Text Text</h3>
 <h3 data-text-eff="letters-eff-flyInOut3" data-text-eff-speed="800">Text Text</h3>
+ 
+ */
 
-*/
+
 
 APP = ( function ( APP, $, window, document ) {
     'use strict';
@@ -41,8 +48,8 @@ APP = ( function ( APP, $, window, document ) {
 /*
  * Text Effect
  *
- * @param  {string} selectors                - Text wrapper ID or class name.
- * @return {void}                            - The constructor.
+ * @param  {String} selectors                - Text wrapper ID or class name.
+ * @return {Void}                            - The constructor.
  */
 ( function ( $ ) {
     $.fn.customTextEffInit = function( options ) {

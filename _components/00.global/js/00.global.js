@@ -1,4 +1,16 @@
-/* 
+/**
+ * APP
+ * @global
+ *
+ * //Used for all modules from _components/[__]/js
+ * @requires examples/assets/js/min/jquery.waitforimages.min.js
+ * @requires examples/assets/js/min/video.min.js
+ * @requires examples/assets/js/min/jquery.waypoints.min.js
+ * @requires examples/assets/js/min/TweenMax.min.js
+ * 
+ */
+
+/**
 
 	TABLE OF CONTENTS
 	---------------------------
@@ -8,8 +20,9 @@
 
 */
 
-if ( typeof jQuery === 'undefined' || typeof TweenMax === 'undefined' || typeof Waypoint === 'undefined' ) {
-    throw new Error( 'Uix Kit\'s JavaScript requires jQuery, TweenMax, Waypoint.' );
+
+if ( typeof jQuery === 'undefined' || typeof TweenMax === 'undefined' || typeof Waypoint === 'undefined' || typeof videojs === 'undefined' ) {
+    throw new Error( 'Uix Kit\'s JavaScript requires jQuery, TweenMax, Waypoint and videojs.' );
 }
 
 
@@ -42,8 +55,8 @@ if ( typeof APP_ROOTPATH === 'undefined' ) {
 
 
 //Modify templateUrl as the correct path when local test is enabled
-if ( location.hostname === 'localhost' || location.hostname === '127.0.0.1' ) {
-    templateUrl = '/examples';
+if ( [ 'localhost', '127.0.0.1', '' ].includes( window.location.hostname ) ) {
+	templateUrl = '/examples';
 }
 
 
@@ -127,9 +140,10 @@ var APP = (function ( $, window, document ) {
  *************************************
  * Create GUID / UUID
  *
- * @return {string}                        - The globally-unique identifiers.
+ * @return {String}                        - The globally-unique identifiers.
  *************************************
  */
+
 var crypto = window.crypto || window.msCrypto || null; // IE11 fix
 var UIX_GUID = UIX_GUID || (function() {
 
@@ -181,17 +195,14 @@ var UIX_GUID = UIX_GUID || (function() {
 
 /* 
  *************************************
- * jQuery hashchange event
- * 
- *************************************
- */
-/*!
  * jQuery hashchange event - v1.3 - 7/21/2010
  * http://benalman.com/projects/jquery-hashchange-plugin/
  * 
  * Copyright (c) 2010 "Cowboy" Ben Alman
  * Dual licensed under the MIT and GPL licenses.
  * http://benalman.com/about/license/
+ * 
+ *************************************
  */
 
 (function($,window,undefined){
@@ -533,7 +544,7 @@ var UIX_GUID = UIX_GUID || (function() {
  *************************************
  * Scroll Lock
  * @https://gist.github.com/barneycarroll/6550066
- * @return {void}                        - The constructor.
+ * @return {Void}                        - The constructor.
  *************************************
  */
 /*
@@ -678,7 +689,9 @@ var UIX_GUID = UIX_GUID || (function() {
  *************************************
  * Parallax Effect
  *
- * @return {void}                        - The constructor.
+ * @param  {Number} speed     - The speed of movement between elements.
+ * @param  {JSON} bg          - Specify the background display. Default value: { enable: true, xPos: '50%' }
+ * @return {Void}             - The constructor.
  *************************************
  */
 

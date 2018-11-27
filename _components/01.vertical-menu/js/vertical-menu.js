@@ -121,9 +121,9 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Monitor the maximum height of the vertical navigation
 		 *
-		 * @param  {number} w         - Returns width of browser viewport
-		 * @param  {number} h         - Returns height of browser viewport
-		 * @return {void}             - The constructor.
+		 * @param  {Number} w         - Returns width of browser viewport
+		 * @param  {Number} h         - Returns height of browser viewport
+		 * @return {Void}             - The constructor.
 		 */
 		function menuWrapInit( w, h ) {
 			

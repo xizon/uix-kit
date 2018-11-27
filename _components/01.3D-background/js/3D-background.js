@@ -38,10 +38,10 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Sets an animation for each element
 		 *
-		 * @param  {number} base           - Base offset value.
-		 * @param  {object} obj            - An HTML element.
-		 * @param  {boolean} reset         - Reset block on mouse leave
-		 * @return {void}                  - The constructor.
+		 * @param  {Number} base           - Base offset value.
+		 * @param  {Object} obj            - An HTML element.
+		 * @param  {Boolean} reset         - Reset block on mouse leave
+		 * @return {Void}                  - The constructor.
 		 */
 		function animate3dElement( base, obj, reset ) {
 
@@ -125,11 +125,11 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Sets an animation with parallax for each element
 		 *
-		 * @param  {number} base           - Base offset value.
-		 * @param  {number} multiple       - The power of target number.
-		 * @param  {object} obj            - An HTML element.
-		 * @param  {boolean} reset         - Reset block on mouse leave
-		 * @return {void}                  - The constructor.
+		 * @param  {Number} base           - Base offset value.
+		 * @param  {Number} multiple       - The power of target number.
+		 * @param  {Object} obj            - An HTML element.
+		 * @param  {Boolean} reset         - Reset block on mouse leave
+		 * @return {Void}                  - The constructor.
 		 */
 		function animate3dMultiElement( base, multiple, obj, reset ) {
 

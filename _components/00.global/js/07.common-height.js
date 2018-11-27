@@ -41,8 +41,8 @@ APP = ( function ( APP, $, window, document ) {
 /*
  * Returns Common Height
  *
- * @param  {string} selector             - The current selector.
- * @return {void}                        - The constructor.
+ * @param  {String} selector             - The current selector.
+ * @return {Void}                        - The constructor.
  */
 ( function ( $ ) {
     $.fn.commonHeight = function( options ) {

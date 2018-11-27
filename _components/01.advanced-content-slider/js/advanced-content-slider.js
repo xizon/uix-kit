@@ -4,6 +4,13 @@
  * <!-- Advanced Content Slider -->
  *************************************
  */
+/**
+ * APP.ADVANCED_CONTENT_SLIDER
+ * @global
+ * @requires examples/assets/js/min/hammer.min.js
+ */
+
+
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
@@ -36,7 +43,7 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Initialize slideshow
 		 *
-		 * @return {void}                   - The constructor.
+		 * @return {Void}                   - The constructor.
 		 */
         function sliderInit() {
 			
@@ -193,11 +200,11 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Transition Between Slides
 		 *
-		 * @param  {number} elementIndex     - Index of current slider.
-		 * @param  {object} slider           - Selector of the slider .
-		 * @param  {string} arrows           - Controller name of prev/next buttons.
-		 * @param  {string} pagination       - Controller name of pagination buttons.
-		 * @return {void}                    - The constructor.
+		 * @param  {Number} elementIndex     - Index of current slider.
+		 * @param  {Object} slider           - Selector of the slider .
+		 * @param  {String} arrows           - Controller name of prev/next buttons.
+		 * @param  {String} pagination       - Controller name of pagination buttons.
+		 * @return {Void}                    - The constructor.
 		 */
         function sliderUpdates( elementIndex, slider, arrows, pagination ) {
 			

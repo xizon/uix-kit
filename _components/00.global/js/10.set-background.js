@@ -39,9 +39,9 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Initialize background using "data-bg" attribute.
 		 *
-		 * @param  {number} w         - Returns width of browser viewport
-		 * @param  {number} h         - Returns height of browser viewport
-		 * @return {void}             - The constructor.
+		 * @param  {Number} w         - Returns width of browser viewport
+		 * @param  {Number} h         - Returns height of browser viewport
+		 * @return {Void}             - The constructor.
 		 */
 		function setBGInit( w, h ) {
 			

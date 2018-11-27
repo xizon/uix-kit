@@ -7,8 +7,8 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  2.2.3
- * ## Last Update         :  November 26, 2018
+ * ## Version             :  2.2.4
+ * ## Last Update         :  November 28, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -16,7 +16,19 @@
  * ## Released under the MIT license.
  */
 
-/* 
+/**
+ * APP
+ * @global
+ *
+ * //Used for all modules from _components/[__]/js
+ * @requires examples/assets/js/min/jquery.waitforimages.min.js
+ * @requires examples/assets/js/min/video.min.js
+ * @requires examples/assets/js/min/jquery.waypoints.min.js
+ * @requires examples/assets/js/min/TweenMax.min.js
+ * 
+ */
+
+/**
 
 	TABLE OF CONTENTS
 	---------------------------
@@ -45,8 +57,8 @@
     21. Accordion 
     22. Accordion Background Images 
     23. Advanced Content Slider 
-    24. Advanced Slider (Basic) 
-    25. Advanced Slider (Special Effects) 
+    24. Advanced Slider (Special Effects) 
+    25. Advanced Slider (Basic) 
     26. Back to Top 
     27. Circle Layout 
     28. Counter 
@@ -100,8 +112,9 @@
 
 */
 
-if ( typeof jQuery === 'undefined' || typeof TweenMax === 'undefined' || typeof Waypoint === 'undefined' ) {
-    throw new Error( 'Uix Kit\'s JavaScript requires jQuery, TweenMax, Waypoint.' );
+
+if ( typeof jQuery === 'undefined' || typeof TweenMax === 'undefined' || typeof Waypoint === 'undefined' || typeof videojs === 'undefined' ) {
+    throw new Error( 'Uix Kit\'s JavaScript requires jQuery, TweenMax, Waypoint and videojs.' );
 }
 
 
@@ -134,8 +147,8 @@ if ( typeof APP_ROOTPATH === 'undefined' ) {
 
 
 //Modify templateUrl as the correct path when local test is enabled
-if ( location.hostname === 'localhost' || location.hostname === '127.0.0.1' ) {
-    templateUrl = '/examples';
+if ( [ 'localhost', '127.0.0.1', '' ].includes( window.location.hostname ) ) {
+	templateUrl = '/examples';
 }
 
 
@@ -219,9 +232,10 @@ var APP = (function ( $, window, document ) {
  *************************************
  * Create GUID / UUID
  *
- * @return {string}                        - The globally-unique identifiers.
+ * @return {String}                        - The globally-unique identifiers.
  *************************************
  */
+
 var crypto = window.crypto || window.msCrypto || null; // IE11 fix
 var UIX_GUID = UIX_GUID || (function() {
 
@@ -273,17 +287,14 @@ var UIX_GUID = UIX_GUID || (function() {
 
 /* 
  *************************************
- * jQuery hashchange event
- * 
- *************************************
- */
-/*!
  * jQuery hashchange event - v1.3 - 7/21/2010
  * http://benalman.com/projects/jquery-hashchange-plugin/
  * 
  * Copyright (c) 2010 "Cowboy" Ben Alman
  * Dual licensed under the MIT and GPL licenses.
  * http://benalman.com/about/license/
+ * 
+ *************************************
  */
 
 (function($,window,undefined){
@@ -625,7 +636,7 @@ var UIX_GUID = UIX_GUID || (function() {
  *************************************
  * Scroll Lock
  * @https://gist.github.com/barneycarroll/6550066
- * @return {void}                        - The constructor.
+ * @return {Void}                        - The constructor.
  *************************************
  */
 /*
@@ -770,7 +781,9 @@ var UIX_GUID = UIX_GUID || (function() {
  *************************************
  * Parallax Effect
  *
- * @return {void}                        - The constructor.
+ * @param  {Number} speed     - The speed of movement between elements.
+ * @param  {JSON} bg          - Specify the background display. Default value: { enable: true, xPos: '50%' }
+ * @return {Void}             - The constructor.
  *************************************
  */
 
@@ -1750,8 +1763,8 @@ APP = ( function ( APP, $, window, document ) {
 /*
  * Returns Common Height
  *
- * @param  {string} selector             - The current selector.
- * @return {void}                        - The constructor.
+ * @param  {String} selector             - The current selector.
+ * @return {Void}                        - The constructor.
  */
 ( function ( $ ) {
     $.fn.commonHeight = function( options ) {
@@ -2123,9 +2136,9 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Initialize background using "data-bg" attribute.
 		 *
-		 * @param  {number} w         - Returns width of browser viewport
-		 * @param  {number} h         - Returns height of browser viewport
-		 * @return {void}             - The constructor.
+		 * @param  {Number} w         - Returns width of browser viewport
+		 * @param  {Number} h         - Returns height of browser viewport
+		 * @return {Void}             - The constructor.
 		 */
 		function setBGInit( w, h ) {
 			
@@ -2508,8 +2521,8 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Initialize mobile menu
 		 *
-		 * @param  {number} w                  - Returns width of browser viewport.
-		 * @return {void}                      - The constructor.
+		 * @param  {Number} w                  - Returns width of browser viewport.
+		 * @return {Void}                      - The constructor.
 		 */
 		function mobileMenuInit( w ) {
 
@@ -2604,10 +2617,10 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Sets an animation for each element
 		 *
-		 * @param  {number} base           - Base offset value.
-		 * @param  {object} obj            - An HTML element.
-		 * @param  {boolean} reset         - Reset block on mouse leave
-		 * @return {void}                  - The constructor.
+		 * @param  {Number} base           - Base offset value.
+		 * @param  {Object} obj            - An HTML element.
+		 * @param  {Boolean} reset         - Reset block on mouse leave
+		 * @return {Void}                  - The constructor.
 		 */
 		function animate3dElement( base, obj, reset ) {
 
@@ -2691,11 +2704,11 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Sets an animation with parallax for each element
 		 *
-		 * @param  {number} base           - Base offset value.
-		 * @param  {number} multiple       - The power of target number.
-		 * @param  {object} obj            - An HTML element.
-		 * @param  {boolean} reset         - Reset block on mouse leave
-		 * @return {void}                  - The constructor.
+		 * @param  {Number} base           - Base offset value.
+		 * @param  {Number} multiple       - The power of target number.
+		 * @param  {Object} obj            - An HTML element.
+		 * @param  {Boolean} reset         - Reset block on mouse leave
+		 * @return {Void}                  - The constructor.
 		 */
 		function animate3dMultiElement( base, multiple, obj, reset ) {
 
@@ -2785,6 +2798,15 @@ APP = ( function ( APP, $, window, document ) {
  * <!-- 3D Background 2 -->
  *************************************
  */
+
+/**
+ * APP._3D_BACKGROUND_THREE
+ * @global
+ * @requires examples/assets/js/min/three.min.js
+ * @requires _components/03.plugins-THREE
+ */
+
+
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
@@ -2906,9 +2928,9 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Batch generation of geometry
 		 *
-		 * @param  {string} objectType     - String of geometry type identifier.
-		 * @param  {number} numObjects       - The total number of generated objects.
-		 * @return {void}                  - The constructor.
+		 * @param  {String} objectType     - String of geometry type identifier.
+		 * @param  {Number} numObjects       - The total number of generated objects.
+		 * @return {Void}                  - The constructor.
 		 */
 		function generateGeometry( objectType, numObjects ) {
 
@@ -3009,6 +3031,14 @@ APP = ( function ( APP, $, window, document ) {
  * <!-- 3D Background 2 -->
  *************************************
  */
+/**
+ * APP._3D_BACKGROUND_THREE2
+ * @global
+ * @requires examples/assets/js/min/three.min.js
+ * @requires _components/03.plugins-THREE
+ */
+
+
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
@@ -3225,9 +3255,9 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Batch generation of geometry
 		 *
-		 * @param  {string} objectType     - String of geometry type identifier.
-		 * @param  {number} numObjects       - The total number of generated objects.
-		 * @return {void}                  - The constructor.
+		 * @param  {String} objectType     - String of geometry type identifier.
+		 * @param  {Number} numObjects       - The total number of generated objects.
+		 * @return {Void}                  - The constructor.
 		 */
 		function generateGeometry( objectType, numObjects ) {
 
@@ -3326,6 +3356,13 @@ APP = ( function ( APP, $, window, document ) {
  * <!-- 3D Carousel -->
  *************************************
  */
+/**
+ * APP._3D_CAROUSEL
+ * @global
+ * @requires examples/assets/js/min/hammer.min.js
+ */
+
+
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
@@ -3483,8 +3520,8 @@ APP = ( function ( APP, $, window, document ) {
 			/*
 			 * Swap Between Images
 			 *
-			 * @param  {string} action           - Direction of movement, optional: clockwise, counter-clockwise
-			 * @return {void}                    - The constructor.
+			 * @param  {String} action           - Direction of movement, optional: clockwise, counter-clockwise
+			 * @return {Void}                    - The constructor.
 			 */
 			function itemUpdates( action ) {
 				var direction = action;
@@ -3567,6 +3604,14 @@ APP = ( function ( APP, $, window, document ) {
  * <!-- 3D Model -->
  *************************************
  */
+
+/**
+ * APP._3D_MODEL
+ * @global
+ * @requires examples/assets/js/min/three.min.js
+ * @requires _components/03.plugins-THREE
+ */
+
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
@@ -3832,6 +3877,14 @@ APP = ( function ( APP, $, window, document ) {
  * <!-- 3D Pages -->
  *************************************
  */
+
+/**
+ * APP._3D_PAGES
+ * @global
+ * @requires examples/assets/js/min/three.min.js
+ * @requires _components/03.plugins-THREE
+ */
+
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
@@ -3966,6 +4019,15 @@ APP = ( function ( APP, $, window, document ) {
  * <!-- 3D Particle Effect -->
  *************************************
  */
+
+/**
+ * APP._3D_PARTICLE
+ * @global
+ * @requires examples/assets/js/min/three.min.js
+ * @requires _components/03.plugins-THREE
+ */
+
+
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
@@ -4114,11 +4176,11 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Returns a random number between two other numbers
 		 *
-		 * @param  {string} src                 - The URL of the image.
-		 * @param  {number} width               - The width of the image.
-		 * @param  {number} height              - The height of the image.
-		 * @param  {function} callback          - Callback function when the image is loaded.
-		 * @return {object}                     - The image element.
+		 * @param  {String} src                 - The URL of the image.
+		 * @param  {Number} width               - The width of the image.
+		 * @param  {Number} height              - The height of the image.
+		 * @param  {Function} callback          - Callback function when the image is loaded.
+		 * @return {Object}                     - The image element.
 		 */
 		function loadImage( src, width, height, callback ) {
 			var image = new Image( width, height ); 
@@ -4134,9 +4196,9 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Draw Image To Canvas
 		 *
-		 * @param  {object} canvasID         - The ID of a canvas.
-		 * @param  {string} img              - Image URL.
-		 * @return {void}                    - The constructor.
+		 * @param  {Object} canvasID         - The ID of a canvas.
+		 * @param  {String} img              - Image URL.
+		 * @return {Void}                    - The constructor.
 		 */
 		function drawImageToCanvas( canvasID, img ) {
 			
@@ -4172,6 +4234,14 @@ APP = ( function ( APP, $, window, document ) {
  * <!-- 3D Sphere Rotation -->
  *************************************
  */
+
+/**
+ * APP._3D_SPHERE_THREE
+ * @global
+ * @requires examples/assets/js/min/three.min.js
+ * @requires _components/03.plugins-THREE
+ */
+
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
@@ -4472,7 +4542,7 @@ APP = ( function ( APP, $, window, document ) {
 			/*
 			 * Initialize the width of each item
 			 *
-			 * @return {void}             - The constructor.
+			 * @return {Void}             - The constructor.
 			 */
 			function itemInit() {
 				$li.removeClass( 'active sub-active' ).css( 'width', 100/total + '%' );
@@ -4500,6 +4570,13 @@ APP = ( function ( APP, $, window, document ) {
  * <!-- Advanced Content Slider -->
  *************************************
  */
+/**
+ * APP.ADVANCED_CONTENT_SLIDER
+ * @global
+ * @requires examples/assets/js/min/hammer.min.js
+ */
+
+
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
@@ -4532,7 +4609,7 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Initialize slideshow
 		 *
-		 * @return {void}                   - The constructor.
+		 * @return {Void}                   - The constructor.
 		 */
         function sliderInit() {
 			
@@ -4689,11 +4766,11 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Transition Between Slides
 		 *
-		 * @param  {number} elementIndex     - Index of current slider.
-		 * @param  {object} slider           - Selector of the slider .
-		 * @param  {string} arrows           - Controller name of prev/next buttons.
-		 * @param  {string} pagination       - Controller name of pagination buttons.
-		 * @return {void}                    - The constructor.
+		 * @param  {Number} elementIndex     - Index of current slider.
+		 * @param  {Object} slider           - Selector of the slider .
+		 * @param  {String} arrows           - Controller name of prev/next buttons.
+		 * @param  {String} pagination       - Controller name of pagination buttons.
+		 * @return {Void}                    - The constructor.
 		 */
         function sliderUpdates( elementIndex, slider, arrows, pagination ) {
 			
@@ -4761,6 +4838,16 @@ APP = ( function ( APP, $, window, document ) {
  * <!-- Advanced Slider (Special Effects) -->
  *************************************
  */
+
+/**
+ * APP.ADVANCED_SLIDER_FILTER
+ * @global
+ * @requires examples/assets/js/min/pixi.min.js
+ * @requires examples/assets/js/min/three.min.js
+ * @requires _components/03.plugins-THREE
+ * @requires _components/03.plugins-GSAP
+ */
+
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
@@ -4826,8 +4913,8 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Initialize slideshow
 		 *
-		 * @param  {boolean} resize            - Determine whether the window size changes.
-		 * @return {void}                   - The constructor.
+		 * @param  {Boolean} resize            - Determine whether the window size changes.
+		 * @return {Void}                   - The constructor.
 		 */
         function sliderInit( resize ) {
 	
@@ -4976,10 +5063,10 @@ APP = ( function ( APP, $, window, document ) {
         /*
 		 * Trigger slider autoplay
 		 *
-		 * @param  {number} timing           - Autoplay interval.
-		 * @param  {object} items            - Each item in current slider.
-		 * @param  {boolean} loop            - Determine whether to loop through each item.
-		 * @return {void}                    - The constructor.
+		 * @param  {Number} timing           - Autoplay interval.
+		 * @param  {Object} items            - Each item in current slider.
+		 * @param  {Boolean} loop            - Determine whether to loop through each item.
+		 * @return {Void}                    - The constructor.
 		 */
         function sliderAutoPlay( timing, items, loop ) {	
 			
@@ -5016,11 +5103,11 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Initialize all the items to the stage
 		 *
-		 * @param  {object} slider           - Current selector of each slider.
-		 * @param  {object} sliderWrapper    - Wrapper of the slider.
-		 * @param  {number} nativeItemW      - Returns the intrinsic width of the image/video.
-		 * @param  {number} nativeItemH      - Returns the intrinsic height of the image/video.
-		 * @return {void}                    - The constructor.
+		 * @param  {Object} slider           - Current selector of each slider.
+		 * @param  {Object} sliderWrapper    - Wrapper of the slider.
+		 * @param  {Number} nativeItemW      - Returns the intrinsic width of the image/video.
+		 * @param  {Number} nativeItemH      - Returns the intrinsic height of the image/video.
+		 * @return {Void}                    - The constructor.
 		 */
         function addItemsToStage( slider, sliderWrapper, nativeItemW, nativeItemH ) {
 			
@@ -6391,10 +6478,10 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Transition Between Slides
 		 *
-		 * @param  {number} elementIndex     - Index of current slider.
-		 * @param  {object} slider           - Selector of the slider .
-		 * @param  {string} dir              - Switching direction indicator.
-		 * @return {void}                    - The constructor.
+		 * @param  {Number} elementIndex     - Index of current slider.
+		 * @param  {Object} slider           - Selector of the slider .
+		 * @param  {String} dir              - Switching direction indicator.
+		 * @return {Void}                    - The constructor.
 		 */
         function sliderUpdates( elementIndex, slider, dir ) {
 			
@@ -6562,9 +6649,9 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Fixed image width adaptation problem for Advanced Slider (on HTML tag <canvas>)
 		 *
-		 * @param  {number} w                - The width that the canvas will be set.
-		 * @param  {number} h                - The height that the canvas will be set.
-		 * @return {void}                    - The constructor.
+		 * @param  {Number} w                - The width that the canvas will be set.
+		 * @param  {Number} h                - The height that the canvas will be set.
+		 * @return {Void}                    - The constructor.
 		 */
         function fixCanvasTagSize( w, h ) {
 
@@ -6580,8 +6667,8 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Initialize the default height of canvas
 		 *
-		 * @param  {object} slider           - Current selector of each slider.
-		 * @return {void}                    - The constructor.
+		 * @param  {Object} slider           - Current selector of each slider.
+		 * @return {Void}                    - The constructor.
 		 */
         function canvasDefaultInit( slider ) {
 			
@@ -6644,13 +6731,13 @@ APP = ( function ( APP, $, window, document ) {
 		 * Canvas Transition Interactions
 		 * @http://pixijs.download/dev/docs/index.html
 		 *
-		 * @param  {number} elementIndex           - Index of current slider.
-		 * @param  {number} prevElementIndex       - Index of previous slider.
-		 * @param  {object} slider                 - Selector of the slider.
-		 * @param  {string} goType                 - The type of entry and exit between two items.  
+		 * @param  {Number} elementIndex           - Index of current slider.
+		 * @param  {Number} prevElementIndex       - Index of previous slider.
+		 * @param  {Object} slider                 - Selector of the slider.
+		 * @param  {String} goType                 - The type of entry and exit between two items.  
 		                                             Optional values: in, out
-		 * @param  {string} dir                    - Switching direction indicator.	 
-		 * @return {void}                          - The constructor.
+		 * @param  {String} dir                    - Switching direction indicator.	 
+		 * @return {Void}                          - The constructor.
 		 */
         function transitionInteractions( elementIndex, prevElementIndex, slider, goType, dir ) {
 			
@@ -7537,9 +7624,9 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Initialize embedded local video.
 		 *
-		 * @param  {object} wrapper          - The outermost video container, which can contain multiple videos
-		 * @param  {boolean} play            - Forced to trigger pause or play events.
-		 * @return {void}                    - The constructor.
+		 * @param  {Object} wrapper          - The outermost video container, which can contain multiple videos
+		 * @param  {Boolean} play            - Forced to trigger pause or play events.
+		 * @return {Void}                    - The constructor.
 		 */
 		function normalSliderVideoInit( wrapper, play ) {
 			wrapper.find( '.uix-video__slider' ).each( function()  {
@@ -7811,8 +7898,8 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Initialize slideshow
 		 *
-		 * @param  {boolean} resize            - Determine whether the window size changes.
-		 * @return {void}                      - The constructor.
+		 * @param  {Boolean} resize            - Determine whether the window size changes.
+		 * @return {Void}                      - The constructor.
 		 */
         function sliderInit( resize ) {
 	
@@ -7956,10 +8043,10 @@ APP = ( function ( APP, $, window, document ) {
         /*
 		 * Trigger slider autoplay
 		 *
-		 * @param  {number} timing           - Autoplay interval.
-		 * @param  {object} items            - Each item in current slider.
-		 * @param  {boolean} loop            - Determine whether to loop through each item.
-		 * @return {void}                    - The constructor.
+		 * @param  {Number} timing           - Autoplay interval.
+		 * @param  {Object} items            - Each item in current slider.
+		 * @param  {Boolean} loop            - Determine whether to loop through each item.
+		 * @return {Void}                    - The constructor.
 		 */
         function sliderAutoPlay( timing, items, loop ) {	
 			
@@ -7990,11 +8077,11 @@ APP = ( function ( APP, $, window, document ) {
         /*
 		 * Initialize all the items to the stage
 		 *
-		 * @param  {object} slider           - Current selector of each slider.
-		 * @param  {object} sliderWrapper    - Wrapper of the slider.
-		 * @param  {number} nativeItemW      - Returns the intrinsic width of the image/video.
-		 * @param  {number} nativeItemH      - Returns the intrinsic height of the image/video.
-		 * @return {void}                    - The constructor.
+		 * @param  {Object} slider           - Current selector of each slider.
+		 * @param  {Object} sliderWrapper    - Wrapper of the slider.
+		 * @param  {Number} nativeItemW      - Returns the intrinsic width of the image/video.
+		 * @param  {Number} nativeItemH      - Returns the intrinsic height of the image/video.
+		 * @return {Void}                    - The constructor.
 		 */
         function addItemsToStage( slider, sliderWrapper, nativeItemW, nativeItemH ) {
 			
@@ -8239,10 +8326,10 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Transition Between Slides
 		 *
-		 * @param  {number} elementIndex     - Index of current slider.
-		 * @param  {object} slider           - Selector of the slider .
-		 * @param  {string} dir              - Switching direction indicator.
-		 * @return {void}                    - The constructor.
+		 * @param  {Number} elementIndex     - Index of current slider.
+		 * @param  {Object} slider           - Selector of the slider .
+		 * @param  {String} dir              - Switching direction indicator.
+		 * @return {Void}                    - The constructor.
 		 */
         function sliderUpdates( elementIndex, slider, dir ) {
 			
@@ -8348,8 +8435,8 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Initialize the default height of item
 		 *
-		 * @param  {object} slider           - Current selector of each slider.
-		 * @return {void}                    - The constructor.
+		 * @param  {Object} slider           - Current selector of each slider.
+		 * @return {Void}                    - The constructor.
 		 */
         function itemDefaultInit( slider ) {
 			
@@ -8397,9 +8484,9 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Initialize embedded local video.
 		 *
-		 * @param  {object} wrapper          - The outermost video container, which can contain multiple videos
-		 * @param  {boolean} play            - Forced to trigger pause or play events.
-		 * @return {void}                    - The constructor.
+		 * @param  {Object} wrapper          - The outermost video container, which can contain multiple videos
+		 * @param  {Boolean} play            - Forced to trigger pause or play events.
+		 * @return {Void}                    - The constructor.
 		 */
 		function normalSliderVideoInit( wrapper, play ) {
 			wrapper.find( '.uix-video__slider' ).each( function()  {
@@ -9357,10 +9444,10 @@ APP = ( function ( APP, $, window, document ) {
  * Search string from JSON data
  * @Format reference: assets/json/countries.json
  *
- * @param  {function} callback               - Return function after successful loading of JSON file.
- * @param  {string} jsonFile                 - The path to the JSON file.
- * @param  {string} key                      - Target key of the JSON data.
- * @return {function}                        - Return a callback function.
+ * @param  {Function} callback               - Return function after successful loading of JSON file.
+ * @param  {String} jsonFile                 - The path to the JSON file.
+ * @param  {String} key                      - Target key of the JSON data.
+ * @return {Function}                        - Return a callback function.
  */
 ( function ( $ ) {
     $.fn.searchJsonString = function( options ) {
@@ -9452,8 +9539,8 @@ APP = ( function ( APP, $, window, document ) {
  * Check if a string is a valid JSON string
  * Note: Used when certain functions use "JSON.parse"
  *
- * @param  {string} string                   - A json arbitrary string
- * @return {boolean}                         - Return a boolean.
+ * @param  {String} string                   - A json arbitrary string
+ * @return {Boolean}                         - Return a boolean.
  */
 ( function ( $ ) {
     $.fn.isJsonObject = function( options ) {
@@ -9504,6 +9591,15 @@ APP = ( function ( APP, $, window, document ) {
  * <!-- Flexslider -->
  *************************************
  */
+
+/**
+ * APP.FLEXSLIDER
+ * @global
+ * @requires examples/assets/js/min/jquery.easing.min.js
+ */
+
+
+
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
@@ -9521,8 +9617,8 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Tiny helper function to add breakpoints.
 		 *
-		 * @param  {number} number           - Number of carousel items that should be visible.
-		 * @return {void}                    - The constructor.
+		 * @param  {Number} number           - Number of carousel items that should be visible.
+		 * @return {Void}                    - The constructor.
 		 */
         function getGridSize( number ) {
             return ( $window.width() <= 768 ) ? 1 : number;
@@ -9532,10 +9628,10 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Return an event from callback function to each slider.
 		 *
-		 * @param  {object} thisSlider             - The current slider.
-		 * @param  {object} sliderWrapper          - The current slider wrapper.
-		 * @param  {string} fireState              - State of fire asynchronously.
-		 * @return {number}                        - Index of current slider .
+		 * @param  {Object} thisSlider             - The current slider.
+		 * @param  {Object} sliderWrapper          - The current slider wrapper.
+		 * @param  {String} fireState              - State of fire asynchronously.
+		 * @return {Number}                        - Index of current slider .
 		 */
         function initslides( sliderWrapper, thisSlider, fireState ) {
 			
@@ -9838,9 +9934,9 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Initialize embedded local video.
 		 *
-		 * @param  {object} wrapper          - The outermost video container, which can contain multiple videos
-		 * @param  {boolean} play            - Forced to trigger pause or play events.
-		 * @return {void}                    - The constructor.
+		 * @param  {Object} wrapper          - The outermost video container, which can contain multiple videos
+		 * @param  {Boolean} play            - Forced to trigger pause or play events.
+		 * @return {Void}                    - The constructor.
 		 */
 		function videoEmbedInit( wrapper, play ) {
 			wrapper.find( '.uix-video__slider' ).each( function()  {
@@ -10060,8 +10156,8 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Make slider image draggable 
 		 *
-		 * @param  {object} $obj             - The current FlexSlider setup using custom selector.
-		 * @return {void}                   - The constructor.
+		 * @param  {Object} $obj             - The current FlexSlider setup using custom selector.
+		 * @return {Void}                   - The constructor.
 		 */
         function slidesExDraggable( $obj ) {
 			
@@ -10129,8 +10225,8 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 *  Scroll The Slider With Mousewheel
 		 *
-		 * @param  {object} $obj            - The current FlexSlider setup using custom selector.
-		 * @return {void}                   - The constructor.
+		 * @param  {Object} $obj            - The current FlexSlider setup using custom selector.
+		 * @return {Void}                   - The constructor.
 		 */
         function slidesExMousewheel( $obj ) {
 
@@ -10171,9 +10267,9 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Slider With Thumbnail ControlNav Pattern
 		 *
-		 * @param  {object} slider           - The current slider.
-		 * @param  {string} navThumbClass    - Class name of thumbnail controlNav.
-		 * @return {void}                    - The constructor.
+		 * @param  {Object} slider           - The current slider.
+		 * @param  {String} navThumbClass    - Class name of thumbnail controlNav.
+		 * @return {Void}                    - The constructor.
 		 */
         function initslidesWithNavThumb( slider, navThumbClass ) {
 
@@ -10194,12 +10290,12 @@ APP = ( function ( APP, $, window, document ) {
 		* fortunately, since all the children are not animating,
 		* they will only update if the main flexslider updates. 
 		 *
-		 * @param  {number} slideNumber          - The current slider index.
-		 * @param  {object} childrenSlidesObj    - Target slider.
-		 * @param  {boolean} loop                - Gives the slider a seamless infinite loop.
-		 * @param  {number} speed                - Set the speed of animations, in milliseconds.
-		 * @param  {number} timing               - Set the speed of the slideshow cycling, in milliseconds.
-		 * @return {void}                        - The constructor.
+		 * @param  {Number} slideNumber          - The current slider index.
+		 * @param  {Object} childrenSlidesObj    - Target slider.
+		 * @param  {Boolean} loop                - Gives the slider a seamless infinite loop.
+		 * @param  {Number} speed                - Set the speed of animations, in milliseconds.
+		 * @param  {Number} timing               - Set the speed of the slideshow cycling, in milliseconds.
+		 * @return {Void}                        - The constructor.
 		 */
 		function updateChildrenSlides( slideNumber, childrenSlidesObj, loop, speed, timing ) {
 			
@@ -11814,7 +11910,7 @@ APP = ( function ( APP, $, window, document ) {
 /*
  * Callbacks for special forms (supports asynchronous)
  *
- * @return {void}                        - The constructor.
+ * @return {Void}                        - The constructor.
  */
 ( function ( $ ) {
     $.fn.customSpecialFormsInit = function( options ) {
@@ -12087,12 +12183,12 @@ APP = ( function ( APP, $, window, document ) {
 /*
  * Custom Select
  *
- * @param  {string} selector             - The current selector.
- * @param  {string} targetWrapper        - Wrapper of the selector.
- * @param  {string} trigger              - Trigger of the selector.
- * @param  {string} itemsWrapper         - Selector's options container.
- * @param  {object} item                 - Each option of the selector.
- * @return {void}                        - The constructor.
+ * @param  {String} selector             - The current selector.
+ * @param  {String} targetWrapper        - Wrapper of the selector.
+ * @param  {String} trigger              - Trigger of the selector.
+ * @param  {String} itemsWrapper         - Selector's options container.
+ * @param  {Object} item                 - Each option of the selector.
+ * @return {Void}                        - The constructor.
  */
 ( function ( $ ) {
     $.fn.customSelectInit = function( options ) {
@@ -12264,10 +12360,10 @@ APP = ( function ( APP, $, window, document ) {
 /*
  * Custom Radio, Checkbox and Toggle 
  *
- * @param  {string} radioWrapper             - Wrapper of the radio.
- * @param  {string} toggle                   - Toggle of the checkbox.
- * @param  {string} checkboxWrapper          - Wrapper of the checkbox.
- * @return {void}                            - The constructor.
+ * @param  {String} radioWrapper             - Wrapper of the radio.
+ * @param  {String} toggle                   - Toggle of the checkbox.
+ * @param  {String} checkboxWrapper          - Wrapper of the checkbox.
+ * @return {Void}                            - The constructor.
  */
 ( function ( $ ) {
     $.fn.customRadioCheckboxInit = function( options ) {
@@ -12337,8 +12433,8 @@ APP = ( function ( APP, $, window, document ) {
 /*
  * Create Line Effect on Click
  *
- * @param  {string} controls                 - Wrapper of controls.
- * @return {void}                            - The constructor.
+ * @param  {String} controls                 - Wrapper of controls.
+ * @return {Void}                            - The constructor.
  */
 ( function ( $ ) {
     $.fn.customControlsLineEffInit = function( options ) {
@@ -14555,7 +14651,7 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Resets the form back to the default state.
 		 *
-		 * @return {void}                   - The constructor.
+		 * @return {Void}                   - The constructor.
 		 */
 		function formReset() {
 			
@@ -14591,11 +14687,11 @@ APP = ( function ( APP, $, window, document ) {
 /*
  * Shows the next form.
  *
- * @param  {object} selector        - Each target forms selector.
- * @param  {object} formTarget      - Wrapper of target forms selector.
- * @param  {string} indicator       - Indicator of timeline.
- * @param  {number} index           - Default index for initialization.
- * @return {void}                   - The constructor.
+ * @param  {Object} selector        - Each target forms selector.
+ * @param  {Object} formTarget      - Wrapper of target forms selector.
+ * @param  {String} indicator       - Indicator of timeline.
+ * @param  {Number} index           - Default index for initialization.
+ * @return {Void}                   - The constructor.
  */
 ( function ( $ ) {
     $.fn.formProgressNext = function( options ) {
@@ -14783,6 +14879,15 @@ APP = ( function ( APP, $, window, document ) {
  * <!-- Gallery -->
  *************************************
  */
+/**
+ * APP.GALLERY
+ * @global
+ * @requires examples/assets/js/wp-jquery/masonry.min.js
+ * @requires examples/assets/js/wp-jquery/imagesloaded.min.js
+ * @requires examples/assets/js/min/jquery.shuffle.min.js
+ */
+
+
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
@@ -14968,9 +15073,9 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Initialize Shapes
 		 *
-		 * @param  {number} w         - Returns width of browser viewport
-		 * @param  {number} h         - Returns height of browser viewport
-		 * @return {void}             - The constructor.
+		 * @param  {Number} w         - Returns width of browser viewport
+		 * @param  {Number} h         - Returns height of browser viewport
+		 * @return {Void}             - The constructor.
 		 */
 		function shapesInit( w ) {
 			
@@ -15677,6 +15782,16 @@ APP = ( function ( APP, $, window, document ) {
  * <!-- Posts List With Ajax -->
  *************************************
  */
+
+/**
+ * APP.POST_LIST_AJAX 
+ * @global
+ * @requires examples/assets/js/min/template7.min.js
+ * @requires examples/assets/js/wp-jquery/masonry.min.js
+ * @requires examples/assets/js/wp-jquery/imagesloaded.min.js
+ */
+
+
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
@@ -16033,20 +16148,20 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Ajax with JSON data
 		 *
-		 * @param  {object} ajaxWrapper     - The outermost container of list.
-		 * @param  {object} defaultPostData - Data to be sent to the server which is custom JSON fields.
-		 * @param  {object} trigger         - Trigger ajax loaded button object.
-		 * @param  {number} curPage         - The current page to load.
-		 * @param  {number} perShow         - The amount to load each time.
-		 * @param  {number} totalPage       - The total page to load.
-		 * @param  {string} template7ID     - HTML template ID
-		 * @param  {string} jsonFile        - JSON file path to docking data
-		 * @param  {string} triggerActive   - The class name of trigger button actived.
-		 * @param  {string} pushContainer   - This container is used to display the loaded dynamic data.
-		 * @param  {string} method          - The type of request to make, which can be either "POST" or "GET".
-		 * @param  {boolean} addition       - Do or not append to the original content.
-		 * @param  {string} noneInfo        - Returns information of ajax asynchronous callback when the content is empty.
-		 * @return {void}                   - The constructor.
+		 * @param  {Object} ajaxWrapper     - The outermost container of list.
+		 * @param  {Object} defaultPostData - Data to be sent to the server which is custom JSON fields.
+		 * @param  {Object} trigger         - Trigger ajax loaded button object.
+		 * @param  {Number} curPage         - The current page to load.
+		 * @param  {Number} perShow         - The amount to load each time.
+		 * @param  {Number} totalPage       - The total page to load.
+		 * @param  {String} template7ID     - HTML template ID
+		 * @param  {String} jsonFile        - JSON file path to docking data
+		 * @param  {String} triggerActive   - The class name of trigger button actived.
+		 * @param  {String} pushContainer   - This container is used to display the loaded dynamic data.
+		 * @param  {String} method          - The type of request to make, which can be either "POST" or "GET".
+		 * @param  {Boolean} addition       - Do or not append to the original content.
+		 * @param  {String} noneInfo        - Returns information of ajax asynchronous callback when the content is empty.
+		 * @return {Void}                   - The constructor.
 		 */
 		
 		function ajaxLoadInit( ajaxWrapper, defaultPostData, trigger, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition, noneInfo ) {
@@ -16319,9 +16434,9 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Scroll initialize
 		 *
-		 * @param  {object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
-		 * @param  {string} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
-		 * @return {void}                - The constructor.
+		 * @param  {Object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
+		 * @param  {String} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
+		 * @return {Void}                - The constructor.
 		 */
 		function scrollInit( event, dir ) {
 	
@@ -16363,6 +16478,13 @@ APP = ( function ( APP, $, window, document ) {
  * <!-- Multiple Items Carousel -->
  *************************************
  */
+/**
+ * APP.MULTI_ITEMS_CAROUSEL
+ * @global
+ * @requires examples/assets/js/min/hammer.min.js
+ */
+
+
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
@@ -16661,12 +16783,12 @@ APP = ( function ( APP, $, window, document ) {
 			/*
 			 * Transition Between Items
 			 *
-			 * @param  {object} wrapper         - Wrapper of carousel.
-			 * @param  {object} curBtn          - The button that currently triggers the move.
-			 * @param  {string} nextBtnStr      - The button ID or class that triggers the next move.
-			 * @param  {string} prevBtnStr      - The button ID or class that triggers the previous move.
-			 * @param  {number} steps           - The number of steps per move.
-			 * @return {void}                   - The constructor.
+			 * @param  {Object} wrapper         - Wrapper of carousel.
+			 * @param  {Object} curBtn          - The button that currently triggers the move.
+			 * @param  {String} nextBtnStr      - The button ID or class that triggers the next move.
+			 * @param  {String} prevBtnStr      - The button ID or class that triggers the previous move.
+			 * @param  {Number} steps           - The number of steps per move.
+			 * @return {Void}                   - The constructor.
 			 */
 			function itemUpdates( wrapper, curBtn, nextBtnStr, prevBtnStr, steps ) {
 
@@ -16962,12 +17084,12 @@ APP = ( function ( APP, $, window, document ) {
 //			/*
 //			 * Transition between items next (left/up)
 //			 *
-//			 * @param  {object} wrapper         - Wrapper of carousel.
-//			 * @param  {object} items           - Items of carousel.
-//			 * @param  {object} curBtn          - The button that currently triggers the move.
-//			 * @param  {string} nextBtnStr      - The button ID or class that triggers the next move.
-//			 * @param  {string} prevBtnStr      - The button ID or class that triggers the previous move.
-//			 * @return {void}                   - The constructor.
+//			 * @param  {Object} wrapper         - Wrapper of carousel.
+//			 * @param  {Object} items           - Items of carousel.
+//			 * @param  {Object} curBtn          - The button that currently triggers the move.
+//			 * @param  {String} nextBtnStr      - The button ID or class that triggers the next move.
+//			 * @param  {String} prevBtnStr      - The button ID or class that triggers the previous move.
+//			 * @return {Void}                   - The constructor.
 //			 */
 //			function moveNext( wrapper, items, curBtn, nextBtnStr, prevBtnStr ) {
 //
@@ -17101,12 +17223,12 @@ APP = ( function ( APP, $, window, document ) {
 //			/*
 //			 * Transition between items previously (right/down)
 //			 *
-//			 * @param  {object} wrapper         - Wrapper of carousel.
-//			 * @param  {object} items           - Items of carousel.
-//			 * @param  {object} curBtn          - The button that currently triggers the move.
-//			 * @param  {string} nextBtnStr      - The button ID or class that triggers the next move.
-//			 * @param  {string} prevBtnStr      - The button ID or class that triggers the previous move.
-//			 * @return {void}                   - The constructor.
+//			 * @param  {Object} wrapper         - Wrapper of carousel.
+//			 * @param  {Object} items           - Items of carousel.
+//			 * @param  {Object} curBtn          - The button that currently triggers the move.
+//			 * @param  {String} nextBtnStr      - The button ID or class that triggers the next move.
+//			 * @param  {String} prevBtnStr      - The button ID or class that triggers the previous move.
+//			 * @return {Void}                   - The constructor.
 //			 */
 //			function movePrev( wrapper, items, curBtn, nextBtnStr, prevBtnStr ) {
 //
@@ -17328,7 +17450,7 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Init the section location
 		 *
-		 * @return {void}                - The constructor.
+		 * @return {Void}                - The constructor.
 		 */
 		function sectionStart() {
 	
@@ -17356,9 +17478,9 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Scroll initialize
 		 *
-		 * @param  {object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
-		 * @param  {string} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
-		 * @return {void}                - The constructor.
+		 * @param  {Object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
+		 * @param  {String} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
+		 * @return {Void}                - The constructor.
 		 */
 		function scrollMoveInit( event, dir ) {
 	
@@ -17387,10 +17509,10 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Move Animation
 		 *
-		 * @param  {object} el           - The container of each sections.
-		 * @param  {string} dir          - Rolling direction indicator.
-		 * @param  {number} hashID       - ID of custom hashchange event.
-		 * @return {void}                - The constructor.
+		 * @param  {Object} el           - The container of each sections.
+		 * @param  {String} dir          - Rolling direction indicator.
+		 * @param  {Number} hashID       - ID of custom hashchange event.
+		 * @return {Void}                - The constructor.
 		 */
 		function moveTo( el, dir, hashID ) {
 			var index     = parseFloat( $sections.filter( '.active' ).attr( 'data-index' ) ),
@@ -17482,8 +17604,8 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Get section or article by href
 		 *
-		 * @param  {string, object} el  - The current selector or selector ID
-		 * @return {object}             - A new selector.
+		 * @param  {String|Object} el  - The current selector or selector ID
+		 * @return {Object}             - A new selector.
 		 */
         function getRelatedContent( el ) {
             return $( $( el ).attr( 'href' ) );
@@ -17493,10 +17615,10 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Get link by section or article id
 		 *
-		 * @param  {string, object} el    - The current selector or selector ID
-		 * @param  {object} menuObj       - Returns the menu element within the document.
-		 * @param  {boolean} echoIndex    - Whether to return the current index.
-		 * @return {object}               - A new selector.
+		 * @param  {String|Object} el    - The current selector or selector ID
+		 * @param  {Object} menuObj       - Returns the menu element within the document.
+		 * @param  {Boolean} echoIndex    - Whether to return the current index.
+		 * @return {Object}               - A new selector.
 		 */
         function getRelatedNavigation( el, menuObj, echoIndex ) {
 			
@@ -17511,8 +17633,8 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Get all links by section or article
 		 *
-		 * @param  {object} menuObj     - Returns the menu element within the document.
-		 * @return {object}             - A new selector.
+		 * @param  {Object} menuObj     - Returns the menu element within the document.
+		 * @return {Object}             - A new selector.
 		 */
         function getAllNavigation( menuObj ) {
             return menuObj.find( 'li' );
@@ -17522,8 +17644,8 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Smooth scroll to content
 		 *
-		 * @param  {object} menuObj     - Returns the menu element within the document.
-		 * @return {void}               - The constructor.
+		 * @param  {Object} menuObj     - Returns the menu element within the document.
+		 * @return {Void}               - The constructor.
 		 */
         function goPageSection( menuObj ) {
 			menuObj.find( 'li > a' ).on( 'click', function(e) {
@@ -17786,7 +17908,7 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Init the section location
 		 *
-		 * @return {void}                - The constructor.
+		 * @return {Void}                - The constructor.
 		 */
 		function sectionStart() {
 	
@@ -17815,9 +17937,9 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Initialize the depth of all sections
 		 *
-		 * @param  {number} nextIndex        - Index of next section.
-		 * @param  {number} currentIndex     - Index of current section.
-		 * @return {void}                    - The constructor.
+		 * @param  {Number} nextIndex        - Index of next section.
+		 * @param  {Number} currentIndex     - Index of current section.
+		 * @return {Void}                    - The constructor.
 		 */
 		function sectionsDepthInit( nextIndex, currentIndex ) {
 	
@@ -17842,9 +17964,9 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Scroll initialize
 		 *
-		 * @param  {object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
-		 * @param  {string} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
-		 * @return {void}                - The constructor.
+		 * @param  {Object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
+		 * @param  {String} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
+		 * @return {Void}                - The constructor.
 		 */
 		function scrollMoveInit( event, dir ) {
 	
@@ -17873,10 +17995,10 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Move Animation
 		 *
-		 * @param  {object} el           - The container of each sections.
-		 * @param  {string} dir          - Rolling direction indicator.
-		 * @param  {number} hashID       - ID of custom hashchange event.
-		 * @return {void}                - The constructor.
+		 * @param  {Object} el           - The container of each sections.
+		 * @param  {String} dir          - Rolling direction indicator.
+		 * @param  {Number} hashID       - ID of custom hashchange event.
+		 * @return {Void}                - The constructor.
 		 */
 		function moveTo( el, dir, hashID ) {
 			var index     = parseFloat( $sections.filter( '.active' ).attr( 'data-index' ) ),
@@ -18003,8 +18125,8 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Get section or article by href
 		 *
-		 * @param  {string, object} el  - The current selector or selector ID
-		 * @return {object}             - A new selector.
+		 * @param  {String|Object} el  - The current selector or selector ID
+		 * @return {Object}             - A new selector.
 		 */
         function getRelatedContent( el ) {
             return $( $( el ).attr( 'href' ) );
@@ -18014,8 +18136,8 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Get all links by section or article
 		 *
-		 * @param  {object} menuObj     - Returns the menu element within the document.
-		 * @return {object}             - A new selector.
+		 * @param  {Object} menuObj     - Returns the menu element within the document.
+		 * @return {Object}             - A new selector.
 		 */
         function getAllNavigation( menuObj ) {
             return menuObj.find( 'li' );
@@ -18025,8 +18147,8 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Smooth scroll to content
 		 *
-		 * @param  {object} menuObj     - Returns the menu element within the document.
-		 * @return {void}               - The constructor.
+		 * @param  {Object} menuObj     - Returns the menu element within the document.
+		 * @return {Void}               - The constructor.
 		 */
         function goPageSection( menuObj ) {
 			menuObj.find( 'li > a' ).on( 'click', function(e) {
@@ -18183,9 +18305,9 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Initialize parallx settings
 		 *
-		 * @param  {number} w         - Returns width of browser viewport
-		 * @param  {number} h         - Returns height of browser viewport
-		 * @return {void}             - The constructor.
+		 * @param  {Number} w         - Returns width of browser viewport
+		 * @param  {Number} h         - Returns height of browser viewport
+		 * @return {Void}             - The constructor.
 		 */
 		function parallaxInit( w, h ) {
 			
@@ -19017,6 +19139,14 @@ APP = ( function ( APP, $, window, document ) {
  * <!-- Scrollspy Animate -->
  *************************************
  */
+
+/**
+ * APP.SCROLLSPY_ANIM
+ * @global
+ * @requires examples/assets/js/min/pixi.min.js
+ * @requires _components/03.plugins-GSAP
+ */
+
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
@@ -21158,14 +21288,21 @@ APP = ( function ( APP, $, window, document ) {
  * <!-- Text effect -->
  *************************************
  */
-/*
-Usage:
+/**
+ * APP.TEXT_EFFECT
+ * @global
+ * @requires examples/assets/js/min/anime.min.js
+ * @example 
+
+ //The data-text-eff attribute on the same page cannot be duplicated.
 
 <h3 data-text-eff="letters-eff-flyInOut1" data-text-eff-speed="800">Text Text</h3>
 <h3 data-text-eff="letters-eff-flyInOut2" data-text-eff-speed="800">Text Text</h3>
 <h3 data-text-eff="letters-eff-flyInOut3" data-text-eff-speed="800">Text Text</h3>
+ 
+ */
 
-*/
+
 
 APP = ( function ( APP, $, window, document ) {
     'use strict';
@@ -21194,8 +21331,8 @@ APP = ( function ( APP, $, window, document ) {
 /*
  * Text Effect
  *
- * @param  {string} selectors                - Text wrapper ID or class name.
- * @return {void}                            - The constructor.
+ * @param  {String} selectors                - Text wrapper ID or class name.
+ * @return {Void}                            - The constructor.
  */
 ( function ( $ ) {
     $.fn.customTextEffInit = function( options ) {
@@ -21392,11 +21529,11 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Method that updates items of timeline
 		 *
-		 * @param  {object} obj                  - Wrapper of timeline.
-		 * @param  {object} iscur                - The current item.
-		 * @param  {string} showEle              - Element ID or class name that push the current text.
-		 * @param  {boolean} prev                - Whether to slide forward.
-		 * @return {void}                        - The constructor.
+		 * @param  {Object} obj                  - Wrapper of timeline.
+		 * @param  {Object} iscur                - The current item.
+		 * @param  {String} showEle              - Element ID or class name that push the current text.
+		 * @param  {Boolean} prev                - Whether to slide forward.
+		 * @return {Void}                        - The constructor.
 		 */
 		function timelineUpdate( obj, iscur, showEle, prev ) {
 			var	itemTotal  = obj.find( '.uix-timeline__item' ).length,
@@ -21605,9 +21742,9 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Monitor the maximum height of the vertical navigation
 		 *
-		 * @param  {number} w         - Returns width of browser viewport
-		 * @param  {number} h         - Returns height of browser viewport
-		 * @return {void}             - The constructor.
+		 * @param  {Number} w         - Returns width of browser viewport
+		 * @param  {Number} h         - Returns height of browser viewport
+		 * @return {Void}             - The constructor.
 		 */
 		function menuWrapInit( w, h ) {
 			
@@ -21785,7 +21922,7 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Initialize the clickable ajax links
 		 *
-		 * @return {void}  - The constructor.
+		 * @return {Void}  - The constructor.
 		 */
 		function ajaxInit() {
 			if ( windowWidth <= 768 ) {
@@ -21857,9 +21994,9 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Scroll initialize
 		 *
-		 * @param  {object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
-		 * @param  {string} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
-		 * @return {void}                - The constructor.
+		 * @param  {Object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
+		 * @param  {String} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
+		 * @return {Void}                - The constructor.
 		 */
 		function scrollMoveInit( event, dir ) {
 	
@@ -21887,11 +22024,11 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Move Animation
 		 *
-		 * @param  {object} container    - The instance returned from the request succeeds 
-		 * @param  {string} url          - The target URL via AJAX.
-		 * @param  {string} dir          - Rolling direction indicator.
-		 * @param  {number} customIndex  - User-specified index value, located on the corresponding AJAX hyperlink.
-		 * @return {void}                - The constructor.
+		 * @param  {Object} container    - The instance returned from the request succeeds 
+		 * @param  {String} url          - The target URL via AJAX.
+		 * @param  {String} dir          - Rolling direction indicator.
+		 * @param  {Number} customIndex  - User-specified index value, located on the corresponding AJAX hyperlink.
+		 * @return {Void}                - The constructor.
 		 */
 		function moveTo( container, url, dir, customIndex ) {
 			var index     = parseFloat( $navs.filter( '.active' ).find( '> a' ).attr( 'data-index' ) ),
@@ -21988,12 +22125,12 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * A function to be called if the request succeeds
 		 *
-		 * @param  {string} dir       - Gets a value that indicates the amount that the mouse wheel has changed.
-		 * @param  {object} container - The instance returned from the request succeeds
-		 * @param  {string} url       - Current URL after click
-		 * @param  {string} content   - The data returned from the server
-		 * @param  {string} title        - The title of a requested page.
-		 * @return {void}             - The constructor.
+		 * @param  {String} dir       - Gets a value that indicates the amount that the mouse wheel has changed.
+		 * @param  {Object} container - The instance returned from the request succeeds
+		 * @param  {String} url       - Current URL after click
+		 * @param  {String} content   - The data returned from the server
+		 * @param  {String} title        - The title of a requested page.
+		 * @return {Void}             - The constructor.
 		 */
 		function ajaxSucceeds( dir, container, url, content, title ) {
 			
@@ -22056,10 +22193,10 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Transition effect between two elements.
 		 *
-		 * @param  {string} dir            - Gets a value that indicates the amount that the mouse wheel has changed.
-		 * @param  {string} oldContent     - A string of HTML to set as the content of matched old element.
-		 * @param  {string} newContent     - A string of HTML to set as the content of matched new element.
-		 * @return {void}                  - The constructor.
+		 * @param  {String} dir            - Gets a value that indicates the amount that the mouse wheel has changed.
+		 * @param  {String} oldContent     - A string of HTML to set as the content of matched old element.
+		 * @param  {String} newContent     - A string of HTML to set as the content of matched new element.
+		 * @return {Void}                  - The constructor.
 		 */
 		function eleTransitionEff( dir, oldContent, newContent ) {
 			
@@ -22165,13 +22302,13 @@ APP = ( function ( APP, $, window, document ) {
 /*
  * Apply some original scripts
  *
- * @param  {boolean} scrollReveal          - Run script of module "Scroll Reveal". a page commonly used to 
+ * @param  {Boolean} scrollReveal          - Run script of module "Scroll Reveal". a page commonly used to 
  *                                           load asynchronous information
- * @param  {boolean} ajaxPostList          - Run script of module "Posts List With Ajax". a page commonly used to 
+ * @param  {Boolean} ajaxPostList          - Run script of module "Posts List With Ajax". a page commonly used to 
  *                                           load asynchronous information
- * @param  {boolean} ajaxDDList            - Run script of module "Dynamic Drop Down List from JSON".
- * @param  {boolean} counterAnim           - Run script of module "Counter".
- * @return {void}  - The constructor.
+ * @param  {Boolean} ajaxDDList            - Run script of module "Dynamic Drop Down List from JSON".
+ * @param  {Boolean} counterAnim           - Run script of module "Counter".
+ * @return {Void}  - The constructor.
  */
 ( function ( $ ) {
     $.fn.applyOriginalSomeScripts = function( options ) {
@@ -22278,8 +22415,8 @@ APP = ( function ( APP, $, window, document ) {
 /*
  * Apply all the original scripts
  *
- * @param  {boolean} runAll          - Run all module scripts.
- * @return {void}  - The constructor.
+ * @param  {Boolean} runAll          - Run all module scripts.
+ * @return {Void}  - The constructor.
  */	
 ( function ( $ ) {
     $.fn.applyOriginalAllScripts = function( options ) {
@@ -22404,12 +22541,12 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Move Animation
 		 *
-		 * @param  {object} container    - The target container to which the content will be added.
-		 * @param  {string} target       - The instance ID or class name returned from the callback data
-		 * @param  {string} loading      - Content of loading area.
-		 * @param  {string} url          - The target URL via AJAX.
-		 * @param  {string} method       - The HTTP method to use for the request (e.g. "POST", "GET", "PUT")
-		 * @return {void}                - The constructor.
+		 * @param  {Object} container    - The target container to which the content will be added.
+		 * @param  {String} target       - The instance ID or class name returned from the callback data
+		 * @param  {String} loading      - Content of loading area.
+		 * @param  {String} url          - The target URL via AJAX.
+		 * @param  {String} method       - The HTTP method to use for the request (e.g. "POST", "GET", "PUT")
+		 * @return {Void}                - The constructor.
 		 */
 		function pushAction( container, target, loading, url, method ) {
 
@@ -22481,11 +22618,11 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * A function to be called if the request succeeds
 		 *
-		 * @param  {string} container    - The target container to which the content will be added.
-		 * @param  {string} url          - Current URL after click
-		 * @param  {string} content      - The data returned from the server
-		 * @param  {string} title        - The title of a requested page.
-		 * @return {void}                - The constructor.
+		 * @param  {String} container    - The target container to which the content will be added.
+		 * @param  {String} url          - Current URL after click
+		 * @param  {String} content      - The data returned from the server
+		 * @param  {String} title        - The title of a requested page.
+		 * @return {Void}                - The constructor.
 		 */
 		function ajaxSucceeds( container, url, content, title ) {
 			
@@ -26726,8 +26863,8 @@ THREE.GLTFLoader = ( function () {
 
 	/**
 	 * Requests the specified dependency asynchronously, with caching.
-	 * @param {string} type
-	 * @param {number} index
+	 * @param {String} type
+	 * @param {Number} index
 	 * @return {Promise<Object>}
 	 */
 	GLTFParser.prototype.getDependency = function ( type, index ) {
@@ -26798,7 +26935,7 @@ THREE.GLTFLoader = ( function () {
 
 	/**
 	 * Requests all dependencies of the specified type asynchronously, with caching.
-	 * @param {string} type
+	 * @param {String} type
 	 * @return {Promise<Array<Object>>}
 	 */
 	GLTFParser.prototype.getDependencies = function ( type ) {
@@ -26859,7 +26996,7 @@ THREE.GLTFLoader = ( function () {
 
 	/**
 	 * Specification: https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md#buffers-and-buffer-views
-	 * @param {number} bufferIndex
+	 * @param {Number} bufferIndex
 	 * @return {Promise<ArrayBuffer>}
 	 */
 	GLTFParser.prototype.loadBuffer = function ( bufferIndex ) {
@@ -26896,7 +27033,7 @@ THREE.GLTFLoader = ( function () {
 
 	/**
 	 * Specification: https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md#buffers-and-buffer-views
-	 * @param {number} bufferViewIndex
+	 * @param {Number} bufferViewIndex
 	 * @return {Promise<ArrayBuffer>}
 	 */
 	GLTFParser.prototype.loadBufferView = function ( bufferViewIndex ) {
@@ -26915,7 +27052,7 @@ THREE.GLTFLoader = ( function () {
 
 	/**
 	 * Specification: https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md#accessors
-	 * @param {number} accessorIndex
+	 * @param {Number} accessorIndex
 	 * @return {Promise<THREE.BufferAttribute|THREE.InterleavedBufferAttribute>}
 	 */
 	GLTFParser.prototype.loadAccessor = function ( accessorIndex ) {
@@ -27045,7 +27182,7 @@ THREE.GLTFLoader = ( function () {
 
 	/**
 	 * Specification: https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#textures
-	 * @param {number} textureIndex
+	 * @param {Number} textureIndex
 	 * @return {Promise<THREE.Texture>}
 	 */
 	GLTFParser.prototype.loadTexture = function ( textureIndex ) {
@@ -27158,8 +27295,8 @@ THREE.GLTFLoader = ( function () {
 	/**
 	 * Asynchronously assigns a texture to the given material parameters.
 	 * @param {Object} materialParams
-	 * @param {string} textureName
-	 * @param {number} textureIndex
+	 * @param {String} textureName
+	 * @param {Number} textureIndex
 	 * @return {Promise}
 	 */
 	GLTFParser.prototype.assignTexture = function ( materialParams, textureName, textureIndex ) {
@@ -27174,7 +27311,7 @@ THREE.GLTFLoader = ( function () {
 
 	/**
 	 * Specification: https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md#materials
-	 * @param {number} materialIndex
+	 * @param {Number} materialIndex
 	 * @return {Promise<THREE.Material>}
 	 */
 	GLTFParser.prototype.loadMaterial = function ( materialIndex ) {
@@ -27552,7 +27689,7 @@ THREE.GLTFLoader = ( function () {
 
 	/**
 	 * Specification: https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md#meshes
-	 * @param {number} meshIndex
+	 * @param {Number} meshIndex
 	 * @return {Promise<THREE.Group|THREE.Mesh|THREE.SkinnedMesh>}
 	 */
 	GLTFParser.prototype.loadMesh = function ( meshIndex ) {
@@ -27791,7 +27928,7 @@ THREE.GLTFLoader = ( function () {
 
 	/**
 	 * Specification: https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#cameras
-	 * @param {number} cameraIndex
+	 * @param {Number} cameraIndex
 	 * @return {Promise<THREE.Camera>}
 	 */
 	GLTFParser.prototype.loadCamera = function ( cameraIndex ) {
@@ -27826,7 +27963,7 @@ THREE.GLTFLoader = ( function () {
 
 	/**
 	 * Specification: https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#skins
-	 * @param {number} skinIndex
+	 * @param {Number} skinIndex
 	 * @return {Promise<Object>}
 	 */
 	GLTFParser.prototype.loadSkin = function ( skinIndex ) {
@@ -27853,7 +27990,7 @@ THREE.GLTFLoader = ( function () {
 
 	/**
 	 * Specification: https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#animations
-	 * @param {number} animationIndex
+	 * @param {Number} animationIndex
 	 * @return {Promise<THREE.AnimationClip>}
 	 */
 	GLTFParser.prototype.loadAnimation = function ( animationIndex ) {
@@ -27996,7 +28133,7 @@ THREE.GLTFLoader = ( function () {
 
 	/**
 	 * Specification: https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#nodes-and-hierarchy
-	 * @param {number} nodeIndex
+	 * @param {Number} nodeIndex
 	 * @return {Promise<THREE.Object3D>}
 	 */
 	GLTFParser.prototype.loadNode = function ( nodeIndex ) {
@@ -28125,7 +28262,7 @@ THREE.GLTFLoader = ( function () {
 
 	/**
 	 * Specification: https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#scenes
-	 * @param {number} sceneIndex
+	 * @param {Number} sceneIndex
 	 * @return {Promise<THREE.Scene>}
 	 */
 	GLTFParser.prototype.loadScene = function () {

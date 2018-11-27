@@ -4,6 +4,15 @@
  * <!-- Gallery -->
  *************************************
  */
+/**
+ * APP.GALLERY
+ * @global
+ * @requires examples/assets/js/wp-jquery/masonry.min.js
+ * @requires examples/assets/js/wp-jquery/imagesloaded.min.js
+ * @requires examples/assets/js/min/jquery.shuffle.min.js
+ */
+
+
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	

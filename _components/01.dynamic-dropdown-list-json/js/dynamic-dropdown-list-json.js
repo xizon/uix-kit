@@ -288,10 +288,10 @@ APP = ( function ( APP, $, window, document ) {
  * Search string from JSON data
  * @Format reference: assets/json/countries.json
  *
- * @param  {function} callback               - Return function after successful loading of JSON file.
- * @param  {string} jsonFile                 - The path to the JSON file.
- * @param  {string} key                      - Target key of the JSON data.
- * @return {function}                        - Return a callback function.
+ * @param  {Function} callback               - Return function after successful loading of JSON file.
+ * @param  {String} jsonFile                 - The path to the JSON file.
+ * @param  {String} key                      - Target key of the JSON data.
+ * @return {Function}                        - Return a callback function.
  */
 ( function ( $ ) {
     $.fn.searchJsonString = function( options ) {
@@ -383,8 +383,8 @@ APP = ( function ( APP, $, window, document ) {
  * Check if a string is a valid JSON string
  * Note: Used when certain functions use "JSON.parse"
  *
- * @param  {string} string                   - A json arbitrary string
- * @return {boolean}                         - Return a boolean.
+ * @param  {String} string                   - A json arbitrary string
+ * @return {Boolean}                         - Return a boolean.
  */
 ( function ( $ ) {
     $.fn.isJsonObject = function( options ) {

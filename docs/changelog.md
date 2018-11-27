@@ -1,5 +1,11 @@
 # Changelog
 
+
+#### = 2.2.4 (November 27, 2018) =
+
+* Tweak: Optimized construction of core scripts.
+
+
 #### = 2.2.3 (November 26, 2018) =
 
 * Fix: Fixed history error in Ajax modules.

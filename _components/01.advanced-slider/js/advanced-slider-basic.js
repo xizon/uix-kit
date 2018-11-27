@@ -42,8 +42,8 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Initialize slideshow
 		 *
-		 * @param  {boolean} resize            - Determine whether the window size changes.
-		 * @return {void}                      - The constructor.
+		 * @param  {Boolean} resize            - Determine whether the window size changes.
+		 * @return {Void}                      - The constructor.
 		 */
         function sliderInit( resize ) {
 	
@@ -187,10 +187,10 @@ APP = ( function ( APP, $, window, document ) {
         /*
 		 * Trigger slider autoplay
 		 *
-		 * @param  {number} timing           - Autoplay interval.
-		 * @param  {object} items            - Each item in current slider.
-		 * @param  {boolean} loop            - Determine whether to loop through each item.
-		 * @return {void}                    - The constructor.
+		 * @param  {Number} timing           - Autoplay interval.
+		 * @param  {Object} items            - Each item in current slider.
+		 * @param  {Boolean} loop            - Determine whether to loop through each item.
+		 * @return {Void}                    - The constructor.
 		 */
         function sliderAutoPlay( timing, items, loop ) {	
 			
@@ -221,11 +221,11 @@ APP = ( function ( APP, $, window, document ) {
         /*
 		 * Initialize all the items to the stage
 		 *
-		 * @param  {object} slider           - Current selector of each slider.
-		 * @param  {object} sliderWrapper    - Wrapper of the slider.
-		 * @param  {number} nativeItemW      - Returns the intrinsic width of the image/video.
-		 * @param  {number} nativeItemH      - Returns the intrinsic height of the image/video.
-		 * @return {void}                    - The constructor.
+		 * @param  {Object} slider           - Current selector of each slider.
+		 * @param  {Object} sliderWrapper    - Wrapper of the slider.
+		 * @param  {Number} nativeItemW      - Returns the intrinsic width of the image/video.
+		 * @param  {Number} nativeItemH      - Returns the intrinsic height of the image/video.
+		 * @return {Void}                    - The constructor.
 		 */
         function addItemsToStage( slider, sliderWrapper, nativeItemW, nativeItemH ) {
 			
@@ -470,10 +470,10 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Transition Between Slides
 		 *
-		 * @param  {number} elementIndex     - Index of current slider.
-		 * @param  {object} slider           - Selector of the slider .
-		 * @param  {string} dir              - Switching direction indicator.
-		 * @return {void}                    - The constructor.
+		 * @param  {Number} elementIndex     - Index of current slider.
+		 * @param  {Object} slider           - Selector of the slider .
+		 * @param  {String} dir              - Switching direction indicator.
+		 * @return {Void}                    - The constructor.
 		 */
         function sliderUpdates( elementIndex, slider, dir ) {
 			
@@ -579,8 +579,8 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Initialize the default height of item
 		 *
-		 * @param  {object} slider           - Current selector of each slider.
-		 * @return {void}                    - The constructor.
+		 * @param  {Object} slider           - Current selector of each slider.
+		 * @return {Void}                    - The constructor.
 		 */
         function itemDefaultInit( slider ) {
 			
@@ -628,9 +628,9 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Initialize embedded local video.
 		 *
-		 * @param  {object} wrapper          - The outermost video container, which can contain multiple videos
-		 * @param  {boolean} play            - Forced to trigger pause or play events.
-		 * @return {void}                    - The constructor.
+		 * @param  {Object} wrapper          - The outermost video container, which can contain multiple videos
+		 * @param  {Boolean} play            - Forced to trigger pause or play events.
+		 * @return {Void}                    - The constructor.
 		 */
 		function normalSliderVideoInit( wrapper, play ) {
 			wrapper.find( '.uix-video__slider' ).each( function()  {

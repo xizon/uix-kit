@@ -1638,8 +1638,8 @@ THREE.GLTFLoader = ( function () {
 
 	/**
 	 * Requests the specified dependency asynchronously, with caching.
-	 * @param {string} type
-	 * @param {number} index
+	 * @param {String} type
+	 * @param {Number} index
 	 * @return {Promise<Object>}
 	 */
 	GLTFParser.prototype.getDependency = function ( type, index ) {
@@ -1710,7 +1710,7 @@ THREE.GLTFLoader = ( function () {
 
 	/**
 	 * Requests all dependencies of the specified type asynchronously, with caching.
-	 * @param {string} type
+	 * @param {String} type
 	 * @return {Promise<Array<Object>>}
 	 */
 	GLTFParser.prototype.getDependencies = function ( type ) {
@@ -1771,7 +1771,7 @@ THREE.GLTFLoader = ( function () {
 
 	/**
 	 * Specification: https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md#buffers-and-buffer-views
-	 * @param {number} bufferIndex
+	 * @param {Number} bufferIndex
 	 * @return {Promise<ArrayBuffer>}
 	 */
 	GLTFParser.prototype.loadBuffer = function ( bufferIndex ) {
@@ -1808,7 +1808,7 @@ THREE.GLTFLoader = ( function () {
 
 	/**
 	 * Specification: https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md#buffers-and-buffer-views
-	 * @param {number} bufferViewIndex
+	 * @param {Number} bufferViewIndex
 	 * @return {Promise<ArrayBuffer>}
 	 */
 	GLTFParser.prototype.loadBufferView = function ( bufferViewIndex ) {
@@ -1827,7 +1827,7 @@ THREE.GLTFLoader = ( function () {
 
 	/**
 	 * Specification: https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md#accessors
-	 * @param {number} accessorIndex
+	 * @param {Number} accessorIndex
 	 * @return {Promise<THREE.BufferAttribute|THREE.InterleavedBufferAttribute>}
 	 */
 	GLTFParser.prototype.loadAccessor = function ( accessorIndex ) {
@@ -1957,7 +1957,7 @@ THREE.GLTFLoader = ( function () {
 
 	/**
 	 * Specification: https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#textures
-	 * @param {number} textureIndex
+	 * @param {Number} textureIndex
 	 * @return {Promise<THREE.Texture>}
 	 */
 	GLTFParser.prototype.loadTexture = function ( textureIndex ) {
@@ -2070,8 +2070,8 @@ THREE.GLTFLoader = ( function () {
 	/**
 	 * Asynchronously assigns a texture to the given material parameters.
 	 * @param {Object} materialParams
-	 * @param {string} textureName
-	 * @param {number} textureIndex
+	 * @param {String} textureName
+	 * @param {Number} textureIndex
 	 * @return {Promise}
 	 */
 	GLTFParser.prototype.assignTexture = function ( materialParams, textureName, textureIndex ) {
@@ -2086,7 +2086,7 @@ THREE.GLTFLoader = ( function () {
 
 	/**
 	 * Specification: https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md#materials
-	 * @param {number} materialIndex
+	 * @param {Number} materialIndex
 	 * @return {Promise<THREE.Material>}
 	 */
 	GLTFParser.prototype.loadMaterial = function ( materialIndex ) {
@@ -2464,7 +2464,7 @@ THREE.GLTFLoader = ( function () {
 
 	/**
 	 * Specification: https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md#meshes
-	 * @param {number} meshIndex
+	 * @param {Number} meshIndex
 	 * @return {Promise<THREE.Group|THREE.Mesh|THREE.SkinnedMesh>}
 	 */
 	GLTFParser.prototype.loadMesh = function ( meshIndex ) {
@@ -2703,7 +2703,7 @@ THREE.GLTFLoader = ( function () {
 
 	/**
 	 * Specification: https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#cameras
-	 * @param {number} cameraIndex
+	 * @param {Number} cameraIndex
 	 * @return {Promise<THREE.Camera>}
 	 */
 	GLTFParser.prototype.loadCamera = function ( cameraIndex ) {
@@ -2738,7 +2738,7 @@ THREE.GLTFLoader = ( function () {
 
 	/**
 	 * Specification: https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#skins
-	 * @param {number} skinIndex
+	 * @param {Number} skinIndex
 	 * @return {Promise<Object>}
 	 */
 	GLTFParser.prototype.loadSkin = function ( skinIndex ) {
@@ -2765,7 +2765,7 @@ THREE.GLTFLoader = ( function () {
 
 	/**
 	 * Specification: https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#animations
-	 * @param {number} animationIndex
+	 * @param {Number} animationIndex
 	 * @return {Promise<THREE.AnimationClip>}
 	 */
 	GLTFParser.prototype.loadAnimation = function ( animationIndex ) {
@@ -2908,7 +2908,7 @@ THREE.GLTFLoader = ( function () {
 
 	/**
 	 * Specification: https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#nodes-and-hierarchy
-	 * @param {number} nodeIndex
+	 * @param {Number} nodeIndex
 	 * @return {Promise<THREE.Object3D>}
 	 */
 	GLTFParser.prototype.loadNode = function ( nodeIndex ) {
@@ -3037,7 +3037,7 @@ THREE.GLTFLoader = ( function () {
 
 	/**
 	 * Specification: https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#scenes
-	 * @param {number} sceneIndex
+	 * @param {Number} sceneIndex
 	 * @return {Promise<THREE.Scene>}
 	 */
 	GLTFParser.prototype.loadScene = function () {

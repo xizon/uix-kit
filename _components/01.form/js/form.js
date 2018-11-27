@@ -69,7 +69,7 @@ APP = ( function ( APP, $, window, document ) {
 /*
  * Callbacks for special forms (supports asynchronous)
  *
- * @return {void}                        - The constructor.
+ * @return {Void}                        - The constructor.
  */
 ( function ( $ ) {
     $.fn.customSpecialFormsInit = function( options ) {
@@ -342,12 +342,12 @@ APP = ( function ( APP, $, window, document ) {
 /*
  * Custom Select
  *
- * @param  {string} selector             - The current selector.
- * @param  {string} targetWrapper        - Wrapper of the selector.
- * @param  {string} trigger              - Trigger of the selector.
- * @param  {string} itemsWrapper         - Selector's options container.
- * @param  {object} item                 - Each option of the selector.
- * @return {void}                        - The constructor.
+ * @param  {String} selector             - The current selector.
+ * @param  {String} targetWrapper        - Wrapper of the selector.
+ * @param  {String} trigger              - Trigger of the selector.
+ * @param  {String} itemsWrapper         - Selector's options container.
+ * @param  {Object} item                 - Each option of the selector.
+ * @return {Void}                        - The constructor.
  */
 ( function ( $ ) {
     $.fn.customSelectInit = function( options ) {
@@ -519,10 +519,10 @@ APP = ( function ( APP, $, window, document ) {
 /*
  * Custom Radio, Checkbox and Toggle 
  *
- * @param  {string} radioWrapper             - Wrapper of the radio.
- * @param  {string} toggle                   - Toggle of the checkbox.
- * @param  {string} checkboxWrapper          - Wrapper of the checkbox.
- * @return {void}                            - The constructor.
+ * @param  {String} radioWrapper             - Wrapper of the radio.
+ * @param  {String} toggle                   - Toggle of the checkbox.
+ * @param  {String} checkboxWrapper          - Wrapper of the checkbox.
+ * @return {Void}                            - The constructor.
  */
 ( function ( $ ) {
     $.fn.customRadioCheckboxInit = function( options ) {
@@ -592,8 +592,8 @@ APP = ( function ( APP, $, window, document ) {
 /*
  * Create Line Effect on Click
  *
- * @param  {string} controls                 - Wrapper of controls.
- * @return {void}                            - The constructor.
+ * @param  {String} controls                 - Wrapper of controls.
+ * @return {Void}                            - The constructor.
  */
 ( function ( $ ) {
     $.fn.customControlsLineEffInit = function( options ) {

@@ -83,12 +83,12 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Move Animation
 		 *
-		 * @param  {object} container    - The target container to which the content will be added.
-		 * @param  {string} target       - The instance ID or class name returned from the callback data
-		 * @param  {string} loading      - Content of loading area.
-		 * @param  {string} url          - The target URL via AJAX.
-		 * @param  {string} method       - The HTTP method to use for the request (e.g. "POST", "GET", "PUT")
-		 * @return {void}                - The constructor.
+		 * @param  {Object} container    - The target container to which the content will be added.
+		 * @param  {String} target       - The instance ID or class name returned from the callback data
+		 * @param  {String} loading      - Content of loading area.
+		 * @param  {String} url          - The target URL via AJAX.
+		 * @param  {String} method       - The HTTP method to use for the request (e.g. "POST", "GET", "PUT")
+		 * @return {Void}                - The constructor.
 		 */
 		function pushAction( container, target, loading, url, method ) {
 
@@ -160,11 +160,11 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * A function to be called if the request succeeds
 		 *
-		 * @param  {string} container    - The target container to which the content will be added.
-		 * @param  {string} url          - Current URL after click
-		 * @param  {string} content      - The data returned from the server
-		 * @param  {string} title        - The title of a requested page.
-		 * @return {void}                - The constructor.
+		 * @param  {String} container    - The target container to which the content will be added.
+		 * @param  {String} url          - Current URL after click
+		 * @param  {String} content      - The data returned from the server
+		 * @param  {String} title        - The title of a requested page.
+		 * @return {Void}                - The constructor.
 		 */
 		function ajaxSucceeds( container, url, content, title ) {
 			

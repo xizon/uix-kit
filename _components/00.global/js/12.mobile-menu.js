@@ -127,8 +127,8 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Initialize mobile menu
 		 *
-		 * @param  {number} w                  - Returns width of browser viewport.
-		 * @return {void}                      - The constructor.
+		 * @param  {Number} w                  - Returns width of browser viewport.
+		 * @return {Void}                      - The constructor.
 		 */
 		function mobileMenuInit( w ) {
 

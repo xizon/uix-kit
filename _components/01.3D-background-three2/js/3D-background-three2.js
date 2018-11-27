@@ -3,6 +3,14 @@
  * <!-- 3D Background 2 -->
  *************************************
  */
+/**
+ * APP._3D_BACKGROUND_THREE2
+ * @global
+ * @requires examples/assets/js/min/three.min.js
+ * @requires _components/03.plugins-THREE
+ */
+
+
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
@@ -219,9 +227,9 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Batch generation of geometry
 		 *
-		 * @param  {string} objectType     - String of geometry type identifier.
-		 * @param  {number} numObjects       - The total number of generated objects.
-		 * @return {void}                  - The constructor.
+		 * @param  {String} objectType     - String of geometry type identifier.
+		 * @param  {Number} numObjects       - The total number of generated objects.
+		 * @return {Void}                  - The constructor.
 		 */
 		function generateGeometry( objectType, numObjects ) {
 

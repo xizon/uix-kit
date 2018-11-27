@@ -3,6 +3,14 @@
  * <!-- 3D Pages -->
  *************************************
  */
+
+/**
+ * APP._3D_PAGES
+ * @global
+ * @requires examples/assets/js/min/three.min.js
+ * @requires _components/03.plugins-THREE
+ */
+
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	

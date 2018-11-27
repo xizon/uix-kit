@@ -109,11 +109,11 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Method that updates items of timeline
 		 *
-		 * @param  {object} obj                  - Wrapper of timeline.
-		 * @param  {object} iscur                - The current item.
-		 * @param  {string} showEle              - Element ID or class name that push the current text.
-		 * @param  {boolean} prev                - Whether to slide forward.
-		 * @return {void}                        - The constructor.
+		 * @param  {Object} obj                  - Wrapper of timeline.
+		 * @param  {Object} iscur                - The current item.
+		 * @param  {String} showEle              - Element ID or class name that push the current text.
+		 * @param  {Boolean} prev                - Whether to slide forward.
+		 * @return {Void}                        - The constructor.
 		 */
 		function timelineUpdate( obj, iscur, showEle, prev ) {
 			var	itemTotal  = obj.find( '.uix-timeline__item' ).length,
