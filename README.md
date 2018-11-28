@@ -194,7 +194,6 @@ http://localhost:8080/examples/
     <script src="assets/js/min/three.min.js?ver=r92"></script>
     <script src="assets/js/min/anime.min.js?ver=2.2.0"></script>
     <script src="assets/js/min/hammer.min.js?ver=2.0.8"></script>
-    <script src="assets/js/min/jquery.pjax.uix.min.js?ver=20180704"></script>
     
     <!-- Masonry -->
     <script src="assets/js/wp-jquery/masonry.min.js?ver=3.3.2"></script>
