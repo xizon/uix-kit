@@ -147,8 +147,8 @@ if ( typeof APP_ROOTPATH === 'undefined' ) {
 
 
 //Modify templateUrl as the correct path when local test is enabled
-if ( [ 'localhost', '127.0.0.1', '' ].includes( window.location.hostname ) ) {
-	templateUrl = '/examples';
+if (location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.hostname === '' ) {
+    templateUrl = '/examples';
 }
 
 
@@ -1912,7 +1912,7 @@ APP = ( function ( APP, $, window, document ) {
 		// Initialize mega menu
 		function megaMenuInit( w ) {
 			var $menuWrap  = $( '.uix-menu__container:not(.is-mobile)' ),
-				maxWidth     = 1170, //The maximum width of the mega menu wrapper
+				maxWidth     = 1140, //The maximum width of the mega menu wrapper
 				
 				//This value is equal to the $nav-mega-li-w variable in the SCSS
 			    perDefaultW  = 270; //Default width of each column

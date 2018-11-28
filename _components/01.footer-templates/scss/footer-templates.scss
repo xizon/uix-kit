@@ -55,13 +55,9 @@
 	
 	.uix-special-footer__container {in: 3rem 0;
 
-		img.logo {
-			max-width: 100%;
-		}
-		
 	
-		.pull-left,
-		.pull-right {
+		.float-left,
+		.float-right {
 			position: relative !important;
 			display: block !important;
 			width: 100% !important;

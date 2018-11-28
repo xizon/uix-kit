@@ -351,9 +351,9 @@ $primary-bg-color      : transparent;
 	// @include securityWidthForElement( '.txt' );
 
 	@if ( $classname != '' ) {
-		/* New XL container for Bootstrap 3.x */
+		/* New XL container for Bootstrap 4.x */
 		#{$classname} {
-			width: 1170px;
+			width: 1140px;
 			position: absolute;
 			left: 50%;
 			transform: translateX(-50%);
@@ -378,7 +378,7 @@ $primary-bg-color      : transparent;
 			}
 		}
 
-		/* New XXL container for Bootstrap 3.x */
+		/* New XXL container for Bootstrap 4.x */
 		@media all and (min-width: 1600px) {
 			#{$classname} {
 				width: 1410px;

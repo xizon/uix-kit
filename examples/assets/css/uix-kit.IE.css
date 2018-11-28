@@ -7,6 +7,290 @@
 	
 */
 
+
+/*
+ * 1. Bootstrap 4.x                              - Do not use prefix "uix-"
+ * 2. Utilities                    
+*/
+
+
+
+/* 
+ ---------------------------
+ 1. Bootstrap 4.x
+ ---------------------------
+ */ 
+.container {
+	display: block;
+}
+   
+.row {
+	display: block;
+}
+
+.row::before,
+.row::after {
+	display: table;
+	content: " ";
+	width: 100%;
+	clear: both;
+}
+
+[class*='col-'] {
+	display: table-cell;
+	float: left;
+	vertical-align: top; /* Required */
+}
+
+
+.col-12,
+.col-sm-12,
+.col-md-12,
+.col-lg-12,
+.col-xl-12 {
+    width: 100%;
+}
+
+.col-11,
+.col-sm-11,
+.col-md-11,
+.col-lg-11,
+.col-xl-11 {
+    width: 91.66666667%;
+}
+
+.col-10,
+.col-sm-10,
+.col-md-10,
+.col-lg-10,
+.col-xl-10 {
+    width: 83.33333333%;
+}
+
+.col-9,
+.col-sm-9,
+.col-md-9,
+.col-lg-9,
+.col-xl-9 {
+
+    width: 75%;
+}
+
+.col-8,
+.col-sm-8,
+.col-md-8,
+.col-lg-8,
+.col-xl-8 {
+    width: 66.66666667%;
+}
+
+.col-7,
+.col-sm-7,
+.col-md-7,
+.col-lg-7,
+.col-xl-7 {
+    width: 58.33333333%;
+}
+
+.col-6,
+.col-sm-6,
+.col-md-6,
+.col-lg-6,
+.col-xl-6 {
+
+    width: 50%;
+}
+
+.col-5,
+.col-sm-5,
+.col-md-5,
+.col-lg-5,
+.col-xl-5 {
+
+    width: 41.66666667%;
+}
+
+.col-4,
+.col-sm-4,
+.col-md-4,
+.col-lg-4,
+.col-xl-4 {
+
+    width: 33.33333333%;
+}
+
+.col-3,
+.col-sm-3,
+.col-md-3,
+.col-lg-3,
+.col-xl-3 {
+
+    width: 25%;
+}
+
+.col-2,
+.col-sm-2,
+.col-md-2,
+.col-lg-2,
+.col-xl-2 {
+
+    width: 16.66666667%;
+}
+
+.col-1,
+.col-sm-1,
+.col-md-1,
+.col-lg-1,
+.col-xl-1 {
+    width: 8.33333333%;
+}
+
+
+.offset-12,
+.offset-sm-12,
+.offset-md-12,
+.offset-lg-12,
+.offset-xl-12 {
+
+    margin-left: 100%;
+}
+
+.offset-11,
+.offset-sm-11,
+.offset-md-11,
+.offset-lg-11,
+.offset-xl-11 {
+
+    margin-left: 91.66666667%;
+}
+
+.offset-10,
+.offset-sm-10,
+.offset-md-10,
+.offset-lg-10,
+.offset-xl-10 {
+
+    margin-left: 83.33333333%;
+}
+
+.offset-9,
+.offset-sm-9,
+.offset-md-9,
+.offset-lg-9,
+.offset-xl-9 {
+
+    margin-left: 75%;
+}
+
+.offset-8,
+.offset-sm-8,
+.offset-md-8,
+.offset-lg-8,
+.offset-xl-8 {
+
+    margin-left: 66.66666667%;
+}
+
+.offset-7,
+.offset-sm-7,
+.offset-md-7,
+.offset-lg-7,
+.offset-xl-7 {
+
+    margin-left: 58.33333333%;
+}
+
+.offset-6,
+.offset-sm-6,
+.offset-md-6,
+.offset-lg-6,
+.offset-xl-6 {
+
+    margin-left: 50%;
+}
+
+.offset-5,
+.offset-sm-5,
+.offset-md-5,
+.offset-lg-5,
+.offset-xl-5 {
+
+    margin-left: 41.66666667%;
+}
+
+.offset-4,
+.offset-sm-4,
+.offset-md-4,
+.offset-lg-4,
+.offset-xl-4 {
+
+    margin-left: 33.33333333%;
+}
+
+.offset-3,
+.offset-sm-3,
+.offset-md-3,
+.offset-lg-3,
+.offset-xl-3 {
+
+    margin-left: 25%;
+}
+
+.offset-2,
+.offset-sm-2,
+.offset-md-2,
+.offset-lg-2,
+.offset-xl-2 {
+
+    margin-left: 16.66666667%;
+}
+
+.offset-1,
+.offset-sm-1,
+.offset-md-1,
+.offset-lg-1,
+.offset-xl-1 {
+
+    margin-left: 8.33333333%;
+}
+
+.offset-0,
+.offset-sm-0,
+.offset-md-0,
+.offset-lg-0,
+.offset-xl-0 {
+
+    margin-left: 0;
+}
+
+
+
+/* Center column in a row,
+ CSS used here will be applied after bootstrap.css */
+.justify-content-center {
+    text-align: center;
+}
+.justify-content-center > [class*='col-'] {
+	display: inline-block;
+	float: none;
+	text-align: left;
+}
+
+.align-items-center > [class*='col-'] {
+	display: inline-block;
+	float: none;
+	text-align: left;
+	vertical-align: middle;
+}
+
+
+
+/* 
+ ---------------------------
+ 2. Utilities
+ ---------------------------
+ */ 
+
 .is-hide-IE {
 	display: none !important;
 }

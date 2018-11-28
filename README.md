@@ -56,7 +56,7 @@ Enjoy the fluid grid system based on Bootstrap and self-expansion. Uix Kit is bu
 * Simple custom CSS and JS core files
 * 100% Responsive & Mobile Ready
 * Prepare some generic plug-ins in advance
-* Core style sheet compatible with Bootstrap 3.x (Optimized reference to Bootstrap 4.x)
+* Core style sheet compatible with Bootstrap 4.x
 * Provides a common web page components and layouts
 * W3C Standard Support
 * Support PJAX no refresh method for loading pages
@@ -156,7 +156,7 @@ http://localhost:8080/examples/
 		============================================= -->
         
         <!-- Basic  -->
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css?ver=3.3.7" media="all"/>
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css?ver=4.1.3" media="all"/>
 		<link rel="stylesheet" href="assets/css/video.min.css?ver=5.19" media="all"/>
 		
         <!-- Icons  -->

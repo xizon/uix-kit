@@ -43,21 +43,21 @@ $imagery-text-gutter: 5vw;
 		box-sizing: border-box;
 		width: 50%;
 		padding-left: $imagery-text-gutter;
-		padding-right: calc(6.730769230769% + #{$imagery-gutter}); /* (1352-1170)/1352/2 * 100 */
+		padding-right: calc(7.840236686391% + #{$imagery-gutter}); /* (1352-1140)/1352/2 * 100 */
 		float: left;
 	}
 
 	&.is-reversed .uix-list-split-imagery__info {
 		float: left;
 		padding-right: $imagery-text-gutter;
-		padding-left: calc(6.730769230769% + #{$imagery-gutter});
+		padding-left: calc(7.840236686391% + #{$imagery-gutter});
 	}	
 	
 
 	
 }
 
-/* New XL container for Bootstrap 3.x */
+/* New XL container for Bootstrap 4.x */
 @media all and (min-width: 1430px) {
 	.uix-list-split-imagery {
 		
@@ -74,7 +74,7 @@ $imagery-text-gutter: 5vw;
 	}
 }
 
-/* New XXL container for Bootstrap 3.x */
+/* New XXL container for Bootstrap 4.x */
 @media all and (min-width: 1600px) {
 
 	.uix-list-split-imagery {

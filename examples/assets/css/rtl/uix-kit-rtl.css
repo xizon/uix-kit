@@ -48,8 +48,6 @@
     21. Comments 
     22. Source Code 
     23. ToolTip 
-    24. Vertical Menu (RTL) 
-    25. WordPress Core ( Do not use prefix "uix-" ) 
 
 
 
@@ -1179,6 +1177,11 @@ a img.alignleft {
  */
 .screen-reader-text:focus {
     left: auto;
+    right: 0.4375rem;
+}
+
+/*# sourceMappingURL=uix-kit-rtl.css.map */
+ left: auto;
     right: 0.4375rem;
 }
 

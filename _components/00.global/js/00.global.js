@@ -55,8 +55,8 @@ if ( typeof APP_ROOTPATH === 'undefined' ) {
 
 
 //Modify templateUrl as the correct path when local test is enabled
-if ( [ 'localhost', '127.0.0.1', '' ].includes( window.location.hostname ) ) {
-	templateUrl = '/examples';
+if (location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.hostname === '' ) {
+    templateUrl = '/examples';
 }
 
 

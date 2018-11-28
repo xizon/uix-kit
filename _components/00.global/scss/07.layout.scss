@@ -2,7 +2,7 @@
    <!-- Basic Layout Styles -->                                        
 /* ====================================================== */
 /*
- * 1. Bootstrap 3.x                              - Do not use prefix "uix-"
+ * 1. Bootstrap 4.x                              - Do not use prefix "uix-"
  * 2. Material Container                         
  * 3. Main Wrapper                               
  * 4. Seamless Grid (Core Grid)
@@ -14,13 +14,13 @@
 
 /* 
  ---------------------------
- 1. Bootstrap 3.x
+ 1. Bootstrap 4.x
  ---------------------------
  */ 
-/* New XL container for Bootstrap 3.x */
+/* New XL container for Bootstrap 4.x */
 .container {
 	width: auto;
-	max-width: 1170px;
+	max-width: 1140px;
 }
 
 @media all and (min-width: 1430px) {
@@ -29,29 +29,13 @@
 	}
 }
 
-/* New XXL container for Bootstrap 3.x */
+/* New XXL container for Bootstrap 4.x */
 @media all and (min-width: 1600px) {
 	.container {
 	    max-width: 1410px;
 	}
 }
 
-
-.no-gutter > [class*='col-'] {
-    padding-right:0;
-    padding-left:0;
-}
-
-/* Center column in a row,
- CSS used here will be applied after bootstrap.css */
-.row-center {
-    text-align: center;
-	
-	> [class*='col-'] {
-		display: inline-block;
-		float: none;
-	}
-}
 
 
 

@@ -21,7 +21,7 @@ $content-text-gutter: 5vw;
 		width: 30%;
 		float: left;
 		padding-right: $content-text-gutter;
-		padding-left: calc(6.730769230769% + #{$content-gutter});
+		padding-left: calc(7.840236686391% + #{$content-gutter}); /* (1352-1140)/1352/2 * 100 */
 		@include outer-shadow();
 		min-height: 150px;
 	}
@@ -32,7 +32,7 @@ $content-text-gutter: 5vw;
 		width: 70%;
 		float: left;
 		padding-left: $content-text-gutter;
-		padding-right: calc(6.730769230769% + #{$content-gutter});
+		padding-right: calc(7.840236686391% + #{$content-gutter});
 		@include bg-gradient();
 		@include outer-shadow();
 		min-height: 150px;
@@ -45,7 +45,7 @@ $content-text-gutter: 5vw;
 }
 
 
-/* New XL container for Bootstrap 3.x */
+/* New XL container for Bootstrap 4.x */
 @media all and (min-width: 1430px) {
 	.uix-list-split-full {
 		
@@ -62,7 +62,7 @@ $content-text-gutter: 5vw;
 	}
 }
 
-/* New XXL container for Bootstrap 3.x */
+/* New XXL container for Bootstrap 4.x */
 @media all and (min-width: 1600px) {
 
 	.uix-list-split-full {

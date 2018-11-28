@@ -42,7 +42,7 @@
         <section>
             <div class="container uix-t-c">
                     <div class="row">
-                        <div class="col-md-8 col-md-offset-2">
+                        <div class="col-md-8 offset-md-2">
                             <h2>Container</h2>
                             
                         </div>
@@ -63,7 +63,7 @@
             <div class="container">
                    
                     <div class="row">
-                        <div class="col-md-4 col-md-offset-4" style="background: #eee;margin-bottom: 50px;">
+                        <div class="col-md-4 offset-md-4" style="background: #eee;margin-bottom: 50px;">
 							<h3>Tiny Container</h3>
 							<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
                         </div>     
@@ -74,7 +74,7 @@
                    
                    
                     <div class="row">
-                        <div class="col-md-6 col-md-offset-3" style="background: #eee;margin-bottom: 50px;">
+                        <div class="col-md-6 offset-md-3" style="background: #eee;margin-bottom: 50px;">
 							<h3>S Container</h3>
 							<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
                         </div>     
@@ -86,7 +86,7 @@
                    
                    
                     <div class="row">
-                        <div class="col-md-8 col-md-offset-2" style="background: #eee;margin-bottom: 50px;">
+                        <div class="col-md-8 offset-md-2" style="background: #eee;margin-bottom: 50px;">
 							<h3>M Container</h3>
 							<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
                         </div>     
@@ -98,7 +98,7 @@
                    
                     <div class="row">
   
-                        <div class="col-md-10 col-md-offset-1" style="background: #eee;margin-bottom: 50px;">
+                        <div class="col-md-10 offset-md-1" style="background: #eee;margin-bottom: 50px;">
 							<h3>L Container</h3>
 							<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
                         </div>           
@@ -108,7 +108,7 @@
                     
                      
                     <div class="row">
-                        <div class="col-md-12" style="background: #eee;margin-bottom: 50px;">
+                        <div class="col-12" style="background: #eee;margin-bottom: 50px;">
 							<h3>Max-width(Default), Max-width(XL), Max-width(XXL) Container</h3>
 							<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
                         </div>          
@@ -120,26 +120,29 @@
                     
             </div>
             <!-- .container end -->
- 
-        </section>   
-        
-        
-     
-       <!-- Full width Content
-        ====================================================== -->
-        <section>
-            <div class="container-fluid uix-list uix-list--normal uix-table uix-table--bordered">
-				<div class="col-md-12" style="background: #eee;margin-bottom: 50px;">
+            
+            
+            <div class="container-fluid uix-list uix-list--normal uix-table uix-table--bordered"  style="background: #999;margin-bottom: 50px;">
+				<div class="col-12" style="background: #eee;">
 					<h3>100% Width</h3>
-					<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
+					<p>Using <code>.container-fluid</code> for width: 100% across all viewport and device sizes.</p>
 				</div>    
                     
             </div>
             <!-- .container-fluid end -->
+            
+            <div class="container-fluid no-gutters uix-list uix-list--normal uix-table uix-table--bordered" style="background: #999;margin-bottom: 50px;">
+				<div class="col-12" style="background: #eee;">
+					<h3>100% Width (No gutters)</h3>
+					<p>Using <code>.container-fluid</code> for width: 100% across all viewport and device sizes. And with <code>.no-gutters</code> on the <code>.row</code>.</p>
+				</div>    
+                    
+            </div>
+            <!-- .container-fluid end -->      
+            
  
         </section>   
-        
-        
+     
         
         
         <!-- Content 01
@@ -147,7 +150,7 @@
         <section>
             <div class="container uix-t-c">
                     <div class="row">
-                        <div class="col-md-8 col-md-offset-2">
+                        <div class="col-md-8 offset-md-2">
                             <h2>Column</h2>
                             
                         </div>
@@ -169,21 +172,34 @@
                    
 
 				<div class="row" style="padding: 20px 0px 20px 0px;">
-					<div class="col-md-3">
+					<div class="col-lg-3 col-md-3" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
 						<h4>One Fourth (1)</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a mi ac diam varius commodo sit amet a eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+						<p>Keep 1 columns when small screen <code>&lt; 768px</code>.</p>
 					</div>
-					<div class="col-md-3">
+					<div class="col-lg-3 col-md-3" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
 						<h4>One Fourth (2)</h4>
-						<p>Aliquam congue dignissim tellus, vel eleifend urna rutrum nec. Morbi et mauris vitae quam venenatis imperdiet. Proin et rutrum magna. Nulla sed venenatis leo. Suspendisse potenti. Proin faucibus cursus luctus.</p>
+						<p>Keep 1 columns when small screen <code>&lt; 768px</code>.</p>
 					</div>
-					<div class="col-md-3">
+					<div class="col-lg-3 col-md-3" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
 						<h4>One Fourth (3)</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a mi ac diam varius commodo sit amet a eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+						<p>Keep 1 columns when small screen <code>&lt; 768px</code>.</p>
 					</div>
-					<div class="col-md-3">
+					<div class="col-lg-3 col-md-3" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
 						<h4>One Fourth (4)</h4>
-						<p>Morbi et mauris vitae quam venenatis imperdiet. Proin et rutrum magna. Nulla sed venenatis leo. Suspendisse potenti. Proin faucibus cursus luctus.</p>
+						<p>Keep 1 columns when small screen <code>&lt; 768px</code>.</p>
+					</div>
+				</div>
+				<!-- /.row -->
+				
+				
+				<div class="row" style="padding: 20px 0px 20px 0px;">
+					<div class="col-lg-2 col-md-2" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
+						<h4>One Fifth</h4>
+						<p>Keep 1 columns when small screen <code>&lt; 768px</code>.</p>
+					</div>
+					<div class="col-lg-10 col-md-10" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
+						<h4>Four Fifth</h4>
+						<p>Keep 1 columns when small screen <code>&lt; 768px</code>.</p>
 					</div>
 				</div>
 				<!-- /.row -->
@@ -191,29 +207,51 @@
 				
 				
 				<div class="row" style="padding: 20px 0px 20px 0px;">
-					<div class="col-md-4">
-						<h4>One Third</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a mi ac diam varius commodo sit amet a eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+					<div class="col-lg-3 col-6" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
+						<h4>One Fourth (1)</h4>
+						<p>Keep 2 columns when small screen <code>&lt; 992px</code>.</p>
 					</div>
-					<div class="col-md-4">
-						<h4>One Third</h4>
-						<p>Aliquam congue dignissim tellus, vel eleifend urna rutrum nec. Morbi et mauris vitae quam venenatis imperdiet. Proin et rutrum magna. Nulla sed venenatis leo. Suspendisse potenti. Proin faucibus cursus luctus.</p>
+					<div class="col-lg-3 col-6" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
+						<h4>One Fourth (2)</h4>
+						<p>Keep 2 columns when small screen <code>&lt; 992px</code>.</p>
 					</div>
-					<div class="col-md-4">
+					<div class="col-lg-3 col-6" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
+						<h4>One Fourth (3)</h4>
+						<p>Keep 2 columns when small screen <code>&lt; 992px</code>.</p>
+					</div>
+					<div class="col-lg-3 col-6" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
+						<h4>One Fourth (4)</h4>
+						<p>Keep 2 columns when small screen <code>&lt; 992px</code>.</p>
+					</div>
+				</div>
+				<!-- /.row -->	
+				
+				
+				
+				<div class="row" style="padding: 20px 0px 20px 0px;">
+					<div class="col-lg-4 col-md-4" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
 						<h4>One Third</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a mi ac diam varius commodo sit amet a eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+						<p>Keep 1 columns when small screen <code>&lt; 768px</code>.</p>
+					</div>
+					<div class="col-lg-4 col-md-4" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
+						<h4>One Third</h4>
+						<p>Keep 1 columns when small screen <code>&lt; 768px</code>.</p>
+					</div>
+					<div class="col-lg-4 col-md-4" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
+						<h4>One Third</h4>
+						<p>Keep 1 columns when small screen <code>&lt; 768px</code>.</p>
 					</div>
 				</div>
 				<!-- /.row -->
 				
 				<div class="row" style="padding: 20px 0px 20px 0px;">
-					<div class="col-xs-6 col-sm-6">
-						<h4>One Half (SM)</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a mi ac diam varius commodo sit amet a eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+					<div class="col-6" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
+						<h4>One Half</h4>
+						<p><strong>Always</strong> keep 2 columns<br><span class="uix-striking-msg uix-striking-msg--alert">Just use the class prefix <code>.col-</code></span></p>
 					</div>
-					<div class="col-xs-6 col-sm-6">
-						<h4>One Half (SM)</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a mi ac diam varius commodo sit amet a eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+					<div class="col-6" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
+						<h4>One Half</h4>
+						<p><strong>Always</strong> keep 2 columns<br><span class="uix-striking-msg uix-striking-msg--alert">Just use the class prefix <code>.col-</code></span></p>
 					</div>
 				</div>
 				<!-- /.row -->
@@ -221,13 +259,13 @@
 								
 				
 				<div class="row" style="padding: 20px 0px 20px 0px;">
-					<div class="col-md-6">
+					<div class="col-lg-6 col-md-6" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
 						<h4>One Half</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a mi ac diam varius commodo sit amet a eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+						<p>Keep 1 columns when small screen <code>&lt; 992px</code>.</p>
 					</div>
-					<div class="col-md-6">
+					<div class="col-lg-6 col-md-6" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
 						<h4>One Half</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a mi ac diam varius commodo sit amet a eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+						<p>Keep 1 columns when small screen <code>&lt; 992px</code>.</p>
 					</div>
 				</div>
 				<!-- /.row -->
@@ -235,13 +273,13 @@
 				
 				
 				<div class="row" style="padding: 20px 0px 20px 0px;">
-					<div class="col-md-3">
+					<div class="col-lg-3" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
 						<h4>One Third</h4>
-						<p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+						<p>Keep 1 columns when small screen <code>&lt; 992px</code>.</p>
 					</div>
-					<div class="col-md-9">
+					<div class="col-lg-9" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
 						<h4>Two Third</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a mi ac diam varius commodo sit amet a eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+						<p>Keep 1 columns when small screen <code>&lt; 992px</code>.</p>
 					</div>
 				</div>
 				<!-- /.row -->
@@ -249,26 +287,26 @@
 				
 				
 				<div class="row" style="padding: 20px 0px 20px 0px;">
-					<div class="col-md-9">
+					<div class="col-lg-9" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
 						<h4>Two Third</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a mi ac diam varius commodo sit amet a eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+						<p>Keep 1 columns when small screen <code>&lt; 992px</code>.</p>
 					</div>
-					<div class="col-md-3">
+					<div class="col-lg-3" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
 						<h4>One Third</h4>
-						<p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+						<p>Keep 1 columns when small screen <code>&lt; 992px</code>.</p>
 					</div>
 				</div>
 				<!-- /.row -->
 				
 				
 				<div class="row" style="padding: 20px 0px 20px 0px;">
-					<div class="col-md-4">
+					<div class="col-lg-4" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
 						<h4>One Fourth</h4>
-						<p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+						<p>Keep 1 columns when small screen <code>&lt; 992px</code>.</p>
 					</div>
-					<div class="col-md-8">
+					<div class="col-lg-8" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
 						<h4>Three Fourth</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a mi ac diam varius commodo sit amet a eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+						<p>Keep 1 columns when small screen <code>&lt; 992px</code>.</p>
 					</div>
 				</div>
 				<!-- /.row -->
@@ -276,18 +314,39 @@
 				
 				
 				<div class="row" style="padding: 20px 0px 20px 0px;">
-					<div class="col-md-8">
+					<div class="col-lg-8" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
 						<h4>Three Fourth</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a mi ac diam varius commodo sit amet a eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+						<p>Keep 1 columns when small screen <code>&lt; 992px</code>.</p>
 					</div>
-					<div class="col-md-4">
+					<div class="col-lg-4" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
 						<h4>One Fourth</h4>
-						<p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+						<p>Keep 1 columns when small screen <code>&lt; 992px</code>.</p>
 					</div>
 				</div>
 				<!-- /.row -->  
                    
-                                       
+                   
+
+				<div class="row" style="padding: 20px 0px 20px 0px;">
+					<div class="col-12 col-lg-4 col-sm-12" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
+						<h4>One Third (1)</h4>
+						<p>Keep 1 columns when small screen <code>&lt; 992px</code>.</p>
+					</div>
+					<div class="col-12 col-lg-4 col-sm-6" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
+						<h4>One Third (1)</h4>
+						<p>Keep 2 columns when small screen <code>&lt; 992px</code>.
+						<br>Keep 1 columns when small screen <code>&lt; 576px</code>.</p>
+					</div>
+					<div class="col-12 col-lg-4 col-sm-6" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
+						<h4>One Third (1)</h4>
+						<p>Keep 2 columns when small screen <code>&lt; 992px</code>.
+						<br>Keep 1 columns when small screen <code>&lt; 576px</code>.</p>
+					</div>
+				</div>
+				<!-- /.row -->
+				                       
+                                              
+                                                            
                     
             </div>
             <!-- .container end -->
@@ -301,7 +360,7 @@
         <section>
             <div class="container uix-t-c">
                     <div class="row">
-                        <div class="col-md-8 col-md-offset-2">
+                        <div class="col-md-8 offset-md-2">
                             <h2>Column (No line breaks)</h2>
 							<p><em>Please simulate mobile viewing after zooming out your viewport.</em></p>
                         </div>
@@ -323,19 +382,19 @@
                    
 
 				<div class="row" style="padding: 20px 0px 20px 0px;">
-					<div class="col-md-3 col-xs-3">
+					<div class="col-lg-3 col-3" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
 						<h4>One Fourth (1)</h4>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 					</div>
-					<div class="col-md-3 col-xs-3">
+					<div class="col-lg-3 col-3" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
 						<h4>One Fourth (2)</h4>
 						<p>Aliquam congue dignissim tellus, vel eleifend urna rutrum nec.</p>
 					</div>
-					<div class="col-md-3 col-xs-3">
+					<div class="col-lg-3 col-3" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
 						<h4>One Fourth (3)</h4>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 					</div>
-					<div class="col-md-3 col-xs-3">
+					<div class="col-lg-3 col-3" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
 						<h4>One Fourth (4)</h4>
 						<p>Morbi et mauris vitae quam venenatis imperdiet.</p>
 					</div>
@@ -345,15 +404,15 @@
 				
 				
 				<div class="row" style="padding: 20px 0px 20px 0px;">
-					<div class="col-md-4 col-xs-4">
+					<div class="col-lg-4 col-4" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
 						<h4>One Third</h4>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 					</div>
-					<div class="col-md-4 col-xs-4">
+					<div class="col-lg-4 col-4" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
 						<h4>One Third</h4>
 						<p>Aliquam congue dignissim tellus, vel eleifend urna rutrum nec.</p>
 					</div>
-					<div class="col-md-4 col-xs-4">
+					<div class="col-lg-4 col-4" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
 						<h4>One Third</h4>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 					</div>
@@ -376,9 +435,9 @@
         <section>
             <div class="container uix-t-c">
                     <div class="row">
-                        <div class="col-md-8 col-md-offset-2">
+                        <div class="col-md-8 offset-md-2">
                             <h2>Center Column</h2>
-							<p>The class <code>.row-center</code> used here will be applied <code>.row</code></p>
+							<p>The class <code>.align-items-center</code> or <code>.justify-content-center</code> used here will be applied <code>.row</code></p>
                             
                         </div>
                     </div>
@@ -398,22 +457,34 @@
             <div class="container">
                    
 
-				<div class="row row-center" style="padding: 20px 0px 20px 0px;">
-					<div class="col-md-3">
+				<div class="row justify-content-center" style="padding: 20px 0px 20px 0px;">
+					<div class="col-lg-3 col-md-3" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
 						<h4>One Fourth (1)</h4>
 						<p>Aliquam congue dignissim tellus, vel eleifend urna rutrum nec. Morbi et mauris vitae quam venenatis imperdiet. Proin et rutrum magna. Nulla sed venenatis leo. Suspendisse potenti. Proin faucibus cursus luctus.</p>
 					</div>
-					<div class="col-md-3">
+					<div class="col-lg-3 col-md-3" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
 						<h4>One Fourth (2)</h4>
 						<p>Aliquam congue dignissim tellus, vel eleifend urna rutrum nec. Morbi et mauris vitae quam venenatis imperdiet. Proin et rutrum magna. Nulla sed venenatis leo. Suspendisse potenti. Proin faucibus cursus luctus.</p>
 					</div>
 				</div>
 				<!-- /.row -->
 				
+				<div class="row justify-content-center align-items-center" style="padding: 20px 0px 20px 0px;">
+					<div class="col-lg-3 col-md-3" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
+						<h4>One Fourth (1)</h4>
+						<p>Aliquam congue dignissim tellus, vel eleifend urna rutrum nec. Morbi et mauris vitae quam venenatis imperdiet. Proin et rutrum magna. Nulla sed venenatis leo. Suspendisse potenti. Proin faucibus cursus luctus.</p>
+					</div>
+					<div class="col-lg-3 col-md-3" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
+						<h4>One Fourth (2)</h4>
+						<p><strong>Vertical Centering</strong></p>
+					</div>
+				</div>
+				<!-- /.row -->
 				
 				
-				<div class="row row-center" style="padding: 20px 0px 20px 0px;">
-					<div class="col-md-4">
+				
+				<div class="row justify-content-center" style="padding: 20px 0px 20px 0px;">
+					<div class="col-lg-4 col-md-4" style="background: #eee; box-shadow: inset -1px 0px 0px 0px #999;">
 						<h4>One Third</h4>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a mi ac diam varius commodo sit amet a eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
 					</div>
@@ -426,6 +497,9 @@
             <!-- .container end -->
  
         </section>   
+        
+        
+        
         
         
         

@@ -1,9 +1,12 @@
 # Changelog
 
 
-#### = 2.2.4 (November 27, 2018) =
+#### = 2.2.4 (November 28, 2018) =
 
+* New: Let Bootstrap V4's grid system support IE9.
 * Tweak: Optimized construction of core scripts.
+* Tweak: Remove Bootstrap3 and migrating to v4. And created a grid system of Bootstrap4 compatible with browsers below IE10.
+* Tweak: Optimize the style of a lot of modules.
 
 
 #### = 2.2.3 (November 26, 2018) =

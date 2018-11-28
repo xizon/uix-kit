@@ -65,8 +65,8 @@
 	
     1. Basic 
     2. Table 
-    3. Bullet List 
-    4. Helper Classes 
+    3. Helper Classes 
+    4. Bullet List 
     5. Typography 
     6. Spacing 
     7. Basic Layout Styles 
@@ -157,6 +157,7 @@
     92. Wave Background 
     93. 3rd Party Plugins 
     94. WordPress Core ( Do not use prefix "uix-" ) 
+    95. Ajax Page Loader (Loading A Page via Ajax Into Div)  
 
 
 
@@ -164,32 +165,15 @@
 /* ====================================================== 
     <!-- Basic -->
 /* ====================================================== */
+/**
+ * @global
+ *
+ * //Used for all modules from _components/[__]/scss
+ * @requires examples/assets/css/bootstrap.min.css
+ * 
+ */
 ::placeholder {
     color: #E6E6E8;
-}
-
-:root {
-    --blue: #007007;
-    --indigo: #6610f2;
-    --purple: #6f42c1;
-    --pink: #e83e8c;
-    --red: #dc3545;
-    --orange: #fd7e14;
-    --yellow: #ffc107;
-    --green: #28a745;
-    --teal: #20c997;
-    --cyan: #17a2b8;
-    --white: #fff;
-    --gray: #868e96;
-    --gray-dark: #343a40;
-    --primary: #007bff;
-    --secondary: #868e96;
-    --success: #28a745;
-    --info: #17a2b8;
-    --warning: #ffc107;
-    --danger: #dc3545;
-    --light: #f8f9fa;
-    --dark: #343a40;
 }
 
 ::selection,
@@ -1668,7 +1652,7 @@ h6 {
    <!-- Basic Layout Styles -->                                        
 /* ====================================================== */
 /*
- * 1. Bootstrap 3.x                              - Do not use prefix "uix-"
+ * 1. Bootstrap 4.x                              - Do not use prefix "uix-"
  * 2. Material Container                         
  * 3. Main Wrapper                               
  * 4. Seamless Grid (Core Grid)
@@ -1677,13 +1661,13 @@ h6 {
 */
 /* 
  ---------------------------
- 1. Bootstrap 3.x
+ 1. Bootstrap 4.x
  ---------------------------
  */
-/* New XL container for Bootstrap 3.x */
+/* New XL container for Bootstrap 4.x */
 .container {
   width: auto;
-  max-width: 1170px;
+  max-width: 1140px;
 }
 
 @media all and (min-width: 1430px) {
@@ -1692,27 +1676,11 @@ h6 {
   }
 }
 
-/* New XXL container for Bootstrap 3.x */
+/* New XXL container for Bootstrap 4.x */
 @media all and (min-width: 1600px) {
   .container {
     max-width: 1410px;
   }
-}
-
-.no-gutter > [class*='col-'] {
-  padding-right: 0;
-  padding-left: 0;
-}
-
-/* Center column in a row,
- CSS used here will be applied after bootstrap.css */
-.row-center {
-  text-align: center;
-}
-
-.row-center > [class*='col-'] {
-  display: inline-block;
-  float: none;
 }
 
 /* 
@@ -2433,8 +2401,8 @@ h6 {
 }
 
 @media all and (max-width: 768px) {
-  .uix-footer__container .pull-left,
-  .uix-footer__container .pull-right {
+  .uix-footer__container .float-left,
+  .uix-footer__container .float-right {
     float: none !important;
   }
 }
@@ -4763,8 +4731,8 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
 .uix-advanced-slider-sp .uix-advanced-slider-sp__inner .uix-advanced-slider-sp__item {
     width: 100%;
     opacity: 0;
-  /* New XL container for Bootstrap 3.x */
-  /* New XXL container for Bootstrap 3.x */;
+  /* New XL container for Bootstrap 4.x */
+  /* New XXL container for Bootstrap 4.x */;
 }
 
 .uix-advanced-slider-sp .uix-advanced-slider-sp__inner .uix-advanced-slider-sp__item .uix-advanced-slider-sp__txt {
@@ -4782,7 +4750,7 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
 }
 
 .uix-advanced-slider-sp .uix-advanced-slider-sp__inner .uix-advanced-slider-sp__item .uix-advanced-slider-sp__txt {
-    width: 1170px;
+    width: 1140px;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -5012,8 +4980,8 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
   opacity: 0;
   /* Javascript will automatically get this value, please do not delete */
   transition: all 0.6s ease;
-  /* New XL container for Bootstrap 3.x */
-  /* New XXL container for Bootstrap 3.x */
+  /* New XL container for Bootstrap 4.x */
+  /* New XXL container for Bootstrap 4.x */
 }
 
 .uix-advanced-slider .uix-advanced-slider__inner .uix-advanced-slider__item .uix-advanced-slider__txt {
@@ -5032,7 +5000,7 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
 }
 
 .uix-advanced-slider .uix-advanced-slider__inner .uix-advanced-slider__item .uix-advanced-slider__txt {
-  width: 1170px;
+  width: 1140px;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -6874,61 +6842,6 @@ h3[data-counter-number] {
 }
 
 /* ====================================================== 
-   <!-- Equal-width Columns --> 
-/* ====================================================== */
-/**
- * Using only CSS, we can make a tabbed navigation whose tabs always
- * occupy an equal share of the available width. No JS to interrogate
- * the DOM, no server-side logic to count through items, no inline styles.
- *
- */
-.uix-equal-width-divs ul {
-  list-style: none;
-  font-size: 0;
-  /*Fighting the Space Between Inline Block Elements*/
-  display: table;
-  /* [1] */
-  table-layout: fixed;
-  /* [2] */
-  width: 100%;
-  /* [3] */
-}
-
-.uix-equal-width-divs ul li {
-  font-size: 1rem;
-  /*Fighting the Space Between Inline Block Elements*/
-  display: table-cell;
-  /* [4] */
-  box-shadow: 1px 0px 0px 0px #AEAEAE;
-}
-
-.uix-equal-width-divs ul li:last-child {
-  box-shadow: none;
-}
-
-.uix-equal-width-divs ul li span {
-  display: block;
-  font-size: 0.75rem;
-}
-
-@media all and (max-width: 768px) {
-  .uix-equal-width-divs ul {
-    display: block;
-  }
-  .uix-equal-width-divs ul li {
-    display: inline-block;
-    width: 50%;
-    margin-bottom: .5rem;
-  }
-  .uix-equal-width-divs ul li:nth-child(2n+0) {
-    box-shadow: none;
-  }
-  .uix-equal-width-divs ul li span {
-    padding-bottom: 1rem;
-  }
-}
-
-/* ====================================================== 
    <!-- Features --> 
 /* ====================================================== */
 .uix-feature {
@@ -7065,6 +6978,61 @@ h3[data-counter-number] {
 
 .uix-typo--color-white .uix-feature .uix-feature__icon--side.is-bordered::before {
   border-color: #fff;
+}
+
+/* ====================================================== 
+   <!-- Equal-width Columns --> 
+/* ====================================================== */
+/**
+ * Using only CSS, we can make a tabbed navigation whose tabs always
+ * occupy an equal share of the available width. No JS to interrogate
+ * the DOM, no server-side logic to count through items, no inline styles.
+ *
+ */
+.uix-equal-width-divs ul {
+  list-style: none;
+  font-size: 0;
+  /*Fighting the Space Between Inline Block Elements*/
+  display: table;
+  /* [1] */
+  table-layout: fixed;
+  /* [2] */
+  width: 100%;
+  /* [3] */
+}
+
+.uix-equal-width-divs ul li {
+  font-size: 1rem;
+  /*Fighting the Space Between Inline Block Elements*/
+  display: table-cell;
+  /* [4] */
+  box-shadow: 1px 0px 0px 0px #AEAEAE;
+}
+
+.uix-equal-width-divs ul li:last-child {
+  box-shadow: none;
+}
+
+.uix-equal-width-divs ul li span {
+  display: block;
+  font-size: 0.75rem;
+}
+
+@media all and (max-width: 768px) {
+  .uix-equal-width-divs ul {
+    display: block;
+  }
+  .uix-equal-width-divs ul li {
+    display: inline-block;
+    width: 50%;
+    margin-bottom: .5rem;
+  }
+  .uix-equal-width-divs ul li:nth-child(2n+0) {
+    box-shadow: none;
+  }
+  .uix-equal-width-divs ul li span {
+    padding-bottom: 1rem;
+  }
 }
 
 /* ====================================================== 
@@ -7814,11 +7782,8 @@ ol.uix-flexslider__control-paging li a:hover, ol.uix-flexslider__control-paging 
   .uix-special-footer__container {
     in: 3rem 0;
   }
-  .uix-special-footer__container img.logo {
-    max-width: 100%;
-  }
-  .uix-special-footer__container .pull-left,
-  .uix-special-footer__container .pull-right {
+  .uix-special-footer__container .float-left,
+  .uix-special-footer__container .float-right {
     position: relative !important;
     display: block !important;
     width: 100% !important;
@@ -9841,15 +9806,6 @@ ol.uix-flexslider__control-paging li a:hover, ol.uix-flexslider__control-paging 
 }
 
 /* ====================================================== 
-   <!-- Custom Core Scripts & Stylesheets --> 
-/* ====================================================== */
-/*
- * 1. Title  
- * 2. Title
- * 3. Title
-
-*/
-/* ====================================================== 
    <!-- Lava-Lamp Style Menu -->     
 /* ====================================================== */
 .uix-lavalamp-menu__container {
@@ -9901,6 +9857,15 @@ ol.uix-flexslider__control-paging li a:hover, ol.uix-flexslider__control-paging 
     left: 0;
 }
 
+/* ====================================================== 
+   <!-- Custom Core Scripts & Stylesheets --> 
+/* ====================================================== */
+/*
+ * 1. Title  
+ * 2. Title
+ * 3. Title
+
+*/
 /* ====================================================== 
    <!-- Cutom Light Box -->   
 /* ====================================================== */
@@ -10569,13 +10534,6 @@ a.uix-lightbox__original__close::after {
 }
 
 /* ====================================================== 
-   <!-- Bulleted List --> 
-/* ====================================================== */
-.uix-list-bullet i {
-    margin-right: .5rem;
-}
-
-/* ====================================================== 
    <!-- Maintain Aspect Ratio List --> 
 /* ====================================================== */
 .uix-list-aspect-ratio {
@@ -10655,6 +10613,13 @@ a.uix-lightbox__original__close::after {
     .uix-list-aspect-ratio .uix-list-aspect-ratio__content {
         padding: .5rem;
     }
+}
+
+/* ====================================================== 
+   <!-- Bulleted List --> 
+/* ====================================================== */
+.uix-list-bullet i {
+    margin-right: .5rem;
 }
 
 /* ====================================================== 
@@ -11003,7 +10968,8 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
     width: 30%;
     float: left;
     padding-right: 5vw;
-    padding-left: calc(6.730769230769% + 15px);
+    padding-left: calc(7.840236686391% + 15px);
+  /* (1352-1140)/1352/2 * 100 */
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
     min-height: 150px;
 }
@@ -11014,14 +10980,14 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
     width: 70%;
     float: left;
     padding-left: 5vw;
-    padding-right: calc(6.730769230769% + 15px);
+    padding-right: calc(7.840236686391% + 15px);
     background: #EC5E79;
     background: linear-gradient(to right, #EC5E79 0%, #E8588C 100%);
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
     min-height: 150px;
 }
 
-/* New XL container for Bootstrap 3.x */
+/* New XL container for Bootstrap 4.x */
 @media all and (min-width: 1430px) {
     .uix-list-split-full .uix-list-split-full__left {
         padding-left: calc(5.189340813464% + 15px);
@@ -11034,7 +11000,7 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
     }
 }
 
-/* New XXL container for Bootstrap 3.x */
+/* New XXL container for Bootstrap 4.x */
 @media all and (min-width: 1600px) {
     .uix-list-split-full .uix-list-split-full__left {
         padding-left: calc(12.992125984252% + 15px);
@@ -11118,18 +11084,18 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
     box-sizing: border-box;
     width: 50%;
     padding-left: 5vw;
-    padding-right: calc(6.730769230769% + 15px);
-  /* (1352-1170)/1352/2 * 100 */
+    padding-right: calc(7.840236686391% + 15px);
+  /* (1352-1140)/1352/2 * 100 */
     float: left;
 }
 
 .uix-list-split-imagery.is-reversed .uix-list-split-imagery__info {
     float: left;
     padding-right: 5vw;
-    padding-left: calc(6.730769230769% + 15px);
+    padding-left: calc(7.840236686391% + 15px);
 }
 
-/* New XL container for Bootstrap 3.x */
+/* New XL container for Bootstrap 4.x */
 @media all and (min-width: 1430px) {
     .uix-list-split-imagery .uix-list-split-imagery__info {
         padding-right: calc(5.189340813464% + 15px);
@@ -11142,7 +11108,7 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
     }
 }
 
-/* New XXL container for Bootstrap 3.x */
+/* New XXL container for Bootstrap 4.x */
 @media all and (min-width: 1600px) {
     .uix-list-split-imagery .uix-list-split-imagery__info {
         padding-right: calc(12.992125984252% + 15px);
@@ -14674,7 +14640,6 @@ Style with support for rainbow parens
   padding: 1.5rem 1rem;
   width: 100%;
   opacity: 0;
-  border-radius: 4px;
   height: 100%;
   overflow: auto;
 }
@@ -16059,13 +16024,6 @@ a img.aligncenter {
   }
   55% {
     right: 2px;
-  }
-  100% {
-    right: 180px;
-    left: 2px;
-  }
-}
-ght: 2px;
   }
   100% {
     right: 180px;
