@@ -1,7 +1,7 @@
 {
   "author": "UIUX Lab",
   "name": "uix-kit",
-  "version": "2.2.4",
+  "version": "2.2.5",
   "description": "Uix Kit (https://github.com/xizon/uix-kit)",
   "main": "gulpfile.js",
   "dependencies": {
@@ -33,11 +33,11 @@
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify": "^3.0.0",
-    "gulp-version-number": "^0.1.7",
-    "gulp-version-replace": "^1.0.9",
     "hoek": "^5.0.3",
     "js-md5": "^0.7.3",
     "jshint": "^2.9.5",
+    "natives": "^1.1.6",
+    "node-sass": "^4.11.0",
     "path": "^0.12.7",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.11.1"

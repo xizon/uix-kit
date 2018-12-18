@@ -1,16 +1,4 @@
 /**
- * APP
- * @global
- *
- * //Used for all modules from _components/[__]/js
- * @requires examples/assets/js/min/jquery.waitforimages.min.js
- * @requires examples/assets/js/min/video.min.js
- * @requires examples/assets/js/min/jquery.waypoints.min.js
- * @requires examples/assets/js/min/TweenMax.min.js
- * 
- */
-
-/**
 
 	TABLE OF CONTENTS
 	---------------------------
@@ -79,6 +67,18 @@ var browser = {
  *************************************
  * Core scripts for current site
  *************************************
+ */
+
+/**
+ * APP
+ * @global
+ *
+ * //Used for all modules from _components/[__]/js
+ * @requires examples/assets/js/min/jquery.waitforimages.min.js
+ * @requires examples/assets/js/min/video.min.js
+ * @requires examples/assets/js/min/jquery.waypoints.min.js
+ * @requires examples/assets/js/min/TweenMax.min.js
+ * 
  */
 var APP = (function ( $, window, document ) {
     'use strict';

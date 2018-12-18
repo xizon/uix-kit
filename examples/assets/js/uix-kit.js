@@ -7,25 +7,13 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  2.2.4
- * ## Last Update         :  November 28, 2018
+ * ## Version             :  2.2.5
+ * ## Last Update         :  December 18, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Compatible With     :  Bootstrap 3.x
  * ## Released under the MIT license.
- */
-
-/**
- * APP
- * @global
- *
- * //Used for all modules from _components/[__]/js
- * @requires examples/assets/js/min/jquery.waitforimages.min.js
- * @requires examples/assets/js/min/video.min.js
- * @requires examples/assets/js/min/jquery.waypoints.min.js
- * @requires examples/assets/js/min/TweenMax.min.js
- * 
  */
 
 /**
@@ -38,76 +26,75 @@
     2. Loader 
     3. Get all custom attributes of an element like "data-*" 
     4. Navigation 
-    5. Videos 
-    6. Common Height 
-    7. Mega Menu 
-    8. Responsive Table 
-    9. Specify a background image 
-    10. Modal Dialog 
+    5. Common Height 
+    6. Mega Menu 
+    7. Responsive Table 
+    8. Specify a background image 
+    9. Modal Dialog 
+    10. WordPress Core Scripts 
     11. Mobile Menu 
-    12. WordPress Core Scripts 
-    13. 3D Background 
-    14. 3D Background 2 
-    15. 3D Background 2 
-    16. 3D Carousel 
-    17. 3D Model 
-    18. 3D Pages 
-    19. 3D Particle Effect 
-    20. 3D Sphere Rotation 
-    21. Accordion 
-    22. Accordion Background Images 
-    23. Advanced Content Slider 
-    24. Advanced Slider (Special Effects) 
-    25. Advanced Slider (Basic) 
-    26. Back to Top 
-    27. Circle Layout 
-    28. Counter 
-    29. Dropdown Menu 
-    30. Dropdown Menu 2 (Multi-level drop-down navigation) 
-    31. Dynamic Drop Down List from JSON 
-    32. Flexslider 
-    33. Floating Side Element 
-    34. Form 
-    35. Form Progress 
-    36. jQuery UI Datepicker 1.11.4 
-    37. Gallery 
-    38. Hover Delay Interaction 
-    39. Image Shapes 
-    40. Theme Scripts  
-    41. Lava-Lamp Style Menu 
-    42. Custom Lightbox 
-    43. Bulleted List 
-    44. Posts List With Ajax 
-    45. Fullwidth List of Split 
-    46. Mousewheel Interaction 
-    47. Multiple Items Carousel 
-    48. Full Page/One Page Transition 
-    49. Full Page/One Page Transition 2 
-    50. Parallax 
-    51. Periodical Scroll 
-    52. Pricing 
-    53. Progress Bar 
-    54. Progress Line 
-    55. Retina Graphics for Website 
-    56. Rotating Elements 
-    57. Scroll Reveal 
-    58. Scrollspy Animate 
-    59. Show More Less 
-    60. Smooth Scrolling When Clicking An Anchor Link 
-    61. Source Code View 
-    62. Sticky Elements 
-    63. SVG Map (China) 
-    64. SVG Map (World) 
-    65. Tabs 
-    66. Team Focus 
-    67. Text effect 
-    68. Timeline 
-    69. Vertical Menu 
-    70. WordPress Core Scripts 
+    12. 3D Background 
+    13. 3D Background 2 
+    14. 3D Carousel 
+    15. 3D Model 
+    16. 3D Pages 
+    17. 3D Particle Effect 
+    18. 3D Sphere Rotation 
+    19. Accordion 
+    20. Accordion Background Images 
+    21. Advanced Content Slider 
+    22. Back to Top 
+    23. Circle Layout 
+    24. Counter 
+    25. Dropdown Menu 2 (Multi-level drop-down navigation) 
+    26. Dropdown Menu 
+    27. Floating Side Element 
+    28. Gallery 
+    29. Image Shapes 
+    30. Hover Delay Interaction 
+    31. Theme Scripts  
+    32. Lava-Lamp Style Menu 
+    33. Bulleted List 
+    34. Fullwidth List of Split 
+    35. Mousewheel Interaction 
+    36. Parallax 
+    37. Periodical Scroll 
+    38. Pricing 
+    39. Progress Line 
+    40. Progress Bar 
+    41. Retina Graphics for Website 
+    42. Rotating Elements 
+    43. Scroll Reveal 
+    44. Show More Less 
+    45. Scrollspy Animate 
+    46. Smooth Scrolling When Clicking An Anchor Link 
+    47. Source Code View 
+    48. Sticky Elements 
+    49. SVG Map (China) 
+    50. SVG Map (World) 
+    51. Tabs 
+    52. Text effect 
+    53. Team Focus 
+    54. Timeline 
+    55. Vertical Menu 
+    56. WordPress Core Scripts 
+    57. Ajax Push Content  
+    58. GSAP Plugins 
+    59. Three.js Plugins 
+    60. Videos 
+    61. 3D Background 2 
+    62. Dynamic Drop Down List from JSON 
+    63. Form Progress 
+    64. Custom Lightbox 
+    65. Posts List With Ajax 
+    66. Full Page/One Page Transition 
+    67. Full Page/One Page Transition 2 
+    68. Advanced Slider (Basic) 
+    69. Form 
+    70. Multiple Items Carousel 
     71. Ajax Page Loader (Loading A Page via Ajax Into Div)  
-    72. Ajax Push Content  
-    73. GSAP Plugins 
-    74. Three.js Plugins 
+    72. Flexslider 
+    73. jQuery UI Datepicker 1.11.4 
 
 
 */
@@ -171,6 +158,18 @@ var browser = {
  *************************************
  * Core scripts for current site
  *************************************
+ */
+
+/**
+ * APP
+ * @global
+ *
+ * //Used for all modules from _components/[__]/js
+ * @requires examples/assets/js/min/jquery.waitforimages.min.js
+ * @requires examples/assets/js/min/video.min.js
+ * @requires examples/assets/js/min/jquery.waypoints.min.js
+ * @requires examples/assets/js/min/TweenMax.min.js
+ * 
  */
 var APP = (function ( $, window, document ) {
     'use strict';
@@ -2612,7 +2611,6 @@ APP = ( function ( APP, $, window, document ) {
 			
 		});
 		
-		
 	
 		/*
 		 * Sets an animation for each element
@@ -4386,70 +4384,6 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
- * <!-- Accordion -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.ACCORDION               = APP.ACCORDION || {};
-	APP.ACCORDION.version       = '0.0.1';
-    APP.ACCORDION.documentReady = function( $ ) {
-
-		$( '.uix-accordion' ).each( function() {
-			var $this           = $( this ),
-				aEvent          = $this.data( 'event' ),
-				firstShow       = $this.data( 'first-show' ),
-				$li             = $this.children( 'dl' ),
-				$titlebox       = $this.find( 'dt' );
-			
-			if( typeof aEvent === typeof undefined ) {
-				aEvent = 'click';
-			}	
-			
-			if( typeof firstShow === typeof undefined ) {
-				firstShow = false;
-			}		
-			
-		
-			if ( firstShow ) {
-				$li.first().addClass( 'active' );
-			}
-			
-
-			$li.on( aEvent, function( e ) {
-				//Prevents further propagation of the current event in the capturing and bubbling phases.
-				e.stopPropagation();
-				
-				$( this ).find( 'dd' ).addClass( 'active' );
-				
-				
-				if ( !$( this ).hasClass( 'active' ) ) {
-					$li.removeClass( 'active' );
-
-					$( this ).addClass( 'active' );
-				} else {
-					$li.removeClass( 'active' );
-				}
-			
-			}); 
-						
-			
-			
-		});
-		
-    };
-
-    APP.components.documentReady.push( APP.ACCORDION.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
-/* 
- *************************************
  * <!-- Accordion Background Images -->
  *************************************
  */
@@ -4561,6 +4495,70 @@ APP = ( function ( APP, $, window, document ) {
 
 }( APP, jQuery, window, document ) );
 
+
+
+
+
+/* 
+ *************************************
+ * <!-- Accordion -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.ACCORDION               = APP.ACCORDION || {};
+	APP.ACCORDION.version       = '0.0.1';
+    APP.ACCORDION.documentReady = function( $ ) {
+
+		$( '.uix-accordion' ).each( function() {
+			var $this           = $( this ),
+				aEvent          = $this.data( 'event' ),
+				firstShow       = $this.data( 'first-show' ),
+				$li             = $this.children( 'dl' ),
+				$titlebox       = $this.find( 'dt' );
+			
+			if( typeof aEvent === typeof undefined ) {
+				aEvent = 'click';
+			}	
+			
+			if( typeof firstShow === typeof undefined ) {
+				firstShow = false;
+			}		
+			
+		
+			if ( firstShow ) {
+				$li.first().addClass( 'active' );
+			}
+			
+
+			$li.on( aEvent, function( e ) {
+				//Prevents further propagation of the current event in the capturing and bubbling phases.
+				e.stopPropagation();
+				
+				$( this ).find( 'dd' ).addClass( 'active' );
+				
+				
+				if ( !$( this ).hasClass( 'active' ) ) {
+					$li.removeClass( 'active' );
+
+					$( this ).addClass( 'active' );
+				} else {
+					$li.removeClass( 'active' );
+				}
+			
+			}); 
+						
+			
+			
+		});
+		
+    };
+
+    APP.components.documentReady.push( APP.ACCORDION.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
 
 
 
@@ -4829,6 +4827,78 @@ APP = ( function ( APP, $, window, document ) {
     return APP;
 
 }( APP, jQuery, window, document ) );
+
+
+
+/* 
+ *************************************
+ * <!-- Back to Top -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.BACK_TO_TOP               = APP.BACK_TO_TOP || {};
+	APP.BACK_TO_TOP.version       = '0.0.2';
+    APP.BACK_TO_TOP.documentReady = function( $ ) {
+
+		
+		var $window      = $( window ),
+			windowWidth  = $window.width(),
+			windowHeight = $window.height(),
+			$el          = $( '#uix-to-top' );
+
+
+		//-------- Sticky button of back to top 
+		//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
+		$( window ).on('scroll touchmove', function() {
+
+			var scrollTop = $( this ).scrollTop(),
+				spyTop    = windowHeight/2;
+
+		
+			if ( scrollTop >= spyTop ) {
+				$el.addClass( 'active' );
+			} else {
+				$el.removeClass( 'active' );	
+			}
+
+		});
+
+
+		//-------- Click event of back button
+		$el.on( 'click', function( e ) {
+			e.preventDefault();
+
+			TweenMax.to( window, 0.5, {
+				scrollTo: {
+					y        : 0, //y: "max" --> vertical scroll to bottom
+					autoKill : false
+				},
+				ease: Power2.easeOut
+			});	
+
+			
+			
+			
+			
+		});	
+		
+		//-------- Back To Top Trigger
+		if ( $( '#uix-to-top' ).length == 0 ) {
+			$( 'body' ).prepend( '<a href="#" id="uix-to-top"><i class="fa fa-level-up" aria-hidden="true"></i></a>' );
+		}
+		
+			
+		
+		
+    };
+
+    APP.components.documentReady.push( APP.BACK_TO_TOP.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
 
 
 
@@ -8710,78 +8780,6 @@ APP = ( function ( APP, $, window, document ) {
     };
 
     APP.components.pageLoaded.push( APP.ADVANCED_SLIDER.pageLoaded );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
-/* 
- *************************************
- * <!-- Back to Top -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.BACK_TO_TOP               = APP.BACK_TO_TOP || {};
-	APP.BACK_TO_TOP.version       = '0.0.2';
-    APP.BACK_TO_TOP.documentReady = function( $ ) {
-
-		
-		var $window      = $( window ),
-			windowWidth  = $window.width(),
-			windowHeight = $window.height(),
-			$el          = $( '#uix-to-top' );
-
-
-		//-------- Sticky button of back to top 
-		//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
-		$( window ).on('scroll touchmove', function() {
-
-			var scrollTop = $( this ).scrollTop(),
-				spyTop    = windowHeight/2;
-
-		
-			if ( scrollTop >= spyTop ) {
-				$el.addClass( 'active' );
-			} else {
-				$el.removeClass( 'active' );	
-			}
-
-		});
-
-
-		//-------- Click event of back button
-		$el.on( 'click', function( e ) {
-			e.preventDefault();
-
-			TweenMax.to( window, 0.5, {
-				scrollTo: {
-					y        : 0, //y: "max" --> vertical scroll to bottom
-					autoKill : false
-				},
-				ease: Power2.easeOut
-			});	
-
-			
-			
-			
-			
-		});	
-		
-		//-------- Back To Top Trigger
-		if ( $( '#uix-to-top' ).length == 0 ) {
-			$( 'body' ).prepend( '<a href="#" id="uix-to-top"><i class="fa fa-level-up" aria-hidden="true"></i></a>' );
-		}
-		
-			
-		
-		
-    };
-
-    APP.components.documentReady.push( APP.BACK_TO_TOP.documentReady );
     return APP;
 
 }( APP, jQuery, window, document ) );
@@ -14564,6 +14562,117 @@ var datepicker = $.datepicker;
 
 /* 
  *************************************
+ * <!-- Gallery -->
+ *************************************
+ */
+/**
+ * APP.GALLERY
+ * @global
+ * @requires examples/assets/js/wp-jquery/masonry.min.js
+ * @requires examples/assets/js/wp-jquery/imagesloaded.min.js
+ * @requires examples/assets/js/min/jquery.shuffle.min.js
+ */
+
+
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.GALLERY               = APP.GALLERY || {};
+	APP.GALLERY.version       = '0.0.1';
+    APP.GALLERY.documentReady = function( $ ) {
+
+		$( '.uix-gallery' ).each( function() {
+			var type = $( this ).data( 'show-type' );
+			
+			// Masonry
+			if ( type.indexOf( 'masonry' ) >= 0  ) {
+				$( this ).addClass( 'masonry-container' );
+				$( this ).find( '.uix-gallery__item' ).addClass( 'masonry-item' );
+			}
+			
+			// Filterable
+			if ( type.indexOf( 'filter' ) >= 0  ) {
+				$( this ).addClass( 'filter-container' );
+				$( this ).find( '.uix-gallery__item' ).addClass( 'filter-item' );	
+			}	
+		
+		});
+	
+	    /*--  Function of Masonry  --*/
+		var masonryObj = $( '.masonry-container .uix-gallery-tiles' );
+		imagesLoaded( masonryObj ).on( 'always', function() {
+			  masonryObj.masonry({
+				itemSelector: '.masonry-item'
+			  });  
+		});
+		
+		
+	    /*--  Function of Filterable  --*/
+		if ( $( "[data-show-type]" ).length > 0 ) {
+			if ( $( "[data-show-type]" ).data( 'show-type' ).indexOf( 'filter' ) >= 0 ) {
+				
+				$( '.uix-gallery' ).each( function() {
+					var filterCat      = $( this ).data( 'filter-id' ),
+						$grid          = $( this ).find( '.uix-gallery-tiles' ),
+						$filterOptions = $( filterCat );
+						
+					imagesLoaded( $grid ).on( 'always', function() {
+						
+						 $grid.shuffle({
+							itemSelector : '.filter-item',
+							speed        : 550, // Transition/animation speed (milliseconds).
+							easing       : 'ease-out', // CSS easing function to use.
+							sizer        : null // Sizer element. Use an element to determine the size of columns and gutters.
+						  });
+						  
+						
+						$filterOptions.find( 'li > a' ).on( 'click', function() {
+							  var $this       = $( this ),
+								  activeClass = 'current-cat',
+								  isActive    = $this.hasClass( activeClass ),
+								  group       = isActive ? 'all' : $this.data( 'group' );
+						
+							  // Hide current label, show current label in title
+							  if ( !isActive ) {
+								$filterOptions.find( '.' + activeClass ).removeClass( activeClass );
+							  }
+						
+							  $this.toggleClass( activeClass );
+						
+							  // Filter elements
+							  $grid.shuffle( 'shuffle', group );
+							  
+							  return false;	
+						});
+					
+			
+					});
+	
+					
+				} );
+		
+				
+			} else {
+				$( '[data-group="all"]' ).parent( 'li' ).hide();
+			}
+	
+		}
+		
+		
+		
+    };
+
+    APP.components.documentReady.push( APP.GALLERY.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+
+/* 
+ *************************************
  * <!-- Form Progress -->
  *************************************
  */
@@ -14871,117 +14980,6 @@ APP = ( function ( APP, $, window, document ) {
     };
  
 }( jQuery ));
-
-
-
-/* 
- *************************************
- * <!-- Gallery -->
- *************************************
- */
-/**
- * APP.GALLERY
- * @global
- * @requires examples/assets/js/wp-jquery/masonry.min.js
- * @requires examples/assets/js/wp-jquery/imagesloaded.min.js
- * @requires examples/assets/js/min/jquery.shuffle.min.js
- */
-
-
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.GALLERY               = APP.GALLERY || {};
-	APP.GALLERY.version       = '0.0.1';
-    APP.GALLERY.documentReady = function( $ ) {
-
-		$( '.uix-gallery' ).each( function() {
-			var type = $( this ).data( 'show-type' );
-			
-			// Masonry
-			if ( type.indexOf( 'masonry' ) >= 0  ) {
-				$( this ).addClass( 'masonry-container' );
-				$( this ).find( '.uix-gallery__item' ).addClass( 'masonry-item' );
-			}
-			
-			// Filterable
-			if ( type.indexOf( 'filter' ) >= 0  ) {
-				$( this ).addClass( 'filter-container' );
-				$( this ).find( '.uix-gallery__item' ).addClass( 'filter-item' );	
-			}	
-		
-		});
-	
-	    /*--  Function of Masonry  --*/
-		var masonryObj = $( '.masonry-container .uix-gallery-tiles' );
-		imagesLoaded( masonryObj ).on( 'always', function() {
-			  masonryObj.masonry({
-				itemSelector: '.masonry-item'
-			  });  
-		});
-		
-		
-	    /*--  Function of Filterable  --*/
-		if ( $( "[data-show-type]" ).length > 0 ) {
-			if ( $( "[data-show-type]" ).data( 'show-type' ).indexOf( 'filter' ) >= 0 ) {
-				
-				$( '.uix-gallery' ).each( function() {
-					var filterCat      = $( this ).data( 'filter-id' ),
-						$grid          = $( this ).find( '.uix-gallery-tiles' ),
-						$filterOptions = $( filterCat );
-						
-					imagesLoaded( $grid ).on( 'always', function() {
-						
-						 $grid.shuffle({
-							itemSelector : '.filter-item',
-							speed        : 550, // Transition/animation speed (milliseconds).
-							easing       : 'ease-out', // CSS easing function to use.
-							sizer        : null // Sizer element. Use an element to determine the size of columns and gutters.
-						  });
-						  
-						
-						$filterOptions.find( 'li > a' ).on( 'click', function() {
-							  var $this       = $( this ),
-								  activeClass = 'current-cat',
-								  isActive    = $this.hasClass( activeClass ),
-								  group       = isActive ? 'all' : $this.data( 'group' );
-						
-							  // Hide current label, show current label in title
-							  if ( !isActive ) {
-								$filterOptions.find( '.' + activeClass ).removeClass( activeClass );
-							  }
-						
-							  $this.toggleClass( activeClass );
-						
-							  // Filter elements
-							  $grid.shuffle( 'shuffle', group );
-							  
-							  return false;	
-						});
-					
-			
-					});
-	
-					
-				} );
-		
-				
-			} else {
-				$( '[data-group="all"]' ).parent( 'li' ).hide();
-			}
-	
-		}
-		
-		
-		
-    };
-
-    APP.components.documentReady.push( APP.GALLERY.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
 
 
 
@@ -18499,80 +18497,6 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
- * <!-- Periodical Scroll -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.PERIODICAL_SCROLL               = APP.PERIODICAL_SCROLL || {};
-	APP.PERIODICAL_SCROLL.version       = '0.0.1';
-    APP.PERIODICAL_SCROLL.documentReady = function( $ ) {
-
-		$( '[data-periodical-scroll-container]' ).each( function() {
-
-			var $this       = $( this ),
-				ul          = $this.data( 'periodical-scroll-container' ),
-				speed       = $this.data( 'periodical-scroll-speed' ),
-				timing      = $this.data( 'periodical-scroll-timing' ),
-				$wrap       = $this.find( ul ),
-				itemHeight  = $wrap.find( 'li:first' ).height();
-
-
-			if( typeof speed === typeof undefined ) {
-				speed = 600;
-			}
-
-			if( typeof timing === typeof undefined ) {
-				timing = 2000;
-			}	
-			
-			//Initialize the container height
-			$wrap.css({
-				'height'   : itemHeight + 'px',
-				'overflow' : 'hidden'
-			});
-			
-			
-			
-			var stop      = false,
-				obj       = $wrap;
-
-			// change item
-			setInterval( periodicalTextChange, timing );
-
-			function periodicalTextChange() {
-				
-				if ( stop ) return;
-
-				var itemToMove = obj[0].firstElementChild;
-				itemToMove.style.marginTop = -itemHeight + 'px';
-			  
-				// move the child to the end of the items' list
-				setTimeout( function() {
-					itemToMove.removeAttribute( 'style' );
-					obj[0].appendChild( itemToMove );
-				}, speed );
-			}
-
-			obj.on( 'mouseenter', function() { stop = true; } )
-			   .on( 'mouseleave', function() { stop = false; } );		
-
-			
-			
-		});
-		
-    };
-
-    APP.components.documentReady.push( APP.PERIODICAL_SCROLL.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-/* 
- *************************************
  * <!-- Pricing -->
  *************************************
  */
@@ -18684,6 +18608,80 @@ APP = ( function ( APP, $, window, document ) {
     };
 
     APP.components.documentReady.push( APP.PRICING.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+/* 
+ *************************************
+ * <!-- Periodical Scroll -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.PERIODICAL_SCROLL               = APP.PERIODICAL_SCROLL || {};
+	APP.PERIODICAL_SCROLL.version       = '0.0.1';
+    APP.PERIODICAL_SCROLL.documentReady = function( $ ) {
+
+		$( '[data-periodical-scroll-container]' ).each( function() {
+
+			var $this       = $( this ),
+				ul          = $this.data( 'periodical-scroll-container' ),
+				speed       = $this.data( 'periodical-scroll-speed' ),
+				timing      = $this.data( 'periodical-scroll-timing' ),
+				$wrap       = $this.find( ul ),
+				itemHeight  = $wrap.find( 'li:first' ).height();
+
+
+			if( typeof speed === typeof undefined ) {
+				speed = 600;
+			}
+
+			if( typeof timing === typeof undefined ) {
+				timing = 2000;
+			}	
+			
+			//Initialize the container height
+			$wrap.css({
+				'height'   : itemHeight + 'px',
+				'overflow' : 'hidden'
+			});
+			
+			
+			
+			var stop      = false,
+				obj       = $wrap;
+
+			// change item
+			setInterval( periodicalTextChange, timing );
+
+			function periodicalTextChange() {
+				
+				if ( stop ) return;
+
+				var itemToMove = obj[0].firstElementChild;
+				itemToMove.style.marginTop = -itemHeight + 'px';
+			  
+				// move the child to the end of the items' list
+				setTimeout( function() {
+					itemToMove.removeAttribute( 'style' );
+					obj[0].appendChild( itemToMove );
+				}, speed );
+			}
+
+			obj.on( 'mouseenter', function() { stop = true; } )
+			   .on( 'mouseleave', function() { stop = false; } );		
+
+			
+			
+		});
+		
+    };
+
+    APP.components.documentReady.push( APP.PERIODICAL_SCROLL.documentReady );
     return APP;
 
 }( APP, jQuery, window, document ) );
@@ -29137,11 +29135,7 @@ THREE.OBJLoader = ( function () {
 			parseVertexIndex: function ( value, len ) {
 
 				var index = parseInt( value, 10 );
-				return ( index >= 0 ? index - 1 : index + len / 3 ) * 3;
-
-			},
-
-			parseNormalIndex: function ( value, len ) {
+				return ( index >= 0 ? index - 1 : index + len /: function ( value, len ) {
 
 				var index = parseInt( value, 10 );
 				return ( index >= 0 ? index - 1 : index + len / 3 ) * 3;
@@ -30917,205 +30911,4 @@ License: MIT
 	    //scenes.display.add(createMesh(textureSize, shaderMaterials.velocity));
 	    //scenes.display.add(createMesh(textureSize, shaderMaterials.position));
 
-	    var processCamera = new THREE.OrthographicCamera(-textureSize/2, textureSize/2, textureSize/2, -textureSize/2, -1, 0);
-
-	    //start with random values
-	    renderer.render(scenes.random, processCamera, renderTargets.velocity[0]);
-	    renderer.render(scenes.random, processCamera, renderTargets.position[0]);
-
-
-	    return {
-	      update: function(){
-	        update(renderer, scenes, processCamera, renderTargets, uniforms);
-	      },
-	      pointCloud: this.pointCloud
-	    };
-	  };
-
-	  var replaceBehaviour = function(shader, snippet){
-	    var regex = /\/\*replace\*\/[^]*\/\*replace\*\//g;
-	    var newShader = shader.replace(regex, snippet);
-	    console.log(newShader);
-	    return newShader;
-	  };
-
-	  var createRenderTargets = function(size, options){
-	    return {
-	      velocity: [
-	        createRenderTarget(size, options),
-	        createRenderTarget(size, options)
-	      ],
-	      position: [
-	        createRenderTarget(size, options),
-	        createRenderTarget(size, options)
-	      ]
-	    };
-	  };
-
-	  var createRenderTarget = function(size, options) {
-	    options = options || {
-	      format: THREE.RGBFormat,
-	      generateMipmaps: false,
-	      magFilter: THREE.NearestFilter,
-	      minFilter: THREE.NearestFilter,
-	      type: THREE.HalfFloatType
-	    };
-	    return new THREE.WebGLRenderTarget(size, size, options);
-	  };
-
-	  var createVelocityUniforms = function(renderTargets, targetPosition, targetTexture, gravityFactor){
-	    return {
-	      velTex: {type: "t", value: renderTargets.velocity[0]},
-	      posTex: {type: "t", value: renderTargets.position[0]},
-	      targetTex: {type: "t", value: targetTexture},
-	      targetPosition: {type: "v3", value: targetPosition},
-	      useTargetTexture: {type: "i", value: !!targetTexture ? 1 : 0},
-	      gravityFactor: {type: "f", value: gravityFactor}
-	    };
-	  };
-
-	  var createPositionUniforms = function(renderTargets){
-	    return {
-	      velTex: {type: "t", value: renderTargets.velocity[0]},
-	      posTex: {type: "t", value: renderTargets.position[0]}
-	    };
-	  };
-
-	  var createDisplayUniforms = function(renderTargets, targetPosition, pointSize){
-	    return {
-	      pointSize: {type: "f", value: pointSize},
-	      posTex: {type: "t", value: renderTargets.position[0]},
-	      targetPosition: {type: "v3", value: targetPosition},
-	      alpha: {type: "f", value: 0.5}
-	    };
-	  };
-
-	  var createRandomUniforms = function(explodeRate){
-	    return {
-	      explodeRate: {type: "f", value: explodeRate}
-	    };
-	  };
-
-	  var createShaderMaterials = function(shaders, uniforms, displayMaterialOptions){
-
-	    displayMaterialOptions = displayMaterialOptions || {
-	      transparent: true,
-	      wireframe: false,
-	      blending: THREE.NormalBlending,
-	      depthWrite: false
-	    };
-
-	    return {
-	      velocity: createShaderMaterial(shaders.velocityVertex, shaders.velocityFragment, uniforms.velocity),
-	      position: createShaderMaterial(shaders.positionVertex, shaders.positionFragment, uniforms.position),
-	      display: createShaderMaterial(shaders.displayVertex, shaders.displayFragment, uniforms.display, displayMaterialOptions),
-	      random: createShaderMaterial(shaders.randomVertex, shaders.randomFragment, uniforms.random)
-	    };
-	  };
-
-	  var createShaderMaterial = function(vShader, fShader, uniforms, options) {
-	    options = options || {};
-	    var defaults = {
-	      uniforms: uniforms,
-	      vertexShader: vShader,
-	      fragmentShader: fShader
-	    };
-	    window.$.extend(defaults, options);
-	    return new THREE.ShaderMaterial(defaults);
-	  };
-
-	  var createMesh = function(size, material) {
-	    return new THREE.Mesh(
-	      new THREE.PlaneBufferGeometry( size, size ),
-	      material
-	    );
-	  };
-
-	  var createPoints = function(size, material) {
-	    var points = new THREE.Geometry();
-	    for (var i = 0; i < size * size; i++) {
-	      var pos = new THREE.Vector3((i % size)/size, Math.floor(i/size)/size , 0);
-	      points.vertices.push(pos);
-	    }
-	    return new THREE.Points(points, material);
-	  };
-
-	  var update = function(renderer, scenes, processCamera, renderTargets, uniforms){
-	    var newBuffer = (buffer+1)%2;
-	    uniforms.velocity.velTex.value = renderTargets.velocity[buffer];
-	    uniforms.position.posTex.value = renderTargets.position[buffer];
-	    renderer.render(scenes.velocity, processCamera, renderTargets.velocity[newBuffer]);
-
-	    uniforms.position.velTex.value = renderTargets.velocity[newBuffer];
-	    uniforms.position.posTex.value = renderTargets.position[buffer];
-	    renderer.render(scenes.position, processCamera, renderTargets.position[newBuffer]);
-
-	    uniforms.display.posTex.value = renderTargets.position[newBuffer];
-
-	    buffer = newBuffer;
-	  };
-
-
-	  if( true ) {
-	    if( typeof module !== 'undefined' && module.exports ) {
-	      exports = module.exports = Particles;
-	    }
-	    exports.Particles = Particles;
-	  }
-	  if(window) {
-	    window.Particles = Particles;
-	  }
-
-	})(window);
-
-
-/***/ },
-/* 1 */
-/***/ function(module, exports) {
-
-	module.exports = "varying vec2 vUv;\n\nvoid main() {\n  vUv = uv;\n  gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);\n}\n";
-
-/***/ },
-/* 2 */
-/***/ function(module, exports) {
-
-	module.exports = "varying vec2 vUv;\nuniform sampler2D velTex;\nuniform sampler2D posTex;\nuniform sampler2D targetTex;\nuniform vec3 targetPosition;\nuniform float gravityFactor;\nuniform int useTargetTexture;\n\nvoid main() {\n  vec3 inVelocity = texture2D(velTex, vUv).rgb;\n  vec3 inPosition = texture2D(posTex, vUv).rgb;\n  vec3 targetPos = targetPosition;\n  vec3 outVelocity;\n  if(useTargetTexture == 1) {\n    targetPos = texture2D(targetTex, vUv).rgb;\n  }\n\n  float dist = distance(targetPos, inPosition);\n  vec3 direction = normalize(targetPos - inPosition);\n\n  /*replace*/\n  dist = max(dist, 1.0);\n  outVelocity = inVelocity + ((direction / dist) * gravityFactor * 0.01);\n  /*replace*/\n\n  gl_FragColor = vec4( outVelocity, 1.0 );\n}\n";
-
-/***/ },
-/* 3 */
-/***/ function(module, exports) {
-
-	module.exports = "varying vec2 vUv;\n\nvoid main() {\n  vUv = uv;\n  gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);\n}\n";
-
-/***/ },
-/* 4 */
-/***/ function(module, exports) {
-
-	module.exports = "varying vec2 vUv;\nuniform sampler2D velTex;\nuniform sampler2D posTex;\n\nvoid main() {\n  vec3 velocity = texture2D(velTex, vUv).rgb;\n  vec3 pos = texture2D(posTex, vUv).rgb;\n\n  /*replace*/\n  pos += velocity;\n  /*replace*/\n  \n  gl_FragColor = vec4( pos, 1.0 );\n}\n";
-
-/***/ },
-/* 5 */
-/***/ function(module, exports) {
-
-	module.exports = "uniform sampler2D posTex;\nuniform float pointSize;\nuniform vec3 targetPosition;\nvarying float dist;\n\nvoid main() {\n  vec3 pos = texture2D(posTex, position.xy).rgb;\n  dist = distance(targetPosition, pos);\n  gl_PointSize = pointSize;\n  gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);\n}\n";
-
-/***/ },
-/* 6 */
-/***/ function(module, exports) {
-
-	module.exports = "varying float dist;\nuniform float alpha;\n\nvoid main() {\n  vec4 color;\n  /*replace*/\n  color = vec4(0.0, 1.0, 0.0, alpha);\n  /*replace*/\n  gl_FragColor = color;\n}\n";
-
-/***/ },
-/* 7 */
-/***/ function(module, exports) {
-
-	module.exports = "varying vec2 vUv;\n\nvoid main() {\n  vUv = uv;\n  gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);\n}\n";
-
-/***/ },
-/* 8 */
-/***/ function(module, exports) {
-
-	module.exports = "uniform float explodeRate;\nvarying vec2 vUv;\n\n\nfloat rand(vec2 co){\n  return fract(sin(dot(co.xy, vec2(12.8273, 67.245))) * 53726.17623);\n}\n\nvoid main() {\n  vec3 col;\n  col.g = rand(vec2(vUv.x, vUv.y + 1.0));\n  col.b = rand(vec2(vUv.x, vUv.y + 2.0));\n  col.r = rand(vec2(vUv.xy));\n  col = col - 0.5;\n  col *= explodeRate;\n\n  gl_FragColor = vec4(col, 1.0);\n}\n";
-
-/***/ }
-/******/ ]);
+	    var processCamera = new THREE.OrthographicCamera(-textureSize/2, textureSize/2, textureSize/2, -textur

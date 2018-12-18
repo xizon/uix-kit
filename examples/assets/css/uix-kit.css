@@ -7,14 +7,26 @@
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Version             :  2.2.4
- * ## Last Update         :  November 28, 2018
+ * ## Version             :  2.2.5
+ * ## Last Update         :  December 18, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Compatible With     :  Bootstrap 3.x
  * ## Released under the MIT license.
  */
+
+/* ====================================================== 
+    <!-- 3D Background -->  
+/* ====================================================== */
+.uix-3d-bg {
+  /* Require more than 500, compatible firefox height */
+    perspective: 700px;
+}
+
+.uix-3d-bg > span {
+    display: inline-block;
+}
 
 /*
 
@@ -65,99 +77,99 @@
 	
     1. Basic 
     2. Table 
-    3. Helper Classes 
-    4. Bullet List 
-    5. Typography 
-    6. Spacing 
-    7. Basic Layout Styles 
-    8. Navigation 
-    9. Header Area 
-    10. Brand 
-    11. Footer 
-    12. Video 
+    3. Bullet List 
+    4. Helper Classes 
+    5. Navigation 
+    6. Typography 
+    7. Spacing 
+    8. Header Area 
+    9. Brand 
+    10. Footer 
+    11. Video 
+    12. Social Media Icons 
     13. Loader 
-    14. Social Media Icons 
+    14. Filterable Navigation 
     15. Pagination 
-    16. Filterable Navigation 
-    17. Sidebar  
-    18. Tags 
-    19. Entry 
-    20. Mobile Menu 
-    21. Onepage Menu 
-    22. Modal Dialog 
+    16. Sidebar  
+    17. Tags 
+    18. Entry 
+    19. Mobile Menu 
+    20. Onepage Menu 
+    21. Modal Dialog 
+    22. Accordion 
     23. 3D Background 
     24. 3D Carousel 
-    25. Accordion 
+    25. Advanced Content Slider 
     26. Accordion Background Images 
-    27. Advanced Content Slider 
-    28. Advanced Slider (Special Effects) 
-    29. Advanced Slider (Basic) 
-    30. Back to Top 
-    31. Badges 
-    32. Blended Grid Layout 
-    33. Breadcrumbs 
-    34. Button 
-    35. Cards 
-    36. Circle Layout 
-    37. Counter 
-    38. Dividing Line 
-    39. Dots 
-    40. Dotted Line 
-    41. Dropdown Menu 
+    27. Advanced Slider (Special Effects) 
+    28. Advanced Slider (Basic) 
+    29. Back to Top 
+    30. Badges 
+    31. Blended Grid Layout 
+    32. Breadcrumbs 
+    33. Button 
+    34. Cards 
+    35. Circle Layout 
+    36. Counter 
+    37. Dots 
+    38. Dotted Line 
+    39. Dividing Line 
+    40. Dropdown Menu 
+    41. Equal-width Columns 
     42. Dropdown Menu 2 (Multi-level drop-down navigation) 
-    43. Equal-width Columns 
-    44. Features 
-    45. Flexslider 
-    46. Floating Side Element 
-    47. Footer Templates 
-    48. Form 
-    49. Form Progress 
-    50. Gallery 
-    51. Heading 
-    52. Image Animation 
-    53. Image Shapes 
-    54. Custom Core Scripts & Stylesheets 
-    55. Lava-Lamp Style Menu 
-    56. Cutom Light Box 
-    57. Brands List 
-    58. Bulleted List 
-    59. Maintain Aspect Ratio List 
-    60. List of Posts 
-    61. List of Split Posts 
-    62. Side by Side List 
-    63. Side by Side List With Photo 
-    64. Fullwidth List of Split 2 
-    65. Fullwidth List of Split 
-    66. Mouse Animation Scroll 
-    67. Multiple Items Carousel 
-    68. Overlay 
-    69. Parallax 
-    70. Periodical Scroll 
-    71. Pricing 
-    72. Progress Bar 
-    73. Progress Line 
-    74. Ribbon 
-    75. Shape Animation 
-    76. Show More Less 
-    77. Comments ( Synchronize to WordPress's class name ) 
-    78. Editing Component  
-    79. Source Code 
-    80. Striking 
-    81. SVG Map 
-    82. Tabs 
-    83. Team Focus 
-    84. Team Fullwidth (Style using the Side by Side List With Photo module) 
-    85. Team Gird 
-    86. Testimonials Carousel 
-    87. Text effect 
-    88. Timeline 
-    89. ToolTip 
-    90. Vertical Menu 
-    91. Vertical Separator 
-    92. Wave Background 
-    93. 3rd Party Plugins 
-    94. WordPress Core ( Do not use prefix "uix-" ) 
-    95. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    43. Floating Side Element 
+    44. Footer Templates 
+    45. Features 
+    46. Gallery 
+    47. Form Progress 
+    48. Image Animation 
+    49. Heading 
+    50. Image Shapes 
+    51. Custom Core Scripts & Stylesheets 
+    52. Lava-Lamp Style Menu 
+    53. Brands List 
+    54. Maintain Aspect Ratio List 
+    55. List of Posts 
+    56. Bulleted List 
+    57. List of Split Posts 
+    58. Side by Side List 
+    59. Side by Side List With Photo 
+    60. Fullwidth List of Split 2 
+    61. Fullwidth List of Split 
+    62. Multiple Items Carousel 
+    63. Mouse Animation Scroll 
+    64. Overlay 
+    65. Parallax 
+    66. Pricing 
+    67. Periodical Scroll 
+    68. Progress Bar 
+    69. Progress Line 
+    70. Ribbon 
+    71. Shape Animation 
+    72. Show More Less 
+    73. Comments ( Synchronize to WordPress's class name ) 
+    74. Editing Component  
+    75. Source Code 
+    76. Striking 
+    77. SVG Map 
+    78. Tabs 
+    79. Team Focus 
+    80. Team Fullwidth (Style using the Side by Side List With Photo module) 
+    81. Team Gird 
+    82. Testimonials Carousel 
+    83. Text effect 
+    84. ToolTip 
+    85. Vertical Menu 
+    86. Vertical Separator 
+    87. 3rd Party Plugins 
+    88. Wave Background 
+    89. WordPress Core ( Do not use prefix "uix-" ) 
+    90. Ajax Page Loader (Loading A Page via Ajax Into Div)  
+    91. Basic Layout Styles 
+    92. Flexslider 
+    93. Cutom Light Box 
+    94. Timeline 
+    95. Form 
 
 
 
@@ -3637,7 +3649,7 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
     right: 20px;
     z-index: 90002;
     cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     border-radius: 100%;
     transition: .1s ease-in-out;
 }
@@ -3649,7 +3661,7 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
     position: fixed;
     z-index: 90001;
     display: block;
-    background: transparent;
+    background: rgba(0, 0, 0, 0);
     width: 100%;
     height: 100%;
     display: none;
@@ -4032,7 +4044,7 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
     <!-- Modal Dialog --> 
 /* ====================================================== */
 .uix-modal-mask {
-    background: transparent;
+    background: rgba(0, 0, 0, 0);
     width: 100%;
     height: 100%;
     top: 0;
@@ -4228,18 +4240,6 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
         width: 90% !important;
         height: 60vh !important;
     }
-}
-
-/* ====================================================== 
-    <!-- 3D Background -->  
-/* ====================================================== */
-.uix-3d-bg {
-  /* Require more than 500, compatible firefox height */
-    perspective: 700px;
-}
-
-.uix-3d-bg > span {
-    display: inline-block;
 }
 
 /* ====================================================== 
@@ -6842,6 +6842,61 @@ h3[data-counter-number] {
 }
 
 /* ====================================================== 
+   <!-- Equal-width Columns --> 
+/* ====================================================== */
+/**
+ * Using only CSS, we can make a tabbed navigation whose tabs always
+ * occupy an equal share of the available width. No JS to interrogate
+ * the DOM, no server-side logic to count through items, no inline styles.
+ *
+ */
+.uix-equal-width-divs ul {
+  list-style: none;
+  font-size: 0;
+  /*Fighting the Space Between Inline Block Elements*/
+  display: table;
+  /* [1] */
+  table-layout: fixed;
+  /* [2] */
+  width: 100%;
+  /* [3] */
+}
+
+.uix-equal-width-divs ul li {
+  font-size: 1rem;
+  /*Fighting the Space Between Inline Block Elements*/
+  display: table-cell;
+  /* [4] */
+  box-shadow: 1px 0px 0px 0px #AEAEAE;
+}
+
+.uix-equal-width-divs ul li:last-child {
+  box-shadow: none;
+}
+
+.uix-equal-width-divs ul li span {
+  display: block;
+  font-size: 0.75rem;
+}
+
+@media all and (max-width: 768px) {
+  .uix-equal-width-divs ul {
+    display: block;
+  }
+  .uix-equal-width-divs ul li {
+    display: inline-block;
+    width: 50%;
+    margin-bottom: .5rem;
+  }
+  .uix-equal-width-divs ul li:nth-child(2n+0) {
+    box-shadow: none;
+  }
+  .uix-equal-width-divs ul li span {
+    padding-bottom: 1rem;
+  }
+}
+
+/* ====================================================== 
    <!-- Features --> 
 /* ====================================================== */
 .uix-feature {
@@ -6978,61 +7033,6 @@ h3[data-counter-number] {
 
 .uix-typo--color-white .uix-feature .uix-feature__icon--side.is-bordered::before {
   border-color: #fff;
-}
-
-/* ====================================================== 
-   <!-- Equal-width Columns --> 
-/* ====================================================== */
-/**
- * Using only CSS, we can make a tabbed navigation whose tabs always
- * occupy an equal share of the available width. No JS to interrogate
- * the DOM, no server-side logic to count through items, no inline styles.
- *
- */
-.uix-equal-width-divs ul {
-  list-style: none;
-  font-size: 0;
-  /*Fighting the Space Between Inline Block Elements*/
-  display: table;
-  /* [1] */
-  table-layout: fixed;
-  /* [2] */
-  width: 100%;
-  /* [3] */
-}
-
-.uix-equal-width-divs ul li {
-  font-size: 1rem;
-  /*Fighting the Space Between Inline Block Elements*/
-  display: table-cell;
-  /* [4] */
-  box-shadow: 1px 0px 0px 0px #AEAEAE;
-}
-
-.uix-equal-width-divs ul li:last-child {
-  box-shadow: none;
-}
-
-.uix-equal-width-divs ul li span {
-  display: block;
-  font-size: 0.75rem;
-}
-
-@media all and (max-width: 768px) {
-  .uix-equal-width-divs ul {
-    display: block;
-  }
-  .uix-equal-width-divs ul li {
-    display: inline-block;
-    width: 50%;
-    margin-bottom: .5rem;
-  }
-  .uix-equal-width-divs ul li:nth-child(2n+0) {
-    box-shadow: none;
-  }
-  .uix-equal-width-divs ul li span {
-    padding-bottom: 1rem;
-  }
 }
 
 /* ====================================================== 
@@ -9113,7 +9113,7 @@ ol.uix-flexslider__control-paging li a:hover, ol.uix-flexslider__control-paging 
 
 .ui-datepicker .ui-state-highlight {
   color: #D54E21  !important;
-  background: transparent !important;
+  background: rgba(0, 0, 0, 0) !important;
   font-weight: bold !important;
 }
 
@@ -9806,6 +9806,15 @@ ol.uix-flexslider__control-paging li a:hover, ol.uix-flexslider__control-paging 
 }
 
 /* ====================================================== 
+   <!-- Custom Core Scripts & Stylesheets --> 
+/* ====================================================== */
+/*
+ * 1. Title  
+ * 2. Title
+ * 3. Title
+
+*/
+/* ====================================================== 
    <!-- Lava-Lamp Style Menu -->     
 /* ====================================================== */
 .uix-lavalamp-menu__container {
@@ -9857,15 +9866,6 @@ ol.uix-flexslider__control-paging li a:hover, ol.uix-flexslider__control-paging 
     left: 0;
 }
 
-/* ====================================================== 
-   <!-- Custom Core Scripts & Stylesheets --> 
-/* ====================================================== */
-/*
- * 1. Title  
- * 2. Title
- * 3. Title
-
-*/
 /* ====================================================== 
    <!-- Cutom Light Box -->   
 /* ====================================================== */
@@ -10534,6 +10534,13 @@ a.uix-lightbox__original__close::after {
 }
 
 /* ====================================================== 
+   <!-- Bulleted List --> 
+/* ====================================================== */
+.uix-list-bullet i {
+    margin-right: .5rem;
+}
+
+/* ====================================================== 
    <!-- Maintain Aspect Ratio List --> 
 /* ====================================================== */
 .uix-list-aspect-ratio {
@@ -10613,13 +10620,6 @@ a.uix-lightbox__original__close::after {
     .uix-list-aspect-ratio .uix-list-aspect-ratio__content {
         padding: .5rem;
     }
-}
-
-/* ====================================================== 
-   <!-- Bulleted List --> 
-/* ====================================================== */
-.uix-list-bullet i {
-    margin-right: .5rem;
 }
 
 /* ====================================================== 

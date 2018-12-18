@@ -1,5 +1,14 @@
 # Changelog
 
+#### = 2.2.6 (December 19, 2018) =
+
+* New: Add a new module "Chart". (Coming Soon)
+
+
+#### = 2.2.5 (December 19, 2018) =
+
+* Fix: Fixed some errors that dependency of Gulp 3.9.1 causes error in Node 10.
+
 
 #### = 2.2.4 (November 28, 2018) =
 

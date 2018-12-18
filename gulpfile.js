@@ -7,7 +7,6 @@ var gulp              = require('gulp'),
 	jshint            = require('gulp-jshint'),
 	cssbeautify       = require('gulp-cssbeautify'),
 	headerComment     = require('gulp-header-comment'),
-	version           = require('gulp-version-number'),
 	fileinclude       = require('gulp-file-include'),
 	clean             = require('gulp-clean'),
 	sourcemaps        = require('gulp-sourcemaps'),
@@ -230,22 +229,6 @@ gulp.task('html', function() {
 	var ver = new Date().getTime();
 	ver     = base64_encode( ver );
 	
-	var versionConfig = {
-		'value'    : '%MDS%',
-		'replaces' : [  
-			[/assets\/css\/rtl\/uix-kit-rtl(.*)\"/ig, 'assets\/css\/rtl\/uix-kit-rtl.css?ver=' + ver + '\"' ],
-			[/assets\/css\/uix-kit.min(.*)\"/ig, 'assets\/css\/uix-kit.min.css?ver=' + ver + '\"' ],
-			[/assets\/css\/uix-kit.IE(.*)\"/ig, 'assets\/css\/uix-kit.IE.css?ver=' + ver + '\"' ],
-			[/assets\/js\/uix-kit.min(.*)\"/ig, 'assets\/js\/uix-kit.min.js?ver=' + ver + '\"' ],
-			[/\@\@\{website_title\}/ig, customWebsiteTitle ],
-			[/\@\@\{website_desc\}/ig, customWebsiteDesc ],
-			[/\@\@\{website_canonical\}/ig, customWebsiteCanonical ],
-			[/\@\@\{website_author\}/ig, customWebsiteAuthor ],
-			[/\@\@\{website_generator\}/ig, customWebsiteGenerator ],
-			[/\@\@\{website_version\}/ig, customWebsiteVersion ]
-			
-		],
-	};
 
   console.log( 'cache:' + ver );
 	
@@ -265,7 +248,16 @@ gulp.task('html', function() {
 		}))
 
 		//Add version
-		.pipe(version( versionConfig ))
+		.pipe( replace(/assets\/css\/rtl\/uix-kit-rtl(.*)\"/ig, 'assets\/css\/rtl\/uix-kit-rtl.css?ver=' + ver + '\"' ))
+		.pipe( replace(/assets\/css\/uix-kit.min(.*)\"/ig, 'assets\/css\/uix-kit.min.css?ver=' + ver + '\"' ))
+		.pipe( replace(/assets\/css\/uix-kit.IE(.*)\"/ig, 'assets\/css\/uix-kit.IE.css?ver=' + ver + '\"' ))
+		.pipe( replace(/assets\/js\/uix-kit.min(.*)\"/ig, 'assets\/js\/uix-kit.min.js?ver=' + ver + '\"' ))
+		.pipe( replace(/\@\@\{website_title\}/ig, customWebsiteTitle ))
+		.pipe( replace(/\@\@\{website_desc\}/ig, customWebsiteDesc ))
+		.pipe( replace(/\@\@\{website_canonical\}/ig, customWebsiteCanonical ))
+		.pipe( replace(/\@\@\{website_author\}/ig, customWebsiteAuthor ))
+		.pipe( replace(/\@\@\{website_generator\}/ig, customWebsiteGenerator ))
+		.pipe( replace(/\@\@\{website_version\}/ig, customWebsiteVersion ))
 
 		//Remove a folder structure when copying files in gulp
 		.pipe(rename({dirname: ''}))

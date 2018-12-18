@@ -10,22 +10,19 @@
         <!-- Mobile Settings end -->
         
         
-		<!-- Core library
+		<!-- Vendor
 		============================================= -->
 		<script src="assets/js/wp-jquery/jquery.min.js?ver=3.3.1"></script>
 		<script src="assets/js/wp-jquery/jquery.migrate.min.js?ver=1.4.1"></script>
         <script src="assets/js/min/prefixfree.min.js?ver=1.0.7"></script>
-        <!-- Core library  end -->
-        
-        
+        <script src="assets/js/min/modernizr.min.js?ver=3.5.0"></script>
+        <!-- Vendor  end -->
         
         
         
 		<!-- Compatibility
 		============================================= -->
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        
-        <script src="assets/js/min/modernizr.min.js?ver=3.5.0"></script>
         
         <!--[if lt IE 9]>
             <script src='assets/js/min/respond.min.js?ver=1.4.2'></script>
@@ -53,11 +50,11 @@
         
        
         <!-- Theme  -->
-        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTU0MzQwMTI4MDU3Ng"/>
+        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTU0NTExNzkzODEwNw"/>
         
         
          <!--[if lt IE 10]>
-           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTU0MzQwMTI4MDU3Ng" />
+           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTU0NTExNzkzODEwNw" />
         <![endif]-->
         
         
@@ -453,14 +450,29 @@
                             <hr> 
 							<h3 class="pinline"><span>How To Use?</span></h3>
 							<p><strong>Step 1.</strong> Use NPM (Locate your current directory of project, and enter the following command.) or download the latest version from <a href="https://github.com/xizon/uix-kit">Github</a>. For nodejs you have to install some dependencies.</p>
-							<p><code>$ npm install uix-kit</code></p>
+							<p><code>$ sudo npm install uix-kit</code></p>
 							<p>Or clone the repo to get all source files including build scripts: </p>
-							<p><code>$ git clone git://github.com/xizon/uix-kit.git</code><br>
-							<code>$ cd uix-kit</code></p>
-							<p><strong>Step 2.</strong> Before doing all dev stuff make sure you have node installed. After that, run the following code in the main directory to install the node module dependencies.</p>
-							<p><code>$ npm install --only=dev</code></p>
+							<p><code>$ git clone git://github.com/xizon/uix-kit.git</code></p>
+							<p><strong>Step 2.</strong> Using an absolute path would get you to the "uix-kit" package directory more quickly. Before doing all dev stuff make sure you have node installed. After that, run the following code in the main directory to install the node module dependencies.</p>
+							<p>
+								<code>$ cd /{your_directory}/uix-kit</code><br>	
+								<code>$ sudo npm install --only=dev</code>
+							</p>
 							<p><strong>Step 3.</strong> Run the following code to enter development mode.</p>
 							<p><code>$ gulp default</code></p>
+							
+							
+							<div class="uix-striking-msg uix-striking-msg--default">
+							
+								<strong>ERROR: Dependency of Gulp 3.9.1 causes error in Node 10.</strong><br>
+								
+								<code>$ sudo npm install natives --only=dev</code><br>
+								<code>$ sudo npm install --save-dev  --unsafe-perm node-sass</code><br>
+								<code>$ gulp default</code>
+							</div>
+
+
+						
 							<p><strong>Step 4.</strong> When you done, please open the browser and enter the following URL to check out.</p>
 							<p><code>http://localhost:8080/examples/</code></p>
 							<p><strong>Step 5.</strong> Directly edit the entries in the components folder in order to modify the core files. (E.g. <code>examples/assets/css/uix-kit.css</code>, <code>examples/assets/css/uix-kit.min.css</code>, <code>examples/assets/css/rtl/uix-kit-rtl.css</code>, <code>examples/assets/js/uix-kit.js</code>, <code>examples/assets/js/uix-kit.min.js</code> ).</p>
@@ -473,6 +485,7 @@
 							</blockquote>
 						
 						
+							
                      
                        
                         </div>
@@ -563,14 +576,14 @@
 	============================================= -->
 	
 	<script>
-		var REVISION     = "2.2.4",
+		var REVISION     = "2.2.5",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
 				"homeUrl"     : "",  //Eg. https://uiux.cc
 				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
 			};
     </script>  
-    <script src="assets/js/uix-kit.min.js?ver=MTU0MzQwMTI4MDU3Ng"></script>
+    <script src="assets/js/uix-kit.min.js?ver=MTU0NTExNzkzODEwNw"></script>
 
 
 

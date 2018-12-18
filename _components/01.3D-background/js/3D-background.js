@@ -33,7 +33,6 @@ APP = ( function ( APP, $, window, document ) {
 			
 		});
 		
-		
 	
 		/*
 		 * Sets an animation for each element

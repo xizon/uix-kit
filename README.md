@@ -2,7 +2,7 @@
 
 
 [![Travis CI](https://api.travis-ci.org/xizon/uix-kit.svg?branch=master)](https://travis-ci.org/xizon/uix-kit/)
-[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=2.2.4&x2=0)](https://www.npmjs.com/package/uix-kit)
+[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=2.2.5&x2=0)](https://www.npmjs.com/package/uix-kit)
 [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
 
 
@@ -71,21 +71,21 @@ Enjoy the fluid grid system based on Bootstrap and self-expansion. Uix Kit is bu
 **Step 1.** Use NPM (Locate your current directory of project, and enter the following command.) or download the latest version from [Github](https://github.com/xizon/uix-kit). For nodejs you have to install some dependencies.
 
 ```sh
-$ npm install uix-kit
+$ sudo npm install uix-kit
 ```
 
 Or clone the repo to get all source files including build scripts: 
 
 ```sh
 $ git clone git://github.com/xizon/uix-kit.git
-$ cd uix-kit
 ```
 
 
-**Step 2.** Before doing all dev stuff make sure you have node installed. After that, run the following code in the main directory to install the node module dependencies.
+**Step 2.** Using an absolute path would get you to the "uix-kit" package directory more quickly. Before doing all dev stuff make sure you have node installed. After that, run the following code in the main directory to install the node module dependencies.
 
 ```sh
-$ npm install --only=dev
+$ cd /{your_directory}/uix-kit
+$ sudo npm install --only=dev
 ```
 
 
@@ -94,6 +94,18 @@ $ npm install --only=dev
 ```sh
 $ gulp default
 ```
+
+### Note:
+ 
+**ERROR: Dependency of Gulp 3.9.1 causes error in Node 10.**
+
+```sh
+$ sudo npm install natives --only=dev
+$ sudo npm install --save-dev  --unsafe-perm node-sass
+$ gulp default
+```
+
+
 
 **Step 4.** When you done, please open the browser and enter the following URL to check out.
 
