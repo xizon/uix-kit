@@ -36,7 +36,7 @@
 
 
 <p align = "left">
-	<a href="https://www.youtube.com/watch?v=ckYJBMfPtBs"><img src="https://uiux.cc/uix-kit/misc/screenshots/video-cover.jpg" width="400"></a>
+	<a href="https://www.youtube.com/watch?v=ckYJBMfPtBs"><img src="https://uiux.cc/uix-kit/_screenshots/video-cover.jpg" width="400"></a>
 </p>
 
 
