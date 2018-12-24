@@ -1,11 +1,9 @@
 language: node_js
 
 node_js:
-  - 6
+  - 8
   - 10
 
 script: 
  - npm install --dev
- - npm view gulp
-
-
+ - npm view build
