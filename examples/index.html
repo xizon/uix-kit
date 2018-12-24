@@ -50,11 +50,11 @@
         
        
         <!-- Theme  -->
-        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=MTU0NTExNzkzODEwNw"/>
+        <link rel="stylesheet" href="../dist/uix-kit.min.css?ver=gVbk9QEVRjP0fmSZaKYb"/>
         
         
          <!--[if lt IE 10]>
-           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=MTU0NTExNzkzODEwNw" />
+           <link rel="stylesheet" href="assets/css/IE.css?ver=gVbk9QEVRjP0fmSZaKYb" />
         <![endif]-->
         
         
@@ -64,7 +64,7 @@
             
 		<!-- SEO
 		============================================= -->
-        <meta name="description" content="Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap">
+        <meta name="description" content="Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.">
         <meta name="generator" content="Uix Kit" />  
         <meta name="author" content="UIUX Lab"> 
         <link rel="canonical" href="https://uiux.cc" />
@@ -443,9 +443,9 @@
             <div class="container">
                     <div class="row">
                         <div class="col-md-10 offset-md-1 uix-list uix-list--normal uix-table uix-table--bordered">
-							<p><strong>Make over <span class="uix-typo--color-highlight">100+</span> components to wear again and again!</strong></p>
-							<p>An underlying front-end system that makes it easy to extend and modify core files. This spec is a living document that will be updated as we continue to develop the tenets and specifics of Uix Kit. Support JS and CSS component( SCSS ) development with <em>Gulp & Webpack</em> together.</p>
-							<p>Enjoy the fluid grid system based on Bootstrap and self-expansion. Uix Kit is built over Bootstrap and has all the benefits that the framework comes with. Regardless of the screen size, the website content will naturally fit the given resolution. Using the Uix Kit will save you large amount of time to build your projects. It supports 3D and 2D rendering with three.js and pixi.js. More typically, automatically generate core files with Gulp & Webpack for each module (contains .js, .scss, .html files).</p>
+							<p><strong>Make over <span class="uix-typo--color-highlight">120+</span> components to wear again and again!</strong></p>
+							<p>An underlying front-end system that makes it easy to extend and modify core files. This spec is a living document that will be updated as we continue to develop the tenets and specifics of Uix Kit. Support JS, HTML and SASS component library automatically packaged. Automatically convert ES6 JS to ES5 using Babel in this scaffold.</p>
+							<p>Enjoy the fluid grid system based on Bootstrap and self-expansion. Uix Kit is built over Bootstrap and has all the benefits that the framework comes with. Regardless of the screen size, the website content will naturally fit the given resolution. Using the Uix Kit will save you large amount of time to build your projects. It supports 3D and 2D rendering with three.js and pixi.js. More typically, automatically generate core files with Webpack for each module (contains .js, .scss, .html files).</p>
                           
                             <hr> 
 							<h3 class="pinline"><span>How To Use?</span></h3>
@@ -453,40 +453,30 @@
 							<p><code>$ sudo npm install uix-kit</code></p>
 							<p>Or clone the repo to get all source files including build scripts: </p>
 							<p><code>$ git clone git://github.com/xizon/uix-kit.git</code></p>
-							<p><strong>Step 2.</strong> Using an absolute path would get you to the "uix-kit" package directory more quickly. Before doing all dev stuff make sure you have node installed. After that, run the following code in the main directory to install the node module dependencies.</p>
+							<p><strong>Step 2.</strong> First, using an absolute path into your <code>"uix-kit/"</code> folder directory.</p>
 							<p>
-								<code>$ cd /{your_directory}/uix-kit</code><br>	
-								<code>$ sudo npm install --only=dev</code>
+								<code>$ cd /{your_directory}/uix-kit</code>
 							</p>
-							<p><strong>Step 3.</strong> Run the following code to enter development mode.</p>
-							<p><code>$ gulp default</code></p>
+							<p><strong>Step 3.</strong> Before doing all dev stuff make sure you have `Node 10+` installed. After that, run the following code in the main directory to install the node module dependencies.</p>
+							<p><code>$ sudo npm install --save-dev  --unsafe-perm node-sass</code></p>
+							
+							<p><strong>Step 4.</strong> Run the following code to enter development mode. The converted ES5 files will be created.</p>
+							<p>
+								<code>$ npm run build</code>
+							</p>
+							
+							<p><strong>Step 5.</strong> When you done, please open the browser and enter the following URL to check out.</p>
+							<p><code>http://localhost:8080/examples/</code></p>
 							
 							
 							<div class="uix-striking-msg uix-striking-msg--default">
 							
-								<strong>ERROR: Dependency of Gulp 3.9.1 causes error in Node 10.</strong><br>
+								<strong>ERROR: npm update check failed.</strong><br>
 								
-								<code>$ sudo npm install natives --only=dev</code><br>
-								<code>$ sudo npm install --save-dev  --unsafe-perm node-sass</code><br>
-								<code>$ gulp default</code>
+								<code>$ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config</code>
 							</div>
 
-
-						
-							<p><strong>Step 4.</strong> When you done, please open the browser and enter the following URL to check out.</p>
-							<p><code>http://localhost:8080/examples/</code></p>
-							<p><strong>Step 5.</strong> Directly edit the entries in the components folder in order to modify the core files. (E.g. <code>examples/assets/css/uix-kit.css</code>, <code>examples/assets/css/uix-kit.min.css</code>, <code>examples/assets/css/rtl/uix-kit-rtl.css</code>, <code>examples/assets/js/uix-kit.js</code>, <code>examples/assets/js/uix-kit.min.js</code> ).</p>
-						    <blockquote>
-
-								<h4>Components:</h4>
-								HTML/JS/CSS Components: <code>_components/*</code><br>
-								<code>00.global</code> and <code>01.index</code> are required components.
-
-							</blockquote>
-						
-						
 							
-                     
                        
                         </div>
                     </div>
@@ -576,14 +566,14 @@
 	============================================= -->
 	
 	<script>
-		var REVISION     = "2.2.5",
+		var REVISION     = "3.0.0",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
 				"homeUrl"     : "",  //Eg. https://uiux.cc
 				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
 			};
     </script>  
-    <script src="assets/js/uix-kit.min.js?ver=MTU0NTExNzkzODEwNw"></script>
+    <script src="../dist/uix-kit.min.js?ver=gVbk9QEVRjP0fmSZaKYb"></script>
 
 
 

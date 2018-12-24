@@ -1,0 +1,62 @@
+/**
+
+	TABLE OF CONTENTS
+	---------------------------
+	
+	
+	${{TOC}}
+
+*/
+
+
+/**
+
+	Adding support for language written in a Right To Left (RTL) direction is easy -
+	it's just a matter of overwriting all the horizontal positioning attributes
+	of your CSS stylesheet in a separate stylesheet file named -rtl.css.
+
+
+*/
+
+
+/******/
+/******/
+/* must be placed in the first place */
+@import '../scss/_variable-and-mixin.scss';
+
+
+/******/
+/******/
+/* base */
+@import 'basic.scss';
+@import 'brand.scss';
+@import 'filterable-navigation.scss';
+@import 'header-area.scss';
+@import 'helper-classes.scss';
+@import 'layout.scss';
+@import 'mobile-menu.scss';
+@import 'modal-dialog.scss';
+@import 'navigation.scss';
+@import 'sidebar.scss';
+
+
+/******/
+/******/
+/* pages */
+@import '../../advanced-slider/scss-rtl/advanced-slider-basic.scss';
+@import '../../advanced-slider/scss-rtl/advanced-slider-SpecialEffects.scss';
+@import '../../card/scss-rtl/card.scss';
+@import '../../dropdown-menu/scss-rtl/dropdown-menu.scss';
+@import '../../flexslider/scss-rtl/custom-flexslider.scss';
+@import '../../form/scss-rtl/form.scss';
+@import '../../list-brands/scss-rtl/list-brands.scss';
+@import '../../list-bulleted/scss-rtl/list-bulleted.scss';
+@import '../../list-maintain-aspect-ratio/scss-rtl/list-maintain-aspect-ratio.scss';
+@import '../../list-side-by-side/scss-rtl/list-side-by-side.scss';
+@import '../../single-post/scss-rtl/comments.scss';
+@import '../../source-code/scss-rtl/source-code.scss';
+@import '../../tooltip/scss-rtl/tooltip.scss';
+@import '../../vertical-menu/scss-rtl/vertical-menu.scss';
+@import '../../wordpress/scss-rtl/wp-core.scss';
+
+

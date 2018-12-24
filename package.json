@@ -1,69 +1,83 @@
 {
   "author": "UIUX Lab",
   "name": "uix-kit",
-  "version": "2.2.5",
-  "description": "Uix Kit (https://github.com/xizon/uix-kit)",
-  "main": "gulpfile.js",
-  "dependencies": {
-    "npm": "^6.0.0"
-  },
-  "devDependencies": {
-    "crypto": "^1.0.1",
-    "del": "^3.0.0",
-    "gulp": "^3.9.1",
-    "gulp-asset-rev": "0.0.15",
-    "gulp-autoprefixer": "^4.0.0",
-    "gulp-cache": "^1.0.1",
-    "gulp-clean": "^0.4.0",
-    "gulp-concat": "^2.6.1",
-    "gulp-css-format": "^0.1.2",
-    "gulp-cssbeautify": "^1.0.0",
-    "gulp-file-include": "^2.0.1",
-    "gulp-header-comment": "^0.3.0",
-    "gulp-imagemin": "^4.0.0",
-    "gulp-jshint": "^2.0.4",
-    "gulp-livereload": "^3.8.1",
-    "gulp-md5-plus": "^1.0.3",
-    "gulp-md5-replace": "^0.1.1",
-    "gulp-merge-json": "^1.2.2",
-    "gulp-minify-css": "^1.2.4",
-    "gulp-notify": "^3.0.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-replace": "^0.6.1",
-    "gulp-sass": "^3.1.0",
-    "gulp-sourcemaps": "^2.6.4",
-    "gulp-uglify": "^3.0.0",
-    "hoek": "^5.0.3",
-    "js-md5": "^0.7.3",
-    "jshint": "^2.9.5",
-    "natives": "^1.1.6",
-    "node-sass": "^4.11.0",
-    "path": "^0.12.7",
-    "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.11.1"
+  "version": "3.0.0",
+  "description": "Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4. (https://github.com/xizon/uix-kit)",
+  "main": "webpack.config.js",
+  "directories": {
+    "example": "examples"
   },
   "scripts": {
-    "start:dev": "webpack-dev-server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "webpack --watch",
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
+    "prettier": "prettier \"./dist/uix-kit.css\"",
+    "prettier-rtl": "prettier \"./dist/uix-kit-rtl.css\""
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xizon/uix-kit.git"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/xizon/uix-kit/issues"
-  },
-  "homepage": "https://github.com/xizon/uix-kit#readme",
-  "directories": {
-    "doc": "docs",
-    "example": "examples"
+    "url": "uix-kit"
   },
   "keywords": [
     "uix",
     "kit",
     "kits",
     "front-end",
-    "webdesign"
-  ]
+    "webdesign",
+    "bootstrap",
+    "scaffold",
+    "webpack"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xizon/uix-kit/issues"
+  },
+  "homepage": "https://github.com/xizon/uix-kit#readme",
+  "devDependencies": {
+    "@babel/core": "^7.2.0",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/preset-flow": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.1.0",
+    "@node-minify/core": "^4.0.2",
+    "@node-minify/uglify-js": "^4.0.2",
+    "babel-loader": "^8.0.4",
+    "clean-webpack-plugin": "^1.0.0",
+    "html-loader": "^0.5.5",
+    "include-file-webpack-plugin": "^1.0.3",
+    "json-loader": "^0.5.7",
+    "log-timestamp": "^0.2.1",
+    "moment": "^2.23.0",
+    "node-sass": "^4.11.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "prettier": "^1.15.3",
+    "prettier-loader": "^2.1.1",
+    "random-string": "^0.2.0",
+    "replace-in-file-webpack-plugin": "^1.0.6",
+    "uglifyjs-webpack-plugin": "^2.0.1",
+    "webpack": "^4.27.0",
+    "webpack-cli": "^3.1.2",
+    "webpack-concat-plugin": "^3.0.0",
+    "webpack-dev-middleware": "^3.4.0",
+    "webpack-dev-server": "^3.1.10"
+  },
+  "dependencies": {
+    "css-loader": "^2.0.1",
+    "mini-css-extract-plugin": "^0.5.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1"
+  },
+  "prettier": {
+    "printWidth": 120,
+    "tabWidth": 4,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "none",
+    "bracketSpacing": true,
+    "jsxBracketSameLine": false,
+    "arrowParens": "avoid",
+    "requirePragma": false,
+    "proseWrap": "preserve"
+  }
 }

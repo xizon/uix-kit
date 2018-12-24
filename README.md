@@ -2,7 +2,7 @@
 
 
 [![Travis CI](https://api.travis-ci.org/xizon/uix-kit.svg?branch=master)](https://travis-ci.org/xizon/uix-kit/)
-[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=2.2.5&x2=0)](https://www.npmjs.com/package/uix-kit)
+[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=3.0.0&x2=0)](https://www.npmjs.com/package/uix-kit)
 [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
 
 
@@ -36,23 +36,23 @@
 
 
 <p align = "left">
-	<a href="https://www.youtube.com/watch?v=ckYJBMfPtBs"><img src="https://uiux.cc/uix-kit/_screenshots/video-cover.jpg" width="400"></a>
+	<a href="https://www.youtube.com/watch?v=ckYJBMfPtBs"><img src="https://uiux.cc/uix-kit/misc/screenshots/video-cover.jpg" width="400"></a>
 </p>
 
 
 
 ## Description
 
-Make over <strong>100+</strong> components to wear again and again!
+Make over <strong>120+</strong> components to wear again and again!
 
 
-An underlying front-end system that makes it easy to extend and modify core files. This spec is a living document that will be updated as we continue to develop the tenets and specifics of Uix Kit. Support JS and CSS component( Sass Format ) development with Gulp & Webpack together.
+An underlying front-end system that makes it easy to extend and modify core files. This spec is a living document that will be updated as we continue to develop the tenets and specifics of Uix Kit. Support JS, HTML and SASS component library automatically packaged. Automatically convert ES6 JS to ES5 using Babel in this scaffold.
 
-Enjoy the fluid grid system based on Bootstrap and self-expansion. Uix Kit is built over Bootstrap and has all the benefits that the framework comes with. Regardless of the screen size, the website content will naturally fit the given resolution. Using the Uix Kit will save you large amount of time to build your projects. It supports 3D and 2D rendering with three.js and pixi.js. More typically, automatically generate core files with Gulp & Webpack for each module (contains .js, .scss, .html files).
+Enjoy the fluid grid system based on Bootstrap and self-expansion. Uix Kit is built over Bootstrap and has all the benefits that the framework comes with. Regardless of the screen size, the website content will naturally fit the given resolution. Using the Uix Kit will save you large amount of time to build your projects. It supports 3D and 2D rendering with three.js and pixi.js. More typically, automatically generate core files with Webpack for each module (contains .js, .scss, .html files).
 
 * Supports 3D and 2D rendering with three.js and pixi.js.
 * Using Sass to Control Scope With BEM Naming
-* Automatically generate table of contents with Gulp for each module comment of name.
+* Automatically generate table of contents for each module comment of name.
 * Simple custom CSS and JS core files
 * 100% Responsive & Mobile Ready
 * Prepare some generic plug-ins in advance
@@ -60,7 +60,8 @@ Enjoy the fluid grid system based on Bootstrap and self-expansion. Uix Kit is bu
 * Provides a common web page components and layouts
 * W3C Standard Support
 * Support PJAX no refresh method for loading pages
-* Support JS and CSS component( Sass Format ) development with Gulp & Webpack together
+* Support JS, HTML and SASS component library automatically packaged.
+* Make a foundation for the React architecture.
 
 
 * * *
@@ -81,45 +82,41 @@ $ git clone git://github.com/xizon/uix-kit.git
 ```
 
 
-**Step 2.** Using an absolute path would get you to the "uix-kit" package directory more quickly. Before doing all dev stuff make sure you have node installed. After that, run the following code in the main directory to install the node module dependencies.
+**Step 2.** First, using an absolute path into your `"uix-kit/"` folder directory.
 
 ```sh
 $ cd /{your_directory}/uix-kit
-$ sudo npm install --only=dev
 ```
 
 
-**Step 3.** Run the following code to enter development mode.
+**Step 3.** Before doing all dev stuff make sure you have `Node 10+` installed. After that, run the following code in the main directory to install the node module dependencies.
 
 ```sh
-$ gulp default
-```
-
-### Note:
- 
-**ERROR: Dependency of Gulp 3.9.1 causes error in Node 10.**
-
-```sh
-$ sudo npm install natives --only=dev
 $ sudo npm install --save-dev  --unsafe-perm node-sass
-$ gulp default
 ```
 
 
+**Step 4.** Run the following code to enter development mode. The converted ES5 files will be created.
 
-**Step 4.** When you done, please open the browser and enter the following URL to check out.
+```sh
+$ npm run build
+```
+
+**Step 5.** When you done, please open the browser and enter the following URL to check out.
 
 ```sh
 http://localhost:8080/examples/
 ```
 
-**Step 5.** Directly edit the entries in the components folder in order to modify the core files. (E.g. `examples/assets/css/uix-kit.css`, `examples/assets/css/uix-kit.min.css`, `examples/assets/css/rtl/uix-kit-rtl.css`, `examples/assets/js/uix-kit.js`, `examples/assets/js/uix-kit.min.js` ).
 
+### Note:
+ 
+**ERROR: npm update check failed.**
 
-> ### Components:
-> 
-> HTML/JS/CSS Components: `_components/*`  
-> `00.global` and `01.index` are required components.
+```sh
+$ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
+```
+
 
 
 * * *
@@ -175,11 +172,11 @@ http://localhost:8080/examples/
         <link rel="stylesheet" href="assets/fonts/fontawesome/font-awesome.min.css?ver=4.5" media="all" />  
         
         <!-- Theme  -->
-        <link rel="stylesheet" href="assets/css/uix-kit.min.css?ver=1.0.0" media="all"/>
+        <link rel="stylesheet" href="../dist/uix-kit.min.css?ver=1.0.0" media="all"/>
         
      
          <!--[if lt IE 10]>
-           <link rel="stylesheet" href="assets/css/uix-kit.IE.css?ver=1.0.0" media="all" />
+           <link rel="stylesheet" href="../dist/uix-kit.IE.css?ver=1.0.0" media="all" />
         <![endif]-->
         
         
@@ -227,7 +224,7 @@ http://localhost:8080/examples/
 				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
 			};
     </script>  
-    <script src="assets/js/uix-kit.min.js?ver=1.0.0"></script>
+    <script src="../dist/uix-kit.min.js?ver=1.0.0"></script>
 
 
   </body>
@@ -245,19 +242,25 @@ http://localhost:8080/examples/
 
 uix-kit/
 ├── README.md
-├── gulpfile.js
-├── main.js
+├── CHANGELOG.md
+├── CONTRIBUTING.md
 ├── LICENSE
+├── webpack.config.js
 ├── package-lock.json
 ├── package.json
-├── docs/
-├── _grid/
-├── _screenshots/
-├── _components/
-│   ├── 00.global/
-│   ├── 01.*/
-│   └── 02.*/
+├── dist/
+├── misc/
+│   ├── screenshots/
+│   └── grid/
+├── src/
+│   ├── index.js
+│   ├── index-rtl.js
+│   ├── components/
+│   │       ├── _global/
+│   │       ├── _home/
+│   │       └── ...
 ├── examples/
+│   ├── *.html
 │   ├── assets/
 │   │       ├── css/
 │   │       ├── fonts/
@@ -269,41 +272,25 @@ uix-kit/
 └──
 ```
 
-#### HTML/JS/CSS Components:
-
-*   `_components/*`
-
-#### Custom Core Files:
-
-You can customize these files to meet the different needs of the site you want :-)
-
-*   `examples/assets/css/uix-kit.css`
-*   `examples/assets/css/uix-kit.min.css`
-*   `examples/assets/css/uix-kit.IE.css`
-*   `examples/assets/css/rtl/uix-kit-rtl.css`
-*   `examples/assets/js/uix-kit.js`
-*   `examples/assets/js/uix-kit.min.js`
-
-
 
 ### 3\. PSD Grid Templates
 
 You can download the corresponding .PSD grid files based on Bootstrap 3.x from the `_grid` folder.
 
-*   `_grid/bootstrap3_1170_grid_web.psd` (Default Container: 1170px)
-*   `_grid/bootstrap3_1278_grid_web.psd` (XL Container: 1278px)
-*   `_grid/bootstrap3_1410_grid_web.psd` (XXL Container: 1410px)
+*   `misc/grid/bootstrap3_1170_grid_web.psd` (Default Container: 1170px)
+*   `misc/grid/bootstrap3_1278_grid_web.psd` (XL Container: 1278px)
+*   `misc/grid/bootstrap3_1410_grid_web.psd` (XXL Container: 1410px)
 
 
 
 ## Contributing
 
-Finding bugs, sending pull requests or improving our docs - any contribution is welcome and highly appreciated. To get started, head over to our [contribution guidelines](docs/contributing.md). Thanks!
+Finding bugs, sending pull requests or improving our docs - any contribution is welcome and highly appreciated. To get started, head over to our [contribution guidelines](CONTRIBUTING.md). Thanks!
 
 
 ## Changelog
 
-[releases](docs/changelog.md)
+[releases](CHANGELOG.md)
 
 
 

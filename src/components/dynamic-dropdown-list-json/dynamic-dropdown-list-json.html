@@ -1,0 +1,293 @@
+@@include('./src/components/_global/include-header.html')
+     
+  <body class="page">
+  
+  
+    @@include('./src/components/_global/include-loader.html')
+    @@include('./src/components/_global/include-toggle-trigger.html')
+    
+    
+  
+  
+    <div class="uix-wrapper">
+    
+        <!-- Header Area
+        ============================================= -->      
+        <header class="uix-header__container">
+            
+             <div class="uix-header">
+                 <div class="container">
+                 
+                        @@include('./src/components/_global/include-brand.html')
+                        
+                        @@include('./src/components/_global/include-menu.html')
+                        
+                        
+                  </div>
+                  <!-- .container end -->
+                  
+                  <div class="uix-clear"></div>
+             </div>
+        
+        </header>
+        <div class="uix-header__placeholder"></div>
+      
+      
+     
+        <!-- Content 01
+        ====================================================== -->
+        <section>
+            <div class="container uix-t-c">
+                    <div class="row">
+                        <div class="col-md-8 offset-md-2">
+                            <h2>Dynamic Drop Down List from JSON</h2>
+							<p>Create a dynamic dropdown form that loads its data from a JSON file.</p>
+                            
+                        </div>
+                    </div>
+                    <!-- .row end -->
+              
+                    
+            </div>
+            <!-- .container end -->
+ 
+        </section>
+     
+       
+    
+       <!-- Content 02
+        ====================================================== -->
+        <section class="uix-spacing--m">
+            <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 offset-md-2">
+   
+						       <p class="uix-striking-msg uix-striking-msg--info"><strong>Callback:</strong> <span id="dynamic-callback">-</span></p>
+         
+								<div class="uix-controls uix-controls__select">
+									<label>
+										<select 
+												id="dynamic-dd-country" 
+												name="dynamic-dd-country" 
+												placeholder="Country"
+												data-ajax-dynamic-dd-json="assets/json/countries.json"
+												data-ajax-dynamic-dd-method="POST" 
+												data-ajax-dynamic-dd-event="change" 
+												data-ajax-dynamic-dd-data="" 
+												data-ajax-dynamic-dd-associated="#dynamic-dd-city">
+
+
+											<option value="" selected>- Country -</option>
+										</select>
+
+									</label>
+									<span>Country</span>
+
+								</div>
+
+
+								<!-- ////////   -->
+
+								<div class="uix-controls uix-controls__select">
+									<label>
+										<select id="dynamic-dd-city" name="dynamic-dd-city" placeholder="City">
+										    <option value="" selected>- City -</option>
+										</select>
+
+									</label>
+									<span>City</span>
+
+								</div>			
+                        
+                       
+                        </div>
+                        <!-- .col-12 end -->
+                    </div>
+                    <!-- .row end -->
+                    
+                    
+            </div>
+            <!-- .container end -->
+            
+            
+        </section>
+        
+        
+        <script>
+		( function( $ ) {
+		"use strict";
+
+			$( function() {
+
+				//The target select event
+				$( document ).on( 'change.DYNAMIC_DD_LIST', '#dynamic-dd-city', function( e ) {
+
+					e.preventDefault();
+
+					var $this        = $( this[ this.selectedIndex ] ),
+						curVal       = $this.val(),
+						curLongitude = $this.data( 'longitude' ),
+						curLatitude  = $this.data( 'latitude' ),
+						curAddresses = $this.data( 'addresses' );
+
+					
+					var curContents = '';
+					for ( var k = 0; k < curAddresses.length; k++ ) {
+						curContents += curAddresses[k].addr_name + ': ' + curAddresses[k].addr_longitude + ', ' + curAddresses[k].addr_latitude + ' ';
+					}
+						
+					
+
+					$( '#dynamic-callback').text( '{ Name: '+curVal+', Longitude: ' + curLongitude + ', Latitude: ' + curLatitude + ', Addresses: ' + curContents + '}'  );
+
+					return false;
+
+
+
+				});			
+			} );
+
+		} ) ( jQuery );
+			
+			
+		</script>
+        
+        
+        
+        
+    
+       <!-- Content 03
+        ====================================================== -->
+        <section class="uix-spacing--m uix-spacing--no-top">
+            <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 offset-md-2">
+   
+						       <p class="uix-striking-msg uix-striking-msg--info"><strong>(中国)区县:</strong> <span id="dynamic-callback2">-</span></p>
+         
+
+								<div class="uix-controls uix-controls__select uix-controls__select--top">
+									<label>
+										<select 
+												id="dynamic-dd-china-province" 
+												name="dynamic-dd-china-province" 
+												data-ajax-dynamic-dd-json="assets/json/china.json"
+												data-ajax-dynamic-dd-method="POST" 
+												data-ajax-dynamic-dd-event="change" 
+												data-ajax-dynamic-dd-data="" 
+												data-ajax-dynamic-dd-associated="#dynamic-dd-china-city">	
+
+											<option value="">- 省份 -</option>
+										</select>
+
+									</label>
+								</div>
+
+
+								<!-- ////////   -->
+
+								<div class="uix-controls uix-controls__select uix-controls__select--top">
+									<label>
+										<select name="dynamic-dd-china-city" id="dynamic-dd-china-city">
+											<option value="">- 城市 -</option>
+										</select>
+
+									</label>
+
+								</div>		
+
+
+								<!-- ////////   -->
+
+								<div class="uix-controls uix-controls__select uix-controls__select--top">
+									<label>
+										<select name="dynamic-dd-china-area" id="dynamic-dd-china-area">
+											<option value="">- 区县 -</option>
+										</select>
+
+									</label>
+
+								</div>		
+
+                                      
+                       
+                        </div>
+                        <!-- .col-12 end -->
+                    </div>
+                    <!-- .row end -->
+                    
+                    
+            </div>
+            <!-- .container end -->
+            
+            
+        </section>
+        
+        
+        <script>
+			
+		( function( $ ) {
+		"use strict";
+
+			$( function() {
+
+				//The target select event
+				$( document ).on( 'change.DYNAMIC_DD_LIST', '#dynamic-dd-china-city', function( e ) {
+
+					e.preventDefault();
+
+					var $this        = $( this[ this.selectedIndex ] ),
+						$areaSel     = $( '#dynamic-dd-china-area'),
+						curVal       = $this.val(),
+						curArea      = $this.data( 'area' );
+
+
+					var optionsHtml = '';
+					for ( var k = 0; k < curArea.length; k++ ) {
+						optionsHtml += "<option value='"+curArea[k]+"'>"+curArea[k]+"</option>";
+					}
+
+					$areaSel.html( optionsHtml );
+
+					//Initialize the custom select
+					$( document ).customSelectInit();
+					$areaSel.attr( 'selected', 'selected' ).change();
+					
+					
+					
+					
+					//Console
+					var areaTxt = '';
+					for ( var k = 0; k < curArea.length; k++ ) {
+						areaTxt += JSON.stringify( curArea[k] ) + ',';
+					}
+
+					areaTxt = areaTxt.replace(/,\s*$/, '' );
+					$( '#dynamic-callback2').text( '[' + areaTxt + ']' );
+	
+					
+					
+					return false;
+
+
+				});			
+			} );
+
+		} ) ( jQuery );
+				
+			
+			
+		</script>
+        
+        
+        
+        
+        @@include('./src/components/_global/include-copyright.html')
+        
+        
+    </div>
+    <!-- .wrapper end -->
+       
+       
+    @@include('./src/components/_global/include-footer.html')
+
