@@ -176,7 +176,7 @@ $ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
         
      
          <!--[if lt IE 10]>
-           <link rel="stylesheet" href="../dist/uix-kit.IE.css?ver=1.0.0" media="all" />
+           <link rel="stylesheet" href="assets/css/IE.css?ver=1.0.0" media="all" />
         <![endif]-->
         
         
