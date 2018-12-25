@@ -2,10 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Based on            :  Uix Kit
- * ## Version             :  3.0.1
- * ## Last Update         :  December 25, 2018
- * ## Powered by          :  UIUX Lab
+ * ## Version             :  3.0.2
+ * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
+ * ## Last Update         :  December 26, 2018
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -5946,7 +5945,7 @@ ol.uix-flexslider__control-paging {
 
 @media all and (max-width: 768px) {
   .uix-special-footer__container {
-    in: 3rem 0; }
+    margin: 3rem 0; }
     .uix-special-footer__container .float-left,
     .uix-special-footer__container .float-right {
       position: relative !important;
@@ -8607,13 +8606,12 @@ dl.uix-list-abreast {
 .uix-periodical-scroll {
   position: relative; }
   .uix-periodical-scroll ul {
-    display: block;
-    overflow: hidden;
-    height: 0; }
+    display: block; }
     .uix-periodical-scroll ul li {
       display: block;
-      min-height: 6rem;
-      /* The height of each scroll */ }
+      opacity: 0;
+      position: absolute;
+      /* required */ }
       .uix-periodical-scroll ul li span {
         display: block;
         background: linear-gradient(to right, #EC5E79 0%, #E8588C 100%);

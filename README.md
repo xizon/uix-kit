@@ -2,7 +2,7 @@
 
 
 [![Travis CI](https://api.travis-ci.org/xizon/uix-kit.svg?branch=master)](https://travis-ci.org/xizon/uix-kit/)
-[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=3.0.1&x2=0)](https://www.npmjs.com/package/uix-kit)
+[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=3.0.2&x2=0)](https://www.npmjs.com/package/uix-kit)
 [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
 
 
@@ -139,28 +139,13 @@ $ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <!-- Mobile Settings end -->
         
-		<!-- Core library
-		============================================= -->
-		<script src="assets/js/wp-jquery/jquery.min.js?ver=2.1.3"></script>
-		<script src="assets/js/wp-jquery/jquery.migrate.min.js?ver=1.4.1"></script>
-		<script src="assets/js/min/prefixfree.min.js?ver=1.0.7"></script>
-		<!-- Core library  end -->
-		
-		
 		<!-- Compatibility
 		============================================= -->
+		<script src="assets/js/min/modernizr.min.js?ver=3.5.0"></script>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        
-        <script src="assets/js/min/modernizr.min.js?ver=3.5.0"></script>
-        
-        <!--[if lt IE 9]>
-            <script src="assets/js/min/respond.min.js?ver=1.4.2"></script>
-        <![endif]-->
-        
         <!-- Compatibility  end -->
 
-
-
+		
 		<!-- Core & Theme CSS
 		============================================= -->
         
@@ -181,6 +166,11 @@ $ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
         
         
         <!-- Core & Theme CSS  end -->
+		
+		<!-- Break free from CSS prefix hell!
+		============================================= -->
+		 <script src="assets/js/min/prefixfree.min.js?ver=1.0.7"></script>
+        
         
      
   </head>     
@@ -192,7 +182,9 @@ $ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
 
   
 
-    <!-- Basic Script -->
+    <!-- Vendor -->
+	<script src="assets/js/wp-jquery/jquery.min.js?ver=3.3.1"></script>
+	<script src="assets/js/wp-jquery/jquery.migrate.min.js?ver=1.4.1"></script>
 	<script src="assets/js/min/jquery.easing.min.js?ver=1.3"></script>
     <script src="assets/js/min/jquery.waitforimages.min.js?ver=1.0"></script>
     <script src="assets/js/min/video.min.js?ver=5.19"></script> 

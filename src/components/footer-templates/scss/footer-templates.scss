@@ -53,9 +53,10 @@
 @media all and (max-width: 768px) {
 
 	
-	.uix-special-footer__container {in: 3rem 0;
+	.uix-special-footer__container {
 
-	
+		margin: 3rem 0;
+		
 		.float-left,
 		.float-right {
 			position: relative !important;

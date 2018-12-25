@@ -2,10 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Based on            :  Uix Kit
- * ## Version             :  3.0.1
- * ## Last Update         :  December 25, 2018
- * ## Powered by          :  UIUX Lab
+ * ## Version             :  3.0.2
+ * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
+ * ## Last Update         :  December 26, 2018
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -26097,7 +26096,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.PERIODICAL_SCROLL               = APP.PERIODICAL_SCROLL || {};
-	APP.PERIODICAL_SCROLL.version       = '0.0.1';
+	APP.PERIODICAL_SCROLL.version       = '0.0.2';
     APP.PERIODICAL_SCROLL.documentReady = function( $ ) {
 
 		$( '[data-periodical-scroll-container]' ).each( function() {
@@ -26118,38 +26117,45 @@ APP = ( function ( APP, $, window, document ) {
 				timing = 2000;
 			}	
 			
-			//Initialize the container height
-			$wrap.css({
-				'height'   : itemHeight + 'px',
-				'overflow' : 'hidden'
+			var $item     = $wrap.find( '> li' ),
+				moveY     = itemHeight*2,
+				timeline  = new TimelineLite({
+				onComplete: function() {
+					setTimeout( function() {
+						timeline.restart();
+					}, timing );
+					
+				}
 			});
+
+			TweenLite.defaultEase = Circ.easeInOut;
+
+			timeline
+					.add( TweenMax.staggerFromTo( $item, speed/1000, {
+						opacity : 0,
+						y       : moveY
+					},
+					{
+						opacity : 1,
+						y       : 0,
+					}, timing/1000 ))
 			
+					.add( TweenMax.staggerTo( $item, speed/1000, {
+						delay    : timing/1000,
+						opacity  : 0,
+						y        : -moveY,
+					}, timing/1000 ), 0 );
 			
-			
-			var stop      = false,
-				obj       = $wrap;
-
-			// change item
-			setInterval( periodicalTextChange, timing );
-
-			function periodicalTextChange() {
-				
-				if ( stop ) return;
-
-				var itemToMove = obj[0].firstElementChild;
-				itemToMove.style.marginTop = -itemHeight + 'px';
-			  
-				// move the child to the end of the items' list
-				setTimeout( function() {
-					itemToMove.removeAttribute( 'style' );
-					obj[0].appendChild( itemToMove );
-				}, speed );
-			}
-
-			obj.on( 'mouseenter', function() { stop = true; } )
-			   .on( 'mouseleave', function() { stop = false; } );		
 
 			
+			$wrap.on( 'mouseenter', function() { 
+				timeline.pause();
+			} )
+		    .on( 'mouseleave', function() { 
+				timeline.play();
+			} );
+			
+
 			
 		});
 		

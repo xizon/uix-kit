@@ -26,7 +26,6 @@ Uix Kit bundles the following third-party resources:
 - [Shuffle.js](https://vestride.github.io/Shuffle/)
 - [waitForImages](https://github.com/alexanderdickson/waitForImages)
 - [modernizr](https://modernizr.com/)
-- [Respond.js](https://github.com/scottjehl/Respond)
 - [animejs](https://github.com/juliangarnier/anime)
 - [waypoints](https://github.com/imakewebthings/waypoints)
 - [Video.js](https://github.com/videojs)

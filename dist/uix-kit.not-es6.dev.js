@@ -25939,7 +25939,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.PERIODICAL_SCROLL               = APP.PERIODICAL_SCROLL || {};
-	APP.PERIODICAL_SCROLL.version       = '0.0.1';
+	APP.PERIODICAL_SCROLL.version       = '0.0.2';
     APP.PERIODICAL_SCROLL.documentReady = function( $ ) {
 
 		$( '[data-periodical-scroll-container]' ).each( function() {
@@ -25960,38 +25960,45 @@ APP = ( function ( APP, $, window, document ) {
 				timing = 2000;
 			}	
 			
-			//Initialize the container height
-			$wrap.css({
-				'height'   : itemHeight + 'px',
-				'overflow' : 'hidden'
+			var $item     = $wrap.find( '> li' ),
+				moveY     = itemHeight*2,
+				timeline  = new TimelineLite({
+				onComplete: function() {
+					setTimeout( function() {
+						timeline.restart();
+					}, timing );
+					
+				}
 			});
+
+			TweenLite.defaultEase = Circ.easeInOut;
+
+			timeline
+					.add( TweenMax.staggerFromTo( $item, speed/1000, {
+						opacity : 0,
+						y       : moveY
+					},
+					{
+						opacity : 1,
+						y       : 0,
+					}, timing/1000 ))
 			
+					.add( TweenMax.staggerTo( $item, speed/1000, {
+						delay    : timing/1000,
+						opacity  : 0,
+						y        : -moveY,
+					}, timing/1000 ), 0 );
 			
-			
-			var stop      = false,
-				obj       = $wrap;
-
-			// change item
-			setInterval( periodicalTextChange, timing );
-
-			function periodicalTextChange() {
-				
-				if ( stop ) return;
-
-				var itemToMove = obj[0].firstElementChild;
-				itemToMove.style.marginTop = -itemHeight + 'px';
-			  
-				// move the child to the end of the items' list
-				setTimeout( function() {
-					itemToMove.removeAttribute( 'style' );
-					obj[0].appendChild( itemToMove );
-				}, speed );
-			}
-
-			obj.on( 'mouseenter', function() { stop = true; } )
-			   .on( 'mouseleave', function() { stop = false; } );		
 
 			
+			$wrap.on( 'mouseenter', function() { 
+				timeline.pause();
+			} )
+		    .on( 'mouseleave', function() { 
+				timeline.play();
+			} );
+			
+
 			
 		});
 		

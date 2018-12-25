@@ -47,10 +47,9 @@ let customWebsiteVersion     = json.version,
 	customWebsiteComment     = `
 ## Project Name        :  ` + customWebsiteTitle + `
 ## Project Description :  ` + customWebsiteDesc + `
-## Based on            :  ` + customWebsiteGenerator + `
 ## Version             :  ` + customWebsiteVersion + `
+## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
 ## Last Update         :  ` + moment().format( "MMMM D, YYYY" ) + `
-## Powered by          :  ` + customWebsiteAuthor + `
 ## Created by          :  UIUX Lab (https://uiux.cc)
 ## Contact Us          :  uiuxlab@gmail.com
 ## Released under the MIT license.

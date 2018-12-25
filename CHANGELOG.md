@@ -1,5 +1,13 @@
 # Changelog
 
+#### = 3.0.2 (December 25, 2018) =
+
+* New: Fixed some bugs of styles.
+* Tweak: Updated scripts and structures for some modules.
+* Tweak: Removed some extra infrequent files.
+* Tweak: Simplified HTML structure.
+* Tweak: Update TweenMax to version 2.0.2.
+
 
 #### = 3.0.1 (December 25, 2018) =
 

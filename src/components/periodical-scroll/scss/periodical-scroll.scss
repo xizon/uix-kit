@@ -7,12 +7,11 @@
 	
 	ul {
 		display: block;
-		overflow: hidden;
-		height: 0;
 
 		li {
 			display: block;
-			min-height: 6rem;/* The height of each scroll */
+			opacity: 0;
+			position: absolute;/* required */
 			
 			span {
 				display: block;
