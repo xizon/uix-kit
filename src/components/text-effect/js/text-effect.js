@@ -8,7 +8,7 @@
 /**
  * APP.TEXT_EFFECT
  * @global
- * @requires examples/assets/js/min/anime.min.js
+ * @requires ./examples/assets/js/min/anime.min.js
  * @example 
 
  //The data-text-eff attribute on the same page cannot be duplicated.

@@ -4,7 +4,7 @@
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
  * ## Based on            :  Uix Kit
  * ## Version             :  3.0.0
- * ## Last Update         :  December 24, 2018
+ * ## Last Update         :  December 25, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -171,8 +171,8 @@
 /**
  * @global
  *
- * //Used for all modules from _components/[__]/scss
- * @requires examples/assets/css/bootstrap.min.css
+ * //Used for all modules from ./src/components/[__]/scss
+ * @requires ./examples/assets/css/bootstrap.min.css
  * 
  */
 ::placeholder {
@@ -3237,7 +3237,7 @@ h6 {
   visibility: hidden; }
 
 /* Display cover and play buttons when some mobile device browsers cannot automatically play video */
-.uix-video__cover .uix-video__cover-placeholder {
+.uix-video__cover .uix-video__cover__placeholder {
   position: absolute;
   z-index: 5;
   left: 0;
@@ -3250,7 +3250,7 @@ h6 {
   background-repeat: no-repeat;
   background-size: cover; }
 
-.uix-video__cover .cover-play {
+.uix-video__cover .uix-video__cover__playbtn {
   display: none;
   position: absolute;
   z-index: 11;
@@ -3263,7 +3263,7 @@ h6 {
   margin-top: -22px;
   font-size: 3rem;
   text-shadow: 1px 0 3px rgba(0, 0, 0, 0.3); }
-  .uix-video__cover .cover-play::before {
+  .uix-video__cover .uix-video__cover__playbtn::before {
     display: inline-block;
     content: "\f01d";
     font-family: 'FontAwesome';

@@ -7,7 +7,7 @@
 /**
  * APP._3D_CAROUSEL
  * @global
- * @requires examples/assets/js/min/hammer.min.js
+ * @requires ./examples/assets/js/min/hammer.min.js
  */
 
 

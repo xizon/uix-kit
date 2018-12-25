@@ -8,9 +8,9 @@
 /**
  * APP.POST_LIST_AJAX 
  * @global
- * @requires examples/assets/js/min/template7.min.js
- * @requires examples/assets/js/wp-jquery/masonry.min.js
- * @requires examples/assets/js/wp-jquery/imagesloaded.min.js
+ * @requires ./examples/assets/js/min/template7.min.js
+ * @requires ./examples/assets/js/wp-jquery/masonry.min.js
+ * @requires ./examples/assets/js/wp-jquery/imagesloaded.min.js
  */
 
 

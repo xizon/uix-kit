@@ -8,8 +8,8 @@
 /**
  * APP.SCROLLSPY_ANIM
  * @global
- * @requires examples/assets/js/min/pixi.min.js
- * @requires _components/03.plugins-GSAP
+ * @requires ./examples/assets/js/min/pixi.min.js
+ * @requires ./src/components/_plugins-GSAP
  */
 
 APP = ( function ( APP, $, window, document ) {

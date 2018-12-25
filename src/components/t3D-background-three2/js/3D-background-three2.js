@@ -6,8 +6,8 @@
 /**
  * APP._3D_BACKGROUND_THREE2
  * @global
- * @requires examples/assets/js/min/three.min.js
- * @requires _components/03.plugins-THREE
+ * @requires ./examples/assets/js/min/three.min.js
+ * @requires ./src/components/_plugins-THREE
  */
 
 

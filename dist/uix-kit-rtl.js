@@ -4,7 +4,7 @@
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
  * ## Based on            :  Uix Kit
  * ## Version             :  3.0.0
- * ## Last Update         :  December 24, 2018
+ * ## Last Update         :  December 25, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com

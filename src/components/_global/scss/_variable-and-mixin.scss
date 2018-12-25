@@ -78,7 +78,10 @@
 
 // FONTS
 // ---------------------------
-// Files: 00.global/scss/01.basic.scss, 00.global/scss/05.typography.scss, 01.form/scss/form.scss
+// Files: 
+// ./src/components/_global/scss/basic.scss
+// ./src/components/_global/scss/typography.scss
+// ./src/components/form/scss/form.scss
 //
 //Default font-size for HTML
 $basic-font-size       : 16px;
@@ -97,7 +100,8 @@ $font-size-h6          : 0.75rem;
 
 // GLOBAL SPACING HIERARCHY WITH <section>
 // ---------------------------
-// Files: 00.global/scss/06.spacing.scss
+// Files: 
+// ./src/components/_global/scss/spacing.scss
 //
 $spacing-large          : 11.375rem;
 $spacing-small          : 4.8125rem;

@@ -12,7 +12,7 @@
 /* Display cover and play buttons when some mobile device browsers cannot automatically play video */
 .uix-video__cover {
 
-	.uix-video__cover-placeholder {
+	.uix-video__cover__placeholder {
 		position: absolute;
 		z-index: 5;
 		left: 0;
@@ -24,7 +24,7 @@
 		@include background-cover();	
 	}
 
-	.cover-play {
+	.uix-video__cover__playbtn {
 		display: none;
 		position: absolute;
 		z-index: 11;

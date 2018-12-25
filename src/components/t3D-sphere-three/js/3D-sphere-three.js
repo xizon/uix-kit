@@ -7,8 +7,8 @@
 /**
  * APP._3D_SPHERE_THREE
  * @global
- * @requires examples/assets/js/min/three.min.js
- * @requires _components/03.plugins-THREE
+ * @requires ./examples/assets/js/min/three.min.js
+ * @requires ./src/components/_plugins-THREE
  */
 
 APP = ( function ( APP, $, window, document ) {

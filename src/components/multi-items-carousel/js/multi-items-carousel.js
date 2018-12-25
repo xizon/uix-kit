@@ -6,7 +6,7 @@
 /**
  * APP.MULTI_ITEMS_CAROUSEL
  * @global
- * @requires examples/assets/js/min/hammer.min.js
+ * @requires ./examples/assets/js/min/hammer.min.js
  */
 
 

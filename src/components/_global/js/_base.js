@@ -78,11 +78,11 @@ var browser = {
  * APP
  * @global
  *
- * //Used for all modules from _components/[__]/js
- * @requires examples/assets/js/min/jquery.waitforimages.min.js
- * @requires examples/assets/js/min/video.min.js
- * @requires examples/assets/js/min/jquery.waypoints.min.js
- * @requires examples/assets/js/min/TweenMax.min.js
+ * //Used for all modules from ./src/components/[__]/js
+ * @requires ./examples/assets/js/min/jquery.waitforimages.min.js
+ * @requires ./examples/assets/js/min/video.min.js
+ * @requires ./examples/assets/js/min/jquery.waypoints.min.js
+ * @requires ./examples/assets/js/min/TweenMax.min.js
  * 
  */
 var APP = (function ( $, window, document ) {

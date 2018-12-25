@@ -8,7 +8,7 @@
 /**
  * APP.FLEXSLIDER
  * @global
- * @requires examples/assets/js/min/jquery.easing.min.js
+ * @requires ./examples/assets/js/min/jquery.easing.min.js
  */
 
 
@@ -397,11 +397,11 @@ APP = ( function ( APP, $, window, document ) {
 
 				//Display cover and play buttons when some mobile device browsers cannot automatically play video
 				if ( $( '#' + coverPlayBtnID ).length == 0 ) {
-					$( '<div id="'+coverPlayBtnID+'" class="uix-video__cover"><span class="uix-video__cover-placeholder" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="cover-play"></span></div>' ).insertBefore( $this );
+					$( '<div id="'+coverPlayBtnID+'" class="uix-video__cover"><span class="uix-video__cover__placeholder" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="uix-video__cover__playbtn"></span></div>' ).insertBefore( $this );
 
 
 					var btnEv = ( Modernizr.touchevents ) ? 'touchstart' : 'click';
-					$( '#' + coverPlayBtnID + ' .cover-play' ).on( btnEv, function( e ) {
+					$( '#' + coverPlayBtnID + ' .uix-video__cover__playbtn' ).on( btnEv, function( e ) {
 						e.preventDefault();
 
 						myPlayer.play();

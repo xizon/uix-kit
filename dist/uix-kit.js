@@ -4,7 +4,7 @@
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
  * ## Based on            :  Uix Kit
  * ## Version             :  3.0.0
- * ## Last Update         :  December 24, 2018
+ * ## Last Update         :  December 25, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -308,11 +308,11 @@ var browser = {
  * APP
  * @global
  *
- * //Used for all modules from _components/[__]/js
- * @requires examples/assets/js/min/jquery.waitforimages.min.js
- * @requires examples/assets/js/min/video.min.js
- * @requires examples/assets/js/min/jquery.waypoints.min.js
- * @requires examples/assets/js/min/TweenMax.min.js
+ * //Used for all modules from ./src/components/[__]/js
+ * @requires ./examples/assets/js/min/jquery.waitforimages.min.js
+ * @requires ./examples/assets/js/min/video.min.js
+ * @requires ./examples/assets/js/min/jquery.waypoints.min.js
+ * @requires ./examples/assets/js/min/TweenMax.min.js
  * 
  */
 var APP = (function ( $, window, document ) {
@@ -2258,12 +2258,12 @@ APP = ( function ( APP, $, window, document ) {
 			//Display cover and play buttons when some mobile device browsers cannot automatically play video
 			if ( $( '#' + coverPlayBtnID ).length == 0 ) {
 				
-				$( '<div id="'+coverPlayBtnID+'" class="uix-video__cover"><span class="uix-video__cover-placeholder" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="cover-play"></span></div>' ).insertBefore( $this );
+				$( '<div id="'+coverPlayBtnID+'" class="uix-video__cover"><span class="uix-video__cover__placeholder" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="uix-video__cover__playbtn"></span></div>' ).insertBefore( $this );
 				
 				
 	
 				var btnEv = ( Modernizr.touchevents ) ? 'touchstart' : 'click';
-				$( '#' + coverPlayBtnID + ' .cover-play' ).on( btnEv, function( e ) {
+				$( '#' + coverPlayBtnID + ' .uix-video__cover__playbtn' ).on( btnEv, function( e ) {
 					e.preventDefault();
 					
 					myPlayer.play();
@@ -2274,7 +2274,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 				//Prevent some devices from automatically playing video and trigger with buttons
 				if ( !dataAuto || browser.isAndroid ) {
-					$( '#' + coverPlayBtnID + ' .cover-play' ).show();
+					$( '#' + coverPlayBtnID + ' .uix-video__cover__playbtn' ).show();
 				}
 
 			}
@@ -11368,7 +11368,7 @@ APP = ( function ( APP, $, window, document ) {
 /**
  * APP.ADVANCED_CONTENT_SLIDER
  * @global
- * @requires examples/assets/js/min/hammer.min.js
+ * @requires ./examples/assets/js/min/hammer.min.js
  */
 
 
@@ -12307,11 +12307,11 @@ APP = ( function ( APP, $, window, document ) {
 
 				//Display cover and play buttons when some mobile device browsers cannot automatically play video
 				if ( $( '#' + coverPlayBtnID ).length == 0 ) {
-					$( '<div id="'+coverPlayBtnID+'" class="uix-video__cover"><span class="uix-video__cover-placeholder" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="cover-play"></span></div>' ).insertBefore( $this );
+					$( '<div id="'+coverPlayBtnID+'" class="uix-video__cover"><span class="uix-video__cover__placeholder" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="uix-video__cover__playbtn"></span></div>' ).insertBefore( $this );
 
 
 					var btnEv = ( Modernizr.touchevents ) ? 'touchstart' : 'click';
-					$( '#' + coverPlayBtnID + ' .cover-play' ).on( btnEv, function( e ) {
+					$( '#' + coverPlayBtnID + ' .uix-video__cover__playbtn' ).on( btnEv, function( e ) {
 						e.preventDefault();
 
 						myPlayer.play();
@@ -12500,10 +12500,10 @@ APP = ( function ( APP, $, window, document ) {
 /**
  * APP.ADVANCED_SLIDER_FILTER
  * @global
- * @requires examples/assets/js/min/pixi.min.js
- * @requires examples/assets/js/min/three.min.js
- * @requires _components/03.plugins-THREE
- * @requires _components/03.plugins-GSAP
+ * @requires ./examples/assets/js/min/pixi.min.js
+ * @requires ./examples/assets/js/min/three.min.js
+ * @requires ./src/components/_plugins-THREE
+ * @requires ./src/components/_plugins-GSAP
  */
 
 APP = ( function ( APP, $, window, document ) {
@@ -15333,11 +15333,11 @@ APP = ( function ( APP, $, window, document ) {
 
 				//Display cover and play buttons when some mobile device browsers cannot automatically play video
 				if ( $( '#' + coverPlayBtnID ).length == 0 ) {
-					$( '<div id="'+coverPlayBtnID+'" class="uix-video__cover"><span class="uix-video__cover-placeholder" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="cover-play"></span></div>' ).insertBefore( $this );
+					$( '<div id="'+coverPlayBtnID+'" class="uix-video__cover"><span class="uix-video__cover__placeholder" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="uix-video__cover__playbtn"></span></div>' ).insertBefore( $this );
 
 
 					var btnEv = ( Modernizr.touchevents ) ? 'touchstart' : 'click';
-					$( '#' + coverPlayBtnID + ' .cover-play' ).on( btnEv, function( e ) {
+					$( '#' + coverPlayBtnID + ' .uix-video__cover__playbtn' ).on( btnEv, function( e ) {
 						e.preventDefault();
 
 						myPlayer.play();
@@ -17222,7 +17222,7 @@ APP = ( function ( APP, $, window, document ) {
 /**
  * APP.FLEXSLIDER
  * @global
- * @requires examples/assets/js/min/jquery.easing.min.js
+ * @requires ./examples/assets/js/min/jquery.easing.min.js
  */
 
 
@@ -17611,11 +17611,11 @@ APP = ( function ( APP, $, window, document ) {
 
 				//Display cover and play buttons when some mobile device browsers cannot automatically play video
 				if ( $( '#' + coverPlayBtnID ).length == 0 ) {
-					$( '<div id="'+coverPlayBtnID+'" class="uix-video__cover"><span class="uix-video__cover-placeholder" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="cover-play"></span></div>' ).insertBefore( $this );
+					$( '<div id="'+coverPlayBtnID+'" class="uix-video__cover"><span class="uix-video__cover__placeholder" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="uix-video__cover__playbtn"></span></div>' ).insertBefore( $this );
 
 
 					var btnEv = ( Modernizr.touchevents ) ? 'touchstart' : 'click';
-					$( '#' + coverPlayBtnID + ' .cover-play' ).on( btnEv, function( e ) {
+					$( '#' + coverPlayBtnID + ' .uix-video__cover__playbtn' ).on( btnEv, function( e ) {
 						e.preventDefault();
 
 						myPlayer.play();
@@ -22509,9 +22509,9 @@ var datepicker = $.datepicker;
 /**
  * APP.GALLERY
  * @global
- * @requires examples/assets/js/wp-jquery/masonry.min.js
- * @requires examples/assets/js/wp-jquery/imagesloaded.min.js
- * @requires examples/assets/js/min/jquery.shuffle.min.js
+ * @requires ./examples/assets/js/wp-jquery/masonry.min.js
+ * @requires ./examples/assets/js/wp-jquery/imagesloaded.min.js
+ * @requires ./examples/assets/js/min/jquery.shuffle.min.js
  */
 
 
@@ -23377,9 +23377,9 @@ APP = ( function ( APP, $, window, document ) {
 /**
  * APP.POST_LIST_AJAX 
  * @global
- * @requires examples/assets/js/min/template7.min.js
- * @requires examples/assets/js/wp-jquery/masonry.min.js
- * @requires examples/assets/js/wp-jquery/imagesloaded.min.js
+ * @requires ./examples/assets/js/min/template7.min.js
+ * @requires ./examples/assets/js/wp-jquery/masonry.min.js
+ * @requires ./examples/assets/js/wp-jquery/imagesloaded.min.js
  */
 
 
@@ -24072,7 +24072,7 @@ APP = ( function ( APP, $, window, document ) {
 /**
  * APP.MULTI_ITEMS_CAROUSEL
  * @global
- * @requires examples/assets/js/min/hammer.min.js
+ * @requires ./examples/assets/js/min/hammer.min.js
  */
 
 
@@ -26734,8 +26734,8 @@ APP = ( function ( APP, $, window, document ) {
 /**
  * APP.SCROLLSPY_ANIM
  * @global
- * @requires examples/assets/js/min/pixi.min.js
- * @requires _components/03.plugins-GSAP
+ * @requires ./examples/assets/js/min/pixi.min.js
+ * @requires ./src/components/_plugins-GSAP
  */
 
 APP = ( function ( APP, $, window, document ) {
@@ -28433,8 +28433,8 @@ APP = ( function ( APP, $, window, document ) {
 /**
  * APP._3D_BACKGROUND_THREE
  * @global
- * @requires examples/assets/js/min/three.min.js
- * @requires _components/03.plugins-THREE
+ * @requires ./examples/assets/js/min/three.min.js
+ * @requires ./src/components/_plugins-THREE
  */
 
 
@@ -28665,8 +28665,8 @@ APP = ( function ( APP, $, window, document ) {
 /**
  * APP._3D_BACKGROUND_THREE2
  * @global
- * @requires examples/assets/js/min/three.min.js
- * @requires _components/03.plugins-THREE
+ * @requires ./examples/assets/js/min/three.min.js
+ * @requires ./src/components/_plugins-THREE
  */
 
 
@@ -29205,7 +29205,7 @@ APP = ( function ( APP, $, window, document ) {
 /**
  * APP._3D_CAROUSEL
  * @global
- * @requires examples/assets/js/min/hammer.min.js
+ * @requires ./examples/assets/js/min/hammer.min.js
  */
 
 
@@ -29454,8 +29454,8 @@ APP = ( function ( APP, $, window, document ) {
 /**
  * APP._3D_MODEL
  * @global
- * @requires examples/assets/js/min/three.min.js
- * @requires _components/03.plugins-THREE
+ * @requires ./examples/assets/js/min/three.min.js
+ * @requires ./src/components/_plugins-THREE
  */
 
 APP = ( function ( APP, $, window, document ) {
@@ -29727,8 +29727,8 @@ APP = ( function ( APP, $, window, document ) {
 /**
  * APP._3D_PAGES
  * @global
- * @requires examples/assets/js/min/three.min.js
- * @requires _components/03.plugins-THREE
+ * @requires ./examples/assets/js/min/three.min.js
+ * @requires ./src/components/_plugins-THREE
  */
 
 APP = ( function ( APP, $, window, document ) {
@@ -29869,8 +29869,8 @@ APP = ( function ( APP, $, window, document ) {
 /**
  * APP._3D_PARTICLE
  * @global
- * @requires examples/assets/js/min/three.min.js
- * @requires _components/03.plugins-THREE
+ * @requires ./examples/assets/js/min/three.min.js
+ * @requires ./src/components/_plugins-THREE
  */
 
 
@@ -30084,8 +30084,8 @@ APP = ( function ( APP, $, window, document ) {
 /**
  * APP._3D_SPHERE_THREE
  * @global
- * @requires examples/assets/js/min/three.min.js
- * @requires _components/03.plugins-THREE
+ * @requires ./examples/assets/js/min/three.min.js
+ * @requires ./src/components/_plugins-THREE
  */
 
 APP = ( function ( APP, $, window, document ) {
@@ -30687,7 +30687,7 @@ APP = ( function ( APP, $, window, document ) {
 /**
  * APP.TEXT_EFFECT
  * @global
- * @requires examples/assets/js/min/anime.min.js
+ * @requires ./examples/assets/js/min/anime.min.js
  * @example 
 
  //The data-text-eff attribute on the same page cannot be duplicated.

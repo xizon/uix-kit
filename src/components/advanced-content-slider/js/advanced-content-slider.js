@@ -7,7 +7,7 @@
 /**
  * APP.ADVANCED_CONTENT_SLIDER
  * @global
- * @requires examples/assets/js/min/hammer.min.js
+ * @requires ./examples/assets/js/min/hammer.min.js
  */
 
 
