@@ -60,13 +60,16 @@ let customWebsiteVersion     = json.version,
 // Get all the HTML template files
 
 let tempPages = glob.sync( './'+globs.build+'/components/**/*.html' );
-let targetFilesName = [];
+let targetTempFilesName = [];
+let targetAllTempFilesName = [];
 
 tempPages.map( ( event ) => {
 	let filename = event.split( '/' ).pop();
 	
+	targetAllTempFilesName.push( [ event, event.split( '/' ).pop() ] );
+	
 	if ( filename.indexOf( 'include-' ) < 0 ) {
-		targetFilesName.push( [ event, event.split( '/' ).pop() ] );
+		targetTempFilesName.push( [ event, event.split( '/' ).pop() ] );
 	}
 	
 });
@@ -267,7 +270,7 @@ webpackConfig.plugins.push(
  *  Batch processing HTML template files
  *************************************
  */
-targetFilesName.map( ( event ) => {
+targetTempFilesName.map( ( event ) => {
 	
 	webpackConfig.plugins.push(
 		
@@ -356,7 +359,7 @@ app.use( instance );
 //Watch for Files Changes in Node.js
 require('log-timestamp');
 
-targetFilesName.map( ( event ) => {
+targetAllTempFilesName.map( ( event ) => {
 	
 	let htmlTempFiles = `${event[0]}`;
 
@@ -374,7 +377,7 @@ targetFilesName.map( ( event ) => {
 		);
 
 
-		targetFilesName.map( ( event ) => {
+		targetTempFilesName.map( ( event ) => {
 
 			compiler.apply(
 

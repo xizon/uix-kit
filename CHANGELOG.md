@@ -1,5 +1,13 @@
 # Changelog
 
+
+#### = 3.0.1 (December 25, 2018) =
+
+* Tweak: HTML template file monitoring mechanism optimization.
+* Tweak: Modification of some wrong characters in the module's SCSS and JS files.
+
+
+
 #### = 3.0.0 (December 24, 2018) =
 
 * New: Make a foundation for the React architecture.
