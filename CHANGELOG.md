@@ -1,5 +1,16 @@
 # Changelog
 
+
+#### = 3.0.3 (December 27, 2018) =
+
+* Fix: Fixed some minor bugs in version 3.0.x.
+* New: Add a new module "3D Object Anim Interaction".
+* Tweak: Optimized the style sheet for some modules.
+* Tweak: Removed "particles.js" from 3D component.
+* Tweak: Updated the particle effects module and upgraded three.js to the latest version of r99.
+* Tweak: Optimized Uix's proprietary grid system ".uix-core-grid{...}".
+
+
 #### = 3.0.2 (December 25, 2018) =
 
 * New: Fixed some bugs of styles.

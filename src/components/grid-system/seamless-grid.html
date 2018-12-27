@@ -30,7 +30,7 @@
                   </div>
                   <!-- .container end -->
                   
-                  <div class="uix-clear"></div>
+                  <div class="uix-clearfix"></div>
              </div>
         
         </header>
@@ -1545,6 +1545,75 @@
  
         </section>   
         
+		
+        <!-- Content 01
+        ====================================================== -->
+        <section>
+            <div class="container uix-t-c">
+                    <div class="row">
+                        <div class="col-md-8 offset-md-2">
+                            <h2>Inline Block</h2>
+                            <p>
+                           Use the <code>.uix-core-grid__col-</code>style class name directly, without the need to add a <code>.uix-core-grid</code> wrapper.
+							</p>
+                            
+                        </div>
+                    </div>
+                    <!-- .row end -->
+              
+                    
+            </div>
+            <!-- .container end -->
+ 
+        </section>
+     
+       
+    
+       <!-- Content 02
+        ====================================================== -->
+        <section class="uix-spacing--m">
+            <div class="container">
+            
+                <div style="background-color: #000;">
+
+					<div class="uix-core-grid__col-2">
+						<div style="background: blue; margin: 0 0 7.5px; box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,.5);">1/4</div>
+					</div>
+                
+					<div class="uix-clearfix"></div>
+					
+					<div class="text-center">
+						<div class="uix-core-grid__col-5 uix-core-grid__inline">
+							<div style="background: teal; margin: 0 0 7.5px; box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,.5);">2/5, Center alignment.</div>
+						</div> 
+					</div>
+
+					<div class="uix-clearfix"></div>
+                  
+					<div class="uix-core-grid__col-5 uix-core-grid__mobile-stack">
+						<div style="background: olive; margin: 0 0 7.5px; box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,.5);">2/5, The width becomes 100% on mobile.</div>
+					</div> 
+                  
+					<div class="uix-clearfix"></div>
+					
+					
+					
+					<div class="uix-core-grid__col-5 uix-core-grid__mobile-half">
+						<div style="background: green; margin: 0 0 7.5px; box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,.5);">2/5, The width becomes 50% on mobile.</div>
+					</div> 		
+					
+					<div class="uix-clearfix"></div>
+					
+				</div>
+        
+          
+           
+            </div>
+            <!-- .container end -->
+ 
+        </section>   
+        
+		
           
         
         @@include('./src/components/_global/include-copyright.html')

@@ -2,7 +2,7 @@
 
 
 [![Travis CI](https://api.travis-ci.org/xizon/uix-kit.svg?branch=master)](https://travis-ci.org/xizon/uix-kit/)
-[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=3.0.2&x2=0)](https://www.npmjs.com/package/uix-kit)
+[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=3.0.3&x2=0)](https://www.npmjs.com/package/uix-kit)
 [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
 
 
@@ -138,7 +138,16 @@ $ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
 		============================================= -->
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <!-- Mobile Settings end -->
-        
+		
+		
+		<!-- Vendor
+		============================================= -->
+		<script src="assets/js/wp-jquery/jquery.min.js?ver=3.3.1"></script>
+		<script src="assets/js/wp-jquery/jquery.migrate.min.js?ver=1.4.1"></script>
+        <!-- Vendor  end -->
+
+		
+		
 		<!-- Compatibility
 		============================================= -->
 		<script src="assets/js/min/modernizr.min.js?ver=3.5.0"></script>
@@ -183,8 +192,6 @@ $ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
   
 
     <!-- Vendor -->
-	<script src="assets/js/wp-jquery/jquery.min.js?ver=3.3.1"></script>
-	<script src="assets/js/wp-jquery/jquery.migrate.min.js?ver=1.4.1"></script>
 	<script src="assets/js/min/jquery.easing.min.js?ver=1.3"></script>
     <script src="assets/js/min/jquery.waitforimages.min.js?ver=1.0"></script>
     <script src="assets/js/min/video.min.js?ver=5.19"></script> 

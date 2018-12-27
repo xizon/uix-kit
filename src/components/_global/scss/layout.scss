@@ -6,8 +6,7 @@
  * 2. Material Container                         
  * 3. Main Wrapper                               
  * 4. Seamless Grid (Core Grid)
- * 5. Auxiliary Grid System for Inline Elements (Subordinate Grid)
- * 6. Align Wide and Full Classes For Elements
+ * 5. Align Wide and Full Classes For Elements
 */
 
 
@@ -133,21 +132,88 @@
  4. Seamless Grid
  ---------------------------
  */ 
+//Width property that can be used independently
+//It can be used for Inline Elements
+[class*='uix-core-grid__col-'] {
+	box-sizing: border-box;
+    float: left;
+	position: relative;
+}
+
+.uix-core-grid__inline {
+	float: none;
+	display: inline-block;
+}
+
+
+
+.uix-core-grid__col-1 {
+	width: 8.333333333333%;
+}
+
+.uix-core-grid__col-2 {
+	width: 16.66666666666667%;
+}
+
+.uix-core-grid__col-3 {
+	width: 25%;
+}
+
+.uix-core-grid__col-4 {
+	width: 33.333333333333%;
+}
+
+
+.uix-core-grid__col-5 {
+	width: 41.666666666667%;
+}
+
+.uix-core-grid__col-6 {
+	width: 50%;
+}
+
+.uix-core-grid__col-7 {
+	width: 58.333333333333%;
+}
+
+.uix-core-grid__col-8 {
+	width: 66.666666666667%;
+}
+
+.uix-core-grid__col-9 {
+	width: 75%;
+}
+
+.uix-core-grid__col-10 {
+	width: 83.333333333333%;
+}
+
+
+.uix-core-grid__col-11 {
+	width: 91.666666666667%;
+}
+
+.uix-core-grid__col-12 {
+	width: 100%;
+}
+
+@media all and (max-width: 768px) {
+	.uix-core-grid__mobile-half {
+		width: 50%;
+	}
+	.uix-core-grid__mobile-stack {
+		width: 100%;
+	}
+}
+	
 
 
 @mixin seamlessGridGenerate( $classname: '.uix-core-grid', $pad: 15px ) {
 	// @include seamlessGridGenerate( '.uix-core-grid', 15px );
-	
 
     @if ( $classname != '' ) {
 		#{$classname} {
 			width: 100%;
-
-			.uix-core-grid__row,
-			[class*='uix-core-grid__col-'] {
-				box-sizing: border-box;
-			}
-
 
 			.uix-core-grid__row {
 
@@ -181,79 +247,26 @@
 
 
 			}
-
-
+			
+			
+			//Common style attribute
 			[class*='uix-core-grid__col-'] {
-				float: left;
 				padding-right: #{$pad};
 				margin-bottom: #{$pad/2};
 
 				.uix-core-grid__row &:last-of-type {
 					padding-right: 0;
-					
-				    [class*='uix-core-grid__col-'] {
+
+					[class*='uix-core-grid__col-'] {
 						> div {
 							width: calc(100% - #{$pad}); 
 						}	
 					}
-		
-					
+
+
 				}
-			
 
 			}
-
-
-			.uix-core-grid__col-1 {
-				width: 8.333333333333%;
-			}
-
-			.uix-core-grid__col-2 {
-				width: 16.66666666666667%;
-			}
-
-			.uix-core-grid__col-3 {
-				width: 25%;
-			}
-
-			.uix-core-grid__col-4 {
-				width: 33.333333333333%;
-			}
-
-
-			.uix-core-grid__col-5 {
-				width: 41.666666666667%;
-			}
-
-			.uix-core-grid__col-6 {
-				width: 50%;
-			}
-
-			.uix-core-grid__col-7 {
-				width: 58.333333333333%;
-			}
-
-			.uix-core-grid__col-8 {
-				width: 66.666666666667%;
-			}
-
-			.uix-core-grid__col-9 {
-				width: 75%;
-			}
-
-			.uix-core-grid__col-10 {
-				width: 83.333333333333%;
-			}
-
-
-			.uix-core-grid__col-11 {
-				width: 91.666666666667%;
-			}
-
-			.uix-core-grid__col-12 {
-				width: 100%;
-			}
-
 
 			.uix-core-grid__row.uix-core-grid__row--loop .uix-core-grid__col-6:nth-child(2n+1),
 			.uix-core-grid__row.uix-core-grid__row--loop .uix-core-grid__col-4:nth-child(3n+1),
@@ -266,8 +279,7 @@
 
 		}
 
-
-
+		
 
 		@media all and (max-width: 991px) {
 
@@ -293,14 +305,10 @@
 
 			}
 
-
-
-
 		}
 
 
 		@media all and (max-width: 768px) {
-
 
 			#{$classname}:not(.uix-core-grid__row--nobreaking) {
 
@@ -356,9 +364,6 @@
 
 			}
 
-
-
-
 		}
 
 
@@ -370,106 +375,10 @@
 @include seamlessGridGenerate( '.uix-core-grid', 15px );
 
 
-/* 
- ---------------------------
- 5. Auxiliary Grid System for Inline Elements
- ---------------------------
- */ 
-
-.uix-el-grid__row:before,
-.uix-el-grid__row:after {
-    content: " ";
-    display: table;
-}
-
-.uix-el-grid__row:after {
-    clear: both;
-}
-
-.uix-el-grid__row .uix-el-grid__row {
-    margin-left: 0;
-    margin-right: 0;
-}
-
-[class*='uix-el-grid__col-'] {
-    position: relative;
-    float: left;
-    width: 100%;
-    min-height: 1px;
-}
-
-.uix-el-grid__col-center {
-	float: none;
-	display: inline-block;
-}
-
-
-.uix-el-grid__col-1 {
-    width: 8.333333333333%;
-}
-
-.uix-el-grid__col-2 {
-    width: 16.666666666667%;
-}
-
-.uix-el-grid__col-3 {
-    width: 25%;
-}
-
-.uix-el-grid__col-4 {
-    width: 33.333333333333%;
-}
-
-.uix-el-grid__col-5 {
-    width: 41.666666666667%;
-}
-
-.uix-el-grid__col-6 {
-    width: 50%;
-}
-
-.uix-el-grid__col-7 {
-    width: 58.333333333333%;
-}
-
-.uix-el-grid__col-8 {
-    width: 66.666666666667%;
-}
-
-.uix-el-grid__col-9 {
-    width: 75%;
-}
-
-.uix-el-grid__col-10 {
-    width: 83.333333333333%;
-}
-
-.uix-el-grid__col-11 {
-    width: 91.666666666667%;
-}
-
-.uix-el-grid__col-12 {
-    width: 100%;
-}
-
-
-@media all and (max-width: 768px) {
-  
-  
-    .uix-el-grid__col-half {
-        width: 50%;
-    }
-
-	
-    .uix-el-grid__col-stack {
-        width: 100%;
-    }
-
-}
 
 /* 
  ---------------------------
- 6. Align Wide and Full Classes For Elements
+ 5. Align Wide and Full Classes For Elements
  ---------------------------
  */ 
 .uix-alignfull {
@@ -478,6 +387,7 @@
 	max-width: 100vw;
 	width: 100vw;
 }
+
 
 
 

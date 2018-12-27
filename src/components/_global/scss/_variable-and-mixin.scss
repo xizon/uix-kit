@@ -339,13 +339,15 @@ $primary-bg-color      : transparent;
 }
 
 
+
 // Security Width Setting for Absolute Element 
 // ---------------------------
 // Note: Generally used for elements that cannot use ".container", such as 
 //       absolutely elements whose security width cannot be determined
 //
-@mixin securityWidthForElement( $classname: '.demo' ){
-	// @include securityWidthForElement( '.txt' );
+@mixin securityWidthForElement( $classname: '.demo', $mouseEvents: false ){
+	// @include securityWidthForElement( '.txt', false );
+
 
 	@if ( $classname != '' ) {
 		/* New XL container for Bootstrap 4.x */
@@ -356,14 +358,20 @@ $primary-bg-color      : transparent;
 			transform: translateX(-50%);
 			padding-left: 15px;
 			padding-right: 15px;
-			pointer-events: none; /* Prevent layers from hiding the underlying elements */
+
+			/* Prevent layers from hiding the underlying elements */
+			@if ( $mouseEvents ) { 
+				pointer-events: auto;
+			} @else {
+				pointer-events: none;
+			}
 			
 			> div {
 				pointer-events: auto;
 			}
 		}
 
-		@media all and (max-width: 1171px) {
+		@media all and (max-width: 1141px) {
 			#{$classname} {
 				width: calc( 100% - 15px);
 			}
@@ -385,6 +393,7 @@ $primary-bg-color      : transparent;
 	}
 	
 }
+
 
 
 

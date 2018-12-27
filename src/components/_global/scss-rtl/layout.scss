@@ -7,6 +7,11 @@
  4. Seamless Grid
  ---------------------------
  */ 
+
+[class*='uix-core-grid__col-'] {
+	float: right;
+}
+
 @mixin seamlessGridGenerateRTL( $classname: '.uix-core-grid', $pad: 15px ) {
 	// @include seamlessGridGenerate( '.uix-core-grid', 15px );
 	
@@ -14,9 +19,7 @@
 	
 		#{$classname} {
 
-
 			[class*='uix-core-grid__col-'] {
-				float: right;
 				padding-right: auto;
 				padding-left: #{$pad};
 
@@ -27,8 +30,6 @@
 
 
 		}
-
-
 
 
 		@media all and (max-width: 991px) {
@@ -99,15 +100,4 @@
 
 
 
-
-
-/* 
- ---------------------------
- 5. Auxiliary Grid System for Inline Elements
- ---------------------------
- */ 
-[class*='uix-el-grid__col-'] {
-    float: right;
-
-}
 

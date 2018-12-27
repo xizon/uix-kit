@@ -72,6 +72,10 @@
 	height: 185px;
 	background: none;
 	
+	&.is-fixed {
+		
+	}
+	
 	&.uix-header__placeholder--auto-height {
 	    height: 75px;
 	}

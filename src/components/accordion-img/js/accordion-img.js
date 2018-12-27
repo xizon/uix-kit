@@ -8,7 +8,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.ACCORDION_BG               = APP.ACCORDION_BG || {};
-	APP.ACCORDION_BG.version       = '0.0.4';
+	APP.ACCORDION_BG.version       = '0.0.5';
     APP.ACCORDION_BG.documentReady = function( $ ) {
 		
 		
@@ -24,6 +24,7 @@ APP = ( function ( APP, $, window, document ) {
 			var $this           = $( this ),
 				aEvent          = $this.data( 'event' ),
 				outReset        = $this.data( 'out-reset' ),
+				activeIndex     = $this.data( 'actived-item' ),
 				widthShow       = $this.data( 'width-show' ),
 				closeBtn        = $this.data( 'close-btn' ),
 				$li             = $this.find( 'ul' ).children( 'li' ),
@@ -31,6 +32,9 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			
+			if( typeof activeIndex === typeof undefined ) {
+				activeIndex = false;
+			}			
 			
 			if( typeof aEvent === typeof undefined ) {
 				aEvent = 'click';
@@ -88,6 +92,23 @@ APP = ( function ( APP, $, window, document ) {
 				
 			}	
 			
+			/*
+			 * Active the target item
+			 *
+		     * @param  {Number} index     - The index value of the item to be activated.
+			 * @return {Void}             - The constructor.
+			 */
+			function itemActiveItem( index ) {
+				
+				if ( index >= 0 ) {
+					$li.css( 'width', ( 100 - parseFloat( widthShow ) )/(total - 1) + '%' );
+					$li.eq( index ).css( 'width', widthShow ).addClass( 'active' );	
+				}
+
+			}
+			
+			itemActiveItem( parseFloat( activeIndex ) );
+			
 			
 	
 			/*
@@ -98,6 +119,7 @@ APP = ( function ( APP, $, window, document ) {
 			function itemInit() {
 				$li.removeClass( 'active sub-active' ).css( 'width', 100/total + '%' );
 			}
+			
 			
 			
 			

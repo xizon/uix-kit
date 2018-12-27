@@ -16,7 +16,6 @@ APP = ( function ( APP, $, window, document ) {
 			windowHeight = $window.height();
 		
 		
-		
 		/* 
 		 ---------------------------
 		 Video Embed

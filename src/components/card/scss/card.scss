@@ -24,6 +24,13 @@ $card-radius: 8px;
 	border-radius: $card-radius;
 	@include outer-shadow();
 	
+	&::before,
+	&::after {
+		content: " ";
+		display: table;
+		clear: both;
+	}
+	
 	.uix-card1__headline {
 		min-height: 2.086538461rem;
 		background: #fff;
@@ -120,10 +127,17 @@ $card-radius: 8px;
     @include transition-default();
 	@include outer-shadow();
 	
+	&::before,
+	&::after {
+		content: " ";
+		display: table;
+		clear: both;
+	}
+	
+	
 	.uix-card2__tagline {
 		font-size: 0.75rem;
 		font-weight: 500;
-		letter-spacing: 2px;
 		text-transform: uppercase;
 		color: rgba(51, 51, 51, .4);
 	}
@@ -155,11 +169,16 @@ $card-radius: 8px;
     @include transition-default();
 	@include outer-shadow();
 	
-
+	&::before,
+	&::after {
+		content: " ";
+		display: table;
+		clear: both;
+	}
+	
 	.uix-card3__tagline {
 		font-size: 0.75rem;
 		font-weight: 500;
-		letter-spacing: 2px;
 		text-transform: uppercase;
 		color: rgba(51, 51, 51, .4);
 	}
@@ -214,11 +233,17 @@ $card-radius: 8px;
     @include transition-default();
 	@include outer-shadow();
 	
+	&::before,
+	&::after {
+		content: " ";
+		display: table;
+		clear: both;
+	}
+	
 
 	.uix-card4__tagline {
 		font-size: 0.75rem;
 		font-weight: 500;
-		letter-spacing: 2px;
 		text-transform: uppercase;
 		color: rgba(51, 51, 51, .4);
 	}

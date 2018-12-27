@@ -61,18 +61,9 @@
 /* 
  ---------------------------
  2. Elements after a floating element will flow around it. 
-    Use the "uix-clear" or "uix-clearfix" hack to fix the problem
+    Use the "uix-clearfix" hack to fix the problem
  ---------------------------
  */ 
-.uix-clear {
-	clear: both;
-	display: block;
-	overflow: hidden;
-	visibility: hidden;
-	width: 0;
-	height: 0;
-}
-
 .uix-clearfix {
 	
 	&::before {

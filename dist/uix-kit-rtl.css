@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.0.2
+ * ## Version             :  3.0.3
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  December 26, 2018
+ * ## Last Update         :  December 28, 2018
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -216,8 +216,10 @@ blockquote {
  4. Seamless Grid
  ---------------------------
  */
+[class*='uix-core-grid__col-'] {
+  float: right; }
+
 .uix-core-grid [class*='uix-core-grid__col-'] {
-  float: right;
   padding-right: auto;
   padding-left: 15px; }
   .uix-core-grid__row .uix-core-grid [class*='uix-core-grid__col-']:last-of-type {
@@ -246,14 +248,6 @@ blockquote {
     .uix-core-grid .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-3:nth-child(2n+0),
     .uix-core-grid .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-4:nth-child(2n+0) {
       padding-left: 15px; } }
-
-/* 
- ---------------------------
- 5. Auxiliary Grid System for Inline Elements
- ---------------------------
- */
-[class*='uix-el-grid__col-'] {
-  float: right; }
 
 /* ====================================================== 
    <!-- Mobile Menu -->

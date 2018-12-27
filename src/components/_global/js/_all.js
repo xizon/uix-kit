@@ -21,7 +21,8 @@ const UIX_KIT_IMPORT = { "files": [
 "./src/components/_global/js/set-background.js",
 "./src/components/_global/js/table.js",
 "./src/components/_global/js/videos.js",
-	
+
+//GSAP ==> generic
 "./src/components/_plugins-GSAP/js/ColorPropsPlugin.js",
 "./src/components/_plugins-GSAP/js/CSSRulePlugin.js",
 "./src/components/_plugins-GSAP/js/EaselPlugin.js",
@@ -32,12 +33,15 @@ const UIX_KIT_IMPORT = { "files": [
 "./src/components/_plugins-GSAP/js/ScrollToPlugin.js",
 "./src/components/_plugins-GSAP/js/TEMPLATE_Plugin.js",
 "./src/components/_plugins-GSAP/js/TextPlugin.js",
+	
+//three.js ==> generic
 "./src/components/_plugins-THREE/js/CSS3DRenderer.js",
 "./src/components/_plugins-THREE/js/GLTFLoader.js",
 "./src/components/_plugins-THREE/js/MTLLoader.js",
 "./src/components/_plugins-THREE/js/OBJLoader.js",
 "./src/components/_plugins-THREE/js/OrbitControls.js",
-"./src/components/_plugins-THREE/js/particles.js",
+	
+	
 	
 /******/
 /******/
@@ -98,6 +102,7 @@ const UIX_KIT_IMPORT = { "files": [
 "./src/components/t3D-pages/js/3D-pages.js",
 "./src/components/t3D-particle-effect/js/3D-particle-effect.js",
 "./src/components/t3D-sphere-three/js/3D-sphere-three.js",
+"./src/components/t3D-obj-anim-interaction/js/3D-obj-anim-interaction.js",
 "./src/components/tabs/js/tabs.js",
 "./src/components/team-focus/js/team-focus.js",
 "./src/components/text-effect/js/text-effect.js",
@@ -109,4 +114,3 @@ const UIX_KIT_IMPORT = { "files": [
 
 
 export { UIX_KIT_IMPORT };
-

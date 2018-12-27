@@ -66,8 +66,16 @@
 		    background: #fff;
 		    padding: 1rem;
 		    position: relative;
+
+			&::before,
+			&::after {
+				content: " ";
+				display: table;
+				clear: both;
+			}
+
 			
-			[class*='uix-el-grid__col-'] {
+			[class*='uix-core-grid__col-'] {
 				overflow: hidden;
 			}
 		  

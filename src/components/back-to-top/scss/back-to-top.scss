@@ -3,7 +3,7 @@
 /* ====================================================== */
 
 #uix-to-top {
-	display: none;
+	transform: scale(0);
 	position: fixed;
 	bottom: 12px;
 	right: 12px;
@@ -17,13 +17,14 @@
 	}
 	
 	&.active {
-	    display: block;
+		transform: scale(1);
 	}
 	
 	&:active, 
 	&:focus {
 	    outline: none;
 	}
+	
 	
 }
 

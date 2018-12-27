@@ -53,7 +53,7 @@ APP = ( function ( APP, $, window, document ) {
 		
 		//-------- Sticky header area
 		//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
-		var $el = $( '.uix-header__container' );
+		var $el = $( '.uix-header__container, .uix-header__placeholder' );
 		$window.on('scroll touchmove', function() {
 
 			var scrollTop = $( this ).scrollTop(),

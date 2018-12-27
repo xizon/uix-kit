@@ -191,17 +191,17 @@ $vertical-menu-top          : 0;
 					
 					&::-webkit-scrollbar-track {
 						border-radius: 0px;
-						background-color: #E22444;
+						background-color: rgba(255,255,255,0);
 					}
 
 					&::-webkit-scrollbar {
 						width: 1px;
-						background-color: #E22444;
+						background-color: rgba(255,255,255,0);
 					}
 
 					&::-webkit-scrollbar-thumb {
 						border-radius: 0px;
-						background-color: #E22444;
+						background-color: rgba(255,255,255,0.4);
 					}
 
 					&:first-child {

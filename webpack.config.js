@@ -84,6 +84,7 @@ if ( fs.existsSync( JSComFiles ) ) {
 	let content = fs.readFileSync( JSComFiles );
 	let curCon  = content
 						.toString()
+	                    .replace(/\/\/(.*)$/gm, '' )
 						.replace(/\'/g, '"' )
 						.replace(/\s/g, '' )
 						.replace(/[\r\n]/g, '' )
@@ -577,7 +578,14 @@ compiler.plugin( 'done', () => {
 						input: targetJSFile,
 						output: targetJSMinFile,
 						callback: function(err, min) {
-						    console.log( targetJSMinFile + ' file written successfully!' );
+							
+							console.log( targetJSMinFile + ' file written successfully!' );
+
+							if ( err ) {
+								console.error('===================[ ERROR: Please Rebuild! ]===================');
+							} 
+							
+						    
 						}
 					});
 					
@@ -590,7 +598,7 @@ compiler.plugin( 'done', () => {
 			});	
 		}
 	
-	}, 1100 );	
+	}, 3500 );	
 	
 	
 

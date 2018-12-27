@@ -16,192 +16,299 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP._3D_PARTICLE               = APP._3D_PARTICLE || {};
-	APP._3D_PARTICLE.version       = '0.0.1';
+	APP._3D_PARTICLE.version       = '0.0.2';
     APP._3D_PARTICLE.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
 		if ( $( '#3D-particle-effect-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
 		
-		
-		
 		var $window                   = $( window ),
 			windowWidth               = $window.width(),
 			windowHeight              = $window.height(),
-			rendererCanvasID          = '3D-particle-effect-canvas',
-			rendererCanvasWidth       = 800,
-			rendererCanvasHeight      = 400;
+			rendererCanvasID          = '3D-particle-effect-canvas';
 		
-		// Draw Image To Canvas
-		//-------------------------------------	
-		//drawImageToCanvas( rendererCanvasID, $( '#' + rendererCanvasID ).data( 'img-src' ) );
+		var renderer, 
+			texture, 
+			scene, 
+			camera,
+			particles,
+			imagedata,
+			clock        = new THREE.Clock(),
+			mouseX       = 0, 
+			mouseY       = 0,
+			isMouseDown  = true,
+			lastMousePos = {x: 0, y: 0},
+			windowHalfX  = windowWidth / 2,
+			windowHalfY  = windowHeight / 2;
 
-		
-		// Effect Render
-		//-------------------------------------	
-		var renderer, scene, camera, controls;
 
+		var centerVector = new THREE.Vector3(0, 0, 0);
+		var previousTime = 0;
 
-		// Create a camera, which defines where we're looking at.		
-		renderer = new THREE.WebGLRenderer( { 
-								canvas   : document.getElementById( rendererCanvasID ), //canvas
-								alpha    : true, 
-								antialias: true 
-							} );
-		renderer.setSize( windowWidth, windowHeight );
-	
-		
-		scene = new THREE.Scene();
-		
-		//camera
-		camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 0.01, 100 );
-		camera.position.set( -1.5, 0.5, 0.5 );
-		camera.lookAt( new THREE.Vector3(0,0,0) );
-		
-		//controls
-		controls = new THREE.OrbitControls( camera );
-		controls.rotateSpeed = 0.5;
-		controls.zoomSpeed = 1.2;
-		controls.panSpeed = 0.8;
-		controls.enableZoom = true;
-		controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-		controls.dampingFactor = 0.25;
-		controls.screenSpacePanning = false;
-	    controls.minDistance = 1.5;
-		controls.maxDistance = 5;
-		controls.maxPolarAngle = Math.PI / 2;
-		
-
-	
-		// Immediately use the texture for material creation
-		var createGeometryTexture = function( geometry, size ) {
-			var data = new Float32Array(size * size * 3);
-			var verticesLength = geometry.vertices.length;
-			for (var i = 0; i < size * size; i++) {
-				if (verticesLength > i) {
-					data[i * 3] = geometry.vertices[i].x;
-					data[i * 3 + 1] = geometry.vertices[i].y;
-					data[i * 3 + 2] = geometry.vertices[i].z;
-				} else {
-					data[i * 3] = data[i * 3 + 1] = data[i * 3 + 2] = 0.0;
-				}
-			}
-			var dataTexture = new THREE.DataTexture( data, size, size, THREE.RGBFormat, THREE.FloatType );
-			dataTexture.needsUpdate = true;
-			return dataTexture;
-		};
-
-		var size            = 84,
-			horizontalPlane = {
-			vertices: []
-		};
-		
-		for (var i = 0; i < size * size; i++) {
-			horizontalPlane.vertices.push({
-				x: (((i % size) / size) - 0.5) * 1.2,
-				y: 0.0,
-				z: (((i / size) / size) - 0.5) * 1.2
-			});
-		}
-
-		var particleTextureTarget = createGeometryTexture(new THREE.SphereGeometry(0.5, size - 1, size - 1), size),
-			texturePlane          = createGeometryTexture(horizontalPlane, size),
-			textureSphere         = createGeometryTexture(new THREE.SphereGeometry(0.5, size - 1, size - 1), size),
-			textureBox            = createGeometryTexture(new THREE.BoxGeometry(0.7, 0.7, 0.7, 26, 26, 26), size);
 
 		
-		// Add textures to array for iteration
-		var geometryTextures = [];
-		geometryTextures.push( texturePlane, textureSphere, textureBox );
-
-		// Change particleTextureTarget.image on click
-		var geometryTextureIndex = 0;
-		$( 'body' ).on( 'click', function() {
-			geometryTextureIndex++;
-			if (geometryTextureIndex > geometryTextures.length - 1) {
-				geometryTextureIndex = 0;
-			}
-			particleTextureTarget.image = geometryTextures[geometryTextureIndex].image;
-			particleTextureTarget.needsUpdate = true;
-		});
-		
-
-		// Create the particles
-		var particleOptions = {
-			textureSize            : size,
-			explodeRate            : 0.1,
-			targetTexture          : particleTextureTarget,
-			velocityFunctionString : 'outVelocity = direction * (dist/50.0);',
-			colorFunctionString    : 'color = vec4(0.0, 0.0, 0.0, 1.0);'
-		};
-		var particles = new Particles( renderer, scene, particleOptions );
-
-		
-
+		init();
 		render();
-		function render() {
+		
 
-			requestAnimationFrame( render );
-
-			// required if controls.enableDamping or controls.autoRotate are set to true
-			controls.update();
+		function init() {
 			
-			// Update the particles for each frame
-			particles.pointCloud.rotation.y += 0.005;
-			particles.update();
-
-			renderer.render( scene, camera );
-
-		}
-		
-		
-		
-	
-
-		/*
-		 * Returns a random number between two other numbers
-		 *
-		 * @param  {String} src                 - The URL of the image.
-		 * @param  {Number} width               - The width of the image.
-		 * @param  {Number} height              - The height of the image.
-		 * @param  {Function} callback          - Callback function when the image is loaded.
-		 * @return {Object}                     - The image element.
-		 */
-		function loadImage( src, width, height, callback ) {
-			var image = new Image( width, height ); 
-			image.src = src ;
-			image.onload = function() {
-				callback.call();
-			};
-
-			return image;
-		}
-		
-	
-		/*
-		 * Draw Image To Canvas
-		 *
-		 * @param  {Object} canvasID         - The ID of a canvas.
-		 * @param  {String} img              - Image URL.
-		 * @return {Void}                    - The constructor.
-		 */
-		function drawImageToCanvas( canvasID, img ) {
+			//@https://github.com/mrdoob/three.js/blob/dev/src/extras/ImageUtils.js#L21
+			THREE.ImageUtils.crossOrigin = '';
 			
-			var image = loadImage( img, rendererCanvasWidth, rendererCanvasHeight, function() {
+			//WebGL Renderer		
+			renderer = new THREE.WebGLRenderer( { 
+									canvas   : document.getElementById( rendererCanvasID ), //canvas
+									alpha    : true, 
+									antialias: true 
+								} );
 
-					var c      = document.getElementById( canvasID ),
-						ctx    = c.getContext( '2d' );
+			
+			renderer.setSize(windowWidth, windowHeight);
+
+			
+			
+			//Scene
+			scene = new THREE.Scene();
+
+			//camera
+			camera = new THREE.PerspectiveCamera(50, windowWidth / windowHeight, 0.1, 10000);
+			camera.position.set(-100, 0, 600);
+			camera.lookAt( centerVector );
+			scene.add( camera );
+
+			
+			// instantiate a loader
+			var loader = new THREE.TextureLoader();
+
+			// load a resource
+			loader.load(
+				// resource URL
+				$( '#' + rendererCanvasID ).data( 'img-src' ),
+
+				// onLoad callback
+				function ( texture ) {
+					// in this example we create the material when the texture is loaded
+					// Get data from an image
+					imagedata = getImageData( texture.image );
+
+					// Immediately use the texture for material creation
+					var geometry = new THREE.Geometry();
+					var material = new THREE.PointsMaterial({
+						size: 2,
+						color: 0x333333,
+						sizeAttenuation: false
+					});
 					
-					c.width = rendererCanvasWidth;
-					c.height = rendererCanvasHeight;
+					
+					
+					for (var y = 0, y2 = imagedata.height; y < y2; y += 2) {
+				
+						for (var x = 0, x2 = imagedata.width; x < x2; x += 2) {
+							
+							if ( imagedata.data[(x * 4 + y * 4 * imagedata.width) + 3] > 128 ) {
 
-					ctx.drawImage( image, 0, 0 );
+						
+								// The array of vertices holds the position of every vertex in the model.
+								var vertex = new THREE.Vector3();
+								
+								
+								vertex.x = Math.random() * 1000 - 500;
+								vertex.y = Math.random() * 1000 - 500;
+								vertex.z = -Math.random() * 500;
 
-		
+								vertex.destination = {
+									x: x - imagedata.width / 2,
+									y: -y + imagedata.height / 2,
+									z: 0
+								};
+
+								vertex.speed = Math.random() / 200 + 0.015;
+
+								geometry.vertices.push( vertex );
+								
+
+							}
+						}
+					}
+					particles = new THREE.Points( geometry, material );
+
+					scene.add( particles );
+
+					
+					
+					
+				},
+
+				// onProgress callback currently not supported
+				undefined,
+
+				// onError callback
+				function ( err ) {
+					console.error( 'An error happened.' );
 				}
 			);
+
+
+			document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+			document.addEventListener( 'touchstart', onDocumentTouchStart, false );
+			document.addEventListener( 'touchmove', onDocumentTouchMove, false );
 			
-		
+			document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+			document.addEventListener( 'mouseup', onDocumentMouseUp, false );
+			
+			
+			
+			// Fires when the window changes
+			window.addEventListener( 'resize', onWindowResize, false );	
 		}
+		
+		
+		
+		
+		
+		function render() {
+			requestAnimationFrame( render );
+			
+            var delta      = clock.getDelta(),
+				thickness = 40;
+			
+			
+			//Need to add judgment to avoid Cannot read property 'geometry' of undefined
+			if ( typeof particles != typeof undefined ) {
+				
+				for (var i = 0, j = particles.geometry.vertices.length; i < j; i++) {
+					var particle = particles.geometry.vertices[i];
+					particle.x += (particle.destination.x - particle.x) * particle.speed;
+					particle.y += (particle.destination.y - particle.y) * particle.speed;
+					particle.z += (particle.destination.z - particle.z) * particle.speed;
+				}
+
+				
+				if ( delta - previousTime > thickness ) {
+					var index     = Math.floor(Math.random()*particles.geometry.vertices.length);
+					var particle1 = particles.geometry.vertices[index];
+					var particle2 = particles.geometry.vertices[particles.geometry.vertices.length-index];
+					
+					TweenMax.to( particle, Math.random()*2+1, {
+									x:    particle2.x, 
+									y:    particle2.y, 
+									ease: Power2.easeInOut
+								});
+					
+					
+					
+					TweenMax.to( particle2, Math.random()*2+1, {
+									x:    particle1.x, 
+									y:    particle1.y, 
+									ease: Power2.easeInOut
+								});
+					
+					previousTime = delta;
+				}
+
+				
+				particles.geometry.verticesNeedUpdate = true;	
+			}
+			
+			
+			if( ! isMouseDown ) {
+				camera.position.x += (0-camera.position.x)*0.06;
+				camera.position.y += (0-camera.position.y)*0.06;
+			}
+			
+
+			camera.position.x += ( mouseX - camera.position.x ) * 0.09;
+			camera.position.y += ( - mouseY - camera.position.y ) * 0.09;
+			camera.lookAt( centerVector );
+			
+
+			renderer.render( scene, camera );
+			
+		}
+		
+		
+
+		function onWindowResize() {
+			camera.aspect = window.innerWidth / window.innerHeight;
+			camera.updateProjectionMatrix();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+		}
+		
+		
+		function onDocumentMouseMove( event ) {
+
+			mouseX = event.clientX - windowHalfX;
+			mouseY = event.clientY - windowHalfY;
+
+			if( isMouseDown ) {
+				camera.position.x += (event.clientX-lastMousePos.x)/100;
+				camera.position.y -= (event.clientY-lastMousePos.y)/100;
+				camera.lookAt( centerVector );
+				lastMousePos = {x: event.clientX, y: event.clientY};
+			}
+			
+			
+		}
+
+		
+		function onDocumentTouchStart( event ) {
+
+			if ( event.touches.length == 1 ) {
+
+				event.preventDefault();
+
+				mouseX = event.touches[ 0 ].pageX - windowHalfX;
+				mouseY = event.touches[ 0 ].pageY - windowHalfY;
+			}
+		}
+
+		function onDocumentTouchMove( event ) {
+
+			if ( event.touches.length == 1 ) {
+
+				event.preventDefault();
+
+				mouseX = event.touches[ 0 ].pageX - windowHalfX;
+				mouseY = event.touches[ 0 ].pageY - windowHalfY;
+
+			}
+		}
+		
+
+		function onDocumentMouseUp() {
+			isMouseDown = false;
+		}
+		
+		function onDocumentMouseDown( event ) {
+			isMouseDown = true;
+			lastMousePos = {x: event.clientX, y: event.clientY};
+			
+			
+		}
+	
+
+		
+		/*
+		 * Get Image Data when Draw Image To Canvas
+		 *
+		 * @param  {Object} image         - Overridden with a record type holding data, width and height.
+		 * @return {JSON}                 - The image data.
+		 */
+		function getImageData( image ) {
+
+			var canvas = document.createElement( 'canvas' );
+			canvas.width = image.width;
+			canvas.height = image.height;
+
+			var ctx = canvas.getContext( '2d' );
+			ctx.drawImage(image, 0, 0);
+
+			return ctx.getImageData(0, 0, image.width, image.height);
+		}
+
+
+		
 		
     };
 

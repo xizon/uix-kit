@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.0.2
+ * ## Version             :  3.0.3
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  December 26, 2018
+ * ## Last Update         :  December 28, 2018
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -846,17 +846,9 @@ ul.uix-entry__meta {
 /* 
  ---------------------------
  2. Elements after a floating element will flow around it. 
-    Use the "uix-clear" or "uix-clearfix" hack to fix the problem
+    Use the "uix-clearfix" hack to fix the problem
  ---------------------------
  */
-.uix-clear {
-  clear: both;
-  display: block;
-  overflow: hidden;
-  visibility: hidden;
-  width: 0;
-  height: 0; }
-
 .uix-clearfix::before {
   display: table;
   content: "";
@@ -1192,8 +1184,7 @@ img.uix-filter-hover--color,
  * 2. Material Container                         
  * 3. Main Wrapper                               
  * 4. Seamless Grid (Core Grid)
- * 5. Auxiliary Grid System for Inline Elements (Subordinate Grid)
- * 6. Align Wide and Full Classes For Elements
+ * 5. Align Wide and Full Classes For Elements
 */
 /* 
  ---------------------------
@@ -1270,11 +1261,59 @@ img.uix-filter-hover--color,
  4. Seamless Grid
  ---------------------------
  */
+[class*='uix-core-grid__col-'] {
+  box-sizing: border-box;
+  float: left;
+  position: relative; }
+
+.uix-core-grid__inline {
+  float: none;
+  display: inline-block; }
+
+.uix-core-grid__col-1 {
+  width: 8.333333333333%; }
+
+.uix-core-grid__col-2 {
+  width: 16.66666666666667%; }
+
+.uix-core-grid__col-3 {
+  width: 25%; }
+
+.uix-core-grid__col-4 {
+  width: 33.333333333333%; }
+
+.uix-core-grid__col-5 {
+  width: 41.666666666667%; }
+
+.uix-core-grid__col-6 {
+  width: 50%; }
+
+.uix-core-grid__col-7 {
+  width: 58.333333333333%; }
+
+.uix-core-grid__col-8 {
+  width: 66.666666666667%; }
+
+.uix-core-grid__col-9 {
+  width: 75%; }
+
+.uix-core-grid__col-10 {
+  width: 83.333333333333%; }
+
+.uix-core-grid__col-11 {
+  width: 91.666666666667%; }
+
+.uix-core-grid__col-12 {
+  width: 100%; }
+
+@media all and (max-width: 768px) {
+  .uix-core-grid__mobile-half {
+    width: 50%; }
+  .uix-core-grid__mobile-stack {
+    width: 100%; } }
+
 .uix-core-grid {
   width: 100%; }
-  .uix-core-grid .uix-core-grid__row,
-  .uix-core-grid [class*='uix-core-grid__col-'] {
-    box-sizing: border-box; }
   .uix-core-grid .uix-core-grid__row {
     width: calc( 100% + 15px); }
     .uix-core-grid .uix-core-grid__row::after {
@@ -1290,37 +1329,12 @@ img.uix-filter-hover--color,
       .uix-core-grid .uix-core-grid__row.uix-core-grid__row--no-gutter [class*='uix-core-grid__col-'] {
         padding-right: 0 !important; }
   .uix-core-grid [class*='uix-core-grid__col-'] {
-    float: left;
     padding-right: 15px;
     margin-bottom: 7.5px; }
     .uix-core-grid__row .uix-core-grid [class*='uix-core-grid__col-']:last-of-type {
       padding-right: 0; }
       .uix-core-grid__row .uix-core-grid [class*='uix-core-grid__col-']:last-of-type [class*='uix-core-grid__col-'] > div {
         width: calc(100% - 15px); }
-  .uix-core-grid .uix-core-grid__col-1 {
-    width: 8.333333333333%; }
-  .uix-core-grid .uix-core-grid__col-2 {
-    width: 16.66666666666667%; }
-  .uix-core-grid .uix-core-grid__col-3 {
-    width: 25%; }
-  .uix-core-grid .uix-core-grid__col-4 {
-    width: 33.333333333333%; }
-  .uix-core-grid .uix-core-grid__col-5 {
-    width: 41.666666666667%; }
-  .uix-core-grid .uix-core-grid__col-6 {
-    width: 50%; }
-  .uix-core-grid .uix-core-grid__col-7 {
-    width: 58.333333333333%; }
-  .uix-core-grid .uix-core-grid__col-8 {
-    width: 66.666666666667%; }
-  .uix-core-grid .uix-core-grid__col-9 {
-    width: 75%; }
-  .uix-core-grid .uix-core-grid__col-10 {
-    width: 83.333333333333%; }
-  .uix-core-grid .uix-core-grid__col-11 {
-    width: 91.666666666667%; }
-  .uix-core-grid .uix-core-grid__col-12 {
-    width: 100%; }
   .uix-core-grid .uix-core-grid__row.uix-core-grid__row--loop .uix-core-grid__col-6:nth-child(2n+1),
   .uix-core-grid .uix-core-grid__row.uix-core-grid__row--loop .uix-core-grid__col-4:nth-child(3n+1),
   .uix-core-grid .uix-core-grid__row.uix-core-grid__row--loop .uix-core-grid__col-3:nth-child(4n+1),
@@ -1373,76 +1387,7 @@ img.uix-filter-hover--color,
 
 /* 
  ---------------------------
- 5. Auxiliary Grid System for Inline Elements
- ---------------------------
- */
-.uix-el-grid__row:before,
-.uix-el-grid__row:after {
-  content: " ";
-  display: table; }
-
-.uix-el-grid__row:after {
-  clear: both; }
-
-.uix-el-grid__row .uix-el-grid__row {
-  margin-left: 0;
-  margin-right: 0; }
-
-[class*='uix-el-grid__col-'] {
-  position: relative;
-  float: left;
-  width: 100%;
-  min-height: 1px; }
-
-.uix-el-grid__col-center {
-  float: none;
-  display: inline-block; }
-
-.uix-el-grid__col-1 {
-  width: 8.333333333333%; }
-
-.uix-el-grid__col-2 {
-  width: 16.666666666667%; }
-
-.uix-el-grid__col-3 {
-  width: 25%; }
-
-.uix-el-grid__col-4 {
-  width: 33.333333333333%; }
-
-.uix-el-grid__col-5 {
-  width: 41.666666666667%; }
-
-.uix-el-grid__col-6 {
-  width: 50%; }
-
-.uix-el-grid__col-7 {
-  width: 58.333333333333%; }
-
-.uix-el-grid__col-8 {
-  width: 66.666666666667%; }
-
-.uix-el-grid__col-9 {
-  width: 75%; }
-
-.uix-el-grid__col-10 {
-  width: 83.333333333333%; }
-
-.uix-el-grid__col-11 {
-  width: 91.666666666667%; }
-
-.uix-el-grid__col-12 {
-  width: 100%; }
-
-@media all and (max-width: 768px) {
-  .uix-el-grid__col-half {
-    width: 50%; }
-  .uix-el-grid__col-stack {
-    width: 100%; } }
-
-/* 
- ---------------------------
- 6. Align Wide and Full Classes For Elements
+ 5. Align Wide and Full Classes For Elements
  ---------------------------
  */
 .uix-alignfull {
@@ -3637,11 +3582,11 @@ h6 {
         transform: translateX(-50%);
         padding-left: 15px;
         padding-right: 15px;
-        pointer-events: none;
-        /* Prevent layers from hiding the underlying elements */ }
+        /* Prevent layers from hiding the underlying elements */
+        pointer-events: none; }
         .uix-advanced-slider .uix-advanced-slider__inner .uix-advanced-slider__item .uix-advanced-slider__txt > div {
           pointer-events: auto; }
-      @media all and (max-width: 1171px) {
+      @media all and (max-width: 1141px) {
         .uix-advanced-slider .uix-advanced-slider__inner .uix-advanced-slider__item .uix-advanced-slider__txt {
           width: calc( 100% - 15px); } }
       @media all and (min-width: 1430px) {
@@ -3701,7 +3646,7 @@ h6 {
     margin-bottom: 0;
     padding-bottom: 0;
     line-height: 1.2; }
-  .uix-advanced-slider .uix-advanced-slider__inner .uix-advanced-slider__item .uix-advanced-slider__txt [class*='uix-el-grid__col-'] {
+  .uix-advanced-slider .uix-advanced-slider__inner .uix-advanced-slider__item .uix-advanced-slider__txt [class*='uix-core-grid__col-'] {
     width: 100%; }
   .uix-advanced-slider .uix-advanced-slider__inner .uix-advanced-slider__item .uix-advanced-slider__txt .uix-btn {
     margin-top: .3rem;
@@ -3846,11 +3791,11 @@ h6 {
         transform: translateX(-50%);
         padding-left: 15px;
         padding-right: 15px;
-        pointer-events: none;
-        /* Prevent layers from hiding the underlying elements */ }
+        /* Prevent layers from hiding the underlying elements */
+        pointer-events: none; }
         .uix-advanced-slider-sp .uix-advanced-slider-sp__inner .uix-advanced-slider-sp__item .uix-advanced-slider-sp__txt > div {
           pointer-events: auto; }
-      @media all and (max-width: 1171px) {
+      @media all and (max-width: 1141px) {
         .uix-advanced-slider-sp .uix-advanced-slider-sp__inner .uix-advanced-slider-sp__item .uix-advanced-slider-sp__txt {
           width: calc( 100% - 15px); } }
       @media all and (min-width: 1430px) {
@@ -3894,7 +3839,7 @@ h6 {
     margin-bottom: 0;
     padding-bottom: 0;
     line-height: 1.2; }
-  .uix-advanced-slider-sp .uix-advanced-slider-sp__inner .uix-advanced-slider-sp__item .uix-advanced-slider-sp__txt [class*='uix-el-grid__col-'] {
+  .uix-advanced-slider-sp .uix-advanced-slider-sp__inner .uix-advanced-slider-sp__item .uix-advanced-slider-sp__txt [class*='uix-core-grid__col-'] {
     width: 100%; }
   .uix-advanced-slider-sp .uix-advanced-slider-sp__inner .uix-advanced-slider-sp__item .uix-advanced-slider-sp__txt .uix-btn {
     margin-top: .3rem;
@@ -4044,7 +3989,7 @@ h6 {
    <!-- Back to Top -->                                               
 /* ====================================================== */
 #uix-to-top {
-  display: none;
+  transform: scale(0);
   position: fixed;
   bottom: 12px;
   right: 12px;
@@ -4055,7 +4000,7 @@ h6 {
   #uix-to-top i {
     font-size: 1.5rem; }
   #uix-to-top.active {
-    display: block; }
+    transform: scale(1); }
   #uix-to-top:active, #uix-to-top:focus {
     outline: none; }
 
@@ -4609,6 +4554,10 @@ h6 {
   border-top: 8px solid #EC5E79;
   border-radius: 8px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02); }
+  .uix-card1::before, .uix-card1::after {
+    content: " ";
+    display: table;
+    clear: both; }
   .uix-card1 .uix-card1__headline {
     min-height: 2.086538461rem;
     background: #fff;
@@ -4683,10 +4632,13 @@ h6 {
   margin-bottom: 1.5rem;
   transition: all 0.3s ease;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02); }
+  .uix-card2::before, .uix-card2::after {
+    content: " ";
+    display: table;
+    clear: both; }
   .uix-card2 .uix-card2__tagline {
     font-size: 0.75rem;
     font-weight: 500;
-    letter-spacing: 2px;
     text-transform: uppercase;
     color: rgba(51, 51, 51, 0.4); }
   .uix-card2 .uix-card2__headline {
@@ -4707,10 +4659,13 @@ h6 {
   margin-bottom: 1.5rem;
   transition: all 0.3s ease;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02); }
+  .uix-card3::before, .uix-card3::after {
+    content: " ";
+    display: table;
+    clear: both; }
   .uix-card3 .uix-card3__tagline {
     font-size: 0.75rem;
     font-weight: 500;
-    letter-spacing: 2px;
     text-transform: uppercase;
     color: rgba(51, 51, 51, 0.4); }
   .uix-card3 .uix-card3__headline {
@@ -4743,10 +4698,13 @@ h6 {
   margin-bottom: 1.5rem;
   transition: all 0.3s ease;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02); }
+  .uix-card4::before, .uix-card4::after {
+    content: " ";
+    display: table;
+    clear: both; }
   .uix-card4 .uix-card4__tagline {
     font-size: 0.75rem;
     font-weight: 500;
-    letter-spacing: 2px;
     text-transform: uppercase;
     color: rgba(51, 51, 51, 0.4); }
   .uix-card4 .uix-card4__headline {
@@ -6937,7 +6895,6 @@ ol.uix-flexslider__control-paging {
     width: 100%;
     background: #fff;
     border: 1px solid #AEAEAE;
-    border-radius: 0;
     box-sizing: border-box;
     color: #555;
     outline: none;
@@ -7191,7 +7148,7 @@ ol.uix-flexslider__control-paging {
     line-height: 1.625;
     display: inline-block;
     position: absolute;
-    bottom: 0.875rem;
+    bottom: 0.8125rem;
     right: 0;
     background: #EC5E79;
     border-radius: 25px;
@@ -7891,8 +7848,6 @@ a.uix-lightbox__original__close {
 /* ====================================================== */
 .uix-list-brands {
   display: block;
-  background: #fff;
-  padding: 1.5rem 0;
   margin: 3rem 0;
   overflow: auto;
   /* CSS background disappears when using float:left */
@@ -8053,7 +8008,11 @@ a.uix-lightbox__original__close {
     padding: 1rem;
     position: relative;
     /* WordPress style */ }
-    .uix-list-topic .uix-list-topic__item .uix-list-topic__item__info [class*='uix-el-grid__col-'] {
+    .uix-list-topic .uix-list-topic__item .uix-list-topic__item__info::before, .uix-list-topic .uix-list-topic__item .uix-list-topic__item__info::after {
+      content: " ";
+      display: table;
+      clear: both; }
+    .uix-list-topic .uix-list-topic__item .uix-list-topic__item__info [class*='uix-core-grid__col-'] {
       overflow: hidden; }
     .uix-list-topic .uix-list-topic__item .uix-list-topic__item__info h1, .uix-list-topic .uix-list-topic__item .uix-list-topic__item__info h2, .uix-list-topic .uix-list-topic__item .uix-list-topic__item__info h3, .uix-list-topic .uix-list-topic__item .uix-list-topic__item__info h4, .uix-list-topic .uix-list-topic__item .uix-list-topic__item__info h5, .uix-list-topic .uix-list-topic__item .uix-list-topic__item__info h6 {
       font-family: inherit;
@@ -10221,12 +10180,15 @@ Style with support for rainbow parens
   padding: .5rem 1rem;
   margin: 1rem 0;
   display: block;
-  border-radius: 25px;
   font-size: 0.875rem;
   line-height: 1.2;
   font-family: 'Source Sans Pro', sans-serif; }
   .uix-striking-msg i:first-child {
     margin-right: .5rem; }
+  .uix-striking-msg.is-pill {
+    border-radius: 35px; }
+  .uix-striking-msg.is-rounded {
+    border-radius: 4px; }
   .uix-striking-msg.uix-striking-msg--default {
     background-color: #fce8dc;
     box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.1), 0 5px 10px -7px rgba(252, 232, 220, 0.3); }
@@ -11374,13 +11336,13 @@ Style with support for rainbow parens
         box-sizing: border-box; }
         .uix-v-menu__container:not(.is-mobile) ul.uix-menu li.multi-column > ul > li::-webkit-scrollbar-track {
           border-radius: 0px;
-          background-color: #E22444; }
+          background-color: rgba(255, 255, 255, 0); }
         .uix-v-menu__container:not(.is-mobile) ul.uix-menu li.multi-column > ul > li::-webkit-scrollbar {
           width: 1px;
-          background-color: #E22444; }
+          background-color: rgba(255, 255, 255, 0); }
         .uix-v-menu__container:not(.is-mobile) ul.uix-menu li.multi-column > ul > li::-webkit-scrollbar-thumb {
           border-radius: 0px;
-          background-color: #E22444; }
+          background-color: rgba(255, 255, 255, 0.4); }
         .uix-v-menu__container:not(.is-mobile) ul.uix-menu li.multi-column > ul > li:first-child {
           border-left: none; }
         .uix-v-menu__container:not(.is-mobile) ul.uix-menu li.multi-column > ul > li ul {

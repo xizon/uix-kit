@@ -6,7 +6,6 @@
     padding: .5rem 1rem;
     margin: 1rem 0;
 	display: block;
-	border-radius: 25px;
 	font-size: 0.875rem;
 	line-height: 1.2;
 	font-family: 'Source Sans Pro', sans-serif;
@@ -14,8 +13,15 @@
 	i:first-child {
 		margin-right: .5rem;
 	}
-
 	
+	
+	&.is-pill {
+		border-radius: 35px;
+	}
+	
+	&.is-rounded {
+		border-radius: 4px;
+	}	
 	
 	&.uix-striking-msg--default {
 		background-color: rgba(252,232,220,1);

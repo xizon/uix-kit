@@ -19,7 +19,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.ADVANCED_SLIDER_FILTER               = APP.ADVANCED_SLIDER_FILTER || {};
-	APP.ADVANCED_SLIDER_FILTER.version       = '0.1.3';
+	APP.ADVANCED_SLIDER_FILTER.version       = '0.1.4';
     APP.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 	
@@ -1177,27 +1177,23 @@ APP = ( function ( APP, $, window, document ) {
 							} else {
 								
 								texture = new THREE.TextureLoader().load( $thisItem.find( 'img' ).attr( 'src' ) );
-								texture.generateMipmaps = false;
-								texture.wrapS = texture.wrapT = THREE.ClampToEdgeWrapping;
-								texture.minFilter = THREE.LinearFilter;
 								
-								
-
+			
 							}
+							
+							
 						
 							// texture controller
 							texturesAll.push( texture );
 							
 							
-					
-
+							
 							// Immediately use the texture for material creation
-							var spriteMat            = new THREE.MeshPhongMaterial( { map: texture } ),
+							var spriteMat            = new THREE.MeshBasicMaterial( { map: texture } ),
 								geometry             = new THREE.BoxGeometry( aspect*15, 15, 2 ),
 								displacementSprite   = new THREE.Mesh( geometry, spriteMat );
 
-							
-							
+						
 							displacementSprite.position.set( -0.01, -0.01, 0 );
 							displacementSprite.rotation.set( 0, 0, 0 );
 							scene.add( displacementSprite );
