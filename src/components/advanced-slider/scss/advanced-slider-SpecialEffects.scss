@@ -13,11 +13,15 @@
  ---------------------------
  */ 
 
+.uix-advanced-slider-sp__wrapper {
+	position: relative;
+}
+
 /* Prevent content overflow */
 .uix-advanced-slider-sp__wrapper,
 .uix-advanced-slider-sp__inner,
 .uix-advanced-slider-sp__canvas-container {
-	max-height: 100vh;
+	//max-height: 100vh;
 	overflow: hidden;
 }
 

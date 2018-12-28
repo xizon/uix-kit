@@ -19,7 +19,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.ADVANCED_SLIDER_FILTER               = APP.ADVANCED_SLIDER_FILTER || {};
-	APP.ADVANCED_SLIDER_FILTER.version       = '0.1.4';
+	APP.ADVANCED_SLIDER_FILTER.version       = '0.1.5';
     APP.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 	
@@ -28,7 +28,6 @@ APP = ( function ( APP, $, window, document ) {
 			windowHeight              = $window.height(),
 			animSpeed                 = 1000,
 			$sliderWrapper            = $( '.uix-advanced-slider-sp' ),
-			tempID                    = 'video-' + UIX_GUID.newGuid(),
 			
 			//Save different canvas heights as an array
 			canvasHeights             = [],
@@ -2169,12 +2168,12 @@ APP = ( function ( APP, $, window, document ) {
 
 						//Add new ripple each time mouse
 						//-------------------------------------
-						document.addEventListener("mousedown", function(e) {
+						$sliderWrapper[0].addEventListener("mousedown", function(e) {
 					  
 							TweenMax.to( displacementFilter.scale, 1, { x: "+=" + Math.sin( e.pageX ) * 100 + "", y: "+=" + Math.cos( e.pageY ) * 100 + ""  });   
 							rotateSpite();
 						});
-						document.addEventListener("mouseup", function(e) {
+						$sliderWrapper[0].addEventListener("mouseup", function(e) {
 					
 							TweenMax.to( displacementFilter.scale, 1, { x: 0, y: 0 } );
 						});
@@ -2182,6 +2181,9 @@ APP = ( function ( APP, $, window, document ) {
 						var rotateSpite = function() {
 							displacementFilter.rotation += 0.001;
 						};
+						
+						
+						
 						
 						
 						
@@ -2794,8 +2796,7 @@ APP = ( function ( APP, $, window, document ) {
 			wrapper.find( '.uix-video__slider' ).each( function()  {
 				var $this          = $( this ),
 					videoWrapperW  = $this.closest( '.uix-advanced-slider__outline' ).width(),
-					videoWrapperH  = $this.closest( '.uix-advanced-slider__outline' ).height(),
-					curVideoID     = tempID,
+					curVideoID     = $this.find( 'video' ).attr( 'id' ) + '-slider-videopush',
 					coverPlayBtnID = 'videocover-' + curVideoID,
 					dataControls   = $this.data( 'embed-video-controls' ),
 					dataAuto       = $this.data( 'embed-video-autoplay' ),
@@ -2807,12 +2808,9 @@ APP = ( function ( APP, $, window, document ) {
 				
 				//Push a new ID to video
 				//Solve the problem that ajax asynchronous loading does not play
-				$this.find( '.video-js' ).attr( 'id', tempID );
+				$this.find( '.video-js' ).attr( 'id', curVideoID );
 
 				
-				if ( videoWrapperH == 0 ) videoWrapperH = videoWrapperW/1.77777777777778;
-
-			
 				if( typeof dataAuto === typeof undefined ) {
 					dataAuto = true;
 				}
@@ -2830,7 +2828,7 @@ APP = ( function ( APP, $, window, document ) {
 				}	
 
 				if( typeof dataH === typeof undefined || dataH == 'auto' ) {
-					dataH = videoWrapperH;
+					dataH = videoWrapperW/1.77777777777778;
 				}
 
 				
@@ -2872,17 +2870,7 @@ APP = ( function ( APP, $, window, document ) {
 										  width     : dataW,
 										  height    : dataH,
 										  loop      : dataLoop,
-										  controlBar: {
-											  muteToggle : false,
-											  autoplay   : dataAuto,
-											  loop       : dataLoop,
-											  controls   : true,
-											  controlBar : {
-												  muteToggle: false
-											  }
-										  }
-
-
+										  autoplay  : dataAuto
 										});
 
 
@@ -2907,9 +2895,8 @@ APP = ( function ( APP, $, window, document ) {
 
 
 						if ( !isNaN( newW ) && !isNaN( newH ) )  {
-							myPlayer
-								.width( newW )
-								.height( newH );	
+							myPlayer.height( newH );		
+							myPlayer.width( newW );		
 							
 							$this.css( 'height', newH );
 						}
@@ -2928,9 +2915,28 @@ APP = ( function ( APP, $, window, document ) {
 				
 					/* ---------  Set, tell the player it's in fullscreen  */
 					if ( dataAuto ) {
-						myPlayer.play();
+						//Fix an error of Video auto play is not working in browser
+						//myPlayer.muted( true ); 
+						
+						//Prevent autoplay error: Uncaught (in promise) DOMException
+						var promise = myPlayer.play();
+
+						if ( promise !== undefined ) {
+							promise.then( function() {
+								// Autoplay started!
+							
+							}).catch( function( error ) {
+								// Autoplay was prevented.
+								$( '#' + coverPlayBtnID ).show();
+								$( '#' + coverPlayBtnID + ' .uix-video__cover__playbtn' ).show();
+								console.log( 'Autoplay was prevented.' );
+								
+							});
+							
+						}
 					}
 
+					
 
 					/* ---------  Disable control bar play button click */
 					if ( !dataControls ) {
@@ -2969,7 +2975,25 @@ APP = ( function ( APP, $, window, document ) {
 						if ( dataAuto ) {
 
 							myPlayer.currentTime(0);
-							myPlayer.play();
+							
+							//Prevent autoplay error: Uncaught (in promise) DOMException
+							var promise = myPlayer.play();
+
+							if ( promise !== undefined ) {
+								promise.then( function() {
+									// Autoplay started!
+
+								}).catch( function( error ) {
+									// Autoplay was prevented.
+									$( '#' + coverPlayBtnID ).show();
+									$( '#' + coverPlayBtnID + ' .uix-video__cover__playbtn' ).show();
+									console.log( 'Autoplay was prevented.' );
+
+								});
+
+							}
+
+							//Hidden replay button
 							$replayBtn.hide();
 
 							//Should the video go to the beginning when it ends

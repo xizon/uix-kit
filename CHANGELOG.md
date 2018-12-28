@@ -1,5 +1,14 @@
 # Changelog
 
+#### = 3.0.4 (December 28, 2018) =
+
+* Fix: Fixed bug in muitiple embedded videos.
+* Fix: Fixed video playback error in Flexslider and Advanced Slider.
+* Tweak: Improve the stability of automated operations on compressed files.
+* Tweak: Optimized script for Tabs module.
+* Tweak: Simplified ID attribute of video module.
+* Tweak: Update videojs to version 7.4.1.
+
 
 #### = 3.0.3 (December 27, 2018) =
 

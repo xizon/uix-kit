@@ -5,80 +5,7 @@
 	---------------------------
 	
 	
-	1.Body And Header
-    2.Common Height
-    3.Get all custom attributes of an element like "data-*"
-    4.Loader
-    5.Mega Menu
-    6.Mobile Menu
-    7.Modal Dialog
-    8.Navigation
-    9.WordPress Core Scripts
-    10.Specify a background image
-    11.Responsive Table
-    12.Videos
-    13.Theme Scripts
-    14.Accordion Background Images
-    15.Accordion
-    16.Advanced Content Slider
-    17.Advanced Slider (Basic)
-    18.Advanced Slider (Special Effects)
-    19.Ajax Push Content
-    20.Ajax Page Loader (Loading A Page via Ajax Into Div)
-    21.Back to Top
-    22.Circle Layout
-    23.Counter
-    24.Dropdown Menu
-    25.Dropdown Menu 2 (Multi-level drop-down navigation)
-    26.Dynamic Drop Down List from JSON
-    27.Flexslider
-    28.Floating Side Element
-    29.Form Progress
-    30.Form
-    31.jQuery UI Datepicker 1.11.4
-    32.Gallery
-    33.Hover Delay Interaction
-    34.Image Shapes
-    35.Lava-Lamp Style Menu
-    36.Custom Lightbox
-    37.Bulleted List
-    38.Posts List With Ajax
-    39.Fullwidth List of Split
-    40.Mousewheel Interaction
-    41.Multiple Items Carousel
-    42.Full Page/One Page Transition
-    43.Full Page/One Page Transition 2
-    44.Parallax
-    45.Periodical Scroll
-    46.Pricing
-    47.Progress Bar
-    48.Progress Line
-    49.Retina Graphics for Website
-    50.Rotating Elements
-    51.Scroll Reveal
-    52.Scrollspy Animate
-    53.Show More Less
-    54.Smooth Scrolling When Clicking An Anchor Link
-    55.Source Code View
-    56.Sticky Elements
-    57.SVG Map (China)
-    58.SVG Map (World)
-    59.3D Background 2
-    60.3D Background 2
-    61.3D Background
-    62.3D Carousel
-    63.3D Model
-    64.3D Pages
-    65.3D Particle Effect
-    66.3D Sphere Rotation
-    67.3D Object Anim When Click
-    68.Tabs
-    69.Team Focus
-    70.Text effect
-    71.Timeline
-    72.Vertical Menu
-    73.WordPress Core Scripts
-
+	${{TOC}}
 
 */
 
@@ -2042,12 +1969,14 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.VIDEOS               = APP.VIDEOS || {};
-	APP.VIDEOS.version       = '0.0.6';
+	APP.VIDEOS.version       = '0.0.7';
     APP.VIDEOS.documentReady = function( $ ) {
 
 		var $window      = $( window ),
 			windowWidth  = $window.width(),
 			windowHeight = $window.height();
+		
+		
 		
 		
 		/* 
@@ -2057,11 +1986,9 @@ APP = ( function ( APP, $, window, document ) {
 		 */  
 		$( '.uix-video' ).each( function()  {
 			var $this          = $( this ),
-				tempID         = 'video-' + UIX_GUID.newGuid(),
-			    curVideoID     = tempID,
+			    curVideoID     = $this.find( 'video' ).attr( 'id' ),
 				coverPlayBtnID = 'videocover-' + curVideoID,
 				videoWrapperW  = $this.closest( '[data-embed-video-wrapper]' ).width(),
-				videoWrapperH  = $this.closest( '[data-embed-video-wrapper]' ).height(),
 				dataAuto       = $this.data( 'embed-video-autoplay' ),
 				dataLoop       = $this.data( 'embed-video-loop' ),
 				dataControls   = $this.data( 'embed-video-controls' ),
@@ -2071,12 +1998,8 @@ APP = ( function ( APP, $, window, document ) {
 			
 			//Push a new ID to video
 			//Solve the problem that ajax asynchronous loading does not play
-			$this.find( '.video-js' ).attr( 'id', tempID );
-			
-			
-			
-			if ( videoWrapperH == 0 ) videoWrapperH = videoWrapperW/1.77777777777778;
-
+			$this.find( '.video-js' ).attr( 'id', curVideoID );
+	
 			
 			if( typeof dataAuto === typeof undefined ) {
 				dataAuto = true;
@@ -2094,7 +2017,7 @@ APP = ( function ( APP, $, window, document ) {
 			}	
 			
 			if( typeof dataH === typeof undefined || dataH == 'auto' ) {
-				dataH = videoWrapperH;
+				dataH = videoWrapperW/1.77777777777778;
 			}
 			
 			//Display cover and play buttons when some mobile device browsers cannot automatically play video
@@ -2136,18 +2059,7 @@ APP = ( function ( APP, $, window, document ) {
 					                  width     : dataW,
 					                  height    : dataH,
 				                      loop      : dataLoop,
-				                      
-									  controlBar: {
-										  muteToggle : false,
-										  autoplay   : dataAuto,
-										  loop       : dataLoop,
-										  controls   : true,
-										  controlBar : {
-											  muteToggle: false,
-										  
-										  }
-									  }
-					
+				                      autoplay   : dataAuto
 					
 									});
 			
@@ -2163,7 +2075,7 @@ APP = ( function ( APP, $, window, document ) {
 						curH    = this.videoHeight(),
 						newW    = curW,
 						newH    = curH;
-
+					
 					newW = videoWrapperW;
 
 					//Scaled/Proportional Content 
@@ -2171,14 +2083,10 @@ APP = ( function ( APP, $, window, document ) {
 					
 				
 					if ( !isNaN( newW ) && !isNaN( newH ) )  {
-						myPlayer
-							.width( newW )
-							.height( newH );		
+						myPlayer.height( newH );		
+						myPlayer.width( newW );		
 					}
 
-
-
-					
 					
 					//Show this video wrapper
 					$this.css( 'visibility', 'visible' );
@@ -2247,7 +2155,8 @@ APP = ( function ( APP, $, window, document ) {
 		//Add video container
 		$( modalDialogTrigger ).each( function()  {
 			
-	
+
+			
 			var $this             = $( this ),
 				videoSrcIfm       = '',
 				videoSrcMp4       = $this.data( 'video-mp4' ),
@@ -2255,7 +2164,7 @@ APP = ( function ( APP, $, window, document ) {
 				videoSrcOgv       = $this.data( 'video-ogv' ),
 				videoPoster       = $this.data( 'video-poster' ),
 				videoContainerMid = $this.data( 'modal-id' ),
-				videoContainerVid = $this.data( 'video-id' );
+				videoContainerVid = videoContainerMid + '--videopush';
 				
 			
 			if( typeof videoSrcMp4 === typeof undefined ) {
@@ -2329,7 +2238,7 @@ APP = ( function ( APP, $, window, document ) {
 		//Check out: http://docs.videojs.com/tutorial-player-workflows.html
 		$( document ).on( 'click', modalDialogTrigger, function() {
 
-			var vid          = $( this ).data( 'video-id' ),
+			var vid          = $( this ).data( 'modal-id' ) + '--videopush',
 				$ifm         = false,
 				newMaxW      = windowWidth - 80,
 				newMaxH      = windowHeight - 80,
@@ -2433,17 +2342,8 @@ APP = ( function ( APP, $, window, document ) {
 			var myPlayer     = videojs( vid, {
 									  width     : 1,
 									  height    : 1,
-									  controlBar: {
-										  muteToggle : false,
-										  autoplay   : true,
-										  loop       : true,
-										  controls   : true,
-										  controlBar : {
-											  muteToggle: false
-										  }
-									  }
-
-
+									  autoplay  : true,
+									  loop      : true
 									});
 
 
@@ -2478,9 +2378,8 @@ APP = ( function ( APP, $, window, document ) {
 					}	
 
 
-					myPlayer
-						.width( newW )
-						.height( newH );
+					myPlayer.height( newH );		
+					myPlayer.width( newW );
 
 
 					//In order to allow CSS to support video centering
@@ -11173,7 +11072,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.ADVANCED_SLIDER               = APP.ADVANCED_SLIDER || {};
-	APP.ADVANCED_SLIDER.version       = '0.0.8';
+	APP.ADVANCED_SLIDER.version       = '0.0.9';
     APP.ADVANCED_SLIDER.pageLoaded    = function() {
 
 		var $window                   = $( window ),
@@ -11181,11 +11080,11 @@ APP = ( function ( APP, $, window, document ) {
 			windowHeight              = $window.height(),
 			animDelay                 = 0,
 			$sliderWrapper            = $( '.uix-advanced-slider' ),
-			tempID                    = 'video-' + UIX_GUID.newGuid(),
 			
 			//Autoplay global variables
 			timer                     = null,
 			playTimes;
+		
 		
 		
 		sliderInit( false );
@@ -11800,8 +11699,7 @@ APP = ( function ( APP, $, window, document ) {
 			wrapper.find( '.uix-video__slider' ).each( function()  {
 				var $this          = $( this ),
 					videoWrapperW  = $this.closest( '.uix-advanced-slider__outline' ).width(),
-					videoWrapperH  = $this.closest( '.uix-advanced-slider__outline' ).height(),
-					curVideoID     = tempID,
+					curVideoID     = $this.find( 'video' ).attr( 'id' ) + '-slider-videopush',
 					coverPlayBtnID = 'videocover-' + curVideoID,
 					dataControls   = $this.data( 'embed-video-controls' ),
 					dataAuto       = $this.data( 'embed-video-autoplay' ),
@@ -11812,12 +11710,9 @@ APP = ( function ( APP, $, window, document ) {
 				
 				//Push a new ID to video
 				//Solve the problem that ajax asynchronous loading does not play
-				$this.find( '.video-js' ).attr( 'id', tempID );
+				$this.find( '.video-js' ).attr( 'id', curVideoID );
 
 				
-				if ( videoWrapperH == 0 ) videoWrapperH = videoWrapperW/1.77777777777778;
-
-			
 				if( typeof dataAuto === typeof undefined ) {
 					dataAuto = true;
 				}
@@ -11835,7 +11730,7 @@ APP = ( function ( APP, $, window, document ) {
 				}	
 
 				if( typeof dataH === typeof undefined || dataH == 'auto' ) {
-					dataH = videoWrapperH;
+					dataH = videoWrapperW/1.77777777777778;
 				}
 
 				
@@ -11878,17 +11773,7 @@ APP = ( function ( APP, $, window, document ) {
 										  width     : dataW,
 										  height    : dataH,
 										  loop      : dataLoop,
-										  controlBar: {
-											  muteToggle : false,
-											  autoplay   : dataAuto,
-											  loop       : dataLoop,
-											  controls   : true,
-											  controlBar : {
-												  muteToggle: false
-											  }
-										  }
-
-
+										  autoplay  : dataAuto
 										});
 
 
@@ -11913,9 +11798,8 @@ APP = ( function ( APP, $, window, document ) {
 
 
 						if ( !isNaN( newW ) && !isNaN( newH ) )  {
-							myPlayer
-								.width( newW )
-								.height( newH );	
+							myPlayer.height( newH );		
+							myPlayer.width( newW );		
 							
 							$this.css( 'height', newH );
 						}
@@ -11934,7 +11818,27 @@ APP = ( function ( APP, $, window, document ) {
 				
 					/* ---------  Set, tell the player it's in fullscreen  */
 					if ( dataAuto ) {
-						myPlayer.play();
+						
+						//Fix an error of Video auto play is not working in browser
+						//myPlayer.muted( true ); 
+						
+						//Prevent autoplay error: Uncaught (in promise) DOMException
+						var promise = myPlayer.play();
+
+						if ( promise !== undefined ) {
+							promise.then( function() {
+								// Autoplay started!
+							
+							}).catch( function( error ) {
+								// Autoplay was prevented.
+								$( '#' + coverPlayBtnID ).show();
+								$( '#' + coverPlayBtnID + ' .uix-video__cover__playbtn' ).show();
+								console.log( 'Autoplay was prevented.' );
+								
+							});
+							
+						}
+						
 					}
 
 
@@ -11976,7 +11880,26 @@ APP = ( function ( APP, $, window, document ) {
 						if ( dataAuto ) {
 
 							myPlayer.currentTime(0);
-							myPlayer.play();
+							
+						
+							//Prevent autoplay error: Uncaught (in promise) DOMException
+							var promise = myPlayer.play();
+
+							if ( promise !== undefined ) {
+								promise.then( function() {
+									// Autoplay started!
+
+								}).catch( function( error ) {
+									// Autoplay was prevented.
+									$( '#' + coverPlayBtnID ).show();
+									$( '#' + coverPlayBtnID + ' .uix-video__cover__playbtn' ).show();
+									console.log( 'Autoplay was prevented.' );
+
+								});
+
+							}
+
+							//Hidden replay button
 							$replayBtn.hide();
 
 							//Should the video go to the beginning when it ends
@@ -12046,7 +11969,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.ADVANCED_SLIDER_FILTER               = APP.ADVANCED_SLIDER_FILTER || {};
-	APP.ADVANCED_SLIDER_FILTER.version       = '0.1.4';
+	APP.ADVANCED_SLIDER_FILTER.version       = '0.1.5';
     APP.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 	
@@ -12055,7 +11978,6 @@ APP = ( function ( APP, $, window, document ) {
 			windowHeight              = $window.height(),
 			animSpeed                 = 1000,
 			$sliderWrapper            = $( '.uix-advanced-slider-sp' ),
-			tempID                    = 'video-' + UIX_GUID.newGuid(),
 			
 			//Save different canvas heights as an array
 			canvasHeights             = [],
@@ -14196,12 +14118,12 @@ APP = ( function ( APP, $, window, document ) {
 
 						//Add new ripple each time mouse
 						//-------------------------------------
-						document.addEventListener("mousedown", function(e) {
+						$sliderWrapper[0].addEventListener("mousedown", function(e) {
 					  
 							TweenMax.to( displacementFilter.scale, 1, { x: "+=" + Math.sin( e.pageX ) * 100 + "", y: "+=" + Math.cos( e.pageY ) * 100 + ""  });   
 							rotateSpite();
 						});
-						document.addEventListener("mouseup", function(e) {
+						$sliderWrapper[0].addEventListener("mouseup", function(e) {
 					
 							TweenMax.to( displacementFilter.scale, 1, { x: 0, y: 0 } );
 						});
@@ -14209,6 +14131,9 @@ APP = ( function ( APP, $, window, document ) {
 						var rotateSpite = function() {
 							displacementFilter.rotation += 0.001;
 						};
+						
+						
+						
 						
 						
 						
@@ -14821,8 +14746,7 @@ APP = ( function ( APP, $, window, document ) {
 			wrapper.find( '.uix-video__slider' ).each( function()  {
 				var $this          = $( this ),
 					videoWrapperW  = $this.closest( '.uix-advanced-slider__outline' ).width(),
-					videoWrapperH  = $this.closest( '.uix-advanced-slider__outline' ).height(),
-					curVideoID     = tempID,
+					curVideoID     = $this.find( 'video' ).attr( 'id' ) + '-slider-videopush',
 					coverPlayBtnID = 'videocover-' + curVideoID,
 					dataControls   = $this.data( 'embed-video-controls' ),
 					dataAuto       = $this.data( 'embed-video-autoplay' ),
@@ -14834,12 +14758,9 @@ APP = ( function ( APP, $, window, document ) {
 				
 				//Push a new ID to video
 				//Solve the problem that ajax asynchronous loading does not play
-				$this.find( '.video-js' ).attr( 'id', tempID );
+				$this.find( '.video-js' ).attr( 'id', curVideoID );
 
 				
-				if ( videoWrapperH == 0 ) videoWrapperH = videoWrapperW/1.77777777777778;
-
-			
 				if( typeof dataAuto === typeof undefined ) {
 					dataAuto = true;
 				}
@@ -14857,7 +14778,7 @@ APP = ( function ( APP, $, window, document ) {
 				}	
 
 				if( typeof dataH === typeof undefined || dataH == 'auto' ) {
-					dataH = videoWrapperH;
+					dataH = videoWrapperW/1.77777777777778;
 				}
 
 				
@@ -14899,17 +14820,7 @@ APP = ( function ( APP, $, window, document ) {
 										  width     : dataW,
 										  height    : dataH,
 										  loop      : dataLoop,
-										  controlBar: {
-											  muteToggle : false,
-											  autoplay   : dataAuto,
-											  loop       : dataLoop,
-											  controls   : true,
-											  controlBar : {
-												  muteToggle: false
-											  }
-										  }
-
-
+										  autoplay  : dataAuto
 										});
 
 
@@ -14934,9 +14845,8 @@ APP = ( function ( APP, $, window, document ) {
 
 
 						if ( !isNaN( newW ) && !isNaN( newH ) )  {
-							myPlayer
-								.width( newW )
-								.height( newH );	
+							myPlayer.height( newH );		
+							myPlayer.width( newW );		
 							
 							$this.css( 'height', newH );
 						}
@@ -14955,9 +14865,28 @@ APP = ( function ( APP, $, window, document ) {
 				
 					/* ---------  Set, tell the player it's in fullscreen  */
 					if ( dataAuto ) {
-						myPlayer.play();
+						//Fix an error of Video auto play is not working in browser
+						//myPlayer.muted( true ); 
+						
+						//Prevent autoplay error: Uncaught (in promise) DOMException
+						var promise = myPlayer.play();
+
+						if ( promise !== undefined ) {
+							promise.then( function() {
+								// Autoplay started!
+							
+							}).catch( function( error ) {
+								// Autoplay was prevented.
+								$( '#' + coverPlayBtnID ).show();
+								$( '#' + coverPlayBtnID + ' .uix-video__cover__playbtn' ).show();
+								console.log( 'Autoplay was prevented.' );
+								
+							});
+							
+						}
 					}
 
+					
 
 					/* ---------  Disable control bar play button click */
 					if ( !dataControls ) {
@@ -14996,7 +14925,25 @@ APP = ( function ( APP, $, window, document ) {
 						if ( dataAuto ) {
 
 							myPlayer.currentTime(0);
-							myPlayer.play();
+							
+							//Prevent autoplay error: Uncaught (in promise) DOMException
+							var promise = myPlayer.play();
+
+							if ( promise !== undefined ) {
+								promise.then( function() {
+									// Autoplay started!
+
+								}).catch( function( error ) {
+									// Autoplay was prevented.
+									$( '#' + coverPlayBtnID ).show();
+									$( '#' + coverPlayBtnID + ' .uix-video__cover__playbtn' ).show();
+									console.log( 'Autoplay was prevented.' );
+
+								});
+
+							}
+
+							//Hidden replay button
 							$replayBtn.hide();
 
 							//Should the video go to the beginning when it ends
@@ -16761,7 +16708,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.FLEXSLIDER               = APP.FLEXSLIDER || {};
-	APP.FLEXSLIDER.version       = '0.1.3';
+	APP.FLEXSLIDER.version       = '0.1.4';
     APP.FLEXSLIDER.documentReady = function( $ ) {
 
 		var $window            = $( window ),
@@ -17099,9 +17046,7 @@ APP = ( function ( APP, $, window, document ) {
 			wrapper.find( '.uix-video__slider' ).each( function()  {
 				var $this          = $( this ),
 					videoWrapperW  = $this.closest( '[data-embed-video-wrapper]' ).width(),
-					videoWrapperH  = $this.closest( '[data-embed-video-wrapper]' ).height(),
-					tempID         = 'video-' + UIX_GUID.newGuid(),
-					curVideoID     = tempID,
+					curVideoID     = $this.find( 'video' ).attr( 'id' ) + '-slider-videopush',
 					coverPlayBtnID = 'videocover-' + curVideoID,
 					dataControls   = $this.data( 'embed-video-controls' ),
 					dataAuto       = $this.data( 'embed-video-autoplay' ),
@@ -17112,10 +17057,8 @@ APP = ( function ( APP, $, window, document ) {
 
 				//Push a new ID to video
 				//Solve the problem that ajax asynchronous loading does not play
-				$this.find( '.video-js' ).attr( 'id', tempID );
+				$this.find( '.video-js' ).attr( 'id', curVideoID );
 
-				
-				if ( videoWrapperH == 0 ) videoWrapperH = videoWrapperW/1.77777777777778;
 			
 				if( typeof dataAuto === typeof undefined ) {
 					dataAuto = true;
@@ -17134,7 +17077,7 @@ APP = ( function ( APP, $, window, document ) {
 				}	
 
 				if( typeof dataH === typeof undefined || dataH == 'auto' ) {
-					dataH = videoWrapperH;
+					dataH = videoWrapperW/1.77777777777778;
 				}
 				
 
@@ -17148,13 +17091,19 @@ APP = ( function ( APP, $, window, document ) {
 					$( '#' + coverPlayBtnID + ' .uix-video__cover__playbtn' ).on( btnEv, function( e ) {
 						e.preventDefault();
 
+				
 						myPlayer.play();
+						
 
 						$( '#' + coverPlayBtnID ).hide();
 
 					});
 
+
+					
+
 				}
+				
 				
 				
 				//Add replay button to video 
@@ -17176,17 +17125,7 @@ APP = ( function ( APP, $, window, document ) {
 										  width     : dataW,
 										  height    : dataH,
 										  loop      : dataLoop,
-										  controlBar: {
-											  muteToggle : false,
-											  autoplay   : dataAuto,
-											  loop       : dataLoop,
-											  controls   : true,
-											  controlBar : {
-												  muteToggle: false
-											  }
-										  }
-
-
+										  autoplay  : dataAuto
 										});
 
 				
@@ -17210,9 +17149,8 @@ APP = ( function ( APP, $, window, document ) {
 						
 					
 						if ( !isNaN( newW ) && !isNaN( newH ) )  {
-							myPlayer
-								.width( newW )
-								.height( newH );	
+							myPlayer.height( newH );		
+							myPlayer.width( newW );			
 							
 							$this.css( 'height', newH );
 						}
@@ -17231,7 +17169,33 @@ APP = ( function ( APP, $, window, document ) {
 				
 					/* ---------  Set, tell the player it's in fullscreen  */
 					if ( dataAuto ) {
-						myPlayer.play();
+						
+						//Fix an error of Video auto play is not working in browser
+						//myPlayer.muted( true ); 
+						
+						
+						
+						//Prevent autoplay error: Uncaught (in promise) DOMException
+						var promise = myPlayer.play();
+
+						if ( promise !== undefined ) {
+							promise.then( function() {
+								// Autoplay started!
+							
+							}).catch( function( error ) {
+								// Autoplay was prevented.
+								$( '#' + coverPlayBtnID ).show();
+								$( '#' + coverPlayBtnID + ' .uix-video__cover__playbtn' ).show();
+								console.log( 'Autoplay was prevented.' );
+								
+							});
+							
+							
+						}
+						
+						
+
+						
 					}
 
 
@@ -17271,8 +17235,30 @@ APP = ( function ( APP, $, window, document ) {
 						if ( dataAuto ) {
 
 							myPlayer.currentTime(0);
-							myPlayer.play();
+							
+							
+							//Prevent autoplay error: Uncaught (in promise) DOMException
+							var promise = myPlayer.play();
+
+							if ( promise !== undefined ) {
+								promise.then( function() {
+									// Autoplay started!
+									
+								}).catch( function( error ) {
+									// Autoplay was prevented.
+									$( '#' + coverPlayBtnID ).show();
+									$( '#' + coverPlayBtnID + ' .uix-video__cover__playbtn' ).show();
+									console.log( 'Autoplay was prevented.' );
+								});
+							}
+
+							
+							
+							
+						
+							//Hidden replay button
 							$replayBtn.hide();
+
 
 							//Should the video go to the beginning when it ends
 							myPlayer.on( 'ended', function () { 
@@ -30103,12 +30089,12 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.TABS               = APP.TABS || {};
-	APP.TABS.version       = '0.1.2';
+	APP.TABS.version       = '0.1.3';
     APP.TABS.documentReady = function( $ ) {
 
 		$( '.uix-tabs' ).each( function( id ) {
 			var $this             = $( this ),
-			    $li               = $this.find( 'ul > li' ),
+			    $li               = $this.find( '.uix-tabs__nav ul > li' ),
 				liWidth           = $li.first().outerWidth(),
 				liHeight          = $li.first().outerHeight(),
 				liNum             = $li.length,
@@ -30119,9 +30105,6 @@ APP = ( function ( APP, $, window, document ) {
 				rotationRadius    = $this.data( 'rotation-radius' ),
 				rotationWapperDeg = $this.data( 'rotation-wrapper-angle' ),
 				rotationDisplay   = $this.data( 'rotation-display' ),
-				
-				
-				
 				tabBoxID          = id,
 				isNumeric         = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
 			
@@ -30165,7 +30148,7 @@ APP = ( function ( APP, $, window, document ) {
 				} );
 
 		
-				$this.find( 'ul' ).css( {
+				$this.find( '.uix-tabs__nav ul' ).css( {
 					'width'     : rotationRadius * 2 + 'px',
 					'height'    : rotationRadius * 2 + 'px',
 					'transform' : 'rotate('+parseFloat(rotationWapperDeg)+'deg)'
@@ -30177,10 +30160,10 @@ APP = ( function ( APP, $, window, document ) {
 				var angle           = 0,
 					step            = 2 * Math.PI / rotationDisplay,
 					transitionDelay = 0,
-					pad             = $this.find( 'ul' ).width();
+					pad             = $this.find( '.uix-tabs__nav ul' ).width();
 
 
-				$this.find( 'ul > li' ).each( function() { //Can'nt use arrow function here!!!
+				$this.find( '.uix-tabs__nav ul > li' ).each( function() { //Can'nt use arrow function here!!!
 					// 'this' works differently with arrow fucntions
 					var el          = $( this ),
 						x           = rotationRadius * Math.cos(angle) - liWidth / 2,
@@ -30222,7 +30205,7 @@ APP = ( function ( APP, $, window, document ) {
 							
 							
 						
-							$this.find( 'ul > li' ).each( function( index ) {
+							$this.find( '.uix-tabs__nav ul > li' ).each( function( index ) {
 								var x2           = Math.cos( - Math.PI / 2 + index * increase - angle) * rotationRadius - liWidth / 2,
 									y2           = Math.sin( - Math.PI / 2 + index * increase - angle) * rotationRadius + liHeight;
 
@@ -30254,19 +30237,19 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			// Tab Sliding Effext
-			if ( $this.find( 'ul li:first .uix-tabs__marker' ).length == 0 ) {
-				$this.find( 'ul li:first' ).prepend( '<div class="uix-tabs__marker"></div>' );
+			if ( $this.find( '.uix-tabs__nav ul > li:first .uix-tabs__marker' ).length == 0 ) {
+				$this.find( '.uix-tabs__nav ul > li:first' ).prepend( '<div class="uix-tabs__marker"></div>' );
 			}
 			
 			
 			// Tab Fade Effect
-			$this.on( 'click', 'li', function( e ) {
+			$this.on( 'click', '.uix-tabs__nav ul > li', function( e ) {
 				
 				var tabID = $( this ).attr( 'data-tab' ),
 					index = parseFloat( $( this ).index() - 1 );
 				
 				
-				$this.find( 'li' ).removeClass( 'active' );
+				$this.find( '.uix-tabs__nav ul > li' ).removeClass( 'active' );
 				$this.find( '.uix-tabs__content' ).removeClass( 'active' );
 		
 				$( this ).addClass( 'active' );
@@ -30275,7 +30258,7 @@ APP = ( function ( APP, $, window, document ) {
 
 				//sliding marker
 				var translateX = $( this ).index() * 100,
-					liHeight   = $this.find( 'ul li:first' ).outerHeight(),
+					liHeight   = $this.find( '.uix-tabs__nav ul > li:first' ).outerHeight(),
 					translateY = $( this ).index() * liHeight;
 				
 				if ( $( window ).width() <= 768 ) {
@@ -30296,7 +30279,7 @@ APP = ( function ( APP, $, window, document ) {
 			});
 			
 			// Init
-			$this.find( 'ul > li.active' ).trigger( 'click' );
+			$this.find( '.uix-tabs__nav ul > li.active' ).trigger( 'click' );
 			
 			//Active current tab
 			var url    = window.location.href,

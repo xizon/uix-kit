@@ -488,70 +488,15 @@ server.listen( globs.port, "localhost", function (err, result) {
  *************************************
  */
 
+
 compiler.plugin( 'done', () => { 
 	
 	
-	let mainJSFile      = './'+globs.dist+'/' + globs.notES6JS,
-		targetJSFile    = './'+globs.dist+'/uix-kit.js',
-		targetJSMinFile = './'+globs.dist+'/uix-kit.min.js';
+	let mainJSFile            = './'+globs.dist+'/' + globs.notES6JS,
+		targetJSFile          = './'+globs.dist+'/uix-kit.js',
+		targetJSMinFile       = './'+globs.dist+'/uix-kit.min.js';
 	
 	
-	setTimeout ( () => {
-		
-		// Build a table of contents (TOC)
-		['./'+globs.dist+'/uix-kit.css', './'+globs.dist+'/uix-kit-rtl.css', './'+globs.dist+'/' + globs.notES6JS].map( ( filepath ) => {
-
-			if ( fs.existsSync( filepath ) ) {
-
-				fs.readFile( filepath, function( err, content ) {
-
-					if ( err ) throw err;
-
-					let curCon  = content.toString(),
-						newtext = curCon.match(/<\!\-\-.*?(?:>|\-\-\/>)/gi );
-
-
-					//is the matched group if found
-					if ( newtext && newtext.length > 1 ) {  
-
-						let curToc = '';
-
-						for ( var p = 0; p < newtext.length; p++ ) {
-
-							let curIndex = p + 1,
-								newStr   = newtext[ p ].replace( '<!--', '' ).replace( '-->', '' ).replace(/^\s+|\s+$/g, '' );
-
-							if ( p > 0 ) {
-								curToc += '    ' + curIndex + '.' + newStr + '\n';
-							} else {
-								curToc +=  curIndex + '.' + newStr + '\n';
-							}
-
-						}
-
-						//Replace a string in a file with nodejs
-						var result = curCon.replace(/\$\{\{TOC\}\}/gi, curToc );
-
-						fs.writeFile( filepath, result, 'utf8', function (err) {
-							console.log( filepath + ' \'s table of contents generated successfully!' );
-							if (err) return console.log(err);
-						});
-
-
-					}
-
-
-				});			
-
-
-			}
-
-
-		});	
-		
-		
-	}, 1000 );
-
 	setTimeout ( () => {
 		
 		
@@ -569,25 +514,93 @@ compiler.plugin( 'done', () => {
 				//Update the normal js file
 				fs.appendFile( targetJSFile, oldContent, 'utf8', function (err) {
 
-					console.log( targetJSFile + ' file written successfully!' );
+					console.log( targetJSFile + ' written successfully!' );
 
-					
-					//Update the compressed js file
-					minify({
-						compressor: uglifyJS,
-						input: targetJSFile,
-						output: targetJSMinFile,
-						callback: function(err, min) {
-							
-							console.log( targetJSMinFile + ' file written successfully!' );
+					fs.copyFile( targetJSFile, targetJSMinFile, function (err) {
 
-							if ( err ) {
-								console.error('===================[ ERROR: Please Rebuild! ]===================');
-							} 
-							
-						    
+						if (err) {
+							return console.error(err);
 						}
+
+						console.log( targetJSMinFile + ' copied successfully!' );
+						
+						//Update the compressed js file
+						minify({
+							compressor: uglifyJS,
+							input: targetJSMinFile,
+							output: targetJSMinFile,
+							callback: function(err, min) {
+
+								if ( err ) {
+									console.log( '=============[ ERROR: Please Rebuild! ]================' + err );
+								} else {
+									console.log( targetJSMinFile + ' compressed successfully!' );
+								}
+								
+								
+								// Build a table of contents (TOC)
+								['./'+globs.dist+'/uix-kit.css', './'+globs.dist+'/uix-kit-rtl.css', targetJSFile ].map( ( filepath ) => {
+
+									if ( fs.existsSync( filepath ) ) {
+
+										fs.readFile( filepath, function( err, content ) {
+
+											if ( err ) throw err;
+
+											let curCon  = content.toString(),
+												newtext = curCon.match(/<\!\-\-.*?(?:>|\-\-\/>)/gi );
+
+
+											//is the matched group if found
+											if ( newtext && newtext.length > 1 ) {  
+
+												let curToc = '';
+
+												for ( var p = 0; p < newtext.length; p++ ) {
+
+													let curIndex = p + 1,
+														newStr   = newtext[ p ].replace( '<!--', '' ).replace( '-->', '' ).replace(/^\s+|\s+$/g, '' );
+
+													if ( p > 0 ) {
+														curToc += '    ' + curIndex + '.' + newStr + '\n';
+													} else {
+														curToc +=  curIndex + '.' + newStr + '\n';
+													}
+
+												}
+
+												//Replace a string in a file with nodejs
+												var result = curCon.replace(/\$\{\{TOC\}\}/gi, curToc );
+
+												fs.writeFile( filepath, result, 'utf8', function (err) {
+													console.log( filepath + ' \'s table of contents generated successfully!' );
+													if (err) return console.log(err);
+												});
+
+
+											}
+
+
+										});			
+
+
+									}
+
+
+								});	
+
+
+
+							}
+						});	
+
+						
+
 					});
+					
+					
+
+						
 					
 					if (err) {
 						console.error(err);
@@ -597,12 +610,14 @@ compiler.plugin( 'done', () => {
 
 			});	
 		}
+		
 	
 	}, 3500 );	
 	
-	
 
 });
+									
+				
 									
 									
 /*! 

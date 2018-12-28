@@ -17,14 +17,15 @@ $anim-duration: 0.6s;
  1. Initialize the slider style
  ---------------------------
  */ 
+.uix-advanced-slider__wrapper {
+	position: relative;
+}
+
+
 /* Prevent content overflow */
 .uix-advanced-slider__wrapper,
 .uix-advanced-slider__item {
-	max-height: 100vh;	
-}
-
-.uix-advanced-slider__wrapper {
-	overflow: hidden;		
+	//max-height: 100vh;	
 }
 
 .uix-advanced-slider {

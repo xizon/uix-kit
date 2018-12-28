@@ -8,12 +8,12 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.TABS               = APP.TABS || {};
-	APP.TABS.version       = '0.1.2';
+	APP.TABS.version       = '0.1.3';
     APP.TABS.documentReady = function( $ ) {
 
 		$( '.uix-tabs' ).each( function( id ) {
 			var $this             = $( this ),
-			    $li               = $this.find( 'ul > li' ),
+			    $li               = $this.find( '.uix-tabs__nav ul > li' ),
 				liWidth           = $li.first().outerWidth(),
 				liHeight          = $li.first().outerHeight(),
 				liNum             = $li.length,
@@ -24,9 +24,6 @@ APP = ( function ( APP, $, window, document ) {
 				rotationRadius    = $this.data( 'rotation-radius' ),
 				rotationWapperDeg = $this.data( 'rotation-wrapper-angle' ),
 				rotationDisplay   = $this.data( 'rotation-display' ),
-				
-				
-				
 				tabBoxID          = id,
 				isNumeric         = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
 			
@@ -70,7 +67,7 @@ APP = ( function ( APP, $, window, document ) {
 				} );
 
 		
-				$this.find( 'ul' ).css( {
+				$this.find( '.uix-tabs__nav ul' ).css( {
 					'width'     : rotationRadius * 2 + 'px',
 					'height'    : rotationRadius * 2 + 'px',
 					'transform' : 'rotate('+parseFloat(rotationWapperDeg)+'deg)'
@@ -82,10 +79,10 @@ APP = ( function ( APP, $, window, document ) {
 				var angle           = 0,
 					step            = 2 * Math.PI / rotationDisplay,
 					transitionDelay = 0,
-					pad             = $this.find( 'ul' ).width();
+					pad             = $this.find( '.uix-tabs__nav ul' ).width();
 
 
-				$this.find( 'ul > li' ).each( function() { //Can'nt use arrow function here!!!
+				$this.find( '.uix-tabs__nav ul > li' ).each( function() { //Can'nt use arrow function here!!!
 					// 'this' works differently with arrow fucntions
 					var el          = $( this ),
 						x           = rotationRadius * Math.cos(angle) - liWidth / 2,
@@ -127,7 +124,7 @@ APP = ( function ( APP, $, window, document ) {
 							
 							
 						
-							$this.find( 'ul > li' ).each( function( index ) {
+							$this.find( '.uix-tabs__nav ul > li' ).each( function( index ) {
 								var x2           = Math.cos( - Math.PI / 2 + index * increase - angle) * rotationRadius - liWidth / 2,
 									y2           = Math.sin( - Math.PI / 2 + index * increase - angle) * rotationRadius + liHeight;
 
@@ -159,19 +156,19 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			// Tab Sliding Effext
-			if ( $this.find( 'ul li:first .uix-tabs__marker' ).length == 0 ) {
-				$this.find( 'ul li:first' ).prepend( '<div class="uix-tabs__marker"></div>' );
+			if ( $this.find( '.uix-tabs__nav ul > li:first .uix-tabs__marker' ).length == 0 ) {
+				$this.find( '.uix-tabs__nav ul > li:first' ).prepend( '<div class="uix-tabs__marker"></div>' );
 			}
 			
 			
 			// Tab Fade Effect
-			$this.on( 'click', 'li', function( e ) {
+			$this.on( 'click', '.uix-tabs__nav ul > li', function( e ) {
 				
 				var tabID = $( this ).attr( 'data-tab' ),
 					index = parseFloat( $( this ).index() - 1 );
 				
 				
-				$this.find( 'li' ).removeClass( 'active' );
+				$this.find( '.uix-tabs__nav ul > li' ).removeClass( 'active' );
 				$this.find( '.uix-tabs__content' ).removeClass( 'active' );
 		
 				$( this ).addClass( 'active' );
@@ -180,7 +177,7 @@ APP = ( function ( APP, $, window, document ) {
 
 				//sliding marker
 				var translateX = $( this ).index() * 100,
-					liHeight   = $this.find( 'ul li:first' ).outerHeight(),
+					liHeight   = $this.find( '.uix-tabs__nav ul > li:first' ).outerHeight(),
 					translateY = $( this ).index() * liHeight;
 				
 				if ( $( window ).width() <= 768 ) {
@@ -201,7 +198,7 @@ APP = ( function ( APP, $, window, document ) {
 			});
 			
 			// Init
-			$this.find( 'ul > li.active' ).trigger( 'click' );
+			$this.find( '.uix-tabs__nav ul > li.active' ).trigger( 'click' );
 			
 			//Active current tab
 			var url    = window.location.href,

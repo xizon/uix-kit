@@ -8,12 +8,14 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.VIDEOS               = APP.VIDEOS || {};
-	APP.VIDEOS.version       = '0.0.6';
+	APP.VIDEOS.version       = '0.0.7';
     APP.VIDEOS.documentReady = function( $ ) {
 
 		var $window      = $( window ),
 			windowWidth  = $window.width(),
 			windowHeight = $window.height();
+		
+		
 		
 		
 		/* 
@@ -23,11 +25,9 @@ APP = ( function ( APP, $, window, document ) {
 		 */  
 		$( '.uix-video' ).each( function()  {
 			var $this          = $( this ),
-				tempID         = 'video-' + UIX_GUID.newGuid(),
-			    curVideoID     = tempID,
+			    curVideoID     = $this.find( 'video' ).attr( 'id' ),
 				coverPlayBtnID = 'videocover-' + curVideoID,
 				videoWrapperW  = $this.closest( '[data-embed-video-wrapper]' ).width(),
-				videoWrapperH  = $this.closest( '[data-embed-video-wrapper]' ).height(),
 				dataAuto       = $this.data( 'embed-video-autoplay' ),
 				dataLoop       = $this.data( 'embed-video-loop' ),
 				dataControls   = $this.data( 'embed-video-controls' ),
@@ -37,12 +37,8 @@ APP = ( function ( APP, $, window, document ) {
 			
 			//Push a new ID to video
 			//Solve the problem that ajax asynchronous loading does not play
-			$this.find( '.video-js' ).attr( 'id', tempID );
-			
-			
-			
-			if ( videoWrapperH == 0 ) videoWrapperH = videoWrapperW/1.77777777777778;
-
+			$this.find( '.video-js' ).attr( 'id', curVideoID );
+	
 			
 			if( typeof dataAuto === typeof undefined ) {
 				dataAuto = true;
@@ -60,7 +56,7 @@ APP = ( function ( APP, $, window, document ) {
 			}	
 			
 			if( typeof dataH === typeof undefined || dataH == 'auto' ) {
-				dataH = videoWrapperH;
+				dataH = videoWrapperW/1.77777777777778;
 			}
 			
 			//Display cover and play buttons when some mobile device browsers cannot automatically play video
@@ -102,18 +98,7 @@ APP = ( function ( APP, $, window, document ) {
 					                  width     : dataW,
 					                  height    : dataH,
 				                      loop      : dataLoop,
-				                      
-									  controlBar: {
-										  muteToggle : false,
-										  autoplay   : dataAuto,
-										  loop       : dataLoop,
-										  controls   : true,
-										  controlBar : {
-											  muteToggle: false,
-										  
-										  }
-									  }
-					
+				                      autoplay   : dataAuto
 					
 									});
 			
@@ -129,7 +114,7 @@ APP = ( function ( APP, $, window, document ) {
 						curH    = this.videoHeight(),
 						newW    = curW,
 						newH    = curH;
-
+					
 					newW = videoWrapperW;
 
 					//Scaled/Proportional Content 
@@ -137,14 +122,10 @@ APP = ( function ( APP, $, window, document ) {
 					
 				
 					if ( !isNaN( newW ) && !isNaN( newH ) )  {
-						myPlayer
-							.width( newW )
-							.height( newH );		
+						myPlayer.height( newH );		
+						myPlayer.width( newW );		
 					}
 
-
-
-					
 					
 					//Show this video wrapper
 					$this.css( 'visibility', 'visible' );
@@ -213,7 +194,8 @@ APP = ( function ( APP, $, window, document ) {
 		//Add video container
 		$( modalDialogTrigger ).each( function()  {
 			
-	
+
+			
 			var $this             = $( this ),
 				videoSrcIfm       = '',
 				videoSrcMp4       = $this.data( 'video-mp4' ),
@@ -221,7 +203,7 @@ APP = ( function ( APP, $, window, document ) {
 				videoSrcOgv       = $this.data( 'video-ogv' ),
 				videoPoster       = $this.data( 'video-poster' ),
 				videoContainerMid = $this.data( 'modal-id' ),
-				videoContainerVid = $this.data( 'video-id' );
+				videoContainerVid = videoContainerMid + '--videopush';
 				
 			
 			if( typeof videoSrcMp4 === typeof undefined ) {
@@ -295,7 +277,7 @@ APP = ( function ( APP, $, window, document ) {
 		//Check out: http://docs.videojs.com/tutorial-player-workflows.html
 		$( document ).on( 'click', modalDialogTrigger, function() {
 
-			var vid          = $( this ).data( 'video-id' ),
+			var vid          = $( this ).data( 'modal-id' ) + '--videopush',
 				$ifm         = false,
 				newMaxW      = windowWidth - 80,
 				newMaxH      = windowHeight - 80,
@@ -399,17 +381,8 @@ APP = ( function ( APP, $, window, document ) {
 			var myPlayer     = videojs( vid, {
 									  width     : 1,
 									  height    : 1,
-									  controlBar: {
-										  muteToggle : false,
-										  autoplay   : true,
-										  loop       : true,
-										  controls   : true,
-										  controlBar : {
-											  muteToggle: false
-										  }
-									  }
-
-
+									  autoplay  : true,
+									  loop      : true
 									});
 
 
@@ -444,9 +417,8 @@ APP = ( function ( APP, $, window, document ) {
 					}	
 
 
-					myPlayer
-						.width( newW )
-						.height( newH );
+					myPlayer.height( newH );		
+					myPlayer.width( newW );
 
 
 					//In order to allow CSS to support video centering
