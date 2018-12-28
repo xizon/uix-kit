@@ -11,12 +11,11 @@
  * @requires ./src/components/_plugins-THREE
  */
 
-
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP._3D_PARTICLE               = APP._3D_PARTICLE || {};
-	APP._3D_PARTICLE.version       = '0.0.2';
+	APP._3D_PARTICLE.version       = '0.0.3';
     APP._3D_PARTICLE.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -41,6 +40,11 @@ APP = ( function ( APP, $, window, document ) {
 			windowHalfX  = windowWidth / 2,
 			windowHalfY  = windowHeight / 2;
 
+		
+		
+		
+		//particle rotation
+		var particleRotation;
 
 		var centerVector = new THREE.Vector3(0, 0, 0);
 		var previousTime = 0;
@@ -49,6 +53,8 @@ APP = ( function ( APP, $, window, document ) {
 		
 		init();
 		render();
+		
+		
 		
 
 		function init() {
@@ -67,6 +73,7 @@ APP = ( function ( APP, $, window, document ) {
 			renderer.setSize(windowWidth, windowHeight);
 
 			
+		
 			
 			//Scene
 			scene = new THREE.Scene();
@@ -95,8 +102,8 @@ APP = ( function ( APP, $, window, document ) {
 					// Immediately use the texture for material creation
 					var geometry = new THREE.Geometry();
 					var material = new THREE.PointsMaterial({
-						size: 2,
-						color: 0x333333,
+						size: 3,
+						color: 0xffffff,
 						sizeAttenuation: false
 					});
 					
@@ -148,8 +155,44 @@ APP = ( function ( APP, $, window, document ) {
 					console.error( 'An error happened.' );
 				}
 			);
+			
+			
+			
+			// add particle rotation
+			particleRotation = new THREE.Object3D();
+			scene.add( particleRotation );
+			var geometryPR = new THREE.TetrahedronGeometry(2, 0),
+				materialPR = new THREE.MeshPhongMaterial({
+				color: 0xffffff,
+				shading: THREE.FlatShading
+			});
 
+			for (var i = 0; i < 1000; i++) {
+				var mesh = new THREE.Mesh( geometryPR, materialPR );
+				mesh.position.set(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize();
+				mesh.position.multiplyScalar(90 + (Math.random() * 700));
+				mesh.rotation.set(Math.random() * 2, Math.random() * 2, Math.random() * 2);
+				particleRotation.add(mesh);
+			}
+			
+			var ambientLight = new THREE.AmbientLight(0x999999 );
+			scene.add(ambientLight);
 
+			var lights = [];
+			lights[0] = new THREE.DirectionalLight( 0xffffff, 1 );
+			lights[0].position.set( 1, 0, 0 );
+			lights[1] = new THREE.DirectionalLight( 0x11E8BB, 1 );
+			lights[1].position.set( 0.75, 1, 0.5 );
+			lights[2] = new THREE.DirectionalLight( 0x8200C9, 1 );
+			lights[2].position.set( -0.75, -1, 0.5 );
+			scene.add( lights[0] );
+			scene.add( lights[1] );
+			scene.add( lights[2] );
+			
+			
+			
+
+			//----
 			document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 			document.addEventListener( 'touchstart', onDocumentTouchStart, false );
 			document.addEventListener( 'touchmove', onDocumentTouchMove, false );
@@ -173,7 +216,7 @@ APP = ( function ( APP, $, window, document ) {
             var delta      = clock.getDelta(),
 				thickness = 40;
 			
-			
+		
 			//Need to add judgment to avoid Cannot read property 'geometry' of undefined
 			if ( typeof particles != typeof undefined ) {
 				
@@ -222,7 +265,12 @@ APP = ( function ( APP, $, window, document ) {
 			camera.position.y += ( - mouseY - camera.position.y ) * 0.09;
 			camera.lookAt( centerVector );
 			
+			
+			//particle rotation
+			particleRotation.rotation.x += 0.0000;
+			particleRotation.rotation.y -= 0.0040;
 
+			
 			renderer.render( scene, camera );
 			
 		}
@@ -316,6 +364,5 @@ APP = ( function ( APP, $, window, document ) {
     return APP;
 
 }( APP, jQuery, window, document ) );
-
 
 

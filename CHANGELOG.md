@@ -1,6 +1,6 @@
 # Changelog
 
-#### = 3.0.4 (December 28, 2018) =
+#### = 3.0.5 (December 28, 2018) =
 
 * Fix: Fixed bug in muitiple embedded videos.
 * Fix: Fixed video playback error in Flexslider and Advanced Slider.
