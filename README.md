@@ -160,7 +160,7 @@ $ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
         
         <!-- Basic  -->
         <link rel="stylesheet" href="assets/css/bootstrap.min.css?ver=4.1.3" media="all"/>
-		<link rel="stylesheet" href="assets/css/video.min.css?ver=5.19" media="all"/>
+		<link rel="stylesheet" href="assets/css/video.min.css?ver=7.4.1" media="all"/>
 		
         <!-- Icons  -->
         <link rel="stylesheet" href="assets/fonts/fontawesome/font-awesome.min.css?ver=4.5" media="all" />  
@@ -194,12 +194,12 @@ $ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
     <!-- Vendor -->
 	<script src="assets/js/min/jquery.easing.min.js?ver=1.3"></script>
     <script src="assets/js/min/jquery.waitforimages.min.js?ver=1.0"></script>
-    <script src="assets/js/min/video.min.js?ver=5.19"></script> 
+    <script src="assets/js/min/video.min.js?ver=7.4.1"></script> 
 	<script src="assets/js/min/jquery.waypoints.min.js?ver=4.0.1"></script> 
     <script src="assets/js/min/template7.min.js?ver=1.2.5"></script>
     <script src="assets/js/min/TweenMax.min.js?ver=1.20.4"></script>
     <script src="assets/js/min/pixi.min.js?ver=4.7.1"></script>
-    <script src="assets/js/min/three.min.js?ver=r92"></script>
+    <script src="assets/js/min/three.min.js?ver=r99"></script>
     <script src="assets/js/min/anime.min.js?ver=2.2.0"></script>
     <script src="assets/js/min/hammer.min.js?ver=2.0.8"></script>
     
