@@ -36,7 +36,7 @@ APP = ( function ( APP, $, window, document ) {
 
 				TweenMax.to( $floatingSideEl, 0.3, {
 					css: {
-						marginTop  : newPosition + ( $( window ).height() - sideBarHeight )/2
+						marginTop  : newPosition + ( window.innerHeight - sideBarHeight )/2
 					}
 				});		
 			} else {

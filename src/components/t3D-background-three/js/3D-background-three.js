@@ -25,8 +25,8 @@ APP = ( function ( APP, $, window, document ) {
 		
 		
 		var $window                   = $( window ),
-			windowWidth               = $window.width(),
-			windowHeight              = $window.height(),
+			windowWidth               = window.innerWidth,
+			windowHeight              = window.innerHeight,
 			rendererCanvasID          = '3D-background-three-canvas';
 		
 	

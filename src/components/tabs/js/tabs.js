@@ -180,7 +180,7 @@ APP = ( function ( APP, $, window, document ) {
 					liHeight   = $this.find( '.uix-tabs__nav ul > li:first' ).outerHeight(),
 					translateY = $( this ).index() * liHeight;
 				
-				if ( $( window ).width() <= 768 ) {
+				if ( window.innerWidth <= 768 ) {
 					$this.find( '.uix-tabs__marker' ).css({
 						'transform'          : 'translateY( '+translateY+'px )'	
 					});	

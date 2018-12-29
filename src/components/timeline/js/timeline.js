@@ -14,8 +14,8 @@ APP = ( function ( APP, $, window, document ) {
     APP.TIMELINE.pageLoaded    = function() {
 
 		var $window          = $( window ),
-			windowWidth      = $window.width(),
-			windowHeight     = $window.height();
+			windowWidth      = window.innerWidth,
+			windowHeight     = window.innerHeight;
 				
 				
 

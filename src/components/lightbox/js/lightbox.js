@@ -169,7 +169,7 @@ APP = ( function ( APP, $, window, document ) {
 						//remove loading
 						$lbLoader.addClass( 'is-loaded' );
 						
-						var sw     = $( window ).width() - 30,
+						var sw     = window.innerWidth - 30,
 							ow     = this.width,
 							oh     = this.height,
 							ratioH = oh/ow,
@@ -183,7 +183,7 @@ APP = ( function ( APP, $, window, document ) {
 						
 					
 						//Prevent height overflow
-						if ( h > $( window ).height() ) h = $( window ).height() * 0.95;
+						if ( h > window.innerHeight ) h = window.innerHeight * 0.95;
 						
 					
 						$lbCon.css( {
@@ -222,7 +222,7 @@ APP = ( function ( APP, $, window, document ) {
 						//If the image is larger than the current window, it will display at the top.
 						//Don't write variables outside
 						var $lbTarImg = $( '.uix-lightbox__photo-container > .uix-lightbox__original__target' );
-						if ( oh > $( window ).height() ) {
+						if ( oh > window.innerHeight ) {
 							$lbTarImg.addClass( 'uix-lightbox__original__target--imgfull' );
 						} else {
 							$lbTarImg.removeClass( 'uix-lightbox__original__target--imgfull' );
@@ -259,8 +259,8 @@ APP = ( function ( APP, $, window, document ) {
 					//Set container width
 					if ( $lbCon.find( '> .uix-lightbox__html .uix-lightbox__content' ).length > 0 ) {
 						
-						if ( $( window ).width() <= 768 ) {
-							$lbCon.css( 'width', $( window ).width() - 10 + 'px' );
+						if ( window.innerWidth <= 768 ) {
+							$lbCon.css( 'width', window.innerWidth - 10 + 'px' );
 						} else {
 							$lbCon.css( 'width', $lbCon.find( '> .uix-lightbox__html .uix-lightbox__content' ).width() + 'px' );
 						}
@@ -339,7 +339,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 					
-					var sw     = $( window ).width() - 30,
+					var sw     = window.innerWidth - 30,
 						ow     = this.width,
 						oh     = this.height,
 						ratioH = oh/ow,
@@ -353,7 +353,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 					//Prevent height overflow
-					if ( h > $( window ).height() ) h = $( window ).height() * 0.95;
+					if ( h > window.innerHeight ) h = window.innerHeight * 0.95;
 
 					
 					$largePhoto.css( {
@@ -367,7 +367,7 @@ APP = ( function ( APP, $, window, document ) {
 					//If the image is larger than the current window, it will display at the top.
 					//Don't write variables outside
 					var $lbTarImg = $largePhoto.find( 'li' ).eq( index ).find( '.uix-lightbox__original__target' );
-					if ( oh > $( window ).height() ) {
+					if ( oh > window.innerHeight ) {
 						$lbTarImg.addClass( 'uix-lightbox__original__target--imgfull' );
 					} else {
 						$lbTarImg.removeClass( 'uix-lightbox__original__target--imgfull' );

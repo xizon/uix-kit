@@ -42,11 +42,11 @@
         
        
         <!-- Theme  -->
-        <link rel="stylesheet" href="../dist/uix-kit.min.css?ver=Yo0E9Wo59H99p2mBQfqr"/>
+        <link rel="stylesheet" href="../dist/uix-kit.min.css?ver=M3mwxKSv1gOq7kmMmNlW"/>
         
         
          <!--[if lt IE 10]>
-           <link rel="stylesheet" href="assets/css/IE.css?ver=Yo0E9Wo59H99p2mBQfqr" />
+           <link rel="stylesheet" href="assets/css/IE.css?ver=M3mwxKSv1gOq7kmMmNlW" />
         <![endif]-->
         
         
@@ -412,15 +412,52 @@
        
        <!-- Content 02
         ====================================================== -->
-        <section class="uix-spacing--m">
+        <section class="uix-spacing--m uix-spacing--no-bottom">
             <div class="container uix-t-c">
                     <div class="row">
                         <div class="col-md-8 offset-md-2">
                        
-							<a href="button.html" data-ajax-push-content="true"><i class="fa fa-cog" aria-hidden="true"></i> Add "button.html" Elements To Div</a>
+							<a href="button.html" data-ajax-push-content='{
+																		  "container":"#my-ajax-demo-push-container",
+																		  "target":"#my-ajax-demo-target-button",
+																		  "loading":"<div class=\"my-loader\"><span><i class=\"fa fa-spinner fa-spin\"></i> loading...</span></div>",
+																		  "method":"POST"
+																		  }'><i class="fa fa-cog" aria-hidden="true"></i> Add <strong>"button.html"</strong> Elements To Div 1</a>
+							
 							
 							
 							<div id="my-ajax-demo-push-container" style="padding: 15px; margin: 15px; background: rgba(237,235,235,1.00);"></div>
+
+
+                  
+                        </div>
+                    </div>
+                    <!-- .row end -->
+              
+                    
+            </div>
+            <!-- .container end -->
+ 
+        </section>
+        
+       
+       <!-- Content 02
+        ====================================================== -->
+        <section class="uix-spacing--m uix-spacing--no-bottom">
+            <div class="container uix-t-c">
+                    <div class="row">
+                        <div class="col-md-8 offset-md-2">
+                       
+							<a href="pricing.html" data-ajax-push-content='{
+																		  "container":"#my-ajax-demo-push-container2",
+																		  "target":"#my-ajax-demo-target-pricing",
+																		  "loading":"<div class=\"my-loader\"><span><i class=\"fa fa-spinner fa-spin\"></i> loading...</span></div>",
+																		  "method":"POST"
+																		  }'><i class="fa fa-cog" aria-hidden="true"></i> Add <strong>"pricing.html"</strong> Elements To Div 2</a>
+							
+							
+							
+							<div id="my-ajax-demo-push-container2" style="padding: 15px; margin: 15px; background: rgba(237,235,235,1.00);"></div>
 
 
                  
@@ -434,8 +471,7 @@
             <!-- .container end -->
  
         </section>
-        
-       
+		
 		
 		
                 <!-- Footer
@@ -514,14 +550,14 @@
 	============================================= -->
 	
 	<script>
-		var REVISION     = "3.0.5",
+		var REVISION     = "3.0.6",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
 				"homeUrl"     : "",  //Eg. https://uiux.cc
 				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
 			};
     </script>  
-    <script src="../dist/uix-kit.min.js?ver=Yo0E9Wo59H99p2mBQfqr"></script>
+    <script src="../dist/uix-kit.min.js?ver=M3mwxKSv1gOq7kmMmNlW"></script>
 
 
 

@@ -11,8 +11,8 @@ APP = ( function ( APP, $, window, document ) {
     APP.ONEPAGE2.documentReady = function( $ ) {
 
         var $window      = $( window ),
-		    windowWidth  = $window.width(),
-		    windowHeight = $window.height();
+		    windowWidth  = window.innerWidth,
+		    windowHeight = window.innerHeight;
 
 		
 	    //Determine the direction of a jQuery scroll event

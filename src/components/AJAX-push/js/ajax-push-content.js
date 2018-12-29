@@ -7,51 +7,39 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.AJAX_PUSH_CONTENT               = APP.AJAX_PUSH_CONTENT || {};
-	APP.AJAX_PUSH_CONTENT.version       = '0.0.3';
+	APP.AJAX_PUSH_CONTENT.version       = '0.0.5';
     APP.AJAX_PUSH_CONTENT.documentReady = function( $ ) {
 
-        var $window                  = $( window ),
-		    windowWidth              = $window.width(),
-		    windowHeight             = $window.height();
+		
+		/* Need to set it as a global variable for history */
+		var ajaxConfig   = {
+					"container" :"#my-ajax-demo-push-container",
+					"target"    :"#my-ajax-demo-target-container",
+					"loading"   :"<div class=\"my-loader\"><span><i class=\"fa fa-spinner fa-spin\"></i> loading...</span></div>",
+					"method"    :"POST"
+				},
+			thisPageTitle = document.title;
+		
+		
 
 		
 		
-	    //Determine the direction of a jQuery scroll event
-		//Fix an issue for mousewheel event is too fast.
-		var loaderRemoveDelay   = 500,
-			AJAXPageLinks       = '[data-ajax-push-content]',
-			ajaxConfig          = {
-									"container" :"#my-ajax-demo-push-container",
-									"target"    :"#my-ajax-demo-target-container",
-									"loading"   :"<div class=\"my-loader\"><span><i class=\"fa fa-spinner fa-spin\"></i> loading...</span></div>",
-									"method"    :"POST"
-								};
-
-		//Fire click event
-		var pushState = history.pushState;
-		history.pushState = function() {
-			pushState.apply( history, arguments );
-			fireClickEvents('pushState', arguments );
-		};
-		
-		function fireClickEvents() {
-			//do something...
-		}
-
-		//Detect URL change
-		window.addEventListener( 'popstate', function( e ) {
-			pushAction( $( ajaxConfig.container ), ajaxConfig.target, ajaxConfig.loading, document.location.href, ajaxConfig.method );
-		});
-
-		
-		$( document ).on( 'click', AJAXPageLinks, function( event ) {
+		//Click event
+		$( document ).on( 'click', '[data-ajax-push-content]', function( event ) {
 			
 			event.preventDefault();
 			
 			
-			var $this            = $( this ),
-			    curURL           = $this.attr( 'href' ); 
+			var $this               = $( this ),
+			    curURL              = $this.attr( 'href' ),
+				config              = $this.data( 'ajax-push-content' );
+			
 
+			if( typeof config == typeof undefined ) {
+				config = ajaxConfig;
+			}
+
+			
 			//The currently URL of link
 			if ( typeof curURL === typeof undefined ) {
 				curURL = $this.closest( 'a' ).attr( 'href' );
@@ -59,19 +47,84 @@ APP = ( function ( APP, $, window, document ) {
 
 
 			//Prevent multiple request on click
-			if ( $( AJAXPageLinks ).data( 'request-running' ) ) {
+			if ( $this.data( 'request-running' ) ) {
 				return;
 			}
-			$( AJAXPageLinks ).data( 'request-running', true );
+			$this.data( 'request-running', true );
 
 
-			//Click on this link element using an AJAX request
-			pushAction( $( ajaxConfig.container ), ajaxConfig.target, ajaxConfig.loading, curURL, ajaxConfig.method );
+	
+						
+			// Modify the URL without reloading the page
+			if( history.pushState ) {
+				history.pushState( null, null, curURL );
+
+			} else {
+				location.hash = curURL;
+			}
 
 			
+			//Click on this link element using an AJAX request
+			pushAction( $( config.container ), config.target, config.loading, curURL, config.method, $this );
+
 
 			return false;
 			
+			
+			
+		});
+		
+		
+		
+
+		//Fire click event
+		var pushState = history.pushState;
+		history.pushState = function() {
+			pushState.apply( history, arguments );
+			fireClickEvents('pushState', arguments );
+		};
+
+		function fireClickEvents() {
+			//do something...
+		}
+
+		
+		//Detect URL change
+		window.addEventListener( 'popstate', function( e ) {
+		
+			var eleTarget = null,
+				goURL     = location.href;
+			
+			$( '[data-ajax-push-content]' ).each( function() {
+				
+				//don't use $( this ).attr( 'href' )
+				
+				if ( this.href === location.href ) {
+					eleTarget = this;
+					goURL = this.href;
+				}
+			});
+
+			
+			//Empty content that does not exist
+			$( '[data-ajax-push-content]' ).each( function() {
+				var curConfig = $( this ).data( 'ajax-push-content' );
+				if ( typeof curConfig != typeof undefined ) {
+					pushAction( $( curConfig.container ), false, curConfig.loading, goURL, curConfig.method, false );
+				}
+
+			});
+			
+			
+			var backConfig = $( eleTarget ).data( 'ajax-push-content' );
+			
+			//Push new content to target container
+			if ( typeof backConfig != typeof undefined ) {
+				pushAction( $( backConfig.container ), backConfig.target, backConfig.loading, goURL, backConfig.method, $( eleTarget ) );	
+			}
+			
+			// Output history button
+			//console.log(  $( eleTarget ).data( 'ajax-push-content' ) );
 			
 			
 		});
@@ -83,14 +136,15 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Move Animation
 		 *
-		 * @param  {Object} container    - The target container to which the content will be added.
-		 * @param  {String} target       - The instance ID or class name returned from the callback data
-		 * @param  {String} loading      - Content of loading area.
-		 * @param  {String} url          - The target URL via AJAX.
-		 * @param  {String} method       - The HTTP method to use for the request (e.g. "POST", "GET", "PUT")
-		 * @return {Void}                - The constructor.
+		 * @param  {Object} container       - The target container to which the content will be added.
+		 * @param  {String|Boolean} target  - The instance ID or class name returned from the callback data. If it is "false", the push content is empty.
+		 * @param  {String} loading         - Content of loading area.
+		 * @param  {String} url             - The target URL via AJAX. 
+		 * @param  {String} method          - The HTTP method to use for the request (e.g. "POST", "GET", "PUT")
+		 * @param  {Object|Boolean} btn     - Current trigger button. Avoid button events if "false".
+		 * @return {Void}                   - The constructor.
 		 */
-		function pushAction( container, target, loading, url, method ) {
+		function pushAction( container, target, loading, url, method, btn ) {
 
 			if ( container.length == 0 ) return false;
 
@@ -109,7 +163,9 @@ APP = ( function ( APP, $, window, document ) {
 				success  : function( response ) {
 					
 					//A function to be called if the request succeeds
-					ajaxSucceeds( container, url, $( response ).find( target ).html(), $( response ).filter( 'title' ).text() );
+					var pushContent = ( !target ) ? '' : $( response ).find( target ).html();
+					
+					ajaxSucceeds( container, pushContent, $( response ).filter( 'title' ).text(), btn );
 
 				},
 				error: function(){
@@ -141,8 +197,6 @@ APP = ( function ( APP, $, window, document ) {
 						});	
 					});
 
-					
-
 
 				}
 			}).fail( function( jqXHR, textStatus ) {
@@ -161,12 +215,12 @@ APP = ( function ( APP, $, window, document ) {
 		 * A function to be called if the request succeeds
 		 *
 		 * @param  {String} container    - The target container to which the content will be added.
-		 * @param  {String} url          - Current URL after click
 		 * @param  {String} content      - The data returned from the server
 		 * @param  {String} title        - The title of a requested page.
+		 * @param  {Object} btn          - Current trigger button.
 		 * @return {Void}                - The constructor.
 		 */
-		function ajaxSucceeds( container, url, content, title ) {
+		function ajaxSucceeds( container, content, title, btn ) {
 			
 		
 			//Remove loader
@@ -179,6 +233,7 @@ APP = ( function ( APP, $, window, document ) {
 						}
 					});
 					
+					
 
 					//The data returned from the server
 					container.html( content ).promise().done( function(){
@@ -186,36 +241,38 @@ APP = ( function ( APP, $, window, document ) {
 						
 						// Apply the original scripts
 						$( document ).applyOriginalSomeScripts();
-	
+
 						
-						// Modify the URL without reloading the page
-						if( history.pushState ) {
-							history.pushState( null, null, url );
-						} else {
-							location.hash = url;
-						}
 						
 						//Change the page title
-						document.title = title;
+						if ( title ) {
+							document.title = title;
+						}
+						
 						
 						
 						//Prevent multiple request on click
-						$( AJAXPageLinks ).data( 'request-running', false );	
+						if ( btn ) {
+							btn.data( 'request-running', false );	
+						}
 						
 						
 						
 					});
 					
 
-	
-					
 				},
-				delay       : loaderRemoveDelay/1000
+				
+				
+				//Determine the direction of a jQuery scroll event
+				//Fix an issue for mousewheel event is too fast.
+				delay       : 0.5
 			});
 			
 			
 		}
-		
+
+
 		
 		
     };

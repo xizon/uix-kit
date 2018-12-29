@@ -13,8 +13,8 @@ APP = ( function ( APP, $, window, document ) {
     APP.ADVANCED_SLIDER.pageLoaded    = function() {
 
 		var $window                   = $( window ),
-			windowWidth               = $window.width(),
-			windowHeight              = $window.height(),
+			windowWidth               = window.innerWidth,
+			windowHeight              = window.innerHeight,
 			animDelay                 = 0,
 			$sliderWrapper            = $( '.uix-advanced-slider' ),
 			
@@ -28,10 +28,10 @@ APP = ( function ( APP, $, window, document ) {
 		
 		$window.on( 'resize', function() {
 			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( $window.width() != windowWidth ) {
+			if ( window.innerWidth != windowWidth ) {
 
 				// Update the window width for next time
-				windowWidth = $window.width();
+				windowWidth = window.innerWidth;
 
 				sliderInit( true );
 				

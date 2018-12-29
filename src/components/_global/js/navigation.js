@@ -12,8 +12,8 @@ APP = ( function ( APP, $, window, document ) {
     APP.NAVIGATION.documentReady = function( $ ) {
 
 		var $window      = $( window ),
-			windowWidth  = $window.width(),
-			windowHeight = $window.height(),
+			windowWidth  = window.innerWidth,
+			windowHeight = window.innerHeight,
 			ulForDesktop = '.uix-menu__container:not(.is-mobile) ul.uix-menu';
 
 

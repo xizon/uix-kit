@@ -11,8 +11,8 @@ APP = ( function ( APP, $, window, document ) {
     APP.AJAX_PAGE_LOADER.documentReady = function( $ ) {
 
         var $window                  = $( window ),
-		    windowWidth              = $window.width(),
-		    windowHeight             = $window.height();
+		    windowWidth              = window.innerWidth,
+		    windowHeight             = window.innerHeight;
 
 		
 		
@@ -81,7 +81,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 		ajaxInit();
 		$window.on( 'resize', function() {
-			windowWidth = $window.width();
+			windowWidth = window.innerWidth;
 			ajaxInit();
 		} );	
 

@@ -13,8 +13,8 @@ APP = ( function ( APP, $, window, document ) {
 		
 		
         var $window      = $( window ),
-		    windowWidth  = $window.width(),
-		    windowHeight = $window.height();
+		    windowWidth  = window.innerWidth,
+		    windowHeight = window.innerHeight;
 		
 		
 		if ( windowWidth <= 768 ) return false;

@@ -12,8 +12,8 @@ APP = ( function ( APP, $, window, document ) {
 
 		
 		var $window      = $( window ),
-			windowWidth  = $window.width(),
-			windowHeight = $window.height();
+			windowWidth  = window.innerWidth,
+			windowHeight = window.innerHeight;
 		
 		$( '<a href="#" id="uix-to-top"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>' ).appendTo( 'body' );
 		$.when( $( '#uix-to-top' ).length > 0).then( function() {

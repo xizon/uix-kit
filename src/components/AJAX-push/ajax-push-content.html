@@ -60,15 +60,52 @@
        
        <!-- Content 02
         ====================================================== -->
-        <section class="uix-spacing--m">
+        <section class="uix-spacing--m uix-spacing--no-bottom">
             <div class="container uix-t-c">
                     <div class="row">
                         <div class="col-md-8 offset-md-2">
                        
-							<a href="button.html" data-ajax-push-content="true"><i class="fa fa-cog" aria-hidden="true"></i> Add "button.html" Elements To Div</a>
+							<a href="button.html" data-ajax-push-content='{
+																		  "container":"#my-ajax-demo-push-container",
+																		  "target":"#my-ajax-demo-target-button",
+																		  "loading":"<div class=\"my-loader\"><span><i class=\"fa fa-spinner fa-spin\"></i> loading...</span></div>",
+																		  "method":"POST"
+																		  }'><i class="fa fa-cog" aria-hidden="true"></i> Add <strong>"button.html"</strong> Elements To Div 1</a>
+							
 							
 							
 							<div id="my-ajax-demo-push-container" style="padding: 15px; margin: 15px; background: rgba(237,235,235,1.00);"></div>
+
+
+                  
+                        </div>
+                    </div>
+                    <!-- .row end -->
+              
+                    
+            </div>
+            <!-- .container end -->
+ 
+        </section>
+        
+       
+       <!-- Content 02
+        ====================================================== -->
+        <section class="uix-spacing--m uix-spacing--no-bottom">
+            <div class="container uix-t-c">
+                    <div class="row">
+                        <div class="col-md-8 offset-md-2">
+                       
+							<a href="pricing.html" data-ajax-push-content='{
+																		  "container":"#my-ajax-demo-push-container2",
+																		  "target":"#my-ajax-demo-target-pricing",
+																		  "loading":"<div class=\"my-loader\"><span><i class=\"fa fa-spinner fa-spin\"></i> loading...</span></div>",
+																		  "method":"POST"
+																		  }'><i class="fa fa-cog" aria-hidden="true"></i> Add <strong>"pricing.html"</strong> Elements To Div 2</a>
+							
+							
+							
+							<div id="my-ajax-demo-push-container2" style="padding: 15px; margin: 15px; background: rgba(237,235,235,1.00);"></div>
 
 
                  
@@ -82,8 +119,7 @@
             <!-- .container end -->
  
         </section>
-        
-       
+		
 		
 		
         @@include('./src/components/_global/include-copyright.html')

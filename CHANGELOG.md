@@ -1,5 +1,12 @@
 # Changelog
 
+
+#### = 3.0.6 (December 29, 2018) =
+
+* Fix: Fixed an inaccurate error in the history of AJAX modules.
+
+
+
 #### = 3.0.5 (December 28, 2018) =
 
 * Fix: Fixed bug in muitiple embedded videos.

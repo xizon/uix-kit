@@ -15,15 +15,15 @@ APP = ( function ( APP, $, window, document ) {
     APP.STICKY_EL.pageLoaded    = function() {
 
 		var $window      = $( window ),
-			windowWidth  = $window.width(),
-			windowHeight = $window.height(),
+			windowWidth  = window.innerWidth,
+			windowHeight = window.innerHeight,
 			topSpacing   = $( '.uix-header__container' ).outerHeight( true ) + 10;
 		
 		
 		$window.on( 'scroll touchmove', function() {
 
 			var scrollTop   = $window.scrollTop(),
-				dynamicTop  = parseFloat( scrollTop + $window.height() ),
+				dynamicTop  = parseFloat( scrollTop + window.innerHeight ),
 				targetTop   = parseFloat( $( document ).height() - 200 );
 
 			//Detecting when user scrolls to bottom of div
@@ -66,13 +66,13 @@ APP = ( function ( APP, $, window, document ) {
 		
 	
 			
-//		var	navMinTop    = $( '.stick-widget' ).offset().top + $( window ).height()/3,
-//			navMaxTop    = parseFloat( $( document ).height() - $( '.uix-footer__container' ).height() ) - $( window ).height()/3;
+//		var	navMinTop    = $( '.stick-widget' ).offset().top + window.innerHeight/3,
+//			navMaxTop    = parseFloat( $( document ).height() - $( '.uix-footer__container' ).height() ) - window.innerHeight/3;
 //
 //
 //		$( window ).on( 'scroll touchmove', function() {
 //			var scrollTop = $( this ).scrollTop(),
-//				spyTop    = parseFloat( scrollTop + $( window ).height()/2 );
+//				spyTop    = parseFloat( scrollTop + window.innerHeight/2 );
 //
 //			//Detecting when user scrolls to bottom of div
 //			if ( spyTop > navMaxTop || spyTop < navMinTop ) {

@@ -799,8 +799,8 @@ APP = ( function ( APP, $, window, document ) {
 		
 
 		var $window      = $( window ),
-			windowWidth  = $window.width(),
-			windowHeight = $window.height();
+			windowWidth  = window.innerWidth,
+			windowHeight = window.innerHeight;
 
 		
 		//-------- Header initialize
@@ -808,10 +808,10 @@ APP = ( function ( APP, $, window, document ) {
 		
 		$window.on( 'resize', function() {
 			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( $window.width() != windowWidth ) {
+			if ( window.innerWidth != windowWidth ) {
 
 				// Update the window width for next time
-				windowWidth = $window.width();
+				windowWidth = window.innerWidth;
 
 				// Do stuff here
 				headerInit( windowWidth );
@@ -916,8 +916,8 @@ APP = ( function ( APP, $, window, document ) {
 			
 			var $this        = $( this ),
 				$window      = $( window ),
-				windowWidth  = $window.width(),
-				windowHeight = $window.height(),
+				windowWidth  = window.innerWidth,
+				windowHeight = window.innerHeight,
 				element      = $this,
 				selectors    = settings.selector,
 				maxHeight    = 0;
@@ -951,10 +951,10 @@ APP = ( function ( APP, $, window, document ) {
 			
 			$window.on( 'resize', function() {
 				// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-				if ( $window.width() != windowWidth ) {
+				if ( window.innerWidth != windowWidth ) {
 
 					// Update the window width for next time
-					windowWidth = $window.width();
+					windowWidth = window.innerWidth;
 
 					// Do stuff here
 					commonHeightInit( windowWidth );
@@ -1117,8 +1117,8 @@ APP = ( function ( APP, $, window, document ) {
     APP.MEGAMENU.pageLoaded    = function() {
 
 		var $window      = $( window ),
-			windowWidth  = $window.width(),
-			windowHeight = $window.height();
+			windowWidth  = window.innerWidth,
+			windowHeight = window.innerHeight;
 
 		// Using delay is for more accurate calculation
 		setTimeout( function() {
@@ -1128,10 +1128,10 @@ APP = ( function ( APP, $, window, document ) {
 		
 		$window.on( 'resize', function() {
 			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( $window.width() != windowWidth ) {
+			if ( window.innerWidth != windowWidth ) {
 
 				// Update the window width for next time
-				windowWidth = $window.width();
+				windowWidth = window.innerWidth;
 
 				// Do stuff here
 				megaMenuInit( windowWidth );
@@ -1144,7 +1144,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 		// For the absolute coordinates of any jquery element 
 		function getAbsoluteCoordinates( $element ) {
-			var windowWidth     = $( window ).width(),
+			var windowWidth     = window.innerWidth,
 			    leftPos         = null;
 
 			
@@ -1152,7 +1152,7 @@ APP = ( function ( APP, $, window, document ) {
 				leftPos = ( $element.offset().left == 0 ) ? $element.parent().offset().left : $element.offset().left;
 			} else {
 				
-				//($(window).width() - ($whatever.offset().left + $whatever.outerWidth()));
+				//(window.innerWidth - ($whatever.offset().left + $whatever.outerWidth()));
 				leftPos = ( $element.offset().left == 0 ) ? ( windowWidth - ( $element.parent().offset().left + $element.parent().outerWidth() ) ) : ( windowWidth - ( $element.offset().left + $element.outerWidth() ) );
 			}
 				
@@ -1321,8 +1321,8 @@ APP = ( function ( APP, $, window, document ) {
     APP.MOBILE_MENU.documentReady = function( $ ) {
 
 		var $window      = $( window ),
-			windowWidth  = $window.width(),
-			windowHeight = $window.height();
+			windowWidth  = window.innerWidth,
+			windowHeight = window.innerHeight;
 
 
 
@@ -1414,10 +1414,10 @@ APP = ( function ( APP, $, window, document ) {
 			// Close the menu on window change
 			$window.on( 'resize', function() {
 				// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-				if ( $window.width() != windowWidth ) {
+				if ( window.innerWidth != windowWidth ) {
 
 					// Update the window width for next time
-					windowWidth = $window.width();
+					windowWidth = window.innerWidth;
 
 					// Do stuff here
 					$toggleBody.removeClass( 'js-uix-menu-opened' );
@@ -1633,8 +1633,8 @@ APP = ( function ( APP, $, window, document ) {
     APP.NAVIGATION.documentReady = function( $ ) {
 
 		var $window      = $( window ),
-			windowWidth  = $window.width(),
-			windowHeight = $window.height(),
+			windowWidth  = window.innerWidth,
+			windowHeight = window.innerHeight,
 			ulForDesktop = '.uix-menu__container:not(.is-mobile) ul.uix-menu';
 
 
@@ -1793,8 +1793,8 @@ APP = ( function ( APP, $, window, document ) {
 
 		
         var $window      = $( window ),
-		    windowWidth  = $window.width(),
-		    windowHeight = $window.height();
+		    windowWidth  = window.innerWidth,
+		    windowHeight = window.innerHeight;
 
         
 		//  Initialize
@@ -1802,11 +1802,11 @@ APP = ( function ( APP, $, window, document ) {
 		
 		$window.on( 'resize', function() {
 			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( $window.width() != windowWidth ) {
+			if ( window.innerWidth != windowWidth ) {
 
 				// Update the window width for next time
-				windowWidth  = $window.width();
-				windowHeight = $window.height();
+				windowWidth  = window.innerWidth;
+				windowHeight = window.innerHeight;
 
 				// Do stuff here
 				setBGInit( windowWidth, windowHeight );
@@ -1973,8 +1973,8 @@ APP = ( function ( APP, $, window, document ) {
     APP.VIDEOS.documentReady = function( $ ) {
 
 		var $window      = $( window ),
-			windowWidth  = $window.width(),
-			windowHeight = $window.height();
+			windowWidth  = window.innerWidth,
+			windowHeight = window.innerHeight;
 		
 		
 		
@@ -10605,8 +10605,8 @@ APP = ( function ( APP, $, window, document ) {
 		
 		
         var $window      = $( window ),
-		    windowWidth  = $window.width(),
-		    windowHeight = $window.height();
+		    windowWidth  = window.innerWidth,
+		    windowHeight = window.innerHeight;
 		
 		
 		if ( windowWidth <= 768 ) return false;
@@ -10814,8 +10814,8 @@ APP = ( function ( APP, $, window, document ) {
     APP.ADVANCED_CONTENT_SLIDER.documentReady = function( $ ) {
 
 		var $window                   = $( window ),
-			windowWidth               = $window.width(),
-			windowHeight              = $window.height(),
+			windowWidth               = window.innerWidth,
+			windowHeight              = window.innerHeight,
 			animDuration              = 1200;
 		
 		
@@ -10824,10 +10824,10 @@ APP = ( function ( APP, $, window, document ) {
 		
 		$window.on( 'resize', function() {
 			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( $window.width() != windowWidth ) {
+			if ( window.innerWidth != windowWidth ) {
 
 				// Update the window width for next time
-				windowWidth = $window.width();
+				windowWidth = window.innerWidth;
 
 				sliderInit();
 				
@@ -11076,8 +11076,8 @@ APP = ( function ( APP, $, window, document ) {
     APP.ADVANCED_SLIDER.pageLoaded    = function() {
 
 		var $window                   = $( window ),
-			windowWidth               = $window.width(),
-			windowHeight              = $window.height(),
+			windowWidth               = window.innerWidth,
+			windowHeight              = window.innerHeight,
 			animDelay                 = 0,
 			$sliderWrapper            = $( '.uix-advanced-slider' ),
 			
@@ -11091,10 +11091,10 @@ APP = ( function ( APP, $, window, document ) {
 		
 		$window.on( 'resize', function() {
 			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( $window.width() != windowWidth ) {
+			if ( window.innerWidth != windowWidth ) {
 
 				// Update the window width for next time
-				windowWidth = $window.width();
+				windowWidth = window.innerWidth;
 
 				sliderInit( true );
 				
@@ -11974,8 +11974,8 @@ APP = ( function ( APP, $, window, document ) {
 
 	
 		var $window                   = $( window ),
-			windowWidth               = $window.width(),
-			windowHeight              = $window.height(),
+			windowWidth               = window.innerWidth,
+			windowHeight              = window.innerHeight,
 			animSpeed                 = 1000,
 			$sliderWrapper            = $( '.uix-advanced-slider-sp' ),
 			
@@ -12012,10 +12012,10 @@ APP = ( function ( APP, $, window, document ) {
 		
 		$window.on( 'resize', function() {
 			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( $window.width() != windowWidth ) {
+			if ( window.innerWidth != windowWidth ) {
 
 				// Update the window width for next time
-				windowWidth = $window.width();
+				windowWidth = window.innerWidth;
 
 				sliderInit( true );
 				
@@ -14999,51 +14999,39 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.AJAX_PUSH_CONTENT               = APP.AJAX_PUSH_CONTENT || {};
-	APP.AJAX_PUSH_CONTENT.version       = '0.0.3';
+	APP.AJAX_PUSH_CONTENT.version       = '0.0.5';
     APP.AJAX_PUSH_CONTENT.documentReady = function( $ ) {
 
-        var $window                  = $( window ),
-		    windowWidth              = $window.width(),
-		    windowHeight             = $window.height();
+		
+		/* Need to set it as a global variable for history */
+		var ajaxConfig   = {
+					"container" :"#my-ajax-demo-push-container",
+					"target"    :"#my-ajax-demo-target-container",
+					"loading"   :"<div class=\"my-loader\"><span><i class=\"fa fa-spinner fa-spin\"></i> loading...</span></div>",
+					"method"    :"POST"
+				},
+			thisPageTitle = document.title;
+		
+		
 
 		
 		
-	    //Determine the direction of a jQuery scroll event
-		//Fix an issue for mousewheel event is too fast.
-		var loaderRemoveDelay   = 500,
-			AJAXPageLinks       = '[data-ajax-push-content]',
-			ajaxConfig          = {
-									"container" :"#my-ajax-demo-push-container",
-									"target"    :"#my-ajax-demo-target-container",
-									"loading"   :"<div class=\"my-loader\"><span><i class=\"fa fa-spinner fa-spin\"></i> loading...</span></div>",
-									"method"    :"POST"
-								};
-
-		//Fire click event
-		var pushState = history.pushState;
-		history.pushState = function() {
-			pushState.apply( history, arguments );
-			fireClickEvents('pushState', arguments );
-		};
-		
-		function fireClickEvents() {
-			//do something...
-		}
-
-		//Detect URL change
-		window.addEventListener( 'popstate', function( e ) {
-			pushAction( $( ajaxConfig.container ), ajaxConfig.target, ajaxConfig.loading, document.location.href, ajaxConfig.method );
-		});
-
-		
-		$( document ).on( 'click', AJAXPageLinks, function( event ) {
+		//Click event
+		$( document ).on( 'click', '[data-ajax-push-content]', function( event ) {
 			
 			event.preventDefault();
 			
 			
-			var $this            = $( this ),
-			    curURL           = $this.attr( 'href' ); 
+			var $this               = $( this ),
+			    curURL              = $this.attr( 'href' ),
+				config              = $this.data( 'ajax-push-content' );
+			
 
+			if( typeof config == typeof undefined ) {
+				config = ajaxConfig;
+			}
+
+			
 			//The currently URL of link
 			if ( typeof curURL === typeof undefined ) {
 				curURL = $this.closest( 'a' ).attr( 'href' );
@@ -15051,19 +15039,84 @@ APP = ( function ( APP, $, window, document ) {
 
 
 			//Prevent multiple request on click
-			if ( $( AJAXPageLinks ).data( 'request-running' ) ) {
+			if ( $this.data( 'request-running' ) ) {
 				return;
 			}
-			$( AJAXPageLinks ).data( 'request-running', true );
+			$this.data( 'request-running', true );
 
 
-			//Click on this link element using an AJAX request
-			pushAction( $( ajaxConfig.container ), ajaxConfig.target, ajaxConfig.loading, curURL, ajaxConfig.method );
+	
+						
+			// Modify the URL without reloading the page
+			if( history.pushState ) {
+				history.pushState( null, null, curURL );
+
+			} else {
+				location.hash = curURL;
+			}
 
 			
+			//Click on this link element using an AJAX request
+			pushAction( $( config.container ), config.target, config.loading, curURL, config.method, $this );
+
 
 			return false;
 			
+			
+			
+		});
+		
+		
+		
+
+		//Fire click event
+		var pushState = history.pushState;
+		history.pushState = function() {
+			pushState.apply( history, arguments );
+			fireClickEvents('pushState', arguments );
+		};
+
+		function fireClickEvents() {
+			//do something...
+		}
+
+		
+		//Detect URL change
+		window.addEventListener( 'popstate', function( e ) {
+		
+			var eleTarget = null,
+				goURL     = location.href;
+			
+			$( '[data-ajax-push-content]' ).each( function() {
+				
+				//don't use $( this ).attr( 'href' )
+				
+				if ( this.href === location.href ) {
+					eleTarget = this;
+					goURL = this.href;
+				}
+			});
+
+			
+			//Empty content that does not exist
+			$( '[data-ajax-push-content]' ).each( function() {
+				var curConfig = $( this ).data( 'ajax-push-content' );
+				if ( typeof curConfig != typeof undefined ) {
+					pushAction( $( curConfig.container ), false, curConfig.loading, goURL, curConfig.method, false );
+				}
+
+			});
+			
+			
+			var backConfig = $( eleTarget ).data( 'ajax-push-content' );
+			
+			//Push new content to target container
+			if ( typeof backConfig != typeof undefined ) {
+				pushAction( $( backConfig.container ), backConfig.target, backConfig.loading, goURL, backConfig.method, $( eleTarget ) );	
+			}
+			
+			// Output history button
+			//console.log(  $( eleTarget ).data( 'ajax-push-content' ) );
 			
 			
 		});
@@ -15075,14 +15128,15 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Move Animation
 		 *
-		 * @param  {Object} container    - The target container to which the content will be added.
-		 * @param  {String} target       - The instance ID or class name returned from the callback data
-		 * @param  {String} loading      - Content of loading area.
-		 * @param  {String} url          - The target URL via AJAX.
-		 * @param  {String} method       - The HTTP method to use for the request (e.g. "POST", "GET", "PUT")
-		 * @return {Void}                - The constructor.
+		 * @param  {Object} container       - The target container to which the content will be added.
+		 * @param  {String|Boolean} target  - The instance ID or class name returned from the callback data. If it is "false", the push content is empty.
+		 * @param  {String} loading         - Content of loading area.
+		 * @param  {String} url             - The target URL via AJAX. 
+		 * @param  {String} method          - The HTTP method to use for the request (e.g. "POST", "GET", "PUT")
+		 * @param  {Object|Boolean} btn     - Current trigger button. Avoid button events if "false".
+		 * @return {Void}                   - The constructor.
 		 */
-		function pushAction( container, target, loading, url, method ) {
+		function pushAction( container, target, loading, url, method, btn ) {
 
 			if ( container.length == 0 ) return false;
 
@@ -15101,7 +15155,9 @@ APP = ( function ( APP, $, window, document ) {
 				success  : function( response ) {
 					
 					//A function to be called if the request succeeds
-					ajaxSucceeds( container, url, $( response ).find( target ).html(), $( response ).filter( 'title' ).text() );
+					var pushContent = ( !target ) ? '' : $( response ).find( target ).html();
+					
+					ajaxSucceeds( container, pushContent, $( response ).filter( 'title' ).text(), btn );
 
 				},
 				error: function(){
@@ -15133,8 +15189,6 @@ APP = ( function ( APP, $, window, document ) {
 						});	
 					});
 
-					
-
 
 				}
 			}).fail( function( jqXHR, textStatus ) {
@@ -15153,12 +15207,12 @@ APP = ( function ( APP, $, window, document ) {
 		 * A function to be called if the request succeeds
 		 *
 		 * @param  {String} container    - The target container to which the content will be added.
-		 * @param  {String} url          - Current URL after click
 		 * @param  {String} content      - The data returned from the server
 		 * @param  {String} title        - The title of a requested page.
+		 * @param  {Object} btn          - Current trigger button.
 		 * @return {Void}                - The constructor.
 		 */
-		function ajaxSucceeds( container, url, content, title ) {
+		function ajaxSucceeds( container, content, title, btn ) {
 			
 		
 			//Remove loader
@@ -15171,6 +15225,7 @@ APP = ( function ( APP, $, window, document ) {
 						}
 					});
 					
+					
 
 					//The data returned from the server
 					container.html( content ).promise().done( function(){
@@ -15178,36 +15233,38 @@ APP = ( function ( APP, $, window, document ) {
 						
 						// Apply the original scripts
 						$( document ).applyOriginalSomeScripts();
-	
+
 						
-						// Modify the URL without reloading the page
-						if( history.pushState ) {
-							history.pushState( null, null, url );
-						} else {
-							location.hash = url;
-						}
 						
 						//Change the page title
-						document.title = title;
+						if ( title ) {
+							document.title = title;
+						}
+						
 						
 						
 						//Prevent multiple request on click
-						$( AJAXPageLinks ).data( 'request-running', false );	
+						if ( btn ) {
+							btn.data( 'request-running', false );	
+						}
 						
 						
 						
 					});
 					
 
-	
-					
 				},
-				delay       : loaderRemoveDelay/1000
+				
+				
+				//Determine the direction of a jQuery scroll event
+				//Fix an issue for mousewheel event is too fast.
+				delay       : 0.5
 			});
 			
 			
 		}
-		
+
+
 		
 		
     };
@@ -15232,8 +15289,8 @@ APP = ( function ( APP, $, window, document ) {
     APP.AJAX_PAGE_LOADER.documentReady = function( $ ) {
 
         var $window                  = $( window ),
-		    windowWidth              = $window.width(),
-		    windowHeight             = $window.height();
+		    windowWidth              = window.innerWidth,
+		    windowHeight             = window.innerHeight;
 
 		
 		
@@ -15302,7 +15359,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 		ajaxInit();
 		$window.on( 'resize', function() {
-			windowWidth = $window.width();
+			windowWidth = window.innerWidth;
 			ajaxInit();
 		} );	
 
@@ -15836,8 +15893,8 @@ APP = ( function ( APP, $, window, document ) {
 
 		
 		var $window      = $( window ),
-			windowWidth  = $window.width(),
-			windowHeight = $window.height();
+			windowWidth  = window.innerWidth,
+			windowHeight = window.innerHeight;
 		
 		$( '<a href="#" id="uix-to-top"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>' ).appendTo( 'body' );
 		$.when( $( '#uix-to-top' ).length > 0).then( function() {
@@ -16712,8 +16769,8 @@ APP = ( function ( APP, $, window, document ) {
     APP.FLEXSLIDER.documentReady = function( $ ) {
 
 		var $window            = $( window ),
-			windowWidth        = $window.width(),
-			windowHeight       = $window.height(),
+			windowWidth        = window.innerWidth,
+			windowHeight       = window.innerHeight,
 			flexslider         = {
 						           vars: {}
 					              };
@@ -16725,7 +16782,7 @@ APP = ( function ( APP, $, window, document ) {
 		 * @return {Void}                    - The constructor.
 		 */
         function getGridSize( number ) {
-            return ( $window.width() <= 768 ) ? 1 : number;
+            return ( window.innerWidth <= 768 ) ? 1 : number;
         }
 
 		
@@ -17659,10 +17716,10 @@ APP = ( function ( APP, $, window, document ) {
 		 */
 		$window.on( 'resize', function() {
 			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( $window.width() != windowWidth ) {
+			if ( window.innerWidth != windowWidth ) {
 
 				// Update the window width for next time
-				windowWidth = $window.width();
+				windowWidth = window.innerWidth;
 
 				$sliderDefault.each( function() {
 					
@@ -18956,7 +19013,7 @@ APP = ( function ( APP, $, window, document ) {
 
 				TweenMax.to( $floatingSideEl, 0.3, {
 					css: {
-						marginTop  : newPosition + ( $( window ).height() - sideBarHeight )/2
+						marginTop  : newPosition + ( window.innerHeight - sideBarHeight )/2
 					}
 				});		
 			} else {
@@ -22191,8 +22248,8 @@ APP = ( function ( APP, $, window, document ) {
     APP.IMAGE_SHAPES.documentReady = function( $ ) {
 
         var $window      = $( window ),
-		    windowWidth  = $window.width(),
-		    windowHeight = $window.height();
+		    windowWidth  = window.innerWidth,
+		    windowHeight = window.innerHeight;
 
         
 		//  Initialize
@@ -22200,10 +22257,10 @@ APP = ( function ( APP, $, window, document ) {
 		
 		$window.on( 'resize', function() {
 			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( $window.width() != windowWidth ) {
+			if ( window.innerWidth != windowWidth ) {
 
 				// Update the window width for next time
-				windowWidth  = $window.width();
+				windowWidth  = window.innerWidth;
 
 				// Do stuff here
 				shapesInit( windowWidth );
@@ -22548,7 +22605,7 @@ APP = ( function ( APP, $, window, document ) {
 						//remove loading
 						$lbLoader.addClass( 'is-loaded' );
 						
-						var sw     = $( window ).width() - 30,
+						var sw     = window.innerWidth - 30,
 							ow     = this.width,
 							oh     = this.height,
 							ratioH = oh/ow,
@@ -22562,7 +22619,7 @@ APP = ( function ( APP, $, window, document ) {
 						
 					
 						//Prevent height overflow
-						if ( h > $( window ).height() ) h = $( window ).height() * 0.95;
+						if ( h > window.innerHeight ) h = window.innerHeight * 0.95;
 						
 					
 						$lbCon.css( {
@@ -22601,7 +22658,7 @@ APP = ( function ( APP, $, window, document ) {
 						//If the image is larger than the current window, it will display at the top.
 						//Don't write variables outside
 						var $lbTarImg = $( '.uix-lightbox__photo-container > .uix-lightbox__original__target' );
-						if ( oh > $( window ).height() ) {
+						if ( oh > window.innerHeight ) {
 							$lbTarImg.addClass( 'uix-lightbox__original__target--imgfull' );
 						} else {
 							$lbTarImg.removeClass( 'uix-lightbox__original__target--imgfull' );
@@ -22638,8 +22695,8 @@ APP = ( function ( APP, $, window, document ) {
 					//Set container width
 					if ( $lbCon.find( '> .uix-lightbox__html .uix-lightbox__content' ).length > 0 ) {
 						
-						if ( $( window ).width() <= 768 ) {
-							$lbCon.css( 'width', $( window ).width() - 10 + 'px' );
+						if ( window.innerWidth <= 768 ) {
+							$lbCon.css( 'width', window.innerWidth - 10 + 'px' );
 						} else {
 							$lbCon.css( 'width', $lbCon.find( '> .uix-lightbox__html .uix-lightbox__content' ).width() + 'px' );
 						}
@@ -22718,7 +22775,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 					
-					var sw     = $( window ).width() - 30,
+					var sw     = window.innerWidth - 30,
 						ow     = this.width,
 						oh     = this.height,
 						ratioH = oh/ow,
@@ -22732,7 +22789,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 					//Prevent height overflow
-					if ( h > $( window ).height() ) h = $( window ).height() * 0.95;
+					if ( h > window.innerHeight ) h = window.innerHeight * 0.95;
 
 					
 					$largePhoto.css( {
@@ -22746,7 +22803,7 @@ APP = ( function ( APP, $, window, document ) {
 					//If the image is larger than the current window, it will display at the top.
 					//Don't write variables outside
 					var $lbTarImg = $largePhoto.find( 'li' ).eq( index ).find( '.uix-lightbox__original__target' );
-					if ( oh > $( window ).height() ) {
+					if ( oh > window.innerHeight ) {
 						$lbTarImg.addClass( 'uix-lightbox__original__target--imgfull' );
 					} else {
 						$lbTarImg.removeClass( 'uix-lightbox__original__target--imgfull' );
@@ -23050,7 +23107,7 @@ APP = ( function ( APP, $, window, document ) {
 						
 						var scrolled = $( window ).scrollTop();
 						
-						if ( scrolled >= parseFloat( $button.offset().top - $( window ).height()/2 - $button.outerHeight( true )*2 ) && !$button.hasClass( triggerActive ) ) {
+						if ( scrolled >= parseFloat( $button.offset().top - window.innerHeight/2 - $button.outerHeight( true )*2 ) && !$button.hasClass( triggerActive ) ) {
 
 								// Active this button
 								$button.addClass( triggerActive );					    
@@ -23439,18 +23496,18 @@ APP = ( function ( APP, $, window, document ) {
     APP.POST_LIST_SPLIT_FULLWIDTH.pageLoaded    = function() {
 
 		var $window      = $( window ),
-			windowWidth  = $window.width(),
-			windowHeight = $window.height();
+			windowWidth  = window.innerWidth,
+			windowHeight = window.innerHeight;
 		
 		
 		fullwidthListSplitInit( windowWidth );
 		
 		$window.on( 'resize', function() {
 			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( $window.width() != windowWidth ) {
+			if ( window.innerWidth != windowWidth ) {
 
 				// Update the window width for next time
-				windowWidth = $window.width();
+				windowWidth = window.innerWidth;
 
 				// Do stuff here
 				fullwidthListSplitInit( windowWidth );
@@ -23631,7 +23688,7 @@ APP = ( function ( APP, $, window, document ) {
 
 			
 			
-			if ( $( window ).width() <= 768 ) amountVisible = 3;
+			if ( window.innerWidth <= 768 ) amountVisible = 3;
 
 			
 			carouselItemWidth  = $carousel.width()/amountVisible;
@@ -24499,8 +24556,8 @@ APP = ( function ( APP, $, window, document ) {
     APP.ONEPAGE.documentReady = function( $ ) {
 
         var $window      = $( window ),
-		    windowWidth  = $window.width(),
-		    windowHeight = $window.height();
+		    windowWidth  = window.innerWidth,
+		    windowHeight = window.innerHeight;
 		
 
 	    //Determine the direction of a jQuery scroll event
@@ -24933,8 +24990,8 @@ APP = ( function ( APP, $, window, document ) {
     APP.ONEPAGE2.documentReady = function( $ ) {
 
         var $window      = $( window ),
-		    windowWidth  = $window.width(),
-		    windowHeight = $window.height();
+		    windowWidth  = window.innerWidth,
+		    windowHeight = window.innerHeight;
 
 		
 	    //Determine the direction of a jQuery scroll event
@@ -25386,8 +25443,8 @@ APP = ( function ( APP, $, window, document ) {
     APP.PARALLAX.documentReady = function( $ ) {
 
         var $window      = $( window ),
-		    windowWidth  = $window.width(),
-		    windowHeight = $window.height();
+		    windowWidth  = window.innerWidth,
+		    windowHeight = window.innerHeight;
 
         
 		//  Initialize
@@ -25395,11 +25452,11 @@ APP = ( function ( APP, $, window, document ) {
 		
 		$window.on( 'resize', function() {
 			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( $window.width() != windowWidth ) {
+			if ( window.innerWidth != windowWidth ) {
 
 				// Update the window width for next time
-				windowWidth  = $window.width();
-				windowHeight = $window.height();
+				windowWidth  = window.innerWidth;
+				windowHeight = window.innerHeight;
 
 				// Do stuff here
 				parallaxInit( windowWidth, windowHeight );
@@ -25699,8 +25756,8 @@ APP = ( function ( APP, $, window, document ) {
 
 		
 		var $window      = $( window ),
-			windowWidth  = $window.width(),
-			windowHeight = $window.height();
+			windowWidth  = window.innerWidth,
+			windowHeight = window.innerHeight;
 
 		
 		//-------- Pricing initialize
@@ -25708,10 +25765,10 @@ APP = ( function ( APP, $, window, document ) {
 		
 		$window.on( 'resize', function() {
 			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( $window.width() != windowWidth ) {
+			if ( window.innerWidth != windowWidth ) {
 
 				// Update the window width for next time
-				windowWidth = $window.width();
+				windowWidth = window.innerWidth;
 
 				// Do stuff here
 				pricingInit( windowWidth );
@@ -26281,7 +26338,7 @@ APP = ( function ( APP, $, window, document ) {
         $( window ).on( 'ready load resizeEnd', function() {
 			
             window.elHeight = $el.height();
-            window.windowHeight = $( window ).height();
+            window.windowHeight = window.innerHeight;
             window.elOffsetTop = $el.offset().top - panelHeight;
 			
         });
@@ -27614,15 +27671,15 @@ APP = ( function ( APP, $, window, document ) {
     APP.STICKY_EL.pageLoaded    = function() {
 
 		var $window      = $( window ),
-			windowWidth  = $window.width(),
-			windowHeight = $window.height(),
+			windowWidth  = window.innerWidth,
+			windowHeight = window.innerHeight,
 			topSpacing   = $( '.uix-header__container' ).outerHeight( true ) + 10;
 		
 		
 		$window.on( 'scroll touchmove', function() {
 
 			var scrollTop   = $window.scrollTop(),
-				dynamicTop  = parseFloat( scrollTop + $window.height() ),
+				dynamicTop  = parseFloat( scrollTop + window.innerHeight ),
 				targetTop   = parseFloat( $( document ).height() - 200 );
 
 			//Detecting when user scrolls to bottom of div
@@ -27665,13 +27722,13 @@ APP = ( function ( APP, $, window, document ) {
 		
 	
 			
-//		var	navMinTop    = $( '.stick-widget' ).offset().top + $( window ).height()/3,
-//			navMaxTop    = parseFloat( $( document ).height() - $( '.uix-footer__container' ).height() ) - $( window ).height()/3;
+//		var	navMinTop    = $( '.stick-widget' ).offset().top + window.innerHeight/3,
+//			navMaxTop    = parseFloat( $( document ).height() - $( '.uix-footer__container' ).height() ) - window.innerHeight/3;
 //
 //
 //		$( window ).on( 'scroll touchmove', function() {
 //			var scrollTop = $( this ).scrollTop(),
-//				spyTop    = parseFloat( scrollTop + $( window ).height()/2 );
+//				spyTop    = parseFloat( scrollTop + window.innerHeight/2 );
 //
 //			//Detecting when user scrolls to bottom of div
 //			if ( spyTop > navMaxTop || spyTop < navMinTop ) {
@@ -27974,8 +28031,8 @@ APP = ( function ( APP, $, window, document ) {
 		
 		
 		var $window                   = $( window ),
-			windowWidth               = $window.width(),
-			windowHeight              = $window.height(),
+			windowWidth               = window.innerWidth,
+			windowHeight              = window.innerHeight,
 			rendererCanvasID          = '3D-background-three-canvas';
 		
 	
@@ -28205,8 +28262,8 @@ APP = ( function ( APP, $, window, document ) {
 		
 		
 		var $window                   = $( window ),
-			windowWidth               = $window.width(),
-			windowHeight              = $window.height(),
+			windowWidth               = window.innerWidth,
+			windowHeight              = window.innerHeight,
 			rendererCanvasID          = '3D-background-three-canvas2';
 		
 	
@@ -28994,8 +29051,8 @@ APP = ( function ( APP, $, window, document ) {
 		
 		
 		var $window                   = $( window ),
-			windowWidth               = $window.width(),
-			windowHeight              = $window.height(),
+			windowWidth               = window.innerWidth,
+			windowHeight              = window.innerHeight,
 			rendererCanvasID          = '3D-model-canvas';
 		
 	
@@ -29268,8 +29325,8 @@ APP = ( function ( APP, $, window, document ) {
 		
 		
 		var $window                   = $( window ),
-			windowWidth               = $window.width(),
-			windowHeight              = $window.height(),
+			windowWidth               = window.innerWidth,
+			windowHeight              = window.innerHeight,
 			viewRenderer              = '3D-renderer';
 		
 		
@@ -29407,8 +29464,8 @@ APP = ( function ( APP, $, window, document ) {
 		if ( $( '#3D-particle-effect-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
 		
 		var $window                   = $( window ),
-			windowWidth               = $window.width(),
-			windowHeight              = $window.height(),
+			windowWidth               = window.innerWidth,
+			windowHeight              = window.innerHeight,
 			rendererCanvasID          = '3D-particle-effect-canvas';
 		
 		var renderer, 
@@ -29777,8 +29834,8 @@ APP = ( function ( APP, $, window, document ) {
 		
 		
 		var $window                   = $( window ),
-			windowWidth               = $window.width(),
-			windowHeight              = $window.height(),
+			windowWidth               = window.innerWidth,
+			windowHeight              = window.innerHeight,
 			rendererCanvasID          = '3D-sphere-three-canvas';
 		
 	
@@ -29931,8 +29988,8 @@ APP = ( function ( APP, $, window, document ) {
 		if ( $( '#3D-object-buttonevent-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
 		
 		var $window                   = $( window ),
-			windowWidth               = $window.width(),
-			windowHeight              = $window.height(),
+			windowWidth               = window.innerWidth,
+			windowHeight              = window.innerHeight,
 			rendererCanvasID          = '3D-object-buttonevent-canvas';
 		
 
@@ -30308,7 +30365,7 @@ APP = ( function ( APP, $, window, document ) {
 					liHeight   = $this.find( '.uix-tabs__nav ul > li:first' ).outerHeight(),
 					translateY = $( this ).index() * liHeight;
 				
-				if ( $( window ).width() <= 768 ) {
+				if ( window.innerWidth <= 768 ) {
 					$this.find( '.uix-tabs__marker' ).css({
 						'transform'          : 'translateY( '+translateY+'px )'	
 					});	
@@ -30724,8 +30781,8 @@ APP = ( function ( APP, $, window, document ) {
     APP.TIMELINE.pageLoaded    = function() {
 
 		var $window          = $( window ),
-			windowWidth      = $window.width(),
-			windowHeight     = $window.height();
+			windowWidth      = window.innerWidth,
+			windowHeight     = window.innerHeight;
 				
 				
 
@@ -30923,8 +30980,8 @@ APP = ( function ( APP, $, window, document ) {
     APP.VERTICAL_MENU.documentReady = function( $ ) {
 
 		var $window      = $( window ),
-			windowWidth  = $window.width(),
-			windowHeight = $window.height(),
+			windowWidth  = window.innerWidth,
+			windowHeight = window.innerHeight,
 			ulForDesktop = '.uix-v-menu__container:not(.is-mobile) ul.uix-menu';
 
 
@@ -31015,11 +31072,11 @@ APP = ( function ( APP, $, window, document ) {
 		
 		$window.on( 'resize', function() {
 			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( $window.width() != windowWidth ) {
+			if ( window.innerWidth != windowWidth ) {
 
 				// Update the window width for next time
-				windowWidth  = $window.width();
-				windowHeight = $window.height();
+				windowWidth  = window.innerWidth;
+				windowHeight = window.innerHeight;
 
 				// Do stuff here
 				menuWrapInit( windowWidth, windowHeight );

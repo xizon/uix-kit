@@ -32,7 +32,7 @@ APP = ( function ( APP, $, window, document ) {
         $( window ).on( 'ready load resizeEnd', function() {
 			
             window.elHeight = $el.height();
-            window.windowHeight = $( window ).height();
+            window.windowHeight = window.innerHeight;
             window.elOffsetTop = $el.offset().top - panelHeight;
 			
         });

@@ -49,7 +49,7 @@ APP = ( function ( APP, $, window, document ) {
 
 			
 			
-			if ( $( window ).width() <= 768 ) amountVisible = 3;
+			if ( window.innerWidth <= 768 ) amountVisible = 3;
 
 			
 			carouselItemWidth  = $carousel.width()/amountVisible;

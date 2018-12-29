@@ -22,8 +22,8 @@ APP = ( function ( APP, $, window, document ) {
 		if ( $( '#3D-particle-effect-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
 		
 		var $window                   = $( window ),
-			windowWidth               = $window.width(),
-			windowHeight              = $window.height(),
+			windowWidth               = window.innerWidth,
+			windowHeight              = window.innerHeight,
 			rendererCanvasID          = '3D-particle-effect-canvas';
 		
 		var renderer, 
