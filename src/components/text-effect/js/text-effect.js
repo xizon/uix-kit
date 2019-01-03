@@ -49,7 +49,7 @@ APP = ( function ( APP, $, window, document ) {
  * Text Effect
  *
  * @param  {String} selectors                - Text wrapper ID or class name.
- * @return {Void}                            - The constructor.
+ * @return {Void}
  */
 ( function ( $ ) {
     $.fn.customTextEffInit = function( options ) {

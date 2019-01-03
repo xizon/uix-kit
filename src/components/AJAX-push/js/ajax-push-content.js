@@ -131,7 +131,7 @@ APP = ( function ( APP, $, window, document ) {
 		 * @param  {String} url             - The target URL via AJAX. 
 		 * @param  {String} method          - The HTTP method to use for the request (e.g. "POST", "GET", "PUT")
 		 * @param  {Object|Boolean} btn     - Current trigger button. Avoid button events if "false".
-		 * @return {Void}                   - The constructor.
+		 * @return {Void}
 		 */
 		function pushAction( container, target, loading, url, method, btn ) {
 			
@@ -210,7 +210,7 @@ APP = ( function ( APP, $, window, document ) {
 		 * @param  {String} content      - The data returned from the server
 		 * @param  {String} title        - The title of a requested page.
 		 * @param  {Object} btn          - Current trigger button.
-		 * @return {Void}                - The constructor.
+		 * @return {Void}
 		 */
 		function ajaxSucceeds( container, content, title, btn ) {
 			

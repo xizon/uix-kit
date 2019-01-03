@@ -31,7 +31,7 @@ APP = ( function ( APP, $, window, document ) {
 		 * Tiny helper function to add breakpoints.
 		 *
 		 * @param  {Number} number           - Number of carousel items that should be visible.
-		 * @return {Void}                    - The constructor.
+		 * @return {Void}
 		 */
         function getGridSize( number ) {
             return ( window.innerWidth <= 768 ) ? 1 : number;
@@ -349,7 +349,7 @@ APP = ( function ( APP, $, window, document ) {
 		 *
 		 * @param  {Object} wrapper          - The outermost video container, which can contain multiple videos
 		 * @param  {Boolean} play            - Forced to trigger pause or play events.
-		 * @return {Void}                    - The constructor.
+		 * @return {Void}
 		 */
 		function videoEmbedInit( wrapper, play ) {
 			wrapper.find( '.uix-video__slider' ).each( function()  {
@@ -609,7 +609,7 @@ APP = ( function ( APP, $, window, document ) {
 		 * Make slider image draggable 
 		 *
 		 * @param  {Object} $obj             - The current FlexSlider setup using custom selector.
-		 * @return {Void}                   - The constructor.
+		 * @return {Void}
 		 */
         function slidesExDraggable( $obj ) {
 			
@@ -678,7 +678,7 @@ APP = ( function ( APP, $, window, document ) {
 		 *  Scroll The Slider With Mousewheel
 		 *
 		 * @param  {Object} $obj            - The current FlexSlider setup using custom selector.
-		 * @return {Void}                   - The constructor.
+		 * @return {Void}
 		 */
         function slidesExMousewheel( $obj ) {
 
@@ -721,7 +721,7 @@ APP = ( function ( APP, $, window, document ) {
 		 *
 		 * @param  {Object} slider           - The current slider.
 		 * @param  {String} navThumbClass    - Class name of thumbnail controlNav.
-		 * @return {Void}                    - The constructor.
+		 * @return {Void}
 		 */
         function initslidesWithNavThumb( slider, navThumbClass ) {
 
@@ -747,7 +747,7 @@ APP = ( function ( APP, $, window, document ) {
 		 * @param  {Boolean} loop                - Gives the slider a seamless infinite loop.
 		 * @param  {Number} speed                - Set the speed of animations, in milliseconds.
 		 * @param  {Number} timing               - Set the speed of the slideshow cycling, in milliseconds.
-		 * @return {Void}                        - The constructor.
+		 * @return {Void}
 		 */
 		function updateChildrenSlides( slideNumber, childrenSlidesObj, loop, speed, timing ) {
 			

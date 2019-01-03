@@ -43,7 +43,7 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Initialize slideshow
 		 *
-		 * @return {Void}                   - The constructor.
+		 * @return {Void}
 		 */
         function sliderInit() {
 			
@@ -204,7 +204,7 @@ APP = ( function ( APP, $, window, document ) {
 		 * @param  {Object} slider           - Selector of the slider .
 		 * @param  {String} arrows           - Controller name of prev/next buttons.
 		 * @param  {String} pagination       - Controller name of pagination buttons.
-		 * @return {Void}                    - The constructor.
+		 * @return {Void}
 		 */
         function sliderUpdates( elementIndex, slider, arrows, pagination ) {
 			

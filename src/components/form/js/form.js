@@ -69,7 +69,7 @@ APP = ( function ( APP, $, window, document ) {
 /*
  * Callbacks for special forms (supports asynchronous)
  *
- * @return {Void}                        - The constructor.
+ * @return {Void}
  */
 ( function ( $ ) {
     $.fn.customSpecialFormsInit = function( options ) {
@@ -347,7 +347,7 @@ APP = ( function ( APP, $, window, document ) {
  * @param  {String} trigger              - Trigger of the selector.
  * @param  {String} itemsWrapper         - Selector's options container.
  * @param  {Object} item                 - Each option of the selector.
- * @return {Void}                        - The constructor.
+ * @return {Void}
  */
 ( function ( $ ) {
     $.fn.customSelectInit = function( options ) {
@@ -522,7 +522,7 @@ APP = ( function ( APP, $, window, document ) {
  * @param  {String} radioWrapper             - Wrapper of the radio.
  * @param  {String} toggle                   - Toggle of the checkbox.
  * @param  {String} checkboxWrapper          - Wrapper of the checkbox.
- * @return {Void}                            - The constructor.
+ * @return {Void}
  */
 ( function ( $ ) {
     $.fn.customRadioCheckboxInit = function( options ) {
@@ -593,7 +593,7 @@ APP = ( function ( APP, $, window, document ) {
  * Create Line Effect on Click
  *
  * @param  {String} controls                 - Wrapper of controls.
- * @return {Void}                            - The constructor.
+ * @return {Void}
  */
 ( function ( $ ) {
     $.fn.customControlsLineEffInit = function( options ) {

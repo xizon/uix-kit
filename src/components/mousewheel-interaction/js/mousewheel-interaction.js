@@ -53,7 +53,7 @@ APP = ( function ( APP, $, window, document ) {
 		 *
 		 * @param  {Object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
 		 * @param  {String} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
-		 * @return {Void}                - The constructor.
+		 * @return {Void}
 		 */
 		function scrollInit( event, dir ) {
 	

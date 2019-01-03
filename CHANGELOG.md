@@ -1,6 +1,6 @@
 # Changelog
 
-#### = 3.0.7 (January 3, 2019) =
+#### = 3.0.8 (January 3, 2019) =
 
 * Fix: Fixed an inaccurate error in the history of Ajax Page Loader.
 * New: Add a new HTML demo "Helper Classes".

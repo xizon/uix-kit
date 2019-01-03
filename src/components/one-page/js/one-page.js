@@ -69,7 +69,7 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Init the section location
 		 *
-		 * @return {Void}                - The constructor.
+		 * @return {Void}
 		 */
 		function sectionStart() {
 	
@@ -99,7 +99,7 @@ APP = ( function ( APP, $, window, document ) {
 		 *
 		 * @param  {Object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
 		 * @param  {String} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
-		 * @return {Void}                - The constructor.
+		 * @return {Void}
 		 */
 		function scrollMoveInit( event, dir ) {
 	
@@ -131,7 +131,7 @@ APP = ( function ( APP, $, window, document ) {
 		 * @param  {Object} el           - The container of each sections.
 		 * @param  {String} dir          - Rolling direction indicator.
 		 * @param  {Number} hashID       - ID of custom hashchange event.
-		 * @return {Void}                - The constructor.
+		 * @return {Void}
 		 */
 		function moveTo( el, dir, hashID ) {
 			var index     = parseFloat( $sections.filter( '.active' ).attr( 'data-index' ) ),
@@ -265,7 +265,7 @@ APP = ( function ( APP, $, window, document ) {
 		 * Smooth scroll to content
 		 *
 		 * @param  {Object} menuObj     - Returns the menu element within the document.
-		 * @return {Void}               - The constructor.
+		 * @return {Void}
 		 */
         function goPageSection( menuObj ) {
 			menuObj.find( 'li > a' ).on( 'click', function(e) {

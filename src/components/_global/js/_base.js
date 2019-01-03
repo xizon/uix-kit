@@ -547,7 +547,7 @@ var UIX_GUID = UIX_GUID || (function() {
  *************************************
  * Scroll Lock
  * @https://gist.github.com/barneycarroll/6550066
- * @return {Void}                        - The constructor.
+ * @return {Void}
  *************************************
  */
 /*
@@ -694,7 +694,7 @@ var UIX_GUID = UIX_GUID || (function() {
  *
  * @param  {Number} speed     - The speed of movement between elements.
  * @param  {JSON} bg          - Specify the background display. Default value: { enable: true, xPos: '50%' }
- * @return {Void}             - The constructor.
+ * @return {Void}
  *************************************
  */
 

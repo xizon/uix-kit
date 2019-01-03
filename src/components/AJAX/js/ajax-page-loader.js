@@ -66,7 +66,7 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Initialize the clickable ajax links
 		 *
-		 * @return {Void}  - The constructor.
+		 * @return {Void}
 		 */
 		function ajaxInit() {
 			if ( windowWidth <= 768 ) {
@@ -179,7 +179,7 @@ APP = ( function ( APP, $, window, document ) {
 		 *
 		 * @param  {Object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
 		 * @param  {String} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
-		 * @return {Void}                - The constructor.
+		 * @return {Void}
 		 */
 		function scrollMoveInit( event, dir ) {
 	
@@ -214,7 +214,7 @@ APP = ( function ( APP, $, window, document ) {
 		 * @param  {String} dir          - Rolling direction indicator.
 		 * @param  {Number} customIndex  - User-specified index value, located on the corresponding AJAX hyperlink.
 		 * @param  {Boolean} wheel       - Whether to enable mouse wheel control.
-		 * @return {Void}                - The constructor.
+		 * @return {Void}
 		 */
 		function moveTo( container, url, dir, customIndex, wheel ) {
 			var index     = parseFloat( $navs.filter( '.active' ).find( '> a' ).attr( 'data-index' ) ),
@@ -330,7 +330,7 @@ APP = ( function ( APP, $, window, document ) {
 		 * @param  {Object} container - The instance returned from the request succeeds
 		 * @param  {String} content   - The data returned from the server
 		 * @param  {String} title        - The title of a requested page.
-		 * @return {Void}             - The constructor.
+		 * @return {Void}
 		 */
 		function ajaxSucceeds( dir, container, content, title ) {
 			
@@ -385,7 +385,7 @@ APP = ( function ( APP, $, window, document ) {
 		 * @param  {String} dir            - Gets a value that indicates the amount that the mouse wheel has changed.
 		 * @param  {String} oldContent     - A string of HTML to set as the content of matched old element.
 		 * @param  {String} newContent     - A string of HTML to set as the content of matched new element.
-		 * @return {Void}                  - The constructor.
+		 * @return {Void}
 		 */
 		function eleTransitionEff( dir, oldContent, newContent ) {
 			
@@ -497,7 +497,7 @@ APP = ( function ( APP, $, window, document ) {
  *                                           load asynchronous information
  * @param  {Boolean} ajaxDDList            - Run script of module "Dynamic Drop Down List from JSON".
  * @param  {Boolean} counterAnim           - Run script of module "Counter".
- * @return {Void}  - The constructor.
+ * @return {Void}
  */
 ( function ( $ ) {
     $.fn.applyOriginalSomeScripts = function( options ) {
@@ -610,7 +610,7 @@ APP = ( function ( APP, $, window, document ) {
  * Apply all the original scripts
  *
  * @param  {Boolean} runAll          - Run all module scripts.
- * @return {Void}  - The constructor.
+ * @return {Void}
  */	
 ( function ( $ ) {
     $.fn.applyOriginalAllScripts = function( options ) {

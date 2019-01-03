@@ -229,7 +229,7 @@ APP = ( function ( APP, $, window, document ) {
 		 *
 		 * @param  {String} objectType     - String of geometry type identifier.
 		 * @param  {Number} numObjects       - The total number of generated objects.
-		 * @return {Void}                  - The constructor.
+		 * @return {Void}
 		 */
 		function generateGeometry( objectType, numObjects ) {
 

@@ -10,7 +10,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.LIGHTBOX               = APP.LIGHTBOX || {};
-	APP.LIGHTBOX.version       = '0.1.2';
+	APP.LIGHTBOX.version       = '0.1.3';
     APP.LIGHTBOX.pageLoaded    = function() {
 
 		if ( $( '.uix-lightbox__container' ).length == 0 ) {
@@ -127,7 +127,34 @@ APP = ( function ( APP, $, window, document ) {
 			};
 			
 			
-
+			// hide the content container
+			var hideLightboxContent = function() {
+				TweenMax.set( $content, {
+					css         : {
+						'display' : 'none'
+					}
+				});		
+			};
+			
+			
+			// show the content container
+			var showLightboxContent = function() {
+				TweenMax.set( $content, {
+					css         : {
+						'display' : 'block'
+					},
+					onComplete  : function() {
+						TweenMax.to( this.target, 0.5, {
+							alpha : 1
+						});
+					}
+				});	
+			};
+			
+			
+			hideLightboxContent();
+			
+			
 			//-------- If it is photo
 			//-----------------------------
 			if ( typeof dataPhoto != typeof undefined && dataPhoto != '' ) {
@@ -212,6 +239,10 @@ APP = ( function ( APP, $, window, document ) {
 						
 						//remove loading
 						$( loaderEl ).addClass( 'is-loaded' );
+
+						// show the content container
+						showLightboxContent();	
+
 						
 						var sw     = window.innerWidth - 30,
 							ow     = this.width,
@@ -295,20 +326,12 @@ APP = ( function ( APP, $, window, document ) {
 			if ( typeof dataHtmlID != typeof undefined && dataHtmlID != '' ) {
 				dataHtmlID = dataHtmlID.replace( '#', '' );
 
-				var $htmlContentContainer = $( '#' + dataHtmlID ).find( '.uix-lightbox__content > div' );
-				
-				// hide the ajax content container
-				TweenMax.set( $htmlContentContainer, {
-					css         : {
-						'display' : 'none'
-					}
-				});	
-
-				
+				var $htmlAjaxContainer = $( '#' + dataHtmlID ).find( '.uix-lightbox__content > div' );
+		
 				//show the lightbox
 				showLightbox();
 				
-				
+				// Content pushing completed
 				var htmlContentLoaded = function() {
 					//remove loading
 					$( loaderEl ).addClass( 'is-loaded' );
@@ -361,11 +384,9 @@ APP = ( function ( APP, $, window, document ) {
 						dataType : 'html',
 						success  : function( response ) {
 
-							$htmlContentContainer.html( $( response ).find( dataAjax.target ).html() ).promise().done( function(){
+							$htmlAjaxContainer.html( $( response ).find( dataAjax.target ).html() ).promise().done( function(){
 								
 
-								
-								//Add content to the dynamic lightbox container
 								$content.html( $( '#' + dataHtmlID ).html() ).promise().done( function(){
 									
 									// Apply the original scripts
@@ -373,6 +394,10 @@ APP = ( function ( APP, $, window, document ) {
 										lightBox : false
 									});
 									
+									// show the content container
+									showLightboxContent();	
+									
+									// Content pushing completed
 									htmlContentLoaded();
 								});	
 								
@@ -381,27 +406,13 @@ APP = ( function ( APP, $, window, document ) {
 
 
 							
-							
-
 						},
 						error: function(){
 							window.location.href = ajaxURL;
 						},
 						beforeSend: function() {
-							$htmlContentContainer.html( ajaxConfig.loading );
 							
-							// show the ajax content container
-							TweenMax.set( $htmlContentContainer, {
-								css         : {
-									'display' : 'block'
-								},
-								onComplete  : function() {
-									TweenMax.to( this.target, 0.5, {
-										alpha : 1
-									});
-								}
-							});		
-							
+						
 						}
 					}).fail( function( jqXHR, textStatus ) {
 						if( textStatus === 'timeout' ) {
@@ -413,22 +424,13 @@ APP = ( function ( APP, $, window, document ) {
 					
 				} else {
 					
-					// show the ajax content container
-					TweenMax.set( $htmlContentContainer, {
-						css         : {
-							'display' : 'block'
-						},
-						onComplete  : function() {
-							TweenMax.to( this.target, 0.5, {
-								alpha : 1
-							});
-						}
-					});		
-
+					// show the content container
+					showLightboxContent();	
 
 					
-					//Add content to the dynamic lightbox container
 					$content.html( $( '#' + dataHtmlID ).html() ).promise().done( function(){
+						
+						// Content pushing completed
 						htmlContentLoaded();
 					});	
 				}
@@ -530,13 +532,26 @@ APP = ( function ( APP, $, window, document ) {
 		 *
 		 * @param  {Number} index           - The target index of large photo.
 		 * @param  {Object} obj             - Target large image <li>.
-		 * @return {Void}                   - The constructor.
+		 * @return {Void}
 		 */
 		function lightboxThumbSwitch( index, obj ) {
 			var $largePhoto = obj.closest( '.uix-lightbox__html' ).find( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' ),
 				$thumb      = obj.closest( '.uix-lightbox__html' ).find( '.uix-lightbox__thumb-container li' ),
 				curImgH     = 0;
 
+			// show the content container
+			var showLightboxContent = function() {
+				TweenMax.set( obj.closest( '.uix-lightbox__html' ), {
+					css         : {
+						'display' : 'block'
+					},
+					onComplete  : function() {
+						TweenMax.to( this.target, 0.5, {
+							alpha : 1
+						});
+					}
+				});	
+			};
 			
 			$thumb.removeClass( 'active' );
 			obj.addClass( 'active' );
@@ -552,6 +567,10 @@ APP = ( function ( APP, $, window, document ) {
 					//remove loading
 					$( loaderEl ).addClass( 'is-loaded' );
 
+					// show the content container
+					showLightboxContent();	
+
+					
 					
 					var sw     = window.innerWidth - 30,
 						ow     = this.width,
@@ -601,7 +620,7 @@ APP = ( function ( APP, $, window, document ) {
 		 * Close the lightbox
 		 *
 		 * @param  {String} url             - The current page URL for history.
-		 * @return {Void}                   - The constructor.
+		 * @return {Void}
 		 */
 		function lightboxClose( url ) {
 			

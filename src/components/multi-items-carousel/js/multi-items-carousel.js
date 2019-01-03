@@ -313,7 +313,7 @@ APP = ( function ( APP, $, window, document ) {
 			 * @param  {String} nextBtnStr      - The button ID or class that triggers the next move.
 			 * @param  {String} prevBtnStr      - The button ID or class that triggers the previous move.
 			 * @param  {Number} steps           - The number of steps per move.
-			 * @return {Void}                   - The constructor.
+			 * @return {Void}
 			 */
 			function itemUpdates( wrapper, curBtn, nextBtnStr, prevBtnStr, steps ) {
 
@@ -614,7 +614,7 @@ APP = ( function ( APP, $, window, document ) {
 //			 * @param  {Object} curBtn          - The button that currently triggers the move.
 //			 * @param  {String} nextBtnStr      - The button ID or class that triggers the next move.
 //			 * @param  {String} prevBtnStr      - The button ID or class that triggers the previous move.
-//			 * @return {Void}                   - The constructor.
+//			 * @return {Void}
 //			 */
 //			function moveNext( wrapper, items, curBtn, nextBtnStr, prevBtnStr ) {
 //
@@ -753,7 +753,7 @@ APP = ( function ( APP, $, window, document ) {
 //			 * @param  {Object} curBtn          - The button that currently triggers the move.
 //			 * @param  {String} nextBtnStr      - The button ID or class that triggers the next move.
 //			 * @param  {String} prevBtnStr      - The button ID or class that triggers the previous move.
-//			 * @return {Void}                   - The constructor.
+//			 * @return {Void}
 //			 */
 //			function movePrev( wrapper, items, curBtn, nextBtnStr, prevBtnStr ) {
 //

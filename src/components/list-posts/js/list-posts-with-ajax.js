@@ -383,7 +383,7 @@ APP = ( function ( APP, $, window, document ) {
 		 * @param  {String} method          - The type of request to make, which can be either "POST" or "GET".
 		 * @param  {Boolean} addition       - Do or not append to the original content.
 		 * @param  {String} noneInfo        - Returns information of ajax asynchronous callback when the content is empty.
-		 * @return {Void}                   - The constructor.
+		 * @return {Void}
 		 */
 		
 		function ajaxLoadInit( ajaxWrapper, defaultPostData, trigger, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition, noneInfo ) {

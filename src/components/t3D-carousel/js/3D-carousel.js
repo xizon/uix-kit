@@ -169,7 +169,7 @@ APP = ( function ( APP, $, window, document ) {
 			 * Swap Between Images
 			 *
 			 * @param  {String} action           - Direction of movement, optional: clockwise, counter-clockwise
-			 * @return {Void}                    - The constructor.
+			 * @return {Void}
 			 */
 			function itemUpdates( action ) {
 				var direction = action;

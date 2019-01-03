@@ -96,7 +96,7 @@ APP = ( function ( APP, $, window, document ) {
 			 * Active the target item
 			 *
 		     * @param  {Number} index     - The index value of the item to be activated.
-			 * @return {Void}             - The constructor.
+			 * @return {Void}
 			 */
 			function itemActiveItem( index ) {
 				
@@ -114,7 +114,7 @@ APP = ( function ( APP, $, window, document ) {
 			/*
 			 * Initialize the width of each item
 			 *
-			 * @return {Void}             - The constructor.
+			 * @return {Void}
 			 */
 			function itemInit() {
 				$li.removeClass( 'active sub-active' ).css( 'width', 100/total + '%' );

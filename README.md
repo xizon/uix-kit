@@ -2,7 +2,7 @@
 
 
 [![Travis CI](https://api.travis-ci.org/xizon/uix-kit.svg?branch=master)](https://travis-ci.org/xizon/uix-kit/)
-[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=3.0.7&x2=0)](https://www.npmjs.com/package/uix-kit)
+[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=3.0.8&x2=0)](https://www.npmjs.com/package/uix-kit)
 [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
 
 
@@ -102,7 +102,7 @@ $ sudo npm install --save-dev  --unsafe-perm node-sass
 $ npm run build
 ```
 
-**Step 5.** When you done, please open the browser and enter the following URL to check out.
+**Step 5.** When you done, this will spin up a server that can be accessed at
 
 ```sh
 http://localhost:8080/examples/

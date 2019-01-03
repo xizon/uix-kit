@@ -113,7 +113,7 @@ APP = ( function ( APP, $, window, document ) {
 		 * @param  {Object} iscur                - The current item.
 		 * @param  {String} showEle              - Element ID or class name that push the current text.
 		 * @param  {Boolean} prev                - Whether to slide forward.
-		 * @return {Void}                        - The constructor.
+		 * @return {Void}
 		 */
 		function timelineUpdate( obj, iscur, showEle, prev ) {
 			var	itemTotal  = obj.find( '.uix-timeline__item' ).length,

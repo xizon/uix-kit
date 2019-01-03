@@ -79,7 +79,7 @@ APP = ( function ( APP, $, window, document ) {
 		 * Initialize slideshow
 		 *
 		 * @param  {Boolean} resize            - Determine whether the window size changes.
-		 * @return {Void}                   - The constructor.
+		 * @return {Void}
 		 */
         function sliderInit( resize ) {
 	
@@ -231,7 +231,7 @@ APP = ( function ( APP, $, window, document ) {
 		 * @param  {Number} timing           - Autoplay interval.
 		 * @param  {Object} items            - Each item in current slider.
 		 * @param  {Boolean} loop            - Determine whether to loop through each item.
-		 * @return {Void}                    - The constructor.
+		 * @return {Void}
 		 */
         function sliderAutoPlay( timing, items, loop ) {	
 			
@@ -272,7 +272,7 @@ APP = ( function ( APP, $, window, document ) {
 		 * @param  {Object} sliderWrapper    - Wrapper of the slider.
 		 * @param  {Number} nativeItemW      - Returns the intrinsic width of the image/video.
 		 * @param  {Number} nativeItemH      - Returns the intrinsic height of the image/video.
-		 * @return {Void}                    - The constructor.
+		 * @return {Void}
 		 */
         function addItemsToStage( slider, sliderWrapper, nativeItemW, nativeItemH ) {
 			
@@ -1642,7 +1642,7 @@ APP = ( function ( APP, $, window, document ) {
 		 * @param  {Number} elementIndex     - Index of current slider.
 		 * @param  {Object} slider           - Selector of the slider .
 		 * @param  {String} dir              - Switching direction indicator.
-		 * @return {Void}                    - The constructor.
+		 * @return {Void}
 		 */
         function sliderUpdates( elementIndex, slider, dir ) {
 			
@@ -1812,7 +1812,7 @@ APP = ( function ( APP, $, window, document ) {
 		 *
 		 * @param  {Number} w                - The width that the canvas will be set.
 		 * @param  {Number} h                - The height that the canvas will be set.
-		 * @return {Void}                    - The constructor.
+		 * @return {Void}
 		 */
         function fixCanvasTagSize( w, h ) {
 
@@ -1829,7 +1829,7 @@ APP = ( function ( APP, $, window, document ) {
 		 * Initialize the default height of canvas
 		 *
 		 * @param  {Object} slider           - Current selector of each slider.
-		 * @return {Void}                    - The constructor.
+		 * @return {Void}
 		 */
         function canvasDefaultInit( slider ) {
 			
@@ -1898,7 +1898,7 @@ APP = ( function ( APP, $, window, document ) {
 		 * @param  {String} goType                 - The type of entry and exit between two items.  
 		                                             Optional values: in, out
 		 * @param  {String} dir                    - Switching direction indicator.	 
-		 * @return {Void}                          - The constructor.
+		 * @return {Void}
 		 */
         function transitionInteractions( elementIndex, prevElementIndex, slider, goType, dir ) {
 			
@@ -2790,7 +2790,7 @@ APP = ( function ( APP, $, window, document ) {
 		 *
 		 * @param  {Object} wrapper          - The outermost video container, which can contain multiple videos
 		 * @param  {Boolean} play            - Forced to trigger pause or play events.
-		 * @return {Void}                    - The constructor.
+		 * @return {Void}
 		 */
 		function normalSliderVideoInit( wrapper, play ) {
 			wrapper.find( '.uix-video__slider' ).each( function()  {

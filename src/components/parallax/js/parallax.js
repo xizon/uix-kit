@@ -40,7 +40,7 @@ APP = ( function ( APP, $, window, document ) {
 		 *
 		 * @param  {Number} w         - Returns width of browser viewport
 		 * @param  {Number} h         - Returns height of browser viewport
-		 * @return {Void}             - The constructor.
+		 * @return {Void}
 		 */
 		function parallaxInit( w, h ) {
 			

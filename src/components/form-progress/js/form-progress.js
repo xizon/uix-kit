@@ -88,7 +88,7 @@ APP = ( function ( APP, $, window, document ) {
 		/*
 		 * Resets the form back to the default state.
 		 *
-		 * @return {Void}                   - The constructor.
+		 * @return {Void}
 		 */
 		function formReset() {
 			
@@ -128,7 +128,7 @@ APP = ( function ( APP, $, window, document ) {
  * @param  {Object} formTarget      - Wrapper of target forms selector.
  * @param  {String} indicator       - Indicator of timeline.
  * @param  {Number} index           - Default index for initialization.
- * @return {Void}                   - The constructor.
+ * @return {Void}
  */
 ( function ( $ ) {
     $.fn.formProgressNext = function( options ) {

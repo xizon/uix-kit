@@ -123,7 +123,7 @@ APP = ( function ( APP, $, window, document ) {
 		 *
 		 * @param  {Number} w         - Returns width of browser viewport
 		 * @param  {Number} h         - Returns height of browser viewport
-		 * @return {Void}             - The constructor.
+		 * @return {Void}
 		 */
 		function menuWrapInit( w, h ) {
 			

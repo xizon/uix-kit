@@ -40,7 +40,7 @@ APP = ( function ( APP, $, window, document ) {
 		 * @param  {Number} base           - Base offset value.
 		 * @param  {Object} obj            - An HTML element.
 		 * @param  {Boolean} reset         - Reset block on mouse leave
-		 * @return {Void}                  - The constructor.
+		 * @return {Void}
 		 */
 		function animate3dElement( base, obj, reset ) {
 
@@ -128,7 +128,7 @@ APP = ( function ( APP, $, window, document ) {
 		 * @param  {Number} multiple       - The power of target number.
 		 * @param  {Object} obj            - An HTML element.
 		 * @param  {Boolean} reset         - Reset block on mouse leave
-		 * @return {Void}                  - The constructor.
+		 * @return {Void}
 		 */
 		function animate3dMultiElement( base, multiple, obj, reset ) {
 
