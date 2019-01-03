@@ -49,7 +49,7 @@ APP = ( function ( APP, $, window, document ) {
 				var $this       = $( this ),
 					dataSpeed   = $this.data( 'parallax' );
 				
-				if( typeof dataSpeed === typeof undefined ) {
+				if ( typeof dataSpeed === typeof undefined ) {
 					dataSpeed = 0;
 				}
 				
@@ -83,12 +83,12 @@ APP = ( function ( APP, $, window, document ) {
 					dataOverlay = 'rgba(0, 0, 0, 0)';
 				}
 				
-				if( typeof dataSpeed === typeof undefined ) { // If there is no data-xxx, save current source to it
+				if ( typeof dataSpeed === typeof undefined ) { // If there is no data-xxx, save current source to it
 					dataSpeed = 0;
 				}	
 				
 				
-				if( typeof dataFullyVisible === typeof undefined ) {
+				if ( typeof dataFullyVisible === typeof undefined ) {
 					dataFullyVisible = false;
 				}	
 				
@@ -169,7 +169,7 @@ APP = ( function ( APP, $, window, document ) {
 					//console.log( 'Height: ' +curImgH + '===' + $this.height() + ' | Width: ' + curImgW + '===' + w + ' | ' + curSize );
 
 					//Add background image to parallax container
-					if( typeof dataImg != typeof undefined ) {
+					if ( typeof dataImg != typeof undefined ) {
 
 						if ( Modernizr.cssanimations ) {
 							// supported
@@ -190,7 +190,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 					//Apply tilt effect
-					if( typeof dataSkew != typeof undefined && dataSkew != 0 ) {
+					if ( typeof dataSkew != typeof undefined && dataSkew != 0 ) {
 						
 						//Firefox browser will affect parallax effect due to transform
 						$this.css( {

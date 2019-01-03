@@ -2,7 +2,17 @@
    <!-- Table -->      
 /* ====================================================== */
 
+/*
+ * 1. Generic
+ * 2. Table Sorter
+*/
 
+
+/* 
+ ---------------------------
+ 1. Generic
+ ---------------------------
+ */
 $table-border-color: #d6d5d5;
 $table-border-headerbg: #f2f2f2;
 $table-alternant-bg: #f2f2f2;
@@ -27,18 +37,15 @@ table.uix-table,
 	th,
 	td {
 		border-color: $table-border-color;
-	}
-
-	td,
-	th {
-
 		border-left: 1px solid $table-border-color;
 		border-width: 0 0 0 1px;
 		margin: 0;
 		overflow: visible;
-		padding: 0.5rem 0.75rem;
+		padding: 0.5rem 0.75rem;	
+		vertical-align: top;
+		
+		
 	}
-
 
 	thead {
 		background: $table-border-headerbg;
@@ -56,13 +63,27 @@ table.uix-table,
 
 	td {
 		background-color: transparent;
-
+		
 	}
 
 	
 
 }
 
+/*-- Table Effect by Default --*/
+/* Compatible with  Uix Shortcodes (WordPress Plugin) */
+.uix-table a:not(.uix-sc-btn) {
+    color: $highlight-color1;
+}
+
+.uix-table a:not(.uix-sc-btn):not(.uix-btn):hover {
+    color: $highlight-color2;
+    text-decoration: underline;
+}
+
+.uix-table a:not(.uix-sc-btn):hover img {
+    text-decoration: none;
+}
 
 
 @media all and (max-width: 768px) { 
@@ -80,6 +101,7 @@ table.uix-table,
 			
 			td {
 				display: block;
+				
 
 
 				&::before {
@@ -198,4 +220,53 @@ table.is-horizontal,
 		border-bottom: 1px solid $table-border-color;
 	}
 
+}
+
+
+
+/* 
+ ---------------------------
+ 2. Table Sorter
+ ---------------------------
+ */
+
+.uix-table-sorter {
+	cursor: pointer;
+
+	&::after {
+		content: '';
+		font-family: 'FontAwesome';
+		color: $sub-text-color;
+		margin-left: .5rem;
+		font-size: 0.75rem;
+		content: "\f0dc";
+	}
+
+}
+
+
+.js-uix-newsort {
+	animation: uix-cssAnim--newsort .5s linear 1 forwards;
+	opacity: 0;
+}
+
+@for $i from 1 to 100 {
+
+	.js-uix-newsort:nth-child(#{$i+1}) {
+		animation-delay: #{$i*100}ms;
+	}
+}	  
+
+
+
+@keyframes uix-cssAnim--newsort {
+	0%   { 
+		opacity: 0;
+		transform: translateX(10px);
+	}
+	
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
 }

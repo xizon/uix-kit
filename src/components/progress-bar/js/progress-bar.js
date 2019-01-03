@@ -17,11 +17,11 @@ APP = ( function ( APP, $, window, document ) {
 					percent      = $this.data( 'progressbar-percent' ),
 					unit         = $this.data( 'progressbar-unit' );
 
-				if( typeof percent === typeof undefined ) {
+				if ( typeof percent === typeof undefined ) {
 					percent = 0;
 				}
 
-				if( typeof unit === typeof undefined ) {
+				if ( typeof unit === typeof undefined ) {
 					unit = '%';
 				}	
 

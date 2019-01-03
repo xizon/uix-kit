@@ -73,12 +73,12 @@ APP = ( function ( APP, $, window, document ) {
 				dataParallax      = thisSlider.data( 'my-parallax' );
 			
 			
-			if( typeof dataPNThumbs === typeof undefined ) dataPNThumbs = false;
-			if( typeof dataTimeline === typeof undefined ) dataTimeline = false;
-			if( typeof dataCountTotal === typeof undefined ) dataCountTotal = false;
-			if( typeof dataCountCur === typeof undefined ) dataCountCur = false;
-			if( typeof dataParallax === typeof undefined ) dataParallax = false;
-			if( typeof dataShowItemsMove === typeof undefined ) dataShowItemsMove = 1;
+			if ( typeof dataPNThumbs === typeof undefined ) dataPNThumbs = false;
+			if ( typeof dataTimeline === typeof undefined ) dataTimeline = false;
+			if ( typeof dataCountTotal === typeof undefined ) dataCountTotal = false;
+			if ( typeof dataCountCur === typeof undefined ) dataCountCur = false;
+			if ( typeof dataParallax === typeof undefined ) dataParallax = false;
+			if ( typeof dataShowItemsMove === typeof undefined ) dataShowItemsMove = 1;
 			
 			
 			//Total counter selector
@@ -369,23 +369,23 @@ APP = ( function ( APP, $, window, document ) {
 				$this.find( '.video-js' ).attr( 'id', curVideoID );
 
 			
-				if( typeof dataAuto === typeof undefined ) {
+				if ( typeof dataAuto === typeof undefined ) {
 					dataAuto = true;
 				}
-				if( typeof dataLoop === typeof undefined ) {
+				if ( typeof dataLoop === typeof undefined ) {
 					dataLoop = true;
 				}
 				
-				if( typeof dataControls === typeof undefined ) {
+				if ( typeof dataControls === typeof undefined ) {
 					dataControls = false;
 				}		
 				
 			
-				if( typeof dataW === typeof undefined || dataW == 'auto' ) {
+				if ( typeof dataW === typeof undefined || dataW == 'auto' ) {
 					dataW = videoWrapperW;
 				}	
 
-				if( typeof dataH === typeof undefined || dataH == 'auto' ) {
+				if ( typeof dataH === typeof undefined || dataH == 'auto' ) {
 					dataH = videoWrapperW/1.77777777777778;
 				}
 				
@@ -809,7 +809,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			// Custom Controls
 			var myControlsContainer, myCustomDirectionNav;
-			if( typeof customConID === typeof undefined || customConID == '' || customConID == false ) {
+			if ( typeof customConID === typeof undefined || customConID == '' || customConID == false ) {
 				myControlsContainer  = '';
 				myCustomDirectionNav = '';
 			} else {
@@ -819,24 +819,24 @@ APP = ( function ( APP, $, window, document ) {
 
 			
 			// If there is no data-xxx, save current source to it
-			if( typeof dataSpeed === typeof undefined ) dataSpeed = 600;
-			if( typeof dataTiming === typeof undefined ) dataTiming = 10000;
-			if( typeof dataLoop === typeof undefined ) dataLoop = true;
-			if( typeof dataPrev === typeof undefined ) dataPrev = "<i class='fa fa-chevron-left'></i>";
-			if( typeof dataNext === typeof undefined ) dataNext = "<i class='fa fa-chevron-right'></i>";
-			if( typeof dataAnim === typeof undefined ) dataAnim = 'slide';
-			if( typeof dataPaging === typeof undefined ) dataPaging = true;
-			if( typeof dataArrows === typeof undefined ) dataArrows = true;
-			if( typeof dataAuto === typeof undefined ) dataAuto = true;
-			if( typeof dataDrag === typeof undefined ) dataDrag = false;
-			if( typeof dataWheel === typeof undefined ) dataWheel = false;
-			if( typeof dataNhumbs === typeof undefined ) dataNhumbs = false;
-			if( typeof dataPNThumbs === typeof undefined ) dataPNThumbs = false;
-			if( typeof dataTimeline === typeof undefined ) dataTimeline = false;
-			if( typeof dataCountTotal === typeof undefined ) dataCountTotal = false;
-			if( typeof dataCountCur === typeof undefined ) dataCountCur = false;
-			if( typeof dataParallax === typeof undefined ) dataParallax = false;
-		    if( typeof dataShowItemsMove === typeof undefined ) dataShowItemsMove = 1;
+			if ( typeof dataSpeed === typeof undefined ) dataSpeed = 600;
+			if ( typeof dataTiming === typeof undefined ) dataTiming = 10000;
+			if ( typeof dataLoop === typeof undefined ) dataLoop = true;
+			if ( typeof dataPrev === typeof undefined ) dataPrev = "<i class='fa fa-chevron-left'></i>";
+			if ( typeof dataNext === typeof undefined ) dataNext = "<i class='fa fa-chevron-right'></i>";
+			if ( typeof dataAnim === typeof undefined ) dataAnim = 'slide';
+			if ( typeof dataPaging === typeof undefined ) dataPaging = true;
+			if ( typeof dataArrows === typeof undefined ) dataArrows = true;
+			if ( typeof dataAuto === typeof undefined ) dataAuto = true;
+			if ( typeof dataDrag === typeof undefined ) dataDrag = false;
+			if ( typeof dataWheel === typeof undefined ) dataWheel = false;
+			if ( typeof dataNhumbs === typeof undefined ) dataNhumbs = false;
+			if ( typeof dataPNThumbs === typeof undefined ) dataPNThumbs = false;
+			if ( typeof dataTimeline === typeof undefined ) dataTimeline = false;
+			if ( typeof dataCountTotal === typeof undefined ) dataCountTotal = false;
+			if ( typeof dataCountCur === typeof undefined ) dataCountCur = false;
+			if ( typeof dataParallax === typeof undefined ) dataParallax = false;
+		    if ( typeof dataShowItemsMove === typeof undefined ) dataShowItemsMove = 1;
 			
 			
 
@@ -863,7 +863,7 @@ APP = ( function ( APP, $, window, document ) {
 				my_minItems  = 0,
 				my_maxItems  = 0;
 			
-			if( typeof dataShowItems != typeof undefined && dataShowItems != '' && dataShowItems != 0 ) {
+			if ( typeof dataShowItems != typeof undefined && dataShowItems != '' && dataShowItems != 0 ) {
 				
 			    my_itemWidth = 1;
 				my_minItems  = getGridSize( dataShowItems );
@@ -878,12 +878,12 @@ APP = ( function ( APP, $, window, document ) {
 					thisSliderID = $this.attr( 'id' );
 				
 				
-				if( typeof curSync != typeof undefined ) {
+				if ( typeof curSync != typeof undefined ) {
 					curSync = curSync.toString().replace( '#', '' ).replace( '.', '' );
 				}
 				
 				
-				if( typeof thisSliderID != typeof undefined && thisSliderID == curSync ) {
+				if ( typeof thisSliderID != typeof undefined && thisSliderID == curSync ) {
 					dataAuto = false; //Set it not to scroll automatically
 					dataPaging = false;
 					
@@ -921,7 +921,7 @@ APP = ( function ( APP, $, window, document ) {
 				start: function( slider ) {
 					
 					//set slider instance to flexslider variable
-					if( typeof dataShowItems != typeof undefined && dataShowItems != '' && dataShowItems != 0 ) {
+					if ( typeof dataShowItems != typeof undefined && dataShowItems != '' && dataShowItems != 0 ) {
 					    flexslider = slider;		
 					}
 					
@@ -934,7 +934,7 @@ APP = ( function ( APP, $, window, document ) {
 					initslides( $this, slider, 'before' );
 					
 					// Call the updateChildrenSlides which itterates through all children slides 
-					if( typeof dataSync != typeof undefined && dataSync != '' && dataSync != 0 ) {
+					if ( typeof dataSync != typeof undefined && dataSync != '' && dataSync != 0 ) {
 						updateChildrenSlides( slider.animatingTo, dataSync, dataLoop, dataSpeed, dataTiming );
 						
 					}
@@ -981,7 +981,7 @@ APP = ( function ( APP, $, window, document ) {
 						var dataShowItems = $( this ).data( 'my-multiple-items' );
 		
 						
-						if( typeof dataShowItems != typeof undefined && dataShowItems != '' && dataShowItems != 0 ) {
+						if ( typeof dataShowItems != typeof undefined && dataShowItems != '' && dataShowItems != 0 ) {
 
 							var gridSize = getGridSize( dataShowItems );
 							flexslider.vars.minItems = gridSize;

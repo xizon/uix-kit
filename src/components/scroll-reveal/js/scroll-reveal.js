@@ -20,7 +20,7 @@ APP = ( function ( APP, $, window, document ) {
 
 				var config = obj.data( 'uix-anim' );
 
-				if( typeof config === typeof undefined || config == '' || config === false ) {
+				if ( typeof config === typeof undefined || config == '' || config === false ) {
 					config = {
 						"from"     : {"opacity":0,"x":70},
 						"to"       : {"opacity":1,"x":0},
@@ -109,7 +109,7 @@ APP = ( function ( APP, $, window, document ) {
 			//Prevent asynchronous loading of repeated calls
 			var actived = $( this ).data( 'active' );
 			
-			if( typeof actived === typeof undefined ) {
+			if ( typeof actived === typeof undefined ) {
 				tmAnim( $( this ), 'from' );
 
 			}
@@ -131,7 +131,7 @@ APP = ( function ( APP, $, window, document ) {
 						tmLoop  = tmAnim( $( this.element ), 'loop' );
 					
 
-					if( typeof actived === typeof undefined && tmLoop != 1 ) {
+					if ( typeof actived === typeof undefined && tmLoop != 1 ) {
 						
 						//$( this.element ).toggleClass( 'animated fadeInUp', direction === 'down' );
 						tmAnim( $( this.element ), 'to' );

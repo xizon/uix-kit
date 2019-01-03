@@ -10,8 +10,6 @@
 */
 
 
-
-
 if ( typeof jQuery === 'undefined' || typeof TweenMax === 'undefined' || typeof Waypoint === 'undefined' || typeof videojs === 'undefined' ) {
     throw new Error( 'Uix Kit\'s JavaScript requires jQuery, TweenMax, Waypoint and videojs.' );
 }
@@ -124,7 +122,7 @@ var APP = (function ( $, window, document ) {
 
     _APP.setContext = function ( contextSelector ) {
         var context = $;
-        if( typeof contextSelector !== typeof undefined ) {
+        if ( typeof contextSelector !== typeof undefined ) {
             return function( selector ) {
                 return $( contextSelector ).find( selector );
             };
@@ -1473,7 +1471,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.MODAL_DIALOG               = APP.MODAL_DIALOG || {};
-	APP.MODAL_DIALOG.version       = '0.0.4';
+	APP.MODAL_DIALOG.version       = '0.0.6';
     APP.MODAL_DIALOG.documentReady = function( $ ) {
 
 		//Get the -webkit-transition-duration property
@@ -1482,6 +1480,7 @@ APP = ( function ( APP, $, window, document ) {
 			if ( typeof el === typeof undefined ) {
 				return 0;
 			}
+			
 			
 			var style    = window.getComputedStyle(el),
 				duration = style.webkitTransitionDuration,
@@ -1545,11 +1544,11 @@ APP = ( function ( APP, $, window, document ) {
 				$.scrollLock( true );
 					
 
-				if( typeof dataH != typeof undefined && dataH != '' ) {
+				if ( typeof dataH != typeof undefined && dataH != '' ) {
 					$obj.css( {'height': dataH } );
 				}
 				
-				if( typeof dataW != typeof undefined && dataW != '' ) {
+				if ( typeof dataW != typeof undefined && dataW != '' ) {
 					$obj.css( {'width': dataW } );
 				}
 				
@@ -1583,11 +1582,17 @@ APP = ( function ( APP, $, window, document ) {
 				}, modalSpeed );
 				
 			}
+			
+			
+			return false;
 		
 		});
 		
+		
 		$( document ).on( 'click.MODAL_DIALOG_CLOSE', '.uix-modal-box .uix-modal-box__close', function() {
 			$( this ).parent().removeClass( 'active' );
+			
+			return false;
 		});
 		
 		$( document ).on( 'click.MODAL_DIALOG_CLOSE', '.uix-modal-box .uix-modal-box__close, .uix-modal-mask', function() {
@@ -1600,11 +1605,18 @@ APP = ( function ( APP, $, window, document ) {
 			});
 				
 			$( '.uix-modal-box' ).find( '.uix-modal-box__content' ).removeClass( 'js-uix-no-fullscreen' );
+			
+			
 			// Unlocks the page
 			$.scrollLock( false );
+			
+			//something...
 			setTimeout( function() {
 	
 			}, modalSpeed );
+			
+			
+			return false;
 			
 		});
 		
@@ -1830,7 +1842,7 @@ APP = ( function ( APP, $, window, document ) {
 					config   = $this.data( 'bg' );
 
 
-				if( typeof config === typeof undefined ) {
+				if ( typeof config === typeof undefined ) {
 					config = {
 						"src"      : "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
 						"position" : "top left",
@@ -1849,9 +1861,9 @@ APP = ( function ( APP, $, window, document ) {
 						dataRepeat    = config.repeat,
 						dataParallax  = config.parallax;
 
-					if( typeof dataPos === typeof undefined ) dataPos = 'top left';
-					if( typeof dataSize === typeof undefined ) dataSize = 'cover';
-					if( typeof dataRepeat === typeof undefined ) dataRepeat = 'no-repeat';
+					if ( typeof dataPos === typeof undefined ) dataPos = 'top left';
+					if ( typeof dataSize === typeof undefined ) dataSize = 'cover';
+					if ( typeof dataRepeat === typeof undefined ) dataRepeat = 'no-repeat';
 
 
 					//Using parallax
@@ -1969,7 +1981,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.VIDEOS               = APP.VIDEOS || {};
-	APP.VIDEOS.version       = '0.0.7';
+	APP.VIDEOS.version       = '0.0.8';
     APP.VIDEOS.documentReady = function( $ ) {
 
 		var $window      = $( window ),
@@ -2001,22 +2013,22 @@ APP = ( function ( APP, $, window, document ) {
 			$this.find( '.video-js' ).attr( 'id', curVideoID );
 	
 			
-			if( typeof dataAuto === typeof undefined ) {
+			if ( typeof dataAuto === typeof undefined ) {
 				dataAuto = true;
 			}
-			if( typeof dataLoop === typeof undefined ) {
+			if ( typeof dataLoop === typeof undefined ) {
 				dataLoop = true;
 			}
-			if( typeof dataControls === typeof undefined ) {
+			if ( typeof dataControls === typeof undefined ) {
 				dataControls = false;
 			}	
 			
 			
-			if( typeof dataW === typeof undefined || dataW == 'auto' ) {
+			if ( typeof dataW === typeof undefined || dataW == 'auto' ) {
 				dataW = videoWrapperW;
 			}	
 			
-			if( typeof dataH === typeof undefined || dataH == 'auto' ) {
+			if ( typeof dataH === typeof undefined || dataH == 'auto' ) {
 				dataH = videoWrapperW/1.77777777777778;
 			}
 			
@@ -2167,15 +2179,15 @@ APP = ( function ( APP, $, window, document ) {
 				videoContainerVid = videoContainerMid + '--videopush';
 				
 			
-			if( typeof videoSrcMp4 === typeof undefined ) {
+			if ( typeof videoSrcMp4 === typeof undefined ) {
 				videoSrcMp4 = '';
 			}	
 			
-			if( typeof videoSrcWebm === typeof undefined ) {
+			if ( typeof videoSrcWebm === typeof undefined ) {
 				videoSrcWebm = '';
 			}	
 			
-			if( typeof videoSrcOgv === typeof undefined ) {
+			if ( typeof videoSrcOgv === typeof undefined ) {
 				videoSrcOgv = '';
 			}		
 			
@@ -2439,7 +2451,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			/* ---------  Close the modal  */
-			$( document ).on( 'click', '.uix-modal-box .uix-modal-box__close', function() {
+			$( document ).on( 'click', '.uix-modal-box .uix-modal-box__close, .uix-modal-mask', function() {
 
 				myPlayer.ready(function() {
 					myPlayer.pause();
@@ -10624,19 +10636,19 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			
-			if( typeof activeIndex === typeof undefined ) {
+			if ( typeof activeIndex === typeof undefined ) {
 				activeIndex = false;
 			}			
 			
-			if( typeof aEvent === typeof undefined ) {
+			if ( typeof aEvent === typeof undefined ) {
 				aEvent = 'click';
 			}	
 			
-			if( typeof outReset === typeof undefined ) {
+			if ( typeof outReset === typeof undefined ) {
 				outReset = true;
 			}	
 			
-			if( typeof widthShow === typeof undefined ) {
+			if ( typeof widthShow === typeof undefined ) {
 				widthShow = '60%';
 			}		
 			
@@ -10676,7 +10688,7 @@ APP = ( function ( APP, $, window, document ) {
 				}); 	
 			}
 			
-			if( typeof closeBtn != typeof undefined && closeBtn != false && closeBtn != '' ) {
+			if ( typeof closeBtn != typeof undefined && closeBtn != false && closeBtn != '' ) {
 				$( closeBtn ).on( 'click', function( e ) {
 					e.preventDefault();
 					itemInit();
@@ -10749,11 +10761,11 @@ APP = ( function ( APP, $, window, document ) {
 				$li             = $this.children( 'dl' ),
 				$titlebox       = $this.find( 'dt' );
 			
-			if( typeof aEvent === typeof undefined ) {
+			if ( typeof aEvent === typeof undefined ) {
 				aEvent = 'click';
 			}	
 			
-			if( typeof firstShow === typeof undefined ) {
+			if ( typeof firstShow === typeof undefined ) {
 				firstShow = false;
 			}		
 			
@@ -11213,9 +11225,9 @@ APP = ( function ( APP, $, window, document ) {
 						dataTiming               = $this.data( 'timing' ),
 						dataLoop                 = $this.data( 'loop' );
 
-					if( typeof dataAuto === typeof undefined ) dataAuto = false;	
-					if( typeof dataTiming === typeof undefined ) dataTiming = 10000;
-					if( typeof dataLoop === typeof undefined ) dataLoop = false;
+					if ( typeof dataAuto === typeof undefined ) dataAuto = false;	
+					if ( typeof dataTiming === typeof undefined ) dataTiming = 10000;
+					if ( typeof dataLoop === typeof undefined ) dataLoop = false;
 
 
 					if ( dataAuto && !isNaN( parseFloat( dataTiming ) ) && isFinite( dataTiming ) ) {
@@ -11303,9 +11315,9 @@ APP = ( function ( APP, $, window, document ) {
 				dataDraggableCursor      = $this.data( 'draggable-cursor' );
 	
 			
-			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider__pagination';
-			if( typeof dataControlsArrows === typeof undefined || dataControlsArrows == false ) dataControlsArrows = '.uix-advanced-slider__arrows';
-			if( typeof dataLoop === typeof undefined ) dataLoop = false;
+			if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider__pagination';
+			if ( typeof dataControlsArrows === typeof undefined || dataControlsArrows == false ) dataControlsArrows = '.uix-advanced-slider__arrows';
+			if ( typeof dataLoop === typeof undefined ) dataLoop = false;
 			if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
 			if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
 				
@@ -11550,11 +11562,11 @@ APP = ( function ( APP, $, window, document ) {
 				dataLoop                 = slider.data( 'loop' );
 			
 
-			if( typeof dataCountTotal === typeof undefined ) dataCountTotal = 'p.count em.count';
-			if( typeof dataCountCur === typeof undefined ) dataCountCur = 'p.count em.current';
-			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider__pagination';
-			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-slider__arrows';
-			if( typeof dataLoop === typeof undefined ) dataLoop = false;
+			if ( typeof dataCountTotal === typeof undefined ) dataCountTotal = 'p.count em.count';
+			if ( typeof dataCountCur === typeof undefined ) dataCountCur = 'p.count em.current';
+			if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider__pagination';
+			if ( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-slider__arrows';
+			if ( typeof dataLoop === typeof undefined ) dataLoop = false;
 					
 		
 		    //Prevent bubbling
@@ -11713,23 +11725,23 @@ APP = ( function ( APP, $, window, document ) {
 				$this.find( '.video-js' ).attr( 'id', curVideoID );
 
 				
-				if( typeof dataAuto === typeof undefined ) {
+				if ( typeof dataAuto === typeof undefined ) {
 					dataAuto = true;
 				}
-				if( typeof dataLoop === typeof undefined ) {
+				if ( typeof dataLoop === typeof undefined ) {
 					dataLoop = true;
 				}
 				
 
-				if( typeof dataControls === typeof undefined ) {
+				if ( typeof dataControls === typeof undefined ) {
 					dataControls = false;
 				}	
 				
-				if( typeof dataW === typeof undefined || dataW == 'auto' ) {
+				if ( typeof dataW === typeof undefined || dataW == 'auto' ) {
 					dataW = videoWrapperW;
 				}	
 
-				if( typeof dataH === typeof undefined || dataH == 'auto' ) {
+				if ( typeof dataH === typeof undefined || dataH == 'auto' ) {
 					dataH = videoWrapperW/1.77777777777778;
 				}
 
@@ -12142,9 +12154,9 @@ APP = ( function ( APP, $, window, document ) {
 						dataTiming               = $this.data( 'timing' ),
 						dataLoop                 = $this.data( 'loop' );
 
-					if( typeof dataAuto === typeof undefined ) dataAuto = false;	
-					if( typeof dataTiming === typeof undefined ) dataTiming = 10000;
-					if( typeof dataLoop === typeof undefined ) dataLoop = false;
+					if ( typeof dataAuto === typeof undefined ) dataAuto = false;	
+					if ( typeof dataTiming === typeof undefined ) dataTiming = 10000;
+					if ( typeof dataLoop === typeof undefined ) dataLoop = false;
 
 
 					if ( dataAuto && !isNaN( parseFloat( dataTiming ) ) && isFinite( dataTiming ) ) {
@@ -12238,10 +12250,10 @@ APP = ( function ( APP, $, window, document ) {
 				dataDraggableCursor      = $this.data( 'draggable-cursor' );
 	
 			
-			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider-sp__pagination';
-			if( typeof dataControlsArrows === typeof undefined || dataControlsArrows == false ) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
-			if( typeof dataLoop === typeof undefined ) dataLoop = false;
-			if( typeof dataFilterTexture === typeof undefined || !dataFilterTexture || dataFilterTexture == '' ) dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+			if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider-sp__pagination';
+			if ( typeof dataControlsArrows === typeof undefined || dataControlsArrows == false ) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
+			if ( typeof dataLoop === typeof undefined ) dataLoop = false;
+			if ( typeof dataFilterTexture === typeof undefined || !dataFilterTexture || dataFilterTexture == '' ) dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 			if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
 			if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
 
@@ -13606,11 +13618,11 @@ APP = ( function ( APP, $, window, document ) {
 				dataLoop                 = slider.data( 'loop' );
 			
 
-			if( typeof dataCountTotal === typeof undefined ) dataCountTotal = 'p.count em.count';
-			if( typeof dataCountCur === typeof undefined ) dataCountCur = 'p.count em.current';
-			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider-sp__pagination';
-			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
-			if( typeof dataLoop === typeof undefined ) dataLoop = false;			
+			if ( typeof dataCountTotal === typeof undefined ) dataCountTotal = 'p.count em.count';
+			if ( typeof dataCountCur === typeof undefined ) dataCountCur = 'p.count em.current';
+			if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider-sp__pagination';
+			if ( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
+			if ( typeof dataLoop === typeof undefined ) dataLoop = false;			
 		
 		    //Prevent bubbling
 			if ( total == 1 ) {
@@ -14761,23 +14773,23 @@ APP = ( function ( APP, $, window, document ) {
 				$this.find( '.video-js' ).attr( 'id', curVideoID );
 
 				
-				if( typeof dataAuto === typeof undefined ) {
+				if ( typeof dataAuto === typeof undefined ) {
 					dataAuto = true;
 				}
-				if( typeof dataLoop === typeof undefined ) {
+				if ( typeof dataLoop === typeof undefined ) {
 					dataLoop = true;
 				}
 				
 
-				if( typeof dataControls === typeof undefined ) {
+				if ( typeof dataControls === typeof undefined ) {
 					dataControls = false;
 				}	
 				
-				if( typeof dataW === typeof undefined || dataW == 'auto' ) {
+				if ( typeof dataW === typeof undefined || dataW == 'auto' ) {
 					dataW = videoWrapperW;
 				}	
 
-				if( typeof dataH === typeof undefined || dataH == 'auto' ) {
+				if ( typeof dataH === typeof undefined || dataH == 'auto' ) {
 					dataH = videoWrapperW/1.77777777777778;
 				}
 
@@ -14995,11 +15007,12 @@ APP = ( function ( APP, $, window, document ) {
  * <!-- Ajax Push Content  -->
  *************************************
  */
+
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.AJAX_PUSH_CONTENT               = APP.AJAX_PUSH_CONTENT || {};
-	APP.AJAX_PUSH_CONTENT.version       = '0.0.5';
+	APP.AJAX_PUSH_CONTENT.version       = '0.0.7';
     APP.AJAX_PUSH_CONTENT.documentReady = function( $ ) {
 
 		
@@ -15013,13 +15026,11 @@ APP = ( function ( APP, $, window, document ) {
 			thisPageTitle = document.title;
 		
 		
-
-		
-		
 		//Click event
 		$( document ).on( 'click', '[data-ajax-push-content]', function( event ) {
 			
 			event.preventDefault();
+			
 			
 			
 			var $this               = $( this ),
@@ -15027,7 +15038,7 @@ APP = ( function ( APP, $, window, document ) {
 				config              = $this.data( 'ajax-push-content' );
 			
 
-			if( typeof config == typeof undefined ) {
+			if ( typeof config == typeof undefined ) {
 				config = ajaxConfig;
 			}
 
@@ -15067,21 +15078,8 @@ APP = ( function ( APP, $, window, document ) {
 		});
 		
 		
-		
 
-		//Fire click event
-		var pushState = history.pushState;
-		history.pushState = function() {
-			pushState.apply( history, arguments );
-			fireClickEvents('pushState', arguments );
-		};
-
-		function fireClickEvents() {
-			//do something...
-		}
-
-		
-		//Detect URL change
+		//Detect URL change & Fire click event
 		window.addEventListener( 'popstate', function( e ) {
 		
 			var eleTarget = null,
@@ -15108,9 +15106,13 @@ APP = ( function ( APP, $, window, document ) {
 			});
 			
 			
-			var backConfig = $( eleTarget ).data( 'ajax-push-content' );
+			
+
+			
 			
 			//Push new content to target container
+			var backConfig = $( eleTarget ).data( 'ajax-push-content' );
+			
 			if ( typeof backConfig != typeof undefined ) {
 				pushAction( $( backConfig.container ), backConfig.target, backConfig.loading, goURL, backConfig.method, $( eleTarget ) );	
 			}
@@ -15120,7 +15122,6 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 		});
-		
 		
 		
 		
@@ -15137,13 +15138,16 @@ APP = ( function ( APP, $, window, document ) {
 		 * @return {Void}                   - The constructor.
 		 */
 		function pushAction( container, target, loading, url, method, btn ) {
-
+			
+			
 			if ( container.length == 0 ) return false;
 
+			
 			if ( typeof method === typeof undefined || method == '' ) {
 			    method = 'POST';
 			}
 		
+			
 			$.ajax({
 				timeout  : 15000,
 				url      : url,
@@ -15173,7 +15177,7 @@ APP = ( function ( APP, $, window, document ) {
 					});		
 
 
-					container.html( '<div class="ajax-content-loader">'+loading+'</div>' ).promise().done( function(){
+					container.html( '<div class="ajax-content-loader">'+loading+'</div>' ).promise().done( function() {
 
 						
 						
@@ -15225,10 +15229,8 @@ APP = ( function ( APP, $, window, document ) {
 						}
 					});
 					
-					
-
 					//The data returned from the server
-					container.html( content ).promise().done( function(){
+					container.html( content ).promise().done( function() {
 						
 						
 						// Apply the original scripts
@@ -15264,8 +15266,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 		}
 
-
-		
+			
 		
     };
 
@@ -15285,14 +15286,13 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.AJAX_PAGE_LOADER               = APP.AJAX_PAGE_LOADER || {};
-	APP.AJAX_PAGE_LOADER.version       = '0.0.4';
+	APP.AJAX_PAGE_LOADER.version       = '0.0.7';
     APP.AJAX_PAGE_LOADER.documentReady = function( $ ) {
 
         var $window                  = $( window ),
 		    windowWidth              = window.innerWidth,
 		    windowHeight             = window.innerHeight;
 
-		
 		
 	    //Determine the direction of a jQuery scroll event
 		//Fix an issue for mousewheel event is too fast.
@@ -15320,7 +15320,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 		//Activate the first item
 		if ( $( '.js-uix-ajax-load__container' ).length == 0 ) {
-			moveTo( $( ajaxContainer ), false, 'down', 0 );
+			moveTo( $( ajaxContainer ), false, 'down', 0, false );
 		} else {
 			//Activate navigation from AJAX request
 			if ( typeof curAjaxPageID != typeof undefined ) $navs.eq( curAjaxPageID ).addClass( 'active' );
@@ -15331,7 +15331,7 @@ APP = ( function ( APP, $, window, document ) {
 		
 		//Detect URL change
 		window.addEventListener( 'popstate', function( e ) {
-			moveTo( $( ajaxContainer ), false, 'down', 0 );
+			moveTo( $( ajaxContainer ), false, 'down', 0, false );
 		});
 
 		
@@ -15398,13 +15398,19 @@ APP = ( function ( APP, $, window, document ) {
 			$( AJAXPageLinks ).data( 'request-running', true );
 
 			
-			//Click on this link element using an AJAX request
-			var dir = 'down';
+						
+			// Modify the URL without reloading the page
+			if( history.pushState ) {
+				history.pushState( null, null, curURL );
 
-			if ( $navs.filter( '.active' ).find( '> a' ).attr( 'data-index' ) > curIndex ) {
-				dir = 'up';
+			} else {
+				location.hash = curURL;
 			}
-			moveTo( $( ajaxContainer ), curURL, dir, curIndex );
+			
+			
+			//Click on this link element using an AJAX request
+			var dir = ( $navs.filter( '.active' ).find( '> a' ).attr( 'data-index' ) > curIndex ) ? 'up' : 'down';
+			moveTo( $( ajaxContainer ), curURL, dir, curIndex, false );
 			
 			
 			
@@ -15412,6 +15418,39 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 		});
+
+		//Detect URL change & Fire click event
+		window.addEventListener( 'popstate', function( e ) {
+		
+			var eleTarget = null,
+				goURL     = location.href;
+			
+			$( AJAXPageLinks ).each( function() {
+				
+				//don't use $( this ).attr( 'href' )
+				
+				if ( this.href === location.href ) {
+					eleTarget = this;
+					goURL = this.href;
+				}
+			});
+
+		
+			var pageIndex = $( eleTarget ).data( 'index' );
+			
+			//Push new content to target container
+			if ( typeof pageIndex != typeof undefined ) {
+				moveTo( $( ajaxContainer ), goURL, 'down', pageIndex, false );
+			}
+			
+			// Output history button
+			//console.log(  $( eleTarget ).data( 'index' ) );
+			
+			
+		});
+		
+		
+		
 		
 		
 		/*
@@ -15432,14 +15471,16 @@ APP = ( function ( APP, $, window, document ) {
 
 			if ( dir == 'down' ) {
 				//scroll down
-				moveTo( $( ajaxContainer ), false, 'down', false );
+				moveTo( $( ajaxContainer ), false, 'down', false, true );
 				
 			} else {
 				//scroll up
-				moveTo( $( ajaxContainer ), false, 'up', false );
+				moveTo( $( ajaxContainer ), false, 'up', false, true );
 				
-			  
 			}
+			
+
+			
 			lastAnimation = timeNow;
 		}
 		
@@ -15451,9 +15492,10 @@ APP = ( function ( APP, $, window, document ) {
 		 * @param  {String} url          - The target URL via AJAX.
 		 * @param  {String} dir          - Rolling direction indicator.
 		 * @param  {Number} customIndex  - User-specified index value, located on the corresponding AJAX hyperlink.
+		 * @param  {Boolean} wheel       - Whether to enable mouse wheel control.
 		 * @return {Void}                - The constructor.
 		 */
-		function moveTo( container, url, dir, customIndex ) {
+		function moveTo( container, url, dir, customIndex, wheel ) {
 			var index     = parseFloat( $navs.filter( '.active' ).find( '> a' ).attr( 'data-index' ) ),
 				nextIndex = null,
 				isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
@@ -15489,12 +15531,27 @@ APP = ( function ( APP, $, window, document ) {
 				$navs.removeClass( 'active' );
 				$navs.eq( nextIndex ).addClass( 'active' );
 
-
 				
 				//Use automatic indexing when no URLs come in.
 				if ( !url || typeof url === typeof undefined ) {
 					url = $navs.eq( nextIndex ).find( '> a' ).attr( 'href' );
 				}
+				
+
+						
+				// Modify the URL without reloading the page when mouse wheel
+				if ( wheel ) {
+					var turl = $navs.eq( nextIndex ).find( '> a' ).attr( 'href' );
+					
+					if( history.pushState ) {
+						history.pushState( null, null, url );
+
+					} else {
+						location.hash = turl;
+					}
+		
+				}
+
  
 				//Click on this link element using an AJAX request
 				$.ajax({
@@ -15508,7 +15565,7 @@ APP = ( function ( APP, $, window, document ) {
 					success  : function( response ) {
 						
 						//A function to be called if the request succeeds
-						ajaxSucceeds( dir, container, url, $( response ).find( '.js-uix-ajax-load__container' ).html(), $( response ).filter( 'title' ).text() );
+						ajaxSucceeds( dir, container, $( response ).find( '.js-uix-ajax-load__container' ).html(), $( response ).filter( 'title' ).text() );
 
 					},
 					error: function(){
@@ -15550,12 +15607,11 @@ APP = ( function ( APP, $, window, document ) {
 		 *
 		 * @param  {String} dir       - Gets a value that indicates the amount that the mouse wheel has changed.
 		 * @param  {Object} container - The instance returned from the request succeeds
-		 * @param  {String} url       - Current URL after click
 		 * @param  {String} content   - The data returned from the server
 		 * @param  {String} title        - The title of a requested page.
 		 * @return {Void}             - The constructor.
 		 */
-		function ajaxSucceeds( dir, container, url, content, title ) {
+		function ajaxSucceeds( dir, container, content, title ) {
 			
 			var oldContent = container.html();
 		
@@ -15571,27 +15627,16 @@ APP = ( function ( APP, $, window, document ) {
 					
 
 					//The data returned from the server
-					container.html( content ).promise().done( function(){
+					container.html( content ).promise().done( function() {
 						
 						//Transition effect between two elements.
 						eleTransitionEff( dir, oldContent, content );
-	
-						// Modify the URL without reloading the page
-						if( history.pushState ) {
-							history.pushState( null, null, url );
-						} else {
-							location.hash = url;
-						}
-				
+
+						
 						//Change the page title
-						document.title = title;	
-						
-						
-						//Change URL without refresh the page
-//						if ( url == 'home.html' ) {
-//							history.pushState(null, null, window.location.href.replace( 'home.html', '' ) );
-//						}	
-						
+						if ( title ) {
+							document.title = title;
+						}
 						
 
 						//Prevent multiple request on click
@@ -15645,7 +15690,7 @@ APP = ( function ( APP, $, window, document ) {
 			    .html( newContent );
 
 			
-			$originalItem.first().find( ajaxContainer ).html( oldContent ).promise().done( function(){
+			$originalItem.first().find( ajaxContainer ).html( oldContent ).promise().done( function() {
 						
 
 				TweenMax.to( $originalItem.first(), animationTime/1000, {
@@ -15738,10 +15783,11 @@ APP = ( function ( APP, $, window, document ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
-			scrollReveal    : true,
-			ajaxPostList    : true,
-			ajaxDDList      : true,
-			counterAnim     : true
+			scrollReveal    : true, // @from ./src/components/scroll-reveal
+			ajaxPostList    : true, // @from ./src/components/list-posts
+			ajaxDDList      : true, // @from ./src/components/dynamic-dropdown-list-json
+			counterAnim     : true, // @from ./src/components/counter
+			lightBox        : true  // @from ./src/components/lightbox
         }, options );
  
         this.each( function() {
@@ -15750,7 +15796,6 @@ APP = ( function ( APP, $, window, document ) {
 			//----
 			if ( APP.INDEX ) APP.INDEX.pageLoaded(); //Theme Scripts
 			if ( APP.COMMON_HEIGHT ) APP.COMMON_HEIGHT.pageLoaded(); //Common Height
-			if ( APP.LIGHTBOX ) APP.LIGHTBOX.pageLoaded(); //Custom Lightbox
 			if ( APP.ADVANCED_SLIDER ) APP.ADVANCED_SLIDER.pageLoaded(); //Advanced Slider (Basic)
 			if ( APP.ADVANCED_SLIDER_FILTER ) APP.ADVANCED_SLIDER_FILTER.pageLoaded(); //Advanced Slider	
 			if ( APP.POST_LIST_SPLIT_FULLWIDTH ) APP.POST_LIST_SPLIT_FULLWIDTH.pageLoaded(); //Fullwidth List of Split
@@ -15759,9 +15804,11 @@ APP = ( function ( APP, $, window, document ) {
 			if ( APP.TIMELINE ) APP.TIMELINE.pageLoaded(); //Timeline
 			
 		
+			
 			//----
 			if ( APP.INDEX ) APP.INDEX.documentReady($); //Theme Scripts
 			if ( APP.TABLE ) APP.TABLE.documentReady($); //Responsive Table
+			if ( APP.TABLE_SORTER ) APP.TABLE_SORTER.documentReady($); //Table Sorter
 			if ( APP.MODAL_DIALOG ) APP.MODAL_DIALOG.documentReady($); //Modal Dialog
 			if ( APP.PARALLAX ) APP.PARALLAX.documentReady($); //Parallax
 			if ( APP.VIDEOS ) APP.VIDEOS.documentReady($); //Videos
@@ -15794,6 +15841,9 @@ APP = ( function ( APP, $, window, document ) {
 			if ( APP._3D_CAROUSEL ) APP._3D_CAROUSEL.documentReady($); //3D Carousel
 			
 			
+		
+			//---- Prevent overlay clicks on asynchronous requests
+		    //---- Commonly used for AJAX modules that are clicked by button
 			//Scroll Reveal
 			if ( settings.scrollReveal ) {
 				if ( APP.SCROLL_REVEAL ) APP.SCROLL_REVEAL.documentReady($); 
@@ -15814,13 +15864,13 @@ APP = ( function ( APP, $, window, document ) {
 			if ( settings.counterAnim ) {
 				if ( APP.COUNTER ) APP.COUNTER.documentReady($);
 			}
-						
-			
-			
-			
-			//----Other functions here
+				
+			//Custom Lightbox
+			if ( settings.lightBox ) {
+				if ( APP.LIGHTBOX ) APP.LIGHTBOX.pageLoaded();
+			}		
 
-
+			
 
 			//----Uix Shortcodes (WordPress Plugin)
 			if ( $.isFunction( $.uix_sc_init ) ) {
@@ -15976,19 +16026,19 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			
-			if( typeof display === typeof undefined ) {
+			if ( typeof display === typeof undefined ) {
 				display = 5;
 			}	
 			
-			if( typeof radius === typeof undefined ) {
+			if ( typeof radius === typeof undefined ) {
 				radius = 180;
 			}	
 			
-			if( typeof radius2 === typeof undefined ) {
+			if ( typeof radius2 === typeof undefined ) {
 				radius2 = 110;
 			}		
 			
-			if( typeof rotation === typeof undefined ) {
+			if ( typeof rotation === typeof undefined ) {
 				rotation = 0;
 			}			
 			
@@ -16341,24 +16391,24 @@ APP = ( function ( APP, $, window, document ) {
 				curID;
 	
 
-			if( typeof jsonFile === typeof undefined ) {
+			if ( typeof jsonFile === typeof undefined ) {
 				jsonFile = '';
 			}	
 			
-			if( typeof toData === typeof undefined ) {
+			if ( typeof toData === typeof undefined ) {
 				toData = '';
 			}	
 			
-			if( typeof method === typeof undefined ) {
+			if ( typeof method === typeof undefined ) {
 				method = 'POST';
 			}		
 			
 			
-			if( typeof associated === typeof undefined ) {
+			if ( typeof associated === typeof undefined ) {
 				associated = '#demo';
 			}		
 			
-			if( typeof ID === typeof undefined ) {
+			if ( typeof ID === typeof undefined ) {
 				$this.attr( 'id', ranID );
 			}	
 			
@@ -16821,12 +16871,12 @@ APP = ( function ( APP, $, window, document ) {
 				dataParallax      = thisSlider.data( 'my-parallax' );
 			
 			
-			if( typeof dataPNThumbs === typeof undefined ) dataPNThumbs = false;
-			if( typeof dataTimeline === typeof undefined ) dataTimeline = false;
-			if( typeof dataCountTotal === typeof undefined ) dataCountTotal = false;
-			if( typeof dataCountCur === typeof undefined ) dataCountCur = false;
-			if( typeof dataParallax === typeof undefined ) dataParallax = false;
-			if( typeof dataShowItemsMove === typeof undefined ) dataShowItemsMove = 1;
+			if ( typeof dataPNThumbs === typeof undefined ) dataPNThumbs = false;
+			if ( typeof dataTimeline === typeof undefined ) dataTimeline = false;
+			if ( typeof dataCountTotal === typeof undefined ) dataCountTotal = false;
+			if ( typeof dataCountCur === typeof undefined ) dataCountCur = false;
+			if ( typeof dataParallax === typeof undefined ) dataParallax = false;
+			if ( typeof dataShowItemsMove === typeof undefined ) dataShowItemsMove = 1;
 			
 			
 			//Total counter selector
@@ -17117,23 +17167,23 @@ APP = ( function ( APP, $, window, document ) {
 				$this.find( '.video-js' ).attr( 'id', curVideoID );
 
 			
-				if( typeof dataAuto === typeof undefined ) {
+				if ( typeof dataAuto === typeof undefined ) {
 					dataAuto = true;
 				}
-				if( typeof dataLoop === typeof undefined ) {
+				if ( typeof dataLoop === typeof undefined ) {
 					dataLoop = true;
 				}
 				
-				if( typeof dataControls === typeof undefined ) {
+				if ( typeof dataControls === typeof undefined ) {
 					dataControls = false;
 				}		
 				
 			
-				if( typeof dataW === typeof undefined || dataW == 'auto' ) {
+				if ( typeof dataW === typeof undefined || dataW == 'auto' ) {
 					dataW = videoWrapperW;
 				}	
 
-				if( typeof dataH === typeof undefined || dataH == 'auto' ) {
+				if ( typeof dataH === typeof undefined || dataH == 'auto' ) {
 					dataH = videoWrapperW/1.77777777777778;
 				}
 				
@@ -17557,7 +17607,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			// Custom Controls
 			var myControlsContainer, myCustomDirectionNav;
-			if( typeof customConID === typeof undefined || customConID == '' || customConID == false ) {
+			if ( typeof customConID === typeof undefined || customConID == '' || customConID == false ) {
 				myControlsContainer  = '';
 				myCustomDirectionNav = '';
 			} else {
@@ -17567,24 +17617,24 @@ APP = ( function ( APP, $, window, document ) {
 
 			
 			// If there is no data-xxx, save current source to it
-			if( typeof dataSpeed === typeof undefined ) dataSpeed = 600;
-			if( typeof dataTiming === typeof undefined ) dataTiming = 10000;
-			if( typeof dataLoop === typeof undefined ) dataLoop = true;
-			if( typeof dataPrev === typeof undefined ) dataPrev = "<i class='fa fa-chevron-left'></i>";
-			if( typeof dataNext === typeof undefined ) dataNext = "<i class='fa fa-chevron-right'></i>";
-			if( typeof dataAnim === typeof undefined ) dataAnim = 'slide';
-			if( typeof dataPaging === typeof undefined ) dataPaging = true;
-			if( typeof dataArrows === typeof undefined ) dataArrows = true;
-			if( typeof dataAuto === typeof undefined ) dataAuto = true;
-			if( typeof dataDrag === typeof undefined ) dataDrag = false;
-			if( typeof dataWheel === typeof undefined ) dataWheel = false;
-			if( typeof dataNhumbs === typeof undefined ) dataNhumbs = false;
-			if( typeof dataPNThumbs === typeof undefined ) dataPNThumbs = false;
-			if( typeof dataTimeline === typeof undefined ) dataTimeline = false;
-			if( typeof dataCountTotal === typeof undefined ) dataCountTotal = false;
-			if( typeof dataCountCur === typeof undefined ) dataCountCur = false;
-			if( typeof dataParallax === typeof undefined ) dataParallax = false;
-		    if( typeof dataShowItemsMove === typeof undefined ) dataShowItemsMove = 1;
+			if ( typeof dataSpeed === typeof undefined ) dataSpeed = 600;
+			if ( typeof dataTiming === typeof undefined ) dataTiming = 10000;
+			if ( typeof dataLoop === typeof undefined ) dataLoop = true;
+			if ( typeof dataPrev === typeof undefined ) dataPrev = "<i class='fa fa-chevron-left'></i>";
+			if ( typeof dataNext === typeof undefined ) dataNext = "<i class='fa fa-chevron-right'></i>";
+			if ( typeof dataAnim === typeof undefined ) dataAnim = 'slide';
+			if ( typeof dataPaging === typeof undefined ) dataPaging = true;
+			if ( typeof dataArrows === typeof undefined ) dataArrows = true;
+			if ( typeof dataAuto === typeof undefined ) dataAuto = true;
+			if ( typeof dataDrag === typeof undefined ) dataDrag = false;
+			if ( typeof dataWheel === typeof undefined ) dataWheel = false;
+			if ( typeof dataNhumbs === typeof undefined ) dataNhumbs = false;
+			if ( typeof dataPNThumbs === typeof undefined ) dataPNThumbs = false;
+			if ( typeof dataTimeline === typeof undefined ) dataTimeline = false;
+			if ( typeof dataCountTotal === typeof undefined ) dataCountTotal = false;
+			if ( typeof dataCountCur === typeof undefined ) dataCountCur = false;
+			if ( typeof dataParallax === typeof undefined ) dataParallax = false;
+		    if ( typeof dataShowItemsMove === typeof undefined ) dataShowItemsMove = 1;
 			
 			
 
@@ -17611,7 +17661,7 @@ APP = ( function ( APP, $, window, document ) {
 				my_minItems  = 0,
 				my_maxItems  = 0;
 			
-			if( typeof dataShowItems != typeof undefined && dataShowItems != '' && dataShowItems != 0 ) {
+			if ( typeof dataShowItems != typeof undefined && dataShowItems != '' && dataShowItems != 0 ) {
 				
 			    my_itemWidth = 1;
 				my_minItems  = getGridSize( dataShowItems );
@@ -17626,12 +17676,12 @@ APP = ( function ( APP, $, window, document ) {
 					thisSliderID = $this.attr( 'id' );
 				
 				
-				if( typeof curSync != typeof undefined ) {
+				if ( typeof curSync != typeof undefined ) {
 					curSync = curSync.toString().replace( '#', '' ).replace( '.', '' );
 				}
 				
 				
-				if( typeof thisSliderID != typeof undefined && thisSliderID == curSync ) {
+				if ( typeof thisSliderID != typeof undefined && thisSliderID == curSync ) {
 					dataAuto = false; //Set it not to scroll automatically
 					dataPaging = false;
 					
@@ -17669,7 +17719,7 @@ APP = ( function ( APP, $, window, document ) {
 				start: function( slider ) {
 					
 					//set slider instance to flexslider variable
-					if( typeof dataShowItems != typeof undefined && dataShowItems != '' && dataShowItems != 0 ) {
+					if ( typeof dataShowItems != typeof undefined && dataShowItems != '' && dataShowItems != 0 ) {
 					    flexslider = slider;		
 					}
 					
@@ -17682,7 +17732,7 @@ APP = ( function ( APP, $, window, document ) {
 					initslides( $this, slider, 'before' );
 					
 					// Call the updateChildrenSlides which itterates through all children slides 
-					if( typeof dataSync != typeof undefined && dataSync != '' && dataSync != 0 ) {
+					if ( typeof dataSync != typeof undefined && dataSync != '' && dataSync != 0 ) {
 						updateChildrenSlides( slider.animatingTo, dataSync, dataLoop, dataSpeed, dataTiming );
 						
 					}
@@ -17729,7 +17779,7 @@ APP = ( function ( APP, $, window, document ) {
 						var dataShowItems = $( this ).data( 'my-multiple-items' );
 		
 						
-						if( typeof dataShowItems != typeof undefined && dataShowItems != '' && dataShowItems != 0 ) {
+						if ( typeof dataShowItems != typeof undefined && dataShowItems != '' && dataShowItems != 0 ) {
 
 							var gridSize = getGridSize( dataShowItems );
 							flexslider.vars.minItems = gridSize;
@@ -19085,7 +19135,7 @@ APP = ( function ( APP, $, window, document ) {
 
 		//Get form transition speed
 		var dur = $formTarget.data( 'anime-speed' );
-		if( typeof dur === typeof undefined ) { 
+		if ( typeof dur === typeof undefined ) { 
 			dur = '0.5s';
 		}
 
@@ -19221,7 +19271,7 @@ APP = ( function ( APP, $, window, document ) {
 
 			//Get form transition speed
 			var dur = $formTarget.data( 'anime-speed' );
-			if( typeof dur === typeof undefined ) { 
+			if ( typeof dur === typeof undefined ) { 
 				dur = '0.5s';
 			}
 
@@ -19642,13 +19692,13 @@ APP = ( function ( APP, $, window, document ) {
 
 
 					// If there is no data-xxx, save current source to it
-					if( typeof dateFormat === typeof undefined ) dateFormat = 'MM d, yy';
-					if( typeof monthNames === typeof undefined ) monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-					if( typeof nextText === typeof undefined ) nextText = '&#8594;';
-					if( typeof prevText === typeof undefined ) prevText = '&#8592;';
-					if( typeof dayNames === typeof undefined ) dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-					if( typeof myminDate === typeof undefined ) myminDate = -1825;
-					if( typeof mymaxDate === typeof undefined ) mymaxDate = 0;
+					if ( typeof dateFormat === typeof undefined ) dateFormat = 'MM d, yy';
+					if ( typeof monthNames === typeof undefined ) monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+					if ( typeof nextText === typeof undefined ) nextText = '&#8594;';
+					if ( typeof prevText === typeof undefined ) prevText = '&#8592;';
+					if ( typeof dayNames === typeof undefined ) dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+					if ( typeof myminDate === typeof undefined ) myminDate = -1825;
+					if ( typeof mymaxDate === typeof undefined ) mymaxDate = 0;
 
 					$this.datepicker({
 						"monthNamesShort" : monthNames,
@@ -22446,89 +22496,131 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.LIGHTBOX               = APP.LIGHTBOX || {};
-	APP.LIGHTBOX.version       = '0.1.0';
+	APP.LIGHTBOX.version       = '0.1.2';
     APP.LIGHTBOX.pageLoaded    = function() {
 
 		if ( $( '.uix-lightbox__container' ).length == 0 ) {
-			$( 'body' ).prepend( '<div class="uix-lightbox__loading is-loaded uix-t-c"><i class="fa fa-spinner fa-spin"></i> Loading...</div><a class="uix-lightbox__original__close" href="#"></a><div class="uix-lightbox__container"><div class="uix-lightbox__inner"><div class="uix-lightbox__html"></div><span class="uix-lightbox__close"></span><p class="title"></p></div></div><div class="uix-lightbox__container-mask"></div><div class="uix-lightbox__close-fixed"></div>' );
+			$( 'body' ).prepend( '<div class="uix-lightbox__loading is-loaded uix-t-c"><i class="fa fa-spinner fa-spin"></i> Loading...</div><a class="uix-lightbox__original__close" href="javascript:void(0);"></a><div class="uix-lightbox__container"><div class="uix-lightbox__inner"><div class="uix-lightbox__html"></div><p class="title"></p></div></div><div class="uix-lightbox__container-mask"></div><div class="uix-lightbox__close"></div>' );
 		}
 		
-
-		var	$lbCon           = $( '.uix-lightbox__inner' ),
-			$lbWrapper       = $( '.uix-lightbox__container' ),
-			$lbMask          = $( '.uix-lightbox__container-mask' ),
-			lbCloseEl        = '.uix-lightbox__container .uix-lightbox__close',
-			lbCloseFixedEl   = '.uix-lightbox__close-fixed',
-			$lbLoader        = $( '.uix-lightbox__loading' ),
-			$lbLargeImgClose = $( '.uix-lightbox__original__close' ),
-			$lbContent       = $lbCon.find( '.uix-lightbox__html' ),
-			tempID           = 'lightbox-' + UIX_GUID.newGuid();
 		
-		$( document ).on( 'click touchstart', '.uix-lightbox__trigger', function() { 
+		
+		var	innerEl         = '.uix-lightbox__inner',
+			wrapperEl       = '.uix-lightbox__container',
+			loaderEl        = '.uix-lightbox__loading',
+			maskEl          = '.uix-lightbox__container-mask',
+			closeEl         = '.uix-lightbox__close',
+			largeImgCloseEl = '.uix-lightbox__original__close',
+			triggerEl       = '.uix-lightbox__trigger',
+			docURL          = window.location.href,
+			$content        = $( innerEl ).find( '.uix-lightbox__html' ),
+			customWidth     = 1000; //Match the width in the css file;
+		
+
+		//Detect URL change & Fire click event
+		window.addEventListener( 'popstate', function( e ) {
+		
+			var eleTarget = null;
+			
+			$( '[data-lb-ajax]' ).each( function() {
+				
+				var prevURL = decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent( 'uix-lightbox-ajaxURL' ).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+
+				if ( $( this ).attr( 'href' ) === prevURL ) {
+					eleTarget = this;
+				}
+				
+			});
+			
+			
+			var backURL = $( eleTarget ).data( 'lb-ajax-doc-url' );
+			if ( typeof backURL != typeof undefined ) {
+				lightboxClose( backURL );
+			}
+			
+			
+		});
+		
+		
+		
+		
+		$( document ).on( 'click', triggerEl, function() { 
 
 			var $this         = $( this ),
 				dataPhoto     = $this.data( 'lb-src' ),
 				dataHtmlID    = $this.data( 'lb-html' ),
 				dataFixed     = $this.data( 'lb-fixed' ),
 				dataMaskClose = $this.data( 'lb-mask-close' ),
-				dataMethod    = $this.data( 'lb-ajax-method' ),
-				dataAjaxCon   = $this.data( 'lb-ajax-content' ),
+				dataAjax      = $this.data( 'lb-ajax' ),
 				htmlContent   = '',
 				imgSrcStr     = '',
 				imgSrcStrToW  = '';
 			
-
-			
 		
-			if( typeof dataFixed === typeof undefined ) {
+			if ( typeof dataFixed === typeof undefined ) {
 				dataFixed = true;
 			}
-			if( typeof dataMaskClose === typeof undefined ) {
+			if ( typeof dataMaskClose === typeof undefined ) {
 				dataMaskClose = false;
 			}	
 			
-			if( typeof dataMethod === typeof undefined ) {
-				dataMethod = 'POST';
+			if ( typeof dataAjax === typeof undefined ) {
+				dataAjax = false;
+			}	
+			
+			if ( dataAjax ) {
+				$( wrapperEl ).addClass( 'js-uix-ajax' );
+				
+				//Record current page URL for history
+				if ( typeof $this.data( 'lb-ajax-doc-url' ) === typeof undefined ) $this.data( 'lb-ajax-doc-url', docURL );
+				
+				
 			}		
 			
 			//Display loading
-			$lbLoader.removeClass( 'is-loaded' );	
+			$( loaderEl ).removeClass( 'is-loaded' );	
 	
 			//Reset the wrapper position
-			$lbWrapper.css( 'margin-top', 0 );	
+			$( wrapperEl ).css( 'margin-top', 0 );	
 			
 
 			if ( !dataFixed ) {
-				$lbWrapper.addClass( 'js-uix-no-fixed' );
-				$( lbCloseEl ).addClass( 'js-uix-no-fixed' );
-				$( lbCloseFixedEl ).addClass( 'active' );
+				$( wrapperEl ).addClass( 'js-uix-no-fixed' );
+				$( closeEl ).addClass( 'active' );
 				
 				//Initialize the wrapper position
-				$lbWrapper.css( 'margin-top', $( window ).scrollTop() + 'px' );	
+				$( wrapperEl ).css( 'margin-top', $( window ).scrollTop() + 'px' );	
 				
 			}
 			
 			
 			//Reset current container type
-			$lbCon.removeClass( 'js-uix-custom js-uix-pure-image' );
+			$( innerEl ).removeClass( 'js-uix-custom js-uix-pure-image' );
 			
 		
 			// Locks the page
-			if ( !$lbWrapper.hasClass( 'js-uix-no-fixed' ) ) {
+			if ( !$( wrapperEl ).hasClass( 'js-uix-no-fixed' ) ) {
 				$.scrollLock( true );
 			}
+			
+			
+			// Show the lightbox
+			var showLightbox = function() {
+				$( closeEl ).addClass( 'active' );
+				$( wrapperEl ).show();
+				$( maskEl ).show();
+				$( innerEl ).show();	
+			};
 			
 			
 
 			//-------- If it is photo
 			//-----------------------------
-			if( typeof dataPhoto != typeof undefined && dataPhoto != '' ) {
+			if ( typeof dataPhoto != typeof undefined && dataPhoto != '' ) {
 				
+				//show the lightbox
+				showLightbox();
 				
-				$( lbCloseEl ).show();
-				$lbWrapper.show();
-				$lbMask.show();
-				$lbCon.show();
 				
 				if ( dataPhoto.indexOf( '[' ) >= 0 &&  dataPhoto.indexOf( ']' ) >= 0 ) {
 					imgSrcStr = JSON.parse( dataPhoto.replace(/([a-zA-Z0-9]+?):/g, '"$1":').replace(/'/g,'"') );
@@ -22536,7 +22628,6 @@ APP = ( function ( APP, $, window, document ) {
 					imgSrcStr = dataPhoto;
 					
 				}
-				
 				
 				//Judging whether multiple image sets
 				if ( Object.prototype.toString.call( imgSrcStr ) =='[object Array]' ) {
@@ -22550,9 +22641,10 @@ APP = ( function ( APP, $, window, document ) {
 					largePhotos += '<div class="uix-lightbox__photo-container uix-lightbox__photo-sets-container"><a href="javascript:" class="uix-lightbox__photo-sets__prev"></a><a href="javascript:" class="uix-lightbox__photo-sets__next"></a><ul>';
 					for ( var i = 0; i < imgSrcStr.length; i++ ) {
 						
+						var tempID = 'lightbox-' + UIX_GUID.newGuid();
 						
 						largePhotos += '<li>';
-						largePhotos += '	<a class="uix-lightbox__original__link" href="#'+tempID+'-sets-'+i+'">';
+						largePhotos += '	<a class="uix-lightbox__original__link" data-target-id="'+tempID+'-sets-'+i+'" href="javascript:void(0);">';
 						largePhotos += '	   <img src="'+ imgSrcStr[i].large +'" alt="">';
 						largePhotos += '	</a>';
 						largePhotos += '	<div class="uix-lightbox__original__target" id="'+tempID+'-sets-'+i+'">';
@@ -22579,10 +22671,12 @@ APP = ( function ( APP, $, window, document ) {
 					
 				} else {
 
+					var tempID = 'lightbox-' + UIX_GUID.newGuid();
+					
 					//Only one image
 					imgSrcStrToW = imgSrcStr;
 					htmlContent += '<div class="uix-lightbox__photo-container">';
-					htmlContent += '	<a class="uix-lightbox__original__link" href="#'+tempID+'">';
+					htmlContent += '	<a class="uix-lightbox__original__link" data-target-id="'+tempID+'" href="javascript:void(0);">';
 					htmlContent += '	   <img src="'+ imgSrcStr +'" alt="">';
 					htmlContent += '	</a>';
 					htmlContent += '	<div class="uix-lightbox__original__target" id="'+tempID+'">';
@@ -22592,10 +22686,10 @@ APP = ( function ( APP, $, window, document ) {
 					
 				}
 						
-				$lbContent.html( htmlContent ).promise().done( function(){
+				$content.html( htmlContent ).promise().done( function(){
 
 					//Set current container type
-					$lbCon.addClass( 'js-uix-pure-image' );
+					$( innerEl ).addClass( 'js-uix-pure-image' );
 
 					//Set container width
 					var img = new Image();
@@ -22603,14 +22697,14 @@ APP = ( function ( APP, $, window, document ) {
 					img.onload = function() {
 						
 						//remove loading
-						$lbLoader.addClass( 'is-loaded' );
+						$( loaderEl ).addClass( 'is-loaded' );
 						
 						var sw     = window.innerWidth - 30,
 							ow     = this.width,
 							oh     = this.height,
 							ratioH = oh/ow,
 							ratioW = ow/oh,
-							w      = ( ow > 1000 ) ? 1000 : ow,
+							w      = ( ow > customWidth ) ? customWidth : ow,
 							h;
 				
 						if ( w > sw ) w = sw;
@@ -22622,7 +22716,7 @@ APP = ( function ( APP, $, window, document ) {
 						if ( h > window.innerHeight ) h = window.innerHeight * 0.95;
 						
 					
-						$lbCon.css( {
+						$( innerEl ).css( {
 							'width': w + 'px'
 						} );
 						
@@ -22635,24 +22729,25 @@ APP = ( function ( APP, $, window, document ) {
 						
 						
 						//Set a new height & width of inside images
-						$lbContent.find( '.uix-lightbox__photo-sets-container ul > li img' ).css( {
+						$content.find( '.uix-lightbox__photo-sets-container ul > li img' ).css( {
 							'height': h + 'px'
 						} );
 
 						
 						if ( ! $( 'body' ).hasClass( 'rtl' ) ) {
-							$lbContent.find( '.uix-lightbox__photo-sets-container' ).css( {
+							$content.find( '.uix-lightbox__photo-sets-container' ).css( {
 								'width': 'calc('+ h*ratioW +'px + 6rem)',
 								'margin-left': '-3rem'
 							} );
 	
 						} else {
-							$lbContent.find( '.uix-lightbox__photo-sets-container' ).css( {
+							$content.find( '.uix-lightbox__photo-sets-container' ).css( {
 								'width': 'calc('+ h*ratioW +'px + 6rem)',
 								'margin-right': '-3rem'
 							} );
 	
 						}
+						
 						
 						
 						//If the image is larger than the current window, it will display at the top.
@@ -22670,7 +22765,7 @@ APP = ( function ( APP, $, window, document ) {
 					};
 					
 					
-					$lbCon.find( '> .uix-lightbox__html' ).removeClass( 'js-uix-no-img' );
+					$( innerEl ).find( '> .uix-lightbox__html' ).removeClass( 'js-uix-no-img' );
 
 				});		
 
@@ -22678,81 +22773,251 @@ APP = ( function ( APP, $, window, document ) {
 			}	
 			
 			
+			
+			
+			
 			//-------- If it is not photo
 			//-----------------------------
-			if( typeof dataHtmlID != typeof undefined && dataHtmlID != '' ) {
+			if ( typeof dataHtmlID != typeof undefined && dataHtmlID != '' ) {
 				dataHtmlID = dataHtmlID.replace( '#', '' );
 
-				$( lbCloseEl ).show();
-				$lbWrapper.show();
-				$lbMask.show();
-				$lbCon.show();
-				$lbContent.html( $( '#' + dataHtmlID ).html() ).promise().done( function(){
+				var $htmlContentContainer = $( '#' + dataHtmlID ).find( '.uix-lightbox__content > div' );
+				
+				// hide the ajax content container
+				TweenMax.set( $htmlContentContainer, {
+					css         : {
+						'display' : 'none'
+					}
+				});	
+
+				
+				//show the lightbox
+				showLightbox();
+				
+				
+				var htmlContentLoaded = function() {
+					//remove loading
+					$( loaderEl ).addClass( 'is-loaded' );
 					
 					//Set current container type
-					$lbCon.addClass( 'js-uix-custom' );
+					$( innerEl ).addClass( 'js-uix-custom' );
 					
 					//Set container width
-					if ( $lbCon.find( '> .uix-lightbox__html .uix-lightbox__content' ).length > 0 ) {
+					if ( $( innerEl ).find( '> .uix-lightbox__html .uix-lightbox__content' ).length > 0 ) {
 						
 						if ( window.innerWidth <= 768 ) {
-							$lbCon.css( 'width', window.innerWidth - 10 + 'px' );
+							$( innerEl ).css( 'width', window.innerWidth - 10 + 'px' );
 						} else {
-							$lbCon.css( 'width', $lbCon.find( '> .uix-lightbox__html .uix-lightbox__content' ).width() + 'px' );
+							$( innerEl ).css( 'width', $( innerEl ).find( '> .uix-lightbox__html .uix-lightbox__content' ).width() + 'px' );
 						}
 						
 						
-						$lbCon.find( '> .uix-lightbox__html' ).addClass( 'js-uix-no-img' );
 						
-						
-						//Ajax-loaded content
-						if( typeof dataAjaxCon != typeof undefined && dataAjaxCon != '' ) {
-							
-							var $ajaxContentContainer = $lbCon.find( '> .uix-lightbox__html .uix-lightbox__content > div' );
-							
-							$ajaxContentContainer.html( $ajaxContentContainer.data( 'loading-text' ) );
-							
-							$.ajax({
-								url      : dataAjaxCon,
-								method   : dataMethod,
-								dataType : 'html',
-								success  : function( response ) { 
-									$ajaxContentContainer.html( $( response ).find( '.uix-entry__content' ).html() );
+						$( innerEl ).find( '> .uix-lightbox__html' ).addClass( 'js-uix-no-img' );
 
-								 },
-								 error : function( XMLHttpRequest, textStatus, errorThrown ) {
-
-								 }
-							});
-
-						}
-						
 						
 					}
+						
+					
+				};
+				
+				
+				
+				if ( $( wrapperEl ).hasClass( 'js-uix-ajax' ) ) {
 
-				});
+					//Add content to the dynamic AJAX container
+					var ajaxURL               = $this.attr( 'href' ),
+						ajaxConfig            = dataAjax;
+
+
+					// Modify the URL without reloading the page
+					if( history.pushState ) {
+						history.pushState( null, null, ajaxURL );
+
+					} else {
+						location.hash = ajaxURL;
+					}
+
+					document.cookie = 'uix-lightbox-ajaxURL=' + ajaxURL;
+
+					$.ajax({
+						timeout  : 15000,
+						url      : ajaxURL,
+						method   : ajaxConfig.method,
+						dataType : 'html',
+						success  : function( response ) {
+
+							$htmlContentContainer.html( $( response ).find( dataAjax.target ).html() ).promise().done( function(){
+								
+
+								
+								//Add content to the dynamic lightbox container
+								$content.html( $( '#' + dataHtmlID ).html() ).promise().done( function(){
+									
+									// Apply the original scripts
+									$( document ).applyOriginalSomeScripts({
+										lightBox : false
+									});
+									
+									htmlContentLoaded();
+								});	
+								
+
+							});
+
+
+							
+							
+
+						},
+						error: function(){
+							window.location.href = ajaxURL;
+						},
+						beforeSend: function() {
+							$htmlContentContainer.html( ajaxConfig.loading );
+							
+							// show the ajax content container
+							TweenMax.set( $htmlContentContainer, {
+								css         : {
+									'display' : 'block'
+								},
+								onComplete  : function() {
+									TweenMax.to( this.target, 0.5, {
+										alpha : 1
+									});
+								}
+							});		
+							
+						}
+					}).fail( function( jqXHR, textStatus ) {
+						if( textStatus === 'timeout' ) {
+							window.location.href = ajaxURL;
+						}
+					});		
+					
+
+					
+				} else {
+					
+					// show the ajax content container
+					TweenMax.set( $htmlContentContainer, {
+						css         : {
+							'display' : 'block'
+						},
+						onComplete  : function() {
+							TweenMax.to( this.target, 0.5, {
+								alpha : 1
+							});
+						}
+					});		
+
+
+					
+					//Add content to the dynamic lightbox container
+					$content.html( $( '#' + dataHtmlID ).html() ).promise().done( function(){
+						htmlContentLoaded();
+					});	
+				}
+
+				
+				
+
 				
 				
 
 			}	
 			
+			
+			return false;
+			
 
-		});
+		}); /* end click event for triggerEl */
+		
+		
 
 		
-		//Close the window
-		$( document ).on( 'click', lbCloseEl, function() {
-			customLBCloseEvent();
-		});
-
-		
-		$( document ).on( 'click', lbCloseFixedEl, function() {
-			customLBCloseEvent();
+		//Close the lightbox
+		$( document ).on( 'click', closeEl + ',' + maskEl, function() {
+			lightboxClose( docURL );
 		});	
 		
 
-		//Click thumbnail to switch large photo
 		
+		$( document ).on( 'click', '.uix-lightbox__thumb-container li', function() {
+			lightboxThumbSwitch( $( this ).index(), $( this ) );
+			
+		});		
+		
+		
+		
+		$( document ).on( 'click', '.uix-lightbox__photo-sets-container > a', function() {
+			var $largePhoto = $( this ).closest( '.uix-lightbox__html' ).find( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' ),
+				$thumb      = $( this ).closest( '.uix-lightbox__html' ).find( '.uix-lightbox__thumb-container li' ),
+				total       = $thumb.length,
+				curIndex    = $thumb.filter( '.active' ).index(),
+				prevIndex   = curIndex - 1,
+				nextIndex   = curIndex + 1;
+			
+			
+			if ( prevIndex < 0 ) prevIndex = total - 1;
+			if ( nextIndex > total - 1 ) nextIndex = 0;
+			
+			
+			if ( $( this ).hasClass( 'uix-lightbox__photo-sets__prev' ) ) {
+				lightboxThumbSwitch( prevIndex, $thumb.eq( prevIndex ) );
+			}
+			
+			if ( $( this ).hasClass( 'uix-lightbox__photo-sets__next' ) ) {
+				lightboxThumbSwitch( nextIndex, $thumb.eq( nextIndex ) );
+			}
+			
+			
+		});		
+		
+		
+		//Close/Open enlarge image
+		if ( window.innerWidth > 768 ) {
+
+			$( document ).on( 'click', '.uix-lightbox__original__link', function( e ) {
+
+				$( '.uix-lightbox__original__target#' + $( this ).data( 'target-id' ) ).addClass( 'active' );
+
+
+				if ( $( this ).closest( '.uix-lightbox__container.js-uix-no-fixed' ).length > 0 ) {
+					$( '.uix-lightbox__container.js-uix-no-fixed, .uix-lightbox__original__target--imgfull' ).addClass( 'no-fixed-imgEnlarged' );
+				}
+
+
+				//---
+				$( 'html' ).css( 'overflow-y', 'hidden' );
+				$( largeImgCloseEl ).addClass( 'active' );
+
+			});	
+
+			$( document ).on( 'click', largeImgCloseEl, function( e ) {
+
+				$( '.uix-lightbox__original__target' ).removeClass( 'active' );
+				$( '.uix-lightbox__container.js-uix-no-fixed, .uix-lightbox__original__target--imgfull' ).removeClass( 'no-fixed-imgEnlarged' );
+
+
+				//---
+				$( this ).removeClass( 'active' );
+				$( 'html' ).css( 'overflow-y', 'auto' );
+
+			});	
+		}
+
+
+		
+		
+		
+		/*
+		 * Click thumbnail to show large photo
+		 *
+		 * @param  {Number} index           - The target index of large photo.
+		 * @param  {Object} obj             - Target large image <li>.
+		 * @return {Void}                   - The constructor.
+		 */
 		function lightboxThumbSwitch( index, obj ) {
 			var $largePhoto = obj.closest( '.uix-lightbox__html' ).find( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' ),
 				$thumb      = obj.closest( '.uix-lightbox__html' ).find( '.uix-lightbox__thumb-container li' ),
@@ -22762,8 +23027,8 @@ APP = ( function ( APP, $, window, document ) {
 			$thumb.removeClass( 'active' );
 			obj.addClass( 'active' );
 			
-			$largePhoto.find( 'li' ).fadeOut( 300 ).removeClass( 'active' );
-			$largePhoto.find( 'li' ).eq( index ).addClass( 'active' ).fadeIn( 300, function() {
+			$largePhoto.find( 'li' ).hide().removeClass( 'active' );
+			$largePhoto.find( 'li' ).eq( index ).addClass( 'active' ).show( 400, function() {
 				
 				//Reset the container height
 				var imgClick = new Image();
@@ -22771,15 +23036,14 @@ APP = ( function ( APP, $, window, document ) {
 				imgClick.onload = function() {
 					
 					//remove loading
-					$lbLoader.addClass( 'is-loaded' );
-
+					$( loaderEl ).addClass( 'is-loaded' );
 
 					
 					var sw     = window.innerWidth - 30,
 						ow     = this.width,
 						oh     = this.height,
 						ratioH = oh/ow,
-						w      = ( ow > 1000 ) ? 1000 : ow,
+						w      = ( ow > customWidth ) ? customWidth : ow,
 						h;
 					
 
@@ -22819,84 +23083,41 @@ APP = ( function ( APP, $, window, document ) {
 		}
 		
 		
-		
-		$( document ).on( 'click', '.uix-lightbox__thumb-container li', function() {
-			lightboxThumbSwitch( $( this ).index(), $( this ) );
+		/*
+		 * Close the lightbox
+		 *
+		 * @param  {String} url             - The current page URL for history.
+		 * @return {Void}                   - The constructor.
+		 */
+		function lightboxClose( url ) {
 			
-		});		
-		
-		$( document ).on( 'click', '.uix-lightbox__photo-sets-container > a', function() {
-			var $largePhoto = $( this ).closest( '.uix-lightbox__html' ).find( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' ),
-				$thumb      = $( this ).closest( '.uix-lightbox__html' ).find( '.uix-lightbox__thumb-container li' ),
-				total       = $thumb.length,
-				curIndex    = $thumb.filter( '.active' ).index(),
-				prevIndex   = curIndex - 1,
-				nextIndex   = curIndex + 1;
-			
-			
-			if ( prevIndex < 0 ) prevIndex = total - 1;
-			if ( nextIndex > total - 1 ) nextIndex = 0;
-			
-			
-			if ( $( this ).hasClass( 'uix-lightbox__photo-sets__prev' ) ) {
-				lightboxThumbSwitch( prevIndex, $thumb.eq( prevIndex ) );
+			//Detect URL change when AJAX calls are done
+			if ( $( wrapperEl ).hasClass( 'js-uix-ajax' ) ) {
+				history.pushState( null, null, url );
 			}
-			
-			if ( $( this ).hasClass( 'uix-lightbox__photo-sets__next' ) ) {
-				lightboxThumbSwitch( nextIndex, $thumb.eq( nextIndex ) );
-			}
-			
-			
-		});		
-		
-		
-		
-		
-		function customLBCloseEvent() {
+
 			//Remove all dynamic classes
-			$lbWrapper.removeClass( 'js-uix-no-fixed' );
-			$( lbCloseEl ).removeClass( 'js-uix-no-fixed' );
-			$( lbCloseFixedEl ).removeClass( 'active' );
+			$( wrapperEl ).removeClass( 'js-uix-no-fixed js-uix-ajax' );
+			$( closeEl ).removeClass( 'active' );
 			
+			//Add a scroll bar.
 			$( 'html' ).css( 'overflow-y', 'auto' );
 			
 			//Reset current container type
-			$lbCon.removeClass( 'js-uix-custom js-uix-pure-image' );
+			$( innerEl ).removeClass( 'js-uix-custom js-uix-pure-image' );
 			
 			
 			//close windows
-			$lbWrapper.hide();
-			$lbMask.hide();
+			$( wrapperEl ).hide();
+			$( maskEl ).hide();
 			
-			
-			//Changing The Site URL
-			var href = window.location.href.substr( 0, window.location.href.indexOf( '#' ) );
-			history.pushState( '', document.title, href );
 			
 			// Unlocks the page
 			$.scrollLock( false );
 	
 			
 		}
-		
-		
-		
-		
-		
-		
-		//Close/Open enlarge image
-		$( document ).on( 'click', '.uix-lightbox__original__link', function( e ) {
-			$( 'html' ).css( 'overflow-y', 'hidden' );
-			$lbLargeImgClose.addClass( 'active' );
-
-		});	
-		
-		$( document ).on( 'click', '.uix-lightbox__original__close', function( e ) {
-            $lbLargeImgClose.removeClass( 'active' );
-			$( 'html' ).css( 'overflow-y', 'auto' );
-		});
-
-		
+	
 		
 		
 		    
@@ -22987,7 +23208,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 
-			if( typeof pageParmStr === typeof undefined ) {
+			if ( typeof pageParmStr === typeof undefined ) {
 				pageParmStr = {
 					'totalPage'     : 'total',
 					'currentPage'   : 'page',
@@ -22995,52 +23216,52 @@ APP = ( function ( APP, $, window, document ) {
 				};
 			}
 			
-			if( typeof curPage === typeof undefined ) {
+			if ( typeof curPage === typeof undefined ) {
 				curPage = 1;
 			}
 			
 			
-			if( typeof perShow === typeof undefined ) {
+			if ( typeof perShow === typeof undefined ) {
 				perShow = 8;
 			}
 			
-			if( typeof totalPage === typeof undefined ) {
+			if ( typeof totalPage === typeof undefined ) {
 				totalPage = 3;
 			}
 			
-			if( typeof totalPage != typeof undefined && totalPage == '-1' ) {
+			if ( typeof totalPage != typeof undefined && totalPage == '-1' ) {
 				totalPage = 9999;
 			}
 			
 			
-			if( typeof trigger === typeof undefined ) {
+			if ( typeof trigger === typeof undefined ) {
 				trigger = '.uix-load-more';
 			}
 			
-			if( typeof infinitescroll === typeof undefined ) {
+			if ( typeof infinitescroll === typeof undefined ) {
 				infinitescroll = false;
 			}	
 			
-			if( typeof addition === typeof undefined ) {
+			if ( typeof addition === typeof undefined ) {
 				addition = true;
 			}			
 			
 			
-			if( typeof jsonFile === typeof undefined ) {
+			if ( typeof jsonFile === typeof undefined ) {
 				jsonFile = '';
 			}		
 			
-			if( typeof template7ID === typeof undefined ) {
+			if ( typeof template7ID === typeof undefined ) {
 				template7ID = '';
 			}	
-			if( typeof triggerActive === typeof undefined ) {
+			if ( typeof triggerActive === typeof undefined ) {
 				triggerActive = 'active';
 			}		
 			
-			if( typeof method === typeof undefined ) {
+			if ( typeof method === typeof undefined ) {
 				method = 'POST';
 			}		
-			if( typeof noneInfo === typeof undefined ) {
+			if ( typeof noneInfo === typeof undefined ) {
 				noneInfo = '{"none":"","error":""}';
 			}
 			
@@ -23050,7 +23271,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			
-			if( typeof pushContainer === typeof undefined ) {
+			if ( typeof pushContainer === typeof undefined ) {
 				pushContainer = '.uix-ajax-items__container';
 				
 				if ( $this.find( pushContainer ).length == 0 ) {
@@ -23677,12 +23898,12 @@ APP = ( function ( APP, $, window, document ) {
 
 			
 			
-			if( typeof carouselDir === typeof undefined ) carouselDir = 'horizontal';
-			if( typeof carouselLoop === typeof undefined ) carouselLoop = false;
-			if( typeof amountVisible === typeof undefined ) amountVisible = 3;
-			if( typeof carouselSpeed === typeof undefined ) carouselSpeed = 250;
-			if( typeof carouselNext === typeof undefined ) carouselNext = '.uix-multi-carousel__controls--next';
-			if( typeof carouselPrev === typeof undefined ) carouselPrev = '.uix-multi-carousel__controls--prev';
+			if ( typeof carouselDir === typeof undefined ) carouselDir = 'horizontal';
+			if ( typeof carouselLoop === typeof undefined ) carouselLoop = false;
+			if ( typeof amountVisible === typeof undefined ) amountVisible = 3;
+			if ( typeof carouselSpeed === typeof undefined ) carouselSpeed = 250;
+			if ( typeof carouselNext === typeof undefined ) carouselNext = '.uix-multi-carousel__controls--next';
+			if ( typeof carouselPrev === typeof undefined ) carouselPrev = '.uix-multi-carousel__controls--prev';
 			if ( typeof carouseDraggable === typeof undefined ) carouseDraggable = false;
 			if ( typeof carouseDraggableCursor === typeof undefined ) carouseDraggableCursor = 'move';
 
@@ -24079,23 +24300,23 @@ APP = ( function ( APP, $, window, document ) {
 //				carouselNext       = $carouselWrapper.data( 'cus-carousel-next' ),
 //				carouselPrev       = $carouselWrapper.data( 'cus-carousel-prev' );
 //
-//			if( typeof carouselDir === typeof undefined ) {
+//			if ( typeof carouselDir === typeof undefined ) {
 //				carouselDir = 'horizontal';
 //			}
 //			
-//			if( typeof carouselLoop === typeof undefined ) {
+//			if ( typeof carouselLoop === typeof undefined ) {
 //				carouselLoop = false;
 //			}
-//			if( typeof showcarouselItem === typeof undefined ) {
+//			if ( typeof showcarouselItem === typeof undefined ) {
 //				showcarouselItem = 3;
 //			}
-//			if( typeof carouselSpeed === typeof undefined ) {
+//			if ( typeof carouselSpeed === typeof undefined ) {
 //				carouselSpeed = 250;
 //			}
-//			if( typeof carouselNext === typeof undefined ) {
+//			if ( typeof carouselNext === typeof undefined ) {
 //				carouselNext = '.uix-multi-carousel__controls--next';
 //			}
-//			if( typeof carouselPrev === typeof undefined ) {
+//			if ( typeof carouselPrev === typeof undefined ) {
 //				carouselPrev = '.uix-multi-carousel__controls--prev';
 //			}
 //
@@ -24733,6 +24954,7 @@ APP = ( function ( APP, $, window, document ) {
 							// - Second argument is a title (not the page title, and not currently used)
 							// - Third argument is the URL - this will appear in the browser address bar
 							history.pushState( {}, document.title, href );
+							
 							console.log( 'Section ' + curSectionIndex + ' loaded!' );
 
 
@@ -25480,7 +25702,7 @@ APP = ( function ( APP, $, window, document ) {
 				var $this       = $( this ),
 					dataSpeed   = $this.data( 'parallax' );
 				
-				if( typeof dataSpeed === typeof undefined ) {
+				if ( typeof dataSpeed === typeof undefined ) {
 					dataSpeed = 0;
 				}
 				
@@ -25514,12 +25736,12 @@ APP = ( function ( APP, $, window, document ) {
 					dataOverlay = 'rgba(0, 0, 0, 0)';
 				}
 				
-				if( typeof dataSpeed === typeof undefined ) { // If there is no data-xxx, save current source to it
+				if ( typeof dataSpeed === typeof undefined ) { // If there is no data-xxx, save current source to it
 					dataSpeed = 0;
 				}	
 				
 				
-				if( typeof dataFullyVisible === typeof undefined ) {
+				if ( typeof dataFullyVisible === typeof undefined ) {
 					dataFullyVisible = false;
 				}	
 				
@@ -25600,7 +25822,7 @@ APP = ( function ( APP, $, window, document ) {
 					//console.log( 'Height: ' +curImgH + '===' + $this.height() + ' | Width: ' + curImgW + '===' + w + ' | ' + curSize );
 
 					//Add background image to parallax container
-					if( typeof dataImg != typeof undefined ) {
+					if ( typeof dataImg != typeof undefined ) {
 
 						if ( Modernizr.cssanimations ) {
 							// supported
@@ -25621,7 +25843,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 					//Apply tilt effect
-					if( typeof dataSkew != typeof undefined && dataSkew != 0 ) {
+					if ( typeof dataSkew != typeof undefined && dataSkew != 0 ) {
 						
 						//Firefox browser will affect parallax effect due to transform
 						$this.css( {
@@ -25683,17 +25905,17 @@ APP = ( function ( APP, $, window, document ) {
 				itemHeight  = $wrap.find( 'li:first' ).height();
 
 
-			if( typeof speed === typeof undefined ) {
+			if ( typeof speed === typeof undefined ) {
 				speed = 600;
 			}
 
-			if( typeof timing === typeof undefined ) {
+			if ( typeof timing === typeof undefined ) {
 				timing = 2000;
 			}	
 			
 			var $item     = $wrap.find( '> li' ),
 				moveY     = itemHeight*2,
-				timeline  = new TimelineLite({
+				timeline  = new TimelineMax({
 				onComplete: function() {
 					setTimeout( function() {
 						timeline.restart();
@@ -25880,11 +26102,11 @@ APP = ( function ( APP, $, window, document ) {
 					percent      = $this.data( 'progressbar-percent' ),
 					unit         = $this.data( 'progressbar-unit' );
 
-				if( typeof percent === typeof undefined ) {
+				if ( typeof percent === typeof undefined ) {
 					percent = 0;
 				}
 
-				if( typeof unit === typeof undefined ) {
+				if ( typeof unit === typeof undefined ) {
 					unit = '%';
 				}	
 
@@ -26066,7 +26288,7 @@ APP = ( function ( APP, $, window, document ) {
 				config = $this.data( 'pointer-to-deg' );
 
 
-			if( typeof config === typeof undefined ) {
+			if ( typeof config === typeof undefined ) {
 				config = false;
 			}
 
@@ -26157,7 +26379,7 @@ APP = ( function ( APP, $, window, document ) {
 
 				var config = obj.data( 'uix-anim' );
 
-				if( typeof config === typeof undefined || config == '' || config === false ) {
+				if ( typeof config === typeof undefined || config == '' || config === false ) {
 					config = {
 						"from"     : {"opacity":0,"x":70},
 						"to"       : {"opacity":1,"x":0},
@@ -26246,7 +26468,7 @@ APP = ( function ( APP, $, window, document ) {
 			//Prevent asynchronous loading of repeated calls
 			var actived = $( this ).data( 'active' );
 			
-			if( typeof actived === typeof undefined ) {
+			if ( typeof actived === typeof undefined ) {
 				tmAnim( $( this ), 'from' );
 
 			}
@@ -26268,7 +26490,7 @@ APP = ( function ( APP, $, window, document ) {
 						tmLoop  = tmAnim( $( this.element ), 'loop' );
 					
 
-					if( typeof actived === typeof undefined && tmLoop != 1 ) {
+					if ( typeof actived === typeof undefined && tmLoop != 1 ) {
 						
 						//$( this.element ).toggleClass( 'animated fadeInUp', direction === 'down' );
 						tmAnim( $( this.element ), 'to' );
@@ -28006,6 +28228,181 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
+ * <!-- Table Sorter -->
+ *************************************
+ */
+
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.TABLE_SORTER               = APP.TABLE_SORTER || {};
+	APP.TABLE_SORTER.version       = '0.0.1';
+    APP.TABLE_SORTER.documentReady = function( $ ) {
+
+		
+		$( '.js-uix-table-sorter' ).each( function()  {
+			var $sortTable = $( this ).find( 'table' );
+
+			$sortTable.find( "[data-sort-type]" ).wrapInner( '<span class="uix-table-sorter" />' ).each( function() {
+
+				var $th     = $( this ),
+					thIndex = $th.index(),
+					thType  = $th.data( 'sort-type' ),
+					inverse = false;
+
+				$th.on( 'click', function() {
+
+					$sortTable.find( 'tbody td' ).filter( function() {
+
+						return $( this ).index() === thIndex;
+
+					}).sortElements( function(a, b) {
+
+
+						var txt1 = $.text([a]).replace(/(<([^>]+)>)/ig, ''),
+							txt2 = $.text([b]).replace(/(<([^>]+)>)/ig, '');
+
+						//type of number
+						if ( thType == 'number' ) {
+							txt1 = Number( txt1.replace(/[^0-9.-]+/g, '' ) );
+							txt2 = Number( txt2.replace(/[^0-9.-]+/g, '' ) );
+						}
+
+						//type of date
+						if ( thType == 'date' ) {
+							txt1 = new Date( txt1 );
+							txt2 = new Date( txt2 );	
+						}	
+
+
+
+						//add filter class
+						$sortTable.find( 'tbody tr' ).addClass( 'js-uix-newsort' );
+
+
+						if ( txt1 > txt2 ) {
+							if ( inverse ) {
+								return -1;
+							} else {
+								return 1;
+							}
+
+						} else {
+
+							if ( inverse ) {
+								return 1;
+							} else {
+								return -1;
+							}	
+
+						}
+
+
+
+
+					},
+					function() {
+
+						// parentNode is the element we want to move
+						return this.parentNode;
+
+					});
+
+					inverse = !inverse;
+
+				});
+
+			});
+
+
+
+		});
+
+
+		
+    };
+
+    APP.components.documentReady.push( APP.TABLE_SORTER.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+/**
+ * jQuery.fn.sortElements
+ * --------------
+ * @author James Padolsey (http://james.padolsey.com)
+ * @version 0.11
+ * @updated 18-MAR-2010
+ * --------------
+ * @param Function comparator:
+ *   Exactly the same behaviour as [1,2,3].sort(comparator)
+ *   
+ * @param Function getSortable
+ *   A function that should return the element that is
+ *   to be sorted. The comparator will run on the
+ *   current collection, but you may want the actual
+ *   resulting sort to occur on a parent or another
+ *   associated element.
+ *   
+ *   E.g. $('td').sortElements(comparator, function(){
+ *      return this.parentNode; 
+ *   })
+ *   
+ *   The <td>'s parent (<tr>) will be sorted instead
+ *   of the <td> itself.
+ */
+jQuery.fn.sortElements = (function(){
+    
+    var sort = [].sort;
+    
+    return function(comparator, getSortable) {
+        
+        getSortable = getSortable || function(){return this;};
+        
+        var placements = this.map(function(){
+            
+            var sortElement = getSortable.call(this),
+                parentNode = sortElement.parentNode,
+                
+                // Since the element itself will change position, we have
+                // to have some way of storing it's original position in
+                // the DOM. The easiest way is to have a 'flag' node:
+                nextSibling = parentNode.insertBefore(
+                    document.createTextNode(''),
+                    sortElement.nextSibling
+                );
+            
+            return function() {
+                
+                if (parentNode === this) {
+                    throw new Error(
+                        "You can't sort elements if any one is a descendant of another."
+                    );
+                }
+                
+				
+                // Insert before flag:
+                parentNode.insertBefore(this, nextSibling);
+                // Remove flag:
+                parentNode.removeChild(nextSibling);
+                
+            };
+            
+        });
+       
+        return sort.call(this, comparator).each(function(i){
+            placements[i].call(getSortable.call(this));
+        });
+        
+    };
+    
+})();
+
+/* 
+ *************************************
  * <!-- 3D Background 2 -->
  *************************************
  */
@@ -28579,7 +28976,7 @@ APP = ( function ( APP, $, window, document ) {
 			var config      = $( element ).data( '3d-animate' );
 			
 			
-			if( typeof config === typeof undefined ) {
+			if ( typeof config === typeof undefined ) {
 				config = false;
 			}
 
@@ -28812,9 +29209,9 @@ APP = ( function ( APP, $, window, document ) {
 				leftpos           = itemCount,
 				resetCount        = itemCount;
 
-			if( typeof dataTiming === typeof undefined ) dataTiming = 5000;
-			if( typeof dataPrevBtn === typeof undefined ) dataPrevBtn = ".my-carousel-3d-prev";
-			if( typeof dataNextBtn === typeof undefined ) dataNextBtn = ".my-carousel-3d-next";
+			if ( typeof dataTiming === typeof undefined ) dataTiming = 5000;
+			if ( typeof dataPrevBtn === typeof undefined ) dataPrevBtn = ".my-carousel-3d-prev";
+			if ( typeof dataNextBtn === typeof undefined ) dataNextBtn = ".my-carousel-3d-next";
 			if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
 			
 
@@ -29981,11 +30378,12 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP._3D_OBJ_ANIM_INTERACTION               = APP._3D_OBJ_ANIM_INTERACTION || {};
-	APP._3D_OBJ_ANIM_INTERACTION.version       = '0.0.1';
+	APP._3D_OBJ_ANIM_INTERACTION.version       = '0.0.2';
     APP._3D_OBJ_ANIM_INTERACTION.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
 		if ( $( '#3D-object-buttonevent-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
+		
 		
 		var $window                   = $( window ),
 			windowWidth               = window.innerWidth,
@@ -29997,27 +30395,20 @@ APP = ( function ( APP, $, window, document ) {
 			scene, 
 			controls, 
 			camera, 
-			axis, 
 			targetObj, 
 			parent, 
 			material,
-			segLength,
-			$btn = $( '#3D-object-button' );
+			segLength;
 		
 		
 		var radius = 3,
 			height = 6,
-			segments = 200, //segments must be even
-			animationDuration = 1.3;
+			segments = 200; //segments must be even
 
-		var tween = {
-			angle: 0,
-			circle1: -Math.PI / 2,
-			circle2: Math.PI / 2
-		};
-		var timeline = new TimelineLite();
-
+	
 		init();
+		render();
+		
 
 		function init() {
 
@@ -30035,9 +30426,8 @@ APP = ( function ( APP, $, window, document ) {
 
 
 			//camera
-			camera = new THREE.PerspectiveCamera(70, innerWidth / innerHeight, 1, 100);
-			camera.position.set(11, 8, 12);
-
+			camera = new THREE.PerspectiveCamera(70, windowWidth / windowHeight, 1, 100);
+			camera.position.set(1, 1, 22);
 
 			//controls
 			controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -30048,6 +30438,7 @@ APP = ( function ( APP, $, window, document ) {
 			controls.enablePan = false;
 
 
+			
 			// Immediately use the texture for material creation
 			material = new THREE.MeshPhongMaterial({
 				color: 0xEB6D35,
@@ -30078,7 +30469,6 @@ APP = ( function ( APP, $, window, document ) {
 			parent.rotation.y = Math.PI;
 			scene.add(parent);
 
-			setAnimation();
 
 			renderer.render(scene, camera);
 		}
@@ -30113,63 +30503,106 @@ APP = ( function ( APP, $, window, document ) {
 			parent.add( targetObj );
 		}
 
-		
-		
-		function setAnimation() {
 
-
-			timeline.to(tween, animationDuration, {
-				angle: Math.PI / segments,
-				circle1: 0,
-				circle2: 0,
-				ease: Power0.easeNone,
-				onUpdate: update,
-				onComplete: function() {
-					timeline.pause()
-				}
-			});
-
-			timeline.progress(1);
-			setTimeout(function() {
-				timeline.reverse()
-			}, 800);
-
+	
+		function render() {
 			
-			$btn.on( 'click', function( e ) {
-				e.preventDefault();
-				
-				timeline.progress() > .5 ? timeline.reverse() : timeline.play();
-			});
+			requestAnimationFrame( render );
+			
+			
+			//upodate object
+			targetObj.geometry.verticesNeedUpdate = true;
+			
+
+			//update camera and controls
+			controls.update();
+			
+			
+			renderer.render( scene, camera );
 			
 		}
 		
+		
+		
+		$( '#3D-object-button1' ).on( 'click', function( e ) {
+			e.preventDefault();
 
-		function update() {
+			var theta = 55,
+				x     = camera.position.x,
+				z     = camera.position.z,
+				moveX = x * Math.cos( theta ) - z * Math.sin( theta ),
+				moveZ = z * Math.cos( theta ) + x * Math.sin( theta );	
+
+			TweenMax.to( camera.position, 1.5, {
+				x: moveX,
+				z: moveZ,
+				ease: Power0.easeNone,
+			    onUpdate: function(){
+					
+
+				}
+
+			});
+
+		});
+		
+		$( '#3D-object-button2' ).on( 'click', function( e ) {
+			e.preventDefault();
 
 			//1. tween the first segment of each side
-			var w = targetObj.geometry.vertices;
-			w[2].x = w[3].x = w[4].x = w[5].x = -Math.sin(tween.angle) * segLength;
-			w[2].z = w[3].z = Math.cos(tween.angle) * segLength;
-			w[4].z = w[5].z = -Math.cos(tween.angle) * segLength;
+			var w     = targetObj.geometry.vertices;
+		
+			w[2].x = w[3].x = w[4].x = w[5].x = -Math.sin( 0 ) * segLength;
+			w[2].z = w[3].z = Math.cos( 0 ) * segLength;
+			w[4].z = w[5].z = -Math.cos( 0 ) * segLength;
 
 			//2. rest of the vertex can now refer to the fourth previous vertex, their reference in the algorithm
-			var updateWrapper = function(vIndex) {
+			for (var i = 6; i < w.length; i++) {
+				
 				//which segment from the origin the vertex belongs to
-				var segIndex = Math.floor((vIndex + 2) / 4);
-				var negate = (vIndex / 4 === Math.floor(vIndex / 4) || (vIndex - 1) / 4 === Math.floor((vIndex - 1) / 4)) ? -1 : 1;
+				var vIndex   = i,
+					segIndex = Math.floor((vIndex + 2) / 4),
+					negate   = (vIndex / 4 === Math.floor(vIndex / 4) || (vIndex - 1) / 4 === Math.floor((vIndex - 1) / 4)) ? -1 : 1;
 
-				w[vIndex].x = w[vIndex - 4].x - Math.sin(tween.angle * (negate * (2 * segIndex - 1))) * segLength * negate;
-				w[vIndex].z = w[vIndex - 4].z + Math.cos(tween.angle * (negate * (2 * segIndex - 1))) * segLength * negate;
-			};
-			for (var i = 6; i < w.length; i++) updateWrapper(i);
+				
+				var tx = w[vIndex - 4].x - Math.sin( vIndex * (negate * (2 * segIndex - 1))) * segLength * negate;
+				var tz = w[vIndex - 4].z + Math.cos( vIndex * (negate * (2 * segIndex - 1))) * segLength * negate;
+				
+				
+				TweenMax.to( w[vIndex], 1.5, {
+					x: tx,
+					z: tz,
+					ease: Power0.easeNone,
+					onUpdate: function(){
 
-			targetObj.geometry.verticesNeedUpdate = true;
-			renderer.render(scene, camera);
+
+					}
+				});
+
+			}
 
 			
-			$btn.text( timeline.progress() > .5 ? 'Click me to reverse animation' : 'Click me to start animation' );
+
+		});
+		
+		$( '#3D-object-button3' ).on( 'click', function( e ) {
+			e.preventDefault();
+
+			var scaleTo = Math.floor(Math.random() * Math.floor( 3 ) );
 			
-		}
+			TweenMax.to( targetObj.scale, 1.5, {
+				x: scaleTo,
+				y: scaleTo,
+				z: scaleTo,
+				ease: Power0.easeNone,
+			    onUpdate: function(){
+					
+				}
+
+			});
+
+		});
+			
 	
 		
 		
@@ -30212,22 +30645,22 @@ APP = ( function ( APP, $, window, document ) {
 				tabBoxID          = id,
 				isNumeric         = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
 			
-			if( typeof fullwidth != typeof undefined && fullwidth == 1 ) {
+			if ( typeof fullwidth != typeof undefined && fullwidth == 1 ) {
 				$li.css( 'width', ( 100 / liNum ) + '%' );
 			}
 			
 					
 			
-			if( typeof rotation === typeof undefined ) {
+			if ( typeof rotation === typeof undefined ) {
 				rotation = false;
 			}	
 			
 			
-			if( typeof rotationWapperDeg === typeof undefined ) {
+			if ( typeof rotationWapperDeg === typeof undefined ) {
 				rotationWapperDeg = 0;
 			}	
 			
-			if( typeof rotationDisplay === typeof undefined ) {
+			if ( typeof rotationDisplay === typeof undefined ) {
 				rotationDisplay = 5;
 			}		
 			
@@ -30447,19 +30880,19 @@ APP = ( function ( APP, $, window, document ) {
 			$this.attr( 'id', thisID );
 			
 		
-			if( typeof hoverWidth === typeof undefined ) {
+			if ( typeof hoverWidth === typeof undefined ) {
 				hoverWidth = 20;
 			}	
 			
-			if( typeof targetWidth === typeof undefined ) {
+			if ( typeof targetWidth === typeof undefined ) {
 				targetWidth = 80;
 			}	
 			
-			if( typeof closeBtn === typeof undefined ) {
+			if ( typeof closeBtn === typeof undefined ) {
 				closeBtn = '.close';
 			}
 			
-			if( typeof targetInfo === typeof undefined ) {
+			if ( typeof targetInfo === typeof undefined ) {
 				targetInfo = '.uix-team-focus__info';
 			}		
 		
@@ -30697,7 +31130,7 @@ APP = ( function ( APP, $, window, document ) {
 				txtEff;
 
 			
-				if( typeof speed === typeof undefined ) {
+				if ( typeof speed === typeof undefined ) {
 					speed = 1200;
 				}	
 			

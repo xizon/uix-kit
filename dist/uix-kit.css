@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.0.6
+ * ## Version             :  3.0.7
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  December 29, 2018
+ * ## Last Update         :  January 3, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -270,6 +270,15 @@ img {
 iframe {
   border: none !important; }
 
+code {
+  color: #c7254e;
+  background-color: #f9f2f4;
+  border-radius: 3px;
+  display: inline-block;
+  margin: 0 .2rem .2rem 0;
+  padding: .1rem .4rem;
+  white-space: nowrap; }
+
 /* ====================================================== 
    <!-- Brand -->                         
 /* ====================================================== */
@@ -356,6 +365,18 @@ ul.uix-list--normal,
 ol.uix-list--normal,
 .uix-list--normal ol {
   list-style-type: decimal; }
+
+/*-- Noemal List Effect by Default --*/
+/* Compatible with  Uix Shortcodes (WordPress Plugin) */
+.uix-list--normal a:not(.uix-sc-btn) {
+  color: #EC5E79; }
+
+.uix-list--normal a:not(.uix-sc-btn):not(.uix-btn):hover {
+  color: #E8588C;
+  text-decoration: underline; }
+
+.uix-list--normal a:not(.uix-sc-btn):hover img {
+  text-decoration: none; }
 
 /* 
  ---------------------------
@@ -816,7 +837,7 @@ ul.uix-entry__meta {
  * 14. Position
  * 15. Element Hidden Style
  * 16. Border Radius
- * 17. Set the value of <section> z-index to solve the hierarchy problem of the module
+ * 17. Align Wide and Full Classes For Elements
 */
 /* 
  ---------------------------
@@ -1165,16 +1186,14 @@ img.uix-filter-hover--color,
 
 /* 
  ---------------------------
-  17. Set the value of <section> z-index to solve the hierarchy problem of the module
+ 17. Align Wide and Full Classes For Elements
  ---------------------------
  */
-.uix-section-index-1 {
-  position: relative;
-  z-index: 1; }
-
-.uix-section-index-2 {
-  position: relative;
-  z-index: 2; }
+.uix-alignfull {
+  margin-left: calc( -100vw / 2 + 100% / 2);
+  margin-right: calc( -100vw / 2 + 100% / 2);
+  max-width: 100vw;
+  width: 100vw; }
 
 /* ====================================================== 
    <!-- Basic Layout Styles -->                                        
@@ -1384,17 +1403,6 @@ img.uix-filter-hover--color,
     .uix-core-grid:not(.uix-core-grid__row--nobreaking) .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-3:nth-child(2n+0),
     .uix-core-grid:not(.uix-core-grid__row--nobreaking) .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-4:nth-child(2n+0) {
       padding-right: 15px; } }
-
-/* 
- ---------------------------
- 5. Align Wide and Full Classes For Elements
- ---------------------------
- */
-.uix-alignfull {
-  margin-left: calc( -100vw / 2 + 100% / 2);
-  margin-right: calc( -100vw / 2 + 100% / 2);
-  max-width: 100vw;
-  width: 100vw; }
 
 /* ====================================================== 
    <!-- Loader -->                                               
@@ -1737,7 +1745,8 @@ img.uix-filter-hover--color,
   box-shadow: 0px 0px 71px 0px rgba(0, 0, 0, 0.47);
   left: 50%;
   transform: translate(-50%, -50%);
-  /* Video container */ }
+  /* Video container */
+  /* Video */ }
   .uix-modal-box:not(.is-fullscreen) {
     max-width: calc(100vw - 100px);
     max-height: calc(100vh - 100px); }
@@ -1786,7 +1795,8 @@ img.uix-filter-hover--color,
     right: 12px;
     top: 12px;
     transform: rotate(45deg);
-    z-index: 1; }
+    z-index: 1;
+    pointer-events: auto; }
     .uix-modal-box .uix-modal-box__close::after {
       font-family: 'FontAwesome';
       content: "\f067";
@@ -1807,6 +1817,11 @@ img.uix-filter-hover--color,
     /* For compatibility with mobile devices, do not use percentages "%" */ }
   .uix-modal-box.is-fullscreen.active {
     top: 0; }
+  .uix-modal-box.is-fullscreen.is-video.active {
+    pointer-events: none; }
+    .uix-modal-box.is-fullscreen.is-video.active .uix-modal-box__video-container > div.video-js,
+    .uix-modal-box.is-fullscreen.is-video.active .uix-modal-box__video-container iframe {
+      pointer-events: auto; }
   .uix-modal-box.active .uix-modal-box__content img,
   .uix-modal-box.is-fullscreen.active .uix-modal-box__content img {
     opacity: 1; }
@@ -2711,6 +2726,15 @@ img.uix-filter-hover--color,
 /* ====================================================== 
    <!-- Table -->      
 /* ====================================================== */
+/*
+ * 1. Generic
+ * 2. Table Sorter
+*/
+/* 
+ ---------------------------
+ 1. Generic
+ ---------------------------
+ */
 table.uix-table,
 .uix-table table {
   margin: 0;
@@ -2728,16 +2752,13 @@ table.uix-table,
   table.uix-table td,
   .uix-table table th,
   .uix-table table td {
-    border-color: #d6d5d5; }
-  table.uix-table td,
-  table.uix-table th,
-  .uix-table table td,
-  .uix-table table th {
+    border-color: #d6d5d5;
     border-left: 1px solid #d6d5d5;
     border-width: 0 0 0 1px;
     margin: 0;
     overflow: visible;
-    padding: 0.5rem 0.75rem; }
+    padding: 0.5rem 0.75rem;
+    vertical-align: top; }
   table.uix-table thead,
   .uix-table table thead {
     background: #f2f2f2;
@@ -2752,6 +2773,18 @@ table.uix-table,
   table.uix-table td,
   .uix-table table td {
     background-color: transparent; }
+
+/*-- Table Effect by Default --*/
+/* Compatible with  Uix Shortcodes (WordPress Plugin) */
+.uix-table a:not(.uix-sc-btn) {
+  color: #EC5E79; }
+
+.uix-table a:not(.uix-sc-btn):not(.uix-btn):hover {
+  color: #E8588C;
+  text-decoration: underline; }
+
+.uix-table a:not(.uix-sc-btn):hover img {
+  text-decoration: none; }
 
 @media all and (max-width: 768px) {
   table.uix-table.is-responsive thead,
@@ -2840,6 +2873,330 @@ table.is-horizontal th,
 .is-horizontal table th {
   border-bottom: 1px solid #d6d5d5; }
 
+/* 
+ ---------------------------
+ 2. Table Sorter
+ ---------------------------
+ */
+.uix-table-sorter {
+  cursor: pointer; }
+  .uix-table-sorter::after {
+    content: '';
+    font-family: 'FontAwesome';
+    color: #AEAEAE;
+    margin-left: .5rem;
+    font-size: 0.75rem;
+    content: "\f0dc"; }
+
+.js-uix-newsort {
+  animation: uix-cssAnim--newsort .5s linear 1 forwards;
+  opacity: 0; }
+
+.js-uix-newsort:nth-child(2) {
+  animation-delay: 100ms; }
+
+.js-uix-newsort:nth-child(3) {
+  animation-delay: 200ms; }
+
+.js-uix-newsort:nth-child(4) {
+  animation-delay: 300ms; }
+
+.js-uix-newsort:nth-child(5) {
+  animation-delay: 400ms; }
+
+.js-uix-newsort:nth-child(6) {
+  animation-delay: 500ms; }
+
+.js-uix-newsort:nth-child(7) {
+  animation-delay: 600ms; }
+
+.js-uix-newsort:nth-child(8) {
+  animation-delay: 700ms; }
+
+.js-uix-newsort:nth-child(9) {
+  animation-delay: 800ms; }
+
+.js-uix-newsort:nth-child(10) {
+  animation-delay: 900ms; }
+
+.js-uix-newsort:nth-child(11) {
+  animation-delay: 1000ms; }
+
+.js-uix-newsort:nth-child(12) {
+  animation-delay: 1100ms; }
+
+.js-uix-newsort:nth-child(13) {
+  animation-delay: 1200ms; }
+
+.js-uix-newsort:nth-child(14) {
+  animation-delay: 1300ms; }
+
+.js-uix-newsort:nth-child(15) {
+  animation-delay: 1400ms; }
+
+.js-uix-newsort:nth-child(16) {
+  animation-delay: 1500ms; }
+
+.js-uix-newsort:nth-child(17) {
+  animation-delay: 1600ms; }
+
+.js-uix-newsort:nth-child(18) {
+  animation-delay: 1700ms; }
+
+.js-uix-newsort:nth-child(19) {
+  animation-delay: 1800ms; }
+
+.js-uix-newsort:nth-child(20) {
+  animation-delay: 1900ms; }
+
+.js-uix-newsort:nth-child(21) {
+  animation-delay: 2000ms; }
+
+.js-uix-newsort:nth-child(22) {
+  animation-delay: 2100ms; }
+
+.js-uix-newsort:nth-child(23) {
+  animation-delay: 2200ms; }
+
+.js-uix-newsort:nth-child(24) {
+  animation-delay: 2300ms; }
+
+.js-uix-newsort:nth-child(25) {
+  animation-delay: 2400ms; }
+
+.js-uix-newsort:nth-child(26) {
+  animation-delay: 2500ms; }
+
+.js-uix-newsort:nth-child(27) {
+  animation-delay: 2600ms; }
+
+.js-uix-newsort:nth-child(28) {
+  animation-delay: 2700ms; }
+
+.js-uix-newsort:nth-child(29) {
+  animation-delay: 2800ms; }
+
+.js-uix-newsort:nth-child(30) {
+  animation-delay: 2900ms; }
+
+.js-uix-newsort:nth-child(31) {
+  animation-delay: 3000ms; }
+
+.js-uix-newsort:nth-child(32) {
+  animation-delay: 3100ms; }
+
+.js-uix-newsort:nth-child(33) {
+  animation-delay: 3200ms; }
+
+.js-uix-newsort:nth-child(34) {
+  animation-delay: 3300ms; }
+
+.js-uix-newsort:nth-child(35) {
+  animation-delay: 3400ms; }
+
+.js-uix-newsort:nth-child(36) {
+  animation-delay: 3500ms; }
+
+.js-uix-newsort:nth-child(37) {
+  animation-delay: 3600ms; }
+
+.js-uix-newsort:nth-child(38) {
+  animation-delay: 3700ms; }
+
+.js-uix-newsort:nth-child(39) {
+  animation-delay: 3800ms; }
+
+.js-uix-newsort:nth-child(40) {
+  animation-delay: 3900ms; }
+
+.js-uix-newsort:nth-child(41) {
+  animation-delay: 4000ms; }
+
+.js-uix-newsort:nth-child(42) {
+  animation-delay: 4100ms; }
+
+.js-uix-newsort:nth-child(43) {
+  animation-delay: 4200ms; }
+
+.js-uix-newsort:nth-child(44) {
+  animation-delay: 4300ms; }
+
+.js-uix-newsort:nth-child(45) {
+  animation-delay: 4400ms; }
+
+.js-uix-newsort:nth-child(46) {
+  animation-delay: 4500ms; }
+
+.js-uix-newsort:nth-child(47) {
+  animation-delay: 4600ms; }
+
+.js-uix-newsort:nth-child(48) {
+  animation-delay: 4700ms; }
+
+.js-uix-newsort:nth-child(49) {
+  animation-delay: 4800ms; }
+
+.js-uix-newsort:nth-child(50) {
+  animation-delay: 4900ms; }
+
+.js-uix-newsort:nth-child(51) {
+  animation-delay: 5000ms; }
+
+.js-uix-newsort:nth-child(52) {
+  animation-delay: 5100ms; }
+
+.js-uix-newsort:nth-child(53) {
+  animation-delay: 5200ms; }
+
+.js-uix-newsort:nth-child(54) {
+  animation-delay: 5300ms; }
+
+.js-uix-newsort:nth-child(55) {
+  animation-delay: 5400ms; }
+
+.js-uix-newsort:nth-child(56) {
+  animation-delay: 5500ms; }
+
+.js-uix-newsort:nth-child(57) {
+  animation-delay: 5600ms; }
+
+.js-uix-newsort:nth-child(58) {
+  animation-delay: 5700ms; }
+
+.js-uix-newsort:nth-child(59) {
+  animation-delay: 5800ms; }
+
+.js-uix-newsort:nth-child(60) {
+  animation-delay: 5900ms; }
+
+.js-uix-newsort:nth-child(61) {
+  animation-delay: 6000ms; }
+
+.js-uix-newsort:nth-child(62) {
+  animation-delay: 6100ms; }
+
+.js-uix-newsort:nth-child(63) {
+  animation-delay: 6200ms; }
+
+.js-uix-newsort:nth-child(64) {
+  animation-delay: 6300ms; }
+
+.js-uix-newsort:nth-child(65) {
+  animation-delay: 6400ms; }
+
+.js-uix-newsort:nth-child(66) {
+  animation-delay: 6500ms; }
+
+.js-uix-newsort:nth-child(67) {
+  animation-delay: 6600ms; }
+
+.js-uix-newsort:nth-child(68) {
+  animation-delay: 6700ms; }
+
+.js-uix-newsort:nth-child(69) {
+  animation-delay: 6800ms; }
+
+.js-uix-newsort:nth-child(70) {
+  animation-delay: 6900ms; }
+
+.js-uix-newsort:nth-child(71) {
+  animation-delay: 7000ms; }
+
+.js-uix-newsort:nth-child(72) {
+  animation-delay: 7100ms; }
+
+.js-uix-newsort:nth-child(73) {
+  animation-delay: 7200ms; }
+
+.js-uix-newsort:nth-child(74) {
+  animation-delay: 7300ms; }
+
+.js-uix-newsort:nth-child(75) {
+  animation-delay: 7400ms; }
+
+.js-uix-newsort:nth-child(76) {
+  animation-delay: 7500ms; }
+
+.js-uix-newsort:nth-child(77) {
+  animation-delay: 7600ms; }
+
+.js-uix-newsort:nth-child(78) {
+  animation-delay: 7700ms; }
+
+.js-uix-newsort:nth-child(79) {
+  animation-delay: 7800ms; }
+
+.js-uix-newsort:nth-child(80) {
+  animation-delay: 7900ms; }
+
+.js-uix-newsort:nth-child(81) {
+  animation-delay: 8000ms; }
+
+.js-uix-newsort:nth-child(82) {
+  animation-delay: 8100ms; }
+
+.js-uix-newsort:nth-child(83) {
+  animation-delay: 8200ms; }
+
+.js-uix-newsort:nth-child(84) {
+  animation-delay: 8300ms; }
+
+.js-uix-newsort:nth-child(85) {
+  animation-delay: 8400ms; }
+
+.js-uix-newsort:nth-child(86) {
+  animation-delay: 8500ms; }
+
+.js-uix-newsort:nth-child(87) {
+  animation-delay: 8600ms; }
+
+.js-uix-newsort:nth-child(88) {
+  animation-delay: 8700ms; }
+
+.js-uix-newsort:nth-child(89) {
+  animation-delay: 8800ms; }
+
+.js-uix-newsort:nth-child(90) {
+  animation-delay: 8900ms; }
+
+.js-uix-newsort:nth-child(91) {
+  animation-delay: 9000ms; }
+
+.js-uix-newsort:nth-child(92) {
+  animation-delay: 9100ms; }
+
+.js-uix-newsort:nth-child(93) {
+  animation-delay: 9200ms; }
+
+.js-uix-newsort:nth-child(94) {
+  animation-delay: 9300ms; }
+
+.js-uix-newsort:nth-child(95) {
+  animation-delay: 9400ms; }
+
+.js-uix-newsort:nth-child(96) {
+  animation-delay: 9500ms; }
+
+.js-uix-newsort:nth-child(97) {
+  animation-delay: 9600ms; }
+
+.js-uix-newsort:nth-child(98) {
+  animation-delay: 9700ms; }
+
+.js-uix-newsort:nth-child(99) {
+  animation-delay: 9800ms; }
+
+.js-uix-newsort:nth-child(100) {
+  animation-delay: 9900ms; }
+
+@keyframes uix-cssAnim--newsort {
+  0% {
+    opacity: 0;
+    transform: translateX(10px); }
+  100% {
+    opacity: 1;
+    transform: translateX(0); } }
+
 /* ====================================================== 
    <!-- Tags -->      
 /* ====================================================== */
@@ -2867,9 +3224,8 @@ table.is-horizontal th,
  * 2. Hyperlink                        
  * 3. Heading (h1,h2,h3,h4,h5,h6) 
  * 4. Text Effect
- * 5. Table & List Effect by Default
- * 6. Drop Cap
- * 7. Vertical Text
+ * 5. Drop Cap
+ * 6. Vertical Text
 */
 /* 
  ---------------------------
@@ -3122,26 +3478,7 @@ h6 {
 
 /* 
  ---------------------------
- 5. Table & List Effect by Default
- ---------------------------
- */
-/* Compatible with  Uix Shortcodes (WordPress Plugin) */
-.uix-list--normal a:not(.uix-sc-btn),
-.uix-table a:not(.uix-sc-btn) {
-  color: #EC5E79; }
-
-.uix-list--normal a:not(.uix-sc-btn):not(.uix-btn):hover,
-.uix-table a:not(.uix-sc-btn):not(.uix-btn):hover {
-  color: #E8588C;
-  text-decoration: underline; }
-
-.uix-list--normal a:not(.uix-sc-btn):hover img,
-.uix-table a:not(.uix-sc-btn):hover img {
-  text-decoration: none; }
-
-/* 
- ---------------------------
- 6. Drop Cap
+ 5. Drop Cap
  ---------------------------
  */
 .uix-typo--dropcap::first-letter,
@@ -3155,7 +3492,7 @@ h6 {
 
 /* 
  ---------------------------
- 7. Vertical Text
+ 6. Vertical Text
  ---------------------------
  */
 .uix-typo--vertical {
@@ -7441,7 +7778,7 @@ ol.uix-flexslider__control-paging {
   height: 100%;
   margin: 0; }
 
-.uix-lightbox__close-fixed {
+.uix-lightbox__close {
   display: none;
   border-radius: 50%;
   width: 36px;
@@ -7450,14 +7787,14 @@ ol.uix-flexslider__control-paging {
   line-height: 34px;
   overflow: hidden;
   position: fixed;
-  z-index: 99997;
-  top: 25px;
-  right: 25px;
+  z-index: 99998;
+  top: 15px;
+  right: 15px;
   transform: rotate(45deg);
   cursor: pointer; }
-  .uix-lightbox__close-fixed.active {
+  .uix-lightbox__close.active {
     display: block; }
-  .uix-lightbox__close-fixed::after {
+  .uix-lightbox__close::after {
     font-family: 'FontAwesome';
     content: "\f067";
     color: #fff;
@@ -7480,8 +7817,11 @@ ol.uix-flexslider__control-paging {
   z-index: 99998;
   top: 0;
   width: 100%;
-  height: 100%; }
+  height: 100%;
+  pointer-events: none;
+  /* Avoid masks being blocked */ }
   .uix-lightbox__container .uix-lightbox__inner {
+    pointer-events: all;
     display: none;
     max-width: 1000px;
     margin: 0 auto;
@@ -7540,10 +7880,14 @@ ol.uix-flexslider__control-paging {
             left: 0;
             width: 100%;
             height: 100%;
+            width: 0;
             transition: all 0.3s ease; }
             .uix-lightbox__container .uix-lightbox__inner .uix-lightbox__html .uix-lightbox__photo-container ul li img {
               max-width: calc(100% - 6rem); }
+            .uix-lightbox__container .uix-lightbox__inner .uix-lightbox__html .uix-lightbox__photo-container ul li.active {
+              width: auto; }
             .uix-lightbox__container .uix-lightbox__inner .uix-lightbox__html .uix-lightbox__photo-container ul li:first-child {
+              width: auto;
               display: block; }
       .uix-lightbox__container .uix-lightbox__inner .uix-lightbox__html .uix-lightbox__thumb-container {
         position: absolute;
@@ -7621,32 +7965,16 @@ ol.uix-flexslider__control-paging {
     .uix-lightbox__container .uix-lightbox__inner.js-uix-custom {
       max-width: 70vw; }
       .uix-lightbox__container .uix-lightbox__inner.js-uix-custom .uix-lightbox__html > .uix-lightbox__content {
-        width: 70vw; }
-  .uix-lightbox__container .uix-lightbox__close {
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    display: inline-block;
-    text-align: center;
-    line-height: 34px;
-    overflow: hidden;
-    position: absolute;
-    z-index: 99999;
-    top: 0;
-    right: -35px;
-    margin-top: -5px;
-    transform: rotate(45deg);
-    cursor: pointer; }
-    .uix-lightbox__container .uix-lightbox__close.js-uix-no-fixed {
-      visibility: hidden; }
-    .uix-lightbox__container .uix-lightbox__close::after {
-      font-family: 'FontAwesome';
-      content: "\f067";
-      color: #fff;
-      font-size: 2rem; }
+        width: 70vw;
+        max-width: 100%; }
   .uix-lightbox__container.js-uix-no-fixed {
     position: absolute;
     top: 100px; }
+    .uix-lightbox__container.js-uix-no-fixed.no-fixed-imgEnlarged {
+      position: fixed;
+      top: 0;
+      margin-top: 0 !important;
+      /* Protected from js */ }
     .uix-lightbox__container.js-uix-no-fixed .uix-lightbox__inner {
       top: 0;
       transform: translateY(0);
@@ -7708,8 +8036,6 @@ ol.uix-flexslider__control-paging {
   background-color: rgba(0, 0, 0, 0.3); }
 
 @media all and (max-width: 768px) {
-  .uix-lightbox__close-fixed {
-    right: 15px; }
   .uix-lightbox__container .uix-lightbox__inner {
     max-width: calc(100% - 30px) !important;
     margin: 15px auto;
@@ -7722,13 +8048,10 @@ ol.uix-flexslider__control-paging {
       max-width: calc(100vw - 30px); }
       .uix-lightbox__container .uix-lightbox__inner.js-uix-custom .uix-lightbox__html > .uix-lightbox__content {
         width: auto; }
-  .uix-lightbox__container .uix-lightbox__close {
-    right: -5px;
-    top: -30px; }
   .uix-lightbox__container.js-uix-no-fixed {
     top: 50px; }
-    .uix-lightbox__container.js-uix-no-fixed .uix-lightbox__close {
-      right: -25px; }
+    .uix-lightbox__container.js-uix-no-fixed.no-fixed-imgEnlarged {
+      top: 0; }
     .uix-lightbox__container.js-uix-no-fixed .uix-lightbox__inner {
       /* Prevent closing button position error */
       overflow: hidden; }
@@ -7747,7 +8070,7 @@ a.uix-lightbox__original__link {
   display: block; }
 
 /* Styles the close link, adds the slide down transition */
-a.uix-lightbox__original__close {
+.uix-lightbox__original__close {
   display: none;
   width: 50px;
   height: 50px;
@@ -7762,9 +8085,9 @@ a.uix-lightbox__original__close {
   transition: all 0.3s ease;
   /* Provides part of the "X" to eliminate an image from the close link */
   /* Provides part of the "X" to eliminate an image from the close link */ }
-  a.uix-lightbox__original__close.active {
+  .uix-lightbox__original__close.active {
     display: block; }
-  a.uix-lightbox__original__close::before {
+  .uix-lightbox__original__close::before {
     content: "";
     display: block;
     height: 30px;
@@ -7774,7 +8097,7 @@ a.uix-lightbox__original__close {
     left: 26px;
     top: 10px;
     transform: rotate(45deg); }
-  a.uix-lightbox__original__close::after {
+  .uix-lightbox__original__close::after {
     content: "";
     display: block;
     height: 30px;
@@ -7794,11 +8117,11 @@ a.uix-lightbox__original__close {
   background: rgba(0, 0, 0, 0.7);
   width: 100vw;
   opacity: 0;
-  transition: opacity .5s ease-in-out;
+  transition: opacity .2s ease-in-out;
   overflow: hidden;
   overflow-y: auto;
   z-index: 100000;
-  /* Uses the :target pseudo-class to perform the animations upon clicking the .uix-lightbox__original__target anchor */ }
+  /* To perform the animations upon clicking the .uix-lightbox__original__target anchor */ }
   .uix-lightbox__original__target::-webkit-scrollbar-track {
     border-radius: 0px;
     background-color: #ddd; }
@@ -7823,23 +8146,26 @@ a.uix-lightbox__original__close {
     max-height: 0%;
     max-width: 0%;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
-    box-sizing: border-box;
-    transition: all 0.3s ease; }
-  .uix-lightbox__original__target.uix-lightbox__original__target--imgfull img {
-    margin: 0 auto !important;
-    /* Protected from js */ }
-  .uix-lightbox__original__target:target {
+    box-sizing: border-box; }
+  .uix-lightbox__original__target.active {
     opacity: 1;
     top: 0;
     bottom: 0;
-    height: 100vh; }
-    .uix-lightbox__original__target:target img {
+    height: 100vh;
+    /* When zooming in on the picture */ }
+    .uix-lightbox__original__target.active.no-fixed-imgEnlarged {
+      top: 0 !important;
+      transform: translate(-50%, 0); }
+    .uix-lightbox__original__target.active img {
       width: auto;
       height: auto;
       max-width: 100% !important;
       max-height: inherit !important; }
-    .uix-lightbox__original__target:target a.uix-lightbox__original__close {
+    .uix-lightbox__original__target.active .uix-lightbox__original__close {
       top: 0px; }
+  .uix-lightbox__original__target.uix-lightbox__original__target--imgfull img {
+    margin: 0 auto !important;
+    /* Protected from js */ }
 
 /* ====================================================== 
     <!-- Brands List --> 
@@ -8064,10 +8390,10 @@ a.uix-lightbox__original__close {
   .uix-list-topic .uix-list-topic__item.uix-list-topic__item--style-2 .uix-tags-box {
     padding-left: 1rem; }
   .uix-list-topic .uix-list-topic__item.uix-list-topic__item--style-2 .uix-list-topic__item__addition a {
-    /* Used when "uix-list uix-list uix-list--normal uix-table uix-table--bordered" style are used */
+    /* Used when "uix-list uix-list--normal uix-table uix-table--bordered" style are used */
     color: #474747 !important; }
     .uix-list-topic .uix-list-topic__item.uix-list-topic__item--style-2 .uix-list-topic__item__addition a:hover {
-      /* Used when "uix-list uix-list uix-list--normal uix-table uix-table--bordered" style are used */
+      /* Used when "uix-list uix-list--normal uix-table uix-table--bordered" style are used */
       color: #000 !important;
       text-decoration: none; }
 

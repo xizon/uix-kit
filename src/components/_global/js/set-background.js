@@ -50,7 +50,7 @@ APP = ( function ( APP, $, window, document ) {
 					config   = $this.data( 'bg' );
 
 
-				if( typeof config === typeof undefined ) {
+				if ( typeof config === typeof undefined ) {
 					config = {
 						"src"      : "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
 						"position" : "top left",
@@ -69,9 +69,9 @@ APP = ( function ( APP, $, window, document ) {
 						dataRepeat    = config.repeat,
 						dataParallax  = config.parallax;
 
-					if( typeof dataPos === typeof undefined ) dataPos = 'top left';
-					if( typeof dataSize === typeof undefined ) dataSize = 'cover';
-					if( typeof dataRepeat === typeof undefined ) dataRepeat = 'no-repeat';
+					if ( typeof dataPos === typeof undefined ) dataPos = 'top left';
+					if ( typeof dataSize === typeof undefined ) dataSize = 'cover';
+					if ( typeof dataRepeat === typeof undefined ) dataRepeat = 'no-repeat';
 
 
 					//Using parallax

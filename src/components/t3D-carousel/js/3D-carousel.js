@@ -34,9 +34,9 @@ APP = ( function ( APP, $, window, document ) {
 				leftpos           = itemCount,
 				resetCount        = itemCount;
 
-			if( typeof dataTiming === typeof undefined ) dataTiming = 5000;
-			if( typeof dataPrevBtn === typeof undefined ) dataPrevBtn = ".my-carousel-3d-prev";
-			if( typeof dataNextBtn === typeof undefined ) dataNextBtn = ".my-carousel-3d-next";
+			if ( typeof dataTiming === typeof undefined ) dataTiming = 5000;
+			if ( typeof dataPrevBtn === typeof undefined ) dataPrevBtn = ".my-carousel-3d-prev";
+			if ( typeof dataNextBtn === typeof undefined ) dataNextBtn = ".my-carousel-3d-next";
 			if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
 			
 

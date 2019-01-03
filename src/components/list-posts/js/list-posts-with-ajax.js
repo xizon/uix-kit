@@ -45,7 +45,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 
-			if( typeof pageParmStr === typeof undefined ) {
+			if ( typeof pageParmStr === typeof undefined ) {
 				pageParmStr = {
 					'totalPage'     : 'total',
 					'currentPage'   : 'page',
@@ -53,52 +53,52 @@ APP = ( function ( APP, $, window, document ) {
 				};
 			}
 			
-			if( typeof curPage === typeof undefined ) {
+			if ( typeof curPage === typeof undefined ) {
 				curPage = 1;
 			}
 			
 			
-			if( typeof perShow === typeof undefined ) {
+			if ( typeof perShow === typeof undefined ) {
 				perShow = 8;
 			}
 			
-			if( typeof totalPage === typeof undefined ) {
+			if ( typeof totalPage === typeof undefined ) {
 				totalPage = 3;
 			}
 			
-			if( typeof totalPage != typeof undefined && totalPage == '-1' ) {
+			if ( typeof totalPage != typeof undefined && totalPage == '-1' ) {
 				totalPage = 9999;
 			}
 			
 			
-			if( typeof trigger === typeof undefined ) {
+			if ( typeof trigger === typeof undefined ) {
 				trigger = '.uix-load-more';
 			}
 			
-			if( typeof infinitescroll === typeof undefined ) {
+			if ( typeof infinitescroll === typeof undefined ) {
 				infinitescroll = false;
 			}	
 			
-			if( typeof addition === typeof undefined ) {
+			if ( typeof addition === typeof undefined ) {
 				addition = true;
 			}			
 			
 			
-			if( typeof jsonFile === typeof undefined ) {
+			if ( typeof jsonFile === typeof undefined ) {
 				jsonFile = '';
 			}		
 			
-			if( typeof template7ID === typeof undefined ) {
+			if ( typeof template7ID === typeof undefined ) {
 				template7ID = '';
 			}	
-			if( typeof triggerActive === typeof undefined ) {
+			if ( typeof triggerActive === typeof undefined ) {
 				triggerActive = 'active';
 			}		
 			
-			if( typeof method === typeof undefined ) {
+			if ( typeof method === typeof undefined ) {
 				method = 'POST';
 			}		
-			if( typeof noneInfo === typeof undefined ) {
+			if ( typeof noneInfo === typeof undefined ) {
 				noneInfo = '{"none":"","error":""}';
 			}
 			
@@ -108,7 +108,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			
-			if( typeof pushContainer === typeof undefined ) {
+			if ( typeof pushContainer === typeof undefined ) {
 				pushContainer = '.uix-ajax-items__container';
 				
 				if ( $this.find( pushContainer ).length == 0 ) {

@@ -24,24 +24,24 @@ APP = ( function ( APP, $, window, document ) {
 				curID;
 	
 
-			if( typeof jsonFile === typeof undefined ) {
+			if ( typeof jsonFile === typeof undefined ) {
 				jsonFile = '';
 			}	
 			
-			if( typeof toData === typeof undefined ) {
+			if ( typeof toData === typeof undefined ) {
 				toData = '';
 			}	
 			
-			if( typeof method === typeof undefined ) {
+			if ( typeof method === typeof undefined ) {
 				method = 'POST';
 			}		
 			
 			
-			if( typeof associated === typeof undefined ) {
+			if ( typeof associated === typeof undefined ) {
 				associated = '#demo';
 			}		
 			
-			if( typeof ID === typeof undefined ) {
+			if ( typeof ID === typeof undefined ) {
 				$this.attr( 'id', ranID );
 			}	
 			

@@ -1,4 +1,5 @@
 
+/* Please do not modify variable "UIX_KIT_IMPORT" name */
 const UIX_KIT_IMPORT = { "files": [
 
 /******/
@@ -94,6 +95,7 @@ const UIX_KIT_IMPORT = { "files": [
 "./src/components/sticky-elements/js/sticky-elements.js",
 "./src/components/svg-map/js/svg-map-china.js",
 "./src/components/svg-map/js/svg-map-world.js",
+"./src/components/table-sorter/js/table-sorter.js",	
 "./src/components/t3D-background-three/js/3D-background-three.js",
 "./src/components/t3D-background-three2/js/3D-background-three2.js",
 "./src/components/t3D-background/js/3D-background.js",

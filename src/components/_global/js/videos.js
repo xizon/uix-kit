@@ -8,7 +8,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.VIDEOS               = APP.VIDEOS || {};
-	APP.VIDEOS.version       = '0.0.7';
+	APP.VIDEOS.version       = '0.0.8';
     APP.VIDEOS.documentReady = function( $ ) {
 
 		var $window      = $( window ),
@@ -40,22 +40,22 @@ APP = ( function ( APP, $, window, document ) {
 			$this.find( '.video-js' ).attr( 'id', curVideoID );
 	
 			
-			if( typeof dataAuto === typeof undefined ) {
+			if ( typeof dataAuto === typeof undefined ) {
 				dataAuto = true;
 			}
-			if( typeof dataLoop === typeof undefined ) {
+			if ( typeof dataLoop === typeof undefined ) {
 				dataLoop = true;
 			}
-			if( typeof dataControls === typeof undefined ) {
+			if ( typeof dataControls === typeof undefined ) {
 				dataControls = false;
 			}	
 			
 			
-			if( typeof dataW === typeof undefined || dataW == 'auto' ) {
+			if ( typeof dataW === typeof undefined || dataW == 'auto' ) {
 				dataW = videoWrapperW;
 			}	
 			
-			if( typeof dataH === typeof undefined || dataH == 'auto' ) {
+			if ( typeof dataH === typeof undefined || dataH == 'auto' ) {
 				dataH = videoWrapperW/1.77777777777778;
 			}
 			
@@ -206,15 +206,15 @@ APP = ( function ( APP, $, window, document ) {
 				videoContainerVid = videoContainerMid + '--videopush';
 				
 			
-			if( typeof videoSrcMp4 === typeof undefined ) {
+			if ( typeof videoSrcMp4 === typeof undefined ) {
 				videoSrcMp4 = '';
 			}	
 			
-			if( typeof videoSrcWebm === typeof undefined ) {
+			if ( typeof videoSrcWebm === typeof undefined ) {
 				videoSrcWebm = '';
 			}	
 			
-			if( typeof videoSrcOgv === typeof undefined ) {
+			if ( typeof videoSrcOgv === typeof undefined ) {
 				videoSrcOgv = '';
 			}		
 			
@@ -478,7 +478,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			/* ---------  Close the modal  */
-			$( document ).on( 'click', '.uix-modal-box .uix-modal-box__close', function() {
+			$( document ).on( 'click', '.uix-modal-box .uix-modal-box__close, .uix-modal-mask', function() {
 
 				myPlayer.ready(function() {
 					myPlayer.pause();

@@ -7,14 +7,13 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.AJAX_PAGE_LOADER               = APP.AJAX_PAGE_LOADER || {};
-	APP.AJAX_PAGE_LOADER.version       = '0.0.4';
+	APP.AJAX_PAGE_LOADER.version       = '0.0.7';
     APP.AJAX_PAGE_LOADER.documentReady = function( $ ) {
 
         var $window                  = $( window ),
 		    windowWidth              = window.innerWidth,
 		    windowHeight             = window.innerHeight;
 
-		
 		
 	    //Determine the direction of a jQuery scroll event
 		//Fix an issue for mousewheel event is too fast.
@@ -42,7 +41,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 		//Activate the first item
 		if ( $( '.js-uix-ajax-load__container' ).length == 0 ) {
-			moveTo( $( ajaxContainer ), false, 'down', 0 );
+			moveTo( $( ajaxContainer ), false, 'down', 0, false );
 		} else {
 			//Activate navigation from AJAX request
 			if ( typeof curAjaxPageID != typeof undefined ) $navs.eq( curAjaxPageID ).addClass( 'active' );
@@ -53,7 +52,7 @@ APP = ( function ( APP, $, window, document ) {
 		
 		//Detect URL change
 		window.addEventListener( 'popstate', function( e ) {
-			moveTo( $( ajaxContainer ), false, 'down', 0 );
+			moveTo( $( ajaxContainer ), false, 'down', 0, false );
 		});
 
 		
@@ -120,13 +119,19 @@ APP = ( function ( APP, $, window, document ) {
 			$( AJAXPageLinks ).data( 'request-running', true );
 
 			
-			//Click on this link element using an AJAX request
-			var dir = 'down';
+						
+			// Modify the URL without reloading the page
+			if( history.pushState ) {
+				history.pushState( null, null, curURL );
 
-			if ( $navs.filter( '.active' ).find( '> a' ).attr( 'data-index' ) > curIndex ) {
-				dir = 'up';
+			} else {
+				location.hash = curURL;
 			}
-			moveTo( $( ajaxContainer ), curURL, dir, curIndex );
+			
+			
+			//Click on this link element using an AJAX request
+			var dir = ( $navs.filter( '.active' ).find( '> a' ).attr( 'data-index' ) > curIndex ) ? 'up' : 'down';
+			moveTo( $( ajaxContainer ), curURL, dir, curIndex, false );
 			
 			
 			
@@ -134,6 +139,39 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 		});
+
+		//Detect URL change & Fire click event
+		window.addEventListener( 'popstate', function( e ) {
+		
+			var eleTarget = null,
+				goURL     = location.href;
+			
+			$( AJAXPageLinks ).each( function() {
+				
+				//don't use $( this ).attr( 'href' )
+				
+				if ( this.href === location.href ) {
+					eleTarget = this;
+					goURL = this.href;
+				}
+			});
+
+		
+			var pageIndex = $( eleTarget ).data( 'index' );
+			
+			//Push new content to target container
+			if ( typeof pageIndex != typeof undefined ) {
+				moveTo( $( ajaxContainer ), goURL, 'down', pageIndex, false );
+			}
+			
+			// Output history button
+			//console.log(  $( eleTarget ).data( 'index' ) );
+			
+			
+		});
+		
+		
+		
 		
 		
 		/*
@@ -154,14 +192,16 @@ APP = ( function ( APP, $, window, document ) {
 
 			if ( dir == 'down' ) {
 				//scroll down
-				moveTo( $( ajaxContainer ), false, 'down', false );
+				moveTo( $( ajaxContainer ), false, 'down', false, true );
 				
 			} else {
 				//scroll up
-				moveTo( $( ajaxContainer ), false, 'up', false );
+				moveTo( $( ajaxContainer ), false, 'up', false, true );
 				
-			  
 			}
+			
+
+			
 			lastAnimation = timeNow;
 		}
 		
@@ -173,9 +213,10 @@ APP = ( function ( APP, $, window, document ) {
 		 * @param  {String} url          - The target URL via AJAX.
 		 * @param  {String} dir          - Rolling direction indicator.
 		 * @param  {Number} customIndex  - User-specified index value, located on the corresponding AJAX hyperlink.
+		 * @param  {Boolean} wheel       - Whether to enable mouse wheel control.
 		 * @return {Void}                - The constructor.
 		 */
-		function moveTo( container, url, dir, customIndex ) {
+		function moveTo( container, url, dir, customIndex, wheel ) {
 			var index     = parseFloat( $navs.filter( '.active' ).find( '> a' ).attr( 'data-index' ) ),
 				nextIndex = null,
 				isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
@@ -211,12 +252,27 @@ APP = ( function ( APP, $, window, document ) {
 				$navs.removeClass( 'active' );
 				$navs.eq( nextIndex ).addClass( 'active' );
 
-
 				
 				//Use automatic indexing when no URLs come in.
 				if ( !url || typeof url === typeof undefined ) {
 					url = $navs.eq( nextIndex ).find( '> a' ).attr( 'href' );
 				}
+				
+
+						
+				// Modify the URL without reloading the page when mouse wheel
+				if ( wheel ) {
+					var turl = $navs.eq( nextIndex ).find( '> a' ).attr( 'href' );
+					
+					if( history.pushState ) {
+						history.pushState( null, null, url );
+
+					} else {
+						location.hash = turl;
+					}
+		
+				}
+
  
 				//Click on this link element using an AJAX request
 				$.ajax({
@@ -230,7 +286,7 @@ APP = ( function ( APP, $, window, document ) {
 					success  : function( response ) {
 						
 						//A function to be called if the request succeeds
-						ajaxSucceeds( dir, container, url, $( response ).find( '.js-uix-ajax-load__container' ).html(), $( response ).filter( 'title' ).text() );
+						ajaxSucceeds( dir, container, $( response ).find( '.js-uix-ajax-load__container' ).html(), $( response ).filter( 'title' ).text() );
 
 					},
 					error: function(){
@@ -272,12 +328,11 @@ APP = ( function ( APP, $, window, document ) {
 		 *
 		 * @param  {String} dir       - Gets a value that indicates the amount that the mouse wheel has changed.
 		 * @param  {Object} container - The instance returned from the request succeeds
-		 * @param  {String} url       - Current URL after click
 		 * @param  {String} content   - The data returned from the server
 		 * @param  {String} title        - The title of a requested page.
 		 * @return {Void}             - The constructor.
 		 */
-		function ajaxSucceeds( dir, container, url, content, title ) {
+		function ajaxSucceeds( dir, container, content, title ) {
 			
 			var oldContent = container.html();
 		
@@ -293,27 +348,16 @@ APP = ( function ( APP, $, window, document ) {
 					
 
 					//The data returned from the server
-					container.html( content ).promise().done( function(){
+					container.html( content ).promise().done( function() {
 						
 						//Transition effect between two elements.
 						eleTransitionEff( dir, oldContent, content );
-	
-						// Modify the URL without reloading the page
-						if( history.pushState ) {
-							history.pushState( null, null, url );
-						} else {
-							location.hash = url;
-						}
-				
+
+						
 						//Change the page title
-						document.title = title;	
-						
-						
-						//Change URL without refresh the page
-//						if ( url == 'home.html' ) {
-//							history.pushState(null, null, window.location.href.replace( 'home.html', '' ) );
-//						}	
-						
+						if ( title ) {
+							document.title = title;
+						}
 						
 
 						//Prevent multiple request on click
@@ -367,7 +411,7 @@ APP = ( function ( APP, $, window, document ) {
 			    .html( newContent );
 
 			
-			$originalItem.first().find( ajaxContainer ).html( oldContent ).promise().done( function(){
+			$originalItem.first().find( ajaxContainer ).html( oldContent ).promise().done( function() {
 						
 
 				TweenMax.to( $originalItem.first(), animationTime/1000, {
@@ -460,10 +504,11 @@ APP = ( function ( APP, $, window, document ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
-			scrollReveal    : true,
-			ajaxPostList    : true,
-			ajaxDDList      : true,
-			counterAnim     : true
+			scrollReveal    : true, // @from ./src/components/scroll-reveal
+			ajaxPostList    : true, // @from ./src/components/list-posts
+			ajaxDDList      : true, // @from ./src/components/dynamic-dropdown-list-json
+			counterAnim     : true, // @from ./src/components/counter
+			lightBox        : true  // @from ./src/components/lightbox
         }, options );
  
         this.each( function() {
@@ -472,7 +517,6 @@ APP = ( function ( APP, $, window, document ) {
 			//----
 			if ( APP.INDEX ) APP.INDEX.pageLoaded(); //Theme Scripts
 			if ( APP.COMMON_HEIGHT ) APP.COMMON_HEIGHT.pageLoaded(); //Common Height
-			if ( APP.LIGHTBOX ) APP.LIGHTBOX.pageLoaded(); //Custom Lightbox
 			if ( APP.ADVANCED_SLIDER ) APP.ADVANCED_SLIDER.pageLoaded(); //Advanced Slider (Basic)
 			if ( APP.ADVANCED_SLIDER_FILTER ) APP.ADVANCED_SLIDER_FILTER.pageLoaded(); //Advanced Slider	
 			if ( APP.POST_LIST_SPLIT_FULLWIDTH ) APP.POST_LIST_SPLIT_FULLWIDTH.pageLoaded(); //Fullwidth List of Split
@@ -481,9 +525,11 @@ APP = ( function ( APP, $, window, document ) {
 			if ( APP.TIMELINE ) APP.TIMELINE.pageLoaded(); //Timeline
 			
 		
+			
 			//----
 			if ( APP.INDEX ) APP.INDEX.documentReady($); //Theme Scripts
 			if ( APP.TABLE ) APP.TABLE.documentReady($); //Responsive Table
+			if ( APP.TABLE_SORTER ) APP.TABLE_SORTER.documentReady($); //Table Sorter
 			if ( APP.MODAL_DIALOG ) APP.MODAL_DIALOG.documentReady($); //Modal Dialog
 			if ( APP.PARALLAX ) APP.PARALLAX.documentReady($); //Parallax
 			if ( APP.VIDEOS ) APP.VIDEOS.documentReady($); //Videos
@@ -516,6 +562,9 @@ APP = ( function ( APP, $, window, document ) {
 			if ( APP._3D_CAROUSEL ) APP._3D_CAROUSEL.documentReady($); //3D Carousel
 			
 			
+		
+			//---- Prevent overlay clicks on asynchronous requests
+		    //---- Commonly used for AJAX modules that are clicked by button
 			//Scroll Reveal
 			if ( settings.scrollReveal ) {
 				if ( APP.SCROLL_REVEAL ) APP.SCROLL_REVEAL.documentReady($); 
@@ -536,13 +585,13 @@ APP = ( function ( APP, $, window, document ) {
 			if ( settings.counterAnim ) {
 				if ( APP.COUNTER ) APP.COUNTER.documentReady($);
 			}
-						
-			
-			
-			
-			//----Other functions here
+				
+			//Custom Lightbox
+			if ( settings.lightBox ) {
+				if ( APP.LIGHTBOX ) APP.LIGHTBOX.pageLoaded();
+			}		
 
-
+			
 
 			//----Uix Shortcodes (WordPress Plugin)
 			if ( $.isFunction( $.uix_sc_init ) ) {

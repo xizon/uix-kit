@@ -18,11 +18,11 @@ APP = ( function ( APP, $, window, document ) {
 				$li             = $this.children( 'dl' ),
 				$titlebox       = $this.find( 'dt' );
 			
-			if( typeof aEvent === typeof undefined ) {
+			if ( typeof aEvent === typeof undefined ) {
 				aEvent = 'click';
 			}	
 			
-			if( typeof firstShow === typeof undefined ) {
+			if ( typeof firstShow === typeof undefined ) {
 				firstShow = false;
 			}		
 			

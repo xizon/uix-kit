@@ -188,6 +188,7 @@ APP = ( function ( APP, $, window, document ) {
 							// - Second argument is a title (not the page title, and not currently used)
 							// - Third argument is the URL - this will appear in the browser address bar
 							history.pushState( {}, document.title, href );
+							
 							console.log( 'Section ' + curSectionIndex + ' loaded!' );
 
 

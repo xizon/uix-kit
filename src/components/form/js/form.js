@@ -289,13 +289,13 @@ APP = ( function ( APP, $, window, document ) {
 
 
 					// If there is no data-xxx, save current source to it
-					if( typeof dateFormat === typeof undefined ) dateFormat = 'MM d, yy';
-					if( typeof monthNames === typeof undefined ) monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-					if( typeof nextText === typeof undefined ) nextText = '&#8594;';
-					if( typeof prevText === typeof undefined ) prevText = '&#8592;';
-					if( typeof dayNames === typeof undefined ) dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-					if( typeof myminDate === typeof undefined ) myminDate = -1825;
-					if( typeof mymaxDate === typeof undefined ) mymaxDate = 0;
+					if ( typeof dateFormat === typeof undefined ) dateFormat = 'MM d, yy';
+					if ( typeof monthNames === typeof undefined ) monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+					if ( typeof nextText === typeof undefined ) nextText = '&#8594;';
+					if ( typeof prevText === typeof undefined ) prevText = '&#8592;';
+					if ( typeof dayNames === typeof undefined ) dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+					if ( typeof myminDate === typeof undefined ) myminDate = -1825;
+					if ( typeof mymaxDate === typeof undefined ) mymaxDate = 0;
 
 					$this.datepicker({
 						"monthNamesShort" : monthNames,

@@ -24,19 +24,19 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			
-			if( typeof display === typeof undefined ) {
+			if ( typeof display === typeof undefined ) {
 				display = 5;
 			}	
 			
-			if( typeof radius === typeof undefined ) {
+			if ( typeof radius === typeof undefined ) {
 				radius = 180;
 			}	
 			
-			if( typeof radius2 === typeof undefined ) {
+			if ( typeof radius2 === typeof undefined ) {
 				radius2 = 110;
 			}		
 			
-			if( typeof rotation === typeof undefined ) {
+			if ( typeof rotation === typeof undefined ) {
 				rotation = 0;
 			}			
 			

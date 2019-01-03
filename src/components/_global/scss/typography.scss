@@ -7,9 +7,8 @@
  * 2. Hyperlink                        
  * 3. Heading (h1,h2,h3,h4,h5,h6) 
  * 4. Text Effect
- * 5. Table & List Effect by Default
- * 6. Drop Cap
- * 7. Vertical Text
+ * 5. Drop Cap
+ * 6. Vertical Text
 */
 
 
@@ -333,32 +332,10 @@ h6 {
 	}
 }
 
-/* 
- ---------------------------
- 5. Table & List Effect by Default
- ---------------------------
- */ 
-/* Compatible with  Uix Shortcodes (WordPress Plugin) */
-.uix-list--normal a:not(.uix-sc-btn), 
-.uix-table a:not(.uix-sc-btn) {
-    color: $highlight-color1;
-}
-
-.uix-list--normal a:not(.uix-sc-btn):not(.uix-btn):hover, 
-.uix-table a:not(.uix-sc-btn):not(.uix-btn):hover {
-    color: $highlight-color2;
-    text-decoration: underline;
-}
-
-.uix-list--normal a:not(.uix-sc-btn):hover img, 
-.uix-table a:not(.uix-sc-btn):hover img {
-    text-decoration: none;
-}
-
 
 /* 
  ---------------------------
- 6. Drop Cap
+ 5. Drop Cap
  ---------------------------
  */ 
 .uix-typo--dropcap::first-letter,
@@ -373,7 +350,7 @@ h6 {
 
 /* 
  ---------------------------
- 7. Vertical Text
+ 6. Vertical Text
  ---------------------------
  */ 
 .uix-typo--vertical {

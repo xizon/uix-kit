@@ -27,22 +27,22 @@ APP = ( function ( APP, $, window, document ) {
 				tabBoxID          = id,
 				isNumeric         = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
 			
-			if( typeof fullwidth != typeof undefined && fullwidth == 1 ) {
+			if ( typeof fullwidth != typeof undefined && fullwidth == 1 ) {
 				$li.css( 'width', ( 100 / liNum ) + '%' );
 			}
 			
 					
 			
-			if( typeof rotation === typeof undefined ) {
+			if ( typeof rotation === typeof undefined ) {
 				rotation = false;
 			}	
 			
 			
-			if( typeof rotationWapperDeg === typeof undefined ) {
+			if ( typeof rotationWapperDeg === typeof undefined ) {
 				rotationWapperDeg = 0;
 			}	
 			
-			if( typeof rotationDisplay === typeof undefined ) {
+			if ( typeof rotationDisplay === typeof undefined ) {
 				rotationDisplay = 5;
 			}		
 			

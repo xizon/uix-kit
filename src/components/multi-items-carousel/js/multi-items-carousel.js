@@ -38,12 +38,12 @@ APP = ( function ( APP, $, window, document ) {
 
 			
 			
-			if( typeof carouselDir === typeof undefined ) carouselDir = 'horizontal';
-			if( typeof carouselLoop === typeof undefined ) carouselLoop = false;
-			if( typeof amountVisible === typeof undefined ) amountVisible = 3;
-			if( typeof carouselSpeed === typeof undefined ) carouselSpeed = 250;
-			if( typeof carouselNext === typeof undefined ) carouselNext = '.uix-multi-carousel__controls--next';
-			if( typeof carouselPrev === typeof undefined ) carouselPrev = '.uix-multi-carousel__controls--prev';
+			if ( typeof carouselDir === typeof undefined ) carouselDir = 'horizontal';
+			if ( typeof carouselLoop === typeof undefined ) carouselLoop = false;
+			if ( typeof amountVisible === typeof undefined ) amountVisible = 3;
+			if ( typeof carouselSpeed === typeof undefined ) carouselSpeed = 250;
+			if ( typeof carouselNext === typeof undefined ) carouselNext = '.uix-multi-carousel__controls--next';
+			if ( typeof carouselPrev === typeof undefined ) carouselPrev = '.uix-multi-carousel__controls--prev';
 			if ( typeof carouseDraggable === typeof undefined ) carouseDraggable = false;
 			if ( typeof carouseDraggableCursor === typeof undefined ) carouseDraggableCursor = 'move';
 
@@ -440,23 +440,23 @@ APP = ( function ( APP, $, window, document ) {
 //				carouselNext       = $carouselWrapper.data( 'cus-carousel-next' ),
 //				carouselPrev       = $carouselWrapper.data( 'cus-carousel-prev' );
 //
-//			if( typeof carouselDir === typeof undefined ) {
+//			if ( typeof carouselDir === typeof undefined ) {
 //				carouselDir = 'horizontal';
 //			}
 //			
-//			if( typeof carouselLoop === typeof undefined ) {
+//			if ( typeof carouselLoop === typeof undefined ) {
 //				carouselLoop = false;
 //			}
-//			if( typeof showcarouselItem === typeof undefined ) {
+//			if ( typeof showcarouselItem === typeof undefined ) {
 //				showcarouselItem = 3;
 //			}
-//			if( typeof carouselSpeed === typeof undefined ) {
+//			if ( typeof carouselSpeed === typeof undefined ) {
 //				carouselSpeed = 250;
 //			}
-//			if( typeof carouselNext === typeof undefined ) {
+//			if ( typeof carouselNext === typeof undefined ) {
 //				carouselNext = '.uix-multi-carousel__controls--next';
 //			}
-//			if( typeof carouselPrev === typeof undefined ) {
+//			if ( typeof carouselPrev === typeof undefined ) {
 //				carouselPrev = '.uix-multi-carousel__controls--prev';
 //			}
 //

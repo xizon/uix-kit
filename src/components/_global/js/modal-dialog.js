@@ -8,7 +8,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.MODAL_DIALOG               = APP.MODAL_DIALOG || {};
-	APP.MODAL_DIALOG.version       = '0.0.4';
+	APP.MODAL_DIALOG.version       = '0.0.6';
     APP.MODAL_DIALOG.documentReady = function( $ ) {
 
 		//Get the -webkit-transition-duration property
@@ -17,6 +17,7 @@ APP = ( function ( APP, $, window, document ) {
 			if ( typeof el === typeof undefined ) {
 				return 0;
 			}
+			
 			
 			var style    = window.getComputedStyle(el),
 				duration = style.webkitTransitionDuration,
@@ -80,11 +81,11 @@ APP = ( function ( APP, $, window, document ) {
 				$.scrollLock( true );
 					
 
-				if( typeof dataH != typeof undefined && dataH != '' ) {
+				if ( typeof dataH != typeof undefined && dataH != '' ) {
 					$obj.css( {'height': dataH } );
 				}
 				
-				if( typeof dataW != typeof undefined && dataW != '' ) {
+				if ( typeof dataW != typeof undefined && dataW != '' ) {
 					$obj.css( {'width': dataW } );
 				}
 				
@@ -118,11 +119,17 @@ APP = ( function ( APP, $, window, document ) {
 				}, modalSpeed );
 				
 			}
+			
+			
+			return false;
 		
 		});
 		
+		
 		$( document ).on( 'click.MODAL_DIALOG_CLOSE', '.uix-modal-box .uix-modal-box__close', function() {
 			$( this ).parent().removeClass( 'active' );
+			
+			return false;
 		});
 		
 		$( document ).on( 'click.MODAL_DIALOG_CLOSE', '.uix-modal-box .uix-modal-box__close, .uix-modal-mask', function() {
@@ -135,11 +142,18 @@ APP = ( function ( APP, $, window, document ) {
 			});
 				
 			$( '.uix-modal-box' ).find( '.uix-modal-box__content' ).removeClass( 'js-uix-no-fullscreen' );
+			
+			
 			// Unlocks the page
 			$.scrollLock( false );
+			
+			//something...
 			setTimeout( function() {
 	
 			}, modalSpeed );
+			
+			
+			return false;
 			
 		});
 		

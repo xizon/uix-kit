@@ -17,7 +17,7 @@ APP = ( function ( APP, $, window, document ) {
 				config = $this.data( 'pointer-to-deg' );
 
 
-			if( typeof config === typeof undefined ) {
+			if ( typeof config === typeof undefined ) {
 				config = false;
 			}
 

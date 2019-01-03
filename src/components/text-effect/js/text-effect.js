@@ -67,7 +67,7 @@ APP = ( function ( APP, $, window, document ) {
 				txtEff;
 
 			
-				if( typeof speed === typeof undefined ) {
+				if ( typeof speed === typeof undefined ) {
 					speed = 1200;
 				}	
 			

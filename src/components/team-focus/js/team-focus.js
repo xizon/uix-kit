@@ -29,19 +29,19 @@ APP = ( function ( APP, $, window, document ) {
 			$this.attr( 'id', thisID );
 			
 		
-			if( typeof hoverWidth === typeof undefined ) {
+			if ( typeof hoverWidth === typeof undefined ) {
 				hoverWidth = 20;
 			}	
 			
-			if( typeof targetWidth === typeof undefined ) {
+			if ( typeof targetWidth === typeof undefined ) {
 				targetWidth = 80;
 			}	
 			
-			if( typeof closeBtn === typeof undefined ) {
+			if ( typeof closeBtn === typeof undefined ) {
 				closeBtn = '.close';
 			}
 			
-			if( typeof targetInfo === typeof undefined ) {
+			if ( typeof targetInfo === typeof undefined ) {
 				targetInfo = '.uix-team-focus__info';
 			}		
 		

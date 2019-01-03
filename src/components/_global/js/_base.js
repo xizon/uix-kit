@@ -10,8 +10,6 @@
 */
 
 
-
-
 if ( typeof jQuery === 'undefined' || typeof TweenMax === 'undefined' || typeof Waypoint === 'undefined' || typeof videojs === 'undefined' ) {
     throw new Error( 'Uix Kit\'s JavaScript requires jQuery, TweenMax, Waypoint and videojs.' );
 }
@@ -124,7 +122,7 @@ var APP = (function ( $, window, document ) {
 
     _APP.setContext = function ( contextSelector ) {
         var context = $;
-        if( typeof contextSelector !== typeof undefined ) {
+        if ( typeof contextSelector !== typeof undefined ) {
             return function( selector ) {
                 return $( contextSelector ).find( selector );
             };

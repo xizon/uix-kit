@@ -1,5 +1,14 @@
 # Changelog
 
+#### = 3.0.7 (January 3, 2019) =
+
+* Fix: Fixed an inaccurate error in the history of Ajax Page Loader.
+* New: Add a new HTML demo "Helper Classes".
+* New: Add a new module "Table Sorter".
+* Tweak: Upgraded module "3D Object Anim Interaction" to a new version.
+* Tweak: Let the lightbox module's ajax feature support URL dynamic changes.
+* Tweak: Optimized some bugs in core style sheets and scripts.
+
 
 #### = 3.0.6 (December 29, 2018) =
 

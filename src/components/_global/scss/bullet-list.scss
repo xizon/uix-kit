@@ -63,6 +63,23 @@ ol.uix-list--normal,
     list-style-type: decimal;
 }
 
+/*-- Noemal List Effect by Default --*/
+/* Compatible with  Uix Shortcodes (WordPress Plugin) */
+.uix-list--normal a:not(.uix-sc-btn) {
+    color: $highlight-color1;
+}
+
+.uix-list--normal a:not(.uix-sc-btn):not(.uix-btn):hover {
+    color: $highlight-color2;
+    text-decoration: underline;
+}
+
+.uix-list--normal a:not(.uix-sc-btn):hover img {
+    text-decoration: none;
+}
+
+
+
 /* 
  ---------------------------
  2. Normal Numbers Ordered List
@@ -297,4 +314,6 @@ $step-line-color: #333;
     }
 
 }
+
+
 

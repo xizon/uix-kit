@@ -10,89 +10,131 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.LIGHTBOX               = APP.LIGHTBOX || {};
-	APP.LIGHTBOX.version       = '0.1.0';
+	APP.LIGHTBOX.version       = '0.1.2';
     APP.LIGHTBOX.pageLoaded    = function() {
 
 		if ( $( '.uix-lightbox__container' ).length == 0 ) {
-			$( 'body' ).prepend( '<div class="uix-lightbox__loading is-loaded uix-t-c"><i class="fa fa-spinner fa-spin"></i> Loading...</div><a class="uix-lightbox__original__close" href="#"></a><div class="uix-lightbox__container"><div class="uix-lightbox__inner"><div class="uix-lightbox__html"></div><span class="uix-lightbox__close"></span><p class="title"></p></div></div><div class="uix-lightbox__container-mask"></div><div class="uix-lightbox__close-fixed"></div>' );
+			$( 'body' ).prepend( '<div class="uix-lightbox__loading is-loaded uix-t-c"><i class="fa fa-spinner fa-spin"></i> Loading...</div><a class="uix-lightbox__original__close" href="javascript:void(0);"></a><div class="uix-lightbox__container"><div class="uix-lightbox__inner"><div class="uix-lightbox__html"></div><p class="title"></p></div></div><div class="uix-lightbox__container-mask"></div><div class="uix-lightbox__close"></div>' );
 		}
 		
-
-		var	$lbCon           = $( '.uix-lightbox__inner' ),
-			$lbWrapper       = $( '.uix-lightbox__container' ),
-			$lbMask          = $( '.uix-lightbox__container-mask' ),
-			lbCloseEl        = '.uix-lightbox__container .uix-lightbox__close',
-			lbCloseFixedEl   = '.uix-lightbox__close-fixed',
-			$lbLoader        = $( '.uix-lightbox__loading' ),
-			$lbLargeImgClose = $( '.uix-lightbox__original__close' ),
-			$lbContent       = $lbCon.find( '.uix-lightbox__html' ),
-			tempID           = 'lightbox-' + UIX_GUID.newGuid();
 		
-		$( document ).on( 'click touchstart', '.uix-lightbox__trigger', function() { 
+		
+		var	innerEl         = '.uix-lightbox__inner',
+			wrapperEl       = '.uix-lightbox__container',
+			loaderEl        = '.uix-lightbox__loading',
+			maskEl          = '.uix-lightbox__container-mask',
+			closeEl         = '.uix-lightbox__close',
+			largeImgCloseEl = '.uix-lightbox__original__close',
+			triggerEl       = '.uix-lightbox__trigger',
+			docURL          = window.location.href,
+			$content        = $( innerEl ).find( '.uix-lightbox__html' ),
+			customWidth     = 1000; //Match the width in the css file;
+		
+
+		//Detect URL change & Fire click event
+		window.addEventListener( 'popstate', function( e ) {
+		
+			var eleTarget = null;
+			
+			$( '[data-lb-ajax]' ).each( function() {
+				
+				var prevURL = decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent( 'uix-lightbox-ajaxURL' ).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+
+				if ( $( this ).attr( 'href' ) === prevURL ) {
+					eleTarget = this;
+				}
+				
+			});
+			
+			
+			var backURL = $( eleTarget ).data( 'lb-ajax-doc-url' );
+			if ( typeof backURL != typeof undefined ) {
+				lightboxClose( backURL );
+			}
+			
+			
+		});
+		
+		
+		
+		
+		$( document ).on( 'click', triggerEl, function() { 
 
 			var $this         = $( this ),
 				dataPhoto     = $this.data( 'lb-src' ),
 				dataHtmlID    = $this.data( 'lb-html' ),
 				dataFixed     = $this.data( 'lb-fixed' ),
 				dataMaskClose = $this.data( 'lb-mask-close' ),
-				dataMethod    = $this.data( 'lb-ajax-method' ),
-				dataAjaxCon   = $this.data( 'lb-ajax-content' ),
+				dataAjax      = $this.data( 'lb-ajax' ),
 				htmlContent   = '',
 				imgSrcStr     = '',
 				imgSrcStrToW  = '';
 			
-
-			
 		
-			if( typeof dataFixed === typeof undefined ) {
+			if ( typeof dataFixed === typeof undefined ) {
 				dataFixed = true;
 			}
-			if( typeof dataMaskClose === typeof undefined ) {
+			if ( typeof dataMaskClose === typeof undefined ) {
 				dataMaskClose = false;
 			}	
 			
-			if( typeof dataMethod === typeof undefined ) {
-				dataMethod = 'POST';
+			if ( typeof dataAjax === typeof undefined ) {
+				dataAjax = false;
+			}	
+			
+			if ( dataAjax ) {
+				$( wrapperEl ).addClass( 'js-uix-ajax' );
+				
+				//Record current page URL for history
+				if ( typeof $this.data( 'lb-ajax-doc-url' ) === typeof undefined ) $this.data( 'lb-ajax-doc-url', docURL );
+				
+				
 			}		
 			
 			//Display loading
-			$lbLoader.removeClass( 'is-loaded' );	
+			$( loaderEl ).removeClass( 'is-loaded' );	
 	
 			//Reset the wrapper position
-			$lbWrapper.css( 'margin-top', 0 );	
+			$( wrapperEl ).css( 'margin-top', 0 );	
 			
 
 			if ( !dataFixed ) {
-				$lbWrapper.addClass( 'js-uix-no-fixed' );
-				$( lbCloseEl ).addClass( 'js-uix-no-fixed' );
-				$( lbCloseFixedEl ).addClass( 'active' );
+				$( wrapperEl ).addClass( 'js-uix-no-fixed' );
+				$( closeEl ).addClass( 'active' );
 				
 				//Initialize the wrapper position
-				$lbWrapper.css( 'margin-top', $( window ).scrollTop() + 'px' );	
+				$( wrapperEl ).css( 'margin-top', $( window ).scrollTop() + 'px' );	
 				
 			}
 			
 			
 			//Reset current container type
-			$lbCon.removeClass( 'js-uix-custom js-uix-pure-image' );
+			$( innerEl ).removeClass( 'js-uix-custom js-uix-pure-image' );
 			
 		
 			// Locks the page
-			if ( !$lbWrapper.hasClass( 'js-uix-no-fixed' ) ) {
+			if ( !$( wrapperEl ).hasClass( 'js-uix-no-fixed' ) ) {
 				$.scrollLock( true );
 			}
+			
+			
+			// Show the lightbox
+			var showLightbox = function() {
+				$( closeEl ).addClass( 'active' );
+				$( wrapperEl ).show();
+				$( maskEl ).show();
+				$( innerEl ).show();	
+			};
 			
 			
 
 			//-------- If it is photo
 			//-----------------------------
-			if( typeof dataPhoto != typeof undefined && dataPhoto != '' ) {
+			if ( typeof dataPhoto != typeof undefined && dataPhoto != '' ) {
 				
+				//show the lightbox
+				showLightbox();
 				
-				$( lbCloseEl ).show();
-				$lbWrapper.show();
-				$lbMask.show();
-				$lbCon.show();
 				
 				if ( dataPhoto.indexOf( '[' ) >= 0 &&  dataPhoto.indexOf( ']' ) >= 0 ) {
 					imgSrcStr = JSON.parse( dataPhoto.replace(/([a-zA-Z0-9]+?):/g, '"$1":').replace(/'/g,'"') );
@@ -100,7 +142,6 @@ APP = ( function ( APP, $, window, document ) {
 					imgSrcStr = dataPhoto;
 					
 				}
-				
 				
 				//Judging whether multiple image sets
 				if ( Object.prototype.toString.call( imgSrcStr ) =='[object Array]' ) {
@@ -114,9 +155,10 @@ APP = ( function ( APP, $, window, document ) {
 					largePhotos += '<div class="uix-lightbox__photo-container uix-lightbox__photo-sets-container"><a href="javascript:" class="uix-lightbox__photo-sets__prev"></a><a href="javascript:" class="uix-lightbox__photo-sets__next"></a><ul>';
 					for ( var i = 0; i < imgSrcStr.length; i++ ) {
 						
+						var tempID = 'lightbox-' + UIX_GUID.newGuid();
 						
 						largePhotos += '<li>';
-						largePhotos += '	<a class="uix-lightbox__original__link" href="#'+tempID+'-sets-'+i+'">';
+						largePhotos += '	<a class="uix-lightbox__original__link" data-target-id="'+tempID+'-sets-'+i+'" href="javascript:void(0);">';
 						largePhotos += '	   <img src="'+ imgSrcStr[i].large +'" alt="">';
 						largePhotos += '	</a>';
 						largePhotos += '	<div class="uix-lightbox__original__target" id="'+tempID+'-sets-'+i+'">';
@@ -143,10 +185,12 @@ APP = ( function ( APP, $, window, document ) {
 					
 				} else {
 
+					var tempID = 'lightbox-' + UIX_GUID.newGuid();
+					
 					//Only one image
 					imgSrcStrToW = imgSrcStr;
 					htmlContent += '<div class="uix-lightbox__photo-container">';
-					htmlContent += '	<a class="uix-lightbox__original__link" href="#'+tempID+'">';
+					htmlContent += '	<a class="uix-lightbox__original__link" data-target-id="'+tempID+'" href="javascript:void(0);">';
 					htmlContent += '	   <img src="'+ imgSrcStr +'" alt="">';
 					htmlContent += '	</a>';
 					htmlContent += '	<div class="uix-lightbox__original__target" id="'+tempID+'">';
@@ -156,10 +200,10 @@ APP = ( function ( APP, $, window, document ) {
 					
 				}
 						
-				$lbContent.html( htmlContent ).promise().done( function(){
+				$content.html( htmlContent ).promise().done( function(){
 
 					//Set current container type
-					$lbCon.addClass( 'js-uix-pure-image' );
+					$( innerEl ).addClass( 'js-uix-pure-image' );
 
 					//Set container width
 					var img = new Image();
@@ -167,14 +211,14 @@ APP = ( function ( APP, $, window, document ) {
 					img.onload = function() {
 						
 						//remove loading
-						$lbLoader.addClass( 'is-loaded' );
+						$( loaderEl ).addClass( 'is-loaded' );
 						
 						var sw     = window.innerWidth - 30,
 							ow     = this.width,
 							oh     = this.height,
 							ratioH = oh/ow,
 							ratioW = ow/oh,
-							w      = ( ow > 1000 ) ? 1000 : ow,
+							w      = ( ow > customWidth ) ? customWidth : ow,
 							h;
 				
 						if ( w > sw ) w = sw;
@@ -186,7 +230,7 @@ APP = ( function ( APP, $, window, document ) {
 						if ( h > window.innerHeight ) h = window.innerHeight * 0.95;
 						
 					
-						$lbCon.css( {
+						$( innerEl ).css( {
 							'width': w + 'px'
 						} );
 						
@@ -199,24 +243,25 @@ APP = ( function ( APP, $, window, document ) {
 						
 						
 						//Set a new height & width of inside images
-						$lbContent.find( '.uix-lightbox__photo-sets-container ul > li img' ).css( {
+						$content.find( '.uix-lightbox__photo-sets-container ul > li img' ).css( {
 							'height': h + 'px'
 						} );
 
 						
 						if ( ! $( 'body' ).hasClass( 'rtl' ) ) {
-							$lbContent.find( '.uix-lightbox__photo-sets-container' ).css( {
+							$content.find( '.uix-lightbox__photo-sets-container' ).css( {
 								'width': 'calc('+ h*ratioW +'px + 6rem)',
 								'margin-left': '-3rem'
 							} );
 	
 						} else {
-							$lbContent.find( '.uix-lightbox__photo-sets-container' ).css( {
+							$content.find( '.uix-lightbox__photo-sets-container' ).css( {
 								'width': 'calc('+ h*ratioW +'px + 6rem)',
 								'margin-right': '-3rem'
 							} );
 	
 						}
+						
 						
 						
 						//If the image is larger than the current window, it will display at the top.
@@ -234,7 +279,7 @@ APP = ( function ( APP, $, window, document ) {
 					};
 					
 					
-					$lbCon.find( '> .uix-lightbox__html' ).removeClass( 'js-uix-no-img' );
+					$( innerEl ).find( '> .uix-lightbox__html' ).removeClass( 'js-uix-no-img' );
 
 				});		
 
@@ -242,81 +287,251 @@ APP = ( function ( APP, $, window, document ) {
 			}	
 			
 			
+			
+			
+			
 			//-------- If it is not photo
 			//-----------------------------
-			if( typeof dataHtmlID != typeof undefined && dataHtmlID != '' ) {
+			if ( typeof dataHtmlID != typeof undefined && dataHtmlID != '' ) {
 				dataHtmlID = dataHtmlID.replace( '#', '' );
 
-				$( lbCloseEl ).show();
-				$lbWrapper.show();
-				$lbMask.show();
-				$lbCon.show();
-				$lbContent.html( $( '#' + dataHtmlID ).html() ).promise().done( function(){
+				var $htmlContentContainer = $( '#' + dataHtmlID ).find( '.uix-lightbox__content > div' );
+				
+				// hide the ajax content container
+				TweenMax.set( $htmlContentContainer, {
+					css         : {
+						'display' : 'none'
+					}
+				});	
+
+				
+				//show the lightbox
+				showLightbox();
+				
+				
+				var htmlContentLoaded = function() {
+					//remove loading
+					$( loaderEl ).addClass( 'is-loaded' );
 					
 					//Set current container type
-					$lbCon.addClass( 'js-uix-custom' );
+					$( innerEl ).addClass( 'js-uix-custom' );
 					
 					//Set container width
-					if ( $lbCon.find( '> .uix-lightbox__html .uix-lightbox__content' ).length > 0 ) {
+					if ( $( innerEl ).find( '> .uix-lightbox__html .uix-lightbox__content' ).length > 0 ) {
 						
 						if ( window.innerWidth <= 768 ) {
-							$lbCon.css( 'width', window.innerWidth - 10 + 'px' );
+							$( innerEl ).css( 'width', window.innerWidth - 10 + 'px' );
 						} else {
-							$lbCon.css( 'width', $lbCon.find( '> .uix-lightbox__html .uix-lightbox__content' ).width() + 'px' );
+							$( innerEl ).css( 'width', $( innerEl ).find( '> .uix-lightbox__html .uix-lightbox__content' ).width() + 'px' );
 						}
 						
 						
-						$lbCon.find( '> .uix-lightbox__html' ).addClass( 'js-uix-no-img' );
 						
-						
-						//Ajax-loaded content
-						if( typeof dataAjaxCon != typeof undefined && dataAjaxCon != '' ) {
-							
-							var $ajaxContentContainer = $lbCon.find( '> .uix-lightbox__html .uix-lightbox__content > div' );
-							
-							$ajaxContentContainer.html( $ajaxContentContainer.data( 'loading-text' ) );
-							
-							$.ajax({
-								url      : dataAjaxCon,
-								method   : dataMethod,
-								dataType : 'html',
-								success  : function( response ) { 
-									$ajaxContentContainer.html( $( response ).find( '.uix-entry__content' ).html() );
+						$( innerEl ).find( '> .uix-lightbox__html' ).addClass( 'js-uix-no-img' );
 
-								 },
-								 error : function( XMLHttpRequest, textStatus, errorThrown ) {
-
-								 }
-							});
-
-						}
-						
 						
 					}
+						
+					
+				};
+				
+				
+				
+				if ( $( wrapperEl ).hasClass( 'js-uix-ajax' ) ) {
 
-				});
+					//Add content to the dynamic AJAX container
+					var ajaxURL               = $this.attr( 'href' ),
+						ajaxConfig            = dataAjax;
+
+
+					// Modify the URL without reloading the page
+					if( history.pushState ) {
+						history.pushState( null, null, ajaxURL );
+
+					} else {
+						location.hash = ajaxURL;
+					}
+
+					document.cookie = 'uix-lightbox-ajaxURL=' + ajaxURL;
+
+					$.ajax({
+						timeout  : 15000,
+						url      : ajaxURL,
+						method   : ajaxConfig.method,
+						dataType : 'html',
+						success  : function( response ) {
+
+							$htmlContentContainer.html( $( response ).find( dataAjax.target ).html() ).promise().done( function(){
+								
+
+								
+								//Add content to the dynamic lightbox container
+								$content.html( $( '#' + dataHtmlID ).html() ).promise().done( function(){
+									
+									// Apply the original scripts
+									$( document ).applyOriginalSomeScripts({
+										lightBox : false
+									});
+									
+									htmlContentLoaded();
+								});	
+								
+
+							});
+
+
+							
+							
+
+						},
+						error: function(){
+							window.location.href = ajaxURL;
+						},
+						beforeSend: function() {
+							$htmlContentContainer.html( ajaxConfig.loading );
+							
+							// show the ajax content container
+							TweenMax.set( $htmlContentContainer, {
+								css         : {
+									'display' : 'block'
+								},
+								onComplete  : function() {
+									TweenMax.to( this.target, 0.5, {
+										alpha : 1
+									});
+								}
+							});		
+							
+						}
+					}).fail( function( jqXHR, textStatus ) {
+						if( textStatus === 'timeout' ) {
+							window.location.href = ajaxURL;
+						}
+					});		
+					
+
+					
+				} else {
+					
+					// show the ajax content container
+					TweenMax.set( $htmlContentContainer, {
+						css         : {
+							'display' : 'block'
+						},
+						onComplete  : function() {
+							TweenMax.to( this.target, 0.5, {
+								alpha : 1
+							});
+						}
+					});		
+
+
+					
+					//Add content to the dynamic lightbox container
+					$content.html( $( '#' + dataHtmlID ).html() ).promise().done( function(){
+						htmlContentLoaded();
+					});	
+				}
+
+				
+				
+
 				
 				
 
 			}	
 			
+			
+			return false;
+			
 
-		});
+		}); /* end click event for triggerEl */
+		
+		
 
 		
-		//Close the window
-		$( document ).on( 'click', lbCloseEl, function() {
-			customLBCloseEvent();
-		});
-
-		
-		$( document ).on( 'click', lbCloseFixedEl, function() {
-			customLBCloseEvent();
+		//Close the lightbox
+		$( document ).on( 'click', closeEl + ',' + maskEl, function() {
+			lightboxClose( docURL );
 		});	
 		
 
-		//Click thumbnail to switch large photo
 		
+		$( document ).on( 'click', '.uix-lightbox__thumb-container li', function() {
+			lightboxThumbSwitch( $( this ).index(), $( this ) );
+			
+		});		
+		
+		
+		
+		$( document ).on( 'click', '.uix-lightbox__photo-sets-container > a', function() {
+			var $largePhoto = $( this ).closest( '.uix-lightbox__html' ).find( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' ),
+				$thumb      = $( this ).closest( '.uix-lightbox__html' ).find( '.uix-lightbox__thumb-container li' ),
+				total       = $thumb.length,
+				curIndex    = $thumb.filter( '.active' ).index(),
+				prevIndex   = curIndex - 1,
+				nextIndex   = curIndex + 1;
+			
+			
+			if ( prevIndex < 0 ) prevIndex = total - 1;
+			if ( nextIndex > total - 1 ) nextIndex = 0;
+			
+			
+			if ( $( this ).hasClass( 'uix-lightbox__photo-sets__prev' ) ) {
+				lightboxThumbSwitch( prevIndex, $thumb.eq( prevIndex ) );
+			}
+			
+			if ( $( this ).hasClass( 'uix-lightbox__photo-sets__next' ) ) {
+				lightboxThumbSwitch( nextIndex, $thumb.eq( nextIndex ) );
+			}
+			
+			
+		});		
+		
+		
+		//Close/Open enlarge image
+		if ( window.innerWidth > 768 ) {
+
+			$( document ).on( 'click', '.uix-lightbox__original__link', function( e ) {
+
+				$( '.uix-lightbox__original__target#' + $( this ).data( 'target-id' ) ).addClass( 'active' );
+
+
+				if ( $( this ).closest( '.uix-lightbox__container.js-uix-no-fixed' ).length > 0 ) {
+					$( '.uix-lightbox__container.js-uix-no-fixed, .uix-lightbox__original__target--imgfull' ).addClass( 'no-fixed-imgEnlarged' );
+				}
+
+
+				//---
+				$( 'html' ).css( 'overflow-y', 'hidden' );
+				$( largeImgCloseEl ).addClass( 'active' );
+
+			});	
+
+			$( document ).on( 'click', largeImgCloseEl, function( e ) {
+
+				$( '.uix-lightbox__original__target' ).removeClass( 'active' );
+				$( '.uix-lightbox__container.js-uix-no-fixed, .uix-lightbox__original__target--imgfull' ).removeClass( 'no-fixed-imgEnlarged' );
+
+
+				//---
+				$( this ).removeClass( 'active' );
+				$( 'html' ).css( 'overflow-y', 'auto' );
+
+			});	
+		}
+
+
+		
+		
+		
+		/*
+		 * Click thumbnail to show large photo
+		 *
+		 * @param  {Number} index           - The target index of large photo.
+		 * @param  {Object} obj             - Target large image <li>.
+		 * @return {Void}                   - The constructor.
+		 */
 		function lightboxThumbSwitch( index, obj ) {
 			var $largePhoto = obj.closest( '.uix-lightbox__html' ).find( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' ),
 				$thumb      = obj.closest( '.uix-lightbox__html' ).find( '.uix-lightbox__thumb-container li' ),
@@ -326,8 +541,8 @@ APP = ( function ( APP, $, window, document ) {
 			$thumb.removeClass( 'active' );
 			obj.addClass( 'active' );
 			
-			$largePhoto.find( 'li' ).fadeOut( 300 ).removeClass( 'active' );
-			$largePhoto.find( 'li' ).eq( index ).addClass( 'active' ).fadeIn( 300, function() {
+			$largePhoto.find( 'li' ).hide().removeClass( 'active' );
+			$largePhoto.find( 'li' ).eq( index ).addClass( 'active' ).show( 400, function() {
 				
 				//Reset the container height
 				var imgClick = new Image();
@@ -335,15 +550,14 @@ APP = ( function ( APP, $, window, document ) {
 				imgClick.onload = function() {
 					
 					//remove loading
-					$lbLoader.addClass( 'is-loaded' );
-
+					$( loaderEl ).addClass( 'is-loaded' );
 
 					
 					var sw     = window.innerWidth - 30,
 						ow     = this.width,
 						oh     = this.height,
 						ratioH = oh/ow,
-						w      = ( ow > 1000 ) ? 1000 : ow,
+						w      = ( ow > customWidth ) ? customWidth : ow,
 						h;
 					
 
@@ -383,84 +597,41 @@ APP = ( function ( APP, $, window, document ) {
 		}
 		
 		
-		
-		$( document ).on( 'click', '.uix-lightbox__thumb-container li', function() {
-			lightboxThumbSwitch( $( this ).index(), $( this ) );
+		/*
+		 * Close the lightbox
+		 *
+		 * @param  {String} url             - The current page URL for history.
+		 * @return {Void}                   - The constructor.
+		 */
+		function lightboxClose( url ) {
 			
-		});		
-		
-		$( document ).on( 'click', '.uix-lightbox__photo-sets-container > a', function() {
-			var $largePhoto = $( this ).closest( '.uix-lightbox__html' ).find( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' ),
-				$thumb      = $( this ).closest( '.uix-lightbox__html' ).find( '.uix-lightbox__thumb-container li' ),
-				total       = $thumb.length,
-				curIndex    = $thumb.filter( '.active' ).index(),
-				prevIndex   = curIndex - 1,
-				nextIndex   = curIndex + 1;
-			
-			
-			if ( prevIndex < 0 ) prevIndex = total - 1;
-			if ( nextIndex > total - 1 ) nextIndex = 0;
-			
-			
-			if ( $( this ).hasClass( 'uix-lightbox__photo-sets__prev' ) ) {
-				lightboxThumbSwitch( prevIndex, $thumb.eq( prevIndex ) );
+			//Detect URL change when AJAX calls are done
+			if ( $( wrapperEl ).hasClass( 'js-uix-ajax' ) ) {
+				history.pushState( null, null, url );
 			}
-			
-			if ( $( this ).hasClass( 'uix-lightbox__photo-sets__next' ) ) {
-				lightboxThumbSwitch( nextIndex, $thumb.eq( nextIndex ) );
-			}
-			
-			
-		});		
-		
-		
-		
-		
-		function customLBCloseEvent() {
+
 			//Remove all dynamic classes
-			$lbWrapper.removeClass( 'js-uix-no-fixed' );
-			$( lbCloseEl ).removeClass( 'js-uix-no-fixed' );
-			$( lbCloseFixedEl ).removeClass( 'active' );
+			$( wrapperEl ).removeClass( 'js-uix-no-fixed js-uix-ajax' );
+			$( closeEl ).removeClass( 'active' );
 			
+			//Add a scroll bar.
 			$( 'html' ).css( 'overflow-y', 'auto' );
 			
 			//Reset current container type
-			$lbCon.removeClass( 'js-uix-custom js-uix-pure-image' );
+			$( innerEl ).removeClass( 'js-uix-custom js-uix-pure-image' );
 			
 			
 			//close windows
-			$lbWrapper.hide();
-			$lbMask.hide();
+			$( wrapperEl ).hide();
+			$( maskEl ).hide();
 			
-			
-			//Changing The Site URL
-			var href = window.location.href.substr( 0, window.location.href.indexOf( '#' ) );
-			history.pushState( '', document.title, href );
 			
 			// Unlocks the page
 			$.scrollLock( false );
 	
 			
 		}
-		
-		
-		
-		
-		
-		
-		//Close/Open enlarge image
-		$( document ).on( 'click', '.uix-lightbox__original__link', function( e ) {
-			$( 'html' ).css( 'overflow-y', 'hidden' );
-			$lbLargeImgClose.addClass( 'active' );
-
-		});	
-		
-		$( document ).on( 'click', '.uix-lightbox__original__close', function( e ) {
-            $lbLargeImgClose.removeClass( 'active' );
-			$( 'html' ).css( 'overflow-y', 'auto' );
-		});
-
-		
+	
 		
 		
 		    

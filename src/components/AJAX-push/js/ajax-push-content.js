@@ -3,11 +3,12 @@
  * <!-- Ajax Push Content  -->
  *************************************
  */
+
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.AJAX_PUSH_CONTENT               = APP.AJAX_PUSH_CONTENT || {};
-	APP.AJAX_PUSH_CONTENT.version       = '0.0.5';
+	APP.AJAX_PUSH_CONTENT.version       = '0.0.7';
     APP.AJAX_PUSH_CONTENT.documentReady = function( $ ) {
 
 		
@@ -21,13 +22,11 @@ APP = ( function ( APP, $, window, document ) {
 			thisPageTitle = document.title;
 		
 		
-
-		
-		
 		//Click event
 		$( document ).on( 'click', '[data-ajax-push-content]', function( event ) {
 			
 			event.preventDefault();
+			
 			
 			
 			var $this               = $( this ),
@@ -35,7 +34,7 @@ APP = ( function ( APP, $, window, document ) {
 				config              = $this.data( 'ajax-push-content' );
 			
 
-			if( typeof config == typeof undefined ) {
+			if ( typeof config == typeof undefined ) {
 				config = ajaxConfig;
 			}
 
@@ -75,21 +74,8 @@ APP = ( function ( APP, $, window, document ) {
 		});
 		
 		
-		
 
-		//Fire click event
-		var pushState = history.pushState;
-		history.pushState = function() {
-			pushState.apply( history, arguments );
-			fireClickEvents('pushState', arguments );
-		};
-
-		function fireClickEvents() {
-			//do something...
-		}
-
-		
-		//Detect URL change
+		//Detect URL change & Fire click event
 		window.addEventListener( 'popstate', function( e ) {
 		
 			var eleTarget = null,
@@ -116,9 +102,13 @@ APP = ( function ( APP, $, window, document ) {
 			});
 			
 			
-			var backConfig = $( eleTarget ).data( 'ajax-push-content' );
+			
+
+			
 			
 			//Push new content to target container
+			var backConfig = $( eleTarget ).data( 'ajax-push-content' );
+			
 			if ( typeof backConfig != typeof undefined ) {
 				pushAction( $( backConfig.container ), backConfig.target, backConfig.loading, goURL, backConfig.method, $( eleTarget ) );	
 			}
@@ -128,7 +118,6 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 		});
-		
 		
 		
 		
@@ -145,13 +134,16 @@ APP = ( function ( APP, $, window, document ) {
 		 * @return {Void}                   - The constructor.
 		 */
 		function pushAction( container, target, loading, url, method, btn ) {
-
+			
+			
 			if ( container.length == 0 ) return false;
 
+			
 			if ( typeof method === typeof undefined || method == '' ) {
 			    method = 'POST';
 			}
 		
+			
 			$.ajax({
 				timeout  : 15000,
 				url      : url,
@@ -181,7 +173,7 @@ APP = ( function ( APP, $, window, document ) {
 					});		
 
 
-					container.html( '<div class="ajax-content-loader">'+loading+'</div>' ).promise().done( function(){
+					container.html( '<div class="ajax-content-loader">'+loading+'</div>' ).promise().done( function() {
 
 						
 						
@@ -233,10 +225,8 @@ APP = ( function ( APP, $, window, document ) {
 						}
 					});
 					
-					
-
 					//The data returned from the server
-					container.html( content ).promise().done( function(){
+					container.html( content ).promise().done( function() {
 						
 						
 						// Apply the original scripts
@@ -272,8 +262,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 		}
 
-
-		
+			
 		
     };
 

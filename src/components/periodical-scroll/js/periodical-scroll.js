@@ -20,17 +20,17 @@ APP = ( function ( APP, $, window, document ) {
 				itemHeight  = $wrap.find( 'li:first' ).height();
 
 
-			if( typeof speed === typeof undefined ) {
+			if ( typeof speed === typeof undefined ) {
 				speed = 600;
 			}
 
-			if( typeof timing === typeof undefined ) {
+			if ( typeof timing === typeof undefined ) {
 				timing = 2000;
 			}	
 			
 			var $item     = $wrap.find( '> li' ),
 				moveY     = itemHeight*2,
-				timeline  = new TimelineLite({
+				timeline  = new TimelineMax({
 				onComplete: function() {
 					setTimeout( function() {
 						timeline.restart();

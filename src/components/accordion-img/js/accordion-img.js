@@ -32,19 +32,19 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			
-			if( typeof activeIndex === typeof undefined ) {
+			if ( typeof activeIndex === typeof undefined ) {
 				activeIndex = false;
 			}			
 			
-			if( typeof aEvent === typeof undefined ) {
+			if ( typeof aEvent === typeof undefined ) {
 				aEvent = 'click';
 			}	
 			
-			if( typeof outReset === typeof undefined ) {
+			if ( typeof outReset === typeof undefined ) {
 				outReset = true;
 			}	
 			
-			if( typeof widthShow === typeof undefined ) {
+			if ( typeof widthShow === typeof undefined ) {
 				widthShow = '60%';
 			}		
 			
@@ -84,7 +84,7 @@ APP = ( function ( APP, $, window, document ) {
 				}); 	
 			}
 			
-			if( typeof closeBtn != typeof undefined && closeBtn != false && closeBtn != '' ) {
+			if ( typeof closeBtn != typeof undefined && closeBtn != false && closeBtn != '' ) {
 				$( closeBtn ).on( 'click', function( e ) {
 					e.preventDefault();
 					itemInit();

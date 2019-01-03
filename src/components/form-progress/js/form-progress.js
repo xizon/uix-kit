@@ -44,7 +44,7 @@ APP = ( function ( APP, $, window, document ) {
 
 		//Get form transition speed
 		var dur = $formTarget.data( 'anime-speed' );
-		if( typeof dur === typeof undefined ) { 
+		if ( typeof dur === typeof undefined ) { 
 			dur = '0.5s';
 		}
 
@@ -180,7 +180,7 @@ APP = ( function ( APP, $, window, document ) {
 
 			//Get form transition speed
 			var dur = $formTarget.data( 'anime-speed' );
-			if( typeof dur === typeof undefined ) { 
+			if ( typeof dur === typeof undefined ) { 
 				dur = '0.5s';
 			}
 

@@ -150,9 +150,9 @@ APP = ( function ( APP, $, window, document ) {
 						dataTiming               = $this.data( 'timing' ),
 						dataLoop                 = $this.data( 'loop' );
 
-					if( typeof dataAuto === typeof undefined ) dataAuto = false;	
-					if( typeof dataTiming === typeof undefined ) dataTiming = 10000;
-					if( typeof dataLoop === typeof undefined ) dataLoop = false;
+					if ( typeof dataAuto === typeof undefined ) dataAuto = false;	
+					if ( typeof dataTiming === typeof undefined ) dataTiming = 10000;
+					if ( typeof dataLoop === typeof undefined ) dataLoop = false;
 
 
 					if ( dataAuto && !isNaN( parseFloat( dataTiming ) ) && isFinite( dataTiming ) ) {
@@ -240,9 +240,9 @@ APP = ( function ( APP, $, window, document ) {
 				dataDraggableCursor      = $this.data( 'draggable-cursor' );
 	
 			
-			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider__pagination';
-			if( typeof dataControlsArrows === typeof undefined || dataControlsArrows == false ) dataControlsArrows = '.uix-advanced-slider__arrows';
-			if( typeof dataLoop === typeof undefined ) dataLoop = false;
+			if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider__pagination';
+			if ( typeof dataControlsArrows === typeof undefined || dataControlsArrows == false ) dataControlsArrows = '.uix-advanced-slider__arrows';
+			if ( typeof dataLoop === typeof undefined ) dataLoop = false;
 			if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
 			if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
 				
@@ -487,11 +487,11 @@ APP = ( function ( APP, $, window, document ) {
 				dataLoop                 = slider.data( 'loop' );
 			
 
-			if( typeof dataCountTotal === typeof undefined ) dataCountTotal = 'p.count em.count';
-			if( typeof dataCountCur === typeof undefined ) dataCountCur = 'p.count em.current';
-			if( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider__pagination';
-			if( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-slider__arrows';
-			if( typeof dataLoop === typeof undefined ) dataLoop = false;
+			if ( typeof dataCountTotal === typeof undefined ) dataCountTotal = 'p.count em.count';
+			if ( typeof dataCountCur === typeof undefined ) dataCountCur = 'p.count em.current';
+			if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider__pagination';
+			if ( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-slider__arrows';
+			if ( typeof dataLoop === typeof undefined ) dataLoop = false;
 					
 		
 		    //Prevent bubbling
@@ -650,23 +650,23 @@ APP = ( function ( APP, $, window, document ) {
 				$this.find( '.video-js' ).attr( 'id', curVideoID );
 
 				
-				if( typeof dataAuto === typeof undefined ) {
+				if ( typeof dataAuto === typeof undefined ) {
 					dataAuto = true;
 				}
-				if( typeof dataLoop === typeof undefined ) {
+				if ( typeof dataLoop === typeof undefined ) {
 					dataLoop = true;
 				}
 				
 
-				if( typeof dataControls === typeof undefined ) {
+				if ( typeof dataControls === typeof undefined ) {
 					dataControls = false;
 				}	
 				
-				if( typeof dataW === typeof undefined || dataW == 'auto' ) {
+				if ( typeof dataW === typeof undefined || dataW == 'auto' ) {
 					dataW = videoWrapperW;
 				}	
 
-				if( typeof dataH === typeof undefined || dataH == 'auto' ) {
+				if ( typeof dataH === typeof undefined || dataH == 'auto' ) {
 					dataH = videoWrapperW/1.77777777777778;
 				}
 

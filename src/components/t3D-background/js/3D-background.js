@@ -16,7 +16,7 @@ APP = ( function ( APP, $, window, document ) {
 			var config      = $( element ).data( '3d-animate' );
 			
 			
-			if( typeof config === typeof undefined ) {
+			if ( typeof config === typeof undefined ) {
 				config = false;
 			}
 

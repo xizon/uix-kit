@@ -108,6 +108,7 @@ $modal-box-radius: 8px;
 		top: 12px;
 		transform: rotate(45deg);
 		z-index: 1;
+		pointer-events: auto;
 		
 		&::after {
 			font-family: 'FontAwesome';
@@ -146,6 +147,19 @@ $modal-box-radius: 8px;
 	    top: 0;
 	}
 	
+	/* Video */
+	&.is-fullscreen.is-video.active {
+	    pointer-events: none;
+		
+		.uix-modal-box__video-container {
+			 > div.video-js,
+			iframe {
+				pointer-events: auto;
+			}
+		}
+	}
+	
+
 	&.active .uix-modal-box__content img, 
 	&.is-fullscreen.active .uix-modal-box__content img {
 		opacity: 1;
