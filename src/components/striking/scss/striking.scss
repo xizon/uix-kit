@@ -25,33 +25,33 @@
 	
 	&.uix-striking-msg--default {
 		background-color: rgba(252,232,220,1);
-		box-shadow:0 3px 15px 0 rgba(0,0,0,.1), 0 5px 10px -7px rgba(252,232,220,.3);		
+		box-shadow:0 3px 15px 0 rgba(0,0,0,.03), 0 5px 10px -7px rgba(252,232,220,.2);		
 
 	}
 
 	&.uix-striking-msg--success {
 		background-color: rgba(128,207,75,1);
-		box-shadow:0 3px 15px 0 rgba(0,0,0,.1), 0 5px 10px -7px rgba(128,207,75,.3);
+		box-shadow:0 3px 15px 0 rgba(0,0,0,.03), 0 5px 10px -7px rgba(128,207,75,.2);
 		color: #fff;
 	}
 
 
 	&.uix-striking-msg--alert {
 		background-color: rgba(245,146,86,1);
-		box-shadow:0 3px 15px 0 rgba(0,0,0,.1), 0 5px 10px -7px rgba(245,146,86,.3);
+		box-shadow:0 3px 15px 0 rgba(0,0,0,.03), 0 5px 10px -7px rgba(245,146,86,.2);
 		color: #fff;
 	}
 	
 	
 	&.uix-striking-msg--danger {
 		background-color: rgba(236, 94, 121,1);
-		box-shadow:0 3px 15px 0 rgba(0,0,0,.1), 0 5px 10px -7px rgba(236, 94, 121,.3);
+		box-shadow:0 3px 15px 0 rgba(0,0,0,.03), 0 5px 10px -7px rgba(236, 94, 121,.2);
 		color: #fff;
 	}
 
 	&.uix-striking-msg--info {
 		background-color: rgba(216,245,254,1);
-		box-shadow:0 3px 15px 0 rgba(0,0,0,.1), 0 5px 10px -7px rgba(216,245,254,.3);	
+		box-shadow:0 3px 15px 0 rgba(0,0,0,.03), 0 5px 10px -7px rgba(216,245,254,.2);	
 	}
 
 }

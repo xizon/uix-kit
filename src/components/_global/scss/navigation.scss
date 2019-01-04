@@ -82,6 +82,7 @@ $nav-mega-li-w    : 270px;
 			}
 			
 			ul {
+				
 				min-width: $nav-sub-w;
 				display: none;
 				position: absolute;
@@ -97,6 +98,7 @@ $nav-mega-li-w    : 270px;
 				opacity: 0;
 
 				&::before {
+					@include outer-shadow( 3 );
 					content: '';
 					display: block;
 					height: 100%;
@@ -124,6 +126,7 @@ $nav-mega-li-w    : 270px;
 		ul.sub-menu {
 			top: 100%;
 			left: 0;
+			
 				
 			a {
 				word-wrap: break-word;
@@ -144,6 +147,7 @@ $nav-mega-li-w    : 270px;
 
 		> li:not(.multi-column) > ul {
 			ul {
+				@include outer-shadow( 1 );
 				top: 0;
 				left: 100%;
 				background: #fff;
@@ -175,6 +179,7 @@ $nav-mega-li-w    : 270px;
 			white-space: nowrap;
 			display: none;
 			padding: 0;
+			
 
 			.multi-column-title {
 				text-transform: uppercase;

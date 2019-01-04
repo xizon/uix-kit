@@ -35,12 +35,6 @@
 		li {
 			display: inline-block;
 			font-size: 1rem;/*Fighting the Space Between Inline Block Elements*/
-		}
-
-		li,
-		div {
-
-			display: inline-block;
 
 			a, 
 			&.active > span, 

@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.0.8
+ * ## Version             :  3.0.9
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  January 3, 2019
+ * ## Last Update         :  January 4, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -82,35 +82,36 @@
     64.Fullwidth List of Split
     65.Mouse Animation Scroll
     66.Multiple Items Carousel
-    67.Overlay
-    68.Parallax
-    69.Periodical Scroll
-    70.Pricing
-    71.Progress Bar
-    72.Progress Line
-    73.Ribbon
-    74.Shape Animation
-    75.Show More Less
-    76.Comments ( Synchronize to WordPress's class name )
-    77.Editing Component
-    78.Source Code
-    79.Striking
-    80.SVG Map
-    81.3D Background
-    82.3D Carousel
-    83.Tabs
-    84.Team Focus
-    85.Team Fullwidth (Style using the Side by Side List With Photo module)
-    86.Team Gird
-    87.Testimonials Carousel
-    88.Text effect
-    89.Timeline
-    90.ToolTip
-    91.Vertical Menu
-    92.Vertical Separator
-    93.Wave Background
-    94.3rd Party Plugins
-    95.WordPress Core ( Do not use prefix "uix-" )
+    67.Navs
+    68.Overlay
+    69.Parallax
+    70.Periodical Scroll
+    71.Pricing
+    72.Progress Bar
+    73.Progress Line
+    74.Ribbon
+    75.Shape Animation
+    76.Show More Less
+    77.Comments ( Synchronize to WordPress's class name )
+    78.Editing Component
+    79.Source Code
+    80.Striking
+    81.SVG Map
+    82.3D Background
+    83.3D Carousel
+    84.Tabs
+    85.Team Focus
+    86.Team Fullwidth (Style using the Side by Side List With Photo module)
+    87.Team Gird
+    88.Testimonials Carousel
+    89.Text effect
+    90.Timeline
+    91.ToolTip
+    92.Vertical Menu
+    93.Vertical Separator
+    94.Wave Background
+    95.3rd Party Plugins
+    96.WordPress Core ( Do not use prefix "uix-" )
 
 
 */
@@ -1951,6 +1952,7 @@ img.uix-filter-hover--color,
         padding-top: 2.625rem;
         opacity: 0; }
         .uix-menu__container:not(.is-mobile) ul.uix-menu > li > ul::before {
+          box-shadow: 0 1.2vw 2vw -0.7vw rgba(0, 0, 0, 0.05);
           content: '';
           display: block;
           height: 100%;
@@ -1975,6 +1977,7 @@ img.uix-filter-hover--color,
           color: #000;
           background: #F1F1F1; }
     .uix-menu__container:not(.is-mobile) ul.uix-menu > li:not(.multi-column) > ul ul {
+      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
       top: 0;
       left: 100%;
       background: #fff;
@@ -2129,15 +2132,9 @@ img.uix-filter-hover--color,
       display: inline-block;
       font-size: 1rem;
       /*Fighting the Space Between Inline Block Elements*/ }
-    .uix-pagination__container ul.uix-pagination li,
-    .uix-pagination__container ul.uix-pagination div {
-      display: inline-block; }
       .uix-pagination__container ul.uix-pagination li a,
       .uix-pagination__container ul.uix-pagination li.active > span,
-      .uix-pagination__container ul.uix-pagination li > span.current,
-      .uix-pagination__container ul.uix-pagination div a,
-      .uix-pagination__container ul.uix-pagination div.active > span,
-      .uix-pagination__container ul.uix-pagination div > span.current {
+      .uix-pagination__container ul.uix-pagination li > span.current {
         display: inline-block;
         width: 3.125rem;
         height: 3.125rem;
@@ -2153,20 +2150,16 @@ img.uix-filter-hover--color,
         line-height: 3.25;
         margin-top: 0;
         margin-bottom: 2.06818181818rem; }
-      .uix-pagination__container ul.uix-pagination li a:hover,
-      .uix-pagination__container ul.uix-pagination div a:hover {
+      .uix-pagination__container ul.uix-pagination li a:hover {
         background: #efefef;
         color: #232323; }
-      .uix-pagination__container ul.uix-pagination li.active a,
-      .uix-pagination__container ul.uix-pagination div.active a {
+      .uix-pagination__container ul.uix-pagination li.active a {
         color: #989898;
         font-style: italic; }
-        .uix-pagination__container ul.uix-pagination li.active a:hover,
-        .uix-pagination__container ul.uix-pagination div.active a:hover {
+        .uix-pagination__container ul.uix-pagination li.active a:hover {
           background: #e7e7e7;
           color: #232323; }
-      .uix-pagination__container ul.uix-pagination li.active > span,
-      .uix-pagination__container ul.uix-pagination div.active > span {
+      .uix-pagination__container ul.uix-pagination li.active > span {
         background: #EC5E79;
         background: linear-gradient(to bottom, #EC5E79 0%, #E8588C 100%);
         color: #fff;
@@ -8834,6 +8827,101 @@ dl.uix-list-abreast {
   left: 600px; }
 
 /* ====================================================== 
+   <!-- Navs --> 
+/* ====================================================== */
+/*
+ * 1. Base Nav
+ * 2. Line Nav
+ * 3. Dropdown
+*/
+.uix-nav {
+  /* 
+	 ---------------------------
+	 1) Base Nav
+	 ---------------------------
+	 */
+  /* 
+	 ---------------------------
+	 2) Line Nav
+	 ---------------------------
+	 */
+  /* 
+	 ---------------------------
+	 3) Dropdown	
+	 ---------------------------
+	 */ }
+  .uix-nav::before {
+    display: table;
+    content: "";
+    line-height: 0; }
+  .uix-nav::after {
+    display: table;
+    content: "";
+    line-height: 0;
+    clear: both; }
+  .uix-nav ul {
+    margin: 0;
+    font-size: 0;
+    /*Fighting the Space Between Inline Block Elements*/ }
+    .uix-nav ul li {
+      position: relative;
+      display: inline-block;
+      font-size: 0.875rem;
+      /*Fighting the Space Between Inline Block Elements*/
+      margin: 0 1rem 1.5rem 0; }
+      .uix-nav ul li a {
+        padding: .5rem 1.5rem;
+        border: #e8e8e8 1px solid;
+        border-radius: 3px; }
+        .uix-nav ul li a:hover {
+          color: #232323; }
+      .uix-nav ul li.active a {
+        border-color: #EC5E79;
+        color: #EC5E79; }
+  .uix-nav.uix-nav--line ul li {
+    margin: 0;
+    padding: 1rem 2.5rem;
+    font-size: 1.25rem;
+    /*Fighting the Space Between Inline Block Elements*/ }
+    .uix-nav.uix-nav--line ul li a {
+      padding: 0;
+      border: none; }
+    .uix-nav.uix-nav--line ul li.active {
+      box-shadow: 0px 3px 0px 0px #EC5E79; }
+  .uix-nav ul li {
+    /*-- Fold Out --*/ }
+    .uix-nav ul li ul {
+      width: 200px;
+      position: absolute;
+      left: 0;
+      top: 100%;
+      z-index: 1;
+      max-height: 0;
+      overflow: hidden;
+      transform: perspective(400) rotate3d(1, 0, 0, -90deg);
+      transform-origin: 50% 0;
+      transition: all 0.3s ease;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02); }
+      .uix-nav ul li ul li,
+      .uix-nav ul li ul a {
+        border: none;
+        box-shadow: none;
+        margin: 0;
+        padding: 0;
+        display: block; }
+      .uix-nav ul li ul li {
+        padding: .3rem 1rem; }
+        .uix-nav ul li ul li:first-child {
+          margin-top: .5rem; }
+        .uix-nav ul li ul li:last-child {
+          margin-bottom: .5rem; }
+    .uix-nav ul li:hover ul {
+      max-height: 1000px;
+      transform: perspective(400) rotate3d(0, 0, 0, 0); }
+
+/* ====================================================== 
    <!-- Overlay -->    
 /* ====================================================== */
 .uix-overlay {
@@ -10515,22 +10603,22 @@ Style with support for rainbow parens
     border-radius: 4px; }
   .uix-striking-msg.uix-striking-msg--default {
     background-color: #fce8dc;
-    box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.1), 0 5px 10px -7px rgba(252, 232, 220, 0.3); }
+    box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.03), 0 5px 10px -7px rgba(252, 232, 220, 0.2); }
   .uix-striking-msg.uix-striking-msg--success {
     background-color: #80cf4b;
-    box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.1), 0 5px 10px -7px rgba(128, 207, 75, 0.3);
+    box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.03), 0 5px 10px -7px rgba(128, 207, 75, 0.2);
     color: #fff; }
   .uix-striking-msg.uix-striking-msg--alert {
     background-color: #f59256;
-    box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.1), 0 5px 10px -7px rgba(245, 146, 86, 0.3);
+    box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.03), 0 5px 10px -7px rgba(245, 146, 86, 0.2);
     color: #fff; }
   .uix-striking-msg.uix-striking-msg--danger {
     background-color: #ec5e79;
-    box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.1), 0 5px 10px -7px rgba(236, 94, 121, 0.3);
+    box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.03), 0 5px 10px -7px rgba(236, 94, 121, 0.2);
     color: #fff; }
   .uix-striking-msg.uix-striking-msg--info {
     background-color: #d8f5fe;
-    box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.1), 0 5px 10px -7px rgba(216, 245, 254, 0.3); }
+    box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.03), 0 5px 10px -7px rgba(216, 245, 254, 0.2); }
 
 /* ====================================================== 
    <!-- SVG Map -->     

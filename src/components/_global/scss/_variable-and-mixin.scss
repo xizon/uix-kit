@@ -242,7 +242,10 @@ $primary-bg-color      : transparent;
 		box-shadow: 0 1.8vw 4vw -.7vw #cbdfee;
 	}
 
-
+	@if ( $type == 3 ) {
+		box-shadow: 0 1.2vw 2vw -.7vw rgba(0, 0, 0, .05);
+	}
+	
 	
 }
 

@@ -1,5 +1,11 @@
 # Changelog
 
+
+#### = 3.0.9 (January 4, 2019) =
+
+* New: Add a new module "Navs".
+
+
 #### = 3.0.8 (January 3, 2019) =
 
 * Fix: Fixed an inaccurate error in the history of Ajax Page Loader.
