@@ -1,6 +1,11 @@
 # Changelog
 
 
+#### = 3.1.2 (January 5, 2019) =
+
+* Fix: Fixed a bug for ajax posts.
+* Tweak: Upgraded PIXI to v4.8.4. 
+
 
 #### = 3.1.1 (January 4, 2019) =
 

@@ -2,7 +2,7 @@
 
 
 [![Travis CI](https://api.travis-ci.org/xizon/uix-kit.svg?branch=master)](https://travis-ci.org/xizon/uix-kit/)
-[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=3.1.1&x2=0)](https://www.npmjs.com/package/uix-kit)
+[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=3.1.2&x2=0)](https://www.npmjs.com/package/uix-kit)
 [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
 
 
@@ -197,11 +197,12 @@ $ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
     <script src="assets/js/min/video.min.js?ver=7.4.1"></script> 
 	<script src="assets/js/min/jquery.waypoints.min.js?ver=4.0.1"></script> 
     <script src="assets/js/min/template7.min.js?ver=1.2.5"></script>
-    <script src="assets/js/min/TweenMax.min.js?ver=1.20.4"></script>
-    <script src="assets/js/min/pixi.min.js?ver=4.7.1"></script>
+    <script src="assets/js/min/TweenMax.min.js?ver=2.0.2"></script>
+    <script src="assets/js/min/pixi.min.js?ver=4.8.4"></script>
     <script src="assets/js/min/three.min.js?ver=r99"></script>
     <script src="assets/js/min/anime.min.js?ver=2.2.0"></script>
     <script src="assets/js/min/hammer.min.js?ver=2.0.8"></script>
+    
     
     <!-- Masonry -->
     <script src="assets/js/wp-jquery/masonry.min.js?ver=3.3.2"></script>

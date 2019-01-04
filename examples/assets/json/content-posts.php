@@ -25,7 +25,7 @@ if ( $page == 4 ) {
 		"items": [
 			{
 			  "img"     : "assets/images/demo/test-img-big-1.jpg",
-			  "title"   : "Project Title - PAGE 4",
+			  "title"   : "'.$title.'  - PAGE 4",
 			  "time"    : "December 10, 2017",
 			  "author"  : "David",
 			  "cat"     : "Art, Design",
@@ -37,7 +37,7 @@ if ( $page == 4 ) {
 			},
 			{
 			  "img"     : "assets/images/demo/test-img-big-3.jpg",
-			  "title"   : "Project Title Here - PAGE 4",
+			  "title"   : "'.$title.'  - PAGE 4",
 			  "time"    : "December 9, 2017",
 			  "author"  : "David",
 			  "cat"     : "Art, Design",
@@ -48,7 +48,7 @@ if ( $page == 4 ) {
 			},
 			{
 			  "img"     : "assets/images/demo/test-img-big-2.jpg",
-			  "title"   : "Project Title Here - PAGE 4",
+			  "title"   : "'.$title.'  - PAGE 4",
 			  "time"    : "December 8, 2017",
 			  "author"  : "David",
 			  "cat"     : "Art, Design",
@@ -71,7 +71,7 @@ if ( $page == 3 ) {
 		"items": [
 			{
 			  "img"     : "assets/images/demo/test-img-big-2.jpg",
-			  "title"   : "Project Title - PAGE 3",
+			  "title"   : "'.$title.'  - PAGE 3",
 			  "time"    : "December 10, 2017",
 			  "author"  : "David",
 			  "cat"     : "Art, Design",
@@ -83,7 +83,7 @@ if ( $page == 3 ) {
 			},
 			{
 			  "img"     : "assets/images/demo/test-img-big-5.jpg",
-			  "title"   : "Project Title Here - PAGE 3",
+			  "title"   : "'.$title.'  - PAGE 3",
 			  "time"    : "December 9, 2017",
 			  "author"  : "David",
 			  "cat"     : "Art, Design",
@@ -94,7 +94,7 @@ if ( $page == 3 ) {
 			},
 			{
 			  "img"     : "assets/images/demo/test-img-big-4.jpg",
-			  "title"   : "Project Title Here - PAGE 3",
+			  "title"   : "'.$title.'  - PAGE 3",
 			  "time"    : "December 8, 2017",
 			  "author"  : "David",
 			  "cat"     : "Art, Design",
@@ -162,7 +162,7 @@ if ( $page == 1 ) {
 		
 			{
 			  "img"     : "assets/images/demo/test-img-big-1.jpg",
-			  "title"   : "Project Title",
+			  "title"   : "'.$title.'",
 			  "time"    : "December 10, 2017",
 			  "author"  : "David",
 			  "cat"     : "Art, Design",
@@ -174,7 +174,7 @@ if ( $page == 1 ) {
 			},
 			{
 			  "img"     : "assets/images/demo/test-img-big-2.jpg",
-			  "title"   : "Project Title Here",
+			  "title"   : "'.$title.'",
 			  "time"    : "December 9, 2017",
 			  "author"  : "David",
 			  "cat"     : "Art, Design",
@@ -185,7 +185,7 @@ if ( $page == 1 ) {
 			},
 			{
 			  "img"     : "assets/images/demo/test-img-big-3.jpg",
-			  "title"   : "Project Title Here",
+			  "title"   : "'.$title.'",
 			  "time"    : "December 8, 2017",
 			  "author"  : "David",
 			  "cat"     : "Art, Design",

@@ -63,6 +63,7 @@ $button-class-margin-b: 1.5rem;
 
 	}
 
+	
 
 	&:hover {
 		background-position: 100% 0;
@@ -73,7 +74,9 @@ $button-class-margin-b: 1.5rem;
 		color: #fff;
 	}
 
-	
+	&.is-hide {
+		display: none;
+	}
 	
 	&.is-pill {
 		border-radius: 35px;

@@ -8,9 +8,9 @@
 /**
  * APP.POST_LIST_AJAX 
  * @global
- * @requires ./examples/assets/js/min/template7.min.js
- * @requires ./examples/assets/js/wp-jquery/masonry.min.js
- * @requires ./examples/assets/js/wp-jquery/imagesloaded.min.js
+ * @requires examples/assets/js/min/template7.min.js
+ * @requires examples/assets/js/wp-jquery/masonry.min.js
+ * @requires examples/assets/js/wp-jquery/imagesloaded.min.js
  */
 
 
@@ -18,7 +18,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.POST_LIST_AJAX               = APP.POST_LIST_AJAX || {};
-	APP.POST_LIST_AJAX.version       = '0.0.7';
+	APP.POST_LIST_AJAX.version       = '0.0.8';
     APP.POST_LIST_AJAX.documentReady = function( $ ) {
 
 		$( '[data-ajax-list-json]' ).each( function() {
@@ -45,7 +45,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 
-			if ( typeof pageParmStr === typeof undefined ) {
+			if( typeof pageParmStr === typeof undefined ) {
 				pageParmStr = {
 					'totalPage'     : 'total',
 					'currentPage'   : 'page',
@@ -53,52 +53,52 @@ APP = ( function ( APP, $, window, document ) {
 				};
 			}
 			
-			if ( typeof curPage === typeof undefined ) {
+			if( typeof curPage === typeof undefined ) {
 				curPage = 1;
 			}
 			
 			
-			if ( typeof perShow === typeof undefined ) {
+			if( typeof perShow === typeof undefined ) {
 				perShow = 8;
 			}
 			
-			if ( typeof totalPage === typeof undefined ) {
+			if( typeof totalPage === typeof undefined ) {
 				totalPage = 3;
 			}
 			
-			if ( typeof totalPage != typeof undefined && totalPage == '-1' ) {
+			if( typeof totalPage != typeof undefined && totalPage == '-1' ) {
 				totalPage = 9999;
 			}
 			
 			
-			if ( typeof trigger === typeof undefined ) {
+			if( typeof trigger === typeof undefined ) {
 				trigger = '.uix-load-more';
 			}
 			
-			if ( typeof infinitescroll === typeof undefined ) {
+			if( typeof infinitescroll === typeof undefined ) {
 				infinitescroll = false;
 			}	
 			
-			if ( typeof addition === typeof undefined ) {
+			if( typeof addition === typeof undefined ) {
 				addition = true;
 			}			
 			
 			
-			if ( typeof jsonFile === typeof undefined ) {
+			if( typeof jsonFile === typeof undefined ) {
 				jsonFile = '';
 			}		
 			
-			if ( typeof template7ID === typeof undefined ) {
+			if( typeof template7ID === typeof undefined ) {
 				template7ID = '';
 			}	
-			if ( typeof triggerActive === typeof undefined ) {
+			if( typeof triggerActive === typeof undefined ) {
 				triggerActive = 'active';
 			}		
 			
-			if ( typeof method === typeof undefined ) {
+			if( typeof method === typeof undefined ) {
 				method = 'POST';
 			}		
-			if ( typeof noneInfo === typeof undefined ) {
+			if( typeof noneInfo === typeof undefined ) {
 				noneInfo = '{"none":"","error":""}';
 			}
 			
@@ -108,7 +108,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			
-			if ( typeof pushContainer === typeof undefined ) {
+			if( typeof pushContainer === typeof undefined ) {
 				pushContainer = '.uix-ajax-items__container';
 				
 				if ( $this.find( pushContainer ).length == 0 ) {
@@ -154,7 +154,7 @@ APP = ( function ( APP, $, window, document ) {
 					
 					//Hide the next button 
 					if ( totalPage == 1 ) {
-						$button.addClass( 'hide' );	
+						$button.addClass( 'is-hide' );	
 					}
 					
 				
@@ -165,7 +165,7 @@ APP = ( function ( APP, $, window, document ) {
 						
 						var scrolled = $( window ).scrollTop();
 						
-						if ( scrolled >= parseFloat( $button.offset().top - window.innerHeight/2 - $button.outerHeight( true )*2 ) && !$button.hasClass( triggerActive ) ) {
+						if ( scrolled >= parseFloat( $button.offset().top - $( window ).height()/2 - $button.outerHeight( true )*2 ) && !$button.hasClass( triggerActive ) ) {
 
 								// Active this button
 								$button.addClass( triggerActive );					    
@@ -225,7 +225,7 @@ APP = ( function ( APP, $, window, document ) {
 						//--------------- Next Button ------------------
 						//Hide the next button 
 						if ( totalPage == 1 ) {
-							$( nextTrigger ).addClass( 'hide' );	
+							$( nextTrigger ).addClass( 'is-hide' );	
 						}
 
 						//Avoid using $( document ) to cause an asynchronous load without counting from 1
@@ -243,7 +243,7 @@ APP = ( function ( APP, $, window, document ) {
 							//Init button status
 							$( prevTrigger ).removeClass( triggerActive );
 							$( nextTrigger ).removeClass( triggerActive );
-							$( prevTrigger ).removeClass( 'hide' );
+							$( prevTrigger ).removeClass( 'is-hide' );
 							
 
 
@@ -269,7 +269,7 @@ APP = ( function ( APP, $, window, document ) {
 						
 						//----------------- Previous Button ----------------
 						//Hide the prev button 
-						$( prevTrigger ).addClass( 'hide' );
+						$( prevTrigger ).addClass( 'is-hide' );
 						
 						//Avoid using $( document ) to cause an asynchronous load without counting from 1
 						$( prevTrigger ).on( 'click', function( e ) {
@@ -286,7 +286,7 @@ APP = ( function ( APP, $, window, document ) {
 							//Init button status
 							$( prevTrigger ).removeClass( triggerActive );
 							$( nextTrigger ).removeClass( triggerActive );
-							$( nextTrigger ).removeClass( 'hide' );
+							$( nextTrigger ).removeClass( 'is-hide' );
 							
 
 
@@ -319,15 +319,17 @@ APP = ( function ( APP, $, window, document ) {
 
 						//Hide the next button 
 						if ( totalPage == 1 ) {
-							$( trigger ).addClass( 'hide' );	
+							$( trigger ).addClass( 'is-hide' );	
 
 						}
 
 						//Avoid using $( document ) to cause an asynchronous load without counting from 1
 						$( trigger ).on( 'click.POST_LIST_AJAX', function( e ) {
+							
 
 							e.preventDefault();
 
+							
 							var $button = $( this ),
 								curPage = $button.attr( 'data-cur-page' );
 
@@ -394,14 +396,16 @@ APP = ( function ( APP, $, window, document ) {
 				$button          = $( trigger );
 
 			
+			
+			
 			//hide the button and callback the information
 			var returnEmptyInfo = function() {
-				$button.addClass( 'hide' );
+				$button.addClass( 'is-hide' );
 				$divRoot.after( noneInfo.none );		
 			};
 			
 			var returnDataError = function() {
-				$button.addClass( 'hide' );
+				$button.addClass( 'is-hide' );
 				$divRoot.after( noneInfo.error );	
 			};
 			
