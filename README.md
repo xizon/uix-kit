@@ -2,7 +2,7 @@
 
 
 [![Travis CI](https://api.travis-ci.org/xizon/uix-kit.svg?branch=master)](https://travis-ci.org/xizon/uix-kit/)
-[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=3.1.0&x2=0)](https://www.npmjs.com/package/uix-kit)
+[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=3.1.1&x2=0)](https://www.npmjs.com/package/uix-kit)
 [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
 
 
@@ -159,14 +159,14 @@ $ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
 		============================================= -->
         
         <!-- Basic  -->
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css?ver=4.1.3" media="all"/>
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css?ver=4.2.1" media="all"/>
 		<link rel="stylesheet" href="assets/css/video.min.css?ver=7.4.1" media="all"/>
 		
         <!-- Icons  -->
         <link rel="stylesheet" href="assets/fonts/fontawesome/font-awesome.min.css?ver=4.5" media="all" />  
         
         <!-- Theme  -->
-        <link rel="stylesheet" href="../dist/uix-kit.min.css?ver=1.0.0" media="all"/>
+        <link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=1.0.0" media="all"/>
         
      
          <!--[if lt IE 10]>
@@ -223,7 +223,7 @@ $ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
 				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
 			};
     </script>  
-    <script src="../dist/uix-kit.min.js?ver=1.0.0"></script>
+    <script src="../dist/js/uix-kit.min.js?ver=1.0.0"></script>
 
 
   </body>
@@ -248,6 +248,26 @@ uix-kit/
 ├── package-lock.json
 ├── package.json
 ├── dist/
+│   ├── css/
+│   │   ├── uix-kit.css
+│   │   ├── uix-kit.css.map
+│   │   ├── uix-kit.min.css
+│   │   ├── uix-kit.min.css.map
+│   │   ├── uix-kit-rtl.css
+│   │   ├── uix-kit-rtl.css.map
+│   │   ├── uix-kit-rtl.min.css
+│   │   └── uix-kit-rtl.min.css.map
+│   └── js/
+│   │   ├── uix-kit.js
+│   │   ├── uix-kit.js.map
+│   │   ├── uix-kit.min.js
+│   │   ├── uix-kit.min.js.map
+│   │   ├── uix-kit-rtl.js
+│   │   ├── uix-kit-rtl.js.map
+│   │   ├── uix-kit-rtl.min.js
+│   │   ├── uix-kit-rtl.min.js.map
+│   │   ├── uix-kit.not-es6.dev.js
+│   │   └── uix-kit.not-es6.dev.js.map
 ├── misc/
 │   ├── screenshots/
 │   └── grid/

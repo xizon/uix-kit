@@ -123,8 +123,8 @@ const webpackConfig = {
 		'uix-kit-rtl.min': './'+globs.build+'/index-rtl.js',
 	},
     output: {
-        path: path.resolve(__dirname, './' + globs.dist ),
-        filename: '[name].js',
+        path: path.resolve(__dirname, './' + globs.dist + '/js' ),
+        filename: '[name].js'
     },
 
 	optimization: {
@@ -138,8 +138,7 @@ const webpackConfig = {
 			new MiniCssExtractPlugin({
 				// Options similar to the same options in webpackOptions.output
 				// both options are optional
-				filename: "[name].css",
-				chunkFilename: "[id].css"
+				filename: '../css/[name].css'
 			}),
 			new OptimizeCssAssetsPlugin({
 				assetNameRegExp: /\.min\.css$/g,
@@ -177,12 +176,7 @@ const webpackConfig = {
 
 					// fallback to style-loader in development
 					{
-						loader: MiniCssExtractPlugin.loader,
-						options: {
-							// you can specify a publicPath here
-							// by default it use publicPath in webpackOptions.output
-							publicPath: path.resolve(__dirname, './' + globs.dist )
-						}
+						loader: MiniCssExtractPlugin.loader
 					},
 					'css-loader',
 					'sass-loader',
@@ -312,7 +306,7 @@ targetTempFilesName.map( ( event ) => {
  */
 webpackConfig.plugins.push(
 	new webpack.SourceMapDevToolPlugin({
-	  filename: '[name].css.map',
+	  filename: '../css/[name].css.map',
 	}),
 
 );
@@ -492,9 +486,9 @@ server.listen( globs.port, "localhost", function (err, result) {
 compiler.plugin( 'done', () => { 
 	
 	
-	let mainJSFile            = './'+globs.dist+'/' + globs.notES6JS,
-		targetJSFile          = './'+globs.dist+'/uix-kit.js',
-		targetJSMinFile       = './'+globs.dist+'/uix-kit.min.js';
+	let mainJSFile            = './'+globs.dist+'/js/' + globs.notES6JS,
+		targetJSFile          = './'+globs.dist+'/js/uix-kit.js',
+		targetJSMinFile       = './'+globs.dist+'/js/uix-kit.min.js';
 	
 	
 	setTimeout ( () => {
@@ -539,7 +533,7 @@ compiler.plugin( 'done', () => {
 								
 								
 								// Build a table of contents (TOC)
-								['./'+globs.dist+'/uix-kit.css', './'+globs.dist+'/uix-kit-rtl.css', targetJSFile ].map( ( filepath ) => {
+								['./'+globs.dist+'/css/uix-kit.css', './'+globs.dist+'/css/uix-kit-rtl.css', targetJSFile ].map( ( filepath ) => {
 
 									if ( fs.existsSync( filepath ) ) {
 

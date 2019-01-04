@@ -1,6 +1,13 @@
 # Changelog
 
 
+
+#### = 3.1.1 (January 4, 2019) =
+
+* Tweak: Upgraded the core scaffolding.
+* Tweak: Upgraded Bootstrap to v4.2.1. 
+
+
 #### = 3.1.0 (January 4, 2019) =
 
 * Fix: Fixed a problem for dropdown-menu
