@@ -1,0 +1,333 @@
+/* ====================================================== 
+   <!-- Navs --> 
+/* ====================================================== */
+
+/*
+ * 1. Base Nav
+ * 2. Line Nav
+ * 3. Separation Line Nav
+ * 4. Dropdown
+ * 5. Responsive Dropdown Nav
+
+*/
+
+
+
+.uix-nav {
+	
+	&::before {
+		display: table;
+		content: "";
+		line-height: 0;
+	}
+	&::after {
+		display: table;
+		content: "";
+		line-height: 0;
+		clear: both;
+	}
+	
+	
+	/* 
+	 ---------------------------
+	 1. Base Nav
+	 ---------------------------
+	 */ 
+	ul {
+		margin: 0;
+		font-size: 0; /*Fighting the Space Between Inline Block Elements*/
+		
+		li {
+			position: relative;
+			display: inline-block;
+			font-size: 0.875rem;/*Fighting the Space Between Inline Block Elements*/
+			margin: 0 1rem 0 0;
+			padding: 0;
+
+			
+			a {
+				padding: .3rem 1.5rem;
+				border: #e8e8e8 1px solid;
+				border-radius: 3px;
+				display: block;
+				
+				&:hover {
+					color: #232323;	
+				}
+				
+			}
+
+			&.active,
+			/* compatible with WordPress */
+			&.current-cat {
+
+				a {
+					border-color: $highlight-color1;
+					color: $highlight-color1;
+				}
+
+			}	
+
+		}	
+		
+		
+	}
+	
+	&.uix-t-r {
+		ul {
+			li {
+				margin: 0 0 0 1rem;
+
+			}	
+
+		}	
+	}
+
+	
+	
+	/* 
+	 ---------------------------
+	 2. Line Nav
+	 ---------------------------
+	 */ 
+	&.uix-nav--line {
+		ul {
+			
+			li {
+				
+				margin: 0;
+				padding: 1rem 2.5rem;
+				font-size: 1.25rem;/*Fighting the Space Between Inline Block Elements*/
+
+				a {
+
+					padding: 0;
+					border: none;
+
+				}
+
+				&.active,
+				/* compatible with WordPress */
+				&.current-cat {
+					box-shadow: 0px 3px 0px 0px $highlight-color1;
+				}	
+
+			}	
+
+		}	
+	}
+	
+	
+	/* 
+	 ---------------------------
+	 3. Separation Line Nav
+	 ---------------------------
+	 */ 
+	&.uix-nav--separation {
+		ul {
+			
+			li {
+				
+				margin: 0;
+				padding: 0;
+
+				&::before {
+					content: '/';
+					opacity: .3;
+					position: absolute;
+					top: 50%;
+					left: 0;
+					transform: translateY(-50%);
+				}	
+
+				&:first-child {
+					
+					&::before {
+						display: none;
+					}
+				}	
+				
+				
+				a {
+
+					padding: .5rem 1.5rem;
+					border: none;
+
+				}
+
+				&.active,
+				/* compatible with WordPress */
+				&.current-cat {
+					
+				}	
+
+			}	
+
+		}	
+	}
+	
+	
+	
+	/* 
+	 ---------------------------
+	 4. Dropdown	
+	 ---------------------------
+	 */ 
+	ul {
+		
+		li {
+			
+			/*-- Fold Out --*/
+			ul {
+				width: 200px;
+				position: absolute;
+				left: 0;
+				top: 100%;
+				z-index: 1;
+				max-height: 0;
+				overflow: hidden;
+				transform: perspective(400) rotate3d(1, 0, 0, -90deg);
+				transform-origin: 50% 0;
+				transition: all 0.3s ease;
+				background: #fff;
+				border-radius: 8px;
+				@include outer-shadow( 1 );
+				
+				
+				li,
+				a {
+					border: none;
+					box-shadow: none;
+					margin: 0;
+					padding: 0;
+					
+				}
+				
+				li {
+					
+					padding: .3rem 1rem;
+					display: block;
+					
+					&::before {
+						display: none;
+					}
+					
+					&:first-child {
+						margin-top: .5rem;
+					}
+					
+					&:last-child {
+						margin-bottom: .5rem;
+					}
+					
+				}
+				
+			}
+
+			
+			&:hover ul {
+				max-height: 1000px;
+				transform: perspective(400) rotate3d(0, 0, 0, 0);
+			}
+
+		}	
+		
+		
+	}
+	
+	
+	/* 
+	 ---------------------------
+	 5. Responsive Dropdown Nav
+	 ---------------------------
+	 */ 
+	&.uix-nav--dropdown-mobile {
+		
+		.uix-nav--dropdown-mobile__togglelabel {
+			display: none;
+			
+			& ~ input {
+				display: none;
+			}	
+		}
+		
+
+	}
+
+}
+
+
+
+@media all and (max-width: 768px) {
+	
+	.uix-nav {
+		
+		/* 
+		 ---------------------------
+		 5. Responsive Dropdown Nav
+		 ---------------------------
+		 */ 
+		&.uix-nav--dropdown-mobile {
+
+			.uix-nav--dropdown-mobile__togglelabel {
+				display: block;
+				cursor: pointer;
+				user-select: none;
+			}
+
+			> ul {
+				@include outer-shadow( 1 );
+				margin-top: -0.203125rem;
+			}	
+
+			/* wrapping this in media querry to prevent fails while change screen size and checked inputs */
+			> :checked ~ ul {
+				display: none;
+			}
+
+			li {
+				padding: .2rem 0;
+				display: block;
+				width: 100%;
+				border-bottom: 1px solid rgba(0,0,0,.1);
+				text-align: left;
+
+				&::before {
+					display: none;
+				}
+				
+				&:not(:last-child) {
+					margin-right: 0;
+
+					&::after {
+						content: '';
+						margin-left: 0;
+					}
+				}
+
+				a {
+					display: block;
+					position: relative;
+					border: none;
+					padding: .5rem 1.5rem;
+
+					&::after {
+						font-family: 'FontAwesome';
+						content: "\f105";
+						font-size: 1rem;
+						float: right;
+						position: absolute;
+						right: .5rem;
+						top: 50%;
+						transform: translateY(-50%);
+					}	
+				}
+
+			}	
+
+
+		}	
+	}
+
+
+}

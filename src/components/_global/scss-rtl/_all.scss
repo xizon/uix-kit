@@ -30,13 +30,13 @@
 /* base */
 @import 'basic.scss';
 @import 'brand.scss';
-@import 'filterable-navigation.scss';
 @import 'header-area.scss';
 @import 'helper-classes.scss';
 @import 'layout.scss';
 @import 'mobile-menu.scss';
 @import 'modal-dialog.scss';
 @import 'navigation.scss';
+@import 'navs.scss';
 @import 'sidebar.scss';
 
 
@@ -54,7 +54,6 @@
 @import '../../list-bulleted/scss-rtl/list-bulleted.scss';
 @import '../../list-maintain-aspect-ratio/scss-rtl/list-maintain-aspect-ratio.scss';
 @import '../../list-side-by-side/scss-rtl/list-side-by-side.scss';
-@import '../../navs/scss-rtl/navs.scss';
 @import '../../single-post/scss-rtl/comments.scss';
 @import '../../source-code/scss-rtl/source-code.scss';
 @import '../../tooltip/scss-rtl/tooltip.scss';

@@ -2,7 +2,7 @@
  * 
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.0.9
+ * ## Version             :  3.1.0
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
  * ## Last Update         :  January 4, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -137,7 +137,7 @@ var UIX_KIT_IMPORT = {
   /******/
 
   /* pages */
-  "./src/components/_home/js/home.js", "./src/components/accordion-img/js/accordion-img.js", "./src/components/accordion/js/accordion.js", "./src/components/advanced-content-slider/js/advanced-content-slider.js", "./src/components/advanced-slider/js/advanced-slider-basic.js", "./src/components/advanced-slider/js/advanced-slider-SpecialEffects.js", "./src/components/AJAX-push/js/ajax-push-content.js", "./src/components/AJAX/js/ajax-page-loader.js", "./src/components/back-to-top/js/back-to-top.js", "./src/components/circle-layout/js/circle-layout.js", "./src/components/counter/js/counter.js", "./src/components/dropdown-menu/js/dropdown-menu.js", "./src/components/dropdown-menu2/js/dropdown-menu2.js", "./src/components/dynamic-dropdown-list-json/js/dynamic-dropdown-list-json.js", "./src/components/flexslider/js/custom-flexslider.js", "./src/components/flexslider/js/jquery.flexslider.js", "./src/components/floating-side-element/js/floating-side-element.js", "./src/components/form-progress/js/form-progress.js", "./src/components/form/js/form.js", "./src/components/form/js/jqueryui.datepicker.js", "./src/components/gallery/js/gallery.js", "./src/components/hover-delay-interaction/js/hover-delay-interaction.js", "./src/components/image-shapes/js/image-shapes.js", "./src/components/lava-lamp-style-menu/js/lava-lamp-style-menu.js", "./src/components/lightbox/js/lightbox.js", "./src/components/list-bulleted/js/list-bulleted.js", "./src/components/list-posts/js/list-posts-with-ajax.js", "./src/components/list-split-imagery/js/list-split-imagery.js", "./src/components/mousewheel-interaction/js/mousewheel-interaction.js", "./src/components/multi-items-carousel/js/multi-items-carousel.js", "./src/components/one-page/js/one-page.js", "./src/components/one-page2/js/one-page2.js", "./src/components/parallax/js/parallax.js", "./src/components/periodical-scroll/js/periodical-scroll.js", "./src/components/pricing/js/pricing.js", "./src/components/progress-bar/js/progress-bar.js", "./src/components/progress-line/js/progress-line.js", "./src/components/retina/js/retina.js", "./src/components/rotating-elements/js/rotating-elements.js", "./src/components/scroll-reveal/js/scroll-reveal.js", "./src/components/scrollspy-animate/js/scrollspy-animate.js", "./src/components/show-more-less/js/show-more-less.js", "./src/components/smooth-scrolling-anchor-link/js/smooth-scrolling-anchor-link.js", "./src/components/source-code/js/highlight.js", "./src/components/source-code/js/source-code.js", "./src/components/sticky-elements/js/sticky-elements.js", "./src/components/svg-map/js/svg-map-china.js", "./src/components/svg-map/js/svg-map-world.js", "./src/components/table-sorter/js/table-sorter.js", "./src/components/t3D-background-three/js/3D-background-three.js", "./src/components/t3D-background-three2/js/3D-background-three2.js", "./src/components/t3D-background/js/3D-background.js", "./src/components/t3D-carousel/js/3D-carousel.js", "./src/components/t3D-model/js/3D-model.js", "./src/components/t3D-pages/js/3D-pages.js", "./src/components/t3D-particle-effect/js/3D-particle-effect.js", "./src/components/t3D-sphere-three/js/3D-sphere-three.js", "./src/components/t3D-obj-anim-interaction/js/3D-obj-anim-interaction.js", "./src/components/tabs/js/tabs.js", "./src/components/team-focus/js/team-focus.js", "./src/components/text-effect/js/text-effect.js", "./src/components/timeline/js/timeline.js", "./src/components/vertical-menu/js/vertical-menu.js", "./src/components/wordpress/js/wp-core.js"]
+  "./src/components/_home/js/home.js", "./src/components/accordion-img/js/accordion-img.js", "./src/components/accordion/js/accordion.js", "./src/components/advanced-content-slider/js/advanced-content-slider.js", "./src/components/advanced-slider/js/advanced-slider-basic.js", "./src/components/advanced-slider/js/advanced-slider-SpecialEffects.js", "./src/components/AJAX-push/js/ajax-push-content.js", "./src/components/AJAX/js/ajax-page-loader.js", "./src/components/back-to-top/js/back-to-top.js", "./src/components/circle-layout/js/circle-layout.js", "./src/components/counter/js/counter.js", "./src/components/dropdown-menu/js/dropdown-menu.js", "./src/components/dropdown-menu2/js/dropdown-menu2.js", "./src/components/dynamic-dropdown-list-json/js/dynamic-dropdown-list-json.js", "./src/components/flexslider/js/custom-flexslider.js", "./src/components/flexslider/js/jquery.flexslider.js", "./src/components/floating-side-element/js/floating-side-element.js", "./src/components/form-progress/js/form-progress.js", "./src/components/form/js/form.js", "./src/components/form/js/jqueryui.datepicker.js", "./src/components/gallery/js/gallery.js", "./src/components/hover-delay-interaction/js/hover-delay-interaction.js", "./src/components/image-shapes/js/image-shapes.js", "./src/components/lava-lamp-style-menu/js/lava-lamp-style-menu.js", "./src/components/lightbox/js/lightbox.js", "./src/components/list-bulleted/js/list-bulleted.js", "./src/components/list-posts/js/list-posts-with-ajax.js", "./src/components/list-split-imagery/js/list-split-imagery.js", "./src/components/mousewheel-interaction/js/mousewheel-interaction.js", "./src/components/multi-items-carousel/js/multi-items-carousel.js", "./src/components/one-page/js/one-page.js", "./src/components/one-page2/js/one-page2.js", "./src/components/parallax/js/parallax.js", "./src/components/periodical-scroll/js/periodical-scroll.js", "./src/components/pricing/js/pricing.js", "./src/components/progress-bar/js/progress-bar.js", "./src/components/progress-line/js/progress-line.js", "./src/components/retina/js/retina.js", "./src/components/rotating-elements/js/rotating-elements.js", "./src/components/scroll-reveal/js/scroll-reveal.js", "./src/components/scrollspy-animate/js/scrollspy-animate.js", "./src/components/show-more-less/js/show-more-less.js", "./src/components/skew-on-scroll/js/skew-on-scroll.js", "./src/components/smooth-scrolling-anchor-link/js/smooth-scrolling-anchor-link.js", "./src/components/source-code/js/highlight.js", "./src/components/source-code/js/source-code.js", "./src/components/sticky-elements/js/sticky-elements.js", "./src/components/svg-map/js/svg-map-china.js", "./src/components/svg-map/js/svg-map-world.js", "./src/components/table-sorter/js/table-sorter.js", "./src/components/t3D-background-three/js/3D-background-three.js", "./src/components/t3D-background-three2/js/3D-background-three2.js", "./src/components/t3D-background/js/3D-background.js", "./src/components/t3D-carousel/js/3D-carousel.js", "./src/components/t3D-model/js/3D-model.js", "./src/components/t3D-pages/js/3D-pages.js", "./src/components/t3D-particle-effect/js/3D-particle-effect.js", "./src/components/t3D-sphere-three/js/3D-sphere-three.js", "./src/components/t3D-obj-anim-interaction/js/3D-obj-anim-interaction.js", "./src/components/tabs/js/tabs.js", "./src/components/team-focus/js/team-focus.js", "./src/components/text-effect/js/text-effect.js", "./src/components/timeline/js/timeline.js", "./src/components/vertical-menu/js/vertical-menu.js", "./src/components/wordpress/js/wp-core.js"]
 };
 
 // CONCATENATED MODULE: ./src/index.js
@@ -218,27 +218,28 @@ var UIX_KIT_IMPORT = {
     51.Scroll Reveal
     52.Scrollspy Animate
     53.Show More Less
-    54.Smooth Scrolling When Clicking An Anchor Link
-    55.Source Code View
-    56.Sticky Elements
-    57.SVG Map (China)
-    58.SVG Map (World)
-    59.Table Sorter
-    60.3D Background 2
+    54.Skew Based On Velocity of Scroll
+    55.Smooth Scrolling When Clicking An Anchor Link
+    56.Source Code View
+    57.Sticky Elements
+    58.SVG Map (China)
+    59.SVG Map (World)
+    60.Table Sorter
     61.3D Background 2
-    62.3D Background
-    63.3D Carousel
-    64.3D Model
-    65.3D Pages
-    66.3D Particle Effect
-    67.3D Sphere Rotation
-    68.3D Object Anim When Click
-    69.Tabs
-    70.Team Focus
-    71.Text effect
-    72.Timeline
-    73.Vertical Menu
-    74.WordPress Core Scripts
+    62.3D Background 2
+    63.3D Background
+    64.3D Carousel
+    65.3D Model
+    66.3D Pages
+    67.3D Particle Effect
+    68.3D Sphere Rotation
+    69.3D Object Anim When Click
+    70.Tabs
+    71.Team Focus
+    72.Text effect
+    73.Timeline
+    74.Vertical Menu
+    75.WordPress Core Scripts
 
 
 */
@@ -16557,23 +16558,28 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.DROPDOWN_MENU2               = APP.DROPDOWN_MENU2 || {};
-	APP.DROPDOWN_MENU2.version       = '0.0.1';
+	APP.DROPDOWN_MENU2.version       = '0.0.2';
     APP.DROPDOWN_MENU2.documentReady = function( $ ) {
 
-		var $verticalMenuLi = $( '.uix-vertical-menu li' );
+		var $verticalMenuLi       = $( '.uix-vertical-menu li' ),
+			verticalMenuAnimSpeed = 500;
 		
 		$verticalMenuLi.find( '> a' ).on( 'click', function( e ) {
 			e.preventDefault();
 			
 			//Hide other all sibling <ul> of the selected element
 			$( this ).parent( 'li' ).siblings()
-			                        .removeClass( 'active' )
-									.find( '> ul' ).slideUp( 500 );
+			                        .removeClass( 'active' );
 
+			
 			
 			var $sub = $( this ).parent( 'li' ).children( 'ul' );
 
-			$sub.slideToggle( 500 );
+			//close opend <ul>
+			$( this ).parent( 'li' ).siblings().find( '> ul' ).slideUp( verticalMenuAnimSpeed/2, function() {
+				$sub.slideToggle( verticalMenuAnimSpeed );
+			} );
+
 			$( this ).parent( 'li' ).toggleClass( 'active' );
 
         });
@@ -22376,7 +22382,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.GALLERY               = APP.GALLERY || {};
-	APP.GALLERY.version       = '0.0.1';
+	APP.GALLERY.version       = '0.0.2';
     APP.GALLERY.documentReady = function( $ ) {
 
 		$( '.uix-gallery' ).each( function() {
@@ -22427,7 +22433,7 @@ APP = ( function ( APP, $, window, document ) {
 						$filterOptions.find( 'li > a' ).on( 'click', function() {
 							  var $this       = $( this ),
 								  activeClass = 'current-cat',
-								  isActive    = $this.hasClass( activeClass ),
+								  isActive    = $this.parent().hasClass( activeClass ),
 								  group       = isActive ? 'all' : $this.data( 'group' );
 						
 							  // Hide current label, show current label in title
@@ -22435,7 +22441,7 @@ APP = ( function ( APP, $, window, document ) {
 								$filterOptions.find( '.' + activeClass ).removeClass( activeClass );
 							  }
 						
-							  $this.toggleClass( activeClass );
+							  $this.parent().toggleClass( activeClass );
 						
 							  // Filter elements
 							  $grid.shuffle( 'shuffle', group );
@@ -22451,7 +22457,7 @@ APP = ( function ( APP, $, window, document ) {
 		
 				
 			} else {
-				$( '[data-group="all"]' ).parent( 'li' ).hide();
+				$( '[data-group="all"]' ).parent( 'li' ).remove();
 			}
 	
 		}
@@ -26986,6 +26992,58 @@ APP = ( function ( APP, $, window, document ) {
     return APP;
 
 }( APP, jQuery, window, document ) );
+
+
+
+
+/* 
+ *************************************
+ * <!-- Skew Based On Velocity of Scroll -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.SKEW_ON_SCROLL               = APP.SKEW_ON_SCROLL || {};
+	APP.SKEW_ON_SCROLL.version       = '0.0.1';
+    APP.SKEW_ON_SCROLL.documentReady = function( $ ) {
+
+		$( '.uix-skewscroll-container' ).each( function() {
+		
+			var $this    = $( this ),
+				$animObj = $this.find( 'p' ),
+				followY  = 0,
+				ease     = 0.15;
+
+			
+			TweenMax.set( $animObj, {
+				transformOrigin: "center left"
+			});
+
+			TweenMax.ticker.addEventListener( 'tick', function() {
+				followY += ( window.scrollY - followY) * ease;
+
+				var dy = (window.scrollY - followY) / 20;
+				
+				dy = Math.min( Math.max(dy, -15), 15);
+				TweenLite.set( $animObj, {
+					skewY: dy
+				});
+			});
+				
+			
+			
+		});
+		
+		
+    };
+
+    APP.components.documentReady.push( APP.SKEW_ON_SCROLL.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
 
 
 

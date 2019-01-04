@@ -8,23 +8,28 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.DROPDOWN_MENU2               = APP.DROPDOWN_MENU2 || {};
-	APP.DROPDOWN_MENU2.version       = '0.0.1';
+	APP.DROPDOWN_MENU2.version       = '0.0.2';
     APP.DROPDOWN_MENU2.documentReady = function( $ ) {
 
-		var $verticalMenuLi = $( '.uix-vertical-menu li' );
+		var $verticalMenuLi       = $( '.uix-vertical-menu li' ),
+			verticalMenuAnimSpeed = 500;
 		
 		$verticalMenuLi.find( '> a' ).on( 'click', function( e ) {
 			e.preventDefault();
 			
 			//Hide other all sibling <ul> of the selected element
 			$( this ).parent( 'li' ).siblings()
-			                        .removeClass( 'active' )
-									.find( '> ul' ).slideUp( 500 );
+			                        .removeClass( 'active' );
 
+			
 			
 			var $sub = $( this ).parent( 'li' ).children( 'ul' );
 
-			$sub.slideToggle( 500 );
+			//close opend <ul>
+			$( this ).parent( 'li' ).siblings().find( '> ul' ).slideUp( verticalMenuAnimSpeed/2, function() {
+				$sub.slideToggle( verticalMenuAnimSpeed );
+			} );
+
 			$( this ).parent( 'li' ).toggleClass( 'active' );
 
         });

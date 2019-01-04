@@ -89,6 +89,7 @@ const UIX_KIT_IMPORT = { "files": [
 "./src/components/scroll-reveal/js/scroll-reveal.js",
 "./src/components/scrollspy-animate/js/scrollspy-animate.js",
 "./src/components/show-more-less/js/show-more-less.js",
+"./src/components/skew-on-scroll/js/skew-on-scroll.js",
 "./src/components/smooth-scrolling-anchor-link/js/smooth-scrolling-anchor-link.js",
 "./src/components/source-code/js/highlight.js",
 "./src/components/source-code/js/source-code.js",

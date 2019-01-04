@@ -1,9 +1,12 @@
 # Changelog
 
 
-#### = 3.0.9 (January 4, 2019) =
+#### = 3.1.0 (January 4, 2019) =
 
+* Fix: Fixed a problem for dropdown-menu
 * New: Add a new module "Navs".
+* New: Add a new module "Skew on Scroll".
+* Tweak: Merge some styles to simplify module style sheets.
 
 
 #### = 3.0.8 (January 3, 2019) =

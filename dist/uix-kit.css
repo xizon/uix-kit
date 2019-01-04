@@ -2,7 +2,7 @@
  * 
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.0.9
+ * ## Version             :  3.1.0
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
  * ## Last Update         :  January 4, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -20,15 +20,15 @@
     2.Brand
     3.Bullet List
     4.Entry
-    5.Filterable Navigation
-    6.Footer
-    7.Header Area
-    8.Helper Classes
-    9.Basic Layout Styles
-    10.Loader
-    11.Mobile Menu
-    12.Modal Dialog
-    13.Navigation
+    5.Footer
+    6.Header Area
+    7.Helper Classes
+    8.Basic Layout Styles
+    9.Loader
+    10.Mobile Menu
+    11.Modal Dialog
+    12.Navigation
+    13.Navs
     14.Onepage Menu
     15.Pagination
     16.Sidebar
@@ -82,36 +82,35 @@
     64.Fullwidth List of Split
     65.Mouse Animation Scroll
     66.Multiple Items Carousel
-    67.Navs
-    68.Overlay
-    69.Parallax
-    70.Periodical Scroll
-    71.Pricing
-    72.Progress Bar
-    73.Progress Line
-    74.Ribbon
-    75.Shape Animation
-    76.Show More Less
-    77.Comments ( Synchronize to WordPress's class name )
-    78.Editing Component
-    79.Source Code
-    80.Striking
-    81.SVG Map
-    82.3D Background
-    83.3D Carousel
-    84.Tabs
-    85.Team Focus
-    86.Team Fullwidth (Style using the Side by Side List With Photo module)
-    87.Team Gird
-    88.Testimonials Carousel
-    89.Text effect
-    90.Timeline
-    91.ToolTip
-    92.Vertical Menu
-    93.Vertical Separator
-    94.Wave Background
-    95.3rd Party Plugins
-    96.WordPress Core ( Do not use prefix "uix-" )
+    67.Overlay
+    68.Parallax
+    69.Periodical Scroll
+    70.Pricing
+    71.Progress Bar
+    72.Progress Line
+    73.Ribbon
+    74.Shape Animation
+    75.Show More Less
+    76.Comments ( Synchronize to WordPress's class name )
+    77.Editing Component
+    78.Source Code
+    79.Striking
+    80.SVG Map
+    81.3D Background
+    82.3D Carousel
+    83.Tabs
+    84.Team Focus
+    85.Team Fullwidth (Style using the Side by Side List With Photo module)
+    86.Team Gird
+    87.Testimonials Carousel
+    88.Text effect
+    89.Timeline
+    90.ToolTip
+    91.Vertical Menu
+    92.Vertical Separator
+    93.Wave Background
+    94.3rd Party Plugins
+    95.WordPress Core ( Do not use prefix "uix-" )
 
 
 */
@@ -655,92 +654,6 @@ ul.uix-entry__meta {
         color: #E8588C; }
   ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
     display: none; }
-
-/* ====================================================== 
-   <!-- Filterable Navigation -->                 
-/* ====================================================== */
-/*
- * 1. Default Navigation
- * 2. Responsive Dropdown Navigation
-*/
-/* 
- ---------------------------
- 1. Default Navigation
- ---------------------------
- */
-.uix-nav-links--filters {
-  padding: 1.421875rem 0; }
-  .uix-nav-links--filters ul {
-    transition: all 0.3s ease;
-    margin: 0;
-    font-size: 0;
-    /*Fighting the Space Between Inline Block Elements*/ }
-    .uix-nav-links--filters ul li {
-      display: inline-block;
-      transition: 0.2s linear;
-      margin-right: 0.203125rem;
-      opacity: .5;
-      font-size: 1rem;
-      /*Fighting the Space Between Inline Block Elements*/
-      /* Sync to WordPress activation class name ".current-cat" */ }
-      .uix-nav-links--filters ul li::after {
-        content: '/';
-        margin-left: 0.5rem;
-        opacity: 0.5; }
-      .uix-nav-links--filters ul li:last-child {
-        margin-right: 0; }
-        .uix-nav-links--filters ul li:last-child::after {
-          display: none; }
-      .uix-nav-links--filters ul li.active, .uix-nav-links--filters ul li.current-cat {
-        opacity: 1; }
-  .uix-nav-links--filters.uix-nav-links--dropdown-mobile > input {
-    display: none; }
-  .uix-nav-links--filters.uix-nav-links--dropdown-mobile .uix-nav-links--filters-toggle-label {
-    display: none;
-    background: #212121;
-    color: #fff; }
-
-/* 
- ---------------------------
- 2. Responsive Dropdown Navigation
- ---------------------------
- */
-@media all and (max-width: 768px) {
-  .uix-nav-links--filters.uix-nav-links--dropdown-mobile {
-    /* wrapping this in media querry to prevent fails while change screen size and checked inputs */ }
-    .uix-nav-links--filters.uix-nav-links--dropdown-mobile .uix-nav-links--filters-toggle-label {
-      display: block;
-      cursor: pointer;
-      user-select: none; }
-    .uix-nav-links--filters.uix-nav-links--dropdown-mobile > ul {
-      box-shadow: 0px 7px 19px 0px rgba(0, 0, 0, 0.21);
-      margin-top: -0.203125rem; }
-    .uix-nav-links--filters.uix-nav-links--dropdown-mobile > :checked ~ ul {
-      display: none; }
-    .uix-nav-links--filters.uix-nav-links--dropdown-mobile li {
-      padding: .2rem 0;
-      display: block;
-      width: 100%;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-      text-align: left; }
-      .uix-nav-links--filters.uix-nav-links--dropdown-mobile li:not(:last-child) {
-        margin-right: 0; }
-        .uix-nav-links--filters.uix-nav-links--dropdown-mobile li:not(:last-child)::after {
-          content: '';
-          margin-left: 0; }
-      .uix-nav-links--filters.uix-nav-links--dropdown-mobile li a {
-        display: block;
-        position: relative;
-        text-indent: 1rem; }
-        .uix-nav-links--filters.uix-nav-links--dropdown-mobile li a::after {
-          font-family: 'FontAwesome';
-          content: "\f105";
-          font-size: 1rem;
-          float: right;
-          position: absolute;
-          right: .5rem;
-          top: 50%;
-          transform: translateY(-50%); } }
 
 /* ====================================================== 
    <!-- Footer -->                               
@@ -2056,6 +1969,185 @@ img.uix-filter-hover--color,
 @media all and (max-width: 768px) {
   .uix-menu__container:not(.is-mobile) {
     display: none; } }
+
+/* ====================================================== 
+   <!-- Navs --> 
+/* ====================================================== */
+/*
+ * 1. Base Nav
+ * 2. Line Nav
+ * 3. Separation Line Nav
+ * 4. Dropdown
+ * 5. Responsive Dropdown Nav
+
+*/
+.uix-nav {
+  /* 
+	 ---------------------------
+	 1. Base Nav
+	 ---------------------------
+	 */
+  /* 
+	 ---------------------------
+	 2. Line Nav
+	 ---------------------------
+	 */
+  /* 
+	 ---------------------------
+	 3. Separation Line Nav
+	 ---------------------------
+	 */
+  /* 
+	 ---------------------------
+	 4. Dropdown	
+	 ---------------------------
+	 */
+  /* 
+	 ---------------------------
+	 5. Responsive Dropdown Nav
+	 ---------------------------
+	 */ }
+  .uix-nav::before {
+    display: table;
+    content: "";
+    line-height: 0; }
+  .uix-nav::after {
+    display: table;
+    content: "";
+    line-height: 0;
+    clear: both; }
+  .uix-nav ul {
+    margin: 0;
+    font-size: 0;
+    /*Fighting the Space Between Inline Block Elements*/ }
+    .uix-nav ul li {
+      position: relative;
+      display: inline-block;
+      font-size: 0.875rem;
+      /*Fighting the Space Between Inline Block Elements*/
+      margin: 0 1rem 0 0;
+      padding: 0; }
+      .uix-nav ul li a {
+        padding: .3rem 1.5rem;
+        border: #e8e8e8 1px solid;
+        border-radius: 3px;
+        display: block; }
+        .uix-nav ul li a:hover {
+          color: #232323; }
+      .uix-nav ul li.active a, .uix-nav ul li.current-cat a {
+        border-color: #EC5E79;
+        color: #EC5E79; }
+  .uix-nav.uix-t-r ul li {
+    margin: 0 0 0 1rem; }
+  .uix-nav.uix-nav--line ul li {
+    margin: 0;
+    padding: 1rem 2.5rem;
+    font-size: 1.25rem;
+    /*Fighting the Space Between Inline Block Elements*/ }
+    .uix-nav.uix-nav--line ul li a {
+      padding: 0;
+      border: none; }
+    .uix-nav.uix-nav--line ul li.active, .uix-nav.uix-nav--line ul li.current-cat {
+      box-shadow: 0px 3px 0px 0px #EC5E79; }
+  .uix-nav.uix-nav--separation ul li {
+    margin: 0;
+    padding: 0; }
+    .uix-nav.uix-nav--separation ul li::before {
+      content: '/';
+      opacity: .3;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%); }
+    .uix-nav.uix-nav--separation ul li:first-child::before {
+      display: none; }
+    .uix-nav.uix-nav--separation ul li a {
+      padding: .5rem 1.5rem;
+      border: none; }
+  .uix-nav ul li {
+    /*-- Fold Out --*/ }
+    .uix-nav ul li ul {
+      width: 200px;
+      position: absolute;
+      left: 0;
+      top: 100%;
+      z-index: 1;
+      max-height: 0;
+      overflow: hidden;
+      transform: perspective(400) rotate3d(1, 0, 0, -90deg);
+      transform-origin: 50% 0;
+      transition: all 0.3s ease;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02); }
+      .uix-nav ul li ul li,
+      .uix-nav ul li ul a {
+        border: none;
+        box-shadow: none;
+        margin: 0;
+        padding: 0; }
+      .uix-nav ul li ul li {
+        padding: .3rem 1rem;
+        display: block; }
+        .uix-nav ul li ul li::before {
+          display: none; }
+        .uix-nav ul li ul li:first-child {
+          margin-top: .5rem; }
+        .uix-nav ul li ul li:last-child {
+          margin-bottom: .5rem; }
+    .uix-nav ul li:hover ul {
+      max-height: 1000px;
+      transform: perspective(400) rotate3d(0, 0, 0, 0); }
+  .uix-nav.uix-nav--dropdown-mobile .uix-nav--dropdown-mobile__togglelabel {
+    display: none; }
+    .uix-nav.uix-nav--dropdown-mobile .uix-nav--dropdown-mobile__togglelabel ~ input {
+      display: none; }
+
+@media all and (max-width: 768px) {
+  .uix-nav {
+    /* 
+		 ---------------------------
+		 5. Responsive Dropdown Nav
+		 ---------------------------
+		 */ }
+    .uix-nav.uix-nav--dropdown-mobile {
+      /* wrapping this in media querry to prevent fails while change screen size and checked inputs */ }
+      .uix-nav.uix-nav--dropdown-mobile .uix-nav--dropdown-mobile__togglelabel {
+        display: block;
+        cursor: pointer;
+        user-select: none; }
+      .uix-nav.uix-nav--dropdown-mobile > ul {
+        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+        margin-top: -0.203125rem; }
+      .uix-nav.uix-nav--dropdown-mobile > :checked ~ ul {
+        display: none; }
+      .uix-nav.uix-nav--dropdown-mobile li {
+        padding: .2rem 0;
+        display: block;
+        width: 100%;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        text-align: left; }
+        .uix-nav.uix-nav--dropdown-mobile li::before {
+          display: none; }
+        .uix-nav.uix-nav--dropdown-mobile li:not(:last-child) {
+          margin-right: 0; }
+          .uix-nav.uix-nav--dropdown-mobile li:not(:last-child)::after {
+            content: '';
+            margin-left: 0; }
+        .uix-nav.uix-nav--dropdown-mobile li a {
+          display: block;
+          position: relative;
+          border: none;
+          padding: .5rem 1.5rem; }
+          .uix-nav.uix-nav--dropdown-mobile li a::after {
+            font-family: 'FontAwesome';
+            content: "\f105";
+            font-size: 1rem;
+            float: right;
+            position: absolute;
+            right: .5rem;
+            top: 50%;
+            transform: translateY(-50%); } }
 
 /* ====================================================== 
     <!-- Onepage Menu -->  
@@ -8825,101 +8917,6 @@ dl.uix-list-abreast {
   position: absolute;
   top: 20%;
   left: 600px; }
-
-/* ====================================================== 
-   <!-- Navs --> 
-/* ====================================================== */
-/*
- * 1. Base Nav
- * 2. Line Nav
- * 3. Dropdown
-*/
-.uix-nav {
-  /* 
-	 ---------------------------
-	 1) Base Nav
-	 ---------------------------
-	 */
-  /* 
-	 ---------------------------
-	 2) Line Nav
-	 ---------------------------
-	 */
-  /* 
-	 ---------------------------
-	 3) Dropdown	
-	 ---------------------------
-	 */ }
-  .uix-nav::before {
-    display: table;
-    content: "";
-    line-height: 0; }
-  .uix-nav::after {
-    display: table;
-    content: "";
-    line-height: 0;
-    clear: both; }
-  .uix-nav ul {
-    margin: 0;
-    font-size: 0;
-    /*Fighting the Space Between Inline Block Elements*/ }
-    .uix-nav ul li {
-      position: relative;
-      display: inline-block;
-      font-size: 0.875rem;
-      /*Fighting the Space Between Inline Block Elements*/
-      margin: 0 1rem 1.5rem 0; }
-      .uix-nav ul li a {
-        padding: .5rem 1.5rem;
-        border: #e8e8e8 1px solid;
-        border-radius: 3px; }
-        .uix-nav ul li a:hover {
-          color: #232323; }
-      .uix-nav ul li.active a {
-        border-color: #EC5E79;
-        color: #EC5E79; }
-  .uix-nav.uix-nav--line ul li {
-    margin: 0;
-    padding: 1rem 2.5rem;
-    font-size: 1.25rem;
-    /*Fighting the Space Between Inline Block Elements*/ }
-    .uix-nav.uix-nav--line ul li a {
-      padding: 0;
-      border: none; }
-    .uix-nav.uix-nav--line ul li.active {
-      box-shadow: 0px 3px 0px 0px #EC5E79; }
-  .uix-nav ul li {
-    /*-- Fold Out --*/ }
-    .uix-nav ul li ul {
-      width: 200px;
-      position: absolute;
-      left: 0;
-      top: 100%;
-      z-index: 1;
-      max-height: 0;
-      overflow: hidden;
-      transform: perspective(400) rotate3d(1, 0, 0, -90deg);
-      transform-origin: 50% 0;
-      transition: all 0.3s ease;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02); }
-      .uix-nav ul li ul li,
-      .uix-nav ul li ul a {
-        border: none;
-        box-shadow: none;
-        margin: 0;
-        padding: 0;
-        display: block; }
-      .uix-nav ul li ul li {
-        padding: .3rem 1rem; }
-        .uix-nav ul li ul li:first-child {
-          margin-top: .5rem; }
-        .uix-nav ul li ul li:last-child {
-          margin-bottom: .5rem; }
-    .uix-nav ul li:hover ul {
-      max-height: 1000px;
-      transform: perspective(400) rotate3d(0, 0, 0, 0); }
 
 /* ====================================================== 
    <!-- Overlay -->    

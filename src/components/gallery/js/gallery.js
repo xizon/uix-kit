@@ -17,7 +17,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.GALLERY               = APP.GALLERY || {};
-	APP.GALLERY.version       = '0.0.1';
+	APP.GALLERY.version       = '0.0.2';
     APP.GALLERY.documentReady = function( $ ) {
 
 		$( '.uix-gallery' ).each( function() {
@@ -68,7 +68,7 @@ APP = ( function ( APP, $, window, document ) {
 						$filterOptions.find( 'li > a' ).on( 'click', function() {
 							  var $this       = $( this ),
 								  activeClass = 'current-cat',
-								  isActive    = $this.hasClass( activeClass ),
+								  isActive    = $this.parent().hasClass( activeClass ),
 								  group       = isActive ? 'all' : $this.data( 'group' );
 						
 							  // Hide current label, show current label in title
@@ -76,7 +76,7 @@ APP = ( function ( APP, $, window, document ) {
 								$filterOptions.find( '.' + activeClass ).removeClass( activeClass );
 							  }
 						
-							  $this.toggleClass( activeClass );
+							  $this.parent().toggleClass( activeClass );
 						
 							  // Filter elements
 							  $grid.shuffle( 'shuffle', group );
@@ -92,7 +92,7 @@ APP = ( function ( APP, $, window, document ) {
 		
 				
 			} else {
-				$( '[data-group="all"]' ).parent( 'li' ).hide();
+				$( '[data-group="all"]' ).parent( 'li' ).remove();
 			}
 	
 		}
