@@ -60,7 +60,7 @@
     "webpack-cli": "^3.1.2",
     "webpack-concat-plugin": "^3.0.0",
     "webpack-dev-middleware": "^3.4.0",
-    "webpack-dev-server": "^3.1.10"
+    "webpack-dev-server": "^3.1.14"
   },
   "dependencies": {
     "css-loader": "^2.0.1",
