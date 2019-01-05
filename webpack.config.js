@@ -22,11 +22,11 @@ const uglifyJS                   = require('@node-minify/uglify-js');
 
 
 let globs = {
-	port         : 8080,
-	examples     : 'examples',
-	build        : 'src',
-	dist         : 'dist',
-	notES6JS     : 'uix-kit.not-es6.dev.js' //This file is used for the mergence of JS script files that do not require ES6 compilation.
+	port                : 8080,
+	examples            : 'examples',
+	build               : 'src',
+	dist                : 'dist',
+	concatES5_JSFile    : 'uix-kit.concat.es5.dev.js' //This file is used for the mergence of JS script files that do not require ES6 compilation.
 };
 
 
@@ -74,7 +74,6 @@ tempPages.map( ( event ) => {
 });
 
 
-
 // Get all the js component files
 
 let targetJSComFilesName = '';
@@ -100,7 +99,16 @@ if ( fs.existsSync( JSComFiles ) ) {
 
 }
 
-//console.log( targetJSComFilesName );
+
+let nArrays = [
+  targetAllTempFilesName,
+  targetJSComFilesName
+];
+let targetAllWatchFilesName = [].concat(...nArrays);
+
+//console.log( targetAllWatchFilesName );
+
+
 
 
 /*! 
@@ -327,7 +335,7 @@ webpackConfig.plugins.push(
 		sourceMap: true,
 		name: 'result',
 		outputPath: '',
-		fileName: globs.notES6JS,
+		fileName: globs.concatES5_JSFile,
 		filesToConcat: targetJSComFilesName,
 		attributes: {
 			async: true
@@ -353,12 +361,12 @@ app.use( instance );
 //Watch for Files Changes in Node.js
 require('log-timestamp');
 
-targetAllTempFilesName.map( ( event ) => {
+targetAllWatchFilesName.map( ( event ) => {
 	
-	let htmlTempFiles = `${event[0]}`;
+	let curFile = `${event[0]}`;
 
-	fs.watchFile( htmlTempFiles, (curr, prev) => {
-	    console.log(`${htmlTempFiles} file Changed`);
+	fs.watchFile( curFile, (curr, prev) => {
+	    console.log(`${curFile} file Changed`);
 		
 		// After a short delay the configuration is changed and a banner plugin is added
 		// to the config
@@ -369,8 +377,7 @@ targetAllTempFilesName.map( ( event ) => {
 			])
 
 		);
-
-
+	
 		targetTempFilesName.map( ( event ) => {
 
 			compiler.apply(
@@ -402,11 +409,9 @@ targetAllTempFilesName.map( ( event ) => {
 					}
 				])
 
-
-
 			);
 
-
+		
 
 		});
 
@@ -417,38 +422,6 @@ targetAllTempFilesName.map( ( event ) => {
 });
 
 
-targetJSComFilesName.map( ( event ) => {
-	
-	let jsTempFiles = `${event[0]}`;
-
-	fs.watchFile( jsTempFiles, (curr, prev) => {
-	    console.log(`${jsTempFiles} file Changed`);
-		
-		// After a short delay the configuration is changed and a banner plugin is added
-		// to the config
-		compiler.apply(
-
-			new ConcatPlugin({
-				uglify: false,
-				sourceMap: true,
-				name: 'result',
-				outputPath: '',
-				fileName: globs.notES6JS,
-				filesToConcat: targetJSComFilesName,
-				attributes: {
-					async: true
-				}
-			})
-
-
-		);
-
-
-		// Recompile the bundle with plugins:
-		instance.invalidate();	
-	});
-	
-});
 
 
 /*! 
@@ -486,7 +459,7 @@ server.listen( globs.port, "localhost", function (err, result) {
 compiler.plugin( 'done', () => { 
 	
 	
-	let mainJSFile            = './'+globs.dist+'/js/' + globs.notES6JS,
+	let mainJSFile            = './'+globs.dist+'/js/' + globs.concatES5_JSFile,
 		targetJSFile          = './'+globs.dist+'/js/uix-kit.js',
 		targetJSMinFile       = './'+globs.dist+'/js/uix-kit.min.js';
 	
@@ -505,102 +478,117 @@ compiler.plugin( 'done', () => {
 				
 				let oldContent = data;
 				
-				//Update the normal js file
-				fs.appendFile( targetJSFile, oldContent, 'utf8', function (err) {
-
-					console.log( targetJSFile + ' written successfully!' );
-
-					fs.copyFile( targetJSFile, targetJSMinFile, function (err) {
-
-						if (err) {
-							return console.error(err);
-						}
-
-						console.log( targetJSMinFile + ' copied successfully!' );
+				//Prevent JS from adding code repeatedly
+				//Check if the uix-kit.concat.es5.dev.js file has been 
+				//merged into the uix-kit.js file?
+				fs.readFile( targetJSFile, function(err, data ){
+					
+					if ( data.indexOf( 'sourceMappingURL='+globs.concatES5_JSFile+'.map' ) < 0 ) {
 						
-						//Update the compressed js file
-						minify({
-							compressor: uglifyJS,
-							input: targetJSMinFile,
-							output: targetJSMinFile,
-							callback: function(err, min) {
+						//Update the normal js file
+						fs.appendFile( targetJSFile, oldContent, 'utf8', function (err) {
 
-								if ( err ) {
-									console.log( '=============[ ERROR: Please Rebuild! ]================' + err );
-								} else {
-									console.log( targetJSMinFile + ' compressed successfully!' );
+							console.log( targetJSFile + ' written successfully!' );
+
+							fs.copyFile( targetJSFile, targetJSMinFile, function (err) {
+
+								if (err) {
+									return console.error(err);
 								}
-								
-								
-								// Build a table of contents (TOC)
-								['./'+globs.dist+'/css/uix-kit.css', './'+globs.dist+'/css/uix-kit-rtl.css', targetJSFile ].map( ( filepath ) => {
 
-									if ( fs.existsSync( filepath ) ) {
+								console.log( targetJSMinFile + ' copied successfully!' );
 
-										fs.readFile( filepath, function( err, content ) {
+								//Update the compressed js file
+								minify({
+									compressor: uglifyJS,
+									input: targetJSMinFile,
+									output: targetJSMinFile,
+									callback: function(err, min) {
 
-											if ( err ) throw err;
+										if ( err ) {
+											console.log( '=============[ ERROR: Please Rebuild! ]================' + err );
+										} else {
+											console.log( targetJSMinFile + ' compressed successfully!' );
+										}
 
-											let curCon  = content.toString(),
-												newtext = curCon.match(/<\!\-\-.*?(?:>|\-\-\/>)/gi );
+
+										// Build a table of contents (TOC)
+										['./'+globs.dist+'/css/uix-kit.css', './'+globs.dist+'/css/uix-kit-rtl.css', targetJSFile ].map( ( filepath ) => {
+
+											if ( fs.existsSync( filepath ) ) {
+
+												fs.readFile( filepath, function( err, content ) {
+
+													if ( err ) throw err;
+
+													let curCon  = content.toString(),
+														newtext = curCon.match(/<\!\-\-.*?(?:>|\-\-\/>)/gi );
 
 
-											//is the matched group if found
-											if ( newtext && newtext.length > 1 ) {  
+													//is the matched group if found
+													if ( newtext && newtext.length > 1 ) {  
 
-												let curToc = '';
+														let curToc = '';
 
-												for ( var p = 0; p < newtext.length; p++ ) {
+														for ( var p = 0; p < newtext.length; p++ ) {
 
-													let curIndex = p + 1,
-														newStr   = newtext[ p ].replace( '<!--', '' ).replace( '-->', '' ).replace(/^\s+|\s+$/g, '' );
+															let curIndex = p + 1,
+																newStr   = newtext[ p ].replace( '<!--', '' ).replace( '-->', '' ).replace(/^\s+|\s+$/g, '' );
 
-													if ( p > 0 ) {
-														curToc += '    ' + curIndex + '.' + newStr + '\n';
-													} else {
-														curToc +=  curIndex + '.' + newStr + '\n';
+															if ( p > 0 ) {
+																curToc += '    ' + curIndex + '.' + newStr + '\n';
+															} else {
+																curToc +=  curIndex + '.' + newStr + '\n';
+															}
+
+														}
+
+														//Replace a string in a file with nodejs
+														var result = curCon.replace(/\$\{\{TOC\}\}/gi, curToc );
+
+														fs.writeFile( filepath, result, 'utf8', function (err) {
+															console.log( filepath + ' \'s table of contents generated successfully!' );
+															if (err) return console.log(err);
+														});
+
+
 													}
 
-												}
 
-												//Replace a string in a file with nodejs
-												var result = curCon.replace(/\$\{\{TOC\}\}/gi, curToc );
-
-												fs.writeFile( filepath, result, 'utf8', function (err) {
-													console.log( filepath + ' \'s table of contents generated successfully!' );
-													if (err) return console.log(err);
-												});
+												});			
 
 
 											}
 
 
-										});			
+										});	
+
 
 
 									}
-
-
 								});	
 
 
 
+							});
+
+
+
+
+
+							if (err) {
+								console.error(err);
+								return;
 							}
-						});	
-
+						});
+	
 						
-
-					});
-					
-					
-
-						
-					
-					if (err) {
-						console.error(err);
-						return;
 					}
+					
 				});
+				
+				
+				
 
 			});	
 		}

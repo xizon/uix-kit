@@ -83,7 +83,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			if ( w > 768 ){
 
-				$menuWrap.find( 'li.multi-column' ).each( function() {
+				$menuWrap.find( 'li.multi-column' ).each( function( index ) {
 					var root_li          = $( this ),
 						col_total        = root_li.find( '> ul > li' ).length,
 						mega_div         = root_li.find( ' > ul.sub-menu' ),

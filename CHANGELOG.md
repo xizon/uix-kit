@@ -1,10 +1,13 @@
 # Changelog
 
 
-#### = 3.1.2 (January 5, 2019) =
+#### = 3.1.3 (January 5, 2019) =
 
 * Fix: Fixed a bug for ajax posts.
+* Fix: Fixed an issue where scaffolding packaged JS was unstable.
 * Tweak: Upgraded PIXI to v4.8.4. 
+* Tweak: Modified Uix Kit core scaffold.
+* New: Add a new module "Text Effect".
 
 
 #### = 3.1.1 (January 4, 2019) =
