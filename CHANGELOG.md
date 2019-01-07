@@ -1,6 +1,14 @@
 # Changelog
 
 
+
+#### = 3.1.4 (January 8, 2019) =
+
+* Fix: Fixed issue with Asynchronous loading of Lightbox.
+* Fix: Fixed a traversal problem for "Table Sorter".
+* Tweak: Micro optimization of some styles.
+
+
 #### = 3.1.3 (January 5, 2019) =
 
 * Fix: Fixed a bug for ajax posts.

@@ -22501,7 +22501,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.LIGHTBOX               = APP.LIGHTBOX || {};
-	APP.LIGHTBOX.version       = '0.1.3';
+	APP.LIGHTBOX.version       = '0.1.4';
     APP.LIGHTBOX.pageLoaded    = function() {
 
 		if ( $( '.uix-lightbox__container' ).length == 0 ) {
@@ -22882,8 +22882,10 @@ APP = ( function ( APP, $, window, document ) {
 									
 									// Apply the original scripts
 									$( document ).applyOriginalSomeScripts({
-										lightBox : false
+										lightBox : false,
+										ajaxPostList : false
 									});
+									
 									
 									// show the content container
 									showLightboxContent();	
@@ -28316,15 +28318,20 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.TABLE_SORTER               = APP.TABLE_SORTER || {};
-	APP.TABLE_SORTER.version       = '0.0.1';
+	APP.TABLE_SORTER.version       = '0.0.2';
     APP.TABLE_SORTER.documentReady = function( $ ) {
 
 		
 		$( '.js-uix-table-sorter' ).each( function()  {
 			var $sortTable = $( this ).find( 'table' );
-
-			$sortTable.find( "[data-sort-type]" ).wrapInner( '<span class="uix-table-sorter" />' ).each( function() {
-
+			
+			//add arrows
+			
+			$sortTable.find( "[data-sort-type]" ).each( function()  {
+				if ( $( this ).find( '.uix-table-sorter' ).length == 0 ) {
+					$( this ).wrapInner( '<span class="uix-table-sorter" />' );
+				}
+				
 				var $th     = $( this ),
 					thIndex = $th.index(),
 					thType  = $th.data( 'sort-type' ),
@@ -28336,7 +28343,7 @@ APP = ( function ( APP, $, window, document ) {
 
 						return $( this ).index() === thIndex;
 
-					}).sortElements( function(a, b) {
+					}).sortElements(function(a, b) {
 
 
 						var txt1 = $.text([a]).replace(/(<([^>]+)>)/ig, ''),
@@ -28394,7 +28401,7 @@ APP = ( function ( APP, $, window, document ) {
 
 			});
 
-
+		
 
 		});
 
@@ -28406,6 +28413,7 @@ APP = ( function ( APP, $, window, document ) {
     return APP;
 
 }( APP, jQuery, window, document ) );
+
 
 
 

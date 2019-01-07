@@ -10,7 +10,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.LIGHTBOX               = APP.LIGHTBOX || {};
-	APP.LIGHTBOX.version       = '0.1.3';
+	APP.LIGHTBOX.version       = '0.1.4';
     APP.LIGHTBOX.pageLoaded    = function() {
 
 		if ( $( '.uix-lightbox__container' ).length == 0 ) {
@@ -391,8 +391,10 @@ APP = ( function ( APP, $, window, document ) {
 									
 									// Apply the original scripts
 									$( document ).applyOriginalSomeScripts({
-										lightBox : false
+										lightBox : false,
+										ajaxPostList : false
 									});
+									
 									
 									// show the content container
 									showLightboxContent();	

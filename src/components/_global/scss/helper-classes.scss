@@ -87,8 +87,13 @@
  ---------------------------
  */ 
 .uix-outer-shadow--s {
+    @include outer-shadow( 3 );
+}
+
+.uix-outer-shadow--m {
     @include outer-shadow( 1 );
 }
+
 .uix-outer-shadow--l {
     @include outer-shadow( 2 );
 }
