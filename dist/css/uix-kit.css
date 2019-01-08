@@ -1159,7 +1159,7 @@ img.uix-filter-hover--color,
   .uix-container__bg.uix-container__bg--white {
     background: #fff; }
   .uix-container__bg.uix-container__bg--shadow {
-    box-shadow: 0px 0px 51px -5px rgba(0, 0, 0, 0.1); }
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px; }
   .uix-container__bg.uix-container__bg--rounded-large {
     border-radius: 15px; }
   .uix-container__bg.uix-container__bg--rounded-medium {
@@ -3811,11 +3811,11 @@ h6 {
     left: 0;
     right: 0;
     pointer-events: none;
-    box-shadow: 0 -1px 0 #e5e5e5, 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.24); }
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px; }
   .uix-accordion dl.active {
     height: auto;
     margin: 1rem 0;
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.16), 0 6px 12px rgba(0, 0, 0, 0.32); }
+    box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px; }
     .uix-accordion dl.active dt {
       border-bottom: 1px solid rgba(0, 0, 0, 0.18); }
       .uix-accordion dl.active dt::before {
@@ -4914,7 +4914,7 @@ h6 {
   border-color: #EC5E79;
   background-color: #EC5E79;
   background-image: linear-gradient(to right, #EC5E79 0%, #f60 20%, #d83ba0 100%);
-  box-shadow: 0 4px 15px 0 rgba(236, 94, 121, 0.75);
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(236, 94, 121, 0.2) 0px 15px 35px 0px;
   color: #fff; }
   .uix-btn__bg--primary.is-transparent {
     background: none;

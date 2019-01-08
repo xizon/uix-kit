@@ -54,7 +54,7 @@
 			left: 0;
 			right: 0;
 			pointer-events: none;
-			box-shadow: 0 -1px 0 #e5e5e5, 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.24);
+			@include outer-shadow( 3 );
 		}
 		
 		
@@ -62,7 +62,7 @@
 		&.active {
 			height: auto;
 			margin: 1rem 0;
-			box-shadow: 0 0 6px rgba(0, 0, 0, 0.16), 0 6px 12px rgba(0, 0, 0, 0.32);
+			@include outer-shadow( 1 );
 
 			dt {
 				border-bottom: 1px solid rgba(0, 0, 0, 0.18);

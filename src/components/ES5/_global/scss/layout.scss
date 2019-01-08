@@ -64,7 +64,7 @@
 	}
 	
 	&.uix-container__bg--shadow {
-		box-shadow: 0px 0px 51px -5px rgba(0,0,0,0.1);
+		@include outer-shadow( 3 );
 	}
 	
 	&.uix-container__bg--rounded-large {
