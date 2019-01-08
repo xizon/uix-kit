@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.1.4
+ * ## Version             :  3.1.5
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  January 7, 2019
+ * ## Last Update         :  January 8, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -103,12 +103,11 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_global_scss_rtl_all_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
-/* harmony import */ var _components_global_scss_rtl_all_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_components_global_scss_rtl_all_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* 
- *************************************
+/* harmony import */ var _components_ES5_global_scss_rtl_all_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
+/* harmony import */ var _components_ES5_global_scss_rtl_all_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_components_ES5_global_scss_rtl_all_scss__WEBPACK_IMPORTED_MODULE_0__);
+/*
  * Import RTL SASS files from components
- *************************************
+ *    
  */
 
 

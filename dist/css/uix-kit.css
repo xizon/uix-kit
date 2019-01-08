@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.1.4
+ * ## Version             :  3.1.5
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  January 7, 2019
+ * ## Last Update         :  January 8, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -170,7 +170,7 @@
 /**
  * @global
  *
- * //Used for all modules from ./src/components/[__]/scss
+ * //Used for all modules from ./src/components/ES5/[__]/scss
  * @requires ./examples/assets/css/bootstrap.min.css
  * 
  */
@@ -801,13 +801,13 @@ ul.uix-entry__meta {
  ---------------------------
  */
 .uix-outer-shadow--s {
-  box-shadow: 0 1.2vw 2vw -0.7vw rgba(0, 0, 0, 0.05); }
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px; }
 
 .uix-outer-shadow--m {
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02); }
+  box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px; }
 
 .uix-outer-shadow--l {
-  box-shadow: 0 1.8vw 4vw -.7vw #cbdfee; }
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(236, 94, 121, 0.2) 0px 15px 35px 0px; }
 
 .uix-none-shadow {
   box-shadow: none !important;
@@ -1868,7 +1868,7 @@ img.uix-filter-hover--color,
         padding-top: 2.625rem;
         opacity: 0; }
         .uix-menu__container:not(.is-mobile) ul.uix-menu > li > ul::before {
-          box-shadow: 0 1.2vw 2vw -0.7vw rgba(0, 0, 0, 0.05);
+          box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px;
           content: '';
           display: block;
           height: 100%;
@@ -1893,7 +1893,7 @@ img.uix-filter-hover--color,
           color: #000;
           background: #F1F1F1; }
     .uix-menu__container:not(.is-mobile) ul.uix-menu > li:not(.multi-column) > ul ul {
-      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+      box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px;
       top: 0;
       left: 100%;
       background: #fff;
@@ -2082,7 +2082,7 @@ img.uix-filter-hover--color,
       transition: all 0.3s ease;
       background: #fff;
       border-radius: 8px;
-      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02); }
+      box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px; }
       .uix-nav ul li ul li,
       .uix-nav ul li ul a {
         border: none;
@@ -2120,7 +2120,7 @@ img.uix-filter-hover--color,
         cursor: pointer;
         user-select: none; }
       .uix-nav.uix-nav--dropdown-mobile > ul {
-        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+        box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px;
         margin-top: -0.203125rem; }
       .uix-nav.uix-nav--dropdown-mobile > :checked ~ ul {
         display: none; }
@@ -4665,7 +4665,7 @@ h6 {
     font-size: 0.875rem;
     /*Fighting the Space Between Inline Block Elements*/
     display: inline-block;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02); }
+    box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px; }
     .uix-breadcrumbs ul li a {
       display: block;
       background: #fff;
@@ -4978,7 +4978,7 @@ h6 {
   position: relative;
   border-top: 8px solid #EC5E79;
   border-radius: 8px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02); }
+  box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px; }
   .uix-card1::before, .uix-card1::after {
     content: " ";
     display: table;
@@ -5056,7 +5056,7 @@ h6 {
   background-size: cover;
   margin-bottom: 1.5rem;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02); }
+  box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px; }
   .uix-card2::before, .uix-card2::after {
     content: " ";
     display: table;
@@ -5083,7 +5083,7 @@ h6 {
   background-color: #fff;
   margin-bottom: 1.5rem;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02); }
+  box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px; }
   .uix-card3::before, .uix-card3::after {
     content: " ";
     display: table;
@@ -5122,7 +5122,7 @@ h6 {
   background-color: #fff;
   margin-bottom: 1.5rem;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02); }
+  box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px; }
   .uix-card4::before, .uix-card4::after {
     content: " ";
     display: table;
@@ -6087,7 +6087,7 @@ ol.uix-flexslider__control-paging {
     overflow: hidden;
     transform: scale(0.7);
     opacity: .5;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02); }
+    box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px; }
     .uix-flexslider__mycontrols--thumb a > span img {
       width: 100%;
       height: 100%; }
@@ -6272,7 +6272,7 @@ ol.uix-flexslider__control-paging {
   height: 428px;
   background: #EC5E79;
   background: linear-gradient(to bottom, #EC5E79 0%, #E8588C 100%);
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02); }
+  box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px; }
   .uix-floating-side-el a {
     font-size: 0.875rem;
     color: #fff;
@@ -8617,7 +8617,7 @@ dl.uix-list-abreast {
     padding-right: 5vw;
     padding-left: calc(7.840236686391% + 15px);
     /* (1352-1140)/1352/2 * 100 */
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+    box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px;
     min-height: 150px; }
   .uix-list-split-full .uix-list-split-full__right {
     word-wrap: break-word;
@@ -8628,7 +8628,7 @@ dl.uix-list-abreast {
     padding-right: calc(7.840236686391% + 15px);
     background: #EC5E79;
     background: linear-gradient(to right, #EC5E79 0%, #E8588C 100%);
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+    box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px;
     min-height: 150px; }
 
 /* New XL container for Bootstrap 4.x */
@@ -9035,7 +9035,7 @@ dl.uix-list-abreast {
     background: #fff;
     transition: .1s ease-in-out; }
     .uix-price .uix-price__outline:hover, .uix-price .uix-controls__multi-sel > span.uix-price__outline.active:not(.uix-controls__bar) {
-      box-shadow: 0 1.8vw 4vw -.7vw #cbdfee; }
+      box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(236, 94, 121, 0.2) 0px 15px 35px 0px; }
   .uix-price .uix-price__level {
     font-size: 0.7rem;
     text-align: center;
@@ -10829,7 +10829,7 @@ Style with support for rainbow parens
 	 ---------------------------
 	 */ }
   .uix-tabs:not(.uix-tabs--rotation) {
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02); }
+    box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px; }
     .uix-tabs:not(.uix-tabs--rotation) .uix-tabs__marker {
       height: 2px;
       width: 100%;
@@ -10883,7 +10883,7 @@ Style with support for rainbow parens
       width: 100%;
       text-align: center;
       /*require*/
-      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02); }
+      box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px; }
       .uix-tabs.uix-tabs--center .uix-tabs__nav > ul li {
         font-size: 1rem;
         /*Fighting the Space Between Inline Block Elements*/
@@ -10892,7 +10892,7 @@ Style with support for rainbow parens
         float: none; }
   .uix-tabs.uix-tabs--rotation .uix-tabs__content {
     position: relative;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02); }
+    box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px; }
   .uix-tabs.uix-tabs--rotation .uix-tabs__nav {
     position: relative;
     margin: 0; }
@@ -10926,7 +10926,7 @@ Style with support for rainbow parens
           line-height: 60px;
           background: #fff;
           border-radius: 100%;
-          box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02); }
+          box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px; }
         .uix-tabs.uix-tabs--rotation .uix-tabs__nav > ul > li.active > a {
           background: #212121;
           color: #fff; }
@@ -11002,7 +11002,7 @@ Style with support for rainbow parens
       margin-left: -300px; }
       .uix-team-focus > div.focus img {
         transform: scale(1.3);
-        box-shadow: 0 1.8vw 4vw -.7vw #cbdfee; }
+        box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(236, 94, 121, 0.2) 0px 15px 35px 0px; }
 
 /* ====================================================== 
    <!-- Team Fullwidth (Style using the Side by Side List With Photo module) -->    
@@ -11206,7 +11206,7 @@ Style with support for rainbow parens
       padding: 1.4rem;
       width: calc(90% - 2.8rem);
       margin-left: 120px;
-      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.05), 0 8px 8px rgba(0, 0, 0, 0.05), 0 16px 16px rgba(0, 0, 0, 0.05), 8px 32px 32px rgba(0, 0, 0, 0.02), 8px 64px 64px rgba(0, 0, 0, 0.02);
+      box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px;
       transition: all 0.3s ease; }
       .uix-timeline__container .uix-timeline .uix-timeline__item .uix-timeline__item--info::after {
         clear: both;

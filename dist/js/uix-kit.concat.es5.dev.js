@@ -76,7 +76,7 @@ var browser = {
  * APP
  * @global
  *
- * //Used for all modules from ./src/components/[__]/js
+ * //Used for all modules from ./src/components/ES5/[__]/js
  * @requires ./examples/assets/js/min/jquery.waitforimages.min.js
  * @requires ./examples/assets/js/min/video.min.js
  * @requires ./examples/assets/js/min/jquery.waypoints.min.js
@@ -11972,8 +11972,8 @@ APP = ( function ( APP, $, window, document ) {
  * @global
  * @requires ./examples/assets/js/min/pixi.min.js
  * @requires ./examples/assets/js/min/three.min.js
- * @requires ./src/components/_plugins-THREE
- * @requires ./src/components/_plugins-GSAP
+ * @requires ./src/components/ES5/_plugins-THREE
+ * @requires ./src/components/ES5/_plugins-GSAP
  */
 
 APP = ( function ( APP, $, window, document ) {
@@ -15783,11 +15783,11 @@ APP = ( function ( APP, $, window, document ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
-			scrollReveal    : true, // @from ./src/components/scroll-reveal
-			ajaxPostList    : true, // @from ./src/components/list-posts
-			ajaxDDList      : true, // @from ./src/components/dynamic-dropdown-list-json
-			counterAnim     : true, // @from ./src/components/counter
-			lightBox        : true  // @from ./src/components/lightbox
+			scrollReveal    : true, // @from ./src/components/ES5/scroll-reveal
+			ajaxPostList    : true, // @from ./src/components/ES5/list-posts
+			ajaxDDList      : true, // @from ./src/components/ES5/dynamic-dropdown-list-json
+			counterAnim     : true, // @from ./src/components/ES5/counter
+			lightBox        : true  // @from ./src/components/ES5/lightbox
         }, options );
  
         this.each( function() {
@@ -26567,7 +26567,7 @@ APP = ( function ( APP, $, window, document ) {
  * APP.SCROLLSPY_ANIM
  * @global
  * @requires ./examples/assets/js/min/pixi.min.js
- * @requires ./src/components/_plugins-GSAP
+ * @requires ./src/components/ES5/_plugins-GSAP
  */
 
 APP = ( function ( APP, $, window, document ) {
@@ -28499,7 +28499,7 @@ jQuery.fn.sortElements = (function(){
  * APP._3D_BACKGROUND_THREE
  * @global
  * @requires ./examples/assets/js/min/three.min.js
- * @requires ./src/components/_plugins-THREE
+ * @requires ./src/components/ES5/_plugins-THREE
  */
 
 
@@ -28731,7 +28731,7 @@ APP = ( function ( APP, $, window, document ) {
  * APP._3D_BACKGROUND_THREE2
  * @global
  * @requires ./examples/assets/js/min/three.min.js
- * @requires ./src/components/_plugins-THREE
+ * @requires ./src/components/ES5/_plugins-THREE
  */
 
 
@@ -29520,7 +29520,7 @@ APP = ( function ( APP, $, window, document ) {
  * APP._3D_MODEL
  * @global
  * @requires ./examples/assets/js/min/three.min.js
- * @requires ./src/components/_plugins-THREE
+ * @requires ./src/components/ES5/_plugins-THREE
  */
 
 APP = ( function ( APP, $, window, document ) {
@@ -29793,7 +29793,7 @@ APP = ( function ( APP, $, window, document ) {
  * APP._3D_PAGES
  * @global
  * @requires ./examples/assets/js/min/three.min.js
- * @requires ./src/components/_plugins-THREE
+ * @requires ./src/components/ES5/_plugins-THREE
  */
 
 APP = ( function ( APP, $, window, document ) {
@@ -29935,7 +29935,7 @@ APP = ( function ( APP, $, window, document ) {
  * APP._3D_PARTICLE
  * @global
  * @requires ./examples/assets/js/min/three.min.js
- * @requires ./src/components/_plugins-THREE
+ * @requires ./src/components/ES5/_plugins-THREE
  */
 
 APP = ( function ( APP, $, window, document ) {
@@ -30304,7 +30304,7 @@ APP = ( function ( APP, $, window, document ) {
  * APP._3D_SPHERE_THREE
  * @global
  * @requires ./examples/assets/js/min/three.min.js
- * @requires ./src/components/_plugins-THREE
+ * @requires ./src/components/ES5/_plugins-THREE
  */
 
 APP = ( function ( APP, $, window, document ) {
@@ -30458,7 +30458,7 @@ APP = ( function ( APP, $, window, document ) {
  * APP._3D_OBJ_ANIM_INTERACTION
  * @global
  * @requires ./examples/assets/js/min/three.min.js
- * @requires ./src/components/_plugins-THREE
+ * @requires ./src/components/ES5/_plugins-THREE
  */
 
 

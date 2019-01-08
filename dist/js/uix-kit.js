@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.1.4
+ * ## Version             :  3.1.5
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  January 7, 2019
+ * ## Last Update         :  January 8, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -111,10 +111,10 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 
-// EXTERNAL MODULE: ./src/components/_global/scss/_all.scss
+// EXTERNAL MODULE: ./src/components/ES5/_global/scss/_all.scss
 var _all = __webpack_require__(0);
 
-// CONCATENATED MODULE: ./src/components/_global/js/_all.js
+// CONCATENATED MODULE: ./src/components/ES5/_global/js/_all.js
 /* Please do not modify variable "UIX_KIT_IMPORT" name */
 var UIX_KIT_IMPORT = {
   "files": [
@@ -123,37 +123,75 @@ var UIX_KIT_IMPORT = {
   /******/
 
   /* must be placed in the first place */
-  "./src/components/_global/js/_base.js",
+  "./src/components/ES5/_global/js/_base.js",
   /******/
 
   /******/
 
   /* base */
-  "./src/components/_global/js/body-and-header.js", "./src/components/_global/js/common-height.js", "./src/components/_global/js/custom-data-attrs.js", "./src/components/_global/js/loader.js", "./src/components/_global/js/mega-menu.js", "./src/components/_global/js/mobile-menu.js", "./src/components/_global/js/modal-dialog.js", "./src/components/_global/js/navigation.js", "./src/components/_global/js/pagination.js", "./src/components/_global/js/set-background.js", "./src/components/_global/js/table.js", "./src/components/_global/js/videos.js", //GSAP ==> generic
-  "./src/components/_plugins-GSAP/js/ColorPropsPlugin.js", "./src/components/_plugins-GSAP/js/CSSRulePlugin.js", "./src/components/_plugins-GSAP/js/EaselPlugin.js", "./src/components/_plugins-GSAP/js/EndArrayPlugin.js", "./src/components/_plugins-GSAP/js/ModifiersPlugin.js", "./src/components/_plugins-GSAP/js/PixiPlugin.js", "./src/components/_plugins-GSAP/js/RaphaelPlugin.js", "./src/components/_plugins-GSAP/js/ScrollToPlugin.js", "./src/components/_plugins-GSAP/js/TEMPLATE_Plugin.js", "./src/components/_plugins-GSAP/js/TextPlugin.js", //three.js ==> generic
-  "./src/components/_plugins-THREE/js/CSS3DRenderer.js", "./src/components/_plugins-THREE/js/GLTFLoader.js", "./src/components/_plugins-THREE/js/MTLLoader.js", "./src/components/_plugins-THREE/js/OBJLoader.js", "./src/components/_plugins-THREE/js/OrbitControls.js",
+  "./src/components/ES5/_global/js/body-and-header.js", "./src/components/ES5/_global/js/common-height.js", "./src/components/ES5/_global/js/custom-data-attrs.js", "./src/components/ES5/_global/js/loader.js", "./src/components/ES5/_global/js/mega-menu.js", "./src/components/ES5/_global/js/mobile-menu.js", "./src/components/ES5/_global/js/modal-dialog.js", "./src/components/ES5/_global/js/navigation.js", "./src/components/ES5/_global/js/pagination.js", "./src/components/ES5/_global/js/set-background.js", "./src/components/ES5/_global/js/table.js", "./src/components/ES5/_global/js/videos.js", //GSAP ==> generic
+  "./src/components/ES5/_plugins-GSAP/js/ColorPropsPlugin.js", "./src/components/ES5/_plugins-GSAP/js/CSSRulePlugin.js", "./src/components/ES5/_plugins-GSAP/js/EaselPlugin.js", "./src/components/ES5/_plugins-GSAP/js/EndArrayPlugin.js", "./src/components/ES5/_plugins-GSAP/js/ModifiersPlugin.js", "./src/components/ES5/_plugins-GSAP/js/PixiPlugin.js", "./src/components/ES5/_plugins-GSAP/js/RaphaelPlugin.js", "./src/components/ES5/_plugins-GSAP/js/ScrollToPlugin.js", "./src/components/ES5/_plugins-GSAP/js/TEMPLATE_Plugin.js", "./src/components/ES5/_plugins-GSAP/js/TextPlugin.js", //three.js ==> generic
+  "./src/components/ES5/_plugins-THREE/js/CSS3DRenderer.js", "./src/components/ES5/_plugins-THREE/js/GLTFLoader.js", "./src/components/ES5/_plugins-THREE/js/MTLLoader.js", "./src/components/ES5/_plugins-THREE/js/OBJLoader.js", "./src/components/ES5/_plugins-THREE/js/OrbitControls.js",
   /******/
 
   /******/
 
   /* pages */
-  "./src/components/_home/js/home.js", "./src/components/accordion-img/js/accordion-img.js", "./src/components/accordion/js/accordion.js", "./src/components/advanced-content-slider/js/advanced-content-slider.js", "./src/components/advanced-slider/js/advanced-slider-basic.js", "./src/components/advanced-slider/js/advanced-slider-SpecialEffects.js", "./src/components/AJAX-push/js/ajax-push-content.js", "./src/components/AJAX/js/ajax-page-loader.js", "./src/components/back-to-top/js/back-to-top.js", "./src/components/circle-layout/js/circle-layout.js", "./src/components/counter/js/counter.js", "./src/components/dropdown-menu/js/dropdown-menu.js", "./src/components/dropdown-menu2/js/dropdown-menu2.js", "./src/components/dynamic-dropdown-list-json/js/dynamic-dropdown-list-json.js", "./src/components/flexslider/js/custom-flexslider.js", "./src/components/flexslider/js/jquery.flexslider.js", "./src/components/floating-side-element/js/floating-side-element.js", "./src/components/form-progress/js/form-progress.js", "./src/components/form/js/form.js", "./src/components/form/js/jqueryui.datepicker.js", "./src/components/gallery/js/gallery.js", "./src/components/hover-delay-interaction/js/hover-delay-interaction.js", "./src/components/image-shapes/js/image-shapes.js", "./src/components/lava-lamp-style-menu/js/lava-lamp-style-menu.js", "./src/components/lightbox/js/lightbox.js", "./src/components/list-bulleted/js/list-bulleted.js", "./src/components/list-posts/js/list-posts-with-ajax.js", "./src/components/list-split-imagery/js/list-split-imagery.js", "./src/components/mousewheel-interaction/js/mousewheel-interaction.js", "./src/components/multi-items-carousel/js/multi-items-carousel.js", "./src/components/one-page/js/one-page.js", "./src/components/one-page2/js/one-page2.js", "./src/components/parallax/js/parallax.js", "./src/components/periodical-scroll/js/periodical-scroll.js", "./src/components/pricing/js/pricing.js", "./src/components/progress-bar/js/progress-bar.js", "./src/components/progress-line/js/progress-line.js", "./src/components/retina/js/retina.js", "./src/components/rotating-elements/js/rotating-elements.js", "./src/components/scroll-reveal/js/scroll-reveal.js", "./src/components/scrollspy-animate/js/scrollspy-animate.js", "./src/components/show-more-less/js/show-more-less.js", "./src/components/skew-on-scroll/js/skew-on-scroll.js", "./src/components/smooth-scrolling-anchor-link/js/smooth-scrolling-anchor-link.js", "./src/components/source-code/js/highlight.js", "./src/components/source-code/js/source-code.js", "./src/components/sticky-elements/js/sticky-elements.js", "./src/components/svg-map/js/svg-map-china.js", "./src/components/svg-map/js/svg-map-world.js", "./src/components/table-sorter/js/table-sorter.js", "./src/components/t3D-background-three/js/3D-background-three.js", "./src/components/t3D-background-three2/js/3D-background-three2.js", "./src/components/t3D-background/js/3D-background.js", "./src/components/t3D-carousel/js/3D-carousel.js", "./src/components/t3D-model/js/3D-model.js", "./src/components/t3D-pages/js/3D-pages.js", "./src/components/t3D-particle-effect/js/3D-particle-effect.js", "./src/components/t3D-sphere-three/js/3D-sphere-three.js", "./src/components/t3D-obj-anim-interaction/js/3D-obj-anim-interaction.js", "./src/components/tabs/js/tabs.js", "./src/components/team-focus/js/team-focus.js", "./src/components/text-effect/js/text-effect.js", "./src/components/timeline/js/timeline.js", "./src/components/vertical-menu/js/vertical-menu.js", "./src/components/wordpress/js/wp-core.js"]
+  "./src/components/ES5/_home/js/home.js", "./src/components/ES5/accordion-img/js/accordion-img.js", "./src/components/ES5/accordion/js/accordion.js", "./src/components/ES5/advanced-content-slider/js/advanced-content-slider.js", "./src/components/ES5/advanced-slider/js/advanced-slider-basic.js", "./src/components/ES5/advanced-slider/js/advanced-slider-SpecialEffects.js", "./src/components/ES5/AJAX-push/js/ajax-push-content.js", "./src/components/ES5/AJAX/js/ajax-page-loader.js", "./src/components/ES5/back-to-top/js/back-to-top.js", "./src/components/ES5/circle-layout/js/circle-layout.js", "./src/components/ES5/counter/js/counter.js", "./src/components/ES5/dropdown-menu/js/dropdown-menu.js", "./src/components/ES5/dropdown-menu2/js/dropdown-menu2.js", "./src/components/ES5/dynamic-dropdown-list-json/js/dynamic-dropdown-list-json.js", "./src/components/ES5/flexslider/js/custom-flexslider.js", "./src/components/ES5/flexslider/js/jquery.flexslider.js", "./src/components/ES5/floating-side-element/js/floating-side-element.js", "./src/components/ES5/form-progress/js/form-progress.js", "./src/components/ES5/form/js/form.js", "./src/components/ES5/form/js/jqueryui.datepicker.js", "./src/components/ES5/gallery/js/gallery.js", "./src/components/ES5/hover-delay-interaction/js/hover-delay-interaction.js", "./src/components/ES5/image-shapes/js/image-shapes.js", "./src/components/ES5/lava-lamp-style-menu/js/lava-lamp-style-menu.js", "./src/components/ES5/lightbox/js/lightbox.js", "./src/components/ES5/list-bulleted/js/list-bulleted.js", "./src/components/ES5/list-posts/js/list-posts-with-ajax.js", "./src/components/ES5/list-split-imagery/js/list-split-imagery.js", "./src/components/ES5/mousewheel-interaction/js/mousewheel-interaction.js", "./src/components/ES5/multi-items-carousel/js/multi-items-carousel.js", "./src/components/ES5/one-page/js/one-page.js", "./src/components/ES5/one-page2/js/one-page2.js", "./src/components/ES5/parallax/js/parallax.js", "./src/components/ES5/periodical-scroll/js/periodical-scroll.js", "./src/components/ES5/pricing/js/pricing.js", "./src/components/ES5/progress-bar/js/progress-bar.js", "./src/components/ES5/progress-line/js/progress-line.js", "./src/components/ES5/retina/js/retina.js", "./src/components/ES5/rotating-elements/js/rotating-elements.js", "./src/components/ES5/scroll-reveal/js/scroll-reveal.js", "./src/components/ES5/scrollspy-animate/js/scrollspy-animate.js", "./src/components/ES5/show-more-less/js/show-more-less.js", "./src/components/ES5/skew-on-scroll/js/skew-on-scroll.js", "./src/components/ES5/smooth-scrolling-anchor-link/js/smooth-scrolling-anchor-link.js", "./src/components/ES5/source-code/js/highlight.js", "./src/components/ES5/source-code/js/source-code.js", "./src/components/ES5/sticky-elements/js/sticky-elements.js", "./src/components/ES5/svg-map/js/svg-map-china.js", "./src/components/ES5/svg-map/js/svg-map-world.js", "./src/components/ES5/table-sorter/js/table-sorter.js", "./src/components/ES5/t3D-background-three/js/3D-background-three.js", "./src/components/ES5/t3D-background-three2/js/3D-background-three2.js", "./src/components/ES5/t3D-background/js/3D-background.js", "./src/components/ES5/t3D-carousel/js/3D-carousel.js", "./src/components/ES5/t3D-model/js/3D-model.js", "./src/components/ES5/t3D-pages/js/3D-pages.js", "./src/components/ES5/t3D-particle-effect/js/3D-particle-effect.js", "./src/components/ES5/t3D-sphere-three/js/3D-sphere-three.js", "./src/components/ES5/t3D-obj-anim-interaction/js/3D-obj-anim-interaction.js", "./src/components/ES5/tabs/js/tabs.js", "./src/components/ES5/team-focus/js/team-focus.js", "./src/components/ES5/text-effect/js/text-effect.js", "./src/components/ES5/timeline/js/timeline.js", "./src/components/ES5/vertical-menu/js/vertical-menu.js", "./src/components/ES5/wordpress/js/wp-core.js"]
 };
 
+// CONCATENATED MODULE: ./src/components/ES6/_global/js/vars.js
+/* 
+ *************************************
+ * <!-- Vars -->
+ *************************************
+ */
+var globalVar = 'global var (one)';
+var globalVar2 = 'global var (two)';
+var globalVar3 = 'global var (three)';
+
+// CONCATENATED MODULE: ./src/components/ES6/app1/js/functions.js
+/* 
+ *************************************
+ * <!-- APP1 -->
+ *************************************
+ */
+
+var sex = 'boy';
+
+var functions_echo = function echo(value) {
+  console.log('%c ./src/components/ES6/app1 =>  echo(sex) =>' + '%c ' + value, 'color: #333', 'color: #f00');
+  console.log('%c ./src/components/ES6/app1 =>  ' + '%c' + globalVar, 'color: #333', 'color: #f00');
+};
+
+
 // CONCATENATED MODULE: ./src/index.js
-/* 
- *************************************
+/*
  * Import SASS files from components
- *************************************
+ *    
  */
 
-/* 
- *************************************
- * Import JS files from components
- *************************************
+/*
+ * Import JS files from components of ES5
+ * 
+ * @description  Only concat all .js files without ES6 parsing.  
+ *        
  */
 
 
+/*
+ * Import JS files from components of ES6
+ * 
+ * @description  Just a simple demonstration of ES6.
+ *        
+ */
+
+ //Output only on the ES6 demo page
+
+if (document.getElementsByTagName('body')[0].className.match(/es6-demo-home/)) {
+  functions_echo(sex);
+  alert('this is ES6 demo page!');
+}
 
 /***/ })
 /******/ ]);
@@ -165,81 +203,83 @@ var UIX_KIT_IMPORT = {
 	---------------------------
 	
 	
-	1.Body And Header
-    2.Common Height
-    3.Get all custom attributes of an element like "data-*"
-    4.Loader
-    5.Mega Menu
-    6.Mobile Menu
-    7.Modal Dialog
-    8.Navigation
-    9.WordPress Core Scripts
-    10.Specify a background image
-    11.Responsive Table
-    12.Videos
-    13.Theme Scripts
-    14.Accordion Background Images
-    15.Accordion
-    16.Advanced Content Slider
-    17.Advanced Slider (Basic)
-    18.Advanced Slider (Special Effects)
-    19.Ajax Push Content
-    20.Ajax Page Loader (Loading A Page via Ajax Into Div)
-    21.Back to Top
-    22.Circle Layout
-    23.Counter
-    24.Dropdown Menu
-    25.Dropdown Menu 2 (Multi-level drop-down navigation)
-    26.Dynamic Drop Down List from JSON
-    27.Flexslider
-    28.Floating Side Element
-    29.Form Progress
-    30.Form
-    31.jQuery UI Datepicker 1.11.4
-    32.Gallery
-    33.Hover Delay Interaction
-    34.Image Shapes
-    35.Lava-Lamp Style Menu
-    36.Custom Lightbox
-    37.Bulleted List
-    38.Posts List With Ajax
-    39.Fullwidth List of Split
-    40.Mousewheel Interaction
-    41.Multiple Items Carousel
-    42.Full Page/One Page Transition
-    43.Full Page/One Page Transition 2
-    44.Parallax
-    45.Periodical Scroll
-    46.Pricing
-    47.Progress Bar
-    48.Progress Line
-    49.Retina Graphics for Website
-    50.Rotating Elements
-    51.Scroll Reveal
-    52.Scrollspy Animate
-    53.Show More Less
-    54.Skew Based On Velocity of Scroll
-    55.Smooth Scrolling When Clicking An Anchor Link
-    56.Source Code View
-    57.Sticky Elements
-    58.SVG Map (China)
-    59.SVG Map (World)
-    60.Table Sorter
-    61.3D Background 2
-    62.3D Background 2
-    63.3D Background
-    64.3D Carousel
-    65.3D Model
-    66.3D Pages
-    67.3D Particle Effect
-    68.3D Sphere Rotation
-    69.3D Object Anim When Click
-    70.Tabs
-    71.Team Focus
-    72.Text effect
-    73.Timeline
-    74.Vertical Menu
-    75.WordPress Core Scripts
+	1.Vars
+    2.APP1
+    3.Body And Header
+    4.Common Height
+    5.Get all custom attributes of an element like "data-*"
+    6.Loader
+    7.Mega Menu
+    8.Mobile Menu
+    9.Modal Dialog
+    10.Navigation
+    11.WordPress Core Scripts
+    12.Specify a background image
+    13.Responsive Table
+    14.Videos
+    15.Theme Scripts
+    16.Accordion Background Images
+    17.Accordion
+    18.Advanced Content Slider
+    19.Advanced Slider (Basic)
+    20.Advanced Slider (Special Effects)
+    21.Ajax Push Content
+    22.Ajax Page Loader (Loading A Page via Ajax Into Div)
+    23.Back to Top
+    24.Circle Layout
+    25.Counter
+    26.Dropdown Menu
+    27.Dropdown Menu 2 (Multi-level drop-down navigation)
+    28.Dynamic Drop Down List from JSON
+    29.Flexslider
+    30.Floating Side Element
+    31.Form Progress
+    32.Form
+    33.jQuery UI Datepicker 1.11.4
+    34.Gallery
+    35.Hover Delay Interaction
+    36.Image Shapes
+    37.Lava-Lamp Style Menu
+    38.Custom Lightbox
+    39.Bulleted List
+    40.Posts List With Ajax
+    41.Fullwidth List of Split
+    42.Mousewheel Interaction
+    43.Multiple Items Carousel
+    44.Full Page/One Page Transition
+    45.Full Page/One Page Transition 2
+    46.Parallax
+    47.Periodical Scroll
+    48.Pricing
+    49.Progress Bar
+    50.Progress Line
+    51.Retina Graphics for Website
+    52.Rotating Elements
+    53.Scroll Reveal
+    54.Scrollspy Animate
+    55.Show More Less
+    56.Skew Based On Velocity of Scroll
+    57.Smooth Scrolling When Clicking An Anchor Link
+    58.Source Code View
+    59.Sticky Elements
+    60.SVG Map (China)
+    61.SVG Map (World)
+    62.Table Sorter
+    63.3D Background 2
+    64.3D Background 2
+    65.3D Background
+    66.3D Carousel
+    67.3D Model
+    68.3D Pages
+    69.3D Particle Effect
+    70.3D Sphere Rotation
+    71.3D Object Anim When Click
+    72.Tabs
+    73.Team Focus
+    74.Text effect
+    75.Timeline
+    76.Vertical Menu
+    77.WordPress Core Scripts
 
 
 */
@@ -311,7 +351,7 @@ var browser = {
  * APP
  * @global
  *
- * //Used for all modules from ./src/components/[__]/js
+ * //Used for all modules from ./src/components/ES5/[__]/js
  * @requires ./examples/assets/js/min/jquery.waitforimages.min.js
  * @requires ./examples/assets/js/min/video.min.js
  * @requires ./examples/assets/js/min/jquery.waypoints.min.js
@@ -12207,8 +12247,8 @@ APP = ( function ( APP, $, window, document ) {
  * @global
  * @requires ./examples/assets/js/min/pixi.min.js
  * @requires ./examples/assets/js/min/three.min.js
- * @requires ./src/components/_plugins-THREE
- * @requires ./src/components/_plugins-GSAP
+ * @requires ./src/components/ES5/_plugins-THREE
+ * @requires ./src/components/ES5/_plugins-GSAP
  */
 
 APP = ( function ( APP, $, window, document ) {
@@ -16018,11 +16058,11 @@ APP = ( function ( APP, $, window, document ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
-			scrollReveal    : true, // @from ./src/components/scroll-reveal
-			ajaxPostList    : true, // @from ./src/components/list-posts
-			ajaxDDList      : true, // @from ./src/components/dynamic-dropdown-list-json
-			counterAnim     : true, // @from ./src/components/counter
-			lightBox        : true  // @from ./src/components/lightbox
+			scrollReveal    : true, // @from ./src/components/ES5/scroll-reveal
+			ajaxPostList    : true, // @from ./src/components/ES5/list-posts
+			ajaxDDList      : true, // @from ./src/components/ES5/dynamic-dropdown-list-json
+			counterAnim     : true, // @from ./src/components/ES5/counter
+			lightBox        : true  // @from ./src/components/ES5/lightbox
         }, options );
  
         this.each( function() {
@@ -26802,7 +26842,7 @@ APP = ( function ( APP, $, window, document ) {
  * APP.SCROLLSPY_ANIM
  * @global
  * @requires ./examples/assets/js/min/pixi.min.js
- * @requires ./src/components/_plugins-GSAP
+ * @requires ./src/components/ES5/_plugins-GSAP
  */
 
 APP = ( function ( APP, $, window, document ) {
@@ -28734,7 +28774,7 @@ jQuery.fn.sortElements = (function(){
  * APP._3D_BACKGROUND_THREE
  * @global
  * @requires ./examples/assets/js/min/three.min.js
- * @requires ./src/components/_plugins-THREE
+ * @requires ./src/components/ES5/_plugins-THREE
  */
 
 
@@ -28966,7 +29006,7 @@ APP = ( function ( APP, $, window, document ) {
  * APP._3D_BACKGROUND_THREE2
  * @global
  * @requires ./examples/assets/js/min/three.min.js
- * @requires ./src/components/_plugins-THREE
+ * @requires ./src/components/ES5/_plugins-THREE
  */
 
 
@@ -29755,7 +29795,7 @@ APP = ( function ( APP, $, window, document ) {
  * APP._3D_MODEL
  * @global
  * @requires ./examples/assets/js/min/three.min.js
- * @requires ./src/components/_plugins-THREE
+ * @requires ./src/components/ES5/_plugins-THREE
  */
 
 APP = ( function ( APP, $, window, document ) {
@@ -30028,7 +30068,7 @@ APP = ( function ( APP, $, window, document ) {
  * APP._3D_PAGES
  * @global
  * @requires ./examples/assets/js/min/three.min.js
- * @requires ./src/components/_plugins-THREE
+ * @requires ./src/components/ES5/_plugins-THREE
  */
 
 APP = ( function ( APP, $, window, document ) {
@@ -30170,7 +30210,7 @@ APP = ( function ( APP, $, window, document ) {
  * APP._3D_PARTICLE
  * @global
  * @requires ./examples/assets/js/min/three.min.js
- * @requires ./src/components/_plugins-THREE
+ * @requires ./src/components/ES5/_plugins-THREE
  */
 
 APP = ( function ( APP, $, window, document ) {
@@ -30539,7 +30579,7 @@ APP = ( function ( APP, $, window, document ) {
  * APP._3D_SPHERE_THREE
  * @global
  * @requires ./examples/assets/js/min/three.min.js
- * @requires ./src/components/_plugins-THREE
+ * @requires ./src/components/ES5/_plugins-THREE
  */
 
 APP = ( function ( APP, $, window, document ) {
@@ -30693,7 +30733,7 @@ APP = ( function ( APP, $, window, document ) {
  * APP._3D_OBJ_ANIM_INTERACTION
  * @global
  * @requires ./examples/assets/js/min/three.min.js
- * @requires ./src/components/_plugins-THREE
+ * @requires ./src/components/ES5/_plugins-THREE
  */
 
 

@@ -1,0 +1,436 @@
+@@include('./src/components/ES5/_global/include-header.html')
+     
+  <body class="page">
+  
+  
+          
+    @@include('./src/components/ES5/_global/include-loader.html')
+    @@include('./src/components/ES5/_global/include-toggle-trigger.html')
+    
+    
+
+  
+  
+    <div class="uix-wrapper">
+    
+        <!-- Header Area
+        ============================================= -->      
+        <header class="uix-header__container">
+            
+             <div class="uix-header">
+                 <div class="container">
+                 
+                        @@include('./src/components/ES5/_global/include-brand.html')
+                        
+                        @@include('./src/components/ES5/_global/include-menu.html')
+                        
+                        
+                        
+                        
+                  </div>
+                  <!-- .container end -->
+                  
+                  <div class="uix-clearfix"></div>
+             </div>
+        
+        </header>
+        <div class="uix-header__placeholder"></div>
+      
+      
+     
+        <!-- Content 01
+        ====================================================== -->
+        <section>
+            <div class="container uix-t-c">
+                    <div class="row">
+                        <div class="col-md-8 offset-md-2">
+                            <h2>Ajax Load Posts</h2>
+                            
+                        </div>
+                    </div>
+                    <!-- .row end -->
+              
+                    
+            </div>
+            <!-- .container end -->
+ 
+        </section>
+     
+       
+    
+       <!-- Content 02
+        ====================================================== -->
+        <section class="uix-spacing--m">
+            <div class="container">
+                    <div class="row">
+                        <div class="col-12 uix-trans uix-filter-hover--color">
+                        
+                        
+                            <!-- Recommended to enter the total number of attribute "data-ajax-list-page-total". -->
+							<div class="uix-list-topic"
+							     data-ajax-list-json="assets/json/content-posts.php" 
+							     data-ajax-list-method="POST" 
+							     data-ajax-list-addition="true" 
+							     data-ajax-list-temp-id="list-topic-ajax-template-1" 
+							     data-ajax-list-page-parm-str='{"totalPage":"total","currentPage":"page","displayPerPage":"per"}' 
+							     data-ajax-list-page-now="1" 
+							     data-ajax-list-page-per="8" 
+							     data-ajax-list-page-total="-1" 
+							     data-ajax-list-trigger="#ajax-loadmore-btn-1" 
+							     data-ajax-list-trigger-active-class=".active" 
+							     data-ajax-list-push-container-class=".uix-list-topic__items-ajax-container" 
+							     data-ajax-list-infinitescroll="false"
+								 data-ajax-list-none-info='{"none":"<div class=\"uix-clearfix\"></div><p class=\"uix-typo--color-sub uix-t-c\">No content yet.</p>","error":"<div class=\"uix-clearfix\"></div><p class=\"uix-typo--color-sub uix-t-c\">An unknown error has occurred.</p>"}'
+							     data-ajax-list-field-name1="Custom String 1"
+							     data-ajax-list-field-name2="Custom String 2">
+
+
+									<!-- List Item -->
+									<div class="uix-list-topic__item uix-list-topic__item--style-2">
+										<div class="row">
+											<div class="col-lg-4 col-md-4 uix-list-topic__item__img uix-trans">
+												<a href="#"> 
+													<img src="assets/images/demo/test-img-big-1.jpg" alt="" />
+												</a>
+											</div><!-- /.col-lg-4.col-md-4  -->
+
+
+											<div class="col-lg-8 col-md-8">
+
+												<div class="uix-list-topic__item__info uix-trans">
+
+
+													<div class="uix-core-grid__col-5 uix-core-grid__mobile-half">
+
+														<h3>
+															 <a href="#">
+																 Project Title Here
+															 </a>
+														</h3>
+													</div>
+
+
+													<div class="uix-core-grid__col-7 uix-core-grid__mobile-half">
+
+														<div class="uix-core-grid__col-5 uix-core-grid__mobile-stack">
+															<p><strong>Author:</strong> David</p>
+															<p><strong>Date:</strong> December 10, 2017</p>
+														</div>
+
+
+														<div class="uix-core-grid__col-7 uix-core-grid__mobile-stack">
+															<p><strong>Comments:</strong> 20</p>
+															<p><strong>Categories:</strong> Art, Design</p>
+														</div>	
+
+													</div>	
+
+												</div><!-- /.uix-list-topic__item__info -->
+
+
+												<div class="uix-clearfix"></div>
+
+
+												<div class="uix-list-topic__item__addition uix-list uix-list--normal uix-table uix-table--bordered">
+
+														<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
+
+
+													 <div class="uix-tags-box">
+														 <a href="#">Tag</a>
+														 <a href="#">Video</a>
+														 <a href="#">Web Design</a>
+													 </div>
+
+												</div>
+
+
+											</div><!-- /.col-lg-8.col-md-8  -->
+
+
+										</div>
+										<!-- .row  end -->
+
+
+
+									</div>
+									<!-- List Item  end --> 
+
+
+
+									<!-- List Item -->
+									<div class="uix-list-topic__item uix-list-topic__item--style-2">
+										<div class="row">
+											<div class="col-lg-4 col-md-4 uix-list-topic__item__img uix-trans">
+												<a href="#"> 
+													<img src="assets/images/demo/test-img-big-2.jpg" alt="" />
+												</a>
+											</div><!-- /.col-lg-4.col-md-4  -->
+
+
+											<div class="col-lg-8 col-md-8">
+
+												<div class="uix-list-topic__item__info uix-trans">
+
+
+													<div class="uix-core-grid__col-5 uix-core-grid__mobile-half">
+
+														<h3>
+															 <a href="#">
+																 Project Title Here - The Long Title Here. The Long Title Here.  The Long Title Here. The Long Title Here. The Long Title Here.
+															 </a>
+														</h3>
+													</div>
+
+
+													<div class="uix-core-grid__col-7 uix-core-grid__mobile-half">
+
+														<div class="uix-core-grid__col-5 uix-core-grid__mobile-stack">
+															<p><strong>Author:</strong> David</p>
+															<p><strong>Date:</strong> December 10, 2017</p>
+														</div>
+
+
+														<div class="uix-core-grid__col-7 uix-core-grid__mobile-stack">
+															<p><strong>Comments:</strong> 20</p>
+															<p><strong>Categories:</strong> Art, Design</p>
+														</div>	
+
+													</div>	
+
+												</div><!-- /.uix-list-topic__item__info -->
+
+
+												<div class="uix-clearfix"></div>
+
+
+												<div class="uix-list-topic__item__addition uix-list uix-list--normal uix-table uix-table--bordered">
+
+														<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
+
+
+													 <div class="uix-tags-box">
+														 <a href="#">Tag</a>
+														 <a href="#">Video</a>
+														 <a href="#">Web Design</a>
+													 </div>
+
+												</div>
+
+
+											</div><!-- /.col-lg-8.col-md-8  -->
+
+
+										</div>
+										<!-- .row  end -->
+
+
+
+									</div>
+									<!-- List Item  end --> 
+
+
+
+
+
+									<!-- List Item -->
+									<div class="uix-list-topic__item uix-list-topic__item--style-2">
+										<div class="row">
+											<div class="col-lg-4 col-md-4 uix-list-topic__item__img uix-trans">
+												<a href="#"> 
+													<img src="assets/images/demo/test-img-big-3.jpg" alt="" />
+												</a>
+											</div><!-- /.col-lg-4.col-md-4  -->
+
+
+											<div class="col-lg-8 col-md-8">
+
+												<div class="uix-list-topic__item__info uix-trans">
+
+
+													<div class="uix-core-grid__col-5 uix-core-grid__mobile-half">
+
+														<h3>
+															 <a href="#">
+																 Project Title Here
+															 </a>
+														</h3>
+													</div>
+
+
+													<div class="uix-core-grid__col-7 uix-core-grid__mobile-half">
+
+														<div class="uix-core-grid__col-5 uix-core-grid__mobile-stack">
+															<p><strong>Author:</strong> David</p>
+															<p><strong>Date:</strong> December 10, 2017</p>
+														</div>
+
+
+														<div class="uix-core-grid__col-7 uix-core-grid__mobile-stack">
+															<p><strong>Comments:</strong> 20</p>
+															<p><strong>Categories:</strong> Art, Design</p>
+														</div>	
+
+													</div>	
+
+												</div><!-- /.uix-list-topic__item__info -->
+
+
+												<div class="uix-clearfix"></div>
+
+
+												<div class="uix-list-topic__item__addition uix-list uix-list--normal uix-table uix-table--bordered">
+
+														<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac.</p>
+
+													 <p>People think focus means saying yes to the thing you&#8217;ve got to focus on. But that&#8217;s not what it means at all. It means saying no to the hundred other good ideas that there are. You have to pick carefully. I&#8217;m actually as proud of the things we haven&#8217;t done as the things I have done. Innovation is saying no to 1,000 things. <cite>Steve Jobs &#8211; Apple Worldwide Developers&#8217; Conference, 1997</cite></p>
+													<p>Nullam id dolor id nibh ultricies vehicula ut id elit. Curabitur blandit tempus porttitor. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper.</p>
+													<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac.</p>
+
+
+													 <div class="uix-tags-box">
+														 <a href="#">Tag</a>
+														 <a href="#">Video</a>
+														 <a href="#">Web Design</a>
+													 </div>
+
+												</div>
+
+
+											</div><!-- /.col-lg-8.col-md-8  -->
+
+
+										</div>
+										<!-- .row  end -->
+
+
+
+									</div>
+									<!-- List Item  end --> 
+
+ 	
+						
+						
+						            <div class="uix-list-topic__items-ajax-container"></div>
+									<script id="list-topic-ajax-template-1" type="text/template7">
+									
+									    {{#each items}}
+										
+
+											<!-- List Item -->
+											<div class="uix-list-topic__item uix-list-topic__item--style-2">
+												<div class="row">
+													<div class="col-lg-4 col-md-4 uix-list-topic__item__img uix-trans">
+														<a href="{{link}}"> 
+															<img src="{{img}}" alt="" />
+														</a>
+													</div><!-- /.col-lg-4.col-md-4  -->
+
+
+													<div class="col-lg-8 col-md-8">
+
+														<div class="uix-list-topic__item__info uix-trans">
+
+
+															<div class="uix-core-grid__col-5 uix-core-grid__mobile-half">
+
+																<h3>
+																	 <a href="{{link}}">
+																		 {{title}}
+																	 </a>
+																</h3>
+															</div>
+
+
+															<div class="uix-core-grid__col-7 uix-core-grid__mobile-half">
+
+																<div class="uix-core-grid__col-5 uix-core-grid__mobile-stack">
+																	<p><strong>Author:</strong> {{author}}</p>
+																	<p><strong>Date:</strong> {{time}}</p>
+																</div>
+
+
+																<div class="uix-core-grid__col-7 uix-core-grid__mobile-stack">
+																	<p><strong>Comments:</strong> {{comments}}</p>
+																	<p><strong>Categories:</strong> {{cat}}</p>
+																</div>	
+
+															</div>	
+
+														</div><!-- /.uix-list-topic__item__info -->
+
+
+														<div class="uix-clearfix"></div>
+
+
+														<div class="uix-list-topic__item__addition uix-list uix-list--normal uix-table uix-table--bordered">
+
+																<p>{{detail}}</p>
+
+															 <div class="uix-tags-box">
+																 {{tags}}
+															 </div>
+
+														</div>
+
+
+													</div><!-- /.col-lg-8.col-md-8  -->
+
+
+												</div>
+												<!-- .row  end -->
+
+
+
+											</div>
+											<!-- List Item  end --> 
+										
+										
+										
+										
+										{{/each}}
+
+									</script>  
+                                  
+									
+						
+						
+						
+						
+							</div><!-- /.uix-list-topic -->
+                       
+                       
+                        </div>
+                        <!-- .col-12 end -->
+                    </div>
+                    <!-- .row end -->
+                    
+                    
+                      
+                    <p class="uix-t-c">
+                        <a id="ajax-loadmore-btn-1" href="javascript:void(0)" class="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary is-pill">Load More</a>
+				    </p>
+                    
+            </div>
+            <!-- .container end -->
+            
+            
+            
+ 
+        </section>
+        
+         
+      
+        
+        
+        
+        
+        @@include('./src/components/ES5/_global/include-copyright.html')
+        
+        
+    </div>
+    <!-- .wrapper end -->
+       
+       
+    @@include('./src/components/ES5/_global/include-footer.html')
+

@@ -2,7 +2,7 @@
 
 
 [![Travis CI](https://api.travis-ci.org/xizon/uix-kit.svg?branch=master)](https://travis-ci.org/xizon/uix-kit/)
-[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=3.1.4&x2=0)](https://www.npmjs.com/package/uix-kit)
+[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=3.1.5&x2=0)](https://www.npmjs.com/package/uix-kit)
 [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
 
 
@@ -276,9 +276,8 @@ uix-kit/
 │   ├── index.js
 │   ├── index-rtl.js
 │   ├── components/
-│   │       ├── _global/
-│   │       ├── _home/
-│   │       └── ...
+│   │   ├── ES5/
+│   │   └── ES6/
 ├── examples/
 │   ├── *.html
 │   ├── assets/

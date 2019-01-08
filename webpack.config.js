@@ -58,11 +58,19 @@ let customWebsiteVersion     = json.version,
 
 // Get all the HTML template files
 
-let tempPages = glob.sync( './'+globs.build+'/components/**/*.html' );
+let tempPagesES5 = glob.sync( './'+globs.build+'/components/ES5/**/*.html' );
+let tempPagesES6 = glob.sync( './'+globs.build+'/components/ES6/**/*.html' );
 let targetTempFilesName = [];
 let targetAllTempFilesName = [];
 
-tempPages.map( ( event ) => {
+let tempPagesArrays = [
+  tempPagesES5,
+  tempPagesES6
+];
+let tempAllPages = [].concat(...tempPagesArrays);
+
+
+tempAllPages.map( ( event ) => {
 	let filename = event.split( '/' ).pop();
 	
 	targetAllTempFilesName.push( [ event, event.split( '/' ).pop() ] );
@@ -74,10 +82,10 @@ tempPages.map( ( event ) => {
 });
 
 
-// Get all the js component files
-
+// Get all the js component files with ES5
+//Just do a merge, not for ES6 parsing
 let targetJSComFilesName = '';
-let JSComFiles = './'+globs.build+'/components/_global/js/_all.js';
+let JSComFiles = './'+globs.build+'/components/ES5/_global/js/_all.js';
 if ( fs.existsSync( JSComFiles ) ) {
 
 	let content = fs.readFileSync( JSComFiles );
@@ -100,11 +108,11 @@ if ( fs.existsSync( JSComFiles ) ) {
 }
 
 
-let nArrays = [
+let targetFilesNameArrays = [
   targetAllTempFilesName,
   targetJSComFilesName
 ];
-let targetAllWatchFilesName = [].concat(...nArrays);
+let targetAllWatchFilesName = [].concat(...targetFilesNameArrays);
 
 //console.log( targetAllWatchFilesName );
 
