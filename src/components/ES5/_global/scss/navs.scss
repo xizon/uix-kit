@@ -191,7 +191,7 @@
 				transition: all 0.3s ease;
 				background: #fff;
 				border-radius: 8px;
-				@include outer-shadow( 1 );
+				@include outer-shadow( 'thick' );
 				
 				
 				li,
@@ -276,7 +276,7 @@
 			}
 
 			> ul {
-				@include outer-shadow( 1 );
+				@include outer-shadow( 'thick' );
 				margin-top: -0.203125rem;
 			}	
 

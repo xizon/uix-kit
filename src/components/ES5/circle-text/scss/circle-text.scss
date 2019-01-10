@@ -1,0 +1,37 @@
+/* ====================================================== 
+   <!-- Badges --> 
+/* ====================================================== */
+
+
+.uix-circle-text {
+	
+	position: relative;
+	display: inline-block;
+	
+	
+	circle-text {
+		
+		color: $primary-text-color1;
+		text-transform: uppercase;
+		letter-spacing: .1rem;
+		transform: rotate(-144deg);	
+		
+		&:defined {
+			display: block;
+		}
+
+		svg {
+			display: block; 
+			overflow: visible; 
+			padding: .5rem;
+		}
+
+		textPath { 
+			fill: currentColor; 
+		}
+
+
+
+	}
+
+}

@@ -98,7 +98,7 @@ $nav-mega-li-w    : 270px;
 				opacity: 0;
 
 				&::before {
-					@include outer-shadow( 3 );
+					@include outer-shadow( 'regular' );
 					content: '';
 					display: block;
 					height: 100%;
@@ -147,7 +147,7 @@ $nav-mega-li-w    : 270px;
 
 		> li:not(.multi-column) > ul {
 			ul {
-				@include outer-shadow( 1 );
+				@include outer-shadow( 'thick' );
 				top: 0;
 				left: 100%;
 				background: #fff;

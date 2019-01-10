@@ -22,7 +22,7 @@ $crumbs-size       : 27px;
 		li {
 			font-size: 0.875rem;/*Fighting the Space Between Inline Block Elements*/
 			display: inline-block;
-		    @include outer-shadow( 1 );
+		    @include outer-shadow( 'thick' );
 			
 			a {
 				display: block;

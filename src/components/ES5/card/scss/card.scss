@@ -22,7 +22,7 @@ $card-radius: 8px;
 	position: relative;
 	border-top: 8px solid $highlight-color1;
 	border-radius: $card-radius;
-	@include outer-shadow();
+	@include outer-shadow( 'thick' );
 	
 	&::before,
 	&::after {
@@ -125,7 +125,7 @@ $card-radius: 8px;
 	background-size: cover;
 	margin-bottom: 1.5rem;
     @include transition-default();
-	@include outer-shadow();
+	@include outer-shadow( 'thick' );
 	
 	&::before,
 	&::after {
@@ -167,7 +167,7 @@ $card-radius: 8px;
     background-color: #fff;
 	margin-bottom: 1.5rem;
     @include transition-default();
-	@include outer-shadow();
+	@include outer-shadow( 'thick' );
 	
 	&::before,
 	&::after {
@@ -231,7 +231,7 @@ $card-radius: 8px;
     background-color: #fff;
 	margin-bottom: 1.5rem;
     @include transition-default();
-	@include outer-shadow();
+	@include outer-shadow( 'thick' );
 	
 	&::before,
 	&::after {

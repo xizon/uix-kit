@@ -403,8 +403,7 @@
             <div class="container uix-t-c">
                     <div class="row">
                         <div class="col-md-8 offset-md-2">
-                            <h2>Basic Tooltip</h2>
-							<p>Please move your mouse pointer over an element.</p>
+                            <h2>Circle Text</h2>
                         </div>
                     </div>
                     <!-- .row end -->
@@ -416,41 +415,42 @@
         </section>
      
        
+       
     
-       <!-- Content 02
+       <!-- Content 02 
         ====================================================== -->
         <section class="uix-spacing--m">
             <div class="container uix-t-c">
-                   
-				           
-				<div class="row">
-					<div class="col-lg-3 col-md-3">
-						<div class="uix-tooltip"><a href="#"><i class="fa fa-cog" aria-hidden="true"></i> Top</a> <span class="uix-tooltip__content uix-tooltip__content--top">Tooltip text<br>Tooltip textTooltip textTooltip textTooltip textTooltip text</span> </div>
+                    <div class="row">
+                        <div class="col-md-8 offset-md-2">
+                        
 
-					</div>
-					<div class="col-lg-3 col-md-3">
-						<div class="uix-tooltip"><a href="#"><i class="fa fa-cog" aria-hidden="true"></i> Right</a> <span class="uix-tooltip__content uix-tooltip__content--right">Tooltip text</span> </div>
+							<div class="uix-circle-text">
+								  <circle-text r="90">
 
-					</div>
-					<div class="col-lg-3 col-md-3">
-						<div class="uix-tooltip"><a href="#"><i class="fa fa-cog" aria-hidden="true"></i> Bottom</a> <span class="uix-tooltip__content uix-tooltip__content--bottom">Tooltip text</span> </div>
+									  <svg height="180" width="180" viewBox="-90,-90,180,180">
+										  <defs><path id="my-circletxt" d="M-90,0 A90,90,0 1 1 90,0 A90,90,0 1 1 -90,0Z"></path>
+											  <circle r="90"></circle>
+										  </defs>
+										  <text><textPath xlink:href="#my-circletxt">Circle Text Here. Circle Text Here. Circle Text Here.</textPath></text>
+									 </svg>
+								  </circle-text>
+							</div>
 
-					</div>
-					<div class="col-lg-3 col-md-3">
-						<div class="uix-tooltip"><a href="#"><i class="fa fa-cog" aria-hidden="true"></i> Left</a> <span class="uix-tooltip__content uix-tooltip__content--left">Tooltip text</span> </div>
 
-					</div>	
-				</div>
-				<!-- .row end -->	
-                   
+							
+                           
+                        </div>
+                    </div>
+                    <!-- .row end -->
+           
                     
             </div>
             <!-- .container end -->
  
         </section>   
-        
-       
-        
+
+      
         
                 <!-- Footer
         ============================================= -->    

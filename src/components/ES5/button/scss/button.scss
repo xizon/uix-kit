@@ -323,7 +323,7 @@ $button-class-margin-b: 1.5rem;
 	border-color: $btn-gradient-color1;
 	background-color: $btn-gradient-color1;
 	background-image: linear-gradient(to right, $btn-gradient-color1 0%, $btn-gradient-color2 20%, $btn-gradient-color3 100%);
-	@include outer-shadow( 2 );
+	@include outer-shadow( 'highlight', $highlight-color1 );
 	color: #fff;
 	
 

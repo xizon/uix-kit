@@ -54,7 +54,8 @@
 			left: 0;
 			right: 0;
 			pointer-events: none;
-			@include outer-shadow( 3 );
+			border: 1px solid rgba(0, 0, 0, .05);
+			@include outer-shadow( 'light' );
 		}
 		
 		
@@ -62,10 +63,10 @@
 		&.active {
 			height: auto;
 			margin: 1rem 0;
-			@include outer-shadow( 1 );
+			@include outer-shadow( 'thick' );
 
 			dt {
-				border-bottom: 1px solid rgba(0, 0, 0, 0.18);
+				border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 				
 				&::before {
 					transform: rotate(90deg);

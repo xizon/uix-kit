@@ -64,7 +64,7 @@
 	}
 	
 	&.uix-container__bg--shadow {
-		@include outer-shadow( 3 );
+		@include outer-shadow( 'regular' );
 	}
 	
 	&.uix-container__bg--rounded-large {

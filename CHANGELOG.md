@@ -1,6 +1,11 @@
 # Changelog
 
 
+#### = 3.1.6 (January 10, 2019) =
+
+* New: Add a new module "Circle Text".
+* Tweak: Semanticize the parameters of Outer Shadow
+
 
 #### = 3.1.5 (January 8, 2019) =
 

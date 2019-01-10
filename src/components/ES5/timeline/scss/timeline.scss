@@ -73,7 +73,7 @@
 				
 				
 				
-				@include outer-shadow();
+				@include outer-shadow( 'thick' );
 				@include transition-default();
 
 				&::after {

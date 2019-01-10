@@ -18,7 +18,7 @@
 	 ---------------------------
 	 */ 
 	&:not(.uix-tabs--rotation) {
-	    @include outer-shadow();
+	    @include outer-shadow( 'thick' );
 		
 		$maker-w: 100%;
 		
@@ -102,7 +102,7 @@
 				width: 100%;
 				text-align: center;
 				/*require*/
-				@include outer-shadow();
+				@include outer-shadow( 'thick' );
 
 				li {
 					font-size: 1rem;/*Fighting the Space Between Inline Block Elements*/
@@ -129,7 +129,7 @@
 		
 		.uix-tabs__content {
 			position: relative;
-			@include outer-shadow();
+			@include outer-shadow( 'thick' );
 		}
 		.uix-tabs__nav {
 			position: relative;
@@ -167,7 +167,7 @@
 						line-height: 60px;
 						background: #fff;
 						border-radius: 100%;
-						@include outer-shadow();
+						@include outer-shadow( 'thick' );
 					}
 
 					&.active > a {

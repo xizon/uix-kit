@@ -462,7 +462,7 @@ ol.uix-flexslider__control-paging {
 		overflow: hidden;
 		transform: scale(.7);
 		opacity: .5;
-		@include outer-shadow();
+		@include outer-shadow( 'thick' );
 		
 		img {
 			width: 100%;

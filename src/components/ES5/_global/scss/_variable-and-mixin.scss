@@ -226,23 +226,37 @@ $primary-bg-color      : transparent;
 
 // Outer Shadow Effect
 // ---------------------------
+// Optional values: thick, highlight, regular, light
 //
-@mixin outer-shadow( $type: 1 ) {
-	// @include outer-shadow( 1 );
+@mixin outer-shadow( $type: 'thick', $color: '' ) {
+	// @include outer-shadow( 'thick' );
 	
-	@if ( $type == 1 ) {
+	// thick
+	@if ( $type == 'thick' ) {
 		box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, 
 			        rgba(0, 0, 0, 0.08) 0 15px 12px;
 	}
 	
-	@if ( $type == 2 ) {
+	// highlight
+	@if ( $type == 'highlight' ) {
+		
+		@if ( $color == '' ) {
+			$color: $highlight-color1;
+		}
+		
 		box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, 
-			        rgba($highlight-color1, 0.2) 0px 15px 35px 0px;
+			        rgba($color, 0.2) 0px 15px 35px 0px;
 	}
 
-	@if ( $type == 3 ) {
+	// regular
+	@if ( $type == 'regular' ) {
 		box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, 
 			        rgba(50, 50, 93, 0.1) 0px 15px 35px 0px;
+	}
+	
+	// light
+	@if ( $type == 'light' ) {
+		box-shadow: 0 3px 8px 0 rgba(0,0,0,0.03);
 	}
 	
 	

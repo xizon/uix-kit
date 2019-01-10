@@ -55,7 +55,7 @@
 		transition: .1s ease-in-out;
 		
 		&:hover {
-			@include outer-shadow( 2 );
+			@include outer-shadow( 'highlight', $highlight-color1 );
 		}
 
 	}

@@ -86,16 +86,20 @@
  3. Shadow Effect
  ---------------------------
  */ 
-.uix-outer-shadow--s {
-    @include outer-shadow( 3 );
+.uix-outer-shadow--regular {
+    @include outer-shadow( 'regular' );
 }
 
-.uix-outer-shadow--m {
-    @include outer-shadow( 1 );
+.uix-outer-shadow--thick {
+    @include outer-shadow( 'thick' );
 }
 
-.uix-outer-shadow--l {
-    @include outer-shadow( 2 );
+.uix-outer-shadow--light {
+    @include outer-shadow( 'light' );
+}
+
+.uix-outer-shadow--highlight {
+    @include outer-shadow( 'highlight', $highlight-color1 );
 }
 
 .uix-none-shadow {

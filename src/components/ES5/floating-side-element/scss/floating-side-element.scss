@@ -11,7 +11,7 @@
 	width: 138px;
 	height: 428px;
 	@include bg-gradient( 'to bottom' );
-	@include outer-shadow( 1 );
+	@include outer-shadow( 'thick' );
 	
 	
 	a {
