@@ -1,6 +1,14 @@
 # Changelog
 
 
+
+#### = 3.1.7 (January 18, 2019) =
+
+* Tweak: Added more card module style.
+* Tweak: Optimized script and style for some modules.
+* Fix: Fixed a bug for Multi-level drop-down navigation.
+
+
 #### = 3.1.6 (January 10, 2019) =
 
 * New: Add a new module "Circle Text".

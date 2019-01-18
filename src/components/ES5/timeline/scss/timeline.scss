@@ -72,8 +72,7 @@
 				margin-left: 120px;
 				
 				
-				
-				@include outer-shadow( 'thick' );
+				@include outer-shadow( 'regular' );
 				@include transition-default();
 
 				&::after {

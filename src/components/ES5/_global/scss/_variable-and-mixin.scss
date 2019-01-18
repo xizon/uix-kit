@@ -256,7 +256,7 @@ $primary-bg-color      : transparent;
 	
 	// light
 	@if ( $type == 'light' ) {
-		box-shadow: 0 3px 8px 0 rgba(0,0,0,0.03);
+		box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px 0px;
 	}
 	
 	

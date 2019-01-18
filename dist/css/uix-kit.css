@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.1.6
+ * ## Version             :  3.1.7
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  January 10, 2019
+ * ## Last Update         :  January 18, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -667,8 +667,8 @@ ul.uix-entry__meta {
     margin: 0.175rem 0.4375rem; }
 
 @media all and (max-width: 768px) {
-  .uix-footer__container .float-left,
-  .uix-footer__container .float-right {
+  .uix-footer__container .uix-f-l,
+  .uix-footer__container .uix-f-r {
     float: none !important; } }
 
 /* ====================================================== 
@@ -808,7 +808,7 @@ ul.uix-entry__meta {
   box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px; }
 
 .uix-outer-shadow--light {
-  box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.03); }
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px 0px; }
 
 .uix-outer-shadow--highlight {
   box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(236, 94, 121, 0.2) 0px 15px 35px 0px; }
@@ -3815,12 +3815,12 @@ h6 {
     left: 0;
     right: 0;
     pointer-events: none;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.03); }
+    border: 1px solid rgba(0, 0, 0, 0.01);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px 0px; }
   .uix-accordion dl.active {
     height: auto;
     margin: 1rem 0;
-    box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px; }
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px; }
     .uix-accordion dl.active dt {
       border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
       .uix-accordion dl.active dt::before {
@@ -4670,7 +4670,7 @@ h6 {
     font-size: 0.875rem;
     /*Fighting the Space Between Inline Block Elements*/
     display: inline-block;
-    box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px; }
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px; }
     .uix-breadcrumbs ul li a {
       display: block;
       background: #fff;
@@ -4967,61 +4967,75 @@ h6 {
    <!-- Cards -->    
 /* ====================================================== */
 /*
- * 1. Style One
- * 2. Style Two
- * 3. Style Three
- * 4. Style Four
+ * 1. Author Card
+ * 2. Entire Background
+ * 3. Separate Up and Down
+ * 4. Separate Left and Right
 */
 /* 
  ---------------------------
- 1. Style One
+ 1. Author Card
  ---------------------------
  */
-.uix-card1 {
+.uix-card--author {
   margin: 0 auto;
   border: 1px solid #eaeaea;
   position: relative;
   border-top: 8px solid #EC5E79;
   border-radius: 8px;
-  box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px; }
-  .uix-card1::before, .uix-card1::after {
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px; }
+  .uix-card--author.uix-card--author--noborder {
+    border: none; }
+  .uix-card--author.uix-card--author--stats {
+    margin-top: 2rem; }
+  .uix-card--author::before, .uix-card--author::after {
     content: " ";
     display: table;
     clear: both; }
-  .uix-card1 .uix-card1__headline {
+  .uix-card--author .uix-card--author__tagline {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: rgba(51, 51, 51, 0.4); }
+  .uix-card--author .uix-card--author__headline {
     min-height: 2.086538461rem;
     background: #fff;
     padding: 0.65625rem 1.75rem 0 1.75rem;
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px; }
-    .uix-card1 .uix-card1__headline h3 {
+    border-radius: 8px 8px 0 0; }
+    .uix-card--author .uix-card--author__headline h3 {
       margin: 0;
       padding: 0;
       font-size: 1.125rem; }
-    .uix-card1 .uix-card1__headline .uix-card1__text {
+    .uix-card--author .uix-card--author__headline .uix-card--author__text {
       margin-top: 0.4375rem;
-      float: left;
       width: calc(100% - 105px); }
-      .uix-card1 .uix-card1__headline .uix-card1__text a {
+      .uix-card--author .uix-card--author__headline .uix-card--author__text a {
         font-size: 0.75rem; }
-    .uix-card1 .uix-card1__headline .uix-card1__pic {
+    .uix-card--author .uix-card--author__headline .uix-card--author__pic {
       position: relative;
+      display: inline-block;
       top: 0.175rem;
       height: 4.375rem;
       width: 4.375rem;
-      float: right;
       width: 100px;
       height: 100px; }
-      .uix-card1 .uix-card1__headline .uix-card1__pic img {
+      .uix-card--author .uix-card--author__headline .uix-card--author__pic.uix-card--author__pic--rounded {
+        border-radius: 8px; }
+      .uix-card--author .uix-card--author__headline .uix-card--author__pic.uix-card--author__pic--jumpOut {
+        box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px;
+        position: absolute;
+        transform: translateY(-2rem); }
+      .uix-card--author .uix-card--author__headline .uix-card--author__pic img {
         width: 90px !important;
         height: 90px !important;
-        margin: 0.3125rem 0 0 0.3125rem;
-        border: 1px solid #eaeaea; }
-  .uix-card1 .uix-card1__content {
+        margin: 0.3125rem 0 0 0.3125rem; }
+  .uix-card--author .uix-card--author__content {
     background: #fff;
     padding: 1.75rem 1.75rem 1.3125rem 1.75rem;
     line-height: 1.5; }
-    .uix-card1 .uix-card1__content::after {
+    .uix-card--author .uix-card--author__content.uix-card--author__content--rounded {
+      border-radius: 0 0 8px 8px; }
+    .uix-card--author .uix-card--author__content::after {
       content: '';
       position: relative;
       height: 0;
@@ -5030,29 +5044,28 @@ h6 {
       border-right: 0.4375rem solid transparent;
       border-top: 0.4375rem solid #fff;
       position: absolute;
-      bottom: 25px;
+      bottom: 2.125rem;
       left: 1.75rem; }
-    .uix-card1 .uix-card1__content p {
+    .uix-card--author .uix-card--author__content p {
       margin-top: 0.875rem;
       padding: 0 0.875rem 0 1.75rem; }
-  .uix-card1 .uix-card1__jump {
-    height: 30px;
-    font-size: 0.75rem;
+  .uix-card--author .uix-card--author__jump {
+    font-size: 0.875rem;
     display: block;
     background: #F6F6F6;
     padding: 0.525rem 2.1875rem;
     text-align: right;
-    border-bottom-left-radius: 2px;
-    border-bottom-right-radius: 2px;
     transition: all 500ms ease-in-out;
-    color: #BDBDBD; }
+    color: #BDBDBD;
+    border-radius: 0 0 8px 8px;
+    vertical-align: middle; }
 
 /* 
  ---------------------------
- 2. Style Two
+ 2. Entire Background
  ---------------------------
  */
-.uix-card2 {
+.uix-card--entireBg {
   position: relative;
   min-height: 21.25rem;
   padding: 1.5rem;
@@ -5061,47 +5074,47 @@ h6 {
   background-size: cover;
   margin-bottom: 1.5rem;
   transition: all 0.3s ease;
-  box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px; }
-  .uix-card2::before, .uix-card2::after {
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px; }
+  .uix-card--entireBg::before, .uix-card--entireBg::after {
     content: " ";
     display: table;
     clear: both; }
-  .uix-card2 .uix-card2__tagline {
+  .uix-card--entireBg .uix-card--entireBg__tagline {
     font-size: 0.75rem;
     font-weight: 500;
     text-transform: uppercase;
     color: rgba(51, 51, 51, 0.4); }
-  .uix-card2 .uix-card2__headline {
+  .uix-card--entireBg .uix-card--entireBg__headline {
     margin-top: 10px;
     color: #fff; }
-  .uix-card2 .uix-card2__content {
+  .uix-card--entireBg .uix-card--entireBg__content {
     position: relative; }
 
 /* 
  ---------------------------
- 3. Style Three
+ 3. Separate Up and Down
  ---------------------------
  */
-.uix-card3 {
+.uix-card--upDownBg {
   position: relative;
   border-radius: 8px;
   background-color: #fff;
   margin-bottom: 1.5rem;
   transition: all 0.3s ease;
-  box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px; }
-  .uix-card3::before, .uix-card3::after {
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px; }
+  .uix-card--upDownBg::before, .uix-card--upDownBg::after {
     content: " ";
     display: table;
     clear: both; }
-  .uix-card3 .uix-card3__tagline {
+  .uix-card--upDownBg .uix-card--upDownBg__tagline {
     font-size: 0.75rem;
     font-weight: 500;
     text-transform: uppercase;
     color: rgba(51, 51, 51, 0.4); }
-  .uix-card3 .uix-card3__headline {
+  .uix-card--upDownBg .uix-card--upDownBg__headline {
     margin-top: 10px;
     margin: 0; }
-  .uix-card3 .uix-card3__pic {
+  .uix-card--upDownBg .uix-card--upDownBg__pic {
     height: 21.25rem;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
@@ -5109,58 +5122,58 @@ h6 {
     background-image: linear-gradient(180deg, rgba(245, 245, 245, 0.5), rgba(245, 245, 245, 0.5));
     background-position: 50% 50%;
     background-size: cover; }
-    .uix-card3 .uix-card3__pic img {
+    .uix-card--upDownBg .uix-card--upDownBg__pic img {
       visibility: hidden; }
-  .uix-card3 .uix-card3__content {
+  .uix-card--upDownBg .uix-card--upDownBg__content {
     padding: 1rem 1.5rem; }
-  .uix-card3.js-uix-common-height .uix-card3__pic {
+  .uix-card--upDownBg.js-uix-common-height .uix-card--upDownBg__pic {
     height: auto; }
 
 /* 
  ---------------------------
- 4. Style Four
+ 4. Separate Left and Right
  ---------------------------
  */
-.uix-card4 {
+.uix-card--leftRightBg {
   position: relative;
   border-radius: 8px;
   background-color: #fff;
   margin-bottom: 1.5rem;
   transition: all 0.3s ease;
-  box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px; }
-  .uix-card4::before, .uix-card4::after {
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px; }
+  .uix-card--leftRightBg::before, .uix-card--leftRightBg::after {
     content: " ";
     display: table;
     clear: both; }
-  .uix-card4 .uix-card4__tagline {
+  .uix-card--leftRightBg .uix-card--leftRightBg__tagline {
     font-size: 0.75rem;
     font-weight: 500;
     text-transform: uppercase;
     color: rgba(51, 51, 51, 0.4); }
-  .uix-card4 .uix-card4__headline {
+  .uix-card--leftRightBg .uix-card--leftRightBg__headline {
     margin-top: 10px;
     margin: 0; }
-  .uix-card4 .uix-card4__pic {
+  .uix-card--leftRightBg .uix-card--leftRightBg__pic {
     height: 21.25rem;
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
     background-position: 50% 50%;
     background-size: cover; }
-    .uix-card4 .uix-card4__pic img {
+    .uix-card--leftRightBg .uix-card--leftRightBg__pic img {
       visibility: hidden; }
-  .uix-card4 .uix-card4__content {
+  .uix-card--leftRightBg .uix-card--leftRightBg__content {
     height: 21.25rem;
     padding: 1.5rem 3rem; }
-  .uix-card4 .uix-card4__title {
+  .uix-card--leftRightBg .uix-card--leftRightBg__title {
     padding-bottom: 1.5rem; }
-  .uix-card4.js-uix-common-height .uix-card4__pic,
-  .uix-card4.js-uix-common-height .uix-card4__content {
+  .uix-card--leftRightBg.js-uix-common-height .uix-card--leftRightBg__pic,
+  .uix-card--leftRightBg.js-uix-common-height .uix-card--leftRightBg__content {
     height: auto; }
 
 @media all and (max-width: 768px) {
-  .uix-card4 .uix-card4__pic {
+  .uix-card--leftRightBg .uix-card--leftRightBg__pic {
     border-bottom-left-radius: 0; }
-  .uix-card4 .uix-card4__content {
+  .uix-card--leftRightBg .uix-card--leftRightBg__content {
     height: auto; } }
 
 /* ====================================================== 
@@ -6112,7 +6125,7 @@ ol.uix-flexslider__control-paging {
     overflow: hidden;
     transform: scale(0.7);
     opacity: .5;
-    box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px; }
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px; }
     .uix-flexslider__mycontrols--thumb a > span img {
       width: 100%;
       height: 100%; }
@@ -6297,7 +6310,7 @@ ol.uix-flexslider__control-paging {
   height: 428px;
   background: #EC5E79;
   background: linear-gradient(to bottom, #EC5E79 0%, #E8588C 100%);
-  box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px; }
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px; }
   .uix-floating-side-el a {
     font-size: 0.875rem;
     color: #fff;
@@ -6354,8 +6367,8 @@ ol.uix-flexslider__control-paging {
 @media all and (max-width: 768px) {
   .uix-special-footer__container {
     margin: 3rem 0; }
-    .uix-special-footer__container .float-left,
-    .uix-special-footer__container .float-right {
+    .uix-special-footer__container .uix-f-l,
+    .uix-special-footer__container .uix-f-r {
       position: relative !important;
       display: block !important;
       width: 100% !important;
@@ -8642,7 +8655,7 @@ dl.uix-list-abreast {
     padding-right: 5vw;
     padding-left: calc(7.840236686391% + 15px);
     /* (1352-1140)/1352/2 * 100 */
-    box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px;
     min-height: 150px; }
   .uix-list-split-full .uix-list-split-full__right {
     word-wrap: break-word;
@@ -8653,7 +8666,7 @@ dl.uix-list-abreast {
     padding-right: calc(7.840236686391% + 15px);
     background: #EC5E79;
     background: linear-gradient(to right, #EC5E79 0%, #E8588C 100%);
-    box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px;
     min-height: 150px; }
 
 /* New XL container for Bootstrap 4.x */
@@ -10854,7 +10867,7 @@ Style with support for rainbow parens
 	 ---------------------------
 	 */ }
   .uix-tabs:not(.uix-tabs--rotation) {
-    box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px; }
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px; }
     .uix-tabs:not(.uix-tabs--rotation) .uix-tabs__marker {
       height: 2px;
       width: 100%;
@@ -10908,7 +10921,7 @@ Style with support for rainbow parens
       width: 100%;
       text-align: center;
       /*require*/
-      box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px; }
+      box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px; }
       .uix-tabs.uix-tabs--center .uix-tabs__nav > ul li {
         font-size: 1rem;
         /*Fighting the Space Between Inline Block Elements*/
@@ -10917,7 +10930,7 @@ Style with support for rainbow parens
         float: none; }
   .uix-tabs.uix-tabs--rotation .uix-tabs__content {
     position: relative;
-    box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px; }
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px; }
   .uix-tabs.uix-tabs--rotation .uix-tabs__nav {
     position: relative;
     margin: 0; }
@@ -10951,7 +10964,7 @@ Style with support for rainbow parens
           line-height: 60px;
           background: #fff;
           border-radius: 100%;
-          box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px; }
+          box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px; }
         .uix-tabs.uix-tabs--rotation .uix-tabs__nav > ul > li.active > a {
           background: #212121;
           color: #fff; }
@@ -11231,7 +11244,7 @@ Style with support for rainbow parens
       padding: 1.4rem;
       width: calc(90% - 2.8rem);
       margin-left: 120px;
-      box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px;
+      box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px;
       transition: all 0.3s ease; }
       .uix-timeline__container .uix-timeline .uix-timeline__item .uix-timeline__item--info::after {
         clear: both;

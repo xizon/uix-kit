@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.1.6
+ * ## Version             :  3.1.7
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  January 10, 2019
+ * ## Last Update         :  January 18, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -16598,29 +16598,37 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.DROPDOWN_MENU2               = APP.DROPDOWN_MENU2 || {};
-	APP.DROPDOWN_MENU2.version       = '0.0.2';
+	APP.DROPDOWN_MENU2.version       = '0.0.3';
     APP.DROPDOWN_MENU2.documentReady = function( $ ) {
 
 		var $verticalMenuLi       = $( '.uix-vertical-menu li' ),
 			verticalMenuAnimSpeed = 500;
 		
 		$verticalMenuLi.find( '> a' ).on( 'click', function( e ) {
-			e.preventDefault();
 			
-			//Hide other all sibling <ul> of the selected element
-			$( this ).parent( 'li' ).siblings()
-			                        .removeClass( 'active' );
+			if ( $( this ).next( 'ul' ).length > 0 ) {
 
-			
-			
-			var $sub = $( this ).parent( 'li' ).children( 'ul' );
+				e.preventDefault();
 
-			//close opend <ul>
-			$( this ).parent( 'li' ).siblings().find( '> ul' ).slideUp( verticalMenuAnimSpeed/2, function() {
-				$sub.slideToggle( verticalMenuAnimSpeed );
-			} );
+				//Hide other all sibling <ul> of the selected element
+				$( this ).parent( 'li' ).siblings()
+										.removeClass( 'active' );
 
-			$( this ).parent( 'li' ).toggleClass( 'active' );
+
+
+				var $sub = $( this ).parent( 'li' ).children( 'ul' );
+
+				//close opend <ul>
+				$( this ).parent( 'li' ).siblings().find( '> ul' ).slideUp( verticalMenuAnimSpeed/2, function() {
+					$sub.slideToggle( verticalMenuAnimSpeed );
+				} );
+
+				$( this ).parent( 'li' ).toggleClass( 'active' );
+
+				return false;
+			}
+				
+
 
         });
 		
@@ -25078,7 +25086,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.ONEPAGE               = APP.ONEPAGE || {};
-	APP.ONEPAGE.version       = '0.0.2';
+	APP.ONEPAGE.version       = '0.0.3';
     APP.ONEPAGE.documentReady = function( $ ) {
 
         var $window      = $( window ),
@@ -25092,7 +25100,7 @@ APP = ( function ( APP, $, window, document ) {
 			quietPeriod        = 500, //Do not change it
 			animationTime      = 1000,//According to page transition animation changes
 			$sectionsContainer = $( '.uix-noemal-load__onepage-container' ),
-			$sections          = $sectionsContainer.find( '> section' ),
+			$sections          = $sectionsContainer.find( '[data-highlight-section]' ),
 			sectionTotal       = $sections.length,
 			topSectionSpacing  = 0,
 			$primaryMenu       = $( '.uix-menu' ),
@@ -25513,7 +25521,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.ONEPAGE2               = APP.ONEPAGE2 || {};
-	APP.ONEPAGE2.version       = '0.0.1';
+	APP.ONEPAGE2.version       = '0.0.3';
     APP.ONEPAGE2.documentReady = function( $ ) {
 
         var $window      = $( window ),
@@ -25527,7 +25535,7 @@ APP = ( function ( APP, $, window, document ) {
 			quietPeriod        = 500, //Do not change it
 			animationTime      = 1000,//According to page transition animation changes
 			$sectionsContainer = $( '.uix-noemal-load__onepage-container2' ),
-			$sections          = $sectionsContainer.find( '> section' ),
+			$sections          = $sectionsContainer.find( '[data-highlight-section]' ),
 			sectionTotal       = $sections.length,
 			topSectionSpacing  = 0,
 			$primaryMenu       = $( '.uix-menu' ),

@@ -2,27 +2,34 @@
    <!-- Cards -->    
 /* ====================================================== */
 /*
- * 1. Style One
- * 2. Style Two
- * 3. Style Three
- * 4. Style Four
+ * 1. Author Card
+ * 2. Entire Background
+ * 3. Separate Up and Down
+ * 4. Separate Left and Right
 */
 
 $card-radius: 8px;
 
 /* 
  ---------------------------
- 1. Style One
+ 1. Author Card
  ---------------------------
  */ 
 
-.uix-card1 {
+.uix-card--author {
 	margin: 0 auto;
 	border: 1px solid #eaeaea;
 	position: relative;
 	border-top: 8px solid $highlight-color1;
 	border-radius: $card-radius;
-	@include outer-shadow( 'thick' );
+	@include outer-shadow( 'regular' );
+	
+	&.uix-card--author--noborder {
+		border: none;
+	}
+	&.uix-card--author--stats {
+		margin-top: 2rem;
+	}
 	
 	&::before,
 	&::after {
@@ -31,12 +38,20 @@ $card-radius: 8px;
 		clear: both;
 	}
 	
-	.uix-card1__headline {
+	.uix-card--author__tagline {
+		font-size: 0.75rem;
+		font-weight: 500;
+		text-transform: uppercase;
+		color: rgba(51, 51, 51, .4);
+	}
+	
+	
+	.uix-card--author__headline {
 		min-height: 2.086538461rem;
 		background: #fff;
 		padding: 0.65625rem 1.75rem 0 1.75rem;
-		border-top-left-radius: 2px;
-		border-top-right-radius: 2px;
+		border-radius: #{$card-radius} #{$card-radius} 0  0;
+
 
 		h3 {
 			margin: 0;
@@ -44,36 +59,50 @@ $card-radius: 8px;
 			font-size: 1.125rem;
 			
 		}
-		.uix-card1__text {
+		.uix-card--author__text {
 			margin-top: 0.4375rem;
-			float: left;
 			width: calc(100% - 105px );
 			a {
 				font-size: 0.75rem;
 			}
 		}
-		.uix-card1__pic {
+		.uix-card--author__pic {
 			position: relative;
+			display: inline-block;
 			top: 0.175rem;
 			height: 4.375rem;
 			width: 4.375rem;
-			float: right;
 			width: 100px;
 			height: 100px;
+			
+			&.uix-card--author__pic--rounded {
+				border-radius: $card-radius;
+			}
+			
+			&.uix-card--author__pic--jumpOut {
+				@include outer-shadow( 'regular' );
+				position: absolute;
+				transform: translateY(-2rem);
+				
+			}
 
 			img {
 				width: 90px !important;
 				height: 90px !important;
 				margin: 0.3125rem 0 0 0.3125rem;
-				border: 1px solid #eaeaea;
 			}
+			
 		}
 	}
 
-	.uix-card1__content {
+	.uix-card--author__content {
 		background: #fff;
 		padding: 1.75rem 1.75rem 1.3125rem 1.75rem;
 		line-height: 1.5;
+		
+		&.uix-card--author__content--rounded {
+			border-radius: 0  0 #{$card-radius} #{$card-radius};
+		}
 
 		&::after {
 			content: '';
@@ -84,7 +113,7 @@ $card-radius: 8px;
 			border-right: 0.4375rem solid transparent;
 			border-top: 0.4375rem solid #fff;
 			position: absolute;
-			bottom: 25px;
+			bottom: 2.125rem;
 			left: 1.75rem;
 		}
 
@@ -94,17 +123,16 @@ $card-radius: 8px;
 		}
 	}
 
-	.uix-card1__jump {
-		height: 30px;
-		font-size: 0.75rem;
+	.uix-card--author__jump {
+		font-size: 0.875rem;
 		display: block;
 		background: #F6F6F6;
 		padding: 0.525rem 2.1875rem;
 		text-align: right;
-		border-bottom-left-radius: 2px;
-		border-bottom-right-radius: 2px;
 		transition: all 500ms ease-in-out;
 		color: #BDBDBD;
+		border-radius: 0  0 #{$card-radius} #{$card-radius};
+		vertical-align: middle;
 	}
 	
 	
@@ -113,10 +141,10 @@ $card-radius: 8px;
 
 /* 
  ---------------------------
- 2. Style Two
+ 2. Entire Background
  ---------------------------
  */ 
-.uix-card2 {
+.uix-card--entireBg {
     position: relative;
     min-height: 21.25rem;
     padding: 1.5rem;
@@ -125,7 +153,7 @@ $card-radius: 8px;
 	background-size: cover;
 	margin-bottom: 1.5rem;
     @include transition-default();
-	@include outer-shadow( 'thick' );
+	@include outer-shadow( 'regular' );
 	
 	&::before,
 	&::after {
@@ -135,7 +163,7 @@ $card-radius: 8px;
 	}
 	
 	
-	.uix-card2__tagline {
+	.uix-card--entireBg__tagline {
 		font-size: 0.75rem;
 		font-weight: 500;
 		text-transform: uppercase;
@@ -143,13 +171,13 @@ $card-radius: 8px;
 	}
 	
 
-	.uix-card2__headline {
+	.uix-card--entireBg__headline {
 		margin-top: 10px;
 		color: #fff;
 
 	}
 
-	.uix-card2__content {
+	.uix-card--entireBg__content {
 		position: relative;
 	}
 
@@ -158,16 +186,16 @@ $card-radius: 8px;
 
 /* 
  ---------------------------
- 3. Style Three
+ 3. Separate Up and Down
  ---------------------------
  */ 
-.uix-card3 {
+.uix-card--upDownBg {
 	position: relative;
     border-radius: $card-radius;
     background-color: #fff;
 	margin-bottom: 1.5rem;
     @include transition-default();
-	@include outer-shadow( 'thick' );
+	@include outer-shadow( 'regular' );
 	
 	&::before,
 	&::after {
@@ -176,7 +204,7 @@ $card-radius: 8px;
 		clear: both;
 	}
 	
-	.uix-card3__tagline {
+	.uix-card--upDownBg__tagline {
 		font-size: 0.75rem;
 		font-weight: 500;
 		text-transform: uppercase;
@@ -184,12 +212,12 @@ $card-radius: 8px;
 	}
 	
 
-	.uix-card3__headline {
+	.uix-card--upDownBg__headline {
 		margin-top: 10px;
 		margin: 0;
 	}
 	
-	.uix-card3__pic {
+	.uix-card--upDownBg__pic {
 		height: 21.25rem;
 		border-top-left-radius: $card-radius;
 		border-top-right-radius: $card-radius;
@@ -204,13 +232,13 @@ $card-radius: 8px;
 		
 	}
 
-	.uix-card3__content {
+	.uix-card--upDownBg__content {
 		padding: 1rem 1.5rem;
 	}
 	
 	
 	&.js-uix-common-height {
-		.uix-card3__pic {
+		.uix-card--upDownBg__pic {
 			height: auto;
 		}
 	}
@@ -222,16 +250,16 @@ $card-radius: 8px;
 
 /* 
  ---------------------------
- 4. Style Four
+ 4. Separate Left and Right
  ---------------------------
  */ 
-.uix-card4 {
+.uix-card--leftRightBg {
 	position: relative;
     border-radius: $card-radius;
     background-color: #fff;
 	margin-bottom: 1.5rem;
     @include transition-default();
-	@include outer-shadow( 'thick' );
+	@include outer-shadow( 'regular' );
 	
 	&::before,
 	&::after {
@@ -241,21 +269,21 @@ $card-radius: 8px;
 	}
 	
 
-	.uix-card4__tagline {
+	.uix-card--leftRightBg__tagline {
 		font-size: 0.75rem;
 		font-weight: 500;
 		text-transform: uppercase;
 		color: rgba(51, 51, 51, .4);
 	}
 	
-	.uix-card4__headline {
+	.uix-card--leftRightBg__headline {
 		margin-top: 10px;
 		margin: 0;
 	}
 	
 	
 
-	.uix-card4__pic {
+	.uix-card--leftRightBg__pic {
 		height: 21.25rem;
 		border-top-left-radius: $card-radius;
 		border-bottom-left-radius: $card-radius;
@@ -269,18 +297,18 @@ $card-radius: 8px;
 	}
 	
 
-	.uix-card4__content {
+	.uix-card--leftRightBg__content {
 		height: 21.25rem;
 		padding: 1.5rem 3rem;
 	}
 	
-	.uix-card4__title {
+	.uix-card--leftRightBg__title {
 		padding-bottom: 1.5rem;
 	}
 	
 	&.js-uix-common-height {
-		.uix-card4__pic,
-		.uix-card4__content {
+		.uix-card--leftRightBg__pic,
+		.uix-card--leftRightBg__content {
 			height: auto;
 		}
 	}
@@ -291,13 +319,13 @@ $card-radius: 8px;
 
 
 @media all and (max-width: 768px) {
-	.uix-card4 {
+	.uix-card--leftRightBg {
 		
-		.uix-card4__pic {
+		.uix-card--leftRightBg__pic {
 			border-bottom-left-radius: 0;
 		}
 
-		.uix-card4__content {
+		.uix-card--leftRightBg__content {
 			height: auto;
 		}
 
@@ -306,6 +334,5 @@ $card-radius: 8px;
 	}
 	
 }
-
 
 

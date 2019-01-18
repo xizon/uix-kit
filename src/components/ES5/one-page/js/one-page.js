@@ -7,7 +7,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.ONEPAGE               = APP.ONEPAGE || {};
-	APP.ONEPAGE.version       = '0.0.2';
+	APP.ONEPAGE.version       = '0.0.3';
     APP.ONEPAGE.documentReady = function( $ ) {
 
         var $window      = $( window ),
@@ -21,7 +21,7 @@ APP = ( function ( APP, $, window, document ) {
 			quietPeriod        = 500, //Do not change it
 			animationTime      = 1000,//According to page transition animation changes
 			$sectionsContainer = $( '.uix-noemal-load__onepage-container' ),
-			$sections          = $sectionsContainer.find( '> section' ),
+			$sections          = $sectionsContainer.find( '[data-highlight-section]' ),
 			sectionTotal       = $sections.length,
 			topSectionSpacing  = 0,
 			$primaryMenu       = $( '.uix-menu' ),

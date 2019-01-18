@@ -22,7 +22,7 @@ $content-text-gutter: 5vw;
 		float: left;
 		padding-right: $content-text-gutter;
 		padding-left: calc(7.840236686391% + #{$content-gutter}); /* (1352-1140)/1352/2 * 100 */
-		@include outer-shadow( 'thick' );
+		@include outer-shadow( 'regular' );
 		min-height: 150px;
 	}
 	
@@ -34,7 +34,7 @@ $content-text-gutter: 5vw;
 		padding-left: $content-text-gutter;
 		padding-right: calc(7.840236686391% + #{$content-gutter});
 		@include bg-gradient();
-		@include outer-shadow( 'thick' );
+		@include outer-shadow( 'regular' );
 		min-height: 150px;
 		
 		
