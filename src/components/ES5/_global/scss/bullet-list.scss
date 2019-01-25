@@ -64,17 +64,17 @@ ol.uix-list--normal,
 }
 
 /*-- Noemal List Effect by Default --*/
-/* Compatible with  Uix Shortcodes (WordPress Plugin) */
-.uix-list--normal a:not(.uix-sc-btn) {
+/* Compatible with  Uix Shortcodes (WordPress Plugin) and Block Button Link */
+.uix-list--normal a:not(.uix-sc-btn):not(.wp-block-button__link) {
     color: $highlight-color1;
 }
 
-.uix-list--normal a:not(.uix-sc-btn):not(.uix-btn):hover {
+.uix-list--normal a:not(.uix-sc-btn):not(.wp-block-button__link):not(.uix-btn):hover {
     color: $highlight-color2;
     text-decoration: underline;
 }
 
-.uix-list--normal a:not(.uix-sc-btn):hover img {
+.uix-list--normal a:not(.uix-sc-btn):not(.wp-block-button__link):hover img {
     text-decoration: none;
 }
 

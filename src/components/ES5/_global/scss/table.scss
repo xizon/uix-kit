@@ -71,17 +71,17 @@ table.uix-table,
 }
 
 /*-- Table Effect by Default --*/
-/* Compatible with  Uix Shortcodes (WordPress Plugin) */
-.uix-table a:not(.uix-sc-btn) {
+/* Compatible with  Uix Shortcodes (WordPress Plugin) and Block Button Link */
+.uix-table a:not(.uix-sc-btn):not(.wp-block-button__link) {
     color: $highlight-color1;
 }
 
-.uix-table a:not(.uix-sc-btn):not(.uix-btn):hover {
+.uix-table a:not(.uix-sc-btn):not(.wp-block-button__link):not(.uix-btn):hover {
     color: $highlight-color2;
     text-decoration: underline;
 }
 
-.uix-table a:not(.uix-sc-btn):hover img {
+.uix-table a:not(.uix-sc-btn):not(.wp-block-button__link):hover img {
     text-decoration: none;
 }
 

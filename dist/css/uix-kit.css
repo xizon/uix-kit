@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.1.7
+ * ## Version             :  3.1.8
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  January 18, 2019
+ * ## Last Update         :  January 25, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -234,14 +234,16 @@ blockquote {
 select {
   max-width: 100%; }
 
+.wp-block-quote,
 blockquote {
   background: #fff;
-  border: 1px solid #F8F8F8;
-  border-left: 5px solid #EC5E79;
-  padding: 0 1.75rem 1.25rem;
-  margin-top: 1.421875rem;
+  border: 1px solid #F8F8F8 !important;
+  border-left: 5px solid #EC5E79 !important;
+  padding: 0 1.75rem 1.25rem !important;
+  margin-top: 1.421875rem !important;
   line-height: 2;
   font-size: 1rem; }
+  .wp-block-quote::before,
   blockquote::before {
     color: #EC5E79;
     content: open-quote;
@@ -368,15 +370,15 @@ ol.uix-list--normal,
   list-style-type: decimal; }
 
 /*-- Noemal List Effect by Default --*/
-/* Compatible with  Uix Shortcodes (WordPress Plugin) */
-.uix-list--normal a:not(.uix-sc-btn) {
+/* Compatible with  Uix Shortcodes (WordPress Plugin) and Block Button Link */
+.uix-list--normal a:not(.uix-sc-btn):not(.wp-block-button__link) {
   color: #EC5E79; }
 
-.uix-list--normal a:not(.uix-sc-btn):not(.uix-btn):hover {
+.uix-list--normal a:not(.uix-sc-btn):not(.wp-block-button__link):not(.uix-btn):hover {
   color: #E8588C;
   text-decoration: underline; }
 
-.uix-list--normal a:not(.uix-sc-btn):hover img {
+.uix-list--normal a:not(.uix-sc-btn):not(.wp-block-button__link):hover img {
   text-decoration: none; }
 
 /* 
@@ -601,15 +603,18 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
     height: auto !important; }
   .uix-entry__content iframe {
     max-width: 100% !important; }
-  .uix-entry__content .alignfull,
-  .uix-entry__content .alignwide {
+  .uix-entry__content img.alignfull,
+  .uix-entry__content img.alignwide,
+  .uix-entry__content .alignfull img,
+  .uix-entry__content .alignwide img {
     margin-left: calc( -100vw / 2 + 100% / 2);
     margin-right: calc( -100vw / 2 + 100% / 2);
     max-width: 100vw;
-    width: 100vw; }
+    width: 100vw !important; }
 
 @media only screen and (min-width: 950px) {
-  .uix-entry__content .alignwide {
+  .uix-entry__content img.alignwide,
+  .uix-entry__content .alignwide img {
     max-width: inherit; } }
 
 /* 
@@ -1110,11 +1115,12 @@ img.uix-filter-hover--color,
  17. Align Wide and Full Classes For Elements
  ---------------------------
  */
-.uix-alignfull {
+img.uix-alignfull,
+.uix-alignfull img {
   margin-left: calc( -100vw / 2 + 100% / 2);
   margin-right: calc( -100vw / 2 + 100% / 2);
   max-width: 100vw;
-  width: 100vw; }
+  width: 100vw !important; }
 
 /* ====================================================== 
    <!-- Basic Layout Styles -->                                        
@@ -2867,15 +2873,15 @@ table.uix-table,
     background-color: transparent; }
 
 /*-- Table Effect by Default --*/
-/* Compatible with  Uix Shortcodes (WordPress Plugin) */
-.uix-table a:not(.uix-sc-btn) {
+/* Compatible with  Uix Shortcodes (WordPress Plugin) and Block Button Link */
+.uix-table a:not(.uix-sc-btn):not(.wp-block-button__link) {
   color: #EC5E79; }
 
-.uix-table a:not(.uix-sc-btn):not(.uix-btn):hover {
+.uix-table a:not(.uix-sc-btn):not(.wp-block-button__link):not(.uix-btn):hover {
   color: #E8588C;
   text-decoration: underline; }
 
-.uix-table a:not(.uix-sc-btn):hover img {
+.uix-table a:not(.uix-sc-btn):not(.wp-block-button__link):hover img {
   text-decoration: none; }
 
 @media all and (max-width: 768px) {
@@ -12056,6 +12062,163 @@ a img.aligncenter {
 .gallery-columns-8 .gallery-caption,
 .gallery-columns-9 .gallery-caption {
   display: none; }
+
+/* Galleries for block */
+ul.wp-block-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  padding: 0;
+  margin: 0; }
+
+ul.wp-block-gallery .blocks-gallery-image,
+ul.wp-block-gallery .blocks-gallery-item {
+  margin: 0 16px 16px 0;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: center;
+  position: relative; }
+
+ul.wp-block-gallery .blocks-gallery-image figure,
+ul.wp-block-gallery .blocks-gallery-item figure {
+  margin: 0;
+  height: 100%; }
+
+@supports (position: -webkit-sticky) or (position: sticky) {
+  ul.wp-block-gallery .blocks-gallery-image figure,
+  ul.wp-block-gallery .blocks-gallery-item figure {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start; } }
+
+ul.wp-block-gallery .blocks-gallery-image img,
+ul.wp-block-gallery .blocks-gallery-item img {
+  display: block;
+  max-width: 100%;
+  height: auto; }
+
+ul.wp-block-gallery .blocks-gallery-image img,
+ul.wp-block-gallery .blocks-gallery-item img {
+  width: 100%; }
+
+@supports (position: -webkit-sticky) or (position: sticky) {
+  ul.wp-block-gallery .blocks-gallery-image img,
+  ul.wp-block-gallery .blocks-gallery-item img {
+    width: auto; } }
+
+ul.wp-block-gallery .blocks-gallery-image figcaption,
+ul.wp-block-gallery .blocks-gallery-item figcaption {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  max-height: 100%;
+  overflow: auto;
+  padding: 40px 10px 5px;
+  color: #fff;
+  text-align: center;
+  font-size: 13px;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0, rgba(0, 0, 0, 0.3) 60%, transparent); }
+
+ul.wp-block-gallery .blocks-gallery-image figcaption img,
+ul.wp-block-gallery .blocks-gallery-item figcaption img {
+  display: inline; }
+
+ul.wp-block-gallery.is-cropped .blocks-gallery-image a,
+ul.wp-block-gallery.is-cropped .blocks-gallery-image img,
+ul.wp-block-gallery.is-cropped .blocks-gallery-item a,
+ul.wp-block-gallery.is-cropped .blocks-gallery-item img {
+  width: 100%; }
+
+@supports (position: -webkit-sticky) or (position: sticky) {
+  ul.wp-block-gallery.is-cropped .blocks-gallery-image a,
+  ul.wp-block-gallery.is-cropped .blocks-gallery-image img,
+  ul.wp-block-gallery.is-cropped .blocks-gallery-item a,
+  ul.wp-block-gallery.is-cropped .blocks-gallery-item img {
+    height: 100% !important;
+    flex: 1;
+    -o-object-fit: cover;
+    object-fit: cover; } }
+
+ul.wp-block-gallery .blocks-gallery-image,
+ul.wp-block-gallery .blocks-gallery-item {
+  width: calc((100% - 16px) / 2); }
+
+ul.wp-block-gallery .blocks-gallery-image:nth-of-type(even),
+ul.wp-block-gallery .blocks-gallery-item:nth-of-type(even) {
+  margin-right: 0; }
+
+ul.wp-block-gallery.columns-1 .blocks-gallery-image,
+ul.wp-block-gallery.columns-1 .blocks-gallery-item {
+  width: 100%;
+  margin-right: 0; }
+
+@media (min-width: 600px) {
+  ul.wp-block-gallery.columns-3 .blocks-gallery-image,
+  ul.wp-block-gallery.columns-3 .blocks-gallery-item {
+    width: calc((100% - 16px * 2) / 3);
+    margin-right: 16px; }
+  ul.wp-block-gallery.columns-4 .blocks-gallery-image,
+  ul.wp-block-gallery.columns-4 .blocks-gallery-item {
+    width: calc((100% - 16px * 3) / 4);
+    margin-right: 16px; }
+  ul.wp-block-gallery.columns-5 .blocks-gallery-image,
+  ul.wp-block-gallery.columns-5 .blocks-gallery-item {
+    width: calc((100% - 16px * 4) / 5);
+    margin-right: 16px; }
+  ul.wp-block-gallery.columns-6 .blocks-gallery-image,
+  ul.wp-block-gallery.columns-6 .blocks-gallery-item {
+    width: calc((100% - 16px * 5) / 6);
+    margin-right: 16px; }
+  ul.wp-block-gallery.columns-7 .blocks-gallery-image,
+  ul.wp-block-gallery.columns-7 .blocks-gallery-item {
+    width: calc((100% - 16px * 6) / 7);
+    margin-right: 16px; }
+  ul.wp-block-gallery.columns-8 .blocks-gallery-image,
+  ul.wp-block-gallery.columns-8 .blocks-gallery-item {
+    width: calc((100% - 16px * 7) / 8);
+    margin-right: 16px; }
+  ul.wp-block-gallery.columns-1 .blocks-gallery-image:nth-of-type(1n),
+  ul.wp-block-gallery.columns-1 .blocks-gallery-item:nth-of-type(1n) {
+    margin-right: 0; }
+  ul.wp-block-gallery.columns-2 .blocks-gallery-image:nth-of-type(2n),
+  ul.wp-block-gallery.columns-2 .blocks-gallery-item:nth-of-type(2n) {
+    margin-right: 0; }
+  ul.wp-block-gallery.columns-3 .blocks-gallery-image:nth-of-type(3n),
+  ul.wp-block-gallery.columns-3 .blocks-gallery-item:nth-of-type(3n) {
+    margin-right: 0; }
+  ul.wp-block-gallery.columns-4 .blocks-gallery-image:nth-of-type(4n),
+  ul.wp-block-gallery.columns-4 .blocks-gallery-item:nth-of-type(4n) {
+    margin-right: 0; }
+  ul.wp-block-gallery.columns-5 .blocks-gallery-image:nth-of-type(5n),
+  ul.wp-block-gallery.columns-5 .blocks-gallery-item:nth-of-type(5n) {
+    margin-right: 0; }
+  ul.wp-block-gallery.columns-6 .blocks-gallery-image:nth-of-type(6n),
+  ul.wp-block-gallery.columns-6 .blocks-gallery-item:nth-of-type(6n) {
+    margin-right: 0; }
+  ul.wp-block-gallery.columns-7 .blocks-gallery-image:nth-of-type(7n),
+  ul.wp-block-gallery.columns-7 .blocks-gallery-item:nth-of-type(7n) {
+    margin-right: 0; }
+  ul.wp-block-gallery.columns-8 .blocks-gallery-image:nth-of-type(8n),
+  ul.wp-block-gallery.columns-8 .blocks-gallery-item:nth-of-type(8n) {
+    margin-right: 0; } }
+
+ul.wp-block-gallery .blocks-gallery-image:last-child,
+ul.wp-block-gallery .blocks-gallery-item:last-child {
+  margin-right: 0; }
+
+ul.wp-block-gallery .blocks-gallery-item.has-add-item-button {
+  width: 100%; }
+
+ul.wp-block-gallery.alignleft, ul.wp-block-gallery.alignright {
+  max-width: 305px;
+  width: 100%; }
+
+ul.wp-block-gallery.alignleft, ul.wp-block-gallery.aligncenter, ul.wp-block-gallery.alignright {
+  display: flex; }
+
+ul.wp-block-gallery.aligncenter .blocks-gallery-item figure {
+  justify-content: center; }
 
 /* 
  ---------------------------

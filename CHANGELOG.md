@@ -1,6 +1,11 @@
 # Changelog
 
 
+#### = 3.1.8 (January 23, 2019) =
+
+* Fix: Fixed a bug for Align Wide and Full Classes For Elements.
+* Tweak: Update the WordPress Core styles to compatible with WP block.
+
 
 #### = 3.1.7 (January 18, 2019) =
 
