@@ -48,7 +48,7 @@ APP = ( function ( APP, $, window, document ) {
 
         // This is the easiest way to have default options.
         var settings = $.extend({
-			selector : '[class*=col-], [class*=uix-core-grid__col-]' //Bootstrap grid system and Custom seamless grid system
+			selector : '[class*=col-], [class*=uix-core-grid__col-]' //Bootstrap grid system and Custom uix grid system
         }, options );
  
         this.each( function() {

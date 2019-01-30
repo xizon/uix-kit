@@ -907,7 +907,7 @@ APP = ( function ( APP, $, window, document ) {
 
         // This is the easiest way to have default options.
         var settings = $.extend({
-			selector : '[class*=col-], [class*=uix-core-grid__col-]' //Bootstrap grid system and Custom seamless grid system
+			selector : '[class*=col-], [class*=uix-core-grid__col-]' //Bootstrap grid system and Custom uix grid system
         }, options );
  
         this.each( function() {
@@ -10751,7 +10751,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.ACCORDION               = APP.ACCORDION || {};
-	APP.ACCORDION.version       = '0.0.1';
+	APP.ACCORDION.version       = '0.0.2';
     APP.ACCORDION.documentReady = function( $ ) {
 
 		$( '.uix-accordion' ).each( function() {
@@ -10760,6 +10760,15 @@ APP = ( function ( APP, $, window, document ) {
 				firstShow       = $this.data( 'first-show' ),
 				$li             = $this.children( 'dl' ),
 				$titlebox       = $this.find( 'dt' );
+			
+			
+			var openItem = function( obj ) {
+				//to open
+				// - temporarilty set height:auto
+				// - tween from height:0
+				TweenMax.set( obj, { height: 'auto' } );
+				TweenMax.from( obj, 0.5, { height:0 } );		
+			};
 			
 			if ( typeof aEvent === typeof undefined ) {
 				aEvent = 'click';
@@ -10771,25 +10780,50 @@ APP = ( function ( APP, $, window, document ) {
 			
 		
 			if ( firstShow ) {
-				$li.first().addClass( 'active' );
+				$li.first().addClass( 'active' ).attr( 'aria-expanded', true );
+				openItem( $li.first().find( 'dd' ) );
+				
 			}
+			
 			
 
 			$li.on( aEvent, function( e ) {
 				//Prevents further propagation of the current event in the capturing and bubbling phases.
 				e.stopPropagation();
 				
-				$( this ).find( 'dd' ).addClass( 'active' );
-				
-				
-				if ( !$( this ).hasClass( 'active' ) ) {
-					$li.removeClass( 'active' );
-
-					$( this ).addClass( 'active' );
-				} else {
-					$li.removeClass( 'active' );
-				}
 			
+				var expanded = ( $( this ).attr( 'aria-expanded' ) == 'true' ) ? false : true,
+					$content = $( this ).find( 'dd' );
+				
+				if ( expanded ) {
+					//Hide other all sibling <dt> of the selected element
+					var $e = $( this ).siblings();
+					$e.removeClass( 'active' ).attr( 'aria-expanded', false );
+					
+					$( this ).addClass( 'active' ).attr( 'aria-expanded', true );
+					
+					TweenMax.to( $e.find( 'dd' ), 0.5, { 
+						height: 0
+					} );
+					
+					//to open
+					openItem( $content );
+
+
+					
+				} else {
+					
+					if ( e.type == 'click' ) {
+						$( this ).removeClass( 'active' ).attr( 'aria-expanded', false );
+						
+						//to close
+						TweenMax.to( $content, 0.5, { height: 0 } );
+
+					}
+					
+				}
+				
+
 			}); 
 						
 			
@@ -16323,37 +16357,56 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.DROPDOWN_MENU2               = APP.DROPDOWN_MENU2 || {};
-	APP.DROPDOWN_MENU2.version       = '0.0.3';
+	APP.DROPDOWN_MENU2.version       = '0.0.4';
     APP.DROPDOWN_MENU2.documentReady = function( $ ) {
 
-		var $verticalMenuLi       = $( '.uix-vertical-menu li' ),
-			verticalMenuAnimSpeed = 500;
+		var $verticalMenuLi = $( '.uix-vertical-menu li' );
 		
 		$verticalMenuLi.find( '> a' ).on( 'click', function( e ) {
 			
-			if ( $( this ).next( 'ul' ).length > 0 ) {
+			var $sub = $( this ).next( 'ul' );
+			
+			if ( $sub.length > 0 ) {
 
 				e.preventDefault();
+				
+				var expanded = ( $( this ).attr( 'aria-expanded' ) == 'true' ) ? false : true;
+				
+				if ( expanded ) {
+					//Hide other all sibling <ul> of the selected element
+					var $e = $( this ).parent( 'li' ).siblings().find( '> a' );
+					
+					$e.removeClass( 'active' ).attr( 'aria-expanded', false );
 
-				//Hide other all sibling <ul> of the selected element
-				$( this ).parent( 'li' ).siblings()
-										.removeClass( 'active' );
+					$( this ).addClass( 'active' ).attr( 'aria-expanded', true );
+					
+					
+					TweenMax.to( $e.next( 'ul' ), 0.5, { height: 0 } );
 
+					//to open
+					// - temporarilty set height:auto
+					// - tween from height:0
+					TweenMax.set( $sub, { height: 'auto' } );
+					TweenMax.from( $sub, 0.5, { height:0 } );	
 
+					
+					
+					
+				} else {
+					
+					$( this ).removeClass( 'active' ).attr( 'aria-expanded', false );
+					
+					//to close
+					TweenMax.to( $sub, 0.5, { height: 0 } );
 
-				var $sub = $( this ).parent( 'li' ).children( 'ul' );
+				}
+				
 
-				//close opend <ul>
-				$( this ).parent( 'li' ).siblings().find( '> ul' ).slideUp( verticalMenuAnimSpeed/2, function() {
-					$sub.slideToggle( verticalMenuAnimSpeed );
-				} );
-
-				$( this ).parent( 'li' ).toggleClass( 'active' );
-
+				
+				
 				return false;
 			}
 				
-
 
         });
 		
@@ -19435,7 +19488,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.FORM               = APP.FORM || {};
-	APP.FORM.version       = '0.0.3';
+	APP.FORM.version       = '0.0.4';
     APP.FORM.documentReady = function( $ ) {
 
 		/* 
@@ -19448,7 +19501,6 @@ APP = ( function ( APP, $, window, document ) {
 		$( document ).customSpecialFormsInit();
 		
 		
-	
 		
 		/* 
 		 ---------------------------
@@ -19652,10 +19704,62 @@ APP = ( function ( APP, $, window, document ) {
 
 			/* 
 			 ---------------------------
+			 Upload field
+			 ---------------------------
+			 */ 	
+			var $dropZone = $( '.uix-controls__file-field-trigger [type="file"]' )
+			$( document ).on( 'dragover', function(e) {
+				var timeout = window.dropZoneTimeout;
+				if (!timeout) {
+					$dropZone.addClass( 'in' );
+				} else {
+					clearTimeout(timeout);
+				}
+				var found = false,
+				node = e.target;
+				do {
+					if (node === $dropZone[0]) {
+						found = true;
+						break;
+					}
+					node = node.parentNode;
+				} while ( node != null );
+				if (found) {
+					$dropZone.addClass( 'hover' );
+				} else {
+					$dropZone.removeClass( 'hover' );
+				}
+				window.dropZoneTimeout = setTimeout(function() {
+					window.dropZoneTimeout = null;
+					$dropZone.removeClass( 'in hover' );
+				},
+				100);
+			});
+			
+			$dropZone.on( 'change', function( e ) {
+				var input = $( this )[0];
+				if ( input.files && input.files[0] ) {
+					var reader = new FileReader();
+					reader.onload = function( e ) {
+						var imgData = e.target.result;
+						var imgName = input.files[0].name;
+						input.setAttribute( 'data-title', imgName );
+						//console.log(e.target.result);
+					}
+					reader.readAsDataURL( input.files[0] );
+					
+					
+				}
+
+			});
+
+			
+			/* 
+			 ---------------------------
 			 Hover Effect
 			 ---------------------------
 			 */ 
-			$( '.float-label' ).each( function(){
+			$( '.js-uix-float-label' ).each( function(){
 
 				var $this = $( this );
 

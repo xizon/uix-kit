@@ -19,9 +19,11 @@
 		&::before {
 			display: inline-block;
 			content: "\f105";
-			font-family: 'FontAwesome';
+			font-family: 'Font Awesome 5 Free';
+			font-weight: 600;
 			color: #333;
 			cursor: pointer;
+			
 
 		}
 		
@@ -39,26 +41,32 @@
 			border-bottom: 1px solid #e5e5e5;
 
 			&:hover {
+				border-color: #333;
 
 			}
 			
+			&.active {
+
+				 > .uix-vertical-menu__arrow {
+					transform: rotate(90deg);
+					top: .5rem;
+
+				}
+
+
+			}	
+			
 		}	
 		
-		&.active {
-			
-			> a > .uix-vertical-menu__arrow {
-				transform: rotate(90deg);
-				top: .5rem;
-				
-			}
-		}
+
 		
 	}
 	
 	> li {
 		
 		ul {
-			display: none;
+			overflow: hidden;
+			height: 0;
 			position: relative;
 		}	
 	}

@@ -37,8 +37,7 @@
 			font-size: 1rem;/*Fighting the Space Between Inline Block Elements*/
 
 			a, 
-			&.active > span, 
-			> span.current {
+			> span {
 				display: inline-block;
 				width: 3.125rem;
 				height: 3.125rem;
@@ -48,6 +47,7 @@
 				border: none;
 				color: $primary-text-color1;
 				font-variant-ligatures: common-ligatures;
+				border-radius: 4px;
 				/*Ligatures and contextual forms are ways of combining glyphs to produce more harmonized forms.*/
 				margin-bottom: 0;
 				font-size: 0.875rem;
@@ -74,7 +74,10 @@
 				}
 
 				> span {
-					@include bg-gradient( 'to bottom' );
+					border-color: $btn-gradient-color1;
+					background-color: $btn-gradient-color1;
+					background-image: linear-gradient(to right, $btn-gradient-color1 0%, $btn-gradient-color2 20%, $btn-gradient-color3 100%);
+					@include outer-shadow( 'highlight', $highlight-color1 );
 					color: #fff;
 					font-style: italic;
 				}

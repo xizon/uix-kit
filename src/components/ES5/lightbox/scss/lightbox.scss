@@ -55,7 +55,8 @@ $lb-radius: 3px;
 
 
 	&::after {
-		font-family: 'FontAwesome';
+		font-family: 'Font Awesome 5 Free';
+		font-weight: 600;
 		content: "\f067";
 		color: #fff;
 		font-size: 2rem;
@@ -130,7 +131,8 @@ $lb-radius: 3px;
 					
 					&::before {
 						display: block;
-						font-family: 'FontAwesome';
+						font-family: 'Font Awesome 5 Free';
+						font-weight: 600;
 						font-size: 2.5rem;
 						color: #fff;
 					}

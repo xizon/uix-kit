@@ -5,7 +5,7 @@
  * 1. Bootstrap 4.x                              - Do not use prefix "uix-"
  * 2. Material Container                         
  * 3. Main Wrapper                               
- * 4. Seamless Grid (Core Grid)
+ * 4. Uix Grid (Core Grid)
  * 5. Align Wide and Full Classes For Elements
 */
 
@@ -129,7 +129,7 @@
 
 /* 
  ---------------------------
- 4. Seamless Grid
+ 4. Uix Grid
  ---------------------------
  */ 
 //Width property that can be used independently
@@ -208,8 +208,8 @@
 	
 
 
-@mixin seamlessGridGenerate( $classname: '.uix-core-grid', $pad: 15px ) {
-	// @include seamlessGridGenerate( '.uix-core-grid', 15px );
+@mixin uixCoreGridGenerate( $classname: '.uix-core-grid', $pad: 15px ) {
+	// @include uixCoreGridGenerate( '.uix-core-grid', 15px );
 
     @if ( $classname != '' ) {
 		#{$classname} {
@@ -372,7 +372,7 @@
 }
 
 
-@include seamlessGridGenerate( '.uix-core-grid', 15px );
+@include uixCoreGridGenerate( '.uix-core-grid', 15px );
 
 
 

@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.1.8
+ * ## Version             :  3.1.9
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  January 25, 2019
+ * ## Last Update         :  January 31, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -1129,7 +1129,7 @@ img.uix-alignfull,
  * 1. Bootstrap 4.x                              - Do not use prefix "uix-"
  * 2. Material Container                         
  * 3. Main Wrapper                               
- * 4. Seamless Grid (Core Grid)
+ * 4. Uix Grid (Core Grid)
  * 5. Align Wide and Full Classes For Elements
 */
 /* 
@@ -1204,7 +1204,7 @@ img.uix-alignfull,
 
 /* 
  ---------------------------
- 4. Seamless Grid
+ 4. Uix Grid
  ---------------------------
  */
 [class*='uix-core-grid__col-'] {
@@ -1688,7 +1688,8 @@ img.uix-alignfull,
     z-index: 99998;
     margin-left: -1rem; }
     .uix-modal-box .uix-modal-box__video-waiting::after {
-      font-family: 'FontAwesome';
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 600;
       content: "\f110";
       color: #fff;
       font-size: 2rem;
@@ -1725,7 +1726,8 @@ img.uix-alignfull,
     z-index: 1;
     pointer-events: auto; }
     .uix-modal-box .uix-modal-box__close::after {
-      font-family: 'FontAwesome';
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 600;
       content: "\f067";
       color: #fff;
       font-size: 16px;
@@ -1808,10 +1810,8 @@ img.uix-alignfull,
  * 4. Dropdown Arrow
 */
 .uix-menu__container:not(.is-mobile) {
-  font-size: 0.75rem;
   float: right;
   padding-top: 1.25rem;
-  line-height: 2.34375;
   /* 
 	 ---------------------------
 	 1. Primary Menu
@@ -1831,6 +1831,8 @@ img.uix-alignfull,
   .uix-menu__container:not(.is-mobile).is-fixed {
     padding-bottom: 0; }
   .uix-menu__container:not(.is-mobile) ul.uix-menu {
+    font-size: 0.75rem;
+    line-height: 2.34375;
     float: left;
     margin: 0;
     /* Required*/
@@ -2153,7 +2155,8 @@ img.uix-alignfull,
           border: none;
           padding: .5rem 1.5rem; }
           .uix-nav.uix-nav--dropdown-mobile li a::after {
-            font-family: 'FontAwesome';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 600;
             content: "\f105";
             font-size: 1rem;
             float: right;
@@ -2238,8 +2241,7 @@ img.uix-alignfull,
       font-size: 1rem;
       /*Fighting the Space Between Inline Block Elements*/ }
       .uix-pagination__container ul.uix-pagination li a,
-      .uix-pagination__container ul.uix-pagination li.active > span,
-      .uix-pagination__container ul.uix-pagination li > span.current {
+      .uix-pagination__container ul.uix-pagination li > span {
         display: inline-block;
         width: 3.125rem;
         height: 3.125rem;
@@ -2249,6 +2251,7 @@ img.uix-alignfull,
         border: none;
         color: #212121;
         font-variant-ligatures: common-ligatures;
+        border-radius: 4px;
         /*Ligatures and contextual forms are ways of combining glyphs to produce more harmonized forms.*/
         margin-bottom: 0;
         font-size: 0.875rem;
@@ -2265,8 +2268,10 @@ img.uix-alignfull,
           background: #e7e7e7;
           color: #232323; }
       .uix-pagination__container ul.uix-pagination li.active > span {
-        background: #EC5E79;
-        background: linear-gradient(to bottom, #EC5E79 0%, #E8588C 100%);
+        border-color: #EC5E79;
+        background-color: #EC5E79;
+        background-image: linear-gradient(to right, #EC5E79 0%, #f60 20%, #d83ba0 100%);
+        box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(236, 94, 121, 0.2) 0px 15px 35px 0px;
         color: #fff;
         font-style: italic; }
 
@@ -2980,7 +2985,8 @@ table.is-horizontal th,
   cursor: pointer; }
   .uix-table-sorter::after {
     content: '';
-    font-family: 'FontAwesome';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 600;
     color: #AEAEAE;
     margin-left: .5rem;
     font-size: 0.75rem;
@@ -3635,19 +3641,25 @@ h6 {
   z-index: 11;
   left: 50%;
   top: 50%;
-  width: 44px;
-  height: 44px;
-  line-height: 44px;
-  margin-left: -22px;
-  margin-top: -22px;
-  font-size: 3rem;
+  width: 64px;
+  height: 64px;
+  line-height: 64px;
+  margin-left: -32px;
+  margin-top: -32px;
+  border: 3px solid #fff;
+  border-radius: 50%;
   text-shadow: 1px 0 3px rgba(0, 0, 0, 0.3); }
   .uix-video__cover .uix-video__cover__playbtn::before {
     display: inline-block;
-    content: "\f01d";
-    font-family: 'FontAwesome';
+    content: "\f04b";
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 600;
     color: #fff;
-    cursor: pointer; }
+    cursor: pointer;
+    font-size: 1.5rem;
+    margin: 15px;
+    line-height: 1;
+    margin-left: 1.3rem; }
 
 .uix-video__slider {
   visibility: visible; }
@@ -3669,7 +3681,8 @@ h6 {
   .uix-video__btn-play::before {
     display: inline-block;
     content: "\f021";
-    font-family: 'FontAwesome';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 600;
     color: #fff;
     cursor: pointer; }
 
@@ -3795,20 +3808,18 @@ h6 {
     .uix-accordion dl dt::before {
       position: absolute;
       display: block;
-      font-family: 'FontAwesome';
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 600;
       content: "\f105";
-      font-size: 18pt;
+      font-size: 1rem;
       right: 1rem;
-      top: .5rem;
+      top: 1rem;
       transition: .1s ease-in-out;
-      color: rgba(0, 0, 0, 0.54);
-      font-weight: 100; }
+      color: rgba(0, 0, 0, 0.54); }
   .uix-accordion dl dd {
     width: calc(100% - 2rem);
     overflow: hidden;
-    /* Use max-height with different transition easing and delay for each state. */
-    max-height: 0px;
-    transition: max-height 0.8s cubic-bezier(0, 1, 0, 1) -0.1s;
+    height: 0;
     font-size: 0.875rem; }
     .uix-accordion dl dd > div {
       padding: 1rem; }
@@ -3831,10 +3842,6 @@ h6 {
       border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
       .uix-accordion dl.active dt::before {
         transform: rotate(90deg); }
-    .uix-accordion dl.active dd {
-      max-height: 1000px;
-      transition-timing-function: cubic-bezier(0.5, 0, 1, 0);
-      transition-delay: 0s; }
 
 /* ====================================================== 
     <!-- Advanced Content Slider -->  
@@ -5670,7 +5677,8 @@ h3[data-counter-number] {
     .uix-vertical-menu .uix-vertical-menu__arrow::before {
       display: inline-block;
       content: "\f105";
-      font-family: 'FontAwesome';
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 600;
       color: #333;
       cursor: pointer; }
   .uix-vertical-menu li {
@@ -5682,11 +5690,14 @@ h3[data-counter-number] {
     .uix-vertical-menu li > a {
       display: block;
       border-bottom: 1px solid #e5e5e5; }
-    .uix-vertical-menu li.active > a > .uix-vertical-menu__arrow {
-      transform: rotate(90deg);
-      top: .5rem; }
+      .uix-vertical-menu li > a:hover {
+        border-color: #333; }
+      .uix-vertical-menu li > a.active > .uix-vertical-menu__arrow {
+        transform: rotate(90deg);
+        top: .5rem; }
   .uix-vertical-menu > li ul {
-    display: none;
+    overflow: hidden;
+    height: 0;
     position: relative; }
 
 /* ====================================================== 
@@ -6631,9 +6642,15 @@ ol.uix-flexslider__control-paging {
     pointer-events: none;
     transition: all 0.3s ease; }
     .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) label.active {
-      top: -1.09375rem;
       color: #555;
-      background-color: white; }
+      background-color: white;
+      transform-origin: left top;
+      transform: scale(0.875) translateY(-1.6rem); }
+  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls--line label {
+    left: -0.75rem; }
+    .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls--line label.active {
+      transform-origin: left top;
+      transform: scale(0.875) translateY(-1.6rem); }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-radio label {
     padding-left: 1.25rem !important;
     position: relative !important;
@@ -6716,6 +6733,10 @@ ol.uix-flexslider__control-paging {
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed select {
     padding-left: 0.546875rem;
     padding-right: calc(3.5rem - 0.546875rem); }
+  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls--line.is-iconic label {
+    left: 2.375rem; }
+  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls--line.is-iconic.is-reversed label {
+    left: -0.546875rem !important; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-success input:not([type="checkbox"]):not([type="radio"]) {
     border-color: #4AB005; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-success textarea,
@@ -6801,13 +6822,13 @@ ol.uix-flexslider__control-paging {
   border-color: transparent !important; }
 
 .uix-controls.uix-controls--line label.active {
-  transform: translateX(-1.75rem) scale(0.8); }
+  transform: translateX(-1.75rem) scale(0.875); }
 
 .uix-controls.uix-controls--line.is-iconic label.active {
-  transform: translateX(-4.09375rem) scale(0.8); }
+  transform: translateX(-4.09375rem) scale(0.875); }
 
 .uix-controls.uix-controls--line.is-iconic.is-reversed label.active {
-  transform: translateX(-1.75rem) scale(0.8); }
+  transform: translateX(-1.75rem) scale(0.875); }
 
 .col-sm-12 .uix-controls.uix-controls--line:not(.uix-controls__short-s):not(.uix-controls__short-m):not(.uix-controls__short-l) .uix-controls__bar {
   left: -8px; }
@@ -6841,6 +6862,74 @@ ol.uix-flexslider__control-paging {
 
 .uix-controls__file-return {
   font-style: italic; }
+
+/* HTML5 drag and drop upload control */
+.uix-controls__file-field-container {
+  height: 400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  background-color: transparent;
+  margin-bottom: 2.5rem; }
+  .uix-controls__file-field-container .uix-controls__file-field-trigger {
+    width: 400px;
+    height: 100%;
+    background: #FBFDFD;
+    border-radius: 8px;
+    position: absolute;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #CBCBCB;
+    pointer-events: hover;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px; }
+    .uix-controls__file-field-container .uix-controls__file-field-trigger > div {
+      width: 60%;
+      height: 65%;
+      text-align: center; }
+      .uix-controls__file-field-container .uix-controls__file-field-trigger > div::after {
+        display: inline-block;
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 600;
+        content: "\f093";
+        font-size: 4rem;
+        color: #EC5E79;
+        transform: translateY(50%); }
+      .uix-controls__file-field-container .uix-controls__file-field-trigger > div input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        outline: none;
+        visibility: hidden;
+        cursor: pointer; }
+        .uix-controls__file-field-container .uix-controls__file-field-trigger > div input::before {
+          content: attr(data-title);
+          position: absolute;
+          color: #CBCBCB;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          opacity: 1;
+          visibility: visible;
+          font-size: 1.2rem;
+          border: 2px dashed #EC5E79;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          transition: all 0.3s ease;
+          padding-top: 4rem; }
+        .uix-controls__file-field-container .uix-controls__file-field-trigger > div input.in::before {
+          border-color: #333; }
+        .uix-controls__file-field-container .uix-controls__file-field-trigger > div input.hover::before, .uix-controls__file-field-container .uix-controls__file-field-trigger > div input:hover::before {
+          border-style: solid; }
 
 /* 
  ---------------------------
@@ -7010,6 +7099,7 @@ ol.uix-flexslider__control-paging {
   .uix-controls__select-wrapper .is-pill .uix-controls__select-trigger {
     border-radius: 50px; }
   .uix-controls__select-wrapper .uix-controls--line .uix-controls__select-trigger {
+    text-indent: -1.6rem;
     border-radius: 0;
     border-top-color: transparent !important;
     border-left-color: transparent !important;
@@ -7017,7 +7107,7 @@ ol.uix-flexslider__control-paging {
   .uix-controls__select-wrapper .uix-controls--line .uix-controls__bar {
     position: absolute;
     height: 2px;
-    left: 0;
+    left: -0.25rem;
     width: 100%;
     bottom: calc( 1.09375rem + 0.5px);
     transform: translateX(2px); }
@@ -7033,6 +7123,8 @@ ol.uix-flexslider__control-paging {
       left: 51%; }
     .uix-controls__select-wrapper .uix-controls--line .uix-controls__bar::after {
       right: 49%; }
+  .uix-controls__select-wrapper .uix-controls--line.is-fullwidth .uix-controls__bar {
+    left: -0.685rem; }
   .uix-controls__select-wrapper .uix-controls__select-label {
     display: inline-block;
     margin-left: .3rem;
@@ -7929,7 +8021,8 @@ ol.uix-flexslider__control-paging {
   .uix-lightbox__close.active {
     display: block; }
   .uix-lightbox__close::after {
-    font-family: 'FontAwesome';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 600;
     content: "\f067";
     color: #fff;
     font-size: 2rem;
@@ -7987,7 +8080,8 @@ ol.uix-flexslider__control-paging {
           .uix-lightbox__container .uix-lightbox__inner .uix-lightbox__html .uix-lightbox__photo-container .uix-lightbox__photo-sets__prev::before,
           .uix-lightbox__container .uix-lightbox__inner .uix-lightbox__html .uix-lightbox__photo-container .uix-lightbox__photo-sets__next::before {
             display: block;
-            font-family: 'FontAwesome';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 600;
             font-size: 2.5rem;
             color: #fff; }
           .uix-lightbox__container .uix-lightbox__inner .uix-lightbox__html .uix-lightbox__photo-container .uix-lightbox__photo-sets__prev:hover, .uix-lightbox__container .uix-lightbox__inner .uix-lightbox__html .uix-lightbox__photo-container .uix-controls__multi-sel > span.uix-lightbox__photo-sets__prev.active:not(.uix-controls__bar),
@@ -9062,7 +9156,8 @@ dl.uix-list-abreast {
     /*default*/
     list-style: none; }
     .uix-price li::before {
-      font-family: 'FontAwesome';
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 600;
       content: "\f00c";
       display: inline-block;
       margin-right: .4rem; }
@@ -10625,7 +10720,8 @@ Style with support for rainbow parens
       border-radius: 0px;
       background-color: #000; }
   #uix-source-code #uix-source-code__close::after {
-    font-family: 'FontAwesome';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 600;
     content: "\f067";
     color: #fff;
     font-size: 1rem; }
@@ -11547,19 +11643,18 @@ Style with support for rainbow parens
   position: relative;
   display: inline-block; }
   .uix-tooltip .uix-tooltip__content {
-    font-size: 0.75rem;
+    font-size: 0.875rem;
     visibility: hidden;
     position: absolute;
-    min-width: 120px;
+    min-width: 150px;
     background-color: #fff;
     color: #333;
-    text-align: center;
     padding: 0.75rem;
     border-radius: 3px;
     z-index: 1;
     opacity: 0;
     transition: all 0.3s ease;
-    box-shadow: 0px 0px 21px 0px rgba(0, 0, 0, 0.27); }
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px; }
     .uix-tooltip .uix-tooltip__content img {
       height: auto !important;
       margin: 0; }

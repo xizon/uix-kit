@@ -15,7 +15,6 @@
 */
 
 
-
 $control-text-color: #888;
 $control-sub-color: #dce4e8;
 $control-focus-color: $primary-text-color1;
@@ -146,7 +145,7 @@ $control-focus-bordercolor2: transparent;
 		background-color: #fff;
 		color: $control-text-color;
 		border: 1px solid $control-sub-color;
-		width: calc(100% - 1.09375rem - 2px );	
+		width: calc(100% - 1.09375rem - 2px );
 	
 	
 		&:focus ~ label {
@@ -287,13 +286,30 @@ $control-focus-bordercolor2: transparent;
 		
 		
 		&.active {
-			top: -1.09375rem;
 			color: #555;
 			background-color: white;
+			transform-origin: left top;
+			transform: scale(0.875) translateY(-1.6rem);
+			
 		}	
 		
 		
 	}
+	
+	&.uix-controls--line {
+		label {
+			left: -0.75rem;
+			
+			&.active {
+				transform-origin: left top;
+				transform: scale(0.875) translateY(-1.6rem);
+
+			}	
+
+
+		}	
+	}
+
 	
 	
 	/*-- Radio --*/
@@ -346,6 +362,7 @@ $control-focus-bordercolor2: transparent;
 		}	
 		
 	}
+	
 	
 	
 
@@ -420,6 +437,27 @@ $control-focus-bordercolor2: transparent;
 				padding-left: 0.546875rem;
 				padding-right: calc(3.5rem - 0.546875rem);
 			}	
+			
+		}
+
+		
+
+	}
+	
+	
+	&.uix-controls--line.is-iconic {
+		label {
+		    left: 2.375rem;
+		}
+
+		
+		&.is-reversed {
+
+			label {
+				left: -0.546875rem !important;
+
+			}
+
 			
 		}
 
@@ -613,14 +651,14 @@ $control-focus-bordercolor2: transparent;
 	
 	label {
 		&.active {
-			transform: translateX(-1.75rem) scale(.8);
+			transform: translateX(-1.75rem) scale(.875);
 		}	
 	}
 	
 	&.is-iconic {
 		label {
 			&.active {
-				transform: translateX(-4.09375rem) scale(.8);
+				transform: translateX(-4.09375rem) scale(.875);
 			}	
 		}	
 		
@@ -628,7 +666,7 @@ $control-focus-bordercolor2: transparent;
 			
 			label {
 				&.active {
-					transform: translateX(-1.75rem) scale(.8);
+					transform: translateX(-1.75rem) scale(.875);
 				}	
 			}		
 		}
@@ -704,6 +742,108 @@ $control-focus-bordercolor2: transparent;
 .uix-controls__file-return {
 	font-style: italic;
 }
+
+
+/* HTML5 drag and drop upload control */
+.uix-controls__file-field-container {
+    height: 400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    background-color: transparent;
+	margin-bottom: 2.5rem;
+	
+	.uix-controls__file-field-trigger {
+		width: 400px;
+		height: 100%;
+		background: #FBFDFD;
+		border-radius: 8px;
+		position: absolute;
+		z-index: 4;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		color: #CBCBCB;
+		pointer-events: hover;
+		cursor: pointer;
+		@include outer-shadow( 'regular' );
+
+		> div {
+			width: 60%;
+			height: 65%;
+			text-align: center;
+			
+			&::after {
+				display: inline-block;
+				font-family: 'Font Awesome 5 Free';
+				font-weight: 600;
+				content: "\f093";
+				font-size: 4rem;
+				color: $highlight-color1;
+				transform: translateY(50%);
+			}	
+			
+			
+			
+			input {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				outline: none;
+				visibility: hidden;
+				cursor: pointer;
+				
+				&::before {
+					content: attr(data-title);
+					position: absolute;
+					color: #CBCBCB;
+					top: 0;
+					left: 0;
+					width: 100%;
+					height: 100%;
+					opacity: 1;
+					visibility: visible;
+					font-size: 1.2rem;
+					border: 2px dashed $highlight-color1;
+					overflow: hidden;
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+					@include transition-default(); 
+					padding-top: 4rem;
+				}
+
+				
+				&.in {
+					&::before {
+						border-color: #333;
+					}
+
+				}
+			
+				
+				&.hover,
+				&:hover {
+					&::before {
+						border-style: solid;
+					}
+				}
+			}
+			
+			
+		}
+		
+		
+		
+		
+	}
+	
+}
+
 
 
 /* 
@@ -954,6 +1094,7 @@ $controls-merge-button-width: 20%;
 	
 	.uix-controls--line  {
 		.uix-controls__select-trigger {
+			text-indent: -1.6rem;
 			border-radius: 0;
 			border-top-color: $control-focus-bordercolor2 !important;
 			border-left-color: $control-focus-bordercolor2 !important;
@@ -962,11 +1103,13 @@ $controls-merge-button-width: 20%;
 		}	
 		
 		
+		
+		
 		//Create Line Effect on Click
 		.uix-controls__bar {
 			position: absolute;
 			height: 2px;
-			left: 0;
+			left: -0.25rem;
 			width: 100%;
 			bottom: calc( 1.09375rem + 0.5px);
 			transform: translateX(2px);
@@ -989,8 +1132,16 @@ $controls-merge-button-width: 20%;
 			}
 
 		}	
-	
 		
+		
+		
+		&.is-fullwidth {
+			.uix-controls__bar {
+				left: -0.685rem;
+			}	
+			
+		}
+	
 	}
 	
 	

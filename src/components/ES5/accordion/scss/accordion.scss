@@ -15,27 +15,26 @@
 				display: block;
 			}
 
+			
 			&::before {
 				position: absolute;
 				display: block;
-				font-family: 'FontAwesome';
+				font-family: 'Font Awesome 5 Free';
+				font-weight: 600;
 				content: "\f105";
-				font-size: 18pt;
+				font-size: 1rem;
 				right: 1rem;
-				top: .5rem;
+				top: 1rem;
 				transition: .1s ease-in-out;
 				color: rgba(0, 0, 0, 0.54);
-				font-weight: 100;
 			}
 		}
 
 		dd {
 			width: calc(100% - 2rem);
 			overflow: hidden;
+			height: 0;
 			
-			/* Use max-height with different transition easing and delay for each state. */
-			max-height: 0px;
-			transition: max-height .8s cubic-bezier(0, 1, 0, 1) -.1s;
 			font-size: 0.875rem;
 			
 			> div {
@@ -73,13 +72,7 @@
 				}
 				
 			}
-			
-			dd {
-				max-height: 1000px;
-				transition-timing-function: cubic-bezier(0.5, 0, 1, 0); 
-				transition-delay: 0s;
-
-			}		
+				
 			
 		}
 

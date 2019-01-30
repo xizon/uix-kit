@@ -29,7 +29,8 @@
 		list-style: none;
 
 		&::before {
-			font-family: 'FontAwesome';
+			font-family: 'Font Awesome 5 Free';
+			font-weight: 600;
 			content: "\f00c";
 			display: inline-block;
 			margin-right: .4rem;

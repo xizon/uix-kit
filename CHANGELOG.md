@@ -1,5 +1,14 @@
 # Changelog
 
+#### = 3.1.9 (January 30, 2019) =
+
+* Fix: Fixed a display bug for Multi-level drop-down navigation.
+* New: Add HTML5 drag and drop upload control.
+* Tweak: Optimized script and style for some modules.
+* Tweak: Change the name "Seamless Grid" to "Uix Grid".
+* Tweak: Upgraded fontawesome version 4 to version 5.
+
+
 
 #### = 3.1.8 (January 23, 2019) =
 

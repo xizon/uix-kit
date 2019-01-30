@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.1.8
+ * ## Version             :  3.1.9
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  January 25, 2019
+ * ## Last Update         :  January 31, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -204,7 +204,7 @@ blockquote {
 /* ====================================================== */
 /* 
  ---------------------------
- 4. Seamless Grid
+ 4. Uix Grid
  ---------------------------
  */
 [class*='uix-core-grid__col-'] {
@@ -584,6 +584,8 @@ blockquote {
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) label {
     left: auto;
     right: 0.875rem; }
+    .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) label.active {
+      transform-origin: right top; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-radio label {
     padding-left: auto !important;
     padding-right: 1.25rem !important;
@@ -628,10 +630,15 @@ blockquote {
 
 /* Create Line Effect on Click */
 .uix-controls.uix-controls--line label.active {
-  transform: translateX(1.75rem) scale(0.8); }
+  transform: translateX(1.75rem) scale(0.875); }
 
-.uix-controls.uix-controls--line.is-iconic label.active {
-  transform: translateX(4.09375rem) scale(0.8); }
+.uix-controls.uix-controls--line.is-iconic label {
+  right: 2.375rem; }
+  .uix-controls.uix-controls--line.is-iconic label.active {
+    transform: translateX(4.09375rem) scale(0.875); }
+
+.uix-controls.uix-controls--line.is-iconic.is-reversed label {
+  right: -0.546875rem !important; }
 
 .col-sm-12 .uix-controls.uix-controls--line:not(.uix-controls__short-s):not(.uix-controls__short-l) .uix-controls__bar {
   right: -8px; }
@@ -685,13 +692,16 @@ blockquote {
 
 .uix-controls__select-wrapper .uix-controls--line .uix-controls__bar {
   left: auto;
-  right: 0; }
+  right: -0.25rem; }
   .uix-controls__select-wrapper .uix-controls--line .uix-controls__bar::before {
     left: auto;
     right: 51%; }
   .uix-controls__select-wrapper .uix-controls--line .uix-controls__bar::after {
     right: auto;
     left: 49%; }
+
+.uix-controls__select-wrapper .uix-controls--line.is-fullwidth .uix-controls__bar {
+  right: -0.685rem; }
 
 .uix-controls__select-wrapper .uix-controls__select-label {
   margin-left: auto;

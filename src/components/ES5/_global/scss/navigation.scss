@@ -16,10 +16,9 @@ $nav-sub-w        : 220px;
 $nav-mega-li-w    : 270px;
 
 .uix-menu__container:not(.is-mobile) {
-	font-size: $nav-font-size;
 	float: right;
 	padding-top: 1.25rem;
-	line-height: 2.34375;
+
 
 	&.is-fixed {
 		padding-bottom: 0;
@@ -32,6 +31,8 @@ $nav-mega-li-w    : 270px;
 	 ---------------------------
 	 */ 
 	ul.uix-menu {
+		font-size: $nav-font-size;
+		line-height: 2.34375;
 		float: left;
 		margin: 0; /* Required*/
 		font-size: 0; /*Fighting the Space Between Inline Block Elements*/

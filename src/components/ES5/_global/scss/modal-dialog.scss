@@ -61,7 +61,8 @@ $modal-box-radius: 8px;
 		margin-left: -1rem;
 		
 		&::after {
-			font-family: 'FontAwesome';
+			font-family: 'Font Awesome 5 Free';
+			font-weight: 600;
 			content: "\f110";
 			color: #fff;
 			font-size: 2rem;
@@ -111,7 +112,8 @@ $modal-box-radius: 8px;
 		pointer-events: auto;
 		
 		&::after {
-			font-family: 'FontAwesome';
+			font-family: 'Font Awesome 5 Free';
+			font-weight: 600;
 			content: "\f067";
 			color: #fff;
 			font-size: 16px;

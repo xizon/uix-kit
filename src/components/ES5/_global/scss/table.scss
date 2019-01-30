@@ -235,7 +235,8 @@ table.is-horizontal,
 
 	&::after {
 		content: '';
-		font-family: 'FontAwesome';
+		font-family: 'Font Awesome 5 Free';
+		font-weight: 600;
 		color: $sub-text-color;
 		margin-left: .5rem;
 		font-size: 0.75rem;

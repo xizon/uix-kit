@@ -8,37 +8,56 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.DROPDOWN_MENU2               = APP.DROPDOWN_MENU2 || {};
-	APP.DROPDOWN_MENU2.version       = '0.0.3';
+	APP.DROPDOWN_MENU2.version       = '0.0.4';
     APP.DROPDOWN_MENU2.documentReady = function( $ ) {
 
-		var $verticalMenuLi       = $( '.uix-vertical-menu li' ),
-			verticalMenuAnimSpeed = 500;
+		var $verticalMenuLi = $( '.uix-vertical-menu li' );
 		
 		$verticalMenuLi.find( '> a' ).on( 'click', function( e ) {
 			
-			if ( $( this ).next( 'ul' ).length > 0 ) {
+			var $sub = $( this ).next( 'ul' );
+			
+			if ( $sub.length > 0 ) {
 
 				e.preventDefault();
+				
+				var expanded = ( $( this ).attr( 'aria-expanded' ) == 'true' ) ? false : true;
+				
+				if ( expanded ) {
+					//Hide other all sibling <ul> of the selected element
+					var $e = $( this ).parent( 'li' ).siblings().find( '> a' );
+					
+					$e.removeClass( 'active' ).attr( 'aria-expanded', false );
 
-				//Hide other all sibling <ul> of the selected element
-				$( this ).parent( 'li' ).siblings()
-										.removeClass( 'active' );
+					$( this ).addClass( 'active' ).attr( 'aria-expanded', true );
+					
+					
+					TweenMax.to( $e.next( 'ul' ), 0.5, { height: 0 } );
 
+					//to open
+					// - temporarilty set height:auto
+					// - tween from height:0
+					TweenMax.set( $sub, { height: 'auto' } );
+					TweenMax.from( $sub, 0.5, { height:0 } );	
 
+					
+					
+					
+				} else {
+					
+					$( this ).removeClass( 'active' ).attr( 'aria-expanded', false );
+					
+					//to close
+					TweenMax.to( $sub, 0.5, { height: 0 } );
 
-				var $sub = $( this ).parent( 'li' ).children( 'ul' );
+				}
+				
 
-				//close opend <ul>
-				$( this ).parent( 'li' ).siblings().find( '> ul' ).slideUp( verticalMenuAnimSpeed/2, function() {
-					$sub.slideToggle( verticalMenuAnimSpeed );
-				} );
-
-				$( this ).parent( 'li' ).toggleClass( 'active' );
-
+				
+				
 				return false;
 			}
 				
-
 
         });
 		

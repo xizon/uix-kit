@@ -30,22 +30,30 @@
 		z-index: 11;
 		left: 50%;
 		top: 50%;
-		width: 44px;
-		height: 44px;
-		line-height: 44px;
-		margin-left: -22px;
-		margin-top: -22px;
-		font-size: 3rem;
+		width: 64px;
+		height: 64px;
+		line-height: 64px;
+		margin-left: -32px;
+		margin-top: -32px;
+		border: 3px solid #fff;
+		border-radius: 50%;
 		text-shadow: 1px 0 3px rgba(0,0,0,.3);
 
-
+		
 		&::before {
 			display: inline-block;
-			content: "\f01d";
-			font-family: 'FontAwesome';
+			content: "\f04b";
+			font-family: 'Font Awesome 5 Free';
+			font-weight: 600;
 			color: #fff;
 			cursor: pointer;
+			font-size: 1.5rem;
+			margin: 15px;
+			line-height: 1;
+			margin-left: 1.3rem;
 		}	
+		
+		
 		
 	}
 	
@@ -76,7 +84,8 @@
 	&::before {
 		display: inline-block;
 		content: "\f021";
-		font-family: 'FontAwesome';
+		font-family: 'Font Awesome 5 Free';
+		font-weight: 600;
 		color: #fff;
 		cursor: pointer;
 	}

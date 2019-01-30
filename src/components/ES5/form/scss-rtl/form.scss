@@ -79,7 +79,13 @@
 	label {
 		left: auto;
 		right: 0.875rem;
-
+		
+		
+		&.active {
+			transform-origin: right top;
+			
+		}	
+		
 	}
 	
 	
@@ -182,17 +188,33 @@
 
 	label {
 		&.active {
-			transform: translateX(1.75rem) scale(.8);
+			transform: translateX(1.75rem) scale(.875);
 		}	
 	}
 	
 	&.is-iconic {
 		label {
+			
+			right: 2.375rem;
+			
 			&.active {
-				transform: translateX(4.09375rem) scale(.8);
+				transform: translateX(4.09375rem) scale(.875);
 			}	
 		}	
+
+		&.is-reversed {
+
+			label {
+				right: -0.546875rem !important;
+
+			}
+
+
+		}
+
+		
 	}
+
 	
 
 	
@@ -309,7 +331,7 @@
 		//Create Line Effect on Click
 		.uix-controls__bar {
 			left: auto;
-			right: 0;
+			right: -0.25rem;
 			
 		
 			&::before {
@@ -321,6 +343,14 @@
 				left: 49%;
 			}
 
+		}	
+		
+		
+		&.is-fullwidth {
+			.uix-controls__bar {
+				right: -0.685rem;
+			}	
+			
 		}	
 	
 		

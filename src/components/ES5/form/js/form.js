@@ -19,7 +19,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.FORM               = APP.FORM || {};
-	APP.FORM.version       = '0.0.3';
+	APP.FORM.version       = '0.0.4';
     APP.FORM.documentReady = function( $ ) {
 
 		/* 
@@ -32,7 +32,6 @@ APP = ( function ( APP, $, window, document ) {
 		$( document ).customSpecialFormsInit();
 		
 		
-	
 		
 		/* 
 		 ---------------------------
@@ -236,10 +235,62 @@ APP = ( function ( APP, $, window, document ) {
 
 			/* 
 			 ---------------------------
+			 Upload field
+			 ---------------------------
+			 */ 	
+			var $dropZone = $( '.uix-controls__file-field-trigger [type="file"]' )
+			$( document ).on( 'dragover', function(e) {
+				var timeout = window.dropZoneTimeout;
+				if (!timeout) {
+					$dropZone.addClass( 'in' );
+				} else {
+					clearTimeout(timeout);
+				}
+				var found = false,
+				node = e.target;
+				do {
+					if (node === $dropZone[0]) {
+						found = true;
+						break;
+					}
+					node = node.parentNode;
+				} while ( node != null );
+				if (found) {
+					$dropZone.addClass( 'hover' );
+				} else {
+					$dropZone.removeClass( 'hover' );
+				}
+				window.dropZoneTimeout = setTimeout(function() {
+					window.dropZoneTimeout = null;
+					$dropZone.removeClass( 'in hover' );
+				},
+				100);
+			});
+			
+			$dropZone.on( 'change', function( e ) {
+				var input = $( this )[0];
+				if ( input.files && input.files[0] ) {
+					var reader = new FileReader();
+					reader.onload = function( e ) {
+						var imgData = e.target.result;
+						var imgName = input.files[0].name;
+						input.setAttribute( 'data-title', imgName );
+						//console.log(e.target.result);
+					}
+					reader.readAsDataURL( input.files[0] );
+					
+					
+				}
+
+			});
+
+			
+			/* 
+			 ---------------------------
 			 Hover Effect
 			 ---------------------------
 			 */ 
-			$( '.float-label' ).each( function(){
+			$( '.js-uix-float-label' ).each( function(){
 
 				var $this = $( this );
 

@@ -116,6 +116,7 @@
 		transform: rotate(45deg);
 		text-decoration: none;
 	}
+	
 	.prettyprint {
 		border-radius: 2px;
 		box-shadow: 0px 0px 28px -4px rgba(0, 0, 0, 0.62);
@@ -133,10 +134,12 @@
 			border-radius: 0px;
 			background-color: #000;
 		}
+		
 	}
 	
 	#uix-source-code__close::after {
-		font-family: 'FontAwesome';
+		font-family: 'Font Awesome 5 Free';
+		font-weight: 600;
 		content: "\f067";
 		color: #fff;
 		font-size: 1rem;

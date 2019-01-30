@@ -4,7 +4,7 @@
 
 /* 
  ---------------------------
- 4. Seamless Grid
+ 4. Uix Grid
  ---------------------------
  */ 
 
@@ -12,8 +12,8 @@
 	float: right;
 }
 
-@mixin seamlessGridGenerateRTL( $classname: '.uix-core-grid', $pad: 15px ) {
-	// @include seamlessGridGenerate( '.uix-core-grid', 15px );
+@mixin uixCoreGridGenerateRTL( $classname: '.uix-core-grid', $pad: 15px ) {
+	// @include uixCoreGridGenerate( '.uix-core-grid', 15px );
 	
     @if ( $classname != '' ) {
 	
@@ -96,7 +96,7 @@
 }
 
 
-@include seamlessGridGenerateRTL( '.uix-core-grid', 15px );
+@include uixCoreGridGenerateRTL( '.uix-core-grid', 15px );
 
 
 
