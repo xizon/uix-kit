@@ -163,7 +163,8 @@ $ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
 		<link rel="stylesheet" href="assets/css/video.min.css?ver=7.4.1" media="all"/>
 		
         <!-- Icons  -->
-        <link rel="stylesheet" href="assets/fonts/fontawesome/font-awesome.min.css?ver=4.5" media="all" />  
+		<link rel="stylesheet" href="assets/fonts/fontawesome/css/all.min.css?ver=5.7.0">
+		<link rel="stylesheet" href="assets/fonts/fontawesome/css/v4-shims.min.css?ver=5.7.0">
         
         <!-- Theme  -->
         <link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=1.0.0" media="all"/>
