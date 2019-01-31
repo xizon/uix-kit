@@ -1,5 +1,11 @@
 # Changelog
 
+#### = 3.2.0 (January 31, 2019) =
+
+* Tweak: Optimized form components.
+
+
+
 #### = 3.1.9 (January 30, 2019) =
 
 * Fix: Fixed a display bug for Multi-level drop-down navigation.

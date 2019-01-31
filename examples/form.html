@@ -44,11 +44,11 @@
         
        
         <!-- Theme  -->
-        <link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=pr6efdEp4Wk5MYS7Uwgn"/>
+        <link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=UkyoMAQMjCs78v23zfvr"/>
         
         
          <!--[if lt IE 10]>
-           <link rel="stylesheet" href="assets/css/IE.css?ver=pr6efdEp4Wk5MYS7Uwgn" />
+           <link rel="stylesheet" href="assets/css/IE.css?ver=UkyoMAQMjCs78v23zfvr" />
         <![endif]-->
         
         
@@ -499,7 +499,7 @@
 
 											<div class="uix-controls uix-controls__select disabled">
 												<label>
-													<select name="selectname" placeholder="Options Here">
+													<select name="selectname">
 													    <option value="Option 1">Option 1</option>
 														<option value="Option 2">Option 2</option>
 														<option value="Option 3">Option 3</option>
@@ -571,7 +571,7 @@
 										<div class="col-sm-6">
 
 											<div class="uix-controls is-fullwidth is-iconic">
-										      <i class="fa fa-cogs" aria-hidden="true"></i>
+										      <i class="fa fa-user-o" aria-hidden="true"></i>
 											  <input type="text" class="js-uix-float-label reqiured" name="first-name">
 											  <label>With Icons<span class="uix-controls__im">*</span></label>
 											</div>
@@ -595,7 +595,7 @@
 										<div class="col-sm-6">
 
 											<div class="uix-controls is-fullwidth is-iconic is-reversed">
-										      <i class="fa fa-cogs" aria-hidden="true"></i>
+										      <i class="fa fa-user-o" aria-hidden="true"></i>
 											  <input type="text" class="js-uix-float-label" name="first-name">
 											  <label>With Icons</label>
 											</div>
@@ -621,26 +621,31 @@
 										<div class="col-sm-6">
 
 											<div class="uix-controls uix-controls__normal-select">
-												<label>
-													<select name="country">
-													    <option value="India">India</option>
-														<option value="Australia">Australia</option>
-													</select>
-													
-												</label>
-												<span>Country</span>
-												
-												
-												<label>
-													<select name="city">
-													    <option value="Barnal">Barnal</option>
-													</select>
-													
-												</label>
-												<span>City</span>
+												<span class="uix-controls__arrow"><i class="fa fa-sort"></i></span>
+												<select name="country">
+													<option value="Option 1">Option 1</option>
+													<option value="Option 2">Option 2</option>
+													<option value="Option 3">Option 3</option>
+												</select>
+												<label>Select</label>
 												
 												
 											</div>
+											
+											
+											<div class="uix-controls uix-controls__normal-select">
+												<span class="uix-controls__arrow"><i class="fa fa-sort"></i></span>
+												<select name="country">
+													<option value="Option 1">Option 1</option>
+													<option value="Option 2">Option 2</option>
+													<option value="Option 3">Option 3</option>
+												</select>
+												<label>Select</label>
+												
+												
+											</div>
+											
+											
 
 										</div>  
 
@@ -652,7 +657,7 @@
 								   <div class="row">
 										<div class="col-12 uix-t-l">
 
-											<div class="uix-controls is-fullwidth">
+											<div class="uix-controls uix-controls__normal-select is-fullwidth">
 												<span class="uix-controls__arrow"><i class="fa fa-sort"></i></span>
 												<select class="js-uix-float-label">
 													<option value="blank"></option>
@@ -677,7 +682,7 @@
 
 											<div class="uix-controls uix-controls__select">
 												<label>
-													<select name="selectname" placeholder="Options Here">
+													<select name="selectname">
 													    <option value="Option 1">Option 1</option>
 														<option value="Option 2">Option 2</option>
 														<option value="Option 3">Option 3</option>
@@ -700,7 +705,7 @@
 
 											<div class="uix-controls uix-controls__select is-fullwidth">
 												<label>
-													<select name="selectname" placeholder="Options Here">
+													<select name="selectname">
 												        <option value="">Full Width Select</option>
 													    <option value="Option 1">Option 1</option>
 														<option value="Option 2">Option 2</option>
@@ -722,7 +727,7 @@
 
 											<div class="uix-controls uix-controls__select uix-controls__select--top is-pill">
 												<label>
-													<select name="selectname" placeholder="Options Here">
+													<select name="selectname">
 													    <option value="Option 1">Option 1</option>
 														<option value="Option 2">Option 2</option>
 														<option value="Option 3">Option 3</option>
@@ -882,7 +887,7 @@
 
 											<div class="uix-controls uix-controls__radio">
 												<label>
-													<input type="radio" name="radioname">Radio Name
+													<input type="radio" name="radioname" checked>Radio Name
 												</label>
 												<label>
 													<input type="radio" name="radioname">Radio Name
@@ -1154,13 +1159,13 @@
 
                             <div class="uix-controls__merge">
 								<input id="search-input" placeholder="Enter your search term..." name="search-input" type="text" required />
-								<button type="submit" class="uix-btn__bg--primary"><span>Search</span></button>                    
+								<button type="submit" class="uix-btn uix-btn__bg--primary"><span><i class="fa fa-search" aria-hidden="true"></i>Search</span></button>                    
                             </div>
                             
                             
                             <div class="uix-controls__merge is-pill">
 								<input id="search-input2" placeholder="Enter your search term..." name="search-input" type="text" required />
-								<button type="submit" class="uix-btn__bg--primary"><span>Search</span></button>                    
+								<button type="submit" class="uix-btn uix-btn__bg--primary"><span>Search</span></button>                    
                             </div>                    
                         
                         
@@ -1210,25 +1215,25 @@
                            
                             <div class="uix-controls__merge">
 								<input id="subscribe-input" placeholder="Enter your Email" name="subscribe-input" type="email" required />
-								<button type="uix-btn" class="uix-btn__bg--primary"><span>Subscribe</span></button>                    
+								<button type="submit" class="uix-btn uix-btn__bg--primary"><span>Subscribe</span></button>                    
                             </div>      
                         
                         
                             <div class="uix-controls__merge is-pill">
 								<input id="subscribe-input" placeholder="Enter your Email" name="subscribe-input" type="email" required />
-								<button type="uix-btn" class="uix-btn__bg--primary"><span>Subscribe</span></button>                    
+								<button type="submit" class="uix-btn uix-btn__bg--primary"><span>Subscribe</span></button>                    
                             </div>    
                         
                             <div class="uix-controls__merge is-iconic">
                                 <i class="fa fa-envelope" aria-hidden="true"></i>
 								<input id="subscribe-input2" placeholder="Enter your Email" name="subscribe-input" type="email" required />
-								<button type="uix-btn" class="uix-btn__bg--primary"><span>Subscribe</span></button>                    
+								<button type="submit" class="uix-btn uix-btn__bg--primary"><span>Subscribe</span></button>                    
                             </div>       
                             
                             <div class="uix-controls__merge is-pill is-iconic">
                                 <i class="fa fa-envelope" aria-hidden="true"></i>
 								<input id="subscribe-input3" placeholder="Enter your Email" name="subscribe-input" type="email" required />
-								<button type="uix-btn" class="uix-btn__bg--primary"><span>Subscribe</span></button>                    
+								<button type="submit" class="uix-btn uix-btn__bg--primary"><span>Subscribe</span></button>                    
                             </div>       
  
                             
@@ -1325,14 +1330,14 @@
 	============================================= -->
 	
 	<script>
-		var REVISION     = "3.1.9",
+		var REVISION     = "3.2.0",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
 				"homeUrl"     : "",  //Eg. https://uiux.cc
 				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
 			};
     </script>  
-    <script src="../dist/js/uix-kit.min.js?ver=pr6efdEp4Wk5MYS7Uwgn"></script>
+    <script src="../dist/js/uix-kit.min.js?ver=UkyoMAQMjCs78v23zfvr"></script>
 
 
 

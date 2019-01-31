@@ -38,10 +38,10 @@ $button-class-margin-b: 1.5rem;
 	position: relative;
 	background-size: 300% 100%;
 	font-weight: 600;
-	text-transform: uppercase;
 	z-index: 1;
 	letter-spacing: .02rem;
 	line-height: 1.2;
+	cursor: pointer;
 	@include transition-default();
 	
 

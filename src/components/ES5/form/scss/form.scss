@@ -88,7 +88,7 @@ $control-focus-bordercolor2: transparent;
 		
 		input:not([type="checkbox"]):not([type="radio"]),
 		textarea, 
-		button, 
+		button:not(.uix-btn), 
 		select {
 			border-radius: 50px;	
 		}
@@ -128,6 +128,15 @@ $control-focus-bordercolor2: transparent;
 			}
 
 		}		
+	}
+	
+	
+	&.is-fullwidth {
+		.uix-controls__bar {
+			left: -6px;
+				
+		}
+	
 	}
 	
 
@@ -243,11 +252,12 @@ $control-focus-bordercolor2: transparent;
 	}
 	
 	
-	button {
+	button:not(.uix-btn) {
 		cursor: pointer;
 		padding: 0.75rem 0;
 		width: auto;
-		border-radius: 0;  
+		border-radius: 0;
+		
 
 		&:focus ~ label {
 			color: $control-focus-color;
@@ -269,6 +279,7 @@ $control-focus-bordercolor2: transparent;
 			border-color: $control-focus-bordercolor;
 		}  
 
+		
 	}
 	
 	
@@ -296,21 +307,18 @@ $control-focus-bordercolor2: transparent;
 		
 	}
 	
-	&.uix-controls--line {
-		label {
-			left: -0.75rem;
-			
-			&.active {
-				transform-origin: left top;
-				transform: scale(0.875) translateY(-1.6rem);
-
-			}	
-
-
-		}	
-	}
-
 	
+	
+	
+	/*-- Select Arrow --*/
+	.uix-controls__arrow {
+		display: inline-block;
+		position: absolute;
+		right: 0.875rem;
+		top: 1rem;
+		font-size: 0.625rem;
+		@include control-label-text();
+	}
 	
 	/*-- Radio --*/
 	&.uix-controls__normal-radio {
@@ -332,34 +340,30 @@ $control-focus-bordercolor2: transparent;
 	/*-- Select --*/
 	&.uix-controls__normal-select {
 
-		> span {
-			display: inline-block;
-			padding-right: 1rem;
-			@include control-label-text();
-			
+		margin-right: 1.65rem;
+		
+		label {
+			display: none;
+		}
+		
+		&.is-fullwidth {
+			label {
+				display: inline-block;
+			}	
+		}
+		
+		
+		.uix-controls__arrow {
+			right: -1rem;
 		}
 		
 		select {
-			padding-right: 1.5rem !important;
+			padding-right: 1.5rem;
+			padding-left: 1.5rem;
+			font-weight: 500;
+			font-size: 1rem;
+			
 		}
-		
-		label {
-			padding-left: 0 !important;
-			padding-right: 0 !important;
-			position: relative !important;
-			left: auto !important;
-			top: auto !important;
-			pointer-events: auto !important;
-			padding-right: 1rem !important;
-
-			&::after {
-			  @include select-arrow( -.3rem, 1rem );
-			}
-
-			&.active {
-			  top: auto !important;
-			}
-		}	
 		
 	}
 	
@@ -398,7 +402,7 @@ $control-focus-bordercolor2: transparent;
 		}
 
 		textarea, 
-		button, 
+		button:not(.uix-btn), 
 		select {
 			padding-left: calc(3.5rem - 0.546875rem);
 			width: calc(100% - 1.09375rem - 2px - 2.5rem );
@@ -409,7 +413,7 @@ $control-focus-bordercolor2: transparent;
 		&.is-reversed {
 
 			label {
-				left: 0.546875rem !important;
+				left: 0.546875rem;
 
 			}
 
@@ -432,32 +436,11 @@ $control-focus-bordercolor2: transparent;
 			}
 
 			textarea, 
-			button, 
+			button:not(.uix-btn), 
 			select {
 				padding-left: 0.546875rem;
 				padding-right: calc(3.5rem - 0.546875rem);
 			}	
-			
-		}
-
-		
-
-	}
-	
-	
-	&.uix-controls--line.is-iconic {
-		label {
-		    left: 2.375rem;
-		}
-
-		
-		&.is-reversed {
-
-			label {
-				left: -0.546875rem !important;
-
-			}
-
 			
 		}
 
@@ -474,7 +457,7 @@ $control-focus-bordercolor2: transparent;
 		}
 
 		textarea, 
-		button, 
+		button:not(.uix-btn), 
 		select {
 		    border-color: #4AB005;
 		}
@@ -499,7 +482,7 @@ $control-focus-bordercolor2: transparent;
 
 		}
 		textarea, 
-		button, 
+		button:not(.uix-btn), 
 		select {
 		    border-color: #f00;
 		}
@@ -524,7 +507,7 @@ $control-focus-bordercolor2: transparent;
 
 		}
 		textarea, 
-		button, 
+		button:not(.uix-btn), 
 		select {
 		    border-color: #E1E1E1;
 			background: #E1E1E1;
@@ -541,44 +524,10 @@ $control-focus-bordercolor2: transparent;
 		
 	}
 	
-	
-	&.uix-controls--line.disabled {
-		input:not([type="checkbox"]):not([type="radio"]) {
-		    opacity: .7;
-
-		}
-		textarea, 
-		button, 
-		select {
-		    opacity: .7;
-		}
-		
-		label {
-			opacity: .5;
-		}
-		
-		
-		.uix-controls__bar {
-			&::before,
-			&::after {
-				opacity: .5;
-			}	
-		}
-		
-	}
-	
-	
-	/*-- Other --*/
-	.uix-controls__arrow {
-		display: inline-block;
-		position: absolute;
-		right: 0.875rem;
-		top: 0.5rem;
-		@include control-label-text();
-	}
 
 
-	/* WordPress Style */
+
+	/*-- WordPress Style --*/
 	.req-icon {
 		position: absolute;
 		right: 0.721875rem;
@@ -591,6 +540,7 @@ $control-focus-bordercolor2: transparent;
 }
 
 
+
 /* Create Line Effect on Click */
 .uix-controls.uix-controls--line {
 
@@ -598,7 +548,7 @@ $control-focus-bordercolor2: transparent;
 	&.is-pill {
 		input:not([type="checkbox"]):not([type="radio"]),
 		textarea, 
-		button, 
+		button:not(.uix-btn), 
 		select {
 			border-radius: 0 !important;	
 		}
@@ -623,13 +573,33 @@ $control-focus-bordercolor2: transparent;
 	
 	
     textarea, 
-	button, 
+	button:not(.uix-btn), 
 	select {
 		border-top-color: $control-focus-bordercolor2 !important;
 		border-left-color: $control-focus-bordercolor2 !important;
 		border-right-color: $control-focus-bordercolor2 !important;
 
 	}
+
+	select {
+
+		&:focus {
+			border-bottom-color: $control-sub-color !important;
+		}  
+
+	}	
+	&.is-fullwidth {
+		select {
+
+			&:focus {
+				border-bottom-color: transparent !important;
+			}  
+
+		}	
+	
+	}
+	
+
 
 	textarea {
 		&:focus {
@@ -639,7 +609,7 @@ $control-focus-bordercolor2: transparent;
 	}
 	
 	
-	button {
+	button:not(.uix-btn) {
 
 		&:focus {
 			border-color: $control-focus-bordercolor2 !important;
@@ -648,15 +618,24 @@ $control-focus-bordercolor2: transparent;
 	}
 	
 	
-	
 	label {
+		left: -0.75rem !important;
+
 		&.active {
+			transform-origin: left top;
 			transform: translateX(-1.75rem) scale(.875);
+
 		}	
-	}
+
+
+	}	
+
 	
+	/*-- Form With Icon --*/
 	&.is-iconic {
 		label {
+			left: 2.375rem !important;
+			
 			&.active {
 				transform: translateX(-4.09375rem) scale(.875);
 			}	
@@ -665,6 +644,8 @@ $control-focus-bordercolor2: transparent;
 		&.is-reversed {
 			
 			label {
+				left: -0.75rem !important;
+				
 				&.active {
 					transform: translateX(-1.75rem) scale(.875);
 				}	
@@ -674,31 +655,50 @@ $control-focus-bordercolor2: transparent;
 		
 	}
 	
-
 	
-}
+	/*-- Select --*/
+	&.uix-controls__normal-select {
 
-.col-sm-12 {
-	
-	.uix-controls.uix-controls--line {
+		.uix-controls__arrow {
+			right: 0 !important;
+		}
 		
-		&:not(.uix-controls__short-s):not(.uix-controls__short-m):not(.uix-controls__short-l) {
-			.uix-controls__bar {
-				left: -8px;
+		select {
+			padding-left: 0 !important;
+		}
+		
+		
+	}
+	
+	
 
+	
+	/*-- Form Status: Disable --*/
+	&.disabled {
+		input:not([type="checkbox"]):not([type="radio"]) {
+		    opacity: .7;
+
+		}
+		textarea, 
+		button:not(.uix-btn), 
+		select {
+		    opacity: .7;
+		}
+		
+		label {
+			opacity: .5;
+		}
+		
+		
+		.uix-controls__bar {
+			&::before,
+			&::after {
+				opacity: .5;
 			}	
 		}
 		
-		&.uix-controls__textarea {
-			.uix-controls__bar {
-				left: -8px;
-				transform: translateY(-0.546875rem);
-			}		
-		}
-		
-	
 	}
-
+	
 }
 
 /* 
@@ -747,6 +747,7 @@ $control-focus-bordercolor2: transparent;
 /* HTML5 drag and drop upload control */
 .uix-controls__file-field-container {
     height: 400px;
+	max-height: 30vh;
     margin: 0 auto;
     position: relative;
     z-index: 2;
@@ -755,6 +756,7 @@ $control-focus-bordercolor2: transparent;
 	
 	.uix-controls__file-field-trigger {
 		width: 400px;
+		max-width: 100%;
 		height: 100%;
 		background: #FBFDFD;
 		border-radius: 8px;
@@ -779,7 +781,7 @@ $control-focus-bordercolor2: transparent;
 				font-family: 'Font Awesome 5 Free';
 				font-weight: 600;
 				content: "\f093";
-				font-size: 4rem;
+				font-size: 2em;
 				color: $highlight-color1;
 				transform: translateY(50%);
 			}	
@@ -814,9 +816,10 @@ $control-focus-bordercolor2: transparent;
 					justify-content: center;
 					align-items: center;
 					@include transition-default(); 
-					padding-top: 4rem;
+					padding-top: 20%;
 				}
 
+				
 				
 				&.in {
 					&::before {
@@ -863,6 +866,11 @@ $controls-merge-button-width: 20%;
 		clear: both;
 	}
 	
+	i {
+		margin-right: .5rem;
+		opacity: .7;
+	}
+	
     textarea, 
 	button, 
 	select {
@@ -888,10 +896,10 @@ $controls-merge-button-width: 20%;
 	}
 	
 	button {
-		padding: 0.609375rem 0 !important;
-		width: calc(#{$controls-merge-button-width} + 5px) !important;
+		padding: 0.85714285714286rem 0;
+		width: calc(#{$controls-merge-button-width} + 5px);
+		min-width: 0;
 		margin-left: -5px;
-		text-transform: uppercase;
 		letter-spacing: .02rem;
 		font-weight: 600;
 		font-size: 0.875rem;
@@ -903,6 +911,9 @@ $controls-merge-button-width: 20%;
 			line-height: 100%;
 			@include ellipsis();
 		}
+		
+		
+		
 	}
 	
 	&.is-pill {
@@ -947,7 +958,7 @@ $controls-merge-button-width: 20%;
 
 		&.is-reversed {
 			input {
-				padding-left: auto;
+				padding-right: auto;
 				padding-left: calc(3rem - 0.546875rem);
 
 			}
@@ -1340,15 +1351,15 @@ $controls-merge-button-width: 20%;
 
 		&::before {
 			content: "";
-			width: 6px;
-			height: 6px;
+			width: 10px;
+			height: 10px;
 			background: $control-focus-color;
 			position: absolute;
 			top: 50%;
 			left: 50%;
 			border-radius: 50%;
-			margin-left: -3px;
-			margin-top: -3px;
+			margin-left: -5px;
+			margin-top: -5px;
 			transform: scale(0);
 			@include transition-default();
 		}
@@ -1504,6 +1515,7 @@ $controls-merge-button-width: 20%;
 		cursor: pointer;
 		font-size: 1rem;
 		background: #fff;	
+		margin-bottom: 1rem;
 		@include transition-default();
 		
 		i {
@@ -1592,7 +1604,9 @@ $controls-merge-button-width: 20%;
 		cursor: pointer;
 		font-size: 1rem;
 		background: #fff;	
+		margin-bottom: 1rem;
 		@include transition-default();
+		
 		
 		
 		&:hover {
