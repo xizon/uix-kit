@@ -4,12 +4,28 @@
 .uix-footer__container {
 	font-size: 0.75rem;
 	padding: 2.625rem 0;
-	
-	ul li {
-		display: inline-block;
-		margin: 0.175rem 0.4375rem;
+}
+
+/* ul li ul li -> all on one line */
+.uix-footer__menu,
+.uix-footer__menu ul,
+.uix-footer__menu li {
+	display: inline;
+	position: relative;
+
+}
+
+
+.uix-footer__menu li {
+	a {
+		padding: 0 0.4375rem;
+		border-right: 1px solid #E1E1E1;
+	}
+	&:last-child a {
+		border: none;
 	}
 }
+
 
 @media all and (max-width: 768px) {
 	.uix-footer__container {

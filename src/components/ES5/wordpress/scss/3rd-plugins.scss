@@ -5,6 +5,7 @@
 /*
  * 1. Disqus
  * 2. Alobaidi Captcha
+ * 3. Easy Digital Downloads (WP Plugin) 
 */
 
 
@@ -26,4 +27,233 @@
  */ 
 .alobaidi-captcha-comment-field {
     margin-left: 0.875rem;
+}
+
+/* 
+ ---------------------------
+ 3. Easy Digital Downloads (WP Plugin) 
+ ---------------------------
+ */ 
+/* ---- AJAX Button----- */
+
+form.edd_download_purchase_form .edd_price {
+	display: none;
+}
+
+.edd-submit {
+	line-height: 1.5 !important;
+	margin: 1em !important;
+}
+
+.edd-loading {
+	border-top-color: #EE6E73 !important;
+	border-right-color: #EE6E73 !important;
+	border-bottom-color: #EE6E73 !important;
+	border-left-color: transparent !important;
+}
+
+/* ---- AJAX Add To Cart Button & Form ----- */
+
+#edd_checkout_form_wrap fieldset#edd_register_fields #edd_checkout_user_info {
+	margin-bottom: 21px;
+}
+
+#edd_checkout_user_info {
+	position: relative;
+	
+	legend {
+		position: absolute;
+		top: -10px;
+		border: none;
+		background: #FFF;
+		display: inline-block;
+		width: 150px;
+		text-indent: 1.2em;
+	}
+}
+
+#edd-email-wrap {
+	padding-top: 2em;
+}
+
+#edd-last-name-wrap {
+	padding-bottom: 1em;
+}
+
+.edd_cart_amount {
+	color: #f00;
+	font-size: 1.5em;
+	letter-spacing: 1px;
+}
+
+#edd_show_terms {
+	padding-left: 20px;
+}
+
+#edd_checkout_form_wrap .edd-payment-icons {
+	padding-bottom: 60px;
+	
+	img.payment-icon {
+		max-height: 42px;
+		border: 1px solid #EEEEEE;
+	}
+}
+
+.edd-cart-added-alert {
+	padding-left: 1.25em;
+}
+
+.edd-custom-btn {
+	min-width: 100px !important;
+	padding: .7em 1.25em !important;
+	border-radius: 0 !important;
+	font-size: 1em !important;
+	margin: .8em 1em 1em !important;
+	
+	&:active {
+		background-image: none !important;
+	}
+	i {
+		margin-right: 8px;
+		opacity: 0.75;
+	}
+	&.green {
+		color: #FFF !important;
+		background: #5cb85c !important;
+		border-color: #4cae4c !important;
+	    &:hover, 
+		&:focus, 
+		&:active {
+			color: #FFF !important;
+			background: #47a447 !important;
+			border-color: #398439 !important;
+		}
+	}
+}
+
+.edd-terms-agreement, 
+#edd_terms {
+	display: block;
+	padding: 1.25em;
+}
+
+.edd_show_terms {}
+
+a.edd_terms_links {
+	padding: .5em 1em;
+	background: #ECECEC;
+	border: 1px solid #eee;
+}
+
+/* ---- Purchase Summary Tables ----- */
+
+.edd_purchase_receipt_files_list {
+	padding-top: 1em;
+	
+	a {
+		display: block;
+		line-height: 1.7;
+	}
+}
+
+table.edd-table {
+	border: none  !important;
+	
+	thead th {
+		width: 150px;
+	}
+	
+	td, 
+	th {
+		border: none  !important;
+	}
+	tr {
+		border-bottom: 1px solid #E8E8E8 !important;
+		height: 4em;
+	}
+}
+
+a.edd_download_file_link {
+	border: 1px solid #333;
+	padding: .3em 1em;
+	margin: 1em 0;
+	display: inline-block;
+}
+
+.edd_purchase_receipt_title {
+	padding-top: 2.5em;
+	color: #BBBBBB;
+}
+
+.edd_purchase_receipt_title2 {
+	font-weight: normal;
+	font-size: 14px;
+}
+
+ul {
+	&.edd_bundled_product_files, 
+	&.edd_purchase_receipt_files, 
+	&.edd_bundled_product_files li, 
+	&.edd_purchase_receipt_files li {
+		margin-left: 0 !important;
+		padding-left: 0 !important;
+	}
+}
+
+/* ---- Download Card ----- */
+
+.edd-custom-download-file {
+	width: 100%;
+	height: 36px;
+	border: 1px solid #4CAF50;
+	position: relative;
+	background: #e4ffe5;
+	margin: .3em 0;
+}
+
+.edd-custom-download-text {
+	margin-left: 45px;
+	line-height: 36px;
+	color: #585858;
+	transition: .1s ease-in-out;
+}
+
+.edd-custom-download-file:hover .edd-custom-download-text {
+	color: #000;
+}
+
+.edd-custom-download-text {
+	&:before {
+		content: '\f15c';
+		position: absolute;
+		font-family: 'Font Awesome 5 Free';
+		font-weight: 600;
+		transform: translate(-28px, 7px);
+	}
+	&:after {
+		content: '';
+		position: absolute;
+		margin-left: 8px;
+		font-size: 0.875rem;
+		color: #626262;
+		transform: translate(0, 10px);
+	}
+}
+
+.edd-custom-download-field {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 50px;
+	height: 36px;
+	color: #FFF;
+	background: #4CAF50;
+	font: 16pt;
+	text-align: center;
+	line-height: 36px;
+	cursor: pointer;
+	
+	&:hover {
+		background: #43A047;
+	}
 }

@@ -47,7 +47,7 @@ const UIX_KIT_IMPORT = { "files": [
 /******/
 /******/
 /* pages */	
-"./src/components/ES5/_home/js/home.js",
+"./src/components/ES5/_main/js/main.js",
 "./src/components/ES5/accordion-img/js/accordion-img.js",
 "./src/components/ES5/accordion/js/accordion.js",
 "./src/components/ES5/advanced-content-slider/js/advanced-content-slider.js",

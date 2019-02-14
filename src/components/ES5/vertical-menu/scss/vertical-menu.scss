@@ -134,23 +134,27 @@ $vertical-menu-top          : 0;
 				display: none !important;
 			}
 		
+
+			
+			span.multi-column-title {
+				color: #fff;
+				font-weight: 900;
+				display: inline-block;
+				cursor: default;
+				text-align: left;
+				opacity: .5;
+				font-size: 0.875rem;
+				display: block;
+				padding: 1rem 1rem 0;
+
+			}
+			
 			> ul {
 				min-width: inherit;
 				white-space: nowrap;
 				display: none;
 				padding: 0;
-				
-				.multi-column-title {
-					color: #fff;
-					font-weight: 900;
-					display: inline-block;
-					cursor: default;
-					text-align: left;
-					opacity: .5;
-					font-size: 0.875rem;
-					padding-bottom: 1rem;
 
-				}
 				
 
 				ul {

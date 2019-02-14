@@ -44,11 +44,11 @@
         
        
         <!-- Theme  -->
-        <link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=UkyoMAQMjCs78v23zfvr"/>
+        <link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=t9vM4zUnmmaLFGpBIK3c"/>
         
         
          <!--[if lt IE 10]>
-           <link rel="stylesheet" href="assets/css/IE.css?ver=UkyoMAQMjCs78v23zfvr" />
+           <link rel="stylesheet" href="assets/css/IE.css?ver=t9vM4zUnmmaLFGpBIK3c" />
         <![endif]-->
         
         
@@ -122,7 +122,7 @@
     
         <!-- Header Area
         ============================================= -->      
-        <header class="uix-header__container">
+        <header class="uix-header__container uix-header__container--overlay">
             
              <div class="uix-header">
                  <div class="container">
@@ -147,8 +147,8 @@
 
 												
 												<li>
+													<span class="multi-column-title">Web Elements (Basic)</span>
 													<ul class="sub-menu">
-														<li><span class="multi-column-title">Web Elements (Basic)</span></li>
 														<li><a href="helper-classes.html">Helper Classes</a></li>
 														<li><a href="uix-grid.html">Uix Grid</a></li>
 														<li><a href="bootstrap-grid.html">Bootstrap Grid</a></li>
@@ -178,8 +178,8 @@
 												
 
 												<li>
+													<span class="multi-column-title">Web Elements (Part 1)</span>
 													<ul class="sub-menu">
-														<li><span class="multi-column-title">Web Elements (Part 1)</span></li>
 														<li><a href="navs.html">Navs</a></li>
 														<li><a href="breadcrumbs.html">Breadcrumbs</a></li>
 														<li><a href="lightbox.html">Lightbox</a></li>
@@ -209,9 +209,8 @@
 												
 												
 												<li>
+													<span class="multi-column-title">Web Elements (Part 2)</span>
 													<ul class="sub-menu">
-														<li><span class="multi-column-title">Web Elements (Part 2)</span></li>
-														
 														<li><a href="tooltip.html">Tooltip</a></li>
 														<li><a href="ribbon.html">Ribbon</a></li>	
 														<li><a href="footer-templates.html">Footer Templates</a></li>
@@ -241,8 +240,8 @@
 
 			
 												<li>
+													<span class="multi-column-title">Contents (Part 1)</span>
 													<ul class="sub-menu">
-														<li><span class="multi-column-title">Contents (Part 1)</span></li>
 														<li><a href="list-posts.html">Posts List</a></li>
 														<li><a href="list-split-imagery.html">Fullwidth List of Split</a></li>
 														<li><a href="list-split-content.html">Fullwidth List of Split 2</a></li>
@@ -269,8 +268,8 @@
 												</li>
 												
 												<li>
+													<span class="multi-column-title">Contents (Part 2)</span>
 													<ul class="sub-menu">
-														<li><span class="multi-column-title">Contents (Part 2)</span></li>
 														<li><a href="table-series.html">Table Series</a></li>
 														<li><a href="table-sorter.html">Table Sorter</a><span class="uix-bubble">new</span></li>
 														<li><a href="3D-carousel.html">3D Carousel</a></li>
@@ -299,11 +298,11 @@
 		
 												
 												<li>
+													<span class="multi-column-title">Interaction</span>
 													<ul class="sub-menu">
-														<li><span class="multi-column-title">Interaction</span></li>
 														<li><a href="scroll-reveal.html">Scroll Reveal</a></li>
-														<li><a href="scrollspy-animate.html">Scrollspy Animate</a><span class="uix-bubble">new</span</li>
-														<li><a href="skew-on-scroll.html">Skew on Scroll</a><span class="uix-bubble">new</span</li>
+														<li><a href="scrollspy-animate.html">Scrollspy Animate</a><span class="uix-bubble">new</span></li>
+														<li><a href="skew-on-scroll.html">Skew on Scroll</a><span class="uix-bubble">new</span></li>
 														<li><a href="text-effect.html">Text Effect</a><span class="uix-bubble">new</span></li>
 														<li><a href="list-posts-with-ajax.html">Ajax Load Posts</a></li>
 														<li><a href="list-posts-with-ajax2.html">Ajax Load Posts 2</a></li>
@@ -387,7 +386,6 @@
                         
                         
                         
-                        
                   </div>
                   <!-- .container end -->
                   
@@ -395,49 +393,43 @@
              </div>
         
         </header>
-        <div class="uix-header__placeholder"></div>
-      
+		
     
-        
-        
-       <!-- Content 01  
-        ====================================================== -->
+   
+        <!-- Parallax & Overlay Demo
+        ============================================= -->
         <section>
-            <div class="container uix-t-c">
-                    <div class="row">
-                        <div class="col-md-8 offset-md-2">
-                            <h2>Wave Background</h2>
-
-                        </div>
-                    </div>
-                    <!-- .row end -->
-              
+            <div class="uix-parallax uix-height--100 uix-typo--color-white" data-fully-visible="false" data-overlay-bg="false" data-skew="0" data-speed="0.3">
+                <img class="uix-parallax__img" src="assets/images/demo/index-bg-1920x1080.jpg" alt="">
+                <div class="uix-v-align--absolute uix-t-c uix-hidden-scrollbar-x">
+                    <div class="container uix-t-c">
                     
+						<div class="row">
+							<div class="col-md-6 offset-md-3">
+							    <h2>Wave Background</h2>
+
+							</div>
+						</div>
+						<!-- .row end -->
+                   
+                    </div>
+                    <!-- .container end -->  
+
+                </div>	
             </div>
-            <!-- .container end -->
- 
         </section>
-        
-        
-        
-        <section class="uix-spacing--m">
-			<!--  Wave Background Begin  -->
-			<div class="uix-wave-bg__container">
-				<div class="uix-wave-bg"></div>
+            
+		<!--  Wave Background Begin  -->
+		<div class="uix-wave-bg__container">
 
-				<div class="uix-wave-bg__svgmask">
-					<svg viewBox="0 0 1440 120" aria-hidden="true">
-						<path d="M1440,21.2101911 L1440,120 L0,120 L0,21.2101911 C120,35.0700637 240,42 360,42 C480,42 600,35.0700637 720,21.2101911 C808.32779,12.416393 874.573633,6.87702029 918.737528,4.59207306 C972.491685,1.8109458 1026.24584,0.420382166 1080,0.420382166 C1200,0.420382166 1320,7.35031847 1440,21.2101911 Z"></path>
-					</svg>
-				</div>
-
+			<div class="uix-wave-bg__svgmask">
+				<svg viewBox="0 0 1440 120" aria-hidden="true">
+					<path d="M1440,21.2101911 L1440,120 L0,120 L0,21.2101911 C120,35.0700637 240,42 360,42 C480,42 600,35.0700637 720,21.2101911 C808.32779,12.416393 874.573633,6.87702029 918.737528,4.59207306 C972.491685,1.8109458 1026.24584,0.420382166 1080,0.420382166 C1200,0.420382166 1320,7.35031847 1440,21.2101911 Z"></path>
+				</svg>
 			</div>
-			<!--  Wave Background End  -->
 
-        
-		</section>
-        
-
+		</div>
+		<!--  Wave Background End  -->
 
     
         
@@ -447,42 +439,51 @@
             <div class="uix-footer">
             
 				<div class="container">
-					<nav class="uix-f-l uix-t-l uix-mobile-tc">
-						<ul>
-							<li>
-								<a href="https://uiux.cc" target="_blank">
-									UIUX Lab
-								</a>
-							</li>
-							<li>
-								<a href="https://opensource.org/licenses/MIT" target="_blank">
-									Licenses
-								</a>
-							</li>
-							<li>
-								<a href="https://github.com/xizon/uix-kit" target="_blank">
-									Download
-								</a>
-							</li>
+					<hr>
+					
+					<div class="row">
+						<div class="col-lg-6 col-md-6 uix-t-l uix-mobile-tc">
 
-							<li>
-								<a href="https://github.com/xizon/uix-kit/wiki/Getting-Started" target="_blank">
-									Documentation
-								</a>
-							</li>
+							Copyright &copy; Uix Kit 2019.  |  All rights reserved. Created by <a href="https://uiux.cc">UIUX Lab</a>.
+						</div>
+						<div class="col-lg-6 col-md-6 uix-t-r uix-mobile-tc">
+							<div class="uix-footer__menu">
+								<ul>
+									<li>
+										<a href="https://uiux.cc" target="_blank">
+											UIUX Lab
+										</a>
+									</li>
+									<li>
+										<a href="https://opensource.org/licenses/MIT" target="_blank">
+											Licenses
+										</a>
+									</li>
+									<li>
+										<a href="https://github.com/xizon/uix-kit" target="_blank">
+											Download
+										</a>
+									</li>
+
+									<li>
+										<a href="https://github.com/xizon/uix-kit/wiki/Getting-Started" target="_blank">
+											Documentation
+										</a>
+									</li>
 
 
+								</ul>
+							</div>
 
-						</ul>
-					</nav>
-					<div class="uix-f-r uix-t-r uix-mobile-tc">
-						Copyright &copy; Uix Kit 2018.  |  All rights reserved. Created by UIUX Lab.
+						</div>
 					</div>
 
 				</div><!-- .container  end -->
 				
 			</div>
         </footer>
+
+
         
         
     </div>
@@ -517,14 +518,14 @@
 	============================================= -->
 	
 	<script>
-		var REVISION     = "3.2.0",
+		var REVISION     = "3.2.1",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
 				"homeUrl"     : "",  //Eg. https://uiux.cc
 				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
 			};
     </script>  
-    <script src="../dist/js/uix-kit.min.js?ver=UkyoMAQMjCs78v23zfvr"></script>
+    <script src="../dist/js/uix-kit.min.js?ver=t9vM4zUnmmaLFGpBIK3c"></script>
 
 
 

@@ -53,6 +53,19 @@
 	
 }
 
+/* Show Toolbar when viewing site with WordPress */
+.admin-bar .uix-header__container {
+    top: 32px;
+	
+}
+
+/* Admin bar becomes taller on smaller devices with WordPress */
+@media all and (max-width: 782px) {
+    .admin-bar .uix-header__container {
+         top: 0;
+    }
+}
+
 
 /* Don't use "margin" or "padding" to set up ".uix-header" */
 

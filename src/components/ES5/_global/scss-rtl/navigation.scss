@@ -2,8 +2,9 @@
    <!-- Navigation -->                                      
 /* ====================================================== */
 
-.uix-menu__container:not(.mobile) {
+.uix-menu__container:not(.is-mobile) {
     float: left;
+	
 	
 	
 	/* 
@@ -84,16 +85,25 @@
 	 */ 
 	/* Multi-column */
 
-	li.multi-column > ul li {
-	    padding-left: auto !important;
-	    padding-right: 1.159375rem !important;
-		
-		.uix-bubble {
-			right: auto;
-			left: 1rem;
+	li.multi-column {
+		span.multi-column-title {
+			padding-left: auto;
+			padding-right: 1.159375rem;
+			
 		}
+		> ul li {
+			padding-left: auto !important;
+			padding-right: 1.159375rem !important;
+
+			.uix-bubble {
+				right: auto;
+				left: 1rem;
+			}
+
+		}	
 		
 	}
+
 
 	ul.uix-menu ul.sub-menu .uix-menu__arrow {
 	    right: auto;
@@ -116,7 +126,7 @@
 
 @media all and (max-width: 1250px) {
 	
-	.uix-menu__container:not(.mobile) {
+	.uix-menu__container:not(.is-mobile) {
 		ul.uix-menu > li {
 			margin-right: auto;
 			margin-left: 1.125rem;

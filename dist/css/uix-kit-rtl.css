@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.2.0
+ * ## Version             :  3.2.1
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  January 31, 2019
+ * ## Last Update         :  February 15, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -37,11 +37,12 @@
     19.Bulleted List
     20.Maintain Aspect Ratio List
     21.Side by Side List
-    22.Comments
-    23.Source Code
-    24.ToolTip
-    25.Vertical Menu (RTL)
-    26.WordPress Core ( Do not use prefix "uix-" )
+    22.Ribbon
+    23.Comments
+    24.Source Code
+    25.ToolTip
+    26.Vertical Menu (RTL)
+    27.WordPress Core ( Do not use prefix "uix-" )
 
 
 */
@@ -258,9 +259,12 @@ blockquote {
   left: auto;
   right: 0;
   transform: translateX(300px); }
+  .uix-menu__container.is-mobile li.multi-column span.multi-column-title,
+  .uix-menu__container.is-mobile ul.uix-menu > li ul > li {
+    padding-right: .625rem !important; }
   .uix-menu__container.is-mobile ul li ul li a, .uix-menu__container.is-mobile ul li ul li span {
     padding-left: auto;
-    padding-right: 30px; }
+    padding-right: 0; }
   .uix-menu__container.is-mobile li:not(.multi-column) ul ul {
     padding-left: auto;
     padding-right: .825em; }
@@ -306,7 +310,7 @@ blockquote {
 /* ====================================================== 
    <!-- Navigation -->                                      
 /* ====================================================== */
-.uix-menu__container:not(.mobile) {
+.uix-menu__container:not(.is-mobile) {
   float: left;
   /* 
 	 ---------------------------
@@ -324,59 +328,62 @@ blockquote {
 	 4. Dropdown Arrow
 	 ---------------------------
 	 */ }
-  .uix-menu__container:not(.mobile) ul.uix-menu {
+  .uix-menu__container:not(.is-mobile) ul.uix-menu {
     float: right;
     /* 
 		 ---------------------------
 		 2. Sub Menu (Using WordPress default class name )
 		 ---------------------------
 		 */ }
-    .uix-menu__container:not(.mobile) ul.uix-menu > li {
+    .uix-menu__container:not(.is-mobile) ul.uix-menu > li {
       margin-right: auto;
       margin-left: 1.6875rem; }
-      .uix-menu__container:not(.mobile) ul.uix-menu > li .uix-bubble {
+      .uix-menu__container:not(.is-mobile) ul.uix-menu > li .uix-bubble {
         right: auto;
         left: 1rem; }
-      .uix-menu__container:not(.mobile) ul.uix-menu > li:not(.multi-column) > ul ul {
+      .uix-menu__container:not(.is-mobile) ul.uix-menu > li:not(.multi-column) > ul ul {
         margin-left: auto;
         margin-right: -0.071875rem; }
-        .uix-menu__container:not(.mobile) ul.uix-menu > li:not(.multi-column) > ul ul ul {
+        .uix-menu__container:not(.is-mobile) ul.uix-menu > li:not(.multi-column) > ul ul ul {
           margin-right: 0; }
-      .uix-menu__container:not(.mobile) ul.uix-menu > li > ul::before {
+      .uix-menu__container:not(.is-mobile) ul.uix-menu > li > ul::before {
         left: auto;
         right: 0; }
-      .uix-menu__container:not(.mobile) ul.uix-menu > li > ul::after {
+      .uix-menu__container:not(.is-mobile) ul.uix-menu > li > ul::after {
         left: auto;
         right: 3.5rem;
         margin-left: auto;
         margin-right: -0.15625rem; }
-      .uix-menu__container:not(.mobile) ul.uix-menu > li li {
+      .uix-menu__container:not(.is-mobile) ul.uix-menu > li li {
         padding-left: auto;
         padding-right: 0.875rem; }
-      .uix-menu__container:not(.mobile) ul.uix-menu > li ul li {
+      .uix-menu__container:not(.is-mobile) ul.uix-menu > li ul li {
         padding-left: auto;
         padding-right: 2.034375rem; }
-    .uix-menu__container:not(.mobile) ul.uix-menu ul.sub-menu {
+    .uix-menu__container:not(.is-mobile) ul.uix-menu ul.sub-menu {
       left: auto;
       right: 0; }
-    .uix-menu__container:not(.mobile) ul.uix-menu > li:not(.multi-column) > ul ul {
+    .uix-menu__container:not(.is-mobile) ul.uix-menu > li:not(.multi-column) > ul ul {
       left: auto;
       right: 100%; }
-  .uix-menu__container:not(.mobile) li.multi-column > ul li {
+  .uix-menu__container:not(.is-mobile) li.multi-column span.multi-column-title {
+    padding-left: auto;
+    padding-right: 1.159375rem; }
+  .uix-menu__container:not(.is-mobile) li.multi-column > ul li {
     padding-left: auto !important;
     padding-right: 1.159375rem !important; }
-    .uix-menu__container:not(.mobile) li.multi-column > ul li .uix-bubble {
+    .uix-menu__container:not(.is-mobile) li.multi-column > ul li .uix-bubble {
       right: auto;
       left: 1rem; }
-  .uix-menu__container:not(.mobile) ul.uix-menu ul.sub-menu .uix-menu__arrow {
+  .uix-menu__container:not(.is-mobile) ul.uix-menu ul.sub-menu .uix-menu__arrow {
     right: auto;
     left: 1.159375rem; }
-  .uix-menu__container:not(.mobile) .uix-menu__arrow {
+  .uix-menu__container:not(.is-mobile) .uix-menu__arrow {
     right: auto;
     left: 0.284375rem; }
 
 @media all and (max-width: 1250px) {
-  .uix-menu__container:not(.mobile) ul.uix-menu > li {
+  .uix-menu__container:not(.is-mobile) ul.uix-menu > li {
     margin-right: auto;
     margin-left: 1.125rem; } }
 
@@ -926,6 +933,31 @@ dl.uix-list-abreast dd {
   padding-right: 1rem; }
 
 /* ====================================================== 
+   <!-- Ribbon --> 
+/* ====================================================== */
+.uix-ribbon--triangle {
+  right: auto;
+  left: 0; }
+  .uix-ribbon--triangle.uix-ribbon--triangle--style-1 > div::after {
+    left: auto;
+    right: 0; }
+  .uix-ribbon--triangle.uix-ribbon--triangle--style-2::after {
+    border-left: inherit;
+    border-right: 40px solid #EC5E79;
+    left: auto;
+    right: 0.25rem;
+    transform: rotate(-315deg); }
+  .uix-ribbon--triangle.uix-ribbon--triangle--style-2 > div {
+    padding: 0 0.5rem 0.25rem 0; }
+  .uix-ribbon--triangle.uix-ribbon--triangle--left {
+    right: 0;
+    left: auto; }
+    .uix-ribbon--triangle.uix-ribbon--triangle--left.uix-ribbon--triangle--style-2::after {
+      transform: rotate(135deg);
+      left: auto;
+      right: -0.25rem; }
+
+/* ====================================================== 
    <!-- Comments -->         
 /* ====================================================== */
 .comment-avatar {
@@ -1038,7 +1070,7 @@ pre.prettyprint {
                       right: 1850px; }
                       .uix-v-menu__container:not(.is-mobile) ul.uix-menu ul.sub-menu ul ul ul ul ul ul ul ul ul {
                         right: 2050px; }
-    .uix-v-menu__container:not(.is-mobile) ul.uix-menu li.multi-column > ul .multi-column-title {
+    .uix-v-menu__container:not(.is-mobile) ul.uix-menu li.multi-column span.multi-column-title {
       text-align: right; }
     .uix-v-menu__container:not(.is-mobile) ul.uix-menu li.multi-column > ul ul li {
       text-align: right; }

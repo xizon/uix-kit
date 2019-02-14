@@ -127,6 +127,20 @@
 	overflow: hidden;
 }
 
+/* Show Toolbar when viewing site with WordPress */
+.admin-bar .uix-wrapper {
+	margin-top: 32px;
+	
+}
+
+/* Admin bar becomes taller on smaller devices with WordPress */
+@media all and (max-width: 782px) {
+    .admin-bar .uix-wrapper {
+         margin-top: 46px;
+    }
+}
+
+
 /* 
  ---------------------------
  4. Uix Grid

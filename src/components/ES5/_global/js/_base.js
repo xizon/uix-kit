@@ -14,7 +14,8 @@ if ( typeof jQuery === 'undefined' || typeof TweenMax === 'undefined' || typeof 
     throw new Error( 'Uix Kit\'s JavaScript requires jQuery, TweenMax, Waypoint and videojs.' );
 }
 
-
+//Fixed a bug that Cannot read property 'fn' of undefined for jQuery 1.xx.x.
+window.$ = window.jQuery;
 
 /* 
  *************************************

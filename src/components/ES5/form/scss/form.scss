@@ -24,7 +24,7 @@ $control-focus-bordercolor2: transparent;
 
 
 @mixin select-arrow( $top, $right ){
-	/* @include select-arrow( -.875rem, 1rem ); */
+	// @include select-arrow( -.875rem, 1rem );
 	border: 1px solid $control-sub-color;
 	border-right: 0;
 	border-top: 0;
@@ -41,8 +41,7 @@ $control-focus-bordercolor2: transparent;
 	z-index: 1;
 }
 
-@mixin control-label-text(){
-	/* @include control-label-text(); */
+@mixin control-label-text() {
 	font-weight: 500;
 	color: #999;
 }

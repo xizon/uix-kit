@@ -3,14 +3,9 @@
 /* ====================================================== */
 .uix-wave-bg__container {
 	position: relative;
-	height: 300px;
-	overflow: hidden;
+	height: 50px;
+	z-index: 1;
 
-	.uix-wave-bg {
-		overflow: hidden;
-		height: 300px;
-		@include bg-gradient( 'to right' );
-	}
 	
 }	
 

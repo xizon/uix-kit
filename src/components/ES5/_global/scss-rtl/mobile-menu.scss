@@ -28,13 +28,20 @@
 	right: 0;
 	transform: translateX(300px);
 
+	li.multi-column span.multi-column-title,
+	ul.uix-menu > li ul > li {
+		padding-right: .625rem !important;
+	}
+	
   
     ul li ul li {
         a, span {
             padding-left: auto;
-            padding-right: 30px;
+            padding-right: 0;
         }
     }
+	
+
 	
     li:not(.multi-column) ul ul {
         padding-left: auto;

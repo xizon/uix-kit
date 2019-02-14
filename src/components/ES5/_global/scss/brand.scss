@@ -15,6 +15,18 @@
 		max-height: 50px;
 		margin-top: 0.75rem;
 	}
+	
+
+	.uix-brand__description {
+		padding: 0;
+		@include ellipsis();
+		width: 90%;
+		line-height: 1.2;
+		font-weight: 100;
+		font-size: 0.75rem;
+	}
+
+	
 }
 
 

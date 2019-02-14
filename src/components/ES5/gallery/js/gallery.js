@@ -38,7 +38,7 @@ APP = ( function ( APP, $, window, document ) {
 		});
 	
 	    /*--  Function of Masonry  --*/
-		var masonryObj = $( '.masonry-container .uix-gallery-tiles' );
+		var masonryObj = $( '.masonry-container .uix-gallery__tiles' );
 		imagesLoaded( masonryObj ).on( 'always', function() {
 			  masonryObj.masonry({
 				itemSelector: '.masonry-item'
@@ -52,7 +52,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 				$( '.uix-gallery' ).each( function() {
 					var filterCat      = $( this ).data( 'filter-id' ),
-						$grid          = $( this ).find( '.uix-gallery-tiles' ),
+						$grid          = $( this ).find( '.uix-gallery__tiles' ),
 						$filterOptions = $( filterCat );
 						
 					imagesLoaded( $grid ).on( 'always', function() {

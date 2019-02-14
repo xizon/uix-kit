@@ -8,7 +8,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.MOBILE_MENU               = APP.MOBILE_MENU || {};
-	APP.MOBILE_MENU.version       = '0.0.3';
+	APP.MOBILE_MENU.version       = '0.0.4';
     APP.MOBILE_MENU.documentReady = function( $ ) {
 
 		var $window      = $( window ),
@@ -79,27 +79,64 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
+			// Fires drop-menu event 
+			var $drMenuLi = $( '.uix-menu__container.is-mobile ul li' );
 
-			// Menu click event
-			$( '.uix-menu__container.is-mobile ul li' ).on( 'click', function( e ) {
+			$drMenuLi.find( '> a' ).on( 'click', function( e ) {
+				
+				var arrowText = $( this ).find( '.uix-menu__arrow-mobile' ).text().replace( /(.).*\1/g, "$1" ),
+					$sub      = $( this ).next( 'ul' );
 
-				var arrowText = $( this ).find( '.uix-menu__arrow-mobile' ).text().replace( /(.).*\1/g, "$1" );
+				if ( $sub.length > 0 ) {
 
-				//Hide other all sibling <ul> of the selected element
-				$( this ).siblings()
-						.removeClass( 'is-opened' )
-						.find( '> .sub-menu:not(.sub-sub)' ).slideUp( 500 );
+					e.preventDefault();
+
+					var expanded = ( $( this ).attr( 'aria-expanded' ) == 'true' ) ? false : true;
+
+					if ( expanded ) {
+						//Hide other all sibling <ul> of the selected element
+						var $e = $( this ).parent( 'li' ).siblings().find( '> a' );
+
+						$e.removeClass( 'is-opened' ).attr( 'aria-expanded', false );
+						$e.parent( 'li' ).find( '.uix-menu__arrow-mobile' ).removeClass( 'is-opened' );
+						$e.parent( 'li' ).removeClass( 'is-opened' );
+						
+
+						$( this ).addClass( 'is-opened' ).attr( 'aria-expanded', true );
+						$( this ).parent( 'li' ).find( '.uix-menu__arrow-mobile' ).addClass( 'is-opened' );
+						$( this ).parent( 'li' ).addClass( 'is-opened' );
 
 
-				var $sub = $( this ).children( 'ul' );
+						TweenMax.to( $e.next( 'ul' ), 0.5, { height: 0 } );
 
-				$sub.slideToggle( 500 );
-				$( this ).toggleClass( 'is-opened' );
+						//to open
+						// - temporarilty set height:auto
+						// - tween from height:0
+						TweenMax.set( $sub, { height: 'auto' } );
+						TweenMax.from( $sub, 0.5, { height:0 } );	
+
+
+					} else {
+
+						$( this ).removeClass( 'is-opened' ).attr( 'aria-expanded', false );
+						$( this ).parent( 'li' ).find( '.uix-menu__arrow-mobile' ).removeClass( 'is-opened' );
+						$( this ).parent( 'li' ).removeClass( 'is-opened' );
+
+						//to close
+						TweenMax.to( $sub, 0.5, { height: 0 } );
+
+					}
+
+
+
+
+					return false;
+				}
+
+
+			});
 			
-
-			} );
-
-
+			
 			mobileMenuInit( windowWidth ); 
 
 			// Close the menu on window change

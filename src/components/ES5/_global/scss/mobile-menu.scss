@@ -212,22 +212,21 @@
             position: relative;
 
 			
-            a, span {
+            a, 
+			span {
                 padding: 0 15px;
                 display: block;
                 text-decoration: none;
                 color: $primary-text-color1;
             }
 			
-            &:hover > {
-                a, 
-				span {
-                    box-shadow: 0 0 15px 3px #ebebeb inset;
-                }
+            a:hover {
+				color: #000;
             }
 			
-            &.active > {
-                a, span {
+            &.is-opened > {
+                a, 
+				span {
                     box-shadow: 0 0 15px 3px #ebebeb inset;
                 }
             }
@@ -246,35 +245,25 @@
                         border-bottom: 0;
                     }
 					
-                    &:hover, 
-		            &.active, 
-		            &.active {
-			  
-		            }
+					a:hover {
+						color: #000;
+					}
 					
-                    &:hover > {
-                        a, span {
+                    &.is-opened > {
+                        a, 
+						span {
                             box-shadow: 0 0 15px 3px #ebebeb inset;
                         }
                     }
 					
-					
-                    &.active > {
-                        a, span {
-                            box-shadow: 0 0 15px 3px #ebebeb inset;
-                        }
-                    }
-					
-                    &.active > {
-                        a, span {
-                            box-shadow: 0 0 15px 3px #ebebeb inset;
-                        }
-                    }
-					
-                    a, span {
+                    a, 
+					span {
                         color: rgba(51, 51, 51, 0.8);
-                        padding-left: 30px;
                     }
+					
+
+					
+					
                 }
 
             }	
@@ -285,27 +274,37 @@
 
     li > .sub-menu {
 		margin-top: 0 !important;
-    	display: none;
+    	overflow: hidden;
+		height: 0;
 		
     	ul {
-        	display: block;
+        	height: auto;
     	}
   	}
 	
 
 	/* Mega & Dropdown */
-	li.multi-column > ul .multi-column-title {
-	    font-weight: bold;
-	    color: #ABABAB;
+	li.multi-column {
+		
+		ul {
+			border: none;
+		}
+		
+		> ul .multi-column-title {
+			font-weight: bold;
+			color: #ABABAB;
+		}
+		
+		
 	}
 
-	.multi-column ul {
-	    border: none;
-	}
 
-	li:not(.multi-column) ul ul {
-	    padding-left: 0.721875rem;
-	}
+	li:not(.multi-column) {
+
+		ul ul {
+			padding-left: 0.721875rem;
+		}
+	} 
 
 	.uix-menu__arrow-mobile {
 	    position: absolute;
@@ -321,19 +320,14 @@
 			display: inline-block;
 			font-size: 1rem;
 		}
-
-	}
-
-	.is-opened {
-		.uix-menu__arrow-mobile {
-			
-			&::after {
-				content: '-';
-			}
-
+		
+		&.is-opened::after {
+			content: '-';
 		}
+		
 
 	}
+
 	
 	
 	/* Form Elements */

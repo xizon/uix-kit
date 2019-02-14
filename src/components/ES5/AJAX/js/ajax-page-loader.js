@@ -515,7 +515,7 @@ APP = ( function ( APP, $, window, document ) {
 
 			
 			//----
-			if ( APP.INDEX ) APP.INDEX.pageLoaded(); //Theme Scripts
+			if ( APP.MAIN ) APP.MAIN.pageLoaded(); //Theme Scripts
 			if ( APP.COMMON_HEIGHT ) APP.COMMON_HEIGHT.pageLoaded(); //Common Height
 			if ( APP.ADVANCED_SLIDER ) APP.ADVANCED_SLIDER.pageLoaded(); //Advanced Slider (Basic)
 			if ( APP.ADVANCED_SLIDER_FILTER ) APP.ADVANCED_SLIDER_FILTER.pageLoaded(); //Advanced Slider	
@@ -527,7 +527,7 @@ APP = ( function ( APP, $, window, document ) {
 		
 			
 			//----
-			if ( APP.INDEX ) APP.INDEX.documentReady($); //Theme Scripts
+			if ( APP.MAIN ) APP.MAIN.documentReady($); //Theme Scripts
 			if ( APP.TABLE ) APP.TABLE.documentReady($); //Responsive Table
 			if ( APP.TABLE_SORTER ) APP.TABLE_SORTER.documentReady($); //Table Sorter
 			if ( APP.MODAL_DIALOG ) APP.MODAL_DIALOG.documentReady($); //Modal Dialog

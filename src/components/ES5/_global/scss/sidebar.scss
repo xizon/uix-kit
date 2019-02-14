@@ -6,8 +6,9 @@
  * 1. Basic                             - Synchronize to WordPress's class name
  * 2. Calendar Widget                   - Synchronize to WordPress's class name
  * 3. Link List                         - Synchronize to WordPress's class name
- * 4. Post List
- * 5. Post List with Featured Image
+ * 4. Tag cloud from sidebar            - Synchronize to WordPress's class name
+ * 5. Post List
+ * 6. Post List with Featured Image
 */
 
 
@@ -50,7 +51,7 @@
  2. Calendar Widget
  ---------------------------
  */ 
-.calendar-box {
+.calendar_wrap > table {
 	padding: 1.3125rem 0;
 	width: 100%;
 	font-size: 0.5625rem;
@@ -150,11 +151,42 @@
 
 }
 
+/* 
+ ---------------------------
+ 4. Tag cloud from sidebar
+ ---------------------------
+ */ 
+
+.tagcloud {
+	
+	margin-bottom: 1.3125rem;
+	
+	> a {
+		font-size: 0.875rem;
+		padding: 0.04375rem 0.109375rem;
+		margin-bottom: 0.175rem;
+		display: inline-block;
+
+		&::after {
+			content: '/';
+			display: inline-block;
+			margin-left: 0.546875rem;
+			opacity: 0.5;
+		}
+
+		&:last-child:after {
+			display: none;
+		}
+	}
+	&.uix-tags-box--has-border > a {
+		border: 1px solid #E6E6E6;
+	}
+}
 
 
 /* 
  ---------------------------
- 4. Post List
+ 5. Post List
  ---------------------------
  */ 
 
@@ -168,7 +200,7 @@
 
 /* 
  ---------------------------
- 5. Post List with Featured Image
+ 6. Post List with Featured Image
  ---------------------------
  */ 
 .uix-sidebar__posts-img {

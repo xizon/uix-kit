@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.2.0
+ * ## Version             :  3.2.1
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  January 31, 2019
+ * ## Last Update         :  February 15, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -137,7 +137,7 @@ var UIX_KIT_IMPORT = {
   /******/
 
   /* pages */
-  "./src/components/ES5/_home/js/home.js", "./src/components/ES5/accordion-img/js/accordion-img.js", "./src/components/ES5/accordion/js/accordion.js", "./src/components/ES5/advanced-content-slider/js/advanced-content-slider.js", "./src/components/ES5/advanced-slider/js/advanced-slider-basic.js", "./src/components/ES5/advanced-slider/js/advanced-slider-SpecialEffects.js", "./src/components/ES5/AJAX-push/js/ajax-push-content.js", "./src/components/ES5/AJAX/js/ajax-page-loader.js", "./src/components/ES5/back-to-top/js/back-to-top.js", "./src/components/ES5/circle-layout/js/circle-layout.js", "./src/components/ES5/counter/js/counter.js", "./src/components/ES5/dropdown-menu/js/dropdown-menu.js", "./src/components/ES5/dropdown-menu2/js/dropdown-menu2.js", "./src/components/ES5/dynamic-dropdown-list-json/js/dynamic-dropdown-list-json.js", "./src/components/ES5/flexslider/js/custom-flexslider.js", "./src/components/ES5/flexslider/js/jquery.flexslider.js", "./src/components/ES5/floating-side-element/js/floating-side-element.js", "./src/components/ES5/form-progress/js/form-progress.js", "./src/components/ES5/form/js/form.js", "./src/components/ES5/form/js/jqueryui.datepicker.js", "./src/components/ES5/gallery/js/gallery.js", "./src/components/ES5/hover-delay-interaction/js/hover-delay-interaction.js", "./src/components/ES5/image-shapes/js/image-shapes.js", "./src/components/ES5/lava-lamp-style-menu/js/lava-lamp-style-menu.js", "./src/components/ES5/lightbox/js/lightbox.js", "./src/components/ES5/list-bulleted/js/list-bulleted.js", "./src/components/ES5/list-posts/js/list-posts-with-ajax.js", "./src/components/ES5/list-split-imagery/js/list-split-imagery.js", "./src/components/ES5/mousewheel-interaction/js/mousewheel-interaction.js", "./src/components/ES5/multi-items-carousel/js/multi-items-carousel.js", "./src/components/ES5/one-page/js/one-page.js", "./src/components/ES5/one-page2/js/one-page2.js", "./src/components/ES5/parallax/js/parallax.js", "./src/components/ES5/periodical-scroll/js/periodical-scroll.js", "./src/components/ES5/pricing/js/pricing.js", "./src/components/ES5/progress-bar/js/progress-bar.js", "./src/components/ES5/progress-line/js/progress-line.js", "./src/components/ES5/retina/js/retina.js", "./src/components/ES5/rotating-elements/js/rotating-elements.js", "./src/components/ES5/scroll-reveal/js/scroll-reveal.js", "./src/components/ES5/scrollspy-animate/js/scrollspy-animate.js", "./src/components/ES5/show-more-less/js/show-more-less.js", "./src/components/ES5/skew-on-scroll/js/skew-on-scroll.js", "./src/components/ES5/smooth-scrolling-anchor-link/js/smooth-scrolling-anchor-link.js", "./src/components/ES5/source-code/js/highlight.js", "./src/components/ES5/source-code/js/source-code.js", "./src/components/ES5/sticky-elements/js/sticky-elements.js", "./src/components/ES5/svg-map/js/svg-map-china.js", "./src/components/ES5/svg-map/js/svg-map-world.js", "./src/components/ES5/table-sorter/js/table-sorter.js", "./src/components/ES5/t3D-background-three/js/3D-background-three.js", "./src/components/ES5/t3D-background-three2/js/3D-background-three2.js", "./src/components/ES5/t3D-background/js/3D-background.js", "./src/components/ES5/t3D-carousel/js/3D-carousel.js", "./src/components/ES5/t3D-model/js/3D-model.js", "./src/components/ES5/t3D-pages/js/3D-pages.js", "./src/components/ES5/t3D-particle-effect/js/3D-particle-effect.js", "./src/components/ES5/t3D-sphere-three/js/3D-sphere-three.js", "./src/components/ES5/t3D-obj-anim-interaction/js/3D-obj-anim-interaction.js", "./src/components/ES5/tabs/js/tabs.js", "./src/components/ES5/team-focus/js/team-focus.js", "./src/components/ES5/text-effect/js/text-effect.js", "./src/components/ES5/timeline/js/timeline.js", "./src/components/ES5/vertical-menu/js/vertical-menu.js", "./src/components/ES5/wordpress/js/wp-core.js"]
+  "./src/components/ES5/_main/js/main.js", "./src/components/ES5/accordion-img/js/accordion-img.js", "./src/components/ES5/accordion/js/accordion.js", "./src/components/ES5/advanced-content-slider/js/advanced-content-slider.js", "./src/components/ES5/advanced-slider/js/advanced-slider-basic.js", "./src/components/ES5/advanced-slider/js/advanced-slider-SpecialEffects.js", "./src/components/ES5/AJAX-push/js/ajax-push-content.js", "./src/components/ES5/AJAX/js/ajax-page-loader.js", "./src/components/ES5/back-to-top/js/back-to-top.js", "./src/components/ES5/circle-layout/js/circle-layout.js", "./src/components/ES5/counter/js/counter.js", "./src/components/ES5/dropdown-menu/js/dropdown-menu.js", "./src/components/ES5/dropdown-menu2/js/dropdown-menu2.js", "./src/components/ES5/dynamic-dropdown-list-json/js/dynamic-dropdown-list-json.js", "./src/components/ES5/flexslider/js/custom-flexslider.js", "./src/components/ES5/flexslider/js/jquery.flexslider.js", "./src/components/ES5/floating-side-element/js/floating-side-element.js", "./src/components/ES5/form-progress/js/form-progress.js", "./src/components/ES5/form/js/form.js", "./src/components/ES5/form/js/jqueryui.datepicker.js", "./src/components/ES5/gallery/js/gallery.js", "./src/components/ES5/hover-delay-interaction/js/hover-delay-interaction.js", "./src/components/ES5/image-shapes/js/image-shapes.js", "./src/components/ES5/lava-lamp-style-menu/js/lava-lamp-style-menu.js", "./src/components/ES5/lightbox/js/lightbox.js", "./src/components/ES5/list-bulleted/js/list-bulleted.js", "./src/components/ES5/list-posts/js/list-posts-with-ajax.js", "./src/components/ES5/list-split-imagery/js/list-split-imagery.js", "./src/components/ES5/mousewheel-interaction/js/mousewheel-interaction.js", "./src/components/ES5/multi-items-carousel/js/multi-items-carousel.js", "./src/components/ES5/one-page/js/one-page.js", "./src/components/ES5/one-page2/js/one-page2.js", "./src/components/ES5/parallax/js/parallax.js", "./src/components/ES5/periodical-scroll/js/periodical-scroll.js", "./src/components/ES5/pricing/js/pricing.js", "./src/components/ES5/progress-bar/js/progress-bar.js", "./src/components/ES5/progress-line/js/progress-line.js", "./src/components/ES5/retina/js/retina.js", "./src/components/ES5/rotating-elements/js/rotating-elements.js", "./src/components/ES5/scroll-reveal/js/scroll-reveal.js", "./src/components/ES5/scrollspy-animate/js/scrollspy-animate.js", "./src/components/ES5/show-more-less/js/show-more-less.js", "./src/components/ES5/skew-on-scroll/js/skew-on-scroll.js", "./src/components/ES5/smooth-scrolling-anchor-link/js/smooth-scrolling-anchor-link.js", "./src/components/ES5/source-code/js/highlight.js", "./src/components/ES5/source-code/js/source-code.js", "./src/components/ES5/sticky-elements/js/sticky-elements.js", "./src/components/ES5/svg-map/js/svg-map-china.js", "./src/components/ES5/svg-map/js/svg-map-world.js", "./src/components/ES5/table-sorter/js/table-sorter.js", "./src/components/ES5/t3D-background-three/js/3D-background-three.js", "./src/components/ES5/t3D-background-three2/js/3D-background-three2.js", "./src/components/ES5/t3D-background/js/3D-background.js", "./src/components/ES5/t3D-carousel/js/3D-carousel.js", "./src/components/ES5/t3D-model/js/3D-model.js", "./src/components/ES5/t3D-pages/js/3D-pages.js", "./src/components/ES5/t3D-particle-effect/js/3D-particle-effect.js", "./src/components/ES5/t3D-sphere-three/js/3D-sphere-three.js", "./src/components/ES5/t3D-obj-anim-interaction/js/3D-obj-anim-interaction.js", "./src/components/ES5/tabs/js/tabs.js", "./src/components/ES5/team-focus/js/team-focus.js", "./src/components/ES5/text-effect/js/text-effect.js", "./src/components/ES5/timeline/js/timeline.js", "./src/components/ES5/vertical-menu/js/vertical-menu.js", "./src/components/ES5/wordpress/js/wp-core.js"]
 };
 
 // CONCATENATED MODULE: ./src/components/ES6/_global/js/vars.js
@@ -289,7 +289,8 @@ if ( typeof jQuery === 'undefined' || typeof TweenMax === 'undefined' || typeof 
     throw new Error( 'Uix Kit\'s JavaScript requires jQuery, TweenMax, Waypoint and videojs.' );
 }
 
-
+//Fixed a bug that Cannot read property 'fn' of undefined for jQuery 1.xx.x.
+window.$ = window.jQuery;
 
 /* 
  *************************************
@@ -1590,7 +1591,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.MOBILE_MENU               = APP.MOBILE_MENU || {};
-	APP.MOBILE_MENU.version       = '0.0.3';
+	APP.MOBILE_MENU.version       = '0.0.4';
     APP.MOBILE_MENU.documentReady = function( $ ) {
 
 		var $window      = $( window ),
@@ -1661,27 +1662,64 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
+			// Fires drop-menu event 
+			var $drMenuLi = $( '.uix-menu__container.is-mobile ul li' );
 
-			// Menu click event
-			$( '.uix-menu__container.is-mobile ul li' ).on( 'click', function( e ) {
+			$drMenuLi.find( '> a' ).on( 'click', function( e ) {
+				
+				var arrowText = $( this ).find( '.uix-menu__arrow-mobile' ).text().replace( /(.).*\1/g, "$1" ),
+					$sub      = $( this ).next( 'ul' );
 
-				var arrowText = $( this ).find( '.uix-menu__arrow-mobile' ).text().replace( /(.).*\1/g, "$1" );
+				if ( $sub.length > 0 ) {
 
-				//Hide other all sibling <ul> of the selected element
-				$( this ).siblings()
-						.removeClass( 'is-opened' )
-						.find( '> .sub-menu:not(.sub-sub)' ).slideUp( 500 );
+					e.preventDefault();
+
+					var expanded = ( $( this ).attr( 'aria-expanded' ) == 'true' ) ? false : true;
+
+					if ( expanded ) {
+						//Hide other all sibling <ul> of the selected element
+						var $e = $( this ).parent( 'li' ).siblings().find( '> a' );
+
+						$e.removeClass( 'is-opened' ).attr( 'aria-expanded', false );
+						$e.parent( 'li' ).find( '.uix-menu__arrow-mobile' ).removeClass( 'is-opened' );
+						$e.parent( 'li' ).removeClass( 'is-opened' );
+						
+
+						$( this ).addClass( 'is-opened' ).attr( 'aria-expanded', true );
+						$( this ).parent( 'li' ).find( '.uix-menu__arrow-mobile' ).addClass( 'is-opened' );
+						$( this ).parent( 'li' ).addClass( 'is-opened' );
 
 
-				var $sub = $( this ).children( 'ul' );
+						TweenMax.to( $e.next( 'ul' ), 0.5, { height: 0 } );
 
-				$sub.slideToggle( 500 );
-				$( this ).toggleClass( 'is-opened' );
+						//to open
+						// - temporarilty set height:auto
+						// - tween from height:0
+						TweenMax.set( $sub, { height: 'auto' } );
+						TweenMax.from( $sub, 0.5, { height:0 } );	
+
+
+					} else {
+
+						$( this ).removeClass( 'is-opened' ).attr( 'aria-expanded', false );
+						$( this ).parent( 'li' ).find( '.uix-menu__arrow-mobile' ).removeClass( 'is-opened' );
+						$( this ).parent( 'li' ).removeClass( 'is-opened' );
+
+						//to close
+						TweenMax.to( $sub, 0.5, { height: 0 } );
+
+					}
+
+
+
+
+					return false;
+				}
+
+
+			});
 			
-
-			} );
-
-
+			
 			mobileMenuInit( windowWidth ); 
 
 			// Close the menu on window change
@@ -10851,24 +10889,34 @@ Object.defineProperties( THREE.OrbitControls.prototype, {
 APP = ( function ( APP, $, window, document ) {
     'use strict';
     
-    APP.INDEX               = APP.INDEX || {};
-	APP.INDEX.version       = '0.0.1';
-    APP.INDEX.documentReady = function( $ ) {
+    APP.MAIN               = APP.MAIN || {};
+	APP.MAIN.version       = '0.0.1';
+    APP.MAIN.documentReady = function( $ ) {
 
-	    //your code here...
+		/* 
+		 ====================================================
+		 *  Function Title Here
+		 ====================================================
+		 */
+		//your code here...
+		
 		
     };
 	
-    APP.INDEX.pageLoaded    = function() {
+    APP.MAIN.pageLoaded    = function() {
 
-	    //your code here...
-		
+		/* 
+		 ====================================================
+		 *  Function Title Here
+		 ====================================================
+		 */
+		//your code here...
 		
     };
 	
 
-    APP.components.documentReady.push( APP.INDEX.documentReady );
-    APP.components.pageLoaded.push( APP.INDEX.pageLoaded );
+    APP.components.documentReady.push( APP.MAIN.documentReady );
+    APP.components.pageLoaded.push( APP.MAIN.pageLoaded );
 	
 	
     return APP;
@@ -16103,7 +16151,7 @@ APP = ( function ( APP, $, window, document ) {
 
 			
 			//----
-			if ( APP.INDEX ) APP.INDEX.pageLoaded(); //Theme Scripts
+			if ( APP.MAIN ) APP.MAIN.pageLoaded(); //Theme Scripts
 			if ( APP.COMMON_HEIGHT ) APP.COMMON_HEIGHT.pageLoaded(); //Common Height
 			if ( APP.ADVANCED_SLIDER ) APP.ADVANCED_SLIDER.pageLoaded(); //Advanced Slider (Basic)
 			if ( APP.ADVANCED_SLIDER_FILTER ) APP.ADVANCED_SLIDER_FILTER.pageLoaded(); //Advanced Slider	
@@ -16115,7 +16163,7 @@ APP = ( function ( APP, $, window, document ) {
 		
 			
 			//----
-			if ( APP.INDEX ) APP.INDEX.documentReady($); //Theme Scripts
+			if ( APP.MAIN ) APP.MAIN.documentReady($); //Theme Scripts
 			if ( APP.TABLE ) APP.TABLE.documentReady($); //Responsive Table
 			if ( APP.TABLE_SORTER ) APP.TABLE_SORTER.documentReady($); //Table Sorter
 			if ( APP.MODAL_DIALOG ) APP.MODAL_DIALOG.documentReady($); //Modal Dialog
@@ -22555,7 +22603,7 @@ APP = ( function ( APP, $, window, document ) {
 		});
 	
 	    /*--  Function of Masonry  --*/
-		var masonryObj = $( '.masonry-container .uix-gallery-tiles' );
+		var masonryObj = $( '.masonry-container .uix-gallery__tiles' );
 		imagesLoaded( masonryObj ).on( 'always', function() {
 			  masonryObj.masonry({
 				itemSelector: '.masonry-item'
@@ -22569,7 +22617,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 				$( '.uix-gallery' ).each( function() {
 					var filterCat      = $( this ).data( 'filter-id' ),
-						$grid          = $( this ).find( '.uix-gallery-tiles' ),
+						$grid          = $( this ).find( '.uix-gallery__tiles' ),
 						$filterOptions = $( filterCat );
 						
 					imagesLoaded( $grid ).on( 'always', function() {
@@ -26796,7 +26844,7 @@ APP = ( function ( APP, $, window, document ) {
 
 				var config = obj.data( 'uix-anim' );
 
-				if ( typeof config === typeof undefined || config == '' || config === false ) {
+				if( typeof config === typeof undefined || config == '' || config === false ) {
 					config = {
 						"from"     : {"opacity":0,"x":70},
 						"to"       : {"opacity":1,"x":0},
@@ -26885,7 +26933,7 @@ APP = ( function ( APP, $, window, document ) {
 			//Prevent asynchronous loading of repeated calls
 			var actived = $( this ).data( 'active' );
 			
-			if ( typeof actived === typeof undefined ) {
+			if( typeof actived === typeof undefined ) {
 				tmAnim( $( this ), 'from' );
 
 			}
@@ -26907,7 +26955,7 @@ APP = ( function ( APP, $, window, document ) {
 						tmLoop  = tmAnim( $( this.element ), 'loop' );
 					
 
-					if ( typeof actived === typeof undefined && tmLoop != 1 ) {
+					if( typeof actived === typeof undefined && tmLoop != 1 ) {
 						
 						//$( this.element ).toggleClass( 'animated fadeInUp', direction === 'down' );
 						tmAnim( $( this.element ), 'to' );

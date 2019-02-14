@@ -95,13 +95,14 @@ $vertical-menu-top          : 0;
 		 */ 
 		/* Multi-column */
 		li.multi-column {
-	
+			
+			span.multi-column-title {
+				text-align: right;
+
+			}
 			
 			> ul {
-				.multi-column-title {
-					text-align: right;
 
-				}
 				
 
 				ul {

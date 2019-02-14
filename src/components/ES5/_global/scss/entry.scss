@@ -4,8 +4,10 @@
 
 /*
  * 1. Spacing
- * 2. Main Content
- * 3. Meta Info
+ * 2. Share
+ * 3. Title
+ * 4. Main Content
+ * 5. Meta Info
 */
 
 
@@ -31,16 +33,44 @@
 		}
 	}
 	
-	.uix-entry__box__title {
-		padding-bottom: 1.75rem;
+	/*-- WordPress Style --*/
+	.post-navigation {
+		width: 100%;
+	}
+	.nav-previous,
+	.nav-next {
+		display: inline-block;
+		width: 50%;
 	}
 }
 
+
+/* 
+ ---------------------------
+ 2. Share
+ ---------------------------
+ */ 
+
+.uix-entry__box__share {
+	.uix-btn {
+		margin: 0 .5rem 1rem;
+	}
+}
+
+
+/* 
+ ---------------------------
+ 3. Title
+ ---------------------------
+ */ 
+
+.uix-entry__box__title {
+	padding-bottom: 1.75rem;
+}
+
 @media all and (max-width: 768px) {
-	.uix-entry__box {
-		.uix-entry__box__title {
-			padding-bottom: 0.4375rem;
-		}
+	.uix-entry__box__title {
+		padding-bottom: 0.4375rem;
 	}
 }
 
@@ -48,7 +78,7 @@
 
 /* 
  ---------------------------
- 2. Main Content
+ 4. Main Content
  ---------------------------
  */ 
 .uix-entry__content {
@@ -93,12 +123,11 @@
 
 /* 
  ---------------------------
- 3. Meta Info
+ 5. Meta Info
  ---------------------------
  */ 
 ul.uix-entry__meta {
 	width: 500px;
-	margin: 0 auto;
 	display: block;
 	color: #999;
 	font-style: italic;
@@ -122,6 +151,10 @@ ul.uix-entry__meta {
 
 	}
 
+	&.uix-entry__meta--centered {
+		margin: 0 auto;
+	}
+	
 
 	&.uix-entry__meta--wrap li {
 		display: block;

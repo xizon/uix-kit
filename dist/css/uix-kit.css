@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.2.0
+ * ## Version             :  3.2.1
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  January 31, 2019
+ * ## Last Update         :  February 15, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -172,7 +172,6 @@
  * @global
  *
  * //Used for all modules from ./src/components/ES5/[__]/scss
- * @requires ./examples/assets/css/bootstrap.min.css
  * 
  */
 ::placeholder {
@@ -297,6 +296,16 @@ code {
   .uix-brand img {
     max-height: 50px;
     margin-top: 0.75rem; }
+  .uix-brand .uix-brand__description {
+    padding: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    white-space: nowrap;
+    width: 90%;
+    line-height: 1.2;
+    font-weight: 100;
+    font-size: 0.75rem; }
 
 .uix-brand--mobile {
   display: none; }
@@ -567,8 +576,10 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
 /* ====================================================== */
 /*
  * 1. Spacing
- * 2. Main Content
- * 3. Meta Info
+ * 2. Share
+ * 3. Title
+ * 4. Main Content
+ * 5. Meta Info
 */
 /* 
  ---------------------------
@@ -576,23 +587,44 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
  ---------------------------
  */
 .uix-entry__box {
-  padding: 2.84375rem 0 1.75rem; }
+  padding: 2.84375rem 0 1.75rem;
+  /*-- WordPress Style --*/ }
   .uix-entry__box.uix-entry__box--top {
     padding: 2.84375rem 0 0; }
   .uix-entry__box.uix-entry__box--mark a {
     color: #EC5E79; }
     .uix-entry__box.uix-entry__box--mark a:hover {
       color: #E8588C; }
-  .uix-entry__box .uix-entry__box__title {
-    padding-bottom: 1.75rem; }
+  .uix-entry__box .post-navigation {
+    width: 100%; }
+  .uix-entry__box .nav-previous,
+  .uix-entry__box .nav-next {
+    display: inline-block;
+    width: 50%; }
+
+/* 
+ ---------------------------
+ 2. Share
+ ---------------------------
+ */
+.uix-entry__box__share .uix-btn {
+  margin: 0 .5rem 1rem; }
+
+/* 
+ ---------------------------
+ 3. Title
+ ---------------------------
+ */
+.uix-entry__box__title {
+  padding-bottom: 1.75rem; }
 
 @media all and (max-width: 768px) {
-  .uix-entry__box .uix-entry__box__title {
+  .uix-entry__box__title {
     padding-bottom: 0.4375rem; } }
 
 /* 
  ---------------------------
- 2. Main Content
+ 4. Main Content
  ---------------------------
  */
 .uix-entry__content {
@@ -619,12 +651,11 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
 
 /* 
  ---------------------------
- 3. Meta Info
+ 5. Meta Info
  ---------------------------
  */
 ul.uix-entry__meta {
   width: 500px;
-  margin: 0 auto;
   display: block;
   color: #999;
   font-style: italic;
@@ -640,6 +671,8 @@ ul.uix-entry__meta {
       margin-right: 0.4375rem; }
     ul.uix-entry__meta li a {
       color: #999; }
+  ul.uix-entry__meta.uix-entry__meta--centered {
+    margin: 0 auto; }
   ul.uix-entry__meta.uix-entry__meta--wrap li {
     display: block; }
     ul.uix-entry__meta.uix-entry__meta--wrap li::before {
@@ -667,9 +700,20 @@ ul.uix-entry__meta {
 .uix-footer__container {
   font-size: 0.75rem;
   padding: 2.625rem 0; }
-  .uix-footer__container ul li {
-    display: inline-block;
-    margin: 0.175rem 0.4375rem; }
+
+/* ul li ul li -> all on one line */
+.uix-footer__menu,
+.uix-footer__menu ul,
+.uix-footer__menu li {
+  display: inline;
+  position: relative; }
+
+.uix-footer__menu li a {
+  padding: 0 0.4375rem;
+  border-right: 1px solid #E1E1E1; }
+
+.uix-footer__menu li:last-child a {
+  border: none; }
 
 @media all and (max-width: 768px) {
   .uix-footer__container .uix-f-l,
@@ -710,6 +754,15 @@ ul.uix-entry__meta {
     .uix-header__container.uix-header__container--overlay.is-fixed {
       background-color: #EC5E79;
       background-image: linear-gradient(to right, #EC5E79 0%, #f60 20%, #d83ba0 100%); }
+
+/* Show Toolbar when viewing site with WordPress */
+.admin-bar .uix-header__container {
+  top: 32px; }
+
+/* Admin bar becomes taller on smaller devices with WordPress */
+@media all and (max-width: 782px) {
+  .admin-bar .uix-header__container {
+    top: 0; } }
 
 /* Don't use "margin" or "padding" to set up ".uix-header" */
 .uix-header {
@@ -1202,6 +1255,15 @@ img.uix-alignfull,
   width: 100%;
   overflow: hidden; }
 
+/* Show Toolbar when viewing site with WordPress */
+.admin-bar .uix-wrapper {
+  margin-top: 32px; }
+
+/* Admin bar becomes taller on smaller devices with WordPress */
+@media all and (max-width: 782px) {
+  .admin-bar .uix-wrapper {
+    margin-top: 46px; } }
+
 /* 
  ---------------------------
  4. Uix Grid
@@ -1548,15 +1610,16 @@ img.uix-alignfull,
       border-top: none;
       border-bottom: 1px solid #dfdfdf;
       position: relative; }
-      .uix-menu__container.is-mobile ul li a, .uix-menu__container.is-mobile ul li span {
+      .uix-menu__container.is-mobile ul li a,
+      .uix-menu__container.is-mobile ul li span {
         padding: 0 15px;
         display: block;
         text-decoration: none;
         color: #212121; }
-      .uix-menu__container.is-mobile ul li:hover > a,
-      .uix-menu__container.is-mobile ul li:hover > span {
-        box-shadow: 0 0 15px 3px #ebebeb inset; }
-      .uix-menu__container.is-mobile ul li.active > a, .uix-menu__container.is-mobile ul li.active > span {
+      .uix-menu__container.is-mobile ul li a:hover {
+        color: #000; }
+      .uix-menu__container.is-mobile ul li.is-opened > a,
+      .uix-menu__container.is-mobile ul li.is-opened > span {
         box-shadow: 0 0 15px 3px #ebebeb inset; }
       .uix-menu__container.is-mobile ul li ul {
         border-bottom: 0;
@@ -1566,25 +1629,25 @@ img.uix-alignfull,
           font-size: 13px; }
           .uix-menu__container.is-mobile ul li ul li:last-child {
             border-bottom: 0; }
-          .uix-menu__container.is-mobile ul li ul li:hover > a, .uix-menu__container.is-mobile ul li ul li:hover > span {
+          .uix-menu__container.is-mobile ul li ul li a:hover {
+            color: #000; }
+          .uix-menu__container.is-mobile ul li ul li.is-opened > a,
+          .uix-menu__container.is-mobile ul li ul li.is-opened > span {
             box-shadow: 0 0 15px 3px #ebebeb inset; }
-          .uix-menu__container.is-mobile ul li ul li.active > a, .uix-menu__container.is-mobile ul li ul li.active > span {
-            box-shadow: 0 0 15px 3px #ebebeb inset; }
-          .uix-menu__container.is-mobile ul li ul li.active > a, .uix-menu__container.is-mobile ul li ul li.active > span {
-            box-shadow: 0 0 15px 3px #ebebeb inset; }
-          .uix-menu__container.is-mobile ul li ul li a, .uix-menu__container.is-mobile ul li ul li span {
-            color: rgba(51, 51, 51, 0.8);
-            padding-left: 30px; }
+          .uix-menu__container.is-mobile ul li ul li a,
+          .uix-menu__container.is-mobile ul li ul li span {
+            color: rgba(51, 51, 51, 0.8); }
   .uix-menu__container.is-mobile li > .sub-menu {
     margin-top: 0 !important;
-    display: none; }
+    overflow: hidden;
+    height: 0; }
     .uix-menu__container.is-mobile li > .sub-menu ul {
-      display: block; }
+      height: auto; }
+  .uix-menu__container.is-mobile li.multi-column ul {
+    border: none; }
   .uix-menu__container.is-mobile li.multi-column > ul .multi-column-title {
     font-weight: bold;
     color: #ABABAB; }
-  .uix-menu__container.is-mobile .multi-column ul {
-    border: none; }
   .uix-menu__container.is-mobile li:not(.multi-column) ul ul {
     padding-left: 0.721875rem; }
   .uix-menu__container.is-mobile .uix-menu__arrow-mobile {
@@ -1599,8 +1662,8 @@ img.uix-alignfull,
       content: '+';
       display: inline-block;
       font-size: 1rem; }
-  .uix-menu__container.is-mobile .is-opened .uix-menu__arrow-mobile::after {
-    content: '-'; }
+    .uix-menu__container.is-mobile .uix-menu__arrow-mobile.is-opened::after {
+      content: '-'; }
   .uix-menu__container.is-mobile form {
     margin: 0 15px; }
   .uix-menu__container.is-mobile label {
@@ -1905,26 +1968,28 @@ img.uix-alignfull,
           color: #000;
           background: #F1F1F1; }
     .uix-menu__container:not(.is-mobile) ul.uix-menu > li:not(.multi-column) > ul ul {
-      box-shadow: rgba(0, 0, 0, 0.18) 0 19px 38px, rgba(0, 0, 0, 0.08) 0 15px 12px;
       top: 0;
       left: 100%;
-      background: #fff;
-      border: 1.15px solid #212121;
       padding: 1.421875rem 0;
-      margin-left: -0.071875rem; }
+      margin-left: -0.071875rem;
+      box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px;
+      border: 1.15px solid rgba(33, 33, 33, 0.1);
+      background: #fff;
+      border-radius: 8px; }
       .uix-menu__container:not(.is-mobile) ul.uix-menu > li:not(.multi-column) > ul ul ul {
         margin-left: 0; }
+  .uix-menu__container:not(.is-mobile) li.multi-column span.multi-column-title {
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #B9B9B9;
+    display: inline-block;
+    cursor: default;
+    padding-left: 1.159375rem; }
   .uix-menu__container:not(.is-mobile) li.multi-column > ul {
     width: auto;
     white-space: nowrap;
     display: none;
     padding: 0; }
-    .uix-menu__container:not(.is-mobile) li.multi-column > ul .multi-column-title {
-      text-transform: uppercase;
-      font-weight: 700;
-      color: #B9B9B9;
-      display: inline-block;
-      cursor: default; }
     .uix-menu__container:not(.is-mobile) li.multi-column > ul li {
       width: 270px;
       /* Required, JS script needs to listen on it for calculation */
@@ -2233,15 +2298,15 @@ img.uix-alignfull,
     content: "";
     line-height: 0;
     clear: both; }
-  .uix-pagination__container ul.uix-pagination {
+  .uix-pagination__container ul {
     font-size: 0;
     /*Fighting the Space Between Inline Block Elements*/ }
-    .uix-pagination__container ul.uix-pagination li {
+    .uix-pagination__container ul li {
       display: inline-block;
       font-size: 1rem;
       /*Fighting the Space Between Inline Block Elements*/ }
-      .uix-pagination__container ul.uix-pagination li a,
-      .uix-pagination__container ul.uix-pagination li > span {
+      .uix-pagination__container ul li a,
+      .uix-pagination__container ul li > span {
         display: inline-block;
         width: 3.125rem;
         height: 3.125rem;
@@ -2258,16 +2323,16 @@ img.uix-alignfull,
         line-height: 3.25;
         margin-top: 0;
         margin-bottom: 2.06818181818rem; }
-      .uix-pagination__container ul.uix-pagination li a:hover {
+      .uix-pagination__container ul li a:hover {
         background: #efefef;
         color: #232323; }
-      .uix-pagination__container ul.uix-pagination li.active a {
+      .uix-pagination__container ul li.active a {
         color: #989898;
         font-style: italic; }
-        .uix-pagination__container ul.uix-pagination li.active a:hover {
+        .uix-pagination__container ul li.active a:hover {
           background: #e7e7e7;
           color: #232323; }
-      .uix-pagination__container ul.uix-pagination li.active > span {
+      .uix-pagination__container ul li.active > span {
         border-color: #EC5E79;
         background-color: #EC5E79;
         background-image: linear-gradient(to right, #EC5E79 0%, #f60 20%, #d83ba0 100%);
@@ -2307,8 +2372,9 @@ img.uix-alignfull,
  * 1. Basic                             - Synchronize to WordPress's class name
  * 2. Calendar Widget                   - Synchronize to WordPress's class name
  * 3. Link List                         - Synchronize to WordPress's class name
- * 4. Post List
- * 5. Post List with Featured Image
+ * 4. Tag cloud from sidebar            - Synchronize to WordPress's class name
+ * 5. Post List
+ * 6. Post List with Featured Image
 */
 /* 
  ---------------------------
@@ -2338,30 +2404,30 @@ img.uix-alignfull,
  2. Calendar Widget
  ---------------------------
  */
-.calendar-box {
+.calendar_wrap > table {
   padding: 1.3125rem 0;
   width: 100%;
   font-size: 0.5625rem; }
-  .calendar-box caption {
+  .calendar_wrap > table caption {
     text-align: center;
     margin: 0.875rem 0;
     font-size: 1.25rem; }
-  .calendar-box thead th {
+  .calendar_wrap > table thead th {
     padding-bottom: 0.625rem;
     text-align: center; }
-  .calendar-box tbody td {
+  .calendar_wrap > table tbody td {
     background: #f5f5f5;
     border: 1px solid #fff;
     text-align: center;
     padding: 0.5rem; }
-    .calendar-box tbody td:hover {
+    .calendar_wrap > table tbody td:hover {
       background: #fff; }
-  .calendar-box tbody .pad {
+  .calendar_wrap > table tbody .pad {
     background: none; }
-  .calendar-box tfoot #next {
+  .calendar_wrap > table tfoot #next {
     text-transform: uppercase;
     text-align: right; }
-  .calendar-box tfoot #prev {
+  .calendar_wrap > table tfoot #prev {
     text-transform: uppercase;
     padding-top: 0.875rem; }
 
@@ -2418,7 +2484,29 @@ img.uix-alignfull,
 
 /* 
  ---------------------------
- 4. Post List
+ 4. Tag cloud from sidebar
+ ---------------------------
+ */
+.tagcloud {
+  margin-bottom: 1.3125rem; }
+  .tagcloud > a {
+    font-size: 0.875rem;
+    padding: 0.04375rem 0.109375rem;
+    margin-bottom: 0.175rem;
+    display: inline-block; }
+    .tagcloud > a::after {
+      content: '/';
+      display: inline-block;
+      margin-left: 0.546875rem;
+      opacity: 0.5; }
+    .tagcloud > a:last-child:after {
+      display: none; }
+  .tagcloud.uix-tags-box--has-border > a {
+    border: 1px solid #E6E6E6; }
+
+/* 
+ ---------------------------
+ 5. Post List
  ---------------------------
  */
 .uix-sidebar__posts li {
@@ -2427,7 +2515,7 @@ img.uix-alignfull,
 
 /* 
  ---------------------------
- 5. Post List with Featured Image
+ 6. Post List with Featured Image
  ---------------------------
  */
 .uix-sidebar__posts-img {
@@ -4968,7 +5056,7 @@ h6 {
  ---------------------------
  */
 .uix-btn__margin--b {
-  margin-bottom: 1.5rem; }
+  margin-bottom: 1rem; }
 
 .uix-btn__margin--l {
   margin-left: 1rem; }
@@ -6632,7 +6720,6 @@ ol.uix-flexslider__control-paging {
       outline: none;
       border-color: #212121; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) label {
-    /* @include control-label-text(); */
     font-weight: 500;
     color: #999;
     position: absolute;
@@ -6654,7 +6741,6 @@ ol.uix-flexslider__control-paging {
     right: 0.875rem;
     top: 1rem;
     font-size: 0.625rem;
-    /* @include control-label-text(); */
     font-weight: 500;
     color: #999; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-radio label {
@@ -7046,7 +7132,6 @@ ol.uix-flexslider__control-paging {
   .uix-controls__select-wrapper select {
     display: none; }
   .uix-controls__select-wrapper .uix-controls__select-trigger {
-    /* @include control-label-text(); */
     font-weight: 500;
     color: #999;
     position: relative;
@@ -7063,7 +7148,6 @@ ol.uix-flexslider__control-paging {
       outline: none;
       border-color: #212121; }
     .uix-controls__select-wrapper .uix-controls__select-trigger::after {
-      /* @include select-arrow( -.875rem, 1rem ); */
       border: 1px solid #dce4e8;
       border-right: 0;
       border-top: 0;
@@ -7111,7 +7195,6 @@ ol.uix-flexslider__control-paging {
     display: inline-block;
     margin-left: .3rem;
     margin-right: .3rem;
-    /* @include control-label-text(); */
     font-weight: 500;
     color: #999; }
   .uix-controls__select-wrapper .uix-controls__select__option-container {
@@ -7220,7 +7303,6 @@ ol.uix-flexslider__control-paging {
     pointer-events: auto;
     /* Required */
     cursor: pointer;
-    /* @include control-label-text(); */
     font-weight: 500;
     color: #999; }
   .uix-controls__radio input[type="radio"] {
@@ -7285,7 +7367,6 @@ ol.uix-flexslider__control-paging {
       width: 55px;
       text-align: center;
       line-height: 100%;
-      /* @include control-label-text(); */
       font-weight: 500;
       color: #999;
       font-size: 0.75rem; }
@@ -7299,7 +7380,6 @@ ol.uix-flexslider__control-paging {
 .uix-controls__checkbox {
   position: relative; }
   .uix-controls__checkbox label {
-    /* @include control-label-text(); */
     font-weight: 500;
     color: #999;
     cursor: pointer;
@@ -10495,7 +10575,8 @@ dl.uix-list-abreast {
     right: 0;
     font-size: 0.75rem;
     padding: 0.175rem 0.875rem 0;
-    text-transform: uppercase; }
+    text-transform: uppercase;
+    border-radius: 2px 2px 0 0; }
 
 /* 
  ---------------------------
@@ -11835,20 +11916,21 @@ Style with support for rainbow parens
                         left: 2050px; }
     .uix-v-menu__container:not(.is-mobile) ul.uix-menu li.multi-column .uix-menu__arrow-mega {
       display: none !important; }
+    .uix-v-menu__container:not(.is-mobile) ul.uix-menu li.multi-column span.multi-column-title {
+      color: #fff;
+      font-weight: 900;
+      display: inline-block;
+      cursor: default;
+      text-align: left;
+      opacity: .5;
+      font-size: 0.875rem;
+      display: block;
+      padding: 1rem 1rem 0; }
     .uix-v-menu__container:not(.is-mobile) ul.uix-menu li.multi-column > ul {
       min-width: inherit;
       white-space: nowrap;
       display: none;
       padding: 0; }
-      .uix-v-menu__container:not(.is-mobile) ul.uix-menu li.multi-column > ul .multi-column-title {
-        color: #fff;
-        font-weight: 900;
-        display: inline-block;
-        cursor: default;
-        text-align: left;
-        opacity: .5;
-        font-size: 0.875rem;
-        padding-bottom: 1rem; }
       .uix-v-menu__container:not(.is-mobile) ul.uix-menu li.multi-column > ul ul {
         display: block; }
         .uix-v-menu__container:not(.is-mobile) ul.uix-menu li.multi-column > ul ul li {
@@ -11927,13 +12009,8 @@ Style with support for rainbow parens
 /* ====================================================== */
 .uix-wave-bg__container {
   position: relative;
-  height: 300px;
-  overflow: hidden; }
-  .uix-wave-bg__container .uix-wave-bg {
-    overflow: hidden;
-    height: 300px;
-    background: #EC5E79;
-    background: linear-gradient(to right, #EC5E79 0%, #E8588C 100%); }
+  height: 50px;
+  z-index: 1; }
 
 .uix-wave-bg__svgmask {
   overflow: hidden;
@@ -11961,6 +12038,7 @@ Style with support for rainbow parens
 /*
  * 1. Disqus
  * 2. Alobaidi Captcha
+ * 3. Easy Digital Downloads (WP Plugin) 
 */
 /* 
  ---------------------------
@@ -11978,6 +12056,179 @@ Style with support for rainbow parens
 .alobaidi-captcha-comment-field {
   margin-left: 0.875rem; }
 
+/* 
+ ---------------------------
+ 3. Easy Digital Downloads (WP Plugin) 
+ ---------------------------
+ */
+/* ---- AJAX Button----- */
+form.edd_download_purchase_form .edd_price {
+  display: none; }
+
+.edd-submit {
+  line-height: 1.5 !important;
+  margin: 1em !important; }
+
+.edd-loading {
+  border-top-color: #EE6E73 !important;
+  border-right-color: #EE6E73 !important;
+  border-bottom-color: #EE6E73 !important;
+  border-left-color: transparent !important; }
+
+/* ---- AJAX Add To Cart Button & Form ----- */
+#edd_checkout_form_wrap fieldset#edd_register_fields #edd_checkout_user_info {
+  margin-bottom: 21px; }
+
+#edd_checkout_user_info {
+  position: relative; }
+  #edd_checkout_user_info legend {
+    position: absolute;
+    top: -10px;
+    border: none;
+    background: #FFF;
+    display: inline-block;
+    width: 150px;
+    text-indent: 1.2em; }
+
+#edd-email-wrap {
+  padding-top: 2em; }
+
+#edd-last-name-wrap {
+  padding-bottom: 1em; }
+
+.edd_cart_amount {
+  color: #f00;
+  font-size: 1.5em;
+  letter-spacing: 1px; }
+
+#edd_show_terms {
+  padding-left: 20px; }
+
+#edd_checkout_form_wrap .edd-payment-icons {
+  padding-bottom: 60px; }
+  #edd_checkout_form_wrap .edd-payment-icons img.payment-icon {
+    max-height: 42px;
+    border: 1px solid #EEEEEE; }
+
+.edd-cart-added-alert {
+  padding-left: 1.25em; }
+
+.edd-custom-btn {
+  min-width: 100px !important;
+  padding: .7em 1.25em !important;
+  border-radius: 0 !important;
+  font-size: 1em !important;
+  margin: .8em 1em 1em !important; }
+  .edd-custom-btn:active {
+    background-image: none !important; }
+  .edd-custom-btn i {
+    margin-right: 8px;
+    opacity: 0.75; }
+  .edd-custom-btn.green {
+    color: #FFF !important;
+    background: #5cb85c !important;
+    border-color: #4cae4c !important; }
+    .edd-custom-btn.green:hover, .uix-controls__multi-sel > span.edd-custom-btn.green.active:not(.uix-controls__bar), .edd-custom-btn.green:focus, .edd-custom-btn.green:active {
+      color: #FFF !important;
+      background: #47a447 !important;
+      border-color: #398439 !important; }
+
+.edd-terms-agreement,
+#edd_terms {
+  display: block;
+  padding: 1.25em; }
+
+a.edd_terms_links {
+  padding: .5em 1em;
+  background: #ECECEC;
+  border: 1px solid #eee; }
+
+/* ---- Purchase Summary Tables ----- */
+.edd_purchase_receipt_files_list {
+  padding-top: 1em; }
+  .edd_purchase_receipt_files_list a {
+    display: block;
+    line-height: 1.7; }
+
+table.edd-table {
+  border: none  !important; }
+  table.edd-table thead th {
+    width: 150px; }
+  table.edd-table td,
+  table.edd-table th {
+    border: none  !important; }
+  table.edd-table tr {
+    border-bottom: 1px solid #E8E8E8 !important;
+    height: 4em; }
+
+a.edd_download_file_link {
+  border: 1px solid #333;
+  padding: .3em 1em;
+  margin: 1em 0;
+  display: inline-block; }
+
+.edd_purchase_receipt_title {
+  padding-top: 2.5em;
+  color: #BBBBBB; }
+
+.edd_purchase_receipt_title2 {
+  font-weight: normal;
+  font-size: 14px; }
+
+ul.edd_bundled_product_files, ul.edd_purchase_receipt_files,
+ul.edd_bundled_product_files li,
+ul.edd_purchase_receipt_files li {
+  margin-left: 0 !important;
+  padding-left: 0 !important; }
+
+/* ---- Download Card ----- */
+.edd-custom-download-file {
+  width: 100%;
+  height: 36px;
+  border: 1px solid #4CAF50;
+  position: relative;
+  background: #e4ffe5;
+  margin: .3em 0; }
+
+.edd-custom-download-text {
+  margin-left: 45px;
+  line-height: 36px;
+  color: #585858;
+  transition: .1s ease-in-out; }
+
+.edd-custom-download-file:hover .edd-custom-download-text, .uix-controls__multi-sel > span.edd-custom-download-file.active:not(.uix-controls__bar) .edd-custom-download-text {
+  color: #000; }
+
+.edd-custom-download-text:before {
+  content: '\f15c';
+  position: absolute;
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 600;
+  transform: translate(-28px, 7px); }
+
+.edd-custom-download-text:after {
+  content: '';
+  position: absolute;
+  margin-left: 8px;
+  font-size: 0.875rem;
+  color: #626262;
+  transform: translate(0, 10px); }
+
+.edd-custom-download-field {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: 36px;
+  color: #FFF;
+  background: #4CAF50;
+  font: 16pt;
+  text-align: center;
+  line-height: 36px;
+  cursor: pointer; }
+  .edd-custom-download-field:hover, .uix-controls__multi-sel > span.edd-custom-download-field.active:not(.uix-controls__bar) {
+    background: #43A047; }
+
 /* ====================================================== 
    <!-- WordPress Core ( Do not use prefix "uix-" ) -->              
 /* ====================================================== */
@@ -11992,13 +12243,13 @@ Style with support for rainbow parens
  1. General
  ---------------------------
  */
-.edit-link {
+.uix-edit-link {
   display: block; }
-  .edit-link::before, .edit-link::after {
+  .uix-edit-link::before, .uix-edit-link::after {
     content: '';
     display: block;
     clear: both; }
-  .edit-link a {
+  .uix-edit-link a {
     text-decoration: underline; }
 
 .alignnone {
@@ -12305,7 +12556,7 @@ ul.wp-block-gallery.aligncenter .blocks-gallery-item figure {
  ---------------------------
  */
 .sticky {
-  opacity: 1; }
+  z-index: inherit; }
 
 
 /*# sourceMappingURL=uix-kit.css.map*/

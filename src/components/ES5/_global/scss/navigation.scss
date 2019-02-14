@@ -148,13 +148,15 @@ $nav-mega-li-w    : 270px;
 
 		> li:not(.multi-column) > ul {
 			ul {
-				@include outer-shadow( 'thick' );
 				top: 0;
 				left: 100%;
-				background: #fff;
-				border: 1.15px solid $primary-text-color1;
 				padding: 1.421875rem 0;
 				margin-left: -0.071875rem;
+				
+				@include outer-shadow( 'regular' );
+				border: 1.15px solid rgba($primary-text-color1, .1);
+				background: #fff;
+				border-radius: 8px;
 
 				ul {
 					margin-left: 0;
@@ -174,22 +176,22 @@ $nav-mega-li-w    : 270px;
 	/* Multi-column */
 	li.multi-column {
 
+		span.multi-column-title {
+			text-transform: uppercase;
+			font-weight: 700;
+			color: #B9B9B9;
+			display: inline-block;
+			cursor: default;
+			padding-left: 1.159375rem;
+		}
 
+		
 		> ul {
 			width: auto;
 			white-space: nowrap;
 			display: none;
 			padding: 0;
 			
-
-			.multi-column-title {
-				text-transform: uppercase;
-				font-weight: 700;
-				color: #B9B9B9;
-				display: inline-block;
-				cursor: default;
-			}
-
 
 			li {
 				width: $nav-mega-li-w; /* Required, JS script needs to listen on it for calculation */

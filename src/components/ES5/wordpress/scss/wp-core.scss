@@ -15,7 +15,7 @@
  1. General
  ---------------------------
  */ 
-.edit-link {
+.uix-edit-link {
 	display: block;
 	
 	&::before, &::after {
@@ -420,5 +420,5 @@ ul.wp-block-gallery.aligncenter .blocks-gallery-item figure {
  ---------------------------
  */ 
 .sticky {
-	opacity: 1;
+	z-index: inherit;
 }
