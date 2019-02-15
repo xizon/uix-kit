@@ -14,6 +14,7 @@ if ( typeof jQuery === 'undefined' || typeof TweenMax === 'undefined' || typeof 
     throw new Error( 'Uix Kit\'s JavaScript requires jQuery, TweenMax, Waypoint and videojs.' );
 }
 
+
 //Fixed a bug that Cannot read property 'fn' of undefined for jQuery 1.xx.x.
 window.$ = window.jQuery;
 
@@ -46,10 +47,9 @@ if ( typeof APP_ROOTPATH === 'undefined' ) {
 
 
 //Modify templateUrl as the correct path when local test is enabled
-if (location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.hostname === '' ) {
+if ( templateUrl == '' && ( location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.hostname === '' ) ) {
     templateUrl = '/examples';
 }
-
 
 
 /* 
@@ -194,6 +194,22 @@ var UIX_GUID = UIX_GUID || (function() {
     };
 })();
 
+
+
+/* 
+ *************************************
+ * Logs out the version and renderer information for this running instance of Uix Kit.
+ *************************************
+ */
+( function UIX_HELLO() { 
+    if ( navigator.userAgent.toLowerCase().indexOf( 'chrome' ) > -1 ) {
+        var args = ['\n %c Made with Uix Kit by https://github.com/xizon/uix-kit', 'color: #333; border: 1px solid; padding: 10px;'];
+
+        window.console.log.apply(console, args);
+    } else if (window.console) {
+        window.console.log( 'Made with Uix Kit by https://github.com/xizon/uix-kit' );
+    }
+} ());
 
 
 

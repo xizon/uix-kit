@@ -1,12 +1,15 @@
 # Changelog
 
 
-#### = 3.2.1 (February 14, 2019) =
+#### = 3.2.1 (February 15, 2019) =
 
+* New: Add a new module "Content Placeholder Animated".
 * New: Added some compatibilities for Show Toolbar when viewing site with WordPress. Valid classes include: .uix-wrapper, .uix-header__container, .uix-menu-mobile__toggle.
 * Fix: Fixed a bug that Cannot read property 'fn' of undefined for jQuery 1.xx.x.
 * Tweak: Improved partial core style compatible with WordPress.
 * Tweak: Optimized scripting and style for mobile navigation and mega navigation.
+
+
 
 
 #### = 3.2.0 (January 31, 2019) =

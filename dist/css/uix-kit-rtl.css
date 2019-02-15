@@ -29,20 +29,21 @@
     11.Advanced Slider (Basic)
     12.Advanced Slider (Special Effects)
     13.Cards
-    14.Dropdown Menu
-    15.Flexslider
-    16.Form
-    17.Cutom Light Box
-    18.Brands List
-    19.Bulleted List
-    20.Maintain Aspect Ratio List
-    21.Side by Side List
-    22.Ribbon
-    23.Comments
-    24.Source Code
-    25.ToolTip
-    26.Vertical Menu (RTL)
-    27.WordPress Core ( Do not use prefix "uix-" )
+    14.Content Placeholder Animated
+    15.Dropdown Menu
+    16.Flexslider
+    17.Form
+    18.Cutom Light Box
+    19.Brands List
+    20.Bulleted List
+    21.Maintain Aspect Ratio List
+    22.Side by Side List
+    23.Ribbon
+    24.Comments
+    25.Source Code
+    26.ToolTip
+    27.Vertical Menu (RTL)
+    28.WordPress Core ( Do not use prefix "uix-" )
 
 
 */
@@ -528,6 +529,16 @@ blockquote {
 /* ====================================================== 
     <!-- Cards -->    
 /* ====================================================== */
+/* ====================================================== 
+   <!-- Content Placeholder Animated -->    
+/* ====================================================== */
+.uix-content-placeholder .uix-content-placeholder__thumbSlot {
+  float: right; }
+  .uix-content-placeholder .uix-content-placeholder__thumbSlot ~ .uix-content-placeholder__textSlot {
+    margin-left: auto;
+    margin-right: 20px;
+    float: right; }
+
 /* ====================================================== 
    <!-- Dropdown Menu -->   
 /* ====================================================== */

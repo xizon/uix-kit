@@ -53,65 +53,66 @@
     35.Cards
     36.Circle Layout
     37.Badges
-    38.Counter
-    39.Dividing Line
-    40.Dots
-    41.Dotted Line
-    42.Dropdown Menu
-    43.Dropdown Menu 2 (Multi-level drop-down navigation)
-    44.Equal-width Columns
-    45.Features
-    46.Flexslider
-    47.Floating Side Element
-    48.Footer Templates
-    49.Form Progress
-    50.Form
-    51.Gallery
-    52.Heading
-    53.Image Animation
-    54.Image Shapes
-    55.Lava-Lamp Style Menu
-    56.Cutom Light Box
-    57.Brands List
-    58.Bulleted List
-    59.Maintain Aspect Ratio List
-    60.List of Posts
-    61.List of Split Posts
-    62.Side by Side List With Photo
-    63.Side by Side List
-    64.Fullwidth List of Split 2
-    65.Fullwidth List of Split
-    66.Mouse Animation Scroll
-    67.Multiple Items Carousel
-    68.Overlay
-    69.Parallax
-    70.Periodical Scroll
-    71.Pricing
-    72.Progress Bar
-    73.Progress Line
-    74.Ribbon
-    75.Shape Animation
-    76.Show More Less
-    77.Comments ( Synchronize to WordPress's class name )
-    78.Editing Component
-    79.Source Code
-    80.Striking
-    81.SVG Map
-    82.3D Background
-    83.3D Carousel
-    84.Tabs
-    85.Team Focus
-    86.Team Fullwidth (Style using the Side by Side List With Photo module)
-    87.Team Gird
-    88.Testimonials Carousel
-    89.Text effect
-    90.Timeline
-    91.ToolTip
-    92.Vertical Menu
-    93.Vertical Separator
-    94.Wave Background
-    95.3rd Party Plugins
-    96.WordPress Core ( Do not use prefix "uix-" )
+    38.Content Placeholder Animated
+    39.Counter
+    40.Dividing Line
+    41.Dots
+    42.Dotted Line
+    43.Dropdown Menu
+    44.Dropdown Menu 2 (Multi-level drop-down navigation)
+    45.Equal-width Columns
+    46.Features
+    47.Flexslider
+    48.Floating Side Element
+    49.Footer Templates
+    50.Form Progress
+    51.Form
+    52.Gallery
+    53.Heading
+    54.Image Animation
+    55.Image Shapes
+    56.Lava-Lamp Style Menu
+    57.Cutom Light Box
+    58.Brands List
+    59.Bulleted List
+    60.Maintain Aspect Ratio List
+    61.List of Posts
+    62.List of Split Posts
+    63.Side by Side List With Photo
+    64.Side by Side List
+    65.Fullwidth List of Split 2
+    66.Fullwidth List of Split
+    67.Mouse Animation Scroll
+    68.Multiple Items Carousel
+    69.Overlay
+    70.Parallax
+    71.Periodical Scroll
+    72.Pricing
+    73.Progress Bar
+    74.Progress Line
+    75.Ribbon
+    76.Shape Animation
+    77.Show More Less
+    78.Comments ( Synchronize to WordPress's class name )
+    79.Editing Component
+    80.Source Code
+    81.Striking
+    82.SVG Map
+    83.3D Background
+    84.3D Carousel
+    85.Tabs
+    86.Team Focus
+    87.Team Fullwidth (Style using the Side by Side List With Photo module)
+    88.Team Gird
+    89.Testimonials Carousel
+    90.Text effect
+    91.Timeline
+    92.ToolTip
+    93.Vertical Menu
+    94.Vertical Separator
+    95.Wave Background
+    96.3rd Party Plugins
+    97.WordPress Core ( Do not use prefix "uix-" )
 
 
 */
@@ -5465,6 +5466,70 @@ h6 {
       padding: .5rem; }
     .uix-circle-text circle-text textPath {
       fill: currentColor; }
+
+/* ====================================================== 
+   <!-- Content Placeholder Animated -->    
+/* ====================================================== */
+.uix-content-placeholder {
+  width: 100%; }
+  .uix-content-placeholder::after {
+    content: '';
+    display: block;
+    clear: both; }
+  .uix-content-placeholder ul {
+    list-style: none;
+    padding: 0;
+    margin: 0; }
+  .uix-content-placeholder li {
+    overflow: hidden;
+    padding: 15px 0;
+    margin: 0;
+    border: 0;
+    background: 0; }
+  .uix-content-placeholder .uix-content-placeholder__line {
+    height: 8px;
+    background-color: #eee; }
+  .uix-content-placeholder .uix-content-placeholder__line--first {
+    width: 100%;
+    animation: uix-cssAnim--firstline 1s infinite linear; }
+  .uix-content-placeholder .uix-content-placeholder__line--second {
+    margin-top: 8px;
+    width: 70%;
+    animation: uix-cssAnim--secondline 1s infinite linear; }
+  .uix-content-placeholder .uix-content-placeholder__thumbSlot {
+    width: 80px;
+    height: 60px;
+    float: left;
+    background-color: #eee;
+    animation: uix-cssAnim--thumb 1s infinite linear; }
+    .uix-content-placeholder .uix-content-placeholder__thumbSlot ~ .uix-content-placeholder__textSlot {
+      width: calc(100% - 100px);
+      margin-left: 20px;
+      float: left; }
+  .uix-content-placeholder .uix-content-placeholder__textSlot {
+    width: 100%;
+    margin-top: 2px; }
+    .uix-content-placeholder .uix-content-placeholder__textSlot ~ .uix-content-placeholder__thumbSlot {
+      width: 100%;
+      margin-top: 10px; }
+
+@keyframes uix-cssAnim--firstline {
+  from {
+    box-shadow: inset 0 0 0 rgba(255, 255, 255, 0.3); }
+  to {
+    box-shadow: inset 200px 0 0 rgba(255, 255, 255, 0.3); } }
+
+@keyframes uix-cssAnim--secondline {
+  from {
+    box-shadow: inset 0 0 0 rgba(255, 255, 255, 0.3); }
+  to {
+    box-shadow: inset 150px 0 0 rgba(255, 255, 255, 0.3); } }
+
+@keyframes uix-cssAnim--thumb {
+  from {
+    box-shadow: inset 0 0 0 rgba(255, 255, 255, 0.3); }
+  to {
+    box-shadow: inset 80px 0 0 rgba(255, 255, 255, 0.3); } }
 
 /* ====================================================== 
        <!-- Counter --> 
@@ -12113,6 +12178,66 @@ form.edd_download_purchase_form .edd_price {
 .edd-cart-added-alert {
   padding-left: 1.25em; }
 
+#edd-purchase-button.is-pill,
+.edd-submit.is-pill,
+[type="submit"].edd-submit.is-pill,
+form#edd_purchase_form [type="submit"].is-pill {
+  border-radius: 35px; }
+
+#edd-purchase-button.is-rounded,
+.edd-submit.is-rounded,
+[type="submit"].edd-submit.is-rounded,
+form#edd_purchase_form [type="submit"].is-rounded {
+  border-radius: 4px; }
+
+#edd-purchase-button.is-fullwidth,
+.edd-submit.is-fullwidth,
+[type="submit"].edd-submit.is-fullwidth,
+form#edd_purchase_form [type="submit"].is-fullwidth {
+  max-width: none;
+  width: 100%; }
+
+#edd-purchase-button.is-fullwidth.is-pill,
+.edd-submit.is-fullwidth.is-pill,
+[type="submit"].edd-submit.is-fullwidth.is-pill,
+form#edd_purchase_form [type="submit"].is-fullwidth.is-pill {
+  padding-left: 35px;
+  padding-right: 35px; }
+
+#edd-purchase-button.uix-btn__size--tiny,
+.edd-submit.uix-btn__size--tiny,
+[type="submit"].edd-submit.uix-btn__size--tiny,
+form#edd_purchase_form [type="submit"].uix-btn__size--tiny {
+  font-size: 0.75rem;
+  padding: .75rem 1.3rem; }
+
+#edd-purchase-button.uix-btn__size--s,
+.edd-submit.uix-btn__size--s,
+[type="submit"].edd-submit.uix-btn__size--s,
+form#edd_purchase_form [type="submit"].uix-btn__size--s {
+  font-size: 0.875rem;
+  padding: .8rem 1.5rem; }
+
+#edd-purchase-button.uix-btn__size--m,
+.edd-submit.uix-btn__size--m,
+[type="submit"].edd-submit.uix-btn__size--m,
+form#edd_purchase_form [type="submit"].uix-btn__size--m {
+  font-size: 1rem;
+  padding: 1rem 2.5rem; }
+
+#edd-purchase-button.uix-btn__size--l,
+.edd-submit.uix-btn__size--l,
+[type="submit"].edd-submit.uix-btn__size--l,
+form#edd_purchase_form [type="submit"].uix-btn__size--l {
+  font-size: 1.375rem;
+  padding: 1.25rem 5rem; }
+
+#edd-purchase-button.uix-btn__bg--primary,
+.edd-submit.uix-btn__bg--primary,
+[type="submit"].edd-submit.uix-btn__bg--primary,
+form#edd_purchase_form [type="submit"].uix-btn__bg--primary {
+  border-color: #EC5E79; }
+
 .edd-custom-btn {
   min-width: 100px !important;
   padding: .7em 1.25em !important;
@@ -12204,7 +12329,7 @@ ul.edd_purchase_receipt_files li {
   position: absolute;
   font-family: 'Font Awesome 5 Free';
   font-weight: 600;
-  transform: translate(-28px, 7px); }
+  transform: translate(-28px, 0); }
 
 .edd-custom-download-text:after {
   content: '';
