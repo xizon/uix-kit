@@ -103,6 +103,59 @@ form.edd_download_purchase_form .edd_price {
 	padding-left: 1.25em;
 }
 
+#edd-purchase-button, 
+.edd-submit, 
+[type="submit"].edd-submit,
+form#edd_purchase_form [type="submit"] {
+
+	&.is-pill {
+		border-radius: 35px;
+	}
+	
+	&.is-rounded {
+		border-radius: 4px;
+	}
+	
+	&.is-fullwidth {
+		max-width: none;
+		width: 100%;
+	}
+	&.is-fullwidth.is-pill {
+		padding-left: 35px;
+		padding-right: 35px;
+	}
+
+	
+	
+	&.uix-btn__size--tiny {
+		font-size: 0.75rem;
+		padding: .75rem 1.3rem;
+	}
+
+
+	&.uix-btn__size--s {
+		font-size: 0.875rem;
+		padding: .8rem 1.5rem;
+	}
+
+	&.uix-btn__size--m {
+		font-size: 1rem;
+		padding: 1rem 2.5rem;
+	}
+
+	&.uix-btn__size--l {
+		font-size: 1.375rem;
+		padding: 1.25rem 5rem;
+	}
+	
+
+	&.uix-btn__bg--primary {
+		border-color: $btn-gradient-color1;
+	}
+
+	
+}
+	
 .edd-custom-btn {
 	min-width: 100px !important;
 	padding: .7em 1.25em !important;
@@ -228,7 +281,7 @@ ul {
 		position: absolute;
 		font-family: 'Font Awesome 5 Free';
 		font-weight: 600;
-		transform: translate(-28px, 7px);
+		transform: translate(-28px, 0);
 	}
 	&:after {
 		content: '';
