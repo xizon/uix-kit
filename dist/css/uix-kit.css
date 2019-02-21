@@ -10994,9 +10994,18 @@ Style with support for rainbow parens
   font-size: 0.875rem;
   line-height: 1.2;
   position: relative;
-  border: 1px solid rgba(0, 0, 0, 0.02); }
+  border: 1px solid rgba(0, 0, 0, 0.02);
+  position: relative; }
   .uix-striking-msg i:first-child {
-    margin-right: .5rem; }
+    margin-right: .5rem;
+    font-size: 1rem;
+    vertical-align: top; }
+    .uix-striking-msg i:first-child ~ span {
+      padding-left: .2rem;
+      display: inline-block;
+      width: calc(100% - 1.5rem); }
+  .uix-striking-msg.uix-striking-msg--inline {
+    display: inline-block; }
   .uix-striking-msg.uix-striking-msg--hasarrow::before, .uix-striking-msg.uix-striking-msg--hasarrow::after {
     content: '';
     position: absolute;

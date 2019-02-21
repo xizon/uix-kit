@@ -1187,6 +1187,9 @@ pre.prettyprint {
 .uix-striking-msg i:first-child {
   margin-right: auto;
   margin-left: .5rem; }
+  .uix-striking-msg i:first-child ~ span {
+    padding-left: auto;
+    padding-right: .2rem; }
 
 .uix-striking-msg.uix-striking-msg--hasarrow::before, .uix-striking-msg.uix-striking-msg--hasarrow::after {
   right: auto;

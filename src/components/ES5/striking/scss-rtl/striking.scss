@@ -9,7 +9,15 @@ $uix-striking-border-color: rgba(0,0,0,.02);
 	i:first-child {
 		margin-right: auto;
 		margin-left: .5rem;
+		
+		~ span {
+			padding-left: auto;
+			padding-right: .2rem;
+		}	
+		
 	}
+	
+	
 	
 	&.uix-striking-msg--hasarrow::before,
 	&.uix-striking-msg--hasarrow::after {

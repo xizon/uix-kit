@@ -12,10 +12,27 @@ $uix-striking-border-color: rgba(0,0,0,.02);
 	line-height: 1.2;
 	position: relative;
 	border: 1px solid #{$uix-striking-border-color};
+	position: relative;
 	
 	i:first-child {
 		margin-right: .5rem;
+		font-size: 1rem;
+		vertical-align: top;
+		
+		~ span {
+			padding-left: .2rem;
+			display: inline-block;
+			width: calc(100% - 1.5rem);
+		}
 	}
+	
+	
+	
+	
+	&.uix-striking-msg--inline {
+		display: inline-block;
+	}
+	
 	
 	&.uix-striking-msg--hasarrow::before,
 	&.uix-striking-msg--hasarrow::after {
