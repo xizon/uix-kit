@@ -9,9 +9,10 @@
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
+	
 
     APP.STICKY_EL               = APP.STICKY_EL || {};
-	APP.STICKY_EL.version       = '0.0.1';
+	APP.STICKY_EL.version       = '0.0.2';
     APP.STICKY_EL.pageLoaded    = function() {
 
 		var $window      = $( window ),
@@ -26,21 +27,30 @@ APP = ( function ( APP, $, window, document ) {
 				dynamicTop  = parseFloat( scrollTop + window.innerHeight ),
 				targetTop   = parseFloat( $( document ).height() - 200 );
 
+		
 			//Detecting when user scrolls to bottom of div
 			if ( dynamicTop >= targetTop ) {
 				
+					$( '.js-uix-sticky-el.active' )
+						  .css( {
+							  'top'  : parseFloat( topSpacing - (dynamicTop - targetTop) ) + 'px'
+						  } );	
 				
-				$( '.stick-widget.sticky' )
-					  .css( {
-						  'top'  : parseFloat( topSpacing - (dynamicTop - targetTop) ) + 'px'
-					  } );
+			} else {
+				
+				if ( $( '.js-uix-sticky-el.active' ).length > 0 && $( '.js-uix-sticky-el.active' ).position().top < topSpacing ) {
+					$( '.js-uix-sticky-el.active' )
+						  .css( {
+							  'top'  : topSpacing + 'px'
+						  } );	
+				}
 				
 			}
 
 
 		});	
 
-		var	waypoints = $( '.stick-widget' ).waypoint({
+		var	waypoints = $( '.js-uix-sticky-el' ).waypoint({
 
 		  handler: function( direction ) {
 
@@ -50,7 +60,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 			  $this
-				  .toggleClass( 'sticky', direction === 'down' )
+				  .toggleClass( 'active', direction === 'down' )
 				  .css( {
 					  'width': oWIdth + 'px',
 					  'top'  : topSpacing + 'px'
@@ -66,7 +76,7 @@ APP = ( function ( APP, $, window, document ) {
 		
 	
 			
-//		var	navMinTop    = $( '.stick-widget' ).offset().top + window.innerHeight/3,
+//		var	navMinTop    = $( '.js-uix-sticky-el' ).offset().top + window.innerHeight/3,
 //			navMaxTop    = parseFloat( $( document ).height() - $( '.uix-footer__container' ).height() ) - window.innerHeight/3;
 //
 //
@@ -76,9 +86,9 @@ APP = ( function ( APP, $, window, document ) {
 //
 //			//Detecting when user scrolls to bottom of div
 //			if ( spyTop > navMaxTop || spyTop < navMinTop ) {
-//				$( '.stick-widget' ).removeClass( 'act' );
+//				$( '.js-uix-sticky-el' ).removeClass( 'act' );
 //			} else {
-//				$( '.stick-widget' ).addClass( 'act' );
+//				$( '.js-uix-sticky-el' ).addClass( 'act' );
 //			}	
 //
 //

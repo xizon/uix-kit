@@ -19,7 +19,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.FORM               = APP.FORM || {};
-	APP.FORM.version       = '0.0.4';
+	APP.FORM.version       = '0.0.5';
     APP.FORM.documentReady = function( $ ) {
 
 		/* 
@@ -100,6 +100,42 @@ APP = ( function ( APP, $, window, document ) {
 			 ---------------------------
 			 */ 			
 			$( document ).customControlsLineEffInit();
+			
+			
+			/* 
+			 ---------------------------
+			 Custom Input Number
+			 ---------------------------
+			 */ 	
+			$( document ).on( 'click', '.uix-controls__number__btn--add', function( e ) {
+				
+				var $numberInput = $( this ).closest( '.uix-controls__number' ).find( 'input[type="number"]' ),
+					numberInputVal = parseInt( $numberInput.val() );
+				
+				if ( e.shiftKey ) {
+					numberInputVal += 10;
+				} else {
+					numberInputVal++;
+				}
+				$numberInput.val( numberInputVal );
+			});
+
+			$( document ).on( 'click', '.uix-controls__number__btn--remove', function( e ) {
+				
+				var $numberInput = $( this ).closest( '.uix-controls__number' ).find( 'input[type="number"]' ),
+					numberInputVal = parseInt( $numberInput.val() );
+				
+				
+				if ( numberInputVal > 11 && e.shiftKey ) {
+					numberInputVal -= 10;
+				} else if (numberInputVal > 1) {
+					numberInputVal--;
+				}
+				$numberInput.val( numberInputVal );
+			});
+
+			
+			
 			
 			/* 
 			 ---------------------------
@@ -675,6 +711,12 @@ APP = ( function ( APP, $, window, document ) {
 						
 					}
 					
+					//Custom Input Number
+					if ( $( this ).hasClass( 'uix-controls__number' ) ) {
+						$( this ).prepend( '<span class="uix-controls__bar"></span>' );
+					}
+					
+			
 
 					//Prevent the form from being initialized again
 					$( this ).data( 'exist', 1 );	

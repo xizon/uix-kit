@@ -27,7 +27,6 @@ APP = ( function ( APP, $, window, document ) {
             $( this ).attr( 'data-table', data );
         });
 		
-		
     };
 
     APP.components.documentReady.push( APP.TABLE.documentReady );

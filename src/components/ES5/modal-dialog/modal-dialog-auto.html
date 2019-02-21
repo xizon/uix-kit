@@ -1,0 +1,139 @@
+@@include('./src/components/ES5/_global/include-header.html')
+     
+  <body class="page">
+  
+  
+          
+    @@include('./src/components/ES5/_global/include-loader.html')
+    @@include('./src/components/ES5/_global/include-toggle-trigger.html')
+    
+    
+
+  
+    <div class="uix-wrapper">
+    
+        <!-- Header Area
+        ============================================= -->      
+        <header class="uix-header__container">
+            
+             <div class="uix-header">
+                 <div class="container">
+                 
+                        @@include('./src/components/ES5/_global/include-brand.html')
+                        
+                        @@include('./src/components/ES5/_global/include-menu.html')
+                        
+                        
+                        
+                        
+                  </div>
+                  <!-- .container end -->
+                  
+                  <div class="uix-clearfix"></div>
+             </div>
+        
+        </header>
+        <div class="uix-header__placeholder"></div>
+      
+    
+        
+        
+       <!-- Content 01  
+        ====================================================== -->
+        <section>
+            <div class="container uix-t-c">
+                    <div class="row">
+                        <div class="col-md-8 offset-md-2">
+                            <h2>Modal Dialog Automatically Open</h2>
+							<p>Use the following script to fire it.</p>
+				
+	
+<pre class="uix-precode uix-t-l"><label>JS</label><code>( function( $ ) {
+"use strict";
+	$( document ).ready( function() {
+		$(document).fireModalDialog({
+			id: 'modal-open-1',
+			height: false,
+			width: false,
+			speed: 500
+		});
+	} );
+} ) ( jQuery );</code>
+</pre>		                 
+          
+	
+<pre class="uix-precode uix-t-l"><label>HTML</label><code>&lt;div class=&quot;uix-modal-box&quot; id=&quot;modal-open-1&quot;&gt;
+	&lt;a href=&quot;javascript:void(0)&quot; class=&quot;uix-modal-box__close&quot;&gt;&lt;/a&gt;
+	&lt;div class=&quot;uix-modal-box__content&quot;&gt;
+		&lt;div&gt;
+			&lt;!-- ////////  content  begin //////// --&gt;
+&#x9;&#x9;&#x9;&#x9;&#x9;&lt;h2&gt;Holy Crap!!!&lt;/h2&gt;
+&#x9;&#x9;&#x9;&#x9;&#x9;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;
+			&lt;!-- ////////  content  end //////// --&gt;
+&#x9;&#x9;&#x9;&#x9;&lt;/div&gt;
+
+
+	&lt;/div&gt;
+&lt;/div&gt;</code>
+</pre>							
+
+                        </div>
+                    </div>
+                    <!-- .row end -->
+              
+                    
+            </div>
+            <!-- .container end -->
+ 
+        </section>
+        
+
+        
+        <!-- Modals
+        ============================================= --> 
+        <div class="uix-modal-box" id="modal-open-1">
+            <a href="javascript:void(0)" class="uix-modal-box__close"></a>
+            <div class="uix-modal-box__content">
+                <div>
+                    <!-- ////////  content  begin //////// -->
+					<h2>Holy Crap!!!</h2>
+					<p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p>
+                    <!-- ////////  content  end //////// -->
+				</div>
+
+
+            </div>
+        </div>
+        <!--  .uix-modal-box  end -->     
+    
+		
+		<script>
+
+		( function( $ ) {
+		"use strict";
+
+			$( document ).ready( function() {
+
+				$(document).fireModalDialog({
+					id: 'modal-open-1',
+					height: false,
+					width: false,
+					speed: 500
+				});
+
+			} );
+
+		} ) ( jQuery );
+		</script>	
+
+		
+
+        @@include('./src/components/ES5/_global/include-copyright.html')
+        
+        
+    </div>
+    <!-- .uix-wrapper end -->
+       
+       
+    @@include('./src/components/ES5/_global/include-footer.html')
+

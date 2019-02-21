@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.2.1
+ * ## Version             :  3.2.2
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  February 15, 2019
+ * ## Last Update         :  February 21, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -96,23 +96,24 @@
     78.Comments ( Synchronize to WordPress's class name )
     79.Editing Component
     80.Source Code
-    81.Striking
-    82.SVG Map
-    83.3D Background
-    84.3D Carousel
-    85.Tabs
-    86.Team Focus
-    87.Team Fullwidth (Style using the Side by Side List With Photo module)
-    88.Team Gird
-    89.Testimonials Carousel
-    90.Text effect
-    91.Timeline
-    92.ToolTip
-    93.Vertical Menu
-    94.Vertical Separator
-    95.Wave Background
-    96.3rd Party Plugins
-    97.WordPress Core ( Do not use prefix "uix-" )
+    81.Sticky Elements
+    82.Striking
+    83.SVG Map
+    84.3D Background
+    85.3D Carousel
+    86.Tabs
+    87.Team Focus
+    88.Team Fullwidth (Style using the Side by Side List With Photo module)
+    89.Team Gird
+    90.Testimonials Carousel
+    91.Text effect
+    92.Timeline
+    93.ToolTip
+    94.Vertical Menu
+    95.Vertical Separator
+    96.Wave Background
+    97.3rd Party Plugins
+    98.WordPress Core ( Do not use prefix "uix-" )
 
 
 */
@@ -282,6 +283,50 @@ code {
   padding: .1rem .4rem;
   white-space: nowrap; }
 
+pre {
+  background: #fff;
+  white-space: pre;
+  word-wrap: break-word;
+  overflow: auto;
+  padding: 0;
+  border-radius: 3px;
+  margin: 1rem 0; }
+  pre.uix-precode {
+    white-space: normal;
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+    position: relative;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08); }
+    pre.uix-precode label {
+      font-family: sans-serif;
+      font-weight: normal;
+      font-size: 0.8125rem;
+      position: absolute;
+      left: -5px;
+      top: 1rem;
+      text-align: center;
+      width: 60px;
+      user-select: none;
+      pointer-events: none;
+      color: #ddd; }
+    pre.uix-precode code {
+      font-family: "Inconsolata","Monaco","Consolas","Andale Mono","Bitstream Vera Sans Mono","Courier New",Courier,monospace;
+      display: block;
+      margin: 0 0 0 3rem;
+      padding: 1rem;
+      border-left: 1px solid #d9d9d9;
+      overflow-x: auto;
+      font-size: 0.8125rem;
+      line-height: 1.125rem;
+      color: #444;
+      background: #fff;
+      white-space: pre; }
+    pre.uix-precode.uix-precode--nolebel label {
+      display: none; }
+    pre.uix-precode.uix-precode--nolebel code {
+      margin: 0;
+      border: none; }
+
 /* ====================================================== 
    <!-- Brand -->                         
 /* ====================================================== */
@@ -381,14 +426,14 @@ ol.uix-list--normal,
 
 /*-- Noemal List Effect by Default --*/
 /* Compatible with  Uix Shortcodes (WordPress Plugin) and Block Button Link */
-.uix-list--normal a:not(.uix-sc-btn):not(.wp-block-button__link) {
+.uix-list--normal a:not(.uix-sc-btn):not(.wp-block-button__link):not(.uix-btn) {
   color: #EC5E79; }
 
 .uix-list--normal a:not(.uix-sc-btn):not(.wp-block-button__link):not(.uix-btn):hover {
   color: #E8588C;
   text-decoration: underline; }
 
-.uix-list--normal a:not(.uix-sc-btn):not(.wp-block-button__link):hover img {
+.uix-list--normal a:not(.uix-sc-btn):not(.wp-block-button__link):not(.uix-btn):hover img {
   text-decoration: none; }
 
 /* 
@@ -2390,9 +2435,6 @@ img.uix-alignfull,
   .uix-sidebar__container .widget {
     padding-bottom: 2.625rem;
     font-size: 0.875rem; }
-    .uix-sidebar__container .widget.sticky {
-      position: fixed;
-      top: 0; }
   .uix-sidebar__container .widget-title {
     margin: 0 0 0.875rem; }
 
@@ -2615,6 +2657,10 @@ img.uix-alignfull,
     border-radius: 50%; }
     .uix-social-btn.uix-social-btn--circle::after {
       border-radius: 50%; }
+  .uix-social-btn.uix-social-btn--rounded {
+    border-radius: 4px; }
+    .uix-social-btn.uix-social-btn--rounded::after {
+      border-radius: 4px; }
   .uix-social-btn.uix-social-btn--small {
     width: 2rem;
     height: 2rem;
@@ -2776,9 +2822,16 @@ img.uix-alignfull,
   border-color: #FF7500 !important;
   background-color: #FF7500 !important; }
 
+.uix-social-bg--weixin {
+  border-color: #50b674 !important;
+  background-color: #50b674 !important; }
+
+.uix-social-bg--qq {
+  border-color: #30a5dd !important;
+  background-color: #30a5dd !important; }
+
 .uix-social-bg--colourful {
   display: inline-block !important;
-  *display: inline !important;
   margin: .2em .5em !important; }
 
 .uix-social-bg--colourful {
@@ -2959,6 +3012,25 @@ table.uix-table,
     .uix-table table thead th {
       text-align: inherit;
       /* Required */ }
+      table.uix-table thead th.uix-t-r,
+      .uix-table table thead th.uix-t-r {
+        text-align: right; }
+      table.uix-table thead th.uix-t-l,
+      .uix-table table thead th.uix-t-l {
+        text-align: left; }
+      table.uix-table thead th.uix-t-c,
+      .uix-table table thead th.uix-t-c {
+        text-align: center; }
+      @media all and (max-width: 768px) {
+        table.uix-table thead th.uix-mobile-tc,
+        .uix-table table thead th.uix-mobile-tc {
+          text-align: center; }
+        table.uix-table thead th.uix-mobile-tl,
+        .uix-table table thead th.uix-mobile-tl {
+          text-align: left; }
+        table.uix-table thead th.uix-mobile-tr,
+        .uix-table table thead th.uix-mobile-tr {
+          text-align: right; } }
   table.uix-table tfoot,
   .uix-table table tfoot {
     border: 1px solid #d6d5d5; }
@@ -2968,14 +3040,14 @@ table.uix-table,
 
 /*-- Table Effect by Default --*/
 /* Compatible with  Uix Shortcodes (WordPress Plugin) and Block Button Link */
-.uix-table a:not(.uix-sc-btn):not(.wp-block-button__link) {
+.uix-table a:not(.uix-sc-btn):not(.wp-block-button__link):not(.uix-btn) {
   color: #EC5E79; }
 
 .uix-table a:not(.uix-sc-btn):not(.wp-block-button__link):not(.uix-btn):hover {
   color: #E8588C;
   text-decoration: underline; }
 
-.uix-table a:not(.uix-sc-btn):not(.wp-block-button__link):hover img {
+.uix-table a:not(.uix-sc-btn):not(.wp-block-button__link):not(.uix-btn):hover img {
   text-decoration: none; }
 
 @media all and (max-width: 768px) {
@@ -4851,7 +4923,6 @@ h6 {
 .uix-btn {
   display: inline-block;
   text-align: center;
-  min-width: 100px;
   margin: 0;
   border: none;
   background: none;
@@ -4871,7 +4942,7 @@ h6 {
     border-color: #e4e7ed !important;
     cursor: not-allowed !important;
     box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.2) !important; }
-  .uix-btn.active, .uix-btn.wait {
+  .uix-btn.wait {
     background-image: linear-gradient(-45deg, rgba(0, 0, 0, 0.15) 25%, transparent 25%, transparent 50%, rgba(0, 0, 0, 0.15) 50%, rgba(0, 0, 0, 0.15) 75%, transparent 75%, transparent) !important;
     background-size: 30px 30px !important;
     animation: uix-cssAnim--moveWaitingStripes 0.5s linear infinite !important;
@@ -5024,7 +5095,8 @@ h6 {
   box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(236, 94, 121, 0.2) 0px 15px 35px 0px;
   color: #fff; }
   .uix-btn__bg--primary.is-transparent {
-    background: none;
+    background-color: transparent;
+    background-image: linear-gradient(to right, #fff 0%, #fff 0%, #fff 0%);
     color: #EC5E79;
     box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.2); }
     .uix-btn__bg--primary.is-transparent:hover, .uix-controls__multi-sel > span.uix-btn__bg--primary.is-transparent.active:not(.uix-controls__bar) {
@@ -6644,10 +6716,11 @@ ol.uix-flexslider__control-paging {
  * 3. Group
  * 4. Custom Select
  * 5. Custom Radio, Toggle And Checkbox
- * 6. Multiple Selector
- * 7. Single Selector
- * 8. Search of Widget
- * 9. Date Picker (With Jquery UI Widget)
+ * 6. Custom Input Number
+ * 7. Multiple Selector
+ * 8. Single Selector
+ * 9. Search of Widget
+ * 10. Date Picker (With Jquery UI Widget)
 */
 /* 
  ---------------------------
@@ -6710,6 +6783,8 @@ ol.uix-flexslider__control-paging {
       width: 50%; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-fullwidth .uix-controls__bar {
     left: -6px; }
+  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__textarea .uix-controls__bar {
+    transform: translateY(-6px); }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) input:not([type="checkbox"]):not([type="radio"]) {
     border-radius: 0;
     /* Remove inner shadow from inputs on mobile iOS */
@@ -6729,6 +6804,8 @@ ol.uix-flexslider__control-paging {
     .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) input:not([type="checkbox"]):not([type="radio"]):focus {
       outline: none;
       border-color: #212121; }
+  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls--line input:not([type="checkbox"]):not([type="radio"]) {
+    padding-left: 0; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__short-s input:not([type="checkbox"]):not([type="radio"]) {
     width: 120px;
     margin-right: .5rem; }
@@ -6768,6 +6845,8 @@ ol.uix-flexslider__control-paging {
     .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) textarea:focus {
       outline: none;
       border-color: #212121; }
+  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls--line textarea {
+    padding-left: 0; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) button:not(.uix-btn) {
     cursor: pointer;
     padding: 0.75rem 0;
@@ -7484,7 +7563,48 @@ ol.uix-flexslider__control-paging {
 
 /* 
  ---------------------------
- 6. Multiple Selector
+ 6. Custom Input Number
+ ---------------------------
+ */
+.uix-controls__number input[type="number"]::-webkit-inner-spin-button,
+.uix-controls__number input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0; }
+
+.uix-controls__number input[type="number"] {
+  -moz-appearance: textfield;
+  font-family: 'Roboto', sans-serif; }
+
+.uix-controls__number input {
+  box-sizing: border-box; }
+
+.uix-controls__number .uix-controls__number__btn {
+  position: absolute;
+  height: 50%;
+  width: 27px;
+  border-left: 1px solid #dce4e8;
+  color: #dce4e8;
+  text-align: center;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+  right: 1px; }
+  .uix-controls__number .uix-controls__number__btn:hover, .uix-controls__number .uix-controls__multi-sel > span.uix-controls__number__btn.active:not(.uix-controls__bar) {
+    color: #333; }
+  .uix-controls__number .uix-controls__number__btn.uix-controls__number__btn--add {
+    top: 0;
+    border-radius: 0 4px 0 0;
+    border-bottom: 1px solid #dce4e8; }
+  .uix-controls__number .uix-controls__number__btn.uix-controls__number__btn--remove {
+    bottom: 0;
+    border-radius: 0 0 4px 0; }
+
+.uix-controls__number.uix-controls--line .uix-controls__number__btn {
+  border: none; }
+
+/* 
+ ---------------------------
+ 7. Multiple Selector
  ---------------------------
  */
 .uix-controls__multi-sel {
@@ -7532,7 +7652,7 @@ ol.uix-flexslider__control-paging {
 
 /* 
  ---------------------------
- 7. Single Selector
+ 8. Single Selector
  ---------------------------
  */
 .uix-controls__single-sel {
@@ -7573,7 +7693,7 @@ ol.uix-flexslider__control-paging {
 
 /* 
  ---------------------------
- 8. Search of Widget
+ 9. Search of Widget
  ---------------------------
  */
 .uix-search-box {
@@ -7609,7 +7729,7 @@ ol.uix-flexslider__control-paging {
 
 /* 
  ---------------------------
- 9. Date Picker (With Jquery UI Widget)
+ 10. Date Picker (With Jquery UI Widget)
  ---------------------------
  */
 /* jQuery UI - v1.12.1 - 2016-09-14
@@ -10858,6 +10978,13 @@ Style with support for rainbow parens
 
 /* Highlight Style */
 /* ====================================================== 
+   <!-- Sticky Elements --> 
+/* ====================================================== */
+.js-uix-sticky-el.active {
+  position: fixed;
+  top: 0; }
+
+/* ====================================================== 
    <!-- Striking --> 
 /* ====================================================== */
 .uix-striking-msg {
@@ -10866,9 +10993,26 @@ Style with support for rainbow parens
   display: block;
   font-size: 0.875rem;
   line-height: 1.2;
-  font-family: 'Source Sans Pro', sans-serif; }
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.02); }
   .uix-striking-msg i:first-child {
     margin-right: .5rem; }
+  .uix-striking-msg.uix-striking-msg--hasarrow::before, .uix-striking-msg.uix-striking-msg--hasarrow::after {
+    content: '';
+    position: absolute;
+    right: 100%;
+    border: solid transparent;
+    height: 0;
+    width: 0;
+    border-right-color: #fce8dc;
+    border-width: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1; }
+  .uix-striking-msg.uix-striking-msg--hasarrow::after {
+    border-right-color: rgba(0, 0, 0, 0.02);
+    border-width: 6px;
+    z-index: 0; }
   .uix-striking-msg.is-pill {
     border-radius: 35px; }
   .uix-striking-msg.is-rounded {
@@ -10876,21 +11020,31 @@ Style with support for rainbow parens
   .uix-striking-msg.uix-striking-msg--default {
     background-color: #fce8dc;
     box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.03), 0 5px 10px -7px rgba(252, 232, 220, 0.2); }
+    .uix-striking-msg.uix-striking-msg--default.uix-striking-msg--hasarrow::before {
+      border-right-color: #fce8dc; }
   .uix-striking-msg.uix-striking-msg--success {
     background-color: #80cf4b;
     box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.03), 0 5px 10px -7px rgba(128, 207, 75, 0.2);
     color: #fff; }
+    .uix-striking-msg.uix-striking-msg--success.uix-striking-msg--hasarrow::before {
+      border-right-color: #80cf4b; }
   .uix-striking-msg.uix-striking-msg--alert {
     background-color: #f59256;
     box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.03), 0 5px 10px -7px rgba(245, 146, 86, 0.2);
     color: #fff; }
+    .uix-striking-msg.uix-striking-msg--alert.uix-striking-msg--hasarrow::before {
+      border-right-color: #f59256; }
   .uix-striking-msg.uix-striking-msg--danger {
     background-color: #ec5e79;
     box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.03), 0 5px 10px -7px rgba(236, 94, 121, 0.2);
     color: #fff; }
+    .uix-striking-msg.uix-striking-msg--danger.uix-striking-msg--hasarrow::before {
+      border-right-color: #ec5e79; }
   .uix-striking-msg.uix-striking-msg--info {
     background-color: #d8f5fe;
     box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.03), 0 5px 10px -7px rgba(216, 245, 254, 0.2); }
+    .uix-striking-msg.uix-striking-msg--info.uix-striking-msg--hasarrow::before {
+      border-right-color: #d8f5fe; }
 
 /* ====================================================== 
    <!-- SVG Map -->     
@@ -12237,26 +12391,6 @@ form#edd_purchase_form [type="submit"].uix-btn__size--l {
 [type="submit"].edd-submit.uix-btn__bg--primary,
 form#edd_purchase_form [type="submit"].uix-btn__bg--primary {
   border-color: #EC5E79; }
-
-.edd-custom-btn {
-  min-width: 100px !important;
-  padding: .7em 1.25em !important;
-  border-radius: 0 !important;
-  font-size: 1em !important;
-  margin: .8em 1em 1em !important; }
-  .edd-custom-btn:active {
-    background-image: none !important; }
-  .edd-custom-btn i {
-    margin-right: 8px;
-    opacity: 0.75; }
-  .edd-custom-btn.green {
-    color: #FFF !important;
-    background: #5cb85c !important;
-    border-color: #4cae4c !important; }
-    .edd-custom-btn.green:hover, .uix-controls__multi-sel > span.edd-custom-btn.green.active:not(.uix-controls__bar), .edd-custom-btn.green:focus, .edd-custom-btn.green:active {
-      color: #FFF !important;
-      background: #47a447 !important;
-      border-color: #398439 !important; }
 
 .edd-terms-agreement,
 #edd_terms {

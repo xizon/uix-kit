@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.2.1
+ * ## Version             :  3.2.2
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  February 15, 2019
+ * ## Last Update         :  February 21, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -18,32 +18,35 @@
 	
 	1.Basic
     2.Brand
-    3.Header Area
-    4.Helper Classes
-    5.Basic Layout Styles
-    6.Mobile Menu
-    7.Modal Dialog
-    8.Navigation
-    9.Navs
-    10.Sidebar
-    11.Advanced Slider (Basic)
-    12.Advanced Slider (Special Effects)
-    13.Cards
-    14.Content Placeholder Animated
-    15.Dropdown Menu
-    16.Flexslider
-    17.Form
-    18.Cutom Light Box
-    19.Brands List
-    20.Bulleted List
-    21.Maintain Aspect Ratio List
-    22.Side by Side List
-    23.Ribbon
-    24.Comments
-    25.Source Code
-    26.ToolTip
-    27.Vertical Menu (RTL)
-    28.WordPress Core ( Do not use prefix "uix-" )
+    3.Bullet List
+    4.Header Area
+    5.Helper Classes
+    6.Basic Layout Styles
+    7.Mobile Menu
+    8.Modal Dialog
+    9.Navigation
+    10.Navs
+    11.Sidebar
+    12.Table
+    13.Advanced Slider (Basic)
+    14.Advanced Slider (Special Effects)
+    15.Cards
+    16.Content Placeholder Animated
+    17.Dropdown Menu
+    18.Flexslider
+    19.Form
+    20.Cutom Light Box
+    21.Brands List
+    22.Bulleted List
+    23.Maintain Aspect Ratio List
+    24.Side by Side List
+    25.Ribbon
+    26.Comments
+    27.Source Code
+    28.Striking
+    29.ToolTip
+    30.Vertical Menu (RTL)
+    31.WordPress Core ( Do not use prefix "uix-" )
 
 
 */
@@ -117,20 +120,6 @@ th,
 td {
   text-align: right; }
 
-ul.uix-list--normal,
-ol.uix-list--normal {
-  padding-left: auto;
-  padding-right: 0.875rem; }
-
-.uix-list--normal ul,
-.uix-list--normal ol {
-  padding-left: auto;
-  padding-right: 0.875rem; }
-
-.uix-table table th,
-table.uix-table th {
-  text-align: right; }
-
 .wp-block-quote,
 blockquote {
   border-left-width: 1px !important;
@@ -142,11 +131,136 @@ blockquote {
     margin-right: auto;
     margin-left: 0.21875rem; }
 
+pre.uix-precode label {
+  left: auto;
+  right: -5px; }
+
+pre.uix-precode code {
+  margin: 0 3rem 0 0;
+  border-left: none;
+  border-right: 1px solid #d9d9d9; }
+
 /* ====================================================== 
    <!-- Brand -->                         
 /* ====================================================== */
 .uix-brand {
   float: right; }
+
+/* ====================================================== 
+   <!-- Bullet List -->      
+/* ====================================================== */
+/*
+ * 1. Normal List Styling
+ * 2. Normal Numbers Ordered List
+ * 3. Custom Circle Icons Ordered List
+ * 4. Big Numbers Ordered List
+ * 5. Step Timeline By Numbers
+*/
+/* 
+ ---------------------------
+ 1. Normal List Styling
+ ---------------------------
+ */
+ol.uix-list--normal,
+ul.uix-list--normal,
+.uix-list--normal ul,
+.uix-list--normal ol {
+  padding-left: auto;
+  padding-right: 0.875rem; }
+
+/* 
+ ---------------------------
+ 2. Normal Numbers Ordered List
+ ---------------------------
+ */
+ol.uix-list--numbered,
+.uix-list--numbered ol {
+  margin-left: auto;
+  margin-right: 1rem; }
+  ol.uix-list--numbered > li,
+  .uix-list--numbered ol > li {
+    margin-left: auto;
+    margin-right: .5rem; }
+  ol.uix-list--numbered > li::before,
+  .uix-list--numbered ol > li::before {
+    left: auto;
+    right: -2.25em;
+    margin-right: auto;
+    margin-left: 0.5em; }
+
+/* 
+ ---------------------------
+ 3. Custom Circle Icons Ordered List
+ ---------------------------
+ */
+ol.uix-list--circle,
+ul.uix-list--circle,
+.uix-list--circle ol,
+.uix-list--circle ul {
+  margin-left: auto;
+  margin-right: 1rem; }
+  ol.uix-list--circle > li,
+  ul.uix-list--circle > li,
+  .uix-list--circle ol > li,
+  .uix-list--circle ul > li {
+    margin-left: auto;
+    margin-right: 1rem; }
+  ol.uix-list--circle > li::before,
+  ul.uix-list--circle > li::before,
+  .uix-list--circle ol > li::before,
+  .uix-list--circle ul > li::before {
+    left: auto;
+    right: -1.5em; }
+
+/* 
+ ---------------------------
+ 4. Big Numbers Ordered List
+ ---------------------------
+ */
+ol.uix-list--numbered-large li,
+.uix-list--numbered-large ol li {
+  padding-left: auto;
+  padding-right: 2.5rem;
+  margin-left: auto;
+  margin-right: 1.2rem; }
+  ol.uix-list--numbered-large li::before,
+  .uix-list--numbered-large ol li::before {
+    margin-left: auto;
+    margin-right: -3.5rem; }
+
+ol.uix-list--numbered-large.uix-list--numbered-bg li,
+.uix-list--numbered-large.uix-list--numbered-bg ol li {
+  margin-right: 0;
+  padding-right: 4.5rem; }
+  ol.uix-list--numbered-large.uix-list--numbered-bg li p,
+  .uix-list--numbered-large.uix-list--numbered-bg ol li p {
+    padding-right: auto;
+    padding-left: 2rem; }
+  ol.uix-list--numbered-large.uix-list--numbered-bg li::before,
+  .uix-list--numbered-large.uix-list--numbered-bg ol li::before {
+    margin-right: -4rem; }
+
+/* 
+ ---------------------------
+ 5. Step Timeline By Numbers
+ ---------------------------
+ */
+.uix-list--numbered-step {
+  margin-left: auto;
+  margin-right: 1rem; }
+  .uix-list--numbered-step li {
+    padding: 0 3.75rem 1.5rem 0;
+    border-left: none;
+    border-right: 2px solid #333; }
+    .uix-list--numbered-step li::before {
+      left: auto;
+      right: -26px; }
+    .uix-list--numbered-step li:last-child {
+      border-right: none; }
+
+@media all and (max-width: 768px) {
+  .uix-list--numbered-step li {
+    padding-right: 2.5rem; } }
 
 /* ====================================================== 
    <!-- Header Area -->                                          
@@ -449,6 +563,56 @@ blockquote {
 .uix-iso-grid-widget .uix-iso-grid-recent-item .uix-sidebar__posts-img__desc {
   float: right; }
 
+/* ====================================================== 
+   <!-- Table -->      
+/* ====================================================== */
+/*
+ * 1. Generic
+ * 2. Table Sorter
+*/
+/* 
+ ---------------------------
+ 1. Generic
+ ---------------------------
+ */
+table.uix-table th,
+table.uix-table td,
+.uix-table table th,
+.uix-table table td {
+  border-left: none;
+  border-right: 1px solid #d6d5d5; }
+
+table.uix-table thead th.uix-t-r,
+.uix-table table thead th.uix-t-r {
+  text-align: left; }
+
+table.uix-table thead th.uix-t-l,
+.uix-table table thead th.uix-t-l {
+  text-align: right; }
+
+@media all and (max-width: 768px) {
+  table.uix-table thead th.uix-mobile-tl,
+  .uix-table table thead th.uix-mobile-tl {
+    text-align: right; }
+  table.uix-table thead th.uix-mobile-tr,
+  .uix-table table thead th.uix-mobile-tr {
+    text-align: left; } }
+
+@media all and (max-width: 768px) {
+  table.uix-table.is-responsive tbody td::before,
+  .uix-table.is-responsive table tbody td::before {
+    border-left: 1px solid #d6d5d5;
+    margin-left: 0.5rem; } }
+
+/* 
+ ---------------------------
+ 2. Table Sorter
+ ---------------------------
+ */
+.uix-table-sorter::after {
+  margin-left: auto;
+  margin-right: .5rem; }
+
 /******/
 /******/
 /* pages */
@@ -566,9 +730,10 @@ blockquote {
  * 3. Group
  * 4. Custom Select
  * 5. Custom Radio, Toggle And Checkbox
- * 6. Multiple Selector
- * 7. Single Selector
- * 8. Search of Widget
+ * 6. Custom Input Number
+ * 7. Multiple Selector
+ * 8. Single Selector
+ * 9. Search of Widget
 */
 /* 
  ---------------------------
@@ -863,7 +1028,18 @@ blockquote {
 
 /* 
  ---------------------------
- 6. Multiple Selector
+ 6. Custom Input Number
+ ---------------------------
+ */
+.uix-controls__number .uix-controls__number__btn {
+  border-left: none;
+  border-right: 1px solid #dce4e8;
+  right: auto;
+  left: 1px; }
+
+/* 
+ ---------------------------
+ 7. Multiple Selector
  ---------------------------
  */
 .uix-controls__multi-sel {
@@ -879,7 +1055,7 @@ blockquote {
 
 /* 
  ---------------------------
- 7. Single Selector
+ 8. Single Selector
  ---------------------------
  */
 .uix-controls__single-sel {
@@ -892,7 +1068,7 @@ blockquote {
 
 /* 
  ---------------------------
- 8. Search of Widget
+ 9. Search of Widget
  ---------------------------
  */
 .uix-search-box .uix-search-box__submit {
@@ -1004,6 +1180,37 @@ pre.prettyprint {
 #uix-view-source {
   right: auto;
   left: 20px; }
+
+/* ====================================================== 
+   <!-- Striking --> 
+/* ====================================================== */
+.uix-striking-msg i:first-child {
+  margin-right: auto;
+  margin-left: .5rem; }
+
+.uix-striking-msg.uix-striking-msg--hasarrow::before, .uix-striking-msg.uix-striking-msg--hasarrow::after {
+  right: auto;
+  left: 100%;
+  border-right-color: transparent;
+  border-left-color: #fce8dc; }
+
+.uix-striking-msg.uix-striking-msg--hasarrow::after {
+  border-left-color: rgba(0, 0, 0, 0.02); }
+
+.uix-striking-msg.uix-striking-msg--default.uix-striking-msg--hasarrow::before {
+  border-left-color: #fce8dc; }
+
+.uix-striking-msg.uix-striking-msg--success.uix-striking-msg--hasarrow::before {
+  border-left-color: #80cf4b; }
+
+.uix-striking-msg.uix-striking-msg--alert.uix-striking-msg--hasarrow::before {
+  border-left-color: #f59256; }
+
+.uix-striking-msg.uix-striking-msg--danger.uix-striking-msg--hasarrow::before {
+  border-left-color: #ec5e79; }
+
+.uix-striking-msg.uix-striking-msg--info.uix-striking-msg--hasarrow::before {
+  border-left-color: #d8f5fe; }
 
 /* ====================================================== 
    <!-- ToolTip -->       

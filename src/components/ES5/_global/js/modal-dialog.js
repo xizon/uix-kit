@@ -8,7 +8,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.MODAL_DIALOG               = APP.MODAL_DIALOG || {};
-	APP.MODAL_DIALOG.version       = '0.0.6';
+	APP.MODAL_DIALOG.version       = '0.0.7';
     APP.MODAL_DIALOG.documentReady = function( $ ) {
 
 		//Get the -webkit-transition-duration property
@@ -40,6 +40,7 @@ APP = ( function ( APP, $, window, document ) {
 
 		};
 		
+		//Delay Time when Full Screen Effect is fired.
 		var modalSpeed = getTransitionDuration( $( '.uix-modal-box:first' )[0] );
 		
 		
@@ -54,73 +55,23 @@ APP = ( function ( APP, $, window, document ) {
 		*/
 		
 	
+		//Add modal mask to stage
 		if ( $( '.uix-modal-mask' ).length == 0 ) {
 			$( 'body' ).prepend( '<div class="uix-modal-mask"></div>' );
 		}
+		
+
 	    
 		$( document ).on( 'click.MODAL_DIALOG', '[data-modal-id]', function() {
-			var dataID = $( this ).data( 'modal-id' ),
-			    dataH  = $( this ).data( 'modal-height' ),
-				dataW  = $( this ).data( 'modal-width' ),
-				$obj   = $( '.uix-modal-box#'+dataID );
-			
-			// Initializate modal
-			$( this ).attr( 'href', 'javascript:void(0)' );
-			$obj.find( '.uix-modal-box__content' ).addClass( 'js-uix-no-fullscreen' );
-			
-			
-			if ( $( this ).data( 'video-win' ) ) {
-				$obj.find( '.uix-modal-box__content > div' ).css( 'overflow-y', 'hidden' );
-			}
-			
-			
-			if ( $obj.length > 0 ) {
-				
-				
-				// Locks the page
-				$.scrollLock( true );
-					
+		
+			$( document ).fireModalDialog( {
+				id        : $( this ).data( 'modal-id' ),
+				height    : $( this ).data( 'modal-height' ),
+				width     : $( this ).data( 'modal-width' ),
+				speed     : modalSpeed,
+				btn       : $( this )
+			});
 
-				if ( typeof dataH != typeof undefined && dataH != '' ) {
-					$obj.css( {'height': dataH } );
-				}
-				
-				if ( typeof dataW != typeof undefined && dataW != '' ) {
-					$obj.css( {'width': dataW } );
-				}
-				
-				TweenMax.set( '.uix-modal-mask', {
-					css: {
-						opacity : 0,
-						display : 'none'
-					},
-					onComplete : function() {
-						
-						TweenMax.to( this.target, 0.3, {
-							css: {
-								opacity    : 1,
-								display    : 'block'
-							}
-						});		
-						
-					}
-				});
-
-				$obj.addClass( 'active' );	
-			}
-			
-			if ( $obj.hasClass( 'is-fullscreen' ) ) {
-				setTimeout( function() {
-
-					if ( !$obj.hasClass( 'is-video' ) ) {
-						$obj.find( '.uix-modal-box__content > div' ).css( 'overflow-y', 'scroll' );
-					}
-					
-				}, modalSpeed );
-				
-			}
-			
-			
 			return false;
 		
 		});
@@ -165,5 +116,118 @@ APP = ( function ( APP, $, window, document ) {
 }( APP, jQuery, window, document ) );
 
 
+		
+
+/*
+ * Fire Modal Dialog
+ *
+ * @param  {String} id                   - Modal's unique identifier.
+ * @param  {Number|String} height        - Custom modal height whick need a unit string. 
+										   This attribute "data-modal-height" may not exist. Such as: 200px
+ * @param  {Number|String} width         - Custom modal width whick need a unit string. 
+										   This attribute "data-modal-height" may not exist. Such as: 200px
+ * @param  {Number} speed                - Delay Time when Full Screen Effect is fired.   
+ * @param  {Object} btn                  - Link or button that fires an event.
+ * @return {Void}
+ */	
+( function ( $ ) {
+    $.fn.fireModalDialog = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+			id        : 'demo',
+			height    : false,
+			width     : false,
+			speed     : 500,
+			btn       : false
+        }, options );
+		
+ 
+        this.each( function() {
+
+			if ( settings.id == '' ) return false;
+			
+			
+	
+			//Add modal mask to stage
+			if ( $( '.uix-modal-mask' ).length == 0 ) {
+				$( 'body' ).prepend( '<div class="uix-modal-mask"></div>' );
+			}
+			$.when( $( '.uix-modal-mask' ).length > 0 ).then( function() {
+
+				var dataID  = settings.id,
+					dataH   = settings.height,
+					dataW   = settings.width,
+					linkBtn = settings.btn,
+					$obj   = $( '.uix-modal-box#'+dataID );
+
+				// Initializate modal
+				if ( linkBtn ) {
+					linkBtn.attr( 'href', 'javascript:void(0)' );
+					$obj.find( '.uix-modal-box__content' ).addClass( 'js-uix-no-fullscreen' );
 
 
+					if ( linkBtn.data( 'video-win' ) ) {
+						$obj.find( '.uix-modal-box__content > div' ).css( 'overflow-y', 'hidden' );
+					}
+
+				}
+
+
+
+				if ( $obj.length > 0 ) {
+
+
+					// Locks the page
+					$.scrollLock( true );
+
+
+					if ( typeof dataH != typeof undefined && dataH != '' && dataH ) {
+						$obj.css( {'height': dataH } );
+					}
+
+					if ( typeof dataW != typeof undefined && dataW != '' && dataW ) {
+						$obj.css( {'width': dataW } );
+					}
+
+					TweenMax.set( '.uix-modal-mask', {
+						css: {
+							opacity : 0,
+							display : 'none'
+						},
+						onComplete : function() {
+
+							TweenMax.to( this.target, 0.3, {
+								css: {
+									opacity    : 1,
+									display    : 'block'
+								}
+							});		
+
+						}
+					});
+
+					$obj.addClass( 'active' );	
+				}
+
+				if ( $obj.hasClass( 'is-fullscreen' ) ) {
+					setTimeout( function() {
+
+						if ( !$obj.hasClass( 'is-video' ) ) {
+							$obj.find( '.uix-modal-box__content > div' ).css( 'overflow-y', 'scroll' );
+						} else {
+							$obj.find( '.uix-modal-box__content > div' ).css( 'overflow-y', 'hidden' );
+						}
+
+					}, settings.speed );
+
+				}	
+
+			});
+			
+			
+		});
+ 
+    };
+ 
+}( jQuery ));

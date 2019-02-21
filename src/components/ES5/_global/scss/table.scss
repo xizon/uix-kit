@@ -53,6 +53,35 @@ table.uix-table,
 		
 		th {
 			text-align: inherit; /* Required */
+			
+			&.uix-t-r {
+				text-align: right;
+			}
+
+			&.uix-t-l {
+				text-align: left;
+			}
+
+
+			&.uix-t-c {
+				text-align: center;
+			}
+
+			@media all and (max-width: 768px) {
+				&.uix-mobile-tc {
+					text-align: center;
+				}	
+
+				&.uix-mobile-tl {
+					text-align: left;
+				}	
+
+				&.uix-mobile-tr {
+					text-align: right;
+				}
+
+			}	
+			
 		}
 	}
 
@@ -72,7 +101,7 @@ table.uix-table,
 
 /*-- Table Effect by Default --*/
 /* Compatible with  Uix Shortcodes (WordPress Plugin) and Block Button Link */
-.uix-table a:not(.uix-sc-btn):not(.wp-block-button__link) {
+.uix-table a:not(.uix-sc-btn):not(.wp-block-button__link):not(.uix-btn) {
     color: $highlight-color1;
 }
 
@@ -81,7 +110,7 @@ table.uix-table,
     text-decoration: underline;
 }
 
-.uix-table a:not(.uix-sc-btn):not(.wp-block-button__link):hover img {
+.uix-table a:not(.uix-sc-btn):not(.wp-block-button__link):not(.uix-btn):hover img {
     text-decoration: none;
 }
 

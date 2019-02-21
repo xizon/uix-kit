@@ -13,25 +13,6 @@ td {
 }
 
 
-ul.uix-list--normal, 
-ol.uix-list--normal {
-	  padding-left: auto;
-	  padding-right: 0.875rem;
-}
-
-.uix-list--normal {
-	ul, 
-	ol {
-		padding-left: auto;
-		padding-right: 0.875rem;
-	}
-}
-
-.uix-table table th, 
-table.uix-table th {
-    text-align: right;
-}
-
 .wp-block-quote,
 blockquote {
 	border-left-width: 1px !important;
@@ -46,5 +27,28 @@ blockquote {
 }
 
 
+
+
+pre {
+	
+	&.uix-precode {
+		
+		label {
+			
+			left: auto;
+			right: -5px;
+			
+		}
+		code {
+			margin: 0 3rem 0 0;
+			border-left: none;
+			border-right: 1px solid #d9d9d9;
+			
+		}
+		
+	}
+  
+
+}
 
 

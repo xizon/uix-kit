@@ -201,15 +201,15 @@ var UIX_GUID = UIX_GUID || (function() {
  * Logs out the version and renderer information for this running instance of Uix Kit.
  *************************************
  */
-( function UIX_HELLO() { 
-    if ( navigator.userAgent.toLowerCase().indexOf( 'chrome' ) > -1 ) {
-        var args = ['\n %c Made with Uix Kit by https://github.com/xizon/uix-kit', 'color: #333; border: 1px solid; padding: 10px;'];
-
-        window.console.log.apply(console, args);
-    } else if (window.console) {
-        window.console.log( 'Made with Uix Kit by https://github.com/xizon/uix-kit' );
-    }
-} ());
+//( function UIX_HELLO() { 
+//    if ( navigator.userAgent.toLowerCase().indexOf( 'chrome' ) > -1 ) {
+//        var args = ['\n %c Made with Uix Kit by https://github.com/xizon/uix-kit', 'color: #333; border: 1px solid; padding: 10px;'];
+//
+//        window.console.log.apply(console, args);
+//    } else if (window.console) {
+//        window.console.log( 'Made with Uix Kit by https://github.com/xizon/uix-kit' );
+//    }
+//} ());
 
 
 
@@ -1525,7 +1525,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.MODAL_DIALOG               = APP.MODAL_DIALOG || {};
-	APP.MODAL_DIALOG.version       = '0.0.6';
+	APP.MODAL_DIALOG.version       = '0.0.7';
     APP.MODAL_DIALOG.documentReady = function( $ ) {
 
 		//Get the -webkit-transition-duration property
@@ -1557,6 +1557,7 @@ APP = ( function ( APP, $, window, document ) {
 
 		};
 		
+		//Delay Time when Full Screen Effect is fired.
 		var modalSpeed = getTransitionDuration( $( '.uix-modal-box:first' )[0] );
 		
 		
@@ -1571,73 +1572,23 @@ APP = ( function ( APP, $, window, document ) {
 		*/
 		
 	
+		//Add modal mask to stage
 		if ( $( '.uix-modal-mask' ).length == 0 ) {
 			$( 'body' ).prepend( '<div class="uix-modal-mask"></div>' );
 		}
+		
+
 	    
 		$( document ).on( 'click.MODAL_DIALOG', '[data-modal-id]', function() {
-			var dataID = $( this ).data( 'modal-id' ),
-			    dataH  = $( this ).data( 'modal-height' ),
-				dataW  = $( this ).data( 'modal-width' ),
-				$obj   = $( '.uix-modal-box#'+dataID );
-			
-			// Initializate modal
-			$( this ).attr( 'href', 'javascript:void(0)' );
-			$obj.find( '.uix-modal-box__content' ).addClass( 'js-uix-no-fullscreen' );
-			
-			
-			if ( $( this ).data( 'video-win' ) ) {
-				$obj.find( '.uix-modal-box__content > div' ).css( 'overflow-y', 'hidden' );
-			}
-			
-			
-			if ( $obj.length > 0 ) {
-				
-				
-				// Locks the page
-				$.scrollLock( true );
-					
+		
+			$( document ).fireModalDialog( {
+				id        : $( this ).data( 'modal-id' ),
+				height    : $( this ).data( 'modal-height' ),
+				width     : $( this ).data( 'modal-width' ),
+				speed     : modalSpeed,
+				btn       : $( this )
+			});
 
-				if ( typeof dataH != typeof undefined && dataH != '' ) {
-					$obj.css( {'height': dataH } );
-				}
-				
-				if ( typeof dataW != typeof undefined && dataW != '' ) {
-					$obj.css( {'width': dataW } );
-				}
-				
-				TweenMax.set( '.uix-modal-mask', {
-					css: {
-						opacity : 0,
-						display : 'none'
-					},
-					onComplete : function() {
-						
-						TweenMax.to( this.target, 0.3, {
-							css: {
-								opacity    : 1,
-								display    : 'block'
-							}
-						});		
-						
-					}
-				});
-
-				$obj.addClass( 'active' );	
-			}
-			
-			if ( $obj.hasClass( 'is-fullscreen' ) ) {
-				setTimeout( function() {
-
-					if ( !$obj.hasClass( 'is-video' ) ) {
-						$obj.find( '.uix-modal-box__content > div' ).css( 'overflow-y', 'scroll' );
-					}
-					
-				}, modalSpeed );
-				
-			}
-			
-			
 			return false;
 		
 		});
@@ -1682,8 +1633,121 @@ APP = ( function ( APP, $, window, document ) {
 }( APP, jQuery, window, document ) );
 
 
+		
+
+/*
+ * Fire Modal Dialog
+ *
+ * @param  {String} id                   - Modal's unique identifier.
+ * @param  {Number|String} height        - Custom modal height whick need a unit string. 
+										   This attribute "data-modal-height" may not exist. Such as: 200px
+ * @param  {Number|String} width         - Custom modal width whick need a unit string. 
+										   This attribute "data-modal-height" may not exist. Such as: 200px
+ * @param  {Number} speed                - Delay Time when Full Screen Effect is fired.   
+ * @param  {Object} btn                  - Link or button that fires an event.
+ * @return {Void}
+ */	
+( function ( $ ) {
+    $.fn.fireModalDialog = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+			id        : 'demo',
+			height    : false,
+			width     : false,
+			speed     : 500,
+			btn       : false
+        }, options );
+		
+ 
+        this.each( function() {
+
+			if ( settings.id == '' ) return false;
+			
+			
+	
+			//Add modal mask to stage
+			if ( $( '.uix-modal-mask' ).length == 0 ) {
+				$( 'body' ).prepend( '<div class="uix-modal-mask"></div>' );
+			}
+			$.when( $( '.uix-modal-mask' ).length > 0 ).then( function() {
+
+				var dataID  = settings.id,
+					dataH   = settings.height,
+					dataW   = settings.width,
+					linkBtn = settings.btn,
+					$obj   = $( '.uix-modal-box#'+dataID );
+
+				// Initializate modal
+				if ( linkBtn ) {
+					linkBtn.attr( 'href', 'javascript:void(0)' );
+					$obj.find( '.uix-modal-box__content' ).addClass( 'js-uix-no-fullscreen' );
 
 
+					if ( linkBtn.data( 'video-win' ) ) {
+						$obj.find( '.uix-modal-box__content > div' ).css( 'overflow-y', 'hidden' );
+					}
+
+				}
+
+
+
+				if ( $obj.length > 0 ) {
+
+
+					// Locks the page
+					$.scrollLock( true );
+
+
+					if ( typeof dataH != typeof undefined && dataH != '' && dataH ) {
+						$obj.css( {'height': dataH } );
+					}
+
+					if ( typeof dataW != typeof undefined && dataW != '' && dataW ) {
+						$obj.css( {'width': dataW } );
+					}
+
+					TweenMax.set( '.uix-modal-mask', {
+						css: {
+							opacity : 0,
+							display : 'none'
+						},
+						onComplete : function() {
+
+							TweenMax.to( this.target, 0.3, {
+								css: {
+									opacity    : 1,
+									display    : 'block'
+								}
+							});		
+
+						}
+					});
+
+					$obj.addClass( 'active' );	
+				}
+
+				if ( $obj.hasClass( 'is-fullscreen' ) ) {
+					setTimeout( function() {
+
+						if ( !$obj.hasClass( 'is-video' ) ) {
+							$obj.find( '.uix-modal-box__content > div' ).css( 'overflow-y', 'scroll' );
+						} else {
+							$obj.find( '.uix-modal-box__content > div' ).css( 'overflow-y', 'hidden' );
+						}
+
+					}, settings.speed );
+
+				}	
+
+			});
+			
+			
+		});
+ 
+    };
+ 
+}( jQuery ));
 
 
 /* 
@@ -2013,7 +2077,6 @@ APP = ( function ( APP, $, window, document ) {
             var data = $thead.find( 'th:eq(' + index + ')' ).attr( 'data-table' );
             $( this ).attr( 'data-table', data );
         });
-		
 		
     };
 
@@ -16049,7 +16112,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			//-------- Sticky button of back to top 
 			//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
-			var $el = $( '#uix-to-top' )
+			var $el = $( '#uix-to-top' );
 			
 			$window.on('scroll touchmove', function() {
 
@@ -16078,6 +16141,8 @@ APP = ( function ( APP, $, window, document ) {
 					},
 					ease: Power2.easeOut
 				});	
+				
+				return false;
 
 
 			});	
@@ -19179,6 +19244,14 @@ APP = ( function ( APP, $, window, document ) {
 		
 
 		documentHeight = $( document ).height();
+		
+		//Init position
+		TweenMax.to( $floatingSideEl, 0.3, {
+			css: {
+				marginTop  : -floatingOffset.top + ( $( window ).height() - $floatingSideEl.height() )/2
+			}
+		});	
+		
 
 		$( window ).on( 'scroll touchmove', function() {
 			var sideBarHeight = $floatingSideEl.height(),
@@ -19552,7 +19625,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.FORM               = APP.FORM || {};
-	APP.FORM.version       = '0.0.4';
+	APP.FORM.version       = '0.0.5';
     APP.FORM.documentReady = function( $ ) {
 
 		/* 
@@ -19633,6 +19706,42 @@ APP = ( function ( APP, $, window, document ) {
 			 ---------------------------
 			 */ 			
 			$( document ).customControlsLineEffInit();
+			
+			
+			/* 
+			 ---------------------------
+			 Custom Input Number
+			 ---------------------------
+			 */ 	
+			$( document ).on( 'click', '.uix-controls__number__btn--add', function( e ) {
+				
+				var $numberInput = $( this ).closest( '.uix-controls__number' ).find( 'input[type="number"]' ),
+					numberInputVal = parseInt( $numberInput.val() );
+				
+				if ( e.shiftKey ) {
+					numberInputVal += 10;
+				} else {
+					numberInputVal++;
+				}
+				$numberInput.val( numberInputVal );
+			});
+
+			$( document ).on( 'click', '.uix-controls__number__btn--remove', function( e ) {
+				
+				var $numberInput = $( this ).closest( '.uix-controls__number' ).find( 'input[type="number"]' ),
+					numberInputVal = parseInt( $numberInput.val() );
+				
+				
+				if ( numberInputVal > 11 && e.shiftKey ) {
+					numberInputVal -= 10;
+				} else if (numberInputVal > 1) {
+					numberInputVal--;
+				}
+				$numberInput.val( numberInputVal );
+			});
+
+			
+			
 			
 			/* 
 			 ---------------------------
@@ -20208,6 +20317,12 @@ APP = ( function ( APP, $, window, document ) {
 						
 					}
 					
+					//Custom Input Number
+					if ( $( this ).hasClass( 'uix-controls__number' ) ) {
+						$( this ).prepend( '<span class="uix-controls__bar"></span>' );
+					}
+					
+			
 
 					//Prevent the form from being initialized again
 					$( this ).data( 'exist', 1 );	
@@ -24992,7 +25107,7 @@ APP = ( function ( APP, $, window, document ) {
 		var lastAnimation      = 0,
 			quietPeriod        = 500, //Do not change it
 			animationTime      = 1000,//According to page transition animation changes
-			$sectionsContainer = $( '.uix-noemal-load__onepage-container' ),
+			$sectionsContainer = $( '.uix-normal-load__onepage-container' ),
 			$sections          = $sectionsContainer.find( '[data-highlight-section]' ),
 			sectionTotal       = $sections.length,
 			topSectionSpacing  = 0,
@@ -25427,7 +25542,7 @@ APP = ( function ( APP, $, window, document ) {
 		var lastAnimation      = 0,
 			quietPeriod        = 500, //Do not change it
 			animationTime      = 1000,//According to page transition animation changes
-			$sectionsContainer = $( '.uix-noemal-load__onepage-container2' ),
+			$sectionsContainer = $( '.uix-normal-load__onepage-container2' ),
 			$sections          = $sectionsContainer.find( '[data-highlight-section]' ),
 			sectionTotal       = $sections.length,
 			topSectionSpacing  = 0,
@@ -27004,7 +27119,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.SMOOTH_SCROLLING_ANCHORLINK               = APP.SMOOTH_SCROLLING_ANCHORLINK || {};
-	APP.SMOOTH_SCROLLING_ANCHORLINK.version       = '0.0.4';
+	APP.SMOOTH_SCROLLING_ANCHORLINK.version       = '0.0.5';
     APP.SMOOTH_SCROLLING_ANCHORLINK.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -27014,27 +27129,31 @@ APP = ( function ( APP, $, window, document ) {
 		var browserURL = window.location.href;
 	
 		//Prevent anchor behaviour
-		$( 'a' ).click( function( e ) {
+		$( 'a' ).on( 'click', function( e ) {
 			
-			var linkURL    = $( this ).attr( 'href' ),
-				locIndex, 
-				locURL;
-			
-			if ( linkURL.indexOf( '#' ) >= 0 && linkURL != '#' ) {
-				e.preventDefault();
-				
-				var locArr = linkURL.split( '#' );
-			    locIndex = locArr[1];
-				locURL   = locArr[0];
-				
-				
-				if ( browserURL.indexOf( locURL ) < 0 ) {
-					window.location.href = locURL + '#!!' + locIndex;
+			if ( $( this ).data( 'smooth-scrolling' ) != false ) {
+
+				var linkURL    = $( this ).attr( 'href' ),
+					locIndex, 
+					locURL;
+
+				if ( linkURL.indexOf( '#' ) >= 0 && linkURL != '#' ) {
+					e.preventDefault();
+
+					var locArr = linkURL.split( '#' );
+					locIndex = locArr[1];
+					locURL   = locArr[0];
+
+
+					if ( browserURL.indexOf( locURL ) < 0 ) {
+						window.location.href = locURL + '#!!' + locIndex;
+					}
+
+
 				}
-				
-				
+	
 			}
-				
+
 			
 		} );
 		
@@ -28145,9 +28264,10 @@ APP = ( function ( APP, $, window, document ) {
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
+	
 
     APP.STICKY_EL               = APP.STICKY_EL || {};
-	APP.STICKY_EL.version       = '0.0.1';
+	APP.STICKY_EL.version       = '0.0.2';
     APP.STICKY_EL.pageLoaded    = function() {
 
 		var $window      = $( window ),
@@ -28162,21 +28282,30 @@ APP = ( function ( APP, $, window, document ) {
 				dynamicTop  = parseFloat( scrollTop + window.innerHeight ),
 				targetTop   = parseFloat( $( document ).height() - 200 );
 
+		
 			//Detecting when user scrolls to bottom of div
 			if ( dynamicTop >= targetTop ) {
 				
+					$( '.js-uix-sticky-el.active' )
+						  .css( {
+							  'top'  : parseFloat( topSpacing - (dynamicTop - targetTop) ) + 'px'
+						  } );	
 				
-				$( '.stick-widget.sticky' )
-					  .css( {
-						  'top'  : parseFloat( topSpacing - (dynamicTop - targetTop) ) + 'px'
-					  } );
+			} else {
+				
+				if ( $( '.js-uix-sticky-el.active' ).length > 0 && $( '.js-uix-sticky-el.active' ).position().top < topSpacing ) {
+					$( '.js-uix-sticky-el.active' )
+						  .css( {
+							  'top'  : topSpacing + 'px'
+						  } );	
+				}
 				
 			}
 
 
 		});	
 
-		var	waypoints = $( '.stick-widget' ).waypoint({
+		var	waypoints = $( '.js-uix-sticky-el' ).waypoint({
 
 		  handler: function( direction ) {
 
@@ -28186,7 +28315,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 			  $this
-				  .toggleClass( 'sticky', direction === 'down' )
+				  .toggleClass( 'active', direction === 'down' )
 				  .css( {
 					  'width': oWIdth + 'px',
 					  'top'  : topSpacing + 'px'
@@ -28202,7 +28331,7 @@ APP = ( function ( APP, $, window, document ) {
 		
 	
 			
-//		var	navMinTop    = $( '.stick-widget' ).offset().top + window.innerHeight/3,
+//		var	navMinTop    = $( '.js-uix-sticky-el' ).offset().top + window.innerHeight/3,
 //			navMaxTop    = parseFloat( $( document ).height() - $( '.uix-footer__container' ).height() ) - window.innerHeight/3;
 //
 //
@@ -28212,9 +28341,9 @@ APP = ( function ( APP, $, window, document ) {
 //
 //			//Detecting when user scrolls to bottom of div
 //			if ( spyTop > navMaxTop || spyTop < navMinTop ) {
-//				$( '.stick-widget' ).removeClass( 'act' );
+//				$( '.js-uix-sticky-el' ).removeClass( 'act' );
 //			} else {
-//				$( '.stick-widget' ).addClass( 'act' );
+//				$( '.js-uix-sticky-el' ).addClass( 'act' );
 //			}	
 //
 //

@@ -22,6 +22,14 @@ APP = ( function ( APP, $, window, document ) {
 		
 
 		documentHeight = $( document ).height();
+		
+		//Init position
+		TweenMax.to( $floatingSideEl, 0.3, {
+			css: {
+				marginTop  : -floatingOffset.top + ( $( window ).height() - $floatingSideEl.height() )/2
+			}
+		});	
+		
 
 		$( window ).on( 'scroll touchmove', function() {
 			var sideBarHeight = $floatingSideEl.height(),

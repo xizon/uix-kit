@@ -8,9 +8,10 @@
  * 3. Group
  * 4. Custom Select
  * 5. Custom Radio, Toggle And Checkbox
- * 6. Multiple Selector
- * 7. Single Selector
- * 8. Search of Widget
+ * 6. Custom Input Number
+ * 7. Multiple Selector
+ * 8. Single Selector
+ * 9. Search of Widget
 */
 
 $control-sub-color: #dce4e8;
@@ -67,7 +68,7 @@ $control-sub-color: #dce4e8;
 		}
 	
 	}
-	
+
 
 	&.uix-controls__short-s {
 		
@@ -669,7 +670,28 @@ $control-sub-color: #dce4e8;
 
 /* 
  ---------------------------
- 6. Multiple Selector
+ 6. Custom Input Number
+ ---------------------------
+ */
+.uix-controls__number {
+
+
+	.uix-controls__number__btn {
+		border-left: none;
+		border-right: 1px solid $control-sub-color;
+		right: auto;
+		left: 1px;
+
+	}
+	
+}
+
+
+
+
+/* 
+ ---------------------------
+ 7. Multiple Selector
  ---------------------------
  */ 
 .uix-controls__multi-sel {
@@ -709,7 +731,7 @@ $control-sub-color: #dce4e8;
 
 /* 
  ---------------------------
- 7. Single Selector
+ 8. Single Selector
  ---------------------------
  */ 
 
@@ -744,7 +766,7 @@ $control-sub-color: #dce4e8;
 
 /* 
  ---------------------------
- 8. Search of Widget
+ 9. Search of Widget
  ---------------------------
  */ 
 .uix-search-box {

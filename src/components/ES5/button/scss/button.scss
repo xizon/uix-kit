@@ -29,7 +29,6 @@ $button-class-margin-b: 1rem;
 .uix-btn {
 	display: inline-block;
 	text-align: center;
-	min-width: 100px;
 	margin: 0;
 	border: none;
 	background: none;
@@ -54,7 +53,6 @@ $button-class-margin-b: 1rem;
 	
 
 	/* Waiting state */
-	&.active,
 	&.wait {
 		background-image: linear-gradient(-45deg,rgba(0,0,0,.15) 25%,transparent 25%,transparent 50%,rgba(0,0,0,.15) 50%,rgba(0,0,0,.15) 75%,transparent 75%,transparent) !important;
 		background-size: 30px 30px !important;
@@ -329,7 +327,8 @@ $button-class-margin-b: 1rem;
 
 	
 	&.is-transparent {
-		background: none;
+		background-color: transparent;
+		background-image: linear-gradient(to right, #fff 0%, #fff 0%, #fff 0%);
 		color: $btn-gradient-color1;
 		box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.2);
 		

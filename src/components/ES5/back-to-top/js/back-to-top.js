@@ -20,7 +20,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			//-------- Sticky button of back to top 
 			//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
-			var $el = $( '#uix-to-top' )
+			var $el = $( '#uix-to-top' );
 			
 			$window.on('scroll touchmove', function() {
 
@@ -49,6 +49,8 @@ APP = ( function ( APP, $, window, document ) {
 					},
 					ease: Power2.easeOut
 				});	
+				
+				return false;
 
 
 			});	

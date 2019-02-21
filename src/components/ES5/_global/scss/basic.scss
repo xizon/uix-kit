@@ -141,4 +141,62 @@ code {
 }
 
 
+pre {
+	background: #fff;
+	white-space: pre;
+	word-wrap: break-word;
+	overflow: auto;
+	padding: 0;
+	border-radius: 3px;
+	margin: 1rem 0;
+	
+
+	&.uix-precode {
+		white-space: normal;
+		border: 1px solid #d9d9d9;
+		border-radius: 2px;
+		position: relative;
+		box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+
+		label {
+			font-family: sans-serif;
+			font-weight: normal;
+			font-size: 0.8125rem;
+			position: absolute;
+			left: -5px;
+			top: 1rem;
+			text-align: center;
+			width: 60px;
+			user-select: none;
+			pointer-events: none;
+			color: #ddd;
+		}
+		code {
+			font-family: "Inconsolata","Monaco","Consolas","Andale Mono","Bitstream Vera Sans Mono","Courier New",Courier,monospace;
+			display: block;
+			margin: 0 0 0 3rem;
+			padding: 1rem;
+			border-left: 1px solid #d9d9d9;
+			overflow-x: auto;
+			font-size: 0.8125rem;
+			line-height: 1.125rem;
+			color: #444;
+			background: #fff;
+			white-space: pre;
+		}
+		
+		&.uix-precode--nolebel {
+			label {
+				display: none;
+			}
+			code {
+				margin: 0;
+				border: none;
+			}
+			
+		}
+	}
+  
+
+}
 

@@ -8,10 +8,11 @@
  * 3. Group
  * 4. Custom Select
  * 5. Custom Radio, Toggle And Checkbox
- * 6. Multiple Selector
- * 7. Single Selector
- * 8. Search of Widget
- * 9. Date Picker (With Jquery UI Widget)
+ * 6. Custom Input Number
+ * 7. Multiple Selector
+ * 8. Single Selector
+ * 9. Search of Widget
+ * 10. Date Picker (With Jquery UI Widget)
 */
 
 
@@ -138,6 +139,15 @@ $control-focus-bordercolor2: transparent;
 	
 	}
 	
+	
+	
+	&.uix-controls__textarea {
+		.uix-controls__bar {
+			transform: translateY(-6px);
+				
+		}
+	}
+	
 
 	input:not([type="checkbox"]):not([type="radio"]) {
 
@@ -167,6 +177,12 @@ $control-focus-bordercolor2: transparent;
 		}	
 	
 		
+	}
+	
+	&.uix-controls--line {
+		input:not([type="checkbox"]):not([type="radio"]) {
+			padding-left: 0;
+		}	
 	}
 	
 	&.uix-controls__short-s {
@@ -248,6 +264,12 @@ $control-focus-bordercolor2: transparent;
 		}  
 
 
+	}
+	
+	&.uix-controls--line {
+		textarea {
+			padding-left: 0;
+		}	
 	}
 	
 	
@@ -1312,6 +1334,7 @@ $controls-merge-button-width: 20%;
 
 }	
 
+
 /* 
  ---------------------------
  5. Custom Radio, Toggle And Checkbox
@@ -1498,7 +1521,78 @@ $controls-merge-button-width: 20%;
 
 /* 
  ---------------------------
- 6. Multiple Selector
+ 6. Custom Input Number
+ ---------------------------
+ */
+.uix-controls__number {
+	
+	input[type="number"]::-webkit-inner-spin-button,
+	input[type="number"]::-webkit-outer-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+
+
+
+	input[type="number"] {
+		-moz-appearance: textfield;
+		font-family: 'Roboto', sans-serif;
+	}
+
+
+	input {
+		box-sizing: border-box;
+	}
+
+
+	.uix-controls__number__btn {
+		position: absolute;
+		height: 50%;
+		width: 27px;
+		border-left: 1px solid $control-sub-color;
+		color: $control-sub-color;
+		text-align: center;
+		line-height: 1;
+		cursor: pointer;
+		user-select: none;
+		right: 1px;
+
+		&:hover {
+			color: #333;
+		}
+
+
+		&.uix-controls__number__btn--add {
+			top: 0;
+			border-radius: 0 4px 0 0;
+			border-bottom: 1px solid $control-sub-color;
+		}
+
+		&.uix-controls__number__btn--remove {
+			bottom: 0;
+			border-radius: 0 0 4px 0;
+
+		}
+		
+	}
+	
+	&.uix-controls--line {
+		
+		.uix-controls__number__btn {
+		    border: none;
+			
+		}
+	}
+	
+}
+
+
+
+
+
+/* 
+ ---------------------------
+ 7. Multiple Selector
  ---------------------------
  */ 
 .uix-controls__multi-sel {
@@ -1586,7 +1680,7 @@ $controls-merge-button-width: 20%;
 
 /* 
  ---------------------------
- 7. Single Selector
+ 8. Single Selector
  ---------------------------
  */ 
 
@@ -1664,7 +1758,7 @@ $controls-merge-button-width: 20%;
 
 /* 
  ---------------------------
- 8. Search of Widget
+ 9. Search of Widget
  ---------------------------
  */ 
 .uix-search-box {
@@ -1714,7 +1808,7 @@ $controls-merge-button-width: 20%;
 
 /* 
  ---------------------------
- 9. Date Picker (With Jquery UI Widget)
+ 10. Date Picker (With Jquery UI Widget)
  ---------------------------
  */ 
 /* jQuery UI - v1.12.1 - 2016-09-14

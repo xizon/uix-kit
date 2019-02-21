@@ -1,6 +1,15 @@
 # Changelog
 
 
+#### = 3.2.2 (February 19, 2019) =
+
+* New: Added an Input Number form type.
+* New: Add a new interaction of Modal Dialog Auto-open.
+* New: Add a new style of Striking.
+* Tweak: Improved and Optimized partial core style compatible with WordPress.
+* Tweak: Upgraded Sticky Elements.
+
+
 #### = 3.2.1 (February 15, 2019) =
 
 * New: Add a new module "Content Placeholder Animated".

@@ -65,7 +65,7 @@ ol.uix-list--normal,
 
 /*-- Noemal List Effect by Default --*/
 /* Compatible with  Uix Shortcodes (WordPress Plugin) and Block Button Link */
-.uix-list--normal a:not(.uix-sc-btn):not(.wp-block-button__link) {
+.uix-list--normal a:not(.uix-sc-btn):not(.wp-block-button__link):not(.uix-btn) {
     color: $highlight-color1;
 }
 
@@ -74,7 +74,7 @@ ol.uix-list--normal,
     text-decoration: underline;
 }
 
-.uix-list--normal a:not(.uix-sc-btn):not(.wp-block-button__link):hover img {
+.uix-list--normal a:not(.uix-sc-btn):not(.wp-block-button__link):not(.uix-btn):hover img {
     text-decoration: none;
 }
 

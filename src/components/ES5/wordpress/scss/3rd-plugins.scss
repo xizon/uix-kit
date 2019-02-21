@@ -103,6 +103,7 @@ form.edd_download_purchase_form .edd_price {
 	padding-left: 1.25em;
 }
 
+
 #edd-purchase-button, 
 .edd-submit, 
 [type="submit"].edd-submit,
@@ -154,34 +155,6 @@ form#edd_purchase_form [type="submit"] {
 	}
 
 	
-}
-	
-.edd-custom-btn {
-	min-width: 100px !important;
-	padding: .7em 1.25em !important;
-	border-radius: 0 !important;
-	font-size: 1em !important;
-	margin: .8em 1em 1em !important;
-	
-	&:active {
-		background-image: none !important;
-	}
-	i {
-		margin-right: 8px;
-		opacity: 0.75;
-	}
-	&.green {
-		color: #FFF !important;
-		background: #5cb85c !important;
-		border-color: #4cae4c !important;
-	    &:hover, 
-		&:focus, 
-		&:active {
-			color: #FFF !important;
-			background: #47a447 !important;
-			border-color: #398439 !important;
-		}
-	}
 }
 
 .edd-terms-agreement, 

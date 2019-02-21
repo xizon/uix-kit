@@ -8,7 +8,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.SMOOTH_SCROLLING_ANCHORLINK               = APP.SMOOTH_SCROLLING_ANCHORLINK || {};
-	APP.SMOOTH_SCROLLING_ANCHORLINK.version       = '0.0.4';
+	APP.SMOOTH_SCROLLING_ANCHORLINK.version       = '0.0.5';
     APP.SMOOTH_SCROLLING_ANCHORLINK.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -18,27 +18,31 @@ APP = ( function ( APP, $, window, document ) {
 		var browserURL = window.location.href;
 	
 		//Prevent anchor behaviour
-		$( 'a' ).click( function( e ) {
+		$( 'a' ).on( 'click', function( e ) {
 			
-			var linkURL    = $( this ).attr( 'href' ),
-				locIndex, 
-				locURL;
-			
-			if ( linkURL.indexOf( '#' ) >= 0 && linkURL != '#' ) {
-				e.preventDefault();
-				
-				var locArr = linkURL.split( '#' );
-			    locIndex = locArr[1];
-				locURL   = locArr[0];
-				
-				
-				if ( browserURL.indexOf( locURL ) < 0 ) {
-					window.location.href = locURL + '#!!' + locIndex;
+			if ( $( this ).data( 'smooth-scrolling' ) != false ) {
+
+				var linkURL    = $( this ).attr( 'href' ),
+					locIndex, 
+					locURL;
+
+				if ( linkURL.indexOf( '#' ) >= 0 && linkURL != '#' ) {
+					e.preventDefault();
+
+					var locArr = linkURL.split( '#' );
+					locIndex = locArr[1];
+					locURL   = locArr[0];
+
+
+					if ( browserURL.indexOf( locURL ) < 0 ) {
+						window.location.href = locURL + '#!!' + locIndex;
+					}
+
+
 				}
-				
-				
+	
 			}
-				
+
 			
 		} );
 		

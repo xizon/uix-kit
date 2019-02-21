@@ -1,0 +1,180 @@
+/* ====================================================== 
+   <!-- Bullet List -->      
+/* ====================================================== */
+
+/*
+ * 1. Normal List Styling
+ * 2. Normal Numbers Ordered List
+ * 3. Custom Circle Icons Ordered List
+ * 4. Big Numbers Ordered List
+ * 5. Step Timeline By Numbers
+*/
+
+/* 
+ ---------------------------
+ 1. Normal List Styling
+ ---------------------------
+ */ 
+ol.uix-list--normal,
+ul.uix-list--normal,
+.uix-list--normal ul,
+.uix-list--normal ol {
+	
+	padding-left: auto;	
+	padding-right: 0.875rem;	
+	
+}
+
+
+
+
+/* 
+ ---------------------------
+ 2. Normal Numbers Ordered List
+ ---------------------------
+ */ 
+
+ol.uix-list--numbered,
+.uix-list--numbered ol {
+    margin-left: auto;
+	margin-right: 1rem;
+	
+	> li {
+		margin-left: auto;
+		margin-right: .5rem;
+	}
+
+	> li::before {
+		left: auto;
+		right: -2.25em;
+		margin-right: auto;
+		margin-left: 0.5em;
+		
+	}	
+	
+}
+
+
+/* 
+ ---------------------------
+ 3. Custom Circle Icons Ordered List
+ ---------------------------
+ */ 
+
+ol.uix-list--circle,
+ul.uix-list--circle,
+.uix-list--circle ol,
+.uix-list--circle ul {
+    margin-left: auto;
+	margin-right: 1rem;
+	
+	> li {
+		margin-left: auto;
+		margin-right: 1rem;
+	}
+
+	> li::before {
+		left: auto;
+		right: -1.5em;
+		
+	}
+	
+}
+
+
+/* 
+ ---------------------------
+ 4. Big Numbers Ordered List
+ ---------------------------
+ */ 
+
+ol.uix-list--numbered-large,
+.uix-list--numbered-large ol {
+
+	
+	li {
+		padding-left: auto;
+		padding-right: 2.5rem;
+		margin-left: auto;
+		margin-right: 1.2rem;
+		
+		&::before {
+			margin-left: auto;
+			margin-right: -3.5rem;
+		}	
+	}	
+
+}
+
+ol.uix-list--numbered-large.uix-list--numbered-bg,
+.uix-list--numbered-large.uix-list--numbered-bg ol {
+   
+	li {
+		margin-right: 0;
+		padding-right: 4.5rem;
+		
+		p {
+			padding-right: auto;
+			padding-left: 2rem;
+		}
+		
+		&::before {
+			margin-right: -4rem;
+			
+		}		
+	}
+
+}
+
+
+
+/* 
+ ---------------------------
+ 5. Step Timeline By Numbers
+ ---------------------------
+ */ 
+$step-line-color: #333;
+
+.uix-list--numbered-step {
+    margin-left: auto;
+	margin-right: 1rem;
+	
+	li {
+		padding: 0 3.75rem 1.5rem 0;
+		border-left: none;
+		border-right: 2px solid $step-line-color;
+	
+
+
+		&::before {
+			left: auto;
+			right: -26px;
+		}
+
+
+		&:last-child {
+			border-right: none;
+		}
+
+
+	}
+
+	
+}
+
+
+
+@media all and (max-width:768px) {
+
+    .uix-list--numbered-step {
+		
+		li {
+			padding-right: 2.5rem;
+		}
+		
+    }
+
+}
+
+
+

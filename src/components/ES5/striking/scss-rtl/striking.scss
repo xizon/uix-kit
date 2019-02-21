@@ -1,0 +1,68 @@
+/* ====================================================== 
+   <!-- Striking --> 
+/* ====================================================== */
+
+$uix-striking-border-color: rgba(0,0,0,.02);
+
+.uix-striking-msg {
+   
+	i:first-child {
+		margin-right: auto;
+		margin-left: .5rem;
+	}
+	
+	&.uix-striking-msg--hasarrow::before,
+	&.uix-striking-msg--hasarrow::after {
+		right: auto;
+		left: 100%;
+		border-right-color: transparent;
+		border-left-color: rgba(252,232,220,1);
+	}
+	
+	&.uix-striking-msg--hasarrow::after {
+		border-left-color: #{$uix-striking-border-color};
+	}
+
+	
+	
+	&.uix-striking-msg--default {
+	
+		&.uix-striking-msg--hasarrow::before {
+			border-left-color: rgba(252,232,220,1);
+		}
+		
+	}
+
+	&.uix-striking-msg--success {
+	
+		&.uix-striking-msg--hasarrow::before {	
+			border-left-color: rgba(128,207,75,1);
+		}
+	}
+
+
+	&.uix-striking-msg--alert {
+
+		&.uix-striking-msg--hasarrow::before {	
+			border-left-color: rgba(245,146,86,1);
+		}
+	}
+	
+	
+	&.uix-striking-msg--danger {
+	
+		&.uix-striking-msg--hasarrow::before {	
+			border-left-color: rgba(236, 94, 121,1);
+		}	
+		
+	}
+
+	&.uix-striking-msg--info {
+	
+		&.uix-striking-msg--hasarrow::before {	
+			border-left-color: rgba(216,245,254,1);
+		}
+	}
+
+}
+

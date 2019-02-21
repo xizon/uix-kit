@@ -46,6 +46,14 @@
 		}
 	}
 
+	&.uix-social-btn--rounded {
+		border-radius: 4px;
+		
+		&::after {
+			border-radius: 4px;
+		}
+	}
+	
 	&.uix-social-btn--small {
 		width: 2rem;
 		height: 2rem;
@@ -154,6 +162,7 @@
 .uix-social-bg {
     color: #fff !important;
 }
+
 
 .uix-social-bg--twitter {
     border-color: #53B9FD !important;
@@ -286,9 +295,19 @@
 }
 
 
+.uix-social-bg--weixin {
+	border-color: #50b674 !important;
+	background-color: #50b674 !important;
+}
+
+.uix-social-bg--qq {
+	border-color: #30a5dd !important;
+	background-color: #30a5dd !important;
+}
+
+
 .uix-social-bg--colourful {
     display: inline-block !important;
-    *display: inline !important;
 	margin: .2em .5em !important;
 }
 
