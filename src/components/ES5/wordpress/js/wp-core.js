@@ -11,6 +11,16 @@ APP = ( function ( APP, $, window, document ) {
 	APP.WP_CORE.version       = '0.0.1';
     APP.WP_CORE.documentReady = function( $ ) {
 
+		/* 
+		 ---------------------------
+		 Pagination
+		 ---------------------------
+		 */  
+		$( '.uix-pagination__container li > span.current' ).each( function()  {
+			$( this ).parent( 'li' ).addClass( 'active' );
+		});
+		
+		
 		
 		/* 
 		 ---------------------------
@@ -24,7 +34,7 @@ APP = ( function ( APP, $, window, document ) {
 			  }
 			  return false;
 		  });
-		
+
 
 		
 		

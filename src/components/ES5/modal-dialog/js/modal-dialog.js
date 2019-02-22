@@ -8,7 +8,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.MODAL_DIALOG               = APP.MODAL_DIALOG || {};
-	APP.MODAL_DIALOG.version       = '0.0.7';
+	APP.MODAL_DIALOG.version       = '0.0.8';
     APP.MODAL_DIALOG.documentReady = function( $ ) {
 
 		//Get the -webkit-transition-duration property
@@ -44,7 +44,6 @@ APP = ( function ( APP, $, window, document ) {
 		var modalSpeed = getTransitionDuration( $( '.uix-modal-box:first' )[0] );
 		
 		
-		
 		/*
 		  * Unbind that one in a safe way that won't accidentally unbind other click handlers.
 		  * In order to trigger other custom Modal Dialog events.
@@ -60,48 +59,53 @@ APP = ( function ( APP, $, window, document ) {
 			$( 'body' ).prepend( '<div class="uix-modal-mask"></div>' );
 		}
 		
-
 	    
 		$( document ).on( 'click.MODAL_DIALOG', '[data-modal-id]', function() {
-		
+
+			var dataH      = $( this ).data( 'modal-height' ),
+				dataW      = $( this ).data( 'modal-width' ),
+				lightbox   = $( this ).data( 'modal-lightbox' ),
+				closeTime  = $( this ).data( 'modal-close-time' );
+			
+			if ( typeof dataH === typeof undefined ) {
+				dataH = false;
+			}
+
+			if ( typeof dataW === typeof undefined ) {
+				dataW = false;
+			}
+			if ( typeof lightbox === typeof undefined ) {
+				lightbox = true;
+			}
+			if ( typeof closeTime === typeof undefined ) {
+				closeTime = false;
+			}	
+			
+
+			
 			$( document ).fireModalDialog( {
 				id        : $( this ).data( 'modal-id' ),
-				height    : $( this ).data( 'modal-height' ),
-				width     : $( this ).data( 'modal-width' ),
+				height    : dataH,
+				width     : dataW,
 				speed     : modalSpeed,
-				btn       : $( this )
+				btn       : $( this ),
+				lightbox  : lightbox,
+				autoClose : closeTime
 			});
 
 			return false;
 		
 		});
-		
-		
-		$( document ).on( 'click.MODAL_DIALOG_CLOSE', '.uix-modal-box .uix-modal-box__close', function() {
-			$( this ).parent().removeClass( 'active' );
-			
-			return false;
-		});
+	
 		
 		$( document ).on( 'click.MODAL_DIALOG_CLOSE', '.uix-modal-box .uix-modal-box__close, .uix-modal-mask', function() {
-			$( '.uix-modal-box' ).removeClass( 'active' );
-			TweenMax.to( '.uix-modal-mask', 0.3, {
-				css: {
-					opacity : 0,
-					display : 'none'
-				}
-			});
-				
-			$( '.uix-modal-box' ).find( '.uix-modal-box__content' ).removeClass( 'js-uix-no-fullscreen' );
 			
+			//btn
+			if ( $( this ).hasClass( 'uix-modal-box__close' ) ) {
+				$( this ).parent().removeClass( 'active' );
+			}
 			
-			// Unlocks the page
-			$.scrollLock( false );
-			
-			//something...
-			setTimeout( function() {
-	
-			}, modalSpeed );
+			$( document ).closeModalDialog();
 			
 			
 			return false;
@@ -122,12 +126,14 @@ APP = ( function ( APP, $, window, document ) {
  * Fire Modal Dialog
  *
  * @param  {String} id                   - Modal's unique identifier.
- * @param  {Number|String} height        - Custom modal height whick need a unit string. 
+ * @param  {Number|Boolean} height       - Custom modal height whick need a unit string. 
 										   This attribute "data-modal-height" may not exist. Such as: 200px
- * @param  {Number|String} width         - Custom modal width whick need a unit string. 
+ * @param  {Number|Boolean} width        - Custom modal width whick need a unit string. 
 										   This attribute "data-modal-height" may not exist. Such as: 200px
  * @param  {Number} speed                - Delay Time when Full Screen Effect is fired.   
- * @param  {Object} btn                  - Link or button that fires an event.
+ * @param  {Object|Boolean} btn          - Link or button that fires an event.
+ * @param  {Boolean} lightbox            - Whether to enable the lightbox effect.
+ * @param  {Number|Boolean} autoClose    - Specify auto-close time. This function is not enabled when this value is false.
  * @return {Void}
  */	
 ( function ( $ ) {
@@ -139,7 +145,9 @@ APP = ( function ( APP, $, window, document ) {
 			height    : false,
 			width     : false,
 			speed     : 500,
-			btn       : false
+			btn       : false,
+			lightbox  : true,
+			autoClose : false
         }, options );
 		
  
@@ -155,11 +163,12 @@ APP = ( function ( APP, $, window, document ) {
 			}
 			$.when( $( '.uix-modal-mask' ).length > 0 ).then( function() {
 
-				var dataID  = settings.id,
-					dataH   = settings.height,
-					dataW   = settings.width,
-					linkBtn = settings.btn,
-					$obj   = $( '.uix-modal-box#'+dataID );
+				var dataID     = settings.id,
+					dataH      = settings.height,
+					dataW      = settings.width,
+					linkBtn    = settings.btn,
+					closeTime  = settings.autoClose,
+					$obj       = $( '.uix-modal-box#'+dataID );
 
 				// Initializate modal
 				if ( linkBtn ) {
@@ -190,24 +199,39 @@ APP = ( function ( APP, $, window, document ) {
 						$obj.css( {'width': dataW } );
 					}
 
-					TweenMax.set( '.uix-modal-mask', {
-						css: {
-							opacity : 0,
-							display : 'none'
-						},
-						onComplete : function() {
+					
+					//Enable the lightbox effect.
+					if ( settings.lightbox ) {
+						TweenMax.set( '.uix-modal-mask', {
+							css: {
+								opacity : 0,
+								display : 'none'
+							},
+							onComplete : function() {
 
-							TweenMax.to( this.target, 0.3, {
-								css: {
-									opacity    : 1,
-									display    : 'block'
-								}
-							});		
+								TweenMax.to( this.target, 0.3, {
+									css: {
+										opacity    : 1,
+										display    : 'block'
+									}
+								});		
 
-						}
-					});
+							}
+						});
+	
+					}
 
-					$obj.addClass( 'active' );	
+					$obj.addClass( 'active' );
+					
+					
+					//auto close
+					if ( closeTime && !isNaN( closeTime ) ) {
+						setTimeout( function() {
+							$( document ).closeModalDialog();
+						}, closeTime );
+					}
+					
+					
 				}
 
 				if ( $obj.hasClass( 'is-fullscreen' ) ) {
@@ -224,6 +248,46 @@ APP = ( function ( APP, $, window, document ) {
 				}	
 
 			});
+			
+			
+		});
+ 
+    };
+ 
+}( jQuery ));
+
+
+
+
+/*
+ * Close Modal Dialog
+ *
+ * @return {Void}
+ */	
+( function ( $ ) {
+    $.fn.closeModalDialog = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+			target  : '.uix-modal-box'
+        }, options );
+		
+ 
+        this.each( function() {
+
+			$( settings.target ).removeClass( 'active' );
+			TweenMax.to( '.uix-modal-mask', 0.3, {
+				css: {
+					opacity : 0,
+					display : 'none'
+				}
+			});
+				
+			$( settings.target ).find( '.uix-modal-box__content' ).removeClass( 'js-uix-no-fullscreen' );
+			
+			
+			// Unlocks the page
+			$.scrollLock( false );
 			
 			
 		});

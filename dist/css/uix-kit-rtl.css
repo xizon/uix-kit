@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.2.2
+ * ## Version             :  3.2.3
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  February 21, 2019
+ * ## Last Update         :  February 22, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -23,27 +23,27 @@
     5.Helper Classes
     6.Basic Layout Styles
     7.Mobile Menu
-    8.Modal Dialog
-    9.Navigation
-    10.Navs
-    11.Sidebar
-    12.Table
-    13.Advanced Slider (Basic)
-    14.Advanced Slider (Special Effects)
-    15.Cards
-    16.Content Placeholder Animated
-    17.Dropdown Menu
-    18.Flexslider
-    19.Form
-    20.Cutom Light Box
-    21.Brands List
-    22.Bulleted List
-    23.Maintain Aspect Ratio List
-    24.Side by Side List
-    25.Ribbon
-    26.Comments
-    27.Source Code
-    28.Striking
+    8.Navigation
+    9.Navs
+    10.Sidebar
+    11.Advanced Slider (Basic)
+    12.Advanced Slider (Special Effects)
+    13.Cards
+    14.Content Placeholder Animated
+    15.Dropdown Menu
+    16.Flexslider
+    17.Form
+    18.Cutom Light Box
+    19.Brands List
+    20.Bulleted List
+    21.Maintain Aspect Ratio List
+    22.Side by Side List
+    23.Modal Dialog
+    24.Ribbon
+    25.Comments
+    26.Source Code
+    27.Striking
+    28.Table
     29.ToolTip
     30.Vertical Menu (RTL)
     31.WordPress Core ( Do not use prefix "uix-" )
@@ -397,32 +397,6 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
   transform: translateX(0); }
 
 /* ====================================================== 
-    <!-- Modal Dialog --> 
-/* ====================================================== */
-.uix-modal-box {
-  left: auto;
-  right: 50%;
-  /* Video container */ }
-  .uix-modal-box .uix-modal-box__video-waiting {
-    left: auto;
-    right: 50%;
-    margin-left: auto;
-    margin-right: -1rem; }
-  .uix-modal-box .uix-modal-box__close {
-    right: auto;
-    left: 12px; }
-  .uix-modal-box.is-fullscreen {
-    left: auto;
-    right: 0; }
-    .uix-modal-box.is-fullscreen .uix-modal-box__close {
-      right: auto;
-      left: 26px; }
-
-.uix-modal-mask {
-  left: auto;
-  right: 0; }
-
-/* ====================================================== 
    <!-- Navigation -->                                      
 /* ====================================================== */
 .uix-menu__container:not(.is-mobile) {
@@ -562,56 +536,6 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
 
 .uix-iso-grid-widget .uix-iso-grid-recent-item .uix-sidebar__posts-img__desc {
   float: right; }
-
-/* ====================================================== 
-   <!-- Table -->      
-/* ====================================================== */
-/*
- * 1. Generic
- * 2. Table Sorter
-*/
-/* 
- ---------------------------
- 1. Generic
- ---------------------------
- */
-table.uix-table th,
-table.uix-table td,
-.uix-table table th,
-.uix-table table td {
-  border-left: none;
-  border-right: 1px solid #d6d5d5; }
-
-table.uix-table thead th.uix-t-r,
-.uix-table table thead th.uix-t-r {
-  text-align: left; }
-
-table.uix-table thead th.uix-t-l,
-.uix-table table thead th.uix-t-l {
-  text-align: right; }
-
-@media all and (max-width: 768px) {
-  table.uix-table thead th.uix-mobile-tl,
-  .uix-table table thead th.uix-mobile-tl {
-    text-align: right; }
-  table.uix-table thead th.uix-mobile-tr,
-  .uix-table table thead th.uix-mobile-tr {
-    text-align: left; } }
-
-@media all and (max-width: 768px) {
-  table.uix-table.is-responsive tbody td::before,
-  .uix-table.is-responsive table tbody td::before {
-    border-left: 1px solid #d6d5d5;
-    margin-left: 0.5rem; } }
-
-/* 
- ---------------------------
- 2. Table Sorter
- ---------------------------
- */
-.uix-table-sorter::after {
-  margin-left: auto;
-  margin-right: .5rem; }
 
 /******/
 /******/
@@ -1120,6 +1044,32 @@ dl.uix-list-abreast dd {
   padding-right: 1rem; }
 
 /* ====================================================== 
+    <!-- Modal Dialog --> 
+/* ====================================================== */
+.uix-modal-box {
+  left: auto;
+  right: 50%;
+  /* Video container */ }
+  .uix-modal-box .uix-modal-box__video-waiting {
+    left: auto;
+    right: 50%;
+    margin-left: auto;
+    margin-right: -1rem; }
+  .uix-modal-box .uix-modal-box__close {
+    right: auto;
+    left: 12px; }
+  .uix-modal-box.is-fullscreen {
+    left: auto;
+    right: 0; }
+    .uix-modal-box.is-fullscreen .uix-modal-box__close {
+      right: auto;
+      left: 26px; }
+
+.uix-modal-mask {
+  left: auto;
+  right: 0; }
+
+/* ====================================================== 
    <!-- Ribbon --> 
 /* ====================================================== */
 .uix-ribbon--triangle {
@@ -1214,6 +1164,56 @@ pre.prettyprint {
 
 .uix-striking-msg.uix-striking-msg--info.uix-striking-msg--hasarrow::before {
   border-left-color: #d8f5fe; }
+
+/* ====================================================== 
+   <!-- Table -->      
+/* ====================================================== */
+/*
+ * 1. Generic
+ * 2. Table Sorter
+*/
+/* 
+ ---------------------------
+ 1. Generic
+ ---------------------------
+ */
+table.uix-table th,
+table.uix-table td,
+.uix-table table th,
+.uix-table table td {
+  border-left: none;
+  border-right: 1px solid #d6d5d5; }
+
+table.uix-table thead th.uix-t-r,
+.uix-table table thead th.uix-t-r {
+  text-align: left; }
+
+table.uix-table thead th.uix-t-l,
+.uix-table table thead th.uix-t-l {
+  text-align: right; }
+
+@media all and (max-width: 768px) {
+  table.uix-table thead th.uix-mobile-tl,
+  .uix-table table thead th.uix-mobile-tl {
+    text-align: right; }
+  table.uix-table thead th.uix-mobile-tr,
+  .uix-table table thead th.uix-mobile-tr {
+    text-align: left; } }
+
+@media all and (max-width: 768px) {
+  table.uix-table.is-responsive tbody td::before,
+  .uix-table.is-responsive table tbody td::before {
+    border-left: 1px solid #d6d5d5;
+    margin-left: 0.5rem; } }
+
+/* 
+ ---------------------------
+ 2. Table Sorter
+ ---------------------------
+ */
+.uix-table-sorter::after {
+  margin-left: auto;
+  margin-right: .5rem; }
 
 /* ====================================================== 
    <!-- ToolTip -->       

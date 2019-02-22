@@ -35,11 +35,9 @@
 @import 'helper-classes.scss';
 @import 'layout.scss';
 @import 'mobile-menu.scss';
-@import 'modal-dialog.scss';
 @import 'navigation.scss';
 @import 'navs.scss';
 @import 'sidebar.scss';
-@import 'table.scss';
 
 
 /******/
@@ -57,10 +55,12 @@
 @import '../../list-bulleted/scss-rtl/list-bulleted.scss';
 @import '../../list-maintain-aspect-ratio/scss-rtl/list-maintain-aspect-ratio.scss';
 @import '../../list-side-by-side/scss-rtl/list-side-by-side.scss';
+@import '../../modal-dialog/scss-rtl/modal-dialog.scss';
 @import '../../ribbon/scss-rtl/ribbon.scss';
 @import '../../single-post/scss-rtl/comments.scss';
 @import '../../source-code/scss-rtl/source-code.scss';
 @import '../../striking/scss-rtl/striking.scss';
+@import '../../table/scss-rtl/table.scss';
 @import '../../tooltip/scss-rtl/tooltip.scss';
 @import '../../vertical-menu/scss-rtl/vertical-menu.scss';
 @import '../../wordpress/scss-rtl/wp-core.scss';

@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.2.2
+ * ## Version             :  3.2.3
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  February 21, 2019
+ * ## Last Update         :  February 22, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -129,7 +129,7 @@ var UIX_KIT_IMPORT = {
   /******/
 
   /* base */
-  "./src/components/ES5/_global/js/body-and-header.js", "./src/components/ES5/_global/js/common-height.js", "./src/components/ES5/_global/js/custom-data-attrs.js", "./src/components/ES5/_global/js/loader.js", "./src/components/ES5/_global/js/mega-menu.js", "./src/components/ES5/_global/js/mobile-menu.js", "./src/components/ES5/_global/js/modal-dialog.js", "./src/components/ES5/_global/js/navigation.js", "./src/components/ES5/_global/js/pagination.js", "./src/components/ES5/_global/js/set-background.js", "./src/components/ES5/_global/js/table.js", "./src/components/ES5/_global/js/videos.js", //GSAP ==> generic
+  "./src/components/ES5/_global/js/body-and-header.js", "./src/components/ES5/_global/js/common-height.js", "./src/components/ES5/_global/js/custom-data-attrs.js", "./src/components/ES5/_global/js/loader.js", "./src/components/ES5/_global/js/mega-menu.js", "./src/components/ES5/_global/js/mobile-menu.js", "./src/components/ES5/_global/js/navigation.js", "./src/components/ES5/_global/js/set-background.js", "./src/components/ES5/_global/js/videos.js", //GSAP ==> generic
   "./src/components/ES5/_plugins-GSAP/js/ColorPropsPlugin.js", "./src/components/ES5/_plugins-GSAP/js/CSSRulePlugin.js", "./src/components/ES5/_plugins-GSAP/js/EaselPlugin.js", "./src/components/ES5/_plugins-GSAP/js/EndArrayPlugin.js", "./src/components/ES5/_plugins-GSAP/js/ModifiersPlugin.js", "./src/components/ES5/_plugins-GSAP/js/PixiPlugin.js", "./src/components/ES5/_plugins-GSAP/js/RaphaelPlugin.js", "./src/components/ES5/_plugins-GSAP/js/ScrollToPlugin.js", "./src/components/ES5/_plugins-GSAP/js/TEMPLATE_Plugin.js", "./src/components/ES5/_plugins-GSAP/js/TextPlugin.js", //three.js ==> generic
   "./src/components/ES5/_plugins-THREE/js/CSS3DRenderer.js", "./src/components/ES5/_plugins-THREE/js/GLTFLoader.js", "./src/components/ES5/_plugins-THREE/js/MTLLoader.js", "./src/components/ES5/_plugins-THREE/js/OBJLoader.js", "./src/components/ES5/_plugins-THREE/js/OrbitControls.js",
   /******/
@@ -137,7 +137,7 @@ var UIX_KIT_IMPORT = {
   /******/
 
   /* pages */
-  "./src/components/ES5/_main/js/main.js", "./src/components/ES5/accordion-img/js/accordion-img.js", "./src/components/ES5/accordion/js/accordion.js", "./src/components/ES5/advanced-content-slider/js/advanced-content-slider.js", "./src/components/ES5/advanced-slider/js/advanced-slider-basic.js", "./src/components/ES5/advanced-slider/js/advanced-slider-SpecialEffects.js", "./src/components/ES5/AJAX-push/js/ajax-push-content.js", "./src/components/ES5/AJAX/js/ajax-page-loader.js", "./src/components/ES5/back-to-top/js/back-to-top.js", "./src/components/ES5/circle-layout/js/circle-layout.js", "./src/components/ES5/counter/js/counter.js", "./src/components/ES5/dropdown-menu/js/dropdown-menu.js", "./src/components/ES5/dropdown-menu2/js/dropdown-menu2.js", "./src/components/ES5/dynamic-dropdown-list-json/js/dynamic-dropdown-list-json.js", "./src/components/ES5/flexslider/js/custom-flexslider.js", "./src/components/ES5/flexslider/js/jquery.flexslider.js", "./src/components/ES5/floating-side-element/js/floating-side-element.js", "./src/components/ES5/form-progress/js/form-progress.js", "./src/components/ES5/form/js/form.js", "./src/components/ES5/form/js/jqueryui.datepicker.js", "./src/components/ES5/gallery/js/gallery.js", "./src/components/ES5/hover-delay-interaction/js/hover-delay-interaction.js", "./src/components/ES5/image-shapes/js/image-shapes.js", "./src/components/ES5/lava-lamp-style-menu/js/lava-lamp-style-menu.js", "./src/components/ES5/lightbox/js/lightbox.js", "./src/components/ES5/list-bulleted/js/list-bulleted.js", "./src/components/ES5/list-posts/js/list-posts-with-ajax.js", "./src/components/ES5/list-split-imagery/js/list-split-imagery.js", "./src/components/ES5/mousewheel-interaction/js/mousewheel-interaction.js", "./src/components/ES5/multi-items-carousel/js/multi-items-carousel.js", "./src/components/ES5/one-page/js/one-page.js", "./src/components/ES5/one-page2/js/one-page2.js", "./src/components/ES5/parallax/js/parallax.js", "./src/components/ES5/periodical-scroll/js/periodical-scroll.js", "./src/components/ES5/pricing/js/pricing.js", "./src/components/ES5/progress-bar/js/progress-bar.js", "./src/components/ES5/progress-line/js/progress-line.js", "./src/components/ES5/retina/js/retina.js", "./src/components/ES5/rotating-elements/js/rotating-elements.js", "./src/components/ES5/scroll-reveal/js/scroll-reveal.js", "./src/components/ES5/scrollspy-animate/js/scrollspy-animate.js", "./src/components/ES5/show-more-less/js/show-more-less.js", "./src/components/ES5/skew-on-scroll/js/skew-on-scroll.js", "./src/components/ES5/smooth-scrolling-anchor-link/js/smooth-scrolling-anchor-link.js", "./src/components/ES5/source-code/js/highlight.js", "./src/components/ES5/source-code/js/source-code.js", "./src/components/ES5/sticky-elements/js/sticky-elements.js", "./src/components/ES5/svg-map/js/svg-map-china.js", "./src/components/ES5/svg-map/js/svg-map-world.js", "./src/components/ES5/table-sorter/js/table-sorter.js", "./src/components/ES5/t3D-background-three/js/3D-background-three.js", "./src/components/ES5/t3D-background-three2/js/3D-background-three2.js", "./src/components/ES5/t3D-background/js/3D-background.js", "./src/components/ES5/t3D-carousel/js/3D-carousel.js", "./src/components/ES5/t3D-model/js/3D-model.js", "./src/components/ES5/t3D-pages/js/3D-pages.js", "./src/components/ES5/t3D-particle-effect/js/3D-particle-effect.js", "./src/components/ES5/t3D-sphere-three/js/3D-sphere-three.js", "./src/components/ES5/t3D-obj-anim-interaction/js/3D-obj-anim-interaction.js", "./src/components/ES5/tabs/js/tabs.js", "./src/components/ES5/team-focus/js/team-focus.js", "./src/components/ES5/text-effect/js/text-effect.js", "./src/components/ES5/timeline/js/timeline.js", "./src/components/ES5/vertical-menu/js/vertical-menu.js", "./src/components/ES5/wordpress/js/wp-core.js"]
+  "./src/components/ES5/_main/js/main.js", "./src/components/ES5/accordion-img/js/accordion-img.js", "./src/components/ES5/accordion/js/accordion.js", "./src/components/ES5/advanced-content-slider/js/advanced-content-slider.js", "./src/components/ES5/advanced-slider/js/advanced-slider-basic.js", "./src/components/ES5/advanced-slider/js/advanced-slider-SpecialEffects.js", "./src/components/ES5/AJAX-push/js/ajax-push-content.js", "./src/components/ES5/AJAX/js/ajax-page-loader.js", "./src/components/ES5/back-to-top/js/back-to-top.js", "./src/components/ES5/circle-layout/js/circle-layout.js", "./src/components/ES5/counter/js/counter.js", "./src/components/ES5/dropdown-menu/js/dropdown-menu.js", "./src/components/ES5/dropdown-menu2/js/dropdown-menu2.js", "./src/components/ES5/dynamic-dropdown-list-json/js/dynamic-dropdown-list-json.js", "./src/components/ES5/flexslider/js/custom-flexslider.js", "./src/components/ES5/flexslider/js/jquery.flexslider.js", "./src/components/ES5/floating-side-element/js/floating-side-element.js", "./src/components/ES5/form-progress/js/form-progress.js", "./src/components/ES5/form/js/form.js", "./src/components/ES5/form/js/jqueryui.datepicker.js", "./src/components/ES5/gallery/js/gallery.js", "./src/components/ES5/hover-delay-interaction/js/hover-delay-interaction.js", "./src/components/ES5/image-shapes/js/image-shapes.js", "./src/components/ES5/lava-lamp-style-menu/js/lava-lamp-style-menu.js", "./src/components/ES5/lightbox/js/lightbox.js", "./src/components/ES5/list-bulleted/js/list-bulleted.js", "./src/components/ES5/list-posts/js/list-posts-with-ajax.js", "./src/components/ES5/list-split-imagery/js/list-split-imagery.js", "./src/components/ES5/modal-dialog/js/modal-dialog.js", "./src/components/ES5/mousewheel-interaction/js/mousewheel-interaction.js", "./src/components/ES5/multi-items-carousel/js/multi-items-carousel.js", "./src/components/ES5/one-page/js/one-page.js", "./src/components/ES5/one-page2/js/one-page2.js", "./src/components/ES5/parallax/js/parallax.js", "./src/components/ES5/periodical-scroll/js/periodical-scroll.js", "./src/components/ES5/pricing/js/pricing.js", "./src/components/ES5/progress-bar/js/progress-bar.js", "./src/components/ES5/progress-line/js/progress-line.js", "./src/components/ES5/retina/js/retina.js", "./src/components/ES5/rotating-elements/js/rotating-elements.js", "./src/components/ES5/scroll-reveal/js/scroll-reveal.js", "./src/components/ES5/scrollspy-animate/js/scrollspy-animate.js", "./src/components/ES5/show-more-less/js/show-more-less.js", "./src/components/ES5/skew-on-scroll/js/skew-on-scroll.js", "./src/components/ES5/smooth-scrolling-anchor-link/js/smooth-scrolling-anchor-link.js", "./src/components/ES5/source-code/js/highlight.js", "./src/components/ES5/source-code/js/source-code.js", "./src/components/ES5/sticky-elements/js/sticky-elements.js", "./src/components/ES5/svg-map/js/svg-map-china.js", "./src/components/ES5/svg-map/js/svg-map-world.js", "./src/components/ES5/table/js/table.js", "./src/components/ES5/table/js/table-sorter.js", "./src/components/ES5/t3D-background-three/js/3D-background-three.js", "./src/components/ES5/t3D-background-three2/js/3D-background-three2.js", "./src/components/ES5/t3D-background/js/3D-background.js", "./src/components/ES5/t3D-carousel/js/3D-carousel.js", "./src/components/ES5/t3D-model/js/3D-model.js", "./src/components/ES5/t3D-pages/js/3D-pages.js", "./src/components/ES5/t3D-particle-effect/js/3D-particle-effect.js", "./src/components/ES5/t3D-sphere-three/js/3D-sphere-three.js", "./src/components/ES5/t3D-obj-anim-interaction/js/3D-obj-anim-interaction.js", "./src/components/ES5/tabs/js/tabs.js", "./src/components/ES5/team-focus/js/team-focus.js", "./src/components/ES5/text-effect/js/text-effect.js", "./src/components/ES5/timeline/js/timeline.js", "./src/components/ES5/vertical-menu/js/vertical-menu.js", "./src/components/ES5/wordpress/js/wp-core.js"]
 };
 
 // CONCATENATED MODULE: ./src/components/ES6/_global/js/vars.js
@@ -211,75 +211,74 @@ if (document.getElementsByTagName('body')[0].className.match(/es6-demo-home/)) {
     6.Loader
     7.Mega Menu
     8.Mobile Menu
-    9.Modal Dialog
-    10.Navigation
-    11.WordPress Core Scripts
-    12.Specify a background image
-    13.Responsive Table
-    14.Videos
-    15.Theme Scripts
-    16.Accordion Background Images
-    17.Accordion
-    18.Advanced Content Slider
-    19.Advanced Slider (Basic)
-    20.Advanced Slider (Special Effects)
-    21.Ajax Push Content
-    22.Ajax Page Loader (Loading A Page via Ajax Into Div)
-    23.Back to Top
-    24.Circle Layout
-    25.Counter
-    26.Dropdown Menu
-    27.Dropdown Menu 2 (Multi-level drop-down navigation)
-    28.Dynamic Drop Down List from JSON
-    29.Flexslider
-    30.Floating Side Element
-    31.Form Progress
-    32.Form
-    33.jQuery UI Datepicker 1.11.4
-    34.Gallery
-    35.Hover Delay Interaction
-    36.Image Shapes
-    37.Lava-Lamp Style Menu
-    38.Custom Lightbox
-    39.Bulleted List
-    40.Posts List With Ajax
-    41.Fullwidth List of Split
-    42.Mousewheel Interaction
-    43.Multiple Items Carousel
-    44.Full Page/One Page Transition
-    45.Full Page/One Page Transition 2
-    46.Parallax
-    47.Periodical Scroll
-    48.Pricing
-    49.Progress Bar
-    50.Progress Line
-    51.Retina Graphics for Website
-    52.Rotating Elements
-    53.Scroll Reveal
-    54.Scrollspy Animate
-    55.Show More Less
-    56.Skew Based On Velocity of Scroll
-    57.Smooth Scrolling When Clicking An Anchor Link
-    58.Source Code View
-    59.Sticky Elements
-    60.SVG Map (China)
-    61.SVG Map (World)
-    62.Table Sorter
+    9.Navigation
+    10.Specify a background image
+    11.Videos
+    12.Theme Scripts
+    13.Accordion Background Images
+    14.Accordion
+    15.Advanced Content Slider
+    16.Advanced Slider (Basic)
+    17.Advanced Slider (Special Effects)
+    18.Ajax Push Content
+    19.Ajax Page Loader (Loading A Page via Ajax Into Div)
+    20.Back to Top
+    21.Circle Layout
+    22.Counter
+    23.Dropdown Menu
+    24.Dropdown Menu 2 (Multi-level drop-down navigation)
+    25.Dynamic Drop Down List from JSON
+    26.Flexslider
+    27.Floating Side Element
+    28.Form Progress
+    29.Form
+    30.jQuery UI Datepicker 1.11.4
+    31.Gallery
+    32.Hover Delay Interaction
+    33.Image Shapes
+    34.Lava-Lamp Style Menu
+    35.Custom Lightbox
+    36.Bulleted List
+    37.Posts List With Ajax
+    38.Fullwidth List of Split
+    39.Modal Dialog
+    40.Mousewheel Interaction
+    41.Multiple Items Carousel
+    42.Full Page/One Page Transition
+    43.Full Page/One Page Transition 2
+    44.Parallax
+    45.Periodical Scroll
+    46.Pricing
+    47.Progress Bar
+    48.Progress Line
+    49.Retina Graphics for Website
+    50.Rotating Elements
+    51.Scroll Reveal
+    52.Scrollspy Animate
+    53.Show More Less
+    54.Skew Based On Velocity of Scroll
+    55.Smooth Scrolling When Clicking An Anchor Link
+    56.Source Code View
+    57.Sticky Elements
+    58.SVG Map (China)
+    59.SVG Map (World)
+    60.Responsive Table
+    61.Table Sorter
+    62.3D Background 2
     63.3D Background 2
-    64.3D Background 2
-    65.3D Background
-    66.3D Carousel
-    67.3D Model
-    68.3D Pages
-    69.3D Particle Effect
-    70.3D Sphere Rotation
-    71.3D Object Anim When Click
-    72.Tabs
-    73.Team Focus
-    74.Text effect
-    75.Timeline
-    76.Vertical Menu
-    77.WordPress Core Scripts
+    64.3D Background
+    65.3D Carousel
+    66.3D Model
+    67.3D Pages
+    68.3D Particle Effect
+    69.3D Sphere Rotation
+    70.3D Object Anim When Click
+    71.Tabs
+    72.Team Focus
+    73.Text effect
+    74.Timeline
+    75.Vertical Menu
+    76.WordPress Core Scripts
 
 
 */
@@ -1793,240 +1792,6 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
- * <!-- Modal Dialog -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.MODAL_DIALOG               = APP.MODAL_DIALOG || {};
-	APP.MODAL_DIALOG.version       = '0.0.7';
-    APP.MODAL_DIALOG.documentReady = function( $ ) {
-
-		//Get the -webkit-transition-duration property
-		var getTransitionDuration = function( el, withDelay ) {
-			
-			if ( typeof el === typeof undefined ) {
-				return 0;
-			}
-			
-			
-			var style    = window.getComputedStyle(el),
-				duration = style.webkitTransitionDuration,
-				delay    = style.webkitTransitionDelay; 
-
-			if ( typeof duration != typeof undefined ) {
-				// fix miliseconds vs seconds
-				duration = (duration.indexOf("ms")>-1) ? parseFloat(duration) : parseFloat(duration)*1000;
-				delay = (delay.indexOf("ms")>-1) ? parseFloat(delay) : parseFloat(delay)*1000;
-
-				if ( withDelay ) {
-					 return (duration + delay);
-				} else {
-					return duration;
-				}	
-			} else {
-				return 0;
-			}
-			
-
-		};
-		
-		//Delay Time when Full Screen Effect is fired.
-		var modalSpeed = getTransitionDuration( $( '.uix-modal-box:first' )[0] );
-		
-		
-		
-		/*
-		  * Unbind that one in a safe way that won't accidentally unbind other click handlers.
-		  * In order to trigger other custom Modal Dialog events.
-			
-			$( '#element' ).off( 'click.MODAL_DIALOG' );
-			$( '#element' ).off( 'click.MODAL_DIALOG_CLOSE' );
-			
-		*/
-		
-	
-		//Add modal mask to stage
-		if ( $( '.uix-modal-mask' ).length == 0 ) {
-			$( 'body' ).prepend( '<div class="uix-modal-mask"></div>' );
-		}
-		
-
-	    
-		$( document ).on( 'click.MODAL_DIALOG', '[data-modal-id]', function() {
-		
-			$( document ).fireModalDialog( {
-				id        : $( this ).data( 'modal-id' ),
-				height    : $( this ).data( 'modal-height' ),
-				width     : $( this ).data( 'modal-width' ),
-				speed     : modalSpeed,
-				btn       : $( this )
-			});
-
-			return false;
-		
-		});
-		
-		
-		$( document ).on( 'click.MODAL_DIALOG_CLOSE', '.uix-modal-box .uix-modal-box__close', function() {
-			$( this ).parent().removeClass( 'active' );
-			
-			return false;
-		});
-		
-		$( document ).on( 'click.MODAL_DIALOG_CLOSE', '.uix-modal-box .uix-modal-box__close, .uix-modal-mask', function() {
-			$( '.uix-modal-box' ).removeClass( 'active' );
-			TweenMax.to( '.uix-modal-mask', 0.3, {
-				css: {
-					opacity : 0,
-					display : 'none'
-				}
-			});
-				
-			$( '.uix-modal-box' ).find( '.uix-modal-box__content' ).removeClass( 'js-uix-no-fullscreen' );
-			
-			
-			// Unlocks the page
-			$.scrollLock( false );
-			
-			//something...
-			setTimeout( function() {
-	
-			}, modalSpeed );
-			
-			
-			return false;
-			
-		});
-		
-    };
-
-    APP.components.documentReady.push( APP.MODAL_DIALOG.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-		
-
-/*
- * Fire Modal Dialog
- *
- * @param  {String} id                   - Modal's unique identifier.
- * @param  {Number|String} height        - Custom modal height whick need a unit string. 
-										   This attribute "data-modal-height" may not exist. Such as: 200px
- * @param  {Number|String} width         - Custom modal width whick need a unit string. 
-										   This attribute "data-modal-height" may not exist. Such as: 200px
- * @param  {Number} speed                - Delay Time when Full Screen Effect is fired.   
- * @param  {Object} btn                  - Link or button that fires an event.
- * @return {Void}
- */	
-( function ( $ ) {
-    $.fn.fireModalDialog = function( options ) {
- 
-        // This is the easiest way to have default options.
-        var settings = $.extend({
-			id        : 'demo',
-			height    : false,
-			width     : false,
-			speed     : 500,
-			btn       : false
-        }, options );
-		
- 
-        this.each( function() {
-
-			if ( settings.id == '' ) return false;
-			
-			
-	
-			//Add modal mask to stage
-			if ( $( '.uix-modal-mask' ).length == 0 ) {
-				$( 'body' ).prepend( '<div class="uix-modal-mask"></div>' );
-			}
-			$.when( $( '.uix-modal-mask' ).length > 0 ).then( function() {
-
-				var dataID  = settings.id,
-					dataH   = settings.height,
-					dataW   = settings.width,
-					linkBtn = settings.btn,
-					$obj   = $( '.uix-modal-box#'+dataID );
-
-				// Initializate modal
-				if ( linkBtn ) {
-					linkBtn.attr( 'href', 'javascript:void(0)' );
-					$obj.find( '.uix-modal-box__content' ).addClass( 'js-uix-no-fullscreen' );
-
-
-					if ( linkBtn.data( 'video-win' ) ) {
-						$obj.find( '.uix-modal-box__content > div' ).css( 'overflow-y', 'hidden' );
-					}
-
-				}
-
-
-
-				if ( $obj.length > 0 ) {
-
-
-					// Locks the page
-					$.scrollLock( true );
-
-
-					if ( typeof dataH != typeof undefined && dataH != '' && dataH ) {
-						$obj.css( {'height': dataH } );
-					}
-
-					if ( typeof dataW != typeof undefined && dataW != '' && dataW ) {
-						$obj.css( {'width': dataW } );
-					}
-
-					TweenMax.set( '.uix-modal-mask', {
-						css: {
-							opacity : 0,
-							display : 'none'
-						},
-						onComplete : function() {
-
-							TweenMax.to( this.target, 0.3, {
-								css: {
-									opacity    : 1,
-									display    : 'block'
-								}
-							});		
-
-						}
-					});
-
-					$obj.addClass( 'active' );	
-				}
-
-				if ( $obj.hasClass( 'is-fullscreen' ) ) {
-					setTimeout( function() {
-
-						if ( !$obj.hasClass( 'is-video' ) ) {
-							$obj.find( '.uix-modal-box__content > div' ).css( 'overflow-y', 'scroll' );
-						} else {
-							$obj.find( '.uix-modal-box__content > div' ).css( 'overflow-y', 'hidden' );
-						}
-
-					}, settings.speed );
-
-				}	
-
-			});
-			
-			
-		});
- 
-    };
- 
-}( jQuery ));
-
-
-/* 
- *************************************
  * <!-- Navigation -->
  *************************************
  */
@@ -2152,35 +1917,6 @@ APP = ( function ( APP, $, window, document ) {
     return APP;
 
 }( APP, jQuery, window, document ) );
-
-
-
-/* 
- *************************************
- * <!-- WordPress Core Scripts -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.PAGINATION               = APP.PAGINATION || {};
-	APP.PAGINATION.version       = '0.0.1';
-    APP.PAGINATION.documentReady = function( $ ) {
-
-		
-		$( '.uix-pagination__container li > span.current' ).each( function()  {
-			$( this ).parent( 'li' ).addClass( 'active' );
-		});
-		
-		
-    };
-
-    APP.components.documentReady.push( APP.PAGINATION.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
 
 
 
@@ -2321,45 +2057,6 @@ APP = ( function ( APP, $, window, document ) {
     return APP;
 
 }( APP, jQuery, window, document ) );
-
-
-
-/* 
- *************************************
- * <!-- Responsive Table -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.TABLE               = APP.TABLE || {};
-	APP.TABLE.version       = '0.0.1';
-    APP.TABLE.documentReady = function( $ ) {
-
-		var $resTable = $('table.uix-table.is-responsive, .uix-table.is-responsive table'),
-			$thead    = $resTable.find( 'thead' ),
-			$tbody    = $resTable.find( 'tbody' );
-
-        $thead.find( 'th' ).each(function() {
-            var data = $(this).text();
-            if ( !$( this ).attr( 'data-table' ) ) {
-                $( this ).attr( 'data-table', data );
-            }
-        });
-
-        $tbody.find( 'td' ).each(function() {
-            var index = $(this).index();
-            var data = $thead.find( 'th:eq(' + index + ')' ).attr( 'data-table' );
-            $( this ).attr( 'data-table', data );
-        });
-		
-    };
-
-    APP.components.documentReady.push( APP.TABLE.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
 
 
 
@@ -24365,6 +24062,304 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
+ * <!-- Modal Dialog -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.MODAL_DIALOG               = APP.MODAL_DIALOG || {};
+	APP.MODAL_DIALOG.version       = '0.0.8';
+    APP.MODAL_DIALOG.documentReady = function( $ ) {
+
+		//Get the -webkit-transition-duration property
+		var getTransitionDuration = function( el, withDelay ) {
+			
+			if ( typeof el === typeof undefined ) {
+				return 0;
+			}
+			
+			
+			var style    = window.getComputedStyle(el),
+				duration = style.webkitTransitionDuration,
+				delay    = style.webkitTransitionDelay; 
+
+			if ( typeof duration != typeof undefined ) {
+				// fix miliseconds vs seconds
+				duration = (duration.indexOf("ms")>-1) ? parseFloat(duration) : parseFloat(duration)*1000;
+				delay = (delay.indexOf("ms")>-1) ? parseFloat(delay) : parseFloat(delay)*1000;
+
+				if ( withDelay ) {
+					 return (duration + delay);
+				} else {
+					return duration;
+				}	
+			} else {
+				return 0;
+			}
+			
+
+		};
+		
+		//Delay Time when Full Screen Effect is fired.
+		var modalSpeed = getTransitionDuration( $( '.uix-modal-box:first' )[0] );
+		
+		
+		/*
+		  * Unbind that one in a safe way that won't accidentally unbind other click handlers.
+		  * In order to trigger other custom Modal Dialog events.
+			
+			$( '#element' ).off( 'click.MODAL_DIALOG' );
+			$( '#element' ).off( 'click.MODAL_DIALOG_CLOSE' );
+			
+		*/
+		
+	
+		//Add modal mask to stage
+		if ( $( '.uix-modal-mask' ).length == 0 ) {
+			$( 'body' ).prepend( '<div class="uix-modal-mask"></div>' );
+		}
+		
+	    
+		$( document ).on( 'click.MODAL_DIALOG', '[data-modal-id]', function() {
+
+			var dataH      = $( this ).data( 'modal-height' ),
+				dataW      = $( this ).data( 'modal-width' ),
+				lightbox   = $( this ).data( 'modal-lightbox' ),
+				closeTime  = $( this ).data( 'modal-close-time' );
+			
+			if ( typeof dataH === typeof undefined ) {
+				dataH = false;
+			}
+
+			if ( typeof dataW === typeof undefined ) {
+				dataW = false;
+			}
+			if ( typeof lightbox === typeof undefined ) {
+				lightbox = true;
+			}
+			if ( typeof closeTime === typeof undefined ) {
+				closeTime = false;
+			}	
+			
+
+			
+			$( document ).fireModalDialog( {
+				id        : $( this ).data( 'modal-id' ),
+				height    : dataH,
+				width     : dataW,
+				speed     : modalSpeed,
+				btn       : $( this ),
+				lightbox  : lightbox,
+				autoClose : closeTime
+			});
+
+			return false;
+		
+		});
+	
+		
+		$( document ).on( 'click.MODAL_DIALOG_CLOSE', '.uix-modal-box .uix-modal-box__close, .uix-modal-mask', function() {
+			
+			//btn
+			if ( $( this ).hasClass( 'uix-modal-box__close' ) ) {
+				$( this ).parent().removeClass( 'active' );
+			}
+			
+			$( document ).closeModalDialog();
+			
+			
+			return false;
+			
+		});
+		
+    };
+
+    APP.components.documentReady.push( APP.MODAL_DIALOG.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+		
+
+/*
+ * Fire Modal Dialog
+ *
+ * @param  {String} id                   - Modal's unique identifier.
+ * @param  {Number|Boolean} height       - Custom modal height whick need a unit string. 
+										   This attribute "data-modal-height" may not exist. Such as: 200px
+ * @param  {Number|Boolean} width        - Custom modal width whick need a unit string. 
+										   This attribute "data-modal-height" may not exist. Such as: 200px
+ * @param  {Number} speed                - Delay Time when Full Screen Effect is fired.   
+ * @param  {Object|Boolean} btn          - Link or button that fires an event.
+ * @param  {Boolean} lightbox            - Whether to enable the lightbox effect.
+ * @param  {Number|Boolean} autoClose    - Specify auto-close time. This function is not enabled when this value is false.
+ * @return {Void}
+ */	
+( function ( $ ) {
+    $.fn.fireModalDialog = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+			id        : 'demo',
+			height    : false,
+			width     : false,
+			speed     : 500,
+			btn       : false,
+			lightbox  : true,
+			autoClose : false
+        }, options );
+		
+ 
+        this.each( function() {
+
+			if ( settings.id == '' ) return false;
+			
+			
+	
+			//Add modal mask to stage
+			if ( $( '.uix-modal-mask' ).length == 0 ) {
+				$( 'body' ).prepend( '<div class="uix-modal-mask"></div>' );
+			}
+			$.when( $( '.uix-modal-mask' ).length > 0 ).then( function() {
+
+				var dataID     = settings.id,
+					dataH      = settings.height,
+					dataW      = settings.width,
+					linkBtn    = settings.btn,
+					closeTime  = settings.autoClose,
+					$obj       = $( '.uix-modal-box#'+dataID );
+
+				// Initializate modal
+				if ( linkBtn ) {
+					linkBtn.attr( 'href', 'javascript:void(0)' );
+					$obj.find( '.uix-modal-box__content' ).addClass( 'js-uix-no-fullscreen' );
+
+
+					if ( linkBtn.data( 'video-win' ) ) {
+						$obj.find( '.uix-modal-box__content > div' ).css( 'overflow-y', 'hidden' );
+					}
+
+				}
+
+
+
+				if ( $obj.length > 0 ) {
+
+
+					// Locks the page
+					$.scrollLock( true );
+
+
+					if ( typeof dataH != typeof undefined && dataH != '' && dataH ) {
+						$obj.css( {'height': dataH } );
+					}
+
+					if ( typeof dataW != typeof undefined && dataW != '' && dataW ) {
+						$obj.css( {'width': dataW } );
+					}
+
+					
+					//Enable the lightbox effect.
+					if ( settings.lightbox ) {
+						TweenMax.set( '.uix-modal-mask', {
+							css: {
+								opacity : 0,
+								display : 'none'
+							},
+							onComplete : function() {
+
+								TweenMax.to( this.target, 0.3, {
+									css: {
+										opacity    : 1,
+										display    : 'block'
+									}
+								});		
+
+							}
+						});
+	
+					}
+
+					$obj.addClass( 'active' );
+					
+					
+					//auto close
+					if ( closeTime && !isNaN( closeTime ) ) {
+						setTimeout( function() {
+							$( document ).closeModalDialog();
+						}, closeTime );
+					}
+					
+					
+				}
+
+				if ( $obj.hasClass( 'is-fullscreen' ) ) {
+					setTimeout( function() {
+
+						if ( !$obj.hasClass( 'is-video' ) ) {
+							$obj.find( '.uix-modal-box__content > div' ).css( 'overflow-y', 'scroll' );
+						} else {
+							$obj.find( '.uix-modal-box__content > div' ).css( 'overflow-y', 'hidden' );
+						}
+
+					}, settings.speed );
+
+				}	
+
+			});
+			
+			
+		});
+ 
+    };
+ 
+}( jQuery ));
+
+
+
+
+/*
+ * Close Modal Dialog
+ *
+ * @return {Void}
+ */	
+( function ( $ ) {
+    $.fn.closeModalDialog = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+			target  : '.uix-modal-box'
+        }, options );
+		
+ 
+        this.each( function() {
+
+			$( settings.target ).removeClass( 'active' );
+			TweenMax.to( '.uix-modal-mask', 0.3, {
+				css: {
+					opacity : 0,
+					display : 'none'
+				}
+			});
+				
+			$( settings.target ).find( '.uix-modal-box__content' ).removeClass( 'js-uix-no-fullscreen' );
+			
+			
+			// Unlocks the page
+			$.scrollLock( false );
+			
+			
+		});
+ 
+    };
+ 
+}( jQuery ));
+
+
+/* 
+ *************************************
  * <!-- Mousewheel Interaction -->
  *************************************
  */
@@ -28890,6 +28885,45 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
+ * <!-- Responsive Table -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.TABLE               = APP.TABLE || {};
+	APP.TABLE.version       = '0.0.1';
+    APP.TABLE.documentReady = function( $ ) {
+
+		var $resTable = $('table.uix-table.is-responsive, .uix-table.is-responsive table'),
+			$thead    = $resTable.find( 'thead' ),
+			$tbody    = $resTable.find( 'tbody' );
+
+        $thead.find( 'th' ).each(function() {
+            var data = $(this).text();
+            if ( !$( this ).attr( 'data-table' ) ) {
+                $( this ).attr( 'data-table', data );
+            }
+        });
+
+        $tbody.find( 'td' ).each(function() {
+            var index = $(this).index();
+            var data = $thead.find( 'th:eq(' + index + ')' ).attr( 'data-table' );
+            $( this ).attr( 'data-table', data );
+        });
+		
+    };
+
+    APP.components.documentReady.push( APP.TABLE.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+/* 
+ *************************************
  * <!-- Table Sorter -->
  *************************************
  */
@@ -32319,6 +32353,16 @@ APP = ( function ( APP, $, window, document ) {
 	APP.WP_CORE.version       = '0.0.1';
     APP.WP_CORE.documentReady = function( $ ) {
 
+		/* 
+		 ---------------------------
+		 Pagination
+		 ---------------------------
+		 */  
+		$( '.uix-pagination__container li > span.current' ).each( function()  {
+			$( this ).parent( 'li' ).addClass( 'active' );
+		});
+		
+		
 		
 		/* 
 		 ---------------------------
@@ -32332,7 +32376,7 @@ APP = ( function ( APP, $, window, document ) {
 			  }
 			  return false;
 		  });
-		
+
 
 		
 		

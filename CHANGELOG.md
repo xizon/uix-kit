@@ -1,6 +1,13 @@
 # Changelog
 
 
+#### = 3.2.3 (February 22, 2019) =
+
+* Tweak: Minor adjustment of the component directory structure.
+* Tweak: UPgrade the Modal Dialog functions.
+
+
+
 #### = 3.2.2 (February 19, 2019) =
 
 * New: Added an Input Number form type.
