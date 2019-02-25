@@ -2,172 +2,328 @@
    <!-- ToolTip --> 
 /* ====================================================== */
 
+/*
+ * 1. Base Styles
+ * 2. Position Modifiers - Top
+ * 3. Position Modifiers - Top Left
+ * 4. Position Modifiers - Top Right
+ * 5. Position Modifiers - Bottom
+ * 6. Position Modifiers - Bottom Left
+ * 7. Position Modifiers - Bottom Right
+ * 8. Position Modifiers - Left
+ * 9. Position Modifiers - Right
+ * 10. Size
+*/
+
 .uix-tooltip {
     position: relative;
     display: inline-block;
-    
-	.uix-tooltip__content {
-		
-		font-size: 0.875rem;
-		visibility: hidden;
-		position: absolute;
-		min-width: 150px;
-		background-color: #fff;
-		color: #333;
-		padding: 0.75rem;
-		border-radius: 3px;
-		z-index: 1;
+	
+	[role~="tooltip"]::before,
+	> div {
+		transform: translate3d(0, 0, 0);
+		backface-visibility: hidden;
+		will-change: transform;
 		opacity: 0;
-		@include transition-default();
+		pointer-events: none;
+
+		position: absolute;
+		box-sizing: border-box;
+		z-index: 10;
+		transform-origin: top;
 		@include outer-shadow( 'regular' );
-		
-		
-		
+		@include transition-default();
+	}
+	
+    
+
+	/* 
+	---------------------------
+	1. Base Styles
+	---------------------------
+	*/  
+
+	> div {
+		background: rgba(17, 17, 17, 0.9);
+		border-radius: 4px;
+		color: #ffffff;
+		content: attr(aria-label);
+		font-size: 0.8125rem;
+		font-weight: normal;
+		text-transform: none;
+		padding: .5em 1em;
+		white-space: nowrap;
+		box-sizing: content-box;
+		line-height: 1.5;
+
 		img {
 			height: auto !important;
-			margin: 0;
+			margin: .5rem 0;
+		}
+		
+	}
+
+	[role~="tooltip"] {
+		
+		position: relative;
+
+		
+		&::before {
+			background-size: 100% auto !important;
+			content: "";
+		}
+
+		&:hover {
+
+			&::before, 
+			~ div {
+				opacity: 1;
+				pointer-events: auto;
+			}
+		}
+
+		&:focus {
+			&::before, 
+			~ div {
+				opacity: 1;
+				pointer-events: auto;
+			}
+		}
+	}
+
+
+
+	[role~="tooltip"] {
+
+
+		/* 
+		---------------------------
+		2. Position Modifiers - Top
+		---------------------------
+		*/   
+
+		&[data-microtip-position|="top"] {
+			&::before {
+				background: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2236px%22%20height%3D%2212px%22%3E%3Cpath%20fill%3D%22rgba%2817,%2017,%2017,%200.9%29%22%20transform%3D%22rotate%280%29%22%20d%3D%22M2.658,0.000%20C-13.615,0.000%2050.938,0.000%2034.662,0.000%20C28.662,0.000%2023.035,12.002%2018.660,12.002%20C14.285,12.002%208.594,0.000%202.658,0.000%20Z%22/%3E%3C/svg%3E") no-repeat;
+				height: 6px;
+				width: 18px;
+				margin-bottom: 5px;
+			}
+			~ div {
+				margin-bottom: 6px;
+			}
+			&::before {
+				transform: translate3d(-50%, 0, 0);
+				bottom: 100%;
+				left: 50%;
+			}
+			&:hover::before {
+				transform: translate3d(-50%, -5px, 0);
+			}
+			~ div {
+				transform: translate3d(-50%, 0, 0);
+				bottom: 100%;
+				left: 50%;
+			}
+		}
+		&[data-microtip-position="top"]:hover ~ div {
+			transform: translate3d(-50%, -5px, 0);
+		}
+
+
+		/* 
+		---------------------------
+		3. Position Modifiers - Top Left
+		---------------------------
+		*/     
+
+		&[data-microtip-position="top-left"] {
+			~ div {
+				transform: translate3d(calc(-100% + 16px), 0, 0);
+				bottom: 100%;
+			}
+			&:hover ~ div {
+				transform: translate3d(calc(-100% + 16px), -5px, 0);
+			}
+		}
+
+
+
+		/* 
+		---------------------------
+		4. Position Modifiers - Top Right
+		---------------------------
+		*/    
+
+		&[data-microtip-position="top-right"] {
+			~ div {
+				transform: translate3d(calc(0% + -16px), 0, 0);
+				bottom: 100%;
+			}
+			&:hover ~ div {
+				transform: translate3d(calc(0% + -16px), -5px, 0);
+			}
+		}
+
+		/* 
+		---------------------------
+		5. Position Modifiers - Bottom
+		---------------------------
+		*/  
+
+
+		&[data-microtip-position|="bottom"] {
+			&::before {
+				background: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2236px%22%20height%3D%2212px%22%3E%3Cpath%20fill%3D%22rgba%2817,%2017,%2017,%200.9%29%22%20transform%3D%22rotate%28180%2018%206%29%22%20d%3D%22M2.658,0.000%20C-13.615,0.000%2050.938,0.000%2034.662,0.000%20C28.662,0.000%2023.035,12.002%2018.660,12.002%20C14.285,12.002%208.594,0.000%202.658,0.000%20Z%22/%3E%3C/svg%3E") no-repeat;
+				height: 6px;
+				width: 18px;
+				margin-top: 5px;
+				margin-bottom: 0;
+			}
+			~ div {
+				margin-top: 6px;
+			}
+			&::before {
+				transform: translate3d(-50%, -10px, 0);
+				bottom: auto;
+				left: 50%;
+				top: 100%;
+			}
+			&:hover::before {
+				transform: translate3d(-50%, 0, 0);
+			}
+			~ div {
+				transform: translate3d(-50%, -10px, 0);
+				top: 100%;
+				left: 50%;
+			}
+		}
+		&[data-microtip-position="bottom"]:hover ~ div {
+			transform: translate3d(-50%, 0, 0);
 		}
 		
 
-		
-	}
 
-	&:hover .uix-tooltip__content {
-		visibility: visible;
-		opacity: 1;
-		transform: translate(0,0);
-	}
+		/* 
+		---------------------------
+		6. Position Modifiers - Bottom Left
+		---------------------------
+		*/  
 
 
-	.uix-tooltip__content--right {
-		top: -5px;
-		left: 125%;
-		transform: translate(10px,0);
-		
-		&::before {
-			content: "";
-			position: absolute;
-			top: 50%;
-			right: 100%;
-			margin-top: -5px;
-			border-width: 5px;
-			border-style: solid;
-			border-color: transparent #fff transparent transparent;
+		&[data-microtip-position="bottom-left"] {
+			~ div {
+				transform: translate3d(calc(-100% + 16px), -10px, 0);
+				top: 100%;
+			}
+			&:hover ~ div {
+				transform: translate3d(calc(-100% + 16px), 0, 0);
+			}
 		}
-		
-		
-		&::after {
-			content: "";
-			height: 100%;
-			top: 0;
-			right: 100%;
-			position: absolute;
-			display: block;
-			width: 1rem;
-			background-color: transparent;
-		}	
-		
-		
-	}
+
+		/* 
+		---------------------------
+		7. Position Modifiers - Bottom Right
+		---------------------------
+		*/   
 
 
-
-	.uix-tooltip__content--bottom {
-		top: 125%;
-		left: 50%;
-		margin-left: -60px;
-		transform: translate(0,10px);
-		
-		&::before {
-			content: "";
-			position: absolute;
-			bottom: 100%;
-			left: 50%;
-			margin-left: -5px;
-			border-width: 5px;
-			border-style: solid;
-			border-color: transparent transparent #fff transparent;
+		&[data-microtip-position="bottom-right"] {
+			~ div {
+				transform: translate3d(calc(0% + -16px), -10px, 0);
+				top: 100%;
+			}
+			&:hover ~ div {
+				transform: translate3d(calc(0% + -16px), 0, 0);
+			}
 		}
-		
-		&::after {
-			content: "";
-			width: 100%;
-			left: 0;
-			bottom: 100%;
-			position: absolute;
-			display: block;
-			height: 1rem;
-			background-color: transparent;
-		}	
-		
+
+
+		/* 
+		---------------------------
+		8. Position Modifiers - Left
+		---------------------------
+		*/  
+		&[data-microtip-position="left"] {
+			&::before, 
+			~ div {
+				bottom: auto;
+				left: auto;
+				right: 100%;
+				top: 50%;
+				transform: translate3d(10px, -50%, 0);
+			}
+			&::before {
+				background: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2212px%22%20height%3D%2236px%22%3E%3Cpath%20fill%3D%22rgba%2817,%2017,%2017,%200.9%29%22%20transform%3D%22rotate%28-90%2018%2018%29%22%20d%3D%22M2.658,0.000%20C-13.615,0.000%2050.938,0.000%2034.662,0.000%20C28.662,0.000%2023.035,12.002%2018.660,12.002%20C14.285,12.002%208.594,0.000%202.658,0.000%20Z%22/%3E%3C/svg%3E") no-repeat;
+				height: 18px;
+				width: 6px;
+				margin-right: 5px;
+				margin-bottom: 0;
+			}
+			~ div {
+				margin-right: 10px;
+			}
+			&:hover {
+				&::before, 
+				~ div {
+					transform: translate3d(0, -50%, 0);
+				}
+			}
+		}
+
+
+		/* 
+		 ---------------------------
+		 9. Position Modifiers - Right
+		 ---------------------------
+		 */   
+
+		&[data-microtip-position="right"] {
+			&::before, 
+			~ div {
+				bottom: auto;
+				left: 100%;
+				top: 50%;
+				transform: translate3d(-10px, -50%, 0);
+			}
+			&::before {
+				background: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2212px%22%20height%3D%2236px%22%3E%3Cpath%20fill%3D%22rgba%2817,%2017,%2017,%200.9%29%22%20transform%3D%22rotate%2890%206%206%29%22%20d%3D%22M2.658,0.000%20C-13.615,0.000%2050.938,0.000%2034.662,0.000%20C28.662,0.000%2023.035,12.002%2018.660,12.002%20C14.285,12.002%208.594,0.000%202.658,0.000%20Z%22/%3E%3C/svg%3E") no-repeat;
+				height: 18px;
+				width: 6px;
+				margin-bottom: 0;
+				margin-left: 5px;
+			}
+			~ div {
+				margin-left: 10px;
+			}
+			&:hover {
+				&::before, 
+				~ div {
+					transform: translate3d(0, -50%, 0);
+				}
+			}
+		}
+
+
+		/* 
+		 ---------------------------
+		 10. Size
+		 ---------------------------
+		 */   
+		&[data-microtip-size="small"] ~ div {
+			white-space: initial;
+			width: 80px;
+		}
+		&[data-microtip-size="medium"] ~ div {
+			white-space: initial;
+			width: 150px;
+		}
+		&[data-microtip-size="large"] ~ div {
+			white-space: initial;
+			width: 260px;
+		}
 	}
-
-
-
-
-	.uix-tooltip__content--top {
-		bottom: 125%;
-		left: 50%;
-		margin-left: -60px;
-		transform: translate(0,-10px);
-		
-		&::before {
-			content: "";
-			position: absolute;
-			top: 100%;
-			left: 50%;
-			margin-left: -5px;
-			border-width: 5px;
-			border-style: solid;
-			border-color: #fff transparent transparent transparent;
-		}	
-
-		
-		&::after {
-			content: "";
-			width: 100%;
-			left: 0;
-			top: 100%;
-			position: absolute;
-			display: block;
-			height: 1rem;
-			background-color: transparent;
-		}		
-		
-	}
-
 	
-
-
-	.uix-tooltip__content--left {
-		top: -5px;
-		bottom: auto;
-		right: 125%;
-		transform: translate(-10px,0);
-		
-		&::before {
-			content: "";
-			position: absolute;
-			top: 50%;
-			left: 100%;
-			margin-top: -5px;
-			border-width: 5px;
-			border-style: solid;
-			border-color: transparent transparent transparent #fff;
-		}
-		
-		&::after {
-			content: "";
-			height: 100%;
-			top: 0;
-			left: 100%;
-			position: absolute;
-			display: block;
-			width: 1rem;
-			background-color: transparent;
-		}	
-		
-	}
-
 	
 }
+

@@ -1,5 +1,10 @@
 # Changelog
 
+#### = 3.2.4 (February 25, 2019) =
+
+* Tweak: Upgrade the Tooltip module.
+
+
 
 #### = 3.2.3 (February 22, 2019) =
 

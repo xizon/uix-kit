@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.2.3
+ * ## Version             :  3.2.4
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  February 22, 2019
+ * ## Last Update         :  February 25, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -11932,120 +11932,220 @@ table.is-horizontal th,
 /* ====================================================== 
    <!-- ToolTip --> 
 /* ====================================================== */
+/*
+ * 1. Base Styles
+ * 2. Position Modifiers - Top
+ * 3. Position Modifiers - Top Left
+ * 4. Position Modifiers - Top Right
+ * 5. Position Modifiers - Bottom
+ * 6. Position Modifiers - Bottom Left
+ * 7. Position Modifiers - Bottom Right
+ * 8. Position Modifiers - Left
+ * 9. Position Modifiers - Right
+ * 10. Size
+*/
 .uix-tooltip {
   position: relative;
-  display: inline-block; }
-  .uix-tooltip .uix-tooltip__content {
-    font-size: 0.875rem;
-    visibility: hidden;
-    position: absolute;
-    min-width: 150px;
-    background-color: #fff;
-    color: #333;
-    padding: 0.75rem;
-    border-radius: 3px;
-    z-index: 1;
+  display: inline-block;
+  /* 
+	---------------------------
+	1. Base Styles
+	---------------------------
+	*/ }
+  .uix-tooltip [role~="tooltip"]::before,
+  .uix-tooltip > div {
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    will-change: transform;
     opacity: 0;
-    transition: all 0.3s ease;
-    box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px; }
-    .uix-tooltip .uix-tooltip__content img {
+    pointer-events: none;
+    position: absolute;
+    box-sizing: border-box;
+    z-index: 10;
+    transform-origin: top;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px;
+    transition: all 0.3s ease; }
+  .uix-tooltip > div {
+    background: rgba(17, 17, 17, 0.9);
+    border-radius: 4px;
+    color: #ffffff;
+    content: attr(aria-label);
+    font-size: 0.8125rem;
+    font-weight: normal;
+    text-transform: none;
+    padding: .5em 1em;
+    white-space: nowrap;
+    box-sizing: content-box;
+    line-height: 1.5; }
+    .uix-tooltip > div img {
       height: auto !important;
-      margin: 0; }
-  .uix-tooltip:hover .uix-tooltip__content, .uix-controls__multi-sel > span.uix-tooltip.active:not(.uix-controls__bar) .uix-tooltip__content {
-    visibility: visible;
-    opacity: 1;
-    transform: translate(0, 0); }
-  .uix-tooltip .uix-tooltip__content--right {
-    top: -5px;
-    left: 125%;
-    transform: translate(10px, 0); }
-    .uix-tooltip .uix-tooltip__content--right::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      right: 100%;
-      margin-top: -5px;
-      border-width: 5px;
-      border-style: solid;
-      border-color: transparent #fff transparent transparent; }
-    .uix-tooltip .uix-tooltip__content--right::after {
-      content: "";
-      height: 100%;
-      top: 0;
-      right: 100%;
-      position: absolute;
-      display: block;
-      width: 1rem;
-      background-color: transparent; }
-  .uix-tooltip .uix-tooltip__content--bottom {
-    top: 125%;
-    left: 50%;
-    margin-left: -60px;
-    transform: translate(0, 10px); }
-    .uix-tooltip .uix-tooltip__content--bottom::before {
-      content: "";
-      position: absolute;
+      margin: .5rem 0; }
+  .uix-tooltip [role~="tooltip"] {
+    position: relative; }
+    .uix-tooltip [role~="tooltip"]::before {
+      background-size: 100% auto !important;
+      content: ""; }
+    .uix-tooltip [role~="tooltip"]:hover::before, .uix-tooltip .uix-controls__multi-sel > span.active:not(.uix-controls__bar)[role~="tooltip"]::before,
+    .uix-tooltip [role~="tooltip"]:hover ~ div,
+    .uix-tooltip .uix-controls__multi-sel > span.active[role~="tooltip"]:not(.uix-controls__bar) ~ div {
+      opacity: 1;
+      pointer-events: auto; }
+    .uix-tooltip [role~="tooltip"]:focus::before,
+    .uix-tooltip [role~="tooltip"]:focus ~ div {
+      opacity: 1;
+      pointer-events: auto; }
+  .uix-tooltip [role~="tooltip"] {
+    /* 
+		---------------------------
+		2. Position Modifiers - Top
+		---------------------------
+		*/
+    /* 
+		---------------------------
+		3. Position Modifiers - Top Left
+		---------------------------
+		*/
+    /* 
+		---------------------------
+		4. Position Modifiers - Top Right
+		---------------------------
+		*/
+    /* 
+		---------------------------
+		5. Position Modifiers - Bottom
+		---------------------------
+		*/
+    /* 
+		---------------------------
+		6. Position Modifiers - Bottom Left
+		---------------------------
+		*/
+    /* 
+		---------------------------
+		7. Position Modifiers - Bottom Right
+		---------------------------
+		*/
+    /* 
+		---------------------------
+		8. Position Modifiers - Left
+		---------------------------
+		*/
+    /* 
+		 ---------------------------
+		 9. Position Modifiers - Right
+		 ---------------------------
+		 */
+    /* 
+		 ---------------------------
+		 10. Size
+		 ---------------------------
+		 */ }
+    .uix-tooltip [role~="tooltip"][data-microtip-position|="top"]::before {
+      background: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2236px%22%20height%3D%2212px%22%3E%3Cpath%20fill%3D%22rgba%2817,%2017,%2017,%200.9%29%22%20transform%3D%22rotate%280%29%22%20d%3D%22M2.658,0.000%20C-13.615,0.000%2050.938,0.000%2034.662,0.000%20C28.662,0.000%2023.035,12.002%2018.660,12.002%20C14.285,12.002%208.594,0.000%202.658,0.000%20Z%22/%3E%3C/svg%3E") no-repeat;
+      height: 6px;
+      width: 18px;
+      margin-bottom: 5px; }
+    .uix-tooltip [role~="tooltip"][data-microtip-position|="top"] ~ div {
+      margin-bottom: 6px; }
+    .uix-tooltip [role~="tooltip"][data-microtip-position|="top"]::before {
+      transform: translate3d(-50%, 0, 0);
       bottom: 100%;
-      left: 50%;
-      margin-left: -5px;
-      border-width: 5px;
-      border-style: solid;
-      border-color: transparent transparent #fff transparent; }
-    .uix-tooltip .uix-tooltip__content--bottom::after {
-      content: "";
-      width: 100%;
-      left: 0;
+      left: 50%; }
+    .uix-tooltip [role~="tooltip"][data-microtip-position|="top"]:hover::before, .uix-tooltip .uix-controls__multi-sel > span.active:not(.uix-controls__bar)[role~="tooltip"][data-microtip-position|="top"]::before {
+      transform: translate3d(-50%, -5px, 0); }
+    .uix-tooltip [role~="tooltip"][data-microtip-position|="top"] ~ div {
+      transform: translate3d(-50%, 0, 0);
       bottom: 100%;
-      position: absolute;
-      display: block;
-      height: 1rem;
-      background-color: transparent; }
-  .uix-tooltip .uix-tooltip__content--top {
-    bottom: 125%;
-    left: 50%;
-    margin-left: -60px;
-    transform: translate(0, -10px); }
-    .uix-tooltip .uix-tooltip__content--top::before {
-      content: "";
-      position: absolute;
-      top: 100%;
+      left: 50%; }
+    .uix-tooltip [role~="tooltip"][data-microtip-position="top"]:hover ~ div, .uix-tooltip .uix-controls__multi-sel > span.active[role~="tooltip"][data-microtip-position="top"]:not(.uix-controls__bar) ~ div {
+      transform: translate3d(-50%, -5px, 0); }
+    .uix-tooltip [role~="tooltip"][data-microtip-position="top-left"] ~ div {
+      transform: translate3d(calc(-100% + 16px), 0, 0);
+      bottom: 100%; }
+    .uix-tooltip [role~="tooltip"][data-microtip-position="top-left"]:hover ~ div, .uix-tooltip .uix-controls__multi-sel > span.active[role~="tooltip"][data-microtip-position="top-left"]:not(.uix-controls__bar) ~ div {
+      transform: translate3d(calc(-100% + 16px), -5px, 0); }
+    .uix-tooltip [role~="tooltip"][data-microtip-position="top-right"] ~ div {
+      transform: translate3d(calc(0% + -16px), 0, 0);
+      bottom: 100%; }
+    .uix-tooltip [role~="tooltip"][data-microtip-position="top-right"]:hover ~ div, .uix-tooltip .uix-controls__multi-sel > span.active[role~="tooltip"][data-microtip-position="top-right"]:not(.uix-controls__bar) ~ div {
+      transform: translate3d(calc(0% + -16px), -5px, 0); }
+    .uix-tooltip [role~="tooltip"][data-microtip-position|="bottom"]::before {
+      background: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2236px%22%20height%3D%2212px%22%3E%3Cpath%20fill%3D%22rgba%2817,%2017,%2017,%200.9%29%22%20transform%3D%22rotate%28180%2018%206%29%22%20d%3D%22M2.658,0.000%20C-13.615,0.000%2050.938,0.000%2034.662,0.000%20C28.662,0.000%2023.035,12.002%2018.660,12.002%20C14.285,12.002%208.594,0.000%202.658,0.000%20Z%22/%3E%3C/svg%3E") no-repeat;
+      height: 6px;
+      width: 18px;
+      margin-top: 5px;
+      margin-bottom: 0; }
+    .uix-tooltip [role~="tooltip"][data-microtip-position|="bottom"] ~ div {
+      margin-top: 6px; }
+    .uix-tooltip [role~="tooltip"][data-microtip-position|="bottom"]::before {
+      transform: translate3d(-50%, -10px, 0);
+      bottom: auto;
       left: 50%;
-      margin-left: -5px;
-      border-width: 5px;
-      border-style: solid;
-      border-color: #fff transparent transparent transparent; }
-    .uix-tooltip .uix-tooltip__content--top::after {
-      content: "";
-      width: 100%;
-      left: 0;
+      top: 100%; }
+    .uix-tooltip [role~="tooltip"][data-microtip-position|="bottom"]:hover::before, .uix-tooltip .uix-controls__multi-sel > span.active:not(.uix-controls__bar)[role~="tooltip"][data-microtip-position|="bottom"]::before {
+      transform: translate3d(-50%, 0, 0); }
+    .uix-tooltip [role~="tooltip"][data-microtip-position|="bottom"] ~ div {
+      transform: translate3d(-50%, -10px, 0);
       top: 100%;
-      position: absolute;
-      display: block;
-      height: 1rem;
-      background-color: transparent; }
-  .uix-tooltip .uix-tooltip__content--left {
-    top: -5px;
-    bottom: auto;
-    right: 125%;
-    transform: translate(-10px, 0); }
-    .uix-tooltip .uix-tooltip__content--left::before {
-      content: "";
-      position: absolute;
+      left: 50%; }
+    .uix-tooltip [role~="tooltip"][data-microtip-position="bottom"]:hover ~ div, .uix-tooltip .uix-controls__multi-sel > span.active[role~="tooltip"][data-microtip-position="bottom"]:not(.uix-controls__bar) ~ div {
+      transform: translate3d(-50%, 0, 0); }
+    .uix-tooltip [role~="tooltip"][data-microtip-position="bottom-left"] ~ div {
+      transform: translate3d(calc(-100% + 16px), -10px, 0);
+      top: 100%; }
+    .uix-tooltip [role~="tooltip"][data-microtip-position="bottom-left"]:hover ~ div, .uix-tooltip .uix-controls__multi-sel > span.active[role~="tooltip"][data-microtip-position="bottom-left"]:not(.uix-controls__bar) ~ div {
+      transform: translate3d(calc(-100% + 16px), 0, 0); }
+    .uix-tooltip [role~="tooltip"][data-microtip-position="bottom-right"] ~ div {
+      transform: translate3d(calc(0% + -16px), -10px, 0);
+      top: 100%; }
+    .uix-tooltip [role~="tooltip"][data-microtip-position="bottom-right"]:hover ~ div, .uix-tooltip .uix-controls__multi-sel > span.active[role~="tooltip"][data-microtip-position="bottom-right"]:not(.uix-controls__bar) ~ div {
+      transform: translate3d(calc(0% + -16px), 0, 0); }
+    .uix-tooltip [role~="tooltip"][data-microtip-position="left"]::before,
+    .uix-tooltip [role~="tooltip"][data-microtip-position="left"] ~ div {
+      bottom: auto;
+      left: auto;
+      right: 100%;
       top: 50%;
+      transform: translate3d(10px, -50%, 0); }
+    .uix-tooltip [role~="tooltip"][data-microtip-position="left"]::before {
+      background: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2212px%22%20height%3D%2236px%22%3E%3Cpath%20fill%3D%22rgba%2817,%2017,%2017,%200.9%29%22%20transform%3D%22rotate%28-90%2018%2018%29%22%20d%3D%22M2.658,0.000%20C-13.615,0.000%2050.938,0.000%2034.662,0.000%20C28.662,0.000%2023.035,12.002%2018.660,12.002%20C14.285,12.002%208.594,0.000%202.658,0.000%20Z%22/%3E%3C/svg%3E") no-repeat;
+      height: 18px;
+      width: 6px;
+      margin-right: 5px;
+      margin-bottom: 0; }
+    .uix-tooltip [role~="tooltip"][data-microtip-position="left"] ~ div {
+      margin-right: 10px; }
+    .uix-tooltip [role~="tooltip"][data-microtip-position="left"]:hover::before, .uix-tooltip .uix-controls__multi-sel > span.active:not(.uix-controls__bar)[role~="tooltip"][data-microtip-position="left"]::before,
+    .uix-tooltip [role~="tooltip"][data-microtip-position="left"]:hover ~ div,
+    .uix-tooltip .uix-controls__multi-sel > span.active[role~="tooltip"][data-microtip-position="left"]:not(.uix-controls__bar) ~ div {
+      transform: translate3d(0, -50%, 0); }
+    .uix-tooltip [role~="tooltip"][data-microtip-position="right"]::before,
+    .uix-tooltip [role~="tooltip"][data-microtip-position="right"] ~ div {
+      bottom: auto;
       left: 100%;
-      margin-top: -5px;
-      border-width: 5px;
-      border-style: solid;
-      border-color: transparent transparent transparent #fff; }
-    .uix-tooltip .uix-tooltip__content--left::after {
-      content: "";
-      height: 100%;
-      top: 0;
-      left: 100%;
-      position: absolute;
-      display: block;
-      width: 1rem;
-      background-color: transparent; }
+      top: 50%;
+      transform: translate3d(-10px, -50%, 0); }
+    .uix-tooltip [role~="tooltip"][data-microtip-position="right"]::before {
+      background: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2212px%22%20height%3D%2236px%22%3E%3Cpath%20fill%3D%22rgba%2817,%2017,%2017,%200.9%29%22%20transform%3D%22rotate%2890%206%206%29%22%20d%3D%22M2.658,0.000%20C-13.615,0.000%2050.938,0.000%2034.662,0.000%20C28.662,0.000%2023.035,12.002%2018.660,12.002%20C14.285,12.002%208.594,0.000%202.658,0.000%20Z%22/%3E%3C/svg%3E") no-repeat;
+      height: 18px;
+      width: 6px;
+      margin-bottom: 0;
+      margin-left: 5px; }
+    .uix-tooltip [role~="tooltip"][data-microtip-position="right"] ~ div {
+      margin-left: 10px; }
+    .uix-tooltip [role~="tooltip"][data-microtip-position="right"]:hover::before, .uix-tooltip .uix-controls__multi-sel > span.active:not(.uix-controls__bar)[role~="tooltip"][data-microtip-position="right"]::before,
+    .uix-tooltip [role~="tooltip"][data-microtip-position="right"]:hover ~ div,
+    .uix-tooltip .uix-controls__multi-sel > span.active[role~="tooltip"][data-microtip-position="right"]:not(.uix-controls__bar) ~ div {
+      transform: translate3d(0, -50%, 0); }
+    .uix-tooltip [role~="tooltip"][data-microtip-size="small"] ~ div {
+      white-space: initial;
+      width: 80px; }
+    .uix-tooltip [role~="tooltip"][data-microtip-size="medium"] ~ div {
+      white-space: initial;
+      width: 150px; }
+    .uix-tooltip [role~="tooltip"][data-microtip-size="large"] ~ div {
+      white-space: initial;
+      width: 260px; }
 
 /* ====================================================== 
    <!-- Vertical Menu -->     
