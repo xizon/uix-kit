@@ -1,16 +1,23 @@
-# Uix Kit
-
-
-[![Travis CI](https://api.travis-ci.org/xizon/uix-kit.svg?branch=master)](https://travis-ci.org/xizon/uix-kit/)
-[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=3.2.4&x2=0)](https://www.npmjs.com/package/uix-kit)
-[![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
-
-
-<p align = "left">
-    <img width="300" src="https://uiux.cc/uix-kit/assets/images/logo-colorful.png">
+<p align="center">
+  <a href="https://github.com/xizon/uix-kit">
+	  <img src="https://uiux.cc/uix-kit/assets/images/logo-colorful.png"  alt="Uix Kit"  width="180" >
+  </a>
+  <p align="center">Make over <strong>120+</strong> components to wear again and again!</p>
+  <p align="center">
+      <a href="https://travis-ci.org/xizon/uix-kit/" title="Travis CI"><img src="https://api.travis-ci.org/xizon/uix-kit.svg?branch=master"/></a>
+	  <a href="https://www.npmjs.com/package/uix-kit" title="npm version"><img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=3.2.5&x2=0"/></a>
+	  <a href="https://github.com/xizon/uix-kit/blob/master/LICENSE" title="license"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg"/></a>
+	   
+  </p>
+  <br>
 </p>
 
+A free web kits for fast web design and development, compatible with Bootstrap v4. This spec is a living document that will be updated as we continue to develop the tenets and specifics of Uix Kit. Support JS, HTML and SASS component library automatically packaged. Automatically convert ES6 JS to ES5 using Babel in this scaffold.
+
+
+
 ---
+
 
 
 [Demo](https://uiux.cc/uix-kit) | [NPM](https://www.npmjs.com/package/uix-kit)
@@ -41,12 +48,8 @@
 
 
 
-## Description
+## Key Features
 
-Make over <strong>120+</strong> components to wear again and again!
-
-
-An underlying front-end system that makes it easy to extend and modify core files. This spec is a living document that will be updated as we continue to develop the tenets and specifics of Uix Kit. Support JS, HTML and SASS component library automatically packaged. Automatically convert ES6 JS to ES5 using Babel in this scaffold.
 
 Enjoy the fluid grid system based on Bootstrap and self-expansion. Uix Kit is built over Bootstrap and has all the benefits that the framework comes with. Regardless of the screen size, the website content will naturally fit the given resolution. Using the Uix Kit will save you large amount of time to build your projects. It supports 3D and 2D rendering with three.js and pixi.js. More typically, automatically generate core files with Webpack for each module (contains .js, .scss, .html files).
 

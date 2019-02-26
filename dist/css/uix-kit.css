@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.2.4
+ * ## Version             :  3.2.5
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  February 25, 2019
+ * ## Last Update         :  February 26, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -281,7 +281,8 @@ code {
   display: inline-block;
   margin: 0 .2rem .2rem 0;
   padding: .1rem .4rem;
-  white-space: nowrap; }
+  white-space: nowrap;
+  font-family: "Inconsolata", "Monaco", "Consolas", "Andale Mono", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace; }
 
 pre {
   background: #fff;
@@ -310,7 +311,7 @@ pre {
       pointer-events: none;
       color: #ddd; }
     pre.uix-precode code {
-      font-family: "Inconsolata","Monaco","Consolas","Andale Mono","Bitstream Vera Sans Mono","Courier New",Courier,monospace;
+      font-family: "Inconsolata", "Monaco", "Consolas", "Andale Mono", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
       display: block;
       margin: 0 0 0 3rem;
       padding: 1rem;
@@ -10835,9 +10836,11 @@ table.uix-table,
   table.uix-table.is-responsive thead,
   .uix-table.is-responsive table thead {
     display: none; }
-  table.uix-table.is-responsive tbody tr:nth-of-type(even),
-  .uix-table.is-responsive table tbody tr:nth-of-type(even) {
-    background-color: #f2f2f2; }
+  table.uix-table.is-responsive tbody tr,
+  .uix-table.is-responsive table tbody tr {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px 0px;
+    margin-bottom: 1rem;
+    display: block; }
   table.uix-table.is-responsive tbody td,
   .uix-table.is-responsive table tbody td {
     display: block; }
@@ -10854,7 +10857,65 @@ table.uix-table,
     .uix-table.is-responsive table tbody td::after {
       content: '';
       display: block;
-      clear: both; } }
+      clear: both; }
+  /* With scroll bars */
+  .js-uix-table--responsive-scrolled table,
+  table.js-uix-table--responsive-scrolled {
+    display: block;
+    width: 100%;
+    border-bottom: 0 !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    overflow: auto; }
+    .js-uix-table--responsive-scrolled table thead,
+    table.js-uix-table--responsive-scrolled thead {
+      display: block;
+      float: left;
+      width: 100px;
+      border-bottom: 1px solid #d6d5d5; }
+      .js-uix-table--responsive-scrolled table thead th,
+      table.js-uix-table--responsive-scrolled thead th {
+        display: block; }
+        .js-uix-table--responsive-scrolled table thead th:not(last-child),
+        table.js-uix-table--responsive-scrolled thead th:not(last-child) {
+          border-bottom: 0; }
+    .js-uix-table--responsive-scrolled table tbody,
+    table.js-uix-table--responsive-scrolled tbody {
+      width: calc(100% - 100px);
+      display: block;
+      float: left;
+      overflow-x: scroll;
+      border-bottom: 1px solid #d6d5d5;
+      border-right: 1px solid #d6d5d5; }
+    .js-uix-table--responsive-scrolled table thead tr,
+    .js-uix-table--responsive-scrolled table tbody tr,
+    table.js-uix-table--responsive-scrolled thead tr,
+    table.js-uix-table--responsive-scrolled tbody tr {
+      display: block; }
+    .js-uix-table--responsive-scrolled table th,
+    .js-uix-table--responsive-scrolled table tbody td,
+    table.js-uix-table--responsive-scrolled th,
+    table.js-uix-table--responsive-scrolled tbody td {
+      box-sizing: border-box;
+      overflow-x: hidden;
+      overflow-y: auto; }
+      .js-uix-table--responsive-scrolled table th:first-child,
+      .js-uix-table--responsive-scrolled table tbody td:first-child,
+      table.js-uix-table--responsive-scrolled th:first-child,
+      table.js-uix-table--responsive-scrolled tbody td:first-child {
+        border-top: 0; }
+      .js-uix-table--responsive-scrolled table th:not(last-child),
+      .js-uix-table--responsive-scrolled table tbody td:not(last-child),
+      table.js-uix-table--responsive-scrolled th:not(last-child),
+      table.js-uix-table--responsive-scrolled tbody td:not(last-child) {
+        border-bottom: 0;
+        border-right: 0; }
+    .js-uix-table--responsive-scrolled table tbody tr,
+    table.js-uix-table--responsive-scrolled tbody tr {
+      display: table-cell; }
+    .js-uix-table--responsive-scrolled table tbody td,
+    table.js-uix-table--responsive-scrolled tbody td {
+      display: block; } }
 
 table.uix-table--bordered,
 .uix-table--bordered table {

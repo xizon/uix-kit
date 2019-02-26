@@ -70,8 +70,11 @@ table.uix-table,
 			td {
 			
 				&::before {
+					float: right;
 					border-left: 1px solid $table-border-color;
+					margin-right: auto;
 					margin-left: 0.5rem;
+					
 				}
 
 			}	
@@ -80,7 +83,36 @@ table.uix-table,
 
 
 	}
+	
 
+	/* With scroll bars */
+	.js-uix-table--responsive-scrolled table,
+	table.js-uix-table--responsive-scrolled {
+		
+		
+		thead {
+			float: right;
+			
+			
+		}
+		tbody {
+			float: right;
+			border-left: 1px solid $table-border-color;
+		}
+		
+		th, 
+		tbody td {
+			
+			&:not(last-child) {
+				border-left: 0;
+			}
+			
+		}
+		
+		
+	}
+	
+	
 }
 
 /* 

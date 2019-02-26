@@ -124,8 +124,15 @@ table.uix-table,
 		    display: none;
 		}
 		tbody {
+			
+			tr {
+				@include outer-shadow( 'light' );
+				margin-bottom: 1rem;
+				display: block;		
+			}
+			
 			tr:nth-of-type(even) {
-				background-color: $table-alternant-bg;
+				//background-color: $table-alternant-bg;
 			}
 			
 			td {
@@ -155,6 +162,76 @@ table.uix-table,
 
 	}
 
+
+	/* With scroll bars */
+	.js-uix-table--responsive-scrolled table,
+	table.js-uix-table--responsive-scrolled {
+		display: block;
+		width: 100%;
+		border-bottom: 0 !important;
+		border-left: 0 !important;
+		border-right: 0 !important;
+		overflow: auto;
+		
+		
+		thead {
+			display: block;
+			float: left;
+			width: 100px;
+			border-bottom: 1px solid $table-border-color;
+			
+			th {
+				display: block;
+	
+				&:not(last-child) {
+					border-bottom: 0;
+				}
+				
+			}
+		}
+		tbody {
+			width: calc(100% - 100px);
+			display: block;
+			float: left;
+			overflow-x: scroll;
+			border-bottom: 1px solid $table-border-color;
+			border-right: 1px solid $table-border-color;
+		}
+		thead tr, 
+		tbody tr {
+			display: block;
+		}
+		th, 
+		tbody td {
+			box-sizing: border-box;
+			overflow-x: hidden;
+			overflow-y: auto;
+				
+			&:first-child {
+				border-top: 0;
+			}
+			
+			&:not(last-child) {
+				border-bottom: 0;
+				border-right: 0;
+			}
+			
+		}
+		
+	
+		tbody tr {
+			display: table-cell;
+			
+		}
+
+		tbody td {
+		    display: block;
+		}	
+		
+		
+		
+	}
+	
 }
 
 

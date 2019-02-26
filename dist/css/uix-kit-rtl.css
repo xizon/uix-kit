@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.2.4
+ * ## Version             :  3.2.5
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  February 25, 2019
+ * ## Last Update         :  February 26, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -1203,8 +1203,23 @@ table.uix-table thead th.uix-t-l,
 @media all and (max-width: 768px) {
   table.uix-table.is-responsive tbody td::before,
   .uix-table.is-responsive table tbody td::before {
+    float: right;
     border-left: 1px solid #d6d5d5;
-    margin-left: 0.5rem; } }
+    margin-right: auto;
+    margin-left: 0.5rem; }
+  /* With scroll bars */
+  .js-uix-table--responsive-scrolled table thead,
+  table.js-uix-table--responsive-scrolled thead {
+    float: right; }
+  .js-uix-table--responsive-scrolled table tbody,
+  table.js-uix-table--responsive-scrolled tbody {
+    float: right;
+    border-left: 1px solid #d6d5d5; }
+  .js-uix-table--responsive-scrolled table th:not(last-child),
+  .js-uix-table--responsive-scrolled table tbody td:not(last-child),
+  table.js-uix-table--responsive-scrolled th:not(last-child),
+  table.js-uix-table--responsive-scrolled tbody td:not(last-child) {
+    border-left: 0; } }
 
 /* 
  ---------------------------

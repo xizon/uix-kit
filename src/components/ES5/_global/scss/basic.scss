@@ -138,6 +138,7 @@ code {
 	margin: 0 .2rem .2rem 0;
 	padding: .1rem .4rem;
 	white-space: nowrap;
+	font-family: $font-code;
 }
 
 
@@ -172,7 +173,7 @@ pre {
 			color: #ddd;
 		}
 		code {
-			font-family: "Inconsolata","Monaco","Consolas","Andale Mono","Bitstream Vera Sans Mono","Courier New",Courier,monospace;
+			font-family: $font-code;
 			display: block;
 			margin: 0 0 0 3rem;
 			padding: 1rem;

@@ -1,5 +1,11 @@
 # Changelog
 
+#### = 3.2.5 (February 26, 2019) =
+
+* Tweak: Upgrade the responsive Table module.
+
+
+
 #### = 3.2.4 (February 25, 2019) =
 
 * Tweak: Upgrade the Tooltip module.
