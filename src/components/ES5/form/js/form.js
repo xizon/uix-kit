@@ -40,7 +40,7 @@ APP = ( function ( APP, $, window, document ) {
 		 */ 
 		//Search Submit Event in WordPress
 		$( '.uix-search-box__submit' ).on( 'click', function() {
-			$( this ).parent().parent( 'form' ).submit();
+			$( this ).closest( 'form' ).submit();
 		});
 		
 		
