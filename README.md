@@ -5,7 +5,7 @@
   <p align="center">Make over <strong>120+</strong> components to wear again and again!</p>
   <p align="center">
       <a href="https://travis-ci.org/xizon/uix-kit/" title="Travis CI"><img src="https://api.travis-ci.org/xizon/uix-kit.svg?branch=master"/></a>
-	  <a href="https://www.npmjs.com/package/uix-kit" title="npm version"><img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=3.2.5&x2=0"/></a>
+	  <a href="https://www.npmjs.com/package/uix-kit" title="npm version"><img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=3.2.6&x2=0"/></a>
 	  <a href="https://github.com/xizon/uix-kit/blob/master/LICENSE" title="license"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg"/></a>
 	   
   </p>
@@ -206,14 +206,7 @@ $ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
     <script src="assets/js/min/three.min.js?ver=r99"></script>
     <script src="assets/js/min/anime.min.js?ver=2.2.0"></script>
     <script src="assets/js/min/hammer.min.js?ver=2.0.8"></script>
-    
-    
-    <!-- Masonry -->
-    <script src="assets/js/wp-jquery/masonry.min.js?ver=3.3.2"></script>
-    <script src="assets/js/wp-jquery/imagesloaded.min.js?ver=4.1.0"></script>
-
-    <!-- Filterable  -->
-    <script src="assets/js/min/jquery.shuffle.min.js?ver=3.1.1"></script> 
+    <script src="assets/js/min/muuri.min.js?ver=0.7.1"></script>
     
     
 	

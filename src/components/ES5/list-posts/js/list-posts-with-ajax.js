@@ -8,9 +8,8 @@
 /**
  * APP.POST_LIST_AJAX 
  * @global
- * @requires examples/assets/js/min/template7.min.js
- * @requires examples/assets/js/wp-jquery/masonry.min.js
- * @requires examples/assets/js/wp-jquery/imagesloaded.min.js
+ * @requires ./examples/assets/js/min/template7.min.js
+ * @requires ./examples/assets/js/min/muuri.min.js
  */
 
 
@@ -452,31 +451,6 @@ APP = ( function ( APP, $, window, document ) {
 								$divRoot.find( pushContainer ).html( htmlEl );
 							}
 							
-							
-							
-							
-							//--------- jQuery Masonry and Ajax Append Items
-							$( '.uix-gallery' ).each( function() {
-								var type = $( this ).data( 'show-type' );
-
-								if ( type.indexOf( 'masonry' ) >= 0  ) {
-									$( this ).addClass( 'masonry-container' );
-									$( this ).find( '.uix-gallery__item' ).addClass( 'masonry-item' );
-								}
-								
-							});
-							
-							var masonryItemContainer = $( '.masonry-container' );
-							imagesLoaded( masonryItemContainer ).on( 'always', function() {
-								 masonryItemContainer.masonry({
-								    itemSelector: '.masonry-item'
-								 });  
-								
-								$( masonryItemContainer ).masonry( 'reloadItems' );
-								$( masonryItemContainer ).masonry( 'layout' );	
-								
-							});	
-				
 							
 							//--------- Apply the original scripts
 							$( document ).applyOriginalSomeScripts({

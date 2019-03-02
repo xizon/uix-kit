@@ -1,5 +1,14 @@
 # Changelog
 
+
+
+#### = 3.2.6 (March 1, 2019) =
+
+* Tweak: Use Muuri JavaScript layout engine instead of Shuffle.js.
+* Tweak: Remove masonry plugin.
+
+ 
+
 #### = 3.2.5 (February 26, 2019) =
 
 * Tweak: Upgrade the responsive Table module.

@@ -4,7 +4,7 @@
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
  * ## Version             :  3.2.5
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  February 26, 2019
+ * ## Last Update         :  March 2, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -4291,7 +4291,8 @@ h6 {
     background-image: linear-gradient(to right, #e4e7ed 0%, #e4e7ed 20%, #e4e7ed 100%) !important;
     border-color: #e4e7ed !important;
     cursor: not-allowed !important;
-    box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.2) !important; }
+    box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.2) !important;
+    pointer-events: none !important; }
   .uix-btn.wait {
     background-image: linear-gradient(-45deg, rgba(0, 0, 0, 0.15) 25%, transparent 25%, transparent 50%, rgba(0, 0, 0, 0.15) 50%, rgba(0, 0, 0, 0.15) 75%, transparent 75%, transparent) !important;
     background-size: 30px 30px !important;
@@ -7261,65 +7262,94 @@ ol.uix-flexslider__control-paging {
 /* ====================================================== 
         <!-- Gallery --> 
 /* ====================================================== */
-.uix-gallery .uix-gallery__item {
-  transition: none;
-  position: relative;
-  text-align: left;
-  margin-bottom: 0;
-  /* Cover the bottom spacing of the grid system */ }
-  .uix-gallery .uix-gallery__item .uix-gallery__image {
-    width: 100%;
-    display: block;
-    overflow: hidden;
+.uix-gallery > .uix-gallery__tiles {
+  overflow: auto;
+  /* Fix a bug for floating divs have 0 height */ }
+  .uix-gallery > .uix-gallery__tiles .uix-gallery__item {
+    transition: none;
     position: relative;
-    outline: 0;
-    background: #ddd;
-    border: 1px solid #E7E7E7; }
-    .uix-gallery .uix-gallery__item .uix-gallery__image .uix-gallery__image-cover {
-      position: relative; }
-      .uix-gallery .uix-gallery__item .uix-gallery__image .uix-gallery__image-cover img {
-        width: 100%; }
-      .uix-gallery .uix-gallery__item .uix-gallery__image .uix-gallery__image-cover::before {
-        transition: all 0.3s ease;
-        background: rgba(255, 255, 255, 0);
-        display: block;
-        content: '';
-        top: 0;
-        left: 0;
-        position: absolute;
-        z-index: 2;
-        width: 100%;
-        height: 100%; }
-  .uix-gallery .uix-gallery__item h3 {
-    position: relative;
-    font-size: 1.125rem;
-    padding-top: 0.546875rem; }
-  .uix-gallery .uix-gallery__item .uix-gallery__title {
-    opacity: 0.7;
-    margin-left: 0.875rem;
-    font-size: 0.625rem;
-    line-height: 1.625;
-    display: inline-block; }
-    .uix-gallery .uix-gallery__item .uix-gallery__title::before {
-      content: '|';
-      padding-right: 0.875rem; }
-  .uix-gallery .uix-gallery__item .uix-gallery__cat {
-    font-size: 0.625rem;
-    line-height: 1.625;
-    display: inline-block;
-    position: absolute;
-    bottom: 0.8125rem;
-    right: 0;
-    background: #EC5E79;
-    border-radius: 25px;
-    padding: 0.0875rem 1.1375rem;
-    color: #fff; }
-    .uix-gallery .uix-gallery__item .uix-gallery__cat a {
+    text-align: left;
+    margin-bottom: 0;
+    /* Cover the bottom spacing of the grid system */ }
+    .uix-gallery > .uix-gallery__tiles .uix-gallery__item .uix-gallery__image {
+      width: 100%;
+      display: block;
+      overflow: hidden;
+      position: relative;
+      outline: 0;
+      background: #ddd;
+      border: 1px solid #E7E7E7; }
+      .uix-gallery > .uix-gallery__tiles .uix-gallery__item .uix-gallery__image .uix-gallery__image-cover {
+        position: relative; }
+        .uix-gallery > .uix-gallery__tiles .uix-gallery__item .uix-gallery__image .uix-gallery__image-cover img {
+          width: 100%; }
+        .uix-gallery > .uix-gallery__tiles .uix-gallery__item .uix-gallery__image .uix-gallery__image-cover::before {
+          transition: all 0.3s ease;
+          background: rgba(255, 255, 255, 0);
+          display: block;
+          content: '';
+          top: 0;
+          left: 0;
+          position: absolute;
+          z-index: 2;
+          width: 100%;
+          height: 100%; }
+    .uix-gallery > .uix-gallery__tiles .uix-gallery__item h3 {
+      position: relative;
+      font-size: 1.125rem;
+      padding-top: 0.546875rem; }
+    .uix-gallery > .uix-gallery__tiles .uix-gallery__item .uix-gallery__title {
+      opacity: 0.7;
+      margin-left: 0.875rem;
+      font-size: 0.625rem;
+      line-height: 1.625;
+      display: inline-block; }
+      .uix-gallery > .uix-gallery__tiles .uix-gallery__item .uix-gallery__title::before {
+        content: '|';
+        padding-right: 0.875rem; }
+    .uix-gallery > .uix-gallery__tiles .uix-gallery__item .uix-gallery__cat {
+      font-size: 0.625rem;
+      line-height: 1.625;
+      display: inline-block;
+      position: absolute;
+      bottom: 0.8125rem;
+      right: 0;
+      background: #EC5E79;
+      border-radius: 25px;
+      padding: 0.0875rem 1.1375rem;
       color: #fff; }
-    .uix-gallery .uix-gallery__item .uix-gallery__cat:hover, .uix-gallery .uix-gallery__item .uix-controls__multi-sel > span.uix-gallery__cat.active:not(.uix-controls__bar) {
-      background: #C56263; }
-  .uix-gallery .uix-gallery__item:hover .uix-gallery__image-cover::before, .uix-gallery .uix-controls__multi-sel > span.uix-gallery__item.active:not(.uix-controls__bar) .uix-gallery__image-cover::before {
-    background: rgba(255, 255, 255, 0.95); }
+      .uix-gallery > .uix-gallery__tiles .uix-gallery__item .uix-gallery__cat a {
+        color: #fff; }
+      .uix-gallery > .uix-gallery__tiles .uix-gallery__item .uix-gallery__cat:hover, .uix-gallery > .uix-gallery__tiles .uix-gallery__item .uix-controls__multi-sel > span.uix-gallery__cat.active:not(.uix-controls__bar) {
+        background: #C56263; }
+    .uix-gallery > .uix-gallery__tiles .uix-gallery__item:hover .uix-gallery__image-cover::before, .uix-gallery > .uix-gallery__tiles .uix-controls__multi-sel > span.uix-gallery__item.active:not(.uix-controls__bar) .uix-gallery__image-cover::before {
+      background: rgba(255, 255, 255, 0.95); }
+
+/* Filter or Masonry */
+.uix-gallery[data-show-type*="filter"] > .uix-gallery__tiles,
+.uix-gallery[data-show-type*="masonry"] > .uix-gallery__tiles {
+  position: relative;
+  /* required */ }
+  .uix-gallery[data-show-type*="filter"] > .uix-gallery__tiles .uix-gallery__item,
+  .uix-gallery[data-show-type*="masonry"] > .uix-gallery__tiles .uix-gallery__item {
+    /* required */
+    display: block;
+    position: absolute;
+    z-index: 1; }
+    .uix-gallery[data-show-type*="filter"] > .uix-gallery__tiles .uix-gallery__item > div,
+    .uix-gallery[data-show-type*="masonry"] > .uix-gallery__tiles .uix-gallery__item > div {
+      position: relative;
+      width: 100%;
+      height: 100%; }
+    .uix-gallery[data-show-type*="filter"] > .uix-gallery__tiles .uix-gallery__item.muuri-item-dragging,
+    .uix-gallery[data-show-type*="masonry"] > .uix-gallery__tiles .uix-gallery__item.muuri-item-dragging {
+      z-index: 3; }
+    .uix-gallery[data-show-type*="filter"] > .uix-gallery__tiles .uix-gallery__item.muuri-item-releasing,
+    .uix-gallery[data-show-type*="masonry"] > .uix-gallery__tiles .uix-gallery__item.muuri-item-releasing {
+      z-index: 2; }
+    .uix-gallery[data-show-type*="filter"] > .uix-gallery__tiles .uix-gallery__item.muuri-item-hidden,
+    .uix-gallery[data-show-type*="masonry"] > .uix-gallery__tiles .uix-gallery__item.muuri-item-hidden {
+      z-index: 0; }
 
 /* ====================================================== 
    <!-- Heading -->    

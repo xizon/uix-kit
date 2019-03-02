@@ -7,9 +7,7 @@
 /**
  * APP.GALLERY
  * @global
- * @requires ./examples/assets/js/wp-jquery/masonry.min.js
- * @requires ./examples/assets/js/wp-jquery/imagesloaded.min.js
- * @requires ./examples/assets/js/min/jquery.shuffle.min.js
+ * @requires ./examples/assets/js/min/muuri.min.js
  */
 
 
@@ -17,86 +15,137 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.GALLERY               = APP.GALLERY || {};
-	APP.GALLERY.version       = '0.0.2';
+	APP.GALLERY.version       = '0.0.3';
     APP.GALLERY.documentReady = function( $ ) {
 
 		$( '.uix-gallery' ).each( function() {
-			var type = $( this ).data( 'show-type' );
+
+			var galleryType = $( this ).data( 'show-type' );
 			
+			
+			/* 
+			 ---------------------------
+			 Add a tagname to each list item
+			 ---------------------------
+			 */ 
 			// Masonry
-			if ( type.indexOf( 'masonry' ) >= 0  ) {
+			if ( galleryType.indexOf( 'masonry' ) >= 0  ) {
 				$( this ).addClass( 'masonry-container' );
 				$( this ).find( '.uix-gallery__item' ).addClass( 'masonry-item' );
 			}
 			
 			// Filterable
-			if ( type.indexOf( 'filter' ) >= 0  ) {
+			if ( galleryType.indexOf( 'filter' ) >= 0  ) {
 				$( this ).addClass( 'filter-container' );
 				$( this ).find( '.uix-gallery__item' ).addClass( 'filter-item' );	
 			}	
-		
-		});
-	
-	    /*--  Function of Masonry  --*/
-		var masonryObj = $( '.masonry-container .uix-gallery__tiles' );
-		imagesLoaded( masonryObj ).on( 'always', function() {
-			  masonryObj.masonry({
-				itemSelector: '.masonry-item'
-			  });  
-		});
-		
-		
-	    /*--  Function of Filterable  --*/
-		if ( $( "[data-show-type]" ).length > 0 ) {
-			if ( $( "[data-show-type]" ).data( 'show-type' ).indexOf( 'filter' ) >= 0 ) {
-				
-				$( '.uix-gallery' ).each( function() {
-					var filterCat      = $( this ).data( 'filter-id' ),
-						$grid          = $( this ).find( '.uix-gallery__tiles' ),
-						$filterOptions = $( filterCat );
-						
-					imagesLoaded( $grid ).on( 'always', function() {
-						
-						 $grid.shuffle({
-							itemSelector : '.filter-item',
-							speed        : 550, // Transition/animation speed (milliseconds).
-							easing       : 'ease-out', // CSS easing function to use.
-							sizer        : null // Sizer element. Use an element to determine the size of columns and gutters.
-						  });
-						  
-						
-						$filterOptions.find( 'li > a' ).on( 'click', function() {
-							  var $this       = $( this ),
-								  activeClass = 'current-cat',
-								  isActive    = $this.parent().hasClass( activeClass ),
-								  group       = isActive ? 'all' : $this.data( 'group' );
-						
-							  // Hide current label, show current label in title
-							  if ( !isActive ) {
-								$filterOptions.find( '.' + activeClass ).removeClass( activeClass );
-							  }
-						
-							  $this.parent().toggleClass( activeClass );
-						
-							  // Filter elements
-							  $grid.shuffle( 'shuffle', group );
-							  
-							  return false;	
-						});
-					
+
 			
-					});
-	
-					
-				} );
-		
+			if ( galleryType.indexOf( 'filter' ) >= 0 || galleryType.indexOf( 'masonry' ) >= 0 ) {
+
+				var filterCat      = $( this ).data( 'filter-id' ),
+					$grid          = $( this ).find( '.uix-gallery__tiles' ),
+					$allItems      = $( this ).find( '.uix-gallery__item' ),
+					$filterOptions = $( filterCat );
+
 				
-			} else {
-				$( '[data-group="all"]' ).parent( 'li' ).remove();
+				var MuuriGrid = new Muuri( $grid.get(0), {
+					items: $grid.get(0).querySelectorAll( '.uix-gallery__item' ),
+					
+					// Default show animation
+					showDuration: 300,
+					showEasing: 'ease',
+
+					// Default hide animation
+					hideDuration: 300,
+					hideEasing: 'ease',
+
+					// Item's visible/hidden state styles
+					visibleStyles: {
+						opacity: '1',
+						transform: 'scale(1)'
+					},
+					hiddenStyles: {
+						opacity: '0',
+						transform: 'scale(0.5)'
+					},
+
+					// Layout
+					layout: {
+						fillGaps: false,
+						horizontal: false,
+						alignRight: false,
+						alignBottom: false,
+						rounding: true
+					},
+					layoutOnResize: 100,
+					layoutOnInit: true,
+					layoutDuration: 300,
+					layoutEasing: 'ease',
+					
+					//// Drag & Drop
+					dragEnabled: true
+				});
+
+
+				// When all items have loaded refresh their
+				// dimensions and layout the grid.
+				$grid.waitForImages().done(function() {
+					MuuriGrid.refreshItems().layout();
+					// For a little finishing touch, let's fade in
+					// the images after all them have loaded and
+					// they are corrertly positioned.
+					$( 'body' ).addClass( 'images-loaded' );
+
+				});
+
+
+				/* 
+				 ---------------------------
+				 Function of Filterable and Masonry
+				 ---------------------------
+				 */ 
+				if ( galleryType.indexOf( 'filter' ) >= 0 ) {
+					$filterOptions.find( 'li > a' ).on( 'click', function() {
+						var $this       = $( this ),
+							activeClass = 'current-cat',
+							isActive    = $this.parent().hasClass( activeClass ),
+							group       = isActive ? 'all' : $this.data( 'group' );
+
+						// Hide current label, show current label in title
+						if ( !isActive ) {
+							$filterOptions.find( '.' + activeClass ).removeClass( activeClass );
+						}
+
+						$this.parent().toggleClass( activeClass );
+
+						// Filter elements
+						var filterFieldValue = group;
+						MuuriGrid.filter( function ( item ) {
+
+							var element       = item.getElement(),
+								curCats       = element.getAttribute( 'data-groups' ).toString().replace(/^\,|\,$/g, '').replace(/^\[|\]$/g, '') + ',all',
+								isFilterMatch = !filterFieldValue ? true : ( curCats || '' ).indexOf( filterFieldValue ) > -1;
+
+							return isFilterMatch;
+						});
+
+
+						return false;	
+					});	
+				} else {
+
+					//remove filter button of all
+					$filterOptions.find( '[data-group="all"]' ).parent( 'li' ).remove();
+					
+				}
+
+				
+
 			}
-	
-		}
-		
+
+
+		} );
 		
 		
     };

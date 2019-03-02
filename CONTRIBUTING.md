@@ -23,7 +23,6 @@ Uix Kit bundles the following third-party resources:
 - [jQuery Easing](http://gsgd.co.uk/sandbox/jquery/easing/)
 - [Flexslider](https://github.com/woocommerce/FlexSlider)
 - [Bootstrap v4](http://getbootstrap.com)
-- [Shuffle.js](https://vestride.github.io/Shuffle/)
 - [waitForImages](https://github.com/alexanderdickson/waitForImages)
 - [modernizr](https://modernizr.com/)
 - [animejs](https://github.com/juliangarnier/anime)
@@ -35,6 +34,8 @@ Uix Kit bundles the following third-party resources:
 - [GSAP - Standard "No Charge" GreenSock License](https://greensock.com)
 - [three.js](https://github.com/mrdoob/three.js/)
 - [Hammer.JS](http://hammerjs.github.io/)
+- [Muuri](https://github.com/haltu/muuri)
+
 
 
 
