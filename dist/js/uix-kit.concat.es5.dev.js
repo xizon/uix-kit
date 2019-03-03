@@ -23318,7 +23318,7 @@ APP = ( function ( APP, $, window, document ) {
 				template7ID = '';
 			}	
 			if( typeof triggerActive === typeof undefined ) {
-				triggerActive = 'active';
+				triggerActive = 'wait';
 			}		
 			
 			if( typeof method === typeof undefined ) {
