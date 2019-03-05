@@ -427,50 +427,66 @@ APP = ( function ( APP, $, window, document ) {
 			});
 
 
-
 			/* 
 			 ---------------------------
 			 Date Picker
 			 ---------------------------
 			 */ 
-			if ( $.isFunction( $.fn.datepicker ) ) {
+			if ( $.isFunction( $.fn.datetimepicker ) ) {
 
 				$( '[data-picker]' ).each( function() {
 
 					var $this            = $( this ),
 						dateFormat       = $this.data( 'picker-format' ),
-						monthNames       = $this.data( 'picker-month' ),
-						nextText         = $this.data( 'picker-next' ),
-						prevText         = $this.data( 'picker-prev' ),
-						dayNames         = $this.data( 'picker-day' ),
+						timeEnable       = $this.data( 'picker-timepicker' ),
+						lang             = $this.data( 'picker-lang' ),
 						myminDate        = $this.data( 'picker-min-date' ),
-						mymaxDate        = $this.data( 'picker-max-date' );
-
+						mymaxDate        = $this.data( 'picker-max-date' ),
+						rtlEnable        = false;
 
 
 					// If there is no data-xxx, save current source to it
-					if ( typeof dateFormat === typeof undefined ) dateFormat = 'MM d, yy';
-					if ( typeof monthNames === typeof undefined ) monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-					if ( typeof nextText === typeof undefined ) nextText = '&#8594;';
-					if ( typeof prevText === typeof undefined ) prevText = '&#8592;';
-					if ( typeof dayNames === typeof undefined ) dayNames = [ "Su", "Mo", "Tu", "We", "Th", "Fr", "Sa" ];
-					if ( typeof myminDate === typeof undefined ) myminDate = -1825;
-					if ( typeof mymaxDate === typeof undefined ) mymaxDate = 0;
+					if ( typeof dateFormat === typeof undefined ) dateFormat = 'M d, Y';  //Y-m-d H:i:s
+					if ( typeof timeEnable === typeof undefined ) timeEnable = false;
+					if ( typeof lang === typeof undefined ) lang = 'en';
+					if ( typeof myminDate === typeof undefined ) myminDate = false; //yesterday is minimum date(for today use 0 or -1970/01/01)
+					if ( typeof mymaxDate === typeof undefined ) mymaxDate = false; //tomorrow is maximum date calendar, such as '+2050/01/01'
+					if ( typeof rtlEnable === typeof undefined ) rtlEnable = false;
 
-					$this.datepicker({
-						"monthNamesShort" : monthNames,
-						"nextText"        : nextText,
-						"prevText"        : prevText,
-						"dayNamesMin"     : dayNames,
-						"dateFormat"      : dateFormat,
-						"changeMonth"     : true,
-						"changeYear"      : true,
-						"yearRange"       : "1930:2092",
-						"minDate"         : myminDate,
-						"maxDate"         : mymaxDate
+				    $.datetimepicker.setLocale( lang );
+
+					//RTL 
+					if ( $( 'body' ).hasClass( 'rtl' ) ) {
+						rtlEnable = true;
+					}
+					
+					//hide or display time selector
+					if ( timeEnable ) {
+					
+						$( document ).on( 'mouseenter', 'td.xdsoft_date[data-date]', function() {
+							if ( $( this ).hasClass( 'xdsoft_disabled' ) ) {
+								$( this ).closest( '.xdsoft_datepicker' ).next( '.xdsoft_timepicker.active' ).hide();
+							} else {
+								$( this ).closest( '.xdsoft_datepicker' ).next( '.xdsoft_timepicker.active' ).show();
+							}
+							
+						} );
+						
+					}
+
+					$this.datetimepicker({
+						rtl         : rtlEnable,
+						timepicker  : timeEnable,
+						format      : dateFormat,
+						formatTime  : 'H:i',
+						formatDate  : 'Y/m/d',
+						minDate     : myminDate,
+						maxDate     : mymaxDate
+						
 					});
-
-
+				
+					
+					
 
 				} );
 
@@ -487,7 +503,6 @@ APP = ( function ( APP, $, window, document ) {
 
 
 			}
-
 
 
 			

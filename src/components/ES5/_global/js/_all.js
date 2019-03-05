@@ -63,7 +63,7 @@ const UIX_KIT_IMPORT = { "files": [
 "./src/components/ES5/floating-side-element/js/floating-side-element.js",
 "./src/components/ES5/form-progress/js/form-progress.js",
 "./src/components/ES5/form/js/form.js",
-"./src/components/ES5/form/js/jqueryui.datepicker.js",
+"./src/components/ES5/form/js/datepicker.js",
 "./src/components/ES5/gallery/js/gallery.js",
 "./src/components/ES5/hover-delay-interaction/js/hover-delay-interaction.js",
 "./src/components/ES5/image-shapes/js/image-shapes.js",

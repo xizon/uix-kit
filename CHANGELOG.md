@@ -4,7 +4,7 @@
 
 * Tweak: Improve the sort object then sub-sort further for Dynamic Drop Down List from JSON.
 * Tweak: Improve the form components styles.
-
+* Tweak: Upgraded the Date Picker function.
 
 
 #### = 3.2.6 (March 1, 2019) =
