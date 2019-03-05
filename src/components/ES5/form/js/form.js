@@ -453,7 +453,7 @@ APP = ( function ( APP, $, window, document ) {
 					if ( typeof monthNames === typeof undefined ) monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 					if ( typeof nextText === typeof undefined ) nextText = '&#8594;';
 					if ( typeof prevText === typeof undefined ) prevText = '&#8592;';
-					if ( typeof dayNames === typeof undefined ) dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+					if ( typeof dayNames === typeof undefined ) dayNames = [ "Su", "Mo", "Tu", "We", "Th", "Fr", "Sa" ];
 					if ( typeof myminDate === typeof undefined ) myminDate = -1825;
 					if ( typeof mymaxDate === typeof undefined ) mymaxDate = 0;
 
@@ -461,7 +461,7 @@ APP = ( function ( APP, $, window, document ) {
 						"monthNamesShort" : monthNames,
 						"nextText"        : nextText,
 						"prevText"        : prevText,
-						"dayNamesShort"   : dayNames,
+						"dayNamesMin"     : dayNames,
 						"dateFormat"      : dateFormat,
 						"changeMonth"     : true,
 						"changeYear"      : true,
