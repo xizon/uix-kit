@@ -8,7 +8,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.DYNAMIC_DD_LIST               = APP.DYNAMIC_DD_LIST || {};
-	APP.DYNAMIC_DD_LIST.version       = '0.0.1';
+	APP.DYNAMIC_DD_LIST.version       = '0.0.2';
     APP.DYNAMIC_DD_LIST.documentReady = function( $ ) {
 
 		$( '[data-ajax-dynamic-dd-json]' ).each( function() {
@@ -37,6 +37,7 @@ APP = ( function ( APP, $, window, document ) {
 			}		
 			
 			
+			
 			if ( typeof associated === typeof undefined ) {
 				associated = '#demo';
 			}		
@@ -51,11 +52,11 @@ APP = ( function ( APP, $, window, document ) {
 			
 			//Parse the JSON data
 			if ( jsonFile != '' ) {
-				
+			
 				//Initialize dependent/chained dropdown list
 				var dataExist = $this.data( 'exist' );
 				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
-				
+
 					$.ajax({
 						url      : jsonFile,
 						method   : method,
@@ -84,47 +85,47 @@ APP = ( function ( APP, $, window, document ) {
 						 }
 					});
 
-					
-					
+
+
 					//Prevent the form from being initialized again
 					$this.data( 'exist', 1 );	
 				}
-				
-				
-				
+
+
+
 				//Dropdown list change event trigger
 				$( document ).on( 'change', '#' + curID, function( e ) {
 
 					e.preventDefault();
-					
-				
+
+
 					if ( thisChange ) {
-						
+
 						thisChange = false;
-						
+
 						var curVal = $( '#' + curID + ' option:selected' ).val();
 
-						
+
 						//Clear all options
 						if ( curVal == '' ) {
-							
-							
+
+
 							$( '#' + curID ).find( 'option[value=""]' ).attr( 'selected', 'selected' );
 							$( associated ).find( 'option:selected' ).removeAttr( 'selected' );
-							
+
 							//Initialize the custom select
 							$( document ).customSelectInit();
 							$( associated ).attr( 'selected', 'selected' ).change();	
-							
+
 							APP.DYNAMIC_DD_LIST.documentReady($);
-							
-							
+
+
 						}
-						
-						
-						
+
+
+
 						if ( curVal != '' ) {
-							
+
 							//remove the empty option
 							$( '#' + curID + ' option[value=""]' ).remove();
 
@@ -141,25 +142,34 @@ APP = ( function ( APP, $, window, document ) {
 										//do something
 									}
 
-									
+
 									for ( var m = 0; m < data.length; m++ ) {
 
 										//Check if a key exists inside a json object
 										if ( data[m].name == curVal ) {
 
 
-											var optionsHtml   = '',
-												cities        = data[m].city,
-												list          = data[m].list;
+											var optionsHtml         = '',
+												sortListDemo        = data[m].list;
 
 
-											if ( typeof list === typeof undefined ) {
+											if ( typeof sortListDemo === typeof undefined ) {
+
+
+												/* 
+												 ====================================================
+												 * China cities dropdown list demo
+												 ====================================================
+												 */
+
+												var chinaCitiesListDemo = data[m].city;
+
 												//Traversing json of chinese provinces and cities
 												//-------------------------------------	
-												for ( var i = 0; i < cities.length; i++ ) {
+												for ( var i = 0; i < chinaCitiesListDemo.length; i++ ) {
 
-													var city      = cities[i].name,
-														area      = cities[i].area;
+													var city      = chinaCitiesListDemo[i].name,
+														area      = chinaCitiesListDemo[i].area;
 
 													var areaTxt = '';
 													for ( var k = 0; k < area.length; k++ ) {
@@ -173,26 +183,35 @@ APP = ( function ( APP, $, window, document ) {
 
 												}
 											} else {
+
+
+												/* 
+												 ====================================================
+												 *  Sort object then subsort further demo
+												 ====================================================
+												 */
+
 												//Traversing json with coordinates and details
 												//-------------------------------------		
-												for ( var i2 = 0; i2 < list.length; i2++ ) {
+												for ( var i2 = 0; i2 < sortListDemo.length; i2++ ) {
 
-													var name      = list[i2].name,
-														longitude = list[i2].longitude,
-														latitude  = list[i2].latitude,
-														addresses = list[i2].addresses;
+													var name        = sortListDemo[i2].name,
+														longitude   = sortListDemo[i2].longitude,
+														latitude    = sortListDemo[i2].latitude,
+														customAttrs = sortListDemo[i2].attributes;
 
-													var addressesTxt = '';
-													for ( var k2 = 0; k2 < addresses.length; k2++ ) {
-														
+													var attributesTxt = '';
+													for ( var k2 = 0; k2 < customAttrs.length; k2++ ) {
+
 														//Need to filter single quotes
-														addressesTxt += JSON.stringify( addresses[k2] ).replace(/'/g, '&apos;' ) + ',';
+														attributesTxt += JSON.stringify( customAttrs[k2] ).replace(/'/g, '&apos;' ) + ',';
 													}
 
-													addressesTxt = addressesTxt.replace(/,\s*$/, '' );
+													attributesTxt = attributesTxt.replace(/,\s*$/, '' );
 
 
-													optionsHtml += "<option data-name='"+name+"' data-addresses='["+addressesTxt+"]' data-longitude='"+longitude+"' data-latitude='"+latitude+"' value='"+name+"'>"+name+"</option>";
+
+													optionsHtml += "<option data-name='"+name+"' data-attributes='["+attributesTxt+"]' data-longitude='"+longitude+"' data-latitude='"+latitude+"' value='"+name+"'>"+name+"</option>";
 
 												}
 
@@ -206,10 +225,14 @@ APP = ( function ( APP, $, window, document ) {
 											$( document ).customSelectInit();
 											$( associated ).attr( 'selected', 'selected' ).change();
 
+
+
+
 											break;
 										}
-									}//end for
-									
+
+									}//end for data
+
 
 									//Avoid duplicate events running
 									thisChange = true;
@@ -224,49 +247,55 @@ APP = ( function ( APP, $, window, document ) {
 
 						}	
 					}
-					
 
-					
+
+
 					return false;
 
 
 				});	
-				
-				
-				
-				//The target select event
+
+
+
+				/* 
+				 ====================================================
+				 *  Callback from two-level classification
+				 *  Fire the three-level classification
+				 ====================================================
+				 */
+				//For "China cities" and "Sort Demo"
+
 				$( document ).on( 'change.DYNAMIC_DD_LIST', associated, function( e ) {
 
 					e.preventDefault();
-					
+
 					var $this        = $( this[ this.selectedIndex ] ),
 						curVal       = $this.val(),
 						curLongitude = $this.data( 'longitude' ),
 						curLatitude  = $this.data( 'latitude' ),
-						curAddresses = $this.data( 'addresses' ),
+						curAttributes = $this.data( 'attributes' ),
 						curContents  = '';
 
-					
-					if ( Object.prototype.toString.call( curAddresses ) =='[object Array]' ) {
-						for ( var k = 0; k < curAddresses.length; k++ ) {
-							curContents += curAddresses[k].addr_name + ': ' + curAddresses[k].addr_longitude + ', ' + curAddresses[k].addr_latitude;
+
+					if ( Object.prototype.toString.call( curAttributes ) =='[object Array]' ) {
+						for ( var k = 0; k < curAttributes.length; k++ ) {
+							curContents += curAttributes[k].attr_name + ': ' + curAttributes[k].attr_longitude + ', ' + curAttributes[k].attr_latitude;
 						}
-						
+
 					}
-					
+
 					//console.log( curVal + ' Longitude: ' + curLongitude + ' | Latitude: ' + curLatitude + ' | Addresses: ' + curContents );
-					
+
 					return false;
-				
-					
 
-				});				
+
+
+				});		
+
 				
 				
-			}
+			} // end of jsonFile
 			
-
-
 			
 			
 		});
@@ -301,7 +330,7 @@ APP = ( function ( APP, $, window, document ) {
 			method    : 'POST',
 			callback  : null,
 			jsonFile  : '',
-			key       : 'addresses'
+			key       : 'attributes'
         }, options );
  
         this.each( function() {

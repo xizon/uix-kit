@@ -19,7 +19,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.FORM               = APP.FORM || {};
-	APP.FORM.version       = '0.0.5';
+	APP.FORM.version       = '0.0.6';
     APP.FORM.documentReady = function( $ ) {
 
 		/* 
@@ -196,12 +196,27 @@ APP = ( function ( APP, $, window, document ) {
 			 ---------------------------
 			 */ 
 			//Control Status
-			var singleSel = '.uix-controls__single-sel > span';
+			var singleSel     = '.uix-controls__single-sel',
+			    singleSelItem = singleSel + ' > span';
 			
-			$( singleSel ).each( function()  {
+			$( singleSelItem ).each( function()  {
 				
-				var targetID = '#' + $( this ).parent().attr( "data-targetid" );
-			
+				var targetID  = '#' + $( this ).parent().attr( "data-targetid" ),
+					switchIDs = '';
+				
+				//add switch IDs
+				$( this ).parent().find( '> span' ).each( function()  {
+					if ( typeof $( this ).data( "switchid" ) != typeof undefined ) {
+						switchIDs += $( this ).data( "switchid" ) + ',';
+					}
+					
+				});
+				
+				$( this ).parent().attr( "data-switchids", switchIDs.replace(/,\s*$/, '' ) );
+				
+				
+				
+				//Set actived style from their values
 				if ( $( targetID ).val() == $( this ).data( 'value' ) ) {
 					$( this ).addClass( 'active' );
 				} else {
@@ -210,14 +225,65 @@ APP = ( function ( APP, $, window, document ) {
 			
 				
 			});
-					
 			
-			$( document ).on( 'click', singleSel, function( e ) {
+			
+			/*
+			 * Initialize single switch
+			 *
+			 * @param  {Object} obj                 - Radio controls. 
+			 * @return {Void}
+			 */
+			function hideAllSingleSelItems( obj ) {
+				obj.each( function( index )  {
+					
+					var $sel                = $( this ),
+						defaultValue        = $( '#' + $sel.attr( "data-targetid" ) ).val(),
+						deffaultSwitchIndex = 0;
+					
+					//get default selected switch index
+					$sel.find( '> span' ).each( function( index )  {
+
+						if ( defaultValue == $( this ).data( 'value' ) ) {
+							deffaultSwitchIndex = index;
+						}
+
+
+					});
+					
+					
+					if ( $sel.data( 'switchids' ) != '' ) {
+						var _switchIDsArr = $sel.data( 'switchids' ).split( ',' );
+						_switchIDsArr.forEach( function( element, index ) {
+							
+							if ( deffaultSwitchIndex != index ) {
+								$( '#' + element ).hide();
+							} else {
+								$( '#' + element ).show();
+							}
+							
+
+						});
+						
+						
+						
+					}
+					
+				});
+	
+			}
+			
+			hideAllSingleSelItems( $( singleSel ) );
+				
+
+				
+			
+			$( document ).on( 'click', singleSelItem, function( e ) {
 				e.preventDefault();
 
 				var $selector     = $( this ).parent(),
 					$option       = $( this ),
 					targetID      = '#' + $selector.data( "targetid" ),
+					switchID      = '#' + $option.data( "switchid" ),
 					curVal        = $option.data( 'value' );
 
 
@@ -226,6 +292,13 @@ APP = ( function ( APP, $, window, document ) {
 				$( targetID ).val( curVal );
 				$option.addClass( 'active' );
 
+				
+				//Switch some options
+				if ( typeof $option.data( "switchid" ) != typeof undefined ) {
+					 hideAllSingleSelItems( $selector );
+				     $( switchID ).show();
+				}
+				
 
 
 				//Dynamic listening for the latest value

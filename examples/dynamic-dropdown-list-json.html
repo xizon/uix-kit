@@ -44,11 +44,11 @@
         
        
         <!-- Theme  -->
-        <link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=nwrPMEPtLwxHy7EbD8gy"/>
+        <link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=ymcAbh2y5XXTe9w9OyKb"/>
         
         
          <!--[if lt IE 10]>
-           <link rel="stylesheet" href="assets/css/IE.css?ver=nwrPMEPtLwxHy7EbD8gy" />
+           <link rel="stylesheet" href="assets/css/IE.css?ver=ymcAbh2y5XXTe9w9OyKb" />
         <![endif]-->
         
         
@@ -433,21 +433,20 @@
 								<div class="uix-controls uix-controls__select">
 									<label>
 										<select 
-												id="dynamic-dd-country" 
-												name="dynamic-dd-country" 
-												placeholder="Country"
-												data-ajax-dynamic-dd-json="assets/json/countries.json"
+												id="dynamic-dd-sort" 
+												name="dynamic-dd-sort" 
+												data-ajax-dynamic-dd-json="assets/json/catgories.json"
 												data-ajax-dynamic-dd-method="POST" 
 												data-ajax-dynamic-dd-event="change" 
 												data-ajax-dynamic-dd-data="" 
-												data-ajax-dynamic-dd-associated="#dynamic-dd-city">
+												data-ajax-dynamic-dd-associated="#dynamic-dd-subsort">
 
 
-											<option value="" selected>- Country -</option>
+											<option value="" selected>Sort</option>
 										</select>
 
 									</label>
-									<span>Country</span>
+									<span>Sort</span>
 
 								</div>
 
@@ -456,12 +455,12 @@
 
 								<div class="uix-controls uix-controls__select">
 									<label>
-										<select id="dynamic-dd-city" name="dynamic-dd-city" placeholder="City">
-										    <option value="" selected>- City -</option>
+										<select id="dynamic-dd-subsort" name="dynamic-dd-subsort">
+										    <option value="" selected>Sub-sort</option>
 										</select>
 
 									</label>
-									<span>City</span>
+									<span>Sub-sort</span>
 
 								</div>			
                         
@@ -485,8 +484,9 @@
 
 			$( function() {
 
-				//The target select event
-				$( document ).on( 'change.DYNAMIC_DD_LIST', '#dynamic-dd-city', function( e ) {
+				//Callback from two-level classification
+				//Fire the three-level classification
+				$( document ).on( 'change.DYNAMIC_DD_LIST', '#dynamic-dd-subsort', function( e ) {
 
 					e.preventDefault();
 
@@ -494,23 +494,31 @@
 						curVal       = $this.val(),
 						curLongitude = $this.data( 'longitude' ),
 						curLatitude  = $this.data( 'latitude' ),
-						curAddresses = $this.data( 'addresses' );
-
+						curAttributes = $this.data( 'attributes' ),
+						curContents  = '';
 					
-					var curContents = '';
-					for ( var k = 0; k < curAddresses.length; k++ ) {
-						curContents += curAddresses[k].addr_name + ': ' + curAddresses[k].addr_longitude + ', ' + curAddresses[k].addr_latitude + ' ';
-					}
+					console.log( curAttributes );
+
+
+					if ( Object.prototype.toString.call( curAttributes ) =='[object Array]' ) {
+						for ( var k = 0; k < curAttributes.length; k++ ) {
+							curContents += '<hr><strong>Level-3 Name</strong>: ' + curAttributes[k].attr_name + '<br> <strong>Level-3 Longitude</strong> : ' + curAttributes[k].attr_longitude + '<br> <strong>Level-3 Latitude</strong>: ' + curAttributes[k].attr_latitude + '<br> <strong>Level-3 Info</strong>: ' + curAttributes[k].attr_info; 
+						}
+
 						
+					}
+
+					$( '#dynamic-callback').html( '<br><strong>Level-2 Name</strong>: '+curVal+'<br> <strong>Level-2 Longitude</strong>: ' + curLongitude + '<br> <strong>Level-2 Latitude</strong>: ' + curLatitude + '<br> <strong>Level-2 Attributes</strong>: ' + curContents + ' <br>'  );
+
 					
-
-					$( '#dynamic-callback').text( '{ Name: '+curVal+', Longitude: ' + curLongitude + ', Latitude: ' + curLatitude + ', Addresses: ' + curContents + '}'  );
-
 					return false;
 
 
+					
 
-				});			
+				});		
+
+			
 			} );
 
 		} ) ( jQuery );
@@ -597,7 +605,7 @@
 
 			$( function() {
 
-				//The target select event
+				//Three-level classification
 				$( document ).on( 'change.DYNAMIC_DD_LIST', '#dynamic-dd-china-city', function( e ) {
 
 					e.preventDefault();
@@ -629,7 +637,7 @@
 					}
 
 					areaTxt = areaTxt.replace(/,\s*$/, '' );
-					$( '#dynamic-callback2').text( '[' + areaTxt + ']' );
+					$( '#dynamic-callback2').html( '[' + areaTxt + ']' );
 	
 					
 					
@@ -726,14 +734,14 @@
 	============================================= -->
 	
 	<script>
-		var REVISION     = "3.2.6",
+		var REVISION     = "3.2.7",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
 				"homeUrl"     : "",  //Eg. https://uiux.cc
 				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
 			};
     </script>  
-    <script src="../dist/js/uix-kit.min.js?ver=nwrPMEPtLwxHy7EbD8gy"></script>
+    <script src="../dist/js/uix-kit.min.js?ver=ymcAbh2y5XXTe9w9OyKb"></script>
 
 
 

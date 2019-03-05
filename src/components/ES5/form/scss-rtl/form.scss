@@ -696,6 +696,8 @@ $control-sub-color: #dce4e8;
  */ 
 .uix-controls__multi-sel {
 	
+	float: right;
+	
 	> span:not(.uix-controls__bar) {
 		margin-right: auto;
 		margin-left: 1rem;
@@ -736,6 +738,8 @@ $control-sub-color: #dce4e8;
  */ 
 
 .uix-controls__single-sel {
+	
+	float: right;
 	
 	> span:not(.uix-controls__bar) {
 		margin-right: auto;

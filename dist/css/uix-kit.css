@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.2.6
+ * ## Version             :  3.2.7
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  March 3, 2019
+ * ## Last Update         :  March 5, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -6111,6 +6111,11 @@ ol.uix-flexslider__control-paging {
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-pill button:not(.uix-btn),
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-pill select {
     border-radius: 50px; }
+  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-rounded input:not([type="checkbox"]):not([type="radio"]),
+  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-rounded textarea,
+  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-rounded button:not(.uix-btn),
+  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-rounded select {
+    border-radius: 4px; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .uix-controls__bar {
     position: absolute;
     height: 2px;
@@ -6343,7 +6348,10 @@ ol.uix-flexslider__control-paging {
   .uix-controls.uix-controls--line.is-pill input:not([type="checkbox"]):not([type="radio"]),
   .uix-controls.uix-controls--line.is-pill textarea,
   .uix-controls.uix-controls--line.is-pill button:not(.uix-btn),
-  .uix-controls.uix-controls--line.is-pill select {
+  .uix-controls.uix-controls--line.is-pill select, .uix-controls.uix-controls--line.is-rounded input:not([type="checkbox"]):not([type="radio"]),
+  .uix-controls.uix-controls--line.is-rounded textarea,
+  .uix-controls.uix-controls--line.is-rounded button:not(.uix-btn),
+  .uix-controls.uix-controls--line.is-rounded select {
     border-radius: 0 !important; }
   .uix-controls.uix-controls--line .uix-controls__bar {
     display: block !important; }
@@ -6544,6 +6552,10 @@ ol.uix-flexslider__control-paging {
     border-radius: 50px 0 0 50px; }
   .uix-controls__merge.is-pill button {
     border-radius: 0 50px 50px 0; }
+  .uix-controls__merge.is-rounded input {
+    border-radius: 4px 0 0 4px; }
+  .uix-controls__merge.is-rounded button {
+    border-radius: 0 4px 4px 0; }
   .uix-controls__merge.is-iconic input {
     padding-left: 3rem;
     width: calc(80% - 1.09375rem - 1.09375rem - 2.453125rem); }
@@ -6659,6 +6671,8 @@ ol.uix-flexslider__control-paging {
       z-index: 1; }
   .uix-controls__select-wrapper .is-pill .uix-controls__select-trigger {
     border-radius: 50px; }
+  .uix-controls__select-wrapper.is-rounded .uix-controls__select-trigger {
+    border-radius: 4px; }
   .uix-controls__select-wrapper .uix-controls--line .uix-controls__select-trigger {
     text-indent: -1.6rem;
     border-radius: 0;
@@ -6840,6 +6854,8 @@ ol.uix-flexslider__control-paging {
     /* Required */ }
   .uix-controls__toggle.is-pill label {
     border-radius: 18px; }
+  .uix-controls__toggle.is-rounded label {
+    border-radius: 4px; }
   .uix-controls__toggle input[type="checkbox"] {
     display: none; }
     .uix-controls__toggle input[type="checkbox"]:checked + .uix-controls__toggle-trigger {
@@ -6963,7 +6979,6 @@ ol.uix-flexslider__control-paging {
   .uix-controls__multi-sel > span:not(.uix-controls__bar) {
     position: relative;
     display: inline-block;
-    margin-right: 1rem;
     border: 1px solid #dce4e8;
     color: #888;
     padding: .3rem .7rem;
@@ -6972,6 +6987,7 @@ ol.uix-flexslider__control-paging {
     font-size: 1rem;
     background: #fff;
     margin-bottom: 1rem;
+    margin-right: 1rem;
     transition: all 0.3s ease; }
     .uix-controls__multi-sel > span:not(.uix-controls__bar) i {
       position: absolute;
@@ -6988,6 +7004,10 @@ ol.uix-flexslider__control-paging {
       background: #EC5E79;
       border-color: #EC5E79;
       color: #fff; }
+  .uix-controls__multi-sel.is-pill > span:not(.uix-controls__bar) {
+    border-radius: 50px; }
+  .uix-controls__multi-sel.is-rounded > span:not(.uix-controls__bar) {
+    border-radius: 4px; }
   .uix-controls__multi-sel.uix-controls--line > span:not(.uix-controls__bar) {
     border-top-color: transparent !important;
     border-left-color: transparent !important;
@@ -7011,7 +7031,6 @@ ol.uix-flexslider__control-paging {
   .uix-controls__single-sel > span:not(.uix-controls__bar) {
     position: relative;
     display: inline-block;
-    margin-right: 1rem;
     border: 1px solid #dce4e8;
     color: #888;
     padding: .3rem .7rem;
@@ -7019,15 +7038,28 @@ ol.uix-flexslider__control-paging {
     cursor: pointer;
     font-size: 1rem;
     background: #fff;
+    float: left;
     margin-bottom: 1rem;
     transition: all 0.3s ease; }
+    .uix-controls__single-sel > span:not(.uix-controls__bar):not(:first-child) {
+      border-left: 0; }
     .uix-controls__single-sel > span:not(.uix-controls__bar):hover, .uix-controls__multi-sel.uix-controls__single-sel > span.active:not(.uix-controls__bar) {
-      border-color: #d7d7d7;
-      background: #EEEEEE; }
-    .uix-controls__single-sel > span:not(.uix-controls__bar).active {
+      color: #fff;
       border-color: #EC5E79;
       background: #EC5E79;
-      color: #fff; }
+      background: linear-gradient(to bottom, #EC5E79 0%, #E8588C 100%); }
+    .uix-controls__single-sel > span:not(.uix-controls__bar).active {
+      color: #fff;
+      border-color: #EC5E79;
+      background: #EC5E79; }
+  .uix-controls__single-sel.is-pill > span:not(.uix-controls__bar):first-child {
+    border-radius: 50px 0 0 50px; }
+  .uix-controls__single-sel.is-pill > span:not(.uix-controls__bar):last-child {
+    border-radius: 0 50px 50px 0; }
+  .uix-controls__single-sel.is-rounded > span:not(.uix-controls__bar):first-child {
+    border-radius: 4px 0 0 4px; }
+  .uix-controls__single-sel.is-rounded > span:not(.uix-controls__bar):last-child {
+    border-radius: 0 4px 4px 0; }
   .uix-controls__single-sel.uix-controls--line > span:not(.uix-controls__bar) {
     border-top-color: transparent !important;
     border-left-color: transparent !important;

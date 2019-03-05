@@ -1,5 +1,10 @@
 # Changelog
 
+#### = 3.2.7 (March 5, 2019) =
+
+* Tweak: Improve the sort object then sub-sort further for Dynamic Drop Down List from JSON.
+* Tweak: Improve the form components styles.
+
 
 
 #### = 3.2.6 (March 1, 2019) =

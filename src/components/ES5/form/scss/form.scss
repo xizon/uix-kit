@@ -94,6 +94,15 @@ $control-focus-bordercolor2: transparent;
 		}
 		
 	}
+	&.is-rounded {
+		input:not([type="checkbox"]):not([type="radio"]),
+		textarea, 
+		button:not(.uix-btn), 
+		select {
+			border-radius: 4px;	
+		}	
+	}
+	
 	
 	//Create Line Effect on Click
 	.uix-controls__bar {
@@ -566,7 +575,8 @@ $control-focus-bordercolor2: transparent;
 .uix-controls.uix-controls--line {
 
 	
-	&.is-pill {
+	&.is-pill,
+	&.is-rounded {
 		input:not([type="checkbox"]):not([type="radio"]),
 		textarea, 
 		button:not(.uix-btn), 
@@ -575,7 +585,7 @@ $control-focus-bordercolor2: transparent;
 		}
 		
 	}
-	
+
 	.uix-controls__bar {
 		display: block !important;
 	}
@@ -947,6 +957,19 @@ $controls-merge-button-width: 20%;
 		}
 		
 	}
+
+	&.is-rounded {
+		input {
+			border-radius: 4px 0 0 4px;
+		}
+		 
+		button {
+			border-radius: 0 4px 4px 0;
+		}
+		
+	}
+
+
 	
     /*-- Form With Icon --*/
 	&.is-iconic {
@@ -1121,6 +1144,12 @@ $controls-merge-button-width: 20%;
 	.is-pill {
 		.uix-controls__select-trigger {
 			border-radius: 50px;
+		}	
+	}
+	
+	&.is-rounded {
+		.uix-controls__select-trigger {
+			border-radius: 4px;
 		}	
 	}
 	
@@ -1411,6 +1440,12 @@ $controls-merge-button-width: 20%;
 			border-radius: 18px;
 		}	
 	}
+	
+	&.is-rounded {
+		label {
+			border-radius: 4px;
+		}	
+	}
 
 	input[type="checkbox"] {
 		display: none;
@@ -1600,7 +1635,6 @@ $controls-merge-button-width: 20%;
 	> span:not(.uix-controls__bar) {
 		position: relative;
 		display: inline-block;
-		margin-right: 1rem;
 		border: 1px solid $control-sub-color;
 		color: $control-text-color;
 		padding: .3rem .7rem;
@@ -1609,8 +1643,9 @@ $controls-merge-button-width: 20%;
 		font-size: 1rem;
 		background: #fff;	
 		margin-bottom: 1rem;
+		margin-right: 1rem;
 		@include transition-default();
-		
+
 		i {
 			position: absolute;
 			top: -5px;
@@ -1625,6 +1660,7 @@ $controls-merge-button-width: 20%;
 		&:hover {
 			border-color: #d7d7d7;
 			background: #EEEEEE;
+			
 		}
 		
 		&.active {
@@ -1638,6 +1674,22 @@ $controls-merge-button-width: 20%;
 			}
 		}
 		
+	}
+	
+	
+	&.is-pill {
+
+		> span:not(.uix-controls__bar) {
+			border-radius: 50px;
+		}
+		
+			
+	}
+	
+	&.is-rounded {
+		> span:not(.uix-controls__bar) {
+			border-radius: 4px;
+		}
 	}
 	
 	
@@ -1689,7 +1741,6 @@ $controls-merge-button-width: 20%;
 	> span:not(.uix-controls__bar) {
 		position: relative;
 		display: inline-block;
-		margin-right: 1rem;
 		border: 1px solid $control-sub-color;
 		color: $control-text-color;
 		padding: .3rem .7rem;
@@ -1697,23 +1748,51 @@ $controls-merge-button-width: 20%;
 		cursor: pointer;
 		font-size: 1rem;
 		background: #fff;	
+		float: left;
 		margin-bottom: 1rem;
 		@include transition-default();
 		
-		
+		&:not(:first-child) {
+			border-left: 0;	
+		}
 		
 		&:hover {
-			border-color: #d7d7d7;
-			background: #EEEEEE;
+			color: #fff;
+			border-color: $highlight-color1;
+			@include bg-gradient( 'to bottom' );
 		}
 		
 		&.active {
-		
+		    color: #fff;
 			border-color: $highlight-color1;
 			background: $highlight-color1;
-			color: #fff;
+			
 			
 		}
+		
+	}
+	
+	
+	&.is-pill {
+
+		> span:not(.uix-controls__bar):first-child {
+			border-radius: 50px 0 0 50px;
+		}
+		
+		> span:not(.uix-controls__bar):last-child {
+			border-radius: 0 50px 50px 0;
+		}	
+			
+	}
+	
+	&.is-rounded {
+		> span:not(.uix-controls__bar):first-child {
+			border-radius: 4px 0 0 4px;
+		}
+		
+		> span:not(.uix-controls__bar):last-child {
+			border-radius: 0 4px 4px 0;
+		}		
 		
 	}
 	
