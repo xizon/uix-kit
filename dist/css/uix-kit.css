@@ -7045,7 +7045,6 @@ ol.uix-flexslider__control-paging {
     .uix-controls__single-sel > span:not(.uix-controls__bar):not(:first-child) {
       border-left: 0; }
     .uix-controls__single-sel > span:not(.uix-controls__bar):hover, .uix-controls__multi-sel.uix-controls__single-sel > span.active:not(.uix-controls__bar) {
-      color: #fff;
       border-color: #EC5E79;
       background: #EC5E79;
       background: linear-gradient(to bottom, #EC5E79 0%, #E8588C 100%); }
@@ -7123,6 +7122,8 @@ ol.uix-flexslider__control-paging {
     content: '';
     clear: both; }
   .uix-controls__dynamic-fields-container .uix-controls__dynamic-fields__tmpl {
+    display: none; }
+  .uix-controls__dynamic-fields-container .uix-controls__dynamic-fields__tmpl__wrapper:first-child .uix-controls__dynamic-fields__removebtn {
     display: none; }
 
 /* 

@@ -1758,7 +1758,6 @@ $controls-merge-button-width: 20%;
 		}
 		
 		&:hover {
-			color: #fff;
 			border-color: $highlight-color1;
 			@include bg-gradient( 'to bottom' );
 		}
@@ -1901,7 +1900,11 @@ $controls-merge-button-width: 20%;
 	
 	.uix-controls__dynamic-fields__tmpl {
 		display: none;
-	}	
+	}
+	
+	.uix-controls__dynamic-fields__tmpl__wrapper:first-child .uix-controls__dynamic-fields__removebtn {
+		display: none
+	}
 }
 
 
