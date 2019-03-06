@@ -4,7 +4,7 @@
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
  * ## Version             :  3.2.7
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  March 5, 2019
+ * ## Last Update         :  March 6, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -6071,7 +6071,8 @@ ol.uix-flexslider__control-paging {
  * 7. Multiple Selector
  * 8. Single Selector
  * 9. Search of Widget
- * 10. Date Picker
+ * 10. Add / remove input field dynamically
+ * 11. Date Picker  ( 3rd Party Plugin )
 */
 /* 
  ---------------------------
@@ -7112,7 +7113,21 @@ ol.uix-flexslider__control-paging {
 
 /* 
  ---------------------------
- 10. Date Picker
+ 10. Add / remove input field dynamically
+ ---------------------------
+ */
+.uix-controls__dynamic-fields-container {
+  margin-bottom: 2.5rem; }
+  .uix-controls__dynamic-fields-container .uix-controls__dynamic-fields__append::before {
+    display: block;
+    content: '';
+    clear: both; }
+  .uix-controls__dynamic-fields-container .uix-controls__dynamic-fields__tmpl {
+    display: none; }
+
+/* 
+ ---------------------------
+ 11. Date Picker ( 3rd Party Plugin )
  ---------------------------
  */
 .xdsoft_datetimepicker {

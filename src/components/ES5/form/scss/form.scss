@@ -12,7 +12,8 @@
  * 7. Multiple Selector
  * 8. Single Selector
  * 9. Search of Widget
- * 10. Date Picker
+ * 10. Add / remove input field dynamically
+ * 11. Date Picker  ( 3rd Party Plugin )
 */
 
 
@@ -1883,11 +1884,31 @@ $controls-merge-button-width: 20%;
 	}
 }
 
+/* 
+ ---------------------------
+ 10. Add / remove input field dynamically
+ ---------------------------
+ */
+.uix-controls__dynamic-fields-container {
+	margin-bottom: 2.5rem;
+	
+	.uix-controls__dynamic-fields__append::before {
+		display: block;
+		content: '';
+		clear: both;
+		
+	}
+	
+	.uix-controls__dynamic-fields__tmpl {
+		display: none;
+	}	
+}
+
 
 
 /* 
  ---------------------------
- 10. Date Picker
+ 11. Date Picker ( 3rd Party Plugin )
  ---------------------------
  */ 
 .xdsoft_datetimepicker {

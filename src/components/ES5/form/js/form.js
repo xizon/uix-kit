@@ -44,7 +44,91 @@ APP = ( function ( APP, $, window, document ) {
 		});
 		
 		
-		
+		/* 
+		 ---------------------------
+		 Add / remove input field dynamically
+		 ---------------------------
+		 */ 
+		$( '.uix-controls__dynamic-fields-container' ).each(function(){
+
+
+			var $this            = $( this ),
+				$addButton       = $this.find( '.uix-controls__dynamic-fields__addbtn' ), //The add button
+				removeButton     = '.uix-controls__dynamic-fields__removebtn', //The remove button selector ID or class
+				$appendWrapper   = $this.find( '.uix-controls__dynamic-fields__append' ), //The field wrapper ID or class 
+				x                = 1,
+				maxField         = $this.data( 'max-fields' ),
+				fieldHTML        = '';
+
+			//Maximum number of forms added
+			if ( typeof maxField === typeof undefined ) {
+				 maxField = 5;
+			}
+
+			//Add a field
+			var addOne = function( fieldCode ) {
+				
+				
+				//replace the index of field name
+				fieldCode = fieldCode.replace(/\{index\}/gi, x );
+				
+				//hide add button
+				if ( x == maxField ) $addButton.hide();
+				
+				if ( x <= maxField ) { 
+
+					
+					$appendWrapper.append( fieldCode );
+					$.when( $appendWrapper.length > 0 ).then( function() {
+
+						//Initialize Form
+						$( document ).customSpecialFormsInit();
+					});
+					
+					x++;
+				}
+
+			};
+
+			addOne( $this.find( '.uix-controls__dynamic-fields__tmpl' ).html() );
+
+
+			//Prevent duplicate function assigned
+			$addButton.off( 'click' ).on( 'click', function( e ) {
+				e.preventDefault();
+
+				addOne( $this.find( '.uix-controls__dynamic-fields__tmpl' ).html() );
+				return false;
+			});
+
+			//Remove per item
+
+			//Prevent duplicate function assigned
+			$( removeButton ).off( 'click' );
+			$( document ).on( 'click', removeButton, function( e ) {
+				e.preventDefault();
+				
+					
+				//display add button
+				$addButton.show();
+
+
+				var $li = $( this ).closest( '.uix-controls__dynamic-fields__tmpl__wrapper' );
+
+				if ( $this.find( '.uix-controls__dynamic-fields .uix-controls__dynamic-fields__tmpl__wrapper' ).length == 1 ) {
+					$li.find( 'input, textarea' ).val( '' );
+					$li.hide();
+				} else {
+					$li.remove();
+				}
+
+
+				x--;
+			});	
+
+
+
+		} );	
 		
 		
 
