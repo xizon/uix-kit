@@ -478,7 +478,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			/* ---------  Close the modal  */
-			$( document ).on( 'click', '.uix-modal-box .uix-modal-box__close, .uix-modal-mask', function() {
+			$( document ).on( 'click', '.uix-modal-box .uix-modal-box__close, .uix-modal-mask:not(.js-uix-disabled)', function() {
 
 				myPlayer.ready(function() {
 					myPlayer.pause();

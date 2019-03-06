@@ -2541,7 +2541,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			/* ---------  Close the modal  */
-			$( document ).on( 'click', '.uix-modal-box .uix-modal-box__close, .uix-modal-mask', function() {
+			$( document ).on( 'click', '.uix-modal-box .uix-modal-box__close, .uix-modal-mask:not(.js-uix-disabled)', function() {
 
 				myPlayer.ready(function() {
 					myPlayer.pause();
@@ -25306,7 +25306,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.MODAL_DIALOG               = APP.MODAL_DIALOG || {};
-	APP.MODAL_DIALOG.version       = '0.0.8';
+	APP.MODAL_DIALOG.version       = '0.0.9';
     APP.MODAL_DIALOG.documentReady = function( $ ) {
 
 		//Get the -webkit-transition-duration property
@@ -25360,10 +25360,11 @@ APP = ( function ( APP, $, window, document ) {
 	    
 		$( document ).on( 'click.MODAL_DIALOG', '[data-modal-id]', function() {
 
-			var dataH      = $( this ).data( 'modal-height' ),
-				dataW      = $( this ).data( 'modal-width' ),
-				lightbox   = $( this ).data( 'modal-lightbox' ),
-				closeTime  = $( this ).data( 'modal-close-time' );
+			var dataH         = $( this ).data( 'modal-height' ),
+				dataW         = $( this ).data( 'modal-width' ),
+				lightbox      = $( this ).data( 'modal-lightbox' ),
+				closeTime     = $( this ).data( 'modal-close-time' ),
+				closeOnlyBtn  = $( this ).data( 'modal-close-onlybtn' );
 			
 			if ( typeof dataH === typeof undefined ) {
 				dataH = false;
@@ -25378,25 +25379,28 @@ APP = ( function ( APP, $, window, document ) {
 			if ( typeof closeTime === typeof undefined ) {
 				closeTime = false;
 			}	
-			
+			if ( typeof closeOnlyBtn === typeof undefined ) {
+				closeOnlyBtn = false;
+			}		
 
 			
+			
 			$( document ).fireModalDialog( {
-				id        : $( this ).data( 'modal-id' ),
-				height    : dataH,
-				width     : dataW,
-				speed     : modalSpeed,
-				btn       : $( this ),
-				lightbox  : lightbox,
-				autoClose : closeTime
+				id           : $( this ).data( 'modal-id' ),
+				height       : dataH,
+				width        : dataW,
+				speed        : modalSpeed,
+				btn          : $( this ),
+				lightbox     : lightbox,
+				autoClose    : closeTime,
+				closeOnlyBtn : closeOnlyBtn
 			});
 
 			return false;
 		
 		});
 	
-		
-		$( document ).on( 'click.MODAL_DIALOG_CLOSE', '.uix-modal-box .uix-modal-box__close, .uix-modal-mask', function() {
+		$( document ).on( 'click.MODAL_DIALOG_CLOSE', '.uix-modal-box .uix-modal-box__close, .uix-modal-mask:not(.js-uix-disabled)', function() {
 			
 			//btn
 			if ( $( this ).hasClass( 'uix-modal-box__close' ) ) {
@@ -25432,6 +25436,7 @@ APP = ( function ( APP, $, window, document ) {
  * @param  {Object|Boolean} btn          - Link or button that fires an event.
  * @param  {Boolean} lightbox            - Whether to enable the lightbox effect.
  * @param  {Number|Boolean} autoClose    - Specify auto-close time. This function is not enabled when this value is false.
+ * @param  {Boolean} closeOnlyBtn        - Disable mask to close the window.
  * @return {Void}
  */	
 ( function ( $ ) {
@@ -25439,13 +25444,14 @@ APP = ( function ( APP, $, window, document ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
-			id        : 'demo',
-			height    : false,
-			width     : false,
-			speed     : 500,
-			btn       : false,
-			lightbox  : true,
-			autoClose : false
+			id           : 'demo',
+			height       : false,
+			width        : false,
+			speed        : 500,
+			btn          : false,
+			lightbox     : true,
+			autoClose    : false,
+			closeOnlyBtn : false
         }, options );
 		
  
@@ -25453,20 +25459,24 @@ APP = ( function ( APP, $, window, document ) {
 
 			if ( settings.id == '' ) return false;
 			
-			
-	
 			//Add modal mask to stage
 			if ( $( '.uix-modal-mask' ).length == 0 ) {
 				$( 'body' ).prepend( '<div class="uix-modal-mask"></div>' );
 			}
 			$.when( $( '.uix-modal-mask' ).length > 0 ).then( function() {
+				
+				if ( settings.closeOnlyBtn ) {
+					$( '.uix-modal-mask' ).addClass( 'js-uix-disabled' );
+				} else {
+					$( '.uix-modal-mask' ).removeClass( 'js-uix-disabled' );
+				}
 
-				var dataID     = settings.id,
-					dataH      = settings.height,
-					dataW      = settings.width,
-					linkBtn    = settings.btn,
-					closeTime  = settings.autoClose,
-					$obj       = $( '.uix-modal-box#'+dataID );
+				var dataID        = settings.id,
+					dataH         = settings.height,
+					dataW         = settings.width,
+					linkBtn       = settings.btn,
+					closeTime     = settings.autoClose,
+					$obj          = $( '.uix-modal-box#'+dataID );
 
 				// Initializate modal
 				if ( linkBtn ) {
@@ -25573,6 +25583,9 @@ APP = ( function ( APP, $, window, document ) {
  
         this.each( function() {
 
+			//Enable mask to close the window.
+			$( '.uix-modal-mask' ).removeClass( 'js-uix-disabled' );
+			
 			$( settings.target ).removeClass( 'active' );
 			TweenMax.to( '.uix-modal-mask', 0.3, {
 				css: {

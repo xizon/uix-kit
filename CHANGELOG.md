@@ -1,11 +1,13 @@
 # Changelog
 
-#### = 3.2.7 (March 5, 2019) =
+#### = 3.2.7 (March 6, 2019) =
 
 * New: Added a new form type which is dynamical fields.
+* New: Added a new HTML property "data-modal-close-onlybtn" for Modal Dialog.
 * Tweak: Improve the sort object then sub-sort further for Dynamic Drop Down List from JSON.
 * Tweak: Improve the form components styles.
 * Tweak: Upgraded the Date Picker function.
+
 
 
 #### = 3.2.6 (March 1, 2019) =
