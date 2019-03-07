@@ -54,7 +54,7 @@ APP = ( function ( APP, $, window, document ) {
 				}
 				
 				
-				$this.uixParallax( { 'speed': dataSpeed, 'bg': false } );	
+				$this.UixParallax( { 'speed': dataSpeed, 'bg': false } );	
 				
 		
 			});
@@ -200,7 +200,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 					//Use parallax to background
-					$this.uixParallax( { 'speed': dataSpeed, 'bg': { enable: true, xPos: '50%' } } );
+					$this.UixParallax( { 'speed': dataSpeed, 'bg': { enable: true, xPos: '50%' } } );
 
 
 					

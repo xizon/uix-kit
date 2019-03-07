@@ -110,7 +110,7 @@ APP = ( function ( APP, $, window, document ) {
 						//Using parallax
 						if ( dataParallax && typeof dataParallax != typeof undefined && dataParallax != 0 ) {
 
-							$this.uixParallax( { 'speed': dataParallax, 'bg': { enable: true, xPos: '50%' } } );
+							$this.UixParallax( { 'speed': dataParallax, 'bg': { enable: true, xPos: '50%' } } );
 						}
 
 

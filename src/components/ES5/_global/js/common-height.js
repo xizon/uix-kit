@@ -20,7 +20,7 @@ APP = ( function ( APP, $, window, document ) {
 	APP.COMMON_HEIGHT.version       = '0.0.1';
     APP.COMMON_HEIGHT.pageLoaded    = function() {
 
-	    $( '.js-uix-common-height' ).commonHeight();
+	    $( '.js-uix-common-height' ).UixCommonHeight();
 		
     };
 
@@ -46,7 +46,7 @@ APP = ( function ( APP, $, window, document ) {
  * @return {Void}
  */
 ( function ( $ ) {
-    $.fn.commonHeight = function( options ) {
+    $.fn.UixCommonHeight = function( options ) {
 
         // This is the easiest way to have default options.
         var settings = $.extend({

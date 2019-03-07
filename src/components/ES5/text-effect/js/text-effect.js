@@ -32,7 +32,7 @@ APP = ( function ( APP, $, window, document ) {
 		//Default Effect
 		//-------------------------------------	
 		$( '[data-text-eff]' ).each( function( index )  {
-			$( document ).customTextEffInit( { selectors: '[data-text-eff="'+$( this ).data( 'text-eff' )+'"]' } );
+			$( document ).UixTextEff( { selectors: '[data-text-eff="'+$( this ).data( 'text-eff' )+'"]' } );
 		});   
 		
     };
@@ -51,7 +51,7 @@ APP = ( function ( APP, $, window, document ) {
  * @return {Void}
  */
 ( function ( $ ) {
-    $.fn.customTextEffInit = function( options ) {
+    $.fn.UixTextEff = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({

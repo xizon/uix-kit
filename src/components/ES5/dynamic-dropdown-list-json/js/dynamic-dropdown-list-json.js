@@ -74,8 +74,8 @@ APP = ( function ( APP, $, window, document ) {
 							$( firstOptionsHtml ).insertAfter( $this.find( 'option' ).first() );
 
 
-							//Initialize the custom select
-							$( document ).customSelectInit();
+							//Render the custom select
+							$( document ).UixRenderCustomSelect();
 
 
 						 },
@@ -113,8 +113,8 @@ APP = ( function ( APP, $, window, document ) {
 							$( '#' + curID ).find( 'option[value=""]' ).attr( 'selected', 'selected' );
 							$( associated ).find( 'option:selected' ).removeAttr( 'selected' );
 
-							//Initialize the custom select
-							$( document ).customSelectInit();
+							//Render the custom select
+							$( document ).UixRenderCustomSelect();
 							$( associated ).attr( 'selected', 'selected' ).change();	
 
 							APP.DYNAMIC_DD_LIST.documentReady($);
@@ -221,8 +221,8 @@ APP = ( function ( APP, $, window, document ) {
 											$( associated ).closest( '.uix-controls__select-wrapper' ).find( '.uix-controls__select-trigger' ).addClass( 'active' );
 
 
-											//Initialize the custom select
-											$( document ).customSelectInit();
+											//Render the custom select
+											$( document ).UixRenderCustomSelect();
 											$( associated ).attr( 'selected', 'selected' ).change();
 
 
@@ -323,7 +323,7 @@ APP = ( function ( APP, $, window, document ) {
  * @return {Function}                        - Return a callback function.
  */
 ( function ( $ ) {
-    $.fn.searchJsonString = function( options ) {
+    $.fn.UixSearchJsonStr = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
@@ -352,7 +352,7 @@ APP = ( function ( APP, $, window, document ) {
 						var formatData = {};
 
 						for ( var item in data ) {
-							if ( $( document ).isJsonObject( { string:  data[item] } ) ) {
+							if ( $( document ).UixIsJsonObj( { string:  data[item] } ) ) {
 								formatFromServer( data[item], formatData );
 							} else {
 								formatData[item] = data[item];
@@ -416,7 +416,7 @@ APP = ( function ( APP, $, window, document ) {
  * @return {Boolean}                         - Return a boolean.
  */
 ( function ( $ ) {
-    $.fn.isJsonObject = function( options ) {
+    $.fn.UixIsJsonObj = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({

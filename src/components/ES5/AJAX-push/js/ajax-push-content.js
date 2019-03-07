@@ -229,8 +229,8 @@ APP = ( function ( APP, $, window, document ) {
 					container.html( content ).promise().done( function() {
 						
 						
-						// Apply the original scripts
-						$( document ).applyOriginalSomeScripts();
+						// Apply some asynchronism scripts
+						$( document ).UixApplyAsyncScripts();
 
 						
 						

@@ -452,8 +452,8 @@ APP = ( function ( APP, $, window, document ) {
 							}
 							
 							
-							//--------- Apply the original scripts
-							$( document ).applyOriginalSomeScripts({
+							//--------- Apply some asynchronism scripts
+							$( document ).UixApplyAsyncScripts({
 								scrollReveal : true,
 								ajaxPostList : false
 							});

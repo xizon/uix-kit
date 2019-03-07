@@ -2,7 +2,7 @@
  * 
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.2.7
+ * ## Version             :  3.3.0
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
  * ## Last Update         :  March 7, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -989,7 +989,7 @@ var UIX_GUID = UIX_GUID || (function() {
  */
 
 ( function ( $ ) {
-    $.fn.uixParallax = function( options ) {
+    $.fn.UixParallax = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
@@ -1169,7 +1169,7 @@ APP = ( function ( APP, $, window, document ) {
 	APP.COMMON_HEIGHT.version       = '0.0.1';
     APP.COMMON_HEIGHT.pageLoaded    = function() {
 
-	    $( '.js-uix-common-height' ).commonHeight();
+	    $( '.js-uix-common-height' ).UixCommonHeight();
 		
     };
 
@@ -1195,7 +1195,7 @@ APP = ( function ( APP, $, window, document ) {
  * @return {Void}
  */
 ( function ( $ ) {
-    $.fn.commonHeight = function( options ) {
+    $.fn.UixCommonHeight = function( options ) {
 
         // This is the easiest way to have default options.
         var settings = $.extend({
@@ -2032,7 +2032,7 @@ APP = ( function ( APP, $, window, document ) {
 						//Using parallax
 						if ( dataParallax && typeof dataParallax != typeof undefined && dataParallax != 0 ) {
 
-							$this.uixParallax( { 'speed': dataParallax, 'bg': { enable: true, xPos: '50%' } } );
+							$this.UixParallax( { 'speed': dataParallax, 'bg': { enable: true, xPos: '50%' } } );
 						}
 
 
@@ -14685,9 +14685,9 @@ APP = ( function ( APP, $, window, document ) {
 								setTimeout( function() {
 									
 									//text effect
-									if ( $.isFunction( $.fn.customTextEffInit ) ) {
+									if ( $.isFunction( $.fn.UixTextEff ) ) {
 										$current.find( '[data-text-eff]' ).each( function( index )  {
-											$( document ).customTextEffInit( { selectors: '[data-text-eff="'+$( this ).data( 'text-eff' )+'"]' } );
+											$( document ).UixTextEff( { selectors: '[data-text-eff="'+$( this ).data( 'text-eff' )+'"]' } );
 										});
 
 									}	
@@ -15367,8 +15367,8 @@ APP = ( function ( APP, $, window, document ) {
 					container.html( content ).promise().done( function() {
 						
 						
-						// Apply the original scripts
-						$( document ).applyOriginalSomeScripts();
+						// Apply some asynchronism scripts
+						$( document ).UixApplyAsyncScripts();
 
 						
 						
@@ -15845,8 +15845,8 @@ APP = ( function ( APP, $, window, document ) {
 							.remove();
 
 
-						// Apply the original scripts
-						$( document ).applyOriginalSomeScripts();
+						// Apply some asynchronism scripts
+						$( document ).UixApplyAsyncScripts();
 						
 						
 					}
@@ -15902,7 +15902,7 @@ APP = ( function ( APP, $, window, document ) {
 		
 		
 /*
- * Apply some original scripts
+ * Apply some asynchronism scripts
  *
  * @param  {Boolean} scrollReveal          - Run script of module "Scroll Reveal". a page commonly used to 
  *                                           load asynchronous information
@@ -15913,7 +15913,7 @@ APP = ( function ( APP, $, window, document ) {
  * @return {Void}
  */
 ( function ( $ ) {
-    $.fn.applyOriginalSomeScripts = function( options ) {
+    $.fn.UixApplyAsyncScripts = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
@@ -16020,13 +16020,13 @@ APP = ( function ( APP, $, window, document ) {
 
 		
 /*
- * Apply all the original scripts
+ * Apply all the asynchronism scripts
  *
  * @param  {Boolean} runAll          - Run all module scripts.
  * @return {Void}
  */	
 ( function ( $ ) {
-    $.fn.applyOriginalAllScripts = function( options ) {
+    $.fn.UixApplyAsyncAllScripts = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
@@ -16609,8 +16609,8 @@ APP = ( function ( APP, $, window, document ) {
 							$( firstOptionsHtml ).insertAfter( $this.find( 'option' ).first() );
 
 
-							//Initialize the custom select
-							$( document ).customSelectInit();
+							//Render the custom select
+							$( document ).UixRenderCustomSelect();
 
 
 						 },
@@ -16648,8 +16648,8 @@ APP = ( function ( APP, $, window, document ) {
 							$( '#' + curID ).find( 'option[value=""]' ).attr( 'selected', 'selected' );
 							$( associated ).find( 'option:selected' ).removeAttr( 'selected' );
 
-							//Initialize the custom select
-							$( document ).customSelectInit();
+							//Render the custom select
+							$( document ).UixRenderCustomSelect();
 							$( associated ).attr( 'selected', 'selected' ).change();	
 
 							APP.DYNAMIC_DD_LIST.documentReady($);
@@ -16756,8 +16756,8 @@ APP = ( function ( APP, $, window, document ) {
 											$( associated ).closest( '.uix-controls__select-wrapper' ).find( '.uix-controls__select-trigger' ).addClass( 'active' );
 
 
-											//Initialize the custom select
-											$( document ).customSelectInit();
+											//Render the custom select
+											$( document ).UixRenderCustomSelect();
 											$( associated ).attr( 'selected', 'selected' ).change();
 
 
@@ -16858,7 +16858,7 @@ APP = ( function ( APP, $, window, document ) {
  * @return {Function}                        - Return a callback function.
  */
 ( function ( $ ) {
-    $.fn.searchJsonString = function( options ) {
+    $.fn.UixSearchJsonStr = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
@@ -16887,7 +16887,7 @@ APP = ( function ( APP, $, window, document ) {
 						var formatData = {};
 
 						for ( var item in data ) {
-							if ( $( document ).isJsonObject( { string:  data[item] } ) ) {
+							if ( $( document ).UixIsJsonObj( { string:  data[item] } ) ) {
 								formatFromServer( data[item], formatData );
 							} else {
 								formatData[item] = data[item];
@@ -16951,7 +16951,7 @@ APP = ( function ( APP, $, window, document ) {
  * @return {Boolean}                         - Return a boolean.
  */
 ( function ( $ ) {
-    $.fn.isJsonObject = function( options ) {
+    $.fn.UixIsJsonObj = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
@@ -19306,7 +19306,7 @@ APP = ( function ( APP, $, window, document ) {
 	If you want to initialize the indicator to a location when the page is first run,
 	you need to call the following function:
 	
-	$( document ).formProgressNext({ 
+	$( document ).UixFormProgressToNext({ 
 		'selector'         : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
 		'formTarget'       : $( '.uix-form-progress__target' ),
 		'indicator'        : '.uix-form-progress .uix-form-progress__indicator',
@@ -19363,7 +19363,7 @@ APP = ( function ( APP, $, window, document ) {
 		$( document ).on( 'click', '.uix-form-progress__target .go-step:not(.disable)', function( e ) {
 			e.preventDefault();
 			var $sections = $( this ).parents( '.uix-form-progress__target__step' );
-			$( document ).formProgressNext({ 
+			$( document ).UixFormProgressToNext({ 
 				'selector'   : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
 				'formTarget' : $formTarget,
 				'indicator'  : '.uix-form-progress .uix-form-progress__indicator',
@@ -19388,7 +19388,7 @@ APP = ( function ( APP, $, window, document ) {
 		 */
 		function formReset() {
 			
-			$( document ).formProgressNext({ 
+			$( document ).UixFormProgressToNext({ 
 				'selector'         : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
 				'formTarget'       : $( '.uix-form-progress__target' ),
 				'indicator'        : '.uix-form-progress .uix-form-progress__indicator',
@@ -19430,7 +19430,7 @@ APP = ( function ( APP, $, window, document ) {
  * @return {Void}
  */
 ( function ( $ ) {
-    $.fn.formProgressNext = function( options ) {
+    $.fn.UixFormProgressToNext = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
@@ -19622,16 +19622,16 @@ APP = ( function ( APP, $, window, document ) {
 	you need add a callback function that initializes the style:
 	
 
-	$( document ).customSelectInit(); //Custom Select
-	$( document ).customRadioCheckboxInit(); //Custom Radio, Toggle And Checkbox
-	$( document ).customControlsLineEffInit(); //Create Line Effect on Click
-	$( document ).disabledFieldsInit(); //Disabled Status
-	$( document ).fileInit(); //Input File
-	$( document ).fileDropInit(); //Upload field
-	$( document ).fieldsHoverEffInit(); //Hover Effect
-	$( document ).multiSelInit(); //Multiple Selector Status
-	$( document ).singleSelInit(); //Single Selector Status
-	$( document ).datePickerlInit(); //Date Picker
+	$( document ).UixRenderCustomSelect(); //Render Custom Select
+	$( document ).UixRenderCustomRadioCheckbox(); //Render Custom Radio, Toggle And Checkbox
+	$( document ).UixRenderControlsLineEff(); //Create Line Effect on Click
+	$( document ).UixRenderControlsDisable(); //Disabled Controls Status
+	$( document ).UixRenderCustomFile(); //Render Custom File Type
+	$( document ).UixRenderCustomFileDropzone(); //Render Custom File Dropzone
+	$( document ).UixRenderControlsHover(); //Hover Effect
+	$( document ).UixRenderCustomMultiSel(); //Render Multiple Selector Status
+	$( document ).UixRenderCustomSingleSel(); //Render Single Selector Status
+	$( document ).UixRenderDatePicker(); //Render Date Picker
 
 	
 */
@@ -19652,16 +19652,16 @@ APP = ( function ( APP, $, window, document ) {
 		 * @return {Void}
 		 */
 		var customSpecialFormsInit = function() {
-			$( document ).customSelectInit(); //Custom Select
-			$( document ).customRadioCheckboxInit(); //Custom Radio, Toggle And Checkbox
-			$( document ).customControlsLineEffInit(); //Create Line Effect on Click
-			$( document ).disabledFieldsInit(); //Disabled Status
-			$( document ).fileInit(); //Input File
-			$( document ).fileDropInit(); //Upload field
-			$( document ).fieldsHoverEffInit(); //Hover Effect
-			$( document ).multiSelInit(); //Multiple Selector Status
-			$( document ).singleSelInit(); //Single Selector Status
-			$( document ).datePickerlInit(); //Date Picker	
+			$( document ).UixRenderCustomSelect(); //Render Custom Select
+			$( document ).UixRenderCustomRadioCheckbox(); //Render Custom Radio, Toggle And Checkbox
+			$( document ).UixRenderControlsLineEff(); //Create Line Effect on Click
+			$( document ).UixRenderControlsDisable(); //Disabled Controls Status
+			$( document ).UixRenderCustomFile(); //Render Custom File Type
+			$( document ).UixRenderCustomFileDropzone(); //Render Custom File Dropzone
+			$( document ).UixRenderControlsHover(); //Hover Effect
+			$( document ).UixRenderCustomMultiSel(); //Render Multiple Selector Status
+			$( document ).UixRenderCustomSingleSel(); //Render Single Selector Status
+			$( document ).UixRenderDatePicker(); //Render Date Picker	
 		};
 		
 		
@@ -19951,7 +19951,7 @@ APP = ( function ( APP, $, window, document ) {
  */
 
 /*
- * Custom Select
+ * Render Custom Select
  *
  * @param  {String} selector             - The current selector.
  * @param  {String} targetWrapper        - Wrapper of the selector.
@@ -19961,7 +19961,7 @@ APP = ( function ( APP, $, window, document ) {
  * @return {Void}
  */
 ( function ( $ ) {
-    $.fn.customSelectInit = function( options ) {
+    $.fn.UixRenderCustomSelect = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
@@ -20128,7 +20128,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 /*
- * Custom Radio, Checkbox and Toggle 
+ * Render Custom Radio, Checkbox and Toggle 
  *
  * @param  {String} radioWrapper             - Wrapper of the radio.
  * @param  {String} toggle                   - Toggle of the checkbox.
@@ -20136,7 +20136,7 @@ APP = ( function ( APP, $, window, document ) {
  * @return {Void}
  */
 ( function ( $ ) {
-    $.fn.customRadioCheckboxInit = function( options ) {
+    $.fn.UixRenderCustomRadioCheckbox = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
@@ -20207,7 +20207,7 @@ APP = ( function ( APP, $, window, document ) {
  * @return {Void}
  */
 ( function ( $ ) {
-    $.fn.customControlsLineEffInit = function( options ) {
+    $.fn.UixRenderControlsLineEff = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
@@ -20261,13 +20261,13 @@ APP = ( function ( APP, $, window, document ) {
 
 
 /*
- * Disabled Fields Status
+ * Disabled Controls Status
  *
  * @param  {String} controls                 - Wrapper of controls.
  * @return {Void}
  */
 ( function ( $ ) {
-    $.fn.disabledFieldsInit = function( options ) {
+    $.fn.UixRenderControlsDisable = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
@@ -20288,13 +20288,13 @@ APP = ( function ( APP, $, window, document ) {
 
 
 /*
- * Input File
+ * Render Custom File Type
  *
  * @param  {String} controls                 - Wrapper of controls.
  * @return {Void}
  */
 ( function ( $ ) {
-    $.fn.fileInit = function( options ) {
+    $.fn.UixRenderCustomFile = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
@@ -20330,13 +20330,13 @@ APP = ( function ( APP, $, window, document ) {
 
 
 /*
- * Upload field
+ * Render Custom File Dropzone
  *
  * @param  {String} controls                 - Wrapper of controls.
  * @return {Void}
  */
 ( function ( $ ) {
-    $.fn.fileDropInit = function( options ) {
+    $.fn.UixRenderCustomFileDropzone = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
@@ -20413,7 +20413,7 @@ APP = ( function ( APP, $, window, document ) {
  * @return {Void}
  */
 ( function ( $ ) {
-    $.fn.fieldsHoverEffInit = function( options ) {
+    $.fn.UixRenderControlsHover = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
@@ -20470,13 +20470,13 @@ APP = ( function ( APP, $, window, document ) {
 
 
 /*
- * Multiple Selector Status
+ * Render Multiple Selector Status
  *
  * @param  {String} controls                 - Wrapper of controls.
  * @return {Void}
  */
 ( function ( $ ) {
-    $.fn.multiSelInit = function( options ) {
+    $.fn.UixRenderCustomMultiSel = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
@@ -20510,54 +20510,15 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
+
 /*
- * Multiple Selector Status
+ * Render Single Selector Status
  *
  * @param  {String} controls                 - Wrapper of controls.
  * @return {Void}
  */
 ( function ( $ ) {
-    $.fn.multiSelInit = function( options ) {
- 
-        // This is the easiest way to have default options.
-        var settings = $.extend({
-			controls    : '.uix-controls__multi-sel'
-        }, options );
- 
-        this.each( function() {
-		
-		
-			$( settings.controls ).each( function()  {
-				$( this ).find( '> span' ).each( function()  {
-
-					var targetID = '#' + $( this ).parent().attr( "data-targetid" );
-
-					if ( $( targetID ).val().indexOf( $( this ).data( 'value' ) ) >= 0 ) {
-						$( this ).addClass( 'active' );
-					} else {
-						$( this ).removeClass( 'active' );
-					}	
-
-
-
-				});
-			});
-			
-		});
- 
-    };
- 
-}( jQuery ));
-
-
-/*
- * Single Selector Status
- *
- * @param  {String} controls                 - Wrapper of controls.
- * @return {Void}
- */
-( function ( $ ) {
-    $.fn.singleSelInit = function( options ) {
+    $.fn.UixRenderCustomSingleSel = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
@@ -20604,13 +20565,13 @@ APP = ( function ( APP, $, window, document ) {
 
 
 /*
- * Date Picker
+ * Render Date Picker
  *
  * @param  {String} controls                 - Wrapper of controls.
  * @return {Void}
  */
 ( function ( $ ) {
-    $.fn.datePickerlInit = function( options ) {
+    $.fn.UixRenderDatePicker = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
@@ -24416,8 +24377,8 @@ APP = ( function ( APP, $, window, document ) {
 
 								$content.html( $( '#' + dataHtmlID ).html() ).promise().done( function(){
 									
-									// Apply the original scripts
-									$( document ).applyOriginalSomeScripts({
+									// Apply some asynchronism scripts
+									$( document ).UixApplyAsyncScripts({
 										lightBox : false,
 										ajaxPostList : false
 									});
@@ -25177,8 +25138,8 @@ APP = ( function ( APP, $, window, document ) {
 							}
 							
 							
-							//--------- Apply the original scripts
-							$( document ).applyOriginalSomeScripts({
+							//--------- Apply some asynchronism scripts
+							$( document ).UixApplyAsyncScripts({
 								scrollReveal : true,
 								ajaxPostList : false
 							});
@@ -25395,7 +25356,7 @@ APP = ( function ( APP, $, window, document ) {
 
 			
 			
-			$( document ).fireModalDialog( {
+			$( document ).UixFireModalDialog( {
 				id           : $( this ).data( 'modal-id' ),
 				height       : dataH,
 				width        : dataW,
@@ -25417,7 +25378,7 @@ APP = ( function ( APP, $, window, document ) {
 				$( this ).parent().removeClass( 'active' );
 			}
 			
-			$( document ).closeModalDialog();
+			$( document ).UixCloseModalDialog();
 			
 			
 			return false;
@@ -25450,7 +25411,7 @@ APP = ( function ( APP, $, window, document ) {
  * @return {Void}
  */	
 ( function ( $ ) {
-    $.fn.fireModalDialog = function( options ) {
+    $.fn.UixFireModalDialog = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
@@ -25545,7 +25506,7 @@ APP = ( function ( APP, $, window, document ) {
 					//auto close
 					if ( closeTime && !isNaN( closeTime ) ) {
 						setTimeout( function() {
-							$( document ).closeModalDialog();
+							$( document ).UixCloseModalDialog();
 						}, closeTime );
 					}
 					
@@ -25583,7 +25544,7 @@ APP = ( function ( APP, $, window, document ) {
  * @return {Void}
  */	
 ( function ( $ ) {
-    $.fn.closeModalDialog = function( options ) {
+    $.fn.UixCloseModalDialog = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
@@ -27558,7 +27519,7 @@ APP = ( function ( APP, $, window, document ) {
 				}
 				
 				
-				$this.uixParallax( { 'speed': dataSpeed, 'bg': false } );	
+				$this.UixParallax( { 'speed': dataSpeed, 'bg': false } );	
 				
 		
 			});
@@ -27704,7 +27665,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 					//Use parallax to background
-					$this.uixParallax( { 'speed': dataSpeed, 'bg': { enable: true, xPos: '50%' } } );
+					$this.UixParallax( { 'speed': dataSpeed, 'bg': { enable: true, xPos: '50%' } } );
 
 
 					
@@ -33123,7 +33084,7 @@ APP = ( function ( APP, $, window, document ) {
 		//Default Effect
 		//-------------------------------------	
 		$( '[data-text-eff]' ).each( function( index )  {
-			$( document ).customTextEffInit( { selectors: '[data-text-eff="'+$( this ).data( 'text-eff' )+'"]' } );
+			$( document ).UixTextEff( { selectors: '[data-text-eff="'+$( this ).data( 'text-eff' )+'"]' } );
 		});   
 		
     };
@@ -33142,7 +33103,7 @@ APP = ( function ( APP, $, window, document ) {
  * @return {Void}
  */
 ( function ( $ ) {
-    $.fn.customTextEffInit = function( options ) {
+    $.fn.UixTextEff = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({

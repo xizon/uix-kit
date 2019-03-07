@@ -432,8 +432,8 @@ APP = ( function ( APP, $, window, document ) {
 							.remove();
 
 
-						// Apply the original scripts
-						$( document ).applyOriginalSomeScripts();
+						// Apply some asynchronism scripts
+						$( document ).UixApplyAsyncScripts();
 						
 						
 					}
@@ -489,7 +489,7 @@ APP = ( function ( APP, $, window, document ) {
 		
 		
 /*
- * Apply some original scripts
+ * Apply some asynchronism scripts
  *
  * @param  {Boolean} scrollReveal          - Run script of module "Scroll Reveal". a page commonly used to 
  *                                           load asynchronous information
@@ -500,7 +500,7 @@ APP = ( function ( APP, $, window, document ) {
  * @return {Void}
  */
 ( function ( $ ) {
-    $.fn.applyOriginalSomeScripts = function( options ) {
+    $.fn.UixApplyAsyncScripts = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
@@ -607,13 +607,13 @@ APP = ( function ( APP, $, window, document ) {
 
 		
 /*
- * Apply all the original scripts
+ * Apply all the asynchronism scripts
  *
  * @param  {Boolean} runAll          - Run all module scripts.
  * @return {Void}
  */	
 ( function ( $ ) {
-    $.fn.applyOriginalAllScripts = function( options ) {
+    $.fn.UixApplyAsyncAllScripts = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({

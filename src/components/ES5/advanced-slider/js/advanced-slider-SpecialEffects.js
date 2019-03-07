@@ -2589,9 +2589,9 @@ APP = ( function ( APP, $, window, document ) {
 								setTimeout( function() {
 									
 									//text effect
-									if ( $.isFunction( $.fn.customTextEffInit ) ) {
+									if ( $.isFunction( $.fn.UixTextEff ) ) {
 										$current.find( '[data-text-eff]' ).each( function( index )  {
-											$( document ).customTextEffInit( { selectors: '[data-text-eff="'+$( this ).data( 'text-eff' )+'"]' } );
+											$( document ).UixTextEff( { selectors: '[data-text-eff="'+$( this ).data( 'text-eff' )+'"]' } );
 										});
 
 									}	

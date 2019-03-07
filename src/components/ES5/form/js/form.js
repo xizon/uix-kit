@@ -11,16 +11,16 @@
 	you need add a callback function that initializes the style:
 	
 
-	$( document ).customSelectInit(); //Custom Select
-	$( document ).customRadioCheckboxInit(); //Custom Radio, Toggle And Checkbox
-	$( document ).customControlsLineEffInit(); //Create Line Effect on Click
-	$( document ).disabledFieldsInit(); //Disabled Status
-	$( document ).fileInit(); //Input File
-	$( document ).fileDropInit(); //Upload field
-	$( document ).fieldsHoverEffInit(); //Hover Effect
-	$( document ).multiSelInit(); //Multiple Selector Status
-	$( document ).singleSelInit(); //Single Selector Status
-	$( document ).datePickerlInit(); //Date Picker
+	$( document ).UixRenderCustomSelect(); //Render Custom Select
+	$( document ).UixRenderCustomRadioCheckbox(); //Render Custom Radio, Toggle And Checkbox
+	$( document ).UixRenderControlsLineEff(); //Create Line Effect on Click
+	$( document ).UixRenderControlsDisable(); //Disabled Controls Status
+	$( document ).UixRenderCustomFile(); //Render Custom File Type
+	$( document ).UixRenderCustomFileDropzone(); //Render Custom File Dropzone
+	$( document ).UixRenderControlsHover(); //Hover Effect
+	$( document ).UixRenderCustomMultiSel(); //Render Multiple Selector Status
+	$( document ).UixRenderCustomSingleSel(); //Render Single Selector Status
+	$( document ).UixRenderDatePicker(); //Render Date Picker
 
 	
 */
@@ -41,16 +41,16 @@ APP = ( function ( APP, $, window, document ) {
 		 * @return {Void}
 		 */
 		var customSpecialFormsInit = function() {
-			$( document ).customSelectInit(); //Custom Select
-			$( document ).customRadioCheckboxInit(); //Custom Radio, Toggle And Checkbox
-			$( document ).customControlsLineEffInit(); //Create Line Effect on Click
-			$( document ).disabledFieldsInit(); //Disabled Status
-			$( document ).fileInit(); //Input File
-			$( document ).fileDropInit(); //Upload field
-			$( document ).fieldsHoverEffInit(); //Hover Effect
-			$( document ).multiSelInit(); //Multiple Selector Status
-			$( document ).singleSelInit(); //Single Selector Status
-			$( document ).datePickerlInit(); //Date Picker	
+			$( document ).UixRenderCustomSelect(); //Render Custom Select
+			$( document ).UixRenderCustomRadioCheckbox(); //Render Custom Radio, Toggle And Checkbox
+			$( document ).UixRenderControlsLineEff(); //Create Line Effect on Click
+			$( document ).UixRenderControlsDisable(); //Disabled Controls Status
+			$( document ).UixRenderCustomFile(); //Render Custom File Type
+			$( document ).UixRenderCustomFileDropzone(); //Render Custom File Dropzone
+			$( document ).UixRenderControlsHover(); //Hover Effect
+			$( document ).UixRenderCustomMultiSel(); //Render Multiple Selector Status
+			$( document ).UixRenderCustomSingleSel(); //Render Single Selector Status
+			$( document ).UixRenderDatePicker(); //Render Date Picker	
 		};
 		
 		
@@ -340,7 +340,7 @@ APP = ( function ( APP, $, window, document ) {
  */
 
 /*
- * Custom Select
+ * Render Custom Select
  *
  * @param  {String} selector             - The current selector.
  * @param  {String} targetWrapper        - Wrapper of the selector.
@@ -350,7 +350,7 @@ APP = ( function ( APP, $, window, document ) {
  * @return {Void}
  */
 ( function ( $ ) {
-    $.fn.customSelectInit = function( options ) {
+    $.fn.UixRenderCustomSelect = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
@@ -517,7 +517,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 /*
- * Custom Radio, Checkbox and Toggle 
+ * Render Custom Radio, Checkbox and Toggle 
  *
  * @param  {String} radioWrapper             - Wrapper of the radio.
  * @param  {String} toggle                   - Toggle of the checkbox.
@@ -525,7 +525,7 @@ APP = ( function ( APP, $, window, document ) {
  * @return {Void}
  */
 ( function ( $ ) {
-    $.fn.customRadioCheckboxInit = function( options ) {
+    $.fn.UixRenderCustomRadioCheckbox = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
@@ -596,7 +596,7 @@ APP = ( function ( APP, $, window, document ) {
  * @return {Void}
  */
 ( function ( $ ) {
-    $.fn.customControlsLineEffInit = function( options ) {
+    $.fn.UixRenderControlsLineEff = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
@@ -650,13 +650,13 @@ APP = ( function ( APP, $, window, document ) {
 
 
 /*
- * Disabled Fields Status
+ * Disabled Controls Status
  *
  * @param  {String} controls                 - Wrapper of controls.
  * @return {Void}
  */
 ( function ( $ ) {
-    $.fn.disabledFieldsInit = function( options ) {
+    $.fn.UixRenderControlsDisable = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
@@ -677,13 +677,13 @@ APP = ( function ( APP, $, window, document ) {
 
 
 /*
- * Input File
+ * Render Custom File Type
  *
  * @param  {String} controls                 - Wrapper of controls.
  * @return {Void}
  */
 ( function ( $ ) {
-    $.fn.fileInit = function( options ) {
+    $.fn.UixRenderCustomFile = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
@@ -719,13 +719,13 @@ APP = ( function ( APP, $, window, document ) {
 
 
 /*
- * Upload field
+ * Render Custom File Dropzone
  *
  * @param  {String} controls                 - Wrapper of controls.
  * @return {Void}
  */
 ( function ( $ ) {
-    $.fn.fileDropInit = function( options ) {
+    $.fn.UixRenderCustomFileDropzone = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
@@ -802,7 +802,7 @@ APP = ( function ( APP, $, window, document ) {
  * @return {Void}
  */
 ( function ( $ ) {
-    $.fn.fieldsHoverEffInit = function( options ) {
+    $.fn.UixRenderControlsHover = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
@@ -859,13 +859,13 @@ APP = ( function ( APP, $, window, document ) {
 
 
 /*
- * Multiple Selector Status
+ * Render Multiple Selector Status
  *
  * @param  {String} controls                 - Wrapper of controls.
  * @return {Void}
  */
 ( function ( $ ) {
-    $.fn.multiSelInit = function( options ) {
+    $.fn.UixRenderCustomMultiSel = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
@@ -899,54 +899,15 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
+
 /*
- * Multiple Selector Status
+ * Render Single Selector Status
  *
  * @param  {String} controls                 - Wrapper of controls.
  * @return {Void}
  */
 ( function ( $ ) {
-    $.fn.multiSelInit = function( options ) {
- 
-        // This is the easiest way to have default options.
-        var settings = $.extend({
-			controls    : '.uix-controls__multi-sel'
-        }, options );
- 
-        this.each( function() {
-		
-		
-			$( settings.controls ).each( function()  {
-				$( this ).find( '> span' ).each( function()  {
-
-					var targetID = '#' + $( this ).parent().attr( "data-targetid" );
-
-					if ( $( targetID ).val().indexOf( $( this ).data( 'value' ) ) >= 0 ) {
-						$( this ).addClass( 'active' );
-					} else {
-						$( this ).removeClass( 'active' );
-					}	
-
-
-
-				});
-			});
-			
-		});
- 
-    };
- 
-}( jQuery ));
-
-
-/*
- * Single Selector Status
- *
- * @param  {String} controls                 - Wrapper of controls.
- * @return {Void}
- */
-( function ( $ ) {
-    $.fn.singleSelInit = function( options ) {
+    $.fn.UixRenderCustomSingleSel = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
@@ -993,13 +954,13 @@ APP = ( function ( APP, $, window, document ) {
 
 
 /*
- * Date Picker
+ * Render Date Picker
  *
  * @param  {String} controls                 - Wrapper of controls.
  * @return {Void}
  */
 ( function ( $ ) {
-    $.fn.datePickerlInit = function( options ) {
+    $.fn.UixRenderDatePicker = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({

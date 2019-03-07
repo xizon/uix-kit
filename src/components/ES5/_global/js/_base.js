@@ -716,7 +716,7 @@ var UIX_GUID = UIX_GUID || (function() {
  */
 
 ( function ( $ ) {
-    $.fn.uixParallax = function( options ) {
+    $.fn.UixParallax = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({

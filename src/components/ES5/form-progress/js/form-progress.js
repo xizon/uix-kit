@@ -10,7 +10,7 @@
 	If you want to initialize the indicator to a location when the page is first run,
 	you need to call the following function:
 	
-	$( document ).formProgressNext({ 
+	$( document ).UixFormProgressToNext({ 
 		'selector'         : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
 		'formTarget'       : $( '.uix-form-progress__target' ),
 		'indicator'        : '.uix-form-progress .uix-form-progress__indicator',
@@ -67,7 +67,7 @@ APP = ( function ( APP, $, window, document ) {
 		$( document ).on( 'click', '.uix-form-progress__target .go-step:not(.disable)', function( e ) {
 			e.preventDefault();
 			var $sections = $( this ).parents( '.uix-form-progress__target__step' );
-			$( document ).formProgressNext({ 
+			$( document ).UixFormProgressToNext({ 
 				'selector'   : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
 				'formTarget' : $formTarget,
 				'indicator'  : '.uix-form-progress .uix-form-progress__indicator',
@@ -92,7 +92,7 @@ APP = ( function ( APP, $, window, document ) {
 		 */
 		function formReset() {
 			
-			$( document ).formProgressNext({ 
+			$( document ).UixFormProgressToNext({ 
 				'selector'         : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
 				'formTarget'       : $( '.uix-form-progress__target' ),
 				'indicator'        : '.uix-form-progress .uix-form-progress__indicator',
@@ -134,7 +134,7 @@ APP = ( function ( APP, $, window, document ) {
  * @return {Void}
  */
 ( function ( $ ) {
-    $.fn.formProgressNext = function( options ) {
+    $.fn.UixFormProgressToNext = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({

@@ -389,8 +389,8 @@ APP = ( function ( APP, $, window, document ) {
 
 								$content.html( $( '#' + dataHtmlID ).html() ).promise().done( function(){
 									
-									// Apply the original scripts
-									$( document ).applyOriginalSomeScripts({
+									// Apply some asynchronism scripts
+									$( document ).UixApplyAsyncScripts({
 										lightBox : false,
 										ajaxPostList : false
 									});

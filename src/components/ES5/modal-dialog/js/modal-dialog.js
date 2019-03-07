@@ -87,7 +87,7 @@ APP = ( function ( APP, $, window, document ) {
 
 			
 			
-			$( document ).fireModalDialog( {
+			$( document ).UixFireModalDialog( {
 				id           : $( this ).data( 'modal-id' ),
 				height       : dataH,
 				width        : dataW,
@@ -109,7 +109,7 @@ APP = ( function ( APP, $, window, document ) {
 				$( this ).parent().removeClass( 'active' );
 			}
 			
-			$( document ).closeModalDialog();
+			$( document ).UixCloseModalDialog();
 			
 			
 			return false;
@@ -142,7 +142,7 @@ APP = ( function ( APP, $, window, document ) {
  * @return {Void}
  */	
 ( function ( $ ) {
-    $.fn.fireModalDialog = function( options ) {
+    $.fn.UixFireModalDialog = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
@@ -237,7 +237,7 @@ APP = ( function ( APP, $, window, document ) {
 					//auto close
 					if ( closeTime && !isNaN( closeTime ) ) {
 						setTimeout( function() {
-							$( document ).closeModalDialog();
+							$( document ).UixCloseModalDialog();
 						}, closeTime );
 					}
 					
@@ -275,7 +275,7 @@ APP = ( function ( APP, $, window, document ) {
  * @return {Void}
  */	
 ( function ( $ ) {
-    $.fn.closeModalDialog = function( options ) {
+    $.fn.UixCloseModalDialog = function( options ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({

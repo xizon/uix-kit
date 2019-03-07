@@ -1,5 +1,10 @@
 # Changelog
 
+#### = 3.3.0 (March 7, 2019) =
+
+* Tweak: Optimized custom jQuery function name.
+
+
 #### = 3.2.7 (March 6, 2019) =
 
 * New: Added a new form type which is dynamical fields.
