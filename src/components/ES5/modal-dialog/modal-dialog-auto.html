@@ -108,29 +108,7 @@
         </div>
         <!--  .uix-modal-box  end -->     
     
-		
-		<script>
 
-		( function( $ ) {
-		"use strict";
-
-			$( document ).ready( function() {
-
-				$(document).fireModalDialog({
-					id: 'modal-open-1',
-					height: false,
-					width: false,
-					speed: 500,
-					lightbox  : true,
-					autoClose : false
-				});
-
-			} );
-
-		} ) ( jQuery );
-		</script>	
-
-		
 
         @@include('./src/components/ES5/_global/include-copyright.html')
         
@@ -139,5 +117,29 @@
     <!-- .uix-wrapper end -->
        
        
+
+	<script>
+
+	( function( $ ) {
+	"use strict";
+
+		$( document ).ready( function() {
+
+			$(document).fireModalDialog({
+				id: 'modal-open-1',
+				height: false,
+				width: false,
+				speed: 500,
+				lightbox  : true,
+				autoClose : false
+			});
+
+		} );
+
+	} ) ( jQuery );
+	</script>	
+
+
+	  
     @@include('./src/components/ES5/_global/include-footer.html')
 

@@ -111,57 +111,7 @@
             
         </section>
         
-        
-        <script>
-		( function( $ ) {
-		"use strict";
 
-			$( function() {
-
-				//Callback from two-level classification
-				//Fire the three-level classification
-				$( document ).on( 'change.DYNAMIC_DD_LIST', '#dynamic-dd-subsort', function( e ) {
-
-					e.preventDefault();
-
-					var $this        = $( this[ this.selectedIndex ] ),
-						curVal       = $this.val(),
-						curLongitude = $this.data( 'longitude' ),
-						curLatitude  = $this.data( 'latitude' ),
-						curAttributes = $this.data( 'attributes' ),
-						curContents  = '';
-					
-					console.log( curAttributes );
-
-
-					if ( Object.prototype.toString.call( curAttributes ) =='[object Array]' ) {
-						for ( var k = 0; k < curAttributes.length; k++ ) {
-							curContents += '<hr><strong>Level-3 Name</strong>: ' + curAttributes[k].attr_name + '<br> <strong>Level-3 Longitude</strong> : ' + curAttributes[k].attr_longitude + '<br> <strong>Level-3 Latitude</strong>: ' + curAttributes[k].attr_latitude + '<br> <strong>Level-3 Info</strong>: ' + curAttributes[k].attr_info; 
-						}
-
-						
-					}
-
-					$( '#dynamic-callback').html( '<br><strong>Level-2 Name</strong>: '+curVal+'<br> <strong>Level-2 Longitude</strong>: ' + curLongitude + '<br> <strong>Level-2 Latitude</strong>: ' + curLatitude + '<br> <strong>Level-2 Attributes</strong>: ' + curContents + ' <br>'  );
-
-					
-					return false;
-
-
-					
-
-				});		
-
-			
-			} );
-
-		} ) ( jQuery );
-			
-			
-		</script>
-        
-        
-        
         
     
        <!-- Content 03
@@ -231,64 +181,7 @@
             
         </section>
         
-        
-        <script>
-			
-		( function( $ ) {
-		"use strict";
 
-			$( function() {
-
-				//Three-level classification
-				$( document ).on( 'change.DYNAMIC_DD_LIST', '#dynamic-dd-china-city', function( e ) {
-
-					e.preventDefault();
-
-					var $this        = $( this[ this.selectedIndex ] ),
-						$areaSel     = $( '#dynamic-dd-china-area'),
-						curVal       = $this.val(),
-						curArea      = $this.data( 'area' );
-
-
-					var optionsHtml = '';
-					for ( var k = 0; k < curArea.length; k++ ) {
-						optionsHtml += "<option value='"+curArea[k]+"'>"+curArea[k]+"</option>";
-					}
-
-					$areaSel.html( optionsHtml );
-
-					//Initialize the custom select
-					$( document ).customSelectInit();
-					$areaSel.attr( 'selected', 'selected' ).change();
-					
-					
-					
-					
-					//Console
-					var areaTxt = '';
-					for ( var k = 0; k < curArea.length; k++ ) {
-						areaTxt += JSON.stringify( curArea[k] ) + ',';
-					}
-
-					areaTxt = areaTxt.replace(/,\s*$/, '' );
-					$( '#dynamic-callback2').html( '[' + areaTxt + ']' );
-	
-					
-					
-					return false;
-
-
-				});			
-			} );
-
-		} ) ( jQuery );
-				
-			
-			
-		</script>
-        
-        
-        
         
         @@include('./src/components/ES5/_global/include-copyright.html')
         
@@ -296,6 +189,100 @@
     </div>
     <!-- .uix-wrapper end -->
        
+		
+
+	<script>
+	( function( $ ) {
+	"use strict";
+
+		$( function() {
+
+			//Callback from two-level classification
+			//Fire the three-level classification
+			$( document ).on( 'change.DYNAMIC_DD_LIST', '#dynamic-dd-subsort', function( e ) {
+
+				e.preventDefault();
+
+				var $this        = $( this[ this.selectedIndex ] ),
+					curVal       = $this.val(),
+					curLongitude = $this.data( 'longitude' ),
+					curLatitude  = $this.data( 'latitude' ),
+					curAttributes = $this.data( 'attributes' ),
+					curContents  = '';
+
+				console.log( curAttributes );
+
+
+				if ( Object.prototype.toString.call( curAttributes ) =='[object Array]' ) {
+					for ( var k = 0; k < curAttributes.length; k++ ) {
+						curContents += '<hr><strong>Level-3 Name</strong>: ' + curAttributes[k].attr_name + '<br> <strong>Level-3 Longitude</strong> : ' + curAttributes[k].attr_longitude + '<br> <strong>Level-3 Latitude</strong>: ' + curAttributes[k].attr_latitude + '<br> <strong>Level-3 Info</strong>: ' + curAttributes[k].attr_info; 
+					}
+
+
+				}
+
+				$( '#dynamic-callback').html( '<br><strong>Level-2 Name</strong>: '+curVal+'<br> <strong>Level-2 Longitude</strong>: ' + curLongitude + '<br> <strong>Level-2 Latitude</strong>: ' + curLatitude + '<br> <strong>Level-2 Attributes</strong>: ' + curContents + ' <br>'  );
+
+
+				return false;
+
+
+
+
+			});		
+
+			
+			//Three-level classification
+			$( document ).on( 'change.DYNAMIC_DD_LIST', '#dynamic-dd-china-city', function( e ) {
+
+				e.preventDefault();
+
+				var $this        = $( this[ this.selectedIndex ] ),
+					$areaSel     = $( '#dynamic-dd-china-area'),
+					curVal       = $this.val(),
+					curArea      = $this.data( 'area' );
+
+
+				var optionsHtml = '';
+				for ( var k = 0; k < curArea.length; k++ ) {
+					optionsHtml += "<option value='"+curArea[k]+"'>"+curArea[k]+"</option>";
+				}
+
+				$areaSel.html( optionsHtml );
+
+				//Initialize the custom select
+				$( document ).customSelectInit();
+				$areaSel.attr( 'selected', 'selected' ).change();
+
+
+
+
+				//Console
+				var areaTxt = '';
+				for ( var k = 0; k < curArea.length; k++ ) {
+					areaTxt += JSON.stringify( curArea[k] ) + ',';
+				}
+
+				areaTxt = areaTxt.replace(/,\s*$/, '' );
+				$( '#dynamic-callback2').html( '[' + areaTxt + ']' );
+
+
+
+				return false;
+
+
+			});			
+			
+
+		} );
+
+	} ) ( jQuery );
+
+
+	</script>
+
+
+	  
        
     @@include('./src/components/ES5/_global/include-footer.html')
 

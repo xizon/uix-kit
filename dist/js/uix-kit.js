@@ -4,7 +4,7 @@
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
  * ## Version             :  3.2.7
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  March 6, 2019
+ * ## Last Update         :  March 7, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -19640,7 +19640,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.FORM               = APP.FORM || {};
-	APP.FORM.version       = '0.0.7';
+	APP.FORM.version       = '0.0.8';
     APP.FORM.documentReady = function( $ ) {
 
 		
@@ -20435,17 +20435,27 @@ APP = ( function ( APP, $, window, document ) {
 
 				//on blur check field and remove class if needed
 				$this.on( 'blur change', function( e ) {
-					if( $this.val() === '' || $this.val() === 'blank') {
-						$( this ).closest( 'div' ).find( 'label, .uix-controls__bar' ).removeClass( 'active' );
+					if( $this.val() === '' || $this.val() === 'blank' ) {
+						$( this ).closest( 'div' ).find( 'label' ).removeClass( 'active' );
 					}	
+					
+					//----
+					if( 
+						$this.val() === '' || 
+						$this.val() === 'blank' || 
+						( $this.val() != '' && $this.val() != 'blank' ) 
+					) {
+						$( this ).closest( 'div' ).find( '.uix-controls__bar' ).removeClass( 'active' );
+					}		
 
 				});
 
 				// if exist cookie value
 				if( $this.val() != '' && $this.val() != 'blank') { 
-				   $( this ).closest( 'div' ).find( 'label, .uix-controls__bar' ).addClass( 'active' );
+				    $( this ).closest( 'div' ).find( 'label' ).addClass( 'active' );
 				}
 
+				
 
 			});
 
