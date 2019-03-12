@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.3.0
+ * ## Version             :  3.3.1
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  March 7, 2019
+ * ## Last Update         :  March 12, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -80,40 +80,41 @@
     62.Side by Side List
     63.Fullwidth List of Split 2
     64.Fullwidth List of Split
-    65.Modal Dialog
-    66.Mouse Animation Scroll
-    67.Multiple Items Carousel
-    68.Overlay
-    69.Parallax
-    70.Periodical Scroll
-    71.Pricing
-    72.Progress Bar
-    73.Progress Line
-    74.Ribbon
-    75.Shape Animation
-    76.Show More Less
-    77.Comments ( Synchronize to WordPress's class name )
-    78.Editing Component
-    79.Source Code
-    80.Sticky Elements
-    81.Striking
-    82.SVG Map
-    83.3D Background
-    84.3D Carousel
-    85.Table
-    86.Tabs
-    87.Team Focus
-    88.Team Fullwidth (Style using the Side by Side List With Photo module)
-    89.Team Gird
-    90.Testimonials Carousel
-    91.Text effect
-    92.Timeline
-    93.ToolTip
-    94.Vertical Menu
-    95.Vertical Separator
-    96.Wave Background
-    97.3rd Party Plugins
-    98.WordPress Core ( Do not use prefix "uix-" )
+    65.Login Templates
+    66.Modal Dialog
+    67.Mouse Animation Scroll
+    68.Multiple Items Carousel
+    69.Overlay
+    70.Parallax
+    71.Periodical Scroll
+    72.Pricing
+    73.Progress Bar
+    74.Progress Line
+    75.Ribbon
+    76.Shape Animation
+    77.Show More Less
+    78.Comments ( Synchronize to WordPress's class name )
+    79.Editing Component
+    80.Source Code
+    81.Sticky Elements
+    82.Striking
+    83.SVG Map
+    84.3D Background
+    85.3D Carousel
+    86.Table
+    87.Tabs
+    88.Team Focus
+    89.Team Fullwidth (Style using the Side by Side List With Photo module)
+    90.Team Gird
+    91.Testimonials Carousel
+    92.Text effect
+    93.Timeline
+    94.ToolTip
+    95.Vertical Menu
+    96.Vertical Separator
+    97.Wave Background
+    98.3rd Party Plugins
+    99.WordPress Core ( Do not use prefix "uix-" )
 
 
 */
@@ -4292,7 +4293,8 @@ h6 {
     border-color: #e4e7ed !important;
     cursor: not-allowed !important;
     box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.2) !important;
-    pointer-events: none !important; }
+    pointer-events: none !important;
+    user-select: none !important; }
   .uix-btn.wait {
     background-image: linear-gradient(-45deg, rgba(0, 0, 0, 0.15) 25%, transparent 25%, transparent 50%, rgba(0, 0, 0, 0.15) 50%, rgba(0, 0, 0, 0.15) 75%, transparent 75%, transparent) !important;
     background-size: 30px 30px !important;
@@ -7131,6 +7133,18 @@ ol.uix-flexslider__control-paging {
  11. Date Picker ( 3rd Party Plugin )
  ---------------------------
  */
+.uix-controls__date::after {
+  display: inline-block;
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 600;
+  content: "\f784";
+  font-size: 1rem;
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  color: #dce4e8;
+  transform: translateY(-50%); }
+
 .xdsoft_datetimepicker {
   box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.506);
   background: #fff;
@@ -8893,6 +8907,65 @@ dl.uix-list-abreast {
     text-align: center;
     width: 100%;
     padding: 0 15px; } }
+
+/* ====================================================== 
+   <!-- Login Templates -->  
+/* ====================================================== */
+/* Form Module */
+.uix-special-login__container {
+  position: relative;
+  background: #ffffff;
+  max-width: 400px;
+  width: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px;
+  border-radius: 8px; }
+  .uix-special-login__container .uix-striking-msg {
+    position: absolute;
+    top: -10px;
+    right: 50px;
+    z-index: 1; }
+  .uix-special-login__container .uix-special-login__toggle {
+    cursor: pointer;
+    position: absolute;
+    top: -60px;
+    right: -65px;
+    width: 110px;
+    height: 110px;
+    margin: -5px 0 0;
+    color: #ffffff;
+    line-height: 30px;
+    transform-origin: center center;
+    text-align: center;
+    transform: rotate(45deg);
+    overflow: hidden; }
+    .uix-special-login__container .uix-special-login__toggle > span {
+      display: inline-block;
+      transform: rotate(-45deg) translate(-57px, 58px); }
+      .uix-special-login__container .uix-special-login__toggle > span i {
+        color: #333;
+        font-size: 50px; }
+        .uix-special-login__container .uix-special-login__toggle > span i:last-child {
+          display: none; }
+  .uix-special-login__container .uix-special-login__form {
+    overflow: hidden;
+    height: auto; }
+    .uix-special-login__container .uix-special-login__form > div {
+      padding: 80px 40px; }
+    .uix-special-login__container .uix-special-login__form:nth-last-child(2) {
+      height: 0; }
+  .uix-special-login__container .uix-special-login__bottom {
+    background: #f2f2f2;
+    width: 100%;
+    padding: .5rem 1rem;
+    box-sizing: border-box;
+    color: #666666;
+    font-size: 0.875rem;
+    text-align: center; }
+    .uix-special-login__container .uix-special-login__bottom a {
+      color: #333333;
+      text-decoration: none; }
 
 /* ====================================================== 
     <!-- Modal Dialog --> 
@@ -10951,6 +11024,10 @@ Style with support for rainbow parens
     border-right-color: rgba(0, 0, 0, 0.02);
     border-width: 6px;
     z-index: 0; }
+  .uix-striking-msg.uix-striking-msg--hasarrow--reversed::before, .uix-striking-msg.uix-striking-msg--hasarrow--reversed::after {
+    transform: translateY(-50%) rotate(180deg);
+    right: auto;
+    left: 100%; }
   .uix-striking-msg.is-pill {
     border-radius: 35px; }
   .uix-striking-msg.is-rounded {

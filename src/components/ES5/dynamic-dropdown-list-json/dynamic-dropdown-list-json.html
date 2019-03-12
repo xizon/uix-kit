@@ -196,8 +196,11 @@
 	"use strict";
 
 		$( function() {
-
-			//Callback from two-level classification
+			/* 
+			 ---------------------------
+			 Callback from two-level classification
+			 ---------------------------
+			 */ 
 			//Fire the three-level classification
 			$( document ).on( 'change.DYNAMIC_DD_LIST', '#dynamic-dd-subsort', function( e ) {
 
@@ -231,8 +234,11 @@
 
 			});		
 
-			
-			//Three-level classification
+			/* 
+			 ---------------------------
+			 Three-level classification for China Area
+			 ---------------------------
+			 */ 
 			$( document ).on( 'change.DYNAMIC_DD_LIST', '#dynamic-dd-china-city', function( e ) {
 
 				e.preventDefault();

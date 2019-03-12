@@ -1,5 +1,13 @@
 # Changelog
 
+
+#### = 3.3.1 (March 12, 2019) =
+
+* New: Added some "Login" premade templates.
+* Tweak: Some minor details of the modification.
+
+
+
 #### = 3.3.0 (March 7, 2019) =
 
 * Tweak: Optimized custom jQuery function name.

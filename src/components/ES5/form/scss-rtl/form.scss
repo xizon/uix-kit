@@ -12,6 +12,7 @@
  * 7. Multiple Selector
  * 8. Single Selector
  * 9. Search of Widget
+ * 11. Date Picker ( 3rd Party Plugin )
 */
 
 $control-sub-color: #dce4e8;
@@ -783,3 +784,12 @@ $control-sub-color: #dce4e8;
 }
 
 
+/* 
+ ---------------------------
+ 11. Date Picker ( 3rd Party Plugin )
+ ---------------------------
+ */ 
+.uix-controls__date::after {
+	right: auto;
+	left: 1rem;
+}

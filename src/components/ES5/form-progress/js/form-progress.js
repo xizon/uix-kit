@@ -14,7 +14,7 @@
 		'selector'         : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
 		'formTarget'       : $( '.uix-form-progress__target' ),
 		'indicator'        : '.uix-form-progress .uix-form-progress__indicator',
-		'index'            : 0 // 0 -> step 1, 1 -> step 2, 2 -> step 3, 3 -> step 4, 4 -> step 5 
+		'index'            : 0
 	});
 	
 */
@@ -25,12 +25,8 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.FORM_PROGRESS               = APP.FORM_PROGRESS || {};
-	APP.FORM_PROGRESS.version       = '0.0.1';
+	APP.FORM_PROGRESS.version       = '0.0.2';
     APP.FORM_PROGRESS.pageLoaded    = function() {
-
-		//Prevent this module from loading in other pages
-		if ( !$( 'body' ).hasClass( 'page-form-progress-eff' ) ) return false;
-		
 
 		var $progressBar   = $( '.uix-form-progress progress' ),
 			$formTarget    = $( '.uix-form-progress__target' ),
@@ -96,7 +92,7 @@ APP = ( function ( APP, $, window, document ) {
 				'selector'         : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
 				'formTarget'       : $( '.uix-form-progress__target' ),
 				'indicator'        : '.uix-form-progress .uix-form-progress__indicator',
-				'index'            : 0 // 0 -> step 1, 1 -> step 2, 2 -> step 3, 3 -> step 4, 4 -> step 5 
+				'index'            : 0
 			});
 		
 			
@@ -131,6 +127,12 @@ APP = ( function ( APP, $, window, document ) {
  * @param  {Object} formTarget      - Wrapper of target forms selector.
  * @param  {String} indicator       - Indicator of timeline.
  * @param  {Number} index           - Default index for initialization.
+ * 									  0 => step one, 
+ * 									  1 => step two
+ * 									  2 => step three
+ * 									  3 => step four
+ * 									  4 => step five
+ * 									  ...
  * @return {Void}
  */
 ( function ( $ ) {

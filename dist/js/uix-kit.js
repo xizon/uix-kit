@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.3.0
+ * ## Version             :  3.3.1
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  March 7, 2019
+ * ## Last Update         :  March 12, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -137,7 +137,7 @@ var UIX_KIT_IMPORT = {
   /******/
 
   /* pages */
-  "./src/components/ES5/_main/js/main.js", "./src/components/ES5/accordion-img/js/accordion-img.js", "./src/components/ES5/accordion/js/accordion.js", "./src/components/ES5/advanced-content-slider/js/advanced-content-slider.js", "./src/components/ES5/advanced-slider/js/advanced-slider-basic.js", "./src/components/ES5/advanced-slider/js/advanced-slider-SpecialEffects.js", "./src/components/ES5/AJAX-push/js/ajax-push-content.js", "./src/components/ES5/AJAX/js/ajax-page-loader.js", "./src/components/ES5/back-to-top/js/back-to-top.js", "./src/components/ES5/circle-layout/js/circle-layout.js", "./src/components/ES5/counter/js/counter.js", "./src/components/ES5/dropdown-menu/js/dropdown-menu.js", "./src/components/ES5/dropdown-menu2/js/dropdown-menu2.js", "./src/components/ES5/dynamic-dropdown-list-json/js/dynamic-dropdown-list-json.js", "./src/components/ES5/flexslider/js/custom-flexslider.js", "./src/components/ES5/flexslider/js/jquery.flexslider.js", "./src/components/ES5/floating-side-element/js/floating-side-element.js", "./src/components/ES5/form-progress/js/form-progress.js", "./src/components/ES5/form/js/form.js", "./src/components/ES5/form/js/datepicker.js", "./src/components/ES5/gallery/js/gallery.js", "./src/components/ES5/hover-delay-interaction/js/hover-delay-interaction.js", "./src/components/ES5/image-shapes/js/image-shapes.js", "./src/components/ES5/lava-lamp-style-menu/js/lava-lamp-style-menu.js", "./src/components/ES5/lightbox/js/lightbox.js", "./src/components/ES5/list-bulleted/js/list-bulleted.js", "./src/components/ES5/list-posts/js/list-posts-with-ajax.js", "./src/components/ES5/list-split-imagery/js/list-split-imagery.js", "./src/components/ES5/modal-dialog/js/modal-dialog.js", "./src/components/ES5/mousewheel-interaction/js/mousewheel-interaction.js", "./src/components/ES5/multi-items-carousel/js/multi-items-carousel.js", "./src/components/ES5/one-page/js/one-page.js", "./src/components/ES5/one-page2/js/one-page2.js", "./src/components/ES5/parallax/js/parallax.js", "./src/components/ES5/periodical-scroll/js/periodical-scroll.js", "./src/components/ES5/pricing/js/pricing.js", "./src/components/ES5/progress-bar/js/progress-bar.js", "./src/components/ES5/progress-line/js/progress-line.js", "./src/components/ES5/retina/js/retina.js", "./src/components/ES5/rotating-elements/js/rotating-elements.js", "./src/components/ES5/scroll-reveal/js/scroll-reveal.js", "./src/components/ES5/scrollspy-animate/js/scrollspy-animate.js", "./src/components/ES5/show-more-less/js/show-more-less.js", "./src/components/ES5/skew-on-scroll/js/skew-on-scroll.js", "./src/components/ES5/smooth-scrolling-anchor-link/js/smooth-scrolling-anchor-link.js", "./src/components/ES5/source-code/js/highlight.js", "./src/components/ES5/source-code/js/source-code.js", "./src/components/ES5/sticky-elements/js/sticky-elements.js", "./src/components/ES5/svg-map/js/svg-map-china.js", "./src/components/ES5/svg-map/js/svg-map-world.js", "./src/components/ES5/table/js/table.js", "./src/components/ES5/table/js/table-sorter.js", "./src/components/ES5/t3D-background-three/js/3D-background-three.js", "./src/components/ES5/t3D-background-three2/js/3D-background-three2.js", "./src/components/ES5/t3D-background/js/3D-background.js", "./src/components/ES5/t3D-carousel/js/3D-carousel.js", "./src/components/ES5/t3D-model/js/3D-model.js", "./src/components/ES5/t3D-pages/js/3D-pages.js", "./src/components/ES5/t3D-particle-effect/js/3D-particle-effect.js", "./src/components/ES5/t3D-sphere-three/js/3D-sphere-three.js", "./src/components/ES5/t3D-obj-anim-interaction/js/3D-obj-anim-interaction.js", "./src/components/ES5/tabs/js/tabs.js", "./src/components/ES5/team-focus/js/team-focus.js", "./src/components/ES5/text-effect/js/text-effect.js", "./src/components/ES5/timeline/js/timeline.js", "./src/components/ES5/vertical-menu/js/vertical-menu.js", "./src/components/ES5/wordpress/js/wp-core.js"]
+  "./src/components/ES5/_main/js/main.js", "./src/components/ES5/accordion-img/js/accordion-img.js", "./src/components/ES5/accordion/js/accordion.js", "./src/components/ES5/advanced-content-slider/js/advanced-content-slider.js", "./src/components/ES5/advanced-slider/js/advanced-slider-basic.js", "./src/components/ES5/advanced-slider/js/advanced-slider-SpecialEffects.js", "./src/components/ES5/AJAX-push/js/ajax-push-content.js", "./src/components/ES5/AJAX/js/ajax-page-loader.js", "./src/components/ES5/back-to-top/js/back-to-top.js", "./src/components/ES5/circle-layout/js/circle-layout.js", "./src/components/ES5/counter/js/counter.js", "./src/components/ES5/dropdown-menu/js/dropdown-menu.js", "./src/components/ES5/dropdown-menu2/js/dropdown-menu2.js", "./src/components/ES5/dynamic-dropdown-list-json/js/dynamic-dropdown-list-json.js", "./src/components/ES5/flexslider/js/custom-flexslider.js", "./src/components/ES5/flexslider/js/jquery.flexslider.js", "./src/components/ES5/floating-side-element/js/floating-side-element.js", "./src/components/ES5/form-progress/js/form-progress.js", "./src/components/ES5/form/js/form.js", "./src/components/ES5/form/js/datepicker.js", "./src/components/ES5/gallery/js/gallery.js", "./src/components/ES5/hover-delay-interaction/js/hover-delay-interaction.js", "./src/components/ES5/image-shapes/js/image-shapes.js", "./src/components/ES5/lava-lamp-style-menu/js/lava-lamp-style-menu.js", "./src/components/ES5/lightbox/js/lightbox.js", "./src/components/ES5/list-bulleted/js/list-bulleted.js", "./src/components/ES5/list-posts/js/list-posts-with-ajax.js", "./src/components/ES5/list-split-imagery/js/list-split-imagery.js", "./src/components/ES5/login-templates/js/login-templates.js", "./src/components/ES5/modal-dialog/js/modal-dialog.js", "./src/components/ES5/mousewheel-interaction/js/mousewheel-interaction.js", "./src/components/ES5/multi-items-carousel/js/multi-items-carousel.js", "./src/components/ES5/one-page/js/one-page.js", "./src/components/ES5/one-page2/js/one-page2.js", "./src/components/ES5/parallax/js/parallax.js", "./src/components/ES5/periodical-scroll/js/periodical-scroll.js", "./src/components/ES5/pricing/js/pricing.js", "./src/components/ES5/progress-bar/js/progress-bar.js", "./src/components/ES5/progress-line/js/progress-line.js", "./src/components/ES5/retina/js/retina.js", "./src/components/ES5/rotating-elements/js/rotating-elements.js", "./src/components/ES5/scroll-reveal/js/scroll-reveal.js", "./src/components/ES5/scrollspy-animate/js/scrollspy-animate.js", "./src/components/ES5/show-more-less/js/show-more-less.js", "./src/components/ES5/skew-on-scroll/js/skew-on-scroll.js", "./src/components/ES5/smooth-scrolling-anchor-link/js/smooth-scrolling-anchor-link.js", "./src/components/ES5/source-code/js/highlight.js", "./src/components/ES5/source-code/js/source-code.js", "./src/components/ES5/sticky-elements/js/sticky-elements.js", "./src/components/ES5/svg-map/js/svg-map-china.js", "./src/components/ES5/svg-map/js/svg-map-world.js", "./src/components/ES5/table/js/table.js", "./src/components/ES5/table/js/table-sorter.js", "./src/components/ES5/t3D-background-three/js/3D-background-three.js", "./src/components/ES5/t3D-background-three2/js/3D-background-three2.js", "./src/components/ES5/t3D-background/js/3D-background.js", "./src/components/ES5/t3D-carousel/js/3D-carousel.js", "./src/components/ES5/t3D-model/js/3D-model.js", "./src/components/ES5/t3D-pages/js/3D-pages.js", "./src/components/ES5/t3D-particle-effect/js/3D-particle-effect.js", "./src/components/ES5/t3D-sphere-three/js/3D-sphere-three.js", "./src/components/ES5/t3D-obj-anim-interaction/js/3D-obj-anim-interaction.js", "./src/components/ES5/tabs/js/tabs.js", "./src/components/ES5/team-focus/js/team-focus.js", "./src/components/ES5/text-effect/js/text-effect.js", "./src/components/ES5/timeline/js/timeline.js", "./src/components/ES5/vertical-menu/js/vertical-menu.js", "./src/components/ES5/wordpress/js/wp-core.js"]
 };
 
 // CONCATENATED MODULE: ./src/components/ES6/_global/js/vars.js
@@ -240,44 +240,45 @@ if (document.getElementsByTagName('body')[0].className.match(/es6-demo-home/)) {
     35.Bulleted List
     36.Posts List With Ajax
     37.Fullwidth List of Split
-    38.Modal Dialog
-    39.Mousewheel Interaction
-    40.Multiple Items Carousel
-    41.Full Page/One Page Transition
-    42.Full Page/One Page Transition 2
-    43.Parallax
-    44.Periodical Scroll
-    45.Pricing
-    46.Progress Bar
-    47.Progress Line
-    48.Retina Graphics for Website
-    49.Rotating Elements
-    50.Scroll Reveal
-    51.Scrollspy Animate
-    52.Show More Less
-    53.Skew Based On Velocity of Scroll
-    54.Smooth Scrolling When Clicking An Anchor Link
-    55.Source Code View
-    56.Sticky Elements
-    57.SVG Map (China)
-    58.SVG Map (World)
-    59.Responsive Table
-    60.Table Sorter
-    61.3D Background 2
+    38.Login Templates
+    39.Modal Dialog
+    40.Mousewheel Interaction
+    41.Multiple Items Carousel
+    42.Full Page/One Page Transition
+    43.Full Page/One Page Transition 2
+    44.Parallax
+    45.Periodical Scroll
+    46.Pricing
+    47.Progress Bar
+    48.Progress Line
+    49.Retina Graphics for Website
+    50.Rotating Elements
+    51.Scroll Reveal
+    52.Scrollspy Animate
+    53.Show More Less
+    54.Skew Based On Velocity of Scroll
+    55.Smooth Scrolling When Clicking An Anchor Link
+    56.Source Code View
+    57.Sticky Elements
+    58.SVG Map (China)
+    59.SVG Map (World)
+    60.Responsive Table
+    61.Table Sorter
     62.3D Background 2
-    63.3D Background
-    64.3D Carousel
-    65.3D Model
-    66.3D Pages
-    67.3D Particle Effect
-    68.3D Sphere Rotation
-    69.3D Object Anim When Click
-    70.Tabs
-    71.Team Focus
-    72.Text effect
-    73.Timeline
-    74.Vertical Menu
-    75.WordPress Core Scripts
+    63.3D Background 2
+    64.3D Background
+    65.3D Carousel
+    66.3D Model
+    67.3D Pages
+    68.3D Particle Effect
+    69.3D Sphere Rotation
+    70.3D Object Anim When Click
+    71.Tabs
+    72.Team Focus
+    73.Text effect
+    74.Timeline
+    75.Vertical Menu
+    76.WordPress Core Scripts
 
 
 */
@@ -19310,7 +19311,7 @@ APP = ( function ( APP, $, window, document ) {
 		'selector'         : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
 		'formTarget'       : $( '.uix-form-progress__target' ),
 		'indicator'        : '.uix-form-progress .uix-form-progress__indicator',
-		'index'            : 0 // 0 -> step 1, 1 -> step 2, 2 -> step 3, 3 -> step 4, 4 -> step 5 
+		'index'            : 0
 	});
 	
 */
@@ -19321,12 +19322,8 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.FORM_PROGRESS               = APP.FORM_PROGRESS || {};
-	APP.FORM_PROGRESS.version       = '0.0.1';
+	APP.FORM_PROGRESS.version       = '0.0.2';
     APP.FORM_PROGRESS.pageLoaded    = function() {
-
-		//Prevent this module from loading in other pages
-		if ( !$( 'body' ).hasClass( 'page-form-progress-eff' ) ) return false;
-		
 
 		var $progressBar   = $( '.uix-form-progress progress' ),
 			$formTarget    = $( '.uix-form-progress__target' ),
@@ -19392,7 +19389,7 @@ APP = ( function ( APP, $, window, document ) {
 				'selector'         : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
 				'formTarget'       : $( '.uix-form-progress__target' ),
 				'indicator'        : '.uix-form-progress .uix-form-progress__indicator',
-				'index'            : 0 // 0 -> step 1, 1 -> step 2, 2 -> step 3, 3 -> step 4, 4 -> step 5 
+				'index'            : 0
 			});
 		
 			
@@ -19427,6 +19424,12 @@ APP = ( function ( APP, $, window, document ) {
  * @param  {Object} formTarget      - Wrapper of target forms selector.
  * @param  {String} indicator       - Indicator of timeline.
  * @param  {Number} index           - Default index for initialization.
+ * 									  0 => step one, 
+ * 									  1 => step two
+ * 									  2 => step three
+ * 									  3 => step four
+ * 									  4 => step five
+ * 									  ...
  * @return {Void}
  */
 ( function ( $ ) {
@@ -25264,6 +25267,85 @@ APP = ( function ( APP, $, window, document ) {
     return APP;
 
 }( APP, jQuery, window, document ) );
+
+
+
+
+/* 
+ *************************************
+ * <!-- Login Templates -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.LOGIN_UI               = APP.LOGIN_UI || {};
+	APP.LOGIN_UI.version       = '0.0.1';
+    APP.LOGIN_UI.documentReady = function( $ ) {
+
+		
+		
+		var $loginToggle = $( '.uix-special-login__toggle' ),
+			$loginForms  = $( '.uix-special-login__form' );
+
+		$loginToggle.data( 'switched', true ).on( 'click', function( e ) {
+			
+			e.preventDefault();
+
+			var $form1 = $loginForms.eq(0),
+			    $form2 = $loginForms.eq(1);
+
+		
+			if ( $( this ).data( 'switched' ) ) {
+				$( this ).data( 'switched', false );
+
+				TweenMax.set( $form2, {
+					height: 'auto'
+				});
+				TweenMax.from( $form2, 0.5, {
+					height: 0
+				});
+
+				TweenMax.to( $form1, 0.5, {
+					height: 0
+				});
+				
+				// Switches the Icon
+				$( this ).find( '> span i' ).eq(0).hide();
+				$( this ).find( '> span i' ).eq(1).show();
+
+
+			} else {
+				$( this ).data( 'switched', true );
+
+				TweenMax.set( $form1, {
+					height: 'auto'
+				});
+				TweenMax.from( $form1, 0.5, {
+					height: 0
+				});
+
+				TweenMax.to( $form2, 0.5, {
+					height: 0
+				});
+				
+				// Switches the Icon
+				$( this ).find( '> span i' ).eq(1).hide();
+				$( this ).find( '> span i' ).eq(0).show();	
+				
+				
+			}
+
+		});
+	
+		
+    };
+
+    APP.components.documentReady.push( APP.LOGIN_UI.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
 
 
 

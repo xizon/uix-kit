@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.3.0
+ * ## Version             :  3.3.1
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  March 7, 2019
+ * ## Last Update         :  March 12, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -38,15 +38,16 @@
     20.Bulleted List
     21.Maintain Aspect Ratio List
     22.Side by Side List
-    23.Modal Dialog
-    24.Ribbon
-    25.Comments
-    26.Source Code
-    27.Striking
-    28.Table
-    29.ToolTip
-    30.Vertical Menu (RTL)
-    31.WordPress Core ( Do not use prefix "uix-" )
+    23.Login Templates
+    24.Modal Dialog
+    25.Ribbon
+    26.Comments
+    27.Source Code
+    28.Striking
+    29.Table
+    30.ToolTip
+    31.Vertical Menu (RTL)
+    32.WordPress Core ( Do not use prefix "uix-" )
 
 
 */
@@ -658,6 +659,7 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
  * 7. Multiple Selector
  * 8. Single Selector
  * 9. Search of Widget
+ * 11. Date Picker ( 3rd Party Plugin )
 */
 /* 
  ---------------------------
@@ -1001,6 +1003,15 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
   right: auto;
   left: 0.875rem; }
 
+/* 
+ ---------------------------
+ 11. Date Picker ( 3rd Party Plugin )
+ ---------------------------
+ */
+.uix-controls__date::after {
+  right: auto;
+  left: 1rem; }
+
 /* ====================================================== 
    <!-- Cutom Light Box -->   
 /* ====================================================== */
@@ -1045,6 +1056,9 @@ dl.uix-list-abreast dd {
   padding-left: auto;
   padding-right: 1rem; }
 
+/* ====================================================== 
+   <!-- Login Templates -->  
+/* ====================================================== */
 /* ====================================================== 
     <!-- Modal Dialog --> 
 /* ====================================================== */
@@ -1151,6 +1165,10 @@ pre.prettyprint {
 
 .uix-striking-msg.uix-striking-msg--hasarrow::after {
   border-left-color: rgba(0, 0, 0, 0.02); }
+
+.uix-striking-msg.uix-striking-msg--hasarrow--reversed::before, .uix-striking-msg.uix-striking-msg--hasarrow--reversed::after {
+  right: 100%;
+  left: auto; }
 
 .uix-striking-msg.uix-striking-msg--default.uix-striking-msg--hasarrow::before {
   border-left-color: #fce8dc; }

@@ -72,6 +72,7 @@ const UIX_KIT_IMPORT = { "files": [
 "./src/components/ES5/list-bulleted/js/list-bulleted.js",
 "./src/components/ES5/list-posts/js/list-posts-with-ajax.js",
 "./src/components/ES5/list-split-imagery/js/list-split-imagery.js",
+"./src/components/ES5/login-templates/js/login-templates.js",
 "./src/components/ES5/modal-dialog/js/modal-dialog.js",
 "./src/components/ES5/mousewheel-interaction/js/mousewheel-interaction.js",
 "./src/components/ES5/multi-items-carousel/js/multi-items-carousel.js",

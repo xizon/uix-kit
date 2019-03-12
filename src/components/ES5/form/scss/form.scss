@@ -1914,6 +1914,19 @@ $controls-merge-button-width: 20%;
  11. Date Picker ( 3rd Party Plugin )
  ---------------------------
  */ 
+.uix-controls__date::after {
+	display: inline-block;
+	font-family: 'Font Awesome 5 Free';
+	font-weight: 600;
+	content: "\f784";
+	font-size: 1rem;
+	position: absolute;
+	top: 50%;
+	right: 1rem;
+	color: $control-sub-color;
+	transform: translateY(-50%);
+}
+
 .xdsoft_datetimepicker {
 	box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.506);
 	background: #fff;

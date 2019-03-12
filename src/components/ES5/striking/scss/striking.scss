@@ -54,6 +54,16 @@ $uix-striking-border-color: rgba(0,0,0,.02);
 		border-width: 6px;
 		z-index: 0;
 	}
+	
+	&.uix-striking-msg--hasarrow--reversed::before,
+	&.uix-striking-msg--hasarrow--reversed::after {
+		transform: translateY(-50%) rotate(180deg);
+		right: auto;
+		left: 100%;
+	}
+	
+	
+	
 
 	&.is-pill {
 		border-radius: 35px;
