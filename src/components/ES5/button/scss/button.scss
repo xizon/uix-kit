@@ -51,6 +51,7 @@ $button-class-margin-b: 1rem;
 		box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.2) !important;
 		pointer-events: none !important;
 		user-select: none !important;
+		color: $primary-text-color2 !important;
 	}
 	
 
@@ -305,6 +306,14 @@ $button-class-margin-b: 1rem;
 		
 	}
 	
+	/* Each fullwidth button from group */
+	&.is-fullwidth {
+		display: flex;
+
+		> .uix-btn {
+		    flex: 1;
+		}
+	}
 
 	
 

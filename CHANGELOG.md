@@ -1,5 +1,17 @@
 # Changelog
 
+#### = 3.3.2 (March 18, 2019) =
+
+* New: Add a new module "3D Mouse Interaction".
+* New: Add a new module "3D Image Transition".
+* New: Added a status for Status Badges.
+* New: Added each fullwidth button from group.
+* Tweak: Enhanced filtering of root paths in front-end html templates to prevent path slashes from overlapping
+* Tweak: Upgraded three.js to the latest version of r102.
+* Tweak: Deactivate Source Code View module.
+* Tweak: Upgraded interactive demo of 3D modules.
+
+
 
 #### = 3.3.1 (March 12, 2019) =
 

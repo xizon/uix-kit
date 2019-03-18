@@ -98,32 +98,27 @@
                             <hr> 
 							<h3 class="pinline"><span>How To Use?</span></h3>
 							<p><strong>Step 1.</strong> Use NPM (Locate your current directory of project, and enter the following command.) or download the latest version from <a href="https://github.com/xizon/uix-kit">Github</a>. For nodejs you have to install some dependencies.</p>
-							<p><code>$ sudo npm install uix-kit</code></p>
+							<pre class="uix-precode"><label>$</label><code>sudo npm install uix-kit</code></pre>
+							
 							<p>Or clone the repo to get all source files including build scripts: </p>
-							<p><code>$ git clone git://github.com/xizon/uix-kit.git</code></p>
+							<pre class="uix-precode"><label>$</label><code>git clone git://github.com/xizon/uix-kit.git</code></pre>
+			
 							<p><strong>Step 2.</strong> First, using an absolute path into your <code>"uix-kit/"</code> folder directory.</p>
-							<p>
-								<code>$ cd /{your_directory}/uix-kit</code>
-							</p>
+							<pre class="uix-precode"><label>$</label><code>cd /{your_directory}/uix-kit</code></pre>
+							
 							<p><strong>Step 3.</strong> Before doing all dev stuff make sure you have `Node 10+` installed. After that, run the following code in the main directory to install the node module dependencies.</p>
-							<p><code>$ sudo npm install --save-dev  --unsafe-perm node-sass</code></p>
+							<pre class="uix-precode"><label>$</label><code>sudo npm install --save-dev  --unsafe-perm node-sass</code></pre>
 							
 							<p><strong>Step 4.</strong> Run the following code to enter development mode. The converted ES5 files will be created.</p>
-							<p>
-								<code>$ npm run build</code>
-							</p>
+							<pre class="uix-precode"><label>$</label><code>npm run build</code></pre>
 							
-							<p><strong>Step 5.</strong> When you done, this will spin up a server that can be accessed at</p>
-							<p><code>http://localhost:8080/examples/</code></p>
-							
-							
-							<div class="uix-striking-msg uix-striking-msg--default">
-							
-								<strong>ERROR: npm update check failed.</strong><br>
-								
-								<code>$ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config</code>
+							<p><strong>Step 5.</strong> When you done, this will spin up a server that can be accessed at <code>http://localhost:8080/examples/</code></p>
+				
+							<div>
+							    <strong>If you get an error of <span class="uix-striking-msg uix-striking-msg--danger is-rounded uix-striking-msg--inline">ERROR: npm update check failed.</span> You could try to enter the following code: </strong>
 							</div>
-
+							<pre class="uix-precode"><label>$</label><code>sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config</code></pre>
+										
 							
                        
                         </div>

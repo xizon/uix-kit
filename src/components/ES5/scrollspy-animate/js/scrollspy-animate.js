@@ -19,6 +19,9 @@ APP = ( function ( APP, $, window, document ) {
 	APP.SCROLLSPY_ANIM.version       = '0.0.1';
     APP.SCROLLSPY_ANIM.documentReady = function( $ ) {
 
+		// Remove pixi.js banner from the console
+		PIXI.utils.skipHello();
+		
 		
 		var $el         = $( '#scrollspy-animate-demo' ),
 			panelHeight = 0;	

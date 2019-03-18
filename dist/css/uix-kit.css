@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.3.1
+ * ## Version             :  3.3.2
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  March 12, 2019
+ * ## Last Update         :  March 18, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -95,26 +95,25 @@
     77.Show More Less
     78.Comments ( Synchronize to WordPress's class name )
     79.Editing Component
-    80.Source Code
-    81.Sticky Elements
-    82.Striking
-    83.SVG Map
-    84.3D Background
-    85.3D Carousel
-    86.Table
-    87.Tabs
-    88.Team Focus
-    89.Team Fullwidth (Style using the Side by Side List With Photo module)
-    90.Team Gird
-    91.Testimonials Carousel
-    92.Text effect
-    93.Timeline
-    94.ToolTip
-    95.Vertical Menu
-    96.Vertical Separator
-    97.Wave Background
-    98.3rd Party Plugins
-    99.WordPress Core ( Do not use prefix "uix-" )
+    80.Sticky Elements
+    81.Striking
+    82.SVG Map
+    83.3D Background
+    84.3D Carousel
+    85.Table
+    86.Tabs
+    87.Team Focus
+    88.Team Fullwidth (Style using the Side by Side List With Photo module)
+    89.Team Gird
+    90.Testimonials Carousel
+    91.Text effect
+    92.Timeline
+    93.ToolTip
+    94.Vertical Menu
+    95.Vertical Separator
+    96.Wave Background
+    97.3rd Party Plugins
+    98.WordPress Core ( Do not use prefix "uix-" )
 
 
 */
@@ -4021,6 +4020,20 @@ h6 {
       border-radius: 50%;
       background: #EC5E79;
       color: #fff; }
+    .uix-badge.uix-badge--status.uix-badge--status-dot::after {
+      font-size: 0;
+      width: 5px;
+      height: 5px;
+      line-height: 0;
+      top: -2.5px;
+      right: -2.5px;
+      animation: uix-cssAnim--dotRippleTiny 2s linear infinite; }
+
+@keyframes uix-cssAnim--dotRippleTiny {
+  0% {
+    box-shadow: 0 0 0 3px rgba(236, 94, 121, 0.4), 0 0 0 5px rgba(236, 94, 121, 0.1); }
+  100% {
+    box-shadow: 0 0 0 7px rgba(236, 94, 121, 0), 0 0 0 12px rgba(236, 94, 121, 0); } }
 
 /* ====================================================== 
    <!-- Blended Grid Layout --> 
@@ -4294,7 +4307,8 @@ h6 {
     cursor: not-allowed !important;
     box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.2) !important;
     pointer-events: none !important;
-    user-select: none !important; }
+    user-select: none !important;
+    color: #474747 !important; }
   .uix-btn.wait {
     background-image: linear-gradient(-45deg, rgba(0, 0, 0, 0.15) 25%, transparent 25%, transparent 50%, rgba(0, 0, 0, 0.15) 50%, rgba(0, 0, 0, 0.15) 75%, transparent 75%, transparent) !important;
     background-size: 30px 30px !important;
@@ -4410,7 +4424,8 @@ h6 {
  ---------------------------
  */
 .uix-btn__group {
-  display: inline-block; }
+  display: inline-block;
+  /* Each fullwidth button from group */ }
   .uix-btn__group::after {
     content: '';
     display: table;
@@ -4434,6 +4449,10 @@ h6 {
       margin-left: -2px; }
     .uix-btn__group > .uix-btn.uix-btn__border--thick:not(:first-child) {
       margin-left: -3px; }
+  .uix-btn__group.is-fullwidth {
+    display: flex; }
+    .uix-btn__group.is-fullwidth > .uix-btn {
+      flex: 1; }
 
 /* 
  ---------------------------
@@ -10789,196 +10808,6 @@ dl.uix-list-abreast {
   text-decoration: none !important;
   margin-top: 1.09375rem; }
 
-/*
-
-Style with support for rainbow parens
-
-*/
-.hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 0.5em;
-  background: #474949;
-  color: #d1d9e1; }
-
-.hljs-comment,
-.hljs-quote {
-  color: #969896;
-  font-style: italic; }
-
-.hljs-keyword,
-.hljs-selector-tag,
-.hljs-literal,
-.hljs-type,
-.hljs-addition {
-  color: #cc99cc; }
-
-.hljs-number,
-.hljs-selector-attr,
-.hljs-selector-pseudo {
-  color: #f99157; }
-
-.hljs-string,
-.hljs-doctag,
-.hljs-regexp {
-  color: #8abeb7; }
-
-.hljs-title,
-.hljs-name,
-.hljs-section,
-.hljs-built_in {
-  color: #b5bd68; }
-
-.hljs-variable,
-.hljs-template-variable,
-.hljs-selector-id,
-.hljs-class .hljs-title {
-  color: #ffcc66; }
-
-.hljs-section,
-.hljs-name,
-.hljs-strong {
-  font-weight: bold; }
-
-.hljs-symbol,
-.hljs-bullet,
-.hljs-subst,
-.hljs-meta,
-.hljs-link {
-  color: #f99157; }
-
-.hljs-deletion {
-  color: #dc322f; }
-
-.hljs-formula {
-  background: #eee8d5; }
-
-.hljs-attr,
-.hljs-attribute {
-  color: #81a2be; }
-
-.hljs-emphasis {
-  font-style: italic; }
-
-/* ====================================================== 
-   <!-- Source Code -->         
-/* ====================================================== */
-/* Source Code Button */
-#uix-view-source {
-  position: fixed;
-  background: #fff;
-  z-index: 99997;
-  top: calc(50% - 18px);
-  right: 20px;
-  margin: auto;
-  text-decoration: none;
-  cursor: pointer;
-  border: 1px solid #EC5E79;
-  border-radius: 25px;
-  height: 2rem;
-  width: 2rem;
-  font-size: 0.75rem;
-  padding: 0;
-  outline: none;
-  overflow: hidden;
-  color: #EC5E79;
-  transition: .1s ease-in-out;
-  text-align: center;
-  line-height: 250%;
-  box-shadow: 0 4px 15px 0 rgba(236, 94, 121, 0.35); }
-  #uix-view-source i {
-    font-size: 1rem; }
-  #uix-view-source::before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    margin: auto;
-    content: '';
-    border-radius: 50%;
-    display: block;
-    width: 4rem;
-    height: 4rem;
-    line-height: 4rem;
-    left: -1rem;
-    text-align: center;
-    transition: box-shadow .3s ease-out;
-    z-index: -1; }
-  #uix-view-source:hover, .uix-controls__multi-sel > span#uix-view-source.active:not(.uix-controls__bar) {
-    color: #fff;
-    box-shadow: 0 4px 15px 0 rgba(236, 94, 121, 0.75); }
-    #uix-view-source:hover::before, .uix-controls__multi-sel > span#uix-view-source.active:not(.uix-controls__bar)::before {
-      box-shadow: inset 0 0 0 4rem #EC5E79; }
-
-@media all and (max-width: 768px) {
-  #uix-view-source {
-    display: none; } }
-
-/* Source Code Area */
-#uix-source-code {
-  display: none;
-  position: fixed;
-  z-index: 99997;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.8); }
-  #uix-source-code:target {
-    display: block; }
-  #uix-source-code pre {
-    padding: 20px;
-    font: 14px/1.6 Monaco, Courier, MonoSpace;
-    margin: 50px auto;
-    background: black;
-    color: white;
-    width: 80%;
-    height: 80%;
-    overflow: auto; }
-    #uix-source-code pre a {
-      text-decoration: none;
-      color: #00ccff !important; }
-      #uix-source-code pre a span {
-        text-decoration: none;
-        color: #00ccff !important; }
-  #uix-source-code #uix-source-code__close {
-    position: absolute;
-    top: 30px;
-    left: 10%;
-    margin-left: -18px;
-    box-shadow: 2.5px 4.33px 16px 0px rgba(204, 23, 30, 0.31);
-    border-radius: 50%;
-    background: #cc171e;
-    width: 36px;
-    height: 36px;
-    display: inline-block;
-    text-align: center;
-    line-height: 34px;
-    overflow: hidden;
-    transform: rotate(45deg);
-    text-decoration: none; }
-  #uix-source-code .prettyprint {
-    border-radius: 2px;
-    box-shadow: 0px 0px 28px -4px rgba(0, 0, 0, 0.62); }
-    #uix-source-code .prettyprint::-webkit-scrollbar-track {
-      border-radius: 0px;
-      background-color: #F1F1F1; }
-    #uix-source-code .prettyprint::-webkit-scrollbar {
-      width: 5px;
-      height: 5px;
-      background-color: #F5F5F5; }
-    #uix-source-code .prettyprint::-webkit-scrollbar-thumb {
-      border-radius: 0px;
-      background-color: #000; }
-  #uix-source-code #uix-source-code__close::after {
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 600;
-    content: "\f067";
-    color: #fff;
-    font-size: 1rem; }
-
-/* Highlight Style */
 /* ====================================================== 
    <!-- Sticky Elements --> 
 /* ====================================================== */

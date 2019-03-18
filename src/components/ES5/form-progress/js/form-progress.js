@@ -70,6 +70,17 @@ APP = ( function ( APP, $, window, document ) {
 				'index'      : $sections.index() + 1
 			});
 			
+
+			//Scroll Top
+			TweenMax.to( window, 0.5, {
+				scrollTo: {
+					y        : 0,
+					autoKill : false
+				},
+				ease: Power2.easeOut
+			});	
+			
+			
 		});
 		
 		
@@ -157,6 +168,9 @@ APP = ( function ( APP, $, window, document ) {
 				stepPerValue     = 100/( allStep - 1 ),
 				value            = 0,
 				tarIndex, curIndex;
+			
+			
+			if ( $indicator.length == 0 ) return false;
 
 
 			//Returns current index
@@ -293,17 +307,6 @@ APP = ( function ( APP, $, window, document ) {
 			// Set progress bar value
 			$( '.uix-form-progress .uix-form-progress__line span' ).css( 'width', value + '%' );
 
-
-			//Scroll Top
-			TweenMax.to( window, 0.5, {
-				scrollTo: {
-					y        : 0,
-					autoKill : false
-				},
-				ease: Power2.easeOut
-			});	
-			
-			
 
 			return false;
 			

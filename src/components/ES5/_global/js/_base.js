@@ -14,7 +14,6 @@ if ( typeof jQuery === 'undefined' || typeof TweenMax === 'undefined' || typeof 
     throw new Error( 'Uix Kit\'s JavaScript requires jQuery, TweenMax, Waypoint and videojs.' );
 }
 
-
 //Fixed a bug that Cannot read property 'fn' of undefined for jQuery 1.xx.x.
 window.$ = window.jQuery;
 
@@ -40,9 +39,9 @@ if ( typeof APP_ROOTPATH === 'undefined' ) {
 	homeUrl     = '';
 	ajaxUrl     = '';
 } else {
-    templateUrl = APP_ROOTPATH.templateUrl;
-	homeUrl     = APP_ROOTPATH.homeUrl;
-	ajaxUrl     = APP_ROOTPATH.ajaxUrl;
+    templateUrl = APP_ROOTPATH.templateUrl.replace(/\/\s*$/, '' );
+	homeUrl     = APP_ROOTPATH.homeUrl.replace(/\/\s*$/, '' );
+	ajaxUrl     = APP_ROOTPATH.ajaxUrl.replace(/\/\s*$/, '' );
 }
 
 

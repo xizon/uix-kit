@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.3.1
+ * ## Version             :  3.3.2
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  March 12, 2019
+ * ## Last Update         :  March 18, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -137,7 +137,7 @@ var UIX_KIT_IMPORT = {
   /******/
 
   /* pages */
-  "./src/components/ES5/_main/js/main.js", "./src/components/ES5/accordion-img/js/accordion-img.js", "./src/components/ES5/accordion/js/accordion.js", "./src/components/ES5/advanced-content-slider/js/advanced-content-slider.js", "./src/components/ES5/advanced-slider/js/advanced-slider-basic.js", "./src/components/ES5/advanced-slider/js/advanced-slider-SpecialEffects.js", "./src/components/ES5/AJAX-push/js/ajax-push-content.js", "./src/components/ES5/AJAX/js/ajax-page-loader.js", "./src/components/ES5/back-to-top/js/back-to-top.js", "./src/components/ES5/circle-layout/js/circle-layout.js", "./src/components/ES5/counter/js/counter.js", "./src/components/ES5/dropdown-menu/js/dropdown-menu.js", "./src/components/ES5/dropdown-menu2/js/dropdown-menu2.js", "./src/components/ES5/dynamic-dropdown-list-json/js/dynamic-dropdown-list-json.js", "./src/components/ES5/flexslider/js/custom-flexslider.js", "./src/components/ES5/flexslider/js/jquery.flexslider.js", "./src/components/ES5/floating-side-element/js/floating-side-element.js", "./src/components/ES5/form-progress/js/form-progress.js", "./src/components/ES5/form/js/form.js", "./src/components/ES5/form/js/datepicker.js", "./src/components/ES5/gallery/js/gallery.js", "./src/components/ES5/hover-delay-interaction/js/hover-delay-interaction.js", "./src/components/ES5/image-shapes/js/image-shapes.js", "./src/components/ES5/lava-lamp-style-menu/js/lava-lamp-style-menu.js", "./src/components/ES5/lightbox/js/lightbox.js", "./src/components/ES5/list-bulleted/js/list-bulleted.js", "./src/components/ES5/list-posts/js/list-posts-with-ajax.js", "./src/components/ES5/list-split-imagery/js/list-split-imagery.js", "./src/components/ES5/login-templates/js/login-templates.js", "./src/components/ES5/modal-dialog/js/modal-dialog.js", "./src/components/ES5/mousewheel-interaction/js/mousewheel-interaction.js", "./src/components/ES5/multi-items-carousel/js/multi-items-carousel.js", "./src/components/ES5/one-page/js/one-page.js", "./src/components/ES5/one-page2/js/one-page2.js", "./src/components/ES5/parallax/js/parallax.js", "./src/components/ES5/periodical-scroll/js/periodical-scroll.js", "./src/components/ES5/pricing/js/pricing.js", "./src/components/ES5/progress-bar/js/progress-bar.js", "./src/components/ES5/progress-line/js/progress-line.js", "./src/components/ES5/retina/js/retina.js", "./src/components/ES5/rotating-elements/js/rotating-elements.js", "./src/components/ES5/scroll-reveal/js/scroll-reveal.js", "./src/components/ES5/scrollspy-animate/js/scrollspy-animate.js", "./src/components/ES5/show-more-less/js/show-more-less.js", "./src/components/ES5/skew-on-scroll/js/skew-on-scroll.js", "./src/components/ES5/smooth-scrolling-anchor-link/js/smooth-scrolling-anchor-link.js", "./src/components/ES5/source-code/js/highlight.js", "./src/components/ES5/source-code/js/source-code.js", "./src/components/ES5/sticky-elements/js/sticky-elements.js", "./src/components/ES5/svg-map/js/svg-map-china.js", "./src/components/ES5/svg-map/js/svg-map-world.js", "./src/components/ES5/table/js/table.js", "./src/components/ES5/table/js/table-sorter.js", "./src/components/ES5/t3D-background-three/js/3D-background-three.js", "./src/components/ES5/t3D-background-three2/js/3D-background-three2.js", "./src/components/ES5/t3D-background/js/3D-background.js", "./src/components/ES5/t3D-carousel/js/3D-carousel.js", "./src/components/ES5/t3D-model/js/3D-model.js", "./src/components/ES5/t3D-pages/js/3D-pages.js", "./src/components/ES5/t3D-particle-effect/js/3D-particle-effect.js", "./src/components/ES5/t3D-sphere-three/js/3D-sphere-three.js", "./src/components/ES5/t3D-obj-anim-interaction/js/3D-obj-anim-interaction.js", "./src/components/ES5/tabs/js/tabs.js", "./src/components/ES5/team-focus/js/team-focus.js", "./src/components/ES5/text-effect/js/text-effect.js", "./src/components/ES5/timeline/js/timeline.js", "./src/components/ES5/vertical-menu/js/vertical-menu.js", "./src/components/ES5/wordpress/js/wp-core.js"]
+  "./src/components/ES5/_main/js/main.js", "./src/components/ES5/accordion-img/js/accordion-img.js", "./src/components/ES5/accordion/js/accordion.js", "./src/components/ES5/advanced-content-slider/js/advanced-content-slider.js", "./src/components/ES5/advanced-slider/js/advanced-slider-basic.js", "./src/components/ES5/advanced-slider/js/advanced-slider-SpecialEffects.js", "./src/components/ES5/AJAX-push/js/ajax-push-content.js", "./src/components/ES5/AJAX/js/ajax-page-loader.js", "./src/components/ES5/back-to-top/js/back-to-top.js", "./src/components/ES5/circle-layout/js/circle-layout.js", "./src/components/ES5/counter/js/counter.js", "./src/components/ES5/dropdown-menu/js/dropdown-menu.js", "./src/components/ES5/dropdown-menu2/js/dropdown-menu2.js", "./src/components/ES5/dynamic-dropdown-list-json/js/dynamic-dropdown-list-json.js", "./src/components/ES5/flexslider/js/custom-flexslider.js", "./src/components/ES5/flexslider/js/jquery.flexslider.js", "./src/components/ES5/floating-side-element/js/floating-side-element.js", "./src/components/ES5/form-progress/js/form-progress.js", "./src/components/ES5/form/js/form.js", "./src/components/ES5/form/js/datepicker.js", "./src/components/ES5/gallery/js/gallery.js", "./src/components/ES5/hover-delay-interaction/js/hover-delay-interaction.js", "./src/components/ES5/image-shapes/js/image-shapes.js", "./src/components/ES5/lava-lamp-style-menu/js/lava-lamp-style-menu.js", "./src/components/ES5/lightbox/js/lightbox.js", "./src/components/ES5/list-bulleted/js/list-bulleted.js", "./src/components/ES5/list-posts/js/list-posts-with-ajax.js", "./src/components/ES5/list-split-imagery/js/list-split-imagery.js", "./src/components/ES5/login-templates/js/login-templates.js", "./src/components/ES5/modal-dialog/js/modal-dialog.js", "./src/components/ES5/mousewheel-interaction/js/mousewheel-interaction.js", "./src/components/ES5/multi-items-carousel/js/multi-items-carousel.js", "./src/components/ES5/one-page/js/one-page.js", "./src/components/ES5/one-page2/js/one-page2.js", "./src/components/ES5/parallax/js/parallax.js", "./src/components/ES5/periodical-scroll/js/periodical-scroll.js", "./src/components/ES5/pricing/js/pricing.js", "./src/components/ES5/progress-bar/js/progress-bar.js", "./src/components/ES5/progress-line/js/progress-line.js", "./src/components/ES5/retina/js/retina.js", "./src/components/ES5/rotating-elements/js/rotating-elements.js", "./src/components/ES5/scroll-reveal/js/scroll-reveal.js", "./src/components/ES5/scrollspy-animate/js/scrollspy-animate.js", "./src/components/ES5/show-more-less/js/show-more-less.js", "./src/components/ES5/skew-on-scroll/js/skew-on-scroll.js", "./src/components/ES5/smooth-scrolling-anchor-link/js/smooth-scrolling-anchor-link.js", "./src/components/ES5/sticky-elements/js/sticky-elements.js", "./src/components/ES5/svg-map/js/svg-map-china.js", "./src/components/ES5/svg-map/js/svg-map-world.js", "./src/components/ES5/simple-3D-background-three/js/3D-background-three.js", "./src/components/ES5/simple-3D-background-three2/js/3D-background-three2.js", "./src/components/ES5/simple-3D-background-three3/js/3D-background-three3.js", "./src/components/ES5/simple-3D-background/js/3D-background.js", "./src/components/ES5/simple-3D-carousel/js/3D-carousel.js", "./src/components/ES5/simple-3D-image-transition/js/3D-image-transition.js", "./src/components/ES5/simple-3D-model/js/3D-model.js", "./src/components/ES5/simple-3D-pages/js/3D-pages.js", "./src/components/ES5/simple-3D-particle-effect/js/3D-particle-effect.js", "./src/components/ES5/simple-3D-sphere-three/js/3D-sphere-three.js", "./src/components/ES5/simple-3D-obj-anim-interaction/js/3D-obj-anim-interaction.js", "./src/components/ES5/simple-3D-mouse-interaction/js/3D-mouse-interaction.js", "./src/components/ES5/table/js/table.js", "./src/components/ES5/table/js/table-sorter.js", "./src/components/ES5/tabs/js/tabs.js", "./src/components/ES5/team-focus/js/team-focus.js", "./src/components/ES5/text-effect/js/text-effect.js", "./src/components/ES5/timeline/js/timeline.js", "./src/components/ES5/vertical-menu/js/vertical-menu.js", "./src/components/ES5/wordpress/js/wp-core.js"]
 };
 
 // CONCATENATED MODULE: ./src/components/ES6/_global/js/vars.js
@@ -258,27 +258,29 @@ if (document.getElementsByTagName('body')[0].className.match(/es6-demo-home/)) {
     53.Show More Less
     54.Skew Based On Velocity of Scroll
     55.Smooth Scrolling When Clicking An Anchor Link
-    56.Source Code View
-    57.Sticky Elements
-    58.SVG Map (China)
-    59.SVG Map (World)
-    60.Responsive Table
-    61.Table Sorter
-    62.3D Background 2
-    63.3D Background 2
-    64.3D Background
-    65.3D Carousel
-    66.3D Model
-    67.3D Pages
-    68.3D Particle Effect
-    69.3D Sphere Rotation
-    70.3D Object Anim When Click
-    71.Tabs
-    72.Team Focus
-    73.Text effect
-    74.Timeline
-    75.Vertical Menu
-    76.WordPress Core Scripts
+    56.Sticky Elements
+    57.SVG Map (China)
+    58.SVG Map (World)
+    59.3D Background 2 with three.js
+    60.3D Background 2 with three.js
+    61.3D Background 3 with three.js
+    62.3D Background
+    63.3D Carousel
+    64.3D Image Transition with three.js
+    65.3D Model
+    66.3D Pages
+    67.3D Particle Effect
+    68.3D Sphere Rotation
+    69.3D Object Anim When Click
+    70.3D Mouse Interaction with three.js
+    71.Responsive Table
+    72.Table Sorter
+    73.Tabs
+    74.Team Focus
+    75.Text effect
+    76.Timeline
+    77.Vertical Menu
+    78.WordPress Core Scripts
 
 
 */
@@ -287,7 +289,6 @@ if (document.getElementsByTagName('body')[0].className.match(/es6-demo-home/)) {
 if ( typeof jQuery === 'undefined' || typeof TweenMax === 'undefined' || typeof Waypoint === 'undefined' || typeof videojs === 'undefined' ) {
     throw new Error( 'Uix Kit\'s JavaScript requires jQuery, TweenMax, Waypoint and videojs.' );
 }
-
 
 //Fixed a bug that Cannot read property 'fn' of undefined for jQuery 1.xx.x.
 window.$ = window.jQuery;
@@ -314,9 +315,9 @@ if ( typeof APP_ROOTPATH === 'undefined' ) {
 	homeUrl     = '';
 	ajaxUrl     = '';
 } else {
-    templateUrl = APP_ROOTPATH.templateUrl;
-	homeUrl     = APP_ROOTPATH.homeUrl;
-	ajaxUrl     = APP_ROOTPATH.ajaxUrl;
+    templateUrl = APP_ROOTPATH.templateUrl.replace(/\/\s*$/, '' );
+	homeUrl     = APP_ROOTPATH.homeUrl.replace(/\/\s*$/, '' );
+	ajaxUrl     = APP_ROOTPATH.ajaxUrl.replace(/\/\s*$/, '' );
 }
 
 
@@ -1691,6 +1692,8 @@ APP = ( function ( APP, $, window, document ) {
 
 					e.preventDefault();
 
+					
+					//Its value is not a boolean but a string
 					var expanded = ( $( this ).attr( 'aria-expanded' ) == 'true' ) ? false : true;
 
 					if ( expanded ) {
@@ -10893,6 +10896,7 @@ APP = ( function ( APP, $, window, document ) {
 				e.stopPropagation();
 				
 			
+				//Its value is not a boolean but a string
 				var expanded = ( $( this ).attr( 'aria-expanded' ) == 'true' ) ? false : true,
 					$content = $( this ).find( 'dd' );
 				
@@ -12119,6 +12123,9 @@ APP = ( function ( APP, $, window, document ) {
 	APP.ADVANCED_SLIDER_FILTER.version       = '0.1.5';
     APP.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
+		
+		// Remove pixi.js banner from the console
+		PIXI.utils.skipHello();		
 	
 		var $window                   = $( window ),
 			windowWidth               = window.innerWidth,
@@ -16473,6 +16480,7 @@ APP = ( function ( APP, $, window, document ) {
 
 				e.preventDefault();
 				
+				//Its value is not a boolean but a string
 				var expanded = ( $( this ).attr( 'aria-expanded' ) == 'true' ) ? false : true;
 				
 				if ( expanded ) {
@@ -19367,6 +19375,17 @@ APP = ( function ( APP, $, window, document ) {
 				'index'      : $sections.index() + 1
 			});
 			
+
+			//Scroll Top
+			TweenMax.to( window, 0.5, {
+				scrollTo: {
+					y        : 0,
+					autoKill : false
+				},
+				ease: Power2.easeOut
+			});	
+			
+			
 		});
 		
 		
@@ -19454,6 +19473,9 @@ APP = ( function ( APP, $, window, document ) {
 				stepPerValue     = 100/( allStep - 1 ),
 				value            = 0,
 				tarIndex, curIndex;
+			
+			
+			if ( $indicator.length == 0 ) return false;
 
 
 			//Returns current index
@@ -19590,17 +19612,6 @@ APP = ( function ( APP, $, window, document ) {
 			// Set progress bar value
 			$( '.uix-form-progress .uix-form-progress__line span' ).css( 'width', value + '%' );
 
-
-			//Scroll Top
-			TweenMax.to( window, 0.5, {
-				scrollTo: {
-					y        : 0,
-					autoKill : false
-				},
-				ease: Power2.easeOut
-			});	
-			
-			
 
 			return false;
 			
@@ -28441,6 +28452,9 @@ APP = ( function ( APP, $, window, document ) {
 	APP.SCROLLSPY_ANIM.version       = '0.0.1';
     APP.SCROLLSPY_ANIM.documentReady = function( $ ) {
 
+		// Remove pixi.js banner from the console
+		PIXI.utils.skipHello();
+		
 		
 		var $el         = $( '#scrollspy-animate-demo' ),
 			panelHeight = 0;	
@@ -28825,1007 +28839,6 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
-/*! highlight.js v9.12.0 | BSD3 License | git.io/hljslicense */
-
-/* @https://github.com/highlightjs/highlight.js/blob/master/src/highlight.js */
-(function(factory) {
-
-  // Find the global object for export to both the browser and web workers.
-  var globalObject = typeof window === 'object' && window ||
-                     typeof self === 'object' && self;
-
-  // Setup highlight.js for different environments. First is Node.js or
-  // CommonJS.
-  if(typeof exports !== 'undefined') {
-    factory(exports);
-  } else if(globalObject) {
-    // Export hljs globally even when using AMD for cases when this script
-    // is loaded with others that may still expect a global hljs.
-    globalObject.hljs = factory({});
-
-    // Finally register the global hljs with AMD.
-    if(typeof define === 'function' && define.amd) {
-      define([], function() {
-        return globalObject.hljs;
-      });
-    }
-  }
-
-}(function(hljs) {
-  // Convenience variables for build-in objects
-  var ArrayProto = [],
-      objectKeys = Object.keys;
-
-  // Global internal variables used within the highlight.js library.
-  var languages = {},
-      aliases   = {};
-
-  // Regular expressions used throughout the highlight.js library.
-  var noHighlightRe    = /^(no-?highlight|plain|text)$/i,
-      languagePrefixRe = /\blang(?:uage)?-([\w-]+)\b/i,
-      fixMarkupRe      = /((^(<[^>]+>|\t|)+|(?:\n)))/gm;
-
-  var spanEndTag = '</span>';
-
-  // Global options used when within external APIs. This is modified when
-  // calling the `hljs.configure` function.
-  var options = {
-    classPrefix: 'hljs-',
-    tabReplace: null,
-    useBR: false,
-    languages: undefined
-  };
-
-
-  /* Utility functions */
-
-  function escape(value) {
-    return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  }
-
-  function tag(node) {
-    return node.nodeName.toLowerCase();
-  }
-
-  function testRe(re, lexeme) {
-    var match = re && re.exec(lexeme);
-    return match && match.index === 0;
-  }
-
-  function isNotHighlighted(language) {
-    return noHighlightRe.test(language);
-  }
-
-  function blockLanguage(block) {
-    var i, match, length, _class;
-    var classes = block.className + ' ';
-
-    classes += block.parentNode ? block.parentNode.className : '';
-
-    // language-* takes precedence over non-prefixed class names.
-    match = languagePrefixRe.exec(classes);
-    if (match) {
-      return getLanguage(match[1]) ? match[1] : 'no-highlight';
-    }
-
-    classes = classes.split(/\s+/);
-
-    for (i = 0, length = classes.length; i < length; i++) {
-      _class = classes[i];
-
-      if (isNotHighlighted(_class) || getLanguage(_class)) {
-        return _class;
-      }
-    }
-  }
-
-  function inherit(parent) {  // inherit(parent, override_obj, override_obj, ...)
-    var key;
-    var result = {};
-    var objects = Array.prototype.slice.call(arguments, 1);
-
-    for (key in parent)
-      result[key] = parent[key];
-    objects.forEach(function(obj) {
-      for (key in obj)
-        result[key] = obj[key];
-    });
-    return result;
-  }
-
-  /* Stream merging */
-
-  function nodeStream(node) {
-    var result = [];
-    (function _nodeStream(node, offset) {
-      for (var child = node.firstChild; child; child = child.nextSibling) {
-        if (child.nodeType === 3)
-          offset += child.nodeValue.length;
-        else if (child.nodeType === 1) {
-          result.push({
-            event: 'start',
-            offset: offset,
-            node: child
-          });
-          offset = _nodeStream(child, offset);
-          // Prevent void elements from having an end tag that would actually
-          // double them in the output. There are more void elements in HTML
-          // but we list only those realistically expected in code display.
-          if (!tag(child).match(/br|hr|img|input/)) {
-            result.push({
-              event: 'stop',
-              offset: offset,
-              node: child
-            });
-          }
-        }
-      }
-      return offset;
-    })(node, 0);
-    return result;
-  }
-
-  function mergeStreams(original, highlighted, value) {
-    var processed = 0;
-    var result = '';
-    var nodeStack = [];
-
-    function selectStream() {
-      if (!original.length || !highlighted.length) {
-        return original.length ? original : highlighted;
-      }
-      if (original[0].offset !== highlighted[0].offset) {
-        return (original[0].offset < highlighted[0].offset) ? original : highlighted;
-      }
-
-      /*
-      To avoid starting the stream just before it should stop the order is
-      ensured that original always starts first and closes last:
-      if (event1 == 'start' && event2 == 'start')
-        return original;
-      if (event1 == 'start' && event2 == 'stop')
-        return highlighted;
-      if (event1 == 'stop' && event2 == 'start')
-        return original;
-      if (event1 == 'stop' && event2 == 'stop')
-        return highlighted;
-      ... which is collapsed to:
-      */
-      return highlighted[0].event === 'start' ? original : highlighted;
-    }
-
-    function open(node) {
-      function attr_str(a) {return ' ' + a.nodeName + '="' + escape(a.value).replace('"', '&quot;') + '"';}
-      result += '<' + tag(node) + ArrayProto.map.call(node.attributes, attr_str).join('') + '>';
-    }
-
-    function close(node) {
-      result += '</' + tag(node) + '>';
-    }
-
-    function render(event) {
-      (event.event === 'start' ? open : close)(event.node);
-    }
-
-    while (original.length || highlighted.length) {
-      var stream = selectStream();
-      result += escape(value.substring(processed, stream[0].offset));
-      processed = stream[0].offset;
-      if (stream === original) {
-        /*
-        On any opening or closing tag of the original markup we first close
-        the entire highlighted node stack, then render the original tag along
-        with all the following original tags at the same offset and then
-        reopen all the tags on the highlighted stack.
-        */
-        nodeStack.reverse().forEach(close);
-        do {
-          render(stream.splice(0, 1)[0]);
-          stream = selectStream();
-        } while (stream === original && stream.length && stream[0].offset === processed);
-        nodeStack.reverse().forEach(open);
-      } else {
-        if (stream[0].event === 'start') {
-          nodeStack.push(stream[0].node);
-        } else {
-          nodeStack.pop();
-        }
-        render(stream.splice(0, 1)[0]);
-      }
-    }
-    return result + escape(value.substr(processed));
-  }
-
-  /* Initialization */
-
-  function expand_mode(mode) {
-    if (mode.variants && !mode.cached_variants) {
-      mode.cached_variants = mode.variants.map(function(variant) {
-        return inherit(mode, {variants: null}, variant);
-      });
-    }
-    return mode.cached_variants || (mode.endsWithParent && [inherit(mode)]) || [mode];
-  }
-
-  function compileLanguage(language) {
-
-    function reStr(re) {
-        return (re && re.source) || re;
-    }
-
-    function langRe(value, global) {
-      return new RegExp(
-        reStr(value),
-        'm' + (language.case_insensitive ? 'i' : '') + (global ? 'g' : '')
-      );
-    }
-
-    function compileMode(mode, parent) {
-      if (mode.compiled)
-        return;
-      mode.compiled = true;
-
-      mode.keywords = mode.keywords || mode.beginKeywords;
-      if (mode.keywords) {
-        var compiled_keywords = {};
-
-        var flatten = function(className, str) {
-          if (language.case_insensitive) {
-            str = str.toLowerCase();
-          }
-          str.split(' ').forEach(function(kw) {
-            var pair = kw.split('|');
-            compiled_keywords[pair[0]] = [className, pair[1] ? Number(pair[1]) : 1];
-          });
-        };
-
-        if (typeof mode.keywords === 'string') { // string
-          flatten('keyword', mode.keywords);
-        } else {
-          objectKeys(mode.keywords).forEach(function (className) {
-            flatten(className, mode.keywords[className]);
-          });
-        }
-        mode.keywords = compiled_keywords;
-      }
-      mode.lexemesRe = langRe(mode.lexemes || /\w+/, true);
-
-      if (parent) {
-        if (mode.beginKeywords) {
-          mode.begin = '\\b(' + mode.beginKeywords.split(' ').join('|') + ')\\b';
-        }
-        if (!mode.begin)
-          mode.begin = /\B|\b/;
-        mode.beginRe = langRe(mode.begin);
-        if (!mode.end && !mode.endsWithParent)
-          mode.end = /\B|\b/;
-        if (mode.end)
-          mode.endRe = langRe(mode.end);
-        mode.terminator_end = reStr(mode.end) || '';
-        if (mode.endsWithParent && parent.terminator_end)
-          mode.terminator_end += (mode.end ? '|' : '') + parent.terminator_end;
-      }
-      if (mode.illegal)
-        mode.illegalRe = langRe(mode.illegal);
-      if (mode.relevance == null)
-        mode.relevance = 1;
-      if (!mode.contains) {
-        mode.contains = [];
-      }
-      mode.contains = Array.prototype.concat.apply([], mode.contains.map(function(c) {
-        return expand_mode(c === 'self' ? mode : c);
-      }));
-      mode.contains.forEach(function(c) {compileMode(c, mode);});
-
-      if (mode.starts) {
-        compileMode(mode.starts, parent);
-      }
-
-      var terminators =
-        mode.contains.map(function(c) {
-          return c.beginKeywords ? '\\.?(' + c.begin + ')\\.?' : c.begin;
-        })
-        .concat([mode.terminator_end, mode.illegal])
-        .map(reStr)
-        .filter(Boolean);
-      mode.terminators = terminators.length ? langRe(terminators.join('|'), true) : {exec: function(/*s*/) {return null;}};
-    }
-
-    compileMode(language);
-  }
-
-  /*
-  Core highlighting function. Accepts a language name, or an alias, and a
-  string with the code to highlight. Returns an object with the following
-  properties:
-  - relevance (int)
-  - value (an HTML string with highlighting markup)
-  */
-  function highlight(name, value, ignore_illegals, continuation) {
-
-    function subMode(lexeme, mode) {
-      var i, length;
-
-      for (i = 0, length = mode.contains.length; i < length; i++) {
-        if (testRe(mode.contains[i].beginRe, lexeme)) {
-          return mode.contains[i];
-        }
-      }
-    }
-
-    function endOfMode(mode, lexeme) {
-      if (testRe(mode.endRe, lexeme)) {
-        while (mode.endsParent && mode.parent) {
-          mode = mode.parent;
-        }
-        return mode;
-      }
-      if (mode.endsWithParent) {
-        return endOfMode(mode.parent, lexeme);
-      }
-    }
-
-    function isIllegal(lexeme, mode) {
-      return !ignore_illegals && testRe(mode.illegalRe, lexeme);
-    }
-
-    function keywordMatch(mode, match) {
-      var match_str = language.case_insensitive ? match[0].toLowerCase() : match[0];
-      return mode.keywords.hasOwnProperty(match_str) && mode.keywords[match_str];
-    }
-
-    function buildSpan(classname, insideSpan, leaveOpen, noPrefix) {
-      var classPrefix = noPrefix ? '' : options.classPrefix,
-          openSpan    = '<span class="' + classPrefix,
-          closeSpan   = leaveOpen ? '' : spanEndTag;
-
-      openSpan += classname + '">';
-
-      return openSpan + insideSpan + closeSpan;
-    }
-
-    function processKeywords() {
-      var keyword_match, last_index, match, result;
-
-      if (!top.keywords)
-        return escape(mode_buffer);
-
-      result = '';
-      last_index = 0;
-      top.lexemesRe.lastIndex = 0;
-      match = top.lexemesRe.exec(mode_buffer);
-
-      while (match) {
-        result += escape(mode_buffer.substring(last_index, match.index));
-        keyword_match = keywordMatch(top, match);
-        if (keyword_match) {
-          relevance += keyword_match[1];
-          result += buildSpan(keyword_match[0], escape(match[0]));
-        } else {
-          result += escape(match[0]);
-        }
-        last_index = top.lexemesRe.lastIndex;
-        match = top.lexemesRe.exec(mode_buffer);
-      }
-      return result + escape(mode_buffer.substr(last_index));
-    }
-
-    function processSubLanguage() {
-      var explicit = typeof top.subLanguage === 'string';
-      if (explicit && !languages[top.subLanguage]) {
-        return escape(mode_buffer);
-      }
-
-      var result = explicit ?
-                   highlight(top.subLanguage, mode_buffer, true, continuations[top.subLanguage]) :
-                   highlightAuto(mode_buffer, top.subLanguage.length ? top.subLanguage : undefined);
-
-      // Counting embedded language score towards the host language may be disabled
-      // with zeroing the containing mode relevance. Usecase in point is Markdown that
-      // allows XML everywhere and makes every XML snippet to have a much larger Markdown
-      // score.
-      if (top.relevance > 0) {
-        relevance += result.relevance;
-      }
-      if (explicit) {
-        continuations[top.subLanguage] = result.top;
-      }
-      return buildSpan(result.language, result.value, false, true);
-    }
-
-    function processBuffer() {
-      result += (top.subLanguage != null ? processSubLanguage() : processKeywords());
-      mode_buffer = '';
-    }
-
-    function startNewMode(mode) {
-      result += mode.className? buildSpan(mode.className, '', true): '';
-      top = Object.create(mode, {parent: {value: top}});
-    }
-
-    function processLexeme(buffer, lexeme) {
-
-      mode_buffer += buffer;
-
-      if (lexeme == null) {
-        processBuffer();
-        return 0;
-      }
-
-      var new_mode = subMode(lexeme, top);
-      if (new_mode) {
-        if (new_mode.skip) {
-          mode_buffer += lexeme;
-        } else {
-          if (new_mode.excludeBegin) {
-            mode_buffer += lexeme;
-          }
-          processBuffer();
-          if (!new_mode.returnBegin && !new_mode.excludeBegin) {
-            mode_buffer = lexeme;
-          }
-        }
-        startNewMode(new_mode, lexeme);
-        return new_mode.returnBegin ? 0 : lexeme.length;
-      }
-
-      var end_mode = endOfMode(top, lexeme);
-      if (end_mode) {
-        var origin = top;
-        if (origin.skip) {
-          mode_buffer += lexeme;
-        } else {
-          if (!(origin.returnEnd || origin.excludeEnd)) {
-            mode_buffer += lexeme;
-          }
-          processBuffer();
-          if (origin.excludeEnd) {
-            mode_buffer = lexeme;
-          }
-        }
-        do {
-          if (top.className) {
-            result += spanEndTag;
-          }
-          if (!top.skip && !top.subLanguage) {
-            relevance += top.relevance;
-          }
-          top = top.parent;
-        } while (top !== end_mode.parent);
-        if (end_mode.starts) {
-          startNewMode(end_mode.starts, '');
-        }
-        return origin.returnEnd ? 0 : lexeme.length;
-      }
-
-      if (isIllegal(lexeme, top))
-        throw new Error('Illegal lexeme "' + lexeme + '" for mode "' + (top.className || '<unnamed>') + '"');
-
-      /*
-      Parser should not reach this point as all types of lexemes should be caught
-      earlier, but if it does due to some bug make sure it advances at least one
-      character forward to prevent infinite looping.
-      */
-      mode_buffer += lexeme;
-      return lexeme.length || 1;
-    }
-
-    var language = getLanguage(name);
-    if (!language) {
-      throw new Error('Unknown language: "' + name + '"');
-    }
-
-    compileLanguage(language);
-    var top = continuation || language;
-    var continuations = {}; // keep continuations for sub-languages
-    var result = '', current;
-    for(current = top; current !== language; current = current.parent) {
-      if (current.className) {
-        result = buildSpan(current.className, '', true) + result;
-      }
-    }
-    var mode_buffer = '';
-    var relevance = 0;
-    try {
-      var match, count, index = 0;
-      while (true) {
-        top.terminators.lastIndex = index;
-        match = top.terminators.exec(value);
-        if (!match)
-          break;
-        count = processLexeme(value.substring(index, match.index), match[0]);
-        index = match.index + count;
-      }
-      processLexeme(value.substr(index));
-      for(current = top; current.parent; current = current.parent) { // close dangling modes
-        if (current.className) {
-          result += spanEndTag;
-        }
-      }
-      return {
-        relevance: relevance,
-        value: result,
-        language: name,
-        top: top
-      };
-    } catch (e) {
-      if (e.message && e.message.indexOf('Illegal') !== -1) {
-        return {
-          relevance: 0,
-          value: escape(value)
-        };
-      } else {
-        throw e;
-      }
-    }
-  }
-
-  /*
-  Highlighting with language detection. Accepts a string with the code to
-  highlight. Returns an object with the following properties:
-  - language (detected language)
-  - relevance (int)
-  - value (an HTML string with highlighting markup)
-  - second_best (object with the same structure for second-best heuristically
-    detected language, may be absent)
-  */
-  function highlightAuto(text, languageSubset) {
-    languageSubset = languageSubset || options.languages || objectKeys(languages);
-    var result = {
-      relevance: 0,
-      value: escape(text)
-    };
-    var second_best = result;
-    languageSubset.filter(getLanguage).forEach(function(name) {
-      var current = highlight(name, text, false);
-      current.language = name;
-      if (current.relevance > second_best.relevance) {
-        second_best = current;
-      }
-      if (current.relevance > result.relevance) {
-        second_best = result;
-        result = current;
-      }
-    });
-    if (second_best.language) {
-      result.second_best = second_best;
-    }
-    return result;
-  }
-
-  /*
-  Post-processing of the highlighted markup:
-  - replace TABs with something more useful
-  - replace real line-breaks with '<br>' for non-pre containers
-  */
-  function fixMarkup(value) {
-    return !(options.tabReplace || options.useBR) ? value : value.replace(fixMarkupRe, function(match, p1) {
-          if (options.useBR && match === '\n') {
-            return '<br>';
-          } else if (options.tabReplace) {
-            return p1.replace(/\t/g, options.tabReplace);
-          }
-          return '';
-      });
-  }
-
-  function buildClassName(prevClassName, currentLang, resultLang) {
-    var language = currentLang ? aliases[currentLang] : resultLang,
-        result   = [prevClassName.trim()];
-
-    if (!prevClassName.match(/\bhljs\b/)) {
-      result.push('hljs');
-    }
-
-    if (prevClassName.indexOf(language) === -1) {
-      result.push(language);
-    }
-
-    return result.join(' ').trim();
-  }
-
-  /*
-  Applies highlighting to a DOM node containing code. Accepts a DOM node and
-  two optional parameters for fixMarkup.
-  */
-  function highlightBlock(block) {
-    var node, originalStream, result, resultNode, text;
-    var language = blockLanguage(block);
-
-    if (isNotHighlighted(language))
-        return;
-
-    if (options.useBR) {
-      node = document.createElementNS('http://www.w3.org/1999/xhtml', 'div');
-      node.innerHTML = block.innerHTML.replace(/\n/g, '').replace(/<br[ \/]*>/g, '\n');
-    } else {
-      node = block;
-    }
-    text = node.textContent;
-    result = language ? highlight(language, text, true) : highlightAuto(text);
-
-    originalStream = nodeStream(node);
-    if (originalStream.length) {
-      resultNode = document.createElementNS('http://www.w3.org/1999/xhtml', 'div');
-      resultNode.innerHTML = result.value;
-      result.value = mergeStreams(originalStream, nodeStream(resultNode), text);
-    }
-    result.value = fixMarkup(result.value);
-
-    block.innerHTML = result.value;
-    block.className = buildClassName(block.className, language, result.language);
-    block.result = {
-      language: result.language,
-      re: result.relevance
-    };
-    if (result.second_best) {
-      block.second_best = {
-        language: result.second_best.language,
-        re: result.second_best.relevance
-      };
-    }
-  }
-
-  /*
-  Updates highlight.js global options with values passed in the form of an object.
-  */
-  function configure(user_options) {
-    options = inherit(options, user_options);
-  }
-
-  /*
-  Applies highlighting to all <pre><code>..</code></pre> blocks on a page.
-  */
-  function initHighlighting() {
-    if (initHighlighting.called)
-      return;
-    initHighlighting.called = true;
-
-    var blocks = document.querySelectorAll('pre code');
-    ArrayProto.forEach.call(blocks, highlightBlock);
-  }
-
-  /*
-  Attaches highlighting to the page load event.
-  */
-  function initHighlightingOnLoad() {
-    addEventListener('DOMContentLoaded', initHighlighting, false);
-    addEventListener('load', initHighlighting, false);
-  }
-
-  function registerLanguage(name, language) {
-    var lang = languages[name] = language(hljs);
-    if (lang.aliases) {
-      lang.aliases.forEach(function(alias) {aliases[alias] = name;});
-    }
-  }
-
-  function listLanguages() {
-    return objectKeys(languages);
-  }
-
-  function getLanguage(name) {
-    name = (name || '').toLowerCase();
-    return languages[name] || languages[aliases[name]];
-  }
-
-  /* Interface definition */
-
-  hljs.highlight = highlight;
-  hljs.highlightAuto = highlightAuto;
-  hljs.fixMarkup = fixMarkup;
-  hljs.highlightBlock = highlightBlock;
-  hljs.configure = configure;
-  hljs.initHighlighting = initHighlighting;
-  hljs.initHighlightingOnLoad = initHighlightingOnLoad;
-  hljs.registerLanguage = registerLanguage;
-  hljs.listLanguages = listLanguages;
-  hljs.getLanguage = getLanguage;
-  hljs.inherit = inherit;
-
-  // Common regexps
-  hljs.IDENT_RE = '[a-zA-Z]\\w*';
-  hljs.UNDERSCORE_IDENT_RE = '[a-zA-Z_]\\w*';
-  hljs.NUMBER_RE = '\\b\\d+(\\.\\d+)?';
-  hljs.C_NUMBER_RE = '(-?)(\\b0[xX][a-fA-F0-9]+|(\\b\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)'; // 0x..., 0..., decimal, float
-  hljs.BINARY_NUMBER_RE = '\\b(0b[01]+)'; // 0b...
-  hljs.RE_STARTERS_RE = '!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|-|-=|/=|/|:|;|<<|<<=|<=|<|===|==|=|>>>=|>>=|>=|>>>|>>|>|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~';
-
-  // Common modes
-  hljs.BACKSLASH_ESCAPE = {
-    begin: '\\\\[\\s\\S]', relevance: 0
-  };
-  hljs.APOS_STRING_MODE = {
-    className: 'string',
-    begin: '\'', end: '\'',
-    illegal: '\\n',
-    contains: [hljs.BACKSLASH_ESCAPE]
-  };
-  hljs.QUOTE_STRING_MODE = {
-    className: 'string',
-    begin: '"', end: '"',
-    illegal: '\\n',
-    contains: [hljs.BACKSLASH_ESCAPE]
-  };
-  hljs.PHRASAL_WORDS_MODE = {
-    begin: /\b(a|an|the|are|I'm|isn't|don't|doesn't|won't|but|just|should|pretty|simply|enough|gonna|going|wtf|so|such|will|you|your|they|like|more)\b/
-  };
-  hljs.COMMENT = function (begin, end, inherits) {
-    var mode = hljs.inherit(
-      {
-        className: 'comment',
-        begin: begin, end: end,
-        contains: []
-      },
-      inherits || {}
-    );
-    mode.contains.push(hljs.PHRASAL_WORDS_MODE);
-    mode.contains.push({
-      className: 'doctag',
-      begin: '(?:TODO|FIXME|NOTE|BUG|XXX):',
-      relevance: 0
-    });
-    return mode;
-  };
-  hljs.C_LINE_COMMENT_MODE = hljs.COMMENT('//', '$');
-  hljs.C_BLOCK_COMMENT_MODE = hljs.COMMENT('/\\*', '\\*/');
-  hljs.HASH_COMMENT_MODE = hljs.COMMENT('#', '$');
-  hljs.NUMBER_MODE = {
-    className: 'number',
-    begin: hljs.NUMBER_RE,
-    relevance: 0
-  };
-  hljs.C_NUMBER_MODE = {
-    className: 'number',
-    begin: hljs.C_NUMBER_RE,
-    relevance: 0
-  };
-  hljs.BINARY_NUMBER_MODE = {
-    className: 'number',
-    begin: hljs.BINARY_NUMBER_RE,
-    relevance: 0
-  };
-  hljs.CSS_NUMBER_MODE = {
-    className: 'number',
-    begin: hljs.NUMBER_RE + '(' +
-      '%|em|ex|ch|rem'  +
-      '|vw|vh|vmin|vmax' +
-      '|cm|mm|in|pt|pc|px' +
-      '|deg|grad|rad|turn' +
-      '|s|ms' +
-      '|Hz|kHz' +
-      '|dpi|dpcm|dppx' +
-      ')?',
-    relevance: 0
-  };
-  hljs.REGEXP_MODE = {
-    className: 'regexp',
-    begin: /\//, end: /\/[gimuy]*/,
-    illegal: /\n/,
-    contains: [
-      hljs.BACKSLASH_ESCAPE,
-      {
-        begin: /\[/, end: /\]/,
-        relevance: 0,
-        contains: [hljs.BACKSLASH_ESCAPE]
-      }
-    ]
-  };
-  hljs.TITLE_MODE = {
-    className: 'title',
-    begin: hljs.IDENT_RE,
-    relevance: 0
-  };
-  hljs.UNDERSCORE_TITLE_MODE = {
-    className: 'title',
-    begin: hljs.UNDERSCORE_IDENT_RE,
-    relevance: 0
-  };
-  hljs.METHOD_GUARD = {
-    // excludes method names from keyword processing
-    begin: '\\.\\s*' + hljs.UNDERSCORE_IDENT_RE,
-    relevance: 0
-  };
-
-  return hljs;
-}));
-
-
-/*
-Language: HTML, XML
-Category: common
-@https://github.com/highlightjs/highlight.js/blob/master/src/languages/xml.js
-*/
-
-hljs.registerLanguage("xml", function(hljs) {
-  var XML_IDENT_RE = '[A-Za-z0-9\\._:-]+';
-  var TAG_INTERNALS = {
-    endsWithParent: true,
-    illegal: /</,
-    relevance: 0,
-    contains: [
-      {
-        className: 'attr',
-        begin: XML_IDENT_RE,
-        relevance: 0
-      },
-      {
-        begin: /=\s*/,
-        relevance: 0,
-        contains: [
-          {
-            className: 'string',
-            endsParent: true,
-            variants: [
-              {begin: /"/, end: /"/},
-              {begin: /'/, end: /'/},
-              {begin: /[^\s"'=<>`]+/}
-            ]
-          }
-        ]
-      }
-    ]
-  };
-  return {
-    aliases: ['html', 'xhtml', 'rss', 'atom', 'xjb', 'xsd', 'xsl', 'plist'],
-    case_insensitive: true,
-    contains: [
-      {
-        className: 'meta',
-        begin: '<!DOCTYPE', end: '>',
-        relevance: 10,
-        contains: [{begin: '\\[', end: '\\]'}]
-      },
-      hljs.COMMENT(
-        '<!--',
-        '-->',
-        {
-          relevance: 10
-        }
-      ),
-      {
-        begin: '<\\!\\[CDATA\\[', end: '\\]\\]>',
-        relevance: 10
-      },
-      {
-        className: 'meta',
-        begin: /<\?xml/, end: /\?>/, relevance: 10
-      },
-      {
-        begin: /<\?(php)?/, end: /\?>/,
-        subLanguage: 'php',
-        contains: [{begin: '/\\*', end: '\\*/', skip: true}]
-      },
-      {
-        className: 'tag',
-        /*
-        The lookahead pattern (?=...) ensures that 'begin' only matches
-        '<style' as a single word, followed by a whitespace or an
-        ending braket. The '$' is needed for the lexeme to be recognized
-        by hljs.subMode() that tests lexemes outside the stream.
-        */
-        begin: '<style(?=\\s|>|$)', end: '>',
-        keywords: {name: 'style'},
-        contains: [TAG_INTERNALS],
-        starts: {
-          end: '</style>', returnEnd: true,
-          subLanguage: ['css', 'xml']
-        }
-      },
-      {
-        className: 'tag',
-        // See the comment in the <style tag about the lookahead pattern
-        begin: '<script(?=\\s|>|$)', end: '>',
-        keywords: {name: 'script'},
-        contains: [TAG_INTERNALS],
-        starts: {
-          end: '\<\/script\>', returnEnd: true,
-          subLanguage: ['actionscript', 'javascript', 'handlebars', 'xml']
-        }
-      },
-      {
-        className: 'tag',
-        begin: '</?', end: '/?>',
-        contains: [
-          {
-            className: 'name', begin: /[^\/><\s]+/, relevance: 0
-          },
-          TAG_INTERNALS
-        ]
-      }
-    ]
-  };
-});
-
-
-
-/* 
- *************************************
- * <!-- Source Code View -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.SOURCE_CODE_VIEW               = APP.SOURCE_CODE_VIEW || {};
-	APP.SOURCE_CODE_VIEW.version       = '0.0.1';
-    APP.SOURCE_CODE_VIEW.documentReady = function( $ ) {
-
-		//Add view source code to body
-		$( 'body' ).prepend( '<a href="#uix-source-code" id="uix-view-source"><i class="fa fa-code" aria-hidden="true"></i></a><div id="uix-source-code"><a href="javascript:void(0);" id="uix-source-code__close"></a></div>' );
-				
-
-		//View source button event
-		$( '#uix-view-source' ).on( 'click', function() {
-			// Locks the page
-			$.scrollLock( true );
-			$( '#uix-source-code' ).show();
-			
-
-			
-		});
-		
-		$( '#uix-source-code > #uix-source-code__close' ).on( 'click', function() {
-			// Unlocks the page
-			$.scrollLock( false );
-			
-			var uri = window.location.toString();
-			if ( uri.indexOf( '#' ) > 0 ) {
-				var clean_uri = uri.substring(0, uri.indexOf( '#' ) );
-				window.history.replaceState({}, document.title, clean_uri );
-			}
-			$( '#uix-source-code' ).hide();
-			
-		});
-		
-		
-		//Remove tag from HTML-String
-		var removeElements = function( text, selector ) {
-			var wrapped = $( "<div>" + text + "</div>" );
-			wrapped.find( selector ).remove();
-			return wrapped.html();
-		};
-
-
-		//Source code init
-		var sourceCodeBodyClass      = $( 'body' ).attr( 'class' ),
-			sourceCodeBodyClassCode  = ( typeof sourceCodeBodyClass != typeof undefined ) ? 'body class="'+sourceCodeBodyClass+'"' : 'body';
-		
-		$.get( window.location.toString(), function( data ) {
-			var pageBodyCode   = data.split("<body")[1].split(">").slice(1).join(">").split("</body>")[0],
-				pageHeaderCode = data.split("</head>")[0];
-			
-			pageBodyCode   = removeElements( pageBodyCode, '#uix-view-source, #uix-source-code' );
-			pageBodyCode   = pageBodyCode.replace(/[<>]/g, function(m) { return {'<':'&lt;','>':'&gt;'}[m]; });
-			pageHeaderCode = pageHeaderCode.replace(/[<>]/g, function(m) { return {'<':'&lt;','>':'&gt;'}[m]; });
-
-
-			$("<pre />", {
-				"html":   pageHeaderCode + '&lt;/head&gt;\n&lt;'+sourceCodeBodyClassCode+'&gt;\n' + pageBodyCode + '\n&lt;/body&gt;\n&lt;/html&gt;',
-				"class": 'highlightBlock-print html'
-			}).appendTo( '#uix-source-code' );	
-			
-			$( 'pre.highlightBlock-print' ).each( function( i, block ) {
-				hljs.highlightBlock( block );
-			});	
-
-
-			
-		});
-		
-		
-		
-		//highlighter written
-		
-    };
-
-    APP.components.documentReady.push( APP.SOURCE_CODE_VIEW.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
 
 
 /* 
@@ -30188,293 +29201,7 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
- * <!-- Responsive Table -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.TABLE               = APP.TABLE || {};
-	APP.TABLE.version       = '0.0.2';
-    APP.TABLE.documentReady = function( $ ) {
-
-
-		
-		var $window      = $( window ),
-			windowWidth  = window.innerWidth,
-			windowHeight = window.innerHeight;	
-		
-		/* 
-		 ---------------------------
-		 Duplicate title
-		 ---------------------------
-		 */
-					
-		var $resTable = $('table.uix-table.is-responsive, .uix-table.is-responsive table'),
-			$thead    = $resTable.find( 'thead' ),
-			$tbody    = $resTable.find( 'tbody' );
-
-        $thead.find( 'th' ).each(function() {
-            var data = $(this).text();
-            if ( !$( this ).attr( 'data-table' ) ) {
-                $( this ).attr( 'data-table', data );
-            }
-        });
-
-        $tbody.find( 'td' ).each(function() {
-            var index = $(this).index();
-            var data = $thead.find( 'th:eq(' + index + ')' ).attr( 'data-table' );
-            $( this ).attr( 'data-table', data );
-        });
-		
-	
-		/* 
-		 ---------------------------
-		 With scroll bars
-		 ---------------------------
-		 */
-		var resTableSCrolled = '.js-uix-table--responsive-scrolled',
-			columns          = $( resTableSCrolled + ' tr').length,
-			rows             = $( resTableSCrolled + ' th').length;
-		
-		tableDataScrolledInit( windowWidth );
-		
-		$window.on( 'resize', function() {
-			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( window.innerWidth != windowWidth ) {
-
-				// Update the window width for next time
-				windowWidth = window.innerWidth;
-
-				// Do stuff here
-				tableDataScrolledInit( windowWidth );
-		
-
-			}
-		});
-		
-		
-		function tableDataScrolledInit( w ) {
-			
-			if ( w <= 768 ) {
-				for ( var i = 0; i < rows; i++ ) {
-					var maxHeight = $( resTableSCrolled + ' th:nth-child(' + i + ')').outerHeight();
-					for ( var j = 0; j < columns; j++ ) {
-						if ($( resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').outerHeight() > maxHeight) {
-							maxHeight = $( resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').outerHeight();
-						}
-						if ($( resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').prop('scrollHeight') > $( resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').outerHeight()) {
-							maxHeight = $( resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').prop( 'scrollHeight' );
-						}
-					}
-					for (var j = 0; j < columns; j++ ) {
-						$( resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').css( 'height', maxHeight );
-						$( resTableSCrolled + ' th:nth-child(' + i + ')').css( 'height', maxHeight );
-					}
-				}
-			} else {
-				$( resTableSCrolled + ' td, '+resTableSCrolled+' th').removeAttr( 'style') ;
-			}
-			
-		}
-		
-
-		
-		
-    };
-
-    APP.components.documentReady.push( APP.TABLE.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
-/* 
- *************************************
- * <!-- Table Sorter -->
- *************************************
- */
-
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.TABLE_SORTER               = APP.TABLE_SORTER || {};
-	APP.TABLE_SORTER.version       = '0.0.2';
-    APP.TABLE_SORTER.documentReady = function( $ ) {
-
-		
-		$( '.js-uix-table-sorter' ).each( function()  {
-			var $sortTable = $( this ).find( 'table' );
-			
-			//add arrows
-			
-			$sortTable.find( "[data-sort-type]" ).each( function()  {
-				if ( $( this ).find( '.uix-table-sorter' ).length == 0 ) {
-					$( this ).wrapInner( '<span class="uix-table-sorter" />' );
-				}
-				
-				var $th     = $( this ),
-					thIndex = $th.index(),
-					thType  = $th.data( 'sort-type' ),
-					inverse = false;
-
-				$th.on( 'click', function() {
-
-					$sortTable.find( 'tbody td' ).filter( function() {
-
-						return $( this ).index() === thIndex;
-
-					}).sortElements(function(a, b) {
-
-
-						var txt1 = $.text([a]).replace(/(<([^>]+)>)/ig, ''),
-							txt2 = $.text([b]).replace(/(<([^>]+)>)/ig, '');
-
-						//type of number
-						if ( thType == 'number' ) {
-							txt1 = Number( txt1.replace(/[^0-9.-]+/g, '' ) );
-							txt2 = Number( txt2.replace(/[^0-9.-]+/g, '' ) );
-						}
-
-						//type of date
-						if ( thType == 'date' ) {
-							txt1 = new Date( txt1 );
-							txt2 = new Date( txt2 );	
-						}	
-
-
-
-						//add filter class
-						$sortTable.find( 'tbody tr' ).addClass( 'js-uix-newsort' );
-
-
-						if ( txt1 > txt2 ) {
-							if ( inverse ) {
-								return -1;
-							} else {
-								return 1;
-							}
-
-						} else {
-
-							if ( inverse ) {
-								return 1;
-							} else {
-								return -1;
-							}	
-
-						}
-
-
-
-
-					},
-					function() {
-
-						// parentNode is the element we want to move
-						return this.parentNode;
-
-					});
-
-					inverse = !inverse;
-
-				});
-
-			});
-
-		
-
-		});
-
-
-		
-    };
-
-    APP.components.documentReady.push( APP.TABLE_SORTER.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
-
-/**
- * jQuery.fn.sortElements
- * --------------
- * @author James Padolsey (http://james.padolsey.com)
- * @version 0.11
- * @updated 18-MAR-2010
- * --------------
- * @param Function comparator:
- *   Exactly the same behaviour as [1,2,3].sort(comparator)
- *   
- * @param Function getSortable
- *   A function that should return the element that is
- *   to be sorted. The comparator will run on the
- *   current collection, but you may want the actual
- *   resulting sort to occur on a parent or another
- *   associated element.
- *   
- *   E.g. $('td').sortElements(comparator, function(){
- *      return this.parentNode; 
- *   })
- *   
- *   The <td>'s parent (<tr>) will be sorted instead
- *   of the <td> itself.
- */
-jQuery.fn.sortElements = (function(){
-    
-    var sort = [].sort;
-    
-    return function(comparator, getSortable) {
-        
-        getSortable = getSortable || function(){return this;};
-        
-        var placements = this.map(function(){
-            
-            var sortElement = getSortable.call(this),
-                parentNode = sortElement.parentNode,
-                
-                // Since the element itself will change position, we have
-                // to have some way of storing it's original position in
-                // the DOM. The easiest way is to have a 'flag' node:
-                nextSibling = parentNode.insertBefore(
-                    document.createTextNode(''),
-                    sortElement.nextSibling
-                );
-            
-            return function() {
-                
-                if (parentNode === this) {
-                    throw new Error(
-                        "You can't sort elements if any one is a descendant of another."
-                    );
-                }
-                
-				
-                // Insert before flag:
-                parentNode.insertBefore(this, nextSibling);
-                // Remove flag:
-                parentNode.removeChild(nextSibling);
-                
-            };
-            
-        });
-       
-        return sort.call(this, comparator).each(function(i){
-            placements[i].call(getSortable.call(this));
-        });
-        
-    };
-    
-})();
-
-/* 
- *************************************
- * <!-- 3D Background 2 -->
+ * <!-- 3D Background 2 with three.js -->
  *************************************
  */
 
@@ -30707,7 +29434,7 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
- * <!-- 3D Background 2 -->
+ * <!-- 3D Background 2 with three.js -->
  *************************************
  */
 /**
@@ -30722,7 +29449,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP._3D_BACKGROUND_THREE2               = APP._3D_BACKGROUND_THREE2 || {};
-	APP._3D_BACKGROUND_THREE2.version       = '0.0.1';
+	APP._3D_BACKGROUND_THREE2.version       = '0.0.2';
     APP._3D_BACKGROUND_THREE2.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -30735,69 +29462,205 @@ APP = ( function ( APP, $, window, document ) {
 			rendererCanvasID          = '3D-background-three-canvas2';
 		
 	
-
-		
 		// Generate one plane geometries mesh to scene
 		//-------------------------------------	
 		var camera,
-			controls,
 			scene,
-			light,
 			renderer,
+			material,
 			displacementSprite,
-			radius       = 100,
-			theta        = 0,
-			clickEnable   = false,
-			newCameraX   = 0,
-			newCameraY   = 0,
-			newCameraZ   = 0;
+			clock = new THREE.Clock();
 		
-		var mouse = new THREE.Vector2(), 
-			INTERSECTED,
-			INTERSECTED_CLICK,
-			raycaster;
+		
+		var mouseVector  = new THREE.Vector2(),
+			vertex       = document.getElementById( 'vertexshader' ).textContent,
+			fragment     = document.getElementById( 'fragmentshader' ).textContent;
+		
+		var mouseX = 0;
+		var mouseY = 0;
+
 		
 		init();
 		render();
 
 		function init() {
 			//camera
-			camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 1, 10000 );
-			camera.position.set(0, 0, -1000);
-			
-
-			
-			//controls
-			controls = new THREE.OrbitControls( camera );
-			controls.autoRotate = true;
-			controls.autoRotateSpeed = 0.5;
-			controls.rotateSpeed = 0.5;
-			controls.zoomSpeed = 1.2;
-			controls.panSpeed = 0.8;
-			controls.enableZoom = true;
-			controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-			controls.dampingFactor = 0.25;
-			controls.screenSpacePanning = false;
-			controls.minDistance = 100;
-			controls.maxDistance = 500;
-			controls.maxPolarAngle = Math.PI / 2;
-			
-			controls.target.set( 30, 167, 81 );
-			controls.update();			
+			camera = new THREE.PerspectiveCamera( 50, windowWidth / windowHeight, .01, 1000 );
+			camera.position.set( 0, 0, 1.8 );
 
 
+			
 			//Scene
 			scene = new THREE.Scene();
 
-			//HemisphereLight
-			scene.add( new THREE.AmbientLight( 0x555555 ) );
+		
+			//WebGL Renderer	
+			renderer = new THREE.WebGLRenderer( { 
+									canvas   : document.getElementById( rendererCanvasID ), //canvas
+									alpha    : true, 
+									antialias: true 
+								} );
+			renderer.setSize( windowWidth, windowHeight );
 
-			light = new THREE.SpotLight( 0xffffff, 1.5 );
-			light.position.set( 0, 500, 2000 );
-			scene.add( light );
 			
 			
+			// Immediately use the texture for material creation
+			material = new THREE.ShaderMaterial({
+				uniforms: {
+					"time": { value: 1.0 },
+					"texture": { value: new THREE.TextureLoader().load( $( '#' + rendererCanvasID ).data( 'filter-texture' ) ) }
+				},
+				fragmentShader: fragment,
+				vertexShader: vertex
+			});			
+			
+			
+			
+			//if use texture
+			material.uniforms.texture.value.wrapS =material.uniforms.texture.value.wrapT = THREE.RepeatWrapping;
+		
+			
+			var geometry = new THREE.SphereGeometry(5, 50, 50, 0, Math.PI * 2, 0, Math.PI * 2);
+			displacementSprite = new THREE.Mesh( geometry, material );
+			scene.add( displacementSprite );
+			
 
+			// Fires when the window changes
+			window.addEventListener( 'resize', onWindowResize, false );
+			document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+			
+			
+		}
+
+		function render() {
+			requestAnimationFrame( render );
+			
+            var delta = clock.getDelta();
+			
+			//To set a background color.
+			renderer.setClearColor( 0x000000 );	
+			
+			
+			material.uniforms.time.value += delta * 5;
+			
+
+			//displacementSprite.rotation.y += delta * 0.5 * 1;
+			//displacementSprite.rotation.x += delta * 0.5 * -1;
+
+			
+			
+			renderer.render( scene, camera );
+			
+			
+		}
+
+
+		function onWindowResize() {
+			camera.aspect = window.innerWidth / window.innerHeight;
+			camera.updateProjectionMatrix();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+		}
+
+		function onDocumentMouseMove( event ) {
+			
+			var rect = renderer.domElement.getBoundingClientRect();
+			displacementSprite.position.z = ( event.clientX - rect.left ) / rect.width * 4 - 1;
+			
+		}
+		
+		
+		
+		function avgArr(arr) {
+			var total = arr.reduce(function(sum, b) {
+				return sum + b
+			});
+			return (total / arr.length);
+		}
+		function maxArr(arr) {
+			return arr.reduce(function(a, b) {
+				return Math.max(a, b);
+			})
+		}
+		function degToRad(degrees) {
+			return degrees * Math.PI / 180;
+		}
+		function round(n, digits) {
+			return Number(n.toFixed(digits));
+		}
+
+		
+		
+    };
+
+    APP.components.documentReady.push( APP._3D_BACKGROUND_THREE2.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+
+
+
+
+/* 
+ *************************************
+ * <!-- 3D Background 3 with three.js -->
+ *************************************
+ */
+/**
+ * APP._3D_BACKGROUND_THREE3
+ * @global
+ * @requires ./examples/assets/js/min/three.min.js
+ * @requires ./src/components/ES5/_plugins-THREE
+ */
+
+
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP._3D_BACKGROUND_THREE3               = APP._3D_BACKGROUND_THREE3 || {};
+	APP._3D_BACKGROUND_THREE3.version       = '0.0.1';
+    APP._3D_BACKGROUND_THREE3.documentReady = function( $ ) {
+
+		//Prevent this module from loading in other pages
+		if ( $( '#3D-background-three-canvas3' ).length == 0 || ! Modernizr.webgl ) return false;
+		
+		
+		var $window                   = $( window ),
+			windowWidth               = window.innerWidth,
+			windowHeight              = window.innerHeight,
+			rendererCanvasID          = '3D-background-three-canvas3';
+		
+	
+		// Generate one plane geometries mesh to scene
+		//-------------------------------------	
+		var camera,
+			scene,
+			renderer,
+			displacementSprite,
+			theta        = 0;
+		
+		var mouseVector  = new THREE.Vector2(),
+			sphereTarget = new THREE.Euler(),
+			xrad         = THREE.Math.degToRad(30),
+			yrad         = THREE.Math.degToRad(10);
+		
+		init();
+		render();
+
+		function init() {
+			//camera
+			camera = new THREE.PerspectiveCamera( 50, windowWidth / windowHeight, .01, 1000 );
+			camera.position.set( 0, 0, 1.8 );
+
+
+			
+			//Scene
+			scene = new THREE.Scene();
+
+		
 			//WebGL Renderer	
 			renderer = new THREE.WebGLRenderer( { 
 									canvas   : document.getElementById( rendererCanvasID ), //canvas
@@ -30808,19 +29671,19 @@ APP = ( function ( APP, $, window, document ) {
 
 			
 			// Immediately use the texture for material creation
-			generateGeometry( 'poly', 200 );
-
+			var sphereGeo = new THREE.SphereBufferGeometry( 2, 12, 12 );
+			var sphereMat = new THREE.MeshBasicMaterial({
+				color: 0x555555,
+				wireframe: true
+			});
+			displacementSprite = new THREE.Mesh( sphereGeo, sphereMat );
+			displacementSprite.position.y = -0.2;
+			scene.add( displacementSprite );
+			
 
 			// Fires when the window changes
 			window.addEventListener( 'resize', onWindowResize, false );
-			
-			
-			// When the mouse moves, call the given function
-			raycaster = new THREE.Raycaster();
 			document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-			document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-			document.addEventListener( 'mouseup', onDocumentMouseUp, false );
-		
 			
 			
 		}
@@ -30830,35 +29693,13 @@ APP = ( function ( APP, $, window, document ) {
 			
             theta += 0.1;
 			
-			
-		
-			//To set a background color.
-			//renderer.setClearColor( 0x000000 );	
-			
-			
-			//Mouse interactions
-			raycaster.setFromCamera( mouse, camera );
-			var intersects = raycaster.intersectObjects( scene.children );
-			if ( intersects.length > 0 ) {
-				if ( INTERSECTED != intersects[ 0 ].object ) {
-					
-					if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
-					INTERSECTED = intersects[ 0 ].object;
-					INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
-					INTERSECTED.material.emissive.setHex( 0xffcc00 );
-				}
-			} else {
-				if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
-				INTERSECTED = null;
-			}
 
-			controls.update();
-			
-			
+			lerp( displacementSprite.rotation, 'x', sphereTarget.x );
+			lerp( displacementSprite.rotation, 'y', sphereTarget.y );
+
+
 			renderer.render( scene, camera );
 			
-			
-
 			
 		}
 
@@ -30871,153 +29712,32 @@ APP = ( function ( APP, $, window, document ) {
 
 		
 		function onDocumentMouseMove( event ) {
-			event.preventDefault();
-			mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-			mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+			// NDC -1 to 1
+			var rect = renderer.domElement.getBoundingClientRect();
+			mouseVector.x = ( event.clientX - rect.left ) / rect.width * 2 - 1;
+			mouseVector.y = ( event.clientY - rect.top ) / rect.height * -2 + 1;
+
+			sphereTarget.y = mouseVector.x * xrad;
+			sphereTarget.x = - mouseVector.y * yrad;
 		}
 		
-		
-		function onDocumentMouseDown( event ) {
-			event.preventDefault();
-			mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-			mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+		//Calculate the interpolation of two vectors
+		function lerp( object, prop, destination ) {
+			if (object && object[prop] !== destination) {
+				object[prop] += (destination - object[prop]) * 0.1;
 
-			clickEnable = true;
-			
-			//Mouse interactions
-			raycaster.setFromCamera( mouse, camera );
-			var intersects = raycaster.intersectObjects( scene.children );
-			if ( intersects.length > 0 ) {
-				if ( INTERSECTED_CLICK != intersects[ 0 ].object ) {
-					
-					INTERSECTED_CLICK = intersects[ 0 ].object;
-					
-					TweenMax.to( INTERSECTED_CLICK.scale, 1, {
-						x: '+=' + ( 200 - INTERSECTED_CLICK.scale.x ) * 0.05,
-						y: '+=' + ( 200 - INTERSECTED_CLICK.scale.y ) * 0.05,
-						z: '+=' + ( 200 - INTERSECTED_CLICK.scale.z ) * 0.05
-					});	
-						
-					
-					INTERSECTED_CLICK.updateMatrix();	
-					
+				if (Math.abs(destination - object[prop]) < 0.001) {
+					object[prop] = destination;
 				}
-			} else {
-				INTERSECTED_CLICK = null;
 			}
-			/*
-			// Parse all the faces
-			for ( var i in intersects ) {
-
-				intersects[ i ].face.material[ 0 ].color.setHex( Math.random() * 0xffffff | 0x80000000 );
-
-			}
-			*/		
-
-			
-			
-			
 		}
-		function onDocumentMouseUp( event ) {
-			event.preventDefault();
-			mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-			mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-			
-			theta = 0;
-			clickEnable = false;
-			
-		}
-			
 		
+	
 		
-		
-		/*
-		 * Batch generation of geometry
-		 *
-		 * @param  {String} objectType     - String of geometry type identifier.
-		 * @param  {Number} numObjects       - The total number of generated objects.
-		 * @return {Void}
-		 */
-		function generateGeometry( objectType, numObjects ) {
-
-            var geometry;
-			if ( objectType == "cube" ) {
-				geometry = new THREE.BoxGeometry( 1, 1, 1 );
-			} else if ( objectType == "sphere" ) {
-				geometry = new THREE.IcosahedronGeometry( 1, 1 );
-
-			} else if ( objectType == "poly" ) {
-				geometry = new THREE.CylinderGeometry( 3, 6, 3, 5, 1 );
-			}
-
-			
-			var applyVertexColors = function( g, c ) {
-
-				g.faces.forEach( function( f ) {
-
-					var n = ( f instanceof THREE.Face3 ) ? 3 : 4;
-
-					for ( var j = 0; j < n; j ++ ) {
-
-						f.vertexColors[ j ] = c;
-
-					}
-
-				} );
-
-			};
-
-			for ( var i = 0; i < numObjects; i ++ ) {
-
-				var position = new THREE.Vector3();
-
-				position.x = Math.random() * 10000 - 5000;
-				position.y = Math.random() * 6000 - 3000;
-				position.z = Math.random() * 8000 - 4000;
-
-				var rotation = new THREE.Euler();
-
-				rotation.x = Math.random() * 2 * Math.PI;
-				rotation.y = Math.random() * 2 * Math.PI;
-				rotation.z = Math.random() * 2 * Math.PI;
-
-				var scale = new THREE.Vector3();
-
-				
-				// give the geom's vertices a random color, to be displayed
-				var color = new THREE.Color();
-				
-				color.setRGB( Math.random() + 0.1, 0, 0 );
-				applyVertexColors( geometry, color );
-
-				
-
-				// Immediately use the texture for material creation
-				var defaultMaterial     = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
-
-				displacementSprite  = new THREE.Mesh( geometry, defaultMaterial );
-				displacementSprite.position.x = Math.random() * 800 - 400;
-				displacementSprite.position.y = Math.random() * 800 - 400;
-				displacementSprite.position.z = Math.random() * 800 - 400;
-				displacementSprite.rotation.x = Math.random() * 2 * Math.PI;
-				displacementSprite.rotation.y = Math.random() * 2 * Math.PI;
-				displacementSprite.rotation.z = Math.random() * 2 * Math.PI;
-				displacementSprite.scale.x = Math.random() + 5;
-				displacementSprite.scale.y = Math.random() + 5;
-				displacementSprite.scale.z = Math.random() + 5;
-				
-				
-				scene.add( displacementSprite );
-
-
-			}
-
-
-		}
 		
     };
 
-    APP.components.documentReady.push( APP._3D_BACKGROUND_THREE2.documentReady );
+    APP.components.documentReady.push( APP._3D_BACKGROUND_THREE3.documentReady );
     return APP;
 
 }( APP, jQuery, window, document ) );
@@ -31495,6 +30215,244 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
+ * <!-- 3D Image Transition with three.js -->
+ *************************************
+ */
+/**
+ * APP._3D_IMAGE_TRANSITION
+ * @global
+ * @requires ./examples/assets/js/min/three.min.js
+ * @requires ./src/components/ES5/_plugins-THREE
+ */
+
+
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP._3D_IMAGE_TRANSITION               = APP._3D_IMAGE_TRANSITION || {};
+	APP._3D_IMAGE_TRANSITION.version       = '0.0.1';
+    APP._3D_IMAGE_TRANSITION.documentReady = function( $ ) {
+
+		//Prevent this module from loading in other pages
+		if ( $( '#3D-imagetransition-three-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
+		
+		
+		var $window                   = $( window ),
+			windowWidth               = window.innerWidth,
+			windowHeight              = window.innerHeight,
+			rendererCanvasID          = '3D-imagetransition-three-canvas';
+		
+	
+		// Generate one plane geometries mesh to scene
+		//-------------------------------------	
+		var camera,
+			controls,
+			scene,
+			light,
+			renderer,
+			displacementSprite,
+			theta        = 0;
+		
+		
+		var vertex       = document.getElementById( 'vertexshader' ).textContent,
+			fragment     = document.getElementById( 'fragmentshader' ).textContent,
+			filterMaterial,
+			offsetWidth  = 1400,
+			offsetHeight = 450;
+
+
+		init();
+		render();
+
+		
+		function init() {
+			//camera
+			camera = new THREE.PerspectiveCamera( 75, offsetWidth / offsetHeight, 1, 10000 );
+			camera.position.set(0, 0, 1000);
+			
+
+			//controls
+			controls = new THREE.OrbitControls( camera );
+			controls.autoRotate = false;
+			controls.autoRotateSpeed = 0.5;
+			controls.rotateSpeed = 0.5;
+			controls.zoomSpeed = 1.2;
+			controls.panSpeed = 0.8;
+			controls.enableZoom = false;
+			controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+			controls.dampingFactor = 0.25;
+			controls.screenSpacePanning = false;
+			controls.minDistance = 100;
+			controls.maxDistance = 500;
+			controls.maxPolarAngle = Math.PI / 2;
+			
+			controls.target.set( 30, 167, 81 );
+			controls.update();			
+
+			
+
+			//Scene
+			scene = new THREE.Scene();
+	
+
+			//HemisphereLight
+			scene.add( new THREE.AmbientLight( 0x555555 ) );
+
+			light = new THREE.SpotLight( 0xffffff, 1.5 );
+			light.position.set( 0, 500, 2000 );
+			scene.add( light );
+			
+			
+
+			//WebGL Renderer	
+			renderer = new THREE.WebGLRenderer( { 
+									canvas   : document.getElementById( rendererCanvasID ), //canvas
+									alpha    : true, 
+									antialias: true 
+								} );
+			renderer.setSize( offsetWidth, offsetHeight );
+
+			
+			// Immediately use the texture for material creation
+			// Create a texture loader so we can load our image file
+			var imgs = [
+				templateUrl + '/assets/images/demo/cool-slider-1.jpg',
+				templateUrl + '/assets/images/demo/cool-slider-2.jpg'
+			];
+			
+			var loader = new THREE.TextureLoader();
+			loader.crossOrigin = '';
+
+
+			var texture1     = loader.load( imgs[0] ),
+				texture2     = loader.load( imgs[1] ),
+				intensity    = 1,
+				dispImage    = $( '#' + rendererCanvasID ).data( 'filter-texture' ), //Load displacement image
+			    disp         = loader.load( dispImage );
+		
+			disp.wrapS = disp.wrapT = THREE.RepeatWrapping;
+
+			texture1.magFilter = texture2.magFilter = THREE.LinearFilter;
+			texture1.minFilter = texture2.minFilter = THREE.LinearFilter;
+
+			texture1.anisotropy = renderer.getMaxAnisotropy();
+			texture2.anisotropy = renderer.getMaxAnisotropy();
+
+			
+			var geometry = new THREE.PlaneBufferGeometry(
+				offsetWidth,
+				offsetHeight,
+				1
+			);
+			
+			
+			
+			filterMaterial = new THREE.ShaderMaterial({
+				uniforms: {
+					effectFactor: { type: "f", value: intensity },
+					dispFactor: { type: "f", value: 0.0 },
+					texture: { type: "t", value: texture1 },
+					texture2: { type: "t", value: texture2 },
+					disp: { type: "t", value: disp }
+				},
+
+				vertexShader: vertex,
+				fragmentShader: fragment,
+				transparent: true,
+				opacity: 1.0
+			});
+	
+			
+			displacementSprite = new THREE.Mesh( geometry, filterMaterial );
+			displacementSprite.position.set( 0, 0, 0 );
+			scene.add( displacementSprite );
+
+			
+//			imgs.forEach( function( element ) {
+//
+//				var loader = new THREE.TextureLoader();
+//				var material = new THREE.MeshLambertMaterial({
+//					map: loader.load( element )
+//				});
+//				var geometry = new THREE.PlaneGeometry( offsetWidth, offsetHeight );
+//				var displacementSprite = new THREE.Mesh( geometry, material );
+//				displacementSprite.position.set( 0, 0, 0 )
+//				scene.add( displacementSprite );
+//			});
+
+			
+
+
+			// Fires when the window changes
+			window.addEventListener( 'resize', onWindowResize, false );
+			
+			
+			// When the mouse moves, call the given function
+			document.getElementById( rendererCanvasID ).addEventListener( 'mouseenter', onDocumentMouseEnter, false );
+			document.getElementById( rendererCanvasID ).addEventListener( 'mouseleave', onDocumentMouseLeave, false );
+		
+			
+			
+		}
+		
+
+		function render() {
+			requestAnimationFrame( render );
+			
+            theta += 0.1;
+			
+			
+			//To set a background color.
+			//renderer.setClearColor( 0x000000 );	
+			
+			
+			controls.update();
+			
+			renderer.render( scene, camera );
+			
+			
+			
+		}
+
+
+		function onWindowResize() {
+			camera.aspect = window.innerWidth / window.innerHeight;
+			camera.updateProjectionMatrix();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+		}
+
+		
+		function onDocumentMouseEnter( event ) {
+            TweenMax.to( filterMaterial.uniforms.dispFactor, 1.5, {
+                value: 1,
+                ease: Expo.easeOut
+            });	
+		}
+		
+
+		function onDocumentMouseLeave( event ) {
+            TweenMax.to( filterMaterial.uniforms.dispFactor, 1, {
+                value: 0,
+                ease: Expo.easeOut
+            });	
+		}
+		
+    };
+
+    APP.components.documentReady.push( APP._3D_IMAGE_TRANSITION.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+
+
+
+
+/* 
+ *************************************
  * <!-- 3D Model -->
  *************************************
  */
@@ -31536,12 +30494,9 @@ APP = ( function ( APP, $, window, document ) {
 			displacementSprite,
 			radius       = 100,
 			theta        = 0,
-			clickEnable   = false,
-			newCameraX   = 0,
-			newCameraY   = 0,
-			newCameraZ   = 0;
+			clickEnable   = false;
 		
-		var mouse = new THREE.Vector2(), 
+		var mouseVector = new THREE.Vector2(), 
 			INTERSECTED,
 			INTERSECTED_CLICK,
 			raycaster;
@@ -31663,7 +30618,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			//Mouse interactions
-			raycaster.setFromCamera( mouse, camera );
+			raycaster.setFromCamera( mouseVector, camera );
 			var intersects = raycaster.intersectObjects( scene.children );
 			if ( intersects.length > 0 ) {
 				if ( INTERSECTED != intersects[ 0 ].object ) {
@@ -31698,20 +30653,20 @@ APP = ( function ( APP, $, window, document ) {
 		
 		function onDocumentMouseMove( event ) {
 			event.preventDefault();
-			mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-			mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+			mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+			mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 		}
 		
 		
 		function onDocumentMouseDown( event ) {
 			event.preventDefault();
-			mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-			mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+			mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+			mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 
 			clickEnable = true;
 			
 			//Mouse interactions
-			raycaster.setFromCamera( mouse, camera );
+			raycaster.setFromCamera( mouseVector, camera );
 			var intersects = raycaster.intersectObjects( scene.children );
 			if ( intersects.length > 0 ) {
 				if ( INTERSECTED_CLICK != intersects[ 0 ].object ) {
@@ -31746,8 +30701,8 @@ APP = ( function ( APP, $, window, document ) {
 		}
 		function onDocumentMouseUp( event ) {
 			event.preventDefault();
-			mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-			mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+			mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+			mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 			
 			theta = 0;
 			clickEnable = false;
@@ -32686,6 +31641,646 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
+
+/* 
+ *************************************
+ * <!-- 3D Mouse Interaction with three.js -->
+ *************************************
+ */
+/**
+ * APP._3D_MOUSE_INTERACTION
+ * @global
+ * @requires ./examples/assets/js/min/three.min.js
+ * @requires ./src/components/ES5/_plugins-THREE
+ */
+
+
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP._3D_MOUSE_INTERACTION               = APP._3D_MOUSE_INTERACTION || {};
+	APP._3D_MOUSE_INTERACTION.version       = '0.0.1';
+    APP._3D_MOUSE_INTERACTION.documentReady = function( $ ) {
+
+		//Prevent this module from loading in other pages
+		if ( $( '#3D-mouseinteraction-three-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
+		
+		
+		var $window                   = $( window ),
+			windowWidth               = window.innerWidth,
+			windowHeight              = window.innerHeight,
+			rendererCanvasID          = '3D-mouseinteraction-three-canvas';
+		
+	
+
+		
+		// Generate one plane geometries mesh to scene
+		//-------------------------------------	
+		var camera,
+			controls,
+			scene,
+			light,
+			renderer,
+			displacementSprite,
+			radius       = 100,
+			theta        = 0,
+			clickEnable   = false;
+		
+		
+		var mouseVector = new THREE.Vector2(), 
+			raycaster,
+			intersects,
+			INTERSECTED,
+			nucleus,
+			atoms = [];
+		
+		
+		init();
+		render();
+
+		function init() {
+			//camera
+			camera = new THREE.PerspectiveCamera( 75, windowWidth / windowHeight, 1, 10000 );
+			camera.position.set(0, 0, 1300);
+			
+
+			//controls
+			controls = new THREE.OrbitControls( camera );
+			controls.autoRotate = false;
+			controls.autoRotateSpeed = 0.5;
+			controls.rotateSpeed = 0.5;
+			controls.zoomSpeed = 1.2;
+			controls.panSpeed = 0.8;
+			controls.enableZoom = true;
+			controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+			controls.dampingFactor = 0.25;
+			controls.screenSpacePanning = false;
+			controls.minDistance = 100;
+			controls.maxDistance = 500;
+			controls.maxPolarAngle = Math.PI / 2;
+			
+			controls.target.set( 30, 167, 81 );
+			controls.update();			
+
+			
+
+			//Scene
+			scene = new THREE.Scene();
+
+			//HemisphereLight
+			scene.add( new THREE.AmbientLight( 0x555555 ) );
+
+			light = new THREE.SpotLight( 0xffffff, 1.5 );
+			light.position.set( 0, 500, 2000 );
+			scene.add( light );
+			
+			
+
+			//WebGL Renderer	
+			renderer = new THREE.WebGLRenderer( { 
+									canvas   : document.getElementById( rendererCanvasID ), //canvas
+									alpha    : true, 
+									antialias: true 
+								} );
+			renderer.setSize( windowWidth, windowHeight );
+
+			
+			// Immediately use the texture for material creation
+			generateGeometry( 'poly', 15 );
+
+
+			// Fires when the window changes
+			window.addEventListener( 'resize', onWindowResize, false );
+			
+			
+			// When the mouse moves, call the given function
+			raycaster = new THREE.Raycaster();
+			document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+			document.getElementById( rendererCanvasID ).addEventListener( 'click', onDocumentMouseDown, false );
+			document.addEventListener( 'mouseup', onDocumentMouseUp, false );
+		
+			
+			
+		}
+		
+
+		function render() {
+			requestAnimationFrame( render );
+			
+            theta += 0.1;
+			
+			
+			//To set a background color.
+			//renderer.setClearColor( 0x000000 );	
+			
+			
+			//Mouse interactions
+			raycaster.setFromCamera( mouseVector, camera );
+			intersects = raycaster.intersectObjects( atoms );
+			//intersects = raycaster.intersectObjects( scene.children );
+			if ( intersects.length > 0 ) {
+
+				if ( INTERSECTED != intersects[ 0 ].object ) {
+
+					// restore previous intersection object (if it exists) to its original color
+					if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+
+					INTERSECTED = intersects[ 0 ].object;
+					INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
+					INTERSECTED.material.emissive.setHex( 0xff0000 );
+
+				}
+
+			} else {
+
+				// restore previous intersection object (if it exists) to its original color
+				if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+
+				//by setting current intersection object to "nothing"
+				INTERSECTED = null;
+
+			}
+
+			
+			controls.update();
+			
+			renderer.render( scene, camera );
+			
+			
+			
+		}
+
+
+		function onWindowResize() {
+			camera.aspect = window.innerWidth / window.innerHeight;
+			camera.updateProjectionMatrix();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+		}
+
+		
+		function onDocumentMouseMove( event ) {
+			event.preventDefault();
+			mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+			mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+		}
+		
+
+		function onDocumentMouseDown( event ) {
+			event.preventDefault();
+			mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+			mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
+			clickEnable = true;
+			
+			//Mouse interactions
+			raycaster.setFromCamera( mouseVector, camera );
+			intersects = raycaster.intersectObjects( atoms );
+			//intersects = raycaster.intersectObjects( scene.children );
+			if ( intersects.length > 0 && intersects[0].object.name.indexOf( 'nucleus' ) >= 0 ) {
+				
+				console.log( intersects[0].object.name );
+				
+				//---Change object size
+//				if ( typeof intersects[ 0 ] != typeof undefined ) {
+//					var obj = intersects[ 0 ].object;
+//
+//
+//					TweenMax.to( obj.scale, 1, {
+//						x: '+=' + ( 200 - obj.scale.x ) * 0.05,
+//						y: '+=' + ( 200 - obj.scale.y ) * 0.05,
+//						z: '+=' + ( 200 - obj.scale.z ) * 0.05
+//					});	
+//
+//
+//					obj.updateMatrix();	
+//	
+//				}
+				
+
+
+				//---Change object position
+				var targetAtomPos = intersects[0].object.position;
+
+				console.log(targetAtomPos);
+				// targetAtomPos.tween.pause();
+				var destinationPos = targetAtomPos.clone();
+				TweenMax.to(controls.target, 2,{ x:destinationPos.x, y:destinationPos.y, z:destinationPos.z});
+				TweenMax.to(camera.position, 2,{ x:destinationPos.x, y:destinationPos.y, z:destinationPos.z+100,
+					onUpdate:function(){
+						camera.up.set(0,1,0);
+						camera.updateProjectionMatrix();
+					}
+				});
+
+			} else {
+				
+				 //Change object position
+				 TweenMax.to(controls.target, 2,{ x:0, y:0, z:0,
+				 	onComplete:function(){
+				 		TweenMax.resumeAll();
+				 	}
+				 });
+			}	
+			
+
+			
+		}
+		
+		
+		function onDocumentMouseUp( event ) {
+			event.preventDefault();
+			mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+			mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+			
+			theta = 0;
+			clickEnable = false;
+			
+		}
+			
+		
+		
+		
+		/*
+		 * Batch generation of geometry
+		 *
+		 * @param  {String} objectType     - String of geometry type identifier.
+		 * @param  {Number} numObjects       - The total number of generated objects.
+		 * @return {Void}
+		 */
+		function generateGeometry( objectType, numObjects ) {
+
+			
+			//set color
+			var applyVertexColors = function( g, c ) {
+				g.faces.forEach( function( f ) {
+					var n = ( f instanceof THREE.Face3 ) ? 3 : 4;
+					for ( var j = 0; j < n; j ++ ) {
+						f.vertexColors[ j ] = c;
+					}
+				} );
+			};
+
+			for ( var i = 0; i < numObjects; i ++ ) {
+
+				
+				var geometry;
+				if ( objectType == "cube" ) {
+					geometry = new THREE.BoxGeometry( 1, 1, 1 );
+				} else if ( objectType == "sphere" ) {
+					geometry = new THREE.IcosahedronGeometry( 1, 1 );
+
+				} else if ( objectType == "poly" ) {
+					geometry = new THREE.CylinderGeometry( 3, 6, 3, 5, 1 );
+				}
+
+				
+				var position = new THREE.Vector3();
+
+				position.x = Math.random() * 500;
+				position.y = Math.random() * 400;
+				position.z = Math.random() * 300;
+
+				var rotation = new THREE.Euler();
+
+				rotation.x = Math.random() * 2 * Math.PI;
+				rotation.y = Math.random() * 2 * Math.PI;
+				rotation.z = Math.random() * 2 * Math.PI;
+
+				
+				var scale = new THREE.Vector3();
+
+				
+				// give the geom's vertices a random color, to be displayed
+				var color = new THREE.Color();
+				
+				color.setRGB( Math.random(), Math.random(), Math.random() );
+				applyVertexColors( geometry, color );
+
+				
+				// Immediately use the texture for material creation
+				var defaultMaterial     = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
+
+				displacementSprite  = new THREE.Mesh( geometry, defaultMaterial );
+				displacementSprite.name = 'nucleus-' + i;
+				displacementSprite.position.x = Math.random() * 800 - 400;
+				displacementSprite.position.y = Math.random() * 800 - 400;
+				displacementSprite.position.z = Math.random() * 800 - 400;
+				displacementSprite.rotation.x = Math.random() * 2 * Math.PI;
+				displacementSprite.rotation.y = Math.random() * 2 * Math.PI;
+				displacementSprite.rotation.z = Math.random() * 2 * Math.PI;
+				displacementSprite.scale.x = Math.random() + 5;
+				displacementSprite.scale.y = Math.random() + 5;
+				displacementSprite.scale.z = Math.random() + 5;
+				
+				
+				scene.add( displacementSprite );
+				atoms.push( displacementSprite );
+
+
+			}
+
+
+		}
+		
+    };
+
+    APP.components.documentReady.push( APP._3D_MOUSE_INTERACTION.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+
+
+
+
+/* 
+ *************************************
+ * <!-- Responsive Table -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.TABLE               = APP.TABLE || {};
+	APP.TABLE.version       = '0.0.2';
+    APP.TABLE.documentReady = function( $ ) {
+
+
+		
+		var $window      = $( window ),
+			windowWidth  = window.innerWidth,
+			windowHeight = window.innerHeight;	
+		
+		/* 
+		 ---------------------------
+		 Duplicate title
+		 ---------------------------
+		 */
+					
+		var $resTable = $('table.uix-table.is-responsive, .uix-table.is-responsive table'),
+			$thead    = $resTable.find( 'thead' ),
+			$tbody    = $resTable.find( 'tbody' );
+
+        $thead.find( 'th' ).each(function() {
+            var data = $(this).text();
+            if ( !$( this ).attr( 'data-table' ) ) {
+                $( this ).attr( 'data-table', data );
+            }
+        });
+
+        $tbody.find( 'td' ).each(function() {
+            var index = $(this).index();
+            var data = $thead.find( 'th:eq(' + index + ')' ).attr( 'data-table' );
+            $( this ).attr( 'data-table', data );
+        });
+		
+	
+		/* 
+		 ---------------------------
+		 With scroll bars
+		 ---------------------------
+		 */
+		var resTableSCrolled = '.js-uix-table--responsive-scrolled',
+			columns          = $( resTableSCrolled + ' tr').length,
+			rows             = $( resTableSCrolled + ' th').length;
+		
+		tableDataScrolledInit( windowWidth );
+		
+		$window.on( 'resize', function() {
+			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+			if ( window.innerWidth != windowWidth ) {
+
+				// Update the window width for next time
+				windowWidth = window.innerWidth;
+
+				// Do stuff here
+				tableDataScrolledInit( windowWidth );
+		
+
+			}
+		});
+		
+		
+		function tableDataScrolledInit( w ) {
+			
+			if ( w <= 768 ) {
+				for ( var i = 0; i < rows; i++ ) {
+					var maxHeight = $( resTableSCrolled + ' th:nth-child(' + i + ')').outerHeight();
+					for ( var j = 0; j < columns; j++ ) {
+						if ($( resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').outerHeight() > maxHeight) {
+							maxHeight = $( resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').outerHeight();
+						}
+						if ($( resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').prop('scrollHeight') > $( resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').outerHeight()) {
+							maxHeight = $( resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').prop( 'scrollHeight' );
+						}
+					}
+					for (var j = 0; j < columns; j++ ) {
+						$( resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').css( 'height', maxHeight );
+						$( resTableSCrolled + ' th:nth-child(' + i + ')').css( 'height', maxHeight );
+					}
+				}
+			} else {
+				$( resTableSCrolled + ' td, '+resTableSCrolled+' th').removeAttr( 'style') ;
+			}
+			
+		}
+		
+
+		
+		
+    };
+
+    APP.components.documentReady.push( APP.TABLE.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+/* 
+ *************************************
+ * <!-- Table Sorter -->
+ *************************************
+ */
+
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.TABLE_SORTER               = APP.TABLE_SORTER || {};
+	APP.TABLE_SORTER.version       = '0.0.2';
+    APP.TABLE_SORTER.documentReady = function( $ ) {
+
+		
+		$( '.js-uix-table-sorter' ).each( function()  {
+			var $sortTable = $( this ).find( 'table' );
+			
+			//add arrows
+			
+			$sortTable.find( "[data-sort-type]" ).each( function()  {
+				if ( $( this ).find( '.uix-table-sorter' ).length == 0 ) {
+					$( this ).wrapInner( '<span class="uix-table-sorter" />' );
+				}
+				
+				var $th     = $( this ),
+					thIndex = $th.index(),
+					thType  = $th.data( 'sort-type' ),
+					inverse = false;
+
+				$th.on( 'click', function() {
+
+					$sortTable.find( 'tbody td' ).filter( function() {
+
+						return $( this ).index() === thIndex;
+
+					}).sortElements(function(a, b) {
+
+
+						var txt1 = $.text([a]).replace(/(<([^>]+)>)/ig, ''),
+							txt2 = $.text([b]).replace(/(<([^>]+)>)/ig, '');
+
+						//type of number
+						if ( thType == 'number' ) {
+							txt1 = Number( txt1.replace(/[^0-9.-]+/g, '' ) );
+							txt2 = Number( txt2.replace(/[^0-9.-]+/g, '' ) );
+						}
+
+						//type of date
+						if ( thType == 'date' ) {
+							txt1 = new Date( txt1 );
+							txt2 = new Date( txt2 );	
+						}	
+
+
+
+						//add filter class
+						$sortTable.find( 'tbody tr' ).addClass( 'js-uix-newsort' );
+
+
+						if ( txt1 > txt2 ) {
+							if ( inverse ) {
+								return -1;
+							} else {
+								return 1;
+							}
+
+						} else {
+
+							if ( inverse ) {
+								return 1;
+							} else {
+								return -1;
+							}	
+
+						}
+
+
+
+
+					},
+					function() {
+
+						// parentNode is the element we want to move
+						return this.parentNode;
+
+					});
+
+					inverse = !inverse;
+
+				});
+
+			});
+
+		
+
+		});
+
+
+		
+    };
+
+    APP.components.documentReady.push( APP.TABLE_SORTER.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+
+/**
+ * jQuery.fn.sortElements
+ * --------------
+ * @author James Padolsey (http://james.padolsey.com)
+ * @version 0.11
+ * @updated 18-MAR-2010
+ * --------------
+ * @param Function comparator:
+ *   Exactly the same behaviour as [1,2,3].sort(comparator)
+ *   
+ * @param Function getSortable
+ *   A function that should return the element that is
+ *   to be sorted. The comparator will run on the
+ *   current collection, but you may want the actual
+ *   resulting sort to occur on a parent or another
+ *   associated element.
+ *   
+ *   E.g. $('td').sortElements(comparator, function(){
+ *      return this.parentNode; 
+ *   })
+ *   
+ *   The <td>'s parent (<tr>) will be sorted instead
+ *   of the <td> itself.
+ */
+jQuery.fn.sortElements = (function(){
+    
+    var sort = [].sort;
+    
+    return function(comparator, getSortable) {
+        
+        getSortable = getSortable || function(){return this;};
+        
+        var placements = this.map(function(){
+            
+            var sortElement = getSortable.call(this),
+                parentNode = sortElement.parentNode,
+                
+                // Since the element itself will change position, we have
+                // to have some way of storing it's original position in
+                // the DOM. The easiest way is to have a 'flag' node:
+                nextSibling = parentNode.insertBefore(
+                    document.createTextNode(''),
+                    sortElement.nextSibling
+                );
+            
+            return function() {
+                
+                if (parentNode === this) {
+                    throw new Error(
+                        "You can't sort elements if any one is a descendant of another."
+                    );
+                }
+                
+				
+                // Insert before flag:
+                parentNode.insertBefore(this, nextSibling);
+                // Remove flag:
+                parentNode.removeChild(nextSibling);
+                
+            };
+            
+        });
+       
+        return sort.call(this, comparator).each(function(i){
+            placements[i].call(getSortable.call(this));
+        });
+        
+    };
+    
+})();
 
 
 /* 

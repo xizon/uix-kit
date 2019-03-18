@@ -22,6 +22,9 @@ APP = ( function ( APP, $, window, document ) {
 	APP.ADVANCED_SLIDER_FILTER.version       = '0.1.5';
     APP.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
+		
+		// Remove pixi.js banner from the console
+		PIXI.utils.skipHello();		
 	
 		var $window                   = $( window ),
 			windowWidth               = window.innerWidth,
