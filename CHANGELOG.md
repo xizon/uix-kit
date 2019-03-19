@@ -1,5 +1,11 @@
 # Changelog
 
+
+#### = 3.3.3 (March 20, 2019) =
+
+* Tweak: Optimized module "3D Background".
+
+
 #### = 3.3.2 (March 18, 2019) =
 
 * New: Add a new module "3D Mouse Interaction".

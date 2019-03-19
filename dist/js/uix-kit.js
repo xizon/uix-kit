@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.3.2
+ * ## Version             :  3.3.3
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  March 18, 2019
+ * ## Last Update         :  March 19, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -29217,7 +29217,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP._3D_BACKGROUND_THREE               = APP._3D_BACKGROUND_THREE || {};
-	APP._3D_BACKGROUND_THREE.version       = '0.0.1';
+	APP._3D_BACKGROUND_THREE.version       = '0.0.2';
     APP._3D_BACKGROUND_THREE.documentReady = function( $ ) {
 
 		
@@ -29241,16 +29241,23 @@ APP = ( function ( APP, $, window, document ) {
 			light,
 			renderer,
 			displacementSprite,
+			shaderSprite,
 			clock = new THREE.Clock();
-
+		
+		var skyMaterial,
+			sunSphere,
+			vertex       = document.getElementById( 'vertexshader' ).textContent,
+			fragment     = document.getElementById( 'fragmentshader' ).textContent;
+	
 		
 		init();
 		render();
 
 		function init() {
 			//camera
-			camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 1, 10000 );
-			camera.position.set(0, 0, -1000);
+			camera = new THREE.PerspectiveCamera( 60, windowWidth / windowHeight, 100, 2000000 );
+			camera.position.set( 0, 100, 2000 );
+
 
 			//controls
 			controls = new THREE.OrbitControls( camera );
@@ -29285,13 +29292,80 @@ APP = ( function ( APP, $, window, document ) {
 								} );
 			renderer.setSize( windowWidth, windowHeight );
 
+			/**
+			 * @author zz85 / https://github.com/zz85
+			 *
+			 * Based on "A Practical Analytic Model for Daylight"
+			 * aka The Preetham Model, the de facto standard analytic skydome model
+			 * http://www.cs.utah.edu/~shirley/papers/sunsky/sunsky.pdf
+			 *
+			 * First implemented by Simon Wallner
+			 * http://www.simonwallner.at/projects/atmospheric-scattering
+			 *
+			 * Improved by Martin Upitis
+			 * http://blenderartists.org/forum/showthread.php?245954-preethams-sky-impementation-HDR
+			 *
+			 * Three.js integration by zz85 http://twitter.com/blurspline
+			*/
+			// Add Sky
+			skyMaterial = new THREE.ShaderMaterial({
+				uniforms: {
+					"luminance": { value: 1 },
+					"turbidity": { value: 2 },
+					"rayleigh": { value: 1 },
+					"mieCoefficient": { value: 0.005 },
+					"mieDirectionalG": { value: 0.8 },
+					"sunPosition": { value: new THREE.Vector3() }
+				},
+				fragmentShader: fragment,
+				vertexShader: vertex,
+				side: THREE.BackSide
+			});
+			
+			skyMaterial.uniforms.turbidity.value = 30;
+			skyMaterial.uniforms.rayleigh.value = 2;
+			skyMaterial.uniforms.luminance.value = 1.1;
+			skyMaterial.uniforms.mieCoefficient.value = 0.005;
+			skyMaterial.uniforms.mieDirectionalG.value = 0.811;
+			
+			
+			var skyGeometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
+			shaderSprite = new THREE.Mesh( skyGeometry, skyMaterial );
+			shaderSprite.scale.setScalar( 450000 );
+			shaderSprite.renderDepth = 100000;
+			scene.add( shaderSprite );
+
+			
+			// Add Sun
+			sunSphere = new THREE.Mesh(
+				new THREE.SphereBufferGeometry( 20000, 16, 8 ),
+				new THREE.MeshBasicMaterial( { color: 0xffffff } )
+			);
+			sunSphere.position.y = - 700000;
+			sunSphere.visible = false;
+			scene.add( sunSphere );
+			
+			
+			skyMaterial.uniforms.sunPosition.value.copy( sunSphere.position );
+			
+
+			var theta = Math.PI * ( 0.49 - 0.5 );
+			var phi = 2 * Math.PI * ( 0.25 - 0.5 );
+			var distance = 400000;
+
+			sunSphere.position.x = distance * Math.cos( phi );
+			sunSphere.position.y = distance * Math.sin( phi ) * Math.sin( theta );
+			sunSphere.position.z = distance * Math.sin( phi ) * Math.cos( theta );
+
+			skyMaterial.uniforms.sunPosition.value = sunSphere.position;
 			
 			// Immediately use the texture for material creation
 			var defaultMaterial    = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
 			
 			displacementSprite = new THREE.Mesh( generateGeometry( 'sphere', 200 ), defaultMaterial );
 			scene.add( displacementSprite );
-
+			
+			
 
 			// Fires when the window changes
 			window.addEventListener( 'resize', onWindowResize, false );
@@ -29419,6 +29493,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 
 		}
+		
 
 		
     };
@@ -29673,7 +29748,7 @@ APP = ( function ( APP, $, window, document ) {
 			// Immediately use the texture for material creation
 			var sphereGeo = new THREE.SphereBufferGeometry( 2, 12, 12 );
 			var sphereMat = new THREE.MeshBasicMaterial({
-				color: 0x555555,
+				color: 0x494949,
 				wireframe: true
 			});
 			displacementSprite = new THREE.Mesh( sphereGeo, sphereMat );
@@ -29692,6 +29767,10 @@ APP = ( function ( APP, $, window, document ) {
 			requestAnimationFrame( render );
 			
             theta += 0.1;
+			
+			//To set a background color.
+			renderer.setClearColor( 0x000000 );	
+			
 			
 
 			lerp( displacementSprite.rotation, 'x', sphereTarget.x );
@@ -31771,7 +31850,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			//To set a background color.
-			//renderer.setClearColor( 0x000000 );	
+			renderer.setClearColor( 0x000000 );	
 			
 			
 			//Mouse interactions

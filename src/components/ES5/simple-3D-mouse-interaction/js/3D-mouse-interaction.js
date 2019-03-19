@@ -127,7 +127,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			//To set a background color.
-			//renderer.setClearColor( 0x000000 );	
+			renderer.setClearColor( 0x000000 );	
 			
 			
 			//Mouse interactions

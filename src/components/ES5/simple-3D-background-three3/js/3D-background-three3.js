@@ -67,7 +67,7 @@ APP = ( function ( APP, $, window, document ) {
 			// Immediately use the texture for material creation
 			var sphereGeo = new THREE.SphereBufferGeometry( 2, 12, 12 );
 			var sphereMat = new THREE.MeshBasicMaterial({
-				color: 0x555555,
+				color: 0x494949,
 				wireframe: true
 			});
 			displacementSprite = new THREE.Mesh( sphereGeo, sphereMat );
@@ -86,6 +86,10 @@ APP = ( function ( APP, $, window, document ) {
 			requestAnimationFrame( render );
 			
             theta += 0.1;
+			
+			//To set a background color.
+			renderer.setClearColor( 0x000000 );	
+			
 			
 
 			lerp( displacementSprite.rotation, 'x', sphereTarget.x );
