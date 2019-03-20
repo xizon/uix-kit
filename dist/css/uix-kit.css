@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit Demo
  * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.3.3
+ * ## Version             :  3.3.4
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  March 19, 2019
+ * ## Last Update         :  March 20, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -992,7 +992,18 @@ ul.uix-entry__meta {
   width: 100%;
   /* Vertical Center */
   top: 50%;
-  transform: translateY(-50%); }
+  transform: translateY(-50%);
+  /* Vertical Bottom */
+  /* Vertical Top */ }
+  .uix-v-align--absolute.uix-v-align--absolute--b,
+  .uix-v-align--relative.uix-v-align--absolute--b {
+    top: auto;
+    bottom: 0;
+    transform: translateY(0); }
+  .uix-v-align--absolute.uix-v-align--absolute--t,
+  .uix-v-align--relative.uix-v-align--absolute--t {
+    top: 0;
+    transform: translateY(0); }
 
 .uix-v-align--relative {
   position: relative; }
@@ -1005,10 +1016,16 @@ ul.uix-entry__meta {
 .uix-v-align--table {
   display: table;
   width: 100%;
-  height: 100%; }
+  height: 100%;
+  /* Vertical Bottom */
+  /* Vertical Top */ }
   .uix-v-align--table > div {
     display: table-cell;
     vertical-align: middle; }
+  .uix-v-align--table.uix-v-align--table--b > div {
+    vertical-align: bottom; }
+  .uix-v-align--table.uix-v-align--table--t > div {
+    vertical-align: top; }
 
 /* 
  ---------------------------
@@ -5966,17 +5983,13 @@ ol.uix-flexslider__control-paging {
     font-size: 1.2em;
     font-weight: 500;
     color: #AEAEAE; }
-  .uix-special-footer__container .uix-special-footer__menus::after {
-    content: '';
-    display: block;
-    clear: both;
-    width: 100%; }
-  .uix-special-footer__container .uix-special-footer__menus > .uix-special-footer__menus__list {
-    width: 12rem;
-    float: left; }
-    .uix-special-footer__container .uix-special-footer__menus > .uix-special-footer__menus__list li {
-      margin: .5rem 0;
-      display: block; }
+  .uix-special-footer__container .uix-special-footer__menus {
+    display: flex; }
+    .uix-special-footer__container .uix-special-footer__menus > .uix-special-footer__menus__list {
+      flex: 1; }
+      .uix-special-footer__container .uix-special-footer__menus > .uix-special-footer__menus__list li {
+        margin: .5rem 0;
+        display: block; }
 
 @media all and (max-width: 768px) {
   .uix-special-footer__container {
@@ -5992,8 +6005,12 @@ ol.uix-flexslider__control-paging {
     .uix-special-footer__container .uix-t-r {
       float: none;
       text-align: center; }
+    .uix-special-footer__container .uix-special-footer__menus.uix-special-footer__menus--mobile-nowrap {
+      flex-wrap: nowrap; }
+    .uix-special-footer__container .uix-special-footer__menus.uix-special-footer__menus--mobile-wrap {
+      flex-wrap: wrap; }
     .uix-special-footer__container .uix-special-footer__menus > .uix-special-footer__menus__list {
-      width: 33.3%; } }
+      flex: 1 100%; } }
 
 /* ====================================================== 
    <!-- Form Progress -->     

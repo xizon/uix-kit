@@ -29,7 +29,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.FORM               = APP.FORM || {};
-	APP.FORM.version       = '0.0.8';
+	APP.FORM.version       = '0.0.9';
     APP.FORM.documentReady = function( $ ) {
 
 		
@@ -213,7 +213,9 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
-			$option.toggleClass( 'active' );
+			$option.toggleClass( 'active' ).attr( 'aria-checked', function( index, attr ) {
+				return attr == 'true' ? false : true;
+			});
 
 			if ( tarVal.indexOf( curVal + ',' ) < 0 ) {
 				resVal = tarVal + curVal + ',';
@@ -302,9 +304,9 @@ APP = ( function ( APP, $, window, document ) {
 
 
 			//Radio Selector
-			$selector.find( '> span' ).removeClass( 'active' );
+			$selector.find( '> span' ).removeClass( 'active' ).attr( 'aria-checked', false );
 			$( targetID ).val( curVal );
-			$option.addClass( 'active' );
+			$option.addClass( 'active' ).attr( 'aria-checked', true );
 
 
 			//Switch some options
@@ -881,9 +883,9 @@ APP = ( function ( APP, $, window, document ) {
 					var targetID = '#' + $( this ).parent().attr( "data-targetid" );
 
 					if ( $( targetID ).val().indexOf( $( this ).data( 'value' ) ) >= 0 ) {
-						$( this ).addClass( 'active' );
+						$( this ).addClass( 'active' ).attr( 'aria-checked', true );
 					} else {
-						$( this ).removeClass( 'active' );
+						$( this ).removeClass( 'active' ).attr( 'aria-checked', false );
 					}	
 
 
@@ -936,9 +938,9 @@ APP = ( function ( APP, $, window, document ) {
 
 					//Set actived style from their values
 					if ( $( targetID ).val() == $( this ).data( 'value' ) ) {
-						$( this ).addClass( 'active' );
+						$( this ).addClass( 'active' ).attr( 'aria-checked', true );
 					} else {
-						$( this ).removeClass( 'active' );
+						$( this ).removeClass( 'active' ).attr( 'aria-checked', false );
 					}	
 
 

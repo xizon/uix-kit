@@ -1,7 +1,13 @@
 # Changelog
 
+#### = 3.3.4 (March 20, 2019) =
 
-#### = 3.3.3 (March 20, 2019) =
+* Tweak: Enhanced HTML support for aria-* and role properties.
+* Tweak: Add some helper classes to Vertical Centering.
+
+
+
+#### = 3.3.3 (March 19, 2019) =
 
 * Tweak: Optimized module "3D Background".
 

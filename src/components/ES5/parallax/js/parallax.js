@@ -73,7 +73,7 @@ APP = ( function ( APP, $, window, document ) {
 					curImgW          = null,
 					curSize          = 'cover';
 				
-				
+			
 				if( 
 					typeof dataOverlay === typeof undefined ||
 					dataOverlay == 'none' ||

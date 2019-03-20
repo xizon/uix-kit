@@ -1,6 +1,6 @@
 /* 
  *************************************
- * <!-- 3D Background 2 with three.js -->
+ * <!-- 3D Background 1 with three.js -->
  *************************************
  */
 
@@ -16,7 +16,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP._3D_BACKGROUND_THREE               = APP._3D_BACKGROUND_THREE || {};
-	APP._3D_BACKGROUND_THREE.version       = '0.0.2';
+	APP._3D_BACKGROUND_THREE.version       = '0.0.3';
     APP._3D_BACKGROUND_THREE.documentReady = function( $ ) {
 
 		
@@ -35,7 +35,6 @@ APP = ( function ( APP, $, window, document ) {
 		// Generate one plane geometries mesh to scene
 		//-------------------------------------	
 		var camera,
-			controls,
 			scene,
 			light,
 			renderer,
@@ -48,6 +47,21 @@ APP = ( function ( APP, $, window, document ) {
 			vertex       = document.getElementById( 'vertexshader' ).textContent,
 			fragment     = document.getElementById( 'fragmentshader' ).textContent;
 	
+
+		// controls
+
+		var spriteAnim = false;
+
+		var mouseX       = 0,
+			mouseY       = 0,
+			windowHalfX  = windowWidth / 2,
+			windowHalfY  = windowHeight / 2;
+
+		var targetX = 0.0, 
+			targetY = 0.0,
+			angle   = 0.0,
+			height  = 0.0,
+			target  = new THREE.Vector3();
 		
 		init();
 		render();
@@ -58,18 +72,6 @@ APP = ( function ( APP, $, window, document ) {
 			camera.position.set( 0, 100, 2000 );
 
 
-			//controls
-			controls = new THREE.OrbitControls( camera );
-			controls.rotateSpeed = 0.5;
-			controls.zoomSpeed = 1.2;
-			controls.panSpeed = 0.8;
-			controls.enableZoom = true;
-			controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-			controls.dampingFactor = 0.25;
-			controls.screenSpacePanning = false;
-			controls.minDistance = 100;
-			controls.maxDistance = 500;
-			controls.maxPolarAngle = Math.PI / 2;
 
 			//Scene
 			scene = new THREE.Scene();
@@ -168,6 +170,9 @@ APP = ( function ( APP, $, window, document ) {
 
 			// Fires when the window changes
 			window.addEventListener( 'resize', onWindowResize, false );
+			document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+			document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+			document.addEventListener( 'mouseup', onDocumentMouseUp, false );
 			
 			
 		}
@@ -178,14 +183,34 @@ APP = ( function ( APP, $, window, document ) {
             var objVector = new THREE.Vector3(0,0.2,0.1),
 				delta     = clock.getDelta();
 			
-			displacementSprite.rotation.x += delta * objVector.x;
-			displacementSprite.rotation.y += delta * objVector.y;
-			displacementSprite.rotation.z += delta * objVector.z;
+			if ( ! spriteAnim ) {
+				displacementSprite.rotation.x += delta * objVector.x;
+				displacementSprite.rotation.y += delta * objVector.y;
+				displacementSprite.rotation.z += delta * objVector.z;
+			}
+
+
 
 			//To set a background color.
-			//renderer.setClearColor( 0x000000 );	
+			renderer.setClearColor( 0x000000 );	
 			
-			controls.update();
+			
+
+			// update camera
+			targetX = mouseX * .002;
+			targetY = mouseY * .002;
+
+			angle  += 0.01 * ( targetX - angle );
+			height += 0.01 * ( targetY - height );
+
+			var x = -Math.sin( angle * 1.5 ) * 35;
+			var z =  Math.cos( angle * 1.5 ) * 35;
+			var y = 130 * height + 0;
+
+			camera.position.set( x, y, z );
+			camera.lookAt( target );	
+
+			
 			
 			renderer.render( scene, camera );
 			
@@ -203,6 +228,31 @@ APP = ( function ( APP, $, window, document ) {
 
 		
 
+		
+		function onDocumentMouseMove( event ) {
+			mouseX = event.clientX - windowHalfX;
+			mouseY = event.clientY - windowHalfY;	
+
+		}
+		
+		function onDocumentMouseDown( event ) {
+			event.preventDefault();
+			spriteAnim = true;
+			mouseX = event.clientX - windowHalfX;
+			mouseY = event.clientY - windowHalfY;	
+			
+			
+		}
+		
+		function onDocumentMouseUp( event ) {
+			event.preventDefault();
+			spriteAnim = false;
+			mouseX = event.clientX - windowHalfX;
+			mouseY = event.clientY - windowHalfY;
+	
+		}
+			
+	
 		
 		/*
 		 * Batch generation of geometry

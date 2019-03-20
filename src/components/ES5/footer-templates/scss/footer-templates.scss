@@ -28,15 +28,11 @@
 
 	.uix-special-footer__menus {
 
-		&::after {
-			content: '';
-			display: block;
-			clear: both;
-			width: 100%;
-		}
+		display: flex;
+
+
 		> .uix-special-footer__menus__list {
-			width: 12rem;
-			float: left;
+			flex: 1;
 
 			li {
 				margin: .5rem 0;
@@ -75,8 +71,17 @@
 		
 		.uix-special-footer__menus {
 
+		
+			&.uix-special-footer__menus--mobile-nowrap  { 
+			  flex-wrap: nowrap;
+			}
+
+			&.uix-special-footer__menus--mobile-wrap {
+			  flex-wrap: wrap;
+			}  
+			
 			> .uix-special-footer__menus__list {
-				width: 33.3%;
+				flex: 1 100%;
 			}
 
 		} 
