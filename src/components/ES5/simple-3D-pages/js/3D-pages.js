@@ -116,6 +116,7 @@ APP = ( function ( APP, $, window, document ) {
 
             var delta = clock.getDelta();
 			
+			//update camera and controls
 			controls.update();
 			
 			renderer.render( scene, camera );

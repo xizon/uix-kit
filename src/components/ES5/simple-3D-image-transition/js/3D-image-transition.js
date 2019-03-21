@@ -42,9 +42,11 @@ APP = ( function ( APP, $, window, document ) {
 		var vertex       = document.getElementById( 'vertexshader' ).textContent,
 			fragment     = document.getElementById( 'fragmentshader' ).textContent,
 			filterMaterial,
-			offsetWidth  = 1400,
-			offsetHeight = 450;
+			offsetWidth  = $( '#' + rendererCanvasID ).parent().width(),
+			offsetHeight = $( '#' + rendererCanvasID ).parent().width() * (550/1400);
+		
 
+		
 
 		init();
 		render();
@@ -52,7 +54,7 @@ APP = ( function ( APP, $, window, document ) {
 		
 		function init() {
 			//camera
-			camera = new THREE.PerspectiveCamera( 75, offsetWidth / offsetHeight, 1, 10000 );
+			camera = new THREE.PerspectiveCamera( 75, windowWidth / windowHeight, 1, 10000 );
 			camera.position.set(0, 0, 1000);
 			
 
@@ -95,7 +97,7 @@ APP = ( function ( APP, $, window, document ) {
 									alpha    : true, 
 									antialias: true 
 								} );
-			renderer.setSize( offsetWidth, offsetHeight );
+			renderer.setSize( offsetWidth , offsetHeight );
 
 			
 			// Immediately use the texture for material creation
@@ -152,21 +154,6 @@ APP = ( function ( APP, $, window, document ) {
 			displacementSprite.position.set( 0, 0, 0 );
 			scene.add( displacementSprite );
 
-			
-//			imgs.forEach( function( element ) {
-//
-//				var loader = new THREE.TextureLoader();
-//				var material = new THREE.MeshLambertMaterial({
-//					map: loader.load( element )
-//				});
-//				var geometry = new THREE.PlaneGeometry( offsetWidth, offsetHeight );
-//				var displacementSprite = new THREE.Mesh( geometry, material );
-//				displacementSprite.position.set( 0, 0, 0 )
-//				scene.add( displacementSprite );
-//			});
-
-			
-
 
 			// Fires when the window changes
 			window.addEventListener( 'resize', onWindowResize, false );
@@ -191,6 +178,7 @@ APP = ( function ( APP, $, window, document ) {
 			//renderer.setClearColor( 0x000000 );	
 			
 			
+			//update camera and controls
 			controls.update();
 			
 			renderer.render( scene, camera );

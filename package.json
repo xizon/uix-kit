@@ -1,8 +1,12 @@
 {
   "author": "UIUX Lab",
   "name": "uix-kit",
-  "version": "3.3.4",
-  "description": "Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4. (https://github.com/xizon/uix-kit)",
+  "email" : "uiuxlab@gmail.com",
+  "version": "3.3.5",
+  "projectName": "Uix Kit",
+  "createdInfo": "UIUX Lab (https://uiux.cc)",
+  "projectURL": "https://uiux.cc",
+  "description": "A free web kits for fast web design and development, compatible with Bootstrap v4.",
   "main": "webpack.config.js",
   "directories": {
     "example": "examples"
@@ -32,7 +36,7 @@
   "bugs": {
     "url": "https://github.com/xizon/uix-kit/issues"
   },
-  "homepage": "https://github.com/xizon/uix-kit#readme",
+  "homepage": "https://github.com/xizon/uix-kit",
   "devDependencies": {
     "@babel/core": "^7.2.0",
     "@babel/polyfill": "^7.0.0",

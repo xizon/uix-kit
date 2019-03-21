@@ -1,10 +1,10 @@
 /*!
  * 
- * ## Project Name        :  Uix Kit Demo
- * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.3.4
+ * ## Project Name        :  Uix Kit
+ * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
+ * ## Version             :  3.3.5
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  March 20, 2019
+ * ## Last Update         :  March 21, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -137,7 +137,7 @@ var UIX_KIT_IMPORT = {
   /******/
 
   /* pages */
-  "./src/components/ES5/_main/js/main.js", "./src/components/ES5/accordion-img/js/accordion-img.js", "./src/components/ES5/accordion/js/accordion.js", "./src/components/ES5/advanced-content-slider/js/advanced-content-slider.js", "./src/components/ES5/advanced-slider/js/advanced-slider-basic.js", "./src/components/ES5/advanced-slider/js/advanced-slider-SpecialEffects.js", "./src/components/ES5/AJAX-push/js/ajax-push-content.js", "./src/components/ES5/AJAX/js/ajax-page-loader.js", "./src/components/ES5/back-to-top/js/back-to-top.js", "./src/components/ES5/circle-layout/js/circle-layout.js", "./src/components/ES5/counter/js/counter.js", "./src/components/ES5/dropdown-menu/js/dropdown-menu.js", "./src/components/ES5/dropdown-menu2/js/dropdown-menu2.js", "./src/components/ES5/dynamic-dropdown-list-json/js/dynamic-dropdown-list-json.js", "./src/components/ES5/flexslider/js/custom-flexslider.js", "./src/components/ES5/flexslider/js/jquery.flexslider.js", "./src/components/ES5/floating-side-element/js/floating-side-element.js", "./src/components/ES5/form-progress/js/form-progress.js", "./src/components/ES5/form/js/form.js", "./src/components/ES5/form/js/datepicker.js", "./src/components/ES5/gallery/js/gallery.js", "./src/components/ES5/hover-delay-interaction/js/hover-delay-interaction.js", "./src/components/ES5/image-shapes/js/image-shapes.js", "./src/components/ES5/lava-lamp-style-menu/js/lava-lamp-style-menu.js", "./src/components/ES5/lightbox/js/lightbox.js", "./src/components/ES5/list-bulleted/js/list-bulleted.js", "./src/components/ES5/list-posts/js/list-posts-with-ajax.js", "./src/components/ES5/list-split-imagery/js/list-split-imagery.js", "./src/components/ES5/login-templates/js/login-templates.js", "./src/components/ES5/modal-dialog/js/modal-dialog.js", "./src/components/ES5/mousewheel-interaction/js/mousewheel-interaction.js", "./src/components/ES5/multi-items-carousel/js/multi-items-carousel.js", "./src/components/ES5/one-page/js/one-page.js", "./src/components/ES5/one-page2/js/one-page2.js", "./src/components/ES5/parallax/js/parallax.js", "./src/components/ES5/periodical-scroll/js/periodical-scroll.js", "./src/components/ES5/pricing/js/pricing.js", "./src/components/ES5/progress-bar/js/progress-bar.js", "./src/components/ES5/progress-line/js/progress-line.js", "./src/components/ES5/retina/js/retina.js", "./src/components/ES5/rotating-elements/js/rotating-elements.js", "./src/components/ES5/scroll-reveal/js/scroll-reveal.js", "./src/components/ES5/scrollspy-animate/js/scrollspy-animate.js", "./src/components/ES5/show-more-less/js/show-more-less.js", "./src/components/ES5/skew-on-scroll/js/skew-on-scroll.js", "./src/components/ES5/smooth-scrolling-anchor-link/js/smooth-scrolling-anchor-link.js", "./src/components/ES5/sticky-elements/js/sticky-elements.js", "./src/components/ES5/svg-map/js/svg-map-china.js", "./src/components/ES5/svg-map/js/svg-map-world.js", "./src/components/ES5/simple-3D-background-three/js/3D-background-three.js", "./src/components/ES5/simple-3D-background-three2/js/3D-background-three2.js", "./src/components/ES5/simple-3D-background-three3/js/3D-background-three3.js", "./src/components/ES5/simple-3D-background/js/3D-background.js", "./src/components/ES5/simple-3D-carousel/js/3D-carousel.js", "./src/components/ES5/simple-3D-image-transition/js/3D-image-transition.js", "./src/components/ES5/simple-3D-model/js/3D-model.js", "./src/components/ES5/simple-3D-pages/js/3D-pages.js", "./src/components/ES5/simple-3D-particle-effect/js/3D-particle-effect.js", "./src/components/ES5/simple-3D-sphere-three/js/3D-sphere-three.js", "./src/components/ES5/simple-3D-obj-anim-interaction/js/3D-obj-anim-interaction.js", "./src/components/ES5/simple-3D-mouse-interaction/js/3D-mouse-interaction.js", "./src/components/ES5/table/js/table.js", "./src/components/ES5/table/js/table-sorter.js", "./src/components/ES5/tabs/js/tabs.js", "./src/components/ES5/team-focus/js/team-focus.js", "./src/components/ES5/text-effect/js/text-effect.js", "./src/components/ES5/timeline/js/timeline.js", "./src/components/ES5/vertical-menu/js/vertical-menu.js", "./src/components/ES5/wordpress/js/wp-core.js"]
+  "./src/components/ES5/_main/js/main.js", "./src/components/ES5/accordion-img/js/accordion-img.js", "./src/components/ES5/accordion/js/accordion.js", "./src/components/ES5/advanced-content-slider/js/advanced-content-slider.js", "./src/components/ES5/advanced-slider/js/advanced-slider-basic.js", "./src/components/ES5/advanced-slider/js/advanced-slider-SpecialEffects.js", "./src/components/ES5/AJAX-push/js/ajax-push-content.js", "./src/components/ES5/AJAX/js/ajax-page-loader.js", "./src/components/ES5/back-to-top/js/back-to-top.js", "./src/components/ES5/circle-layout/js/circle-layout.js", "./src/components/ES5/counter/js/counter.js", "./src/components/ES5/dropdown-menu/js/dropdown-menu.js", "./src/components/ES5/dropdown-menu2/js/dropdown-menu2.js", "./src/components/ES5/dynamic-dropdown-list-json/js/dynamic-dropdown-list-json.js", "./src/components/ES5/flexslider/js/custom-flexslider.js", "./src/components/ES5/flexslider/js/jquery.flexslider.js", "./src/components/ES5/floating-side-element/js/floating-side-element.js", "./src/components/ES5/form-progress/js/form-progress.js", "./src/components/ES5/form/js/form.js", "./src/components/ES5/form/js/datepicker.js", "./src/components/ES5/gallery/js/gallery.js", "./src/components/ES5/hover-delay-interaction/js/hover-delay-interaction.js", "./src/components/ES5/image-shapes/js/image-shapes.js", "./src/components/ES5/lava-lamp-style-menu/js/lava-lamp-style-menu.js", "./src/components/ES5/lightbox/js/lightbox.js", "./src/components/ES5/list-bulleted/js/list-bulleted.js", "./src/components/ES5/list-posts/js/list-posts-with-ajax.js", "./src/components/ES5/list-split-imagery/js/list-split-imagery.js", "./src/components/ES5/login-templates/js/login-templates.js", "./src/components/ES5/modal-dialog/js/modal-dialog.js", "./src/components/ES5/mousewheel-interaction/js/mousewheel-interaction.js", "./src/components/ES5/multi-items-carousel/js/multi-items-carousel.js", "./src/components/ES5/one-page/js/one-page.js", "./src/components/ES5/one-page2/js/one-page2.js", "./src/components/ES5/parallax/js/parallax.js", "./src/components/ES5/periodical-scroll/js/periodical-scroll.js", "./src/components/ES5/pricing/js/pricing.js", "./src/components/ES5/progress-bar/js/progress-bar.js", "./src/components/ES5/progress-line/js/progress-line.js", "./src/components/ES5/retina/js/retina.js", "./src/components/ES5/rotating-elements/js/rotating-elements.js", "./src/components/ES5/scroll-reveal/js/scroll-reveal.js", "./src/components/ES5/scrollspy-animate/js/scrollspy-animate.js", "./src/components/ES5/show-more-less/js/show-more-less.js", "./src/components/ES5/skew-on-scroll/js/skew-on-scroll.js", "./src/components/ES5/smooth-scrolling-anchor-link/js/smooth-scrolling-anchor-link.js", "./src/components/ES5/sticky-elements/js/sticky-elements.js", "./src/components/ES5/svg-map/js/svg-map-china.js", "./src/components/ES5/svg-map/js/svg-map-world.js", "./src/components/ES5/simple-3D-background-three/js/3D-background-three.js", "./src/components/ES5/simple-3D-background-three2/js/3D-background-three2.js", "./src/components/ES5/simple-3D-background-three3/js/3D-background-three3.js", "./src/components/ES5/simple-3D-background/js/3D-background.js", "./src/components/ES5/simple-3D-carousel/js/3D-carousel.js", "./src/components/ES5/simple-3D-gallery/js/3D-gallery.js", "./src/components/ES5/simple-3D-image-transition/js/3D-image-transition.js", "./src/components/ES5/simple-3D-model/js/3D-model.js", "./src/components/ES5/simple-3D-pages/js/3D-pages.js", "./src/components/ES5/simple-3D-particle-effect/js/3D-particle-effect.js", "./src/components/ES5/simple-3D-sphere-three/js/3D-sphere-three.js", "./src/components/ES5/simple-3D-obj-anim-interaction/js/3D-obj-anim-interaction.js", "./src/components/ES5/simple-3D-mouse-interaction/js/3D-mouse-interaction.js", "./src/components/ES5/table/js/table.js", "./src/components/ES5/table/js/table-sorter.js", "./src/components/ES5/tabs/js/tabs.js", "./src/components/ES5/team-focus/js/team-focus.js", "./src/components/ES5/text-effect/js/text-effect.js", "./src/components/ES5/timeline/js/timeline.js", "./src/components/ES5/vertical-menu/js/vertical-menu.js", "./src/components/ES5/wordpress/js/wp-core.js"]
 };
 
 // CONCATENATED MODULE: ./src/components/ES6/_global/js/vars.js
@@ -266,21 +266,22 @@ if (document.getElementsByTagName('body')[0].className.match(/es6-demo-home/)) {
     61.3D Background 3 with three.js
     62.3D Background
     63.3D Carousel
-    64.3D Image Transition with three.js
-    65.3D Model
-    66.3D Pages
-    67.3D Particle Effect
-    68.3D Sphere Rotation
-    69.3D Object Anim When Click
-    70.3D Mouse Interaction with three.js
-    71.Responsive Table
-    72.Table Sorter
-    73.Tabs
-    74.Team Focus
-    75.Text effect
-    76.Timeline
-    77.Vertical Menu
-    78.WordPress Core Scripts
+    64.3D Gallery with three.js
+    65.3D Image Transition with three.js
+    66.3D Model
+    67.3D Pages
+    68.3D Particle Effect
+    69.3D Sphere Rotation
+    70.3D Object Anim When Click
+    71.3D Mouse Interaction with three.js
+    72.Responsive Table
+    73.Table Sorter
+    74.Tabs
+    75.Team Focus
+    76.Text effect
+    77.Timeline
+    78.Vertical Menu
+    79.WordPress Core Scripts
 
 
 */
@@ -30346,6 +30347,241 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
+ * <!-- 3D Gallery with three.js -->
+ *************************************
+ */
+/**
+ * APP._3D_GALLERY
+ * @global
+ * @requires ./examples/assets/js/min/three.min.js
+ * @requires ./src/components/ES5/_plugins-THREE
+ */
+
+
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP._3D_GALLERY               = APP._3D_GALLERY || {};
+	APP._3D_GALLERY.version       = '0.0.1';
+    APP._3D_GALLERY.documentReady = function( $ ) {
+
+		//Prevent this module from loading in other pages
+		if ( $( '#3D-gallery-three-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
+		
+		
+		var $window                   = $( window ),
+			windowWidth               = window.innerWidth,
+			windowHeight              = window.innerHeight,
+			rendererCanvasID          = '3D-gallery-three-canvas';
+		
+	
+		// Generate one plane geometries mesh to scene
+		//-------------------------------------	
+		var camera,
+			controls,
+			scene,
+			light,
+			renderer,
+			displacementSprite,
+			theta        = 0;
+		
+		
+		var offsetWidth  = 1400,
+			offsetHeight = 933,
+			allImages    = [],
+			imgTotal,
+			imagesLoaded = false;
+
+
+		init();
+		render();
+
+		
+		function init() {
+			//camera
+			camera = new THREE.PerspectiveCamera( 75, windowWidth / windowHeight, 1, 10000 );
+			camera.position.set(0, 0, 1000);
+			
+
+			
+			//controls
+			controls = new THREE.OrbitControls( camera );
+			controls.autoRotate = false;
+			controls.autoRotateSpeed = 0.5;
+			controls.rotateSpeed = 0.5;
+			controls.zoomSpeed = 1.2;
+			controls.panSpeed = 0.8;
+			controls.enableZoom = false;
+			controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+			controls.dampingFactor = 0.25;
+			controls.screenSpacePanning = false;
+			controls.minDistance = 100;
+			controls.maxDistance = 500;
+			controls.maxPolarAngle = Math.PI / 2;
+			
+			controls.target.set( 30, 167, 81 );
+			controls.update();			
+
+			
+
+			//Scene
+			scene = new THREE.Scene();
+	
+
+			//HemisphereLight
+			scene.add( new THREE.AmbientLight( 0x555555 ) );
+
+			light = new THREE.SpotLight( 0xffffff, 1.5 );
+			light.position.set( 0, 500, 2000 );
+			scene.add( light );
+			
+			
+
+			//WebGL Renderer	
+			renderer = new THREE.WebGLRenderer( { 
+									canvas   : document.getElementById( rendererCanvasID ), //canvas
+									alpha    : true, 
+									antialias: true 
+								} );
+			renderer.setSize( windowWidth, windowHeight );
+
+			
+			// Immediately use the texture for material creation
+			// Create a texture loader so we can load our image file
+			var imgs = [
+				templateUrl + '/assets/images/demo/test-img-big-1.jpg',
+				templateUrl + '/assets/images/demo/test-img-big-2.jpg',
+				templateUrl + '/assets/images/demo/test-img-big-3.jpg',
+				templateUrl + '/assets/images/demo/test-img-big-4.jpg',
+				templateUrl + '/assets/images/demo/test-img-big-5.jpg',
+				templateUrl + '/assets/images/demo/test-img-big-1.jpg',
+				templateUrl + '/assets/images/demo/test-img-big-2.jpg',
+				templateUrl + '/assets/images/demo/test-img-big-3.jpg',
+				templateUrl + '/assets/images/demo/test-img-big-4.jpg',
+				templateUrl + '/assets/images/demo/test-img-big-5.jpg'	
+			];
+			
+			//A loader for loading all images from array.
+			var loader = new THREE.TextureLoader();
+			loader.crossOrigin = 'anonymous';
+			
+			//Preload
+			imgTotal = imgs.length;
+			
+			var gap               = 100,
+				circumference         = (offsetWidth + gap) * imgTotal,
+				galleryRadius       = circumference / ( Math.PI * 2 ), // C = 2πr = Math.PI * 2 * radius
+				eachItemAngleToRad  = ( Math.PI * 2 ) / imgTotal; // 360° = 2π = Math.PI * 2
+			
+			if ( camera.position.length() > galleryRadius ) {
+				camera.position.set( 0, 0, 0 );
+			}	
+			
+
+			//Load images
+			imgs.forEach( function( element, index ) {
+				loadImage( loader, element, index, offsetWidth, offsetHeight, imgTotal, eachItemAngleToRad, galleryRadius, $( '#3D-gallery-three-canvas__loader' ) );
+			});
+
+
+			// Fires when the window changes
+			window.addEventListener( 'resize', onWindowResize, false );
+			
+			
+		}
+		
+
+		function render() {
+			requestAnimationFrame( render );
+			
+            theta += 0.1;
+			
+			
+			//To set a background color.
+			renderer.setClearColor( 0x000000 );	
+			
+			//check all images loaded
+			if ( !imagesLoaded && allImages.length === imgTotal ) {
+				allImages.forEach( function (element ) {
+					scene.add( element );
+				});
+				imagesLoaded = true;
+				
+			}
+			
+			//update camera and controls
+			controls.update();
+			
+			renderer.render( scene, camera );
+			
+			
+		}
+
+
+		function onWindowResize() {
+			camera.aspect = window.innerWidth / window.innerHeight;
+			camera.updateProjectionMatrix();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+		}
+
+			
+		/*
+		 * Load Image
+		 *
+		 * @param  {Object} imgLoader       - A loader for loading all images from array.
+		 * @param  {String} src             - URL of image.
+		 * @param  {Number} index           - Index of image.
+		 * @param  {Number} w               - The width of an image, in pixels. 
+		 * @param  {Number} h               - The height of an image, in pixels. 
+		 * @param  {Number} total           - Total number of preload images.
+		 * @param  {Number} itemRadAngle    - An equal radian angle of a sphere for each element.
+		 * @param  {Number} radius          - Radius length of the sphere (circumference).
+		 * @param  {Object} loading         - Progress bar display control.
+		 * @return {Void}
+		 */
+        function loadImage( imgLoader, src, index, w, h, total, itemRadAngle, radius, loading ) {
+			
+			var material = new THREE.MeshLambertMaterial({
+				map: imgLoader.load( src )
+			});
+			var geometry = new THREE.PlaneGeometry( w, h );
+			var displacementSprite = new THREE.Mesh( geometry, material );
+
+			//LinearFilter, which takes the four closest texels and bilinearly interpolates among them. 
+			displacementSprite.minFilter = THREE.LinearFilter;
+			displacementSprite.overdraw = true;
+			
+			//Calculate the position of the image 
+			//X axis: Math.sin( rad ) * radius
+			//Z axis: Math.cos( rad ) * radius
+			displacementSprite.rotation.y = -index * itemRadAngle;
+			displacementSprite.position.set( radius * Math.sin(index * itemRadAngle), 0, -radius * Math.cos(index * itemRadAngle) );
+
+			allImages.push( displacementSprite );
+
+			//loading
+			loading.css( 'width', Math.round(100 * allImages.length / total ) + '%' );
+			
+		}
+
+
+		
+    };
+
+    APP.components.documentReady.push( APP._3D_GALLERY.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+
+
+
+
+/* 
+ *************************************
  * <!-- 3D Image Transition with three.js -->
  *************************************
  */
@@ -30388,9 +30624,11 @@ APP = ( function ( APP, $, window, document ) {
 		var vertex       = document.getElementById( 'vertexshader' ).textContent,
 			fragment     = document.getElementById( 'fragmentshader' ).textContent,
 			filterMaterial,
-			offsetWidth  = 1400,
-			offsetHeight = 450;
+			offsetWidth  = $( '#' + rendererCanvasID ).parent().width(),
+			offsetHeight = $( '#' + rendererCanvasID ).parent().width() * (550/1400);
+		
 
+		
 
 		init();
 		render();
@@ -30398,7 +30636,7 @@ APP = ( function ( APP, $, window, document ) {
 		
 		function init() {
 			//camera
-			camera = new THREE.PerspectiveCamera( 75, offsetWidth / offsetHeight, 1, 10000 );
+			camera = new THREE.PerspectiveCamera( 75, windowWidth / windowHeight, 1, 10000 );
 			camera.position.set(0, 0, 1000);
 			
 
@@ -30441,7 +30679,7 @@ APP = ( function ( APP, $, window, document ) {
 									alpha    : true, 
 									antialias: true 
 								} );
-			renderer.setSize( offsetWidth, offsetHeight );
+			renderer.setSize( offsetWidth , offsetHeight );
 
 			
 			// Immediately use the texture for material creation
@@ -30498,21 +30736,6 @@ APP = ( function ( APP, $, window, document ) {
 			displacementSprite.position.set( 0, 0, 0 );
 			scene.add( displacementSprite );
 
-			
-//			imgs.forEach( function( element ) {
-//
-//				var loader = new THREE.TextureLoader();
-//				var material = new THREE.MeshLambertMaterial({
-//					map: loader.load( element )
-//				});
-//				var geometry = new THREE.PlaneGeometry( offsetWidth, offsetHeight );
-//				var displacementSprite = new THREE.Mesh( geometry, material );
-//				displacementSprite.position.set( 0, 0, 0 )
-//				scene.add( displacementSprite );
-//			});
-
-			
-
 
 			// Fires when the window changes
 			window.addEventListener( 'resize', onWindowResize, false );
@@ -30537,6 +30760,7 @@ APP = ( function ( APP, $, window, document ) {
 			//renderer.setClearColor( 0x000000 );	
 			
 			
+			//update camera and controls
 			controls.update();
 			
 			renderer.render( scene, camera );
@@ -30764,6 +30988,8 @@ APP = ( function ( APP, $, window, document ) {
 				INTERSECTED = null;
 			}
 
+			
+			//update camera and controls
 			controls.update();
 			
 			
@@ -30970,6 +31196,7 @@ APP = ( function ( APP, $, window, document ) {
 
             var delta = clock.getDelta();
 			
+			//update camera and controls
 			controls.update();
 			
 			renderer.render( scene, camera );
@@ -31488,6 +31715,9 @@ APP = ( function ( APP, $, window, document ) {
 			requestAnimationFrame( render );
 			
 			displacementSprite.rotation.z += 0.01;
+			
+			
+			//update camera and controls
 			controls.update();
 			
 			renderer.render( scene, camera );
@@ -31932,7 +32162,7 @@ APP = ( function ( APP, $, window, document ) {
 
 			}
 
-			
+			//update camera and controls
 			controls.update();
 			
 			renderer.render( scene, camera );

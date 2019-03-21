@@ -1,9 +1,12 @@
 # Changelog
 
-#### = 3.3.4 (March 20, 2019) =
 
+#### = 3.3.5 (March 20, 2019) =
+
+* New: Add a new module "3D Gallery".
 * Tweak: Enhanced HTML support for aria-* and role properties.
 * Tweak: Add some helper classes to Vertical Centering.
+* Tweak: Change the webpack config.
 
 
 

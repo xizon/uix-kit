@@ -180,6 +180,8 @@ APP = ( function ( APP, $, window, document ) {
 				INTERSECTED = null;
 			}
 
+			
+			//update camera and controls
 			controls.update();
 			
 			

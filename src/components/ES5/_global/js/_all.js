@@ -98,6 +98,7 @@ const UIX_KIT_IMPORT = { "files": [
 "./src/components/ES5/simple-3D-background-three3/js/3D-background-three3.js",
 "./src/components/ES5/simple-3D-background/js/3D-background.js",
 "./src/components/ES5/simple-3D-carousel/js/3D-carousel.js",
+"./src/components/ES5/simple-3D-gallery/js/3D-gallery.js",
 "./src/components/ES5/simple-3D-image-transition/js/3D-image-transition.js",
 "./src/components/ES5/simple-3D-model/js/3D-model.js",
 "./src/components/ES5/simple-3D-pages/js/3D-pages.js",

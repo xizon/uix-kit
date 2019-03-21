@@ -39,20 +39,20 @@ let globs = {
 
 let customWebsiteVersion     = json.version,
 	customWebsiteAuthor      = json.author,
-	customWebsiteTitle       = 'Uix Kit Demo',
-	customWebsiteDesc        = 'Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.',
-	customWebsiteCanonical   = '<link rel="canonical" href="https://uiux.cc" />',
+	customWebsiteTitle       = json.projectName,
+	customWebsiteDesc        = json.description,
+	customWebsiteCanonical   = '<link rel="canonical" href="'+json.projectURL+'" />',
 	customWebsiteGenerator   = 'Uix Kit',
 	customWebsiteHash        = randomString({length: 20}),
 	customWebsiteComment     = `
 ## Project Name        :  ` + customWebsiteTitle + `
 ## Project Description :  ` + customWebsiteDesc + `
 ## Version             :  ` + customWebsiteVersion + `
-## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
+## Based on            :  Uix Kit (` + json.homepage + `)
 ## Last Update         :  ` + moment().format( "MMMM D, YYYY" ) + `
-## Created by          :  UIUX Lab (https://uiux.cc)
-## Contact Us          :  uiuxlab@gmail.com
-## Released under the MIT license.
+## Created by          :  ` + json.createdInfo + `
+## Contact Us          :  ` + json.email + `
+## Released under the ` + json.license + ` license.
 	`;
 
 
@@ -307,6 +307,7 @@ targetTempFilesName.map( ( event ) => {
 					{ search: '@@{website_comment}', replace: customWebsiteComment },
 					{ search: '@@{website_hash}', replace: customWebsiteHash },
 
+					
 				]
 			}
 		]),	

@@ -157,7 +157,7 @@ APP = ( function ( APP, $, window, document ) {
 
 			}
 
-			
+			//update camera and controls
 			controls.update();
 			
 			renderer.render( scene, camera );

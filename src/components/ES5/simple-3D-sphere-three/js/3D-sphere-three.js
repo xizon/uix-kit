@@ -123,6 +123,9 @@ APP = ( function ( APP, $, window, document ) {
 			requestAnimationFrame( render );
 			
 			displacementSprite.rotation.z += 0.01;
+			
+			
+			//update camera and controls
 			controls.update();
 			
 			renderer.render( scene, camera );
