@@ -29,7 +29,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.FORM               = APP.FORM || {};
-	APP.FORM.version       = '0.0.9';
+	APP.FORM.version       = '0.1.0';
     APP.FORM.documentReady = function( $ ) {
 
 		
@@ -255,7 +255,7 @@ APP = ( function ( APP, $, window, document ) {
 			obj.each( function( index )  {
 
 				var $sel                = $( this ),
-					defaultValue        = $( '#' + $sel.attr( "data-targetid" ) ).val(),
+					defaultValue        = $( '#' + $sel.attr( 'data-targetid' ) ).val(),
 					deffaultSwitchIndex = 0;
 
 				//get default selected switch index
@@ -322,6 +322,29 @@ APP = ( function ( APP, $, window, document ) {
 
 		} );
 
+		
+		/* 
+		 ---------------------------
+		 Click Event of Checkbox and Toggle 
+		 ---------------------------
+		 */ 
+		var checkboxSel     = '.uix-controls__toggle [type="checkbox"], .uix-controls__checkbox [type="checkbox"]';
+
+		$( document ).on( 'change', checkboxSel, function( e ) {
+			//hide or display a associated div
+			var $obj      = $( this ).closest( '.uix-controls' ),
+				targetID  = '#' + $obj.attr( 'data-targetid' );
+			
+			if ( this.checked ) {
+				$obj.addClass( 'active' ).attr( 'aria-checked', true );
+				$( targetID ).show();
+			} else {
+				$obj.removeClass( 'active' ).attr( 'aria-checked', false );
+				$( targetID ).hide();
+			}
+			
+		});
+		
 		
     };
 
@@ -555,11 +578,26 @@ APP = ( function ( APP, $, window, document ) {
 
 			});
 
-			$( customToggle ).find( 'input[type="checkbox"]' ).each( function() {
-				var dataExist = $( this ).data( 'exist' );
-				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
-					$( '<span class="uix-controls__toggle-trigger"></span>' ).insertAfter( $( this ) );
 
+			$( customToggle ).find( 'input[type="checkbox"]' ).each( function() {
+				var dataExist = $( this ).data( 'exist' ),
+					$obj      = $( this ).closest( '.uix-controls' ),
+					offText   = $obj.data( 'off-text' ),
+					onText    = $obj.data( 'on-text' );
+				
+				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
+					$( '<span class="uix-controls__toggle-trigger" data-off-text="'+offText+'" data-on-text="'+onText+'"></span>' ).insertAfter( $( this ) );
+					//hide or display a associated div
+					var targetID = '#' + $obj.attr( 'data-targetid' );
+					if ( $( this ).is( ':checked' ) ) {
+						$obj.addClass( 'active' ).attr( 'aria-checked', true );
+						$( targetID ).show();
+					} else {
+						$obj.removeClass( 'active' ).attr( 'aria-checked', false );
+						$( targetID ).hide();
+					}
+					
+					
 					//Prevent the form from being initialized again
 					$( this ).data( 'exist', 1 );	
 				}
@@ -568,10 +606,22 @@ APP = ( function ( APP, $, window, document ) {
 			});
 
 			$( customCheckbox ).find( 'input[type="checkbox"]' ).each( function() {
-				var dataExist = $( this ).data( 'exist' );
+				var dataExist = $( this ).data( 'exist' ),
+					$obj      = $( this ).closest( '.uix-controls' );
+				
 				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
 					$( '<span class="uix-controls__checkbox-trigger"></span>' ).insertAfter( $( this ) );
 
+					//hide or display a associated div
+					var targetID = '#' + $obj.attr( 'data-targetid' );
+					if ( $( this ).is( ':checked' ) ) {
+						$obj.addClass( 'active' ).attr( 'aria-checked', true );
+						$( targetID ).show();
+					} else {
+						$obj.removeClass( 'active' ).attr( 'aria-checked', false );
+						$( targetID ).hide();
+					}
+					
 					//Prevent the form from being initialized again
 					$( this ).data( 'exist', 1 );	
 				}
@@ -880,7 +930,7 @@ APP = ( function ( APP, $, window, document ) {
 			$( settings.controls ).each( function()  {
 				$( this ).find( '> span' ).each( function()  {
 
-					var targetID = '#' + $( this ).parent().attr( "data-targetid" );
+					var targetID = '#' + $( this ).parent().attr( 'data-targetid' );
 
 					if ( $( targetID ).val().indexOf( $( this ).data( 'value' ) ) >= 0 ) {
 						$( this ).addClass( 'active' ).attr( 'aria-checked', true );
@@ -922,7 +972,7 @@ APP = ( function ( APP, $, window, document ) {
 			$( settings.controls ).each( function()  {
 				$( this ).find( '> span' ).each( function()  {
 
-					var targetID  = '#' + $( this ).parent().attr( "data-targetid" ),
+					var targetID  = '#' + $( this ).parent().attr( 'data-targetid' ),
 						switchIDs = '';
 
 					//add switch IDs

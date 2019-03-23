@@ -81,7 +81,10 @@ APP = ( function ( APP, $, window, document ) {
 			var geometry = new THREE.SphereGeometry( 3, 32, 32 );
 
 			// material, we create the material when the texture is loaded
-			var texture = new THREE.TextureLoader().load( templateUrl + '/assets/images/demo/test-img-big-1.jpg' ),
+			var loader = new THREE.TextureLoader();
+			loader.crossOrigin = 'anonymous';
+			
+			var texture = loader.load( 'http://placekitten.com/1650/1650' ),
 				material = new THREE.MeshBasicMaterial( { map: texture } );
 
 			// parent

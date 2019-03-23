@@ -147,6 +147,23 @@ $nav-mega-li-w    : 270px;
 		}
 
 		> li:not(.multi-column) > ul {
+			
+
+			/* arrow of sub menu, not mega menu */
+			&::after {
+				content: "";
+				display: block;
+				position: absolute;
+				top: -3px;
+				left: 15px;
+				width: 0;
+				height: 0;
+				border-left: 8px solid transparent;
+				border-right: 8px solid transparent;
+				border-bottom: 8px solid #fff;
+				box-shadow: 0 3px 57px rgba(0,0,0,.1);		
+			}
+			
 			ul {
 				top: 0;
 				left: 100%;

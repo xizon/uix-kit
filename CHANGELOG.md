@@ -1,6 +1,13 @@
 # Changelog
 
 
+#### = 3.3.6 (March 22, 2019) =
+
+* Tweak: Update the GUID function.
+* Tweak: Enhanced the functionality of the switch component.
+
+
+
 #### = 3.3.5 (March 20, 2019) =
 
 * New: Add a new module "3D Gallery".

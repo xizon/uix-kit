@@ -15,7 +15,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP._3D_GALLERY               = APP._3D_GALLERY || {};
-	APP._3D_GALLERY.version       = '0.0.1';
+	APP._3D_GALLERY.version       = '0.0.2';
     APP._3D_GALLERY.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -102,17 +102,19 @@ APP = ( function ( APP, $, window, document ) {
 			// Immediately use the texture for material creation
 			// Create a texture loader so we can load our image file
 			var imgs = [
-				templateUrl + '/assets/images/demo/test-img-big-1.jpg',
-				templateUrl + '/assets/images/demo/test-img-big-2.jpg',
-				templateUrl + '/assets/images/demo/test-img-big-3.jpg',
-				templateUrl + '/assets/images/demo/test-img-big-4.jpg',
-				templateUrl + '/assets/images/demo/test-img-big-5.jpg',
-				templateUrl + '/assets/images/demo/test-img-big-1.jpg',
-				templateUrl + '/assets/images/demo/test-img-big-2.jpg',
-				templateUrl + '/assets/images/demo/test-img-big-3.jpg',
-				templateUrl + '/assets/images/demo/test-img-big-4.jpg',
-				templateUrl + '/assets/images/demo/test-img-big-5.jpg'	
+				'http://placekitten.com/2100/2100',
+				'http://placekitten.com/2200/2200',
+				'http://placekitten.com/2300/2300',
+				'http://placekitten.com/2400/2400',
+				'http://placekitten.com/2500/2500',
+				'http://placekitten.com/2000/2000',
+				'http://placekitten.com/1600/1600',
+				'http://placekitten.com/1650/1650',
+				'http://placekitten.com/1670/1670',
+				'http://placekitten.com/1680/1680',
+				'http://placekitten.com/1700/1700'
 			];
+				
 			
 			//A loader for loading all images from array.
 			var loader = new THREE.TextureLoader();
@@ -122,7 +124,7 @@ APP = ( function ( APP, $, window, document ) {
 			imgTotal = imgs.length;
 			
 			var gap               = 100,
-				circumference         = (offsetWidth + gap) * imgTotal,
+				circumference         = (offsetWidth + gap) * imgTotal,  //get circumference from all images width
 				galleryRadius       = circumference / ( Math.PI * 2 ), // C = 2πr = Math.PI * 2 * radius
 				eachItemAngleToRad  = ( Math.PI * 2 ) / imgTotal; // 360° = 2π = Math.PI * 2
 			
@@ -194,26 +196,58 @@ APP = ( function ( APP, $, window, document ) {
 		 */
         function loadImage( imgLoader, src, index, w, h, total, itemRadAngle, radius, loading ) {
 			
-			var material = new THREE.MeshLambertMaterial({
-				map: imgLoader.load( src )
-			});
-			var geometry = new THREE.PlaneGeometry( w, h );
-			var displacementSprite = new THREE.Mesh( geometry, material );
+			// load a resource
+			imgLoader.load(
+				// resource URL
+				src,
 
-			//LinearFilter, which takes the four closest texels and bilinearly interpolates among them. 
-			displacementSprite.minFilter = THREE.LinearFilter;
-			displacementSprite.overdraw = true;
-			
-			//Calculate the position of the image 
-			//X axis: Math.sin( rad ) * radius
-			//Z axis: Math.cos( rad ) * radius
-			displacementSprite.rotation.y = -index * itemRadAngle;
-			displacementSprite.position.set( radius * Math.sin(index * itemRadAngle), 0, -radius * Math.cos(index * itemRadAngle) );
+				// onLoad callback
+				function ( texture ) {
+					// in this example we create the material when the texture is loaded
+					var material = new THREE.MeshBasicMaterial( {
+						map: texture
+					 } );
+					
+					var geometry = new THREE.PlaneGeometry( w, h );
+					var displacementSprite = new THREE.Mesh( geometry, material );
 
-			allImages.push( displacementSprite );
+					//LinearFilter, which takes the four closest texels and bilinearly interpolates among them. 
+					displacementSprite.minFilter = THREE.LinearFilter;
+					displacementSprite.overdraw = true;
 
-			//loading
-			loading.css( 'width', Math.round(100 * allImages.length / total ) + '%' );
+					//Calculate the position of the image 
+					//X axis: a = sinA * c = Math.sin( rad ) * radius
+					//Z axis: b = cosA * c = Math.cos( rad ) * radius
+					displacementSprite.rotation.y = -index * itemRadAngle;
+					displacementSprite.position.set( radius * Math.sin(index * itemRadAngle), 0, -radius * Math.cos(index * itemRadAngle) );
+
+					allImages.push( displacementSprite );
+
+					//loading
+					TweenMax.to( loading, 0.5, {
+						width    : Math.round(100 * allImages.length / total ) + '%',
+						onComplete : function() {
+
+							if ( $( this.target ).width() >= windowWidth - 50 ) {
+
+								TweenMax.to( this.target, 0.5, {
+									alpha: 0
+								});	
+							}
+
+						}
+					});
+					
+				},
+
+				// onProgress callback currently not supported
+				undefined,
+
+				// onError callback
+				function ( err ) {
+					console.error( 'An error happened.' );
+				}
+			);
 			
 		}
 
@@ -225,10 +259,6 @@ APP = ( function ( APP, $, window, document ) {
     return APP;
 
 }( APP, jQuery, window, document ) );
-
-
-
-
 
 
 

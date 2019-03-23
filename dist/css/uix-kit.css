@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
- * ## Version             :  3.3.5
+ * ## Version             :  3.3.6
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  March 21, 2019
+ * ## Last Update         :  March 23, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -1874,17 +1874,31 @@ img.uix-alignfull,
         .uix-menu__container:not(.is-mobile) ul.uix-menu ul.sub-menu a:hover {
           color: #000;
           background: #F1F1F1; }
-    .uix-menu__container:not(.is-mobile) ul.uix-menu > li:not(.multi-column) > ul ul {
-      top: 0;
-      left: 100%;
-      padding: 1.421875rem 0;
-      margin-left: -0.071875rem;
-      box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px;
-      border: 1.15px solid rgba(33, 33, 33, 0.1);
-      background: #fff;
-      border-radius: 8px; }
-      .uix-menu__container:not(.is-mobile) ul.uix-menu > li:not(.multi-column) > ul ul ul {
-        margin-left: 0; }
+    .uix-menu__container:not(.is-mobile) ul.uix-menu > li:not(.multi-column) > ul {
+      /* arrow of sub menu, not mega menu */ }
+      .uix-menu__container:not(.is-mobile) ul.uix-menu > li:not(.multi-column) > ul::after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: -3px;
+        left: 15px;
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 8px solid #fff;
+        box-shadow: 0 3px 57px rgba(0, 0, 0, 0.1); }
+      .uix-menu__container:not(.is-mobile) ul.uix-menu > li:not(.multi-column) > ul ul {
+        top: 0;
+        left: 100%;
+        padding: 1.421875rem 0;
+        margin-left: -0.071875rem;
+        box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px;
+        border: 1.15px solid rgba(33, 33, 33, 0.1);
+        background: #fff;
+        border-radius: 8px; }
+        .uix-menu__container:not(.is-mobile) ul.uix-menu > li:not(.multi-column) > ul ul ul {
+          margin-left: 0; }
   .uix-menu__container:not(.is-mobile) li.multi-column span.multi-column-title {
     text-transform: uppercase;
     font-weight: 700;
@@ -6921,10 +6935,10 @@ ol.uix-flexslider__control-paging {
       color: #999;
       font-size: 0.75rem; }
     .uix-controls__toggle .uix-controls__toggle-trigger::before {
-      content: "Off";
+      content: attr(data-off-text);
       left: -50px; }
     .uix-controls__toggle .uix-controls__toggle-trigger::after {
-      content: "On";
+      content: attr(data-on-text);
       right: -50px; }
 
 .uix-controls__checkbox {

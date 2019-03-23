@@ -350,6 +350,36 @@ webpackConfig.plugins.push(
 			async: true
 		}
 	}),
+	
+	
+//	new ConcatPlugin({
+//		uglify: false,
+//		sourceMap: false,
+//		name: 'result',
+//		outputPath: '',
+//		fileName: 'vendor.js',
+//		filesToConcat: [
+//			'./vendor/files/jquery.easing.min.js', 
+//			'./vendor/files/jquery.waitforimages.min.js', 
+//			'./vendor/files/video.min.js', 
+//			'./vendor/files/jquery.waypoints.min.js', 
+//			'./vendor/files/template7.min.js', 
+//			'./vendor/files/TweenMax.min.js', 
+//			'./vendor/files/pixi.min.js', 
+//			'./vendor/files/three.min.js', 
+//			'./vendor/files/anime.min.js', 
+//			'./vendor/files/hammer.min.js', 
+//			'./vendor/files/muuri.min.js',
+//			'./vendor/files/react.min.js',
+//			'./vendor/files/react-dom.min.js',
+//			'./vendor/files/radium.min.js',
+//		],
+//		attributes: {
+//			async: true
+//		}
+//	}),
+	
+	
 
 );
 

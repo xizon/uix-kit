@@ -182,7 +182,7 @@ APP = ( function ( APP, $, window, document ) {
 					largePhotos += '<div class="uix-lightbox__photo-container uix-lightbox__photo-sets-container"><a href="javascript:" class="uix-lightbox__photo-sets__prev"></a><a href="javascript:" class="uix-lightbox__photo-sets__next"></a><ul>';
 					for ( var i = 0; i < imgSrcStr.length; i++ ) {
 						
-						var tempID = 'lightbox-' + UIX_GUID.newGuid();
+						var tempID = 'lightbox-' + UixGUID.create();
 						
 						largePhotos += '<li>';
 						largePhotos += '	<a class="uix-lightbox__original__link" data-target-id="'+tempID+'-sets-'+i+'" href="javascript:void(0);">';
@@ -212,7 +212,7 @@ APP = ( function ( APP, $, window, document ) {
 					
 				} else {
 
-					var tempID = 'lightbox-' + UIX_GUID.newGuid();
+					var tempID = 'lightbox-' + UixGUID.create();
 					
 					//Only one image
 					imgSrcStrToW = imgSrcStr;

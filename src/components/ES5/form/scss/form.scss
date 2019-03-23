@@ -1482,12 +1482,12 @@ $controls-merge-button-width: 20%;
 		}
 
 		&::before {
-			content: "Off";
+			content: attr(data-off-text);
 			left: -50px;
 		}
 
 		&::after {
-			content: "On";
+			content: attr(data-on-text);
 			right: -50px;
 		}
 

@@ -16,7 +16,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 		$( teamFocusContent ).each( function() {
 			var $this           = $( this ),
-				thisID          = 'uix-team-focus-' + UIX_GUID.newGuid(),
+				thisID          = 'uix-team-focus-' + UixGUID.create(),
 				hoverWidth      = $this.data( 'hover-width' ),
 				targetWidth     = $this.data( 'target-width' ), // Div over width as a percentage 
 				targetInfo      = $this.data( 'target-info' ), // Corresponding character details display

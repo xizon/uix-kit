@@ -103,12 +103,12 @@ APP = ( function ( APP, $, window, document ) {
 			// Immediately use the texture for material creation
 			// Create a texture loader so we can load our image file
 			var imgs = [
-				templateUrl + '/assets/images/demo/cool-slider-1.jpg',
-				templateUrl + '/assets/images/demo/cool-slider-2.jpg'
+				'http://placekitten.com/1400/550',
+				'http://placekitten.com/1410/550'
 			];
 			
 			var loader = new THREE.TextureLoader();
-			loader.crossOrigin = '';
+			loader.crossOrigin = 'anonymous';
 
 
 			var texture1     = loader.load( imgs[0] ),
