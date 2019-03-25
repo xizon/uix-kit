@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
- * ## Version             :  3.3.6
+ * ## Version             :  3.3.7
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  March 23, 2019
+ * ## Last Update         :  March 25, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -1875,19 +1875,19 @@ img.uix-alignfull,
           color: #000;
           background: #F1F1F1; }
     .uix-menu__container:not(.is-mobile) ul.uix-menu > li:not(.multi-column) > ul {
+      left: 1.784375rem;
       /* arrow of sub menu, not mega menu */ }
       .uix-menu__container:not(.is-mobile) ul.uix-menu > li:not(.multi-column) > ul::after {
         content: "";
         display: block;
         position: absolute;
-        top: -3px;
+        top: 5px;
         left: 15px;
         width: 0;
         height: 0;
         border-left: 8px solid transparent;
         border-right: 8px solid transparent;
-        border-bottom: 8px solid #fff;
-        box-shadow: 0 3px 57px rgba(0, 0, 0, 0.1); }
+        border-bottom: 8px solid #fff; }
       .uix-menu__container:not(.is-mobile) ul.uix-menu > li:not(.multi-column) > ul ul {
         top: 0;
         left: 100%;
@@ -1937,14 +1937,15 @@ img.uix-alignfull,
     content: '';
     display: none;
     position: absolute;
-    top: 58px;
+    top: 56px;
     left: 50%;
     width: 0;
     height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-bottom: 5px solid #000;
-    opacity: 0; }
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #fff;
+    opacity: 0;
+    z-index: 1; }
   .uix-menu__container:not(.is-mobile) ul.uix-menu ul.sub-menu .uix-menu__arrow {
     background-color: #000;
     right: 2.159375rem;
@@ -6131,6 +6132,19 @@ ol.uix-flexslider__control-paging {
  1. Controls
  ---------------------------
  */
+/* Change Autocomplete styles in Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: 1px solid #dce4e8;
+  -webkit-text-fill-color: #dce4e8;
+  box-shadow: 0 0 0px 1000px #fff inset;
+  transition: background-color 5000s ease-in-out 0s; }
+
 /* Required field marker */
 .uix-controls__im {
   color: red;

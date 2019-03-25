@@ -44,11 +44,11 @@
         
        
         <!-- Theme  -->
-        <link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=evtU31WDBZKy7QUW8t4l"/>
+        <link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=DKd56Nf375ux61YhFABu"/>
         
         
          <!--[if lt IE 10]>
-           <link rel="stylesheet" href="assets/css/IE.css?ver=evtU31WDBZKy7QUW8t4l" />
+           <link rel="stylesheet" href="assets/css/IE.css?ver=DKd56Nf375ux61YhFABu" />
         <![endif]-->
         
         
@@ -407,79 +407,83 @@
         </header>
         <div class="uix-header__placeholder uix-header__placeholder--auto-height"></div><!-- This class is used for seamless connection with float navigation. -->
       
-     
+		<main id="uix-maincontent">
+			
+			<!-- Content   
+			====================================================== -->
+			<section>
+
+				<section class="uix-spacing--m uix-spacing--no-top">
+					<style>
+					#map {
+						width: 100%;
+						height: 400px;
+					}
+					</style>
+					<div id="map"></div>
+
+				</section>
+
+				<div class="container">
+						<div class="row">
+							<div class="col-lg-6 col-md-6 uix-trans">
+
+								<h4>GET IN TOUCH</h4>
+								<p> At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, </p>
+								<hr>
+								<p> 438 Marine Parade
+								<br /> Elwood, Victoria
+								<br /> P.O Box 3184 </p>
+								<hr>
+								<p> <strong>E:</strong> hello@foundry.net
+								<br /> <strong>P:</strong> +614 3948 2726
+								<br /> </p>
+
+							</div>
+							<!-- .col-lg-6.col-md-6 end -->
+
+							<div class="col-lg-6 col-md-6 uix-trans">
+
+									 <form method="post" action="#">
+
+
+										<div class="uix-controls is-fullwidth">
+										  <input type="text" class="js-uix-float-label" name="author">
+										  <label>Author</label>
+										</div>
+
+										<div class="uix-controls is-fullwidth">
+										  <input type="email" class="js-uix-float-label" name="email">
+										  <label>Email</label>
+										</div>
+
+
+										<div class="uix-controls uix-controls__textarea is-fullwidth">
+										  <textarea name="comments" class="js-uix-float-label"></textarea>
+										  <label>Comments</label>
+										</div>
+
+										<div class="uix-controls">
+										  <button type="submit" class="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary">Submit</button>
+										</div>  
+
+									</form>
+
+							</div>
+							<!-- .col-lg-6.col-md-6 end -->             
+
+						</div>
+						<!-- .row end -->
+
+				</div>
+				<!-- .container end -->
+
+
+			</section>
+			
+		</main>
  
-       <!-- Content   
-        ====================================================== -->
-        <section>
-   
-            <section class="uix-spacing--m uix-spacing--no-top">
-				<style>
-                #map {
-                    width: 100%;
-                    height: 400px;
-                }
-                </style>
-                <div id="map"></div>
-
-            </section>
-
-            <div class="container">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 uix-trans">
-                        
-                            <h4>GET IN TOUCH</h4>
-                            <p> At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, </p>
-                            <hr>
-                            <p> 438 Marine Parade
-                            <br /> Elwood, Victoria
-                            <br /> P.O Box 3184 </p>
-                            <hr>
-                            <p> <strong>E:</strong> hello@foundry.net
-                            <br /> <strong>P:</strong> +614 3948 2726
-                            <br /> </p>
-                         
-                        </div>
-                        <!-- .col-lg-6.col-md-6 end -->
-                        
-                        <div class="col-lg-6 col-md-6 uix-trans">
-                                
-								 <form method="post" action="#">
-
-
-									<div class="uix-controls is-fullwidth">
-									  <input type="text" class="js-uix-float-label" name="author">
-									  <label>Author</label>
-									</div>
-
-									<div class="uix-controls is-fullwidth">
-									  <input type="email" class="js-uix-float-label" name="email">
-									  <label>Email</label>
-									</div>
-
-
-									<div class="uix-controls uix-controls__textarea is-fullwidth">
-									  <textarea name="comments" class="js-uix-float-label"></textarea>
-									  <label>Comments</label>
-									</div>
-
-									<div class="uix-controls">
-									  <button type="submit" class="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--primary">Submit</button>
-									</div>  
-
-								</form>
-                         
-                        </div>
-                        <!-- .col-lg-6.col-md-6 end -->             
-                        
-                    </div>
-                    <!-- .row end -->
-                    
-            </div>
-            <!-- .container end -->
-           
-   
-        </section>
+		   
 
 
 
@@ -580,14 +584,14 @@
 	============================================= -->
 	
 	<script>
-		var REVISION     = "3.3.6",
+		var REVISION     = "3.3.7",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
 				"homeUrl"     : "",  //Eg. https://uiux.cc
 				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
 			};
     </script>  
-    <script src="../dist/js/uix-kit.min.js?ver=evtU31WDBZKy7QUW8t4l"></script>
+    <script src="../dist/js/uix-kit.min.js?ver=DKd56Nf375ux61YhFABu"></script>
 
 
 

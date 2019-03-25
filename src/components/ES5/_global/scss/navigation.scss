@@ -148,20 +148,21 @@ $nav-mega-li-w    : 270px;
 
 		> li:not(.multi-column) > ul {
 			
+			left: 1.784375rem;
+			
 
 			/* arrow of sub menu, not mega menu */
 			&::after {
 				content: "";
 				display: block;
 				position: absolute;
-				top: -3px;
+				top: 5px;
 				left: 15px;
 				width: 0;
 				height: 0;
 				border-left: 8px solid transparent;
 				border-right: 8px solid transparent;
-				border-bottom: 8px solid #fff;
-				box-shadow: 0 3px 57px rgba(0,0,0,.1);		
+				border-bottom: 8px solid #fff;	
 			}
 			
 			ul {
@@ -178,6 +179,7 @@ $nav-mega-li-w    : 270px;
 				ul {
 					margin-left: 0;
 				}
+				
 				
 			}	
 		}
@@ -259,15 +261,17 @@ $nav-mega-li-w    : 270px;
 			content: '';
 			display: none;
 			position: absolute;
-			top: 58px;
+			top: 56px;
 			left: 50%;
 			width: 0;
 			height: 0;
-			border-left: 5px solid transparent;
-			border-right: 5px solid transparent;
-			border-bottom: 5px solid #000;
+			border-left: 8px solid transparent;
+			border-right: 8px solid transparent;
+			border-bottom: 8px solid #fff;
 			opacity: 0;
+			z-index: 1;
 		}
+		
 
 
 	}

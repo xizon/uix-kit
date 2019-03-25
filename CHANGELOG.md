@@ -1,11 +1,15 @@
 # Changelog
 
+#### = 3.3.7 (March 25, 2019) =
+
+* Tweak: Optimized tag semantics for html.
+* Tweak: Optimized shader loader of module "3D Background".
+
 
 #### = 3.3.6 (March 22, 2019) =
 
 * Tweak: Update the GUID function.
 * Tweak: Enhanced the functionality of the switch component.
-
 
 
 #### = 3.3.5 (March 20, 2019) =

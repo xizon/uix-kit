@@ -32,155 +32,160 @@
         </header>
         <div class="uix-header__placeholder"></div>
       
-      
+		<main id="uix-maincontent">
+			
+			<!-- Content 
+			====================================================== -->
+			<section>
+				<div class="container uix-t-c">
+						<div class="row">
+							<div class="col-md-8 offset-md-2">
+								<h2>Dynamic Drop Down List from JSON</h2>
+								<p>Create a dynamic dropdown form that loads its data from a JSON file.</p>
+
+							</div>
+						</div>
+						<!-- .row end -->
+
+
+				</div>
+				<!-- .container end -->
+
+			</section>
+
+
+
+		   <!-- Content 
+			====================================================== -->
+			<section class="uix-spacing--m">
+				<div class="container">
+						<div class="row">
+							<div class="col-md-8 offset-md-2">
+
+								   <p class="uix-striking-msg uix-striking-msg--info"><strong>Callback:</strong> <span id="dynamic-callback">-</span></p>
+
+									<div class="uix-controls uix-controls__select">
+										<label>
+											<select 
+													id="dynamic-dd-sort" 
+													name="dynamic-dd-sort" 
+													data-ajax-dynamic-dd-json="assets/json/catgories.json"
+													data-ajax-dynamic-dd-method="POST" 
+													data-ajax-dynamic-dd-event="change" 
+													data-ajax-dynamic-dd-data="" 
+													data-ajax-dynamic-dd-associated="#dynamic-dd-subsort">
+
+
+												<option value="" selected>Sort</option>
+											</select>
+
+										</label>
+										<span>Sort</span>
+
+									</div>
+
+
+									<!-- ////////   -->
+
+									<div class="uix-controls uix-controls__select">
+										<label>
+											<select id="dynamic-dd-subsort" name="dynamic-dd-subsort">
+												<option value="" selected>Sub-sort</option>
+											</select>
+
+										</label>
+										<span>Sub-sort</span>
+
+									</div>			
+
+
+							</div>
+							<!-- .col-12 end -->
+						</div>
+						<!-- .row end -->
+
+
+				</div>
+				<!-- .container end -->
+
+
+			</section>
+
+
+
+
+		   <!-- Content 
+			====================================================== -->
+			<section class="uix-spacing--m uix-spacing--no-top">
+				<div class="container">
+						<div class="row">
+							<div class="col-md-8 offset-md-2">
+
+								   <p class="uix-striking-msg uix-striking-msg--info"><strong>(中国)区县:</strong> <span id="dynamic-callback2">-</span></p>
+
+
+									<div class="uix-controls uix-controls__select uix-controls__select--top">
+										<label>
+											<select 
+													id="dynamic-dd-china-province" 
+													name="dynamic-dd-china-province" 
+													data-ajax-dynamic-dd-json="assets/json/china.json"
+													data-ajax-dynamic-dd-method="POST" 
+													data-ajax-dynamic-dd-event="change" 
+													data-ajax-dynamic-dd-data="" 
+													data-ajax-dynamic-dd-associated="#dynamic-dd-china-city">	
+
+												<option value="">- 省份 -</option>
+											</select>
+
+										</label>
+									</div>
+
+
+									<!-- ////////   -->
+
+									<div class="uix-controls uix-controls__select uix-controls__select--top">
+										<label>
+											<select name="dynamic-dd-china-city" id="dynamic-dd-china-city">
+												<option value="">- 城市 -</option>
+											</select>
+
+										</label>
+
+									</div>		
+
+
+									<!-- ////////   -->
+
+									<div class="uix-controls uix-controls__select uix-controls__select--top">
+										<label>
+											<select name="dynamic-dd-china-area" id="dynamic-dd-china-area">
+												<option value="">- 区县 -</option>
+											</select>
+
+										</label>
+
+									</div>		
+
+
+
+							</div>
+							<!-- .col-12 end -->
+						</div>
+						<!-- .row end -->
+
+
+				</div>
+				<!-- .container end -->
+
+
+			</section>
+
+			
+		</main>
+		
      
-        <!-- Content 
-        ====================================================== -->
-        <section>
-            <div class="container uix-t-c">
-                    <div class="row">
-                        <div class="col-md-8 offset-md-2">
-                            <h2>Dynamic Drop Down List from JSON</h2>
-							<p>Create a dynamic dropdown form that loads its data from a JSON file.</p>
-                            
-                        </div>
-                    </div>
-                    <!-- .row end -->
-              
-                    
-            </div>
-            <!-- .container end -->
- 
-        </section>
-     
-       
-    
-       <!-- Content 
-        ====================================================== -->
-        <section class="uix-spacing--m">
-            <div class="container">
-                    <div class="row">
-                        <div class="col-md-8 offset-md-2">
-   
-						       <p class="uix-striking-msg uix-striking-msg--info"><strong>Callback:</strong> <span id="dynamic-callback">-</span></p>
-         
-								<div class="uix-controls uix-controls__select">
-									<label>
-										<select 
-												id="dynamic-dd-sort" 
-												name="dynamic-dd-sort" 
-												data-ajax-dynamic-dd-json="assets/json/catgories.json"
-												data-ajax-dynamic-dd-method="POST" 
-												data-ajax-dynamic-dd-event="change" 
-												data-ajax-dynamic-dd-data="" 
-												data-ajax-dynamic-dd-associated="#dynamic-dd-subsort">
-
-
-											<option value="" selected>Sort</option>
-										</select>
-
-									</label>
-									<span>Sort</span>
-
-								</div>
-
-
-								<!-- ////////   -->
-
-								<div class="uix-controls uix-controls__select">
-									<label>
-										<select id="dynamic-dd-subsort" name="dynamic-dd-subsort">
-										    <option value="" selected>Sub-sort</option>
-										</select>
-
-									</label>
-									<span>Sub-sort</span>
-
-								</div>			
-                        
-                       
-                        </div>
-                        <!-- .col-12 end -->
-                    </div>
-                    <!-- .row end -->
-                    
-                    
-            </div>
-            <!-- .container end -->
-            
-            
-        </section>
-        
-
-        
-    
-       <!-- Content 
-        ====================================================== -->
-        <section class="uix-spacing--m uix-spacing--no-top">
-            <div class="container">
-                    <div class="row">
-                        <div class="col-md-8 offset-md-2">
-   
-						       <p class="uix-striking-msg uix-striking-msg--info"><strong>(中国)区县:</strong> <span id="dynamic-callback2">-</span></p>
-         
-
-								<div class="uix-controls uix-controls__select uix-controls__select--top">
-									<label>
-										<select 
-												id="dynamic-dd-china-province" 
-												name="dynamic-dd-china-province" 
-												data-ajax-dynamic-dd-json="assets/json/china.json"
-												data-ajax-dynamic-dd-method="POST" 
-												data-ajax-dynamic-dd-event="change" 
-												data-ajax-dynamic-dd-data="" 
-												data-ajax-dynamic-dd-associated="#dynamic-dd-china-city">	
-
-											<option value="">- 省份 -</option>
-										</select>
-
-									</label>
-								</div>
-
-
-								<!-- ////////   -->
-
-								<div class="uix-controls uix-controls__select uix-controls__select--top">
-									<label>
-										<select name="dynamic-dd-china-city" id="dynamic-dd-china-city">
-											<option value="">- 城市 -</option>
-										</select>
-
-									</label>
-
-								</div>		
-
-
-								<!-- ////////   -->
-
-								<div class="uix-controls uix-controls__select uix-controls__select--top">
-									<label>
-										<select name="dynamic-dd-china-area" id="dynamic-dd-china-area">
-											<option value="">- 区县 -</option>
-										</select>
-
-									</label>
-
-								</div>		
-
-                                      
-                       
-                        </div>
-                        <!-- .col-12 end -->
-                    </div>
-                    <!-- .row end -->
-                    
-                    
-            </div>
-            <!-- .container end -->
-            
-            
-        </section>
-        
+			
 
         
         @@include('./src/components/ES5/_global/include-copyright.html')

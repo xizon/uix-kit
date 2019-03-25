@@ -164,7 +164,7 @@ APP = ( function ( APP, $, window, document ) {
 			var geometryPR = new THREE.TetrahedronGeometry(2, 0),
 				materialPR = new THREE.MeshPhongMaterial({
 				color: 0xffffff,
-				shading: THREE.FlatShading
+				flatShading: THREE.FlatShading
 			});
 
 			for (var i = 0; i < 1000; i++) {

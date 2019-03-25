@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
- * ## Version             :  3.3.6
+ * ## Version             :  3.3.7
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  March 23, 2019
+ * ## Last Update         :  March 25, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -31246,7 +31246,7 @@ APP = ( function ( APP, $, window, document ) {
 			var geometryPR = new THREE.TetrahedronGeometry(2, 0),
 				materialPR = new THREE.MeshPhongMaterial({
 				color: 0xffffff,
-				shading: THREE.FlatShading
+				flatShading: THREE.FlatShading
 			});
 
 			for (var i = 0; i < 1000; i++) {
