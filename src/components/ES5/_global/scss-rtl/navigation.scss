@@ -70,10 +70,18 @@
 		    right: 0;
 	    }
 		
-	    > li:not(.multi-column) > ul ul {
-		    left: auto;
-		    right: 100%;
-	    }
+		> li:not(.multi-column) > ul {
+			
+			right: 1.784375rem;
+			
+			ul {
+				left: auto;
+				right: 100%;
+			}
+			
+		}
+		
+
 	}
 
 

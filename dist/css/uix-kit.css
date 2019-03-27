@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
- * ## Version             :  3.3.7
+ * ## Version             :  3.3.8
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  March 25, 2019
+ * ## Last Update         :  March 27, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -491,7 +491,6 @@ ul.uix-list--circle,
     position: relative;
     margin-bottom: .5rem;
     color: #212121;
-    font-size: 1.125rem;
     margin-left: 1rem; }
   ol.uix-list--circle > li::before,
   ul.uix-list--circle > li::before,
@@ -4080,7 +4079,8 @@ h6 {
   /*--- 2 Rows, Large image on the right ---*/
   /*--- 3 Rows, Large image on the left ---*/
   /*--- 3 Rows, Large image on the right ---*/
-  /*--- 2 Rows, 3 Columns Large image on the left and right ---*/ }
+  /*--- 2 Rows, 3 Columns, Large image on the left and right ---*/
+  /*--- 2 Rows, 3 Columns, Large image on the left, 2 columns image on the right ---*/ }
   .uix-blended-grid > ul {
     margin: 0;
     padding: 0; }
@@ -4209,6 +4209,31 @@ h6 {
     left: 75%;
     width: 25%;
     height: 100%; }
+  .uix-blended-grid .uix-blended-grid__col-three-left-right2 > li:nth-child(1) {
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%; }
+  .uix-blended-grid .uix-blended-grid__col-three-left-right2 > li:nth-child(2) {
+    top: 0;
+    left: 50%;
+    width: 25%;
+    height: 50%; }
+  .uix-blended-grid .uix-blended-grid__col-three-left-right2 > li:nth-child(3) {
+    top: 0;
+    left: 75%;
+    width: 25%;
+    height: 50%; }
+  .uix-blended-grid .uix-blended-grid__col-three-left-right2 > li:nth-child(4) {
+    top: 50%;
+    left: 50%;
+    width: 25%;
+    height: 50%; }
+  .uix-blended-grid .uix-blended-grid__col-three-left-right2 > li:nth-child(5) {
+    top: 50%;
+    left: 75%;
+    width: 25%;
+    height: 50%; }
 
 @media all and (max-width: 768px) {
   .uix-blended-grid {

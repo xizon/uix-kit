@@ -1,5 +1,10 @@
 # Changelog
 
+#### = 3.3.8 (March 27, 2019) =
+
+* Tweak: Subtle style optimization.
+
+
 #### = 3.3.7 (March 25, 2019) =
 
 * Tweak: Optimized tag semantics for html.
