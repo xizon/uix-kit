@@ -225,44 +225,35 @@ APP = ( function ( APP, $, window, document ) {
 
 			var geometry = new THREE.Geometry();
 
-			var applyVertexColors = function( g, c ) {
-
-				g.faces.forEach( function( f ) {
-
-					var n = ( f instanceof THREE.Face3 ) ? 3 : 4;
-
-					for ( var j = 0; j < n; j ++ ) {
-
-						f.vertexColors[ j ] = c;
-
+			var applyVertexColors = function(g, c) {
+				g.faces.forEach(function(f) {
+					var n = (f instanceof THREE.Face3) ? 3 : 4;
+					for (var j = 0; j < n; j++) {
+						f.vertexColors[j] = c;
 					}
-
-				} );
-
+				});
 			};
 
 			for ( var i = 0; i < numObjects; i ++ ) {
 
 				var position = new THREE.Vector3();
-
 				position.x = Math.random() * 10000 - 5000;
 				position.y = Math.random() * 6000 - 3000;
 				position.z = Math.random() * 8000 - 4000;
 
 				var rotation = new THREE.Euler();
-
 				rotation.x = Math.random() * 2 * Math.PI;
 				rotation.y = Math.random() * 2 * Math.PI;
 				rotation.z = Math.random() * 2 * Math.PI;
 
 				var scale = new THREE.Vector3();
+				scale.x = Math.random() * 200 + 100;
 
+				
 				var geom, 
 					color = new THREE.Color();
 
-				scale.x = Math.random() * 200 + 100;
-
-
+				
 				if ( objectType == "cube" ) {
 
 					geom = new THREE.BoxGeometry( 1, 1, 1 );
@@ -308,7 +299,7 @@ APP = ( function ( APP, $, window, document ) {
 		
 		//Generate random number between two numbers
 		function getRandomFloat(min, max) {
-		  return Math.random() * (max - min) + min;
+			return Math.random() * (max - min) + min;
 		}
 		
 

@@ -1,7 +1,8 @@
 # Changelog
 
-#### = 3.4.0 (March 29, 2019) =
+#### = 3.4.1 (March 29, 2019) =
 
+* New: Add a new module "3D Mouse Interaction 2".
 * New: Added support for shaderfrog.
 * Tweak: Upgraded the module "3D Background".
 * Fix: Fixed a minor bug in form linkage.

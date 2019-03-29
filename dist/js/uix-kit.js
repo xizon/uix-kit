@@ -2,7 +2,7 @@
  * 
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
- * ## Version             :  3.4.0
+ * ## Version             :  3.4.1
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
  * ## Last Update         :  March 29, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -137,7 +137,7 @@ var UIX_KIT_IMPORT = {
   /******/
 
   /* pages */
-  "./src/components/ES5/_main/js/main.js", "./src/components/ES5/accordion-img/js/accordion-img.js", "./src/components/ES5/accordion/js/accordion.js", "./src/components/ES5/advanced-content-slider/js/advanced-content-slider.js", "./src/components/ES5/advanced-slider/js/advanced-slider-basic.js", "./src/components/ES5/advanced-slider/js/advanced-slider-SpecialEffects.js", "./src/components/ES5/AJAX-push/js/ajax-push-content.js", "./src/components/ES5/AJAX/js/ajax-page-loader.js", "./src/components/ES5/back-to-top/js/back-to-top.js", "./src/components/ES5/circle-layout/js/circle-layout.js", "./src/components/ES5/counter/js/counter.js", "./src/components/ES5/dropdown-menu/js/dropdown-menu.js", "./src/components/ES5/dropdown-menu2/js/dropdown-menu2.js", "./src/components/ES5/dynamic-dropdown-list-json/js/dynamic-dropdown-list-json.js", "./src/components/ES5/flexslider/js/custom-flexslider.js", "./src/components/ES5/flexslider/js/jquery.flexslider.js", "./src/components/ES5/floating-side-element/js/floating-side-element.js", "./src/components/ES5/form-progress/js/form-progress.js", "./src/components/ES5/form/js/form.js", "./src/components/ES5/form/js/datepicker.js", "./src/components/ES5/gallery/js/gallery.js", "./src/components/ES5/hover-delay-interaction/js/hover-delay-interaction.js", "./src/components/ES5/image-shapes/js/image-shapes.js", "./src/components/ES5/lava-lamp-style-menu/js/lava-lamp-style-menu.js", "./src/components/ES5/lightbox/js/lightbox.js", "./src/components/ES5/list-bulleted/js/list-bulleted.js", "./src/components/ES5/list-posts/js/list-posts-with-ajax.js", "./src/components/ES5/list-split-imagery/js/list-split-imagery.js", "./src/components/ES5/login-templates/js/login-templates.js", "./src/components/ES5/modal-dialog/js/modal-dialog.js", "./src/components/ES5/mousewheel-interaction/js/mousewheel-interaction.js", "./src/components/ES5/multi-items-carousel/js/multi-items-carousel.js", "./src/components/ES5/one-page/js/one-page.js", "./src/components/ES5/one-page2/js/one-page2.js", "./src/components/ES5/parallax/js/parallax.js", "./src/components/ES5/periodical-scroll/js/periodical-scroll.js", "./src/components/ES5/pricing/js/pricing.js", "./src/components/ES5/progress-bar/js/progress-bar.js", "./src/components/ES5/progress-line/js/progress-line.js", "./src/components/ES5/retina/js/retina.js", "./src/components/ES5/rotating-elements/js/rotating-elements.js", "./src/components/ES5/scroll-reveal/js/scroll-reveal.js", "./src/components/ES5/scrollspy-animate/js/scrollspy-animate.js", "./src/components/ES5/show-more-less/js/show-more-less.js", "./src/components/ES5/skew-on-scroll/js/skew-on-scroll.js", "./src/components/ES5/smooth-scrolling-anchor-link/js/smooth-scrolling-anchor-link.js", "./src/components/ES5/sticky-elements/js/sticky-elements.js", "./src/components/ES5/svg-map/js/svg-map-china.js", "./src/components/ES5/svg-map/js/svg-map-world.js", "./src/components/ES5/simple-3D-background-three/js/3D-background-three.js", "./src/components/ES5/simple-3D-background-three2/js/3D-background-three2.js", "./src/components/ES5/simple-3D-background-three3/js/3D-background-three3.js", "./src/components/ES5/simple-3D-background/js/3D-background.js", "./src/components/ES5/simple-3D-carousel/js/3D-carousel.js", "./src/components/ES5/simple-3D-gallery/js/3D-gallery.js", "./src/components/ES5/simple-3D-image-transition/js/3D-image-transition.js", "./src/components/ES5/simple-3D-model/js/3D-model.js", "./src/components/ES5/simple-3D-pages/js/3D-pages.js", "./src/components/ES5/simple-3D-particle-effect/js/3D-particle-effect.js", "./src/components/ES5/simple-3D-sphere-three/js/3D-sphere-three.js", "./src/components/ES5/simple-3D-obj-anim-interaction/js/3D-obj-anim-interaction.js", "./src/components/ES5/simple-3D-mouse-interaction/js/3D-mouse-interaction.js", "./src/components/ES5/table/js/table.js", "./src/components/ES5/table/js/table-sorter.js", "./src/components/ES5/tabs/js/tabs.js", "./src/components/ES5/team-focus/js/team-focus.js", "./src/components/ES5/text-effect/js/text-effect.js", "./src/components/ES5/timeline/js/timeline.js", "./src/components/ES5/vertical-menu/js/vertical-menu.js", "./src/components/ES5/wordpress/js/wp-core.js"]
+  "./src/components/ES5/_main/js/main.js", "./src/components/ES5/accordion-img/js/accordion-img.js", "./src/components/ES5/accordion/js/accordion.js", "./src/components/ES5/advanced-content-slider/js/advanced-content-slider.js", "./src/components/ES5/advanced-slider/js/advanced-slider-basic.js", "./src/components/ES5/advanced-slider/js/advanced-slider-SpecialEffects.js", "./src/components/ES5/AJAX-push/js/ajax-push-content.js", "./src/components/ES5/AJAX/js/ajax-page-loader.js", "./src/components/ES5/back-to-top/js/back-to-top.js", "./src/components/ES5/circle-layout/js/circle-layout.js", "./src/components/ES5/counter/js/counter.js", "./src/components/ES5/dropdown-menu/js/dropdown-menu.js", "./src/components/ES5/dropdown-menu2/js/dropdown-menu2.js", "./src/components/ES5/dynamic-dropdown-list-json/js/dynamic-dropdown-list-json.js", "./src/components/ES5/flexslider/js/custom-flexslider.js", "./src/components/ES5/flexslider/js/jquery.flexslider.js", "./src/components/ES5/floating-side-element/js/floating-side-element.js", "./src/components/ES5/form-progress/js/form-progress.js", "./src/components/ES5/form/js/form.js", "./src/components/ES5/form/js/datepicker.js", "./src/components/ES5/gallery/js/gallery.js", "./src/components/ES5/hover-delay-interaction/js/hover-delay-interaction.js", "./src/components/ES5/image-shapes/js/image-shapes.js", "./src/components/ES5/lava-lamp-style-menu/js/lava-lamp-style-menu.js", "./src/components/ES5/lightbox/js/lightbox.js", "./src/components/ES5/list-bulleted/js/list-bulleted.js", "./src/components/ES5/list-posts/js/list-posts-with-ajax.js", "./src/components/ES5/list-split-imagery/js/list-split-imagery.js", "./src/components/ES5/login-templates/js/login-templates.js", "./src/components/ES5/modal-dialog/js/modal-dialog.js", "./src/components/ES5/mousewheel-interaction/js/mousewheel-interaction.js", "./src/components/ES5/multi-items-carousel/js/multi-items-carousel.js", "./src/components/ES5/one-page/js/one-page.js", "./src/components/ES5/one-page2/js/one-page2.js", "./src/components/ES5/parallax/js/parallax.js", "./src/components/ES5/periodical-scroll/js/periodical-scroll.js", "./src/components/ES5/pricing/js/pricing.js", "./src/components/ES5/progress-bar/js/progress-bar.js", "./src/components/ES5/progress-line/js/progress-line.js", "./src/components/ES5/retina/js/retina.js", "./src/components/ES5/rotating-elements/js/rotating-elements.js", "./src/components/ES5/scroll-reveal/js/scroll-reveal.js", "./src/components/ES5/scrollspy-animate/js/scrollspy-animate.js", "./src/components/ES5/show-more-less/js/show-more-less.js", "./src/components/ES5/skew-on-scroll/js/skew-on-scroll.js", "./src/components/ES5/smooth-scrolling-anchor-link/js/smooth-scrolling-anchor-link.js", "./src/components/ES5/sticky-elements/js/sticky-elements.js", "./src/components/ES5/svg-map/js/svg-map-china.js", "./src/components/ES5/svg-map/js/svg-map-world.js", "./src/components/ES5/simple-3D-background-three/js/3D-background-three.js", "./src/components/ES5/simple-3D-background-three2/js/3D-background-three2.js", "./src/components/ES5/simple-3D-background-three3/js/3D-background-three3.js", "./src/components/ES5/simple-3D-background/js/3D-background.js", "./src/components/ES5/simple-3D-carousel/js/3D-carousel.js", "./src/components/ES5/simple-3D-gallery/js/3D-gallery.js", "./src/components/ES5/simple-3D-image-transition/js/3D-image-transition.js", "./src/components/ES5/simple-3D-model/js/3D-model.js", "./src/components/ES5/simple-3D-pages/js/3D-pages.js", "./src/components/ES5/simple-3D-particle-effect/js/3D-particle-effect.js", "./src/components/ES5/simple-3D-sphere-three/js/3D-sphere-three.js", "./src/components/ES5/simple-3D-obj-anim-interaction/js/3D-obj-anim-interaction.js", "./src/components/ES5/simple-3D-mouse-interaction/js/3D-mouse-interaction.js", "./src/components/ES5/simple-3D-mouse-interaction2/js/3D-mouse-interaction2.js", "./src/components/ES5/table/js/table.js", "./src/components/ES5/table/js/table-sorter.js", "./src/components/ES5/tabs/js/tabs.js", "./src/components/ES5/team-focus/js/team-focus.js", "./src/components/ES5/text-effect/js/text-effect.js", "./src/components/ES5/timeline/js/timeline.js", "./src/components/ES5/vertical-menu/js/vertical-menu.js", "./src/components/ES5/wordpress/js/wp-core.js"]
 };
 
 // CONCATENATED MODULE: ./src/components/ES6/_global/js/vars.js
@@ -274,14 +274,15 @@ if (document.getElementsByTagName('body')[0].className.match(/es6-demo-home/)) {
     69.3D Sphere Rotation
     70.3D Object Anim When Click
     71.3D Mouse Interaction with three.js
-    72.Responsive Table
-    73.Table Sorter
-    74.Tabs
-    75.Team Focus
-    76.Text effect
-    77.Timeline
-    78.Vertical Menu
-    79.WordPress Core Scripts
+    72.3D Mouse Interaction with three.js
+    73.Responsive Table
+    74.Table Sorter
+    75.Tabs
+    76.Team Focus
+    77.Text effect
+    78.Timeline
+    79.Vertical Menu
+    80.WordPress Core Scripts
 
 
 */
@@ -29602,44 +29603,35 @@ APP = ( function ( APP, $, window, document ) {
 
 			var geometry = new THREE.Geometry();
 
-			var applyVertexColors = function( g, c ) {
-
-				g.faces.forEach( function( f ) {
-
-					var n = ( f instanceof THREE.Face3 ) ? 3 : 4;
-
-					for ( var j = 0; j < n; j ++ ) {
-
-						f.vertexColors[ j ] = c;
-
+			var applyVertexColors = function(g, c) {
+				g.faces.forEach(function(f) {
+					var n = (f instanceof THREE.Face3) ? 3 : 4;
+					for (var j = 0; j < n; j++) {
+						f.vertexColors[j] = c;
 					}
-
-				} );
-
+				});
 			};
 
 			for ( var i = 0; i < numObjects; i ++ ) {
 
 				var position = new THREE.Vector3();
-
 				position.x = Math.random() * 10000 - 5000;
 				position.y = Math.random() * 6000 - 3000;
 				position.z = Math.random() * 8000 - 4000;
 
 				var rotation = new THREE.Euler();
-
 				rotation.x = Math.random() * 2 * Math.PI;
 				rotation.y = Math.random() * 2 * Math.PI;
 				rotation.z = Math.random() * 2 * Math.PI;
 
 				var scale = new THREE.Vector3();
+				scale.x = Math.random() * 200 + 100;
 
+				
 				var geom, 
 					color = new THREE.Color();
 
-				scale.x = Math.random() * 200 + 100;
-
-
+				
 				if ( objectType == "cube" ) {
 
 					geom = new THREE.BoxGeometry( 1, 1, 1 );
@@ -29685,7 +29677,7 @@ APP = ( function ( APP, $, window, document ) {
 		
 		//Generate random number between two numbers
 		function getRandomFloat(min, max) {
-		  return Math.random() * (max - min) + min;
+			return Math.random() * (max - min) + min;
 		}
 		
 
@@ -32520,6 +32512,400 @@ APP = ( function ( APP, $, window, document ) {
     };
 
     APP.components.documentReady.push( APP._3D_MOUSE_INTERACTION.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+
+
+
+
+/* 
+ *************************************
+ * <!-- 3D Mouse Interaction with three.js -->
+ *************************************
+ */
+/**
+ * APP._3D_MOUSE_INTERACTION2
+ * @global
+ * @requires ./examples/assets/js/min/three.min.js
+ * @requires ./src/components/ES5/_plugins-THREE
+ */
+
+
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP._3D_MOUSE_INTERACTION2               = APP._3D_MOUSE_INTERACTION2 || {};
+	APP._3D_MOUSE_INTERACTION2.version       = '0.0.1';
+    APP._3D_MOUSE_INTERACTION2.documentReady = function( $ ) {
+
+		//Prevent this module from loading in other pages
+		if ( $( '#3D-mouseinteraction2-three-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
+		
+		
+		var $window                   = $( window ),
+			windowWidth               = window.innerWidth,
+			windowHeight              = window.innerHeight,
+			rendererCanvasID          = '3D-mouseinteraction2-three-canvas';
+		
+	
+		
+		// Generate one plane geometries mesh to scene
+		//-------------------------------------	
+		var camera,
+			scene,
+			light,
+			renderer,
+			displacementSprite,
+			theta         = 0,
+			clickEnable   = false;
+		
+
+		// controls
+		var scroller = new CameraScroller({direction: "y"});
+
+		
+		// mouse
+		var mouseVector = new THREE.Vector2(), 
+			raycaster,
+			intersects,
+			INTERSECTED,
+			nucleus,
+			atoms = [];
+		
+		
+		
+		
+		init();
+		render();
+
+		function init() {
+			//camera
+			camera = new THREE.PerspectiveCamera( 70, windowWidth / windowHeight, 1, 50000 );
+			camera.position.set( 0, 0, 20000 );
+
+			
+			//Scene
+			scene = new THREE.Scene();
+
+			//HemisphereLight
+			scene.add( new THREE.AmbientLight( 0x555555 ) );
+
+			light = new THREE.SpotLight( 0xffffff, 1.5 );
+			light.position.set( 0, 500, 2000 );
+			scene.add( light );
+			
+			
+			
+			
+
+			//WebGL Renderer		
+			renderer = new THREE.WebGLRenderer( { 
+									canvas   : document.getElementById( rendererCanvasID ), //canvas
+									alpha    : true, 
+									antialias: true 
+								} );
+			renderer.setSize( windowWidth, windowHeight );
+			
+			
+			scroller.init( renderer.domElement );
+
+			// Immediately use the texture for material creation
+			generateGeometry( 500 );
+			
+
+			// Fires when the window changes
+			window.addEventListener( 'resize', onWindowResize, false );
+			
+			
+			// When the mouse moves, call the given function
+			raycaster = new THREE.Raycaster();
+			document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+			document.getElementById( rendererCanvasID ).addEventListener( 'click', onDocumentMouseDown, false );
+			document.addEventListener( 'mouseup', onDocumentMouseUp, false );
+		
+			
+			
+		}
+
+		function render() {
+			requestAnimationFrame( render );
+		
+			
+
+			//To set a background color.
+			renderer.setClearColor( 0x000000 );	
+			
+			//update controls
+			camera.position.y = scroller.getScrollPosY()*10000;
+			
+			//Mouse interactions
+			raycaster.setFromCamera( mouseVector, camera );
+			intersects = raycaster.intersectObjects( atoms );
+			//intersects = raycaster.intersectObjects( scene.children );
+			if ( intersects.length > 0 ) {
+
+			
+				if ( INTERSECTED != intersects[ 0 ].object ) {
+
+					// restore previous intersection object (if it exists) to its original color
+					if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+
+					INTERSECTED = intersects[ 0 ].object;
+					INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
+					INTERSECTED.material.emissive.setHex( 0xff0000 );
+
+				}
+
+			} else {
+
+				// restore previous intersection object (if it exists) to its original color
+				if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+
+				//by setting current intersection object to "nothing"
+				INTERSECTED = null;
+
+			}
+			
+			renderer.render( scene, camera );
+			
+			
+
+			
+		}
+
+
+		function onWindowResize() {
+			camera.aspect = window.innerWidth / window.innerHeight;
+			camera.updateProjectionMatrix();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+		}
+
+		
+		function onDocumentMouseMove( event ) {
+			event.preventDefault();
+			mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+			mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+		}
+		
+
+		function onDocumentMouseDown( event ) {
+			event.preventDefault();
+			mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+			mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
+			clickEnable = true;
+	
+			//Mouse interactions
+			raycaster.setFromCamera( mouseVector, camera );
+			intersects = raycaster.intersectObjects( atoms );
+			//intersects = raycaster.intersectObjects( scene.children );
+			
+			
+			
+			
+			if ( intersects.length > 0 && intersects[0].object.name.indexOf( 'nucleus' ) >= 0 ) {
+	
+				var targetAtomPos = intersects[0].object.position;
+
+				// targetAtomPos.tween.pause();
+				var destinationPos = targetAtomPos.clone();
+		
+				// jump to new position
+				// y movement via scroller object
+				// x and z movement via TWEEN
+				scroller.targetPosition = intersects[0].object.position.y/10000;
+				var targetPos = { x: intersects[0].object.position.x, y:intersects[0].object.position.y, z:intersects[0].object.position.z+1100};
+			
+				TweenMax.to( targetPos, 2,{ x:destinationPos.x, y:destinationPos.y, z:destinationPos.z});
+				TweenMax.to( camera.position, 2,{ x:destinationPos.x, y:destinationPos.y, z:destinationPos.z+1000,
+					onUpdate:function(){
+						camera.up.set(0,1,0);
+						camera.updateProjectionMatrix();
+					}
+				});
+
+			} else {
+				
+				
+				//restore scroller position
+				scroller.targetPosition = 0;
+				
+				//restore camera position
+				TweenMax.to( camera.position, 2,{ x:0, y:0, z:20000,
+					onComplete:function(){
+						TweenMax.resumeAll();
+					}
+				});	
+
+			}	
+			
+
+			
+		}
+		
+		
+		function onDocumentMouseUp( event ) {
+			event.preventDefault();
+			mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+			mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+			
+			theta = 0;
+			clickEnable = false;
+			
+		}
+			
+		
+	
+		
+		/*
+		 * Batch generation of geometry
+		 *
+		 * @param  {Number} numObjects       - The total number of generated objects.
+		 * @return {Void}
+		 */
+		function generateGeometry( numObjects ) {
+
+			var geometry = new THREE.Geometry();
+
+			var applyVertexColors = function(g, c) {
+				g.faces.forEach(function(f) {
+					var n = (f instanceof THREE.Face3) ? 3 : 4;
+					for (var j = 0; j < n; j++) {
+						f.vertexColors[j] = c;
+					}
+				});
+			};
+			
+			for ( var i = 0; i < numObjects; i ++ ) {
+
+				var geom, 
+					color = new THREE.Color();
+				
+				
+				
+				var position = new THREE.Vector3();
+				position.x = -9000 + (i % 10) * 2000;
+				position.y = -9000 + Math.floor((i % 100) / 10) * 2000;
+				position.z = -1000 + Math.floor(i / 100) * 2000;
+
+				var rotation = new THREE.Euler();
+				rotation.x = 0;
+				rotation.y = 0;
+				rotation.z = 0;
+
+				var scale = new THREE.Vector3();
+				scale.x = 1200;
+				scale.y = 600;
+				scale.z = 200;
+
+				geom = new THREE.BoxGeometry( 1, 1, 1 );
+				color.setRGB( 0, 0, Math.random() + 0.1 );
+
+
+
+				// give the geom's vertices a random color, to be displayed
+				applyVertexColors( geom, color );
+
+				
+				// Immediately use the texture for material creation
+				var defaultMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
+
+				displacementSprite = new THREE.Mesh( geom, defaultMaterial );
+				scene.add( displacementSprite );
+
+				var object = new THREE.Mesh( geom );
+				displacementSprite.name = 'nucleus-' + i;
+				displacementSprite.position.copy( position );
+				displacementSprite.rotation.copy( rotation );
+				displacementSprite.scale.copy( scale );
+				displacementSprite.updateMatrix();
+				
+				scene.add( displacementSprite );
+				atoms.push( displacementSprite );
+
+
+			}
+
+		}
+		
+		
+
+		/*
+		 * CameraSroller
+		 * Scrolls the camera vertically (up/down) by mouse, scrollwhell and touch
+		 * including a velocity based animation
+		 */
+		function CameraScroller(options) {
+			this.targetPosition = 0;
+			this.targetPositionOnMouseDown = 0;
+			this.mouseY = 0;
+			this.mouseYOnMouseDown = 0;
+			this.scrollPosY = 0;
+			this.domElem = undefined;
+			this.init = function(domEl) {
+				this.domElem = domEl;
+				this.domElem.addEventListener('mousedown', this.onDocumentMouseDown, false);
+				this.domElem.addEventListener('touchstart', this.onDocumentTouchStart, false);
+				this.domElem.addEventListener('touchmove', this.onDocumentTouchMove, false);
+				this.domElem.addEventListener('DOMMouseScroll', this.onDocumentMousewheel, false);
+				this.domElem.addEventListener('mousewheel', this.onDocumentMousewheel, false);
+			};
+			this.onDocumentMouseDown = function(event) {
+				event.preventDefault();
+				this.domElem.addEventListener('mousemove', this.onDocumentMouseMove, false);
+				this.domElem.addEventListener('mouseup', this.onDocumentMouseUp, false);
+				this.domElem.addEventListener('mouseout', this.onDocumentMouseOut, false);
+				this.mouseYOnMouseDown = event.clientY;
+				this.targetPositionOnMouseDown = this.targetPosition;
+			}.bind(this);
+			this.onDocumentMouseMove = function(event) {
+				this.mouseY = event.clientY;
+				this.targetPosition = this.targetPositionOnMouseDown + (this.mouseY - this.mouseYOnMouseDown) * 0.02;
+			}.bind(this);
+			this.onDocumentMouseUp = function(event) {
+				this.domElem.removeEventListener('mousemove', this.onDocumentMouseMove, false);
+				this.domElem.removeEventListener('mouseup', this.onDocumentMouseUp, false);
+				this.domElem.removeEventListener('mouseout', this.onDocumentMouseOut, false);
+			}.bind(this);
+			this.onDocumentMouseOut = function(event) {
+				this.domElem.removeEventListener('mousemove', this.onDocumentMouseMove, false);
+				this.domElem.removeEventListener('mouseup', this.onDocumentMouseUp, false);
+				this.domElem.removeEventListener('mouseout', this.onDocumentMouseOut, false);
+			}.bind(this);
+			this.onDocumentTouchStart = function(event) {
+				if (event.touches.length == 1) {
+					event.preventDefault();
+					this.mouseYOnMouseDown = event.touches[0].pageY;
+					this.targetPositionOnMouseDown = this.targetPosition;
+				}
+			}.bind(this);
+			this.onDocumentTouchMove = function(event) {
+				if (event.touches.length == 1) {
+					event.preventDefault();
+					this.mouseY = event.touches[0].pageY;
+					this.targetPosition = this.targetPositionOnMouseDown + (this.mouseY - this.mouseYOnMouseDown) * 0.02;
+				}
+			}.bind(this);
+			this.onDocumentMousewheel = function(event) {
+				this.targetPosition = this.targetPosition + event.wheelDeltaY * 0.005;
+			}.bind(this);
+			this.getScrollPosY = function() {
+				this.scrollPosY = this.scrollPosY + (this.targetPosition - this.scrollPosY) * 0.05; // 0.05=long scroll delay, 0.15=short delay
+				return this.scrollPosY
+			}.bind(this);
+
+		}
+
+		
+		
+    };
+
+    APP.components.documentReady.push( APP._3D_MOUSE_INTERACTION2.documentReady );
     return APP;
 
 }( APP, jQuery, window, document ) );

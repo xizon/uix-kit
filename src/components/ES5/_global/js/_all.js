@@ -107,6 +107,7 @@ const UIX_KIT_IMPORT = { "files": [
 "./src/components/ES5/simple-3D-sphere-three/js/3D-sphere-three.js",
 "./src/components/ES5/simple-3D-obj-anim-interaction/js/3D-obj-anim-interaction.js",
 "./src/components/ES5/simple-3D-mouse-interaction/js/3D-mouse-interaction.js",
+"./src/components/ES5/simple-3D-mouse-interaction2/js/3D-mouse-interaction2.js",
 "./src/components/ES5/table/js/table.js",
 "./src/components/ES5/table/js/table-sorter.js",	
 "./src/components/ES5/tabs/js/tabs.js",
