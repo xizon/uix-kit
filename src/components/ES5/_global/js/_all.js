@@ -38,6 +38,7 @@ const UIX_KIT_IMPORT = { "files": [
 "./src/components/ES5/_plugins-THREE/js/MTLLoader.js",
 "./src/components/ES5/_plugins-THREE/js/OBJLoader.js",
 "./src/components/ES5/_plugins-THREE/js/OrbitControls.js",
+"./src/components/ES5/_plugins-THREE/js/ShaderRuntime.Fixed.js",
 	
 	
 	

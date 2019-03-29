@@ -44,11 +44,11 @@
         
        
         <!-- Theme  -->
-        <link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=ZhH5pHDcS2chE3NfXaNA"/>
+        <link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=pHAHaomrZlIKiwUHbhpJ"/>
         
         
          <!--[if lt IE 10]>
-           <link rel="stylesheet" href="assets/css/IE.css?ver=ZhH5pHDcS2chE3NfXaNA" />
+           <link rel="stylesheet" href="assets/css/IE.css?ver=pHAHaomrZlIKiwUHbhpJ" />
         <![endif]-->
         
         
@@ -413,6 +413,7 @@
 							<div class="col-md-8 offset-md-2">
 								<h2>Dynamic Drop Down List from JSON</h2>
 								<p>Create a dynamic dropdown form that loads its data from a JSON file.</p>
+								<p class="uix-striking-msg uix-striking-msg--info"><strong>Callback:</strong> <span id="dynamic-callback">-</span></p>
 
 							</div>
 						</div>
@@ -433,43 +434,39 @@
 						<div class="row">
 							<div class="col-md-8 offset-md-2">
 
-								   <p class="uix-striking-msg uix-striking-msg--info"><strong>Callback:</strong> <span id="dynamic-callback">-</span></p>
+								
+									<div class="uix-controls uix-controls__normal-select">
+										<span class="uix-controls__arrow"><i class="fa fa-sort"></i></span>
+										<select 
+												id="dynamic-dd-sort" 
+												name="dynamic-dd-sort" 
+												data-ajax-dynamic-dd-json="assets/json/catgories.json"
+												data-ajax-dynamic-dd-method="POST"
+												data-ajax-dynamic-dd-auto-expand="false"
+												data-ajax-dynamic-dd-data="" 
+												data-ajax-dynamic-dd-this-text="- Sort -" 
+												data-ajax-dynamic-dd-associated-text="- SubSort -" 
+												data-ajax-dynamic-dd-associated2-text="" 
+												data-ajax-dynamic-dd-associated="#dynamic-dd-subsort"
+												data-ajax-dynamic-dd-associated2="">	
 
-									<div class="uix-controls uix-controls__select">
-										<label>
-											<select 
-													id="dynamic-dd-sort" 
-													name="dynamic-dd-sort" 
-													data-ajax-dynamic-dd-json="assets/json/catgories.json"
-													data-ajax-dynamic-dd-method="POST" 
-													data-ajax-dynamic-dd-event="change" 
-													data-ajax-dynamic-dd-data="" 
-													data-ajax-dynamic-dd-associated="#dynamic-dd-subsort">
-
-
-												<option value="" selected>Sort</option>
-											</select>
-
-										</label>
-										<span>Sort</span>
+										</select>
 
 									</div>
 
 
 									<!-- ////////   -->
 
-									<div class="uix-controls uix-controls__select">
-										<label>
-											<select id="dynamic-dd-subsort" name="dynamic-dd-subsort">
-												<option value="" selected>Sub-sort</option>
-											</select>
-
-										</label>
-										<span>Sub-sort</span>
+									<div class="uix-controls uix-controls__normal-select">
+										<span class="uix-controls__arrow"><i class="fa fa-sort"></i></span>
+										<select id="dynamic-dd-subsort" name="dynamic-dd-subsort">
+											<option value="" selected>Sub-sort</option>
+										</select>
 
 									</div>			
 
-
+								   
+								
 							</div>
 							<!-- .col-12 end -->
 						</div>
@@ -484,7 +481,6 @@
 
 
 
-
 		   <!-- Content 
 			====================================================== -->
 			<section class="uix-spacing--m uix-spacing--no-top">
@@ -492,21 +488,91 @@
 						<div class="row">
 							<div class="col-md-8 offset-md-2">
 
-								   <p class="uix-striking-msg uix-striking-msg--info"><strong>(中国)区县:</strong> <span id="dynamic-callback2">-</span></p>
+								    <p>Normal Select Control</p>
+								
+									<div class="uix-controls uix-controls__normal-select">
+										<span class="uix-controls__arrow"><i class="fa fa-sort"></i></span>
+										<select 
+												id="dynamic-dd-china-province" 
+												name="dynamic-dd-china-province" 
+												data-ajax-dynamic-dd-json="assets/json/china.json"
+												data-ajax-dynamic-dd-method="POST"
+												data-ajax-dynamic-dd-auto-expand="true"
+												data-ajax-dynamic-dd-data="" 
+												data-ajax-dynamic-dd-this-text="- 省 -" 
+												data-ajax-dynamic-dd-associated-text="- 市 -" 
+												data-ajax-dynamic-dd-associated2-text="- 区 -" 
+												data-ajax-dynamic-dd-associated="#dynamic-dd-china-city",
+												data-ajax-dynamic-dd-associated2="#dynamic-dd-china-area">	
 
+											    <!--<option value="湖南省">湖南省</option>-->
+										</select>
+
+									</div>
+
+
+									<!-- ////////   -->
+
+									<div class="uix-controls uix-controls__normal-select">
+										<span class="uix-controls__arrow"><i class="fa fa-sort"></i></span>
+										<select name="dynamic-dd-china-city" id="dynamic-dd-china-city">
+										    <!--<option value="长沙市">长沙市</option>-->
+										</select>
+
+									</div>		
+
+
+									<!-- ////////   -->
+
+									<div class="uix-controls uix-controls__normal-select">
+										<span class="uix-controls__arrow"><i class="fa fa-sort"></i></span>
+										<select name="dynamic-dd-china-area" id="dynamic-dd-china-area"></select>
+
+
+									</div>		
+
+
+
+							</div>
+							<!-- .col-12 end -->
+						</div>
+						<!-- .row end -->
+
+
+				</div>
+				<!-- .container end -->
+
+
+			</section>
+			
+			
+			
+			
+		   <!-- Content 
+			====================================================== -->
+			<section class="uix-spacing--m uix-spacing--no-top">
+				<div class="container">
+						<div class="row">
+							<div class="col-md-8 offset-md-2">
+
+								   <p>Custom Select Control</p>
 
 									<div class="uix-controls uix-controls__select uix-controls__select--top">
 										<label>
 											<select 
-													id="dynamic-dd-china-province" 
-													name="dynamic-dd-china-province" 
+													id="dynamic-dd-china-province2" 
+													name="dynamic-dd-china-province2" 
 													data-ajax-dynamic-dd-json="assets/json/china.json"
-													data-ajax-dynamic-dd-method="POST" 
-													data-ajax-dynamic-dd-event="change" 
+													data-ajax-dynamic-dd-method="POST"
+													data-ajax-dynamic-dd-auto-expand="true"
 													data-ajax-dynamic-dd-data="" 
-													data-ajax-dynamic-dd-associated="#dynamic-dd-china-city">	
+													data-ajax-dynamic-dd-this-text="- 省 -" 
+													data-ajax-dynamic-dd-associated-text="- 市 -" 
+													data-ajax-dynamic-dd-associated2-text="- 区 -" 
+													data-ajax-dynamic-dd-associated="#dynamic-dd-china-city2",
+													data-ajax-dynamic-dd-associated2="#dynamic-dd-china-area2">	
 
-												<option value="">- 省份 -</option>
+												<option value="湖南省">湖南省</option>
 											</select>
 
 										</label>
@@ -517,8 +583,8 @@
 
 									<div class="uix-controls uix-controls__select uix-controls__select--top">
 										<label>
-											<select name="dynamic-dd-china-city" id="dynamic-dd-china-city">
-												<option value="">- 城市 -</option>
+											<select name="dynamic-dd-china-city" id="dynamic-dd-china-city2">
+												<option value="长沙市">长沙市</option>
 											</select>
 
 										</label>
@@ -530,7 +596,7 @@
 
 									<div class="uix-controls uix-controls__select uix-controls__select--top">
 										<label>
-											<select name="dynamic-dd-china-area" id="dynamic-dd-china-area">
+											<select name="dynamic-dd-china-area" id="dynamic-dd-china-area2">
 												<option value="">- 区县 -</option>
 											</select>
 
@@ -552,6 +618,8 @@
 
 			</section>
 
+
+			
 			
 		</main>
 		
@@ -624,88 +692,25 @@
 		$( function() {
 			/* 
 			 ---------------------------
-			 Callback from two-level classification
+			 Callback Data
 			 ---------------------------
 			 */ 
-			//Fire the three-level classification
-			$( document ).on( 'change.DYNAMIC_DD_LIST', '#dynamic-dd-subsort', function( e ) {
+			$( document ).on( 'change.DYNAMIC_DD_LIST', 'select', function( e ) {
 
 				e.preventDefault();
 
 				var $this        = $( this[ this.selectedIndex ] ),
 					curVal       = $this.val(),
-					curLongitude = $this.data( 'longitude' ),
-					curLatitude  = $this.data( 'latitude' ),
-					curAttributes = $this.data( 'attributes' ),
 					curContents  = '';
 
-				console.log( curAttributes );
-
-
-				if ( Object.prototype.toString.call( curAttributes ) =='[object Array]' ) {
-					for ( var k = 0; k < curAttributes.length; k++ ) {
-						curContents += '<hr><strong>Level-3 Name</strong>: ' + curAttributes[k].attr_name + '<br> <strong>Level-3 Longitude</strong> : ' + curAttributes[k].attr_longitude + '<br> <strong>Level-3 Latitude</strong>: ' + curAttributes[k].attr_latitude + '<br> <strong>Level-3 Info</strong>: ' + curAttributes[k].attr_info; 
-					}
-
-
-				}
-
-				$( '#dynamic-callback').html( '<br><strong>Level-2 Name</strong>: '+curVal+'<br> <strong>Level-2 Longitude</strong>: ' + curLongitude + '<br> <strong>Level-2 Latitude</strong>: ' + curLatitude + '<br> <strong>Level-2 Attributes</strong>: ' + curContents + ' <br>'  );
-
+				$( '#dynamic-callback').html( curVal );
 
 				return false;
-
-
-
 
 			});		
 
-			/* 
-			 ---------------------------
-			 Three-level classification for China Area
-			 ---------------------------
-			 */ 
-			$( document ).on( 'change.DYNAMIC_DD_LIST', '#dynamic-dd-china-city', function( e ) {
 
-				e.preventDefault();
-
-				var $this        = $( this[ this.selectedIndex ] ),
-					$areaSel     = $( '#dynamic-dd-china-area'),
-					curVal       = $this.val(),
-					curArea      = $this.data( 'area' );
-
-
-				var optionsHtml = '';
-				for ( var k = 0; k < curArea.length; k++ ) {
-					optionsHtml += "<option value='"+curArea[k]+"'>"+curArea[k]+"</option>";
-				}
-
-				$areaSel.html( optionsHtml );
-
-				//Render the custom select
-				$( document ).UixRenderCustomSelect();
-				$areaSel.attr( 'selected', 'selected' ).change();
-
-
-
-
-				//Console
-				var areaTxt = '';
-				for ( var k = 0; k < curArea.length; k++ ) {
-					areaTxt += JSON.stringify( curArea[k] ) + ',';
-				}
-
-				areaTxt = areaTxt.replace(/,\s*$/, '' );
-				$( '#dynamic-callback2').html( '[' + areaTxt + ']' );
-
-
-
-				return false;
-
-
-			});			
 			
-
 		} );
 
 	} ) ( jQuery );
@@ -713,6 +718,9 @@
 
 	</script>
 
+
+	  
+       
 
 	  
        
@@ -737,14 +745,14 @@
 	============================================= -->
 	
 	<script>
-		var REVISION     = "3.3.8",
+		var REVISION     = "3.4.0",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
 				"homeUrl"     : "",  //Eg. https://uiux.cc
 				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
 			};
     </script>  
-    <script src="../dist/js/uix-kit.min.js?ver=ZhH5pHDcS2chE3NfXaNA"></script>
+    <script src="../dist/js/uix-kit.min.js?ver=pHAHaomrZlIKiwUHbhpJ"></script>
 
 
 

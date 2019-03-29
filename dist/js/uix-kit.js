@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
- * ## Version             :  3.3.8
+ * ## Version             :  3.4.0
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  March 27, 2019
+ * ## Last Update         :  March 29, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -131,7 +131,7 @@ var UIX_KIT_IMPORT = {
   /* base */
   "./src/components/ES5/_global/js/body-and-header.js", "./src/components/ES5/_global/js/common-height.js", "./src/components/ES5/_global/js/custom-data-attrs.js", "./src/components/ES5/_global/js/loader.js", "./src/components/ES5/_global/js/mega-menu.js", "./src/components/ES5/_global/js/mobile-menu.js", "./src/components/ES5/_global/js/navigation.js", "./src/components/ES5/_global/js/set-background.js", "./src/components/ES5/_global/js/videos.js", //GSAP ==> generic
   "./src/components/ES5/_plugins-GSAP/js/ColorPropsPlugin.js", "./src/components/ES5/_plugins-GSAP/js/CSSRulePlugin.js", "./src/components/ES5/_plugins-GSAP/js/EaselPlugin.js", "./src/components/ES5/_plugins-GSAP/js/EndArrayPlugin.js", "./src/components/ES5/_plugins-GSAP/js/ModifiersPlugin.js", "./src/components/ES5/_plugins-GSAP/js/PixiPlugin.js", "./src/components/ES5/_plugins-GSAP/js/RaphaelPlugin.js", "./src/components/ES5/_plugins-GSAP/js/ScrollToPlugin.js", "./src/components/ES5/_plugins-GSAP/js/TEMPLATE_Plugin.js", "./src/components/ES5/_plugins-GSAP/js/TextPlugin.js", //three.js ==> generic
-  "./src/components/ES5/_plugins-THREE/js/CSS3DRenderer.js", "./src/components/ES5/_plugins-THREE/js/GLTFLoader.js", "./src/components/ES5/_plugins-THREE/js/MTLLoader.js", "./src/components/ES5/_plugins-THREE/js/OBJLoader.js", "./src/components/ES5/_plugins-THREE/js/OrbitControls.js",
+  "./src/components/ES5/_plugins-THREE/js/CSS3DRenderer.js", "./src/components/ES5/_plugins-THREE/js/GLTFLoader.js", "./src/components/ES5/_plugins-THREE/js/MTLLoader.js", "./src/components/ES5/_plugins-THREE/js/OBJLoader.js", "./src/components/ES5/_plugins-THREE/js/OrbitControls.js", "./src/components/ES5/_plugins-THREE/js/ShaderRuntime.Fixed.js",
   /******/
 
   /******/
@@ -10441,6 +10441,300 @@ Object.defineProperties( THREE.OrbitControls.prototype, {
 } );
 
 
+var defaultThreeUniforms = ['normalMatrix', 'viewMatrix', 'projectionMatrix', 'position', 'normal', 'modelViewMatrix', 'uv', 'uv2', 'modelMatrix'];
+
+function ShaderRuntime() {}
+
+ShaderRuntime.prototype = {
+  mainCamera: null,
+  cubeCameras: {},
+  reserved: {
+    time: null,
+    cameraPosition: null
+  },
+  umap: {
+    float: {
+      type: 'f',
+      value: 0
+    },
+    int: {
+      type: 'i',
+      value: 0
+    },
+    vec2: {
+      type: 'v2',
+      value: function value() {
+        return new THREE.Vector2();
+      }
+    },
+    vec3: {
+      type: 'v3',
+      value: function value() {
+        return new THREE.Vector3();
+      }
+    },
+    vec4: {
+      type: 'v4',
+      value: function value() {
+        return new THREE.Vector4();
+      }
+    },
+    samplerCube: {
+      type: 't'
+    },
+    sampler2D: {
+      type: 't'
+    }
+  },
+  getUmap: function getUmap(type) {
+    var value = this.umap[type].value;
+    return typeof value === 'function' ? value() : value;
+  },
+  load: function load(sourceOrSources, callback) {
+    var _this = this;
+
+    var sources = sourceOrSources,
+        onlyOneSource = typeof sourceOrSources === 'string';
+
+    if (onlyOneSource) {
+      sources = [sourceOrSources];
+    }
+
+    var loadedShaders = new Array(sources.length),
+        itemsLoaded = 0;
+
+    var loadSource = function loadSource(index, source) {
+      var loader = new THREE.FileLoader();
+      loader.load(source, function (json) {
+        var parsed;
+
+        try {
+          parsed = JSON.parse(json);
+          delete parsed.id; // Errors if passed to rawshadermaterial :(
+        } catch (e) {
+          throw new Error('Could not parse shader' + source + '! Please verify the URL is correct.');
+        }
+
+        _this.add(parsed.name, parsed);
+
+        loadedShaders[index] = parsed;
+
+        if (++itemsLoaded === sources.length) {
+          callback(onlyOneSource ? loadedShaders[0] : loadedShaders);
+        }
+      });
+    };
+
+    for (var x = 0; x < sources.length; x++) {
+      loadSource(x, sources[x]);
+    }
+  },
+  registerCamera: function registerCamera(camera) {
+    if (!(camera instanceof THREE.Camera)) {
+      throw new Error('Cannot register a non-camera as a camera!');
+    }
+
+    this.mainCamera = camera;
+  },
+  registerCubeCamera: function registerCubeCamera(name, camera) {
+    if (!camera.renderTarget) {
+      throw new Error('Cannot register a non-camera as a camera!');
+    }
+
+    this.cubeCameras[name] = camera;
+  },
+  unregisterCamera: function unregisterCamera(name) {
+    if (name in this.cubeCameras) {
+      delete this.cubeCameras[name];
+    } else if (name === this.mainCamera) {
+      delete this.mainCamera;
+    } else {
+      throw new Error('You never registered camera ' + name);
+    }
+  },
+  updateSource: function updateSource(identifier, config, findBy) {
+    findBy = findBy || 'name';
+
+    if (!this.shaderTypes[identifier]) {
+      throw new Error('Runtime Error: Cannot update shader ' + identifier + ' because it has not been added.');
+    }
+
+    var newShaderData = this.add(identifier, config),
+        shader,
+        x;
+
+    for (x = 0; shader = this.runningShaders[x++];) {
+      if (shader[findBy] === identifier) {
+        extend(shader.material, omit(newShaderData, 'id'));
+        shader.material.needsUpdate = true;
+      }
+    }
+  },
+  renameShader: function renameShader(oldName, newName) {
+    var x, shader;
+
+    if (!(oldName in this.shaderTypes)) {
+      throw new Error('Could not rename shader ' + oldName + ' to ' + newName + '. It does not exist.');
+    }
+
+    this.shaderTypes[newName] = this.shaderTypes[oldName];
+    delete this.shaderTypes[oldName];
+
+    for (x = 0; shader = this.runningShaders[x++];) {
+      if (shader.name === oldName) {
+        shader.name = newName;
+      }
+    }
+  },
+  get: function get(identifier) {
+    var shaderType = this.shaderTypes[identifier];
+
+    if (!shaderType.initted) {
+      this.create(identifier);
+    }
+
+    return shaderType.material;
+  },
+  add: function add(shaderName, config) {
+    var newData = clone(config),
+        uniform;
+    newData.fragmentShader = config.fragment;
+    newData.vertexShader = config.vertex;
+    delete newData.fragment;
+    delete newData.vertex;
+
+    for (var uniformName in newData.uniforms) {
+      uniform = newData.uniforms[uniformName];
+
+      if (uniform.value === null) {
+        newData.uniforms[uniformName].value = this.getUmap(uniform.glslType);
+      }
+    }
+
+    if (shaderName in this.shaderTypes) {
+      // maybe not needed? too sleepy, need document
+      extend(this.shaderTypes[shaderName], newData);
+    } else {
+      this.shaderTypes[shaderName] = newData;
+    }
+
+    return newData;
+  },
+  create: function create(identifier) {
+    var shaderType = this.shaderTypes[identifier];
+    var keys = Object.keys(shaderType); // Three's shadermaterial id is not assignable, so filter it out
+
+    var withoutId = {};
+
+    for (var i = 0; i < keys.length; i++) {
+      if (keys[i] !== 'id') {
+        withoutId[keys[i]] = shaderType[keys[i]];
+      }
+    }
+
+    shaderType.material = new THREE.RawShaderMaterial(withoutId);
+    this.runningShaders.push(shaderType);
+    shaderType.init && shaderType.init(shaderType.material);
+    shaderType.material.needsUpdate = true;
+    shaderType.initted = true;
+    return shaderType.material;
+  },
+  updateRuntime: function updateRuntime(identifier, data, findBy) {
+    findBy = findBy || 'name';
+    var shader, x, uniformName, uniform; // This loop does not appear to be a slowdown culprit
+
+    for (x = 0; shader = this.runningShaders[x++];) {
+      if (shader[findBy] === identifier) {
+        for (uniformName in data.uniforms) {
+          if (uniformName in this.reserved) {
+            continue;
+          }
+
+          if (uniformName in shader.material.uniforms) {
+            uniform = data.uniforms[uniformName]; // this is nasty, since the shader serializes
+            // CubeCamera model to string. Maybe not update it at
+            // all?
+
+            if (uniform.type === 't' && typeof uniform.value === 'string') {
+              uniform.value = this.cubeCameras[uniform.value].renderTarget;
+            }
+
+            shader.material.uniforms[uniformName].value = data.uniforms[uniformName].value;
+          }
+        }
+      }
+    }
+  },
+  // Update global shader uniform values
+  updateShaders: function updateShaders(time, obj) {
+    var shader, x;
+    obj = obj || {};
+
+    for (x = 0; shader = this.runningShaders[x++];) {
+      for (var uniform in obj.uniforms) {
+        if (uniform in shader.material.uniforms) {
+          shader.material.uniforms[uniform].value = obj.uniforms[uniform];
+        }
+      }
+
+      if ('cameraPosition' in shader.material.uniforms && this.mainCamera) {
+        shader.material.uniforms.cameraPosition.value = this.mainCamera.position.clone();
+      }
+
+      if ('viewMatrix' in shader.material.uniforms && this.mainCamera) {
+        shader.material.uniforms.viewMatrix.value = this.mainCamera.matrixWorldInverse;
+      }
+
+      if ('time' in shader.material.uniforms) {
+        shader.material.uniforms.time.value = time;
+      }
+    }
+  },
+  shaderTypes: {},
+  runningShaders: []
+}; // Convenience methods so we don't have to include underscore
+
+function extend() {
+  var length = arguments.length,
+      obj = arguments[0];
+
+  if (length < 2) {
+    return obj;
+  }
+
+  for (var index = 1; index < length; index++) {
+    var source = arguments[index],
+        keys = Object.keys(source || {}),
+        l = keys.length;
+
+    for (var i = 0; i < l; i++) {
+      var key = keys[i];
+      obj[key] = source[key];
+    }
+  }
+
+  return obj;
+}
+
+function clone(obj) {
+  return extend({}, obj);
+}
+
+function omit(obj) {
+  var cloned = clone(obj),
+      x,
+      key;
+
+  for (x = 0; key = (_ref = x++ + 1, _ref < 1 || arguments.length <= _ref ? undefined : arguments[_ref]);) {
+    var _ref;
+
+    delete cloned[key];
+  }
+
+  return cloned;
+}
+
+
 /* 
  *************************************
  * <!-- Theme Scripts  -->
@@ -16332,45 +16626,41 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.DYNAMIC_DD_LIST               = APP.DYNAMIC_DD_LIST || {};
-	APP.DYNAMIC_DD_LIST.version       = '0.0.2';
+	APP.DYNAMIC_DD_LIST.version       = '0.0.4';
     APP.DYNAMIC_DD_LIST.documentReady = function( $ ) {
 
+			
 		$( '[data-ajax-dynamic-dd-json]' ).each( function() {
 			var $this            = $( this ),
 			    jsonFile         = $this.data( 'ajax-dynamic-dd-json' ),
 				ranID            = 'dynamic-dd-control-' + UixGUID.create(),
-				method           = $this.data( 'ajax-dynamic-dd-method' ),
-				event            = $this.data( 'ajax-dynamic-dd-event' ),
-				associated       = $this.data( 'ajax-dynamic-dd-associated' ),
-				toData           = $this.data( 'ajax-dynamic-dd-data' ),
 				ID               = $this.attr( 'id' ),
+				method           = $this.data( 'ajax-dynamic-dd-method' ),
+				autoExpand       = $this.data( 'ajax-dynamic-dd-auto-expand' ),
+				associated       = $this.data( 'ajax-dynamic-dd-associated' ),
+				associated2      = $this.data( 'ajax-dynamic-dd-associated2' ),
+				toData           = $this.data( 'ajax-dynamic-dd-data' ),
+				emptyTxt1        = $this.data( 'ajax-dynamic-dd-this-text' ),
+				emptyTxt2        = $this.data( 'ajax-dynamic-dd-associated-text' ),
+				emptyTxt3        = $this.data( 'ajax-dynamic-dd-associated2-text' ),
 				thisChange       = true,
 				curID;
 	
+					
+			if ( typeof emptyTxt1 === typeof undefined ) emptyTxt1 = '-';
+			if ( typeof emptyTxt2 === typeof undefined ) emptyTxt2 = '-';
+			if ( typeof emptyTxt3 === typeof undefined ) emptyTxt3 = '-';
+			if ( typeof jsonFile === typeof undefined ) jsonFile = '';
+			if ( typeof toData === typeof undefined ) toData = '';
+			if ( typeof method === typeof undefined ) method = 'POST';
+			if ( typeof autoExpand === typeof undefined ) autoExpand = true;
+			if ( typeof associated === typeof undefined ) associated = '#demo';
+			if ( typeof associated2 === typeof undefined ) associated2 = '#demo2';
+			if ( typeof ID === typeof undefined ) $this.attr( 'id', ranID );
+			
+			
+			
 
-			if ( typeof jsonFile === typeof undefined ) {
-				jsonFile = '';
-			}	
-			
-			if ( typeof toData === typeof undefined ) {
-				toData = '';
-			}	
-			
-			if ( typeof method === typeof undefined ) {
-				method = 'POST';
-			}		
-			
-			
-			
-			if ( typeof associated === typeof undefined ) {
-				associated = '#demo';
-			}		
-			
-			if ( typeof ID === typeof undefined ) {
-				$this.attr( 'id', ranID );
-			}	
-			
-			
 			curID = $this.attr( 'id' );
 			
 			
@@ -16388,18 +16678,269 @@ APP = ( function ( APP, $, window, document ) {
 						dataType : 'json',
 						success  : function ( data ) { 
 
-							var firstOptionsHtml = '';
-
-							//Push the options to target select
-							for ( var m = 0; m < data.length; m++ ) {
-								firstOptionsHtml += "<option value='"+data[m].name+"'>"+data[m].name+"</option>";
-							}	
-
-							$( firstOptionsHtml ).insertAfter( $this.find( 'option' ).first() );
+							
+								var _level1 = [],
+									_level2 = [],
+									_level3 = [];
 
 
-							//Render the custom select
-							$( document ).UixRenderCustomSelect();
+								for ( var m = 0; m < data.length; m++ ) {
+
+									_level1.push( data[m].name );
+
+									var level2_List;
+
+									if ( typeof data[0].list === typeof undefined ) {
+										//============ China cities dropdown list demo
+										//================================================
+										level2_List = data[m].city;
+									} else {
+										//============ Sort object then subsort further demo
+										//================================================
+										level2_List = data[m].list;
+									}
+
+									var _curLevel2Items   = [],
+										_curLevel3Items   = [];
+
+
+									for ( var i = 0; i < level2_List.length; i++ ) {
+
+
+
+										if ( typeof data[0].list === typeof undefined ) {
+											//============ China cities dropdown list demo
+											//================================================
+											var city      = level2_List[i].name,
+												area      = level2_List[i].area;
+
+
+											_curLevel2Items.push( city );
+
+											var _tempLevel3Items = [];
+											for ( var k = 0; k < area.length; k++ ) {
+												_tempLevel3Items.push( area[k] );
+											}
+
+											_curLevel3Items.push( _tempLevel3Items );
+
+
+										} else {
+											//============ Sort object then subsort further demo
+											//================================================
+											var sort1   = level2_List[i].name;
+
+											_curLevel2Items.push( sort1 );
+										}
+
+
+
+									}// end for
+
+									_level2.push( _curLevel2Items );
+									_level3.push( _curLevel3Items );
+
+								}// end for
+
+
+
+								function initSelectControls() {
+									var allLevel1Items           = _level1,
+										allLevel2Items           = _level2,
+										allLevel3Items           = _level3,
+										$level1El                = $this,
+										$level2El                = $( associated ),
+										$level3El                = $( associated2 ),
+										level1EmptyOption        = '<option value="">' + emptyTxt1 + '</option>',
+										level2EmptyOption        = '<option value="">' + emptyTxt2 + '</option>',
+										level3EmptyOption        = '<option value="">' + emptyTxt3 + '</option>',
+										defaultLevel1Val         = $this.val(),
+										defaultLevel2Val         = $level2El.val(),
+										defaultLevel3Val         = $level3El.val(),
+										isCustomSelLevel1        = $level1El.closest( '.uix-controls' ).hasClass( 'uix-controls__select' ),
+										isCustomSelLevel2        = $level2El.closest( '.uix-controls' ).hasClass( 'uix-controls__select' ),
+										isCustomSelLevel3        = $level3El.closest( '.uix-controls' ).hasClass( 'uix-controls__select' ),
+										$level1Wrapper           = isCustomSelLevel1 ? $level1El.closest( '.uix-controls' ).parent( '.uix-controls__select-wrapper' ) : $level1El.closest( '.uix-controls' ),
+										$level2Wrapper           = isCustomSelLevel2 ? $level2El.closest( '.uix-controls' ).parent( '.uix-controls__select-wrapper' ) : $level2El.closest( '.uix-controls' ),
+										$level3Wrapper           = isCustomSelLevel3 ? $level3El.closest( '.uix-controls' ).parent( '.uix-controls__select-wrapper' ) : $level3El.closest( '.uix-controls' );
+
+
+//									console.log( allLevel1Items );
+//									console.log( allLevel2Items );
+//									console.log( allLevel3Items );
+									
+									
+									
+
+									//Clear all the drop-down list
+									$level1El.empty();
+									$level2El.empty();
+									$level3El.empty();
+
+									//Hide or display controls
+									if ( autoExpand ) $level2Wrapper.hide();
+									if ( autoExpand ) $level3Wrapper.hide();
+									
+							
+									
+									//---------- Initialize the level 1
+									if ( defaultLevel1Val != '' && defaultLevel1Val != null ) {
+										//Hide or display controls
+										if ( autoExpand ) $level2Wrapper.show();
+									}
+									$level1El.append( level1EmptyOption );
+									for (var i = 0; i < allLevel1Items.length; i++) {
+										var _v = allLevel1Items[i];
+
+										if ( defaultLevel1Val == _v ) {
+											$level1El.append("<option data-index='" + (i + 1) + "' value='" + _v + "' selected>" + _v + "</option>");
+										} else {
+											$level1El.append("<option data-index='" + (i + 1) + "' value='" + _v + "'>" + _v + "</option>");
+										}
+
+									}
+
+
+									//---------- Initialize the level 2
+									var curLevel1Index = $level1El.find( 'option:selected' ).data( 'index' );
+
+									if ( defaultLevel2Val != '' && defaultLevel2Val != null ) {
+										//Hide or display controls
+										if ( autoExpand ) $level3Wrapper.show();
+									}							
+									$level2El.append( level2EmptyOption );
+
+									if ( typeof curLevel1Index != typeof undefined ) {
+										for (var i = 0; i < allLevel2Items[curLevel1Index - 1].length; i++) {
+											var _v = allLevel2Items[curLevel1Index - 1][i];
+
+											if ( defaultLevel2Val == _v ) {
+												$level2El.append("<option data-index='" + (i + 1) + "' value='" + _v + "' selected>" + _v + "</option>");
+											} else {
+												$level2El.append("<option data-index='" + (i + 1) + "' value='" + _v + "'>" + _v + "</option>");
+											}
+										}		
+									}
+
+
+									//---------- Initialization level 3
+									var curLevel2Index = $level2El.find( 'option:selected' ).data( 'index' );
+									$level3El.append( level3EmptyOption );
+
+									if ( typeof curLevel2Index != typeof undefined ) {
+										for (var i = 0; i < allLevel3Items[curLevel1Index - 1][curLevel2Index - 1].length; i++) {
+											var _v = allLevel3Items[curLevel1Index - 1][curLevel2Index - 1][i];
+
+											if ( defaultLevel3Val == _v ) {
+												$level3El.append("<option data-index='" + (i + 1) + "' value='" + _v + "' selected>" + _v + "</option>");
+											} else {
+												$level3El.append("<option data-index='" + (i + 1) + "' value='" + _v + "'>" + _v + "</option>");
+											}
+										}
+
+									}
+
+
+									//---------- Render the custom select
+									$( document ).UixRenderCustomSelect();
+									$level1El.attr( 'selected', 'selected' ).change();
+									$level2El.attr( 'selected', 'selected' ).change();
+									$level3El.attr( 'selected', 'selected' ).change();
+
+
+
+
+									//---------- Change event level 1
+									$level1El.on( 'change.DYNAMIC_DD_LIST', function() {
+										//Clear all the level 2 and level 3 items in the drop-down list
+										$level2El.empty();
+										$level3El.empty();
+
+									
+										//Add a option with a value of 0
+										$level2El.append( level2EmptyOption );
+										$level3El.append( level3EmptyOption );
+
+
+										//Hide or display controls
+										if ( autoExpand ) $level2Wrapper.show();
+										
+
+
+										//Set the current subscript of the selected option and assign
+										var level1Index = $(this).find( 'option:selected' ).data( 'index' );
+										var level2Items = allLevel2Items[level1Index - 1];
+
+										if ( typeof level2Items != typeof undefined ) {
+											for (var i = 0; i < level2Items.length; i++) {
+												var _v = level2Items[i];
+												$level2El.append("<option data-index='" + (i + 1) + "' value='" + _v + "'>" + _v + "</option>");
+											}			
+										} else {
+											//Hide or display controls
+											if ( autoExpand ) $level2Wrapper.hide();
+										}
+										
+										//Render the custom select
+										$( document ).UixRenderCustomSelect();
+										$level2El.attr( 'selected', 'selected' ).change();
+										
+
+									});
+
+
+									//---------- Change event level 2
+									$level2El.on( 'change.DYNAMIC_DD_LIST', function() {
+										//Clear all the level 3 items in the drop-down list
+										$level3El.empty();
+
+										
+										//Add a option with a value of 0
+										$level3El.append( level3EmptyOption );
+										
+										
+										//Hide or display controls
+										if ( autoExpand ) $level3Wrapper.show();
+										
+										
+
+										//Get the subscript corresponding to the level 1 and level 2 at this time
+										var level1Index = $level1El.find( 'option:selected' ).data( 'index' );
+										var level2Index = $(this).find( 'option:selected' ).data( 'index' );
+										
+										
+										if ( typeof level1Index != typeof undefined && typeof level2Index != typeof undefined ) {
+											var level3Items = allLevel3Items[level1Index - 1][level2Index - 1];
+
+											if ( typeof level3Items != typeof undefined ) {
+												for (var i = 0; i < level3Items.length; i++) {
+													var _v = level3Items[i];
+													$level3El.append("<option data-index='" + (i + 1) + "' value='" + _v + "'>" + _v + "</option>");
+												}		
+											}	
+										} else {
+											
+											//Hide or display controls
+											if ( autoExpand ) $level3Wrapper.hide();
+											
+										}
+										
+										
+										
+										//Render the custom select
+										$( document ).UixRenderCustomSelect();
+										$level3El.attr( 'selected', 'selected' ).change();
+
+									});	
+
+
+
+								}
+
+
+								initSelectControls();
+							
+
 
 
 						 },
@@ -16416,207 +16957,6 @@ APP = ( function ( APP, $, window, document ) {
 				}
 
 
-
-				//Dropdown list change event trigger
-				$( document ).on( 'change', '#' + curID, function( e ) {
-
-					e.preventDefault();
-
-
-					if ( thisChange ) {
-
-						thisChange = false;
-
-						var curVal = $( '#' + curID + ' option:selected' ).val();
-
-
-						//Clear all options
-						if ( curVal == '' ) {
-
-
-							$( '#' + curID ).find( 'option[value=""]' ).attr( 'selected', 'selected' );
-							$( associated ).find( 'option:selected' ).removeAttr( 'selected' );
-
-							//Render the custom select
-							$( document ).UixRenderCustomSelect();
-							$( associated ).attr( 'selected', 'selected' ).change();	
-
-							APP.DYNAMIC_DD_LIST.documentReady($);
-
-
-						}
-
-
-
-						if ( curVal != '' ) {
-
-							//remove the empty option
-							$( '#' + curID + ' option[value=""]' ).remove();
-
-							//Returns JSON data
-							$.ajax({
-								url      : jsonFile, //Be careful about the format of the JSON file
-								method   : method,
-								data     : toData,
-								dataType : 'json',
-								success  : function ( data ) { 
-
-									//If the data is empty
-									if ( data == null ) {
-										//do something
-									}
-
-
-									for ( var m = 0; m < data.length; m++ ) {
-
-										//Check if a key exists inside a json object
-										if ( data[m].name == curVal ) {
-
-
-											var optionsHtml         = '',
-												sortListDemo        = data[m].list;
-
-
-											if ( typeof sortListDemo === typeof undefined ) {
-
-
-												/* 
-												 ====================================================
-												 * China cities dropdown list demo
-												 ====================================================
-												 */
-
-												var chinaCitiesListDemo = data[m].city;
-
-												//Traversing json of chinese provinces and cities
-												//-------------------------------------	
-												for ( var i = 0; i < chinaCitiesListDemo.length; i++ ) {
-
-													var city      = chinaCitiesListDemo[i].name,
-														area      = chinaCitiesListDemo[i].area;
-
-													var areaTxt = '';
-													for ( var k = 0; k < area.length; k++ ) {
-														areaTxt += JSON.stringify( area[k] ) + ',';
-													}
-
-													areaTxt = areaTxt.replace(/,\s*$/, '' );
-
-
-													optionsHtml += "<option data-name='"+city+"' data-area='["+areaTxt+"]'  value='"+city+"'>"+city+"</option>";
-
-												}
-											} else {
-
-
-												/* 
-												 ====================================================
-												 *  Sort object then subsort further demo
-												 ====================================================
-												 */
-
-												//Traversing json with coordinates and details
-												//-------------------------------------		
-												for ( var i2 = 0; i2 < sortListDemo.length; i2++ ) {
-
-													var name        = sortListDemo[i2].name,
-														longitude   = sortListDemo[i2].longitude,
-														latitude    = sortListDemo[i2].latitude,
-														customAttrs = sortListDemo[i2].attributes;
-
-													var attributesTxt = '';
-													for ( var k2 = 0; k2 < customAttrs.length; k2++ ) {
-
-														//Need to filter single quotes
-														attributesTxt += JSON.stringify( customAttrs[k2] ).replace(/'/g, '&apos;' ) + ',';
-													}
-
-													attributesTxt = attributesTxt.replace(/,\s*$/, '' );
-
-
-
-													optionsHtml += "<option data-name='"+name+"' data-attributes='["+attributesTxt+"]' data-longitude='"+longitude+"' data-latitude='"+latitude+"' value='"+name+"'>"+name+"</option>";
-
-												}
-
-											}
-
-											$( associated ).html( optionsHtml );
-											$( associated ).closest( '.uix-controls__select-wrapper' ).find( '.uix-controls__select-trigger' ).addClass( 'active' );
-
-
-											//Render the custom select
-											$( document ).UixRenderCustomSelect();
-											$( associated ).attr( 'selected', 'selected' ).change();
-
-
-
-
-											break;
-										}
-
-									}//end for data
-
-
-									//Avoid duplicate events running
-									thisChange = true;
-
-								 },
-								 error  : function() {
-
-
-								 }
-							});
-
-
-						}	
-					}
-
-
-
-					return false;
-
-
-				});	
-
-
-
-				/* 
-				 ====================================================
-				 *  Callback from two-level classification
-				 *  Fire the three-level classification
-				 ====================================================
-				 */
-				//For "China cities" and "Sort Demo"
-
-				$( document ).on( 'change.DYNAMIC_DD_LIST', associated, function( e ) {
-
-					e.preventDefault();
-
-					var $this        = $( this[ this.selectedIndex ] ),
-						curVal       = $this.val(),
-						curLongitude = $this.data( 'longitude' ),
-						curLatitude  = $this.data( 'latitude' ),
-						curAttributes = $this.data( 'attributes' ),
-						curContents  = '';
-
-
-					if ( Object.prototype.toString.call( curAttributes ) =='[object Array]' ) {
-						for ( var k = 0; k < curAttributes.length; k++ ) {
-							curContents += curAttributes[k].attr_name + ': ' + curAttributes[k].attr_longitude + ', ' + curAttributes[k].attr_latitude;
-						}
-
-					}
-
-					//console.log( curVal + ' Longitude: ' + curLongitude + ' | Latitude: ' + curLatitude + ' | Addresses: ' + curContents );
-
-					return false;
-
-
-
-				});		
-
-				
 				
 			} // end of jsonFile
 			
@@ -16624,6 +16964,10 @@ APP = ( function ( APP, $, window, document ) {
 			
 		});
 		
+			
+			
+			
+				
     };
 
     APP.components.documentReady.push( APP.DYNAMIC_DD_LIST.documentReady );
@@ -29049,7 +29393,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP._3D_BACKGROUND_THREE               = APP._3D_BACKGROUND_THREE || {};
-	APP._3D_BACKGROUND_THREE.version       = '0.0.3';
+	APP._3D_BACKGROUND_THREE.version       = '0.0.4';
     APP._3D_BACKGROUND_THREE.documentReady = function( $ ) {
 
 		
@@ -29075,11 +29419,6 @@ APP = ( function ( APP, $, window, document ) {
 			shaderSprite,
 			clock = new THREE.Clock();
 		
-		var skyMaterial,
-			sunSphere,
-			vertex       = document.getElementById( 'vertexshader' ).textContent,
-			fragment     = document.getElementById( 'fragmentshader' ).textContent;
-	
 
 		// controls
 
@@ -29096,6 +29435,24 @@ APP = ( function ( APP, $, window, document ) {
 			height  = 0.0,
 			target  = new THREE.Vector3();
 		
+		
+		// Load multiple ShaderFrog shaders
+		var runtime = new ShaderRuntime();
+
+		runtime.load([
+			$( '#' + rendererCanvasID ).data( 'shader-url' )
+		], function( shaders ) {
+
+			// Get the Three.js material you can assign to your objects
+			var material = runtime.get( shaders[0].name );
+			shaderSprite.material = material;
+			
+		});
+
+		
+		
+		
+		
 		init();
 		render();
 
@@ -29104,6 +29461,7 @@ APP = ( function ( APP, $, window, document ) {
 			camera = new THREE.PerspectiveCamera( 60, windowWidth / windowHeight, 100, 2000000 );
 			camera.position.set( 0, 100, 2000 );
 
+			runtime.registerCamera( camera );
 
 
 			//Scene
@@ -29126,73 +29484,15 @@ APP = ( function ( APP, $, window, document ) {
 								} );
 			renderer.setSize( windowWidth, windowHeight );
 
-			/**
-			 * @author zz85 / https://github.com/zz85
-			 *
-			 * Based on "A Practical Analytic Model for Daylight"
-			 * aka The Preetham Model, the de facto standard analytic skydome model
-			 * http://www.cs.utah.edu/~shirley/papers/sunsky/sunsky.pdf
-			 *
-			 * First implemented by Simon Wallner
-			 * http://www.simonwallner.at/projects/atmospheric-scattering
-			 *
-			 * Improved by Martin Upitis
-			 * http://blenderartists.org/forum/showthread.php?245954-preethams-sky-impementation-HDR
-			 *
-			 * Three.js integration by zz85 http://twitter.com/blurspline
-			*/
-			// Add Sky
-			skyMaterial = new THREE.ShaderMaterial({
-				uniforms: {
-					"luminance": { value: 1 },
-					"turbidity": { value: 2 },
-					"rayleigh": { value: 1 },
-					"mieCoefficient": { value: 0.005 },
-					"mieDirectionalG": { value: 0.8 },
-					"sunPosition": { value: new THREE.Vector3() }
-				},
-				fragmentShader: fragment,
-				vertexShader: vertex,
-				side: THREE.BackSide
-			});
 			
-			skyMaterial.uniforms.turbidity.value = 30;
-			skyMaterial.uniforms.rayleigh.value = 2;
-			skyMaterial.uniforms.luminance.value = 1.1;
-			skyMaterial.uniforms.mieCoefficient.value = 0.005;
-			skyMaterial.uniforms.mieDirectionalG.value = 0.811;
-			
-			
-			var skyGeometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
-			shaderSprite = new THREE.Mesh( skyGeometry, skyMaterial );
-			shaderSprite.scale.setScalar( 450000 );
-			shaderSprite.renderDepth = 100000;
+			//Add shader background
+			var geometry = new THREE.SphereGeometry(5, 32, 32, 0, Math.PI * 2, 0, Math.PI * 2);
+			shaderSprite = new THREE.Mesh( geometry );
+			shaderSprite.scale.setScalar( 10000 );
+			shaderSprite.renderDepth = 0;
 			scene.add( shaderSprite );
-
-			
-			// Add Sun
-			sunSphere = new THREE.Mesh(
-				new THREE.SphereBufferGeometry( 20000, 16, 8 ),
-				new THREE.MeshBasicMaterial( { color: 0xffffff } )
-			);
-			sunSphere.position.y = - 700000;
-			sunSphere.visible = false;
-			scene.add( sunSphere );
-			
-			
-			skyMaterial.uniforms.sunPosition.value.copy( sunSphere.position );
 			
 
-			var theta = Math.PI * ( 0.49 - 0.5 );
-			var phi = 2 * Math.PI * ( 0.25 - 0.5 );
-			var distance = 400000;
-
-			sunSphere.position.x = distance * Math.cos( phi );
-			sunSphere.position.y = distance * Math.sin( phi ) * Math.sin( theta );
-			sunSphere.position.z = distance * Math.sin( phi ) * Math.cos( theta );
-
-			skyMaterial.uniforms.sunPosition.value = sunSphere.position;
-			
 			// Immediately use the texture for material creation
 			var defaultMaterial    = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
 			
@@ -29226,6 +29526,10 @@ APP = ( function ( APP, $, window, document ) {
 
 			//To set a background color.
 			renderer.setClearColor( 0x000000 );	
+			
+			
+			//update shaders
+			runtime.updateShaders( clock.getElapsedTime() );
 			
 			
 
@@ -29330,9 +29634,11 @@ APP = ( function ( APP, $, window, document ) {
 
 				var scale = new THREE.Vector3();
 
-				var geom, color = new THREE.Color();
+				var geom, 
+					color = new THREE.Color();
 
 				scale.x = Math.random() * 200 + 100;
+
 
 				if ( objectType == "cube" ) {
 
@@ -29345,7 +29651,7 @@ APP = ( function ( APP, $, window, document ) {
 
 					geom = new THREE.IcosahedronGeometry( 1, 1 );
 					scale.y = scale.z = scale.x;
-					color.setRGB( Math.random() + 0.1, 0, 0 );
+					color.setRGB( 0.35, getRandomFloat( 0.12, 0.3 ), 0.2 );
 
 				} else if ( objectType == "poly" ) {
 
@@ -29374,6 +29680,12 @@ APP = ( function ( APP, $, window, document ) {
 			return geometry;
 			
 
+		}
+		
+		
+		//Generate random number between two numbers
+		function getRandomFloat(min, max) {
+		  return Math.random() * (max - min) + min;
 		}
 		
 

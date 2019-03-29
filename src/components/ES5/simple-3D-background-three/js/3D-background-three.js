@@ -16,7 +16,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP._3D_BACKGROUND_THREE               = APP._3D_BACKGROUND_THREE || {};
-	APP._3D_BACKGROUND_THREE.version       = '0.0.3';
+	APP._3D_BACKGROUND_THREE.version       = '0.0.4';
     APP._3D_BACKGROUND_THREE.documentReady = function( $ ) {
 
 		
@@ -42,11 +42,6 @@ APP = ( function ( APP, $, window, document ) {
 			shaderSprite,
 			clock = new THREE.Clock();
 		
-		var skyMaterial,
-			sunSphere,
-			vertex       = document.getElementById( 'vertexshader' ).textContent,
-			fragment     = document.getElementById( 'fragmentshader' ).textContent;
-	
 
 		// controls
 
@@ -63,6 +58,24 @@ APP = ( function ( APP, $, window, document ) {
 			height  = 0.0,
 			target  = new THREE.Vector3();
 		
+		
+		// Load multiple ShaderFrog shaders
+		var runtime = new ShaderRuntime();
+
+		runtime.load([
+			$( '#' + rendererCanvasID ).data( 'shader-url' )
+		], function( shaders ) {
+
+			// Get the Three.js material you can assign to your objects
+			var material = runtime.get( shaders[0].name );
+			shaderSprite.material = material;
+			
+		});
+
+		
+		
+		
+		
 		init();
 		render();
 
@@ -71,6 +84,7 @@ APP = ( function ( APP, $, window, document ) {
 			camera = new THREE.PerspectiveCamera( 60, windowWidth / windowHeight, 100, 2000000 );
 			camera.position.set( 0, 100, 2000 );
 
+			runtime.registerCamera( camera );
 
 
 			//Scene
@@ -93,73 +107,15 @@ APP = ( function ( APP, $, window, document ) {
 								} );
 			renderer.setSize( windowWidth, windowHeight );
 
-			/**
-			 * @author zz85 / https://github.com/zz85
-			 *
-			 * Based on "A Practical Analytic Model for Daylight"
-			 * aka The Preetham Model, the de facto standard analytic skydome model
-			 * http://www.cs.utah.edu/~shirley/papers/sunsky/sunsky.pdf
-			 *
-			 * First implemented by Simon Wallner
-			 * http://www.simonwallner.at/projects/atmospheric-scattering
-			 *
-			 * Improved by Martin Upitis
-			 * http://blenderartists.org/forum/showthread.php?245954-preethams-sky-impementation-HDR
-			 *
-			 * Three.js integration by zz85 http://twitter.com/blurspline
-			*/
-			// Add Sky
-			skyMaterial = new THREE.ShaderMaterial({
-				uniforms: {
-					"luminance": { value: 1 },
-					"turbidity": { value: 2 },
-					"rayleigh": { value: 1 },
-					"mieCoefficient": { value: 0.005 },
-					"mieDirectionalG": { value: 0.8 },
-					"sunPosition": { value: new THREE.Vector3() }
-				},
-				fragmentShader: fragment,
-				vertexShader: vertex,
-				side: THREE.BackSide
-			});
 			
-			skyMaterial.uniforms.turbidity.value = 30;
-			skyMaterial.uniforms.rayleigh.value = 2;
-			skyMaterial.uniforms.luminance.value = 1.1;
-			skyMaterial.uniforms.mieCoefficient.value = 0.005;
-			skyMaterial.uniforms.mieDirectionalG.value = 0.811;
-			
-			
-			var skyGeometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
-			shaderSprite = new THREE.Mesh( skyGeometry, skyMaterial );
-			shaderSprite.scale.setScalar( 450000 );
-			shaderSprite.renderDepth = 100000;
+			//Add shader background
+			var geometry = new THREE.SphereGeometry(5, 32, 32, 0, Math.PI * 2, 0, Math.PI * 2);
+			shaderSprite = new THREE.Mesh( geometry );
+			shaderSprite.scale.setScalar( 10000 );
+			shaderSprite.renderDepth = 0;
 			scene.add( shaderSprite );
-
-			
-			// Add Sun
-			sunSphere = new THREE.Mesh(
-				new THREE.SphereBufferGeometry( 20000, 16, 8 ),
-				new THREE.MeshBasicMaterial( { color: 0xffffff } )
-			);
-			sunSphere.position.y = - 700000;
-			sunSphere.visible = false;
-			scene.add( sunSphere );
-			
-			
-			skyMaterial.uniforms.sunPosition.value.copy( sunSphere.position );
 			
 
-			var theta = Math.PI * ( 0.49 - 0.5 );
-			var phi = 2 * Math.PI * ( 0.25 - 0.5 );
-			var distance = 400000;
-
-			sunSphere.position.x = distance * Math.cos( phi );
-			sunSphere.position.y = distance * Math.sin( phi ) * Math.sin( theta );
-			sunSphere.position.z = distance * Math.sin( phi ) * Math.cos( theta );
-
-			skyMaterial.uniforms.sunPosition.value = sunSphere.position;
-			
 			// Immediately use the texture for material creation
 			var defaultMaterial    = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
 			
@@ -193,6 +149,10 @@ APP = ( function ( APP, $, window, document ) {
 
 			//To set a background color.
 			renderer.setClearColor( 0x000000 );	
+			
+			
+			//update shaders
+			runtime.updateShaders( clock.getElapsedTime() );
 			
 			
 
@@ -297,9 +257,11 @@ APP = ( function ( APP, $, window, document ) {
 
 				var scale = new THREE.Vector3();
 
-				var geom, color = new THREE.Color();
+				var geom, 
+					color = new THREE.Color();
 
 				scale.x = Math.random() * 200 + 100;
+
 
 				if ( objectType == "cube" ) {
 
@@ -312,7 +274,7 @@ APP = ( function ( APP, $, window, document ) {
 
 					geom = new THREE.IcosahedronGeometry( 1, 1 );
 					scale.y = scale.z = scale.x;
-					color.setRGB( Math.random() + 0.1, 0, 0 );
+					color.setRGB( 0.35, getRandomFloat( 0.12, 0.3 ), 0.2 );
 
 				} else if ( objectType == "poly" ) {
 
@@ -341,6 +303,12 @@ APP = ( function ( APP, $, window, document ) {
 			return geometry;
 			
 
+		}
+		
+		
+		//Generate random number between two numbers
+		function getRandomFloat(min, max) {
+		  return Math.random() * (max - min) + min;
 		}
 		
 

@@ -1,5 +1,13 @@
 # Changelog
 
+#### = 3.4.0 (March 29, 2019) =
+
+* New: Added support for shaderfrog.
+* Tweak: Upgraded the module "3D Background".
+* Fix: Fixed a minor bug in form linkage.
+
+
+
 #### = 3.3.8 (March 27, 2019) =
 
 * Tweak: Subtle style optimization.
