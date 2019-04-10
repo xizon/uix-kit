@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
- * ## Version             :  3.4.1
+ * ## Version             :  3.4.2
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  March 29, 2019
+ * ## Last Update         :  April 10, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -131,7 +131,7 @@ var UIX_KIT_IMPORT = {
   /* base */
   "./src/components/ES5/_global/js/body-and-header.js", "./src/components/ES5/_global/js/common-height.js", "./src/components/ES5/_global/js/custom-data-attrs.js", "./src/components/ES5/_global/js/loader.js", "./src/components/ES5/_global/js/mega-menu.js", "./src/components/ES5/_global/js/mobile-menu.js", "./src/components/ES5/_global/js/navigation.js", "./src/components/ES5/_global/js/set-background.js", "./src/components/ES5/_global/js/videos.js", //GSAP ==> generic
   "./src/components/ES5/_plugins-GSAP/js/ColorPropsPlugin.js", "./src/components/ES5/_plugins-GSAP/js/CSSRulePlugin.js", "./src/components/ES5/_plugins-GSAP/js/EaselPlugin.js", "./src/components/ES5/_plugins-GSAP/js/EndArrayPlugin.js", "./src/components/ES5/_plugins-GSAP/js/ModifiersPlugin.js", "./src/components/ES5/_plugins-GSAP/js/PixiPlugin.js", "./src/components/ES5/_plugins-GSAP/js/RaphaelPlugin.js", "./src/components/ES5/_plugins-GSAP/js/ScrollToPlugin.js", "./src/components/ES5/_plugins-GSAP/js/TEMPLATE_Plugin.js", "./src/components/ES5/_plugins-GSAP/js/TextPlugin.js", //three.js ==> generic
-  "./src/components/ES5/_plugins-THREE/js/CSS3DRenderer.js", "./src/components/ES5/_plugins-THREE/js/GLTFLoader.js", "./src/components/ES5/_plugins-THREE/js/MTLLoader.js", "./src/components/ES5/_plugins-THREE/js/OBJLoader.js", "./src/components/ES5/_plugins-THREE/js/OrbitControls.js", "./src/components/ES5/_plugins-THREE/js/ShaderRuntime.Fixed.js",
+  "./src/components/ES5/_plugins-THREE/js/CSS3DRenderer.js", "./src/components/ES5/_plugins-THREE/js/GLTFLoader.js", "./src/components/ES5/_plugins-THREE/js/MTLLoader.js", "./src/components/ES5/_plugins-THREE/js/OBJLoader.js", "./src/components/ES5/_plugins-THREE/js/OrbitControls.js", "./src/components/ES5/_plugins-THREE/js/ShaderRuntime.custom.js", "./src/components/ES5/_plugins-THREE/js/d3-threeD.custom.js",
   /******/
 
   /******/
@@ -10441,300 +10441,654 @@ Object.defineProperties( THREE.OrbitControls.prototype, {
 
 } );
 
-
 var defaultThreeUniforms = ['normalMatrix', 'viewMatrix', 'projectionMatrix', 'position', 'normal', 'modelViewMatrix', 'uv', 'uv2', 'modelMatrix'];
 
 function ShaderRuntime() {}
 
 ShaderRuntime.prototype = {
-  mainCamera: null,
-  cubeCameras: {},
-  reserved: {
-    time: null,
-    cameraPosition: null
-  },
-  umap: {
-    float: {
-      type: 'f',
-      value: 0
+    mainCamera: null,
+    cubeCameras: {},
+    reserved: {
+        time: null,
+        cameraPosition: null
     },
-    int: {
-      type: 'i',
-      value: 0
+    umap: {
+        float: {
+            type: 'f',
+            value: 0
+        },
+        int: {
+            type: 'i',
+            value: 0
+        },
+        vec2: {
+            type: 'v2',
+            value: function value() {
+                return new THREE.Vector2();
+            }
+        },
+        vec3: {
+            type: 'v3',
+            value: function value() {
+                return new THREE.Vector3();
+            }
+        },
+        vec4: {
+            type: 'v4',
+            value: function value() {
+                return new THREE.Vector4();
+            }
+        },
+        samplerCube: {
+            type: 't'
+        },
+        sampler2D: {
+            type: 't'
+        }
     },
-    vec2: {
-      type: 'v2',
-      value: function value() {
-        return new THREE.Vector2();
-      }
+    getUmap: function getUmap(type) {
+        var value = this.umap[type].value;
+        return typeof value === 'function' ? value() : value;
     },
-    vec3: {
-      type: 'v3',
-      value: function value() {
-        return new THREE.Vector3();
-      }
-    },
-    vec4: {
-      type: 'v4',
-      value: function value() {
-        return new THREE.Vector4();
-      }
-    },
-    samplerCube: {
-      type: 't'
-    },
-    sampler2D: {
-      type: 't'
-    }
-  },
-  getUmap: function getUmap(type) {
-    var value = this.umap[type].value;
-    return typeof value === 'function' ? value() : value;
-  },
-  load: function load(sourceOrSources, callback) {
-    var _this = this;
+    load: function load(sourceOrSources, callback) {
+        var _this = this;
 
-    var sources = sourceOrSources,
+        var sources = sourceOrSources,
         onlyOneSource = typeof sourceOrSources === 'string';
 
-    if (onlyOneSource) {
-      sources = [sourceOrSources];
-    }
+        if (onlyOneSource) {
+            sources = [sourceOrSources];
+        }
 
-    var loadedShaders = new Array(sources.length),
+        var loadedShaders = new Array(sources.length),
         itemsLoaded = 0;
 
-    var loadSource = function loadSource(index, source) {
-      var loader = new THREE.FileLoader();
-      loader.load(source, function (json) {
-        var parsed;
+        var loadSource = function loadSource(index, source) {
+            var loader = new THREE.FileLoader();
 
-        try {
-          parsed = JSON.parse(json);
-          delete parsed.id; // Errors if passed to rawshadermaterial :(
-        } catch (e) {
-          throw new Error('Could not parse shader' + source + '! Please verify the URL is correct.');
+            loader.load(source, function(json) {
+                var parsed;
+
+                try {
+                    parsed = JSON.parse(json);
+                    delete parsed.id; // Errors if passed to rawshadermaterial :(
+                } catch(e) {
+                    throw new Error('Could not parse shader' + source + '! Please verify the URL is correct.');
+                }
+				
+                _this.add(parsed.name, parsed);
+
+                loadedShaders[index] = parsed;
+
+                if (++itemsLoaded === sources.length) {
+                    callback(onlyOneSource ? loadedShaders[0] : loadedShaders);
+                }
+            });
+        };
+
+        for (var x = 0; x < sources.length; x++) {
+            loadSource(x, sources[x]);
+        }
+    },
+	
+	//Load json code directly
+    loadJSON: function load(sourceOrSources, callback) {
+        var _this = this;
+
+        var sources = sourceOrSources,
+        onlyOneSource = typeof sourceOrSources === 'string';
+
+        if (onlyOneSource) {
+            sources = [sourceOrSources];
         }
 
-        _this.add(parsed.name, parsed);
+        var loadedShaders = new Array(sources.length),
+        itemsLoaded = 0;
 
-        loadedShaders[index] = parsed;
+        var loadJSONCode = function loadJSONCode(index, source) {
+			
+			var parsed;
 
-        if (++itemsLoaded === sources.length) {
-          callback(onlyOneSource ? loadedShaders[0] : loadedShaders);
+			parsed = source;
+			delete parsed.id; // Errors if passed to rawshadermaterial :(
+			
+
+			_this.add(parsed.name, parsed);
+
+			loadedShaders[index] = parsed;
+
+			if (++itemsLoaded === sources.length) {
+				callback(onlyOneSource ? loadedShaders[0] : loadedShaders);
+			}
+			
+			
+        };
+
+        for (var x = 0; x < sources.length; x++) {
+            loadJSONCode(x, sources[x]);
         }
-      });
-    };
+    },
+    registerCamera: function registerCamera(camera) {
+        if (! (camera instanceof THREE.Camera)) {
+            throw new Error('Cannot register a non-camera as a camera!');
+        }
 
-    for (var x = 0; x < sources.length; x++) {
-      loadSource(x, sources[x]);
-    }
-  },
-  registerCamera: function registerCamera(camera) {
-    if (!(camera instanceof THREE.Camera)) {
-      throw new Error('Cannot register a non-camera as a camera!');
-    }
+        this.mainCamera = camera;
+    },
+    registerCubeCamera: function registerCubeCamera(name, camera) {
+        if (!camera.renderTarget) {
+            throw new Error('Cannot register a non-camera as a camera!');
+        }
 
-    this.mainCamera = camera;
-  },
-  registerCubeCamera: function registerCubeCamera(name, camera) {
-    if (!camera.renderTarget) {
-      throw new Error('Cannot register a non-camera as a camera!');
-    }
+        this.cubeCameras[name] = camera;
+    },
+    unregisterCamera: function unregisterCamera(name) {
+        if (name in this.cubeCameras) {
+            delete this.cubeCameras[name];
+        } else if (name === this.mainCamera) {
+            delete this.mainCamera;
+        } else {
+            throw new Error('You never registered camera ' + name);
+        }
+    },
+    updateSource: function updateSource(identifier, config, findBy) {
+        findBy = findBy || 'name';
 
-    this.cubeCameras[name] = camera;
-  },
-  unregisterCamera: function unregisterCamera(name) {
-    if (name in this.cubeCameras) {
-      delete this.cubeCameras[name];
-    } else if (name === this.mainCamera) {
-      delete this.mainCamera;
-    } else {
-      throw new Error('You never registered camera ' + name);
-    }
-  },
-  updateSource: function updateSource(identifier, config, findBy) {
-    findBy = findBy || 'name';
+        if (!this.shaderTypes[identifier]) {
+            throw new Error('Runtime Error: Cannot update shader ' + identifier + ' because it has not been added.');
+        }
 
-    if (!this.shaderTypes[identifier]) {
-      throw new Error('Runtime Error: Cannot update shader ' + identifier + ' because it has not been added.');
-    }
-
-    var newShaderData = this.add(identifier, config),
+        var newShaderData = this.add(identifier, config),
         shader,
         x;
 
-    for (x = 0; shader = this.runningShaders[x++];) {
-      if (shader[findBy] === identifier) {
-        extend(shader.material, omit(newShaderData, 'id'));
-        shader.material.needsUpdate = true;
-      }
-    }
-  },
-  renameShader: function renameShader(oldName, newName) {
-    var x, shader;
+        for (x = 0; shader = this.runningShaders[x++];) {
+            if (shader[findBy] === identifier) {
+                extend(shader.material, omit(newShaderData, 'id'));
+                shader.material.needsUpdate = true;
+            }
+        }
+    },
+    renameShader: function renameShader(oldName, newName) {
+        var x, shader;
 
-    if (!(oldName in this.shaderTypes)) {
-      throw new Error('Could not rename shader ' + oldName + ' to ' + newName + '. It does not exist.');
-    }
+        if (! (oldName in this.shaderTypes)) {
+            throw new Error('Could not rename shader ' + oldName + ' to ' + newName + '. It does not exist.');
+        }
 
-    this.shaderTypes[newName] = this.shaderTypes[oldName];
-    delete this.shaderTypes[oldName];
+        this.shaderTypes[newName] = this.shaderTypes[oldName];
+        delete this.shaderTypes[oldName];
 
-    for (x = 0; shader = this.runningShaders[x++];) {
-      if (shader.name === oldName) {
-        shader.name = newName;
-      }
-    }
-  },
-  get: function get(identifier) {
-    var shaderType = this.shaderTypes[identifier];
+        for (x = 0; shader = this.runningShaders[x++];) {
+            if (shader.name === oldName) {
+                shader.name = newName;
+            }
+        }
+    },
+    get: function get(identifier) {
+        var shaderType = this.shaderTypes[identifier];
 
-    if (!shaderType.initted) {
-      this.create(identifier);
-    }
+        if (!shaderType.initted) {
+            this.create(identifier);
+        }
 
-    return shaderType.material;
-  },
-  add: function add(shaderName, config) {
-    var newData = clone(config),
+        return shaderType.material;
+    },
+    add: function add(shaderName, config) {
+        var newData = clone(config),
         uniform;
-    newData.fragmentShader = config.fragment;
-    newData.vertexShader = config.vertex;
-    delete newData.fragment;
-    delete newData.vertex;
+        newData.fragmentShader = config.fragment;
+        newData.vertexShader = config.vertex;
+        delete newData.fragment;
+        delete newData.vertex;
 
-    for (var uniformName in newData.uniforms) {
-      uniform = newData.uniforms[uniformName];
+        for (var uniformName in newData.uniforms) {
+            uniform = newData.uniforms[uniformName];
 
-      if (uniform.value === null) {
-        newData.uniforms[uniformName].value = this.getUmap(uniform.glslType);
-      }
-    }
+            if (uniform.value === null) {
+                newData.uniforms[uniformName].value = this.getUmap(uniform.glslType);
+            }
+        }
 
-    if (shaderName in this.shaderTypes) {
-      // maybe not needed? too sleepy, need document
-      extend(this.shaderTypes[shaderName], newData);
-    } else {
-      this.shaderTypes[shaderName] = newData;
-    }
+        if (shaderName in this.shaderTypes) {
+            // maybe not needed? too sleepy, need document
+            extend(this.shaderTypes[shaderName], newData);
+        } else {
+            this.shaderTypes[shaderName] = newData;
+        }
 
-    return newData;
-  },
-  create: function create(identifier) {
-    var shaderType = this.shaderTypes[identifier];
-    var keys = Object.keys(shaderType); // Three's shadermaterial id is not assignable, so filter it out
+        return newData;
+    },
+    create: function create(identifier) {
+        var shaderType = this.shaderTypes[identifier];
+        var keys = Object.keys(shaderType); // Three's shadermaterial id is not assignable, so filter it out
+        var withoutId = {};
 
-    var withoutId = {};
+        for (var i = 0; i < keys.length; i++) {
+            if (keys[i] !== 'id') {
+                withoutId[keys[i]] = shaderType[keys[i]];
+            }
+        }
 
-    for (var i = 0; i < keys.length; i++) {
-      if (keys[i] !== 'id') {
-        withoutId[keys[i]] = shaderType[keys[i]];
-      }
-    }
+        shaderType.material = new THREE.RawShaderMaterial(withoutId);
+        this.runningShaders.push(shaderType);
+        shaderType.init && shaderType.init(shaderType.material);
+        shaderType.material.needsUpdate = true;
+        shaderType.initted = true;
+        return shaderType.material;
+    },
+    updateRuntime: function updateRuntime(identifier, data, findBy) {
+        findBy = findBy || 'name';
+        var shader, x, uniformName, uniform; // This loop does not appear to be a slowdown culprit
+        for (x = 0; shader = this.runningShaders[x++];) {
+            if (shader[findBy] === identifier) {
+                for (uniformName in data.uniforms) {
+                    if (uniformName in this.reserved) {
+                        continue;
+                    }
 
-    shaderType.material = new THREE.RawShaderMaterial(withoutId);
-    this.runningShaders.push(shaderType);
-    shaderType.init && shaderType.init(shaderType.material);
-    shaderType.material.needsUpdate = true;
-    shaderType.initted = true;
-    return shaderType.material;
-  },
-  updateRuntime: function updateRuntime(identifier, data, findBy) {
-    findBy = findBy || 'name';
-    var shader, x, uniformName, uniform; // This loop does not appear to be a slowdown culprit
+                    if (uniformName in shader.material.uniforms) {
+                        uniform = data.uniforms[uniformName]; // this is nasty, since the shader serializes
+                        // CubeCamera model to string. Maybe not update it at
+                        // all?
+                        if (uniform.type === 't' && typeof uniform.value === 'string') {
+                            uniform.value = this.cubeCameras[uniform.value].renderTarget;
+                        }
 
-    for (x = 0; shader = this.runningShaders[x++];) {
-      if (shader[findBy] === identifier) {
-        for (uniformName in data.uniforms) {
-          if (uniformName in this.reserved) {
-            continue;
-          }
+                        shader.material.uniforms[uniformName].value = data.uniforms[uniformName].value;
+                    }
+                }
+            }
+        }
+    },
+    // Update global shader uniform values
+    updateShaders: function updateShaders(time, obj) {
+        var shader, x;
+        obj = obj || {};
 
-          if (uniformName in shader.material.uniforms) {
-            uniform = data.uniforms[uniformName]; // this is nasty, since the shader serializes
-            // CubeCamera model to string. Maybe not update it at
-            // all?
-
-            if (uniform.type === 't' && typeof uniform.value === 'string') {
-              uniform.value = this.cubeCameras[uniform.value].renderTarget;
+        for (x = 0; shader = this.runningShaders[x++];) {
+            for (var uniform in obj.uniforms) {
+                if (uniform in shader.material.uniforms) {
+                    shader.material.uniforms[uniform].value = obj.uniforms[uniform];
+                }
             }
 
-            shader.material.uniforms[uniformName].value = data.uniforms[uniformName].value;
-          }
+            if ('cameraPosition' in shader.material.uniforms && this.mainCamera) {
+                shader.material.uniforms.cameraPosition.value = this.mainCamera.position.clone();
+            }
+
+            if ('viewMatrix' in shader.material.uniforms && this.mainCamera) {
+                shader.material.uniforms.viewMatrix.value = this.mainCamera.matrixWorldInverse;
+            }
+
+            if ('time' in shader.material.uniforms) {
+                shader.material.uniforms.time.value = time;
+            }
         }
-      }
-    }
-  },
-  // Update global shader uniform values
-  updateShaders: function updateShaders(time, obj) {
-    var shader, x;
-    obj = obj || {};
-
-    for (x = 0; shader = this.runningShaders[x++];) {
-      for (var uniform in obj.uniforms) {
-        if (uniform in shader.material.uniforms) {
-          shader.material.uniforms[uniform].value = obj.uniforms[uniform];
-        }
-      }
-
-      if ('cameraPosition' in shader.material.uniforms && this.mainCamera) {
-        shader.material.uniforms.cameraPosition.value = this.mainCamera.position.clone();
-      }
-
-      if ('viewMatrix' in shader.material.uniforms && this.mainCamera) {
-        shader.material.uniforms.viewMatrix.value = this.mainCamera.matrixWorldInverse;
-      }
-
-      if ('time' in shader.material.uniforms) {
-        shader.material.uniforms.time.value = time;
-      }
-    }
-  },
-  shaderTypes: {},
-  runningShaders: []
+    },
+    shaderTypes: {},
+    runningShaders: []
 }; // Convenience methods so we don't have to include underscore
-
 function extend() {
-  var length = arguments.length,
-      obj = arguments[0];
+    var length = arguments.length,
+    obj = arguments[0];
 
-  if (length < 2) {
-    return obj;
-  }
+    if (length < 2) {
+        return obj;
+    }
 
-  for (var index = 1; index < length; index++) {
-    var source = arguments[index],
+    for (var index = 1; index < length; index++) {
+        var source = arguments[index],
         keys = Object.keys(source || {}),
         l = keys.length;
 
-    for (var i = 0; i < l; i++) {
-      var key = keys[i];
-      obj[key] = source[key];
+        for (var i = 0; i < l; i++) {
+            var key = keys[i];
+            obj[key] = source[key];
+        }
     }
-  }
 
-  return obj;
+    return obj;
 }
 
 function clone(obj) {
-  return extend({}, obj);
+    return extend({},
+    obj);
 }
 
 function omit(obj) {
-  var cloned = clone(obj),
-      x,
-      key;
+    var cloned = clone(obj),
+    x,
+    key;
 
-  for (x = 0; key = (_ref = x++ + 1, _ref < 1 || arguments.length <= _ref ? undefined : arguments[_ref]);) {
-    var _ref;
+    for (x = 0; key = (_ref = x+++1, _ref < 1 || arguments.length <= _ref ? undefined: arguments[_ref]);) {
+        var _ref;
 
-    delete cloned[key];
-  }
+        delete cloned[key];
+    }
 
-  return cloned;
+    return cloned;
 }
 
+
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
+function d3threeD(exports) {
+
+    var DEGS_TO_RADS = Math.PI / 180;
+    var DIGIT_0 = 48,
+    DIGIT_9 = 57,
+    COMMA = 44,
+    SPACE = 32,
+    PERIOD = 46,
+    MINUS = 45;
+
+    exports.transformSVGPath = function transformSVGPath(pathStr) {
+
+        var path = new THREE.ShapePath();
+
+        var idx = 1,
+        len = pathStr.length,
+        activeCmd, x = 0,
+        y = 0,
+        nx = 0,
+        ny = 0,
+        firstX = null,
+        firstY = null,
+        x1 = 0,
+        x2 = 0,
+        y1 = 0,
+        y2 = 0,
+        rx = 0,
+        ry = 0,
+        xar = 0,
+        laf = 0,
+        sf = 0,
+        cx, cy;
+
+        function eatNum() {
+
+            var sidx, c, isFloat = false,
+            s;
+
+            // eat delims
+            while (idx < len) {
+
+                c = pathStr.charCodeAt(idx);
+
+                if (c !== COMMA && c !== SPACE) break;
+
+                idx++;
+
+            }
+
+            if (c === MINUS) {
+
+                sidx = idx++;
+
+            } else {
+
+                sidx = idx;
+
+            }
+
+            // eat number
+            while (idx < len) {
+
+                c = pathStr.charCodeAt(idx);
+
+                if (DIGIT_0 <= c && c <= DIGIT_9) {
+
+                    idx++;
+                    continue;
+
+                } else if (c === PERIOD) {
+
+                    idx++;
+                    isFloat = true;
+                    continue;
+
+                }
+
+                s = pathStr.substring(sidx, idx);
+                return isFloat ? parseFloat(s) : parseInt(s);
+
+            }
+
+            s = pathStr.substring(sidx);
+            return isFloat ? parseFloat(s) : parseInt(s);
+
+        }
+
+        function nextIsNum() {
+
+            var c;
+
+            // do permanently eat any delims...
+            while (idx < len) {
+
+                c = pathStr.charCodeAt(idx);
+
+                if (c !== COMMA && c !== SPACE) break;
+
+                idx++;
+
+            }
+
+            c = pathStr.charCodeAt(idx);
+            return (c === MINUS || (DIGIT_0 <= c && c <= DIGIT_9));
+
+        }
+
+        var canRepeat;
+        activeCmd = pathStr[0];
+
+        while (idx <= len) {
+
+            canRepeat = true;
+
+            switch (activeCmd) {
+
+                // moveto commands, become lineto's if repeated
+            case 'M':
+                x = eatNum();
+                y = eatNum();
+                path.moveTo(x, y);
+                activeCmd = 'L';
+                firstX = x;
+                firstY = y;
+                break;
+
+            case 'm':
+                x += eatNum();
+                y += eatNum();
+                path.moveTo(x, y);
+                activeCmd = 'l';
+                firstX = x;
+                firstY = y;
+                break;
+
+            case 'Z':
+            case 'z':
+                canRepeat = false;
+                if (x !== firstX || y !== firstY) path.lineTo(firstX, firstY);
+                break;
+
+                // - lines!
+            case 'L':
+            case 'H':
+            case 'V':
+                nx = (activeCmd === 'V') ? x: eatNum();
+                ny = (activeCmd === 'H') ? y: eatNum();
+                path.lineTo(nx, ny);
+                x = nx;
+                y = ny;
+                break;
+
+            case 'l':
+            case 'h':
+            case 'v':
+                nx = (activeCmd === 'v') ? x: (x + eatNum());
+                ny = (activeCmd === 'h') ? y: (y + eatNum());
+                path.lineTo(nx, ny);
+                x = nx;
+                y = ny;
+                break;
+
+                // - cubic bezier
+            case 'C':
+                x1 = eatNum();
+                y1 = eatNum();
+
+            case 'S':
+                if (activeCmd === 'S') {
+
+                    x1 = 2 * x - x2;
+                    y1 = 2 * y - y2;
+
+                }
+
+                x2 = eatNum();
+                y2 = eatNum();
+                nx = eatNum();
+                ny = eatNum();
+                path.bezierCurveTo(x1, y1, x2, y2, nx, ny);
+                x = nx;
+                y = ny;
+                break;
+
+            case 'c':
+                x1 = x + eatNum();
+                y1 = y + eatNum();
+
+            case 's':
+                if (activeCmd === 's') {
+
+                    x1 = 2 * x - x2;
+                    y1 = 2 * y - y2;
+
+                }
+
+                x2 = x + eatNum();
+                y2 = y + eatNum();
+                nx = x + eatNum();
+                ny = y + eatNum();
+                path.bezierCurveTo(x1, y1, x2, y2, nx, ny);
+                x = nx;
+                y = ny;
+                break;
+
+                // - quadratic bezier
+            case 'Q':
+                x1 = eatNum();
+                y1 = eatNum();
+
+            case 'T':
+                if (activeCmd === 'T') {
+
+                    x1 = 2 * x - x1;
+                    y1 = 2 * y - y1;
+
+                }
+                nx = eatNum();
+                ny = eatNum();
+                path.quadraticCurveTo(x1, y1, nx, ny);
+                x = nx;
+                y = ny;
+                break;
+
+            case 'q':
+                x1 = x + eatNum();
+                y1 = y + eatNum();
+
+            case 't':
+                if (activeCmd === 't') {
+
+                    x1 = 2 * x - x1;
+                    y1 = 2 * y - y1;
+
+                }
+
+                nx = x + eatNum();
+                ny = y + eatNum();
+                path.quadraticCurveTo(x1, y1, nx, ny);
+                x = nx;
+                y = ny;
+                break;
+
+                // - elliptical arc
+            case 'A':
+                rx = eatNum();
+                ry = eatNum();
+                xar = eatNum() * DEGS_TO_RADS;
+                laf = eatNum();
+                sf = eatNum();
+                nx = eatNum();
+                ny = eatNum();
+                if (rx !== ry) console.warn('Forcing elliptical arc to be a circular one:', rx, ry);
+
+                // SVG implementation notes does all the math for us! woo!
+                // http://www.w3.org/TR/SVG/implnote.html#ArcImplementationNotes
+                // step1, using x1 as x1'
+                x1 = Math.cos(xar) * (x - nx) / 2 + Math.sin(xar) * (y - ny) / 2;
+                y1 = -Math.sin(xar) * (x - nx) / 2 + Math.cos(xar) * (y - ny) / 2;
+
+                // step 2, using x2 as cx'
+                var norm = Math.sqrt((rx * rx * ry * ry - rx * rx * y1 * y1 - ry * ry * x1 * x1) / (rx * rx * y1 * y1 + ry * ry * x1 * x1));
+
+                if (laf === sf) norm = -norm;
+
+                x2 = norm * rx * y1 / ry;
+                y2 = norm * -ry * x1 / rx;
+
+                // step 3
+                cx = Math.cos(xar) * x2 - Math.sin(xar) * y2 + (x + nx) / 2;
+                cy = Math.sin(xar) * x2 + Math.cos(xar) * y2 + (y + ny) / 2;
+
+                var u = new THREE.Vector2(1, 0);
+                var v = new THREE.Vector2((x1 - x2) / rx, (y1 - y2) / ry);
+
+                var startAng = Math.acos(u.dot(v) / u.length() / v.length());
+
+                if (((u.x * v.y) - (u.y * v.x)) < 0) startAng = -startAng;
+
+                // we can reuse 'v' from start angle as our 'u' for delta angle
+                u.x = ( - x1 - x2) / rx;
+                u.y = ( - y1 - y2) / ry;
+
+                var deltaAng = Math.acos(v.dot(u) / v.length() / u.length());
+
+                // This normalization ends up making our curves fail to triangulate...
+                if (((v.x * u.y) - (v.y * u.x)) < 0) deltaAng = -deltaAng;
+                if (!sf && deltaAng > 0) deltaAng -= Math.PI * 2;
+                if (sf && deltaAng < 0) deltaAng += Math.PI * 2;
+
+                path.absarc(cx, cy, rx, startAng, startAng + deltaAng, sf);
+                x = nx;
+                y = ny;
+                break;
+
+            default:
+                throw new Error('Wrong path command: ' + activeCmd);
+
+            }
+
+            // just reissue the command
+            if (canRepeat && nextIsNum()) continue;
+
+            activeCmd = pathStr[idx++];
+
+        }
+
+        return path;
+
+    };
+
+}
+
+var $d3g = {};
+d3threeD($d3g);
 
 /* 
  *************************************
@@ -16011,51 +16365,51 @@ APP = ( function ( APP, $, window, document ) {
 
 			
 			//----
-			if ( APP.MAIN ) APP.MAIN.pageLoaded(); //Theme Scripts
-			if ( APP.COMMON_HEIGHT ) APP.COMMON_HEIGHT.pageLoaded(); //Common Height
-			if ( APP.ADVANCED_SLIDER ) APP.ADVANCED_SLIDER.pageLoaded(); //Advanced Slider (Basic)
-			if ( APP.ADVANCED_SLIDER_FILTER ) APP.ADVANCED_SLIDER_FILTER.pageLoaded(); //Advanced Slider	
-			if ( APP.POST_LIST_SPLIT_FULLWIDTH ) APP.POST_LIST_SPLIT_FULLWIDTH.pageLoaded(); //Fullwidth List of Split
-			if ( APP.STICKY_EL ) APP.STICKY_EL.pageLoaded(); //Sticky Elements
-			if ( APP.TEXT_EFFECT ) APP.TEXT_EFFECT.pageLoaded(); //Text effect
-			if ( APP.TIMELINE ) APP.TIMELINE.pageLoaded(); //Timeline
+			if ( APP.MAIN )                         APP.MAIN.pageLoaded(); //Theme Scripts
+			if ( APP.COMMON_HEIGHT )                APP.COMMON_HEIGHT.pageLoaded(); //Common Height
+			if ( APP.ADVANCED_SLIDER )              APP.ADVANCED_SLIDER.pageLoaded(); //Advanced Slider (Basic)
+			if ( APP.ADVANCED_SLIDER_FILTER )       APP.ADVANCED_SLIDER_FILTER.pageLoaded(); //Advanced Slider	
+			if ( APP.POST_LIST_SPLIT_FULLWIDTH )    APP.POST_LIST_SPLIT_FULLWIDTH.pageLoaded(); //Fullwidth List of Split
+			if ( APP.STICKY_EL )                    APP.STICKY_EL.pageLoaded(); //Sticky Elements
+			if ( APP.TEXT_EFFECT )                  APP.TEXT_EFFECT.pageLoaded(); //Text effect
+			if ( APP.TIMELINE )                     APP.TIMELINE.pageLoaded(); //Timeline
 			
 		
 			
 			//----
-			if ( APP.MAIN ) APP.MAIN.documentReady($); //Theme Scripts
-			if ( APP.TABLE ) APP.TABLE.documentReady($); //Responsive Table
-			if ( APP.TABLE_SORTER ) APP.TABLE_SORTER.documentReady($); //Table Sorter
-			if ( APP.MODAL_DIALOG ) APP.MODAL_DIALOG.documentReady($); //Modal Dialog
-			if ( APP.PARALLAX ) APP.PARALLAX.documentReady($); //Parallax
-			if ( APP.VIDEOS ) APP.VIDEOS.documentReady($); //Videos
-			if ( APP.BODY_AND_HEADER ) APP.BODY_AND_HEADER.documentReady($); //Header Area
-			if ( APP.SET_BG ) APP.SET_BG.documentReady($); //Specify a background image
-			if ( APP.GET_CUSTOM_ATTRS ) APP.GET_CUSTOM_ATTRS.documentReady($); //Get all custom attributes of an element like "data-*"
-			if ( APP.PAGINATION ) APP.PAGINATION.documentReady($); //Pagination
-			if ( APP.FORM ) APP.FORM.documentReady($); //Form
-			if ( APP.FLEXSLIDER ) APP.FLEXSLIDER.documentReady($); //Flexslider
-			if ( APP.RETINA ) APP.RETINA.documentReady($); //Retina Graphics for Website
-			if ( APP.SHOW_MORELESS ) APP.SHOW_MORELESS.documentReady($); //Show More Less
-			if ( APP.DROPDOWN_MENU ) APP.DROPDOWN_MENU.documentReady($); //Dropdown Menu
-			if ( APP.DROPDOWN_MENU2 ) APP.DROPDOWN_MENU2.documentReady($); //Dropdown Menu2
-			if ( APP.ACCORDION ) APP.ACCORDION.documentReady($); //Accordion	
-			if ( APP.ADVANCED_CONTENT_SLIDER ) APP.ADVANCED_CONTENT_SLIDER.documentReady($); //Advanced Content Slider
-			if ( APP.GALLERY ) APP.GALLERY.documentReady($); //Gallery
-			if ( APP.IMAGE_SHAPES ) APP.IMAGE_SHAPES.documentReady($); //Image Shapes
-			if ( APP.PERIODICAL_SCROLL ) APP.PERIODICAL_SCROLL.documentReady($); //Periodical Scroll
-			if ( APP.PRICING ) APP.PRICING.documentReady($); //Pricing
-			if ( APP.PROGRESSBAR ) APP.PROGRESSBAR.documentReady($); //Progress Bar
-			if ( APP.PROGRESSLINE ) APP.PROGRESSLINE.documentReady($); //Progress Line
-			if ( APP.ROTATING_EL ) APP.ROTATING_EL.documentReady($); //Rotating Elements
-			if ( APP.SMOOTH_SCROLLING_ANCHORLINK ) APP.SMOOTH_SCROLLING_ANCHORLINK.documentReady($); //Smooth Scrolling When Clicking An Anchor Link
-			if ( APP.TABS ) APP.TABS.documentReady($); //Tabs
-			if ( APP.TEAM_FOCUS ) APP.TEAM_FOCUS.documentReady($); //Team Focus
-			if ( APP.LAVA_LAMP_STYLE_MENU ) APP.LAVA_LAMP_STYLE_MENU.documentReady($); //Lava-Lamp Style Menu
-			if ( APP.CIRCLE_LAYOUT ) APP.CIRCLE_LAYOUT.documentReady($); //Circle Layout
-			if ( APP.MULTI_ITEMS_CAROUSEL ) APP.MULTI_ITEMS_CAROUSEL.documentReady($); //Multiple Items Carousel
-			if ( APP._3D_BACKGROUND ) APP._3D_BACKGROUND.documentReady($); //3D Background
-			if ( APP._3D_CAROUSEL ) APP._3D_CAROUSEL.documentReady($); //3D Carousel
+			if ( APP.MAIN )                         APP.MAIN.documentReady($); //Theme Scripts
+			if ( APP.TABLE )                        APP.TABLE.documentReady($); //Responsive Table
+			if ( APP.TABLE_SORTER )                 APP.TABLE_SORTER.documentReady($); //Table Sorter
+			if ( APP.MODAL_DIALOG )                 APP.MODAL_DIALOG.documentReady($); //Modal Dialog
+			if ( APP.PARALLAX )                     APP.PARALLAX.documentReady($); //Parallax
+			if ( APP.VIDEOS )                       APP.VIDEOS.documentReady($); //Videos
+			if ( APP.BODY_AND_HEADER )              APP.BODY_AND_HEADER.documentReady($); //Header Area
+			if ( APP.SET_BG )                       APP.SET_BG.documentReady($); //Specify a background image
+			if ( APP.GET_CUSTOM_ATTRS )             APP.GET_CUSTOM_ATTRS.documentReady($); //Get all custom attributes of an element like "data-*"
+			if ( APP.PAGINATION )                   APP.PAGINATION.documentReady($); //Pagination
+			if ( APP.FORM )                         APP.FORM.documentReady($); //Form
+			if ( APP.FLEXSLIDER )                   APP.FLEXSLIDER.documentReady($); //Flexslider
+			if ( APP.RETINA )                       APP.RETINA.documentReady($); //Retina Graphics for Website
+			if ( APP.SHOW_MORELESS )                APP.SHOW_MORELESS.documentReady($); //Show More Less
+			if ( APP.DROPDOWN_MENU )                APP.DROPDOWN_MENU.documentReady($); //Dropdown Menu
+			if ( APP.DROPDOWN_MENU2 )               APP.DROPDOWN_MENU2.documentReady($); //Dropdown Menu2
+			if ( APP.ACCORDION )                    APP.ACCORDION.documentReady($); //Accordion	
+			if ( APP.ADVANCED_CONTENT_SLIDER )      APP.ADVANCED_CONTENT_SLIDER.documentReady($); //Advanced Content Slider
+			if ( APP.GALLERY )                      APP.GALLERY.documentReady($); //Gallery
+			if ( APP.IMAGE_SHAPES )                 APP.IMAGE_SHAPES.documentReady($); //Image Shapes
+			if ( APP.PERIODICAL_SCROLL )            APP.PERIODICAL_SCROLL.documentReady($); //Periodical Scroll
+			if ( APP.PRICING )                      APP.PRICING.documentReady($); //Pricing
+			if ( APP.PROGRESSBAR )                  APP.PROGRESSBAR.documentReady($); //Progress Bar
+			if ( APP.PROGRESSLINE )                 APP.PROGRESSLINE.documentReady($); //Progress Line
+			if ( APP.ROTATING_EL )                  APP.ROTATING_EL.documentReady($); //Rotating Elements
+			if ( APP.SMOOTH_SCROLLING_ANCHORLINK )  APP.SMOOTH_SCROLLING_ANCHORLINK.documentReady($); //Smooth Scrolling When Clicking An Anchor Link
+			if ( APP.TABS )                         APP.TABS.documentReady($); //Tabs
+			if ( APP.TEAM_FOCUS )                   APP.TEAM_FOCUS.documentReady($); //Team Focus
+			if ( APP.LAVA_LAMP_STYLE_MENU )         APP.LAVA_LAMP_STYLE_MENU.documentReady($); //Lava-Lamp Style Menu
+			if ( APP.CIRCLE_LAYOUT )                APP.CIRCLE_LAYOUT.documentReady($); //Circle Layout
+			if ( APP.MULTI_ITEMS_CAROUSEL )         APP.MULTI_ITEMS_CAROUSEL.documentReady($); //Multiple Items Carousel
+			if ( APP._3D_BACKGROUND )               APP._3D_BACKGROUND.documentReady($); //3D Background
+			if ( APP._3D_CAROUSEL )                 APP._3D_CAROUSEL.documentReady($); //3D Carousel
 			
 			
 		
@@ -16627,8 +16981,9 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.DYNAMIC_DD_LIST               = APP.DYNAMIC_DD_LIST || {};
-	APP.DYNAMIC_DD_LIST.version       = '0.0.4';
+	APP.DYNAMIC_DD_LIST.version       = '0.0.5';
     APP.DYNAMIC_DD_LIST.documentReady = function( $ ) {
+
 
 			
 		$( '[data-ajax-dynamic-dd-json]' ).each( function() {
@@ -16682,12 +17037,16 @@ APP = ( function ( APP, $, window, document ) {
 							
 								var _level1 = [],
 									_level2 = [],
-									_level3 = [];
+									_level3 = [],
+									_level1IDs     = [],
+									_level2IDs     = [],
+									_level3IDs     = [];
 
 
 								for ( var m = 0; m < data.length; m++ ) {
 
 									_level1.push( data[m].name );
+									_level1IDs.push( data[m].id );
 
 									var level2_List;
 
@@ -16702,7 +17061,9 @@ APP = ( function ( APP, $, window, document ) {
 									}
 
 									var _curLevel2Items   = [],
-										_curLevel3Items   = [];
+										_curLevel3Items   = [],
+										_curLevel2IDs     = [],
+										_curLevel3IDs     = [];
 
 
 									for ( var i = 0; i < level2_List.length; i++ ) {
@@ -16713,25 +17074,44 @@ APP = ( function ( APP, $, window, document ) {
 											//============ China cities dropdown list demo
 											//================================================
 											var city      = level2_List[i].name,
-												area      = level2_List[i].area;
+												area      = level2_List[i].area,
+												areaIDs   = level2_List[i].areaid,
+												ids       = level2_List[i].id;
 
+											
 
 											_curLevel2Items.push( city );
+											_curLevel2IDs.push( ids );
 
-											var _tempLevel3Items = [];
-											for ( var k = 0; k < area.length; k++ ) {
-												_tempLevel3Items.push( area[k] );
+											var _tempLevel3Items = [],
+												_tempLevel3IDs   = [];
+											
+											if ( typeof area != typeof undefined ) {
+												for ( var k = 0; k < area.length; k++ ) {
+													_tempLevel3Items.push( area[k] );
+
+												}		
 											}
 
+											if ( typeof areaIDs != typeof undefined ) {
+												for ( var p = 0; p < areaIDs.length; p++ ) {
+													_tempLevel3IDs.push( areaIDs[p] );
+
+												}		
+											}
+											
 											_curLevel3Items.push( _tempLevel3Items );
+											_curLevel3IDs.push( _tempLevel3IDs );
 
 
 										} else {
 											//============ Sort object then subsort further demo
 											//================================================
-											var sort1   = level2_List[i].name;
+											var sort1    = level2_List[i].name,
+												sortID   = level2_List[i].id;
 
 											_curLevel2Items.push( sort1 );
+											_curLevel2IDs.push( sortID );
 										}
 
 
@@ -16740,6 +17120,10 @@ APP = ( function ( APP, $, window, document ) {
 
 									_level2.push( _curLevel2Items );
 									_level3.push( _curLevel3Items );
+									
+									_level2IDs.push( _curLevel2IDs );
+									_level3IDs.push( _curLevel3IDs );									
+									
 
 								}// end for
 
@@ -16749,6 +17133,9 @@ APP = ( function ( APP, $, window, document ) {
 									var allLevel1Items           = _level1,
 										allLevel2Items           = _level2,
 										allLevel3Items           = _level3,
+										allLevel1IDs             = _level1IDs,
+										allLevel2IDs             = _level2IDs,
+										allLevel3IDs             = _level3IDs,
 										$level1El                = $this,
 										$level2El                = $( associated ),
 										$level3El                = $( associated2 ),
@@ -16770,7 +17157,9 @@ APP = ( function ( APP, $, window, document ) {
 //									console.log( allLevel2Items );
 //									console.log( allLevel3Items );
 									
-									
+//									console.log( allLevel1IDs );
+//									console.log( allLevel2IDs );
+//									console.log( allLevel3IDs );								
 									
 
 									//Clear all the drop-down list
@@ -16791,12 +17180,13 @@ APP = ( function ( APP, $, window, document ) {
 									}
 									$level1El.append( level1EmptyOption );
 									for (var i = 0; i < allLevel1Items.length; i++) {
-										var _v = allLevel1Items[i];
+										var _v = allLevel1Items[i],
+											_id = allLevel1IDs[i];
 
 										if ( defaultLevel1Val == _v ) {
-											$level1El.append("<option data-index='" + (i + 1) + "' value='" + _v + "' selected>" + _v + "</option>");
+											$level1El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "' selected>" + _v + "</option>");
 										} else {
-											$level1El.append("<option data-index='" + (i + 1) + "' value='" + _v + "'>" + _v + "</option>");
+											$level1El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
 										}
 
 									}
@@ -16813,12 +17203,14 @@ APP = ( function ( APP, $, window, document ) {
 
 									if ( typeof curLevel1Index != typeof undefined ) {
 										for (var i = 0; i < allLevel2Items[curLevel1Index - 1].length; i++) {
-											var _v = allLevel2Items[curLevel1Index - 1][i];
+											var _v = allLevel2Items[curLevel1Index - 1][i],
+											    _id = allLevel2IDs[curLevel1Index - 1][i];
+  
 
 											if ( defaultLevel2Val == _v ) {
-												$level2El.append("<option data-index='" + (i + 1) + "' value='" + _v + "' selected>" + _v + "</option>");
+												$level2El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "' selected>" + _v + "</option>");
 											} else {
-												$level2El.append("<option data-index='" + (i + 1) + "' value='" + _v + "'>" + _v + "</option>");
+												$level2El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
 											}
 										}		
 									}
@@ -16830,12 +17222,14 @@ APP = ( function ( APP, $, window, document ) {
 
 									if ( typeof curLevel2Index != typeof undefined ) {
 										for (var i = 0; i < allLevel3Items[curLevel1Index - 1][curLevel2Index - 1].length; i++) {
-											var _v = allLevel3Items[curLevel1Index - 1][curLevel2Index - 1][i];
+											var _v = allLevel3Items[curLevel1Index - 1][curLevel2Index - 1][i],
+											    _id = allLevel3IDs[curLevel1Index - 1][curLevel2Index - 1][i];
+
 
 											if ( defaultLevel3Val == _v ) {
-												$level3El.append("<option data-index='" + (i + 1) + "' value='" + _v + "' selected>" + _v + "</option>");
+												$level3El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "' selected>" + _v + "</option>");
 											} else {
-												$level3El.append("<option data-index='" + (i + 1) + "' value='" + _v + "'>" + _v + "</option>");
+												$level3El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
 											}
 										}
 
@@ -16871,11 +17265,14 @@ APP = ( function ( APP, $, window, document ) {
 										//Set the current subscript of the selected option and assign
 										var level1Index = $(this).find( 'option:selected' ).data( 'index' );
 										var level2Items = allLevel2Items[level1Index - 1];
+										var level2IDs = allLevel2IDs[level1Index - 1];
 
 										if ( typeof level2Items != typeof undefined ) {
 											for (var i = 0; i < level2Items.length; i++) {
-												var _v = level2Items[i];
-												$level2El.append("<option data-index='" + (i + 1) + "' value='" + _v + "'>" + _v + "</option>");
+												var _v = level2Items[i],
+											        _id = level2IDs[i];
+
+												$level2El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
 											}			
 										} else {
 											//Hide or display controls
@@ -16910,13 +17307,17 @@ APP = ( function ( APP, $, window, document ) {
 										var level2Index = $(this).find( 'option:selected' ).data( 'index' );
 										
 										
+										
 										if ( typeof level1Index != typeof undefined && typeof level2Index != typeof undefined ) {
 											var level3Items = allLevel3Items[level1Index - 1][level2Index - 1];
+											var level3IDs = allLevel3IDs[level1Index - 1][level2Index - 1];
 
 											if ( typeof level3Items != typeof undefined ) {
 												for (var i = 0; i < level3Items.length; i++) {
-													var _v = level3Items[i];
-													$level3El.append("<option data-index='" + (i + 1) + "' value='" + _v + "'>" + _v + "</option>");
+													var _v = level3Items[i],
+											            _id = level3IDs[i];
+
+													$level3El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
 												}		
 											}	
 										} else {
@@ -16965,8 +17366,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 		});
 		
-			
-			
+		
 			
 				
     };
@@ -16975,7 +17375,6 @@ APP = ( function ( APP, $, window, document ) {
     return APP;
 
 }( APP, jQuery, window, document ) );
-
 
 
 
@@ -29778,7 +30177,8 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			//if use texture
-			material.uniforms.texture.value.wrapS =material.uniforms.texture.value.wrapT = THREE.RepeatWrapping;
+			material.uniforms.texture.value.wrapS = THREE.RepeatWrapping;
+			material.uniforms.texture.value.wrapT = THREE.RepeatWrapping;
 		
 			
 			var geometry = new THREE.SphereGeometry(5, 50, 50, 0, Math.PI * 2, 0, Math.PI * 2);
@@ -30495,7 +30895,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP._3D_GALLERY               = APP._3D_GALLERY || {};
-	APP._3D_GALLERY.version       = '0.0.2';
+	APP._3D_GALLERY.version       = '0.0.3';
     APP._3D_GALLERY.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -30524,6 +30924,12 @@ APP = ( function ( APP, $, window, document ) {
 			allImages    = [],
 			imgTotal,
 			imagesLoaded = false;
+
+
+		// we will keep track of the scroll
+		var scrollValue = 0;
+		var lastScrollValue = 0;
+
 
 
 		init();
@@ -30582,17 +30988,17 @@ APP = ( function ( APP, $, window, document ) {
 			// Immediately use the texture for material creation
 			// Create a texture loader so we can load our image file
 			var imgs = [
-				'http://placekitten.com/2100/2100',
-				'http://placekitten.com/2200/2200',
-				'http://placekitten.com/2300/2300',
-				'http://placekitten.com/2400/2400',
-				'http://placekitten.com/2500/2500',
-				'http://placekitten.com/2000/2000',
-				'http://placekitten.com/1600/1600',
-				'http://placekitten.com/1650/1650',
-				'http://placekitten.com/1670/1670',
-				'http://placekitten.com/1680/1680',
-				'http://placekitten.com/1700/1700'
+				'https://placekitten.com/2100/2100',
+				'https://placekitten.com/2200/2200',
+				'https://placekitten.com/2300/2300',
+				'https://placekitten.com/2400/2400',
+				'https://placekitten.com/2500/2500',
+				'https://placekitten.com/2000/2000',
+				'https://placekitten.com/1600/1600',
+				'https://placekitten.com/1650/1650',
+				'https://placekitten.com/1670/1670',
+				'https://placekitten.com/1680/1680',
+				'https://placekitten.com/1700/1700'
 			];
 				
 			
@@ -30635,14 +31041,30 @@ APP = ( function ( APP, $, window, document ) {
 			//To set a background color.
 			renderer.setClearColor( 0x000000 );	
 			
-			//check all images loaded
-			if ( !imagesLoaded && allImages.length === imgTotal ) {
-				allImages.forEach( function (element ) {
-					scene.add( element );
-				});
-				imagesLoaded = true;
-				
+			// listen to scroll to update
+			var delta = scrollValue - lastScrollValue;
+			// threshold
+			if (delta > 60) {
+				delta = 60;
+			} else if(delta < -60) {
+				delta = -60;
 			}
+			
+			camera.position.x = camera.position.x + delta;
+			
+
+			
+			//check all images loaded
+			if ( typeof allImages != typeof undefined ) {
+				if ( !imagesLoaded && allImages.length === imgTotal ) {
+					allImages.forEach( function (element ) {
+						scene.add( element );
+					});
+					imagesLoaded = true;
+
+				}		
+			}
+
 			
 			//update camera and controls
 			controls.update();
@@ -30660,6 +31082,16 @@ APP = ( function ( APP, $, window, document ) {
 		}
 
 			
+		// listen to scroll
+		window.addEventListener( 'scroll', function(e) {
+			lastScrollValue = scrollValue;
+			scrollValue = window.pageYOffset;
+			
+			console.log( 'lastScrollValue: ' + lastScrollValue + ', scrollValue: ' + scrollValue );
+		});
+		
+
+		
 		/*
 		 * Load Image
 		 *
@@ -30848,8 +31280,8 @@ APP = ( function ( APP, $, window, document ) {
 			// Immediately use the texture for material creation
 			// Create a texture loader so we can load our image file
 			var imgs = [
-				'http://placekitten.com/1400/550',
-				'http://placekitten.com/1410/550'
+				'https://placekitten.com/1400/550',
+				'https://placekitten.com/1410/550'
 			];
 			
 			var loader = new THREE.TextureLoader();
@@ -31839,7 +32271,7 @@ APP = ( function ( APP, $, window, document ) {
 			var loader = new THREE.TextureLoader();
 			loader.crossOrigin = 'anonymous';
 			
-			var texture = loader.load( 'http://placekitten.com/1650/1650' ),
+			var texture = loader.load( 'https://placekitten.com/1650/1650' ),
 				material = new THREE.MeshBasicMaterial( { map: texture } );
 
 			// parent
@@ -32926,7 +33358,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.TABLE               = APP.TABLE || {};
-	APP.TABLE.version       = '0.0.2';
+	APP.TABLE.version       = '0.0.3';
     APP.TABLE.documentReady = function( $ ) {
 
 
@@ -32946,7 +33378,7 @@ APP = ( function ( APP, $, window, document ) {
 			$tbody    = $resTable.find( 'tbody' );
 
         $thead.find( 'th' ).each(function() {
-            var data = $(this).text();
+            var data = $( this ).html().replace(/<span\s+class=(\"|\')js-uix-table-responsive__hidden(\"|\')(([\s\S])*?)<\/span>/g, '');
             if ( !$( this ).attr( 'data-table' ) ) {
                 $( this ).attr( 'data-table', data );
             }

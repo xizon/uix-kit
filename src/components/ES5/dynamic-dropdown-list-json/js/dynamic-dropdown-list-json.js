@@ -8,8 +8,9 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.DYNAMIC_DD_LIST               = APP.DYNAMIC_DD_LIST || {};
-	APP.DYNAMIC_DD_LIST.version       = '0.0.4';
+	APP.DYNAMIC_DD_LIST.version       = '0.0.5';
     APP.DYNAMIC_DD_LIST.documentReady = function( $ ) {
+
 
 			
 		$( '[data-ajax-dynamic-dd-json]' ).each( function() {
@@ -63,12 +64,16 @@ APP = ( function ( APP, $, window, document ) {
 							
 								var _level1 = [],
 									_level2 = [],
-									_level3 = [];
+									_level3 = [],
+									_level1IDs     = [],
+									_level2IDs     = [],
+									_level3IDs     = [];
 
 
 								for ( var m = 0; m < data.length; m++ ) {
 
 									_level1.push( data[m].name );
+									_level1IDs.push( data[m].id );
 
 									var level2_List;
 
@@ -83,7 +88,9 @@ APP = ( function ( APP, $, window, document ) {
 									}
 
 									var _curLevel2Items   = [],
-										_curLevel3Items   = [];
+										_curLevel3Items   = [],
+										_curLevel2IDs     = [],
+										_curLevel3IDs     = [];
 
 
 									for ( var i = 0; i < level2_List.length; i++ ) {
@@ -94,25 +101,44 @@ APP = ( function ( APP, $, window, document ) {
 											//============ China cities dropdown list demo
 											//================================================
 											var city      = level2_List[i].name,
-												area      = level2_List[i].area;
+												area      = level2_List[i].area,
+												areaIDs   = level2_List[i].areaid,
+												ids       = level2_List[i].id;
 
+											
 
 											_curLevel2Items.push( city );
+											_curLevel2IDs.push( ids );
 
-											var _tempLevel3Items = [];
-											for ( var k = 0; k < area.length; k++ ) {
-												_tempLevel3Items.push( area[k] );
+											var _tempLevel3Items = [],
+												_tempLevel3IDs   = [];
+											
+											if ( typeof area != typeof undefined ) {
+												for ( var k = 0; k < area.length; k++ ) {
+													_tempLevel3Items.push( area[k] );
+
+												}		
 											}
 
+											if ( typeof areaIDs != typeof undefined ) {
+												for ( var p = 0; p < areaIDs.length; p++ ) {
+													_tempLevel3IDs.push( areaIDs[p] );
+
+												}		
+											}
+											
 											_curLevel3Items.push( _tempLevel3Items );
+											_curLevel3IDs.push( _tempLevel3IDs );
 
 
 										} else {
 											//============ Sort object then subsort further demo
 											//================================================
-											var sort1   = level2_List[i].name;
+											var sort1    = level2_List[i].name,
+												sortID   = level2_List[i].id;
 
 											_curLevel2Items.push( sort1 );
+											_curLevel2IDs.push( sortID );
 										}
 
 
@@ -121,6 +147,10 @@ APP = ( function ( APP, $, window, document ) {
 
 									_level2.push( _curLevel2Items );
 									_level3.push( _curLevel3Items );
+									
+									_level2IDs.push( _curLevel2IDs );
+									_level3IDs.push( _curLevel3IDs );									
+									
 
 								}// end for
 
@@ -130,6 +160,9 @@ APP = ( function ( APP, $, window, document ) {
 									var allLevel1Items           = _level1,
 										allLevel2Items           = _level2,
 										allLevel3Items           = _level3,
+										allLevel1IDs             = _level1IDs,
+										allLevel2IDs             = _level2IDs,
+										allLevel3IDs             = _level3IDs,
 										$level1El                = $this,
 										$level2El                = $( associated ),
 										$level3El                = $( associated2 ),
@@ -151,7 +184,9 @@ APP = ( function ( APP, $, window, document ) {
 //									console.log( allLevel2Items );
 //									console.log( allLevel3Items );
 									
-									
+//									console.log( allLevel1IDs );
+//									console.log( allLevel2IDs );
+//									console.log( allLevel3IDs );								
 									
 
 									//Clear all the drop-down list
@@ -172,12 +207,13 @@ APP = ( function ( APP, $, window, document ) {
 									}
 									$level1El.append( level1EmptyOption );
 									for (var i = 0; i < allLevel1Items.length; i++) {
-										var _v = allLevel1Items[i];
+										var _v = allLevel1Items[i],
+											_id = allLevel1IDs[i];
 
 										if ( defaultLevel1Val == _v ) {
-											$level1El.append("<option data-index='" + (i + 1) + "' value='" + _v + "' selected>" + _v + "</option>");
+											$level1El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "' selected>" + _v + "</option>");
 										} else {
-											$level1El.append("<option data-index='" + (i + 1) + "' value='" + _v + "'>" + _v + "</option>");
+											$level1El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
 										}
 
 									}
@@ -194,12 +230,14 @@ APP = ( function ( APP, $, window, document ) {
 
 									if ( typeof curLevel1Index != typeof undefined ) {
 										for (var i = 0; i < allLevel2Items[curLevel1Index - 1].length; i++) {
-											var _v = allLevel2Items[curLevel1Index - 1][i];
+											var _v = allLevel2Items[curLevel1Index - 1][i],
+											    _id = allLevel2IDs[curLevel1Index - 1][i];
+  
 
 											if ( defaultLevel2Val == _v ) {
-												$level2El.append("<option data-index='" + (i + 1) + "' value='" + _v + "' selected>" + _v + "</option>");
+												$level2El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "' selected>" + _v + "</option>");
 											} else {
-												$level2El.append("<option data-index='" + (i + 1) + "' value='" + _v + "'>" + _v + "</option>");
+												$level2El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
 											}
 										}		
 									}
@@ -211,12 +249,14 @@ APP = ( function ( APP, $, window, document ) {
 
 									if ( typeof curLevel2Index != typeof undefined ) {
 										for (var i = 0; i < allLevel3Items[curLevel1Index - 1][curLevel2Index - 1].length; i++) {
-											var _v = allLevel3Items[curLevel1Index - 1][curLevel2Index - 1][i];
+											var _v = allLevel3Items[curLevel1Index - 1][curLevel2Index - 1][i],
+											    _id = allLevel3IDs[curLevel1Index - 1][curLevel2Index - 1][i];
+
 
 											if ( defaultLevel3Val == _v ) {
-												$level3El.append("<option data-index='" + (i + 1) + "' value='" + _v + "' selected>" + _v + "</option>");
+												$level3El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "' selected>" + _v + "</option>");
 											} else {
-												$level3El.append("<option data-index='" + (i + 1) + "' value='" + _v + "'>" + _v + "</option>");
+												$level3El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
 											}
 										}
 
@@ -252,11 +292,14 @@ APP = ( function ( APP, $, window, document ) {
 										//Set the current subscript of the selected option and assign
 										var level1Index = $(this).find( 'option:selected' ).data( 'index' );
 										var level2Items = allLevel2Items[level1Index - 1];
+										var level2IDs = allLevel2IDs[level1Index - 1];
 
 										if ( typeof level2Items != typeof undefined ) {
 											for (var i = 0; i < level2Items.length; i++) {
-												var _v = level2Items[i];
-												$level2El.append("<option data-index='" + (i + 1) + "' value='" + _v + "'>" + _v + "</option>");
+												var _v = level2Items[i],
+											        _id = level2IDs[i];
+
+												$level2El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
 											}			
 										} else {
 											//Hide or display controls
@@ -291,13 +334,17 @@ APP = ( function ( APP, $, window, document ) {
 										var level2Index = $(this).find( 'option:selected' ).data( 'index' );
 										
 										
+										
 										if ( typeof level1Index != typeof undefined && typeof level2Index != typeof undefined ) {
 											var level3Items = allLevel3Items[level1Index - 1][level2Index - 1];
+											var level3IDs = allLevel3IDs[level1Index - 1][level2Index - 1];
 
 											if ( typeof level3Items != typeof undefined ) {
 												for (var i = 0; i < level3Items.length; i++) {
-													var _v = level3Items[i];
-													$level3El.append("<option data-index='" + (i + 1) + "' value='" + _v + "'>" + _v + "</option>");
+													var _v = level3Items[i],
+											            _id = level3IDs[i];
+
+													$level3El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
 												}		
 											}	
 										} else {
@@ -346,8 +393,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 		});
 		
-			
-			
+		
 			
 				
     };
@@ -356,7 +402,6 @@ APP = ( function ( APP, $, window, document ) {
     return APP;
 
 }( APP, jQuery, window, document ) );
-
 
 
 

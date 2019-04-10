@@ -15,7 +15,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP._3D_GALLERY               = APP._3D_GALLERY || {};
-	APP._3D_GALLERY.version       = '0.0.2';
+	APP._3D_GALLERY.version       = '0.0.3';
     APP._3D_GALLERY.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -44,6 +44,12 @@ APP = ( function ( APP, $, window, document ) {
 			allImages    = [],
 			imgTotal,
 			imagesLoaded = false;
+
+
+		// we will keep track of the scroll
+		var scrollValue = 0;
+		var lastScrollValue = 0;
+
 
 
 		init();
@@ -102,17 +108,17 @@ APP = ( function ( APP, $, window, document ) {
 			// Immediately use the texture for material creation
 			// Create a texture loader so we can load our image file
 			var imgs = [
-				'http://placekitten.com/2100/2100',
-				'http://placekitten.com/2200/2200',
-				'http://placekitten.com/2300/2300',
-				'http://placekitten.com/2400/2400',
-				'http://placekitten.com/2500/2500',
-				'http://placekitten.com/2000/2000',
-				'http://placekitten.com/1600/1600',
-				'http://placekitten.com/1650/1650',
-				'http://placekitten.com/1670/1670',
-				'http://placekitten.com/1680/1680',
-				'http://placekitten.com/1700/1700'
+				'https://placekitten.com/2100/2100',
+				'https://placekitten.com/2200/2200',
+				'https://placekitten.com/2300/2300',
+				'https://placekitten.com/2400/2400',
+				'https://placekitten.com/2500/2500',
+				'https://placekitten.com/2000/2000',
+				'https://placekitten.com/1600/1600',
+				'https://placekitten.com/1650/1650',
+				'https://placekitten.com/1670/1670',
+				'https://placekitten.com/1680/1680',
+				'https://placekitten.com/1700/1700'
 			];
 				
 			
@@ -155,14 +161,30 @@ APP = ( function ( APP, $, window, document ) {
 			//To set a background color.
 			renderer.setClearColor( 0x000000 );	
 			
-			//check all images loaded
-			if ( !imagesLoaded && allImages.length === imgTotal ) {
-				allImages.forEach( function (element ) {
-					scene.add( element );
-				});
-				imagesLoaded = true;
-				
+			// listen to scroll to update
+			var delta = scrollValue - lastScrollValue;
+			// threshold
+			if (delta > 60) {
+				delta = 60;
+			} else if(delta < -60) {
+				delta = -60;
 			}
+			
+			camera.position.x = camera.position.x + delta;
+			
+
+			
+			//check all images loaded
+			if ( typeof allImages != typeof undefined ) {
+				if ( !imagesLoaded && allImages.length === imgTotal ) {
+					allImages.forEach( function (element ) {
+						scene.add( element );
+					});
+					imagesLoaded = true;
+
+				}		
+			}
+
 			
 			//update camera and controls
 			controls.update();
@@ -180,6 +202,16 @@ APP = ( function ( APP, $, window, document ) {
 		}
 
 			
+		// listen to scroll
+		window.addEventListener( 'scroll', function(e) {
+			lastScrollValue = scrollValue;
+			scrollValue = window.pageYOffset;
+			
+			console.log( 'lastScrollValue: ' + lastScrollValue + ', scrollValue: ' + scrollValue );
+		});
+		
+
+		
 		/*
 		 * Load Image
 		 *

@@ -83,7 +83,8 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			//if use texture
-			material.uniforms.texture.value.wrapS =material.uniforms.texture.value.wrapT = THREE.RepeatWrapping;
+			material.uniforms.texture.value.wrapS = THREE.RepeatWrapping;
+			material.uniforms.texture.value.wrapT = THREE.RepeatWrapping;
 		
 			
 			var geometry = new THREE.SphereGeometry(5, 50, 50, 0, Math.PI * 2, 0, Math.PI * 2);

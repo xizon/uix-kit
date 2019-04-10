@@ -1,0 +1,48 @@
+{
+  "id": 3243,
+  "name": "New Composed Shader",
+  "fragment": "precision highp float;\nprecision highp int;\nuniform float time;\nuniform float speed;\nuniform float blur;\nuniform vec3 color;\nuniform float arms;\nuniform vec2 resolution;\nvarying vec2 vUv;\nvec4 Follow_the_Spiral_Rabbit1554217820258_1302_main(void) \n    {\n        vec4 Follow_the_Spiral_Rabbit1554217820258_1302_gl_FragColor = vec4(0.0);\n        vec2 position = (vUv - 0.5) * resolution;\n        float th = atan(position.y, position.x) / 3.1415926;\n        float d = length(position) - time * speed;\n        vec3 uv = vec3(th + d, th - d, th + sin(d));\n        float a = 0.5 + cos(uv.x * 3.1415926 * arms) * .5;\n        vec3 color = mix(color, vec3(0.0), pow(a, blur));\n        Follow_the_Spiral_Rabbit1554217820258_1302_gl_FragColor = vec4(color * length(position), 1.0);\n        return Follow_the_Spiral_Rabbit1554217820258_1302_gl_FragColor *= 1.0;\n    }\nvoid main() \n    {\n        gl_FragColor = Follow_the_Spiral_Rabbit1554217820258_1302_main();    }\n",
+  "vertex": "precision highp float;\nprecision highp int;\nuniform mat4 modelMatrix;\nuniform mat4 modelViewMatrix;\nuniform mat4 projectionMatrix;\nuniform mat4 viewMatrix;\nuniform mat3 normalMatrix;\nuniform vec3 cameraPosition;\nuniform float time;\nattribute vec3 position;\nattribute vec3 normal;\nattribute vec2 uv;\nattribute vec2 uv2;\nvarying vec3 vPosition;\nvarying vec3 vNormal;\nvarying vec2 vUv;\nvarying vec2 vUv2;\nvec4 Follow_the_Spiral_Rabbit1554217820258_1302_main() \n    {\n        vec4 Follow_the_Spiral_Rabbit1554217820258_1302_gl_Position = vec4(0.0);\n        vNormal = normal;\n        vUv = uv;\n        vUv2 = uv2;\n        vPosition = position;\n        Follow_the_Spiral_Rabbit1554217820258_1302_gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n        return Follow_the_Spiral_Rabbit1554217820258_1302_gl_Position *= 1.0;\n    }\nvoid main() \n    {\n        gl_Position = Follow_the_Spiral_Rabbit1554217820258_1302_main();    }\n",
+  "uniforms": {
+    "cameraPosition": {
+      "type": "v3",
+      "glslType": "vec3"
+    },
+    "time": {
+      "type": "f",
+      "glslType": "float"
+    },
+    "resolution": {
+      "value": {
+        "x": "10",
+        "y": "10"
+      },
+      "type": "v2",
+      "glslType": "vec2"
+    },
+    "arms": {
+      "value": "1",
+      "type": "f",
+      "glslType": "float"
+    },
+    "speed": {
+      "value": "1",
+      "type": "f",
+      "glslType": "float"
+    },
+    "blur": {
+      "value": "0.2",
+      "type": "f",
+      "glslType": "float"
+    },
+    "color": {
+      "value": {
+        "r": 0.00392156862745098,
+        "g": 0.023529411764705882,
+        "b": 0.27058823529411763
+      },
+      "type": "c",
+      "glslType": "vec3"
+    }
+  }
+}

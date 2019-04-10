@@ -84,7 +84,7 @@ APP = ( function ( APP, $, window, document ) {
 			var loader = new THREE.TextureLoader();
 			loader.crossOrigin = 'anonymous';
 			
-			var texture = loader.load( 'http://placekitten.com/1650/1650' ),
+			var texture = loader.load( 'https://placekitten.com/1650/1650' ),
 				material = new THREE.MeshBasicMaterial( { map: texture } );
 
 			// parent

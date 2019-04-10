@@ -103,8 +103,8 @@ APP = ( function ( APP, $, window, document ) {
 			// Immediately use the texture for material creation
 			// Create a texture loader so we can load our image file
 			var imgs = [
-				'http://placekitten.com/1400/550',
-				'http://placekitten.com/1410/550'
+				'https://placekitten.com/1400/550',
+				'https://placekitten.com/1410/550'
 			];
 			
 			var loader = new THREE.TextureLoader();

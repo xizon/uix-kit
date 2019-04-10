@@ -1,5 +1,18 @@
 # Changelog
 
+
+#### = 3.4.2 (April 8, 2019) =
+
+* Fix: Fixed an issue of responsive table.
+* New: Add d3-threeD in order to parse SVG with 3D.
+* New: Add some new effects of shader.
+* Tweak: Beautify some scripts.
+* Tweak: Upgraded the module "3D Gallery".
+* Tweak: Upgraded javascript of ShaderRuntime.
+
+
+
+
 #### = 3.4.1 (March 29, 2019) =
 
 * New: Add a new module "3D Mouse Interaction 2".

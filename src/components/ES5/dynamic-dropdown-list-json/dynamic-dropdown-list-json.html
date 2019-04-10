@@ -283,6 +283,9 @@
 					curContents  = '';
 
 				$( '#dynamic-callback').html( curVal );
+				
+				//set id
+				$( this ).next( '[type="hidden"]' ).val( $this.data( 'id' ) );
 
 				return false;
 

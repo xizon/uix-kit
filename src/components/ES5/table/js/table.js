@@ -7,7 +7,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.TABLE               = APP.TABLE || {};
-	APP.TABLE.version       = '0.0.2';
+	APP.TABLE.version       = '0.0.3';
     APP.TABLE.documentReady = function( $ ) {
 
 
@@ -27,7 +27,7 @@ APP = ( function ( APP, $, window, document ) {
 			$tbody    = $resTable.find( 'tbody' );
 
         $thead.find( 'th' ).each(function() {
-            var data = $(this).text();
+            var data = $( this ).html().replace(/<span\s+class=(\"|\')js-uix-table-responsive__hidden(\"|\')(([\s\S])*?)<\/span>/g, '');
             if ( !$( this ).attr( 'data-table' ) ) {
                 $( this ).attr( 'data-table', data );
             }
