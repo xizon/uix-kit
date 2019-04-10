@@ -329,6 +329,30 @@ table.is-horizontal,
 }
 
 
+@media all and (max-width: 768px) { 
+	
+
+	table.uix-table--per-line.is-responsive,
+	.uix-table--per-line.is-responsive table {
+
+		tbody tr:last-child td {
+			border-bottom-width: 1px;
+		}		
+
+	}
+
+	table.is-horizontal.is-responsive,
+	.is-horizontal.is-responsive table {
+
+		tbody tr:last-child td {
+			border-bottom-width: 1px;
+		}	
+
+
+	}
+	
+}
+
 
 /* 
  ---------------------------

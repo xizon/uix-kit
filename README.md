@@ -72,6 +72,9 @@ Uix Kit can be used separately, or merge components and grid systems using boots
 
 ## Installation And Test
 
+You will need to have [node](https://nodejs.org/) setup on your machine. That will output the built distributables to `./dist/*` and `./examples/*.html`.
+
+
 **Step 1.** Use NPM (Locate your current directory of project, and enter the following command.) or download the latest version from [Github](https://github.com/xizon/uix-kit). For nodejs you have to install some dependencies.
 
 ```sh
