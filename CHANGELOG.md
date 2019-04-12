@@ -1,5 +1,14 @@
 # Changelog
 
+#### = 3.4.3 (April 11, 2019) =
+
+* Fix: Solved the problem of cross-domain video playback.
+* New: Added THREE.MeshLine.js and simplex-noise.js to three.js extensions.
+* Tweak: Optimized script and style for some modules, such as: Equal-width Columns, Card, Brands List.
+* Tweak: Adjust the assets folder of shaders.
+* Tweak: Upgraded videojs to 7.5.3.
+
+
 
 #### = 3.4.2 (April 8, 2019) =
 

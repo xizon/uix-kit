@@ -1,0 +1,24 @@
+{
+  "id": 2931,
+  "name": "New Composed Shader",
+  "fragment": "precision highp float;\nprecision highp int;\nuniform vec2 resolution;\nuniform float time;\nvarying vec2 vUv;\nvec4 Test_Universe1548734227201_267_main() \n    {\n        vec4 Test_Universe1548734227201_267_gl_FragColor = vec4(0.0);\n        float timeScaled = (time + 29.) * 60.0;\n        float s = 0.0, v = 0.0;\n        vec2 uv = (vUv.xy / resolution.xy) * 2.0 - 1.0;\n        float t = time * 0.005;\n        uv.x = (uv.x * resolution.x / resolution.y) + sin(t) * 0.5;\n        float si = sin(t + 1.0);\n        float co = cos(t);\n        uv *= mat2(co, si, -si, co);\n        vec3 col = vec3(0.0);\n        vec3 init = vec3(0.25, 0.25 + sin(timeScaled * 0.001) * 0.4, floor(timeScaled) * 0.0008);\n        for (int r = 0;\n r < 50; r++) \n        {\n            vec3 p = init + s * vec3(uv, 0.143);\n            p.z = mod(p.z, 2.0);\n            for (int i = 0;\n i < 10; i++) p = abs(p * 2.04) / dot(p, p) - 0.75;\n            v += length(p * p) * smoothstep(0.0, 0.5, 0.9 - s) * .002;\n            col += vec3(v * 0.8, 1.1 - s * 0.5, .7 + v * 0.5) * v * 0.013;\n            s += .01;\n        }\n        Test_Universe1548734227201_267_gl_FragColor = vec4(col, 1.0);\n        return Test_Universe1548734227201_267_gl_FragColor *= 1.0;\n    }\nvoid main() \n    {\n        gl_FragColor = Test_Universe1548734227201_267_main();    }\n",
+  "vertex": "precision highp float;\nprecision highp int;\nuniform mat4 modelMatrix;\nuniform mat4 modelViewMatrix;\nuniform mat4 projectionMatrix;\nuniform mat4 viewMatrix;\nuniform mat3 normalMatrix;\nuniform vec3 cameraPosition;\nuniform float time;\nattribute vec3 position;\nattribute vec3 normal;\nattribute vec2 uv;\nattribute vec2 uv2;\nvarying vec3 vPosition;\nvarying vec3 vNormal;\nvarying vec2 vUv;\nvarying vec2 vUv2;\nvec4 Test_Universe1548734227201_267_main() \n    {\n        vec4 Test_Universe1548734227201_267_gl_Position = vec4(0.0);\n        vNormal = normal;\n        vUv = uv;\n        vUv2 = uv2;\n        vPosition = position;\n        Test_Universe1548734227201_267_gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n        return Test_Universe1548734227201_267_gl_Position *= 1.0;\n    }\nvoid main() \n    {\n        gl_Position = Test_Universe1548734227201_267_main();    }\n",
+  "uniforms": {
+    "cameraPosition": {
+      "type": "v3",
+      "glslType": "vec3"
+    },
+    "time": {
+      "type": "f",
+      "glslType": "float"
+    },
+    "resolution": {
+      "value": {
+        "x": "1",
+        "y": "1"
+      },
+      "type": "v2",
+      "glslType": "vec2"
+    }
+  }
+}

@@ -19,7 +19,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.ADVANCED_SLIDER_FILTER               = APP.ADVANCED_SLIDER_FILTER || {};
-	APP.ADVANCED_SLIDER_FILTER.version       = '0.1.5';
+	APP.ADVANCED_SLIDER_FILTER.version       = '0.1.6';
     APP.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 		
@@ -2869,118 +2869,69 @@ APP = ( function ( APP, $, window, document ) {
 					});
 				}
 
-				var myPlayer = videojs( curVideoID, {
-										  width     : dataW,
-										  height    : dataH,
-										  loop      : dataLoop,
-										  autoplay  : dataAuto
-										});
+				var myPlayer = videojs( curVideoID, 
+				   {
+					  width     : dataW,
+					  height    : dataH,
+					  loop      : dataLoop,
+					  autoplay  : dataAuto
+					}, 
+				   function onPlayerReady() {
 
 
-				
-				
-				myPlayer.ready(function() {
-					
-					
-					/* ---------  Video initialize */
-					myPlayer.on( 'loadedmetadata', function() {
+						var initVideo = function( obj ) {
 
-						//Get Video Dimensions
-						var curW    = this.videoWidth(),
-							curH    = this.videoHeight(),
-							newW    = curW,
-							newH    = curH;
+							//Get Video Dimensions
+							var curW    = obj.videoWidth(),
+								curH    = obj.videoHeight(),
+								newW    = curW,
+								newH    = curH;
 
-						newW = videoWrapperW;
+							newW = videoWrapperW;
 
-						//Scaled/Proportional Content 
-						newH = curH*(newW/curW);
+							//Scaled/Proportional Content 
+							newH = curH*(newW/curW);
 
 
-						if ( !isNaN( newW ) && !isNaN( newH ) )  {
-							myPlayer.height( newH );		
-							myPlayer.width( newW );		
-							
-							$this.css( 'height', newH );
+							if ( !isNaN( newW ) && !isNaN( newH ) )  {
+								obj.height( newH );		
+								obj.width( newW );			
+
+								$this.css( 'height', newH );
+							}
+
+
+
+							//Show this video wrapper
+							$this.css( 'visibility', 'visible' );
+
+							//Hide loading effect
+							$this.find( '.vjs-loading-spinner, .vjs-big-play-button' ).hide();
 						}
 
 
+						/* ---------  Video initialize */
+						this.on( 'loadedmetadata', function() {
 
-						//Show this video wrapper
-						$this.css( 'visibility', 'visible' );
+							initVideo( this );
 
-						//Hide loading effect
-						$this.find( '.vjs-loading-spinner, .vjs-big-play-button' ).hide();
+						});
 
-					});		
-
-		
+					
+					    /* ---------  Display the play button  */
+					    if ( ! dataAuto ) $this.find( '.vjs-big-play-button' ).show();
+					    $this.find( '.vjs-big-play-button' ).off( 'click' ).on( 'click', function() {
+							$( this ).hide();
+						});
+					
 				
-					/* ---------  Set, tell the player it's in fullscreen  */
-					if ( dataAuto ) {
-						//Fix an error of Video auto play is not working in browser
-						//myPlayer.muted( true ); 
-						
-						//Prevent autoplay error: Uncaught (in promise) DOMException
-						var promise = myPlayer.play();
-
-						if ( promise !== undefined ) {
-							promise.then( function() {
-								// Autoplay started!
-							
-							}).catch( function( error ) {
-								// Autoplay was prevented.
-								$( '#' + coverPlayBtnID ).show();
-								$( '#' + coverPlayBtnID + ' .uix-video__cover__playbtn' ).show();
-								console.log( 'Autoplay was prevented.' );
-								
-							});
-							
-						}
-					}
-
-					
-
-					/* ---------  Disable control bar play button click */
-					if ( !dataControls ) {
-						myPlayer.controls( false );
-					}
-					
-					
-					/* ---------  Determine if the video is auto played from mobile devices  */
-					var autoPlayOK = false;
-
-					myPlayer.on( 'timeupdate', function() {
-
-						var duration = this.duration();
-						if ( duration > 0 ) {
-							autoPlayOK = true;
-							if ( this.currentTime() > 0 ) {
-								autoPlayOK = true;
-								this.off( 'timeupdate' );
-
-								//Hide cover and play buttons when the video automatically played
-								$( '#' + coverPlayBtnID ).hide();
-							} 
-
-						}
-
-					});
-				
-
-					
-					/* ---------  Pause the video when it is not current slider  */
-					if ( !play ) {
-						myPlayer.pause();
-						myPlayer.currentTime(0);
-						
-					} else {
+						/* ---------  Set, tell the player it's in fullscreen  */
 						if ( dataAuto ) {
+							//Fix an error of Video auto play is not working in browser
+							//this.muted( true ); 
 
-							myPlayer.currentTime(0);
-							
 							//Prevent autoplay error: Uncaught (in promise) DOMException
-							var promise = myPlayer.play();
+							var promise = this.play();
 
 							if ( promise !== undefined ) {
 								promise.then( function() {
@@ -2995,40 +2946,101 @@ APP = ( function ( APP, $, window, document ) {
 								});
 
 							}
+						}
 
-							//Hidden replay button
-							$replayBtn.hide();
 
-							//Should the video go to the beginning when it ends
-							myPlayer.on( 'ended', function () { 
-								
-								if ( dataLoop ) {
-									myPlayer.currentTime(0);
-									myPlayer.play();	
-								} else {
-									//Replay this video
-									myPlayer.currentTime(0);
-									
-									$replayBtn
-										.show()
-										.off( 'click' )
-										.on( 'click', function( e ) {
-											e.preventDefault();
 
-											myPlayer.play();
-											$replayBtn.hide();
+						/* ---------  Disable control bar play button click */
+						if ( !dataControls ) {
+							this.controls( false );
+						}
 
-										});						
+
+						/* ---------  Determine if the video is auto played from mobile devices  */
+						var autoPlayOK = false;
+
+						this.on( 'timeupdate', function() {
+
+							var duration = this.duration();
+							if ( duration > 0 ) {
+								autoPlayOK = true;
+								if ( this.currentTime() > 0 ) {
+									autoPlayOK = true;
+									this.off( 'timeupdate' );
+
+									//Hide cover and play buttons when the video automatically played
+									$( '#' + coverPlayBtnID ).hide();
+								} 
+
+							}
+
+						});
+
+
+
+						/* ---------  Pause the video when it is not current slider  */
+						if ( !play ) {
+							this.pause();
+							this.currentTime(0);
+
+						} else {
+							if ( dataAuto ) {
+
+								this.currentTime(0);
+
+								//Prevent autoplay error: Uncaught (in promise) DOMException
+								var promise = this.play();
+
+								if ( promise !== undefined ) {
+									promise.then( function() {
+										// Autoplay started!
+
+									}).catch( function( error ) {
+										// Autoplay was prevented.
+										$( '#' + coverPlayBtnID ).show();
+										$( '#' + coverPlayBtnID + ' .uix-video__cover__playbtn' ).show();
+										console.log( 'Autoplay was prevented.' );
+
+									});
+
 								}
-							
-							});		
+
+								//Hidden replay button
+								$replayBtn.hide();
+
+								//Should the video go to the beginning when it ends
+								this.on( 'ended', function () { 
+
+									if ( dataLoop ) {
+										this.currentTime(0);
+										this.play();	
+									} else {
+										//Replay this video
+										this.currentTime(0);
+
+										$replayBtn
+											.show()
+											.off( 'click' )
+											.on( 'click', function( e ) {
+												e.preventDefault();
+
+												this.play();
+												$replayBtn.hide();
+
+											});						
+									}
+
+								});		
 
 
-						}	
-					}
-					
+							}	
+						}
 
-				});
+
+
+					});
+
+				
 
 			});	
 		}	    

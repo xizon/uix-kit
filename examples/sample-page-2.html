@@ -44,11 +44,11 @@
         
        
         <!-- Theme  -->
-        <link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=i4E6TsI7Snf4NdYnPX3L"/>
+        <link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=DZYvxl0EsY893hsXjEtX"/>
         
         
          <!--[if lt IE 10]>
-           <link rel="stylesheet" href="assets/css/IE.css?ver=i4E6TsI7Snf4NdYnPX3L" />
+           <link rel="stylesheet" href="assets/css/IE.css?ver=DZYvxl0EsY893hsXjEtX" />
         <![endif]-->
         
         
@@ -122,7 +122,7 @@
     
         <!-- Header Area
         ============================================= -->      
-        <header class="uix-header__container uix-header__container--overlay">
+        <header class="uix-header__container">
             
              <div class="uix-header">
                  <div class="container">
@@ -404,6 +404,8 @@
              </div>
         
         </header>
+		<div class="uix-header__placeholder uix-header__placeholder--auto-height"></div><!-- This class is used for seamless connection with float navigation. -->
+		
  
 		<main id="uix-maincontent">
 			
@@ -411,7 +413,7 @@
 			====================================================== -->
 			<section>
 				<div class="uix-parallax uix-height--70" data-fully-visible="false" data-overlay-bg="false" data-skew="0" data-speed="0.4">
-					<img class="uix-parallax__img" src="assets/images/demo/test-img-big-5.jpg" alt="">
+					<img class="uix-parallax__img" src="assets/images/demo/index-bg-1920x1080.jpg" alt="">
 					<div class="uix-v-align--absolute uix-t-c uix-typo--color-white">
 							<h2>Uix Kit Released!</h2>
 						<p class="uix-typo--h5 uix-typo--style-normal">Make over <span class="uix-typo--h4 uix-typo--style-underline uix-typo--style-bold" data-counter-number="100" data-counter-double-digits="true" data-counter-dilimiter="true" data-counter-duration="100">00</span><span class="uix-typo--h4 uix-typo--style-underline uix-typo--style-bold">+</span> components to wear again and again!</p>
@@ -432,7 +434,7 @@
 						<div class="row js-uix-common-height uix-typo--color-white">
 
 
-							<div class="col-lg-4 col-md-4 uix-relative" style="background-color: #d778e8;">
+							<div class="col-lg-4 col-md-4 uix-relative" style="background-color: #d04985;">
 
 								<div style="padding: 2rem;">
 
@@ -451,7 +453,7 @@
 
 
 
-							<div class="col-lg-4 col-md-4 uix-relative" style="background-color: #e287f2;">
+							<div class="col-lg-4 col-md-4 uix-relative" style="background-color: #bf4079;">
 
 								<div style="padding: 2rem;">
 
@@ -470,7 +472,7 @@
 
 
 
-							<div class="col-lg-4 col-md-4 uix-relative" style="background-color: #e895f7;">
+							<div class="col-lg-4 col-md-4 uix-relative" style="background-color: #b53a71;">
 
 								<div style="padding: 2rem;">
 
@@ -643,7 +645,10 @@
 								<div class="row">
 									<div class="col-lg-6 col-md-6">
 										<div class="uix-card--entireBg" data-bg='{"src":"assets/images/demo/test-img-big-1.jpg","position":"top left","size":"cover","repeat":"no-repeat","fill":false,"parallax":0}'>
-											<div class="uix-card--entireBg__content">
+											<div class="uix-card--entireBg__pic">
+											    <img src="assets/images/demo/test-img-big-1.jpg" alt="">
+											</div>
+											<div class="uix-card--entireBg__content uix-card--entireBg__content--overlay">
 												<div class="uix-card--entireBg__tagline">Full-stack Designer</div>
 												<h3 class="uix-card--entireBg__headline">Focus on user interface, user experience, awesome websites, front-end and WordPress development.</h3>
 												<a href="#" class="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--secondary is-pill is-fill-white">Check Out</a>
@@ -656,7 +661,10 @@
 
 									<div class="col-lg-6 col-md-6">
 										<div class="uix-card--entireBg" data-bg='{"src":"assets/images/demo/test-img-big-2.jpg","position":"top left","size":"cover","repeat":"no-repeat","fill":false,"parallax":0}'>
-											<div class="uix-card--entireBg__content">
+											<div class="uix-card--entireBg__pic">
+											    <img src="assets/images/demo/test-img-big-2.jpg" alt="">
+											</div>
+											<div class="uix-card--entireBg__content uix-card--entireBg__content--overlay">
 												<div class="uix-card--entireBg__tagline">Full-stack Designer</div>
 												<h3 class="uix-card--entireBg__headline">I want to build things I can be proud of. </h3>
 												<a href="#" class="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--secondary is-pill is-fill-white">Check Out</a>
@@ -997,7 +1005,7 @@
     <!-- Vendor -->
 	<script src="assets/js/min/jquery.easing.min.js?ver=1.3"></script>
     <script src="assets/js/min/jquery.waitforimages.min.js?ver=1.0"></script>
-    <script src="assets/js/min/video.min.js?ver=7.4.1"></script> 
+    <script src="assets/js/min/video.min.js?ver=7.5.3"></script> 
 	<script src="assets/js/min/jquery.waypoints.min.js?ver=4.0.1"></script> 
     <script src="assets/js/min/template7.min.js?ver=1.2.5"></script>
     <script src="assets/js/min/TweenMax.min.js?ver=2.0.2"></script>
@@ -1013,14 +1021,14 @@
 	============================================= -->
 	
 	<script>
-		var REVISION     = "3.4.2",
+		var REVISION     = "3.4.3",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
 				"homeUrl"     : "",  //Eg. https://uiux.cc
 				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
 			};
     </script>  
-    <script src="../dist/js/uix-kit.min.js?ver=i4E6TsI7Snf4NdYnPX3L"></script>
+    <script src="../dist/js/uix-kit.min.js?ver=DZYvxl0EsY893hsXjEtX"></script>
 
 
 

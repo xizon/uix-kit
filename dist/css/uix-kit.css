@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
- * ## Version             :  3.4.2
+ * ## Version             :  3.4.3
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  April 10, 2019
+ * ## Last Update         :  April 12, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -3242,6 +3242,36 @@ h6 {
   .uix-video__container-bg {
     height: auto; } }
 
+/* Override the default button for videojs */
+.video-js .vjs-big-play-button {
+  position: absolute;
+  z-index: 11;
+  left: 50%;
+  top: 50%;
+  width: 64px;
+  height: 64px;
+  line-height: 64px;
+  margin-left: -32px;
+  margin-top: -32px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  text-shadow: 1px 0 3px rgba(0, 0, 0, 0.3); }
+  .video-js .vjs-big-play-button::before {
+    display: inline-block;
+    content: "\f04b";
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.5rem;
+    margin: 15px;
+    line-height: 1;
+    margin-left: 1.3rem;
+    transform: translateY(-3px); }
+  .video-js .vjs-big-play-button .vjs-icon-placeholder,
+  .video-js .vjs-big-play-button .vjs-control-text {
+    display: none; }
+
 /******/
 /******/
 /* pages */
@@ -4618,8 +4648,6 @@ h6 {
       position: relative;
       display: inline-block;
       top: 0.175rem;
-      height: 4.375rem;
-      width: 4.375rem;
       width: 100px;
       height: 100px; }
       .uix-card--author .uix-card--author__headline .uix-card--author__pic.uix-card--author__pic--rounded {
@@ -4670,7 +4698,6 @@ h6 {
  */
 .uix-card--entireBg {
   position: relative;
-  min-height: 21.25rem;
   padding: 1.5rem;
   border-radius: 8px;
   background-position: 50% 50%;
@@ -4690,8 +4717,14 @@ h6 {
   .uix-card--entireBg .uix-card--entireBg__headline {
     margin-top: 10px;
     color: #fff; }
+  .uix-card--entireBg .uix-card--entireBg__pic img {
+    visibility: hidden; }
   .uix-card--entireBg .uix-card--entireBg__content {
     position: relative; }
+    .uix-card--entireBg .uix-card--entireBg__content.uix-card--entireBg__content--overlay {
+      position: absolute;
+      bottom: 0;
+      padding-bottom: 1.5rem; }
 
 /* 
  ---------------------------
@@ -4718,7 +4751,6 @@ h6 {
     margin-top: 10px;
     margin: 0; }
   .uix-card--upDownBg .uix-card--upDownBg__pic {
-    height: 21.25rem;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     background-image: -webkit-linear-gradient(270deg, rgba(245, 245, 245, 0.5), rgba(245, 245, 245, 0.5));
@@ -4729,8 +4761,6 @@ h6 {
       visibility: hidden; }
   .uix-card--upDownBg .uix-card--upDownBg__content {
     padding: 1rem 1.5rem; }
-  .uix-card--upDownBg.js-uix-common-height .uix-card--upDownBg__pic {
-    height: auto; }
 
 /* 
  ---------------------------
@@ -4757,7 +4787,6 @@ h6 {
     margin-top: 10px;
     margin: 0; }
   .uix-card--leftRightBg .uix-card--leftRightBg__pic {
-    height: 21.25rem;
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
     background-position: 50% 50%;
@@ -4765,19 +4794,15 @@ h6 {
     .uix-card--leftRightBg .uix-card--leftRightBg__pic img {
       visibility: hidden; }
   .uix-card--leftRightBg .uix-card--leftRightBg__content {
-    height: 21.25rem;
     padding: 1.5rem 3rem; }
   .uix-card--leftRightBg .uix-card--leftRightBg__title {
     padding-bottom: 1.5rem; }
-  .uix-card--leftRightBg.js-uix-common-height .uix-card--leftRightBg__pic,
-  .uix-card--leftRightBg.js-uix-common-height .uix-card--leftRightBg__content {
-    height: auto; }
 
 @media all and (max-width: 768px) {
   .uix-card--leftRightBg .uix-card--leftRightBg__pic {
     border-bottom-left-radius: 0; }
   .uix-card--leftRightBg .uix-card--leftRightBg__content {
-    height: auto; } }
+    padding: 1.5rem 1.5rem 0 1.5rem; } }
 
 /* ====================================================== 
     <!-- Circle Layout -->      
@@ -5386,15 +5411,15 @@ h3[data-counter-number] {
       font-size: 0.75rem; }
 
 @media all and (max-width: 768px) {
-  .uix-equal-width-divs ul {
+  .uix-equal-width-divs:not(.uix-equal-width-divs--nobreak) ul {
     display: block; }
-    .uix-equal-width-divs ul li {
+    .uix-equal-width-divs:not(.uix-equal-width-divs--nobreak) ul li {
       display: inline-block;
       width: 50%;
       margin-bottom: .5rem; }
-      .uix-equal-width-divs ul li:nth-child(2n+0) {
+      .uix-equal-width-divs:not(.uix-equal-width-divs--nobreak) ul li:nth-child(2n+0) {
         box-shadow: none; }
-      .uix-equal-width-divs ul li span {
+      .uix-equal-width-divs:not(.uix-equal-width-divs--nobreak) ul li span {
         padding-bottom: 1rem; } }
 
 /* ====================================================== 
@@ -8526,8 +8551,7 @@ a.uix-lightbox__original__link {
   display: block;
   margin: 3rem 0;
   overflow: auto;
-  /* CSS background disappears when using float:left */
-  /* Default */ }
+  /* CSS background disappears when using float:left */ }
   .uix-list-brands::after {
     content: '';
     display: block;
@@ -8545,22 +8569,26 @@ a.uix-lightbox__original__link {
       font-size: 0.875rem;
       display: block;
       padding: 1.5rem; }
-  .uix-list-brands.uix-list-brands--tiny li {
-    width: 16.66666666666667%; }
-    .uix-list-brands.uix-list-brands--tiny li:nth-child(6n+1) {
-      clear: both; }
-  .uix-list-brands.uix-list-brands--small li {
-    width: 20%; }
-    .uix-list-brands.uix-list-brands--small li:nth-child(5n+1) {
-      clear: both; }
-  .uix-list-brands.uix-list-brands--medium li {
-    width: 25%; }
-    .uix-list-brands.uix-list-brands--medium li:nth-child(4n+1) {
-      clear: both; }
-  .uix-list-brands.uix-list-brands--large li {
-    width: 33.33333333333333%; }
-    .uix-list-brands.uix-list-brands--large li:nth-child(3n+1) {
-      clear: both; }
+
+@media all and (min-width: 769px) {
+  .uix-list-brands {
+    /* Default */ }
+    .uix-list-brands.uix-list-brands--tiny li {
+      width: 16.66666666666667%; }
+      .uix-list-brands.uix-list-brands--tiny li:nth-child(6n+1) {
+        clear: both; }
+    .uix-list-brands.uix-list-brands--small li {
+      width: 20%; }
+      .uix-list-brands.uix-list-brands--small li:nth-child(5n+1) {
+        clear: both; }
+    .uix-list-brands.uix-list-brands--medium li {
+      width: 25%; }
+      .uix-list-brands.uix-list-brands--medium li:nth-child(4n+1) {
+        clear: both; }
+    .uix-list-brands.uix-list-brands--large li {
+      width: 33.33333333333333%; }
+      .uix-list-brands.uix-list-brands--large li:nth-child(3n+1) {
+        clear: both; } }
 
 @media all and (max-width: 768px) {
   .uix-list-brands {
@@ -11376,6 +11404,14 @@ table.is-horizontal tbody tr:last-child td,
 table.is-horizontal th,
 .is-horizontal table th {
   border-bottom: 1px solid #d6d5d5; }
+
+@media all and (max-width: 768px) {
+  table.uix-table--per-line.is-responsive tbody tr:last-child td,
+  .uix-table--per-line.is-responsive table tbody tr:last-child td {
+    border-bottom-width: 1px; }
+  table.is-horizontal.is-responsive tbody tr:last-child td,
+  .is-horizontal.is-responsive table tbody tr:last-child td {
+    border-bottom-width: 1px; } }
 
 /* 
  ---------------------------

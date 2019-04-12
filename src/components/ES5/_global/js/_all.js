@@ -34,13 +34,15 @@ const UIX_KIT_IMPORT = { "files": [
 	
 //three.js ==> generic
 "./src/components/ES5/_plugins-THREE/js/CSS3DRenderer.js",
-"./src/components/ES5/_plugins-THREE/js/GLTFLoader.js",
-"./src/components/ES5/_plugins-THREE/js/MTLLoader.js",
-"./src/components/ES5/_plugins-THREE/js/OBJLoader.js",
 "./src/components/ES5/_plugins-THREE/js/OrbitControls.js",
-"./src/components/ES5/_plugins-THREE/js/ShaderRuntime.custom.js",
-"./src/components/ES5/_plugins-THREE/js/d3-threeD.custom.js",
-	
+"./src/components/ES5/_plugins-THREE/js/loaders/GLTFLoader.js",
+"./src/components/ES5/_plugins-THREE/js/loaders/MTLLoader.js",
+"./src/components/ES5/_plugins-THREE/js/loaders/OBJLoader.js",
+"./src/components/ES5/_plugins-THREE/js/extensions/ShaderRuntime.custom.js",
+"./src/components/ES5/_plugins-THREE/js/extensions/d3-threeD.custom.js",
+"./src/components/ES5/_plugins-THREE/js/extensions/simplex-noise.js",
+"./src/components/ES5/_plugins-THREE/js/extensions/THREE.MeshLine.js",
+
 	
 /******/
 /******/
