@@ -20570,12 +20570,16 @@ APP = ( function ( APP, $, window, document ) {
 	If you want to initialize the indicator to a location when the page is first run,
 	you need to call the following function:
 	
-	$( document ).UixFormProgressToNext({ 
-		'selector'         : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
-		'formTarget'       : $( '.uix-form-progress__target' ),
-		'indicator'        : '.uix-form-progress .uix-form-progress__indicator',
-		'index'            : 0
+	$( 'body' ).waitForImages().done(function() {
+		$( document ).UixFormProgressToNext({ 
+			'selector'         : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
+			'formTarget'       : $( '.uix-form-progress__target' ),
+			'indicator'        : '.uix-form-progress .uix-form-progress__indicator',
+			'index'            : 0
+		});
 	});
+
+
 	
 */
 
@@ -20900,6 +20904,7 @@ APP = ( function ( APP, $, window, document ) {
 	$( document ).UixRenderControlsHover(); //Hover Effect
 	$( document ).UixRenderCustomMultiSel(); //Render Multiple Selector Status
 	$( document ).UixRenderCustomSingleSel(); //Render Single Selector Status
+	$( document ).UixRenderNormalRadio(); //Render Normal Radio Status
 	$( document ).UixRenderDatePicker(); //Render Date Picker
 
 	
@@ -20909,7 +20914,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.FORM               = APP.FORM || {};
-	APP.FORM.version       = '0.1.0';
+	APP.FORM.version       = '0.1.2';
     APP.FORM.documentReady = function( $ ) {
 
 		
@@ -20930,6 +20935,7 @@ APP = ( function ( APP, $, window, document ) {
 			$( document ).UixRenderControlsHover(); //Hover Effect
 			$( document ).UixRenderCustomMultiSel(); //Render Multiple Selector Status
 			$( document ).UixRenderCustomSingleSel(); //Render Single Selector Status
+			$( document ).UixRenderNormalRadio(); //Render Normal Radio Status
 			$( document ).UixRenderDatePicker(); //Render Date Picker	
 		};
 		
@@ -21045,30 +21051,51 @@ APP = ( function ( APP, $, window, document ) {
 		 */ 	
 		$( document ).on( 'click', '.uix-controls__number__btn--add', function( e ) {
 
-			var $numberInput = $( this ).closest( '.uix-controls__number' ).find( 'input[type="number"]' ),
-				numberInputVal = parseInt( $numberInput.val() );
+			var step           = $( this ).data( 'step' ),
+				$numberInput   = $( this ).closest( '.uix-controls__number' ).find( 'input[type="number"]' ),
+				numberInputVal = parseInt( $numberInput.val() ),
+				max            = $numberInput.attr( 'max' );
+			
+			
+			if ( typeof step === typeof undefined || isNaN( step ) ) step = 1;
 
-			if ( e.shiftKey ) {
-				numberInputVal += 10;
-			} else {
-				numberInputVal++;
+			if ( typeof max != typeof undefined && parseFloat( numberInputVal + step ) >= max ) {
+				step = 0;
 			}
+			
+			
+			
+			if ( e.shiftKey ) {
+				numberInputVal += step;
+			} else {
+				numberInputVal += step;
+			}
+			
+			
 			$numberInput.val( numberInputVal );
 		});
 
 		$( document ).on( 'click', '.uix-controls__number__btn--remove', function( e ) {
 
-			var $numberInput = $( this ).closest( '.uix-controls__number' ).find( 'input[type="number"]' ),
-				numberInputVal = parseInt( $numberInput.val() );
+			var step           = $( this ).data( 'step' ),
+				$numberInput   = $( this ).closest( '.uix-controls__number' ).find( 'input[type="number"]' ),
+				numberInputVal = parseInt( $numberInput.val() ),
+				min            = $numberInput.attr( 'min' );
 
-
-			if ( numberInputVal > 11 && e.shiftKey ) {
-				numberInputVal -= 10;
-			} else if (numberInputVal > 1) {
-				numberInputVal--;
+			if ( typeof step === typeof undefined || isNaN( step ) ) step = 1;
+			
+			if ( typeof min != typeof undefined && parseFloat( numberInputVal - step ) <= min ) {
+				step = 0;
 			}
+			if ( e.shiftKey ) {
+				numberInputVal -= step;
+			} else {
+				numberInputVal -= step;
+			}	
+
 			$numberInput.val( numberInputVal );
 		});
+
 
 			
 		
@@ -21202,6 +21229,105 @@ APP = ( function ( APP, $, window, document ) {
 
 		} );
 
+		
+		/* 
+		 ---------------------------
+		 Click Event of Normal Radio
+		 ---------------------------
+		 */ 
+		var normalRadio     = '.uix-controls__radio',
+			normalRadioItem = normalRadio + ' > label';
+
+
+		/*
+		 * Initialize single switch
+		 *
+		 * @param  {Object} obj                 - Radio controls. 
+		 * @return {Void}
+		 */
+		var hideAllNormalRadioItems = function( obj ) {
+			obj.each( function( index )  {
+
+				var $sel                = $( this ),
+					defaultValue        = $( '#' + $sel.attr( "data-targetid" ) ).val(),
+					deffaultSwitchIndex = 0;
+
+				//get default selected switch index
+				$sel.find( '> label' ).each( function( index )  {
+
+					if ( defaultValue == $( this ).data( 'value' ) ) {
+						deffaultSwitchIndex = index;
+					}
+
+
+				});
+
+
+				if ( typeof $sel.data( 'switchids' ) != typeof undefined && $sel.data( 'switchids' ) != '' ) {
+					var _switchIDsArr = $sel.data( 'switchids' ).split( ',' );
+					_switchIDsArr.forEach( function( element, index ) {
+
+						if ( deffaultSwitchIndex != index ) {
+							$( '#' + element ).hide();
+						} else {
+							$( '#' + element ).show();
+						}
+
+
+					});
+
+
+
+				}
+
+			});
+
+		};
+
+		hideAllNormalRadioItems( $( normalRadio ) );
+
+
+		$( document ).on( 'click', normalRadioItem, function( e ) {
+			e.preventDefault();
+
+			var $selector     = $( this ).parent(),
+				$option       = $( this ),
+				targetID      = '#' + $selector.data( "targetid" ),
+				switchID      = '#' + $option.data( "switchid" ),
+				curVal        = $option.data( 'value' );
+
+
+			//Radio Selector
+			$selector.find( '> label' )
+				.removeClass( 'active' )
+			    .find( '[type="radio"]' ).prop( 'checked', false );
+			
+			$( targetID ).val( curVal );
+			$option
+				.addClass( 'active' )
+			    .find( '[type="radio"]' ).prop( 'checked', true );
+			
+
+
+
+			//Switch some options
+			if ( typeof $option.data( "switchid" ) != typeof undefined ) {
+				 hideAllNormalRadioItems( $selector );
+				 $( switchID ).show();
+			}
+
+
+
+			//Dynamic listening for the latest value
+			$( targetID ).focus().blur();
+
+		} );	
+		
+
+
+
+		
+		
 		
 		/* 
 		 ---------------------------
@@ -21883,6 +22009,66 @@ APP = ( function ( APP, $, window, document ) {
     };
  
 }( jQuery ));
+
+
+
+/*
+ * Render Normal Radio Status
+ *
+ * @param  {String} controls                 - Wrapper of controls.
+ * @return {Void}
+ */
+( function ( $ ) {
+    $.fn.UixRenderNormalRadio = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+			controls    : '.uix-controls__radio'
+        }, options );
+ 
+        this.each( function() {
+		
+		
+			$( settings.controls ).each( function()  {
+				$( this ).find( '> label' ).each( function()  {
+
+					var targetID  = '#' + $( this ).parent().attr( "data-targetid" ),
+						switchIDs = '';
+
+					//add switch IDs
+					$( this ).parent().find( '> label' ).each( function()  {
+						if ( typeof $( this ).data( "switchid" ) != typeof undefined ) {
+							switchIDs += $( this ).data( "switchid" ) + ',';
+						}
+
+					});
+
+					$( this ).parent().attr( "data-switchids", switchIDs.replace(/,\s*$/, '' ) );
+
+
+					//Set actived style from their values
+					if ( $( targetID ).val() == $( this ).data( 'value' ) ) {
+						$( this )
+							.addClass( 'active' )
+						    .find( '[type="radio"]' ).prop( 'checked', true );
+						
+					} else {
+						$( this )
+							.removeClass( 'active' )
+						    .find( '[type="radio"]' ).prop( 'checked', false );
+					}	
+
+
+				});
+			});
+
+			
+		});
+ 
+    };
+ 
+}( jQuery ));
+
 
 
 /*
@@ -30532,284 +30718,301 @@ APP = ( function ( APP, $, window, document ) {
 		if ( $( '#3D-background-three-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
 		
 		
-		var $window                   = $( window ),
-			windowWidth               = window.innerWidth,
-			windowHeight              = window.innerHeight,
-			rendererCanvasID          = '3D-background-three-canvas';
-		
-	
 
-		
-		// Generate one plane geometries mesh to scene
-		//-------------------------------------	
-		var camera,
-			scene,
-			light,
-			renderer,
-			displacementSprite,
-			shaderSprite,
-			clock = new THREE.Clock();
-		
 
-		// controls
-
-		var spriteAnim = false;
-
-		var mouseX       = 0,
-			mouseY       = 0,
-			windowHalfX  = windowWidth / 2,
-			windowHalfY  = windowHeight / 2;
-
-		var targetX = 0.0, 
-			targetY = 0.0,
-			angle   = 0.0,
-			height  = 0.0,
-			target  = new THREE.Vector3();
-		
-		
-		// Load multiple ShaderFrog shaders
-		var runtime = new ShaderRuntime();
-
-		runtime.load([
-			$( '#' + rendererCanvasID ).data( 'shader-url' )
-		], function( shaders ) {
-
-			// Get the Three.js material you can assign to your objects
-			var material = runtime.get( shaders[0].name );
-			shaderSprite.material = material;
+		var MainStage = function() {
 			
-		});
+			var $window                   = $( window ),
+				windowWidth               = window.innerWidth,
+				windowHeight              = window.innerHeight,
+				rendererCanvasID          = '3D-background-three-canvas';
 
-		
-		
-		
-		
-		init();
-		render();
-
-		function init() {
-			//camera
-			camera = new THREE.PerspectiveCamera( 60, windowWidth / windowHeight, 100, 2000000 );
-			camera.position.set( 0, 100, 2000 );
-
-			runtime.registerCamera( camera );
-
-
-			//Scene
-			scene = new THREE.Scene();
-
-			//HemisphereLight
-			scene.add( new THREE.AmbientLight( 0x555555 ) );
-
-			light = new THREE.SpotLight( 0xffffff, 1.5 );
-			light.position.set( 0, 500, 2000 );
-			scene.add( light );
-			
 			
 
-			//WebGL Renderer		
-			renderer = new THREE.WebGLRenderer( { 
-									canvas   : document.getElementById( rendererCanvasID ), //canvas
-									alpha    : true, 
-									antialias: true 
-								} );
-			renderer.setSize( windowWidth, windowHeight );
+			// Generate one plane geometries mesh to scene
+			//-------------------------------------	
+			var camera,
+				scene,
+				light,
+				renderer,
+				displacementSprite,
+				shaderSprite,
+				clock = new THREE.Clock();
+
+
+			// controls
+
+			var spriteAnim = false;
+
+			var mouseX       = 0,
+				mouseY       = 0,
+				windowHalfX  = windowWidth / 2,
+				windowHalfY  = windowHeight / 2;
+
+			var targetX = 0.0, 
+				targetY = 0.0,
+				angle   = 0.0,
+				height  = 0.0,
+				target  = new THREE.Vector3();
+
+
+			// Load multiple ShaderFrog shaders
+			var runtime = new ShaderRuntime();
+
+			runtime.load([
+				$( '#' + rendererCanvasID ).data( 'shader-url' )
+			], function( shaders ) {
+
+				// Get the Three.js material you can assign to your objects
+				var material = runtime.get( shaders[0].name );
+				shaderSprite.material = material;
+
+			});
+
 
 			
-			//Add shader background
-			var geometry = new THREE.SphereGeometry(5, 32, 32, 0, Math.PI * 2, 0, Math.PI * 2);
-			shaderSprite = new THREE.Mesh( geometry );
-			shaderSprite.scale.setScalar( 10000 );
-			shaderSprite.renderDepth = 0;
-			scene.add( shaderSprite );
-			
 
-			// Immediately use the texture for material creation
-			var defaultMaterial    = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
-			
-			displacementSprite = new THREE.Mesh( generateGeometry( 'sphere', 200 ), defaultMaterial );
-			scene.add( displacementSprite );
-			
-			
+			function init() {
+				//camera
+				camera = new THREE.PerspectiveCamera( 60, windowWidth / windowHeight, 100, 2000000 );
+				camera.position.set( 0, 100, 2000 );
 
-			// Fires when the window changes
-			window.addEventListener( 'resize', onWindowResize, false );
-			document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-			document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-			document.addEventListener( 'mouseup', onDocumentMouseUp, false );
-			
-			
-		}
+				runtime.registerCamera( camera );
 
-		function render() {
-			requestAnimationFrame( render );
-			
-            var objVector = new THREE.Vector3(0,0.2,0.1),
-				delta     = clock.getDelta();
-			
-			if ( ! spriteAnim ) {
-				displacementSprite.rotation.x += delta * objVector.x;
-				displacementSprite.rotation.y += delta * objVector.y;
-				displacementSprite.rotation.z += delta * objVector.z;
+
+				//Scene
+				scene = new THREE.Scene();
+
+				//HemisphereLight
+				scene.add( new THREE.AmbientLight( 0x555555 ) );
+
+				light = new THREE.SpotLight( 0xffffff, 1.5 );
+				light.position.set( 0, 500, 2000 );
+				scene.add( light );
+
+
+
+				//WebGL Renderer		
+				renderer = new THREE.WebGLRenderer( { 
+										canvas   : document.getElementById( rendererCanvasID ), //canvas
+										alpha    : true, 
+										antialias: true 
+									} );
+				renderer.setSize( windowWidth, windowHeight );
+
+
+				//Add shader background
+				var geometry = new THREE.SphereGeometry(5, 32, 32, 0, Math.PI * 2, 0, Math.PI * 2);
+				shaderSprite = new THREE.Mesh( geometry );
+				shaderSprite.scale.setScalar( 10000 );
+				shaderSprite.renderDepth = 0;
+				scene.add( shaderSprite );
+
+
+				// Immediately use the texture for material creation
+				var defaultMaterial    = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
+
+				displacementSprite = new THREE.Mesh( generateGeometry( 'sphere', 200 ), defaultMaterial );
+				scene.add( displacementSprite );
+
+
+
+				// Fires when the window changes
+				window.addEventListener( 'resize', onWindowResize, false );
+				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+				document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+				document.addEventListener( 'mouseup', onDocumentMouseUp, false );
+
+
 			}
 
+			function render() {
+				requestAnimationFrame( render );
 
+				var objVector = new THREE.Vector3(0,0.2,0.1),
+					delta     = clock.getDelta();
 
-			//To set a background color.
-			renderer.setClearColor( 0x000000 );	
-			
-			
-			//update shaders
-			runtime.updateShaders( clock.getElapsedTime() );
-			
-			
-
-			// update camera
-			targetX = mouseX * .002;
-			targetY = mouseY * .002;
-
-			angle  += 0.01 * ( targetX - angle );
-			height += 0.01 * ( targetY - height );
-
-			var x = -Math.sin( angle * 1.5 ) * 35;
-			var z =  Math.cos( angle * 1.5 ) * 35;
-			var y = 130 * height + 0;
-
-			camera.position.set( x, y, z );
-			camera.lookAt( target );	
-
-			
-			
-			renderer.render( scene, camera );
-			
-			
-
-			
-		}
-
-
-		function onWindowResize() {
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-			renderer.setSize( window.innerWidth, window.innerHeight );
-		}
-
-		
-
-		
-		function onDocumentMouseMove( event ) {
-			mouseX = event.clientX - windowHalfX;
-			mouseY = event.clientY - windowHalfY;	
-
-		}
-		
-		function onDocumentMouseDown( event ) {
-			event.preventDefault();
-			spriteAnim = true;
-			mouseX = event.clientX - windowHalfX;
-			mouseY = event.clientY - windowHalfY;	
-			
-			
-		}
-		
-		function onDocumentMouseUp( event ) {
-			event.preventDefault();
-			spriteAnim = false;
-			mouseX = event.clientX - windowHalfX;
-			mouseY = event.clientY - windowHalfY;
-	
-		}
-			
-	
-		
-		/*
-		 * Batch generation of geometry
-		 *
-		 * @param  {String} objectType     - String of geometry type identifier.
-		 * @param  {Number} numObjects       - The total number of generated objects.
-		 * @return {Void}
-		 */
-		function generateGeometry( objectType, numObjects ) {
-
-			var geometry = new THREE.Geometry();
-
-			var applyVertexColors = function(g, c) {
-				g.faces.forEach(function(f) {
-					var n = (f instanceof THREE.Face3) ? 3 : 4;
-					for (var j = 0; j < n; j++) {
-						f.vertexColors[j] = c;
-					}
-				});
-			};
-
-			for ( var i = 0; i < numObjects; i ++ ) {
-
-				var position = new THREE.Vector3();
-				position.x = Math.random() * 10000 - 5000;
-				position.y = Math.random() * 6000 - 3000;
-				position.z = Math.random() * 8000 - 4000;
-
-				var rotation = new THREE.Euler();
-				rotation.x = Math.random() * 2 * Math.PI;
-				rotation.y = Math.random() * 2 * Math.PI;
-				rotation.z = Math.random() * 2 * Math.PI;
-
-				var scale = new THREE.Vector3();
-				scale.x = Math.random() * 200 + 100;
-
-				
-				var geom, 
-					color = new THREE.Color();
-
-				
-				if ( objectType == "cube" ) {
-
-					geom = new THREE.BoxGeometry( 1, 1, 1 );
-					scale.y = Math.random() * 200 + 100;
-					scale.z = Math.random() * 200 + 100;
-					color.setRGB( 0, 0, Math.random() + 0.1 );
-
-				} else if ( objectType == "sphere" ) {
-
-					geom = new THREE.IcosahedronGeometry( 1, 1 );
-					scale.y = scale.z = scale.x;
-					color.setRGB( 0.35, getRandomFloat( 0.12, 0.3 ), 0.2 );
-
-				} else if ( objectType == "poly" ) {
-
-
-					geom = new THREE.CylinderGeometry( 3, 6, 3, 5, 1 );
-					scale.y = Math.random() * 30;
-					scale.z = Math.random() * 30;
-					color.setRGB( Math.random() + 0.1, 0, 0 );
-
+				if ( ! spriteAnim ) {
+					displacementSprite.rotation.x += delta * objVector.x;
+					displacementSprite.rotation.y += delta * objVector.y;
+					displacementSprite.rotation.z += delta * objVector.z;
 				}
 
 
-				// give the geom's vertices a random color, to be displayed
-				applyVertexColors( geom, color );
 
-				var object = new THREE.Mesh( geom );
-				object.position.copy( position );
-				object.rotation.copy( rotation );
-				object.scale.copy( scale );
-				object.updateMatrix();
+				//To set a background color.
+				renderer.setClearColor( 0x000000 );	
 
-				geometry.merge( object.geometry, object.matrix );
+
+				//update shaders
+				runtime.updateShaders( clock.getElapsedTime() );
+
+
+
+				// update camera
+				targetX = mouseX * .002;
+				targetY = mouseY * .002;
+
+				angle  += 0.01 * ( targetX - angle );
+				height += 0.01 * ( targetY - height );
+
+				var x = -Math.sin( angle * 1.5 ) * 35;
+				var z =  Math.cos( angle * 1.5 ) * 35;
+				var y = 130 * height + 0;
+
+				camera.position.set( x, y, z );
+				camera.lookAt( target );	
+
+
+
+				renderer.render( scene, camera );
+
+
+
 
 			}
 
-			return geometry;
-			
 
-		}
+			function onWindowResize() {
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+			}
+
+
+
+
+			function onDocumentMouseMove( event ) {
+				mouseX = event.clientX - windowHalfX;
+				mouseY = event.clientY - windowHalfY;	
+
+			}
+
+			function onDocumentMouseDown( event ) {
+				event.preventDefault();
+				spriteAnim = true;
+				mouseX = event.clientX - windowHalfX;
+				mouseY = event.clientY - windowHalfY;	
+
+
+			}
+
+			function onDocumentMouseUp( event ) {
+				event.preventDefault();
+				spriteAnim = false;
+				mouseX = event.clientX - windowHalfX;
+				mouseY = event.clientY - windowHalfY;
+
+			}
+
+
+
+			/*
+			 * Batch generation of geometry
+			 *
+			 * @param  {String} objectType     - String of geometry type identifier.
+			 * @param  {Number} numObjects       - The total number of generated objects.
+			 * @return {Void}
+			 */
+			function generateGeometry( objectType, numObjects ) {
+
+				var geometry = new THREE.Geometry();
+
+				var applyVertexColors = function(g, c) {
+					g.faces.forEach(function(f) {
+						var n = (f instanceof THREE.Face3) ? 3 : 4;
+						for (var j = 0; j < n; j++) {
+							f.vertexColors[j] = c;
+						}
+					});
+				};
+
+				for ( var i = 0; i < numObjects; i ++ ) {
+
+					var position = new THREE.Vector3();
+					position.x = Math.random() * 10000 - 5000;
+					position.y = Math.random() * 6000 - 3000;
+					position.z = Math.random() * 8000 - 4000;
+
+					var rotation = new THREE.Euler();
+					rotation.x = Math.random() * 2 * Math.PI;
+					rotation.y = Math.random() * 2 * Math.PI;
+					rotation.z = Math.random() * 2 * Math.PI;
+
+					var scale = new THREE.Vector3();
+					scale.x = Math.random() * 200 + 100;
+
+
+					var geom, 
+						color = new THREE.Color();
+
+
+					if ( objectType == "cube" ) {
+
+						geom = new THREE.BoxGeometry( 1, 1, 1 );
+						scale.y = Math.random() * 200 + 100;
+						scale.z = Math.random() * 200 + 100;
+						color.setRGB( 0, 0, Math.random() + 0.1 );
+
+					} else if ( objectType == "sphere" ) {
+
+						geom = new THREE.IcosahedronGeometry( 1, 1 );
+						scale.y = scale.z = scale.x;
+						color.setRGB( 0.35, getRandomFloat( 0.12, 0.3 ), 0.2 );
+
+					} else if ( objectType == "poly" ) {
+
+
+						geom = new THREE.CylinderGeometry( 3, 6, 3, 5, 1 );
+						scale.y = Math.random() * 30;
+						scale.z = Math.random() * 30;
+						color.setRGB( Math.random() + 0.1, 0, 0 );
+
+					}
+
+
+					// give the geom's vertices a random color, to be displayed
+					applyVertexColors( geom, color );
+
+					var object = new THREE.Mesh( geom );
+					object.position.copy( position );
+					object.rotation.copy( rotation );
+					object.scale.copy( scale );
+					object.updateMatrix();
+
+					geometry.merge( object.geometry, object.matrix );
+
+				}
+
+				return geometry;
+
+
+			}
+
+
+			//Generate random number between two numbers
+			function getRandomFloat(min, max) {
+				return Math.random() * (max - min) + min;
+			}
+
+
+			// 
+			//-------------------------------------	
+			return {
+				init      : init,
+				render    : render,
+				getScene  : function () { return scene; },
+				getCamera : function () { return camera; } 
+			};
+
+
+		}();
+
+		MainStage.init();
+		MainStage.render();
+
 		
-		
-		//Generate random number between two numbers
-		function getRandomFloat(min, max) {
-			return Math.random() * (max - min) + min;
-		}
-		
+
 
 		
     };
@@ -30847,138 +31050,157 @@ APP = ( function ( APP, $, window, document ) {
 		if ( $( '#3D-background-three-canvas2' ).length == 0 || ! Modernizr.webgl ) return false;
 		
 		
-		var $window                   = $( window ),
-			windowWidth               = window.innerWidth,
-			windowHeight              = window.innerHeight,
-			rendererCanvasID          = '3D-background-three-canvas2';
+
+		var MainStage = function() {
+
+			var $window                   = $( window ),
+				windowWidth               = window.innerWidth,
+				windowHeight              = window.innerHeight,
+				rendererCanvasID          = '3D-background-three-canvas2';
+			
+			
+			// Generate one plane geometries mesh to scene
+			//-------------------------------------	
+			var camera,
+				scene,
+				renderer,
+				material,
+				displacementSprite,
+				clock = new THREE.Clock();
+
+
+			var mouseVector  = new THREE.Vector2(),
+				vertex       = document.getElementById( 'vertexshader' ).textContent,
+				fragment     = document.getElementById( 'fragmentshader' ).textContent;
+
+			var mouseX = 0;
+			var mouseY = 0;
+
+
+
+			function init() {
+				//camera
+				camera = new THREE.PerspectiveCamera( 50, windowWidth / windowHeight, .01, 1000 );
+				camera.position.set( 0, 0, 1.8 );
+
+
+
+				//Scene
+				scene = new THREE.Scene();
+
+
+				//WebGL Renderer	
+				renderer = new THREE.WebGLRenderer( { 
+										canvas   : document.getElementById( rendererCanvasID ), //canvas
+										alpha    : true, 
+										antialias: true 
+									} );
+				renderer.setSize( windowWidth, windowHeight );
+
+
+
+				// Immediately use the texture for material creation
+				material = new THREE.ShaderMaterial({
+					uniforms: {
+						"time": { value: 1.0 },
+						"texture": { value: new THREE.TextureLoader().load( $( '#' + rendererCanvasID ).data( 'filter-texture' ) ) }
+					},
+					fragmentShader: fragment,
+					vertexShader: vertex
+				});			
+
+
+
+				//if use texture
+				material.uniforms.texture.value.wrapS = THREE.RepeatWrapping;
+				material.uniforms.texture.value.wrapT = THREE.RepeatWrapping;
+
+
+				var geometry = new THREE.SphereGeometry(5, 50, 50, 0, Math.PI * 2, 0, Math.PI * 2);
+				displacementSprite = new THREE.Mesh( geometry, material );
+				scene.add( displacementSprite );
+
+
+				// Fires when the window changes
+				window.addEventListener( 'resize', onWindowResize, false );
+				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+
+
+			}
+
+			function render() {
+				requestAnimationFrame( render );
+
+				var delta = clock.getDelta();
+
+				//To set a background color.
+				renderer.setClearColor( 0x000000 );	
+
+
+				material.uniforms.time.value += delta * 5;
+
+
+				//displacementSprite.rotation.y += delta * 0.5 * 1;
+				//displacementSprite.rotation.x += delta * 0.5 * -1;
+
+
+
+				renderer.render( scene, camera );
+
+
+			}
+
+
+			function onWindowResize() {
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+			}
+
+			function onDocumentMouseMove( event ) {
+
+				var rect = renderer.domElement.getBoundingClientRect();
+				displacementSprite.position.z = ( event.clientX - rect.left ) / rect.width * 4 - 1;
+
+			}
+
+
+
+			function avgArr(arr) {
+				var total = arr.reduce(function(sum, b) {
+					return sum + b
+				});
+				return (total / arr.length);
+			}
+			function maxArr(arr) {
+				return arr.reduce(function(a, b) {
+					return Math.max(a, b);
+				})
+			}
+			function degToRad(degrees) {
+				return degrees * Math.PI / 180;
+			}
+			function round(n, digits) {
+				return Number(n.toFixed(digits));
+			}
+
+			// 
+			//-------------------------------------	
+			return {
+				init      : init,
+				render    : render,
+				getScene  : function () { return scene; },
+				getCamera : function () { return camera; } 
+			};
+
+
+		}();
+
+		MainStage.init();
+		MainStage.render();
 		
-	
-		// Generate one plane geometries mesh to scene
-		//-------------------------------------	
-		var camera,
-			scene,
-			renderer,
-			material,
-			displacementSprite,
-			clock = new THREE.Clock();
 		
-		
-		var mouseVector  = new THREE.Vector2(),
-			vertex       = document.getElementById( 'vertexshader' ).textContent,
-			fragment     = document.getElementById( 'fragmentshader' ).textContent;
-		
-		var mouseX = 0;
-		var mouseY = 0;
 
-		
-		init();
-		render();
-
-		function init() {
-			//camera
-			camera = new THREE.PerspectiveCamera( 50, windowWidth / windowHeight, .01, 1000 );
-			camera.position.set( 0, 0, 1.8 );
-
-
-			
-			//Scene
-			scene = new THREE.Scene();
-
-		
-			//WebGL Renderer	
-			renderer = new THREE.WebGLRenderer( { 
-									canvas   : document.getElementById( rendererCanvasID ), //canvas
-									alpha    : true, 
-									antialias: true 
-								} );
-			renderer.setSize( windowWidth, windowHeight );
-
-			
-			
-			// Immediately use the texture for material creation
-			material = new THREE.ShaderMaterial({
-				uniforms: {
-					"time": { value: 1.0 },
-					"texture": { value: new THREE.TextureLoader().load( $( '#' + rendererCanvasID ).data( 'filter-texture' ) ) }
-				},
-				fragmentShader: fragment,
-				vertexShader: vertex
-			});			
-			
-			
-			
-			//if use texture
-			material.uniforms.texture.value.wrapS = THREE.RepeatWrapping;
-			material.uniforms.texture.value.wrapT = THREE.RepeatWrapping;
-		
-			
-			var geometry = new THREE.SphereGeometry(5, 50, 50, 0, Math.PI * 2, 0, Math.PI * 2);
-			displacementSprite = new THREE.Mesh( geometry, material );
-			scene.add( displacementSprite );
-			
-
-			// Fires when the window changes
-			window.addEventListener( 'resize', onWindowResize, false );
-			document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-			
-			
-		}
-
-		function render() {
-			requestAnimationFrame( render );
-			
-            var delta = clock.getDelta();
-			
-			//To set a background color.
-			renderer.setClearColor( 0x000000 );	
-			
-			
-			material.uniforms.time.value += delta * 5;
-			
-
-			//displacementSprite.rotation.y += delta * 0.5 * 1;
-			//displacementSprite.rotation.x += delta * 0.5 * -1;
-
-			
-			
-			renderer.render( scene, camera );
-			
-			
-		}
-
-
-		function onWindowResize() {
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-			renderer.setSize( window.innerWidth, window.innerHeight );
-		}
-
-		function onDocumentMouseMove( event ) {
-			
-			var rect = renderer.domElement.getBoundingClientRect();
-			displacementSprite.position.z = ( event.clientX - rect.left ) / rect.width * 4 - 1;
-			
-		}
-		
-		
-		
-		function avgArr(arr) {
-			var total = arr.reduce(function(sum, b) {
-				return sum + b
-			});
-			return (total / arr.length);
-		}
-		function maxArr(arr) {
-			return arr.reduce(function(a, b) {
-				return Math.max(a, b);
-			})
-		}
-		function degToRad(degrees) {
-			return degrees * Math.PI / 180;
-		}
-		function round(n, digits) {
-			return Number(n.toFixed(digits));
-		}
 
 		
 		
@@ -31020,113 +31242,131 @@ APP = ( function ( APP, $, window, document ) {
 		if ( $( '#3D-background-three-canvas3' ).length == 0 || ! Modernizr.webgl ) return false;
 		
 		
-		var $window                   = $( window ),
-			windowWidth               = window.innerWidth,
-			windowHeight              = window.innerHeight,
-			rendererCanvasID          = '3D-background-three-canvas3';
-		
-	
-		// Generate one plane geometries mesh to scene
-		//-------------------------------------	
-		var camera,
-			scene,
-			renderer,
-			displacementSprite,
-			theta        = 0;
-		
-		var mouseVector  = new THREE.Vector2(),
-			sphereTarget = new THREE.Euler(),
-			xrad         = THREE.Math.degToRad(30),
-			yrad         = THREE.Math.degToRad(10);
-		
-		init();
-		render();
+		var MainStage = function() {
 
-		function init() {
-			//camera
-			camera = new THREE.PerspectiveCamera( 50, windowWidth / windowHeight, .01, 1000 );
-			camera.position.set( 0, 0, 1.8 );
+			var $window                   = $( window ),
+				windowWidth               = window.innerWidth,
+				windowHeight              = window.innerHeight,
+				rendererCanvasID          = '3D-background-three-canvas3';
 
 
-			
-			//Scene
-			scene = new THREE.Scene();
+			// Generate one plane geometries mesh to scene
+			//-------------------------------------	
+			var camera,
+				scene,
+				renderer,
+				displacementSprite,
+				theta        = 0;
 
-		
-			//WebGL Renderer	
-			renderer = new THREE.WebGLRenderer( { 
-									canvas   : document.getElementById( rendererCanvasID ), //canvas
-									alpha    : true, 
-									antialias: true 
-								} );
-			renderer.setSize( windowWidth, windowHeight );
-
-			
-			// Immediately use the texture for material creation
-			var sphereGeo = new THREE.SphereBufferGeometry( 2, 12, 12 );
-			var sphereMat = new THREE.MeshBasicMaterial({
-				color: 0x494949,
-				wireframe: true
-			});
-			displacementSprite = new THREE.Mesh( sphereGeo, sphereMat );
-			displacementSprite.position.y = -0.2;
-			scene.add( displacementSprite );
-			
-
-			// Fires when the window changes
-			window.addEventListener( 'resize', onWindowResize, false );
-			document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-			
-			
-		}
-
-		function render() {
-			requestAnimationFrame( render );
-			
-            theta += 0.1;
-			
-			//To set a background color.
-			renderer.setClearColor( 0x000000 );	
-			
-			
-
-			lerp( displacementSprite.rotation, 'x', sphereTarget.x );
-			lerp( displacementSprite.rotation, 'y', sphereTarget.y );
+			var mouseVector  = new THREE.Vector2(),
+				sphereTarget = new THREE.Euler(),
+				xrad         = THREE.Math.degToRad(30),
+				yrad         = THREE.Math.degToRad(10);
 
 
-			renderer.render( scene, camera );
-			
-			
-		}
+			function init() {
+				//camera
+				camera = new THREE.PerspectiveCamera( 50, windowWidth / windowHeight, .01, 1000 );
+				camera.position.set( 0, 0, 1.8 );
 
 
-		function onWindowResize() {
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-			renderer.setSize( window.innerWidth, window.innerHeight );
-		}
 
-		
-		function onDocumentMouseMove( event ) {
-			// NDC -1 to 1
-			var rect = renderer.domElement.getBoundingClientRect();
-			mouseVector.x = ( event.clientX - rect.left ) / rect.width * 2 - 1;
-			mouseVector.y = ( event.clientY - rect.top ) / rect.height * -2 + 1;
+				//Scene
+				scene = new THREE.Scene();
 
-			sphereTarget.y = mouseVector.x * xrad;
-			sphereTarget.x = - mouseVector.y * yrad;
-		}
-		
-		//Calculate the interpolation of two vectors
-		function lerp( object, prop, destination ) {
-			if (object && object[prop] !== destination) {
-				object[prop] += (destination - object[prop]) * 0.1;
 
-				if (Math.abs(destination - object[prop]) < 0.001) {
-					object[prop] = destination;
+				//WebGL Renderer	
+				renderer = new THREE.WebGLRenderer( { 
+										canvas   : document.getElementById( rendererCanvasID ), //canvas
+										alpha    : true, 
+										antialias: true 
+									} );
+				renderer.setSize( windowWidth, windowHeight );
+
+
+				// Immediately use the texture for material creation
+				var sphereGeo = new THREE.SphereBufferGeometry( 2, 12, 12 );
+				var sphereMat = new THREE.MeshBasicMaterial({
+					color: 0x494949,
+					wireframe: true
+				});
+				displacementSprite = new THREE.Mesh( sphereGeo, sphereMat );
+				displacementSprite.position.y = -0.2;
+				scene.add( displacementSprite );
+
+
+				// Fires when the window changes
+				window.addEventListener( 'resize', onWindowResize, false );
+				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+
+
+			}
+
+			function render() {
+				requestAnimationFrame( render );
+
+				theta += 0.1;
+
+				//To set a background color.
+				renderer.setClearColor( 0x000000 );	
+
+
+
+				lerp( displacementSprite.rotation, 'x', sphereTarget.x );
+				lerp( displacementSprite.rotation, 'y', sphereTarget.y );
+
+
+				renderer.render( scene, camera );
+
+
+			}
+
+
+			function onWindowResize() {
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+			}
+
+
+			function onDocumentMouseMove( event ) {
+				// NDC -1 to 1
+				var rect = renderer.domElement.getBoundingClientRect();
+				mouseVector.x = ( event.clientX - rect.left ) / rect.width * 2 - 1;
+				mouseVector.y = ( event.clientY - rect.top ) / rect.height * -2 + 1;
+
+				sphereTarget.y = mouseVector.x * xrad;
+				sphereTarget.x = - mouseVector.y * yrad;
+			}
+
+			//Calculate the interpolation of two vectors
+			function lerp( object, prop, destination ) {
+				if (object && object[prop] !== destination) {
+					object[prop] += (destination - object[prop]) * 0.1;
+
+					if (Math.abs(destination - object[prop]) < 0.001) {
+						object[prop] = destination;
+					}
 				}
 			}
-		}
+
+			// 
+			//-------------------------------------	
+			return {
+				init      : init,
+				render    : render,
+				getScene  : function () { return scene; },
+				getCamera : function () { return camera; } 
+			};
+
+
+		}();
+
+		MainStage.init();
+		MainStage.render();
+		
+		
+
 		
 	
 		
@@ -31633,266 +31873,282 @@ APP = ( function ( APP, $, window, document ) {
 		if ( $( '#3D-gallery-three-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
 		
 		
-		var $window                   = $( window ),
-			windowWidth               = window.innerWidth,
-			windowHeight              = window.innerHeight,
-			rendererCanvasID          = '3D-gallery-three-canvas';
-		
-	
-		// Generate one plane geometries mesh to scene
-		//-------------------------------------	
-		var camera,
-			controls,
-			scene,
-			light,
-			renderer,
-			displacementSprite,
-			theta        = 0;
-		
-		
-		var offsetWidth  = 1400,
-			offsetHeight = 933,
-			allImages    = [],
-			imgTotal,
-			imagesLoaded = false;
+		var MainStage = function() {
+
+			var $window                   = $( window ),
+				windowWidth               = window.innerWidth,
+				windowHeight              = window.innerHeight,
+				rendererCanvasID          = '3D-gallery-three-canvas';
 
 
-		// we will keep track of the scroll
-		var scrollValue = 0;
-		var lastScrollValue = 0;
+			// Generate one plane geometries mesh to scene
+			//-------------------------------------	
+			var camera,
+				controls,
+				scene,
+				light,
+				renderer,
+				displacementSprite,
+				theta        = 0;
+
+
+			var offsetWidth  = 1400,
+				offsetHeight = 933,
+				allImages    = [],
+				imgTotal,
+				imagesLoaded = false;
+
+
+			// we will keep track of the scroll
+			var scrollValue = 0;
+			var lastScrollValue = 0;
 
 
 
-		init();
-		render();
+			function init() {
+				//camera
+				camera = new THREE.PerspectiveCamera( 75, windowWidth / windowHeight, 1, 10000 );
+				camera.position.set(0, 0, 1000);
 
-		
-		function init() {
-			//camera
-			camera = new THREE.PerspectiveCamera( 75, windowWidth / windowHeight, 1, 10000 );
-			camera.position.set(0, 0, 1000);
-			
 
-			
-			//controls
-			controls = new THREE.OrbitControls( camera );
-			controls.autoRotate = false;
-			controls.autoRotateSpeed = 0.5;
-			controls.rotateSpeed = 0.5;
-			controls.zoomSpeed = 1.2;
-			controls.panSpeed = 0.8;
-			controls.enableZoom = false;
-			controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-			controls.dampingFactor = 0.25;
-			controls.screenSpacePanning = false;
-			controls.minDistance = 100;
-			controls.maxDistance = 500;
-			controls.maxPolarAngle = Math.PI / 2;
-			
-			controls.target.set( 30, 167, 81 );
-			controls.update();			
 
-			
+				//controls
+				controls = new THREE.OrbitControls( camera );
+				controls.autoRotate = false;
+				controls.autoRotateSpeed = 0.5;
+				controls.rotateSpeed = 0.5;
+				controls.zoomSpeed = 1.2;
+				controls.panSpeed = 0.8;
+				controls.enableZoom = false;
+				controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+				controls.dampingFactor = 0.25;
+				controls.screenSpacePanning = false;
+				controls.minDistance = 100;
+				controls.maxDistance = 500;
+				controls.maxPolarAngle = Math.PI / 2;
 
-			//Scene
-			scene = new THREE.Scene();
-	
+				controls.target.set( 30, 167, 81 );
+				controls.update();			
 
-			//HemisphereLight
-			scene.add( new THREE.AmbientLight( 0x555555 ) );
 
-			light = new THREE.SpotLight( 0xffffff, 1.5 );
-			light.position.set( 0, 500, 2000 );
-			scene.add( light );
-			
-			
 
-			//WebGL Renderer	
-			renderer = new THREE.WebGLRenderer( { 
-									canvas   : document.getElementById( rendererCanvasID ), //canvas
-									alpha    : true, 
-									antialias: true 
-								} );
-			renderer.setSize( windowWidth, windowHeight );
+				//Scene
+				scene = new THREE.Scene();
 
-			
-			// Immediately use the texture for material creation
-			// Create a texture loader so we can load our image file
-			var imgs = [
-				'https://placekitten.com/2100/2100',
-				'https://placekitten.com/2200/2200',
-				'https://placekitten.com/2300/2300',
-				'https://placekitten.com/2400/2400',
-				'https://placekitten.com/2500/2500',
-				'https://placekitten.com/2000/2000',
-				'https://placekitten.com/1600/1600',
-				'https://placekitten.com/1650/1650',
-				'https://placekitten.com/1670/1670',
-				'https://placekitten.com/1680/1680',
-				'https://placekitten.com/1700/1700'
-			];
-				
-			
-			//A loader for loading all images from array.
-			var loader = new THREE.TextureLoader();
-			loader.crossOrigin = 'anonymous';
-			
-			//Preload
-			imgTotal = imgs.length;
-			
-			var gap               = 100,
-				circumference         = (offsetWidth + gap) * imgTotal,  //get circumference from all images width
-				galleryRadius       = circumference / ( Math.PI * 2 ), // C = 2πr = Math.PI * 2 * radius
-				eachItemAngleToRad  = ( Math.PI * 2 ) / imgTotal; // 360° = 2π = Math.PI * 2
-			
-			if ( camera.position.length() > galleryRadius ) {
-				camera.position.set( 0, 0, 0 );
-			}	
-			
 
-			//Load images
-			imgs.forEach( function( element, index ) {
-				loadImage( loader, element, index, offsetWidth, offsetHeight, imgTotal, eachItemAngleToRad, galleryRadius, $( '#3D-gallery-three-canvas__loader' ) );
+				//HemisphereLight
+				scene.add( new THREE.AmbientLight( 0x555555 ) );
+
+				light = new THREE.SpotLight( 0xffffff, 1.5 );
+				light.position.set( 0, 500, 2000 );
+				scene.add( light );
+
+
+
+				//WebGL Renderer	
+				renderer = new THREE.WebGLRenderer( { 
+										canvas   : document.getElementById( rendererCanvasID ), //canvas
+										alpha    : true, 
+										antialias: true 
+									} );
+				renderer.setSize( windowWidth, windowHeight );
+
+
+				// Immediately use the texture for material creation
+				// Create a texture loader so we can load our image file
+				var imgs = [
+					'https://placekitten.com/2100/2100',
+					'https://placekitten.com/2200/2200',
+					'https://placekitten.com/2300/2300',
+					'https://placekitten.com/2400/2400',
+					'https://placekitten.com/2500/2500',
+					'https://placekitten.com/2000/2000',
+					'https://placekitten.com/1600/1600',
+					'https://placekitten.com/1650/1650',
+					'https://placekitten.com/1670/1670',
+					'https://placekitten.com/1680/1680',
+					'https://placekitten.com/1700/1700'
+				];
+
+
+				//A loader for loading all images from array.
+				var loader = new THREE.TextureLoader();
+				loader.crossOrigin = 'anonymous';
+
+				//Preload
+				imgTotal = imgs.length;
+
+				var gap               = 100,
+					circumference         = (offsetWidth + gap) * imgTotal,  //get circumference from all images width
+					galleryRadius       = circumference / ( Math.PI * 2 ), // C = 2πr = Math.PI * 2 * radius
+					eachItemAngleToRad  = ( Math.PI * 2 ) / imgTotal; // 360° = 2π = Math.PI * 2
+
+				if ( camera.position.length() > galleryRadius ) {
+					camera.position.set( 0, 0, 0 );
+				}	
+
+
+				//Load images
+				imgs.forEach( function( element, index ) {
+					loadImage( loader, element, index, offsetWidth, offsetHeight, imgTotal, eachItemAngleToRad, galleryRadius, $( '#3D-gallery-three-canvas__loader' ) );
+				});
+
+
+				// Fires when the window changes
+				window.addEventListener( 'resize', onWindowResize, false );
+
+
+			}
+
+
+			function render() {
+				requestAnimationFrame( render );
+
+				theta += 0.1;
+
+
+				//To set a background color.
+				renderer.setClearColor( 0x000000 );	
+
+				// listen to scroll to update
+				var delta = scrollValue - lastScrollValue;
+				// threshold
+				if (delta > 60) {
+					delta = 60;
+				} else if(delta < -60) {
+					delta = -60;
+				}
+
+				camera.position.x = camera.position.x + delta;
+
+
+
+				//check all images loaded
+				if ( typeof allImages != typeof undefined ) {
+					if ( !imagesLoaded && allImages.length === imgTotal ) {
+						allImages.forEach( function (element ) {
+							scene.add( element );
+						});
+						imagesLoaded = true;
+
+					}		
+				}
+
+
+				//update camera and controls
+				controls.update();
+
+				renderer.render( scene, camera );
+
+
+			}
+
+
+			function onWindowResize() {
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+			}
+
+
+			// listen to scroll
+			window.addEventListener( 'scroll', function(e) {
+				lastScrollValue = scrollValue;
+				scrollValue = window.pageYOffset;
+
+				console.log( 'lastScrollValue: ' + lastScrollValue + ', scrollValue: ' + scrollValue );
 			});
 
 
-			// Fires when the window changes
-			window.addEventListener( 'resize', onWindowResize, false );
-			
-			
-		}
-		
 
-		function render() {
-			requestAnimationFrame( render );
-			
-            theta += 0.1;
-			
-			
-			//To set a background color.
-			renderer.setClearColor( 0x000000 );	
-			
-			// listen to scroll to update
-			var delta = scrollValue - lastScrollValue;
-			// threshold
-			if (delta > 60) {
-				delta = 60;
-			} else if(delta < -60) {
-				delta = -60;
-			}
-			
-			camera.position.x = camera.position.x + delta;
-			
+			/*
+			 * Load Image
+			 *
+			 * @param  {Object} imgLoader       - A loader for loading all images from array.
+			 * @param  {String} src             - URL of image.
+			 * @param  {Number} index           - Index of image.
+			 * @param  {Number} w               - The width of an image, in pixels. 
+			 * @param  {Number} h               - The height of an image, in pixels. 
+			 * @param  {Number} total           - Total number of preload images.
+			 * @param  {Number} itemRadAngle    - An equal radian angle of a sphere for each element.
+			 * @param  {Number} radius          - Radius length of the sphere (circumference).
+			 * @param  {Object} loading         - Progress bar display control.
+			 * @return {Void}
+			 */
+			function loadImage( imgLoader, src, index, w, h, total, itemRadAngle, radius, loading ) {
 
-			
-			//check all images loaded
-			if ( typeof allImages != typeof undefined ) {
-				if ( !imagesLoaded && allImages.length === imgTotal ) {
-					allImages.forEach( function (element ) {
-						scene.add( element );
-					});
-					imagesLoaded = true;
+				// load a resource
+				imgLoader.load(
+					// resource URL
+					src,
 
-				}		
-			}
+					// onLoad callback
+					function ( texture ) {
+						// in this example we create the material when the texture is loaded
+						var material = new THREE.MeshBasicMaterial( {
+							map: texture
+						 } );
 
-			
-			//update camera and controls
-			controls.update();
-			
-			renderer.render( scene, camera );
-			
-			
-		}
+						var geometry = new THREE.PlaneGeometry( w, h );
+						var displacementSprite = new THREE.Mesh( geometry, material );
 
+						//LinearFilter, which takes the four closest texels and bilinearly interpolates among them. 
+						displacementSprite.minFilter = THREE.LinearFilter;
+						displacementSprite.overdraw = true;
 
-		function onWindowResize() {
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-			renderer.setSize( window.innerWidth, window.innerHeight );
-		}
+						//Calculate the position of the image 
+						//X axis: a = sinA * c = Math.sin( rad ) * radius
+						//Z axis: b = cosA * c = Math.cos( rad ) * radius
+						displacementSprite.rotation.y = -index * itemRadAngle;
+						displacementSprite.position.set( radius * Math.sin(index * itemRadAngle), 0, -radius * Math.cos(index * itemRadAngle) );
 
-			
-		// listen to scroll
-		window.addEventListener( 'scroll', function(e) {
-			lastScrollValue = scrollValue;
-			scrollValue = window.pageYOffset;
-			
-			console.log( 'lastScrollValue: ' + lastScrollValue + ', scrollValue: ' + scrollValue );
-		});
-		
+						allImages.push( displacementSprite );
 
-		
-		/*
-		 * Load Image
-		 *
-		 * @param  {Object} imgLoader       - A loader for loading all images from array.
-		 * @param  {String} src             - URL of image.
-		 * @param  {Number} index           - Index of image.
-		 * @param  {Number} w               - The width of an image, in pixels. 
-		 * @param  {Number} h               - The height of an image, in pixels. 
-		 * @param  {Number} total           - Total number of preload images.
-		 * @param  {Number} itemRadAngle    - An equal radian angle of a sphere for each element.
-		 * @param  {Number} radius          - Radius length of the sphere (circumference).
-		 * @param  {Object} loading         - Progress bar display control.
-		 * @return {Void}
-		 */
-        function loadImage( imgLoader, src, index, w, h, total, itemRadAngle, radius, loading ) {
-			
-			// load a resource
-			imgLoader.load(
-				// resource URL
-				src,
+						//loading
+						TweenMax.to( loading, 0.5, {
+							width    : Math.round(100 * allImages.length / total ) + '%',
+							onComplete : function() {
 
-				// onLoad callback
-				function ( texture ) {
-					// in this example we create the material when the texture is loaded
-					var material = new THREE.MeshBasicMaterial( {
-						map: texture
-					 } );
-					
-					var geometry = new THREE.PlaneGeometry( w, h );
-					var displacementSprite = new THREE.Mesh( geometry, material );
+								if ( $( this.target ).width() >= windowWidth - 50 ) {
 
-					//LinearFilter, which takes the four closest texels and bilinearly interpolates among them. 
-					displacementSprite.minFilter = THREE.LinearFilter;
-					displacementSprite.overdraw = true;
+									TweenMax.to( this.target, 0.5, {
+										alpha: 0
+									});	
+								}
 
-					//Calculate the position of the image 
-					//X axis: a = sinA * c = Math.sin( rad ) * radius
-					//Z axis: b = cosA * c = Math.cos( rad ) * radius
-					displacementSprite.rotation.y = -index * itemRadAngle;
-					displacementSprite.position.set( radius * Math.sin(index * itemRadAngle), 0, -radius * Math.cos(index * itemRadAngle) );
-
-					allImages.push( displacementSprite );
-
-					//loading
-					TweenMax.to( loading, 0.5, {
-						width    : Math.round(100 * allImages.length / total ) + '%',
-						onComplete : function() {
-
-							if ( $( this.target ).width() >= windowWidth - 50 ) {
-
-								TweenMax.to( this.target, 0.5, {
-									alpha: 0
-								});	
 							}
+						});
 
-						}
-					});
-					
-				},
+					},
 
-				// onProgress callback currently not supported
-				undefined,
+					// onProgress callback currently not supported
+					undefined,
 
-				// onError callback
-				function ( err ) {
-					console.error( 'An error happened.' );
-				}
-			);
-			
-		}
+					// onError callback
+					function ( err ) {
+						console.error( 'An error happened.' );
+					}
+				);
+
+			}
+
+
+			// 
+			//-------------------------------------	
+			return {
+				init      : init,
+				render    : render,
+				getScene  : function () { return scene; },
+				getCamera : function () { return camera; } 
+			};
+
+
+		}();
+
+		MainStage.init();
+		MainStage.render();
+		
+		
 
 
 		
@@ -31929,194 +32185,209 @@ APP = ( function ( APP, $, window, document ) {
 		//Prevent this module from loading in other pages
 		if ( $( '#3D-imagetransition-three-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
 		
+
+		var MainStage = function() {
+
+
+			var $window                   = $( window ),
+				windowWidth               = window.innerWidth,
+				windowHeight              = window.innerHeight,
+				rendererCanvasID          = '3D-imagetransition-three-canvas';
+
+
+			// Generate one plane geometries mesh to scene
+			//-------------------------------------	
+			var camera,
+				controls,
+				scene,
+				light,
+				renderer,
+				displacementSprite,
+				theta        = 0;
+
+
+			var vertex       = document.getElementById( 'vertexshader' ).textContent,
+				fragment     = document.getElementById( 'fragmentshader' ).textContent,
+				filterMaterial,
+				offsetWidth  = $( '#' + rendererCanvasID ).parent().width(),
+				offsetHeight = $( '#' + rendererCanvasID ).parent().width() * (550/1400);
+
+
+
+			function init() {
+				//camera
+				camera = new THREE.PerspectiveCamera( 75, windowWidth / windowHeight, 1, 10000 );
+				camera.position.set(0, 0, 1000);
+
+
+				//controls
+				controls = new THREE.OrbitControls( camera );
+				controls.autoRotate = false;
+				controls.autoRotateSpeed = 0.5;
+				controls.rotateSpeed = 0.5;
+				controls.zoomSpeed = 1.2;
+				controls.panSpeed = 0.8;
+				controls.enableZoom = false;
+				controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+				controls.dampingFactor = 0.25;
+				controls.screenSpacePanning = false;
+				controls.minDistance = 100;
+				controls.maxDistance = 500;
+				controls.maxPolarAngle = Math.PI / 2;
+
+				controls.target.set( 30, 167, 81 );
+				controls.update();			
+
+
+
+				//Scene
+				scene = new THREE.Scene();
+
+
+				//HemisphereLight
+				scene.add( new THREE.AmbientLight( 0x555555 ) );
+
+				light = new THREE.SpotLight( 0xffffff, 1.5 );
+				light.position.set( 0, 500, 2000 );
+				scene.add( light );
+
+
+
+				//WebGL Renderer	
+				renderer = new THREE.WebGLRenderer( { 
+										canvas   : document.getElementById( rendererCanvasID ), //canvas
+										alpha    : true, 
+										antialias: true 
+									} );
+				renderer.setSize( offsetWidth , offsetHeight );
+
+
+				// Immediately use the texture for material creation
+				// Create a texture loader so we can load our image file
+				var imgs = [
+					'https://placekitten.com/1400/550',
+					'https://placekitten.com/1410/550'
+				];
+
+				var loader = new THREE.TextureLoader();
+				loader.crossOrigin = 'anonymous';
+
+
+				var texture1     = loader.load( imgs[0] ),
+					texture2     = loader.load( imgs[1] ),
+					intensity    = 1,
+					dispImage    = $( '#' + rendererCanvasID ).data( 'filter-texture' ), //Load displacement image
+					disp         = loader.load( dispImage );
+
+				disp.wrapS = disp.wrapT = THREE.RepeatWrapping;
+
+				texture1.magFilter = texture2.magFilter = THREE.LinearFilter;
+				texture1.minFilter = texture2.minFilter = THREE.LinearFilter;
+
+				texture1.anisotropy = renderer.getMaxAnisotropy();
+				texture2.anisotropy = renderer.getMaxAnisotropy();
+
+
+				var geometry = new THREE.PlaneBufferGeometry(
+					offsetWidth,
+					offsetHeight,
+					1
+				);
+
+
+
+				filterMaterial = new THREE.ShaderMaterial({
+					uniforms: {
+						effectFactor: { type: "f", value: intensity },
+						dispFactor: { type: "f", value: 0.0 },
+						texture: { type: "t", value: texture1 },
+						texture2: { type: "t", value: texture2 },
+						disp: { type: "t", value: disp }
+					},
+
+					vertexShader: vertex,
+					fragmentShader: fragment,
+					transparent: true,
+					opacity: 1.0
+				});
+
+
+				displacementSprite = new THREE.Mesh( geometry, filterMaterial );
+				displacementSprite.position.set( 0, 0, 0 );
+				scene.add( displacementSprite );
+
+
+				// Fires when the window changes
+				window.addEventListener( 'resize', onWindowResize, false );
+
+
+				// When the mouse moves, call the given function
+				document.getElementById( rendererCanvasID ).addEventListener( 'mouseenter', onDocumentMouseEnter, false );
+				document.getElementById( rendererCanvasID ).addEventListener( 'mouseleave', onDocumentMouseLeave, false );
+
+
+
+			}
+
+
+			function render() {
+				requestAnimationFrame( render );
+
+				theta += 0.1;
+
+
+				//To set a background color.
+				//renderer.setClearColor( 0x000000 );	
+
+
+				//update camera and controls
+				controls.update();
+
+				renderer.render( scene, camera );
+
+
+
+			}
+
+
+			function onWindowResize() {
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+			}
+
+
+			function onDocumentMouseEnter( event ) {
+				TweenMax.to( filterMaterial.uniforms.dispFactor, 1.5, {
+					value: 1,
+					ease: Expo.easeOut
+				});	
+			}
+
+
+			function onDocumentMouseLeave( event ) {
+				TweenMax.to( filterMaterial.uniforms.dispFactor, 1, {
+					value: 0,
+					ease: Expo.easeOut
+				});	
+			}
+			// 
+			//-------------------------------------	
+			return {
+				init      : init,
+				render    : render,
+				getScene  : function () { return scene; },
+				getCamera : function () { return camera; } 
+			};
+
+
+		}();
+
+		MainStage.init();
+		MainStage.render();
 		
-		var $window                   = $( window ),
-			windowWidth               = window.innerWidth,
-			windowHeight              = window.innerHeight,
-			rendererCanvasID          = '3D-imagetransition-three-canvas';
-		
-	
-		// Generate one plane geometries mesh to scene
-		//-------------------------------------	
-		var camera,
-			controls,
-			scene,
-			light,
-			renderer,
-			displacementSprite,
-			theta        = 0;
-		
-		
-		var vertex       = document.getElementById( 'vertexshader' ).textContent,
-			fragment     = document.getElementById( 'fragmentshader' ).textContent,
-			filterMaterial,
-			offsetWidth  = $( '#' + rendererCanvasID ).parent().width(),
-			offsetHeight = $( '#' + rendererCanvasID ).parent().width() * (550/1400);
 		
 
-		
-
-		init();
-		render();
-
-		
-		function init() {
-			//camera
-			camera = new THREE.PerspectiveCamera( 75, windowWidth / windowHeight, 1, 10000 );
-			camera.position.set(0, 0, 1000);
-			
-
-			//controls
-			controls = new THREE.OrbitControls( camera );
-			controls.autoRotate = false;
-			controls.autoRotateSpeed = 0.5;
-			controls.rotateSpeed = 0.5;
-			controls.zoomSpeed = 1.2;
-			controls.panSpeed = 0.8;
-			controls.enableZoom = false;
-			controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-			controls.dampingFactor = 0.25;
-			controls.screenSpacePanning = false;
-			controls.minDistance = 100;
-			controls.maxDistance = 500;
-			controls.maxPolarAngle = Math.PI / 2;
-			
-			controls.target.set( 30, 167, 81 );
-			controls.update();			
-
-			
-
-			//Scene
-			scene = new THREE.Scene();
-	
-
-			//HemisphereLight
-			scene.add( new THREE.AmbientLight( 0x555555 ) );
-
-			light = new THREE.SpotLight( 0xffffff, 1.5 );
-			light.position.set( 0, 500, 2000 );
-			scene.add( light );
-			
-			
-
-			//WebGL Renderer	
-			renderer = new THREE.WebGLRenderer( { 
-									canvas   : document.getElementById( rendererCanvasID ), //canvas
-									alpha    : true, 
-									antialias: true 
-								} );
-			renderer.setSize( offsetWidth , offsetHeight );
-
-			
-			// Immediately use the texture for material creation
-			// Create a texture loader so we can load our image file
-			var imgs = [
-				'https://placekitten.com/1400/550',
-				'https://placekitten.com/1410/550'
-			];
-			
-			var loader = new THREE.TextureLoader();
-			loader.crossOrigin = 'anonymous';
-
-
-			var texture1     = loader.load( imgs[0] ),
-				texture2     = loader.load( imgs[1] ),
-				intensity    = 1,
-				dispImage    = $( '#' + rendererCanvasID ).data( 'filter-texture' ), //Load displacement image
-			    disp         = loader.load( dispImage );
-		
-			disp.wrapS = disp.wrapT = THREE.RepeatWrapping;
-
-			texture1.magFilter = texture2.magFilter = THREE.LinearFilter;
-			texture1.minFilter = texture2.minFilter = THREE.LinearFilter;
-
-			texture1.anisotropy = renderer.getMaxAnisotropy();
-			texture2.anisotropy = renderer.getMaxAnisotropy();
-
-			
-			var geometry = new THREE.PlaneBufferGeometry(
-				offsetWidth,
-				offsetHeight,
-				1
-			);
-			
-			
-			
-			filterMaterial = new THREE.ShaderMaterial({
-				uniforms: {
-					effectFactor: { type: "f", value: intensity },
-					dispFactor: { type: "f", value: 0.0 },
-					texture: { type: "t", value: texture1 },
-					texture2: { type: "t", value: texture2 },
-					disp: { type: "t", value: disp }
-				},
-
-				vertexShader: vertex,
-				fragmentShader: fragment,
-				transparent: true,
-				opacity: 1.0
-			});
-	
-			
-			displacementSprite = new THREE.Mesh( geometry, filterMaterial );
-			displacementSprite.position.set( 0, 0, 0 );
-			scene.add( displacementSprite );
-
-
-			// Fires when the window changes
-			window.addEventListener( 'resize', onWindowResize, false );
-			
-			
-			// When the mouse moves, call the given function
-			document.getElementById( rendererCanvasID ).addEventListener( 'mouseenter', onDocumentMouseEnter, false );
-			document.getElementById( rendererCanvasID ).addEventListener( 'mouseleave', onDocumentMouseLeave, false );
-		
-			
-			
-		}
-		
-
-		function render() {
-			requestAnimationFrame( render );
-			
-            theta += 0.1;
-			
-			
-			//To set a background color.
-			//renderer.setClearColor( 0x000000 );	
-			
-			
-			//update camera and controls
-			controls.update();
-			
-			renderer.render( scene, camera );
-			
-			
-			
-		}
-
-
-		function onWindowResize() {
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-			renderer.setSize( window.innerWidth, window.innerHeight );
-		}
-
-		
-		function onDocumentMouseEnter( event ) {
-            TweenMax.to( filterMaterial.uniforms.dispFactor, 1.5, {
-                value: 1,
-                ease: Expo.easeOut
-            });	
-		}
-		
-
-		function onDocumentMouseLeave( event ) {
-            TweenMax.to( filterMaterial.uniforms.dispFactor, 1, {
-                value: 0,
-                ease: Expo.easeOut
-            });	
-		}
 		
     };
 
@@ -32157,240 +32428,259 @@ APP = ( function ( APP, $, window, document ) {
 		if ( $( '#3D-model-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
 		
 		
-		var $window                   = $( window ),
-			windowWidth               = window.innerWidth,
-			windowHeight              = window.innerHeight,
-			rendererCanvasID          = '3D-model-canvas';
-		
-	
+		var MainStage = function() {
 
-		
-		// Generate one plane geometries mesh to scene
-		//-------------------------------------	
-		var camera,
-			controls,
-			scene,
-			light,
-			renderer,
-			displacementSprite,
-			radius       = 100,
-			theta        = 0,
-			clickEnable   = false;
-		
-		var mouseVector = new THREE.Vector2(), 
-			INTERSECTED,
-			INTERSECTED_CLICK,
-			raycaster;
-		
-		init();
-		render();
-
-		function init() {
-			//camera
-			camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 1, 10000 );
-			camera.position.set(0, 0, -1000);
-			
-
-			
-			//controls
-			controls = new THREE.OrbitControls( camera );
-			controls.autoRotate = true;
-			controls.autoRotateSpeed = 0.5;
-			controls.rotateSpeed = 0.5;
-			controls.zoomSpeed = 1.2;
-			controls.panSpeed = 0.8;
-			controls.enableZoom = true;
-			controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-			controls.dampingFactor = 0.25;
-			controls.screenSpacePanning = false;
-			controls.minDistance = 100;
-			controls.maxDistance = 500;
-			controls.maxPolarAngle = Math.PI / 2;
-			
-			controls.target.set( 30, 167, 81 );
-			controls.update();			
+			var $window                   = $( window ),
+				windowWidth               = window.innerWidth,
+				windowHeight              = window.innerHeight,
+				rendererCanvasID          = '3D-model-canvas';
 
 
-			//Scene
-			scene = new THREE.Scene();
 
-			//HemisphereLight
-			scene.add( new THREE.AmbientLight( 0xcccccc, 0.4 ) );
 
-			light = new THREE.SpotLight( 0xffffff, 1.5 );
-			light.position.set( 0, 500, 2000 );
-			scene.add( light );
-			
-			
+			// Generate one plane geometries mesh to scene
+			//-------------------------------------	
+			var camera,
+				controls,
+				scene,
+				light,
+				renderer,
+				displacementSprite,
+				radius       = 100,
+				theta        = 0,
+				clickEnable   = false;
 
-			//WebGL Renderer	
-			renderer = new THREE.WebGLRenderer( { 
-									canvas   : document.getElementById( rendererCanvasID ), //canvas
-									alpha    : true, 
-									antialias: true 
-								} );
-			renderer.setSize( windowWidth, windowHeight );
+			var mouseVector = new THREE.Vector2(), 
+				INTERSECTED,
+				INTERSECTED_CLICK,
+				raycaster;
 
-			
-			// Immediately use the texture for material creation
-			var manager = new THREE.LoadingManager();
-			manager.onProgress = function ( item, loaded, total ) {
 
-				console.log( item, loaded, total );
 
+			function init() {
+				//camera
+				camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 1, 10000 );
+				camera.position.set(0, 0, -1000);
+
+
+
+				//controls
+				controls = new THREE.OrbitControls( camera );
+				controls.autoRotate = true;
+				controls.autoRotateSpeed = 0.5;
+				controls.rotateSpeed = 0.5;
+				controls.zoomSpeed = 1.2;
+				controls.panSpeed = 0.8;
+				controls.enableZoom = true;
+				controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+				controls.dampingFactor = 0.25;
+				controls.screenSpacePanning = false;
+				controls.minDistance = 100;
+				controls.maxDistance = 500;
+				controls.maxPolarAngle = Math.PI / 2;
+
+				controls.target.set( 30, 167, 81 );
+				controls.update();			
+
+
+				//Scene
+				scene = new THREE.Scene();
+
+				//HemisphereLight
+				scene.add( new THREE.AmbientLight( 0xcccccc, 0.4 ) );
+
+				light = new THREE.SpotLight( 0xffffff, 1.5 );
+				light.position.set( 0, 500, 2000 );
+				scene.add( light );
+
+
+
+				//WebGL Renderer	
+				renderer = new THREE.WebGLRenderer( { 
+										canvas   : document.getElementById( rendererCanvasID ), //canvas
+										alpha    : true, 
+										antialias: true 
+									} );
+				renderer.setSize( windowWidth, windowHeight );
+
+
+				// Immediately use the texture for material creation
+				var manager = new THREE.LoadingManager();
+				manager.onProgress = function ( item, loaded, total ) {
+
+					console.log( item, loaded, total );
+
+				};
+
+				var textureLoader = new THREE.TextureLoader( manager ),
+					texture       = textureLoader.load( templateUrl + '/assets/models/obj/project.png' ),
+					onProgress    = function ( xhr ) {
+						if ( xhr.lengthComputable ) {
+							var percentComplete = xhr.loaded / xhr.total * 100;
+							console.log( Math.round(percentComplete, 2) + '% downloaded' );
+						}
+					},
+					onError       = function ( xhr ) { };
+
+
+				var loader        = new THREE.OBJLoader( manager );
+				loader.load( templateUrl + '/assets/models/obj/project.obj', function ( object ) {
+
+					object.traverse( function ( child ) {
+
+						if ( child instanceof THREE.Mesh ) {
+
+							child.material.map = texture;
+
+						}
+
+					} );
+
+					object.scale.set( 165, 165, 165 );
+					object.position.y = 100;
+					scene.add( object );
+
+				}, onProgress, onError );
+
+
+
+
+				// Fires when the window changes
+				window.addEventListener( 'resize', onWindowResize, false );
+
+
+				// When the mouse moves, call the given function
+				raycaster = new THREE.Raycaster();
+				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+				document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+				document.addEventListener( 'mouseup', onDocumentMouseUp, false );
+
+
+
+			}
+
+			function render() {
+				requestAnimationFrame( render );
+
+				theta += 0.1;
+
+
+
+				//To set a background color.
+				//renderer.setClearColor( 0x000000 );	
+
+
+				//Mouse interactions
+				raycaster.setFromCamera( mouseVector, camera );
+				var intersects = raycaster.intersectObjects( scene.children );
+				if ( intersects.length > 0 ) {
+					if ( INTERSECTED != intersects[ 0 ].object ) {
+
+						if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+						INTERSECTED = intersects[ 0 ].object;
+						INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
+						INTERSECTED.material.emissive.setHex( 0xffcc00 );
+					}
+				} else {
+					if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+					INTERSECTED = null;
+				}
+
+
+				//update camera and controls
+				controls.update();
+
+
+				renderer.render( scene, camera );
+
+
+
+
+			}
+
+
+			function onWindowResize() {
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+			}
+
+
+			function onDocumentMouseMove( event ) {
+				event.preventDefault();
+				mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+				mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+			}
+
+
+			function onDocumentMouseDown( event ) {
+				event.preventDefault();
+				mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+				mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
+				clickEnable = true;
+
+				//Mouse interactions
+				raycaster.setFromCamera( mouseVector, camera );
+				var intersects = raycaster.intersectObjects( scene.children );
+				if ( intersects.length > 0 ) {
+					if ( INTERSECTED_CLICK != intersects[ 0 ].object ) {
+
+						INTERSECTED_CLICK = intersects[ 0 ].object;
+
+						TweenMax.to( INTERSECTED_CLICK.scale, 1, {
+							x: '+=' + ( 200 - INTERSECTED_CLICK.scale.x ) * 0.05,
+							y: '+=' + ( 200 - INTERSECTED_CLICK.scale.y ) * 0.05,
+							z: '+=' + ( 200 - INTERSECTED_CLICK.scale.z ) * 0.05
+						});	
+
+
+						INTERSECTED_CLICK.updateMatrix();	
+
+					}
+				} else {
+					INTERSECTED_CLICK = null;
+				}
+				/*
+				// Parse all the faces
+				for ( var i in intersects ) {
+
+					intersects[ i ].face.material[ 0 ].color.setHex( Math.random() * 0xffffff | 0x80000000 );
+
+				}
+				*/		
+
+
+
+
+			}
+			function onDocumentMouseUp( event ) {
+				event.preventDefault();
+				mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+				mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
+				theta = 0;
+				clickEnable = false;
+
+			}
+
+			// 
+			//-------------------------------------	
+			return {
+				init      : init,
+				render    : render,
+				getScene  : function () { return scene; },
+				getCamera : function () { return camera; } 
 			};
 
-			var textureLoader = new THREE.TextureLoader( manager ),
-				texture       = textureLoader.load( templateUrl + '/assets/models/obj/project.png' ),
-				onProgress    = function ( xhr ) {
-					if ( xhr.lengthComputable ) {
-						var percentComplete = xhr.loaded / xhr.total * 100;
-						console.log( Math.round(percentComplete, 2) + '% downloaded' );
-					}
-				},
-				onError       = function ( xhr ) { };
-			
-			
-			var loader        = new THREE.OBJLoader( manager );
-			loader.load( templateUrl + '/assets/models/obj/project.obj', function ( object ) {
 
-				object.traverse( function ( child ) {
+		}();
 
-					if ( child instanceof THREE.Mesh ) {
-
-						child.material.map = texture;
-
-					}
-
-				} );
-
-				object.scale.set( 165, 165, 165 );
-				object.position.y = 100;
-				scene.add( object );
-
-			}, onProgress, onError );
-
-			
-			
-
-			// Fires when the window changes
-			window.addEventListener( 'resize', onWindowResize, false );
-			
-			
-			// When the mouse moves, call the given function
-			raycaster = new THREE.Raycaster();
-			document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-			document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-			document.addEventListener( 'mouseup', onDocumentMouseUp, false );
-		
-			
-			
-		}
-
-		function render() {
-			requestAnimationFrame( render );
-			
-            theta += 0.1;
-			
-			
-		
-			//To set a background color.
-			//renderer.setClearColor( 0x000000 );	
-			
-			
-			//Mouse interactions
-			raycaster.setFromCamera( mouseVector, camera );
-			var intersects = raycaster.intersectObjects( scene.children );
-			if ( intersects.length > 0 ) {
-				if ( INTERSECTED != intersects[ 0 ].object ) {
-					
-					if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
-					INTERSECTED = intersects[ 0 ].object;
-					INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
-					INTERSECTED.material.emissive.setHex( 0xffcc00 );
-				}
-			} else {
-				if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
-				INTERSECTED = null;
-			}
-
-			
-			//update camera and controls
-			controls.update();
-			
-			
-			renderer.render( scene, camera );
-			
-			
-
-			
-		}
-
-
-		function onWindowResize() {
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-			renderer.setSize( window.innerWidth, window.innerHeight );
-		}
-
-		
-		function onDocumentMouseMove( event ) {
-			event.preventDefault();
-			mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-			mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-		}
+		MainStage.init();
+		MainStage.render();
 		
 		
-		function onDocumentMouseDown( event ) {
-			event.preventDefault();
-			mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-			mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 
-			clickEnable = true;
-			
-			//Mouse interactions
-			raycaster.setFromCamera( mouseVector, camera );
-			var intersects = raycaster.intersectObjects( scene.children );
-			if ( intersects.length > 0 ) {
-				if ( INTERSECTED_CLICK != intersects[ 0 ].object ) {
-					
-					INTERSECTED_CLICK = intersects[ 0 ].object;
-					
-					TweenMax.to( INTERSECTED_CLICK.scale, 1, {
-						x: '+=' + ( 200 - INTERSECTED_CLICK.scale.x ) * 0.05,
-						y: '+=' + ( 200 - INTERSECTED_CLICK.scale.y ) * 0.05,
-						z: '+=' + ( 200 - INTERSECTED_CLICK.scale.z ) * 0.05
-					});	
-						
-					
-					INTERSECTED_CLICK.updateMatrix();	
-					
-				}
-			} else {
-				INTERSECTED_CLICK = null;
-			}
-			/*
-			// Parse all the faces
-			for ( var i in intersects ) {
-
-				intersects[ i ].face.material[ 0 ].color.setHex( Math.random() * 0xffffff | 0x80000000 );
-
-			}
-			*/		
-
-			
-			
-			
-		}
-		function onDocumentMouseUp( event ) {
-			event.preventDefault();
-			mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-			mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-			
-			theta = 0;
-			clickEnable = false;
-			
-		}
 			
 		
 
@@ -32428,112 +32718,129 @@ APP = ( function ( APP, $, window, document ) {
 		//Prevent this module from loading in other pages
 		if ( $( '#3D-renderer' ).length == 0 || ! Modernizr.webgl ) return false;
 		
+		var MainStage = function() {
+
+			var $window                   = $( window ),
+				windowWidth               = window.innerWidth,
+				windowHeight              = window.innerHeight,
+				viewRenderer              = '3D-renderer';
+
+
+			// Generate one plane geometries mesh to scene
+			//-------------------------------------	
+			var camera,
+				controls,
+				scene,
+				light,
+				renderer,
+				clock = new THREE.Clock();
+
+
+
+			function init() {
+				//camera
+				camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 1, 10000 );
+				camera.position.set(0, 0, -1000);
+
+				//controls
+				controls = new THREE.OrbitControls( camera );
+				controls.rotateSpeed = 0.5;
+				controls.zoomSpeed = 1.2;
+				controls.panSpeed = 0.8;
+				controls.enableZoom = true;
+				controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+				controls.dampingFactor = 0.25;
+				controls.screenSpacePanning = false;
+				controls.minDistance = 1000;
+				controls.maxDistance = 1500;
+				controls.maxPolarAngle = Math.PI / 2;
+
+				//Scene
+				scene = new THREE.Scene();
+
+				//HemisphereLight
+				light = new THREE.HemisphereLight( 0xffbf67, 0x15c6ff );
+				scene.add( light );
+
+				//WebGL Renderer
+				renderer = new THREE.WebGLRenderer( { 
+										alpha    : true, 
+										antialias: true 
+									} );
+				renderer.setClearColor( 0xffffff, 0 );
+				renderer.setSize( windowWidth - 50, windowHeight - 50 );
+				renderer.domElement.style.zIndex = 5;
+				document.getElementById( viewRenderer ).appendChild( renderer.domElement );
+
+
+				//Add HTML elements to scene
+				var target  = $( '#html3D-view' ).clone(),
+					pages   = target.find( '.html3D-view-content' );
+
+				pages.each( function() {
+					var el = new THREE.CSS3DObject( $.parseHTML( $( this )[0].outerHTML )[0] );
+
+					el.position.x = $( this ).data( 'position-x' ) || 0;
+					el.position.y = $( this ).data( 'position-y' ) || 0;
+					el.position.z = $( this ).data( 'position-z' ) || 0;
+					el.rotation.x = $( this ).data( 'rotation-x' ) || 0;
+					el.rotation.y = $( this ).data( 'rotation-y' ) || 3.14159265358979;
+					el.rotation.z = $( this ).data( 'rotation-z' ) || 0;
+
+					scene.add( el );
+				});
+
+
+
+
+				//CSS3D Renderer
+				renderer = new THREE.CSS3DRenderer();
+				renderer.setSize( windowWidth, windowHeight );
+				renderer.domElement.style.position = 'absolute';
+				renderer.domElement.style.top = 0;
+				document.getElementById( viewRenderer ).appendChild( renderer.domElement );
+
+				// Fires when the window changes
+				window.addEventListener( 'resize', onWindowResize, false );
+
+
+			}
+
+			function render() {
+				requestAnimationFrame( render );
+
+				var delta = clock.getDelta();
+
+				//update camera and controls
+				controls.update();
+
+				renderer.render( scene, camera );
+
+			}
+
+			function onWindowResize() {
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+			}
+
+
+			// 
+			//-------------------------------------	
+			return {
+				init      : init,
+				render    : render,
+				getScene  : function () { return scene; },
+				getCamera : function () { return camera; } 
+			};
+
+
+		}();
+
+		MainStage.init();
+		MainStage.render();
 		
 		
-		var $window                   = $( window ),
-			windowWidth               = window.innerWidth,
-			windowHeight              = window.innerHeight,
-			viewRenderer              = '3D-renderer';
-		
-		
-		// Generate one plane geometries mesh to scene
-		//-------------------------------------	
-		var camera,
-			controls,
-			scene,
-			light,
-			renderer,
-			clock = new THREE.Clock();
-
-		init();
-		render();
-
-		function init() {
-			//camera
-			camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 1, 10000 );
-			camera.position.set(0, 0, -1000);
-
-			//controls
-			controls = new THREE.OrbitControls( camera );
-			controls.rotateSpeed = 0.5;
-			controls.zoomSpeed = 1.2;
-			controls.panSpeed = 0.8;
-			controls.enableZoom = true;
-			controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-			controls.dampingFactor = 0.25;
-			controls.screenSpacePanning = false;
-			controls.minDistance = 1000;
-			controls.maxDistance = 1500;
-			controls.maxPolarAngle = Math.PI / 2;
-
-			//Scene
-			scene = new THREE.Scene();
-
-			//HemisphereLight
-			light = new THREE.HemisphereLight( 0xffbf67, 0x15c6ff );
-			scene.add( light );
-
-			//WebGL Renderer
-			renderer = new THREE.WebGLRenderer( { 
-									alpha    : true, 
-									antialias: true 
-								} );
-			renderer.setClearColor( 0xffffff, 0 );
-			renderer.setSize( windowWidth - 50, windowHeight - 50 );
-			renderer.domElement.style.zIndex = 5;
-			document.getElementById( viewRenderer ).appendChild( renderer.domElement );
-
-			
-			//Add HTML elements to scene
-			var target  = $( '#html3D-view' ).clone(),
-				pages   = target.find( '.html3D-view-content' );
-
-			pages.each( function() {
-				var el = new THREE.CSS3DObject( $.parseHTML( $( this )[0].outerHTML )[0] );
-
-				el.position.x = $( this ).data( 'position-x' ) || 0;
-				el.position.y = $( this ).data( 'position-y' ) || 0;
-				el.position.z = $( this ).data( 'position-z' ) || 0;
-				el.rotation.x = $( this ).data( 'rotation-x' ) || 0;
-				el.rotation.y = $( this ).data( 'rotation-y' ) || 3.14159265358979;
-				el.rotation.z = $( this ).data( 'rotation-z' ) || 0;
-
-				scene.add( el );
-			});
-			
-
-			
-			
-			//CSS3D Renderer
-			renderer = new THREE.CSS3DRenderer();
-			renderer.setSize( windowWidth, windowHeight );
-			renderer.domElement.style.position = 'absolute';
-			renderer.domElement.style.top = 0;
-			document.getElementById( viewRenderer ).appendChild( renderer.domElement );
-
-			// Fires when the window changes
-			window.addEventListener( 'resize', onWindowResize, false );
-			
-			
-		}
-
-		function render() {
-			requestAnimationFrame( render );
-
-            var delta = clock.getDelta();
-			
-			//update camera and controls
-			controls.update();
-			
-			renderer.render( scene, camera );
-			
-		}
-		
-		function onWindowResize() {
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-			renderer.setSize( window.innerWidth, window.innerHeight );
-		}
 
 
 		
@@ -32570,340 +32877,357 @@ APP = ( function ( APP, $, window, document ) {
 		//Prevent this module from loading in other pages
 		if ( $( '#3D-particle-effect-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
 		
-		var $window                   = $( window ),
-			windowWidth               = window.innerWidth,
-			windowHeight              = window.innerHeight,
-			rendererCanvasID          = '3D-particle-effect-canvas';
-		
-		var renderer, 
-			texture, 
-			scene, 
-			camera,
-			particles,
-			imagedata,
-			clock        = new THREE.Clock(),
-			mouseX       = 0, 
-			mouseY       = 0,
-			isMouseDown  = true,
-			lastMousePos = {x: 0, y: 0},
-			windowHalfX  = windowWidth / 2,
-			windowHalfY  = windowHeight / 2;
-
 		
 		
-		
-		//particle rotation
-		var particleRotation;
-
-		var centerVector = new THREE.Vector3(0, 0, 0);
-		var previousTime = 0;
+		var MainStage = function() {
 
 
-		
-		init();
-		render();
-		
-		
-		
+			var $window                   = $( window ),
+				windowWidth               = window.innerWidth,
+				windowHeight              = window.innerHeight,
+				rendererCanvasID          = '3D-particle-effect-canvas';
 
-		function init() {
-			
-			//@https://github.com/mrdoob/three.js/blob/dev/src/extras/ImageUtils.js#L21
-			THREE.ImageUtils.crossOrigin = '';
-			
-			//WebGL Renderer		
-			renderer = new THREE.WebGLRenderer( { 
-									canvas   : document.getElementById( rendererCanvasID ), //canvas
-									alpha    : true, 
-									antialias: true 
-								} );
+			var renderer, 
+				texture, 
+				scene, 
+				camera,
+				particles,
+				imagedata,
+				clock        = new THREE.Clock(),
+				mouseX       = 0, 
+				mouseY       = 0,
+				isMouseDown  = true,
+				lastMousePos = {x: 0, y: 0},
+				windowHalfX  = windowWidth / 2,
+				windowHalfY  = windowHeight / 2;
 
-			
-			renderer.setSize(windowWidth, windowHeight);
 
-			
-		
-			
-			//Scene
-			scene = new THREE.Scene();
 
-			//camera
-			camera = new THREE.PerspectiveCamera(50, windowWidth / windowHeight, 0.1, 10000);
-			camera.position.set(-100, 0, 600);
-			camera.lookAt( centerVector );
-			scene.add( camera );
 
-			
-			// instantiate a loader
-			var loader = new THREE.TextureLoader();
+			//particle rotation
+			var particleRotation;
 
-			// load a resource
-			loader.load(
-				// resource URL
-				$( '#' + rendererCanvasID ).data( 'img-src' ),
+			var centerVector = new THREE.Vector3(0, 0, 0);
+			var previousTime = 0;
 
-				// onLoad callback
-				function ( texture ) {
-					// in this example we create the material when the texture is loaded
-					// Get data from an image
-					imagedata = getImageData( texture.image );
 
-					// Immediately use the texture for material creation
-					var geometry = new THREE.Geometry();
-					var material = new THREE.PointsMaterial({
-						size: 3,
-						color: 0xffffff,
-						sizeAttenuation: false
-					});
-					
-					
-					
-					for (var y = 0, y2 = imagedata.height; y < y2; y += 2) {
-				
-						for (var x = 0, x2 = imagedata.width; x < x2; x += 2) {
-							
-							if ( imagedata.data[(x * 4 + y * 4 * imagedata.width) + 3] > 128 ) {
 
-						
-								// The array of vertices holds the position of every vertex in the model.
-								var vertex = new THREE.Vector3();
-								
-								
-								vertex.x = Math.random() * 1000 - 500;
-								vertex.y = Math.random() * 1000 - 500;
-								vertex.z = -Math.random() * 500;
+			function init() {
 
-								vertex.destination = {
-									x: x - imagedata.width / 2,
-									y: -y + imagedata.height / 2,
-									z: 0
-								};
+				//@https://github.com/mrdoob/three.js/blob/dev/src/extras/ImageUtils.js#L21
+				THREE.ImageUtils.crossOrigin = '';
 
-								vertex.speed = Math.random() / 200 + 0.015;
+				//WebGL Renderer		
+				renderer = new THREE.WebGLRenderer( { 
+										canvas   : document.getElementById( rendererCanvasID ), //canvas
+										alpha    : true, 
+										antialias: true 
+									} );
 
-								geometry.vertices.push( vertex );
-								
 
+				renderer.setSize(windowWidth, windowHeight);
+
+
+
+
+				//Scene
+				scene = new THREE.Scene();
+
+				//camera
+				camera = new THREE.PerspectiveCamera(50, windowWidth / windowHeight, 0.1, 10000);
+				camera.position.set(-100, 0, 600);
+				camera.lookAt( centerVector );
+				scene.add( camera );
+
+
+				// instantiate a loader
+				var loader = new THREE.TextureLoader();
+
+				// load a resource
+				loader.load(
+					// resource URL
+					$( '#' + rendererCanvasID ).data( 'img-src' ),
+
+					// onLoad callback
+					function ( texture ) {
+						// in this example we create the material when the texture is loaded
+						// Get data from an image
+						imagedata = getImageData( texture.image );
+
+						// Immediately use the texture for material creation
+						var geometry = new THREE.Geometry();
+						var material = new THREE.PointsMaterial({
+							size: 3,
+							color: 0xffffff,
+							sizeAttenuation: false
+						});
+
+
+
+						for (var y = 0, y2 = imagedata.height; y < y2; y += 2) {
+
+							for (var x = 0, x2 = imagedata.width; x < x2; x += 2) {
+
+								if ( imagedata.data[(x * 4 + y * 4 * imagedata.width) + 3] > 128 ) {
+
+
+									// The array of vertices holds the position of every vertex in the model.
+									var vertex = new THREE.Vector3();
+
+
+									vertex.x = Math.random() * 1000 - 500;
+									vertex.y = Math.random() * 1000 - 500;
+									vertex.z = -Math.random() * 500;
+
+									vertex.destination = {
+										x: x - imagedata.width / 2,
+										y: -y + imagedata.height / 2,
+										z: 0
+									};
+
+									vertex.speed = Math.random() / 200 + 0.015;
+
+									geometry.vertices.push( vertex );
+
+
+								}
 							}
 						}
+						particles = new THREE.Points( geometry, material );
+
+						scene.add( particles );
+
+
+
+
+					},
+
+					// onProgress callback currently not supported
+					undefined,
+
+					// onError callback
+					function ( err ) {
+						console.error( 'An error happened.' );
 					}
-					particles = new THREE.Points( geometry, material );
+				);
 
-					scene.add( particles );
 
-					
-					
-					
-				},
 
-				// onProgress callback currently not supported
-				undefined,
+				// add particle rotation
+				particleRotation = new THREE.Object3D();
+				scene.add( particleRotation );
+				var geometryPR = new THREE.TetrahedronGeometry(2, 0),
+					materialPR = new THREE.MeshPhongMaterial({
+					color: 0xffffff,
+					flatShading: THREE.FlatShading
+				});
 
-				// onError callback
-				function ( err ) {
-					console.error( 'An error happened.' );
-				}
-			);
-			
-			
-			
-			// add particle rotation
-			particleRotation = new THREE.Object3D();
-			scene.add( particleRotation );
-			var geometryPR = new THREE.TetrahedronGeometry(2, 0),
-				materialPR = new THREE.MeshPhongMaterial({
-				color: 0xffffff,
-				flatShading: THREE.FlatShading
-			});
-
-			for (var i = 0; i < 1000; i++) {
-				var mesh = new THREE.Mesh( geometryPR, materialPR );
-				mesh.position.set(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize();
-				mesh.position.multiplyScalar(90 + (Math.random() * 700));
-				mesh.rotation.set(Math.random() * 2, Math.random() * 2, Math.random() * 2);
-				particleRotation.add(mesh);
-			}
-			
-			var ambientLight = new THREE.AmbientLight(0x999999 );
-			scene.add(ambientLight);
-
-			var lights = [];
-			lights[0] = new THREE.DirectionalLight( 0xffffff, 1 );
-			lights[0].position.set( 1, 0, 0 );
-			lights[1] = new THREE.DirectionalLight( 0x11E8BB, 1 );
-			lights[1].position.set( 0.75, 1, 0.5 );
-			lights[2] = new THREE.DirectionalLight( 0x8200C9, 1 );
-			lights[2].position.set( -0.75, -1, 0.5 );
-			scene.add( lights[0] );
-			scene.add( lights[1] );
-			scene.add( lights[2] );
-			
-			
-			
-
-			//----
-			document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-			document.addEventListener( 'touchstart', onDocumentTouchStart, false );
-			document.addEventListener( 'touchmove', onDocumentTouchMove, false );
-			
-			document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-			document.addEventListener( 'mouseup', onDocumentMouseUp, false );
-			
-			
-			
-			// Fires when the window changes
-			window.addEventListener( 'resize', onWindowResize, false );	
-		}
-		
-		
-		
-		
-		
-		function render() {
-			requestAnimationFrame( render );
-			
-            var delta      = clock.getDelta(),
-				thickness = 40;
-			
-		
-			//Need to add judgment to avoid Cannot read property 'geometry' of undefined
-			if ( typeof particles != typeof undefined ) {
-				
-				for (var i = 0, j = particles.geometry.vertices.length; i < j; i++) {
-					var particle = particles.geometry.vertices[i];
-					particle.x += (particle.destination.x - particle.x) * particle.speed;
-					particle.y += (particle.destination.y - particle.y) * particle.speed;
-					particle.z += (particle.destination.z - particle.z) * particle.speed;
+				for (var i = 0; i < 1000; i++) {
+					var mesh = new THREE.Mesh( geometryPR, materialPR );
+					mesh.position.set(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize();
+					mesh.position.multiplyScalar(90 + (Math.random() * 700));
+					mesh.rotation.set(Math.random() * 2, Math.random() * 2, Math.random() * 2);
+					particleRotation.add(mesh);
 				}
 
-				
-				if ( delta - previousTime > thickness ) {
-					var index     = Math.floor(Math.random()*particles.geometry.vertices.length);
-					var particle1 = particles.geometry.vertices[index];
-					var particle2 = particles.geometry.vertices[particles.geometry.vertices.length-index];
-					
-					TweenMax.to( particle, Math.random()*2+1, {
-									x:    particle2.x, 
-									y:    particle2.y, 
-									ease: Power2.easeInOut
-								});
-					
-					
-					
-					TweenMax.to( particle2, Math.random()*2+1, {
-									x:    particle1.x, 
-									y:    particle1.y, 
-									ease: Power2.easeInOut
-								});
-					
-					previousTime = delta;
+				var ambientLight = new THREE.AmbientLight(0x999999 );
+				scene.add(ambientLight);
+
+				var lights = [];
+				lights[0] = new THREE.DirectionalLight( 0xffffff, 1 );
+				lights[0].position.set( 1, 0, 0 );
+				lights[1] = new THREE.DirectionalLight( 0x11E8BB, 1 );
+				lights[1].position.set( 0.75, 1, 0.5 );
+				lights[2] = new THREE.DirectionalLight( 0x8200C9, 1 );
+				lights[2].position.set( -0.75, -1, 0.5 );
+				scene.add( lights[0] );
+				scene.add( lights[1] );
+				scene.add( lights[2] );
+
+
+
+
+				//----
+				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+				document.addEventListener( 'touchstart', onDocumentTouchStart, false );
+				document.addEventListener( 'touchmove', onDocumentTouchMove, false );
+
+				document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+				document.addEventListener( 'mouseup', onDocumentMouseUp, false );
+
+
+
+				// Fires when the window changes
+				window.addEventListener( 'resize', onWindowResize, false );	
+			}
+
+
+
+
+
+			function render() {
+				requestAnimationFrame( render );
+
+				var delta      = clock.getDelta(),
+					thickness = 40;
+
+
+				//Need to add judgment to avoid Cannot read property 'geometry' of undefined
+				if ( typeof particles != typeof undefined ) {
+
+					for (var i = 0, j = particles.geometry.vertices.length; i < j; i++) {
+						var particle = particles.geometry.vertices[i];
+						particle.x += (particle.destination.x - particle.x) * particle.speed;
+						particle.y += (particle.destination.y - particle.y) * particle.speed;
+						particle.z += (particle.destination.z - particle.z) * particle.speed;
+					}
+
+
+					if ( delta - previousTime > thickness ) {
+						var index     = Math.floor(Math.random()*particles.geometry.vertices.length);
+						var particle1 = particles.geometry.vertices[index];
+						var particle2 = particles.geometry.vertices[particles.geometry.vertices.length-index];
+
+						TweenMax.to( particle, Math.random()*2+1, {
+										x:    particle2.x, 
+										y:    particle2.y, 
+										ease: Power2.easeInOut
+									});
+
+
+
+						TweenMax.to( particle2, Math.random()*2+1, {
+										x:    particle1.x, 
+										y:    particle1.y, 
+										ease: Power2.easeInOut
+									});
+
+						previousTime = delta;
+					}
+
+
+					particles.geometry.verticesNeedUpdate = true;	
 				}
 
-				
-				particles.geometry.verticesNeedUpdate = true;	
-			}
-			
-			
-			if( ! isMouseDown ) {
-				camera.position.x += (0-camera.position.x)*0.06;
-				camera.position.y += (0-camera.position.y)*0.06;
-			}
-			
 
-			camera.position.x += ( mouseX - camera.position.x ) * 0.09;
-			camera.position.y += ( - mouseY - camera.position.y ) * 0.09;
-			camera.lookAt( centerVector );
-			
-			
-			//particle rotation
-			particleRotation.rotation.x += 0.0000;
-			particleRotation.rotation.y -= 0.0040;
+				if( ! isMouseDown ) {
+					camera.position.x += (0-camera.position.x)*0.06;
+					camera.position.y += (0-camera.position.y)*0.06;
+				}
 
-			
-			renderer.render( scene, camera );
-			
-		}
-		
-		
 
-		function onWindowResize() {
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-			renderer.setSize( window.innerWidth, window.innerHeight );
-		}
-		
-		
-		function onDocumentMouseMove( event ) {
-
-			mouseX = event.clientX - windowHalfX;
-			mouseY = event.clientY - windowHalfY;
-
-			if( isMouseDown ) {
-				camera.position.x += (event.clientX-lastMousePos.x)/100;
-				camera.position.y -= (event.clientY-lastMousePos.y)/100;
+				camera.position.x += ( mouseX - camera.position.x ) * 0.09;
+				camera.position.y += ( - mouseY - camera.position.y ) * 0.09;
 				camera.lookAt( centerVector );
+
+
+				//particle rotation
+				particleRotation.rotation.x += 0.0000;
+				particleRotation.rotation.y -= 0.0040;
+
+
+				renderer.render( scene, camera );
+
+			}
+
+
+
+			function onWindowResize() {
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+			}
+
+
+			function onDocumentMouseMove( event ) {
+
+				mouseX = event.clientX - windowHalfX;
+				mouseY = event.clientY - windowHalfY;
+
+				if( isMouseDown ) {
+					camera.position.x += (event.clientX-lastMousePos.x)/100;
+					camera.position.y -= (event.clientY-lastMousePos.y)/100;
+					camera.lookAt( centerVector );
+					lastMousePos = {x: event.clientX, y: event.clientY};
+				}
+
+
+			}
+
+
+			function onDocumentTouchStart( event ) {
+
+				if ( event.touches.length == 1 ) {
+
+					event.preventDefault();
+
+					mouseX = event.touches[ 0 ].pageX - windowHalfX;
+					mouseY = event.touches[ 0 ].pageY - windowHalfY;
+				}
+			}
+
+			function onDocumentTouchMove( event ) {
+
+				if ( event.touches.length == 1 ) {
+
+					event.preventDefault();
+
+					mouseX = event.touches[ 0 ].pageX - windowHalfX;
+					mouseY = event.touches[ 0 ].pageY - windowHalfY;
+
+				}
+			}
+
+
+			function onDocumentMouseUp() {
+				isMouseDown = false;
+			}
+
+			function onDocumentMouseDown( event ) {
+				isMouseDown = true;
 				lastMousePos = {x: event.clientX, y: event.clientY};
-			}
-			
-			
-		}
 
-		
-		function onDocumentTouchStart( event ) {
-
-			if ( event.touches.length == 1 ) {
-
-				event.preventDefault();
-
-				mouseX = event.touches[ 0 ].pageX - windowHalfX;
-				mouseY = event.touches[ 0 ].pageY - windowHalfY;
-			}
-		}
-
-		function onDocumentTouchMove( event ) {
-
-			if ( event.touches.length == 1 ) {
-
-				event.preventDefault();
-
-				mouseX = event.touches[ 0 ].pageX - windowHalfX;
-				mouseY = event.touches[ 0 ].pageY - windowHalfY;
 
 			}
-		}
+
+
+
+			/*
+			 * Get Image Data when Draw Image To Canvas
+			 *
+			 * @param  {Object} image         - Overridden with a record type holding data, width and height.
+			 * @return {JSON}                 - The image data.
+			 */
+			function getImageData( image ) {
+
+				var canvas = document.createElement( 'canvas' );
+				canvas.width = image.width;
+				canvas.height = image.height;
+
+				var ctx = canvas.getContext( '2d' );
+				ctx.drawImage(image, 0, 0);
+
+				return ctx.getImageData(0, 0, image.width, image.height);
+			}
+
+
+
+			// 
+			//-------------------------------------	
+			return {
+				init      : init,
+				render    : render,
+				getScene  : function () { return scene; },
+				getCamera : function () { return camera; } 
+			};
+
+
+		}();
+
+		MainStage.init();
+		MainStage.render();
 		
-
-		function onDocumentMouseUp() {
-			isMouseDown = false;
-		}
 		
-		function onDocumentMouseDown( event ) {
-			isMouseDown = true;
-			lastMousePos = {x: event.clientX, y: event.clientY};
-			
-			
-		}
-	
-
-		
-		/*
-		 * Get Image Data when Draw Image To Canvas
-		 *
-		 * @param  {Object} image         - Overridden with a record type holding data, width and height.
-		 * @return {JSON}                 - The image data.
-		 */
-		function getImageData( image ) {
-
-			var canvas = document.createElement( 'canvas' );
-			canvas.width = image.width;
-			canvas.height = image.height;
-
-			var ctx = canvas.getContext( '2d' );
-			ctx.drawImage(image, 0, 0);
-
-			return ctx.getImageData(0, 0, image.width, image.height);
-		}
-
 
 		
 		
@@ -32940,125 +33264,141 @@ APP = ( function ( APP, $, window, document ) {
 		if ( $( '#3D-sphere-three-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
 		
 		
-		var $window                   = $( window ),
-			windowWidth               = window.innerWidth,
-			windowHeight              = window.innerHeight,
-			rendererCanvasID          = '3D-sphere-three-canvas';
+		var MainStage = function() {
+
+			var $window                   = $( window ),
+				windowWidth               = window.innerWidth,
+				windowHeight              = window.innerHeight,
+				rendererCanvasID          = '3D-sphere-three-canvas';
+
+
+
+
+			// Generate one plane geometries mesh to scene
+			//-------------------------------------	
+			var camera,
+				controls,
+				scene,
+				light,
+				renderer,
+				displacementSprite;
+
+			function init() {
+				// camera
+				camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 100 );
+				camera.position.set( 0, -46, 18 );
+
+				// controls
+				controls = new THREE.OrbitControls( camera );
+				controls.minDistance = 10;
+				controls.maxDistance = 50;
+
+				//Scene
+				scene = new THREE.Scene();
+
+				//HemisphereLight
+				scene.add( new THREE.AmbientLight( 0x555555 ) );
+
+				light = new THREE.SpotLight( 0xffffff, 1.5 );
+				light.position.set( 0, 500, 2000 );
+				scene.add( light );
+
+
+
+				//WebGL Renderer		
+				renderer = new THREE.WebGLRenderer( { 
+										canvas   : document.getElementById( rendererCanvasID ), //canvas
+										alpha    : true, 
+										antialias: true 
+									} );
+				renderer.setSize( windowWidth, windowHeight );
+
+
+				// axes
+				//scene.add( new THREE.AxisHelper( 20 ) );
+
+				// geometry
+				var geometry = new THREE.SphereGeometry( 3, 32, 32 );
+
+				// material, we create the material when the texture is loaded
+				var loader = new THREE.TextureLoader();
+				loader.crossOrigin = 'anonymous';
+
+				var texture = loader.load( 'https://placekitten.com/1650/1650' ),
+					material = new THREE.MeshBasicMaterial( { map: texture } );
+
+				// parent
+				displacementSprite = new THREE.Object3D();
+				scene.add( displacementSprite );
+
+				// pivots
+				var pivot1 = new THREE.Object3D(),
+					pivot2 = new THREE.Object3D(),
+					pivot3 = new THREE.Object3D();
+
+				pivot1.rotation.z = 0;
+				pivot2.rotation.z = 2 * Math.PI / 3;
+				pivot3.rotation.z = 4 * Math.PI / 3;
+				displacementSprite.add( pivot1 );
+				displacementSprite.add( pivot2 );
+				displacementSprite.add( pivot3 );
+
+				// mesh
+				var mesh1 = new THREE.Mesh( geometry, material ),
+					mesh2 = new THREE.Mesh( geometry, material ),
+					mesh3 = new THREE.Mesh( geometry, material );
+
+				mesh1.position.y = 5;
+				mesh2.position.y = 15;
+				mesh3.position.y = 25;
+				pivot1.add( mesh1 );
+				pivot2.add( mesh2 );
+				pivot3.add( mesh3 );
+
+
+				// Fires when the window changes
+				window.addEventListener( 'resize', onWindowResize, false );
+
+
+			}
+
+			function render() {
+				requestAnimationFrame( render );
+
+				displacementSprite.rotation.z += 0.01;
+
+
+				//update camera and controls
+				controls.update();
+
+				renderer.render( scene, camera );
+
+			}
+
+
+			function onWindowResize() {
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+			}
+
+
+			// 
+			//-------------------------------------	
+			return {
+				init      : init,
+				render    : render,
+				getScene  : function () { return scene; },
+				getCamera : function () { return camera; } 
+			};
+
+
+		}();
+
+		MainStage.init();
+		MainStage.render();
 		
-	
-
 		
-		// Generate one plane geometries mesh to scene
-		//-------------------------------------	
-		var camera,
-			controls,
-			scene,
-			light,
-			renderer,
-			displacementSprite;
-
-		
-		init();
-		render();
-
-		function init() {
-			// camera
-			camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 100 );
-			camera.position.set( 0, -46, 18 );
-
-			// controls
-			controls = new THREE.OrbitControls( camera );
-			controls.minDistance = 10;
-			controls.maxDistance = 50;
-
-			//Scene
-			scene = new THREE.Scene();
-
-			//HemisphereLight
-			scene.add( new THREE.AmbientLight( 0x555555 ) );
-
-			light = new THREE.SpotLight( 0xffffff, 1.5 );
-			light.position.set( 0, 500, 2000 );
-			scene.add( light );
-			
-			
-
-			//WebGL Renderer		
-			renderer = new THREE.WebGLRenderer( { 
-									canvas   : document.getElementById( rendererCanvasID ), //canvas
-									alpha    : true, 
-									antialias: true 
-								} );
-			renderer.setSize( windowWidth, windowHeight );
-
-			
-			// axes
-			//scene.add( new THREE.AxisHelper( 20 ) );
-
-			// geometry
-			var geometry = new THREE.SphereGeometry( 3, 32, 32 );
-
-			// material, we create the material when the texture is loaded
-			var loader = new THREE.TextureLoader();
-			loader.crossOrigin = 'anonymous';
-			
-			var texture = loader.load( 'https://placekitten.com/1650/1650' ),
-				material = new THREE.MeshBasicMaterial( { map: texture } );
-
-			// parent
-			displacementSprite = new THREE.Object3D();
-			scene.add( displacementSprite );
-
-			// pivots
-			var pivot1 = new THREE.Object3D(),
-				pivot2 = new THREE.Object3D(),
-				pivot3 = new THREE.Object3D();
-			
-			pivot1.rotation.z = 0;
-			pivot2.rotation.z = 2 * Math.PI / 3;
-			pivot3.rotation.z = 4 * Math.PI / 3;
-			displacementSprite.add( pivot1 );
-			displacementSprite.add( pivot2 );
-			displacementSprite.add( pivot3 );
-
-			// mesh
-			var mesh1 = new THREE.Mesh( geometry, material ),
-				mesh2 = new THREE.Mesh( geometry, material ),
-				mesh3 = new THREE.Mesh( geometry, material );
-			
-			mesh1.position.y = 5;
-			mesh2.position.y = 15;
-			mesh3.position.y = 25;
-			pivot1.add( mesh1 );
-			pivot2.add( mesh2 );
-			pivot3.add( mesh3 );
-			
-			
-			// Fires when the window changes
-			window.addEventListener( 'resize', onWindowResize, false );
-			
-			
-		}
-
-		function render() {
-			requestAnimationFrame( render );
-			
-			displacementSprite.rotation.z += 0.01;
-			
-			
-			//update camera and controls
-			controls.update();
-			
-			renderer.render( scene, camera );
-			
-		}
-
-
-		function onWindowResize() {
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-			renderer.setSize( window.innerWidth, window.innerHeight );
-		}
 
 
 		
@@ -33101,225 +33441,238 @@ APP = ( function ( APP, $, window, document ) {
 		if ( $( '#3D-object-buttonevent-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
 		
 		
-		var $window                   = $( window ),
-			windowWidth               = window.innerWidth,
-			windowHeight              = window.innerHeight,
-			rendererCanvasID          = '3D-object-buttonevent-canvas';
-		
-
-		var renderer, 
-			scene, 
-			controls, 
-			camera, 
-			targetObj, 
-			parent, 
-			material,
-			segLength;
-		
-		
-		var radius = 3,
-			height = 6,
-			segments = 200; //segments must be even
-
-	
-		init();
-		render();
-		
-
-		function init() {
-
-			// Create a camera, which defines where we're looking at.		
-			renderer = new THREE.WebGLRenderer( { 
-									canvas   : document.getElementById( rendererCanvasID ), //canvas
-									alpha    : true, 
-									antialias: true 
-								} );
-			renderer.setSize( windowWidth, windowHeight );
+		var MainStage = function() {
 
 
-			//Scene
-			scene = new THREE.Scene();
+			var $window                   = $( window ),
+				windowWidth               = window.innerWidth,
+				windowHeight              = window.innerHeight,
+				rendererCanvasID          = '3D-object-buttonevent-canvas';
 
 
-			//camera
-			camera = new THREE.PerspectiveCamera(70, windowWidth / windowHeight, 1, 100);
-			camera.position.set(1, 1, 22);
+			var renderer, 
+				scene, 
+				controls, 
+				camera, 
+				targetObj, 
+				parent, 
+				material,
+				segLength;
 
-			//controls
-			controls = new THREE.OrbitControls(camera, renderer.domElement);
-			controls.addEventListener('change', function() {
+
+			var radius = 3,
+				height = 6,
+				segments = 200; //segments must be even
+
+
+			function init() {
+
+				// Create a camera, which defines where we're looking at.		
+				renderer = new THREE.WebGLRenderer( { 
+										canvas   : document.getElementById( rendererCanvasID ), //canvas
+										alpha    : true, 
+										antialias: true 
+									} );
+				renderer.setSize( windowWidth, windowHeight );
+
+
+				//Scene
+				scene = new THREE.Scene();
+
+
+				//camera
+				camera = new THREE.PerspectiveCamera(70, windowWidth / windowHeight, 1, 100);
+				camera.position.set(1, 1, 22);
+
+				//controls
+				controls = new THREE.OrbitControls(camera, renderer.domElement);
+				controls.addEventListener('change', function() {
+					renderer.render(scene, camera);
+				}, false);
+				controls.enableZoom = false;
+				controls.enablePan = false;
+
+
+
+				// Immediately use the texture for material creation
+				material = new THREE.MeshPhongMaterial({
+					color: 0xEB6D35,
+					specular: 0xEB6D35,
+					shininess: 15,
+					flatShading: THREE.FlatShading,
+					side: THREE.DoubleSide,
+					transparent: true,
+					opacity: .8
+				});
+
+
+				//HemisphereLight
+				var light1 = new THREE.DirectionalLight(0xffffff);
+				light1.position.set(-5, 10, 10);
+				var light2 = new THREE.PointLight(0xffffff, .7, 0);
+				light2.position.set(5, 5, -5);
+
+				scene.add(light1, light2);
+
+				//put the target object inside a parent object so the manipulation is easier
+				parent = new THREE.Object3D();
+
+
+				addObject();
+
+				parent.position.set(-radius, height / 2, 0);
+				parent.rotation.y = Math.PI;
+				scene.add(parent);
+
+
 				renderer.render(scene, camera);
-			}, false);
-			controls.enableZoom = false;
-			controls.enablePan = false;
-
-
-			
-			// Immediately use the texture for material creation
-			material = new THREE.MeshPhongMaterial({
-				color: 0xEB6D35,
-				specular: 0xEB6D35,
-				shininess: 15,
-				flatShading: THREE.FlatShading,
-				side: THREE.DoubleSide,
-				transparent: true,
-				opacity: .8
-			});
-
-
-			//HemisphereLight
-			var light1 = new THREE.DirectionalLight(0xffffff);
-			light1.position.set(-5, 10, 10);
-			var light2 = new THREE.PointLight(0xffffff, .7, 0);
-			light2.position.set(5, 5, -5);
-
-			scene.add(light1, light2);
-
-			//put the target object inside a parent object so the manipulation is easier
-			parent = new THREE.Object3D();
-
-			
-			addObject();
-
-			parent.position.set(-radius, height / 2, 0);
-			parent.rotation.y = Math.PI;
-			scene.add(parent);
-
-
-			renderer.render(scene, camera);
-		}
-
-		
-		
-
-
-		function addObject() {
-			var geo = new THREE.Geometry();
-			segLength = Math.PI * 2 * radius / segments;
-			geo.vertices.push(new THREE.Vector3(0, height / 2, 0));
-			geo.vertices.push(new THREE.Vector3(0, -height / 2, 0));
-			for (var i = 0; i < Math.floor(segments / 2); i++) {
-				geo.vertices.push(new THREE.Vector3(0, height / 2, segLength * i));
-				geo.vertices.push(new THREE.Vector3(0, -height / 2, segLength * i));
-				geo.vertices.push(new THREE.Vector3(0, height / 2, -segLength * i));
-				geo.vertices.push(new THREE.Vector3(0, -height / 2, -segLength * i));
 			}
-			geo.faces.push(new THREE.Face3(0, 1, 2));
-			geo.faces.push(new THREE.Face3(1, 2, 3));
-			geo.faces.push(new THREE.Face3(0, 1, 4));
-			geo.faces.push(new THREE.Face3(1, 4, 5));
-			for (var i = 1; i < Math.floor(segments / 2); i++) {
-				geo.faces.push(new THREE.Face3(2 + (i - 1) * 4, 3 + (i - 1) * 4, 6 + (i - 1) * 4));
-				geo.faces.push(new THREE.Face3(3 + (i - 1) * 4, 6 + (i - 1) * 4, 7 + (i - 1) * 4));
-				geo.faces.push(new THREE.Face3(4 + (i - 1) * 4, 5 + (i - 1) * 4, 8 + (i - 1) * 4));
-				geo.faces.push(new THREE.Face3(5 + (i - 1) * 4, 8 + (i - 1) * 4, 9 + (i - 1) * 4));
-			}
-			targetObj = new THREE.Mesh(geo, material);
-
-			parent.add( targetObj );
-		}
 
 
-	
-		function render() {
-			
-			requestAnimationFrame( render );
-			
-			
-			//upodate object
-			targetObj.geometry.verticesNeedUpdate = true;
-			
 
-			//update camera and controls
-			controls.update();
-			
-			
-			renderer.render( scene, camera );
-			
-		}
-		
-		
-		
-		$( '#3D-object-button1' ).on( 'click', function( e ) {
-			e.preventDefault();
 
-			var theta = 55,
-				x     = camera.position.x,
-				z     = camera.position.z,
-				moveX = x * Math.cos( theta ) - z * Math.sin( theta ),
-				moveZ = z * Math.cos( theta ) + x * Math.sin( theta );	
 
-			TweenMax.to( camera.position, 1.5, {
-				x: moveX,
-				z: moveZ,
-				ease: Power0.easeNone,
-			    onUpdate: function(){
-					
-
+			function addObject() {
+				var geo = new THREE.Geometry();
+				segLength = Math.PI * 2 * radius / segments;
+				geo.vertices.push(new THREE.Vector3(0, height / 2, 0));
+				geo.vertices.push(new THREE.Vector3(0, -height / 2, 0));
+				for (var i = 0; i < Math.floor(segments / 2); i++) {
+					geo.vertices.push(new THREE.Vector3(0, height / 2, segLength * i));
+					geo.vertices.push(new THREE.Vector3(0, -height / 2, segLength * i));
+					geo.vertices.push(new THREE.Vector3(0, height / 2, -segLength * i));
+					geo.vertices.push(new THREE.Vector3(0, -height / 2, -segLength * i));
 				}
+				geo.faces.push(new THREE.Face3(0, 1, 2));
+				geo.faces.push(new THREE.Face3(1, 2, 3));
+				geo.faces.push(new THREE.Face3(0, 1, 4));
+				geo.faces.push(new THREE.Face3(1, 4, 5));
+				for (var i = 1; i < Math.floor(segments / 2); i++) {
+					geo.faces.push(new THREE.Face3(2 + (i - 1) * 4, 3 + (i - 1) * 4, 6 + (i - 1) * 4));
+					geo.faces.push(new THREE.Face3(3 + (i - 1) * 4, 6 + (i - 1) * 4, 7 + (i - 1) * 4));
+					geo.faces.push(new THREE.Face3(4 + (i - 1) * 4, 5 + (i - 1) * 4, 8 + (i - 1) * 4));
+					geo.faces.push(new THREE.Face3(5 + (i - 1) * 4, 8 + (i - 1) * 4, 9 + (i - 1) * 4));
+				}
+				targetObj = new THREE.Mesh(geo, material);
 
-			});
+				parent.add( targetObj );
+			}
 
-		});
-		
-		$( '#3D-object-button2' ).on( 'click', function( e ) {
-			e.preventDefault();
 
-			//1. tween the first segment of each side
-			var w     = targetObj.geometry.vertices;
-		
-			w[2].x = w[3].x = w[4].x = w[5].x = -Math.sin( 0 ) * segLength;
-			w[2].z = w[3].z = Math.cos( 0 ) * segLength;
-			w[4].z = w[5].z = -Math.cos( 0 ) * segLength;
 
-			//2. rest of the vertex can now refer to the fourth previous vertex, their reference in the algorithm
-			for (var i = 6; i < w.length; i++) {
-				
-				//which segment from the origin the vertex belongs to
-				var vIndex   = i,
-					segIndex = Math.floor((vIndex + 2) / 4),
-					negate   = (vIndex / 4 === Math.floor(vIndex / 4) || (vIndex - 1) / 4 === Math.floor((vIndex - 1) / 4)) ? -1 : 1;
+			function render() {
 
-				
-				var tx = w[vIndex - 4].x - Math.sin( vIndex * (negate * (2 * segIndex - 1))) * segLength * negate;
-				var tz = w[vIndex - 4].z + Math.cos( vIndex * (negate * (2 * segIndex - 1))) * segLength * negate;
-				
-				
-				TweenMax.to( w[vIndex], 1.5, {
-					x: tx,
-					z: tz,
+				requestAnimationFrame( render );
+
+
+				//upodate object
+				targetObj.geometry.verticesNeedUpdate = true;
+
+
+				//update camera and controls
+				controls.update();
+
+
+				renderer.render( scene, camera );
+
+			}
+
+
+
+			$( '#3D-object-button1' ).on( 'click', function( e ) {
+				e.preventDefault();
+
+				var theta = 55,
+					x     = camera.position.x,
+					z     = camera.position.z,
+					moveX = x * Math.cos( theta ) - z * Math.sin( theta ),
+					moveZ = z * Math.cos( theta ) + x * Math.sin( theta );	
+
+				TweenMax.to( camera.position, 1.5, {
+					x: moveX,
+					z: moveZ,
 					ease: Power0.easeNone,
 					onUpdate: function(){
 
 
 					}
+
 				});
-
-			}
-
-			
-
-		});
-		
-		$( '#3D-object-button3' ).on( 'click', function( e ) {
-			e.preventDefault();
-
-			var scaleTo = Math.floor(Math.random() * Math.floor( 3 ) );
-			
-			TweenMax.to( targetObj.scale, 1.5, {
-				x: scaleTo,
-				y: scaleTo,
-				z: scaleTo,
-				ease: Power0.easeNone,
-			    onUpdate: function(){
-					
-				}
 
 			});
 
-		});
-			
-	
+			$( '#3D-object-button2' ).on( 'click', function( e ) {
+				e.preventDefault();
+
+				//1. tween the first segment of each side
+				var w     = targetObj.geometry.vertices;
+
+				w[2].x = w[3].x = w[4].x = w[5].x = -Math.sin( 0 ) * segLength;
+				w[2].z = w[3].z = Math.cos( 0 ) * segLength;
+				w[4].z = w[5].z = -Math.cos( 0 ) * segLength;
+
+				//2. rest of the vertex can now refer to the fourth previous vertex, their reference in the algorithm
+				for (var i = 6; i < w.length; i++) {
+
+					//which segment from the origin the vertex belongs to
+					var vIndex   = i,
+						segIndex = Math.floor((vIndex + 2) / 4),
+						negate   = (vIndex / 4 === Math.floor(vIndex / 4) || (vIndex - 1) / 4 === Math.floor((vIndex - 1) / 4)) ? -1 : 1;
+
+
+					var tx = w[vIndex - 4].x - Math.sin( vIndex * (negate * (2 * segIndex - 1))) * segLength * negate;
+					var tz = w[vIndex - 4].z + Math.cos( vIndex * (negate * (2 * segIndex - 1))) * segLength * negate;
+
+
+					TweenMax.to( w[vIndex], 1.5, {
+						x: tx,
+						z: tz,
+						ease: Power0.easeNone,
+						onUpdate: function(){
+
+
+						}
+					});
+
+				}
+
+
+
+			});
+
+			$( '#3D-object-button3' ).on( 'click', function( e ) {
+				e.preventDefault();
+
+				var scaleTo = Math.floor(Math.random() * Math.floor( 3 ) );
+
+				TweenMax.to( targetObj.scale, 1.5, {
+					x: scaleTo,
+					y: scaleTo,
+					z: scaleTo,
+					ease: Power0.easeNone,
+					onUpdate: function(){
+
+					}
+
+				});
+
+			});
+
+			// 
+			//-------------------------------------	
+			return {
+				init      : init,
+				render    : render,
+				getScene  : function () { return scene; },
+				getCamera : function () { return camera; } 
+			};
+
+
+		}();
+
+		MainStage.init();
+		MainStage.render();
+		
 		
 		
     };
@@ -33355,323 +33708,341 @@ APP = ( function ( APP, $, window, document ) {
 		//Prevent this module from loading in other pages
 		if ( $( '#3D-mouseinteraction-three-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
 		
-		
-		var $window                   = $( window ),
-			windowWidth               = window.innerWidth,
-			windowHeight              = window.innerHeight,
-			rendererCanvasID          = '3D-mouseinteraction-three-canvas';
-		
-	
+		var MainStage = function() {
 
-		
-		// Generate one plane geometries mesh to scene
-		//-------------------------------------	
-		var camera,
-			controls,
-			scene,
-			light,
-			renderer,
-			displacementSprite,
-			radius       = 100,
-			theta        = 0,
-			clickEnable   = false;
-		
-		
-		var mouseVector = new THREE.Vector2(), 
-			raycaster,
-			intersects,
-			INTERSECTED,
-			nucleus,
-			atoms = [];
-		
-		
-		init();
-		render();
-
-		function init() {
-			//camera
-			camera = new THREE.PerspectiveCamera( 75, windowWidth / windowHeight, 1, 10000 );
-			camera.position.set(0, 0, 1300);
-			
-
-			//controls
-			controls = new THREE.OrbitControls( camera );
-			controls.autoRotate = false;
-			controls.autoRotateSpeed = 0.5;
-			controls.rotateSpeed = 0.5;
-			controls.zoomSpeed = 1.2;
-			controls.panSpeed = 0.8;
-			controls.enableZoom = true;
-			controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-			controls.dampingFactor = 0.25;
-			controls.screenSpacePanning = false;
-			controls.minDistance = 100;
-			controls.maxDistance = 500;
-			controls.maxPolarAngle = Math.PI / 2;
-			
-			controls.target.set( 30, 167, 81 );
-			controls.update();			
-
-			
-
-			//Scene
-			scene = new THREE.Scene();
-
-			//HemisphereLight
-			scene.add( new THREE.AmbientLight( 0x555555 ) );
-
-			light = new THREE.SpotLight( 0xffffff, 1.5 );
-			light.position.set( 0, 500, 2000 );
-			scene.add( light );
-			
-			
-
-			//WebGL Renderer	
-			renderer = new THREE.WebGLRenderer( { 
-									canvas   : document.getElementById( rendererCanvasID ), //canvas
-									alpha    : true, 
-									antialias: true 
-								} );
-			renderer.setSize( windowWidth, windowHeight );
-
-			
-			// Immediately use the texture for material creation
-			generateGeometry( 'poly', 15 );
+			var $window                   = $( window ),
+				windowWidth               = window.innerWidth,
+				windowHeight              = window.innerHeight,
+				rendererCanvasID          = '3D-mouseinteraction-three-canvas';
 
 
-			// Fires when the window changes
-			window.addEventListener( 'resize', onWindowResize, false );
-			
-			
-			// When the mouse moves, call the given function
-			raycaster = new THREE.Raycaster();
-			document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-			document.getElementById( rendererCanvasID ).addEventListener( 'click', onDocumentMouseDown, false );
-			document.addEventListener( 'mouseup', onDocumentMouseUp, false );
-		
-			
-			
-		}
-		
 
-		function render() {
-			requestAnimationFrame( render );
-			
-            theta += 0.1;
-			
-			
-			//To set a background color.
-			renderer.setClearColor( 0x000000 );	
-			
-			
-			//Mouse interactions
-			raycaster.setFromCamera( mouseVector, camera );
-			intersects = raycaster.intersectObjects( atoms );
-			//intersects = raycaster.intersectObjects( scene.children );
-			if ( intersects.length > 0 ) {
 
-				if ( INTERSECTED != intersects[ 0 ].object ) {
+
+
+			// Generate one plane geometries mesh to scene
+			//-------------------------------------	
+			var camera,
+				controls,
+				scene,
+				light,
+				renderer,
+				displacementSprite,
+				radius       = 100,
+				theta        = 0,
+				clickEnable   = false;
+
+
+			var mouseVector = new THREE.Vector2(), 
+				raycaster,
+				intersects,
+				INTERSECTED,
+				nucleus,
+				atoms = [];
+
+
+			function init() {
+				//camera
+				camera = new THREE.PerspectiveCamera( 75, windowWidth / windowHeight, 1, 10000 );
+				camera.position.set(0, 0, 1300);
+
+
+				//controls
+				controls = new THREE.OrbitControls( camera );
+				controls.autoRotate = false;
+				controls.autoRotateSpeed = 0.5;
+				controls.rotateSpeed = 0.5;
+				controls.zoomSpeed = 1.2;
+				controls.panSpeed = 0.8;
+				controls.enableZoom = true;
+				controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+				controls.dampingFactor = 0.25;
+				controls.screenSpacePanning = false;
+				controls.minDistance = 100;
+				controls.maxDistance = 500;
+				controls.maxPolarAngle = Math.PI / 2;
+
+				controls.target.set( 30, 167, 81 );
+				controls.update();			
+
+
+
+				//Scene
+				scene = new THREE.Scene();
+
+				//HemisphereLight
+				scene.add( new THREE.AmbientLight( 0x555555 ) );
+
+				light = new THREE.SpotLight( 0xffffff, 1.5 );
+				light.position.set( 0, 500, 2000 );
+				scene.add( light );
+
+
+
+				//WebGL Renderer	
+				renderer = new THREE.WebGLRenderer( { 
+										canvas   : document.getElementById( rendererCanvasID ), //canvas
+										alpha    : true, 
+										antialias: true 
+									} );
+				renderer.setSize( windowWidth, windowHeight );
+
+
+				// Immediately use the texture for material creation
+				generateGeometry( 'poly', 15 );
+
+
+				// Fires when the window changes
+				window.addEventListener( 'resize', onWindowResize, false );
+
+
+				// When the mouse moves, call the given function
+				raycaster = new THREE.Raycaster();
+				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+				document.getElementById( rendererCanvasID ).addEventListener( 'click', onDocumentMouseDown, false );
+				document.addEventListener( 'mouseup', onDocumentMouseUp, false );
+
+
+
+			}
+
+
+			function render() {
+				requestAnimationFrame( render );
+
+				theta += 0.1;
+
+
+				//To set a background color.
+				renderer.setClearColor( 0x000000 );	
+
+
+				//Mouse interactions
+				raycaster.setFromCamera( mouseVector, camera );
+				intersects = raycaster.intersectObjects( atoms );
+				//intersects = raycaster.intersectObjects( scene.children );
+				if ( intersects.length > 0 ) {
+
+					if ( INTERSECTED != intersects[ 0 ].object ) {
+
+						// restore previous intersection object (if it exists) to its original color
+						if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+
+						INTERSECTED = intersects[ 0 ].object;
+						INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
+						INTERSECTED.material.emissive.setHex( 0xff0000 );
+
+					}
+
+				} else {
 
 					// restore previous intersection object (if it exists) to its original color
 					if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
 
-					INTERSECTED = intersects[ 0 ].object;
-					INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
-					INTERSECTED.material.emissive.setHex( 0xff0000 );
+					//by setting current intersection object to "nothing"
+					INTERSECTED = null;
 
 				}
 
-			} else {
+				//update camera and controls
+				controls.update();
 
-				// restore previous intersection object (if it exists) to its original color
-				if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+				renderer.render( scene, camera );
 
-				//by setting current intersection object to "nothing"
-				INTERSECTED = null;
+
 
 			}
 
-			//update camera and controls
-			controls.update();
-			
-			renderer.render( scene, camera );
-			
-			
-			
-		}
+
+			function onWindowResize() {
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+			}
 
 
-		function onWindowResize() {
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-			renderer.setSize( window.innerWidth, window.innerHeight );
-		}
-
-		
-		function onDocumentMouseMove( event ) {
-			event.preventDefault();
-			mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-			mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-		}
-		
-
-		function onDocumentMouseDown( event ) {
-			event.preventDefault();
-			mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-			mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-
-			clickEnable = true;
-			
-			//Mouse interactions
-			raycaster.setFromCamera( mouseVector, camera );
-			intersects = raycaster.intersectObjects( atoms );
-			//intersects = raycaster.intersectObjects( scene.children );
-			if ( intersects.length > 0 && intersects[0].object.name.indexOf( 'nucleus' ) >= 0 ) {
-				
-				console.log( intersects[0].object.name );
-				
-				//---Change object size
-//				if ( typeof intersects[ 0 ] != typeof undefined ) {
-//					var obj = intersects[ 0 ].object;
-//
-//
-//					TweenMax.to( obj.scale, 1, {
-//						x: '+=' + ( 200 - obj.scale.x ) * 0.05,
-//						y: '+=' + ( 200 - obj.scale.y ) * 0.05,
-//						z: '+=' + ( 200 - obj.scale.z ) * 0.05
-//					});	
-//
-//
-//					obj.updateMatrix();	
-//	
-//				}
-				
+			function onDocumentMouseMove( event ) {
+				event.preventDefault();
+				mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+				mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+			}
 
 
-				//---Change object position
-				var targetAtomPos = intersects[0].object.position;
+			function onDocumentMouseDown( event ) {
+				event.preventDefault();
+				mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+				mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 
-				console.log(targetAtomPos);
-				// targetAtomPos.tween.pause();
-				var destinationPos = targetAtomPos.clone();
-				TweenMax.to(controls.target, 2,{ x:destinationPos.x, y:destinationPos.y, z:destinationPos.z});
-				TweenMax.to(camera.position, 2,{ x:destinationPos.x, y:destinationPos.y, z:destinationPos.z+100,
-					onUpdate:function(){
-						camera.up.set(0,1,0);
-						camera.updateProjectionMatrix();
+				clickEnable = true;
+
+				//Mouse interactions
+				raycaster.setFromCamera( mouseVector, camera );
+				intersects = raycaster.intersectObjects( atoms );
+				//intersects = raycaster.intersectObjects( scene.children );
+				if ( intersects.length > 0 && intersects[0].object.name.indexOf( 'nucleus' ) >= 0 ) {
+
+					console.log( intersects[0].object.name );
+
+					//---Change object size
+	//				if ( typeof intersects[ 0 ] != typeof undefined ) {
+	//					var obj = intersects[ 0 ].object;
+	//
+	//
+	//					TweenMax.to( obj.scale, 1, {
+	//						x: '+=' + ( 200 - obj.scale.x ) * 0.05,
+	//						y: '+=' + ( 200 - obj.scale.y ) * 0.05,
+	//						z: '+=' + ( 200 - obj.scale.z ) * 0.05
+	//					});	
+	//
+	//
+	//					obj.updateMatrix();	
+	//	
+	//				}
+
+
+
+					//---Change object position
+					var targetAtomPos = intersects[0].object.position;
+
+					console.log(targetAtomPos);
+					// targetAtomPos.tween.pause();
+					var destinationPos = targetAtomPos.clone();
+					TweenMax.to(controls.target, 2,{ x:destinationPos.x, y:destinationPos.y, z:destinationPos.z});
+					TweenMax.to(camera.position, 2,{ x:destinationPos.x, y:destinationPos.y, z:destinationPos.z+100,
+						onUpdate:function(){
+							camera.up.set(0,1,0);
+							camera.updateProjectionMatrix();
+						}
+					});
+
+				} else {
+
+					 //Change object position
+					 TweenMax.to(controls.target, 2,{ x:0, y:0, z:0,
+						onComplete:function(){
+							TweenMax.resumeAll();
+						}
+					 });
+				}	
+
+
+
+			}
+
+
+			function onDocumentMouseUp( event ) {
+				event.preventDefault();
+				mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+				mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
+				theta = 0;
+				clickEnable = false;
+
+			}
+
+
+
+
+			/*
+			 * Batch generation of geometry
+			 *
+			 * @param  {String} objectType     - String of geometry type identifier.
+			 * @param  {Number} numObjects       - The total number of generated objects.
+			 * @return {Void}
+			 */
+			function generateGeometry( objectType, numObjects ) {
+
+
+				//set color
+				var applyVertexColors = function( g, c ) {
+					g.faces.forEach( function( f ) {
+						var n = ( f instanceof THREE.Face3 ) ? 3 : 4;
+						for ( var j = 0; j < n; j ++ ) {
+							f.vertexColors[ j ] = c;
+						}
+					} );
+				};
+
+				for ( var i = 0; i < numObjects; i ++ ) {
+
+
+					var geometry;
+					if ( objectType == "cube" ) {
+						geometry = new THREE.BoxGeometry( 1, 1, 1 );
+					} else if ( objectType == "sphere" ) {
+						geometry = new THREE.IcosahedronGeometry( 1, 1 );
+
+					} else if ( objectType == "poly" ) {
+						geometry = new THREE.CylinderGeometry( 3, 6, 3, 5, 1 );
 					}
-				});
 
-			} else {
-				
-				 //Change object position
-				 TweenMax.to(controls.target, 2,{ x:0, y:0, z:0,
-				 	onComplete:function(){
-				 		TweenMax.resumeAll();
-				 	}
-				 });
-			}	
-			
 
-			
-		}
-		
-		
-		function onDocumentMouseUp( event ) {
-			event.preventDefault();
-			mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-			mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-			
-			theta = 0;
-			clickEnable = false;
-			
-		}
-			
-		
-		
-		
-		/*
-		 * Batch generation of geometry
-		 *
-		 * @param  {String} objectType     - String of geometry type identifier.
-		 * @param  {Number} numObjects       - The total number of generated objects.
-		 * @return {Void}
-		 */
-		function generateGeometry( objectType, numObjects ) {
+					var position = new THREE.Vector3();
 
-			
-			//set color
-			var applyVertexColors = function( g, c ) {
-				g.faces.forEach( function( f ) {
-					var n = ( f instanceof THREE.Face3 ) ? 3 : 4;
-					for ( var j = 0; j < n; j ++ ) {
-						f.vertexColors[ j ] = c;
-					}
-				} );
+					position.x = Math.random() * 500;
+					position.y = Math.random() * 400;
+					position.z = Math.random() * 300;
+
+					var rotation = new THREE.Euler();
+
+					rotation.x = Math.random() * 2 * Math.PI;
+					rotation.y = Math.random() * 2 * Math.PI;
+					rotation.z = Math.random() * 2 * Math.PI;
+
+
+					var scale = new THREE.Vector3();
+
+
+					// give the geom's vertices a random color, to be displayed
+					var color = new THREE.Color();
+
+					color.setRGB( Math.random(), Math.random(), Math.random() );
+					applyVertexColors( geometry, color );
+
+
+					// Immediately use the texture for material creation
+					var defaultMaterial     = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
+
+					displacementSprite  = new THREE.Mesh( geometry, defaultMaterial );
+					displacementSprite.name = 'nucleus-' + i;
+					displacementSprite.position.x = Math.random() * 800 - 400;
+					displacementSprite.position.y = Math.random() * 800 - 400;
+					displacementSprite.position.z = Math.random() * 800 - 400;
+					displacementSprite.rotation.x = Math.random() * 2 * Math.PI;
+					displacementSprite.rotation.y = Math.random() * 2 * Math.PI;
+					displacementSprite.rotation.z = Math.random() * 2 * Math.PI;
+					displacementSprite.scale.x = Math.random() + 5;
+					displacementSprite.scale.y = Math.random() + 5;
+					displacementSprite.scale.z = Math.random() + 5;
+
+
+					scene.add( displacementSprite );
+					atoms.push( displacementSprite );
+
+
+				}
+
+
+			}
+
+
+			// 
+			//-------------------------------------	
+			return {
+				init      : init,
+				render    : render,
+				getScene  : function () { return scene; },
+				getCamera : function () { return camera; } 
 			};
 
-			for ( var i = 0; i < numObjects; i ++ ) {
 
-				
-				var geometry;
-				if ( objectType == "cube" ) {
-					geometry = new THREE.BoxGeometry( 1, 1, 1 );
-				} else if ( objectType == "sphere" ) {
-					geometry = new THREE.IcosahedronGeometry( 1, 1 );
+		}();
 
-				} else if ( objectType == "poly" ) {
-					geometry = new THREE.CylinderGeometry( 3, 6, 3, 5, 1 );
-				}
-
-				
-				var position = new THREE.Vector3();
-
-				position.x = Math.random() * 500;
-				position.y = Math.random() * 400;
-				position.z = Math.random() * 300;
-
-				var rotation = new THREE.Euler();
-
-				rotation.x = Math.random() * 2 * Math.PI;
-				rotation.y = Math.random() * 2 * Math.PI;
-				rotation.z = Math.random() * 2 * Math.PI;
-
-				
-				var scale = new THREE.Vector3();
-
-				
-				// give the geom's vertices a random color, to be displayed
-				var color = new THREE.Color();
-				
-				color.setRGB( Math.random(), Math.random(), Math.random() );
-				applyVertexColors( geometry, color );
-
-				
-				// Immediately use the texture for material creation
-				var defaultMaterial     = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
-
-				displacementSprite  = new THREE.Mesh( geometry, defaultMaterial );
-				displacementSprite.name = 'nucleus-' + i;
-				displacementSprite.position.x = Math.random() * 800 - 400;
-				displacementSprite.position.y = Math.random() * 800 - 400;
-				displacementSprite.position.z = Math.random() * 800 - 400;
-				displacementSprite.rotation.x = Math.random() * 2 * Math.PI;
-				displacementSprite.rotation.y = Math.random() * 2 * Math.PI;
-				displacementSprite.rotation.z = Math.random() * 2 * Math.PI;
-				displacementSprite.scale.x = Math.random() + 5;
-				displacementSprite.scale.y = Math.random() + 5;
-				displacementSprite.scale.z = Math.random() + 5;
-				
-				
-				scene.add( displacementSprite );
-				atoms.push( displacementSprite );
-
-
-			}
-
-
-		}
+		MainStage.init();
+		MainStage.render();
 		
+		
+
     };
 
     APP.components.documentReady.push( APP._3D_MOUSE_INTERACTION.documentReady );
@@ -33709,360 +34080,377 @@ APP = ( function ( APP, $, window, document ) {
 		//Prevent this module from loading in other pages
 		if ( $( '#3D-mouseinteraction2-three-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
 		
-		
-		var $window                   = $( window ),
-			windowWidth               = window.innerWidth,
-			windowHeight              = window.innerHeight,
-			rendererCanvasID          = '3D-mouseinteraction2-three-canvas';
-		
+
 	
-		
-		// Generate one plane geometries mesh to scene
-		//-------------------------------------	
-		var camera,
-			scene,
-			light,
-			renderer,
-			displacementSprite,
-			theta         = 0,
-			clickEnable   = false;
-		
+		var MainStage = function() {
 
-		// controls
-		var scroller = new CameraScroller({direction: "y"});
+			var $window                   = $( window ),
+				windowWidth               = window.innerWidth,
+				windowHeight              = window.innerHeight,
+				rendererCanvasID          = '3D-mouseinteraction2-three-canvas';
 
-		
-		// mouse
-		var mouseVector = new THREE.Vector2(), 
-			raycaster,
-			intersects,
-			INTERSECTED,
-			nucleus,
-			atoms = [];
-		
-		
-		
-		
-		init();
-		render();
 
-		function init() {
-			//camera
-			camera = new THREE.PerspectiveCamera( 70, windowWidth / windowHeight, 1, 50000 );
-			camera.position.set( 0, 0, 20000 );
 
-			
-			//Scene
-			scene = new THREE.Scene();
+			// Generate one plane geometries mesh to scene
+			//-------------------------------------	
+			var camera,
+				scene,
+				light,
+				renderer,
+				displacementSprite,
+				theta         = 0,
+				clickEnable   = false;
 
-			//HemisphereLight
-			scene.add( new THREE.AmbientLight( 0x555555 ) );
 
-			light = new THREE.SpotLight( 0xffffff, 1.5 );
-			light.position.set( 0, 500, 2000 );
-			scene.add( light );
-			
-			
-			
-			
+			// controls
+			var scroller = new CameraScroller({direction: "y"});
 
-			//WebGL Renderer		
-			renderer = new THREE.WebGLRenderer( { 
-									canvas   : document.getElementById( rendererCanvasID ), //canvas
-									alpha    : true, 
-									antialias: true 
-								} );
-			renderer.setSize( windowWidth, windowHeight );
-			
-			
-			scroller.init( renderer.domElement );
 
-			// Immediately use the texture for material creation
-			generateGeometry( 500 );
-			
+			// mouse
+			var mouseVector = new THREE.Vector2(), 
+				raycaster,
+				intersects,
+				INTERSECTED,
+				nucleus,
+				atoms = [];
 
-			// Fires when the window changes
-			window.addEventListener( 'resize', onWindowResize, false );
-			
-			
-			// When the mouse moves, call the given function
-			raycaster = new THREE.Raycaster();
-			document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-			document.getElementById( rendererCanvasID ).addEventListener( 'click', onDocumentMouseDown, false );
-			document.addEventListener( 'mouseup', onDocumentMouseUp, false );
-		
-			
-			
-		}
 
-		function render() {
-			requestAnimationFrame( render );
-		
-			
 
-			//To set a background color.
-			renderer.setClearColor( 0x000000 );	
-			
-			//update controls
-			camera.position.y = scroller.getScrollPosY()*10000;
-			
-			//Mouse interactions
-			raycaster.setFromCamera( mouseVector, camera );
-			intersects = raycaster.intersectObjects( atoms );
-			//intersects = raycaster.intersectObjects( scene.children );
-			if ( intersects.length > 0 ) {
+			function init() {
+				//camera
+				camera = new THREE.PerspectiveCamera( 70, windowWidth / windowHeight, 1, 50000 );
+				camera.position.set( 0, 0, 20000 );
 
-			
-				if ( INTERSECTED != intersects[ 0 ].object ) {
+
+				//Scene
+				scene = new THREE.Scene();
+
+				//HemisphereLight
+				scene.add( new THREE.AmbientLight( 0x555555 ) );
+
+				light = new THREE.SpotLight( 0xffffff, 1.5 );
+				light.position.set( 0, 500, 2000 );
+				scene.add( light );
+
+
+
+
+
+				//WebGL Renderer		
+				renderer = new THREE.WebGLRenderer( { 
+										canvas   : document.getElementById( rendererCanvasID ), //canvas
+										alpha    : true, 
+										antialias: true 
+									} );
+				renderer.setSize( windowWidth, windowHeight );
+
+
+				scroller.init( renderer.domElement );
+
+				// Immediately use the texture for material creation
+				generateGeometry( 500 );
+
+
+				// Fires when the window changes
+				window.addEventListener( 'resize', onWindowResize, false );
+
+
+				// When the mouse moves, call the given function
+				raycaster = new THREE.Raycaster();
+				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+				document.getElementById( rendererCanvasID ).addEventListener( 'click', onDocumentMouseDown, false );
+				document.addEventListener( 'mouseup', onDocumentMouseUp, false );
+
+
+
+			}
+
+			function render() {
+				requestAnimationFrame( render );
+
+
+
+				//To set a background color.
+				renderer.setClearColor( 0x000000 );	
+
+				//update controls
+				camera.position.y = scroller.getScrollPosY()*10000;
+
+				//Mouse interactions
+				raycaster.setFromCamera( mouseVector, camera );
+				intersects = raycaster.intersectObjects( atoms );
+				//intersects = raycaster.intersectObjects( scene.children );
+				if ( intersects.length > 0 ) {
+
+
+					if ( INTERSECTED != intersects[ 0 ].object ) {
+
+						// restore previous intersection object (if it exists) to its original color
+						if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+
+						INTERSECTED = intersects[ 0 ].object;
+						INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
+						INTERSECTED.material.emissive.setHex( 0xff0000 );
+
+					}
+
+				} else {
 
 					// restore previous intersection object (if it exists) to its original color
 					if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
 
-					INTERSECTED = intersects[ 0 ].object;
-					INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
-					INTERSECTED.material.emissive.setHex( 0xff0000 );
+					//by setting current intersection object to "nothing"
+					INTERSECTED = null;
 
 				}
 
-			} else {
-
-				// restore previous intersection object (if it exists) to its original color
-				if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
-
-				//by setting current intersection object to "nothing"
-				INTERSECTED = null;
-
-			}
-			
-			renderer.render( scene, camera );
-			
-			
-
-			
-		}
+				renderer.render( scene, camera );
 
 
-		function onWindowResize() {
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-			renderer.setSize( window.innerWidth, window.innerHeight );
-		}
-
-		
-		function onDocumentMouseMove( event ) {
-			event.preventDefault();
-			mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-			mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-		}
-		
-
-		function onDocumentMouseDown( event ) {
-			event.preventDefault();
-			mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-			mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-
-			clickEnable = true;
-	
-			//Mouse interactions
-			raycaster.setFromCamera( mouseVector, camera );
-			intersects = raycaster.intersectObjects( atoms );
-			//intersects = raycaster.intersectObjects( scene.children );
-			
-			
-			
-			
-			if ( intersects.length > 0 && intersects[0].object.name.indexOf( 'nucleus' ) >= 0 ) {
-	
-				var targetAtomPos = intersects[0].object.position;
-
-				// targetAtomPos.tween.pause();
-				var destinationPos = targetAtomPos.clone();
-		
-				// jump to new position
-				// y movement via scroller object
-				// x and z movement via TWEEN
-				scroller.targetPosition = intersects[0].object.position.y/10000;
-				var targetPos = { x: intersects[0].object.position.x, y:intersects[0].object.position.y, z:intersects[0].object.position.z+1100};
-			
-				TweenMax.to( targetPos, 2,{ x:destinationPos.x, y:destinationPos.y, z:destinationPos.z});
-				TweenMax.to( camera.position, 2,{ x:destinationPos.x, y:destinationPos.y, z:destinationPos.z+1000,
-					onUpdate:function(){
-						camera.up.set(0,1,0);
-						camera.updateProjectionMatrix();
-					}
-				});
-
-			} else {
-				
-				
-				//restore scroller position
-				scroller.targetPosition = 0;
-				
-				//restore camera position
-				TweenMax.to( camera.position, 2,{ x:0, y:0, z:20000,
-					onComplete:function(){
-						TweenMax.resumeAll();
-					}
-				});	
-
-			}	
-			
-
-			
-		}
-		
-		
-		function onDocumentMouseUp( event ) {
-			event.preventDefault();
-			mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-			mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-			
-			theta = 0;
-			clickEnable = false;
-			
-		}
-			
-		
-	
-		
-		/*
-		 * Batch generation of geometry
-		 *
-		 * @param  {Number} numObjects       - The total number of generated objects.
-		 * @return {Void}
-		 */
-		function generateGeometry( numObjects ) {
-
-			var geometry = new THREE.Geometry();
-
-			var applyVertexColors = function(g, c) {
-				g.faces.forEach(function(f) {
-					var n = (f instanceof THREE.Face3) ? 3 : 4;
-					for (var j = 0; j < n; j++) {
-						f.vertexColors[j] = c;
-					}
-				});
-			};
-			
-			for ( var i = 0; i < numObjects; i ++ ) {
-
-				var geom, 
-					color = new THREE.Color();
-				
-				
-				
-				var position = new THREE.Vector3();
-				position.x = -9000 + (i % 10) * 2000;
-				position.y = -9000 + Math.floor((i % 100) / 10) * 2000;
-				position.z = -1000 + Math.floor(i / 100) * 2000;
-
-				var rotation = new THREE.Euler();
-				rotation.x = 0;
-				rotation.y = 0;
-				rotation.z = 0;
-
-				var scale = new THREE.Vector3();
-				scale.x = 1200;
-				scale.y = 600;
-				scale.z = 200;
-
-				geom = new THREE.BoxGeometry( 1, 1, 1 );
-				color.setRGB( 0, 0, Math.random() + 0.1 );
-
-
-
-				// give the geom's vertices a random color, to be displayed
-				applyVertexColors( geom, color );
-
-				
-				// Immediately use the texture for material creation
-				var defaultMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
-
-				displacementSprite = new THREE.Mesh( geom, defaultMaterial );
-				scene.add( displacementSprite );
-
-				var object = new THREE.Mesh( geom );
-				displacementSprite.name = 'nucleus-' + i;
-				displacementSprite.position.copy( position );
-				displacementSprite.rotation.copy( rotation );
-				displacementSprite.scale.copy( scale );
-				displacementSprite.updateMatrix();
-				
-				scene.add( displacementSprite );
-				atoms.push( displacementSprite );
 
 
 			}
 
-		}
-		
-		
 
-		/*
-		 * CameraSroller
-		 * Scrolls the camera vertically (up/down) by mouse, scrollwhell and touch
-		 * including a velocity based animation
-		 */
-		function CameraScroller(options) {
-			this.targetPosition = 0;
-			this.targetPositionOnMouseDown = 0;
-			this.mouseY = 0;
-			this.mouseYOnMouseDown = 0;
-			this.scrollPosY = 0;
-			this.domElem = undefined;
-			this.init = function(domEl) {
-				this.domElem = domEl;
-				this.domElem.addEventListener('mousedown', this.onDocumentMouseDown, false);
-				this.domElem.addEventListener('touchstart', this.onDocumentTouchStart, false);
-				this.domElem.addEventListener('touchmove', this.onDocumentTouchMove, false);
-				this.domElem.addEventListener('DOMMouseScroll', this.onDocumentMousewheel, false);
-				this.domElem.addEventListener('mousewheel', this.onDocumentMousewheel, false);
-			};
-			this.onDocumentMouseDown = function(event) {
+			function onWindowResize() {
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+			}
+
+
+			function onDocumentMouseMove( event ) {
 				event.preventDefault();
-				this.domElem.addEventListener('mousemove', this.onDocumentMouseMove, false);
-				this.domElem.addEventListener('mouseup', this.onDocumentMouseUp, false);
-				this.domElem.addEventListener('mouseout', this.onDocumentMouseOut, false);
-				this.mouseYOnMouseDown = event.clientY;
-				this.targetPositionOnMouseDown = this.targetPosition;
-			}.bind(this);
-			this.onDocumentMouseMove = function(event) {
-				this.mouseY = event.clientY;
-				this.targetPosition = this.targetPositionOnMouseDown + (this.mouseY - this.mouseYOnMouseDown) * 0.02;
-			}.bind(this);
-			this.onDocumentMouseUp = function(event) {
-				this.domElem.removeEventListener('mousemove', this.onDocumentMouseMove, false);
-				this.domElem.removeEventListener('mouseup', this.onDocumentMouseUp, false);
-				this.domElem.removeEventListener('mouseout', this.onDocumentMouseOut, false);
-			}.bind(this);
-			this.onDocumentMouseOut = function(event) {
-				this.domElem.removeEventListener('mousemove', this.onDocumentMouseMove, false);
-				this.domElem.removeEventListener('mouseup', this.onDocumentMouseUp, false);
-				this.domElem.removeEventListener('mouseout', this.onDocumentMouseOut, false);
-			}.bind(this);
-			this.onDocumentTouchStart = function(event) {
-				if (event.touches.length == 1) {
-					event.preventDefault();
-					this.mouseYOnMouseDown = event.touches[0].pageY;
-					this.targetPositionOnMouseDown = this.targetPosition;
-				}
-			}.bind(this);
-			this.onDocumentTouchMove = function(event) {
-				if (event.touches.length == 1) {
-					event.preventDefault();
-					this.mouseY = event.touches[0].pageY;
-					this.targetPosition = this.targetPositionOnMouseDown + (this.mouseY - this.mouseYOnMouseDown) * 0.02;
-				}
-			}.bind(this);
-			this.onDocumentMousewheel = function(event) {
-				this.targetPosition = this.targetPosition + event.wheelDeltaY * 0.005;
-			}.bind(this);
-			this.getScrollPosY = function() {
-				this.scrollPosY = this.scrollPosY + (this.targetPosition - this.scrollPosY) * 0.05; // 0.05=long scroll delay, 0.15=short delay
-				return this.scrollPosY
-			}.bind(this);
+				mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+				mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+			}
 
-		}
+
+			function onDocumentMouseDown( event ) {
+				event.preventDefault();
+				mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+				mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
+				clickEnable = true;
+
+				//Mouse interactions
+				raycaster.setFromCamera( mouseVector, camera );
+				intersects = raycaster.intersectObjects( atoms );
+				//intersects = raycaster.intersectObjects( scene.children );
+
+
+
+
+				if ( intersects.length > 0 && intersects[0].object.name.indexOf( 'nucleus' ) >= 0 ) {
+
+					var targetAtomPos = intersects[0].object.position;
+
+					// targetAtomPos.tween.pause();
+					var destinationPos = targetAtomPos.clone();
+
+					// jump to new position
+					// y movement via scroller object
+					// x and z movement via TWEEN
+					scroller.targetPosition = intersects[0].object.position.y/10000;
+					var targetPos = { x: intersects[0].object.position.x, y:intersects[0].object.position.y, z:intersects[0].object.position.z+1100};
+
+					TweenMax.to( targetPos, 2,{ x:destinationPos.x, y:destinationPos.y, z:destinationPos.z});
+					TweenMax.to( camera.position, 2,{ x:destinationPos.x, y:destinationPos.y, z:destinationPos.z+1000,
+						onUpdate:function(){
+							camera.up.set(0,1,0);
+							camera.updateProjectionMatrix();
+						}
+					});
+
+				} else {
+
+
+					//restore scroller position
+					scroller.targetPosition = 0;
+
+					//restore camera position
+					TweenMax.to( camera.position, 2,{ x:0, y:0, z:20000,
+						onComplete:function(){
+							TweenMax.resumeAll();
+						}
+					});	
+
+				}	
+
+
+
+			}
+
+
+			function onDocumentMouseUp( event ) {
+				event.preventDefault();
+				mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+				mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
+				theta = 0;
+				clickEnable = false;
+
+			}
+
+
+
+
+			/*
+			 * Batch generation of geometry
+			 *
+			 * @param  {Number} numObjects       - The total number of generated objects.
+			 * @return {Void}
+			 */
+			function generateGeometry( numObjects ) {
+
+				var geometry = new THREE.Geometry();
+
+				var applyVertexColors = function(g, c) {
+					g.faces.forEach(function(f) {
+						var n = (f instanceof THREE.Face3) ? 3 : 4;
+						for (var j = 0; j < n; j++) {
+							f.vertexColors[j] = c;
+						}
+					});
+				};
+
+				for ( var i = 0; i < numObjects; i ++ ) {
+
+					var geom, 
+						color = new THREE.Color();
+
+
+
+					var position = new THREE.Vector3();
+					position.x = -9000 + (i % 10) * 2000;
+					position.y = -9000 + Math.floor((i % 100) / 10) * 2000;
+					position.z = -1000 + Math.floor(i / 100) * 2000;
+
+					var rotation = new THREE.Euler();
+					rotation.x = 0;
+					rotation.y = 0;
+					rotation.z = 0;
+
+					var scale = new THREE.Vector3();
+					scale.x = 1200;
+					scale.y = 600;
+					scale.z = 200;
+
+					geom = new THREE.BoxGeometry( 1, 1, 1 );
+					color.setRGB( 0, 0, Math.random() + 0.1 );
+
+
+
+					// give the geom's vertices a random color, to be displayed
+					applyVertexColors( geom, color );
+
+
+					// Immediately use the texture for material creation
+					var defaultMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
+
+					displacementSprite = new THREE.Mesh( geom, defaultMaterial );
+					scene.add( displacementSprite );
+
+					var object = new THREE.Mesh( geom );
+					displacementSprite.name = 'nucleus-' + i;
+					displacementSprite.position.copy( position );
+					displacementSprite.rotation.copy( rotation );
+					displacementSprite.scale.copy( scale );
+					displacementSprite.updateMatrix();
+
+					scene.add( displacementSprite );
+					atoms.push( displacementSprite );
+
+
+				}
+
+			}
+
+
+
+			/*
+			 * CameraSroller
+			 * Scrolls the camera vertically (up/down) by mouse, scrollwhell and touch
+			 * including a velocity based animation
+			 */
+			function CameraScroller(options) {
+				this.targetPosition = 0;
+				this.targetPositionOnMouseDown = 0;
+				this.mouseY = 0;
+				this.mouseYOnMouseDown = 0;
+				this.scrollPosY = 0;
+				this.domElem = undefined;
+				this.init = function(domEl) {
+					this.domElem = domEl;
+					this.domElem.addEventListener('mousedown', this.onDocumentMouseDown, false);
+					this.domElem.addEventListener('touchstart', this.onDocumentTouchStart, false);
+					this.domElem.addEventListener('touchmove', this.onDocumentTouchMove, false);
+					this.domElem.addEventListener('DOMMouseScroll', this.onDocumentMousewheel, false);
+					this.domElem.addEventListener('mousewheel', this.onDocumentMousewheel, false);
+				};
+				this.onDocumentMouseDown = function(event) {
+					event.preventDefault();
+					this.domElem.addEventListener('mousemove', this.onDocumentMouseMove, false);
+					this.domElem.addEventListener('mouseup', this.onDocumentMouseUp, false);
+					this.domElem.addEventListener('mouseout', this.onDocumentMouseOut, false);
+					this.mouseYOnMouseDown = event.clientY;
+					this.targetPositionOnMouseDown = this.targetPosition;
+				}.bind(this);
+				this.onDocumentMouseMove = function(event) {
+					this.mouseY = event.clientY;
+					this.targetPosition = this.targetPositionOnMouseDown + (this.mouseY - this.mouseYOnMouseDown) * 0.02;
+				}.bind(this);
+				this.onDocumentMouseUp = function(event) {
+					this.domElem.removeEventListener('mousemove', this.onDocumentMouseMove, false);
+					this.domElem.removeEventListener('mouseup', this.onDocumentMouseUp, false);
+					this.domElem.removeEventListener('mouseout', this.onDocumentMouseOut, false);
+				}.bind(this);
+				this.onDocumentMouseOut = function(event) {
+					this.domElem.removeEventListener('mousemove', this.onDocumentMouseMove, false);
+					this.domElem.removeEventListener('mouseup', this.onDocumentMouseUp, false);
+					this.domElem.removeEventListener('mouseout', this.onDocumentMouseOut, false);
+				}.bind(this);
+				this.onDocumentTouchStart = function(event) {
+					if (event.touches.length == 1) {
+						event.preventDefault();
+						this.mouseYOnMouseDown = event.touches[0].pageY;
+						this.targetPositionOnMouseDown = this.targetPosition;
+					}
+				}.bind(this);
+				this.onDocumentTouchMove = function(event) {
+					if (event.touches.length == 1) {
+						event.preventDefault();
+						this.mouseY = event.touches[0].pageY;
+						this.targetPosition = this.targetPositionOnMouseDown + (this.mouseY - this.mouseYOnMouseDown) * 0.02;
+					}
+				}.bind(this);
+				this.onDocumentMousewheel = function(event) {
+					this.targetPosition = this.targetPosition + event.wheelDeltaY * 0.005;
+				}.bind(this);
+				this.getScrollPosY = function() {
+					this.scrollPosY = this.scrollPosY + (this.targetPosition - this.scrollPosY) * 0.05; // 0.05=long scroll delay, 0.15=short delay
+					return this.scrollPosY
+				}.bind(this);
+
+			}
+
+
+			// 
+			//-------------------------------------	
+			return {
+				init      : init,
+				render    : render,
+				getScene  : function () { return scene; },
+				getCamera : function () { return camera; } 
+			};
+
+
+		}();
+
+		MainStage.init();
+		MainStage.render();
+		
+
 
 		
 		

@@ -20,6 +20,7 @@
 	$( document ).UixRenderControlsHover(); //Hover Effect
 	$( document ).UixRenderCustomMultiSel(); //Render Multiple Selector Status
 	$( document ).UixRenderCustomSingleSel(); //Render Single Selector Status
+	$( document ).UixRenderNormalRadio(); //Render Normal Radio Status
 	$( document ).UixRenderDatePicker(); //Render Date Picker
 
 	
@@ -29,7 +30,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.FORM               = APP.FORM || {};
-	APP.FORM.version       = '0.1.0';
+	APP.FORM.version       = '0.1.2';
     APP.FORM.documentReady = function( $ ) {
 
 		
@@ -50,6 +51,7 @@ APP = ( function ( APP, $, window, document ) {
 			$( document ).UixRenderControlsHover(); //Hover Effect
 			$( document ).UixRenderCustomMultiSel(); //Render Multiple Selector Status
 			$( document ).UixRenderCustomSingleSel(); //Render Single Selector Status
+			$( document ).UixRenderNormalRadio(); //Render Normal Radio Status
 			$( document ).UixRenderDatePicker(); //Render Date Picker	
 		};
 		
@@ -165,30 +167,51 @@ APP = ( function ( APP, $, window, document ) {
 		 */ 	
 		$( document ).on( 'click', '.uix-controls__number__btn--add', function( e ) {
 
-			var $numberInput = $( this ).closest( '.uix-controls__number' ).find( 'input[type="number"]' ),
-				numberInputVal = parseInt( $numberInput.val() );
+			var step           = $( this ).data( 'step' ),
+				$numberInput   = $( this ).closest( '.uix-controls__number' ).find( 'input[type="number"]' ),
+				numberInputVal = parseInt( $numberInput.val() ),
+				max            = $numberInput.attr( 'max' );
+			
+			
+			if ( typeof step === typeof undefined || isNaN( step ) ) step = 1;
 
-			if ( e.shiftKey ) {
-				numberInputVal += 10;
-			} else {
-				numberInputVal++;
+			if ( typeof max != typeof undefined && parseFloat( numberInputVal + step ) >= max ) {
+				step = 0;
 			}
+			
+			
+			
+			if ( e.shiftKey ) {
+				numberInputVal += step;
+			} else {
+				numberInputVal += step;
+			}
+			
+			
 			$numberInput.val( numberInputVal );
 		});
 
 		$( document ).on( 'click', '.uix-controls__number__btn--remove', function( e ) {
 
-			var $numberInput = $( this ).closest( '.uix-controls__number' ).find( 'input[type="number"]' ),
-				numberInputVal = parseInt( $numberInput.val() );
+			var step           = $( this ).data( 'step' ),
+				$numberInput   = $( this ).closest( '.uix-controls__number' ).find( 'input[type="number"]' ),
+				numberInputVal = parseInt( $numberInput.val() ),
+				min            = $numberInput.attr( 'min' );
 
-
-			if ( numberInputVal > 11 && e.shiftKey ) {
-				numberInputVal -= 10;
-			} else if (numberInputVal > 1) {
-				numberInputVal--;
+			if ( typeof step === typeof undefined || isNaN( step ) ) step = 1;
+			
+			if ( typeof min != typeof undefined && parseFloat( numberInputVal - step ) <= min ) {
+				step = 0;
 			}
+			if ( e.shiftKey ) {
+				numberInputVal -= step;
+			} else {
+				numberInputVal -= step;
+			}	
+
 			$numberInput.val( numberInputVal );
 		});
+
 
 			
 		
@@ -322,6 +345,105 @@ APP = ( function ( APP, $, window, document ) {
 
 		} );
 
+		
+		/* 
+		 ---------------------------
+		 Click Event of Normal Radio
+		 ---------------------------
+		 */ 
+		var normalRadio     = '.uix-controls__radio',
+			normalRadioItem = normalRadio + ' > label';
+
+
+		/*
+		 * Initialize single switch
+		 *
+		 * @param  {Object} obj                 - Radio controls. 
+		 * @return {Void}
+		 */
+		var hideAllNormalRadioItems = function( obj ) {
+			obj.each( function( index )  {
+
+				var $sel                = $( this ),
+					defaultValue        = $( '#' + $sel.attr( "data-targetid" ) ).val(),
+					deffaultSwitchIndex = 0;
+
+				//get default selected switch index
+				$sel.find( '> label' ).each( function( index )  {
+
+					if ( defaultValue == $( this ).data( 'value' ) ) {
+						deffaultSwitchIndex = index;
+					}
+
+
+				});
+
+
+				if ( typeof $sel.data( 'switchids' ) != typeof undefined && $sel.data( 'switchids' ) != '' ) {
+					var _switchIDsArr = $sel.data( 'switchids' ).split( ',' );
+					_switchIDsArr.forEach( function( element, index ) {
+
+						if ( deffaultSwitchIndex != index ) {
+							$( '#' + element ).hide();
+						} else {
+							$( '#' + element ).show();
+						}
+
+
+					});
+
+
+
+				}
+
+			});
+
+		};
+
+		hideAllNormalRadioItems( $( normalRadio ) );
+
+
+		$( document ).on( 'click', normalRadioItem, function( e ) {
+			e.preventDefault();
+
+			var $selector     = $( this ).parent(),
+				$option       = $( this ),
+				targetID      = '#' + $selector.data( "targetid" ),
+				switchID      = '#' + $option.data( "switchid" ),
+				curVal        = $option.data( 'value' );
+
+
+			//Radio Selector
+			$selector.find( '> label' )
+				.removeClass( 'active' )
+			    .find( '[type="radio"]' ).prop( 'checked', false );
+			
+			$( targetID ).val( curVal );
+			$option
+				.addClass( 'active' )
+			    .find( '[type="radio"]' ).prop( 'checked', true );
+			
+
+
+
+			//Switch some options
+			if ( typeof $option.data( "switchid" ) != typeof undefined ) {
+				 hideAllNormalRadioItems( $selector );
+				 $( switchID ).show();
+			}
+
+
+
+			//Dynamic listening for the latest value
+			$( targetID ).focus().blur();
+
+		} );	
+		
+
+
+
+		
+		
 		
 		/* 
 		 ---------------------------
@@ -1003,6 +1125,66 @@ APP = ( function ( APP, $, window, document ) {
     };
  
 }( jQuery ));
+
+
+
+/*
+ * Render Normal Radio Status
+ *
+ * @param  {String} controls                 - Wrapper of controls.
+ * @return {Void}
+ */
+( function ( $ ) {
+    $.fn.UixRenderNormalRadio = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+			controls    : '.uix-controls__radio'
+        }, options );
+ 
+        this.each( function() {
+		
+		
+			$( settings.controls ).each( function()  {
+				$( this ).find( '> label' ).each( function()  {
+
+					var targetID  = '#' + $( this ).parent().attr( "data-targetid" ),
+						switchIDs = '';
+
+					//add switch IDs
+					$( this ).parent().find( '> label' ).each( function()  {
+						if ( typeof $( this ).data( "switchid" ) != typeof undefined ) {
+							switchIDs += $( this ).data( "switchid" ) + ',';
+						}
+
+					});
+
+					$( this ).parent().attr( "data-switchids", switchIDs.replace(/,\s*$/, '' ) );
+
+
+					//Set actived style from their values
+					if ( $( targetID ).val() == $( this ).data( 'value' ) ) {
+						$( this )
+							.addClass( 'active' )
+						    .find( '[type="radio"]' ).prop( 'checked', true );
+						
+					} else {
+						$( this )
+							.removeClass( 'active' )
+						    .find( '[type="radio"]' ).prop( 'checked', false );
+					}	
+
+
+				});
+			});
+
+			
+		});
+ 
+    };
+ 
+}( jQuery ));
+
 
 
 /*

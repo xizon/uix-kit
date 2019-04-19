@@ -1416,6 +1416,7 @@ $controls-merge-button-width: 20%;
 		margin-right: 5px;
 		display: inline-block;
 		position: relative;
+		vertical-align: middle;
 
 		&::before {
 			content: "";
@@ -1588,7 +1589,7 @@ $controls-merge-button-width: 20%;
 
 	input[type="number"] {
 		-moz-appearance: textfield;
-		font-family: 'Roboto', sans-serif;
+		min-width: 100px;
 	}
 
 

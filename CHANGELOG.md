@@ -1,5 +1,14 @@
 # Changelog
 
+
+#### = 3.4.4 (April 19, 2019) =
+
+* Tweak: Optimized radio component.
+* Tweak: Adjusted the 3D modules script structure.
+* New: Increase a function of numerical control for number component.
+
+
+
 #### = 3.4.3 (April 11, 2019) =
 
 * Fix: Solved the problem of cross-domain video playback.

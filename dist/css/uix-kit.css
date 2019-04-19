@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
- * ## Version             :  3.4.3
+ * ## Version             :  3.4.4
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  April 12, 2019
+ * ## Last Update         :  April 19, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -6942,7 +6942,8 @@ select:-webkit-autofill:focus {
     border: 1px solid #dce4e8;
     margin-right: 5px;
     display: inline-block;
-    position: relative; }
+    position: relative;
+    vertical-align: middle; }
     .uix-controls__radio .uix-controls__radio-trigger::before {
       content: "";
       width: 10px;
@@ -7057,7 +7058,7 @@ select:-webkit-autofill:focus {
 
 .uix-controls__number input[type="number"] {
   -moz-appearance: textfield;
-  font-family: 'Roboto', sans-serif; }
+  min-width: 100px; }
 
 .uix-controls__number input {
   box-sizing: border-box; }
