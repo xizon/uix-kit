@@ -1449,7 +1449,8 @@ $controls-merge-button-width: 20%;
 		white-space: nowrap;
 		overflow: hidden;
 		cursor: pointer;
-		margin-top: .5rem;
+		margin-top: 0;
+		margin-bottom: .546875rem;
 		text-align: left; /* Required */
 	}	
 	
@@ -1600,7 +1601,7 @@ $controls-merge-button-width: 20%;
 
 	.uix-controls__number__btn {
 		position: absolute;
-		height: 50%;
+		height: calc(50% - 1px);
 		width: 27px;
 		border-left: 1px solid $control-sub-color;
 		color: $control-sub-color;
@@ -1609,6 +1610,7 @@ $controls-merge-button-width: 20%;
 		cursor: pointer;
 		user-select: none;
 		right: 1px;
+		background-color: #fff;
 
 		&:hover {
 			color: #333;
@@ -1616,13 +1618,13 @@ $controls-merge-button-width: 20%;
 
 
 		&.uix-controls__number__btn--add {
-			top: 0;
+			top: 1px;
 			border-radius: 0 4px 0 0;
 			border-bottom: 1px solid $control-sub-color;
 		}
 
 		&.uix-controls__number__btn--remove {
-			bottom: 0;
+			bottom: 1px;
 			border-radius: 0 0 4px 0;
 
 		}

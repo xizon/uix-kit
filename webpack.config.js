@@ -36,7 +36,10 @@ let globs = {
  * Site Info
  *************************************
  */
-
+let charset                  = 'utf-8';
+let lang                     = 'en-US';
+let dirLTR                   = 'ltr';
+let dirRTL                   = 'rtl';
 let customWebsiteVersion     = json.version,
 	customWebsiteAuthor      = json.author,
 	customWebsiteTitle       = json.projectName,
@@ -298,6 +301,10 @@ targetTempFilesName.map( ( event ) => {
 				dir: globs.examples,
 				files: [ event[1], event[1] ],
 				rules: [
+					{ search: '@@{website_charset}', replace: charset },
+					{ search: '@@{website_lang}', replace: lang },
+					{ search: '@@{website_dirLTR}', replace: dirLTR },
+				    { search: '@@{website_dirRTL}', replace: dirRTL },
 					{ search: '@@{website_title}', replace: customWebsiteTitle },
 					{ search: '@@{website_desc}', replace: customWebsiteDesc },
 					{ search: '@@{website_canonical}', replace: customWebsiteCanonical },
@@ -435,6 +442,10 @@ targetAllWatchFilesName.map( ( event ) => {
 						dir: globs.examples,
 						files: [ event[1], event[1] ],
 						rules: [
+							{ search: '@@{website_charset}', replace: charset },
+							{ search: '@@{website_lang}', replace: lang },
+							{ search: '@@{website_dirLTR}', replace: dirLTR },
+							{ search: '@@{website_dirRTL}', replace: dirRTL },
 							{ search: '@@{website_title}', replace: customWebsiteTitle },
 							{ search: '@@{website_desc}', replace: customWebsiteDesc },
 							{ search: '@@{website_canonical}', replace: customWebsiteCanonical },

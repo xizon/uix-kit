@@ -1,5 +1,12 @@
 # Changelog
 
+#### = 3.4.5 (April 24, 2019) =
+
+* Fix: Fixed a bug of Input Number form type.
+* Tweak: Minor adjustment of the three.js component directory structure.
+* Tweak: Update webpack.config.js.
+* Tweak: Add a separate title to each demo page.
+
 
 #### = 3.4.4 (April 19, 2019) =
 

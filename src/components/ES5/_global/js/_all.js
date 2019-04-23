@@ -33,16 +33,24 @@ const UIX_KIT_IMPORT = { "files": [
 "./src/components/ES5/_plugins-GSAP/js/TextPlugin.js",
 	
 //three.js ==> generic
-"./src/components/ES5/_plugins-THREE/js/CSS3DRenderer.js",
-"./src/components/ES5/_plugins-THREE/js/OrbitControls.js",
+"./src/components/ES5/_plugins-THREE/js/renderers/CSS3DRenderer.js",
+"./src/components/ES5/_plugins-THREE/js/controls/OrbitControls.js",
 "./src/components/ES5/_plugins-THREE/js/loaders/GLTFLoader.js",
 "./src/components/ES5/_plugins-THREE/js/loaders/MTLLoader.js",
 "./src/components/ES5/_plugins-THREE/js/loaders/OBJLoader.js",
+"./src/components/ES5/_plugins-THREE/js/shaders/CopyShader.js",
+"./src/components/ES5/_plugins-THREE/js/postprocessing/EffectComposer.js",
+"./src/components/ES5/_plugins-THREE/js/postprocessing/BloomPass.js",
+"./src/components/ES5/_plugins-THREE/js/postprocessing/MaskPass.js",
+"./src/components/ES5/_plugins-THREE/js/postprocessing/TexturePass.js",
+"./src/components/ES5/_plugins-THREE/js/postprocessing/ShaderPass.js",
+"./src/components/ES5/_plugins-THREE/js/postprocessing/RenderPass.js",
+"./src/components/ES5/_plugins-THREE/js/postprocessing/ClearPass.js",
 "./src/components/ES5/_plugins-THREE/js/extensions/ShaderRuntime.custom.js",
 "./src/components/ES5/_plugins-THREE/js/extensions/d3-threeD.custom.js",
 "./src/components/ES5/_plugins-THREE/js/extensions/simplex-noise.js",
 "./src/components/ES5/_plugins-THREE/js/extensions/THREE.MeshLine.js",
-
+	
 	
 /******/
 /******/

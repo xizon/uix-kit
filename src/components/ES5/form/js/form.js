@@ -30,7 +30,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.FORM               = APP.FORM || {};
-	APP.FORM.version       = '0.1.2';
+	APP.FORM.version       = '0.1.3';
     APP.FORM.documentReady = function( $ ) {
 
 		
@@ -167,51 +167,44 @@ APP = ( function ( APP, $, window, document ) {
 		 */ 	
 		$( document ).on( 'click', '.uix-controls__number__btn--add', function( e ) {
 
-			var step           = $( this ).data( 'step' ),
+			var step           = parseFloat( $( this ).data( 'step' ) ),
+				decimals       = $( this ).data( 'decimals' ),
 				$numberInput   = $( this ).closest( '.uix-controls__number' ).find( 'input[type="number"]' ),
-				numberInputVal = parseInt( $numberInput.val() ),
+				numberInputVal = parseFloat( $numberInput.val() ),
 				max            = $numberInput.attr( 'max' );
 			
 			
 			if ( typeof step === typeof undefined || isNaN( step ) ) step = 1;
-
+			if ( typeof decimals === typeof undefined ) decimals = 0;
 			if ( typeof max != typeof undefined && parseFloat( numberInputVal + step ) >= max ) {
 				step = 0;
 			}
+
+			
+			numberInputVal = parseFloat( numberInputVal + step );
 			
 			
-			
-			if ( e.shiftKey ) {
-				numberInputVal += step;
-			} else {
-				numberInputVal += step;
-			}
-			
-			
-			$numberInput.val( numberInputVal );
+			$numberInput.val( numberInputVal.toFixed( decimals ) );
 		});
 
 		$( document ).on( 'click', '.uix-controls__number__btn--remove', function( e ) {
 
 			var step           = $( this ).data( 'step' ),
+				decimals       = $( this ).data( 'decimals' ),
 				$numberInput   = $( this ).closest( '.uix-controls__number' ).find( 'input[type="number"]' ),
-				numberInputVal = parseInt( $numberInput.val() ),
+				numberInputVal = parseFloat( $numberInput.val() ),
 				min            = $numberInput.attr( 'min' );
 
 			if ( typeof step === typeof undefined || isNaN( step ) ) step = 1;
-			
-			if ( typeof min != typeof undefined && parseFloat( numberInputVal - step ) <= min ) {
+			if ( typeof decimals === typeof undefined ) decimals = 0;
+			if ( typeof min != typeof undefined && parseFloat( numberInputVal - step ) < min ) {
 				step = 0;
 			}
-			if ( e.shiftKey ) {
-				numberInputVal -= step;
-			} else {
-				numberInputVal -= step;
-			}	
+			
+			numberInputVal -= step;	
 
-			$numberInput.val( numberInputVal );
+			$numberInput.val( numberInputVal.toFixed( decimals ) );
 		});
-
 
 			
 		
