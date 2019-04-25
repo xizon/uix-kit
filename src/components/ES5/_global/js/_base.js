@@ -313,6 +313,10 @@ var UixGUID = UixGUID || (function() {
  * Get all attributes of an element using jQuery
  *
  * @return {array}                        - Returns a new array.
+ * @usage:
+ 
+	$( '#demo' ).attr();  // { "data-a": "1", "id": "b" }
+
  *************************************
  */
 ( function( old ) {
