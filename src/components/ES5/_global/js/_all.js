@@ -6,7 +6,10 @@ const UIX_KIT_IMPORT = { "files": [
 /******/
 /* must be placed in the first place */	
 "./src/components/ES5/_global/js/_base.js",
-
+"./src/components/ES5/_global/js/func-common.js",
+"./src/components/ES5/_global/js/func-3rd.js",
+	
+	
 /******/
 /******/
 /* base */	
@@ -46,6 +49,8 @@ const UIX_KIT_IMPORT = { "files": [
 "./src/components/ES5/_plugins-THREE/js/postprocessing/ShaderPass.js",
 "./src/components/ES5/_plugins-THREE/js/postprocessing/RenderPass.js",
 "./src/components/ES5/_plugins-THREE/js/postprocessing/ClearPass.js",
+"./src/components/ES5/_plugins-THREE/js/modifiers/TessellateModifier.js",
+"./src/components/ES5/_plugins-THREE/js/modifiers/ExplodeModifier.js",
 "./src/components/ES5/_plugins-THREE/js/extensions/ShaderRuntime.custom.js",
 "./src/components/ES5/_plugins-THREE/js/extensions/d3-threeD.custom.js",
 "./src/components/ES5/_plugins-THREE/js/extensions/simplex-noise.js",
@@ -118,6 +123,8 @@ const UIX_KIT_IMPORT = { "files": [
 "./src/components/ES5/simple-3D-obj-anim-interaction/js/3D-obj-anim-interaction.js",
 "./src/components/ES5/simple-3D-mouse-interaction/js/3D-mouse-interaction.js",
 "./src/components/ES5/simple-3D-mouse-interaction2/js/3D-mouse-interaction2.js",
+"./src/components/ES5/simple-3D-shatter-slider/js/3D-shatter-slider.js",	
+"./src/components/ES5/simple-3D-explosive-particle-slider/js/3D-explosive-particle-slider.js",
 "./src/components/ES5/table/js/table.js",
 "./src/components/ES5/table/js/table-sorter.js",	
 "./src/components/ES5/tabs/js/tabs.js",

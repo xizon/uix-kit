@@ -30,7 +30,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.FORM               = APP.FORM || {};
-	APP.FORM.version       = '0.1.3';
+	APP.FORM.version       = '0.1.4';
     APP.FORM.documentReady = function( $ ) {
 
 		
@@ -1156,16 +1156,19 @@ APP = ( function ( APP, $, window, document ) {
 
 
 					//Set actived style from their values
-					if ( $( targetID ).val() == $( this ).data( 'value' ) ) {
-						$( this )
-							.addClass( 'active' )
-						    .find( '[type="radio"]' ).prop( 'checked', true );
-						
-					} else {
-						$( this )
-							.removeClass( 'active' )
-						    .find( '[type="radio"]' ).prop( 'checked', false );
-					}	
+					if ( typeof $( this ).data( 'value' ) != typeof undefined ) {
+						if ( $( targetID ).val() == $( this ).data( 'value' ) ) {
+							$( this )
+								.addClass( 'active' )
+								.find( '[type="radio"]' ).prop( 'checked', true );
+
+						} else {
+							$( this )
+								.removeClass( 'active' )
+								.find( '[type="radio"]' ).prop( 'checked', false );
+						}		
+					} 
+
 
 
 				});

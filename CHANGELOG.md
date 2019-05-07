@@ -1,5 +1,17 @@
 # Changelog
 
+
+#### = 3.4.6 (May 7, 2019) =
+
+* New: Added modifiers to three.js extensions.
+* New: Add a new module "3D Explosive Particle Slider".
+* New: Add a new module "3D Shatter Slider".
+* Tweak: Removed Advanced Slider 3D Rotating.
+* Tweak: Optimized the basic js module in src/components/ES5/_global/.
+* Fix: Fixed a bug in the default value of the radio control.
+
+
+
 #### = 3.4.5 (April 24, 2019) =
 
 * Fix: Fixed a bug of Input Number form type.

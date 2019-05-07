@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
- * ## Version             :  3.4.5
+ * ## Version             :  3.4.6
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  April 23, 2019
+ * ## Last Update         :  May 7, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -100,20 +100,22 @@
     82.SVG Map
     83.3D Background
     84.3D Carousel
-    85.Table
-    86.Tabs
-    87.Team Focus
-    88.Team Fullwidth (Style using the Side by Side List With Photo module)
-    89.Team Gird
-    90.Testimonials Carousel
-    91.Text effect
-    92.Timeline
-    93.ToolTip
-    94.Vertical Menu
-    95.Vertical Separator
-    96.Wave Background
-    97.3rd Party Plugins
-    98.WordPress Core ( Do not use prefix "uix-" )
+    85.3D Shatter Slider
+    86.3D Explosive Particle Slider
+    87.Table
+    88.Tabs
+    89.Team Focus
+    90.Team Fullwidth (Style using the Side by Side List With Photo module)
+    91.Team Gird
+    92.Testimonials Carousel
+    93.Text effect
+    94.Timeline
+    95.ToolTip
+    96.Vertical Menu
+    97.Vertical Separator
+    98.Wave Background
+    99.3rd Party Plugins
+    100.WordPress Core ( Do not use prefix "uix-" )
 
 
 */
@@ -11178,6 +11180,270 @@ dl.uix-list-abreast {
         margin-left: 1rem; }
       .uix-3d-carousel ul .uix-3d-carousel__item.uix-3d-carousel__item--right-pos {
         margin-left: 110px; } }
+
+/* ====================================================== 
+   <!-- 3D Shatter Slider -->     
+/* ====================================================== */
+/*
+ * 1. Initialize the slider style
+ * 2. Pagination dots 
+ * 3. Next/Prev buttons
+*/
+/* 
+ ---------------------------
+ 1. Initialize the slider style
+ ---------------------------
+ */
+.uix-3d-slider--shatter__wrapper {
+  position: relative; }
+
+/* Prevent content overflow */
+.uix-3d-slider--shatter__wrapper,
+.uix-3d-slider--shatter__inner,
+.uix-3d-slider--shatter__canvas-container {
+  overflow: hidden; }
+
+.uix-3d-slider--shatter__canvas-container {
+  position: relative;
+  z-index: 2;
+  display: block;
+  height: 100%;
+  /* Required, It will make the canvas fill up */ }
+
+.uix-3d-slider--shatter {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  z-index: 1;
+  background-color: transparent; }
+  .uix-3d-slider--shatter canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    background-color: transparent; }
+  .uix-3d-slider--shatter .uix-3d-slider--shatter__inner {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 3;
+    height: 100%;
+    /* Required */
+    display: none; }
+    .uix-3d-slider--shatter .uix-3d-slider--shatter__inner .uix-3d-slider--shatter__item {
+      width: 100%;
+      opacity: 0; }
+      .uix-3d-slider--shatter .uix-3d-slider--shatter__inner .uix-3d-slider--shatter__item img {
+        width: 100%;
+        visibility: hidden; }
+      .uix-3d-slider--shatter .uix-3d-slider--shatter__inner .uix-3d-slider--shatter__item video {
+        display: none; }
+      .uix-3d-slider--shatter .uix-3d-slider--shatter__inner .uix-3d-slider--shatter__item.leave {
+        opacity: 0; }
+      .uix-3d-slider--shatter .uix-3d-slider--shatter__inner .uix-3d-slider--shatter__item.active {
+        opacity: 1; }
+
+/* 
+ ---------------------------
+ 2. Pagination dots 
+ ---------------------------
+ */
+.uix-3d-slider--shatter__pagination {
+  position: relative;
+  transform: translateY(-40px);
+  z-index: 2; }
+  .uix-3d-slider--shatter__pagination ul {
+    list-style: none;
+    left: 0;
+    bottom: 0;
+    font-size: 0;
+    /*Fighting the Space Between Inline Block Elements*/
+    display: block;
+    width: 100%;
+    text-align: center;
+    /*require*/
+    position: relative;
+    transform: translateY(0.5rem); }
+    .uix-3d-slider--shatter__pagination ul li {
+      font-size: 1rem;
+      /*Fighting the Space Between Inline Block Elements*/
+      display: inline-block;
+      /*require*/
+      margin: 0 .2rem; }
+      .uix-3d-slider--shatter__pagination ul li a {
+        width: 12px;
+        height: 12px;
+        display: block;
+        box-shadow: 0px 3px 22px 0px rgba(0, 0, 0, 0.45);
+        background: rgba(255, 255, 255, 0.6);
+        cursor: pointer;
+        text-indent: -9999px;
+        border-radius: 20px; }
+      .uix-3d-slider--shatter__pagination ul li:hover a, .uix-3d-slider--shatter__pagination ul li.active a {
+        background: white;
+        width: 25px; }
+
+/* 
+ ---------------------------
+ 3. Next/Prev buttons
+ ---------------------------
+ */
+.uix-3d-slider--shatter__arrows {
+  position: relative;
+  transform: translateY(-65px);
+  z-index: 3; }
+  .uix-3d-slider--shatter__arrows a {
+    box-shadow: 0px 10px 54px 0px rgba(19, 32, 62, 0.21);
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    transition: .3s ease-in-out;
+    line-height: 50px;
+    text-align: center;
+    background: #fff; }
+  .uix-3d-slider--shatter__arrows .uix-3d-slider--shatter__arrows--prev {
+    left: 15px; }
+    .uix-3d-slider--shatter__arrows .uix-3d-slider--shatter__arrows--prev.disabled {
+      visibility: hidden; }
+  .uix-3d-slider--shatter__arrows .uix-3d-slider--shatter__arrows--next {
+    right: 15px; }
+    .uix-3d-slider--shatter__arrows .uix-3d-slider--shatter__arrows--next.disabled {
+      visibility: hidden; }
+
+/* ====================================================== 
+   <!-- 3D Explosive Particle Slider -->     
+/* ====================================================== */
+/*
+ * 1. Initialize the slider style
+ * 2. Pagination dots 
+ * 3. Next/Prev buttons
+*/
+/* 
+ ---------------------------
+ 1. Initialize the slider style
+ ---------------------------
+ */
+.uix-3d-slider--expParticle__wrapper {
+  position: relative; }
+
+/* Prevent content overflow */
+.uix-3d-slider--expParticle__wrapper,
+.uix-3d-slider--expParticle__inner,
+.uix-3d-slider--expParticle__canvas-container {
+  overflow: hidden; }
+
+.uix-3d-slider--expParticle__canvas-container {
+  position: relative;
+  z-index: 2;
+  display: block;
+  height: 100%;
+  /* Required, It will make the canvas fill up */ }
+
+.uix-3d-slider--expParticle {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  z-index: 1;
+  background-color: transparent; }
+  .uix-3d-slider--expParticle canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    background-color: transparent; }
+  .uix-3d-slider--expParticle .uix-3d-slider--expParticle__inner {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 3;
+    height: 100%;
+    /* Required */
+    display: none; }
+    .uix-3d-slider--expParticle .uix-3d-slider--expParticle__inner .uix-3d-slider--expParticle__item {
+      width: 100%;
+      opacity: 0; }
+      .uix-3d-slider--expParticle .uix-3d-slider--expParticle__inner .uix-3d-slider--expParticle__item img {
+        width: 100%;
+        visibility: hidden; }
+      .uix-3d-slider--expParticle .uix-3d-slider--expParticle__inner .uix-3d-slider--expParticle__item video {
+        display: none; }
+      .uix-3d-slider--expParticle .uix-3d-slider--expParticle__inner .uix-3d-slider--expParticle__item.leave {
+        opacity: 0; }
+      .uix-3d-slider--expParticle .uix-3d-slider--expParticle__inner .uix-3d-slider--expParticle__item.active {
+        opacity: 1; }
+
+/* 
+ ---------------------------
+ 2. Pagination dots 
+ ---------------------------
+ */
+.uix-3d-slider--expParticle__pagination {
+  position: relative;
+  transform: translateY(-40px);
+  z-index: 2; }
+  .uix-3d-slider--expParticle__pagination ul {
+    list-style: none;
+    left: 0;
+    bottom: 0;
+    font-size: 0;
+    /*Fighting the Space Between Inline Block Elements*/
+    display: block;
+    width: 100%;
+    text-align: center;
+    /*require*/
+    position: relative;
+    transform: translateY(0.5rem); }
+    .uix-3d-slider--expParticle__pagination ul li {
+      font-size: 1rem;
+      /*Fighting the Space Between Inline Block Elements*/
+      display: inline-block;
+      /*require*/
+      margin: 0 .2rem; }
+      .uix-3d-slider--expParticle__pagination ul li a {
+        width: 12px;
+        height: 12px;
+        display: block;
+        box-shadow: 0px 3px 22px 0px rgba(0, 0, 0, 0.45);
+        background: rgba(255, 255, 255, 0.6);
+        cursor: pointer;
+        text-indent: -9999px;
+        border-radius: 20px; }
+      .uix-3d-slider--expParticle__pagination ul li:hover a, .uix-3d-slider--expParticle__pagination ul li.active a {
+        background: white;
+        width: 25px; }
+
+/* 
+ ---------------------------
+ 3. Next/Prev buttons
+ ---------------------------
+ */
+.uix-3d-slider--expParticle__arrows {
+  position: relative;
+  transform: translateY(-65px);
+  z-index: 3; }
+  .uix-3d-slider--expParticle__arrows a {
+    box-shadow: 0px 10px 54px 0px rgba(19, 32, 62, 0.21);
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    transition: .3s ease-in-out;
+    line-height: 50px;
+    text-align: center;
+    background: #fff; }
+  .uix-3d-slider--expParticle__arrows .uix-3d-slider--expParticle__arrows--prev {
+    left: 15px; }
+    .uix-3d-slider--expParticle__arrows .uix-3d-slider--expParticle__arrows--prev.disabled {
+      visibility: hidden; }
+  .uix-3d-slider--expParticle__arrows .uix-3d-slider--expParticle__arrows--next {
+    right: 15px; }
+    .uix-3d-slider--expParticle__arrows .uix-3d-slider--expParticle__arrows--next.disabled {
+      visibility: hidden; }
 
 /* ====================================================== 
    <!-- Table -->      

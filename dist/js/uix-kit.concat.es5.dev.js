@@ -45,12 +45,6 @@ if ( typeof APP_ROOTPATH === 'undefined' ) {
 }
 
 
-//Modify templateUrl as the correct path when local test is enabled
-if ( templateUrl == '' && ( location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.hostname === '' ) ) {
-    templateUrl = '/examples';
-}
-
-
 /* 
  *************************************
  * Determine whether it is a special browser
@@ -139,6 +133,22 @@ var APP = (function ( $, window, document ) {
 
 
 
+
+
+
+/* 
+ *************************************
+ * <!-- Base Functions -->
+ *************************************
+ */
+
+//=========================================================
+//=========================================================
+//=========================================================
+//=========================================================
+//=========================================================
+
+
 /* 
  *************************************
  * Create GUID / UUID
@@ -184,20 +194,109 @@ var UixGUID = UixGUID || (function() {
 })();
 
 
+
+
 /* 
  *************************************
- * Logs out the version and renderer information for this running instance of Uix Kit.
+ * Parallax Effect
+ *
+ * @param  {Number} speed     - The speed of movement between elements.
+ * @param  {JSON} bg          - Specify the background display. Default value: { enable: true, xPos: '50%' }
+ * @return {Void}
  *************************************
  */
-//( function UIX_HELLO() { 
-//    if ( navigator.userAgent.toLowerCase().indexOf( 'chrome' ) > -1 ) {
-//        var args = ['\n %c Made with Uix Kit by https://github.com/xizon/uix-kit', 'color: #333; border: 1px solid; padding: 10px;'];
-//
-//        window.console.log.apply(console, args);
-//    } else if (window.console) {
-//        window.console.log( 'Made with Uix Kit by https://github.com/xizon/uix-kit' );
-//    }
-//} ());
+
+( function ( $ ) {
+    $.fn.UixParallax = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+			speed    : 0.25,
+			bg       : { enable: true, xPos: '50%' }
+        }, options );
+ 
+        this.each( function() {
+			
+			var bgEff      = settings.bg,
+				$this      = $( this ),
+				bgXpos     = '50%',
+				speed      = -parseFloat( settings.speed );
+			
+			
+			
+			if ( bgEff ) {
+				bgEff      = settings.bg.enable;
+				bgXpos     = settings.bg.xPos;
+			}
+			
+	
+			//Prohibit transition delay
+			$this.css( {
+				'transition': 'none'
+			} );
+
+		    $( window ).on( 'scroll touchmove', function( e ){
+				scrollUpdate();
+			});
+			
+			
+			//Initialize the position of the background
+			if ( bgEff ) {
+				//background parallax
+				TweenMax.set( $this, {
+					backgroundPosition: bgXpos + ' ' + (-$this.offset().top*speed) + 'px'
+				});
+			} else {
+				//element parallax
+				TweenMax.set( $this, {
+					y: 0
+				});	
+			}
+			
+			
+			function scrollUpdate() {
+				var scrolled = $( window ).scrollTop(),
+					st       = $this.offset().top - scrolled;
+				
+
+				
+				if ( bgEff ) {
+					//background parallax
+					TweenMax.set( $this, {
+						backgroundPosition: bgXpos + ' ' + ( 0 - ( st * speed ) ) + 'px'
+					});
+				} else {
+					//element parallax
+					TweenMax.set( $this, {
+						y: ( 0 - ( scrolled * speed ) )
+					});
+					
+					
+				}
+				
+			}
+
+			
+			
+		});
+ 
+    };
+ 
+}( jQuery ));
+
+
+
+/* 
+ *************************************
+ * <!-- Base Third-party Functions -->
+ *************************************
+ */
+
+//=========================================================
+//=========================================================
+//=========================================================
+//=========================================================
+//=========================================================
 
 
 /* 
@@ -313,6 +412,10 @@ var UixGUID = UixGUID || (function() {
  * Get all attributes of an element using jQuery
  *
  * @return {array}                        - Returns a new array.
+ * @usage:
+ 
+	$( '#demo' ).attr();  // { "data-a": "1", "id": "b" }
+
  *************************************
  */
 ( function( old ) {
@@ -480,99 +583,6 @@ var UixGUID = UixGUID || (function() {
 	}() );
 
 } ) ( jQuery );
-
-
-
-/* 
- *************************************
- * Parallax Effect
- *
- * @param  {Number} speed     - The speed of movement between elements.
- * @param  {JSON} bg          - Specify the background display. Default value: { enable: true, xPos: '50%' }
- * @return {Void}
- *************************************
- */
-
-( function ( $ ) {
-    $.fn.UixParallax = function( options ) {
- 
-        // This is the easiest way to have default options.
-        var settings = $.extend({
-			speed    : 0.25,
-			bg       : { enable: true, xPos: '50%' }
-        }, options );
- 
-        this.each( function() {
-			
-			var bgEff      = settings.bg,
-				$this      = $( this ),
-				bgXpos     = '50%',
-				speed      = -parseFloat( settings.speed );
-			
-			
-			
-			if ( bgEff ) {
-				bgEff      = settings.bg.enable;
-				bgXpos     = settings.bg.xPos;
-			}
-			
-	
-			//Prohibit transition delay
-			$this.css( {
-				'transition': 'none'
-			} );
-
-		    $( window ).on( 'scroll touchmove', function( e ){
-				scrollUpdate();
-			});
-			
-			
-			//Initialize the position of the background
-			if ( bgEff ) {
-				//background parallax
-				TweenMax.set( $this, {
-					backgroundPosition: bgXpos + ' ' + (-$this.offset().top*speed) + 'px'
-				});
-			} else {
-				//element parallax
-				TweenMax.set( $this, {
-					y: 0
-				});	
-			}
-			
-			
-			function scrollUpdate() {
-				var scrolled = $( window ).scrollTop(),
-					st       = $this.offset().top - scrolled;
-				
-
-				
-				if ( bgEff ) {
-					//background parallax
-					TweenMax.set( $this, {
-						backgroundPosition: bgXpos + ' ' + ( 0 - ( st * speed ) ) + 'px'
-					});
-				} else {
-					//element parallax
-					TweenMax.set( $this, {
-						y: ( 0 - ( scrolled * speed ) )
-					});
-					
-					
-				}
-				
-			}
-
-			
-			
-		});
- 
-    };
- 
-}( jQuery ));
-
-
-
 
 
 /* 
@@ -10938,6 +10948,310 @@ THREE.ClearPass.prototype = Object.assign( Object.create( THREE.Pass.prototype )
 
 } );
 
+(function(root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        define('three.TessellateModifier', ['three'], factory);
+    }
+    else if ('undefined' !== typeof exports && 'undefined' !== typeof module) {
+        module.exports = factory(require('three'));
+    }
+    else {
+        factory(root.THREE);
+    }
+}(this, function(THREE) {
+
+/**
+ * Break faces with edges longer than maxEdgeLength
+ * - not recursive
+ *
+ * @author alteredq / http://alteredqualia.com/
+ */
+
+THREE.TessellateModifier = function ( maxEdgeLength ) {
+
+	this.maxEdgeLength = maxEdgeLength;
+
+};
+
+THREE.TessellateModifier.prototype.modify = function ( geometry ) {
+
+	var edge;
+
+	var faces = [];
+	var faceVertexUvs = [];
+	var maxEdgeLengthSquared = this.maxEdgeLength * this.maxEdgeLength;
+
+	for ( var i = 0, il = geometry.faceVertexUvs.length; i < il; i ++ ) {
+
+		faceVertexUvs[ i ] = [];
+
+	}
+
+	for ( var i = 0, il = geometry.faces.length; i < il; i ++ ) {
+
+		var face = geometry.faces[ i ];
+
+		if ( face instanceof THREE.Face3 ) {
+
+			var a = face.a;
+			var b = face.b;
+			var c = face.c;
+
+			var va = geometry.vertices[ a ];
+			var vb = geometry.vertices[ b ];
+			var vc = geometry.vertices[ c ];
+
+			var dab = va.distanceToSquared( vb );
+			var dbc = vb.distanceToSquared( vc );
+			var dac = va.distanceToSquared( vc );
+
+			if ( dab > maxEdgeLengthSquared || dbc > maxEdgeLengthSquared || dac > maxEdgeLengthSquared ) {
+
+				var m = geometry.vertices.length;
+
+				var triA = face.clone();
+				var triB = face.clone();
+
+				if ( dab >= dbc && dab >= dac ) {
+
+					var vm = va.clone();
+					vm.lerp( vb, 0.5 );
+
+					triA.a = a;
+					triA.b = m;
+					triA.c = c;
+
+					triB.a = m;
+					triB.b = b;
+					triB.c = c;
+
+					if ( face.vertexNormals.length === 3 ) {
+
+						var vnm = face.vertexNormals[ 0 ].clone();
+						vnm.lerp( face.vertexNormals[ 1 ], 0.5 );
+
+						triA.vertexNormals[ 1 ].copy( vnm );
+						triB.vertexNormals[ 0 ].copy( vnm );
+
+					}
+
+					if ( face.vertexColors.length === 3 ) {
+
+						var vcm = face.vertexColors[ 0 ].clone();
+						vcm.lerp( face.vertexColors[ 1 ], 0.5 );
+
+						triA.vertexColors[ 1 ].copy( vcm );
+						triB.vertexColors[ 0 ].copy( vcm );
+
+					}
+
+					edge = 0;
+
+				} else if ( dbc >= dab && dbc >= dac ) {
+
+					var vm = vb.clone();
+					vm.lerp( vc, 0.5 );
+
+					triA.a = a;
+					triA.b = b;
+					triA.c = m;
+
+					triB.a = m;
+					triB.b = c;
+					triB.c = a;
+
+					if ( face.vertexNormals.length === 3 ) {
+
+						var vnm = face.vertexNormals[ 1 ].clone();
+						vnm.lerp( face.vertexNormals[ 2 ], 0.5 );
+
+						triA.vertexNormals[ 2 ].copy( vnm );
+
+						triB.vertexNormals[ 0 ].copy( vnm );
+						triB.vertexNormals[ 1 ].copy( face.vertexNormals[ 2 ] );
+						triB.vertexNormals[ 2 ].copy( face.vertexNormals[ 0 ] );
+
+					}
+
+					if ( face.vertexColors.length === 3 ) {
+
+						var vcm = face.vertexColors[ 1 ].clone();
+						vcm.lerp( face.vertexColors[ 2 ], 0.5 );
+
+						triA.vertexColors[ 2 ].copy( vcm );
+
+						triB.vertexColors[ 0 ].copy( vcm );
+						triB.vertexColors[ 1 ].copy( face.vertexColors[ 2 ] );
+						triB.vertexColors[ 2 ].copy( face.vertexColors[ 0 ] );
+
+					}
+
+					edge = 1;
+
+				} else {
+
+					var vm = va.clone();
+					vm.lerp( vc, 0.5 );
+
+					triA.a = a;
+					triA.b = b;
+					triA.c = m;
+
+					triB.a = m;
+					triB.b = b;
+					triB.c = c;
+
+					if ( face.vertexNormals.length === 3 ) {
+
+						var vnm = face.vertexNormals[ 0 ].clone();
+						vnm.lerp( face.vertexNormals[ 2 ], 0.5 );
+
+						triA.vertexNormals[ 2 ].copy( vnm );
+						triB.vertexNormals[ 0 ].copy( vnm );
+
+					}
+
+					if ( face.vertexColors.length === 3 ) {
+
+						var vcm = face.vertexColors[ 0 ].clone();
+						vcm.lerp( face.vertexColors[ 2 ], 0.5 );
+
+						triA.vertexColors[ 2 ].copy( vcm );
+						triB.vertexColors[ 0 ].copy( vcm );
+
+					}
+
+					edge = 2;
+
+				}
+
+				faces.push( triA, triB );
+				geometry.vertices.push( vm );
+
+				for ( var j = 0, jl = geometry.faceVertexUvs.length; j < jl; j ++ ) {
+
+					if ( geometry.faceVertexUvs[ j ].length ) {
+
+						var uvs = geometry.faceVertexUvs[ j ][ i ];
+
+						var uvA = uvs[ 0 ];
+						var uvB = uvs[ 1 ];
+						var uvC = uvs[ 2 ];
+
+						// AB
+
+						if ( edge === 0 ) {
+
+							var uvM = uvA.clone();
+							uvM.lerp( uvB, 0.5 );
+
+							var uvsTriA = [ uvA.clone(), uvM.clone(), uvC.clone() ];
+							var uvsTriB = [ uvM.clone(), uvB.clone(), uvC.clone() ];
+
+						// BC
+
+						} else if ( edge === 1 ) {
+
+							var uvM = uvB.clone();
+							uvM.lerp( uvC, 0.5 );
+
+							var uvsTriA = [ uvA.clone(), uvB.clone(), uvM.clone() ];
+							var uvsTriB = [ uvM.clone(), uvC.clone(), uvA.clone() ];
+
+						// AC
+
+						} else {
+
+							var uvM = uvA.clone();
+							uvM.lerp( uvC, 0.5 );
+
+							var uvsTriA = [ uvA.clone(), uvB.clone(), uvM.clone() ];
+							var uvsTriB = [ uvM.clone(), uvB.clone(), uvC.clone() ];
+
+						}
+
+						faceVertexUvs[ j ].push( uvsTriA, uvsTriB );
+
+					}
+
+				}
+
+			} else {
+
+				faces.push( face );
+
+				for ( var j = 0, jl = geometry.faceVertexUvs.length; j < jl; j ++ ) {
+
+					faceVertexUvs[ j ].push( geometry.faceVertexUvs[ j ][ i ] );
+
+				}
+
+			}
+
+		}
+
+	}
+
+	geometry.faces = faces;
+	geometry.faceVertexUvs = faceVertexUvs;
+
+};
+}));
+(function(root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        define('three.ExplodeModifier', ['three'], factory);
+    }
+    else if ('undefined' !== typeof exports && 'undefined' !== typeof module) {
+        module.exports = factory(require('three'));
+    }
+    else {
+        factory(root.THREE);
+    }
+}(this, function(THREE) {
+
+/**
+ * Make all faces use unique vertices
+ * so that each face can be separated from others
+ *
+ * @author alteredq / http://alteredqualia.com/
+ */
+
+THREE.ExplodeModifier = function () {
+
+};
+
+THREE.ExplodeModifier.prototype.modify = function ( geometry ) {
+
+	var vertices = [];
+
+	for ( var i = 0, il = geometry.faces.length; i < il; i ++ ) {
+
+		var n = vertices.length;
+
+		var face = geometry.faces[ i ];
+
+		var a = face.a;
+		var b = face.b;
+		var c = face.c;
+
+		var va = geometry.vertices[ a ];
+		var vb = geometry.vertices[ b ];
+		var vc = geometry.vertices[ c ];
+
+		vertices.push( va.clone() );
+		vertices.push( vb.clone() );
+		vertices.push( vc.clone() );
+
+		face.a = n;
+		face.b = n + 1;
+		face.c = n + 2;
+
+	}
+
+	geometry.vertices = vertices;
+
+};
+}));
 var defaultThreeUniforms = ['normalMatrix', 'viewMatrix', 'projectionMatrix', 'position', 'normal', 'modelViewMatrix', 'uv', 'uv2', 'modelMatrix'];
 
 function ShaderRuntime() {}
@@ -14007,8 +14321,6 @@ APP = ( function ( APP, $, window, document ) {
  * APP.ADVANCED_SLIDER_FILTER
  * @global
  * @requires ./examples/assets/js/min/pixi.min.js
- * @requires ./examples/assets/js/min/three.min.js
- * @requires ./src/components/ES5/_plugins-THREE
  * @requires ./src/components/ES5/_plugins-GSAP
  */
 
@@ -14017,7 +14329,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.ADVANCED_SLIDER_FILTER               = APP.ADVANCED_SLIDER_FILTER || {};
-	APP.ADVANCED_SLIDER_FILTER.version       = '0.1.6';
+	APP.ADVANCED_SLIDER_FILTER.version       = '0.1.7';
     APP.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 		
@@ -14049,15 +14361,7 @@ APP = ( function ( APP, $, window, document ) {
 		    stage__filter,
 			container__items,
 			displacementSprite,
-			displacementFilter,
-			
-			//Three.js
-			scenesAll                 = [],
-			texturesAll               = [],
-			webGLRenderer;
-		
-		
-		
+			displacementFilter;
 		
 		sliderInit( false );
 		
@@ -15085,331 +15389,6 @@ APP = ( function ( APP, $, window, document ) {
 				}// end effect
 				
 				
-				
-
-				//----------------------------------------------------------------------------------
-				//--------------------------------- 3D Rotating Effect -----------------------------
-				//----------------------------------------------------------------------------------
-				//Usage of returning sprite object: texturesAll[ index ]     scenesAll[ index ]
-				if ( $this.hasClass( 'uix-advanced-slider-sp--eff-3d-rotating' ) ) {
-
-
-					var texture;
-
-					//Drag and Drop
-					var targetRotationX             = 0,
-						targetRotationXOnMouseDown  = 0,
-						targetRotationXOnTouchDown  = 0,
-						targetRotationY             = 0,
-						targetRotationYOnMouseDown  = 0,
-						targetRotationYOnTouchDown  = 0,
-						mouseX                      = 0,
-						mouseY                      = 0,
-						mouseXOnMouseDown           = 0,
-						mouseXOnTouchDown           = 0,
-						mouseYOnMouseDown           = 0,
-						mouseYOnTouchDown           = 0,
-						windowHalfX                 = $this.width() / 2,
-						windowHalfY                 = $this.height() / 2;
-
-
-					
-					
-
-					//Add Geometries and Lights to the main container 
-					//-------------------------------------					
-					var init = function() {
-						$this.find( '.uix-advanced-slider-sp__item' ).each( function( index )  {
-
-							var $thisItem      = $( this ),
-								imgVideoHeight = null;
-
-							// create a scene, that will hold all our elements such as objects, cameras and lights.
-							var scene  = new THREE.Scene();
-							scene.name = 'scene-' + index;
-
-
-							// make a list item
-							var element = document.createElement( 'div' );
-							element.className = 'list-item';
-							element.innerHTML = '<div class="scene" style="width:'+$this.width() +'px;height:'+$this.height() +'px;"></div>';
-
-							// Look up the element that represents the area
-							// we want to render the scene
-							scene.userData.element = element.querySelector( '.scene' );
-							document.getElementById( rendererOuterID ).appendChild( element );
-
-							TweenMax.set( $( '#' + rendererOuterID ).find( '.list-item' ), {
-									alpha: 0,
-									css  : {
-										display: 'none'
-									}
-								});	
-
-
-							// Create a camera, which defines where we're looking at.
-							var aspect      = $this.width() / $this.height(),
-								camera      = new THREE.PerspectiveCamera( 55, aspect, 0.1, 1000 );
-
-							camera.position.x = 0;
-							camera.position.y = -30;
-							camera.position.z = 25;
-							camera.lookAt( new THREE.Vector3( 0, 0, 0 ) );
-							scene.userData.camera = camera;
-
-
-							// Generate one plane geometries mesh to each scene
-							if ( $thisItem.find( 'video' ).length > 0 ) {
-
-								texture = new THREE.VideoTexture( document.getElementById( $thisItem.find( 'video' ).attr( 'id' ) ) );
-								texture.minFilter = THREE.LinearFilter;
-								texture.magFilter = THREE.LinearFilter;
-								texture.format = THREE.RGBFormat;
-
-								// pause the video
-								texture.image.autoplay = true;
-								texture.image.currentTime = 0;
-								texture.image.muted = false;
-								texture.image.pause();
-								
-							
-
-							} else {
-								
-								texture = new THREE.TextureLoader().load( $thisItem.find( 'img' ).attr( 'src' ) );
-								
-			
-							}
-							
-							
-						
-							// texture controller
-							texturesAll.push( texture );
-							
-							
-							
-							// Immediately use the texture for material creation
-							var spriteMat            = new THREE.MeshBasicMaterial( { map: texture } ),
-								geometry             = new THREE.BoxGeometry( aspect*15, 15, 2 ),
-								displacementSprite   = new THREE.Mesh( geometry, spriteMat );
-
-						
-							displacementSprite.position.set( -0.01, -0.01, 0 );
-							displacementSprite.rotation.set( 0, 0, 0 );
-							scene.add( displacementSprite );
-
-
-							// Generate Ambient Light
-							var ambiLight = new THREE.AmbientLight( 0x404040 );
-							scene.add( ambiLight );
-
-							// Generate Directional Light
-							var light = new THREE.DirectionalLight( 0xffffff, 0.5 );
-							light.position.set( 0, 30, 70 );
-							scene.add( light );
-
-
-							// Display multiple instances of three.js in a single page
-							scenesAll.push( scene );
-
-
-
-						});
-
-
-						//Create a render and set the size
-						webGLRenderer = new THREE.WebGLRenderer( { 
-												canvas   : document.getElementById( rendererCanvasID ), //canvas
-												alpha    : true, 
-												antialias: true 
-											} );
-
-						webGLRenderer.setClearColor( new THREE.Color( 0x000000, 0 ) );
-						webGLRenderer.setPixelRatio( window.devicePixelRatio );  
-						webGLRenderer.shadowMap.enabled = true;
-
-
-					};
-
-					//Add render event
-					//-------------------------------------	
-
-					//Converts numeric degrees to radians
-					var toRad = function( number ) {
-						return number * Math.PI / 180;
-					};
-
-
-					var render = function() {
-
-
-						webGLRenderer.setClearColor( 0x000000 );
-						webGLRenderer.setScissorTest( false );
-						webGLRenderer.clear();
-
-						webGLRenderer.setClearColor( 0x000000 );
-						webGLRenderer.setScissorTest( true );
-
-						scenesAll.forEach( function( scene, i ) {
-
-							// Get the element that is a place holder for where we want to draw the scene
-							var element = scene.userData.element,
-								camera  = scene.userData.camera,
-								rect    = element.getBoundingClientRect();
-
-
-							//automatic rotation
-							scene.children[0].rotation.y = Date.now() * 0.0001;
-							var amplitudeVal = 1.0 + Math.sin( Date.now() * 0.0001 * 0.5 );
-
-							
-							//drag & drop
-	//						scene.children[0].rotation.x = toRad( targetRotationX * 4 );
-	//						scene.children[0].rotation.y = toRad( targetRotationY * 4 );	
-	//						
-							//drag & drop with easing effect
-							scene.children[0].rotation.x += ( targetRotationX - scene.children[0].rotation.x ) * 0.05;
-							scene.children[0].rotation.y += ( targetRotationY - scene.children[0].rotation.y ) * 0.05;
-
-
-							// set the viewport
-							webGLRenderer.setViewport( 0, 0, rect.width, rect.height );
-							webGLRenderer.setScissor( 0, 0, rect.width, rect.height );
-
-
-							//tell texture object it needs to be updated
-							texture.needsUpdate = true;
-
-							camera.aspect = $this.width() / $this.height(); // not changing in this example
-							camera.updateProjectionMatrix();
-
-							//drag & drop
-							webGLRenderer.render( scene, camera );
-
-						} );
-
-					};
-
-
-
-					//Animation Interactions
-					//-------------------------------------
-					var animate = function() {
-						render();
-						requestAnimationFrame( animate );
-					};
-
-
-					init();
-					animate();
-
-
-					//Rotation and Drop
-
-					var onDocumentMouseDown = function( e ) {
-						e.preventDefault();
-						document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-						document.addEventListener( 'mouseup', onDocumentMouseUp, false );
-						document.addEventListener( 'mouseout', onDocumentMouseOut, false );
-						mouseXOnMouseDown = e.clientX - windowHalfX;
-						mouseYOnMouseDown = e.clientY - windowHalfY;
-						targetRotationXOnMouseDown = targetRotationX;
-						targetRotationYOnMouseDown = targetRotationY;
-					};
-
-					var onDocumentMouseMove = function( e ) {
-						mouseX = e.clientX - windowHalfX;
-						mouseY = e.clientY - windowHalfY;
-						targetRotationX = targetRotationXOnMouseDown + (mouseX - mouseXOnMouseDown) * 0.02;
-						targetRotationY = targetRotationYOnMouseDown + (mouseY - mouseYOnMouseDown) * 0.02;
-					};
-
-					var onDocumentMouseUp = function( e ) {
-						document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
-						document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
-						document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
-
-					};
-
-					var onDocumentMouseOut = function( e ) {
-						document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
-						document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
-						document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
-
-					};
-
-
-
-
-					var onDocumentTouchStart = function( e ) {
-						e.preventDefault();
-						e = e.changedTouches[ 0 ];
-
-						document.addEventListener( 'touchmove', onDocumentTouchMove, false );
-						document.addEventListener( 'touchend', onDocumentTouchEnd, false );
-						mouseXOnTouchDown = e.clientX - windowHalfX;
-						mouseYOnTouchDown = e.clientY - windowHalfY;
-						targetRotationXOnTouchDown = targetRotationX;
-						targetRotationYOnTouchDown = targetRotationY;
-
-
-					};
-
-					var onDocumentTouchMove = function( e ) {
-						e.preventDefault();
-						e = e.changedTouches[ 0 ];
-
-						mouseX = e.clientX - windowHalfX;
-						mouseY = e.clientY - windowHalfY;
-						targetRotationX = targetRotationXOnTouchDown + (mouseX - mouseXOnTouchDown) * 0.02;
-						targetRotationY = targetRotationYOnTouchDown + (mouseY - mouseYOnTouchDown) * 0.02;	
-
-
-
-					};
-
-					var onDocumentTouchEnd = function( e ) {
-						document.removeEventListener( 'touchmove', onDocumentTouchMove, false );
-						document.removeEventListener( 'touchend', onDocumentTouchEnd, false );
-
-					};
-
-					if ( Modernizr.touchevents ) {
-						document.addEventListener( 'touchstart', onDocumentTouchStart, false );
-					} else {
-						document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-					}
-
-
-
-
-					//Responsive plane geometries
-					//-------------------------------------
-					window.addEventListener( 'resize', function () {
-
-						var width = document.getElementById( rendererCanvasID ).clientWidth;
-						var height = document.getElementById( rendererCanvasID ).clientHeight;
-
-						if ( document.getElementById( rendererCanvasID ).width !== width || document.getElementById( rendererCanvasID ).height !== height ) {
-
-							webGLRenderer.setSize( width, height, false );
-
-						}
-
-
-					}, false );
-
-
-					//Initialize the default height of canvas
-					//-------------------------------------	
-					setTimeout( function() {
-						canvasDefaultInit( $first );
-					}, animSpeed );
-
-
-				}// end effect
-
-
 
 				//Canvas Interactions
 				//-------------------------------------
@@ -15789,11 +15768,6 @@ APP = ( function ( APP, $, window, document ) {
 				if ( dataLoop ) {
 					if ( elementIndex == 0 ) dir = 'prev';
 				}
-
-			}
-
-			//-- 3D Rotating Effect
-			if ( slider.hasClass( 'uix-advanced-slider-sp--eff-3d-rotating' ) ) {
 
 			}
 
@@ -16667,116 +16641,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 
 				} // end effect		
-				
-				
-				//----------------------------------------------------------------------------------
-				//--------------------------------- 3D Rotating Effect -----------------------------
-				//----------------------------------------------------------------------------------
-				if ( slider.hasClass( 'uix-advanced-slider-sp--eff-3d-rotating' ) ) {
-					
-					
-			
-					//Hide description container of item
-					//-------------------------------------
-					TweenMax.to( $allItems, animSpeed/1000, {
-						alpha : 0
-					});			
 
-					
-					//Display wrapper of canvas (transitions between slides)
-					//-------------------------------------	
-					
-					if ( goType == 'out' ) {
-						//Current item leaving action
-						
-						
-						//rotation transition
-						TweenMax.to( scenesAll[ elementIndex ].children[ 0 ].rotation, animSpeed/1000, {
-							x: '+=2',
-							y: '+=2'
-						});	
-						
-						
-	
-					} else {
-						
-						//Current item entry action
-						TweenMax.to( $myRenderer, animSpeed/1000, {
-							alpha : 0,
-							onComplete    : function() {
-
-								var curSp = $myRenderer.find( '.list-item' ).eq( elementIndex );
-
-								TweenMax.to( this.target, animSpeed/1000, {
-									alpha : 1
-								});
-
-
-								//display the current item
-								TweenMax.set( $myRenderer.find( '.list-item' ), {
-									alpha: 0,
-									css  : {
-										display: 'none'
-									}
-								});	
-
-
-								// pause all videos
-								for ( var k = 0; k < spTotal; k++ ) {
-
-									var videoOb = texturesAll[ k ].image;
-
-									if ( videoOb.currentSrc.indexOf( '.mp4' ) >= 0 ) {
-										videoOb.autoplay = false;
-										videoOb.currentTime = 0;
-										videoOb.muted = true;
-										videoOb.pause();
-									}
-
-								}
-
-
-
-								// play the video
-								var videoObCur =  texturesAll[ elementIndex ].image;
-
-								if ( videoObCur.currentSrc.indexOf( '.mp4' ) >= 0 ) {
-									videoObCur.autoplay = true;
-									videoObCur.currentTime = 0;
-									videoObCur.muted = false;
-									videoObCur.play();
-								}
-
-
-
-								//display filters
-								TweenMax.to( curSp, animSpeed/1000, {
-									alpha: 1,
-									css : {
-										display: 'block'
-									},
-									onComplete : function() {
-										TweenMax.to( $current, animSpeed/1000, {
-											alpha : 1
-										});		
-									}
-								});	
-
-
-							}
-						});			
-
-						
-					}
-
-
-
-					
-
-				}// end effect
-					
-				
-				
 				
 			} else {
 				slider.find( '.uix-advanced-slider-sp__item canvas' ).hide();
@@ -21678,7 +21543,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.FORM               = APP.FORM || {};
-	APP.FORM.version       = '0.1.3';
+	APP.FORM.version       = '0.1.4';
     APP.FORM.documentReady = function( $ ) {
 
 		
@@ -22804,16 +22669,19 @@ APP = ( function ( APP, $, window, document ) {
 
 
 					//Set actived style from their values
-					if ( $( targetID ).val() == $( this ).data( 'value' ) ) {
-						$( this )
-							.addClass( 'active' )
-						    .find( '[type="radio"]' ).prop( 'checked', true );
-						
-					} else {
-						$( this )
-							.removeClass( 'active' )
-						    .find( '[type="radio"]' ).prop( 'checked', false );
-					}	
+					if ( typeof $( this ).data( 'value' ) != typeof undefined ) {
+						if ( $( targetID ).val() == $( this ).data( 'value' ) ) {
+							$( this )
+								.addClass( 'active' )
+								.find( '[type="radio"]' ).prop( 'checked', true );
+
+						} else {
+							$( this )
+								.removeClass( 'active' )
+								.find( '[type="radio"]' ).prop( 'checked', false );
+						}		
+					} 
+
 
 
 				});
@@ -33177,7 +33045,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP._3D_MODEL               = APP._3D_MODEL || {};
-	APP._3D_MODEL.version       = '0.0.1';
+	APP._3D_MODEL.version       = '0.0.2';
     APP._3D_MODEL.documentReady = function( $ ) {
 
 		
@@ -33269,8 +33137,11 @@ APP = ( function ( APP, $, window, document ) {
 
 				};
 
+				var textureURL = ( typeof $( '#' + rendererCanvasID ).data( 'texture-src' ) != typeof undefined ) ? $( '#' + rendererCanvasID ).data( 'texture-src' ) : templateUrl + '/assets/models/obj/project.png';
+				var objURL = ( typeof $( '#' + rendererCanvasID ).data( 'model-src' ) != typeof undefined ) ? $( '#' + rendererCanvasID ).data( 'model-src' ) : templateUrl + '/assets/models/obj/project.obj';
+				
 				var textureLoader = new THREE.TextureLoader( manager ),
-					texture       = textureLoader.load( templateUrl + '/assets/models/obj/project.png' ),
+					texture       = textureLoader.load( textureURL ),
 					onProgress    = function ( xhr ) {
 						if ( xhr.lengthComputable ) {
 							var percentComplete = xhr.loaded / xhr.total * 100;
@@ -33281,7 +33152,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 				var loader        = new THREE.OBJLoader( manager );
-				loader.load( templateUrl + '/assets/models/obj/project.obj', function ( object ) {
+				loader.load( objURL, function ( object ) {
 
 					object.traverse( function ( child ) {
 
@@ -35214,6 +35085,1770 @@ APP = ( function ( APP, $, window, document ) {
     };
 
     APP.components.documentReady.push( APP._3D_MOUSE_INTERACTION2.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+
+
+
+
+/* 
+ *************************************
+ * <!-- 3D Shatter Slider -->
+ *************************************
+ */
+
+/**
+ * APP._3D_SHATTER_SLIDER
+ * @global
+ * @requires ./examples/assets/js/min/three.min.js
+ * @requires ./src/components/ES5/_plugins-THREE
+ */
+
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP._3D_SHATTER_SLIDER               = APP._3D_SHATTER_SLIDER || {};
+	APP._3D_SHATTER_SLIDER.version       = '0.0.1';
+    APP._3D_SHATTER_SLIDER.documentReady = function( $ ) {
+
+		//Prevent this module from loading in other pages
+		if ( $( '.uix-3d-slider--shatter' ).length == 0 || ! Modernizr.webgl ) return false;
+		
+		
+		var MainStage = function() {
+
+			var $window                   = $( window ),
+				windowWidth               = window.innerWidth,
+				windowHeight              = window.innerHeight;
+
+
+			var animSpeed                 = 1000,
+				$sliderWrapper            = $( '.uix-3d-slider--shatter' ),
+
+
+				//Autoplay global variables
+				timer                     = null,
+				playTimes,
+
+				//Basic webGL renderers 
+				renderLoaderID            = 'uix-3d-slider--shatter__loader',
+				rendererOuterID           = 'uix-3d-slider--shatter__canvas-container',
+				rendererCanvasID          = 'uix-3d-slider--shatter__canvas',
+				renderer;
+
+
+
+			// Generate one plane geometries mesh to scene
+			//-------------------------------------	
+			var camera,
+				controls,
+				scene,
+				light,
+				renderer,
+				material,
+				displacementSprite,
+				theta        = 0;
+
+
+			var offsetWidth   = 475, //Set the display width of the objects in the Stage
+				offsetHeight  = 375, //Set the display height of the objects in the Stage
+				allSources    = [],
+				objTotal,
+				objLoaded = false;
+
+			
+		
+			var sources = [];
+			var isAnimating = false;
+			
+			
+			// constants
+			var activeSlider = 0;
+			
+			function wrapperInit() {
+				
+				$sliderWrapper.each( function()  {
+
+					var $this                    = $( this ),
+						$items                   = $this.find( '.uix-3d-slider--shatter__item' ),
+						$first                   = $items.first(),
+						itemsTotal               = $items.length,
+						dataControlsPagination   = $this.data( 'controls-pagination' ),
+						dataControlsArrows       = $this.data( 'controls-arrows' ),
+						dataLoop                 = $this.data( 'loop' ),
+						dataFilterTexture        = $this.data( 'filter-texture' ),
+						dataDraggable            = $this.data( 'draggable' ),
+						dataDraggableCursor      = $this.data( 'draggable-cursor' );
+
+
+					if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-3d-slider--shatter__pagination';
+					if ( typeof dataControlsArrows === typeof undefined || dataControlsArrows == false ) dataControlsArrows = '.uix-3d-slider--shatter__arrows';
+					if ( typeof dataLoop === typeof undefined ) dataLoop = false;
+					if ( typeof dataFilterTexture === typeof undefined || !dataFilterTexture || dataFilterTexture == '' ) dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+					if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
+					if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
+					
+					
+
+
+					//If arrows does not exist on the page, it will be added by default, 
+					//and the drag and drop function will be activated.
+					if ( $( dataControlsArrows ).length == 0 ) {
+						$( 'body' ).prepend( '<div style="display:none;" class="uix-3d-slider--shatter__arrows '+dataControlsArrows.replace('#','').replace('.','')+'"><a href="#" class="uix-3d-slider--shatter__arrows--prev"></a><a href="#" class="uix-3d-slider--shatter__arrows--next"></a></div>' );
+					}
+
+
+
+					//Prevent bubbling
+					if ( itemsTotal == 1 ) {
+						$( dataControlsPagination ).hide();
+						$( dataControlsArrows ).hide();
+					}
+
+					
+					//Initialize the controlers classes
+					//-------------------------------------	
+					$( dataControlsPagination ).find( 'ul > li' ).first().addClass( 'active' );
+
+
+					
+					
+					//Initialize the wrapper width and height
+					//-------------------------------------	
+					$this.css( 'height', windowHeight + 'px' );
+					
+
+					//Load slides to canvas
+					//-------------------------------------	
+					if ( $( '#' + rendererCanvasID ).length == 0 ) {
+						$this.prepend( '<div id="'+rendererOuterID+'" class="uix-advanced-slider-sp__canvas-container"><canvas id="'+rendererCanvasID+'"></canvas></div>' );
+
+					}
+
+					
+					//Get the animation speed
+					//-------------------------------------	
+					if ( typeof $this.data( 'speed' ) != typeof undefined && $this.data( 'speed' ) != false ) {
+						animSpeed = $this.data( 'speed' );
+					}
+
+
+					//Initialize the first item container
+					//-------------------------------------		
+					$items.addClass( 'next' );
+					$first.addClass( 'active' );
+
+
+
+					//Get all images and videos
+					//-------------------------------------		
+					$items.each( function()  {
+						var _item = $( this );
+						
+						if ( _item.find( 'video' ).length > 0 ) {
+
+							//Returns the dimensions (intrinsic height and width ) of the video
+							var video    = document.getElementById( _item.find( 'video' ).attr( 'id' ) ),
+								videoURL = _item.find( 'source:first' ).attr( 'src' );
+
+							if ( typeof videoURL != typeof undefined ) {
+								sources.push(
+									{
+										"url": videoURL,
+										"id": _item.find( 'video' ).attr( 'id' ),
+										"type": 'video'
+									}
+								);
+							}
+
+
+
+
+						} else {
+
+							var imgURL   = _item.find( 'img' ).attr( 'src' );
+
+							if ( typeof imgURL != typeof undefined ) {
+
+								sources.push(
+									{
+										"url": imgURL,
+										"id": 'img-' + UixGUID.create(),
+										"type": 'img'
+									}
+								);
+							}
+
+
+						}	
+
+					});
+					
+					
+
+					//Pagination dots 
+					//-------------------------------------	
+					var _dot       = '',
+						_dotActive = '';
+					_dot += '<ul>';
+					for ( var i = 0; i < itemsTotal; i++ ) {
+
+						_dotActive = ( i == 0 ) ? 'class="active"' : '';
+
+						_dot += '<li '+_dotActive+' data-index="'+i+'"><a href="javascript:"></a></li>';
+					}
+					_dot += '</ul>';
+
+					if ( $( dataControlsPagination ).html() == '' ) $( dataControlsPagination ).html( _dot );
+
+					
+					//Fire the slider transtion with buttons
+					$( dataControlsPagination ).find( 'ul > li' ).on( 'click', function( e ) {
+						e.preventDefault();
+
+						var slideCurId  = $( dataControlsPagination ).find( 'ul > li.active' ).index(),
+							slideNextId = $( this ).index();
+
+
+						//Determine the direction
+						var curDir = 'prev';
+						if ( $( this ).attr( 'data-index' ) > slideCurId ) {
+							curDir = 'next';
+						}
+
+
+						//Transition Between Slides
+						sliderUpdates( slideCurId, slideNextId, curDir );
+
+
+						//Pause the auto play event
+						clearInterval( timer );	
+
+
+					});
+
+					//Next/Prev buttons
+					//-------------------------------------		
+					var _prev = $( dataControlsArrows ).find( '.uix-3d-slider--shatter__arrows--prev' ),
+						_next = $( dataControlsArrows ).find( '.uix-3d-slider--shatter__arrows--next' );
+
+					$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
+
+					$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
+					if ( !dataLoop ) {
+						_prev.addClass( 'disabled' );
+					}
+
+
+					_prev.on( 'click', function( e ) {
+						e.preventDefault();
+
+						var slideCurId  = $items.filter( '.active' ).index(),
+							slideNextId = parseFloat( $items.filter( '.active' ).index() ) - 1;
+	
+						//Transition Between Slides
+						sliderUpdates( slideCurId, slideNextId, 'prev' );	
+						
+						
+
+
+						//Pause the auto play event
+						clearInterval( timer );
+
+					});
+
+					_next.on( 'click', function( e ) {
+						e.preventDefault();
+
+						var slideCurId  = $items.filter( '.active' ).index(),
+							slideNextId = parseFloat( $items.filter( '.active' ).index() ) + 1;
+	
+						//Transition Between Slides
+						sliderUpdates( slideCurId, slideNextId, 'next' );	
+
+
+						//Pause the auto play event
+						clearInterval( timer );
+
+
+					});
+					
+
+					
+					//Autoplay Slider
+					//-------------------------------------		
+					var dataAuto                 = $this.data( 'auto' ),
+						dataTiming               = $this.data( 'timing' ),
+						dataLoop                 = $this.data( 'loop' );
+
+					if ( typeof dataAuto === typeof undefined ) dataAuto = false;	
+					if ( typeof dataTiming === typeof undefined ) dataTiming = 10000;
+					if ( typeof dataLoop === typeof undefined ) dataLoop = false;
+
+
+					if ( dataAuto && !isNaN( parseFloat( dataTiming ) ) && isFinite( dataTiming ) ) {
+
+						sliderAutoPlay( dataTiming, $items, dataLoop );
+
+						$this.on({
+							mouseenter: function() {
+								clearInterval( timer );
+							},
+							mouseleave: function() {
+								sliderAutoPlay( dataTiming, $items, dataLoop );
+							}
+						});	
+
+					}
+
+
+				});// end each				
+			}
+
+
+			
+			function init() {
+
+				
+
+				//Core 3D stage begin
+				//-------------------------------------		
+				//camera
+				camera = new THREE.PerspectiveCamera( 55, window.innerWidth / window.innerHeight, 10,  2500 ); // FlyCamera // FlyControls
+				camera.movementSpeed = 100.0;
+				camera.rollSpeed = 0.5;
+				camera.position.y = 60;
+				camera.position.z = 500;
+
+
+
+				//Scene
+				scene = new THREE.Scene();
+
+
+				//HemisphereLight
+				scene.add( new THREE.AmbientLight( 0x555555 ) );
+
+				light = new THREE.SpotLight( 0xffffff, 1.5 );
+				light.position.set( 0, 0, 2000 );
+				scene.add( light );
+
+
+
+				//WebGL Renderer	
+				 // create a render and set the size
+				renderer = new THREE.WebGLRenderer( { 
+										canvas   : document.getElementById( rendererCanvasID ), //canvas
+										alpha    : true, 
+										antialias: true 
+									} );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+				//controls
+				controls = new THREE.OrbitControls( camera, renderer.domElement );
+				controls.autoRotate = false;
+				controls.autoRotateSpeed = 0.5;
+				controls.rotateSpeed = 0.5;
+				controls.zoomSpeed = 1.2;
+				controls.panSpeed = 0.8;
+				controls.enableZoom = false;
+				controls.target.set(0, 0, 0 );
+				controls.update();			
+
+
+
+				//A loader for loading all images from array.
+				var loader = new THREE.TextureLoader();
+				loader.crossOrigin = 'anonymous';
+
+
+				//Preload
+				objTotal = sources.length;
+			
+				sources.forEach( function( element, index ) {
+					
+				
+					if ( element.type == 'img' ) {
+						
+						
+						loader.load(
+							// resource URL
+							element.url,
+
+							// onLoad callback
+							function ( texture ) {
+								
+								loadSource( texture, index, offsetWidth, offsetHeight, objTotal, $( '#' + renderLoaderID ) );
+
+							},
+
+							// onProgress callback currently not supported
+							undefined,
+
+							// onError callback
+							function ( err ) {
+								console.error( 'An error happened.' );
+							}
+						);	
+						
+						
+						
+					} else {
+						
+					
+						var texture = new THREE.VideoTexture( document.getElementById( element.id ) );
+						texture.minFilter = THREE.LinearFilter;
+						texture.magFilter = THREE.LinearFilter;
+						texture.format = THREE.RGBFormat;
+
+						// pause the video
+						texture.image.autoplay = true;
+						texture.image.loop = true;
+						texture.image.currentTime = 0;
+						texture.image.muted = false;
+						texture.image.pause();	
+
+						
+						loadSource( texture, index, offsetWidth, offsetHeight, objTotal, $( '#' + renderLoaderID ) );
+					}
+					
+				});
+		
+
+				// Fires when the window changes
+				window.addEventListener( 'resize', onWindowResize, false );
+
+
+			}
+
+
+
+
+
+			function render() {
+				requestAnimationFrame( render );
+
+				theta += 0.1;
+
+
+				//To set a background color.
+				//renderer.setClearColor( 0x000000 );	
+
+
+
+				//Animating Three.js vertices
+				allSources.forEach( function ( element, index ) {
+					element.geometry.verticesNeedUpdate = true;
+				});
+
+
+
+				//check all images loaded
+				if ( typeof allSources != typeof undefined ) {
+					if ( !objLoaded && allSources.length === objTotal ) {
+						
+						allSources.forEach( function ( element, index ) {
+							scene.add( element );
+
+
+							//if the first object is video and play it
+							if ( index == 0 ) {
+								var videoObCur =  element.material.map.image;
+								if ( videoObCur.localName == 'video' ) {
+									videoObCur.autoplay = true;
+									videoObCur.currentTime = 0;
+									videoObCur.muted = true;
+									videoObCur.play();
+								}
+							}
+
+							
+							//initialize all objects
+							if ( index > 0 ) {
+								var fragment =  element.geometry.vertices;
+
+								for ( var i = 0; i < fragment.length; i++ ) {
+
+									var pos = new THREE.Vector3();
+									var final = Math.random();
+
+									pos.x = Math.random();
+									pos.y = Math.random() * (50 * i);
+									pos.z = Math.random() * -300;
+
+									fragment[i].x = pos.x;
+									fragment[i].y = pos.y;
+									fragment[i].z = pos.z;
+
+								}	
+							}
+
+							console.log( element );
+						});
+						objLoaded = true;
+
+
+					}	
+
+				}
+
+
+
+				//update camera and controls
+				controls.update();
+
+				renderer.render( scene, camera );
+
+
+			}
+
+
+			function onWindowResize() {
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+			}
+
+			
+
+			/*
+			 * Load Source
+			 *
+			 * @param  {Object} texture         - Returns a new texture object which can directly be used for material creation.
+			 * @param  {Number} index           - Index of image or video.
+			 * @param  {Number} w               - The width of an image or video, in pixels. 
+			 * @param  {Number} h               - The height of an image or video, in pixels. 
+			 * @param  {Number} total           - Total number of preload images or video.
+			 * @param  {Object} loading         - Progress bar display control.
+			 * @return {Void}
+			 */
+			function loadSource( texture, index, w, h, total, loading ) {
+
+				var imgW = w,
+					imgH = h;
+
+				
+				// Immediately use the texture for material creation
+				// Create a texture loader so we can load our image file
+				material = new THREE.MeshBasicMaterial( {
+					map: texture
+				 } );
+
+
+				var geometryExplode = new THREE.BoxGeometry( imgW, imgH, 13 ),
+
+
+				displacementSprite = new THREE.Mesh( geometryExplode, material );
+
+				displacementSprite.minFilter = THREE.LinearFilter;
+				displacementSprite.overdraw = true;
+				displacementSprite.position.set(0,0,0);
+
+
+				geometryExplode.center();
+
+				// Shattering Images
+				var explodeModifier = new THREE.ExplodeModifier();
+				explodeModifier.modify( geometryExplode );
+
+				// add some additional vars to the
+				// fragments to ensure we can do physics
+				// and so on
+				for ( var i = 0; i < geometryExplode.vertices.length; i++ ) {
+					var fragment = geometryExplode.vertices[i];
+					fragment.origPos	= {
+						x: fragment.x,
+						y: fragment.y,
+						z: fragment.z
+					};
+
+				}
+
+
+				allSources.push( displacementSprite );
+
+
+				//loading
+				TweenMax.to( loading, 0.5, {
+					width    : Math.round(100 * allSources.length / total ) + '%',
+					onComplete : function() {
+
+						if ( $( this.target ).width() >= windowWidth - 50 ) {
+
+							TweenMax.to( this.target, 0.5, {
+								alpha: 0
+							});	
+						}
+
+					}
+				});
+					
+
+			}
+
+
+			
+			/*
+			 * Trigger slider autoplay
+			 *
+			 * @param  {Number} timing           - Autoplay interval.
+			 * @param  {Object} items            - Each item in current slider.
+			 * @param  {Boolean} loop            - Determine whether to loop through each item.
+			 * @return {Void}                    - The constructor.
+			 */
+			function sliderAutoPlay( timing, items, loop ) {	
+
+				var total = items.length;
+
+				timer = setInterval( function() {
+
+					playTimes = parseFloat( items.filter( '.active' ).index() );
+					playTimes++;
+
+					
+					if ( !loop ) {
+						if ( playTimes < total && playTimes >= 0 ) {
+							
+							var slideCurId  = items.filter( '.active' ).index(),
+								slideNextId = playTimes;	
+
+							sliderUpdates( slideCurId, slideNextId, 'next' );
+						}
+					} else {
+						if ( playTimes == total ) playTimes = 0;
+						if ( playTimes < 0 ) playTimes = total-1;		
+
+						var slideCurId  = items.filter( '.active' ).index(),
+							slideNextId = playTimes;	
+
+						
+						//Prevent problems with styles when switching in positive order
+						if ( playTimes == 0 ) {
+							sliderUpdates( slideCurId, slideNextId, 'prev' );	
+						} else {
+							sliderUpdates( slideCurId, slideNextId, 'next' );
+						}
+
+					}
+
+
+
+				}, timing );	
+			}
+
+			
+			
+			/*
+			 *  Transition Between Slides
+			 *
+			 * @param  {Number} slideCurId             - Index of current slider.
+			 * @param  {Number} slideNextId            - Index of next slider.
+			 * @param  {String} dir                    - Switching direction indicator.	 
+			 * @return {Void}
+			 */
+			function sliderUpdates( slideCurId, slideNextId, dir ) {
+
+
+				var $items                   = $sliderWrapper.find( '.uix-3d-slider--shatter__item' ),
+					total                    = $items.length,
+					dataCountTotal           = $sliderWrapper.data( 'count-total' ),
+					dataCountCur             = $sliderWrapper.data( 'count-now' ),
+					dataControlsPagination   = $sliderWrapper.data( 'controls-pagination' ),
+					dataControlsArrows       = $sliderWrapper.data( 'controls-arrows' ),	
+					dataLoop                 = $sliderWrapper.data( 'loop' );
+	
+			
+				
+				if ( typeof dataCountTotal === typeof undefined ) dataCountTotal = 'p.count em.count';
+				if ( typeof dataCountCur === typeof undefined ) dataCountCur = 'p.count em.current';
+				if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-3d-slider--shatter__pagination';
+				if ( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-3d-slider--shatter__arrows';
+				if ( typeof dataLoop === typeof undefined ) dataLoop = false;			
+
+				//Prevent bubbling
+				if ( total == 1 ) {
+					$( dataControlsPagination ).hide();
+					$( dataControlsArrows ).hide();
+					return false;
+				}
+
+				if ( ! isAnimating ) {
+					isAnimating = true;
+					
+					
+					//Transition Interception
+					//-------------------------------------
+					if ( dataLoop ) {
+						if ( slideCurId > total - 1 ) slideCurId = 0;
+						if ( slideCurId < 0 ) slideCurId = total-1;	
+
+						//--
+						if ( slideNextId < 0 ) slideNextId = total-1;
+						if ( slideNextId > total - 1 ) slideNextId = 0;
+					} else {
+
+						if ( slideCurId > total - 1 ) slideCurId = total-1;
+						if ( slideCurId < 0 ) slideCurId = 0;	
+
+						//--
+						if ( slideNextId < 0 ) slideNextId = 0;
+						if ( slideNextId > total - 1 ) slideNextId = total-1;
+
+					}
+
+
+
+					//Get previous and next index of item
+					//-------------------------------------
+					var $current = $sliderWrapper.find( '.uix-3d-slider--shatter__item' ).eq( slideCurId );
+					var	$next    = $sliderWrapper.find( '.uix-3d-slider--shatter__item' ).eq( slideNextId );
+
+
+
+					console.log( 'Current: ' + slideCurId + ' | Next: ' + slideNextId );
+
+
+					//Determine the direction and add class to switching direction indicator.
+					//-------------------------------------
+					var dirIndicatorClass = '';
+					if ( dir == 'prev' ) dirIndicatorClass = 'prev';
+					if ( dir == 'next' ) dirIndicatorClass = 'next';
+
+
+					//Add transition class to each item
+					//-------------------------------------	
+					$items.removeClass( 'active leave prev next' )
+						  .addClass( dirIndicatorClass );
+
+					$current.addClass( 'leave' );
+					$next.addClass( 'active' );
+
+
+
+					//Add transition class to Controls Pagination
+					//-------------------------------------
+					$( dataControlsPagination ).find( 'ul > li' ).removeClass( 'active leave prev next' )
+											   .addClass( dirIndicatorClass );
+
+					$( dataControlsPagination ).find( 'ul > li' ).eq( slideCurId ).addClass( 'leave' );
+					$( dataControlsPagination ).find( 'ul > li' ).eq( slideNextId ).addClass( 'active' );
+
+
+
+					//Add transition class to Arrows
+					//-------------------------------------		
+					if ( ! dataLoop ) {
+						$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
+						if ( slideNextId == total - 1 ) $( dataControlsArrows ).find( '.uix-3d-slider--shatter__arrows--next' ).addClass( 'disabled' );
+						if ( slideNextId == 0 ) $( dataControlsArrows ).find( '.uix-3d-slider--shatter__arrows--prev' ).addClass( 'disabled' );
+					}
+
+
+
+
+					//Display counter
+					//-------------------------------------
+					$( dataCountTotal ).text( total );
+					$( dataCountCur ).text( parseFloat( slideCurId ) + 1 );		
+
+
+
+					//Pause all videos
+					//-------------------------------------
+					// pause all videos
+					allSources.forEach( function ( element, index ) {
+
+						var videoOb = element.material.map.image;
+
+						if ( videoOb.localName == 'video' ) {
+							videoOb.autoplay = false;
+							videoOb.currentTime = 0;
+							videoOb.muted = true;
+							videoOb.pause();
+						}
+					});
+
+
+
+					//Fire the next object
+					//-------------------------------------
+					activeSlider = slideNextId;
+					
+					
+					if ( typeof allSources[slideNextId] != typeof undefined ) {
+
+						var fragment = allSources[slideNextId].geometry.vertices;
+
+						for ( var i = 0; i < fragment.length; i++ ) {
+
+							TweenMax.to( fragment[i], 2, {
+								x: fragment[i].origPos.x,
+								y: fragment[i].origPos.y,
+								z: fragment[i].origPos.z,
+								ease: "Expo.easeInOut"
+							});	
+						}		
+
+
+					}	
+
+					// play the video
+					var videoObCur =  allSources[ slideNextId ].material.map.image;
+
+					if ( videoObCur.localName == 'video' ) {
+						videoObCur.autoplay = true;
+						videoObCur.currentTime = 0;
+						videoObCur.muted = false;
+						videoObCur.play();
+					}
+
+
+					//Fire the current object
+					//-------------------------------------
+					if ( typeof allSources[slideCurId] != typeof undefined ) {
+
+						var fragment = allSources[slideCurId].geometry.vertices;
+
+						for ( var i = 0; i < fragment.length; i++ ) {
+
+							var pos = new THREE.Vector3();
+							var final = Math.random();
+
+							pos.x = Math.random();
+							pos.y = Math.random() * (50 * i);
+							pos.z = Math.random() * -300;
+
+							TweenMax.to( fragment[i], 2, {
+								x: pos.x,
+								y: pos.y,
+								z: pos.z,
+								ease: "Expo.easeInOut",
+								onComplete: function onComplete() {
+
+									//reset the trigger
+									isAnimating = false;
+
+								}
+							});	
+						}		
+
+
+					}			
+					
+					
+				}// end isAnimating
+				
+				
+
+			}
+
+			
+			
+
+
+			// 
+			//-------------------------------------	
+			return {
+				init              : init,
+				wrapperInit       : wrapperInit,
+				render            : render,
+				getScene          : function () { return scene; },
+				getCamera         : function () { return camera; } 
+			};
+
+
+		}();
+
+		MainStage.wrapperInit();
+		MainStage.init();
+		MainStage.render();
+		
+		
+
+
+		
+    };
+	
+    APP.components.documentReady.push( APP._3D_SHATTER_SLIDER.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+
+
+
+
+/* 
+ *************************************
+ * <!-- 3D Explosive Particle Slider -->
+ *************************************
+ */
+
+/**
+ * APP._3D_EXP_PARTICLE_SLIDER
+ * @global
+ * @requires ./examples/assets/js/min/three.min.js
+ * @requires ./src/components/ES5/_plugins-THREE
+ */
+
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP._3D_EXP_PARTICLE_SLIDER               = APP._3D_EXP_PARTICLE_SLIDER || {};
+	APP._3D_EXP_PARTICLE_SLIDER.version       = '0.0.1';
+    APP._3D_EXP_PARTICLE_SLIDER.documentReady = function( $ ) {
+
+		
+		//Prevent this module from loading in other pages
+		if ( $( '.uix-3d-slider--expParticle' ).length == 0 || ! Modernizr.webgl ) return false;
+		
+		
+		var MainStage = function() {
+
+			var $window                   = $( window ),
+				windowWidth               = window.innerWidth,
+				windowHeight              = window.innerHeight;
+
+
+			var animSpeed                 = 1000,
+				$sliderWrapper            = $( '.uix-3d-slider--expParticle' ),
+
+
+				//Autoplay global variables
+				timer                     = null,
+				playTimes,
+
+				//Basic webGL renderers 
+				renderLoaderID            = 'uix-3d-slider--expParticle__loader',
+				rendererOuterID           = 'uix-3d-slider--expParticle__canvas-container',
+				rendererCanvasID          = 'uix-3d-slider--expParticle__canvas',
+				renderer;
+
+
+
+			// Generate one plane geometries mesh to scene
+			//-------------------------------------	
+			var camera,
+				controls,
+				scene,
+				light,
+				renderer,
+				material,
+				displacementSprite,
+				clock = new THREE.Clock();
+
+
+			var offsetWidth   = 475, //Set the display width of the objects in the Stage
+				offsetHeight  = 375, //Set the display height of the objects in the Stage
+				allSources    = [],
+				objTotal,
+				objLoaded = false;
+
+		
+			
+			var sources = [];
+			var isAnimating = false;
+			
+			
+			// constants
+			var activeSlider = 0;
+			
+			var cube_count,
+				meshes = [],
+				materials = [],
+				xgrid = 25,
+				ygrid = 15;
+			
+			
+			function wrapperInit() {
+				
+				$sliderWrapper.each( function()  {
+
+					var $this                    = $( this ),
+						$items                   = $this.find( '.uix-3d-slider--expParticle__item' ),
+						$first                   = $items.first(),
+						itemsTotal               = $items.length,
+						dataControlsPagination   = $this.data( 'controls-pagination' ),
+						dataControlsArrows       = $this.data( 'controls-arrows' ),
+						dataLoop                 = $this.data( 'loop' ),
+						dataFilterTexture        = $this.data( 'filter-texture' ),
+						dataDraggable            = $this.data( 'draggable' ),
+						dataDraggableCursor      = $this.data( 'draggable-cursor' );
+
+
+					if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-3d-slider--expParticle__pagination';
+					if ( typeof dataControlsArrows === typeof undefined || dataControlsArrows == false ) dataControlsArrows = '.uix-3d-slider--expParticle__arrows';
+					if ( typeof dataLoop === typeof undefined ) dataLoop = false;
+					if ( typeof dataFilterTexture === typeof undefined || !dataFilterTexture || dataFilterTexture == '' ) dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+					if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
+					if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
+					
+					
+
+
+					//If arrows does not exist on the page, it will be added by default, 
+					//and the drag and drop function will be activated.
+					if ( $( dataControlsArrows ).length == 0 ) {
+						$( 'body' ).prepend( '<div style="display:none;" class="uix-3d-slider--expParticle__arrows '+dataControlsArrows.replace('#','').replace('.','')+'"><a href="#" class="uix-3d-slider--expParticle__arrows--prev"></a><a href="#" class="uix-3d-slider--expParticle__arrows--next"></a></div>' );
+					}
+
+
+
+					//Prevent bubbling
+					if ( itemsTotal == 1 ) {
+						$( dataControlsPagination ).hide();
+						$( dataControlsArrows ).hide();
+					}
+
+					
+					//Initialize the controlers classes
+					//-------------------------------------	
+					$( dataControlsPagination ).find( 'ul > li' ).first().addClass( 'active' );
+
+
+					
+					
+					//Initialize the wrapper width and height
+					//-------------------------------------	
+					$this.css( 'height', windowHeight + 'px' );
+					
+
+					//Load slides to canvas
+					//-------------------------------------	
+					if ( $( '#' + rendererCanvasID ).length == 0 ) {
+						$this.prepend( '<div id="'+rendererOuterID+'" class="uix-advanced-slider-sp__canvas-container"><canvas id="'+rendererCanvasID+'"></canvas></div>' );
+
+					}
+
+					
+					//Get the animation speed
+					//-------------------------------------	
+					if ( typeof $this.data( 'speed' ) != typeof undefined && $this.data( 'speed' ) != false ) {
+						animSpeed = $this.data( 'speed' );
+					}
+
+
+					//Initialize the first item container
+					//-------------------------------------		
+					$items.addClass( 'next' );
+					$first.addClass( 'active' );
+
+
+
+					//Get all images and videos
+					//-------------------------------------		
+					$items.each( function()  {
+						var _item = $( this );
+						
+						if ( _item.find( 'video' ).length > 0 ) {
+
+							//Returns the dimensions (intrinsic height and width ) of the video
+							var video    = document.getElementById( _item.find( 'video' ).attr( 'id' ) ),
+								videoURL = _item.find( 'source:first' ).attr( 'src' );
+
+							if ( typeof videoURL != typeof undefined ) {
+								sources.push(
+									{
+										"url": videoURL,
+										"id": _item.find( 'video' ).attr( 'id' ),
+										"type": 'video'
+									}
+								);
+							}
+
+
+
+
+						} else {
+
+							var imgURL   = _item.find( 'img' ).attr( 'src' );
+
+							if ( typeof imgURL != typeof undefined ) {
+
+								sources.push(
+									{
+										"url": imgURL,
+										"id": 'img-' + UixGUID.create(),
+										"type": 'img'
+									}
+								);
+							}
+
+
+						}	
+
+					});
+					
+					
+
+					//Pagination dots 
+					//-------------------------------------	
+					var _dot       = '',
+						_dotActive = '';
+					_dot += '<ul>';
+					for ( var i = 0; i < itemsTotal; i++ ) {
+
+						_dotActive = ( i == 0 ) ? 'class="active"' : '';
+
+						_dot += '<li '+_dotActive+' data-index="'+i+'"><a href="javascript:"></a></li>';
+					}
+					_dot += '</ul>';
+
+					if ( $( dataControlsPagination ).html() == '' ) $( dataControlsPagination ).html( _dot );
+
+					
+					//Fire the slider transtion with buttons
+					$( dataControlsPagination ).find( 'ul > li' ).on( 'click', function( e ) {
+						e.preventDefault();
+
+						var slideCurId  = $( dataControlsPagination ).find( 'ul > li.active' ).index(),
+							slideNextId = $( this ).index();
+
+
+						//Determine the direction
+						var curDir = 'prev';
+						if ( $( this ).attr( 'data-index' ) > slideCurId ) {
+							curDir = 'next';
+						}
+
+
+						//Transition Between Slides
+						sliderUpdates( slideCurId, slideNextId, curDir );
+
+
+						//Pause the auto play event
+						clearInterval( timer );	
+
+
+					});
+
+					//Next/Prev buttons
+					//-------------------------------------		
+					var _prev = $( dataControlsArrows ).find( '.uix-3d-slider--expParticle__arrows--prev' ),
+						_next = $( dataControlsArrows ).find( '.uix-3d-slider--expParticle__arrows--next' );
+
+					$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
+
+					$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
+					if ( !dataLoop ) {
+						_prev.addClass( 'disabled' );
+					}
+
+
+					_prev.on( 'click', function( e ) {
+						e.preventDefault();
+
+						var slideCurId  = $items.filter( '.active' ).index(),
+							slideNextId = parseFloat( $items.filter( '.active' ).index() ) - 1;
+	
+						//Transition Between Slides
+						sliderUpdates( slideCurId, slideNextId, 'prev' );	
+						
+						
+
+
+						//Pause the auto play event
+						clearInterval( timer );
+
+					});
+
+					_next.on( 'click', function( e ) {
+						e.preventDefault();
+
+						var slideCurId  = $items.filter( '.active' ).index(),
+							slideNextId = parseFloat( $items.filter( '.active' ).index() ) + 1;
+	
+						//Transition Between Slides
+						sliderUpdates( slideCurId, slideNextId, 'next' );	
+
+
+						//Pause the auto play event
+						clearInterval( timer );
+
+
+					});
+					
+
+					
+					//Autoplay Slider
+					//-------------------------------------		
+					var dataAuto                 = $this.data( 'auto' ),
+						dataTiming               = $this.data( 'timing' ),
+						dataLoop                 = $this.data( 'loop' );
+
+					if ( typeof dataAuto === typeof undefined ) dataAuto = false;	
+					if ( typeof dataTiming === typeof undefined ) dataTiming = 10000;
+					if ( typeof dataLoop === typeof undefined ) dataLoop = false;
+
+
+					if ( dataAuto && !isNaN( parseFloat( dataTiming ) ) && isFinite( dataTiming ) ) {
+
+						sliderAutoPlay( dataTiming, $items, dataLoop );
+
+						$this.on({
+							mouseenter: function() {
+								clearInterval( timer );
+							},
+							mouseleave: function() {
+								sliderAutoPlay( dataTiming, $items, dataLoop );
+							}
+						});	
+
+					}
+
+
+				});// end each				
+			}
+
+
+			
+			function init() {
+
+				
+
+				//Core 3D stage begin
+				//-------------------------------------		
+				//camera
+				camera = new THREE.PerspectiveCamera( 55, window.innerWidth / window.innerHeight, 10,  2500 ); // FlyCamera // FlyControls
+				camera.movementSpeed = 100.0;
+				camera.rollSpeed = 0.5;
+				camera.position.y = 60;
+				camera.position.z = 500;
+
+
+
+				//Scene
+				scene = new THREE.Scene();
+
+
+				//HemisphereLight
+				scene.add( new THREE.AmbientLight( 0x555555 ) );
+
+				light = new THREE.SpotLight( 0xffffff, 1.5 );
+				light.position.set( 0, 0, 2000 );
+				scene.add( light );
+
+
+
+				//WebGL Renderer	
+				 // create a render and set the size
+				renderer = new THREE.WebGLRenderer( { 
+										canvas   : document.getElementById( rendererCanvasID ), //canvas
+										alpha    : true, 
+										antialias: true 
+									} );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+				//controls
+				controls = new THREE.OrbitControls( camera, renderer.domElement );
+				controls.autoRotate = false;
+				controls.autoRotateSpeed = 0.5;
+				controls.rotateSpeed = 0.5;
+				controls.zoomSpeed = 1.2;
+				controls.panSpeed = 0.8;
+				controls.enableZoom = false;
+				controls.target.set(0, 0, 0 );
+				controls.update();			
+
+
+
+				//A loader for loading all images from array.
+				var loader = new THREE.TextureLoader();
+				loader.crossOrigin = 'anonymous';
+
+
+				//Preload
+				objTotal = sources.length;
+			
+				sources.forEach( function( element, index ) {
+					
+				
+					if ( element.type == 'img' ) {
+						
+						
+						loader.load(
+							// resource URL
+							element.url,
+
+							// onLoad callback
+							function ( texture ) {
+								
+								loadSource( texture, index, offsetWidth, offsetHeight, objTotal, $( '#' + renderLoaderID ) );
+
+							},
+
+							// onProgress callback currently not supported
+							undefined,
+
+							// onError callback
+							function ( err ) {
+								console.error( 'An error happened.' );
+							}
+						);	
+						
+						
+						
+					} else {
+						
+					
+						var texture = new THREE.VideoTexture( document.getElementById( element.id ) );
+						texture.minFilter = THREE.LinearFilter;
+						texture.magFilter = THREE.LinearFilter;
+						texture.format = THREE.RGBFormat;
+
+						// pause the video
+						texture.image.autoplay = true;
+						texture.image.loop = true;
+						texture.image.currentTime = 0;
+						texture.image.muted = true;
+						texture.image.play();	
+
+						
+						
+						loadSource( texture, index, offsetWidth, offsetHeight, objTotal, $( '#' + renderLoaderID ) );
+					}
+					
+				});
+		
+
+				// Fires when the window changes
+				window.addEventListener( 'resize', onWindowResize, false );
+
+
+			}
+
+
+
+
+
+			function render() {
+				requestAnimationFrame( render );
+
+				var t = clock.getElapsedTime();
+
+
+				//To set a background color.
+				//renderer.setClearColor( 0x000000 );	
+
+
+
+				//Display the destination object
+				if ( typeof allSources[activeSlider] != typeof undefined ) {
+
+					var objects = allSources[activeSlider].children;
+					var speed =  Math.random() * .0002;
+
+					for ( var i = 0; i < objects.length; i++ ) {
+
+
+						for ( var j = 0; j < objects[i].parent.children.length; j++ ) {
+							var obj = objects[i].parent.children[j];
+
+							obj.position.x += (obj.origPos.x - obj.position.x) * speed;
+							obj.position.y += (obj.origPos.y - obj.position.y) * speed;
+							obj.position.z += (obj.origPos.z - obj.position.z) * speed;
+
+							
+						}	
+
+					}	
+					
+
+				}	
+				
+				
+				//Hide inactive objects
+				allSources.forEach( function ( element, index ) {
+					if ( index != activeSlider ) {
+
+						var objects = element.children;
+						var speed =  Math.random() * .00005;
+
+						for ( var i = 0; i < objects.length; i++ ) {
+
+
+							for ( var j = 0; j < objects[i].parent.children.length; j++ ) {
+								var obj = objects[i].parent.children[j];
+								
+								obj.position.x += (obj.targetPos.x - obj.position.x) * speed;
+								obj.position.y += (obj.targetPos.y - obj.position.y) * speed;
+								obj.position.z += (obj.targetPos.z - obj.position.z) * speed;
+
+							}	
+
+						}		
+					}
+
+				});
+	
+
+			
+				//check all images loaded
+				if ( typeof allSources != typeof undefined ) {
+					if ( !objLoaded && allSources.length === objTotal ) {
+						
+						allSources.forEach( function ( element, index ) {
+							scene.add( element );
+							console.log( element );
+						});
+						objLoaded = true;
+
+
+					}	
+
+				}
+
+
+				//update camera and controls
+				controls.update();
+
+				renderer.render( scene, camera );
+
+
+			}
+
+
+			function onWindowResize() {
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+			}
+
+			
+
+			/*
+			 * Load Source
+			 *
+			 * @param  {Object} texture         - Returns a new texture object which can directly be used for material creation.
+			 * @param  {Number} index           - Index of image or video.
+			 * @param  {Number} w               - The width of an image or video, in pixels. 
+			 * @param  {Number} h               - The height of an image or video, in pixels. 
+			 * @param  {Number} total           - Total number of preload images or video.
+			 * @param  {Object} loading         - Progress bar display control.
+			 * @return {Void}
+			 */
+			function loadSource( texture, index, w, h, total, loading ) {
+
+				var imgW = w,
+					imgH = h;
+				
+				
+				//
+				var group = new THREE.Object3D();
+				var i, j, ux, uy, ox, oy,
+					geometry,
+					xsize, ysize;
+				ux = 1 / xgrid;
+				uy = 1 / ygrid;
+				xsize = imgW / xgrid;
+				ysize = imgH / ygrid;
+				cube_count = 0;
+				for ( i = 0; i < xgrid; i ++ ) {
+					for ( j = 0; j < ygrid; j ++ ) {
+						ox = i;
+						oy = j;
+						geometry = new THREE.BoxBufferGeometry( xsize, ysize, xsize );
+						changeUVS( geometry, ux, uy, ox, oy );
+						materials[ cube_count ] = new THREE.MeshBasicMaterial( {
+							map: texture
+						 } );
+						material = materials[ cube_count ];
+						displacementSprite = new THREE.Mesh( geometry, material );
+						displacementSprite.position.x = ( i - xgrid / 2 ) * xsize;
+						displacementSprite.position.y = ( j - ygrid / 2 ) * ysize;
+						displacementSprite.position.z = 0;
+						displacementSprite.scale.x = displacementSprite.scale.y = displacementSprite.scale.z = 1;
+						displacementSprite.origPos	= {
+							x: displacementSprite.position.x,
+							y: displacementSprite.position.y,
+							z: displacementSprite.position.z
+						};
+
+						
+						//hide all
+						var newPosX = 4000 * Math.random() * ( Math.random() > 0.5 ? 1 : -1 );
+						var newPosY = 2000 * Math.random();
+						var newPosZ = 3000 * Math.random();
+						displacementSprite.position.x = newPosX;
+						displacementSprite.position.y = newPosY;
+						displacementSprite.position.z = newPosZ;
+						
+						displacementSprite.targetPos	= {
+							x: newPosX,
+							y: newPosY,
+							z: newPosZ
+						};	
+						
+						//
+						group.add( displacementSprite );
+						
+					
+						
+						//
+						meshes[ cube_count ] = displacementSprite;
+						cube_count += 1;
+					}			
+				}
+				
+
+				allSources.push( group );
+
+
+				//loading
+				TweenMax.to( loading, 0.5, {
+					width    : Math.round(100 * allSources.length / total ) + '%',
+					onComplete : function() {
+
+						if ( $( this.target ).width() >= windowWidth - 50 ) {
+
+							TweenMax.to( this.target, 0.5, {
+								alpha: 0
+							});	
+						}
+
+					}
+				});
+					
+
+			}
+
+
+			function changeUVS( geometry, unitx, unity, offsetx, offsety ) {
+				var uvs = geometry.attributes.uv.array;
+				for ( var i = 0; i < uvs.length; i += 2 ) {
+					uvs[ i ] = ( uvs[ i ] + offsetx ) * unitx;
+					uvs[ i + 1 ] = ( uvs[ i + 1 ] + offsety ) * unity;
+				}
+			}	
+			
+			
+			
+	
+
+			
+			/*
+			 * Trigger slider autoplay
+			 *
+			 * @param  {Number} timing           - Autoplay interval.
+			 * @param  {Object} items            - Each item in current slider.
+			 * @param  {Boolean} loop            - Determine whether to loop through each item.
+			 * @return {Void}                    - The constructor.
+			 */
+			function sliderAutoPlay( timing, items, loop ) {	
+
+				var total = items.length;
+
+				timer = setInterval( function() {
+
+					playTimes = parseFloat( items.filter( '.active' ).index() );
+					playTimes++;
+
+					
+					if ( !loop ) {
+						if ( playTimes < total && playTimes >= 0 ) {
+							
+							var slideCurId  = items.filter( '.active' ).index(),
+								slideNextId = playTimes;	
+
+							sliderUpdates( slideCurId, slideNextId, 'next' );
+						}
+					} else {
+						if ( playTimes == total ) playTimes = 0;
+						if ( playTimes < 0 ) playTimes = total-1;		
+
+						var slideCurId  = items.filter( '.active' ).index(),
+							slideNextId = playTimes;	
+
+						
+						//Prevent problems with styles when switching in positive order
+						if ( playTimes == 0 ) {
+							sliderUpdates( slideCurId, slideNextId, 'prev' );	
+						} else {
+							sliderUpdates( slideCurId, slideNextId, 'next' );
+						}
+
+					}
+
+
+
+				}, timing );	
+			}
+
+			
+			
+			/*
+			 *  Transition Between Slides
+			 *
+			 * @param  {Number} slideCurId             - Index of current slider.
+			 * @param  {Number} slideNextId            - Index of next slider.
+			 * @param  {String} dir                    - Switching direction indicator.	 
+			 * @return {Void}
+			 */
+			function sliderUpdates( slideCurId, slideNextId, dir ) {
+
+
+				var $items                   = $sliderWrapper.find( '.uix-3d-slider--expParticle__item' ),
+					total                    = $items.length,
+					dataCountTotal           = $sliderWrapper.data( 'count-total' ),
+					dataCountCur             = $sliderWrapper.data( 'count-now' ),
+					dataControlsPagination   = $sliderWrapper.data( 'controls-pagination' ),
+					dataControlsArrows       = $sliderWrapper.data( 'controls-arrows' ),	
+					dataLoop                 = $sliderWrapper.data( 'loop' );
+	
+			
+				
+				if ( typeof dataCountTotal === typeof undefined ) dataCountTotal = 'p.count em.count';
+				if ( typeof dataCountCur === typeof undefined ) dataCountCur = 'p.count em.current';
+				if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-3d-slider--expParticle__pagination';
+				if ( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-3d-slider--expParticle__arrows';
+				if ( typeof dataLoop === typeof undefined ) dataLoop = false;			
+
+				//Prevent bubbling
+				if ( total == 1 ) {
+					$( dataControlsPagination ).hide();
+					$( dataControlsArrows ).hide();
+					return false;
+				}
+
+				if ( ! isAnimating ) {
+					isAnimating = true;
+					
+					
+					//Transition Interception
+					//-------------------------------------
+					if ( dataLoop ) {
+						if ( slideCurId > total - 1 ) slideCurId = 0;
+						if ( slideCurId < 0 ) slideCurId = total-1;	
+
+						//--
+						if ( slideNextId < 0 ) slideNextId = total-1;
+						if ( slideNextId > total - 1 ) slideNextId = 0;
+					} else {
+
+						if ( slideCurId > total - 1 ) slideCurId = total-1;
+						if ( slideCurId < 0 ) slideCurId = 0;	
+
+						//--
+						if ( slideNextId < 0 ) slideNextId = 0;
+						if ( slideNextId > total - 1 ) slideNextId = total-1;
+
+					}
+
+
+
+					//Get previous and next index of item
+					//-------------------------------------
+					var $current = $sliderWrapper.find( '.uix-3d-slider--expParticle__item' ).eq( slideCurId );
+					var	$next    = $sliderWrapper.find( '.uix-3d-slider--expParticle__item' ).eq( slideNextId );
+
+
+
+					console.log( 'Current: ' + slideCurId + ' | Next: ' + slideNextId );
+
+
+					//Determine the direction and add class to switching direction indicator.
+					//-------------------------------------
+					var dirIndicatorClass = '';
+					if ( dir == 'prev' ) dirIndicatorClass = 'prev';
+					if ( dir == 'next' ) dirIndicatorClass = 'next';
+
+
+					//Add transition class to each item
+					//-------------------------------------	
+					$items.removeClass( 'active leave prev next' )
+						  .addClass( dirIndicatorClass );
+
+					$current.addClass( 'leave' );
+					$next.addClass( 'active' );
+
+
+
+					//Add transition class to Controls Pagination
+					//-------------------------------------
+					$( dataControlsPagination ).find( 'ul > li' ).removeClass( 'active leave prev next' )
+											   .addClass( dirIndicatorClass );
+
+					$( dataControlsPagination ).find( 'ul > li' ).eq( slideCurId ).addClass( 'leave' );
+					$( dataControlsPagination ).find( 'ul > li' ).eq( slideNextId ).addClass( 'active' );
+
+
+
+					//Add transition class to Arrows
+					//-------------------------------------		
+					if ( ! dataLoop ) {
+						$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
+						if ( slideNextId == total - 1 ) $( dataControlsArrows ).find( '.uix-3d-slider--expParticle__arrows--next' ).addClass( 'disabled' );
+						if ( slideNextId == 0 ) $( dataControlsArrows ).find( '.uix-3d-slider--expParticle__arrows--prev' ).addClass( 'disabled' );
+					}
+
+
+
+
+					//Display counter
+					//-------------------------------------
+					$( dataCountTotal ).text( total );
+					$( dataCountCur ).text( parseFloat( slideCurId ) + 1 );		
+
+
+
+
+
+					//Fire the next object
+					//-------------------------------------
+					activeSlider = slideNextId;
+				
+
+					//Fire the current object
+					//-------------------------------------
+				
+
+					//Reset the trigger
+					//-------------------------------------
+					isAnimating = false;			
+					
+					
+				}// end isAnimating
+				
+				
+
+			}
+
+			
+			
+
+
+			// 
+			//-------------------------------------	
+			return {
+				init              : init,
+				wrapperInit       : wrapperInit,
+				render            : render,
+				getScene          : function () { return scene; },
+				getCamera         : function () { return camera; } 
+			};
+
+
+		}();
+
+		MainStage.wrapperInit();
+		MainStage.init();
+		MainStage.render();
+		
+
+		
+    };
+	
+    APP.components.documentReady.push( APP._3D_EXP_PARTICLE_SLIDER.documentReady );
     return APP;
 
 }( APP, jQuery, window, document ) );

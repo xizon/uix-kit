@@ -15,7 +15,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP._3D_MODEL               = APP._3D_MODEL || {};
-	APP._3D_MODEL.version       = '0.0.1';
+	APP._3D_MODEL.version       = '0.0.2';
     APP._3D_MODEL.documentReady = function( $ ) {
 
 		
@@ -107,8 +107,11 @@ APP = ( function ( APP, $, window, document ) {
 
 				};
 
+				var textureURL = ( typeof $( '#' + rendererCanvasID ).data( 'texture-src' ) != typeof undefined ) ? $( '#' + rendererCanvasID ).data( 'texture-src' ) : templateUrl + '/assets/models/obj/project.png';
+				var objURL = ( typeof $( '#' + rendererCanvasID ).data( 'model-src' ) != typeof undefined ) ? $( '#' + rendererCanvasID ).data( 'model-src' ) : templateUrl + '/assets/models/obj/project.obj';
+				
 				var textureLoader = new THREE.TextureLoader( manager ),
-					texture       = textureLoader.load( templateUrl + '/assets/models/obj/project.png' ),
+					texture       = textureLoader.load( textureURL ),
 					onProgress    = function ( xhr ) {
 						if ( xhr.lengthComputable ) {
 							var percentComplete = xhr.loaded / xhr.total * 100;
@@ -119,7 +122,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 				var loader        = new THREE.OBJLoader( manager );
-				loader.load( templateUrl + '/assets/models/obj/project.obj', function ( object ) {
+				loader.load( objURL, function ( object ) {
 
 					object.traverse( function ( child ) {
 
