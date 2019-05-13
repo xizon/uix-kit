@@ -45,7 +45,7 @@ A free web kits for fast web design and development. Uix Kit can be used separat
 
 
 <p align = "left">
-	<a href="https://www.youtube.com/watch?v=ckYJBMfPtBs"><img src="https://uiux.cc/uix-kit/_screenshots/video-cover.jpg" width="400"></a>
+	<a href="https://www.youtube.com/watch?v=aRDY9Cr-1-E"><img src="https://uiux.cc/uix-kit/_screenshots/video-cover.jpg" width="400"></a>
 </p>
 
 
