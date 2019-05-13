@@ -11,7 +11,6 @@
 //=========================================================
 //=========================================================
 
-
 /* 
  *************************************
  * Create GUID / UUID
@@ -57,6 +56,132 @@ var UixGUID = UixGUID || (function() {
 })();
 
 
+
+/* 
+ *************************************
+ * Evaluating a string as a mathematical expression in JavaScript
+ *
+ * @return {String}            - New calculation result.
+ *************************************
+ */
+var UixMath = UixMath || (function() {
+    function t() { }
+	
+    return t.version = "0.0.1",
+   
+    t.evaluate = function(s) {
+		
+		var chars = s.replace(/\s/g, '').split("");
+		var n = [], op = [], index = 0, oplast = true;
+
+		n[index] = "";
+
+		// Parse the expression
+		for (var c = 0; c < chars.length; c++) {
+
+			if (isNaN(parseInt(chars[c])) && chars[c] !== "." && !oplast) {
+				op[index] = chars[c];
+				index++;
+				n[index] = "";
+				oplast = true;
+			} else {
+				n[index] += chars[c];
+				oplast = false;
+			}
+		}
+
+		// Calculate the expression
+		s = parseFloat(n[0]);
+		for (var o = 0; o < op.length; o++) {
+			var num = parseFloat(n[o + 1]);
+			switch (op[o]) {
+				case "+":
+					s = s + num;
+					break;
+				case "-":
+					s = s - num;
+					break;
+				case "*":
+					s = s * num;
+					break;
+				case "/":
+					s = s / num;
+					break;
+			}
+		}
+
+		return s;
+    },
+	t
+})();
+
+
+
+/* 
+ *************************************
+ * Get the CSS property
+ *
+ * @param  {Object} el     - Target object, using class name or ID to locate.
+ * @return {String|JSON}            - The value of property.
+ *************************************
+ */
+var UixCssProperty = UixCssProperty || (function() {
+    function t() { }
+	
+    return t.version = "0.0.1",
+
+    t.getTransitionDuration = function( el ) {
+		
+		if ( typeof el === typeof undefined ) {
+			return 0;
+		}
+
+
+		var style    = window.getComputedStyle(el),
+			duration = style.webkitTransitionDuration,
+			delay    = style.webkitTransitionDelay; 
+
+		if ( typeof duration != typeof undefined ) {
+			// fix miliseconds vs seconds
+			duration = (duration.indexOf("ms")>-1) ? parseFloat(duration) : parseFloat(duration)*1000;
+			delay = (delay.indexOf("ms")>-1) ? parseFloat(delay) : parseFloat(delay)*1000;
+
+			return duration;
+		} else {
+			return 0;
+		}
+		
+    },
+		
+    //
+    t.getAbsoluteCoordinates = function( el ) {
+		
+		var windowWidth     = window.innerWidth,
+			leftPos         = null,
+			topPos          = null;
+
+		if ( ! document.getElementsByTagName( 'body' )[0].className.match(/rtl/) ) {
+			leftPos = ( el.offsetLeft == 0 ) ? el.parentElement.offsetLeft : el.offsetLeft;
+			topPos = ( el.offsetTop == 0 ) ? el.parentElement.offsetTop : el.offsetTop;
+		} else {
+			
+			// width and height in pixels, including padding and border
+			// Corresponds to jQuery outerWidth(), outerHeight()
+			leftPos = ( el.offsetLeft == 0 ) ? ( windowWidth - ( el.parentElement.offsetLeft + el.parentElement.offsetWidth ) ) : ( windowWidth - ( el.offsetLeft + el.offsetWidth ) );
+			topPos = ( el.offsetTop == 0 ) ? ( windowWidth - ( el.parentElement.offsetTop + el.parentElement.offsetHeight ) ) : ( windowWidth - ( el.offsetTop + el.offsetHeight ) );
+		}
+
+
+		return {
+			'left': leftPos,
+			'top': topPos
+		};
+		
+    },	
+		
+		
+	t
+})();
 
 
 /* 

@@ -1,8 +1,7 @@
 /* ====================================================== 
     <!-- Fullwidth List of Split 2 --> 
 /* ====================================================== */
-$content-gutter: 15px;
-$content-text-gutter: 5vw;
+$content-gutter: 100px;
 
 
 .uix-list-split-full {
@@ -16,96 +15,49 @@ $content-text-gutter: 5vw;
 	
 
 	
-	.uix-list-split-full__left {
-		position: relative;
-		width: 30%;
-		float: left;
-		padding-right: $content-text-gutter;
-		padding-left: calc(7.840236686391% + #{$content-gutter}); /* (1352-1140)/1352/2 * 100 */
-		@include outer-shadow( 'regular' );
-		min-height: 150px;
-	}
-	
+	.uix-list-split-full__left,
 	.uix-list-split-full__right {
+		position: relative;
+		float: left;
+		min-height: 150px;
 		word-wrap: break-word;
 		box-sizing: border-box;
-		width: 70%;
+		
+	}
+	
+	
+	.uix-list-split-full__left > div {
+		max-width: 639px;
+		float: right;
+		margin-right: $content-gutter;
+	}
+	.uix-list-split-full__right > div {
+		max-width: 639px;
 		float: left;
-		padding-left: $content-text-gutter;
-		padding-right: calc(7.840236686391% + #{$content-gutter});
-		@include bg-gradient();
-		@include outer-shadow( 'regular' );
-		min-height: 150px;
-		
-		
-		
+		margin-left: $content-gutter;
 	}
 
 	
 }
 
-
-/* New XL container for Bootstrap 4.x */
-@media all and (min-width: 1430px) {
-	.uix-list-split-full {
-		
-		.uix-list-split-full__left {
-			padding-left: calc(5.189340813464% + #{$content-gutter}); /* (1426-1278)/1426/2 * 100 */
-
-		}
-		
-		.uix-list-split-full__right {
-			padding-right: calc(5.189340813464% + #{$content-gutter}); /* (1426-1278)/1426/2 * 100 */
-
-		}
-
-	}
-}
-
-/* New XXL container for Bootstrap 4.x */
-@media all and (min-width: 1600px) {
-
-	.uix-list-split-full {
-		.uix-list-split-full__left {
-			padding-left: calc(12.992125984252% + #{$content-gutter}); /* (1905-1410)/1905/2 * 100 */
-		}
-		.uix-list-split-full__right {
-			padding-right: calc(12.992125984252% + #{$content-gutter}); /* (1905-1410)/1905/2 * 100 */
-		}
-	}
-}
-
-/* > 2560 */
-@media all and (min-width: 2400px) {
-
-	.uix-list-split-full {
-		.uix-list-split-full__left {
-			padding-left: calc(22.298624754421% + #{$content-gutter}); /* (2545-1410)/2545/2 * 100 */
-			padding-right: $content-gutter;
-		}
-		.uix-list-split-full__right {
-			padding-right: calc(22.298624754421% + #{$content-gutter}); /* (2545-1410)/2545/2 * 100 */
-			margin-left: $content-text-gutter;
-			width: calc( 70% - #{$content-text-gutter});
-		}
-	}
-}
 
 @media all and (max-width: 768px) {
 	.uix-list-split-full {
 		
 
-		.uix-list-split-full__left {
-			width: 100%;
-			min-height: inherit;
-		}	
-		
+		.uix-list-split-full__left,
 		.uix-list-split-full__right {
-			min-height: inherit;
 			width: 100%;
-			padding: 0 $content-gutter;
+			float: none;
+			min-height: inherit;
 			
-		}
+			> div {
+				margin: 0 15px;
+				float: none;
+				max-width: none;
+			}
+		}	
+	
 		
 	}
 	

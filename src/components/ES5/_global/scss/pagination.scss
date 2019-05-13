@@ -92,6 +92,7 @@
 }
 
 
+
 /* 
  ---------------------------
  2. Paginate WordPress Posts
@@ -100,6 +101,12 @@
 .uix-page-links {
 	margin: 0.875rem 0;
 	font-weight: 600;
+	position: relative;
+	display: block;
+	padding: 0.5rem 0.75rem;
+	margin-left: -1px;
+	line-height: 1.25;
+	border: 1px solid #dee2e6;
 	
 	> span {
 		display: inline-block;

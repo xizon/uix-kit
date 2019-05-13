@@ -40,63 +40,47 @@
              </div>
         
         </header>
-        <div class="uix-header__placeholder"></div>
+        <div class="uix-header__placeholder js-uix-header__placeholder-autoheight"></div>
       
     
 		<main id="uix-maincontent">
 			
 			<!-- Content   
 			====================================================== -->
-			<section>
-				<div class="container uix-t-c">
-						<div class="row">
-							<div class="col-md-8 offset-md-2">
-								<h2>Modal Dialog Automatically Open</h2>
-								<p>Use the following script to fire it.</p>
+			<section class="uix-spacing--s uix-spacing--no-bottom">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<h3>Modal Dialog Automatically Open</h3>
+							<p>Trigger with a simple JavaScript</p>
+							
+<pre class="uix-precode uix-t-l"><label>JS</label><code>$( document ).ready( function() {
+	$(document).UixFireModalDialog({
+		id: 'modal-open-1',
+		height: false,
+		width: false,
+		speed: 500,
+		lightbox  : true,
+		autoClose : false
+	});
 
-
-<pre class="uix-precode uix-t-l"><label>JS</label><code>( function( $ ) {
-"use strict";
-	$( document ).ready( function() {
-		$(document).UixFireModalDialog({
-			id: 'modal-open-1',
-			height: false,
-			width: false,
-			speed: 500,
-			lightbox  : true,
-			autoClose : false
-		});
-	} );
-} ) ( jQuery );</code>
-</pre>		                 
-
-
-<pre class="uix-precode uix-t-l"><label>HTML</label><code>&lt;div class=&quot;uix-modal-box&quot; id=&quot;modal-open-1&quot;&gt;
-	&lt;a href=&quot;javascript:void(0)&quot; class=&quot;uix-modal-box__close&quot;&gt;&lt;/a&gt;
-	&lt;div class=&quot;uix-modal-box__content&quot;&gt;
-		&lt;div&gt;
-			&lt;!-- ////////  content  begin //////// --&gt;
-&#x9;&#x9;&#x9;&#x9;&#x9;&lt;h2&gt;Holy Crap!!!&lt;/h2&gt;
-&#x9;&#x9;&#x9;&#x9;&#x9;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;
-			&lt;!-- ////////  content  end //////// --&gt;
-&#x9;&#x9;&#x9;&#x9;&lt;/div&gt;
-
-
-	&lt;/div&gt;
-&lt;/div&gt;</code>
-</pre>							
-
-							</div>
+} );</code>
+</pre>					
+							
+							<hr>
+							
+							
 						</div>
-						<!-- .row end -->
-
+					</div>
+					<!-- .row end -->
 
 				</div>
 				<!-- .container end -->
 
 			</section>
-
-
+			
+			
+		
 
 			<!-- Modals
 			============================================= --> 

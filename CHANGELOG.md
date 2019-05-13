@@ -1,6 +1,21 @@
 # Changelog
 
 
+#### = 3.5.0 (May 13, 2019) =
+
+* New: Added a tiny style to button component.
+* New: Added a demonstration of the grid system.
+* Tweak: Minor adjustment of the component Demo.
+* Tweak: Optimized core stylesheet.
+* Tweak: Optimized header placeholder styles and scripts.
+* Tweak: Removed the extension style of the New XXL container for Bootstrap 4.x.
+* Tweak: Upgraded the automatic play function of the special slider modules.
+* Tweak: Upgraded the Sticky Elements.
+* Fix: Fixed a bug for Infinite Scroll Posts.
+
+
+ 
+ 
 #### = 3.4.6 (May 7, 2019) =
 
 * New: Added modifiers to three.js extensions.

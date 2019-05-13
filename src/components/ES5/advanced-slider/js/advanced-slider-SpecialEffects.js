@@ -17,7 +17,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.ADVANCED_SLIDER_FILTER               = APP.ADVANCED_SLIDER_FILTER || {};
-	APP.ADVANCED_SLIDER_FILTER.version       = '0.1.7';
+	APP.ADVANCED_SLIDER_FILTER.version       = '0.1.8';
     APP.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 		
@@ -33,10 +33,6 @@ APP = ( function ( APP, $, window, document ) {
 			//Save different canvas heights as an array
 			canvasHeights             = [],
 
-			
-			//Autoplay global variables
-			timer                     = null,
-			playTimes,
 			
 			//Basic webGL renderers 
 			rendererOuterID           = 'uix-advanced-slider-sp__canvas-container',
@@ -83,6 +79,12 @@ APP = ( function ( APP, $, window, document ) {
 					$first                   = $items.first(),
 					nativeItemW,
 					nativeItemH;
+				
+				
+				//Autoplay times
+				var playTimes;
+				//A function called "timer" once every second (like a digital watch).
+				$this[0].animatedSlides;
 				
 				
 				//Get the animation speed
@@ -136,7 +138,7 @@ APP = ( function ( APP, $, window, document ) {
 							nativeItemH = this.videoHeight;	
 
 							//Initialize all the items to the stage
-							addItemsToStage( $this, $sliderWrapper, nativeItemW, nativeItemH );
+							addItemsToStage( $this, nativeItemW, nativeItemH );
 
 
 						}, false);	
@@ -162,7 +164,7 @@ APP = ( function ( APP, $, window, document ) {
 							nativeItemH = this.height;	
 
 							//Initialize all the items to the stage
-							addItemsToStage( $this, $sliderWrapper, nativeItemW, nativeItemH );
+							addItemsToStage( $this, nativeItemW, nativeItemH );
 							
 
 							
@@ -192,14 +194,14 @@ APP = ( function ( APP, $, window, document ) {
 
 					if ( dataAuto && !isNaN( parseFloat( dataTiming ) ) && isFinite( dataTiming ) ) {
 
-						sliderAutoPlay( dataTiming, $items, dataLoop );
+						sliderAutoPlay( playTimes, dataTiming, dataLoop, $this );
 
 						$this.on({
 							mouseenter: function() {
-								clearInterval( timer );
+								clearInterval( $this[0].animatedSlides );
 							},
 							mouseleave: function() {
-								sliderAutoPlay( dataTiming, $items, dataLoop );
+								sliderAutoPlay( playTimes, dataTiming, dataLoop, $this );
 							}
 						});	
 
@@ -218,19 +220,21 @@ APP = ( function ( APP, $, window, document ) {
 		
 		
 
-        /*
+         /*
 		 * Trigger slider autoplay
 		 *
+		 * @param  {Function} playTimes      - Number of times.
 		 * @param  {Number} timing           - Autoplay interval.
-		 * @param  {Object} items            - Each item in current slider.
 		 * @param  {Boolean} loop            - Determine whether to loop through each item.
-		 * @return {Void}
+		 * @param  {Object} slider           - Selector of the slider .
+		 * @return {Void}                    - The constructor.
 		 */
-        function sliderAutoPlay( timing, items, loop ) {	
+		function sliderAutoPlay( playTimes, timing, loop, slider ) {	
+
+			var items = slider.find( '.uix-advanced-slider-sp__item' ),
+				total = items.length;
 			
-			var total = items.length;
-			
-			timer = setInterval( function() {
+			slider[0].animatedSlides = setInterval( function() {
 
 				playTimes = parseFloat( items.filter( '.active' ).index() );
 				playTimes++;
@@ -262,12 +266,11 @@ APP = ( function ( APP, $, window, document ) {
 		 * Initialize all the items to the stage
 		 *
 		 * @param  {Object} slider           - Current selector of each slider.
-		 * @param  {Object} sliderWrapper    - Wrapper of the slider.
 		 * @param  {Number} nativeItemW      - Returns the intrinsic width of the image/video.
 		 * @param  {Number} nativeItemH      - Returns the intrinsic height of the image/video.
 		 * @return {Void}
 		 */
-        function addItemsToStage( slider, sliderWrapper, nativeItemW, nativeItemH ) {
+        function addItemsToStage( slider, nativeItemW, nativeItemH ) {
 			
 			var $this                    = slider,
 				$items                   = $this.find( '.uix-advanced-slider-sp__item' ),
@@ -1122,15 +1125,15 @@ APP = ( function ( APP, $, window, document ) {
 					
 					
 					//Canvas Interactions
-					transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), sliderWrapper, 'out', curDir );
+					transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), $this, 'out', curDir );
 						
 					
 					
 					//Update the current and previous/next items
-					sliderUpdates( $( this ).attr( 'data-index' ), sliderWrapper, curDir );
+					sliderUpdates( $( this ).attr( 'data-index' ), $this, curDir );
 
 					//Pause the auto play event
-					clearInterval( timer );	
+					clearInterval( $this[0].animatedSlides );	
 				}
 
 
@@ -1155,13 +1158,13 @@ APP = ( function ( APP, $, window, document ) {
 				e.preventDefault();
 
 				//Canvas Interactions
-				transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), sliderWrapper, 'out', 'prev' );	
+				transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), $this, 'out', 'prev' );	
 
 				//Update the current and previous items
-				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, sliderWrapper, 'prev' );
+				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, 'prev' );
 
 				//Pause the auto play event
-				clearInterval( timer );
+				clearInterval( $this[0].animatedSlides );
 
 			});
 
@@ -1169,14 +1172,14 @@ APP = ( function ( APP, $, window, document ) {
 				e.preventDefault();
 
 				//Canvas Interactions
-				transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), sliderWrapper, 'out', 'next' );	
+				transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), $this, 'out', 'next' );	
 
 				//Update the current and next items
-				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, sliderWrapper, 'next' );
+				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, 'next' );
 
 
 				//Pause the auto play event
-				clearInterval( timer );
+				clearInterval( $this[0].animatedSlides );
 
 
 			});

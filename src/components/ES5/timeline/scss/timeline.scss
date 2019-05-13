@@ -249,7 +249,7 @@ $horizontal-container-width: 1000px;
 		position: absolute;
 		z-index: 3;
 		left: 8%;
-		top: 135px;
+		top: 80px;
 		transition: .3s ease-in-out;
 		line-height: 50px;
 		text-align: center;
@@ -285,7 +285,7 @@ $horizontal-container-width: 1000px;
 			background-image: linear-gradient(to right, $btn-gradient-color1 0%, $btn-gradient-color2 20%, $btn-gradient-color3 100%);
 			width: 100%;
 			height: 1px;
-			top: 161px;
+			top: 104px;
 			left: 0;
 			
 		}
@@ -563,13 +563,13 @@ $horizontal-container-width: 1000px;
 .uix-timeline__container-wrapper.is-horizontal.uix-timeline__container-wrapper--classic {
 	
 	.uix-timeline__btn {
-		top: 200px;
+		top: 147px;
 	}
 	
 	.uix-timeline__container.is-horizontal {
 		
 		&::after {
-			top: 227px;
+			top: 171px;
 		}
 
 		

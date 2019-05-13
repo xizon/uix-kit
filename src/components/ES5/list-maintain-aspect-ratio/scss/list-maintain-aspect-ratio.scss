@@ -3,10 +3,9 @@
 /* ====================================================== */
 .uix-list-aspect-ratio {
 	
-	padding: 0 3rem;
 	
 	.uix-list-aspect-ratio__content {
-		padding: 3rem;
+		padding: 0 3rem; /* You can change this value to change items size */
 	}
 	
 	.uix-list-aspect-ratio__item {

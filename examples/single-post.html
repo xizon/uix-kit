@@ -43,11 +43,11 @@
 
 
 	<!-- Theme  -->
-	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=qWlYwFJRZZIMlzGwFWwi"/>
+	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=MEH6ZxZ8jolSkK3d4a6q"/>
 
 
 	<!--[if lt IE 10]>
-	<link rel="stylesheet" href="assets/css/IE.css?ver=qWlYwFJRZZIMlzGwFWwi" />
+	<link rel="stylesheet" href="assets/css/IE.css?ver=MEH6ZxZ8jolSkK3d4a6q" />
 	<![endif]-->
 
 
@@ -418,18 +418,18 @@
              </div>
         
         </header>
-        <div class="uix-header__placeholder uix-header__placeholder--auto-height"></div><!-- This class is used for seamless connection with float navigation. -->
+        <div class="uix-header__placeholder js-uix-header__placeholder-autoheight"></div>
 
 		<main id="uix-maincontent">
 			
 			<!-- Content   
 			====================================================== -->
-			<section class="uix-spacing--m uix-spacing--no-top">
+			<section class="uix-spacing--s uix-spacing--no-top">
 				<div class="uix-parallax uix-typo--color-white uix-height--50" data-fully-visible="false" data-overlay-bg="rgba(0,0,0,.6)" data-skew="0" data-speed="0.3">
 					<img class="uix-parallax__img" src="assets/images/demo/test-img-big-1.jpg" alt="">
 					<div class="uix-v-align--absolute uix-t-c">
 						<div class="row">
-							<div class="col-md-8 offset-md-2">
+							<div class="col-12">
 									<h1 class="uix-typo--h2">Example: Single Post Title Here</h1>
 									<ul class="uix-entry__meta uix-entry__meta--centered">
 										<li><time datetime="2018-09-17">September 17, 2018</time></li>
@@ -453,12 +453,12 @@
 
 		   <!-- Content   
 			====================================================== -->
-			<section class="uix-spacing--m uix-spacing--no-top">
+			<section class="uix-spacing--s uix-spacing--no-top">
 				<div class="uix-parallax uix-typo--color-white uix-height--50" data-fully-visible="false" data-overlay-bg="rgba(0,0,0,.6)" data-skew="0" data-speed="0.3">
 					<img class="uix-parallax__img" src="assets/images/demo/test-img-big-1.jpg" alt="">
 					<div class="uix-v-align--absolute uix-t-c">
 						<div class="row">
-							<div class="col-md-8 offset-md-2">
+							<div class="col-12">
 									<h1 class="uix-typo--h2">Example: Single Post Title Here</h1>
 									<ul class="uix-entry__meta uix-entry__meta--centered uix-entry__meta--wrap uix-typo--style-noitalic uix-t-l">
 										<li><strong>Release</strong><span><time datetime="2018-09-17">September 17, 2018</time></span></li>
@@ -482,10 +482,10 @@
 
 		   <!-- Content 
 			====================================================== -->
-			<article class="uix-spacing--m uix-spacing--no-top">
+			<article class="uix-spacing--s uix-spacing--no-top">
 				<div class="container">
 					<div class="row">
-						<div class="col-md-8 offset-md-2">
+						<div class="col-12">
 
 
 								<!-- Entry Content
@@ -505,21 +505,6 @@
 									<p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras mattis consectetur purus sit amet fermentum. Donec id elit non mi porta gravida at eget metus.</p>
 
 									<p><img src="assets/images/demo/test-img-big-1.jpg" alt="big image" width="1024" height="682"></p>
-
-
-
-									<p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Aenean lacinia bibendum nulla sed consectetur. Cras justo odio, dapibus ac facilisis in, egestas eget quam. <a href="#">Nullam quis risus eget urna</a> mollis ornare vel eu leo. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
-
-<pre>
-$: > Booting systems...
-$: > Total memory found: 256kb
-$: > Scanning for bootable media    ■■■■■■■■■■■ 100%
-$: > No media found. Booting from network address 3E:40:9C:75
-$: > Loading BIOS 2.3               ■■■■■■■■■■■ 100%
-$: > Reticulating splines           ■■■■■■■■■■■ 100%
-$: > Booting console                ■■■■■■■■■■■ 100%
-</pre>						
-
 
 
 
@@ -548,9 +533,7 @@ $: > Booting console                ■■■■■■■■■■■ 100%
 									<h4>Header four</h4>
 									<h5>Header five</h5>
 									<h6>Header six</h6>
-									<p>Paginated:</p>
-									<div class="page-link"><span>Pages:</span> <a href="http://wptest.io/demo/paginated/">1</a> <a href="http://wptest.io/demo/paginated/2/">2</a> <a href="http://wptest.io/demo/paginated/3/">3</a></div>
-
+								
 									<p>Single line blockquote:</p>
 									<blockquote>
 										<p>Stay hungry. Stay foolish.</p>
@@ -834,7 +817,7 @@ $: > Booting console                ■■■■■■■■■■■ 100%
 										</div>
 
 										<div class="uix-controls uix-controls__textarea is-fullwidth">
-										  <textarea name="comments" class="js-uix-float-label" id="comments"></textarea>
+										  <textarea name="comments" class="js-uix-float-label" id="comments" rows="8"></textarea>
 										  <label>Comments</label>
 										</div>
 
@@ -945,14 +928,14 @@ $: > Booting console                ■■■■■■■■■■■ 100%
 	============================================= -->
 	
 	<script>
-		var REVISION     = "3.4.6",
+		var REVISION     = "3.5.0",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
 				"homeUrl"     : "",  //Eg. https://uiux.cc
 				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
 			};
     </script>  
-    <script src="../dist/js/uix-kit.min.js?ver=qWlYwFJRZZIMlzGwFWwi"></script>
+    <script src="../dist/js/uix-kit.min.js?ver=MEH6ZxZ8jolSkK3d4a6q"></script>
 
 
 

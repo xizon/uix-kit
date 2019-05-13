@@ -11,38 +11,10 @@ APP = ( function ( APP, $, window, document ) {
 	APP.MODAL_DIALOG.version       = '0.0.9';
     APP.MODAL_DIALOG.documentReady = function( $ ) {
 
-		//Get the -webkit-transition-duration property
-		var getTransitionDuration = function( el, withDelay ) {
-			
-			if ( typeof el === typeof undefined ) {
-				return 0;
-			}
-			
-			
-			var style    = window.getComputedStyle(el),
-				duration = style.webkitTransitionDuration,
-				delay    = style.webkitTransitionDelay; 
-
-			if ( typeof duration != typeof undefined ) {
-				// fix miliseconds vs seconds
-				duration = (duration.indexOf("ms")>-1) ? parseFloat(duration) : parseFloat(duration)*1000;
-				delay = (delay.indexOf("ms")>-1) ? parseFloat(delay) : parseFloat(delay)*1000;
-
-				if ( withDelay ) {
-					 return (duration + delay);
-				} else {
-					return duration;
-				}	
-			} else {
-				return 0;
-			}
-			
-
-		};
 		
 		//Delay Time when Full Screen Effect is fired.
-		var modalSpeed = getTransitionDuration( $( '.uix-modal-box:first' )[0] );
-		
+		var modalSpeed = UixCssProperty.getTransitionDuration( $( '.uix-modal-box:first' )[0] );
+	
 		
 		/*
 		  * Unbind that one in a safe way that won't accidentally unbind other click handlers.

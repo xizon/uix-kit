@@ -944,13 +944,14 @@ $controls-merge-button-width: 20%;
 	}
 	
 	button {
-		padding: 0.85714285714286rem 0;
+		padding: 0.8125rem 0;
 		width: calc(#{$controls-merge-button-width} + 5px);
 		min-width: 0;
 		margin-left: -5px;
 		letter-spacing: .02rem;
 		font-weight: 600;
 		font-size: 0.875rem;
+		margin-top: -2px;
 		
 		span {
 			display: inline-block;

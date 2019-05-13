@@ -13,6 +13,8 @@
 			padding-bottom: #{$height};
 			display: block;
 			position: relative;
+			margin-top: -#{$gap};
+			
 			
 			> ul {
 				margin: 0;

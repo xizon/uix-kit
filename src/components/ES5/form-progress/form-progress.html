@@ -39,37 +39,52 @@
              </div>
         
         </header>
-        <div class="uix-header__placeholder"></div>
+        <div class="uix-header__placeholder js-uix-header__placeholder-autoheight"></div>
       
        
 		<main id="uix-maincontent">
 			
 			<!-- Content 
 			====================================================== -->
-			<section>
-				<div class="container uix-t-c">
-						<div class="row">
-							<div class="col-md-8 offset-md-2">
-								<h2>Form Progress</h2>
-
-							</div>
+			<section class="uix-spacing--s uix-spacing--no-bottom">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<h3>Form Progress</h3>
+							<p>Progress steps are great for user experience where the user needs to enter data across multiple steps.
+								<br>
+								<strong>Note: </strong>If you want to initialize the indicator to a location when the page is first run, you need to call the following function:</p>
+							
+<pre class="uix-precode uix-t-l"><label>JS</label><code>$( 'body' ).waitForImages().done(function() {
+	$( document ).UixFormProgressToNext({ 
+		'selector'         : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
+		'formTarget'       : $( '.uix-form-progress__target' ),
+		'indicator'        : '.uix-form-progress .uix-form-progress__indicator',
+		'index'            : 0
+	});
+});</code>
+</pre>					
+							
+							<hr>
+							
 						</div>
-						<!-- .row end -->
-
+					</div>
+					<!-- .row end -->
 
 				</div>
 				<!-- .container end -->
 
 			</section>
-
+			
+		
 
 
 		   <!-- Content 
 			====================================================== -->
-			<section class="uix-spacing--m">
+			<section class="uix-spacing--s">
 				<div class="container">
 						<div class="row">
-							<div class="col-md-8 offset-md-2">
+							<div class="col-12">
 
 
 									<div class="uix-form-progress">

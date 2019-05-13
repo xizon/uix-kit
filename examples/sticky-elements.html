@@ -43,11 +43,11 @@
 
 
 	<!-- Theme  -->
-	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=qWlYwFJRZZIMlzGwFWwi"/>
+	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=MEH6ZxZ8jolSkK3d4a6q"/>
 
 
 	<!--[if lt IE 10]>
-	<link rel="stylesheet" href="assets/css/IE.css?ver=qWlYwFJRZZIMlzGwFWwi" />
+	<link rel="stylesheet" href="assets/css/IE.css?ver=MEH6ZxZ8jolSkK3d4a6q" />
 	<![endif]-->
 
 
@@ -419,46 +419,47 @@
              </div>
         
         </header>
-        <div class="uix-header__placeholder"></div>
+        <div class="uix-header__placeholder js-uix-header__placeholder-autoheight"></div>
       
       
 		<main id="uix-maincontent">
 			
 			<!-- Content 
 			====================================================== -->
-			<section>
-				<div class="container uix-t-c">
-						<div class="row">
-							<div class="col-md-8 offset-md-2">
-								<h2>Sticky Elements</h2>
-								<p>
-							   Use the <code>.js-uix-sticky-el</code> to add a HTML tag you want.
+			<section class="uix-spacing--s uix-spacing--no-bottom">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<h3>Sticky Elements</h3>
+							<p>
+							   Use the <code>.js-uix-sticky-el</code> to add a HTML tag you want. Set <code>data-stop-trigger</code> and <code>data-stop-trigger-diff</code> properties to turn off sticky.
 								</p>
-
-
-							</div>
+							<hr>
+							
+							
 						</div>
-						<!-- .row end -->
-
+					</div>
+					<!-- .row end -->
 
 				</div>
 				<!-- .container end -->
 
 			</section>
-
+			
+			
 
 		   <!-- Content 
 			====================================================== -->
-			<section class="uix-spacing--m" style="height: 3000px;">
+			<section class="uix-spacing--s" style="height: 3000px;">
 				<div class="container">
 					<div class="row">
 
-						<div class="col-md-8 offset-md-2">
+						<div class="col-12">
 
 
-								<div class="js-uix-sticky-el">
+								<div class="js-uix-sticky-el" data-stop-trigger=".uix-footer__container" data-stop-trigger-diff="%h/4">
 									<h4>Sticky Title Here</h4>
-									<div style="height: 500px; background: #eee; margin-bottom: 50px;"></div>
+									<div style="height: 500px; background: #f2f2f2; margin-bottom: 50px;"></div>
 								</div>
 
 
@@ -565,14 +566,14 @@
 	============================================= -->
 	
 	<script>
-		var REVISION     = "3.4.6",
+		var REVISION     = "3.5.0",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
 				"homeUrl"     : "",  //Eg. https://uiux.cc
 				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
 			};
     </script>  
-    <script src="../dist/js/uix-kit.min.js?ver=qWlYwFJRZZIMlzGwFWwi"></script>
+    <script src="../dist/js/uix-kit.min.js?ver=MEH6ZxZ8jolSkK3d4a6q"></script>
 
 
 

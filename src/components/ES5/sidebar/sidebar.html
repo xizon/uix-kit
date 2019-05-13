@@ -40,7 +40,7 @@
              </div>
         
         </header>
-        <div class="uix-header__placeholder"></div>
+        <div class="uix-header__placeholder js-uix-header__placeholder-autoheight"></div>
       
       
 		<main id="uix-maincontent">
@@ -48,36 +48,40 @@
 			
 			<!-- Content 
 			====================================================== -->
-			<section>
-				<div class="container uix-t-c">
-						<div class="row">
-							<div class="col-md-8 offset-md-2">
-								<h2>Sidebar</h2>
-
-
-							</div>
+			<section class="uix-spacing--s uix-spacing--no-bottom">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<h3>Sidebar</h3>
+							<hr>
+							
+							
 						</div>
-						<!-- .row end -->
-
+					</div>
+					<!-- .row end -->
 
 				</div>
 				<!-- .container end -->
 
-			</section>
+			</section>	
+			
 
 
 		   <!-- Content 
 			====================================================== -->
-			<section class="uix-spacing--m">
+			<section class="uix-spacing--s">
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-9 col-md-9">
 
 
-							<div style="height: 3000px;">CONTENT...</div>
+							<div style="height: 3000px; background: #f2f2f2;"></div>
 
 						</div>
 						<!--  .col-lg-9.col-md-9  end -->
+						
+						
+						
 						<div class="col-lg-3 col-md-3">
 
 								<!-- Sidebar
@@ -225,7 +229,7 @@
 
 
 
-									<div class="widget js-uix-sticky-el">
+									<div id="uix-sidebar__posts" class="widget js-uix-sticky-el" data-stop-trigger=".uix-footer__container" data-stop-trigger-diff="0">
 										<h3 class="widget-title uix-typo--h5 uix-typo--style-uppercase">Sticky Posts</h3>
 										<ul class="uix-sidebar__posts-img">
 											<li>
@@ -284,9 +288,7 @@
 
 			</section>
 
-
-
-
+	
 			
 		</main>
 		

@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
- * ## Version             :  3.4.6
+ * ## Version             :  3.5.0
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  May 7, 2019
+ * ## Last Update         :  May 13, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -430,7 +430,6 @@ var APP = (function ( $, window, document ) {
 //=========================================================
 //=========================================================
 
-
 /* 
  *************************************
  * Create GUID / UUID
@@ -476,6 +475,132 @@ var UixGUID = UixGUID || (function() {
 })();
 
 
+
+/* 
+ *************************************
+ * Evaluating a string as a mathematical expression in JavaScript
+ *
+ * @return {String}            - New calculation result.
+ *************************************
+ */
+var UixMath = UixMath || (function() {
+    function t() { }
+	
+    return t.version = "0.0.1",
+   
+    t.evaluate = function(s) {
+		
+		var chars = s.replace(/\s/g, '').split("");
+		var n = [], op = [], index = 0, oplast = true;
+
+		n[index] = "";
+
+		// Parse the expression
+		for (var c = 0; c < chars.length; c++) {
+
+			if (isNaN(parseInt(chars[c])) && chars[c] !== "." && !oplast) {
+				op[index] = chars[c];
+				index++;
+				n[index] = "";
+				oplast = true;
+			} else {
+				n[index] += chars[c];
+				oplast = false;
+			}
+		}
+
+		// Calculate the expression
+		s = parseFloat(n[0]);
+		for (var o = 0; o < op.length; o++) {
+			var num = parseFloat(n[o + 1]);
+			switch (op[o]) {
+				case "+":
+					s = s + num;
+					break;
+				case "-":
+					s = s - num;
+					break;
+				case "*":
+					s = s * num;
+					break;
+				case "/":
+					s = s / num;
+					break;
+			}
+		}
+
+		return s;
+    },
+	t
+})();
+
+
+
+/* 
+ *************************************
+ * Get the CSS property
+ *
+ * @param  {Object} el     - Target object, using class name or ID to locate.
+ * @return {String|JSON}            - The value of property.
+ *************************************
+ */
+var UixCssProperty = UixCssProperty || (function() {
+    function t() { }
+	
+    return t.version = "0.0.1",
+
+    t.getTransitionDuration = function( el ) {
+		
+		if ( typeof el === typeof undefined ) {
+			return 0;
+		}
+
+
+		var style    = window.getComputedStyle(el),
+			duration = style.webkitTransitionDuration,
+			delay    = style.webkitTransitionDelay; 
+
+		if ( typeof duration != typeof undefined ) {
+			// fix miliseconds vs seconds
+			duration = (duration.indexOf("ms")>-1) ? parseFloat(duration) : parseFloat(duration)*1000;
+			delay = (delay.indexOf("ms")>-1) ? parseFloat(delay) : parseFloat(delay)*1000;
+
+			return duration;
+		} else {
+			return 0;
+		}
+		
+    },
+		
+    //
+    t.getAbsoluteCoordinates = function( el ) {
+		
+		var windowWidth     = window.innerWidth,
+			leftPos         = null,
+			topPos          = null;
+
+		if ( ! document.getElementsByTagName( 'body' )[0].className.match(/rtl/) ) {
+			leftPos = ( el.offsetLeft == 0 ) ? el.parentElement.offsetLeft : el.offsetLeft;
+			topPos = ( el.offsetTop == 0 ) ? el.parentElement.offsetTop : el.offsetTop;
+		} else {
+			
+			// width and height in pixels, including padding and border
+			// Corresponds to jQuery outerWidth(), outerHeight()
+			leftPos = ( el.offsetLeft == 0 ) ? ( windowWidth - ( el.parentElement.offsetLeft + el.parentElement.offsetWidth ) ) : ( windowWidth - ( el.offsetLeft + el.offsetWidth ) );
+			topPos = ( el.offsetTop == 0 ) ? ( windowWidth - ( el.parentElement.offsetTop + el.parentElement.offsetHeight ) ) : ( windowWidth - ( el.offsetTop + el.offsetHeight ) );
+		}
+
+
+		return {
+			'left': leftPos,
+			'top': topPos
+		};
+		
+    },	
+		
+		
+	t
+})();
 
 
 /* 
@@ -876,7 +1001,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.BODY_AND_HEADER               = APP.BODY_AND_HEADER || {};
-	APP.BODY_AND_HEADER.version       = '0.0.2';
+	APP.BODY_AND_HEADER.version       = '0.0.3';
     APP.BODY_AND_HEADER.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -905,19 +1030,19 @@ APP = ( function ( APP, $, window, document ) {
 			}
 		});
 		function headerInit( w ) {
+			
+			var $headerPlaceholder = $( '.uix-header__placeholder.js-uix-header__placeholder-autoheight' );
+			
 			if ( w > 768 ) {
-				
-				$( '.uix-header__placeholder.uix-header__placeholder--auto-height' ).css( 'height', $( '.uix-header__container' ).outerHeight() + 'px' ); 
-				
+				$headerPlaceholder.css( 'height', $( '.uix-header__container' ).outerHeight() + 'px' ); 
 				$( 'body' ).removeClass( 'is-mobile' );
 			} else {
+				$headerPlaceholder.css( 'height', 0 ); 
 				$( 'body' ).addClass( 'is-mobile' );
 			}
 		}
 		
 		
-
-
 		
 		//-------- Sticky header area
 		//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
@@ -1198,9 +1323,8 @@ APP = ( function ( APP, $, window, document ) {
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
-
     APP.MEGAMENU               = APP.MEGAMENU || {};
-	APP.MEGAMENU.version       = '0.0.1';
+	APP.MEGAMENU.version       = '0.0.3';
     APP.MEGAMENU.pageLoaded    = function() {
 
 		var $window      = $( window ),
@@ -1223,29 +1347,10 @@ APP = ( function ( APP, $, window, document ) {
 				// Do stuff here
 				megaMenuInit( windowWidth );
 		
-
 			}
 		});
 		
 		
-	
-		// For the absolute coordinates of any jquery element 
-		function getAbsoluteCoordinates( $element ) {
-			var windowWidth     = window.innerWidth,
-			    leftPos         = null;
-
-			
-			if ( ! $( 'body' ).hasClass( 'rtl' ) ) {
-				leftPos = ( $element.offset().left == 0 ) ? $element.parent().offset().left : $element.offset().left;
-			} else {
-				
-				//(window.innerWidth - ($whatever.offset().left + $whatever.outerWidth()));
-				leftPos = ( $element.offset().left == 0 ) ? ( windowWidth - ( $element.parent().offset().left + $element.parent().outerWidth() ) ) : ( windowWidth - ( $element.offset().left + $element.outerWidth() ) );
-			}
-				
-
-			return leftPos;
-		}	
 
 		
 		// Initialize mega menu
@@ -1257,9 +1362,11 @@ APP = ( function ( APP, $, window, document ) {
 			    perDefaultW  = 270; //Default width of each column
 
 			
-			//Basic Container
+			//New XL container for Bootstrap 4.x
 			if ( w > 1430 ) maxWidth = 1278;
-			if ( w > 1600 ) maxWidth = 1410;
+			
+			//Full width container
+			maxWidth = windowWidth;
 			
 			
 			
@@ -1290,14 +1397,14 @@ APP = ( function ( APP, $, window, document ) {
 					// Detecting if the right or left of the div is touching the browser window edge.
 					if ( col_total > 0 ) {
 
-						root_li_left     = getAbsoluteCoordinates( mega_div );
+						root_li_left = UixCssProperty.getAbsoluteCoordinates( mega_div[0] ).left;
 						
 						
 						//Determine the mega menu wrapper within document width, in order to limit the width of each column for mega menu
 						if ( maxWidth > w ) maxWidth = w;
 						
 						
-						if ( mega_div_w > maxWidth ) {
+						if ( parseFloat(mega_div_w + 20) > maxWidth ) {
 
 							mega_div_w       = maxWidth;
 							mega_single_w    = maxWidth/col_total - 2.888;
@@ -1699,16 +1806,6 @@ APP = ( function ( APP, $, window, document ) {
 		});
 		
 
-		//-------- Prevent to <a> of page transitions
-		$( 'a' ).each( function() {
-			var attr = $( this ).attr( 'href' );
-			if ( typeof attr !== typeof undefined && attr !== false ) {
-				if  ( $( this ).attr( 'href' ).indexOf( '/#' ) >= 0   || $( this ).attr( 'href' ) == '#' ) {
-					$( this ).attr( 'data-normal', 1 ); 
-				 }	
-			}
-
-		});
 	
 		
     };
@@ -13439,12 +13536,11 @@ APP = ( function ( APP, $, window, document ) {
  * @requires ./examples/assets/js/min/hammer.min.js
  */
 
-
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.ADVANCED_CONTENT_SLIDER               = APP.ADVANCED_CONTENT_SLIDER || {};
-	APP.ADVANCED_CONTENT_SLIDER.version       = '0.0.2';
+	APP.ADVANCED_CONTENT_SLIDER.version       = '0.0.3';
     APP.ADVANCED_CONTENT_SLIDER.documentReady = function( $ ) {
 
 		var $window                   = $( window ),
@@ -13490,6 +13586,11 @@ APP = ( function ( APP, $, window, document ) {
 					dataDraggableCursor        = $this.data( 'draggable-cursor' ),
 					dataControlsPaginationAuto = false;
 
+				
+				//Autoplay times
+				var playTimes;
+				//A function called "timer" once every second (like a digital watch).
+				$this[0].animatedSlides;
 				
 				
 
@@ -13544,7 +13645,13 @@ APP = ( function ( APP, $, window, document ) {
 					if ( !$( this ).hasClass( 'active' ) ) {
 						
 						sliderUpdates( $( this ).attr( 'data-index' ), $this, dataControlsArrows, dataControlsPagination );
+						
+						//Pause the auto play event
+					    clearInterval( $this[0].animatedSlides );	
+						
+						
 					}
+					
 
 
 
@@ -13566,6 +13673,10 @@ APP = ( function ( APP, $, window, document ) {
 					e.preventDefault();
 
 					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
+					
+					//Pause the auto play event
+					clearInterval( $this[0].animatedSlides );	
+					
 
 				});
 
@@ -13573,6 +13684,9 @@ APP = ( function ( APP, $, window, document ) {
 					e.preventDefault();
 
 					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
+					
+					//Pause the auto play event
+					clearInterval( $this[0].animatedSlides );	
 
 				});
 				
@@ -13611,20 +13725,103 @@ APP = ( function ( APP, $, window, document ) {
 					//You know the pan has ended
 					//and you know which action they were taking
 					if ( direction == 'panleft' ) {
-						sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );	
+						sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
+						//Pause the auto play event
+				    	clearInterval( $this[0].animatedSlides );	
 					}
 					
 					if ( direction == 'panright' ) {
 						sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
+						//Pause the auto play event
+				    	clearInterval( $this[0].animatedSlides );	
 					}			
 
 					
-
 				});	
+				
+				
+				
+				//Autoplay Slider
+				//-------------------------------------		
+				var dataAuto                 = $this.data( 'auto' ),
+					dataTiming               = $this.data( 'timing' ),
+					dataLoop                 = $this.data( 'loop' );
+
+				if ( typeof dataAuto === typeof undefined ) dataAuto = false;	
+				if ( typeof dataTiming === typeof undefined ) dataTiming = 10000;
+				if ( typeof dataLoop === typeof undefined ) dataLoop = false;
+
+
+				if ( dataAuto && !isNaN( parseFloat( dataTiming ) ) && isFinite( dataTiming ) ) {
+
+					sliderAutoPlay( playTimes, dataTiming, dataLoop, $this, dataControlsArrows, dataControlsPagination );
+
+					$this.on({
+						mouseenter: function() {
+							clearInterval( $this[0].animatedSlides );
+						},
+						mouseleave: function() {
+							sliderAutoPlay( playTimes, dataTiming, dataLoop, $this, dataControlsArrows, dataControlsPagination );
+						}
+					});	
+
+				}
+
 			
 			});	
 			
+			
 		}
+		
+		
+		/*
+		 * Trigger slider autoplay
+		 *
+		 * @param  {Function} playTimes      - Number of times.
+		 * @param  {Number} timing           - Autoplay interval.
+		 * @param  {Boolean} loop            - Determine whether to loop through each item.
+		 * @param  {Object} slider           - Selector of the slider .
+		 * @param  {String} arrows           - Controller name of prev/next buttons.
+		 * @param  {String} pagination       - Controller name of pagination buttons.
+		 * @return {Void}                    - The constructor.
+		 */
+		function sliderAutoPlay( playTimes, timing, loop, slider, arrows, pagination ) {	
+
+			var items = slider.find( '.uix-advanced-content-slider__item' ),
+				total = items.length;
+			
+			slider[0].animatedSlides = setInterval( function() {
+
+				playTimes = parseFloat( items.filter( '.active' ).index() );
+				playTimes++;
+
+
+				if ( !loop ) {
+					if ( playTimes < total && playTimes >= 0 ) {
+
+						var slideNextId = playTimes;	
+
+						sliderUpdates( slideNextId, slider, arrows, pagination );
+					}
+				} else {
+					if ( playTimes == total ) playTimes = 0;
+					if ( playTimes < 0 ) playTimes = total-1;		
+
+					var slideNextId = playTimes;	
+
+
+					//Prevent problems with styles when switching in positive order
+					sliderUpdates( slideNextId, slider, arrows, pagination );	
+
+				}
+
+
+
+			}, timing );	
+		}
+
+		
+		
 		
 		/*
 		 * Transition Between Slides
@@ -13642,6 +13839,16 @@ APP = ( function ( APP, $, window, document ) {
 				$prev         = $( arrows ).find( '.uix-advanced-content-slider__arrows--prev' ),
 				$next         = $( arrows ).find( '.uix-advanced-content-slider__arrows--next' ),
 				$pagination   = $( pagination ).find( 'li a' );
+			
+			
+			
+			
+			//Get the animation speed
+			if ( typeof slider.data( 'speed' ) != typeof undefined && slider.data( 'speed' ) != false ) {
+				animDuration = slider.data( 'speed' );
+			}
+
+			
 				
 			if ( elementIndex <= itemsTotal - 1 && elementIndex >= 0 ) {
 
@@ -13706,21 +13913,16 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.ADVANCED_SLIDER               = APP.ADVANCED_SLIDER || {};
-	APP.ADVANCED_SLIDER.version       = '0.1.0';
+	APP.ADVANCED_SLIDER.version       = '0.1.1';
     APP.ADVANCED_SLIDER.pageLoaded    = function() {
 
 		var $window                   = $( window ),
 			windowWidth               = window.innerWidth,
 			windowHeight              = window.innerHeight,
 			animDelay                 = 0,
-			$sliderWrapper            = $( '.uix-advanced-slider' ),
+			$sliderWrapper            = $( '.uix-advanced-slider' );
 			
-			//Autoplay global variables
-			timer                     = null,
-			playTimes;
-		
-		
-		
+			
 		sliderInit( false );
 		
 		$window.on( 'resize', function() {
@@ -13734,6 +13936,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 			}
 		});
+		
 		
 		
 		/*
@@ -13752,34 +13955,15 @@ APP = ( function ( APP, $, window, document ) {
 					nativeItemW,
 					nativeItemH;
 				
-				//Get the -webkit-transition-duration property
-				//-------------------------------------	
-				var getTransitionDuration = function( el, withDelay ) {
+				
+				//Autoplay times
+				var playTimes;
+				//A function called "timer" once every second (like a digital watch).
+				$this[0].animatedSlides;
+				
+				
 
-					if ( typeof el === typeof undefined ) {
-						return 0;
-					}
-
-					var style    = window.getComputedStyle(el),
-						duration = style.webkitTransitionDuration,
-						delay    = style.webkitTransitionDelay; 
-
-					if ( typeof duration != typeof undefined ) {
-						// fix miliseconds vs seconds
-						duration = (duration.indexOf("ms")>-1) ? parseFloat(duration) : parseFloat(duration)*1000;
-						delay = (delay.indexOf("ms")>-1) ? parseFloat(delay) : parseFloat(delay)*1000;
-
-						if ( withDelay ) {
-							 return (duration + delay);
-						} else {
-							return duration;
-						}	
-					} else {
-						return 0;
-					}
-				};
-
-				animDelay = getTransitionDuration( $first[0] );
+				animDelay = UixCssProperty.getTransitionDuration( $first[0] );
 
 
 				
@@ -13805,7 +13989,7 @@ APP = ( function ( APP, $, window, document ) {
 						nativeItemH = this.videoHeight;	
 
 						//Initialize all the items to the stage
-						addItemsToStage( $this, $sliderWrapper, nativeItemW, nativeItemH );
+						addItemsToStage( $this, nativeItemW, nativeItemH );
 
 					}, false);	
 
@@ -13826,7 +14010,7 @@ APP = ( function ( APP, $, window, document ) {
 							nativeItemH = this.height;	
 
 							//Initialize all the items to the stage
-							addItemsToStage( $this, $sliderWrapper, nativeItemW, nativeItemH );
+							addItemsToStage( $this, nativeItemW, nativeItemH );
 
 						};
 
@@ -13854,14 +14038,14 @@ APP = ( function ( APP, $, window, document ) {
 
 					if ( dataAuto && !isNaN( parseFloat( dataTiming ) ) && isFinite( dataTiming ) ) {
 
-						sliderAutoPlay( dataTiming, $items, dataLoop );
+						sliderAutoPlay( playTimes, dataTiming, dataLoop, $this );
 
 						$this.on({
 							mouseenter: function() {
-								clearInterval( timer );
+								clearInterval( $this[0].animatedSlides );
 							},
 							mouseleave: function() {
-								sliderAutoPlay( dataTiming, $items, dataLoop );
+								sliderAutoPlay( playTimes, dataTiming, dataLoop, $this );
 							}
 						});	
 
@@ -13884,16 +14068,18 @@ APP = ( function ( APP, $, window, document ) {
         /*
 		 * Trigger slider autoplay
 		 *
+		 * @param  {Function} playTimes      - Number of times.
 		 * @param  {Number} timing           - Autoplay interval.
-		 * @param  {Object} items            - Each item in current slider.
 		 * @param  {Boolean} loop            - Determine whether to loop through each item.
-		 * @return {Void}
+		 * @param  {Object} slider           - Selector of the slider .
+		 * @return {Void}                    - The constructor.
 		 */
-        function sliderAutoPlay( timing, items, loop ) {	
+		function sliderAutoPlay( playTimes, timing, loop, slider ) {	
+
+			var items = slider.find( '.uix-advanced-slider__item' ),
+				total = items.length;
 			
-			var total = items.length;
-			
-			timer = setInterval( function() {
+			slider[0].animatedSlides = setInterval( function() {
 
 				playTimes = parseFloat( items.filter( '.active' ).index() );
 				playTimes++;
@@ -13919,12 +14105,11 @@ APP = ( function ( APP, $, window, document ) {
 		 * Initialize all the items to the stage
 		 *
 		 * @param  {Object} slider           - Current selector of each slider.
-		 * @param  {Object} sliderWrapper    - Wrapper of the slider.
 		 * @param  {Number} nativeItemW      - Returns the intrinsic width of the image/video.
 		 * @param  {Number} nativeItemH      - Returns the intrinsic height of the image/video.
 		 * @return {Void}
 		 */
-        function addItemsToStage( slider, sliderWrapper, nativeItemW, nativeItemH ) {
+        function addItemsToStage( slider, nativeItemW, nativeItemH ) {
 			
 			var $this                    = slider,
 				$items                   = $this.find( '.uix-advanced-slider__item' ),
@@ -13996,10 +14181,10 @@ APP = ( function ( APP, $, window, document ) {
 					}
 					
 					
-					sliderUpdates( $( this ).attr( 'data-index' ), sliderWrapper, curDir );
+					sliderUpdates( $( this ).attr( 'data-index' ), $this, curDir );
 
 					//Pause the auto play event
-					clearInterval( timer );	
+					clearInterval( $this[0].animatedSlides );	
 				}
 
 
@@ -14019,25 +14204,24 @@ APP = ( function ( APP, $, window, document ) {
 			}
 
 
-
 			_prev.on( 'click', function( e ) {
 				e.preventDefault();
 
-				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, sliderWrapper, 'prev' );
+				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, 'prev' );
 
 				//Pause the auto play event
-				clearInterval( timer );
+				clearInterval( $this[0].animatedSlides );
 
 			});
 
 			_next.on( 'click', function( e ) {
 				e.preventDefault();
 
-				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, sliderWrapper, 'next' );
+				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, 'next' );
 
 
 				//Pause the auto play event
-				clearInterval( timer );
+				clearInterval( $this[0].animatedSlides );
 
 
 			});
@@ -14611,7 +14795,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.ADVANCED_SLIDER_FILTER               = APP.ADVANCED_SLIDER_FILTER || {};
-	APP.ADVANCED_SLIDER_FILTER.version       = '0.1.7';
+	APP.ADVANCED_SLIDER_FILTER.version       = '0.1.8';
     APP.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 		
@@ -14627,10 +14811,6 @@ APP = ( function ( APP, $, window, document ) {
 			//Save different canvas heights as an array
 			canvasHeights             = [],
 
-			
-			//Autoplay global variables
-			timer                     = null,
-			playTimes,
 			
 			//Basic webGL renderers 
 			rendererOuterID           = 'uix-advanced-slider-sp__canvas-container',
@@ -14677,6 +14857,12 @@ APP = ( function ( APP, $, window, document ) {
 					$first                   = $items.first(),
 					nativeItemW,
 					nativeItemH;
+				
+				
+				//Autoplay times
+				var playTimes;
+				//A function called "timer" once every second (like a digital watch).
+				$this[0].animatedSlides;
 				
 				
 				//Get the animation speed
@@ -14730,7 +14916,7 @@ APP = ( function ( APP, $, window, document ) {
 							nativeItemH = this.videoHeight;	
 
 							//Initialize all the items to the stage
-							addItemsToStage( $this, $sliderWrapper, nativeItemW, nativeItemH );
+							addItemsToStage( $this, nativeItemW, nativeItemH );
 
 
 						}, false);	
@@ -14756,7 +14942,7 @@ APP = ( function ( APP, $, window, document ) {
 							nativeItemH = this.height;	
 
 							//Initialize all the items to the stage
-							addItemsToStage( $this, $sliderWrapper, nativeItemW, nativeItemH );
+							addItemsToStage( $this, nativeItemW, nativeItemH );
 							
 
 							
@@ -14786,14 +14972,14 @@ APP = ( function ( APP, $, window, document ) {
 
 					if ( dataAuto && !isNaN( parseFloat( dataTiming ) ) && isFinite( dataTiming ) ) {
 
-						sliderAutoPlay( dataTiming, $items, dataLoop );
+						sliderAutoPlay( playTimes, dataTiming, dataLoop, $this );
 
 						$this.on({
 							mouseenter: function() {
-								clearInterval( timer );
+								clearInterval( $this[0].animatedSlides );
 							},
 							mouseleave: function() {
-								sliderAutoPlay( dataTiming, $items, dataLoop );
+								sliderAutoPlay( playTimes, dataTiming, dataLoop, $this );
 							}
 						});	
 
@@ -14812,19 +14998,21 @@ APP = ( function ( APP, $, window, document ) {
 		
 		
 
-        /*
+         /*
 		 * Trigger slider autoplay
 		 *
+		 * @param  {Function} playTimes      - Number of times.
 		 * @param  {Number} timing           - Autoplay interval.
-		 * @param  {Object} items            - Each item in current slider.
 		 * @param  {Boolean} loop            - Determine whether to loop through each item.
-		 * @return {Void}
+		 * @param  {Object} slider           - Selector of the slider .
+		 * @return {Void}                    - The constructor.
 		 */
-        function sliderAutoPlay( timing, items, loop ) {	
+		function sliderAutoPlay( playTimes, timing, loop, slider ) {	
+
+			var items = slider.find( '.uix-advanced-slider-sp__item' ),
+				total = items.length;
 			
-			var total = items.length;
-			
-			timer = setInterval( function() {
+			slider[0].animatedSlides = setInterval( function() {
 
 				playTimes = parseFloat( items.filter( '.active' ).index() );
 				playTimes++;
@@ -14856,12 +15044,11 @@ APP = ( function ( APP, $, window, document ) {
 		 * Initialize all the items to the stage
 		 *
 		 * @param  {Object} slider           - Current selector of each slider.
-		 * @param  {Object} sliderWrapper    - Wrapper of the slider.
 		 * @param  {Number} nativeItemW      - Returns the intrinsic width of the image/video.
 		 * @param  {Number} nativeItemH      - Returns the intrinsic height of the image/video.
 		 * @return {Void}
 		 */
-        function addItemsToStage( slider, sliderWrapper, nativeItemW, nativeItemH ) {
+        function addItemsToStage( slider, nativeItemW, nativeItemH ) {
 			
 			var $this                    = slider,
 				$items                   = $this.find( '.uix-advanced-slider-sp__item' ),
@@ -15716,15 +15903,15 @@ APP = ( function ( APP, $, window, document ) {
 					
 					
 					//Canvas Interactions
-					transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), sliderWrapper, 'out', curDir );
+					transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), $this, 'out', curDir );
 						
 					
 					
 					//Update the current and previous/next items
-					sliderUpdates( $( this ).attr( 'data-index' ), sliderWrapper, curDir );
+					sliderUpdates( $( this ).attr( 'data-index' ), $this, curDir );
 
 					//Pause the auto play event
-					clearInterval( timer );	
+					clearInterval( $this[0].animatedSlides );	
 				}
 
 
@@ -15749,13 +15936,13 @@ APP = ( function ( APP, $, window, document ) {
 				e.preventDefault();
 
 				//Canvas Interactions
-				transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), sliderWrapper, 'out', 'prev' );	
+				transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), $this, 'out', 'prev' );	
 
 				//Update the current and previous items
-				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, sliderWrapper, 'prev' );
+				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, 'prev' );
 
 				//Pause the auto play event
-				clearInterval( timer );
+				clearInterval( $this[0].animatedSlides );
 
 			});
 
@@ -15763,14 +15950,14 @@ APP = ( function ( APP, $, window, document ) {
 				e.preventDefault();
 
 				//Canvas Interactions
-				transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), sliderWrapper, 'out', 'next' );	
+				transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), $this, 'out', 'next' );	
 
 				//Update the current and next items
-				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, sliderWrapper, 'next' );
+				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, 'next' );
 
 
 				//Pause the auto play event
-				clearInterval( timer );
+				clearInterval( $this[0].animatedSlides );
 
 
 			});
@@ -21491,7 +21678,6 @@ APP = ( function ( APP, $, window, document ) {
 	});
 
 
-	
 */
 
 
@@ -27773,38 +27959,10 @@ APP = ( function ( APP, $, window, document ) {
 	APP.MODAL_DIALOG.version       = '0.0.9';
     APP.MODAL_DIALOG.documentReady = function( $ ) {
 
-		//Get the -webkit-transition-duration property
-		var getTransitionDuration = function( el, withDelay ) {
-			
-			if ( typeof el === typeof undefined ) {
-				return 0;
-			}
-			
-			
-			var style    = window.getComputedStyle(el),
-				duration = style.webkitTransitionDuration,
-				delay    = style.webkitTransitionDelay; 
-
-			if ( typeof duration != typeof undefined ) {
-				// fix miliseconds vs seconds
-				duration = (duration.indexOf("ms")>-1) ? parseFloat(duration) : parseFloat(duration)*1000;
-				delay = (delay.indexOf("ms")>-1) ? parseFloat(delay) : parseFloat(delay)*1000;
-
-				if ( withDelay ) {
-					 return (duration + delay);
-				} else {
-					return duration;
-				}	
-			} else {
-				return 0;
-			}
-			
-
-		};
 		
 		//Delay Time when Full Screen Effect is fired.
-		var modalSpeed = getTransitionDuration( $( '.uix-modal-box:first' )[0] );
-		
+		var modalSpeed = UixCssProperty.getTransitionDuration( $( '.uix-modal-box:first' )[0] );
+	
 		
 		/*
 		  * Unbind that one in a safe way that won't accidentally unbind other click handlers.
@@ -31240,7 +31398,6 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
-
 /* 
  *************************************
  *  <!-- Sticky Elements -->
@@ -31250,10 +31407,9 @@ APP = ( function ( APP, $, window, document ) {
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
-	
 
     APP.STICKY_EL               = APP.STICKY_EL || {};
-	APP.STICKY_EL.version       = '0.0.2';
+	APP.STICKY_EL.version       = '0.0.3';
     APP.STICKY_EL.pageLoaded    = function() {
 
 		var $window      = $( window ),
@@ -31261,33 +31417,45 @@ APP = ( function ( APP, $, window, document ) {
 			windowHeight = window.innerHeight,
 			topSpacing   = $( '.uix-header__container' ).outerHeight( true ) + 10;
 		
-		
+
 		$window.on( 'scroll touchmove', function() {
 
 			var scrollTop   = $window.scrollTop(),
-				dynamicTop  = parseFloat( scrollTop + window.innerHeight ),
-				targetTop   = parseFloat( $( document ).height() - 200 );
+				dynamicTop  = parseFloat( scrollTop + window.innerHeight );
 
-		
-			//Detecting when user scrolls to bottom of div
-			if ( dynamicTop >= targetTop ) {
-				
-					$( '.js-uix-sticky-el.active' )
-						  .css( {
-							  'top'  : parseFloat( topSpacing - (dynamicTop - targetTop) ) + 'px'
-						  } );	
-				
-			} else {
-				
-				if ( $( '.js-uix-sticky-el.active' ).length > 0 && $( '.js-uix-sticky-el.active' ).position().top < topSpacing ) {
-					$( '.js-uix-sticky-el.active' )
-						  .css( {
-							  'top'  : topSpacing + 'px'
-						  } );	
-				}
-				
-			}
 
+			$( '.js-uix-sticky-el.active' ).each( function()  {
+				var $el = $( this );
+
+				if ( typeof $el.data( 'stop-trigger' ) != typeof undefined && $( $el.data( 'stop-trigger' ) ).length > 0 ) {
+					
+					
+
+					var diff      = typeof $el.data( 'stop-trigger-diff' ) != typeof undefined && $el.data( 'stop-trigger-diff' ).length > 0 ? UixMath.evaluate( $el.data( 'stop-trigger-diff' ).replace(/\s/g, '').replace(/\%\h/g, windowHeight ).replace(/\%\w/g, windowWidth ) ) : 0,
+						targetTop = $( $el.data( 'stop-trigger' ) ).offset().top - diff;
+					
+				
+					//Detecting when user scrolls to bottom of div
+					if ( dynamicTop >= targetTop ) {
+
+							$el.css( {
+								  'top'  : parseFloat( topSpacing - (dynamicTop - targetTop) ) + 'px'
+							  } );	
+
+					} else {
+
+						if ( $el.length > 0 && $el.position().top < topSpacing ) {
+							$el.css( {
+								  'top'  : topSpacing + 'px'
+							  } );	
+						}
+
+					}
+				}	
+
+			});
+			
+			
 
 		});	
 
@@ -31327,9 +31495,9 @@ APP = ( function ( APP, $, window, document ) {
 //
 //			//Detecting when user scrolls to bottom of div
 //			if ( spyTop > navMaxTop || spyTop < navMinTop ) {
-//				$( '.js-uix-sticky-el' ).removeClass( 'act' );
+//				$( '.js-uix-sticky-el' ).removeClass( 'active' );
 //			} else {
-//				$( '.js-uix-sticky-el' ).addClass( 'act' );
+//				$( '.js-uix-sticky-el' ).addClass( 'active' );
 //			}	
 //
 //
@@ -35395,7 +35563,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP._3D_SHATTER_SLIDER               = APP._3D_SHATTER_SLIDER || {};
-	APP._3D_SHATTER_SLIDER.version       = '0.0.1';
+	APP._3D_SHATTER_SLIDER.version       = '0.0.2';
     APP._3D_SHATTER_SLIDER.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -35413,9 +35581,6 @@ APP = ( function ( APP, $, window, document ) {
 				$sliderWrapper            = $( '.uix-3d-slider--shatter' ),
 
 
-				//Autoplay global variables
-				timer                     = null,
-				playTimes,
 
 				//Basic webGL renderers 
 				renderLoaderID            = 'uix-3d-slider--shatter__loader',
@@ -35476,6 +35641,10 @@ APP = ( function ( APP, $, window, document ) {
 					if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
 					
 					
+					//Autoplay times
+					var playTimes;
+					//A function called "timer" once every second (like a digital watch).
+					$this[0].animatedSlides;
 
 
 					//If arrows does not exist on the page, it will be added by default, 
@@ -35609,7 +35778,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 						//Pause the auto play event
-						clearInterval( timer );	
+						clearInterval( $this[0].animatedSlides );	
 
 
 					});
@@ -35640,7 +35809,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 						//Pause the auto play event
-						clearInterval( timer );
+						clearInterval( $this[0].animatedSlides );
 
 					});
 
@@ -35655,7 +35824,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 						//Pause the auto play event
-						clearInterval( timer );
+						clearInterval( $this[0].animatedSlides );
 
 
 					});
@@ -35675,14 +35844,14 @@ APP = ( function ( APP, $, window, document ) {
 
 					if ( dataAuto && !isNaN( parseFloat( dataTiming ) ) && isFinite( dataTiming ) ) {
 
-						sliderAutoPlay( dataTiming, $items, dataLoop );
+						sliderAutoPlay( playTimes, dataTiming, dataLoop, $this );
 
 						$this.on({
 							mouseenter: function() {
-								clearInterval( timer );
+								clearInterval( $this[0].animatedSlides );
 							},
 							mouseleave: function() {
-								sliderAutoPlay( dataTiming, $items, dataLoop );
+								sliderAutoPlay( playTimes, dataTiming, dataLoop, $this );
 							}
 						});	
 
@@ -35976,19 +36145,21 @@ APP = ( function ( APP, $, window, document ) {
 
 
 			
-			/*
-			 * Trigger slider autoplay
-			 *
-			 * @param  {Number} timing           - Autoplay interval.
-			 * @param  {Object} items            - Each item in current slider.
-			 * @param  {Boolean} loop            - Determine whether to loop through each item.
-			 * @return {Void}                    - The constructor.
-			 */
-			function sliderAutoPlay( timing, items, loop ) {	
+		 /*
+		 * Trigger slider autoplay
+		 *
+		 * @param  {Function} playTimes      - Number of times.
+		 * @param  {Number} timing           - Autoplay interval.
+		 * @param  {Boolean} loop            - Determine whether to loop through each item.
+		 * @param  {Object} slider           - Selector of the slider .
+		 * @return {Void}                    - The constructor.
+		 */
+		function sliderAutoPlay( playTimes, timing, loop, slider ) {	
 
-				var total = items.length;
-
-				timer = setInterval( function() {
+			var items = slider.find( '.uix-3d-slider--shatter__item' ),
+				total = items.length;
+			
+			slider[0].animatedSlides = setInterval( function() {
 
 					playTimes = parseFloat( items.filter( '.active' ).index() );
 					playTimes++;
@@ -36286,7 +36457,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP._3D_EXP_PARTICLE_SLIDER               = APP._3D_EXP_PARTICLE_SLIDER || {};
-	APP._3D_EXP_PARTICLE_SLIDER.version       = '0.0.1';
+	APP._3D_EXP_PARTICLE_SLIDER.version       = '0.0.2';
     APP._3D_EXP_PARTICLE_SLIDER.documentReady = function( $ ) {
 
 		
@@ -36305,9 +36476,6 @@ APP = ( function ( APP, $, window, document ) {
 				$sliderWrapper            = $( '.uix-3d-slider--expParticle' ),
 
 
-				//Autoplay global variables
-				timer                     = null,
-				playTimes,
 
 				//Basic webGL renderers 
 				renderLoaderID            = 'uix-3d-slider--expParticle__loader',
@@ -36376,6 +36544,12 @@ APP = ( function ( APP, $, window, document ) {
 					
 					
 
+					//Autoplay times
+					var playTimes;
+					//A function called "timer" once every second (like a digital watch).
+					$this[0].animatedSlides;
+
+					
 
 					//If arrows does not exist on the page, it will be added by default, 
 					//and the drag and drop function will be activated.
@@ -36508,7 +36682,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 						//Pause the auto play event
-						clearInterval( timer );	
+						clearInterval( $this[0].animatedSlides );	
 
 
 					});
@@ -36539,7 +36713,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 						//Pause the auto play event
-						clearInterval( timer );
+						clearInterval( $this[0].animatedSlides );
 
 					});
 
@@ -36554,7 +36728,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 						//Pause the auto play event
-						clearInterval( timer );
+						clearInterval( $this[0].animatedSlides );
 
 
 					});
@@ -36574,14 +36748,14 @@ APP = ( function ( APP, $, window, document ) {
 
 					if ( dataAuto && !isNaN( parseFloat( dataTiming ) ) && isFinite( dataTiming ) ) {
 
-						sliderAutoPlay( dataTiming, $items, dataLoop );
+						sliderAutoPlay( playTimes, dataTiming, dataLoop, $this );
 
 						$this.on({
 							mouseenter: function() {
-								clearInterval( timer );
+								clearInterval( $this[0].animatedSlides );
 							},
 							mouseleave: function() {
-								sliderAutoPlay( dataTiming, $items, dataLoop );
+								sliderAutoPlay( playTimes, dataTiming, dataLoop, $this );
 							}
 						});	
 
@@ -36918,19 +37092,21 @@ APP = ( function ( APP, $, window, document ) {
 	
 
 			
-			/*
-			 * Trigger slider autoplay
-			 *
-			 * @param  {Number} timing           - Autoplay interval.
-			 * @param  {Object} items            - Each item in current slider.
-			 * @param  {Boolean} loop            - Determine whether to loop through each item.
-			 * @return {Void}                    - The constructor.
-			 */
-			function sliderAutoPlay( timing, items, loop ) {	
+		 /*
+		 * Trigger slider autoplay
+		 *
+		 * @param  {Function} playTimes      - Number of times.
+		 * @param  {Number} timing           - Autoplay interval.
+		 * @param  {Boolean} loop            - Determine whether to loop through each item.
+		 * @param  {Object} slider           - Selector of the slider .
+		 * @return {Void}                    - The constructor.
+		 */
+		function sliderAutoPlay( playTimes, timing, loop, slider ) {	
 
-				var total = items.length;
-
-				timer = setInterval( function() {
+			var items = slider.find( '.uix-3d-slider--expParticle__item' ),
+				total = items.length;
+			
+			slider[0].animatedSlides = setInterval( function() {
 
 					playTimes = parseFloat( items.filter( '.active' ).index() );
 					playTimes++;

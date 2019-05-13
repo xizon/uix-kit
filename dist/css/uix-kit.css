@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
- * ## Version             :  3.4.6
+ * ## Version             :  3.5.0
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  May 7, 2019
+ * ## Last Update         :  May 13, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -145,10 +145,10 @@
 	
     Large                      :    11.375rem
     Medium                     :    6.5625rem
-    Small                      :    4.8125rem
+    Small                      :    3rem
     Default (mobile)           :    4.265625rem
     Large (mobile)             :    4.265625rem
-    Small (mobile)             :    2.625rem
+    Small (mobile)             :    1.5rem
 
 
 
@@ -281,7 +281,7 @@ code {
   background-color: #f9f2f4;
   border-radius: 3px;
   display: inline-block;
-  margin: 0 .2rem .2rem 0;
+  margin: 0 .2rem .2rem .2rem;
   padding: .1rem .4rem;
   white-space: nowrap;
   font-family: "Inconsolata", "Monaco", "Consolas", "Andale Mono", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace; }
@@ -747,7 +747,7 @@ ul.uix-entry__meta {
 /* ====================================================== */
 .uix-footer__container {
   font-size: 0.75rem;
-  padding: 2.625rem 0; }
+  padding: 3rem 0; }
 
 /* ul li ul li -> all on one line */
 .uix-footer__menu,
@@ -821,10 +821,8 @@ ul.uix-entry__meta {
 
 /* Header Placeholder, to prevent floating elements from affecting layout */
 .uix-header__placeholder {
-  height: 185px;
+  height: 75px;
   background: none; }
-  .uix-header__placeholder.uix-header__placeholder--auto-height {
-    height: 75px; }
 
 @media all and (max-width: 768px) {
   .uix-header__container {
@@ -833,10 +831,9 @@ ul.uix-entry__meta {
       background-color: #EC5E79;
       background-image: linear-gradient(to right, #EC5E79 0%, #f60 20%, #d83ba0 100%);
       position: relative; }
+  /* Header Placeholder, to prevent floating elements from affecting layout */
   .uix-header__placeholder {
-    height: calc(185px - 75px); }
-    .uix-header__placeholder.uix-header__placeholder--auto-height {
-      height: 0; } }
+    height: 0; } }
 
 /* ====================================================== 
     <!-- Helper Classes -->              
@@ -1264,11 +1261,6 @@ img.uix-alignfull,
   .container {
     max-width: 1278px; } }
 
-/* New XXL container for Bootstrap 4.x */
-@media all and (min-width: 1600px) {
-  .container {
-    max-width: 1410px; } }
-
 /* 
  ---------------------------
  2. Material Container
@@ -1388,7 +1380,8 @@ img.uix-alignfull,
 .uix-core-grid {
   width: 100%; }
   .uix-core-grid .uix-core-grid__row {
-    width: calc( 100% + 15px); }
+    width: calc( 100% + 15px);
+    /* Auto width, for automatic widths such as 5 columns */ }
     .uix-core-grid .uix-core-grid__row::after {
       /* Or @extend .uix-clearfix */
       content: "";
@@ -1401,9 +1394,19 @@ img.uix-alignfull,
       width: 100%; }
       .uix-core-grid .uix-core-grid__row.uix-core-grid__row--no-gutter [class*='uix-core-grid__col-'] {
         padding-right: 0 !important; }
+    .uix-core-grid .uix-core-grid__row.uix-core-grid__row--auto-width {
+      display: flex;
+      flex-wrap: wrap; }
+      .uix-core-grid .uix-core-grid__row.uix-core-grid__row--auto-width .uix-core-grid__col {
+        -ms-flex-preferred-size: 0;
+        flex-basis: 0;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        padding-right: 15px; }
+    .uix-core-grid .uix-core-grid__row.uix-core-grid__row--auto-width.uix-core-grid__row--no-gutter .uix-core-grid__col {
+      padding-right: 0; }
   .uix-core-grid [class*='uix-core-grid__col-'] {
-    padding-right: 15px;
-    margin-bottom: 7.5px; }
+    padding-right: 15px; }
     .uix-core-grid__row .uix-core-grid [class*='uix-core-grid__col-']:last-of-type {
       padding-right: 0; }
       .uix-core-grid__row .uix-core-grid [class*='uix-core-grid__col-']:last-of-type [class*='uix-core-grid__col-'] > div {
@@ -1429,33 +1432,41 @@ img.uix-alignfull,
       clear: both; } }
 
 @media all and (max-width: 768px) {
-  .uix-core-grid:not(.uix-core-grid__row--nobreaking) {
+  .uix-core-grid .uix-core-grid__row {
+    /* Auto width, for automatic widths such as 5 columns */ }
+    .uix-core-grid .uix-core-grid__row.uix-core-grid__row--auto-width {
+      display: block; }
+    .uix-core-grid .uix-core-grid__row.uix-core-grid__row--auto-width.uix-core-grid__row--no-gutter .uix-core-grid__col {
+      padding-right: 15px; }
+  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--nobreaking {
+    /* Auto width, for automatic widths such as 5 columns */ }
+    .uix-core-grid .uix-core-grid__row.uix-core-grid__row--nobreaking.uix-core-grid__row--auto-width {
+      display: flex; }
+  .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--nobreaking) {
     /* 2 columns */ }
-    .uix-core-grid:not(.uix-core-grid__row--nobreaking) .uix-core-grid__row.uix-core-grid__row--no-gutter {
+    .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--nobreaking).uix-core-grid__row--no-gutter {
       width: calc(100% + 15px); }
-    .uix-core-grid:not(.uix-core-grid__row--nobreaking) [class*='uix-core-grid__col-'] {
+    .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--nobreaking) [class*='uix-core-grid__col-'] {
       float: none;
       width: calc(100% - 15px);
       padding-left: 0;
-      padding-right: 0;
-      margin-bottom: 15px; }
-    .uix-core-grid:not(.uix-core-grid__row--nobreaking) .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-2,
-    .uix-core-grid:not(.uix-core-grid__row--nobreaking) .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-3,
-    .uix-core-grid:not(.uix-core-grid__row--nobreaking) .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-4 {
+      padding-right: 0; }
+    .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--nobreaking).uix-core-grid__row--col-2 .uix-core-grid__col-2,
+    .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--nobreaking).uix-core-grid__row--col-2 .uix-core-grid__col-3,
+    .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--nobreaking).uix-core-grid__row--col-2 .uix-core-grid__col-4 {
       width: 50%;
-      float: left;
-      margin-bottom: 7.5px; }
-    .uix-core-grid:not(.uix-core-grid__row--nobreaking) .uix-core-grid__row.uix-core-grid__row--col-2.uix-core-grid__row--no-gutter .uix-core-grid__col-2,
-    .uix-core-grid:not(.uix-core-grid__row--nobreaking) .uix-core-grid__row.uix-core-grid__row--col-2.uix-core-grid__row--no-gutter .uix-core-grid__col-3,
-    .uix-core-grid:not(.uix-core-grid__row--nobreaking) .uix-core-grid__row.uix-core-grid__row--col-2.uix-core-grid__row--no-gutter .uix-core-grid__col-4 {
+      float: left; }
+    .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--nobreaking).uix-core-grid__row--col-2.uix-core-grid__row--no-gutter .uix-core-grid__col-2,
+    .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--nobreaking).uix-core-grid__row--col-2.uix-core-grid__row--no-gutter .uix-core-grid__col-3,
+    .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--nobreaking).uix-core-grid__row--col-2.uix-core-grid__row--no-gutter .uix-core-grid__col-4 {
       width: calc(50% - 7.5px); }
-    .uix-core-grid:not(.uix-core-grid__row--nobreaking) .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-2:nth-child(2n+1),
-    .uix-core-grid:not(.uix-core-grid__row--nobreaking) .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-3:nth-child(2n+1),
-    .uix-core-grid:not(.uix-core-grid__row--nobreaking) .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-4:nth-child(2n+1) {
+    .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--nobreaking).uix-core-grid__row--col-2 .uix-core-grid__col-2:nth-child(2n+1),
+    .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--nobreaking).uix-core-grid__row--col-2 .uix-core-grid__col-3:nth-child(2n+1),
+    .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--nobreaking).uix-core-grid__row--col-2 .uix-core-grid__col-4:nth-child(2n+1) {
       clear: both; }
-    .uix-core-grid:not(.uix-core-grid__row--nobreaking) .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-2:nth-child(2n+0),
-    .uix-core-grid:not(.uix-core-grid__row--nobreaking) .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-3:nth-child(2n+0),
-    .uix-core-grid:not(.uix-core-grid__row--nobreaking) .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-4:nth-child(2n+0) {
+    .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--nobreaking).uix-core-grid__row--col-2 .uix-core-grid__col-2:nth-child(2n+0),
+    .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--nobreaking).uix-core-grid__row--col-2 .uix-core-grid__col-3:nth-child(2n+0),
+    .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--nobreaking).uix-core-grid__row--col-2 .uix-core-grid__col-4:nth-child(2n+0) {
       padding-right: 15px; } }
 
 /* ====================================================== 
@@ -2270,7 +2281,13 @@ img.uix-alignfull,
  */
 .uix-page-links {
   margin: 0.875rem 0;
-  font-weight: 600; }
+  font-weight: 600;
+  position: relative;
+  display: block;
+  padding: 0.5rem 0.75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  border: 1px solid #dee2e6; }
   .uix-page-links > span {
     display: inline-block;
     margin: 0 0.13125rem;
@@ -2804,7 +2821,7 @@ img.uix-alignfull,
 /* ====================================================== */
 .uix-spacing--s {
   position: relative;
-  padding: 4.8125rem 0; }
+  padding: 3rem 0; }
 
 .uix-spacing--m {
   position: relative;
@@ -2831,7 +2848,7 @@ img.uix-alignfull,
 
 @media all and (max-width: 768px) {
   .uix-spacing--s {
-    padding: 2.40625rem 0; }
+    padding: 1.5rem 0; }
   .uix-spacing--m {
     padding: 3.28125rem 0; }
   .uix-spacing--l {
@@ -3146,8 +3163,8 @@ h6 {
 .uix-typo--vertical {
   /* Defines the orientation of the text characters in a line.  */ }
   .uix-typo--vertical:not(.uix-typo--vertical-characters-line) {
-    transform: rotate(90deg);
-    transform-origin: left top 0;
+    writing-mode: vertical-rl;
+    transform: translateX(0.5rem);
     line-height: 0;
     /* Fix the problem of left-leaning text after rotation */ }
   .uix-typo--vertical.uix-typo--vertical-characters-line {
@@ -3575,8 +3592,7 @@ h6 {
       opacity: 0;
       /* Javascript will automatically get this value, please do not delete */
       transition: all 0.6s ease;
-      /* New XL container for Bootstrap 4.x */
-      /* New XXL container for Bootstrap 4.x */ }
+      /* New XL container for Bootstrap 4.x */ }
       .uix-advanced-slider .uix-advanced-slider__inner .uix-advanced-slider__item .uix-advanced-slider__txt {
         position: absolute;
         left: 50%;
@@ -3605,9 +3621,6 @@ h6 {
       @media all and (min-width: 1430px) {
         .uix-advanced-slider .uix-advanced-slider__inner .uix-advanced-slider__item .uix-advanced-slider__txt {
           width: 1278px; } }
-      @media all and (min-width: 1600px) {
-        .uix-advanced-slider .uix-advanced-slider__inner .uix-advanced-slider__item .uix-advanced-slider__txt {
-          width: 1410px; } }
       .uix-advanced-slider .uix-advanced-slider__inner .uix-advanced-slider__item img {
         width: 100%; }
       .uix-advanced-slider .uix-advanced-slider__inner .uix-advanced-slider__item.leave {
@@ -3787,8 +3800,7 @@ h6 {
     .uix-advanced-slider-sp .uix-advanced-slider-sp__inner .uix-advanced-slider-sp__item {
       width: 100%;
       opacity: 0;
-      /* New XL container for Bootstrap 4.x */
-      /* New XXL container for Bootstrap 4.x */ }
+      /* New XL container for Bootstrap 4.x */ }
       .uix-advanced-slider-sp .uix-advanced-slider-sp__inner .uix-advanced-slider-sp__item .uix-advanced-slider-sp__txt {
         position: absolute;
         left: 50%;
@@ -3816,9 +3828,6 @@ h6 {
       @media all and (min-width: 1430px) {
         .uix-advanced-slider-sp .uix-advanced-slider-sp__inner .uix-advanced-slider-sp__item .uix-advanced-slider-sp__txt {
           width: 1278px; } }
-      @media all and (min-width: 1600px) {
-        .uix-advanced-slider-sp .uix-advanced-slider-sp__inner .uix-advanced-slider-sp__item .uix-advanced-slider-sp__txt {
-          width: 1410px; } }
       .uix-advanced-slider-sp .uix-advanced-slider-sp__inner .uix-advanced-slider-sp__item img {
         width: 100%;
         visibility: hidden; }
@@ -3933,12 +3942,7 @@ h6 {
    <!-- Ajax Page Loader (Loading A Page via Ajax Into Div)  --> 
 /* ====================================================== */
 .uix-ajax-load__container {
-  padding: 7rem 0;
   position: relative; }
-
-@media all and (max-width: 768px) {
-  .uix-ajax-load__container {
-    padding: 2rem 0; } }
 
 /* Used for full page */
 .uix-ajax-load__fullpage-container {
@@ -4107,6 +4111,7 @@ h6 {
   padding-bottom: 100vh;
   display: block;
   position: relative;
+  margin-top: -15px;
   /*--- 2 Rows, Large image on the left ---*/
   /*--- 2 Rows, Large image on the right ---*/
   /*--- 3 Rows, Large image on the left ---*/
@@ -4455,14 +4460,22 @@ h6 {
  3. Sizes
  ---------------------------
  */
+/* tiny */
+.uix-btn__size--t {
+  font-size: 0.75rem;
+  padding: .5rem 1rem; }
+
+/* small */
 .uix-btn__size--s {
   font-size: 0.875rem;
   padding: .8rem 1.5rem; }
 
+/* medium */
 .uix-btn__size--m {
   font-size: 1rem;
   padding: 1rem 2.5rem; }
 
+/* large */
 .uix-btn__size--l {
   font-size: 1.375rem;
   padding: 1.25rem 5rem; }
@@ -4493,11 +4506,14 @@ h6 {
       position: relative;
       margin-top: 50%;
       transform: translateY(-50%); }
-  .uix-btn__icon.is-transparent > span {
-    background-color: transparent;
-    border: 1px solid rgba(0, 0, 0, 0.1); }
   .uix-btn__icon.uix-btn__icon--left > span {
     left: 0; }
+  .uix-btn__icon.is-transparent.uix-btn__icon--left > span {
+    background-color: transparent;
+    border-right: 1px solid rgba(0, 0, 0, 0.1); }
+  .uix-btn__icon.is-transparent.uix-btn__icon--right > span {
+    background-color: transparent;
+    border-left: 1px solid rgba(0, 0, 0, 0.1); }
   .uix-btn__icon.is-pill.uix-btn__icon--left span {
     border-radius: 35px 0 0 35px; }
   .uix-btn__icon.is-pill.uix-btn__icon--right span {
@@ -4556,10 +4572,11 @@ h6 {
   box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(236, 94, 121, 0.2) 0px 15px 35px 0px;
   color: #fff; }
   .uix-btn__bg--primary.is-transparent {
+    border-color: #DADCDF;
     background-color: transparent;
     background-image: linear-gradient(to right, #fff 0%, #fff 0%, #fff 0%);
     color: #EC5E79;
-    box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.2); }
+    box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.05); }
     .uix-btn__bg--primary.is-transparent:hover, .uix-controls__multi-sel > span.uix-btn__bg--primary.is-transparent.active:not(.uix-controls__bar) {
       background-color: #EC5E79;
       background-image: linear-gradient(to right, #EC5E79 0%, #f60 20%, #d83ba0 100%);
@@ -5016,7 +5033,7 @@ h6 {
     background: 0; }
   .uix-content-placeholder .uix-content-placeholder__line {
     height: 8px;
-    background-color: #eee; }
+    background-color: #f2f2f2; }
   .uix-content-placeholder .uix-content-placeholder__line--first {
     width: 100%;
     animation: uix-cssAnim--firstline 1s infinite linear; }
@@ -5028,7 +5045,7 @@ h6 {
     width: 80px;
     height: 60px;
     float: left;
-    background-color: #eee;
+    background-color: #f2f2f2;
     animation: uix-cssAnim--thumb 1s infinite linear; }
     .uix-content-placeholder .uix-content-placeholder__thumbSlot ~ .uix-content-placeholder__textSlot {
       width: calc(100% - 100px);
@@ -6651,13 +6668,14 @@ select:-webkit-autofill:focus {
     border: 1px solid #dce4e8;
     width: calc(80% - 1.09375rem - 1.09375rem); }
   .uix-controls__merge button {
-    padding: 0.85714285714286rem 0;
+    padding: 0.8125rem 0;
     width: calc(20% + 5px);
     min-width: 0;
     margin-left: -5px;
     letter-spacing: .02rem;
     font-weight: 600;
-    font-size: 0.875rem; }
+    font-size: 0.875rem;
+    margin-top: -2px; }
     .uix-controls__merge button span {
       display: inline-block;
       padding-left: .3rem;
@@ -8554,7 +8572,6 @@ a.uix-lightbox__original__link {
 /* ====================================================== */
 .uix-list-brands {
   display: block;
-  margin: 3rem 0;
   overflow: auto;
   /* CSS background disappears when using float:left */ }
   .uix-list-brands::after {
@@ -8618,46 +8635,46 @@ a.uix-lightbox__original__link {
 /* ====================================================== 
    <!-- Maintain Aspect Ratio List --> 
 /* ====================================================== */
-.uix-list-aspect-ratio {
-  padding: 0 3rem; }
-  .uix-list-aspect-ratio .uix-list-aspect-ratio__content {
-    padding: 3rem; }
-  .uix-list-aspect-ratio .uix-list-aspect-ratio__item {
-    display: block;
+.uix-list-aspect-ratio .uix-list-aspect-ratio__content {
+  padding: 0 3rem;
+  /* You can change this value to change items size */ }
+
+.uix-list-aspect-ratio .uix-list-aspect-ratio__item {
+  display: block;
+  transition: all 0.3s ease;
+  background: #212121;
+  /* Maintain Aspect Ratio 1:1*/
+  width: 100%;
+  padding-top: 100%;
+  /* 1:1 Aspect Ratio */
+  position: relative;
+  /* If you want text inside of it */ }
+  .uix-list-aspect-ratio .uix-list-aspect-ratio__item img,
+  .uix-list-aspect-ratio .uix-list-aspect-ratio__item i,
+  .uix-list-aspect-ratio .uix-list-aspect-ratio__item .disabled {
     transition: all 0.3s ease;
-    background: #212121;
-    /* Maintain Aspect Ratio 1:1*/
-    width: 100%;
-    padding-top: 100%;
-    /* 1:1 Aspect Ratio */
-    position: relative;
-    /* If you want text inside of it */ }
-    .uix-list-aspect-ratio .uix-list-aspect-ratio__item img,
-    .uix-list-aspect-ratio .uix-list-aspect-ratio__item i,
-    .uix-list-aspect-ratio .uix-list-aspect-ratio__item .disabled {
-      transition: all 0.3s ease;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      z-index: 1;
-      opacity: 0;
-      width: 5rem;
-      height: auto;
-      transform: translate(-50%, -50%);
-      font-size: 5rem;
-      color: white; }
-    .uix-list-aspect-ratio .uix-list-aspect-ratio__item .disabled {
-      opacity: 1;
-      z-index: 2;
-      color: rgba(255, 255, 255, 0.3); }
-    .uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover, .uix-list-aspect-ratio .uix-controls__multi-sel > span.uix-list-aspect-ratio__item.active:not(.uix-controls__bar) {
-      background: #EC5E79; }
-      .uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover img, .uix-list-aspect-ratio .uix-controls__multi-sel > span.uix-list-aspect-ratio__item.active:not(.uix-controls__bar) img,
-      .uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover i,
-      .uix-list-aspect-ratio .uix-controls__multi-sel > span.uix-list-aspect-ratio__item.active:not(.uix-controls__bar) i {
-        opacity: 1; }
-      .uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover .disabled, .uix-list-aspect-ratio .uix-controls__multi-sel > span.uix-list-aspect-ratio__item.active:not(.uix-controls__bar) .disabled {
-        opacity: 0; }
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    opacity: 0;
+    width: 5rem;
+    height: auto;
+    transform: translate(-50%, -50%);
+    font-size: 5rem;
+    color: white; }
+  .uix-list-aspect-ratio .uix-list-aspect-ratio__item .disabled {
+    opacity: 1;
+    z-index: 2;
+    color: rgba(255, 255, 255, 0.3); }
+  .uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover, .uix-list-aspect-ratio .uix-controls__multi-sel > span.uix-list-aspect-ratio__item.active:not(.uix-controls__bar) {
+    background: #EC5E79; }
+    .uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover img, .uix-list-aspect-ratio .uix-controls__multi-sel > span.uix-list-aspect-ratio__item.active:not(.uix-controls__bar) img,
+    .uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover i,
+    .uix-list-aspect-ratio .uix-controls__multi-sel > span.uix-list-aspect-ratio__item.active:not(.uix-controls__bar) i {
+      opacity: 1; }
+    .uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover .disabled, .uix-list-aspect-ratio .uix-controls__multi-sel > span.uix-list-aspect-ratio__item.active:not(.uix-controls__bar) .disabled {
+      opacity: 0; }
 
 @media all and (max-width: 768px) {
   .uix-list-aspect-ratio {
@@ -8685,17 +8702,15 @@ a.uix-lightbox__original__link {
   .uix-list-topic .uix-list-topic__item .uix-list-topic__item__audio {
     position: relative;
     z-index: 1; }
-  .uix-list-topic .uix-list-topic__item .uix-list-topic__item__img {
-    margin-top: 1.75rem; }
-    .uix-list-topic .uix-list-topic__item .uix-list-topic__item__img a {
-      display: block;
-      position: relative;
-      width: 100%;
-      height: 100%;
-      overflow: hidden; }
-    .uix-list-topic .uix-list-topic__item .uix-list-topic__item__img iframe {
-      max-width: 100% !important;
-      max-height: 300px !important; }
+  .uix-list-topic .uix-list-topic__item .uix-list-topic__item__img a {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; }
+  .uix-list-topic .uix-list-topic__item .uix-list-topic__item__img iframe {
+    max-width: 100% !important;
+    max-height: 300px !important; }
   .uix-list-topic .uix-list-topic__item .uix-list--normal ul,
   .uix-list-topic .uix-list-topic__item .uix-list--normal ol {
     line-height: inherit !important; }
@@ -8711,12 +8726,11 @@ a.uix-lightbox__original__link {
     .uix-list-topic .uix-list-topic__item:not(.post-blockquote) blockquote::before {
       display: none; }
   .uix-list-topic .uix-list-topic__item .uix-list-topic__item__info {
-    margin-top: 3.5rem;
+    margin-top: 1.75rem;
     word-wrap: break-word;
     background: #fff;
     padding: 1rem;
-    position: relative;
-    /* WordPress style */ }
+    position: relative; }
     .uix-list-topic .uix-list-topic__item .uix-list-topic__item__info::before, .uix-list-topic .uix-list-topic__item .uix-list-topic__item__info::after {
       content: " ";
       display: table;
@@ -8735,9 +8749,6 @@ a.uix-lightbox__original__link {
     .uix-list-topic .uix-list-topic__item .uix-list-topic__item__info h3 {
       font-size: 1.25rem;
       line-height: 1.625; }
-    .uix-list-topic .uix-list-topic__item .uix-list-topic__item__info .page-link a {
-      display: inline-block;
-      padding: .2625rem; }
   .uix-list-topic .uix-list-topic__item .uix-list-topic__item__addition {
     margin-top: 1rem; }
   .uix-list-topic .uix-list-topic__item p {
@@ -8905,65 +8916,33 @@ dl.uix-list-abreast {
     content: '';
     display: block;
     clear: both; }
-  .uix-list-split-full .uix-list-split-full__left {
+  .uix-list-split-full .uix-list-split-full__left,
+  .uix-list-split-full .uix-list-split-full__right {
     position: relative;
-    width: 30%;
     float: left;
-    padding-right: 5vw;
-    padding-left: calc(7.840236686391% + 15px);
-    /* (1352-1140)/1352/2 * 100 */
-    box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px;
-    min-height: 150px; }
-  .uix-list-split-full .uix-list-split-full__right {
+    min-height: 150px;
     word-wrap: break-word;
-    box-sizing: border-box;
-    width: 70%;
+    box-sizing: border-box; }
+  .uix-list-split-full .uix-list-split-full__left > div {
+    max-width: 639px;
+    float: right;
+    margin-right: 100px; }
+  .uix-list-split-full .uix-list-split-full__right > div {
+    max-width: 639px;
     float: left;
-    padding-left: 5vw;
-    padding-right: calc(7.840236686391% + 15px);
-    background: #EC5E79;
-    background: linear-gradient(to right, #EC5E79 0%, #E8588C 100%);
-    box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px;
-    min-height: 150px; }
-
-/* New XL container for Bootstrap 4.x */
-@media all and (min-width: 1430px) {
-  .uix-list-split-full .uix-list-split-full__left {
-    padding-left: calc(5.189340813464% + 15px);
-    /* (1426-1278)/1426/2 * 100 */ }
-  .uix-list-split-full .uix-list-split-full__right {
-    padding-right: calc(5.189340813464% + 15px);
-    /* (1426-1278)/1426/2 * 100 */ } }
-
-/* New XXL container for Bootstrap 4.x */
-@media all and (min-width: 1600px) {
-  .uix-list-split-full .uix-list-split-full__left {
-    padding-left: calc(12.992125984252% + 15px);
-    /* (1905-1410)/1905/2 * 100 */ }
-  .uix-list-split-full .uix-list-split-full__right {
-    padding-right: calc(12.992125984252% + 15px);
-    /* (1905-1410)/1905/2 * 100 */ } }
-
-/* > 2560 */
-@media all and (min-width: 2400px) {
-  .uix-list-split-full .uix-list-split-full__left {
-    padding-left: calc(22.298624754421% + 15px);
-    /* (2545-1410)/2545/2 * 100 */
-    padding-right: 15px; }
-  .uix-list-split-full .uix-list-split-full__right {
-    padding-right: calc(22.298624754421% + 15px);
-    /* (2545-1410)/2545/2 * 100 */
-    margin-left: 5vw;
-    width: calc( 70% - 5vw); } }
+    margin-left: 100px; }
 
 @media all and (max-width: 768px) {
-  .uix-list-split-full .uix-list-split-full__left {
-    width: 100%;
-    min-height: inherit; }
+  .uix-list-split-full .uix-list-split-full__left,
   .uix-list-split-full .uix-list-split-full__right {
-    min-height: inherit;
     width: 100%;
-    padding: 0 15px; } }
+    float: none;
+    min-height: inherit; }
+    .uix-list-split-full .uix-list-split-full__left > div,
+    .uix-list-split-full .uix-list-split-full__right > div {
+      margin: 0 15px;
+      float: none;
+      max-width: none; } }
 
 /* ====================================================== 
     <!-- Fullwidth List of Split --> 
@@ -9011,15 +8990,6 @@ dl.uix-list-abreast {
   .uix-list-split-imagery.is-reversed .uix-list-split-imagery__info {
     padding-right: auto;
     padding-left: calc(5.189340813464% + 15px); } }
-
-/* New XXL container for Bootstrap 4.x */
-@media all and (min-width: 1600px) {
-  .uix-list-split-imagery .uix-list-split-imagery__info {
-    padding-right: calc(12.992125984252% + 15px);
-    /* (1905-1410)/1905/2 * 100 */ }
-  .uix-list-split-imagery.is-reversed .uix-list-split-imagery__info {
-    padding-right: auto;
-    padding-left: calc(12.992125984252% + 15px); } }
 
 @media all and (max-width: 768px) {
   .uix-list-split-imagery .uix-list-split-imagery__img-container {
@@ -12025,75 +11995,84 @@ table.is-horizontal th,
 	 2. Tab Rotation Effect
 	 ---------------------------
 	 */ }
-  .uix-tabs:not(.uix-tabs--rotation) {
-    box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px; }
-    .uix-tabs:not(.uix-tabs--rotation) .uix-tabs__marker {
-      height: 2px;
-      width: 100%;
+  .uix-tabs:not(.uix-tabs--rotation) .uix-tabs__marker {
+    height: 2px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    transition: .1s ease-in-out; }
+    .uix-tabs:not(.uix-tabs--rotation) .uix-tabs__marker::after {
       position: absolute;
-      bottom: 0;
-      left: 0;
-      z-index: 1;
-      transition: .1s ease-in-out; }
-      .uix-tabs:not(.uix-tabs--rotation) .uix-tabs__marker::after {
-        position: absolute;
-        left: calc(50% - 50%);
-        top: 0;
-        display: block;
-        content: '';
-        background: #212121;
-        height: 100%;
-        width: 100%;
-        z-index: 1; }
+      left: calc(50% - 50%);
+      top: 0;
+      display: block;
+      content: '';
+      background: #212121;
+      height: 100%;
+      width: 100%;
+      z-index: 1; }
   .uix-tabs .uix-tabs__content {
     display: none;
     padding: 1.3125rem;
     text-align: left; }
     .uix-tabs .uix-tabs__content.active {
       display: block; }
-  .uix-tabs .uix-tabs__nav > ul > li {
-    position: relative;
-    display: block;
-    transition: .1s ease-in-out;
-    list-style: none;
-    float: left;
-    box-shadow: inset 1px 0px 0px 0px #e6e6e6;
-    background: #f7f7f7;
-    min-width: 7.5rem; }
-    .uix-tabs .uix-tabs__nav > ul > li > a {
+  .uix-tabs .uix-tabs__nav > ul {
+    border-bottom: 1px solid #DCDCDC; }
+    .uix-tabs .uix-tabs__nav > ul > li {
       position: relative;
-      padding: 0.625rem 1rem;
       display: block;
-      text-align: center; }
-    .uix-tabs .uix-tabs__nav > ul > li.active {
-      background: #fff; }
-  .uix-tabs .uix-tabs__nav > ul::after {
-    content: '';
+      transition: .1s ease-in-out;
+      list-style: none;
+      float: left;
+      min-width: 7.5rem; }
+      .uix-tabs .uix-tabs__nav > ul > li > a {
+        opacity: .6;
+        position: relative;
+        padding: 0.625rem 1rem;
+        display: block;
+        text-align: center; }
+    .uix-tabs .uix-tabs__nav > ul::after {
+      content: '';
+      display: block;
+      clear: both; }
+  .uix-tabs.uix-tabs--center .uix-tabs__nav > ul {
+    border-bottom: 1px solid #DCDCDC;
+    font-size: 0;
+    /*Fighting the Space Between Inline Block Elements*/
     display: block;
-    clear: both; }
-  .uix-tabs.uix-tabs--center {
-    box-shadow: none; }
-    .uix-tabs.uix-tabs--center .uix-tabs__nav > ul {
-      font-size: 0;
+    width: 100%;
+    text-align: center;
+    /*require*/ }
+    .uix-tabs.uix-tabs--center .uix-tabs__nav > ul li {
+      font-size: 1rem;
       /*Fighting the Space Between Inline Block Elements*/
-      display: block;
-      width: 100%;
-      text-align: center;
+      display: inline-block;
       /*require*/
-      box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px; }
-      .uix-tabs.uix-tabs--center .uix-tabs__nav > ul li {
-        font-size: 1rem;
-        /*Fighting the Space Between Inline Block Elements*/
-        display: inline-block;
-        /*require*/
-        float: none; }
+      float: none; }
+  .uix-tabs.uix-tabs--normal .uix-tabs__nav > ul {
+    border-bottom: 1px solid #DCDCDC;
+    font-size: 0;
+    /*Fighting the Space Between Inline Block Elements*/
+    display: block;
+    width: 100%;
+    text-align: left;
+    /*require*/ }
+    .uix-tabs.uix-tabs--normal .uix-tabs__nav > ul li {
+      font-size: 1rem;
+      /*Fighting the Space Between Inline Block Elements*/
+      display: inline-block;
+      /*require*/
+      float: none; }
   .uix-tabs.uix-tabs--rotation .uix-tabs__content {
-    position: relative;
-    box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px; }
+    position: relative; }
   .uix-tabs.uix-tabs--rotation .uix-tabs__nav {
     position: relative;
     margin: 0; }
     .uix-tabs.uix-tabs--rotation .uix-tabs__nav > ul {
+      border-bottom: none;
       box-sizing: border-box;
       position: relative;
       width: 300px;
@@ -12111,19 +12090,19 @@ table.is-horizontal th,
         width: 80px;
         height: 80px;
         background: none;
-        box-shadow: none;
         z-index: 2;
         top: 0;
         left: 50%;
         min-width: inherit;
         /* Required */ }
         .uix-tabs.uix-tabs--rotation .uix-tabs__nav > ul > li > a {
+          border: 1px solid #DCDCDC;
+          opacity: 1;
           width: 80px;
           height: 80px;
           line-height: 60px;
           background: #fff;
-          border-radius: 100%;
-          box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px; }
+          border-radius: 100%; }
         .uix-tabs.uix-tabs--rotation .uix-tabs__nav > ul > li.active > a {
           background: #212121;
           color: #fff; }
@@ -12481,7 +12460,7 @@ table.is-horizontal th,
   position: absolute;
   z-index: 3;
   left: 8%;
-  top: 135px;
+  top: 80px;
   transition: .3s ease-in-out;
   line-height: 50px;
   text-align: center;
@@ -12509,7 +12488,7 @@ table.is-horizontal th,
     background-image: linear-gradient(to right, #EC5E79 0%, #f60 20%, #d83ba0 100%);
     width: 100%;
     height: 1px;
-    top: 161px;
+    top: 104px;
     left: 0; }
   .uix-timeline__container-wrapper.is-horizontal .uix-timeline__container.is-horizontal .uix-timeline {
     width: 9999px;
@@ -12641,10 +12620,10 @@ table.is-horizontal th,
  ---------------------------
  */
 .uix-timeline__container-wrapper.is-horizontal.uix-timeline__container-wrapper--classic .uix-timeline__btn {
-  top: 200px; }
+  top: 147px; }
 
 .uix-timeline__container-wrapper.is-horizontal.uix-timeline__container-wrapper--classic .uix-timeline__container.is-horizontal::after {
-  top: 227px; }
+  top: 171px; }
 
 .uix-timeline__container-wrapper.is-horizontal.uix-timeline__container-wrapper--classic .uix-timeline__container.is-horizontal .uix-timeline {
   /* Whether to slide to the middle. */ }
@@ -13231,10 +13210,10 @@ form#edd_purchase_form [type="submit"].is-fullwidth.is-pill {
   padding-left: 35px;
   padding-right: 35px; }
 
-#edd-purchase-button.uix-btn__size--tiny,
-.edd-submit.uix-btn__size--tiny,
-[type="submit"].edd-submit.uix-btn__size--tiny,
-form#edd_purchase_form [type="submit"].uix-btn__size--tiny {
+#edd-purchase-button.uix-btn__size--t,
+.edd-submit.uix-btn__size--t,
+[type="submit"].edd-submit.uix-btn__size--t,
+form#edd_purchase_form [type="submit"].uix-btn__size--t {
   font-size: 0.75rem;
   padding: .75rem 1.3rem; }
 

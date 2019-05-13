@@ -15,7 +15,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP._3D_EXP_PARTICLE_SLIDER               = APP._3D_EXP_PARTICLE_SLIDER || {};
-	APP._3D_EXP_PARTICLE_SLIDER.version       = '0.0.1';
+	APP._3D_EXP_PARTICLE_SLIDER.version       = '0.0.2';
     APP._3D_EXP_PARTICLE_SLIDER.documentReady = function( $ ) {
 
 		
@@ -34,9 +34,6 @@ APP = ( function ( APP, $, window, document ) {
 				$sliderWrapper            = $( '.uix-3d-slider--expParticle' ),
 
 
-				//Autoplay global variables
-				timer                     = null,
-				playTimes,
 
 				//Basic webGL renderers 
 				renderLoaderID            = 'uix-3d-slider--expParticle__loader',
@@ -105,6 +102,12 @@ APP = ( function ( APP, $, window, document ) {
 					
 					
 
+					//Autoplay times
+					var playTimes;
+					//A function called "timer" once every second (like a digital watch).
+					$this[0].animatedSlides;
+
+					
 
 					//If arrows does not exist on the page, it will be added by default, 
 					//and the drag and drop function will be activated.
@@ -237,7 +240,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 						//Pause the auto play event
-						clearInterval( timer );	
+						clearInterval( $this[0].animatedSlides );	
 
 
 					});
@@ -268,7 +271,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 						//Pause the auto play event
-						clearInterval( timer );
+						clearInterval( $this[0].animatedSlides );
 
 					});
 
@@ -283,7 +286,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 						//Pause the auto play event
-						clearInterval( timer );
+						clearInterval( $this[0].animatedSlides );
 
 
 					});
@@ -303,14 +306,14 @@ APP = ( function ( APP, $, window, document ) {
 
 					if ( dataAuto && !isNaN( parseFloat( dataTiming ) ) && isFinite( dataTiming ) ) {
 
-						sliderAutoPlay( dataTiming, $items, dataLoop );
+						sliderAutoPlay( playTimes, dataTiming, dataLoop, $this );
 
 						$this.on({
 							mouseenter: function() {
-								clearInterval( timer );
+								clearInterval( $this[0].animatedSlides );
 							},
 							mouseleave: function() {
-								sliderAutoPlay( dataTiming, $items, dataLoop );
+								sliderAutoPlay( playTimes, dataTiming, dataLoop, $this );
 							}
 						});	
 
@@ -647,19 +650,21 @@ APP = ( function ( APP, $, window, document ) {
 	
 
 			
-			/*
-			 * Trigger slider autoplay
-			 *
-			 * @param  {Number} timing           - Autoplay interval.
-			 * @param  {Object} items            - Each item in current slider.
-			 * @param  {Boolean} loop            - Determine whether to loop through each item.
-			 * @return {Void}                    - The constructor.
-			 */
-			function sliderAutoPlay( timing, items, loop ) {	
+		 /*
+		 * Trigger slider autoplay
+		 *
+		 * @param  {Function} playTimes      - Number of times.
+		 * @param  {Number} timing           - Autoplay interval.
+		 * @param  {Boolean} loop            - Determine whether to loop through each item.
+		 * @param  {Object} slider           - Selector of the slider .
+		 * @return {Void}                    - The constructor.
+		 */
+		function sliderAutoPlay( playTimes, timing, loop, slider ) {	
 
-				var total = items.length;
-
-				timer = setInterval( function() {
+			var items = slider.find( '.uix-3d-slider--expParticle__item' ),
+				total = items.length;
+			
+			slider[0].animatedSlides = setInterval( function() {
 
 					playTimes = parseFloat( items.filter( '.active' ).index() );
 					playTimes++;

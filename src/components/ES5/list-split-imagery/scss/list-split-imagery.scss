@@ -74,22 +74,6 @@ $imagery-text-gutter: 5vw;
 	}
 }
 
-/* New XXL container for Bootstrap 4.x */
-@media all and (min-width: 1600px) {
-
-	.uix-list-split-imagery {
-		.uix-list-split-imagery__info {
-			padding-right: calc(12.992125984252% + #{$imagery-gutter}); /* (1905-1410)/1905/2 * 100 */
-		}
-		
-		&.is-reversed .uix-list-split-imagery__info {
-			padding-right: auto;
-			padding-left: calc(12.992125984252% + #{$imagery-gutter});
-		}
-
-	}
-}
-
 
 @media all and (max-width: 768px) {
 	.uix-list-split-imagery {
