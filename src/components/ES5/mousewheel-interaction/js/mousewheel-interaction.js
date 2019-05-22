@@ -12,7 +12,7 @@ APP = ( function ( APP, $, window, document ) {
     APP.SCROLL_LOCK.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
-		if ( !$( 'body' ).hasClass( 'page-mousewheel-eff' ) ) return false;
+		if ( !$( 'body' ).hasClass( 'mousewheel-interaction' ) ) return false;
 		
 		
 	    //Determine the direction of a jQuery scroll event

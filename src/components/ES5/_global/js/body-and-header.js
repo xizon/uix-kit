@@ -8,7 +8,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.BODY_AND_HEADER               = APP.BODY_AND_HEADER || {};
-	APP.BODY_AND_HEADER.version       = '0.0.2';
+	APP.BODY_AND_HEADER.version       = '0.0.3';
     APP.BODY_AND_HEADER.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -37,19 +37,19 @@ APP = ( function ( APP, $, window, document ) {
 			}
 		});
 		function headerInit( w ) {
+			
+			var $headerPlaceholder = $( '.uix-header__placeholder.js-uix-header__placeholder-autoheight' );
+			
 			if ( w > 768 ) {
-				
-				$( '.uix-header__placeholder.uix-header__placeholder--auto-height' ).css( 'height', $( '.uix-header__container' ).outerHeight() + 'px' ); 
-				
+				$headerPlaceholder.css( 'height', $( '.uix-header__container' ).outerHeight() + 'px' ); 
 				$( 'body' ).removeClass( 'is-mobile' );
 			} else {
+				$headerPlaceholder.css( 'height', 0 ); 
 				$( 'body' ).addClass( 'is-mobile' );
 			}
 		}
 		
 		
-
-
 		
 		//-------- Sticky header area
 		//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element

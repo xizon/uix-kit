@@ -9,21 +9,16 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.ADVANCED_SLIDER               = APP.ADVANCED_SLIDER || {};
-	APP.ADVANCED_SLIDER.version       = '0.0.9';
+	APP.ADVANCED_SLIDER.version       = '0.1.1';
     APP.ADVANCED_SLIDER.pageLoaded    = function() {
 
 		var $window                   = $( window ),
 			windowWidth               = window.innerWidth,
 			windowHeight              = window.innerHeight,
 			animDelay                 = 0,
-			$sliderWrapper            = $( '.uix-advanced-slider' ),
+			$sliderWrapper            = $( '.uix-advanced-slider' );
 			
-			//Autoplay global variables
-			timer                     = null,
-			playTimes;
-		
-		
-		
+			
 		sliderInit( false );
 		
 		$window.on( 'resize', function() {
@@ -37,6 +32,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 			}
 		});
+		
 		
 		
 		/*
@@ -55,34 +51,15 @@ APP = ( function ( APP, $, window, document ) {
 					nativeItemW,
 					nativeItemH;
 				
-				//Get the -webkit-transition-duration property
-				//-------------------------------------	
-				var getTransitionDuration = function( el, withDelay ) {
+				
+				//Autoplay times
+				var playTimes;
+				//A function called "timer" once every second (like a digital watch).
+				$this[0].animatedSlides;
+				
+				
 
-					if ( typeof el === typeof undefined ) {
-						return 0;
-					}
-
-					var style    = window.getComputedStyle(el),
-						duration = style.webkitTransitionDuration,
-						delay    = style.webkitTransitionDelay; 
-
-					if ( typeof duration != typeof undefined ) {
-						// fix miliseconds vs seconds
-						duration = (duration.indexOf("ms")>-1) ? parseFloat(duration) : parseFloat(duration)*1000;
-						delay = (delay.indexOf("ms")>-1) ? parseFloat(delay) : parseFloat(delay)*1000;
-
-						if ( withDelay ) {
-							 return (duration + delay);
-						} else {
-							return duration;
-						}	
-					} else {
-						return 0;
-					}
-				};
-
-				animDelay = getTransitionDuration( $first[0] );
+				animDelay = UixCssProperty.getTransitionDuration( $first[0] );
 
 
 				
@@ -108,7 +85,7 @@ APP = ( function ( APP, $, window, document ) {
 						nativeItemH = this.videoHeight;	
 
 						//Initialize all the items to the stage
-						addItemsToStage( $this, $sliderWrapper, nativeItemW, nativeItemH );
+						addItemsToStage( $this, nativeItemW, nativeItemH );
 
 					}, false);	
 
@@ -129,7 +106,7 @@ APP = ( function ( APP, $, window, document ) {
 							nativeItemH = this.height;	
 
 							//Initialize all the items to the stage
-							addItemsToStage( $this, $sliderWrapper, nativeItemW, nativeItemH );
+							addItemsToStage( $this, nativeItemW, nativeItemH );
 
 						};
 
@@ -157,14 +134,14 @@ APP = ( function ( APP, $, window, document ) {
 
 					if ( dataAuto && !isNaN( parseFloat( dataTiming ) ) && isFinite( dataTiming ) ) {
 
-						sliderAutoPlay( dataTiming, $items, dataLoop );
+						sliderAutoPlay( playTimes, dataTiming, dataLoop, $this );
 
 						$this.on({
 							mouseenter: function() {
-								clearInterval( timer );
+								clearInterval( $this[0].animatedSlides );
 							},
 							mouseleave: function() {
-								sliderAutoPlay( dataTiming, $items, dataLoop );
+								sliderAutoPlay( playTimes, dataTiming, dataLoop, $this );
 							}
 						});	
 
@@ -187,16 +164,18 @@ APP = ( function ( APP, $, window, document ) {
         /*
 		 * Trigger slider autoplay
 		 *
+		 * @param  {Function} playTimes      - Number of times.
 		 * @param  {Number} timing           - Autoplay interval.
-		 * @param  {Object} items            - Each item in current slider.
 		 * @param  {Boolean} loop            - Determine whether to loop through each item.
-		 * @return {Void}
+		 * @param  {Object} slider           - Selector of the slider .
+		 * @return {Void}                    - The constructor.
 		 */
-        function sliderAutoPlay( timing, items, loop ) {	
+		function sliderAutoPlay( playTimes, timing, loop, slider ) {	
+
+			var items = slider.find( '.uix-advanced-slider__item' ),
+				total = items.length;
 			
-			var total = items.length;
-			
-			timer = setInterval( function() {
+			slider[0].animatedSlides = setInterval( function() {
 
 				playTimes = parseFloat( items.filter( '.active' ).index() );
 				playTimes++;
@@ -222,12 +201,11 @@ APP = ( function ( APP, $, window, document ) {
 		 * Initialize all the items to the stage
 		 *
 		 * @param  {Object} slider           - Current selector of each slider.
-		 * @param  {Object} sliderWrapper    - Wrapper of the slider.
 		 * @param  {Number} nativeItemW      - Returns the intrinsic width of the image/video.
 		 * @param  {Number} nativeItemH      - Returns the intrinsic height of the image/video.
 		 * @return {Void}
 		 */
-        function addItemsToStage( slider, sliderWrapper, nativeItemW, nativeItemH ) {
+        function addItemsToStage( slider, nativeItemW, nativeItemH ) {
 			
 			var $this                    = slider,
 				$items                   = $this.find( '.uix-advanced-slider__item' ),
@@ -299,10 +277,10 @@ APP = ( function ( APP, $, window, document ) {
 					}
 					
 					
-					sliderUpdates( $( this ).attr( 'data-index' ), sliderWrapper, curDir );
+					sliderUpdates( $( this ).attr( 'data-index' ), $this, curDir );
 
 					//Pause the auto play event
-					clearInterval( timer );	
+					clearInterval( $this[0].animatedSlides );	
 				}
 
 
@@ -322,25 +300,24 @@ APP = ( function ( APP, $, window, document ) {
 			}
 
 
-
 			_prev.on( 'click', function( e ) {
 				e.preventDefault();
 
-				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, sliderWrapper, 'prev' );
+				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, 'prev' );
 
 				//Pause the auto play event
-				clearInterval( timer );
+				clearInterval( $this[0].animatedSlides );
 
 			});
 
 			_next.on( 'click', function( e ) {
 				e.preventDefault();
 
-				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, sliderWrapper, 'next' );
+				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, 'next' );
 
 
 				//Pause the auto play event
-				clearInterval( timer );
+				clearInterval( $this[0].animatedSlides );
 
 
 			});
@@ -706,121 +683,70 @@ APP = ( function ( APP, $, window, document ) {
 					});
 				}
 
-				var myPlayer = videojs( curVideoID, {
-										  width     : dataW,
-										  height    : dataH,
-										  loop      : dataLoop,
-										  autoplay  : dataAuto
-										});
-
-
 				
-				
-				myPlayer.ready(function() {
-					
-					
-					/* ---------  Video initialize */
-					myPlayer.on( 'loadedmetadata', function() {
-
-						//Get Video Dimensions
-						var curW    = this.videoWidth(),
-							curH    = this.videoHeight(),
-							newW    = curW,
-							newH    = curH;
-
-						newW = videoWrapperW;
-
-						//Scaled/Proportional Content 
-						newH = curH*(newW/curW);
+				var myPlayer = videojs( curVideoID, 
+				   {
+					  width     : dataW,
+					  height    : dataH,
+					  loop      : dataLoop,
+					  autoplay  : dataAuto
+					}, 
+				   function onPlayerReady() {
 
 
-						if ( !isNaN( newW ) && !isNaN( newH ) )  {
-							myPlayer.height( newH );		
-							myPlayer.width( newW );		
-							
-							$this.css( 'height', newH );
+						var initVideo = function( obj ) {
+
+							//Get Video Dimensions
+							var curW    = obj.videoWidth(),
+								curH    = obj.videoHeight(),
+								newW    = curW,
+								newH    = curH;
+
+							newW = videoWrapperW;
+
+							//Scaled/Proportional Content 
+							newH = curH*(newW/curW);
+
+
+							if ( !isNaN( newW ) && !isNaN( newH ) )  {
+								obj.height( newH );		
+								obj.width( newW );			
+
+								$this.css( 'height', newH );
+							}
+
+
+
+							//Show this video wrapper
+							$this.css( 'visibility', 'visible' );
+
+							//Hide loading effect
+							$this.find( '.vjs-loading-spinner, .vjs-big-play-button' ).hide();
 						}
 
+						
+						/* ---------  Video initialize */
+						this.on( 'loadedmetadata', function() {
 
+							initVideo( this );
 
-						//Show this video wrapper
-						$this.css( 'visibility', 'visible' );
+						});
+					
+					    /* ---------  Display the play button  */
+					    if ( ! dataAuto ) $this.find( '.vjs-big-play-button' ).show();
+					    $this.find( '.vjs-big-play-button' ).off( 'click' ).on( 'click', function() {
+							$( this ).hide();
+						});
+					
 
-						//Hide loading effect
-						$this.find( '.vjs-loading-spinner, .vjs-big-play-button' ).hide();
-
-					});		
-
-		
 				
-					/* ---------  Set, tell the player it's in fullscreen  */
-					if ( dataAuto ) {
-						
-						//Fix an error of Video auto play is not working in browser
-						//myPlayer.muted( true ); 
-						
-						//Prevent autoplay error: Uncaught (in promise) DOMException
-						var promise = myPlayer.play();
-
-						if ( promise !== undefined ) {
-							promise.then( function() {
-								// Autoplay started!
-							
-							}).catch( function( error ) {
-								// Autoplay was prevented.
-								$( '#' + coverPlayBtnID ).show();
-								$( '#' + coverPlayBtnID + ' .uix-video__cover__playbtn' ).show();
-								console.log( 'Autoplay was prevented.' );
-								
-							});
-							
-						}
-						
-					}
-
-
-					/* ---------  Disable control bar play button click */
-					if ( !dataControls ) {
-						myPlayer.controls( false );
-					}
-
-					
-					
-					/* ---------  Determine if the video is auto played from mobile devices  */
-					var autoPlayOK = false;
-
-					myPlayer.on( 'timeupdate', function() {
-
-						var duration = this.duration();
-						if ( duration > 0 ) {
-							autoPlayOK = true;
-							if ( this.currentTime() > 0 ) {
-								autoPlayOK = true;
-								this.off( 'timeupdate' );
-
-								//Hide cover and play buttons when the video automatically played
-								$( '#' + coverPlayBtnID ).hide();
-							} 
-
-						}
-
-					});
-				
-					
-					
-					/* ---------  Pause the video when it is not current slider  */
-					if ( !play ) {
-						myPlayer.pause();
-						myPlayer.currentTime(0);
-						
-					} else {
+						/* ---------  Set, tell the player it's in fullscreen  */
 						if ( dataAuto ) {
+							//Fix an error of Video auto play is not working in browser
+							//this.muted( true ); 
 
-							myPlayer.currentTime(0);
-							
-						
 							//Prevent autoplay error: Uncaught (in promise) DOMException
-							var promise = myPlayer.play();
+							var promise = this.play();
 
 							if ( promise !== undefined ) {
 								promise.then( function() {
@@ -835,41 +761,102 @@ APP = ( function ( APP, $, window, document ) {
 								});
 
 							}
+						}
 
-							//Hidden replay button
-							$replayBtn.hide();
 
-							//Should the video go to the beginning when it ends
-							myPlayer.on( 'ended', function () { 
-								
-								if ( dataLoop ) {
-									myPlayer.currentTime(0);
-									myPlayer.play();	
-								} else {
-									//Replay this video
-									myPlayer.currentTime(0);
-									
-									$replayBtn
-										.show()
-										.off( 'click' )
-										.on( 'click', function( e ) {
-											e.preventDefault();
 
-											myPlayer.play();
-											$replayBtn.hide();
+						/* ---------  Disable control bar play button click */
+						if ( !dataControls ) {
+							this.controls( false );
+						}
 
-										});						
+
+						/* ---------  Determine if the video is auto played from mobile devices  */
+						var autoPlayOK = false;
+
+						this.on( 'timeupdate', function() {
+
+							var duration = this.duration();
+							if ( duration > 0 ) {
+								autoPlayOK = true;
+								if ( this.currentTime() > 0 ) {
+									autoPlayOK = true;
+									this.off( 'timeupdate' );
+
+									//Hide cover and play buttons when the video automatically played
+									$( '#' + coverPlayBtnID ).hide();
+								} 
+
+							}
+
+						});
+
+
+
+						/* ---------  Pause the video when it is not current slider  */
+						if ( !play ) {
+							this.pause();
+							this.currentTime(0);
+
+						} else {
+							if ( dataAuto ) {
+
+								this.currentTime(0);
+
+								//Prevent autoplay error: Uncaught (in promise) DOMException
+								var promise = this.play();
+
+								if ( promise !== undefined ) {
+									promise.then( function() {
+										// Autoplay started!
+
+									}).catch( function( error ) {
+										// Autoplay was prevented.
+										$( '#' + coverPlayBtnID ).show();
+										$( '#' + coverPlayBtnID + ' .uix-video__cover__playbtn' ).show();
+										console.log( 'Autoplay was prevented.' );
+
+									});
+
 								}
-							
-							});		
+
+								//Hidden replay button
+								$replayBtn.hide();
+
+								//Should the video go to the beginning when it ends
+								this.on( 'ended', function () { 
+
+									if ( dataLoop ) {
+										this.currentTime(0);
+										this.play();	
+									} else {
+										//Replay this video
+										this.currentTime(0);
+
+										$replayBtn
+											.show()
+											.off( 'click' )
+											.on( 'click', function( e ) {
+												e.preventDefault();
+
+												this.play();
+												$replayBtn.hide();
+
+											});						
+									}
+
+								});		
 
 
-						}	
-					}
-					
+							}	
+						}
 
-				});
 
+
+					});
+
+				
+				
 			});	
 		}	
 		

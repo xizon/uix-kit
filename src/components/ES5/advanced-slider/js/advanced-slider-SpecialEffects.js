@@ -9,8 +9,6 @@
  * APP.ADVANCED_SLIDER_FILTER
  * @global
  * @requires ./examples/assets/js/min/pixi.min.js
- * @requires ./examples/assets/js/min/three.min.js
- * @requires ./src/components/ES5/_plugins-THREE
  * @requires ./src/components/ES5/_plugins-GSAP
  */
 
@@ -19,9 +17,12 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.ADVANCED_SLIDER_FILTER               = APP.ADVANCED_SLIDER_FILTER || {};
-	APP.ADVANCED_SLIDER_FILTER.version       = '0.1.5';
+	APP.ADVANCED_SLIDER_FILTER.version       = '0.1.8';
     APP.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
+		
+		// Remove pixi.js banner from the console
+		PIXI.utils.skipHello();		
 	
 		var $window                   = $( window ),
 			windowWidth               = window.innerWidth,
@@ -32,10 +33,6 @@ APP = ( function ( APP, $, window, document ) {
 			//Save different canvas heights as an array
 			canvasHeights             = [],
 
-			
-			//Autoplay global variables
-			timer                     = null,
-			playTimes,
 			
 			//Basic webGL renderers 
 			rendererOuterID           = 'uix-advanced-slider-sp__canvas-container',
@@ -48,15 +45,7 @@ APP = ( function ( APP, $, window, document ) {
 		    stage__filter,
 			container__items,
 			displacementSprite,
-			displacementFilter,
-			
-			//Three.js
-			scenesAll                 = [],
-			texturesAll               = [],
-			webGLRenderer;
-		
-		
-		
+			displacementFilter;
 		
 		sliderInit( false );
 		
@@ -90,6 +79,12 @@ APP = ( function ( APP, $, window, document ) {
 					$first                   = $items.first(),
 					nativeItemW,
 					nativeItemH;
+				
+				
+				//Autoplay times
+				var playTimes;
+				//A function called "timer" once every second (like a digital watch).
+				$this[0].animatedSlides;
 				
 				
 				//Get the animation speed
@@ -143,7 +138,7 @@ APP = ( function ( APP, $, window, document ) {
 							nativeItemH = this.videoHeight;	
 
 							//Initialize all the items to the stage
-							addItemsToStage( $this, $sliderWrapper, nativeItemW, nativeItemH );
+							addItemsToStage( $this, nativeItemW, nativeItemH );
 
 
 						}, false);	
@@ -169,7 +164,7 @@ APP = ( function ( APP, $, window, document ) {
 							nativeItemH = this.height;	
 
 							//Initialize all the items to the stage
-							addItemsToStage( $this, $sliderWrapper, nativeItemW, nativeItemH );
+							addItemsToStage( $this, nativeItemW, nativeItemH );
 							
 
 							
@@ -199,14 +194,14 @@ APP = ( function ( APP, $, window, document ) {
 
 					if ( dataAuto && !isNaN( parseFloat( dataTiming ) ) && isFinite( dataTiming ) ) {
 
-						sliderAutoPlay( dataTiming, $items, dataLoop );
+						sliderAutoPlay( playTimes, dataTiming, dataLoop, $this );
 
 						$this.on({
 							mouseenter: function() {
-								clearInterval( timer );
+								clearInterval( $this[0].animatedSlides );
 							},
 							mouseleave: function() {
-								sliderAutoPlay( dataTiming, $items, dataLoop );
+								sliderAutoPlay( playTimes, dataTiming, dataLoop, $this );
 							}
 						});	
 
@@ -225,19 +220,21 @@ APP = ( function ( APP, $, window, document ) {
 		
 		
 
-        /*
+         /*
 		 * Trigger slider autoplay
 		 *
+		 * @param  {Function} playTimes      - Number of times.
 		 * @param  {Number} timing           - Autoplay interval.
-		 * @param  {Object} items            - Each item in current slider.
 		 * @param  {Boolean} loop            - Determine whether to loop through each item.
-		 * @return {Void}
+		 * @param  {Object} slider           - Selector of the slider .
+		 * @return {Void}                    - The constructor.
 		 */
-        function sliderAutoPlay( timing, items, loop ) {	
+		function sliderAutoPlay( playTimes, timing, loop, slider ) {	
+
+			var items = slider.find( '.uix-advanced-slider-sp__item' ),
+				total = items.length;
 			
-			var total = items.length;
-			
-			timer = setInterval( function() {
+			slider[0].animatedSlides = setInterval( function() {
 
 				playTimes = parseFloat( items.filter( '.active' ).index() );
 				playTimes++;
@@ -269,12 +266,11 @@ APP = ( function ( APP, $, window, document ) {
 		 * Initialize all the items to the stage
 		 *
 		 * @param  {Object} slider           - Current selector of each slider.
-		 * @param  {Object} sliderWrapper    - Wrapper of the slider.
 		 * @param  {Number} nativeItemW      - Returns the intrinsic width of the image/video.
 		 * @param  {Number} nativeItemH      - Returns the intrinsic height of the image/video.
 		 * @return {Void}
 		 */
-        function addItemsToStage( slider, sliderWrapper, nativeItemW, nativeItemH ) {
+        function addItemsToStage( slider, nativeItemW, nativeItemH ) {
 			
 			var $this                    = slider,
 				$items                   = $this.find( '.uix-advanced-slider-sp__item' ),
@@ -1084,331 +1080,6 @@ APP = ( function ( APP, $, window, document ) {
 				}// end effect
 				
 				
-				
-
-				//----------------------------------------------------------------------------------
-				//--------------------------------- 3D Rotating Effect -----------------------------
-				//----------------------------------------------------------------------------------
-				//Usage of returning sprite object: texturesAll[ index ]     scenesAll[ index ]
-				if ( $this.hasClass( 'uix-advanced-slider-sp--eff-3d-rotating' ) ) {
-
-
-					var texture;
-
-					//Drag and Drop
-					var targetRotationX             = 0,
-						targetRotationXOnMouseDown  = 0,
-						targetRotationXOnTouchDown  = 0,
-						targetRotationY             = 0,
-						targetRotationYOnMouseDown  = 0,
-						targetRotationYOnTouchDown  = 0,
-						mouseX                      = 0,
-						mouseY                      = 0,
-						mouseXOnMouseDown           = 0,
-						mouseXOnTouchDown           = 0,
-						mouseYOnMouseDown           = 0,
-						mouseYOnTouchDown           = 0,
-						windowHalfX                 = $this.width() / 2,
-						windowHalfY                 = $this.height() / 2;
-
-
-					
-					
-
-					//Add Geometries and Lights to the main container 
-					//-------------------------------------					
-					var init = function() {
-						$this.find( '.uix-advanced-slider-sp__item' ).each( function( index )  {
-
-							var $thisItem      = $( this ),
-								imgVideoHeight = null;
-
-							// create a scene, that will hold all our elements such as objects, cameras and lights.
-							var scene  = new THREE.Scene();
-							scene.name = 'scene-' + index;
-
-
-							// make a list item
-							var element = document.createElement( 'div' );
-							element.className = 'list-item';
-							element.innerHTML = '<div class="scene" style="width:'+$this.width() +'px;height:'+$this.height() +'px;"></div>';
-
-							// Look up the element that represents the area
-							// we want to render the scene
-							scene.userData.element = element.querySelector( '.scene' );
-							document.getElementById( rendererOuterID ).appendChild( element );
-
-							TweenMax.set( $( '#' + rendererOuterID ).find( '.list-item' ), {
-									alpha: 0,
-									css  : {
-										display: 'none'
-									}
-								});	
-
-
-							// Create a camera, which defines where we're looking at.
-							var aspect      = $this.width() / $this.height(),
-								camera      = new THREE.PerspectiveCamera( 55, aspect, 0.1, 1000 );
-
-							camera.position.x = 0;
-							camera.position.y = -30;
-							camera.position.z = 25;
-							camera.lookAt( new THREE.Vector3( 0, 0, 0 ) );
-							scene.userData.camera = camera;
-
-
-							// Generate one plane geometries mesh to each scene
-							if ( $thisItem.find( 'video' ).length > 0 ) {
-
-								texture = new THREE.VideoTexture( document.getElementById( $thisItem.find( 'video' ).attr( 'id' ) ) );
-								texture.minFilter = THREE.LinearFilter;
-								texture.magFilter = THREE.LinearFilter;
-								texture.format = THREE.RGBFormat;
-
-								// pause the video
-								texture.image.autoplay = true;
-								texture.image.currentTime = 0;
-								texture.image.muted = false;
-								texture.image.pause();
-								
-							
-
-							} else {
-								
-								texture = new THREE.TextureLoader().load( $thisItem.find( 'img' ).attr( 'src' ) );
-								
-			
-							}
-							
-							
-						
-							// texture controller
-							texturesAll.push( texture );
-							
-							
-							
-							// Immediately use the texture for material creation
-							var spriteMat            = new THREE.MeshBasicMaterial( { map: texture } ),
-								geometry             = new THREE.BoxGeometry( aspect*15, 15, 2 ),
-								displacementSprite   = new THREE.Mesh( geometry, spriteMat );
-
-						
-							displacementSprite.position.set( -0.01, -0.01, 0 );
-							displacementSprite.rotation.set( 0, 0, 0 );
-							scene.add( displacementSprite );
-
-
-							// Generate Ambient Light
-							var ambiLight = new THREE.AmbientLight( 0x404040 );
-							scene.add( ambiLight );
-
-							// Generate Directional Light
-							var light = new THREE.DirectionalLight( 0xffffff, 0.5 );
-							light.position.set( 0, 30, 70 );
-							scene.add( light );
-
-
-							// Display multiple instances of three.js in a single page
-							scenesAll.push( scene );
-
-
-
-						});
-
-
-						//Create a render and set the size
-						webGLRenderer = new THREE.WebGLRenderer( { 
-												canvas   : document.getElementById( rendererCanvasID ), //canvas
-												alpha    : true, 
-												antialias: true 
-											} );
-
-						webGLRenderer.setClearColor( new THREE.Color( 0x000000, 0 ) );
-						webGLRenderer.setPixelRatio( window.devicePixelRatio );  
-						webGLRenderer.shadowMap.enabled = true;
-
-
-					};
-
-					//Add render event
-					//-------------------------------------	
-
-					//Converts numeric degrees to radians
-					var toRad = function( number ) {
-						return number * Math.PI / 180;
-					};
-
-
-					var render = function() {
-
-
-						webGLRenderer.setClearColor( 0x000000 );
-						webGLRenderer.setScissorTest( false );
-						webGLRenderer.clear();
-
-						webGLRenderer.setClearColor( 0x000000 );
-						webGLRenderer.setScissorTest( true );
-
-						scenesAll.forEach( function( scene, i ) {
-
-							// Get the element that is a place holder for where we want to draw the scene
-							var element = scene.userData.element,
-								camera  = scene.userData.camera,
-								rect    = element.getBoundingClientRect();
-
-
-							//automatic rotation
-							scene.children[0].rotation.y = Date.now() * 0.0001;
-							var amplitudeVal = 1.0 + Math.sin( Date.now() * 0.0001 * 0.5 );
-
-							
-							//drag & drop
-	//						scene.children[0].rotation.x = toRad( targetRotationX * 4 );
-	//						scene.children[0].rotation.y = toRad( targetRotationY * 4 );	
-	//						
-							//drag & drop with easing effect
-							scene.children[0].rotation.x += ( targetRotationX - scene.children[0].rotation.x ) * 0.05;
-							scene.children[0].rotation.y += ( targetRotationY - scene.children[0].rotation.y ) * 0.05;
-
-
-							// set the viewport
-							webGLRenderer.setViewport( 0, 0, rect.width, rect.height );
-							webGLRenderer.setScissor( 0, 0, rect.width, rect.height );
-
-
-							//tell texture object it needs to be updated
-							texture.needsUpdate = true;
-
-							camera.aspect = $this.width() / $this.height(); // not changing in this example
-							camera.updateProjectionMatrix();
-
-							//drag & drop
-							webGLRenderer.render( scene, camera );
-
-						} );
-
-					};
-
-
-
-					//Animation Interactions
-					//-------------------------------------
-					var animate = function() {
-						render();
-						requestAnimationFrame( animate );
-					};
-
-
-					init();
-					animate();
-
-
-					//Rotation and Drop
-
-					var onDocumentMouseDown = function( e ) {
-						e.preventDefault();
-						document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-						document.addEventListener( 'mouseup', onDocumentMouseUp, false );
-						document.addEventListener( 'mouseout', onDocumentMouseOut, false );
-						mouseXOnMouseDown = e.clientX - windowHalfX;
-						mouseYOnMouseDown = e.clientY - windowHalfY;
-						targetRotationXOnMouseDown = targetRotationX;
-						targetRotationYOnMouseDown = targetRotationY;
-					};
-
-					var onDocumentMouseMove = function( e ) {
-						mouseX = e.clientX - windowHalfX;
-						mouseY = e.clientY - windowHalfY;
-						targetRotationX = targetRotationXOnMouseDown + (mouseX - mouseXOnMouseDown) * 0.02;
-						targetRotationY = targetRotationYOnMouseDown + (mouseY - mouseYOnMouseDown) * 0.02;
-					};
-
-					var onDocumentMouseUp = function( e ) {
-						document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
-						document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
-						document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
-
-					};
-
-					var onDocumentMouseOut = function( e ) {
-						document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
-						document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
-						document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
-
-					};
-
-
-
-
-					var onDocumentTouchStart = function( e ) {
-						e.preventDefault();
-						e = e.changedTouches[ 0 ];
-
-						document.addEventListener( 'touchmove', onDocumentTouchMove, false );
-						document.addEventListener( 'touchend', onDocumentTouchEnd, false );
-						mouseXOnTouchDown = e.clientX - windowHalfX;
-						mouseYOnTouchDown = e.clientY - windowHalfY;
-						targetRotationXOnTouchDown = targetRotationX;
-						targetRotationYOnTouchDown = targetRotationY;
-
-
-					};
-
-					var onDocumentTouchMove = function( e ) {
-						e.preventDefault();
-						e = e.changedTouches[ 0 ];
-
-						mouseX = e.clientX - windowHalfX;
-						mouseY = e.clientY - windowHalfY;
-						targetRotationX = targetRotationXOnTouchDown + (mouseX - mouseXOnTouchDown) * 0.02;
-						targetRotationY = targetRotationYOnTouchDown + (mouseY - mouseYOnTouchDown) * 0.02;	
-
-
-
-					};
-
-					var onDocumentTouchEnd = function( e ) {
-						document.removeEventListener( 'touchmove', onDocumentTouchMove, false );
-						document.removeEventListener( 'touchend', onDocumentTouchEnd, false );
-
-					};
-
-					if ( Modernizr.touchevents ) {
-						document.addEventListener( 'touchstart', onDocumentTouchStart, false );
-					} else {
-						document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-					}
-
-
-
-
-					//Responsive plane geometries
-					//-------------------------------------
-					window.addEventListener( 'resize', function () {
-
-						var width = document.getElementById( rendererCanvasID ).clientWidth;
-						var height = document.getElementById( rendererCanvasID ).clientHeight;
-
-						if ( document.getElementById( rendererCanvasID ).width !== width || document.getElementById( rendererCanvasID ).height !== height ) {
-
-							webGLRenderer.setSize( width, height, false );
-
-						}
-
-
-					}, false );
-
-
-					//Initialize the default height of canvas
-					//-------------------------------------	
-					setTimeout( function() {
-						canvasDefaultInit( $first );
-					}, animSpeed );
-
-
-				}// end effect
-
-
 
 				//Canvas Interactions
 				//-------------------------------------
@@ -1454,15 +1125,15 @@ APP = ( function ( APP, $, window, document ) {
 					
 					
 					//Canvas Interactions
-					transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), sliderWrapper, 'out', curDir );
+					transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), $this, 'out', curDir );
 						
 					
 					
 					//Update the current and previous/next items
-					sliderUpdates( $( this ).attr( 'data-index' ), sliderWrapper, curDir );
+					sliderUpdates( $( this ).attr( 'data-index' ), $this, curDir );
 
 					//Pause the auto play event
-					clearInterval( timer );	
+					clearInterval( $this[0].animatedSlides );	
 				}
 
 
@@ -1487,13 +1158,13 @@ APP = ( function ( APP, $, window, document ) {
 				e.preventDefault();
 
 				//Canvas Interactions
-				transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), sliderWrapper, 'out', 'prev' );	
+				transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), $this, 'out', 'prev' );	
 
 				//Update the current and previous items
-				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, sliderWrapper, 'prev' );
+				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, 'prev' );
 
 				//Pause the auto play event
-				clearInterval( timer );
+				clearInterval( $this[0].animatedSlides );
 
 			});
 
@@ -1501,14 +1172,14 @@ APP = ( function ( APP, $, window, document ) {
 				e.preventDefault();
 
 				//Canvas Interactions
-				transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), sliderWrapper, 'out', 'next' );	
+				transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), $this, 'out', 'next' );	
 
 				//Update the current and next items
-				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, sliderWrapper, 'next' );
+				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, 'next' );
 
 
 				//Pause the auto play event
-				clearInterval( timer );
+				clearInterval( $this[0].animatedSlides );
 
 
 			});
@@ -1788,11 +1459,6 @@ APP = ( function ( APP, $, window, document ) {
 				if ( dataLoop ) {
 					if ( elementIndex == 0 ) dir = 'prev';
 				}
-
-			}
-
-			//-- 3D Rotating Effect
-			if ( slider.hasClass( 'uix-advanced-slider-sp--eff-3d-rotating' ) ) {
 
 			}
 
@@ -2666,116 +2332,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 
 				} // end effect		
-				
-				
-				//----------------------------------------------------------------------------------
-				//--------------------------------- 3D Rotating Effect -----------------------------
-				//----------------------------------------------------------------------------------
-				if ( slider.hasClass( 'uix-advanced-slider-sp--eff-3d-rotating' ) ) {
-					
-					
-			
-					//Hide description container of item
-					//-------------------------------------
-					TweenMax.to( $allItems, animSpeed/1000, {
-						alpha : 0
-					});			
 
-					
-					//Display wrapper of canvas (transitions between slides)
-					//-------------------------------------	
-					
-					if ( goType == 'out' ) {
-						//Current item leaving action
-						
-						
-						//rotation transition
-						TweenMax.to( scenesAll[ elementIndex ].children[ 0 ].rotation, animSpeed/1000, {
-							x: '+=2',
-							y: '+=2'
-						});	
-						
-						
-	
-					} else {
-						
-						//Current item entry action
-						TweenMax.to( $myRenderer, animSpeed/1000, {
-							alpha : 0,
-							onComplete    : function() {
-
-								var curSp = $myRenderer.find( '.list-item' ).eq( elementIndex );
-
-								TweenMax.to( this.target, animSpeed/1000, {
-									alpha : 1
-								});
-
-
-								//display the current item
-								TweenMax.set( $myRenderer.find( '.list-item' ), {
-									alpha: 0,
-									css  : {
-										display: 'none'
-									}
-								});	
-
-
-								// pause all videos
-								for ( var k = 0; k < spTotal; k++ ) {
-
-									var videoOb = texturesAll[ k ].image;
-
-									if ( videoOb.currentSrc.indexOf( '.mp4' ) >= 0 ) {
-										videoOb.autoplay = false;
-										videoOb.currentTime = 0;
-										videoOb.muted = true;
-										videoOb.pause();
-									}
-
-								}
-
-
-
-								// play the video
-								var videoObCur =  texturesAll[ elementIndex ].image;
-
-								if ( videoObCur.currentSrc.indexOf( '.mp4' ) >= 0 ) {
-									videoObCur.autoplay = true;
-									videoObCur.currentTime = 0;
-									videoObCur.muted = false;
-									videoObCur.play();
-								}
-
-
-
-								//display filters
-								TweenMax.to( curSp, animSpeed/1000, {
-									alpha: 1,
-									css : {
-										display: 'block'
-									},
-									onComplete : function() {
-										TweenMax.to( $current, animSpeed/1000, {
-											alpha : 1
-										});		
-									}
-								});	
-
-
-							}
-						});			
-
-						
-					}
-
-
-
-					
-
-				}// end effect
-					
-				
-				
 				
 			} else {
 				slider.find( '.uix-advanced-slider-sp__item canvas' ).hide();
@@ -2866,118 +2423,69 @@ APP = ( function ( APP, $, window, document ) {
 					});
 				}
 
-				var myPlayer = videojs( curVideoID, {
-										  width     : dataW,
-										  height    : dataH,
-										  loop      : dataLoop,
-										  autoplay  : dataAuto
-										});
+				var myPlayer = videojs( curVideoID, 
+				   {
+					  width     : dataW,
+					  height    : dataH,
+					  loop      : dataLoop,
+					  autoplay  : dataAuto
+					}, 
+				   function onPlayerReady() {
 
 
-				
-				
-				myPlayer.ready(function() {
-					
-					
-					/* ---------  Video initialize */
-					myPlayer.on( 'loadedmetadata', function() {
+						var initVideo = function( obj ) {
 
-						//Get Video Dimensions
-						var curW    = this.videoWidth(),
-							curH    = this.videoHeight(),
-							newW    = curW,
-							newH    = curH;
+							//Get Video Dimensions
+							var curW    = obj.videoWidth(),
+								curH    = obj.videoHeight(),
+								newW    = curW,
+								newH    = curH;
 
-						newW = videoWrapperW;
+							newW = videoWrapperW;
 
-						//Scaled/Proportional Content 
-						newH = curH*(newW/curW);
+							//Scaled/Proportional Content 
+							newH = curH*(newW/curW);
 
 
-						if ( !isNaN( newW ) && !isNaN( newH ) )  {
-							myPlayer.height( newH );		
-							myPlayer.width( newW );		
-							
-							$this.css( 'height', newH );
+							if ( !isNaN( newW ) && !isNaN( newH ) )  {
+								obj.height( newH );		
+								obj.width( newW );			
+
+								$this.css( 'height', newH );
+							}
+
+
+
+							//Show this video wrapper
+							$this.css( 'visibility', 'visible' );
+
+							//Hide loading effect
+							$this.find( '.vjs-loading-spinner, .vjs-big-play-button' ).hide();
 						}
 
 
+						/* ---------  Video initialize */
+						this.on( 'loadedmetadata', function() {
 
-						//Show this video wrapper
-						$this.css( 'visibility', 'visible' );
+							initVideo( this );
 
-						//Hide loading effect
-						$this.find( '.vjs-loading-spinner, .vjs-big-play-button' ).hide();
+						});
 
-					});		
-
-		
+					
+					    /* ---------  Display the play button  */
+					    if ( ! dataAuto ) $this.find( '.vjs-big-play-button' ).show();
+					    $this.find( '.vjs-big-play-button' ).off( 'click' ).on( 'click', function() {
+							$( this ).hide();
+						});
+					
 				
-					/* ---------  Set, tell the player it's in fullscreen  */
-					if ( dataAuto ) {
-						//Fix an error of Video auto play is not working in browser
-						//myPlayer.muted( true ); 
-						
-						//Prevent autoplay error: Uncaught (in promise) DOMException
-						var promise = myPlayer.play();
-
-						if ( promise !== undefined ) {
-							promise.then( function() {
-								// Autoplay started!
-							
-							}).catch( function( error ) {
-								// Autoplay was prevented.
-								$( '#' + coverPlayBtnID ).show();
-								$( '#' + coverPlayBtnID + ' .uix-video__cover__playbtn' ).show();
-								console.log( 'Autoplay was prevented.' );
-								
-							});
-							
-						}
-					}
-
-					
-
-					/* ---------  Disable control bar play button click */
-					if ( !dataControls ) {
-						myPlayer.controls( false );
-					}
-					
-					
-					/* ---------  Determine if the video is auto played from mobile devices  */
-					var autoPlayOK = false;
-
-					myPlayer.on( 'timeupdate', function() {
-
-						var duration = this.duration();
-						if ( duration > 0 ) {
-							autoPlayOK = true;
-							if ( this.currentTime() > 0 ) {
-								autoPlayOK = true;
-								this.off( 'timeupdate' );
-
-								//Hide cover and play buttons when the video automatically played
-								$( '#' + coverPlayBtnID ).hide();
-							} 
-
-						}
-
-					});
-				
-
-					
-					/* ---------  Pause the video when it is not current slider  */
-					if ( !play ) {
-						myPlayer.pause();
-						myPlayer.currentTime(0);
-						
-					} else {
+						/* ---------  Set, tell the player it's in fullscreen  */
 						if ( dataAuto ) {
+							//Fix an error of Video auto play is not working in browser
+							//this.muted( true ); 
 
-							myPlayer.currentTime(0);
-							
 							//Prevent autoplay error: Uncaught (in promise) DOMException
-							var promise = myPlayer.play();
+							var promise = this.play();
 
 							if ( promise !== undefined ) {
 								promise.then( function() {
@@ -2992,40 +2500,101 @@ APP = ( function ( APP, $, window, document ) {
 								});
 
 							}
+						}
 
-							//Hidden replay button
-							$replayBtn.hide();
 
-							//Should the video go to the beginning when it ends
-							myPlayer.on( 'ended', function () { 
-								
-								if ( dataLoop ) {
-									myPlayer.currentTime(0);
-									myPlayer.play();	
-								} else {
-									//Replay this video
-									myPlayer.currentTime(0);
-									
-									$replayBtn
-										.show()
-										.off( 'click' )
-										.on( 'click', function( e ) {
-											e.preventDefault();
 
-											myPlayer.play();
-											$replayBtn.hide();
+						/* ---------  Disable control bar play button click */
+						if ( !dataControls ) {
+							this.controls( false );
+						}
 
-										});						
+
+						/* ---------  Determine if the video is auto played from mobile devices  */
+						var autoPlayOK = false;
+
+						this.on( 'timeupdate', function() {
+
+							var duration = this.duration();
+							if ( duration > 0 ) {
+								autoPlayOK = true;
+								if ( this.currentTime() > 0 ) {
+									autoPlayOK = true;
+									this.off( 'timeupdate' );
+
+									//Hide cover and play buttons when the video automatically played
+									$( '#' + coverPlayBtnID ).hide();
+								} 
+
+							}
+
+						});
+
+
+
+						/* ---------  Pause the video when it is not current slider  */
+						if ( !play ) {
+							this.pause();
+							this.currentTime(0);
+
+						} else {
+							if ( dataAuto ) {
+
+								this.currentTime(0);
+
+								//Prevent autoplay error: Uncaught (in promise) DOMException
+								var promise = this.play();
+
+								if ( promise !== undefined ) {
+									promise.then( function() {
+										// Autoplay started!
+
+									}).catch( function( error ) {
+										// Autoplay was prevented.
+										$( '#' + coverPlayBtnID ).show();
+										$( '#' + coverPlayBtnID + ' .uix-video__cover__playbtn' ).show();
+										console.log( 'Autoplay was prevented.' );
+
+									});
+
 								}
-							
-							});		
+
+								//Hidden replay button
+								$replayBtn.hide();
+
+								//Should the video go to the beginning when it ends
+								this.on( 'ended', function () { 
+
+									if ( dataLoop ) {
+										this.currentTime(0);
+										this.play();	
+									} else {
+										//Replay this video
+										this.currentTime(0);
+
+										$replayBtn
+											.show()
+											.off( 'click' )
+											.on( 'click', function( e ) {
+												e.preventDefault();
+
+												this.play();
+												$replayBtn.hide();
+
+											});						
+									}
+
+								});		
 
 
-						}	
-					}
-					
+							}	
+						}
 
-				});
+
+
+					});
+
+				
 
 			});	
 		}	    

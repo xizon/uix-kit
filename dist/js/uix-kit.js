@@ -1,10 +1,10 @@
 /*!
  * 
- * ## Project Name        :  Uix Kit Demo
- * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.3.1
+ * ## Project Name        :  Uix Kit
+ * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
+ * ## Version             :  3.5.0
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  March 12, 2019
+ * ## Last Update         :  May 13, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -123,7 +123,7 @@ var UIX_KIT_IMPORT = {
   /******/
 
   /* must be placed in the first place */
-  "./src/components/ES5/_global/js/_base.js",
+  "./src/components/ES5/_global/js/_base.js", "./src/components/ES5/_global/js/func-common.js", "./src/components/ES5/_global/js/func-3rd.js",
   /******/
 
   /******/
@@ -131,13 +131,13 @@ var UIX_KIT_IMPORT = {
   /* base */
   "./src/components/ES5/_global/js/body-and-header.js", "./src/components/ES5/_global/js/common-height.js", "./src/components/ES5/_global/js/custom-data-attrs.js", "./src/components/ES5/_global/js/loader.js", "./src/components/ES5/_global/js/mega-menu.js", "./src/components/ES5/_global/js/mobile-menu.js", "./src/components/ES5/_global/js/navigation.js", "./src/components/ES5/_global/js/set-background.js", "./src/components/ES5/_global/js/videos.js", //GSAP ==> generic
   "./src/components/ES5/_plugins-GSAP/js/ColorPropsPlugin.js", "./src/components/ES5/_plugins-GSAP/js/CSSRulePlugin.js", "./src/components/ES5/_plugins-GSAP/js/EaselPlugin.js", "./src/components/ES5/_plugins-GSAP/js/EndArrayPlugin.js", "./src/components/ES5/_plugins-GSAP/js/ModifiersPlugin.js", "./src/components/ES5/_plugins-GSAP/js/PixiPlugin.js", "./src/components/ES5/_plugins-GSAP/js/RaphaelPlugin.js", "./src/components/ES5/_plugins-GSAP/js/ScrollToPlugin.js", "./src/components/ES5/_plugins-GSAP/js/TEMPLATE_Plugin.js", "./src/components/ES5/_plugins-GSAP/js/TextPlugin.js", //three.js ==> generic
-  "./src/components/ES5/_plugins-THREE/js/CSS3DRenderer.js", "./src/components/ES5/_plugins-THREE/js/GLTFLoader.js", "./src/components/ES5/_plugins-THREE/js/MTLLoader.js", "./src/components/ES5/_plugins-THREE/js/OBJLoader.js", "./src/components/ES5/_plugins-THREE/js/OrbitControls.js",
+  "./src/components/ES5/_plugins-THREE/js/renderers/CSS3DRenderer.js", "./src/components/ES5/_plugins-THREE/js/controls/OrbitControls.js", "./src/components/ES5/_plugins-THREE/js/loaders/GLTFLoader.js", "./src/components/ES5/_plugins-THREE/js/loaders/MTLLoader.js", "./src/components/ES5/_plugins-THREE/js/loaders/OBJLoader.js", "./src/components/ES5/_plugins-THREE/js/shaders/CopyShader.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/EffectComposer.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/BloomPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/MaskPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/TexturePass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/ShaderPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/RenderPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/ClearPass.js", "./src/components/ES5/_plugins-THREE/js/modifiers/TessellateModifier.js", "./src/components/ES5/_plugins-THREE/js/modifiers/ExplodeModifier.js", "./src/components/ES5/_plugins-THREE/js/extensions/ShaderRuntime.custom.js", "./src/components/ES5/_plugins-THREE/js/extensions/d3-threeD.custom.js", "./src/components/ES5/_plugins-THREE/js/extensions/simplex-noise.js", "./src/components/ES5/_plugins-THREE/js/extensions/THREE.MeshLine.js",
   /******/
 
   /******/
 
   /* pages */
-  "./src/components/ES5/_main/js/main.js", "./src/components/ES5/accordion-img/js/accordion-img.js", "./src/components/ES5/accordion/js/accordion.js", "./src/components/ES5/advanced-content-slider/js/advanced-content-slider.js", "./src/components/ES5/advanced-slider/js/advanced-slider-basic.js", "./src/components/ES5/advanced-slider/js/advanced-slider-SpecialEffects.js", "./src/components/ES5/AJAX-push/js/ajax-push-content.js", "./src/components/ES5/AJAX/js/ajax-page-loader.js", "./src/components/ES5/back-to-top/js/back-to-top.js", "./src/components/ES5/circle-layout/js/circle-layout.js", "./src/components/ES5/counter/js/counter.js", "./src/components/ES5/dropdown-menu/js/dropdown-menu.js", "./src/components/ES5/dropdown-menu2/js/dropdown-menu2.js", "./src/components/ES5/dynamic-dropdown-list-json/js/dynamic-dropdown-list-json.js", "./src/components/ES5/flexslider/js/custom-flexslider.js", "./src/components/ES5/flexslider/js/jquery.flexslider.js", "./src/components/ES5/floating-side-element/js/floating-side-element.js", "./src/components/ES5/form-progress/js/form-progress.js", "./src/components/ES5/form/js/form.js", "./src/components/ES5/form/js/datepicker.js", "./src/components/ES5/gallery/js/gallery.js", "./src/components/ES5/hover-delay-interaction/js/hover-delay-interaction.js", "./src/components/ES5/image-shapes/js/image-shapes.js", "./src/components/ES5/lava-lamp-style-menu/js/lava-lamp-style-menu.js", "./src/components/ES5/lightbox/js/lightbox.js", "./src/components/ES5/list-bulleted/js/list-bulleted.js", "./src/components/ES5/list-posts/js/list-posts-with-ajax.js", "./src/components/ES5/list-split-imagery/js/list-split-imagery.js", "./src/components/ES5/login-templates/js/login-templates.js", "./src/components/ES5/modal-dialog/js/modal-dialog.js", "./src/components/ES5/mousewheel-interaction/js/mousewheel-interaction.js", "./src/components/ES5/multi-items-carousel/js/multi-items-carousel.js", "./src/components/ES5/one-page/js/one-page.js", "./src/components/ES5/one-page2/js/one-page2.js", "./src/components/ES5/parallax/js/parallax.js", "./src/components/ES5/periodical-scroll/js/periodical-scroll.js", "./src/components/ES5/pricing/js/pricing.js", "./src/components/ES5/progress-bar/js/progress-bar.js", "./src/components/ES5/progress-line/js/progress-line.js", "./src/components/ES5/retina/js/retina.js", "./src/components/ES5/rotating-elements/js/rotating-elements.js", "./src/components/ES5/scroll-reveal/js/scroll-reveal.js", "./src/components/ES5/scrollspy-animate/js/scrollspy-animate.js", "./src/components/ES5/show-more-less/js/show-more-less.js", "./src/components/ES5/skew-on-scroll/js/skew-on-scroll.js", "./src/components/ES5/smooth-scrolling-anchor-link/js/smooth-scrolling-anchor-link.js", "./src/components/ES5/source-code/js/highlight.js", "./src/components/ES5/source-code/js/source-code.js", "./src/components/ES5/sticky-elements/js/sticky-elements.js", "./src/components/ES5/svg-map/js/svg-map-china.js", "./src/components/ES5/svg-map/js/svg-map-world.js", "./src/components/ES5/table/js/table.js", "./src/components/ES5/table/js/table-sorter.js", "./src/components/ES5/t3D-background-three/js/3D-background-three.js", "./src/components/ES5/t3D-background-three2/js/3D-background-three2.js", "./src/components/ES5/t3D-background/js/3D-background.js", "./src/components/ES5/t3D-carousel/js/3D-carousel.js", "./src/components/ES5/t3D-model/js/3D-model.js", "./src/components/ES5/t3D-pages/js/3D-pages.js", "./src/components/ES5/t3D-particle-effect/js/3D-particle-effect.js", "./src/components/ES5/t3D-sphere-three/js/3D-sphere-three.js", "./src/components/ES5/t3D-obj-anim-interaction/js/3D-obj-anim-interaction.js", "./src/components/ES5/tabs/js/tabs.js", "./src/components/ES5/team-focus/js/team-focus.js", "./src/components/ES5/text-effect/js/text-effect.js", "./src/components/ES5/timeline/js/timeline.js", "./src/components/ES5/vertical-menu/js/vertical-menu.js", "./src/components/ES5/wordpress/js/wp-core.js"]
+  "./src/components/ES5/_main/js/main.js", "./src/components/ES5/accordion-img/js/accordion-img.js", "./src/components/ES5/accordion/js/accordion.js", "./src/components/ES5/advanced-content-slider/js/advanced-content-slider.js", "./src/components/ES5/advanced-slider/js/advanced-slider-basic.js", "./src/components/ES5/advanced-slider/js/advanced-slider-SpecialEffects.js", "./src/components/ES5/AJAX-push/js/ajax-push-content.js", "./src/components/ES5/AJAX/js/ajax-page-loader.js", "./src/components/ES5/back-to-top/js/back-to-top.js", "./src/components/ES5/circle-layout/js/circle-layout.js", "./src/components/ES5/counter/js/counter.js", "./src/components/ES5/dropdown-menu/js/dropdown-menu.js", "./src/components/ES5/dropdown-menu2/js/dropdown-menu2.js", "./src/components/ES5/dynamic-dropdown-list-json/js/dynamic-dropdown-list-json.js", "./src/components/ES5/flexslider/js/custom-flexslider.js", "./src/components/ES5/flexslider/js/jquery.flexslider.js", "./src/components/ES5/floating-side-element/js/floating-side-element.js", "./src/components/ES5/form-progress/js/form-progress.js", "./src/components/ES5/form/js/form.js", "./src/components/ES5/form/js/datepicker.js", "./src/components/ES5/gallery/js/gallery.js", "./src/components/ES5/hover-delay-interaction/js/hover-delay-interaction.js", "./src/components/ES5/image-shapes/js/image-shapes.js", "./src/components/ES5/lava-lamp-style-menu/js/lava-lamp-style-menu.js", "./src/components/ES5/lightbox/js/lightbox.js", "./src/components/ES5/list-bulleted/js/list-bulleted.js", "./src/components/ES5/list-posts/js/list-posts-with-ajax.js", "./src/components/ES5/list-split-imagery/js/list-split-imagery.js", "./src/components/ES5/login-templates/js/login-templates.js", "./src/components/ES5/modal-dialog/js/modal-dialog.js", "./src/components/ES5/mousewheel-interaction/js/mousewheel-interaction.js", "./src/components/ES5/multi-items-carousel/js/multi-items-carousel.js", "./src/components/ES5/one-page/js/one-page.js", "./src/components/ES5/one-page2/js/one-page2.js", "./src/components/ES5/parallax/js/parallax.js", "./src/components/ES5/periodical-scroll/js/periodical-scroll.js", "./src/components/ES5/pricing/js/pricing.js", "./src/components/ES5/progress-bar/js/progress-bar.js", "./src/components/ES5/progress-line/js/progress-line.js", "./src/components/ES5/retina/js/retina.js", "./src/components/ES5/rotating-elements/js/rotating-elements.js", "./src/components/ES5/scroll-reveal/js/scroll-reveal.js", "./src/components/ES5/scrollspy-animate/js/scrollspy-animate.js", "./src/components/ES5/show-more-less/js/show-more-less.js", "./src/components/ES5/skew-on-scroll/js/skew-on-scroll.js", "./src/components/ES5/smooth-scrolling-anchor-link/js/smooth-scrolling-anchor-link.js", "./src/components/ES5/sticky-elements/js/sticky-elements.js", "./src/components/ES5/svg-map/js/svg-map-china.js", "./src/components/ES5/svg-map/js/svg-map-world.js", "./src/components/ES5/simple-3D-background-three/js/3D-background-three.js", "./src/components/ES5/simple-3D-background-three2/js/3D-background-three2.js", "./src/components/ES5/simple-3D-background-three3/js/3D-background-three3.js", "./src/components/ES5/simple-3D-background/js/3D-background.js", "./src/components/ES5/simple-3D-carousel/js/3D-carousel.js", "./src/components/ES5/simple-3D-gallery/js/3D-gallery.js", "./src/components/ES5/simple-3D-image-transition/js/3D-image-transition.js", "./src/components/ES5/simple-3D-model/js/3D-model.js", "./src/components/ES5/simple-3D-pages/js/3D-pages.js", "./src/components/ES5/simple-3D-particle-effect/js/3D-particle-effect.js", "./src/components/ES5/simple-3D-sphere-three/js/3D-sphere-three.js", "./src/components/ES5/simple-3D-obj-anim-interaction/js/3D-obj-anim-interaction.js", "./src/components/ES5/simple-3D-mouse-interaction/js/3D-mouse-interaction.js", "./src/components/ES5/simple-3D-mouse-interaction2/js/3D-mouse-interaction2.js", "./src/components/ES5/simple-3D-shatter-slider/js/3D-shatter-slider.js", "./src/components/ES5/simple-3D-explosive-particle-slider/js/3D-explosive-particle-slider.js", "./src/components/ES5/table/js/table.js", "./src/components/ES5/table/js/table-sorter.js", "./src/components/ES5/tabs/js/tabs.js", "./src/components/ES5/team-focus/js/team-focus.js", "./src/components/ES5/text-effect/js/text-effect.js", "./src/components/ES5/timeline/js/timeline.js", "./src/components/ES5/vertical-menu/js/vertical-menu.js", "./src/components/ES5/wordpress/js/wp-core.js"]
 };
 
 // CONCATENATED MODULE: ./src/components/ES6/_global/js/vars.js
@@ -205,80 +205,88 @@ if (document.getElementsByTagName('body')[0].className.match(/es6-demo-home/)) {
 	
 	1.Vars
     2.APP1
-    3.Body And Header
-    4.Common Height
-    5.Get all custom attributes of an element like "data-*"
-    6.Loader
-    7.Mega Menu
-    8.Mobile Menu
-    9.Navigation
-    10.Specify a background image
-    11.Videos
-    12.Theme Scripts
-    13.Accordion Background Images
-    14.Accordion
-    15.Advanced Content Slider
-    16.Advanced Slider (Basic)
-    17.Advanced Slider (Special Effects)
-    18.Ajax Push Content
-    19.Ajax Page Loader (Loading A Page via Ajax Into Div)
-    20.Back to Top
-    21.Circle Layout
-    22.Counter
-    23.Dropdown Menu
-    24.Dropdown Menu 2 (Multi-level drop-down navigation)
-    25.Dynamic Drop Down List from JSON
-    26.Flexslider
-    27.Floating Side Element
-    28.Form Progress
-    29.Form
-    30.Gallery
-    31.Hover Delay Interaction
-    32.Image Shapes
-    33.Lava-Lamp Style Menu
-    34.Custom Lightbox
-    35.Bulleted List
-    36.Posts List With Ajax
-    37.Fullwidth List of Split
-    38.Login Templates
-    39.Modal Dialog
-    40.Mousewheel Interaction
-    41.Multiple Items Carousel
-    42.Full Page/One Page Transition
-    43.Full Page/One Page Transition 2
-    44.Parallax
-    45.Periodical Scroll
-    46.Pricing
-    47.Progress Bar
-    48.Progress Line
-    49.Retina Graphics for Website
-    50.Rotating Elements
-    51.Scroll Reveal
-    52.Scrollspy Animate
-    53.Show More Less
-    54.Skew Based On Velocity of Scroll
-    55.Smooth Scrolling When Clicking An Anchor Link
-    56.Source Code View
-    57.Sticky Elements
-    58.SVG Map (China)
-    59.SVG Map (World)
-    60.Responsive Table
-    61.Table Sorter
-    62.3D Background 2
-    63.3D Background 2
+    3.Base Functions
+    4.Base Third-party Functions
+    5.Body And Header
+    6.Common Height
+    7.Get all custom attributes of an element like "data-*"
+    8.Loader
+    9.Mega Menu
+    10.Mobile Menu
+    11.Navigation
+    12.Specify a background image
+    13.Videos
+    14.Theme Scripts
+    15.Accordion Background Images
+    16.Accordion
+    17.Advanced Content Slider
+    18.Advanced Slider (Basic)
+    19.Advanced Slider (Special Effects)
+    20.Ajax Push Content
+    21.Ajax Page Loader (Loading A Page via Ajax Into Div)
+    22.Back to Top
+    23.Circle Layout
+    24.Counter
+    25.Dropdown Menu
+    26.Dropdown Menu 2 (Multi-level drop-down navigation)
+    27.Dynamic Drop Down List from JSON
+    28.Flexslider
+    29.Floating Side Element
+    30.Form Progress
+    31.Form
+    32.Gallery
+    33.Hover Delay Interaction
+    34.Image Shapes
+    35.Lava-Lamp Style Menu
+    36.Custom Lightbox
+    37.Bulleted List
+    38.Posts List With Ajax
+    39.Fullwidth List of Split
+    40.Login Templates
+    41.Modal Dialog
+    42.Mousewheel Interaction
+    43.Multiple Items Carousel
+    44.Full Page/One Page Transition
+    45.Full Page/One Page Transition 2
+    46.Parallax
+    47.Periodical Scroll
+    48.Pricing
+    49.Progress Bar
+    50.Progress Line
+    51.Retina Graphics for Website
+    52.Rotating Elements
+    53.Scroll Reveal
+    54.Scrollspy Animate
+    55.Show More Less
+    56.Skew Based On Velocity of Scroll
+    57.Smooth Scrolling When Clicking An Anchor Link
+    58.Sticky Elements
+    59.SVG Map (China)
+    60.SVG Map (World)
+    61.3D Background 1 with three.js
+    62.3D Background 2 with three.js
+    63.3D Background 3 with three.js
     64.3D Background
     65.3D Carousel
-    66.3D Model
-    67.3D Pages
-    68.3D Particle Effect
-    69.3D Sphere Rotation
-    70.3D Object Anim When Click
-    71.Tabs
-    72.Team Focus
-    73.Text effect
-    74.Timeline
-    75.Vertical Menu
-    76.WordPress Core Scripts
+    66.3D Gallery with three.js
+    67.3D Image Transition with three.js
+    68.3D Model
+    69.3D Pages
+    70.3D Particle Effect
+    71.3D Sphere Rotation
+    72.3D Object Anim When Click
+    73.3D Mouse Interaction with three.js
+    74.3D Mouse Interaction with three.js
+    75.3D Shatter Slider
+    76.3D Explosive Particle Slider
+    77.Responsive Table
+    78.Table Sorter
+    79.Tabs
+    80.Team Focus
+    81.Text effect
+    82.Timeline
+    83.Vertical Menu
+    84.WordPress Core Scripts
 
 
 */
@@ -287,7 +295,6 @@ if (document.getElementsByTagName('body')[0].className.match(/es6-demo-home/)) {
 if ( typeof jQuery === 'undefined' || typeof TweenMax === 'undefined' || typeof Waypoint === 'undefined' || typeof videojs === 'undefined' ) {
     throw new Error( 'Uix Kit\'s JavaScript requires jQuery, TweenMax, Waypoint and videojs.' );
 }
-
 
 //Fixed a bug that Cannot read property 'fn' of undefined for jQuery 1.xx.x.
 window.$ = window.jQuery;
@@ -314,15 +321,9 @@ if ( typeof APP_ROOTPATH === 'undefined' ) {
 	homeUrl     = '';
 	ajaxUrl     = '';
 } else {
-    templateUrl = APP_ROOTPATH.templateUrl;
-	homeUrl     = APP_ROOTPATH.homeUrl;
-	ajaxUrl     = APP_ROOTPATH.ajaxUrl;
-}
-
-
-//Modify templateUrl as the correct path when local test is enabled
-if ( templateUrl == '' && ( location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.hostname === '' ) ) {
-    templateUrl = '/examples';
+    templateUrl = APP_ROOTPATH.templateUrl.replace(/\/\s*$/, '' );
+	homeUrl     = APP_ROOTPATH.homeUrl.replace(/\/\s*$/, '' );
+	ajaxUrl     = APP_ROOTPATH.ajaxUrl.replace(/\/\s*$/, '' );
 }
 
 
@@ -414,6 +415,21 @@ var APP = (function ( $, window, document ) {
 
 
 
+
+
+
+/* 
+ *************************************
+ * <!-- Base Functions -->
+ *************************************
+ */
+
+//=========================================================
+//=========================================================
+//=========================================================
+//=========================================================
+//=========================================================
+
 /* 
  *************************************
  * Create GUID / UUID
@@ -421,70 +437,273 @@ var APP = (function ( $, window, document ) {
  * @return {String}                        - The globally-unique identifiers.
  *************************************
  */
-
-var crypto = window.crypto || window.msCrypto || null; // IE11 fix
-var UIX_GUID = UIX_GUID || (function() {
-
-    var EMPTY = '00000000-0000-0000-0000-000000000000';
-
-    var _padLeft = function(paddingString, width, replacementChar) {
-        return paddingString.length >= width ? paddingString: _padLeft(replacementChar + paddingString, width, replacementChar || ' ');
-    };
-
-    var _s4 = function(number) {
-        var hexadecimalResult = number.toString(16);
-        return _padLeft(hexadecimalResult, 4, '0');
-    };
-
-    var _cryptoGuid = function() {
-        var buffer = new window.Uint16Array(8);
-        window.crypto.getRandomValues(buffer);
-        return [_s4(buffer[0]) + _s4(buffer[1]), _s4(buffer[2]), _s4(buffer[3]), _s4(buffer[4]), _s4(buffer[5]) + _s4(buffer[6]) + _s4(buffer[7])].join('-');
-    };
-
-    var _guid = function() {
-        var currentDateMilliseconds = new Date().getTime();
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,
-        function(currentChar) {
-            var randomChar = (currentDateMilliseconds + Math.random() * 16) % 16 | 0;
-            currentDateMilliseconds = Math.floor(currentDateMilliseconds / 16);
-            return (currentChar === 'x' ? randomChar: (randomChar & 0x7 | 0x8)).toString(16);
-        });
-    };
-
-    var create = function() {
-		if ( browser.isIE ) {
-			return _guid();
-		} else {
-			var hasCrypto = crypto != 'undefined' && crypto !== null,
-			hasRandomValues = typeof(window.crypto.getRandomValues) != 'undefined';
-			return (hasCrypto && hasRandomValues) ? _cryptoGuid() : _guid();	
-		}
-    };
-
-    return {
-        newGuid: create,
-        empty: EMPTY
-    };
+var UixGUID = UixGUID || (function() {
+    function t() {
+        do {
+            var x = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,
+            function(t) {
+                var x = 16 * Math.random() | 0;
+                return ("x" == t ? x: 3 & x | 8).toString(16)
+            })
+        } while (! t . register ( x ));
+        return x;
+    }
+	
+    return t.version = "1.4.2",
+    t.create = function() {
+        return t();
+    },
+    t._list = {},
+    Object.defineProperty(t, "list", {
+        get: function() {
+            var x = [];
+            for (var r in t._list) x.push(r);
+            return x;
+        },
+        set: function(x) {
+            t._list = {};
+            for (var r = 0; r < x.length; r++) t._list[x[r]] = 1;
+        }
+    }),
+    t.exists = function(x) {
+        return !! t._list[x];
+    },
+    t.register = function(x) {
+        return ! t.exists(x) && (t._list[x] = 1, !0);
+    },
+	t
 })();
 
 
 
 /* 
  *************************************
- * Logs out the version and renderer information for this running instance of Uix Kit.
+ * Evaluating a string as a mathematical expression in JavaScript
+ *
+ * @return {String}            - New calculation result.
  *************************************
  */
-//( function UIX_HELLO() { 
-//    if ( navigator.userAgent.toLowerCase().indexOf( 'chrome' ) > -1 ) {
-//        var args = ['\n %c Made with Uix Kit by https://github.com/xizon/uix-kit', 'color: #333; border: 1px solid; padding: 10px;'];
-//
-//        window.console.log.apply(console, args);
-//    } else if (window.console) {
-//        window.console.log( 'Made with Uix Kit by https://github.com/xizon/uix-kit' );
-//    }
-//} ());
+var UixMath = UixMath || (function() {
+    function t() { }
+	
+    return t.version = "0.0.1",
+   
+    t.evaluate = function(s) {
+		
+		var chars = s.replace(/\s/g, '').split("");
+		var n = [], op = [], index = 0, oplast = true;
 
+		n[index] = "";
+
+		// Parse the expression
+		for (var c = 0; c < chars.length; c++) {
+
+			if (isNaN(parseInt(chars[c])) && chars[c] !== "." && !oplast) {
+				op[index] = chars[c];
+				index++;
+				n[index] = "";
+				oplast = true;
+			} else {
+				n[index] += chars[c];
+				oplast = false;
+			}
+		}
+
+		// Calculate the expression
+		s = parseFloat(n[0]);
+		for (var o = 0; o < op.length; o++) {
+			var num = parseFloat(n[o + 1]);
+			switch (op[o]) {
+				case "+":
+					s = s + num;
+					break;
+				case "-":
+					s = s - num;
+					break;
+				case "*":
+					s = s * num;
+					break;
+				case "/":
+					s = s / num;
+					break;
+			}
+		}
+
+		return s;
+    },
+	t
+})();
+
+
+
+/* 
+ *************************************
+ * Get the CSS property
+ *
+ * @param  {Object} el     - Target object, using class name or ID to locate.
+ * @return {String|JSON}            - The value of property.
+ *************************************
+ */
+var UixCssProperty = UixCssProperty || (function() {
+    function t() { }
+	
+    return t.version = "0.0.1",
+
+    t.getTransitionDuration = function( el ) {
+		
+		if ( typeof el === typeof undefined ) {
+			return 0;
+		}
+
+
+		var style    = window.getComputedStyle(el),
+			duration = style.webkitTransitionDuration,
+			delay    = style.webkitTransitionDelay; 
+
+		if ( typeof duration != typeof undefined ) {
+			// fix miliseconds vs seconds
+			duration = (duration.indexOf("ms")>-1) ? parseFloat(duration) : parseFloat(duration)*1000;
+			delay = (delay.indexOf("ms")>-1) ? parseFloat(delay) : parseFloat(delay)*1000;
+
+			return duration;
+		} else {
+			return 0;
+		}
+		
+    },
+		
+    //
+    t.getAbsoluteCoordinates = function( el ) {
+		
+		var windowWidth     = window.innerWidth,
+			leftPos         = null,
+			topPos          = null;
+
+		if ( ! document.getElementsByTagName( 'body' )[0].className.match(/rtl/) ) {
+			leftPos = ( el.offsetLeft == 0 ) ? el.parentElement.offsetLeft : el.offsetLeft;
+			topPos = ( el.offsetTop == 0 ) ? el.parentElement.offsetTop : el.offsetTop;
+		} else {
+			
+			// width and height in pixels, including padding and border
+			// Corresponds to jQuery outerWidth(), outerHeight()
+			leftPos = ( el.offsetLeft == 0 ) ? ( windowWidth - ( el.parentElement.offsetLeft + el.parentElement.offsetWidth ) ) : ( windowWidth - ( el.offsetLeft + el.offsetWidth ) );
+			topPos = ( el.offsetTop == 0 ) ? ( windowWidth - ( el.parentElement.offsetTop + el.parentElement.offsetHeight ) ) : ( windowWidth - ( el.offsetTop + el.offsetHeight ) );
+		}
+
+
+		return {
+			'left': leftPos,
+			'top': topPos
+		};
+		
+    },	
+		
+		
+	t
+})();
+
+
+/* 
+ *************************************
+ * Parallax Effect
+ *
+ * @param  {Number} speed     - The speed of movement between elements.
+ * @param  {JSON} bg          - Specify the background display. Default value: { enable: true, xPos: '50%' }
+ * @return {Void}
+ *************************************
+ */
+
+( function ( $ ) {
+    $.fn.UixParallax = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+			speed    : 0.25,
+			bg       : { enable: true, xPos: '50%' }
+        }, options );
+ 
+        this.each( function() {
+			
+			var bgEff      = settings.bg,
+				$this      = $( this ),
+				bgXpos     = '50%',
+				speed      = -parseFloat( settings.speed );
+			
+			
+			
+			if ( bgEff ) {
+				bgEff      = settings.bg.enable;
+				bgXpos     = settings.bg.xPos;
+			}
+			
+	
+			//Prohibit transition delay
+			$this.css( {
+				'transition': 'none'
+			} );
+
+		    $( window ).on( 'scroll touchmove', function( e ){
+				scrollUpdate();
+			});
+			
+			
+			//Initialize the position of the background
+			if ( bgEff ) {
+				//background parallax
+				TweenMax.set( $this, {
+					backgroundPosition: bgXpos + ' ' + (-$this.offset().top*speed) + 'px'
+				});
+			} else {
+				//element parallax
+				TweenMax.set( $this, {
+					y: 0
+				});	
+			}
+			
+			
+			function scrollUpdate() {
+				var scrolled = $( window ).scrollTop(),
+					st       = $this.offset().top - scrolled;
+				
+
+				
+				if ( bgEff ) {
+					//background parallax
+					TweenMax.set( $this, {
+						backgroundPosition: bgXpos + ' ' + ( 0 - ( st * speed ) ) + 'px'
+					});
+				} else {
+					//element parallax
+					TweenMax.set( $this, {
+						y: ( 0 - ( scrolled * speed ) )
+					});
+					
+					
+				}
+				
+			}
+
+			
+			
+		});
+ 
+    };
+ 
+}( jQuery ));
+
+
+
+/* 
+ *************************************
+ * <!-- Base Third-party Functions -->
+ *************************************
+ */
+
+//=========================================================
+//=========================================================
+//=========================================================
+//=========================================================
+//=========================================================
 
 
 /* 
@@ -499,309 +718,100 @@ var UIX_GUID = UIX_GUID || (function() {
  *************************************
  */
 
-(function($,window,undefined){
-  '$:nomunge'; // Used by YUI compressor.
-  
-  // Reused string.
-  var str_hashchange = 'hashchange',
-    
-    // Method / object references.
+(function($, window, undefined) {
+    '$:nomunge';
+    var str_hashchange = 'hashchange',
     doc = document,
-    fake_onhashchange,
-    special = $.event.special,
-    
-    // Does the browser support window.onhashchange? Note that IE8 running in
-    // IE7 compatibility mode reports true for 'onhashchange' in window, even
-    // though the event isn't supported, so also test document.documentMode.
+    fake_onhashchange, special = $.event.special,
     doc_mode = doc.documentMode,
-    supports_onhashchange = 'on' + str_hashchange in window && ( doc_mode === undefined || doc_mode > 7 );
-  
-  // Get location.hash (or what you'd expect location.hash to be) sans any
-  // leading #. Thanks for making this necessary, Firefox!
-  function get_fragment( url ) {
-    url = url || location.href;
-    return '#' + url.replace( /^[^#]*#?(.*)$/, '$1' );
-  };
-  
-  // Method: jQuery.fn.hashchange
-  // 
-  // Bind a handler to the window.onhashchange event or trigger all bound
-  // window.onhashchange event handlers. This behavior is consistent with
-  // jQuery's built-in event handlers.
-  // 
-  // Usage:
-  // 
-  // > jQuery(window).hashchange( [ handler ] );
-  // 
-  // Arguments:
-  // 
-  //  handler - (Function) Optional handler to be bound to the hashchange
-  //    event. This is a "shortcut" for the more verbose form:
-  //    jQuery(window).bind( 'hashchange', handler ). If handler is omitted,
-  //    all bound window.onhashchange event handlers will be triggered. This
-  //    is a shortcut for the more verbose
-  //    jQuery(window).trigger( 'hashchange' ). These forms are described in
-  //    the <hashchange event> section.
-  // 
-  // Returns:
-  // 
-  //  (jQuery) The initial jQuery collection of elements.
-  
-  // Allow the "shortcut" format $(elem).hashchange( fn ) for binding and
-  // $(elem).hashchange() for triggering, like jQuery does for built-in events.
-  $.fn[ str_hashchange ] = function( fn ) {
-    return fn ? this.bind( str_hashchange, fn ) : this.trigger( str_hashchange );
-  };
-  
-  // Property: jQuery.fn.hashchange.delay
-  // 
-  // The numeric interval (in milliseconds) at which the <hashchange event>
-  // polling loop executes. Defaults to 50.
-  
-  // Property: jQuery.fn.hashchange.domain
-  // 
-  // If you're setting document.domain in your JavaScript, and you want hash
-  // history to work in IE6/7, not only must this property be set, but you must
-  // also set document.domain BEFORE jQuery is loaded into the page. This
-  // property is only applicable if you are supporting IE6/7 (or IE8 operating
-  // in "IE7 compatibility" mode).
-  // 
-  // In addition, the <jQuery.fn.hashchange.src> property must be set to the
-  // path of the included "document-domain.html" file, which can be renamed or
-  // modified if necessary (note that the document.domain specified must be the
-  // same in both your main JavaScript as well as in this file).
-  // 
-  // Usage:
-  // 
-  // jQuery.fn.hashchange.domain = document.domain;
-  
-  // Property: jQuery.fn.hashchange.src
-  // 
-  // If, for some reason, you need to specify an Iframe src file (for example,
-  // when setting document.domain as in <jQuery.fn.hashchange.domain>), you can
-  // do so using this property. Note that when using this property, history
-  // won't be recorded in IE6/7 until the Iframe src file loads. This property
-  // is only applicable if you are supporting IE6/7 (or IE8 operating in "IE7
-  // compatibility" mode).
-  // 
-  // Usage:
-  // 
-  // jQuery.fn.hashchange.src = 'path/to/file.html';
-  
-  $.fn[ str_hashchange ].delay = 50;
-  /*
-  $.fn[ str_hashchange ].domain = null;
-  $.fn[ str_hashchange ].src = null;
-  */
-  
-  // Event: hashchange event
-  // 
-  // Fired when location.hash changes. In browsers that support it, the native
-  // HTML5 window.onhashchange event is used, otherwise a polling loop is
-  // initialized, running every <jQuery.fn.hashchange.delay> milliseconds to
-  // see if the hash has changed. In IE6/7 (and IE8 operating in "IE7
-  // compatibility" mode), a hidden Iframe is created to allow the back button
-  // and hash-based history to work.
-  // 
-  // Usage as described in <jQuery.fn.hashchange>:
-  // 
-  // > // Bind an event handler.
-  // > jQuery(window).hashchange( function(e) {
-  // >   var hash = location.hash;
-  // >   ...
-  // > });
-  // > 
-  // > // Manually trigger the event handler.
-  // > jQuery(window).hashchange();
-  // 
-  // A more verbose usage that allows for event namespacing:
-  // 
-  // > // Bind an event handler.
-  // > jQuery(window).bind( 'hashchange', function(e) {
-  // >   var hash = location.hash;
-  // >   ...
-  // > });
-  // > 
-  // > // Manually trigger the event handler.
-  // > jQuery(window).trigger( 'hashchange' );
-  // 
-  // Additional Notes:
-  // 
-  // * The polling loop and Iframe are not created until at least one handler
-  //   is actually bound to the 'hashchange' event.
-  // * If you need the bound handler(s) to execute immediately, in cases where
-  //   a location.hash exists on page load, via bookmark or page refresh for
-  //   example, use jQuery(window).hashchange() or the more verbose 
-  //   jQuery(window).trigger( 'hashchange' ).
-  // * The event can be bound before DOM ready, but since it won't be usable
-  //   before then in IE6/7 (due to the necessary Iframe), recommended usage is
-  //   to bind it inside a DOM ready handler.
-  
-  // Override existing $.event.special.hashchange methods (allowing this plugin
-  // to be defined after jQuery BBQ in BBQ's source code).
-  special[ str_hashchange ] = $.extend( special[ str_hashchange ], {
-    
-    // Called only when the first 'hashchange' event is bound to window.
-    setup: function() {
-      // If window.onhashchange is supported natively, there's nothing to do..
-      if ( supports_onhashchange ) { return false; }
-      
-      // Otherwise, we need to create our own. And we don't want to call this
-      // until the user binds to the event, just in case they never do, since it
-      // will create a polling loop and possibly even a hidden Iframe.
-      $( fake_onhashchange.start );
-    },
-    
-    // Called only when the last 'hashchange' event is unbound from window.
-    teardown: function() {
-      // If window.onhashchange is supported natively, there's nothing to do..
-      if ( supports_onhashchange ) { return false; }
-      
-      // Otherwise, we need to stop ours (if possible).
-      $( fake_onhashchange.stop );
-    }
-    
-  });
-  
-  // fake_onhashchange does all the work of triggering the window.onhashchange
-  // event for browsers that don't natively support it, including creating a
-  // polling loop to watch for hash changes and in IE 6/7 creating a hidden
-  // Iframe to enable back and forward.
-  fake_onhashchange = (function(){
-    var self = {},
-      timeout_id,
-      
-      // Remember the initial hash so it doesn't get triggered immediately.
-      last_hash = get_fragment(),
-      
-      fn_retval = function(val){ return val; },
-      history_set = fn_retval,
-      history_get = fn_retval;
-    
-    // Start the polling loop.
-    self.start = function() {
-      timeout_id || poll();
+    supports_onhashchange = 'on' + str_hashchange in window && (doc_mode === undefined || doc_mode > 7);
+    function get_fragment(url) {
+        url = url || location.href;
+        return '#' + url.replace(/^[^#]*#?(.*)$/, '$1');
     };
-    
-    // Stop the polling loop.
-    self.stop = function() {
-      timeout_id && clearTimeout( timeout_id );
-      timeout_id = undefined;
+    $.fn[str_hashchange] = function(fn) {
+        return fn ? this.bind(str_hashchange, fn) : this.trigger(str_hashchange);
     };
-    
-    // This polling loop checks every $.fn.hashchange.delay milliseconds to see
-    // if location.hash has changed, and triggers the 'hashchange' event on
-    // window when necessary.
-    function poll() {
-      var hash = get_fragment(),
-        history_hash = history_get( last_hash );
-      
-      if ( hash !== last_hash ) {
-        history_set( last_hash = hash, history_hash );
-        
-        $(window).trigger( str_hashchange );
-        
-      } else if ( history_hash !== last_hash ) {
-        location.href = location.href.replace( /#.*/, '' ) + history_hash;
-      }
-      
-      timeout_id = setTimeout( poll, $.fn[ str_hashchange ].delay );
-    };
-    
-    // vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-    // vvvvvvvvvvvvvvvvvvv REMOVE IF NOT SUPPORTING IE6/7/8 vvvvvvvvvvvvvvvvvvv
-    // vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-    $.browser.msie && !supports_onhashchange && (function(){
-      // Not only do IE6/7 need the "magical" Iframe treatment, but so does IE8
-      // when running in "IE7 compatibility" mode.
-      
-      var iframe,
-        iframe_src;
-      
-      // When the event is bound and polling starts in IE 6/7, create a hidden
-      // Iframe for history handling.
-      self.start = function(){
-        if ( !iframe ) {
-          iframe_src = $.fn[ str_hashchange ].src;
-          iframe_src = iframe_src && iframe_src + get_fragment();
-          
-          // Create hidden Iframe. Attempt to make Iframe as hidden as possible
-          // by using techniques from http://www.paciellogroup.com/blog/?p=604.
-          iframe = $('<iframe tabindex="-1" title="empty"/>').hide()
-            
-            // When Iframe has completely loaded, initialize the history and
-            // start polling.
-            .one( 'load', function(){
-              iframe_src || history_set( get_fragment() );
-              poll();
-            })
-            
-            // Load Iframe src if specified, otherwise nothing.
-            .attr( 'src', iframe_src || 'javascript:0' )
-            
-            // Append Iframe after the end of the body to prevent unnecessary
-            // initial page scrolling (yes, this works).
-            .insertAfter( 'body' )[0].contentWindow;
-          
-          // Whenever `document.title` changes, update the Iframe's title to
-          // prettify the back/next history menu entries. Since IE sometimes
-          // errors with "Unspecified error" the very first time this is set
-          // (yes, very useful) wrap this with a try/catch block.
-          doc.onpropertychange = function(){
-            try {
-              if ( event.propertyName === 'title' ) {
-                iframe.document.title = doc.title;
-              }
-            } catch(e) {}
-          };
-          
+    $.fn[str_hashchange].delay = 50;
+    special[str_hashchange] = $.extend(special[str_hashchange], {
+        setup: function() {
+            if (supports_onhashchange) {
+                return false;
+            }
+            $(fake_onhashchange.start);
+        },
+        teardown: function() {
+            if (supports_onhashchange) {
+                return false;
+            }
+            $(fake_onhashchange.stop);
         }
-      };
-      
-      // Override the "stop" method since an IE6/7 Iframe was created. Even
-      // if there are no longer any bound event handlers, the polling loop
-      // is still necessary for back/next to work at all!
-      self.stop = fn_retval;
-      
-      // Get history by looking at the hidden Iframe's location.hash.
-      history_get = function() {
-        return get_fragment( iframe.location.href );
-      };
-      
-      // Set a new history item by opening and then closing the Iframe
-      // document, *then* setting its location.hash. If document.domain has
-      // been set, update that as well.
-      history_set = function( hash, history_hash ) {
-        var iframe_doc = iframe.document,
-          domain = $.fn[ str_hashchange ].domain;
-        
-        if ( hash !== history_hash ) {
-          // Update Iframe with any initial `document.title` that might be set.
-          iframe_doc.title = doc.title;
-          
-          // Opening the Iframe's document after it has been closed is what
-          // actually adds a history entry.
-          iframe_doc.open();
-          
-          // Set document.domain for the Iframe document as well, if necessary.
-          domain && iframe_doc.write( '<script>document.domain="' + domain + '"</script>' );
-          
-          iframe_doc.close();
-          
-          // Update the Iframe's hash, for great justice.
-          iframe.location.hash = hash;
-        }
-      };
-      
+    });
+    fake_onhashchange = (function() {
+        var self = {},
+        timeout_id, last_hash = get_fragment(),
+        fn_retval = function(val) {
+            return val;
+        },
+        history_set = fn_retval,
+        history_get = fn_retval;
+        self.start = function() {
+            timeout_id || poll();
+        };
+        self.stop = function() {
+            timeout_id && clearTimeout(timeout_id);
+            timeout_id = undefined;
+        };
+        function poll() {
+            var hash = get_fragment(),
+            history_hash = history_get(last_hash);
+            if (hash !== last_hash) {
+                history_set(last_hash = hash, history_hash);
+                $(window).trigger(str_hashchange);
+            } else if (history_hash !== last_hash) {
+                location.href = location.href.replace(/#.*/, '') + history_hash;
+            }
+            timeout_id = setTimeout(poll, $.fn[str_hashchange].delay);
+        };
+        $.browser.msie && !supports_onhashchange && (function() {
+            var iframe, iframe_src;
+            self.start = function() {
+                if (!iframe) {
+                    iframe_src = $.fn[str_hashchange].src;
+                    iframe_src = iframe_src && iframe_src + get_fragment();
+                    iframe = $('<iframe tabindex="-1" title="empty"/>').hide().one('load',
+                    function() {
+                        iframe_src || history_set(get_fragment());
+                        poll();
+                    }).attr('src', iframe_src || 'javascript:0').insertAfter('body')[0].contentWindow;
+                    doc.onpropertychange = function() {
+                        try {
+                            if (event.propertyName === 'title') {
+                                iframe.document.title = doc.title;
+                            }
+                        } catch(e) {}
+                    };
+                }
+            };
+            self.stop = fn_retval;
+            history_get = function() {
+                return get_fragment(iframe.location.href);
+            };
+            history_set = function(hash, history_hash) {
+                var iframe_doc = iframe.document,
+                domain = $.fn[str_hashchange].domain;
+                if (hash !== history_hash) {
+                    iframe_doc.title = doc.title;
+                    iframe_doc.open();
+                    domain && iframe_doc.write('<script>document.domain="' + domain + '"</script>');
+                    iframe_doc.close();
+                    iframe.location.hash = hash;
+                }
+            };
+        })();
+        return self;
     })();
-    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    // ^^^^^^^^^^^^^^^^^^^ REMOVE IF NOT SUPPORTING IE6/7/8 ^^^^^^^^^^^^^^^^^^^
-    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    
-    return self;
-  })();
-  
-})(jQuery,this);
+})(jQuery, this);
 
 
 /* 
@@ -809,6 +819,10 @@ var UIX_GUID = UIX_GUID || (function() {
  * Get all attributes of an element using jQuery
  *
  * @return {array}                        - Returns a new array.
+ * @usage:
+ 
+	$( '#demo' ).attr();  // { "data-a": "1", "id": "b" }
+
  *************************************
  */
 ( function( old ) {
@@ -978,99 +992,6 @@ var UIX_GUID = UIX_GUID || (function() {
 } ) ( jQuery );
 
 
-
-/* 
- *************************************
- * Parallax Effect
- *
- * @param  {Number} speed     - The speed of movement between elements.
- * @param  {JSON} bg          - Specify the background display. Default value: { enable: true, xPos: '50%' }
- * @return {Void}
- *************************************
- */
-
-( function ( $ ) {
-    $.fn.UixParallax = function( options ) {
- 
-        // This is the easiest way to have default options.
-        var settings = $.extend({
-			speed    : 0.25,
-			bg       : { enable: true, xPos: '50%' }
-        }, options );
- 
-        this.each( function() {
-			
-			var bgEff      = settings.bg,
-				$this      = $( this ),
-				bgXpos     = '50%',
-				speed      = -parseFloat( settings.speed );
-			
-			
-			
-			if ( bgEff ) {
-				bgEff      = settings.bg.enable;
-				bgXpos     = settings.bg.xPos;
-			}
-			
-	
-			//Prohibit transition delay
-			$this.css( {
-				'transition': 'none'
-			} );
-
-		    $( window ).on( 'scroll touchmove', function( e ){
-				scrollUpdate();
-			});
-			
-			
-			//Initialize the position of the background
-			if ( bgEff ) {
-				//background parallax
-				TweenMax.set( $this, {
-					backgroundPosition: bgXpos + ' ' + (-$this.offset().top*speed) + 'px'
-				});
-			} else {
-				//element parallax
-				TweenMax.set( $this, {
-					y: 0
-				});	
-			}
-			
-			
-			function scrollUpdate() {
-				var scrolled = $( window ).scrollTop(),
-					st       = $this.offset().top - scrolled;
-				
-
-				
-				if ( bgEff ) {
-					//background parallax
-					TweenMax.set( $this, {
-						backgroundPosition: bgXpos + ' ' + ( 0 - ( st * speed ) ) + 'px'
-					});
-				} else {
-					//element parallax
-					TweenMax.set( $this, {
-						y: ( 0 - ( scrolled * speed ) )
-					});
-					
-					
-				}
-				
-			}
-
-			
-			
-		});
- 
-    };
- 
-}( jQuery ));
-
-
-
-
-
 /* 
  *************************************
  * <!-- Body And Header -->
@@ -1080,7 +1001,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.BODY_AND_HEADER               = APP.BODY_AND_HEADER || {};
-	APP.BODY_AND_HEADER.version       = '0.0.2';
+	APP.BODY_AND_HEADER.version       = '0.0.3';
     APP.BODY_AND_HEADER.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -1109,19 +1030,19 @@ APP = ( function ( APP, $, window, document ) {
 			}
 		});
 		function headerInit( w ) {
+			
+			var $headerPlaceholder = $( '.uix-header__placeholder.js-uix-header__placeholder-autoheight' );
+			
 			if ( w > 768 ) {
-				
-				$( '.uix-header__placeholder.uix-header__placeholder--auto-height' ).css( 'height', $( '.uix-header__container' ).outerHeight() + 'px' ); 
-				
+				$headerPlaceholder.css( 'height', $( '.uix-header__container' ).outerHeight() + 'px' ); 
 				$( 'body' ).removeClass( 'is-mobile' );
 			} else {
+				$headerPlaceholder.css( 'height', 0 ); 
 				$( 'body' ).addClass( 'is-mobile' );
 			}
 		}
 		
 		
-
-
 		
 		//-------- Sticky header area
 		//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
@@ -1402,9 +1323,8 @@ APP = ( function ( APP, $, window, document ) {
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
-
     APP.MEGAMENU               = APP.MEGAMENU || {};
-	APP.MEGAMENU.version       = '0.0.1';
+	APP.MEGAMENU.version       = '0.0.3';
     APP.MEGAMENU.pageLoaded    = function() {
 
 		var $window      = $( window ),
@@ -1427,29 +1347,10 @@ APP = ( function ( APP, $, window, document ) {
 				// Do stuff here
 				megaMenuInit( windowWidth );
 		
-
 			}
 		});
 		
 		
-	
-		// For the absolute coordinates of any jquery element 
-		function getAbsoluteCoordinates( $element ) {
-			var windowWidth     = window.innerWidth,
-			    leftPos         = null;
-
-			
-			if ( ! $( 'body' ).hasClass( 'rtl' ) ) {
-				leftPos = ( $element.offset().left == 0 ) ? $element.parent().offset().left : $element.offset().left;
-			} else {
-				
-				//(window.innerWidth - ($whatever.offset().left + $whatever.outerWidth()));
-				leftPos = ( $element.offset().left == 0 ) ? ( windowWidth - ( $element.parent().offset().left + $element.parent().outerWidth() ) ) : ( windowWidth - ( $element.offset().left + $element.outerWidth() ) );
-			}
-				
-
-			return leftPos;
-		}	
 
 		
 		// Initialize mega menu
@@ -1461,9 +1362,11 @@ APP = ( function ( APP, $, window, document ) {
 			    perDefaultW  = 270; //Default width of each column
 
 			
-			//Basic Container
+			//New XL container for Bootstrap 4.x
 			if ( w > 1430 ) maxWidth = 1278;
-			if ( w > 1600 ) maxWidth = 1410;
+			
+			//Full width container
+			maxWidth = windowWidth;
 			
 			
 			
@@ -1494,14 +1397,14 @@ APP = ( function ( APP, $, window, document ) {
 					// Detecting if the right or left of the div is touching the browser window edge.
 					if ( col_total > 0 ) {
 
-						root_li_left     = getAbsoluteCoordinates( mega_div );
+						root_li_left = UixCssProperty.getAbsoluteCoordinates( mega_div[0] ).left;
 						
 						
 						//Determine the mega menu wrapper within document width, in order to limit the width of each column for mega menu
 						if ( maxWidth > w ) maxWidth = w;
 						
 						
-						if ( mega_div_w > maxWidth ) {
+						if ( parseFloat(mega_div_w + 20) > maxWidth ) {
 
 							mega_div_w       = maxWidth;
 							mega_single_w    = maxWidth/col_total - 2.888;
@@ -1691,6 +1594,8 @@ APP = ( function ( APP, $, window, document ) {
 
 					e.preventDefault();
 
+					
+					//Its value is not a boolean but a string
 					var expanded = ( $( this ).attr( 'aria-expanded' ) == 'true' ) ? false : true;
 
 					if ( expanded ) {
@@ -1901,16 +1806,6 @@ APP = ( function ( APP, $, window, document ) {
 		});
 		
 
-		//-------- Prevent to <a> of page transitions
-		$( 'a' ).each( function() {
-			var attr = $( this ).attr( 'href' );
-			if ( typeof attr !== typeof undefined && attr !== false ) {
-				if  ( $( this ).attr( 'href' ).indexOf( '/#' ) >= 0   || $( this ).attr( 'href' ) == '#' ) {
-					$( this ).attr( 'data-normal', 1 ); 
-				 }	
-			}
-
-		});
 	
 		
     };
@@ -2072,7 +1967,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.VIDEOS               = APP.VIDEOS || {};
-	APP.VIDEOS.version       = '0.0.8';
+	APP.VIDEOS.version       = '0.0.9';
     APP.VIDEOS.documentReady = function( $ ) {
 
 		var $window      = $( window ),
@@ -2158,91 +2053,94 @@ APP = ( function ( APP, $, window, document ) {
 				});
 			}
 			
-			var myPlayer = videojs( curVideoID, {
-					                  width     : dataW,
-					                  height    : dataH,
-				                      loop      : dataLoop,
-				                      autoplay   : dataAuto
-					
-									});
 			
+			var myPlayer = videojs( curVideoID, 
+			   {
+				  width     : dataW,
+				  height    : dataH,
+				  loop      : dataLoop,
+				  autoplay  : dataAuto
+				}, 
+			   function onPlayerReady() {
+				
 			
+				    var initVideo = function( obj ) {
+						//Get Video Dimensions
+						var curW    = obj.videoWidth(),
+							curH    = obj.videoHeight(),
+							newW    = curW,
+							newH    = curH;
 
-			myPlayer.ready(function() {
-				
-				/* ---------  Video initialize */
-				myPlayer.on( 'loadedmetadata', function() {
+						newW = videoWrapperW;
 
-					//Get Video Dimensions
-					var curW    = this.videoWidth(),
-						curH    = this.videoHeight(),
-						newW    = curW,
-						newH    = curH;
-					
-					newW = videoWrapperW;
+						//Scaled/Proportional Content 
+						newH = curH*(newW/curW);
 
-					//Scaled/Proportional Content 
-					newH = curH*(newW/curW);
-					
-				
-					if ( !isNaN( newW ) && !isNaN( newH ) )  {
-						myPlayer.height( newH );		
-						myPlayer.width( newW );		
+
+						if ( !isNaN( newW ) && !isNaN( newH ) )  {
+							obj.height( newH );		
+							obj.width( newW );		
+						}
+
+
+						//Show this video wrapper
+						$this.css( 'visibility', 'visible' );
+
+						//Hide loading effect
+						$this.find( '.vjs-loading-spinner, .vjs-big-play-button' ).hide();		
 					}
 
-					
-					//Show this video wrapper
-					$this.css( 'visibility', 'visible' );
-					
 
-
-					//Hide loading effect
-					$this.find( '.vjs-loading-spinner, .vjs-big-play-button' ).hide();
-
-				});		
-			
-
-
-			
+					initVideo( this );
 				
-				/* ---------  Set, tell the player it's in fullscreen  */
-				if ( dataAuto ) {
+					/* ---------  Video initialize */
+					this.on( 'loadedmetadata', function() {
 
-					myPlayer.muted( true ); //Fix an error of Video auto play is not working in browser
-					myPlayer.play();
+						initVideo( this );
 
-				}
+					});
 
-				/* ---------  Disable control bar play button click */
-				if ( !dataControls ) {
-					myPlayer.controls( false );
-				}
 				
-				
-				/* ---------  Determine if the video is auto played from mobile devices  */
-				var autoPlayOK = false;
+					/* ---------  Set, tell the player it's in fullscreen  */
+					if ( dataAuto ) {
 
-				myPlayer.on( 'timeupdate', function() {
+						this.muted( true ); //Fix an error of Video auto play is not working in browser
+						this.play();
 
-					var duration = this.duration();
-					if ( duration > 0 ) {
-						autoPlayOK = true;
-						if ( this.currentTime() > 0 ) {
+					}
+
+					/* ---------  Disable control bar play button click */
+					if ( !dataControls ) {
+						this.controls( false );
+					}
+
+
+					/* ---------  Determine if the video is auto played from mobile devices  */
+					var autoPlayOK = false;
+
+					this.on( 'timeupdate', function() {
+
+						var duration = this.duration();
+						if ( duration > 0 ) {
 							autoPlayOK = true;
-							this.off( 'timeupdate' );
+							if ( this.currentTime() > 0 ) {
+								autoPlayOK = true;
+								this.off( 'timeupdate' );
 
-							//Hide cover and play buttons when the video automatically played
-							$( '#' + coverPlayBtnID ).hide();
-						} 
+								//Hide cover and play buttons when the video automatically played
+								$( '#' + coverPlayBtnID ).hide();
+							} 
 
-					}
+						}
 
-				});
+					});
 				
-
-
-
-			});
+				
+				
+			    });
+			
+			
+			
 			
 		});
 		
@@ -2442,97 +2340,105 @@ APP = ( function ( APP, $, window, document ) {
 
 
 			//----- Embed local video
-			var myPlayer     = videojs( vid, {
-									  width     : 1,
-									  height    : 1,
-									  autoplay  : true,
-									  loop      : true
-									});
+			var myPlayer = videojs( vid, 
+			   {
+				  width     : 1,
+				  height    : 1,
+				  autoplay  : true,
+				  loop      : true
+				}, 
+			   function onPlayerReady() {
+				
+			
+				    var initVideo = function( obj ) {
+						//Get Video Dimensions
+						var curW    = obj.videoWidth(),
+							curH    = obj.videoHeight(),
+							newW    = curW,
+							newH    = curH;
+
+						//Resise modal
+						if ( curH > newMaxH ) {
+							newH = newMaxH;
+
+							//Scaled/Proportional Content 
+							newW = curW*(newH/curH);
 
 
-			myPlayer.ready(function() {
+						}
 
 
-				/* ---------  Video Modal initialize */
-				myPlayer.on( 'loadedmetadata', function() {
+						if ( newW > newMaxW ) {
+							newW = newMaxW;
 
-					//Get Video Dimensions
-					var curW    = this.videoWidth(),
-						curH    = this.videoHeight(),
-						newW    = curW,
-						newH    = curH;
-
-					//Resise modal
-					if ( curH > newMaxH ) {
-						newH = newMaxH;
-
-						//Scaled/Proportional Content 
-						newW = curW*(newH/curH);
+							//Scaled/Proportional Content 
+							newH = curH*(newW/curW);
+						}	
 
 
+						obj.height( newH );		
+						obj.width( newW );
+
+
+						//In order to allow CSS to support video centering
+						$vContainer.find( ' > div.video-js' ).css({
+							'width' : newW + 'px'
+						});			
+
+
+						//Vertically center the video area
+						var mt = parseFloat( windowHeight - newH )/2 - 50;
+						$vContainer.css({
+							'transform' : 'translateY('+ mt +'px)'
+						});			
+
+						//Display the wrapper of video
+						displayVC();	
 					}
 
 
-					if ( newW > newMaxW ) {
-						newW = newMaxW;
 
-						//Scaled/Proportional Content 
-						newH = curH*(newW/curW);
-					}	
+					initVideo( this );
+				
+					/* ---------  Video Modal initialize */
+					this.on( 'loadedmetadata', function() {
 
+						initVideo( this );
 
-					myPlayer.height( newH );		
-					myPlayer.width( newW );
-
-
-					//In order to allow CSS to support video centering
-					$vContainer.find( ' > div.video-js' ).css({
-						'width' : newW + 'px'
-					});			
-					
-					
-					//Vertically center the video area
-					var mt = parseFloat( windowHeight - newH )/2 - 50;
-					$vContainer.css({
-						'transform' : 'translateY('+ mt +'px)'
-					});			
-					
-					//Display the wrapper of video
-					displayVC();
-					
-					//If a player instance has already been created for this variable.
-					$vContainer.data( 'video-player-init', 1 );
-
-					
-				});
-
-				/* ---------  Set, tell the player it's in fullscreen  */
-				//myPlayer.exitFullscreen();
-				//myPlayer.requestFullscreen();
-				myPlayer.play();
-
-				/* ---------  Disable control bar play button click */
-				//myPlayer.controls( false );
-
-				/* ---------  Display video playback progress  */
-				myPlayer.on( 'timeupdate', function() {
-
-					var duration = this.duration(),
-					progressAmount = '0%';
-					if (duration > 0) {
-						progressAmount = ((this.currentTime() / duration) * 100) + "%";
-					}
-
-					//console.log( progressAmount );
-				});
-
-				/* ---------  Callback for when a video has ended */
-				myPlayer.on( 'ended', function() {
-					//console.log( 'video is done!' );
-				});
+						//If a player instance has already been created for this variable.
+						$vContainer.data( 'video-player-init', 1 );
 
 
-			});
+					});
+
+					/* ---------  Set, tell the player it's in fullscreen  */
+					//this.exitFullscreen();
+					//this.requestFullscreen();
+					this.play();
+
+					/* ---------  Disable control bar play button click */
+					//this.controls( false );
+
+					/* ---------  Display video playback progress  */
+					this.on( 'timeupdate', function() {
+
+						var duration = this.duration(),
+						progressAmount = '0%';
+						if (duration > 0) {
+							progressAmount = ((this.currentTime() / duration) * 100) + "%";
+						}
+
+						//console.log( progressAmount );
+					});
+
+					/* ---------  Callback for when a video has ended */
+					this.on( 'ended', function() {
+						//console.log( 'video is done!' );
+					});
+				
+				
+			    });
+			
 
 			
 			/* ---------  Display the wrapper of video  */
@@ -2545,7 +2451,7 @@ APP = ( function ( APP, $, window, document ) {
 			$( document ).on( 'click', '.uix-modal-box .uix-modal-box__close, .uix-modal-mask:not(.js-uix-disabled)', function() {
 
 				myPlayer.ready(function() {
-					myPlayer.pause();
+					this.pause();
 					
 				});				
 
@@ -5094,6 +5000,1050 @@ THREE.CSS3DRenderer = function () {
 	};
 
 };
+
+/**
+ * @author qiao / https://github.com/qiao
+ * @author mrdoob / http://mrdoob.com
+ * @author alteredq / http://alteredqualia.com/
+ * @author WestLangley / http://github.com/WestLangley
+ * @author erich666 / http://erichaines.com
+ */
+
+// This set of controls performs orbiting, dollying (zooming), and panning.
+// Unlike TrackballControls, it maintains the "up" direction object.up (+Y by default).
+//
+//    Orbit - left mouse / touch: one-finger move
+//    Zoom - middle mouse, or mousewheel / touch: two-finger spread or squish
+//    Pan - right mouse, or arrow keys / touch: two-finger move
+
+THREE.OrbitControls = function ( object, domElement ) {
+
+	this.object = object;
+
+	this.domElement = ( domElement !== undefined ) ? domElement : document;
+
+	// Set to false to disable this control
+	this.enabled = true;
+
+	// "target" sets the location of focus, where the object orbits around
+	this.target = new THREE.Vector3();
+
+	// How far you can dolly in and out ( PerspectiveCamera only )
+	this.minDistance = 0;
+	this.maxDistance = Infinity;
+
+	// How far you can zoom in and out ( OrthographicCamera only )
+	this.minZoom = 0;
+	this.maxZoom = Infinity;
+
+	// How far you can orbit vertically, upper and lower limits.
+	// Range is 0 to Math.PI radians.
+	this.minPolarAngle = 0; // radians
+	this.maxPolarAngle = Math.PI; // radians
+
+	// How far you can orbit horizontally, upper and lower limits.
+	// If set, must be a sub-interval of the interval [ - Math.PI, Math.PI ].
+	this.minAzimuthAngle = - Infinity; // radians
+	this.maxAzimuthAngle = Infinity; // radians
+
+	// Set to true to enable damping (inertia)
+	// If damping is enabled, you must call controls.update() in your animation loop
+	this.enableDamping = false;
+	this.dampingFactor = 0.25;
+
+	// This option actually enables dollying in and out; left as "zoom" for backwards compatibility.
+	// Set to false to disable zooming
+	this.enableZoom = true;
+	this.zoomSpeed = 1.0;
+
+	// Set to false to disable rotating
+	this.enableRotate = true;
+	this.rotateSpeed = 1.0;
+
+	// Set to false to disable panning
+	this.enablePan = true;
+	this.panSpeed = 1.0;
+	this.screenSpacePanning = false; // if true, pan in screen-space
+	this.keyPanSpeed = 7.0;	// pixels moved per arrow key push
+
+	// Set to true to automatically rotate around the target
+	// If auto-rotate is enabled, you must call controls.update() in your animation loop
+	this.autoRotate = false;
+	this.autoRotateSpeed = 2.0; // 30 seconds per round when fps is 60
+
+	// Set to false to disable use of the keys
+	this.enableKeys = true;
+
+	// The four arrow keys
+	this.keys = { LEFT: 37, UP: 38, RIGHT: 39, BOTTOM: 40 };
+
+	// Mouse buttons
+	this.mouseButtons = { ORBIT: THREE.MOUSE.LEFT, ZOOM: THREE.MOUSE.MIDDLE, PAN: THREE.MOUSE.RIGHT };
+
+	// for reset
+	this.target0 = this.target.clone();
+	this.position0 = this.object.position.clone();
+	this.zoom0 = this.object.zoom;
+
+	//
+	// public methods
+	//
+
+	this.getPolarAngle = function () {
+
+		return spherical.phi;
+
+	};
+
+	this.getAzimuthalAngle = function () {
+
+		return spherical.theta;
+
+	};
+
+	this.saveState = function () {
+
+		scope.target0.copy( scope.target );
+		scope.position0.copy( scope.object.position );
+		scope.zoom0 = scope.object.zoom;
+
+	};
+
+	this.reset = function () {
+
+		scope.target.copy( scope.target0 );
+		scope.object.position.copy( scope.position0 );
+		scope.object.zoom = scope.zoom0;
+
+		scope.object.updateProjectionMatrix();
+		scope.dispatchEvent( changeEvent );
+
+		scope.update();
+
+		state = STATE.NONE;
+
+	};
+
+	// this method is exposed, but perhaps it would be better if we can make it private...
+	this.update = function () {
+
+		var offset = new THREE.Vector3();
+
+		// so camera.up is the orbit axis
+		var quat = new THREE.Quaternion().setFromUnitVectors( object.up, new THREE.Vector3( 0, 1, 0 ) );
+		var quatInverse = quat.clone().inverse();
+
+		var lastPosition = new THREE.Vector3();
+		var lastQuaternion = new THREE.Quaternion();
+
+		return function update() {
+
+			var position = scope.object.position;
+
+			offset.copy( position ).sub( scope.target );
+
+			// rotate offset to "y-axis-is-up" space
+			offset.applyQuaternion( quat );
+
+			// angle from z-axis around y-axis
+			spherical.setFromVector3( offset );
+
+			if ( scope.autoRotate && state === STATE.NONE ) {
+
+				rotateLeft( getAutoRotationAngle() );
+
+			}
+
+			spherical.theta += sphericalDelta.theta;
+			spherical.phi += sphericalDelta.phi;
+
+			// restrict theta to be between desired limits
+			spherical.theta = Math.max( scope.minAzimuthAngle, Math.min( scope.maxAzimuthAngle, spherical.theta ) );
+
+			// restrict phi to be between desired limits
+			spherical.phi = Math.max( scope.minPolarAngle, Math.min( scope.maxPolarAngle, spherical.phi ) );
+
+			spherical.makeSafe();
+
+
+			spherical.radius *= scale;
+
+			// restrict radius to be between desired limits
+			spherical.radius = Math.max( scope.minDistance, Math.min( scope.maxDistance, spherical.radius ) );
+
+			// move target to panned location
+			scope.target.add( panOffset );
+
+			offset.setFromSpherical( spherical );
+
+			// rotate offset back to "camera-up-vector-is-up" space
+			offset.applyQuaternion( quatInverse );
+
+			position.copy( scope.target ).add( offset );
+
+			scope.object.lookAt( scope.target );
+
+			if ( scope.enableDamping === true ) {
+
+				sphericalDelta.theta *= ( 1 - scope.dampingFactor );
+				sphericalDelta.phi *= ( 1 - scope.dampingFactor );
+
+				panOffset.multiplyScalar( 1 - scope.dampingFactor );
+
+			} else {
+
+				sphericalDelta.set( 0, 0, 0 );
+
+				panOffset.set( 0, 0, 0 );
+
+			}
+
+			scale = 1;
+
+			// update condition is:
+			// min(camera displacement, camera rotation in radians)^2 > EPS
+			// using small-angle approximation cos(x/2) = 1 - x^2 / 8
+
+			if ( zoomChanged ||
+				lastPosition.distanceToSquared( scope.object.position ) > EPS ||
+				8 * ( 1 - lastQuaternion.dot( scope.object.quaternion ) ) > EPS ) {
+
+				scope.dispatchEvent( changeEvent );
+
+				lastPosition.copy( scope.object.position );
+				lastQuaternion.copy( scope.object.quaternion );
+				zoomChanged = false;
+
+				return true;
+
+			}
+
+			return false;
+
+		};
+
+	}();
+
+	this.dispose = function () {
+
+		scope.domElement.removeEventListener( 'contextmenu', onContextMenu, false );
+		scope.domElement.removeEventListener( 'mousedown', onMouseDown, false );
+		scope.domElement.removeEventListener( 'wheel', onMouseWheel, false );
+
+		scope.domElement.removeEventListener( 'touchstart', onTouchStart, false );
+		scope.domElement.removeEventListener( 'touchend', onTouchEnd, false );
+		scope.domElement.removeEventListener( 'touchmove', onTouchMove, false );
+
+		document.removeEventListener( 'mousemove', onMouseMove, false );
+		document.removeEventListener( 'mouseup', onMouseUp, false );
+
+		window.removeEventListener( 'keydown', onKeyDown, false );
+
+		//scope.dispatchEvent( { type: 'dispose' } ); // should this be added here?
+
+	};
+
+	//
+	// internals
+	//
+
+	var scope = this;
+
+	var changeEvent = { type: 'change' };
+	var startEvent = { type: 'start' };
+	var endEvent = { type: 'end' };
+
+	var STATE = { NONE: - 1, ROTATE: 0, DOLLY: 1, PAN: 2, TOUCH_ROTATE: 3, TOUCH_DOLLY_PAN: 4 };
+
+	var state = STATE.NONE;
+
+	var EPS = 0.000001;
+
+	// current position in spherical coordinates
+	var spherical = new THREE.Spherical();
+	var sphericalDelta = new THREE.Spherical();
+
+	var scale = 1;
+	var panOffset = new THREE.Vector3();
+	var zoomChanged = false;
+
+	var rotateStart = new THREE.Vector2();
+	var rotateEnd = new THREE.Vector2();
+	var rotateDelta = new THREE.Vector2();
+
+	var panStart = new THREE.Vector2();
+	var panEnd = new THREE.Vector2();
+	var panDelta = new THREE.Vector2();
+
+	var dollyStart = new THREE.Vector2();
+	var dollyEnd = new THREE.Vector2();
+	var dollyDelta = new THREE.Vector2();
+
+	function getAutoRotationAngle() {
+
+		return 2 * Math.PI / 60 / 60 * scope.autoRotateSpeed;
+
+	}
+
+	function getZoomScale() {
+
+		return Math.pow( 0.95, scope.zoomSpeed );
+
+	}
+
+	function rotateLeft( angle ) {
+
+		sphericalDelta.theta -= angle;
+
+	}
+
+	function rotateUp( angle ) {
+
+		sphericalDelta.phi -= angle;
+
+	}
+
+	var panLeft = function () {
+
+		var v = new THREE.Vector3();
+
+		return function panLeft( distance, objectMatrix ) {
+
+			v.setFromMatrixColumn( objectMatrix, 0 ); // get X column of objectMatrix
+			v.multiplyScalar( - distance );
+
+			panOffset.add( v );
+
+		};
+
+	}();
+
+	var panUp = function () {
+
+		var v = new THREE.Vector3();
+
+		return function panUp( distance, objectMatrix ) {
+
+			if ( scope.screenSpacePanning === true ) {
+
+				v.setFromMatrixColumn( objectMatrix, 1 );
+
+			} else {
+
+				v.setFromMatrixColumn( objectMatrix, 0 );
+				v.crossVectors( scope.object.up, v );
+
+			}
+
+			v.multiplyScalar( distance );
+
+			panOffset.add( v );
+
+		};
+
+	}();
+
+	// deltaX and deltaY are in pixels; right and down are positive
+	var pan = function () {
+
+		var offset = new THREE.Vector3();
+
+		return function pan( deltaX, deltaY ) {
+
+			var element = scope.domElement === document ? scope.domElement.body : scope.domElement;
+
+			if ( scope.object.isPerspectiveCamera ) {
+
+				// perspective
+				var position = scope.object.position;
+				offset.copy( position ).sub( scope.target );
+				var targetDistance = offset.length();
+
+				// half of the fov is center to top of screen
+				targetDistance *= Math.tan( ( scope.object.fov / 2 ) * Math.PI / 180.0 );
+
+				// we use only clientHeight here so aspect ratio does not distort speed
+				panLeft( 2 * deltaX * targetDistance / element.clientHeight, scope.object.matrix );
+				panUp( 2 * deltaY * targetDistance / element.clientHeight, scope.object.matrix );
+
+			} else if ( scope.object.isOrthographicCamera ) {
+
+				// orthographic
+				panLeft( deltaX * ( scope.object.right - scope.object.left ) / scope.object.zoom / element.clientWidth, scope.object.matrix );
+				panUp( deltaY * ( scope.object.top - scope.object.bottom ) / scope.object.zoom / element.clientHeight, scope.object.matrix );
+
+			} else {
+
+				// camera neither orthographic nor perspective
+				console.warn( 'WARNING: OrbitControls.js encountered an unknown camera type - pan disabled.' );
+				scope.enablePan = false;
+
+			}
+
+		};
+
+	}();
+
+	function dollyIn( dollyScale ) {
+
+		if ( scope.object.isPerspectiveCamera ) {
+
+			scale /= dollyScale;
+
+		} else if ( scope.object.isOrthographicCamera ) {
+
+			scope.object.zoom = Math.max( scope.minZoom, Math.min( scope.maxZoom, scope.object.zoom * dollyScale ) );
+			scope.object.updateProjectionMatrix();
+			zoomChanged = true;
+
+		} else {
+
+			console.warn( 'WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled.' );
+			scope.enableZoom = false;
+
+		}
+
+	}
+
+	function dollyOut( dollyScale ) {
+
+		if ( scope.object.isPerspectiveCamera ) {
+
+			scale *= dollyScale;
+
+		} else if ( scope.object.isOrthographicCamera ) {
+
+			scope.object.zoom = Math.max( scope.minZoom, Math.min( scope.maxZoom, scope.object.zoom / dollyScale ) );
+			scope.object.updateProjectionMatrix();
+			zoomChanged = true;
+
+		} else {
+
+			console.warn( 'WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled.' );
+			scope.enableZoom = false;
+
+		}
+
+	}
+
+	//
+	// event callbacks - update the object state
+	//
+
+	function handleMouseDownRotate( event ) {
+
+		//console.log( 'handleMouseDownRotate' );
+
+		rotateStart.set( event.clientX, event.clientY );
+
+	}
+
+	function handleMouseDownDolly( event ) {
+
+		//console.log( 'handleMouseDownDolly' );
+
+		dollyStart.set( event.clientX, event.clientY );
+
+	}
+
+	function handleMouseDownPan( event ) {
+
+		//console.log( 'handleMouseDownPan' );
+
+		panStart.set( event.clientX, event.clientY );
+
+	}
+
+	function handleMouseMoveRotate( event ) {
+
+		//console.log( 'handleMouseMoveRotate' );
+
+		rotateEnd.set( event.clientX, event.clientY );
+
+		rotateDelta.subVectors( rotateEnd, rotateStart ).multiplyScalar( scope.rotateSpeed );
+
+		var element = scope.domElement === document ? scope.domElement.body : scope.domElement;
+
+		// rotating across whole screen goes 360 degrees around
+		rotateLeft( 2 * Math.PI * rotateDelta.x / element.clientWidth );
+
+		// rotating up and down along whole screen attempts to go 360, but limited to 180
+		rotateUp( 2 * Math.PI * rotateDelta.y / element.clientHeight );
+
+		rotateStart.copy( rotateEnd );
+
+		scope.update();
+
+	}
+
+	function handleMouseMoveDolly( event ) {
+
+		//console.log( 'handleMouseMoveDolly' );
+
+		dollyEnd.set( event.clientX, event.clientY );
+
+		dollyDelta.subVectors( dollyEnd, dollyStart );
+
+		if ( dollyDelta.y > 0 ) {
+
+			dollyIn( getZoomScale() );
+
+		} else if ( dollyDelta.y < 0 ) {
+
+			dollyOut( getZoomScale() );
+
+		}
+
+		dollyStart.copy( dollyEnd );
+
+		scope.update();
+
+	}
+
+	function handleMouseMovePan( event ) {
+
+		//console.log( 'handleMouseMovePan' );
+
+		panEnd.set( event.clientX, event.clientY );
+
+		panDelta.subVectors( panEnd, panStart ).multiplyScalar( scope.panSpeed );
+
+		pan( panDelta.x, panDelta.y );
+
+		panStart.copy( panEnd );
+
+		scope.update();
+
+	}
+
+	function handleMouseUp( event ) {
+
+		// console.log( 'handleMouseUp' );
+
+	}
+
+	function handleMouseWheel( event ) {
+
+		// console.log( 'handleMouseWheel' );
+
+		if ( event.deltaY < 0 ) {
+
+			dollyOut( getZoomScale() );
+
+		} else if ( event.deltaY > 0 ) {
+
+			dollyIn( getZoomScale() );
+
+		}
+
+		scope.update();
+
+	}
+
+	function handleKeyDown( event ) {
+
+		//console.log( 'handleKeyDown' );
+
+		switch ( event.keyCode ) {
+
+			case scope.keys.UP:
+				pan( 0, scope.keyPanSpeed );
+				scope.update();
+				break;
+
+			case scope.keys.BOTTOM:
+				pan( 0, - scope.keyPanSpeed );
+				scope.update();
+				break;
+
+			case scope.keys.LEFT:
+				pan( scope.keyPanSpeed, 0 );
+				scope.update();
+				break;
+
+			case scope.keys.RIGHT:
+				pan( - scope.keyPanSpeed, 0 );
+				scope.update();
+				break;
+
+		}
+
+	}
+
+	function handleTouchStartRotate( event ) {
+
+		//console.log( 'handleTouchStartRotate' );
+
+		rotateStart.set( event.touches[ 0 ].pageX, event.touches[ 0 ].pageY );
+
+	}
+
+	function handleTouchStartDollyPan( event ) {
+
+		//console.log( 'handleTouchStartDollyPan' );
+
+		if ( scope.enableZoom ) {
+
+			var dx = event.touches[ 0 ].pageX - event.touches[ 1 ].pageX;
+			var dy = event.touches[ 0 ].pageY - event.touches[ 1 ].pageY;
+
+			var distance = Math.sqrt( dx * dx + dy * dy );
+
+			dollyStart.set( 0, distance );
+
+		}
+
+		if ( scope.enablePan ) {
+
+			var x = 0.5 * ( event.touches[ 0 ].pageX + event.touches[ 1 ].pageX );
+			var y = 0.5 * ( event.touches[ 0 ].pageY + event.touches[ 1 ].pageY );
+
+			panStart.set( x, y );
+
+		}
+
+	}
+
+	function handleTouchMoveRotate( event ) {
+
+		//console.log( 'handleTouchMoveRotate' );
+
+		rotateEnd.set( event.touches[ 0 ].pageX, event.touches[ 0 ].pageY );
+
+		rotateDelta.subVectors( rotateEnd, rotateStart ).multiplyScalar( scope.rotateSpeed );
+
+		var element = scope.domElement === document ? scope.domElement.body : scope.domElement;
+
+		// rotating across whole screen goes 360 degrees around
+		rotateLeft( 2 * Math.PI * rotateDelta.x / element.clientWidth );
+
+		// rotating up and down along whole screen attempts to go 360, but limited to 180
+		rotateUp( 2 * Math.PI * rotateDelta.y / element.clientHeight );
+
+		rotateStart.copy( rotateEnd );
+
+		scope.update();
+
+	}
+
+	function handleTouchMoveDollyPan( event ) {
+
+		//console.log( 'handleTouchMoveDollyPan' );
+
+		if ( scope.enableZoom ) {
+
+			var dx = event.touches[ 0 ].pageX - event.touches[ 1 ].pageX;
+			var dy = event.touches[ 0 ].pageY - event.touches[ 1 ].pageY;
+
+			var distance = Math.sqrt( dx * dx + dy * dy );
+
+			dollyEnd.set( 0, distance );
+
+			dollyDelta.set( 0, Math.pow( dollyEnd.y / dollyStart.y, scope.zoomSpeed ) );
+
+			dollyIn( dollyDelta.y );
+
+			dollyStart.copy( dollyEnd );
+
+		}
+
+		if ( scope.enablePan ) {
+
+			var x = 0.5 * ( event.touches[ 0 ].pageX + event.touches[ 1 ].pageX );
+			var y = 0.5 * ( event.touches[ 0 ].pageY + event.touches[ 1 ].pageY );
+
+			panEnd.set( x, y );
+
+			panDelta.subVectors( panEnd, panStart ).multiplyScalar( scope.panSpeed );
+
+			pan( panDelta.x, panDelta.y );
+
+			panStart.copy( panEnd );
+
+		}
+
+		scope.update();
+
+	}
+
+	function handleTouchEnd( event ) {
+
+		//console.log( 'handleTouchEnd' );
+
+	}
+
+	//
+	// event handlers - FSM: listen for events and reset state
+	//
+
+	function onMouseDown( event ) {
+
+		if ( scope.enabled === false ) return;
+
+		event.preventDefault();
+
+		switch ( event.button ) {
+
+			case scope.mouseButtons.ORBIT:
+
+				if ( scope.enableRotate === false ) return;
+
+				handleMouseDownRotate( event );
+
+				state = STATE.ROTATE;
+
+				break;
+
+			case scope.mouseButtons.ZOOM:
+
+				if ( scope.enableZoom === false ) return;
+
+				handleMouseDownDolly( event );
+
+				state = STATE.DOLLY;
+
+				break;
+
+			case scope.mouseButtons.PAN:
+
+				if ( scope.enablePan === false ) return;
+
+				handleMouseDownPan( event );
+
+				state = STATE.PAN;
+
+				break;
+
+		}
+
+		if ( state !== STATE.NONE ) {
+
+			document.addEventListener( 'mousemove', onMouseMove, false );
+			document.addEventListener( 'mouseup', onMouseUp, false );
+
+			scope.dispatchEvent( startEvent );
+
+		}
+
+	}
+
+	function onMouseMove( event ) {
+
+		if ( scope.enabled === false ) return;
+
+		event.preventDefault();
+
+		switch ( state ) {
+
+			case STATE.ROTATE:
+
+				if ( scope.enableRotate === false ) return;
+
+				handleMouseMoveRotate( event );
+
+				break;
+
+			case STATE.DOLLY:
+
+				if ( scope.enableZoom === false ) return;
+
+				handleMouseMoveDolly( event );
+
+				break;
+
+			case STATE.PAN:
+
+				if ( scope.enablePan === false ) return;
+
+				handleMouseMovePan( event );
+
+				break;
+
+		}
+
+	}
+
+	function onMouseUp( event ) {
+
+		if ( scope.enabled === false ) return;
+
+		handleMouseUp( event );
+
+		document.removeEventListener( 'mousemove', onMouseMove, false );
+		document.removeEventListener( 'mouseup', onMouseUp, false );
+
+		scope.dispatchEvent( endEvent );
+
+		state = STATE.NONE;
+
+	}
+
+	function onMouseWheel( event ) {
+
+		if ( scope.enabled === false || scope.enableZoom === false || ( state !== STATE.NONE && state !== STATE.ROTATE ) ) return;
+
+		event.preventDefault();
+		event.stopPropagation();
+
+		scope.dispatchEvent( startEvent );
+
+		handleMouseWheel( event );
+
+		scope.dispatchEvent( endEvent );
+
+	}
+
+	function onKeyDown( event ) {
+
+		if ( scope.enabled === false || scope.enableKeys === false || scope.enablePan === false ) return;
+
+		handleKeyDown( event );
+
+	}
+
+	function onTouchStart( event ) {
+
+		if ( scope.enabled === false ) return;
+
+		event.preventDefault();
+
+		switch ( event.touches.length ) {
+
+			case 1:	// one-fingered touch: rotate
+
+				if ( scope.enableRotate === false ) return;
+
+				handleTouchStartRotate( event );
+
+				state = STATE.TOUCH_ROTATE;
+
+				break;
+
+			case 2:	// two-fingered touch: dolly-pan
+
+				if ( scope.enableZoom === false && scope.enablePan === false ) return;
+
+				handleTouchStartDollyPan( event );
+
+				state = STATE.TOUCH_DOLLY_PAN;
+
+				break;
+
+			default:
+
+				state = STATE.NONE;
+
+		}
+
+		if ( state !== STATE.NONE ) {
+
+			scope.dispatchEvent( startEvent );
+
+		}
+
+	}
+
+	function onTouchMove( event ) {
+
+		if ( scope.enabled === false ) return;
+
+		event.preventDefault();
+		event.stopPropagation();
+
+		switch ( event.touches.length ) {
+
+			case 1: // one-fingered touch: rotate
+
+				if ( scope.enableRotate === false ) return;
+				if ( state !== STATE.TOUCH_ROTATE ) return; // is this needed?
+
+				handleTouchMoveRotate( event );
+
+				break;
+
+			case 2: // two-fingered touch: dolly-pan
+
+				if ( scope.enableZoom === false && scope.enablePan === false ) return;
+				if ( state !== STATE.TOUCH_DOLLY_PAN ) return; // is this needed?
+
+				handleTouchMoveDollyPan( event );
+
+				break;
+
+			default:
+
+				state = STATE.NONE;
+
+		}
+
+	}
+
+	function onTouchEnd( event ) {
+
+		if ( scope.enabled === false ) return;
+
+		handleTouchEnd( event );
+
+		scope.dispatchEvent( endEvent );
+
+		state = STATE.NONE;
+
+	}
+
+	function onContextMenu( event ) {
+
+		if ( scope.enabled === false ) return;
+
+		event.preventDefault();
+
+	}
+
+	//
+
+	scope.domElement.addEventListener( 'contextmenu', onContextMenu, false );
+
+	scope.domElement.addEventListener( 'mousedown', onMouseDown, false );
+	scope.domElement.addEventListener( 'wheel', onMouseWheel, false );
+
+	scope.domElement.addEventListener( 'touchstart', onTouchStart, false );
+	scope.domElement.addEventListener( 'touchend', onTouchEnd, false );
+	scope.domElement.addEventListener( 'touchmove', onTouchMove, false );
+
+	window.addEventListener( 'keydown', onKeyDown, false );
+
+	// force an update at start
+
+	this.update();
+
+};
+
+THREE.OrbitControls.prototype = Object.create( THREE.EventDispatcher.prototype );
+THREE.OrbitControls.prototype.constructor = THREE.OrbitControls;
+
+Object.defineProperties( THREE.OrbitControls.prototype, {
+
+	center: {
+
+		get: function () {
+
+			console.warn( 'THREE.OrbitControls: .center has been renamed to .target' );
+			return this.target;
+
+		}
+
+	},
+
+	// backward compatibility
+
+	noZoom: {
+
+		get: function () {
+
+			console.warn( 'THREE.OrbitControls: .noZoom has been deprecated. Use .enableZoom instead.' );
+			return ! this.enableZoom;
+
+		},
+
+		set: function ( value ) {
+
+			console.warn( 'THREE.OrbitControls: .noZoom has been deprecated. Use .enableZoom instead.' );
+			this.enableZoom = ! value;
+
+		}
+
+	},
+
+	noRotate: {
+
+		get: function () {
+
+			console.warn( 'THREE.OrbitControls: .noRotate has been deprecated. Use .enableRotate instead.' );
+			return ! this.enableRotate;
+
+		},
+
+		set: function ( value ) {
+
+			console.warn( 'THREE.OrbitControls: .noRotate has been deprecated. Use .enableRotate instead.' );
+			this.enableRotate = ! value;
+
+		}
+
+	},
+
+	noPan: {
+
+		get: function () {
+
+			console.warn( 'THREE.OrbitControls: .noPan has been deprecated. Use .enablePan instead.' );
+			return ! this.enablePan;
+
+		},
+
+		set: function ( value ) {
+
+			console.warn( 'THREE.OrbitControls: .noPan has been deprecated. Use .enablePan instead.' );
+			this.enablePan = ! value;
+
+		}
+
+	},
+
+	noKeys: {
+
+		get: function () {
+
+			console.warn( 'THREE.OrbitControls: .noKeys has been deprecated. Use .enableKeys instead.' );
+			return ! this.enableKeys;
+
+		},
+
+		set: function ( value ) {
+
+			console.warn( 'THREE.OrbitControls: .noKeys has been deprecated. Use .enableKeys instead.' );
+			this.enableKeys = ! value;
+
+		}
+
+	},
+
+	staticMoving: {
+
+		get: function () {
+
+			console.warn( 'THREE.OrbitControls: .staticMoving has been deprecated. Use .enableDamping instead.' );
+			return ! this.enableDamping;
+
+		},
+
+		set: function ( value ) {
+
+			console.warn( 'THREE.OrbitControls: .staticMoving has been deprecated. Use .enableDamping instead.' );
+			this.enableDamping = ! value;
+
+		}
+
+	},
+
+	dynamicDampingFactor: {
+
+		get: function () {
+
+			console.warn( 'THREE.OrbitControls: .dynamicDampingFactor has been renamed. Use .dampingFactor instead.' );
+			return this.dampingFactor;
+
+		},
+
+		set: function ( value ) {
+
+			console.warn( 'THREE.OrbitControls: .dynamicDampingFactor has been renamed. Use .dampingFactor instead.' );
+			this.dampingFactor = value;
+
+		}
+
+	}
+
+} );
 
 /**
  * @author Rich Tibbett / https://github.com/richtr
@@ -9614,1048 +10564,2681 @@ THREE.OBJLoader = ( function () {
 
 } )();
 /**
- * @author qiao / https://github.com/qiao
- * @author mrdoob / http://mrdoob.com
  * @author alteredq / http://alteredqualia.com/
- * @author WestLangley / http://github.com/WestLangley
- * @author erich666 / http://erichaines.com
+ *
+ * Full-screen textured quad shader
  */
 
-// This set of controls performs orbiting, dollying (zooming), and panning.
-// Unlike TrackballControls, it maintains the "up" direction object.up (+Y by default).
-//
-//    Orbit - left mouse / touch: one-finger move
-//    Zoom - middle mouse, or mousewheel / touch: two-finger spread or squish
-//    Pan - right mouse, or arrow keys / touch: two-finger move
+THREE.CopyShader = {
 
-THREE.OrbitControls = function ( object, domElement ) {
+	uniforms: {
 
-	this.object = object;
+		"tDiffuse": { value: null },
+		"opacity":  { value: 1.0 }
 
-	this.domElement = ( domElement !== undefined ) ? domElement : document;
+	},
 
-	// Set to false to disable this control
-	this.enabled = true;
+	vertexShader: [
 
-	// "target" sets the location of focus, where the object orbits around
-	this.target = new THREE.Vector3();
+		"varying vec2 vUv;",
 
-	// How far you can dolly in and out ( PerspectiveCamera only )
-	this.minDistance = 0;
-	this.maxDistance = Infinity;
+		"void main() {",
 
-	// How far you can zoom in and out ( OrthographicCamera only )
-	this.minZoom = 0;
-	this.maxZoom = Infinity;
+			"vUv = uv;",
+			"gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );",
 
-	// How far you can orbit vertically, upper and lower limits.
-	// Range is 0 to Math.PI radians.
-	this.minPolarAngle = 0; // radians
-	this.maxPolarAngle = Math.PI; // radians
+		"}"
 
-	// How far you can orbit horizontally, upper and lower limits.
-	// If set, must be a sub-interval of the interval [ - Math.PI, Math.PI ].
-	this.minAzimuthAngle = - Infinity; // radians
-	this.maxAzimuthAngle = Infinity; // radians
+	].join( "\n" ),
 
-	// Set to true to enable damping (inertia)
-	// If damping is enabled, you must call controls.update() in your animation loop
-	this.enableDamping = false;
-	this.dampingFactor = 0.25;
+	fragmentShader: [
 
-	// This option actually enables dollying in and out; left as "zoom" for backwards compatibility.
-	// Set to false to disable zooming
-	this.enableZoom = true;
-	this.zoomSpeed = 1.0;
+		"uniform float opacity;",
 
-	// Set to false to disable rotating
-	this.enableRotate = true;
-	this.rotateSpeed = 1.0;
+		"uniform sampler2D tDiffuse;",
 
-	// Set to false to disable panning
-	this.enablePan = true;
-	this.panSpeed = 1.0;
-	this.screenSpacePanning = false; // if true, pan in screen-space
-	this.keyPanSpeed = 7.0;	// pixels moved per arrow key push
+		"varying vec2 vUv;",
 
-	// Set to true to automatically rotate around the target
-	// If auto-rotate is enabled, you must call controls.update() in your animation loop
-	this.autoRotate = false;
-	this.autoRotateSpeed = 2.0; // 30 seconds per round when fps is 60
+		"void main() {",
 
-	// Set to false to disable use of the keys
-	this.enableKeys = true;
+			"vec4 texel = texture2D( tDiffuse, vUv );",
+			"gl_FragColor = opacity * texel;",
 
-	// The four arrow keys
-	this.keys = { LEFT: 37, UP: 38, RIGHT: 39, BOTTOM: 40 };
+		"}"
 
-	// Mouse buttons
-	this.mouseButtons = { ORBIT: THREE.MOUSE.LEFT, ZOOM: THREE.MOUSE.MIDDLE, PAN: THREE.MOUSE.RIGHT };
-
-	// for reset
-	this.target0 = this.target.clone();
-	this.position0 = this.object.position.clone();
-	this.zoom0 = this.object.zoom;
-
-	//
-	// public methods
-	//
-
-	this.getPolarAngle = function () {
-
-		return spherical.phi;
-
-	};
-
-	this.getAzimuthalAngle = function () {
-
-		return spherical.theta;
-
-	};
-
-	this.saveState = function () {
-
-		scope.target0.copy( scope.target );
-		scope.position0.copy( scope.object.position );
-		scope.zoom0 = scope.object.zoom;
-
-	};
-
-	this.reset = function () {
-
-		scope.target.copy( scope.target0 );
-		scope.object.position.copy( scope.position0 );
-		scope.object.zoom = scope.zoom0;
-
-		scope.object.updateProjectionMatrix();
-		scope.dispatchEvent( changeEvent );
-
-		scope.update();
-
-		state = STATE.NONE;
-
-	};
-
-	// this method is exposed, but perhaps it would be better if we can make it private...
-	this.update = function () {
-
-		var offset = new THREE.Vector3();
-
-		// so camera.up is the orbit axis
-		var quat = new THREE.Quaternion().setFromUnitVectors( object.up, new THREE.Vector3( 0, 1, 0 ) );
-		var quatInverse = quat.clone().inverse();
-
-		var lastPosition = new THREE.Vector3();
-		var lastQuaternion = new THREE.Quaternion();
-
-		return function update() {
-
-			var position = scope.object.position;
-
-			offset.copy( position ).sub( scope.target );
-
-			// rotate offset to "y-axis-is-up" space
-			offset.applyQuaternion( quat );
-
-			// angle from z-axis around y-axis
-			spherical.setFromVector3( offset );
-
-			if ( scope.autoRotate && state === STATE.NONE ) {
-
-				rotateLeft( getAutoRotationAngle() );
-
-			}
-
-			spherical.theta += sphericalDelta.theta;
-			spherical.phi += sphericalDelta.phi;
-
-			// restrict theta to be between desired limits
-			spherical.theta = Math.max( scope.minAzimuthAngle, Math.min( scope.maxAzimuthAngle, spherical.theta ) );
-
-			// restrict phi to be between desired limits
-			spherical.phi = Math.max( scope.minPolarAngle, Math.min( scope.maxPolarAngle, spherical.phi ) );
-
-			spherical.makeSafe();
-
-
-			spherical.radius *= scale;
-
-			// restrict radius to be between desired limits
-			spherical.radius = Math.max( scope.minDistance, Math.min( scope.maxDistance, spherical.radius ) );
-
-			// move target to panned location
-			scope.target.add( panOffset );
-
-			offset.setFromSpherical( spherical );
-
-			// rotate offset back to "camera-up-vector-is-up" space
-			offset.applyQuaternion( quatInverse );
-
-			position.copy( scope.target ).add( offset );
-
-			scope.object.lookAt( scope.target );
-
-			if ( scope.enableDamping === true ) {
-
-				sphericalDelta.theta *= ( 1 - scope.dampingFactor );
-				sphericalDelta.phi *= ( 1 - scope.dampingFactor );
-
-				panOffset.multiplyScalar( 1 - scope.dampingFactor );
-
-			} else {
-
-				sphericalDelta.set( 0, 0, 0 );
-
-				panOffset.set( 0, 0, 0 );
-
-			}
-
-			scale = 1;
-
-			// update condition is:
-			// min(camera displacement, camera rotation in radians)^2 > EPS
-			// using small-angle approximation cos(x/2) = 1 - x^2 / 8
-
-			if ( zoomChanged ||
-				lastPosition.distanceToSquared( scope.object.position ) > EPS ||
-				8 * ( 1 - lastQuaternion.dot( scope.object.quaternion ) ) > EPS ) {
-
-				scope.dispatchEvent( changeEvent );
-
-				lastPosition.copy( scope.object.position );
-				lastQuaternion.copy( scope.object.quaternion );
-				zoomChanged = false;
-
-				return true;
-
-			}
-
-			return false;
-
-		};
-
-	}();
-
-	this.dispose = function () {
-
-		scope.domElement.removeEventListener( 'contextmenu', onContextMenu, false );
-		scope.domElement.removeEventListener( 'mousedown', onMouseDown, false );
-		scope.domElement.removeEventListener( 'wheel', onMouseWheel, false );
-
-		scope.domElement.removeEventListener( 'touchstart', onTouchStart, false );
-		scope.domElement.removeEventListener( 'touchend', onTouchEnd, false );
-		scope.domElement.removeEventListener( 'touchmove', onTouchMove, false );
-
-		document.removeEventListener( 'mousemove', onMouseMove, false );
-		document.removeEventListener( 'mouseup', onMouseUp, false );
-
-		window.removeEventListener( 'keydown', onKeyDown, false );
-
-		//scope.dispatchEvent( { type: 'dispose' } ); // should this be added here?
-
-	};
-
-	//
-	// internals
-	//
-
-	var scope = this;
-
-	var changeEvent = { type: 'change' };
-	var startEvent = { type: 'start' };
-	var endEvent = { type: 'end' };
-
-	var STATE = { NONE: - 1, ROTATE: 0, DOLLY: 1, PAN: 2, TOUCH_ROTATE: 3, TOUCH_DOLLY_PAN: 4 };
-
-	var state = STATE.NONE;
-
-	var EPS = 0.000001;
-
-	// current position in spherical coordinates
-	var spherical = new THREE.Spherical();
-	var sphericalDelta = new THREE.Spherical();
-
-	var scale = 1;
-	var panOffset = new THREE.Vector3();
-	var zoomChanged = false;
-
-	var rotateStart = new THREE.Vector2();
-	var rotateEnd = new THREE.Vector2();
-	var rotateDelta = new THREE.Vector2();
-
-	var panStart = new THREE.Vector2();
-	var panEnd = new THREE.Vector2();
-	var panDelta = new THREE.Vector2();
-
-	var dollyStart = new THREE.Vector2();
-	var dollyEnd = new THREE.Vector2();
-	var dollyDelta = new THREE.Vector2();
-
-	function getAutoRotationAngle() {
-
-		return 2 * Math.PI / 60 / 60 * scope.autoRotateSpeed;
-
-	}
-
-	function getZoomScale() {
-
-		return Math.pow( 0.95, scope.zoomSpeed );
-
-	}
-
-	function rotateLeft( angle ) {
-
-		sphericalDelta.theta -= angle;
-
-	}
-
-	function rotateUp( angle ) {
-
-		sphericalDelta.phi -= angle;
-
-	}
-
-	var panLeft = function () {
-
-		var v = new THREE.Vector3();
-
-		return function panLeft( distance, objectMatrix ) {
-
-			v.setFromMatrixColumn( objectMatrix, 0 ); // get X column of objectMatrix
-			v.multiplyScalar( - distance );
-
-			panOffset.add( v );
-
-		};
-
-	}();
-
-	var panUp = function () {
-
-		var v = new THREE.Vector3();
-
-		return function panUp( distance, objectMatrix ) {
-
-			if ( scope.screenSpacePanning === true ) {
-
-				v.setFromMatrixColumn( objectMatrix, 1 );
-
-			} else {
-
-				v.setFromMatrixColumn( objectMatrix, 0 );
-				v.crossVectors( scope.object.up, v );
-
-			}
-
-			v.multiplyScalar( distance );
-
-			panOffset.add( v );
-
-		};
-
-	}();
-
-	// deltaX and deltaY are in pixels; right and down are positive
-	var pan = function () {
-
-		var offset = new THREE.Vector3();
-
-		return function pan( deltaX, deltaY ) {
-
-			var element = scope.domElement === document ? scope.domElement.body : scope.domElement;
-
-			if ( scope.object.isPerspectiveCamera ) {
-
-				// perspective
-				var position = scope.object.position;
-				offset.copy( position ).sub( scope.target );
-				var targetDistance = offset.length();
-
-				// half of the fov is center to top of screen
-				targetDistance *= Math.tan( ( scope.object.fov / 2 ) * Math.PI / 180.0 );
-
-				// we use only clientHeight here so aspect ratio does not distort speed
-				panLeft( 2 * deltaX * targetDistance / element.clientHeight, scope.object.matrix );
-				panUp( 2 * deltaY * targetDistance / element.clientHeight, scope.object.matrix );
-
-			} else if ( scope.object.isOrthographicCamera ) {
-
-				// orthographic
-				panLeft( deltaX * ( scope.object.right - scope.object.left ) / scope.object.zoom / element.clientWidth, scope.object.matrix );
-				panUp( deltaY * ( scope.object.top - scope.object.bottom ) / scope.object.zoom / element.clientHeight, scope.object.matrix );
-
-			} else {
-
-				// camera neither orthographic nor perspective
-				console.warn( 'WARNING: OrbitControls.js encountered an unknown camera type - pan disabled.' );
-				scope.enablePan = false;
-
-			}
-
-		};
-
-	}();
-
-	function dollyIn( dollyScale ) {
-
-		if ( scope.object.isPerspectiveCamera ) {
-
-			scale /= dollyScale;
-
-		} else if ( scope.object.isOrthographicCamera ) {
-
-			scope.object.zoom = Math.max( scope.minZoom, Math.min( scope.maxZoom, scope.object.zoom * dollyScale ) );
-			scope.object.updateProjectionMatrix();
-			zoomChanged = true;
-
-		} else {
-
-			console.warn( 'WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled.' );
-			scope.enableZoom = false;
-
-		}
-
-	}
-
-	function dollyOut( dollyScale ) {
-
-		if ( scope.object.isPerspectiveCamera ) {
-
-			scale *= dollyScale;
-
-		} else if ( scope.object.isOrthographicCamera ) {
-
-			scope.object.zoom = Math.max( scope.minZoom, Math.min( scope.maxZoom, scope.object.zoom / dollyScale ) );
-			scope.object.updateProjectionMatrix();
-			zoomChanged = true;
-
-		} else {
-
-			console.warn( 'WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled.' );
-			scope.enableZoom = false;
-
-		}
-
-	}
-
-	//
-	// event callbacks - update the object state
-	//
-
-	function handleMouseDownRotate( event ) {
-
-		//console.log( 'handleMouseDownRotate' );
-
-		rotateStart.set( event.clientX, event.clientY );
-
-	}
-
-	function handleMouseDownDolly( event ) {
-
-		//console.log( 'handleMouseDownDolly' );
-
-		dollyStart.set( event.clientX, event.clientY );
-
-	}
-
-	function handleMouseDownPan( event ) {
-
-		//console.log( 'handleMouseDownPan' );
-
-		panStart.set( event.clientX, event.clientY );
-
-	}
-
-	function handleMouseMoveRotate( event ) {
-
-		//console.log( 'handleMouseMoveRotate' );
-
-		rotateEnd.set( event.clientX, event.clientY );
-
-		rotateDelta.subVectors( rotateEnd, rotateStart ).multiplyScalar( scope.rotateSpeed );
-
-		var element = scope.domElement === document ? scope.domElement.body : scope.domElement;
-
-		// rotating across whole screen goes 360 degrees around
-		rotateLeft( 2 * Math.PI * rotateDelta.x / element.clientWidth );
-
-		// rotating up and down along whole screen attempts to go 360, but limited to 180
-		rotateUp( 2 * Math.PI * rotateDelta.y / element.clientHeight );
-
-		rotateStart.copy( rotateEnd );
-
-		scope.update();
-
-	}
-
-	function handleMouseMoveDolly( event ) {
-
-		//console.log( 'handleMouseMoveDolly' );
-
-		dollyEnd.set( event.clientX, event.clientY );
-
-		dollyDelta.subVectors( dollyEnd, dollyStart );
-
-		if ( dollyDelta.y > 0 ) {
-
-			dollyIn( getZoomScale() );
-
-		} else if ( dollyDelta.y < 0 ) {
-
-			dollyOut( getZoomScale() );
-
-		}
-
-		dollyStart.copy( dollyEnd );
-
-		scope.update();
-
-	}
-
-	function handleMouseMovePan( event ) {
-
-		//console.log( 'handleMouseMovePan' );
-
-		panEnd.set( event.clientX, event.clientY );
-
-		panDelta.subVectors( panEnd, panStart ).multiplyScalar( scope.panSpeed );
-
-		pan( panDelta.x, panDelta.y );
-
-		panStart.copy( panEnd );
-
-		scope.update();
-
-	}
-
-	function handleMouseUp( event ) {
-
-		// console.log( 'handleMouseUp' );
-
-	}
-
-	function handleMouseWheel( event ) {
-
-		// console.log( 'handleMouseWheel' );
-
-		if ( event.deltaY < 0 ) {
-
-			dollyOut( getZoomScale() );
-
-		} else if ( event.deltaY > 0 ) {
-
-			dollyIn( getZoomScale() );
-
-		}
-
-		scope.update();
-
-	}
-
-	function handleKeyDown( event ) {
-
-		//console.log( 'handleKeyDown' );
-
-		switch ( event.keyCode ) {
-
-			case scope.keys.UP:
-				pan( 0, scope.keyPanSpeed );
-				scope.update();
-				break;
-
-			case scope.keys.BOTTOM:
-				pan( 0, - scope.keyPanSpeed );
-				scope.update();
-				break;
-
-			case scope.keys.LEFT:
-				pan( scope.keyPanSpeed, 0 );
-				scope.update();
-				break;
-
-			case scope.keys.RIGHT:
-				pan( - scope.keyPanSpeed, 0 );
-				scope.update();
-				break;
-
-		}
-
-	}
-
-	function handleTouchStartRotate( event ) {
-
-		//console.log( 'handleTouchStartRotate' );
-
-		rotateStart.set( event.touches[ 0 ].pageX, event.touches[ 0 ].pageY );
-
-	}
-
-	function handleTouchStartDollyPan( event ) {
-
-		//console.log( 'handleTouchStartDollyPan' );
-
-		if ( scope.enableZoom ) {
-
-			var dx = event.touches[ 0 ].pageX - event.touches[ 1 ].pageX;
-			var dy = event.touches[ 0 ].pageY - event.touches[ 1 ].pageY;
-
-			var distance = Math.sqrt( dx * dx + dy * dy );
-
-			dollyStart.set( 0, distance );
-
-		}
-
-		if ( scope.enablePan ) {
-
-			var x = 0.5 * ( event.touches[ 0 ].pageX + event.touches[ 1 ].pageX );
-			var y = 0.5 * ( event.touches[ 0 ].pageY + event.touches[ 1 ].pageY );
-
-			panStart.set( x, y );
-
-		}
-
-	}
-
-	function handleTouchMoveRotate( event ) {
-
-		//console.log( 'handleTouchMoveRotate' );
-
-		rotateEnd.set( event.touches[ 0 ].pageX, event.touches[ 0 ].pageY );
-
-		rotateDelta.subVectors( rotateEnd, rotateStart ).multiplyScalar( scope.rotateSpeed );
-
-		var element = scope.domElement === document ? scope.domElement.body : scope.domElement;
-
-		// rotating across whole screen goes 360 degrees around
-		rotateLeft( 2 * Math.PI * rotateDelta.x / element.clientWidth );
-
-		// rotating up and down along whole screen attempts to go 360, but limited to 180
-		rotateUp( 2 * Math.PI * rotateDelta.y / element.clientHeight );
-
-		rotateStart.copy( rotateEnd );
-
-		scope.update();
-
-	}
-
-	function handleTouchMoveDollyPan( event ) {
-
-		//console.log( 'handleTouchMoveDollyPan' );
-
-		if ( scope.enableZoom ) {
-
-			var dx = event.touches[ 0 ].pageX - event.touches[ 1 ].pageX;
-			var dy = event.touches[ 0 ].pageY - event.touches[ 1 ].pageY;
-
-			var distance = Math.sqrt( dx * dx + dy * dy );
-
-			dollyEnd.set( 0, distance );
-
-			dollyDelta.set( 0, Math.pow( dollyEnd.y / dollyStart.y, scope.zoomSpeed ) );
-
-			dollyIn( dollyDelta.y );
-
-			dollyStart.copy( dollyEnd );
-
-		}
-
-		if ( scope.enablePan ) {
-
-			var x = 0.5 * ( event.touches[ 0 ].pageX + event.touches[ 1 ].pageX );
-			var y = 0.5 * ( event.touches[ 0 ].pageY + event.touches[ 1 ].pageY );
-
-			panEnd.set( x, y );
-
-			panDelta.subVectors( panEnd, panStart ).multiplyScalar( scope.panSpeed );
-
-			pan( panDelta.x, panDelta.y );
-
-			panStart.copy( panEnd );
-
-		}
-
-		scope.update();
-
-	}
-
-	function handleTouchEnd( event ) {
-
-		//console.log( 'handleTouchEnd' );
-
-	}
-
-	//
-	// event handlers - FSM: listen for events and reset state
-	//
-
-	function onMouseDown( event ) {
-
-		if ( scope.enabled === false ) return;
-
-		event.preventDefault();
-
-		switch ( event.button ) {
-
-			case scope.mouseButtons.ORBIT:
-
-				if ( scope.enableRotate === false ) return;
-
-				handleMouseDownRotate( event );
-
-				state = STATE.ROTATE;
-
-				break;
-
-			case scope.mouseButtons.ZOOM:
-
-				if ( scope.enableZoom === false ) return;
-
-				handleMouseDownDolly( event );
-
-				state = STATE.DOLLY;
-
-				break;
-
-			case scope.mouseButtons.PAN:
-
-				if ( scope.enablePan === false ) return;
-
-				handleMouseDownPan( event );
-
-				state = STATE.PAN;
-
-				break;
-
-		}
-
-		if ( state !== STATE.NONE ) {
-
-			document.addEventListener( 'mousemove', onMouseMove, false );
-			document.addEventListener( 'mouseup', onMouseUp, false );
-
-			scope.dispatchEvent( startEvent );
-
-		}
-
-	}
-
-	function onMouseMove( event ) {
-
-		if ( scope.enabled === false ) return;
-
-		event.preventDefault();
-
-		switch ( state ) {
-
-			case STATE.ROTATE:
-
-				if ( scope.enableRotate === false ) return;
-
-				handleMouseMoveRotate( event );
-
-				break;
-
-			case STATE.DOLLY:
-
-				if ( scope.enableZoom === false ) return;
-
-				handleMouseMoveDolly( event );
-
-				break;
-
-			case STATE.PAN:
-
-				if ( scope.enablePan === false ) return;
-
-				handleMouseMovePan( event );
-
-				break;
-
-		}
-
-	}
-
-	function onMouseUp( event ) {
-
-		if ( scope.enabled === false ) return;
-
-		handleMouseUp( event );
-
-		document.removeEventListener( 'mousemove', onMouseMove, false );
-		document.removeEventListener( 'mouseup', onMouseUp, false );
-
-		scope.dispatchEvent( endEvent );
-
-		state = STATE.NONE;
-
-	}
-
-	function onMouseWheel( event ) {
-
-		if ( scope.enabled === false || scope.enableZoom === false || ( state !== STATE.NONE && state !== STATE.ROTATE ) ) return;
-
-		event.preventDefault();
-		event.stopPropagation();
-
-		scope.dispatchEvent( startEvent );
-
-		handleMouseWheel( event );
-
-		scope.dispatchEvent( endEvent );
-
-	}
-
-	function onKeyDown( event ) {
-
-		if ( scope.enabled === false || scope.enableKeys === false || scope.enablePan === false ) return;
-
-		handleKeyDown( event );
-
-	}
-
-	function onTouchStart( event ) {
-
-		if ( scope.enabled === false ) return;
-
-		event.preventDefault();
-
-		switch ( event.touches.length ) {
-
-			case 1:	// one-fingered touch: rotate
-
-				if ( scope.enableRotate === false ) return;
-
-				handleTouchStartRotate( event );
-
-				state = STATE.TOUCH_ROTATE;
-
-				break;
-
-			case 2:	// two-fingered touch: dolly-pan
-
-				if ( scope.enableZoom === false && scope.enablePan === false ) return;
-
-				handleTouchStartDollyPan( event );
-
-				state = STATE.TOUCH_DOLLY_PAN;
-
-				break;
-
-			default:
-
-				state = STATE.NONE;
-
-		}
-
-		if ( state !== STATE.NONE ) {
-
-			scope.dispatchEvent( startEvent );
-
-		}
-
-	}
-
-	function onTouchMove( event ) {
-
-		if ( scope.enabled === false ) return;
-
-		event.preventDefault();
-		event.stopPropagation();
-
-		switch ( event.touches.length ) {
-
-			case 1: // one-fingered touch: rotate
-
-				if ( scope.enableRotate === false ) return;
-				if ( state !== STATE.TOUCH_ROTATE ) return; // is this needed?
-
-				handleTouchMoveRotate( event );
-
-				break;
-
-			case 2: // two-fingered touch: dolly-pan
-
-				if ( scope.enableZoom === false && scope.enablePan === false ) return;
-				if ( state !== STATE.TOUCH_DOLLY_PAN ) return; // is this needed?
-
-				handleTouchMoveDollyPan( event );
-
-				break;
-
-			default:
-
-				state = STATE.NONE;
-
-		}
-
-	}
-
-	function onTouchEnd( event ) {
-
-		if ( scope.enabled === false ) return;
-
-		handleTouchEnd( event );
-
-		scope.dispatchEvent( endEvent );
-
-		state = STATE.NONE;
-
-	}
-
-	function onContextMenu( event ) {
-
-		if ( scope.enabled === false ) return;
-
-		event.preventDefault();
-
-	}
-
-	//
-
-	scope.domElement.addEventListener( 'contextmenu', onContextMenu, false );
-
-	scope.domElement.addEventListener( 'mousedown', onMouseDown, false );
-	scope.domElement.addEventListener( 'wheel', onMouseWheel, false );
-
-	scope.domElement.addEventListener( 'touchstart', onTouchStart, false );
-	scope.domElement.addEventListener( 'touchend', onTouchEnd, false );
-	scope.domElement.addEventListener( 'touchmove', onTouchMove, false );
-
-	window.addEventListener( 'keydown', onKeyDown, false );
-
-	// force an update at start
-
-	this.update();
+	].join( "\n" )
 
 };
 
-THREE.OrbitControls.prototype = Object.create( THREE.EventDispatcher.prototype );
-THREE.OrbitControls.prototype.constructor = THREE.OrbitControls;
+/**
+ * @author alteredq / http://alteredqualia.com/
+ */
 
-Object.defineProperties( THREE.OrbitControls.prototype, {
+THREE.EffectComposer = function ( renderer, renderTarget ) {
 
-	center: {
+	this.renderer = renderer;
 
-		get: function () {
+	if ( renderTarget === undefined ) {
 
-			console.warn( 'THREE.OrbitControls: .center has been renamed to .target' );
-			return this.target;
+		var parameters = {
+			minFilter: THREE.LinearFilter,
+			magFilter: THREE.LinearFilter,
+			format: THREE.RGBAFormat,
+			stencilBuffer: false
+		};
 
-		}
+		var size = renderer.getDrawingBufferSize( new THREE.Vector2() );
+		renderTarget = new THREE.WebGLRenderTarget( size.width, size.height, parameters );
+		renderTarget.texture.name = 'EffectComposer.rt1';
 
-	},
+	}
 
-	// backward compatibility
+	this.renderTarget1 = renderTarget;
+	this.renderTarget2 = renderTarget.clone();
+	this.renderTarget2.texture.name = 'EffectComposer.rt2';
 
-	noZoom: {
+	this.writeBuffer = this.renderTarget1;
+	this.readBuffer = this.renderTarget2;
 
-		get: function () {
+	this.renderToScreen = true;
 
-			console.warn( 'THREE.OrbitControls: .noZoom has been deprecated. Use .enableZoom instead.' );
-			return ! this.enableZoom;
+	this.passes = [];
 
-		},
+	// dependencies
 
-		set: function ( value ) {
+	if ( THREE.CopyShader === undefined ) {
 
-			console.warn( 'THREE.OrbitControls: .noZoom has been deprecated. Use .enableZoom instead.' );
-			this.enableZoom = ! value;
+		console.error( 'THREE.EffectComposer relies on THREE.CopyShader' );
 
-		}
+	}
 
-	},
+	if ( THREE.ShaderPass === undefined ) {
 
-	noRotate: {
+		console.error( 'THREE.EffectComposer relies on THREE.ShaderPass' );
 
-		get: function () {
+	}
 
-			console.warn( 'THREE.OrbitControls: .noRotate has been deprecated. Use .enableRotate instead.' );
-			return ! this.enableRotate;
+	this.copyPass = new THREE.ShaderPass( THREE.CopyShader );
 
-		},
+	this._previousFrameTime = Date.now();
 
-		set: function ( value ) {
+};
 
-			console.warn( 'THREE.OrbitControls: .noRotate has been deprecated. Use .enableRotate instead.' );
-			this.enableRotate = ! value;
+Object.assign( THREE.EffectComposer.prototype, {
 
-		}
+	swapBuffers: function () {
 
-	},
-
-	noPan: {
-
-		get: function () {
-
-			console.warn( 'THREE.OrbitControls: .noPan has been deprecated. Use .enablePan instead.' );
-			return ! this.enablePan;
-
-		},
-
-		set: function ( value ) {
-
-			console.warn( 'THREE.OrbitControls: .noPan has been deprecated. Use .enablePan instead.' );
-			this.enablePan = ! value;
-
-		}
+		var tmp = this.readBuffer;
+		this.readBuffer = this.writeBuffer;
+		this.writeBuffer = tmp;
 
 	},
 
-	noKeys: {
+	addPass: function ( pass ) {
 
-		get: function () {
+		this.passes.push( pass );
 
-			console.warn( 'THREE.OrbitControls: .noKeys has been deprecated. Use .enableKeys instead.' );
-			return ! this.enableKeys;
-
-		},
-
-		set: function ( value ) {
-
-			console.warn( 'THREE.OrbitControls: .noKeys has been deprecated. Use .enableKeys instead.' );
-			this.enableKeys = ! value;
-
-		}
+		var size = this.renderer.getDrawingBufferSize( new THREE.Vector2() );
+		pass.setSize( size.width, size.height );
 
 	},
 
-	staticMoving: {
+	insertPass: function ( pass, index ) {
 
-		get: function () {
-
-			console.warn( 'THREE.OrbitControls: .staticMoving has been deprecated. Use .enableDamping instead.' );
-			return ! this.enableDamping;
-
-		},
-
-		set: function ( value ) {
-
-			console.warn( 'THREE.OrbitControls: .staticMoving has been deprecated. Use .enableDamping instead.' );
-			this.enableDamping = ! value;
-
-		}
+		this.passes.splice( index, 0, pass );
 
 	},
 
-	dynamicDampingFactor: {
+	isLastEnabledPass: function ( passIndex ) {
 
-		get: function () {
+		for ( var i = passIndex + 1; i < this.passes.length; i ++ ) {
 
-			console.warn( 'THREE.OrbitControls: .dynamicDampingFactor has been renamed. Use .dampingFactor instead.' );
-			return this.dampingFactor;
+			if ( this.passes[ i ].enabled ) {
 
-		},
+				return false;
 
-		set: function ( value ) {
+			}
 
-			console.warn( 'THREE.OrbitControls: .dynamicDampingFactor has been renamed. Use .dampingFactor instead.' );
-			this.dampingFactor = value;
+		}
+
+		return true;
+
+	},
+
+	render: function ( deltaTime ) {
+
+		// deltaTime value is in seconds
+
+		if ( deltaTime === undefined ) {
+
+			deltaTime = ( Date.now() - this._previousFrameTime ) * 0.001;
+
+		}
+
+		this._previousFrameTime = Date.now();
+
+		var currentRenderTarget = this.renderer.getRenderTarget();
+
+		var maskActive = false;
+
+		var pass, i, il = this.passes.length;
+
+		for ( i = 0; i < il; i ++ ) {
+
+			pass = this.passes[ i ];
+
+			if ( pass.enabled === false ) continue;
+
+			pass.renderToScreen = ( this.renderToScreen && this.isLastEnabledPass( i ) );
+			pass.render( this.renderer, this.writeBuffer, this.readBuffer, deltaTime, maskActive );
+
+			if ( pass.needsSwap ) {
+
+				if ( maskActive ) {
+
+					var context = this.renderer.context;
+
+					context.stencilFunc( context.NOTEQUAL, 1, 0xffffffff );
+
+					this.copyPass.render( this.renderer, this.writeBuffer, this.readBuffer, deltaTime );
+
+					context.stencilFunc( context.EQUAL, 1, 0xffffffff );
+
+				}
+
+				this.swapBuffers();
+
+			}
+
+			if ( THREE.MaskPass !== undefined ) {
+
+				if ( pass instanceof THREE.MaskPass ) {
+
+					maskActive = true;
+
+				} else if ( pass instanceof THREE.ClearMaskPass ) {
+
+					maskActive = false;
+
+				}
+
+			}
+
+		}
+
+		this.renderer.setRenderTarget( currentRenderTarget );
+
+	},
+
+	reset: function ( renderTarget ) {
+
+		if ( renderTarget === undefined ) {
+
+			var size = this.renderer.getDrawingBufferSize( new THREE.Vector2() );
+
+			renderTarget = this.renderTarget1.clone();
+			renderTarget.setSize( size.width, size.height );
+
+		}
+
+		this.renderTarget1.dispose();
+		this.renderTarget2.dispose();
+		this.renderTarget1 = renderTarget;
+		this.renderTarget2 = renderTarget.clone();
+
+		this.writeBuffer = this.renderTarget1;
+		this.readBuffer = this.renderTarget2;
+
+	},
+
+	setSize: function ( width, height ) {
+
+		this.renderTarget1.setSize( width, height );
+		this.renderTarget2.setSize( width, height );
+
+		for ( var i = 0; i < this.passes.length; i ++ ) {
+
+			this.passes[ i ].setSize( width, height );
 
 		}
 
 	}
 
 } );
+
+
+THREE.Pass = function () {
+
+	// if set to true, the pass is processed by the composer
+	this.enabled = true;
+
+	// if set to true, the pass indicates to swap read and write buffer after rendering
+	this.needsSwap = true;
+
+	// if set to true, the pass clears its buffer before rendering
+	this.clear = false;
+
+	// if set to true, the result of the pass is rendered to screen. This is set automatically by EffectComposer.
+	this.renderToScreen = false;
+
+};
+
+Object.assign( THREE.Pass.prototype, {
+
+	setSize: function ( width, height ) {},
+
+	render: function ( renderer, writeBuffer, readBuffer, deltaTime, maskActive ) {
+
+		console.error( 'THREE.Pass: .render() must be implemented in derived pass.' );
+
+	}
+
+} );
+
+// Helper for passes that need to fill the viewport with a single quad.
+THREE.Pass.FullScreenQuad = ( function () {
+
+	var camera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 0, 1 );
+	var geometry = new THREE.PlaneBufferGeometry( 2, 2 );
+
+	var FullScreenQuad = function ( material ) {
+
+		this._mesh = new THREE.Mesh( geometry, material );
+
+	};
+
+	Object.defineProperty( FullScreenQuad.prototype, 'material', {
+
+		get: function () {
+
+			return this._mesh.material;
+
+		},
+
+		set: function ( value ) {
+
+			this._mesh.material = value;
+
+		}
+
+	} );
+
+	Object.assign( FullScreenQuad.prototype, {
+
+		render: function ( renderer ) {
+
+			renderer.render( this._mesh, camera );
+
+		}
+
+	} );
+
+	return FullScreenQuad;
+
+} )();
+
+/**
+ * @author alteredq / http://alteredqualia.com/
+ */
+
+THREE.BloomPass = function ( strength, kernelSize, sigma, resolution ) {
+
+	strength = ( strength !== undefined ) ? strength : 1;
+	kernelSize = ( kernelSize !== undefined ) ? kernelSize : 25;
+	sigma = ( sigma !== undefined ) ? sigma : 4.0;
+	resolution = ( resolution !== undefined ) ? resolution : 256;
+
+	// render targets
+
+	var pars = { minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, format: THREE.RGBFormat };
+
+	this.renderTargetX = new THREE.WebGLRenderTarget( resolution, resolution, pars );
+	this.renderTargetY = new THREE.WebGLRenderTarget( resolution, resolution, pars );
+
+	// copy material
+
+	if ( THREE.CopyShader === undefined )
+		console.error( "THREE.BloomPass relies on THREE.CopyShader" );
+
+	var copyShader = THREE.CopyShader;
+
+	this.copyUniforms = THREE.UniformsUtils.clone( copyShader.uniforms );
+
+	this.copyUniforms[ "opacity" ].value = strength;
+
+	this.materialCopy = new THREE.ShaderMaterial( {
+
+		uniforms: this.copyUniforms,
+		vertexShader: copyShader.vertexShader,
+		fragmentShader: copyShader.fragmentShader,
+		blending: THREE.AdditiveBlending,
+		transparent: true
+
+	} );
+
+	// convolution material
+
+	if ( THREE.ConvolutionShader === undefined )
+		console.error( "THREE.BloomPass relies on THREE.ConvolutionShader" );
+
+	var convolutionShader = THREE.ConvolutionShader;
+
+	this.convolutionUniforms = THREE.UniformsUtils.clone( convolutionShader.uniforms );
+
+	this.convolutionUniforms[ "uImageIncrement" ].value = THREE.BloomPass.blurx;
+	this.convolutionUniforms[ "cKernel" ].value = THREE.ConvolutionShader.buildKernel( sigma );
+
+	this.materialConvolution = new THREE.ShaderMaterial( {
+
+		uniforms: this.convolutionUniforms,
+		vertexShader:  convolutionShader.vertexShader,
+		fragmentShader: convolutionShader.fragmentShader,
+		defines: {
+			"KERNEL_SIZE_FLOAT": kernelSize.toFixed( 1 ),
+			"KERNEL_SIZE_INT": kernelSize.toFixed( 0 )
+		}
+
+	} );
+
+	this.enabled = true;
+	this.needsSwap = false;
+	this.clear = false;
+
+};
+
+THREE.BloomPass.prototype = {
+
+	render: function ( renderer, writeBuffer, readBuffer, delta, maskActive ) {
+
+		if ( maskActive ) renderer.context.disable( renderer.context.STENCIL_TEST );
+
+		// Render quad with blured scene into texture (convolution pass 1)
+
+		THREE.EffectComposer.quad.material = this.materialConvolution;
+
+		this.convolutionUniforms[ "tDiffuse" ].value = readBuffer;
+		this.convolutionUniforms[ "uImageIncrement" ].value = THREE.BloomPass.blurX;
+
+		renderer.render( THREE.EffectComposer.scene, THREE.EffectComposer.camera, this.renderTargetX, true );
+
+
+		// Render quad with blured scene into texture (convolution pass 2)
+
+		this.convolutionUniforms[ "tDiffuse" ].value = this.renderTargetX;
+		this.convolutionUniforms[ "uImageIncrement" ].value = THREE.BloomPass.blurY;
+
+		renderer.render( THREE.EffectComposer.scene, THREE.EffectComposer.camera, this.renderTargetY, true );
+
+		// Render original scene with superimposed blur to texture
+
+		THREE.EffectComposer.quad.material = this.materialCopy;
+
+		this.copyUniforms[ "tDiffuse" ].value = this.renderTargetY;
+
+		if ( maskActive ) renderer.context.enable( renderer.context.STENCIL_TEST );
+
+		renderer.render( THREE.EffectComposer.scene, THREE.EffectComposer.camera, readBuffer, this.clear );
+
+	}
+
+};
+
+THREE.BloomPass.blurX = new THREE.Vector2( 0.001953125, 0.0 );
+THREE.BloomPass.blurY = new THREE.Vector2( 0.0, 0.001953125 );
+
+/**
+ * @author alteredq / http://alteredqualia.com/
+ */
+
+THREE.MaskPass = function ( scene, camera ) {
+
+	THREE.Pass.call( this );
+
+	this.scene = scene;
+	this.camera = camera;
+
+	this.clear = true;
+	this.needsSwap = false;
+
+	this.inverse = false;
+
+};
+
+THREE.MaskPass.prototype = Object.assign( Object.create( THREE.Pass.prototype ), {
+
+	constructor: THREE.MaskPass,
+
+	render: function ( renderer, writeBuffer, readBuffer, deltaTime, maskActive ) {
+
+		var context = renderer.context;
+		var state = renderer.state;
+
+		// don't update color or depth
+
+		state.buffers.color.setMask( false );
+		state.buffers.depth.setMask( false );
+
+		// lock buffers
+
+		state.buffers.color.setLocked( true );
+		state.buffers.depth.setLocked( true );
+
+		// set up stencil
+
+		var writeValue, clearValue;
+
+		if ( this.inverse ) {
+
+			writeValue = 0;
+			clearValue = 1;
+
+		} else {
+
+			writeValue = 1;
+			clearValue = 0;
+
+		}
+
+		state.buffers.stencil.setTest( true );
+		state.buffers.stencil.setOp( context.REPLACE, context.REPLACE, context.REPLACE );
+		state.buffers.stencil.setFunc( context.ALWAYS, writeValue, 0xffffffff );
+		state.buffers.stencil.setClear( clearValue );
+
+		// draw into the stencil buffer
+
+		renderer.setRenderTarget( readBuffer );
+		if ( this.clear ) renderer.clear();
+		renderer.render( this.scene, this.camera );
+
+		renderer.setRenderTarget( writeBuffer );
+		if ( this.clear ) renderer.clear();
+		renderer.render( this.scene, this.camera );
+
+		// unlock color and depth buffer for subsequent rendering
+
+		state.buffers.color.setLocked( false );
+		state.buffers.depth.setLocked( false );
+
+		// only render where stencil is set to 1
+
+		state.buffers.stencil.setFunc( context.EQUAL, 1, 0xffffffff ); // draw if == 1
+		state.buffers.stencil.setOp( context.KEEP, context.KEEP, context.KEEP );
+
+	}
+
+} );
+
+
+THREE.ClearMaskPass = function () {
+
+	THREE.Pass.call( this );
+
+	this.needsSwap = false;
+
+};
+
+THREE.ClearMaskPass.prototype = Object.create( THREE.Pass.prototype );
+
+Object.assign( THREE.ClearMaskPass.prototype, {
+
+	render: function ( renderer, writeBuffer, readBuffer, deltaTime, maskActive ) {
+
+		renderer.state.buffers.stencil.setTest( false );
+
+	}
+
+} );
+
+/**
+ * @author alteredq / http://alteredqualia.com/
+ */
+
+THREE.TexturePass = function ( map, opacity ) {
+
+	THREE.Pass.call( this );
+
+	if ( THREE.CopyShader === undefined )
+		console.error( "THREE.TexturePass relies on THREE.CopyShader" );
+
+	var shader = THREE.CopyShader;
+
+	this.map = map;
+	this.opacity = ( opacity !== undefined ) ? opacity : 1.0;
+
+	this.uniforms = THREE.UniformsUtils.clone( shader.uniforms );
+
+	this.material = new THREE.ShaderMaterial( {
+
+		uniforms: this.uniforms,
+		vertexShader: shader.vertexShader,
+		fragmentShader: shader.fragmentShader,
+		depthTest: false,
+		depthWrite: false
+
+	} );
+
+	this.needsSwap = false;
+
+	this.fsQuad = new THREE.Pass.FullScreenQuad( null );
+
+};
+
+THREE.TexturePass.prototype = Object.assign( Object.create( THREE.Pass.prototype ), {
+
+	constructor: THREE.TexturePass,
+
+	render: function ( renderer, writeBuffer, readBuffer, deltaTime, maskActive ) {
+
+		var oldAutoClear = renderer.autoClear;
+		renderer.autoClear = false;
+
+		this.fsQuad.material = this.material;
+
+		this.uniforms[ "opacity" ].value = this.opacity;
+		this.uniforms[ "tDiffuse" ].value = this.map;
+		this.material.transparent = ( this.opacity < 1.0 );
+
+		renderer.setRenderTarget( this.renderToScreen ? null : readBuffer );
+		if ( this.clear ) renderer.clear();
+		this.fsQuad.render( renderer );
+
+		renderer.autoClear = oldAutoClear;
+	}
+
+} );
+
+/**
+ * @author alteredq / http://alteredqualia.com/
+ */
+
+THREE.ShaderPass = function ( shader, textureID ) {
+
+	THREE.Pass.call( this );
+
+	this.textureID = ( textureID !== undefined ) ? textureID : "tDiffuse";
+
+	if ( shader instanceof THREE.ShaderMaterial ) {
+
+		this.uniforms = shader.uniforms;
+
+		this.material = shader;
+
+	} else if ( shader ) {
+
+		this.uniforms = THREE.UniformsUtils.clone( shader.uniforms );
+
+		this.material = new THREE.ShaderMaterial( {
+
+			defines: Object.assign( {}, shader.defines ),
+			uniforms: this.uniforms,
+			vertexShader: shader.vertexShader,
+			fragmentShader: shader.fragmentShader
+
+		} );
+
+	}
+
+	this.fsQuad = new THREE.Pass.FullScreenQuad( this.material );
+};
+
+THREE.ShaderPass.prototype = Object.assign( Object.create( THREE.Pass.prototype ), {
+
+	constructor: THREE.ShaderPass,
+
+	render: function ( renderer, writeBuffer, readBuffer, deltaTime, maskActive ) {
+
+		if ( this.uniforms[ this.textureID ] ) {
+
+			this.uniforms[ this.textureID ].value = readBuffer.texture;
+
+		}
+
+		this.fsQuad.material = this.material;
+
+		if ( this.renderToScreen ) {
+
+			renderer.setRenderTarget( null );
+			this.fsQuad.render( renderer );
+
+		} else {
+
+			renderer.setRenderTarget( writeBuffer );
+			// TODO: Avoid using autoClear properties, see https://github.com/mrdoob/three.js/pull/15571#issuecomment-465669600
+			if ( this.clear ) renderer.clear( renderer.autoClearColor, renderer.autoClearDepth, renderer.autoClearStencil );
+			this.fsQuad.render( renderer );
+
+		}
+
+	}
+
+} );
+
+/**
+ * @author alteredq / http://alteredqualia.com/
+ */
+
+THREE.RenderPass = function ( scene, camera, overrideMaterial, clearColor, clearAlpha ) {
+
+	THREE.Pass.call( this );
+
+	this.scene = scene;
+	this.camera = camera;
+
+	this.overrideMaterial = overrideMaterial;
+
+	this.clearColor = clearColor;
+	this.clearAlpha = ( clearAlpha !== undefined ) ? clearAlpha : 0;
+
+	this.clear = true;
+	this.clearDepth = false;
+	this.needsSwap = false;
+
+};
+
+THREE.RenderPass.prototype = Object.assign( Object.create( THREE.Pass.prototype ), {
+
+	constructor: THREE.RenderPass,
+
+	render: function ( renderer, writeBuffer, readBuffer, deltaTime, maskActive ) {
+
+		var oldAutoClear = renderer.autoClear;
+		renderer.autoClear = false;
+
+		this.scene.overrideMaterial = this.overrideMaterial;
+
+		var oldClearColor, oldClearAlpha;
+
+		if ( this.clearColor ) {
+
+			oldClearColor = renderer.getClearColor().getHex();
+			oldClearAlpha = renderer.getClearAlpha();
+
+			renderer.setClearColor( this.clearColor, this.clearAlpha );
+
+		}
+
+		if ( this.clearDepth ) {
+
+			renderer.clearDepth();
+
+		}
+
+		renderer.setRenderTarget( this.renderToScreen ? null : readBuffer );
+
+		// TODO: Avoid using autoClear properties, see https://github.com/mrdoob/three.js/pull/15571#issuecomment-465669600
+		if ( this.clear ) renderer.clear( renderer.autoClearColor, renderer.autoClearDepth, renderer.autoClearStencil );
+		renderer.render( this.scene, this.camera );
+
+		if ( this.clearColor ) {
+
+			renderer.setClearColor( oldClearColor, oldClearAlpha );
+
+		}
+
+		this.scene.overrideMaterial = null;
+		renderer.autoClear = oldAutoClear;
+
+	}
+
+} );
+
+/**
+ * @author mrdoob / http://mrdoob.com/
+ */
+
+THREE.ClearPass = function ( clearColor, clearAlpha ) {
+
+	THREE.Pass.call( this );
+
+	this.needsSwap = false;
+
+	this.clearColor = ( clearColor !== undefined ) ? clearColor : 0x000000;
+	this.clearAlpha = ( clearAlpha !== undefined ) ? clearAlpha : 0;
+
+};
+
+THREE.ClearPass.prototype = Object.assign( Object.create( THREE.Pass.prototype ), {
+
+	constructor: THREE.ClearPass,
+
+	render: function ( renderer, writeBuffer, readBuffer, deltaTime, maskActive ) {
+
+		var oldClearColor, oldClearAlpha;
+
+		if ( this.clearColor ) {
+
+			oldClearColor = renderer.getClearColor().getHex();
+			oldClearAlpha = renderer.getClearAlpha();
+
+			renderer.setClearColor( this.clearColor, this.clearAlpha );
+
+		}
+
+		renderer.setRenderTarget( this.renderToScreen ? null : readBuffer );
+		renderer.clear();
+
+		if ( this.clearColor ) {
+
+			renderer.setClearColor( oldClearColor, oldClearAlpha );
+
+		}
+
+	}
+
+} );
+
+(function(root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        define('three.TessellateModifier', ['three'], factory);
+    }
+    else if ('undefined' !== typeof exports && 'undefined' !== typeof module) {
+        module.exports = factory(require('three'));
+    }
+    else {
+        factory(root.THREE);
+    }
+}(this, function(THREE) {
+
+/**
+ * Break faces with edges longer than maxEdgeLength
+ * - not recursive
+ *
+ * @author alteredq / http://alteredqualia.com/
+ */
+
+THREE.TessellateModifier = function ( maxEdgeLength ) {
+
+	this.maxEdgeLength = maxEdgeLength;
+
+};
+
+THREE.TessellateModifier.prototype.modify = function ( geometry ) {
+
+	var edge;
+
+	var faces = [];
+	var faceVertexUvs = [];
+	var maxEdgeLengthSquared = this.maxEdgeLength * this.maxEdgeLength;
+
+	for ( var i = 0, il = geometry.faceVertexUvs.length; i < il; i ++ ) {
+
+		faceVertexUvs[ i ] = [];
+
+	}
+
+	for ( var i = 0, il = geometry.faces.length; i < il; i ++ ) {
+
+		var face = geometry.faces[ i ];
+
+		if ( face instanceof THREE.Face3 ) {
+
+			var a = face.a;
+			var b = face.b;
+			var c = face.c;
+
+			var va = geometry.vertices[ a ];
+			var vb = geometry.vertices[ b ];
+			var vc = geometry.vertices[ c ];
+
+			var dab = va.distanceToSquared( vb );
+			var dbc = vb.distanceToSquared( vc );
+			var dac = va.distanceToSquared( vc );
+
+			if ( dab > maxEdgeLengthSquared || dbc > maxEdgeLengthSquared || dac > maxEdgeLengthSquared ) {
+
+				var m = geometry.vertices.length;
+
+				var triA = face.clone();
+				var triB = face.clone();
+
+				if ( dab >= dbc && dab >= dac ) {
+
+					var vm = va.clone();
+					vm.lerp( vb, 0.5 );
+
+					triA.a = a;
+					triA.b = m;
+					triA.c = c;
+
+					triB.a = m;
+					triB.b = b;
+					triB.c = c;
+
+					if ( face.vertexNormals.length === 3 ) {
+
+						var vnm = face.vertexNormals[ 0 ].clone();
+						vnm.lerp( face.vertexNormals[ 1 ], 0.5 );
+
+						triA.vertexNormals[ 1 ].copy( vnm );
+						triB.vertexNormals[ 0 ].copy( vnm );
+
+					}
+
+					if ( face.vertexColors.length === 3 ) {
+
+						var vcm = face.vertexColors[ 0 ].clone();
+						vcm.lerp( face.vertexColors[ 1 ], 0.5 );
+
+						triA.vertexColors[ 1 ].copy( vcm );
+						triB.vertexColors[ 0 ].copy( vcm );
+
+					}
+
+					edge = 0;
+
+				} else if ( dbc >= dab && dbc >= dac ) {
+
+					var vm = vb.clone();
+					vm.lerp( vc, 0.5 );
+
+					triA.a = a;
+					triA.b = b;
+					triA.c = m;
+
+					triB.a = m;
+					triB.b = c;
+					triB.c = a;
+
+					if ( face.vertexNormals.length === 3 ) {
+
+						var vnm = face.vertexNormals[ 1 ].clone();
+						vnm.lerp( face.vertexNormals[ 2 ], 0.5 );
+
+						triA.vertexNormals[ 2 ].copy( vnm );
+
+						triB.vertexNormals[ 0 ].copy( vnm );
+						triB.vertexNormals[ 1 ].copy( face.vertexNormals[ 2 ] );
+						triB.vertexNormals[ 2 ].copy( face.vertexNormals[ 0 ] );
+
+					}
+
+					if ( face.vertexColors.length === 3 ) {
+
+						var vcm = face.vertexColors[ 1 ].clone();
+						vcm.lerp( face.vertexColors[ 2 ], 0.5 );
+
+						triA.vertexColors[ 2 ].copy( vcm );
+
+						triB.vertexColors[ 0 ].copy( vcm );
+						triB.vertexColors[ 1 ].copy( face.vertexColors[ 2 ] );
+						triB.vertexColors[ 2 ].copy( face.vertexColors[ 0 ] );
+
+					}
+
+					edge = 1;
+
+				} else {
+
+					var vm = va.clone();
+					vm.lerp( vc, 0.5 );
+
+					triA.a = a;
+					triA.b = b;
+					triA.c = m;
+
+					triB.a = m;
+					triB.b = b;
+					triB.c = c;
+
+					if ( face.vertexNormals.length === 3 ) {
+
+						var vnm = face.vertexNormals[ 0 ].clone();
+						vnm.lerp( face.vertexNormals[ 2 ], 0.5 );
+
+						triA.vertexNormals[ 2 ].copy( vnm );
+						triB.vertexNormals[ 0 ].copy( vnm );
+
+					}
+
+					if ( face.vertexColors.length === 3 ) {
+
+						var vcm = face.vertexColors[ 0 ].clone();
+						vcm.lerp( face.vertexColors[ 2 ], 0.5 );
+
+						triA.vertexColors[ 2 ].copy( vcm );
+						triB.vertexColors[ 0 ].copy( vcm );
+
+					}
+
+					edge = 2;
+
+				}
+
+				faces.push( triA, triB );
+				geometry.vertices.push( vm );
+
+				for ( var j = 0, jl = geometry.faceVertexUvs.length; j < jl; j ++ ) {
+
+					if ( geometry.faceVertexUvs[ j ].length ) {
+
+						var uvs = geometry.faceVertexUvs[ j ][ i ];
+
+						var uvA = uvs[ 0 ];
+						var uvB = uvs[ 1 ];
+						var uvC = uvs[ 2 ];
+
+						// AB
+
+						if ( edge === 0 ) {
+
+							var uvM = uvA.clone();
+							uvM.lerp( uvB, 0.5 );
+
+							var uvsTriA = [ uvA.clone(), uvM.clone(), uvC.clone() ];
+							var uvsTriB = [ uvM.clone(), uvB.clone(), uvC.clone() ];
+
+						// BC
+
+						} else if ( edge === 1 ) {
+
+							var uvM = uvB.clone();
+							uvM.lerp( uvC, 0.5 );
+
+							var uvsTriA = [ uvA.clone(), uvB.clone(), uvM.clone() ];
+							var uvsTriB = [ uvM.clone(), uvC.clone(), uvA.clone() ];
+
+						// AC
+
+						} else {
+
+							var uvM = uvA.clone();
+							uvM.lerp( uvC, 0.5 );
+
+							var uvsTriA = [ uvA.clone(), uvB.clone(), uvM.clone() ];
+							var uvsTriB = [ uvM.clone(), uvB.clone(), uvC.clone() ];
+
+						}
+
+						faceVertexUvs[ j ].push( uvsTriA, uvsTriB );
+
+					}
+
+				}
+
+			} else {
+
+				faces.push( face );
+
+				for ( var j = 0, jl = geometry.faceVertexUvs.length; j < jl; j ++ ) {
+
+					faceVertexUvs[ j ].push( geometry.faceVertexUvs[ j ][ i ] );
+
+				}
+
+			}
+
+		}
+
+	}
+
+	geometry.faces = faces;
+	geometry.faceVertexUvs = faceVertexUvs;
+
+};
+}));
+(function(root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        define('three.ExplodeModifier', ['three'], factory);
+    }
+    else if ('undefined' !== typeof exports && 'undefined' !== typeof module) {
+        module.exports = factory(require('three'));
+    }
+    else {
+        factory(root.THREE);
+    }
+}(this, function(THREE) {
+
+/**
+ * Make all faces use unique vertices
+ * so that each face can be separated from others
+ *
+ * @author alteredq / http://alteredqualia.com/
+ */
+
+THREE.ExplodeModifier = function () {
+
+};
+
+THREE.ExplodeModifier.prototype.modify = function ( geometry ) {
+
+	var vertices = [];
+
+	for ( var i = 0, il = geometry.faces.length; i < il; i ++ ) {
+
+		var n = vertices.length;
+
+		var face = geometry.faces[ i ];
+
+		var a = face.a;
+		var b = face.b;
+		var c = face.c;
+
+		var va = geometry.vertices[ a ];
+		var vb = geometry.vertices[ b ];
+		var vc = geometry.vertices[ c ];
+
+		vertices.push( va.clone() );
+		vertices.push( vb.clone() );
+		vertices.push( vc.clone() );
+
+		face.a = n;
+		face.b = n + 1;
+		face.c = n + 2;
+
+	}
+
+	geometry.vertices = vertices;
+
+};
+}));
+var defaultThreeUniforms = ['normalMatrix', 'viewMatrix', 'projectionMatrix', 'position', 'normal', 'modelViewMatrix', 'uv', 'uv2', 'modelMatrix'];
+
+function ShaderRuntime() {}
+
+ShaderRuntime.prototype = {
+    mainCamera: null,
+    cubeCameras: {},
+    reserved: {
+        time: null,
+        cameraPosition: null
+    },
+    umap: {
+        float: {
+            type: 'f',
+            value: 0
+        },
+        int: {
+            type: 'i',
+            value: 0
+        },
+        vec2: {
+            type: 'v2',
+            value: function value() {
+                return new THREE.Vector2();
+            }
+        },
+        vec3: {
+            type: 'v3',
+            value: function value() {
+                return new THREE.Vector3();
+            }
+        },
+        vec4: {
+            type: 'v4',
+            value: function value() {
+                return new THREE.Vector4();
+            }
+        },
+        samplerCube: {
+            type: 't'
+        },
+        sampler2D: {
+            type: 't'
+        }
+    },
+    getUmap: function getUmap(type) {
+        var value = this.umap[type].value;
+        return typeof value === 'function' ? value() : value;
+    },
+    load: function load(sourceOrSources, callback) {
+        var _this = this;
+
+        var sources = sourceOrSources,
+        onlyOneSource = typeof sourceOrSources === 'string';
+
+        if (onlyOneSource) {
+            sources = [sourceOrSources];
+        }
+
+        var loadedShaders = new Array(sources.length),
+        itemsLoaded = 0;
+
+        var loadSource = function loadSource(index, source) {
+            var loader = new THREE.FileLoader();
+
+            loader.load(source, function(json) {
+                var parsed;
+
+                try {
+                    parsed = JSON.parse(json);
+                    delete parsed.id; // Errors if passed to rawshadermaterial :(
+                } catch(e) {
+                    throw new Error('Could not parse shader' + source + '! Please verify the URL is correct.');
+                }
+				
+                _this.add(parsed.name, parsed);
+
+                loadedShaders[index] = parsed;
+
+                if (++itemsLoaded === sources.length) {
+                    callback(onlyOneSource ? loadedShaders[0] : loadedShaders);
+                }
+            });
+        };
+
+        for (var x = 0; x < sources.length; x++) {
+            loadSource(x, sources[x]);
+        }
+    },
+	
+	//Load json code directly
+    loadJSON: function load(sourceOrSources, callback) {
+        var _this = this;
+
+        var sources = sourceOrSources,
+        onlyOneSource = typeof sourceOrSources === 'string';
+
+        if (onlyOneSource) {
+            sources = [sourceOrSources];
+        }
+
+        var loadedShaders = new Array(sources.length),
+        itemsLoaded = 0;
+
+        var loadJSONCode = function loadJSONCode(index, source) {
+			
+			var parsed;
+
+			parsed = source;
+			delete parsed.id; // Errors if passed to rawshadermaterial :(
+			
+
+			_this.add(parsed.name, parsed);
+
+			loadedShaders[index] = parsed;
+
+			if (++itemsLoaded === sources.length) {
+				callback(onlyOneSource ? loadedShaders[0] : loadedShaders);
+			}
+			
+			
+        };
+
+        for (var x = 0; x < sources.length; x++) {
+            loadJSONCode(x, sources[x]);
+        }
+    },
+    registerCamera: function registerCamera(camera) {
+        if (! (camera instanceof THREE.Camera)) {
+            throw new Error('Cannot register a non-camera as a camera!');
+        }
+
+        this.mainCamera = camera;
+    },
+    registerCubeCamera: function registerCubeCamera(name, camera) {
+        if (!camera.renderTarget) {
+            throw new Error('Cannot register a non-camera as a camera!');
+        }
+
+        this.cubeCameras[name] = camera;
+    },
+    unregisterCamera: function unregisterCamera(name) {
+        if (name in this.cubeCameras) {
+            delete this.cubeCameras[name];
+        } else if (name === this.mainCamera) {
+            delete this.mainCamera;
+        } else {
+            throw new Error('You never registered camera ' + name);
+        }
+    },
+    updateSource: function updateSource(identifier, config, findBy) {
+        findBy = findBy || 'name';
+
+        if (!this.shaderTypes[identifier]) {
+            throw new Error('Runtime Error: Cannot update shader ' + identifier + ' because it has not been added.');
+        }
+
+        var newShaderData = this.add(identifier, config),
+        shader,
+        x;
+
+        for (x = 0; shader = this.runningShaders[x++];) {
+            if (shader[findBy] === identifier) {
+                extend(shader.material, omit(newShaderData, 'id'));
+                shader.material.needsUpdate = true;
+            }
+        }
+    },
+    renameShader: function renameShader(oldName, newName) {
+        var x, shader;
+
+        if (! (oldName in this.shaderTypes)) {
+            throw new Error('Could not rename shader ' + oldName + ' to ' + newName + '. It does not exist.');
+        }
+
+        this.shaderTypes[newName] = this.shaderTypes[oldName];
+        delete this.shaderTypes[oldName];
+
+        for (x = 0; shader = this.runningShaders[x++];) {
+            if (shader.name === oldName) {
+                shader.name = newName;
+            }
+        }
+    },
+    get: function get(identifier) {
+        var shaderType = this.shaderTypes[identifier];
+
+        if (!shaderType.initted) {
+            this.create(identifier);
+        }
+
+        return shaderType.material;
+    },
+    add: function add(shaderName, config) {
+        var newData = clone(config),
+        uniform;
+        newData.fragmentShader = config.fragment;
+        newData.vertexShader = config.vertex;
+        delete newData.fragment;
+        delete newData.vertex;
+
+        for (var uniformName in newData.uniforms) {
+            uniform = newData.uniforms[uniformName];
+
+            if (uniform.value === null) {
+                newData.uniforms[uniformName].value = this.getUmap(uniform.glslType);
+            }
+        }
+
+        if (shaderName in this.shaderTypes) {
+            // maybe not needed? too sleepy, need document
+            extend(this.shaderTypes[shaderName], newData);
+        } else {
+            this.shaderTypes[shaderName] = newData;
+        }
+
+        return newData;
+    },
+    create: function create(identifier) {
+        var shaderType = this.shaderTypes[identifier];
+        var keys = Object.keys(shaderType); // Three's shadermaterial id is not assignable, so filter it out
+        var withoutId = {};
+
+        for (var i = 0; i < keys.length; i++) {
+            if (keys[i] !== 'id') {
+                withoutId[keys[i]] = shaderType[keys[i]];
+            }
+        }
+
+        shaderType.material = new THREE.RawShaderMaterial(withoutId);
+        this.runningShaders.push(shaderType);
+        shaderType.init && shaderType.init(shaderType.material);
+        shaderType.material.needsUpdate = true;
+        shaderType.initted = true;
+        return shaderType.material;
+    },
+    updateRuntime: function updateRuntime(identifier, data, findBy) {
+        findBy = findBy || 'name';
+        var shader, x, uniformName, uniform; // This loop does not appear to be a slowdown culprit
+        for (x = 0; shader = this.runningShaders[x++];) {
+            if (shader[findBy] === identifier) {
+                for (uniformName in data.uniforms) {
+                    if (uniformName in this.reserved) {
+                        continue;
+                    }
+
+                    if (uniformName in shader.material.uniforms) {
+                        uniform = data.uniforms[uniformName]; // this is nasty, since the shader serializes
+                        // CubeCamera model to string. Maybe not update it at
+                        // all?
+                        if (uniform.type === 't' && typeof uniform.value === 'string') {
+                            uniform.value = this.cubeCameras[uniform.value].renderTarget;
+                        }
+
+                        shader.material.uniforms[uniformName].value = data.uniforms[uniformName].value;
+                    }
+                }
+            }
+        }
+    },
+    // Update global shader uniform values
+    updateShaders: function updateShaders(time, obj) {
+        var shader, x;
+        obj = obj || {};
+
+        for (x = 0; shader = this.runningShaders[x++];) {
+            for (var uniform in obj.uniforms) {
+                if (uniform in shader.material.uniforms) {
+                    shader.material.uniforms[uniform].value = obj.uniforms[uniform];
+                }
+            }
+
+            if ('cameraPosition' in shader.material.uniforms && this.mainCamera) {
+                shader.material.uniforms.cameraPosition.value = this.mainCamera.position.clone();
+            }
+
+            if ('viewMatrix' in shader.material.uniforms && this.mainCamera) {
+                shader.material.uniforms.viewMatrix.value = this.mainCamera.matrixWorldInverse;
+            }
+
+            if ('time' in shader.material.uniforms) {
+                shader.material.uniforms.time.value = time;
+            }
+        }
+    },
+    shaderTypes: {},
+    runningShaders: []
+}; // Convenience methods so we don't have to include underscore
+function extend() {
+    var length = arguments.length,
+    obj = arguments[0];
+
+    if (length < 2) {
+        return obj;
+    }
+
+    for (var index = 1; index < length; index++) {
+        var source = arguments[index],
+        keys = Object.keys(source || {}),
+        l = keys.length;
+
+        for (var i = 0; i < l; i++) {
+            var key = keys[i];
+            obj[key] = source[key];
+        }
+    }
+
+    return obj;
+}
+
+function clone(obj) {
+    return extend({},
+    obj);
+}
+
+function omit(obj) {
+    var cloned = clone(obj),
+    x,
+    key;
+
+    for (x = 0; key = (_ref = x+++1, _ref < 1 || arguments.length <= _ref ? undefined: arguments[_ref]);) {
+        var _ref;
+
+        delete cloned[key];
+    }
+
+    return cloned;
+}
+
+
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
+function d3threeD(exports) {
+
+    var DEGS_TO_RADS = Math.PI / 180;
+    var DIGIT_0 = 48,
+    DIGIT_9 = 57,
+    COMMA = 44,
+    SPACE = 32,
+    PERIOD = 46,
+    MINUS = 45;
+
+    exports.transformSVGPath = function transformSVGPath(pathStr) {
+
+        var path = new THREE.ShapePath();
+
+        var idx = 1,
+        len = pathStr.length,
+        activeCmd, x = 0,
+        y = 0,
+        nx = 0,
+        ny = 0,
+        firstX = null,
+        firstY = null,
+        x1 = 0,
+        x2 = 0,
+        y1 = 0,
+        y2 = 0,
+        rx = 0,
+        ry = 0,
+        xar = 0,
+        laf = 0,
+        sf = 0,
+        cx, cy;
+
+        function eatNum() {
+
+            var sidx, c, isFloat = false,
+            s;
+
+            // eat delims
+            while (idx < len) {
+
+                c = pathStr.charCodeAt(idx);
+
+                if (c !== COMMA && c !== SPACE) break;
+
+                idx++;
+
+            }
+
+            if (c === MINUS) {
+
+                sidx = idx++;
+
+            } else {
+
+                sidx = idx;
+
+            }
+
+            // eat number
+            while (idx < len) {
+
+                c = pathStr.charCodeAt(idx);
+
+                if (DIGIT_0 <= c && c <= DIGIT_9) {
+
+                    idx++;
+                    continue;
+
+                } else if (c === PERIOD) {
+
+                    idx++;
+                    isFloat = true;
+                    continue;
+
+                }
+
+                s = pathStr.substring(sidx, idx);
+                return isFloat ? parseFloat(s) : parseInt(s);
+
+            }
+
+            s = pathStr.substring(sidx);
+            return isFloat ? parseFloat(s) : parseInt(s);
+
+        }
+
+        function nextIsNum() {
+
+            var c;
+
+            // do permanently eat any delims...
+            while (idx < len) {
+
+                c = pathStr.charCodeAt(idx);
+
+                if (c !== COMMA && c !== SPACE) break;
+
+                idx++;
+
+            }
+
+            c = pathStr.charCodeAt(idx);
+            return (c === MINUS || (DIGIT_0 <= c && c <= DIGIT_9));
+
+        }
+
+        var canRepeat;
+        activeCmd = pathStr[0];
+
+        while (idx <= len) {
+
+            canRepeat = true;
+
+            switch (activeCmd) {
+
+                // moveto commands, become lineto's if repeated
+            case 'M':
+                x = eatNum();
+                y = eatNum();
+                path.moveTo(x, y);
+                activeCmd = 'L';
+                firstX = x;
+                firstY = y;
+                break;
+
+            case 'm':
+                x += eatNum();
+                y += eatNum();
+                path.moveTo(x, y);
+                activeCmd = 'l';
+                firstX = x;
+                firstY = y;
+                break;
+
+            case 'Z':
+            case 'z':
+                canRepeat = false;
+                if (x !== firstX || y !== firstY) path.lineTo(firstX, firstY);
+                break;
+
+                // - lines!
+            case 'L':
+            case 'H':
+            case 'V':
+                nx = (activeCmd === 'V') ? x: eatNum();
+                ny = (activeCmd === 'H') ? y: eatNum();
+                path.lineTo(nx, ny);
+                x = nx;
+                y = ny;
+                break;
+
+            case 'l':
+            case 'h':
+            case 'v':
+                nx = (activeCmd === 'v') ? x: (x + eatNum());
+                ny = (activeCmd === 'h') ? y: (y + eatNum());
+                path.lineTo(nx, ny);
+                x = nx;
+                y = ny;
+                break;
+
+                // - cubic bezier
+            case 'C':
+                x1 = eatNum();
+                y1 = eatNum();
+
+            case 'S':
+                if (activeCmd === 'S') {
+
+                    x1 = 2 * x - x2;
+                    y1 = 2 * y - y2;
+
+                }
+
+                x2 = eatNum();
+                y2 = eatNum();
+                nx = eatNum();
+                ny = eatNum();
+                path.bezierCurveTo(x1, y1, x2, y2, nx, ny);
+                x = nx;
+                y = ny;
+                break;
+
+            case 'c':
+                x1 = x + eatNum();
+                y1 = y + eatNum();
+
+            case 's':
+                if (activeCmd === 's') {
+
+                    x1 = 2 * x - x2;
+                    y1 = 2 * y - y2;
+
+                }
+
+                x2 = x + eatNum();
+                y2 = y + eatNum();
+                nx = x + eatNum();
+                ny = y + eatNum();
+                path.bezierCurveTo(x1, y1, x2, y2, nx, ny);
+                x = nx;
+                y = ny;
+                break;
+
+                // - quadratic bezier
+            case 'Q':
+                x1 = eatNum();
+                y1 = eatNum();
+
+            case 'T':
+                if (activeCmd === 'T') {
+
+                    x1 = 2 * x - x1;
+                    y1 = 2 * y - y1;
+
+                }
+                nx = eatNum();
+                ny = eatNum();
+                path.quadraticCurveTo(x1, y1, nx, ny);
+                x = nx;
+                y = ny;
+                break;
+
+            case 'q':
+                x1 = x + eatNum();
+                y1 = y + eatNum();
+
+            case 't':
+                if (activeCmd === 't') {
+
+                    x1 = 2 * x - x1;
+                    y1 = 2 * y - y1;
+
+                }
+
+                nx = x + eatNum();
+                ny = y + eatNum();
+                path.quadraticCurveTo(x1, y1, nx, ny);
+                x = nx;
+                y = ny;
+                break;
+
+                // - elliptical arc
+            case 'A':
+                rx = eatNum();
+                ry = eatNum();
+                xar = eatNum() * DEGS_TO_RADS;
+                laf = eatNum();
+                sf = eatNum();
+                nx = eatNum();
+                ny = eatNum();
+                if (rx !== ry) console.warn('Forcing elliptical arc to be a circular one:', rx, ry);
+
+                // SVG implementation notes does all the math for us! woo!
+                // http://www.w3.org/TR/SVG/implnote.html#ArcImplementationNotes
+                // step1, using x1 as x1'
+                x1 = Math.cos(xar) * (x - nx) / 2 + Math.sin(xar) * (y - ny) / 2;
+                y1 = -Math.sin(xar) * (x - nx) / 2 + Math.cos(xar) * (y - ny) / 2;
+
+                // step 2, using x2 as cx'
+                var norm = Math.sqrt((rx * rx * ry * ry - rx * rx * y1 * y1 - ry * ry * x1 * x1) / (rx * rx * y1 * y1 + ry * ry * x1 * x1));
+
+                if (laf === sf) norm = -norm;
+
+                x2 = norm * rx * y1 / ry;
+                y2 = norm * -ry * x1 / rx;
+
+                // step 3
+                cx = Math.cos(xar) * x2 - Math.sin(xar) * y2 + (x + nx) / 2;
+                cy = Math.sin(xar) * x2 + Math.cos(xar) * y2 + (y + ny) / 2;
+
+                var u = new THREE.Vector2(1, 0);
+                var v = new THREE.Vector2((x1 - x2) / rx, (y1 - y2) / ry);
+
+                var startAng = Math.acos(u.dot(v) / u.length() / v.length());
+
+                if (((u.x * v.y) - (u.y * v.x)) < 0) startAng = -startAng;
+
+                // we can reuse 'v' from start angle as our 'u' for delta angle
+                u.x = ( - x1 - x2) / rx;
+                u.y = ( - y1 - y2) / ry;
+
+                var deltaAng = Math.acos(v.dot(u) / v.length() / u.length());
+
+                // This normalization ends up making our curves fail to triangulate...
+                if (((v.x * u.y) - (v.y * u.x)) < 0) deltaAng = -deltaAng;
+                if (!sf && deltaAng > 0) deltaAng -= Math.PI * 2;
+                if (sf && deltaAng < 0) deltaAng += Math.PI * 2;
+
+                path.absarc(cx, cy, rx, startAng, startAng + deltaAng, sf);
+                x = nx;
+                y = ny;
+                break;
+
+            default:
+                throw new Error('Wrong path command: ' + activeCmd);
+
+            }
+
+            // just reissue the command
+            if (canRepeat && nextIsNum()) continue;
+
+            activeCmd = pathStr[idx++];
+
+        }
+
+        return path;
+
+    };
+
+}
+
+var $d3g = {};
+d3threeD($d3g);
+/*
+ * A fast javascript implementation of simplex noise by Jonas Wagner
+
+Based on a speed-improved simplex noise algorithm for 2D, 3D and 4D in Java.
+Which is based on example code by Stefan Gustavson (stegu@itn.liu.se).
+With Optimisations by Peter Eastman (peastman@drizzle.stanford.edu).
+Better rank ordering method by Stefan Gustavson in 2012.
+
+
+ Copyright (c) 2018 Jonas Wagner
+
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+ */
+(function() {
+  'use strict';
+
+  var F2 = 0.5 * (Math.sqrt(3.0) - 1.0);
+  var G2 = (3.0 - Math.sqrt(3.0)) / 6.0;
+  var F3 = 1.0 / 3.0;
+  var G3 = 1.0 / 6.0;
+  var F4 = (Math.sqrt(5.0) - 1.0) / 4.0;
+  var G4 = (5.0 - Math.sqrt(5.0)) / 20.0;
+
+  function SimplexNoise(randomOrSeed) {
+    var random;
+    if (typeof randomOrSeed == 'function') {
+      random = randomOrSeed;
+    }
+    else if (randomOrSeed) {
+      random = alea(randomOrSeed);
+    } else {
+      random = Math.random;
+    }
+    this.p = buildPermutationTable(random);
+    this.perm = new Uint8Array(512);
+    this.permMod12 = new Uint8Array(512);
+    for (var i = 0; i < 512; i++) {
+      this.perm[i] = this.p[i & 255];
+      this.permMod12[i] = this.perm[i] % 12;
+    }
+
+  }
+  SimplexNoise.prototype = {
+    grad3: new Float32Array([1, 1, 0,
+      -1, 1, 0,
+      1, -1, 0,
+
+      -1, -1, 0,
+      1, 0, 1,
+      -1, 0, 1,
+
+      1, 0, -1,
+      -1, 0, -1,
+      0, 1, 1,
+
+      0, -1, 1,
+      0, 1, -1,
+      0, -1, -1]),
+    grad4: new Float32Array([0, 1, 1, 1, 0, 1, 1, -1, 0, 1, -1, 1, 0, 1, -1, -1,
+      0, -1, 1, 1, 0, -1, 1, -1, 0, -1, -1, 1, 0, -1, -1, -1,
+      1, 0, 1, 1, 1, 0, 1, -1, 1, 0, -1, 1, 1, 0, -1, -1,
+      -1, 0, 1, 1, -1, 0, 1, -1, -1, 0, -1, 1, -1, 0, -1, -1,
+      1, 1, 0, 1, 1, 1, 0, -1, 1, -1, 0, 1, 1, -1, 0, -1,
+      -1, 1, 0, 1, -1, 1, 0, -1, -1, -1, 0, 1, -1, -1, 0, -1,
+      1, 1, 1, 0, 1, 1, -1, 0, 1, -1, 1, 0, 1, -1, -1, 0,
+      -1, 1, 1, 0, -1, 1, -1, 0, -1, -1, 1, 0, -1, -1, -1, 0]),
+    noise2D: function(xin, yin) {
+      var permMod12 = this.permMod12;
+      var perm = this.perm;
+      var grad3 = this.grad3;
+      var n0 = 0; // Noise contributions from the three corners
+      var n1 = 0;
+      var n2 = 0;
+      // Skew the input space to determine which simplex cell we're in
+      var s = (xin + yin) * F2; // Hairy factor for 2D
+      var i = Math.floor(xin + s);
+      var j = Math.floor(yin + s);
+      var t = (i + j) * G2;
+      var X0 = i - t; // Unskew the cell origin back to (x,y) space
+      var Y0 = j - t;
+      var x0 = xin - X0; // The x,y distances from the cell origin
+      var y0 = yin - Y0;
+      // For the 2D case, the simplex shape is an equilateral triangle.
+      // Determine which simplex we are in.
+      var i1, j1; // Offsets for second (middle) corner of simplex in (i,j) coords
+      if (x0 > y0) {
+        i1 = 1;
+        j1 = 0;
+      } // lower triangle, XY order: (0,0)->(1,0)->(1,1)
+      else {
+        i1 = 0;
+        j1 = 1;
+      } // upper triangle, YX order: (0,0)->(0,1)->(1,1)
+      // A step of (1,0) in (i,j) means a step of (1-c,-c) in (x,y), and
+      // a step of (0,1) in (i,j) means a step of (-c,1-c) in (x,y), where
+      // c = (3-sqrt(3))/6
+      var x1 = x0 - i1 + G2; // Offsets for middle corner in (x,y) unskewed coords
+      var y1 = y0 - j1 + G2;
+      var x2 = x0 - 1.0 + 2.0 * G2; // Offsets for last corner in (x,y) unskewed coords
+      var y2 = y0 - 1.0 + 2.0 * G2;
+      // Work out the hashed gradient indices of the three simplex corners
+      var ii = i & 255;
+      var jj = j & 255;
+      // Calculate the contribution from the three corners
+      var t0 = 0.5 - x0 * x0 - y0 * y0;
+      if (t0 >= 0) {
+        var gi0 = permMod12[ii + perm[jj]] * 3;
+        t0 *= t0;
+        n0 = t0 * t0 * (grad3[gi0] * x0 + grad3[gi0 + 1] * y0); // (x,y) of grad3 used for 2D gradient
+      }
+      var t1 = 0.5 - x1 * x1 - y1 * y1;
+      if (t1 >= 0) {
+        var gi1 = permMod12[ii + i1 + perm[jj + j1]] * 3;
+        t1 *= t1;
+        n1 = t1 * t1 * (grad3[gi1] * x1 + grad3[gi1 + 1] * y1);
+      }
+      var t2 = 0.5 - x2 * x2 - y2 * y2;
+      if (t2 >= 0) {
+        var gi2 = permMod12[ii + 1 + perm[jj + 1]] * 3;
+        t2 *= t2;
+        n2 = t2 * t2 * (grad3[gi2] * x2 + grad3[gi2 + 1] * y2);
+      }
+      // Add contributions from each corner to get the final noise value.
+      // The result is scaled to return values in the interval [-1,1].
+      return 70.0 * (n0 + n1 + n2);
+    },
+    // 3D simplex noise
+    noise3D: function(xin, yin, zin) {
+      var permMod12 = this.permMod12;
+      var perm = this.perm;
+      var grad3 = this.grad3;
+      var n0, n1, n2, n3; // Noise contributions from the four corners
+      // Skew the input space to determine which simplex cell we're in
+      var s = (xin + yin + zin) * F3; // Very nice and simple skew factor for 3D
+      var i = Math.floor(xin + s);
+      var j = Math.floor(yin + s);
+      var k = Math.floor(zin + s);
+      var t = (i + j + k) * G3;
+      var X0 = i - t; // Unskew the cell origin back to (x,y,z) space
+      var Y0 = j - t;
+      var Z0 = k - t;
+      var x0 = xin - X0; // The x,y,z distances from the cell origin
+      var y0 = yin - Y0;
+      var z0 = zin - Z0;
+      // For the 3D case, the simplex shape is a slightly irregular tetrahedron.
+      // Determine which simplex we are in.
+      var i1, j1, k1; // Offsets for second corner of simplex in (i,j,k) coords
+      var i2, j2, k2; // Offsets for third corner of simplex in (i,j,k) coords
+      if (x0 >= y0) {
+        if (y0 >= z0) {
+          i1 = 1;
+          j1 = 0;
+          k1 = 0;
+          i2 = 1;
+          j2 = 1;
+          k2 = 0;
+        } // X Y Z order
+        else if (x0 >= z0) {
+          i1 = 1;
+          j1 = 0;
+          k1 = 0;
+          i2 = 1;
+          j2 = 0;
+          k2 = 1;
+        } // X Z Y order
+        else {
+          i1 = 0;
+          j1 = 0;
+          k1 = 1;
+          i2 = 1;
+          j2 = 0;
+          k2 = 1;
+        } // Z X Y order
+      }
+      else { // x0<y0
+        if (y0 < z0) {
+          i1 = 0;
+          j1 = 0;
+          k1 = 1;
+          i2 = 0;
+          j2 = 1;
+          k2 = 1;
+        } // Z Y X order
+        else if (x0 < z0) {
+          i1 = 0;
+          j1 = 1;
+          k1 = 0;
+          i2 = 0;
+          j2 = 1;
+          k2 = 1;
+        } // Y Z X order
+        else {
+          i1 = 0;
+          j1 = 1;
+          k1 = 0;
+          i2 = 1;
+          j2 = 1;
+          k2 = 0;
+        } // Y X Z order
+      }
+      // A step of (1,0,0) in (i,j,k) means a step of (1-c,-c,-c) in (x,y,z),
+      // a step of (0,1,0) in (i,j,k) means a step of (-c,1-c,-c) in (x,y,z), and
+      // a step of (0,0,1) in (i,j,k) means a step of (-c,-c,1-c) in (x,y,z), where
+      // c = 1/6.
+      var x1 = x0 - i1 + G3; // Offsets for second corner in (x,y,z) coords
+      var y1 = y0 - j1 + G3;
+      var z1 = z0 - k1 + G3;
+      var x2 = x0 - i2 + 2.0 * G3; // Offsets for third corner in (x,y,z) coords
+      var y2 = y0 - j2 + 2.0 * G3;
+      var z2 = z0 - k2 + 2.0 * G3;
+      var x3 = x0 - 1.0 + 3.0 * G3; // Offsets for last corner in (x,y,z) coords
+      var y3 = y0 - 1.0 + 3.0 * G3;
+      var z3 = z0 - 1.0 + 3.0 * G3;
+      // Work out the hashed gradient indices of the four simplex corners
+      var ii = i & 255;
+      var jj = j & 255;
+      var kk = k & 255;
+      // Calculate the contribution from the four corners
+      var t0 = 0.6 - x0 * x0 - y0 * y0 - z0 * z0;
+      if (t0 < 0) n0 = 0.0;
+      else {
+        var gi0 = permMod12[ii + perm[jj + perm[kk]]] * 3;
+        t0 *= t0;
+        n0 = t0 * t0 * (grad3[gi0] * x0 + grad3[gi0 + 1] * y0 + grad3[gi0 + 2] * z0);
+      }
+      var t1 = 0.6 - x1 * x1 - y1 * y1 - z1 * z1;
+      if (t1 < 0) n1 = 0.0;
+      else {
+        var gi1 = permMod12[ii + i1 + perm[jj + j1 + perm[kk + k1]]] * 3;
+        t1 *= t1;
+        n1 = t1 * t1 * (grad3[gi1] * x1 + grad3[gi1 + 1] * y1 + grad3[gi1 + 2] * z1);
+      }
+      var t2 = 0.6 - x2 * x2 - y2 * y2 - z2 * z2;
+      if (t2 < 0) n2 = 0.0;
+      else {
+        var gi2 = permMod12[ii + i2 + perm[jj + j2 + perm[kk + k2]]] * 3;
+        t2 *= t2;
+        n2 = t2 * t2 * (grad3[gi2] * x2 + grad3[gi2 + 1] * y2 + grad3[gi2 + 2] * z2);
+      }
+      var t3 = 0.6 - x3 * x3 - y3 * y3 - z3 * z3;
+      if (t3 < 0) n3 = 0.0;
+      else {
+        var gi3 = permMod12[ii + 1 + perm[jj + 1 + perm[kk + 1]]] * 3;
+        t3 *= t3;
+        n3 = t3 * t3 * (grad3[gi3] * x3 + grad3[gi3 + 1] * y3 + grad3[gi3 + 2] * z3);
+      }
+      // Add contributions from each corner to get the final noise value.
+      // The result is scaled to stay just inside [-1,1]
+      return 32.0 * (n0 + n1 + n2 + n3);
+    },
+    // 4D simplex noise, better simplex rank ordering method 2012-03-09
+    noise4D: function(x, y, z, w) {
+      var perm = this.perm;
+      var grad4 = this.grad4;
+
+      var n0, n1, n2, n3, n4; // Noise contributions from the five corners
+      // Skew the (x,y,z,w) space to determine which cell of 24 simplices we're in
+      var s = (x + y + z + w) * F4; // Factor for 4D skewing
+      var i = Math.floor(x + s);
+      var j = Math.floor(y + s);
+      var k = Math.floor(z + s);
+      var l = Math.floor(w + s);
+      var t = (i + j + k + l) * G4; // Factor for 4D unskewing
+      var X0 = i - t; // Unskew the cell origin back to (x,y,z,w) space
+      var Y0 = j - t;
+      var Z0 = k - t;
+      var W0 = l - t;
+      var x0 = x - X0; // The x,y,z,w distances from the cell origin
+      var y0 = y - Y0;
+      var z0 = z - Z0;
+      var w0 = w - W0;
+      // For the 4D case, the simplex is a 4D shape I won't even try to describe.
+      // To find out which of the 24 possible simplices we're in, we need to
+      // determine the magnitude ordering of x0, y0, z0 and w0.
+      // Six pair-wise comparisons are performed between each possible pair
+      // of the four coordinates, and the results are used to rank the numbers.
+      var rankx = 0;
+      var ranky = 0;
+      var rankz = 0;
+      var rankw = 0;
+      if (x0 > y0) rankx++;
+      else ranky++;
+      if (x0 > z0) rankx++;
+      else rankz++;
+      if (x0 > w0) rankx++;
+      else rankw++;
+      if (y0 > z0) ranky++;
+      else rankz++;
+      if (y0 > w0) ranky++;
+      else rankw++;
+      if (z0 > w0) rankz++;
+      else rankw++;
+      var i1, j1, k1, l1; // The integer offsets for the second simplex corner
+      var i2, j2, k2, l2; // The integer offsets for the third simplex corner
+      var i3, j3, k3, l3; // The integer offsets for the fourth simplex corner
+      // simplex[c] is a 4-vector with the numbers 0, 1, 2 and 3 in some order.
+      // Many values of c will never occur, since e.g. x>y>z>w makes x<z, y<w and x<w
+      // impossible. Only the 24 indices which have non-zero entries make any sense.
+      // We use a thresholding to set the coordinates in turn from the largest magnitude.
+      // Rank 3 denotes the largest coordinate.
+      i1 = rankx >= 3 ? 1 : 0;
+      j1 = ranky >= 3 ? 1 : 0;
+      k1 = rankz >= 3 ? 1 : 0;
+      l1 = rankw >= 3 ? 1 : 0;
+      // Rank 2 denotes the second largest coordinate.
+      i2 = rankx >= 2 ? 1 : 0;
+      j2 = ranky >= 2 ? 1 : 0;
+      k2 = rankz >= 2 ? 1 : 0;
+      l2 = rankw >= 2 ? 1 : 0;
+      // Rank 1 denotes the second smallest coordinate.
+      i3 = rankx >= 1 ? 1 : 0;
+      j3 = ranky >= 1 ? 1 : 0;
+      k3 = rankz >= 1 ? 1 : 0;
+      l3 = rankw >= 1 ? 1 : 0;
+      // The fifth corner has all coordinate offsets = 1, so no need to compute that.
+      var x1 = x0 - i1 + G4; // Offsets for second corner in (x,y,z,w) coords
+      var y1 = y0 - j1 + G4;
+      var z1 = z0 - k1 + G4;
+      var w1 = w0 - l1 + G4;
+      var x2 = x0 - i2 + 2.0 * G4; // Offsets for third corner in (x,y,z,w) coords
+      var y2 = y0 - j2 + 2.0 * G4;
+      var z2 = z0 - k2 + 2.0 * G4;
+      var w2 = w0 - l2 + 2.0 * G4;
+      var x3 = x0 - i3 + 3.0 * G4; // Offsets for fourth corner in (x,y,z,w) coords
+      var y3 = y0 - j3 + 3.0 * G4;
+      var z3 = z0 - k3 + 3.0 * G4;
+      var w3 = w0 - l3 + 3.0 * G4;
+      var x4 = x0 - 1.0 + 4.0 * G4; // Offsets for last corner in (x,y,z,w) coords
+      var y4 = y0 - 1.0 + 4.0 * G4;
+      var z4 = z0 - 1.0 + 4.0 * G4;
+      var w4 = w0 - 1.0 + 4.0 * G4;
+      // Work out the hashed gradient indices of the five simplex corners
+      var ii = i & 255;
+      var jj = j & 255;
+      var kk = k & 255;
+      var ll = l & 255;
+      // Calculate the contribution from the five corners
+      var t0 = 0.6 - x0 * x0 - y0 * y0 - z0 * z0 - w0 * w0;
+      if (t0 < 0) n0 = 0.0;
+      else {
+        var gi0 = (perm[ii + perm[jj + perm[kk + perm[ll]]]] % 32) * 4;
+        t0 *= t0;
+        n0 = t0 * t0 * (grad4[gi0] * x0 + grad4[gi0 + 1] * y0 + grad4[gi0 + 2] * z0 + grad4[gi0 + 3] * w0);
+      }
+      var t1 = 0.6 - x1 * x1 - y1 * y1 - z1 * z1 - w1 * w1;
+      if (t1 < 0) n1 = 0.0;
+      else {
+        var gi1 = (perm[ii + i1 + perm[jj + j1 + perm[kk + k1 + perm[ll + l1]]]] % 32) * 4;
+        t1 *= t1;
+        n1 = t1 * t1 * (grad4[gi1] * x1 + grad4[gi1 + 1] * y1 + grad4[gi1 + 2] * z1 + grad4[gi1 + 3] * w1);
+      }
+      var t2 = 0.6 - x2 * x2 - y2 * y2 - z2 * z2 - w2 * w2;
+      if (t2 < 0) n2 = 0.0;
+      else {
+        var gi2 = (perm[ii + i2 + perm[jj + j2 + perm[kk + k2 + perm[ll + l2]]]] % 32) * 4;
+        t2 *= t2;
+        n2 = t2 * t2 * (grad4[gi2] * x2 + grad4[gi2 + 1] * y2 + grad4[gi2 + 2] * z2 + grad4[gi2 + 3] * w2);
+      }
+      var t3 = 0.6 - x3 * x3 - y3 * y3 - z3 * z3 - w3 * w3;
+      if (t3 < 0) n3 = 0.0;
+      else {
+        var gi3 = (perm[ii + i3 + perm[jj + j3 + perm[kk + k3 + perm[ll + l3]]]] % 32) * 4;
+        t3 *= t3;
+        n3 = t3 * t3 * (grad4[gi3] * x3 + grad4[gi3 + 1] * y3 + grad4[gi3 + 2] * z3 + grad4[gi3 + 3] * w3);
+      }
+      var t4 = 0.6 - x4 * x4 - y4 * y4 - z4 * z4 - w4 * w4;
+      if (t4 < 0) n4 = 0.0;
+      else {
+        var gi4 = (perm[ii + 1 + perm[jj + 1 + perm[kk + 1 + perm[ll + 1]]]] % 32) * 4;
+        t4 *= t4;
+        n4 = t4 * t4 * (grad4[gi4] * x4 + grad4[gi4 + 1] * y4 + grad4[gi4 + 2] * z4 + grad4[gi4 + 3] * w4);
+      }
+      // Sum up and scale the result to cover the range [-1,1]
+      return 27.0 * (n0 + n1 + n2 + n3 + n4);
+    }
+  };
+
+  function buildPermutationTable(random) {
+    var i;
+    var p = new Uint8Array(256);
+    for (i = 0; i < 256; i++) {
+      p[i] = i;
+    }
+    for (i = 0; i < 255; i++) {
+      var r = i + ~~(random() * (256 - i));
+      var aux = p[i];
+      p[i] = p[r];
+      p[r] = aux;
+    }
+    return p;
+  }
+  SimplexNoise._buildPermutationTable = buildPermutationTable;
+
+  function alea() {
+    // Johannes Baagøe <baagoe@baagoe.com>, 2010
+    var s0 = 0;
+    var s1 = 0;
+    var s2 = 0;
+    var c = 1;
+
+    var mash = masher();
+    s0 = mash(' ');
+    s1 = mash(' ');
+    s2 = mash(' ');
+
+    for (var i = 0; i < arguments.length; i++) {
+      s0 -= mash(arguments[i]);
+      if (s0 < 0) {
+        s0 += 1;
+      }
+      s1 -= mash(arguments[i]);
+      if (s1 < 0) {
+        s1 += 1;
+      }
+      s2 -= mash(arguments[i]);
+      if (s2 < 0) {
+        s2 += 1;
+      }
+    }
+    mash = null;
+    return function() {
+      var t = 2091639 * s0 + c * 2.3283064365386963e-10; // 2^-32
+      s0 = s1;
+      s1 = s2;
+      return s2 = t - (c = t | 0);
+    };
+  }
+  function masher() {
+    var n = 0xefc8249d;
+    return function(data) {
+      data = data.toString();
+      for (var i = 0; i < data.length; i++) {
+        n += data.charCodeAt(i);
+        var h = 0.02519603282416938 * n;
+        n = h >>> 0;
+        h -= n;
+        h *= n;
+        n = h >>> 0;
+        h -= n;
+        n += h * 0x100000000; // 2^32
+      }
+      return (n >>> 0) * 2.3283064365386963e-10; // 2^-32
+    };
+  }
+
+  // amd
+  if (typeof define !== 'undefined' && define.amd) define(function() {return SimplexNoise;});
+  // common js
+  if (typeof exports !== 'undefined') exports.SimplexNoise = SimplexNoise;
+  // browser
+  else if (typeof window !== 'undefined') window.SimplexNoise = SimplexNoise;
+  // nodejs
+  if (typeof module !== 'undefined') {
+    module.exports = SimplexNoise;
+  }
+
+})();
+
+;(function() {
+
+"use strict";
+
+var root = this
+
+var has_require = typeof require !== 'undefined'
+
+var THREE = root.THREE || has_require && require('three')
+if( !THREE )
+	throw new Error( 'MeshLine requires three.js' )
+
+function MeshLine() {
+
+	this.positions = [];
+
+	this.previous = [];
+	this.next = [];
+	this.side = [];
+	this.width = [];
+	this.indices_array = [];
+	this.uvs = [];
+	this.counters = [];
+	this.geometry = new THREE.BufferGeometry();
+
+	this.widthCallback = null;
+
+}
+
+MeshLine.prototype.setGeometry = function( g, c ) {
+
+	this.widthCallback = c;
+
+	this.positions = [];
+	this.counters = [];
+
+	if( g instanceof THREE.Geometry ) {
+		for( var j = 0; j < g.vertices.length; j++ ) {
+			var v = g.vertices[ j ];
+			var c = j/g.vertices.length;
+			this.positions.push( v.x, v.y, v.z );
+			this.positions.push( v.x, v.y, v.z );
+			this.counters.push(c);
+			this.counters.push(c);
+		}
+	}
+
+	if( g instanceof THREE.BufferGeometry ) {
+		// read attribute positions ?
+	}
+
+	if( g instanceof Float32Array || g instanceof Array ) {
+		for( var j = 0; j < g.length; j += 3 ) {
+			var c = j/g.length;
+			this.positions.push( g[ j ], g[ j + 1 ], g[ j + 2 ] );
+			this.positions.push( g[ j ], g[ j + 1 ], g[ j + 2 ] );
+			this.counters.push(c);
+			this.counters.push(c);
+		}
+	}
+
+	this.process();
+
+}
+
+MeshLine.prototype.compareV3 = function( a, b ) {
+
+	var aa = a * 6;
+	var ab = b * 6;
+	return ( this.positions[ aa ] === this.positions[ ab ] ) && ( this.positions[ aa + 1 ] === this.positions[ ab + 1 ] ) && ( this.positions[ aa + 2 ] === this.positions[ ab + 2 ] );
+
+}
+
+MeshLine.prototype.copyV3 = function( a ) {
+
+	var aa = a * 6;
+	return [ this.positions[ aa ], this.positions[ aa + 1 ], this.positions[ aa + 2 ] ];
+
+}
+
+MeshLine.prototype.process = function() {
+
+	var l = this.positions.length / 6;
+
+	this.previous = [];
+	this.next = [];
+	this.side = [];
+	this.width = [];
+	this.indices_array = [];
+	this.uvs = [];
+
+	for( var j = 0; j < l; j++ ) {
+		this.side.push( 1 );
+		this.side.push( -1 );
+	}
+
+	var w;
+	for( var j = 0; j < l; j++ ) {
+		if( this.widthCallback ) w = this.widthCallback( j / ( l -1 ) );
+		else w = 1;
+		this.width.push( w );
+		this.width.push( w );
+	}
+
+	for( var j = 0; j < l; j++ ) {
+		this.uvs.push( j / ( l - 1 ), 0 );
+		this.uvs.push( j / ( l - 1 ), 1 );
+	}
+
+	var v;
+
+	if( this.compareV3( 0, l - 1 ) ){
+		v = this.copyV3( l - 2 );
+	} else {
+		v = this.copyV3( 0 );
+	}
+	this.previous.push( v[ 0 ], v[ 1 ], v[ 2 ] );
+	this.previous.push( v[ 0 ], v[ 1 ], v[ 2 ] );
+	for( var j = 0; j < l - 1; j++ ) {
+		v = this.copyV3( j );
+		this.previous.push( v[ 0 ], v[ 1 ], v[ 2 ] );
+		this.previous.push( v[ 0 ], v[ 1 ], v[ 2 ] );
+	}
+
+	for( var j = 1; j < l; j++ ) {
+		v = this.copyV3( j );
+		this.next.push( v[ 0 ], v[ 1 ], v[ 2 ] );
+		this.next.push( v[ 0 ], v[ 1 ], v[ 2 ] );
+	}
+
+	if( this.compareV3( l - 1, 0 ) ){
+		v = this.copyV3( 1 );
+	} else {
+		v = this.copyV3( l - 1 );
+	}
+	this.next.push( v[ 0 ], v[ 1 ], v[ 2 ] );
+	this.next.push( v[ 0 ], v[ 1 ], v[ 2 ] );
+
+	for( var j = 0; j < l - 1; j++ ) {
+		var n = j * 2;
+		this.indices_array.push( n, n + 1, n + 2 );
+		this.indices_array.push( n + 2, n + 1, n + 3 );
+	}
+
+	if (!this.attributes) {
+		this.attributes = {
+			position: new THREE.BufferAttribute( new Float32Array( this.positions ), 3 ),
+			previous: new THREE.BufferAttribute( new Float32Array( this.previous ), 3 ),
+			next: new THREE.BufferAttribute( new Float32Array( this.next ), 3 ),
+			side: new THREE.BufferAttribute( new Float32Array( this.side ), 1 ),
+			width: new THREE.BufferAttribute( new Float32Array( this.width ), 1 ),
+			uv: new THREE.BufferAttribute( new Float32Array( this.uvs ), 2 ),
+			index: new THREE.BufferAttribute( new Uint16Array( this.indices_array ), 1 ),
+			counters: new THREE.BufferAttribute( new Float32Array( this.counters ), 1 )
+		}
+	} else {
+		this.attributes.position.copyArray(new Float32Array(this.positions));
+		this.attributes.position.needsUpdate = true;
+		this.attributes.previous.copyArray(new Float32Array(this.previous));
+		this.attributes.previous.needsUpdate = true;
+		this.attributes.next.copyArray(new Float32Array(this.next));
+		this.attributes.next.needsUpdate = true;
+		this.attributes.side.copyArray(new Float32Array(this.side));
+		this.attributes.side.needsUpdate = true;
+		this.attributes.width.copyArray(new Float32Array(this.width));
+		this.attributes.width.needsUpdate = true;
+		this.attributes.uv.copyArray(new Float32Array(this.uvs));
+		this.attributes.uv.needsUpdate = true;
+		this.attributes.index.copyArray(new Uint16Array(this.indices_array));
+		this.attributes.index.needsUpdate = true;
+    }
+
+	this.geometry.addAttribute( 'position', this.attributes.position );
+	this.geometry.addAttribute( 'previous', this.attributes.previous );
+	this.geometry.addAttribute( 'next', this.attributes.next );
+	this.geometry.addAttribute( 'side', this.attributes.side );
+	this.geometry.addAttribute( 'width', this.attributes.width );
+	this.geometry.addAttribute( 'uv', this.attributes.uv );
+	this.geometry.addAttribute( 'counters', this.attributes.counters );
+
+	this.geometry.setIndex( this.attributes.index );
+
+}
+
+function memcpy (src, srcOffset, dst, dstOffset, length) {
+	var i
+
+	src = src.subarray || src.slice ? src : src.buffer
+	dst = dst.subarray || dst.slice ? dst : dst.buffer
+
+	src = srcOffset ? src.subarray ?
+	src.subarray(srcOffset, length && srcOffset + length) :
+	src.slice(srcOffset, length && srcOffset + length) : src
+
+	if (dst.set) {
+		dst.set(src, dstOffset)
+	} else {
+		for (i=0; i<src.length; i++) {
+			dst[i + dstOffset] = src[i]
+		}
+	}
+
+	return dst
+}
+
+/**
+ * Fast method to advance the line by one position.  The oldest position is removed.
+ * @param position
+ */
+MeshLine.prototype.advance = function(position) {
+
+	var positions = this.attributes.position.array;
+	var previous = this.attributes.previous.array;
+	var next = this.attributes.next.array;
+	var l = positions.length;
+
+	// PREVIOUS
+	memcpy( positions, 0, previous, 0, l );
+
+	// POSITIONS
+	memcpy( positions, 6, positions, 0, l - 6 );
+
+	positions[l - 6] = position.x;
+	positions[l - 5] = position.y;
+	positions[l - 4] = position.z;
+	positions[l - 3] = position.x;
+	positions[l - 2] = position.y;
+	positions[l - 1] = position.z;
+
+    // NEXT
+	memcpy( positions, 6, next, 0, l - 6 );
+
+	next[l - 6]  = position.x;
+	next[l - 5]  = position.y;
+	next[l - 4]  = position.z;
+	next[l - 3]  = position.x;
+	next[l - 2]  = position.y;
+	next[l - 1]  = position.z;
+
+	this.attributes.position.needsUpdate = true;
+	this.attributes.previous.needsUpdate = true;
+	this.attributes.next.needsUpdate = true;
+
+};
+
+function MeshLineMaterial( parameters ) {
+
+	var vertexShaderSource = [
+'precision highp float;',
+'',
+'attribute vec3 position;',
+'attribute vec3 previous;',
+'attribute vec3 next;',
+'attribute float side;',
+'attribute float width;',
+'attribute vec2 uv;',
+'attribute float counters;',
+'',
+'uniform mat4 projectionMatrix;',
+'uniform mat4 modelViewMatrix;',
+'uniform vec2 resolution;',
+'uniform float lineWidth;',
+'uniform vec3 color;',
+'uniform float opacity;',
+'uniform float near;',
+'uniform float far;',
+'uniform float sizeAttenuation;',
+'',
+'varying vec2 vUV;',
+'varying vec4 vColor;',
+'varying float vCounters;',
+'',
+'vec2 fix( vec4 i, float aspect ) {',
+'',
+'    vec2 res = i.xy / i.w;',
+'    res.x *= aspect;',
+'	 vCounters = counters;',
+'    return res;',
+'',
+'}',
+'',
+'void main() {',
+'',
+'    float aspect = resolution.x / resolution.y;',
+'	 float pixelWidthRatio = 1. / (resolution.x * projectionMatrix[0][0]);',
+'',
+'    vColor = vec4( color, opacity );',
+'    vUV = uv;',
+'',
+'    mat4 m = projectionMatrix * modelViewMatrix;',
+'    vec4 finalPosition = m * vec4( position, 1.0 );',
+'    vec4 prevPos = m * vec4( previous, 1.0 );',
+'    vec4 nextPos = m * vec4( next, 1.0 );',
+'',
+'    vec2 currentP = fix( finalPosition, aspect );',
+'    vec2 prevP = fix( prevPos, aspect );',
+'    vec2 nextP = fix( nextPos, aspect );',
+'',
+'	 float pixelWidth = finalPosition.w * pixelWidthRatio;',
+'    float w = 1.8 * pixelWidth * lineWidth * width;',
+'',
+'    if( sizeAttenuation == 1. ) {',
+'        w = 1.8 * lineWidth * width;',
+'    }',
+'',
+'    vec2 dir;',
+'    if( nextP == currentP ) dir = normalize( currentP - prevP );',
+'    else if( prevP == currentP ) dir = normalize( nextP - currentP );',
+'    else {',
+'        vec2 dir1 = normalize( currentP - prevP );',
+'        vec2 dir2 = normalize( nextP - currentP );',
+'        dir = normalize( dir1 + dir2 );',
+'',
+'        vec2 perp = vec2( -dir1.y, dir1.x );',
+'        vec2 miter = vec2( -dir.y, dir.x );',
+'        //w = clamp( w / dot( miter, perp ), 0., 4. * lineWidth * width );',
+'',
+'    }',
+'',
+'    //vec2 normal = ( cross( vec3( dir, 0. ), vec3( 0., 0., 1. ) ) ).xy;',
+'    vec2 normal = vec2( -dir.y, dir.x );',
+'    normal.x /= aspect;',
+'    normal *= .5 * w;',
+'',
+'    vec4 offset = vec4( normal * side, 0.0, 1.0 );',
+'    finalPosition.xy += offset.xy;',
+'',
+'    gl_Position = finalPosition;',
+'',
+'}' ];
+
+	var fragmentShaderSource = [
+		'#extension GL_OES_standard_derivatives : enable',
+'precision mediump float;',
+'',
+'uniform sampler2D map;',
+'uniform sampler2D alphaMap;',
+'uniform float useMap;',
+'uniform float useAlphaMap;',
+'uniform float useDash;',
+'uniform float dashArray;',
+'uniform float dashOffset;',
+'uniform float dashRatio;',
+'uniform float visibility;',
+'uniform float alphaTest;',
+'uniform vec2 repeat;',
+'',
+'varying vec2 vUV;',
+'varying vec4 vColor;',
+'varying float vCounters;',
+'',
+'void main() {',
+'',
+'    vec4 c = vColor;',
+'    if( useMap == 1. ) c *= texture2D( map, vUV * repeat );',
+'    if( useAlphaMap == 1. ) c.a *= texture2D( alphaMap, vUV * repeat ).a;',
+'    if( c.a < alphaTest ) discard;',
+'    if( useDash == 1. ){',
+'        c.a *= ceil(mod(vCounters + dashOffset, dashArray) - (dashArray * dashRatio));',
+'    }',
+'    gl_FragColor = c;',
+'    gl_FragColor.a *= step(vCounters, visibility);',
+'}' ];
+
+	function check( v, d ) {
+		if( v === undefined ) return d;
+		return v;
+	}
+
+	THREE.Material.call( this );
+
+	parameters = parameters || {};
+
+	this.lineWidth = check( parameters.lineWidth, 1 );
+	this.map = check( parameters.map, null );
+	this.useMap = check( parameters.useMap, 0 );
+	this.alphaMap = check( parameters.alphaMap, null );
+	this.useAlphaMap = check( parameters.useAlphaMap, 0 );
+	this.color = check( parameters.color, new THREE.Color( 0xffffff ) );
+	this.opacity = check( parameters.opacity, 1 );
+	this.resolution = check( parameters.resolution, new THREE.Vector2( 1, 1 ) );
+	this.sizeAttenuation = check( parameters.sizeAttenuation, 1 );
+	this.near = check( parameters.near, 1 );
+	this.far = check( parameters.far, 1 );
+	this.dashArray = check( parameters.dashArray, 0 );
+	this.dashOffset = check( parameters.dashOffset, 0 );
+	this.dashRatio = check( parameters.dashRatio, 0.5 );
+	this.useDash = ( this.dashArray !== 0 ) ? 1 : 0;
+	this.visibility = check( parameters.visibility, 1 );
+	this.alphaTest = check( parameters.alphaTest, 0 );
+	this.repeat = check( parameters.repeat, new THREE.Vector2( 1, 1 ) );
+
+	var material = new THREE.RawShaderMaterial( {
+		uniforms:{
+			lineWidth: { type: 'f', value: this.lineWidth },
+			map: { type: 't', value: this.map },
+			useMap: { type: 'f', value: this.useMap },
+			alphaMap: { type: 't', value: this.alphaMap },
+			useAlphaMap: { type: 'f', value: this.useAlphaMap },
+			color: { type: 'c', value: this.color },
+			opacity: { type: 'f', value: this.opacity },
+			resolution: { type: 'v2', value: this.resolution },
+			sizeAttenuation: { type: 'f', value: this.sizeAttenuation },
+			near: { type: 'f', value: this.near },
+			far: { type: 'f', value: this.far },
+			dashArray: { type: 'f', value: this.dashArray },
+			dashOffset: { type: 'f', value: this.dashOffset },
+			dashRatio: { type: 'f', value: this.dashRatio },
+			useDash: { type: 'f', value: this.useDash },
+			visibility: {type: 'f', value: this.visibility},
+			alphaTest: {type: 'f', value: this.alphaTest},
+			repeat: { type: 'v2', value: this.repeat }
+		},
+		vertexShader: vertexShaderSource.join( '\r\n' ),
+		fragmentShader: fragmentShaderSource.join( '\r\n' )
+	});
+
+	delete parameters.lineWidth;
+	delete parameters.map;
+	delete parameters.useMap;
+	delete parameters.alphaMap;
+	delete parameters.useAlphaMap;
+	delete parameters.color;
+	delete parameters.opacity;
+	delete parameters.resolution;
+	delete parameters.sizeAttenuation;
+	delete parameters.near;
+	delete parameters.far;
+	delete parameters.dashArray;
+	delete parameters.dashOffset;
+	delete parameters.dashRatio;
+	delete parameters.visibility;
+	delete parameters.alphaTest;
+	delete parameters.repeat;
+
+	material.type = 'MeshLineMaterial';
+
+	material.setValues( parameters );
+
+	return material;
+
+};
+
+MeshLineMaterial.prototype = Object.create( THREE.Material.prototype );
+MeshLineMaterial.prototype.constructor = MeshLineMaterial;
+
+MeshLineMaterial.prototype.copy = function ( source ) {
+
+	THREE.Material.prototype.copy.call( this, source );
+
+	this.lineWidth = source.lineWidth;
+	this.map = source.map;
+	this.useMap = source.useMap;
+	this.alphaMap = source.alphaMap;
+	this.useAlphaMap = source.useAlphaMap;
+	this.color.copy( source.color );
+	this.opacity = source.opacity;
+	this.resolution.copy( source.resolution );
+	this.sizeAttenuation = source.sizeAttenuation;
+	this.near = source.near;
+	this.far = source.far;
+	this.dashArray.copy( source.dashArray );
+	this.dashOffset.copy( source.dashOffset );
+	this.dashRatio.copy( source.dashRatio );
+	this.useDash = source.useDash;
+	this.visibility = source.visibility;
+	this.alphaTest = source.alphaTest;
+	this.repeat.copy( source.repeat );
+
+	return this;
+
+};
+
+if( typeof exports !== 'undefined' ) {
+	if( typeof module !== 'undefined' && module.exports ) {
+		exports = module.exports = { MeshLine: MeshLine, MeshLineMaterial: MeshLineMaterial };
+	}
+	exports.MeshLine = MeshLine;
+	exports.MeshLineMaterial = MeshLineMaterial;
+}
+else {
+	root.MeshLine = MeshLine;
+	root.MeshLineMaterial = MeshLineMaterial;
+}
+
+}).call(this);
 
 
 /* 
@@ -10893,6 +13476,7 @@ APP = ( function ( APP, $, window, document ) {
 				e.stopPropagation();
 				
 			
+				//Its value is not a boolean but a string
 				var expanded = ( $( this ).attr( 'aria-expanded' ) == 'true' ) ? false : true,
 					$content = $( this ).find( 'dd' );
 				
@@ -10952,12 +13536,11 @@ APP = ( function ( APP, $, window, document ) {
  * @requires ./examples/assets/js/min/hammer.min.js
  */
 
-
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.ADVANCED_CONTENT_SLIDER               = APP.ADVANCED_CONTENT_SLIDER || {};
-	APP.ADVANCED_CONTENT_SLIDER.version       = '0.0.2';
+	APP.ADVANCED_CONTENT_SLIDER.version       = '0.0.3';
     APP.ADVANCED_CONTENT_SLIDER.documentReady = function( $ ) {
 
 		var $window                   = $( window ),
@@ -11003,6 +13586,11 @@ APP = ( function ( APP, $, window, document ) {
 					dataDraggableCursor        = $this.data( 'draggable-cursor' ),
 					dataControlsPaginationAuto = false;
 
+				
+				//Autoplay times
+				var playTimes;
+				//A function called "timer" once every second (like a digital watch).
+				$this[0].animatedSlides;
 				
 				
 
@@ -11057,7 +13645,13 @@ APP = ( function ( APP, $, window, document ) {
 					if ( !$( this ).hasClass( 'active' ) ) {
 						
 						sliderUpdates( $( this ).attr( 'data-index' ), $this, dataControlsArrows, dataControlsPagination );
+						
+						//Pause the auto play event
+					    clearInterval( $this[0].animatedSlides );	
+						
+						
 					}
+					
 
 
 
@@ -11079,6 +13673,10 @@ APP = ( function ( APP, $, window, document ) {
 					e.preventDefault();
 
 					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
+					
+					//Pause the auto play event
+					clearInterval( $this[0].animatedSlides );	
+					
 
 				});
 
@@ -11086,6 +13684,9 @@ APP = ( function ( APP, $, window, document ) {
 					e.preventDefault();
 
 					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
+					
+					//Pause the auto play event
+					clearInterval( $this[0].animatedSlides );	
 
 				});
 				
@@ -11124,20 +13725,103 @@ APP = ( function ( APP, $, window, document ) {
 					//You know the pan has ended
 					//and you know which action they were taking
 					if ( direction == 'panleft' ) {
-						sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );	
+						sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
+						//Pause the auto play event
+				    	clearInterval( $this[0].animatedSlides );	
 					}
 					
 					if ( direction == 'panright' ) {
 						sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
+						//Pause the auto play event
+				    	clearInterval( $this[0].animatedSlides );	
 					}			
 
 					
-
 				});	
+				
+				
+				
+				//Autoplay Slider
+				//-------------------------------------		
+				var dataAuto                 = $this.data( 'auto' ),
+					dataTiming               = $this.data( 'timing' ),
+					dataLoop                 = $this.data( 'loop' );
+
+				if ( typeof dataAuto === typeof undefined ) dataAuto = false;	
+				if ( typeof dataTiming === typeof undefined ) dataTiming = 10000;
+				if ( typeof dataLoop === typeof undefined ) dataLoop = false;
+
+
+				if ( dataAuto && !isNaN( parseFloat( dataTiming ) ) && isFinite( dataTiming ) ) {
+
+					sliderAutoPlay( playTimes, dataTiming, dataLoop, $this, dataControlsArrows, dataControlsPagination );
+
+					$this.on({
+						mouseenter: function() {
+							clearInterval( $this[0].animatedSlides );
+						},
+						mouseleave: function() {
+							sliderAutoPlay( playTimes, dataTiming, dataLoop, $this, dataControlsArrows, dataControlsPagination );
+						}
+					});	
+
+				}
+
 			
 			});	
 			
+			
 		}
+		
+		
+		/*
+		 * Trigger slider autoplay
+		 *
+		 * @param  {Function} playTimes      - Number of times.
+		 * @param  {Number} timing           - Autoplay interval.
+		 * @param  {Boolean} loop            - Determine whether to loop through each item.
+		 * @param  {Object} slider           - Selector of the slider .
+		 * @param  {String} arrows           - Controller name of prev/next buttons.
+		 * @param  {String} pagination       - Controller name of pagination buttons.
+		 * @return {Void}                    - The constructor.
+		 */
+		function sliderAutoPlay( playTimes, timing, loop, slider, arrows, pagination ) {	
+
+			var items = slider.find( '.uix-advanced-content-slider__item' ),
+				total = items.length;
+			
+			slider[0].animatedSlides = setInterval( function() {
+
+				playTimes = parseFloat( items.filter( '.active' ).index() );
+				playTimes++;
+
+
+				if ( !loop ) {
+					if ( playTimes < total && playTimes >= 0 ) {
+
+						var slideNextId = playTimes;	
+
+						sliderUpdates( slideNextId, slider, arrows, pagination );
+					}
+				} else {
+					if ( playTimes == total ) playTimes = 0;
+					if ( playTimes < 0 ) playTimes = total-1;		
+
+					var slideNextId = playTimes;	
+
+
+					//Prevent problems with styles when switching in positive order
+					sliderUpdates( slideNextId, slider, arrows, pagination );	
+
+				}
+
+
+
+			}, timing );	
+		}
+
+		
+		
 		
 		/*
 		 * Transition Between Slides
@@ -11155,6 +13839,16 @@ APP = ( function ( APP, $, window, document ) {
 				$prev         = $( arrows ).find( '.uix-advanced-content-slider__arrows--prev' ),
 				$next         = $( arrows ).find( '.uix-advanced-content-slider__arrows--next' ),
 				$pagination   = $( pagination ).find( 'li a' );
+			
+			
+			
+			
+			//Get the animation speed
+			if ( typeof slider.data( 'speed' ) != typeof undefined && slider.data( 'speed' ) != false ) {
+				animDuration = slider.data( 'speed' );
+			}
+
+			
 				
 			if ( elementIndex <= itemsTotal - 1 && elementIndex >= 0 ) {
 
@@ -11219,21 +13913,16 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.ADVANCED_SLIDER               = APP.ADVANCED_SLIDER || {};
-	APP.ADVANCED_SLIDER.version       = '0.0.9';
+	APP.ADVANCED_SLIDER.version       = '0.1.1';
     APP.ADVANCED_SLIDER.pageLoaded    = function() {
 
 		var $window                   = $( window ),
 			windowWidth               = window.innerWidth,
 			windowHeight              = window.innerHeight,
 			animDelay                 = 0,
-			$sliderWrapper            = $( '.uix-advanced-slider' ),
+			$sliderWrapper            = $( '.uix-advanced-slider' );
 			
-			//Autoplay global variables
-			timer                     = null,
-			playTimes;
-		
-		
-		
+			
 		sliderInit( false );
 		
 		$window.on( 'resize', function() {
@@ -11247,6 +13936,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 			}
 		});
+		
 		
 		
 		/*
@@ -11265,34 +13955,15 @@ APP = ( function ( APP, $, window, document ) {
 					nativeItemW,
 					nativeItemH;
 				
-				//Get the -webkit-transition-duration property
-				//-------------------------------------	
-				var getTransitionDuration = function( el, withDelay ) {
+				
+				//Autoplay times
+				var playTimes;
+				//A function called "timer" once every second (like a digital watch).
+				$this[0].animatedSlides;
+				
+				
 
-					if ( typeof el === typeof undefined ) {
-						return 0;
-					}
-
-					var style    = window.getComputedStyle(el),
-						duration = style.webkitTransitionDuration,
-						delay    = style.webkitTransitionDelay; 
-
-					if ( typeof duration != typeof undefined ) {
-						// fix miliseconds vs seconds
-						duration = (duration.indexOf("ms")>-1) ? parseFloat(duration) : parseFloat(duration)*1000;
-						delay = (delay.indexOf("ms")>-1) ? parseFloat(delay) : parseFloat(delay)*1000;
-
-						if ( withDelay ) {
-							 return (duration + delay);
-						} else {
-							return duration;
-						}	
-					} else {
-						return 0;
-					}
-				};
-
-				animDelay = getTransitionDuration( $first[0] );
+				animDelay = UixCssProperty.getTransitionDuration( $first[0] );
 
 
 				
@@ -11318,7 +13989,7 @@ APP = ( function ( APP, $, window, document ) {
 						nativeItemH = this.videoHeight;	
 
 						//Initialize all the items to the stage
-						addItemsToStage( $this, $sliderWrapper, nativeItemW, nativeItemH );
+						addItemsToStage( $this, nativeItemW, nativeItemH );
 
 					}, false);	
 
@@ -11339,7 +14010,7 @@ APP = ( function ( APP, $, window, document ) {
 							nativeItemH = this.height;	
 
 							//Initialize all the items to the stage
-							addItemsToStage( $this, $sliderWrapper, nativeItemW, nativeItemH );
+							addItemsToStage( $this, nativeItemW, nativeItemH );
 
 						};
 
@@ -11367,14 +14038,14 @@ APP = ( function ( APP, $, window, document ) {
 
 					if ( dataAuto && !isNaN( parseFloat( dataTiming ) ) && isFinite( dataTiming ) ) {
 
-						sliderAutoPlay( dataTiming, $items, dataLoop );
+						sliderAutoPlay( playTimes, dataTiming, dataLoop, $this );
 
 						$this.on({
 							mouseenter: function() {
-								clearInterval( timer );
+								clearInterval( $this[0].animatedSlides );
 							},
 							mouseleave: function() {
-								sliderAutoPlay( dataTiming, $items, dataLoop );
+								sliderAutoPlay( playTimes, dataTiming, dataLoop, $this );
 							}
 						});	
 
@@ -11397,16 +14068,18 @@ APP = ( function ( APP, $, window, document ) {
         /*
 		 * Trigger slider autoplay
 		 *
+		 * @param  {Function} playTimes      - Number of times.
 		 * @param  {Number} timing           - Autoplay interval.
-		 * @param  {Object} items            - Each item in current slider.
 		 * @param  {Boolean} loop            - Determine whether to loop through each item.
-		 * @return {Void}
+		 * @param  {Object} slider           - Selector of the slider .
+		 * @return {Void}                    - The constructor.
 		 */
-        function sliderAutoPlay( timing, items, loop ) {	
+		function sliderAutoPlay( playTimes, timing, loop, slider ) {	
+
+			var items = slider.find( '.uix-advanced-slider__item' ),
+				total = items.length;
 			
-			var total = items.length;
-			
-			timer = setInterval( function() {
+			slider[0].animatedSlides = setInterval( function() {
 
 				playTimes = parseFloat( items.filter( '.active' ).index() );
 				playTimes++;
@@ -11432,12 +14105,11 @@ APP = ( function ( APP, $, window, document ) {
 		 * Initialize all the items to the stage
 		 *
 		 * @param  {Object} slider           - Current selector of each slider.
-		 * @param  {Object} sliderWrapper    - Wrapper of the slider.
 		 * @param  {Number} nativeItemW      - Returns the intrinsic width of the image/video.
 		 * @param  {Number} nativeItemH      - Returns the intrinsic height of the image/video.
 		 * @return {Void}
 		 */
-        function addItemsToStage( slider, sliderWrapper, nativeItemW, nativeItemH ) {
+        function addItemsToStage( slider, nativeItemW, nativeItemH ) {
 			
 			var $this                    = slider,
 				$items                   = $this.find( '.uix-advanced-slider__item' ),
@@ -11509,10 +14181,10 @@ APP = ( function ( APP, $, window, document ) {
 					}
 					
 					
-					sliderUpdates( $( this ).attr( 'data-index' ), sliderWrapper, curDir );
+					sliderUpdates( $( this ).attr( 'data-index' ), $this, curDir );
 
 					//Pause the auto play event
-					clearInterval( timer );	
+					clearInterval( $this[0].animatedSlides );	
 				}
 
 
@@ -11532,25 +14204,24 @@ APP = ( function ( APP, $, window, document ) {
 			}
 
 
-
 			_prev.on( 'click', function( e ) {
 				e.preventDefault();
 
-				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, sliderWrapper, 'prev' );
+				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, 'prev' );
 
 				//Pause the auto play event
-				clearInterval( timer );
+				clearInterval( $this[0].animatedSlides );
 
 			});
 
 			_next.on( 'click', function( e ) {
 				e.preventDefault();
 
-				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, sliderWrapper, 'next' );
+				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, 'next' );
 
 
 				//Pause the auto play event
-				clearInterval( timer );
+				clearInterval( $this[0].animatedSlides );
 
 
 			});
@@ -11916,121 +14587,70 @@ APP = ( function ( APP, $, window, document ) {
 					});
 				}
 
-				var myPlayer = videojs( curVideoID, {
-										  width     : dataW,
-										  height    : dataH,
-										  loop      : dataLoop,
-										  autoplay  : dataAuto
-										});
-
-
 				
-				
-				myPlayer.ready(function() {
-					
-					
-					/* ---------  Video initialize */
-					myPlayer.on( 'loadedmetadata', function() {
-
-						//Get Video Dimensions
-						var curW    = this.videoWidth(),
-							curH    = this.videoHeight(),
-							newW    = curW,
-							newH    = curH;
-
-						newW = videoWrapperW;
-
-						//Scaled/Proportional Content 
-						newH = curH*(newW/curW);
+				var myPlayer = videojs( curVideoID, 
+				   {
+					  width     : dataW,
+					  height    : dataH,
+					  loop      : dataLoop,
+					  autoplay  : dataAuto
+					}, 
+				   function onPlayerReady() {
 
 
-						if ( !isNaN( newW ) && !isNaN( newH ) )  {
-							myPlayer.height( newH );		
-							myPlayer.width( newW );		
-							
-							$this.css( 'height', newH );
+						var initVideo = function( obj ) {
+
+							//Get Video Dimensions
+							var curW    = obj.videoWidth(),
+								curH    = obj.videoHeight(),
+								newW    = curW,
+								newH    = curH;
+
+							newW = videoWrapperW;
+
+							//Scaled/Proportional Content 
+							newH = curH*(newW/curW);
+
+
+							if ( !isNaN( newW ) && !isNaN( newH ) )  {
+								obj.height( newH );		
+								obj.width( newW );			
+
+								$this.css( 'height', newH );
+							}
+
+
+
+							//Show this video wrapper
+							$this.css( 'visibility', 'visible' );
+
+							//Hide loading effect
+							$this.find( '.vjs-loading-spinner, .vjs-big-play-button' ).hide();
 						}
 
+						
+						/* ---------  Video initialize */
+						this.on( 'loadedmetadata', function() {
 
+							initVideo( this );
 
-						//Show this video wrapper
-						$this.css( 'visibility', 'visible' );
+						});
+					
+					    /* ---------  Display the play button  */
+					    if ( ! dataAuto ) $this.find( '.vjs-big-play-button' ).show();
+					    $this.find( '.vjs-big-play-button' ).off( 'click' ).on( 'click', function() {
+							$( this ).hide();
+						});
+					
 
-						//Hide loading effect
-						$this.find( '.vjs-loading-spinner, .vjs-big-play-button' ).hide();
-
-					});		
-
-		
 				
-					/* ---------  Set, tell the player it's in fullscreen  */
-					if ( dataAuto ) {
-						
-						//Fix an error of Video auto play is not working in browser
-						//myPlayer.muted( true ); 
-						
-						//Prevent autoplay error: Uncaught (in promise) DOMException
-						var promise = myPlayer.play();
-
-						if ( promise !== undefined ) {
-							promise.then( function() {
-								// Autoplay started!
-							
-							}).catch( function( error ) {
-								// Autoplay was prevented.
-								$( '#' + coverPlayBtnID ).show();
-								$( '#' + coverPlayBtnID + ' .uix-video__cover__playbtn' ).show();
-								console.log( 'Autoplay was prevented.' );
-								
-							});
-							
-						}
-						
-					}
-
-
-					/* ---------  Disable control bar play button click */
-					if ( !dataControls ) {
-						myPlayer.controls( false );
-					}
-
-					
-					
-					/* ---------  Determine if the video is auto played from mobile devices  */
-					var autoPlayOK = false;
-
-					myPlayer.on( 'timeupdate', function() {
-
-						var duration = this.duration();
-						if ( duration > 0 ) {
-							autoPlayOK = true;
-							if ( this.currentTime() > 0 ) {
-								autoPlayOK = true;
-								this.off( 'timeupdate' );
-
-								//Hide cover and play buttons when the video automatically played
-								$( '#' + coverPlayBtnID ).hide();
-							} 
-
-						}
-
-					});
-				
-					
-					
-					/* ---------  Pause the video when it is not current slider  */
-					if ( !play ) {
-						myPlayer.pause();
-						myPlayer.currentTime(0);
-						
-					} else {
+						/* ---------  Set, tell the player it's in fullscreen  */
 						if ( dataAuto ) {
+							//Fix an error of Video auto play is not working in browser
+							//this.muted( true ); 
 
-							myPlayer.currentTime(0);
-							
-						
 							//Prevent autoplay error: Uncaught (in promise) DOMException
-							var promise = myPlayer.play();
+							var promise = this.play();
 
 							if ( promise !== undefined ) {
 								promise.then( function() {
@@ -12045,41 +14665,102 @@ APP = ( function ( APP, $, window, document ) {
 								});
 
 							}
+						}
 
-							//Hidden replay button
-							$replayBtn.hide();
 
-							//Should the video go to the beginning when it ends
-							myPlayer.on( 'ended', function () { 
-								
-								if ( dataLoop ) {
-									myPlayer.currentTime(0);
-									myPlayer.play();	
-								} else {
-									//Replay this video
-									myPlayer.currentTime(0);
-									
-									$replayBtn
-										.show()
-										.off( 'click' )
-										.on( 'click', function( e ) {
-											e.preventDefault();
 
-											myPlayer.play();
-											$replayBtn.hide();
+						/* ---------  Disable control bar play button click */
+						if ( !dataControls ) {
+							this.controls( false );
+						}
 
-										});						
+
+						/* ---------  Determine if the video is auto played from mobile devices  */
+						var autoPlayOK = false;
+
+						this.on( 'timeupdate', function() {
+
+							var duration = this.duration();
+							if ( duration > 0 ) {
+								autoPlayOK = true;
+								if ( this.currentTime() > 0 ) {
+									autoPlayOK = true;
+									this.off( 'timeupdate' );
+
+									//Hide cover and play buttons when the video automatically played
+									$( '#' + coverPlayBtnID ).hide();
+								} 
+
+							}
+
+						});
+
+
+
+						/* ---------  Pause the video when it is not current slider  */
+						if ( !play ) {
+							this.pause();
+							this.currentTime(0);
+
+						} else {
+							if ( dataAuto ) {
+
+								this.currentTime(0);
+
+								//Prevent autoplay error: Uncaught (in promise) DOMException
+								var promise = this.play();
+
+								if ( promise !== undefined ) {
+									promise.then( function() {
+										// Autoplay started!
+
+									}).catch( function( error ) {
+										// Autoplay was prevented.
+										$( '#' + coverPlayBtnID ).show();
+										$( '#' + coverPlayBtnID + ' .uix-video__cover__playbtn' ).show();
+										console.log( 'Autoplay was prevented.' );
+
+									});
+
 								}
-							
-							});		
+
+								//Hidden replay button
+								$replayBtn.hide();
+
+								//Should the video go to the beginning when it ends
+								this.on( 'ended', function () { 
+
+									if ( dataLoop ) {
+										this.currentTime(0);
+										this.play();	
+									} else {
+										//Replay this video
+										this.currentTime(0);
+
+										$replayBtn
+											.show()
+											.off( 'click' )
+											.on( 'click', function( e ) {
+												e.preventDefault();
+
+												this.play();
+												$replayBtn.hide();
+
+											});						
+									}
+
+								});		
 
 
-						}	
-					}
-					
+							}	
+						}
 
-				});
 
+
+					});
+
+				
+				
 			});	
 		}	
 		
@@ -12106,8 +14787,6 @@ APP = ( function ( APP, $, window, document ) {
  * APP.ADVANCED_SLIDER_FILTER
  * @global
  * @requires ./examples/assets/js/min/pixi.min.js
- * @requires ./examples/assets/js/min/three.min.js
- * @requires ./src/components/ES5/_plugins-THREE
  * @requires ./src/components/ES5/_plugins-GSAP
  */
 
@@ -12116,9 +14795,12 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.ADVANCED_SLIDER_FILTER               = APP.ADVANCED_SLIDER_FILTER || {};
-	APP.ADVANCED_SLIDER_FILTER.version       = '0.1.5';
+	APP.ADVANCED_SLIDER_FILTER.version       = '0.1.8';
     APP.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
+		
+		// Remove pixi.js banner from the console
+		PIXI.utils.skipHello();		
 	
 		var $window                   = $( window ),
 			windowWidth               = window.innerWidth,
@@ -12129,10 +14811,6 @@ APP = ( function ( APP, $, window, document ) {
 			//Save different canvas heights as an array
 			canvasHeights             = [],
 
-			
-			//Autoplay global variables
-			timer                     = null,
-			playTimes,
 			
 			//Basic webGL renderers 
 			rendererOuterID           = 'uix-advanced-slider-sp__canvas-container',
@@ -12145,15 +14823,7 @@ APP = ( function ( APP, $, window, document ) {
 		    stage__filter,
 			container__items,
 			displacementSprite,
-			displacementFilter,
-			
-			//Three.js
-			scenesAll                 = [],
-			texturesAll               = [],
-			webGLRenderer;
-		
-		
-		
+			displacementFilter;
 		
 		sliderInit( false );
 		
@@ -12187,6 +14857,12 @@ APP = ( function ( APP, $, window, document ) {
 					$first                   = $items.first(),
 					nativeItemW,
 					nativeItemH;
+				
+				
+				//Autoplay times
+				var playTimes;
+				//A function called "timer" once every second (like a digital watch).
+				$this[0].animatedSlides;
 				
 				
 				//Get the animation speed
@@ -12240,7 +14916,7 @@ APP = ( function ( APP, $, window, document ) {
 							nativeItemH = this.videoHeight;	
 
 							//Initialize all the items to the stage
-							addItemsToStage( $this, $sliderWrapper, nativeItemW, nativeItemH );
+							addItemsToStage( $this, nativeItemW, nativeItemH );
 
 
 						}, false);	
@@ -12266,7 +14942,7 @@ APP = ( function ( APP, $, window, document ) {
 							nativeItemH = this.height;	
 
 							//Initialize all the items to the stage
-							addItemsToStage( $this, $sliderWrapper, nativeItemW, nativeItemH );
+							addItemsToStage( $this, nativeItemW, nativeItemH );
 							
 
 							
@@ -12296,14 +14972,14 @@ APP = ( function ( APP, $, window, document ) {
 
 					if ( dataAuto && !isNaN( parseFloat( dataTiming ) ) && isFinite( dataTiming ) ) {
 
-						sliderAutoPlay( dataTiming, $items, dataLoop );
+						sliderAutoPlay( playTimes, dataTiming, dataLoop, $this );
 
 						$this.on({
 							mouseenter: function() {
-								clearInterval( timer );
+								clearInterval( $this[0].animatedSlides );
 							},
 							mouseleave: function() {
-								sliderAutoPlay( dataTiming, $items, dataLoop );
+								sliderAutoPlay( playTimes, dataTiming, dataLoop, $this );
 							}
 						});	
 
@@ -12322,19 +14998,21 @@ APP = ( function ( APP, $, window, document ) {
 		
 		
 
-        /*
+         /*
 		 * Trigger slider autoplay
 		 *
+		 * @param  {Function} playTimes      - Number of times.
 		 * @param  {Number} timing           - Autoplay interval.
-		 * @param  {Object} items            - Each item in current slider.
 		 * @param  {Boolean} loop            - Determine whether to loop through each item.
-		 * @return {Void}
+		 * @param  {Object} slider           - Selector of the slider .
+		 * @return {Void}                    - The constructor.
 		 */
-        function sliderAutoPlay( timing, items, loop ) {	
+		function sliderAutoPlay( playTimes, timing, loop, slider ) {	
+
+			var items = slider.find( '.uix-advanced-slider-sp__item' ),
+				total = items.length;
 			
-			var total = items.length;
-			
-			timer = setInterval( function() {
+			slider[0].animatedSlides = setInterval( function() {
 
 				playTimes = parseFloat( items.filter( '.active' ).index() );
 				playTimes++;
@@ -12366,12 +15044,11 @@ APP = ( function ( APP, $, window, document ) {
 		 * Initialize all the items to the stage
 		 *
 		 * @param  {Object} slider           - Current selector of each slider.
-		 * @param  {Object} sliderWrapper    - Wrapper of the slider.
 		 * @param  {Number} nativeItemW      - Returns the intrinsic width of the image/video.
 		 * @param  {Number} nativeItemH      - Returns the intrinsic height of the image/video.
 		 * @return {Void}
 		 */
-        function addItemsToStage( slider, sliderWrapper, nativeItemW, nativeItemH ) {
+        function addItemsToStage( slider, nativeItemW, nativeItemH ) {
 			
 			var $this                    = slider,
 				$items                   = $this.find( '.uix-advanced-slider-sp__item' ),
@@ -13181,331 +15858,6 @@ APP = ( function ( APP, $, window, document ) {
 				}// end effect
 				
 				
-				
-
-				//----------------------------------------------------------------------------------
-				//--------------------------------- 3D Rotating Effect -----------------------------
-				//----------------------------------------------------------------------------------
-				//Usage of returning sprite object: texturesAll[ index ]     scenesAll[ index ]
-				if ( $this.hasClass( 'uix-advanced-slider-sp--eff-3d-rotating' ) ) {
-
-
-					var texture;
-
-					//Drag and Drop
-					var targetRotationX             = 0,
-						targetRotationXOnMouseDown  = 0,
-						targetRotationXOnTouchDown  = 0,
-						targetRotationY             = 0,
-						targetRotationYOnMouseDown  = 0,
-						targetRotationYOnTouchDown  = 0,
-						mouseX                      = 0,
-						mouseY                      = 0,
-						mouseXOnMouseDown           = 0,
-						mouseXOnTouchDown           = 0,
-						mouseYOnMouseDown           = 0,
-						mouseYOnTouchDown           = 0,
-						windowHalfX                 = $this.width() / 2,
-						windowHalfY                 = $this.height() / 2;
-
-
-					
-					
-
-					//Add Geometries and Lights to the main container 
-					//-------------------------------------					
-					var init = function() {
-						$this.find( '.uix-advanced-slider-sp__item' ).each( function( index )  {
-
-							var $thisItem      = $( this ),
-								imgVideoHeight = null;
-
-							// create a scene, that will hold all our elements such as objects, cameras and lights.
-							var scene  = new THREE.Scene();
-							scene.name = 'scene-' + index;
-
-
-							// make a list item
-							var element = document.createElement( 'div' );
-							element.className = 'list-item';
-							element.innerHTML = '<div class="scene" style="width:'+$this.width() +'px;height:'+$this.height() +'px;"></div>';
-
-							// Look up the element that represents the area
-							// we want to render the scene
-							scene.userData.element = element.querySelector( '.scene' );
-							document.getElementById( rendererOuterID ).appendChild( element );
-
-							TweenMax.set( $( '#' + rendererOuterID ).find( '.list-item' ), {
-									alpha: 0,
-									css  : {
-										display: 'none'
-									}
-								});	
-
-
-							// Create a camera, which defines where we're looking at.
-							var aspect      = $this.width() / $this.height(),
-								camera      = new THREE.PerspectiveCamera( 55, aspect, 0.1, 1000 );
-
-							camera.position.x = 0;
-							camera.position.y = -30;
-							camera.position.z = 25;
-							camera.lookAt( new THREE.Vector3( 0, 0, 0 ) );
-							scene.userData.camera = camera;
-
-
-							// Generate one plane geometries mesh to each scene
-							if ( $thisItem.find( 'video' ).length > 0 ) {
-
-								texture = new THREE.VideoTexture( document.getElementById( $thisItem.find( 'video' ).attr( 'id' ) ) );
-								texture.minFilter = THREE.LinearFilter;
-								texture.magFilter = THREE.LinearFilter;
-								texture.format = THREE.RGBFormat;
-
-								// pause the video
-								texture.image.autoplay = true;
-								texture.image.currentTime = 0;
-								texture.image.muted = false;
-								texture.image.pause();
-								
-							
-
-							} else {
-								
-								texture = new THREE.TextureLoader().load( $thisItem.find( 'img' ).attr( 'src' ) );
-								
-			
-							}
-							
-							
-						
-							// texture controller
-							texturesAll.push( texture );
-							
-							
-							
-							// Immediately use the texture for material creation
-							var spriteMat            = new THREE.MeshBasicMaterial( { map: texture } ),
-								geometry             = new THREE.BoxGeometry( aspect*15, 15, 2 ),
-								displacementSprite   = new THREE.Mesh( geometry, spriteMat );
-
-						
-							displacementSprite.position.set( -0.01, -0.01, 0 );
-							displacementSprite.rotation.set( 0, 0, 0 );
-							scene.add( displacementSprite );
-
-
-							// Generate Ambient Light
-							var ambiLight = new THREE.AmbientLight( 0x404040 );
-							scene.add( ambiLight );
-
-							// Generate Directional Light
-							var light = new THREE.DirectionalLight( 0xffffff, 0.5 );
-							light.position.set( 0, 30, 70 );
-							scene.add( light );
-
-
-							// Display multiple instances of three.js in a single page
-							scenesAll.push( scene );
-
-
-
-						});
-
-
-						//Create a render and set the size
-						webGLRenderer = new THREE.WebGLRenderer( { 
-												canvas   : document.getElementById( rendererCanvasID ), //canvas
-												alpha    : true, 
-												antialias: true 
-											} );
-
-						webGLRenderer.setClearColor( new THREE.Color( 0x000000, 0 ) );
-						webGLRenderer.setPixelRatio( window.devicePixelRatio );  
-						webGLRenderer.shadowMap.enabled = true;
-
-
-					};
-
-					//Add render event
-					//-------------------------------------	
-
-					//Converts numeric degrees to radians
-					var toRad = function( number ) {
-						return number * Math.PI / 180;
-					};
-
-
-					var render = function() {
-
-
-						webGLRenderer.setClearColor( 0x000000 );
-						webGLRenderer.setScissorTest( false );
-						webGLRenderer.clear();
-
-						webGLRenderer.setClearColor( 0x000000 );
-						webGLRenderer.setScissorTest( true );
-
-						scenesAll.forEach( function( scene, i ) {
-
-							// Get the element that is a place holder for where we want to draw the scene
-							var element = scene.userData.element,
-								camera  = scene.userData.camera,
-								rect    = element.getBoundingClientRect();
-
-
-							//automatic rotation
-							scene.children[0].rotation.y = Date.now() * 0.0001;
-							var amplitudeVal = 1.0 + Math.sin( Date.now() * 0.0001 * 0.5 );
-
-							
-							//drag & drop
-	//						scene.children[0].rotation.x = toRad( targetRotationX * 4 );
-	//						scene.children[0].rotation.y = toRad( targetRotationY * 4 );	
-	//						
-							//drag & drop with easing effect
-							scene.children[0].rotation.x += ( targetRotationX - scene.children[0].rotation.x ) * 0.05;
-							scene.children[0].rotation.y += ( targetRotationY - scene.children[0].rotation.y ) * 0.05;
-
-
-							// set the viewport
-							webGLRenderer.setViewport( 0, 0, rect.width, rect.height );
-							webGLRenderer.setScissor( 0, 0, rect.width, rect.height );
-
-
-							//tell texture object it needs to be updated
-							texture.needsUpdate = true;
-
-							camera.aspect = $this.width() / $this.height(); // not changing in this example
-							camera.updateProjectionMatrix();
-
-							//drag & drop
-							webGLRenderer.render( scene, camera );
-
-						} );
-
-					};
-
-
-
-					//Animation Interactions
-					//-------------------------------------
-					var animate = function() {
-						render();
-						requestAnimationFrame( animate );
-					};
-
-
-					init();
-					animate();
-
-
-					//Rotation and Drop
-
-					var onDocumentMouseDown = function( e ) {
-						e.preventDefault();
-						document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-						document.addEventListener( 'mouseup', onDocumentMouseUp, false );
-						document.addEventListener( 'mouseout', onDocumentMouseOut, false );
-						mouseXOnMouseDown = e.clientX - windowHalfX;
-						mouseYOnMouseDown = e.clientY - windowHalfY;
-						targetRotationXOnMouseDown = targetRotationX;
-						targetRotationYOnMouseDown = targetRotationY;
-					};
-
-					var onDocumentMouseMove = function( e ) {
-						mouseX = e.clientX - windowHalfX;
-						mouseY = e.clientY - windowHalfY;
-						targetRotationX = targetRotationXOnMouseDown + (mouseX - mouseXOnMouseDown) * 0.02;
-						targetRotationY = targetRotationYOnMouseDown + (mouseY - mouseYOnMouseDown) * 0.02;
-					};
-
-					var onDocumentMouseUp = function( e ) {
-						document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
-						document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
-						document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
-
-					};
-
-					var onDocumentMouseOut = function( e ) {
-						document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
-						document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
-						document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
-
-					};
-
-
-
-
-					var onDocumentTouchStart = function( e ) {
-						e.preventDefault();
-						e = e.changedTouches[ 0 ];
-
-						document.addEventListener( 'touchmove', onDocumentTouchMove, false );
-						document.addEventListener( 'touchend', onDocumentTouchEnd, false );
-						mouseXOnTouchDown = e.clientX - windowHalfX;
-						mouseYOnTouchDown = e.clientY - windowHalfY;
-						targetRotationXOnTouchDown = targetRotationX;
-						targetRotationYOnTouchDown = targetRotationY;
-
-
-					};
-
-					var onDocumentTouchMove = function( e ) {
-						e.preventDefault();
-						e = e.changedTouches[ 0 ];
-
-						mouseX = e.clientX - windowHalfX;
-						mouseY = e.clientY - windowHalfY;
-						targetRotationX = targetRotationXOnTouchDown + (mouseX - mouseXOnTouchDown) * 0.02;
-						targetRotationY = targetRotationYOnTouchDown + (mouseY - mouseYOnTouchDown) * 0.02;	
-
-
-
-					};
-
-					var onDocumentTouchEnd = function( e ) {
-						document.removeEventListener( 'touchmove', onDocumentTouchMove, false );
-						document.removeEventListener( 'touchend', onDocumentTouchEnd, false );
-
-					};
-
-					if ( Modernizr.touchevents ) {
-						document.addEventListener( 'touchstart', onDocumentTouchStart, false );
-					} else {
-						document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-					}
-
-
-
-
-					//Responsive plane geometries
-					//-------------------------------------
-					window.addEventListener( 'resize', function () {
-
-						var width = document.getElementById( rendererCanvasID ).clientWidth;
-						var height = document.getElementById( rendererCanvasID ).clientHeight;
-
-						if ( document.getElementById( rendererCanvasID ).width !== width || document.getElementById( rendererCanvasID ).height !== height ) {
-
-							webGLRenderer.setSize( width, height, false );
-
-						}
-
-
-					}, false );
-
-
-					//Initialize the default height of canvas
-					//-------------------------------------	
-					setTimeout( function() {
-						canvasDefaultInit( $first );
-					}, animSpeed );
-
-
-				}// end effect
-
-
 
 				//Canvas Interactions
 				//-------------------------------------
@@ -13551,15 +15903,15 @@ APP = ( function ( APP, $, window, document ) {
 					
 					
 					//Canvas Interactions
-					transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), sliderWrapper, 'out', curDir );
+					transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), $this, 'out', curDir );
 						
 					
 					
 					//Update the current and previous/next items
-					sliderUpdates( $( this ).attr( 'data-index' ), sliderWrapper, curDir );
+					sliderUpdates( $( this ).attr( 'data-index' ), $this, curDir );
 
 					//Pause the auto play event
-					clearInterval( timer );	
+					clearInterval( $this[0].animatedSlides );	
 				}
 
 
@@ -13584,13 +15936,13 @@ APP = ( function ( APP, $, window, document ) {
 				e.preventDefault();
 
 				//Canvas Interactions
-				transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), sliderWrapper, 'out', 'prev' );	
+				transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), $this, 'out', 'prev' );	
 
 				//Update the current and previous items
-				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, sliderWrapper, 'prev' );
+				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, 'prev' );
 
 				//Pause the auto play event
-				clearInterval( timer );
+				clearInterval( $this[0].animatedSlides );
 
 			});
 
@@ -13598,14 +15950,14 @@ APP = ( function ( APP, $, window, document ) {
 				e.preventDefault();
 
 				//Canvas Interactions
-				transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), sliderWrapper, 'out', 'next' );	
+				transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), $this, 'out', 'next' );	
 
 				//Update the current and next items
-				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, sliderWrapper, 'next' );
+				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, 'next' );
 
 
 				//Pause the auto play event
-				clearInterval( timer );
+				clearInterval( $this[0].animatedSlides );
 
 
 			});
@@ -13885,11 +16237,6 @@ APP = ( function ( APP, $, window, document ) {
 				if ( dataLoop ) {
 					if ( elementIndex == 0 ) dir = 'prev';
 				}
-
-			}
-
-			//-- 3D Rotating Effect
-			if ( slider.hasClass( 'uix-advanced-slider-sp--eff-3d-rotating' ) ) {
 
 			}
 
@@ -14763,116 +17110,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 
 				} // end effect		
-				
-				
-				//----------------------------------------------------------------------------------
-				//--------------------------------- 3D Rotating Effect -----------------------------
-				//----------------------------------------------------------------------------------
-				if ( slider.hasClass( 'uix-advanced-slider-sp--eff-3d-rotating' ) ) {
-					
-					
-			
-					//Hide description container of item
-					//-------------------------------------
-					TweenMax.to( $allItems, animSpeed/1000, {
-						alpha : 0
-					});			
 
-					
-					//Display wrapper of canvas (transitions between slides)
-					//-------------------------------------	
-					
-					if ( goType == 'out' ) {
-						//Current item leaving action
-						
-						
-						//rotation transition
-						TweenMax.to( scenesAll[ elementIndex ].children[ 0 ].rotation, animSpeed/1000, {
-							x: '+=2',
-							y: '+=2'
-						});	
-						
-						
-	
-					} else {
-						
-						//Current item entry action
-						TweenMax.to( $myRenderer, animSpeed/1000, {
-							alpha : 0,
-							onComplete    : function() {
-
-								var curSp = $myRenderer.find( '.list-item' ).eq( elementIndex );
-
-								TweenMax.to( this.target, animSpeed/1000, {
-									alpha : 1
-								});
-
-
-								//display the current item
-								TweenMax.set( $myRenderer.find( '.list-item' ), {
-									alpha: 0,
-									css  : {
-										display: 'none'
-									}
-								});	
-
-
-								// pause all videos
-								for ( var k = 0; k < spTotal; k++ ) {
-
-									var videoOb = texturesAll[ k ].image;
-
-									if ( videoOb.currentSrc.indexOf( '.mp4' ) >= 0 ) {
-										videoOb.autoplay = false;
-										videoOb.currentTime = 0;
-										videoOb.muted = true;
-										videoOb.pause();
-									}
-
-								}
-
-
-
-								// play the video
-								var videoObCur =  texturesAll[ elementIndex ].image;
-
-								if ( videoObCur.currentSrc.indexOf( '.mp4' ) >= 0 ) {
-									videoObCur.autoplay = true;
-									videoObCur.currentTime = 0;
-									videoObCur.muted = false;
-									videoObCur.play();
-								}
-
-
-
-								//display filters
-								TweenMax.to( curSp, animSpeed/1000, {
-									alpha: 1,
-									css : {
-										display: 'block'
-									},
-									onComplete : function() {
-										TweenMax.to( $current, animSpeed/1000, {
-											alpha : 1
-										});		
-									}
-								});	
-
-
-							}
-						});			
-
-						
-					}
-
-
-
-					
-
-				}// end effect
-					
-				
-				
 				
 			} else {
 				slider.find( '.uix-advanced-slider-sp__item canvas' ).hide();
@@ -14963,118 +17201,69 @@ APP = ( function ( APP, $, window, document ) {
 					});
 				}
 
-				var myPlayer = videojs( curVideoID, {
-										  width     : dataW,
-										  height    : dataH,
-										  loop      : dataLoop,
-										  autoplay  : dataAuto
-										});
+				var myPlayer = videojs( curVideoID, 
+				   {
+					  width     : dataW,
+					  height    : dataH,
+					  loop      : dataLoop,
+					  autoplay  : dataAuto
+					}, 
+				   function onPlayerReady() {
 
 
-				
-				
-				myPlayer.ready(function() {
-					
-					
-					/* ---------  Video initialize */
-					myPlayer.on( 'loadedmetadata', function() {
+						var initVideo = function( obj ) {
 
-						//Get Video Dimensions
-						var curW    = this.videoWidth(),
-							curH    = this.videoHeight(),
-							newW    = curW,
-							newH    = curH;
+							//Get Video Dimensions
+							var curW    = obj.videoWidth(),
+								curH    = obj.videoHeight(),
+								newW    = curW,
+								newH    = curH;
 
-						newW = videoWrapperW;
+							newW = videoWrapperW;
 
-						//Scaled/Proportional Content 
-						newH = curH*(newW/curW);
+							//Scaled/Proportional Content 
+							newH = curH*(newW/curW);
 
 
-						if ( !isNaN( newW ) && !isNaN( newH ) )  {
-							myPlayer.height( newH );		
-							myPlayer.width( newW );		
-							
-							$this.css( 'height', newH );
+							if ( !isNaN( newW ) && !isNaN( newH ) )  {
+								obj.height( newH );		
+								obj.width( newW );			
+
+								$this.css( 'height', newH );
+							}
+
+
+
+							//Show this video wrapper
+							$this.css( 'visibility', 'visible' );
+
+							//Hide loading effect
+							$this.find( '.vjs-loading-spinner, .vjs-big-play-button' ).hide();
 						}
 
 
+						/* ---------  Video initialize */
+						this.on( 'loadedmetadata', function() {
 
-						//Show this video wrapper
-						$this.css( 'visibility', 'visible' );
+							initVideo( this );
 
-						//Hide loading effect
-						$this.find( '.vjs-loading-spinner, .vjs-big-play-button' ).hide();
+						});
 
-					});		
-
-		
+					
+					    /* ---------  Display the play button  */
+					    if ( ! dataAuto ) $this.find( '.vjs-big-play-button' ).show();
+					    $this.find( '.vjs-big-play-button' ).off( 'click' ).on( 'click', function() {
+							$( this ).hide();
+						});
+					
 				
-					/* ---------  Set, tell the player it's in fullscreen  */
-					if ( dataAuto ) {
-						//Fix an error of Video auto play is not working in browser
-						//myPlayer.muted( true ); 
-						
-						//Prevent autoplay error: Uncaught (in promise) DOMException
-						var promise = myPlayer.play();
-
-						if ( promise !== undefined ) {
-							promise.then( function() {
-								// Autoplay started!
-							
-							}).catch( function( error ) {
-								// Autoplay was prevented.
-								$( '#' + coverPlayBtnID ).show();
-								$( '#' + coverPlayBtnID + ' .uix-video__cover__playbtn' ).show();
-								console.log( 'Autoplay was prevented.' );
-								
-							});
-							
-						}
-					}
-
-					
-
-					/* ---------  Disable control bar play button click */
-					if ( !dataControls ) {
-						myPlayer.controls( false );
-					}
-					
-					
-					/* ---------  Determine if the video is auto played from mobile devices  */
-					var autoPlayOK = false;
-
-					myPlayer.on( 'timeupdate', function() {
-
-						var duration = this.duration();
-						if ( duration > 0 ) {
-							autoPlayOK = true;
-							if ( this.currentTime() > 0 ) {
-								autoPlayOK = true;
-								this.off( 'timeupdate' );
-
-								//Hide cover and play buttons when the video automatically played
-								$( '#' + coverPlayBtnID ).hide();
-							} 
-
-						}
-
-					});
-				
-
-					
-					/* ---------  Pause the video when it is not current slider  */
-					if ( !play ) {
-						myPlayer.pause();
-						myPlayer.currentTime(0);
-						
-					} else {
+						/* ---------  Set, tell the player it's in fullscreen  */
 						if ( dataAuto ) {
+							//Fix an error of Video auto play is not working in browser
+							//this.muted( true ); 
 
-							myPlayer.currentTime(0);
-							
 							//Prevent autoplay error: Uncaught (in promise) DOMException
-							var promise = myPlayer.play();
+							var promise = this.play();
 
 							if ( promise !== undefined ) {
 								promise.then( function() {
@@ -15089,40 +17278,101 @@ APP = ( function ( APP, $, window, document ) {
 								});
 
 							}
+						}
 
-							//Hidden replay button
-							$replayBtn.hide();
 
-							//Should the video go to the beginning when it ends
-							myPlayer.on( 'ended', function () { 
-								
-								if ( dataLoop ) {
-									myPlayer.currentTime(0);
-									myPlayer.play();	
-								} else {
-									//Replay this video
-									myPlayer.currentTime(0);
-									
-									$replayBtn
-										.show()
-										.off( 'click' )
-										.on( 'click', function( e ) {
-											e.preventDefault();
 
-											myPlayer.play();
-											$replayBtn.hide();
+						/* ---------  Disable control bar play button click */
+						if ( !dataControls ) {
+							this.controls( false );
+						}
 
-										});						
+
+						/* ---------  Determine if the video is auto played from mobile devices  */
+						var autoPlayOK = false;
+
+						this.on( 'timeupdate', function() {
+
+							var duration = this.duration();
+							if ( duration > 0 ) {
+								autoPlayOK = true;
+								if ( this.currentTime() > 0 ) {
+									autoPlayOK = true;
+									this.off( 'timeupdate' );
+
+									//Hide cover and play buttons when the video automatically played
+									$( '#' + coverPlayBtnID ).hide();
+								} 
+
+							}
+
+						});
+
+
+
+						/* ---------  Pause the video when it is not current slider  */
+						if ( !play ) {
+							this.pause();
+							this.currentTime(0);
+
+						} else {
+							if ( dataAuto ) {
+
+								this.currentTime(0);
+
+								//Prevent autoplay error: Uncaught (in promise) DOMException
+								var promise = this.play();
+
+								if ( promise !== undefined ) {
+									promise.then( function() {
+										// Autoplay started!
+
+									}).catch( function( error ) {
+										// Autoplay was prevented.
+										$( '#' + coverPlayBtnID ).show();
+										$( '#' + coverPlayBtnID + ' .uix-video__cover__playbtn' ).show();
+										console.log( 'Autoplay was prevented.' );
+
+									});
+
 								}
-							
-							});		
+
+								//Hidden replay button
+								$replayBtn.hide();
+
+								//Should the video go to the beginning when it ends
+								this.on( 'ended', function () { 
+
+									if ( dataLoop ) {
+										this.currentTime(0);
+										this.play();	
+									} else {
+										//Replay this video
+										this.currentTime(0);
+
+										$replayBtn
+											.show()
+											.off( 'click' )
+											.on( 'click', function( e ) {
+												e.preventDefault();
+
+												this.play();
+												$replayBtn.hide();
+
+											});						
+									}
+
+								});		
 
 
-						}	
-					}
-					
+							}	
+						}
 
-				});
+
+
+					});
+
+				
 
 			});	
 		}	    
@@ -15929,51 +18179,51 @@ APP = ( function ( APP, $, window, document ) {
 
 			
 			//----
-			if ( APP.MAIN ) APP.MAIN.pageLoaded(); //Theme Scripts
-			if ( APP.COMMON_HEIGHT ) APP.COMMON_HEIGHT.pageLoaded(); //Common Height
-			if ( APP.ADVANCED_SLIDER ) APP.ADVANCED_SLIDER.pageLoaded(); //Advanced Slider (Basic)
-			if ( APP.ADVANCED_SLIDER_FILTER ) APP.ADVANCED_SLIDER_FILTER.pageLoaded(); //Advanced Slider	
-			if ( APP.POST_LIST_SPLIT_FULLWIDTH ) APP.POST_LIST_SPLIT_FULLWIDTH.pageLoaded(); //Fullwidth List of Split
-			if ( APP.STICKY_EL ) APP.STICKY_EL.pageLoaded(); //Sticky Elements
-			if ( APP.TEXT_EFFECT ) APP.TEXT_EFFECT.pageLoaded(); //Text effect
-			if ( APP.TIMELINE ) APP.TIMELINE.pageLoaded(); //Timeline
+			if ( APP.MAIN )                         APP.MAIN.pageLoaded(); //Theme Scripts
+			if ( APP.COMMON_HEIGHT )                APP.COMMON_HEIGHT.pageLoaded(); //Common Height
+			if ( APP.ADVANCED_SLIDER )              APP.ADVANCED_SLIDER.pageLoaded(); //Advanced Slider (Basic)
+			if ( APP.ADVANCED_SLIDER_FILTER )       APP.ADVANCED_SLIDER_FILTER.pageLoaded(); //Advanced Slider	
+			if ( APP.POST_LIST_SPLIT_FULLWIDTH )    APP.POST_LIST_SPLIT_FULLWIDTH.pageLoaded(); //Fullwidth List of Split
+			if ( APP.STICKY_EL )                    APP.STICKY_EL.pageLoaded(); //Sticky Elements
+			if ( APP.TEXT_EFFECT )                  APP.TEXT_EFFECT.pageLoaded(); //Text effect
+			if ( APP.TIMELINE )                     APP.TIMELINE.pageLoaded(); //Timeline
 			
 		
 			
 			//----
-			if ( APP.MAIN ) APP.MAIN.documentReady($); //Theme Scripts
-			if ( APP.TABLE ) APP.TABLE.documentReady($); //Responsive Table
-			if ( APP.TABLE_SORTER ) APP.TABLE_SORTER.documentReady($); //Table Sorter
-			if ( APP.MODAL_DIALOG ) APP.MODAL_DIALOG.documentReady($); //Modal Dialog
-			if ( APP.PARALLAX ) APP.PARALLAX.documentReady($); //Parallax
-			if ( APP.VIDEOS ) APP.VIDEOS.documentReady($); //Videos
-			if ( APP.BODY_AND_HEADER ) APP.BODY_AND_HEADER.documentReady($); //Header Area
-			if ( APP.SET_BG ) APP.SET_BG.documentReady($); //Specify a background image
-			if ( APP.GET_CUSTOM_ATTRS ) APP.GET_CUSTOM_ATTRS.documentReady($); //Get all custom attributes of an element like "data-*"
-			if ( APP.PAGINATION ) APP.PAGINATION.documentReady($); //Pagination
-			if ( APP.FORM ) APP.FORM.documentReady($); //Form
-			if ( APP.FLEXSLIDER ) APP.FLEXSLIDER.documentReady($); //Flexslider
-			if ( APP.RETINA ) APP.RETINA.documentReady($); //Retina Graphics for Website
-			if ( APP.SHOW_MORELESS ) APP.SHOW_MORELESS.documentReady($); //Show More Less
-			if ( APP.DROPDOWN_MENU ) APP.DROPDOWN_MENU.documentReady($); //Dropdown Menu
-			if ( APP.DROPDOWN_MENU2 ) APP.DROPDOWN_MENU2.documentReady($); //Dropdown Menu2
-			if ( APP.ACCORDION ) APP.ACCORDION.documentReady($); //Accordion	
-			if ( APP.ADVANCED_CONTENT_SLIDER ) APP.ADVANCED_CONTENT_SLIDER.documentReady($); //Advanced Content Slider
-			if ( APP.GALLERY ) APP.GALLERY.documentReady($); //Gallery
-			if ( APP.IMAGE_SHAPES ) APP.IMAGE_SHAPES.documentReady($); //Image Shapes
-			if ( APP.PERIODICAL_SCROLL ) APP.PERIODICAL_SCROLL.documentReady($); //Periodical Scroll
-			if ( APP.PRICING ) APP.PRICING.documentReady($); //Pricing
-			if ( APP.PROGRESSBAR ) APP.PROGRESSBAR.documentReady($); //Progress Bar
-			if ( APP.PROGRESSLINE ) APP.PROGRESSLINE.documentReady($); //Progress Line
-			if ( APP.ROTATING_EL ) APP.ROTATING_EL.documentReady($); //Rotating Elements
-			if ( APP.SMOOTH_SCROLLING_ANCHORLINK ) APP.SMOOTH_SCROLLING_ANCHORLINK.documentReady($); //Smooth Scrolling When Clicking An Anchor Link
-			if ( APP.TABS ) APP.TABS.documentReady($); //Tabs
-			if ( APP.TEAM_FOCUS ) APP.TEAM_FOCUS.documentReady($); //Team Focus
-			if ( APP.LAVA_LAMP_STYLE_MENU ) APP.LAVA_LAMP_STYLE_MENU.documentReady($); //Lava-Lamp Style Menu
-			if ( APP.CIRCLE_LAYOUT ) APP.CIRCLE_LAYOUT.documentReady($); //Circle Layout
-			if ( APP.MULTI_ITEMS_CAROUSEL ) APP.MULTI_ITEMS_CAROUSEL.documentReady($); //Multiple Items Carousel
-			if ( APP._3D_BACKGROUND ) APP._3D_BACKGROUND.documentReady($); //3D Background
-			if ( APP._3D_CAROUSEL ) APP._3D_CAROUSEL.documentReady($); //3D Carousel
+			if ( APP.MAIN )                         APP.MAIN.documentReady($); //Theme Scripts
+			if ( APP.TABLE )                        APP.TABLE.documentReady($); //Responsive Table
+			if ( APP.TABLE_SORTER )                 APP.TABLE_SORTER.documentReady($); //Table Sorter
+			if ( APP.MODAL_DIALOG )                 APP.MODAL_DIALOG.documentReady($); //Modal Dialog
+			if ( APP.PARALLAX )                     APP.PARALLAX.documentReady($); //Parallax
+			if ( APP.VIDEOS )                       APP.VIDEOS.documentReady($); //Videos
+			if ( APP.BODY_AND_HEADER )              APP.BODY_AND_HEADER.documentReady($); //Header Area
+			if ( APP.SET_BG )                       APP.SET_BG.documentReady($); //Specify a background image
+			if ( APP.GET_CUSTOM_ATTRS )             APP.GET_CUSTOM_ATTRS.documentReady($); //Get all custom attributes of an element like "data-*"
+			if ( APP.PAGINATION )                   APP.PAGINATION.documentReady($); //Pagination
+			if ( APP.FORM )                         APP.FORM.documentReady($); //Form
+			if ( APP.FLEXSLIDER )                   APP.FLEXSLIDER.documentReady($); //Flexslider
+			if ( APP.RETINA )                       APP.RETINA.documentReady($); //Retina Graphics for Website
+			if ( APP.SHOW_MORELESS )                APP.SHOW_MORELESS.documentReady($); //Show More Less
+			if ( APP.DROPDOWN_MENU )                APP.DROPDOWN_MENU.documentReady($); //Dropdown Menu
+			if ( APP.DROPDOWN_MENU2 )               APP.DROPDOWN_MENU2.documentReady($); //Dropdown Menu2
+			if ( APP.ACCORDION )                    APP.ACCORDION.documentReady($); //Accordion	
+			if ( APP.ADVANCED_CONTENT_SLIDER )      APP.ADVANCED_CONTENT_SLIDER.documentReady($); //Advanced Content Slider
+			if ( APP.GALLERY )                      APP.GALLERY.documentReady($); //Gallery
+			if ( APP.IMAGE_SHAPES )                 APP.IMAGE_SHAPES.documentReady($); //Image Shapes
+			if ( APP.PERIODICAL_SCROLL )            APP.PERIODICAL_SCROLL.documentReady($); //Periodical Scroll
+			if ( APP.PRICING )                      APP.PRICING.documentReady($); //Pricing
+			if ( APP.PROGRESSBAR )                  APP.PROGRESSBAR.documentReady($); //Progress Bar
+			if ( APP.PROGRESSLINE )                 APP.PROGRESSLINE.documentReady($); //Progress Line
+			if ( APP.ROTATING_EL )                  APP.ROTATING_EL.documentReady($); //Rotating Elements
+			if ( APP.SMOOTH_SCROLLING_ANCHORLINK )  APP.SMOOTH_SCROLLING_ANCHORLINK.documentReady($); //Smooth Scrolling When Clicking An Anchor Link
+			if ( APP.TABS )                         APP.TABS.documentReady($); //Tabs
+			if ( APP.TEAM_FOCUS )                   APP.TEAM_FOCUS.documentReady($); //Team Focus
+			if ( APP.LAVA_LAMP_STYLE_MENU )         APP.LAVA_LAMP_STYLE_MENU.documentReady($); //Lava-Lamp Style Menu
+			if ( APP.CIRCLE_LAYOUT )                APP.CIRCLE_LAYOUT.documentReady($); //Circle Layout
+			if ( APP.MULTI_ITEMS_CAROUSEL )         APP.MULTI_ITEMS_CAROUSEL.documentReady($); //Multiple Items Carousel
+			if ( APP._3D_BACKGROUND )               APP._3D_BACKGROUND.documentReady($); //3D Background
+			if ( APP._3D_CAROUSEL )                 APP._3D_CAROUSEL.documentReady($); //3D Carousel
 			
 			
 		
@@ -16473,6 +18723,7 @@ APP = ( function ( APP, $, window, document ) {
 
 				e.preventDefault();
 				
+				//Its value is not a boolean but a string
 				var expanded = ( $( this ).attr( 'aria-expanded' ) == 'true' ) ? false : true;
 				
 				if ( expanded ) {
@@ -16544,45 +18795,42 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.DYNAMIC_DD_LIST               = APP.DYNAMIC_DD_LIST || {};
-	APP.DYNAMIC_DD_LIST.version       = '0.0.2';
+	APP.DYNAMIC_DD_LIST.version       = '0.0.5';
     APP.DYNAMIC_DD_LIST.documentReady = function( $ ) {
 
+
+			
 		$( '[data-ajax-dynamic-dd-json]' ).each( function() {
 			var $this            = $( this ),
 			    jsonFile         = $this.data( 'ajax-dynamic-dd-json' ),
-				ranID            = 'dynamic-dd-control-' + UIX_GUID.newGuid(),
-				method           = $this.data( 'ajax-dynamic-dd-method' ),
-				event            = $this.data( 'ajax-dynamic-dd-event' ),
-				associated       = $this.data( 'ajax-dynamic-dd-associated' ),
-				toData           = $this.data( 'ajax-dynamic-dd-data' ),
+				ranID            = 'dynamic-dd-control-' + UixGUID.create(),
 				ID               = $this.attr( 'id' ),
+				method           = $this.data( 'ajax-dynamic-dd-method' ),
+				autoExpand       = $this.data( 'ajax-dynamic-dd-auto-expand' ),
+				associated       = $this.data( 'ajax-dynamic-dd-associated' ),
+				associated2      = $this.data( 'ajax-dynamic-dd-associated2' ),
+				toData           = $this.data( 'ajax-dynamic-dd-data' ),
+				emptyTxt1        = $this.data( 'ajax-dynamic-dd-this-text' ),
+				emptyTxt2        = $this.data( 'ajax-dynamic-dd-associated-text' ),
+				emptyTxt3        = $this.data( 'ajax-dynamic-dd-associated2-text' ),
 				thisChange       = true,
 				curID;
 	
+					
+			if ( typeof emptyTxt1 === typeof undefined ) emptyTxt1 = '-';
+			if ( typeof emptyTxt2 === typeof undefined ) emptyTxt2 = '-';
+			if ( typeof emptyTxt3 === typeof undefined ) emptyTxt3 = '-';
+			if ( typeof jsonFile === typeof undefined ) jsonFile = '';
+			if ( typeof toData === typeof undefined ) toData = '';
+			if ( typeof method === typeof undefined ) method = 'POST';
+			if ( typeof autoExpand === typeof undefined ) autoExpand = true;
+			if ( typeof associated === typeof undefined ) associated = '#demo';
+			if ( typeof associated2 === typeof undefined ) associated2 = '#demo2';
+			if ( typeof ID === typeof undefined ) $this.attr( 'id', ranID );
+			
+			
+			
 
-			if ( typeof jsonFile === typeof undefined ) {
-				jsonFile = '';
-			}	
-			
-			if ( typeof toData === typeof undefined ) {
-				toData = '';
-			}	
-			
-			if ( typeof method === typeof undefined ) {
-				method = 'POST';
-			}		
-			
-			
-			
-			if ( typeof associated === typeof undefined ) {
-				associated = '#demo';
-			}		
-			
-			if ( typeof ID === typeof undefined ) {
-				$this.attr( 'id', ranID );
-			}	
-			
-			
 			curID = $this.attr( 'id' );
 			
 			
@@ -16600,18 +18848,315 @@ APP = ( function ( APP, $, window, document ) {
 						dataType : 'json',
 						success  : function ( data ) { 
 
-							var firstOptionsHtml = '';
+							
+								var _level1 = [],
+									_level2 = [],
+									_level3 = [],
+									_level1IDs     = [],
+									_level2IDs     = [],
+									_level3IDs     = [];
 
-							//Push the options to target select
-							for ( var m = 0; m < data.length; m++ ) {
-								firstOptionsHtml += "<option value='"+data[m].name+"'>"+data[m].name+"</option>";
-							}	
 
-							$( firstOptionsHtml ).insertAfter( $this.find( 'option' ).first() );
+								for ( var m = 0; m < data.length; m++ ) {
+
+									_level1.push( data[m].name );
+									_level1IDs.push( data[m].id );
+
+									var level2_List;
+
+									if ( typeof data[0].list === typeof undefined ) {
+										//============ China cities dropdown list demo
+										//================================================
+										level2_List = data[m].city;
+									} else {
+										//============ Sort object then subsort further demo
+										//================================================
+										level2_List = data[m].list;
+									}
+
+									var _curLevel2Items   = [],
+										_curLevel3Items   = [],
+										_curLevel2IDs     = [],
+										_curLevel3IDs     = [];
 
 
-							//Render the custom select
-							$( document ).UixRenderCustomSelect();
+									for ( var i = 0; i < level2_List.length; i++ ) {
+
+
+
+										if ( typeof data[0].list === typeof undefined ) {
+											//============ China cities dropdown list demo
+											//================================================
+											var city      = level2_List[i].name,
+												area      = level2_List[i].area,
+												areaIDs   = level2_List[i].areaid,
+												ids       = level2_List[i].id;
+
+											
+
+											_curLevel2Items.push( city );
+											_curLevel2IDs.push( ids );
+
+											var _tempLevel3Items = [],
+												_tempLevel3IDs   = [];
+											
+											if ( typeof area != typeof undefined ) {
+												for ( var k = 0; k < area.length; k++ ) {
+													_tempLevel3Items.push( area[k] );
+
+												}		
+											}
+
+											if ( typeof areaIDs != typeof undefined ) {
+												for ( var p = 0; p < areaIDs.length; p++ ) {
+													_tempLevel3IDs.push( areaIDs[p] );
+
+												}		
+											}
+											
+											_curLevel3Items.push( _tempLevel3Items );
+											_curLevel3IDs.push( _tempLevel3IDs );
+
+
+										} else {
+											//============ Sort object then subsort further demo
+											//================================================
+											var sort1    = level2_List[i].name,
+												sortID   = level2_List[i].id;
+
+											_curLevel2Items.push( sort1 );
+											_curLevel2IDs.push( sortID );
+										}
+
+
+
+									}// end for
+
+									_level2.push( _curLevel2Items );
+									_level3.push( _curLevel3Items );
+									
+									_level2IDs.push( _curLevel2IDs );
+									_level3IDs.push( _curLevel3IDs );									
+									
+
+								}// end for
+
+
+
+								function initSelectControls() {
+									var allLevel1Items           = _level1,
+										allLevel2Items           = _level2,
+										allLevel3Items           = _level3,
+										allLevel1IDs             = _level1IDs,
+										allLevel2IDs             = _level2IDs,
+										allLevel3IDs             = _level3IDs,
+										$level1El                = $this,
+										$level2El                = $( associated ),
+										$level3El                = $( associated2 ),
+										level1EmptyOption        = '<option value="">' + emptyTxt1 + '</option>',
+										level2EmptyOption        = '<option value="">' + emptyTxt2 + '</option>',
+										level3EmptyOption        = '<option value="">' + emptyTxt3 + '</option>',
+										defaultLevel1Val         = $this.val(),
+										defaultLevel2Val         = $level2El.val(),
+										defaultLevel3Val         = $level3El.val(),
+										isCustomSelLevel1        = $level1El.closest( '.uix-controls' ).hasClass( 'uix-controls__select' ),
+										isCustomSelLevel2        = $level2El.closest( '.uix-controls' ).hasClass( 'uix-controls__select' ),
+										isCustomSelLevel3        = $level3El.closest( '.uix-controls' ).hasClass( 'uix-controls__select' ),
+										$level1Wrapper           = isCustomSelLevel1 ? $level1El.closest( '.uix-controls' ).parent( '.uix-controls__select-wrapper' ) : $level1El.closest( '.uix-controls' ),
+										$level2Wrapper           = isCustomSelLevel2 ? $level2El.closest( '.uix-controls' ).parent( '.uix-controls__select-wrapper' ) : $level2El.closest( '.uix-controls' ),
+										$level3Wrapper           = isCustomSelLevel3 ? $level3El.closest( '.uix-controls' ).parent( '.uix-controls__select-wrapper' ) : $level3El.closest( '.uix-controls' );
+
+
+//									console.log( allLevel1Items );
+//									console.log( allLevel2Items );
+//									console.log( allLevel3Items );
+									
+//									console.log( allLevel1IDs );
+//									console.log( allLevel2IDs );
+//									console.log( allLevel3IDs );								
+									
+
+									//Clear all the drop-down list
+									$level1El.empty();
+									$level2El.empty();
+									$level3El.empty();
+
+									//Hide or display controls
+									if ( autoExpand ) $level2Wrapper.hide();
+									if ( autoExpand ) $level3Wrapper.hide();
+									
+							
+									
+									//---------- Initialize the level 1
+									if ( defaultLevel1Val != '' && defaultLevel1Val != null ) {
+										//Hide or display controls
+										if ( autoExpand ) $level2Wrapper.show();
+									}
+									$level1El.append( level1EmptyOption );
+									for (var i = 0; i < allLevel1Items.length; i++) {
+										var _v = allLevel1Items[i],
+											_id = allLevel1IDs[i];
+
+										if ( defaultLevel1Val == _v ) {
+											$level1El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "' selected>" + _v + "</option>");
+										} else {
+											$level1El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
+										}
+
+									}
+
+
+									//---------- Initialize the level 2
+									var curLevel1Index = $level1El.find( 'option:selected' ).data( 'index' );
+
+									if ( defaultLevel2Val != '' && defaultLevel2Val != null ) {
+										//Hide or display controls
+										if ( autoExpand ) $level3Wrapper.show();
+									}							
+									$level2El.append( level2EmptyOption );
+
+									if ( typeof curLevel1Index != typeof undefined ) {
+										for (var i = 0; i < allLevel2Items[curLevel1Index - 1].length; i++) {
+											var _v = allLevel2Items[curLevel1Index - 1][i],
+											    _id = allLevel2IDs[curLevel1Index - 1][i];
+  
+
+											if ( defaultLevel2Val == _v ) {
+												$level2El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "' selected>" + _v + "</option>");
+											} else {
+												$level2El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
+											}
+										}		
+									}
+
+
+									//---------- Initialization level 3
+									var curLevel2Index = $level2El.find( 'option:selected' ).data( 'index' );
+									$level3El.append( level3EmptyOption );
+
+									if ( typeof curLevel2Index != typeof undefined ) {
+										for (var i = 0; i < allLevel3Items[curLevel1Index - 1][curLevel2Index - 1].length; i++) {
+											var _v = allLevel3Items[curLevel1Index - 1][curLevel2Index - 1][i],
+											    _id = allLevel3IDs[curLevel1Index - 1][curLevel2Index - 1][i];
+
+
+											if ( defaultLevel3Val == _v ) {
+												$level3El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "' selected>" + _v + "</option>");
+											} else {
+												$level3El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
+											}
+										}
+
+									}
+
+
+									//---------- Render the custom select
+									$( document ).UixRenderCustomSelect();
+									$level1El.attr( 'selected', 'selected' ).change();
+									$level2El.attr( 'selected', 'selected' ).change();
+									$level3El.attr( 'selected', 'selected' ).change();
+
+
+
+
+									//---------- Change event level 1
+									$level1El.on( 'change.DYNAMIC_DD_LIST', function() {
+										//Clear all the level 2 and level 3 items in the drop-down list
+										$level2El.empty();
+										$level3El.empty();
+
+									
+										//Add a option with a value of 0
+										$level2El.append( level2EmptyOption );
+										$level3El.append( level3EmptyOption );
+
+
+										//Hide or display controls
+										if ( autoExpand ) $level2Wrapper.show();
+										
+
+
+										//Set the current subscript of the selected option and assign
+										var level1Index = $(this).find( 'option:selected' ).data( 'index' );
+										var level2Items = allLevel2Items[level1Index - 1];
+										var level2IDs = allLevel2IDs[level1Index - 1];
+
+										if ( typeof level2Items != typeof undefined ) {
+											for (var i = 0; i < level2Items.length; i++) {
+												var _v = level2Items[i],
+											        _id = level2IDs[i];
+
+												$level2El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
+											}			
+										} else {
+											//Hide or display controls
+											if ( autoExpand ) $level2Wrapper.hide();
+										}
+										
+										//Render the custom select
+										$( document ).UixRenderCustomSelect();
+										$level2El.attr( 'selected', 'selected' ).change();
+										
+
+									});
+
+
+									//---------- Change event level 2
+									$level2El.on( 'change.DYNAMIC_DD_LIST', function() {
+										//Clear all the level 3 items in the drop-down list
+										$level3El.empty();
+
+										
+										//Add a option with a value of 0
+										$level3El.append( level3EmptyOption );
+										
+										
+										//Hide or display controls
+										if ( autoExpand ) $level3Wrapper.show();
+										
+										
+
+										//Get the subscript corresponding to the level 1 and level 2 at this time
+										var level1Index = $level1El.find( 'option:selected' ).data( 'index' );
+										var level2Index = $(this).find( 'option:selected' ).data( 'index' );
+										
+										
+										
+										if ( typeof level1Index != typeof undefined && typeof level2Index != typeof undefined ) {
+											var level3Items = allLevel3Items[level1Index - 1][level2Index - 1];
+											var level3IDs = allLevel3IDs[level1Index - 1][level2Index - 1];
+
+											if ( typeof level3Items != typeof undefined ) {
+												for (var i = 0; i < level3Items.length; i++) {
+													var _v = level3Items[i],
+											            _id = level3IDs[i];
+
+													$level3El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
+												}		
+											}	
+										} else {
+											
+											//Hide or display controls
+											if ( autoExpand ) $level3Wrapper.hide();
+											
+										}
+										
+										
+										
+										//Render the custom select
+										$( document ).UixRenderCustomSelect();
+										$level3El.attr( 'selected', 'selected' ).change();
+
+									});	
+
+
+
+								}
+
+
+								initSelectControls();
+							
+
 
 
 						 },
@@ -16628,207 +19173,6 @@ APP = ( function ( APP, $, window, document ) {
 				}
 
 
-
-				//Dropdown list change event trigger
-				$( document ).on( 'change', '#' + curID, function( e ) {
-
-					e.preventDefault();
-
-
-					if ( thisChange ) {
-
-						thisChange = false;
-
-						var curVal = $( '#' + curID + ' option:selected' ).val();
-
-
-						//Clear all options
-						if ( curVal == '' ) {
-
-
-							$( '#' + curID ).find( 'option[value=""]' ).attr( 'selected', 'selected' );
-							$( associated ).find( 'option:selected' ).removeAttr( 'selected' );
-
-							//Render the custom select
-							$( document ).UixRenderCustomSelect();
-							$( associated ).attr( 'selected', 'selected' ).change();	
-
-							APP.DYNAMIC_DD_LIST.documentReady($);
-
-
-						}
-
-
-
-						if ( curVal != '' ) {
-
-							//remove the empty option
-							$( '#' + curID + ' option[value=""]' ).remove();
-
-							//Returns JSON data
-							$.ajax({
-								url      : jsonFile, //Be careful about the format of the JSON file
-								method   : method,
-								data     : toData,
-								dataType : 'json',
-								success  : function ( data ) { 
-
-									//If the data is empty
-									if ( data == null ) {
-										//do something
-									}
-
-
-									for ( var m = 0; m < data.length; m++ ) {
-
-										//Check if a key exists inside a json object
-										if ( data[m].name == curVal ) {
-
-
-											var optionsHtml         = '',
-												sortListDemo        = data[m].list;
-
-
-											if ( typeof sortListDemo === typeof undefined ) {
-
-
-												/* 
-												 ====================================================
-												 * China cities dropdown list demo
-												 ====================================================
-												 */
-
-												var chinaCitiesListDemo = data[m].city;
-
-												//Traversing json of chinese provinces and cities
-												//-------------------------------------	
-												for ( var i = 0; i < chinaCitiesListDemo.length; i++ ) {
-
-													var city      = chinaCitiesListDemo[i].name,
-														area      = chinaCitiesListDemo[i].area;
-
-													var areaTxt = '';
-													for ( var k = 0; k < area.length; k++ ) {
-														areaTxt += JSON.stringify( area[k] ) + ',';
-													}
-
-													areaTxt = areaTxt.replace(/,\s*$/, '' );
-
-
-													optionsHtml += "<option data-name='"+city+"' data-area='["+areaTxt+"]'  value='"+city+"'>"+city+"</option>";
-
-												}
-											} else {
-
-
-												/* 
-												 ====================================================
-												 *  Sort object then subsort further demo
-												 ====================================================
-												 */
-
-												//Traversing json with coordinates and details
-												//-------------------------------------		
-												for ( var i2 = 0; i2 < sortListDemo.length; i2++ ) {
-
-													var name        = sortListDemo[i2].name,
-														longitude   = sortListDemo[i2].longitude,
-														latitude    = sortListDemo[i2].latitude,
-														customAttrs = sortListDemo[i2].attributes;
-
-													var attributesTxt = '';
-													for ( var k2 = 0; k2 < customAttrs.length; k2++ ) {
-
-														//Need to filter single quotes
-														attributesTxt += JSON.stringify( customAttrs[k2] ).replace(/'/g, '&apos;' ) + ',';
-													}
-
-													attributesTxt = attributesTxt.replace(/,\s*$/, '' );
-
-
-
-													optionsHtml += "<option data-name='"+name+"' data-attributes='["+attributesTxt+"]' data-longitude='"+longitude+"' data-latitude='"+latitude+"' value='"+name+"'>"+name+"</option>";
-
-												}
-
-											}
-
-											$( associated ).html( optionsHtml );
-											$( associated ).closest( '.uix-controls__select-wrapper' ).find( '.uix-controls__select-trigger' ).addClass( 'active' );
-
-
-											//Render the custom select
-											$( document ).UixRenderCustomSelect();
-											$( associated ).attr( 'selected', 'selected' ).change();
-
-
-
-
-											break;
-										}
-
-									}//end for data
-
-
-									//Avoid duplicate events running
-									thisChange = true;
-
-								 },
-								 error  : function() {
-
-
-								 }
-							});
-
-
-						}	
-					}
-
-
-
-					return false;
-
-
-				});	
-
-
-
-				/* 
-				 ====================================================
-				 *  Callback from two-level classification
-				 *  Fire the three-level classification
-				 ====================================================
-				 */
-				//For "China cities" and "Sort Demo"
-
-				$( document ).on( 'change.DYNAMIC_DD_LIST', associated, function( e ) {
-
-					e.preventDefault();
-
-					var $this        = $( this[ this.selectedIndex ] ),
-						curVal       = $this.val(),
-						curLongitude = $this.data( 'longitude' ),
-						curLatitude  = $this.data( 'latitude' ),
-						curAttributes = $this.data( 'attributes' ),
-						curContents  = '';
-
-
-					if ( Object.prototype.toString.call( curAttributes ) =='[object Array]' ) {
-						for ( var k = 0; k < curAttributes.length; k++ ) {
-							curContents += curAttributes[k].attr_name + ': ' + curAttributes[k].attr_longitude + ', ' + curAttributes[k].attr_latitude;
-						}
-
-					}
-
-					//console.log( curVal + ' Longitude: ' + curLongitude + ' | Latitude: ' + curLatitude + ' | Addresses: ' + curContents );
-
-					return false;
-
-
-
-				});		
-
-				
 				
 			} // end of jsonFile
 			
@@ -16836,13 +19180,15 @@ APP = ( function ( APP, $, window, document ) {
 			
 		});
 		
+		
+			
+				
     };
 
     APP.components.documentReady.push( APP.DYNAMIC_DD_LIST.documentReady );
     return APP;
 
 }( APP, jQuery, window, document ) );
-
 
 
 
@@ -17013,7 +19359,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.FLEXSLIDER               = APP.FLEXSLIDER || {};
-	APP.FLEXSLIDER.version       = '0.1.4';
+	APP.FLEXSLIDER.version       = '0.1.5';
     APP.FLEXSLIDER.documentReady = function( $ ) {
 
 		var $window            = $( window ),
@@ -17022,6 +19368,7 @@ APP = ( function ( APP, $, window, document ) {
 			flexslider         = {
 						           vars: {}
 					              };
+		
 		
 		/*
 		 * Tiny helper function to add breakpoints.
@@ -17426,175 +19773,189 @@ APP = ( function ( APP, $, window, document ) {
 					});
 				}
 
-				var myPlayer = videojs( curVideoID, {
-										  width     : dataW,
-										  height    : dataH,
-										  loop      : dataLoop,
-										  autoplay  : dataAuto
-										});
-
 				
+				var myPlayer = videojs( curVideoID, 
+				   {
+					  width     : dataW,
+					  height    : dataH,
+					  loop      : dataLoop,
+					  autoplay  : dataAuto
+					}, 
+				   function onPlayerReady() {
 
-				myPlayer.ready(function() {
-					
-			
-					/* ---------  Video initialize */
-					myPlayer.on( 'loadedmetadata', function() {
 
-						//Get Video Dimensions
-						var curW    = this.videoWidth(),
-							curH    = this.videoHeight(),
-							newW    = curW,
-							newH    = curH;
+						var initVideo = function( obj ) {
 
-						newW = videoWrapperW;
+							//Get Video Dimensions
+							var curW    = obj.videoWidth(),
+								curH    = obj.videoHeight(),
+								newW    = curW,
+								newH    = curH;
 
-						//Scaled/Proportional Content 
-						newH = curH*(newW/curW);
-						
-					
-						if ( !isNaN( newW ) && !isNaN( newH ) )  {
-							myPlayer.height( newH );		
-							myPlayer.width( newW );			
-							
-							$this.css( 'height', newH );
+							newW = videoWrapperW;
+
+							//Scaled/Proportional Content 
+							newH = curH*(newW/curW);
+
+
+							if ( !isNaN( newW ) && !isNaN( newH ) )  {
+								obj.height( newH );		
+								obj.width( newW );			
+
+								$this.css( 'height', newH );
+							}
+
+
+
+							//Show this video wrapper
+							$this.css( 'visibility', 'visible' );
+
+							//Hide loading effect
+							$this.find( '.vjs-loading-spinner, .vjs-big-play-button' ).hide();
 						}
 
+						/* ---------  Video initialize */
+						this.on( 'loadedmetadata', function() {
 
+							initVideo( this );
 
-						//Show this video wrapper
-						$this.css( 'visibility', 'visible' );
-
-						//Hide loading effect
-						$this.find( '.vjs-loading-spinner, .vjs-big-play-button' ).hide();
-
-					});		
-
-		
-				
-					/* ---------  Set, tell the player it's in fullscreen  */
-					if ( dataAuto ) {
-						
-						//Fix an error of Video auto play is not working in browser
-						//myPlayer.muted( true ); 
-						
-						
-						
-						//Prevent autoplay error: Uncaught (in promise) DOMException
-						var promise = myPlayer.play();
-
-						if ( promise !== undefined ) {
-							promise.then( function() {
-								// Autoplay started!
-							
-							}).catch( function( error ) {
-								// Autoplay was prevented.
-								$( '#' + coverPlayBtnID ).show();
-								$( '#' + coverPlayBtnID + ' .uix-video__cover__playbtn' ).show();
-								console.log( 'Autoplay was prevented.' );
-								
-							});
-							
-							
-						}
-						
-						
-
-						
-					}
-
-
-					/* ---------  Disable control bar play button click */
-					if ( !dataControls ) {
-						myPlayer.controls( false );
-					}
-
-
-					/* ---------  Determine if the video is auto played from mobile devices  */
-					var autoPlayOK = false;
-
-					myPlayer.on( 'timeupdate', function() {
-
-						var duration = this.duration();
-						if ( duration > 0 ) {
-							autoPlayOK = true;
-							if ( this.currentTime() > 0 ) {
-								autoPlayOK = true;
-								this.off( 'timeupdate' );
-
-								//Hide cover and play buttons when the video automatically played
-								$( '#' + coverPlayBtnID ).hide();
-							} 
-
-						}
-
-					});
-				
+						});
 					
 					
-					/* ---------  Pause the video when it is not current slider  */
-					if ( !play ) {
-						myPlayer.pause();
-						myPlayer.currentTime(0);
-					} else {
+					    /* ---------  Display the play button  */
+					    if ( ! dataAuto ) $this.find( '.vjs-big-play-button' ).show();
+					    $this.find( '.vjs-big-play-button' ).off( 'click' ).on( 'click', function() {
+							$( this ).hide();
+						});
+
+					
+
+						/* ---------  Set, tell the player it's in fullscreen  */
 						if ( dataAuto ) {
 
-							myPlayer.currentTime(0);
-							
-							
+							//Fix an error of Video auto play is not working in browser
+							//this.muted( true ); 
+
+
+
 							//Prevent autoplay error: Uncaught (in promise) DOMException
-							var promise = myPlayer.play();
+							var promise = this.play();
 
 							if ( promise !== undefined ) {
 								promise.then( function() {
 									// Autoplay started!
-									
+
 								}).catch( function( error ) {
 									// Autoplay was prevented.
 									$( '#' + coverPlayBtnID ).show();
 									$( '#' + coverPlayBtnID + ' .uix-video__cover__playbtn' ).show();
 									console.log( 'Autoplay was prevented.' );
+
 								});
+
+
 							}
 
-							
-							
-							
-						
-							//Hidden replay button
-							$replayBtn.hide();
 
 
-							//Should the video go to the beginning when it ends
-							myPlayer.on( 'ended', function () { 
-								
-								if ( dataLoop ) {
-									myPlayer.currentTime(0);
-									myPlayer.play();	
-								} else {
-									//Replay this video
-									myPlayer.currentTime(0);
-									
-									$replayBtn
-										.show()
-										.off( 'click' )
-										.on( 'click', function( e ) {
-											e.preventDefault();
 
-											myPlayer.play();
-											$replayBtn.hide();
+						}
 
-										});						
+
+						/* ---------  Disable control bar play button click */
+						if ( !dataControls ) {
+							this.controls( false );
+						}
+
+
+						/* ---------  Determine if the video is auto played from mobile devices  */
+						var autoPlayOK = false;
+
+						this.on( 'timeupdate', function() {
+
+							var duration = this.duration();
+							if ( duration > 0 ) {
+								autoPlayOK = true;
+								if ( this.currentTime() > 0 ) {
+									autoPlayOK = true;
+									this.off( 'timeupdate' );
+
+									//Hide cover and play buttons when the video automatically played
+									$( '#' + coverPlayBtnID ).hide();
+								} 
+
+							}
+
+						});
+
+
+
+						/* ---------  Pause the video when it is not current slider  */
+						if ( !play ) {
+							this.pause();
+							this.currentTime(0);
+						} else {
+							if ( dataAuto ) {
+
+								this.currentTime(0);
+
+
+								//Prevent autoplay error: Uncaught (in promise) DOMException
+								var promise = this.play();
+
+								if ( promise !== undefined ) {
+									promise.then( function() {
+										// Autoplay started!
+
+									}).catch( function( error ) {
+										// Autoplay was prevented.
+										$( '#' + coverPlayBtnID ).show();
+										$( '#' + coverPlayBtnID + ' .uix-video__cover__playbtn' ).show();
+										console.log( 'Autoplay was prevented.' );
+									});
 								}
-							
-							});		
 
 
-						}	
-					}
-					
 
-				});
+
+
+								//Hidden replay button
+								$replayBtn.hide();
+
+
+								//Should the video go to the beginning when it ends
+								this.on( 'ended', function () { 
+
+									if ( dataLoop ) {
+										this.currentTime(0);
+										this.play();	
+									} else {
+										//Replay this video
+										this.currentTime(0);
+
+										$replayBtn
+											.show()
+											.off( 'click' )
+											.on( 'click', function( e ) {
+												e.preventDefault();
+
+												this.play();
+												$replayBtn.hide();
+
+											});						
+									}
+
+								});		
+
+
+							}	
+						}
+
+
+
+					});
+
+				
 
 			});	
 		}	
@@ -19307,13 +21668,16 @@ APP = ( function ( APP, $, window, document ) {
 	If you want to initialize the indicator to a location when the page is first run,
 	you need to call the following function:
 	
-	$( document ).UixFormProgressToNext({ 
-		'selector'         : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
-		'formTarget'       : $( '.uix-form-progress__target' ),
-		'indicator'        : '.uix-form-progress .uix-form-progress__indicator',
-		'index'            : 0
+	$( 'body' ).waitForImages().done(function() {
+		$( document ).UixFormProgressToNext({ 
+			'selector'         : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
+			'formTarget'       : $( '.uix-form-progress__target' ),
+			'indicator'        : '.uix-form-progress .uix-form-progress__indicator',
+			'index'            : 0
+		});
 	});
-	
+
+
 */
 
 
@@ -19366,6 +21730,17 @@ APP = ( function ( APP, $, window, document ) {
 				'indicator'  : '.uix-form-progress .uix-form-progress__indicator',
 				'index'      : $sections.index() + 1
 			});
+			
+
+			//Scroll Top
+			TweenMax.to( window, 0.5, {
+				scrollTo: {
+					y        : 0,
+					autoKill : false
+				},
+				ease: Power2.easeOut
+			});	
+			
 			
 		});
 		
@@ -19454,6 +21829,9 @@ APP = ( function ( APP, $, window, document ) {
 				stepPerValue     = 100/( allStep - 1 ),
 				value            = 0,
 				tarIndex, curIndex;
+			
+			
+			if ( $indicator.length == 0 ) return false;
 
 
 			//Returns current index
@@ -19591,17 +21969,6 @@ APP = ( function ( APP, $, window, document ) {
 			$( '.uix-form-progress .uix-form-progress__line span' ).css( 'width', value + '%' );
 
 
-			//Scroll Top
-			TweenMax.to( window, 0.5, {
-				scrollTo: {
-					y        : 0,
-					autoKill : false
-				},
-				ease: Power2.easeOut
-			});	
-			
-			
-
 			return false;
 			
 			
@@ -19634,6 +22001,7 @@ APP = ( function ( APP, $, window, document ) {
 	$( document ).UixRenderControlsHover(); //Hover Effect
 	$( document ).UixRenderCustomMultiSel(); //Render Multiple Selector Status
 	$( document ).UixRenderCustomSingleSel(); //Render Single Selector Status
+	$( document ).UixRenderNormalRadio(); //Render Normal Radio Status
 	$( document ).UixRenderDatePicker(); //Render Date Picker
 
 	
@@ -19643,7 +22011,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.FORM               = APP.FORM || {};
-	APP.FORM.version       = '0.0.8';
+	APP.FORM.version       = '0.1.4';
     APP.FORM.documentReady = function( $ ) {
 
 		
@@ -19664,6 +22032,7 @@ APP = ( function ( APP, $, window, document ) {
 			$( document ).UixRenderControlsHover(); //Hover Effect
 			$( document ).UixRenderCustomMultiSel(); //Render Multiple Selector Status
 			$( document ).UixRenderCustomSingleSel(); //Render Single Selector Status
+			$( document ).UixRenderNormalRadio(); //Render Normal Radio Status
 			$( document ).UixRenderDatePicker(); //Render Date Picker	
 		};
 		
@@ -19779,29 +22148,43 @@ APP = ( function ( APP, $, window, document ) {
 		 */ 	
 		$( document ).on( 'click', '.uix-controls__number__btn--add', function( e ) {
 
-			var $numberInput = $( this ).closest( '.uix-controls__number' ).find( 'input[type="number"]' ),
-				numberInputVal = parseInt( $numberInput.val() );
-
-			if ( e.shiftKey ) {
-				numberInputVal += 10;
-			} else {
-				numberInputVal++;
+			var step           = parseFloat( $( this ).data( 'step' ) ),
+				decimals       = $( this ).data( 'decimals' ),
+				$numberInput   = $( this ).closest( '.uix-controls__number' ).find( 'input[type="number"]' ),
+				numberInputVal = parseFloat( $numberInput.val() ),
+				max            = $numberInput.attr( 'max' );
+			
+			
+			if ( typeof step === typeof undefined || isNaN( step ) ) step = 1;
+			if ( typeof decimals === typeof undefined ) decimals = 0;
+			if ( typeof max != typeof undefined && parseFloat( numberInputVal + step ) >= max ) {
+				step = 0;
 			}
-			$numberInput.val( numberInputVal );
+
+			
+			numberInputVal = parseFloat( numberInputVal + step );
+			
+			
+			$numberInput.val( numberInputVal.toFixed( decimals ) );
 		});
 
 		$( document ).on( 'click', '.uix-controls__number__btn--remove', function( e ) {
 
-			var $numberInput = $( this ).closest( '.uix-controls__number' ).find( 'input[type="number"]' ),
-				numberInputVal = parseInt( $numberInput.val() );
+			var step           = $( this ).data( 'step' ),
+				decimals       = $( this ).data( 'decimals' ),
+				$numberInput   = $( this ).closest( '.uix-controls__number' ).find( 'input[type="number"]' ),
+				numberInputVal = parseFloat( $numberInput.val() ),
+				min            = $numberInput.attr( 'min' );
 
-
-			if ( numberInputVal > 11 && e.shiftKey ) {
-				numberInputVal -= 10;
-			} else if (numberInputVal > 1) {
-				numberInputVal--;
+			if ( typeof step === typeof undefined || isNaN( step ) ) step = 1;
+			if ( typeof decimals === typeof undefined ) decimals = 0;
+			if ( typeof min != typeof undefined && parseFloat( numberInputVal - step ) < min ) {
+				step = 0;
 			}
-			$numberInput.val( numberInputVal );
+			
+			numberInputVal -= step;	
+
+			$numberInput.val( numberInputVal.toFixed( decimals ) );
 		});
 
 			
@@ -19827,7 +22210,9 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
-			$option.toggleClass( 'active' );
+			$option.toggleClass( 'active' ).attr( 'aria-checked', function( index, attr ) {
+				return attr == 'true' ? false : true;
+			});
 
 			if ( tarVal.indexOf( curVal + ',' ) < 0 ) {
 				resVal = tarVal + curVal + ',';
@@ -19867,7 +22252,7 @@ APP = ( function ( APP, $, window, document ) {
 			obj.each( function( index )  {
 
 				var $sel                = $( this ),
-					defaultValue        = $( '#' + $sel.attr( "data-targetid" ) ).val(),
+					defaultValue        = $( '#' + $sel.attr( 'data-targetid' ) ).val(),
 					deffaultSwitchIndex = 0;
 
 				//get default selected switch index
@@ -19916,9 +22301,9 @@ APP = ( function ( APP, $, window, document ) {
 
 
 			//Radio Selector
-			$selector.find( '> span' ).removeClass( 'active' );
+			$selector.find( '> span' ).removeClass( 'active' ).attr( 'aria-checked', false );
 			$( targetID ).val( curVal );
-			$option.addClass( 'active' );
+			$option.addClass( 'active' ).attr( 'aria-checked', true );
 
 
 			//Switch some options
@@ -19934,6 +22319,128 @@ APP = ( function ( APP, $, window, document ) {
 
 		} );
 
+		
+		/* 
+		 ---------------------------
+		 Click Event of Normal Radio
+		 ---------------------------
+		 */ 
+		var normalRadio     = '.uix-controls__radio',
+			normalRadioItem = normalRadio + ' > label';
+
+
+		/*
+		 * Initialize single switch
+		 *
+		 * @param  {Object} obj                 - Radio controls. 
+		 * @return {Void}
+		 */
+		var hideAllNormalRadioItems = function( obj ) {
+			obj.each( function( index )  {
+
+				var $sel                = $( this ),
+					defaultValue        = $( '#' + $sel.attr( "data-targetid" ) ).val(),
+					deffaultSwitchIndex = 0;
+
+				//get default selected switch index
+				$sel.find( '> label' ).each( function( index )  {
+
+					if ( defaultValue == $( this ).data( 'value' ) ) {
+						deffaultSwitchIndex = index;
+					}
+
+
+				});
+
+
+				if ( typeof $sel.data( 'switchids' ) != typeof undefined && $sel.data( 'switchids' ) != '' ) {
+					var _switchIDsArr = $sel.data( 'switchids' ).split( ',' );
+					_switchIDsArr.forEach( function( element, index ) {
+
+						if ( deffaultSwitchIndex != index ) {
+							$( '#' + element ).hide();
+						} else {
+							$( '#' + element ).show();
+						}
+
+
+					});
+
+
+
+				}
+
+			});
+
+		};
+
+		hideAllNormalRadioItems( $( normalRadio ) );
+
+
+		$( document ).on( 'click', normalRadioItem, function( e ) {
+			e.preventDefault();
+
+			var $selector     = $( this ).parent(),
+				$option       = $( this ),
+				targetID      = '#' + $selector.data( "targetid" ),
+				switchID      = '#' + $option.data( "switchid" ),
+				curVal        = $option.data( 'value' );
+
+
+			//Radio Selector
+			$selector.find( '> label' )
+				.removeClass( 'active' )
+			    .find( '[type="radio"]' ).prop( 'checked', false );
+			
+			$( targetID ).val( curVal );
+			$option
+				.addClass( 'active' )
+			    .find( '[type="radio"]' ).prop( 'checked', true );
+			
+
+
+
+			//Switch some options
+			if ( typeof $option.data( "switchid" ) != typeof undefined ) {
+				 hideAllNormalRadioItems( $selector );
+				 $( switchID ).show();
+			}
+
+
+
+			//Dynamic listening for the latest value
+			$( targetID ).focus().blur();
+
+		} );	
+		
+
+
+
+		
+		
+		
+		/* 
+		 ---------------------------
+		 Click Event of Checkbox and Toggle 
+		 ---------------------------
+		 */ 
+		var checkboxSel     = '.uix-controls__toggle [type="checkbox"], .uix-controls__checkbox [type="checkbox"]';
+
+		$( document ).on( 'change', checkboxSel, function( e ) {
+			//hide or display a associated div
+			var $obj      = $( this ).closest( '.uix-controls' ),
+				targetID  = '#' + $obj.attr( 'data-targetid' );
+			
+			if ( this.checked ) {
+				$obj.addClass( 'active' ).attr( 'aria-checked', true );
+				$( targetID ).show();
+			} else {
+				$obj.removeClass( 'active' ).attr( 'aria-checked', false );
+				$( targetID ).hide();
+			}
+			
+		});
+		
 		
     };
 
@@ -20167,11 +22674,26 @@ APP = ( function ( APP, $, window, document ) {
 
 			});
 
-			$( customToggle ).find( 'input[type="checkbox"]' ).each( function() {
-				var dataExist = $( this ).data( 'exist' );
-				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
-					$( '<span class="uix-controls__toggle-trigger"></span>' ).insertAfter( $( this ) );
 
+			$( customToggle ).find( 'input[type="checkbox"]' ).each( function() {
+				var dataExist = $( this ).data( 'exist' ),
+					$obj      = $( this ).closest( '.uix-controls' ),
+					offText   = $obj.data( 'off-text' ),
+					onText    = $obj.data( 'on-text' );
+				
+				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
+					$( '<span class="uix-controls__toggle-trigger" data-off-text="'+offText+'" data-on-text="'+onText+'"></span>' ).insertAfter( $( this ) );
+					//hide or display a associated div
+					var targetID = '#' + $obj.attr( 'data-targetid' );
+					if ( $( this ).is( ':checked' ) ) {
+						$obj.addClass( 'active' ).attr( 'aria-checked', true );
+						$( targetID ).show();
+					} else {
+						$obj.removeClass( 'active' ).attr( 'aria-checked', false );
+						$( targetID ).hide();
+					}
+					
+					
 					//Prevent the form from being initialized again
 					$( this ).data( 'exist', 1 );	
 				}
@@ -20180,10 +22702,22 @@ APP = ( function ( APP, $, window, document ) {
 			});
 
 			$( customCheckbox ).find( 'input[type="checkbox"]' ).each( function() {
-				var dataExist = $( this ).data( 'exist' );
+				var dataExist = $( this ).data( 'exist' ),
+					$obj      = $( this ).closest( '.uix-controls' );
+				
 				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
 					$( '<span class="uix-controls__checkbox-trigger"></span>' ).insertAfter( $( this ) );
 
+					//hide or display a associated div
+					var targetID = '#' + $obj.attr( 'data-targetid' );
+					if ( $( this ).is( ':checked' ) ) {
+						$obj.addClass( 'active' ).attr( 'aria-checked', true );
+						$( targetID ).show();
+					} else {
+						$obj.removeClass( 'active' ).attr( 'aria-checked', false );
+						$( targetID ).hide();
+					}
+					
 					//Prevent the form from being initialized again
 					$( this ).data( 'exist', 1 );	
 				}
@@ -20492,12 +23026,12 @@ APP = ( function ( APP, $, window, document ) {
 			$( settings.controls ).each( function()  {
 				$( this ).find( '> span' ).each( function()  {
 
-					var targetID = '#' + $( this ).parent().attr( "data-targetid" );
+					var targetID = '#' + $( this ).parent().attr( 'data-targetid' );
 
 					if ( $( targetID ).val().indexOf( $( this ).data( 'value' ) ) >= 0 ) {
-						$( this ).addClass( 'active' );
+						$( this ).addClass( 'active' ).attr( 'aria-checked', true );
 					} else {
-						$( this ).removeClass( 'active' );
+						$( this ).removeClass( 'active' ).attr( 'aria-checked', false );
 					}	
 
 
@@ -20534,7 +23068,7 @@ APP = ( function ( APP, $, window, document ) {
 			$( settings.controls ).each( function()  {
 				$( this ).find( '> span' ).each( function()  {
 
-					var targetID  = '#' + $( this ).parent().attr( "data-targetid" ),
+					var targetID  = '#' + $( this ).parent().attr( 'data-targetid' ),
 						switchIDs = '';
 
 					//add switch IDs
@@ -20550,9 +23084,9 @@ APP = ( function ( APP, $, window, document ) {
 
 					//Set actived style from their values
 					if ( $( targetID ).val() == $( this ).data( 'value' ) ) {
-						$( this ).addClass( 'active' );
+						$( this ).addClass( 'active' ).attr( 'aria-checked', true );
 					} else {
-						$( this ).removeClass( 'active' );
+						$( this ).removeClass( 'active' ).attr( 'aria-checked', false );
 					}	
 
 
@@ -20565,6 +23099,69 @@ APP = ( function ( APP, $, window, document ) {
     };
  
 }( jQuery ));
+
+
+
+/*
+ * Render Normal Radio Status
+ *
+ * @param  {String} controls                 - Wrapper of controls.
+ * @return {Void}
+ */
+( function ( $ ) {
+    $.fn.UixRenderNormalRadio = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+			controls    : '.uix-controls__radio'
+        }, options );
+ 
+        this.each( function() {
+		
+		
+			$( settings.controls ).each( function()  {
+				$( this ).find( '> label' ).each( function()  {
+
+					var targetID  = '#' + $( this ).parent().attr( "data-targetid" ),
+						switchIDs = '';
+
+					//add switch IDs
+					$( this ).parent().find( '> label' ).each( function()  {
+						if ( typeof $( this ).data( "switchid" ) != typeof undefined ) {
+							switchIDs += $( this ).data( "switchid" ) + ',';
+						}
+
+					});
+
+					$( this ).parent().attr( "data-switchids", switchIDs.replace(/,\s*$/, '' ) );
+
+
+					//Set actived style from their values
+					if ( typeof $( this ).data( 'value' ) != typeof undefined ) {
+						if ( $( targetID ).val() == $( this ).data( 'value' ) ) {
+							$( this )
+								.addClass( 'active' )
+								.find( '[type="radio"]' ).prop( 'checked', true );
+
+						} else {
+							$( this )
+								.removeClass( 'active' )
+								.find( '[type="radio"]' ).prop( 'checked', false );
+						}		
+					} 
+
+
+
+				});
+			});
+
+			
+		});
+ 
+    };
+ 
+}( jQuery ));
+
 
 
 /*
@@ -23836,7 +26433,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			$( '.uix-shape-img' ).each( function()  {
 				var $this          = $( this ),
-					ranID          = 'uix-shape-img-' + UIX_GUID.newGuid(),
+					ranID          = 'uix-shape-img-' + UixGUID.create(),
 					svgPath        = $this.data( 'path' ),
 					svgW           = parseFloat( $this.data( 'svg-const-width' ) ),
 					svgH           = parseFloat( $this.data( 'svg-const-height' ) ),
@@ -24173,7 +26770,7 @@ APP = ( function ( APP, $, window, document ) {
 					largePhotos += '<div class="uix-lightbox__photo-container uix-lightbox__photo-sets-container"><a href="javascript:" class="uix-lightbox__photo-sets__prev"></a><a href="javascript:" class="uix-lightbox__photo-sets__next"></a><ul>';
 					for ( var i = 0; i < imgSrcStr.length; i++ ) {
 						
-						var tempID = 'lightbox-' + UIX_GUID.newGuid();
+						var tempID = 'lightbox-' + UixGUID.create();
 						
 						largePhotos += '<li>';
 						largePhotos += '	<a class="uix-lightbox__original__link" data-target-id="'+tempID+'-sets-'+i+'" href="javascript:void(0);">';
@@ -24203,7 +26800,7 @@ APP = ( function ( APP, $, window, document ) {
 					
 				} else {
 
-					var tempID = 'lightbox-' + UIX_GUID.newGuid();
+					var tempID = 'lightbox-' + UixGUID.create();
 					
 					//Only one image
 					imgSrcStrToW = imgSrcStr;
@@ -24711,7 +27308,7 @@ APP = ( function ( APP, $, window, document ) {
 
 		$( '[data-ajax-list-json]' ).each( function() {
 			var $this            = $( this ),
-				wrapperID        = 'refresh-all-waypoint-' + UIX_GUID.newGuid(),
+				wrapperID        = 'refresh-all-waypoint-' + UixGUID.create(),
 			    curPage          = $this.data( 'ajax-list-page-now' ),
 				perShow          = $this.data( 'ajax-list-page-per' ),
 				totalPage        = $this.data( 'ajax-list-page-total' ),
@@ -25362,38 +27959,10 @@ APP = ( function ( APP, $, window, document ) {
 	APP.MODAL_DIALOG.version       = '0.0.9';
     APP.MODAL_DIALOG.documentReady = function( $ ) {
 
-		//Get the -webkit-transition-duration property
-		var getTransitionDuration = function( el, withDelay ) {
-			
-			if ( typeof el === typeof undefined ) {
-				return 0;
-			}
-			
-			
-			var style    = window.getComputedStyle(el),
-				duration = style.webkitTransitionDuration,
-				delay    = style.webkitTransitionDelay; 
-
-			if ( typeof duration != typeof undefined ) {
-				// fix miliseconds vs seconds
-				duration = (duration.indexOf("ms")>-1) ? parseFloat(duration) : parseFloat(duration)*1000;
-				delay = (delay.indexOf("ms")>-1) ? parseFloat(delay) : parseFloat(delay)*1000;
-
-				if ( withDelay ) {
-					 return (duration + delay);
-				} else {
-					return duration;
-				}	
-			} else {
-				return 0;
-			}
-			
-
-		};
 		
 		//Delay Time when Full Screen Effect is fired.
-		var modalSpeed = getTransitionDuration( $( '.uix-modal-box:first' )[0] );
-		
+		var modalSpeed = UixCssProperty.getTransitionDuration( $( '.uix-modal-box:first' )[0] );
+	
 		
 		/*
 		  * Unbind that one in a safe way that won't accidentally unbind other click handlers.
@@ -25674,7 +28243,7 @@ APP = ( function ( APP, $, window, document ) {
     APP.SCROLL_LOCK.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
-		if ( !$( 'body' ).hasClass( 'page-mousewheel-eff' ) ) return false;
+		if ( !$( 'body' ).hasClass( 'mousewheel-interaction' ) ) return false;
 		
 		
 	    //Determine the direction of a jQuery scroll event
@@ -27620,7 +30189,7 @@ APP = ( function ( APP, $, window, document ) {
 					curImgW          = null,
 					curSize          = 'cover';
 				
-				
+			
 				if( 
 					typeof dataOverlay === typeof undefined ||
 					dataOverlay == 'none' ||
@@ -28441,6 +31010,9 @@ APP = ( function ( APP, $, window, document ) {
 	APP.SCROLLSPY_ANIM.version       = '0.0.1';
     APP.SCROLLSPY_ANIM.documentReady = function( $ ) {
 
+		// Remove pixi.js banner from the console
+		PIXI.utils.skipHello();
+		
 		
 		var $el         = $( '#scrollspy-animate-demo' ),
 			panelHeight = 0;	
@@ -28825,1008 +31397,6 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
-/*! highlight.js v9.12.0 | BSD3 License | git.io/hljslicense */
-
-/* @https://github.com/highlightjs/highlight.js/blob/master/src/highlight.js */
-(function(factory) {
-
-  // Find the global object for export to both the browser and web workers.
-  var globalObject = typeof window === 'object' && window ||
-                     typeof self === 'object' && self;
-
-  // Setup highlight.js for different environments. First is Node.js or
-  // CommonJS.
-  if(typeof exports !== 'undefined') {
-    factory(exports);
-  } else if(globalObject) {
-    // Export hljs globally even when using AMD for cases when this script
-    // is loaded with others that may still expect a global hljs.
-    globalObject.hljs = factory({});
-
-    // Finally register the global hljs with AMD.
-    if(typeof define === 'function' && define.amd) {
-      define([], function() {
-        return globalObject.hljs;
-      });
-    }
-  }
-
-}(function(hljs) {
-  // Convenience variables for build-in objects
-  var ArrayProto = [],
-      objectKeys = Object.keys;
-
-  // Global internal variables used within the highlight.js library.
-  var languages = {},
-      aliases   = {};
-
-  // Regular expressions used throughout the highlight.js library.
-  var noHighlightRe    = /^(no-?highlight|plain|text)$/i,
-      languagePrefixRe = /\blang(?:uage)?-([\w-]+)\b/i,
-      fixMarkupRe      = /((^(<[^>]+>|\t|)+|(?:\n)))/gm;
-
-  var spanEndTag = '</span>';
-
-  // Global options used when within external APIs. This is modified when
-  // calling the `hljs.configure` function.
-  var options = {
-    classPrefix: 'hljs-',
-    tabReplace: null,
-    useBR: false,
-    languages: undefined
-  };
-
-
-  /* Utility functions */
-
-  function escape(value) {
-    return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  }
-
-  function tag(node) {
-    return node.nodeName.toLowerCase();
-  }
-
-  function testRe(re, lexeme) {
-    var match = re && re.exec(lexeme);
-    return match && match.index === 0;
-  }
-
-  function isNotHighlighted(language) {
-    return noHighlightRe.test(language);
-  }
-
-  function blockLanguage(block) {
-    var i, match, length, _class;
-    var classes = block.className + ' ';
-
-    classes += block.parentNode ? block.parentNode.className : '';
-
-    // language-* takes precedence over non-prefixed class names.
-    match = languagePrefixRe.exec(classes);
-    if (match) {
-      return getLanguage(match[1]) ? match[1] : 'no-highlight';
-    }
-
-    classes = classes.split(/\s+/);
-
-    for (i = 0, length = classes.length; i < length; i++) {
-      _class = classes[i];
-
-      if (isNotHighlighted(_class) || getLanguage(_class)) {
-        return _class;
-      }
-    }
-  }
-
-  function inherit(parent) {  // inherit(parent, override_obj, override_obj, ...)
-    var key;
-    var result = {};
-    var objects = Array.prototype.slice.call(arguments, 1);
-
-    for (key in parent)
-      result[key] = parent[key];
-    objects.forEach(function(obj) {
-      for (key in obj)
-        result[key] = obj[key];
-    });
-    return result;
-  }
-
-  /* Stream merging */
-
-  function nodeStream(node) {
-    var result = [];
-    (function _nodeStream(node, offset) {
-      for (var child = node.firstChild; child; child = child.nextSibling) {
-        if (child.nodeType === 3)
-          offset += child.nodeValue.length;
-        else if (child.nodeType === 1) {
-          result.push({
-            event: 'start',
-            offset: offset,
-            node: child
-          });
-          offset = _nodeStream(child, offset);
-          // Prevent void elements from having an end tag that would actually
-          // double them in the output. There are more void elements in HTML
-          // but we list only those realistically expected in code display.
-          if (!tag(child).match(/br|hr|img|input/)) {
-            result.push({
-              event: 'stop',
-              offset: offset,
-              node: child
-            });
-          }
-        }
-      }
-      return offset;
-    })(node, 0);
-    return result;
-  }
-
-  function mergeStreams(original, highlighted, value) {
-    var processed = 0;
-    var result = '';
-    var nodeStack = [];
-
-    function selectStream() {
-      if (!original.length || !highlighted.length) {
-        return original.length ? original : highlighted;
-      }
-      if (original[0].offset !== highlighted[0].offset) {
-        return (original[0].offset < highlighted[0].offset) ? original : highlighted;
-      }
-
-      /*
-      To avoid starting the stream just before it should stop the order is
-      ensured that original always starts first and closes last:
-      if (event1 == 'start' && event2 == 'start')
-        return original;
-      if (event1 == 'start' && event2 == 'stop')
-        return highlighted;
-      if (event1 == 'stop' && event2 == 'start')
-        return original;
-      if (event1 == 'stop' && event2 == 'stop')
-        return highlighted;
-      ... which is collapsed to:
-      */
-      return highlighted[0].event === 'start' ? original : highlighted;
-    }
-
-    function open(node) {
-      function attr_str(a) {return ' ' + a.nodeName + '="' + escape(a.value).replace('"', '&quot;') + '"';}
-      result += '<' + tag(node) + ArrayProto.map.call(node.attributes, attr_str).join('') + '>';
-    }
-
-    function close(node) {
-      result += '</' + tag(node) + '>';
-    }
-
-    function render(event) {
-      (event.event === 'start' ? open : close)(event.node);
-    }
-
-    while (original.length || highlighted.length) {
-      var stream = selectStream();
-      result += escape(value.substring(processed, stream[0].offset));
-      processed = stream[0].offset;
-      if (stream === original) {
-        /*
-        On any opening or closing tag of the original markup we first close
-        the entire highlighted node stack, then render the original tag along
-        with all the following original tags at the same offset and then
-        reopen all the tags on the highlighted stack.
-        */
-        nodeStack.reverse().forEach(close);
-        do {
-          render(stream.splice(0, 1)[0]);
-          stream = selectStream();
-        } while (stream === original && stream.length && stream[0].offset === processed);
-        nodeStack.reverse().forEach(open);
-      } else {
-        if (stream[0].event === 'start') {
-          nodeStack.push(stream[0].node);
-        } else {
-          nodeStack.pop();
-        }
-        render(stream.splice(0, 1)[0]);
-      }
-    }
-    return result + escape(value.substr(processed));
-  }
-
-  /* Initialization */
-
-  function expand_mode(mode) {
-    if (mode.variants && !mode.cached_variants) {
-      mode.cached_variants = mode.variants.map(function(variant) {
-        return inherit(mode, {variants: null}, variant);
-      });
-    }
-    return mode.cached_variants || (mode.endsWithParent && [inherit(mode)]) || [mode];
-  }
-
-  function compileLanguage(language) {
-
-    function reStr(re) {
-        return (re && re.source) || re;
-    }
-
-    function langRe(value, global) {
-      return new RegExp(
-        reStr(value),
-        'm' + (language.case_insensitive ? 'i' : '') + (global ? 'g' : '')
-      );
-    }
-
-    function compileMode(mode, parent) {
-      if (mode.compiled)
-        return;
-      mode.compiled = true;
-
-      mode.keywords = mode.keywords || mode.beginKeywords;
-      if (mode.keywords) {
-        var compiled_keywords = {};
-
-        var flatten = function(className, str) {
-          if (language.case_insensitive) {
-            str = str.toLowerCase();
-          }
-          str.split(' ').forEach(function(kw) {
-            var pair = kw.split('|');
-            compiled_keywords[pair[0]] = [className, pair[1] ? Number(pair[1]) : 1];
-          });
-        };
-
-        if (typeof mode.keywords === 'string') { // string
-          flatten('keyword', mode.keywords);
-        } else {
-          objectKeys(mode.keywords).forEach(function (className) {
-            flatten(className, mode.keywords[className]);
-          });
-        }
-        mode.keywords = compiled_keywords;
-      }
-      mode.lexemesRe = langRe(mode.lexemes || /\w+/, true);
-
-      if (parent) {
-        if (mode.beginKeywords) {
-          mode.begin = '\\b(' + mode.beginKeywords.split(' ').join('|') + ')\\b';
-        }
-        if (!mode.begin)
-          mode.begin = /\B|\b/;
-        mode.beginRe = langRe(mode.begin);
-        if (!mode.end && !mode.endsWithParent)
-          mode.end = /\B|\b/;
-        if (mode.end)
-          mode.endRe = langRe(mode.end);
-        mode.terminator_end = reStr(mode.end) || '';
-        if (mode.endsWithParent && parent.terminator_end)
-          mode.terminator_end += (mode.end ? '|' : '') + parent.terminator_end;
-      }
-      if (mode.illegal)
-        mode.illegalRe = langRe(mode.illegal);
-      if (mode.relevance == null)
-        mode.relevance = 1;
-      if (!mode.contains) {
-        mode.contains = [];
-      }
-      mode.contains = Array.prototype.concat.apply([], mode.contains.map(function(c) {
-        return expand_mode(c === 'self' ? mode : c);
-      }));
-      mode.contains.forEach(function(c) {compileMode(c, mode);});
-
-      if (mode.starts) {
-        compileMode(mode.starts, parent);
-      }
-
-      var terminators =
-        mode.contains.map(function(c) {
-          return c.beginKeywords ? '\\.?(' + c.begin + ')\\.?' : c.begin;
-        })
-        .concat([mode.terminator_end, mode.illegal])
-        .map(reStr)
-        .filter(Boolean);
-      mode.terminators = terminators.length ? langRe(terminators.join('|'), true) : {exec: function(/*s*/) {return null;}};
-    }
-
-    compileMode(language);
-  }
-
-  /*
-  Core highlighting function. Accepts a language name, or an alias, and a
-  string with the code to highlight. Returns an object with the following
-  properties:
-  - relevance (int)
-  - value (an HTML string with highlighting markup)
-  */
-  function highlight(name, value, ignore_illegals, continuation) {
-
-    function subMode(lexeme, mode) {
-      var i, length;
-
-      for (i = 0, length = mode.contains.length; i < length; i++) {
-        if (testRe(mode.contains[i].beginRe, lexeme)) {
-          return mode.contains[i];
-        }
-      }
-    }
-
-    function endOfMode(mode, lexeme) {
-      if (testRe(mode.endRe, lexeme)) {
-        while (mode.endsParent && mode.parent) {
-          mode = mode.parent;
-        }
-        return mode;
-      }
-      if (mode.endsWithParent) {
-        return endOfMode(mode.parent, lexeme);
-      }
-    }
-
-    function isIllegal(lexeme, mode) {
-      return !ignore_illegals && testRe(mode.illegalRe, lexeme);
-    }
-
-    function keywordMatch(mode, match) {
-      var match_str = language.case_insensitive ? match[0].toLowerCase() : match[0];
-      return mode.keywords.hasOwnProperty(match_str) && mode.keywords[match_str];
-    }
-
-    function buildSpan(classname, insideSpan, leaveOpen, noPrefix) {
-      var classPrefix = noPrefix ? '' : options.classPrefix,
-          openSpan    = '<span class="' + classPrefix,
-          closeSpan   = leaveOpen ? '' : spanEndTag;
-
-      openSpan += classname + '">';
-
-      return openSpan + insideSpan + closeSpan;
-    }
-
-    function processKeywords() {
-      var keyword_match, last_index, match, result;
-
-      if (!top.keywords)
-        return escape(mode_buffer);
-
-      result = '';
-      last_index = 0;
-      top.lexemesRe.lastIndex = 0;
-      match = top.lexemesRe.exec(mode_buffer);
-
-      while (match) {
-        result += escape(mode_buffer.substring(last_index, match.index));
-        keyword_match = keywordMatch(top, match);
-        if (keyword_match) {
-          relevance += keyword_match[1];
-          result += buildSpan(keyword_match[0], escape(match[0]));
-        } else {
-          result += escape(match[0]);
-        }
-        last_index = top.lexemesRe.lastIndex;
-        match = top.lexemesRe.exec(mode_buffer);
-      }
-      return result + escape(mode_buffer.substr(last_index));
-    }
-
-    function processSubLanguage() {
-      var explicit = typeof top.subLanguage === 'string';
-      if (explicit && !languages[top.subLanguage]) {
-        return escape(mode_buffer);
-      }
-
-      var result = explicit ?
-                   highlight(top.subLanguage, mode_buffer, true, continuations[top.subLanguage]) :
-                   highlightAuto(mode_buffer, top.subLanguage.length ? top.subLanguage : undefined);
-
-      // Counting embedded language score towards the host language may be disabled
-      // with zeroing the containing mode relevance. Usecase in point is Markdown that
-      // allows XML everywhere and makes every XML snippet to have a much larger Markdown
-      // score.
-      if (top.relevance > 0) {
-        relevance += result.relevance;
-      }
-      if (explicit) {
-        continuations[top.subLanguage] = result.top;
-      }
-      return buildSpan(result.language, result.value, false, true);
-    }
-
-    function processBuffer() {
-      result += (top.subLanguage != null ? processSubLanguage() : processKeywords());
-      mode_buffer = '';
-    }
-
-    function startNewMode(mode) {
-      result += mode.className? buildSpan(mode.className, '', true): '';
-      top = Object.create(mode, {parent: {value: top}});
-    }
-
-    function processLexeme(buffer, lexeme) {
-
-      mode_buffer += buffer;
-
-      if (lexeme == null) {
-        processBuffer();
-        return 0;
-      }
-
-      var new_mode = subMode(lexeme, top);
-      if (new_mode) {
-        if (new_mode.skip) {
-          mode_buffer += lexeme;
-        } else {
-          if (new_mode.excludeBegin) {
-            mode_buffer += lexeme;
-          }
-          processBuffer();
-          if (!new_mode.returnBegin && !new_mode.excludeBegin) {
-            mode_buffer = lexeme;
-          }
-        }
-        startNewMode(new_mode, lexeme);
-        return new_mode.returnBegin ? 0 : lexeme.length;
-      }
-
-      var end_mode = endOfMode(top, lexeme);
-      if (end_mode) {
-        var origin = top;
-        if (origin.skip) {
-          mode_buffer += lexeme;
-        } else {
-          if (!(origin.returnEnd || origin.excludeEnd)) {
-            mode_buffer += lexeme;
-          }
-          processBuffer();
-          if (origin.excludeEnd) {
-            mode_buffer = lexeme;
-          }
-        }
-        do {
-          if (top.className) {
-            result += spanEndTag;
-          }
-          if (!top.skip && !top.subLanguage) {
-            relevance += top.relevance;
-          }
-          top = top.parent;
-        } while (top !== end_mode.parent);
-        if (end_mode.starts) {
-          startNewMode(end_mode.starts, '');
-        }
-        return origin.returnEnd ? 0 : lexeme.length;
-      }
-
-      if (isIllegal(lexeme, top))
-        throw new Error('Illegal lexeme "' + lexeme + '" for mode "' + (top.className || '<unnamed>') + '"');
-
-      /*
-      Parser should not reach this point as all types of lexemes should be caught
-      earlier, but if it does due to some bug make sure it advances at least one
-      character forward to prevent infinite looping.
-      */
-      mode_buffer += lexeme;
-      return lexeme.length || 1;
-    }
-
-    var language = getLanguage(name);
-    if (!language) {
-      throw new Error('Unknown language: "' + name + '"');
-    }
-
-    compileLanguage(language);
-    var top = continuation || language;
-    var continuations = {}; // keep continuations for sub-languages
-    var result = '', current;
-    for(current = top; current !== language; current = current.parent) {
-      if (current.className) {
-        result = buildSpan(current.className, '', true) + result;
-      }
-    }
-    var mode_buffer = '';
-    var relevance = 0;
-    try {
-      var match, count, index = 0;
-      while (true) {
-        top.terminators.lastIndex = index;
-        match = top.terminators.exec(value);
-        if (!match)
-          break;
-        count = processLexeme(value.substring(index, match.index), match[0]);
-        index = match.index + count;
-      }
-      processLexeme(value.substr(index));
-      for(current = top; current.parent; current = current.parent) { // close dangling modes
-        if (current.className) {
-          result += spanEndTag;
-        }
-      }
-      return {
-        relevance: relevance,
-        value: result,
-        language: name,
-        top: top
-      };
-    } catch (e) {
-      if (e.message && e.message.indexOf('Illegal') !== -1) {
-        return {
-          relevance: 0,
-          value: escape(value)
-        };
-      } else {
-        throw e;
-      }
-    }
-  }
-
-  /*
-  Highlighting with language detection. Accepts a string with the code to
-  highlight. Returns an object with the following properties:
-  - language (detected language)
-  - relevance (int)
-  - value (an HTML string with highlighting markup)
-  - second_best (object with the same structure for second-best heuristically
-    detected language, may be absent)
-  */
-  function highlightAuto(text, languageSubset) {
-    languageSubset = languageSubset || options.languages || objectKeys(languages);
-    var result = {
-      relevance: 0,
-      value: escape(text)
-    };
-    var second_best = result;
-    languageSubset.filter(getLanguage).forEach(function(name) {
-      var current = highlight(name, text, false);
-      current.language = name;
-      if (current.relevance > second_best.relevance) {
-        second_best = current;
-      }
-      if (current.relevance > result.relevance) {
-        second_best = result;
-        result = current;
-      }
-    });
-    if (second_best.language) {
-      result.second_best = second_best;
-    }
-    return result;
-  }
-
-  /*
-  Post-processing of the highlighted markup:
-  - replace TABs with something more useful
-  - replace real line-breaks with '<br>' for non-pre containers
-  */
-  function fixMarkup(value) {
-    return !(options.tabReplace || options.useBR) ? value : value.replace(fixMarkupRe, function(match, p1) {
-          if (options.useBR && match === '\n') {
-            return '<br>';
-          } else if (options.tabReplace) {
-            return p1.replace(/\t/g, options.tabReplace);
-          }
-          return '';
-      });
-  }
-
-  function buildClassName(prevClassName, currentLang, resultLang) {
-    var language = currentLang ? aliases[currentLang] : resultLang,
-        result   = [prevClassName.trim()];
-
-    if (!prevClassName.match(/\bhljs\b/)) {
-      result.push('hljs');
-    }
-
-    if (prevClassName.indexOf(language) === -1) {
-      result.push(language);
-    }
-
-    return result.join(' ').trim();
-  }
-
-  /*
-  Applies highlighting to a DOM node containing code. Accepts a DOM node and
-  two optional parameters for fixMarkup.
-  */
-  function highlightBlock(block) {
-    var node, originalStream, result, resultNode, text;
-    var language = blockLanguage(block);
-
-    if (isNotHighlighted(language))
-        return;
-
-    if (options.useBR) {
-      node = document.createElementNS('http://www.w3.org/1999/xhtml', 'div');
-      node.innerHTML = block.innerHTML.replace(/\n/g, '').replace(/<br[ \/]*>/g, '\n');
-    } else {
-      node = block;
-    }
-    text = node.textContent;
-    result = language ? highlight(language, text, true) : highlightAuto(text);
-
-    originalStream = nodeStream(node);
-    if (originalStream.length) {
-      resultNode = document.createElementNS('http://www.w3.org/1999/xhtml', 'div');
-      resultNode.innerHTML = result.value;
-      result.value = mergeStreams(originalStream, nodeStream(resultNode), text);
-    }
-    result.value = fixMarkup(result.value);
-
-    block.innerHTML = result.value;
-    block.className = buildClassName(block.className, language, result.language);
-    block.result = {
-      language: result.language,
-      re: result.relevance
-    };
-    if (result.second_best) {
-      block.second_best = {
-        language: result.second_best.language,
-        re: result.second_best.relevance
-      };
-    }
-  }
-
-  /*
-  Updates highlight.js global options with values passed in the form of an object.
-  */
-  function configure(user_options) {
-    options = inherit(options, user_options);
-  }
-
-  /*
-  Applies highlighting to all <pre><code>..</code></pre> blocks on a page.
-  */
-  function initHighlighting() {
-    if (initHighlighting.called)
-      return;
-    initHighlighting.called = true;
-
-    var blocks = document.querySelectorAll('pre code');
-    ArrayProto.forEach.call(blocks, highlightBlock);
-  }
-
-  /*
-  Attaches highlighting to the page load event.
-  */
-  function initHighlightingOnLoad() {
-    addEventListener('DOMContentLoaded', initHighlighting, false);
-    addEventListener('load', initHighlighting, false);
-  }
-
-  function registerLanguage(name, language) {
-    var lang = languages[name] = language(hljs);
-    if (lang.aliases) {
-      lang.aliases.forEach(function(alias) {aliases[alias] = name;});
-    }
-  }
-
-  function listLanguages() {
-    return objectKeys(languages);
-  }
-
-  function getLanguage(name) {
-    name = (name || '').toLowerCase();
-    return languages[name] || languages[aliases[name]];
-  }
-
-  /* Interface definition */
-
-  hljs.highlight = highlight;
-  hljs.highlightAuto = highlightAuto;
-  hljs.fixMarkup = fixMarkup;
-  hljs.highlightBlock = highlightBlock;
-  hljs.configure = configure;
-  hljs.initHighlighting = initHighlighting;
-  hljs.initHighlightingOnLoad = initHighlightingOnLoad;
-  hljs.registerLanguage = registerLanguage;
-  hljs.listLanguages = listLanguages;
-  hljs.getLanguage = getLanguage;
-  hljs.inherit = inherit;
-
-  // Common regexps
-  hljs.IDENT_RE = '[a-zA-Z]\\w*';
-  hljs.UNDERSCORE_IDENT_RE = '[a-zA-Z_]\\w*';
-  hljs.NUMBER_RE = '\\b\\d+(\\.\\d+)?';
-  hljs.C_NUMBER_RE = '(-?)(\\b0[xX][a-fA-F0-9]+|(\\b\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)'; // 0x..., 0..., decimal, float
-  hljs.BINARY_NUMBER_RE = '\\b(0b[01]+)'; // 0b...
-  hljs.RE_STARTERS_RE = '!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|-|-=|/=|/|:|;|<<|<<=|<=|<|===|==|=|>>>=|>>=|>=|>>>|>>|>|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~';
-
-  // Common modes
-  hljs.BACKSLASH_ESCAPE = {
-    begin: '\\\\[\\s\\S]', relevance: 0
-  };
-  hljs.APOS_STRING_MODE = {
-    className: 'string',
-    begin: '\'', end: '\'',
-    illegal: '\\n',
-    contains: [hljs.BACKSLASH_ESCAPE]
-  };
-  hljs.QUOTE_STRING_MODE = {
-    className: 'string',
-    begin: '"', end: '"',
-    illegal: '\\n',
-    contains: [hljs.BACKSLASH_ESCAPE]
-  };
-  hljs.PHRASAL_WORDS_MODE = {
-    begin: /\b(a|an|the|are|I'm|isn't|don't|doesn't|won't|but|just|should|pretty|simply|enough|gonna|going|wtf|so|such|will|you|your|they|like|more)\b/
-  };
-  hljs.COMMENT = function (begin, end, inherits) {
-    var mode = hljs.inherit(
-      {
-        className: 'comment',
-        begin: begin, end: end,
-        contains: []
-      },
-      inherits || {}
-    );
-    mode.contains.push(hljs.PHRASAL_WORDS_MODE);
-    mode.contains.push({
-      className: 'doctag',
-      begin: '(?:TODO|FIXME|NOTE|BUG|XXX):',
-      relevance: 0
-    });
-    return mode;
-  };
-  hljs.C_LINE_COMMENT_MODE = hljs.COMMENT('//', '$');
-  hljs.C_BLOCK_COMMENT_MODE = hljs.COMMENT('/\\*', '\\*/');
-  hljs.HASH_COMMENT_MODE = hljs.COMMENT('#', '$');
-  hljs.NUMBER_MODE = {
-    className: 'number',
-    begin: hljs.NUMBER_RE,
-    relevance: 0
-  };
-  hljs.C_NUMBER_MODE = {
-    className: 'number',
-    begin: hljs.C_NUMBER_RE,
-    relevance: 0
-  };
-  hljs.BINARY_NUMBER_MODE = {
-    className: 'number',
-    begin: hljs.BINARY_NUMBER_RE,
-    relevance: 0
-  };
-  hljs.CSS_NUMBER_MODE = {
-    className: 'number',
-    begin: hljs.NUMBER_RE + '(' +
-      '%|em|ex|ch|rem'  +
-      '|vw|vh|vmin|vmax' +
-      '|cm|mm|in|pt|pc|px' +
-      '|deg|grad|rad|turn' +
-      '|s|ms' +
-      '|Hz|kHz' +
-      '|dpi|dpcm|dppx' +
-      ')?',
-    relevance: 0
-  };
-  hljs.REGEXP_MODE = {
-    className: 'regexp',
-    begin: /\//, end: /\/[gimuy]*/,
-    illegal: /\n/,
-    contains: [
-      hljs.BACKSLASH_ESCAPE,
-      {
-        begin: /\[/, end: /\]/,
-        relevance: 0,
-        contains: [hljs.BACKSLASH_ESCAPE]
-      }
-    ]
-  };
-  hljs.TITLE_MODE = {
-    className: 'title',
-    begin: hljs.IDENT_RE,
-    relevance: 0
-  };
-  hljs.UNDERSCORE_TITLE_MODE = {
-    className: 'title',
-    begin: hljs.UNDERSCORE_IDENT_RE,
-    relevance: 0
-  };
-  hljs.METHOD_GUARD = {
-    // excludes method names from keyword processing
-    begin: '\\.\\s*' + hljs.UNDERSCORE_IDENT_RE,
-    relevance: 0
-  };
-
-  return hljs;
-}));
-
-
-/*
-Language: HTML, XML
-Category: common
-@https://github.com/highlightjs/highlight.js/blob/master/src/languages/xml.js
-*/
-
-hljs.registerLanguage("xml", function(hljs) {
-  var XML_IDENT_RE = '[A-Za-z0-9\\._:-]+';
-  var TAG_INTERNALS = {
-    endsWithParent: true,
-    illegal: /</,
-    relevance: 0,
-    contains: [
-      {
-        className: 'attr',
-        begin: XML_IDENT_RE,
-        relevance: 0
-      },
-      {
-        begin: /=\s*/,
-        relevance: 0,
-        contains: [
-          {
-            className: 'string',
-            endsParent: true,
-            variants: [
-              {begin: /"/, end: /"/},
-              {begin: /'/, end: /'/},
-              {begin: /[^\s"'=<>`]+/}
-            ]
-          }
-        ]
-      }
-    ]
-  };
-  return {
-    aliases: ['html', 'xhtml', 'rss', 'atom', 'xjb', 'xsd', 'xsl', 'plist'],
-    case_insensitive: true,
-    contains: [
-      {
-        className: 'meta',
-        begin: '<!DOCTYPE', end: '>',
-        relevance: 10,
-        contains: [{begin: '\\[', end: '\\]'}]
-      },
-      hljs.COMMENT(
-        '<!--',
-        '-->',
-        {
-          relevance: 10
-        }
-      ),
-      {
-        begin: '<\\!\\[CDATA\\[', end: '\\]\\]>',
-        relevance: 10
-      },
-      {
-        className: 'meta',
-        begin: /<\?xml/, end: /\?>/, relevance: 10
-      },
-      {
-        begin: /<\?(php)?/, end: /\?>/,
-        subLanguage: 'php',
-        contains: [{begin: '/\\*', end: '\\*/', skip: true}]
-      },
-      {
-        className: 'tag',
-        /*
-        The lookahead pattern (?=...) ensures that 'begin' only matches
-        '<style' as a single word, followed by a whitespace or an
-        ending braket. The '$' is needed for the lexeme to be recognized
-        by hljs.subMode() that tests lexemes outside the stream.
-        */
-        begin: '<style(?=\\s|>|$)', end: '>',
-        keywords: {name: 'style'},
-        contains: [TAG_INTERNALS],
-        starts: {
-          end: '</style>', returnEnd: true,
-          subLanguage: ['css', 'xml']
-        }
-      },
-      {
-        className: 'tag',
-        // See the comment in the <style tag about the lookahead pattern
-        begin: '<script(?=\\s|>|$)', end: '>',
-        keywords: {name: 'script'},
-        contains: [TAG_INTERNALS],
-        starts: {
-          end: '\<\/script\>', returnEnd: true,
-          subLanguage: ['actionscript', 'javascript', 'handlebars', 'xml']
-        }
-      },
-      {
-        className: 'tag',
-        begin: '</?', end: '/?>',
-        contains: [
-          {
-            className: 'name', begin: /[^\/><\s]+/, relevance: 0
-          },
-          TAG_INTERNALS
-        ]
-      }
-    ]
-  };
-});
-
-
-
-/* 
- *************************************
- * <!-- Source Code View -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.SOURCE_CODE_VIEW               = APP.SOURCE_CODE_VIEW || {};
-	APP.SOURCE_CODE_VIEW.version       = '0.0.1';
-    APP.SOURCE_CODE_VIEW.documentReady = function( $ ) {
-
-		//Add view source code to body
-		$( 'body' ).prepend( '<a href="#uix-source-code" id="uix-view-source"><i class="fa fa-code" aria-hidden="true"></i></a><div id="uix-source-code"><a href="javascript:void(0);" id="uix-source-code__close"></a></div>' );
-				
-
-		//View source button event
-		$( '#uix-view-source' ).on( 'click', function() {
-			// Locks the page
-			$.scrollLock( true );
-			$( '#uix-source-code' ).show();
-			
-
-			
-		});
-		
-		$( '#uix-source-code > #uix-source-code__close' ).on( 'click', function() {
-			// Unlocks the page
-			$.scrollLock( false );
-			
-			var uri = window.location.toString();
-			if ( uri.indexOf( '#' ) > 0 ) {
-				var clean_uri = uri.substring(0, uri.indexOf( '#' ) );
-				window.history.replaceState({}, document.title, clean_uri );
-			}
-			$( '#uix-source-code' ).hide();
-			
-		});
-		
-		
-		//Remove tag from HTML-String
-		var removeElements = function( text, selector ) {
-			var wrapped = $( "<div>" + text + "</div>" );
-			wrapped.find( selector ).remove();
-			return wrapped.html();
-		};
-
-
-		//Source code init
-		var sourceCodeBodyClass      = $( 'body' ).attr( 'class' ),
-			sourceCodeBodyClassCode  = ( typeof sourceCodeBodyClass != typeof undefined ) ? 'body class="'+sourceCodeBodyClass+'"' : 'body';
-		
-		$.get( window.location.toString(), function( data ) {
-			var pageBodyCode   = data.split("<body")[1].split(">").slice(1).join(">").split("</body>")[0],
-				pageHeaderCode = data.split("</head>")[0];
-			
-			pageBodyCode   = removeElements( pageBodyCode, '#uix-view-source, #uix-source-code' );
-			pageBodyCode   = pageBodyCode.replace(/[<>]/g, function(m) { return {'<':'&lt;','>':'&gt;'}[m]; });
-			pageHeaderCode = pageHeaderCode.replace(/[<>]/g, function(m) { return {'<':'&lt;','>':'&gt;'}[m]; });
-
-
-			$("<pre />", {
-				"html":   pageHeaderCode + '&lt;/head&gt;\n&lt;'+sourceCodeBodyClassCode+'&gt;\n' + pageBodyCode + '\n&lt;/body&gt;\n&lt;/html&gt;',
-				"class": 'highlightBlock-print html'
-			}).appendTo( '#uix-source-code' );	
-			
-			$( 'pre.highlightBlock-print' ).each( function( i, block ) {
-				hljs.highlightBlock( block );
-			});	
-
-
-			
-		});
-		
-		
-		
-		//highlighter written
-		
-    };
-
-    APP.components.documentReady.push( APP.SOURCE_CODE_VIEW.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
 
 /* 
  *************************************
@@ -29837,10 +31407,9 @@ APP = ( function ( APP, $, window, document ) {
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
-	
 
     APP.STICKY_EL               = APP.STICKY_EL || {};
-	APP.STICKY_EL.version       = '0.0.2';
+	APP.STICKY_EL.version       = '0.0.3';
     APP.STICKY_EL.pageLoaded    = function() {
 
 		var $window      = $( window ),
@@ -29848,33 +31417,45 @@ APP = ( function ( APP, $, window, document ) {
 			windowHeight = window.innerHeight,
 			topSpacing   = $( '.uix-header__container' ).outerHeight( true ) + 10;
 		
-		
+
 		$window.on( 'scroll touchmove', function() {
 
 			var scrollTop   = $window.scrollTop(),
-				dynamicTop  = parseFloat( scrollTop + window.innerHeight ),
-				targetTop   = parseFloat( $( document ).height() - 200 );
+				dynamicTop  = parseFloat( scrollTop + window.innerHeight );
 
-		
-			//Detecting when user scrolls to bottom of div
-			if ( dynamicTop >= targetTop ) {
-				
-					$( '.js-uix-sticky-el.active' )
-						  .css( {
-							  'top'  : parseFloat( topSpacing - (dynamicTop - targetTop) ) + 'px'
-						  } );	
-				
-			} else {
-				
-				if ( $( '.js-uix-sticky-el.active' ).length > 0 && $( '.js-uix-sticky-el.active' ).position().top < topSpacing ) {
-					$( '.js-uix-sticky-el.active' )
-						  .css( {
-							  'top'  : topSpacing + 'px'
-						  } );	
-				}
-				
-			}
 
+			$( '.js-uix-sticky-el.active' ).each( function()  {
+				var $el = $( this );
+
+				if ( typeof $el.data( 'stop-trigger' ) != typeof undefined && $( $el.data( 'stop-trigger' ) ).length > 0 ) {
+					
+					
+
+					var diff      = typeof $el.data( 'stop-trigger-diff' ) != typeof undefined && $el.data( 'stop-trigger-diff' ).length > 0 ? UixMath.evaluate( $el.data( 'stop-trigger-diff' ).replace(/\s/g, '').replace(/\%\h/g, windowHeight ).replace(/\%\w/g, windowWidth ) ) : 0,
+						targetTop = $( $el.data( 'stop-trigger' ) ).offset().top - diff;
+					
+				
+					//Detecting when user scrolls to bottom of div
+					if ( dynamicTop >= targetTop ) {
+
+							$el.css( {
+								  'top'  : parseFloat( topSpacing - (dynamicTop - targetTop) ) + 'px'
+							  } );	
+
+					} else {
+
+						if ( $el.length > 0 && $el.position().top < topSpacing ) {
+							$el.css( {
+								  'top'  : topSpacing + 'px'
+							  } );	
+						}
+
+					}
+				}	
+
+			});
+			
+			
 
 		});	
 
@@ -29914,9 +31495,9 @@ APP = ( function ( APP, $, window, document ) {
 //
 //			//Detecting when user scrolls to bottom of div
 //			if ( spyTop > navMaxTop || spyTop < navMinTop ) {
-//				$( '.js-uix-sticky-el' ).removeClass( 'act' );
+//				$( '.js-uix-sticky-el' ).removeClass( 'active' );
 //			} else {
-//				$( '.js-uix-sticky-el' ).addClass( 'act' );
+//				$( '.js-uix-sticky-el' ).addClass( 'active' );
 //			}	
 //
 //
@@ -30188,293 +31769,7 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
- * <!-- Responsive Table -->
- *************************************
- */
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.TABLE               = APP.TABLE || {};
-	APP.TABLE.version       = '0.0.2';
-    APP.TABLE.documentReady = function( $ ) {
-
-
-		
-		var $window      = $( window ),
-			windowWidth  = window.innerWidth,
-			windowHeight = window.innerHeight;	
-		
-		/* 
-		 ---------------------------
-		 Duplicate title
-		 ---------------------------
-		 */
-					
-		var $resTable = $('table.uix-table.is-responsive, .uix-table.is-responsive table'),
-			$thead    = $resTable.find( 'thead' ),
-			$tbody    = $resTable.find( 'tbody' );
-
-        $thead.find( 'th' ).each(function() {
-            var data = $(this).text();
-            if ( !$( this ).attr( 'data-table' ) ) {
-                $( this ).attr( 'data-table', data );
-            }
-        });
-
-        $tbody.find( 'td' ).each(function() {
-            var index = $(this).index();
-            var data = $thead.find( 'th:eq(' + index + ')' ).attr( 'data-table' );
-            $( this ).attr( 'data-table', data );
-        });
-		
-	
-		/* 
-		 ---------------------------
-		 With scroll bars
-		 ---------------------------
-		 */
-		var resTableSCrolled = '.js-uix-table--responsive-scrolled',
-			columns          = $( resTableSCrolled + ' tr').length,
-			rows             = $( resTableSCrolled + ' th').length;
-		
-		tableDataScrolledInit( windowWidth );
-		
-		$window.on( 'resize', function() {
-			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( window.innerWidth != windowWidth ) {
-
-				// Update the window width for next time
-				windowWidth = window.innerWidth;
-
-				// Do stuff here
-				tableDataScrolledInit( windowWidth );
-		
-
-			}
-		});
-		
-		
-		function tableDataScrolledInit( w ) {
-			
-			if ( w <= 768 ) {
-				for ( var i = 0; i < rows; i++ ) {
-					var maxHeight = $( resTableSCrolled + ' th:nth-child(' + i + ')').outerHeight();
-					for ( var j = 0; j < columns; j++ ) {
-						if ($( resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').outerHeight() > maxHeight) {
-							maxHeight = $( resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').outerHeight();
-						}
-						if ($( resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').prop('scrollHeight') > $( resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').outerHeight()) {
-							maxHeight = $( resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').prop( 'scrollHeight' );
-						}
-					}
-					for (var j = 0; j < columns; j++ ) {
-						$( resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').css( 'height', maxHeight );
-						$( resTableSCrolled + ' th:nth-child(' + i + ')').css( 'height', maxHeight );
-					}
-				}
-			} else {
-				$( resTableSCrolled + ' td, '+resTableSCrolled+' th').removeAttr( 'style') ;
-			}
-			
-		}
-		
-
-		
-		
-    };
-
-    APP.components.documentReady.push( APP.TABLE.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
-/* 
- *************************************
- * <!-- Table Sorter -->
- *************************************
- */
-
-APP = ( function ( APP, $, window, document ) {
-    'use strict';
-	
-    APP.TABLE_SORTER               = APP.TABLE_SORTER || {};
-	APP.TABLE_SORTER.version       = '0.0.2';
-    APP.TABLE_SORTER.documentReady = function( $ ) {
-
-		
-		$( '.js-uix-table-sorter' ).each( function()  {
-			var $sortTable = $( this ).find( 'table' );
-			
-			//add arrows
-			
-			$sortTable.find( "[data-sort-type]" ).each( function()  {
-				if ( $( this ).find( '.uix-table-sorter' ).length == 0 ) {
-					$( this ).wrapInner( '<span class="uix-table-sorter" />' );
-				}
-				
-				var $th     = $( this ),
-					thIndex = $th.index(),
-					thType  = $th.data( 'sort-type' ),
-					inverse = false;
-
-				$th.on( 'click', function() {
-
-					$sortTable.find( 'tbody td' ).filter( function() {
-
-						return $( this ).index() === thIndex;
-
-					}).sortElements(function(a, b) {
-
-
-						var txt1 = $.text([a]).replace(/(<([^>]+)>)/ig, ''),
-							txt2 = $.text([b]).replace(/(<([^>]+)>)/ig, '');
-
-						//type of number
-						if ( thType == 'number' ) {
-							txt1 = Number( txt1.replace(/[^0-9.-]+/g, '' ) );
-							txt2 = Number( txt2.replace(/[^0-9.-]+/g, '' ) );
-						}
-
-						//type of date
-						if ( thType == 'date' ) {
-							txt1 = new Date( txt1 );
-							txt2 = new Date( txt2 );	
-						}	
-
-
-
-						//add filter class
-						$sortTable.find( 'tbody tr' ).addClass( 'js-uix-newsort' );
-
-
-						if ( txt1 > txt2 ) {
-							if ( inverse ) {
-								return -1;
-							} else {
-								return 1;
-							}
-
-						} else {
-
-							if ( inverse ) {
-								return 1;
-							} else {
-								return -1;
-							}	
-
-						}
-
-
-
-
-					},
-					function() {
-
-						// parentNode is the element we want to move
-						return this.parentNode;
-
-					});
-
-					inverse = !inverse;
-
-				});
-
-			});
-
-		
-
-		});
-
-
-		
-    };
-
-    APP.components.documentReady.push( APP.TABLE_SORTER.documentReady );
-    return APP;
-
-}( APP, jQuery, window, document ) );
-
-
-
-
-
-/**
- * jQuery.fn.sortElements
- * --------------
- * @author James Padolsey (http://james.padolsey.com)
- * @version 0.11
- * @updated 18-MAR-2010
- * --------------
- * @param Function comparator:
- *   Exactly the same behaviour as [1,2,3].sort(comparator)
- *   
- * @param Function getSortable
- *   A function that should return the element that is
- *   to be sorted. The comparator will run on the
- *   current collection, but you may want the actual
- *   resulting sort to occur on a parent or another
- *   associated element.
- *   
- *   E.g. $('td').sortElements(comparator, function(){
- *      return this.parentNode; 
- *   })
- *   
- *   The <td>'s parent (<tr>) will be sorted instead
- *   of the <td> itself.
- */
-jQuery.fn.sortElements = (function(){
-    
-    var sort = [].sort;
-    
-    return function(comparator, getSortable) {
-        
-        getSortable = getSortable || function(){return this;};
-        
-        var placements = this.map(function(){
-            
-            var sortElement = getSortable.call(this),
-                parentNode = sortElement.parentNode,
-                
-                // Since the element itself will change position, we have
-                // to have some way of storing it's original position in
-                // the DOM. The easiest way is to have a 'flag' node:
-                nextSibling = parentNode.insertBefore(
-                    document.createTextNode(''),
-                    sortElement.nextSibling
-                );
-            
-            return function() {
-                
-                if (parentNode === this) {
-                    throw new Error(
-                        "You can't sort elements if any one is a descendant of another."
-                    );
-                }
-                
-				
-                // Insert before flag:
-                parentNode.insertBefore(this, nextSibling);
-                // Remove flag:
-                parentNode.removeChild(nextSibling);
-                
-            };
-            
-        });
-       
-        return sort.call(this, comparator).each(function(i){
-            placements[i].call(getSortable.call(this));
-        });
-        
-    };
-    
-})();
-
-/* 
- *************************************
- * <!-- 3D Background 2 -->
+ * <!-- 3D Background 1 with three.js -->
  *************************************
  */
 
@@ -30490,7 +31785,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP._3D_BACKGROUND_THREE               = APP._3D_BACKGROUND_THREE || {};
-	APP._3D_BACKGROUND_THREE.version       = '0.0.1';
+	APP._3D_BACKGROUND_THREE.version       = '0.0.4';
     APP._3D_BACKGROUND_THREE.documentReady = function( $ ) {
 
 		
@@ -30498,200 +31793,301 @@ APP = ( function ( APP, $, window, document ) {
 		if ( $( '#3D-background-three-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
 		
 		
-		var $window                   = $( window ),
-			windowWidth               = window.innerWidth,
-			windowHeight              = window.innerHeight,
-			rendererCanvasID          = '3D-background-three-canvas';
-		
-	
 
-		
-		// Generate one plane geometries mesh to scene
-		//-------------------------------------	
-		var camera,
-			controls,
-			scene,
-			light,
-			renderer,
-			displacementSprite,
-			clock = new THREE.Clock();
 
-		
-		init();
-		render();
-
-		function init() {
-			//camera
-			camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 1, 10000 );
-			camera.position.set(0, 0, -1000);
-
-			//controls
-			controls = new THREE.OrbitControls( camera );
-			controls.rotateSpeed = 0.5;
-			controls.zoomSpeed = 1.2;
-			controls.panSpeed = 0.8;
-			controls.enableZoom = true;
-			controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-			controls.dampingFactor = 0.25;
-			controls.screenSpacePanning = false;
-			controls.minDistance = 100;
-			controls.maxDistance = 500;
-			controls.maxPolarAngle = Math.PI / 2;
-
-			//Scene
-			scene = new THREE.Scene();
-
-			//HemisphereLight
-			scene.add( new THREE.AmbientLight( 0x555555 ) );
-
-			light = new THREE.SpotLight( 0xffffff, 1.5 );
-			light.position.set( 0, 500, 2000 );
-			scene.add( light );
+		var MainStage = function() {
 			
+			var $window                   = $( window ),
+				windowWidth               = window.innerWidth,
+				windowHeight              = window.innerHeight,
+				rendererCanvasID          = '3D-background-three-canvas';
+
 			
 
-			//WebGL Renderer		
-			renderer = new THREE.WebGLRenderer( { 
-									canvas   : document.getElementById( rendererCanvasID ), //canvas
-									alpha    : true, 
-									antialias: true 
-								} );
-			renderer.setSize( windowWidth, windowHeight );
+			// Generate one plane geometries mesh to scene
+			//-------------------------------------	
+			var camera,
+				scene,
+				light,
+				renderer,
+				displacementSprite,
+				shaderSprite,
+				clock = new THREE.Clock();
+
+
+			// controls
+
+			var spriteAnim = false;
+
+			var mouseX       = 0,
+				mouseY       = 0,
+				windowHalfX  = windowWidth / 2,
+				windowHalfY  = windowHeight / 2;
+
+			var targetX = 0.0, 
+				targetY = 0.0,
+				angle   = 0.0,
+				height  = 0.0,
+				target  = new THREE.Vector3();
+
+
+			// Load multiple ShaderFrog shaders
+			var runtime = new ShaderRuntime();
+
+			runtime.load([
+				$( '#' + rendererCanvasID ).data( 'shader-url' )
+			], function( shaders ) {
+
+				// Get the Three.js material you can assign to your objects
+				var material = runtime.get( shaders[0].name );
+				shaderSprite.material = material;
+
+			});
+
 
 			
-			// Immediately use the texture for material creation
-			var defaultMaterial    = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
-			
-			displacementSprite = new THREE.Mesh( generateGeometry( 'sphere', 200 ), defaultMaterial );
-			scene.add( displacementSprite );
+
+			function init() {
+				//camera
+				camera = new THREE.PerspectiveCamera( 60, windowWidth / windowHeight, 100, 2000000 );
+				camera.position.set( 0, 100, 2000 );
+
+				runtime.registerCamera( camera );
 
 
-			// Fires when the window changes
-			window.addEventListener( 'resize', onWindowResize, false );
-			
-			
-		}
+				//Scene
+				scene = new THREE.Scene();
 
-		function render() {
-			requestAnimationFrame( render );
-			
-            var objVector = new THREE.Vector3(0,0.2,0.1),
-				delta     = clock.getDelta();
-			
-			displacementSprite.rotation.x += delta * objVector.x;
-			displacementSprite.rotation.y += delta * objVector.y;
-			displacementSprite.rotation.z += delta * objVector.z;
+				//HemisphereLight
+				scene.add( new THREE.AmbientLight( 0x555555 ) );
 
-			//To set a background color.
-			//renderer.setClearColor( 0x000000 );	
-			
-			controls.update();
-			
-			renderer.render( scene, camera );
-			
-			
-
-			
-		}
+				light = new THREE.SpotLight( 0xffffff, 1.5 );
+				light.position.set( 0, 500, 2000 );
+				scene.add( light );
 
 
-		function onWindowResize() {
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-			renderer.setSize( window.innerWidth, window.innerHeight );
-		}
 
-		
-
-		
-		/*
-		 * Batch generation of geometry
-		 *
-		 * @param  {String} objectType     - String of geometry type identifier.
-		 * @param  {Number} numObjects       - The total number of generated objects.
-		 * @return {Void}
-		 */
-		function generateGeometry( objectType, numObjects ) {
-
-			var geometry = new THREE.Geometry();
-
-			var applyVertexColors = function( g, c ) {
-
-				g.faces.forEach( function( f ) {
-
-					var n = ( f instanceof THREE.Face3 ) ? 3 : 4;
-
-					for ( var j = 0; j < n; j ++ ) {
-
-						f.vertexColors[ j ] = c;
-
-					}
-
-				} );
-
-			};
-
-			for ( var i = 0; i < numObjects; i ++ ) {
-
-				var position = new THREE.Vector3();
-
-				position.x = Math.random() * 10000 - 5000;
-				position.y = Math.random() * 6000 - 3000;
-				position.z = Math.random() * 8000 - 4000;
-
-				var rotation = new THREE.Euler();
-
-				rotation.x = Math.random() * 2 * Math.PI;
-				rotation.y = Math.random() * 2 * Math.PI;
-				rotation.z = Math.random() * 2 * Math.PI;
-
-				var scale = new THREE.Vector3();
-
-				var geom, color = new THREE.Color();
-
-				scale.x = Math.random() * 200 + 100;
-
-				if ( objectType == "cube" ) {
-
-					geom = new THREE.BoxGeometry( 1, 1, 1 );
-					scale.y = Math.random() * 200 + 100;
-					scale.z = Math.random() * 200 + 100;
-					color.setRGB( 0, 0, Math.random() + 0.1 );
-
-				} else if ( objectType == "sphere" ) {
-
-					geom = new THREE.IcosahedronGeometry( 1, 1 );
-					scale.y = scale.z = scale.x;
-					color.setRGB( Math.random() + 0.1, 0, 0 );
-
-				} else if ( objectType == "poly" ) {
+				//WebGL Renderer		
+				renderer = new THREE.WebGLRenderer( { 
+										canvas   : document.getElementById( rendererCanvasID ), //canvas
+										alpha    : true, 
+										antialias: true 
+									} );
+				renderer.setSize( windowWidth, windowHeight );
 
 
-					geom = new THREE.CylinderGeometry( 3, 6, 3, 5, 1 );
-					scale.y = Math.random() * 30;
-					scale.z = Math.random() * 30;
-					color.setRGB( Math.random() + 0.1, 0, 0 );
+				//Add shader background
+				var geometry = new THREE.SphereGeometry(5, 32, 32, 0, Math.PI * 2, 0, Math.PI * 2);
+				shaderSprite = new THREE.Mesh( geometry );
+				shaderSprite.scale.setScalar( 10000 );
+				shaderSprite.renderDepth = 0;
+				scene.add( shaderSprite );
 
-				}
+
+				// Immediately use the texture for material creation
+				var defaultMaterial    = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
+
+				displacementSprite = new THREE.Mesh( generateGeometry( 'sphere', 200 ), defaultMaterial );
+				scene.add( displacementSprite );
 
 
-				// give the geom's vertices a random color, to be displayed
-				applyVertexColors( geom, color );
 
-				var object = new THREE.Mesh( geom );
-				object.position.copy( position );
-				object.rotation.copy( rotation );
-				object.scale.copy( scale );
-				object.updateMatrix();
+				// Fires when the window changes
+				window.addEventListener( 'resize', onWindowResize, false );
+				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+				document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+				document.addEventListener( 'mouseup', onDocumentMouseUp, false );
 
-				geometry.merge( object.geometry, object.matrix );
 
 			}
 
-			return geometry;
-			
+			function render() {
+				requestAnimationFrame( render );
 
-		}
+				var objVector = new THREE.Vector3(0,0.2,0.1),
+					delta     = clock.getDelta();
+
+				if ( ! spriteAnim ) {
+					displacementSprite.rotation.x += delta * objVector.x;
+					displacementSprite.rotation.y += delta * objVector.y;
+					displacementSprite.rotation.z += delta * objVector.z;
+				}
+
+
+
+				//To set a background color.
+				renderer.setClearColor( 0x000000 );	
+
+
+				//update shaders
+				runtime.updateShaders( clock.getElapsedTime() );
+
+
+
+				// update camera
+				targetX = mouseX * .002;
+				targetY = mouseY * .002;
+
+				angle  += 0.01 * ( targetX - angle );
+				height += 0.01 * ( targetY - height );
+
+				var x = -Math.sin( angle * 1.5 ) * 35;
+				var z =  Math.cos( angle * 1.5 ) * 35;
+				var y = 130 * height + 0;
+
+				camera.position.set( x, y, z );
+				camera.lookAt( target );	
+
+
+
+				renderer.render( scene, camera );
+
+
+
+
+			}
+
+
+			function onWindowResize() {
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+			}
+
+
+
+
+			function onDocumentMouseMove( event ) {
+				mouseX = event.clientX - windowHalfX;
+				mouseY = event.clientY - windowHalfY;	
+
+			}
+
+			function onDocumentMouseDown( event ) {
+				event.preventDefault();
+				spriteAnim = true;
+				mouseX = event.clientX - windowHalfX;
+				mouseY = event.clientY - windowHalfY;	
+
+
+			}
+
+			function onDocumentMouseUp( event ) {
+				event.preventDefault();
+				spriteAnim = false;
+				mouseX = event.clientX - windowHalfX;
+				mouseY = event.clientY - windowHalfY;
+
+			}
+
+
+
+			/*
+			 * Batch generation of geometry
+			 *
+			 * @param  {String} objectType     - String of geometry type identifier.
+			 * @param  {Number} numObjects       - The total number of generated objects.
+			 * @return {Void}
+			 */
+			function generateGeometry( objectType, numObjects ) {
+
+				var geometry = new THREE.Geometry();
+
+				var applyVertexColors = function(g, c) {
+					g.faces.forEach(function(f) {
+						var n = (f instanceof THREE.Face3) ? 3 : 4;
+						for (var j = 0; j < n; j++) {
+							f.vertexColors[j] = c;
+						}
+					});
+				};
+
+				for ( var i = 0; i < numObjects; i ++ ) {
+
+					var position = new THREE.Vector3();
+					position.x = Math.random() * 10000 - 5000;
+					position.y = Math.random() * 6000 - 3000;
+					position.z = Math.random() * 8000 - 4000;
+
+					var rotation = new THREE.Euler();
+					rotation.x = Math.random() * 2 * Math.PI;
+					rotation.y = Math.random() * 2 * Math.PI;
+					rotation.z = Math.random() * 2 * Math.PI;
+
+					var scale = new THREE.Vector3();
+					scale.x = Math.random() * 200 + 100;
+
+
+					var geom, 
+						color = new THREE.Color();
+
+
+					if ( objectType == "cube" ) {
+
+						geom = new THREE.BoxGeometry( 1, 1, 1 );
+						scale.y = Math.random() * 200 + 100;
+						scale.z = Math.random() * 200 + 100;
+						color.setRGB( 0, 0, Math.random() + 0.1 );
+
+					} else if ( objectType == "sphere" ) {
+
+						geom = new THREE.IcosahedronGeometry( 1, 1 );
+						scale.y = scale.z = scale.x;
+						color.setRGB( 0.35, getRandomFloat( 0.12, 0.3 ), 0.2 );
+
+					} else if ( objectType == "poly" ) {
+
+
+						geom = new THREE.CylinderGeometry( 3, 6, 3, 5, 1 );
+						scale.y = Math.random() * 30;
+						scale.z = Math.random() * 30;
+						color.setRGB( Math.random() + 0.1, 0, 0 );
+
+					}
+
+
+					// give the geom's vertices a random color, to be displayed
+					applyVertexColors( geom, color );
+
+					var object = new THREE.Mesh( geom );
+					object.position.copy( position );
+					object.rotation.copy( rotation );
+					object.scale.copy( scale );
+					object.updateMatrix();
+
+					geometry.merge( object.geometry, object.matrix );
+
+				}
+
+				return geometry;
+
+
+			}
+
+
+			//Generate random number between two numbers
+			function getRandomFloat(min, max) {
+				return Math.random() * (max - min) + min;
+			}
+
+
+			// 
+			//-------------------------------------	
+			return {
+				init      : init,
+				render    : render,
+				getScene  : function () { return scene; },
+				getCamera : function () { return camera; } 
+			};
+
+
+		}();
+
+		MainStage.init();
+		MainStage.render();
+
+		
+
 
 		
     };
@@ -30707,7 +32103,7 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
- * <!-- 3D Background 2 -->
+ * <!-- 3D Background 2 with three.js -->
  *************************************
  */
 /**
@@ -30722,302 +32118,337 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP._3D_BACKGROUND_THREE2               = APP._3D_BACKGROUND_THREE2 || {};
-	APP._3D_BACKGROUND_THREE2.version       = '0.0.1';
+	APP._3D_BACKGROUND_THREE2.version       = '0.0.2';
     APP._3D_BACKGROUND_THREE2.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
 		if ( $( '#3D-background-three-canvas2' ).length == 0 || ! Modernizr.webgl ) return false;
 		
 		
-		var $window                   = $( window ),
-			windowWidth               = window.innerWidth,
-			windowHeight              = window.innerHeight,
-			rendererCanvasID          = '3D-background-three-canvas2';
-		
-	
 
-		
-		// Generate one plane geometries mesh to scene
-		//-------------------------------------	
-		var camera,
-			controls,
-			scene,
-			light,
-			renderer,
-			displacementSprite,
-			radius       = 100,
-			theta        = 0,
-			clickEnable   = false,
-			newCameraX   = 0,
-			newCameraY   = 0,
-			newCameraZ   = 0;
-		
-		var mouse = new THREE.Vector2(), 
-			INTERSECTED,
-			INTERSECTED_CLICK,
-			raycaster;
-		
-		init();
-		render();
+		var MainStage = function() {
 
-		function init() {
-			//camera
-			camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 1, 10000 );
-			camera.position.set(0, 0, -1000);
-			
-
-			
-			//controls
-			controls = new THREE.OrbitControls( camera );
-			controls.autoRotate = true;
-			controls.autoRotateSpeed = 0.5;
-			controls.rotateSpeed = 0.5;
-			controls.zoomSpeed = 1.2;
-			controls.panSpeed = 0.8;
-			controls.enableZoom = true;
-			controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-			controls.dampingFactor = 0.25;
-			controls.screenSpacePanning = false;
-			controls.minDistance = 100;
-			controls.maxDistance = 500;
-			controls.maxPolarAngle = Math.PI / 2;
-			
-			controls.target.set( 30, 167, 81 );
-			controls.update();			
-
-
-			//Scene
-			scene = new THREE.Scene();
-
-			//HemisphereLight
-			scene.add( new THREE.AmbientLight( 0x555555 ) );
-
-			light = new THREE.SpotLight( 0xffffff, 1.5 );
-			light.position.set( 0, 500, 2000 );
-			scene.add( light );
+			var $window                   = $( window ),
+				windowWidth               = window.innerWidth,
+				windowHeight              = window.innerHeight,
+				rendererCanvasID          = '3D-background-three-canvas2';
 			
 			
-
-			//WebGL Renderer	
-			renderer = new THREE.WebGLRenderer( { 
-									canvas   : document.getElementById( rendererCanvasID ), //canvas
-									alpha    : true, 
-									antialias: true 
-								} );
-			renderer.setSize( windowWidth, windowHeight );
-
-			
-			// Immediately use the texture for material creation
-			generateGeometry( 'poly', 200 );
+			// Generate one plane geometries mesh to scene
+			//-------------------------------------	
+			var camera,
+				scene,
+				renderer,
+				material,
+				displacementSprite,
+				clock = new THREE.Clock();
 
 
-			// Fires when the window changes
-			window.addEventListener( 'resize', onWindowResize, false );
-			
-			
-			// When the mouse moves, call the given function
-			raycaster = new THREE.Raycaster();
-			document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-			document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-			document.addEventListener( 'mouseup', onDocumentMouseUp, false );
-		
-			
-			
-		}
+			var mouseVector  = new THREE.Vector2(),
+				vertex       = document.getElementById( 'vertexshader' ).textContent,
+				fragment     = document.getElementById( 'fragmentshader' ).textContent;
 
-		function render() {
-			requestAnimationFrame( render );
-			
-            theta += 0.1;
-			
-			
-		
-			//To set a background color.
-			//renderer.setClearColor( 0x000000 );	
-			
-			
-			//Mouse interactions
-			raycaster.setFromCamera( mouse, camera );
-			var intersects = raycaster.intersectObjects( scene.children );
-			if ( intersects.length > 0 ) {
-				if ( INTERSECTED != intersects[ 0 ].object ) {
-					
-					if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
-					INTERSECTED = intersects[ 0 ].object;
-					INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
-					INTERSECTED.material.emissive.setHex( 0xffcc00 );
-				}
-			} else {
-				if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
-				INTERSECTED = null;
-			}
-
-			controls.update();
-			
-			
-			renderer.render( scene, camera );
-			
-			
-
-			
-		}
+			var mouseX = 0;
+			var mouseY = 0;
 
 
-		function onWindowResize() {
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-			renderer.setSize( window.innerWidth, window.innerHeight );
-		}
 
-		
-		function onDocumentMouseMove( event ) {
-			event.preventDefault();
-			mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-			mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-		}
-		
-		
-		function onDocumentMouseDown( event ) {
-			event.preventDefault();
-			mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-			mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+			function init() {
+				//camera
+				camera = new THREE.PerspectiveCamera( 50, windowWidth / windowHeight, .01, 1000 );
+				camera.position.set( 0, 0, 1.8 );
 
-			clickEnable = true;
-			
-			//Mouse interactions
-			raycaster.setFromCamera( mouse, camera );
-			var intersects = raycaster.intersectObjects( scene.children );
-			if ( intersects.length > 0 ) {
-				if ( INTERSECTED_CLICK != intersects[ 0 ].object ) {
-					
-					INTERSECTED_CLICK = intersects[ 0 ].object;
-					
-					TweenMax.to( INTERSECTED_CLICK.scale, 1, {
-						x: '+=' + ( 200 - INTERSECTED_CLICK.scale.x ) * 0.05,
-						y: '+=' + ( 200 - INTERSECTED_CLICK.scale.y ) * 0.05,
-						z: '+=' + ( 200 - INTERSECTED_CLICK.scale.z ) * 0.05
-					});	
-						
-					
-					INTERSECTED_CLICK.updateMatrix();	
-					
-				}
-			} else {
-				INTERSECTED_CLICK = null;
-			}
-			/*
-			// Parse all the faces
-			for ( var i in intersects ) {
 
-				intersects[ i ].face.material[ 0 ].color.setHex( Math.random() * 0xffffff | 0x80000000 );
 
-			}
-			*/		
+				//Scene
+				scene = new THREE.Scene();
 
-			
-			
-			
-		}
-		function onDocumentMouseUp( event ) {
-			event.preventDefault();
-			mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-			mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-			
-			theta = 0;
-			clickEnable = false;
-			
-		}
-			
-		
-		
-		
-		/*
-		 * Batch generation of geometry
-		 *
-		 * @param  {String} objectType     - String of geometry type identifier.
-		 * @param  {Number} numObjects       - The total number of generated objects.
-		 * @return {Void}
-		 */
-		function generateGeometry( objectType, numObjects ) {
 
-            var geometry;
-			if ( objectType == "cube" ) {
-				geometry = new THREE.BoxGeometry( 1, 1, 1 );
-			} else if ( objectType == "sphere" ) {
-				geometry = new THREE.IcosahedronGeometry( 1, 1 );
+				//WebGL Renderer	
+				renderer = new THREE.WebGLRenderer( { 
+										canvas   : document.getElementById( rendererCanvasID ), //canvas
+										alpha    : true, 
+										antialias: true 
+									} );
+				renderer.setSize( windowWidth, windowHeight );
 
-			} else if ( objectType == "poly" ) {
-				geometry = new THREE.CylinderGeometry( 3, 6, 3, 5, 1 );
-			}
 
-			
-			var applyVertexColors = function( g, c ) {
-
-				g.faces.forEach( function( f ) {
-
-					var n = ( f instanceof THREE.Face3 ) ? 3 : 4;
-
-					for ( var j = 0; j < n; j ++ ) {
-
-						f.vertexColors[ j ] = c;
-
-					}
-
-				} );
-
-			};
-
-			for ( var i = 0; i < numObjects; i ++ ) {
-
-				var position = new THREE.Vector3();
-
-				position.x = Math.random() * 10000 - 5000;
-				position.y = Math.random() * 6000 - 3000;
-				position.z = Math.random() * 8000 - 4000;
-
-				var rotation = new THREE.Euler();
-
-				rotation.x = Math.random() * 2 * Math.PI;
-				rotation.y = Math.random() * 2 * Math.PI;
-				rotation.z = Math.random() * 2 * Math.PI;
-
-				var scale = new THREE.Vector3();
-
-				
-				// give the geom's vertices a random color, to be displayed
-				var color = new THREE.Color();
-				
-				color.setRGB( Math.random() + 0.1, 0, 0 );
-				applyVertexColors( geometry, color );
-
-				
 
 				// Immediately use the texture for material creation
-				var defaultMaterial     = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
+				material = new THREE.ShaderMaterial({
+					uniforms: {
+						"time": { value: 1.0 },
+						"texture": { value: new THREE.TextureLoader().load( $( '#' + rendererCanvasID ).data( 'filter-texture' ) ) }
+					},
+					fragmentShader: fragment,
+					vertexShader: vertex
+				});			
 
-				displacementSprite  = new THREE.Mesh( geometry, defaultMaterial );
-				displacementSprite.position.x = Math.random() * 800 - 400;
-				displacementSprite.position.y = Math.random() * 800 - 400;
-				displacementSprite.position.z = Math.random() * 800 - 400;
-				displacementSprite.rotation.x = Math.random() * 2 * Math.PI;
-				displacementSprite.rotation.y = Math.random() * 2 * Math.PI;
-				displacementSprite.rotation.z = Math.random() * 2 * Math.PI;
-				displacementSprite.scale.x = Math.random() + 5;
-				displacementSprite.scale.y = Math.random() + 5;
-				displacementSprite.scale.z = Math.random() + 5;
-				
-				
+
+
+				//if use texture
+				material.uniforms.texture.value.wrapS = THREE.RepeatWrapping;
+				material.uniforms.texture.value.wrapT = THREE.RepeatWrapping;
+
+
+				var geometry = new THREE.SphereGeometry(5, 50, 50, 0, Math.PI * 2, 0, Math.PI * 2);
+				displacementSprite = new THREE.Mesh( geometry, material );
 				scene.add( displacementSprite );
 
 
+				// Fires when the window changes
+				window.addEventListener( 'resize', onWindowResize, false );
+				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+
+
+			}
+
+			function render() {
+				requestAnimationFrame( render );
+
+				var delta = clock.getDelta();
+
+				//To set a background color.
+				renderer.setClearColor( 0x000000 );	
+
+
+				material.uniforms.time.value += delta * 5;
+
+
+				//displacementSprite.rotation.y += delta * 0.5 * 1;
+				//displacementSprite.rotation.x += delta * 0.5 * -1;
+
+
+
+				renderer.render( scene, camera );
+
+
 			}
 
 
-		}
+			function onWindowResize() {
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+			}
+
+			function onDocumentMouseMove( event ) {
+
+				var rect = renderer.domElement.getBoundingClientRect();
+				displacementSprite.position.z = ( event.clientX - rect.left ) / rect.width * 4 - 1;
+
+			}
+
+
+
+			function avgArr(arr) {
+				var total = arr.reduce(function(sum, b) {
+					return sum + b
+				});
+				return (total / arr.length);
+			}
+			function maxArr(arr) {
+				return arr.reduce(function(a, b) {
+					return Math.max(a, b);
+				})
+			}
+			function degToRad(degrees) {
+				return degrees * Math.PI / 180;
+			}
+			function round(n, digits) {
+				return Number(n.toFixed(digits));
+			}
+
+			// 
+			//-------------------------------------	
+			return {
+				init      : init,
+				render    : render,
+				getScene  : function () { return scene; },
+				getCamera : function () { return camera; } 
+			};
+
+
+		}();
+
+		MainStage.init();
+		MainStage.render();
+		
+		
+
+
+		
 		
     };
 
     APP.components.documentReady.push( APP._3D_BACKGROUND_THREE2.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+
+
+
+
+/* 
+ *************************************
+ * <!-- 3D Background 3 with three.js -->
+ *************************************
+ */
+/**
+ * APP._3D_BACKGROUND_THREE3
+ * @global
+ * @requires ./examples/assets/js/min/three.min.js
+ * @requires ./src/components/ES5/_plugins-THREE
+ */
+
+
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP._3D_BACKGROUND_THREE3               = APP._3D_BACKGROUND_THREE3 || {};
+	APP._3D_BACKGROUND_THREE3.version       = '0.0.1';
+    APP._3D_BACKGROUND_THREE3.documentReady = function( $ ) {
+
+		//Prevent this module from loading in other pages
+		if ( $( '#3D-background-three-canvas3' ).length == 0 || ! Modernizr.webgl ) return false;
+		
+		
+		var MainStage = function() {
+
+			var $window                   = $( window ),
+				windowWidth               = window.innerWidth,
+				windowHeight              = window.innerHeight,
+				rendererCanvasID          = '3D-background-three-canvas3';
+
+
+			// Generate one plane geometries mesh to scene
+			//-------------------------------------	
+			var camera,
+				scene,
+				renderer,
+				displacementSprite,
+				theta        = 0;
+
+			var mouseVector  = new THREE.Vector2(),
+				sphereTarget = new THREE.Euler(),
+				xrad         = THREE.Math.degToRad(30),
+				yrad         = THREE.Math.degToRad(10);
+
+
+			function init() {
+				//camera
+				camera = new THREE.PerspectiveCamera( 50, windowWidth / windowHeight, .01, 1000 );
+				camera.position.set( 0, 0, 1.8 );
+
+
+
+				//Scene
+				scene = new THREE.Scene();
+
+
+				//WebGL Renderer	
+				renderer = new THREE.WebGLRenderer( { 
+										canvas   : document.getElementById( rendererCanvasID ), //canvas
+										alpha    : true, 
+										antialias: true 
+									} );
+				renderer.setSize( windowWidth, windowHeight );
+
+
+				// Immediately use the texture for material creation
+				var sphereGeo = new THREE.SphereBufferGeometry( 2, 12, 12 );
+				var sphereMat = new THREE.MeshBasicMaterial({
+					color: 0x494949,
+					wireframe: true
+				});
+				displacementSprite = new THREE.Mesh( sphereGeo, sphereMat );
+				displacementSprite.position.y = -0.2;
+				scene.add( displacementSprite );
+
+
+				// Fires when the window changes
+				window.addEventListener( 'resize', onWindowResize, false );
+				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+
+
+			}
+
+			function render() {
+				requestAnimationFrame( render );
+
+				theta += 0.1;
+
+				//To set a background color.
+				renderer.setClearColor( 0x000000 );	
+
+
+
+				lerp( displacementSprite.rotation, 'x', sphereTarget.x );
+				lerp( displacementSprite.rotation, 'y', sphereTarget.y );
+
+
+				renderer.render( scene, camera );
+
+
+			}
+
+
+			function onWindowResize() {
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+			}
+
+
+			function onDocumentMouseMove( event ) {
+				// NDC -1 to 1
+				var rect = renderer.domElement.getBoundingClientRect();
+				mouseVector.x = ( event.clientX - rect.left ) / rect.width * 2 - 1;
+				mouseVector.y = ( event.clientY - rect.top ) / rect.height * -2 + 1;
+
+				sphereTarget.y = mouseVector.x * xrad;
+				sphereTarget.x = - mouseVector.y * yrad;
+			}
+
+			//Calculate the interpolation of two vectors
+			function lerp( object, prop, destination ) {
+				if (object && object[prop] !== destination) {
+					object[prop] += (destination - object[prop]) * 0.1;
+
+					if (Math.abs(destination - object[prop]) < 0.001) {
+						object[prop] = destination;
+					}
+				}
+			}
+
+			// 
+			//-------------------------------------	
+			return {
+				init      : init,
+				render    : render,
+				getScene  : function () { return scene; },
+				getCamera : function () { return camera; } 
+			};
+
+
+		}();
+
+		MainStage.init();
+		MainStage.render();
+		
+		
+
+		
+	
+		
+		
+    };
+
+    APP.components.documentReady.push( APP._3D_BACKGROUND_THREE3.documentReady );
     return APP;
 
 }( APP, jQuery, window, document ) );
@@ -31495,6 +32926,560 @@ APP = ( function ( APP, $, window, document ) {
 
 /* 
  *************************************
+ * <!-- 3D Gallery with three.js -->
+ *************************************
+ */
+/**
+ * APP._3D_GALLERY
+ * @global
+ * @requires ./examples/assets/js/min/three.min.js
+ * @requires ./src/components/ES5/_plugins-THREE
+ */
+
+
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP._3D_GALLERY               = APP._3D_GALLERY || {};
+	APP._3D_GALLERY.version       = '0.0.3';
+    APP._3D_GALLERY.documentReady = function( $ ) {
+
+		//Prevent this module from loading in other pages
+		if ( $( '#3D-gallery-three-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
+		
+		
+		var MainStage = function() {
+
+			var $window                   = $( window ),
+				windowWidth               = window.innerWidth,
+				windowHeight              = window.innerHeight,
+				rendererCanvasID          = '3D-gallery-three-canvas';
+
+
+			// Generate one plane geometries mesh to scene
+			//-------------------------------------	
+			var camera,
+				controls,
+				scene,
+				light,
+				renderer,
+				displacementSprite,
+				theta        = 0;
+
+
+			var offsetWidth  = 1400,
+				offsetHeight = 933,
+				allImages    = [],
+				imgTotal,
+				imagesLoaded = false;
+
+
+			// we will keep track of the scroll
+			var scrollValue = 0;
+			var lastScrollValue = 0;
+
+
+
+			function init() {
+				//camera
+				camera = new THREE.PerspectiveCamera( 75, windowWidth / windowHeight, 1, 10000 );
+				camera.position.set(0, 0, 1000);
+
+
+
+				//controls
+				controls = new THREE.OrbitControls( camera );
+				controls.autoRotate = false;
+				controls.autoRotateSpeed = 0.5;
+				controls.rotateSpeed = 0.5;
+				controls.zoomSpeed = 1.2;
+				controls.panSpeed = 0.8;
+				controls.enableZoom = false;
+				controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+				controls.dampingFactor = 0.25;
+				controls.screenSpacePanning = false;
+				controls.minDistance = 100;
+				controls.maxDistance = 500;
+				controls.maxPolarAngle = Math.PI / 2;
+
+				controls.target.set( 30, 167, 81 );
+				controls.update();			
+
+
+
+				//Scene
+				scene = new THREE.Scene();
+
+
+				//HemisphereLight
+				scene.add( new THREE.AmbientLight( 0x555555 ) );
+
+				light = new THREE.SpotLight( 0xffffff, 1.5 );
+				light.position.set( 0, 500, 2000 );
+				scene.add( light );
+
+
+
+				//WebGL Renderer	
+				renderer = new THREE.WebGLRenderer( { 
+										canvas   : document.getElementById( rendererCanvasID ), //canvas
+										alpha    : true, 
+										antialias: true 
+									} );
+				renderer.setSize( windowWidth, windowHeight );
+
+
+				// Immediately use the texture for material creation
+				// Create a texture loader so we can load our image file
+				var imgs = [
+					'https://placekitten.com/2100/2100',
+					'https://placekitten.com/2200/2200',
+					'https://placekitten.com/2300/2300',
+					'https://placekitten.com/2400/2400',
+					'https://placekitten.com/2500/2500',
+					'https://placekitten.com/2000/2000',
+					'https://placekitten.com/1600/1600',
+					'https://placekitten.com/1650/1650',
+					'https://placekitten.com/1670/1670',
+					'https://placekitten.com/1680/1680',
+					'https://placekitten.com/1700/1700'
+				];
+
+
+				//A loader for loading all images from array.
+				var loader = new THREE.TextureLoader();
+				loader.crossOrigin = 'anonymous';
+
+				//Preload
+				imgTotal = imgs.length;
+
+				var gap               = 100,
+					circumference         = (offsetWidth + gap) * imgTotal,  //get circumference from all images width
+					galleryRadius       = circumference / ( Math.PI * 2 ), // C = 2πr = Math.PI * 2 * radius
+					eachItemAngleToRad  = ( Math.PI * 2 ) / imgTotal; // 360° = 2π = Math.PI * 2
+
+				if ( camera.position.length() > galleryRadius ) {
+					camera.position.set( 0, 0, 0 );
+				}	
+
+
+				//Load images
+				imgs.forEach( function( element, index ) {
+					loadImage( loader, element, index, offsetWidth, offsetHeight, imgTotal, eachItemAngleToRad, galleryRadius, $( '#3D-gallery-three-canvas__loader' ) );
+				});
+
+
+				// Fires when the window changes
+				window.addEventListener( 'resize', onWindowResize, false );
+
+
+			}
+
+
+			function render() {
+				requestAnimationFrame( render );
+
+				theta += 0.1;
+
+
+				//To set a background color.
+				renderer.setClearColor( 0x000000 );	
+
+				// listen to scroll to update
+				var delta = scrollValue - lastScrollValue;
+				// threshold
+				if (delta > 60) {
+					delta = 60;
+				} else if(delta < -60) {
+					delta = -60;
+				}
+
+				camera.position.x = camera.position.x + delta;
+
+
+
+				//check all images loaded
+				if ( typeof allImages != typeof undefined ) {
+					if ( !imagesLoaded && allImages.length === imgTotal ) {
+						allImages.forEach( function (element ) {
+							scene.add( element );
+						});
+						imagesLoaded = true;
+
+					}		
+				}
+
+
+				//update camera and controls
+				controls.update();
+
+				renderer.render( scene, camera );
+
+
+			}
+
+
+			function onWindowResize() {
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+			}
+
+
+			// listen to scroll
+			window.addEventListener( 'scroll', function(e) {
+				lastScrollValue = scrollValue;
+				scrollValue = window.pageYOffset;
+
+				console.log( 'lastScrollValue: ' + lastScrollValue + ', scrollValue: ' + scrollValue );
+			});
+
+
+
+			/*
+			 * Load Image
+			 *
+			 * @param  {Object} imgLoader       - A loader for loading all images from array.
+			 * @param  {String} src             - URL of image.
+			 * @param  {Number} index           - Index of image.
+			 * @param  {Number} w               - The width of an image, in pixels. 
+			 * @param  {Number} h               - The height of an image, in pixels. 
+			 * @param  {Number} total           - Total number of preload images.
+			 * @param  {Number} itemRadAngle    - An equal radian angle of a sphere for each element.
+			 * @param  {Number} radius          - Radius length of the sphere (circumference).
+			 * @param  {Object} loading         - Progress bar display control.
+			 * @return {Void}
+			 */
+			function loadImage( imgLoader, src, index, w, h, total, itemRadAngle, radius, loading ) {
+
+				// load a resource
+				imgLoader.load(
+					// resource URL
+					src,
+
+					// onLoad callback
+					function ( texture ) {
+						// in this example we create the material when the texture is loaded
+						var material = new THREE.MeshBasicMaterial( {
+							map: texture
+						 } );
+
+						var geometry = new THREE.PlaneGeometry( w, h );
+						var displacementSprite = new THREE.Mesh( geometry, material );
+
+						//LinearFilter, which takes the four closest texels and bilinearly interpolates among them. 
+						displacementSprite.minFilter = THREE.LinearFilter;
+						displacementSprite.overdraw = true;
+
+						//Calculate the position of the image 
+						//X axis: a = sinA * c = Math.sin( rad ) * radius
+						//Z axis: b = cosA * c = Math.cos( rad ) * radius
+						displacementSprite.rotation.y = -index * itemRadAngle;
+						displacementSprite.position.set( radius * Math.sin(index * itemRadAngle), 0, -radius * Math.cos(index * itemRadAngle) );
+
+						allImages.push( displacementSprite );
+
+						//loading
+						TweenMax.to( loading, 0.5, {
+							width    : Math.round(100 * allImages.length / total ) + '%',
+							onComplete : function() {
+
+								if ( $( this.target ).width() >= windowWidth - 50 ) {
+
+									TweenMax.to( this.target, 0.5, {
+										alpha: 0
+									});	
+								}
+
+							}
+						});
+
+					},
+
+					// onProgress callback currently not supported
+					undefined,
+
+					// onError callback
+					function ( err ) {
+						console.error( 'An error happened.' );
+					}
+				);
+
+			}
+
+
+			// 
+			//-------------------------------------	
+			return {
+				init      : init,
+				render    : render,
+				getScene  : function () { return scene; },
+				getCamera : function () { return camera; } 
+			};
+
+
+		}();
+
+		MainStage.init();
+		MainStage.render();
+		
+		
+
+
+		
+    };
+
+    APP.components.documentReady.push( APP._3D_GALLERY.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+/* 
+ *************************************
+ * <!-- 3D Image Transition with three.js -->
+ *************************************
+ */
+/**
+ * APP._3D_IMAGE_TRANSITION
+ * @global
+ * @requires ./examples/assets/js/min/three.min.js
+ * @requires ./src/components/ES5/_plugins-THREE
+ */
+
+
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP._3D_IMAGE_TRANSITION               = APP._3D_IMAGE_TRANSITION || {};
+	APP._3D_IMAGE_TRANSITION.version       = '0.0.1';
+    APP._3D_IMAGE_TRANSITION.documentReady = function( $ ) {
+
+		//Prevent this module from loading in other pages
+		if ( $( '#3D-imagetransition-three-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
+		
+
+		var MainStage = function() {
+
+
+			var $window                   = $( window ),
+				windowWidth               = window.innerWidth,
+				windowHeight              = window.innerHeight,
+				rendererCanvasID          = '3D-imagetransition-three-canvas';
+
+
+			// Generate one plane geometries mesh to scene
+			//-------------------------------------	
+			var camera,
+				controls,
+				scene,
+				light,
+				renderer,
+				displacementSprite,
+				theta        = 0;
+
+
+			var vertex       = document.getElementById( 'vertexshader' ).textContent,
+				fragment     = document.getElementById( 'fragmentshader' ).textContent,
+				filterMaterial,
+				offsetWidth  = $( '#' + rendererCanvasID ).parent().width(),
+				offsetHeight = $( '#' + rendererCanvasID ).parent().width() * (550/1400);
+
+
+
+			function init() {
+				//camera
+				camera = new THREE.PerspectiveCamera( 75, windowWidth / windowHeight, 1, 10000 );
+				camera.position.set(0, 0, 1000);
+
+
+				//controls
+				controls = new THREE.OrbitControls( camera );
+				controls.autoRotate = false;
+				controls.autoRotateSpeed = 0.5;
+				controls.rotateSpeed = 0.5;
+				controls.zoomSpeed = 1.2;
+				controls.panSpeed = 0.8;
+				controls.enableZoom = false;
+				controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+				controls.dampingFactor = 0.25;
+				controls.screenSpacePanning = false;
+				controls.minDistance = 100;
+				controls.maxDistance = 500;
+				controls.maxPolarAngle = Math.PI / 2;
+
+				controls.target.set( 30, 167, 81 );
+				controls.update();			
+
+
+
+				//Scene
+				scene = new THREE.Scene();
+
+
+				//HemisphereLight
+				scene.add( new THREE.AmbientLight( 0x555555 ) );
+
+				light = new THREE.SpotLight( 0xffffff, 1.5 );
+				light.position.set( 0, 500, 2000 );
+				scene.add( light );
+
+
+
+				//WebGL Renderer	
+				renderer = new THREE.WebGLRenderer( { 
+										canvas   : document.getElementById( rendererCanvasID ), //canvas
+										alpha    : true, 
+										antialias: true 
+									} );
+				renderer.setSize( offsetWidth , offsetHeight );
+
+
+				// Immediately use the texture for material creation
+				// Create a texture loader so we can load our image file
+				var imgs = [
+					'https://placekitten.com/1400/550',
+					'https://placekitten.com/1410/550'
+				];
+
+				var loader = new THREE.TextureLoader();
+				loader.crossOrigin = 'anonymous';
+
+
+				var texture1     = loader.load( imgs[0] ),
+					texture2     = loader.load( imgs[1] ),
+					intensity    = 1,
+					dispImage    = $( '#' + rendererCanvasID ).data( 'filter-texture' ), //Load displacement image
+					disp         = loader.load( dispImage );
+
+				disp.wrapS = disp.wrapT = THREE.RepeatWrapping;
+
+				texture1.magFilter = texture2.magFilter = THREE.LinearFilter;
+				texture1.minFilter = texture2.minFilter = THREE.LinearFilter;
+
+				texture1.anisotropy = renderer.getMaxAnisotropy();
+				texture2.anisotropy = renderer.getMaxAnisotropy();
+
+
+				var geometry = new THREE.PlaneBufferGeometry(
+					offsetWidth,
+					offsetHeight,
+					1
+				);
+
+
+
+				filterMaterial = new THREE.ShaderMaterial({
+					uniforms: {
+						effectFactor: { type: "f", value: intensity },
+						dispFactor: { type: "f", value: 0.0 },
+						texture: { type: "t", value: texture1 },
+						texture2: { type: "t", value: texture2 },
+						disp: { type: "t", value: disp }
+					},
+
+					vertexShader: vertex,
+					fragmentShader: fragment,
+					transparent: true,
+					opacity: 1.0
+				});
+
+
+				displacementSprite = new THREE.Mesh( geometry, filterMaterial );
+				displacementSprite.position.set( 0, 0, 0 );
+				scene.add( displacementSprite );
+
+
+				// Fires when the window changes
+				window.addEventListener( 'resize', onWindowResize, false );
+
+
+				// When the mouse moves, call the given function
+				document.getElementById( rendererCanvasID ).addEventListener( 'mouseenter', onDocumentMouseEnter, false );
+				document.getElementById( rendererCanvasID ).addEventListener( 'mouseleave', onDocumentMouseLeave, false );
+
+
+
+			}
+
+
+			function render() {
+				requestAnimationFrame( render );
+
+				theta += 0.1;
+
+
+				//To set a background color.
+				//renderer.setClearColor( 0x000000 );	
+
+
+				//update camera and controls
+				controls.update();
+
+				renderer.render( scene, camera );
+
+
+
+			}
+
+
+			function onWindowResize() {
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+			}
+
+
+			function onDocumentMouseEnter( event ) {
+				TweenMax.to( filterMaterial.uniforms.dispFactor, 1.5, {
+					value: 1,
+					ease: Expo.easeOut
+				});	
+			}
+
+
+			function onDocumentMouseLeave( event ) {
+				TweenMax.to( filterMaterial.uniforms.dispFactor, 1, {
+					value: 0,
+					ease: Expo.easeOut
+				});	
+			}
+			// 
+			//-------------------------------------	
+			return {
+				init      : init,
+				render    : render,
+				getScene  : function () { return scene; },
+				getCamera : function () { return camera; } 
+			};
+
+
+		}();
+
+		MainStage.init();
+		MainStage.render();
+		
+		
+
+		
+    };
+
+    APP.components.documentReady.push( APP._3D_IMAGE_TRANSITION.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+
+
+
+
+/* 
+ *************************************
  * <!-- 3D Model -->
  *************************************
  */
@@ -31510,7 +33495,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP._3D_MODEL               = APP._3D_MODEL || {};
-	APP._3D_MODEL.version       = '0.0.1';
+	APP._3D_MODEL.version       = '0.0.2';
     APP._3D_MODEL.documentReady = function( $ ) {
 
 		
@@ -31518,241 +33503,262 @@ APP = ( function ( APP, $, window, document ) {
 		if ( $( '#3D-model-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
 		
 		
-		var $window                   = $( window ),
-			windowWidth               = window.innerWidth,
-			windowHeight              = window.innerHeight,
-			rendererCanvasID          = '3D-model-canvas';
-		
-	
+		var MainStage = function() {
 
-		
-		// Generate one plane geometries mesh to scene
-		//-------------------------------------	
-		var camera,
-			controls,
-			scene,
-			light,
-			renderer,
-			displacementSprite,
-			radius       = 100,
-			theta        = 0,
-			clickEnable   = false,
-			newCameraX   = 0,
-			newCameraY   = 0,
-			newCameraZ   = 0;
-		
-		var mouse = new THREE.Vector2(), 
-			INTERSECTED,
-			INTERSECTED_CLICK,
-			raycaster;
-		
-		init();
-		render();
-
-		function init() {
-			//camera
-			camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 1, 10000 );
-			camera.position.set(0, 0, -1000);
-			
-
-			
-			//controls
-			controls = new THREE.OrbitControls( camera );
-			controls.autoRotate = true;
-			controls.autoRotateSpeed = 0.5;
-			controls.rotateSpeed = 0.5;
-			controls.zoomSpeed = 1.2;
-			controls.panSpeed = 0.8;
-			controls.enableZoom = true;
-			controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-			controls.dampingFactor = 0.25;
-			controls.screenSpacePanning = false;
-			controls.minDistance = 100;
-			controls.maxDistance = 500;
-			controls.maxPolarAngle = Math.PI / 2;
-			
-			controls.target.set( 30, 167, 81 );
-			controls.update();			
+			var $window                   = $( window ),
+				windowWidth               = window.innerWidth,
+				windowHeight              = window.innerHeight,
+				rendererCanvasID          = '3D-model-canvas';
 
 
-			//Scene
-			scene = new THREE.Scene();
 
-			//HemisphereLight
-			scene.add( new THREE.AmbientLight( 0xcccccc, 0.4 ) );
 
-			light = new THREE.SpotLight( 0xffffff, 1.5 );
-			light.position.set( 0, 500, 2000 );
-			scene.add( light );
-			
-			
+			// Generate one plane geometries mesh to scene
+			//-------------------------------------	
+			var camera,
+				controls,
+				scene,
+				light,
+				renderer,
+				displacementSprite,
+				radius       = 100,
+				theta        = 0,
+				clickEnable   = false;
 
-			//WebGL Renderer	
-			renderer = new THREE.WebGLRenderer( { 
-									canvas   : document.getElementById( rendererCanvasID ), //canvas
-									alpha    : true, 
-									antialias: true 
-								} );
-			renderer.setSize( windowWidth, windowHeight );
+			var mouseVector = new THREE.Vector2(), 
+				INTERSECTED,
+				INTERSECTED_CLICK,
+				raycaster;
 
-			
-			// Immediately use the texture for material creation
-			var manager = new THREE.LoadingManager();
-			manager.onProgress = function ( item, loaded, total ) {
 
-				console.log( item, loaded, total );
 
+			function init() {
+				//camera
+				camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 1, 10000 );
+				camera.position.set(0, 0, -1000);
+
+
+
+				//controls
+				controls = new THREE.OrbitControls( camera );
+				controls.autoRotate = true;
+				controls.autoRotateSpeed = 0.5;
+				controls.rotateSpeed = 0.5;
+				controls.zoomSpeed = 1.2;
+				controls.panSpeed = 0.8;
+				controls.enableZoom = true;
+				controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+				controls.dampingFactor = 0.25;
+				controls.screenSpacePanning = false;
+				controls.minDistance = 100;
+				controls.maxDistance = 500;
+				controls.maxPolarAngle = Math.PI / 2;
+
+				controls.target.set( 30, 167, 81 );
+				controls.update();			
+
+
+				//Scene
+				scene = new THREE.Scene();
+
+				//HemisphereLight
+				scene.add( new THREE.AmbientLight( 0xcccccc, 0.4 ) );
+
+				light = new THREE.SpotLight( 0xffffff, 1.5 );
+				light.position.set( 0, 500, 2000 );
+				scene.add( light );
+
+
+
+				//WebGL Renderer	
+				renderer = new THREE.WebGLRenderer( { 
+										canvas   : document.getElementById( rendererCanvasID ), //canvas
+										alpha    : true, 
+										antialias: true 
+									} );
+				renderer.setSize( windowWidth, windowHeight );
+
+
+				// Immediately use the texture for material creation
+				var manager = new THREE.LoadingManager();
+				manager.onProgress = function ( item, loaded, total ) {
+
+					console.log( item, loaded, total );
+
+				};
+
+				var textureURL = ( typeof $( '#' + rendererCanvasID ).data( 'texture-src' ) != typeof undefined ) ? $( '#' + rendererCanvasID ).data( 'texture-src' ) : templateUrl + '/assets/models/obj/project.png';
+				var objURL = ( typeof $( '#' + rendererCanvasID ).data( 'model-src' ) != typeof undefined ) ? $( '#' + rendererCanvasID ).data( 'model-src' ) : templateUrl + '/assets/models/obj/project.obj';
+				
+				var textureLoader = new THREE.TextureLoader( manager ),
+					texture       = textureLoader.load( textureURL ),
+					onProgress    = function ( xhr ) {
+						if ( xhr.lengthComputable ) {
+							var percentComplete = xhr.loaded / xhr.total * 100;
+							console.log( Math.round(percentComplete, 2) + '% downloaded' );
+						}
+					},
+					onError       = function ( xhr ) { };
+
+
+				var loader        = new THREE.OBJLoader( manager );
+				loader.load( objURL, function ( object ) {
+
+					object.traverse( function ( child ) {
+
+						if ( child instanceof THREE.Mesh ) {
+
+							child.material.map = texture;
+
+						}
+
+					} );
+
+					object.scale.set( 165, 165, 165 );
+					object.position.y = 100;
+					scene.add( object );
+
+				}, onProgress, onError );
+
+
+
+
+				// Fires when the window changes
+				window.addEventListener( 'resize', onWindowResize, false );
+
+
+				// When the mouse moves, call the given function
+				raycaster = new THREE.Raycaster();
+				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+				document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+				document.addEventListener( 'mouseup', onDocumentMouseUp, false );
+
+
+
+			}
+
+			function render() {
+				requestAnimationFrame( render );
+
+				theta += 0.1;
+
+
+
+				//To set a background color.
+				//renderer.setClearColor( 0x000000 );	
+
+
+				//Mouse interactions
+				raycaster.setFromCamera( mouseVector, camera );
+				var intersects = raycaster.intersectObjects( scene.children );
+				if ( intersects.length > 0 ) {
+					if ( INTERSECTED != intersects[ 0 ].object ) {
+
+						if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+						INTERSECTED = intersects[ 0 ].object;
+						INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
+						INTERSECTED.material.emissive.setHex( 0xffcc00 );
+					}
+				} else {
+					if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+					INTERSECTED = null;
+				}
+
+
+				//update camera and controls
+				controls.update();
+
+
+				renderer.render( scene, camera );
+
+
+
+
+			}
+
+
+			function onWindowResize() {
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+			}
+
+
+			function onDocumentMouseMove( event ) {
+				event.preventDefault();
+				mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+				mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+			}
+
+
+			function onDocumentMouseDown( event ) {
+				event.preventDefault();
+				mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+				mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
+				clickEnable = true;
+
+				//Mouse interactions
+				raycaster.setFromCamera( mouseVector, camera );
+				var intersects = raycaster.intersectObjects( scene.children );
+				if ( intersects.length > 0 ) {
+					if ( INTERSECTED_CLICK != intersects[ 0 ].object ) {
+
+						INTERSECTED_CLICK = intersects[ 0 ].object;
+
+						TweenMax.to( INTERSECTED_CLICK.scale, 1, {
+							x: '+=' + ( 200 - INTERSECTED_CLICK.scale.x ) * 0.05,
+							y: '+=' + ( 200 - INTERSECTED_CLICK.scale.y ) * 0.05,
+							z: '+=' + ( 200 - INTERSECTED_CLICK.scale.z ) * 0.05
+						});	
+
+
+						INTERSECTED_CLICK.updateMatrix();	
+
+					}
+				} else {
+					INTERSECTED_CLICK = null;
+				}
+				/*
+				// Parse all the faces
+				for ( var i in intersects ) {
+
+					intersects[ i ].face.material[ 0 ].color.setHex( Math.random() * 0xffffff | 0x80000000 );
+
+				}
+				*/		
+
+
+
+
+			}
+			function onDocumentMouseUp( event ) {
+				event.preventDefault();
+				mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+				mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
+				theta = 0;
+				clickEnable = false;
+
+			}
+
+			// 
+			//-------------------------------------	
+			return {
+				init      : init,
+				render    : render,
+				getScene  : function () { return scene; },
+				getCamera : function () { return camera; } 
 			};
 
-			var textureLoader = new THREE.TextureLoader( manager ),
-				texture       = textureLoader.load( templateUrl + '/assets/models/obj/project.png' ),
-				onProgress    = function ( xhr ) {
-					if ( xhr.lengthComputable ) {
-						var percentComplete = xhr.loaded / xhr.total * 100;
-						console.log( Math.round(percentComplete, 2) + '% downloaded' );
-					}
-				},
-				onError       = function ( xhr ) { };
-			
-			
-			var loader        = new THREE.OBJLoader( manager );
-			loader.load( templateUrl + '/assets/models/obj/project.obj', function ( object ) {
 
-				object.traverse( function ( child ) {
+		}();
 
-					if ( child instanceof THREE.Mesh ) {
-
-						child.material.map = texture;
-
-					}
-
-				} );
-
-				object.scale.set( 165, 165, 165 );
-				object.position.y = 100;
-				scene.add( object );
-
-			}, onProgress, onError );
-
-			
-			
-
-			// Fires when the window changes
-			window.addEventListener( 'resize', onWindowResize, false );
-			
-			
-			// When the mouse moves, call the given function
-			raycaster = new THREE.Raycaster();
-			document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-			document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-			document.addEventListener( 'mouseup', onDocumentMouseUp, false );
-		
-			
-			
-		}
-
-		function render() {
-			requestAnimationFrame( render );
-			
-            theta += 0.1;
-			
-			
-		
-			//To set a background color.
-			//renderer.setClearColor( 0x000000 );	
-			
-			
-			//Mouse interactions
-			raycaster.setFromCamera( mouse, camera );
-			var intersects = raycaster.intersectObjects( scene.children );
-			if ( intersects.length > 0 ) {
-				if ( INTERSECTED != intersects[ 0 ].object ) {
-					
-					if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
-					INTERSECTED = intersects[ 0 ].object;
-					INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
-					INTERSECTED.material.emissive.setHex( 0xffcc00 );
-				}
-			} else {
-				if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
-				INTERSECTED = null;
-			}
-
-			controls.update();
-			
-			
-			renderer.render( scene, camera );
-			
-			
-
-			
-		}
-
-
-		function onWindowResize() {
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-			renderer.setSize( window.innerWidth, window.innerHeight );
-		}
-
-		
-		function onDocumentMouseMove( event ) {
-			event.preventDefault();
-			mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-			mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-		}
+		MainStage.init();
+		MainStage.render();
 		
 		
-		function onDocumentMouseDown( event ) {
-			event.preventDefault();
-			mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-			mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 
-			clickEnable = true;
-			
-			//Mouse interactions
-			raycaster.setFromCamera( mouse, camera );
-			var intersects = raycaster.intersectObjects( scene.children );
-			if ( intersects.length > 0 ) {
-				if ( INTERSECTED_CLICK != intersects[ 0 ].object ) {
-					
-					INTERSECTED_CLICK = intersects[ 0 ].object;
-					
-					TweenMax.to( INTERSECTED_CLICK.scale, 1, {
-						x: '+=' + ( 200 - INTERSECTED_CLICK.scale.x ) * 0.05,
-						y: '+=' + ( 200 - INTERSECTED_CLICK.scale.y ) * 0.05,
-						z: '+=' + ( 200 - INTERSECTED_CLICK.scale.z ) * 0.05
-					});	
-						
-					
-					INTERSECTED_CLICK.updateMatrix();	
-					
-				}
-			} else {
-				INTERSECTED_CLICK = null;
-			}
-			/*
-			// Parse all the faces
-			for ( var i in intersects ) {
-
-				intersects[ i ].face.material[ 0 ].color.setHex( Math.random() * 0xffffff | 0x80000000 );
-
-			}
-			*/		
-
-			
-			
-			
-		}
-		function onDocumentMouseUp( event ) {
-			event.preventDefault();
-			mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-			mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-			
-			theta = 0;
-			clickEnable = false;
-			
-		}
 			
 		
 
@@ -31790,111 +33796,129 @@ APP = ( function ( APP, $, window, document ) {
 		//Prevent this module from loading in other pages
 		if ( $( '#3D-renderer' ).length == 0 || ! Modernizr.webgl ) return false;
 		
+		var MainStage = function() {
+
+			var $window                   = $( window ),
+				windowWidth               = window.innerWidth,
+				windowHeight              = window.innerHeight,
+				viewRenderer              = '3D-renderer';
+
+
+			// Generate one plane geometries mesh to scene
+			//-------------------------------------	
+			var camera,
+				controls,
+				scene,
+				light,
+				renderer,
+				clock = new THREE.Clock();
+
+
+
+			function init() {
+				//camera
+				camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 1, 10000 );
+				camera.position.set(0, 0, -1000);
+
+				//controls
+				controls = new THREE.OrbitControls( camera );
+				controls.rotateSpeed = 0.5;
+				controls.zoomSpeed = 1.2;
+				controls.panSpeed = 0.8;
+				controls.enableZoom = true;
+				controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+				controls.dampingFactor = 0.25;
+				controls.screenSpacePanning = false;
+				controls.minDistance = 1000;
+				controls.maxDistance = 1500;
+				controls.maxPolarAngle = Math.PI / 2;
+
+				//Scene
+				scene = new THREE.Scene();
+
+				//HemisphereLight
+				light = new THREE.HemisphereLight( 0xffbf67, 0x15c6ff );
+				scene.add( light );
+
+				//WebGL Renderer
+				renderer = new THREE.WebGLRenderer( { 
+										alpha    : true, 
+										antialias: true 
+									} );
+				renderer.setClearColor( 0xffffff, 0 );
+				renderer.setSize( windowWidth - 50, windowHeight - 50 );
+				renderer.domElement.style.zIndex = 5;
+				document.getElementById( viewRenderer ).appendChild( renderer.domElement );
+
+
+				//Add HTML elements to scene
+				var target  = $( '#html3D-view' ).clone(),
+					pages   = target.find( '.html3D-view-content' );
+
+				pages.each( function() {
+					var el = new THREE.CSS3DObject( $.parseHTML( $( this )[0].outerHTML )[0] );
+
+					el.position.x = $( this ).data( 'position-x' ) || 0;
+					el.position.y = $( this ).data( 'position-y' ) || 0;
+					el.position.z = $( this ).data( 'position-z' ) || 0;
+					el.rotation.x = $( this ).data( 'rotation-x' ) || 0;
+					el.rotation.y = $( this ).data( 'rotation-y' ) || 3.14159265358979;
+					el.rotation.z = $( this ).data( 'rotation-z' ) || 0;
+
+					scene.add( el );
+				});
+
+
+
+
+				//CSS3D Renderer
+				renderer = new THREE.CSS3DRenderer();
+				renderer.setSize( windowWidth, windowHeight );
+				renderer.domElement.style.position = 'absolute';
+				renderer.domElement.style.top = 0;
+				document.getElementById( viewRenderer ).appendChild( renderer.domElement );
+
+				// Fires when the window changes
+				window.addEventListener( 'resize', onWindowResize, false );
+
+
+			}
+
+			function render() {
+				requestAnimationFrame( render );
+
+				var delta = clock.getDelta();
+
+				//update camera and controls
+				controls.update();
+
+				renderer.render( scene, camera );
+
+			}
+
+			function onWindowResize() {
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+			}
+
+
+			// 
+			//-------------------------------------	
+			return {
+				init      : init,
+				render    : render,
+				getScene  : function () { return scene; },
+				getCamera : function () { return camera; } 
+			};
+
+
+		}();
+
+		MainStage.init();
+		MainStage.render();
 		
 		
-		var $window                   = $( window ),
-			windowWidth               = window.innerWidth,
-			windowHeight              = window.innerHeight,
-			viewRenderer              = '3D-renderer';
-		
-		
-		// Generate one plane geometries mesh to scene
-		//-------------------------------------	
-		var camera,
-			controls,
-			scene,
-			light,
-			renderer,
-			clock = new THREE.Clock();
-
-		init();
-		render();
-
-		function init() {
-			//camera
-			camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 1, 10000 );
-			camera.position.set(0, 0, -1000);
-
-			//controls
-			controls = new THREE.OrbitControls( camera );
-			controls.rotateSpeed = 0.5;
-			controls.zoomSpeed = 1.2;
-			controls.panSpeed = 0.8;
-			controls.enableZoom = true;
-			controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-			controls.dampingFactor = 0.25;
-			controls.screenSpacePanning = false;
-			controls.minDistance = 1000;
-			controls.maxDistance = 1500;
-			controls.maxPolarAngle = Math.PI / 2;
-
-			//Scene
-			scene = new THREE.Scene();
-
-			//HemisphereLight
-			light = new THREE.HemisphereLight( 0xffbf67, 0x15c6ff );
-			scene.add( light );
-
-			//WebGL Renderer
-			renderer = new THREE.WebGLRenderer( { 
-									alpha    : true, 
-									antialias: true 
-								} );
-			renderer.setClearColor( 0xffffff, 0 );
-			renderer.setSize( windowWidth - 50, windowHeight - 50 );
-			renderer.domElement.style.zIndex = 5;
-			document.getElementById( viewRenderer ).appendChild( renderer.domElement );
-
-			
-			//Add HTML elements to scene
-			var target  = $( '#html3D-view' ).clone(),
-				pages   = target.find( '.html3D-view-content' );
-
-			pages.each( function() {
-				var el = new THREE.CSS3DObject( $.parseHTML( $( this )[0].outerHTML )[0] );
-
-				el.position.x = $( this ).data( 'position-x' ) || 0;
-				el.position.y = $( this ).data( 'position-y' ) || 0;
-				el.position.z = $( this ).data( 'position-z' ) || 0;
-				el.rotation.x = $( this ).data( 'rotation-x' ) || 0;
-				el.rotation.y = $( this ).data( 'rotation-y' ) || 3.14159265358979;
-				el.rotation.z = $( this ).data( 'rotation-z' ) || 0;
-
-				scene.add( el );
-			});
-			
-
-			
-			
-			//CSS3D Renderer
-			renderer = new THREE.CSS3DRenderer();
-			renderer.setSize( windowWidth, windowHeight );
-			renderer.domElement.style.position = 'absolute';
-			renderer.domElement.style.top = 0;
-			document.getElementById( viewRenderer ).appendChild( renderer.domElement );
-
-			// Fires when the window changes
-			window.addEventListener( 'resize', onWindowResize, false );
-			
-			
-		}
-
-		function render() {
-			requestAnimationFrame( render );
-
-            var delta = clock.getDelta();
-			
-			controls.update();
-			
-			renderer.render( scene, camera );
-			
-		}
-		
-		function onWindowResize() {
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-			renderer.setSize( window.innerWidth, window.innerHeight );
-		}
 
 
 		
@@ -31931,340 +33955,357 @@ APP = ( function ( APP, $, window, document ) {
 		//Prevent this module from loading in other pages
 		if ( $( '#3D-particle-effect-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
 		
-		var $window                   = $( window ),
-			windowWidth               = window.innerWidth,
-			windowHeight              = window.innerHeight,
-			rendererCanvasID          = '3D-particle-effect-canvas';
-		
-		var renderer, 
-			texture, 
-			scene, 
-			camera,
-			particles,
-			imagedata,
-			clock        = new THREE.Clock(),
-			mouseX       = 0, 
-			mouseY       = 0,
-			isMouseDown  = true,
-			lastMousePos = {x: 0, y: 0},
-			windowHalfX  = windowWidth / 2,
-			windowHalfY  = windowHeight / 2;
-
 		
 		
-		
-		//particle rotation
-		var particleRotation;
-
-		var centerVector = new THREE.Vector3(0, 0, 0);
-		var previousTime = 0;
+		var MainStage = function() {
 
 
-		
-		init();
-		render();
-		
-		
-		
+			var $window                   = $( window ),
+				windowWidth               = window.innerWidth,
+				windowHeight              = window.innerHeight,
+				rendererCanvasID          = '3D-particle-effect-canvas';
 
-		function init() {
-			
-			//@https://github.com/mrdoob/three.js/blob/dev/src/extras/ImageUtils.js#L21
-			THREE.ImageUtils.crossOrigin = '';
-			
-			//WebGL Renderer		
-			renderer = new THREE.WebGLRenderer( { 
-									canvas   : document.getElementById( rendererCanvasID ), //canvas
-									alpha    : true, 
-									antialias: true 
-								} );
+			var renderer, 
+				texture, 
+				scene, 
+				camera,
+				particles,
+				imagedata,
+				clock        = new THREE.Clock(),
+				mouseX       = 0, 
+				mouseY       = 0,
+				isMouseDown  = true,
+				lastMousePos = {x: 0, y: 0},
+				windowHalfX  = windowWidth / 2,
+				windowHalfY  = windowHeight / 2;
 
-			
-			renderer.setSize(windowWidth, windowHeight);
 
-			
-		
-			
-			//Scene
-			scene = new THREE.Scene();
 
-			//camera
-			camera = new THREE.PerspectiveCamera(50, windowWidth / windowHeight, 0.1, 10000);
-			camera.position.set(-100, 0, 600);
-			camera.lookAt( centerVector );
-			scene.add( camera );
 
-			
-			// instantiate a loader
-			var loader = new THREE.TextureLoader();
+			//particle rotation
+			var particleRotation;
 
-			// load a resource
-			loader.load(
-				// resource URL
-				$( '#' + rendererCanvasID ).data( 'img-src' ),
+			var centerVector = new THREE.Vector3(0, 0, 0);
+			var previousTime = 0;
 
-				// onLoad callback
-				function ( texture ) {
-					// in this example we create the material when the texture is loaded
-					// Get data from an image
-					imagedata = getImageData( texture.image );
 
-					// Immediately use the texture for material creation
-					var geometry = new THREE.Geometry();
-					var material = new THREE.PointsMaterial({
-						size: 3,
-						color: 0xffffff,
-						sizeAttenuation: false
-					});
-					
-					
-					
-					for (var y = 0, y2 = imagedata.height; y < y2; y += 2) {
-				
-						for (var x = 0, x2 = imagedata.width; x < x2; x += 2) {
-							
-							if ( imagedata.data[(x * 4 + y * 4 * imagedata.width) + 3] > 128 ) {
 
-						
-								// The array of vertices holds the position of every vertex in the model.
-								var vertex = new THREE.Vector3();
-								
-								
-								vertex.x = Math.random() * 1000 - 500;
-								vertex.y = Math.random() * 1000 - 500;
-								vertex.z = -Math.random() * 500;
+			function init() {
 
-								vertex.destination = {
-									x: x - imagedata.width / 2,
-									y: -y + imagedata.height / 2,
-									z: 0
-								};
+				//@https://github.com/mrdoob/three.js/blob/dev/src/extras/ImageUtils.js#L21
+				THREE.ImageUtils.crossOrigin = '';
 
-								vertex.speed = Math.random() / 200 + 0.015;
+				//WebGL Renderer		
+				renderer = new THREE.WebGLRenderer( { 
+										canvas   : document.getElementById( rendererCanvasID ), //canvas
+										alpha    : true, 
+										antialias: true 
+									} );
 
-								geometry.vertices.push( vertex );
-								
 
+				renderer.setSize(windowWidth, windowHeight);
+
+
+
+
+				//Scene
+				scene = new THREE.Scene();
+
+				//camera
+				camera = new THREE.PerspectiveCamera(50, windowWidth / windowHeight, 0.1, 10000);
+				camera.position.set(-100, 0, 600);
+				camera.lookAt( centerVector );
+				scene.add( camera );
+
+
+				// instantiate a loader
+				var loader = new THREE.TextureLoader();
+
+				// load a resource
+				loader.load(
+					// resource URL
+					$( '#' + rendererCanvasID ).data( 'img-src' ),
+
+					// onLoad callback
+					function ( texture ) {
+						// in this example we create the material when the texture is loaded
+						// Get data from an image
+						imagedata = getImageData( texture.image );
+
+						// Immediately use the texture for material creation
+						var geometry = new THREE.Geometry();
+						var material = new THREE.PointsMaterial({
+							size: 3,
+							color: 0xffffff,
+							sizeAttenuation: false
+						});
+
+
+
+						for (var y = 0, y2 = imagedata.height; y < y2; y += 2) {
+
+							for (var x = 0, x2 = imagedata.width; x < x2; x += 2) {
+
+								if ( imagedata.data[(x * 4 + y * 4 * imagedata.width) + 3] > 128 ) {
+
+
+									// The array of vertices holds the position of every vertex in the model.
+									var vertex = new THREE.Vector3();
+
+
+									vertex.x = Math.random() * 1000 - 500;
+									vertex.y = Math.random() * 1000 - 500;
+									vertex.z = -Math.random() * 500;
+
+									vertex.destination = {
+										x: x - imagedata.width / 2,
+										y: -y + imagedata.height / 2,
+										z: 0
+									};
+
+									vertex.speed = Math.random() / 200 + 0.015;
+
+									geometry.vertices.push( vertex );
+
+
+								}
 							}
 						}
+						particles = new THREE.Points( geometry, material );
+
+						scene.add( particles );
+
+
+
+
+					},
+
+					// onProgress callback currently not supported
+					undefined,
+
+					// onError callback
+					function ( err ) {
+						console.error( 'An error happened.' );
 					}
-					particles = new THREE.Points( geometry, material );
+				);
 
-					scene.add( particles );
 
-					
-					
-					
-				},
 
-				// onProgress callback currently not supported
-				undefined,
+				// add particle rotation
+				particleRotation = new THREE.Object3D();
+				scene.add( particleRotation );
+				var geometryPR = new THREE.TetrahedronGeometry(2, 0),
+					materialPR = new THREE.MeshPhongMaterial({
+					color: 0xffffff,
+					flatShading: THREE.FlatShading
+				});
 
-				// onError callback
-				function ( err ) {
-					console.error( 'An error happened.' );
-				}
-			);
-			
-			
-			
-			// add particle rotation
-			particleRotation = new THREE.Object3D();
-			scene.add( particleRotation );
-			var geometryPR = new THREE.TetrahedronGeometry(2, 0),
-				materialPR = new THREE.MeshPhongMaterial({
-				color: 0xffffff,
-				shading: THREE.FlatShading
-			});
-
-			for (var i = 0; i < 1000; i++) {
-				var mesh = new THREE.Mesh( geometryPR, materialPR );
-				mesh.position.set(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize();
-				mesh.position.multiplyScalar(90 + (Math.random() * 700));
-				mesh.rotation.set(Math.random() * 2, Math.random() * 2, Math.random() * 2);
-				particleRotation.add(mesh);
-			}
-			
-			var ambientLight = new THREE.AmbientLight(0x999999 );
-			scene.add(ambientLight);
-
-			var lights = [];
-			lights[0] = new THREE.DirectionalLight( 0xffffff, 1 );
-			lights[0].position.set( 1, 0, 0 );
-			lights[1] = new THREE.DirectionalLight( 0x11E8BB, 1 );
-			lights[1].position.set( 0.75, 1, 0.5 );
-			lights[2] = new THREE.DirectionalLight( 0x8200C9, 1 );
-			lights[2].position.set( -0.75, -1, 0.5 );
-			scene.add( lights[0] );
-			scene.add( lights[1] );
-			scene.add( lights[2] );
-			
-			
-			
-
-			//----
-			document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-			document.addEventListener( 'touchstart', onDocumentTouchStart, false );
-			document.addEventListener( 'touchmove', onDocumentTouchMove, false );
-			
-			document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-			document.addEventListener( 'mouseup', onDocumentMouseUp, false );
-			
-			
-			
-			// Fires when the window changes
-			window.addEventListener( 'resize', onWindowResize, false );	
-		}
-		
-		
-		
-		
-		
-		function render() {
-			requestAnimationFrame( render );
-			
-            var delta      = clock.getDelta(),
-				thickness = 40;
-			
-		
-			//Need to add judgment to avoid Cannot read property 'geometry' of undefined
-			if ( typeof particles != typeof undefined ) {
-				
-				for (var i = 0, j = particles.geometry.vertices.length; i < j; i++) {
-					var particle = particles.geometry.vertices[i];
-					particle.x += (particle.destination.x - particle.x) * particle.speed;
-					particle.y += (particle.destination.y - particle.y) * particle.speed;
-					particle.z += (particle.destination.z - particle.z) * particle.speed;
+				for (var i = 0; i < 1000; i++) {
+					var mesh = new THREE.Mesh( geometryPR, materialPR );
+					mesh.position.set(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize();
+					mesh.position.multiplyScalar(90 + (Math.random() * 700));
+					mesh.rotation.set(Math.random() * 2, Math.random() * 2, Math.random() * 2);
+					particleRotation.add(mesh);
 				}
 
-				
-				if ( delta - previousTime > thickness ) {
-					var index     = Math.floor(Math.random()*particles.geometry.vertices.length);
-					var particle1 = particles.geometry.vertices[index];
-					var particle2 = particles.geometry.vertices[particles.geometry.vertices.length-index];
-					
-					TweenMax.to( particle, Math.random()*2+1, {
-									x:    particle2.x, 
-									y:    particle2.y, 
-									ease: Power2.easeInOut
-								});
-					
-					
-					
-					TweenMax.to( particle2, Math.random()*2+1, {
-									x:    particle1.x, 
-									y:    particle1.y, 
-									ease: Power2.easeInOut
-								});
-					
-					previousTime = delta;
+				var ambientLight = new THREE.AmbientLight(0x999999 );
+				scene.add(ambientLight);
+
+				var lights = [];
+				lights[0] = new THREE.DirectionalLight( 0xffffff, 1 );
+				lights[0].position.set( 1, 0, 0 );
+				lights[1] = new THREE.DirectionalLight( 0x11E8BB, 1 );
+				lights[1].position.set( 0.75, 1, 0.5 );
+				lights[2] = new THREE.DirectionalLight( 0x8200C9, 1 );
+				lights[2].position.set( -0.75, -1, 0.5 );
+				scene.add( lights[0] );
+				scene.add( lights[1] );
+				scene.add( lights[2] );
+
+
+
+
+				//----
+				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+				document.addEventListener( 'touchstart', onDocumentTouchStart, false );
+				document.addEventListener( 'touchmove', onDocumentTouchMove, false );
+
+				document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+				document.addEventListener( 'mouseup', onDocumentMouseUp, false );
+
+
+
+				// Fires when the window changes
+				window.addEventListener( 'resize', onWindowResize, false );	
+			}
+
+
+
+
+
+			function render() {
+				requestAnimationFrame( render );
+
+				var delta      = clock.getDelta(),
+					thickness = 40;
+
+
+				//Need to add judgment to avoid Cannot read property 'geometry' of undefined
+				if ( typeof particles != typeof undefined ) {
+
+					for (var i = 0, j = particles.geometry.vertices.length; i < j; i++) {
+						var particle = particles.geometry.vertices[i];
+						particle.x += (particle.destination.x - particle.x) * particle.speed;
+						particle.y += (particle.destination.y - particle.y) * particle.speed;
+						particle.z += (particle.destination.z - particle.z) * particle.speed;
+					}
+
+
+					if ( delta - previousTime > thickness ) {
+						var index     = Math.floor(Math.random()*particles.geometry.vertices.length);
+						var particle1 = particles.geometry.vertices[index];
+						var particle2 = particles.geometry.vertices[particles.geometry.vertices.length-index];
+
+						TweenMax.to( particle, Math.random()*2+1, {
+										x:    particle2.x, 
+										y:    particle2.y, 
+										ease: Power2.easeInOut
+									});
+
+
+
+						TweenMax.to( particle2, Math.random()*2+1, {
+										x:    particle1.x, 
+										y:    particle1.y, 
+										ease: Power2.easeInOut
+									});
+
+						previousTime = delta;
+					}
+
+
+					particles.geometry.verticesNeedUpdate = true;	
 				}
 
-				
-				particles.geometry.verticesNeedUpdate = true;	
-			}
-			
-			
-			if( ! isMouseDown ) {
-				camera.position.x += (0-camera.position.x)*0.06;
-				camera.position.y += (0-camera.position.y)*0.06;
-			}
-			
 
-			camera.position.x += ( mouseX - camera.position.x ) * 0.09;
-			camera.position.y += ( - mouseY - camera.position.y ) * 0.09;
-			camera.lookAt( centerVector );
-			
-			
-			//particle rotation
-			particleRotation.rotation.x += 0.0000;
-			particleRotation.rotation.y -= 0.0040;
+				if( ! isMouseDown ) {
+					camera.position.x += (0-camera.position.x)*0.06;
+					camera.position.y += (0-camera.position.y)*0.06;
+				}
 
-			
-			renderer.render( scene, camera );
-			
-		}
-		
-		
 
-		function onWindowResize() {
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-			renderer.setSize( window.innerWidth, window.innerHeight );
-		}
-		
-		
-		function onDocumentMouseMove( event ) {
-
-			mouseX = event.clientX - windowHalfX;
-			mouseY = event.clientY - windowHalfY;
-
-			if( isMouseDown ) {
-				camera.position.x += (event.clientX-lastMousePos.x)/100;
-				camera.position.y -= (event.clientY-lastMousePos.y)/100;
+				camera.position.x += ( mouseX - camera.position.x ) * 0.09;
+				camera.position.y += ( - mouseY - camera.position.y ) * 0.09;
 				camera.lookAt( centerVector );
+
+
+				//particle rotation
+				particleRotation.rotation.x += 0.0000;
+				particleRotation.rotation.y -= 0.0040;
+
+
+				renderer.render( scene, camera );
+
+			}
+
+
+
+			function onWindowResize() {
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+			}
+
+
+			function onDocumentMouseMove( event ) {
+
+				mouseX = event.clientX - windowHalfX;
+				mouseY = event.clientY - windowHalfY;
+
+				if( isMouseDown ) {
+					camera.position.x += (event.clientX-lastMousePos.x)/100;
+					camera.position.y -= (event.clientY-lastMousePos.y)/100;
+					camera.lookAt( centerVector );
+					lastMousePos = {x: event.clientX, y: event.clientY};
+				}
+
+
+			}
+
+
+			function onDocumentTouchStart( event ) {
+
+				if ( event.touches.length == 1 ) {
+
+					event.preventDefault();
+
+					mouseX = event.touches[ 0 ].pageX - windowHalfX;
+					mouseY = event.touches[ 0 ].pageY - windowHalfY;
+				}
+			}
+
+			function onDocumentTouchMove( event ) {
+
+				if ( event.touches.length == 1 ) {
+
+					event.preventDefault();
+
+					mouseX = event.touches[ 0 ].pageX - windowHalfX;
+					mouseY = event.touches[ 0 ].pageY - windowHalfY;
+
+				}
+			}
+
+
+			function onDocumentMouseUp() {
+				isMouseDown = false;
+			}
+
+			function onDocumentMouseDown( event ) {
+				isMouseDown = true;
 				lastMousePos = {x: event.clientX, y: event.clientY};
-			}
-			
-			
-		}
 
-		
-		function onDocumentTouchStart( event ) {
-
-			if ( event.touches.length == 1 ) {
-
-				event.preventDefault();
-
-				mouseX = event.touches[ 0 ].pageX - windowHalfX;
-				mouseY = event.touches[ 0 ].pageY - windowHalfY;
-			}
-		}
-
-		function onDocumentTouchMove( event ) {
-
-			if ( event.touches.length == 1 ) {
-
-				event.preventDefault();
-
-				mouseX = event.touches[ 0 ].pageX - windowHalfX;
-				mouseY = event.touches[ 0 ].pageY - windowHalfY;
 
 			}
-		}
+
+
+
+			/*
+			 * Get Image Data when Draw Image To Canvas
+			 *
+			 * @param  {Object} image         - Overridden with a record type holding data, width and height.
+			 * @return {JSON}                 - The image data.
+			 */
+			function getImageData( image ) {
+
+				var canvas = document.createElement( 'canvas' );
+				canvas.width = image.width;
+				canvas.height = image.height;
+
+				var ctx = canvas.getContext( '2d' );
+				ctx.drawImage(image, 0, 0);
+
+				return ctx.getImageData(0, 0, image.width, image.height);
+			}
+
+
+
+			// 
+			//-------------------------------------	
+			return {
+				init      : init,
+				render    : render,
+				getScene  : function () { return scene; },
+				getCamera : function () { return camera; } 
+			};
+
+
+		}();
+
+		MainStage.init();
+		MainStage.render();
 		
-
-		function onDocumentMouseUp() {
-			isMouseDown = false;
-		}
 		
-		function onDocumentMouseDown( event ) {
-			isMouseDown = true;
-			lastMousePos = {x: event.clientX, y: event.clientY};
-			
-			
-		}
-	
-
-		
-		/*
-		 * Get Image Data when Draw Image To Canvas
-		 *
-		 * @param  {Object} image         - Overridden with a record type holding data, width and height.
-		 * @return {JSON}                 - The image data.
-		 */
-		function getImageData( image ) {
-
-			var canvas = document.createElement( 'canvas' );
-			canvas.width = image.width;
-			canvas.height = image.height;
-
-			var ctx = canvas.getContext( '2d' );
-			ctx.drawImage(image, 0, 0);
-
-			return ctx.getImageData(0, 0, image.width, image.height);
-		}
-
 
 		
 		
@@ -32301,119 +34342,141 @@ APP = ( function ( APP, $, window, document ) {
 		if ( $( '#3D-sphere-three-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
 		
 		
-		var $window                   = $( window ),
-			windowWidth               = window.innerWidth,
-			windowHeight              = window.innerHeight,
-			rendererCanvasID          = '3D-sphere-three-canvas';
+		var MainStage = function() {
+
+			var $window                   = $( window ),
+				windowWidth               = window.innerWidth,
+				windowHeight              = window.innerHeight,
+				rendererCanvasID          = '3D-sphere-three-canvas';
+
+
+
+
+			// Generate one plane geometries mesh to scene
+			//-------------------------------------	
+			var camera,
+				controls,
+				scene,
+				light,
+				renderer,
+				displacementSprite;
+
+			function init() {
+				// camera
+				camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 100 );
+				camera.position.set( 0, -46, 18 );
+
+				// controls
+				controls = new THREE.OrbitControls( camera );
+				controls.minDistance = 10;
+				controls.maxDistance = 50;
+
+				//Scene
+				scene = new THREE.Scene();
+
+				//HemisphereLight
+				scene.add( new THREE.AmbientLight( 0x555555 ) );
+
+				light = new THREE.SpotLight( 0xffffff, 1.5 );
+				light.position.set( 0, 500, 2000 );
+				scene.add( light );
+
+
+
+				//WebGL Renderer		
+				renderer = new THREE.WebGLRenderer( { 
+										canvas   : document.getElementById( rendererCanvasID ), //canvas
+										alpha    : true, 
+										antialias: true 
+									} );
+				renderer.setSize( windowWidth, windowHeight );
+
+
+				// axes
+				//scene.add( new THREE.AxisHelper( 20 ) );
+
+				// geometry
+				var geometry = new THREE.SphereGeometry( 3, 32, 32 );
+
+				// material, we create the material when the texture is loaded
+				var loader = new THREE.TextureLoader();
+				loader.crossOrigin = 'anonymous';
+
+				var texture = loader.load( 'https://placekitten.com/1650/1650' ),
+					material = new THREE.MeshBasicMaterial( { map: texture } );
+
+				// parent
+				displacementSprite = new THREE.Object3D();
+				scene.add( displacementSprite );
+
+				// pivots
+				var pivot1 = new THREE.Object3D(),
+					pivot2 = new THREE.Object3D(),
+					pivot3 = new THREE.Object3D();
+
+				pivot1.rotation.z = 0;
+				pivot2.rotation.z = 2 * Math.PI / 3;
+				pivot3.rotation.z = 4 * Math.PI / 3;
+				displacementSprite.add( pivot1 );
+				displacementSprite.add( pivot2 );
+				displacementSprite.add( pivot3 );
+
+				// mesh
+				var mesh1 = new THREE.Mesh( geometry, material ),
+					mesh2 = new THREE.Mesh( geometry, material ),
+					mesh3 = new THREE.Mesh( geometry, material );
+
+				mesh1.position.y = 5;
+				mesh2.position.y = 15;
+				mesh3.position.y = 25;
+				pivot1.add( mesh1 );
+				pivot2.add( mesh2 );
+				pivot3.add( mesh3 );
+
+
+				// Fires when the window changes
+				window.addEventListener( 'resize', onWindowResize, false );
+
+
+			}
+
+			function render() {
+				requestAnimationFrame( render );
+
+				displacementSprite.rotation.z += 0.01;
+
+
+				//update camera and controls
+				controls.update();
+
+				renderer.render( scene, camera );
+
+			}
+
+
+			function onWindowResize() {
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+			}
+
+
+			// 
+			//-------------------------------------	
+			return {
+				init      : init,
+				render    : render,
+				getScene  : function () { return scene; },
+				getCamera : function () { return camera; } 
+			};
+
+
+		}();
+
+		MainStage.init();
+		MainStage.render();
 		
-	
-
 		
-		// Generate one plane geometries mesh to scene
-		//-------------------------------------	
-		var camera,
-			controls,
-			scene,
-			light,
-			renderer,
-			displacementSprite;
-
-		
-		init();
-		render();
-
-		function init() {
-			// camera
-			camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 100 );
-			camera.position.set( 0, -46, 18 );
-
-			// controls
-			controls = new THREE.OrbitControls( camera );
-			controls.minDistance = 10;
-			controls.maxDistance = 50;
-
-			//Scene
-			scene = new THREE.Scene();
-
-			//HemisphereLight
-			scene.add( new THREE.AmbientLight( 0x555555 ) );
-
-			light = new THREE.SpotLight( 0xffffff, 1.5 );
-			light.position.set( 0, 500, 2000 );
-			scene.add( light );
-			
-			
-
-			//WebGL Renderer		
-			renderer = new THREE.WebGLRenderer( { 
-									canvas   : document.getElementById( rendererCanvasID ), //canvas
-									alpha    : true, 
-									antialias: true 
-								} );
-			renderer.setSize( windowWidth, windowHeight );
-
-			
-			// axes
-			//scene.add( new THREE.AxisHelper( 20 ) );
-
-			// geometry
-			var geometry = new THREE.SphereGeometry( 3, 32, 32 );
-
-			// material, we create the material when the texture is loaded
-			var texture = new THREE.TextureLoader().load( templateUrl + '/assets/images/demo/test-img-big-1.jpg' ),
-				material = new THREE.MeshBasicMaterial( { map: texture } );
-
-			// parent
-			displacementSprite = new THREE.Object3D();
-			scene.add( displacementSprite );
-
-			// pivots
-			var pivot1 = new THREE.Object3D(),
-				pivot2 = new THREE.Object3D(),
-				pivot3 = new THREE.Object3D();
-			
-			pivot1.rotation.z = 0;
-			pivot2.rotation.z = 2 * Math.PI / 3;
-			pivot3.rotation.z = 4 * Math.PI / 3;
-			displacementSprite.add( pivot1 );
-			displacementSprite.add( pivot2 );
-			displacementSprite.add( pivot3 );
-
-			// mesh
-			var mesh1 = new THREE.Mesh( geometry, material ),
-				mesh2 = new THREE.Mesh( geometry, material ),
-				mesh3 = new THREE.Mesh( geometry, material );
-			
-			mesh1.position.y = 5;
-			mesh2.position.y = 15;
-			mesh3.position.y = 25;
-			pivot1.add( mesh1 );
-			pivot2.add( mesh2 );
-			pivot3.add( mesh3 );
-			
-			
-			// Fires when the window changes
-			window.addEventListener( 'resize', onWindowResize, false );
-			
-			
-		}
-
-		function render() {
-			requestAnimationFrame( render );
-			
-			displacementSprite.rotation.z += 0.01;
-			controls.update();
-			
-			renderer.render( scene, camera );
-			
-		}
-
-
-		function onWindowResize() {
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-			renderer.setSize( window.innerWidth, window.innerHeight );
-		}
 
 
 		
@@ -32456,225 +34519,238 @@ APP = ( function ( APP, $, window, document ) {
 		if ( $( '#3D-object-buttonevent-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
 		
 		
-		var $window                   = $( window ),
-			windowWidth               = window.innerWidth,
-			windowHeight              = window.innerHeight,
-			rendererCanvasID          = '3D-object-buttonevent-canvas';
-		
-
-		var renderer, 
-			scene, 
-			controls, 
-			camera, 
-			targetObj, 
-			parent, 
-			material,
-			segLength;
-		
-		
-		var radius = 3,
-			height = 6,
-			segments = 200; //segments must be even
-
-	
-		init();
-		render();
-		
-
-		function init() {
-
-			// Create a camera, which defines where we're looking at.		
-			renderer = new THREE.WebGLRenderer( { 
-									canvas   : document.getElementById( rendererCanvasID ), //canvas
-									alpha    : true, 
-									antialias: true 
-								} );
-			renderer.setSize( windowWidth, windowHeight );
+		var MainStage = function() {
 
 
-			//Scene
-			scene = new THREE.Scene();
+			var $window                   = $( window ),
+				windowWidth               = window.innerWidth,
+				windowHeight              = window.innerHeight,
+				rendererCanvasID          = '3D-object-buttonevent-canvas';
 
 
-			//camera
-			camera = new THREE.PerspectiveCamera(70, windowWidth / windowHeight, 1, 100);
-			camera.position.set(1, 1, 22);
+			var renderer, 
+				scene, 
+				controls, 
+				camera, 
+				targetObj, 
+				parent, 
+				material,
+				segLength;
 
-			//controls
-			controls = new THREE.OrbitControls(camera, renderer.domElement);
-			controls.addEventListener('change', function() {
+
+			var radius = 3,
+				height = 6,
+				segments = 200; //segments must be even
+
+
+			function init() {
+
+				// Create a camera, which defines where we're looking at.		
+				renderer = new THREE.WebGLRenderer( { 
+										canvas   : document.getElementById( rendererCanvasID ), //canvas
+										alpha    : true, 
+										antialias: true 
+									} );
+				renderer.setSize( windowWidth, windowHeight );
+
+
+				//Scene
+				scene = new THREE.Scene();
+
+
+				//camera
+				camera = new THREE.PerspectiveCamera(70, windowWidth / windowHeight, 1, 100);
+				camera.position.set(1, 1, 22);
+
+				//controls
+				controls = new THREE.OrbitControls(camera, renderer.domElement);
+				controls.addEventListener('change', function() {
+					renderer.render(scene, camera);
+				}, false);
+				controls.enableZoom = false;
+				controls.enablePan = false;
+
+
+
+				// Immediately use the texture for material creation
+				material = new THREE.MeshPhongMaterial({
+					color: 0xEB6D35,
+					specular: 0xEB6D35,
+					shininess: 15,
+					flatShading: THREE.FlatShading,
+					side: THREE.DoubleSide,
+					transparent: true,
+					opacity: .8
+				});
+
+
+				//HemisphereLight
+				var light1 = new THREE.DirectionalLight(0xffffff);
+				light1.position.set(-5, 10, 10);
+				var light2 = new THREE.PointLight(0xffffff, .7, 0);
+				light2.position.set(5, 5, -5);
+
+				scene.add(light1, light2);
+
+				//put the target object inside a parent object so the manipulation is easier
+				parent = new THREE.Object3D();
+
+
+				addObject();
+
+				parent.position.set(-radius, height / 2, 0);
+				parent.rotation.y = Math.PI;
+				scene.add(parent);
+
+
 				renderer.render(scene, camera);
-			}, false);
-			controls.enableZoom = false;
-			controls.enablePan = false;
-
-
-			
-			// Immediately use the texture for material creation
-			material = new THREE.MeshPhongMaterial({
-				color: 0xEB6D35,
-				specular: 0xEB6D35,
-				shininess: 15,
-				flatShading: THREE.FlatShading,
-				side: THREE.DoubleSide,
-				transparent: true,
-				opacity: .8
-			});
-
-
-			//HemisphereLight
-			var light1 = new THREE.DirectionalLight(0xffffff);
-			light1.position.set(-5, 10, 10);
-			var light2 = new THREE.PointLight(0xffffff, .7, 0);
-			light2.position.set(5, 5, -5);
-
-			scene.add(light1, light2);
-
-			//put the target object inside a parent object so the manipulation is easier
-			parent = new THREE.Object3D();
-
-			
-			addObject();
-
-			parent.position.set(-radius, height / 2, 0);
-			parent.rotation.y = Math.PI;
-			scene.add(parent);
-
-
-			renderer.render(scene, camera);
-		}
-
-		
-		
-
-
-		function addObject() {
-			var geo = new THREE.Geometry();
-			segLength = Math.PI * 2 * radius / segments;
-			geo.vertices.push(new THREE.Vector3(0, height / 2, 0));
-			geo.vertices.push(new THREE.Vector3(0, -height / 2, 0));
-			for (var i = 0; i < Math.floor(segments / 2); i++) {
-				geo.vertices.push(new THREE.Vector3(0, height / 2, segLength * i));
-				geo.vertices.push(new THREE.Vector3(0, -height / 2, segLength * i));
-				geo.vertices.push(new THREE.Vector3(0, height / 2, -segLength * i));
-				geo.vertices.push(new THREE.Vector3(0, -height / 2, -segLength * i));
 			}
-			geo.faces.push(new THREE.Face3(0, 1, 2));
-			geo.faces.push(new THREE.Face3(1, 2, 3));
-			geo.faces.push(new THREE.Face3(0, 1, 4));
-			geo.faces.push(new THREE.Face3(1, 4, 5));
-			for (var i = 1; i < Math.floor(segments / 2); i++) {
-				geo.faces.push(new THREE.Face3(2 + (i - 1) * 4, 3 + (i - 1) * 4, 6 + (i - 1) * 4));
-				geo.faces.push(new THREE.Face3(3 + (i - 1) * 4, 6 + (i - 1) * 4, 7 + (i - 1) * 4));
-				geo.faces.push(new THREE.Face3(4 + (i - 1) * 4, 5 + (i - 1) * 4, 8 + (i - 1) * 4));
-				geo.faces.push(new THREE.Face3(5 + (i - 1) * 4, 8 + (i - 1) * 4, 9 + (i - 1) * 4));
-			}
-			targetObj = new THREE.Mesh(geo, material);
-
-			parent.add( targetObj );
-		}
 
 
-	
-		function render() {
-			
-			requestAnimationFrame( render );
-			
-			
-			//upodate object
-			targetObj.geometry.verticesNeedUpdate = true;
-			
 
-			//update camera and controls
-			controls.update();
-			
-			
-			renderer.render( scene, camera );
-			
-		}
-		
-		
-		
-		$( '#3D-object-button1' ).on( 'click', function( e ) {
-			e.preventDefault();
 
-			var theta = 55,
-				x     = camera.position.x,
-				z     = camera.position.z,
-				moveX = x * Math.cos( theta ) - z * Math.sin( theta ),
-				moveZ = z * Math.cos( theta ) + x * Math.sin( theta );	
 
-			TweenMax.to( camera.position, 1.5, {
-				x: moveX,
-				z: moveZ,
-				ease: Power0.easeNone,
-			    onUpdate: function(){
-					
-
+			function addObject() {
+				var geo = new THREE.Geometry();
+				segLength = Math.PI * 2 * radius / segments;
+				geo.vertices.push(new THREE.Vector3(0, height / 2, 0));
+				geo.vertices.push(new THREE.Vector3(0, -height / 2, 0));
+				for (var i = 0; i < Math.floor(segments / 2); i++) {
+					geo.vertices.push(new THREE.Vector3(0, height / 2, segLength * i));
+					geo.vertices.push(new THREE.Vector3(0, -height / 2, segLength * i));
+					geo.vertices.push(new THREE.Vector3(0, height / 2, -segLength * i));
+					geo.vertices.push(new THREE.Vector3(0, -height / 2, -segLength * i));
 				}
+				geo.faces.push(new THREE.Face3(0, 1, 2));
+				geo.faces.push(new THREE.Face3(1, 2, 3));
+				geo.faces.push(new THREE.Face3(0, 1, 4));
+				geo.faces.push(new THREE.Face3(1, 4, 5));
+				for (var i = 1; i < Math.floor(segments / 2); i++) {
+					geo.faces.push(new THREE.Face3(2 + (i - 1) * 4, 3 + (i - 1) * 4, 6 + (i - 1) * 4));
+					geo.faces.push(new THREE.Face3(3 + (i - 1) * 4, 6 + (i - 1) * 4, 7 + (i - 1) * 4));
+					geo.faces.push(new THREE.Face3(4 + (i - 1) * 4, 5 + (i - 1) * 4, 8 + (i - 1) * 4));
+					geo.faces.push(new THREE.Face3(5 + (i - 1) * 4, 8 + (i - 1) * 4, 9 + (i - 1) * 4));
+				}
+				targetObj = new THREE.Mesh(geo, material);
 
-			});
+				parent.add( targetObj );
+			}
 
-		});
-		
-		$( '#3D-object-button2' ).on( 'click', function( e ) {
-			e.preventDefault();
 
-			//1. tween the first segment of each side
-			var w     = targetObj.geometry.vertices;
-		
-			w[2].x = w[3].x = w[4].x = w[5].x = -Math.sin( 0 ) * segLength;
-			w[2].z = w[3].z = Math.cos( 0 ) * segLength;
-			w[4].z = w[5].z = -Math.cos( 0 ) * segLength;
 
-			//2. rest of the vertex can now refer to the fourth previous vertex, their reference in the algorithm
-			for (var i = 6; i < w.length; i++) {
-				
-				//which segment from the origin the vertex belongs to
-				var vIndex   = i,
-					segIndex = Math.floor((vIndex + 2) / 4),
-					negate   = (vIndex / 4 === Math.floor(vIndex / 4) || (vIndex - 1) / 4 === Math.floor((vIndex - 1) / 4)) ? -1 : 1;
+			function render() {
 
-				
-				var tx = w[vIndex - 4].x - Math.sin( vIndex * (negate * (2 * segIndex - 1))) * segLength * negate;
-				var tz = w[vIndex - 4].z + Math.cos( vIndex * (negate * (2 * segIndex - 1))) * segLength * negate;
-				
-				
-				TweenMax.to( w[vIndex], 1.5, {
-					x: tx,
-					z: tz,
+				requestAnimationFrame( render );
+
+
+				//upodate object
+				targetObj.geometry.verticesNeedUpdate = true;
+
+
+				//update camera and controls
+				controls.update();
+
+
+				renderer.render( scene, camera );
+
+			}
+
+
+
+			$( '#3D-object-button1' ).on( 'click', function( e ) {
+				e.preventDefault();
+
+				var theta = 55,
+					x     = camera.position.x,
+					z     = camera.position.z,
+					moveX = x * Math.cos( theta ) - z * Math.sin( theta ),
+					moveZ = z * Math.cos( theta ) + x * Math.sin( theta );	
+
+				TweenMax.to( camera.position, 1.5, {
+					x: moveX,
+					z: moveZ,
 					ease: Power0.easeNone,
 					onUpdate: function(){
 
 
 					}
+
 				});
-
-			}
-
-			
-
-		});
-		
-		$( '#3D-object-button3' ).on( 'click', function( e ) {
-			e.preventDefault();
-
-			var scaleTo = Math.floor(Math.random() * Math.floor( 3 ) );
-			
-			TweenMax.to( targetObj.scale, 1.5, {
-				x: scaleTo,
-				y: scaleTo,
-				z: scaleTo,
-				ease: Power0.easeNone,
-			    onUpdate: function(){
-					
-				}
 
 			});
 
-		});
-			
-	
+			$( '#3D-object-button2' ).on( 'click', function( e ) {
+				e.preventDefault();
+
+				//1. tween the first segment of each side
+				var w     = targetObj.geometry.vertices;
+
+				w[2].x = w[3].x = w[4].x = w[5].x = -Math.sin( 0 ) * segLength;
+				w[2].z = w[3].z = Math.cos( 0 ) * segLength;
+				w[4].z = w[5].z = -Math.cos( 0 ) * segLength;
+
+				//2. rest of the vertex can now refer to the fourth previous vertex, their reference in the algorithm
+				for (var i = 6; i < w.length; i++) {
+
+					//which segment from the origin the vertex belongs to
+					var vIndex   = i,
+						segIndex = Math.floor((vIndex + 2) / 4),
+						negate   = (vIndex / 4 === Math.floor(vIndex / 4) || (vIndex - 1) / 4 === Math.floor((vIndex - 1) / 4)) ? -1 : 1;
+
+
+					var tx = w[vIndex - 4].x - Math.sin( vIndex * (negate * (2 * segIndex - 1))) * segLength * negate;
+					var tz = w[vIndex - 4].z + Math.cos( vIndex * (negate * (2 * segIndex - 1))) * segLength * negate;
+
+
+					TweenMax.to( w[vIndex], 1.5, {
+						x: tx,
+						z: tz,
+						ease: Power0.easeNone,
+						onUpdate: function(){
+
+
+						}
+					});
+
+				}
+
+
+
+			});
+
+			$( '#3D-object-button3' ).on( 'click', function( e ) {
+				e.preventDefault();
+
+				var scaleTo = Math.floor(Math.random() * Math.floor( 3 ) );
+
+				TweenMax.to( targetObj.scale, 1.5, {
+					x: scaleTo,
+					y: scaleTo,
+					z: scaleTo,
+					ease: Power0.easeNone,
+					onUpdate: function(){
+
+					}
+
+				});
+
+			});
+
+			// 
+			//-------------------------------------	
+			return {
+				init      : init,
+				render    : render,
+				getScene  : function () { return scene; },
+				getCamera : function () { return camera; } 
+			};
+
+
+		}();
+
+		MainStage.init();
+		MainStage.render();
+		
 		
 		
     };
@@ -32686,6 +34762,2847 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
+
+/* 
+ *************************************
+ * <!-- 3D Mouse Interaction with three.js -->
+ *************************************
+ */
+/**
+ * APP._3D_MOUSE_INTERACTION
+ * @global
+ * @requires ./examples/assets/js/min/three.min.js
+ * @requires ./src/components/ES5/_plugins-THREE
+ */
+
+
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP._3D_MOUSE_INTERACTION               = APP._3D_MOUSE_INTERACTION || {};
+	APP._3D_MOUSE_INTERACTION.version       = '0.0.1';
+    APP._3D_MOUSE_INTERACTION.documentReady = function( $ ) {
+
+		//Prevent this module from loading in other pages
+		if ( $( '#3D-mouseinteraction-three-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
+		
+		var MainStage = function() {
+
+			var $window                   = $( window ),
+				windowWidth               = window.innerWidth,
+				windowHeight              = window.innerHeight,
+				rendererCanvasID          = '3D-mouseinteraction-three-canvas';
+
+
+
+
+
+
+			// Generate one plane geometries mesh to scene
+			//-------------------------------------	
+			var camera,
+				controls,
+				scene,
+				light,
+				renderer,
+				displacementSprite,
+				radius       = 100,
+				theta        = 0,
+				clickEnable   = false;
+
+
+			var mouseVector = new THREE.Vector2(), 
+				raycaster,
+				intersects,
+				INTERSECTED,
+				nucleus,
+				atoms = [];
+
+
+			function init() {
+				//camera
+				camera = new THREE.PerspectiveCamera( 75, windowWidth / windowHeight, 1, 10000 );
+				camera.position.set(0, 0, 1300);
+
+
+				//controls
+				controls = new THREE.OrbitControls( camera );
+				controls.autoRotate = false;
+				controls.autoRotateSpeed = 0.5;
+				controls.rotateSpeed = 0.5;
+				controls.zoomSpeed = 1.2;
+				controls.panSpeed = 0.8;
+				controls.enableZoom = true;
+				controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+				controls.dampingFactor = 0.25;
+				controls.screenSpacePanning = false;
+				controls.minDistance = 100;
+				controls.maxDistance = 500;
+				controls.maxPolarAngle = Math.PI / 2;
+
+				controls.target.set( 30, 167, 81 );
+				controls.update();			
+
+
+
+				//Scene
+				scene = new THREE.Scene();
+
+				//HemisphereLight
+				scene.add( new THREE.AmbientLight( 0x555555 ) );
+
+				light = new THREE.SpotLight( 0xffffff, 1.5 );
+				light.position.set( 0, 500, 2000 );
+				scene.add( light );
+
+
+
+				//WebGL Renderer	
+				renderer = new THREE.WebGLRenderer( { 
+										canvas   : document.getElementById( rendererCanvasID ), //canvas
+										alpha    : true, 
+										antialias: true 
+									} );
+				renderer.setSize( windowWidth, windowHeight );
+
+
+				// Immediately use the texture for material creation
+				generateGeometry( 'poly', 15 );
+
+
+				// Fires when the window changes
+				window.addEventListener( 'resize', onWindowResize, false );
+
+
+				// When the mouse moves, call the given function
+				raycaster = new THREE.Raycaster();
+				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+				document.getElementById( rendererCanvasID ).addEventListener( 'click', onDocumentMouseDown, false );
+				document.addEventListener( 'mouseup', onDocumentMouseUp, false );
+
+
+
+			}
+
+
+			function render() {
+				requestAnimationFrame( render );
+
+				theta += 0.1;
+
+
+				//To set a background color.
+				renderer.setClearColor( 0x000000 );	
+
+
+				//Mouse interactions
+				raycaster.setFromCamera( mouseVector, camera );
+				intersects = raycaster.intersectObjects( atoms );
+				//intersects = raycaster.intersectObjects( scene.children );
+				if ( intersects.length > 0 ) {
+
+					if ( INTERSECTED != intersects[ 0 ].object ) {
+
+						// restore previous intersection object (if it exists) to its original color
+						if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+
+						INTERSECTED = intersects[ 0 ].object;
+						INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
+						INTERSECTED.material.emissive.setHex( 0xff0000 );
+
+					}
+
+				} else {
+
+					// restore previous intersection object (if it exists) to its original color
+					if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+
+					//by setting current intersection object to "nothing"
+					INTERSECTED = null;
+
+				}
+
+				//update camera and controls
+				controls.update();
+
+				renderer.render( scene, camera );
+
+
+
+			}
+
+
+			function onWindowResize() {
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+			}
+
+
+			function onDocumentMouseMove( event ) {
+				event.preventDefault();
+				mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+				mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+			}
+
+
+			function onDocumentMouseDown( event ) {
+				event.preventDefault();
+				mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+				mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
+				clickEnable = true;
+
+				//Mouse interactions
+				raycaster.setFromCamera( mouseVector, camera );
+				intersects = raycaster.intersectObjects( atoms );
+				//intersects = raycaster.intersectObjects( scene.children );
+				if ( intersects.length > 0 && intersects[0].object.name.indexOf( 'nucleus' ) >= 0 ) {
+
+					console.log( intersects[0].object.name );
+
+					//---Change object size
+	//				if ( typeof intersects[ 0 ] != typeof undefined ) {
+	//					var obj = intersects[ 0 ].object;
+	//
+	//
+	//					TweenMax.to( obj.scale, 1, {
+	//						x: '+=' + ( 200 - obj.scale.x ) * 0.05,
+	//						y: '+=' + ( 200 - obj.scale.y ) * 0.05,
+	//						z: '+=' + ( 200 - obj.scale.z ) * 0.05
+	//					});	
+	//
+	//
+	//					obj.updateMatrix();	
+	//	
+	//				}
+
+
+
+					//---Change object position
+					var targetAtomPos = intersects[0].object.position;
+
+					console.log(targetAtomPos);
+					// targetAtomPos.tween.pause();
+					var destinationPos = targetAtomPos.clone();
+					TweenMax.to(controls.target, 2,{ x:destinationPos.x, y:destinationPos.y, z:destinationPos.z});
+					TweenMax.to(camera.position, 2,{ x:destinationPos.x, y:destinationPos.y, z:destinationPos.z+100,
+						onUpdate:function(){
+							camera.up.set(0,1,0);
+							camera.updateProjectionMatrix();
+						}
+					});
+
+				} else {
+
+					 //Change object position
+					 TweenMax.to(controls.target, 2,{ x:0, y:0, z:0,
+						onComplete:function(){
+							TweenMax.resumeAll();
+						}
+					 });
+				}	
+
+
+
+			}
+
+
+			function onDocumentMouseUp( event ) {
+				event.preventDefault();
+				mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+				mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
+				theta = 0;
+				clickEnable = false;
+
+			}
+
+
+
+
+			/*
+			 * Batch generation of geometry
+			 *
+			 * @param  {String} objectType     - String of geometry type identifier.
+			 * @param  {Number} numObjects       - The total number of generated objects.
+			 * @return {Void}
+			 */
+			function generateGeometry( objectType, numObjects ) {
+
+
+				//set color
+				var applyVertexColors = function( g, c ) {
+					g.faces.forEach( function( f ) {
+						var n = ( f instanceof THREE.Face3 ) ? 3 : 4;
+						for ( var j = 0; j < n; j ++ ) {
+							f.vertexColors[ j ] = c;
+						}
+					} );
+				};
+
+				for ( var i = 0; i < numObjects; i ++ ) {
+
+
+					var geometry;
+					if ( objectType == "cube" ) {
+						geometry = new THREE.BoxGeometry( 1, 1, 1 );
+					} else if ( objectType == "sphere" ) {
+						geometry = new THREE.IcosahedronGeometry( 1, 1 );
+
+					} else if ( objectType == "poly" ) {
+						geometry = new THREE.CylinderGeometry( 3, 6, 3, 5, 1 );
+					}
+
+
+					var position = new THREE.Vector3();
+
+					position.x = Math.random() * 500;
+					position.y = Math.random() * 400;
+					position.z = Math.random() * 300;
+
+					var rotation = new THREE.Euler();
+
+					rotation.x = Math.random() * 2 * Math.PI;
+					rotation.y = Math.random() * 2 * Math.PI;
+					rotation.z = Math.random() * 2 * Math.PI;
+
+
+					var scale = new THREE.Vector3();
+
+
+					// give the geom's vertices a random color, to be displayed
+					var color = new THREE.Color();
+
+					color.setRGB( Math.random(), Math.random(), Math.random() );
+					applyVertexColors( geometry, color );
+
+
+					// Immediately use the texture for material creation
+					var defaultMaterial     = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
+
+					displacementSprite  = new THREE.Mesh( geometry, defaultMaterial );
+					displacementSprite.name = 'nucleus-' + i;
+					displacementSprite.position.x = Math.random() * 800 - 400;
+					displacementSprite.position.y = Math.random() * 800 - 400;
+					displacementSprite.position.z = Math.random() * 800 - 400;
+					displacementSprite.rotation.x = Math.random() * 2 * Math.PI;
+					displacementSprite.rotation.y = Math.random() * 2 * Math.PI;
+					displacementSprite.rotation.z = Math.random() * 2 * Math.PI;
+					displacementSprite.scale.x = Math.random() + 5;
+					displacementSprite.scale.y = Math.random() + 5;
+					displacementSprite.scale.z = Math.random() + 5;
+
+
+					scene.add( displacementSprite );
+					atoms.push( displacementSprite );
+
+
+				}
+
+
+			}
+
+
+			// 
+			//-------------------------------------	
+			return {
+				init      : init,
+				render    : render,
+				getScene  : function () { return scene; },
+				getCamera : function () { return camera; } 
+			};
+
+
+		}();
+
+		MainStage.init();
+		MainStage.render();
+		
+		
+
+    };
+
+    APP.components.documentReady.push( APP._3D_MOUSE_INTERACTION.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+
+
+
+
+/* 
+ *************************************
+ * <!-- 3D Mouse Interaction with three.js -->
+ *************************************
+ */
+/**
+ * APP._3D_MOUSE_INTERACTION2
+ * @global
+ * @requires ./examples/assets/js/min/three.min.js
+ * @requires ./src/components/ES5/_plugins-THREE
+ */
+
+
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP._3D_MOUSE_INTERACTION2               = APP._3D_MOUSE_INTERACTION2 || {};
+	APP._3D_MOUSE_INTERACTION2.version       = '0.0.1';
+    APP._3D_MOUSE_INTERACTION2.documentReady = function( $ ) {
+
+		//Prevent this module from loading in other pages
+		if ( $( '#3D-mouseinteraction2-three-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
+		
+
+	
+		var MainStage = function() {
+
+			var $window                   = $( window ),
+				windowWidth               = window.innerWidth,
+				windowHeight              = window.innerHeight,
+				rendererCanvasID          = '3D-mouseinteraction2-three-canvas';
+
+
+
+			// Generate one plane geometries mesh to scene
+			//-------------------------------------	
+			var camera,
+				scene,
+				light,
+				renderer,
+				displacementSprite,
+				theta         = 0,
+				clickEnable   = false;
+
+
+			// controls
+			var scroller = new CameraScroller({direction: "y"});
+
+
+			// mouse
+			var mouseVector = new THREE.Vector2(), 
+				raycaster,
+				intersects,
+				INTERSECTED,
+				nucleus,
+				atoms = [];
+
+
+
+			function init() {
+				//camera
+				camera = new THREE.PerspectiveCamera( 70, windowWidth / windowHeight, 1, 50000 );
+				camera.position.set( 0, 0, 20000 );
+
+
+				//Scene
+				scene = new THREE.Scene();
+
+				//HemisphereLight
+				scene.add( new THREE.AmbientLight( 0x555555 ) );
+
+				light = new THREE.SpotLight( 0xffffff, 1.5 );
+				light.position.set( 0, 500, 2000 );
+				scene.add( light );
+
+
+
+
+
+				//WebGL Renderer		
+				renderer = new THREE.WebGLRenderer( { 
+										canvas   : document.getElementById( rendererCanvasID ), //canvas
+										alpha    : true, 
+										antialias: true 
+									} );
+				renderer.setSize( windowWidth, windowHeight );
+
+
+				scroller.init( renderer.domElement );
+
+				// Immediately use the texture for material creation
+				generateGeometry( 500 );
+
+
+				// Fires when the window changes
+				window.addEventListener( 'resize', onWindowResize, false );
+
+
+				// When the mouse moves, call the given function
+				raycaster = new THREE.Raycaster();
+				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+				document.getElementById( rendererCanvasID ).addEventListener( 'click', onDocumentMouseDown, false );
+				document.addEventListener( 'mouseup', onDocumentMouseUp, false );
+
+
+
+			}
+
+			function render() {
+				requestAnimationFrame( render );
+
+
+
+				//To set a background color.
+				renderer.setClearColor( 0x000000 );	
+
+				//update controls
+				camera.position.y = scroller.getScrollPosY()*10000;
+
+				//Mouse interactions
+				raycaster.setFromCamera( mouseVector, camera );
+				intersects = raycaster.intersectObjects( atoms );
+				//intersects = raycaster.intersectObjects( scene.children );
+				if ( intersects.length > 0 ) {
+
+
+					if ( INTERSECTED != intersects[ 0 ].object ) {
+
+						// restore previous intersection object (if it exists) to its original color
+						if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+
+						INTERSECTED = intersects[ 0 ].object;
+						INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
+						INTERSECTED.material.emissive.setHex( 0xff0000 );
+
+					}
+
+				} else {
+
+					// restore previous intersection object (if it exists) to its original color
+					if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+
+					//by setting current intersection object to "nothing"
+					INTERSECTED = null;
+
+				}
+
+				renderer.render( scene, camera );
+
+
+
+
+			}
+
+
+			function onWindowResize() {
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+			}
+
+
+			function onDocumentMouseMove( event ) {
+				event.preventDefault();
+				mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+				mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+			}
+
+
+			function onDocumentMouseDown( event ) {
+				event.preventDefault();
+				mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+				mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
+				clickEnable = true;
+
+				//Mouse interactions
+				raycaster.setFromCamera( mouseVector, camera );
+				intersects = raycaster.intersectObjects( atoms );
+				//intersects = raycaster.intersectObjects( scene.children );
+
+
+
+
+				if ( intersects.length > 0 && intersects[0].object.name.indexOf( 'nucleus' ) >= 0 ) {
+
+					var targetAtomPos = intersects[0].object.position;
+
+					// targetAtomPos.tween.pause();
+					var destinationPos = targetAtomPos.clone();
+
+					// jump to new position
+					// y movement via scroller object
+					// x and z movement via TWEEN
+					scroller.targetPosition = intersects[0].object.position.y/10000;
+					var targetPos = { x: intersects[0].object.position.x, y:intersects[0].object.position.y, z:intersects[0].object.position.z+1100};
+
+					TweenMax.to( targetPos, 2,{ x:destinationPos.x, y:destinationPos.y, z:destinationPos.z});
+					TweenMax.to( camera.position, 2,{ x:destinationPos.x, y:destinationPos.y, z:destinationPos.z+1000,
+						onUpdate:function(){
+							camera.up.set(0,1,0);
+							camera.updateProjectionMatrix();
+						}
+					});
+
+				} else {
+
+
+					//restore scroller position
+					scroller.targetPosition = 0;
+
+					//restore camera position
+					TweenMax.to( camera.position, 2,{ x:0, y:0, z:20000,
+						onComplete:function(){
+							TweenMax.resumeAll();
+						}
+					});	
+
+				}	
+
+
+
+			}
+
+
+			function onDocumentMouseUp( event ) {
+				event.preventDefault();
+				mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+				mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
+				theta = 0;
+				clickEnable = false;
+
+			}
+
+
+
+
+			/*
+			 * Batch generation of geometry
+			 *
+			 * @param  {Number} numObjects       - The total number of generated objects.
+			 * @return {Void}
+			 */
+			function generateGeometry( numObjects ) {
+
+				var geometry = new THREE.Geometry();
+
+				var applyVertexColors = function(g, c) {
+					g.faces.forEach(function(f) {
+						var n = (f instanceof THREE.Face3) ? 3 : 4;
+						for (var j = 0; j < n; j++) {
+							f.vertexColors[j] = c;
+						}
+					});
+				};
+
+				for ( var i = 0; i < numObjects; i ++ ) {
+
+					var geom, 
+						color = new THREE.Color();
+
+
+
+					var position = new THREE.Vector3();
+					position.x = -9000 + (i % 10) * 2000;
+					position.y = -9000 + Math.floor((i % 100) / 10) * 2000;
+					position.z = -1000 + Math.floor(i / 100) * 2000;
+
+					var rotation = new THREE.Euler();
+					rotation.x = 0;
+					rotation.y = 0;
+					rotation.z = 0;
+
+					var scale = new THREE.Vector3();
+					scale.x = 1200;
+					scale.y = 600;
+					scale.z = 200;
+
+					geom = new THREE.BoxGeometry( 1, 1, 1 );
+					color.setRGB( 0, 0, Math.random() + 0.1 );
+
+
+
+					// give the geom's vertices a random color, to be displayed
+					applyVertexColors( geom, color );
+
+
+					// Immediately use the texture for material creation
+					var defaultMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
+
+					displacementSprite = new THREE.Mesh( geom, defaultMaterial );
+					scene.add( displacementSprite );
+
+					var object = new THREE.Mesh( geom );
+					displacementSprite.name = 'nucleus-' + i;
+					displacementSprite.position.copy( position );
+					displacementSprite.rotation.copy( rotation );
+					displacementSprite.scale.copy( scale );
+					displacementSprite.updateMatrix();
+
+					scene.add( displacementSprite );
+					atoms.push( displacementSprite );
+
+
+				}
+
+			}
+
+
+
+			/*
+			 * CameraSroller
+			 * Scrolls the camera vertically (up/down) by mouse, scrollwhell and touch
+			 * including a velocity based animation
+			 */
+			function CameraScroller(options) {
+				this.targetPosition = 0;
+				this.targetPositionOnMouseDown = 0;
+				this.mouseY = 0;
+				this.mouseYOnMouseDown = 0;
+				this.scrollPosY = 0;
+				this.domElem = undefined;
+				this.init = function(domEl) {
+					this.domElem = domEl;
+					this.domElem.addEventListener('mousedown', this.onDocumentMouseDown, false);
+					this.domElem.addEventListener('touchstart', this.onDocumentTouchStart, false);
+					this.domElem.addEventListener('touchmove', this.onDocumentTouchMove, false);
+					this.domElem.addEventListener('DOMMouseScroll', this.onDocumentMousewheel, false);
+					this.domElem.addEventListener('mousewheel', this.onDocumentMousewheel, false);
+				};
+				this.onDocumentMouseDown = function(event) {
+					event.preventDefault();
+					this.domElem.addEventListener('mousemove', this.onDocumentMouseMove, false);
+					this.domElem.addEventListener('mouseup', this.onDocumentMouseUp, false);
+					this.domElem.addEventListener('mouseout', this.onDocumentMouseOut, false);
+					this.mouseYOnMouseDown = event.clientY;
+					this.targetPositionOnMouseDown = this.targetPosition;
+				}.bind(this);
+				this.onDocumentMouseMove = function(event) {
+					this.mouseY = event.clientY;
+					this.targetPosition = this.targetPositionOnMouseDown + (this.mouseY - this.mouseYOnMouseDown) * 0.02;
+				}.bind(this);
+				this.onDocumentMouseUp = function(event) {
+					this.domElem.removeEventListener('mousemove', this.onDocumentMouseMove, false);
+					this.domElem.removeEventListener('mouseup', this.onDocumentMouseUp, false);
+					this.domElem.removeEventListener('mouseout', this.onDocumentMouseOut, false);
+				}.bind(this);
+				this.onDocumentMouseOut = function(event) {
+					this.domElem.removeEventListener('mousemove', this.onDocumentMouseMove, false);
+					this.domElem.removeEventListener('mouseup', this.onDocumentMouseUp, false);
+					this.domElem.removeEventListener('mouseout', this.onDocumentMouseOut, false);
+				}.bind(this);
+				this.onDocumentTouchStart = function(event) {
+					if (event.touches.length == 1) {
+						event.preventDefault();
+						this.mouseYOnMouseDown = event.touches[0].pageY;
+						this.targetPositionOnMouseDown = this.targetPosition;
+					}
+				}.bind(this);
+				this.onDocumentTouchMove = function(event) {
+					if (event.touches.length == 1) {
+						event.preventDefault();
+						this.mouseY = event.touches[0].pageY;
+						this.targetPosition = this.targetPositionOnMouseDown + (this.mouseY - this.mouseYOnMouseDown) * 0.02;
+					}
+				}.bind(this);
+				this.onDocumentMousewheel = function(event) {
+					this.targetPosition = this.targetPosition + event.wheelDeltaY * 0.005;
+				}.bind(this);
+				this.getScrollPosY = function() {
+					this.scrollPosY = this.scrollPosY + (this.targetPosition - this.scrollPosY) * 0.05; // 0.05=long scroll delay, 0.15=short delay
+					return this.scrollPosY
+				}.bind(this);
+
+			}
+
+
+			// 
+			//-------------------------------------	
+			return {
+				init      : init,
+				render    : render,
+				getScene  : function () { return scene; },
+				getCamera : function () { return camera; } 
+			};
+
+
+		}();
+
+		MainStage.init();
+		MainStage.render();
+		
+
+
+		
+		
+    };
+
+    APP.components.documentReady.push( APP._3D_MOUSE_INTERACTION2.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+
+
+
+
+/* 
+ *************************************
+ * <!-- 3D Shatter Slider -->
+ *************************************
+ */
+
+/**
+ * APP._3D_SHATTER_SLIDER
+ * @global
+ * @requires ./examples/assets/js/min/three.min.js
+ * @requires ./src/components/ES5/_plugins-THREE
+ */
+
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP._3D_SHATTER_SLIDER               = APP._3D_SHATTER_SLIDER || {};
+	APP._3D_SHATTER_SLIDER.version       = '0.0.2';
+    APP._3D_SHATTER_SLIDER.documentReady = function( $ ) {
+
+		//Prevent this module from loading in other pages
+		if ( $( '.uix-3d-slider--shatter' ).length == 0 || ! Modernizr.webgl ) return false;
+		
+		
+		var MainStage = function() {
+
+			var $window                   = $( window ),
+				windowWidth               = window.innerWidth,
+				windowHeight              = window.innerHeight;
+
+
+			var animSpeed                 = 1000,
+				$sliderWrapper            = $( '.uix-3d-slider--shatter' ),
+
+
+
+				//Basic webGL renderers 
+				renderLoaderID            = 'uix-3d-slider--shatter__loader',
+				rendererOuterID           = 'uix-3d-slider--shatter__canvas-container',
+				rendererCanvasID          = 'uix-3d-slider--shatter__canvas',
+				renderer;
+
+
+
+			// Generate one plane geometries mesh to scene
+			//-------------------------------------	
+			var camera,
+				controls,
+				scene,
+				light,
+				renderer,
+				material,
+				displacementSprite,
+				theta        = 0;
+
+
+			var offsetWidth   = 475, //Set the display width of the objects in the Stage
+				offsetHeight  = 375, //Set the display height of the objects in the Stage
+				allSources    = [],
+				objTotal,
+				objLoaded = false;
+
+			
+		
+			var sources = [];
+			var isAnimating = false;
+			
+			
+			// constants
+			var activeSlider = 0;
+			
+			function wrapperInit() {
+				
+				$sliderWrapper.each( function()  {
+
+					var $this                    = $( this ),
+						$items                   = $this.find( '.uix-3d-slider--shatter__item' ),
+						$first                   = $items.first(),
+						itemsTotal               = $items.length,
+						dataControlsPagination   = $this.data( 'controls-pagination' ),
+						dataControlsArrows       = $this.data( 'controls-arrows' ),
+						dataLoop                 = $this.data( 'loop' ),
+						dataFilterTexture        = $this.data( 'filter-texture' ),
+						dataDraggable            = $this.data( 'draggable' ),
+						dataDraggableCursor      = $this.data( 'draggable-cursor' );
+
+
+					if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-3d-slider--shatter__pagination';
+					if ( typeof dataControlsArrows === typeof undefined || dataControlsArrows == false ) dataControlsArrows = '.uix-3d-slider--shatter__arrows';
+					if ( typeof dataLoop === typeof undefined ) dataLoop = false;
+					if ( typeof dataFilterTexture === typeof undefined || !dataFilterTexture || dataFilterTexture == '' ) dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+					if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
+					if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
+					
+					
+					//Autoplay times
+					var playTimes;
+					//A function called "timer" once every second (like a digital watch).
+					$this[0].animatedSlides;
+
+
+					//If arrows does not exist on the page, it will be added by default, 
+					//and the drag and drop function will be activated.
+					if ( $( dataControlsArrows ).length == 0 ) {
+						$( 'body' ).prepend( '<div style="display:none;" class="uix-3d-slider--shatter__arrows '+dataControlsArrows.replace('#','').replace('.','')+'"><a href="#" class="uix-3d-slider--shatter__arrows--prev"></a><a href="#" class="uix-3d-slider--shatter__arrows--next"></a></div>' );
+					}
+
+
+
+					//Prevent bubbling
+					if ( itemsTotal == 1 ) {
+						$( dataControlsPagination ).hide();
+						$( dataControlsArrows ).hide();
+					}
+
+					
+					//Initialize the controlers classes
+					//-------------------------------------	
+					$( dataControlsPagination ).find( 'ul > li' ).first().addClass( 'active' );
+
+
+					
+					
+					//Initialize the wrapper width and height
+					//-------------------------------------	
+					$this.css( 'height', windowHeight + 'px' );
+					
+
+					//Load slides to canvas
+					//-------------------------------------	
+					if ( $( '#' + rendererCanvasID ).length == 0 ) {
+						$this.prepend( '<div id="'+rendererOuterID+'" class="uix-advanced-slider-sp__canvas-container"><canvas id="'+rendererCanvasID+'"></canvas></div>' );
+
+					}
+
+					
+					//Get the animation speed
+					//-------------------------------------	
+					if ( typeof $this.data( 'speed' ) != typeof undefined && $this.data( 'speed' ) != false ) {
+						animSpeed = $this.data( 'speed' );
+					}
+
+
+					//Initialize the first item container
+					//-------------------------------------		
+					$items.addClass( 'next' );
+					$first.addClass( 'active' );
+
+
+
+					//Get all images and videos
+					//-------------------------------------		
+					$items.each( function()  {
+						var _item = $( this );
+						
+						if ( _item.find( 'video' ).length > 0 ) {
+
+							//Returns the dimensions (intrinsic height and width ) of the video
+							var video    = document.getElementById( _item.find( 'video' ).attr( 'id' ) ),
+								videoURL = _item.find( 'source:first' ).attr( 'src' );
+
+							if ( typeof videoURL != typeof undefined ) {
+								sources.push(
+									{
+										"url": videoURL,
+										"id": _item.find( 'video' ).attr( 'id' ),
+										"type": 'video'
+									}
+								);
+							}
+
+
+
+
+						} else {
+
+							var imgURL   = _item.find( 'img' ).attr( 'src' );
+
+							if ( typeof imgURL != typeof undefined ) {
+
+								sources.push(
+									{
+										"url": imgURL,
+										"id": 'img-' + UixGUID.create(),
+										"type": 'img'
+									}
+								);
+							}
+
+
+						}	
+
+					});
+					
+					
+
+					//Pagination dots 
+					//-------------------------------------	
+					var _dot       = '',
+						_dotActive = '';
+					_dot += '<ul>';
+					for ( var i = 0; i < itemsTotal; i++ ) {
+
+						_dotActive = ( i == 0 ) ? 'class="active"' : '';
+
+						_dot += '<li '+_dotActive+' data-index="'+i+'"><a href="javascript:"></a></li>';
+					}
+					_dot += '</ul>';
+
+					if ( $( dataControlsPagination ).html() == '' ) $( dataControlsPagination ).html( _dot );
+
+					
+					//Fire the slider transtion with buttons
+					$( dataControlsPagination ).find( 'ul > li' ).on( 'click', function( e ) {
+						e.preventDefault();
+
+						var slideCurId  = $( dataControlsPagination ).find( 'ul > li.active' ).index(),
+							slideNextId = $( this ).index();
+
+
+						//Determine the direction
+						var curDir = 'prev';
+						if ( $( this ).attr( 'data-index' ) > slideCurId ) {
+							curDir = 'next';
+						}
+
+
+						//Transition Between Slides
+						sliderUpdates( slideCurId, slideNextId, curDir );
+
+
+						//Pause the auto play event
+						clearInterval( $this[0].animatedSlides );	
+
+
+					});
+
+					//Next/Prev buttons
+					//-------------------------------------		
+					var _prev = $( dataControlsArrows ).find( '.uix-3d-slider--shatter__arrows--prev' ),
+						_next = $( dataControlsArrows ).find( '.uix-3d-slider--shatter__arrows--next' );
+
+					$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
+
+					$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
+					if ( !dataLoop ) {
+						_prev.addClass( 'disabled' );
+					}
+
+
+					_prev.on( 'click', function( e ) {
+						e.preventDefault();
+
+						var slideCurId  = $items.filter( '.active' ).index(),
+							slideNextId = parseFloat( $items.filter( '.active' ).index() ) - 1;
+	
+						//Transition Between Slides
+						sliderUpdates( slideCurId, slideNextId, 'prev' );	
+						
+						
+
+
+						//Pause the auto play event
+						clearInterval( $this[0].animatedSlides );
+
+					});
+
+					_next.on( 'click', function( e ) {
+						e.preventDefault();
+
+						var slideCurId  = $items.filter( '.active' ).index(),
+							slideNextId = parseFloat( $items.filter( '.active' ).index() ) + 1;
+	
+						//Transition Between Slides
+						sliderUpdates( slideCurId, slideNextId, 'next' );	
+
+
+						//Pause the auto play event
+						clearInterval( $this[0].animatedSlides );
+
+
+					});
+					
+
+					
+					//Autoplay Slider
+					//-------------------------------------		
+					var dataAuto                 = $this.data( 'auto' ),
+						dataTiming               = $this.data( 'timing' ),
+						dataLoop                 = $this.data( 'loop' );
+
+					if ( typeof dataAuto === typeof undefined ) dataAuto = false;	
+					if ( typeof dataTiming === typeof undefined ) dataTiming = 10000;
+					if ( typeof dataLoop === typeof undefined ) dataLoop = false;
+
+
+					if ( dataAuto && !isNaN( parseFloat( dataTiming ) ) && isFinite( dataTiming ) ) {
+
+						sliderAutoPlay( playTimes, dataTiming, dataLoop, $this );
+
+						$this.on({
+							mouseenter: function() {
+								clearInterval( $this[0].animatedSlides );
+							},
+							mouseleave: function() {
+								sliderAutoPlay( playTimes, dataTiming, dataLoop, $this );
+							}
+						});	
+
+					}
+
+
+				});// end each				
+			}
+
+
+			
+			function init() {
+
+				
+
+				//Core 3D stage begin
+				//-------------------------------------		
+				//camera
+				camera = new THREE.PerspectiveCamera( 55, window.innerWidth / window.innerHeight, 10,  2500 ); // FlyCamera // FlyControls
+				camera.movementSpeed = 100.0;
+				camera.rollSpeed = 0.5;
+				camera.position.y = 60;
+				camera.position.z = 500;
+
+
+
+				//Scene
+				scene = new THREE.Scene();
+
+
+				//HemisphereLight
+				scene.add( new THREE.AmbientLight( 0x555555 ) );
+
+				light = new THREE.SpotLight( 0xffffff, 1.5 );
+				light.position.set( 0, 0, 2000 );
+				scene.add( light );
+
+
+
+				//WebGL Renderer	
+				 // create a render and set the size
+				renderer = new THREE.WebGLRenderer( { 
+										canvas   : document.getElementById( rendererCanvasID ), //canvas
+										alpha    : true, 
+										antialias: true 
+									} );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+				//controls
+				controls = new THREE.OrbitControls( camera, renderer.domElement );
+				controls.autoRotate = false;
+				controls.autoRotateSpeed = 0.5;
+				controls.rotateSpeed = 0.5;
+				controls.zoomSpeed = 1.2;
+				controls.panSpeed = 0.8;
+				controls.enableZoom = false;
+				controls.target.set(0, 0, 0 );
+				controls.update();			
+
+
+
+				//A loader for loading all images from array.
+				var loader = new THREE.TextureLoader();
+				loader.crossOrigin = 'anonymous';
+
+
+				//Preload
+				objTotal = sources.length;
+			
+				sources.forEach( function( element, index ) {
+					
+				
+					if ( element.type == 'img' ) {
+						
+						
+						loader.load(
+							// resource URL
+							element.url,
+
+							// onLoad callback
+							function ( texture ) {
+								
+								loadSource( texture, index, offsetWidth, offsetHeight, objTotal, $( '#' + renderLoaderID ) );
+
+							},
+
+							// onProgress callback currently not supported
+							undefined,
+
+							// onError callback
+							function ( err ) {
+								console.error( 'An error happened.' );
+							}
+						);	
+						
+						
+						
+					} else {
+						
+					
+						var texture = new THREE.VideoTexture( document.getElementById( element.id ) );
+						texture.minFilter = THREE.LinearFilter;
+						texture.magFilter = THREE.LinearFilter;
+						texture.format = THREE.RGBFormat;
+
+						// pause the video
+						texture.image.autoplay = true;
+						texture.image.loop = true;
+						texture.image.currentTime = 0;
+						texture.image.muted = false;
+						texture.image.pause();	
+
+						
+						loadSource( texture, index, offsetWidth, offsetHeight, objTotal, $( '#' + renderLoaderID ) );
+					}
+					
+				});
+		
+
+				// Fires when the window changes
+				window.addEventListener( 'resize', onWindowResize, false );
+
+
+			}
+
+
+
+
+
+			function render() {
+				requestAnimationFrame( render );
+
+				theta += 0.1;
+
+
+				//To set a background color.
+				//renderer.setClearColor( 0x000000 );	
+
+
+
+				//Animating Three.js vertices
+				allSources.forEach( function ( element, index ) {
+					element.geometry.verticesNeedUpdate = true;
+				});
+
+
+
+				//check all images loaded
+				if ( typeof allSources != typeof undefined ) {
+					if ( !objLoaded && allSources.length === objTotal ) {
+						
+						allSources.forEach( function ( element, index ) {
+							scene.add( element );
+
+
+							//if the first object is video and play it
+							if ( index == 0 ) {
+								var videoObCur =  element.material.map.image;
+								if ( videoObCur.localName == 'video' ) {
+									videoObCur.autoplay = true;
+									videoObCur.currentTime = 0;
+									videoObCur.muted = true;
+									videoObCur.play();
+								}
+							}
+
+							
+							//initialize all objects
+							if ( index > 0 ) {
+								var fragment =  element.geometry.vertices;
+
+								for ( var i = 0; i < fragment.length; i++ ) {
+
+									var pos = new THREE.Vector3();
+									var final = Math.random();
+
+									pos.x = Math.random();
+									pos.y = Math.random() * (50 * i);
+									pos.z = Math.random() * -300;
+
+									fragment[i].x = pos.x;
+									fragment[i].y = pos.y;
+									fragment[i].z = pos.z;
+
+								}	
+							}
+
+							console.log( element );
+						});
+						objLoaded = true;
+
+
+					}	
+
+				}
+
+
+
+				//update camera and controls
+				controls.update();
+
+				renderer.render( scene, camera );
+
+
+			}
+
+
+			function onWindowResize() {
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+			}
+
+			
+
+			/*
+			 * Load Source
+			 *
+			 * @param  {Object} texture         - Returns a new texture object which can directly be used for material creation.
+			 * @param  {Number} index           - Index of image or video.
+			 * @param  {Number} w               - The width of an image or video, in pixels. 
+			 * @param  {Number} h               - The height of an image or video, in pixels. 
+			 * @param  {Number} total           - Total number of preload images or video.
+			 * @param  {Object} loading         - Progress bar display control.
+			 * @return {Void}
+			 */
+			function loadSource( texture, index, w, h, total, loading ) {
+
+				var imgW = w,
+					imgH = h;
+
+				
+				// Immediately use the texture for material creation
+				// Create a texture loader so we can load our image file
+				material = new THREE.MeshBasicMaterial( {
+					map: texture
+				 } );
+
+
+				var geometryExplode = new THREE.BoxGeometry( imgW, imgH, 13 ),
+
+
+				displacementSprite = new THREE.Mesh( geometryExplode, material );
+
+				displacementSprite.minFilter = THREE.LinearFilter;
+				displacementSprite.overdraw = true;
+				displacementSprite.position.set(0,0,0);
+
+
+				geometryExplode.center();
+
+				// Shattering Images
+				var explodeModifier = new THREE.ExplodeModifier();
+				explodeModifier.modify( geometryExplode );
+
+				// add some additional vars to the
+				// fragments to ensure we can do physics
+				// and so on
+				for ( var i = 0; i < geometryExplode.vertices.length; i++ ) {
+					var fragment = geometryExplode.vertices[i];
+					fragment.origPos	= {
+						x: fragment.x,
+						y: fragment.y,
+						z: fragment.z
+					};
+
+				}
+
+
+				allSources.push( displacementSprite );
+
+
+				//loading
+				TweenMax.to( loading, 0.5, {
+					width    : Math.round(100 * allSources.length / total ) + '%',
+					onComplete : function() {
+
+						if ( $( this.target ).width() >= windowWidth - 50 ) {
+
+							TweenMax.to( this.target, 0.5, {
+								alpha: 0
+							});	
+						}
+
+					}
+				});
+					
+
+			}
+
+
+			
+		 /*
+		 * Trigger slider autoplay
+		 *
+		 * @param  {Function} playTimes      - Number of times.
+		 * @param  {Number} timing           - Autoplay interval.
+		 * @param  {Boolean} loop            - Determine whether to loop through each item.
+		 * @param  {Object} slider           - Selector of the slider .
+		 * @return {Void}                    - The constructor.
+		 */
+		function sliderAutoPlay( playTimes, timing, loop, slider ) {	
+
+			var items = slider.find( '.uix-3d-slider--shatter__item' ),
+				total = items.length;
+			
+			slider[0].animatedSlides = setInterval( function() {
+
+					playTimes = parseFloat( items.filter( '.active' ).index() );
+					playTimes++;
+
+					
+					if ( !loop ) {
+						if ( playTimes < total && playTimes >= 0 ) {
+							
+							var slideCurId  = items.filter( '.active' ).index(),
+								slideNextId = playTimes;	
+
+							sliderUpdates( slideCurId, slideNextId, 'next' );
+						}
+					} else {
+						if ( playTimes == total ) playTimes = 0;
+						if ( playTimes < 0 ) playTimes = total-1;		
+
+						var slideCurId  = items.filter( '.active' ).index(),
+							slideNextId = playTimes;	
+
+						
+						//Prevent problems with styles when switching in positive order
+						if ( playTimes == 0 ) {
+							sliderUpdates( slideCurId, slideNextId, 'prev' );	
+						} else {
+							sliderUpdates( slideCurId, slideNextId, 'next' );
+						}
+
+					}
+
+
+
+				}, timing );	
+			}
+
+			
+			
+			/*
+			 *  Transition Between Slides
+			 *
+			 * @param  {Number} slideCurId             - Index of current slider.
+			 * @param  {Number} slideNextId            - Index of next slider.
+			 * @param  {String} dir                    - Switching direction indicator.	 
+			 * @return {Void}
+			 */
+			function sliderUpdates( slideCurId, slideNextId, dir ) {
+
+
+				var $items                   = $sliderWrapper.find( '.uix-3d-slider--shatter__item' ),
+					total                    = $items.length,
+					dataCountTotal           = $sliderWrapper.data( 'count-total' ),
+					dataCountCur             = $sliderWrapper.data( 'count-now' ),
+					dataControlsPagination   = $sliderWrapper.data( 'controls-pagination' ),
+					dataControlsArrows       = $sliderWrapper.data( 'controls-arrows' ),	
+					dataLoop                 = $sliderWrapper.data( 'loop' );
+	
+			
+				
+				if ( typeof dataCountTotal === typeof undefined ) dataCountTotal = 'p.count em.count';
+				if ( typeof dataCountCur === typeof undefined ) dataCountCur = 'p.count em.current';
+				if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-3d-slider--shatter__pagination';
+				if ( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-3d-slider--shatter__arrows';
+				if ( typeof dataLoop === typeof undefined ) dataLoop = false;			
+
+				//Prevent bubbling
+				if ( total == 1 ) {
+					$( dataControlsPagination ).hide();
+					$( dataControlsArrows ).hide();
+					return false;
+				}
+
+				if ( ! isAnimating ) {
+					isAnimating = true;
+					
+					
+					//Transition Interception
+					//-------------------------------------
+					if ( dataLoop ) {
+						if ( slideCurId > total - 1 ) slideCurId = 0;
+						if ( slideCurId < 0 ) slideCurId = total-1;	
+
+						//--
+						if ( slideNextId < 0 ) slideNextId = total-1;
+						if ( slideNextId > total - 1 ) slideNextId = 0;
+					} else {
+
+						if ( slideCurId > total - 1 ) slideCurId = total-1;
+						if ( slideCurId < 0 ) slideCurId = 0;	
+
+						//--
+						if ( slideNextId < 0 ) slideNextId = 0;
+						if ( slideNextId > total - 1 ) slideNextId = total-1;
+
+					}
+
+
+
+					//Get previous and next index of item
+					//-------------------------------------
+					var $current = $sliderWrapper.find( '.uix-3d-slider--shatter__item' ).eq( slideCurId );
+					var	$next    = $sliderWrapper.find( '.uix-3d-slider--shatter__item' ).eq( slideNextId );
+
+
+
+					console.log( 'Current: ' + slideCurId + ' | Next: ' + slideNextId );
+
+
+					//Determine the direction and add class to switching direction indicator.
+					//-------------------------------------
+					var dirIndicatorClass = '';
+					if ( dir == 'prev' ) dirIndicatorClass = 'prev';
+					if ( dir == 'next' ) dirIndicatorClass = 'next';
+
+
+					//Add transition class to each item
+					//-------------------------------------	
+					$items.removeClass( 'active leave prev next' )
+						  .addClass( dirIndicatorClass );
+
+					$current.addClass( 'leave' );
+					$next.addClass( 'active' );
+
+
+
+					//Add transition class to Controls Pagination
+					//-------------------------------------
+					$( dataControlsPagination ).find( 'ul > li' ).removeClass( 'active leave prev next' )
+											   .addClass( dirIndicatorClass );
+
+					$( dataControlsPagination ).find( 'ul > li' ).eq( slideCurId ).addClass( 'leave' );
+					$( dataControlsPagination ).find( 'ul > li' ).eq( slideNextId ).addClass( 'active' );
+
+
+
+					//Add transition class to Arrows
+					//-------------------------------------		
+					if ( ! dataLoop ) {
+						$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
+						if ( slideNextId == total - 1 ) $( dataControlsArrows ).find( '.uix-3d-slider--shatter__arrows--next' ).addClass( 'disabled' );
+						if ( slideNextId == 0 ) $( dataControlsArrows ).find( '.uix-3d-slider--shatter__arrows--prev' ).addClass( 'disabled' );
+					}
+
+
+
+
+					//Display counter
+					//-------------------------------------
+					$( dataCountTotal ).text( total );
+					$( dataCountCur ).text( parseFloat( slideCurId ) + 1 );		
+
+
+
+					//Pause all videos
+					//-------------------------------------
+					// pause all videos
+					allSources.forEach( function ( element, index ) {
+
+						var videoOb = element.material.map.image;
+
+						if ( videoOb.localName == 'video' ) {
+							videoOb.autoplay = false;
+							videoOb.currentTime = 0;
+							videoOb.muted = true;
+							videoOb.pause();
+						}
+					});
+
+
+
+					//Fire the next object
+					//-------------------------------------
+					activeSlider = slideNextId;
+					
+					
+					if ( typeof allSources[slideNextId] != typeof undefined ) {
+
+						var fragment = allSources[slideNextId].geometry.vertices;
+
+						for ( var i = 0; i < fragment.length; i++ ) {
+
+							TweenMax.to( fragment[i], 2, {
+								x: fragment[i].origPos.x,
+								y: fragment[i].origPos.y,
+								z: fragment[i].origPos.z,
+								ease: "Expo.easeInOut"
+							});	
+						}		
+
+
+					}	
+
+					// play the video
+					var videoObCur =  allSources[ slideNextId ].material.map.image;
+
+					if ( videoObCur.localName == 'video' ) {
+						videoObCur.autoplay = true;
+						videoObCur.currentTime = 0;
+						videoObCur.muted = false;
+						videoObCur.play();
+					}
+
+
+					//Fire the current object
+					//-------------------------------------
+					if ( typeof allSources[slideCurId] != typeof undefined ) {
+
+						var fragment = allSources[slideCurId].geometry.vertices;
+
+						for ( var i = 0; i < fragment.length; i++ ) {
+
+							var pos = new THREE.Vector3();
+							var final = Math.random();
+
+							pos.x = Math.random();
+							pos.y = Math.random() * (50 * i);
+							pos.z = Math.random() * -300;
+
+							TweenMax.to( fragment[i], 2, {
+								x: pos.x,
+								y: pos.y,
+								z: pos.z,
+								ease: "Expo.easeInOut",
+								onComplete: function onComplete() {
+
+									//reset the trigger
+									isAnimating = false;
+
+								}
+							});	
+						}		
+
+
+					}			
+					
+					
+				}// end isAnimating
+				
+				
+
+			}
+
+			
+			
+
+
+			// 
+			//-------------------------------------	
+			return {
+				init              : init,
+				wrapperInit       : wrapperInit,
+				render            : render,
+				getScene          : function () { return scene; },
+				getCamera         : function () { return camera; } 
+			};
+
+
+		}();
+
+		MainStage.wrapperInit();
+		MainStage.init();
+		MainStage.render();
+		
+		
+
+
+		
+    };
+	
+    APP.components.documentReady.push( APP._3D_SHATTER_SLIDER.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+
+
+
+
+/* 
+ *************************************
+ * <!-- 3D Explosive Particle Slider -->
+ *************************************
+ */
+
+/**
+ * APP._3D_EXP_PARTICLE_SLIDER
+ * @global
+ * @requires ./examples/assets/js/min/three.min.js
+ * @requires ./src/components/ES5/_plugins-THREE
+ */
+
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP._3D_EXP_PARTICLE_SLIDER               = APP._3D_EXP_PARTICLE_SLIDER || {};
+	APP._3D_EXP_PARTICLE_SLIDER.version       = '0.0.2';
+    APP._3D_EXP_PARTICLE_SLIDER.documentReady = function( $ ) {
+
+		
+		//Prevent this module from loading in other pages
+		if ( $( '.uix-3d-slider--expParticle' ).length == 0 || ! Modernizr.webgl ) return false;
+		
+		
+		var MainStage = function() {
+
+			var $window                   = $( window ),
+				windowWidth               = window.innerWidth,
+				windowHeight              = window.innerHeight;
+
+
+			var animSpeed                 = 1000,
+				$sliderWrapper            = $( '.uix-3d-slider--expParticle' ),
+
+
+
+				//Basic webGL renderers 
+				renderLoaderID            = 'uix-3d-slider--expParticle__loader',
+				rendererOuterID           = 'uix-3d-slider--expParticle__canvas-container',
+				rendererCanvasID          = 'uix-3d-slider--expParticle__canvas',
+				renderer;
+
+
+
+			// Generate one plane geometries mesh to scene
+			//-------------------------------------	
+			var camera,
+				controls,
+				scene,
+				light,
+				renderer,
+				material,
+				displacementSprite,
+				clock = new THREE.Clock();
+
+
+			var offsetWidth   = 475, //Set the display width of the objects in the Stage
+				offsetHeight  = 375, //Set the display height of the objects in the Stage
+				allSources    = [],
+				objTotal,
+				objLoaded = false;
+
+		
+			
+			var sources = [];
+			var isAnimating = false;
+			
+			
+			// constants
+			var activeSlider = 0;
+			
+			var cube_count,
+				meshes = [],
+				materials = [],
+				xgrid = 25,
+				ygrid = 15;
+			
+			
+			function wrapperInit() {
+				
+				$sliderWrapper.each( function()  {
+
+					var $this                    = $( this ),
+						$items                   = $this.find( '.uix-3d-slider--expParticle__item' ),
+						$first                   = $items.first(),
+						itemsTotal               = $items.length,
+						dataControlsPagination   = $this.data( 'controls-pagination' ),
+						dataControlsArrows       = $this.data( 'controls-arrows' ),
+						dataLoop                 = $this.data( 'loop' ),
+						dataFilterTexture        = $this.data( 'filter-texture' ),
+						dataDraggable            = $this.data( 'draggable' ),
+						dataDraggableCursor      = $this.data( 'draggable-cursor' );
+
+
+					if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-3d-slider--expParticle__pagination';
+					if ( typeof dataControlsArrows === typeof undefined || dataControlsArrows == false ) dataControlsArrows = '.uix-3d-slider--expParticle__arrows';
+					if ( typeof dataLoop === typeof undefined ) dataLoop = false;
+					if ( typeof dataFilterTexture === typeof undefined || !dataFilterTexture || dataFilterTexture == '' ) dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+					if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
+					if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
+					
+					
+
+					//Autoplay times
+					var playTimes;
+					//A function called "timer" once every second (like a digital watch).
+					$this[0].animatedSlides;
+
+					
+
+					//If arrows does not exist on the page, it will be added by default, 
+					//and the drag and drop function will be activated.
+					if ( $( dataControlsArrows ).length == 0 ) {
+						$( 'body' ).prepend( '<div style="display:none;" class="uix-3d-slider--expParticle__arrows '+dataControlsArrows.replace('#','').replace('.','')+'"><a href="#" class="uix-3d-slider--expParticle__arrows--prev"></a><a href="#" class="uix-3d-slider--expParticle__arrows--next"></a></div>' );
+					}
+
+
+
+					//Prevent bubbling
+					if ( itemsTotal == 1 ) {
+						$( dataControlsPagination ).hide();
+						$( dataControlsArrows ).hide();
+					}
+
+					
+					//Initialize the controlers classes
+					//-------------------------------------	
+					$( dataControlsPagination ).find( 'ul > li' ).first().addClass( 'active' );
+
+
+					
+					
+					//Initialize the wrapper width and height
+					//-------------------------------------	
+					$this.css( 'height', windowHeight + 'px' );
+					
+
+					//Load slides to canvas
+					//-------------------------------------	
+					if ( $( '#' + rendererCanvasID ).length == 0 ) {
+						$this.prepend( '<div id="'+rendererOuterID+'" class="uix-advanced-slider-sp__canvas-container"><canvas id="'+rendererCanvasID+'"></canvas></div>' );
+
+					}
+
+					
+					//Get the animation speed
+					//-------------------------------------	
+					if ( typeof $this.data( 'speed' ) != typeof undefined && $this.data( 'speed' ) != false ) {
+						animSpeed = $this.data( 'speed' );
+					}
+
+
+					//Initialize the first item container
+					//-------------------------------------		
+					$items.addClass( 'next' );
+					$first.addClass( 'active' );
+
+
+
+					//Get all images and videos
+					//-------------------------------------		
+					$items.each( function()  {
+						var _item = $( this );
+						
+						if ( _item.find( 'video' ).length > 0 ) {
+
+							//Returns the dimensions (intrinsic height and width ) of the video
+							var video    = document.getElementById( _item.find( 'video' ).attr( 'id' ) ),
+								videoURL = _item.find( 'source:first' ).attr( 'src' );
+
+							if ( typeof videoURL != typeof undefined ) {
+								sources.push(
+									{
+										"url": videoURL,
+										"id": _item.find( 'video' ).attr( 'id' ),
+										"type": 'video'
+									}
+								);
+							}
+
+
+
+
+						} else {
+
+							var imgURL   = _item.find( 'img' ).attr( 'src' );
+
+							if ( typeof imgURL != typeof undefined ) {
+
+								sources.push(
+									{
+										"url": imgURL,
+										"id": 'img-' + UixGUID.create(),
+										"type": 'img'
+									}
+								);
+							}
+
+
+						}	
+
+					});
+					
+					
+
+					//Pagination dots 
+					//-------------------------------------	
+					var _dot       = '',
+						_dotActive = '';
+					_dot += '<ul>';
+					for ( var i = 0; i < itemsTotal; i++ ) {
+
+						_dotActive = ( i == 0 ) ? 'class="active"' : '';
+
+						_dot += '<li '+_dotActive+' data-index="'+i+'"><a href="javascript:"></a></li>';
+					}
+					_dot += '</ul>';
+
+					if ( $( dataControlsPagination ).html() == '' ) $( dataControlsPagination ).html( _dot );
+
+					
+					//Fire the slider transtion with buttons
+					$( dataControlsPagination ).find( 'ul > li' ).on( 'click', function( e ) {
+						e.preventDefault();
+
+						var slideCurId  = $( dataControlsPagination ).find( 'ul > li.active' ).index(),
+							slideNextId = $( this ).index();
+
+
+						//Determine the direction
+						var curDir = 'prev';
+						if ( $( this ).attr( 'data-index' ) > slideCurId ) {
+							curDir = 'next';
+						}
+
+
+						//Transition Between Slides
+						sliderUpdates( slideCurId, slideNextId, curDir );
+
+
+						//Pause the auto play event
+						clearInterval( $this[0].animatedSlides );	
+
+
+					});
+
+					//Next/Prev buttons
+					//-------------------------------------		
+					var _prev = $( dataControlsArrows ).find( '.uix-3d-slider--expParticle__arrows--prev' ),
+						_next = $( dataControlsArrows ).find( '.uix-3d-slider--expParticle__arrows--next' );
+
+					$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
+
+					$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
+					if ( !dataLoop ) {
+						_prev.addClass( 'disabled' );
+					}
+
+
+					_prev.on( 'click', function( e ) {
+						e.preventDefault();
+
+						var slideCurId  = $items.filter( '.active' ).index(),
+							slideNextId = parseFloat( $items.filter( '.active' ).index() ) - 1;
+	
+						//Transition Between Slides
+						sliderUpdates( slideCurId, slideNextId, 'prev' );	
+						
+						
+
+
+						//Pause the auto play event
+						clearInterval( $this[0].animatedSlides );
+
+					});
+
+					_next.on( 'click', function( e ) {
+						e.preventDefault();
+
+						var slideCurId  = $items.filter( '.active' ).index(),
+							slideNextId = parseFloat( $items.filter( '.active' ).index() ) + 1;
+	
+						//Transition Between Slides
+						sliderUpdates( slideCurId, slideNextId, 'next' );	
+
+
+						//Pause the auto play event
+						clearInterval( $this[0].animatedSlides );
+
+
+					});
+					
+
+					
+					//Autoplay Slider
+					//-------------------------------------		
+					var dataAuto                 = $this.data( 'auto' ),
+						dataTiming               = $this.data( 'timing' ),
+						dataLoop                 = $this.data( 'loop' );
+
+					if ( typeof dataAuto === typeof undefined ) dataAuto = false;	
+					if ( typeof dataTiming === typeof undefined ) dataTiming = 10000;
+					if ( typeof dataLoop === typeof undefined ) dataLoop = false;
+
+
+					if ( dataAuto && !isNaN( parseFloat( dataTiming ) ) && isFinite( dataTiming ) ) {
+
+						sliderAutoPlay( playTimes, dataTiming, dataLoop, $this );
+
+						$this.on({
+							mouseenter: function() {
+								clearInterval( $this[0].animatedSlides );
+							},
+							mouseleave: function() {
+								sliderAutoPlay( playTimes, dataTiming, dataLoop, $this );
+							}
+						});	
+
+					}
+
+
+				});// end each				
+			}
+
+
+			
+			function init() {
+
+				
+
+				//Core 3D stage begin
+				//-------------------------------------		
+				//camera
+				camera = new THREE.PerspectiveCamera( 55, window.innerWidth / window.innerHeight, 10,  2500 ); // FlyCamera // FlyControls
+				camera.movementSpeed = 100.0;
+				camera.rollSpeed = 0.5;
+				camera.position.y = 60;
+				camera.position.z = 500;
+
+
+
+				//Scene
+				scene = new THREE.Scene();
+
+
+				//HemisphereLight
+				scene.add( new THREE.AmbientLight( 0x555555 ) );
+
+				light = new THREE.SpotLight( 0xffffff, 1.5 );
+				light.position.set( 0, 0, 2000 );
+				scene.add( light );
+
+
+
+				//WebGL Renderer	
+				 // create a render and set the size
+				renderer = new THREE.WebGLRenderer( { 
+										canvas   : document.getElementById( rendererCanvasID ), //canvas
+										alpha    : true, 
+										antialias: true 
+									} );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+				//controls
+				controls = new THREE.OrbitControls( camera, renderer.domElement );
+				controls.autoRotate = false;
+				controls.autoRotateSpeed = 0.5;
+				controls.rotateSpeed = 0.5;
+				controls.zoomSpeed = 1.2;
+				controls.panSpeed = 0.8;
+				controls.enableZoom = false;
+				controls.target.set(0, 0, 0 );
+				controls.update();			
+
+
+
+				//A loader for loading all images from array.
+				var loader = new THREE.TextureLoader();
+				loader.crossOrigin = 'anonymous';
+
+
+				//Preload
+				objTotal = sources.length;
+			
+				sources.forEach( function( element, index ) {
+					
+				
+					if ( element.type == 'img' ) {
+						
+						
+						loader.load(
+							// resource URL
+							element.url,
+
+							// onLoad callback
+							function ( texture ) {
+								
+								loadSource( texture, index, offsetWidth, offsetHeight, objTotal, $( '#' + renderLoaderID ) );
+
+							},
+
+							// onProgress callback currently not supported
+							undefined,
+
+							// onError callback
+							function ( err ) {
+								console.error( 'An error happened.' );
+							}
+						);	
+						
+						
+						
+					} else {
+						
+					
+						var texture = new THREE.VideoTexture( document.getElementById( element.id ) );
+						texture.minFilter = THREE.LinearFilter;
+						texture.magFilter = THREE.LinearFilter;
+						texture.format = THREE.RGBFormat;
+
+						// pause the video
+						texture.image.autoplay = true;
+						texture.image.loop = true;
+						texture.image.currentTime = 0;
+						texture.image.muted = true;
+						texture.image.play();	
+
+						
+						
+						loadSource( texture, index, offsetWidth, offsetHeight, objTotal, $( '#' + renderLoaderID ) );
+					}
+					
+				});
+		
+
+				// Fires when the window changes
+				window.addEventListener( 'resize', onWindowResize, false );
+
+
+			}
+
+
+
+
+
+			function render() {
+				requestAnimationFrame( render );
+
+				var t = clock.getElapsedTime();
+
+
+				//To set a background color.
+				//renderer.setClearColor( 0x000000 );	
+
+
+
+				//Display the destination object
+				if ( typeof allSources[activeSlider] != typeof undefined ) {
+
+					var objects = allSources[activeSlider].children;
+					var speed =  Math.random() * .0002;
+
+					for ( var i = 0; i < objects.length; i++ ) {
+
+
+						for ( var j = 0; j < objects[i].parent.children.length; j++ ) {
+							var obj = objects[i].parent.children[j];
+
+							obj.position.x += (obj.origPos.x - obj.position.x) * speed;
+							obj.position.y += (obj.origPos.y - obj.position.y) * speed;
+							obj.position.z += (obj.origPos.z - obj.position.z) * speed;
+
+							
+						}	
+
+					}	
+					
+
+				}	
+				
+				
+				//Hide inactive objects
+				allSources.forEach( function ( element, index ) {
+					if ( index != activeSlider ) {
+
+						var objects = element.children;
+						var speed =  Math.random() * .00005;
+
+						for ( var i = 0; i < objects.length; i++ ) {
+
+
+							for ( var j = 0; j < objects[i].parent.children.length; j++ ) {
+								var obj = objects[i].parent.children[j];
+								
+								obj.position.x += (obj.targetPos.x - obj.position.x) * speed;
+								obj.position.y += (obj.targetPos.y - obj.position.y) * speed;
+								obj.position.z += (obj.targetPos.z - obj.position.z) * speed;
+
+							}	
+
+						}		
+					}
+
+				});
+	
+
+			
+				//check all images loaded
+				if ( typeof allSources != typeof undefined ) {
+					if ( !objLoaded && allSources.length === objTotal ) {
+						
+						allSources.forEach( function ( element, index ) {
+							scene.add( element );
+							console.log( element );
+						});
+						objLoaded = true;
+
+
+					}	
+
+				}
+
+
+				//update camera and controls
+				controls.update();
+
+				renderer.render( scene, camera );
+
+
+			}
+
+
+			function onWindowResize() {
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+			}
+
+			
+
+			/*
+			 * Load Source
+			 *
+			 * @param  {Object} texture         - Returns a new texture object which can directly be used for material creation.
+			 * @param  {Number} index           - Index of image or video.
+			 * @param  {Number} w               - The width of an image or video, in pixels. 
+			 * @param  {Number} h               - The height of an image or video, in pixels. 
+			 * @param  {Number} total           - Total number of preload images or video.
+			 * @param  {Object} loading         - Progress bar display control.
+			 * @return {Void}
+			 */
+			function loadSource( texture, index, w, h, total, loading ) {
+
+				var imgW = w,
+					imgH = h;
+				
+				
+				//
+				var group = new THREE.Object3D();
+				var i, j, ux, uy, ox, oy,
+					geometry,
+					xsize, ysize;
+				ux = 1 / xgrid;
+				uy = 1 / ygrid;
+				xsize = imgW / xgrid;
+				ysize = imgH / ygrid;
+				cube_count = 0;
+				for ( i = 0; i < xgrid; i ++ ) {
+					for ( j = 0; j < ygrid; j ++ ) {
+						ox = i;
+						oy = j;
+						geometry = new THREE.BoxBufferGeometry( xsize, ysize, xsize );
+						changeUVS( geometry, ux, uy, ox, oy );
+						materials[ cube_count ] = new THREE.MeshBasicMaterial( {
+							map: texture
+						 } );
+						material = materials[ cube_count ];
+						displacementSprite = new THREE.Mesh( geometry, material );
+						displacementSprite.position.x = ( i - xgrid / 2 ) * xsize;
+						displacementSprite.position.y = ( j - ygrid / 2 ) * ysize;
+						displacementSprite.position.z = 0;
+						displacementSprite.scale.x = displacementSprite.scale.y = displacementSprite.scale.z = 1;
+						displacementSprite.origPos	= {
+							x: displacementSprite.position.x,
+							y: displacementSprite.position.y,
+							z: displacementSprite.position.z
+						};
+
+						
+						//hide all
+						var newPosX = 4000 * Math.random() * ( Math.random() > 0.5 ? 1 : -1 );
+						var newPosY = 2000 * Math.random();
+						var newPosZ = 3000 * Math.random();
+						displacementSprite.position.x = newPosX;
+						displacementSprite.position.y = newPosY;
+						displacementSprite.position.z = newPosZ;
+						
+						displacementSprite.targetPos	= {
+							x: newPosX,
+							y: newPosY,
+							z: newPosZ
+						};	
+						
+						//
+						group.add( displacementSprite );
+						
+					
+						
+						//
+						meshes[ cube_count ] = displacementSprite;
+						cube_count += 1;
+					}			
+				}
+				
+
+				allSources.push( group );
+
+
+				//loading
+				TweenMax.to( loading, 0.5, {
+					width    : Math.round(100 * allSources.length / total ) + '%',
+					onComplete : function() {
+
+						if ( $( this.target ).width() >= windowWidth - 50 ) {
+
+							TweenMax.to( this.target, 0.5, {
+								alpha: 0
+							});	
+						}
+
+					}
+				});
+					
+
+			}
+
+
+			function changeUVS( geometry, unitx, unity, offsetx, offsety ) {
+				var uvs = geometry.attributes.uv.array;
+				for ( var i = 0; i < uvs.length; i += 2 ) {
+					uvs[ i ] = ( uvs[ i ] + offsetx ) * unitx;
+					uvs[ i + 1 ] = ( uvs[ i + 1 ] + offsety ) * unity;
+				}
+			}	
+			
+			
+			
+	
+
+			
+		 /*
+		 * Trigger slider autoplay
+		 *
+		 * @param  {Function} playTimes      - Number of times.
+		 * @param  {Number} timing           - Autoplay interval.
+		 * @param  {Boolean} loop            - Determine whether to loop through each item.
+		 * @param  {Object} slider           - Selector of the slider .
+		 * @return {Void}                    - The constructor.
+		 */
+		function sliderAutoPlay( playTimes, timing, loop, slider ) {	
+
+			var items = slider.find( '.uix-3d-slider--expParticle__item' ),
+				total = items.length;
+			
+			slider[0].animatedSlides = setInterval( function() {
+
+					playTimes = parseFloat( items.filter( '.active' ).index() );
+					playTimes++;
+
+					
+					if ( !loop ) {
+						if ( playTimes < total && playTimes >= 0 ) {
+							
+							var slideCurId  = items.filter( '.active' ).index(),
+								slideNextId = playTimes;	
+
+							sliderUpdates( slideCurId, slideNextId, 'next' );
+						}
+					} else {
+						if ( playTimes == total ) playTimes = 0;
+						if ( playTimes < 0 ) playTimes = total-1;		
+
+						var slideCurId  = items.filter( '.active' ).index(),
+							slideNextId = playTimes;	
+
+						
+						//Prevent problems with styles when switching in positive order
+						if ( playTimes == 0 ) {
+							sliderUpdates( slideCurId, slideNextId, 'prev' );	
+						} else {
+							sliderUpdates( slideCurId, slideNextId, 'next' );
+						}
+
+					}
+
+
+
+				}, timing );	
+			}
+
+			
+			
+			/*
+			 *  Transition Between Slides
+			 *
+			 * @param  {Number} slideCurId             - Index of current slider.
+			 * @param  {Number} slideNextId            - Index of next slider.
+			 * @param  {String} dir                    - Switching direction indicator.	 
+			 * @return {Void}
+			 */
+			function sliderUpdates( slideCurId, slideNextId, dir ) {
+
+
+				var $items                   = $sliderWrapper.find( '.uix-3d-slider--expParticle__item' ),
+					total                    = $items.length,
+					dataCountTotal           = $sliderWrapper.data( 'count-total' ),
+					dataCountCur             = $sliderWrapper.data( 'count-now' ),
+					dataControlsPagination   = $sliderWrapper.data( 'controls-pagination' ),
+					dataControlsArrows       = $sliderWrapper.data( 'controls-arrows' ),	
+					dataLoop                 = $sliderWrapper.data( 'loop' );
+	
+			
+				
+				if ( typeof dataCountTotal === typeof undefined ) dataCountTotal = 'p.count em.count';
+				if ( typeof dataCountCur === typeof undefined ) dataCountCur = 'p.count em.current';
+				if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-3d-slider--expParticle__pagination';
+				if ( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-3d-slider--expParticle__arrows';
+				if ( typeof dataLoop === typeof undefined ) dataLoop = false;			
+
+				//Prevent bubbling
+				if ( total == 1 ) {
+					$( dataControlsPagination ).hide();
+					$( dataControlsArrows ).hide();
+					return false;
+				}
+
+				if ( ! isAnimating ) {
+					isAnimating = true;
+					
+					
+					//Transition Interception
+					//-------------------------------------
+					if ( dataLoop ) {
+						if ( slideCurId > total - 1 ) slideCurId = 0;
+						if ( slideCurId < 0 ) slideCurId = total-1;	
+
+						//--
+						if ( slideNextId < 0 ) slideNextId = total-1;
+						if ( slideNextId > total - 1 ) slideNextId = 0;
+					} else {
+
+						if ( slideCurId > total - 1 ) slideCurId = total-1;
+						if ( slideCurId < 0 ) slideCurId = 0;	
+
+						//--
+						if ( slideNextId < 0 ) slideNextId = 0;
+						if ( slideNextId > total - 1 ) slideNextId = total-1;
+
+					}
+
+
+
+					//Get previous and next index of item
+					//-------------------------------------
+					var $current = $sliderWrapper.find( '.uix-3d-slider--expParticle__item' ).eq( slideCurId );
+					var	$next    = $sliderWrapper.find( '.uix-3d-slider--expParticle__item' ).eq( slideNextId );
+
+
+
+					console.log( 'Current: ' + slideCurId + ' | Next: ' + slideNextId );
+
+
+					//Determine the direction and add class to switching direction indicator.
+					//-------------------------------------
+					var dirIndicatorClass = '';
+					if ( dir == 'prev' ) dirIndicatorClass = 'prev';
+					if ( dir == 'next' ) dirIndicatorClass = 'next';
+
+
+					//Add transition class to each item
+					//-------------------------------------	
+					$items.removeClass( 'active leave prev next' )
+						  .addClass( dirIndicatorClass );
+
+					$current.addClass( 'leave' );
+					$next.addClass( 'active' );
+
+
+
+					//Add transition class to Controls Pagination
+					//-------------------------------------
+					$( dataControlsPagination ).find( 'ul > li' ).removeClass( 'active leave prev next' )
+											   .addClass( dirIndicatorClass );
+
+					$( dataControlsPagination ).find( 'ul > li' ).eq( slideCurId ).addClass( 'leave' );
+					$( dataControlsPagination ).find( 'ul > li' ).eq( slideNextId ).addClass( 'active' );
+
+
+
+					//Add transition class to Arrows
+					//-------------------------------------		
+					if ( ! dataLoop ) {
+						$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
+						if ( slideNextId == total - 1 ) $( dataControlsArrows ).find( '.uix-3d-slider--expParticle__arrows--next' ).addClass( 'disabled' );
+						if ( slideNextId == 0 ) $( dataControlsArrows ).find( '.uix-3d-slider--expParticle__arrows--prev' ).addClass( 'disabled' );
+					}
+
+
+
+
+					//Display counter
+					//-------------------------------------
+					$( dataCountTotal ).text( total );
+					$( dataCountCur ).text( parseFloat( slideCurId ) + 1 );		
+
+
+
+
+
+					//Fire the next object
+					//-------------------------------------
+					activeSlider = slideNextId;
+				
+
+					//Fire the current object
+					//-------------------------------------
+				
+
+					//Reset the trigger
+					//-------------------------------------
+					isAnimating = false;			
+					
+					
+				}// end isAnimating
+				
+				
+
+			}
+
+			
+			
+
+
+			// 
+			//-------------------------------------	
+			return {
+				init              : init,
+				wrapperInit       : wrapperInit,
+				render            : render,
+				getScene          : function () { return scene; },
+				getCamera         : function () { return camera; } 
+			};
+
+
+		}();
+
+		MainStage.wrapperInit();
+		MainStage.init();
+		MainStage.render();
+		
+
+		
+    };
+	
+    APP.components.documentReady.push( APP._3D_EXP_PARTICLE_SLIDER.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+
+
+
+
+/* 
+ *************************************
+ * <!-- Responsive Table -->
+ *************************************
+ */
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.TABLE               = APP.TABLE || {};
+	APP.TABLE.version       = '0.0.3';
+    APP.TABLE.documentReady = function( $ ) {
+
+
+		
+		var $window      = $( window ),
+			windowWidth  = window.innerWidth,
+			windowHeight = window.innerHeight;	
+		
+		/* 
+		 ---------------------------
+		 Duplicate title
+		 ---------------------------
+		 */
+					
+		var $resTable = $('table.uix-table.is-responsive, .uix-table.is-responsive table'),
+			$thead    = $resTable.find( 'thead' ),
+			$tbody    = $resTable.find( 'tbody' );
+
+        $thead.find( 'th' ).each(function() {
+            var data = $( this ).html().replace(/<span\s+class=(\"|\')js-uix-table-responsive__hidden(\"|\')(([\s\S])*?)<\/span>/g, '');
+            if ( !$( this ).attr( 'data-table' ) ) {
+                $( this ).attr( 'data-table', data );
+            }
+        });
+
+        $tbody.find( 'td' ).each(function() {
+            var index = $(this).index();
+            var data = $thead.find( 'th:eq(' + index + ')' ).attr( 'data-table' );
+            $( this ).attr( 'data-table', data );
+        });
+		
+	
+		/* 
+		 ---------------------------
+		 With scroll bars
+		 ---------------------------
+		 */
+		var resTableSCrolled = '.js-uix-table--responsive-scrolled',
+			columns          = $( resTableSCrolled + ' tr').length,
+			rows             = $( resTableSCrolled + ' th').length;
+		
+		tableDataScrolledInit( windowWidth );
+		
+		$window.on( 'resize', function() {
+			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+			if ( window.innerWidth != windowWidth ) {
+
+				// Update the window width for next time
+				windowWidth = window.innerWidth;
+
+				// Do stuff here
+				tableDataScrolledInit( windowWidth );
+		
+
+			}
+		});
+		
+		
+		function tableDataScrolledInit( w ) {
+			
+			if ( w <= 768 ) {
+				for ( var i = 0; i < rows; i++ ) {
+					var maxHeight = $( resTableSCrolled + ' th:nth-child(' + i + ')').outerHeight();
+					for ( var j = 0; j < columns; j++ ) {
+						if ($( resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').outerHeight() > maxHeight) {
+							maxHeight = $( resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').outerHeight();
+						}
+						if ($( resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').prop('scrollHeight') > $( resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').outerHeight()) {
+							maxHeight = $( resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').prop( 'scrollHeight' );
+						}
+					}
+					for (var j = 0; j < columns; j++ ) {
+						$( resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').css( 'height', maxHeight );
+						$( resTableSCrolled + ' th:nth-child(' + i + ')').css( 'height', maxHeight );
+					}
+				}
+			} else {
+				$( resTableSCrolled + ' td, '+resTableSCrolled+' th').removeAttr( 'style') ;
+			}
+			
+		}
+		
+
+		
+		
+    };
+
+    APP.components.documentReady.push( APP.TABLE.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+/* 
+ *************************************
+ * <!-- Table Sorter -->
+ *************************************
+ */
+
+APP = ( function ( APP, $, window, document ) {
+    'use strict';
+	
+    APP.TABLE_SORTER               = APP.TABLE_SORTER || {};
+	APP.TABLE_SORTER.version       = '0.0.2';
+    APP.TABLE_SORTER.documentReady = function( $ ) {
+
+		
+		$( '.js-uix-table-sorter' ).each( function()  {
+			var $sortTable = $( this ).find( 'table' );
+			
+			//add arrows
+			
+			$sortTable.find( "[data-sort-type]" ).each( function()  {
+				if ( $( this ).find( '.uix-table-sorter' ).length == 0 ) {
+					$( this ).wrapInner( '<span class="uix-table-sorter" />' );
+				}
+				
+				var $th     = $( this ),
+					thIndex = $th.index(),
+					thType  = $th.data( 'sort-type' ),
+					inverse = false;
+
+				$th.on( 'click', function() {
+
+					$sortTable.find( 'tbody td' ).filter( function() {
+
+						return $( this ).index() === thIndex;
+
+					}).sortElements(function(a, b) {
+
+
+						var txt1 = $.text([a]).replace(/(<([^>]+)>)/ig, ''),
+							txt2 = $.text([b]).replace(/(<([^>]+)>)/ig, '');
+
+						//type of number
+						if ( thType == 'number' ) {
+							txt1 = Number( txt1.replace(/[^0-9.-]+/g, '' ) );
+							txt2 = Number( txt2.replace(/[^0-9.-]+/g, '' ) );
+						}
+
+						//type of date
+						if ( thType == 'date' ) {
+							txt1 = new Date( txt1 );
+							txt2 = new Date( txt2 );	
+						}	
+
+
+
+						//add filter class
+						$sortTable.find( 'tbody tr' ).addClass( 'js-uix-newsort' );
+
+
+						if ( txt1 > txt2 ) {
+							if ( inverse ) {
+								return -1;
+							} else {
+								return 1;
+							}
+
+						} else {
+
+							if ( inverse ) {
+								return 1;
+							} else {
+								return -1;
+							}	
+
+						}
+
+
+
+
+					},
+					function() {
+
+						// parentNode is the element we want to move
+						return this.parentNode;
+
+					});
+
+					inverse = !inverse;
+
+				});
+
+			});
+
+		
+
+		});
+
+
+		
+    };
+
+    APP.components.documentReady.push( APP.TABLE_SORTER.documentReady );
+    return APP;
+
+}( APP, jQuery, window, document ) );
+
+
+
+
+
+/**
+ * jQuery.fn.sortElements
+ * --------------
+ * @author James Padolsey (http://james.padolsey.com)
+ * @version 0.11
+ * @updated 18-MAR-2010
+ * --------------
+ * @param Function comparator:
+ *   Exactly the same behaviour as [1,2,3].sort(comparator)
+ *   
+ * @param Function getSortable
+ *   A function that should return the element that is
+ *   to be sorted. The comparator will run on the
+ *   current collection, but you may want the actual
+ *   resulting sort to occur on a parent or another
+ *   associated element.
+ *   
+ *   E.g. $('td').sortElements(comparator, function(){
+ *      return this.parentNode; 
+ *   })
+ *   
+ *   The <td>'s parent (<tr>) will be sorted instead
+ *   of the <td> itself.
+ */
+jQuery.fn.sortElements = (function(){
+    
+    var sort = [].sort;
+    
+    return function(comparator, getSortable) {
+        
+        getSortable = getSortable || function(){return this;};
+        
+        var placements = this.map(function(){
+            
+            var sortElement = getSortable.call(this),
+                parentNode = sortElement.parentNode,
+                
+                // Since the element itself will change position, we have
+                // to have some way of storing it's original position in
+                // the DOM. The easiest way is to have a 'flag' node:
+                nextSibling = parentNode.insertBefore(
+                    document.createTextNode(''),
+                    sortElement.nextSibling
+                );
+            
+            return function() {
+                
+                if (parentNode === this) {
+                    throw new Error(
+                        "You can't sort elements if any one is a descendant of another."
+                    );
+                }
+                
+				
+                // Insert before flag:
+                parentNode.insertBefore(this, nextSibling);
+                // Remove flag:
+                parentNode.removeChild(nextSibling);
+                
+            };
+            
+        });
+       
+        return sort.call(this, comparator).each(function(i){
+            placements[i].call(getSortable.call(this));
+        });
+        
+    };
+    
+})();
 
 
 /* 
@@ -32938,7 +37855,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 		$( teamFocusContent ).each( function() {
 			var $this           = $( this ),
-				thisID          = 'uix-team-focus-' + UIX_GUID.newGuid(),
+				thisID          = 'uix-team-focus-' + UixGUID.create(),
 				hoverWidth      = $this.data( 'hover-width' ),
 				targetWidth     = $this.data( 'target-width' ), // Div over width as a percentage 
 				targetInfo      = $this.data( 'target-info' ), // Corresponding character details display

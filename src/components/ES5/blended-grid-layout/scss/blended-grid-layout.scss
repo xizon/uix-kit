@@ -13,6 +13,8 @@
 			padding-bottom: #{$height};
 			display: block;
 			position: relative;
+			margin-top: -#{$gap};
+			
 			
 			> ul {
 				margin: 0;
@@ -205,7 +207,7 @@
 			
 			
 			
-			/*--- 2 Rows, 3 Columns Large image on the left and right ---*/
+			/*--- 2 Rows, 3 Columns, Large image on the left and right ---*/
 			.uix-blended-grid__col-three-left-right {
 
 
@@ -242,7 +244,51 @@
 		
 
 			}
-						
+					
+			
+			/*--- 2 Rows, 3 Columns, Large image on the left, 2 columns image on the right ---*/
+			.uix-blended-grid__col-three-left-right2 {
+
+				> li:nth-child(1) {
+					top: 0;
+					left: 0;
+					width: 50%;
+					height: 100%;	
+				}
+
+
+				> li:nth-child(2) {
+					top: 0;
+					left: 50%;
+					width: 25%;
+					height: 50%;
+
+				}
+
+				> li:nth-child(3) {
+					top: 0;
+					left: 75%;
+					width: 25%;
+					height: 50%;
+				}
+
+				> li:nth-child(4) {
+					top: 50%;
+					left: 50%;
+					width: 25%;
+					height: 50%;
+
+				}
+
+				> li:nth-child(5) {
+					top: 50%;
+					left: 75%;
+					width: 25%;
+					height: 50%;
+				}
+
+			}
+			
 			
 
 		}

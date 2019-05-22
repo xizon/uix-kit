@@ -70,8 +70,6 @@ $card-radius: 8px;
 			position: relative;
 			display: inline-block;
 			top: 0.175rem;
-			height: 4.375rem;
-			width: 4.375rem;
 			width: 100px;
 			height: 100px;
 			
@@ -146,7 +144,6 @@ $card-radius: 8px;
  */ 
 .uix-card--entireBg {
     position: relative;
-    min-height: 21.25rem;
     padding: 1.5rem;
     border-radius: $card-radius;
 	background-position: 50% 50%;
@@ -155,6 +152,8 @@ $card-radius: 8px;
     @include transition-default();
 	@include outer-shadow( 'regular' );
 	
+
+
 	&::before,
 	&::after {
 		content: " ";
@@ -176,9 +175,23 @@ $card-radius: 8px;
 		color: #fff;
 
 	}
+	
+	
+	.uix-card--entireBg__pic {
+		
+		img {
+			visibility: hidden;
+		}	
+	}
 
 	.uix-card--entireBg__content {
 		position: relative;
+		
+		&.uix-card--entireBg__content--overlay {
+			position: absolute;
+			bottom: 0;
+			padding-bottom: 1.5rem;
+		}
 	}
 
 }
@@ -196,6 +209,7 @@ $card-radius: 8px;
 	margin-bottom: 1.5rem;
     @include transition-default();
 	@include outer-shadow( 'regular' );
+
 	
 	&::before,
 	&::after {
@@ -218,7 +232,6 @@ $card-radius: 8px;
 	}
 	
 	.uix-card--upDownBg__pic {
-		height: 21.25rem;
 		border-top-left-radius: $card-radius;
 		border-top-right-radius: $card-radius;
 		background-image: -webkit-linear-gradient(270deg, hsla(0, 0%, 96%, .5), hsla(0, 0%, 96%, .5));
@@ -236,13 +249,6 @@ $card-radius: 8px;
 		padding: 1rem 1.5rem;
 	}
 	
-	
-	&.js-uix-common-height {
-		.uix-card--upDownBg__pic {
-			height: auto;
-		}
-	}
-
 	
 
 }
@@ -284,7 +290,6 @@ $card-radius: 8px;
 	
 
 	.uix-card--leftRightBg__pic {
-		height: 21.25rem;
 		border-top-left-radius: $card-radius;
 		border-bottom-left-radius: $card-radius;
 		background-position: 50% 50%;
@@ -298,21 +303,12 @@ $card-radius: 8px;
 	
 
 	.uix-card--leftRightBg__content {
-		height: 21.25rem;
 		padding: 1.5rem 3rem;
 	}
 	
 	.uix-card--leftRightBg__title {
 		padding-bottom: 1.5rem;
 	}
-	
-	&.js-uix-common-height {
-		.uix-card--leftRightBg__pic,
-		.uix-card--leftRightBg__content {
-			height: auto;
-		}
-	}
-
 
 	
 }
@@ -326,9 +322,8 @@ $card-radius: 8px;
 		}
 
 		.uix-card--leftRightBg__content {
-			height: auto;
+			padding: 1.5rem 1.5rem 0 1.5rem;
 		}
-
 
 
 	}

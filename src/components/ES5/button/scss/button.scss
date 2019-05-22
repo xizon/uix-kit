@@ -51,6 +51,7 @@ $button-class-margin-b: 1rem;
 		box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.2) !important;
 		pointer-events: none !important;
 		user-select: none !important;
+		color: $primary-text-color2 !important;
 	}
 	
 
@@ -153,16 +154,22 @@ $button-class-margin-b: 1rem;
  3. Sizes
  ---------------------------
  */ 
+/* tiny */
+.uix-btn__size--t {
+    font-size: 0.75rem;
+	padding: .5rem 1rem;
+}
+/* small */
 .uix-btn__size--s {
     font-size: 0.875rem;
 	padding: .8rem 1.5rem;
 }
-
+/* medium */
 .uix-btn__size--m {
 	font-size: 1rem;
 	padding: 1rem 2.5rem;
 }
-
+/* large */
 .uix-btn__size--l {
 	font-size: 1.375rem;
 	padding: 1.25rem 5rem;
@@ -206,13 +213,6 @@ $button-class-margin-b: 1rem;
 		}
 	}
 	
-	&.is-transparent {
-		> span {
-			background-color: transparent;
-			border: 1px solid rgba(0,0,0,.1);
-		}	
-	}
-
 
 	&.uix-btn__icon--left {
 
@@ -222,6 +222,19 @@ $button-class-margin-b: 1rem;
 
 	}
 
+	&.is-transparent.uix-btn__icon--left {
+		> span {
+			background-color: transparent;
+			border-right: 1px solid rgba(0,0,0,.1);
+		}	
+	}
+	&.is-transparent.uix-btn__icon--right {
+		> span {
+			background-color: transparent;
+			border-left: 1px solid rgba(0,0,0,.1);
+		}	
+	}
+	
 
 	&.is-pill.uix-btn__icon--left span {
 		border-radius: 35px 0 0 35px;
@@ -305,6 +318,14 @@ $button-class-margin-b: 1rem;
 		
 	}
 	
+	/* Each fullwidth button from group */
+	&.is-fullwidth {
+		display: flex;
+
+		> .uix-btn {
+		    flex: 1;
+		}
+	}
 
 	
 
@@ -329,10 +350,11 @@ $button-class-margin-b: 1rem;
 
 	
 	&.is-transparent {
+		border-color: #DADCDF;
 		background-color: transparent;
 		background-image: linear-gradient(to right, #fff 0%, #fff 0%, #fff 0%);
 		color: $btn-gradient-color1;
-		box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.2);
+		box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.05);
 		
 		&:hover {
 			background-color: $btn-gradient-color1;
@@ -341,6 +363,7 @@ $button-class-margin-b: 1rem;
 		}
 	}
 }
+
 
 
 .uix-btn__bg--secondary {
@@ -358,7 +381,7 @@ $button-class-margin-b: 1rem;
 		box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.2);
 		color: $primary-text-color2;
 	}
-	
+
 	&:hover {
 		background-color: #fff;
 		color: $primary-text-color2;

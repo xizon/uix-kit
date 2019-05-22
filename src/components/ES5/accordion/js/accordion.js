@@ -49,6 +49,7 @@ APP = ( function ( APP, $, window, document ) {
 				e.stopPropagation();
 				
 			
+				//Its value is not a boolean but a string
 				var expanded = ( $( this ).attr( 'aria-expanded' ) == 'true' ) ? false : true,
 					$content = $( this ).find( 'dd' );
 				

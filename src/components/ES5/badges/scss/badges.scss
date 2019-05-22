@@ -69,11 +69,37 @@
 			color: #fff;
 		}
 
+		&.uix-badge--status-dot {
 
+			&::after {
+				font-size: 0;
+				width: 5px;
+				height: 5px;
+				line-height: 0;
+				top: -2.5px;
+				right: -2.5px;
+				animation: uix-cssAnim--dotRippleTiny 2s linear infinite;
+
+			}	
+		}
+
+		
 	}
 	
 	
 }
 
+
+
+@keyframes uix-cssAnim--dotRippleTiny {
+    0% {
+		box-shadow: 0 0 0 3px rgba($highlight-color1, 0.4),
+					0 0 0 5px rgba($highlight-color1, 0.1);
+    }
+    100% {
+		box-shadow: 0 0 0 7px rgba($highlight-color1, 0),
+					0 0 0 12px rgba($highlight-color1, 0);
+    }
+}
 
 

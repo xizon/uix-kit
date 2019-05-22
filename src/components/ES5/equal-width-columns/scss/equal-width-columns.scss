@@ -41,7 +41,7 @@
 
 @media all and (max-width: 768px) {
 
-	.uix-equal-width-divs {
+	.uix-equal-width-divs:not(.uix-equal-width-divs--nobreak) {
 
 		ul {
 			display: block;

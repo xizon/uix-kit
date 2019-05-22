@@ -28,7 +28,7 @@ $uix-content-placeholder-w: 100%;
 
 	.uix-content-placeholder__line {
 		height: 8px;
-		background-color: #eee;
+		background-color: #f2f2f2;
 	}
 	.uix-content-placeholder__line--first {
 		width: 100%;
@@ -43,7 +43,7 @@ $uix-content-placeholder-w: 100%;
 		width: 80px;
 		height: 60px;
 		float: left;
-		background-color: #eee;
+		background-color: #f2f2f2;
 		animation: uix-cssAnim--thumb 1s infinite linear;
 		
 		~ .uix-content-placeholder__textSlot {

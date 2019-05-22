@@ -5,22 +5,26 @@
   <p align="center">Make over <strong>120+</strong> components to wear again and again!</p>
   <p align="center">
       <a href="https://travis-ci.org/xizon/uix-kit/" title="Travis CI"><img src="https://api.travis-ci.org/xizon/uix-kit.svg?branch=master"/></a>
-	  <a href="https://www.npmjs.com/package/uix-kit" title="npm version"><img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=3.3.1&x2=0"/></a>
+	  <a href="https://www.npmjs.com/package/uix-kit" title="npm version"><img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=3.5.0&x2=0"/></a>
 	  <a href="https://github.com/xizon/uix-kit/blob/master/LICENSE" title="license"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg"/></a>
 	   
   </p>
   <br>
 </p>
 
-A free web kits for fast web design and development, compatible with Bootstrap v4. This spec is a living document that will be updated as we continue to develop the tenets and specifics of Uix Kit. Support JS, HTML and SASS component library automatically packaged. Automatically convert ES6 JS to ES5 using Babel in this scaffold.
+**Uix Kit is not a framework, just a toolbox based on some common libraries.**
+
+A free web kits for fast web design and development. Uix Kit can be used separately, or merge components and grid systems using bootstrap. Support JS, HTML and SASS component library automatically packaged. Automatically convert ES6 JS to ES5 using Babel in this scaffold. **Uix Kit is now in Long Term Support (LTS) mode.**
 
 
 
 ---
 
+## Demo
 
+[https://xizon.github.io/uix-kit/examples/](https://xizon.github.io/uix-kit/examples/)
 
-[Demo](https://uiux.cc/uix-kit) | [NPM](https://www.npmjs.com/package/uix-kit)
+[Official](https://uiux.cc/uix-kit)
 
 
 
@@ -43,7 +47,7 @@ A free web kits for fast web design and development, compatible with Bootstrap v
 
 
 <p align = "left">
-	<a href="https://www.youtube.com/watch?v=ckYJBMfPtBs"><img src="https://uiux.cc/uix-kit/_screenshots/video-cover.jpg" width="400"></a>
+	<a href="https://www.youtube.com/watch?v=aRDY9Cr-1-E"><img src="https://uiux.cc/uix-kit/_screenshots/video-cover.jpg" width="400"></a>
 </p>
 
 
@@ -51,7 +55,7 @@ A free web kits for fast web design and development, compatible with Bootstrap v
 ## Key Features
 
 
-Enjoy the fluid grid system based on Bootstrap and self-expansion. Uix Kit is built over Bootstrap and has all the benefits that the framework comes with. Regardless of the screen size, the website content will naturally fit the given resolution. Using the Uix Kit will save you large amount of time to build your projects. It supports 3D and 2D rendering with three.js and pixi.js. More typically, automatically generate core files with Webpack for each module (contains .js, .scss, .html files).
+Uix Kit can be used separately, or merge components and grid systems using bootstrap. Regardless of the screen size, the website content will naturally fit the given resolution. Using the Uix Kit will save you large amount of time to build your projects. It supports 3D and 2D rendering with three.js and pixi.js. More typically, automatically generate core files with Webpack for each module (contains .js, .scss, .html files).
 
 * Supports 3D and 2D rendering with three.js and pixi.js.
 * Using Sass to Control Scope With BEM Naming
@@ -59,7 +63,7 @@ Enjoy the fluid grid system based on Bootstrap and self-expansion. Uix Kit is bu
 * Simple custom CSS and JS core files
 * 100% Responsive & Mobile Ready
 * Prepare some generic plug-ins in advance
-* Core style sheet compatible with Bootstrap 4.x
+* Compatible with Bootstrap 4.x
 * Provides a common web page components and layouts
 * W3C Standard Support
 * Support PJAX no refresh method for loading pages
@@ -71,6 +75,9 @@ Enjoy the fluid grid system based on Bootstrap and self-expansion. Uix Kit is bu
 
 
 ## Installation And Test
+
+You will need to have [node](https://nodejs.org/) setup on your machine. That will output the built distributables to `./dist/*` and `./examples/*.html`.
+
 
 **Step 1.** Use NPM (Locate your current directory of project, and enter the following command.) or download the latest version from [Github](https://github.com/xizon/uix-kit). For nodejs you have to install some dependencies.
 
@@ -291,7 +298,7 @@ uix-kit/
 
 ### 3\. PSD Grid Templates
 
-You can download the corresponding .PSD grid files based on Bootstrap 3.x from the `_grid` folder.
+You can download the corresponding .PSD grid files.
 
 *   `misc/grid/bootstrap3_1170_grid_web.psd` (Default Container: 1170px)
 *   `misc/grid/bootstrap3_1278_grid_web.psd` (XL Container: 1278px)

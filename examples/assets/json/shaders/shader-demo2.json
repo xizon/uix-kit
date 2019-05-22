@@ -1,0 +1,46 @@
+{
+  "id": 3037,
+  "name": "Circuit Shader",
+  "fragment": "#define PI 3.1415926535897932384626433832795\n\nprecision highp float;\nprecision highp int;\nuniform float time;\nuniform float resolution;\nuniform float intensity;\nuniform float speed;\nuniform vec3 lightColor;\nuniform vec3 baseColor;\nvarying vec2 vUv;\nvarying vec3 vPosition;\nvec2 circuit(vec2 p) \n    {\n        p = fract(p);\n        float r = 0.3;\n        float v = 0.0, g = 1.0;\n        float d;\n        const int iter = 7;\n        for (int i = 0;\n i < iter; i++) \n        {\n            d = p.x - r;\n            g += pow(clamp(1.0 - abs(d), 0.0, 1.0), 200.0);\n            if (d > 0.0) \n            {\n                p.x = (p.x - r) / (1.8 - r);\n            }\n else \n            {\n                p.x = p.x;\n            }\n            p = p.yx;\n        }\n        v /= float(iter);\n        return vec2(g, v);\n    }\nvec4 Circuit_Grid1551692624802_300_main() \n    {\n        vec4 Circuit_Grid1551692624802_300_gl_FragColor = vec4(0.0);\n        vec2 uv = (vUv.xy + 0.5) * resolution;\n        vec2 cid2 = floor(uv);\n        float cid = (cid2.y + cid2.x);\n        vec2 dg = circuit(uv);\n        float d = dg.x;\n        vec3 col1 = (0.2 - vec3(max(min(d, 2.0) - 1.0, 0.0))) * baseColor;\n        vec3 col2 = vec3(max(d - 1.0, 0.0)) * lightColor;\n        float f = max(0.4 - mod(uv.y - uv.x + (time * speed) + (dg.y * 0.2), 2.5), 0.0) * intensity;\n        col2 *= f;\n        Circuit_Grid1551692624802_300_gl_FragColor = vec4(col1 + col2, 1.0);\n        return Circuit_Grid1551692624802_300_gl_FragColor *= 1.0;\n    }\nvoid main() \n    {\n        gl_FragColor = Circuit_Grid1551692624802_300_main();    }\n",
+  "vertex": "precision highp float;\nprecision highp int;\nuniform mat4 modelMatrix;\nuniform mat4 modelViewMatrix;\nuniform mat4 projectionMatrix;\nattribute vec3 position;\nattribute vec3 normal;\nattribute vec2 uv;\nattribute vec2 uv2;\nvarying vec2 vUv;\nvarying vec3 vPosition;\nvec4 Circuit_Grid1551692624802_300_main() \n    {\n        vec4 Circuit_Grid1551692624802_300_gl_Position = vec4(0.0);\n        vUv = uv;\n        vPosition = position;\n        Circuit_Grid1551692624802_300_gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n        return Circuit_Grid1551692624802_300_gl_Position *= 1.0;\n    }\nvoid main() \n    {\n        gl_Position = Circuit_Grid1551692624802_300_main();    }\n",
+  "uniforms": {
+    "time": {
+      "type": "f",
+      "glslType": "float"
+    },
+    "resolution": {
+      "value": "6",
+      "type": "f",
+      "glslType": "float"
+    },
+    "intensity": {
+      "value": "10",
+      "type": "f",
+      "glslType": "float"
+    },
+    "speed": {
+      "value": "1",
+      "type": "f",
+      "glslType": "float"
+    },
+    "lightColor": {
+      "value": {
+        "r": 0,
+        "g": 0.9647058823529412,
+        "b": 0.14901960784313725
+      },
+      "type": "c",
+      "glslType": "vec3"
+    },
+    "baseColor": {
+      "value": {
+        "r": 0.7019607843137254,
+        "g": 0.7019607843137254,
+        "b": 0.7019607843137254
+      },
+      "type": "c",
+      "glslType": "vec3"
+    }
+  }
+
+}

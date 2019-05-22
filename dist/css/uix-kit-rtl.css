@@ -1,10 +1,10 @@
 /*!
  * 
- * ## Project Name        :  Uix Kit Demo
- * ## Project Description :  Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.
- * ## Version             :  3.3.1
+ * ## Project Name        :  Uix Kit
+ * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
+ * ## Version             :  3.5.0
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  March 12, 2019
+ * ## Last Update         :  May 13, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -26,23 +26,23 @@
     8.Navigation
     9.Navs
     10.Sidebar
-    11.Advanced Slider (Basic)
-    12.Advanced Slider (Special Effects)
-    13.Cards
-    14.Content Placeholder Animated
-    15.Dropdown Menu
-    16.Flexslider
-    17.Form
-    18.Cutom Light Box
-    19.Brands List
-    20.Bulleted List
-    21.Maintain Aspect Ratio List
-    22.Side by Side List
-    23.Login Templates
-    24.Modal Dialog
-    25.Ribbon
-    26.Comments
-    27.Source Code
+    11.Typography
+    12.Advanced Slider (Basic)
+    13.Advanced Slider (Special Effects)
+    14.Cards
+    15.Content Placeholder Animated
+    16.Dropdown Menu
+    17.Flexslider
+    18.Form
+    19.Cutom Light Box
+    20.Brands List
+    21.Bulleted List
+    22.Maintain Aspect Ratio List
+    23.Side by Side List
+    24.Login Templates
+    25.Modal Dialog
+    26.Ribbon
+    27.Comments
     28.Striking
     29.Table
     30.ToolTip
@@ -85,10 +85,10 @@
 	
     Large                      :    11.375rem
     Medium                     :    6.5625rem
-    Small                      :    4.8125rem
+    Small                      :    3rem
     Default (mobile)           :    4.265625rem
     Large (mobile)             :    4.265625rem
-    Small (mobile)             :    2.625rem
+    Small (mobile)             :    1.5rem
 
 
 
@@ -453,9 +453,11 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
     .uix-menu__container:not(.is-mobile) ul.uix-menu ul.sub-menu {
       left: auto;
       right: 0; }
-    .uix-menu__container:not(.is-mobile) ul.uix-menu > li:not(.multi-column) > ul ul {
-      left: auto;
-      right: 100%; }
+    .uix-menu__container:not(.is-mobile) ul.uix-menu > li:not(.multi-column) > ul {
+      right: 1.784375rem; }
+      .uix-menu__container:not(.is-mobile) ul.uix-menu > li:not(.multi-column) > ul ul {
+        left: auto;
+        right: 100%; }
   .uix-menu__container:not(.is-mobile) li.multi-column span.multi-column-title {
     padding-left: auto;
     padding-right: 1.159375rem; }
@@ -537,6 +539,21 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
 
 .uix-iso-grid-widget .uix-iso-grid-recent-item .uix-sidebar__posts-img__desc {
   float: right; }
+
+/* ====================================================== 
+   <!-- Typography -->            
+/* ====================================================== */
+/*
+ * 6. Vertical Text
+*/
+/* 
+ ---------------------------
+ 6. Vertical Text
+ ---------------------------
+ */
+.uix-typo--vertical:not(.uix-typo--vertical-characters-line) {
+  writing-mode: vertical-lr;
+  transform: translateX(-0.5rem); }
 
 /******/
 /******/
@@ -1134,18 +1151,6 @@ dl.uix-list-abreast dd {
   .comment-content a.respond {
     right: auto;
     left: 0; }
-
-/* ====================================================== 
-    <!-- Source Code -->       
-/* ====================================================== */
-/* Pretty printing styles. Used with prettify.js. */
-pre.prettyprint {
-  direction: ltr; }
-
-/* Source Code Button */
-#uix-view-source {
-  right: auto;
-  left: 20px; }
 
 /* ====================================================== 
    <!-- Striking --> 

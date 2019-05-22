@@ -6,7 +6,10 @@ const UIX_KIT_IMPORT = { "files": [
 /******/
 /* must be placed in the first place */	
 "./src/components/ES5/_global/js/_base.js",
-
+"./src/components/ES5/_global/js/func-common.js",
+"./src/components/ES5/_global/js/func-3rd.js",
+	
+	
 /******/
 /******/
 /* base */	
@@ -33,12 +36,25 @@ const UIX_KIT_IMPORT = { "files": [
 "./src/components/ES5/_plugins-GSAP/js/TextPlugin.js",
 	
 //three.js ==> generic
-"./src/components/ES5/_plugins-THREE/js/CSS3DRenderer.js",
-"./src/components/ES5/_plugins-THREE/js/GLTFLoader.js",
-"./src/components/ES5/_plugins-THREE/js/MTLLoader.js",
-"./src/components/ES5/_plugins-THREE/js/OBJLoader.js",
-"./src/components/ES5/_plugins-THREE/js/OrbitControls.js",
-	
+"./src/components/ES5/_plugins-THREE/js/renderers/CSS3DRenderer.js",
+"./src/components/ES5/_plugins-THREE/js/controls/OrbitControls.js",
+"./src/components/ES5/_plugins-THREE/js/loaders/GLTFLoader.js",
+"./src/components/ES5/_plugins-THREE/js/loaders/MTLLoader.js",
+"./src/components/ES5/_plugins-THREE/js/loaders/OBJLoader.js",
+"./src/components/ES5/_plugins-THREE/js/shaders/CopyShader.js",
+"./src/components/ES5/_plugins-THREE/js/postprocessing/EffectComposer.js",
+"./src/components/ES5/_plugins-THREE/js/postprocessing/BloomPass.js",
+"./src/components/ES5/_plugins-THREE/js/postprocessing/MaskPass.js",
+"./src/components/ES5/_plugins-THREE/js/postprocessing/TexturePass.js",
+"./src/components/ES5/_plugins-THREE/js/postprocessing/ShaderPass.js",
+"./src/components/ES5/_plugins-THREE/js/postprocessing/RenderPass.js",
+"./src/components/ES5/_plugins-THREE/js/postprocessing/ClearPass.js",
+"./src/components/ES5/_plugins-THREE/js/modifiers/TessellateModifier.js",
+"./src/components/ES5/_plugins-THREE/js/modifiers/ExplodeModifier.js",
+"./src/components/ES5/_plugins-THREE/js/extensions/ShaderRuntime.custom.js",
+"./src/components/ES5/_plugins-THREE/js/extensions/d3-threeD.custom.js",
+"./src/components/ES5/_plugins-THREE/js/extensions/simplex-noise.js",
+"./src/components/ES5/_plugins-THREE/js/extensions/THREE.MeshLine.js",
 	
 	
 /******/
@@ -90,22 +106,27 @@ const UIX_KIT_IMPORT = { "files": [
 "./src/components/ES5/show-more-less/js/show-more-less.js",
 "./src/components/ES5/skew-on-scroll/js/skew-on-scroll.js",
 "./src/components/ES5/smooth-scrolling-anchor-link/js/smooth-scrolling-anchor-link.js",
-"./src/components/ES5/source-code/js/highlight.js",
-"./src/components/ES5/source-code/js/source-code.js",
 "./src/components/ES5/sticky-elements/js/sticky-elements.js",
 "./src/components/ES5/svg-map/js/svg-map-china.js",
 "./src/components/ES5/svg-map/js/svg-map-world.js",
+"./src/components/ES5/simple-3D-background-three/js/3D-background-three.js",
+"./src/components/ES5/simple-3D-background-three2/js/3D-background-three2.js",
+"./src/components/ES5/simple-3D-background-three3/js/3D-background-three3.js",
+"./src/components/ES5/simple-3D-background/js/3D-background.js",
+"./src/components/ES5/simple-3D-carousel/js/3D-carousel.js",
+"./src/components/ES5/simple-3D-gallery/js/3D-gallery.js",
+"./src/components/ES5/simple-3D-image-transition/js/3D-image-transition.js",
+"./src/components/ES5/simple-3D-model/js/3D-model.js",
+"./src/components/ES5/simple-3D-pages/js/3D-pages.js",
+"./src/components/ES5/simple-3D-particle-effect/js/3D-particle-effect.js",
+"./src/components/ES5/simple-3D-sphere-three/js/3D-sphere-three.js",
+"./src/components/ES5/simple-3D-obj-anim-interaction/js/3D-obj-anim-interaction.js",
+"./src/components/ES5/simple-3D-mouse-interaction/js/3D-mouse-interaction.js",
+"./src/components/ES5/simple-3D-mouse-interaction2/js/3D-mouse-interaction2.js",
+"./src/components/ES5/simple-3D-shatter-slider/js/3D-shatter-slider.js",	
+"./src/components/ES5/simple-3D-explosive-particle-slider/js/3D-explosive-particle-slider.js",
 "./src/components/ES5/table/js/table.js",
 "./src/components/ES5/table/js/table-sorter.js",	
-"./src/components/ES5/t3D-background-three/js/3D-background-three.js",
-"./src/components/ES5/t3D-background-three2/js/3D-background-three2.js",
-"./src/components/ES5/t3D-background/js/3D-background.js",
-"./src/components/ES5/t3D-carousel/js/3D-carousel.js",
-"./src/components/ES5/t3D-model/js/3D-model.js",
-"./src/components/ES5/t3D-pages/js/3D-pages.js",
-"./src/components/ES5/t3D-particle-effect/js/3D-particle-effect.js",
-"./src/components/ES5/t3D-sphere-three/js/3D-sphere-three.js",
-"./src/components/ES5/t3D-obj-anim-interaction/js/3D-obj-anim-interaction.js",
 "./src/components/ES5/tabs/js/tabs.js",
 "./src/components/ES5/team-focus/js/team-focus.js",
 "./src/components/ES5/text-effect/js/text-effect.js",

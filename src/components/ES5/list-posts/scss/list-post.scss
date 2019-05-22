@@ -17,8 +17,7 @@
 	    }
 		
 	    .uix-list-topic__item__img {
-		    margin-top: 1.75rem;
-
+		   
 		    a {
 			    display: block;
 			    position: relative;
@@ -61,7 +60,7 @@
 	    }
 
 	    .uix-list-topic__item__info {
-		    margin-top: 3.5rem;
+		    margin-top: 1.75rem;
 		    word-wrap: break-word;
 		    background: #fff;
 		    padding: 1rem;
@@ -96,11 +95,6 @@
 			    line-height: 1.625;
 		    }
 			
-			/* WordPress style */
-		    .page-link a {
-			    display: inline-block;
-			    padding: .2625rem;
-		    }
 	    }
 		
 	    .uix-list-topic__item__addition {

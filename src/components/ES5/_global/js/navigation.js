@@ -108,16 +108,6 @@ APP = ( function ( APP, $, window, document ) {
 		});
 		
 
-		//-------- Prevent to <a> of page transitions
-		$( 'a' ).each( function() {
-			var attr = $( this ).attr( 'href' );
-			if ( typeof attr !== typeof undefined && attr !== false ) {
-				if  ( $( this ).attr( 'href' ).indexOf( '/#' ) >= 0   || $( this ).attr( 'href' ) == '#' ) {
-					$( this ).attr( 'data-normal', 1 ); 
-				 }	
-			}
-
-		});
 	
 		
     };

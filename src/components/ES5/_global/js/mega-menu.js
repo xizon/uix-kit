@@ -7,9 +7,8 @@
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
-
     APP.MEGAMENU               = APP.MEGAMENU || {};
-	APP.MEGAMENU.version       = '0.0.1';
+	APP.MEGAMENU.version       = '0.0.3';
     APP.MEGAMENU.pageLoaded    = function() {
 
 		var $window      = $( window ),
@@ -32,29 +31,10 @@ APP = ( function ( APP, $, window, document ) {
 				// Do stuff here
 				megaMenuInit( windowWidth );
 		
-
 			}
 		});
 		
 		
-	
-		// For the absolute coordinates of any jquery element 
-		function getAbsoluteCoordinates( $element ) {
-			var windowWidth     = window.innerWidth,
-			    leftPos         = null;
-
-			
-			if ( ! $( 'body' ).hasClass( 'rtl' ) ) {
-				leftPos = ( $element.offset().left == 0 ) ? $element.parent().offset().left : $element.offset().left;
-			} else {
-				
-				//(window.innerWidth - ($whatever.offset().left + $whatever.outerWidth()));
-				leftPos = ( $element.offset().left == 0 ) ? ( windowWidth - ( $element.parent().offset().left + $element.parent().outerWidth() ) ) : ( windowWidth - ( $element.offset().left + $element.outerWidth() ) );
-			}
-				
-
-			return leftPos;
-		}	
 
 		
 		// Initialize mega menu
@@ -66,9 +46,11 @@ APP = ( function ( APP, $, window, document ) {
 			    perDefaultW  = 270; //Default width of each column
 
 			
-			//Basic Container
+			//New XL container for Bootstrap 4.x
 			if ( w > 1430 ) maxWidth = 1278;
-			if ( w > 1600 ) maxWidth = 1410;
+			
+			//Full width container
+			maxWidth = windowWidth;
 			
 			
 			
@@ -99,14 +81,14 @@ APP = ( function ( APP, $, window, document ) {
 					// Detecting if the right or left of the div is touching the browser window edge.
 					if ( col_total > 0 ) {
 
-						root_li_left     = getAbsoluteCoordinates( mega_div );
+						root_li_left = UixCssProperty.getAbsoluteCoordinates( mega_div[0] ).left;
 						
 						
 						//Determine the mega menu wrapper within document width, in order to limit the width of each column for mega menu
 						if ( maxWidth > w ) maxWidth = w;
 						
 						
-						if ( mega_div_w > maxWidth ) {
+						if ( parseFloat(mega_div_w + 20) > maxWidth ) {
 
 							mega_div_w       = maxWidth;
 							mega_single_w    = maxWidth/col_total - 2.888;

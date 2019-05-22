@@ -515,51 +515,51 @@ APP = ( function ( APP, $, window, document ) {
 
 			
 			//----
-			if ( APP.MAIN ) APP.MAIN.pageLoaded(); //Theme Scripts
-			if ( APP.COMMON_HEIGHT ) APP.COMMON_HEIGHT.pageLoaded(); //Common Height
-			if ( APP.ADVANCED_SLIDER ) APP.ADVANCED_SLIDER.pageLoaded(); //Advanced Slider (Basic)
-			if ( APP.ADVANCED_SLIDER_FILTER ) APP.ADVANCED_SLIDER_FILTER.pageLoaded(); //Advanced Slider	
-			if ( APP.POST_LIST_SPLIT_FULLWIDTH ) APP.POST_LIST_SPLIT_FULLWIDTH.pageLoaded(); //Fullwidth List of Split
-			if ( APP.STICKY_EL ) APP.STICKY_EL.pageLoaded(); //Sticky Elements
-			if ( APP.TEXT_EFFECT ) APP.TEXT_EFFECT.pageLoaded(); //Text effect
-			if ( APP.TIMELINE ) APP.TIMELINE.pageLoaded(); //Timeline
+			if ( APP.MAIN )                         APP.MAIN.pageLoaded(); //Theme Scripts
+			if ( APP.COMMON_HEIGHT )                APP.COMMON_HEIGHT.pageLoaded(); //Common Height
+			if ( APP.ADVANCED_SLIDER )              APP.ADVANCED_SLIDER.pageLoaded(); //Advanced Slider (Basic)
+			if ( APP.ADVANCED_SLIDER_FILTER )       APP.ADVANCED_SLIDER_FILTER.pageLoaded(); //Advanced Slider	
+			if ( APP.POST_LIST_SPLIT_FULLWIDTH )    APP.POST_LIST_SPLIT_FULLWIDTH.pageLoaded(); //Fullwidth List of Split
+			if ( APP.STICKY_EL )                    APP.STICKY_EL.pageLoaded(); //Sticky Elements
+			if ( APP.TEXT_EFFECT )                  APP.TEXT_EFFECT.pageLoaded(); //Text effect
+			if ( APP.TIMELINE )                     APP.TIMELINE.pageLoaded(); //Timeline
 			
 		
 			
 			//----
-			if ( APP.MAIN ) APP.MAIN.documentReady($); //Theme Scripts
-			if ( APP.TABLE ) APP.TABLE.documentReady($); //Responsive Table
-			if ( APP.TABLE_SORTER ) APP.TABLE_SORTER.documentReady($); //Table Sorter
-			if ( APP.MODAL_DIALOG ) APP.MODAL_DIALOG.documentReady($); //Modal Dialog
-			if ( APP.PARALLAX ) APP.PARALLAX.documentReady($); //Parallax
-			if ( APP.VIDEOS ) APP.VIDEOS.documentReady($); //Videos
-			if ( APP.BODY_AND_HEADER ) APP.BODY_AND_HEADER.documentReady($); //Header Area
-			if ( APP.SET_BG ) APP.SET_BG.documentReady($); //Specify a background image
-			if ( APP.GET_CUSTOM_ATTRS ) APP.GET_CUSTOM_ATTRS.documentReady($); //Get all custom attributes of an element like "data-*"
-			if ( APP.PAGINATION ) APP.PAGINATION.documentReady($); //Pagination
-			if ( APP.FORM ) APP.FORM.documentReady($); //Form
-			if ( APP.FLEXSLIDER ) APP.FLEXSLIDER.documentReady($); //Flexslider
-			if ( APP.RETINA ) APP.RETINA.documentReady($); //Retina Graphics for Website
-			if ( APP.SHOW_MORELESS ) APP.SHOW_MORELESS.documentReady($); //Show More Less
-			if ( APP.DROPDOWN_MENU ) APP.DROPDOWN_MENU.documentReady($); //Dropdown Menu
-			if ( APP.DROPDOWN_MENU2 ) APP.DROPDOWN_MENU2.documentReady($); //Dropdown Menu2
-			if ( APP.ACCORDION ) APP.ACCORDION.documentReady($); //Accordion	
-			if ( APP.ADVANCED_CONTENT_SLIDER ) APP.ADVANCED_CONTENT_SLIDER.documentReady($); //Advanced Content Slider
-			if ( APP.GALLERY ) APP.GALLERY.documentReady($); //Gallery
-			if ( APP.IMAGE_SHAPES ) APP.IMAGE_SHAPES.documentReady($); //Image Shapes
-			if ( APP.PERIODICAL_SCROLL ) APP.PERIODICAL_SCROLL.documentReady($); //Periodical Scroll
-			if ( APP.PRICING ) APP.PRICING.documentReady($); //Pricing
-			if ( APP.PROGRESSBAR ) APP.PROGRESSBAR.documentReady($); //Progress Bar
-			if ( APP.PROGRESSLINE ) APP.PROGRESSLINE.documentReady($); //Progress Line
-			if ( APP.ROTATING_EL ) APP.ROTATING_EL.documentReady($); //Rotating Elements
-			if ( APP.SMOOTH_SCROLLING_ANCHORLINK ) APP.SMOOTH_SCROLLING_ANCHORLINK.documentReady($); //Smooth Scrolling When Clicking An Anchor Link
-			if ( APP.TABS ) APP.TABS.documentReady($); //Tabs
-			if ( APP.TEAM_FOCUS ) APP.TEAM_FOCUS.documentReady($); //Team Focus
-			if ( APP.LAVA_LAMP_STYLE_MENU ) APP.LAVA_LAMP_STYLE_MENU.documentReady($); //Lava-Lamp Style Menu
-			if ( APP.CIRCLE_LAYOUT ) APP.CIRCLE_LAYOUT.documentReady($); //Circle Layout
-			if ( APP.MULTI_ITEMS_CAROUSEL ) APP.MULTI_ITEMS_CAROUSEL.documentReady($); //Multiple Items Carousel
-			if ( APP._3D_BACKGROUND ) APP._3D_BACKGROUND.documentReady($); //3D Background
-			if ( APP._3D_CAROUSEL ) APP._3D_CAROUSEL.documentReady($); //3D Carousel
+			if ( APP.MAIN )                         APP.MAIN.documentReady($); //Theme Scripts
+			if ( APP.TABLE )                        APP.TABLE.documentReady($); //Responsive Table
+			if ( APP.TABLE_SORTER )                 APP.TABLE_SORTER.documentReady($); //Table Sorter
+			if ( APP.MODAL_DIALOG )                 APP.MODAL_DIALOG.documentReady($); //Modal Dialog
+			if ( APP.PARALLAX )                     APP.PARALLAX.documentReady($); //Parallax
+			if ( APP.VIDEOS )                       APP.VIDEOS.documentReady($); //Videos
+			if ( APP.BODY_AND_HEADER )              APP.BODY_AND_HEADER.documentReady($); //Header Area
+			if ( APP.SET_BG )                       APP.SET_BG.documentReady($); //Specify a background image
+			if ( APP.GET_CUSTOM_ATTRS )             APP.GET_CUSTOM_ATTRS.documentReady($); //Get all custom attributes of an element like "data-*"
+			if ( APP.PAGINATION )                   APP.PAGINATION.documentReady($); //Pagination
+			if ( APP.FORM )                         APP.FORM.documentReady($); //Form
+			if ( APP.FLEXSLIDER )                   APP.FLEXSLIDER.documentReady($); //Flexslider
+			if ( APP.RETINA )                       APP.RETINA.documentReady($); //Retina Graphics for Website
+			if ( APP.SHOW_MORELESS )                APP.SHOW_MORELESS.documentReady($); //Show More Less
+			if ( APP.DROPDOWN_MENU )                APP.DROPDOWN_MENU.documentReady($); //Dropdown Menu
+			if ( APP.DROPDOWN_MENU2 )               APP.DROPDOWN_MENU2.documentReady($); //Dropdown Menu2
+			if ( APP.ACCORDION )                    APP.ACCORDION.documentReady($); //Accordion	
+			if ( APP.ADVANCED_CONTENT_SLIDER )      APP.ADVANCED_CONTENT_SLIDER.documentReady($); //Advanced Content Slider
+			if ( APP.GALLERY )                      APP.GALLERY.documentReady($); //Gallery
+			if ( APP.IMAGE_SHAPES )                 APP.IMAGE_SHAPES.documentReady($); //Image Shapes
+			if ( APP.PERIODICAL_SCROLL )            APP.PERIODICAL_SCROLL.documentReady($); //Periodical Scroll
+			if ( APP.PRICING )                      APP.PRICING.documentReady($); //Pricing
+			if ( APP.PROGRESSBAR )                  APP.PROGRESSBAR.documentReady($); //Progress Bar
+			if ( APP.PROGRESSLINE )                 APP.PROGRESSLINE.documentReady($); //Progress Line
+			if ( APP.ROTATING_EL )                  APP.ROTATING_EL.documentReady($); //Rotating Elements
+			if ( APP.SMOOTH_SCROLLING_ANCHORLINK )  APP.SMOOTH_SCROLLING_ANCHORLINK.documentReady($); //Smooth Scrolling When Clicking An Anchor Link
+			if ( APP.TABS )                         APP.TABS.documentReady($); //Tabs
+			if ( APP.TEAM_FOCUS )                   APP.TEAM_FOCUS.documentReady($); //Team Focus
+			if ( APP.LAVA_LAMP_STYLE_MENU )         APP.LAVA_LAMP_STYLE_MENU.documentReady($); //Lava-Lamp Style Menu
+			if ( APP.CIRCLE_LAYOUT )                APP.CIRCLE_LAYOUT.documentReady($); //Circle Layout
+			if ( APP.MULTI_ITEMS_CAROUSEL )         APP.MULTI_ITEMS_CAROUSEL.documentReady($); //Multiple Items Carousel
+			if ( APP._3D_BACKGROUND )               APP._3D_BACKGROUND.documentReady($); //3D Background
+			if ( APP._3D_CAROUSEL )                 APP._3D_CAROUSEL.documentReady($); //3D Carousel
 			
 			
 		

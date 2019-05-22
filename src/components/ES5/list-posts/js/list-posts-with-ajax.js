@@ -22,7 +22,7 @@ APP = ( function ( APP, $, window, document ) {
 
 		$( '[data-ajax-list-json]' ).each( function() {
 			var $this            = $( this ),
-				wrapperID        = 'refresh-all-waypoint-' + UIX_GUID.newGuid(),
+				wrapperID        = 'refresh-all-waypoint-' + UixGUID.create(),
 			    curPage          = $this.data( 'ajax-list-page-now' ),
 				perShow          = $this.data( 'ajax-list-page-per' ),
 				totalPage        = $this.data( 'ajax-list-page-total' ),

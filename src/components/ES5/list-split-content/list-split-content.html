@@ -1,4 +1,11 @@
-@@include('./src/components/ES5/_global/include-header.html')
+<!DOCTYPE html>
+<html lang="@@{website_lang}" dir="@@{website_dirLTR}">
+<head>
+	<meta charset="@@{website_charset}" />
+	<title>Fullwidth List of Split 2 - @@{website_title}</title>	
+	@@include('./src/components/ES5/_global/include-header.html')
+</head>  
+
      
   <body class="page">
   
@@ -32,61 +39,71 @@
              </div>
         
         </header>
-        <div class="uix-header__placeholder"></div>
+        <div class="uix-header__placeholder js-uix-header__placeholder-autoheight"></div>
       
        
-    
-       
-       
-        <!-- Content 01
-        ====================================================== -->
-        <section>
-            <div class="container uix-t-c">
-                    <div class="row">
-                        <div class="col-md-8 offset-md-2">
-                            <h2>Fullwidth List of Split 2</h2>
-                            
-                        </div>
-                    </div>
-                    <!-- .row end -->
-              
-                    
-            </div>
-            <!-- .container end -->
- 
-        </section>
-     
-       
-    
-       <!-- Content 02
-        ====================================================== -->
-		 <section class="uix-spacing--s uix-spacing--no-bottom">
-
-		     <div class="uix-list-split-full">
-					<div class="uix-list-split-full__left">
-
-						<h3>Title Here</h3>
-						
+		<main id="uix-maincontent">
+			
+			<!-- Content 
+			====================================================== -->
+			<section class="uix-spacing--s uix-spacing--no-bottom">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<h3>Fullwidth List of Split 2</h3>
+							<hr>
+							
+							
+						</div>
 					</div>
-					<!-- /.uix-list-split-full__left -->
-					
-					
-					<div class="uix-list-split-full__right uix-typo--color-white">
+					<!-- .row end -->
 
-					    <br>
-						<p>Uix Kit provides you with a comprehensive set of marketing tools to engage with your audience, get found across search and social, and grow your&nbsp;following.</p>
+				</div>
+				<!-- .container end -->
 
-					</div>
-					<!-- /.uix-list-split-full__right -->
-					
-			 </div>
-			 <!-- /.uix-list-split-full -->
-		
+			</section>
+			
+			
 
-		</section>
+		   <!-- Content 
+			====================================================== -->
+			 <section class="uix-spacing--s uix-spacing--no-bottom">
 
+				 <div class="uix-list-split-full">
+						<div class="uix-list-split-full__left uix-core-grid__col-4 uix-outer-shadow--regular">
+							<div>
+								
+							    Left content in here
+								
+							</div>
+						</div>
+						<!-- /.uix-list-split-full__left -->
+
+
+						<div class="uix-list-split-full__right uix-core-grid__col-8 uix-outer-shadow--regular">
+							<div>
+								
+							      Uix Kit provides you with a comprehensive set of marketing tools to engage with your audience, get found across search and social, and grow your&nbsp;following.
+								
+							</div>						
+							
+
+						</div>
+						<!-- /.uix-list-split-full__right -->
+
+				 </div>
+				 <!-- /.uix-list-split-full -->
+
+
+			</section>
+
+
+
+			
+		</main>
        
-    
+       
+			
         
         
         @@include('./src/components/ES5/_global/include-copyright.html')

@@ -356,8 +356,8 @@ h6 {
 .uix-typo--vertical {
 
 	&:not(.uix-typo--vertical-characters-line) {
-		transform: rotate(90deg);
-		transform-origin: left top 0;
+		writing-mode: vertical-rl;
+		transform: translateX(.5rem);
 		line-height: 0;/* Fix the problem of left-leaning text after rotation */
 	
 	}

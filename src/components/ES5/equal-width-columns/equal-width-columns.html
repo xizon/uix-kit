@@ -1,4 +1,11 @@
-@@include('./src/components/ES5/_global/include-header.html')
+<!DOCTYPE html>
+<html lang="@@{website_lang}" dir="@@{website_dirLTR}">
+<head>
+	<meta charset="@@{website_charset}" />
+	<title>Equal-width Columns - @@{website_title}</title>	
+	@@include('./src/components/ES5/_global/include-header.html')
+</head>  
+
      
   <body class="page">
   
@@ -34,54 +41,77 @@
              </div>
         
         </header>
-        <div class="uix-header__placeholder"></div>
+        <div class="uix-header__placeholder js-uix-header__placeholder-autoheight"></div>
       
       
-        <!-- Content 01
-        ====================================================== -->
-        <section>
-            <div class="container uix-t-c">
-                    <div class="row">
-                        <div class="col-md-8 offset-md-2">
-                            <h2>Equal Width Columns</h2>
+		<main id="uix-maincontent">
+			
+			
+			<!-- Content 
+			====================================================== -->
+			<section class="uix-spacing--s uix-spacing--no-bottom">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<h3>Equal Width Columns</h3>
 							<p>Using only CSS, we can make a tabbed navigation whose tabs always occupy an equal share of the available width. No JS to interrogate the DOM, no server-side logic to count through items, no inline styles.</p>
-                        </div>
-                    </div>
-                    <!-- .row end -->
-              
-                    
-            </div>
-            <!-- .container end -->
- 
-        </section>
-     
-       
-    
-       <!-- Content 02
-        ====================================================== -->
-        <section class="uix-spacing--m">
-            <div class="container">
-                   
-                
-					<div class="uix-equal-width-divs uix-t-c">
-						<ul>
-							<li><h3>223</h3><span>Web Design</span></li>
-							<li><h3>13</h3><span>UI</span></li>
-							<li><h3>5</h3><span>SEO</span></li>  
-							<li><h3>567</h3><span>Interaction</span></li>  
-						</ul>
+							<hr>
+							
+							
+						</div>
 					</div>
-					<!-- .uix-equal-width-divs  end -->
- 
-           
-                    
-                    
-                    
-            </div>
-            <!-- .container end -->
-            
-            
-        </section>
+					<!-- .row end -->
+
+				</div>
+				<!-- .container end -->
+
+			</section>
+			
+			
+
+
+		   <!-- Content 
+			====================================================== -->
+			<section class="uix-spacing--s">
+				<div class="container">
+
+
+						<div class="uix-equal-width-divs uix-t-c">
+							<ul>
+								<li><h3>223</h3><span>Web Design</span></li>
+								<li><h3>13</h3><span>UI</span></li>
+								<li><h3>5</h3><span>SEO</span></li>  
+								<li><h3>567</h3><span>Interaction</span></li>  
+							</ul>
+						</div>
+						<!-- .uix-equal-width-divs  end -->
+
+					
+						<div class="uix-equal-width-divs uix-equal-width-divs--nobreak uix-t-c">
+							<ul>
+								<li><h3>223</h3><span>No Break</span></li>
+								<li><h3>13</h3><span>No Break</span></li>
+								<li><h3>5</h3><span>No Break</span></li>  
+								<li><h3>567</h3><span>No Break</span></li>  
+							</ul>
+						</div>
+						<!-- .uix-equal-width-divs  end -->
+
+
+
+					
+					
+					
+
+				</div>
+				<!-- .container end -->
+
+
+			</section>
+			
+		</main>
+		
+
      
         
         

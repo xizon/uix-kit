@@ -18,7 +18,7 @@
 	 ---------------------------
 	 */ 
 	&:not(.uix-tabs--rotation) {
-	    @include outer-shadow( 'regular' );
+	    
 		
 		$maker-w: 100%;
 		
@@ -58,25 +58,31 @@
 	}
 	
 	.uix-tabs__nav {
+		
+		
 		> ul {
+			
+			border-bottom: 1px solid #DCDCDC;
+			
 			> li {
 				position: relative;
 				display: block;
 				transition: .1s ease-in-out;
 				list-style: none;
 				float: left;
-				box-shadow: inset 1px 0px 0px 0px rgba(230, 230, 230, 1);
-				background: #f7f7f7;
 				min-width: 7.5rem;
+				
+			
 
 				> a {
+					opacity: .6;
 					position: relative;
 					padding: 0.625rem 1rem;
 					display: block;
 					text-align: center;
 				}
 				&.active {
-					background: #fff;
+					
 
 				}
 			}
@@ -92,17 +98,18 @@
 	
 
 	&.uix-tabs--center {
-		box-shadow: none;
+		
 
 		.uix-tabs__nav {
 			
 			> ul {
+				border-bottom: 1px solid #DCDCDC;
 				font-size: 0; /*Fighting the Space Between Inline Block Elements*/
 				display: block;
 				width: 100%;
-				text-align: center;
-				/*require*/
-				@include outer-shadow( 'regular' );
+				text-align: center; /*require*/
+				
+				
 
 				li {
 					font-size: 1rem;/*Fighting the Space Between Inline Block Elements*/
@@ -119,7 +126,32 @@
 	}
 
 
+	&.uix-tabs--normal {
+		
+		.uix-tabs__nav {
+			
+			> ul {
+				border-bottom: 1px solid #DCDCDC;
+				font-size: 0; /*Fighting the Space Between Inline Block Elements*/
+				display: block;
+				width: 100%;
+				text-align: left; /*require*/
+				
+				
+				li {
+					font-size: 1rem;/*Fighting the Space Between Inline Block Elements*/
+					display: inline-block;
+					/*require*/
+					float: none;
 
+				}
+			}	
+			
+		}
+		
+
+	}
+	
 	/* 
 	 ---------------------------
 	 2. Tab Rotation Effect
@@ -129,13 +161,13 @@
 		
 		.uix-tabs__content {
 			position: relative;
-			@include outer-shadow( 'regular' );
 		}
 		.uix-tabs__nav {
 			position: relative;
 			margin: 0;
 			
 			> ul {
+				border-bottom: none;
 				box-sizing: border-box;
 				position: relative;
 				width: 300px;
@@ -155,19 +187,20 @@
 					width: 80px;
 					height: 80px;
 					background: none;
-					box-shadow: none;
 					z-index: 2;
 					top: 0;
 					left: 50%;
 					min-width: inherit; /* Required */
 				
+					
 					> a {
+						border: 1px solid #DCDCDC;
+						opacity: 1;
 						width: 80px;
 						height: 80px;
 						line-height: 60px;
 						background: #fff;
 						border-radius: 100%;
-						@include outer-shadow( 'regular' );
 					}
 
 					&.active > a {

@@ -1,0 +1,74 @@
+{
+  "id": 3243,
+  "name": "New Composed Shader",
+  "fragment": "precision highp float;\nprecision highp int;\nuniform mat4 modelMatrix;\nuniform mat4 modelViewMatrix;\nuniform mat4 projectionMatrix;\nuniform mat4 viewMatrix;\nuniform mat3 normalMatrix;\nuniform vec3 cameraPosition;\nuniform float time;\nuniform vec3 New_Basic_Shader1554217331092_984_color;\nuniform vec3 lightPosition;\nuniform float speed;\nuniform float fadeAway;\nuniform vec3 Warp_Speed1554217618750_1202_color;\nuniform vec2 mouse;\nuniform vec2 resolution;\nuniform float uniformity;\nvarying vec3 New_Basic_Shader1554217331092_984_vPosition;\nvarying vec3 New_Basic_Shader1554217331092_984_vNormal;\nvarying vec2 New_Basic_Shader1554217331092_984_vUv;\nvarying vec2 New_Basic_Shader1554217331092_984_vUv2;\nvarying vec2 Warp_Speed1554217618750_1202_vUv;\nvec4 New_Basic_Shader1554217331092_984_main() \n    {\n        vec4 New_Basic_Shader1554217331092_984_gl_FragColor = vec4(0.0);\n        vec3 worldPosition = (modelMatrix * vec4(New_Basic_Shader1554217331092_984_vPosition, 1.0)).xyz;\n        vec3 worldNormal = normalize(vec3(modelMatrix * vec4(New_Basic_Shader1554217331092_984_vNormal, 0.0)));\n        vec3 lightVector = normalize(lightPosition - worldPosition);\n        float brightness = dot(worldNormal, lightVector);\n        New_Basic_Shader1554217331092_984_gl_FragColor = vec4(New_Basic_Shader1554217331092_984_color * brightness, 1.0);\n        return New_Basic_Shader1554217331092_984_gl_FragColor *= 0.0;\n    }\nvec4 Warp_Speed1554217618750_1202_main(void) \n    {\n        vec4 Warp_Speed1554217618750_1202_gl_FragColor = vec4(0.0);\n        float t = time * speed;\n        vec2 position = (Warp_Speed1554217618750_1202_vUv.xy - resolution.xy * .5) / resolution.x;\n        float angle = atan(position.y, position.x) / (2. * 3.14159265359);\n        angle -= floor(angle);\n        float rad = length(position);\n        float angleFract = fract(angle * 256.);\n        float angleRnd = floor(angle * 256.) + 1.;\n        float angleRnd1 = fract(angleRnd * fract(angleRnd * .7235) * 45.1);\n        float angleRnd2 = fract(angleRnd * fract(angleRnd * .82657) * 13.724);\n        float t2 = t + angleRnd1 * uniformity;\n        float radDist = sqrt(angleRnd2);\n        float adist = radDist / rad * .1;\n        float dist = (t2 * .1 + adist);\n        dist = abs(fract(dist) - fadeAway);\n        float outputColor = (1.0 / (dist)) * cos(0.7 * sin(t)) * adist / radDist / 30.0;\n        angle = fract(angle + .61);\n        Warp_Speed1554217618750_1202_gl_FragColor = vec4(outputColor * Warp_Speed1554217618750_1202_color, 1.0);\n        return Warp_Speed1554217618750_1202_gl_FragColor *= 1.0;\n    }\nvoid main() \n    {\n        gl_FragColor = (New_Basic_Shader1554217331092_984_main() + Warp_Speed1554217618750_1202_main());    }\n",
+  "vertex": "precision highp float;\nprecision highp int;\nuniform mat4 modelMatrix;\nuniform mat4 modelViewMatrix;\nuniform mat4 projectionMatrix;\nuniform mat4 viewMatrix;\nuniform mat3 normalMatrix;\nuniform vec3 cameraPosition;\nuniform float time;\nattribute vec3 position;\nattribute vec3 normal;\nattribute vec2 uv;\nattribute vec2 uv2;\nvarying vec3 New_Basic_Shader1554217331092_984_vPosition;\nvarying vec3 New_Basic_Shader1554217331092_984_vNormal;\nvarying vec2 New_Basic_Shader1554217331092_984_vUv;\nvarying vec2 New_Basic_Shader1554217331092_984_vUv2;\nvarying vec3 Warp_Speed1554217618750_1202_vPosition;\nvarying vec3 Warp_Speed1554217618750_1202_vNormal;\nvarying vec2 Warp_Speed1554217618750_1202_vUv;\nvarying vec2 Warp_Speed1554217618750_1202_vUv2;\nvec4 New_Basic_Shader1554217331092_984_main() \n    {\n        vec4 New_Basic_Shader1554217331092_984_gl_Position = vec4(0.0);\n        New_Basic_Shader1554217331092_984_vNormal = normal;\n        New_Basic_Shader1554217331092_984_vUv = uv;\n        New_Basic_Shader1554217331092_984_vUv2 = uv2;\n        New_Basic_Shader1554217331092_984_vPosition = position;\n        New_Basic_Shader1554217331092_984_gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n        return New_Basic_Shader1554217331092_984_gl_Position *= 0.0;\n    }\nvec4 Warp_Speed1554217618750_1202_main() \n    {\n        vec4 Warp_Speed1554217618750_1202_gl_Position = vec4(0.0);\n        Warp_Speed1554217618750_1202_vNormal = normal;\n        Warp_Speed1554217618750_1202_vUv = uv;\n        Warp_Speed1554217618750_1202_vUv2 = uv2;\n        Warp_Speed1554217618750_1202_vPosition = position;\n        Warp_Speed1554217618750_1202_gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n        return Warp_Speed1554217618750_1202_gl_Position *= 1.0;\n    }\nvoid main() \n    {\n        gl_Position = New_Basic_Shader1554217331092_984_main() + Warp_Speed1554217618750_1202_main();    }\n",
+  "uniforms": {
+    "cameraPosition": {
+      "type": "v3",
+      "glslType": "vec3"
+    },
+    "time": {
+      "type": "f",
+      "glslType": "float"
+    },
+    "lightPosition": {
+      "value": {
+        "x": "2",
+        "y": 1.25,
+        "z": 1.25
+      },
+      "type": "v3",
+      "glslType": "vec3"
+    },
+    "New_Basic_Shader1554217331092_984_color": {
+      "value": {
+        "r": 0.6823529411764706,
+        "g": 0.8862745098039215,
+        "b": 0.2235294117647059
+      },
+      "type": "c",
+      "glslType": "vec3"
+    },
+    "mouse": {
+      "value": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "type": "v2",
+      "glslType": "vec2"
+    },
+    "fadeAway": {
+      "value": "0.5",
+      "type": "f",
+      "glslType": "float"
+    },
+    "uniformity": {
+      "value": "10",
+      "type": "f",
+      "glslType": "float"
+    },
+    "Warp_Speed1554217618750_1202_color": {
+      "value": {
+        "r": 0.8745098039215686,
+        "g": 0.5725490196078431,
+        "b": 0.058823529411764705
+      },
+      "type": "c",
+      "glslType": "vec3"
+    },
+    "speed": {
+      "value": "2",
+      "type": "f",
+      "glslType": "float"
+    },
+    "resolution": {
+      "value": {
+        "x": "1",
+        "y": "1"
+      },
+      "type": "v2",
+      "glslType": "vec2"
+    }
+  }
+}

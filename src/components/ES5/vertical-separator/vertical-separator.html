@@ -1,4 +1,11 @@
-@@include('./src/components/ES5/_global/include-header.html')
+<!DOCTYPE html>
+<html lang="@@{website_lang}" dir="@@{website_dirLTR}">
+<head>
+	<meta charset="@@{website_charset}" />
+	<title>Vertical Separator - @@{website_title}</title>	
+	@@include('./src/components/ES5/_global/include-header.html')
+</head>  
+
      
   <body class="page">
   
@@ -33,51 +40,61 @@
              </div>
         
         </header>
-        <div class="uix-header__placeholder"></div>
+        <div class="uix-header__placeholder js-uix-header__placeholder-autoheight"></div>
       
     
         
-        
-       <!-- Content 01  
-        ====================================================== -->
-        <section>
-            <div class="container uix-t-c">
-                    <div class="row">
-                        <div class="col-md-8 offset-md-2">
-                            <h2>Vertical Separator</h2>
+		<main id="uix-maincontent">
+			
+			<!-- Content   
+			====================================================== -->
+			<section class="uix-spacing--s uix-spacing--no-bottom">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<h3>Vertical Separator</h3>
+							<hr>
+							
+							
+						</div>
+					</div>
+					<!-- .row end -->
 
-                        </div>
-                    </div>
-                    <!-- .row end -->
-              
-                    
-            </div>
-            <!-- .container end -->
- 
-        </section>
-        
-        
-        
-       <!-- Content 02 
-        ====================================================== -->
-        <section class="uix-spacing--m">
-            <div class="container uix-t-c">
-                    <div class="row">
-                        <div class="col-md-8 offset-md-2">
+				</div>
+				<!-- .container end -->
 
-						    <div class="uix-vertical-separator"><span>or</span></div>
-                       
-                        </div>
-                    </div>
-                    <!-- .row end -->
-           
-                    
-            </div>
-            <!-- .container end -->
- 
-        </section>   
+			</section>
+			
+			
+			
+		
 
-    
+
+		   <!-- Content  
+			====================================================== -->
+			<section class="uix-spacing--s">
+				<div class="container uix-t-c">
+						<div class="row">
+							<div class="col-12">
+
+								<div class="uix-vertical-separator"><span>or</span></div>
+
+							</div>
+						</div>
+						<!-- .row end -->
+
+
+				</div>
+				<!-- .container end -->
+
+			</section>   
+
+
+			
+		</main>
+		
+        
+		   
         
     
         

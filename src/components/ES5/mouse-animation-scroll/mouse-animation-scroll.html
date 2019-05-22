@@ -1,4 +1,11 @@
-@@include('./src/components/ES5/_global/include-header.html')
+<!DOCTYPE html>
+<html lang="@@{website_lang}" dir="@@{website_dirLTR}">
+<head>
+	<meta charset="@@{website_charset}" />
+	<title>Mouse Animation Scroll - @@{website_title}</title>	
+	@@include('./src/components/ES5/_global/include-header.html')
+</head>  
+
      
   <body class="page">
   
@@ -34,42 +41,52 @@
              </div>
         
         </header>
-        <div class="uix-header__placeholder"></div>
+        <div class="uix-header__placeholder js-uix-header__placeholder-autoheight"></div>
       
       
-        <!-- Content 01
-        ====================================================== -->
-        <section class="uix-spacing--s">
-            <div class="container uix-t-c">
-                    <div class="row">
-                        <div class="col-md-8 offset-md-2">
-                            <h2>Mouse Animation Scroll</h2>
-                        </div>
-                    </div>
-                    <!-- .row end -->
-              
-                    
-            </div>
-            <!-- .container end -->
- 
-        </section>
-     
-       
-    
-       <!-- Content 02
-        ====================================================== -->
-        <div style="background: #000; padding: 5rem; margin: 3rem 0; position: relative;">
-            <div class="uix-mouse-icon uix-mouse-icon--simulation"></div>
-		</div>
-        
-        <div style="background: #000; padding: 5rem; margin: 3rem 0; position: relative;">
-            <div class="uix-mouse-icon uix-mouse-icon--arrow"></div>
-		</div> 
-       
-        <div style="background: #000; padding: 5rem; margin: 3rem 0; position: relative;">
-            <div class="uix-mouse-icon uix-mouse-icon--arrow-simple"></div>
-		</div>      
-        
+		<main id="uix-maincontent">
+			
+			<!-- Content 
+			====================================================== -->
+			<section class="uix-spacing--s uix-spacing--no-bottom">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<h3>Mouse Animation Scroll</h3>
+							<p>A delicate scrolling mouse animation will offer direction to the user after the initial land on a website. </p>
+							<hr>
+							
+							
+						</div>
+					</div>
+					<!-- .row end -->
+
+				</div>
+				<!-- .container end -->
+
+			</section>
+			
+			
+
+
+		   <!-- Content 
+			====================================================== -->
+			<div style="background: #000; padding: 5rem; margin: 3rem 0; position: relative;">
+				<div class="uix-mouse-icon uix-mouse-icon--simulation"></div>
+			</div>
+
+			<div style="background: #000; padding: 5rem; margin: 3rem 0; position: relative;">
+				<div class="uix-mouse-icon uix-mouse-icon--arrow"></div>
+			</div> 
+
+			<div style="background: #000; padding: 5rem; margin: 3rem 0; position: relative;">
+				<div class="uix-mouse-icon uix-mouse-icon--arrow-simple"></div>
+			</div>      
+
+			
+		</main>
+		
+			
         
         @@include('./src/components/ES5/_global/include-copyright.html')
         

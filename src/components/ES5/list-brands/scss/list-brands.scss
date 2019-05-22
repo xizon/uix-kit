@@ -3,7 +3,6 @@
 /* ====================================================== */
 .uix-list-brands {
 	display: block;
-	margin: 3rem 0;
 	overflow:auto; /* CSS background disappears when using float:left */
 	
 	&::after {
@@ -31,45 +30,53 @@
 	}
 	
 	
-	&.uix-list-brands--tiny li {
-		width: 16.66666666666667%;
+}
+
+@media all and (min-width: 769px) {
+
+	.uix-list-brands {
 		
-		
-		&:nth-child(6n+1) {
-			clear: both;
+
+		&.uix-list-brands--tiny li {
+			width: 16.66666666666667%;
+
+
+			&:nth-child(6n+1) {
+				clear: both;
+			}
+
 		}
-		
+
+		&.uix-list-brands--small li {
+			width: 20%;
+
+			&:nth-child(5n+1) {
+				clear: both;
+			}	
+
+		}
+
+		/* Default */
+		&.uix-list-brands--medium li {
+			width: 25%;
+
+			&:nth-child(4n+1) {
+				clear: both;
+			}	
+
+		}
+
+		&.uix-list-brands--large li {
+			width: 33.33333333333333%;
+
+
+			&:nth-child(3n+1) {
+				clear: both;
+			}		
+
+		}
+
 	}
-	
-	&.uix-list-brands--small li {
-		width: 20%;
-		
-		&:nth-child(5n+1) {
-			clear: both;
-		}	
-		
-	}
-	
-	/* Default */
-	&.uix-list-brands--medium li {
-		width: 25%;
-		
-		&:nth-child(4n+1) {
-			clear: both;
-		}	
-		
-	}
-	
-	&.uix-list-brands--large li {
-		width: 33.33333333333333%;
-		
-		
-		&:nth-child(3n+1) {
-			clear: both;
-		}		
-		
-	}
-	
 }
 
 @media all and (max-width: 768px) {

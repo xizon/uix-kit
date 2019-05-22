@@ -1,4 +1,11 @@
-@@include('./src/components/ES5/_global/include-header.html')
+<!DOCTYPE html>
+<html lang="@@{website_lang}" dir="@@{website_dirLTR}">
+<head>
+	<meta charset="@@{website_charset}" />
+	<title>Scroll Reveal - @@{website_title}</title>	
+	@@include('./src/components/ES5/_global/include-header.html')
+</head>  
+
      
   <body class="page">
   
@@ -36,89 +43,75 @@
         </header>
 
     
-             
-             
-        <style>
-			.demo-sr-active {
-				transition: all 1s ease;
-				transform: scale(0.7);
-			}
+		<main id="uix-maincontent">
 			
-		</style>
-              
-       
-       
-        <!-- Scroll Reveal
-        ============================================= --> 
-        <section class="uix-spacing--s uix-height--50 uix-el--transparent" data-uix-anim='{"viewport":"100%","from":{"opacity":0,"x":100},"to":{"opacity":1,"x":0},"ease":"Power2.easeOut","duration":0.8,"delay":0,"infinite":false}' style="background: #cb60b3; background: linear-gradient(to bottom, #cb60b3 0%,#ad1283 100%);">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 offset-md-2">
-                        <h3>Moving the element when going left</h3>
-                    </div>
-                </div>
-            </div>
-        </section> 
-        
+			<style>
+				.demo-sr-active {
+					transition: all 1s ease;
+					transform: scale(0.7);
+				}
 
-        
-        <section class="uix-spacing--s uix-height--50 uix-el--transparent" data-uix-anim='{"viewport":"100%","from":{"opacity":0,"scale":0.5,"transform":"translateX(50px) rotate(30deg)"},"to":{"opacity":1,"scale":1,"transform":"translateX(0) rotate(0deg)"},"ease":"Power2.easeOut","duration":0.8,"delay":0.5,"infinite":false}' style="background: #d2ff52; background: linear-gradient(to bottom, #d2ff52 0%,#91e842 100%);">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 offset-md-2">
-                        <h3>Flipping the element when going left</h3>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
+			</style>
 
-        <section class="uix-spacing--s uix-height--50 uix-el--transparent" data-uix-anim='{"viewport":"100%","from":{"opacity":0,"y":150},"to":{"opacity":1,"y":0},"ease":"Power2.easeOut","duration":0.8,"delay":0,"infinite":true}' style="background: #ffb76b; background: linear-gradient(to bottom, #ffb76b 0%,#ff7f04 100%);">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 offset-md-2">
-                        <h3>Infinite loop animation</h3>
-                    </div>
-                </div>
-            </div>
-        </section>
-    
-    
-        <section class="uix-spacing--s uix-height--50 uix-el--transparent" data-uix-anim='{"viewport":"100%","from":{"opacity":0,"y":150},"to":{"opacity":1,"y":0},"ease":"Power2.easeOut","duration":0.8,"delay":0,"infinite":false}' style="background: #f0b7a1; background: linear-gradient(to bottom, #f0b7a1 0%,#8c3310 100%);">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 offset-md-2">
-                        <h3>Moving the element when going top</h3>
-                    </div>
-                </div>
-            </div>
-        </section>
-           
-        
 
-        <section class="uix-spacing--s uix-height--50" data-uix-anim='{"viewport":"100%","from":"","to":".demo-sr-active","infinite":true}' style="background: #b5bdc8; background: linear-gradient(to bottom, #bb51dd 0%,#8b0cb1 100%);">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 offset-md-2">
-						<h3>Add class <code>.demo-sr-active</code> when element becomes visible</h3>
-                    </div>
-                </div>
-            </div>
-        </section>
-               
-        
-          
-    
-        <section class="uix-spacing--s uix-height--50 uix-el--zoom" data-uix-anim='{"viewport":"100%","from":{"scale":0},"to":{"scale":1},"ease":"Power2.easeOut","duration":0.8,"delay":0,"infinite":false}' style="background: #b5bdc8; background: linear-gradient(to bottom, #b5bdc8 0%,#28343b 100%);">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 offset-md-2">
-                        <h3>Scale effect</h3>
-                    </div>
-                </div>
-            </div>
-        </section>
+
+			<!-- Scroll Reveal
+			============================================= --> 
+			<section class="uix-spacing--s uix-height--50 uix-el--transparent" data-uix-anim='{"viewport":"100%","from":{"opacity":0,"x":100},"to":{"opacity":1,"x":0},"ease":"Power2.easeOut","duration":0.8,"delay":0,"infinite":false}' style="background: #cb60b3; background: linear-gradient(to bottom, #cb60b3 0%,#ad1283 100%);">
+				<div class="uix-v-align--relative uix-t-c">
+					<h3>Moving the element when going left</h3>
+				</div>
+			</section> 
+
+
+
+			<section class="uix-spacing--s uix-height--50 uix-el--transparent" data-uix-anim='{"viewport":"100%","from":{"opacity":0,"scale":0.5,"transform":"translateX(50px) rotate(30deg)"},"to":{"opacity":1,"scale":1,"transform":"translateX(0) rotate(0deg)"},"ease":"Power2.easeOut","duration":0.8,"delay":0.5,"infinite":false}' style="background: #d2ff52; background: linear-gradient(to bottom, #d2ff52 0%,#91e842 100%);">
+				<div class="uix-v-align--relative uix-t-c">
+					<h3>Flipping the element when going left</h3>
+
+				</div>
+			</section>
+
+
+			<section class="uix-spacing--s uix-height--50 uix-el--transparent" data-uix-anim='{"viewport":"100%","from":{"opacity":0,"y":150},"to":{"opacity":1,"y":0},"ease":"Power2.easeOut","duration":0.8,"delay":0,"infinite":true}' style="background: #ffb76b; background: linear-gradient(to bottom, #ffb76b 0%,#ff7f04 100%);">
+				<div class="uix-v-align--relative uix-t-c">
+					<h3>Infinite loop animation</h3>
+
+				</div>
+			</section>
+
+
+			<section class="uix-spacing--s uix-height--50 uix-el--transparent" data-uix-anim='{"viewport":"100%","from":{"opacity":0,"y":150},"to":{"opacity":1,"y":0},"ease":"Power2.easeOut","duration":0.8,"delay":0,"infinite":false}' style="background: #f0b7a1; background: linear-gradient(to bottom, #f0b7a1 0%,#8c3310 100%);">
+				<div class="uix-v-align--relative uix-t-c">
+					<h3>Moving the element when going top</h3>
+
+				</div>
+			</section>
+
+
+
+			<section class="uix-spacing--s uix-height--50" data-uix-anim='{"viewport":"100%","from":"","to":".demo-sr-active","infinite":true}' style="background: #b5bdc8; background: linear-gradient(to bottom, #bb51dd 0%,#8b0cb1 100%);">
+				<div class="uix-v-align--relative uix-t-c">
+					<h3>Add class <code>.demo-sr-active</code> when element becomes visible</h3>
+
+				</div>
+			</section>
+
+
+
+
+			<section class="uix-spacing--s uix-height--50 uix-el--zoom" data-uix-anim='{"viewport":"100%","from":{"scale":0},"to":{"scale":1},"ease":"Power2.easeOut","duration":0.8,"delay":0,"infinite":false}' style="background: #b5bdc8; background: linear-gradient(to bottom, #b5bdc8 0%,#28343b 100%);">
+				<div class="uix-v-align--relative uix-t-c">
+					<h3>Scale effect</h3>
+
+				</div>
+			</section>
+
+			
+		</main>
+		
              
+			
 
                         
             

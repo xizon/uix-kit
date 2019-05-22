@@ -8,7 +8,7 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.VIDEOS               = APP.VIDEOS || {};
-	APP.VIDEOS.version       = '0.0.8';
+	APP.VIDEOS.version       = '0.0.9';
     APP.VIDEOS.documentReady = function( $ ) {
 
 		var $window      = $( window ),
@@ -94,91 +94,94 @@ APP = ( function ( APP, $, window, document ) {
 				});
 			}
 			
-			var myPlayer = videojs( curVideoID, {
-					                  width     : dataW,
-					                  height    : dataH,
-				                      loop      : dataLoop,
-				                      autoplay   : dataAuto
-					
-									});
 			
+			var myPlayer = videojs( curVideoID, 
+			   {
+				  width     : dataW,
+				  height    : dataH,
+				  loop      : dataLoop,
+				  autoplay  : dataAuto
+				}, 
+			   function onPlayerReady() {
+				
 			
+				    var initVideo = function( obj ) {
+						//Get Video Dimensions
+						var curW    = obj.videoWidth(),
+							curH    = obj.videoHeight(),
+							newW    = curW,
+							newH    = curH;
 
-			myPlayer.ready(function() {
-				
-				/* ---------  Video initialize */
-				myPlayer.on( 'loadedmetadata', function() {
+						newW = videoWrapperW;
 
-					//Get Video Dimensions
-					var curW    = this.videoWidth(),
-						curH    = this.videoHeight(),
-						newW    = curW,
-						newH    = curH;
-					
-					newW = videoWrapperW;
+						//Scaled/Proportional Content 
+						newH = curH*(newW/curW);
 
-					//Scaled/Proportional Content 
-					newH = curH*(newW/curW);
-					
-				
-					if ( !isNaN( newW ) && !isNaN( newH ) )  {
-						myPlayer.height( newH );		
-						myPlayer.width( newW );		
+
+						if ( !isNaN( newW ) && !isNaN( newH ) )  {
+							obj.height( newH );		
+							obj.width( newW );		
+						}
+
+
+						//Show this video wrapper
+						$this.css( 'visibility', 'visible' );
+
+						//Hide loading effect
+						$this.find( '.vjs-loading-spinner, .vjs-big-play-button' ).hide();		
 					}
 
-					
-					//Show this video wrapper
-					$this.css( 'visibility', 'visible' );
-					
 
-
-					//Hide loading effect
-					$this.find( '.vjs-loading-spinner, .vjs-big-play-button' ).hide();
-
-				});		
-			
-
-
-			
+					initVideo( this );
 				
-				/* ---------  Set, tell the player it's in fullscreen  */
-				if ( dataAuto ) {
+					/* ---------  Video initialize */
+					this.on( 'loadedmetadata', function() {
 
-					myPlayer.muted( true ); //Fix an error of Video auto play is not working in browser
-					myPlayer.play();
+						initVideo( this );
 
-				}
+					});
 
-				/* ---------  Disable control bar play button click */
-				if ( !dataControls ) {
-					myPlayer.controls( false );
-				}
 				
-				
-				/* ---------  Determine if the video is auto played from mobile devices  */
-				var autoPlayOK = false;
+					/* ---------  Set, tell the player it's in fullscreen  */
+					if ( dataAuto ) {
 
-				myPlayer.on( 'timeupdate', function() {
+						this.muted( true ); //Fix an error of Video auto play is not working in browser
+						this.play();
 
-					var duration = this.duration();
-					if ( duration > 0 ) {
-						autoPlayOK = true;
-						if ( this.currentTime() > 0 ) {
+					}
+
+					/* ---------  Disable control bar play button click */
+					if ( !dataControls ) {
+						this.controls( false );
+					}
+
+
+					/* ---------  Determine if the video is auto played from mobile devices  */
+					var autoPlayOK = false;
+
+					this.on( 'timeupdate', function() {
+
+						var duration = this.duration();
+						if ( duration > 0 ) {
 							autoPlayOK = true;
-							this.off( 'timeupdate' );
+							if ( this.currentTime() > 0 ) {
+								autoPlayOK = true;
+								this.off( 'timeupdate' );
 
-							//Hide cover and play buttons when the video automatically played
-							$( '#' + coverPlayBtnID ).hide();
-						} 
+								//Hide cover and play buttons when the video automatically played
+								$( '#' + coverPlayBtnID ).hide();
+							} 
 
-					}
+						}
 
-				});
+					});
 				
-
-
-
-			});
+				
+				
+			    });
+			
+			
+			
 			
 		});
 		
@@ -378,97 +381,105 @@ APP = ( function ( APP, $, window, document ) {
 
 
 			//----- Embed local video
-			var myPlayer     = videojs( vid, {
-									  width     : 1,
-									  height    : 1,
-									  autoplay  : true,
-									  loop      : true
-									});
+			var myPlayer = videojs( vid, 
+			   {
+				  width     : 1,
+				  height    : 1,
+				  autoplay  : true,
+				  loop      : true
+				}, 
+			   function onPlayerReady() {
+				
+			
+				    var initVideo = function( obj ) {
+						//Get Video Dimensions
+						var curW    = obj.videoWidth(),
+							curH    = obj.videoHeight(),
+							newW    = curW,
+							newH    = curH;
+
+						//Resise modal
+						if ( curH > newMaxH ) {
+							newH = newMaxH;
+
+							//Scaled/Proportional Content 
+							newW = curW*(newH/curH);
 
 
-			myPlayer.ready(function() {
+						}
 
 
-				/* ---------  Video Modal initialize */
-				myPlayer.on( 'loadedmetadata', function() {
+						if ( newW > newMaxW ) {
+							newW = newMaxW;
 
-					//Get Video Dimensions
-					var curW    = this.videoWidth(),
-						curH    = this.videoHeight(),
-						newW    = curW,
-						newH    = curH;
-
-					//Resise modal
-					if ( curH > newMaxH ) {
-						newH = newMaxH;
-
-						//Scaled/Proportional Content 
-						newW = curW*(newH/curH);
+							//Scaled/Proportional Content 
+							newH = curH*(newW/curW);
+						}	
 
 
+						obj.height( newH );		
+						obj.width( newW );
+
+
+						//In order to allow CSS to support video centering
+						$vContainer.find( ' > div.video-js' ).css({
+							'width' : newW + 'px'
+						});			
+
+
+						//Vertically center the video area
+						var mt = parseFloat( windowHeight - newH )/2 - 50;
+						$vContainer.css({
+							'transform' : 'translateY('+ mt +'px)'
+						});			
+
+						//Display the wrapper of video
+						displayVC();	
 					}
 
 
-					if ( newW > newMaxW ) {
-						newW = newMaxW;
 
-						//Scaled/Proportional Content 
-						newH = curH*(newW/curW);
-					}	
+					initVideo( this );
+				
+					/* ---------  Video Modal initialize */
+					this.on( 'loadedmetadata', function() {
 
+						initVideo( this );
 
-					myPlayer.height( newH );		
-					myPlayer.width( newW );
-
-
-					//In order to allow CSS to support video centering
-					$vContainer.find( ' > div.video-js' ).css({
-						'width' : newW + 'px'
-					});			
-					
-					
-					//Vertically center the video area
-					var mt = parseFloat( windowHeight - newH )/2 - 50;
-					$vContainer.css({
-						'transform' : 'translateY('+ mt +'px)'
-					});			
-					
-					//Display the wrapper of video
-					displayVC();
-					
-					//If a player instance has already been created for this variable.
-					$vContainer.data( 'video-player-init', 1 );
-
-					
-				});
-
-				/* ---------  Set, tell the player it's in fullscreen  */
-				//myPlayer.exitFullscreen();
-				//myPlayer.requestFullscreen();
-				myPlayer.play();
-
-				/* ---------  Disable control bar play button click */
-				//myPlayer.controls( false );
-
-				/* ---------  Display video playback progress  */
-				myPlayer.on( 'timeupdate', function() {
-
-					var duration = this.duration(),
-					progressAmount = '0%';
-					if (duration > 0) {
-						progressAmount = ((this.currentTime() / duration) * 100) + "%";
-					}
-
-					//console.log( progressAmount );
-				});
-
-				/* ---------  Callback for when a video has ended */
-				myPlayer.on( 'ended', function() {
-					//console.log( 'video is done!' );
-				});
+						//If a player instance has already been created for this variable.
+						$vContainer.data( 'video-player-init', 1 );
 
 
-			});
+					});
+
+					/* ---------  Set, tell the player it's in fullscreen  */
+					//this.exitFullscreen();
+					//this.requestFullscreen();
+					this.play();
+
+					/* ---------  Disable control bar play button click */
+					//this.controls( false );
+
+					/* ---------  Display video playback progress  */
+					this.on( 'timeupdate', function() {
+
+						var duration = this.duration(),
+						progressAmount = '0%';
+						if (duration > 0) {
+							progressAmount = ((this.currentTime() / duration) * 100) + "%";
+						}
+
+						//console.log( progressAmount );
+					});
+
+					/* ---------  Callback for when a video has ended */
+					this.on( 'ended', function() {
+						//console.log( 'video is done!' );
+					});
+				
+				
+			    });
+			
 
 			
 			/* ---------  Display the wrapper of video  */
@@ -481,7 +492,7 @@ APP = ( function ( APP, $, window, document ) {
 			$( document ).on( 'click', '.uix-modal-box .uix-modal-box__close, .uix-modal-mask:not(.js-uix-disabled)', function() {
 
 				myPlayer.ready(function() {
-					myPlayer.pause();
+					this.pause();
 					
 				});				
 

@@ -82,16 +82,13 @@
 
 /* Header Placeholder, to prevent floating elements from affecting layout */
 .uix-header__placeholder {
-	height: 185px;
+	height: 75px;
 	background: none;
 	
 	&.is-fixed {
 		
 	}
 	
-	&.uix-header__placeholder--auto-height {
-	    height: 75px;
-	}
 
 }
 
@@ -114,15 +111,12 @@
 
 		
 	}
-	
+
+	/* Header Placeholder, to prevent floating elements from affecting layout */
 	.uix-header__placeholder {
-		height: calc(185px - 75px);
-
-		&.uix-header__placeholder--auto-height {
-			height: 0;
-		}
-
+		height: 0;
 	}
 
+	
 	
 }

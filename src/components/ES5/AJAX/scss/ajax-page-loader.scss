@@ -2,18 +2,10 @@
    <!-- Ajax Page Loader (Loading A Page via Ajax Into Div)  --> 
 /* ====================================================== */
 
-
 .uix-ajax-load__container {
-	padding: 7rem 0;
 	position: relative;
 }
 
-@media all and (max-width: 768px) {
-	
-	.uix-ajax-load__container {
-		padding: 2rem 0;
-	}	
-}
 
 /* Used for full page */
 .uix-ajax-load__fullpage-container {

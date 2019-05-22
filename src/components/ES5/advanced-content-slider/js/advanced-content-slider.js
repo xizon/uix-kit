@@ -10,12 +10,11 @@
  * @requires ./examples/assets/js/min/hammer.min.js
  */
 
-
 APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.ADVANCED_CONTENT_SLIDER               = APP.ADVANCED_CONTENT_SLIDER || {};
-	APP.ADVANCED_CONTENT_SLIDER.version       = '0.0.2';
+	APP.ADVANCED_CONTENT_SLIDER.version       = '0.0.3';
     APP.ADVANCED_CONTENT_SLIDER.documentReady = function( $ ) {
 
 		var $window                   = $( window ),
@@ -61,6 +60,11 @@ APP = ( function ( APP, $, window, document ) {
 					dataDraggableCursor        = $this.data( 'draggable-cursor' ),
 					dataControlsPaginationAuto = false;
 
+				
+				//Autoplay times
+				var playTimes;
+				//A function called "timer" once every second (like a digital watch).
+				$this[0].animatedSlides;
 				
 				
 
@@ -115,7 +119,13 @@ APP = ( function ( APP, $, window, document ) {
 					if ( !$( this ).hasClass( 'active' ) ) {
 						
 						sliderUpdates( $( this ).attr( 'data-index' ), $this, dataControlsArrows, dataControlsPagination );
+						
+						//Pause the auto play event
+					    clearInterval( $this[0].animatedSlides );	
+						
+						
 					}
+					
 
 
 
@@ -137,6 +147,10 @@ APP = ( function ( APP, $, window, document ) {
 					e.preventDefault();
 
 					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
+					
+					//Pause the auto play event
+					clearInterval( $this[0].animatedSlides );	
+					
 
 				});
 
@@ -144,6 +158,9 @@ APP = ( function ( APP, $, window, document ) {
 					e.preventDefault();
 
 					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
+					
+					//Pause the auto play event
+					clearInterval( $this[0].animatedSlides );	
 
 				});
 				
@@ -182,20 +199,103 @@ APP = ( function ( APP, $, window, document ) {
 					//You know the pan has ended
 					//and you know which action they were taking
 					if ( direction == 'panleft' ) {
-						sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );	
+						sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
+						//Pause the auto play event
+				    	clearInterval( $this[0].animatedSlides );	
 					}
 					
 					if ( direction == 'panright' ) {
 						sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
+						//Pause the auto play event
+				    	clearInterval( $this[0].animatedSlides );	
 					}			
 
 					
-
 				});	
+				
+				
+				
+				//Autoplay Slider
+				//-------------------------------------		
+				var dataAuto                 = $this.data( 'auto' ),
+					dataTiming               = $this.data( 'timing' ),
+					dataLoop                 = $this.data( 'loop' );
+
+				if ( typeof dataAuto === typeof undefined ) dataAuto = false;	
+				if ( typeof dataTiming === typeof undefined ) dataTiming = 10000;
+				if ( typeof dataLoop === typeof undefined ) dataLoop = false;
+
+
+				if ( dataAuto && !isNaN( parseFloat( dataTiming ) ) && isFinite( dataTiming ) ) {
+
+					sliderAutoPlay( playTimes, dataTiming, dataLoop, $this, dataControlsArrows, dataControlsPagination );
+
+					$this.on({
+						mouseenter: function() {
+							clearInterval( $this[0].animatedSlides );
+						},
+						mouseleave: function() {
+							sliderAutoPlay( playTimes, dataTiming, dataLoop, $this, dataControlsArrows, dataControlsPagination );
+						}
+					});	
+
+				}
+
 			
 			});	
 			
+			
 		}
+		
+		
+		/*
+		 * Trigger slider autoplay
+		 *
+		 * @param  {Function} playTimes      - Number of times.
+		 * @param  {Number} timing           - Autoplay interval.
+		 * @param  {Boolean} loop            - Determine whether to loop through each item.
+		 * @param  {Object} slider           - Selector of the slider .
+		 * @param  {String} arrows           - Controller name of prev/next buttons.
+		 * @param  {String} pagination       - Controller name of pagination buttons.
+		 * @return {Void}                    - The constructor.
+		 */
+		function sliderAutoPlay( playTimes, timing, loop, slider, arrows, pagination ) {	
+
+			var items = slider.find( '.uix-advanced-content-slider__item' ),
+				total = items.length;
+			
+			slider[0].animatedSlides = setInterval( function() {
+
+				playTimes = parseFloat( items.filter( '.active' ).index() );
+				playTimes++;
+
+
+				if ( !loop ) {
+					if ( playTimes < total && playTimes >= 0 ) {
+
+						var slideNextId = playTimes;	
+
+						sliderUpdates( slideNextId, slider, arrows, pagination );
+					}
+				} else {
+					if ( playTimes == total ) playTimes = 0;
+					if ( playTimes < 0 ) playTimes = total-1;		
+
+					var slideNextId = playTimes;	
+
+
+					//Prevent problems with styles when switching in positive order
+					sliderUpdates( slideNextId, slider, arrows, pagination );	
+
+				}
+
+
+
+			}, timing );	
+		}
+
+		
+		
 		
 		/*
 		 * Transition Between Slides
@@ -213,6 +313,16 @@ APP = ( function ( APP, $, window, document ) {
 				$prev         = $( arrows ).find( '.uix-advanced-content-slider__arrows--prev' ),
 				$next         = $( arrows ).find( '.uix-advanced-content-slider__arrows--next' ),
 				$pagination   = $( pagination ).find( 'li a' );
+			
+			
+			
+			
+			//Get the animation speed
+			if ( typeof slider.data( 'speed' ) != typeof undefined && slider.data( 'speed' ) != false ) {
+				animDuration = slider.data( 'speed' );
+			}
+
+			
 				
 			if ( elementIndex <= itemsTotal - 1 && elementIndex >= 0 ) {
 

@@ -1,6 +1,123 @@
 # Changelog
 
 
+#### = 3.5.0 (May 13, 2019) =
+
+* New: Added a tiny style to button component.
+* New: Added a demonstration of the grid system.
+* Tweak: Minor adjustment of the component Demo.
+* Tweak: Optimized core stylesheet.
+* Tweak: Optimized header placeholder styles and scripts.
+* Tweak: Removed the extension style of the New XXL container for Bootstrap 4.x.
+* Tweak: Upgraded the automatic play function of the special slider modules.
+* Tweak: Upgraded the Sticky Elements.
+* Fix: Fixed a bug for Infinite Scroll Posts.
+
+
+ 
+ 
+#### = 3.4.6 (May 7, 2019) =
+
+* New: Added modifiers to three.js extensions.
+* New: Add a new module "3D Explosive Particle Slider".
+* New: Add a new module "3D Shatter Slider".
+* Tweak: Removed Advanced Slider 3D Rotating.
+* Tweak: Optimized the basic js module in src/components/ES5/_global/.
+* Fix: Fixed a bug in the default value of the radio control.
+
+
+
+#### = 3.4.5 (April 24, 2019) =
+
+* Fix: Fixed a bug of Input Number form type.
+* Tweak: Minor adjustment of the three.js component directory structure.
+* Tweak: Update webpack.config.js.
+* Tweak: Add a separate title to each demo page.
+
+
+#### = 3.4.4 (April 19, 2019) =
+
+* Tweak: Optimized radio component.
+* Tweak: Adjusted the 3D modules script structure.
+* New: Increase a function of numerical control for number component.
+
+
+
+#### = 3.4.3 (April 11, 2019) =
+
+* Fix: Solved the problem of cross-domain video playback.
+* New: Added THREE.MeshLine.js and simplex-noise.js to three.js extensions.
+* Tweak: Optimized script and style for some modules, such as: Equal-width Columns, Card, Brands List.
+* Tweak: Adjust the assets folder of shaders.
+* Tweak: Upgraded videojs to 7.5.3.
+
+
+
+#### = 3.4.2 (April 8, 2019) =
+
+* Fix: Fixed an issue of responsive table.
+* New: Add d3-threeD in order to parse SVG with 3D.
+* New: Add some new effects of shader.
+* Tweak: Beautify some scripts.
+* Tweak: Upgraded the module "3D Gallery".
+* Tweak: Upgraded javascript of ShaderRuntime.
+
+
+
+
+#### = 3.4.1 (March 29, 2019) =
+
+* New: Add a new module "3D Mouse Interaction 2".
+* New: Added support for shaderfrog.
+* Tweak: Upgraded the module "3D Background".
+* Fix: Fixed a minor bug in form linkage.
+
+
+
+#### = 3.3.8 (March 27, 2019) =
+
+* Tweak: Subtle style optimization.
+
+
+#### = 3.3.7 (March 25, 2019) =
+
+* Tweak: Optimized tag semantics for html.
+* Tweak: Optimized shader loader of module "3D Background".
+
+
+#### = 3.3.6 (March 22, 2019) =
+
+* Tweak: Update the GUID function.
+* Tweak: Enhanced the functionality of the switch component.
+
+
+#### = 3.3.5 (March 20, 2019) =
+
+* New: Add a new module "3D Gallery".
+* Tweak: Enhanced HTML support for aria-* and role properties.
+* Tweak: Add some helper classes to Vertical Centering.
+* Tweak: Change the webpack config.
+
+
+
+#### = 3.3.3 (March 19, 2019) =
+
+* Tweak: Optimized module "3D Background".
+
+
+#### = 3.3.2 (March 18, 2019) =
+
+* New: Add a new module "3D Mouse Interaction".
+* New: Add a new module "3D Image Transition".
+* New: Added a status for Status Badges.
+* New: Added each fullwidth button from group.
+* Tweak: Enhanced filtering of root paths in front-end html templates to prevent path slashes from overlapping
+* Tweak: Upgraded three.js to the latest version of r102.
+* Tweak: Deactivate Source Code View module.
+* Tweak: Upgraded interactive demo of 3D modules.
+
+
+
 #### = 3.3.1 (March 12, 2019) =
 
 * New: Added some "Login" premade templates.

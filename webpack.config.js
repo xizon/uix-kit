@@ -36,23 +36,26 @@ let globs = {
  * Site Info
  *************************************
  */
-
+let charset                  = 'utf-8';
+let lang                     = 'en-US';
+let dirLTR                   = 'ltr';
+let dirRTL                   = 'rtl';
 let customWebsiteVersion     = json.version,
 	customWebsiteAuthor      = json.author,
-	customWebsiteTitle       = 'Uix Kit Demo',
-	customWebsiteDesc        = 'Free Responsive HTML5 UI Kit for Fast Web Design Based On Bootstrap v4.',
-	customWebsiteCanonical   = '<link rel="canonical" href="https://uiux.cc" />',
+	customWebsiteTitle       = json.projectName,
+	customWebsiteDesc        = json.description,
+	customWebsiteCanonical   = '<link rel="canonical" href="'+json.projectURL+'" />',
 	customWebsiteGenerator   = 'Uix Kit',
 	customWebsiteHash        = randomString({length: 20}),
 	customWebsiteComment     = `
 ## Project Name        :  ` + customWebsiteTitle + `
 ## Project Description :  ` + customWebsiteDesc + `
 ## Version             :  ` + customWebsiteVersion + `
-## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
+## Based on            :  Uix Kit (` + json.homepage + `)
 ## Last Update         :  ` + moment().format( "MMMM D, YYYY" ) + `
-## Created by          :  UIUX Lab (https://uiux.cc)
-## Contact Us          :  uiuxlab@gmail.com
-## Released under the MIT license.
+## Created by          :  ` + json.createdInfo + `
+## Contact Us          :  ` + json.email + `
+## Released under the ` + json.license + ` license.
 	`;
 
 
@@ -298,6 +301,10 @@ targetTempFilesName.map( ( event ) => {
 				dir: globs.examples,
 				files: [ event[1], event[1] ],
 				rules: [
+					{ search: '@@{website_charset}', replace: charset },
+					{ search: '@@{website_lang}', replace: lang },
+					{ search: '@@{website_dirLTR}', replace: dirLTR },
+				    { search: '@@{website_dirRTL}', replace: dirRTL },
 					{ search: '@@{website_title}', replace: customWebsiteTitle },
 					{ search: '@@{website_desc}', replace: customWebsiteDesc },
 					{ search: '@@{website_canonical}', replace: customWebsiteCanonical },
@@ -307,6 +314,7 @@ targetTempFilesName.map( ( event ) => {
 					{ search: '@@{website_comment}', replace: customWebsiteComment },
 					{ search: '@@{website_hash}', replace: customWebsiteHash },
 
+					
 				]
 			}
 		]),	
@@ -349,6 +357,36 @@ webpackConfig.plugins.push(
 			async: true
 		}
 	}),
+	
+	
+//	new ConcatPlugin({
+//		uglify: false,
+//		sourceMap: false,
+//		name: 'result',
+//		outputPath: '',
+//		fileName: 'vendor.js',
+//		filesToConcat: [
+//			'./vendor/files/jquery.easing.min.js', 
+//			'./vendor/files/jquery.waitforimages.min.js', 
+//			'./vendor/files/video.min.js', 
+//			'./vendor/files/jquery.waypoints.min.js', 
+//			'./vendor/files/template7.min.js', 
+//			'./vendor/files/TweenMax.min.js', 
+//			'./vendor/files/pixi.min.js', 
+//			'./vendor/files/three.min.js', 
+//			'./vendor/files/anime.min.js', 
+//			'./vendor/files/hammer.min.js', 
+//			'./vendor/files/muuri.min.js',
+//			'./vendor/files/react.min.js',
+//			'./vendor/files/react-dom.min.js',
+//			'./vendor/files/radium.min.js',
+//		],
+//		attributes: {
+//			async: true
+//		}
+//	}),
+	
+	
 
 );
 
@@ -404,6 +442,10 @@ targetAllWatchFilesName.map( ( event ) => {
 						dir: globs.examples,
 						files: [ event[1], event[1] ],
 						rules: [
+							{ search: '@@{website_charset}', replace: charset },
+							{ search: '@@{website_lang}', replace: lang },
+							{ search: '@@{website_dirLTR}', replace: dirLTR },
+							{ search: '@@{website_dirRTL}', replace: dirRTL },
 							{ search: '@@{website_title}', replace: customWebsiteTitle },
 							{ search: '@@{website_desc}', replace: customWebsiteDesc },
 							{ search: '@@{website_canonical}', replace: customWebsiteCanonical },

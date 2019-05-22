@@ -1,4 +1,11 @@
-@@include('./src/components/ES5/_global/include-header.html')
+<!DOCTYPE html>
+<html lang="@@{website_lang}" dir="@@{website_dirLTR}">
+<head>
+	<meta charset="@@{website_charset}" />
+	<title>Modal Dialog - @@{website_title}</title>	
+	@@include('./src/components/ES5/_global/include-header.html')
+</head>  
+
      
   <body class="page">
   
@@ -33,27 +40,24 @@
              </div>
         
         </header>
-        <div class="uix-header__placeholder"></div>
+        <div class="uix-header__placeholder js-uix-header__placeholder-autoheight"></div>
       
-    
-        
-        
-       <!-- Content 01  
-        ====================================================== -->
-        <section>
-            <div class="container uix-t-c">
-                    <div class="row">
-                        <div class="col-md-8 offset-md-2">
-                            <h2>Modal Dialog</h2>
+   		<main id="uix-maincontent">
+			
+			<!-- Content   
+			====================================================== -->
+			<section class="uix-spacing--s uix-spacing--no-bottom">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<h3>Modal Dialog</h3>
 							<p>A modal dialog is a pop-window that forces the user to interact with it before they can go back to using the parent application.</p>
 							<p>Use the following HTML code to fire it.</p>
 
-											
-<pre class="uix-precode uix-t-l"><label>HTML</label><code>&lt;a href=&quot;javascript:void(0)&quot; data-modal-id=&quot;modal-open-3&quot; data-modal-close-onlybtn=&quot;false&quot; data-modal-height=&quot;200px&quot; data-modal-width=&quot;300px&quot; data-modal-lightbox=&quot;true&quot; data-modal-close-time=&quot;false&quot;&gt;Normal&lt;/a&gt;
 
-&lt;a href=&quot;javascript:void(0)&quot; data-video-win=&quot;true&quot; data-video-poster=&quot;assets/videos/1920x1080/demo.jpg&quot; data-video-mp4=&quot;&quot; data-video-webm=&quot;&quot; data-video-ogv=&quot;&quot; data-modal-id=&quot;web-modal-2&quot; data-modal-close-onlybtn=&quot;false&quot; data-modal-lightbox=&quot;true&quot; data-modal-close-time=&quot;false&quot;&gt;&lt;span data-video-iframe=&quot;true&quot;&gt;&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/******&quot; frameborder=&quot;0&quot; allow=&quot;autoplay; encrypted-media&quot; allowfullscreen&gt;&lt;/iframe&gt;&lt;/span&gt;Video&lt;/a&gt;</code>
+<pre class="uix-precode uix-t-l"><label>HTML</label><code>&lt;a href=&quot;javascript:void(0)&quot; data-modal-id=&quot;modal-open-3&quot; data-modal-close-onlybtn=&quot;false&quot; data-modal-height=&quot;200px&quot; data-modal-width=&quot;300px&quot; data-modal-lightbox=&quot;true&quot; data-modal-close-time=&quot;false&quot;&gt;Normal&lt;/a&gt;</code>
 </pre>		
-							
+
 <pre class="uix-precode uix-t-l"><label>HTML</label><code>&lt;div class=&quot;uix-modal-box&quot; id=&quot;modal-open-1&quot;&gt;
 	&lt;a href=&quot;javascript:void(0)&quot; class=&quot;uix-modal-box__close&quot;&gt;&lt;/a&gt;
 	&lt;div class=&quot;uix-modal-box__content&quot;&gt;
@@ -67,107 +71,169 @@
 
 	&lt;/div&gt;
 &lt;/div&gt;</code>
-</pre>							
+</pre>	
+						
+						
+							<hr>
+							
+							
+						</div>
+					</div>
+					<!-- .row end -->
 
-
-                        </div>
-                    </div>
-                    <!-- .row end -->
-              
-                    
-            </div>
-            <!-- .container end -->
- 
-        </section>
-        
-        
-        
-       <!-- Content 02 
-        ====================================================== -->
-        <section class="uix-spacing--m">
-            <div class="container">
-                    <div class="row">
-                        <div class="col-md-8 offset-md-2">
-                            <a class="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary" href="javascript:void(0)" data-modal-id="modal-open-1" data-modal-close-onlybtn="false">Click Here to Open Modal</a>
-                            <br>
-                            
-                            <a class="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary" href="javascript:void(0)" data-modal-id="modal-open-2" data-modal-close-onlybtn="false">Click Here to Open Modal (Fullscreen)</a>
-                            <br>
-                            
-                            
-                            <a class="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary" href="javascript:void(0)" data-modal-id="modal-open-3" data-modal-close-onlybtn="false" data-modal-height="200px" data-modal-width="300px">Click Here to Open Modal (Custom)</a>
-                            <br>
-                            
-                            <a class="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary" href="javascript:void(0)" data-video-win="true" data-video-poster="assets/videos/1920x1080/demo.jpg" data-video-mp4="assets/videos/1920x1080/demo.mp4" data-video-webm="" data-video-ogv="" data-modal-id="web-modal-1" data-modal-close-onlybtn="false">Click Here to Open Video</a>
-                            <br>
-                            
-                            
-							<a class="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary" href="javascript:void(0)" data-video-win="true" data-video-poster="assets/videos/1920x1080/demo.jpg" data-video-mp4="" data-video-webm="" data-video-ogv="" data-modal-id="web-modal-2" data-modal-close-onlybtn="false"><span data-video-iframe="true"><iframe width="560" height="315" src="https://www.youtube.com/embed/ckYJBMfPtBs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></span>Click Here to Open Youtube Video</a>
-                            <br> 
-                            
-                            
-                        </div>
-                    </div>
-                    <!-- .row end -->
-              
-                    
-            </div>
-            <!-- .container end -->
- 
-        </section>
-        
-        
-        <!-- Modals
-        ============================================= --> 
-        <div class="uix-modal-box" id="modal-open-1">
-            <a href="javascript:void(0)" class="uix-modal-box__close"></a>
-            <div class="uix-modal-box__content">
-                <div>
-                    <!-- ////////  content  begin //////// -->
-					<h2>Holy Crap!!!</h2>
-					<p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p>
-                    <!-- ////////  content  end //////// -->
 				</div>
+				<!-- .container end -->
+
+			</section>
+			
+			
 
 
-            </div>
-        </div>
-        <!--  .uix-modal-box  end -->     
-    
-    
-        <div class="uix-modal-box is-fullscreen" id="modal-open-2">
-            <a href="javascript:void(0)" class="uix-modal-box__close"></a>
-            <div class="uix-modal-box__content">
-                <div>
-                    <!-- ////////  content  begin //////// -->
-					<h2>Holy Crap!!!</h2>
-					<p>p.s. Sorry for calling you a dingus earlier.</p>
-                    <!-- ////////  content  end //////// -->
+
+		   <!-- Content  
+			====================================================== -->
+			<section class="uix-spacing--s">
+				<div class="container">
+						<div class="row">
+							<div class="col-12">
+								<a class="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary" href="javascript:void(0)" data-modal-id="modal-open-1" data-modal-close-onlybtn="false">Click Here to Open Modal</a>
+								<br>
+
+								<a class="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary" href="javascript:void(0)" data-modal-id="modal-open-2" data-modal-close-onlybtn="false">Click Here to Open Modal (Fullscreen)</a>
+								<br>
+
+
+								<a class="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary" href="javascript:void(0)" data-modal-id="modal-open-3" data-modal-close-onlybtn="false" data-modal-height="200px" data-modal-width="300px">Click Here to Open Modal (Custom)</a>
+								<br>
+
+
+							</div>
+						</div>
+						<!-- .row end -->
+
+
 				</div>
+				<!-- .container end -->
+
+			</section>
 
 
-            </div>
-        </div>
-        <!--  .uix-modal-box  end -->     
+			<!-- Modals
+			============================================= --> 
+			<div class="uix-modal-box" id="modal-open-1">
+				<a href="javascript:void(0)" class="uix-modal-box__close"></a>
+				<div class="uix-modal-box__content">
+					<div>
+						<!-- ////////  content  begin //////// -->
+						<h2>Holy Crap!!!</h2>
+						<p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p>
+						<!-- ////////  content  end //////// -->
+					</div>
+
+
+				</div>
+			</div>
+			<!--  .uix-modal-box  end -->     
+
+
+			<div class="uix-modal-box is-fullscreen" id="modal-open-2">
+				<a href="javascript:void(0)" class="uix-modal-box__close"></a>
+				<div class="uix-modal-box__content">
+					<div>
+						<!-- ////////  content  begin //////// -->
+						<h2>Holy Crap!!!</h2>
+						<p>p.s. Sorry for calling you a dingus earlier.</p>
+						<!-- ////////  content  end //////// -->
+					</div>
+
+
+				</div>
+			</div>
+			<!--  .uix-modal-box  end -->     
+
+			<div class="uix-modal-box" id="modal-open-3">
+				<a href="javascript:void(0)" class="uix-modal-box__close"></a>
+				<div class="uix-modal-box__content">
+					<div>
+						<!-- ////////  content  begin //////// -->
+
+						<h2>Holy Crap!!!</h2>
+						<p>p.s. Sorry for calling you a dingus earlier.</p>
+						<!-- ////////  content  end //////// -->
+					</div>   
+
+
+
+				</div>
+			</div>
+			<!--  .uix-modal-box  end -->     
+
+		
+		
+		
+			<!-- Content   
+			====================================================== -->
+			<section>
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<h3>Modal Dialog (Video)</h3>
+							<p>Use the following HTML code to fire video.</p>
+
+<pre class="uix-precode uix-t-l"><label>HTML</label><code>&lt;a href="javascript:void(0)</a>" data-video-win="true" data-video-poster="assets/videos/1920x1080/demo.jpg" data-video-mp4="assets/videos/1920x1080/demo.mp4" data-video-webm="" data-video-ogv="" data-modal-id="web-modal-1" data-modal-close-onlybtn="false"&gt;Click Here to Open Video&lt;/a&gt;
+
+&lt;a href=&quot;javascript:void(0)&quot; data-video-win=&quot;true&quot; data-video-poster=&quot;assets/videos/1920x1080/demo.jpg&quot; data-video-mp4=&quot;&quot; data-video-webm=&quot;&quot; data-video-ogv=&quot;&quot; data-modal-id=&quot;web-modal-2&quot; data-modal-close-onlybtn=&quot;false&quot; data-modal-lightbox=&quot;true&quot; data-modal-close-time=&quot;false&quot;&gt;&lt;span data-video-iframe=&quot;true&quot;&gt;&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/******&quot; frameborder=&quot;0&quot; allow=&quot;autoplay; encrypted-media&quot; allowfullscreen&gt;&lt;/iframe&gt;&lt;/span&gt;Video&lt;/a&gt;</code>
+</pre>		
+
+							<hr>
+							
+							
+						</div>
+					</div>
+					<!-- .row end -->
+
+				</div>
+				<!-- .container end -->
+
+			</section>
+			
+			
+
+
+
+		   <!-- Content  
+			====================================================== -->
+			<section class="uix-spacing--s">
+				<div class="container">
+						<div class="row">
+							<div class="col-12">
+								
+								<a class="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary" href="javascript:void(0)" data-video-win="true" data-video-poster="assets/videos/1920x1080/demo.jpg" data-video-mp4="assets/videos/1920x1080/demo.mp4" data-video-webm="" data-video-ogv="" data-modal-id="web-modal-1" data-modal-close-onlybtn="false">Click Here to Open Video</a>
+								<br>
+
+
+								<a class="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary" href="javascript:void(0)" data-video-win="true" data-video-poster="assets/videos/1920x1080/demo.jpg" data-video-mp4="" data-video-webm="" data-video-ogv="" data-modal-id="web-modal-2" data-modal-close-onlybtn="false"><span data-video-iframe="true"><iframe width="560" height="315" src="https://www.youtube.com/embed/ckYJBMfPtBs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></span>Click Here to Open Youtube Video</a>
+								<br> 
+
+
+							</div>
+						</div>
+						<!-- .row end -->
+
+
+				</div>
+				<!-- .container end -->
+
+			</section>
+		
+		
+		
+
+			
+		</main>
         
-        <div class="uix-modal-box" id="modal-open-3">
-            <a href="javascript:void(0)" class="uix-modal-box__close"></a>
-            <div class="uix-modal-box__content">
-                <div>
-                    <!-- ////////  content  begin //////// -->
-                
-					<h2>Holy Crap!!!</h2>
-					<p>p.s. Sorry for calling you a dingus earlier.</p>
-                    <!-- ////////  content  end //////// -->
-				</div>   
-               
-
-
-            </div>
-        </div>
-        <!--  .uix-modal-box  end -->     
         
-        
+		   
 		
         
         

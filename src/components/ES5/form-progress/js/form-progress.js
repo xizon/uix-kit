@@ -10,13 +10,16 @@
 	If you want to initialize the indicator to a location when the page is first run,
 	you need to call the following function:
 	
-	$( document ).UixFormProgressToNext({ 
-		'selector'         : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
-		'formTarget'       : $( '.uix-form-progress__target' ),
-		'indicator'        : '.uix-form-progress .uix-form-progress__indicator',
-		'index'            : 0
+	$( 'body' ).waitForImages().done(function() {
+		$( document ).UixFormProgressToNext({ 
+			'selector'         : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
+			'formTarget'       : $( '.uix-form-progress__target' ),
+			'indicator'        : '.uix-form-progress .uix-form-progress__indicator',
+			'index'            : 0
+		});
 	});
-	
+
+
 */
 
 
@@ -69,6 +72,17 @@ APP = ( function ( APP, $, window, document ) {
 				'indicator'  : '.uix-form-progress .uix-form-progress__indicator',
 				'index'      : $sections.index() + 1
 			});
+			
+
+			//Scroll Top
+			TweenMax.to( window, 0.5, {
+				scrollTo: {
+					y        : 0,
+					autoKill : false
+				},
+				ease: Power2.easeOut
+			});	
+			
 			
 		});
 		
@@ -157,6 +171,9 @@ APP = ( function ( APP, $, window, document ) {
 				stepPerValue     = 100/( allStep - 1 ),
 				value            = 0,
 				tarIndex, curIndex;
+			
+			
+			if ( $indicator.length == 0 ) return false;
 
 
 			//Returns current index
@@ -293,17 +310,6 @@ APP = ( function ( APP, $, window, document ) {
 			// Set progress bar value
 			$( '.uix-form-progress .uix-form-progress__line span' ).css( 'width', value + '%' );
 
-
-			//Scroll Top
-			TweenMax.to( window, 0.5, {
-				scrollTo: {
-					y        : 0,
-					autoKill : false
-				},
-				ease: Power2.easeOut
-			});	
-			
-			
 
 			return false;
 			

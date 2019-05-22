@@ -45,7 +45,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			$( '.uix-shape-img' ).each( function()  {
 				var $this          = $( this ),
-					ranID          = 'uix-shape-img-' + UIX_GUID.newGuid(),
+					ranID          = 'uix-shape-img-' + UixGUID.create(),
 					svgPath        = $this.data( 'path' ),
 					svgW           = parseFloat( $this.data( 'svg-const-width' ) ),
 					svgH           = parseFloat( $this.data( 'svg-const-height' ) ),

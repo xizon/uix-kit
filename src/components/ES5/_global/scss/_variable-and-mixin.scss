@@ -21,10 +21,10 @@
 	
     Large                      :    11.375rem
     Medium                     :    6.5625rem
-    Small                      :    4.8125rem
+    Small                      :    3rem
     Default (mobile)           :    4.265625rem
     Large (mobile)             :    4.265625rem
-    Small (mobile)             :    2.625rem
+    Small (mobile)             :    1.5rem
 
 
 
@@ -106,11 +106,11 @@ $font-size-h6          : 0.75rem;
 // ./src/components/ES5/_global/scss/spacing.scss
 //
 $spacing-large          : 11.375rem;
-$spacing-small          : 4.8125rem;
 $spacing-medium         : 6.5625rem;
+$spacing-small          : 3rem;
 $spacing-large-mobile   : $spacing-large/2;
-$spacing-small-mobile   : $spacing-small/2;
 $spacing-medium-mobile  : $spacing-medium/2;
+$spacing-small-mobile   : $spacing-small/2;
 
 
 // COLOR PALETTE
@@ -400,12 +400,6 @@ $primary-bg-color      : transparent;
 			}
 		}
 
-		/* New XXL container for Bootstrap 4.x */
-		@media all and (min-width: 1600px) {
-			#{$classname} {
-				width: 1410px;
-			}
-		}
 
 	}
 	
