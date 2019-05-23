@@ -5,7 +5,7 @@
   <p align="center">Make over <strong>120+</strong> components to wear again and again!</p>
   <p align="center">
       <a href="https://travis-ci.org/xizon/uix-kit/" title="Travis CI"><img src="https://api.travis-ci.org/xizon/uix-kit.svg?branch=master"/></a>
-	  <a href="https://www.npmjs.com/package/uix-kit" title="npm version"><img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=3.5.0&x2=0"/></a>
+	  <a href="https://www.npmjs.com/package/uix-kit" title="npm version"><img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=3.5.2&x2=0"/></a>
 	  <a href="https://github.com/xizon/uix-kit/blob/master/LICENSE" title="license"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg"/></a>
 	   
   </p>
@@ -102,7 +102,7 @@ $ cd /{your_directory}/uix-kit
 **Step 3.** Before doing all dev stuff make sure you have `Node 10+` installed. After that, run the following code in the main directory to install the node module dependencies.
 
 ```sh
-$ sudo npm install --save-dev  --unsafe-perm node-sass
+$ sudo npm install --only=dev --unsafe-perm --production
 ```
 
 

@@ -19,7 +19,6 @@ APP = ( function ( APP, $, window, document ) {
 			windowWidth  = window.innerWidth,
 			windowHeight = window.innerHeight;
 
-		
 		//-------- Header initialize
 		headerInit( windowWidth );
 		

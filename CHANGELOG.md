@@ -1,5 +1,13 @@
 # Changelog
 
+#### = 3.5.2 (May 23, 2019) =
+
+* Fix: Fixed webpack-dev-server's hot start error that may be caused by replace-in-file-webpack-plugin.
+* Tweak: Improved partial core style compatible with WordPress.
+* Tweak: Optimized style for some modules.
+* Tweak: Modified package.json and webpack.config.js. Use a more stable command for the dependency installation of the development environment, using the following command: `sudo npm install --only=dev --unsafe-perm --production`
+
+
 
 #### = 3.5.0 (May 13, 2019) =
 

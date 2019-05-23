@@ -45,6 +45,7 @@ if ( typeof APP_ROOTPATH === 'undefined' ) {
 }
 
 
+
 /* 
  *************************************
  * Determine whether it is a special browser
@@ -730,7 +731,6 @@ APP = ( function ( APP, $, window, document ) {
 			windowWidth  = window.innerWidth,
 			windowHeight = window.innerHeight;
 
-		
 		//-------- Header initialize
 		headerInit( windowWidth );
 		

@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
- * ## Version             :  3.5.0
+ * ## Version             :  3.5.2
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  May 13, 2019
+ * ## Last Update         :  May 23, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -325,6 +325,7 @@ if ( typeof APP_ROOTPATH === 'undefined' ) {
 	homeUrl     = APP_ROOTPATH.homeUrl.replace(/\/\s*$/, '' );
 	ajaxUrl     = APP_ROOTPATH.ajaxUrl.replace(/\/\s*$/, '' );
 }
+
 
 
 /* 
@@ -1012,7 +1013,6 @@ APP = ( function ( APP, $, window, document ) {
 			windowWidth  = window.innerWidth,
 			windowHeight = window.innerHeight;
 
-		
 		//-------- Header initialize
 		headerInit( windowWidth );
 		
