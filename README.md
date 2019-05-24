@@ -124,10 +124,28 @@ http://localhost:8080/examples/
 
 ### Note:
  
-**ERROR: npm update check failed.**
+**a) ERROR: npm update check failed.**
 
 ```sh
 $ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
+```
+
+**b) Site Info Configuration**
+
+You can update the Placeholders in Templates by modifying the Site Info configuration of `package.json`. Like this:
+
+```json
+{
+  "author": "UIUX Lab",
+  "name": "uix-kit",
+  "email": "uiuxlab@gmail.com",
+  "version": "1.0.0",
+  "projectName": "Uix Kit",
+  "createdInfo": "UIUX Lab (https://uiux.cc)",
+  "projectURL": "https://uiux.cc",
+  "description": "A free web kits for fast web design and development, compatible with Bootstrap v4.",
+  ...
+}
 ```
 
 
@@ -140,7 +158,6 @@ $ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
 ### 1\. HTML Structure
 
 ```html
-
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US">
 	<head>
@@ -170,7 +187,6 @@ $ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
 		
 		<!-- Core & Theme CSS
 		============================================= -->
-        
         <!-- Basic  -->
         <link rel="stylesheet" href="assets/css/bootstrap.min.css?ver=4.2.1" media="all"/>
 		<link rel="stylesheet" href="assets/css/video.min.css?ver=7.4.1" media="all"/>
@@ -181,29 +197,20 @@ $ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
         
         <!-- Theme  -->
         <link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=1.0.0" media="all"/>
-        
-     
+
          <!--[if lt IE 10]>
            <link rel="stylesheet" href="assets/css/IE.css?ver=1.0.0" media="all" />
         <![endif]-->
-        
-        
         <!-- Core & Theme CSS  end -->
+		
 		
 		<!-- Break free from CSS prefix hell!
 		============================================= -->
-		 <script src="assets/js/min/prefixfree.min.js?ver=1.0.7"></script>
-        
-        
-     
+		<script src="assets/js/min/prefixfree.min.js?ver=1.0.7"></script>
   </head>     
   <body>
-  
-  
-          
+    
     ...
-
-  
 
     <!-- Vendor -->
 	<script src="assets/js/min/jquery.easing.min.js?ver=1.3"></script>
@@ -218,11 +225,9 @@ $ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
     <script src="assets/js/min/hammer.min.js?ver=2.0.8"></script>
     <script src="assets/js/min/muuri.min.js?ver=0.7.1"></script>
     
-    
-	
+	  
 	<!-- Your Plugins & Theme Scripts
 	============================================= -->
-
 	<script>
 		var REVISION     = "1.0.0",
 			APP_ROOTPATH = {
@@ -233,11 +238,8 @@ $ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
     </script>  
     <script src="../dist/js/uix-kit.min.js?ver=1.0.0"></script>
 
-
   </body>
 </html>
-
-
 
 ```
 
