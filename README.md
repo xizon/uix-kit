@@ -55,7 +55,8 @@ A free web kits for fast web design and development. Uix Kit can be used separat
 ## Key Features
 
 
-Uix Kit can be used separately, or merge components and grid systems using bootstrap. Regardless of the screen size, the website content will naturally fit the given resolution. Using the Uix Kit will save you large amount of time to build your projects. It supports 3D and 2D rendering with three.js and pixi.js. More typically, automatically generate core files with Webpack for each module (contains .js, .scss, .html files).
+Uix Kit isn't a reusable component structure, mostly custom CSS and JavaScript based. Definitely interesting, and if you're developing mostly web content and not applications this is particularly useful. It can be used separately, or merge components and grid systems using bootstrap. Regardless of the screen size, the website content will naturally fit the given resolution. Using the Uix Kit will save you large amount of time to build your projects. It supports 3D and 2D rendering with three.js and pixi.js. More typically, automatically generate core files with Webpack for each module (contains .js, .scss, .html files).
+
 
 * Supports 3D and 2D rendering with three.js and pixi.js.
 * Using Sass to Control Scope With BEM Naming
