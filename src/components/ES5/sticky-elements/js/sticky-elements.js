@@ -10,15 +10,45 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.STICKY_EL               = APP.STICKY_EL || {};
-	APP.STICKY_EL.version       = '0.0.3';
+	APP.STICKY_EL.version       = '0.0.4';
     APP.STICKY_EL.pageLoaded    = function() {
 
 		var $window      = $( window ),
 			windowWidth  = window.innerWidth,
 			windowHeight = window.innerHeight,
-			topSpacing   = $( '.uix-header__container' ).outerHeight( true ) + 10;
+			topSpacing   = ( windowWidth <= 768 ) ? 0 : $( '.uix-header__container' ).outerHeight( true ); //with margin
 		
+	
+		
+		
+		//prepend a placeholder
+		$( '.js-uix-sticky-el' ).each( function()  {
 
+			var $el      = $( this ),
+				elHeight = $el.outerHeight( true ), //with margin
+				elClass  = $el.attr( 'class' ).replace( 'js-uix-sticky-el', ''),
+				tempID   = 'sticky-' + UixGUID.create();
+
+			$el.attr( 'data-sticky-id', tempID );
+			
+			if ( ! $el.hasClass( 'is-placeholder' ) ) {
+				$( '<div class="'+elClass+' is-placeholder"></div>' )
+					.css({
+						'height': elHeight + 'px',
+						'width' : '100%',
+						'display': 'none',
+						'visibility': 'hidden'
+					})
+				    .attr( 'data-sticky-id', tempID )
+					.insertBefore( $el );
+			}
+
+			
+		});
+
+		
+		
+		//spy the scroll event
 		$window.on( 'scroll touchmove', function() {
 
 			var scrollTop   = $window.scrollTop(),
@@ -26,12 +56,10 @@ APP = ( function ( APP, $, window, document ) {
 
 
 			$( '.js-uix-sticky-el.active' ).each( function()  {
-				var $el = $( this );
+				var $el      = $( this );
 
 				if ( typeof $el.data( 'stop-trigger' ) != typeof undefined && $( $el.data( 'stop-trigger' ) ).length > 0 ) {
 					
-					
-
 					var diff      = typeof $el.data( 'stop-trigger-diff' ) != typeof undefined && $el.data( 'stop-trigger-diff' ).length > 0 ? UixMath.evaluate( $el.data( 'stop-trigger-diff' ).replace(/\s/g, '').replace(/\%\h/g, windowHeight ).replace(/\%\w/g, windowWidth ) ) : 0,
 						targetTop = $( $el.data( 'stop-trigger' ) ).offset().top - diff;
 					
@@ -41,14 +69,15 @@ APP = ( function ( APP, $, window, document ) {
 
 							$el.css( {
 								  'top'  : parseFloat( topSpacing - (dynamicTop - targetTop) ) + 'px'
-							  } );	
-
+							  } );
+						     
 					} else {
 
 						if ( $el.length > 0 && $el.position().top < topSpacing ) {
 							$el.css( {
 								  'top'  : topSpacing + 'px'
 							  } );	
+							
 						}
 
 					}
@@ -65,8 +94,10 @@ APP = ( function ( APP, $, window, document ) {
 		  handler: function( direction ) {
 
 
-			var $this      = $( this.element ),
-				oWIdth     = $this.width();
+			var $this    = $( this.element ),
+				oWIdth   = $this.width(),
+				clsID    = $this.data( 'sticky-id' ),
+				$ph      = $( '[data-sticky-id="'+clsID+'"].is-placeholder' );
 
 
 			  $this
@@ -75,6 +106,12 @@ APP = ( function ( APP, $, window, document ) {
 					  'width': oWIdth + 'px',
 					  'top'  : topSpacing + 'px'
 				  } );
+			  
+			  if ( $this.hasClass( 'active' ) ) {
+				  $ph.css( 'display', 'block' );
+			  } else {
+				  $ph.css( 'display', 'none' );
+			  }
 
 
 

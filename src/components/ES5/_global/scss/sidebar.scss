@@ -26,6 +26,11 @@
 	.widget {
 		padding-bottom: 2.625rem;
 		font-size: 0.875rem;
+		
+		&.js-uix-sticky-el.active {
+			background: #fff;
+			padding-top: 10px;
+		}
 
 	}
 

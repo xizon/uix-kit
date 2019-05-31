@@ -73,7 +73,7 @@ APP = ( function ( APP, $, window, document ) {
 
 						for ( var i = 0; i < el.length; i++) {
 
-							var singleHeight = $( el[i] )[0].offsetHeight;
+							var singleHeight = $( el[i] ).outerHeight( true );
 
 							if (counter < singleHeight) {
 								counter = singleHeight;

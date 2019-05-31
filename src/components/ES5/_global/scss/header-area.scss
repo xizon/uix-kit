@@ -84,12 +84,14 @@
 .uix-header__placeholder {
 	height: 75px;
 	background: none;
+	display: block;
+	visibility: hidden;
+	width: 100%;
 	
 	&.is-fixed {
 		
 	}
 	
-
 }
 
 

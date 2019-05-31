@@ -1,5 +1,12 @@
 # Changelog
 
+
+#### = 3.5.3 (May 31, 2019) =
+
+* Tweak: Upgraded Sticky Elements.
+* Tweak: Other styles and scripting micro-optimizations.
+
+
 #### = 3.5.2 (May 23, 2019) =
 
 * Fix: Fixed webpack-dev-server's hot start error that may be caused by replace-in-file-webpack-plugin.
