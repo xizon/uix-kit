@@ -59,7 +59,7 @@ $indicator-desc-w: 60px;
 			
 		}
 
-		&.active {
+		&.is-active {
 			animation: uix-cssAnim--indicatorOK .5s forwards;
 			border-color: $highlight-color1;
 		}
@@ -83,7 +83,7 @@ $indicator-desc-w: 60px;
 	overflow: hidden;
 	opacity: 0;
 	
-	&.active {
+	&.is-active {
 		opacity: 1;
 	}
 	

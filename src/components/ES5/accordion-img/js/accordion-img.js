@@ -61,14 +61,14 @@ APP = ( function ( APP, $, window, document ) {
 				//Apply click method to outer div but not inner div
 				if ( e.target.className == 'uix-accordion-img__content' ) {
 					
-					if ( $( this ).hasClass( 'active' ) ) {
-						$( this ).addClass( 'active' );
+					if ( $( this ).hasClass( 'is-active' ) ) {
+						$( this ).addClass( 'is-active' );
 
 					} else {
 						
-						$li.addClass( 'sub-active' );
-						$( this ).addClass( 'active' );
-						$( this ).siblings().removeClass( 'active' );
+						$li.addClass( 'active-sub' );
+						$( this ).addClass( 'is-active' );
+						$( this ).siblings().removeClass( 'is-active' );
 
 						$li.css( 'width', ( 100 - parseFloat( widthShow ) )/(total - 1) + '%' );
 						$( this ).css( 'width', widthShow );
@@ -102,7 +102,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 				if ( index >= 0 ) {
 					$li.css( 'width', ( 100 - parseFloat( widthShow ) )/(total - 1) + '%' );
-					$li.eq( index ).css( 'width', widthShow ).addClass( 'active' );	
+					$li.eq( index ).css( 'width', widthShow ).addClass( 'is-active' );	
 				}
 
 			}
@@ -117,7 +117,7 @@ APP = ( function ( APP, $, window, document ) {
 			 * @return {Void}
 			 */
 			function itemInit() {
-				$li.removeClass( 'active sub-active' ).css( 'width', 100/total + '%' );
+				$li.removeClass( 'is-active active-sub' ).css( 'width', 100/total + '%' );
 			}
 			
 			

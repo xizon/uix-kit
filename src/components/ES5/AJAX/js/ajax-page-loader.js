@@ -44,7 +44,7 @@ APP = ( function ( APP, $, window, document ) {
 			moveTo( $( ajaxContainer ), false, 'down', 0, false );
 		} else {
 			//Activate navigation from AJAX request
-			if ( typeof curAjaxPageID != typeof undefined ) $navs.eq( curAjaxPageID ).addClass( 'active' );
+			if ( typeof curAjaxPageID != typeof undefined ) $navs.eq( curAjaxPageID ).addClass( 'is-active' );
 		}
 
 		
@@ -130,7 +130,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			//Click on this link element using an AJAX request
-			var dir = ( $navs.filter( '.active' ).find( '> a' ).attr( 'data-index' ) > curIndex ) ? 'up' : 'down';
+			var dir = ( $navs.filter( '.is-active' ).find( '> a' ).attr( 'data-index' ) > curIndex ) ? 'up' : 'down';
 			moveTo( $( ajaxContainer ), curURL, dir, curIndex, false );
 			
 			
@@ -217,7 +217,7 @@ APP = ( function ( APP, $, window, document ) {
 		 * @return {Void}
 		 */
 		function moveTo( container, url, dir, customIndex, wheel ) {
-			var index     = parseFloat( $navs.filter( '.active' ).find( '> a' ).attr( 'data-index' ) ),
+			var index     = parseFloat( $navs.filter( '.is-active' ).find( '> a' ).attr( 'data-index' ) ),
 				nextIndex = null,
 				isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
 			
@@ -249,8 +249,8 @@ APP = ( function ( APP, $, window, document ) {
 			
 				
 				//Activate navigation from AJAX request
-				$navs.removeClass( 'active' );
-				$navs.eq( nextIndex ).addClass( 'active' );
+				$navs.removeClass( 'is-active' );
+				$navs.eq( nextIndex ).addClass( 'is-active' );
 
 				
 				//Use automatic indexing when no URLs come in.

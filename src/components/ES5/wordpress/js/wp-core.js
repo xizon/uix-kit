@@ -17,7 +17,7 @@ APP = ( function ( APP, $, window, document ) {
 		 ---------------------------
 		 */  
 		$( '.uix-pagination__container li > span.current' ).each( function()  {
-			$( this ).parent( 'li' ).addClass( 'active' );
+			$( this ).parent( 'li' ).addClass( 'is-active' );
 		});
 		
 		

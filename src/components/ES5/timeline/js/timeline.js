@@ -58,8 +58,8 @@ APP = ( function ( APP, $, window, document ) {
 
 				
 				//Activate the default selection
-				timelineUpdate( $this, $this.find( '.uix-timeline__item.active' ), dateShowEle, false );
-				if ( $this.find( '.uix-timeline__item.active' ).index() == 0 ) {
+				timelineUpdate( $this, $this.find( '.uix-timeline__item.is-active' ), dateShowEle, false );
+				if ( $this.find( '.uix-timeline__item.is-active' ).index() == 0 ) {
 					$this.find( '.uix-timeline__btn--prev' ).addClass( 'is-disabled' );
 				}
 				
@@ -121,7 +121,7 @@ APP = ( function ( APP, $, window, document ) {
 				tLoop      = false;
 			
 			
-			var curIndex = obj.find( '.uix-timeline__item.active' ).index(),
+			var curIndex = obj.find( '.uix-timeline__item.is-active' ).index(),
 				tarIndex;
 
 			//Check if a value is an object currently
@@ -169,8 +169,8 @@ APP = ( function ( APP, $, window, document ) {
 
 			
 			
-			tNav.removeClass( 'active' );
-			obj.find( '.uix-timeline__item:eq('+tarIndex+')' ).addClass( 'active' );
+			tNav.removeClass( 'is-active' );
+			obj.find( '.uix-timeline__item:eq('+tarIndex+')' ).addClass( 'is-active' );
 
 			//scroll left
 			var tNavW = 0;

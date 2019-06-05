@@ -229,7 +229,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
-			$option.toggleClass( 'active' ).attr( 'aria-checked', function( index, attr ) {
+			$option.toggleClass( 'is-active' ).attr( 'aria-checked', function( index, attr ) {
 				return attr == 'true' ? false : true;
 			});
 
@@ -320,9 +320,9 @@ APP = ( function ( APP, $, window, document ) {
 
 
 			//Radio Selector
-			$selector.find( '> span' ).removeClass( 'active' ).attr( 'aria-checked', false );
+			$selector.find( '> span' ).removeClass( 'is-active' ).attr( 'aria-checked', false );
 			$( targetID ).val( curVal );
-			$option.addClass( 'active' ).attr( 'aria-checked', true );
+			$option.addClass( 'is-active' ).attr( 'aria-checked', true );
 
 
 			//Switch some options
@@ -408,12 +408,12 @@ APP = ( function ( APP, $, window, document ) {
 
 			//Radio Selector
 			$selector.find( '> label' )
-				.removeClass( 'active' )
+				.removeClass( 'is-active' )
 			    .find( '[type="radio"]' ).prop( 'checked', false );
 			
 			$( targetID ).val( curVal );
 			$option
-				.addClass( 'active' )
+				.addClass( 'is-active' )
 			    .find( '[type="radio"]' ).prop( 'checked', true );
 			
 
@@ -451,10 +451,10 @@ APP = ( function ( APP, $, window, document ) {
 				targetID  = '#' + $obj.attr( 'data-targetid' );
 			
 			if ( this.checked ) {
-				$obj.addClass( 'active' ).attr( 'aria-checked', true );
+				$obj.addClass( 'is-active' ).attr( 'aria-checked', true );
 				$( targetID ).show();
 			} else {
-				$obj.removeClass( 'active' ).attr( 'aria-checked', false );
+				$obj.removeClass( 'is-active' ).attr( 'aria-checked', false );
 				$( targetID ).hide();
 			}
 			
@@ -527,7 +527,7 @@ APP = ( function ( APP, $, window, document ) {
 						var selected = '';
 
 						if ( $( this ).is( ':selected' ) ) {
-							selected = 'active';
+							selected = 'is-active';
 						}
 
 						template += '<span class="uix-controls__select__option '+selected+'" data-value="' + $( this ).attr( 'value' ) + '">' + $( this ).html() + '</span>';
@@ -583,7 +583,7 @@ APP = ( function ( APP, $, window, document ) {
 
 			//Set the default selector text
 			$( settings.selector + '.js-uix-new' ).each( function( index ) {
-				$( this ).find( settings.trigger ).text( $( this ).find( settings.item + '.active' ).html() );
+				$( this ).find( settings.trigger ).text( $( this ).find( settings.item + '.is-active' ).html() );
 			});
 
 
@@ -601,11 +601,11 @@ APP = ( function ( APP, $, window, document ) {
 				$selectCurWrapper.removeClass( 'is-opened' );
 
 				//Set the selector text
-				$selectCurWrapper.find( settings.trigger ).text( $( this ).html() ).addClass( 'active' );
+				$selectCurWrapper.find( settings.trigger ).text( $( this ).html() ).addClass( 'is-active' );
 
 				//Activate this option
-				$selectCurWrapper.find( settings.item ).removeClass( 'active' );
-				$( this ).addClass( 'active' );
+				$selectCurWrapper.find( settings.item ).removeClass( 'is-active' );
+				$( this ).addClass( 'is-active' );
 
 				//Set select option 'selected', by value
 				$selectWrapper.find( 'select' ).val( curVal );
@@ -629,7 +629,7 @@ APP = ( function ( APP, $, window, document ) {
 					var selected = '';
 
 					if ( $( this ).is( ':selected' ) ) {
-						selected = 'active';
+						selected = 'is-active';
 					}
 
 					newOptions += '<span class="uix-controls__select__option '+selected+'" data-value="' + $( this ).attr( 'value' ) + '">' + $( this ).html() + '</span>';
@@ -641,7 +641,7 @@ APP = ( function ( APP, $, window, document ) {
 
 				//Set the default selector text
 				$cusSelect.each( function( index ) {
-					$( this ).find( settings.trigger ).text( $( this ).find( settings.item + '.active' ).html() );
+					$( this ).find( settings.trigger ).text( $( this ).find( settings.item + '.is-active' ).html() );
 				});
 
 			});
@@ -705,10 +705,10 @@ APP = ( function ( APP, $, window, document ) {
 					//hide or display a associated div
 					var targetID = '#' + $obj.attr( 'data-targetid' );
 					if ( $( this ).is( ':checked' ) ) {
-						$obj.addClass( 'active' ).attr( 'aria-checked', true );
+						$obj.addClass( 'is-active' ).attr( 'aria-checked', true );
 						$( targetID ).show();
 					} else {
-						$obj.removeClass( 'active' ).attr( 'aria-checked', false );
+						$obj.removeClass( 'is-active' ).attr( 'aria-checked', false );
 						$( targetID ).hide();
 					}
 					
@@ -730,10 +730,10 @@ APP = ( function ( APP, $, window, document ) {
 					//hide or display a associated div
 					var targetID = '#' + $obj.attr( 'data-targetid' );
 					if ( $( this ).is( ':checked' ) ) {
-						$obj.addClass( 'active' ).attr( 'aria-checked', true );
+						$obj.addClass( 'is-active' ).attr( 'aria-checked', true );
 						$( targetID ).show();
 					} else {
-						$obj.removeClass( 'active' ).attr( 'aria-checked', false );
+						$obj.removeClass( 'is-active' ).attr( 'aria-checked', false );
 						$( targetID ).hide();
 					}
 					
@@ -985,14 +985,14 @@ APP = ( function ( APP, $, window, document ) {
 
 				// on focus add cladd active to label
 				$this.on( 'focus', function() {
-					$( this ).closest( 'div' ).find( 'label, .uix-controls__bar' ).addClass( 'active' );
+					$( this ).closest( 'div' ).find( 'label, .uix-controls__bar' ).addClass( 'is-active' );
 				});
 
 
 				//on blur check field and remove class if needed
 				$this.on( 'blur change', function( e ) {
 					if( $this.val() === '' || $this.val() === 'blank' ) {
-						$( this ).closest( 'div' ).find( 'label' ).removeClass( 'active' );
+						$( this ).closest( 'div' ).find( 'label' ).removeClass( 'is-active' );
 					}	
 					
 					//----
@@ -1001,14 +1001,14 @@ APP = ( function ( APP, $, window, document ) {
 						$this.val() === 'blank' || 
 						( $this.val() != '' && $this.val() != 'blank' ) 
 					) {
-						$( this ).closest( 'div' ).find( '.uix-controls__bar' ).removeClass( 'active' );
+						$( this ).closest( 'div' ).find( '.uix-controls__bar' ).removeClass( 'is-active' );
 					}		
 
 				});
 
 				// if exist cookie value
 				if( $this.val() != '' && $this.val() != 'blank') { 
-				    $( this ).closest( 'div' ).find( 'label' ).addClass( 'active' );
+				    $( this ).closest( 'div' ).find( 'label' ).addClass( 'is-active' );
 				}
 
 				
@@ -1048,9 +1048,9 @@ APP = ( function ( APP, $, window, document ) {
 					var targetID = '#' + $( this ).parent().attr( 'data-targetid' );
 
 					if ( $( targetID ).val().indexOf( $( this ).data( 'value' ) ) >= 0 ) {
-						$( this ).addClass( 'active' ).attr( 'aria-checked', true );
+						$( this ).addClass( 'is-active' ).attr( 'aria-checked', true );
 					} else {
-						$( this ).removeClass( 'active' ).attr( 'aria-checked', false );
+						$( this ).removeClass( 'is-active' ).attr( 'aria-checked', false );
 					}	
 
 
@@ -1103,9 +1103,9 @@ APP = ( function ( APP, $, window, document ) {
 
 					//Set actived style from their values
 					if ( $( targetID ).val() == $( this ).data( 'value' ) ) {
-						$( this ).addClass( 'active' ).attr( 'aria-checked', true );
+						$( this ).addClass( 'is-active' ).attr( 'aria-checked', true );
 					} else {
-						$( this ).removeClass( 'active' ).attr( 'aria-checked', false );
+						$( this ).removeClass( 'is-active' ).attr( 'aria-checked', false );
 					}	
 
 
@@ -1159,12 +1159,12 @@ APP = ( function ( APP, $, window, document ) {
 					if ( typeof $( this ).data( 'value' ) != typeof undefined ) {
 						if ( $( targetID ).val() == $( this ).data( 'value' ) ) {
 							$( this )
-								.addClass( 'active' )
+								.addClass( 'is-active' )
 								.find( '[type="radio"]' ).prop( 'checked', true );
 
 						} else {
 							$( this )
-								.removeClass( 'active' )
+								.removeClass( 'is-active' )
 								.find( '[type="radio"]' ).prop( 'checked', false );
 						}		
 					} 
@@ -1263,7 +1263,7 @@ APP = ( function ( APP, $, window, document ) {
 				//Dynamic listening for the latest value
 				$( document ).on( 'mouseleave', '[data-handler]', function() {
 					$( '[data-picker]' ).each( function() {
-						$( this ).closest( 'div' ).find( 'label, .uix-controls__bar' ).addClass( 'active' );
+						$( this ).closest( 'div' ).find( 'label, .uix-controls__bar' ).addClass( 'is-active' );
 					});
 
 				});	

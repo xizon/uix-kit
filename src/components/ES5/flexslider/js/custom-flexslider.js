@@ -192,8 +192,8 @@ APP = ( function ( APP, $, window, document ) {
 				//Thumbnail ControlNav Pattern
 				//-------------------------------------
 				if ( dataNhumbs && dataNhumbs != '' ) {
-					$( '.uix-flexslider__thumbs'+dataNhumbs+' > ul > li' ).removeClass( 'active' );
-					$( '.uix-flexslider__thumbs'+dataNhumbs+' > ul > li' ).eq( curIndex ).addClass( 'active' );			
+					$( '.uix-flexslider__thumbs'+dataNhumbs+' > ul > li' ).removeClass( 'is-active' );
+					$( '.uix-flexslider__thumbs'+dataNhumbs+' > ul > li' ).eq( curIndex ).addClass( 'is-active' );			
 				}
 
 
@@ -278,10 +278,10 @@ APP = ( function ( APP, $, window, document ) {
 				
 				//Common images style
 				//-------------------------------------	
-				$next.find( 'img' ).addClass( 'active' );
-				$current.find( 'img' ).removeClass( 'active' );
-				$prev.find( 'img' ).removeClass( 'active' );
-				$first.find( 'img' ).removeClass( 'active' );
+				$next.find( 'img' ).addClass( 'is-active' );
+				$current.find( 'img' ).removeClass( 'is-active' );
+				$prev.find( 'img' ).removeClass( 'is-active' );
+				$first.find( 'img' ).removeClass( 'is-active' );
 
 				//With Timeline
 				//-------------------------------------	
@@ -307,7 +307,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 				//Common images style
 				//-------------------------------------	
-				$first.find( 'img' ).addClass( 'active' );
+				$first.find( 'img' ).addClass( 'is-active' );
 		
 				
 			}
@@ -642,7 +642,7 @@ APP = ( function ( APP, $, window, document ) {
 					return;
 				}
 
-				$( this ).addClass( 'dragging' );
+				$( this ).addClass( 'is-dragging' );
 				$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
 				$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );
 				
@@ -653,7 +653,7 @@ APP = ( function ( APP, $, window, document ) {
 					return;
 				}
 
-				$( this ).removeClass( 'dragging' );
+				$( this ).removeClass( 'is-dragging' );
 				var origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
 					origin_mouse_y = $( this ).data( 'origin_mouse_y' );
 				
@@ -742,8 +742,8 @@ APP = ( function ( APP, $, window, document ) {
 
 				$( '.uix-flexslider__thumbs'+navThumbClass+' > ul > li' ).on( 'click', function() {
 
-					$( '.uix-flexslider__thumbs'+navThumbClass+' > ul > li' ).removeClass( 'active' );
-					$( this ).addClass( 'active' );
+					$( '.uix-flexslider__thumbs'+navThumbClass+' > ul > li' ).removeClass( 'is-active' );
+					$( this ).addClass( 'is-active' );
 					slider.flexslider( $( this ).index() );
 
 				});	

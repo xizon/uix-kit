@@ -107,7 +107,7 @@ APP = ( function ( APP, $, window, document ) {
 		$scrollRevealElements.each( function()  {
 			
 			//Prevent asynchronous loading of repeated calls
-			var actived = $( this ).data( 'active' );
+			var actived = $( this ).data( 'is-active' );
 			
 			if( typeof actived === typeof undefined ) {
 				tmAnim( $( this ), 'from' );
@@ -127,7 +127,7 @@ APP = ( function ( APP, $, window, document ) {
 
 					
 					//Prevent asynchronous loading of repeated calls
-					var actived = $( this.element ).data( 'active' ),
+					var actived = $( this.element ).data( 'is-active' ),
 						tmLoop  = tmAnim( $( this.element ), 'loop' );
 					
 
@@ -136,7 +136,7 @@ APP = ( function ( APP, $, window, document ) {
 						//$( this.element ).toggleClass( 'animated fadeInUp', direction === 'down' );
 						tmAnim( $( this.element ), 'to' );
 
-						$( this.element ).data( 'active', 1 );
+						$( this.element ).data( 'is-active', 1 );
 
 						
 					}

@@ -37,7 +37,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 		
 			if ( firstShow ) {
-				$li.first().addClass( 'active' ).attr( 'aria-expanded', true );
+				$li.first().addClass( 'is-active' ).attr( 'aria-expanded', true );
 				openItem( $li.first().find( 'dd' ) );
 				
 			}
@@ -56,9 +56,9 @@ APP = ( function ( APP, $, window, document ) {
 				if ( expanded ) {
 					//Hide other all sibling <dt> of the selected element
 					var $e = $( this ).siblings();
-					$e.removeClass( 'active' ).attr( 'aria-expanded', false );
+					$e.removeClass( 'is-active' ).attr( 'aria-expanded', false );
 					
-					$( this ).addClass( 'active' ).attr( 'aria-expanded', true );
+					$( this ).addClass( 'is-active' ).attr( 'aria-expanded', true );
 					
 					TweenMax.to( $e.find( 'dd' ), 0.5, { 
 						height: 0
@@ -72,7 +72,7 @@ APP = ( function ( APP, $, window, document ) {
 				} else {
 					
 					if ( e.type == 'click' ) {
-						$( this ).removeClass( 'active' ).attr( 'aria-expanded', false );
+						$( this ).removeClass( 'is-active' ).attr( 'aria-expanded', false );
 						
 						//to close
 						TweenMax.to( $content, 0.5, { height: 0 } );

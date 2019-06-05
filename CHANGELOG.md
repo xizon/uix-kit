@@ -1,9 +1,14 @@
 # Changelog
 
 
-#### = 3.5.5 (June 5, 2019) =
+#### = 3.5.6 (June 5, 2019) =
 
-* Tweak: Change all disabled style names `.disabled` to `.is-disabled`.
+* Fix: Fixed an issue that Infinite AJAX Scroll does not trigger.
+* Tweak: Change all disabled element's class names `.disabled` to `.is-disabled`.
+* Tweak: Change all draggable element's class names `.dragging` to `.is-dragging`.
+* Tweak: Change all activated element's class names `.active` to `.is-active`.
+* Tweak: Upgraded module "Show More Less".
+
 
 
 #### = 3.5.4 (June 4, 2019) =

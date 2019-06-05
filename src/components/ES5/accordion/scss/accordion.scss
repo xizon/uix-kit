@@ -59,7 +59,7 @@
 		
 		
 		/* Actived status */
-		&.active {
+		&.is-active {
 			height: auto;
 			margin: 1rem 0;
 			@include outer-shadow( 'regular' );

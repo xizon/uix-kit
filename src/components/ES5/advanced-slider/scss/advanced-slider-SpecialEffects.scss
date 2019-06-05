@@ -89,7 +89,7 @@
 			&.leave {
 				opacity: 0;
 			}
-			&.active {
+			&.is-active {
 				opacity: 1;
 			}
 
@@ -220,7 +220,7 @@
 				border-radius: 20px;
 
 				&:hover, 
-				&.active {
+				&.is-active {
 					background: rgba(255, 255, 255, 1);
 					width: 25px;
 				}
@@ -268,7 +268,7 @@
 //			
 //			
 //			&:hover, 
-//			&.active {
+//			&.is-active {
 //				background: rgba(255, 255, 255, 1);
 //				
 //				

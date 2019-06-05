@@ -15,8 +15,8 @@ APP = ( function ( APP, $, window, document ) {
 			progressLineRestore = function() {
 				var k = 0;
 				var progressLineAnimGo = setInterval( function() {
-					$progressLineCircle.eq( k ).addClass( 'active' );
-					$progressLineCircle.eq( k ).next( '.uix-progress-line__bar' ).addClass( 'active' );
+					$progressLineCircle.eq( k ).addClass( 'is-active' );
+					$progressLineCircle.eq( k ).next( '.uix-progress-line__bar' ).addClass( 'is-active' );
 					k++;
 
 
@@ -46,11 +46,11 @@ APP = ( function ( APP, $, window, document ) {
 		
 			var curIndex = $( this ).index()/2;
 			
-			$progressLineCircle.removeClass( 'active' );	
-			$progressLineCircle.next( '.uix-progress-line__bar' ).removeClass( 'active' );	
+			$progressLineCircle.removeClass( 'is-active' );	
+			$progressLineCircle.next( '.uix-progress-line__bar' ).removeClass( 'is-active' );	
 			for ( var i = curIndex; i >= 0; i-- ) {
-				$progressLineCircle.eq( i ).addClass('active');	
-				$progressLineCircle.eq( i ).next( '.uix-progress-line__bar' ).addClass( 'active' );	
+				$progressLineCircle.eq( i ).addClass('is-active');	
+				$progressLineCircle.eq( i ).next( '.uix-progress-line__bar' ).addClass( 'is-active' );	
 			}
 
 

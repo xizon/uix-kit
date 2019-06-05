@@ -100,7 +100,7 @@ APP = ( function ( APP, $, window, document ) {
 
 			if ( !dataFixed ) {
 				$( wrapperEl ).addClass( 'js-uix-no-fixed' );
-				$( closeEl ).addClass( 'active' );
+				$( closeEl ).addClass( 'is-active' );
 				
 				//Initialize the wrapper position
 				$( wrapperEl ).css( 'margin-top', $( window ).scrollTop() + 'px' );	
@@ -120,7 +120,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			// Show the lightbox
 			var showLightbox = function() {
-				$( closeEl ).addClass( 'active' );
+				$( closeEl ).addClass( 'is-active' );
 				$( wrapperEl ).show();
 				$( maskEl ).show();
 				$( innerEl ).show();	
@@ -200,7 +200,7 @@ APP = ( function ( APP, $, window, document ) {
 					thumbs += '<div class="uix-lightbox__thumb-container"><ul>';
 					for ( var k = 0; k < imgSrcStr.length; k++ ) {
 						
-						var active = ( k == 0 ) ? 'class="active"' : '';
+						var active = ( k == 0 ) ? 'class="is-active"' : '';
 						
 						thumbs += '<li '+active+'><img src="'+ imgSrcStr[k].thumb +'" alt=""></li>';
 					}
@@ -472,7 +472,7 @@ APP = ( function ( APP, $, window, document ) {
 			var $largePhoto = $( this ).closest( '.uix-lightbox__html' ).find( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' ),
 				$thumb      = $( this ).closest( '.uix-lightbox__html' ).find( '.uix-lightbox__thumb-container li' ),
 				total       = $thumb.length,
-				curIndex    = $thumb.filter( '.active' ).index(),
+				curIndex    = $thumb.filter( '.is-active' ).index(),
 				prevIndex   = curIndex - 1,
 				nextIndex   = curIndex + 1;
 			
@@ -498,7 +498,7 @@ APP = ( function ( APP, $, window, document ) {
 
 			$( document ).on( 'click', '.uix-lightbox__original__link', function( e ) {
 
-				$( '.uix-lightbox__original__target#' + $( this ).data( 'target-id' ) ).addClass( 'active' );
+				$( '.uix-lightbox__original__target#' + $( this ).data( 'target-id' ) ).addClass( 'is-active' );
 
 
 				if ( $( this ).closest( '.uix-lightbox__container.js-uix-no-fixed' ).length > 0 ) {
@@ -508,18 +508,18 @@ APP = ( function ( APP, $, window, document ) {
 
 				//---
 				$( 'html' ).css( 'overflow-y', 'hidden' );
-				$( largeImgCloseEl ).addClass( 'active' );
+				$( largeImgCloseEl ).addClass( 'is-active' );
 
 			});	
 
 			$( document ).on( 'click', largeImgCloseEl, function( e ) {
 
-				$( '.uix-lightbox__original__target' ).removeClass( 'active' );
+				$( '.uix-lightbox__original__target' ).removeClass( 'is-active' );
 				$( '.uix-lightbox__container.js-uix-no-fixed, .uix-lightbox__original__target--imgfull' ).removeClass( 'no-fixed-imgEnlarged' );
 
 
 				//---
-				$( this ).removeClass( 'active' );
+				$( this ).removeClass( 'is-active' );
 				$( 'html' ).css( 'overflow-y', 'auto' );
 
 			});	
@@ -555,11 +555,11 @@ APP = ( function ( APP, $, window, document ) {
 				});	
 			};
 			
-			$thumb.removeClass( 'active' );
-			obj.addClass( 'active' );
+			$thumb.removeClass( 'is-active' );
+			obj.addClass( 'is-active' );
 			
-			$largePhoto.find( 'li' ).hide().removeClass( 'active' );
-			$largePhoto.find( 'li' ).eq( index ).addClass( 'active' ).show( 400, function() {
+			$largePhoto.find( 'li' ).hide().removeClass( 'is-active' );
+			$largePhoto.find( 'li' ).eq( index ).addClass( 'is-active' ).show( 400, function() {
 				
 				//Reset the container height
 				var imgClick = new Image();
@@ -633,7 +633,7 @@ APP = ( function ( APP, $, window, document ) {
 
 			//Remove all dynamic classes
 			$( wrapperEl ).removeClass( 'js-uix-no-fixed js-uix-ajax' );
-			$( closeEl ).removeClass( 'active' );
+			$( closeEl ).removeClass( 'is-active' );
 			
 			//Add a scroll bar.
 			$( 'html' ).css( 'overflow-y', 'auto' );

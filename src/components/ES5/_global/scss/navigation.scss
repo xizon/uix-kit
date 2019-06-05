@@ -65,7 +65,7 @@ $nav-mega-li-w    : 270px;
 			}
 			
 			/* Sync to WordPress activation class name ".current-menu-item" */
-			&.active, 
+			&.is-active, 
 			&.current-menu-item {
 				box-shadow: 0 2.15px 0 rgba(255, 255, 255, 1);
 			} 

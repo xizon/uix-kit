@@ -46,8 +46,8 @@ APP = ( function ( APP, $, window, document ) {
 
 			
 			//Activate navigation style
-			$( menu + ' > li' ).removeClass( 'active' );
-			$this.parent().addClass( 'active' );
+			$( menu + ' > li' ).removeClass( 'is-active' );
+			$this.parent().addClass( 'is-active' );
 			
 			// GSAP animate to clicked menu item
 			TweenMax.to( line, 1, {

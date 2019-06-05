@@ -19,7 +19,7 @@
 			visibility: hidden;
 			box-sizing: border-box;
 			
-			&.active-item,
+			&.active-current,
 			&:hover {
 				
 			}
@@ -33,7 +33,7 @@
 			color: #fff;
 			background: #333;
 
-			&.active {
+			&.is-active {
 				background: #000;
 				font-size: 3rem;
 			}

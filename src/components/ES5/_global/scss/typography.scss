@@ -40,21 +40,12 @@ h6,
  */ 
 a {
 	color: $primary-text-color2;
+	text-decoration: none;
 	
-	&:hover, 
-	&:focus, 
-	&:active {
+	&:hover{
 		color: #000;
 		text-decoration: none;
-		outline: none;
 	}
-	
-	&:hover, 
-	&:active, 
-	&:focus {
-		
-	}
-
 }
 
 /* 

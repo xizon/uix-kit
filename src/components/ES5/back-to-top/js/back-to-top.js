@@ -29,9 +29,9 @@ APP = ( function ( APP, $, window, document ) {
 
 
 				if ( scrollTop >= spyTop ) {
-					$el.addClass( 'active' );
+					$el.addClass( 'is-active' );
 				} else {
-					$el.removeClass( 'active' );	
+					$el.removeClass( 'is-active' );	
 				}
 
 			});

@@ -97,7 +97,7 @@ APP = ( function ( APP, $, window, document ) {
 						//------
 						if ( parseFloat( scrollTop + topSpacing ) > elTop ) {
 						  $el
-							  .addClass( 'active' )
+							  .addClass( 'is-active' )
 							  .css( {
 								  'width': oWidth + 'px',
 								  'top'  : topSpacing + 'px'
@@ -106,7 +106,7 @@ APP = ( function ( APP, $, window, document ) {
 
 						} else {
 						  $el
-							  .removeClass( 'active' )
+							  .removeClass( 'is-active' )
 							  .css( {
 								  'top'  : 0
 							  } );	
@@ -151,7 +151,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 				
 			} else {
-				$( '.js-uix-sticky-el' ).removeClass( 'active' );
+				$( '.js-uix-sticky-el' ).removeClass( 'is-active' );
 				$( '[data-sticky-id].is-placeholder' ).css( 'display', 'none' );
 				
 			}// endif w > 768

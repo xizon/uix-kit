@@ -25,7 +25,6 @@ $button-class-margin-b: 1rem;
     box-shadow: none;
 }
 
-
 .uix-btn {
 	display: inline-block;
 	text-align: center;
@@ -43,7 +42,15 @@ $button-class-margin-b: 1rem;
 	cursor: pointer;
 	@include transition-default();
 	
-
+	&:hover {
+		background-position: 100% 0;
+		color: #fff;
+	}
+	
+	&:not([href]):not([tabindex]):focus {
+	    outline: 3px auto -webkit-focus-ring-color !important;
+	}
+	
 	&:disabled,
 	&.is-disabled {
 		background-image: linear-gradient(to right, #e4e7ed 0%, #e4e7ed 20%, #e4e7ed 100%)  !important;
@@ -66,16 +73,6 @@ $button-class-margin-b: 1rem;
 
 	}
 
-	
-
-	&:hover {
-		background-position: 100% 0;
-	}
-	
-	&:hover,
-	&:focus {
-		color: #fff;
-	}
 
 	&.is-hide {
 		display: none;
@@ -98,10 +95,6 @@ $button-class-margin-b: 1rem;
 		padding-right: 35px;
 	}
 
-	
-	&:focus {
-	    outline: none;
-	}
 	> span {
 	    vertical-align: middle;
 	}
@@ -113,7 +106,6 @@ $button-class-margin-b: 1rem;
 	
 	
 }
-
 
 
 @keyframes uix-cssAnim--moveWaitingStripes {

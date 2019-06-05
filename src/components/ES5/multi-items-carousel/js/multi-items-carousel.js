@@ -128,19 +128,19 @@ APP = ( function ( APP, $, window, document ) {
 			function carouselActiveCenterItem( el, dir, steps ) {
 				var curItemIndex    = (amountVisible/2).toFixed(0),
 					centerItemIndex = Math.floor(amountVisible / 2)-1;		
-				el.removeClass( 'active active-prev active-next' );
+				el.removeClass( 'is-active active-prev active-next' );
 				
 				
 			
 				if ( dir == 'default' ) {
-					el.eq( parseFloat( curItemIndex - 1 ) ).addClass( 'active' );		
+					el.eq( parseFloat( curItemIndex - 1 ) ).addClass( 'is-active' );		
 				} else {
-					el.eq( parseFloat( steps + centerItemIndex + 1 ) ).addClass( 'active' );	
+					el.eq( parseFloat( steps + centerItemIndex + 1 ) ).addClass( 'is-active' );	
 				}
 				
 				//Add nearest classes for 3 elements
 				el.each( function() {
-					if ( $( this ).hasClass( 'active' ) ) {
+					if ( $( this ).hasClass( 'is-active' ) ) {
 						$( this ).prev().addClass( 'active-prev' );
 						$( this ).next().addClass( 'active-next' );
 						
@@ -229,8 +229,8 @@ APP = ( function ( APP, $, window, document ) {
 			//Solve the activation problem of touch events
 			//-------------------------------------	
 			$carouselItem.on( 'click touchstart', function() {
-				$carouselItem.removeClass( 'active-item' );
-				$( this ).addClass( 'active-item' );
+				$carouselItem.removeClass( 'active-current' );
+				$( this ).addClass( 'active-current' );
 			});
 			
 			
@@ -525,23 +525,23 @@ APP = ( function ( APP, $, window, document ) {
 //			function carouselActiveCenterItem( el, dir ) {
 //				var curItemIndex    = (showcarouselItem/2).toFixed(0),
 //					centerItemIndex = Math.floor(showcarouselItem / 2)-1;		
-//				el.removeClass( 'active active-prev active-next' );
+//				el.removeClass( 'is-active active-prev active-next' );
 //				
 //				
 //				
 //				if ( dir == 'left' ) {
-//					el.eq( curItemIndex ).addClass( 'active' );
+//					el.eq( curItemIndex ).addClass( 'is-active' );
 //					
 //				} else if ( dir == 'right' ) {
-//					el.eq( centerItemIndex ).addClass( 'active' );	
+//					el.eq( centerItemIndex ).addClass( 'is-active' );	
 //					
 //				} else if ( dir == 'default' ) {
-//					el.eq( curItemIndex - 1 ).addClass( 'active' );		
+//					el.eq( curItemIndex - 1 ).addClass( 'is-active' );		
 //				}
 //				
 //				//Add nearest classes for 3 elements
 //				el.each( function() {
-//					if ( $( this ).hasClass( 'active' ) ) {
+//					if ( $( this ).hasClass( 'is-active' ) ) {
 //						$( this ).prev().addClass( 'active-prev' );
 //						$( this ).next().addClass( 'active-next' );
 //						

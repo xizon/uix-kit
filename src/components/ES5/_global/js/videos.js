@@ -296,7 +296,7 @@ APP = ( function ( APP, $, window, document ) {
 				TweenMax.set( $vContainer, {
 					alpha: 1
 				});
-				$vLoader.removeClass( 'active' );
+				$vLoader.removeClass( 'is-active' );
 			};
 			
 			var hiddenVC = function() {
@@ -305,7 +305,7 @@ APP = ( function ( APP, $, window, document ) {
 					alpha: 0
 				});
 
-				$vLoader.addClass( 'active' );
+				$vLoader.addClass( 'is-active' );
 			};
 
 			

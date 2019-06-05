@@ -116,7 +116,7 @@ APP = ( function ( APP, $, window, document ) {
 					
 					//Initialize the controlers classes
 					//-------------------------------------	
-					$( dataControlsPagination ).find( 'ul > li' ).first().addClass( 'active' );
+					$( dataControlsPagination ).find( 'ul > li' ).first().addClass( 'is-active' );
 
 
 					
@@ -144,7 +144,7 @@ APP = ( function ( APP, $, window, document ) {
 					//Initialize the first item container
 					//-------------------------------------		
 					$items.addClass( 'next' );
-					$first.addClass( 'active' );
+					$first.addClass( 'is-active' );
 
 
 
@@ -201,7 +201,7 @@ APP = ( function ( APP, $, window, document ) {
 					_dot += '<ul>';
 					for ( var i = 0; i < itemsTotal; i++ ) {
 
-						_dotActive = ( i == 0 ) ? 'class="active"' : '';
+						_dotActive = ( i == 0 ) ? 'class="is-active"' : '';
 
 						_dot += '<li '+_dotActive+' data-index="'+i+'"><a href="javascript:"></a></li>';
 					}
@@ -214,7 +214,7 @@ APP = ( function ( APP, $, window, document ) {
 					$( dataControlsPagination ).find( 'ul > li' ).on( 'click', function( e ) {
 						e.preventDefault();
 
-						var slideCurId  = $( dataControlsPagination ).find( 'ul > li.active' ).index(),
+						var slideCurId  = $( dataControlsPagination ).find( 'ul > li.is-active' ).index(),
 							slideNextId = $( this ).index();
 
 
@@ -251,8 +251,8 @@ APP = ( function ( APP, $, window, document ) {
 					_prev.on( 'click', function( e ) {
 						e.preventDefault();
 
-						var slideCurId  = $items.filter( '.active' ).index(),
-							slideNextId = parseFloat( $items.filter( '.active' ).index() ) - 1;
+						var slideCurId  = $items.filter( '.is-active' ).index(),
+							slideNextId = parseFloat( $items.filter( '.is-active' ).index() ) - 1;
 	
 						//Transition Between Slides
 						sliderUpdates( slideCurId, slideNextId, 'prev' );	
@@ -268,8 +268,8 @@ APP = ( function ( APP, $, window, document ) {
 					_next.on( 'click', function( e ) {
 						e.preventDefault();
 
-						var slideCurId  = $items.filter( '.active' ).index(),
-							slideNextId = parseFloat( $items.filter( '.active' ).index() ) + 1;
+						var slideCurId  = $items.filter( '.is-active' ).index(),
+							slideNextId = parseFloat( $items.filter( '.is-active' ).index() ) + 1;
 	
 						//Transition Between Slides
 						sliderUpdates( slideCurId, slideNextId, 'next' );	
@@ -613,14 +613,14 @@ APP = ( function ( APP, $, window, document ) {
 			
 			slider[0].animatedSlides = setInterval( function() {
 
-					playTimes = parseFloat( items.filter( '.active' ).index() );
+					playTimes = parseFloat( items.filter( '.is-active' ).index() );
 					playTimes++;
 
 					
 					if ( !loop ) {
 						if ( playTimes < total && playTimes >= 0 ) {
 							
-							var slideCurId  = items.filter( '.active' ).index(),
+							var slideCurId  = items.filter( '.is-active' ).index(),
 								slideNextId = playTimes;	
 
 							sliderUpdates( slideCurId, slideNextId, 'next' );
@@ -629,7 +629,7 @@ APP = ( function ( APP, $, window, document ) {
 						if ( playTimes == total ) playTimes = 0;
 						if ( playTimes < 0 ) playTimes = total-1;		
 
-						var slideCurId  = items.filter( '.active' ).index(),
+						var slideCurId  = items.filter( '.is-active' ).index(),
 							slideNextId = playTimes;	
 
 						
@@ -728,21 +728,21 @@ APP = ( function ( APP, $, window, document ) {
 
 					//Add transition class to each item
 					//-------------------------------------	
-					$items.removeClass( 'active leave prev next' )
+					$items.removeClass( 'is-active leave prev next' )
 						  .addClass( dirIndicatorClass );
 
 					$current.addClass( 'leave' );
-					$next.addClass( 'active' );
+					$next.addClass( 'is-active' );
 
 
 
 					//Add transition class to Controls Pagination
 					//-------------------------------------
-					$( dataControlsPagination ).find( 'ul > li' ).removeClass( 'active leave prev next' )
+					$( dataControlsPagination ).find( 'ul > li' ).removeClass( 'is-active leave prev next' )
 											   .addClass( dirIndicatorClass );
 
 					$( dataControlsPagination ).find( 'ul > li' ).eq( slideCurId ).addClass( 'leave' );
-					$( dataControlsPagination ).find( 'ul > li' ).eq( slideNextId ).addClass( 'active' );
+					$( dataControlsPagination ).find( 'ul > li' ).eq( slideNextId ).addClass( 'is-active' );
 
 
 

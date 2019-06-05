@@ -68,7 +68,7 @@ APP = ( function ( APP, $, window, document ) {
 							$initHeight.find( '.uix-price__outline' ).css( 'height', priceBGH_Max + 'px' );
 
 							// Actived columns
-							$initHeight.find( '.uix-price__outline.active' ).each( function() {
+							$initHeight.find( '.uix-price__outline.is-active' ).each( function() {
 
 								var ty = Math.abs( parseInt( $( this ).css('transform').split(',')[5]));
 								if ( !isNaN(ty) ) {
@@ -87,7 +87,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 						// Actived columns
-						$initHeight.find( '.uix-price__outline.active' ).each( function() {
+						$initHeight.find( '.uix-price__outline.is-active' ).each( function() {
 
 							var textColor = $( this ).closest( '.uix-price__outline--hover' ).data( 'tcolor' ),
 								btnColor  = $( this ).closest( '.uix-price__outline--hover' ).data( 'bcolor' );

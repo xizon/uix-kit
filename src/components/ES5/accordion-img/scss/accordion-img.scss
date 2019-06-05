@@ -80,12 +80,12 @@ $accordion-img-height: 250px;
 
 			}
 
-			&.active {
+			&.is-active {
 				width: 60%;
 			}	
 			
 
-			&.sub-active {
+			&.is-active.active-sub {
 			
 				> .outer {
 					
