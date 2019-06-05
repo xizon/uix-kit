@@ -1,5 +1,9 @@
 # Changelog
 
+#### = 3.5.4 (June 4, 2019) =
+
+* Tweak: Upgraded Sticky Elements.
+
 
 #### = 3.5.3 (May 31, 2019) =
 

@@ -10,15 +10,13 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.STICKY_EL               = APP.STICKY_EL || {};
-	APP.STICKY_EL.version       = '0.0.4';
+	APP.STICKY_EL.version       = '0.0.5';
     APP.STICKY_EL.pageLoaded    = function() {
 
 		var $window      = $( window ),
 			windowWidth  = window.innerWidth,
 			windowHeight = window.innerHeight,
 			topSpacing   = ( windowWidth <= 768 ) ? 0 : $( '.uix-header__container' ).outerHeight( true ); //with margin
-		
-	
 		
 		
 		//prepend a placeholder
@@ -45,104 +43,126 @@ APP = ( function ( APP, $, window, document ) {
 
 			
 		});
-
 		
+		//  Initialize
+		stickyInit( windowWidth, windowHeight );
 		
-		//spy the scroll event
-		$window.on( 'scroll touchmove', function() {
+		$window.on( 'resize', function() {
+			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+			if ( window.innerWidth != windowWidth ) {
 
-			var scrollTop   = $window.scrollTop(),
-				dynamicTop  = parseFloat( scrollTop + window.innerHeight );
+				// Update the window width for next time
+				windowWidth  = window.innerWidth;
+				windowHeight = window.innerHeight;
 
+				// Do stuff here
+				stickyInit( windowWidth, windowHeight );
+		
 
-			$( '.js-uix-sticky-el.active' ).each( function()  {
-				var $el      = $( this );
-
-				if ( typeof $el.data( 'stop-trigger' ) != typeof undefined && $( $el.data( 'stop-trigger' ) ).length > 0 ) {
-					
-					var diff      = typeof $el.data( 'stop-trigger-diff' ) != typeof undefined && $el.data( 'stop-trigger-diff' ).length > 0 ? UixMath.evaluate( $el.data( 'stop-trigger-diff' ).replace(/\s/g, '').replace(/\%\h/g, windowHeight ).replace(/\%\w/g, windowWidth ) ) : 0,
-						targetTop = $( $el.data( 'stop-trigger' ) ).offset().top - diff;
-					
-				
-					//Detecting when user scrolls to bottom of div
-					if ( dynamicTop >= targetTop ) {
-
-							$el.css( {
-								  'top'  : parseFloat( topSpacing - (dynamicTop - targetTop) ) + 'px'
-							  } );
-						     
-					} else {
-
-						if ( $el.length > 0 && $el.position().top < topSpacing ) {
-							$el.css( {
-								  'top'  : topSpacing + 'px'
-							  } );	
-							
-						}
-
-					}
-				}	
-
-			});
-			
-			
-
-		});	
-
-		var	waypoints = $( '.js-uix-sticky-el' ).waypoint({
-
-		  handler: function( direction ) {
-
-
-			var $this    = $( this.element ),
-				oWIdth   = $this.width(),
-				clsID    = $this.data( 'sticky-id' ),
-				$ph      = $( '[data-sticky-id="'+clsID+'"].is-placeholder' );
-
-
-			  $this
-				  .toggleClass( 'active', direction === 'down' )
-				  .css( {
-					  'width': oWIdth + 'px',
-					  'top'  : topSpacing + 'px'
-				  } );
-			  
-			  if ( $this.hasClass( 'active' ) ) {
-				  $ph.css( 'display', 'block' );
-			  } else {
-				  $ph.css( 'display', 'none' );
-			  }
-
-
-
-		  },
-
-		  offset: topSpacing
-
-		});	
+			}
+		});
+		
 		
 	
+		/*
+		 * Initialize Sticky Elements settings
+		 *
+		 * @param  {Number} w         - Returns width of browser viewport
+		 * @param  {Number} h         - Returns height of browser viewport
+		 * @return {Void}
+		 */
+		function stickyInit( w, h ) {
 			
-//		var	navMinTop    = $( '.js-uix-sticky-el' ).offset().top + window.innerHeight/3,
-//			navMaxTop    = parseFloat( $( document ).height() - $( '.uix-footer__container' ).height() ) - window.innerHeight/3;
-//
-//
-//		$( window ).on( 'scroll touchmove', function() {
-//			var scrollTop = $( this ).scrollTop(),
-//				spyTop    = parseFloat( scrollTop + window.innerHeight/2 );
-//
-//			//Detecting when user scrolls to bottom of div
-//			if ( spyTop > navMaxTop || spyTop < navMinTop ) {
-//				$( '.js-uix-sticky-el' ).removeClass( 'active' );
-//			} else {
-//				$( '.js-uix-sticky-el' ).addClass( 'active' );
-//			}	
-//
-//
-//		});
+			$window.off( 'scroll.STICKY_EL touchmove.STICKY_EL' );
+
+			
+			if ( w > 768 ) {
+				
+				$( '.js-uix-sticky-el' ).each( function()  {
+					var $el      = $( this ),
+						elTop    = $el.offset().top,
+						oWidth   = $el.width(),
+						clsID    = $el.data( 'sticky-id' ),
+						$ph      = $( '[data-sticky-id="'+clsID+'"].is-placeholder' );
+					
+					
+					
+					//spy the scroll event
+					$window.on( 'scroll.STICKY_EL touchmove.STICKY_EL', function() {
+
+						var scrollTop   = $window.scrollTop(),
+							dynamicTop  = parseFloat( scrollTop + window.innerHeight );
 
 
-    
+						//------
+						if ( parseFloat( scrollTop + topSpacing ) > elTop ) {
+						  $el
+							  .addClass( 'active' )
+							  .css( {
+								  'width': oWidth + 'px',
+								  'top'  : topSpacing + 'px'
+							  } );
+						   $ph.css( 'display', 'block' );
+
+						} else {
+						  $el
+							  .removeClass( 'active' )
+							  .css( {
+								  'top'  : 0
+							  } );	
+						  $ph.css( 'display', 'none' );
+						}
+
+
+
+						//------
+						if ( typeof $el.data( 'stop-trigger' ) != typeof undefined && $( $el.data( 'stop-trigger' ) ).length > 0 ) {
+
+							var diff      = typeof $el.data( 'stop-trigger-diff' ) != typeof undefined && $el.data( 'stop-trigger-diff' ).length > 0 ? UixMath.evaluate( $el.data( 'stop-trigger-diff' ).replace(/\s/g, '').replace(/\%\h/g, windowHeight ).replace(/\%\w/g, windowWidth ) ) : 0,
+								targetTop = $( $el.data( 'stop-trigger' ) ).offset().top - diff;
+
+
+							//Detecting when user scrolls to bottom of div
+							if ( dynamicTop >= targetTop ) {
+
+									$el.css( {
+										  'top'  : parseFloat( topSpacing - (dynamicTop - targetTop) ) + 'px'
+									  } );
+
+							} else {
+
+								if ( $el.length > 0 && $el.position().top < topSpacing ) {
+									$el.css( {
+										  'top'  : topSpacing + 'px'
+									  } );	
+
+								}
+
+							}
+						}	
+
+
+					});//endif scroll.STICKY_EL touchmove.STICKY_EL
+					
+					
+
+				});//endif $( '.js-uix-sticky-el' )
+
+				
+				
+			} else {
+				$( '.js-uix-sticky-el' ).removeClass( 'active' );
+				$( '[data-sticky-id].is-placeholder' ).css( 'display', 'none' );
+				
+			}// endif w > 768
+			
+			
+		}
+		
+		
+		
+
+
 		
     };
 
