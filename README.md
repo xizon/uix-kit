@@ -160,85 +160,78 @@ You can update the Placeholders in Templates by modifying the Site Info configur
 ```html
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US">
-	<head>
-		<meta charset="utf-8" />
-		<title></title>	
-        
-		<!-- Mobile Settings
-		============================================= -->
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-        <!-- Mobile Settings end -->
-		
-		
-		<!-- Vendor
-		============================================= -->
-		<script src="assets/js/wp-jquery/jquery.min.js?ver=3.3.1"></script>
-		<script src="assets/js/wp-jquery/jquery.migrate.min.js?ver=1.4.1"></script>
-        <!-- Vendor  end -->
-
-		
-		
-		<!-- Compatibility
-		============================================= -->
-		<script src="assets/js/min/modernizr.min.js?ver=3.5.0"></script>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <!-- Compatibility  end -->
-
-		
-		<!-- Core & Theme CSS
-		============================================= -->
-        <!-- Basic  -->
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css?ver=4.2.1" media="all"/>
-		<link rel="stylesheet" href="assets/css/video.min.css?ver=7.4.1" media="all"/>
-		
-        <!-- Icons  -->
-		<link rel="stylesheet" href="assets/fonts/fontawesome/css/all.min.css?ver=5.7.0">
-		<link rel="stylesheet" href="assets/fonts/fontawesome/css/v4-shims.min.css?ver=5.7.0">
-        
-        <!-- Theme  -->
-        <link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=1.0.0" media="all"/>
-
-         <!--[if lt IE 10]>
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+	<!-- Mobile Settings
+	============================================= -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<!-- Mobile Settings end -->
+	
+	<!-- Vendor
+	============================================= -->
+	<script src="assets/js/wp-jquery/jquery.min.js?ver=3.3.1"></script>
+	<script src="assets/js/wp-jquery/jquery.migrate.min.js?ver=1.4.1"></script>
+	<!-- Vendor  end -->
+	
+	<!-- Compatibility
+	============================================= -->
+	<script src="assets/js/min/modernizr.min.js?ver=3.5.0"></script>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!-- Compatibility  end -->
+	
+	<!-- Core & Theme CSS
+	============================================= -->
+	<!-- Basic  -->
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css?ver=4.2.1" media="all" />
+	<link rel="stylesheet" href="assets/css/video.min.css?ver=7.4.1" media="all" />
+	<!-- Icons  -->
+	<link rel="stylesheet" href="assets/fonts/fontawesome/css/all.min.css?ver=5.7.0">
+	<link rel="stylesheet" href="assets/fonts/fontawesome/css/v4-shims.min.css?ver=5.7.0">
+	<!-- Theme  -->
+	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=1.0.0" media="all" />
+	<!--[if lt IE 10]>
            <link rel="stylesheet" href="assets/css/IE.css?ver=1.0.0" media="all" />
         <![endif]-->
-        <!-- Core & Theme CSS  end -->
-		
-		
-		<!-- Break free from CSS prefix hell!
-		============================================= -->
-		<script src="assets/js/min/prefixfree.min.js?ver=1.0.7"></script>
-  </head>     
-  <body>
-    
-    ...
+	<!-- Core & Theme CSS  end -->
+	
+	<!-- Break free from CSS prefix hell!
+	============================================= -->
+	<script src="assets/js/min/prefixfree.min.js?ver=1.0.7"></script>
+</head>
 
-    <!-- Vendor -->
+<body> 
+	
+	{your_html_codes_here}
+	
+	
+	<!-- Vendor -->
 	<script src="assets/js/min/jquery.easing.min.js?ver=1.3"></script>
-    <script src="assets/js/min/jquery.waitforimages.min.js?ver=1.0"></script>
-    <script src="assets/js/min/video.min.js?ver=7.4.1"></script> 
-	<script src="assets/js/min/jquery.waypoints.min.js?ver=4.0.1"></script> 
-    <script src="assets/js/min/template7.min.js?ver=1.2.5"></script>
-    <script src="assets/js/min/TweenMax.min.js?ver=2.0.2"></script>
-    <script src="assets/js/min/pixi.min.js?ver=4.8.4"></script>
-    <script src="assets/js/min/three.min.js?ver=r99"></script>
-    <script src="assets/js/min/anime.min.js?ver=2.2.0"></script>
-    <script src="assets/js/min/hammer.min.js?ver=2.0.8"></script>
-    <script src="assets/js/min/muuri.min.js?ver=0.7.1"></script>
-    
-	  
+	<script src="assets/js/min/jquery.waitforimages.min.js?ver=1.0"></script>
+	<script src="assets/js/min/video.min.js?ver=7.4.1"></script>
+	<script src="assets/js/min/jquery.waypoints.min.js?ver=4.0.1"></script>
+	<script src="assets/js/min/template7.min.js?ver=1.2.5"></script>
+	<script src="assets/js/min/TweenMax.min.js?ver=2.0.2"></script>
+	<script src="assets/js/min/pixi.min.js?ver=4.8.4"></script>
+	<script src="assets/js/min/three.min.js?ver=r99"></script>
+	<script src="assets/js/min/anime.min.js?ver=2.2.0"></script>
+	<script src="assets/js/min/hammer.min.js?ver=2.0.8"></script>
+	<script src="assets/js/min/muuri.min.js?ver=0.7.1"></script>
+
 	<!-- Your Plugins & Theme Scripts
 	============================================= -->
 	<script>
-		var REVISION     = "1.0.0",
-			APP_ROOTPATH = {
-				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
-				"homeUrl"     : "",  //Eg. https://uiux.cc
-				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
-			};
-    </script>  
-    <script src="../dist/js/uix-kit.min.js?ver=1.0.0"></script>
+	var REVISION = "1.0.0",
+	APP_ROOTPATH = {
+		"templateUrl": "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
+		"homeUrl": "", //Eg. https://uiux.cc
+	"ajaxUrl": "" //Eg. https://uiux.cc/wp-admin/admin-ajax.php
+	};
+	</script>
+	<script src="../dist/js/uix-kit.min.js?ver=1.0.0"></script>
+	
+</body>
 
-  </body>
 </html>
 
 ```
