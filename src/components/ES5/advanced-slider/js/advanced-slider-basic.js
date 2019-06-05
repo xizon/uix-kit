@@ -294,9 +294,9 @@ APP = ( function ( APP, $, window, document ) {
 
 			$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
 
-			$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
+			$( dataControlsArrows ).find( 'a' ).removeClass( 'is-disabled' );
 			if ( !dataLoop ) {
-				_prev.addClass( 'disabled' );
+				_prev.addClass( 'is-disabled' );
 			}
 
 
@@ -486,9 +486,9 @@ APP = ( function ( APP, $, window, document ) {
 				if ( elementIndex == total ) elementIndex = 0;
 				if ( elementIndex < 0 ) elementIndex = total-1;	
 			} else {
-				$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
-				if ( elementIndex == total - 1 ) $( dataControlsArrows ).find( '.uix-advanced-slider__arrows--next' ).addClass( 'disabled' );
-				if ( elementIndex == 0 ) $( dataControlsArrows ).find( '.uix-advanced-slider__arrows--prev' ).addClass( 'disabled' );
+				$( dataControlsArrows ).find( 'a' ).removeClass( 'is-disabled' );
+				if ( elementIndex == total - 1 ) $( dataControlsArrows ).find( '.uix-advanced-slider__arrows--next' ).addClass( 'is-disabled' );
+				if ( elementIndex == 0 ) $( dataControlsArrows ).find( '.uix-advanced-slider__arrows--prev' ).addClass( 'is-disabled' );
 			}
 
 			// To determine if it is a touch screen.
@@ -500,12 +500,12 @@ APP = ( function ( APP, $, window, document ) {
 				if ( !dataLoop ) {
 					//first item
 					if ( elementIndex == 0 ) {
-						$( dataControlsArrows ).find( '.uix-advanced-slider__arrows--prev' ).addClass( 'disabled' );
+						$( dataControlsArrows ).find( '.uix-advanced-slider__arrows--prev' ).addClass( 'is-disabled' );
 					}
 
 					//last item
 					if ( elementIndex == total - 1 ) {
-						$( dataControlsArrows ).find( '.uix-advanced-slider__arrows--next' ).addClass( 'disabled' );
+						$( dataControlsArrows ).find( '.uix-advanced-slider__arrows--next' ).addClass( 'is-disabled' );
 					}	
 				}
 

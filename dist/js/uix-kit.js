@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
- * ## Version             :  3.5.4
+ * ## Version             :  3.5.5
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  June 4, 2019
+ * ## Last Update         :  June 5, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -1366,7 +1366,7 @@ APP = ( function ( APP, $, window, document ) {
 			if ( w > 1430 ) maxWidth = 1278;
 			
 			//Full width container
-			maxWidth = windowWidth;
+			maxWidth = windowWidth - 15;
 			
 			
 			
@@ -13667,7 +13667,7 @@ APP = ( function ( APP, $, window, document ) {
 
 				$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
 				
-				_prev.addClass( 'disabled' );
+				_prev.addClass( 'is-disabled' );
 
 				_prev.on( 'click', function( e ) {
 					e.preventDefault();
@@ -13855,17 +13855,17 @@ APP = ( function ( APP, $, window, document ) {
 				if ( elementIndex > parseFloat( itemsTotal - 1 ) ) elementIndex = parseFloat( itemsTotal - 1 );
 				if ( elementIndex < 0 ) elementIndex = 0;
 				
-				$next.removeClass( 'disabled' );
-				$prev.removeClass( 'disabled' );
+				$next.removeClass( 'is-disabled' );
+				$prev.removeClass( 'is-disabled' );
 				$pagination.removeClass( 'active' );
 				$pagination.parent().removeClass( 'active' );
 
 				if ( elementIndex == itemsTotal - 1 ) {
-					$next.addClass( 'disabled' );
+					$next.addClass( 'is-disabled' );
 				}
 
 				if ( elementIndex == 0 ) {
-					$prev.addClass( 'disabled' );
+					$prev.addClass( 'is-disabled' );
 				}
 
 				
@@ -14198,9 +14198,9 @@ APP = ( function ( APP, $, window, document ) {
 
 			$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
 
-			$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
+			$( dataControlsArrows ).find( 'a' ).removeClass( 'is-disabled' );
 			if ( !dataLoop ) {
-				_prev.addClass( 'disabled' );
+				_prev.addClass( 'is-disabled' );
 			}
 
 
@@ -14390,9 +14390,9 @@ APP = ( function ( APP, $, window, document ) {
 				if ( elementIndex == total ) elementIndex = 0;
 				if ( elementIndex < 0 ) elementIndex = total-1;	
 			} else {
-				$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
-				if ( elementIndex == total - 1 ) $( dataControlsArrows ).find( '.uix-advanced-slider__arrows--next' ).addClass( 'disabled' );
-				if ( elementIndex == 0 ) $( dataControlsArrows ).find( '.uix-advanced-slider__arrows--prev' ).addClass( 'disabled' );
+				$( dataControlsArrows ).find( 'a' ).removeClass( 'is-disabled' );
+				if ( elementIndex == total - 1 ) $( dataControlsArrows ).find( '.uix-advanced-slider__arrows--next' ).addClass( 'is-disabled' );
+				if ( elementIndex == 0 ) $( dataControlsArrows ).find( '.uix-advanced-slider__arrows--prev' ).addClass( 'is-disabled' );
 			}
 
 			// To determine if it is a touch screen.
@@ -14404,12 +14404,12 @@ APP = ( function ( APP, $, window, document ) {
 				if ( !dataLoop ) {
 					//first item
 					if ( elementIndex == 0 ) {
-						$( dataControlsArrows ).find( '.uix-advanced-slider__arrows--prev' ).addClass( 'disabled' );
+						$( dataControlsArrows ).find( '.uix-advanced-slider__arrows--prev' ).addClass( 'is-disabled' );
 					}
 
 					//last item
 					if ( elementIndex == total - 1 ) {
-						$( dataControlsArrows ).find( '.uix-advanced-slider__arrows--next' ).addClass( 'disabled' );
+						$( dataControlsArrows ).find( '.uix-advanced-slider__arrows--next' ).addClass( 'is-disabled' );
 					}	
 				}
 
@@ -15925,9 +15925,9 @@ APP = ( function ( APP, $, window, document ) {
 
 			$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
 
-			$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
+			$( dataControlsArrows ).find( 'a' ).removeClass( 'is-disabled' );
 			if ( !dataLoop ) {
-				_prev.addClass( 'disabled' );
+				_prev.addClass( 'is-disabled' );
 			}
 
 
@@ -16127,9 +16127,9 @@ APP = ( function ( APP, $, window, document ) {
 				if ( elementIndex == total ) elementIndex = 0;
 				if ( elementIndex < 0 ) elementIndex = total-1;	
 			} else {
-				$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
-				if ( elementIndex == total - 1 ) $( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--next' ).addClass( 'disabled' );
-				if ( elementIndex == 0 ) $( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--prev' ).addClass( 'disabled' );
+				$( dataControlsArrows ).find( 'a' ).removeClass( 'is-disabled' );
+				if ( elementIndex == total - 1 ) $( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--next' ).addClass( 'is-disabled' );
+				if ( elementIndex == 0 ) $( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--prev' ).addClass( 'is-disabled' );
 			}
 
 
@@ -16144,12 +16144,12 @@ APP = ( function ( APP, $, window, document ) {
 				if ( !dataLoop ) {
 					//first item
 					if ( elementIndex == 0 ) {
-						$( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--prev' ).addClass( 'disabled' );
+						$( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--prev' ).addClass( 'is-disabled' );
 					}
 
 					//last item
 					if ( elementIndex == total - 1 ) {
-						$( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--next' ).addClass( 'disabled' );
+						$( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--next' ).addClass( 'is-disabled' );
 					}	
 				}
 
@@ -19471,12 +19471,12 @@ APP = ( function ( APP, $, window, document ) {
 						$plinkPrev = $plink.filter( '.uix-flexslider__mycontrols--thumb__prev' ),
 						$plinkNext = $plink.filter( '.uix-flexslider__mycontrols--thumb__next' );
 
-					$plinkPrev.removeClass( 'disabled' );
-					$plinkNext.removeClass( 'disabled' );
+					$plinkPrev.removeClass( 'is-disabled' );
+					$plinkNext.removeClass( 'is-disabled' );
 
 					if ( !thisSlider.vars.animationLoop ) {
-						if ( prevIndex === -1 ) $plinkPrev.addClass( 'disabled' );
-						if ( nextIndex === thisSlider.last + 1 ) $plinkNext.addClass( 'disabled' );	
+						if ( prevIndex === -1 ) $plinkPrev.addClass( 'is-disabled' );
+						if ( nextIndex === thisSlider.last + 1 ) $plinkNext.addClass( 'is-disabled' );	
 					} else {
 						if ( prevIndex === -1 ) prevIndex = thisSlider.last;
 						if ( nextIndex === thisSlider.last + 1 ) nextIndex = 0;
@@ -22520,7 +22520,7 @@ APP = ( function ( APP, $, window, document ) {
 					}
 
 
-					$this.wrap('<div class="'+ settings.targetWrapper.replace( '.', '' )+' '+( $this.hasClass( 'uix-controls--line' ) ? 'uix-controls--line' : '' )+' '+( $this.hasClass( 'is-fullwidth' ) ? 'is-fullwidth' : '' )+' '+( $this.hasClass( 'disabled' ) ? 'disabled' : '' )+'"></div>');
+					$this.wrap('<div class="'+ settings.targetWrapper.replace( '.', '' )+' '+( $this.hasClass( 'uix-controls--line' ) ? 'uix-controls--line' : '' )+' '+( $this.hasClass( 'is-fullwidth' ) ? 'is-fullwidth' : '' )+' '+( $this.hasClass( 'is-disabled' ) ? 'is-disabled' : '' )+'"></div>');
 					$this.hide();
 					$this.after( template );	
 
@@ -22808,7 +22808,7 @@ APP = ( function ( APP, $, window, document ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
-			controls    : 'input.disabled'
+			controls    : 'input.is-disabled'
         }, options );
  
         this.each( function() {
@@ -28410,7 +28410,7 @@ APP = ( function ( APP, $, window, document ) {
 
 			//default button status
 			if ( $carouselItem.first().data( 'id' ) == 1 && !carouselLoop ) {
-				$( carouselPrev ).addClass( 'disabled' );
+				$( carouselPrev ).addClass( 'is-disabled' );
 			}	
 
 			/* 
@@ -28662,12 +28662,12 @@ APP = ( function ( APP, $, window, document ) {
 				//The state of the control button
 				if ( !carouselLoop ) {
 					
-					if ( isEnd ) $( nextBtnStr ).addClass( 'disabled' );
-					if ( isFirst ) $( prevBtnStr ).addClass( 'disabled' );
+					if ( isEnd ) $( nextBtnStr ).addClass( 'is-disabled' );
+					if ( isFirst ) $( prevBtnStr ).addClass( 'is-disabled' );
 					
 					if ( isMid ) {
-						$( nextBtnStr ).removeClass( 'disabled' );
-						$( prevBtnStr ).removeClass( 'disabled' );
+						$( nextBtnStr ).removeClass( 'is-disabled' );
+						$( prevBtnStr ).removeClass( 'is-disabled' );
 					}
 					
 					
@@ -28807,7 +28807,7 @@ APP = ( function ( APP, $, window, document ) {
 //
 //			//default button status
 //			if ( $carouselItem.first().data( 'id' ) == 1 && !carouselLoop ) {
-//				$( carouselPrev ).addClass( 'disabled' );
+//				$( carouselPrev ).addClass( 'is-disabled' );
 //			}	
 //
 //			/* 
@@ -28953,7 +28953,7 @@ APP = ( function ( APP, $, window, document ) {
 //					isEnd = true;
 //				}
 //				if ( (carouselItemTotal - showcarouselItem) == $curItems.first().data( 'id' ) && !carouselLoop ) {
-//					if ( curBtn ) curBtn.addClass( 'disabled' );
+//					if ( curBtn ) curBtn.addClass( 'is-disabled' );
 //				}
 //				
 //				
@@ -28965,7 +28965,7 @@ APP = ( function ( APP, $, window, document ) {
 //				//Reset prevents code from duplicate run
 //				var preventEvent = function() {
 //					if ( carouselPrev && carouselPrev != '' ) {
-//						$( carouselPrev ).data( 'click', 0 ).removeClass( 'disabled' );
+//						$( carouselPrev ).data( 'click', 0 ).removeClass( 'is-disabled' );
 //					}
 //
 //					if ( curBtn ) curBtn.data( 'click', 0 );
@@ -29093,7 +29093,7 @@ APP = ( function ( APP, $, window, document ) {
 //					isEnd = true;
 //				}
 //				if ( 2 == $curItems.first().data( 'id' ) && !carouselLoop ) {
-//					if ( curBtn ) curBtn.addClass( 'disabled' );
+//					if ( curBtn ) curBtn.addClass( 'is-disabled' );
 //				}
 //				
 //				
@@ -29105,7 +29105,7 @@ APP = ( function ( APP, $, window, document ) {
 //				//Reset prevents code from duplicate run
 //				var preventEvent = function() {
 //					if ( carouselNext && carouselNext != '' ) {
-//						$( carouselNext ).data( 'click', 0 ).removeClass( 'disabled' );
+//						$( carouselNext ).data( 'click', 0 ).removeClass( 'is-disabled' );
 //					}
 //
 //					if ( curBtn ) curBtn.data( 'click', 0 );
@@ -31409,7 +31409,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.STICKY_EL               = APP.STICKY_EL || {};
-	APP.STICKY_EL.version       = '0.0.4';
+	APP.STICKY_EL.version       = '0.0.5';
     APP.STICKY_EL.pageLoaded    = function() {
 
 		var $window      = $( window ),
@@ -35847,9 +35847,9 @@ APP = ( function ( APP, $, window, document ) {
 
 					$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
 
-					$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
+					$( dataControlsArrows ).find( 'a' ).removeClass( 'is-disabled' );
 					if ( !dataLoop ) {
-						_prev.addClass( 'disabled' );
+						_prev.addClass( 'is-disabled' );
 					}
 
 
@@ -36354,9 +36354,9 @@ APP = ( function ( APP, $, window, document ) {
 					//Add transition class to Arrows
 					//-------------------------------------		
 					if ( ! dataLoop ) {
-						$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
-						if ( slideNextId == total - 1 ) $( dataControlsArrows ).find( '.uix-3d-slider--shatter__arrows--next' ).addClass( 'disabled' );
-						if ( slideNextId == 0 ) $( dataControlsArrows ).find( '.uix-3d-slider--shatter__arrows--prev' ).addClass( 'disabled' );
+						$( dataControlsArrows ).find( 'a' ).removeClass( 'is-disabled' );
+						if ( slideNextId == total - 1 ) $( dataControlsArrows ).find( '.uix-3d-slider--shatter__arrows--next' ).addClass( 'is-disabled' );
+						if ( slideNextId == 0 ) $( dataControlsArrows ).find( '.uix-3d-slider--shatter__arrows--prev' ).addClass( 'is-disabled' );
 					}
 
 
@@ -36751,9 +36751,9 @@ APP = ( function ( APP, $, window, document ) {
 
 					$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
 
-					$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
+					$( dataControlsArrows ).find( 'a' ).removeClass( 'is-disabled' );
 					if ( !dataLoop ) {
-						_prev.addClass( 'disabled' );
+						_prev.addClass( 'is-disabled' );
 					}
 
 
@@ -37301,9 +37301,9 @@ APP = ( function ( APP, $, window, document ) {
 					//Add transition class to Arrows
 					//-------------------------------------		
 					if ( ! dataLoop ) {
-						$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
-						if ( slideNextId == total - 1 ) $( dataControlsArrows ).find( '.uix-3d-slider--expParticle__arrows--next' ).addClass( 'disabled' );
-						if ( slideNextId == 0 ) $( dataControlsArrows ).find( '.uix-3d-slider--expParticle__arrows--prev' ).addClass( 'disabled' );
+						$( dataControlsArrows ).find( 'a' ).removeClass( 'is-disabled' );
+						if ( slideNextId == total - 1 ) $( dataControlsArrows ).find( '.uix-3d-slider--expParticle__arrows--next' ).addClass( 'is-disabled' );
+						if ( slideNextId == 0 ) $( dataControlsArrows ).find( '.uix-3d-slider--expParticle__arrows--prev' ).addClass( 'is-disabled' );
 					}
 
 
@@ -38350,7 +38350,7 @@ APP = ( function ( APP, $, window, document ) {
 				//Activate the default selection
 				timelineUpdate( $this, $this.find( '.uix-timeline__item.active' ), dateShowEle, false );
 				if ( $this.find( '.uix-timeline__item.active' ).index() == 0 ) {
-					$this.find( '.uix-timeline__btn--prev' ).addClass( 'disabled' );
+					$this.find( '.uix-timeline__btn--prev' ).addClass( 'is-disabled' );
 				}
 				
 
@@ -38432,7 +38432,7 @@ APP = ( function ( APP, $, window, document ) {
 		
 			
 			//loop the items
-			obj.find( '.uix-timeline__btn--prev, .uix-timeline__btn--next' ).removeClass( 'disabled' );
+			obj.find( '.uix-timeline__btn--prev, .uix-timeline__btn--next' ).removeClass( 'is-disabled' );
 			
 			if ( prev ) {
 				
@@ -38441,7 +38441,7 @@ APP = ( function ( APP, $, window, document ) {
 					if ( tarIndex < 0 ) tarIndex = itemTotal-1;
 				} else {
 					if ( tarIndex < 0 ) tarIndex = 0;
-					if ( tarIndex == 0 ) obj.find( '.uix-timeline__btn--prev' ).addClass( 'disabled' );
+					if ( tarIndex == 0 ) obj.find( '.uix-timeline__btn--prev' ).addClass( 'is-disabled' );
 					
 					 
 				}
@@ -38452,8 +38452,8 @@ APP = ( function ( APP, $, window, document ) {
 					if ( tarIndex == itemTotal ) tarIndex = 0;
 				} else {
 					if ( tarIndex > itemTotal-1 ) tarIndex = itemTotal-1;
-					if ( tarIndex > itemTotal-2 ) obj.find( '.uix-timeline__btn--next' ).addClass( 'disabled' );
-					if ( tarIndex == 0 ) obj.find( '.uix-timeline__btn--prev' ).addClass( 'disabled' );
+					if ( tarIndex > itemTotal-2 ) obj.find( '.uix-timeline__btn--next' ).addClass( 'is-disabled' );
+					if ( tarIndex == 0 ) obj.find( '.uix-timeline__btn--prev' ).addClass( 'is-disabled' );
 				}
 			}
 

@@ -242,9 +242,9 @@ APP = ( function ( APP, $, window, document ) {
 
 					$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
 
-					$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
+					$( dataControlsArrows ).find( 'a' ).removeClass( 'is-disabled' );
 					if ( !dataLoop ) {
-						_prev.addClass( 'disabled' );
+						_prev.addClass( 'is-disabled' );
 					}
 
 
@@ -749,9 +749,9 @@ APP = ( function ( APP, $, window, document ) {
 					//Add transition class to Arrows
 					//-------------------------------------		
 					if ( ! dataLoop ) {
-						$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
-						if ( slideNextId == total - 1 ) $( dataControlsArrows ).find( '.uix-3d-slider--shatter__arrows--next' ).addClass( 'disabled' );
-						if ( slideNextId == 0 ) $( dataControlsArrows ).find( '.uix-3d-slider--shatter__arrows--prev' ).addClass( 'disabled' );
+						$( dataControlsArrows ).find( 'a' ).removeClass( 'is-disabled' );
+						if ( slideNextId == total - 1 ) $( dataControlsArrows ).find( '.uix-3d-slider--shatter__arrows--next' ).addClass( 'is-disabled' );
+						if ( slideNextId == 0 ) $( dataControlsArrows ).find( '.uix-3d-slider--shatter__arrows--prev' ).addClass( 'is-disabled' );
 					}
 
 

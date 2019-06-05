@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
- * ## Version             :  3.5.4
+ * ## Version             :  3.5.5
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  June 4, 2019
+ * ## Last Update         :  June 5, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -3554,12 +3554,12 @@ h6 {
     margin-right: 1rem; }
   .uix-advanced-content-slider__arrows .uix-advanced-content-slider__arrows--prev {
     left: 15px; }
-    .uix-advanced-content-slider__arrows .uix-advanced-content-slider__arrows--prev.disabled {
+    .uix-advanced-content-slider__arrows .uix-advanced-content-slider__arrows--prev.is-disabled {
       display: none; }
   .uix-advanced-content-slider__arrows .uix-advanced-content-slider__arrows--next {
     right: 15px;
     text-align: right; }
-    .uix-advanced-content-slider__arrows .uix-advanced-content-slider__arrows--next.disabled {
+    .uix-advanced-content-slider__arrows .uix-advanced-content-slider__arrows--next.is-disabled {
       display: none; }
 
 /* ====================================================== 
@@ -3746,11 +3746,11 @@ h6 {
     background: #fff; }
   .uix-advanced-slider__arrows .uix-advanced-slider__arrows--prev {
     left: 15px; }
-    .uix-advanced-slider__arrows .uix-advanced-slider__arrows--prev.disabled {
+    .uix-advanced-slider__arrows .uix-advanced-slider__arrows--prev.is-disabled {
       visibility: hidden; }
   .uix-advanced-slider__arrows .uix-advanced-slider__arrows--next {
     right: 15px; }
-    .uix-advanced-slider__arrows .uix-advanced-slider__arrows--next.disabled {
+    .uix-advanced-slider__arrows .uix-advanced-slider__arrows--next.is-disabled {
       visibility: hidden; }
 
 /* ====================================================== 
@@ -3937,11 +3937,11 @@ h6 {
     background: #fff; }
   .uix-advanced-slider-sp__arrows .uix-advanced-slider-sp__arrows--prev {
     left: 15px; }
-    .uix-advanced-slider-sp__arrows .uix-advanced-slider-sp__arrows--prev.disabled {
+    .uix-advanced-slider-sp__arrows .uix-advanced-slider-sp__arrows--prev.is-disabled {
       visibility: hidden; }
   .uix-advanced-slider-sp__arrows .uix-advanced-slider-sp__arrows--next {
     right: 15px; }
-    .uix-advanced-slider-sp__arrows .uix-advanced-slider-sp__arrows--next.disabled {
+    .uix-advanced-slider-sp__arrows .uix-advanced-slider-sp__arrows--next.is-disabled {
       visibility: hidden; }
 
 /* ====================================================== 
@@ -4401,11 +4401,11 @@ h6 {
   cursor: pointer;
   transition: all 0.3s ease;
   /* Waiting state */ }
-  .uix-btn.disabled {
+  .uix-btn:disabled, .uix-btn.is-disabled {
     background-image: linear-gradient(to right, #e4e7ed 0%, #e4e7ed 20%, #e4e7ed 100%) !important;
     border-color: #e4e7ed !important;
     cursor: not-allowed !important;
-    box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.2) !important;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.05) !important;
     pointer-events: none !important;
     user-select: none !important;
     color: #474747 !important; }
@@ -5857,11 +5857,11 @@ ol.uix-flexslider__control-paging {
     .uix-flexslider__mycontrols--thumb > a:hover > span {
       transform: scale(1);
       opacity: 1; }
-  .uix-flexslider__mycontrols--thumb .uix-flexslider__mycontrols--thumb__prev.disabled {
+  .uix-flexslider__mycontrols--thumb .uix-flexslider__mycontrols--thumb__prev.is-disabled {
     display: none; }
   .uix-flexslider__mycontrols--thumb .uix-flexslider__mycontrols--thumb__next {
     text-align: right; }
-    .uix-flexslider__mycontrols--thumb .uix-flexslider__mycontrols--thumb__next.disabled {
+    .uix-flexslider__mycontrols--thumb .uix-flexslider__mycontrols--thumb__next.is-disabled {
       display: none; }
 
 /*----- 3.5. Timeline Indicator -----*/
@@ -6466,15 +6466,15 @@ select:-webkit-autofill:focus {
     color: #f00 !important; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-error .uix-controls__bar::before, .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-error .uix-controls__bar::after {
     background: #f00; }
-  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select):not(.uix-controls--line).disabled input:not([type="checkbox"]):not([type="radio"]) {
+  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select):not(.uix-controls--line).is-disabled input:not([type="checkbox"]):not([type="radio"]) {
     border-color: #E1E1E1;
     background: #EDEDED; }
-  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select):not(.uix-controls--line).disabled textarea,
-  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select):not(.uix-controls--line).disabled button:not(.uix-btn),
-  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select):not(.uix-controls--line).disabled select {
+  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select):not(.uix-controls--line).is-disabled textarea,
+  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select):not(.uix-controls--line).is-disabled button:not(.uix-btn),
+  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select):not(.uix-controls--line).is-disabled select {
     border-color: #E1E1E1;
     background: #E1E1E1; }
-  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select):not(.uix-controls--line).disabled .uix-controls__bar::before, .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select):not(.uix-controls--line).disabled .uix-controls__bar::after {
+  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select):not(.uix-controls--line).is-disabled .uix-controls__bar::before, .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select):not(.uix-controls--line).is-disabled .uix-controls__bar::after {
     background: #E1E1E1; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .req-icon {
     position: absolute;
@@ -6534,15 +6534,15 @@ select:-webkit-autofill:focus {
     right: 0 !important; }
   .uix-controls.uix-controls--line.uix-controls__normal-select select {
     padding-left: 0 !important; }
-  .uix-controls.uix-controls--line.disabled input:not([type="checkbox"]):not([type="radio"]) {
+  .uix-controls.uix-controls--line.is-disabled input:not([type="checkbox"]):not([type="radio"]) {
     opacity: .7; }
-  .uix-controls.uix-controls--line.disabled textarea,
-  .uix-controls.uix-controls--line.disabled button:not(.uix-btn),
-  .uix-controls.uix-controls--line.disabled select {
+  .uix-controls.uix-controls--line.is-disabled textarea,
+  .uix-controls.uix-controls--line.is-disabled button:not(.uix-btn),
+  .uix-controls.uix-controls--line.is-disabled select {
     opacity: .7; }
-  .uix-controls.uix-controls--line.disabled label {
+  .uix-controls.uix-controls--line.is-disabled label {
     opacity: .5; }
-  .uix-controls.uix-controls--line.disabled .uix-controls__bar::before, .uix-controls.uix-controls--line.disabled .uix-controls__bar::after {
+  .uix-controls.uix-controls--line.is-disabled .uix-controls__bar::before, .uix-controls.uix-controls--line.is-disabled .uix-controls__bar::after {
     opacity: .5; }
 
 /* 
@@ -6749,9 +6749,9 @@ select:-webkit-autofill:focus {
     width: 100%; }
     .uix-controls__select-wrapper.is-fullwidth .uix-controls__select-trigger {
       width: 100% !important; }
-  .uix-controls__select-wrapper:not(.uix-controls--line).disabled {
+  .uix-controls__select-wrapper:not(.uix-controls--line).is-disabled {
     /* Mask used to prohibit selection */ }
-    .uix-controls__select-wrapper:not(.uix-controls--line).disabled::before {
+    .uix-controls__select-wrapper:not(.uix-controls--line).is-disabled::before {
       content: '';
       position: absolute;
       display: block;
@@ -6762,13 +6762,13 @@ select:-webkit-autofill:focus {
       left: 0;
       z-index: 2;
       user-select: none; }
-    .uix-controls__select-wrapper:not(.uix-controls--line).disabled .uix-controls__select-trigger {
+    .uix-controls__select-wrapper:not(.uix-controls--line).is-disabled .uix-controls__select-trigger {
       border-color: #E1E1E1 !important;
       background: #EDEDED !important; }
-  .uix-controls__select-wrapper.uix-controls--line.disabled {
+  .uix-controls__select-wrapper.uix-controls--line.is-disabled {
     opacity: .7;
     /* Mask used to prohibit selection */ }
-    .uix-controls__select-wrapper.uix-controls--line.disabled::before {
+    .uix-controls__select-wrapper.uix-controls--line.is-disabled::before {
       content: '';
       position: absolute;
       display: block;
@@ -8656,39 +8656,26 @@ a.uix-lightbox__original__link {
   position: relative;
   /* If you want text inside of it */ }
   .uix-list-aspect-ratio .uix-list-aspect-ratio__item img,
-  .uix-list-aspect-ratio .uix-list-aspect-ratio__item i,
-  .uix-list-aspect-ratio .uix-list-aspect-ratio__item .disabled {
+  .uix-list-aspect-ratio .uix-list-aspect-ratio__item i {
     transition: all 0.3s ease;
     position: absolute;
     top: 50%;
     left: 50%;
     z-index: 1;
-    opacity: 0;
     width: 5rem;
     height: auto;
     transform: translate(-50%, -50%);
     font-size: 5rem;
     color: white; }
-  .uix-list-aspect-ratio .uix-list-aspect-ratio__item .disabled {
-    opacity: 1;
-    z-index: 2;
-    color: rgba(255, 255, 255, 0.3); }
   .uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover, .uix-list-aspect-ratio .uix-controls__multi-sel > span.uix-list-aspect-ratio__item.active:not(.uix-controls__bar) {
     background: #EC5E79; }
-    .uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover img, .uix-list-aspect-ratio .uix-controls__multi-sel > span.uix-list-aspect-ratio__item.active:not(.uix-controls__bar) img,
-    .uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover i,
-    .uix-list-aspect-ratio .uix-controls__multi-sel > span.uix-list-aspect-ratio__item.active:not(.uix-controls__bar) i {
-      opacity: 1; }
-    .uix-list-aspect-ratio .uix-list-aspect-ratio__item:hover .disabled, .uix-list-aspect-ratio .uix-controls__multi-sel > span.uix-list-aspect-ratio__item.active:not(.uix-controls__bar) .disabled {
-      opacity: 0; }
 
 @media all and (max-width: 768px) {
   .uix-list-aspect-ratio {
     padding: 0;
     padding-right: 15px; }
     .uix-list-aspect-ratio .uix-list-aspect-ratio__item img,
-    .uix-list-aspect-ratio .uix-list-aspect-ratio__item i,
-    .uix-list-aspect-ratio .uix-list-aspect-ratio__item .disabled {
+    .uix-list-aspect-ratio .uix-list-aspect-ratio__item i {
       width: 2.5rem;
       font-size: 2.5rem; }
     .uix-list-aspect-ratio .uix-core-grid__col-4 {
@@ -9384,7 +9371,7 @@ dl.uix-list-abreast {
     opacity: 1;
     text-decoration: none;
     font-family: Arial, "sans-serif"; }
-    .uix-multi-carousel__controls a.disabled {
+    .uix-multi-carousel__controls a.is-disabled {
       opacity: .3; }
 
 /*----- Vertical Carousel -----*/
@@ -11282,11 +11269,11 @@ dl.uix-list-abreast {
     background: #fff; }
   .uix-3d-slider--shatter__arrows .uix-3d-slider--shatter__arrows--prev {
     left: 15px; }
-    .uix-3d-slider--shatter__arrows .uix-3d-slider--shatter__arrows--prev.disabled {
+    .uix-3d-slider--shatter__arrows .uix-3d-slider--shatter__arrows--prev.is-disabled {
       visibility: hidden; }
   .uix-3d-slider--shatter__arrows .uix-3d-slider--shatter__arrows--next {
     right: 15px; }
-    .uix-3d-slider--shatter__arrows .uix-3d-slider--shatter__arrows--next.disabled {
+    .uix-3d-slider--shatter__arrows .uix-3d-slider--shatter__arrows--next.is-disabled {
       visibility: hidden; }
 
 /* ====================================================== 
@@ -11414,11 +11401,11 @@ dl.uix-list-abreast {
     background: #fff; }
   .uix-3d-slider--expParticle__arrows .uix-3d-slider--expParticle__arrows--prev {
     left: 15px; }
-    .uix-3d-slider--expParticle__arrows .uix-3d-slider--expParticle__arrows--prev.disabled {
+    .uix-3d-slider--expParticle__arrows .uix-3d-slider--expParticle__arrows--prev.is-disabled {
       visibility: hidden; }
   .uix-3d-slider--expParticle__arrows .uix-3d-slider--expParticle__arrows--next {
     right: 15px; }
-    .uix-3d-slider--expParticle__arrows .uix-3d-slider--expParticle__arrows--next.disabled {
+    .uix-3d-slider--expParticle__arrows .uix-3d-slider--expParticle__arrows--next.is-disabled {
       visibility: hidden; }
 
 /* ====================================================== 
@@ -12478,7 +12465,7 @@ table.is-horizontal th,
     margin-left: -0.3125rem; }
   .uix-timeline__container-wrapper.is-horizontal .uix-timeline__btn.uix-timeline__btn--next:hover, .uix-timeline__container-wrapper.is-horizontal .uix-controls__multi-sel > span.uix-timeline__btn.uix-timeline__btn--next.active:not(.uix-controls__bar) {
     margin-right: -0.3125rem; }
-  .uix-timeline__container-wrapper.is-horizontal .uix-timeline__btn.disabled {
+  .uix-timeline__container-wrapper.is-horizontal .uix-timeline__btn.is-disabled {
     display: none; }
 
 .uix-timeline__container-wrapper.is-horizontal .uix-timeline__container.is-horizontal {

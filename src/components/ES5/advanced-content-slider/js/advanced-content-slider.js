@@ -141,7 +141,7 @@ APP = ( function ( APP, $, window, document ) {
 
 				$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
 				
-				_prev.addClass( 'disabled' );
+				_prev.addClass( 'is-disabled' );
 
 				_prev.on( 'click', function( e ) {
 					e.preventDefault();
@@ -329,17 +329,17 @@ APP = ( function ( APP, $, window, document ) {
 				if ( elementIndex > parseFloat( itemsTotal - 1 ) ) elementIndex = parseFloat( itemsTotal - 1 );
 				if ( elementIndex < 0 ) elementIndex = 0;
 				
-				$next.removeClass( 'disabled' );
-				$prev.removeClass( 'disabled' );
+				$next.removeClass( 'is-disabled' );
+				$prev.removeClass( 'is-disabled' );
 				$pagination.removeClass( 'active' );
 				$pagination.parent().removeClass( 'active' );
 
 				if ( elementIndex == itemsTotal - 1 ) {
-					$next.addClass( 'disabled' );
+					$next.addClass( 'is-disabled' );
 				}
 
 				if ( elementIndex == 0 ) {
-					$prev.addClass( 'disabled' );
+					$prev.addClass( 'is-disabled' );
 				}
 
 				

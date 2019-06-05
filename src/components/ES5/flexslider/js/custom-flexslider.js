@@ -129,12 +129,12 @@ APP = ( function ( APP, $, window, document ) {
 						$plinkPrev = $plink.filter( '.uix-flexslider__mycontrols--thumb__prev' ),
 						$plinkNext = $plink.filter( '.uix-flexslider__mycontrols--thumb__next' );
 
-					$plinkPrev.removeClass( 'disabled' );
-					$plinkNext.removeClass( 'disabled' );
+					$plinkPrev.removeClass( 'is-disabled' );
+					$plinkNext.removeClass( 'is-disabled' );
 
 					if ( !thisSlider.vars.animationLoop ) {
-						if ( prevIndex === -1 ) $plinkPrev.addClass( 'disabled' );
-						if ( nextIndex === thisSlider.last + 1 ) $plinkNext.addClass( 'disabled' );	
+						if ( prevIndex === -1 ) $plinkPrev.addClass( 'is-disabled' );
+						if ( nextIndex === thisSlider.last + 1 ) $plinkNext.addClass( 'is-disabled' );	
 					} else {
 						if ( prevIndex === -1 ) prevIndex = thisSlider.last;
 						if ( nextIndex === thisSlider.last + 1 ) nextIndex = 0;

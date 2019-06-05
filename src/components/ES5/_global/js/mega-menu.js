@@ -50,7 +50,7 @@ APP = ( function ( APP, $, window, document ) {
 			if ( w > 1430 ) maxWidth = 1278;
 			
 			//Full width container
-			maxWidth = windowWidth;
+			maxWidth = windowWidth - 15;
 			
 			
 			

@@ -489,7 +489,7 @@ ol.uix-flexslider__control-paging {
 	}
 	
 	.uix-flexslider__mycontrols--thumb__prev {
-		&.disabled {
+		&.is-disabled {
 			display: none;
 		}
 		
@@ -498,7 +498,7 @@ ol.uix-flexslider__control-paging {
 		
 		text-align: right;
 		
-		&.disabled {
+		&.is-disabled {
 			display: none;
 		}	
 		

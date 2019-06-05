@@ -547,7 +547,7 @@ select:-webkit-autofill:focus {
 	}
 	
 	/*-- Form Status: Disable --*/
-	&:not(.uix-controls--line).disabled {
+	&:not(.uix-controls--line).is-disabled {
 		input:not([type="checkbox"]):not([type="radio"]) {
 		    border-color: #E1E1E1;
 			background: #EDEDED;
@@ -722,7 +722,7 @@ select:-webkit-autofill:focus {
 
 	
 	/*-- Form Status: Disable --*/
-	&.disabled {
+	&.is-disabled {
 		input:not([type="checkbox"]):not([type="radio"]) {
 		    opacity: .7;
 
@@ -1079,7 +1079,7 @@ $controls-merge-button-width: 20%;
 		
 	}
 	
-	&:not(.uix-controls--line).disabled {
+	&:not(.uix-controls--line).is-disabled {
 		
 		/* Mask used to prohibit selection */
 		&::before {
@@ -1104,7 +1104,7 @@ $controls-merge-button-width: 20%;
 
 	}
 	
-	&.uix-controls--line.disabled {
+	&.uix-controls--line.is-disabled {
 		
 		opacity: .7;
 		

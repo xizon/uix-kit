@@ -365,7 +365,7 @@ $anim-duration: 0.6s;
 	.uix-advanced-slider__arrows--prev {
 		left: 15px;
 		
-		&.disabled {
+		&.is-disabled {
 			visibility: hidden;
 			
 		}
@@ -374,7 +374,7 @@ $anim-duration: 0.6s;
 	.uix-advanced-slider__arrows--next {
 		right: 15px;
 		
-		&.disabled {
+		&.is-disabled {
 			visibility: hidden;
 		}	
 		

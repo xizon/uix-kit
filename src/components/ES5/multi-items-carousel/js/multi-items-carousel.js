@@ -87,7 +87,7 @@ APP = ( function ( APP, $, window, document ) {
 
 			//default button status
 			if ( $carouselItem.first().data( 'id' ) == 1 && !carouselLoop ) {
-				$( carouselPrev ).addClass( 'disabled' );
+				$( carouselPrev ).addClass( 'is-disabled' );
 			}	
 
 			/* 
@@ -339,12 +339,12 @@ APP = ( function ( APP, $, window, document ) {
 				//The state of the control button
 				if ( !carouselLoop ) {
 					
-					if ( isEnd ) $( nextBtnStr ).addClass( 'disabled' );
-					if ( isFirst ) $( prevBtnStr ).addClass( 'disabled' );
+					if ( isEnd ) $( nextBtnStr ).addClass( 'is-disabled' );
+					if ( isFirst ) $( prevBtnStr ).addClass( 'is-disabled' );
 					
 					if ( isMid ) {
-						$( nextBtnStr ).removeClass( 'disabled' );
-						$( prevBtnStr ).removeClass( 'disabled' );
+						$( nextBtnStr ).removeClass( 'is-disabled' );
+						$( prevBtnStr ).removeClass( 'is-disabled' );
 					}
 					
 					
@@ -484,7 +484,7 @@ APP = ( function ( APP, $, window, document ) {
 //
 //			//default button status
 //			if ( $carouselItem.first().data( 'id' ) == 1 && !carouselLoop ) {
-//				$( carouselPrev ).addClass( 'disabled' );
+//				$( carouselPrev ).addClass( 'is-disabled' );
 //			}	
 //
 //			/* 
@@ -630,7 +630,7 @@ APP = ( function ( APP, $, window, document ) {
 //					isEnd = true;
 //				}
 //				if ( (carouselItemTotal - showcarouselItem) == $curItems.first().data( 'id' ) && !carouselLoop ) {
-//					if ( curBtn ) curBtn.addClass( 'disabled' );
+//					if ( curBtn ) curBtn.addClass( 'is-disabled' );
 //				}
 //				
 //				
@@ -642,7 +642,7 @@ APP = ( function ( APP, $, window, document ) {
 //				//Reset prevents code from duplicate run
 //				var preventEvent = function() {
 //					if ( carouselPrev && carouselPrev != '' ) {
-//						$( carouselPrev ).data( 'click', 0 ).removeClass( 'disabled' );
+//						$( carouselPrev ).data( 'click', 0 ).removeClass( 'is-disabled' );
 //					}
 //
 //					if ( curBtn ) curBtn.data( 'click', 0 );
@@ -770,7 +770,7 @@ APP = ( function ( APP, $, window, document ) {
 //					isEnd = true;
 //				}
 //				if ( 2 == $curItems.first().data( 'id' ) && !carouselLoop ) {
-//					if ( curBtn ) curBtn.addClass( 'disabled' );
+//					if ( curBtn ) curBtn.addClass( 'is-disabled' );
 //				}
 //				
 //				
@@ -782,7 +782,7 @@ APP = ( function ( APP, $, window, document ) {
 //				//Reset prevents code from duplicate run
 //				var preventEvent = function() {
 //					if ( carouselNext && carouselNext != '' ) {
-//						$( carouselNext ).data( 'click', 0 ).removeClass( 'disabled' );
+//						$( carouselNext ).data( 'click', 0 ).removeClass( 'is-disabled' );
 //					}
 //
 //					if ( curBtn ) curBtn.data( 'click', 0 );

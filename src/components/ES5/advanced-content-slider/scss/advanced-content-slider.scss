@@ -162,7 +162,7 @@
 	.uix-advanced-content-slider__arrows--prev {
 		left: 15px;
 		
-		&.disabled {
+		&.is-disabled {
 			display: none;
 			
 		}
@@ -172,7 +172,7 @@
 		right: 15px;
 		text-align: right;
 		
-		&.disabled {
+		&.is-disabled {
 			display: none;
 		}	
 		

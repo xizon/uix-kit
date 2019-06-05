@@ -60,7 +60,7 @@ APP = ( function ( APP, $, window, document ) {
 				//Activate the default selection
 				timelineUpdate( $this, $this.find( '.uix-timeline__item.active' ), dateShowEle, false );
 				if ( $this.find( '.uix-timeline__item.active' ).index() == 0 ) {
-					$this.find( '.uix-timeline__btn--prev' ).addClass( 'disabled' );
+					$this.find( '.uix-timeline__btn--prev' ).addClass( 'is-disabled' );
 				}
 				
 
@@ -142,7 +142,7 @@ APP = ( function ( APP, $, window, document ) {
 		
 			
 			//loop the items
-			obj.find( '.uix-timeline__btn--prev, .uix-timeline__btn--next' ).removeClass( 'disabled' );
+			obj.find( '.uix-timeline__btn--prev, .uix-timeline__btn--next' ).removeClass( 'is-disabled' );
 			
 			if ( prev ) {
 				
@@ -151,7 +151,7 @@ APP = ( function ( APP, $, window, document ) {
 					if ( tarIndex < 0 ) tarIndex = itemTotal-1;
 				} else {
 					if ( tarIndex < 0 ) tarIndex = 0;
-					if ( tarIndex == 0 ) obj.find( '.uix-timeline__btn--prev' ).addClass( 'disabled' );
+					if ( tarIndex == 0 ) obj.find( '.uix-timeline__btn--prev' ).addClass( 'is-disabled' );
 					
 					 
 				}
@@ -162,8 +162,8 @@ APP = ( function ( APP, $, window, document ) {
 					if ( tarIndex == itemTotal ) tarIndex = 0;
 				} else {
 					if ( tarIndex > itemTotal-1 ) tarIndex = itemTotal-1;
-					if ( tarIndex > itemTotal-2 ) obj.find( '.uix-timeline__btn--next' ).addClass( 'disabled' );
-					if ( tarIndex == 0 ) obj.find( '.uix-timeline__btn--prev' ).addClass( 'disabled' );
+					if ( tarIndex > itemTotal-2 ) obj.find( '.uix-timeline__btn--next' ).addClass( 'is-disabled' );
+					if ( tarIndex == 0 ) obj.find( '.uix-timeline__btn--prev' ).addClass( 'is-disabled' );
 				}
 			}
 

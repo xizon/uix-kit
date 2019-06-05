@@ -318,7 +318,7 @@
 	.uix-advanced-slider-sp__arrows--prev {
 		left: 15px;
 		
-		&.disabled {
+		&.is-disabled {
 			visibility: hidden;
 			
 		}
@@ -327,7 +327,7 @@
 	.uix-advanced-slider-sp__arrows--next {
 		right: 15px;
 		
-		&.disabled {
+		&.is-disabled {
 			visibility: hidden;
 		}	
 		

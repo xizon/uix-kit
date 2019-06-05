@@ -461,7 +461,7 @@ $control-sub-color: #dce4e8;
 .uix-controls__select-wrapper {
 
 
-	&:not(.uix-controls--line).disabled {
+	&:not(.uix-controls--line).is-disabled {
 		
 		/* Mask used to prohibit selection */
 		&::before {
@@ -472,7 +472,7 @@ $control-sub-color: #dce4e8;
 
 	}
 	
-	&.uix-controls--line.disabled {
+	&.uix-controls--line.is-disabled {
 
 		
 		/* Mask used to prohibit selection */

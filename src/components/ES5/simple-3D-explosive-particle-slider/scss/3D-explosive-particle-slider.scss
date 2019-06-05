@@ -175,7 +175,7 @@
 	.uix-3d-slider--expParticle__arrows--prev {
 		left: 15px;
 		
-		&.disabled {
+		&.is-disabled {
 			visibility: hidden;
 			
 		}
@@ -184,7 +184,7 @@
 	.uix-3d-slider--expParticle__arrows--next {
 		right: 15px;
 		
-		&.disabled {
+		&.is-disabled {
 			visibility: hidden;
 		}	
 		

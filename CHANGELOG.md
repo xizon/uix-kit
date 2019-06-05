@@ -1,5 +1,11 @@
 # Changelog
 
+
+#### = 3.5.5 (June 5, 2019) =
+
+* Tweak: Change all disabled style names `.disabled` to `.is-disabled`.
+
+
 #### = 3.5.4 (June 4, 2019) =
 
 * Tweak: Upgraded Sticky Elements.
