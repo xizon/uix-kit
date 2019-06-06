@@ -1,5 +1,9 @@
 # Changelog
 
+#### = 3.5.7 (June 6, 2019) =
+
+* Tweak: Upgraded ES6 demo page.
+
 
 #### = 3.5.6 (June 5, 2019) =
 

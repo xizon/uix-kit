@@ -22,14 +22,4 @@ import './components/ES5/_global/js/_all.js';
  * @description  Just a simple demonstration of ES6.
  *        
  */
-
-import { sex, echo } from './components/ES6/app1/js/functions.js';
-
-//Output only on the ES6 demo page
-if ( document.getElementsByTagName( 'body' )[0].className.match(/es6-demo-home/) ) {
-	echo( sex );
-	alert( 'this is ES6 demo page!' );
-}
-
-
-
+import './components/ES6/_global/js/_all.js';

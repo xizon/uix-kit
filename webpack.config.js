@@ -197,7 +197,7 @@ class ReplacePlaceholderForFile {
 								return;
 							}
 							//file written successfully
-							console.log(colors.fg.Green, `${filepath} written successfully!`, colors.Reset);
+							//console.log(colors.fg.Green, `${filepath} written successfully!`, colors.Reset);
 
 						});		
 					}
