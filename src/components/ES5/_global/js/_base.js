@@ -45,6 +45,7 @@ if ( typeof APP_ROOTPATH === 'undefined' ) {
 }
 
 
+
 /* 
  *************************************
  * Determine whether it is a special browser

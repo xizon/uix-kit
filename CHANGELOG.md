@@ -1,6 +1,36 @@
 # Changelog
 
 
+#### = 3.5.6 (June 5, 2019) =
+
+* Fix: Fixed an issue that Infinite AJAX Scroll does not trigger.
+* Tweak: Change all disabled element's class names `.disabled` to `.is-disabled`.
+* Tweak: Change all draggable element's class names `.dragging` to `.is-dragging`.
+* Tweak: Change all activated element's class names `.active` to `.is-active`.
+* Tweak: Upgraded module "Show More Less".
+
+
+
+#### = 3.5.4 (June 4, 2019) =
+
+* Tweak: Upgraded Sticky Elements.
+
+
+#### = 3.5.3 (May 31, 2019) =
+
+* Tweak: Upgraded Sticky Elements.
+* Tweak: Other styles and scripting micro-optimizations.
+
+
+#### = 3.5.2 (May 23, 2019) =
+
+* Fix: Fixed webpack-dev-server's hot start error that may be caused by replace-in-file-webpack-plugin.
+* Tweak: Improved partial core style compatible with WordPress.
+* Tweak: Optimized style for some modules.
+* Tweak: Modified package.json and webpack.config.js. Use a more stable command for the dependency installation of the development environment, using the following command: `sudo npm install --only=dev --unsafe-perm --production`
+
+
+
 #### = 3.5.0 (May 13, 2019) =
 
 * New: Added a tiny style to button component.

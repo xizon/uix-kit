@@ -48,7 +48,7 @@ $line-bar-w: 45px;
 			display: none;
 		}
 
-		&.active {
+		&.is-active {
 			&::after {
 				transform: translateX(0);
 			}
@@ -111,7 +111,7 @@ $line-bar-w: 45px;
 			margin-left: 0;
 		}
 		
-		&.active {
+		&.is-active {
 			
 			opacity: 1;
 			border: 1px solid $highlight-color1;

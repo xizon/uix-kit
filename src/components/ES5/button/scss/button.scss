@@ -25,7 +25,6 @@ $button-class-margin-b: 1rem;
     box-shadow: none;
 }
 
-
 .uix-btn {
 	display: inline-block;
 	text-align: center;
@@ -43,16 +42,26 @@ $button-class-margin-b: 1rem;
 	cursor: pointer;
 	@include transition-default();
 	
-
-	&.disabled {
+	&:hover {
+		background-position: 100% 0;
+		color: #fff;
+	}
+	
+	&:not([href]):not([tabindex]):focus {
+	    outline: 3px auto -webkit-focus-ring-color !important;
+	}
+	
+	&:disabled,
+	&.is-disabled {
 		background-image: linear-gradient(to right, #e4e7ed 0%, #e4e7ed 20%, #e4e7ed 100%)  !important;
 		border-color: #e4e7ed !important;
 		cursor: not-allowed !important;
-		box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.2) !important;
+		box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.05) !important;
 		pointer-events: none !important;
 		user-select: none !important;
 		color: $primary-text-color2 !important;
 	}
+	
 	
 
 	/* Waiting state */
@@ -64,16 +73,6 @@ $button-class-margin-b: 1rem;
 
 	}
 
-	
-
-	&:hover {
-		background-position: 100% 0;
-	}
-	
-	&:hover,
-	&:focus {
-		color: #fff;
-	}
 
 	&.is-hide {
 		display: none;
@@ -96,10 +95,6 @@ $button-class-margin-b: 1rem;
 		padding-right: 35px;
 	}
 
-	
-	&:focus {
-	    outline: none;
-	}
 	> span {
 	    vertical-align: middle;
 	}
@@ -111,7 +106,6 @@ $button-class-margin-b: 1rem;
 	
 	
 }
-
 
 
 @keyframes uix-cssAnim--moveWaitingStripes {

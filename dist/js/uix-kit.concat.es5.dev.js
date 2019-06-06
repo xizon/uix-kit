@@ -45,6 +45,7 @@ if ( typeof APP_ROOTPATH === 'undefined' ) {
 }
 
 
+
 /* 
  *************************************
  * Determine whether it is a special browser
@@ -730,7 +731,6 @@ APP = ( function ( APP, $, window, document ) {
 			windowWidth  = window.innerWidth,
 			windowHeight = window.innerHeight;
 
-		
 		//-------- Header initialize
 		headerInit( windowWidth );
 		
@@ -752,7 +752,7 @@ APP = ( function ( APP, $, window, document ) {
 			var $headerPlaceholder = $( '.uix-header__placeholder.js-uix-header__placeholder-autoheight' );
 			
 			if ( w > 768 ) {
-				$headerPlaceholder.css( 'height', $( '.uix-header__container' ).outerHeight() + 'px' ); 
+				$headerPlaceholder.css( 'height', $( '.uix-header__container' ).outerHeight( true ) + 'px' ); 
 				$( 'body' ).removeClass( 'is-mobile' );
 			} else {
 				$headerPlaceholder.css( 'height', 0 ); 
@@ -1084,7 +1084,7 @@ APP = ( function ( APP, $, window, document ) {
 			if ( w > 1430 ) maxWidth = 1278;
 			
 			//Full width container
-			maxWidth = windowWidth;
+			maxWidth = windowWidth - 15;
 			
 			
 			
@@ -1436,7 +1436,7 @@ APP = ( function ( APP, $, window, document ) {
 		//-------- Menu selected (if it exists "data-current" property in <ul>)
 		var curMenuIndex = $( ulForDesktop ).data( 'current' );
 		if ( typeof curMenuIndex !== typeof undefined ) {
-			$( ulForDesktop + ' > li:eq('+curMenuIndex+')' ).addClass( 'active' );
+			$( ulForDesktop + ' > li:eq('+curMenuIndex+')' ).addClass( 'is-active' );
 		}
 
 
@@ -1973,7 +1973,7 @@ APP = ( function ( APP, $, window, document ) {
 				TweenMax.set( $vContainer, {
 					alpha: 1
 				});
-				$vLoader.removeClass( 'active' );
+				$vLoader.removeClass( 'is-active' );
 			};
 			
 			var hiddenVC = function() {
@@ -1982,7 +1982,7 @@ APP = ( function ( APP, $, window, document ) {
 					alpha: 0
 				});
 
-				$vLoader.addClass( 'active' );
+				$vLoader.addClass( 'is-active' );
 			};
 
 			
@@ -13067,14 +13067,14 @@ APP = ( function ( APP, $, window, document ) {
 				//Apply click method to outer div but not inner div
 				if ( e.target.className == 'uix-accordion-img__content' ) {
 					
-					if ( $( this ).hasClass( 'active' ) ) {
-						$( this ).addClass( 'active' );
+					if ( $( this ).hasClass( 'is-active' ) ) {
+						$( this ).addClass( 'is-active' );
 
 					} else {
 						
-						$li.addClass( 'sub-active' );
-						$( this ).addClass( 'active' );
-						$( this ).siblings().removeClass( 'active' );
+						$li.addClass( 'active-sub' );
+						$( this ).addClass( 'is-active' );
+						$( this ).siblings().removeClass( 'is-active' );
 
 						$li.css( 'width', ( 100 - parseFloat( widthShow ) )/(total - 1) + '%' );
 						$( this ).css( 'width', widthShow );
@@ -13108,7 +13108,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 				if ( index >= 0 ) {
 					$li.css( 'width', ( 100 - parseFloat( widthShow ) )/(total - 1) + '%' );
-					$li.eq( index ).css( 'width', widthShow ).addClass( 'active' );	
+					$li.eq( index ).css( 'width', widthShow ).addClass( 'is-active' );	
 				}
 
 			}
@@ -13123,7 +13123,7 @@ APP = ( function ( APP, $, window, document ) {
 			 * @return {Void}
 			 */
 			function itemInit() {
-				$li.removeClass( 'active sub-active' ).css( 'width', 100/total + '%' );
+				$li.removeClass( 'is-active active-sub' ).css( 'width', 100/total + '%' );
 			}
 			
 			
@@ -13182,7 +13182,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 		
 			if ( firstShow ) {
-				$li.first().addClass( 'active' ).attr( 'aria-expanded', true );
+				$li.first().addClass( 'is-active' ).attr( 'aria-expanded', true );
 				openItem( $li.first().find( 'dd' ) );
 				
 			}
@@ -13201,9 +13201,9 @@ APP = ( function ( APP, $, window, document ) {
 				if ( expanded ) {
 					//Hide other all sibling <dt> of the selected element
 					var $e = $( this ).siblings();
-					$e.removeClass( 'active' ).attr( 'aria-expanded', false );
+					$e.removeClass( 'is-active' ).attr( 'aria-expanded', false );
 					
-					$( this ).addClass( 'active' ).attr( 'aria-expanded', true );
+					$( this ).addClass( 'is-active' ).attr( 'aria-expanded', true );
 					
 					TweenMax.to( $e.find( 'dd' ), 0.5, { 
 						height: 0
@@ -13217,7 +13217,7 @@ APP = ( function ( APP, $, window, document ) {
 				} else {
 					
 					if ( e.type == 'click' ) {
-						$( this ).removeClass( 'active' ).attr( 'aria-expanded', false );
+						$( this ).removeClass( 'is-active' ).attr( 'aria-expanded', false );
 						
 						//to close
 						TweenMax.to( $content, 0.5, { height: 0 } );
@@ -13323,7 +13323,7 @@ APP = ( function ( APP, $, window, document ) {
 
 				//Initialize the width of each item
 				//-------------------------------------		
-				$first.addClass( 'active' );
+				$first.addClass( 'is-active' );
 				
 				$items.css( 'width', itemWidth + 'px' );
 				
@@ -13344,7 +13344,7 @@ APP = ( function ( APP, $, window, document ) {
 					_dot += '<ul class="uix-advanced-content-slider__pagination--default">';
 					for ( var i = 0; i < itemsTotal; i++ ) {
 
-						_dotActive = ( i == 0 ) ? 'class="active"' : '';
+						_dotActive = ( i == 0 ) ? 'class="is-active"' : '';
 
 						_dot += '<li><a '+_dotActive+' data-index="'+i+'" href="javascript:"></a></li>';
 					}
@@ -13352,15 +13352,15 @@ APP = ( function ( APP, $, window, document ) {
 
 					if ( $( dataControlsPagination ).html() == '' ) $( dataControlsPagination ).html( _dot );	
 				} else {
-					$( dataControlsPagination ).find( 'li' ).first().find( 'a' ).addClass( 'active' );
-					$( dataControlsPagination ).find( 'li' ).first().addClass( 'active' );
+					$( dataControlsPagination ).find( 'li' ).first().find( 'a' ).addClass( 'is-active' );
+					$( dataControlsPagination ).find( 'li' ).first().addClass( 'is-active' );
 				}
 
 
 				$( dataControlsPagination ).find( 'li a' ).on( 'click', function( e ) {
 					e.preventDefault();
 
-					if ( !$( this ).hasClass( 'active' ) ) {
+					if ( !$( this ).hasClass( 'is-active' ) ) {
 						
 						sliderUpdates( $( this ).attr( 'data-index' ), $this, dataControlsArrows, dataControlsPagination );
 						
@@ -13385,12 +13385,12 @@ APP = ( function ( APP, $, window, document ) {
 
 				$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
 				
-				_prev.addClass( 'disabled' );
+				_prev.addClass( 'is-disabled' );
 
 				_prev.on( 'click', function( e ) {
 					e.preventDefault();
 
-					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
+					sliderUpdates( parseFloat( $items.filter( '.is-active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
 					
 					//Pause the auto play event
 					clearInterval( $this[0].animatedSlides );	
@@ -13401,7 +13401,7 @@ APP = ( function ( APP, $, window, document ) {
 				_next.on( 'click', function( e ) {
 					e.preventDefault();
 
-					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
+					sliderUpdates( parseFloat( $items.filter( '.is-active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
 					
 					//Pause the auto play event
 					clearInterval( $this[0].animatedSlides );	
@@ -13443,13 +13443,13 @@ APP = ( function ( APP, $, window, document ) {
 					//You know the pan has ended
 					//and you know which action they were taking
 					if ( direction == 'panleft' ) {
-						sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
+						sliderUpdates( parseFloat( $items.filter( '.is-active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
 						//Pause the auto play event
 				    	clearInterval( $this[0].animatedSlides );	
 					}
 					
 					if ( direction == 'panright' ) {
-						sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
+						sliderUpdates( parseFloat( $items.filter( '.is-active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
 						//Pause the auto play event
 				    	clearInterval( $this[0].animatedSlides );	
 					}			
@@ -13510,7 +13510,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			slider[0].animatedSlides = setInterval( function() {
 
-				playTimes = parseFloat( items.filter( '.active' ).index() );
+				playTimes = parseFloat( items.filter( '.is-active' ).index() );
 				playTimes++;
 
 
@@ -13573,25 +13573,25 @@ APP = ( function ( APP, $, window, document ) {
 				if ( elementIndex > parseFloat( itemsTotal - 1 ) ) elementIndex = parseFloat( itemsTotal - 1 );
 				if ( elementIndex < 0 ) elementIndex = 0;
 				
-				$next.removeClass( 'disabled' );
-				$prev.removeClass( 'disabled' );
-				$pagination.removeClass( 'active' );
-				$pagination.parent().removeClass( 'active' );
+				$next.removeClass( 'is-disabled' );
+				$prev.removeClass( 'is-disabled' );
+				$pagination.removeClass( 'is-active' );
+				$pagination.parent().removeClass( 'is-active' );
 
 				if ( elementIndex == itemsTotal - 1 ) {
-					$next.addClass( 'disabled' );
+					$next.addClass( 'is-disabled' );
 				}
 
 				if ( elementIndex == 0 ) {
-					$prev.addClass( 'disabled' );
+					$prev.addClass( 'is-disabled' );
 				}
 
 				
 
-				$items.removeClass( 'active' );
-				$items.eq( elementIndex ).addClass( 'active' );	
-				$pagination.eq( elementIndex ).addClass( 'active' );
-				$pagination.eq( elementIndex ).parent().addClass( 'active' );
+				$items.removeClass( 'is-active' );
+				$items.eq( elementIndex ).addClass( 'is-active' );	
+				$pagination.eq( elementIndex ).addClass( 'is-active' );
+				$pagination.eq( elementIndex ).parent().addClass( 'is-active' );
 				
 				
 				
@@ -13690,7 +13690,7 @@ APP = ( function ( APP, $, window, document ) {
 				$items.addClass( 'next' );
 				
 				setTimeout( function() {
-					$first.addClass( 'active' );
+					$first.addClass( 'is-active' );
 				}, animDelay );
 				
 
@@ -13799,7 +13799,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			slider[0].animatedSlides = setInterval( function() {
 
-				playTimes = parseFloat( items.filter( '.active' ).index() );
+				playTimes = parseFloat( items.filter( '.is-active' ).index() );
 				playTimes++;
 				
 			
@@ -13878,7 +13878,7 @@ APP = ( function ( APP, $, window, document ) {
 			_dot += '<ul>';
 			for ( var i = 0; i < itemsTotal; i++ ) {
 
-				_dotActive = ( i == 0 ) ? 'class="active"' : '';
+				_dotActive = ( i == 0 ) ? 'class="is-active"' : '';
 
 				_dot += '<li><a '+_dotActive+' data-index="'+i+'" href="javascript:"></a></li>';
 			}
@@ -13889,12 +13889,12 @@ APP = ( function ( APP, $, window, document ) {
 			$( dataControlsPagination ).find( 'li a' ).on( 'click', function( e ) {
 				e.preventDefault();
 
-				if ( !$( this ).hasClass( 'active' ) ) {
+				if ( !$( this ).hasClass( 'is-active' ) ) {
 					
 
 					//Determine the direction
 					var curDir = 'prev';
-					if ( $( this ).attr( 'data-index' ) > parseFloat( $items.filter( '.active' ).index() ) ) {
+					if ( $( this ).attr( 'data-index' ) > parseFloat( $items.filter( '.is-active' ).index() ) ) {
 						curDir = 'next';
 					}
 					
@@ -13916,16 +13916,16 @@ APP = ( function ( APP, $, window, document ) {
 
 			$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
 
-			$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
+			$( dataControlsArrows ).find( 'a' ).removeClass( 'is-disabled' );
 			if ( !dataLoop ) {
-				_prev.addClass( 'disabled' );
+				_prev.addClass( 'is-disabled' );
 			}
 
 
 			_prev.on( 'click', function( e ) {
 				e.preventDefault();
 
-				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, 'prev' );
+				sliderUpdates( parseFloat( $items.filter( '.is-active' ).index() ) - 1, $this, 'prev' );
 
 				//Pause the auto play event
 				clearInterval( $this[0].animatedSlides );
@@ -13935,7 +13935,7 @@ APP = ( function ( APP, $, window, document ) {
 			_next.on( 'click', function( e ) {
 				e.preventDefault();
 
-				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, 'next' );
+				sliderUpdates( parseFloat( $items.filter( '.is-active' ).index() ) + 1, $this, 'next' );
 
 
 				//Pause the auto play event
@@ -13962,7 +13962,7 @@ APP = ( function ( APP, $, window, document ) {
 
 				var touches = e.originalEvent.touches;
 
-				$( this ).addClass( 'dragging' );
+				$( this ).addClass( 'is-dragging' );
 
 
 				if ( touches && touches.length ) {	
@@ -13982,7 +13982,7 @@ APP = ( function ( APP, $, window, document ) {
 				$dragDropTrigger.on( 'mouseup.ADVANCED_SLIDER touchmove.ADVANCED_SLIDER', function( e ) {
 					
 
-					$( this ).removeClass( 'dragging' );
+					$( this ).removeClass( 'is-dragging' );
 					var touches        = e.originalEvent.touches,
 						origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
 						origin_mouse_y = $( this ).data( 'origin_mouse_y' );
@@ -13994,12 +13994,12 @@ APP = ( function ( APP, $, window, document ) {
 
 						//--- left
 						if ( deltaX >= 50) {
-							if ( $items.filter( '.active' ).index() < itemsTotal - 1 ) _next.trigger( 'click' );
+							if ( $items.filter( '.is-active' ).index() < itemsTotal - 1 ) _next.trigger( 'click' );
 						}
 						
 						//--- right
 						if ( deltaX <= -50) {
-							if ( $items.filter( '.active' ).index() > 0 ) _prev.trigger( 'click' );
+							if ( $items.filter( '.is-active' ).index() > 0 ) _prev.trigger( 'click' );
 						}
 						
 						//--- up
@@ -14026,12 +14026,12 @@ APP = ( function ( APP, $, window, document ) {
 						if ( dataDraggable ) {
 							//right
 							if ( e.pageX > origin_mouse_x ) {				
-								if ( $items.filter( '.active' ).index() > 0 ) _prev.trigger( 'click' );
+								if ( $items.filter( '.is-active' ).index() > 0 ) _prev.trigger( 'click' );
 							}
 
 							//left
 							if ( e.pageX < origin_mouse_x ) {
-								if ( $items.filter( '.active' ).index() < itemsTotal - 1 ) _next.trigger( 'click' );
+								if ( $items.filter( '.is-active' ).index() < itemsTotal - 1 ) _next.trigger( 'click' );
 							}
 
 							//down
@@ -14108,9 +14108,9 @@ APP = ( function ( APP, $, window, document ) {
 				if ( elementIndex == total ) elementIndex = 0;
 				if ( elementIndex < 0 ) elementIndex = total-1;	
 			} else {
-				$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
-				if ( elementIndex == total - 1 ) $( dataControlsArrows ).find( '.uix-advanced-slider__arrows--next' ).addClass( 'disabled' );
-				if ( elementIndex == 0 ) $( dataControlsArrows ).find( '.uix-advanced-slider__arrows--prev' ).addClass( 'disabled' );
+				$( dataControlsArrows ).find( 'a' ).removeClass( 'is-disabled' );
+				if ( elementIndex == total - 1 ) $( dataControlsArrows ).find( '.uix-advanced-slider__arrows--next' ).addClass( 'is-disabled' );
+				if ( elementIndex == 0 ) $( dataControlsArrows ).find( '.uix-advanced-slider__arrows--prev' ).addClass( 'is-disabled' );
 			}
 
 			// To determine if it is a touch screen.
@@ -14122,12 +14122,12 @@ APP = ( function ( APP, $, window, document ) {
 				if ( !dataLoop ) {
 					//first item
 					if ( elementIndex == 0 ) {
-						$( dataControlsArrows ).find( '.uix-advanced-slider__arrows--prev' ).addClass( 'disabled' );
+						$( dataControlsArrows ).find( '.uix-advanced-slider__arrows--prev' ).addClass( 'is-disabled' );
 					}
 
 					//last item
 					if ( elementIndex == total - 1 ) {
-						$( dataControlsArrows ).find( '.uix-advanced-slider__arrows--next' ).addClass( 'disabled' );
+						$( dataControlsArrows ).find( '.uix-advanced-slider__arrows--next' ).addClass( 'is-disabled' );
 					}	
 				}
 
@@ -14144,14 +14144,14 @@ APP = ( function ( APP, $, window, document ) {
 			
 			//Add transition class to Controls Pagination
 			$( dataControlsPagination ).find( 'li a' ).removeClass( 'leave' );
-			$( dataControlsPagination ).find( 'li a.active' ).removeClass( 'active' ).addClass( 'leave');
-			$( dataControlsPagination ).find( 'li a[data-index="'+elementIndex+'"]' ).addClass( 'active').removeClass( 'leave' );
+			$( dataControlsPagination ).find( 'li a.is-active' ).removeClass( 'is-active' ).addClass( 'leave');
+			$( dataControlsPagination ).find( 'li a[data-index="'+elementIndex+'"]' ).addClass( 'is-active').removeClass( 'leave' );
 			
 			//Add transition class to each item
 			$items.removeClass( 'leave prev next' );
 			$items.addClass( dirIndicatorClass );
-			slider.find( '.uix-advanced-slider__item.active' ).removeClass( 'active' ).addClass( 'leave ' + dirIndicatorClass );
-			$items.eq( elementIndex ).addClass( 'active ' + dirIndicatorClass ).removeClass( 'leave' );
+			slider.find( '.uix-advanced-slider__item.is-active' ).removeClass( 'is-active' ).addClass( 'leave ' + dirIndicatorClass );
+			$items.eq( elementIndex ).addClass( 'is-active ' + dirIndicatorClass ).removeClass( 'leave' );
 
 			
 			
@@ -14603,7 +14603,7 @@ APP = ( function ( APP, $, window, document ) {
 				//-------------------------------------		
 				$items.addClass( 'next' );
 				
-				$first.addClass( 'active' );
+				$first.addClass( 'is-active' );
 				
 				
 				TweenMax.set( $items, {
@@ -14732,7 +14732,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			slider[0].animatedSlides = setInterval( function() {
 
-				playTimes = parseFloat( items.filter( '.active' ).index() );
+				playTimes = parseFloat( items.filter( '.is-active' ).index() );
 				playTimes++;
 				
 			
@@ -15599,7 +15599,7 @@ APP = ( function ( APP, $, window, document ) {
 			_dot += '<ul>';
 			for ( var i = 0; i < itemsTotal; i++ ) {
 
-				_dotActive = ( i == 0 ) ? 'class="active"' : '';
+				_dotActive = ( i == 0 ) ? 'class="is-active"' : '';
 
 				_dot += '<li><a '+_dotActive+' data-index="'+i+'" href="javascript:"></a></li>';
 			}
@@ -15610,18 +15610,18 @@ APP = ( function ( APP, $, window, document ) {
 			$( dataControlsPagination ).find( 'li a' ).on( 'click', function( e ) {
 				e.preventDefault();
 
-				if ( !$( this ).hasClass( 'active' ) ) {
+				if ( !$( this ).hasClass( 'is-active' ) ) {
 
 					
 					//Determine the direction
 					var curDir = 'prev';
-					if ( $( this ).attr( 'data-index' ) > parseFloat( $items.filter( '.active' ).index() ) ) {
+					if ( $( this ).attr( 'data-index' ) > parseFloat( $items.filter( '.is-active' ).index() ) ) {
 						curDir = 'next';
 					}
 					
 					
 					//Canvas Interactions
-					transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), $this, 'out', curDir );
+					transitionInteractions( $items.filter( '.is-active' ).index(), $items.filter( '.leave' ).index(), $this, 'out', curDir );
 						
 					
 					
@@ -15643,9 +15643,9 @@ APP = ( function ( APP, $, window, document ) {
 
 			$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
 
-			$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
+			$( dataControlsArrows ).find( 'a' ).removeClass( 'is-disabled' );
 			if ( !dataLoop ) {
-				_prev.addClass( 'disabled' );
+				_prev.addClass( 'is-disabled' );
 			}
 
 
@@ -15654,10 +15654,10 @@ APP = ( function ( APP, $, window, document ) {
 				e.preventDefault();
 
 				//Canvas Interactions
-				transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), $this, 'out', 'prev' );	
+				transitionInteractions( $items.filter( '.is-active' ).index(), $items.filter( '.leave' ).index(), $this, 'out', 'prev' );	
 
 				//Update the current and previous items
-				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, 'prev' );
+				sliderUpdates( parseFloat( $items.filter( '.is-active' ).index() ) - 1, $this, 'prev' );
 
 				//Pause the auto play event
 				clearInterval( $this[0].animatedSlides );
@@ -15668,10 +15668,10 @@ APP = ( function ( APP, $, window, document ) {
 				e.preventDefault();
 
 				//Canvas Interactions
-				transitionInteractions( $items.filter( '.active' ).index(), $items.filter( '.leave' ).index(), $this, 'out', 'next' );	
+				transitionInteractions( $items.filter( '.is-active' ).index(), $items.filter( '.leave' ).index(), $this, 'out', 'next' );	
 
 				//Update the current and next items
-				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, 'next' );
+				sliderUpdates( parseFloat( $items.filter( '.is-active' ).index() ) + 1, $this, 'next' );
 
 
 				//Pause the auto play event
@@ -15699,7 +15699,7 @@ APP = ( function ( APP, $, window, document ) {
 
 				var touches = e.originalEvent.touches;
 
-				$( this ).addClass( 'dragging' );
+				$( this ).addClass( 'is-dragging' );
 	
 				if ( touches && touches.length ) {	
 					$( this ).data( 'origin_mouse_x', parseInt( touches[0].pageX ) );
@@ -15718,7 +15718,7 @@ APP = ( function ( APP, $, window, document ) {
 				$dragDropTrigger.on( 'mouseup.ADVANCED_SLIDER_FILTER touchmove.ADVANCED_SLIDER_FILTER', function( e ) {
 					
 
-					$( this ).removeClass( 'dragging' );
+					$( this ).removeClass( 'is-dragging' );
 					var touches        = e.originalEvent.touches,
 						origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
 						origin_mouse_y = $( this ).data( 'origin_mouse_y' );
@@ -15730,12 +15730,12 @@ APP = ( function ( APP, $, window, document ) {
 
 						//--- left
 						if ( deltaX >= 50) {
-							if ( $items.filter( '.active' ).index() < itemsTotal - 1 ) _next.trigger( 'click' );
+							if ( $items.filter( '.is-active' ).index() < itemsTotal - 1 ) _next.trigger( 'click' );
 						}
 						
 						//--- right
 						if ( deltaX <= -50) {
-							if ( $items.filter( '.active' ).index() > 0 ) _prev.trigger( 'click' );
+							if ( $items.filter( '.is-active' ).index() > 0 ) _prev.trigger( 'click' );
 						}
 						
 						//--- up
@@ -15762,12 +15762,12 @@ APP = ( function ( APP, $, window, document ) {
 						if ( dataDraggable ) {
 							//right
 							if ( e.pageX > origin_mouse_x ) {				
-								if ( $items.filter( '.active' ).index() > 0 ) _prev.trigger( 'click' );
+								if ( $items.filter( '.is-active' ).index() > 0 ) _prev.trigger( 'click' );
 							}
 
 							//left
 							if ( e.pageX < origin_mouse_x ) {
-								if ( $items.filter( '.active' ).index() < itemsTotal - 1 ) _next.trigger( 'click' );
+								if ( $items.filter( '.is-active' ).index() < itemsTotal - 1 ) _next.trigger( 'click' );
 							}
 
 							//down
@@ -15845,9 +15845,9 @@ APP = ( function ( APP, $, window, document ) {
 				if ( elementIndex == total ) elementIndex = 0;
 				if ( elementIndex < 0 ) elementIndex = total-1;	
 			} else {
-				$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
-				if ( elementIndex == total - 1 ) $( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--next' ).addClass( 'disabled' );
-				if ( elementIndex == 0 ) $( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--prev' ).addClass( 'disabled' );
+				$( dataControlsArrows ).find( 'a' ).removeClass( 'is-disabled' );
+				if ( elementIndex == total - 1 ) $( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--next' ).addClass( 'is-disabled' );
+				if ( elementIndex == 0 ) $( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--prev' ).addClass( 'is-disabled' );
 			}
 
 
@@ -15862,12 +15862,12 @@ APP = ( function ( APP, $, window, document ) {
 				if ( !dataLoop ) {
 					//first item
 					if ( elementIndex == 0 ) {
-						$( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--prev' ).addClass( 'disabled' );
+						$( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--prev' ).addClass( 'is-disabled' );
 					}
 
 					//last item
 					if ( elementIndex == total - 1 ) {
-						$( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--next' ).addClass( 'disabled' );
+						$( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--next' ).addClass( 'is-disabled' );
 					}	
 				}
 
@@ -15884,8 +15884,8 @@ APP = ( function ( APP, $, window, document ) {
 			//Add transition class to Controls Pagination
 			//-------------------------------------
 			$( dataControlsPagination ).find( 'li a' ).removeClass( 'leave' );
-			$( dataControlsPagination ).find( 'li a.active' ).removeClass( 'active' ).addClass( 'leave' );
-			$( dataControlsPagination ).find( 'li a[data-index="'+elementIndex+'"]' ).addClass( 'active' ).removeClass( 'leave' );
+			$( dataControlsPagination ).find( 'li a.is-active' ).removeClass( 'is-active' ).addClass( 'leave' );
+			$( dataControlsPagination ).find( 'li a[data-index="'+elementIndex+'"]' ).addClass( 'is-active' ).removeClass( 'leave' );
 			
 			
 			
@@ -15893,8 +15893,8 @@ APP = ( function ( APP, $, window, document ) {
 			//-------------------------------------	
 			$items.removeClass( 'leave prev next' );
 			$items.addClass( dirIndicatorClass );
-			slider.find( '.uix-advanced-slider-sp__item.active' ).removeClass( 'active' ).addClass( 'leave ' + dirIndicatorClass );
-			$items.eq( elementIndex ).addClass( 'active ' + dirIndicatorClass ).removeClass( 'leave' );
+			slider.find( '.uix-advanced-slider-sp__item.is-active' ).removeClass( 'is-active' ).addClass( 'leave ' + dirIndicatorClass );
+			$items.eq( elementIndex ).addClass( 'is-active ' + dirIndicatorClass ).removeClass( 'leave' );
 
 			
 			
@@ -17426,7 +17426,7 @@ APP = ( function ( APP, $, window, document ) {
 			moveTo( $( ajaxContainer ), false, 'down', 0, false );
 		} else {
 			//Activate navigation from AJAX request
-			if ( typeof curAjaxPageID != typeof undefined ) $navs.eq( curAjaxPageID ).addClass( 'active' );
+			if ( typeof curAjaxPageID != typeof undefined ) $navs.eq( curAjaxPageID ).addClass( 'is-active' );
 		}
 
 		
@@ -17512,7 +17512,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			
 			//Click on this link element using an AJAX request
-			var dir = ( $navs.filter( '.active' ).find( '> a' ).attr( 'data-index' ) > curIndex ) ? 'up' : 'down';
+			var dir = ( $navs.filter( '.is-active' ).find( '> a' ).attr( 'data-index' ) > curIndex ) ? 'up' : 'down';
 			moveTo( $( ajaxContainer ), curURL, dir, curIndex, false );
 			
 			
@@ -17599,7 +17599,7 @@ APP = ( function ( APP, $, window, document ) {
 		 * @return {Void}
 		 */
 		function moveTo( container, url, dir, customIndex, wheel ) {
-			var index     = parseFloat( $navs.filter( '.active' ).find( '> a' ).attr( 'data-index' ) ),
+			var index     = parseFloat( $navs.filter( '.is-active' ).find( '> a' ).attr( 'data-index' ) ),
 				nextIndex = null,
 				isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
 			
@@ -17631,8 +17631,8 @@ APP = ( function ( APP, $, window, document ) {
 			
 				
 				//Activate navigation from AJAX request
-				$navs.removeClass( 'active' );
-				$navs.eq( nextIndex ).addClass( 'active' );
+				$navs.removeClass( 'is-active' );
+				$navs.eq( nextIndex ).addClass( 'is-active' );
 
 				
 				//Use automatic indexing when no URLs come in.
@@ -18063,9 +18063,9 @@ APP = ( function ( APP, $, window, document ) {
 
 
 				if ( scrollTop >= spyTop ) {
-					$el.addClass( 'active' );
+					$el.addClass( 'is-active' );
 				} else {
-					$el.removeClass( 'active' );	
+					$el.removeClass( 'is-active' );	
 				}
 
 			});
@@ -18448,9 +18448,9 @@ APP = ( function ( APP, $, window, document ) {
 					//Hide other all sibling <ul> of the selected element
 					var $e = $( this ).parent( 'li' ).siblings().find( '> a' );
 					
-					$e.removeClass( 'active' ).attr( 'aria-expanded', false );
+					$e.removeClass( 'is-active' ).attr( 'aria-expanded', false );
 
-					$( this ).addClass( 'active' ).attr( 'aria-expanded', true );
+					$( this ).addClass( 'is-active' ).attr( 'aria-expanded', true );
 					
 					
 					TweenMax.to( $e.next( 'ul' ), 0.5, { height: 0 } );
@@ -18466,7 +18466,7 @@ APP = ( function ( APP, $, window, document ) {
 					
 				} else {
 					
-					$( this ).removeClass( 'active' ).attr( 'aria-expanded', false );
+					$( this ).removeClass( 'is-active' ).attr( 'aria-expanded', false );
 					
 					//to close
 					TweenMax.to( $sub, 0.5, { height: 0 } );
@@ -19189,12 +19189,12 @@ APP = ( function ( APP, $, window, document ) {
 						$plinkPrev = $plink.filter( '.uix-flexslider__mycontrols--thumb__prev' ),
 						$plinkNext = $plink.filter( '.uix-flexslider__mycontrols--thumb__next' );
 
-					$plinkPrev.removeClass( 'disabled' );
-					$plinkNext.removeClass( 'disabled' );
+					$plinkPrev.removeClass( 'is-disabled' );
+					$plinkNext.removeClass( 'is-disabled' );
 
 					if ( !thisSlider.vars.animationLoop ) {
-						if ( prevIndex === -1 ) $plinkPrev.addClass( 'disabled' );
-						if ( nextIndex === thisSlider.last + 1 ) $plinkNext.addClass( 'disabled' );	
+						if ( prevIndex === -1 ) $plinkPrev.addClass( 'is-disabled' );
+						if ( nextIndex === thisSlider.last + 1 ) $plinkNext.addClass( 'is-disabled' );	
 					} else {
 						if ( prevIndex === -1 ) prevIndex = thisSlider.last;
 						if ( nextIndex === thisSlider.last + 1 ) nextIndex = 0;
@@ -19252,8 +19252,8 @@ APP = ( function ( APP, $, window, document ) {
 				//Thumbnail ControlNav Pattern
 				//-------------------------------------
 				if ( dataNhumbs && dataNhumbs != '' ) {
-					$( '.uix-flexslider__thumbs'+dataNhumbs+' > ul > li' ).removeClass( 'active' );
-					$( '.uix-flexslider__thumbs'+dataNhumbs+' > ul > li' ).eq( curIndex ).addClass( 'active' );			
+					$( '.uix-flexslider__thumbs'+dataNhumbs+' > ul > li' ).removeClass( 'is-active' );
+					$( '.uix-flexslider__thumbs'+dataNhumbs+' > ul > li' ).eq( curIndex ).addClass( 'is-active' );			
 				}
 
 
@@ -19338,10 +19338,10 @@ APP = ( function ( APP, $, window, document ) {
 				
 				//Common images style
 				//-------------------------------------	
-				$next.find( 'img' ).addClass( 'active' );
-				$current.find( 'img' ).removeClass( 'active' );
-				$prev.find( 'img' ).removeClass( 'active' );
-				$first.find( 'img' ).removeClass( 'active' );
+				$next.find( 'img' ).addClass( 'is-active' );
+				$current.find( 'img' ).removeClass( 'is-active' );
+				$prev.find( 'img' ).removeClass( 'is-active' );
+				$first.find( 'img' ).removeClass( 'is-active' );
 
 				//With Timeline
 				//-------------------------------------	
@@ -19367,7 +19367,7 @@ APP = ( function ( APP, $, window, document ) {
 				
 				//Common images style
 				//-------------------------------------	
-				$first.find( 'img' ).addClass( 'active' );
+				$first.find( 'img' ).addClass( 'is-active' );
 		
 				
 			}
@@ -19702,7 +19702,7 @@ APP = ( function ( APP, $, window, document ) {
 					return;
 				}
 
-				$( this ).addClass( 'dragging' );
+				$( this ).addClass( 'is-dragging' );
 				$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
 				$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );
 				
@@ -19713,7 +19713,7 @@ APP = ( function ( APP, $, window, document ) {
 					return;
 				}
 
-				$( this ).removeClass( 'dragging' );
+				$( this ).removeClass( 'is-dragging' );
 				var origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
 					origin_mouse_y = $( this ).data( 'origin_mouse_y' );
 				
@@ -19802,8 +19802,8 @@ APP = ( function ( APP, $, window, document ) {
 
 				$( '.uix-flexslider__thumbs'+navThumbClass+' > ul > li' ).on( 'click', function() {
 
-					$( '.uix-flexslider__thumbs'+navThumbClass+' > ul > li' ).removeClass( 'active' );
-					$( this ).addClass( 'active' );
+					$( '.uix-flexslider__thumbs'+navThumbClass+' > ul > li' ).removeClass( 'is-active' );
+					$( this ).addClass( 'is-active' );
 					slider.flexslider( $( this ).index() );
 
 				});	
@@ -21434,7 +21434,7 @@ APP = ( function ( APP, $, window, document ) {
 		
 		//Display the target
 		setTimeout( function() {
-			$formTarget.addClass( 'active' );
+			$formTarget.addClass( 'is-active' );
 		}, parseFloat( dur ) * 1000 );
 		
 
@@ -21600,9 +21600,9 @@ APP = ( function ( APP, $, window, document ) {
 			if ( currentFormIndex > 0 ) {
 				for ( var i = 0; i < curIndex; i++ ) {
 					$sections.eq( i ).addClass( 'leaving' );
-					$indicator.eq( i ).addClass( 'active' );
+					$indicator.eq( i ).addClass( 'is-active' );
 				}
-				$indicator.eq( curIndex ).addClass( 'active' );
+				$indicator.eq( curIndex ).addClass( 'is-active' );
 				
 			}
 
@@ -21611,7 +21611,7 @@ APP = ( function ( APP, $, window, document ) {
 			// Hide current form fields
 			$sections.eq( tarIndex ).addClass( 'leaving' );
 			setTimeout(function() {
-				$indicator.eq( currentFormIndex ).addClass( 'active' );
+				$indicator.eq( currentFormIndex ).addClass( 'is-active' );
 			}, animeSpeed );
 
 
@@ -21621,8 +21621,8 @@ APP = ( function ( APP, $, window, document ) {
 			});
 			
 			// Active next form fields
-			$sections.removeClass( 'active' );
-			$sections.eq( currentFormIndex ).addClass( 'active' );
+			$sections.removeClass( 'is-active' );
+			$sections.eq( currentFormIndex ).addClass( 'is-active' );
 
 			// Increment value (based on 4 steps 0 - 100)
 			value += stepPerValue;
@@ -21639,7 +21639,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 				//so something
-				$indicator.removeClass( 'active' );
+				$indicator.removeClass( 'is-active' );
 				$indicator.each( function( index )  {
 					$( this ).css( 'left', index*stepPerValue + '%' );
 					$formTarget.find( '.uix-form-progress__target__step:eq('+index+')' ).attr( 'data-step', index+1 );
@@ -21680,7 +21680,7 @@ APP = ( function ( APP, $, window, document ) {
 											   .last()
 											   .removeClass( 'coming waiting leaving' );
 			} else {
-				$( '.uix-form-progress' ).find( '.uix-form-progress__indicator.active' ).next( '.uix-form-progress__indicator' ).addClass( 'active' );
+				$( '.uix-form-progress' ).find( '.uix-form-progress__indicator.is-active' ).next( '.uix-form-progress__indicator' ).addClass( 'is-active' );
 			}
 
 			// Set progress bar value
@@ -21928,7 +21928,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 
-			$option.toggleClass( 'active' ).attr( 'aria-checked', function( index, attr ) {
+			$option.toggleClass( 'is-active' ).attr( 'aria-checked', function( index, attr ) {
 				return attr == 'true' ? false : true;
 			});
 
@@ -22019,9 +22019,9 @@ APP = ( function ( APP, $, window, document ) {
 
 
 			//Radio Selector
-			$selector.find( '> span' ).removeClass( 'active' ).attr( 'aria-checked', false );
+			$selector.find( '> span' ).removeClass( 'is-active' ).attr( 'aria-checked', false );
 			$( targetID ).val( curVal );
-			$option.addClass( 'active' ).attr( 'aria-checked', true );
+			$option.addClass( 'is-active' ).attr( 'aria-checked', true );
 
 
 			//Switch some options
@@ -22107,12 +22107,12 @@ APP = ( function ( APP, $, window, document ) {
 
 			//Radio Selector
 			$selector.find( '> label' )
-				.removeClass( 'active' )
+				.removeClass( 'is-active' )
 			    .find( '[type="radio"]' ).prop( 'checked', false );
 			
 			$( targetID ).val( curVal );
 			$option
-				.addClass( 'active' )
+				.addClass( 'is-active' )
 			    .find( '[type="radio"]' ).prop( 'checked', true );
 			
 
@@ -22150,10 +22150,10 @@ APP = ( function ( APP, $, window, document ) {
 				targetID  = '#' + $obj.attr( 'data-targetid' );
 			
 			if ( this.checked ) {
-				$obj.addClass( 'active' ).attr( 'aria-checked', true );
+				$obj.addClass( 'is-active' ).attr( 'aria-checked', true );
 				$( targetID ).show();
 			} else {
-				$obj.removeClass( 'active' ).attr( 'aria-checked', false );
+				$obj.removeClass( 'is-active' ).attr( 'aria-checked', false );
 				$( targetID ).hide();
 			}
 			
@@ -22226,7 +22226,7 @@ APP = ( function ( APP, $, window, document ) {
 						var selected = '';
 
 						if ( $( this ).is( ':selected' ) ) {
-							selected = 'active';
+							selected = 'is-active';
 						}
 
 						template += '<span class="uix-controls__select__option '+selected+'" data-value="' + $( this ).attr( 'value' ) + '">' + $( this ).html() + '</span>';
@@ -22238,7 +22238,7 @@ APP = ( function ( APP, $, window, document ) {
 					}
 
 
-					$this.wrap('<div class="'+ settings.targetWrapper.replace( '.', '' )+' '+( $this.hasClass( 'uix-controls--line' ) ? 'uix-controls--line' : '' )+' '+( $this.hasClass( 'is-fullwidth' ) ? 'is-fullwidth' : '' )+' '+( $this.hasClass( 'disabled' ) ? 'disabled' : '' )+'"></div>');
+					$this.wrap('<div class="'+ settings.targetWrapper.replace( '.', '' )+' '+( $this.hasClass( 'uix-controls--line' ) ? 'uix-controls--line' : '' )+' '+( $this.hasClass( 'is-fullwidth' ) ? 'is-fullwidth' : '' )+' '+( $this.hasClass( 'is-disabled' ) ? 'is-disabled' : '' )+'"></div>');
 					$this.hide();
 					$this.after( template );	
 
@@ -22282,7 +22282,7 @@ APP = ( function ( APP, $, window, document ) {
 
 			//Set the default selector text
 			$( settings.selector + '.js-uix-new' ).each( function( index ) {
-				$( this ).find( settings.trigger ).text( $( this ).find( settings.item + '.active' ).html() );
+				$( this ).find( settings.trigger ).text( $( this ).find( settings.item + '.is-active' ).html() );
 			});
 
 
@@ -22300,11 +22300,11 @@ APP = ( function ( APP, $, window, document ) {
 				$selectCurWrapper.removeClass( 'is-opened' );
 
 				//Set the selector text
-				$selectCurWrapper.find( settings.trigger ).text( $( this ).html() ).addClass( 'active' );
+				$selectCurWrapper.find( settings.trigger ).text( $( this ).html() ).addClass( 'is-active' );
 
 				//Activate this option
-				$selectCurWrapper.find( settings.item ).removeClass( 'active' );
-				$( this ).addClass( 'active' );
+				$selectCurWrapper.find( settings.item ).removeClass( 'is-active' );
+				$( this ).addClass( 'is-active' );
 
 				//Set select option 'selected', by value
 				$selectWrapper.find( 'select' ).val( curVal );
@@ -22328,7 +22328,7 @@ APP = ( function ( APP, $, window, document ) {
 					var selected = '';
 
 					if ( $( this ).is( ':selected' ) ) {
-						selected = 'active';
+						selected = 'is-active';
 					}
 
 					newOptions += '<span class="uix-controls__select__option '+selected+'" data-value="' + $( this ).attr( 'value' ) + '">' + $( this ).html() + '</span>';
@@ -22340,7 +22340,7 @@ APP = ( function ( APP, $, window, document ) {
 
 				//Set the default selector text
 				$cusSelect.each( function( index ) {
-					$( this ).find( settings.trigger ).text( $( this ).find( settings.item + '.active' ).html() );
+					$( this ).find( settings.trigger ).text( $( this ).find( settings.item + '.is-active' ).html() );
 				});
 
 			});
@@ -22404,10 +22404,10 @@ APP = ( function ( APP, $, window, document ) {
 					//hide or display a associated div
 					var targetID = '#' + $obj.attr( 'data-targetid' );
 					if ( $( this ).is( ':checked' ) ) {
-						$obj.addClass( 'active' ).attr( 'aria-checked', true );
+						$obj.addClass( 'is-active' ).attr( 'aria-checked', true );
 						$( targetID ).show();
 					} else {
-						$obj.removeClass( 'active' ).attr( 'aria-checked', false );
+						$obj.removeClass( 'is-active' ).attr( 'aria-checked', false );
 						$( targetID ).hide();
 					}
 					
@@ -22429,10 +22429,10 @@ APP = ( function ( APP, $, window, document ) {
 					//hide or display a associated div
 					var targetID = '#' + $obj.attr( 'data-targetid' );
 					if ( $( this ).is( ':checked' ) ) {
-						$obj.addClass( 'active' ).attr( 'aria-checked', true );
+						$obj.addClass( 'is-active' ).attr( 'aria-checked', true );
 						$( targetID ).show();
 					} else {
-						$obj.removeClass( 'active' ).attr( 'aria-checked', false );
+						$obj.removeClass( 'is-active' ).attr( 'aria-checked', false );
 						$( targetID ).hide();
 					}
 					
@@ -22526,7 +22526,7 @@ APP = ( function ( APP, $, window, document ) {
  
         // This is the easiest way to have default options.
         var settings = $.extend({
-			controls    : 'input.disabled'
+			controls    : 'input.is-disabled'
         }, options );
  
         this.each( function() {
@@ -22684,14 +22684,14 @@ APP = ( function ( APP, $, window, document ) {
 
 				// on focus add cladd active to label
 				$this.on( 'focus', function() {
-					$( this ).closest( 'div' ).find( 'label, .uix-controls__bar' ).addClass( 'active' );
+					$( this ).closest( 'div' ).find( 'label, .uix-controls__bar' ).addClass( 'is-active' );
 				});
 
 
 				//on blur check field and remove class if needed
 				$this.on( 'blur change', function( e ) {
 					if( $this.val() === '' || $this.val() === 'blank' ) {
-						$( this ).closest( 'div' ).find( 'label' ).removeClass( 'active' );
+						$( this ).closest( 'div' ).find( 'label' ).removeClass( 'is-active' );
 					}	
 					
 					//----
@@ -22700,14 +22700,14 @@ APP = ( function ( APP, $, window, document ) {
 						$this.val() === 'blank' || 
 						( $this.val() != '' && $this.val() != 'blank' ) 
 					) {
-						$( this ).closest( 'div' ).find( '.uix-controls__bar' ).removeClass( 'active' );
+						$( this ).closest( 'div' ).find( '.uix-controls__bar' ).removeClass( 'is-active' );
 					}		
 
 				});
 
 				// if exist cookie value
 				if( $this.val() != '' && $this.val() != 'blank') { 
-				    $( this ).closest( 'div' ).find( 'label' ).addClass( 'active' );
+				    $( this ).closest( 'div' ).find( 'label' ).addClass( 'is-active' );
 				}
 
 				
@@ -22747,9 +22747,9 @@ APP = ( function ( APP, $, window, document ) {
 					var targetID = '#' + $( this ).parent().attr( 'data-targetid' );
 
 					if ( $( targetID ).val().indexOf( $( this ).data( 'value' ) ) >= 0 ) {
-						$( this ).addClass( 'active' ).attr( 'aria-checked', true );
+						$( this ).addClass( 'is-active' ).attr( 'aria-checked', true );
 					} else {
-						$( this ).removeClass( 'active' ).attr( 'aria-checked', false );
+						$( this ).removeClass( 'is-active' ).attr( 'aria-checked', false );
 					}	
 
 
@@ -22802,9 +22802,9 @@ APP = ( function ( APP, $, window, document ) {
 
 					//Set actived style from their values
 					if ( $( targetID ).val() == $( this ).data( 'value' ) ) {
-						$( this ).addClass( 'active' ).attr( 'aria-checked', true );
+						$( this ).addClass( 'is-active' ).attr( 'aria-checked', true );
 					} else {
-						$( this ).removeClass( 'active' ).attr( 'aria-checked', false );
+						$( this ).removeClass( 'is-active' ).attr( 'aria-checked', false );
 					}	
 
 
@@ -22858,12 +22858,12 @@ APP = ( function ( APP, $, window, document ) {
 					if ( typeof $( this ).data( 'value' ) != typeof undefined ) {
 						if ( $( targetID ).val() == $( this ).data( 'value' ) ) {
 							$( this )
-								.addClass( 'active' )
+								.addClass( 'is-active' )
 								.find( '[type="radio"]' ).prop( 'checked', true );
 
 						} else {
 							$( this )
-								.removeClass( 'active' )
+								.removeClass( 'is-active' )
 								.find( '[type="radio"]' ).prop( 'checked', false );
 						}		
 					} 
@@ -22962,7 +22962,7 @@ APP = ( function ( APP, $, window, document ) {
 				//Dynamic listening for the latest value
 				$( document ).on( 'mouseleave', '[data-handler]', function() {
 					$( '[data-picker]' ).each( function() {
-						$( this ).closest( 'div' ).find( 'label, .uix-controls__bar' ).addClass( 'active' );
+						$( this ).closest( 'div' ).find( 'label, .uix-controls__bar' ).addClass( 'is-active' );
 					});
 
 				});	
@@ -26191,7 +26191,7 @@ APP = ( function ( APP, $, window, document ) {
 					svgOut += '</svg>';	
 
 
-					$this.addClass( 'active' ).html( svgOut );		
+					$this.addClass( 'is-active' ).html( svgOut );		
 				};
 				
 				
@@ -26262,8 +26262,8 @@ APP = ( function ( APP, $, window, document ) {
 
 			
 			//Activate navigation style
-			$( menu + ' > li' ).removeClass( 'active' );
-			$this.parent().addClass( 'active' );
+			$( menu + ' > li' ).removeClass( 'is-active' );
+			$this.parent().addClass( 'is-active' );
 			
 			// GSAP animate to clicked menu item
 			TweenMax.to( line, 1, {
@@ -26406,7 +26406,7 @@ APP = ( function ( APP, $, window, document ) {
 
 			if ( !dataFixed ) {
 				$( wrapperEl ).addClass( 'js-uix-no-fixed' );
-				$( closeEl ).addClass( 'active' );
+				$( closeEl ).addClass( 'is-active' );
 				
 				//Initialize the wrapper position
 				$( wrapperEl ).css( 'margin-top', $( window ).scrollTop() + 'px' );	
@@ -26426,7 +26426,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			// Show the lightbox
 			var showLightbox = function() {
-				$( closeEl ).addClass( 'active' );
+				$( closeEl ).addClass( 'is-active' );
 				$( wrapperEl ).show();
 				$( maskEl ).show();
 				$( innerEl ).show();	
@@ -26506,7 +26506,7 @@ APP = ( function ( APP, $, window, document ) {
 					thumbs += '<div class="uix-lightbox__thumb-container"><ul>';
 					for ( var k = 0; k < imgSrcStr.length; k++ ) {
 						
-						var active = ( k == 0 ) ? 'class="active"' : '';
+						var active = ( k == 0 ) ? 'class="is-active"' : '';
 						
 						thumbs += '<li '+active+'><img src="'+ imgSrcStr[k].thumb +'" alt=""></li>';
 					}
@@ -26778,7 +26778,7 @@ APP = ( function ( APP, $, window, document ) {
 			var $largePhoto = $( this ).closest( '.uix-lightbox__html' ).find( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' ),
 				$thumb      = $( this ).closest( '.uix-lightbox__html' ).find( '.uix-lightbox__thumb-container li' ),
 				total       = $thumb.length,
-				curIndex    = $thumb.filter( '.active' ).index(),
+				curIndex    = $thumb.filter( '.is-active' ).index(),
 				prevIndex   = curIndex - 1,
 				nextIndex   = curIndex + 1;
 			
@@ -26804,7 +26804,7 @@ APP = ( function ( APP, $, window, document ) {
 
 			$( document ).on( 'click', '.uix-lightbox__original__link', function( e ) {
 
-				$( '.uix-lightbox__original__target#' + $( this ).data( 'target-id' ) ).addClass( 'active' );
+				$( '.uix-lightbox__original__target#' + $( this ).data( 'target-id' ) ).addClass( 'is-active' );
 
 
 				if ( $( this ).closest( '.uix-lightbox__container.js-uix-no-fixed' ).length > 0 ) {
@@ -26814,18 +26814,18 @@ APP = ( function ( APP, $, window, document ) {
 
 				//---
 				$( 'html' ).css( 'overflow-y', 'hidden' );
-				$( largeImgCloseEl ).addClass( 'active' );
+				$( largeImgCloseEl ).addClass( 'is-active' );
 
 			});	
 
 			$( document ).on( 'click', largeImgCloseEl, function( e ) {
 
-				$( '.uix-lightbox__original__target' ).removeClass( 'active' );
+				$( '.uix-lightbox__original__target' ).removeClass( 'is-active' );
 				$( '.uix-lightbox__container.js-uix-no-fixed, .uix-lightbox__original__target--imgfull' ).removeClass( 'no-fixed-imgEnlarged' );
 
 
 				//---
-				$( this ).removeClass( 'active' );
+				$( this ).removeClass( 'is-active' );
 				$( 'html' ).css( 'overflow-y', 'auto' );
 
 			});	
@@ -26861,11 +26861,11 @@ APP = ( function ( APP, $, window, document ) {
 				});	
 			};
 			
-			$thumb.removeClass( 'active' );
-			obj.addClass( 'active' );
+			$thumb.removeClass( 'is-active' );
+			obj.addClass( 'is-active' );
 			
-			$largePhoto.find( 'li' ).hide().removeClass( 'active' );
-			$largePhoto.find( 'li' ).eq( index ).addClass( 'active' ).show( 400, function() {
+			$largePhoto.find( 'li' ).hide().removeClass( 'is-active' );
+			$largePhoto.find( 'li' ).eq( index ).addClass( 'is-active' ).show( 400, function() {
 				
 				//Reset the container height
 				var imgClick = new Image();
@@ -26939,7 +26939,7 @@ APP = ( function ( APP, $, window, document ) {
 
 			//Remove all dynamic classes
 			$( wrapperEl ).removeClass( 'js-uix-no-fixed js-uix-ajax' );
-			$( closeEl ).removeClass( 'active' );
+			$( closeEl ).removeClass( 'is-active' );
 			
 			//Add a scroll bar.
 			$( 'html' ).css( 'overflow-y', 'auto' );
@@ -27164,11 +27164,9 @@ APP = ( function ( APP, $, window, document ) {
 						
 					$( window ).on( 'scroll touchmove', function() {
 						
-					
-						
 						var scrolled = $( window ).scrollTop();
 						
-						if ( scrolled >= parseFloat( $button.offset().top - $( window ).height()/2 - $button.outerHeight( true )*2 ) && !$button.hasClass( triggerActive ) ) {
+						if ( scrolled >= parseFloat( $button.offset().top - $( window ).height()/1.5 - $button.outerHeight( true ) ) && !$button.hasClass( triggerActive ) ) {
 
 								// Active this button
 								$button.addClass( triggerActive );					    
@@ -27744,7 +27742,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			//btn
 			if ( $( this ).hasClass( 'uix-modal-box__close' ) ) {
-				$( this ).parent().removeClass( 'active' );
+				$( this ).parent().removeClass( 'is-active' );
 			}
 			
 			$( document ).UixCloseModalDialog();
@@ -27869,7 +27867,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 					}
 
-					$obj.addClass( 'active' );
+					$obj.addClass( 'is-active' );
 					
 					
 					//auto close
@@ -27926,7 +27924,7 @@ APP = ( function ( APP, $, window, document ) {
 			//Enable mask to close the window.
 			$( '.uix-modal-mask' ).removeClass( 'js-uix-disabled' );
 			
-			$( settings.target ).removeClass( 'active' );
+			$( settings.target ).removeClass( 'is-active' );
 			TweenMax.to( '.uix-modal-mask', 0.3, {
 				css: {
 					opacity : 0,
@@ -28128,7 +28126,7 @@ APP = ( function ( APP, $, window, document ) {
 
 			//default button status
 			if ( $carouselItem.first().data( 'id' ) == 1 && !carouselLoop ) {
-				$( carouselPrev ).addClass( 'disabled' );
+				$( carouselPrev ).addClass( 'is-disabled' );
 			}	
 
 			/* 
@@ -28169,19 +28167,19 @@ APP = ( function ( APP, $, window, document ) {
 			function carouselActiveCenterItem( el, dir, steps ) {
 				var curItemIndex    = (amountVisible/2).toFixed(0),
 					centerItemIndex = Math.floor(amountVisible / 2)-1;		
-				el.removeClass( 'active active-prev active-next' );
+				el.removeClass( 'is-active active-prev active-next' );
 				
 				
 			
 				if ( dir == 'default' ) {
-					el.eq( parseFloat( curItemIndex - 1 ) ).addClass( 'active' );		
+					el.eq( parseFloat( curItemIndex - 1 ) ).addClass( 'is-active' );		
 				} else {
-					el.eq( parseFloat( steps + centerItemIndex + 1 ) ).addClass( 'active' );	
+					el.eq( parseFloat( steps + centerItemIndex + 1 ) ).addClass( 'is-active' );	
 				}
 				
 				//Add nearest classes for 3 elements
 				el.each( function() {
-					if ( $( this ).hasClass( 'active' ) ) {
+					if ( $( this ).hasClass( 'is-active' ) ) {
 						$( this ).prev().addClass( 'active-prev' );
 						$( this ).next().addClass( 'active-next' );
 						
@@ -28270,8 +28268,8 @@ APP = ( function ( APP, $, window, document ) {
 			//Solve the activation problem of touch events
 			//-------------------------------------	
 			$carouselItem.on( 'click touchstart', function() {
-				$carouselItem.removeClass( 'active-item' );
-				$( this ).addClass( 'active-item' );
+				$carouselItem.removeClass( 'active-current' );
+				$( this ).addClass( 'active-current' );
 			});
 			
 			
@@ -28380,12 +28378,12 @@ APP = ( function ( APP, $, window, document ) {
 				//The state of the control button
 				if ( !carouselLoop ) {
 					
-					if ( isEnd ) $( nextBtnStr ).addClass( 'disabled' );
-					if ( isFirst ) $( prevBtnStr ).addClass( 'disabled' );
+					if ( isEnd ) $( nextBtnStr ).addClass( 'is-disabled' );
+					if ( isFirst ) $( prevBtnStr ).addClass( 'is-disabled' );
 					
 					if ( isMid ) {
-						$( nextBtnStr ).removeClass( 'disabled' );
-						$( prevBtnStr ).removeClass( 'disabled' );
+						$( nextBtnStr ).removeClass( 'is-disabled' );
+						$( prevBtnStr ).removeClass( 'is-disabled' );
 					}
 					
 					
@@ -28525,7 +28523,7 @@ APP = ( function ( APP, $, window, document ) {
 //
 //			//default button status
 //			if ( $carouselItem.first().data( 'id' ) == 1 && !carouselLoop ) {
-//				$( carouselPrev ).addClass( 'disabled' );
+//				$( carouselPrev ).addClass( 'is-disabled' );
 //			}	
 //
 //			/* 
@@ -28566,23 +28564,23 @@ APP = ( function ( APP, $, window, document ) {
 //			function carouselActiveCenterItem( el, dir ) {
 //				var curItemIndex    = (showcarouselItem/2).toFixed(0),
 //					centerItemIndex = Math.floor(showcarouselItem / 2)-1;		
-//				el.removeClass( 'active active-prev active-next' );
+//				el.removeClass( 'is-active active-prev active-next' );
 //				
 //				
 //				
 //				if ( dir == 'left' ) {
-//					el.eq( curItemIndex ).addClass( 'active' );
+//					el.eq( curItemIndex ).addClass( 'is-active' );
 //					
 //				} else if ( dir == 'right' ) {
-//					el.eq( centerItemIndex ).addClass( 'active' );	
+//					el.eq( centerItemIndex ).addClass( 'is-active' );	
 //					
 //				} else if ( dir == 'default' ) {
-//					el.eq( curItemIndex - 1 ).addClass( 'active' );		
+//					el.eq( curItemIndex - 1 ).addClass( 'is-active' );		
 //				}
 //				
 //				//Add nearest classes for 3 elements
 //				el.each( function() {
-//					if ( $( this ).hasClass( 'active' ) ) {
+//					if ( $( this ).hasClass( 'is-active' ) ) {
 //						$( this ).prev().addClass( 'active-prev' );
 //						$( this ).next().addClass( 'active-next' );
 //						
@@ -28671,7 +28669,7 @@ APP = ( function ( APP, $, window, document ) {
 //					isEnd = true;
 //				}
 //				if ( (carouselItemTotal - showcarouselItem) == $curItems.first().data( 'id' ) && !carouselLoop ) {
-//					if ( curBtn ) curBtn.addClass( 'disabled' );
+//					if ( curBtn ) curBtn.addClass( 'is-disabled' );
 //				}
 //				
 //				
@@ -28683,7 +28681,7 @@ APP = ( function ( APP, $, window, document ) {
 //				//Reset prevents code from duplicate run
 //				var preventEvent = function() {
 //					if ( carouselPrev && carouselPrev != '' ) {
-//						$( carouselPrev ).data( 'click', 0 ).removeClass( 'disabled' );
+//						$( carouselPrev ).data( 'click', 0 ).removeClass( 'is-disabled' );
 //					}
 //
 //					if ( curBtn ) curBtn.data( 'click', 0 );
@@ -28811,7 +28809,7 @@ APP = ( function ( APP, $, window, document ) {
 //					isEnd = true;
 //				}
 //				if ( 2 == $curItems.first().data( 'id' ) && !carouselLoop ) {
-//					if ( curBtn ) curBtn.addClass( 'disabled' );
+//					if ( curBtn ) curBtn.addClass( 'is-disabled' );
 //				}
 //				
 //				
@@ -28823,7 +28821,7 @@ APP = ( function ( APP, $, window, document ) {
 //				//Reset prevents code from duplicate run
 //				var preventEvent = function() {
 //					if ( carouselNext && carouselNext != '' ) {
-//						$( carouselNext ).data( 'click', 0 ).removeClass( 'disabled' );
+//						$( carouselNext ).data( 'click', 0 ).removeClass( 'is-disabled' );
 //					}
 //
 //					if ( curBtn ) curBtn.data( 'click', 0 );
@@ -28984,7 +28982,7 @@ APP = ( function ( APP, $, window, document ) {
 		$.each( $sections, function( i ) {
 			$( this ).attr( 'data-index', i );
 			if ( i == 0 ) {
-				$( this ).addClass( 'active' );
+				$( this ).addClass( 'is-active' );
 
 			}
 			
@@ -29081,7 +29079,7 @@ APP = ( function ( APP, $, window, document ) {
 		 * @return {Void}
 		 */
 		function moveTo( el, dir, hashID ) {
-			var index     = parseFloat( $sections.filter( '.active' ).attr( 'data-index' ) ),
+			var index     = parseFloat( $sections.filter( '.is-active' ).attr( 'data-index' ) ),
 				nextIndex = null,
 				$next     = null,
 				isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
@@ -29121,14 +29119,14 @@ APP = ( function ( APP, $, window, document ) {
 							$sections.removeClass( 'leave' );
 							$sections.eq( index ).addClass( 'leave' );
 
-							$sections.removeClass( 'active' );
-							$next.addClass( 'active' ).removeClass( 'leave' );
+							$sections.removeClass( 'is-active' );
+							$next.addClass( 'is-active' ).removeClass( 'leave' );
 
 
 
 							//Changing The Site URL
-							var curSectionIndex = $sections.filter( '.active' ).index() + 1,
-								href            = window.location.href.substr( 0, window.location.href.indexOf( '#' ) ) + '#' + $sections.filter( '.active' ).attr( 'id' );
+							var curSectionIndex = $sections.filter( '.is-active' ).index() + 1,
+								href            = window.location.href.substr( 0, window.location.href.indexOf( '#' ) ) + '#' + $sections.filter( '.is-active' ).attr( 'id' );
 
 							// Save state on history stack
 							// - First argument is any object that will let you restore state
@@ -29164,8 +29162,8 @@ APP = ( function ( APP, $, window, document ) {
         
 	
 		//Activate the first item
-		$primaryMenu.find( 'li:first' ).addClass( 'active' );
-		$sidefixedMenu.find( 'li:first' ).addClass( 'active' );
+		$primaryMenu.find( 'li:first' ).addClass( 'is-active' );
+		$sidefixedMenu.find( 'li:first' ).addClass( 'is-active' );
 		
 		
 		/*
@@ -29218,7 +29216,7 @@ APP = ( function ( APP, $, window, document ) {
 			menuObj.find( 'li > a' ).on( 'click', function(e) {
 				e.preventDefault();
 				
-				if ( $( this ).parent().hasClass( 'active' ) ) return false;
+				if ( $( this ).parent().hasClass( 'is-active' ) ) return false;
 				
 				
 				moveTo( $sectionsContainer, false, $( this ).parent( 'li' ).index() + 1 );
@@ -29247,10 +29245,10 @@ APP = ( function ( APP, $, window, document ) {
 				if ( eleTop < spyTop + 1 ) {
 
 					// Highlight element when related content
-					getAllNavigation( $primaryMenu ).removeClass( 'active' );
-					getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
-					getRelatedNavigation( block, $primaryMenu, false ).addClass( 'active' );
-					getRelatedNavigation( block, $sidefixedMenu, false ).addClass( 'active' );
+					getAllNavigation( $primaryMenu ).removeClass( 'is-active' );
+					getAllNavigation( $sidefixedMenu ).removeClass( 'is-active' );
+					getRelatedNavigation( block, $primaryMenu, false ).addClass( 'is-active' );
+					getRelatedNavigation( block, $sidefixedMenu, false ).addClass( 'is-active' );
 					
 					
 				} 
@@ -29262,8 +29260,8 @@ APP = ( function ( APP, $, window, document ) {
 			// The 1 pixel in order to solve inaccurate value of outerHeight() 
 			// in Safari and Firefox browsers.
 			if ( spyTop > maxTop || spyTop < minTop - 1 ) {
-				getAllNavigation( $primaryMenu ).removeClass( 'active' );
-				getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
+				getAllNavigation( $primaryMenu ).removeClass( 'is-active' );
+				getAllNavigation( $sidefixedMenu ).removeClass( 'is-active' );
 			}
 
 
@@ -29442,7 +29440,7 @@ APP = ( function ( APP, $, window, document ) {
 		$.each( $sections, function( i ) {
 			$( this ).attr( 'data-index', i );
 			if ( i == 0 ) {
-				$( this ).addClass( 'active' );
+				$( this ).addClass( 'is-active' );
 
 			}
 			
@@ -29568,7 +29566,7 @@ APP = ( function ( APP, $, window, document ) {
 		 * @return {Void}
 		 */
 		function moveTo( el, dir, hashID ) {
-			var index     = parseFloat( $sections.filter( '.active' ).attr( 'data-index' ) ),
+			var index     = parseFloat( $sections.filter( '.is-active' ).attr( 'data-index' ) ),
 				nextIndex = null,
 				$next     = null,
 				isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
@@ -29627,14 +29625,14 @@ APP = ( function ( APP, $, window, document ) {
 									$sections.removeClass( 'leave' );
 									$sections.eq( index ).addClass( 'leave' );
 
-									$sections.removeClass( 'active' );
-									$next.addClass( 'active' ).removeClass( 'leave' );
+									$sections.removeClass( 'is-active' );
+									$next.addClass( 'is-active' ).removeClass( 'leave' );
 
 
 
 									//Changing The Site URL
-									var curSectionIndex = $sections.filter( '.active' ).index() + 1,
-										href            = window.location.href.substr( 0, window.location.href.indexOf( '#' ) ) + '#' + $sections.filter( '.active' ).attr( 'id' );
+									var curSectionIndex = $sections.filter( '.is-active' ).index() + 1,
+										href            = window.location.href.substr( 0, window.location.href.indexOf( '#' ) ) + '#' + $sections.filter( '.is-active' ).attr( 'id' );
 
 									
 									// Save state on history stack
@@ -29645,10 +29643,10 @@ APP = ( function ( APP, $, window, document ) {
 									console.log( 'Section ' + curSectionIndex + ' loaded!' );
 
 									// Highlight element when related content
-									getAllNavigation( $primaryMenu ).removeClass( 'active' );
-									getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
-									$primaryMenu.find( 'li' ).eq( nextIndex ).addClass( 'active' );
-									$sidefixedMenu.find( 'li' ).eq( nextIndex ).addClass( 'active' );
+									getAllNavigation( $primaryMenu ).removeClass( 'is-active' );
+									getAllNavigation( $sidefixedMenu ).removeClass( 'is-active' );
+									$primaryMenu.find( 'li' ).eq( nextIndex ).addClass( 'is-active' );
+									$sidefixedMenu.find( 'li' ).eq( nextIndex ).addClass( 'is-active' );
 
 
 
@@ -29685,8 +29683,8 @@ APP = ( function ( APP, $, window, document ) {
 
 	
 		//Activate the first item
-		$primaryMenu.find( 'li:first' ).addClass( 'active' );
-		$sidefixedMenu.find( 'li:first' ).addClass( 'active' );
+		$primaryMenu.find( 'li:first' ).addClass( 'is-active' );
+		$sidefixedMenu.find( 'li:first' ).addClass( 'is-active' );
 
 		
 		/*
@@ -29721,12 +29719,12 @@ APP = ( function ( APP, $, window, document ) {
 			menuObj.find( 'li > a' ).on( 'click', function(e) {
 				e.preventDefault();
 				
-				if ( $( this ).parent().hasClass( 'active' ) ) return false;
+				if ( $( this ).parent().hasClass( 'is-active' ) ) return false;
 				
 			
 				var dir = 'down';
 				
-				if ( $sections.filter( '.active' ).index() > $( this ).parent().index() ) {
+				if ( $sections.filter( '.is-active' ).index() > $( this ).parent().index() ) {
 					dir = 'up';
 				}
 				moveTo( $sectionsContainer, dir, $( this ).parent( 'li' ).index() + 1 );
@@ -30215,7 +30213,7 @@ APP = ( function ( APP, $, window, document ) {
 							$initHeight.find( '.uix-price__outline' ).css( 'height', priceBGH_Max + 'px' );
 
 							// Actived columns
-							$initHeight.find( '.uix-price__outline.active' ).each( function() {
+							$initHeight.find( '.uix-price__outline.is-active' ).each( function() {
 
 								var ty = Math.abs( parseInt( $( this ).css('transform').split(',')[5]));
 								if ( !isNaN(ty) ) {
@@ -30234,7 +30232,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 						// Actived columns
-						$initHeight.find( '.uix-price__outline.active' ).each( function() {
+						$initHeight.find( '.uix-price__outline.is-active' ).each( function() {
 
 							var textColor = $( this ).closest( '.uix-price__outline--hover' ).data( 'tcolor' ),
 								btnColor  = $( this ).closest( '.uix-price__outline--hover' ).data( 'bcolor' );
@@ -30341,8 +30339,8 @@ APP = ( function ( APP, $, window, document ) {
 			progressLineRestore = function() {
 				var k = 0;
 				var progressLineAnimGo = setInterval( function() {
-					$progressLineCircle.eq( k ).addClass( 'active' );
-					$progressLineCircle.eq( k ).next( '.uix-progress-line__bar' ).addClass( 'active' );
+					$progressLineCircle.eq( k ).addClass( 'is-active' );
+					$progressLineCircle.eq( k ).next( '.uix-progress-line__bar' ).addClass( 'is-active' );
 					k++;
 
 
@@ -30372,11 +30370,11 @@ APP = ( function ( APP, $, window, document ) {
 		
 			var curIndex = $( this ).index()/2;
 			
-			$progressLineCircle.removeClass( 'active' );	
-			$progressLineCircle.next( '.uix-progress-line__bar' ).removeClass( 'active' );	
+			$progressLineCircle.removeClass( 'is-active' );	
+			$progressLineCircle.next( '.uix-progress-line__bar' ).removeClass( 'is-active' );	
 			for ( var i = curIndex; i >= 0; i-- ) {
-				$progressLineCircle.eq( i ).addClass('active');	
-				$progressLineCircle.eq( i ).next( '.uix-progress-line__bar' ).addClass( 'active' );	
+				$progressLineCircle.eq( i ).addClass('is-active');	
+				$progressLineCircle.eq( i ).next( '.uix-progress-line__bar' ).addClass( 'is-active' );	
 			}
 
 
@@ -30647,7 +30645,7 @@ APP = ( function ( APP, $, window, document ) {
 		$scrollRevealElements.each( function()  {
 			
 			//Prevent asynchronous loading of repeated calls
-			var actived = $( this ).data( 'active' );
+			var actived = $( this ).data( 'is-active' );
 			
 			if( typeof actived === typeof undefined ) {
 				tmAnim( $( this ), 'from' );
@@ -30667,7 +30665,7 @@ APP = ( function ( APP, $, window, document ) {
 
 					
 					//Prevent asynchronous loading of repeated calls
-					var actived = $( this.element ).data( 'active' ),
+					var actived = $( this.element ).data( 'is-active' ),
 						tmLoop  = tmAnim( $( this.element ), 'loop' );
 					
 
@@ -30676,7 +30674,7 @@ APP = ( function ( APP, $, window, document ) {
 						//$( this.element ).toggleClass( 'animated fadeInUp', direction === 'down' );
 						tmAnim( $( this.element ), 'to' );
 
-						$( this.element ).data( 'active', 1 );
+						$( this.element ).data( 'is-active', 1 );
 
 						
 					}
@@ -30899,17 +30897,58 @@ APP = ( function ( APP, $, window, document ) {
     'use strict';
 	
     APP.SHOW_MORELESS               = APP.SHOW_MORELESS || {};
-	APP.SHOW_MORELESS.version       = '0.0.1';
+	APP.SHOW_MORELESS.version       = '0.0.2';
     APP.SHOW_MORELESS.documentReady = function( $ ) {
 
-		$( '.uix-more-btn__link' ).on( 'click', function( e ) {
-			e.preventDefault();
-			$( this ).parent().prev( '.uix-more-btn' ).toggleClass( 'js-uix-show' );
-			$( this ).find( '> span' ).first().toggle();
-			$( this ).find( '> span' ).eq(1).toggle();
-			
+	
+		$( '.uix-more-btn__link' ).each( function()  {
+			var $btn          = $( this ),
+				$con          = $btn.parent().prev( '.uix-more-btn' ),
+				$btnTxt       = $btn.find( '> span' ),
+				defaultHeight = $con.height()
 
-		});	
+
+			
+			$btn.on( 'click', function( e ) {
+				e.preventDefault();
+
+				var expanded      = ( $( this ).attr( 'aria-expanded' ) == 'true' ) ? false : true;
+
+				if ( expanded ) {
+
+					$con.addClass( 'is-active' ).attr( 'aria-expanded', true );
+					$( this ).addClass( 'is-active' ).attr( 'aria-expanded', true );
+
+
+					//to open
+					// - temporarilty set height:auto
+					// - tween from height:0
+					TweenMax.set( $con, { height: 'auto' } );
+					TweenMax.from( $con, 0.5, { height: defaultHeight } );		
+
+					//change text
+					$btnTxt.eq(0).hide();
+					$btnTxt.eq(1).show();
+
+
+				} else {
+
+					$con.removeClass( 'is-active' ).attr( 'aria-expanded', false );
+					$( this ).removeClass( 'is-active' ).attr( 'aria-expanded', false );
+
+					//to close
+					TweenMax.to( $con, 0.5, { height: defaultHeight } );
+
+					//change text
+					$btnTxt.eq(0).show();
+					$btnTxt.eq(1).hide();
+
+
+				}
+
+			});	
+		});
+
 		
     };
 
@@ -31127,102 +31166,159 @@ APP = ( function ( APP, $, window, document ) {
 	
 
     APP.STICKY_EL               = APP.STICKY_EL || {};
-	APP.STICKY_EL.version       = '0.0.3';
+	APP.STICKY_EL.version       = '0.0.5';
     APP.STICKY_EL.pageLoaded    = function() {
 
 		var $window      = $( window ),
 			windowWidth  = window.innerWidth,
 			windowHeight = window.innerHeight,
-			topSpacing   = $( '.uix-header__container' ).outerHeight( true ) + 10;
+			topSpacing   = ( windowWidth <= 768 ) ? 0 : $( '.uix-header__container' ).outerHeight( true ); //with margin
+		
+		
+		//prepend a placeholder
+		$( '.js-uix-sticky-el' ).each( function()  {
+
+			var $el      = $( this ),
+				elHeight = $el.outerHeight( true ), //with margin
+				elClass  = $el.attr( 'class' ).replace( 'js-uix-sticky-el', ''),
+				tempID   = 'sticky-' + UixGUID.create();
+
+			$el.attr( 'data-sticky-id', tempID );
+			
+			if ( ! $el.hasClass( 'is-placeholder' ) ) {
+				$( '<div class="'+elClass+' is-placeholder"></div>' )
+					.css({
+						'height': elHeight + 'px',
+						'width' : '100%',
+						'display': 'none',
+						'visibility': 'hidden'
+					})
+				    .attr( 'data-sticky-id', tempID )
+					.insertBefore( $el );
+			}
+
+			
+		});
+		
+		//  Initialize
+		stickyInit( windowWidth, windowHeight );
+		
+		$window.on( 'resize', function() {
+			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+			if ( window.innerWidth != windowWidth ) {
+
+				// Update the window width for next time
+				windowWidth  = window.innerWidth;
+				windowHeight = window.innerHeight;
+
+				// Do stuff here
+				stickyInit( windowWidth, windowHeight );
 		
 
-		$window.on( 'scroll touchmove', function() {
-
-			var scrollTop   = $window.scrollTop(),
-				dynamicTop  = parseFloat( scrollTop + window.innerHeight );
-
-
-			$( '.js-uix-sticky-el.active' ).each( function()  {
-				var $el = $( this );
-
-				if ( typeof $el.data( 'stop-trigger' ) != typeof undefined && $( $el.data( 'stop-trigger' ) ).length > 0 ) {
-					
-					
-
-					var diff      = typeof $el.data( 'stop-trigger-diff' ) != typeof undefined && $el.data( 'stop-trigger-diff' ).length > 0 ? UixMath.evaluate( $el.data( 'stop-trigger-diff' ).replace(/\s/g, '').replace(/\%\h/g, windowHeight ).replace(/\%\w/g, windowWidth ) ) : 0,
-						targetTop = $( $el.data( 'stop-trigger' ) ).offset().top - diff;
-					
-				
-					//Detecting when user scrolls to bottom of div
-					if ( dynamicTop >= targetTop ) {
-
-							$el.css( {
-								  'top'  : parseFloat( topSpacing - (dynamicTop - targetTop) ) + 'px'
-							  } );	
-
-					} else {
-
-						if ( $el.length > 0 && $el.position().top < topSpacing ) {
-							$el.css( {
-								  'top'  : topSpacing + 'px'
-							  } );	
-						}
-
-					}
-				}	
-
-			});
-			
-			
-
-		});	
-
-		var	waypoints = $( '.js-uix-sticky-el' ).waypoint({
-
-		  handler: function( direction ) {
-
-
-			var $this      = $( this.element ),
-				oWIdth     = $this.width();
-
-
-			  $this
-				  .toggleClass( 'active', direction === 'down' )
-				  .css( {
-					  'width': oWIdth + 'px',
-					  'top'  : topSpacing + 'px'
-				  } );
-
-
-
-		  },
-
-		  offset: topSpacing
-
-		});	
+			}
+		});
+		
 		
 	
+		/*
+		 * Initialize Sticky Elements settings
+		 *
+		 * @param  {Number} w         - Returns width of browser viewport
+		 * @param  {Number} h         - Returns height of browser viewport
+		 * @return {Void}
+		 */
+		function stickyInit( w, h ) {
 			
-//		var	navMinTop    = $( '.js-uix-sticky-el' ).offset().top + window.innerHeight/3,
-//			navMaxTop    = parseFloat( $( document ).height() - $( '.uix-footer__container' ).height() ) - window.innerHeight/3;
-//
-//
-//		$( window ).on( 'scroll touchmove', function() {
-//			var scrollTop = $( this ).scrollTop(),
-//				spyTop    = parseFloat( scrollTop + window.innerHeight/2 );
-//
-//			//Detecting when user scrolls to bottom of div
-//			if ( spyTop > navMaxTop || spyTop < navMinTop ) {
-//				$( '.js-uix-sticky-el' ).removeClass( 'active' );
-//			} else {
-//				$( '.js-uix-sticky-el' ).addClass( 'active' );
-//			}	
-//
-//
-//		});
+			$window.off( 'scroll.STICKY_EL touchmove.STICKY_EL' );
+
+			
+			if ( w > 768 ) {
+				
+				$( '.js-uix-sticky-el' ).each( function()  {
+					var $el      = $( this ),
+						elTop    = $el.offset().top,
+						oWidth   = $el.width(),
+						clsID    = $el.data( 'sticky-id' ),
+						$ph      = $( '[data-sticky-id="'+clsID+'"].is-placeholder' );
+					
+					
+					
+					//spy the scroll event
+					$window.on( 'scroll.STICKY_EL touchmove.STICKY_EL', function() {
+
+						var scrollTop   = $window.scrollTop(),
+							dynamicTop  = parseFloat( scrollTop + window.innerHeight );
 
 
-    
+						//------
+						if ( parseFloat( scrollTop + topSpacing ) > elTop ) {
+						  $el
+							  .addClass( 'is-active' )
+							  .css( {
+								  'width': oWidth + 'px',
+								  'top'  : topSpacing + 'px'
+							  } );
+						   $ph.css( 'display', 'block' );
+
+						} else {
+						  $el
+							  .removeClass( 'is-active' )
+							  .css( {
+								  'top'  : 0
+							  } );	
+						  $ph.css( 'display', 'none' );
+						}
+
+
+
+						//------
+						if ( typeof $el.data( 'stop-trigger' ) != typeof undefined && $( $el.data( 'stop-trigger' ) ).length > 0 ) {
+
+							var diff      = typeof $el.data( 'stop-trigger-diff' ) != typeof undefined && $el.data( 'stop-trigger-diff' ).length > 0 ? UixMath.evaluate( $el.data( 'stop-trigger-diff' ).replace(/\s/g, '').replace(/\%\h/g, windowHeight ).replace(/\%\w/g, windowWidth ) ) : 0,
+								targetTop = $( $el.data( 'stop-trigger' ) ).offset().top - diff;
+
+
+							//Detecting when user scrolls to bottom of div
+							if ( dynamicTop >= targetTop ) {
+
+									$el.css( {
+										  'top'  : parseFloat( topSpacing - (dynamicTop - targetTop) ) + 'px'
+									  } );
+
+							} else {
+
+								if ( $el.length > 0 && $el.position().top < topSpacing ) {
+									$el.css( {
+										  'top'  : topSpacing + 'px'
+									  } );	
+
+								}
+
+							}
+						}	
+
+
+					});//endif scroll.STICKY_EL touchmove.STICKY_EL
+					
+					
+
+				});//endif $( '.js-uix-sticky-el' )
+
+				
+				
+			} else {
+				$( '.js-uix-sticky-el' ).removeClass( 'is-active' );
+				$( '[data-sticky-id].is-placeholder' ).css( 'display', 'none' );
+				
+			}// endif w > 768
+			
+			
+		}
+		
+		
+		
+
+
 		
     };
 
@@ -35382,7 +35478,7 @@ APP = ( function ( APP, $, window, document ) {
 					
 					//Initialize the controlers classes
 					//-------------------------------------	
-					$( dataControlsPagination ).find( 'ul > li' ).first().addClass( 'active' );
+					$( dataControlsPagination ).find( 'ul > li' ).first().addClass( 'is-active' );
 
 
 					
@@ -35410,7 +35506,7 @@ APP = ( function ( APP, $, window, document ) {
 					//Initialize the first item container
 					//-------------------------------------		
 					$items.addClass( 'next' );
-					$first.addClass( 'active' );
+					$first.addClass( 'is-active' );
 
 
 
@@ -35467,7 +35563,7 @@ APP = ( function ( APP, $, window, document ) {
 					_dot += '<ul>';
 					for ( var i = 0; i < itemsTotal; i++ ) {
 
-						_dotActive = ( i == 0 ) ? 'class="active"' : '';
+						_dotActive = ( i == 0 ) ? 'class="is-active"' : '';
 
 						_dot += '<li '+_dotActive+' data-index="'+i+'"><a href="javascript:"></a></li>';
 					}
@@ -35480,7 +35576,7 @@ APP = ( function ( APP, $, window, document ) {
 					$( dataControlsPagination ).find( 'ul > li' ).on( 'click', function( e ) {
 						e.preventDefault();
 
-						var slideCurId  = $( dataControlsPagination ).find( 'ul > li.active' ).index(),
+						var slideCurId  = $( dataControlsPagination ).find( 'ul > li.is-active' ).index(),
 							slideNextId = $( this ).index();
 
 
@@ -35508,17 +35604,17 @@ APP = ( function ( APP, $, window, document ) {
 
 					$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
 
-					$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
+					$( dataControlsArrows ).find( 'a' ).removeClass( 'is-disabled' );
 					if ( !dataLoop ) {
-						_prev.addClass( 'disabled' );
+						_prev.addClass( 'is-disabled' );
 					}
 
 
 					_prev.on( 'click', function( e ) {
 						e.preventDefault();
 
-						var slideCurId  = $items.filter( '.active' ).index(),
-							slideNextId = parseFloat( $items.filter( '.active' ).index() ) - 1;
+						var slideCurId  = $items.filter( '.is-active' ).index(),
+							slideNextId = parseFloat( $items.filter( '.is-active' ).index() ) - 1;
 	
 						//Transition Between Slides
 						sliderUpdates( slideCurId, slideNextId, 'prev' );	
@@ -35534,8 +35630,8 @@ APP = ( function ( APP, $, window, document ) {
 					_next.on( 'click', function( e ) {
 						e.preventDefault();
 
-						var slideCurId  = $items.filter( '.active' ).index(),
-							slideNextId = parseFloat( $items.filter( '.active' ).index() ) + 1;
+						var slideCurId  = $items.filter( '.is-active' ).index(),
+							slideNextId = parseFloat( $items.filter( '.is-active' ).index() ) + 1;
 	
 						//Transition Between Slides
 						sliderUpdates( slideCurId, slideNextId, 'next' );	
@@ -35879,14 +35975,14 @@ APP = ( function ( APP, $, window, document ) {
 			
 			slider[0].animatedSlides = setInterval( function() {
 
-					playTimes = parseFloat( items.filter( '.active' ).index() );
+					playTimes = parseFloat( items.filter( '.is-active' ).index() );
 					playTimes++;
 
 					
 					if ( !loop ) {
 						if ( playTimes < total && playTimes >= 0 ) {
 							
-							var slideCurId  = items.filter( '.active' ).index(),
+							var slideCurId  = items.filter( '.is-active' ).index(),
 								slideNextId = playTimes;	
 
 							sliderUpdates( slideCurId, slideNextId, 'next' );
@@ -35895,7 +35991,7 @@ APP = ( function ( APP, $, window, document ) {
 						if ( playTimes == total ) playTimes = 0;
 						if ( playTimes < 0 ) playTimes = total-1;		
 
-						var slideCurId  = items.filter( '.active' ).index(),
+						var slideCurId  = items.filter( '.is-active' ).index(),
 							slideNextId = playTimes;	
 
 						
@@ -35994,30 +36090,30 @@ APP = ( function ( APP, $, window, document ) {
 
 					//Add transition class to each item
 					//-------------------------------------	
-					$items.removeClass( 'active leave prev next' )
+					$items.removeClass( 'is-active leave prev next' )
 						  .addClass( dirIndicatorClass );
 
 					$current.addClass( 'leave' );
-					$next.addClass( 'active' );
+					$next.addClass( 'is-active' );
 
 
 
 					//Add transition class to Controls Pagination
 					//-------------------------------------
-					$( dataControlsPagination ).find( 'ul > li' ).removeClass( 'active leave prev next' )
+					$( dataControlsPagination ).find( 'ul > li' ).removeClass( 'is-active leave prev next' )
 											   .addClass( dirIndicatorClass );
 
 					$( dataControlsPagination ).find( 'ul > li' ).eq( slideCurId ).addClass( 'leave' );
-					$( dataControlsPagination ).find( 'ul > li' ).eq( slideNextId ).addClass( 'active' );
+					$( dataControlsPagination ).find( 'ul > li' ).eq( slideNextId ).addClass( 'is-active' );
 
 
 
 					//Add transition class to Arrows
 					//-------------------------------------		
 					if ( ! dataLoop ) {
-						$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
-						if ( slideNextId == total - 1 ) $( dataControlsArrows ).find( '.uix-3d-slider--shatter__arrows--next' ).addClass( 'disabled' );
-						if ( slideNextId == 0 ) $( dataControlsArrows ).find( '.uix-3d-slider--shatter__arrows--prev' ).addClass( 'disabled' );
+						$( dataControlsArrows ).find( 'a' ).removeClass( 'is-disabled' );
+						if ( slideNextId == total - 1 ) $( dataControlsArrows ).find( '.uix-3d-slider--shatter__arrows--next' ).addClass( 'is-disabled' );
+						if ( slideNextId == 0 ) $( dataControlsArrows ).find( '.uix-3d-slider--shatter__arrows--prev' ).addClass( 'is-disabled' );
 					}
 
 
@@ -36286,7 +36382,7 @@ APP = ( function ( APP, $, window, document ) {
 					
 					//Initialize the controlers classes
 					//-------------------------------------	
-					$( dataControlsPagination ).find( 'ul > li' ).first().addClass( 'active' );
+					$( dataControlsPagination ).find( 'ul > li' ).first().addClass( 'is-active' );
 
 
 					
@@ -36314,7 +36410,7 @@ APP = ( function ( APP, $, window, document ) {
 					//Initialize the first item container
 					//-------------------------------------		
 					$items.addClass( 'next' );
-					$first.addClass( 'active' );
+					$first.addClass( 'is-active' );
 
 
 
@@ -36371,7 +36467,7 @@ APP = ( function ( APP, $, window, document ) {
 					_dot += '<ul>';
 					for ( var i = 0; i < itemsTotal; i++ ) {
 
-						_dotActive = ( i == 0 ) ? 'class="active"' : '';
+						_dotActive = ( i == 0 ) ? 'class="is-active"' : '';
 
 						_dot += '<li '+_dotActive+' data-index="'+i+'"><a href="javascript:"></a></li>';
 					}
@@ -36384,7 +36480,7 @@ APP = ( function ( APP, $, window, document ) {
 					$( dataControlsPagination ).find( 'ul > li' ).on( 'click', function( e ) {
 						e.preventDefault();
 
-						var slideCurId  = $( dataControlsPagination ).find( 'ul > li.active' ).index(),
+						var slideCurId  = $( dataControlsPagination ).find( 'ul > li.is-active' ).index(),
 							slideNextId = $( this ).index();
 
 
@@ -36412,17 +36508,17 @@ APP = ( function ( APP, $, window, document ) {
 
 					$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
 
-					$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
+					$( dataControlsArrows ).find( 'a' ).removeClass( 'is-disabled' );
 					if ( !dataLoop ) {
-						_prev.addClass( 'disabled' );
+						_prev.addClass( 'is-disabled' );
 					}
 
 
 					_prev.on( 'click', function( e ) {
 						e.preventDefault();
 
-						var slideCurId  = $items.filter( '.active' ).index(),
-							slideNextId = parseFloat( $items.filter( '.active' ).index() ) - 1;
+						var slideCurId  = $items.filter( '.is-active' ).index(),
+							slideNextId = parseFloat( $items.filter( '.is-active' ).index() ) - 1;
 	
 						//Transition Between Slides
 						sliderUpdates( slideCurId, slideNextId, 'prev' );	
@@ -36438,8 +36534,8 @@ APP = ( function ( APP, $, window, document ) {
 					_next.on( 'click', function( e ) {
 						e.preventDefault();
 
-						var slideCurId  = $items.filter( '.active' ).index(),
-							slideNextId = parseFloat( $items.filter( '.active' ).index() ) + 1;
+						var slideCurId  = $items.filter( '.is-active' ).index(),
+							slideNextId = parseFloat( $items.filter( '.is-active' ).index() ) + 1;
 	
 						//Transition Between Slides
 						sliderUpdates( slideCurId, slideNextId, 'next' );	
@@ -36826,14 +36922,14 @@ APP = ( function ( APP, $, window, document ) {
 			
 			slider[0].animatedSlides = setInterval( function() {
 
-					playTimes = parseFloat( items.filter( '.active' ).index() );
+					playTimes = parseFloat( items.filter( '.is-active' ).index() );
 					playTimes++;
 
 					
 					if ( !loop ) {
 						if ( playTimes < total && playTimes >= 0 ) {
 							
-							var slideCurId  = items.filter( '.active' ).index(),
+							var slideCurId  = items.filter( '.is-active' ).index(),
 								slideNextId = playTimes;	
 
 							sliderUpdates( slideCurId, slideNextId, 'next' );
@@ -36842,7 +36938,7 @@ APP = ( function ( APP, $, window, document ) {
 						if ( playTimes == total ) playTimes = 0;
 						if ( playTimes < 0 ) playTimes = total-1;		
 
-						var slideCurId  = items.filter( '.active' ).index(),
+						var slideCurId  = items.filter( '.is-active' ).index(),
 							slideNextId = playTimes;	
 
 						
@@ -36941,30 +37037,30 @@ APP = ( function ( APP, $, window, document ) {
 
 					//Add transition class to each item
 					//-------------------------------------	
-					$items.removeClass( 'active leave prev next' )
+					$items.removeClass( 'is-active leave prev next' )
 						  .addClass( dirIndicatorClass );
 
 					$current.addClass( 'leave' );
-					$next.addClass( 'active' );
+					$next.addClass( 'is-active' );
 
 
 
 					//Add transition class to Controls Pagination
 					//-------------------------------------
-					$( dataControlsPagination ).find( 'ul > li' ).removeClass( 'active leave prev next' )
+					$( dataControlsPagination ).find( 'ul > li' ).removeClass( 'is-active leave prev next' )
 											   .addClass( dirIndicatorClass );
 
 					$( dataControlsPagination ).find( 'ul > li' ).eq( slideCurId ).addClass( 'leave' );
-					$( dataControlsPagination ).find( 'ul > li' ).eq( slideNextId ).addClass( 'active' );
+					$( dataControlsPagination ).find( 'ul > li' ).eq( slideNextId ).addClass( 'is-active' );
 
 
 
 					//Add transition class to Arrows
 					//-------------------------------------		
 					if ( ! dataLoop ) {
-						$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
-						if ( slideNextId == total - 1 ) $( dataControlsArrows ).find( '.uix-3d-slider--expParticle__arrows--next' ).addClass( 'disabled' );
-						if ( slideNextId == 0 ) $( dataControlsArrows ).find( '.uix-3d-slider--expParticle__arrows--prev' ).addClass( 'disabled' );
+						$( dataControlsArrows ).find( 'a' ).removeClass( 'is-disabled' );
+						if ( slideNextId == total - 1 ) $( dataControlsArrows ).find( '.uix-3d-slider--expParticle__arrows--next' ).addClass( 'is-disabled' );
+						if ( slideNextId == 0 ) $( dataControlsArrows ).find( '.uix-3d-slider--expParticle__arrows--prev' ).addClass( 'is-disabled' );
 					}
 
 
@@ -37492,11 +37588,11 @@ APP = ( function ( APP, $, window, document ) {
 					index = parseFloat( $( this ).index() - 1 );
 				
 				
-				$this.find( '.uix-tabs__nav ul > li' ).removeClass( 'active' );
-				$this.find( '.uix-tabs__content' ).removeClass( 'active' );
+				$this.find( '.uix-tabs__nav ul > li' ).removeClass( 'is-active' );
+				$this.find( '.uix-tabs__content' ).removeClass( 'is-active' );
 		
-				$( this ).addClass( 'active' );
-				$( '#' + tabID ).addClass( 'active' );
+				$( this ).addClass( 'is-active' );
+				$( '#' + tabID ).addClass( 'is-active' );
 				
 
 				//sliding marker
@@ -37522,7 +37618,7 @@ APP = ( function ( APP, $, window, document ) {
 			});
 			
 			// Init
-			$this.find( '.uix-tabs__nav ul > li.active' ).trigger( 'click' );
+			$this.find( '.uix-tabs__nav ul > li.is-active' ).trigger( 'click' );
 			
 			//Active current tab
 			var url    = window.location.href,
@@ -37644,8 +37740,8 @@ APP = ( function ( APP, $, window, document ) {
 				//The mask prevent click and hover
 				$( teamFocusMask ).show();
 				
-				$( el ).removeClass( 'active' );
-				$cur.addClass( 'active' );
+				$( el ).removeClass( 'is-active' );
+				$cur.addClass( 'is-active' );
 				
 				
 				
@@ -38009,9 +38105,9 @@ APP = ( function ( APP, $, window, document ) {
 
 				
 				//Activate the default selection
-				timelineUpdate( $this, $this.find( '.uix-timeline__item.active' ), dateShowEle, false );
-				if ( $this.find( '.uix-timeline__item.active' ).index() == 0 ) {
-					$this.find( '.uix-timeline__btn--prev' ).addClass( 'disabled' );
+				timelineUpdate( $this, $this.find( '.uix-timeline__item.is-active' ), dateShowEle, false );
+				if ( $this.find( '.uix-timeline__item.is-active' ).index() == 0 ) {
+					$this.find( '.uix-timeline__btn--prev' ).addClass( 'is-disabled' );
 				}
 				
 
@@ -38024,7 +38120,7 @@ APP = ( function ( APP, $, window, document ) {
 
 						for ( var i = 0; i < el.length; i++) {
 
-							var singleHeight = $( el[i] )[0].offsetHeight;
+							var singleHeight = $( el[i] ).outerHeight( true );
 
 							if (counter < singleHeight) {
 								counter = singleHeight;
@@ -38072,7 +38168,7 @@ APP = ( function ( APP, $, window, document ) {
 				tLoop      = false;
 			
 			
-			var curIndex = obj.find( '.uix-timeline__item.active' ).index(),
+			var curIndex = obj.find( '.uix-timeline__item.is-active' ).index(),
 				tarIndex;
 
 			//Check if a value is an object currently
@@ -38093,7 +38189,7 @@ APP = ( function ( APP, $, window, document ) {
 		
 			
 			//loop the items
-			obj.find( '.uix-timeline__btn--prev, .uix-timeline__btn--next' ).removeClass( 'disabled' );
+			obj.find( '.uix-timeline__btn--prev, .uix-timeline__btn--next' ).removeClass( 'is-disabled' );
 			
 			if ( prev ) {
 				
@@ -38102,7 +38198,7 @@ APP = ( function ( APP, $, window, document ) {
 					if ( tarIndex < 0 ) tarIndex = itemTotal-1;
 				} else {
 					if ( tarIndex < 0 ) tarIndex = 0;
-					if ( tarIndex == 0 ) obj.find( '.uix-timeline__btn--prev' ).addClass( 'disabled' );
+					if ( tarIndex == 0 ) obj.find( '.uix-timeline__btn--prev' ).addClass( 'is-disabled' );
 					
 					 
 				}
@@ -38113,15 +38209,15 @@ APP = ( function ( APP, $, window, document ) {
 					if ( tarIndex == itemTotal ) tarIndex = 0;
 				} else {
 					if ( tarIndex > itemTotal-1 ) tarIndex = itemTotal-1;
-					if ( tarIndex > itemTotal-2 ) obj.find( '.uix-timeline__btn--next' ).addClass( 'disabled' );
-					if ( tarIndex == 0 ) obj.find( '.uix-timeline__btn--prev' ).addClass( 'disabled' );
+					if ( tarIndex > itemTotal-2 ) obj.find( '.uix-timeline__btn--next' ).addClass( 'is-disabled' );
+					if ( tarIndex == 0 ) obj.find( '.uix-timeline__btn--prev' ).addClass( 'is-disabled' );
 				}
 			}
 
 			
 			
-			tNav.removeClass( 'active' );
-			obj.find( '.uix-timeline__item:eq('+tarIndex+')' ).addClass( 'active' );
+			tNav.removeClass( 'is-active' );
+			obj.find( '.uix-timeline__item:eq('+tarIndex+')' ).addClass( 'is-active' );
 
 			//scroll left
 			var tNavW = 0;
@@ -38363,7 +38459,7 @@ APP = ( function ( APP, $, window, document ) {
 		 ---------------------------
 		 */  
 		$( '.uix-pagination__container li > span.current' ).each( function()  {
-			$( this ).parent( 'li' ).addClass( 'active' );
+			$( this ).parent( 'li' ).addClass( 'is-active' );
 		});
 		
 		

@@ -71,7 +71,7 @@ $modal-box-radius: 8px;
 			animation: fa-spin 2s infinite linear;
 		}
 		
-		&.active {
+		&.is-active {
 			display: block;
 		}
 	}	
@@ -137,20 +137,20 @@ $modal-box-radius: 8px;
 		
 	}
 
-	&.active, 
-	&.is-fullscreen.active {
+	&.is-active, 
+	&.is-fullscreen.is-active {
 	    pointer-events: auto;
 	}
 	
-	&.active {
+	&.is-active {
 	    top: 50vh; /* For compatibility with mobile devices, do not use percentages "%" */
 	}
-	&.is-fullscreen.active {
+	&.is-fullscreen.is-active {
 	    top: 0;
 	}
 	
 	/* Video */
-	&.is-fullscreen.is-video.active {
+	&.is-fullscreen.is-video.is-active {
 	    pointer-events: none;
 		
 		.uix-modal-box__video-container {
@@ -162,12 +162,12 @@ $modal-box-radius: 8px;
 	}
 	
 
-	&.active .uix-modal-box__content img, 
-	&.is-fullscreen.active .uix-modal-box__content img {
+	&.is-active .uix-modal-box__content img, 
+	&.is-fullscreen.is-active .uix-modal-box__content img {
 		opacity: 1;
 	}
 	
-	&.active .uix-modal-box__content {
+	&.is-active .uix-modal-box__content {
 		
 		> div {
 			overflow-y: auto;

@@ -52,7 +52,7 @@
 		padding: 1.3125rem;
 		text-align: left;
 		
-		&.active {
+		&.is-active {
 			display: block;
 		}
 	}
@@ -81,7 +81,7 @@
 					display: block;
 					text-align: center;
 				}
-				&.active {
+				&.is-active {
 					
 
 				}
@@ -203,7 +203,7 @@
 						border-radius: 100%;
 					}
 
-					&.active > a {
+					&.is-active > a {
 						background: $primary-text-color1;
 						color: #fff;
 					}

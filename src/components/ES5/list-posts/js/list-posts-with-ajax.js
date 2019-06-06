@@ -160,11 +160,9 @@ APP = ( function ( APP, $, window, document ) {
 						
 					$( window ).on( 'scroll touchmove', function() {
 						
-					
-						
 						var scrolled = $( window ).scrollTop();
 						
-						if ( scrolled >= parseFloat( $button.offset().top - $( window ).height()/2 - $button.outerHeight( true )*2 ) && !$button.hasClass( triggerActive ) ) {
+						if ( scrolled >= parseFloat( $button.offset().top - $( window ).height()/1.5 - $button.outerHeight( true ) ) && !$button.hasClass( triggerActive ) ) {
 
 								// Active this button
 								$button.addClass( triggerActive );					    

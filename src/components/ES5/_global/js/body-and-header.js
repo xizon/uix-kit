@@ -19,7 +19,6 @@ APP = ( function ( APP, $, window, document ) {
 			windowWidth  = window.innerWidth,
 			windowHeight = window.innerHeight;
 
-		
 		//-------- Header initialize
 		headerInit( windowWidth );
 		
@@ -41,7 +40,7 @@ APP = ( function ( APP, $, window, document ) {
 			var $headerPlaceholder = $( '.uix-header__placeholder.js-uix-header__placeholder-autoheight' );
 			
 			if ( w > 768 ) {
-				$headerPlaceholder.css( 'height', $( '.uix-header__container' ).outerHeight() + 'px' ); 
+				$headerPlaceholder.css( 'height', $( '.uix-header__container' ).outerHeight( true ) + 'px' ); 
 				$( 'body' ).removeClass( 'is-mobile' );
 			} else {
 				$headerPlaceholder.css( 'height', 0 ); 

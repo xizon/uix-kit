@@ -49,7 +49,7 @@ $lb-radius: 3px;
 	transform: rotate(45deg);
 	cursor: pointer;
 	
-	&.active {
+	&.is-active {
 		display: block;
 	}
 
@@ -182,7 +182,7 @@ $lb-radius: 3px;
 							max-width: calc(100% - 6rem);
 						}
 						
-						&.active {
+						&.is-active {
 							width: auto;
 						}
 
@@ -232,7 +232,7 @@ $lb-radius: 3px;
 						transform: scale(.9);
 						@include transition-default();
 						
-						&.active {
+						&.is-active {
 							transform: scale(1);
 						}
 						
@@ -507,7 +507,7 @@ a.uix-lightbox__original__link {
 	z-index: 100001;
     @include transition-default(); 
 	
-	&.active {
+	&.is-active {
 		display: block;
 	}
 
@@ -593,7 +593,7 @@ a.uix-lightbox__original__link {
 	
 	
 	/* To perform the animations upon clicking the .uix-lightbox__original__target anchor */
-	&.active {
+	&.is-active {
 		opacity: 1;
 		top: 0;
 		bottom: 0;

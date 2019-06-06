@@ -37,7 +37,7 @@ APP = ( function ( APP, $, window, document ) {
 		$.each( $sections, function( i ) {
 			$( this ).attr( 'data-index', i );
 			if ( i == 0 ) {
-				$( this ).addClass( 'active' );
+				$( this ).addClass( 'is-active' );
 
 			}
 			
@@ -134,7 +134,7 @@ APP = ( function ( APP, $, window, document ) {
 		 * @return {Void}
 		 */
 		function moveTo( el, dir, hashID ) {
-			var index     = parseFloat( $sections.filter( '.active' ).attr( 'data-index' ) ),
+			var index     = parseFloat( $sections.filter( '.is-active' ).attr( 'data-index' ) ),
 				nextIndex = null,
 				$next     = null,
 				isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
@@ -174,14 +174,14 @@ APP = ( function ( APP, $, window, document ) {
 							$sections.removeClass( 'leave' );
 							$sections.eq( index ).addClass( 'leave' );
 
-							$sections.removeClass( 'active' );
-							$next.addClass( 'active' ).removeClass( 'leave' );
+							$sections.removeClass( 'is-active' );
+							$next.addClass( 'is-active' ).removeClass( 'leave' );
 
 
 
 							//Changing The Site URL
-							var curSectionIndex = $sections.filter( '.active' ).index() + 1,
-								href            = window.location.href.substr( 0, window.location.href.indexOf( '#' ) ) + '#' + $sections.filter( '.active' ).attr( 'id' );
+							var curSectionIndex = $sections.filter( '.is-active' ).index() + 1,
+								href            = window.location.href.substr( 0, window.location.href.indexOf( '#' ) ) + '#' + $sections.filter( '.is-active' ).attr( 'id' );
 
 							// Save state on history stack
 							// - First argument is any object that will let you restore state
@@ -217,8 +217,8 @@ APP = ( function ( APP, $, window, document ) {
         
 	
 		//Activate the first item
-		$primaryMenu.find( 'li:first' ).addClass( 'active' );
-		$sidefixedMenu.find( 'li:first' ).addClass( 'active' );
+		$primaryMenu.find( 'li:first' ).addClass( 'is-active' );
+		$sidefixedMenu.find( 'li:first' ).addClass( 'is-active' );
 		
 		
 		/*
@@ -271,7 +271,7 @@ APP = ( function ( APP, $, window, document ) {
 			menuObj.find( 'li > a' ).on( 'click', function(e) {
 				e.preventDefault();
 				
-				if ( $( this ).parent().hasClass( 'active' ) ) return false;
+				if ( $( this ).parent().hasClass( 'is-active' ) ) return false;
 				
 				
 				moveTo( $sectionsContainer, false, $( this ).parent( 'li' ).index() + 1 );
@@ -300,10 +300,10 @@ APP = ( function ( APP, $, window, document ) {
 				if ( eleTop < spyTop + 1 ) {
 
 					// Highlight element when related content
-					getAllNavigation( $primaryMenu ).removeClass( 'active' );
-					getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
-					getRelatedNavigation( block, $primaryMenu, false ).addClass( 'active' );
-					getRelatedNavigation( block, $sidefixedMenu, false ).addClass( 'active' );
+					getAllNavigation( $primaryMenu ).removeClass( 'is-active' );
+					getAllNavigation( $sidefixedMenu ).removeClass( 'is-active' );
+					getRelatedNavigation( block, $primaryMenu, false ).addClass( 'is-active' );
+					getRelatedNavigation( block, $sidefixedMenu, false ).addClass( 'is-active' );
 					
 					
 				} 
@@ -315,8 +315,8 @@ APP = ( function ( APP, $, window, document ) {
 			// The 1 pixel in order to solve inaccurate value of outerHeight() 
 			// in Safari and Firefox browsers.
 			if ( spyTop > maxTop || spyTop < minTop - 1 ) {
-				getAllNavigation( $primaryMenu ).removeClass( 'active' );
-				getAllNavigation( $sidefixedMenu ).removeClass( 'active' );
+				getAllNavigation( $primaryMenu ).removeClass( 'is-active' );
+				getAllNavigation( $sidefixedMenu ).removeClass( 'is-active' );
 			}
 
 

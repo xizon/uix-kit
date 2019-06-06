@@ -266,7 +266,7 @@ $horizontal-container-width: 1000px;
 			margin-right: -0.3125rem;
 		}
 		
-		&.disabled {
+		&.is-disabled {
 			display: none;
 		}
 	}
@@ -363,7 +363,7 @@ $horizontal-container-width: 1000px;
 				}
 
 
-				&.active {
+				&.is-active {
 
 					.uix-timeline__item--img {
 						opacity: 1;
@@ -450,7 +450,7 @@ $horizontal-container-width: 1000px;
 					}	
 					
 
-					&.active {
+					&.is-active {
 
 						.uix-timeline__item--info {
 							.uix-timeline__item--date {
@@ -609,7 +609,7 @@ $horizontal-container-width: 1000px;
 				}
 
 
-				&.active {
+				&.is-active {
 					.uix-timeline__item--info {
 						opacity: 1;
 					}	

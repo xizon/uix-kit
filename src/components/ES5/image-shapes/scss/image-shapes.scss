@@ -6,7 +6,7 @@
 	opacity: 0;
 	@include transition-default();
 
-	&.active {
+	&.is-active {
 		opacity: 1;
 	}
 	

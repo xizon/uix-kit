@@ -48,6 +48,8 @@
 //	---------------------------
 //  Note: Valid only on certain special modules
 //
+//    .is-active                --> Activate current element.
+//    .is-dragging              --> The element being dragged.
 //    .is-responsive            --> Let the current element use a responsive layout.
 //    .is-horizontal            --> Let the elements be laid out horizontally.
 //    .is-vertical              --> Let the elements be laid out vertically.
@@ -73,7 +75,7 @@
 //    .is-error                 --> Returns a style of error, often used in forms.
 //    .is-hide-IE               --> Hide this element in old IE (10-). Only IE is valid.
 //    .is-hide                  --> Hide this element.
-//    
+//    .is-disabled              --> Disable this element.
 
 
 

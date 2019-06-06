@@ -74,7 +74,7 @@
 			padding: 0;
 			transform: scale(.9);
 
-			&.active {
+			&.is-active {
 				transform: scale(1);
 			}
 
@@ -178,7 +178,7 @@ ul.uix-flexslider__direction-nav {
 	margin: 0;
 	padding: 0;
 	list-style: none;
-	background: #f00;
+	background: none;
 	
 	li {
 		margin: 0;
@@ -489,7 +489,7 @@ ol.uix-flexslider__control-paging {
 	}
 	
 	.uix-flexslider__mycontrols--thumb__prev {
-		&.disabled {
+		&.is-disabled {
 			display: none;
 		}
 		
@@ -498,7 +498,7 @@ ol.uix-flexslider__control-paging {
 		
 		text-align: right;
 		
-		&.disabled {
+		&.is-disabled {
 			display: none;
 		}	
 		

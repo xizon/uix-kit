@@ -87,8 +87,8 @@ APP = ( function ( APP, $, window, document ) {
 				//The mask prevent click and hover
 				$( teamFocusMask ).show();
 				
-				$( el ).removeClass( 'active' );
-				$cur.addClass( 'active' );
+				$( el ).removeClass( 'is-active' );
+				$cur.addClass( 'is-active' );
 				
 				
 				

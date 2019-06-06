@@ -2,7 +2,7 @@
   "author": "UIUX Lab",
   "name": "uix-kit",
   "email": "uiuxlab@gmail.com",
-  "version": "3.5.0",
+  "version": "3.5.6",
   "projectName": "Uix Kit",
   "createdInfo": "UIUX Lab (https://uiux.cc)",
   "projectURL": "https://uiux.cc",
@@ -15,8 +15,8 @@
     "watch": "webpack --watch",
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
-    "prettier": "prettier \"./dist/uix-kit.css\"",
-    "prettier-rtl": "prettier \"./dist/uix-kit-rtl.css\""
+    "prettier": "prettier \"./dist/css/uix-kit.css\"",
+    "prettier-rtl": "prettier \"./dist/css/uix-kit-rtl.css\""
   },
   "repository": {
     "type": "git",
@@ -39,6 +39,7 @@
   "homepage": "https://github.com/xizon/uix-kit",
   "devDependencies": {
     "@babel/core": "^7.2.0",
+    "@babel/plugin-proposal-class-properties": "^7.2.3",
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.2.0",
     "@babel/preset-flow": "^7.0.0",
@@ -48,17 +49,22 @@
     "@node-minify/uglify-js": "^4.0.2",
     "babel-loader": "^8.0.4",
     "clean-webpack-plugin": "^1.0.0",
+    "css-loader": "^2.0.1",
     "html-loader": "^0.5.5",
     "include-file-webpack-plugin": "^1.0.3",
     "json-loader": "^0.5.7",
     "log-timestamp": "^0.2.1",
+    "mini-css-extract-plugin": "^0.5.0",
     "moment": "^2.23.0",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.12.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "prettier": "^1.15.3",
     "prettier-loader": "^2.1.1",
     "random-string": "^0.2.0",
-    "replace-in-file-webpack-plugin": "^1.0.6",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
     "tar": "^4.4.8",
     "uglifyjs-webpack-plugin": "^2.0.1",
     "webpack": "^4.27.0",
@@ -67,12 +73,7 @@
     "webpack-dev-middleware": "^3.4.0",
     "webpack-dev-server": "^3.1.14"
   },
-  "dependencies": {
-    "css-loader": "^2.0.1",
-    "mini-css-extract-plugin": "^0.5.0",
-    "sass-loader": "^7.1.0",
-    "style-loader": "^0.23.1"
-  },
+  "dependencies": {},
   "prettier": {
     "printWidth": 120,
     "tabWidth": 4,

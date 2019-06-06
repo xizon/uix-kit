@@ -168,11 +168,11 @@ APP = ( function ( APP, $, window, document ) {
 					index = parseFloat( $( this ).index() - 1 );
 				
 				
-				$this.find( '.uix-tabs__nav ul > li' ).removeClass( 'active' );
-				$this.find( '.uix-tabs__content' ).removeClass( 'active' );
+				$this.find( '.uix-tabs__nav ul > li' ).removeClass( 'is-active' );
+				$this.find( '.uix-tabs__content' ).removeClass( 'is-active' );
 		
-				$( this ).addClass( 'active' );
-				$( '#' + tabID ).addClass( 'active' );
+				$( this ).addClass( 'is-active' );
+				$( '#' + tabID ).addClass( 'is-active' );
 				
 
 				//sliding marker
@@ -198,7 +198,7 @@ APP = ( function ( APP, $, window, document ) {
 			});
 			
 			// Init
-			$this.find( '.uix-tabs__nav ul > li.active' ).trigger( 'click' );
+			$this.find( '.uix-tabs__nav ul > li.is-active' ).trigger( 'click' );
 			
 			//Active current tab
 			var url    = window.location.href,

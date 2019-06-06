@@ -28,9 +28,9 @@ APP = ( function ( APP, $, window, document ) {
 					//Hide other all sibling <ul> of the selected element
 					var $e = $( this ).parent( 'li' ).siblings().find( '> a' );
 					
-					$e.removeClass( 'active' ).attr( 'aria-expanded', false );
+					$e.removeClass( 'is-active' ).attr( 'aria-expanded', false );
 
-					$( this ).addClass( 'active' ).attr( 'aria-expanded', true );
+					$( this ).addClass( 'is-active' ).attr( 'aria-expanded', true );
 					
 					
 					TweenMax.to( $e.next( 'ul' ), 0.5, { height: 0 } );
@@ -46,7 +46,7 @@ APP = ( function ( APP, $, window, document ) {
 					
 				} else {
 					
-					$( this ).removeClass( 'active' ).attr( 'aria-expanded', false );
+					$( this ).removeClass( 'is-active' ).attr( 'aria-expanded', false );
 					
 					//to close
 					TweenMax.to( $sub, 0.5, { height: 0 } );

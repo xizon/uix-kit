@@ -68,7 +68,7 @@ APP = ( function ( APP, $, window, document ) {
 				$items.addClass( 'next' );
 				
 				setTimeout( function() {
-					$first.addClass( 'active' );
+					$first.addClass( 'is-active' );
 				}, animDelay );
 				
 
@@ -177,7 +177,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			slider[0].animatedSlides = setInterval( function() {
 
-				playTimes = parseFloat( items.filter( '.active' ).index() );
+				playTimes = parseFloat( items.filter( '.is-active' ).index() );
 				playTimes++;
 				
 			
@@ -256,7 +256,7 @@ APP = ( function ( APP, $, window, document ) {
 			_dot += '<ul>';
 			for ( var i = 0; i < itemsTotal; i++ ) {
 
-				_dotActive = ( i == 0 ) ? 'class="active"' : '';
+				_dotActive = ( i == 0 ) ? 'class="is-active"' : '';
 
 				_dot += '<li><a '+_dotActive+' data-index="'+i+'" href="javascript:"></a></li>';
 			}
@@ -267,12 +267,12 @@ APP = ( function ( APP, $, window, document ) {
 			$( dataControlsPagination ).find( 'li a' ).on( 'click', function( e ) {
 				e.preventDefault();
 
-				if ( !$( this ).hasClass( 'active' ) ) {
+				if ( !$( this ).hasClass( 'is-active' ) ) {
 					
 
 					//Determine the direction
 					var curDir = 'prev';
-					if ( $( this ).attr( 'data-index' ) > parseFloat( $items.filter( '.active' ).index() ) ) {
+					if ( $( this ).attr( 'data-index' ) > parseFloat( $items.filter( '.is-active' ).index() ) ) {
 						curDir = 'next';
 					}
 					
@@ -294,16 +294,16 @@ APP = ( function ( APP, $, window, document ) {
 
 			$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
 
-			$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
+			$( dataControlsArrows ).find( 'a' ).removeClass( 'is-disabled' );
 			if ( !dataLoop ) {
-				_prev.addClass( 'disabled' );
+				_prev.addClass( 'is-disabled' );
 			}
 
 
 			_prev.on( 'click', function( e ) {
 				e.preventDefault();
 
-				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, 'prev' );
+				sliderUpdates( parseFloat( $items.filter( '.is-active' ).index() ) - 1, $this, 'prev' );
 
 				//Pause the auto play event
 				clearInterval( $this[0].animatedSlides );
@@ -313,7 +313,7 @@ APP = ( function ( APP, $, window, document ) {
 			_next.on( 'click', function( e ) {
 				e.preventDefault();
 
-				sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, 'next' );
+				sliderUpdates( parseFloat( $items.filter( '.is-active' ).index() ) + 1, $this, 'next' );
 
 
 				//Pause the auto play event
@@ -340,7 +340,7 @@ APP = ( function ( APP, $, window, document ) {
 
 				var touches = e.originalEvent.touches;
 
-				$( this ).addClass( 'dragging' );
+				$( this ).addClass( 'is-dragging' );
 
 
 				if ( touches && touches.length ) {	
@@ -360,7 +360,7 @@ APP = ( function ( APP, $, window, document ) {
 				$dragDropTrigger.on( 'mouseup.ADVANCED_SLIDER touchmove.ADVANCED_SLIDER', function( e ) {
 					
 
-					$( this ).removeClass( 'dragging' );
+					$( this ).removeClass( 'is-dragging' );
 					var touches        = e.originalEvent.touches,
 						origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
 						origin_mouse_y = $( this ).data( 'origin_mouse_y' );
@@ -372,12 +372,12 @@ APP = ( function ( APP, $, window, document ) {
 
 						//--- left
 						if ( deltaX >= 50) {
-							if ( $items.filter( '.active' ).index() < itemsTotal - 1 ) _next.trigger( 'click' );
+							if ( $items.filter( '.is-active' ).index() < itemsTotal - 1 ) _next.trigger( 'click' );
 						}
 						
 						//--- right
 						if ( deltaX <= -50) {
-							if ( $items.filter( '.active' ).index() > 0 ) _prev.trigger( 'click' );
+							if ( $items.filter( '.is-active' ).index() > 0 ) _prev.trigger( 'click' );
 						}
 						
 						//--- up
@@ -404,12 +404,12 @@ APP = ( function ( APP, $, window, document ) {
 						if ( dataDraggable ) {
 							//right
 							if ( e.pageX > origin_mouse_x ) {				
-								if ( $items.filter( '.active' ).index() > 0 ) _prev.trigger( 'click' );
+								if ( $items.filter( '.is-active' ).index() > 0 ) _prev.trigger( 'click' );
 							}
 
 							//left
 							if ( e.pageX < origin_mouse_x ) {
-								if ( $items.filter( '.active' ).index() < itemsTotal - 1 ) _next.trigger( 'click' );
+								if ( $items.filter( '.is-active' ).index() < itemsTotal - 1 ) _next.trigger( 'click' );
 							}
 
 							//down
@@ -486,9 +486,9 @@ APP = ( function ( APP, $, window, document ) {
 				if ( elementIndex == total ) elementIndex = 0;
 				if ( elementIndex < 0 ) elementIndex = total-1;	
 			} else {
-				$( dataControlsArrows ).find( 'a' ).removeClass( 'disabled' );
-				if ( elementIndex == total - 1 ) $( dataControlsArrows ).find( '.uix-advanced-slider__arrows--next' ).addClass( 'disabled' );
-				if ( elementIndex == 0 ) $( dataControlsArrows ).find( '.uix-advanced-slider__arrows--prev' ).addClass( 'disabled' );
+				$( dataControlsArrows ).find( 'a' ).removeClass( 'is-disabled' );
+				if ( elementIndex == total - 1 ) $( dataControlsArrows ).find( '.uix-advanced-slider__arrows--next' ).addClass( 'is-disabled' );
+				if ( elementIndex == 0 ) $( dataControlsArrows ).find( '.uix-advanced-slider__arrows--prev' ).addClass( 'is-disabled' );
 			}
 
 			// To determine if it is a touch screen.
@@ -500,12 +500,12 @@ APP = ( function ( APP, $, window, document ) {
 				if ( !dataLoop ) {
 					//first item
 					if ( elementIndex == 0 ) {
-						$( dataControlsArrows ).find( '.uix-advanced-slider__arrows--prev' ).addClass( 'disabled' );
+						$( dataControlsArrows ).find( '.uix-advanced-slider__arrows--prev' ).addClass( 'is-disabled' );
 					}
 
 					//last item
 					if ( elementIndex == total - 1 ) {
-						$( dataControlsArrows ).find( '.uix-advanced-slider__arrows--next' ).addClass( 'disabled' );
+						$( dataControlsArrows ).find( '.uix-advanced-slider__arrows--next' ).addClass( 'is-disabled' );
 					}	
 				}
 
@@ -522,14 +522,14 @@ APP = ( function ( APP, $, window, document ) {
 			
 			//Add transition class to Controls Pagination
 			$( dataControlsPagination ).find( 'li a' ).removeClass( 'leave' );
-			$( dataControlsPagination ).find( 'li a.active' ).removeClass( 'active' ).addClass( 'leave');
-			$( dataControlsPagination ).find( 'li a[data-index="'+elementIndex+'"]' ).addClass( 'active').removeClass( 'leave' );
+			$( dataControlsPagination ).find( 'li a.is-active' ).removeClass( 'is-active' ).addClass( 'leave');
+			$( dataControlsPagination ).find( 'li a[data-index="'+elementIndex+'"]' ).addClass( 'is-active').removeClass( 'leave' );
 			
 			//Add transition class to each item
 			$items.removeClass( 'leave prev next' );
 			$items.addClass( dirIndicatorClass );
-			slider.find( '.uix-advanced-slider__item.active' ).removeClass( 'active' ).addClass( 'leave ' + dirIndicatorClass );
-			$items.eq( elementIndex ).addClass( 'active ' + dirIndicatorClass ).removeClass( 'leave' );
+			slider.find( '.uix-advanced-slider__item.is-active' ).removeClass( 'is-active' ).addClass( 'leave ' + dirIndicatorClass );
+			$items.eq( elementIndex ).addClass( 'is-active ' + dirIndicatorClass ).removeClass( 'leave' );
 
 			
 			

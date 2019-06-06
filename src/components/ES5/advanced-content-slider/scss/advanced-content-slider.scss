@@ -94,7 +94,7 @@
 				box-shadow: 0px 6px 23px -2px rgba(0, 0, 0, 0.36);
 
 				&:hover, 
-				&.active {
+				&.is-active {
 					background: rgba(0, 0, 0, 1);
 					width: 25px;
 				}
@@ -132,7 +132,7 @@
 				padding: .2rem 1rem;
 
 				&:hover, 
-				&.active {
+				&.is-active {
 					background: rgba(0, 0, 0, 1);
 				}
 			}	
@@ -162,7 +162,7 @@
 	.uix-advanced-content-slider__arrows--prev {
 		left: 15px;
 		
-		&.disabled {
+		&.is-disabled {
 			display: none;
 			
 		}
@@ -172,7 +172,7 @@
 		right: 15px;
 		text-align: right;
 		
-		&.disabled {
+		&.is-disabled {
 			display: none;
 		}	
 		

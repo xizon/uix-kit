@@ -57,7 +57,7 @@
 				
 			}
 
-			&.active,
+			&.is-active,
 			/* compatible with WordPress */
 			&.current-cat {
 
@@ -106,7 +106,7 @@
 
 				}
 
-				&.active,
+				&.is-active,
 				/* compatible with WordPress */
 				&.current-cat {
 					box-shadow: 0px 3px 0px 0px $highlight-color1;
@@ -155,7 +155,7 @@
 
 				}
 
-				&.active,
+				&.is-active,
 				/* compatible with WordPress */
 				&.current-cat {
 					

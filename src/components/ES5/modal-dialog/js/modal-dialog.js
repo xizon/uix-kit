@@ -78,7 +78,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			//btn
 			if ( $( this ).hasClass( 'uix-modal-box__close' ) ) {
-				$( this ).parent().removeClass( 'active' );
+				$( this ).parent().removeClass( 'is-active' );
 			}
 			
 			$( document ).UixCloseModalDialog();
@@ -203,7 +203,7 @@ APP = ( function ( APP, $, window, document ) {
 	
 					}
 
-					$obj.addClass( 'active' );
+					$obj.addClass( 'is-active' );
 					
 					
 					//auto close
@@ -260,7 +260,7 @@ APP = ( function ( APP, $, window, document ) {
 			//Enable mask to close the window.
 			$( '.uix-modal-mask' ).removeClass( 'js-uix-disabled' );
 			
-			$( settings.target ).removeClass( 'active' );
+			$( settings.target ).removeClass( 'is-active' );
 			TweenMax.to( '.uix-modal-mask', 0.3, {
 				css: {
 					opacity : 0,

@@ -20,7 +20,7 @@ APP = ( function ( APP, $, window, document ) {
 		//-------- Menu selected (if it exists "data-current" property in <ul>)
 		var curMenuIndex = $( ulForDesktop ).data( 'current' );
 		if ( typeof curMenuIndex !== typeof undefined ) {
-			$( ulForDesktop + ' > li:eq('+curMenuIndex+')' ).addClass( 'active' );
+			$( ulForDesktop + ' > li:eq('+curMenuIndex+')' ).addClass( 'is-active' );
 		}
 
 

@@ -79,7 +79,7 @@ APP = ( function ( APP, $, window, document ) {
 
 				//Initialize the width of each item
 				//-------------------------------------		
-				$first.addClass( 'active' );
+				$first.addClass( 'is-active' );
 				
 				$items.css( 'width', itemWidth + 'px' );
 				
@@ -100,7 +100,7 @@ APP = ( function ( APP, $, window, document ) {
 					_dot += '<ul class="uix-advanced-content-slider__pagination--default">';
 					for ( var i = 0; i < itemsTotal; i++ ) {
 
-						_dotActive = ( i == 0 ) ? 'class="active"' : '';
+						_dotActive = ( i == 0 ) ? 'class="is-active"' : '';
 
 						_dot += '<li><a '+_dotActive+' data-index="'+i+'" href="javascript:"></a></li>';
 					}
@@ -108,15 +108,15 @@ APP = ( function ( APP, $, window, document ) {
 
 					if ( $( dataControlsPagination ).html() == '' ) $( dataControlsPagination ).html( _dot );	
 				} else {
-					$( dataControlsPagination ).find( 'li' ).first().find( 'a' ).addClass( 'active' );
-					$( dataControlsPagination ).find( 'li' ).first().addClass( 'active' );
+					$( dataControlsPagination ).find( 'li' ).first().find( 'a' ).addClass( 'is-active' );
+					$( dataControlsPagination ).find( 'li' ).first().addClass( 'is-active' );
 				}
 
 
 				$( dataControlsPagination ).find( 'li a' ).on( 'click', function( e ) {
 					e.preventDefault();
 
-					if ( !$( this ).hasClass( 'active' ) ) {
+					if ( !$( this ).hasClass( 'is-active' ) ) {
 						
 						sliderUpdates( $( this ).attr( 'data-index' ), $this, dataControlsArrows, dataControlsPagination );
 						
@@ -141,12 +141,12 @@ APP = ( function ( APP, $, window, document ) {
 
 				$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
 				
-				_prev.addClass( 'disabled' );
+				_prev.addClass( 'is-disabled' );
 
 				_prev.on( 'click', function( e ) {
 					e.preventDefault();
 
-					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
+					sliderUpdates( parseFloat( $items.filter( '.is-active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
 					
 					//Pause the auto play event
 					clearInterval( $this[0].animatedSlides );	
@@ -157,7 +157,7 @@ APP = ( function ( APP, $, window, document ) {
 				_next.on( 'click', function( e ) {
 					e.preventDefault();
 
-					sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
+					sliderUpdates( parseFloat( $items.filter( '.is-active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
 					
 					//Pause the auto play event
 					clearInterval( $this[0].animatedSlides );	
@@ -199,13 +199,13 @@ APP = ( function ( APP, $, window, document ) {
 					//You know the pan has ended
 					//and you know which action they were taking
 					if ( direction == 'panleft' ) {
-						sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
+						sliderUpdates( parseFloat( $items.filter( '.is-active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );
 						//Pause the auto play event
 				    	clearInterval( $this[0].animatedSlides );	
 					}
 					
 					if ( direction == 'panright' ) {
-						sliderUpdates( parseFloat( $items.filter( '.active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
+						sliderUpdates( parseFloat( $items.filter( '.is-active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
 						//Pause the auto play event
 				    	clearInterval( $this[0].animatedSlides );	
 					}			
@@ -266,7 +266,7 @@ APP = ( function ( APP, $, window, document ) {
 			
 			slider[0].animatedSlides = setInterval( function() {
 
-				playTimes = parseFloat( items.filter( '.active' ).index() );
+				playTimes = parseFloat( items.filter( '.is-active' ).index() );
 				playTimes++;
 
 
@@ -329,25 +329,25 @@ APP = ( function ( APP, $, window, document ) {
 				if ( elementIndex > parseFloat( itemsTotal - 1 ) ) elementIndex = parseFloat( itemsTotal - 1 );
 				if ( elementIndex < 0 ) elementIndex = 0;
 				
-				$next.removeClass( 'disabled' );
-				$prev.removeClass( 'disabled' );
-				$pagination.removeClass( 'active' );
-				$pagination.parent().removeClass( 'active' );
+				$next.removeClass( 'is-disabled' );
+				$prev.removeClass( 'is-disabled' );
+				$pagination.removeClass( 'is-active' );
+				$pagination.parent().removeClass( 'is-active' );
 
 				if ( elementIndex == itemsTotal - 1 ) {
-					$next.addClass( 'disabled' );
+					$next.addClass( 'is-disabled' );
 				}
 
 				if ( elementIndex == 0 ) {
-					$prev.addClass( 'disabled' );
+					$prev.addClass( 'is-disabled' );
 				}
 
 				
 
-				$items.removeClass( 'active' );
-				$items.eq( elementIndex ).addClass( 'active' );	
-				$pagination.eq( elementIndex ).addClass( 'active' );
-				$pagination.eq( elementIndex ).parent().addClass( 'active' );
+				$items.removeClass( 'is-active' );
+				$items.eq( elementIndex ).addClass( 'is-active' );	
+				$pagination.eq( elementIndex ).addClass( 'is-active' );
+				$pagination.eq( elementIndex ).parent().addClass( 'is-active' );
 				
 				
 				

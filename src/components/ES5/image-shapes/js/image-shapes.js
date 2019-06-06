@@ -85,7 +85,7 @@ APP = ( function ( APP, $, window, document ) {
 					svgOut += '</svg>';	
 
 
-					$this.addClass( 'active' ).html( svgOut );		
+					$this.addClass( 'is-active' ).html( svgOut );		
 				};
 				
 				

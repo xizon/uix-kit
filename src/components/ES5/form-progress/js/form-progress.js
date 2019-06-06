@@ -58,7 +58,7 @@ APP = ( function ( APP, $, window, document ) {
 		
 		//Display the target
 		setTimeout( function() {
-			$formTarget.addClass( 'active' );
+			$formTarget.addClass( 'is-active' );
 		}, parseFloat( dur ) * 1000 );
 		
 
@@ -224,9 +224,9 @@ APP = ( function ( APP, $, window, document ) {
 			if ( currentFormIndex > 0 ) {
 				for ( var i = 0; i < curIndex; i++ ) {
 					$sections.eq( i ).addClass( 'leaving' );
-					$indicator.eq( i ).addClass( 'active' );
+					$indicator.eq( i ).addClass( 'is-active' );
 				}
-				$indicator.eq( curIndex ).addClass( 'active' );
+				$indicator.eq( curIndex ).addClass( 'is-active' );
 				
 			}
 
@@ -235,7 +235,7 @@ APP = ( function ( APP, $, window, document ) {
 			// Hide current form fields
 			$sections.eq( tarIndex ).addClass( 'leaving' );
 			setTimeout(function() {
-				$indicator.eq( currentFormIndex ).addClass( 'active' );
+				$indicator.eq( currentFormIndex ).addClass( 'is-active' );
 			}, animeSpeed );
 
 
@@ -245,8 +245,8 @@ APP = ( function ( APP, $, window, document ) {
 			});
 			
 			// Active next form fields
-			$sections.removeClass( 'active' );
-			$sections.eq( currentFormIndex ).addClass( 'active' );
+			$sections.removeClass( 'is-active' );
+			$sections.eq( currentFormIndex ).addClass( 'is-active' );
 
 			// Increment value (based on 4 steps 0 - 100)
 			value += stepPerValue;
@@ -263,7 +263,7 @@ APP = ( function ( APP, $, window, document ) {
 
 
 				//so something
-				$indicator.removeClass( 'active' );
+				$indicator.removeClass( 'is-active' );
 				$indicator.each( function( index )  {
 					$( this ).css( 'left', index*stepPerValue + '%' );
 					$formTarget.find( '.uix-form-progress__target__step:eq('+index+')' ).attr( 'data-step', index+1 );
@@ -304,7 +304,7 @@ APP = ( function ( APP, $, window, document ) {
 											   .last()
 											   .removeClass( 'coming waiting leaving' );
 			} else {
-				$( '.uix-form-progress' ).find( '.uix-form-progress__indicator.active' ).next( '.uix-form-progress__indicator' ).addClass( 'active' );
+				$( '.uix-form-progress' ).find( '.uix-form-progress__indicator.is-active' ).next( '.uix-form-progress__indicator' ).addClass( 'is-active' );
 			}
 
 			// Set progress bar value

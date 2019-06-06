@@ -5,7 +5,7 @@
   <p align="center">Make over <strong>120+</strong> components to wear again and again!</p>
   <p align="center">
       <a href="https://travis-ci.org/xizon/uix-kit/" title="Travis CI"><img src="https://api.travis-ci.org/xizon/uix-kit.svg?branch=master"/></a>
-	  <a href="https://www.npmjs.com/package/uix-kit" title="npm version"><img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=3.5.0&x2=0"/></a>
+	  <a href="https://www.npmjs.com/package/uix-kit" title="npm version"><img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=3.5.6&x2=0"/></a>
 	  <a href="https://github.com/xizon/uix-kit/blob/master/LICENSE" title="license"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg"/></a>
 	   
   </p>
@@ -24,7 +24,9 @@ A free web kits for fast web design and development. Uix Kit can be used separat
 
 [https://xizon.github.io/uix-kit/examples/](https://xizon.github.io/uix-kit/examples/)
 
-[Official](https://uiux.cc/uix-kit)
+GitHub pages can only serve static content, and there is no way to run PHP or get Ajax request on the pages. You need to visit the link below to see some special demos &#128071;
+
+[https://uiux.cc/uix-kit](https://uiux.cc/uix-kit) 
 
 
 
@@ -55,7 +57,10 @@ A free web kits for fast web design and development. Uix Kit can be used separat
 ## Key Features
 
 
-Uix Kit can be used separately, or merge components and grid systems using bootstrap. Regardless of the screen size, the website content will naturally fit the given resolution. Using the Uix Kit will save you large amount of time to build your projects. It supports 3D and 2D rendering with three.js and pixi.js. More typically, automatically generate core files with Webpack for each module (contains .js, .scss, .html files).
+Uix Kit isn't a reusable component structure, mostly custom CSS and JavaScript based. Definitely interesting, and if you're developing mostly web content and not applications this is particularly useful. 
+
+It can be used separately, or merge components and grid systems using bootstrap. Regardless of the screen size, the website content will naturally fit the given resolution. Using the Uix Kit will save you large amount of time to build your projects. It supports 3D and 2D rendering with three.js and pixi.js. More typically, automatically generate core files with Webpack for each module (contains .js, .scss, .html files).
+
 
 * Supports 3D and 2D rendering with three.js and pixi.js.
 * Using Sass to Control Scope With BEM Naming
@@ -102,7 +107,7 @@ $ cd /{your_directory}/uix-kit
 **Step 3.** Before doing all dev stuff make sure you have `Node 10+` installed. After that, run the following code in the main directory to install the node module dependencies.
 
 ```sh
-$ sudo npm install --save-dev  --unsafe-perm node-sass
+$ sudo npm install --only=dev --unsafe-perm --production
 ```
 
 
@@ -121,10 +126,28 @@ http://localhost:8080/examples/
 
 ### Note:
  
-**ERROR: npm update check failed.**
+**a) ERROR: npm update check failed.**
 
 ```sh
 $ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
+```
+
+**b) Site Info Configuration**
+
+You can update the Placeholders in Templates by modifying the Site Info configuration of `package.json`. Like this:
+
+```json
+{
+  "author": "UIUX Lab",
+  "name": "uix-kit",
+  "email": "uiuxlab@gmail.com",
+  "version": "1.0.0",
+  "projectName": "Uix Kit",
+  "createdInfo": "UIUX Lab (https://uiux.cc)",
+  "projectURL": "https://uiux.cc",
+  "description": "A free web kits for fast web design and development, compatible with Bootstrap v4.",
+  ...
+}
 ```
 
 
@@ -137,104 +160,81 @@ $ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
 ### 1\. HTML Structure
 
 ```html
-
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US">
-	<head>
-		<meta charset="utf-8" />
-		<title></title>	
-        
-		<!-- Mobile Settings
-		============================================= -->
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-        <!-- Mobile Settings end -->
-		
-		
-		<!-- Vendor
-		============================================= -->
-		<script src="assets/js/wp-jquery/jquery.min.js?ver=3.3.1"></script>
-		<script src="assets/js/wp-jquery/jquery.migrate.min.js?ver=1.4.1"></script>
-        <!-- Vendor  end -->
-
-		
-		
-		<!-- Compatibility
-		============================================= -->
-		<script src="assets/js/min/modernizr.min.js?ver=3.5.0"></script>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <!-- Compatibility  end -->
-
-		
-		<!-- Core & Theme CSS
-		============================================= -->
-        
-        <!-- Basic  -->
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css?ver=4.2.1" media="all"/>
-		<link rel="stylesheet" href="assets/css/video.min.css?ver=7.4.1" media="all"/>
-		
-        <!-- Icons  -->
-		<link rel="stylesheet" href="assets/fonts/fontawesome/css/all.min.css?ver=5.7.0">
-		<link rel="stylesheet" href="assets/fonts/fontawesome/css/v4-shims.min.css?ver=5.7.0">
-        
-        <!-- Theme  -->
-        <link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=1.0.0" media="all"/>
-        
-     
-         <!--[if lt IE 10]>
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+	<!-- Mobile Settings
+	============================================= -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<!-- Mobile Settings end -->
+	
+	<!-- Vendor
+	============================================= -->
+	<script src="assets/js/wp-jquery/jquery.min.js?ver=3.3.1"></script>
+	<script src="assets/js/wp-jquery/jquery.migrate.min.js?ver=1.4.1"></script>
+	<!-- Vendor  end -->
+	
+	<!-- Compatibility
+	============================================= -->
+	<script src="assets/js/min/modernizr.min.js?ver=3.5.0"></script>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!-- Compatibility  end -->
+	
+	<!-- Core & Theme CSS
+	============================================= -->
+	<!-- Basic  -->
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css?ver=4.2.1" media="all" />
+	<link rel="stylesheet" href="assets/css/video.min.css?ver=7.4.1" media="all" />
+	<!-- Icons  -->
+	<link rel="stylesheet" href="assets/fonts/fontawesome/css/all.min.css?ver=5.7.0">
+	<link rel="stylesheet" href="assets/fonts/fontawesome/css/v4-shims.min.css?ver=5.7.0">
+	<!-- Theme  -->
+	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=1.0.0" media="all" />
+	<!--[if lt IE 10]>
            <link rel="stylesheet" href="assets/css/IE.css?ver=1.0.0" media="all" />
         <![endif]-->
-        
-        
-        <!-- Core & Theme CSS  end -->
-		
-		<!-- Break free from CSS prefix hell!
-		============================================= -->
-		 <script src="assets/js/min/prefixfree.min.js?ver=1.0.7"></script>
-        
-        
-     
-  </head>     
-  <body>
-  
-  
-          
-    ...
-
-  
-
-    <!-- Vendor -->
-	<script src="assets/js/min/jquery.easing.min.js?ver=1.3"></script>
-    <script src="assets/js/min/jquery.waitforimages.min.js?ver=1.0"></script>
-    <script src="assets/js/min/video.min.js?ver=7.4.1"></script> 
-	<script src="assets/js/min/jquery.waypoints.min.js?ver=4.0.1"></script> 
-    <script src="assets/js/min/template7.min.js?ver=1.2.5"></script>
-    <script src="assets/js/min/TweenMax.min.js?ver=2.0.2"></script>
-    <script src="assets/js/min/pixi.min.js?ver=4.8.4"></script>
-    <script src="assets/js/min/three.min.js?ver=r99"></script>
-    <script src="assets/js/min/anime.min.js?ver=2.2.0"></script>
-    <script src="assets/js/min/hammer.min.js?ver=2.0.8"></script>
-    <script src="assets/js/min/muuri.min.js?ver=0.7.1"></script>
-    
-    
+	<!-- Core & Theme CSS  end -->
 	
+	<!-- Break free from CSS prefix hell!
+	============================================= -->
+	<script src="assets/js/min/prefixfree.min.js?ver=1.0.7"></script>
+</head>
+
+<body> 
+	
+	{your_html_codes_here}
+	
+	
+	<!-- Vendor -->
+	<script src="assets/js/min/jquery.easing.min.js?ver=1.3"></script>
+	<script src="assets/js/min/jquery.waitforimages.min.js?ver=1.0"></script>
+	<script src="assets/js/min/video.min.js?ver=7.4.1"></script>
+	<script src="assets/js/min/jquery.waypoints.min.js?ver=4.0.1"></script>
+	<script src="assets/js/min/template7.min.js?ver=1.2.5"></script>
+	<script src="assets/js/min/TweenMax.min.js?ver=2.0.2"></script>
+	<script src="assets/js/min/pixi.min.js?ver=4.8.4"></script>
+	<script src="assets/js/min/three.min.js?ver=r99"></script>
+	<script src="assets/js/min/anime.min.js?ver=2.2.0"></script>
+	<script src="assets/js/min/hammer.min.js?ver=2.0.8"></script>
+	<script src="assets/js/min/muuri.min.js?ver=0.7.1"></script>
+
 	<!-- Your Plugins & Theme Scripts
 	============================================= -->
-
 	<script>
-		var REVISION     = "1.0.0",
-			APP_ROOTPATH = {
-				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
-				"homeUrl"     : "",  //Eg. https://uiux.cc
-				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
-			};
-    </script>  
-    <script src="../dist/js/uix-kit.min.js?ver=1.0.0"></script>
+	var REVISION = "1.0.0",
+	APP_ROOTPATH = {
+		"templateUrl": "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
+		"homeUrl": "", //Eg. https://uiux.cc
+	"ajaxUrl": "" //Eg. https://uiux.cc/wp-admin/admin-ajax.php
+	};
+	</script>
+	<script src="../dist/js/uix-kit.min.js?ver=1.0.0"></script>
+	
+</body>
 
-
-  </body>
 </html>
-
-
 
 ```
 
