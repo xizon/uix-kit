@@ -24,7 +24,9 @@ A free web kits for fast web design and development. Uix Kit can be used separat
 
 [https://xizon.github.io/uix-kit/examples/](https://xizon.github.io/uix-kit/examples/)
 
-[Official](https://uiux.cc/uix-kit)
+GitHub pages can only serve static content, and there is no way to run PHP or get Ajax request on the pages. You need to visit the link below to see some special demos &#128071;
+
+[https://uiux.cc/uix-kit](https://uiux.cc/uix-kit) 
 
 
 
