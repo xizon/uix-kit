@@ -227,6 +227,14 @@ const webpackConfig = {
     resolve: {
         extensions: ['.js', '.es6', '.vue', '.jsx' ]
     },
+	
+	//Exclude react from bundle
+//    externals: {
+//      'react': 'React',
+//		'react-dom': 'ReactDOM',
+//	    'jquery': 'jQuery',
+//    },
+	
 	entry: {
 		'uix-kit': './'+globs.build+'/index.js',
 		'uix-kit.min': './'+globs.build+'/index.js',
