@@ -9,7 +9,7 @@
  * APP
  * @global
  *
- * //Used for all modules from ./src/components/ES5/[__]/js
+ * //Used for all modules from ./src/components/ES6/[__]/js
  * @requires ./examples/assets/js/min/jquery.waitforimages.min.js
  * @requires ./examples/assets/js/min/video.min.js
  * @requires ./examples/assets/js/min/jquery.waypoints.min.js
