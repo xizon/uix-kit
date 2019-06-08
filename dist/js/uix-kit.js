@@ -4,7 +4,7 @@
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Version             :  3.5.7
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  June 6, 2019
+ * ## Last Update         :  June 8, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -146,28 +146,120 @@ var UIX_KIT_IMPORT = {
   "./src/components/ES5/_main/js/main.js", "./src/components/ES5/accordion-img/js/accordion-img.js", "./src/components/ES5/accordion/js/accordion.js", "./src/components/ES5/advanced-content-slider/js/advanced-content-slider.js", "./src/components/ES5/advanced-slider/js/advanced-slider-basic.js", "./src/components/ES5/advanced-slider/js/advanced-slider-SpecialEffects.js", "./src/components/ES5/AJAX-push/js/ajax-push-content.js", "./src/components/ES5/AJAX/js/ajax-page-loader.js", "./src/components/ES5/back-to-top/js/back-to-top.js", "./src/components/ES5/circle-layout/js/circle-layout.js", "./src/components/ES5/counter/js/counter.js", "./src/components/ES5/dropdown-menu/js/dropdown-menu.js", "./src/components/ES5/dropdown-menu2/js/dropdown-menu2.js", "./src/components/ES5/dynamic-dropdown-list-json/js/dynamic-dropdown-list-json.js", "./src/components/ES5/flexslider/js/custom-flexslider.js", "./src/components/ES5/flexslider/js/jquery.flexslider.js", "./src/components/ES5/floating-side-element/js/floating-side-element.js", "./src/components/ES5/form-progress/js/form-progress.js", "./src/components/ES5/form/js/form.js", "./src/components/ES5/form/js/datepicker.js", "./src/components/ES5/gallery/js/gallery.js", "./src/components/ES5/hover-delay-interaction/js/hover-delay-interaction.js", "./src/components/ES5/image-shapes/js/image-shapes.js", "./src/components/ES5/lava-lamp-style-menu/js/lava-lamp-style-menu.js", "./src/components/ES5/lightbox/js/lightbox.js", "./src/components/ES5/list-bulleted/js/list-bulleted.js", "./src/components/ES5/list-posts/js/list-posts-with-ajax.js", "./src/components/ES5/list-split-imagery/js/list-split-imagery.js", "./src/components/ES5/login-templates/js/login-templates.js", "./src/components/ES5/modal-dialog/js/modal-dialog.js", "./src/components/ES5/mousewheel-interaction/js/mousewheel-interaction.js", "./src/components/ES5/multi-items-carousel/js/multi-items-carousel.js", "./src/components/ES5/one-page/js/one-page.js", "./src/components/ES5/one-page2/js/one-page2.js", "./src/components/ES5/parallax/js/parallax.js", "./src/components/ES5/periodical-scroll/js/periodical-scroll.js", "./src/components/ES5/pricing/js/pricing.js", "./src/components/ES5/progress-bar/js/progress-bar.js", "./src/components/ES5/progress-line/js/progress-line.js", "./src/components/ES5/retina/js/retina.js", "./src/components/ES5/rotating-elements/js/rotating-elements.js", "./src/components/ES5/scroll-reveal/js/scroll-reveal.js", "./src/components/ES5/scrollspy-animate/js/scrollspy-animate.js", "./src/components/ES5/show-more-less/js/show-more-less.js", "./src/components/ES5/skew-on-scroll/js/skew-on-scroll.js", "./src/components/ES5/smooth-scrolling-anchor-link/js/smooth-scrolling-anchor-link.js", "./src/components/ES5/sticky-elements/js/sticky-elements.js", "./src/components/ES5/svg-map/js/svg-map-china.js", "./src/components/ES5/svg-map/js/svg-map-world.js", "./src/components/ES5/simple-3D-background-three/js/3D-background-three.js", "./src/components/ES5/simple-3D-background-three2/js/3D-background-three2.js", "./src/components/ES5/simple-3D-background-three3/js/3D-background-three3.js", "./src/components/ES5/simple-3D-background/js/3D-background.js", "./src/components/ES5/simple-3D-carousel/js/3D-carousel.js", "./src/components/ES5/simple-3D-gallery/js/3D-gallery.js", "./src/components/ES5/simple-3D-image-transition/js/3D-image-transition.js", "./src/components/ES5/simple-3D-model/js/3D-model.js", "./src/components/ES5/simple-3D-pages/js/3D-pages.js", "./src/components/ES5/simple-3D-particle-effect/js/3D-particle-effect.js", "./src/components/ES5/simple-3D-sphere-three/js/3D-sphere-three.js", "./src/components/ES5/simple-3D-obj-anim-interaction/js/3D-obj-anim-interaction.js", "./src/components/ES5/simple-3D-mouse-interaction/js/3D-mouse-interaction.js", "./src/components/ES5/simple-3D-mouse-interaction2/js/3D-mouse-interaction2.js", "./src/components/ES5/simple-3D-shatter-slider/js/3D-shatter-slider.js", "./src/components/ES5/simple-3D-explosive-particle-slider/js/3D-explosive-particle-slider.js", "./src/components/ES5/table/js/table.js", "./src/components/ES5/table/js/table-sorter.js", "./src/components/ES5/tabs/js/tabs.js", "./src/components/ES5/team-focus/js/team-focus.js", "./src/components/ES5/text-effect/js/text-effect.js", "./src/components/ES5/timeline/js/timeline.js", "./src/components/ES5/vertical-menu/js/vertical-menu.js", "./src/components/ES5/wordpress/js/wp-core.js"]
 };
 
+// CONCATENATED MODULE: ./src/components/ES6/_global/js/_base.js
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+/* 
+ *************************************
+ * Core scripts for current site
+ *************************************
+ */
+
+/**
+ * APP
+ * @global
+ *
+ * //Used for all modules from ./src/components/ES5/[__]/js
+ * @requires ./examples/assets/js/min/jquery.waitforimages.min.js
+ * @requires ./examples/assets/js/min/video.min.js
+ * @requires ./examples/assets/js/min/jquery.waypoints.min.js
+ * @requires ./examples/assets/js/min/TweenMax.min.js
+ * 
+ */
+//Fixed a bug that Cannot read property 'fn' of undefined for jQuery 1.xx.x.
+window.$ = window.jQuery;
+
+var Application = function ($, window, document) {
+  var _APP = {},
+      components = {
+    documentReady: [],
+    pageLoaded: []
+  };
+
+  if ($('img').length == 0) {
+    $('body').prepend('<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" style="display:none">');
+  }
+
+  if ($.isFunction($.fn.waitForImages)) {
+    $('body').waitForImages(pageLoaded);
+  } else {
+    $(window).on('load', pageLoaded);
+  }
+
+  $(document).ready(documentReady);
+
+  function documentReady(context) {
+    context = _typeof(context) == ( true ? "undefined" : undefined) ? $ : context;
+    components.documentReady.forEach(function (component) {
+      component(context);
+    });
+  }
+
+  function pageLoaded(context) {
+    context = _typeof(context) == "object" ? $ : context;
+    components.pageLoaded.forEach(function (component) {
+      component(context);
+    });
+  }
+
+  _APP.setContext = function (contextSelector) {
+    var context = $;
+
+    if (_typeof(contextSelector) !== ( true ? "undefined" : undefined)) {
+      return function (selector) {
+        return $(contextSelector).find(selector);
+      };
+    }
+
+    return context;
+  };
+
+  _APP.components = components;
+  _APP.documentReady = documentReady;
+  _APP.pageLoaded = pageLoaded;
+  return _APP;
+}($, window, document);
+
+/* harmony default export */ var _base = (Application);
 // CONCATENATED MODULE: ./src/components/ES6/MyApp1/js/index.js
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 /* 
  *************************************
  * <!-- APP 1 -->
  *************************************
  */
-var sex = 'boy';
-
-var echo = function echo(value) {
-  document.getElementById('root').innerHTML = './src/components/ES6/MyApp1 => <span style="color:red">echo(sex) =>' + value + '</span>';
-};
 
 
+var AppDemo1 = function (Application, $, window, document) {
+  Application.DEMO1 = Application.DEMO1 || {};
+  Application.DEMO1.version = '0.0.1';
+
+  Application.DEMO1.pageLoaded = function () {
+    //Prevent this module from loading in other pages
+    if (!document.getElementsByTagName('body')[0].className.match(/es6-demo-home/)) return false;
+
+    var echo = function echo(value) {
+      document.getElementById('root').innerHTML = "./src/components/ES6/MyApp1 => <span style=\"color:red\">echo(sex) => ".concat(value, "</span>");
+    };
+
+    echo('boy');
+  };
+
+  Application.components.pageLoaded.push(Application.DEMO1.pageLoaded);
+  return function AppDemo1() {
+    _classCallCheck(this, AppDemo1);
+
+    this.Application = Application;
+  };
+}(_base, jQuery, window, document);
+
+/* harmony default export */ var js = (AppDemo1);
 // EXTERNAL MODULE: ./src/components/ES6/MyApp2/scss/style.scss
 var style = __webpack_require__(1);
 
 // CONCATENATED MODULE: ./src/components/ES6/MyApp2/js/index.js
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
  *************************************
@@ -176,43 +268,32 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
  */
 
 
-var AppShowBodyClass =
-/*#__PURE__*/
-function () {
-  _createClass(AppShowBodyClass, [{
-    key: "properties",
-    value: function properties() {
-      this.version = '0.0.1';
-    }
-  }]);
 
-  function AppShowBodyClass() {
-    _classCallCheck(this, AppShowBodyClass);
+var AppDemo2 = function (Application, $, window, document) {
+  Application.DEMO2 = Application.DEMO2 || {};
+  Application.DEMO2.version = '0.0.1';
 
-    this.properties();
-  }
+  Application.DEMO2.documentReady = function ($) {
+    //Prevent this module from loading in other pages
+    if (!$('body').hasClass('es6-demo-home')) return false;
+    var $window = $(window),
+        windowWidth = window.innerWidth,
+        windowHeight = window.innerHeight; //Show class name for ES6 demo page
 
-  _createClass(AppShowBodyClass, [{
-    key: "render",
-    value: function render() {
-      (function ($) {
-        "use strict";
+    $('#root').append("<br> ./src/components/ES6/MyApp2 => <span style=\"color:red\">ES6 uses jQuery closure to succeed, and window width is: <code>".concat(windowWidth, "</code></span>"));
+  };
 
-        $(document).ready(function () {
-          //Show class name for ES6 demo page
-          if ($('body').hasClass('es6-demo-home')) {
-            $('#root').append('<br>./src/components/ES6/MyApp2 => <span style="color:red">ES6 uses jQuery closure to succeed, and body class is: <code>' + $('body').attr('class') + '</code></span>');
-          }
-        });
-      })(jQuery);
-    }
-  }]);
+  Application.components.documentReady.push(Application.DEMO2.documentReady);
+  return function AppDemo2() {
+    js_classCallCheck(this, AppDemo2);
 
-  return AppShowBodyClass;
-}();
+    this.Application = Application;
+  };
+}(_base, jQuery, window, document);
 
-
+/* harmony default export */ var MyApp2_js = (AppDemo2);
 // CONCATENATED MODULE: ./src/components/ES6/_global/js/_all.js
+
 /******/
 
 /******/
@@ -220,10 +301,6 @@ function () {
 /* App 1 */
 
 
-if (document.getElementsByTagName('body')[0].className.match(/es6-demo-home/)) {
-  //Output only on the ES6 demo page
-  echo(sex);
-}
 /******/
 
 /******/
@@ -231,8 +308,6 @@ if (document.getElementsByTagName('body')[0].className.match(/es6-demo-home/)) {
 /* App 2 ( With jQuery ) */
 
 
-
-var AppShowBodyClassRender = new AppShowBodyClass().render();
 // CONCATENATED MODULE: ./src/index.js
 /*
  * Import SASS files from components
