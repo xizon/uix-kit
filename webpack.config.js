@@ -55,7 +55,7 @@ let globs = {
 	examples            : 'examples',
 	build               : 'src',
 	dist                : 'dist',
-	concatES5_JSFile    : 'uix-kit.concat.es5.dev.js' //This file is used for the mergence of JS script files that do not require ES6 compilation.
+	concatES5_JSFile    : 'uix-kit.concat.es5.3rd-party-plugins.js' //This file is used for the mergence of JS script files that do not require ES6 compilation.
 };
 
 
@@ -114,9 +114,10 @@ tempAllPages.map( ( event ) => {
 
 
 // Get all the js component files with ES5
-//Just do a merge, not for ES6 parsing
+// Third-party plugins adopts pure merge and does not import and export.
+// Just do a merge, not for ES6 parsing
 let targetJSComFilesName = '';
-let JSComFiles = './'+globs.build+'/components/ES5/_global/js/_all.js';
+let JSComFiles = './'+globs.build+'/components/ES5/_app-load.js';
 if ( fs.existsSync( JSComFiles ) ) {
 
 	let content = fs.readFileSync( JSComFiles );
@@ -129,8 +130,8 @@ if ( fs.existsSync( JSComFiles ) ) {
 						.replace(/\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm, '' );
 
 
-	let filesJSON = curCon.match(/UIX_KIT_IMPORT\=\{.*?(?:\}|\})/gi );
-	filesJSON = filesJSON[0].replace( 'UIX_KIT_IMPORT=', '' );
+	let filesJSON = curCon.match(/UIXKIT_3RD_PARTY_PLUGINS_IMPORT\=\{.*?(?:\}|\})/gi );
+	filesJSON = filesJSON[0].replace( 'UIXKIT_3RD_PARTY_PLUGINS_IMPORT=', '' );
 	filesJSON = JSON.parse( filesJSON );
 
 	targetJSComFilesName = filesJSON.files;	
@@ -213,7 +214,6 @@ class ReplacePlaceholderForFile {
 }
 
 
-
 /*! 
  *************************************
  *  Main configuration
@@ -225,7 +225,13 @@ const webpackConfig = {
 	watch: true,
 	node: { fs: 'empty' },
     resolve: {
-        extensions: ['.js', '.es6', '.vue', '.jsx' ]
+        extensions: ['.js', '.es6', '.vue', '.jsx' ],
+		alias: {
+			
+			// Uix Kit specific mappings.
+			'@uixkit/core': path.resolve(__dirname, './' + globs.build + '/components/ES6' ),
+			'@uixkit/3rd-party-plugins': path.resolve(__dirname, './' + globs.build + '/components/ES5' ),
+		}
     },
 	
 	//Exclude react from bundle
@@ -584,7 +590,7 @@ compiler.hooks.done.tap( 'MyPlugin', ( compilation ) => {
 				let oldContent = data;
 				
 				//Prevent JS from adding code repeatedly
-				//Check if the uix-kit.concat.es5.dev.js file has been 
+				//Check if the uix-kit.concat.es5.3rd-party-plugins.js file has been 
 				//merged into the uix-kit.js file?
 				fs.readFile( targetJSFile, function(err, data ){
 					
@@ -593,13 +599,16 @@ compiler.hooks.done.tap( 'MyPlugin', ( compilation ) => {
 						//Update the normal js file
 						fs.appendFile( targetJSFile, oldContent, 'utf8', function (err) {
 
+							if (err) {
+								return console.log(colors.fg.Red, err, colors.Reset);
+							}
+							
 							console.log(colors.bg.Green, colors.fg.White, `${targetJSFile} written successfully!`, colors.Reset);
 
 							fs.copyFile( targetJSFile, targetJSMinFile, function (err) {
 
 								if (err) {
 									return console.log(colors.fg.Red, err, colors.Reset);
-									
 								}
 
 								console.log(colors.bg.Green, colors.fg.White, `${targetJSMinFile} copied successfully!`, colors.Reset);
@@ -612,7 +621,8 @@ compiler.hooks.done.tap( 'MyPlugin', ( compilation ) => {
 									callback: function(err, min) {
 
 										if ( err ) {
-											console.log(colors.bg.Red, colors.fg.White, '===[ ERROR: File processing failed! ]=== Do not perform other operations after saving the <scss> or <js> file, please wait 10 seconds to rebuild.', colors.Reset);
+											return console.log(colors.bg.Red, colors.fg.White, `===[ ERROR: ${err} ]=== Do not perform other operations after saving the <scss> or <js> file, please wait 10 seconds to rebuild.`, colors.Reset);
+											
 										} else {
 											console.log(colors.bg.Green, colors.fg.White, `${targetJSMinFile} compressed successfully!`, colors.Reset);
 										}
@@ -707,7 +717,7 @@ compiler.hooks.done.tap( 'MyPlugin', ( compilation ) => {
 		}
 		
 	
-	}, 3500 );	
+	}, 1500 );	
 	
 
 });

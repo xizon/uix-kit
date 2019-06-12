@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
- * ## Version             :  3.5.7
+ * ## Version             :  3.6.0
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  June 8, 2019
+ * ## Last Update         :  June 12, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -93,32 +93,289 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 124);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */,
-/* 1 */,
-/* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/******/ ({
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_ES5_global_scss_rtl_all_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
-/* harmony import */ var _components_ES5_global_scss_rtl_all_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_components_ES5_global_scss_rtl_all_scss__WEBPACK_IMPORTED_MODULE_0__);
-/*
- * Import RTL SASS files from components
- *    
- */
-
-
-/***/ }),
-/* 3 */
+/***/ 101:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
+/***/ }),
+
+/***/ 102:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ 103:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ 104:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ 105:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ 106:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ 107:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ 108:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ 109:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ 110:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ 111:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ 112:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ 113:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ 114:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ 115:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ 116:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ 117:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ 118:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ 119:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ 120:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ 121:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ 122:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ 124:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+
+// EXTERNAL MODULE: ./src/components/ES6/_global/scss-rtl/_style.scss
+var _style = __webpack_require__(101);
+
+// EXTERNAL MODULE: ./src/components/ES6/advanced-slider/scss-rtl/_basic.scss
+var _basic = __webpack_require__(102);
+
+// EXTERNAL MODULE: ./src/components/ES6/advanced-slider/scss-rtl/_special.scss
+var _special = __webpack_require__(103);
+
+// EXTERNAL MODULE: ./src/components/ES6/card/scss-rtl/_style.scss
+var scss_rtl_style = __webpack_require__(104);
+
+// EXTERNAL MODULE: ./src/components/ES6/content-placeholder-animated/scss-rtl/_style.scss
+var content_placeholder_animated_scss_rtl_style = __webpack_require__(105);
+
+// EXTERNAL MODULE: ./src/components/ES6/dropdown-menu/scss-rtl/_style.scss
+var dropdown_menu_scss_rtl_style = __webpack_require__(106);
+
+// EXTERNAL MODULE: ./src/components/ES6/flexslider/scss-rtl/_style.scss
+var flexslider_scss_rtl_style = __webpack_require__(107);
+
+// EXTERNAL MODULE: ./src/components/ES6/form/scss-rtl/_style.scss
+var form_scss_rtl_style = __webpack_require__(108);
+
+// EXTERNAL MODULE: ./src/components/ES6/lightbox/scss-rtl/_style.scss
+var lightbox_scss_rtl_style = __webpack_require__(109);
+
+// EXTERNAL MODULE: ./src/components/ES6/list-brands/scss-rtl/_style.scss
+var list_brands_scss_rtl_style = __webpack_require__(110);
+
+// EXTERNAL MODULE: ./src/components/ES6/list-bulleted/scss-rtl/_style.scss
+var list_bulleted_scss_rtl_style = __webpack_require__(111);
+
+// EXTERNAL MODULE: ./src/components/ES6/list-maintain-aspect-ratio/scss-rtl/_style.scss
+var list_maintain_aspect_ratio_scss_rtl_style = __webpack_require__(112);
+
+// EXTERNAL MODULE: ./src/components/ES6/list-side-by-side/scss-rtl/_style.scss
+var list_side_by_side_scss_rtl_style = __webpack_require__(113);
+
+// EXTERNAL MODULE: ./src/components/ES6/login-templates/scss-rtl/_style.scss
+var login_templates_scss_rtl_style = __webpack_require__(114);
+
+// EXTERNAL MODULE: ./src/components/ES6/modal-dialog/scss-rtl/_style.scss
+var modal_dialog_scss_rtl_style = __webpack_require__(115);
+
+// EXTERNAL MODULE: ./src/components/ES6/ribbon/scss-rtl/_style.scss
+var ribbon_scss_rtl_style = __webpack_require__(116);
+
+// EXTERNAL MODULE: ./src/components/ES6/single-post/scss-rtl/_style.scss
+var single_post_scss_rtl_style = __webpack_require__(117);
+
+// EXTERNAL MODULE: ./src/components/ES6/striking/scss-rtl/_style.scss
+var striking_scss_rtl_style = __webpack_require__(118);
+
+// EXTERNAL MODULE: ./src/components/ES6/table/scss-rtl/_style.scss
+var table_scss_rtl_style = __webpack_require__(119);
+
+// EXTERNAL MODULE: ./src/components/ES6/tooltip/scss-rtl/_style.scss
+var tooltip_scss_rtl_style = __webpack_require__(120);
+
+// EXTERNAL MODULE: ./src/components/ES6/vertical-menu/scss-rtl/_style.scss
+var vertical_menu_scss_rtl_style = __webpack_require__(121);
+
+// EXTERNAL MODULE: ./src/components/ES6/wordpress/scss-rtl/_wp_core.scss
+var _wp_core = __webpack_require__(122);
+
+// CONCATENATED MODULE: ./src/components/ES6/_app-load-rtl.js
+/*
+ * Import RTL SASS files from components
+ *
+ * !!! Note 1: In RTL mode, only rtl style files are generated independently.
+ * !!! Note 2: These RTL modules do not need JavaScript.
+ *    
+ */
+
+/******/
+
+/******/
+
+/* base */
+
+/******/
+
+/******/
+
+/* pages */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// CONCATENATED MODULE: ./src/index-rtl.js
+/*
+ * Import RTL modules from components of ES6
+ * 
+ *        
+ */
+
+
 /***/ })
-/******/ ]);
+
+/******/ });
 //# sourceMappingURL=../css/uix-kit-rtl.css.map
 //# sourceMappingURL=uix-kit-rtl.js.map

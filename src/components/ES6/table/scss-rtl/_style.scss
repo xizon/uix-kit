@@ -1,0 +1,133 @@
+/* ======================================================
+   <!-- Table -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+
+/*
+ * 1. Generic
+ * 2. Table Sorter
+*/
+
+$table-border-color: #d6d5d5;
+
+/*
+ ---------------------------
+ 1. Generic
+ ---------------------------
+ */
+table.uix-table,
+.uix-table table {
+
+	th,
+	td {
+		border-left: none;
+		border-right: 1px solid $table-border-color;
+
+
+	}
+
+	thead {
+
+		th {
+
+			&.uix-t-r {
+				text-align: left;
+			}
+
+			&.uix-t-l {
+				text-align: right;
+			}
+
+
+			@media all and (max-width: 768px) {
+
+				&.uix-mobile-tl {
+					text-align: right;
+				}
+
+				&.uix-mobile-tr {
+					text-align: left;
+				}
+
+			}
+
+		}
+	}
+
+
+
+
+}
+
+
+
+@media all and (max-width: 768px) {
+
+	table.uix-table.is-responsive,
+	.uix-table.is-responsive table {
+
+		tbody {
+
+			td {
+
+				&::before {
+					float: right;
+					border-left: 1px solid $table-border-color;
+					margin-right: auto;
+					margin-left: 0.5rem;
+
+				}
+
+			}
+
+		}
+
+
+	}
+
+
+	/* With scroll bars */
+	.js-uix-table--responsive-scrolled table,
+	table.js-uix-table--responsive-scrolled {
+
+
+		thead {
+			float: right;
+
+
+		}
+		tbody {
+			float: right;
+			border-left: 1px solid $table-border-color;
+		}
+
+		th,
+		tbody td {
+
+			&:not(last-child) {
+				border-left: 0;
+			}
+
+		}
+
+
+	}
+
+
+}
+
+/*
+ ---------------------------
+ 2. Table Sorter
+ ---------------------------
+ */
+
+.uix-table-sorter {
+
+	&::after {
+		margin-left: auto;
+		margin-right: .5rem;
+	}
+
+}

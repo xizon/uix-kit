@@ -1,0 +1,26 @@
+/* ======================================================
+       <!-- Periodical Scroll -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+
+.uix-periodical-scroll {
+	position: relative;
+
+
+	ul {
+		display: block;
+
+		li {
+			display: block;
+			opacity: 0;
+			position: absolute;/* required */
+
+			span {
+				display: block;
+				@include icontxt-gradient();
+				letter-spacing: 2px;
+			}
+		}
+	}
+}

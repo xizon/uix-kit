@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
- * ## Version             :  3.5.7
+ * ## Version             :  3.6.0
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  June 8, 2019
+ * ## Last Update         :  June 12, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -62,50 +62,6 @@
 /******/
 /******/
 /* must be placed in the first place */
-/*
-
-
-	FONT SIZE HIERARCHY
-	---------------------------
-	
-    Default font-size for HTML :    16px
-    blockquote                 :    1rem
-    body                       :    1rem
-    form                       :    0.875rem
-    h1                         :    3.5rem
-    h2                         :    2.5rem
-    h3                         :    1.75rem
-    h4                         :    1.25rem
-    h5                         :    1rem
-    h6                         :    0.75rem
-
-
-	GLOBAL SPACING HIERARCHY WITH <section>
-	---------------------------
-	
-    Large                      :    11.375rem
-    Medium                     :    6.5625rem
-    Small                      :    3rem
-    Default (mobile)           :    4.265625rem
-    Large (mobile)             :    4.265625rem
-    Small (mobile)             :    1.5rem
-
-
-
-	COLOR PALETTE
-	---------------------------
-
-    Placeholder Text Color     :    #E6E6E8
-	Primary Background Color   :    transparent
-	Highlight Color            :    #EC5E79, #E8588C
-	Primary Text Color         :    #212121, #474747
-    Heading Text Color         :    #212121
-	Subordinate Text Color     :    #AEAEAE
-	Dividing Line Color        :    #F4F4F4
-    Button Gradient Color      :    #EC5E79, #f60, #d83ba0
-
-
-*/
 /******/
 /******/
 /* base */
@@ -555,33 +511,35 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
   writing-mode: vertical-lr;
   transform: translateX(-0.5rem); }
 
-/******/
-/******/
-/* pages */
-/* ====================================================== 
-   <!-- Advanced Slider (Basic) -->     
+/* ======================================================
+   <!-- Advanced Slider (Basic) -->
 /* ====================================================== */
-/* 
+/*
+ * 1. Initialize the slider style
+ * 2. Pagination dots
+ * 3. Next/Prev buttons
+*/
+/*
  ---------------------------
- 1) Initialize the slider style
+ 1. Initialize the slider style
  ---------------------------
  */
 .uix-advanced-slider .uix-advanced-slider__inner .uix-advanced-slider__item {
   left: auto;
   right: 0; }
 
-/* 
+/*
  ---------------------------
- 2) Pagination dots 
+ 2. Pagination dots
  ---------------------------
  */
 .uix-advanced-slider__pagination ul {
   left: auto;
   right: 0; }
 
-/* 
+/*
  ---------------------------
- 3) Next/Prev buttons
+ 3. Next/Prev buttons
  ---------------------------
  */
 .uix-advanced-slider__arrows .uix-advanced-slider__arrows--prev {
@@ -593,12 +551,17 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
   left: 15px;
   text-align: left; }
 
-/* ====================================================== 
-   <!-- Advanced Slider (Special Effects) -->     
+/* ======================================================
+   <!-- Advanced Slider (Special Effects) -->
 /* ====================================================== */
-/* 
+/*
+ * 1. Initialize the slider style
+ * 2. Pagination dots
+ * 3. Next/Prev buttons
+*/
+/*
  ---------------------------
- 1) Initialize the slider style
+ 1. Initialize the slider style
  ---------------------------
  */
 .uix-advanced-slider-sp canvas {
@@ -609,18 +572,18 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
   left: auto;
   right: 0; }
 
-/* 
+/*
  ---------------------------
- 2) Pagination dots 
+ 2. Pagination dots
  ---------------------------
  */
 .uix-advanced-slider-sp__pagination ul {
   left: auto;
   right: 0; }
 
-/* 
+/*
  ---------------------------
- 3) Next/Prev buttons
+ 3. Next/Prev buttons
  ---------------------------
  */
 .uix-advanced-slider-sp__arrows .uix-advanced-slider-sp__arrows--prev {
@@ -632,11 +595,12 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
   left: 15px;
   text-align: left; }
 
-/* ====================================================== 
-    <!-- Cards -->    
+/* ======================================================
+    <!-- Cards -->
 /* ====================================================== */
-/* ====================================================== 
-   <!-- Content Placeholder Animated -->    
+
+/* ======================================================
+   <!-- Content Placeholder Animated -->
 /* ====================================================== */
 .uix-content-placeholder .uix-content-placeholder__thumbSlot {
   float: right; }
@@ -645,8 +609,8 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
     margin-right: 20px;
     float: right; }
 
-/* ====================================================== 
-   <!-- Dropdown Menu -->   
+/* ======================================================
+   <!-- Dropdown Menu -->
 /* ====================================================== */
 /* Do not use <a> tag */
 .uix-dropdown-menu > ul {
@@ -656,15 +620,15 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
     left: auto;
     right: 20px; }
 
-/* ====================================================== 
+/* ======================================================
    <!-- Flexslider -->
 /* ====================================================== */
 .flexslider,
 .uix-flexslider {
   direction: ltr !important; }
 
-/* ====================================================== 
-    <!-- Form -->                                         
+/* ======================================================
+    <!-- Form -->
 /* ====================================================== */
 /*
  * 1. Controls
@@ -678,7 +642,7 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
  * 9. Search of Widget
  * 11. Date Picker ( 3rd Party Plugin )
 */
-/* 
+/*
  ---------------------------
  1. Controls
  ---------------------------
@@ -796,7 +760,7 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
     padding-left: auto !important;
     padding-right: 0 !important; }
 
-/* 
+/*
  ---------------------------
  2. Upload
  ---------------------------
@@ -817,7 +781,7 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
     left: auto;
     right: 0; }
 
-/* 
+/*
  ---------------------------
  3. Group
  ---------------------------
@@ -853,7 +817,7 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
       right: auto;
       left: 1.4rem; }
 
-/* 
+/*
  ---------------------------
  4. Custom Select
  ---------------------------
@@ -922,7 +886,7 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
 .uix-controls__select-wrapper .uix-controls__select__option:last-of-type {
   border-radius: 2px 2px 0 0; }
 
-/* 
+/*
  ---------------------------
  5. Custom Radio, Toggle And Checkbox
  ---------------------------
@@ -969,7 +933,7 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
     left: auto;
     right: 4px; }
 
-/* 
+/*
  ---------------------------
  6. Custom Input Number
  ---------------------------
@@ -980,7 +944,7 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
   right: auto;
   left: 1px; }
 
-/* 
+/*
  ---------------------------
  7. Multiple Selector
  ---------------------------
@@ -997,7 +961,7 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
   .uix-controls__multi-sel.uix-controls--line > span:not(.uix-controls__bar) .uix-controls__bar {
     right: 0 !important; }
 
-/* 
+/*
  ---------------------------
  8. Single Selector
  ---------------------------
@@ -1011,7 +975,7 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
   .uix-controls__single-sel.uix-controls--line > span:not(.uix-controls__bar) .uix-controls__bar {
     right: 0 !important; }
 
-/* 
+/*
  ---------------------------
  9. Search of Widget
  ---------------------------
@@ -1020,7 +984,7 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
   right: auto;
   left: 0.875rem; }
 
-/* 
+/*
  ---------------------------
  11. Date Picker ( 3rd Party Plugin )
  ---------------------------
@@ -1029,27 +993,27 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
   right: auto;
   left: 1rem; }
 
-/* ====================================================== 
-   <!-- Cutom Light Box -->   
+/* ======================================================
+   <!-- Cutom Light Box -->
 /* ====================================================== */
 .uix-lightbox__close {
   right: auto;
   left: 15px; }
 
-/* ====================================================== 
-   <!-- Brands List -->       
+/* ======================================================
+   <!-- Brands List -->
 /* ====================================================== */
 .uix-list-brands li {
   float: right; }
 
-/* ====================================================== 
+/* ======================================================
    <!-- Bulleted List -->
 /* ====================================================== */
 .uix-list-bullet i {
   margin-right: auto;
   margin-left: .5rem; }
 
-/* ====================================================== 
+/* ======================================================
    <!-- Maintain Aspect Ratio List -->
 /* ====================================================== */
 @media all and (max-width: 768px) {
@@ -1059,7 +1023,7 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
     .uix-list-aspect-ratio .uix-core-grid__col-4 {
       float: right; } }
 
-/* ====================================================== 
+/* ======================================================
    <!-- Side by Side List -->
 /* ====================================================== */
 dl.uix-list-abreast dt {
@@ -1073,11 +1037,12 @@ dl.uix-list-abreast dd {
   padding-left: auto;
   padding-right: 1rem; }
 
-/* ====================================================== 
-   <!-- Login Templates -->  
+/* ======================================================
+   <!-- Login Templates -->
 /* ====================================================== */
-/* ====================================================== 
-    <!-- Modal Dialog --> 
+
+/* ======================================================
+    <!-- Modal Dialog -->
 /* ====================================================== */
 .uix-modal-box {
   left: auto;
@@ -1102,8 +1067,8 @@ dl.uix-list-abreast dd {
   left: auto;
   right: 0; }
 
-/* ====================================================== 
-   <!-- Ribbon --> 
+/* ======================================================
+   <!-- Ribbon -->
 /* ====================================================== */
 .uix-ribbon--triangle {
   right: auto;
@@ -1127,8 +1092,8 @@ dl.uix-list-abreast dd {
       left: auto;
       right: -0.25rem; }
 
-/* ====================================================== 
-   <!-- Comments -->         
+/* ======================================================
+   <!-- Comments -->
 /* ====================================================== */
 .comment-avatar {
   float: right;
@@ -1152,8 +1117,8 @@ dl.uix-list-abreast dd {
     right: auto;
     left: 0; }
 
-/* ====================================================== 
-   <!-- Striking --> 
+/* ======================================================
+   <!-- Striking -->
 /* ====================================================== */
 .uix-striking-msg i:first-child {
   margin-right: auto;
@@ -1190,14 +1155,14 @@ dl.uix-list-abreast dd {
 .uix-striking-msg.uix-striking-msg--info.uix-striking-msg--hasarrow::before {
   border-left-color: #d8f5fe; }
 
-/* ====================================================== 
-   <!-- Table -->      
+/* ======================================================
+   <!-- Table -->
 /* ====================================================== */
 /*
  * 1. Generic
  * 2. Table Sorter
 */
-/* 
+/*
  ---------------------------
  1. Generic
  ---------------------------
@@ -1246,7 +1211,7 @@ table.uix-table thead th.uix-t-l,
   table.js-uix-table--responsive-scrolled tbody td:not(last-child) {
     border-left: 0; } }
 
-/* 
+/*
  ---------------------------
  2. Table Sorter
  ---------------------------
@@ -1255,45 +1220,45 @@ table.uix-table thead th.uix-t-l,
   margin-left: auto;
   margin-right: .5rem; }
 
-/* ====================================================== 
-   <!-- ToolTip --> 
+/* ======================================================
+   <!-- ToolTip -->
 /* ====================================================== */
 .uix-tooltip > div {
   text-align: right; }
 
-/* ====================================================== 
-   <!-- Vertical Menu (RTL) -->     
+/* ======================================================
+   <!-- Vertical Menu (RTL) -->
 /* ====================================================== */
 /*
  * 1. Primary Menu
  * 2. Sub Menu (Using WordPress default class name )
- * 3. Multi-level Sub Menu Position 
- * 4. Mega/Dropdown Menu 
+ * 3. Multi-level Sub Menu Position
+ * 4. Mega/Dropdown Menu
  * 5. Dropdown Arrow
 */
 .uix-v-menu__container:not(.is-mobile) {
   left: auto;
   right: 0;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-  /* 
+  /*
 	 ---------------------------
 	 1. Primary Menu
 	 ---------------------------
 	 */
-  /* 
+  /*
 	 ---------------------------
 	 4. Dropdown Arrow
 	 ---------------------------
 	 */ }
   .uix-v-menu__container:not(.is-mobile) ul.uix-menu {
-    /* 
+    /*
 		 ---------------------------
 		 2. Sub Menu (Using WordPress default class name )
 		 ---------------------------
 		 */
-    /* 
+    /*
 		 ---------------------------
-		 4. Mega/Dropdown Menu 
+		 4. Mega/Dropdown Menu
 		 ---------------------------
 		 */
     /* Multi-column */ }
@@ -1307,7 +1272,7 @@ table.uix-table thead th.uix-t-l,
       border-right: 1px solid rgba(255, 255, 255, 0.13);
       left: auto;
       right: 250px;
-      /* 
+      /*
 			 ---------------------------
 			 3. Multi-level Sub Menu Position
 			 ---------------------------

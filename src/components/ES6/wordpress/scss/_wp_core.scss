@@ -1,0 +1,425 @@
+/* ====================================================== 
+   <!-- WordPress Core ( Do not use prefix "uix-" ) -->              
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+/*
+ * 1. General
+ * 2. Text meant only for screen readers.
+ * 3. Galleries
+ * 4. Sticky
+*/
+
+
+/* 
+ ---------------------------
+ 1. General
+ ---------------------------
+ */ 
+.uix-edit-link {
+	display: block;
+	
+	&::before, &::after {
+		content: '';
+		display: block;
+		clear: both;
+	}
+	a {
+	    text-decoration: underline;
+	}
+}
+
+.alignnone {
+    margin: 0.4375rem 1.27624999994rem 1.27624999994rem 0;
+}
+
+.aligncenter, div.aligncenter {
+    display: block;
+    margin: 0.4375rem auto 0.4375rem auto;
+}
+
+.alignright {
+    float: right;
+    margin: 0.4375rem 0 1.27624999994rem 1.27624999994rem;
+}
+
+.alignleft {
+    float: left;
+    margin: 0.4375rem 1.27624999994rem 1.27624999994rem 0;
+}
+
+a img {
+	&.alignright {
+		float: right;
+		margin: 0.4375rem 0 1.27624999994rem 1.27624999994rem;
+	}
+	&.alignnone {
+	    margin: 0.4375rem 1.27624999994rem 1.27624999994rem 0;
+	}
+	&.alignleft {
+		float: left;
+		margin: 0.4375rem 1.27624999994rem 1.27624999994rem 0;
+	}
+	&.aligncenter {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
+.wp-caption {
+	background: #fff;
+	border: 1px solid #f0f0f0;
+	max-width: 96%;
+	/* Image does not overflow the content area */
+	padding: 0.4375rem 0.2625rem 0.625rem;
+	text-align: center;
+	
+	&.alignnone, 
+	&.alignleft {
+	    margin: 0.4375rem 1.27624999994rem 1.27624999994rem 0;
+	}
+	&.alignright {
+	    margin: 0.4375rem 0 1.27624999994rem 1.27624999994rem;
+	}
+	img {
+		border: 0 none;
+		height: auto;
+		margin: 0;
+		max-width: 98.5%;
+		padding: 0;
+		width: auto;
+	}
+	p.wp-caption-text {
+		font-size: 0.6875rem;
+		line-height: 1.421875;
+		margin: 0;
+		padding: 0 0.35rem 0.4375rem;
+	}
+}
+
+
+/* 
+ ---------------------------
+ 2. Text meant only for screen readers.
+ ---------------------------
+ */ 
+
+.screen-reader-text {
+	clip: rect(1px, 1px, 1px, 1px);
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	
+	&:focus {
+		background-color: #f1f1f1;
+		border-radius: 3px;
+		box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+		clip: auto !important;
+		color: #21759b;
+		display: block;
+		font-size: 0.875rem;
+		font-weight: bold;
+		height: auto;
+		left: 0.4375rem;
+		line-height: normal;
+		padding: 1.05rem 1.421875rem 0.875rem;
+		text-decoration: none;
+		top: 0.4375rem;
+		width: auto;
+		z-index: 100000;
+	}
+}
+
+
+/* 
+ ---------------------------
+ 3. Galleries
+ ---------------------------
+ */ 
+
+.gallery {
+    margin-bottom: 1.4rem;
+}
+
+.gallery-item {
+	display: inline-block;
+	padding: 1.79104477%;
+	text-align: center;
+	vertical-align: top;
+	width: 100%;
+}
+
+.gallery-columns-2 .gallery-item {
+    max-width: 50%;
+}
+
+.gallery-columns-3 .gallery-item {
+    max-width: 33.33%;
+}
+
+.gallery-columns-4 .gallery-item {
+    max-width: 25%;
+}
+
+.gallery-columns-5 .gallery-item {
+    max-width: 20%;
+}
+
+.gallery-columns-6 .gallery-item {
+    max-width: 16.66%;
+}
+
+.gallery-columns-7 .gallery-item {
+    max-width: 14.28%;
+}
+
+.gallery-columns-8 .gallery-item {
+    max-width: 12.5%;
+}
+
+.gallery-columns-9 .gallery-item {
+    max-width: 11.11%;
+}
+
+.gallery-icon img {
+    margin: 0 auto;
+}
+
+.gallery-caption {
+	color: #707070;
+	color: rgba(51, 51, 51, 0.7);
+	display: block;
+	font-family: "Noto Sans", sans-serif;
+	font-size: 1.2rem;
+	line-height: 1.5;
+	padding: 0.435rem 0;
+}
+
+.gallery-columns-6 .gallery-caption, 
+.gallery-columns-7 .gallery-caption, 
+.gallery-columns-8 .gallery-caption, 
+.gallery-columns-9 .gallery-caption {
+    display: none;
+}
+
+
+
+
+/* Galleries for block */
+ul.wp-block-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    padding: 0;
+	margin: 0;
+}
+
+ul.wp-block-gallery .blocks-gallery-image,
+  ul.wp-block-gallery .blocks-gallery-item {
+    margin: 0 16px 16px 0;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+ul.wp-block-gallery .blocks-gallery-image figure,
+    ul.wp-block-gallery .blocks-gallery-item figure {
+    margin: 0;
+    height: 100%;
+}
+
+@supports ((position: -webkit-sticky) or (position: sticky)) {
+    ul.wp-block-gallery .blocks-gallery-image figure,
+        ul.wp-block-gallery .blocks-gallery-item figure {
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-start;
+    }
+}
+
+ul.wp-block-gallery .blocks-gallery-image img,
+    ul.wp-block-gallery .blocks-gallery-item img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+ul.wp-block-gallery .blocks-gallery-image img,
+    ul.wp-block-gallery .blocks-gallery-item img {
+    width: 100%;
+}
+
+@supports ((position: -webkit-sticky) or (position: sticky)) {
+    ul.wp-block-gallery .blocks-gallery-image img,
+        ul.wp-block-gallery .blocks-gallery-item img {
+        width: auto;
+    }
+}
+
+ul.wp-block-gallery .blocks-gallery-image figcaption,
+    ul.wp-block-gallery .blocks-gallery-item figcaption {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    max-height: 100%;
+    overflow: auto;
+    padding: 40px 10px 5px;
+    color: #fff;
+    text-align: center;
+    font-size: 13px;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0, rgba(0, 0, 0, 0.3) 60%, transparent);
+}
+
+ul.wp-block-gallery .blocks-gallery-image figcaption img,
+      ul.wp-block-gallery .blocks-gallery-item figcaption img {
+    display: inline;
+}
+
+ul.wp-block-gallery.is-cropped .blocks-gallery-image a,
+  ul.wp-block-gallery.is-cropped .blocks-gallery-image img,
+  ul.wp-block-gallery.is-cropped .blocks-gallery-item a,
+  ul.wp-block-gallery.is-cropped .blocks-gallery-item img {
+    width: 100%;
+}
+
+@supports ((position: -webkit-sticky) or (position: sticky)) {
+    ul.wp-block-gallery.is-cropped .blocks-gallery-image a,
+      ul.wp-block-gallery.is-cropped .blocks-gallery-image img,
+      ul.wp-block-gallery.is-cropped .blocks-gallery-item a,
+      ul.wp-block-gallery.is-cropped .blocks-gallery-item img {
+        height: 100% !important;
+        flex: 1;
+        -o-object-fit: cover;
+        object-fit: cover;
+    }
+}
+
+ul.wp-block-gallery .blocks-gallery-image,
+  ul.wp-block-gallery .blocks-gallery-item {
+    width: calc((100% - 16px) / 2);
+}
+
+ul.wp-block-gallery .blocks-gallery-image:nth-of-type(even),
+    ul.wp-block-gallery .blocks-gallery-item:nth-of-type(even) {
+    margin-right: 0;
+}
+
+ul.wp-block-gallery.columns-1 .blocks-gallery-image,
+  ul.wp-block-gallery.columns-1 .blocks-gallery-item {
+    width: 100%;
+    margin-right: 0;
+}
+
+@media (min-width: 600px) {
+    ul.wp-block-gallery.columns-3 .blocks-gallery-image,
+    ul.wp-block-gallery.columns-3 .blocks-gallery-item {
+        width: calc((100% - 16px * 2) / 3);
+        margin-right: 16px;
+    }
+
+    ul.wp-block-gallery.columns-4 .blocks-gallery-image,
+    ul.wp-block-gallery.columns-4 .blocks-gallery-item {
+        width: calc((100% - 16px * 3) / 4);
+        margin-right: 16px;
+    }
+
+    ul.wp-block-gallery.columns-5 .blocks-gallery-image,
+    ul.wp-block-gallery.columns-5 .blocks-gallery-item {
+        width: calc((100% - 16px * 4) / 5);
+        margin-right: 16px;
+    }
+
+    ul.wp-block-gallery.columns-6 .blocks-gallery-image,
+    ul.wp-block-gallery.columns-6 .blocks-gallery-item {
+        width: calc((100% - 16px * 5) / 6);
+        margin-right: 16px;
+    }
+
+    ul.wp-block-gallery.columns-7 .blocks-gallery-image,
+    ul.wp-block-gallery.columns-7 .blocks-gallery-item {
+        width: calc((100% - 16px * 6) / 7);
+        margin-right: 16px;
+    }
+
+    ul.wp-block-gallery.columns-8 .blocks-gallery-image,
+    ul.wp-block-gallery.columns-8 .blocks-gallery-item {
+        width: calc((100% - 16px * 7) / 8);
+        margin-right: 16px;
+    }
+
+    ul.wp-block-gallery.columns-1 .blocks-gallery-image:nth-of-type(1n),
+    ul.wp-block-gallery.columns-1 .blocks-gallery-item:nth-of-type(1n) {
+        margin-right: 0;
+    }
+
+    ul.wp-block-gallery.columns-2 .blocks-gallery-image:nth-of-type(2n),
+    ul.wp-block-gallery.columns-2 .blocks-gallery-item:nth-of-type(2n) {
+        margin-right: 0;
+    }
+
+    ul.wp-block-gallery.columns-3 .blocks-gallery-image:nth-of-type(3n),
+    ul.wp-block-gallery.columns-3 .blocks-gallery-item:nth-of-type(3n) {
+        margin-right: 0;
+    }
+
+    ul.wp-block-gallery.columns-4 .blocks-gallery-image:nth-of-type(4n),
+    ul.wp-block-gallery.columns-4 .blocks-gallery-item:nth-of-type(4n) {
+        margin-right: 0;
+    }
+
+    ul.wp-block-gallery.columns-5 .blocks-gallery-image:nth-of-type(5n),
+    ul.wp-block-gallery.columns-5 .blocks-gallery-item:nth-of-type(5n) {
+        margin-right: 0;
+    }
+
+    ul.wp-block-gallery.columns-6 .blocks-gallery-image:nth-of-type(6n),
+    ul.wp-block-gallery.columns-6 .blocks-gallery-item:nth-of-type(6n) {
+        margin-right: 0;
+    }
+
+    ul.wp-block-gallery.columns-7 .blocks-gallery-image:nth-of-type(7n),
+    ul.wp-block-gallery.columns-7 .blocks-gallery-item:nth-of-type(7n) {
+        margin-right: 0;
+    }
+
+    ul.wp-block-gallery.columns-8 .blocks-gallery-image:nth-of-type(8n),
+    ul.wp-block-gallery.columns-8 .blocks-gallery-item:nth-of-type(8n) {
+        margin-right: 0;
+    }
+}
+
+ul.wp-block-gallery .blocks-gallery-image:last-child,
+  ul.wp-block-gallery .blocks-gallery-item:last-child {
+    margin-right: 0;
+}
+
+ul.wp-block-gallery .blocks-gallery-item.has-add-item-button {
+    width: 100%;
+}
+
+ul.wp-block-gallery.alignleft, ul.wp-block-gallery.alignright {
+    max-width: 305px;
+    width: 100%;
+}
+
+ul.wp-block-gallery.alignleft, ul.wp-block-gallery.aligncenter, ul.wp-block-gallery.alignright {
+    display: flex;
+}
+
+ul.wp-block-gallery.aligncenter .blocks-gallery-item figure {
+    justify-content: center;
+}
+
+
+/* 
+ ---------------------------
+ 4. Sticky
+ ---------------------------
+ */ 
+.sticky {
+	z-index: inherit;
+}

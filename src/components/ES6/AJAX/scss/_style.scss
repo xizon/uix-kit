@@ -1,0 +1,89 @@
+/* ======================================================
+   <!-- Ajax Page Loader (Loading A Page via Ajax Into Div)  -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+.uix-ajax-load__container {
+	position: relative;
+}
+
+
+/* Used for full page */
+.uix-ajax-load__fullpage-container {
+	height: 100vh;
+	overflow: hidden;
+	position: relative;
+
+	> section {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100vh;
+		z-index: 1;
+	}
+}
+
+.uix-ajax-load__loader {
+
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,.8);
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	position: fixed;
+	z-index: 99999;
+	display: none;
+	opacity: 0;
+
+
+	> span {
+		display: inline-block;
+		width: 200px;
+		height: 20px;
+		top: 50%;
+		left: 50%;
+		background-color: #ddd;
+		transform: translate(-50%, -50%);
+		position: absolute;
+		border-radius: 100px;
+
+		&::after {
+			border-radius: 100px;
+			content: "";
+			position: absolute;
+			background-color: #333;
+			left: 2px;
+			top: 2px;
+			bottom: 2px;
+			right: 180px;
+			animation: uix-cssAnim--loaderSlide 2s linear infinite;
+		}
+
+	}
+
+
+
+}
+
+@keyframes uix-cssAnim--loaderSlide {
+    0% {
+        right: 180px;
+        left: 2px;
+    }
+    5% {
+        left: 2px;
+    }
+    50% {
+        right: 2px;
+        left: 180px;
+    }
+    55% {
+        right: 2px;
+    }
+    100% {
+        right: 180px;
+        left: 2px;
+    }
+}

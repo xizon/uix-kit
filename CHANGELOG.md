@@ -1,5 +1,15 @@
 # Changelog
 
+#### = 3.6.0 (June 12, 2019) =
+
+* Tweak: Uses Passive Event Listeners for some modules to Improve Scrolling Performance.
+* Tweak: Removed some unnecessary css styles.
+* Tweak: Increased compilation stability by using core JavaScript in ES6 package from `./src/components/ES6`.
+* Tweak: Updated scaffolding structure based on ES6 module.
+* Tweak: Removed empty scss-rtl folder.
+* Tweak: Switch to javascript's es6 typings.
+
+
 #### = 3.5.7 (June 6, 2019) =
 
 * Tweak: Upgraded ES6 demo page.

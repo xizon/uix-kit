@@ -5,7 +5,7 @@
   <p align="center">Make over <strong>120+</strong> components to wear again and again!</p>
   <p align="center">
       <a href="https://travis-ci.org/xizon/uix-kit/" title="Travis CI"><img src="https://api.travis-ci.org/xizon/uix-kit.svg?branch=master"/></a>
-	  <a href="https://www.npmjs.com/package/uix-kit" title="npm version"><img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=3.5.7&x2=0"/></a>
+	  <a href="https://www.npmjs.com/package/uix-kit" title="npm version"><img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=3.6.0&x2=0"/></a>
 	  <a href="https://github.com/xizon/uix-kit/blob/master/LICENSE" title="license"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg"/></a>
 	   
   </p>
@@ -74,6 +74,7 @@ It can be used separately, or merge components and grid systems using bootstrap.
 * Support PJAX no refresh method for loading pages
 * Support JS, HTML and SASS component library automatically packaged.
 * Make a foundation for the React architecture.
+* The core module adopts ES6 import and export, and the third-party plugins adopts pure merge and does not import and export.
 
 
 * * *
@@ -270,9 +271,7 @@ uix-kit/
 │   │   ├── uix-kit-rtl.js
 │   │   ├── uix-kit-rtl.js.map
 │   │   ├── uix-kit-rtl.min.js
-│   │   ├── uix-kit-rtl.min.js.map
-│   │   ├── uix-kit.concat.es5.dev.js
-│   │   └── uix-kit.concat.es5.dev.js.map
+│   │   └── uix-kit-rtl.min.js.map
 ├── misc/
 │   ├── screenshots/
 │   └── grid/
@@ -280,8 +279,8 @@ uix-kit/
 │   ├── index.js
 │   ├── index-rtl.js
 │   ├── components/
-│   │   ├── ES5/
-│   │   └── ES6/
+│   │   ├── ES5/  => Third-party plugins adopts pure merge and does not import and export.
+│   │   └── ES6/  => Core modules
 ├── examples/
 │   ├── *.html
 │   ├── assets/

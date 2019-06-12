@@ -1,0 +1,334 @@
+/* ======================================================
+   <!-- Cards -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+
+/*
+ * 1. Author Card
+ * 2. Entire Background
+ * 3. Separate Up and Down
+ * 4. Separate Left and Right
+*/
+
+$card-radius: 8px;
+
+/*
+ ---------------------------
+ 1. Author Card
+ ---------------------------
+ */
+
+.uix-card--author {
+	margin: 0 auto;
+	border: 1px solid #eaeaea;
+	position: relative;
+	border-top: 8px solid $highlight-color1;
+	border-radius: $card-radius;
+	@include outer-shadow( 'regular' );
+
+	&.uix-card--author--noborder {
+		border: none;
+	}
+	&.uix-card--author--stats {
+		margin-top: 2rem;
+	}
+
+	&::before,
+	&::after {
+		content: " ";
+		display: table;
+		clear: both;
+	}
+
+	.uix-card--author__tagline {
+		font-size: 0.75rem;
+		font-weight: 500;
+		text-transform: uppercase;
+		color: rgba(51, 51, 51, .4);
+	}
+
+
+	.uix-card--author__headline {
+		min-height: 2.086538461rem;
+		background: #fff;
+		padding: 0.65625rem 1.75rem 0 1.75rem;
+		border-radius: #{$card-radius} #{$card-radius} 0  0;
+
+
+		h3 {
+			margin: 0;
+			padding: 0;
+			font-size: 1.125rem;
+
+		}
+		.uix-card--author__text {
+			margin-top: 0.4375rem;
+			width: calc(100% - 105px );
+			a {
+				font-size: 0.75rem;
+			}
+		}
+		.uix-card--author__pic {
+			position: relative;
+			display: inline-block;
+			top: 0.175rem;
+			width: 100px;
+			height: 100px;
+
+			&.uix-card--author__pic--rounded {
+				border-radius: $card-radius;
+			}
+
+			&.uix-card--author__pic--jumpOut {
+				@include outer-shadow( 'regular' );
+				position: absolute;
+				transform: translateY(-2rem);
+
+			}
+
+			img {
+				width: 90px !important;
+				height: 90px !important;
+				margin: 0.3125rem 0 0 0.3125rem;
+			}
+
+		}
+	}
+
+	.uix-card--author__content {
+		background: #fff;
+		padding: 1.75rem 1.75rem 1.3125rem 1.75rem;
+		line-height: 1.5;
+
+		&.uix-card--author__content--rounded {
+			border-radius: 0  0 #{$card-radius} #{$card-radius};
+		}
+
+		&::after {
+			content: '';
+			position: relative;
+			height: 0;
+			width: 0;
+			border-left: 0.4375rem solid transparent;
+			border-right: 0.4375rem solid transparent;
+			border-top: 0.4375rem solid #fff;
+			position: absolute;
+			bottom: 2.125rem;
+			left: 1.75rem;
+		}
+
+		p {
+			margin-top: 0.875rem;
+			padding: 0 0.875rem 0 1.75rem;
+		}
+	}
+
+	.uix-card--author__jump {
+		font-size: 0.875rem;
+		display: block;
+		background: #F6F6F6;
+		padding: 0.525rem 2.1875rem;
+		text-align: right;
+		transition: all 500ms ease-in-out;
+		color: #BDBDBD;
+		border-radius: 0  0 #{$card-radius} #{$card-radius};
+		vertical-align: middle;
+	}
+
+
+}
+
+
+/*
+ ---------------------------
+ 2. Entire Background
+ ---------------------------
+ */
+.uix-card--entireBg {
+    position: relative;
+    padding: 1.5rem;
+    border-radius: $card-radius;
+	background-position: 50% 50%;
+	background-size: cover;
+	margin-bottom: 1.5rem;
+    @include transition-default();
+	@include outer-shadow( 'regular' );
+
+
+
+	&::before,
+	&::after {
+		content: " ";
+		display: table;
+		clear: both;
+	}
+
+
+	.uix-card--entireBg__tagline {
+		font-size: 0.75rem;
+		font-weight: 500;
+		text-transform: uppercase;
+		color: rgba(51, 51, 51, .4);
+	}
+
+
+	.uix-card--entireBg__headline {
+		margin-top: 10px;
+		color: #fff;
+
+	}
+
+
+	.uix-card--entireBg__pic {
+
+		img {
+			visibility: hidden;
+		}
+	}
+
+	.uix-card--entireBg__content {
+		position: relative;
+
+		&.uix-card--entireBg__content--overlay {
+			position: absolute;
+			bottom: 0;
+			padding-bottom: 1.5rem;
+		}
+	}
+
+}
+
+
+/*
+ ---------------------------
+ 3. Separate Up and Down
+ ---------------------------
+ */
+.uix-card--upDownBg {
+	position: relative;
+    border-radius: $card-radius;
+    background-color: #fff;
+	margin-bottom: 1.5rem;
+    @include transition-default();
+	@include outer-shadow( 'regular' );
+
+
+	&::before,
+	&::after {
+		content: " ";
+		display: table;
+		clear: both;
+	}
+
+	.uix-card--upDownBg__tagline {
+		font-size: 0.75rem;
+		font-weight: 500;
+		text-transform: uppercase;
+		color: rgba(51, 51, 51, .4);
+	}
+
+
+	.uix-card--upDownBg__headline {
+		margin-top: 10px;
+		margin: 0;
+	}
+
+	.uix-card--upDownBg__pic {
+		border-top-left-radius: $card-radius;
+		border-top-right-radius: $card-radius;
+		background-image: -webkit-linear-gradient(270deg, hsla(0, 0%, 96%, .5), hsla(0, 0%, 96%, .5));
+		background-image: linear-gradient(180deg, hsla(0, 0%, 96%, .5), hsla(0, 0%, 96%, .5));
+		background-position: 50% 50%;
+		background-size: cover;
+
+		img {
+			visibility: hidden;
+		}
+
+	}
+
+	.uix-card--upDownBg__content {
+		padding: 1rem 1.5rem;
+	}
+
+
+
+}
+
+
+/*
+ ---------------------------
+ 4. Separate Left and Right
+ ---------------------------
+ */
+.uix-card--leftRightBg {
+	position: relative;
+    border-radius: $card-radius;
+    background-color: #fff;
+	margin-bottom: 1.5rem;
+    @include transition-default();
+	@include outer-shadow( 'regular' );
+
+	&::before,
+	&::after {
+		content: " ";
+		display: table;
+		clear: both;
+	}
+
+
+	.uix-card--leftRightBg__tagline {
+		font-size: 0.75rem;
+		font-weight: 500;
+		text-transform: uppercase;
+		color: rgba(51, 51, 51, .4);
+	}
+
+	.uix-card--leftRightBg__headline {
+		margin-top: 10px;
+		margin: 0;
+	}
+
+
+
+	.uix-card--leftRightBg__pic {
+		border-top-left-radius: $card-radius;
+		border-bottom-left-radius: $card-radius;
+		background-position: 50% 50%;
+		background-size: cover;
+
+		img {
+			visibility: hidden;
+		}
+
+	}
+
+
+	.uix-card--leftRightBg__content {
+		padding: 1.5rem 3rem;
+	}
+
+	.uix-card--leftRightBg__title {
+		padding-bottom: 1.5rem;
+	}
+
+
+}
+
+
+@media all and (max-width: 768px) {
+	.uix-card--leftRightBg {
+
+		.uix-card--leftRightBg__pic {
+			border-bottom-left-radius: 0;
+		}
+
+		.uix-card--leftRightBg__content {
+			padding: 1.5rem 1.5rem 0 1.5rem;
+		}
+
+
+	}
+
+}

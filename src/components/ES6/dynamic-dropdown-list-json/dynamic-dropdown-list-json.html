@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="@@{website_lang}" dir="@@{website_dirLTR}">
+<head>
+	<meta charset="@@{website_charset}" />
+	<title>Dynamic Drop Down List - @@{website_title}</title>	
+	@@include('./src/components/ES6/_global/include-header.html')
+</head>  
+
+     
+  <body class="page">
+  
+  
+    @@include('./src/components/ES6/_global/include-loader.html')
+    @@include('./src/components/ES6/_global/include-toggle-trigger.html')
+    
+    
+  
+  
+    <div class="uix-wrapper">
+    
+        <!-- Header Area
+        ============================================= -->      
+        <header class="uix-header__container">
+            
+             <div class="uix-header">
+                 <div class="container">
+                 
+                        @@include('./src/components/ES6/_global/include-brand.html')
+                        
+                        @@include('./src/components/ES6/_global/include-menu.html')
+                        
+                        
+                  </div>
+                  <!-- .container end -->
+                  
+                  <div class="uix-clearfix"></div>
+             </div>
+        
+        </header>
+        <div class="uix-header__placeholder js-uix-header__placeholder-autoheight"></div>
+      
+		<main id="uix-maincontent">
+			
+			<!-- Content 
+			====================================================== -->
+			<section class="uix-spacing--s uix-spacing--no-bottom">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<h3>Dynamic Drop Down List from JSON</h3>
+							<p>Create a dynamic dropdown form that loads its data from a JSON file.</p>
+								<p class="uix-striking-msg uix-striking-msg--info"><strong>Callback:</strong> <span id="dynamic-callback">-</span></p>
+							<hr>
+							
+							
+						</div>
+					</div>
+					<!-- .row end -->
+
+				</div>
+				<!-- .container end -->
+
+			</section>
+
+
+			
+
+
+		   <!-- Content 
+			====================================================== -->
+			<section class="uix-spacing--s">
+				<div class="container">
+						<div class="row">
+							<div class="col-12">
+
+								
+									<div class="uix-controls uix-controls__normal-select">
+										<span class="uix-controls__arrow"><i class="fa fa-sort"></i></span>
+										<select 
+												id="dynamic-dd-sort" 
+												name="dynamic-dd-sort" 
+												data-ajax-dynamic-dd-json="assets/json/catgories.json"
+												data-ajax-dynamic-dd-method="POST"
+												data-ajax-dynamic-dd-auto-expand="false"
+												data-ajax-dynamic-dd-data="" 
+												data-ajax-dynamic-dd-this-text="- Sort -" 
+												data-ajax-dynamic-dd-associated-text="- SubSort -" 
+												data-ajax-dynamic-dd-associated2-text="" 
+												data-ajax-dynamic-dd-associated="#dynamic-dd-subsort"
+												data-ajax-dynamic-dd-associated2="">	
+
+										</select>
+
+									</div>
+
+
+									<!-- ////////   -->
+
+									<div class="uix-controls uix-controls__normal-select">
+										<span class="uix-controls__arrow"><i class="fa fa-sort"></i></span>
+										<select id="dynamic-dd-subsort" name="dynamic-dd-subsort">
+											<option value="" selected>Sub-sort</option>
+										</select>
+
+									</div>			
+
+								   
+								
+							</div>
+							<!-- .col-12 end -->
+						</div>
+						<!-- .row end -->
+
+
+				</div>
+				<!-- .container end -->
+
+
+			</section>
+
+
+
+		   <!-- Content 
+			====================================================== -->
+			<section class="uix-spacing--s uix-spacing--no-top">
+				<div class="container">
+						<div class="row">
+							<div class="col-12">
+
+								    <p>Normal Select Control</p>
+								
+									<div class="uix-controls uix-controls__normal-select">
+										<span class="uix-controls__arrow"><i class="fa fa-sort"></i></span>
+										<select 
+												id="dynamic-dd-china-province" 
+												name="dynamic-dd-china-province" 
+												data-ajax-dynamic-dd-json="assets/json/china.json"
+												data-ajax-dynamic-dd-method="POST"
+												data-ajax-dynamic-dd-auto-expand="true"
+												data-ajax-dynamic-dd-data="" 
+												data-ajax-dynamic-dd-this-text="- 省 -" 
+												data-ajax-dynamic-dd-associated-text="- 市 -" 
+												data-ajax-dynamic-dd-associated2-text="- 区 -" 
+												data-ajax-dynamic-dd-associated="#dynamic-dd-china-city",
+												data-ajax-dynamic-dd-associated2="#dynamic-dd-china-area">	
+
+											    <!--<option value="湖南省">湖南省</option>-->
+										</select>
+
+									</div>
+
+
+									<!-- ////////   -->
+
+									<div class="uix-controls uix-controls__normal-select">
+										<span class="uix-controls__arrow"><i class="fa fa-sort"></i></span>
+										<select name="dynamic-dd-china-city" id="dynamic-dd-china-city">
+										    <!--<option value="长沙市">长沙市</option>-->
+										</select>
+
+									</div>		
+
+
+									<!-- ////////   -->
+
+									<div class="uix-controls uix-controls__normal-select">
+										<span class="uix-controls__arrow"><i class="fa fa-sort"></i></span>
+										<select name="dynamic-dd-china-area" id="dynamic-dd-china-area"></select>
+
+
+									</div>		
+
+
+
+							</div>
+							<!-- .col-12 end -->
+						</div>
+						<!-- .row end -->
+
+
+				</div>
+				<!-- .container end -->
+
+
+			</section>
+			
+			
+			
+			
+		   <!-- Content 
+			====================================================== -->
+			<section class="uix-spacing--s uix-spacing--no-top">
+				<div class="container">
+						<div class="row">
+							<div class="col-12">
+
+								   <p>Custom Select Control</p>
+
+									<div class="uix-controls uix-controls__select uix-controls__select--top">
+										<label>
+											<select 
+													id="dynamic-dd-china-province2" 
+													name="dynamic-dd-china-province2" 
+													data-ajax-dynamic-dd-json="assets/json/china.json"
+													data-ajax-dynamic-dd-method="POST"
+													data-ajax-dynamic-dd-auto-expand="true"
+													data-ajax-dynamic-dd-data="" 
+													data-ajax-dynamic-dd-this-text="- 省 -" 
+													data-ajax-dynamic-dd-associated-text="- 市 -" 
+													data-ajax-dynamic-dd-associated2-text="- 区 -" 
+													data-ajax-dynamic-dd-associated="#dynamic-dd-china-city2",
+													data-ajax-dynamic-dd-associated2="#dynamic-dd-china-area2">	
+
+												<option value="湖南省">湖南省</option>
+											</select>
+
+										</label>
+									</div>
+
+
+									<!-- ////////   -->
+
+									<div class="uix-controls uix-controls__select uix-controls__select--top">
+										<label>
+											<select name="dynamic-dd-china-city" id="dynamic-dd-china-city2">
+												<option value="长沙市">长沙市</option>
+											</select>
+
+										</label>
+
+									</div>		
+
+
+									<!-- ////////   -->
+
+									<div class="uix-controls uix-controls__select uix-controls__select--top">
+										<label>
+											<select name="dynamic-dd-china-area" id="dynamic-dd-china-area2">
+												<option value="">- 区县 -</option>
+											</select>
+
+										</label>
+
+									</div>		
+
+
+
+							</div>
+							<!-- .col-12 end -->
+						</div>
+						<!-- .row end -->
+
+
+				</div>
+				<!-- .container end -->
+
+
+			</section>
+
+
+			
+			
+		</main>
+		
+     
+			
+
+        
+        @@include('./src/components/ES6/_global/include-copyright.html')
+        
+        
+    </div>
+    <!-- .uix-wrapper end -->
+       
+		
+
+	<script>
+	( function( $ ) {
+	"use strict";
+
+		$( function() {
+			/* 
+			 ---------------------------
+			 Callback Data
+			 ---------------------------
+			 */ 
+			$( document ).on( 'change.DYNAMIC_DD_LIST', 'select', function( e ) {
+
+				e.preventDefault();
+
+				var $this        = $( this[ this.selectedIndex ] ),
+					curVal       = $this.val(),
+					curContents  = '';
+
+				$( '#dynamic-callback').html( curVal );
+				
+				//set id
+				$( this ).next( '[type="hidden"]' ).val( $this.data( 'id' ) );
+
+				return false;
+
+			});		
+
+
+			
+		} );
+
+	} ) ( jQuery );
+
+
+	</script>
+
+
+	  
+       
+
+	  
+       
+    @@include('./src/components/ES6/_global/include-footer.html')
+

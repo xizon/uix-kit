@@ -1,0 +1,42 @@
+/**
+
+	TABLE OF CONTENTS
+	---------------------------
+	
+	
+	${{TOC}}
+
+*/
+
+
+/******/
+/******/
+/* must be placed in the first place */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+
+/******/
+/******/
+/* base */
+@import './basic.scss';
+@import './brand.scss';
+@import './bullet-list.scss';
+@import './entry.scss';
+@import './footer.scss';
+@import './header-area.scss';
+@import './helper-classes.scss';
+@import './layout.scss';
+@import './loader.scss';
+@import './mobile-menu.scss';
+@import './navigation.scss';
+@import './navs.scss';
+@import './onepage-menu.scss';
+@import './pagination.scss';
+@import './sidebar.scss';
+@import './social-meida-icons.scss';
+@import './spacing.scss';
+@import './tags.scss';
+@import './typography.scss';
+@import './video.scss';
+
+

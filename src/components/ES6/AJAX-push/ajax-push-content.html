@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="@@{website_lang}" dir="@@{website_dirLTR}">
+<head>
+	<meta charset="@@{website_charset}" />
+	<title>Ajax Push Content - @@{website_title}</title>	
+	@@include('./src/components/ES6/_global/include-header.html')
+</head>  
+
+     
+  <body class="page">
+  
+  
+  
+          
+    @@include('./src/components/ES6/_global/include-loader.html')
+    @@include('./src/components/ES6/_global/include-toggle-trigger.html')
+    
+    
+
+  
+  
+    <div class="uix-wrapper">
+    
+        <!-- Header Area
+        ============================================= -->      
+        <header class="uix-header__container">
+            
+             <div class="uix-header">
+                 <div class="container">
+                 
+                        @@include('./src/components/ES6/_global/include-brand.html')
+                        
+                        @@include('./src/components/ES6/_global/include-menu.html')
+                        
+                        
+                        
+                        
+                  </div>
+                  <!-- .container end -->
+                  
+                  <div class="uix-clearfix"></div>
+             </div>
+        
+        </header>
+         <div class="uix-header__placeholder js-uix-header__placeholder-autoheight"></div>
+    
+		
+		<main id="uix-maincontent">
+			
+
+			<!-- Content 
+			====================================================== -->
+			<section class="uix-spacing--s uix-spacing--no-bottom">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<h3>Ajax Push Content</h3>
+							<p>Click the hyperlink to push the specified content to element.</p>
+							<hr>
+							
+							
+						</div>
+					</div>
+					<!-- .row end -->
+
+				</div>
+				<!-- .container end -->
+
+			</section>
+
+
+
+
+		   <!-- Content 
+			====================================================== -->
+			<section class="uix-spacing--s uix-spacing--no-bottom">
+				<div class="container uix-t-c">
+						<div class="row">
+							<div class="col-12">
+
+								<a href="button.html" data-ajax-push-content='{
+																			  "container":"#my-ajax-demo-push-container",
+																			  "target":"#my-ajax-demo-target-button",
+																			  "loading":"<div class=\"my-loader\"><span><i class=\"fa fa-spinner fa-spin\"></i> loading...</span></div>",
+																			  "method":"POST"
+																			  }'><i class="fa fa-cog" aria-hidden="true"></i> Add <strong>"button.html"</strong> Elements To Div 1</a>
+
+
+
+								<div id="my-ajax-demo-push-container" style="padding: 15px; margin: 15px; background: rgba(237,235,235,1.00);"></div>
+
+
+
+							</div>
+						</div>
+						<!-- .row end -->
+
+
+				</div>
+				<!-- .container end -->
+
+			</section>
+
+
+		   <!-- Content 
+			====================================================== -->
+			<section class="uix-spacing--s uix-spacing--no-bottom">
+				<div class="container uix-t-c">
+						<div class="row">
+							<div class="col-12">
+
+								<a href="pricing.html" data-ajax-push-content='{
+																			  "container":"#my-ajax-demo-push-container2",
+																			  "target":"#my-ajax-demo-target-pricing",
+																			  "loading":"<div class=\"my-loader\"><span><i class=\"fa fa-spinner fa-spin\"></i> loading...</span></div>",
+																			  "method":"POST"
+																			  }'><i class="fa fa-cog" aria-hidden="true"></i> Add <strong>"pricing.html"</strong> Elements To Div 2</a>
+
+
+
+								<div id="my-ajax-demo-push-container2" style="padding: 15px; margin: 15px; background: rgba(237,235,235,1.00);"></div>
+
+
+
+
+							</div>
+						</div>
+						<!-- .row end -->
+
+
+				</div>
+				<!-- .container end -->
+
+			</section>		
+			
+		</main>
+		
+
+		
+		
+		
+        @@include('./src/components/ES6/_global/include-copyright.html')
+        
+        
+    </div>
+    <!-- .uix-wrapper end -->
+       
+       
+    @@include('./src/components/ES6/_global/include-footer.html')
+

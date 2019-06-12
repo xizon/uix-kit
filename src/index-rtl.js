@@ -1,8 +1,6 @@
-
 /*
- * Import RTL SASS files from components
- *    
+ * Import RTL modules from components of ES6
+ * 
+ *        
  */
-import './components/ES5/_global/scss-rtl/_all.scss';
-
-
+import '@uixkit/core/_app-load-rtl';

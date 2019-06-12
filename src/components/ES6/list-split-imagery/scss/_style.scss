@@ -1,0 +1,96 @@
+/* ======================================================
+    <!-- Fullwidth List of Split -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+
+$imagery-gutter: 15px;
+$imagery-text-gutter: 5vw;
+
+.uix-list-split-imagery {
+	position: relative;
+
+	&::after {
+		content: '';
+		display: block;
+		clear: both;
+	}
+
+	.uix-list-split-imagery__img {
+		@include background-cover();
+		opacity: 0;
+		transition: opacity 300ms cubic-bezier(.694,0,.335,1);
+	}
+
+	.uix-list-split-imagery__img.is-loaded {
+		opacity: 1;
+	}
+
+
+	.uix-list-split-imagery__img-container {
+		user-select: none;
+		position: relative;
+		width: 50%;
+		float: left;
+
+	}
+
+	&.is-reversed .uix-list-split-imagery__img-container {
+		float: right;
+	}
+
+
+	/* Text Area */
+	.uix-list-split-imagery__info {
+		word-wrap: break-word;
+		box-sizing: border-box;
+		width: 50%;
+		padding-left: $imagery-text-gutter;
+		padding-right: calc(7.840236686391% + #{$imagery-gutter}); /* (1352-1140)/1352/2 * 100 */
+		float: left;
+	}
+
+	&.is-reversed .uix-list-split-imagery__info {
+		float: left;
+		padding-right: $imagery-text-gutter;
+		padding-left: calc(7.840236686391% + #{$imagery-gutter});
+	}
+
+
+
+}
+
+/* New XL container for Bootstrap 4.x */
+@media all and (min-width: 1430px) {
+	.uix-list-split-imagery {
+
+		.uix-list-split-imagery__info {
+			padding-right: calc(5.189340813464% + #{$imagery-gutter}); /* (1426-1278)/1426/2 * 100 */
+
+		}
+
+		&.is-reversed .uix-list-split-imagery__info {
+			padding-right: auto;
+			padding-left: calc(5.189340813464% + #{$imagery-gutter});
+		}
+
+	}
+}
+
+
+@media all and (max-width: 768px) {
+	.uix-list-split-imagery {
+		.uix-list-split-imagery__img-container {
+			width: 100%;
+		}
+
+		.uix-list-split-imagery__info,
+		&.is-reversed .uix-list-split-imagery__info {
+			text-align: center;
+			width: 100%;
+			padding: 0 $imagery-gutter;
+		}
+
+	}
+
+}

@@ -1,0 +1,135 @@
+/* ======================================================
+   <!-- Breadcrumbs -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+
+$crumbs-back       : #fff;
+$crumbs-line-color : #d5d5d5;
+$crumbs-line-deg   : 2;
+$crumbs-size       : 27px;
+
+
+
+.uix-breadcrumbs__container {
+	margin-top: -#{$crumbs-size};
+}
+
+.uix-breadcrumbs {
+
+	ul {
+		list-style: none;
+		display: inline-table;
+		font-size: 0; /*Fighting the Space Between Inline Block Elements*/
+
+		li {
+			font-size: 0.875rem;/*Fighting the Space Between Inline Block Elements*/
+			display: inline-block;
+		    @include outer-shadow( 'regular' );
+
+			a {
+				display: block;
+				background: $crumbs-back;
+				text-align: center;
+				padding: 0 #{$crumbs-size*1} 0 #{$crumbs-size*2};
+				position: relative;
+				text-decoration: none;
+				color: $primary-text-color1;
+				height: #{$crumbs-size*2};
+				line-height: #{$crumbs-size*2};
+
+
+				&::before,
+				&::after {
+					content: '';
+					position: absolute;
+					top: 0;
+					left: 100%;
+					z-index: 1;
+					display: block;
+					width: 0;
+					height: 0;
+					border-top: #{$crumbs-size} solid transparent;
+					border-bottom: #{$crumbs-size} solid transparent;
+					border-left: #{$crumbs-size/$crumbs-line-deg} solid transparent;
+					@include transition-default();
+				}
+
+				&::before {
+					margin-left: 1px;
+					border-left-color: $crumbs-line-color;
+				}
+
+				&::after {
+				    border-left-color: #fff;
+				}
+
+
+				&:hover {
+					background: $crumbs-line-color;
+					color: #fff;
+
+					&::after {
+						border-left-color: $crumbs-line-color;
+					}
+
+				}
+
+
+
+			}
+
+			&:first-child a {
+				border-top-left-radius: 3px;
+				border-bottom-left-radius: 3px;
+
+
+			}
+
+			&:last-child a {
+				padding-right: #{$crumbs-size*2};
+				border-top-right-radius: 3px;
+				border-bottom-right-radius: 3px;
+
+
+
+				&::before,
+				&::after {
+					display: none;
+				}
+			}
+
+
+			&.is-active {
+
+				a {
+
+					background: $highlight-color1;
+					color: #fff;
+
+					&::after {
+						border-left-color: $highlight-color1;
+					}
+				}
+			}
+
+
+		}
+
+	}
+
+	&.is-fullwidth {
+
+		ul {
+			display: table;
+			width: 100%;
+
+			li {
+				display: table-cell;
+				width: auto;
+			}
+		}
+
+	}
+
+}

@@ -1,0 +1,22 @@
+/* ======================================================
+   <!-- Dropdown Menu -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+
+/* Do not use <a> tag */
+.uix-dropdown-menu {
+
+	> ul {
+		left: auto;
+		right: 0;
+
+
+		&::before {
+			left: auto;
+			right: 20px;
+		}
+
+	}
+
+}

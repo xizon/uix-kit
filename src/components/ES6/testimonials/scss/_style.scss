@@ -1,0 +1,70 @@
+/* ======================================================
+   <!-- Testimonials Carousel -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+
+.uix-testimonials__count {
+	font-size: 0.75rem;
+	letter-spacing: 1px;
+	text-align: center;
+}
+
+.uix-testimonials {
+
+	/* Required */
+	overflow: hidden;
+
+
+	.uix-testimonials__content {
+		position: relative;
+		margin: 0 auto;
+		max-width: calc(100% - 176px );
+		box-shadow: 0 22px 40px 0 #eef4fc;
+		border-radius: 10px;
+		margin-bottom: 100px;
+		padding: 1rem 44px;
+	}
+
+	.uix-testimonials__signature {
+		font-size: 0.75rem;
+		text-align: center;
+		height: 40px;
+		width: 100%;
+		display: block;
+		font-style: italic;
+
+
+		.uix-testimonials__signature--avatar img {
+			width: 32px;
+			height: 32px;
+			margin: .3rem 0 0.875rem 0.875rem;
+			vertical-align: middle;
+			display: inline-block;
+		}
+		.uix-testimonials__signature--no-avatar {
+			width: 1px;
+			height: 1px;
+			border: none;
+		}
+		strong {
+			font-weight: 700;
+
+			&.uix-testimonials__signature__shorttext {
+				display: inline-block;
+			}
+		}
+	}
+}
+
+@media all and (max-width: 768px) {
+
+	.uix-testimonials {
+		.uix-testimonials__content {
+			max-width: 100%;
+			margin-bottom: 50px;
+			padding: 1rem 0;
+		}
+	}
+
+}

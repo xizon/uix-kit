@@ -1,0 +1,86 @@
+/* ======================================================
+   <!-- Side by Side List With Photo -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+.uix-list-abreast-img {
+
+	.uix-list-abreast-img__item {
+		margin-top: 1.5rem;
+		padding-bottom: 3rem;
+		position: relative;
+
+
+		.uix-list-abreast-img__item__left,
+		.uix-list-abreast-img__item__right {
+			display: table-cell;
+			vertical-align: top;
+		}
+
+
+		.uix-list-abreast-img__item__right {
+			padding-left: 1.5rem;
+
+			em {
+				color: $sub-text-color;
+				display: inline-block;
+				margin-right: 1rem;
+			}
+
+		}
+
+		.uix-list-abreast-img__item__desc {
+			line-height: 1.5;
+			margin-top: 1em;
+		}
+
+		.uix-list-abreast-img__item__img {
+			width: 250px;
+			margin: 0 auto;
+
+			img {
+				width: 100%;
+			}
+
+
+		}
+
+
+
+	}
+
+
+}
+
+
+
+
+
+@media (max-width: 768px) {
+
+    .uix-list-abreast-img {
+
+        text-align: center;
+
+		.uix-list-abreast-img__item {
+
+			.uix-list-abreast-img__item__left {
+				display: block;
+				text-align: center;
+				margin-bottom: 1rem;
+			}
+
+			.uix-list-abreast-img__item__img {
+				width: 100%;
+			}
+
+			.uix-list-abreast-img__item__right {
+				display: block;
+				padding-left: 0;
+				width: 100%;
+			}
+		}
+    }
+
+
+}

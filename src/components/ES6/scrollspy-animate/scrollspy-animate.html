@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="@@{website_lang}" dir="@@{website_dirLTR}">
+<head>
+	<meta charset="@@{website_charset}" />
+	<title>Scrollspy Animate - @@{website_title}</title>	
+	@@include('./src/components/ES6/_global/include-header.html')
+</head>  
+
+     
+  <body class="page">
+  
+  
+          
+    @@include('./src/components/ES6/_global/include-loader.html')
+    @@include('./src/components/ES6/_global/include-toggle-trigger.html')
+    
+    
+
+  
+  
+    <div class="uix-wrapper">
+    
+        <!-- Header Area
+        ============================================= -->      
+        <header class="uix-header__container uix-header__container--overlay">
+            
+             <div class="uix-header">
+                 <div class="container">
+                 
+                        @@include('./src/components/ES6/_global/include-brand.html')
+                        
+                        @@include('./src/components/ES6/_global/include-menu.html')
+                        
+                        
+                        
+                        
+                  </div>
+                  <!-- .container end -->
+                  
+                  <div class="uix-clearfix"></div>
+             </div>
+        
+        </header>
+
+    
+		<main id="uix-maincontent">
+			
+			<!-- Parallax & Overlay 
+			============================================= --> 
+
+			<section id="scrollspy-animate-demo">
+				<div class="uix-parallax uix-height--100 uix-typo--color-white" data-fully-visible="false" data-overlay-bg="false" data-skew="0" data-speed="0.3">
+					<img class="uix-parallax__img" src="assets/images/demo/index-bg-1920x1080.jpg" alt="">
+					<div class="uix-v-align--absolute uix-t-c">
+						<div class="container uix-t-c">
+
+							<div class="row">
+								<div class="col-md-6 offset-md-3">
+									<div class="uix-spacing--s uix-spacing--no-bottom uix-mobile-el"></div>
+									<img src="assets/images/logo-hero.png" alt="Uix Kit">
+									<br>
+									<br>
+									<canvas data-txt="Animated Scroll Down" data-filter-texture="assets/images/dmaps/2048x2048/clouds.jpg" id="scrollspy-animate-demo--txt"></canvas>
+									<h3 class="uix-typo--h5 uix-typo--style-normal uix-spacing--no-bottom">Here is the progress of the scroll: <strong><em>0</em>/1</strong></h3>
+
+
+
+								</div>
+							</div>
+							<!-- .row end -->
+
+						</div>
+						<!-- .container end -->  
+
+					</div>
+
+				</div>
+			</section>
+
+
+			<div style="height: 1500px;"></div>
+		
+
+			
+		</main>
+		
+   
+			
+            
+        @@include('./src/components/ES6/_global/include-copyright.html')
+        
+        
+    </div>
+    <!-- .uix-wrapper end -->
+       
+       
+    @@include('./src/components/ES6/_global/include-footer.html')
+

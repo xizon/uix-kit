@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="@@{website_lang}" dir="@@{website_dirLTR}">
+<head>
+	<meta charset="@@{website_charset}" />
+	<title>3D Object Anim Interaction - @@{website_title}</title>	
+	@@include('./src/components/ES6/_global/include-header.html')
+</head>  
+
+     
+  <body class="page">
+  
+  
+          
+    @@include('./src/components/ES6/_global/include-loader.html')
+    @@include('./src/components/ES6/_global/include-toggle-trigger.html')
+    
+    
+
+  
+  
+    <div class="uix-wrapper">
+    
+        <!-- Header Area
+        ============================================= -->      
+        <header class="uix-header__container">
+            
+             <div class="uix-header">
+                 <div class="container">
+                 
+                        @@include('./src/components/ES6/_global/include-brand.html')
+                        
+                        @@include('./src/components/ES6/_global/include-menu.html')
+                        
+                        
+                        
+                        
+                  </div>
+                  <!-- .container end -->
+                  
+                  <div class="uix-clearfix"></div>
+             </div>
+        
+        </header>
+        <div class="uix-header__placeholder js-uix-header__placeholder-autoheight"></div>
+      
+		
+		<main id="uix-maincontent">
+			
+			<!-- Content 
+			====================================================== -->
+			<section class="uix-spacing--s uix-spacing--no-bottom">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<h3>3D Object Anim Interaction</h3>
+							<p>Click the button below to control camera position and object deformation.</p>
+							<hr>
+							
+							
+						</div>
+					</div>
+					<!-- .row end -->
+
+				</div>
+				<!-- .container end -->
+
+			</section>
+
+
+
+
+		   <!-- Content 
+			====================================================== -->
+			<div class="text-center">
+				<a class="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary is-pill is-transparent" id="3D-object-button1" href="#">Camera</a>
+				<a class="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary is-pill is-transparent" id="3D-object-button2" href="#">Morph</a>
+				<a class="uix-btn uix-btn__border--thin uix-btn__margin--b uix-btn__size--s uix-btn__bg--primary is-pill is-transparent" id="3D-object-button3" href="#">Scale</a>
+
+			</div>
+
+			<canvas id="3D-object-buttonevent-canvas"></canvas>
+
+
+			
+		</main>
+		
+    
+			
+       
+		
+        @@include('./src/components/ES6/_global/include-copyright.html')
+        
+        
+    </div>
+    <!-- .uix-wrapper end -->
+       
+       
+    @@include('./src/components/ES6/_global/include-footer.html')
+

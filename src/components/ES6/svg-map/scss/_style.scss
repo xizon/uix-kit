@@ -1,0 +1,164 @@
+/* ====================================================== 
+   <!-- SVG Map -->     
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+/*
+ * 1. World Map
+ * 2. China Map
+*/
+
+
+
+/* 
+ ---------------------------
+ 1. World Map
+ ---------------------------
+ */ 
+.uix-svgmap--world {
+	svg {
+		width: 100%;
+		height: 100%;
+	}
+	path {
+		fill: rgba($highlight-color1, .2);
+		stroke: #ffffff;
+		opacity: 1;
+		stroke-opacity: 1;
+		stroke-width: 1;
+		stroke-linejoin: round;
+		transform: matrix(0.3474, 0, 0, 0.3474, 0, 0);
+		cursor: pointer;
+		fill-opacity: 1;
+		@include transition-default();
+		
+		&:hover {
+			fill: rgba($highlight-color1, .3);
+		}
+	}
+
+
+	text {
+		font-size: 3px;
+		fill: $primary-text-color1;
+		display: none;
+		@include transition-default();
+		text-anchor: middle;
+		font-family: Arial;
+		
+		&.uix-svgmap--world__num {
+			font-size: 6px;
+			transform: translate(0, 3px);
+			fill: #fff;
+			font-family: Arial;
+		}	
+		
+	}
+	
+	
+	path, 
+	text {
+		opacity: 1;
+		display: block;
+		z-index: 1;
+		
+		&.is-show {
+			opacity: 1;
+		}
+		
+	}
+
+}
+
+
+
+
+/* 
+ ---------------------------
+ 2. China Map
+ ---------------------------
+ */ 
+
+.uix-svgmap--china {
+
+	svg {
+		width: 100%;
+		height: 100%;
+	}
+	polygon {
+		cursor: pointer;
+		fill: rgba($highlight-color1, .2);
+		stroke: #fff;
+		stroke-width: 1;
+		@include transition-default();
+		
+		&:hover {
+			fill: rgba($highlight-color1, .3);
+		}
+	}
+
+	text {
+		font-size: 7px;
+		fill: $primary-text-color1;
+		display: none;
+		@include transition-default();
+		text-anchor: middle;
+
+		&.uix-svgmap--china__name {
+			transform: translate(0,15px);
+		}
+
+		&.uix-svgmap--china__num {
+			font-size: 6px;
+			transform: translate(0,3px);
+			fill: #fff;
+			font-family: Arial;
+		}	 
+
+	}
+
+	circle {
+		fill: rgba($highlight-color2, 1);
+		stroke: rgba($highlight-color2, .2);
+		stroke-width: 7;
+		r: 6;
+		animation: uix-cssAnim--map-dot ease 1s infinite;
+		pointer-events: none;
+		@include transition-default();
+		position: relative;
+		filter: drop-shadow( -5px -5px 5px #000 );
+
+	}
+
+
+	circle,
+	text {
+		opacity: 1;
+		display: block;
+		z-index: 1;
+		position: relative;
+
+		&.is-show {
+			opacity: 1;
+		}
+	}
+
+
+} 
+
+
+
+@keyframes uix-cssAnim--map-dot {
+    0% {
+        stroke-width: 5;
+    }
+
+    50% {
+        stroke-width: 0;
+    }
+
+    100% {
+        stroke-width: 5;
+    }
+}
+	

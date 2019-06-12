@@ -1,0 +1,103 @@
+/* ======================================================
+   <!-- Content Placeholder Animated -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+
+$uix-content-placeholder-w: 100%;
+
+.uix-content-placeholder {
+	width: 100%;
+
+	&::after {
+		content: '';
+		display: block;
+		clear: both;
+	}
+
+	ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	li {
+		overflow: hidden;
+		padding: 15px 0;
+		margin: 0;
+		border: 0;
+		background: 0;
+	}
+
+	.uix-content-placeholder__line {
+		height: 8px;
+		background-color: #f2f2f2;
+	}
+	.uix-content-placeholder__line--first {
+		width: 100%;
+		animation: uix-cssAnim--firstline 1s infinite linear;
+	}
+	.uix-content-placeholder__line--second {
+		margin-top: 8px;
+		width: #{$uix-content-placeholder-w - 30%};
+		animation: uix-cssAnim--secondline 1s infinite linear;
+	}
+	.uix-content-placeholder__thumbSlot {
+		width: 80px;
+		height: 60px;
+		float: left;
+		background-color: #f2f2f2;
+		animation: uix-cssAnim--thumb 1s infinite linear;
+
+		~ .uix-content-placeholder__textSlot {
+			width: calc(#{$uix-content-placeholder-w} - 100px);
+			margin-left: 20px;
+			float: left;
+		}
+
+	}
+	.uix-content-placeholder__textSlot {
+		width: #{$uix-content-placeholder-w};
+		margin-top: 2px;
+
+		~ .uix-content-placeholder__thumbSlot {
+			width: #{$uix-content-placeholder-w};
+			margin-top: 10px;
+		}
+	}
+
+}
+
+
+
+@keyframes uix-cssAnim--firstline {
+	from {
+		box-shadow: inset 0 0 0 rgba(255, 255, 255, 0.3);
+	}
+
+	to {
+		box-shadow: inset 200px 0 0 rgba(255, 255, 255, 0.3);
+	}
+}
+
+
+@keyframes uix-cssAnim--secondline {
+	from {
+		box-shadow: inset 0 0 0 rgba(255, 255, 255, 0.3);
+	}
+
+	to {
+		box-shadow: inset 150px 0 0 rgba(255, 255, 255, 0.3);
+	}
+}
+
+
+
+@keyframes uix-cssAnim--thumb {
+	from {
+		box-shadow: inset 0 0 0 rgba(255, 255, 255, 0.3);
+	}
+
+	to {
+		box-shadow: inset 80px 0 0 rgba(255, 255, 255, 0.3);
+	}
+}

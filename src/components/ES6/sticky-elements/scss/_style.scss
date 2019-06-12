@@ -1,0 +1,14 @@
+/* ======================================================
+   <!-- Sticky Elements -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+
+.js-uix-sticky-el {
+
+	&.is-active {
+		position: fixed;
+		top: 0;
+	}
+
+}

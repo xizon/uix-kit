@@ -1,0 +1,42 @@
+/**
+
+	TABLE OF CONTENTS
+	---------------------------
+	
+	
+	${{TOC}}
+
+*/
+
+
+/**
+
+	Adding support for language written in a Right To Left (RTL) direction is easy -
+	it's just a matter of overwriting all the horizontal positioning attributes
+	of your CSS stylesheet in a separate stylesheet file named -rtl.css.
+
+
+*/
+
+
+/******/
+/******/
+/* must be placed in the first place */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+
+/******/
+/******/
+/* base */
+@import './basic.scss';
+@import './brand.scss';
+@import './bullet-list.scss';
+@import './header-area.scss';
+@import './helper-classes.scss';
+@import './layout.scss';
+@import './mobile-menu.scss';
+@import './navigation.scss';
+@import './navs.scss';
+@import './sidebar.scss';
+@import './typography.scss';
+
