@@ -1,24 +1,4 @@
 /*
- * Check dependencies
- *    
- */
-if ( 
-	typeof jQuery === 'undefined' || 
-	typeof TweenMax === 'undefined'
-) {
-    throw new Error( 'Uix Kit\'s JavaScript requires jQuery, TweenMax.' );
-}
-
-/*
- * Fixed a bug that Cannot read property 'fn' of undefined for jQuery 1.xx.x.
- *    
- */
-window.$ = window.jQuery;
-
-
-
-
-/*
  * Common website functions, Can be called separately in the HTML page
  *    
  */

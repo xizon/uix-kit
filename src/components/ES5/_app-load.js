@@ -5,9 +5,12 @@
  * !!! Please do not modify variable "UIXKIT_3RD_PARTY_PLUGINS_IMPORT" name
  */
 
-'use strict';
-
 const UIXKIT_3RD_PARTY_PLUGINS_IMPORT = { "files": [
+
+//Dependencies
+//Must be placed in the first place
+"./src/components/ES5/_plugins-Miscellaneous/js/_dependencies.js",
+	
 
 //Website ==> miscellaneous
 "./src/components/ES5/_plugins-Miscellaneous/js/scrollLock.js",

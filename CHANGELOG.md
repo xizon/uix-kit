@@ -1,5 +1,11 @@
 # Changelog
 
+
+#### = 3.6.1 (June 13, 2019) =
+
+* Fix: Fixed a bug that Cannot read property 'fn' of undefined for jQuery 1.xx.x when using WordPress.
+
+
 #### = 3.6.0 (June 12, 2019) =
 
 * Tweak: Uses Passive Event Listeners for some modules to Improve Scrolling Performance.

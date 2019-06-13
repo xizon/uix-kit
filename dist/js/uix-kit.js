@@ -2,7 +2,7 @@
  * 
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
- * ## Version             :  3.6.0
+ * ## Version             :  3.6.1
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
  * ## Last Update         :  June 13, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -10,6 +10,13 @@
  * ## Released under the MIT license.
  * 	
  */
+// Must leave a line blank
+/*
+* Fixed a bug that Cannot read property 'fn' of undefined for jQuery 1.xx.x.
+*    
+*/
+window.$ = window.jQuery;
+
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -2005,10 +2012,10 @@ __webpack_require__.r(__webpack_exports__);
  * !!! Third-party plugins adopts pure merge and does not import and export.
  * !!! Please do not modify variable "UIXKIT_3RD_PARTY_PLUGINS_IMPORT" name
  */
-
-
 var UIXKIT_3RD_PARTY_PLUGINS_IMPORT = {
-  "files": [//Website ==> miscellaneous
+  "files": [//Dependencies
+  //Must be placed in the first place
+  "./src/components/ES5/_plugins-Miscellaneous/js/_dependencies.js", //Website ==> miscellaneous
   "./src/components/ES5/_plugins-Miscellaneous/js/scrollLock.js", "./src/components/ES5/_plugins-Miscellaneous/js/attrExt.js", "./src/components/ES5/_plugins-Miscellaneous/js/hashchange.js", "./src/components/ES5/_plugins-Miscellaneous/js/datepicker.js", "./src/components/ES5/_plugins-Miscellaneous/js/jquery.flexslider.js", "./src/components/ES5/_plugins-Miscellaneous/js/highlight.js", //GSAP plugins
   "./src/components/ES5/_plugins-GSAP/js/ColorPropsPlugin.js", "./src/components/ES5/_plugins-GSAP/js/CSSRulePlugin.js", "./src/components/ES5/_plugins-GSAP/js/EaselPlugin.js", "./src/components/ES5/_plugins-GSAP/js/EndArrayPlugin.js", "./src/components/ES5/_plugins-GSAP/js/ModifiersPlugin.js", "./src/components/ES5/_plugins-GSAP/js/PixiPlugin.js", "./src/components/ES5/_plugins-GSAP/js/RaphaelPlugin.js", "./src/components/ES5/_plugins-GSAP/js/ScrollToPlugin.js", "./src/components/ES5/_plugins-GSAP/js/TEMPLATE_Plugin.js", "./src/components/ES5/_plugins-GSAP/js/TextPlugin.js", //three.js plugins
   "./src/components/ES5/_plugins-THREE/js/renderers/CSS3DRenderer.js", "./src/components/ES5/_plugins-THREE/js/controls/OrbitControls.js", "./src/components/ES5/_plugins-THREE/js/loaders/GLTFLoader.js", "./src/components/ES5/_plugins-THREE/js/loaders/MTLLoader.js", "./src/components/ES5/_plugins-THREE/js/loaders/OBJLoader.js", "./src/components/ES5/_plugins-THREE/js/shaders/CopyShader.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/EffectComposer.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/BloomPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/MaskPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/TexturePass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/ShaderPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/RenderPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/ClearPass.js", "./src/components/ES5/_plugins-THREE/js/modifiers/TessellateModifier.js", "./src/components/ES5/_plugins-THREE/js/modifiers/ExplodeModifier.js", "./src/components/ES5/_plugins-THREE/js/extensions/ShaderRuntime.custom.js", "./src/components/ES5/_plugins-THREE/js/extensions/d3-threeD.custom.js", "./src/components/ES5/_plugins-THREE/js/extensions/simplex-noise.js", "./src/components/ES5/_plugins-THREE/js/extensions/THREE.MeshLine.js"]
@@ -18902,24 +18909,9 @@ var wave_background_scss_style = __webpack_require__(100);
 
 // CONCATENATED MODULE: ./src/components/ES6/_app-load.js
 /*
- * Check dependencies
- *    
- */
-if (typeof jQuery === 'undefined' || typeof TweenMax === 'undefined') {
-  throw new Error('Uix Kit\'s JavaScript requires jQuery, TweenMax.');
-}
-/*
- * Fixed a bug that Cannot read property 'fn' of undefined for jQuery 1.xx.x.
- *    
- */
-
-
-window.$ = window.jQuery;
-/*
  * Common website functions, Can be called separately in the HTML page
  *    
  */
-
 
 window.UixGUID = UixGUID;
 window.UixMath = UixMath;
@@ -19083,7 +19075,14 @@ window.UixApplyAsyncAllScripts = UixApplyAsyncAllScripts;
 /***/ })
 /******/ ]);
 //# sourceMappingURL=../css/uix-kit.css.map
-//# sourceMappingURL=uix-kit.js.map
+//# sourceMappingURL=uix-kit.js.map// Must leave a line blank
+/*
+* Fixed a bug that Cannot read property 'fn' of undefined for jQuery 1.xx.x.
+*    
+*/
+window.$ = window.jQuery;
+
+
 /* 
  *************************************
  * Scroll Lock
