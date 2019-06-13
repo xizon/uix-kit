@@ -6,15 +6,15 @@
  */
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 
@@ -25,7 +25,7 @@ export const SHOW_MORELESS = ( ( module, $, window, document ) => {
 	
 	
     module.SHOW_MORELESS               = module.SHOW_MORELESS || {};
-	module.SHOW_MORELESS.version       = '0.0.2';
+    module.SHOW_MORELESS.version       = '0.0.2';
     module.SHOW_MORELESS.documentReady = function( $ ) {
 
 	

@@ -6,15 +6,15 @@
  */
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 
@@ -22,7 +22,7 @@ import {
 export const RETINA = ( ( module, $, window, document ) => {
 	
     module.RETINA               = module.RETINA || {};
-	module.RETINA.version       = '0.0.1';
+    module.RETINA.version       = '0.0.1';
     module.RETINA.documentReady = function( $ ) {
 
 		//Determine if you have retinal display

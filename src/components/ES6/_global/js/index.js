@@ -3,13 +3,13 @@
 
 	TABLE OF CONTENTS
 	---------------------------
-	
-	
+
+
 	${{TOC}}
 
 */
 
-/* 
+/*
  *************************************
  * <!-- Base -->
  *************************************
@@ -21,14 +21,14 @@ import '../scss/_style.scss';
 /*
  * Global variables from front pages
  */
-export let 
-	//If the file is in the root directory, you can leave it empty. 
+export let
+	//If the file is in the root directory, you can leave it empty.
 	//If in another directory, you can write: "/blog"
     templateUrl,
 
 	//Eg. https://uiux.cc
 	homeUrl,
-	
+
 	//Eg. https://uiux.cc/wp-admin/admin-ajax.php
 	ajaxUrl;
 
@@ -69,24 +69,24 @@ export const browser = {
  */
 export const UixModuleInstance = ( ( $, window, document ) => {
 	'use strict';
-	
+
     var _APP           = {},
         components     = { documentReady: [], pageLoaded: [] };
 
 	if ( $( 'img' ).length == 0 ) {
 		$( 'body' ).prepend( '<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" style="display:none">' );
 	}
-	
+
 	if( $.isFunction( $.fn.waitForImages ) ) {
 		$( 'body' ).waitForImages( pageLoaded );
 	} else {
 		$( window ).on( 'load', pageLoaded );
 	}
-	
+
     $( document ).ready( documentReady );
-	
+
     function documentReady( context ) {
-        
+
         context = typeof context == typeof undefined ? $ : context;
         components.documentReady.forEach( function( component ) {
             component( context );
@@ -94,7 +94,7 @@ export const UixModuleInstance = ( ( $, window, document ) => {
     }
 
     function pageLoaded( context ){
-        
+
         context = typeof context == "object" ? $ : context;
         components.pageLoaded.forEach( function( component ) {
            component( context );
@@ -114,10 +114,10 @@ export const UixModuleInstance = ( ( $, window, document ) => {
     _APP.components         = components;
     _APP.documentReady      = documentReady;
 	_APP.pageLoaded         = pageLoaded;
-	
-	
+
+
 	return _APP;
-	
+
 })( $, window, document );
 
 
@@ -139,7 +139,7 @@ export const UixGUID = UixGUID || ( () => {
         } while (! t . register ( x ));
         return x;
     }
-	
+
     return t.version = "1.4.2",
     t.create = function() {
         return t();
@@ -174,11 +174,11 @@ export const UixGUID = UixGUID || ( () => {
  */
 export const UixMath = UixMath || ( () => {
     function t() { }
-	
+
     return t.version = "0.0.1",
-   
+
     t.evaluate = function(s) {
-		
+
 		var chars = s.replace(/\s/g, '').split("");
 		var n = [], op = [], index = 0, oplast = true;
 
@@ -233,11 +233,11 @@ export const UixMath = UixMath || ( () => {
  */
 export const UixCssProperty = UixCssProperty || ( () => {
     function t() { }
-	
+
     return t.version = "0.0.1",
 
     t.getTransitionDuration = function( el ) {
-		
+
 		if ( typeof el === typeof undefined ) {
 			return 0;
 		}
@@ -245,7 +245,7 @@ export const UixCssProperty = UixCssProperty || ( () => {
 
 		var style    = window.getComputedStyle(el),
 			duration = style.webkitTransitionDuration,
-			delay    = style.webkitTransitionDelay; 
+			delay    = style.webkitTransitionDelay;
 
 		if ( typeof duration != typeof undefined ) {
 			// fix miliseconds vs seconds
@@ -256,12 +256,12 @@ export const UixCssProperty = UixCssProperty || ( () => {
 		} else {
 			return 0;
 		}
-		
+
     },
-		
+
     //
     t.getAbsoluteCoordinates = function( el ) {
-		
+
 		var windowWidth     = window.innerWidth,
 			leftPos         = null,
 			topPos          = null;
@@ -270,7 +270,7 @@ export const UixCssProperty = UixCssProperty || ( () => {
 			leftPos = ( el.offsetLeft == 0 ) ? el.parentElement.offsetLeft : el.offsetLeft;
 			topPos = ( el.offsetTop == 0 ) ? el.parentElement.offsetTop : el.offsetTop;
 		} else {
-			
+
 			// width and height in pixels, including padding and border
 			// Corresponds to jQuery outerWidth(), outerHeight()
 			leftPos = ( el.offsetLeft == 0 ) ? ( windowWidth - ( el.parentElement.offsetLeft + el.parentElement.offsetWidth ) ) : ( windowWidth - ( el.offsetLeft + el.offsetWidth ) );
@@ -282,10 +282,10 @@ export const UixCssProperty = UixCssProperty || ( () => {
 			'left': leftPos,
 			'top': topPos
 		};
-		
-    },	
-		
-		
+
+    },
+
+
 	t
 })();
 
@@ -294,9 +294,9 @@ export const UixCssProperty = UixCssProperty || ( () => {
 /*
  * Apply some asynchronism scripts
  *
- * @param  {Boolean} scrollReveal          - Run script of module "Scroll Reveal". a page commonly used to 
+ * @param  {Boolean} scrollReveal          - Run script of module "Scroll Reveal". a page commonly used to
  *                                           load asynchronous information
- * @param  {Boolean} ajaxPostList          - Run script of module "Posts List With Ajax". a page commonly used to 
+ * @param  {Boolean} ajaxPostList          - Run script of module "Posts List With Ajax". a page commonly used to
  *                                           load asynchronous information
  * @param  {Boolean} ajaxDDList            - Run script of module "Dynamic Drop Down List from JSON".
  * @param  {Boolean} counterAnim           - Run script of module "Counter".
@@ -304,7 +304,7 @@ export const UixCssProperty = UixCssProperty || ( () => {
  */
 export const UixApplyAsyncScripts = ( options ) => {
 	'use strict';
-	
+
 	// This is the easiest way to have default options.
 	var settings = $.extend({
 		scrollReveal    : true, // @from ./src/components/ES6/scroll-reveal
@@ -319,7 +319,7 @@ export const UixApplyAsyncScripts = ( options ) => {
 	if ( UixModuleInstance.MAIN )                         UixModuleInstance.MAIN.pageLoaded(); //Theme Scripts
 	if ( UixModuleInstance.COMMON_HEIGHT )                UixModuleInstance.COMMON_HEIGHT.pageLoaded(); //Common Height
 	if ( UixModuleInstance.ADVANCED_SLIDER )              UixModuleInstance.ADVANCED_SLIDER.pageLoaded(); //Advanced Slider (Basic)
-	if ( UixModuleInstance.ADVANCED_SLIDER_FILTER )       UixModuleInstance.ADVANCED_SLIDER_FILTER.pageLoaded(); //Advanced Slider	
+	if ( UixModuleInstance.ADVANCED_SLIDER_FILTER )       UixModuleInstance.ADVANCED_SLIDER_FILTER.pageLoaded(); //Advanced Slider
 	if ( UixModuleInstance.POST_LIST_SPLIT_FULLWIDTH )    UixModuleInstance.POST_LIST_SPLIT_FULLWIDTH.pageLoaded(); //Fullwidth List of Split
 	if ( UixModuleInstance.STICKY_EL )                    UixModuleInstance.STICKY_EL.pageLoaded(); //Sticky Elements
 	if ( UixModuleInstance.TEXT_EFFECT )                  UixModuleInstance.TEXT_EFFECT.pageLoaded(); //Text effect
@@ -344,7 +344,7 @@ export const UixApplyAsyncScripts = ( options ) => {
 	if ( UixModuleInstance.SHOW_MORELESS )                UixModuleInstance.SHOW_MORELESS.documentReady($); //Show More Less
 	if ( UixModuleInstance.DROPDOWN_MENU )                UixModuleInstance.DROPDOWN_MENU.documentReady($); //Dropdown Menu
 	if ( UixModuleInstance.DROPDOWN_MENU2 )               UixModuleInstance.DROPDOWN_MENU2.documentReady($); //Dropdown Menu2
-	if ( UixModuleInstance.ACCORDION )                    UixModuleInstance.ACCORDION.documentReady($); //Accordion	
+	if ( UixModuleInstance.ACCORDION )                    UixModuleInstance.ACCORDION.documentReady($); //Accordion
 	if ( UixModuleInstance.ADVANCED_CONTENT_SLIDER )      UixModuleInstance.ADVANCED_CONTENT_SLIDER.documentReady($); //Advanced Content Slider
 	if ( UixModuleInstance.GALLERY )                      UixModuleInstance.GALLERY.documentReady($); //Gallery
 	if ( UixModuleInstance.IMAGE_SHAPES )                 UixModuleInstance.IMAGE_SHAPES.documentReady($); //Image Shapes
@@ -368,12 +368,12 @@ export const UixApplyAsyncScripts = ( options ) => {
 	//---- Commonly used for AJAX modules that are clicked by button
 	//Scroll Reveal
 	if ( settings.scrollReveal ) {
-		if ( UixModuleInstance.SCROLL_REVEAL ) UixModuleInstance.SCROLL_REVEAL.documentReady($); 
+		if ( UixModuleInstance.SCROLL_REVEAL ) UixModuleInstance.SCROLL_REVEAL.documentReady($);
 	}
 
 	//Posts List With Ajax
 	if ( settings.ajaxPostList ) {
-		if ( UixModuleInstance.POST_LIST_AJAX ) UixModuleInstance.POST_LIST_AJAX.documentReady($); 
+		if ( UixModuleInstance.POST_LIST_AJAX ) UixModuleInstance.POST_LIST_AJAX.documentReady($);
 	}
 
 	//Dynamic Drop Down List from JSON
@@ -390,7 +390,7 @@ export const UixApplyAsyncScripts = ( options ) => {
 	//Custom Lightbox
 	if ( settings.lightBox ) {
 		if ( UixModuleInstance.LIGHTBOX ) UixModuleInstance.LIGHTBOX.pageLoaded();
-	}		
+	}
 
 
 
@@ -411,7 +411,7 @@ export const UixApplyAsyncScripts = ( options ) => {
  */
 export const UixApplyAsyncAllScripts = ( options ) => {
 	'use strict';
-	
+
 	// This is the easiest way to have default options.
 	var settings = $.extend({
 		runAll    : true
@@ -429,7 +429,7 @@ export const UixApplyAsyncAllScripts = ( options ) => {
 		}
 		for ( var j = 0; j < scipts_documentReady.length; j++ ) {
 			 scipts_documentReady[j]( $ );
-		}		
+		}
 	}
 
 
@@ -441,4 +441,3 @@ export const UixApplyAsyncAllScripts = ( options ) => {
 
 
 };
-

@@ -6,15 +6,15 @@
  */
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 
@@ -25,7 +25,7 @@ export const VERTICAL_MENU = ( ( module, $, window, document ) => {
 	
 	
     module.VERTICAL_MENU               = module.VERTICAL_MENU || {};
-	module.VERTICAL_MENU.version       = '0.0.1';
+    module.VERTICAL_MENU.version       = '0.0.1';
     module.VERTICAL_MENU.documentReady = function( $ ) {
 
 		var $window      = $( window ),

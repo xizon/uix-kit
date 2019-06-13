@@ -6,15 +6,15 @@
  */	
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 import UixCountTo from '@uixkit/core/counter/js/fn/count-to';
 
@@ -25,7 +25,7 @@ export const COUNTER = ( ( module, $, window, document ) => {
 	
 	
     module.COUNTER               = module.COUNTER || {};
-	module.COUNTER.version       = '0.0.2';
+    module.COUNTER.version       = '0.0.2';
     module.COUNTER.documentReady = function( $ ) {
 
 		var waypoints = $( '[data-counter-number]' ).waypoint({

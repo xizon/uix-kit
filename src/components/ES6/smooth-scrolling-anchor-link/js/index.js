@@ -6,22 +6,22 @@
  */
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 export const SMOOTH_SCROLLING_ANCHORLINK = ( ( module, $, window, document ) => {
 	
 	
     module.SMOOTH_SCROLLING_ANCHORLINK               = module.SMOOTH_SCROLLING_ANCHORLINK || {};
-	module.SMOOTH_SCROLLING_ANCHORLINK.version       = '0.0.5';
+    module.SMOOTH_SCROLLING_ANCHORLINK.version       = '0.0.5';
     module.SMOOTH_SCROLLING_ANCHORLINK.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages

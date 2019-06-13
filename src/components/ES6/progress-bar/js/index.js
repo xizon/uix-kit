@@ -5,15 +5,15 @@
  */
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 
@@ -24,7 +24,7 @@ export const PROGRESS_BAR = ( ( module, $, window, document ) => {
 	
 	
     module.PROGRESS_BAR               = module.PROGRESS_BAR || {};
-	module.PROGRESS_BAR.version       = '0.0.4';
+    module.PROGRESS_BAR.version       = '0.0.4';
     module.PROGRESS_BAR.documentReady = function( $ ) {
 
 		var waypoints = $( '[data-progressbar-percent]' ).waypoint({

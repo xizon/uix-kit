@@ -6,15 +6,15 @@
  */
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 
@@ -23,7 +23,7 @@ export const MOUSEWHEEL_INTERACTION = ( ( module, $, window, document ) => {
 	
 	
     module.MOUSEWHEEL_INTERACTION               = module.MOUSEWHEEL_INTERACTION || {};
-	module.MOUSEWHEEL_INTERACTION.version       = '0.0.2';
+    module.MOUSEWHEEL_INTERACTION.version       = '0.0.2';
     module.MOUSEWHEEL_INTERACTION.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages

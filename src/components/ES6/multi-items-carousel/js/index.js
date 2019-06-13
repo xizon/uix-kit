@@ -12,15 +12,15 @@
 
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 
@@ -31,7 +31,7 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 	
 	
     module.MULTI_ITEMS_CAROUSEL               = module.MULTI_ITEMS_CAROUSEL || {};
-	module.MULTI_ITEMS_CAROUSEL.version       = '0.0.3';
+    module.MULTI_ITEMS_CAROUSEL.version       = '0.0.3';
     module.MULTI_ITEMS_CAROUSEL.documentReady = function( $ ) {
 
 		$( '.uix-multi-carousel' ).each( function()  {

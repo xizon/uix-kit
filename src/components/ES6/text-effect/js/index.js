@@ -23,15 +23,15 @@
 
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 import UixTextEff from '@uixkit/core/text-effect/js/fn/text-anime';
 
@@ -44,7 +44,7 @@ export const TEXT_EFFECT = ( ( module, $, window, document ) => {
 	
 
     module.TEXT_EFFECT               = module.TEXT_EFFECT || {};
-	module.TEXT_EFFECT.version       = '0.0.4';
+    module.TEXT_EFFECT.version       = '0.0.4';
     module.TEXT_EFFECT.pageLoaded    = function() {
 
 		//Default Effect

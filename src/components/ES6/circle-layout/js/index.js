@@ -6,15 +6,15 @@
  */
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 
@@ -24,7 +24,7 @@ import '../scss/_style.scss';
 export const CIRCLE_LAYOUT = ( ( module, $, window, document ) => {
 	
     module.CIRCLE_LAYOUT               = module.CIRCLE_LAYOUT || {};
-	module.CIRCLE_LAYOUT.version       = '0.0.1';
+    module.CIRCLE_LAYOUT.version       = '0.0.1';
     module.CIRCLE_LAYOUT.documentReady = function( $ ) {
 
 		$( '.js-uix-circle-layout' ).each( function( id ) {

@@ -7,15 +7,15 @@
 
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 
@@ -26,7 +26,7 @@ export const TIMELINE = ( ( module, $, window, document ) => {
 	
 
     module.TIMELINE               = module.TIMELINE || {};
-	module.TIMELINE.version       = '0.1.5';
+    module.TIMELINE.version       = '0.1.5';
     module.TIMELINE.pageLoaded    = function() {
 
 		var $window          = $( window ),

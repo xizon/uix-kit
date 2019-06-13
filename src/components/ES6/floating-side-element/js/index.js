@@ -6,15 +6,15 @@
  */
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 
@@ -25,7 +25,7 @@ export const FLOATING_SIDE_EL = ( ( module, $, window, document ) => {
 	
 	
     module.FLOATING_SIDE_EL               = module.FLOATING_SIDE_EL || {};
-	module.FLOATING_SIDE_EL.version       = '0.0.1';
+    module.FLOATING_SIDE_EL.version       = '0.0.1';
     module.FLOATING_SIDE_EL.documentReady = function( $ ) {
 
 

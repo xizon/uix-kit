@@ -13,15 +13,15 @@
 
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 
@@ -30,7 +30,7 @@ export const THREE_MOUSE_INTERACTION = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_MOUSE_INTERACTION               = module.THREE_MOUSE_INTERACTION || {};
-	module.THREE_MOUSE_INTERACTION.version       = '0.0.1';
+    module.THREE_MOUSE_INTERACTION.version       = '0.0.1';
     module.THREE_MOUSE_INTERACTION.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages

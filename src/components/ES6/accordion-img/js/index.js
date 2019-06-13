@@ -6,15 +6,15 @@
  */
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 
@@ -25,7 +25,7 @@ export const ACCORDION_BG = ( ( module, $, window, document ) => {
 	
 	
     module.ACCORDION_BG               = module.ACCORDION_BG || {};
-	module.ACCORDION_BG.version       = '0.0.5';
+    module.ACCORDION_BG.version       = '0.0.5';
     module.ACCORDION_BG.documentReady = function( $ ) {
 		
 		

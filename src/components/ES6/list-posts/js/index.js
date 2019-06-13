@@ -17,15 +17,15 @@
 
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 
@@ -37,7 +37,7 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 	
 	
     module.POST_LIST_AJAX               = module.POST_LIST_AJAX || {};
-	module.POST_LIST_AJAX.version       = '0.0.8';
+    module.POST_LIST_AJAX.version       = '0.0.8';
     module.POST_LIST_AJAX.documentReady = function( $ ) {
 
 		$( '[data-ajax-list-json]' ).each( function() {

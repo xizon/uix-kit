@@ -5,15 +5,15 @@
  */
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 
@@ -24,7 +24,7 @@ export const PROGRESS_LINE = ( ( module, $, window, document ) => {
 	
 	
     module.PROGRESS_LINE               = module.PROGRESS_LINE || {};
-	module.PROGRESS_LINE.version       = '0.0.2';
+    module.PROGRESS_LINE.version       = '0.0.2';
     module.PROGRESS_LINE.documentReady = function( $ ) {
 
 		var $obj                = $( '.uix-progress-line' ),

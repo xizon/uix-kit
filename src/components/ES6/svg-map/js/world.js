@@ -6,15 +6,15 @@
  */
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 
@@ -24,7 +24,7 @@ import '../scss/_style.scss';
 export const SVG_MAP_WORLD = ( ( module, $, window, document ) => {
 	
     module.SVG_MAP_WORLD               = module.SVG_MAP_WORLD || {};
-	module.SVG_MAP_WORLD.version       = '0.0.1';
+    module.SVG_MAP_WORLD.version       = '0.0.1';
     module.SVG_MAP_WORLD.documentReady = function( $ ) {
 
 

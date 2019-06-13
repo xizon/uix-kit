@@ -7,15 +7,15 @@
 
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 import UixParallax from '@uixkit/core/_global/js/fn/parallax';
 
@@ -27,7 +27,7 @@ export const PARALLAX = ( ( module, $, window, document ) => {
 	
 	
 	module.PARALLAX               = module.PARALLAX || {};
-	module.PARALLAX.version       = '0.0.5';
+    module.PARALLAX.version       = '0.0.5';
 	module.PARALLAX.documentReady = function( $ ) {
 
         var $window      = $( window ),

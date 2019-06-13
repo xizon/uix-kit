@@ -36,15 +36,15 @@
 
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 import UixRenderNormalRadio from '@uixkit/core/form/js/fn/normal-radio';
 import UixRenderDatePicker from '@uixkit/core/form/js/fn/datapicker';
@@ -66,7 +66,7 @@ export const FORM = ( ( module, $, window, document ) => {
 	
 	
     module.FORM               = module.FORM || {};
-	module.FORM.version       = '0.1.4';
+    module.FORM.version       = '0.1.4';
     module.FORM.documentReady = function( $ ) {
 
 		

@@ -6,15 +6,15 @@
  */
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 
@@ -23,7 +23,7 @@ export const VIDEOS = ( ( module, $, window, document ) => {
 	
 	
 	module.VIDEOS               = module.VIDEOS || {};
-	module.VIDEOS.version       = '0.0.9';
+    module.VIDEOS.version       = '0.0.9';
 	module.VIDEOS.documentReady = function( $ ) {
 
 		var $window      = $( window ),

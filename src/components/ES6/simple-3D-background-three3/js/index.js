@@ -13,15 +13,15 @@
 
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 
@@ -30,7 +30,7 @@ export const THREE_BACKGROUND_THREE3 = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_BACKGROUND_THREE3               = module.THREE_BACKGROUND_THREE3 || {};
-	module.THREE_BACKGROUND_THREE3.version       = '0.0.1';
+    module.THREE_BACKGROUND_THREE3.version       = '0.0.1';
     module.THREE_BACKGROUND_THREE3.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages

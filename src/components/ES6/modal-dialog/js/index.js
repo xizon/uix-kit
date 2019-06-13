@@ -15,15 +15,15 @@
 
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 import UixFireModalDialog from '@uixkit/core/modal-dialog/js/fn/fire-modal-dialog';
 import UixCloseModalDialog from '@uixkit/core/modal-dialog/js/fn/close-modal-dialog';
@@ -34,7 +34,7 @@ import '../scss/_style.scss';
 export const MODAL_DIALOG = ( ( module, $, window, document ) => {
 	
     module.MODAL_DIALOG               = module.MODAL_DIALOG || {};
-	module.MODAL_DIALOG.version       = '0.0.9';
+    module.MODAL_DIALOG.version       = '0.0.9';
     module.MODAL_DIALOG.documentReady = function( $ ) {
 
 		

@@ -6,15 +6,15 @@
  */
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 
@@ -25,7 +25,7 @@ export const WP_CORE = ( ( module, $, window, document ) => {
 	
 	
     module.WP_CORE               = module.WP_CORE || {};
-	module.WP_CORE.version       = '0.0.1';
+    module.WP_CORE.version       = '0.0.1';
     module.WP_CORE.documentReady = function( $ ) {
 
 		/* 

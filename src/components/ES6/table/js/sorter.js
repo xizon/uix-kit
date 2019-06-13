@@ -6,17 +6,17 @@
 
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
-import UixCountTo from '@uixkit/core/table/js/fn/sort-elements';
+import sortElements from '@uixkit/core/table/js/fn/sort-elements';
 
 import '../scss/_style.scss';
 
@@ -25,7 +25,7 @@ export const TABLE_SORTER = ( ( module, $, window, document ) => {
 	
 	
     module.TABLE_SORTER               = module.TABLE_SORTER || {};
-	module.TABLE_SORTER.version       = '0.0.2';
+    module.TABLE_SORTER.version       = '0.0.2';
     module.TABLE_SORTER.documentReady = function( $ ) {
 
 		

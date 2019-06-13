@@ -5,15 +5,15 @@
  */
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 
@@ -24,7 +24,7 @@ export const TEAM_FOCUS = ( ( module, $, window, document ) => {
 	
 	
     module.TEAM_FOCUS               = module.TEAM_FOCUS || {};
-	module.TEAM_FOCUS.version       = '0.0.2';
+    module.TEAM_FOCUS.version       = '0.0.2';
     module.TEAM_FOCUS.documentReady = function( $ ) {
 
 		var teamFocusContent = '.uix-team-focus',

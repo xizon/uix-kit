@@ -12,15 +12,15 @@
 
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 
@@ -30,7 +30,7 @@ export const ONEPAGE2 = ( ( module, $, window, document ) => {
 	
 	
     module.ONEPAGE2               = module.ONEPAGE2 || {};
-	module.ONEPAGE2.version       = '0.0.4';
+    module.ONEPAGE2.version       = '0.0.4';
     module.ONEPAGE2.documentReady = function( $ ) {
 
         var $window      = $( window ),

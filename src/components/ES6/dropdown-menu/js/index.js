@@ -6,15 +6,15 @@
  */	
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 
@@ -25,7 +25,7 @@ export const DROPDOWN_MENU = ( ( module, $, window, document ) => {
 	
 	
     module.DROPDOWN_MENU               = module.DROPDOWN_MENU || {};
-	module.DROPDOWN_MENU.version       = '0.0.2';
+    module.DROPDOWN_MENU.version       = '0.0.2';
     module.DROPDOWN_MENU.documentReady = function( $ ) {
 
 		//Create a trigger of Dropdown Menu on Click

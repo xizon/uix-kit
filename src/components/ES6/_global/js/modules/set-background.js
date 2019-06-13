@@ -6,15 +6,15 @@
  */
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 import UixParallax from '@uixkit/core/_global/js/fn/parallax';
 
@@ -23,7 +23,7 @@ export const SET_BG = ( ( module, $, window, document ) => {
 	
 	
 	module.SET_BG               = module.SET_BG || {};
-	module.SET_BG.version       = '0.0.3';
+    module.SET_BG.version       = '0.0.3';
 	module.SET_BG.documentReady = function( $ ) {
 
 

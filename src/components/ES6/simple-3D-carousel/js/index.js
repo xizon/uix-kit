@@ -13,15 +13,15 @@
 
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 
@@ -32,7 +32,7 @@ export const THREE_CAROUSEL = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_CAROUSEL               = module.THREE_CAROUSEL || {};
-	module.THREE_CAROUSEL.version       = '0.0.1';
+    module.THREE_CAROUSEL.version       = '0.0.1';
     module.THREE_CAROUSEL.documentReady = function( $ ) {
 
 		$( '.uix-3d-carousel' ).each( function() {

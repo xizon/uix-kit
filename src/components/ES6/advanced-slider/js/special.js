@@ -14,15 +14,15 @@
 
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 
@@ -34,7 +34,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 	
 
     module.ADVANCED_SLIDER_FILTER               = module.ADVANCED_SLIDER_FILTER || {};
-	module.ADVANCED_SLIDER_FILTER.version       = '0.1.8';
+    module.ADVANCED_SLIDER_FILTER.version       = '0.1.8';
     module.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 		

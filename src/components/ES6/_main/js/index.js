@@ -7,15 +7,15 @@
 
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 
@@ -26,7 +26,7 @@ export const MAIN = ( ( module, $, window, document ) => {
 	
 	
     module.MAIN               = module.MAIN || {};
-	module.MAIN.version       = '0.0.1';
+    module.MAIN.version       = '0.0.1';
     module.MAIN.documentReady = function( $ ) {
 
 		/* 

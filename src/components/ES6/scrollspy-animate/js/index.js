@@ -14,15 +14,15 @@
 
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 
@@ -30,7 +30,7 @@ export const SCROLLSPY_ANIM = ( ( module, $, window, document ) => {
 	
 	
     module.SCROLLSPY_ANIM               = module.SCROLLSPY_ANIM || {};
-	module.SCROLLSPY_ANIM.version       = '0.0.1';
+    module.SCROLLSPY_ANIM.version       = '0.0.1';
     module.SCROLLSPY_ANIM.documentReady = function( $ ) {
 
 		// Remove pixi.js banner from the console

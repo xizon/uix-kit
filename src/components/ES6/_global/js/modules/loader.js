@@ -5,15 +5,15 @@
  */
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 
@@ -22,7 +22,7 @@ export const LOADER = ( ( module, $, window, document ) => {
 	
 	
 	module.LOADER               = module.LOADER || {};
-	module.LOADER.version       = '0.0.2';
+    module.LOADER.version       = '0.0.2';
 	module.LOADER.documentReady = function( $ ) {
 
 

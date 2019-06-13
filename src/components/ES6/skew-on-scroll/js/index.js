@@ -6,15 +6,15 @@
  */
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 
@@ -22,7 +22,7 @@ import {
 export const SKEW_ON_SCROLL = ( ( module, $, window, document ) => {
 	
     module.SKEW_ON_SCROLL               = module.SKEW_ON_SCROLL || {};
-	module.SKEW_ON_SCROLL.version       = '0.0.1';
+    module.SKEW_ON_SCROLL.version       = '0.0.1';
     module.SKEW_ON_SCROLL.documentReady = function( $ ) {
 
 		$( '.uix-skewscroll-container' ).each( function() {

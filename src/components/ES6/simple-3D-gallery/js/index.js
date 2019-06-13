@@ -13,22 +13,22 @@
 
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 export const THREE_GALLERY = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_GALLERY               = module.THREE_GALLERY || {};
-	module.THREE_GALLERY.version       = '0.0.3';
+    module.THREE_GALLERY.version       = '0.0.3';
     module.THREE_GALLERY.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages

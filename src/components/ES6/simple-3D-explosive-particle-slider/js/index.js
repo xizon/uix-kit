@@ -13,15 +13,15 @@
 
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 
@@ -31,7 +31,7 @@ import '../scss/_style.scss';
 export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 	
     module.THREE_EXP_PARTICLE_SLIDER               = module.THREE_EXP_PARTICLE_SLIDER || {};
-	module.THREE_EXP_PARTICLE_SLIDER.version       = '0.0.2';
+    module.THREE_EXP_PARTICLE_SLIDER.version       = '0.0.2';
     module.THREE_EXP_PARTICLE_SLIDER.documentReady = function( $ ) {
 
 		

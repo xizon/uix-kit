@@ -13,15 +13,15 @@
 
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 
@@ -30,7 +30,7 @@ export const THREE_MODEL = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_MODEL               = module.THREE_MODEL || {};
-	module.THREE_MODEL.version       = '0.0.2';
+    module.THREE_MODEL.version       = '0.0.2';
     module.THREE_MODEL.documentReady = function( $ ) {
 
 		

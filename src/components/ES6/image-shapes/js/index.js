@@ -6,15 +6,15 @@
  */	
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 
@@ -25,7 +25,7 @@ export const IMAGE_SHAPES = ( ( module, $, window, document ) => {
 	
 	
     module.IMAGE_SHAPES               = module.IMAGE_SHAPES || {};
-	module.IMAGE_SHAPES.version       = '0.0.1';
+    module.IMAGE_SHAPES.version       = '0.0.1';
     module.IMAGE_SHAPES.documentReady = function( $ ) {
 
         var $window      = $( window ),

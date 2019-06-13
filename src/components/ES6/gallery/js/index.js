@@ -13,15 +13,15 @@
 
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 
@@ -31,7 +31,7 @@ import '../scss/_style.scss';
 export const GALLERY = ( ( module, $, window, document ) => {
 	
     module.GALLERY               = module.GALLERY || {};
-	module.GALLERY.version       = '0.0.3';
+    module.GALLERY.version       = '0.0.3';
     module.GALLERY.documentReady = function( $ ) {
 
 		$( '.uix-gallery' ).each( function() {

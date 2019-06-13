@@ -6,22 +6,22 @@
  */
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 
 export const SCROLL_REVEAL = ( ( module, $, window, document ) => {
 	
     module.SCROLL_REVEAL               = module.SCROLL_REVEAL || {};
-	module.SCROLL_REVEAL.version       = '0.1.0';
+    module.SCROLL_REVEAL.version       = '0.1.0';
     module.SCROLL_REVEAL.documentReady = function( $ ) {
 
 		

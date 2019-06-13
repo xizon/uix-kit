@@ -5,15 +5,15 @@
  */
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 
@@ -24,7 +24,7 @@ export const TABLE = ( ( module, $, window, document ) => {
 	
 	
     module.TABLE               = module.TABLE || {};
-	module.TABLE.version       = '0.0.3';
+    module.TABLE.version       = '0.0.3';
     module.TABLE.documentReady = function( $ ) {
 
 

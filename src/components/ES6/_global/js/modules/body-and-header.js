@@ -6,15 +6,15 @@
  */
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 
@@ -23,7 +23,7 @@ export const BODY_AND_HEADER = ( ( module, $, window, document ) => {
 	
 	
 	module.BODY_AND_HEADER               = module.BODY_AND_HEADER || {};
-	module.BODY_AND_HEADER.version       = '0.0.3';
+    module.BODY_AND_HEADER.version       = '0.0.3';
 	module.BODY_AND_HEADER.documentReady = function( $ ) {
 
 

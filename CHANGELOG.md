@@ -1,9 +1,10 @@
 # Changelog
 
 
-#### = 3.6.1 (June 13, 2019) =
+#### = 3.6.2 (June 13, 2019) =
 
 * Fix: Fixed a bug that Cannot read property 'fn' of undefined for jQuery 1.xx.x when using WordPress.
+* Tweak: Beautify script for all modules.
 
 
 #### = 3.6.0 (June 12, 2019) =

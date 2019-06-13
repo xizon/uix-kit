@@ -2,7 +2,7 @@
  * 
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
- * ## Version             :  3.6.1
+ * ## Version             :  3.6.2
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
  * ## Last Update         :  June 13, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -2033,8 +2033,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 	TABLE OF CONTENTS
 	---------------------------
-	
-	
+
+
 	1.Base
     2.Body And Header
     3.Common Height
@@ -2120,7 +2120,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 */
 
-/* 
+/*
  *************************************
  * <!-- Base -->
  *************************************
@@ -2130,7 +2130,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * Global variables from front pages
  */
 
-var //If the file is in the root directory, you can leave it empty. 
+var //If the file is in the root directory, you can leave it empty.
 //If in another directory, you can write: "/blog"
 templateUrl, //Eg. https://uiux.cc
 homeUrl, //Eg. https://uiux.cc/wp-admin/admin-ajax.php
@@ -2375,9 +2375,9 @@ var UixCssProperty = UixCssProperty || function () {
 /*
  * Apply some asynchronism scripts
  *
- * @param  {Boolean} scrollReveal          - Run script of module "Scroll Reveal". a page commonly used to 
+ * @param  {Boolean} scrollReveal          - Run script of module "Scroll Reveal". a page commonly used to
  *                                           load asynchronous information
- * @param  {Boolean} ajaxPostList          - Run script of module "Posts List With Ajax". a page commonly used to 
+ * @param  {Boolean} ajaxPostList          - Run script of module "Posts List With Ajax". a page commonly used to
  *                                           load asynchronous information
  * @param  {Boolean} ajaxDDList            - Run script of module "Dynamic Drop Down List from JSON".
  * @param  {Boolean} counterAnim           - Run script of module "Counter".
@@ -2406,7 +2406,7 @@ var UixApplyAsyncScripts = function UixApplyAsyncScripts(options) {
 
   if (UixModuleInstance.ADVANCED_SLIDER) UixModuleInstance.ADVANCED_SLIDER.pageLoaded(); //Advanced Slider (Basic)
 
-  if (UixModuleInstance.ADVANCED_SLIDER_FILTER) UixModuleInstance.ADVANCED_SLIDER_FILTER.pageLoaded(); //Advanced Slider	
+  if (UixModuleInstance.ADVANCED_SLIDER_FILTER) UixModuleInstance.ADVANCED_SLIDER_FILTER.pageLoaded(); //Advanced Slider
 
   if (UixModuleInstance.POST_LIST_SPLIT_FULLWIDTH) UixModuleInstance.POST_LIST_SPLIT_FULLWIDTH.pageLoaded(); //Fullwidth List of Split
 
@@ -2449,7 +2449,7 @@ var UixApplyAsyncScripts = function UixApplyAsyncScripts(options) {
 
   if (UixModuleInstance.DROPDOWN_MENU2) UixModuleInstance.DROPDOWN_MENU2.documentReady($); //Dropdown Menu2
 
-  if (UixModuleInstance.ACCORDION) UixModuleInstance.ACCORDION.documentReady($); //Accordion	
+  if (UixModuleInstance.ACCORDION) UixModuleInstance.ACCORDION.documentReady($); //Accordion
 
   if (UixModuleInstance.ADVANCED_CONTENT_SLIDER) UixModuleInstance.ADVANCED_CONTENT_SLIDER.documentReady($); //Advanced Content Slider
 

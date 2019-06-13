@@ -6,15 +6,15 @@
  */
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 
@@ -24,7 +24,7 @@ import '../scss/_style.scss';
 export const TABS = ( ( module, $, window, document ) => {
 	
     module.TABS               = module.TABS || {};
-	module.TABS.version       = '0.1.3';
+    module.TABS.version       = '0.1.3';
     module.TABS.documentReady = function( $ ) {
 
 		$( '.uix-tabs' ).each( function( id ) {

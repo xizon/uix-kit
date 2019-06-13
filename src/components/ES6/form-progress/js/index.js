@@ -25,15 +25,15 @@
 
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 import UixFormProgressToNext from '@uixkit/core/form-progress/js/fn/form-progress-to-next';
 
@@ -43,7 +43,7 @@ import '../scss/_style.scss';
 export const FORM_PROGRESS = ( ( module, $, window, document ) => {
 	
     module.FORM_PROGRESS               = module.FORM_PROGRESS || {};
-	module.FORM_PROGRESS.version       = '0.0.2';
+    module.FORM_PROGRESS.version       = '0.0.2';
     module.FORM_PROGRESS.pageLoaded    = function() {
 
 		var $progressBar   = $( '.uix-form-progress progress' ),

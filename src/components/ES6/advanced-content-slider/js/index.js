@@ -12,15 +12,15 @@
 
 import {
     templateUrl,
-	homeUrl,
-	ajaxUrl,
+    homeUrl,
+    ajaxUrl,
     browser,
     UixModuleInstance,
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
+    UixGUID,
+    UixMath,
+    UixCssProperty,
+    UixApplyAsyncScripts,
+    UixApplyAsyncAllScripts
 } from '@uixkit/core/_global/js';
 
 
@@ -31,7 +31,7 @@ export const ADVANCED_CONTENT_SLIDER = ( ( module, $, window, document ) => {
 	
 	
     module.ADVANCED_CONTENT_SLIDER               = module.ADVANCED_CONTENT_SLIDER || {};
-	module.ADVANCED_CONTENT_SLIDER.version       = '0.0.3';
+    module.ADVANCED_CONTENT_SLIDER.version       = '0.0.3';
     module.ADVANCED_CONTENT_SLIDER.documentReady = function( $ ) {
 
 		var $window                   = $( window ),
