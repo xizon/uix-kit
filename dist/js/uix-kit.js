@@ -4,7 +4,7 @@
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Version             :  3.6.0
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  June 12, 2019
+ * ## Last Update         :  June 13, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -177,7 +177,125 @@
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-// extracted by mini-css-extract-plugin
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+/*
+ * Render Custom Select
+ *
+ * @param  {String} selector             - The current selector.
+ * @param  {String} targetWrapper        - Wrapper of the selector.
+ * @param  {String} trigger              - Trigger of the selector.
+ * @param  {String} itemsWrapper         - Selector's options container.
+ * @param  {Object} item                 - Each option of the selector.
+ * @return {Void}
+ */
+(function ($) {
+  $.fn.UixRenderCustomSelect = function (options) {
+    // This is the easiest way to have default options.
+    var settings = $.extend({
+      selector: '.uix-controls__select',
+      targetWrapper: '.uix-controls__select-wrapper',
+      trigger: '.uix-controls__select-trigger',
+      itemsWrapper: '.uix-controls__select__option-container',
+      item: '.uix-controls__select__option'
+    }, options);
+    this.each(function () {
+      $(settings.selector).not('.js-uix-new').each(function () {
+        var $this = $(this),
+            classes = $this.attr('class'),
+            id = $this.attr('id'),
+            name = $this.attr('name'),
+            template = '',
+            labelText = $this.find('> span').html(),
+            dataExist = $this.data('exist');
+
+        if (_typeof(dataExist) === ( true ? "undefined" : undefined) && dataExist != 1) {
+          template = '<div class="' + classes + ' js-uix-new">';
+          template += '<span class="uix-controls__select-trigger">' + $this.find('select').attr('placeholder') + '</span><span class="uix-controls__bar"></span>';
+          template += '<div class="uix-controls__select__option-container">';
+          $this.find('select option').each(function (index) {
+            var selected = '';
+
+            if ($(this).is(':selected')) {
+              selected = 'is-active';
+            }
+
+            template += '<span class="uix-controls__select__option ' + selected + '" data-value="' + $(this).attr('value') + '">' + $(this).html() + '</span>';
+          });
+          template += '</div></div>';
+
+          if (_typeof(labelText) != ( true ? "undefined" : undefined) && labelText != '') {
+            template += '<span class="uix-controls__select-label">' + labelText + '</span>';
+          }
+
+          $this.wrap('<div class="' + settings.targetWrapper.replace('.', '') + ' ' + ($this.hasClass('uix-controls--line') ? 'uix-controls--line' : '') + ' ' + ($this.hasClass('is-fullwidth') ? 'is-fullwidth' : '') + ' ' + ($this.hasClass('is-disabled') ? 'is-disabled' : '') + '"></div>');
+          $this.hide();
+          $this.after(template); //Prevent the form from being initialized again
+
+          $(this).data('exist', 1);
+        }
+      }); //Show/Hide Selector
+
+      $(document).on('click', settings.trigger, function (e) {
+        e.preventDefault();
+        var $selectWrapper = $(this).closest(settings.targetWrapper),
+            $selectCurWrapper = $selectWrapper.find(settings.selector + '.js-uix-new');
+        $selectCurWrapper.addClass('is-opened');
+      });
+      $(document.body).on('click', function (e) {
+        if (e.target.className != '' && _typeof(e.target.className) != ( true ? "undefined" : undefined) && Object.prototype.toString.call(e.target.className) != '[object SVGAnimatedString]') {
+          if (e.target.className.indexOf('uix-controls__select__option') < 0) {
+            $(settings.selector + '.js-uix-new').removeClass('is-opened');
+          }
+        }
+      }); //Set the default selector text
+
+      $(settings.selector + '.js-uix-new').each(function (index) {
+        $(this).find(settings.trigger).text($(this).find(settings.item + '.is-active').html());
+      }); //Change Event Here
+      //Prevents the triggering of multiple change events
+
+      $(document).off('click.FORM_SELECT');
+      $(document).on('click.FORM_SELECT', settings.item, function (e) {
+        e.preventDefault();
+        var $selectWrapper = $(this).closest(settings.targetWrapper),
+            $selectCurWrapper = $selectWrapper.find(settings.selector + '.js-uix-new'),
+            curVal = $(this).data('value'); //Close the selector
+
+        $selectCurWrapper.removeClass('is-opened'); //Set the selector text
+
+        $selectCurWrapper.find(settings.trigger).text($(this).html()).addClass('is-active'); //Activate this option
+
+        $selectCurWrapper.find(settings.item).removeClass('is-active');
+        $(this).addClass('is-active'); //Set select option 'selected', by value
+
+        $selectWrapper.find('select').val(curVal);
+        $selectWrapper.find('select option').removeAttr('selected');
+        $selectWrapper.find('select option[value="' + curVal + '"]').attr('selected', 'selected').change();
+      }); //Synchronize to the original select change event
+
+      $(settings.selector).not('.js-uix-new').each(function () {
+        var $this = $(this).find('select'),
+            $cusSelect = $this.closest(settings.targetWrapper).find(settings.selector + '.js-uix-new'),
+            newOptions = '';
+        $this.closest(settings.targetWrapper).find('select option').each(function (index) {
+          var selected = '';
+
+          if ($(this).is(':selected')) {
+            selected = 'is-active';
+          }
+
+          newOptions += '<span class="uix-controls__select__option ' + selected + '" data-value="' + $(this).attr('value') + '">' + $(this).html() + '</span>';
+        });
+        $cusSelect.find(settings.itemsWrapper).html('<div>' + newOptions + '</div>'); //Set the default selector text
+
+        $cusSelect.each(function (index) {
+          $(this).find(settings.trigger).text($(this).find(settings.item + '.is-active').html());
+        });
+      });
+    });
+  };
+})(jQuery);
 
 /***/ }),
 /* 2 */
@@ -247,6 +365,12 @@
 
 /***/ }),
 /* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 14 */
 /***/ (function(module, exports) {
 
 /* 
@@ -357,12 +481,6 @@
 })(jQuery);
 
 /***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
 /* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -376,6 +494,12 @@
 
 /***/ }),
 /* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 18 */
 /***/ (function(module, exports) {
 
 /*
@@ -445,7 +569,7 @@
 })(jQuery);
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports) {
 
 /*
@@ -482,12 +606,6 @@
 })(jQuery);
 
 /***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
 /* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -495,6 +613,12 @@
 
 /***/ }),
 /* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -634,13 +758,13 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 })(jQuery);
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -684,7 +808,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 })(jQuery);
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -761,7 +885,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 })(jQuery);
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports) {
 
 /*
@@ -804,7 +928,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 })(jQuery);
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -846,7 +970,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 })(jQuery);
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports) {
 
 /*
@@ -878,7 +1002,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 })(jQuery);
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports) {
 
 /*
@@ -949,7 +1073,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 })(jQuery);
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports) {
 
 /*
@@ -981,7 +1105,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 })(jQuery);
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports) {
 
 /*
@@ -1003,7 +1127,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 })(jQuery);
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -1049,7 +1173,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 })(jQuery);
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -1127,130 +1251,6 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
           $(this).data('exist', 1);
         }
-      });
-    });
-  };
-})(jQuery);
-
-/***/ }),
-/* 33 */
-/***/ (function(module, exports, __webpack_require__) {
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-/*
- * Render Custom Select
- *
- * @param  {String} selector             - The current selector.
- * @param  {String} targetWrapper        - Wrapper of the selector.
- * @param  {String} trigger              - Trigger of the selector.
- * @param  {String} itemsWrapper         - Selector's options container.
- * @param  {Object} item                 - Each option of the selector.
- * @return {Void}
- */
-(function ($) {
-  $.fn.UixRenderCustomSelect = function (options) {
-    // This is the easiest way to have default options.
-    var settings = $.extend({
-      selector: '.uix-controls__select',
-      targetWrapper: '.uix-controls__select-wrapper',
-      trigger: '.uix-controls__select-trigger',
-      itemsWrapper: '.uix-controls__select__option-container',
-      item: '.uix-controls__select__option'
-    }, options);
-    this.each(function () {
-      $(settings.selector).not('.js-uix-new').each(function () {
-        var $this = $(this),
-            classes = $this.attr('class'),
-            id = $this.attr('id'),
-            name = $this.attr('name'),
-            template = '',
-            labelText = $this.find('> span').html(),
-            dataExist = $this.data('exist');
-
-        if (_typeof(dataExist) === ( true ? "undefined" : undefined) && dataExist != 1) {
-          template = '<div class="' + classes + ' js-uix-new">';
-          template += '<span class="uix-controls__select-trigger">' + $this.find('select').attr('placeholder') + '</span><span class="uix-controls__bar"></span>';
-          template += '<div class="uix-controls__select__option-container">';
-          $this.find('select option').each(function (index) {
-            var selected = '';
-
-            if ($(this).is(':selected')) {
-              selected = 'is-active';
-            }
-
-            template += '<span class="uix-controls__select__option ' + selected + '" data-value="' + $(this).attr('value') + '">' + $(this).html() + '</span>';
-          });
-          template += '</div></div>';
-
-          if (_typeof(labelText) != ( true ? "undefined" : undefined) && labelText != '') {
-            template += '<span class="uix-controls__select-label">' + labelText + '</span>';
-          }
-
-          $this.wrap('<div class="' + settings.targetWrapper.replace('.', '') + ' ' + ($this.hasClass('uix-controls--line') ? 'uix-controls--line' : '') + ' ' + ($this.hasClass('is-fullwidth') ? 'is-fullwidth' : '') + ' ' + ($this.hasClass('is-disabled') ? 'is-disabled' : '') + '"></div>');
-          $this.hide();
-          $this.after(template); //Prevent the form from being initialized again
-
-          $(this).data('exist', 1);
-        }
-      }); //Show/Hide Selector
-
-      $(document).on('click', settings.trigger, function (e) {
-        e.preventDefault();
-        var $selectWrapper = $(this).closest(settings.targetWrapper),
-            $selectCurWrapper = $selectWrapper.find(settings.selector + '.js-uix-new');
-        $selectCurWrapper.addClass('is-opened');
-      });
-      $(document.body).on('click', function (e) {
-        if (e.target.className != '' && _typeof(e.target.className) != ( true ? "undefined" : undefined) && Object.prototype.toString.call(e.target.className) != '[object SVGAnimatedString]') {
-          if (e.target.className.indexOf('uix-controls__select__option') < 0) {
-            $(settings.selector + '.js-uix-new').removeClass('is-opened');
-          }
-        }
-      }); //Set the default selector text
-
-      $(settings.selector + '.js-uix-new').each(function (index) {
-        $(this).find(settings.trigger).text($(this).find(settings.item + '.is-active').html());
-      }); //Change Event Here
-      //Prevents the triggering of multiple change events
-
-      $(document).off('click.FORM_SELECT');
-      $(document).on('click.FORM_SELECT', settings.item, function (e) {
-        e.preventDefault();
-        var $selectWrapper = $(this).closest(settings.targetWrapper),
-            $selectCurWrapper = $selectWrapper.find(settings.selector + '.js-uix-new'),
-            curVal = $(this).data('value'); //Close the selector
-
-        $selectCurWrapper.removeClass('is-opened'); //Set the selector text
-
-        $selectCurWrapper.find(settings.trigger).text($(this).html()).addClass('is-active'); //Activate this option
-
-        $selectCurWrapper.find(settings.item).removeClass('is-active');
-        $(this).addClass('is-active'); //Set select option 'selected', by value
-
-        $selectWrapper.find('select').val(curVal);
-        $selectWrapper.find('select option').removeAttr('selected');
-        $selectWrapper.find('select option[value="' + curVal + '"]').attr('selected', 'selected').change();
-      }); //Synchronize to the original select change event
-
-      $(settings.selector).not('.js-uix-new').each(function () {
-        var $this = $(this).find('select'),
-            $cusSelect = $this.closest(settings.targetWrapper).find(settings.selector + '.js-uix-new'),
-            newOptions = '';
-        $this.closest(settings.targetWrapper).find('select option').each(function (index) {
-          var selected = '';
-
-          if ($(this).is(':selected')) {
-            selected = 'is-active';
-          }
-
-          newOptions += '<span class="uix-controls__select__option ' + selected + '" data-value="' + $(this).attr('value') + '">' + $(this).html() + '</span>';
-        });
-        $cusSelect.find(settings.itemsWrapper).html('<div>' + newOptions + '</div>'); //Set the default selector text
-
-        $cusSelect.each(function (index) {
-          $(this).find(settings.trigger).text($(this).find(settings.item + '.is-active').html());
-        });
       });
     });
   };
@@ -2015,7 +2015,7 @@ var UIXKIT_3RD_PARTY_PLUGINS_IMPORT = {
 };
 
 // EXTERNAL MODULE: ./src/components/ES6/_global/scss/_style.scss
-var _style = __webpack_require__(3);
+var _style = __webpack_require__(4);
 
 // CONCATENATED MODULE: ./src/components/ES6/_global/js/index.js
 var _this = undefined;
@@ -3678,7 +3678,7 @@ var VIDEOS = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/_main/scss/_style.scss
-var scss_style = __webpack_require__(4);
+var scss_style = __webpack_require__(5);
 
 // CONCATENATED MODULE: ./src/components/ES6/_main/js/index.js
 function js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3721,7 +3721,7 @@ var MAIN = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/accordion-img/scss/_style.scss
-var accordion_img_scss_style = __webpack_require__(5);
+var accordion_img_scss_style = __webpack_require__(6);
 
 // CONCATENATED MODULE: ./src/components/ES6/accordion-img/js/index.js
 function accordion_img_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3837,7 +3837,7 @@ var ACCORDION_BG = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/accordion/scss/_style.scss
-var accordion_scss_style = __webpack_require__(6);
+var accordion_scss_style = __webpack_require__(7);
 
 // CONCATENATED MODULE: ./src/components/ES6/accordion/js/index.js
 function accordion_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3926,7 +3926,7 @@ var ACCORDION = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/advanced-content-slider/scss/_style.scss
-var advanced_content_slider_scss_style = __webpack_require__(7);
+var advanced_content_slider_scss_style = __webpack_require__(8);
 
 // CONCATENATED MODULE: ./src/components/ES6/advanced-content-slider/js/index.js
 function advanced_content_slider_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -4207,7 +4207,7 @@ var ADVANCED_CONTENT_SLIDER = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/advanced-slider/scss/_basic.scss
-var _basic = __webpack_require__(8);
+var _basic = __webpack_require__(9);
 
 // CONCATENATED MODULE: ./src/components/ES6/advanced-slider/js/basic.js
 function basic_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -4835,7 +4835,7 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/advanced-slider/scss/_special.scss
-var _special = __webpack_require__(9);
+var _special = __webpack_require__(10);
 
 // CONCATENATED MODULE: ./src/components/ES6/advanced-slider/js/special.js
 function special_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -6832,7 +6832,7 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/AJAX/scss/_style.scss
-var AJAX_scss_style = __webpack_require__(10);
+var AJAX_scss_style = __webpack_require__(11);
 
 // CONCATENATED MODULE: ./src/components/ES6/AJAX/js/index.js
 function AJAX_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -7234,7 +7234,7 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/back-to-top/scss/_style.scss
-var back_to_top_scss_style = __webpack_require__(11);
+var back_to_top_scss_style = __webpack_require__(12);
 
 // CONCATENATED MODULE: ./src/components/ES6/back-to-top/js/index.js
 function back_to_top_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -7293,7 +7293,7 @@ var BACK_TO_TOP = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/circle-layout/scss/_style.scss
-var circle_layout_scss_style = __webpack_require__(12);
+var circle_layout_scss_style = __webpack_require__(13);
 
 // CONCATENATED MODULE: ./src/components/ES6/circle-layout/js/index.js
 function circle_layout_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -7382,10 +7382,10 @@ var CIRCLE_LAYOUT = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/counter/js/fn/count-to.js
-var count_to = __webpack_require__(13);
+var count_to = __webpack_require__(14);
 
 // EXTERNAL MODULE: ./src/components/ES6/counter/scss/_style.scss
-var counter_scss_style = __webpack_require__(14);
+var counter_scss_style = __webpack_require__(15);
 
 // CONCATENATED MODULE: ./src/components/ES6/counter/js/index.js
 function counter_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -7422,7 +7422,7 @@ var COUNTER = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/dropdown-menu/scss/_style.scss
-var dropdown_menu_scss_style = __webpack_require__(15);
+var dropdown_menu_scss_style = __webpack_require__(16);
 
 // CONCATENATED MODULE: ./src/components/ES6/dropdown-menu/js/index.js
 function dropdown_menu_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -7483,7 +7483,7 @@ var DROPDOWN_MENU = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/dropdown-menu2/scss/_style.scss
-var dropdown_menu2_scss_style = __webpack_require__(16);
+var dropdown_menu2_scss_style = __webpack_require__(17);
 
 // CONCATENATED MODULE: ./src/components/ES6/dropdown-menu2/js/index.js
 function dropdown_menu2_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -7559,10 +7559,13 @@ var DROPDOWN_MENU2 = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/dynamic-dropdown-list-json/js/fn/search-json.js
-var search_json = __webpack_require__(17);
+var search_json = __webpack_require__(18);
 
 // EXTERNAL MODULE: ./src/components/ES6/dynamic-dropdown-list-json/js/fn/is-json.js
-var is_json = __webpack_require__(18);
+var is_json = __webpack_require__(19);
+
+// EXTERNAL MODULE: ./src/components/ES6/form/js/fn/select.js
+var fn_select = __webpack_require__(1);
 
 // CONCATENATED MODULE: ./src/components/ES6/dynamic-dropdown-list-json/js/index.js
 function dynamic_dropdown_list_json_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -7574,6 +7577,7 @@ function dynamic_dropdown_list_json_js_typeof(obj) { if (typeof Symbol === "func
  * <!-- Dynamic Drop Down List from JSON -->
  *************************************
  */
+
 
 
 
@@ -7886,7 +7890,7 @@ var DYNAMIC_DD_LIST = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/flexslider/scss/_style.scss
-var flexslider_scss_style = __webpack_require__(19);
+var flexslider_scss_style = __webpack_require__(20);
 
 // CONCATENATED MODULE: ./src/components/ES6/flexslider/js/index.js
 function flexslider_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -8678,7 +8682,7 @@ var FLEXSLIDER = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/floating-side-element/scss/_style.scss
-var floating_side_element_scss_style = __webpack_require__(20);
+var floating_side_element_scss_style = __webpack_require__(21);
 
 // CONCATENATED MODULE: ./src/components/ES6/floating-side-element/js/index.js
 function floating_side_element_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -8742,10 +8746,10 @@ var FLOATING_SIDE_EL = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/form-progress/js/fn/form-progress-to-next.js
-var form_progress_to_next = __webpack_require__(21);
+var form_progress_to_next = __webpack_require__(22);
 
 // EXTERNAL MODULE: ./src/components/ES6/form-progress/scss/_style.scss
-var form_progress_scss_style = __webpack_require__(22);
+var form_progress_scss_style = __webpack_require__(23);
 
 // CONCATENATED MODULE: ./src/components/ES6/form-progress/js/index.js
 function form_progress_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -8856,37 +8860,34 @@ var FORM_PROGRESS = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/form/js/fn/normal-radio.js
-var normal_radio = __webpack_require__(23);
+var normal_radio = __webpack_require__(24);
 
 // EXTERNAL MODULE: ./src/components/ES6/form/js/fn/datapicker.js
-var datapicker = __webpack_require__(24);
+var datapicker = __webpack_require__(25);
 
 // EXTERNAL MODULE: ./src/components/ES6/form/js/fn/controls-hover.js
-var controls_hover = __webpack_require__(25);
+var controls_hover = __webpack_require__(26);
 
 // EXTERNAL MODULE: ./src/components/ES6/form/js/fn/single-seletor.js
-var single_seletor = __webpack_require__(26);
+var single_seletor = __webpack_require__(27);
 
 // EXTERNAL MODULE: ./src/components/ES6/form/js/fn/multi-seletor.js
-var multi_seletor = __webpack_require__(27);
+var multi_seletor = __webpack_require__(28);
 
 // EXTERNAL MODULE: ./src/components/ES6/form/js/fn/file-dropzone.js
-var file_dropzone = __webpack_require__(28);
+var file_dropzone = __webpack_require__(29);
 
 // EXTERNAL MODULE: ./src/components/ES6/form/js/fn/upload.js
-var upload = __webpack_require__(29);
+var upload = __webpack_require__(30);
 
 // EXTERNAL MODULE: ./src/components/ES6/form/js/fn/controls-disable.js
-var controls_disable = __webpack_require__(30);
+var controls_disable = __webpack_require__(31);
 
 // EXTERNAL MODULE: ./src/components/ES6/form/js/fn/controls-line.js
-var controls_line = __webpack_require__(31);
+var controls_line = __webpack_require__(32);
 
 // EXTERNAL MODULE: ./src/components/ES6/form/js/fn/radio-and-checkbox.js
-var radio_and_checkbox = __webpack_require__(32);
-
-// EXTERNAL MODULE: ./src/components/ES6/form/js/fn/select.js
-var fn_select = __webpack_require__(33);
+var radio_and_checkbox = __webpack_require__(33);
 
 // EXTERNAL MODULE: ./src/components/ES6/form/scss/_style.scss
 var form_scss_style = __webpack_require__(34);
@@ -13518,7 +13519,7 @@ var STICKY_EL = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/svg-map/scss/_style.scss
-var svg_map_scss_style = __webpack_require__(1);
+var svg_map_scss_style = __webpack_require__(2);
 
 // CONCATENATED MODULE: ./src/components/ES6/svg-map/js/china.js
 function china_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -17867,7 +17868,7 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/table/scss/_style.scss
-var table_scss_style = __webpack_require__(2);
+var table_scss_style = __webpack_require__(3);
 
 // CONCATENATED MODULE: ./src/components/ES6/table/js/basic.js
 function js_basic_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }

@@ -18,6 +18,7 @@ import {
 } from '@uixkit/core/_global/js';
 import UixSearchJsonStr from '@uixkit/core/dynamic-dropdown-list-json/js/fn/search-json';
 import UixIsJsonObj from '@uixkit/core/dynamic-dropdown-list-json/js/fn/is-json';
+import UixRenderCustomSelect from '@uixkit/core/form/js/fn/select';
 
 
 export const DYNAMIC_DD_LIST = ( ( module, $, window, document ) => {
