@@ -564,6 +564,7 @@ server.listen( globs.port, "localhost", function (err, result) {
 })
 
 
+
 /*! 
  *************************************
  * Process of processing files after compilation
@@ -624,11 +625,17 @@ compiler.hooks.done.tap( 'MyPlugin', ( compilation ) => {
 
 					//Add string on top file with NodeJS
 					//Fixed a bug that Cannot read property 'fn' of undefined for jQuery 1.xx.x.
-					data = data.toString().split("\n");
-					var customWebsiteCommentArr = customWebsiteComment.toString().split("\n");
 					
-					data.splice(customWebsiteCommentArr.length + 2, 0, pureMergeJSDependenciesFileData );
-					var resultData = data.join("\n");
+					var resultData;
+					if ( data.indexOf( pureMergeJSDependenciesFileData ) >= 0 ) {
+						resultData = data;
+					} else {
+						data = data.toString().split("\n");
+						var customWebsiteCommentArr = customWebsiteComment.toString().split("\n");
+
+						data.splice(customWebsiteCommentArr.length + 2, 0, pureMergeJSDependenciesFileData );
+						resultData = data.join("\n");	
+					}
 
 
 					// Step 3 => write targetJSFile
@@ -639,14 +646,14 @@ compiler.hooks.done.tap( 'MyPlugin', ( compilation ) => {
 							console.log(colors.fg.Red, err, colors.Reset);
 							return;
 						}
-						//file written successfully	
-						console.log(colors.fg.Green, `${targetJSFile} added common JavaScript on top successfully! (1/7)`, colors.Reset);
 
-
-						
 						// Step 4 => append targetJSFile
 						//---------------------------------------------------------------------
 						if ( data.indexOf( 'sourceMappingURL='+globs.concatES5_JSFile+'.map' ) < 0 ) {
+							
+							//file written successfully	
+							console.log(colors.fg.Green, `${targetJSFile} added common JavaScript on top successfully! (1/7)`, colors.Reset);
+
 
 							//Update the normal js file
 							fs.appendFile( targetJSFile, oldContent, 'utf8', function (err) {
