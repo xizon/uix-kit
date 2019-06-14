@@ -276,7 +276,7 @@ uix-kit/
 │   ├── index.js
 │   ├── index-rtl.js
 │   ├── components/
-│   │   ├── ES5/  => Third-party plugins adopts pure merge and does not import and export.
+│   │   ├── ES5/  => Third-party plugins adopt pure merge and do not import and export
 │   │   └── ES6/  => Core modules
 ├── examples/
 │   ├── *.html
