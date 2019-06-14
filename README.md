@@ -12,7 +12,7 @@
   <br>
 </p>
 
-**Uix Kit is not a framework, just a toolbox based on some common libraries.**
+**Uix Kit is not a framework, just a UI toolkit based on some common libraries for building beautiful responsive website.**
 
 A free web kits for fast web design and development. Uix Kit can be used separately, or merge components and grid systems using bootstrap. Support JS, HTML and SASS component library automatically packaged. Automatically convert ES6 JS to ES5 using Babel in this scaffold. **Uix Kit is now in Long Term Support (LTS) mode.**
 
