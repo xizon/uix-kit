@@ -14,8 +14,11 @@
 
 **Uix Kit is not a framework, just a UI toolkit based on some common libraries for building beautiful responsive website.**
 
-A free web kits for fast web design and development. Uix Kit can be used separately, or merge components and grid systems using bootstrap. Support JS, HTML and SASS component library automatically packaged. Automatically convert ES6 JS to ES5 using Babel in this scaffold. **Uix Kit is now in Long Term Support (LTS) mode.**
+Uix Kit isn't a reusable component structure, mostly custom CSS and JavaScript based. Definitely interesting, and if you're developing mostly web content and not applications this is particularly useful. 
 
+It can be used separately, or merge components and grid systems using bootstrap. Support JS, HTML and SASS component library automatically packaged. Automatically convert ES6 JS to ES5 using Babel in this scaffold. 
+
+**Uix Kit is now in Long Term Support (LTS) mode.**
 
 
 ---
@@ -55,12 +58,6 @@ GitHub pages can only serve static content, and there is no way to run PHP or ge
 
 
 ## Key Features
-
-
-Uix Kit isn't a reusable component structure, mostly custom CSS and JavaScript based. Definitely interesting, and if you're developing mostly web content and not applications this is particularly useful. 
-
-It can be used separately, or merge components and grid systems using bootstrap. Regardless of the screen size, the website content will naturally fit the given resolution. Using the Uix Kit will save you large amount of time to build your projects. It supports 3D and 2D rendering with three.js and pixi.js. More typically, automatically generate core files with Webpack for each module (contains .js, .scss, .html files).
-
 
 * Supports 3D and 2D rendering with three.js and pixi.js.
 * Using Sass to Control Scope With BEM Naming
