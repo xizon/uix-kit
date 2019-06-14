@@ -61,7 +61,7 @@ GitHub pages can only serve static content, and there is no way to run PHP or ge
 
 * Supports 3D and 2D rendering with three.js and pixi.js.
 * Using Sass to Control Scope With BEM Naming
-* Automatically generate table of contents for each module comment of name.
+* Automatically generate a table of contents for each module comment of the name.
 * Simple custom CSS and JS core files
 * 100% Responsive & Mobile Ready
 * Prepare some generic plug-ins in advance
@@ -71,7 +71,7 @@ GitHub pages can only serve static content, and there is no way to run PHP or ge
 * Support PJAX no refresh method for loading pages
 * Support JS, HTML and SASS component library automatically packaged.
 * Make a foundation for the React architecture.
-* The core module adopts ES6 import and export, and the third-party plugins adopts pure merge and does not import and export.
+* The core module adopts ES6 import and export, and the third-party plugins adopt pure merge and do not import and export.
 
 
 * * *
@@ -115,7 +115,7 @@ $ sudo npm install --only=dev --unsafe-perm --production
 $ npm run build
 ```
 
-**Step 5.** When you done, this will spin up a server that can be accessed at
+**Step 5.** When you have done, this will spin up a server that can be accessed at
 
 ```sh
 http://localhost:8080/examples/
