@@ -1,0 +1,21 @@
+/* ======================================================
+   <!-- Maintain Aspect Ratio List -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+
+@media all and (max-width: 768px) {
+	.uix-list-aspect-ratio {
+
+		padding-right: auto;
+		padding-left: 15px;
+
+		.uix-core-grid__col-4 {
+			float: right;
+		}
+
+
+	}
+
+
+}

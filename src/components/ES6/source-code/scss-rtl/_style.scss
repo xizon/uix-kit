@@ -1,0 +1,17 @@
+/* ======================================================
+    <!-- Source Code -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+
+/* Pretty printing styles. Used with prettify.js. */
+pre.prettyprint {
+	direction: ltr;
+}
+
+
+/* Source Code Button */
+#uix-view-source {
+	right: auto;
+	left: 20px;
+}

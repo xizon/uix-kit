@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="@@{website_lang}" dir="@@{website_dirLTR}">
+<head>
+	<meta charset="@@{website_charset}" />
+	<title>Sticky Elements - @@{website_title}</title>	
+	@@include('./src/components/ES6/_global/include-header.html')
+</head>  
+
+     
+  <body class="page">
+  
+  
+          
+    @@include('./src/components/ES6/_global/include-loader.html')
+    @@include('./src/components/ES6/_global/include-toggle-trigger.html')
+    
+    
+
+  
+    <div class="uix-wrapper">
+    
+        <!-- Header Area
+        ============================================= -->      
+        <header class="uix-header__container">
+            
+             <div class="uix-header">
+                 <div class="container">
+                 
+                        @@include('./src/components/ES6/_global/include-brand.html')
+                        
+                        @@include('./src/components/ES6/_global/include-menu.html')
+                        
+                        
+                        
+                        
+                  </div>
+                  <!-- .container end -->
+                  
+                  <div class="uix-clearfix"></div>
+             </div>
+        
+        </header>
+        <div class="uix-header__placeholder js-uix-header__placeholder-autoheight"></div>
+      
+      
+		<main id="uix-maincontent">
+			
+			<!-- Content 
+			====================================================== -->
+			<section class="uix-spacing--s uix-spacing--no-bottom">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<h3>Sticky Elements</h3>
+							<p>
+							   Use the <code>.js-uix-sticky-el</code> to add a HTML tag you want. Set <code>data-stop-trigger</code> and <code>data-stop-trigger-diff</code> properties to turn off sticky.
+								</p>
+							<hr>
+							
+							
+						</div>
+					</div>
+					<!-- .row end -->
+
+				</div>
+				<!-- .container end -->
+
+			</section>
+			
+			
+
+		   <!-- Content 
+			====================================================== -->
+			<section class="uix-spacing--s" style="height: 3000px;">
+				<div class="container">
+					<div class="row">
+
+						<div class="col-12">
+
+
+								<div class="js-uix-sticky-el" data-stop-trigger=".uix-footer__container" data-stop-trigger-diff="%h/4">
+									<h4>Sticky Title Here</h4>
+									<div style="height: 500px; background: #f2f2f2; margin-bottom: 50px;"></div>
+								</div>
+
+
+
+						</div>
+
+					</div>
+					<!-- .row  end -->
+
+
+
+
+				</div>
+				<!-- .container end -->
+
+			</section>
+
+
+			
+		</main>
+		
+		
+		
+			
+		
+        
+        
+        
+        @@include('./src/components/ES6/_global/include-copyright.html')
+        
+        
+    </div>
+    <!-- .uix-wrapper end -->
+       
+       
+    @@include('./src/components/ES6/_global/include-footer.html')
+

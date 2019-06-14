@@ -51,13 +51,14 @@ const colors = {
 };
 
 let globs = {
-	port                : 8080,
-	examples            : 'examples',
-	build               : 'src',
-	dist                : 'dist',
-	concatES5_JSFile    : 'uix-kit.concat.es5.dev.js' //This file is used for the mergence of JS script files that do not require ES6 compilation.
+	port                  : 8080,
+	examples              : 'examples',
+	build                 : 'src',
+	dist                  : 'dist',
+	pathCore              : './src/components/ES6',
+	pathThirdPartyPlugins : './src/components/ES5',
+	concatES5_JSFile      : 'uix-kit.concat.es5.3rd-party-plugins.js' //This file is used for the mergence of JS script files that do not require ES6 compilation.
 };
-
 
 
 /*! 
@@ -89,8 +90,8 @@ let customWebsiteVersion     = json.version,
 
 
 // Get all the HTML template files
-let tempPagesES5 = glob.sync( './'+globs.build+'/components/ES5/**/*.html' );
-let tempPagesES6 = glob.sync( './'+globs.build+'/components/ES6/**/*.html' );
+let tempPagesES5 = glob.sync( globs.pathThirdPartyPlugins + '/**/*.html' );
+let tempPagesES6 = glob.sync( globs.pathCore + '/**/*.html' );
 let targetTempFilesName = [];
 let targetAllTempFilesName = [];
 
@@ -114,9 +115,10 @@ tempAllPages.map( ( event ) => {
 
 
 // Get all the js component files with ES5
-//Just do a merge, not for ES6 parsing
+// Third-party plugins adopt pure file merger and do not import and export
+let pureMergeJSDependenciesFile = globs.pathThirdPartyPlugins + '/_plugins-Miscellaneous/js/_dependencies.js';
 let targetJSComFilesName = '';
-let JSComFiles = './'+globs.build+'/components/ES5/_global/js/_all.js';
+let JSComFiles = globs.pathThirdPartyPlugins + '/_app-load.js';
 if ( fs.existsSync( JSComFiles ) ) {
 
 	let content = fs.readFileSync( JSComFiles );
@@ -129,8 +131,8 @@ if ( fs.existsSync( JSComFiles ) ) {
 						.replace(/\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm, '' );
 
 
-	let filesJSON = curCon.match(/UIX_KIT_IMPORT\=\{.*?(?:\}|\})/gi );
-	filesJSON = filesJSON[0].replace( 'UIX_KIT_IMPORT=', '' );
+	let filesJSON = curCon.match(/UIXKIT_3RD_PARTY_PLUGINS_IMPORT\=\{.*?(?:\}|\})/gi );
+	filesJSON = filesJSON[0].replace( 'UIXKIT_3RD_PARTY_PLUGINS_IMPORT=', '' );
 	filesJSON = JSON.parse( filesJSON );
 
 	targetJSComFilesName = filesJSON.files;	
@@ -197,7 +199,7 @@ class ReplacePlaceholderForFile {
 								return;
 							}
 							//file written successfully
-							console.log(colors.fg.Green, `${filepath} written successfully!`, colors.Reset);
+							//console.log(colors.fg.Green, `${filepath} written successfully!`, colors.Reset);
 
 						});		
 					}
@@ -213,7 +215,6 @@ class ReplacePlaceholderForFile {
 }
 
 
-
 /*! 
  *************************************
  *  Main configuration
@@ -225,8 +226,22 @@ const webpackConfig = {
 	watch: true,
 	node: { fs: 'empty' },
     resolve: {
-        extensions: ['.js', '.es6', '.vue', '.jsx' ]
+        extensions: ['.js', '.es6', '.vue', '.jsx' ],
+		alias: {
+			
+			// Uix Kit specific mappings.
+			'@uixkit/core': path.resolve(__dirname, globs.pathCore ),
+			'@uixkit/3rd-party-plugins': path.resolve(__dirname, globs.pathThirdPartyPlugins ),
+		}
     },
+	
+	//Exclude react from bundle
+//    externals: {
+//      'react': 'React',
+//		'react-dom': 'ReactDOM',
+//	    'jquery': 'jQuery',
+//    },
+	
 	entry: {
 		'uix-kit': './'+globs.build+'/index.js',
 		'uix-kit.min': './'+globs.build+'/index.js',
@@ -548,158 +563,238 @@ server.listen( globs.port, "localhost", function (err, result) {
 })
 
 
+
 /*! 
  *************************************
- *  Merge all js files & Build a table of contents (TOC)
+ * Process of processing files after compilation
+ * 
+ * Step 1 => read pureMergeJSFile
+ * Step 2 => read targetJSFile
+ * Step 3 => write targetJSFile
+ * Step 4 => append targetJSFile
+ * Step 5 => copy targetJSFile
+ * Step 6 => minify targetJSFile
+ * Step 7 => read all core css and js files and build a table of contents (TOC)
  *************************************
  */
 compiler.hooks.done.tap( 'MyPlugin', ( compilation ) => {
 	
 	
-	let mainJSFile            = './'+globs.dist+'/js/' + globs.concatES5_JSFile,
-		targetJSFile          = './'+globs.dist+'/js/uix-kit.js',
-		targetJSMinFile       = './'+globs.dist+'/js/uix-kit.min.js';
+	let pureMergeJSFile              = './'+globs.dist+'/js/' + globs.concatES5_JSFile,
+		targetJSFile                 = './'+globs.dist+'/js/uix-kit.js',
+		targetJSMinFile              = './'+globs.dist+'/js/uix-kit.min.js';
 	
 	
 	setTimeout ( () => {
 		
 		
-		//merge all js files
-
-		let oldContent = '';
 		
-		if ( fs.existsSync( mainJSFile ) ) {
-			fs.readFile( mainJSFile, function(err, data ){
+		let oldContent = '';
+		let pureMergeJSDependenciesFileData = '';
+		
+		// Step 1 => read pureMergeJSFile
+		//---------------------------------------------------------------------
+		if ( fs.existsSync( pureMergeJSFile ) ) {
+			
+			fs.readFile( pureMergeJSFile, function(err, data ){
 
 				if (err) throw err;
 				
-				let oldContent = data;
+				oldContent = data;
 				
+				
+				//get pureMergeJSDependenciesFile content
+				if ( fs.existsSync( pureMergeJSDependenciesFile ) ) {
+					fs.readFile( pureMergeJSDependenciesFile, function( err, content ) {
+						if ( ! err ) {
+							pureMergeJSDependenciesFileData = content;
+						}
+
+					});// fs.readFile( pureMergeJSDependenciesFile ...
+				}//endif fs.existsSync( pureMergeJSDependenciesFile ) 
+
+				
+
+				// Step 2 => read targetJSFile
+				//---------------------------------------------------------------------
 				//Prevent JS from adding code repeatedly
-				//Check if the uix-kit.concat.es5.dev.js file has been 
+				//Check if the uix-kit.concat.es5.3rd-party-plugins.js file has been 
 				//merged into the uix-kit.js file?
 				fs.readFile( targetJSFile, function(err, data ){
+
+					//Add string on top file with NodeJS
+					//Fixed a bug that Cannot read property 'fn' of undefined for jQuery 1.xx.x.
 					
-					if ( data.indexOf( 'sourceMappingURL='+globs.concatES5_JSFile+'.map' ) < 0 ) {
-						
-						//Update the normal js file
-						fs.appendFile( targetJSFile, oldContent, 'utf8', function (err) {
+					var resultData;
+					if ( data.indexOf( pureMergeJSDependenciesFileData ) >= 0 ) {
+						resultData = data;
+					} else {
+						data = data.toString().split("\n");
+						var customWebsiteCommentArr = customWebsiteComment.toString().split("\n");
 
-							console.log(colors.bg.Green, colors.fg.White, `${targetJSFile} written successfully!`, colors.Reset);
+						data.splice(customWebsiteCommentArr.length + 2, 0, pureMergeJSDependenciesFileData );
+						resultData = data.join("\n");	
+					}
 
-							fs.copyFile( targetJSFile, targetJSMinFile, function (err) {
+
+					// Step 3 => write targetJSFile
+					//---------------------------------------------------------------------
+					fs.writeFile( targetJSFile, resultData, 'utf8', function (err) {
+
+						if ( err ) {
+							console.log(colors.fg.Red, err, colors.Reset);
+							return;
+						}
+
+						// Step 4 => append targetJSFile
+						//---------------------------------------------------------------------
+						if ( data.indexOf( 'sourceMappingURL='+globs.concatES5_JSFile+'.map' ) < 0 ) {
+							
+							//file written successfully	
+							console.log(colors.fg.Green, `${targetJSFile} added common JavaScript on top successfully! (1/7)`, colors.Reset);
+
+
+							//Update the normal js file
+							fs.appendFile( targetJSFile, oldContent, 'utf8', function (err) {
 
 								if (err) {
 									return console.log(colors.fg.Red, err, colors.Reset);
-									
 								}
 
-								console.log(colors.bg.Green, colors.fg.White, `${targetJSMinFile} copied successfully!`, colors.Reset);
+								console.log(colors.fg.Green, `${targetJSFile} written successfully! (2/7)`, colors.Reset);
 
-								//Update the compressed js file
-								minify({
-									compressor: uglifyJS,
-									input: targetJSMinFile,
-									output: targetJSMinFile,
-									callback: function(err, min) {
+								
+								// Step 5 => copy targetJSFile
+								//---------------------------------------------------------------------					
+								fs.copyFile( targetJSFile, targetJSMinFile, function (err) {
 
-										if ( err ) {
-											console.log(colors.bg.Red, colors.fg.White, '===[ ERROR: File processing failed! ]=== Do not perform other operations after saving the <scss> or <js> file, please wait 10 seconds to rebuild.', colors.Reset);
-										} else {
-											console.log(colors.bg.Green, colors.fg.White, `${targetJSMinFile} compressed successfully!`, colors.Reset);
-										}
+									if (err) {
+										return console.log(colors.fg.Red, err, colors.Reset);
+									}
 
+									console.log(colors.fg.Green, `${targetJSMinFile} copied successfully! (3/7)`, colors.Reset);
 
-										// Build a table of contents (TOC)
-										['./'+globs.dist+'/css/uix-kit.css', './'+globs.dist+'/css/uix-kit-rtl.css', targetJSFile ].map( ( filepath ) => {
+									
+									
+									// Step 6 => minify targetJSFile
+									//---------------------------------------------------------------------	
+									//Update the compressed js file
+									minify({
+										compressor: uglifyJS,
+										input: targetJSMinFile,
+										output: targetJSMinFile,
+										callback: function(err, min) {
 
-											if ( fs.existsSync( filepath ) ) {
+											if ( err ) {
+												return console.log(colors.bg.Red, colors.fg.White, `===[ ERROR: ${err} ]=== Do not perform other operations after saving the <scss> or <js> file, please wait 10 seconds to rebuild.`, colors.Reset);
 
-												fs.readFile( filepath, function( err, content ) {
-
-													if ( err ) throw err;
-
-													let curCon  = content.toString(),
-														newtext = curCon.match(/<\!\-\-.*?(?:>|\-\-\/>)/gi );
-
-
-													//is the matched group if found
-													if ( newtext && newtext.length > 1 ) {  
-
-														let curToc = '';
-
-														for ( var p = 0; p < newtext.length; p++ ) {
-
-															let curIndex = p + 1,
-																newStr   = newtext[ p ].replace( '<!--', '' ).replace( '-->', '' ).replace(/^\s+|\s+$/g, '' );
-
-															if ( p > 0 ) {
-																curToc += '    ' + curIndex + '.' + newStr + '\n';
-															} else {
-																curToc +=  curIndex + '.' + newStr + '\n';
-															}
-
-														}
-
-														//Replace a string in a file with nodejs
-														var result = curCon.replace(/\$\{\{TOC\}\}/gi, curToc );
-
-														fs.writeFile( filepath, result, 'utf8', function (err) {
-															
-															if ( err ) {
-																console.log(colors.fg.Red, err, colors.Reset);
-																return;
-															}
-															//file written successfully	
-															console.log(colors.bg.Green, colors.fg.White, `${filepath}'s table of contents generated successfully!`, colors.Reset);
-															
-															
-														});
-
-
-													}
-
-
-												});			
-
-
+											} else {
+												console.log(colors.fg.Green, `${targetJSMinFile} compressed successfully! (4/7)`, colors.Reset);
 											}
 
 
-										});	
+											// Step 7 => read all core css and js files and build a table of contents
+											//---------------------------------------------------------------------
+											// Build a table of contents (TOC)
+											var tocBuildedIndex = 5;
+											['./'+globs.dist+'/css/uix-kit.css', './'+globs.dist+'/css/uix-kit-rtl.css', targetJSFile ].map( ( filepath ) => {
+
+												if ( fs.existsSync( filepath ) ) {
+
+													fs.readFile( filepath, function( err, content ) {
+
+														if ( err ) throw err;
+
+														let curCon  = content.toString(),
+															newtext = curCon.match(/<\!\-\-.*?(?:>|\-\-\/>)/gi );
+
+
+														//is the matched group if found
+														if ( newtext && newtext.length > 1 ) {  
+
+															let curToc = '';
+
+															for ( var p = 0; p < newtext.length; p++ ) {
+
+																let curIndex = p + 1,
+																	newStr   = newtext[ p ].replace( '<!--', '' ).replace( '-->', '' ).replace(/^\s+|\s+$/g, '' );
+
+																if ( p > 0 ) {
+																	curToc += '    ' + curIndex + '.' + newStr + '\n';
+																} else {
+																	curToc +=  curIndex + '.' + newStr + '\n';
+																}
+
+															}
+
+															//Replace a string in a file with nodejs
+															var resultData = curCon.replace(/\$\{\{TOC\}\}/gi, curToc );
+
+															fs.writeFile( filepath, resultData, 'utf8', function (err) {
+
+																if ( err ) {
+																	console.log(colors.fg.Red, err, colors.Reset);
+																	return;
+																}
+																//file written successfully	
+																console.log(colors.fg.Green, `${filepath}'s table of contents generated successfully! (${tocBuildedIndex}/7)`, colors.Reset);
+																
+																tocBuildedIndex++;
+
+
+															});
+
+
+														}
+
+
+													});// fs.readFile( filepath ...
+
+
+												}//endif fs.existsSync( filepath ) 
+
+
+											});	
 
 
 
-									}
-								});	
+										}
+										
+										
+									});	// minify
 
 
 
-							});
+								});// fs.copyFile( targetJSFile ...
 
 
 
+								if (err) {
+									console.error(err);
+									return;
+								}
+
+							}); //fs.appendFile( targetJSFile ...
 
 
-							if (err) {
-								console.error(err);
-								return;
-							}
-						});
-	
-						
-					}
-					
-				});
+						}// endif data.indexOf( 'sourceMappingURL='+globs.concatES5_JSFile+'.map' )
+
+
+
+					});// fs.writeFile( targetJSFile ...
+
+
+
+				}); //fs.readFile( targetJSFile ...
 				
-				
-				
 
-			});	
-		}
+			});// fs.readFile( pureMergeJSFile
+			
+			
+		}// endif fs.existsSync( pureMergeJSFile )
 		
 	
-	}, 3500 );	
+	}, 1500 );	
 	
 
 });

@@ -1,0 +1,50 @@
+/* ======================================================
+    <!-- Modal Dialog -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+.uix-modal-box {
+	left: auto;
+	right: 50%;
+
+
+
+	/* Video container */
+
+	.uix-modal-box__video-waiting {
+
+		left: auto;
+		right: 50%;
+		margin-left: auto;
+		margin-right: -1rem;
+
+
+	}
+
+	.uix-modal-box__close {
+		right: auto;
+		left: 12px;
+
+	}
+
+
+	&.is-fullscreen {
+		left: auto;
+		right: 0;
+
+		.uix-modal-box__close {
+			right: auto;
+			left: 26px;
+
+
+		}
+
+	}
+
+
+}
+
+.uix-modal-mask {
+	left: auto;
+	right: 0;
+}

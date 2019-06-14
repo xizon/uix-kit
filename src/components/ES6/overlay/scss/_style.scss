@@ -1,0 +1,50 @@
+/* ======================================================
+   <!-- Overlay -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+
+.uix-overlay {
+	max-width: 100%;
+	touch-action: none;
+    padding: 1.5rem;
+	background: #f00;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	height: auto;
+	display: table;
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	p {
+		margin: 0;
+	}
+
+	&.uix-overlay--white {
+		background: rgba(255,255,255,0.6);
+	}
+
+	&.uix-overlay--black {
+		background: rgba(34,34,34,0.8);
+		color: #fff;
+
+		a {
+			color: #fff;
+		}
+	}
+
+	&.uix-overlay--cover {
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		display: block;
+	}
+
+
+}

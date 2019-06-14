@@ -1,0 +1,122 @@
+/* ======================================================
+    <!-- 3D Carousel -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+$carousel-3d-item-width: 400px;
+$carousel-3d-item-height: 300px;
+$carousel-3d-item-offset: 80px;
+$carousel-3d-item-gutter: 1rem;
+
+$carousel-3d-item-m-width: 180px;
+$carousel-3d-item-m-height: 135px;
+$carousel-3d-item-m-offset: 70px;
+$carousel-3d-item-m-gutter: 1rem;
+
+.uix-3d-carousel {
+    position: relative;
+	width: #{$carousel-3d-item-width + $carousel-3d-item-offset*2};
+	height: $carousel-3d-item-height;
+	margin: 0 auto;
+	text-align: left;
+	transform: translateX( #{$carousel-3d-item-offset} );
+
+
+	img {
+		pointer-events: none !important; /* Fix an error fot swipe event not working on images */
+	}
+
+	ul {
+		padding: 0;
+		margin: 0;
+		position: relative;
+		display: block;
+
+		.uix-3d-carousel__item {
+			position: absolute;
+			width: $carousel-3d-item-width;
+			height: $carousel-3d-item-height;
+			display: inline-block;
+			@include transition-default();
+			overflow: hidden;
+
+
+			&.uix-3d-carousel__item--main-pos {
+				margin-left: $carousel-3d-item-gutter;
+				z-index: 3000;
+				transform: scale(1.2);
+				filter: blur(.5px);/* Prevent image flash when transitioning with blur */
+			}
+
+			&.uix-3d-carousel__item--left-pos {
+				opacity: .3;
+				margin-left: calc(-#{$carousel-3d-item-width - $carousel-3d-item-offset} + #{$carousel-3d-item-gutter * 2});
+				z-index: 1000;
+				transform: scale(1);
+				filter: blur(5px);
+			}
+
+			&.uix-3d-carousel__item--back-pos {
+				margin-left: $carousel-3d-item-gutter;
+				opacity: .05;
+				transform: scale(1);
+				filter: blur(5px);
+			}
+
+			&.uix-3d-carousel__item--right-pos {
+				opacity: .3;
+				margin-left: #{$carousel-3d-item-width - $carousel-3d-item-offset};
+				z-index: 1000;
+				transform: scale(1);
+				filter: blur(5px);
+			}
+
+		}
+
+	}
+
+
+
+}
+
+
+@media all and (max-width: 768px) {
+
+	.uix-3d-carousel {
+		width: #{$carousel-3d-item-m-width + $carousel-3d-item-m-offset*2};
+		height: $carousel-3d-item-m-height;
+		transform: translateX( #{$carousel-3d-item-m-offset} );
+
+		ul {
+
+			.uix-3d-carousel__item {
+				width: $carousel-3d-item-m-width;
+				height: $carousel-3d-item-m-height;
+
+				&.uix-3d-carousel__item--main-pos {
+					margin-left: $carousel-3d-item-m-gutter;
+
+				}
+
+				&.uix-3d-carousel__item--left-pos {
+					margin-left: calc(-#{$carousel-3d-item-m-width - $carousel-3d-item-m-offset} + #{$carousel-3d-item-m-gutter * 2});
+
+				}
+
+				&.uix-3d-carousel__item--back-pos {
+					margin-left: $carousel-3d-item-m-gutter;
+				}
+
+				&.uix-3d-carousel__item--right-pos {
+					margin-left: #{$carousel-3d-item-m-width - $carousel-3d-item-m-offset};
+				}
+
+			}
+
+		}
+
+
+
+	}
+
+}

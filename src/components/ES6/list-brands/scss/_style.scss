@@ -1,0 +1,109 @@
+/* ======================================================
+    <!-- Brands List -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+
+.uix-list-brands {
+	display: block;
+	overflow:auto; /* CSS background disappears when using float:left */
+
+	&::after {
+		content: '';
+		display: block;
+		clear: both;
+	}
+
+
+	li {
+		text-align: center;
+		display: inline-block;
+		padding: 1rem 0;
+		text-align: center;
+		margin: 0;
+		box-sizing: border-box;
+		float: left; /* When using inline-block elements, there will always be an whitespace issue between those elements (that space is about ~ 4px wide). */
+
+
+		span {
+			font-size: 0.875rem;
+			display: block;
+			padding: 1.5rem;
+		}
+	}
+
+
+}
+
+@media all and (min-width: 769px) {
+
+	.uix-list-brands {
+
+
+		&.uix-list-brands--tiny li {
+			width: 16.66666666666667%;
+
+
+			&:nth-child(6n+1) {
+				clear: both;
+			}
+
+		}
+
+		&.uix-list-brands--small li {
+			width: 20%;
+
+			&:nth-child(5n+1) {
+				clear: both;
+			}
+
+		}
+
+		/* Default */
+		&.uix-list-brands--medium li {
+			width: 25%;
+
+			&:nth-child(4n+1) {
+				clear: both;
+			}
+
+		}
+
+		&.uix-list-brands--large li {
+			width: 33.33333333333333%;
+
+
+			&:nth-child(3n+1) {
+				clear: both;
+			}
+
+		}
+
+	}
+}
+
+@media all and (max-width: 768px) {
+	.uix-list-brands {
+		margin: 1.5rem 0;
+		min-height: inherit;
+
+		li {
+
+			width: 50%;
+
+			&:nth-child(2n+1) {
+				clear: both;
+			}
+
+		}
+
+		&.uix-list-brands--tiny li,
+		&.uix-list-brands--small li,
+		&.uix-list-brands--medium li,
+		&.uix-list-brands--large li {
+			width: 50%;
+		}
+
+	}
+
+}

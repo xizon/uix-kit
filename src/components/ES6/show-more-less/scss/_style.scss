@@ -1,0 +1,35 @@
+/* ======================================================
+   <!-- Show More Less -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+
+.uix-more-btn__link {
+	> span:nth-child(2) {
+		display: none;
+	}
+}
+.uix-more-btn {
+	position: relative;
+	height: 8.5rem;
+	overflow: hidden;
+
+	&::after {
+		display: block;
+		content: "...";
+		text-align: right;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 2em;
+		background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 100%);
+		overflow: hidden;
+	}
+
+
+	/* Actived status */
+	&.is-active::after {
+		display: none;
+	}
+}

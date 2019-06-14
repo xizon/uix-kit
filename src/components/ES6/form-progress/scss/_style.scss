@@ -1,0 +1,130 @@
+/* ======================================================
+   <!-- Form Progress -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+
+$indicator-desc-w: 60px;
+
+.uix-form-progress {
+	position: relative;
+	display: block;
+	margin: 3rem 0;
+	width: calc(100% - #{$indicator-desc-w});
+
+	.uix-form-progress__line {
+		display: block;
+		position: relative;
+		top: 5px;
+		left: 5px;
+		-webkit-appearance: none;
+		appearance: none;
+		width: 100%;
+		height: 5px;
+		background-color: #ddd;
+
+		> span {
+			display: block;
+			width: 0;
+			height: 100%;
+			transition: all 0.5s ease-in-out;
+			background-color: $highlight-color1;
+		}
+	}
+
+
+
+	.uix-form-progress__indicator {
+		position: absolute;
+		top: -2px;
+		left: 0;
+		z-index: 1;
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+		background: #fff;
+		border: 3px solid #ddd;
+		border-radius: 50%;
+		@include transition-default();
+
+
+		> span {
+			font-size: 0.75rem;
+			color: $sub-text-color;
+			display: inline-block;
+			position: absolute;
+			background: #fff;
+			margin-top: -3px;
+			margin-left: 17px;
+			padding: 0 .5rem;
+			min-width: $indicator-desc-w;
+
+		}
+
+		&.is-active {
+			animation: uix-cssAnim--indicatorOK .5s forwards;
+			border-color: $highlight-color1;
+		}
+		&.current {
+			background: $highlight-color1;
+		}
+
+
+	}
+
+}
+
+
+/* Form animations */
+.uix-form-progress__target {
+	@include transition-default();
+	position: relative;
+	width: 100%;
+	height: 0;
+	transition: .3s;
+	overflow: hidden;
+	opacity: 0;
+
+	&.is-active {
+		opacity: 1;
+	}
+
+	&.js-uix-show {
+		height: auto;
+	}
+
+
+	.uix-form-progress__target__step {
+		width: 100%;
+		position: absolute;
+		@include transition-default();
+	}
+
+	.uix-form-progress__target__step:first-child {
+		position: relative;
+	}
+
+	.uix-form-progress__target__step.leaving {
+		transform: translateX(-110%);
+	}
+
+	.uix-form-progress__target__step.waiting {
+		transform: translateX(110%);
+	}
+
+	.uix-form-progress__target__step.coming {
+		transform: translateX(0);
+	}
+
+}
+
+
+
+@keyframes uix-cssAnim--indicatorOK {
+	50% {
+		transform: scale(1.5);
+	}
+	100% {
+		transform: scale(1);
+	}
+}

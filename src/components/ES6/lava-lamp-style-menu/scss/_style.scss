@@ -1,0 +1,62 @@
+/* ======================================================
+   <!-- Lava-Lamp Style Menu -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+
+.uix-lavalamp-menu__container {
+
+	position: relative;/* Required*/
+	margin: 0 auto;
+
+	ul.uix-lavalamp-menu {
+
+		padding: 0;
+		margin: 0; /* Required*/
+		font-size: 0; /*Fighting the Space Between Inline Block Elements*/
+
+		li {
+
+			margin: 0;
+			padding: 0;
+			position: relative;
+			padding: 0 1.159375rem;
+			display: inline-block;
+			margin-right: 1.6875rem;
+			white-space: nowrap; /* Required*/
+			font-size: 1rem; /*Fighting the Space Between Inline Block Elements*/
+
+
+			a {
+				display: block;
+			}
+
+			&.is-active {
+				a {
+					font-weight: bold;
+				}
+			}
+
+		}
+
+
+		.uix-lavalamp-menu__slide-line {
+			display: block;
+			padding: 0;
+			margin: 0;
+			background: $highlight-color1;
+			z-index: -1;
+			position: absolute;
+			top: 105%;
+			border-radius: 3px;
+			width: auto;
+			height: 5px;
+			left: 0;
+		}
+
+
+
+	}
+
+
+}

@@ -1,0 +1,95 @@
+/* ======================================================
+   <!-- Footer Templates -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+
+.uix-special-footer__container {
+	background: $primary-text-color1;
+	padding: 3rem 0;
+	margin: 3rem 0 0;
+	color: $sub-text-color;
+
+	&.is-transparent {
+		background: none;
+	}
+
+	img.logo {
+		max-width: 150px;
+		margin-bottom: 1.5rem;
+	}
+
+	h3,
+	.uix-typo--h3 {
+		margin-bottom: 1rem;
+		font-size: 1.2em;
+		font-weight: 500;
+		color: $sub-text-color;
+
+	}
+
+
+	.uix-special-footer__menus {
+
+		display: flex;
+
+
+		> .uix-special-footer__menus__list {
+			flex: 1;
+
+			li {
+				margin: .5rem 0;
+				display: block;
+			}
+
+		}
+	}
+
+
+}
+
+
+@media all and (max-width: 768px) {
+
+
+	.uix-special-footer__container {
+
+		margin: 3rem 0;
+
+		.uix-f-l,
+		.uix-f-r {
+			position: relative !important;
+			display: block !important;
+			width: 100% !important;
+			text-align: left;
+			float: none;
+		}
+
+
+		.uix-t-l,
+		.uix-t-r {
+			float: none;
+			text-align: center;
+		}
+
+		.uix-special-footer__menus {
+
+
+			&.uix-special-footer__menus--mobile-nowrap  {
+			  flex-wrap: nowrap;
+			}
+
+			&.uix-special-footer__menus--mobile-wrap {
+			  flex-wrap: wrap;
+			}
+
+			> .uix-special-footer__menus__list {
+				flex: 1 100%;
+			}
+
+		}
+
+	}
+
+
+}

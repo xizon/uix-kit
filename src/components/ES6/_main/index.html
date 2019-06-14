@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="@@{website_lang}" dir="@@{website_dirLTR}">
+<head>
+	<meta charset="@@{website_charset}" />
+	<title>@@{website_title}</title>	
+	@@include('./src/components/ES6/_global/include-header.html')
+</head>  
+
+ 
+  <body class="home">
+  
+  
+          
+    @@include('./src/components/ES6/_global/include-loader.html')
+    @@include('./src/components/ES6/_global/include-toggle-trigger.html')
+    
+
+  
+  
+    <div class="uix-wrapper">
+    
+        <!-- Header Area
+        ============================================= -->      
+        <header class="uix-header__container uix-header__container--overlay">
+            
+             <div class="uix-header">
+                 <div class="container">
+                 
+                        @@include('./src/components/ES6/_global/include-brand.html')
+                        
+                        @@include('./src/components/ES6/_global/include-menu.html')
+                        
+                        
+                        
+                  </div>
+                  <!-- .container end -->
+                  
+                  <div class="uix-clearfix"></div>
+             </div>
+        
+        </header>
+		
+		<main id="uix-maincontent">
+			
+			<!-- Main
+			============================================= --> 
+
+			<section style="background-color: #ec5e79; background-image: linear-gradient(90deg,#ec5e79 0,#f60 20%,#d83ba0);">
+				<div class="uix-parallax uix-height--100 uix-typo--color-white" data-fully-visible="false" data-overlay-bg="false" data-skew="0" data-speed="0.3">
+					<img class="uix-parallax__img" src="assets/images/blank.gif" alt="">
+					<canvas id="3D-particle-effect-canvas" data-img-src="assets/images/logo-colorful.png"></canvas>
+					<div class="uix-v-align--absolute uix-v-align--absolute--b uix-t-c uix-hidden-scrollbar-x">
+						<div class="container uix-t-c">
+
+							<div class="row">
+								<div class="col-md-6 offset-md-3">
+
+									<h3 class="uix-typo--h5 uix-typo--style-normal" data-text-eff="letters-eff-flyInOut-001" data-text-eff-speed="800">Free Web Kits For Fast Web Design And Development, Compatible With Bootstrap 4</h3>
+
+									<div class="uix-btn__group uix-btn__margin--b">
+										<a href="https://github.com/xizon/uix-kit" target="_blank" class="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--secondary is-pill">Download</a>
+										<a href="https://www.youtube.com/watch?v=aRDY9Cr-1-E" target="_blank" class="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--secondary is-pill"><i class="fa fa-play-circle" aria-hidden="true"></i>Getting Started</a>
+
+									</div>
+
+
+
+									<br>
+									<!-- Place this tag where you want the button to render. -->
+									<iframe src="https://ghbtns.com/github-btn.html?user=xizon&repo=uix-kit&type=star&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
+
+									&nbsp;&nbsp;
+									<a href="https://twitter.com/uiux_lab?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-size="small" data-lang="en" data-show-count="true">Follow @uiux_lab</a><script async src="https://platform.twitter.com/widgets.js"></script>
+
+
+									<div class="uix-spacing--s uix-spacing--no-bottom"></div>
+
+
+								</div>
+							</div>
+							<!-- .row end -->
+
+						</div>
+						<!-- .container end -->  
+
+					</div>
+
+				</div>
+			</section>
+
+
+
+		   <!-- Content   
+			====================================================== -->
+			<section class="uix-spacing--s">
+				<div class="container">
+						<div class="row">
+							<div class="col-md-10 offset-md-1 uix-list uix-list--normal uix-table uix-table--bordered">
+								<p><strong>Make over <span class="uix-typo--color-highlight">120+</span> components to wear again and again!</strong></p>
+								<p>A free web kits for fast web design and development. Uix Kit can be used separately, or merge components and grid systems using bootstrap. Support JS, HTML and SASS component library automatically packaged. Automatically convert ES6 JS to ES5 using Babel in this scaffold.</p>
+
+								<hr> 
+								<h3 class="pinline"><span>How To Use?</span></h3>
+								<p>You will need to have <a href="https://nodejs.org/" target="_blank">node</a> setup on your machine. That will output the built distributables to <code>./dist/*</code> and <code>./examples/*.html</code>.</p>
+								<p><strong>Step 1.</strong> Use NPM (Locate your current directory of project, and enter the following command.) or download the latest version from <a href="https://github.com/xizon/uix-kit">Github</a>. For nodejs you have to install some dependencies.</p>
+								<pre class="uix-precode"><label>$</label><code>sudo npm install uix-kit</code></pre>
+
+								<p>Or clone the repo to get all source files including build scripts: </p>
+								<pre class="uix-precode"><label>$</label><code>git clone git://github.com/xizon/uix-kit.git</code></pre>
+
+								<p><strong>Step 2.</strong> First, using an absolute path into your <code>"uix-kit/"</code> folder directory.</p>
+								<pre class="uix-precode"><label>$</label><code>cd /{your_directory}/uix-kit</code></pre>
+
+								<p><strong>Step 3.</strong> Before doing all dev stuff make sure you have `Node 10+` installed. After that, run the following code in the main directory to install the node module dependencies.</p>
+								<pre class="uix-precode"><label>$</label><code>sudo npm install --only=dev --unsafe-perm --production</code></pre>
+
+								<p><strong>Step 4.</strong> Run the following code to enter development mode. The converted ES5 files will be created.</p>
+								<pre class="uix-precode"><label>$</label><code>npm run build</code></pre>
+
+								<p><strong>Step 5.</strong> When you have done, this will spin up a server that can be accessed at <code>http://localhost:8080/examples/</code></p>
+
+								<div>
+									<strong>If you get an error of <span class="uix-striking-msg uix-striking-msg--danger is-rounded uix-striking-msg--inline">ERROR: npm update check failed.</span> You could try to enter the following code: </strong>
+								</div>
+								<pre class="uix-precode"><label>$</label><code>sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config</code></pre>
+
+								
+
+								<div>
+									<strong>You can update the Placeholders in Templates by modifying the Site Info configuration of <code>package.json</code>. Like this:</strong>
+								</div>
+								<pre class="uix-precode"><label>JSON</label><code>{
+  "author": "UIUX Lab",
+  "name": "uix-kit",
+  "email": "uiuxlab@gmail.com",
+  "version": "1.0.0",
+  "projectName": "Uix Kit",
+  "createdInfo": "UIUX Lab (https://uiux.cc)",
+  "projectURL": "https://uiux.cc",
+  "description": "A free web kits for fast web design and development, compatible with Bootstrap v4.",
+  ...
+}</code></pre>
+
+
+
+							</div>
+						</div>
+						<!-- .row end -->
+
+
+				</div>
+				<!-- .container end -->
+
+			</section>
+			
+		</main>
+		
+
+    
+			
+          
+        
+
+    @@include('./src/components/ES6/_global/include-copyright.html')
+        
+        
+    </div>
+    <!-- .uix-wrapper end -->
+       
+       
+    @@include('./src/components/ES6/_global/include-footer.html')
+    
+   

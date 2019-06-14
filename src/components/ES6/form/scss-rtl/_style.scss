@@ -1,0 +1,796 @@
+/* ======================================================
+    <!-- Form -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+/*
+ * 1. Controls
+ * 2. Upload
+ * 3. Group
+ * 4. Custom Select
+ * 5. Custom Radio, Toggle And Checkbox
+ * 6. Custom Input Number
+ * 7. Multiple Selector
+ * 8. Single Selector
+ * 9. Search of Widget
+ * 11. Date Picker ( 3rd Party Plugin )
+*/
+
+$control-sub-color: #dce4e8;
+
+@mixin select-arrow-rtl( $top, $left ){
+	border-left: 0;
+	right: auto;
+	left: $left;
+}
+
+
+
+/*
+ ---------------------------
+ 1. Controls
+ ---------------------------
+ */
+
+/* Default Controls */
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) {
+
+	text-align: right;
+
+
+	&.uix-controls__side {
+		margin-left: auto;
+		margin-right: .2rem;
+	}
+
+
+
+
+	//Create Line Effect on Click
+	.uix-controls__bar {
+		left: auto;
+		right: -2px;
+
+
+		&::before {
+			left: auto;
+			right: 51%;
+		}
+		&::after {
+			right: auto;
+			left: 49%;
+		}
+	}
+
+
+	&.is-fullwidth {
+		.uix-controls__bar {
+			right: -6px;
+
+		}
+
+	}
+
+
+	&.uix-controls__short-s {
+
+		input:not([type="checkbox"]):not([type="radio"]) {
+			margin-right: auto;
+			margin-left: .5rem;
+		}
+
+
+	}
+
+	&.uix-controls__short-m {
+
+		input:not([type="checkbox"]):not([type="radio"]) {
+			margin-right: auto;
+			margin-left: .5rem;
+		}
+	}
+
+
+	&.uix-controls__short-l {
+		input:not([type="checkbox"]):not([type="radio"]) {
+			margin-right: auto;
+			margin-left: .5rem;
+		}
+
+	}
+
+
+	label {
+		left: auto;
+		right: 0.875rem;
+
+
+		&.is-active {
+			transform-origin: right top;
+
+		}
+
+
+	}
+
+
+
+	/*-- Select Arrow --*/
+	.uix-controls__arrow {
+		right: auto;
+		left: 0.875rem;
+	}
+
+	/*-- Radio --*/
+	&.uix-controls__normal-radio {
+
+		label {
+			padding-left: auto !important;
+			padding-right: 1.25rem !important;
+			right: auto !important;
+		}
+
+	}
+
+	/*-- Select --*/
+	&.uix-controls__normal-select {
+
+		margin-right: auto;
+		margin-left: 1.65rem;
+
+
+
+		.uix-controls__arrow {
+			left: -1rem;
+		}
+
+	}
+
+
+
+
+    /*-- Form With Icon --*/
+	&.is-iconic {
+		label {
+		    left: auto;
+			right: 3rem;
+		}
+
+		i {
+			left: auto;
+			right: 1rem;
+
+			&::after {
+				left: auto;
+				right: 1.4rem;
+			}
+
+		}
+
+		input:not([type="checkbox"]):not([type="radio"]) {
+			padding-left: auto;
+			padding-right: calc(3.5rem - 0.546875rem);
+
+
+		}
+
+		textarea,
+		button:not(.uix-btn),
+		select {
+			padding-left: auto;
+			padding-right: calc(3.5rem - 0.546875rem);
+		}
+
+
+
+		&.is-reversed {
+
+			label {
+				left: auto;
+				right: 0.546875rem;
+
+			}
+
+			i {
+				left: 1rem;
+				right: auto;
+
+				&::after {
+					left: 1.4rem;
+					right: auto;
+				}
+
+			}
+
+
+			input:not([type="checkbox"]):not([type="radio"]) {
+				padding-right: 0.546875rem;
+				padding-left: calc(3.5rem - 0.546875rem);
+
+			}
+
+			textarea,
+			button:not(.uix-btn),
+			select {
+				padding-right: 0.546875rem;
+				padding-left: calc(3.5rem - 0.546875rem);
+			}
+
+		}
+
+
+
+	}
+
+
+
+	/*-- WordPress Style --*/
+	.req-icon {
+		right: auto;
+		left: 0.721875rem;
+	}
+
+
+
+}
+
+
+
+/* Create Line Effect on Click */
+.uix-controls.uix-controls--line {
+
+
+	label {
+		left: auto!important;
+		right: -0.75rem !important;
+
+		&.is-active {
+			transform-origin: right top;
+			transform: translateX(1.75rem) scale(.875);
+
+		}
+
+
+	}
+
+
+	/*-- Form With Icon --*/
+	&.is-iconic {
+		label {
+			left: auto!important;
+			right: 2.375rem !important;
+
+			&.is-active {
+				transform: translateX(4.09375rem) scale(.875);
+			}
+		}
+
+		&.is-reversed {
+
+			label {
+				left: auto!important;
+				right: -0.75rem !important;
+
+				&.is-active {
+					transform: translateX(1.75rem) scale(.875);
+				}
+			}
+		}
+
+
+	}
+
+
+	/*-- Select --*/
+	&.uix-controls__normal-select {
+
+		.uix-controls__arrow {
+			right: auto!important;
+			left: 0 !important;
+		}
+
+		select {
+			padding-left: auto !important;
+			padding-right: 0 !important;
+		}
+
+
+	}
+
+
+
+}
+
+
+
+
+/*
+ ---------------------------
+ 2. Upload
+ ---------------------------
+ */
+
+.uix-controls__file-container {
+
+	.uix-controls__file-trigger {
+
+		i {
+			margin-right: auto;
+			margin-left: .5rem;
+		}
+	}
+
+
+	input[type="file"] {
+		left: auto;
+		right: 0;
+	}
+
+
+}
+
+
+
+/* HTML5 drag and drop upload control */
+.uix-controls__file-field-container {
+
+	.uix-controls__file-field-trigger {
+
+		> div {
+
+			input {
+				left: auto;
+				right: 0;
+
+				&::before {
+					left: auto;
+					right: 0;
+				}
+
+			}
+
+
+		}
+
+
+	}
+
+}
+
+
+
+/*
+ ---------------------------
+ 3. Group
+ ---------------------------
+ */
+
+
+.uix-controls__merge {
+
+
+	i {
+		margin-right: auto;
+		margin-left: .5rem;
+
+	}
+
+
+	button {
+		margin-left: auto;
+		margin-right: -5px;
+	}
+
+
+	&.is-pill {
+		input {
+			border-radius: 0 50px 50px 0;
+		}
+
+		button {
+			border-radius: 50px 0 0 50px;
+		}
+
+	}
+
+    /*-- Form With Icon --*/
+	&.is-iconic {
+
+		input {
+			padding-left: auto;
+			padding-right: 3rem;
+
+		}
+
+
+		i {
+			left: auto;
+			right: 1rem;
+
+			&::after {
+				left: auto;
+				right: 1.4rem;
+			}
+
+		}
+
+
+		&.is-reversed {
+			input {
+				padding-left: auto;
+				padding-right: calc(3rem - 0.546875rem);
+
+			}
+
+
+			i {
+				right: auto;
+				left: 1rem;
+
+				&::after {
+					right: auto;
+					left: 1.4rem;
+				}
+
+			}
+
+		}
+
+
+	}
+
+}
+
+
+
+/*
+ ---------------------------
+ 4. Custom Select
+ ---------------------------
+ */
+.uix-controls__select {
+	margin-right: auto;
+	margin-left: .3rem;
+
+	&.js-uix-new {
+		text-align: right; /* Required */
+	}
+
+
+}
+
+.uix-controls__select-wrapper {
+
+
+	&:not(.uix-controls--line).is-disabled {
+
+		/* Mask used to prohibit selection */
+		&::before {
+			left: auto;
+			right: 0;
+
+		}
+
+	}
+
+	&.uix-controls--line.is-disabled {
+
+
+		/* Mask used to prohibit selection */
+		&::before {
+			left: auto;
+			right: 0;
+
+		}
+
+	}
+
+
+	.uix-controls__select-trigger {
+		padding: 0.546875rem 1.5rem 0.546875rem 2.5rem;
+
+		&::after {
+			@include select-arrow-rtl( -.275rem, 1rem );
+		}
+
+
+	}
+
+
+
+	.uix-controls--line  {
+
+
+		//Create Line Effect on Click
+		.uix-controls__bar {
+			left: auto;
+			right: -0.25rem;
+			transform: translateX(-2px);
+
+
+			&::before {
+				left: auto;
+				right: 51%;
+			}
+			&::after {
+				right: auto;
+				left: 49%;
+			}
+
+		}
+
+
+
+		&.is-fullwidth {
+			.uix-controls__bar {
+				left: auto;
+				right: -0.685rem;
+			}
+
+		}
+
+	}
+
+
+
+
+	.uix-controls__select__option-container {
+		left: auto;
+		right: 0;
+
+
+		&::before {
+			left: auto;
+			right: 25px;
+			border-left: 1px solid transparent;
+			border-right: 1px solid $control-sub-color;
+		}
+
+	}
+
+
+	.uix-controls__select--top {
+		/* Shown from above */
+		.uix-controls__select__option-container {
+
+
+			&::after {
+				right: auto;
+				left: 25px;
+				border-left: 1px solid $control-sub-color;
+				border-right: 1px solid transparent;
+
+			}
+
+
+		}
+
+	}
+
+	.uix-controls__select__option {
+
+		&:first-of-type {
+		    border-radius:  0 0 2px 2px;
+		}
+		&:last-of-type {
+			border-radius: 2px 2px 0 0;
+		}
+
+	}
+
+
+}
+
+
+
+/*
+ ---------------------------
+ 5. Custom Radio, Toggle And Checkbox
+ ---------------------------
+ */
+.uix-controls__radio {
+
+	text-align: right;
+
+	label {
+		right: auto;
+	}
+
+
+	.uix-controls__radio-trigger {
+		margin-right: auto;
+		margin-left: 5px;
+
+		&::before {
+			left: auto;
+			margin-left: auto;
+			right: 50%;
+			margin-right: -3px;
+		}
+	}
+}
+
+
+
+.uix-controls__toggle {
+
+	label {
+		text-align: right; /* Required */
+	}
+
+
+
+	input[type="checkbox"] {
+		display: none;
+
+		&:checked + .uix-controls__toggle-trigger {
+			margin-left: auto;
+			margin-right: 8px;
+		}
+	}
+
+	.uix-controls__toggle-trigger {
+		margin: 0.5rem 0 0.5rem .5rem;
+
+		&::before {
+			left: auto;
+			right: -50px;
+
+		}
+
+		&::after {
+			right: auto;
+			left: -50px;
+
+		}
+
+	}
+}
+
+.uix-controls__checkbox {
+
+	label {
+		text-align: right; /* Required */
+	}
+
+
+	.uix-controls__checkbox-trigger {
+		margin: 0.546875rem 0 0.546875rem .5rem;
+
+		&::before,
+		&::after {
+			left: auto;
+			right: 4px;
+
+
+		}
+
+	}
+}
+
+
+
+/*
+ ---------------------------
+ 6. Custom Input Number
+ ---------------------------
+ */
+.uix-controls__number {
+
+
+	.uix-controls__number__btn {
+		border-left: none;
+		border-right: 1px solid $control-sub-color;
+		right: auto;
+		left: 1px;
+
+	}
+
+}
+
+
+
+
+/*
+ ---------------------------
+ 7. Multiple Selector
+ ---------------------------
+ */
+.uix-controls__multi-sel {
+
+	float: right;
+
+	> span:not(.uix-controls__bar) {
+		margin-right: auto;
+		margin-left: 1rem;
+
+		i {
+			right: auto;
+			left: -8px;
+		}
+
+
+	}
+
+
+	/* Create Line Effect on Click */
+	&.uix-controls--line {
+
+		> span:not(.uix-controls__bar) {
+
+			.uix-controls__bar {
+				right: 0 !important;
+			}
+
+
+		}
+
+
+	}
+
+}
+
+
+
+
+/*
+ ---------------------------
+ 8. Single Selector
+ ---------------------------
+ */
+
+.uix-controls__single-sel {
+
+	float: right;
+
+	> span:not(.uix-controls__bar) {
+		margin-right: auto;
+		margin-left: 1rem;
+
+	}
+
+	/* Create Line Effect on Click */
+	&.uix-controls--line {
+
+
+		> span:not(.uix-controls__bar) {
+
+			.uix-controls__bar {
+				right: 0 !important;
+			}
+
+
+		}
+
+
+	}
+
+}
+
+
+
+
+/*
+ ---------------------------
+ 9. Search of Widget
+ ---------------------------
+ */
+.uix-search-box {
+
+	.uix-search-box__submit {
+		right: auto;
+		left: 0.875rem;
+	}
+
+}
+
+
+/*
+ ---------------------------
+ 11. Date Picker ( 3rd Party Plugin )
+ ---------------------------
+ */
+.uix-controls__date::after {
+	right: auto;
+	left: 1rem;
+}

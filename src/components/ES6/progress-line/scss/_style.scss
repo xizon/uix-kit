@@ -1,0 +1,132 @@
+/* ======================================================
+   <!-- Progress Line -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+
+$line-bar-w: 45px;
+
+.uix-progress-line {
+	width: 100%;
+	position: relative;
+
+	.uix-progress-line__circle,
+	.uix-progress-line__bar {
+		display: inline-block;
+		background: #fff;
+		width: 100px;
+		height: 100px;
+		border-radius: 50%;
+		position: relative;
+		@include transition-default();
+	}
+
+
+	.uix-progress-line__bar {
+		position: absolute;
+		width: $line-bar-w;
+		height: 1px;
+		top: 50px;
+		margin-left: -5px;
+		margin-right: -5px;
+		background: #ECECEC;
+		overflow: hidden;
+		border-radius: 0;
+
+		&::after {
+			position: absolute;
+			top: 0;
+			left: 0;
+			content: '';
+			display: block;
+			width: $line-bar-w;
+			height: 100%;
+			background: $highlight-color1;
+			transform: translateX(-100%);
+			@include transition-default();
+		}
+
+		&:last-child {
+			display: none;
+		}
+
+		&.is-active {
+			&::after {
+				transform: translateX(0);
+			}
+
+		}
+
+
+	}
+	.uix-progress-line__circle__label {
+		display: inline-block;
+		width: 85px;
+		height: 85px;
+		border-radius: 50%;
+		margin-top: 3px;
+		color: #fff;
+		font-size: 1rem;
+		position: relative;
+		@include transition-default();
+
+		i {
+			font-size: 40px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+			margin: 0;
+		}
+	}
+	.uix-progress-line__circle__title {
+		margin-left: -5px;
+		font-size: 1rem;
+		font-weight: bold;
+		display: block;
+		padding-top: 1.5rem;
+		color: $primary-text-color1;
+		@include ellipsis();
+		@include transition-default();
+	}
+
+	.uix-progress-line__circle__num {
+		position: absolute;
+		font-size: 1.875rem;
+		color: #e8edee;
+		top: 142%;
+		left: 50%;
+		transform: translateX(-50%);
+		@include transition-default();
+
+	}
+
+
+	.uix-progress-line__circle {
+
+		background: rgba(0,0,0,.2);
+		opacity: .6;
+		text-align: center;
+		margin-left: #{$line-bar-w - 5px};
+
+		&:first-child {
+			margin-left: 0;
+		}
+
+		&.is-active {
+
+			opacity: 1;
+			border: 1px solid $highlight-color1;
+			background: #fff;
+
+			.uix-progress-line__circle__label {
+				color: #fff;
+				background: $highlight-color1;
+				margin-top: 6px;
+			}
+
+		}
+	}
+
+
+}

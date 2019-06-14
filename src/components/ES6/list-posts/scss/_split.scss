@@ -1,0 +1,59 @@
+/* ======================================================
+   <!-- List of Split Posts -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+
+.uix-list-split {
+
+	.uix-list-split__item {
+
+		position: relative;
+		margin-bottom: 4.8125rem;
+
+
+		.uix-list-split__item__info {
+			p {
+				font-size: 0.875rem;
+			}
+			> div {
+				padding: 0 4rem;
+			}
+		}
+		&.is-reversed .row > .col-sm-6,
+		&.is-reversed .uix-core-grid .uix-core-grid__col-6 {
+			float: right;
+		}
+	}
+
+
+}
+
+
+@media all and (max-width: 768px) {
+
+	.uix-list-split {
+
+		.uix-list-split__item {
+
+			margin-bottom: 3rem;
+
+			&.is-reversed .row > .col-sm-6,
+			&.is-reversed .uix-core-grid .uix-core-grid__col-6 {
+				float: left;
+				&:first-child, &:nth-child(2) {
+					transform: translateX(0);
+				}
+			}
+			.uix-list-split__item__info {
+				margin-top: 1.5rem;
+
+				> div {
+					padding: 0;
+				}
+			}
+		}
+
+	}
+
+}

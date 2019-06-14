@@ -1,0 +1,9 @@
+/* ======================================================
+   <!-- Flexslider -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+.flexslider,
+.uix-flexslider {
+    direction: ltr !important;
+}

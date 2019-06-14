@@ -1,0 +1,130 @@
+/* ======================================================
+   <!-- Striking -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+
+$uix-striking-border-color: rgba(0,0,0,.02);
+
+.uix-striking-msg {
+    padding: .5rem 1rem;
+    margin: 1rem 0;
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.2;
+	position: relative;
+	border: 1px solid #{$uix-striking-border-color};
+	position: relative;
+
+	i:first-child {
+		margin-right: .5rem;
+		font-size: 1rem;
+		vertical-align: top;
+
+		~ span {
+			padding-left: .2rem;
+			display: inline-block;
+			width: calc(100% - 1.5rem);
+		}
+	}
+
+
+
+
+	&.uix-striking-msg--inline {
+		display: inline-block;
+	}
+
+
+	&.uix-striking-msg--hasarrow::before,
+	&.uix-striking-msg--hasarrow::after {
+		content: '';
+		position: absolute;
+		right: 100%;
+		border: solid transparent;
+		height: 0;
+		width: 0;
+		border-right-color: rgba(252,232,220,1);
+		border-width: 5px;
+		top: 50%;
+		transform: translateY(-50%);
+		z-index: 1;
+	}
+
+	&.uix-striking-msg--hasarrow::after {
+		border-right-color: #{$uix-striking-border-color};
+		border-width: 6px;
+		z-index: 0;
+	}
+
+	&.uix-striking-msg--hasarrow--reversed::before,
+	&.uix-striking-msg--hasarrow--reversed::after {
+		transform: translateY(-50%) rotate(180deg);
+		right: auto;
+		left: 100%;
+	}
+
+
+
+
+	&.is-pill {
+		border-radius: 35px;
+	}
+
+	&.is-rounded {
+		border-radius: 4px;
+	}
+
+	&.uix-striking-msg--default {
+		background-color: rgba(252,232,220,1);
+		box-shadow:0 3px 15px 0 rgba(0,0,0,.03), 0 5px 10px -7px rgba(252,232,220,.2);
+
+		&.uix-striking-msg--hasarrow::before {
+			border-right-color: rgba(252,232,220,1);
+		}
+
+	}
+
+	&.uix-striking-msg--success {
+		background-color: rgba(128,207,75,1);
+		box-shadow:0 3px 15px 0 rgba(0,0,0,.03), 0 5px 10px -7px rgba(128,207,75,.2);
+		color: #fff;
+
+		&.uix-striking-msg--hasarrow::before {
+			border-right-color: rgba(128,207,75,1);
+		}
+	}
+
+
+	&.uix-striking-msg--alert {
+		background-color: rgba(245,146,86,1);
+		box-shadow:0 3px 15px 0 rgba(0,0,0,.03), 0 5px 10px -7px rgba(245,146,86,.2);
+		color: #fff;
+
+		&.uix-striking-msg--hasarrow::before {
+			border-right-color: rgba(245,146,86,1);
+		}
+	}
+
+
+	&.uix-striking-msg--danger {
+		background-color: rgba(236, 94, 121,1);
+		box-shadow:0 3px 15px 0 rgba(0,0,0,.03), 0 5px 10px -7px rgba(236, 94, 121,.2);
+		color: #fff;
+
+		&.uix-striking-msg--hasarrow::before {
+			border-right-color: rgba(236, 94, 121,1);
+		}
+
+	}
+
+	&.uix-striking-msg--info {
+		background-color: rgba(216,245,254,1);
+		box-shadow:0 3px 15px 0 rgba(0,0,0,.03), 0 5px 10px -7px rgba(216,245,254,.2);
+
+		&.uix-striking-msg--hasarrow::before {
+			border-right-color: rgba(216,245,254,1);
+		}
+	}
+
+}

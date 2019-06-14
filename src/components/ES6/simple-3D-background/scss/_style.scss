@@ -1,0 +1,16 @@
+/* ======================================================
+    <!-- 3D Background -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+
+.uix-3d-bg {
+
+	/* Require more than 500, compatible firefox height */
+	perspective: 700px;
+
+	> span {
+		display: inline-block;
+	}
+
+}

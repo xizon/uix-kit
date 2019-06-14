@@ -1,0 +1,410 @@
+/* ======================================================
+   <!-- Button -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+/*
+ * 1. Common button styles
+ * 2. Borders
+ * 3. Sizes
+ * 4. Icons
+ * 5. Group
+ * 6. Background
+ * 7. Margin
+*/
+
+$button-class-margin-lr: 1rem;
+$button-class-margin-b: 1rem;
+
+
+/*
+ ---------------------------
+ 1. Common button styles
+ ---------------------------
+ */
+.uix-btn[class*=button-]:focus {
+    box-shadow: none;
+}
+
+.uix-btn {
+	display: inline-block;
+	text-align: center;
+	margin: 0;
+	border: none;
+	background: none;
+	color: inherit;
+	vertical-align: middle;
+	position: relative;
+	background-size: 300% 100%;
+	font-weight: 600;
+	z-index: 1;
+	letter-spacing: .02rem;
+	line-height: 1.2;
+	cursor: pointer;
+	@include transition-default();
+
+	&:hover {
+		background-position: 100% 0;
+		color: #fff;
+	}
+
+	&:focus {
+	    outline: 3px auto -webkit-focus-ring-color;
+	}
+
+	&:disabled,
+	&.is-disabled {
+		background-image: linear-gradient(to right, #e4e7ed 0%, #e4e7ed 20%, #e4e7ed 100%)  !important;
+		border-color: #e4e7ed !important;
+		cursor: not-allowed !important;
+		box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.05) !important;
+		pointer-events: none !important;
+		user-select: none !important;
+		color: $primary-text-color2 !important;
+	}
+
+
+
+	/* Waiting state */
+	&.wait {
+		background-image: linear-gradient(-45deg,rgba(0,0,0,.15) 25%,transparent 25%,transparent 50%,rgba(0,0,0,.15) 50%,rgba(0,0,0,.15) 75%,transparent 75%,transparent) !important;
+		background-size: 30px 30px !important;
+		animation: uix-cssAnim--moveWaitingStripes 0.5s linear infinite !important;
+		cursor: wait !important;
+
+	}
+
+
+	&.is-hide {
+		display: none;
+	}
+
+	&.is-pill {
+		border-radius: 35px;
+	}
+
+	&.is-rounded {
+		border-radius: 4px;
+	}
+
+	&.is-fullwidth {
+		max-width: none;
+		width: 100%;
+	}
+	&.is-fullwidth.is-pill {
+		padding-left: 35px;
+		padding-right: 35px;
+	}
+
+	> span {
+	    vertical-align: middle;
+	}
+
+	i {
+		margin-right: .5rem;
+		margin-left: .5rem;
+	}
+
+
+}
+
+
+@keyframes uix-cssAnim--moveWaitingStripes {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 30px 0px;
+    }
+}
+
+
+
+
+
+/*
+ ---------------------------
+ 2. Borders
+ ---------------------------
+ */
+.uix-btn__border--thin {
+    border: 1px solid;
+}
+
+.uix-btn__border--medium {
+    border: 2px solid;
+}
+
+.uix-btn__border--thick {
+    border: 3px solid;
+}
+
+.uix-btn__border--white {
+    border-color: #fff;
+}
+
+/*
+ ---------------------------
+ 3. Sizes
+ ---------------------------
+ */
+/* tiny */
+.uix-btn__size--t {
+    font-size: 0.75rem;
+	padding: .5rem 1rem;
+}
+/* small */
+.uix-btn__size--s {
+    font-size: 0.875rem;
+	padding: .8rem 1.5rem;
+}
+/* medium */
+.uix-btn__size--m {
+	font-size: 1rem;
+	padding: 1rem 2.5rem;
+}
+/* large */
+.uix-btn__size--l {
+	font-size: 1.375rem;
+	padding: 1.25rem 5rem;
+}
+
+/*
+ ---------------------------
+ 4. Icons
+ ---------------------------
+ */
+
+.uix-btn__icon {
+    padding-left: 3.6rem;
+    position: relative;
+
+
+	&.uix-btn__icon--right {
+		padding-left: 2.5rem;
+		padding-right: 3.6rem;
+
+		> span {
+			right: 0;
+			left: auto;
+		}
+	}
+
+	> span {
+		width: 2.6rem;
+		left: 0;
+		top: 0;
+		height: 100%;
+		position: absolute;
+		background-color: rgba(0,0,0,.1);
+
+
+		i {
+			margin: 0;
+			position: relative;
+			margin-top: 50%;
+			transform: translateY(-50%);
+		}
+	}
+
+
+	&.uix-btn__icon--left {
+
+		> span {
+			left: 0;
+		}
+
+	}
+
+	&.is-transparent.uix-btn__icon--left {
+		> span {
+			background-color: transparent;
+			border-right: 1px solid rgba(0,0,0,.1);
+		}
+	}
+	&.is-transparent.uix-btn__icon--right {
+		> span {
+			background-color: transparent;
+			border-left: 1px solid rgba(0,0,0,.1);
+		}
+	}
+
+
+	&.is-pill.uix-btn__icon--left span {
+		border-radius: 35px 0 0 35px;
+	}
+
+	&.is-pill.uix-btn__icon--right span {
+		border-radius: 0 50px 50px 0;
+	}
+
+	&.is-rounded.uix-btn__icon--left span {
+		border-radius: 4px 0 0 4px;
+	}
+
+	&.is-rounded.uix-btn__icon--right span {
+		border-radius: 0 4px 4px 0;
+	}
+
+
+
+}
+
+
+/*
+ ---------------------------
+ 5. Group
+ ---------------------------
+ */
+.uix-btn__group {
+
+	display: inline-block;
+
+	&::after {
+		content: '';
+		display: table;
+		clear: both;
+	}
+
+	> .uix-btn {
+		margin: 0;
+		border-radius: 0;
+		float: left;
+		box-sizing: border-box;
+
+		&.is-pill {
+
+			&:first-child {
+				border-radius: 50px 0 0 50px;
+			}
+
+			&:last-child {
+				border-radius: 0 50px 50px 0;
+			}
+
+		}
+
+		&.is-rounded {
+
+			&:first-child {
+				border-radius: 4px 0 0 4px;
+			}
+
+			&:last-child {
+				border-radius: 0 4px 4px 0;
+			}
+
+		}
+
+		&.uix-btn__border--thin:not(:first-child) {
+			margin-left: -1px;
+		}
+
+		&.uix-btn__border--medium:not(:first-child) {
+			margin-left: -2px;
+		}
+
+		&.uix-btn__border--thick:not(:first-child) {
+			margin-left: -3px;
+		}
+
+
+
+	}
+
+	/* Each fullwidth button from group */
+	&.is-fullwidth {
+		display: flex;
+
+		> .uix-btn {
+		    flex: 1;
+		}
+	}
+
+
+
+}
+
+
+
+/*
+ ---------------------------
+ 6. Background
+ ---------------------------
+ */
+/* Your Custom colors for buttons */
+
+.uix-btn__bg--primary {
+	border-color: $btn-gradient-color1;
+	background-color: $btn-gradient-color1;
+	background-image: linear-gradient(to right, $btn-gradient-color1 0%, $btn-gradient-color2 20%, $btn-gradient-color3 100%);
+	@include outer-shadow( 'highlight', $highlight-color1 );
+	color: #fff;
+
+
+
+	&.is-transparent {
+		border-color: #DADCDF;
+		background-color: transparent;
+		background-image: linear-gradient(to right, #fff 0%, #fff 0%, #fff 0%);
+		color: $btn-gradient-color1;
+		box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.05);
+
+		&:hover {
+			background-color: $btn-gradient-color1;
+			background-image: linear-gradient(to right, $btn-gradient-color1 0%, $btn-gradient-color2 20%, $btn-gradient-color3 100%);
+			color: #fff;
+		}
+	}
+}
+
+
+
+.uix-btn__bg--secondary {
+
+	&:not(.is-fill-white) {
+		border-color: #fff;
+		background-color: transparent;
+		box-shadow: 0 4px 15px 0 rgba(255, 255, 255, 0.2);
+		color: #fff;
+	}
+
+	&.is-fill-white {
+		border-color: #fff;
+		background-color: #fff;
+		box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.2);
+		color: $primary-text-color2;
+	}
+
+	&:hover {
+		background-color: #fff;
+		color: $primary-text-color2;
+	}
+
+
+	&.is-fill-white:hover {
+		box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.6);
+	}
+
+}
+
+
+
+/*
+ ---------------------------
+ 7. Margin
+ ---------------------------
+ */
+
+.uix-btn__margin--b {
+	margin-bottom: #{$button-class-margin-b};
+}
+
+.uix-btn__margin--l {
+	margin-left: #{$button-class-margin-lr};
+}
+
+.uix-btn__margin--r {
+	margin-right: #{$button-class-margin-lr};
+}

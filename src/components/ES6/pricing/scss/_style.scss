@@ -1,0 +1,138 @@
+/* ======================================================
+   <!-- Pricing -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+
+.uix-price {
+	text-align: center;
+	position: relative;
+
+	&::before {
+	    padding-top: 2.25rem;
+	}
+	&::after {
+	    padding-bottom: 0;
+	}
+	ul,
+	ol {
+		/*default*/
+		display: block;
+		list-style-type: disc;
+		margin-top: 0.875rem;
+		margin-bottom: 0.875rem;
+		margin-left: 0;
+		margin-right: 0;
+		padding-bottom: 1.7rem;
+		/*custom*/
+		line-height: 2;
+	}
+	li {
+		/*default*/
+		list-style: none;
+
+		&::before {
+			font-family: 'Font Awesome 5 Free';
+			font-weight: 600;
+			content: "\f00c";
+			display: inline-block;
+			margin-right: .4rem;
+		}
+	}
+
+	.uix-price__hr {
+		margin: 1.5rem 0;
+		border-top: 1px solid rgba(0, 0, 0, 0.05);
+	}
+
+	.uix-price__outline--hover {
+	    margin-bottom: 1.5rem;
+	}
+
+
+	.uix-price__outline {
+		padding-top: 0.875rem;
+		position: relative;
+		box-shadow: 0 22px 40px 0 #eef4fc;
+		border-radius: 10px;
+		background: #fff;
+		transition: .1s ease-in-out;
+
+		&:hover {
+			@include outer-shadow( 'highlight', $highlight-color1 );
+		}
+
+	}
+
+
+	.uix-price__level {
+		font-size: 0.7rem;
+		text-align: center;
+		text-indent: 0.875rem;
+		text-transform: uppercase;
+		position: relative;
+		z-index: 3;
+		font-weight: 700;
+		opacity: 0.35;
+	}
+
+	.uix-price__num {
+		color: $highlight-color1;
+		font-weight: 700;
+		font-size: 3.5rem;
+		margin-top: 0.875rem;
+	}
+
+	.uix-price__num--im {
+
+	}
+
+	.uix-price__currency {
+	    font-size: 0.875rem;
+	}
+
+
+	.uix-price__period {
+		font-size: 12px;
+
+		&::before {
+			content: '/';
+			padding-right: .1rem;
+		}
+	}
+
+	.uix-price__detail {
+		text-align: left;
+		padding-bottom: 1.125rem;
+		padding-left: 1rem;
+		font-size: 0.875rem;
+	}
+
+	.uix-price__excerpt {
+		height: auto;
+		padding: 0 0.875rem;
+		font-size: 0.875rem;
+		opacity: 0.65;
+
+		p {
+			line-height: 1.5;
+		}
+	}
+
+
+	.uix-price__outline.is-active {
+
+		.uix-price__num,
+		.uix-price__excerpt,
+		.uix-price__detail,
+		.uix-price__level {
+			color: #fff !important;
+		}
+
+		.uix-price__excerpt {
+			opacity: 0.65;
+		}
+
+	}
+
+}

@@ -1,0 +1,198 @@
+/* ======================================================
+   <!-- 3D Shatter Slider -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+
+/*
+ * 1. Initialize the slider style
+ * 2. Pagination dots
+ * 3. Next/Prev buttons
+*/
+
+/*
+ ---------------------------
+ 1. Initialize the slider style
+ ---------------------------
+ */
+
+.uix-3d-slider--shatter__wrapper {
+	position: relative;
+}
+
+/* Prevent content overflow */
+.uix-3d-slider--shatter__wrapper,
+.uix-3d-slider--shatter__inner,
+.uix-3d-slider--shatter__canvas-container {
+	//max-height: 100vh;
+	overflow: hidden;
+}
+
+.uix-3d-slider--shatter__canvas-container {
+	position: relative;
+	z-index: 2;
+	display: block;
+	height: 100%; /* Required, It will make the canvas fill up */
+}
+.uix-3d-slider--shatter {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+	z-index: 1;
+	background-color: transparent;
+
+	canvas {
+		position: absolute;
+		left: 0;
+		top: 0;
+		z-index: 2;
+		width: 100%;
+		height: 100%;
+		background-color: transparent;
+	}
+
+
+	.uix-3d-slider--shatter__inner {
+		position: absolute;
+		left: 0;
+		top: 0;
+		z-index: 3;
+		height: 100%;/* Required */
+		display: none;
+
+		.uix-3d-slider--shatter__item {
+			width: 100%;
+			opacity: 0;
+
+
+
+			img {
+				width: 100%;
+				visibility: hidden;
+			}
+
+			video {
+				display: none;
+			}
+
+			&.leave {
+				opacity: 0;
+			}
+			&.is-active {
+				opacity: 1;
+			}
+
+
+		}
+
+	}
+
+
+
+}
+
+
+
+
+/*
+ ---------------------------
+ 2. Pagination dots
+ ---------------------------
+ */
+.uix-3d-slider--shatter__pagination {
+
+	position: relative;
+	transform: translateY(-40px);
+	z-index: 2;
+
+	ul {
+		list-style: none;
+		left: 0;
+		bottom: 0;
+		font-size: 0;/*Fighting the Space Between Inline Block Elements*/
+		display: block;
+		width: 100%;
+		text-align: center; /*require*/
+		position: relative;
+		transform: translateY(.5rem);
+
+		li {
+			font-size: 1rem;/*Fighting the Space Between Inline Block Elements*/
+			display: inline-block; /*require*/
+			margin: 0 .2rem;
+
+			a {
+				width: 12px;
+				height: 12px;
+				display: block;
+				box-shadow: 0px 3px 22px 0px rgba(0,0,0,0.45);
+				background: rgba(255, 255, 255, .6);
+				cursor: pointer;
+				text-indent: -9999px;
+				border-radius: 20px;
+			}
+
+			&:hover,
+			&.is-active {
+				a {
+					background: rgba(255, 255, 255, 1);
+					width: 25px;
+				}
+			}
+
+
+		}
+
+
+	}
+
+
+
+}
+
+
+/*
+ ---------------------------
+ 3. Next/Prev buttons
+ ---------------------------
+ */
+.uix-3d-slider--shatter__arrows {
+	position: relative;
+	transform: translateY(-65px);
+	z-index: 3;
+
+
+	a {
+		box-shadow: 0px 10px 54px 0px rgba(19, 32, 62, 0.21);
+		border-radius: 100%;
+		width: 50px;
+		height: 50px;
+		position: absolute;
+		transition: .3s ease-in-out;
+		line-height: 50px;
+		text-align: center;
+		background: #fff;
+
+	}
+
+	.uix-3d-slider--shatter__arrows--prev {
+		left: 15px;
+
+		&.is-disabled {
+			visibility: hidden;
+
+		}
+
+	}
+	.uix-3d-slider--shatter__arrows--next {
+		right: 15px;
+
+		&.is-disabled {
+			visibility: hidden;
+		}
+
+
+
+	}
+
+}

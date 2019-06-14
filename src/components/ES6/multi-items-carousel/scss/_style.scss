@@ -1,0 +1,120 @@
+/* ======================================================
+   <!-- Multiple Items Carousel -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+
+.uix-multi-carousel {
+	/* Required */
+	overflow: hidden;
+
+	.uix-multi-carousel__items {
+		height: 150px;
+		width: 100%;
+		position: relative;
+		overflow: hidden;
+
+		> div {
+			position: relative;
+			float: left;
+			height: 100%;
+			visibility: hidden;
+			box-sizing: border-box;
+
+			&.active-current,
+			&:hover {
+
+			}
+
+
+			/* Demo Style */
+			box-shadow: inset -1px 0px 0px 0px rgba(255,255,255,.5);
+			font-size: 1.2rem;
+			padding: 2rem 0;
+			text-align: center;
+			color: #fff;
+			background: #333;
+
+			&.is-active {
+				background: #000;
+				font-size: 3rem;
+			}
+
+			&.active-prev,
+			&.active-next {
+				font-size: 2rem;
+			}
+
+		}
+	}
+}
+
+/*----- Previous/Next Arrows -----*/
+.uix-multi-carousel__controls {
+	margin-top: 30px;
+	text-align: center;
+	pointer-events: none;
+
+	.uix-multi-carousel__controls--prev {
+	    padding-left: 2px;
+	}
+	.uix-multi-carousel__controls--next {
+	    padding-right: 2px;
+	}
+	a {
+		pointer-events: all;
+		margin-left: 10px;
+		margin-right: 10px;
+		outline: 0;
+		border: 0;
+		color: #000;
+		font-weight: bold;
+		border-radius: 50%;
+		height: 50px;
+		width: 50px;
+		font-size: 32px;
+		cursor: pointer;
+		opacity: 1;
+		text-decoration: none;
+		font-family: Arial, "sans-serif";
+
+		&.is-disabled {
+			opacity: .3;
+		}
+	}
+}
+
+
+
+/*----- Vertical Carousel -----*/
+.uix-multi-carousel.is-vertical {
+	/* Required */
+	overflow: hidden;
+	width: 500px;
+	height: 450px;
+
+	.uix-multi-carousel__items {
+
+		width: 100%;
+		/* Required */
+		height: 100%;
+
+		> div {
+			float: none;
+			width: 100%;
+
+			/* Demo Style */
+			box-shadow: inset 0px -1px 0px 0px rgba(255,255,255,.5);
+			padding: 0 0;
+
+		}
+	}
+}
+
+
+.uix-multi-carousel__controls.is-vertical {
+	width: 300px;
+	position: absolute;
+	top: 20%;
+	left: 600px;
+}

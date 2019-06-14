@@ -1,0 +1,157 @@
+/* ======================================================
+   <!-- Mouse Animation Scroll -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+
+.uix-mouse-icon {
+
+	&.uix-mouse-icon--simulation {
+		border: 2px solid #B7B7B7;
+		border-radius: 16px;
+		display: block;
+		height: 40px;
+		width: 25px;
+
+		/* locate */
+		z-index: 10;
+		position: absolute;
+		bottom: 10px;
+		left: 50%;
+		transform: translateX(-50%);
+		cursor: pointer;
+
+		&::after {
+			content: '';
+			display: block;
+			height: 10px;
+			width: 4px;
+			top: 4px;
+			animation-delay: 0s;
+			animation-duration: 1s;
+			animation-iteration-count: infinite;
+			animation-name: uix-cssAnim--mouseScrolling;
+			animation-play-state: running;
+			animation-timing-function: linear;
+			background: #fff none repeat scroll 0 0;
+			border-radius: 10px;
+			margin-left: auto;
+			margin-right: auto;
+			position: relative;
+		}
+
+	}
+
+
+	&.uix-mouse-icon--arrow {
+
+		width: 35px;
+		/* locate */
+		z-index: 10;
+		position: absolute;
+		bottom: 10px;
+		left: 50%;
+		transform: translateX(-50%);
+		cursor: pointer;
+
+		&::after,
+		&::before {
+			content: '';
+			display: block;
+			width: 15px;
+			height: 15px;
+			transform: rotate(45deg);
+			border-right: 2px solid #fff;
+			border-bottom: 2px solid #fff;
+			margin: 5px auto 3px;
+			animation: uix-cssAnim--arrowScrolling 1s infinite;
+			animation-delay: .2s;
+		}
+
+		&::after {
+			-webkit-animation-delay: .1s;
+			animation-delay: .1s;
+			margin-top: -10px;
+		}
+
+		&::before {
+			-webkit-animation-delay: .3s;
+			animation-delay: .3s;
+		}
+
+
+	}
+
+
+
+	&.uix-mouse-icon--arrow-simple {
+
+		width: 35px;
+		/* locate */
+		z-index: 10;
+		position: absolute;
+		bottom: 10px;
+		left: 50%;
+		transform: translateX(-50%);
+		cursor: pointer;
+		animation: uix-cssAnim--arrowScrolling2 1s infinite alternate;
+
+		&::before {
+			content: '';
+			display: block;
+			width: 15px;
+			height: 15px;
+			transform: rotate(45deg);
+			border-right: 2px solid #fff;
+			border-bottom: 2px solid #fff;
+			margin: 5px auto 3px;
+		}
+
+
+
+	}
+
+}
+
+
+@keyframes uix-cssAnim--arrowScrolling {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: .5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes uix-cssAnim--arrowScrolling2 {
+    0% {
+		bottom: 10px;
+    }
+
+    100% {
+        bottom: 20px;
+    }
+}
+
+
+@keyframes uix-cssAnim--mouseScrolling {
+    0% {
+        opacity: 0;
+        top: 5px;
+    }
+
+    30% {
+        opacity: 1;
+        top: 10px;
+    }
+
+    100% {
+        opacity: 0;
+        top: 25px;
+    }
+}

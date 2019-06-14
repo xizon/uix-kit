@@ -1,0 +1,205 @@
+/* ======================================================
+   <!-- Progress Bar -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+/*
+ * 1. Radial Progress Bar
+ * 2. Rectangle Progress Bar
+*/
+
+$bar-size       : 100px;
+$bar-line-size  : 8px;
+$bar-bg         : $primary-text-color1;
+$bar-track-bg   : rgba(236,236,236,1.00);
+$bar-fill-color : $highlight-color1;
+$bar-speed      : 0.8s;
+
+/*
+ ---------------------------
+ 1. Radial Progress Bar
+ ---------------------------
+ */
+@mixin size($w, $h){
+	height: $h;
+	width: $w;
+}
+
+.uix-progressbar--circle {
+	@include size($bar-size, $bar-size);
+
+	display: inline-block;
+	margin: 1rem;
+	position: relative;
+
+
+	.uix-progressbar__title {
+		color: $primary-text-color1;
+		padding-top: 1rem;
+	}
+
+	.uix-progressbar__pie {
+		@include size(100%, 100%);
+		clip: rect(0, $bar-size, $bar-size, $bar-size / 2);
+		left: 0;
+		position: absolute;
+		top: 0;
+
+		.uix-progressbar__pie--half-circle {
+			transition: all #{$bar-speed} ease;
+			@include size(100%, 100%);
+			border: $bar-line-size solid;
+			border-radius: 50%;
+			clip: rect(0, $bar-size / 2, $bar-size, 0);
+			left: 0;
+			position: absolute;
+			top: 0;
+		}
+	}
+
+	.uix-progressbar__track {
+		border: $bar-line-size solid $bar-track-bg;
+		background: $bar-bg;
+		border-radius: 100%;
+		display: block;
+		width: 100%;
+		height: 100%;
+		line-height: $bar-size;
+		font-size: 1rem;
+		position: relative;
+		text-align: center;
+		color: #fff;
+
+		> span {
+			margin-top: -.5rem;
+			position: absolute;
+			width: 100%;
+			left: 0;
+			top: 0;
+		}
+
+		.uix-progressbar__unit {
+			color: $sub-text-color;
+			font-size: 0.875rem;
+			display: inline-block;
+			margin-left: .1rem;
+			font-style: normal;
+		}
+	}
+
+
+	&.is-transparent {
+
+		.uix-progressbar__track {
+			color: $primary-text-color1;
+			background: none;
+		}
+	}
+
+	@for $i from 1 to 101 {
+
+		&.uix-progressbar--progress-#{$i} {
+
+			@if $i <= 50 {
+				.uix-progressbar__pie {
+					.uix-progressbar__pie--right-side {
+						display: none;
+					}
+				}
+			}
+
+			@if $i > 50 {
+				.uix-progressbar__pie {
+					clip: rect(auto, auto, auto, auto);
+
+					.uix-progressbar__pie--right-side {
+						transform: rotate(180deg);
+					}
+				}
+
+			}
+
+			.uix-progressbar__pie {
+				.uix-progressbar__pie--half-circle {
+					border-color: $bar-fill-color;
+				}
+
+				.uix-progressbar__pie--left-side {
+					transform: rotate(#{$i*3.5}deg);
+				}
+
+			}
+
+			@if $i == 100 {
+				.uix-progressbar__pie {
+					.uix-progressbar__pie--right-side {
+						transform: rotate(170deg);
+					}
+				}
+
+			}
+
+
+		}
+
+	}
+	/* End For */
+
+
+}
+
+/*
+ ---------------------------
+ 2. Rectangle Progress Bar
+ ---------------------------
+ */
+.uix-progressbar--rectangle {
+	display: block;
+	margin: 1rem;
+	position: relative;
+	width: calc(100% - 2rem);
+
+	.uix-progressbar__title {
+		color: $primary-text-color1;
+	}
+
+	.uix-progressbar__bar {
+		height: $bar-line-size;
+		background-color: $bar-track-bg;
+
+
+		> span {
+			position: absolute;
+			top: 0;
+			right: 0;
+			font-weight: bold;
+
+			.uix-progressbar__unit {
+				color: $sub-text-color;
+				font-size: 0.875rem;
+				display: inline-block;
+				margin-left: .1rem;
+				font-style: normal;
+			}
+		}
+
+		.uix-progressbar__track {
+			transition: all #{$bar-speed} ease;
+			position: relative;
+			height: 100%;
+			width: 0;
+			background-color: $bar-fill-color;
+			color: $primary-text-color1;
+		}
+
+	}
+
+	@for $i from 1 to 101 {
+		&.uix-progressbar--progress-#{$i} .uix-progressbar__track {
+			width: #{$i}#{"%"};
+		}
+	}
+
+
+
+}

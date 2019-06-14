@@ -1,0 +1,18 @@
+/* ====================================================== 
+   <!-- Parallax -->                                           
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+.uix-parallax {
+	position: relative;
+	width: 100%;
+	background-attachment: fixed;
+	@include background-cover();
+	
+	height: auto;
+	width: 100%;
+	
+	.uix-parallax__img {
+	    visibility: hidden;
+	}
+}

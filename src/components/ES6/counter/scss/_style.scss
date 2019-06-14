@@ -1,0 +1,10 @@
+
+/* ======================================================
+       <!-- Counter -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+
+h3[data-counter-number] {
+	padding: 2rem;
+}

@@ -1,0 +1,634 @@
+/* ======================================================
+   <!-- Cutom Light Box -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+/*
+ * 1. Initialization module
+ * 2. Click to enlarge image in light box
+*/
+
+$lb-custom-w: 1000px;
+
+
+/*
+ ---------------------------
+ 1. Initialization module
+ ---------------------------
+ */
+$lb-radius: 3px;
+
+.uix-lightbox__content-container {
+	display: none;
+}
+
+.uix-lightbox__container-mask {
+	display: none;
+	position: fixed;
+	z-index: 99997;
+	background: rgba(0,0,0,.6);
+	top: 0;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+}
+
+
+.uix-lightbox__close {
+	display: none;
+	border-radius: 50%;
+	width: 36px;
+	height: 36px;
+	text-align: center;
+	line-height: 34px;
+	overflow: hidden;
+	position: fixed;
+	z-index: 99998;
+	top: 15px;
+	right: 15px;
+	transform: rotate(45deg);
+	cursor: pointer;
+
+	&.is-active {
+		display: block;
+	}
+
+
+	&::after {
+		font-family: 'Font Awesome 5 Free';
+		font-weight: 600;
+		content: "\f067";
+		color: #fff;
+		font-size: 2rem;
+		text-shadow: 0 2px 3px rgba(0,0,0,.3);
+	}
+}
+
+.uix-lightbox__loading {
+	position: fixed;
+	z-index: 99998;
+	left: 50vw;
+	top: 50vh;
+	transform: translate(-50%,-50%);
+	color: #fff;
+
+	&.is-loaded {
+		display: none;
+	}
+}
+
+
+.uix-lightbox__container {
+	display: none;
+	position: fixed;
+	z-index: 99998;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none; /* Avoid masks being blocked */
+
+
+
+	.uix-lightbox__inner {
+		pointer-events: all;
+		display: none;
+		max-width: #{$lb-custom-w};
+		margin: 0 auto;
+		position: relative;
+		top: 50%;
+		transform: translateY(-50%);
+		text-align: center;
+
+
+
+		.uix-lightbox__html {
+
+			text-align: center;
+
+			.uix-lightbox__photo-container {
+				transition: all 0.1s ease;
+				display: inline-block;
+
+				&.uix-lightbox__photo-sets-container {
+					overflow: hidden;
+					background-color: transparent;
+					position: relative;
+
+				}
+
+				.uix-lightbox__photo-sets__prev,
+				.uix-lightbox__photo-sets__next {
+					position: absolute;
+					z-index: 2;
+					top: 50%;
+					transform: translateY(-50%);
+					display: inline-block;
+					text-rendering: auto;
+					-webkit-font-smoothing: antialiased;
+					-moz-osx-font-smoothing: grayscale;
+					opacity: .7;
+
+
+					&::before {
+						display: block;
+						font-family: 'Font Awesome 5 Free';
+						font-weight: 600;
+						font-size: 2.5rem;
+						color: #fff;
+					}
+
+					&:hover {
+						opacity: 1;
+					}
+
+
+				}
+				.uix-lightbox__photo-sets__prev {
+					left: 0;
+
+					&::before {
+						content: "\f104";
+					}
+
+				}
+				.uix-lightbox__photo-sets__next {
+					right: 0;
+
+					&::before {
+						content: "\f105";
+					}
+
+				}
+
+
+				ul {
+
+					margin: 0;
+					padding: 0;
+					height: 100%;
+
+					li {
+						padding: 0;
+						display: none;
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: 100%;
+						height: 100%;
+						width: 0;
+						@include transition-default();
+
+						img {
+							max-width: calc(100% - 6rem);
+						}
+
+						&.is-active {
+							width: auto;
+						}
+
+						&:first-child {
+							width: auto;
+							display: block;
+						}
+
+
+
+
+					}
+
+				}
+
+			}
+
+
+			.uix-lightbox__thumb-container {
+				position: absolute;
+				bottom: 0;
+				left: 50%;
+				transform: translateX(-50%);
+				text-align: center;
+				width: 100%;
+				overflow: hidden;
+				overflow-x: auto;
+				white-space: nowrap;
+
+
+
+
+				ul {
+
+					margin: 0;
+					padding: 0;
+
+
+					li {
+						width: 100px;
+						max-height: 100px;
+						display: inline-block;
+						cursor: pointer;
+						margin-right: 10px;
+						margin-bottom: 10px;
+						padding: 0;
+						transform: scale(.9);
+						@include transition-default();
+
+						&.is-active {
+							transform: scale(1);
+						}
+
+
+						img {
+
+							box-shadow: 0px 6px 21px 1px rgba(0,0,0,0.29);
+						}
+
+					}
+				}
+
+
+
+			}
+
+
+			&::before,
+			&::after {
+				content: '';
+				display: block;
+				width: 100%;
+				height: 25px;
+				position: absolute;
+				z-index: 1;
+				left: 0;
+				top: 0;
+				background: #fff;
+				border-top-left-radius: $lb-radius;
+				border-top-right-radius: $lb-radius;
+			}
+
+			&::after {
+				top: auto;
+				bottom: 0;
+				border-top-left-radius: 0;
+				border-top-right-radius: 0;
+				border-bottom-left-radius: $lb-radius;
+				border-bottom-right-radius: $lb-radius;
+			}
+
+			&.js-uix-no-img {
+				background: #fff;
+				border-radius: $lb-radius;
+			}
+
+			> .uix-lightbox__content {
+
+				position: relative;
+				/* Required Width */
+				width: 600px;
+				word-wrap: break-word;
+
+
+				max-height: 60vh;
+				overflow-y: auto;
+				text-align: left;
+
+
+				> div {
+					padding: 1.5rem;
+					color: $sub-text-color;
+					font-size: 0.75rem;
+
+					img {
+						max-width: 100% !important;
+						height: auto !important;
+					}
+
+
+				}
+
+
+
+
+			}
+
+			> img {
+				border-radius: $lb-radius;
+				max-width: 100%;
+				width: auto;
+			}
+
+		}
+
+
+
+		&.js-uix-pure-image {
+
+			.uix-lightbox__html {
+				&::before,
+				&::after {
+					display: none;
+				}
+
+				img {
+					max-height: 95vh; /* Do not use percentages here */
+				}
+
+			}
+
+		}
+
+
+		 /* Custom content width you want */
+		&.js-uix-custom {
+			max-width: 70vw;
+
+			.uix-lightbox__html {
+				> .uix-lightbox__content {
+					width: 70vw;
+					max-width: 100%;
+				}
+			}
+
+		}
+
+	}
+
+
+
+	&.js-uix-no-fixed {
+		position: absolute;
+		top: 100px;
+
+		&.no-fixed-imgEnlarged {
+			position: fixed;
+			top: 0;
+			margin-top: 0 !important; /* Protected from js */
+		}
+
+		.uix-lightbox__inner {
+			top: 0;
+			transform: translateY(0);
+			padding-bottom: 5rem;
+
+
+			.uix-lightbox__html {
+				&::after {
+					bottom: 5rem;
+				}
+			}
+
+
+			&.js-uix-pure-image {
+
+				.uix-lightbox__html {
+
+					img {
+						max-height: inherit;
+					}
+
+				}
+
+			}
+
+			&.js-uix-custom {
+
+				max-width: 1200px;
+
+				.uix-lightbox__html > .uix-lightbox__content {
+					width: #{$lb-custom-w};
+					max-height: inherit;
+
+				}
+
+			}
+
+		}
+	}
+
+}
+
+@include customScrollbar( 'vertical', '.uix-lightbox__content' );
+@include customScrollbar( 'horizontal', '.uix-lightbox__thumb-container' );
+
+@media all and (max-width: 768px) {
+
+	.uix-lightbox__container {
+
+		.uix-lightbox__inner {
+
+			max-width: calc(100% - 30px) !important;
+			margin: 15px auto;
+
+
+			.uix-lightbox__html {
+				> .uix-lightbox__content {
+					width: auto;
+				}
+
+
+				.uix-lightbox__thumb-container {
+					bottom: -100px;
+
+				}
+
+			}
+
+
+			 /* Custom content width you want */
+			&.js-uix-custom {
+				max-width: calc(100vw - 30px);
+
+				.uix-lightbox__html {
+					> .uix-lightbox__content {
+						width: auto;
+					}
+				}
+
+			}
+
+		}
+
+		&.js-uix-no-fixed {
+			top: 50px;
+
+			&.no-fixed-imgEnlarged {
+				top: 0;
+			}
+
+			.uix-lightbox__inner {
+
+				/* Prevent closing button position error */
+				overflow: hidden;
+
+				&.js-uix-custom {
+
+					max-width: calc(100vw - 30px);
+
+					.uix-lightbox__html > .uix-lightbox__content {
+						width: auto;
+
+					}
+
+				}
+
+			}
+
+		}
+
+	}
+}
+
+
+
+
+/*
+ ---------------------------
+ 2. Click to enlarge image in light box
+ ---------------------------
+ */
+
+a.uix-lightbox__original__link {
+	cursor: zoom-in;
+	display: block;
+}
+
+/* Styles the close link, adds the slide down transition */
+
+.uix-lightbox__original__close {
+    display: none;
+    width: 50px;
+    height: 50px;
+    box-sizing: border-box;
+    background: white;
+    color: black;
+    text-decoration: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+	z-index: 100001;
+    @include transition-default();
+
+	&.is-active {
+		display: block;
+	}
+
+	/* Provides part of the "X" to eliminate an image from the close link */
+	&::before {
+		content: "";
+		display: block;
+		height: 30px;
+		width: 1px;
+		background: black;
+		position: absolute;
+		left: 26px;
+		top: 10px;
+		transform: rotate(45deg);
+	}
+
+	/* Provides part of the "X" to eliminate an image from the close link */
+
+	&::after {
+		content: "";
+		display: block;
+		height: 30px;
+		width: 1px;
+		background: black;
+		position: absolute;
+		left: 26px;
+		top: 10px;
+		transform: rotate(-45deg);
+	}
+
+
+}
+
+
+/* Styles the lightbox image, centers it vertically and horizontally, adds the zoom-in transition and makes it responsive using a combination of margin and absolute positioning */
+
+.uix-lightbox__original__target {
+
+    position: fixed;
+	left: 50% !important;
+	top: 50% !important;
+	transform: translate(-50%,-50%);
+    background: rgba(0,0,0,.7);
+    width: 100vw;
+    opacity: 0;
+    transition: opacity .2s ease-in-out;
+    overflow: hidden;
+	overflow-y: auto;
+	z-index: 100000;
+
+
+	&::-webkit-scrollbar-track {
+		border-radius: 0px;
+		background-color: #ddd;
+	}
+
+	&::-webkit-scrollbar {
+		width: 5px;
+		background-color: #333;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		border-radius: 0px;
+		background-color: #333;
+	}
+
+
+	img {
+		width: auto !important; /* Protected from js */
+		height: auto !important; /* Protected from js */
+		margin: auto !important; /* Protected from js */
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		max-height: 0%;
+		max-width: 0%;
+		box-shadow: 0px 0px 8px rgba(0,0,0,.3);
+		box-sizing: border-box;
+	}
+
+
+
+	/* To perform the animations upon clicking the .uix-lightbox__original__target anchor */
+	&.is-active {
+		opacity: 1;
+		top: 0;
+		bottom: 0;
+		height: 100vh;
+
+		/* When zooming in on the picture */
+		&.no-fixed-imgEnlarged {
+			top: 0 !important;
+			transform: translate(-50%, 0);
+		}
+
+
+		img {
+			width: auto;
+			height: auto;
+			max-width: 100% !important;
+			max-height: inherit !important;
+		}
+
+		.uix-lightbox__original__close {
+			top: 0px;
+		}
+
+	}
+
+
+
+	&.uix-lightbox__original__target--imgfull {
+
+		img {
+			margin: 0 auto !important; /* Protected from js */
+		}
+	}
+
+
+
+
+}
