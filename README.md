@@ -71,7 +71,7 @@ GitHub pages can only serve static content, and there is no way to run PHP or ge
 * Support PJAX no refresh method for loading pages
 * Support JS, HTML and SASS component library automatically packaged.
 * Make a foundation for the React architecture.
-* The core module adopts ES6 import and export, and the third-party plugins adopt pure merge and do not import and export.
+* The core module adopts ES6 import and export, and the third-party plugins adopt pure file merger and do not import and export.
 
 
 * * *
@@ -276,7 +276,7 @@ uix-kit/
 │   ├── index.js
 │   ├── index-rtl.js
 │   ├── components/
-│   │   ├── ES5/  => Third-party plugins adopt pure merge and do not import and export
+│   │   ├── ES5/  => Third-party plugins adopt pure file merger and do not import and export
 │   │   └── ES6/  => Core modules
 ├── examples/
 │   ├── *.html

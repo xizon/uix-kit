@@ -115,8 +115,7 @@ tempAllPages.map( ( event ) => {
 
 
 // Get all the js component files with ES5
-// Third-party plugins adopts pure merge and does not import and export.
-// Just do a merge, not for ES6 parsing
+// Third-party plugins adopt pure file merger and do not import and export
 let pureMergeJSDependenciesFile = globs.pathThirdPartyPlugins + '/_plugins-Miscellaneous/js/_dependencies.js';
 let targetJSComFilesName = '';
 let JSComFiles = globs.pathThirdPartyPlugins + '/_app-load.js';

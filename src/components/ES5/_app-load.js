@@ -1,7 +1,7 @@
 /*
  * Third-party plugins for website
  *    
- * !!! Third-party plugins adopts pure merge and does not import and export.
+ * !!! Third-party plugins adopt pure file merger and do not import and export
  * !!! Please do not modify variable "UIXKIT_3RD_PARTY_PLUGINS_IMPORT" name
  */
 
