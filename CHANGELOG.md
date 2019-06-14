@@ -1,6 +1,11 @@
 # Changelog
 
 
+#### = 3.6.3 (June 14, 2019) =
+
+* Tweak: Optimized webpack configuration.
+
+
 #### = 3.6.2 (June 13, 2019) =
 
 * Fix: Fixed a bug that Cannot read property 'fn' of undefined for jQuery 1.xx.x when using WordPress.

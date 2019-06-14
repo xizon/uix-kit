@@ -14,7 +14,6 @@
  * <!-- Base -->
  *************************************
  */
-
 import '../scss/_style.scss';
 
 
@@ -34,11 +33,11 @@ export let
 
 
 if ( typeof APP_ROOTPATH === 'undefined' ) {
-    templateUrl = '';
+	templateUrl = '';
 	homeUrl     = '';
 	ajaxUrl     = '';
 } else {
-    templateUrl = APP_ROOTPATH.templateUrl.replace(/\/\s*$/, '' );
+	templateUrl = APP_ROOTPATH.templateUrl.replace(/\/\s*$/, '' );
 	homeUrl     = APP_ROOTPATH.homeUrl.replace(/\/\s*$/, '' );
 	ajaxUrl     = APP_ROOTPATH.ajaxUrl.replace(/\/\s*$/, '' );
 }
