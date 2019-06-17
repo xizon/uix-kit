@@ -12,9 +12,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -22,6 +20,8 @@ import '../scss/_style.scss';
 
 
 export const SHOW_MORELESS = ( ( module, $, window, document ) => {
+	if ( window.SHOW_MORELESS === null ) return false;
+	
 	
 	
     module.SHOW_MORELESS               = module.SHOW_MORELESS || {};

@@ -1,21 +1,11 @@
 /*
- * Common website functions, Can be called separately in the HTML page
+ * Common website functions, Can be called separately in HTML pages or custom JavaScript.
  *    
  */
-import {
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
-} from '@uixkit/core/_global/js';
+import UixModuleFilter from '@uixkit/core/_global/js/fn/UixModuleFilter';
+import UixApplyAsyncScripts from '@uixkit/core/_global/js/fn/UixApplyAsyncScripts';
+import UixApplyAsyncAllScripts from '@uixkit/core/_global/js/fn/UixApplyAsyncAllScripts';
 
-
-window.UixGUID = UixGUID;
-window.UixMath = UixMath;
-window.UixCssProperty = UixCssProperty;
-window.UixApplyAsyncScripts = UixApplyAsyncScripts;
-window.UixApplyAsyncAllScripts = UixApplyAsyncAllScripts;
 
 
 /*

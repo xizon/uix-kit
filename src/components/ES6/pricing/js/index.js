@@ -11,9 +11,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -21,6 +19,8 @@ import '../scss/_style.scss';
 
 
 export const PRICING = ( ( module, $, window, document ) => {
+	if ( window.PRICING === null ) return false;
+	
 	
 	
     module.PRICING               = module.PRICING || {};

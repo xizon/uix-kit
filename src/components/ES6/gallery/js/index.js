@@ -19,9 +19,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -29,6 +27,8 @@ import '../scss/_style.scss';
 
 
 export const GALLERY = ( ( module, $, window, document ) => {
+	if ( window.GALLERY === null ) return false;
+	
 	
     module.GALLERY               = module.GALLERY || {};
     module.GALLERY.version       = '0.0.3';

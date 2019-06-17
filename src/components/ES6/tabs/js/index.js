@@ -12,9 +12,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -22,6 +20,8 @@ import '../scss/_style.scss';
 
 
 export const TABS = ( ( module, $, window, document ) => {
+	if ( window.TABS === null ) return false;
+	
 	
     module.TABS               = module.TABS || {};
     module.TABS.version       = '0.1.3';

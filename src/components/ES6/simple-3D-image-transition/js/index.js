@@ -19,13 +19,13 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
 export const THREE_IMAGE_TRANSITION = ( ( module, $, window, document ) => {
+	if ( window.THREE_IMAGE_TRANSITION === null ) return false;
+	
 	
     module.THREE_IMAGE_TRANSITION               = module.THREE_IMAGE_TRANSITION || {};
     module.THREE_IMAGE_TRANSITION.version       = '0.0.1';

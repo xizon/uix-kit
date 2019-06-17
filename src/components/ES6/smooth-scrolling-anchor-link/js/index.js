@@ -12,12 +12,12 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 export const SMOOTH_SCROLLING_ANCHORLINK = ( ( module, $, window, document ) => {
+	if ( window.SMOOTH_SCROLLING_ANCHORLINK === null ) return false;
+	
 	
 	
     module.SMOOTH_SCROLLING_ANCHORLINK               = module.SMOOTH_SCROLLING_ANCHORLINK || {};

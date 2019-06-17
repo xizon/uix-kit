@@ -12,14 +12,14 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
 
 export const MOUSEWHEEL_INTERACTION = ( ( module, $, window, document ) => {
+	if ( window.MOUSEWHEEL_INTERACTION === null ) return false;
+	
 	
 	
     module.MOUSEWHEEL_INTERACTION               = module.MOUSEWHEEL_INTERACTION || {};

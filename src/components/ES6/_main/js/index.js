@@ -13,9 +13,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -23,29 +21,33 @@ import '../scss/_style.scss';
 
 
 export const MAIN = ( ( module, $, window, document ) => {
+	if ( window.MAIN === null ) return false;
+	
 	
 	
     module.MAIN               = module.MAIN || {};
     module.MAIN.version       = '0.0.1';
     module.MAIN.documentReady = function( $ ) {
-
+		
+		
 		/* 
-		 ====================================================
-		 *  Function Title Here
-		 ====================================================
-		 */
+		 ---------------------------
+		 Function Here
+		 ---------------------------
+		 */ 
 		//your code here...
 	
+		
 		
     };
 	
     module.MAIN.pageLoaded    = function() {
 
 		/* 
-		 ====================================================
-		 *  Function Title Here
-		 ====================================================
-		 */
+		 ---------------------------
+		 Function Here
+		 ---------------------------
+		 */ 
 		//your code here...
 		
     };

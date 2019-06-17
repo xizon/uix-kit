@@ -19,9 +19,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -29,6 +27,8 @@ import '../scss/_style.scss';
 
 
 export const THREE_CAROUSEL = ( ( module, $, window, document ) => {
+	if ( window.THREE_CAROUSEL === null ) return false;
+	
 	
 	
     module.THREE_CAROUSEL               = module.THREE_CAROUSEL || {};

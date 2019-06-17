@@ -42,9 +42,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 import UixRenderNormalRadio from '@uixkit/core/form/js/fn/normal-radio';
 import UixRenderDatePicker from '@uixkit/core/form/js/fn/datapicker';
@@ -63,6 +61,8 @@ import '../scss/_style.scss';
 
 
 export const FORM = ( ( module, $, window, document ) => {
+	if ( window.FORM === null ) return false;
+	
 	
 	
     module.FORM               = module.FORM || {};

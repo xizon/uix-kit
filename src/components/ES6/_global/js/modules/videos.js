@@ -12,13 +12,13 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
 export const VIDEOS = ( ( module, $, window, document ) => {
+	if ( window.VIDEOS === null ) return false;
+	
 	
 	
 	

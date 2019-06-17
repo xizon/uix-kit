@@ -19,14 +19,14 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
 
 export const THREE_MOUSE_INTERACTION = ( ( module, $, window, document ) => {
+	if ( window.THREE_MOUSE_INTERACTION === null ) return false;
+	
 	
 	
     module.THREE_MOUSE_INTERACTION               = module.THREE_MOUSE_INTERACTION || {};

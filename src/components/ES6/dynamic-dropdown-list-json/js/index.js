@@ -12,9 +12,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 import UixSearchJsonStr from '@uixkit/core/dynamic-dropdown-list-json/js/fn/search-json';
 import UixIsJsonObj from '@uixkit/core/dynamic-dropdown-list-json/js/fn/is-json';
@@ -22,6 +20,8 @@ import UixRenderCustomSelect from '@uixkit/core/form/js/fn/select';
 
 
 export const DYNAMIC_DD_LIST = ( ( module, $, window, document ) => {
+	if ( window.DYNAMIC_DD_LIST === null ) return false;
+	
 	
     module.DYNAMIC_DD_LIST               = module.DYNAMIC_DD_LIST || {};
     module.DYNAMIC_DD_LIST.version       = '0.0.5';

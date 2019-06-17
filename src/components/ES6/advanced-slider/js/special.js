@@ -20,9 +20,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -30,6 +28,8 @@ import '../scss/_special.scss';
 
 
 export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
+	if ( window.ADVANCED_SLIDER_FILTER === null ) return false;
+	
 	
 	
 

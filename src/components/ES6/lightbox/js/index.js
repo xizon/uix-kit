@@ -21,16 +21,17 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
+import UixApplyAsyncScripts from '@uixkit/core/_global/js/fn/UixApplyAsyncScripts';
 
 
 import '../scss/_style.scss';
 
 
 export const LIGHTBOX = ( ( module, $, window, document ) => {
+	if ( window.LIGHTBOX === null ) return false;
+	
 	
 	
     module.LIGHTBOX               = module.LIGHTBOX || {};
@@ -414,7 +415,7 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 								$content.html( $( '#' + dataHtmlID ).html() ).promise().done( function(){
 									
 									// Apply some asynchronism scripts
-									UixApplyAsyncScripts({
+									$( document ).UixApplyAsyncScripts({
 										lightBox : false,
 										ajaxPostList : false
 									});

@@ -1,5 +1,10 @@
 # Changelog
 
+#### = 3.6.4 (June 16, 2019) =
+
+* New: Module function can be destroyed using `window.MODULE_NAME = null;`.
+* New: Add a filter function `UixModuleFilter` to operate the module group. Users can add a new module without modifying the uix-kit core JavaScript.
+
 
 #### = 3.6.3 (June 14, 2019) =
 

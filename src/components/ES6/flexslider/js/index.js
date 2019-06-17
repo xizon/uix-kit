@@ -22,9 +22,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -32,6 +30,8 @@ import '../scss/_style.scss';
 
 
 export const FLEXSLIDER = ( ( module, $, window, document ) => {
+	if ( window.FLEXSLIDER === null ) return false;
+	
 	
 	
     module.FLEXSLIDER               = module.FLEXSLIDER || {};

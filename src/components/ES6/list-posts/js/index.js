@@ -23,10 +23,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
+import UixApplyAsyncScripts from '@uixkit/core/_global/js/fn/UixApplyAsyncScripts';
 
 
 import '../scss/_basic.scss';
@@ -34,6 +33,8 @@ import '../scss/_split.scss';
 
 
 export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
+	if ( window.POST_LIST_AJAX === null ) return false;
+	
 	
 	
     module.POST_LIST_AJAX               = module.POST_LIST_AJAX || {};
@@ -471,8 +472,7 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 							
 							
 							//--------- Apply some asynchronism scripts
-							UixApplyAsyncScripts({
-								scrollReveal : true,
+							$( document ).UixApplyAsyncScripts({
 								ajaxPostList : false
 							});
 

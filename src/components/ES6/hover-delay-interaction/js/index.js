@@ -12,13 +12,13 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
 export const HOVER_DELAY_INTERACTION = ( ( module, $, window, document ) => {
+	if ( window.HOVER_DELAY_INTERACTION === null ) return false;
+	
 	
     module.HOVER_DELAY_INTERACTION               = module.HOVER_DELAY_INTERACTION || {};
     module.HOVER_DELAY_INTERACTION.version       = '0.0.1';

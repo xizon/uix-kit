@@ -12,14 +12,14 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
 
 export const MEGA_MENU = ( ( module, $, window, document ) => {
+	if ( window.MEGA_MENU === null ) return false;
+	
 	
 	
 	

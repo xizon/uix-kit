@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
- * ## Version             :  3.6.3
+ * ## Version             :  3.6.4
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  June 14, 2019
+ * ## Last Update         :  June 17, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -2009,7 +2009,7 @@ __webpack_require__.r(__webpack_exports__);
 /*
  * Third-party plugins for website
  *    
- * !!! Third-party plugins adopts pure merge and does not import and export.
+ * !!! Third-party plugins adopt pure file merger and do not import and export
  * !!! Please do not modify variable "UIXKIT_3RD_PARTY_PLUGINS_IMPORT" name
  */
 var UIXKIT_3RD_PARTY_PLUGINS_IMPORT = {
@@ -2025,8 +2025,6 @@ var UIXKIT_3RD_PARTY_PLUGINS_IMPORT = {
 var _style = __webpack_require__(4);
 
 // CONCATENATED MODULE: ./src/components/ES6/_global/js/index.js
-var _this = undefined;
-
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 /**
@@ -2128,6 +2126,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 /*
  * Global variables from front pages
+ *
+ * @private
  */
 
 var //If the file is in the root directory, you can leave it empty.
@@ -2147,6 +2147,8 @@ if (typeof APP_ROOTPATH === 'undefined') {
 }
 /*
  * Determine whether it is a special browser
+ *
+ * @private
  */
 
 
@@ -2162,9 +2164,9 @@ var browser = {
 };
 /*
  * Core scripts for current site
- * @global
  *
- * //Used for all modules from ./src/components/ES6/[__]/js
+ * @private
+ * @description Used for all modules from ./src/components/ES6/[__]/js
  * @requires ./examples/assets/js/min/jquery.waitforimages.min.js
  * @requires ./examples/assets/js/min/video.min.js
  * @requires ./examples/assets/js/min/jquery.waypoints.min.js
@@ -2226,6 +2228,8 @@ var UixModuleInstance = function ($, window, document) {
 /*
  * Create GUID / UUID
  *
+ * @private
+ * @description This function can be used separately in HTML pages or custom JavaScript.
  * @return {String}                        - The globally-unique identifiers.
  */
 
@@ -2269,6 +2273,8 @@ var UixGUID = UixGUID || function () {
 /*
  * Evaluating a string as a mathematical expression in JavaScript
  *
+ * @private
+ * @description This function can be used separately in HTML pages or custom JavaScript.
  * @return {String}            - New calculation result.
  */
 
@@ -2326,6 +2332,8 @@ var UixMath = UixMath || function () {
 /*
  * Get the CSS property
  *
+ * @private
+ * @description This function can be used separately in HTML pages or custom JavaScript.
  * @param  {Object} el     - Target object, using class name or ID to locate.
  * @return {String|JSON}   - The value of property.
  */
@@ -2372,9 +2380,129 @@ var UixCssProperty = UixCssProperty || function () {
     };
   }, t;
 }();
+// CONCATENATED MODULE: ./src/components/ES6/_global/js/fn/UixModuleFilter.js
+function UixModuleFilter_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { UixModuleFilter_typeof = function _typeof(obj) { return typeof obj; }; } else { UixModuleFilter_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return UixModuleFilter_typeof(obj); }
+
+/*
+ * Method of deleting or adding a module
+ *
+ * @global
+ * @description This function can be used separately in HTML pages or custom JavaScript.
+ * @param  {Boolean|String} destroy       - If it is a string, it means destroying this module from UixModuleInstance
+ * @param  {JSON} add                     - New module data.
+ * @param  {String} add.moduleName        - The name of the module (the default is all uppercase).
+ * @param  {Boolean} add.pageLoaded       - Window loading module method. If true or 1, the module will execute after the page is loaded.
+ * @param  {Number} add.version           - The new module version number.
+ * @param  {Function} add.callback        - The new module script of function.
+ * @return {Void}      
+ *
+ * @Usage:
+ * !!! The code is to be inserted in front of the uix-kit core script.
+	
+	
+<script>
+window.MAIN = null;
+( function( $ ) {
+"use strict";
+    $( document ).ready( function() {
+		$( document ).UixModuleFilter( { 
+		   'destroy' : 'MAIN',
+		   'add'     : {
+							moduleName    : 'YOUR_MODULE_NAME',
+							pageLoaded    : true,
+							version       : '0.0.1',
+							callback      : function() {
+								//the module will execute after the page is loaded.
+
+							}
+						}
+		} );
+    } );
+} ) ( jQuery );
+</script>
+
+ *
+ * 
+ */
+
+
+(function ($) {
+  'use strict';
+
+  $.fn.UixModuleFilter = function (options) {
+    // This is the easiest way to have default options.
+    var settings = $.extend({
+      destroy: false,
+      add: {
+        moduleName: 'OLD_MODULE_NAME',
+        pageLoaded: false,
+        version: '0.0.1',
+        callback: function callback() {}
+      }
+    }, options);
+    this.each(function () {
+      //remove a module
+      //-------------------------------------	
+      if (settings.destroy && Object.prototype.toString.call(settings.destroy) == '[object String]') {
+        var moduleName = settings.destroy;
+
+        if (UixModuleFilter_typeof(UixModuleInstance[moduleName]) != ( true ? "undefined" : undefined)) {
+          delete UixModuleInstance[moduleName];
+        }
+      } //add or replace a module
+      //-------------------------------------	
+
+
+      if (settings.add && Object.prototype.toString.call(settings.add) == '[object Object]' && settings.add.hasOwnProperty('pageLoaded')) {
+        var moduleName = settings.add.moduleName; //delete the old module if exist
+
+        if (UixModuleFilter_typeof(UixModuleInstance[moduleName]) != ( true ? "undefined" : undefined)) {
+          console.log('The module already exists, please destroy the old module or change the new module name.');
+        } else {
+          //loading mode "documentReady"
+          if (!settings.add.pageLoaded || settings.add.pageLoaded == 0) {
+            var _moduleName = function (module, $, window, document) {
+              module[moduleName] = module[moduleName] || {};
+              module[moduleName].version = settings.add.version;
+
+              module[moduleName].documentReady = function ($) {
+                settings.add.callback();
+              };
+
+              module.components.documentReady.push(module[moduleName].documentReady);
+              return _moduleName;
+            }(UixModuleInstance, jQuery, window, document);
+
+            UixModuleInstance[moduleName].documentReady($);
+          } //loading mode "pageLoaded"
+
+
+          if (settings.add.pageLoaded || settings.add.pageLoaded == 1) {
+            var _moduleName = function (module, $, window, document) {
+              module[moduleName] = module[moduleName] || {};
+              module[moduleName].version = settings.add.version;
+
+              module[moduleName].pageLoaded = function () {
+                settings.add.callback();
+              };
+
+              module.components.pageLoaded.push(module[moduleName].pageLoaded);
+              return _moduleName;
+            }(UixModuleInstance, jQuery, window, document);
+
+            UixModuleInstance[moduleName].pageLoaded();
+          }
+        }
+      }
+    });
+  };
+})(jQuery);
+// CONCATENATED MODULE: ./src/components/ES6/_global/js/fn/UixApplyAsyncScripts.js
 /*
  * Apply some asynchronism scripts
  *
+ * @global
+ * @description This function can be used separately in HTML pages or custom JavaScript.
  * @param  {Boolean} scrollReveal          - Run script of module "Scroll Reveal". a page commonly used to
  *                                           load asynchronous information
  * @param  {Boolean} ajaxPostList          - Run script of module "Posts List With Ajax". a page commonly used to
@@ -2382,171 +2510,221 @@ var UixCssProperty = UixCssProperty || function () {
  * @param  {Boolean} ajaxDDList            - Run script of module "Dynamic Drop Down List from JSON".
  * @param  {Boolean} counterAnim           - Run script of module "Counter".
  * @return {Void}
+ *
+ * @Usage:
+    
+	
+<script>
+( function( $ ) {
+"use strict";
+    $( document ).ready( function() {
+		$( document ).UixApplyAsyncScripts({
+			scrollReveal    : true,
+			ajaxPostList    : true,
+			ajaxDDList      : true,
+			counterAnim     : true,
+			lightBox        : true 
+		});
+    } );
+} ) ( jQuery );
+</script>
+
+ 
+
+ *
+ * 
  */
 
-var UixApplyAsyncScripts = function UixApplyAsyncScripts(options) {
-  'use strict'; // This is the easiest way to have default options.
 
-  var settings = $.extend({
-    scrollReveal: true,
-    // @from ./src/components/ES6/scroll-reveal
-    ajaxPostList: true,
-    // @from ./src/components/ES6/list-posts
-    ajaxDDList: true,
-    // @from ./src/components/ES6/dynamic-dropdown-list-json
-    counterAnim: true,
-    // @from ./src/components/ES6/counter
-    lightBox: true // @from ./src/components/ES6/lightbox
+(function ($) {
+  $.fn.UixApplyAsyncScripts = function (options) {
+    // This is the easiest way to have default options.
+    var settings = $.extend({
+      scrollReveal: true,
+      // @from ./src/components/ES6/scroll-reveal
+      ajaxPostList: true,
+      // @from ./src/components/ES6/list-posts
+      ajaxDDList: true,
+      // @from ./src/components/ES6/dynamic-dropdown-list-json
+      counterAnim: true,
+      // @from ./src/components/ES6/counter
+      lightBox: true // @from ./src/components/ES6/lightbox
 
-  }, options); //----
+    }, options);
+    this.each(function () {
+      //----
+      if (UixModuleInstance.MAIN) UixModuleInstance.MAIN.pageLoaded(); //Theme Scripts
 
-  if (UixModuleInstance.MAIN) UixModuleInstance.MAIN.pageLoaded(); //Theme Scripts
+      if (UixModuleInstance.COMMON_HEIGHT) UixModuleInstance.COMMON_HEIGHT.pageLoaded(); //Common Height
 
-  if (UixModuleInstance.COMMON_HEIGHT) UixModuleInstance.COMMON_HEIGHT.pageLoaded(); //Common Height
+      if (UixModuleInstance.ADVANCED_SLIDER) UixModuleInstance.ADVANCED_SLIDER.pageLoaded(); //Advanced Slider (Basic)
 
-  if (UixModuleInstance.ADVANCED_SLIDER) UixModuleInstance.ADVANCED_SLIDER.pageLoaded(); //Advanced Slider (Basic)
+      if (UixModuleInstance.ADVANCED_SLIDER_FILTER) UixModuleInstance.ADVANCED_SLIDER_FILTER.pageLoaded(); //Advanced Slider
 
-  if (UixModuleInstance.ADVANCED_SLIDER_FILTER) UixModuleInstance.ADVANCED_SLIDER_FILTER.pageLoaded(); //Advanced Slider
+      if (UixModuleInstance.POST_LIST_SPLIT_FULLWIDTH) UixModuleInstance.POST_LIST_SPLIT_FULLWIDTH.pageLoaded(); //Fullwidth List of Split
 
-  if (UixModuleInstance.POST_LIST_SPLIT_FULLWIDTH) UixModuleInstance.POST_LIST_SPLIT_FULLWIDTH.pageLoaded(); //Fullwidth List of Split
+      if (UixModuleInstance.STICKY_EL) UixModuleInstance.STICKY_EL.pageLoaded(); //Sticky Elements
 
-  if (UixModuleInstance.STICKY_EL) UixModuleInstance.STICKY_EL.pageLoaded(); //Sticky Elements
+      if (UixModuleInstance.TEXT_EFFECT) UixModuleInstance.TEXT_EFFECT.pageLoaded(); //Text effect
 
-  if (UixModuleInstance.TEXT_EFFECT) UixModuleInstance.TEXT_EFFECT.pageLoaded(); //Text effect
+      if (UixModuleInstance.TIMELINE) UixModuleInstance.TIMELINE.pageLoaded(); //Timeline
+      //----
 
-  if (UixModuleInstance.TIMELINE) UixModuleInstance.TIMELINE.pageLoaded(); //Timeline
-  //----
+      if (UixModuleInstance.MAIN) UixModuleInstance.MAIN.documentReady($); //Theme Scripts
 
-  if (UixModuleInstance.MAIN) UixModuleInstance.MAIN.documentReady($); //Theme Scripts
+      if (UixModuleInstance.TABLE) UixModuleInstance.TABLE.documentReady($); //Responsive Table
 
-  if (UixModuleInstance.TABLE) UixModuleInstance.TABLE.documentReady($); //Responsive Table
+      if (UixModuleInstance.TABLE_SORTER) UixModuleInstance.TABLE_SORTER.documentReady($); //Table Sorter
 
-  if (UixModuleInstance.TABLE_SORTER) UixModuleInstance.TABLE_SORTER.documentReady($); //Table Sorter
+      if (UixModuleInstance.MODAL_DIALOG) UixModuleInstance.MODAL_DIALOG.documentReady($); //Modal Dialog
 
-  if (UixModuleInstance.MODAL_DIALOG) UixModuleInstance.MODAL_DIALOG.documentReady($); //Modal Dialog
+      if (UixModuleInstance.PARALLAX) UixModuleInstance.PARALLAX.documentReady($); //Parallax
 
-  if (UixModuleInstance.PARALLAX) UixModuleInstance.PARALLAX.documentReady($); //Parallax
+      if (UixModuleInstance.VIDEOS) UixModuleInstance.VIDEOS.documentReady($); //Videos
 
-  if (UixModuleInstance.VIDEOS) UixModuleInstance.VIDEOS.documentReady($); //Videos
+      if (UixModuleInstance.BODY_AND_HEADER) UixModuleInstance.BODY_AND_HEADER.documentReady($); //Header Area
 
-  if (UixModuleInstance.BODY_AND_HEADER) UixModuleInstance.BODY_AND_HEADER.documentReady($); //Header Area
+      if (UixModuleInstance.SET_BG) UixModuleInstance.SET_BG.documentReady($); //Specify a background image
 
-  if (UixModuleInstance.SET_BG) UixModuleInstance.SET_BG.documentReady($); //Specify a background image
+      if (UixModuleInstance.GET_CUSTOM_ATTRS) UixModuleInstance.GET_CUSTOM_ATTRS.documentReady($); //Get all custom attributes of an element like "data-*"
 
-  if (UixModuleInstance.GET_CUSTOM_ATTRS) UixModuleInstance.GET_CUSTOM_ATTRS.documentReady($); //Get all custom attributes of an element like "data-*"
+      if (UixModuleInstance.PAGINATION) UixModuleInstance.PAGINATION.documentReady($); //Pagination
 
-  if (UixModuleInstance.PAGINATION) UixModuleInstance.PAGINATION.documentReady($); //Pagination
+      if (UixModuleInstance.FORM) UixModuleInstance.FORM.documentReady($); //Form
 
-  if (UixModuleInstance.FORM) UixModuleInstance.FORM.documentReady($); //Form
+      if (UixModuleInstance.FLEXSLIDER) UixModuleInstance.FLEXSLIDER.documentReady($); //Flexslider
 
-  if (UixModuleInstance.FLEXSLIDER) UixModuleInstance.FLEXSLIDER.documentReady($); //Flexslider
+      if (UixModuleInstance.RETINA) UixModuleInstance.RETINA.documentReady($); //Retina Graphics for Website
 
-  if (UixModuleInstance.RETINA) UixModuleInstance.RETINA.documentReady($); //Retina Graphics for Website
+      if (UixModuleInstance.SHOW_MORELESS) UixModuleInstance.SHOW_MORELESS.documentReady($); //Show More Less
 
-  if (UixModuleInstance.SHOW_MORELESS) UixModuleInstance.SHOW_MORELESS.documentReady($); //Show More Less
+      if (UixModuleInstance.DROPDOWN_MENU) UixModuleInstance.DROPDOWN_MENU.documentReady($); //Dropdown Menu
 
-  if (UixModuleInstance.DROPDOWN_MENU) UixModuleInstance.DROPDOWN_MENU.documentReady($); //Dropdown Menu
+      if (UixModuleInstance.DROPDOWN_MENU2) UixModuleInstance.DROPDOWN_MENU2.documentReady($); //Dropdown Menu2
 
-  if (UixModuleInstance.DROPDOWN_MENU2) UixModuleInstance.DROPDOWN_MENU2.documentReady($); //Dropdown Menu2
+      if (UixModuleInstance.ACCORDION) UixModuleInstance.ACCORDION.documentReady($); //Accordion
 
-  if (UixModuleInstance.ACCORDION) UixModuleInstance.ACCORDION.documentReady($); //Accordion
+      if (UixModuleInstance.ADVANCED_CONTENT_SLIDER) UixModuleInstance.ADVANCED_CONTENT_SLIDER.documentReady($); //Advanced Content Slider
 
-  if (UixModuleInstance.ADVANCED_CONTENT_SLIDER) UixModuleInstance.ADVANCED_CONTENT_SLIDER.documentReady($); //Advanced Content Slider
+      if (UixModuleInstance.GALLERY) UixModuleInstance.GALLERY.documentReady($); //Gallery
 
-  if (UixModuleInstance.GALLERY) UixModuleInstance.GALLERY.documentReady($); //Gallery
+      if (UixModuleInstance.IMAGE_SHAPES) UixModuleInstance.IMAGE_SHAPES.documentReady($); //Image Shapes
 
-  if (UixModuleInstance.IMAGE_SHAPES) UixModuleInstance.IMAGE_SHAPES.documentReady($); //Image Shapes
+      if (UixModuleInstance.PERIODICAL_SCROLL) UixModuleInstance.PERIODICAL_SCROLL.documentReady($); //Periodical Scroll
 
-  if (UixModuleInstance.PERIODICAL_SCROLL) UixModuleInstance.PERIODICAL_SCROLL.documentReady($); //Periodical Scroll
+      if (UixModuleInstance.PRICING) UixModuleInstance.PRICING.documentReady($); //Pricing
 
-  if (UixModuleInstance.PRICING) UixModuleInstance.PRICING.documentReady($); //Pricing
+      if (UixModuleInstance.PROGRESS_BAR) UixModuleInstance.PROGRESS_BAR.documentReady($); //Progress Bar
 
-  if (UixModuleInstance.PROGRESS_BAR) UixModuleInstance.PROGRESS_BAR.documentReady($); //Progress Bar
+      if (UixModuleInstance.PROGRESS_LINE) UixModuleInstance.PROGRESS_LINE.documentReady($); //Progress Line
 
-  if (UixModuleInstance.PROGRESS_LINE) UixModuleInstance.PROGRESS_LINE.documentReady($); //Progress Line
+      if (UixModuleInstance.ROTATING_EL) UixModuleInstance.ROTATING_EL.documentReady($); //Rotating Elements
 
-  if (UixModuleInstance.ROTATING_EL) UixModuleInstance.ROTATING_EL.documentReady($); //Rotating Elements
+      if (UixModuleInstance.SMOOTH_SCROLLING_ANCHORLINK) UixModuleInstance.SMOOTH_SCROLLING_ANCHORLINK.documentReady($); //Smooth Scrolling When Clicking An Anchor Link
 
-  if (UixModuleInstance.SMOOTH_SCROLLING_ANCHORLINK) UixModuleInstance.SMOOTH_SCROLLING_ANCHORLINK.documentReady($); //Smooth Scrolling When Clicking An Anchor Link
+      if (UixModuleInstance.TABS) UixModuleInstance.TABS.documentReady($); //Tabs
 
-  if (UixModuleInstance.TABS) UixModuleInstance.TABS.documentReady($); //Tabs
+      if (UixModuleInstance.TEAM_FOCUS) UixModuleInstance.TEAM_FOCUS.documentReady($); //Team Focus
 
-  if (UixModuleInstance.TEAM_FOCUS) UixModuleInstance.TEAM_FOCUS.documentReady($); //Team Focus
+      if (UixModuleInstance.LAVA_LAMP_STYLE_MENU) UixModuleInstance.LAVA_LAMP_STYLE_MENU.documentReady($); //Lava-Lamp Style Menu
 
-  if (UixModuleInstance.LAVA_LAMP_STYLE_MENU) UixModuleInstance.LAVA_LAMP_STYLE_MENU.documentReady($); //Lava-Lamp Style Menu
+      if (UixModuleInstance.CIRCLE_LAYOUT) UixModuleInstance.CIRCLE_LAYOUT.documentReady($); //Circle Layout
 
-  if (UixModuleInstance.CIRCLE_LAYOUT) UixModuleInstance.CIRCLE_LAYOUT.documentReady($); //Circle Layout
+      if (UixModuleInstance.MULTI_ITEMS_CAROUSEL) UixModuleInstance.MULTI_ITEMS_CAROUSEL.documentReady($); //Multiple Items Carousel
 
-  if (UixModuleInstance.MULTI_ITEMS_CAROUSEL) UixModuleInstance.MULTI_ITEMS_CAROUSEL.documentReady($); //Multiple Items Carousel
+      if (UixModuleInstance.THREE_BACKGROUND) UixModuleInstance.THREE_BACKGROUND.documentReady($); //3D Background
 
-  if (UixModuleInstance.THREE_BACKGROUND) UixModuleInstance.THREE_BACKGROUND.documentReady($); //3D Background
+      if (UixModuleInstance.THREE_CAROUSEL) UixModuleInstance.THREE_CAROUSEL.documentReady($); //3D Carousel
+      //---- Prevent overlay clicks on asynchronous requests
+      //---- Commonly used for AJAX modules that are clicked by button
+      //Scroll Reveal
 
-  if (UixModuleInstance.THREE_CAROUSEL) UixModuleInstance.THREE_CAROUSEL.documentReady($); //3D Carousel
-  //---- Prevent overlay clicks on asynchronous requests
-  //---- Commonly used for AJAX modules that are clicked by button
-  //Scroll Reveal
-
-  if (settings.scrollReveal) {
-    if (UixModuleInstance.SCROLL_REVEAL) UixModuleInstance.SCROLL_REVEAL.documentReady($);
-  } //Posts List With Ajax
-
-
-  if (settings.ajaxPostList) {
-    if (UixModuleInstance.POST_LIST_AJAX) UixModuleInstance.POST_LIST_AJAX.documentReady($);
-  } //Dynamic Drop Down List from JSON
+      if (settings.scrollReveal) {
+        if (UixModuleInstance.SCROLL_REVEAL) UixModuleInstance.SCROLL_REVEAL.documentReady($);
+      } //Posts List With Ajax
 
 
-  if (settings.ajaxDDList) {
-    if (UixModuleInstance.DYNAMIC_DD_LIST) UixModuleInstance.DYNAMIC_DD_LIST.documentReady($);
-  } //Counter
+      if (settings.ajaxPostList) {
+        if (UixModuleInstance.POST_LIST_AJAX) UixModuleInstance.POST_LIST_AJAX.documentReady($);
+      } //Dynamic Drop Down List from JSON
 
 
-  if (settings.counterAnim) {
-    if (UixModuleInstance.COUNTER) UixModuleInstance.COUNTER.documentReady($);
-  } //Custom Lightbox
+      if (settings.ajaxDDList) {
+        if (UixModuleInstance.DYNAMIC_DD_LIST) UixModuleInstance.DYNAMIC_DD_LIST.documentReady($);
+      } //Counter
 
 
-  if (settings.lightBox) {
-    if (UixModuleInstance.LIGHTBOX) UixModuleInstance.LIGHTBOX.pageLoaded();
-  } //----Uix Shortcodes (WordPress Plugin)
+      if (settings.counterAnim) {
+        if (UixModuleInstance.COUNTER) UixModuleInstance.COUNTER.documentReady($);
+      } //Custom Lightbox
 
 
-  if ($.isFunction($.uix_sc_init)) {
-    $.uix_sc_init();
-  }
-};
+      if (settings.lightBox) {
+        if (UixModuleInstance.LIGHTBOX) UixModuleInstance.LIGHTBOX.pageLoaded();
+      } //----Uix Shortcodes (WordPress Plugin)
+
+
+      if ($.isFunction($.uix_sc_init)) {
+        $.uix_sc_init();
+      }
+    });
+  };
+})(jQuery);
+// CONCATENATED MODULE: ./src/components/ES6/_global/js/fn/UixApplyAsyncAllScripts.js
 /*
  * Apply all the asynchronism scripts
  *
+ * @global
+ * @description This function can be used separately in HTML pages or custom JavaScript.
  * @param  {Boolean} runAll          - Run all module scripts.
  * @return {Void}
+ *
+ * @Usage:
+    
+<script>
+( function( $ ) {
+"use strict";
+    $( document ).ready( function() {
+		$( document ).UixApplyAsyncAllScripts();
+    } );
+} ) ( jQuery );
+</script>
+	
+
+ *
+ * 
  */
 
-var UixApplyAsyncAllScripts = function UixApplyAsyncAllScripts(options) {
-  'use strict'; // This is the easiest way to have default options.
 
-  var settings = $.extend({
-    runAll: true
-  }, options);
-  var $this = $(_this);
-  var scipts_pageLoaded = UixModuleInstance.components.pageLoaded,
-      scipts_documentReady = UixModuleInstance.components.documentReady;
+(function ($) {
+  'use strict';
 
-  if (settings.runAll) {
-    for (var i = 0; i < scipts_pageLoaded.length; i++) {
-      scipts_pageLoaded[i]();
-    }
+  $.fn.UixApplyAsyncAllScripts = function (options) {
+    // This is the easiest way to have default options.
+    var settings = $.extend({
+      runAll: true
+    }, options);
+    this.each(function () {
+      var scipts_pageLoaded = UixModuleInstance.components.pageLoaded,
+          scipts_documentReady = UixModuleInstance.components.documentReady;
 
-    for (var j = 0; j < scipts_documentReady.length; j++) {
-      scipts_documentReady[j]($);
-    }
-  } //Uix Shortcodes
+      if (settings.runAll) {
+        for (var i = 0; i < scipts_pageLoaded.length; i++) {
+          scipts_pageLoaded[i]();
+        }
+
+        for (var j = 0; j < scipts_documentReady.length; j++) {
+          scipts_documentReady[j]($);
+        }
+      } //Uix Shortcodes
 
 
-  if ($.isFunction($.uix_sc_init)) {
-    $.uix_sc_init();
-  }
-};
+      if ($.isFunction($.uix_sc_init)) {
+        $.uix_sc_init();
+      }
+    });
+  };
+})(jQuery);
 // CONCATENATED MODULE: ./src/components/ES6/_global/js/modules/body-and-header.js
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -2557,6 +2735,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  */
 
 var BODY_AND_HEADER = function (module, $, window, document) {
+  if (window.BODY_AND_HEADER === null) return false;
   module.BODY_AND_HEADER = module.BODY_AND_HEADER || {};
   module.BODY_AND_HEADER.version = '0.0.3';
 
@@ -2629,6 +2808,7 @@ function common_height_classCallCheck(instance, Constructor) { if (!(instance in
  */
 
 var COMMON_HEIGHT = function (module, $, window, document) {
+  if (window.COMMON_HEIGHT === null) return false;
   module.COMMON_HEIGHT = module.COMMON_HEIGHT || {};
   module.COMMON_HEIGHT.version = '0.0.1';
 
@@ -2708,6 +2888,7 @@ function custom_data_attrs_classCallCheck(instance, Constructor) { if (!(instanc
  */
 
 var GET_CUSTOM_ATTRS = function (module, $, window, document) {
+  if (window.GET_CUSTOM_ATTRS === null) return false;
   module.GET_CUSTOM_ATTRS = module.GET_CUSTOM_ATTRS || {};
   module.GET_CUSTOM_ATTRS.version = '0.0.1';
 
@@ -2743,6 +2924,7 @@ function loader_classCallCheck(instance, Constructor) { if (!(instance instanceo
  */
 
 var LOADER = function (module, $, window, document) {
+  if (window.LOADER === null) return false;
   module.LOADER = module.LOADER || {};
   module.LOADER.version = '0.0.2';
 
@@ -2804,6 +2986,7 @@ function mega_menu_classCallCheck(instance, Constructor) { if (!(instance instan
  */
 
 var MEGA_MENU = function (module, $, window, document) {
+  if (window.MEGA_MENU === null) return false;
   module.MEGA_MENU = module.MEGA_MENU || {};
   module.MEGA_MENU.version = '0.0.3';
 
@@ -2942,6 +3125,7 @@ function mobile_menu_typeof(obj) { if (typeof Symbol === "function" && typeof Sy
  */
 
 var MOBILE_MENU = function (module, $, window, document) {
+  if (window.MOBILE_MENU === null) return false;
   module.MOBILE_MENU = module.MOBILE_MENU || {};
   module.MOBILE_MENU.version = '0.0.4';
 
@@ -3092,6 +3276,7 @@ function navigation_typeof(obj) { if (typeof Symbol === "function" && typeof Sym
  */
 
 var NAVIGATION = function (module, $, window, document) {
+  if (window.NAVIGATION === null) return false;
   module.NAVIGATION = module.NAVIGATION || {};
   module.NAVIGATION.version = '0.0.4';
 
@@ -3187,6 +3372,7 @@ function set_background_typeof(obj) { if (typeof Symbol === "function" && typeof
 
 
 var SET_BG = function (module, $, window, document) {
+  if (window.SET_BG === null) return false;
   module.SET_BG = module.SET_BG || {};
   module.SET_BG.version = '0.0.3';
 
@@ -3299,6 +3485,7 @@ function videos_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.
  */
 
 var VIDEOS = function (module, $, window, document) {
+  if (window.VIDEOS === null) return false;
   module.VIDEOS = module.VIDEOS || {};
   module.VIDEOS.version = '0.0.9';
 
@@ -3698,23 +3885,24 @@ function js_classCallCheck(instance, Constructor) { if (!(instance instanceof Co
 
 
 var MAIN = function (module, $, window, document) {
+  if (window.MAIN === null) return false;
   module.MAIN = module.MAIN || {};
   module.MAIN.version = '0.0.1';
 
   module.MAIN.documentReady = function ($) {
     /* 
-     ====================================================
-     *  Function Title Here
-     ====================================================
+     ---------------------------
+     Function Here
+     ---------------------------
      */
     //your code here...
   };
 
   module.MAIN.pageLoaded = function () {
     /* 
-     ====================================================
-     *  Function Title Here
-     ====================================================
+     ---------------------------
+     Function Here
+     ---------------------------
      */
     //your code here...
   };
@@ -3743,6 +3931,7 @@ function js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iter
 
 
 var ACCORDION_BG = function (module, $, window, document) {
+  if (window.ACCORDION_BG === null) return false;
   module.ACCORDION_BG = module.ACCORDION_BG || {};
   module.ACCORDION_BG.version = '0.0.5';
 
@@ -3859,6 +4048,7 @@ function accordion_js_typeof(obj) { if (typeof Symbol === "function" && typeof S
 
 
 var ACCORDION = function (module, $, window, document) {
+  if (window.ACCORDION === null) return false;
   module.ACCORDION = module.ACCORDION || {};
   module.ACCORDION.version = '0.0.2';
 
@@ -3954,6 +4144,7 @@ function advanced_content_slider_js_typeof(obj) { if (typeof Symbol === "functio
 
 
 var ADVANCED_CONTENT_SLIDER = function (module, $, window, document) {
+  if (window.ADVANCED_CONTENT_SLIDER === null) return false;
   module.ADVANCED_CONTENT_SLIDER = module.ADVANCED_CONTENT_SLIDER || {};
   module.ADVANCED_CONTENT_SLIDER.version = '0.0.3';
 
@@ -4229,6 +4420,7 @@ function basic_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.i
 
 
 var ADVANCED_SLIDER = function (module, $, window, document) {
+  if (window.ADVANCED_SLIDER === null) return false;
   module.ADVANCED_SLIDER = module.ADVANCED_SLIDER || {};
   module.ADVANCED_SLIDER.version = '0.1.1';
 
@@ -4864,6 +5056,7 @@ function special_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol
 
 
 var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
+  if (window.ADVANCED_SLIDER_FILTER === null) return false;
   module.ADVANCED_SLIDER_FILTER = module.ADVANCED_SLIDER_FILTER || {};
   module.ADVANCED_SLIDER_FILTER.version = '0.1.8';
 
@@ -6653,7 +6846,9 @@ function AJAX_push_js_typeof(obj) { if (typeof Symbol === "function" && typeof S
  *************************************
  */
 
+
 var AJAX_PUSH_CONTENT = function (module, $, window, document) {
+  if (window.AJAX_PUSH_CONTENT === null) return false;
   module.AJAX_PUSH_CONTENT = module.AJAX_PUSH_CONTENT || {};
   module.AJAX_PUSH_CONTENT.version = '0.0.7';
 
@@ -6812,7 +7007,7 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
 
           container.html(content).promise().done(function () {
             // Apply some asynchronism scripts
-            UixApplyAsyncScripts(); //Change the page title
+            $(document).UixApplyAsyncScripts(); //Change the page title
 
             if (title) {
               document.title = title;
@@ -6853,7 +7048,9 @@ function AJAX_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol
  */
 
 
+
 var AJAX_PAGE_LOADER = function (module, $, window, document) {
+  if (window.AJAX_PAGE_LOADER === null) return false;
   module.AJAX_PAGE_LOADER = module.AJAX_PAGE_LOADER || {};
   module.AJAX_PAGE_LOADER.version = '0.0.8';
 
@@ -7164,7 +7361,7 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
             //Remove duplicate elements
             $originalItem.first().remove(); // Apply some asynchronism scripts
 
-            UixApplyAsyncScripts();
+            $(document).UixApplyAsyncScripts();
           }
         });
       });
@@ -7254,6 +7451,7 @@ function back_to_top_js_classCallCheck(instance, Constructor) { if (!(instance i
 
 
 var BACK_TO_TOP = function (module, $, window, document) {
+  if (window.BACK_TO_TOP === null) return false;
   module.BACK_TO_TOP = module.BACK_TO_TOP || {};
   module.BACK_TO_TOP.version = '0.0.3';
 
@@ -7315,6 +7513,7 @@ function circle_layout_js_typeof(obj) { if (typeof Symbol === "function" && type
 
 
 var CIRCLE_LAYOUT = function (module, $, window, document) {
+  if (window.CIRCLE_LAYOUT === null) return false;
   module.CIRCLE_LAYOUT = module.CIRCLE_LAYOUT || {};
   module.CIRCLE_LAYOUT.version = '0.0.1';
 
@@ -7406,6 +7605,7 @@ function counter_js_classCallCheck(instance, Constructor) { if (!(instance insta
 
 
 var COUNTER = function (module, $, window, document) {
+  if (window.COUNTER === null) return false;
   module.COUNTER = module.COUNTER || {};
   module.COUNTER.version = '0.0.2';
 
@@ -7444,6 +7644,7 @@ function dropdown_menu_js_typeof(obj) { if (typeof Symbol === "function" && type
 
 
 var DROPDOWN_MENU = function (module, $, window, document) {
+  if (window.DROPDOWN_MENU === null) return false;
   module.DROPDOWN_MENU = module.DROPDOWN_MENU || {};
   module.DROPDOWN_MENU.version = '0.0.2';
 
@@ -7503,6 +7704,7 @@ function dropdown_menu2_js_classCallCheck(instance, Constructor) { if (!(instanc
 
 
 var DROPDOWN_MENU2 = function (module, $, window, document) {
+  if (window.DROPDOWN_MENU2 === null) return false;
   module.DROPDOWN_MENU2 = module.DROPDOWN_MENU2 || {};
   module.DROPDOWN_MENU2.version = '0.0.4';
 
@@ -7589,6 +7791,7 @@ function dynamic_dropdown_list_json_js_typeof(obj) { if (typeof Symbol === "func
 
 
 var DYNAMIC_DD_LIST = function (module, $, window, document) {
+  if (window.DYNAMIC_DD_LIST === null) return false;
   module.DYNAMIC_DD_LIST = module.DYNAMIC_DD_LIST || {};
   module.DYNAMIC_DD_LIST.version = '0.0.5';
 
@@ -7919,6 +8122,7 @@ function flexslider_js_typeof(obj) { if (typeof Symbol === "function" && typeof 
 
 
 var FLEXSLIDER = function (module, $, window, document) {
+  if (window.FLEXSLIDER === null) return false;
   module.FLEXSLIDER = module.FLEXSLIDER || {};
   module.FLEXSLIDER.version = '0.1.6';
 
@@ -8702,6 +8906,7 @@ function floating_side_element_js_classCallCheck(instance, Constructor) { if (!(
 
 
 var FLOATING_SIDE_EL = function (module, $, window, document) {
+  if (window.FLOATING_SIDE_EL === null) return false;
   module.FLOATING_SIDE_EL = module.FLOATING_SIDE_EL || {};
   module.FLOATING_SIDE_EL.version = '0.0.1';
 
@@ -8790,6 +8995,7 @@ function form_progress_js_typeof(obj) { if (typeof Symbol === "function" && type
 
 
 var FORM_PROGRESS = function (module, $, window, document) {
+  if (window.FORM_PROGRESS === null) return false;
   module.FORM_PROGRESS = module.FORM_PROGRESS || {};
   module.FORM_PROGRESS.version = '0.0.2';
 
@@ -8951,6 +9157,7 @@ function form_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol
 
 
 var FORM = function (module, $, window, document) {
+  if (window.FORM === null) return false;
   module.FORM = module.FORM || {};
   module.FORM.version = '0.1.4';
 
@@ -9304,6 +9511,7 @@ function gallery_js_classCallCheck(instance, Constructor) { if (!(instance insta
 
 
 var GALLERY = function (module, $, window, document) {
+  if (window.GALLERY === null) return false;
   module.GALLERY = module.GALLERY || {};
   module.GALLERY.version = '0.0.3';
 
@@ -9427,6 +9635,7 @@ function hover_delay_interaction_js_classCallCheck(instance, Constructor) { if (
  */
 
 var HOVER_DELAY_INTERACTION = function (module, $, window, document) {
+  if (window.HOVER_DELAY_INTERACTION === null) return false;
   module.HOVER_DELAY_INTERACTION = module.HOVER_DELAY_INTERACTION || {};
   module.HOVER_DELAY_INTERACTION.version = '0.0.1';
 
@@ -9476,6 +9685,7 @@ function image_shapes_js_classCallCheck(instance, Constructor) { if (!(instance 
 
 
 var IMAGE_SHAPES = function (module, $, window, document) {
+  if (window.IMAGE_SHAPES === null) return false;
   module.IMAGE_SHAPES = module.IMAGE_SHAPES || {};
   module.IMAGE_SHAPES.version = '0.0.1';
 
@@ -9570,6 +9780,7 @@ function lava_lamp_style_menu_js_classCallCheck(instance, Constructor) { if (!(i
 
 
 var LAVA_LAMP_STYLE_MENU = function (module, $, window, document) {
+  if (window.LAVA_LAMP_STYLE_MENU === null) return false;
   module.LAVA_LAMP_STYLE_MENU = module.LAVA_LAMP_STYLE_MENU || {};
   module.LAVA_LAMP_STYLE_MENU.version = '0.0.1';
 
@@ -9643,7 +9854,9 @@ function lightbox_js_typeof(obj) { if (typeof Symbol === "function" && typeof Sy
  */
 
 
+
 var LIGHTBOX = function (module, $, window, document) {
+  if (window.LIGHTBOX === null) return false;
   module.LIGHTBOX = module.LIGHTBOX || {};
   module.LIGHTBOX.version = '0.1.4';
 
@@ -9925,7 +10138,7 @@ var LIGHTBOX = function (module, $, window, document) {
               $htmlAjaxContainer.html($(response).find(dataAjax.target).html()).promise().done(function () {
                 $content.html($('#' + dataHtmlID).html()).promise().done(function () {
                   // Apply some asynchronism scripts
-                  UixApplyAsyncScripts({
+                  $(document).UixApplyAsyncScripts({
                     lightBox: false,
                     ajaxPostList: false
                   }); // show the content container
@@ -10122,6 +10335,7 @@ function list_bulleted_js_classCallCheck(instance, Constructor) { if (!(instance
 
 
 var BULLETED_LIST = function (module, $, window, document) {
+  if (window.BULLETED_LIST === null) return false;
   module.BULLETED_LIST = module.BULLETED_LIST || {};
   module.BULLETED_LIST.version = '0.0.1';
 
@@ -10167,7 +10381,9 @@ function list_posts_js_typeof(obj) { if (typeof Symbol === "function" && typeof 
 
 
 
+
 var POST_LIST_AJAX = function (module, $, window, document) {
+  if (window.POST_LIST_AJAX === null) return false;
   module.POST_LIST_AJAX = module.POST_LIST_AJAX || {};
   module.POST_LIST_AJAX.version = '0.0.8';
 
@@ -10484,8 +10700,7 @@ var POST_LIST_AJAX = function (module, $, window, document) {
               } //--------- Apply some asynchronism scripts
 
 
-              UixApplyAsyncScripts({
-                scrollReveal: true,
+              $(document).UixApplyAsyncScripts({
                 ajaxPostList: false
               }); //--------- Remove this button
 
@@ -10535,6 +10750,7 @@ function list_split_imagery_js_classCallCheck(instance, Constructor) { if (!(ins
 
 
 var POST_LIST_SPLIT_FULLWIDTH = function (module, $, window, document) {
+  if (window.POST_LIST_SPLIT_FULLWIDTH === null) return false;
   module.POST_LIST_SPLIT_FULLWIDTH = module.POST_LIST_SPLIT_FULLWIDTH || {};
   module.POST_LIST_SPLIT_FULLWIDTH.version = '0.0.2';
 
@@ -10589,6 +10805,7 @@ function login_templates_js_classCallCheck(instance, Constructor) { if (!(instan
 
 
 var LOGIN_UI = function (module, $, window, document) {
+  if (window.LOGIN_UI === null) return false;
   module.LOGIN_UI = module.LOGIN_UI || {};
   module.LOGIN_UI.version = '0.0.1';
 
@@ -10669,6 +10886,7 @@ function modal_dialog_js_typeof(obj) { if (typeof Symbol === "function" && typeo
 
 
 var MODAL_DIALOG = function (module, $, window, document) {
+  if (window.MODAL_DIALOG === null) return false;
   module.MODAL_DIALOG = module.MODAL_DIALOG || {};
   module.MODAL_DIALOG.version = '0.0.9';
 
@@ -10756,6 +10974,7 @@ function mousewheel_interaction_js_classCallCheck(instance, Constructor) { if (!
  */
 
 var MOUSEWHEEL_INTERACTION = function (module, $, window, document) {
+  if (window.MOUSEWHEEL_INTERACTION === null) return false;
   module.MOUSEWHEEL_INTERACTION = module.MOUSEWHEEL_INTERACTION || {};
   module.MOUSEWHEEL_INTERACTION.version = '0.0.2';
 
@@ -10883,6 +11102,7 @@ function multi_items_carousel_js_typeof(obj) { if (typeof Symbol === "function" 
 
 
 var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
+  if (window.MULTI_ITEMS_CAROUSEL === null) return false;
   module.MULTI_ITEMS_CAROUSEL = module.MULTI_ITEMS_CAROUSEL || {};
   module.MULTI_ITEMS_CAROUSEL.version = '0.0.3';
 
@@ -11171,9 +11391,11 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document); //
 //export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
+//	if ( window.MULTI_ITEMS_CAROUSEL === null ) return false;
+//	
 //	
 //    module.MULTI_ITEMS_CAROUSEL               = module.MULTI_ITEMS_CAROUSEL || {};
-//	module.MULTI_ITEMS_CAROUSEL.version       = '0.0.1';
+//	  module.MULTI_ITEMS_CAROUSEL.version       = '0.0.1';
 //    module.MULTI_ITEMS_CAROUSEL.documentReady = function( $ ) {
 //
 //		$( '.uix-multi-carousel' ).each( function()  {
@@ -11673,6 +11895,7 @@ function one_page_js_classCallCheck(instance, Constructor) { if (!(instance inst
  */
 
 var ONEPAGE = function (module, $, window, document) {
+  if (window.ONEPAGE === null) return false;
   module.ONEPAGE = module.ONEPAGE || {};
   module.ONEPAGE.version = '0.0.4';
 
@@ -12011,6 +12234,7 @@ function one_page2_js_classCallCheck(instance, Constructor) { if (!(instance ins
  */
 
 var ONEPAGE2 = function (module, $, window, document) {
+  if (window.ONEPAGE2 === null) return false;
   module.ONEPAGE2 = module.ONEPAGE2 || {};
   module.ONEPAGE2.version = '0.0.4';
 
@@ -12362,6 +12586,7 @@ function parallax_js_typeof(obj) { if (typeof Symbol === "function" && typeof Sy
 
 
 var PARALLAX = function (module, $, window, document) {
+  if (window.PARALLAX === null) return false;
   module.PARALLAX = module.PARALLAX || {};
   module.PARALLAX.version = '0.0.5';
 
@@ -12546,6 +12771,7 @@ function periodical_scroll_js_typeof(obj) { if (typeof Symbol === "function" && 
 
 
 var PERIODICAL_SCROLL = function (module, $, window, document) {
+  if (window.PERIODICAL_SCROLL === null) return false;
   module.PERIODICAL_SCROLL = module.PERIODICAL_SCROLL || {};
   module.PERIODICAL_SCROLL.version = '0.0.2';
 
@@ -12616,6 +12842,7 @@ function pricing_js_classCallCheck(instance, Constructor) { if (!(instance insta
 
 
 var PRICING = function (module, $, window, document) {
+  if (window.PRICING === null) return false;
   module.PRICING = module.PRICING || {};
   module.PRICING.version = '0.0.2';
 
@@ -12704,6 +12931,7 @@ function progress_bar_js_typeof(obj) { if (typeof Symbol === "function" && typeo
 
 
 var PROGRESS_BAR = function (module, $, window, document) {
+  if (window.PROGRESS_BAR === null) return false;
   module.PROGRESS_BAR = module.PROGRESS_BAR || {};
   module.PROGRESS_BAR.version = '0.0.4';
 
@@ -12763,6 +12991,7 @@ function progress_line_js_classCallCheck(instance, Constructor) { if (!(instance
 
 
 var PROGRESS_LINE = function (module, $, window, document) {
+  if (window.PROGRESS_LINE === null) return false;
   module.PROGRESS_LINE = module.PROGRESS_LINE || {};
   module.PROGRESS_LINE.version = '0.0.2';
 
@@ -12829,6 +13058,7 @@ function retina_js_classCallCheck(instance, Constructor) { if (!(instance instan
  */
 
 var RETINA = function (module, $, window, document) {
+  if (window.RETINA === null) return false;
   module.RETINA = module.RETINA || {};
   module.RETINA.version = '0.0.1';
 
@@ -12871,6 +13101,7 @@ function rotating_elements_js_typeof(obj) { if (typeof Symbol === "function" && 
  */
 
 var ROTATING_EL = function (module, $, window, document) {
+  if (window.ROTATING_EL === null) return false;
   module.ROTATING_EL = module.ROTATING_EL || {};
   module.ROTATING_EL.version = '0.0.1';
 
@@ -12941,6 +13172,7 @@ function scroll_reveal_js_typeof(obj) { if (typeof Symbol === "function" && type
  */
 
 var SCROLL_REVEAL = function (module, $, window, document) {
+  if (window.SCROLL_REVEAL === null) return false;
   module.SCROLL_REVEAL = module.SCROLL_REVEAL || {};
   module.SCROLL_REVEAL.version = '0.1.0';
 
@@ -13082,6 +13314,7 @@ function scrollspy_animate_js_classCallCheck(instance, Constructor) { if (!(inst
  */
 
 var SCROLLSPY_ANIM = function (module, $, window, document) {
+  if (window.SCROLLSPY_ANIM === null) return false;
   module.SCROLLSPY_ANIM = module.SCROLLSPY_ANIM || {};
   module.SCROLLSPY_ANIM.version = '0.0.1';
 
@@ -13208,6 +13441,7 @@ function show_more_less_js_classCallCheck(instance, Constructor) { if (!(instanc
 
 
 var SHOW_MORELESS = function (module, $, window, document) {
+  if (window.SHOW_MORELESS === null) return false;
   module.SHOW_MORELESS = module.SHOW_MORELESS || {};
   module.SHOW_MORELESS.version = '0.0.2';
 
@@ -13268,6 +13502,7 @@ function skew_on_scroll_js_classCallCheck(instance, Constructor) { if (!(instanc
  */
 
 var SKEW_ON_SCROLL = function (module, $, window, document) {
+  if (window.SKEW_ON_SCROLL === null) return false;
   module.SKEW_ON_SCROLL = module.SKEW_ON_SCROLL || {};
   module.SKEW_ON_SCROLL.version = '0.0.1';
 
@@ -13308,6 +13543,7 @@ function smooth_scrolling_anchor_link_js_classCallCheck(instance, Constructor) {
  */
 
 var SMOOTH_SCROLLING_ANCHORLINK = function (module, $, window, document) {
+  if (window.SMOOTH_SCROLLING_ANCHORLINK === null) return false;
   module.SMOOTH_SCROLLING_ANCHORLINK = module.SMOOTH_SCROLLING_ANCHORLINK || {};
   module.SMOOTH_SCROLLING_ANCHORLINK.version = '0.0.5';
 
@@ -13416,6 +13652,7 @@ function sticky_elements_js_typeof(obj) { if (typeof Symbol === "function" && ty
 
 
 var STICKY_EL = function (module, $, window, document) {
+  if (window.STICKY_EL === null) return false;
   module.STICKY_EL = module.STICKY_EL || {};
   module.STICKY_EL.version = '0.0.5';
 
@@ -13539,6 +13776,7 @@ function china_classCallCheck(instance, Constructor) { if (!(instance instanceof
 
 
 var SVG_MAP_CHINA = function (module, $, window, document) {
+  if (window.SVG_MAP_CHINA === null) return false;
   module.SVG_MAP_CHINA = module.SVG_MAP_CHINA || {};
   module.SVG_MAP_CHINA.version = '0.0.1';
 
@@ -13631,6 +13869,7 @@ function world_classCallCheck(instance, Constructor) { if (!(instance instanceof
 
 
 var SVG_MAP_WORLD = function (module, $, window, document) {
+  if (window.SVG_MAP_WORLD === null) return false;
   module.SVG_MAP_WORLD = module.SVG_MAP_WORLD || {};
   module.SVG_MAP_WORLD.version = '0.0.1';
 
@@ -13726,6 +13965,7 @@ function simple_3D_background_three_js_classCallCheck(instance, Constructor) { i
  */
 
 var THREE_BACKGROUND_THREE = function (module, $, window, document) {
+  if (window.THREE_BACKGROUND_THREE === null) return false;
   module.THREE_BACKGROUND_THREE = module.THREE_BACKGROUND_THREE || {};
   module.THREE_BACKGROUND_THREE.version = '0.0.4';
 
@@ -13971,6 +14211,7 @@ function simple_3D_background_three2_js_classCallCheck(instance, Constructor) { 
  */
 
 var THREE_BACKGROUND_THREE2 = function (module, $, window, document) {
+  if (window.THREE_BACKGROUND_THREE2 === null) return false;
   module.THREE_BACKGROUND_THREE2 = module.THREE_BACKGROUND_THREE2 || {};
   module.THREE_BACKGROUND_THREE2.version = '0.0.2';
 
@@ -14120,6 +14361,7 @@ function simple_3D_background_three3_js_classCallCheck(instance, Constructor) { 
  */
 
 var THREE_BACKGROUND_THREE3 = function (module, $, window, document) {
+  if (window.THREE_BACKGROUND_THREE3 === null) return false;
   module.THREE_BACKGROUND_THREE3 = module.THREE_BACKGROUND_THREE3 || {};
   module.THREE_BACKGROUND_THREE3.version = '0.0.1';
 
@@ -14249,6 +14491,7 @@ function simple_3D_background_js_typeof(obj) { if (typeof Symbol === "function" 
 
 
 var THREE_BACKGROUND = function (module, $, window, document) {
+  if (window.THREE_BACKGROUND === null) return false;
   module.THREE_BACKGROUND = module.THREE_BACKGROUND || {};
   module.THREE_BACKGROUND.version = '0.0.2';
 
@@ -14420,6 +14663,7 @@ function simple_3D_carousel_js_typeof(obj) { if (typeof Symbol === "function" &&
 
 
 var THREE_CAROUSEL = function (module, $, window, document) {
+  if (window.THREE_CAROUSEL === null) return false;
   module.THREE_CAROUSEL = module.THREE_CAROUSEL || {};
   module.THREE_CAROUSEL.version = '0.0.1';
 
@@ -14632,6 +14876,7 @@ function simple_3D_gallery_js_typeof(obj) { if (typeof Symbol === "function" && 
  */
 
 var THREE_GALLERY = function (module, $, window, document) {
+  if (window.THREE_GALLERY === null) return false;
   module.THREE_GALLERY = module.THREE_GALLERY || {};
   module.THREE_GALLERY.version = '0.0.3';
 
@@ -14862,6 +15107,7 @@ function simple_3D_image_transition_js_classCallCheck(instance, Constructor) { i
  */
 
 var THREE_IMAGE_TRANSITION = function (module, $, window, document) {
+  if (window.THREE_IMAGE_TRANSITION === null) return false;
   module.THREE_IMAGE_TRANSITION = module.THREE_IMAGE_TRANSITION || {};
   module.THREE_IMAGE_TRANSITION.version = '0.0.1';
 
@@ -15054,6 +15300,7 @@ function simple_3D_model_js_typeof(obj) { if (typeof Symbol === "function" && ty
  */
 
 var THREE_MODEL = function (module, $, window, document) {
+  if (window.THREE_MODEL === null) return false;
   module.THREE_MODEL = module.THREE_MODEL || {};
   module.THREE_MODEL.version = '0.0.2';
 
@@ -15277,6 +15524,7 @@ function simple_3D_pages_js_classCallCheck(instance, Constructor) { if (!(instan
  */
 
 var THREE_PAGES = function (module, $, window, document) {
+  if (window.THREE_PAGES === null) return false;
   module.THREE_PAGES = module.THREE_PAGES || {};
   module.THREE_PAGES.version = '0.0.1';
 
@@ -15410,6 +15658,7 @@ function simple_3D_particle_effect_js_typeof(obj) { if (typeof Symbol === "funct
  */
 
 var THREE_PARTICLE = function (module, $, window, document) {
+  if (window.THREE_PARTICLE === null) return false;
   module.THREE_PARTICLE = module.THREE_PARTICLE || {};
   module.THREE_PARTICLE.version = '0.0.3';
 
@@ -15697,6 +15946,7 @@ function simple_3D_sphere_three_js_classCallCheck(instance, Constructor) { if (!
  */
 
 var THREE_SPHERE_THREE = function (module, $, window, document) {
+  if (window.THREE_SPHERE_THREE === null) return false;
   module.THREE_SPHERE_THREE = module.THREE_SPHERE_THREE || {};
   module.THREE_SPHERE_THREE.version = '0.0.1';
 
@@ -15830,6 +16080,7 @@ function simple_3D_obj_anim_interaction_js_classCallCheck(instance, Constructor)
  */
 
 var THREE_OBJ_ANIM_INTERACTION = function (module, $, window, document) {
+  if (window.THREE_OBJ_ANIM_INTERACTION === null) return false;
   module.THREE_OBJ_ANIM_INTERACTION = module.THREE_OBJ_ANIM_INTERACTION || {};
   module.THREE_OBJ_ANIM_INTERACTION.version = '0.0.2';
 
@@ -16021,6 +16272,7 @@ function simple_3D_mouse_interaction_js_classCallCheck(instance, Constructor) { 
  */
 
 var THREE_MOUSE_INTERACTION = function (module, $, window, document) {
+  if (window.THREE_MOUSE_INTERACTION === null) return false;
   module.THREE_MOUSE_INTERACTION = module.THREE_MOUSE_INTERACTION || {};
   module.THREE_MOUSE_INTERACTION.version = '0.0.1';
 
@@ -16313,6 +16565,7 @@ function simple_3D_mouse_interaction2_js_classCallCheck(instance, Constructor) {
  */
 
 var THREE_MOUSE_INTERACTION2 = function (module, $, window, document) {
+  if (window.THREE_MOUSE_INTERACTION2 === null) return false;
   module.THREE_MOUSE_INTERACTION2 = module.THREE_MOUSE_INTERACTION2 || {};
   module.THREE_MOUSE_INTERACTION2.version = '0.0.1';
 
@@ -16658,6 +16911,7 @@ function simple_3D_shatter_slider_js_typeof(obj) { if (typeof Symbol === "functi
 
 
 var THREE_SHATTER_SLIDER = function (module, $, window, document) {
+  if (window.THREE_SHATTER_SLIDER === null) return false;
   module.THREE_SHATTER_SLIDER = module.THREE_SHATTER_SLIDER || {};
   module.THREE_SHATTER_SLIDER.version = '0.0.2';
 
@@ -17287,6 +17541,7 @@ function simple_3D_explosive_particle_slider_js_typeof(obj) { if (typeof Symbol 
 
 
 var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
+  if (window.THREE_EXP_PARTICLE_SLIDER === null) return false;
   module.THREE_EXP_PARTICLE_SLIDER = module.THREE_EXP_PARTICLE_SLIDER || {};
   module.THREE_EXP_PARTICLE_SLIDER.version = '0.0.2';
 
@@ -17888,6 +18143,7 @@ function js_basic_classCallCheck(instance, Constructor) { if (!(instance instanc
 
 
 var TABLE = function (module, $, window, document) {
+  if (window.TABLE === null) return false;
   module.TABLE = module.TABLE || {};
   module.TABLE.version = '0.0.3';
 
@@ -17984,6 +18240,7 @@ function sorter_classCallCheck(instance, Constructor) { if (!(instance instanceo
 
 
 var TABLE_SORTER = function (module, $, window, document) {
+  if (window.TABLE_SORTER === null) return false;
   module.TABLE_SORTER = module.TABLE_SORTER || {};
   module.TABLE_SORTER.version = '0.0.2';
 
@@ -18067,6 +18324,7 @@ function tabs_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol
 
 
 var TABS = function (module, $, window, document) {
+  if (window.TABS === null) return false;
   module.TABS = module.TABS || {};
   module.TABS.version = '0.1.3';
 
@@ -18243,6 +18501,7 @@ function team_focus_js_typeof(obj) { if (typeof Symbol === "function" && typeof 
 
 
 var TEAM_FOCUS = function (module, $, window, document) {
+  if (window.TEAM_FOCUS === null) return false;
   module.TEAM_FOCUS = module.TEAM_FOCUS || {};
   module.TEAM_FOCUS.version = '0.0.2';
 
@@ -18421,6 +18680,7 @@ function text_effect_js_classCallCheck(instance, Constructor) { if (!(instance i
 
 
 var TEXT_EFFECT = function (module, $, window, document) {
+  if (window.TEXT_EFFECT === null) return false;
   module.TEXT_EFFECT = module.TEXT_EFFECT || {};
   module.TEXT_EFFECT.version = '0.0.4';
 
@@ -18457,6 +18717,7 @@ function timeline_js_typeof(obj) { if (typeof Symbol === "function" && typeof Sy
 
 
 var TIMELINE = function (module, $, window, document) {
+  if (window.TIMELINE === null) return false;
   module.TIMELINE = module.TIMELINE || {};
   module.TIMELINE.version = '0.1.5';
 
@@ -18620,6 +18881,7 @@ function vertical_menu_js_classCallCheck(instance, Constructor) { if (!(instance
 
 
 var VERTICAL_MENU = function (module, $, window, document) {
+  if (window.VERTICAL_MENU === null) return false;
   module.VERTICAL_MENU = module.VERTICAL_MENU || {};
   module.VERTICAL_MENU.version = '0.0.1';
 
@@ -18772,6 +19034,7 @@ function wordpress_js_classCallCheck(instance, Constructor) { if (!(instance ins
 
 
 var WP_CORE = function (module, $, window, document) {
+  if (window.WP_CORE === null) return false;
   module.WP_CORE = module.WP_CORE || {};
   module.WP_CORE.version = '0.0.1';
 
@@ -18909,15 +19172,12 @@ var wave_background_scss_style = __webpack_require__(100);
 
 // CONCATENATED MODULE: ./src/components/ES6/_app-load.js
 /*
- * Common website functions, Can be called separately in the HTML page
+ * Common website functions, Can be called separately in HTML pages or custom JavaScript.
  *    
  */
 
-window.UixGUID = UixGUID;
-window.UixMath = UixMath;
-window.UixCssProperty = UixCssProperty;
-window.UixApplyAsyncScripts = UixApplyAsyncScripts;
-window.UixApplyAsyncAllScripts = UixApplyAsyncAllScripts;
+
+
 /*
  * Import modules from components
  *    
@@ -19060,7 +19320,7 @@ window.UixApplyAsyncAllScripts = UixApplyAsyncAllScripts;
 /*
  * Import third-party plugins from components of ES5
  * 
- * @description  Third-party plugins adopts pure merge and does not import and export.
+ * @description  Third-party plugins adopt pure file merger and do not import and export
  *        
  */
 

@@ -11,16 +11,17 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
+import UixApplyAsyncScripts from '@uixkit/core/_global/js/fn/UixApplyAsyncScripts';
 
 
 import '../scss/_style.scss';
 
 
 export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
+	if ( window.AJAX_PAGE_LOADER === null ) return false;
+	
 	
 	
     module.AJAX_PAGE_LOADER               = module.AJAX_PAGE_LOADER || {};
@@ -449,7 +450,7 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 
 
 						// Apply some asynchronism scripts
-						UixApplyAsyncScripts();
+						$( document ).UixApplyAsyncScripts();
 						
 						
 					}

@@ -12,9 +12,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -22,6 +20,8 @@ import '../scss/_style.scss';
 
 
 export const VERTICAL_MENU = ( ( module, $, window, document ) => {
+	if ( window.VERTICAL_MENU === null ) return false;
+	
 	
 	
     module.VERTICAL_MENU               = module.VERTICAL_MENU || {};

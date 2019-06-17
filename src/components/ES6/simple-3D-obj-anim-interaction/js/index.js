@@ -20,13 +20,13 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
 export const THREE_OBJ_ANIM_INTERACTION = ( ( module, $, window, document ) => {
+	if ( window.THREE_OBJ_ANIM_INTERACTION === null ) return false;
+	
 	
 	
     module.THREE_OBJ_ANIM_INTERACTION               = module.THREE_OBJ_ANIM_INTERACTION || {};

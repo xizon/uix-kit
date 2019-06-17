@@ -29,9 +29,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 import UixTextEff from '@uixkit/core/text-effect/js/fn/text-anime';
 
@@ -40,6 +38,8 @@ import '../scss/_style.scss';
 
 
 export const TEXT_EFFECT = ( ( module, $, window, document ) => {
+	if ( window.TEXT_EFFECT === null ) return false;
+	
 	
 	
 

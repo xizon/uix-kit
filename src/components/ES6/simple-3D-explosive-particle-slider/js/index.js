@@ -19,9 +19,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -29,6 +27,8 @@ import '../scss/_style.scss';
 
 
 export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
+	if ( window.THREE_EXP_PARTICLE_SLIDER === null ) return false;
+	
 	
     module.THREE_EXP_PARTICLE_SLIDER               = module.THREE_EXP_PARTICLE_SLIDER || {};
     module.THREE_EXP_PARTICLE_SLIDER.version       = '0.0.2';

@@ -12,14 +12,14 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
-
+import UixApplyAsyncScripts from '@uixkit/core/_global/js/fn/UixApplyAsyncScripts';
 
 
 export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
+	if ( window.AJAX_PUSH_CONTENT === null ) return false;
+	
 	
     module.AJAX_PUSH_CONTENT               = module.AJAX_PUSH_CONTENT || {};
     module.AJAX_PUSH_CONTENT.version       = '0.0.7';
@@ -244,7 +244,7 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 						
 						
 						// Apply some asynchronism scripts
-						UixApplyAsyncScripts();
+						$( document ).UixApplyAsyncScripts();
 
 						
 						

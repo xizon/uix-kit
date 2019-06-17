@@ -19,13 +19,13 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
 export const THREE_SPHERE_THREE = ( ( module, $, window, document ) => {
+	if ( window.THREE_SPHERE_THREE === null ) return false;
+	
 	
 	
     module.THREE_SPHERE_THREE               = module.THREE_SPHERE_THREE || {};

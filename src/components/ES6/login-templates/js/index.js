@@ -12,9 +12,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -22,6 +20,8 @@ import '../scss/_style.scss';
 
 
 export const LOGIN_UI = ( ( module, $, window, document ) => {
+	if ( window.LOGIN_UI === null ) return false;
+	
 	
 	
     module.LOGIN_UI               = module.LOGIN_UI || {};

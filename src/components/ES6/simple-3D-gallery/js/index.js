@@ -19,12 +19,12 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 export const THREE_GALLERY = ( ( module, $, window, document ) => {
+	if ( window.THREE_GALLERY === null ) return false;
+	
 	
 	
     module.THREE_GALLERY               = module.THREE_GALLERY || {};

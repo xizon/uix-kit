@@ -12,9 +12,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 import sortElements from '@uixkit/core/table/js/fn/sort-elements';
 
@@ -22,6 +20,8 @@ import '../scss/_style.scss';
 
 
 export const TABLE_SORTER = ( ( module, $, window, document ) => {
+	if ( window.TABLE_SORTER === null ) return false;
+	
 	
 	
     module.TABLE_SORTER               = module.TABLE_SORTER || {};

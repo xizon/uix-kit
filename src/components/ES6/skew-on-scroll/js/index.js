@@ -12,14 +12,14 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
 
 export const SKEW_ON_SCROLL = ( ( module, $, window, document ) => {
+	if ( window.SKEW_ON_SCROLL === null ) return false;
+	
 	
     module.SKEW_ON_SCROLL               = module.SKEW_ON_SCROLL || {};
     module.SKEW_ON_SCROLL.version       = '0.0.1';

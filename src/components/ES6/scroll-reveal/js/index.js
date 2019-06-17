@@ -12,13 +12,13 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
 export const SCROLL_REVEAL = ( ( module, $, window, document ) => {
+	if ( window.SCROLL_REVEAL === null ) return false;
+	
 	
     module.SCROLL_REVEAL               = module.SCROLL_REVEAL || {};
     module.SCROLL_REVEAL.version       = '0.1.0';

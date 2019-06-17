@@ -12,9 +12,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -22,6 +20,8 @@ import '../scss/_style.scss';
 
 
 export const ACCORDION_BG = ( ( module, $, window, document ) => {
+	if ( window.ACCORDION_BG === null ) return false;
+	
 	
 	
     module.ACCORDION_BG               = module.ACCORDION_BG || {};

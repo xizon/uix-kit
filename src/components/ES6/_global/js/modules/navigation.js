@@ -12,13 +12,13 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
 export const NAVIGATION = ( ( module, $, window, document ) => {
+	if ( window.NAVIGATION === null ) return false;
+	
 	
 	
 	

@@ -18,15 +18,15 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
 
 
 export const ONEPAGE2 = ( ( module, $, window, document ) => {
+	if ( window.ONEPAGE2 === null ) return false;
+	
 	
 	
     module.ONEPAGE2               = module.ONEPAGE2 || {};

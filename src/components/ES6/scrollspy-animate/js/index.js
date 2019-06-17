@@ -20,13 +20,13 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
 export const SCROLLSPY_ANIM = ( ( module, $, window, document ) => {
+	if ( window.SCROLLSPY_ANIM === null ) return false;
+	
 	
 	
     module.SCROLLSPY_ANIM               = module.SCROLLSPY_ANIM || {};

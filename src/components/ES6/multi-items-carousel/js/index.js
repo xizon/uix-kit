@@ -18,9 +18,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -28,6 +26,8 @@ import '../scss/_style.scss';
 
 
 export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
+	if ( window.MULTI_ITEMS_CAROUSEL === null ) return false;
+	
 	
 	
     module.MULTI_ITEMS_CAROUSEL               = module.MULTI_ITEMS_CAROUSEL || {};
@@ -442,9 +442,11 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 
 //
 //export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
+//	if ( window.MULTI_ITEMS_CAROUSEL === null ) return false;
+//	
 //	
 //    module.MULTI_ITEMS_CAROUSEL               = module.MULTI_ITEMS_CAROUSEL || {};
-//	module.MULTI_ITEMS_CAROUSEL.version       = '0.0.1';
+//	  module.MULTI_ITEMS_CAROUSEL.version       = '0.0.1';
 //    module.MULTI_ITEMS_CAROUSEL.documentReady = function( $ ) {
 //
 //		$( '.uix-multi-carousel' ).each( function()  {

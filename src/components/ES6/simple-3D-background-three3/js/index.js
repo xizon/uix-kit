@@ -19,14 +19,14 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
 
 export const THREE_BACKGROUND_THREE3 = ( ( module, $, window, document ) => {
+	if ( window.THREE_BACKGROUND_THREE3 === null ) return false;
+	
 	
 	
     module.THREE_BACKGROUND_THREE3               = module.THREE_BACKGROUND_THREE3 || {};

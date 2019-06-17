@@ -18,9 +18,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -28,6 +26,8 @@ import '../scss/_style.scss';
 
 
 export const ADVANCED_CONTENT_SLIDER = ( ( module, $, window, document ) => {
+	if ( window.ADVANCED_CONTENT_SLIDER === null ) return false;
+	
 	
 	
     module.ADVANCED_CONTENT_SLIDER               = module.ADVANCED_CONTENT_SLIDER || {};

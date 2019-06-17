@@ -19,13 +19,13 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
 export const THREE_PARTICLE = ( ( module, $, window, document ) => {
+	if ( window.THREE_PARTICLE === null ) return false;
+	
 	
 	
     module.THREE_PARTICLE               = module.THREE_PARTICLE || {};

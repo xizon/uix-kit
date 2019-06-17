@@ -19,14 +19,14 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
 
 export const THREE_MODEL = ( ( module, $, window, document ) => {
+	if ( window.THREE_MODEL === null ) return false;
+	
 	
 	
     module.THREE_MODEL               = module.THREE_MODEL || {};

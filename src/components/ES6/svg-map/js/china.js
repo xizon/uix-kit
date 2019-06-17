@@ -12,9 +12,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -22,6 +20,8 @@ import '../scss/_style.scss';
 
 
 export const SVG_MAP_CHINA = ( ( module, $, window, document ) => {
+	if ( window.SVG_MAP_CHINA === null ) return false;
+	
 	
 	
     module.SVG_MAP_CHINA               = module.SVG_MAP_CHINA || {};

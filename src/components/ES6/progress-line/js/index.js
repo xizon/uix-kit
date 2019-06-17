@@ -11,9 +11,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -21,6 +19,8 @@ import '../scss/_style.scss';
 
 
 export const PROGRESS_LINE = ( ( module, $, window, document ) => {
+	if ( window.PROGRESS_LINE === null ) return false;
+	
 	
 	
     module.PROGRESS_LINE               = module.PROGRESS_LINE || {};

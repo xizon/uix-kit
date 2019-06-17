@@ -31,9 +31,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 import UixFormProgressToNext from '@uixkit/core/form-progress/js/fn/form-progress-to-next';
 
@@ -41,6 +39,8 @@ import '../scss/_style.scss';
 
 
 export const FORM_PROGRESS = ( ( module, $, window, document ) => {
+	if ( window.FORM_PROGRESS === null ) return false;
+	
 	
     module.FORM_PROGRESS               = module.FORM_PROGRESS || {};
     module.FORM_PROGRESS.version       = '0.0.2';

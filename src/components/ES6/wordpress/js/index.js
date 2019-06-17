@@ -12,9 +12,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -22,6 +20,8 @@ import '../scss/_wp_core.scss';
 import '../scss/_3rd_party_plugins.scss';
 
 export const WP_CORE = ( ( module, $, window, document ) => {
+	if ( window.WP_CORE === null ) return false;
+	
 	
 	
     module.WP_CORE               = module.WP_CORE || {};

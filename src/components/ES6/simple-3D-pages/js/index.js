@@ -18,13 +18,13 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
 export const THREE_PAGES = ( ( module, $, window, document ) => {
+	if ( window.THREE_PAGES === null ) return false;
+	
 	
 	
 	

@@ -21,9 +21,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 import UixFireModalDialog from '@uixkit/core/modal-dialog/js/fn/fire-modal-dialog';
 import UixCloseModalDialog from '@uixkit/core/modal-dialog/js/fn/close-modal-dialog';
@@ -32,6 +30,8 @@ import '../scss/_style.scss';
 
 
 export const MODAL_DIALOG = ( ( module, $, window, document ) => {
+	if ( window.MODAL_DIALOG === null ) return false;
+	
 	
     module.MODAL_DIALOG               = module.MODAL_DIALOG || {};
     module.MODAL_DIALOG.version       = '0.0.9';

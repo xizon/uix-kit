@@ -12,9 +12,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -22,6 +20,8 @@ import '../scss/_style.scss';
 
 
 export const LAVA_LAMP_STYLE_MENU = ( ( module, $, window, document ) => {
+	if ( window.LAVA_LAMP_STYLE_MENU === null ) return false;
+	
 	
 	
     module.LAVA_LAMP_STYLE_MENU               = module.LAVA_LAMP_STYLE_MENU || {};

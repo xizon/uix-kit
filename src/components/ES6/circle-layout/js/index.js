@@ -12,9 +12,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -22,6 +20,8 @@ import '../scss/_style.scss';
 
 
 export const CIRCLE_LAYOUT = ( ( module, $, window, document ) => {
+	if ( window.CIRCLE_LAYOUT === null ) return false;
+	
 	
     module.CIRCLE_LAYOUT               = module.CIRCLE_LAYOUT || {};
     module.CIRCLE_LAYOUT.version       = '0.0.1';

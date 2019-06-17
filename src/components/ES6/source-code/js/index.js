@@ -19,9 +19,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -29,6 +27,8 @@ import '../scss/_style.scss';
 
 
 export const SOURCE_CODE_VIEW = ( ( module, $, window, document ) => {
+	if ( window.SOURCE_CODE_VIEW === null ) return false;
+	
 	
 	
     module.SOURCE_CODE_VIEW               = module.SOURCE_CODE_VIEW || {};

@@ -12,13 +12,13 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
 export const BODY_AND_HEADER = ( ( module, $, window, document ) => {
+	if ( window.BODY_AND_HEADER === null ) return false;
+	
 	
 	
 	

@@ -11,14 +11,14 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
 
 export const ROTATING_EL = ( ( module, $, window, document ) => {
+	if ( window.ROTATING_EL === null ) return false;
+	
 	
 	
     module.ROTATING_EL               = module.ROTATING_EL || {};

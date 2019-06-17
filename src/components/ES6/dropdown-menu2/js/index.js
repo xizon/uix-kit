@@ -12,9 +12,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -22,6 +20,8 @@ import '../scss/_style.scss';
 
 
 export const DROPDOWN_MENU2 = ( ( module, $, window, document ) => {
+	if ( window.DROPDOWN_MENU2 === null ) return false;
+	
 	
 	
     module.DROPDOWN_MENU2               = module.DROPDOWN_MENU2 || {};

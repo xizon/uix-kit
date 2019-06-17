@@ -13,9 +13,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -23,6 +21,8 @@ import '../scss/_style.scss';
 
 
 export const TIMELINE = ( ( module, $, window, document ) => {
+	if ( window.TIMELINE === null ) return false;
+	
 	
 
     module.TIMELINE               = module.TIMELINE || {};
