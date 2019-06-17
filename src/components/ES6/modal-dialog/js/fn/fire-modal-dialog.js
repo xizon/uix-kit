@@ -109,10 +109,11 @@
 					
 					//auto close
 					if ( closeTime && !isNaN( closeTime ) ) {
-						setTimeout( function() {
-							$( document ).UixCloseModalDialog();
+						window.setCloseModalDialog = setTimeout( function() {
+							$( document ).closeModalDialog();
 						}, closeTime );
 					}
+					
 					
 					
 				}

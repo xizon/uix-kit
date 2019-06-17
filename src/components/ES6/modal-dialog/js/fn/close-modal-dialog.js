@@ -33,6 +33,10 @@
 			$.scrollLock( false );
 			
 			
+			//Prevent automatic close from affecting new fire effects
+			clearTimeout( window.setCloseModalDialog );
+			
+			
 		});
  
     };

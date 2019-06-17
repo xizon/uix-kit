@@ -34,7 +34,7 @@ export const MODAL_DIALOG = ( ( module, $, window, document ) => {
 	
 	
     module.MODAL_DIALOG               = module.MODAL_DIALOG || {};
-    module.MODAL_DIALOG.version       = '0.0.9';
+    module.MODAL_DIALOG.version       = '0.1.0';
     module.MODAL_DIALOG.documentReady = function( $ ) {
 
 		

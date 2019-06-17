@@ -1,5 +1,11 @@
 # Changelog
 
+
+#### = 3.6.5 (June 17, 2019) =
+
+* Fix: Fix a bug of Modal Dialog that prevent automatic close from affecting new fire effects.
+
+
 #### = 3.6.4 (June 16, 2019) =
 
 * New: Module function can be destroyed using `window.MODULE_NAME = null;`.
