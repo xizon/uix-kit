@@ -23,7 +23,7 @@ export const VIDEOS = ( ( module, $, window, document ) => {
 	
 	
 	module.VIDEOS               = module.VIDEOS || {};
-    module.VIDEOS.version       = '0.0.9';
+    module.VIDEOS.version       = '0.1.0';
 	module.VIDEOS.documentReady = function( $ ) {
 
 		var $window      = $( window ),
@@ -261,7 +261,7 @@ export const VIDEOS = ( ( module, $, window, document ) => {
 				}
 				
 				v += '<div class="uix-modal-box is-fullscreen is-video" id="'+videoContainerMid+'">';
-				v += '<a href="javascript:void(0)" class="uix-modal-box__close"></a>';
+				v += '<a href="javascript:void(0)" class="uix-modal-box__close" data-modal-close-trigger="true"></a>';
 				v += '<div class="uix-modal-box__content">';
 				v += '<div class="uix-modal-box__video-waiting"></div><div class="uix-modal-box__video-container" data-video-player-init="0">';
 				
@@ -504,7 +504,7 @@ export const VIDEOS = ( ( module, $, window, document ) => {
 			
 			
 			/* ---------  Close the modal  */
-			$( document ).on( 'click', '.uix-modal-box .uix-modal-box__close, .uix-modal-mask:not(.js-uix-disabled)', function() {
+			$( document ).on( 'click', '.uix-modal-box [data-modal-close-trigger], .uix-modal-mask:not(.js-uix-disabled)', function() {
 
 				myPlayer.ready(function() {
 					this.pause();

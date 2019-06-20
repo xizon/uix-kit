@@ -1,5 +1,10 @@
 # Changelog
 
+#### = 3.6.6 (June 20, 2019) =
+
+* New: Added role attribute for Tabs and Accordion modules from HTML to improve semantic.
+* Tweak: Optimized the closing trigger of the Modal Dialog module.
+
 
 #### = 3.6.5 (June 17, 2019) =
 

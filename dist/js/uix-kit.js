@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
- * ## Version             :  3.6.4
+ * ## Version             :  3.6.6
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  June 17, 2019
+ * ## Last Update         :  June 20, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -1424,8 +1424,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
           $obj.addClass('is-active'); //auto close
 
           if (closeTime && !isNaN(closeTime)) {
-            setTimeout(function () {
-              $(document).UixCloseModalDialog();
+            window.setCloseModalDialog = setTimeout(function () {
+              $(document).closeModalDialog();
             }, closeTime);
           }
         }
@@ -1471,7 +1471,9 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       });
       $(settings.target).find('.uix-modal-box__content').removeClass('js-uix-no-fullscreen'); // Unlocks the page
 
-      $.scrollLock(false);
+      $.scrollLock(false); //Prevent automatic close from affecting new fire effects
+
+      clearTimeout(window.setCloseModalDialog);
     });
   };
 })(jQuery);
@@ -3487,7 +3489,7 @@ function videos_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.
 var VIDEOS = function (module, $, window, document) {
   if (window.VIDEOS === null) return false;
   module.VIDEOS = module.VIDEOS || {};
-  module.VIDEOS.version = '0.0.9';
+  module.VIDEOS.version = '0.1.0';
 
   module.VIDEOS.documentReady = function ($) {
     var $window = $(window),
@@ -3676,7 +3678,7 @@ var VIDEOS = function (module, $, window, document) {
         }
 
         v += '<div class="uix-modal-box is-fullscreen is-video" id="' + videoContainerMid + '">';
-        v += '<a href="javascript:void(0)" class="uix-modal-box__close"></a>';
+        v += '<a href="javascript:void(0)" class="uix-modal-box__close" data-modal-close-trigger="true"></a>';
         v += '<div class="uix-modal-box__content">';
         v += '<div class="uix-modal-box__video-waiting"></div><div class="uix-modal-box__video-container" data-video-player-init="0">';
 
@@ -3856,7 +3858,7 @@ var VIDEOS = function (module, $, window, document) {
       /* ---------  Close the modal  */
 
 
-      $(document).on('click', '.uix-modal-box .uix-modal-box__close, .uix-modal-mask:not(.js-uix-disabled)', function () {
+      $(document).on('click', '.uix-modal-box [data-modal-close-trigger], .uix-modal-mask:not(.js-uix-disabled)', function () {
         myPlayer.ready(function () {
           this.pause();
         });
@@ -10888,7 +10890,7 @@ function modal_dialog_js_typeof(obj) { if (typeof Symbol === "function" && typeo
 var MODAL_DIALOG = function (module, $, window, document) {
   if (window.MODAL_DIALOG === null) return false;
   module.MODAL_DIALOG = module.MODAL_DIALOG || {};
-  module.MODAL_DIALOG.version = '0.0.9';
+  module.MODAL_DIALOG.version = '0.1.1';
 
   module.MODAL_DIALOG.documentReady = function ($) {
     //Delay Time when Full Screen Effect is fired.
@@ -10946,7 +10948,7 @@ var MODAL_DIALOG = function (module, $, window, document) {
       });
       return false;
     });
-    $(document).on('click.MODAL_DIALOG_CLOSE', '.uix-modal-box .uix-modal-box__close, .uix-modal-mask:not(.js-uix-disabled)', function () {
+    $(document).on('click.MODAL_DIALOG_CLOSE', '.uix-modal-box [data-modal-close-trigger], .uix-modal-mask:not(.js-uix-disabled)', function () {
       //btn
       if ($(this).hasClass('uix-modal-box__close')) {
         $(this).parent().removeClass('is-active');
