@@ -1,5 +1,12 @@
 # Changelog
 
+
+#### = 3.6.7 (July 9, 2019) =
+
+* Tweak: Optimized template engine functions for AJAX load posts.
+* Tweak: Upgraded template7 to 1.4.2.
+
+
 #### = 3.6.6 (June 20, 2019) =
 
 * New: Added role attribute for Tabs and Accordion modules from HTML to improve semantic.

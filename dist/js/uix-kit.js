@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
- * ## Version             :  3.6.6
+ * ## Version             :  3.6.7
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  June 20, 2019
+ * ## Last Update         :  July 9, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -10387,7 +10387,7 @@ function list_posts_js_typeof(obj) { if (typeof Symbol === "function" && typeof 
 var POST_LIST_AJAX = function (module, $, window, document) {
   if (window.POST_LIST_AJAX === null) return false;
   module.POST_LIST_AJAX = module.POST_LIST_AJAX || {};
-  module.POST_LIST_AJAX.version = '0.0.8';
+  module.POST_LIST_AJAX.version = '0.0.9';
 
   module.POST_LIST_AJAX.documentReady = function ($) {
     $('[data-ajax-list-json]').each(function () {
@@ -10400,7 +10400,7 @@ var POST_LIST_AJAX = function (module, $, window, document) {
           trigger = $this.data('ajax-list-trigger'),
           infinitescroll = $this.data('ajax-list-infinitescroll'),
           jsonFile = $this.data('ajax-list-json'),
-          addition = $this.data('ajax-list-addition'),
+          render = $this.data('ajax-list-render'),
           template7ID = $this.data('ajax-list-temp-id'),
           pushContainer = $this.data('ajax-list-push-container-class'),
           triggerActive = $this.data('ajax-list-trigger-active-class'),
@@ -10440,8 +10440,8 @@ var POST_LIST_AJAX = function (module, $, window, document) {
         infinitescroll = false;
       }
 
-      if (list_posts_js_typeof(addition) === ( true ? "undefined" : undefined)) {
-        addition = true;
+      if (list_posts_js_typeof(render) === ( true ? "undefined" : undefined)) {
+        render = 'before';
       }
 
       if (list_posts_js_typeof(jsonFile) === ( true ? "undefined" : undefined)) {
@@ -10486,6 +10486,18 @@ var POST_LIST_AJAX = function (module, $, window, document) {
       customPostData = customPostData.replace(/,\s*$/, ''); //Parse the JSON data
 
       if (jsonFile != '' && template7ID != '') {
+        //Default output of the first page
+        if (curPage == 2) {
+          //Perform dynamic loading
+          if (customPostData != '') {
+            defaultPostData = JSON.parse('{ "' + pageParmStr.totalPage + '": ' + totalPage + ', "' + pageParmStr.displayPerPage + '": ' + perShow + ', "' + pageParmStr.currentPage + '": 1, ' + customPostData + ' }');
+          } else {
+            defaultPostData = JSON.parse('{ "' + pageParmStr.totalPage + '": ' + totalPage + ', "' + pageParmStr.displayPerPage + '": ' + perShow + ', "' + pageParmStr.currentPage + '": 1 }');
+          }
+
+          ajaxLoadInit($this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, render, noneInfo);
+        }
+
         if (infinitescroll) {
           /* 
            ---------------------------
@@ -10520,7 +10532,7 @@ var POST_LIST_AJAX = function (module, $, window, document) {
                 defaultPostData = JSON.parse('{ "' + pageParmStr.totalPage + '": ' + totalPage + ', "' + pageParmStr.displayPerPage + '": ' + perShow + ', "' + pageParmStr.currentPage + '": ' + curPage + ' }');
               }
 
-              ajaxLoadInit($this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition, noneInfo);
+              ajaxLoadInit($this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, render, noneInfo);
             }
           });
         } else {
@@ -10570,7 +10582,7 @@ var POST_LIST_AJAX = function (module, $, window, document) {
                 defaultPostData = JSON.parse('{ "' + pageParmStr.totalPage + '": ' + totalPage + ', "' + pageParmStr.displayPerPage + '": ' + perShow + ', "' + pageParmStr.currentPage + '": ' + curPage + ' }');
               }
 
-              ajaxLoadInit($this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition, noneInfo);
+              ajaxLoadInit($this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, render, noneInfo);
               return false;
             }); //----------------- Previous Button ----------------
             //Hide the prev button 
@@ -10597,7 +10609,7 @@ var POST_LIST_AJAX = function (module, $, window, document) {
                 defaultPostData = JSON.parse('{ "' + pageParmStr.totalPage + '": ' + totalPage + ', "' + pageParmStr.displayPerPage + '": ' + perShow + ', "' + pageParmStr.currentPage + '": ' + curPage + ' }');
               }
 
-              ajaxLoadInit($this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition, noneInfo);
+              ajaxLoadInit($this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, render, noneInfo);
               return false;
             });
           } else {
@@ -10626,7 +10638,7 @@ var POST_LIST_AJAX = function (module, $, window, document) {
                 defaultPostData = JSON.parse('{ "' + pageParmStr.totalPage + '": ' + totalPage + ', "' + pageParmStr.displayPerPage + '": ' + perShow + ', "' + pageParmStr.currentPage + '": ' + curPage + ' }');
               }
 
-              ajaxLoadInit($this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition, noneInfo);
+              ajaxLoadInit($this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, render, noneInfo);
               return false;
             });
           }
@@ -10648,12 +10660,12 @@ var POST_LIST_AJAX = function (module, $, window, document) {
      * @param  {String} triggerActive   - The class name of trigger button actived.
      * @param  {String} pushContainer   - This container is used to display the loaded dynamic data.
      * @param  {String} method          - The type of request to make, which can be either "POST" or "GET".
-     * @param  {Boolean} addition       - Do or not append to the original content.
+     * @param  {String} render          - Rendering mode of display information. ==> before | html | append
      * @param  {String} noneInfo        - Returns information of ajax asynchronous callback when the content is empty.
      * @return {Void}
      */
 
-    function ajaxLoadInit(ajaxWrapper, defaultPostData, trigger, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition, noneInfo) {
+    function ajaxLoadInit(ajaxWrapper, defaultPostData, trigger, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, render, noneInfo) {
       var $divRoot = ajaxWrapper,
           template = document.getElementById(template7ID).innerHTML,
           compiledTemplate = Template7.compile(template),
@@ -10691,14 +10703,20 @@ var POST_LIST_AJAX = function (module, $, window, document) {
                   result = null,
                   htmlEl = null; //--------- Do or not append to the original content
 
-              if (addition) {
+              if (render == 'before') {
                 result = curHtml + html;
                 htmlEl = $(result);
                 $divRoot.find(pushContainer).before(htmlEl);
-              } else {
+              }
+
+              if (render == 'html') {
                 result = html;
                 htmlEl = $(result);
                 $divRoot.find(pushContainer).html(htmlEl);
+              }
+
+              if (render == 'append') {
+                $divRoot.find(pushContainer).append(html);
               } //--------- Apply some asynchronism scripts
 
 
@@ -17832,7 +17850,7 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
 
       function render() {
         requestAnimationFrame(render);
-        var t = clock.getElapsedTime(); //To set a background color.
+        var elapsed = clock.getElapsedTime(); //To set a background color.
         //renderer.setClearColor( 0x000000 );	
         //Display the destination object
 

@@ -464,7 +464,7 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 			function render() {
 				requestAnimationFrame( render );
 
-				var t = clock.getElapsedTime();
+				var elapsed = clock.getElapsedTime();
 
 
 				//To set a background color.

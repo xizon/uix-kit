@@ -38,7 +38,7 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 	
 	
     module.POST_LIST_AJAX               = module.POST_LIST_AJAX || {};
-    module.POST_LIST_AJAX.version       = '0.0.8';
+    module.POST_LIST_AJAX.version       = '0.0.9';
     module.POST_LIST_AJAX.documentReady = function( $ ) {
 
 		$( '[data-ajax-list-json]' ).each( function() {
@@ -51,7 +51,7 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 				trigger          = $this.data( 'ajax-list-trigger' ),
 				infinitescroll   = $this.data( 'ajax-list-infinitescroll' ),
 				jsonFile         = $this.data( 'ajax-list-json' ),
-				addition         = $this.data( 'ajax-list-addition' ),
+				render           = $this.data( 'ajax-list-render' ),
 				template7ID      = $this.data( 'ajax-list-temp-id' ),
 				pushContainer    = $this.data( 'ajax-list-push-container-class' ),
 				triggerActive    = $this.data( 'ajax-list-trigger-active-class' ),
@@ -99,8 +99,8 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 				infinitescroll = false;
 			}	
 			
-			if( typeof addition === typeof undefined ) {
-				addition = true;
+			if( typeof render === typeof undefined ) {
+				render = 'before';
 			}			
 			
 			
@@ -159,6 +159,24 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 			if ( jsonFile != '' && template7ID != '' ) {
 				
 				
+				
+				//Default output of the first page
+				if ( curPage == 2 ) {
+
+					//Perform dynamic loading
+					if ( customPostData != '' ) {
+						defaultPostData = JSON.parse( '{ "'+pageParmStr.totalPage+'": '+totalPage+', "'+pageParmStr.displayPerPage+'": '+perShow+', "'+pageParmStr.currentPage+'": 1, '+customPostData+' }' );
+					} else {
+						defaultPostData = JSON.parse( '{ "'+pageParmStr.totalPage+'": '+totalPage+', "'+pageParmStr.displayPerPage+'": '+perShow+', "'+pageParmStr.currentPage+'": 1 }' );
+					}
+
+
+					ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, render, noneInfo );
+				}
+				
+				
+				
+				
 				if ( infinitescroll ) {
 					/* 
 					 ---------------------------
@@ -205,7 +223,7 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 								}
 
 
-								ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition, noneInfo );
+								ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, render, noneInfo );
 
 
 							
@@ -276,7 +294,7 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 								defaultPostData = JSON.parse( '{ "'+pageParmStr.totalPage+'": '+totalPage+', "'+pageParmStr.displayPerPage+'": '+perShow+', "'+pageParmStr.currentPage+'": '+curPage+' }' );
 							}
 
-							ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition, noneInfo );
+							ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, render, noneInfo );
 							
 							return false;
 
@@ -319,7 +337,7 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 								defaultPostData = JSON.parse( '{ "'+pageParmStr.totalPage+'": '+totalPage+', "'+pageParmStr.displayPerPage+'": '+perShow+', "'+pageParmStr.currentPage+'": '+curPage+' }' );
 							}
 
-							ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition, noneInfo );
+							ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, render, noneInfo );
 
 							
 							return false;
@@ -368,7 +386,7 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 								defaultPostData = JSON.parse( '{ "'+pageParmStr.totalPage+'": '+totalPage+', "'+pageParmStr.displayPerPage+'": '+perShow+', "'+pageParmStr.currentPage+'": '+curPage+' }' );
 							}
 
-							ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition, noneInfo );
+							ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, render, noneInfo );
 
 							
 							return false;
@@ -401,12 +419,12 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 		 * @param  {String} triggerActive   - The class name of trigger button actived.
 		 * @param  {String} pushContainer   - This container is used to display the loaded dynamic data.
 		 * @param  {String} method          - The type of request to make, which can be either "POST" or "GET".
-		 * @param  {Boolean} addition       - Do or not append to the original content.
+		 * @param  {String} render          - Rendering mode of display information. ==> before | html | append
 		 * @param  {String} noneInfo        - Returns information of ajax asynchronous callback when the content is empty.
 		 * @return {Void}
 		 */
 		
-		function ajaxLoadInit( ajaxWrapper, defaultPostData, trigger, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition, noneInfo ) {
+		function ajaxLoadInit( ajaxWrapper, defaultPostData, trigger, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, render, noneInfo ) {
 
 			var $divRoot         = ajaxWrapper,
 				template         = document.getElementById( template7ID ).innerHTML,
@@ -460,15 +478,23 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 							
 							
 							//--------- Do or not append to the original content
-							if ( addition ) {
+							if ( render == 'before' ) {
 								result = curHtml + html;
 								htmlEl = $( result );
-								$divRoot.find( pushContainer ).before( htmlEl );
-							} else {
+								$divRoot.find( pushContainer ).before( htmlEl );	
+							}
+							
+							if ( render == 'html' ) {
 								result = html;
 								htmlEl = $( result );
 								$divRoot.find( pushContainer ).html( htmlEl );
-							}
+							}		
+							
+							if ( render == 'append' ) {
+								$divRoot.find( pushContainer ).append( html );
+								
+							}	
+							
 							
 							
 							//--------- Apply some asynchronism scripts

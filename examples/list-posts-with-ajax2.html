@@ -43,11 +43,11 @@
 
 
 	<!-- Theme  -->
-	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=SqMIy3RLZ69ofqzqw7l8"/>
+	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=og4KYg74cSdRA7snPZVu"/>
 
 
 	<!--[if lt IE 10]>
-	<link rel="stylesheet" href="assets/css/IE.css?ver=SqMIy3RLZ69ofqzqw7l8" />
+	<link rel="stylesheet" href="assets/css/IE.css?ver=og4KYg74cSdRA7snPZVu" />
 	<![endif]-->
 
 
@@ -457,11 +457,27 @@
 						<div class="row">
 							<div class="col-12 uix-trans uix-filter-hover--color">
 
-								<!-- Recommended to enter the total number of attribute "data-ajax-list-page-total". -->
+								<!-- 
+									Note: Recommended to enter the total number of attribute "data-ajax-list-page-total".
+
+									* @param  {String} data-ajax-list-json                    - JSON file path to docking data.
+									* @param  {String} data-ajax-list-method                  - The type of request to make, which can be either "POST" or "GET".
+									* @param  {String} data-ajax-list-render                  - Rendering mode of display information. ==> before | html | append
+									* @param  {String} data-ajax-list-temp-id                 - HTML template ID
+									* @param  {Object} data-ajax-list-page-parm-str           - Data to be sent to the server which is custom JSON fields.
+									* @param  {Number} data-ajax-list-page-now                - The current page to load.
+									* @param  {Number} data-ajax-list-page-per                - The amount to load each time.
+									* @param  {Number} data-ajax-list-page-total              - The total page to load.
+									* @param  {Object} data-ajax-list-trigger                 - Trigger ajax loaded button object.
+									* @param  {String} data-ajax-list-trigger-active-class    - The class name of trigger button actived.
+									* @param  {String} data-ajax-list-push-container-class    - This container is used to display the loaded dynamic data.
+									* @param  {Boolean} data-ajax-list-infinitescroll         - Returns information of ajax asynchronous callback when the content is empty.
+									* @param  {String} data-ajax-list-field-{str}             - Customize the fields to be transferred to the server.
+								 -->
 								<div class="uix-list-topic"
 									 data-ajax-list-json="assets/json/content-posts.php" 
 									 data-ajax-list-method="POST" 
-									 data-ajax-list-addition="false" 
+									 data-ajax-list-render="html" 
 									 data-ajax-list-temp-id="list-topic-ajax-template-1" 
 									 data-ajax-list-page-parm-str='{"totalPage":"total","currentPage":"page","displayPerPage":"per"}' 
 									 data-ajax-list-page-now="1" 
@@ -715,9 +731,9 @@
 
 
 												<!-- List Item -->
-												<article class="uix-list-topic__item uix-list-topic__item--style-2">
+												<article class="uix-list-topic__item uix-list-topic__item--style-2 {{js "@index % 2 === 0 ? 'even' : 'odd'"}}">
 													<div class="row">
-														<div class="col-lg-4 col-md-4 uix-list-topic__item__img uix-trans">
+														<div class="col-lg-4 col-md-4 uix-list-topic__item__img uix-trans {{js "this.img === '' ? 'none' : ''"}}">
 															<a href="{{link}}"> 
 																<img src="{{img}}" alt="" />
 															</a>
@@ -891,7 +907,7 @@
     <script src="assets/js/min/jquery.waitforimages.min.js?ver=1.0"></script>
     <script src="assets/js/min/video.min.js?ver=7.5.3"></script> 
 	<script src="assets/js/min/jquery.waypoints.min.js?ver=4.0.1"></script> 
-    <script src="assets/js/min/template7.min.js?ver=1.2.5"></script>
+    <script src="assets/js/min/template7.min.js?ver=1.4.2"></script>
     <script src="assets/js/min/TweenMax.min.js?ver=2.0.2"></script>
     <script src="assets/js/min/pixi.min.js?ver=4.8.4"></script>
     <script src="assets/js/min/three.min.js?ver=r102"></script>
@@ -905,14 +921,14 @@
 	============================================= -->
 	
 	<script>
-		var REVISION     = "3.6.6",
+		var REVISION     = "3.6.7",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
 				"homeUrl"     : "",  //Eg. https://uiux.cc
 				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
 			};
     </script>  
-    <script src="../dist/js/uix-kit.min.js?ver=SqMIy3RLZ69ofqzqw7l8"></script>
+    <script src="../dist/js/uix-kit.min.js?ver=og4KYg74cSdRA7snPZVu"></script>
 	<!-- Your Plugins & Theme Scripts  end -->
     
 

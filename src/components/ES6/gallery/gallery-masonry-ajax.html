@@ -101,10 +101,28 @@
 
 						<div class="uix-gallery" data-show-type="masonry" data-filter-id="">
 
+							
+							<!-- 
+								Note: Recommended to enter the total number of attribute "data-ajax-list-page-total".
+
+								* @param  {String} data-ajax-list-json                    - JSON file path to docking data.
+								* @param  {String} data-ajax-list-method                  - The type of request to make, which can be either "POST" or "GET".
+								* @param  {String} data-ajax-list-render                  - Rendering mode of display information. ==> before | html | append
+								* @param  {String} data-ajax-list-temp-id                 - HTML template ID
+								* @param  {Object} data-ajax-list-page-parm-str           - Data to be sent to the server which is custom JSON fields.
+								* @param  {Number} data-ajax-list-page-now                - The current page to load.
+								* @param  {Number} data-ajax-list-page-per                - The amount to load each time.
+								* @param  {Number} data-ajax-list-page-total              - The total page to load.
+								* @param  {Object} data-ajax-list-trigger                 - Trigger ajax loaded button object.
+								* @param  {String} data-ajax-list-trigger-active-class    - The class name of trigger button actived.
+								* @param  {String} data-ajax-list-push-container-class    - This container is used to display the loaded dynamic data.
+								* @param  {Boolean} data-ajax-list-infinitescroll         - Returns information of ajax asynchronous callback when the content is empty.    
+								* @param  {String} data-ajax-list-field-{str}             - Customize the fields to be transferred to the server.
+                             -->
 							<div class="uix-gallery__tiles"
 								 data-ajax-list-json="assets/json/content-posts.php" 
 								 data-ajax-list-method="POST" 
-								 data-ajax-list-addition="true" 
+								 data-ajax-list-render="before" 
 								 data-ajax-list-temp-id="list-topic-ajax-template-1" 
 								 data-ajax-list-page-parm-str='{"totalPage":"total","currentPage":"page","displayPerPage":"per"}' 
 								 data-ajax-list-page-now="1" 
@@ -249,12 +267,12 @@
 
 
 										<!-- Item  -->
-										<article class="uix-core-grid__col-4 uix-gallery__item" data-groups='[]'>
+										<article class="uix-core-grid__col-4 uix-gallery__item {{js "@index % 2 === 0 ? 'even' : 'odd'"}}" data-groups='[]'>
 
 
 											<div>
 												<a href="#" class="uix-gallery__image" >
-													<div class="uix-gallery__image-cover">
+													<div class="uix-gallery__image-cover {{js "this.img === '' ? 'none' : ''"}}">
 														<img src="{{img}}" alt="" />
 													</div>
 												</a>
