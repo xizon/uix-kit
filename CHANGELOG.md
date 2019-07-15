@@ -1,5 +1,10 @@
 # Changelog
 
+#### = 3.6.8 (July 15, 2019) =
+
+* Tweak: Security: Upgrade dependencies for webpack.
+
+
 
 #### = 3.6.7 (July 9, 2019) =
 
