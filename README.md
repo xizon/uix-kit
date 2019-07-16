@@ -23,6 +23,11 @@ It can be used separately, or merge components and grid systems using bootstrap.
 
 ---
 
+[中文版说明文档](README_CN.md)
+
+---
+
+
 ## Demo
 
 [https://xizon.github.io/uix-kit/examples/](https://xizon.github.io/uix-kit/examples/)
