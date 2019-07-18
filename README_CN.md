@@ -10,7 +10,8 @@ Uix Kit是一个偏视觉交互的工具集合，它基于常用的脚本库，�
 
 ---
 
-[English Documentation](README.md)
+- [English Documentation](README.md)
+- [中文版说明文档](README_CN.md)
 
 ---
 

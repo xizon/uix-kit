@@ -212,7 +212,7 @@ export const FORM = ( ( module, $, window, document ) => {
 			
 			if ( typeof step === typeof undefined || isNaN( step ) ) step = 1;
 			if ( typeof decimals === typeof undefined ) decimals = 0;
-			if ( typeof max != typeof undefined && parseFloat( numberInputVal + step ) >= max ) {
+			if ( typeof max != typeof undefined && parseFloat( numberInputVal + step ) > max ) {
 				step = 0;
 			}
 

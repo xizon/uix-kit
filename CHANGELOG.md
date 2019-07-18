@@ -1,5 +1,11 @@
 # Changelog
 
+#### = 3.6.9 (July 18, 2019) =
+
+* Fix: Fixed a form bug of Input Number Field.
+
+
+
 #### = 3.6.8 (July 15, 2019) =
 
 * Tweak: Security: Upgrade dependencies for webpack.
