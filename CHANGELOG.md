@@ -3,6 +3,8 @@
 #### = 3.7.0 (July 21, 2019) =
 
 * Tweak: Custom functions introduce JavaScript's strict mode, for ease of use when leaving the development mode.
+* Fix: Fixed a bug for Dynamic Drop Down List from JSON.
+
 
 
 #### = 3.6.9 (July 18, 2019) =

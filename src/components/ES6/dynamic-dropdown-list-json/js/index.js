@@ -24,7 +24,7 @@ export const DYNAMIC_DD_LIST = ( ( module, $, window, document ) => {
 	
 	
     module.DYNAMIC_DD_LIST               = module.DYNAMIC_DD_LIST || {};
-    module.DYNAMIC_DD_LIST.version       = '0.0.5';
+    module.DYNAMIC_DD_LIST.version       = '0.0.6';
     module.DYNAMIC_DD_LIST.documentReady = function( $ ) {
 
 
@@ -264,17 +264,24 @@ export const DYNAMIC_DD_LIST = ( ( module, $, window, document ) => {
 									$level3El.append( level3EmptyOption );
 
 									if ( typeof curLevel2Index != typeof undefined ) {
-										for (var i = 0; i < allLevel3Items[curLevel1Index - 1][curLevel2Index - 1].length; i++) {
-											var _v = allLevel3Items[curLevel1Index - 1][curLevel2Index - 1][i],
-											    _id = allLevel3IDs[curLevel1Index - 1][curLevel2Index - 1][i];
+                                        
+                                        //If the data exists, you need to determine if the array is empty.
+                                        if ( allLevel3Items[curLevel1Index - 1].length > 0 ) {
+
+                                            for (var i = 0; i < allLevel3Items[curLevel1Index - 1][curLevel2Index - 1].length; i++) {
+                                                var _v = allLevel3Items[curLevel1Index - 1][curLevel2Index - 1][i],
+                                                    _id = allLevel3IDs[curLevel1Index - 1][curLevel2Index - 1][i];
 
 
-											if ( defaultLevel3Val == _v ) {
-												$level3El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "' selected>" + _v + "</option>");
-											} else {
-												$level3El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
-											}
-										}
+                                                if ( defaultLevel3Val == _v ) {
+                                                    $level3El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "' selected>" + _v + "</option>");
+                                                } else {
+                                                    $level3El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
+                                                }
+                                            }   
+                                        }
+                                        
+
 
 									}
 
