@@ -38,6 +38,7 @@
 import { UixModuleInstance } from '@uixkit/core/_global/js';
 
 ( function ( $ ) {
+    'use strict';
     $.fn.UixApplyAsyncScripts = function( options ) {
  
 		// This is the easiest way to have default options.

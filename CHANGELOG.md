@@ -1,5 +1,10 @@
 # Changelog
 
+#### = 3.7.0 (July 21, 2019) =
+
+* Tweak: Custom functions introduce JavaScript's strict mode, for ease of use when leaving the development mode.
+
+
 #### = 3.6.9 (July 18, 2019) =
 
 * Fix: Fixed a form bug of Input Number Field.

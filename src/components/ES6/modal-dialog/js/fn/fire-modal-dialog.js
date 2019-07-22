@@ -15,6 +15,7 @@
  * @return {Void}
  */	
 ( function ( $ ) {
+    'use strict';
     $.fn.UixFireModalDialog = function( options ) {
  
         // This is the easiest way to have default options.

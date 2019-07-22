@@ -5,6 +5,7 @@
  * @return {Void}
  */	
 ( function ( $ ) {
+    'use strict';
     $.fn.UixCloseModalDialog = function( options ) {
  
         // This is the easiest way to have default options.

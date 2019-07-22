@@ -10,6 +10,7 @@
  * @return {Void}
  */
 ( function ( $ ) {
+    'use strict';
     $.fn.UixRenderCustomSelect = function( options ) {
  
         // This is the easiest way to have default options.

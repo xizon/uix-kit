@@ -7,6 +7,7 @@
  * @return {Boolean}                         - Return a boolean.
  */
 ( function ( $ ) {
+    'use strict';
     $.fn.UixIsJsonObj = function( options ) {
  
         // This is the easiest way to have default options.

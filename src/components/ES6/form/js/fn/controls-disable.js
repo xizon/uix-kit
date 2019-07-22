@@ -6,6 +6,7 @@
  * @return {Void}
  */
 ( function ( $ ) {
+    'use strict';
     $.fn.UixRenderControlsDisable = function( options ) {
  
         // This is the easiest way to have default options.

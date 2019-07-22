@@ -71,7 +71,6 @@ export const browser = {
  * @requires ./examples/assets/js/min/TweenMax.min.js
  */
 export const UixModuleInstance = ( ( $, window, document ) => {
-	'use strict';
 
     var _APP           = {},
         components     = { documentReady: [], pageLoaded: [] };

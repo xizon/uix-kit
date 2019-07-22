@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
- * ## Version             :  3.6.8
+ * ## Version             :  3.7.0
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  July 15, 2019
+ * ## Last Update         :  July 22, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "9b13a761ba98d4d1e9d9";
+/******/ 	var hotCurrentHash = "4db37629cc9416392e90";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -907,6 +907,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Void}
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixRenderCustomSelect = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -1107,6 +1109,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  *************************************
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixCountTo = function (options) {
     options = options || {};
     return $(this).each(function () {
@@ -1229,6 +1233,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Function}                        - Return a callback function.
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixSearchJsonStr = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -1297,6 +1303,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Boolean}                         - Return a boolean.
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixIsJsonObj = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -1356,6 +1364,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Void}
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixFormProgressToNext = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -1493,6 +1503,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Void}
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixRenderNormalRadio = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -1537,6 +1549,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Void}
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixRenderDatePicker = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -1612,6 +1626,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Void}
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixRenderControlsHover = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -1657,6 +1673,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Void}
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixRenderCustomSingleSel = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -1697,6 +1715,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Void}
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixRenderCustomMultiSel = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -1729,6 +1749,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Void}
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixRenderCustomFileDropzone = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -1800,6 +1822,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Void}
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixRenderCustomFile = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -1832,6 +1856,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Void}
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixRenderControlsDisable = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -1856,6 +1882,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Void}
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixRenderControlsLineEff = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -1904,6 +1932,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Void}
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixRenderCustomRadioCheckbox = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -2055,6 +2085,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Void}
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixFireModalDialog = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -2164,6 +2196,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Void}
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixCloseModalDialog = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -2350,6 +2384,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Void}
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixTextEff = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -2886,8 +2922,6 @@ var browser = {
  */
 
 var UixModuleInstance = function ($, window, document) {
-  'use strict';
-
   var _APP = {},
       components = {
     documentReady: [],
@@ -3249,6 +3283,8 @@ window.MAIN = null;
 
 
 (function ($) {
+  'use strict';
+
   $.fn.UixApplyAsyncScripts = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -9996,7 +10032,7 @@ var FORM = function (module, $, window, document) {
       if (form_js_typeof(step) === ( true ? "undefined" : undefined) || isNaN(step)) step = 1;
       if (form_js_typeof(decimals) === ( true ? "undefined" : undefined)) decimals = 0;
 
-      if (form_js_typeof(max) != ( true ? "undefined" : undefined) && parseFloat(numberInputVal + step) >= max) {
+      if (form_js_typeof(max) != ( true ? "undefined" : undefined) && parseFloat(numberInputVal + step) > max) {
         step = 0;
       }
 

@@ -9,6 +9,7 @@
  * @return {Function}                        - Return a callback function.
  */
 ( function ( $ ) {
+    'use strict';
     $.fn.UixSearchJsonStr = function( options ) {
  
         // This is the easiest way to have default options.
