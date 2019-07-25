@@ -22,7 +22,7 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 	
 	
     module.AJAX_PUSH_CONTENT               = module.AJAX_PUSH_CONTENT || {};
-    module.AJAX_PUSH_CONTENT.version       = '0.0.7';
+    module.AJAX_PUSH_CONTENT.version       = '0.0.8';
     module.AJAX_PUSH_CONTENT.documentReady = function( $ ) {
 
 		
@@ -37,7 +37,7 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 		
 		
 		//Click event
-		$( document ).on( 'click', '[data-ajax-push-content]', function( event ) {
+		$( document ).off( 'click.AJAX_PUSH_CONTENT' ).on( 'click.AJAX_PUSH_CONTENT', '[data-ajax-push-content]', function( event ) {
 			
 			event.preventDefault();
 			

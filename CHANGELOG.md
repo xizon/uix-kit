@@ -1,5 +1,13 @@
 # Changelog
 
+
+#### = 3.7.1 (July 24, 2019) =
+
+* Fix: Fixed a bug for AJAX load posts.
+* Fix: Fixed a bug of click events firing multiple times with AJAX request.
+
+
+
 #### = 3.7.0 (July 21, 2019) =
 
 * Tweak: Custom functions introduce JavaScript's strict mode, for ease of use when leaving the development mode.

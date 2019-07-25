@@ -23,7 +23,7 @@ export const VIDEOS = ( ( module, $, window, document ) => {
 	
 	
 	module.VIDEOS               = module.VIDEOS || {};
-    module.VIDEOS.version       = '0.1.0';
+    module.VIDEOS.version       = '0.1.1';
 	module.VIDEOS.documentReady = function( $ ) {
 
 		var $window      = $( window ),
@@ -293,7 +293,7 @@ export const VIDEOS = ( ( module, $, window, document ) => {
 		
 		
 		//Check out: http://docs.videojs.com/tutorial-player-workflows.html
-		$( document ).on( 'click', modalDialogTrigger, function() {
+		$( document ).off( 'click.VIDEOS' ).on( 'click.VIDEOS', modalDialogTrigger, function() {
 
 			var vid          = $( this ).data( 'modal-id' ) + '--videopush',
 				$ifm         = false,
@@ -504,7 +504,7 @@ export const VIDEOS = ( ( module, $, window, document ) => {
 			
 			
 			/* ---------  Close the modal  */
-			$( document ).on( 'click', '.uix-modal-box [data-modal-close-trigger], .uix-modal-mask:not(.js-uix-disabled)', function() {
+			$( document ).off( 'click.VIDEOS_CLOSE' ).on( 'click.VIDEOS_CLOSE', '.uix-modal-box [data-modal-close-trigger], .uix-modal-mask:not(.js-uix-disabled)', function() {
 
 				myPlayer.ready(function() {
 					this.pause();

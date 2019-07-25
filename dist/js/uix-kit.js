@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
- * ## Version             :  3.7.0
+ * ## Version             :  3.7.1
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  July 22, 2019
+ * ## Last Update         :  July 25, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "4db37629cc9416392e90";
+/******/ 	var hotCurrentHash = "e21bb2c5f64fb56e27b4";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -955,7 +955,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         }
       }); //Show/Hide Selector
 
-      $(document).on('click', settings.trigger, function (e) {
+      $(document).off('click.FORM_CUSTOM_SELECT').on('click.FORM_CUSTOM_SELECT', settings.trigger, function (e) {
         e.preventDefault();
         var $selectWrapper = $(this).closest(settings.targetWrapper),
             $selectCurWrapper = $selectWrapper.find(settings.selector + '.js-uix-new');
@@ -974,8 +974,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       }); //Change Event Here
       //Prevents the triggering of multiple change events
 
-      $(document).off('click.FORM_SELECT');
-      $(document).on('click.FORM_SELECT', settings.item, function (e) {
+      $(document).off('click.FORM_CUSTOM_SELECT_ITEM').on('click.FORM_CUSTOM_SELECT_ITEM', settings.item, function (e) {
         e.preventDefault();
         var $selectWrapper = $(this).closest(settings.targetWrapper),
             $selectCurWrapper = $selectWrapper.find(settings.selector + '.js-uix-new'),
@@ -4235,7 +4234,7 @@ function videos_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.
 var VIDEOS = function (module, $, window, document) {
   if (window.VIDEOS === null) return false;
   module.VIDEOS = module.VIDEOS || {};
-  module.VIDEOS.version = '0.1.0';
+  module.VIDEOS.version = '0.1.1';
 
   module.VIDEOS.documentReady = function ($) {
     var $window = $(window),
@@ -4448,7 +4447,7 @@ var VIDEOS = function (module, $, window, document) {
       }
     }); //Check out: http://docs.videojs.com/tutorial-player-workflows.html
 
-    $(document).on('click', modalDialogTrigger, function () {
+    $(document).off('click.VIDEOS').on('click.VIDEOS', modalDialogTrigger, function () {
       var vid = $(this).data('modal-id') + '--videopush',
           $ifm = false,
           newMaxW = windowWidth - 80,
@@ -4604,7 +4603,7 @@ var VIDEOS = function (module, $, window, document) {
       /* ---------  Close the modal  */
 
 
-      $(document).on('click', '.uix-modal-box [data-modal-close-trigger], .uix-modal-mask:not(.js-uix-disabled)', function () {
+      $(document).off('click.VIDEOS_CLOSE').on('click.VIDEOS_CLOSE', '.uix-modal-box [data-modal-close-trigger], .uix-modal-mask:not(.js-uix-disabled)', function () {
         myPlayer.ready(function () {
           this.pause();
         });
@@ -7598,7 +7597,7 @@ function AJAX_push_js_typeof(obj) { if (typeof Symbol === "function" && typeof S
 var AJAX_PUSH_CONTENT = function (module, $, window, document) {
   if (window.AJAX_PUSH_CONTENT === null) return false;
   module.AJAX_PUSH_CONTENT = module.AJAX_PUSH_CONTENT || {};
-  module.AJAX_PUSH_CONTENT.version = '0.0.7';
+  module.AJAX_PUSH_CONTENT.version = '0.0.8';
 
   module.AJAX_PUSH_CONTENT.documentReady = function ($) {
     /* Need to set it as a global variable for history */
@@ -7610,7 +7609,7 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
     },
         thisPageTitle = document.title; //Click event
 
-    $(document).on('click', '[data-ajax-push-content]', function (event) {
+    $(document).off('click.AJAX_PUSH_CONTENT').on('click.AJAX_PUSH_CONTENT', '[data-ajax-push-content]', function (event) {
       event.preventDefault();
       var $this = $(this),
           curURL = $this.attr('href'),
@@ -7800,7 +7799,7 @@ function AJAX_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol
 var AJAX_PAGE_LOADER = function (module, $, window, document) {
   if (window.AJAX_PAGE_LOADER === null) return false;
   module.AJAX_PAGE_LOADER = module.AJAX_PAGE_LOADER || {};
-  module.AJAX_PAGE_LOADER.version = '0.0.8';
+  module.AJAX_PAGE_LOADER.version = '0.0.9';
 
   module.AJAX_PAGE_LOADER.documentReady = function ($) {
     var $window = $(window),
@@ -7870,7 +7869,7 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
      *
      */
 
-    $(document).on('click', AJAXPageLinks, function (e) {
+    $(document).off('click.AJAX_PAGE_LOADER').on('click.AJAX_PAGE_LOADER', AJAXPageLinks, function (e) {
       //Prevents third-party plug-ins from triggering
       if ($(this).data('mobile-running')) {
         return;
@@ -8394,18 +8393,18 @@ function dropdown_menu_js_typeof(obj) { if (typeof Symbol === "function" && type
 var DROPDOWN_MENU = function (module, $, window, document) {
   if (window.DROPDOWN_MENU === null) return false;
   module.DROPDOWN_MENU = module.DROPDOWN_MENU || {};
-  module.DROPDOWN_MENU.version = '0.0.2';
+  module.DROPDOWN_MENU.version = '0.0.4';
 
   module.DROPDOWN_MENU.documentReady = function ($) {
     //Create a trigger of Dropdown Menu on Click
     //Use $( document ) to support other click events for ajax
-    $(document).on('click', '.uix-dropdown-menu > label', function (e) {
+    $(document).off('click.DROPDOWN_MENU').on('click.DROPDOWN_MENU', '.uix-dropdown-menu > label', function (e) {
       // stop propagation of this event, it will never reach body in bubbling phase.
       e.stopPropagation();
       var $this = $(this).parent('.uix-dropdown-menu');
       $this.toggleClass('is-opened');
     });
-    $(document).on('click', '.uix-dropdown-menu li a', function (e) {
+    $(document).off('click.DROPDOWN_MENU_LINK').on('click.DROPDOWN_MENU_LINK', '.uix-dropdown-menu li a', function (e) {
       // stop propagation of this event, it will never reach body in bubbling phase.
       e.stopPropagation();
       var $this = $(this).closest('.uix-dropdown-menu');
@@ -8541,7 +8540,7 @@ function dynamic_dropdown_list_json_js_typeof(obj) { if (typeof Symbol === "func
 var DYNAMIC_DD_LIST = function (module, $, window, document) {
   if (window.DYNAMIC_DD_LIST === null) return false;
   module.DYNAMIC_DD_LIST = module.DYNAMIC_DD_LIST || {};
-  module.DYNAMIC_DD_LIST.version = '0.0.5';
+  module.DYNAMIC_DD_LIST.version = '0.0.6';
 
   module.DYNAMIC_DD_LIST.documentReady = function ($) {
     $('[data-ajax-dynamic-dd-json]').each(function () {
@@ -8747,14 +8746,17 @@ var DYNAMIC_DD_LIST = function (module, $, window, document) {
                 $level3El.append(level3EmptyOption);
 
                 if (dynamic_dropdown_list_json_js_typeof(curLevel2Index) != ( true ? "undefined" : undefined)) {
-                  for (var i = 0; i < allLevel3Items[curLevel1Index - 1][curLevel2Index - 1].length; i++) {
-                    var _v = allLevel3Items[curLevel1Index - 1][curLevel2Index - 1][i],
-                        _id = allLevel3IDs[curLevel1Index - 1][curLevel2Index - 1][i];
+                  //If the data exists, you need to determine if the array is empty.
+                  if (allLevel3Items[curLevel1Index - 1].length > 0) {
+                    for (var i = 0; i < allLevel3Items[curLevel1Index - 1][curLevel2Index - 1].length; i++) {
+                      var _v = allLevel3Items[curLevel1Index - 1][curLevel2Index - 1][i],
+                          _id = allLevel3IDs[curLevel1Index - 1][curLevel2Index - 1][i];
 
-                    if (defaultLevel3Val == _v) {
-                      $level3El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "' selected>" + _v + "</option>");
-                    } else {
-                      $level3El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
+                      if (defaultLevel3Val == _v) {
+                        $level3El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "' selected>" + _v + "</option>");
+                      } else {
+                        $level3El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
+                      }
                     }
                   }
                 } //---------- Render the custom select
@@ -9745,7 +9747,7 @@ function form_progress_js_typeof(obj) { if (typeof Symbol === "function" && type
 var FORM_PROGRESS = function (module, $, window, document) {
   if (window.FORM_PROGRESS === null) return false;
   module.FORM_PROGRESS = module.FORM_PROGRESS || {};
-  module.FORM_PROGRESS.version = '0.0.2';
+  module.FORM_PROGRESS.version = '0.0.3';
 
   module.FORM_PROGRESS.pageLoaded = function () {
     var $progressBar = $('.uix-form-progress progress'),
@@ -9774,7 +9776,7 @@ var FORM_PROGRESS = function (module, $, window, document) {
       $formTarget.addClass('is-active');
     }, parseFloat(dur) * 1000); // Show next form on continue click
 
-    $(document).on('click', '.uix-form-progress__target .go-step:not(.disable)', function (e) {
+    $(document).off('click.FORM_PROGRESS').on('click.FORM_PROGRESS', '.uix-form-progress__target .go-step:not(.disable)', function (e) {
       e.preventDefault();
       var $sections = $(this).parents('.uix-form-progress__target__step');
       $(document).UixFormProgressToNext({
@@ -9793,7 +9795,7 @@ var FORM_PROGRESS = function (module, $, window, document) {
       });
     }); // Reset form on reset button click
 
-    $(document).on('click', '.uix-form-progress__target .go-reset', function (e) {
+    $(document).off('click.FORM_PROGRESS_RESET').on('click.FORM_PROGRESS_RESET', '.uix-form-progress__target .go-reset', function (e) {
       e.preventDefault();
       formReset();
     });
@@ -9907,7 +9909,7 @@ function form_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol
 var FORM = function (module, $, window, document) {
   if (window.FORM === null) return false;
   module.FORM = module.FORM || {};
-  module.FORM.version = '0.1.4';
+  module.FORM.version = '0.1.5';
 
   module.FORM.documentReady = function ($) {
     /*
@@ -10000,8 +10002,7 @@ var FORM = function (module, $, window, document) {
       }); //Remove per item
       //Prevent duplicate function assigned
 
-      $(removeButton).off('click');
-      $(document).on('click', removeButton, function (e) {
+      $(document).off('click.FORM_DYNAMIC_FIELDS').on('click.FORM_DYNAMIC_FIELDS', removeButton, function (e) {
         e.preventDefault(); //display add button
 
         $addButton.show();
@@ -10023,7 +10024,7 @@ var FORM = function (module, $, window, document) {
      ---------------------------
      */
 
-    $(document).on('click', '.uix-controls__number__btn--add', function (e) {
+    $(document).off('click.FORM_NUMBER_BTN_ADD').on('click.FORM_NUMBER_BTN_ADD', '.uix-controls__number__btn--add', function (e) {
       var step = parseFloat($(this).data('step')),
           decimals = $(this).data('decimals'),
           $numberInput = $(this).closest('.uix-controls__number').find('input[type="number"]'),
@@ -10039,7 +10040,7 @@ var FORM = function (module, $, window, document) {
       numberInputVal = parseFloat(numberInputVal + step);
       $numberInput.val(numberInputVal.toFixed(decimals));
     });
-    $(document).on('click', '.uix-controls__number__btn--remove', function (e) {
+    $(document).off('click.FORM_NUMBER_BTN_REMOVE').on('click.FORM_NUMBER_BTN_REMOVE', '.uix-controls__number__btn--remove', function (e) {
       var step = $(this).data('step'),
           decimals = $(this).data('decimals'),
           $numberInput = $(this).closest('.uix-controls__number').find('input[type="number"]'),
@@ -10063,7 +10064,7 @@ var FORM = function (module, $, window, document) {
 
     var multiSel = '.uix-controls__multi-sel',
         multiSelItem = multiSel + ' > span';
-    $(document).on('click', multiSelItem, function (e) {
+    $(document).off('click.FORM_MULTI_SEL').on('click.FORM_MULTI_SEL', multiSelItem, function (e) {
       e.preventDefault();
       var $selector = $(this).parent(),
           $option = $(this),
@@ -10128,7 +10129,7 @@ var FORM = function (module, $, window, document) {
     };
 
     hideAllSingleSelItems($(singleSel));
-    $(document).on('click', singleSelItem, function (e) {
+    $(document).off('click.FORM_SINGLE_SEL').on('click.FORM_SINGLE_SEL', singleSelItem, function (e) {
       e.preventDefault();
       var $selector = $(this).parent(),
           $option = $(this),
@@ -10190,7 +10191,7 @@ var FORM = function (module, $, window, document) {
     };
 
     hideAllNormalRadioItems($(normalRadio));
-    $(document).on('click', normalRadioItem, function (e) {
+    $(document).off('click.FORM_NORMAL_RADIO').on('click.FORM_NORMAL_RADIO', normalRadioItem, function (e) {
       e.preventDefault();
       var $selector = $(this).parent(),
           $option = $(this),
@@ -10606,7 +10607,7 @@ function lightbox_js_typeof(obj) { if (typeof Symbol === "function" && typeof Sy
 var LIGHTBOX = function (module, $, window, document) {
   if (window.LIGHTBOX === null) return false;
   module.LIGHTBOX = module.LIGHTBOX || {};
-  module.LIGHTBOX.version = '0.1.4';
+  module.LIGHTBOX.version = '0.1.5';
 
   module.LIGHTBOX.pageLoaded = function () {
     if ($('.uix-lightbox__container').length == 0) {
@@ -10640,7 +10641,7 @@ var LIGHTBOX = function (module, $, window, document) {
         lightboxClose(backURL);
       }
     });
-    $(document).on('click', triggerEl, function () {
+    $(document).off('click.LIGHTBOX_TRIGGER').on('click.LIGHTBOX_TRIGGER', triggerEl, function () {
       var $this = $(this),
           dataPhoto = $this.data('lb-src'),
           dataHtmlID = $this.data('lb-html'),
@@ -10921,13 +10922,13 @@ var LIGHTBOX = function (module, $, window, document) {
     /* end click event for triggerEl */
     //Close the lightbox
 
-    $(document).on('click', closeEl + ',' + maskEl, function () {
+    $(document).off('click.LIGHTBOX_CLOSE').on('click.LIGHTBOX_CLOSE', closeEl + ',' + maskEl, function () {
       lightboxClose(docURL);
     });
-    $(document).on('click', '.uix-lightbox__thumb-container li', function () {
+    $(document).off('click.LIGHTBOX_THUMB').on('click.LIGHTBOX_THUMB', '.uix-lightbox__thumb-container li', function () {
       lightboxThumbSwitch($(this).index(), $(this));
     });
-    $(document).on('click', '.uix-lightbox__photo-sets-container > a', function () {
+    $(document).off('click.LIGHTBOX_PHOTO_SETS').on('click.LIGHTBOX_PHOTO_SETS', '.uix-lightbox__photo-sets-container > a', function () {
       var $largePhoto = $(this).closest('.uix-lightbox__html').find('.uix-lightbox__photo-container.uix-lightbox__photo-sets-container'),
           $thumb = $(this).closest('.uix-lightbox__html').find('.uix-lightbox__thumb-container li'),
           total = $thumb.length,
@@ -10947,7 +10948,7 @@ var LIGHTBOX = function (module, $, window, document) {
     }); //Close/Open enlarge image
 
     if (window.innerWidth > 768) {
-      $(document).on('click', '.uix-lightbox__original__link', function (e) {
+      $(document).off('click.LIGHTBOX_ORGINAL_LINK').on('click.LIGHTBOX_ORGINAL_LINK', '.uix-lightbox__original__link', function (e) {
         $('.uix-lightbox__original__target#' + $(this).data('target-id')).addClass('is-active');
 
         if ($(this).closest('.uix-lightbox__container.js-uix-no-fixed').length > 0) {
@@ -10958,7 +10959,7 @@ var LIGHTBOX = function (module, $, window, document) {
         $('html').css('overflow-y', 'hidden');
         $(largeImgCloseEl).addClass('is-active');
       });
-      $(document).on('click', largeImgCloseEl, function (e) {
+      $(document).off('click.LIGHTBOX_LARGE_IMG_CLOSE').on('click.LIGHTBOX_LARGE_IMG_CLOSE', largeImgCloseEl, function (e) {
         $('.uix-lightbox__original__target').removeClass('is-active');
         $('.uix-lightbox__container.js-uix-no-fixed, .uix-lightbox__original__target--imgfull').removeClass('no-fixed-imgEnlarged'); //---
 
@@ -11241,7 +11242,7 @@ var POST_LIST_AJAX = function (module, $, window, document) {
             defaultPostData = JSON.parse('{ "' + pageParmStr.totalPage + '": ' + totalPage + ', "' + pageParmStr.displayPerPage + '": ' + perShow + ', "' + pageParmStr.currentPage + '": 1 }');
           }
 
-          ajaxLoadInit($this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, render, noneInfo);
+          ajaxLoadInit($this, defaultPostData, $(trigger), curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, render, noneInfo);
         }
 
         if (infinitescroll) {
@@ -11654,7 +11655,7 @@ function modal_dialog_js_typeof(obj) { if (typeof Symbol === "function" && typeo
 var MODAL_DIALOG = function (module, $, window, document) {
   if (window.MODAL_DIALOG === null) return false;
   module.MODAL_DIALOG = module.MODAL_DIALOG || {};
-  module.MODAL_DIALOG.version = '0.1.1';
+  module.MODAL_DIALOG.version = '0.1.2';
 
   module.MODAL_DIALOG.documentReady = function ($) {
     //Delay Time when Full Screen Effect is fired.
@@ -11673,7 +11674,7 @@ var MODAL_DIALOG = function (module, $, window, document) {
       $('body').prepend('<div class="uix-modal-mask"></div>');
     }
 
-    $(document).on('click.MODAL_DIALOG', '[data-modal-id]', function () {
+    $(document).off('click.MODAL_DIALOG').on('click.MODAL_DIALOG', '[data-modal-id]', function () {
       var dataH = $(this).data('modal-height'),
           dataW = $(this).data('modal-width'),
           lightbox = $(this).data('modal-lightbox'),
@@ -11712,7 +11713,7 @@ var MODAL_DIALOG = function (module, $, window, document) {
       });
       return false;
     });
-    $(document).on('click.MODAL_DIALOG_CLOSE', '.uix-modal-box [data-modal-close-trigger], .uix-modal-mask:not(.js-uix-disabled)', function () {
+    $(document).off('click.MODAL_DIALOG_CLOSE').on('click.MODAL_DIALOG_CLOSE', '.uix-modal-box [data-modal-close-trigger], .uix-modal-mask:not(.js-uix-disabled)', function () {
       //btn
       if ($(this).hasClass('uix-modal-box__close')) {
         $(this).parent().removeClass('is-active');
@@ -14544,11 +14545,11 @@ function china_classCallCheck(instance, Constructor) { if (!(instance instanceof
 var SVG_MAP_CHINA = function (module, $, window, document) {
   if (window.SVG_MAP_CHINA === null) return false;
   module.SVG_MAP_CHINA = module.SVG_MAP_CHINA || {};
-  module.SVG_MAP_CHINA.version = '0.0.1';
+  module.SVG_MAP_CHINA.version = '0.0.2';
 
   module.SVG_MAP_CHINA.documentReady = function ($) {
     var $svgEl = $('.uix-svgmap--china');
-    $(document).on('click', '.uix-svgmap--china__trigger a', function (e) {
+    $(document).off('click.SVG_MAP_CHINA').on('click.SVG_MAP_CHINA', '.uix-svgmap--china__trigger a', function (e) {
       // stop propagation of this event, it will never reach body in bubbling phase.
       e.stopPropagation();
       var goName = $(this).data('title'),
@@ -14637,11 +14638,11 @@ function world_classCallCheck(instance, Constructor) { if (!(instance instanceof
 var SVG_MAP_WORLD = function (module, $, window, document) {
   if (window.SVG_MAP_WORLD === null) return false;
   module.SVG_MAP_WORLD = module.SVG_MAP_WORLD || {};
-  module.SVG_MAP_WORLD.version = '0.0.1';
+  module.SVG_MAP_WORLD.version = '0.0.2';
 
   module.SVG_MAP_WORLD.documentReady = function ($) {
     var $svgEl = $('.uix-svgmap--world');
-    $(document).on('click', '.uix-svgmap--world__trigger a', function (e) {
+    $(document).off('click.SVG_MAP_WORLD').on('click.SVG_MAP_WORLD', '.uix-svgmap--world__trigger a', function (e) {
       // stop propagation of this event, it will never reach body in bubbling phase.
       e.stopPropagation();
       var goName = $(this).data('title'),
@@ -19273,7 +19274,7 @@ function team_focus_js_typeof(obj) { if (typeof Symbol === "function" && typeof 
 var TEAM_FOCUS = function (module, $, window, document) {
   if (window.TEAM_FOCUS === null) return false;
   module.TEAM_FOCUS = module.TEAM_FOCUS || {};
-  module.TEAM_FOCUS.version = '0.0.2';
+  module.TEAM_FOCUS.version = '0.0.3';
 
   module.TEAM_FOCUS.documentReady = function ($) {
     var teamFocusContent = '.uix-team-focus',
@@ -19328,7 +19329,7 @@ var TEAM_FOCUS = function (module, $, window, document) {
         });
       }); //Display the target item
 
-      $(document).on('click', el, function (e) {
+      $(document).off('click.TEAM_FOCUS').on('click.TEAM_FOCUS', el, function (e) {
         e.preventDefault();
         var $cur = $(this),
             $neighbor = $cur.siblings(),
@@ -19380,7 +19381,7 @@ var TEAM_FOCUS = function (module, $, window, document) {
         }
       }); //Close the focus item
 
-      $(document).on('click', el + '.focus, ' + closeBtn + ', ' + targetInfo + ', ' + teamFocusMask, function (e) {
+      $(document).off('click.TEAM_FOCUS_CLOSE').on('click.TEAM_FOCUS_CLOSE', el + '.focus, ' + closeBtn + ', ' + targetInfo + ', ' + teamFocusMask, function (e) {
         e.preventDefault(); //Remove the mask
 
         $(teamFocusMask).hide();

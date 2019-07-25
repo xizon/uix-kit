@@ -24,14 +24,14 @@ export const SVG_MAP_WORLD = ( ( module, $, window, document ) => {
 	
 	
     module.SVG_MAP_WORLD               = module.SVG_MAP_WORLD || {};
-    module.SVG_MAP_WORLD.version       = '0.0.1';
+    module.SVG_MAP_WORLD.version       = '0.0.2';
     module.SVG_MAP_WORLD.documentReady = function( $ ) {
 
 
 		var $svgEl = $( '.uix-svgmap--world' );
 		
 
-		$( document ).on( 'click', '.uix-svgmap--world__trigger a', function( e ) {
+		$( document ).off( 'click.SVG_MAP_WORLD' ).on( 'click.SVG_MAP_WORLD', '.uix-svgmap--world__trigger a', function( e ) {
 			
 			// stop propagation of this event, it will never reach body in bubbling phase.
 			e.stopPropagation();

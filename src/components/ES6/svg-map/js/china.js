@@ -25,14 +25,14 @@ export const SVG_MAP_CHINA = ( ( module, $, window, document ) => {
 	
 	
     module.SVG_MAP_CHINA               = module.SVG_MAP_CHINA || {};
-    module.SVG_MAP_CHINA.version       = '0.0.1';
+    module.SVG_MAP_CHINA.version       = '0.0.2';
     module.SVG_MAP_CHINA.documentReady = function( $ ) {
 
 
 		
 		var $svgEl = $( '.uix-svgmap--china' );
 		
-		$( document ).on( 'click', '.uix-svgmap--china__trigger a', function( e ) {
+		$( document ).off( 'click.SVG_MAP_CHINA' ).on( 'click.SVG_MAP_CHINA', '.uix-svgmap--china__trigger a', function( e ) {
 			
 			// stop propagation of this event, it will never reach body in bubbling phase.
 			e.stopPropagation();

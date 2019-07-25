@@ -35,7 +35,7 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 	
 	
     module.LIGHTBOX               = module.LIGHTBOX || {};
-    module.LIGHTBOX.version       = '0.1.4';
+    module.LIGHTBOX.version       = '0.1.5';
     module.LIGHTBOX.pageLoaded    = function() {
 
 		if ( $( '.uix-lightbox__container' ).length == 0 ) {
@@ -83,7 +83,7 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 		
 		
 		
-		$( document ).on( 'click', triggerEl, function() { 
+		$( document ).off( 'click.LIGHTBOX_TRIGGER' ).on( 'click.LIGHTBOX_TRIGGER', triggerEl, function() { 
 
 			var $this         = $( this ),
 				dataPhoto     = $this.data( 'lb-src' ),
@@ -480,20 +480,20 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 
 		
 		//Close the lightbox
-		$( document ).on( 'click', closeEl + ',' + maskEl, function() {
+		$( document ).off( 'click.LIGHTBOX_CLOSE' ).on( 'click.LIGHTBOX_CLOSE', closeEl + ',' + maskEl, function() {
 			lightboxClose( docURL );
 		});	
 		
 
 		
-		$( document ).on( 'click', '.uix-lightbox__thumb-container li', function() {
+		$( document ).off( 'click.LIGHTBOX_THUMB' ).on( 'click.LIGHTBOX_THUMB', '.uix-lightbox__thumb-container li', function() {
 			lightboxThumbSwitch( $( this ).index(), $( this ) );
 			
 		});		
 		
 		
 		
-		$( document ).on( 'click', '.uix-lightbox__photo-sets-container > a', function() {
+		$( document ).off( 'click.LIGHTBOX_PHOTO_SETS' ).on( 'click.LIGHTBOX_PHOTO_SETS', '.uix-lightbox__photo-sets-container > a', function() {
 			var $largePhoto = $( this ).closest( '.uix-lightbox__html' ).find( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' ),
 				$thumb      = $( this ).closest( '.uix-lightbox__html' ).find( '.uix-lightbox__thumb-container li' ),
 				total       = $thumb.length,
@@ -521,7 +521,7 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 		//Close/Open enlarge image
 		if ( window.innerWidth > 768 ) {
 
-			$( document ).on( 'click', '.uix-lightbox__original__link', function( e ) {
+			$( document ).off( 'click.LIGHTBOX_ORGINAL_LINK' ).on( 'click.LIGHTBOX_ORGINAL_LINK', '.uix-lightbox__original__link', function( e ) {
 
 				$( '.uix-lightbox__original__target#' + $( this ).data( 'target-id' ) ).addClass( 'is-active' );
 
@@ -537,7 +537,7 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 
 			});	
 
-			$( document ).on( 'click', largeImgCloseEl, function( e ) {
+			$( document ).off( 'click.LIGHTBOX_LARGE_IMG_CLOSE' ).on( 'click.LIGHTBOX_LARGE_IMG_CLOSE', largeImgCloseEl, function( e ) {
 
 				$( '.uix-lightbox__original__target' ).removeClass( 'is-active' );
 				$( '.uix-lightbox__container.js-uix-no-fixed, .uix-lightbox__original__target--imgfull' ).removeClass( 'no-fixed-imgEnlarged' );

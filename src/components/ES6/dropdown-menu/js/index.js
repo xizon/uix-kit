@@ -25,12 +25,12 @@ export const DROPDOWN_MENU = ( ( module, $, window, document ) => {
 	
 	
     module.DROPDOWN_MENU               = module.DROPDOWN_MENU || {};
-    module.DROPDOWN_MENU.version       = '0.0.2';
+    module.DROPDOWN_MENU.version       = '0.0.4';
     module.DROPDOWN_MENU.documentReady = function( $ ) {
 
 		//Create a trigger of Dropdown Menu on Click
 		//Use $( document ) to support other click events for ajax
-		$( document ).on( 'click', '.uix-dropdown-menu > label', function( e ) {
+		$( document ).off( 'click.DROPDOWN_MENU' ).on( 'click.DROPDOWN_MENU', '.uix-dropdown-menu > label', function( e ) {
 		
 			// stop propagation of this event, it will never reach body in bubbling phase.
 			e.stopPropagation();
@@ -41,7 +41,7 @@ export const DROPDOWN_MENU = ( ( module, $, window, document ) => {
 
 		});	
 
-		$( document ).on( 'click', '.uix-dropdown-menu li a', function( e ) {
+		$( document ).off( 'click.DROPDOWN_MENU_LINK' ).on( 'click.DROPDOWN_MENU_LINK', '.uix-dropdown-menu li a', function( e ) {
 			
 			// stop propagation of this event, it will never reach body in bubbling phase.
 			e.stopPropagation();

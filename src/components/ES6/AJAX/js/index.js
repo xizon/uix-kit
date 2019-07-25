@@ -25,7 +25,7 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 	
 	
     module.AJAX_PAGE_LOADER               = module.AJAX_PAGE_LOADER || {};
-    module.AJAX_PAGE_LOADER.version       = '0.0.8';
+    module.AJAX_PAGE_LOADER.version       = '0.0.9';
     module.AJAX_PAGE_LOADER.documentReady = function( $ ) {
 
         var $window                  = $( window ),
@@ -109,7 +109,7 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 		 * Call AJAX on click event for "single pages links"
 		 *
 		 */
-		$( document ).on( 'click', AJAXPageLinks, function( e ) {
+		$( document ).off( 'click.AJAX_PAGE_LOADER' ).on( 'click.AJAX_PAGE_LOADER', AJAXPageLinks, function( e ) {
 			
 			//Prevents third-party plug-ins from triggering
 			if ( $( this ).data( 'mobile-running' ) ) {

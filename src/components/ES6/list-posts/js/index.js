@@ -171,7 +171,7 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 					}
 
 
-					ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, render, noneInfo );
+					ajaxLoadInit( $this, defaultPostData, $( trigger ), curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, render, noneInfo );
 				}
 				
 				
