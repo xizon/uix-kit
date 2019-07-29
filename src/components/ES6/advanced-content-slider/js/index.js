@@ -31,7 +31,7 @@ export const ADVANCED_CONTENT_SLIDER = ( ( module, $, window, document ) => {
 	
 	
     module.ADVANCED_CONTENT_SLIDER               = module.ADVANCED_CONTENT_SLIDER || {};
-    module.ADVANCED_CONTENT_SLIDER.version       = '0.0.3';
+    module.ADVANCED_CONTENT_SLIDER.version       = '0.0.4';
     module.ADVANCED_CONTENT_SLIDER.documentReady = function( $ ) {
 
 		var $window                   = $( window ),
@@ -130,7 +130,7 @@ export const ADVANCED_CONTENT_SLIDER = ( ( module, $, window, document ) => {
 				}
 
 
-				$( dataControlsPagination ).find( 'li a' ).on( 'click', function( e ) {
+				$( dataControlsPagination ).find( 'li a' ).off( 'click' ).on( 'click', function( e ) {
 					e.preventDefault();
 
 					if ( !$( this ).hasClass( 'is-active' ) ) {
@@ -160,7 +160,7 @@ export const ADVANCED_CONTENT_SLIDER = ( ( module, $, window, document ) => {
 				
 				_prev.addClass( 'is-disabled' );
 
-				_prev.on( 'click', function( e ) {
+				_prev.off( 'click' ).on( 'click', function( e ) {
 					e.preventDefault();
 
 					sliderUpdates( parseFloat( $items.filter( '.is-active' ).index() ) - 1, $this, dataControlsArrows, dataControlsPagination );
@@ -171,7 +171,7 @@ export const ADVANCED_CONTENT_SLIDER = ( ( module, $, window, document ) => {
 
 				});
 
-				_next.on( 'click', function( e ) {
+				_next.off( 'click' ).on( 'click', function( e ) {
 					e.preventDefault();
 
 					sliderUpdates( parseFloat( $items.filter( '.is-active' ).index() ) + 1, $this, dataControlsArrows, dataControlsPagination );

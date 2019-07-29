@@ -64,7 +64,8 @@ export const SVG_MAP_WORLD = ( ( module, $, window, document ) => {
 			
 			
 		//Restore all elements
-		$( 'body' ).on( 'click', function( e ) {
+        //Do not add off() to this
+		$( document.body ).on( 'click', function( e ) {
 			svgMapRestore(2);
 		});
 

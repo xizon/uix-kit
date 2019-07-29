@@ -1,5 +1,9 @@
 # Changelog
 
+#### = 3.7.2 (July 29, 2019) =
+
+* Tweak: Prevents the click event from being called repeatedly when an asynchronous event fires.
+
 
 #### = 3.7.1 (July 24, 2019) =
 

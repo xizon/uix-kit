@@ -35,7 +35,7 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 	
 	
     module.FLEXSLIDER               = module.FLEXSLIDER || {};
-    module.FLEXSLIDER.version       = '0.1.6';
+    module.FLEXSLIDER.version       = '0.1.7';
     module.FLEXSLIDER.documentReady = function( $ ) {
 
 		var $window            = $( window ),
@@ -172,7 +172,7 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 						if ( typeof nimg != typeof undefined ) $plinkNext.attr( 'data-goto', nextIndex ).find( '> span' ).html('<img src="'+nimg+'" alt="">');		
 
 
-						$plink.on( 'click', function( e ) {
+						$plink.off( 'click' ).off( 'click' ).on( 'click', function( e ) {
 							e.preventDefault();
 
 							thisSlider.flexslider( parseInt( $( this ).attr( 'data-goto' ) ) );
@@ -766,7 +766,7 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 		 */
         function initslidesWithNavThumb( slider, navThumbClass ) {
 
-				$( '.uix-flexslider__thumbs'+navThumbClass+' > ul > li' ).on( 'click', function() {
+				$( '.uix-flexslider__thumbs'+navThumbClass+' > ul > li' ).off( 'click' ).on( 'click', function() {
 
 					$( '.uix-flexslider__thumbs'+navThumbClass+' > ul > li' ).removeClass( 'is-active' );
 					$( this ).addClass( 'is-active' );

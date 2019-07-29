@@ -66,7 +66,8 @@ export const DROPDOWN_MENU = ( ( module, $, window, document ) => {
 
 
 		//Close the target
-		$( 'body' ).on( 'click', function( e ) {
+        //Do not add off() to this
+		$( document.body ).on( 'click', function( e ) {
 			
 			//Apply click method to outer div but not inner div
 			if ( ! $( e.target.offsetParent ).hasClass( 'uix-dropdown-menu' ) ) {

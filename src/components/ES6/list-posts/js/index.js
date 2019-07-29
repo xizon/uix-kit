@@ -38,7 +38,7 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 	
 	
     module.POST_LIST_AJAX               = module.POST_LIST_AJAX || {};
-    module.POST_LIST_AJAX.version       = '0.0.9';
+    module.POST_LIST_AJAX.version       = '0.1.0';
     module.POST_LIST_AJAX.documentReady = function( $ ) {
 
 		$( '[data-ajax-list-json]' ).each( function() {
@@ -265,7 +265,7 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 						}
 
 						//Avoid using $( document ) to cause an asynchronous load without counting from 1
-						$( nextTrigger ).on( 'click', function( e ) {
+						$( nextTrigger ).off( 'click' ).on( 'click', function( e ) {
 
 							e.preventDefault();
 
@@ -308,7 +308,7 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 						$( prevTrigger ).addClass( 'is-hide' );
 						
 						//Avoid using $( document ) to cause an asynchronous load without counting from 1
-						$( prevTrigger ).on( 'click', function( e ) {
+						$( prevTrigger ).off( 'click' ).on( 'click', function( e ) {
 
 							e.preventDefault();
 

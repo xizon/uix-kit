@@ -22,7 +22,7 @@ export const ROTATING_EL = ( ( module, $, window, document ) => {
 	
 	
     module.ROTATING_EL               = module.ROTATING_EL || {};
-    module.ROTATING_EL.version       = '0.0.1';
+    module.ROTATING_EL.version       = '0.0.2';
     module.ROTATING_EL.documentReady = function( $ ) {
 
 
@@ -76,7 +76,7 @@ export const ROTATING_EL = ( ( module, $, window, document ) => {
 				}
 
 				
-				$this.on( 'click', function( e ) {
+				$this.off( 'click' ).on( 'click', function( e ) {
 					e.preventDefault();
 
 					pointer.style.transform = 'rotate(' + config.deg + 'deg)';

@@ -25,7 +25,7 @@ export const ACCORDION = ( ( module, $, window, document ) => {
 	
 	
     module.ACCORDION               = module.ACCORDION || {};
-    module.ACCORDION.version       = '0.0.2';
+    module.ACCORDION.version       = '0.0.3';
     module.ACCORDION.documentReady = function( $ ) {
 
 		$( '.uix-accordion' ).each( function() {
@@ -61,7 +61,7 @@ export const ACCORDION = ( ( module, $, window, document ) => {
 			
 			
 
-			$li.on( aEvent, function( e ) {
+			$li.off( aEvent ).on( aEvent, function( e ) {
 				//Prevents further propagation of the current event in the capturing and bubbling phases.
 				e.stopPropagation();
 				

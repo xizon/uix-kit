@@ -25,7 +25,7 @@ export const ACCORDION_BG = ( ( module, $, window, document ) => {
 	
 	
     module.ACCORDION_BG               = module.ACCORDION_BG || {};
-    module.ACCORDION_BG.version       = '0.0.5';
+    module.ACCORDION_BG.version       = '0.0.6';
     module.ACCORDION_BG.documentReady = function( $ ) {
 		
 		
@@ -102,7 +102,7 @@ export const ACCORDION_BG = ( ( module, $, window, document ) => {
 			}
 			
 			if ( typeof closeBtn != typeof undefined && closeBtn != false && closeBtn != '' ) {
-				$( closeBtn ).on( 'click', function( e ) {
+				$( closeBtn ).off( 'click' ).on( 'click', function( e ) {
 					e.preventDefault();
 					itemInit();
 				}); 		

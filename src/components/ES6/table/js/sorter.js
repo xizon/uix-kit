@@ -25,7 +25,7 @@ export const TABLE_SORTER = ( ( module, $, window, document ) => {
 	
 	
     module.TABLE_SORTER               = module.TABLE_SORTER || {};
-    module.TABLE_SORTER.version       = '0.0.2';
+    module.TABLE_SORTER.version       = '0.0.3';
     module.TABLE_SORTER.documentReady = function( $ ) {
 
 		
@@ -44,7 +44,7 @@ export const TABLE_SORTER = ( ( module, $, window, document ) => {
 					thType  = $th.data( 'sort-type' ),
 					inverse = false;
 
-				$th.on( 'click', function() {
+				$th.off( 'click' ).on( 'click', function() {
 
 					$sortTable.find( 'tbody td' ).filter( function() {
 

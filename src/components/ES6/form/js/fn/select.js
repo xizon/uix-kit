@@ -83,7 +83,7 @@
 
 			});
 
-			
+			//Do not add off() to this
 			$( document.body ).on( 'click', function( e ) {
 				
 				if ( 

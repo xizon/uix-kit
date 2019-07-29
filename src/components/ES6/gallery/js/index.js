@@ -31,7 +31,7 @@ export const GALLERY = ( ( module, $, window, document ) => {
 	
 	
     module.GALLERY               = module.GALLERY || {};
-    module.GALLERY.version       = '0.0.3';
+    module.GALLERY.version       = '0.0.4';
     module.GALLERY.documentReady = function( $ ) {
 
 		$( '.uix-gallery' ).each( function() {
@@ -122,7 +122,7 @@ export const GALLERY = ( ( module, $, window, document ) => {
 				 ---------------------------
 				 */ 
 				if ( galleryType.indexOf( 'filter' ) >= 0 ) {
-					$filterOptions.find( 'li > a' ).on( 'click', function() {
+					$filterOptions.find( 'li > a' ).off( 'click' ).on( 'click', function() {
 						var $this       = $( this ),
 							activeClass = 'current-cat',
 							isActive    = $this.parent().hasClass( activeClass ),

@@ -21,7 +21,7 @@ export const SMOOTH_SCROLLING_ANCHORLINK = ( ( module, $, window, document ) => 
 	
 	
     module.SMOOTH_SCROLLING_ANCHORLINK               = module.SMOOTH_SCROLLING_ANCHORLINK || {};
-    module.SMOOTH_SCROLLING_ANCHORLINK.version       = '0.0.5';
+    module.SMOOTH_SCROLLING_ANCHORLINK.version       = '0.0.6';
     module.SMOOTH_SCROLLING_ANCHORLINK.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -31,6 +31,7 @@ export const SMOOTH_SCROLLING_ANCHORLINK = ( ( module, $, window, document ) => 
 		var browserURL = window.location.href;
 	
 		//Prevent anchor behaviour
+        //Do not add off() to this
 		$( 'a' ).on( 'click', function( e ) {
 			
 			if ( $( this ).data( 'smooth-scrolling' ) != false ) {
@@ -98,12 +99,14 @@ export const SMOOTH_SCROLLING_ANCHORLINK = ( ( module, $, window, document ) => 
 		
 		
 		//Hyperlink click event
+        //Do not add off() to this
 		$( 'a[href*="#"]' ).on( 'click', function( e ) {
 		
 			if ( 
 				location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && 
 				location.hostname == this.hostname &&
-				$( this ).attr( 'href' ) != '#'
+				$( this ).attr( 'href' ) != '#' &
+                $( this ).attr( 'href' ).indexOf( '#?' ) < 0
 				
 			) {
 				

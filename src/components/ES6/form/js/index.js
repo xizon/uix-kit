@@ -66,7 +66,7 @@ export const FORM = ( ( module, $, window, document ) => {
 	
 	
     module.FORM               = module.FORM || {};
-    module.FORM.version       = '0.1.5';
+    module.FORM.version       = '0.1.6';
     module.FORM.documentReady = function( $ ) {
 
 		
@@ -103,7 +103,7 @@ export const FORM = ( ( module, $, window, document ) => {
 		 ---------------------------
 		 */ 
 		//Search Submit Event in WordPress
-		$( '.uix-search-box__submit' ).on( 'click', function() {
+		$( '.uix-search-box__submit' ).off( 'click' ).on( 'click', function() {
 			$( this ).closest( 'form' ).submit();
 		});
 		
@@ -158,7 +158,7 @@ export const FORM = ( ( module, $, window, document ) => {
 
 
 			//Prevent duplicate function assigned
-			$addButton.off( 'click' ).on( 'click', function( e ) {
+			$addButton.off( 'click' ).off( 'click' ).on( 'click', function( e ) {
 				e.preventDefault();
 
 				addOne( $this.find( '.uix-controls__dynamic-fields__tmpl' ).html() );

@@ -26,7 +26,7 @@ export const TIMELINE = ( ( module, $, window, document ) => {
 	
 
     module.TIMELINE               = module.TIMELINE || {};
-    module.TIMELINE.version       = '0.1.5';
+    module.TIMELINE.version       = '0.1.6';
     module.TIMELINE.pageLoaded    = function() {
 
 		var $window          = $( window ),
@@ -54,19 +54,19 @@ export const TIMELINE = ( ( module, $, window, document ) => {
 		
 			
 
-				$this.find( '.uix-timeline__btn--prev' ).on( 'click', function( e ) {
+				$this.find( '.uix-timeline__btn--prev' ).off( 'click' ).on( 'click', function( e ) {
 					e.preventDefault();
 					timelineUpdate( $this, false, dateShowEle, true );
 					return false;
 				});
 
-				$this.find( '.uix-timeline__btn--next' ).on( 'click', function( e ) {
+				$this.find( '.uix-timeline__btn--next' ).off( 'click' ).on( 'click', function( e ) {
 					e.preventDefault();
 					timelineUpdate( $this, false, dateShowEle, false );
 					return false;
 				});
 
-				$this.find( '.uix-timeline__item .uix-timeline__item--img' ).on( 'click', function( e ) {
+				$this.find( '.uix-timeline__item .uix-timeline__item--img' ).off( 'click' ).on( 'click', function( e ) {
 					e.preventDefault();
 					timelineUpdate( $this, $( this ).parent(), dateShowEle, false );
 					return false;

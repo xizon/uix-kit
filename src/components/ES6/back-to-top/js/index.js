@@ -24,7 +24,7 @@ export const BACK_TO_TOP = ( ( module, $, window, document ) => {
 	
 	
     module.BACK_TO_TOP               = module.BACK_TO_TOP || {};
-    module.BACK_TO_TOP.version       = '0.0.3';
+    module.BACK_TO_TOP.version       = '0.0.4';
     module.BACK_TO_TOP.documentReady = function( $ ) {
 
 		
@@ -56,7 +56,7 @@ export const BACK_TO_TOP = ( ( module, $, window, document ) => {
 			
 
 			//-------- Click event of back button
-			$el.on( 'click', function( e ) {
+			$el.off( 'click' ).on( 'click', function( e ) {
 				e.preventDefault();
 
 				TweenMax.to( window, 0.5, {

@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
- * ## Version             :  3.7.1
+ * ## Version             :  3.7.2
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  July 25, 2019
+ * ## Last Update         :  July 29, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "e21bb2c5f64fb56e27b4";
+/******/ 	var hotCurrentHash = "dd0e459019976579e51c";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -960,7 +960,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         var $selectWrapper = $(this).closest(settings.targetWrapper),
             $selectCurWrapper = $selectWrapper.find(settings.selector + '.js-uix-new');
         $selectCurWrapper.addClass('is-opened');
-      });
+      }); //Do not add off() to this
+
       $(document.body).on('click', function (e) {
         if (e.target.className != '' && _typeof(e.target.className) != ( true ? "undefined" : undefined) && Object.prototype.toString.call(e.target.className) != '[object SVGAnimatedString]') {
           if (e.target.className.indexOf('uix-controls__select__option') < 0) {
@@ -1833,7 +1834,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         var $fileInput = $(this).find('input[type="file"]'),
             $fileBtn = $(this).find('.uix-controls__file-trigger'),
             $filePath = $(this).next('.uix-controls__file-return');
-        $fileBtn.on('click', function () {
+        $fileBtn.off('click').on('click', function () {
           $fileInput.focusin();
         });
         $fileInput.on('change', function () {
@@ -4680,7 +4681,7 @@ function js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iter
 var ACCORDION_BG = function (module, $, window, document) {
   if (window.ACCORDION_BG === null) return false;
   module.ACCORDION_BG = module.ACCORDION_BG || {};
-  module.ACCORDION_BG.version = '0.0.5';
+  module.ACCORDION_BG.version = '0.0.6';
 
   module.ACCORDION_BG.documentReady = function ($) {
     var $window = $(window),
@@ -4739,7 +4740,7 @@ var ACCORDION_BG = function (module, $, window, document) {
       }
 
       if (js_typeof(closeBtn) != ( true ? "undefined" : undefined) && closeBtn != false && closeBtn != '') {
-        $(closeBtn).on('click', function (e) {
+        $(closeBtn).off('click').on('click', function (e) {
           e.preventDefault();
           itemInit();
         });
@@ -4797,7 +4798,7 @@ function accordion_js_typeof(obj) { if (typeof Symbol === "function" && typeof S
 var ACCORDION = function (module, $, window, document) {
   if (window.ACCORDION === null) return false;
   module.ACCORDION = module.ACCORDION || {};
-  module.ACCORDION.version = '0.0.2';
+  module.ACCORDION.version = '0.0.3';
 
   module.ACCORDION.documentReady = function ($) {
     $('.uix-accordion').each(function () {
@@ -4832,7 +4833,7 @@ var ACCORDION = function (module, $, window, document) {
         openItem($li.first().find('dd'));
       }
 
-      $li.on(aEvent, function (e) {
+      $li.off(aEvent).on(aEvent, function (e) {
         //Prevents further propagation of the current event in the capturing and bubbling phases.
         e.stopPropagation(); //Its value is not a boolean but a string
 
@@ -4893,7 +4894,7 @@ function advanced_content_slider_js_typeof(obj) { if (typeof Symbol === "functio
 var ADVANCED_CONTENT_SLIDER = function (module, $, window, document) {
   if (window.ADVANCED_CONTENT_SLIDER === null) return false;
   module.ADVANCED_CONTENT_SLIDER = module.ADVANCED_CONTENT_SLIDER || {};
-  module.ADVANCED_CONTENT_SLIDER.version = '0.0.3';
+  module.ADVANCED_CONTENT_SLIDER.version = '0.0.4';
 
   module.ADVANCED_CONTENT_SLIDER.documentReady = function ($) {
     var $window = $(window),
@@ -4967,7 +4968,7 @@ var ADVANCED_CONTENT_SLIDER = function (module, $, window, document) {
           $(dataControlsPagination).find('li').first().addClass('is-active');
         }
 
-        $(dataControlsPagination).find('li a').on('click', function (e) {
+        $(dataControlsPagination).find('li a').off('click').on('click', function (e) {
           e.preventDefault();
 
           if (!$(this).hasClass('is-active')) {
@@ -4985,14 +4986,14 @@ var ADVANCED_CONTENT_SLIDER = function (module, $, window, document) {
 
         _prev.addClass('is-disabled');
 
-        _prev.on('click', function (e) {
+        _prev.off('click').on('click', function (e) {
           e.preventDefault();
           sliderUpdates(parseFloat($items.filter('.is-active').index()) - 1, $this, dataControlsArrows, dataControlsPagination); //Pause the auto play event
 
           clearInterval($this[0].animatedSlides);
         });
 
-        _next.on('click', function (e) {
+        _next.off('click').on('click', function (e) {
           e.preventDefault();
           sliderUpdates(parseFloat($items.filter('.is-active').index()) + 1, $this, dataControlsArrows, dataControlsPagination); //Pause the auto play event
 
@@ -5169,7 +5170,7 @@ function basic_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.i
 var ADVANCED_SLIDER = function (module, $, window, document) {
   if (window.ADVANCED_SLIDER === null) return false;
   module.ADVANCED_SLIDER = module.ADVANCED_SLIDER || {};
-  module.ADVANCED_SLIDER.version = '0.1.1';
+  module.ADVANCED_SLIDER.version = '0.1.3';
 
   module.ADVANCED_SLIDER.pageLoaded = function () {
     var $window = $(window),
@@ -5346,7 +5347,7 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
 
       _dot += '</ul>';
       if ($(dataControlsPagination).html() == '') $(dataControlsPagination).html(_dot);
-      $(dataControlsPagination).find('li a').on('click', function (e) {
+      $(dataControlsPagination).find('li a').off('click').on('click', function (e) {
         e.preventDefault();
 
         if (!$(this).hasClass('is-active')) {
@@ -5374,14 +5375,14 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
         _prev.addClass('is-disabled');
       }
 
-      _prev.on('click', function (e) {
+      _prev.off('click').on('click', function (e) {
         e.preventDefault();
         sliderUpdates(parseFloat($items.filter('.is-active').index()) - 1, $this, 'prev'); //Pause the auto play event
 
         clearInterval($this[0].animatedSlides);
       });
 
-      _next.on('click', function (e) {
+      _next.off('click').on('click', function (e) {
         e.preventDefault();
         sliderUpdates(parseFloat($items.filter('.is-active').index()) + 1, $this, 'next'); //Pause the auto play event
 
@@ -5805,7 +5806,7 @@ function special_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol
 var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
   if (window.ADVANCED_SLIDER_FILTER === null) return false;
   module.ADVANCED_SLIDER_FILTER = module.ADVANCED_SLIDER_FILTER || {};
-  module.ADVANCED_SLIDER_FILTER.version = '0.1.8';
+  module.ADVANCED_SLIDER_FILTER.version = '0.2.0';
 
   module.ADVANCED_SLIDER_FILTER.pageLoaded = function () {
     // Remove pixi.js banner from the console
@@ -6513,7 +6514,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
       _dot += '</ul>';
       if ($(dataControlsPagination).html() == '') $(dataControlsPagination).html(_dot);
-      $(dataControlsPagination).find('li a').on('click', function (e) {
+      $(dataControlsPagination).find('li a').off('click').on('click', function (e) {
         e.preventDefault();
 
         if (!$(this).hasClass('is-active')) {
@@ -6544,7 +6545,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
         _prev.addClass('is-disabled');
       }
 
-      _prev.on('click', function (e) {
+      _prev.off('click').on('click', function (e) {
         e.preventDefault(); //Canvas Interactions
 
         transitionInteractions($items.filter('.is-active').index(), $items.filter('.leave').index(), $this, 'out', 'prev'); //Update the current and previous items
@@ -6554,7 +6555,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
         clearInterval($this[0].animatedSlides);
       });
 
-      _next.on('click', function (e) {
+      _next.off('click').on('click', function (e) {
         e.preventDefault(); //Canvas Interactions
 
         transitionInteractions($items.filter('.is-active').index(), $items.filter('.leave').index(), $this, 'out', 'next'); //Update the current and next items
@@ -8200,7 +8201,7 @@ function back_to_top_js_classCallCheck(instance, Constructor) { if (!(instance i
 var BACK_TO_TOP = function (module, $, window, document) {
   if (window.BACK_TO_TOP === null) return false;
   module.BACK_TO_TOP = module.BACK_TO_TOP || {};
-  module.BACK_TO_TOP.version = '0.0.3';
+  module.BACK_TO_TOP.version = '0.0.4';
 
   module.BACK_TO_TOP.documentReady = function ($) {
     var $window = $(window),
@@ -8222,7 +8223,7 @@ var BACK_TO_TOP = function (module, $, window, document) {
         }
       }); //-------- Click event of back button
 
-      $el.on('click', function (e) {
+      $el.off('click').on('click', function (e) {
         e.preventDefault();
         TweenMax.to(window, 0.5, {
           scrollTo: {
@@ -8421,8 +8422,9 @@ var DROPDOWN_MENU = function (module, $, window, document) {
         $this.find('> label > span').html($(this).data('display-text'));
       }
     }); //Close the target
+    //Do not add off() to this
 
-    $('body').on('click', function (e) {
+    $(document.body).on('click', function (e) {
       //Apply click method to outer div but not inner div
       if (!$(e.target.offsetParent).hasClass('uix-dropdown-menu')) {
         $('.uix-dropdown-menu').removeClass('is-opened');
@@ -8453,11 +8455,11 @@ function dropdown_menu2_js_classCallCheck(instance, Constructor) { if (!(instanc
 var DROPDOWN_MENU2 = function (module, $, window, document) {
   if (window.DROPDOWN_MENU2 === null) return false;
   module.DROPDOWN_MENU2 = module.DROPDOWN_MENU2 || {};
-  module.DROPDOWN_MENU2.version = '0.0.4';
+  module.DROPDOWN_MENU2.version = '0.0.5';
 
   module.DROPDOWN_MENU2.documentReady = function ($) {
     var $verticalMenuLi = $('.uix-vertical-menu li');
-    $verticalMenuLi.find('> a').on('click', function (e) {
+    $verticalMenuLi.find('> a').off('click').on('click', function (e) {
       var $sub = $(this).next('ul');
 
       if ($sub.length > 0) {
@@ -8874,7 +8876,7 @@ function flexslider_js_typeof(obj) { if (typeof Symbol === "function" && typeof 
 var FLEXSLIDER = function (module, $, window, document) {
   if (window.FLEXSLIDER === null) return false;
   module.FLEXSLIDER = module.FLEXSLIDER || {};
-  module.FLEXSLIDER.version = '0.1.6';
+  module.FLEXSLIDER.version = '0.1.7';
 
   module.FLEXSLIDER.documentReady = function ($) {
     var $window = $(window),
@@ -8983,7 +8985,7 @@ var FLEXSLIDER = function (module, $, window, document) {
             $plink.attr('href', 'javascript:void(0);');
             if (flexslider_js_typeof(pimg) != ( true ? "undefined" : undefined)) $plinkPrev.attr('data-goto', prevIndex).find('> span').html('<img src="' + pimg + '" alt="">');
             if (flexslider_js_typeof(nimg) != ( true ? "undefined" : undefined)) $plinkNext.attr('data-goto', nextIndex).find('> span').html('<img src="' + nimg + '" alt="">');
-            $plink.on('click', function (e) {
+            $plink.off('click').off('click').on('click', function (e) {
               e.preventDefault();
               thisSlider.flexslider(parseInt($(this).attr('data-goto')));
             });
@@ -9414,7 +9416,7 @@ var FLEXSLIDER = function (module, $, window, document) {
 
 
     function initslidesWithNavThumb(slider, navThumbClass) {
-      $('.uix-flexslider__thumbs' + navThumbClass + ' > ul > li').on('click', function () {
+      $('.uix-flexslider__thumbs' + navThumbClass + ' > ul > li').off('click').on('click', function () {
         $('.uix-flexslider__thumbs' + navThumbClass + ' > ul > li').removeClass('is-active');
         $(this).addClass('is-active');
         slider.flexslider($(this).index());
@@ -9909,7 +9911,7 @@ function form_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol
 var FORM = function (module, $, window, document) {
   if (window.FORM === null) return false;
   module.FORM = module.FORM || {};
-  module.FORM.version = '0.1.5';
+  module.FORM.version = '0.1.6';
 
   module.FORM.documentReady = function ($) {
     /*
@@ -9951,7 +9953,7 @@ var FORM = function (module, $, window, document) {
      */
     //Search Submit Event in WordPress
 
-    $('.uix-search-box__submit').on('click', function () {
+    $('.uix-search-box__submit').off('click').on('click', function () {
       $(this).closest('form').submit();
     });
     /* 
@@ -9995,7 +9997,7 @@ var FORM = function (module, $, window, document) {
 
       addOne($this.find('.uix-controls__dynamic-fields__tmpl').html()); //Prevent duplicate function assigned
 
-      $addButton.off('click').on('click', function (e) {
+      $addButton.off('click').off('click').on('click', function (e) {
         e.preventDefault();
         addOne($this.find('.uix-controls__dynamic-fields__tmpl').html());
         return false;
@@ -10262,7 +10264,7 @@ function gallery_js_classCallCheck(instance, Constructor) { if (!(instance insta
 var GALLERY = function (module, $, window, document) {
   if (window.GALLERY === null) return false;
   module.GALLERY = module.GALLERY || {};
-  module.GALLERY.version = '0.0.3';
+  module.GALLERY.version = '0.0.4';
 
   module.GALLERY.documentReady = function ($) {
     $('.uix-gallery').each(function () {
@@ -10338,7 +10340,7 @@ var GALLERY = function (module, $, window, document) {
          */
 
         if (galleryType.indexOf('filter') >= 0) {
-          $filterOptions.find('li > a').on('click', function () {
+          $filterOptions.find('li > a').off('click').on('click', function () {
             var $this = $(this),
                 activeClass = 'current-cat',
                 isActive = $this.parent().hasClass(activeClass),
@@ -11134,7 +11136,7 @@ function list_posts_js_typeof(obj) { if (typeof Symbol === "function" && typeof 
 var POST_LIST_AJAX = function (module, $, window, document) {
   if (window.POST_LIST_AJAX === null) return false;
   module.POST_LIST_AJAX = module.POST_LIST_AJAX || {};
-  module.POST_LIST_AJAX.version = '0.0.9';
+  module.POST_LIST_AJAX.version = '0.1.0';
 
   module.POST_LIST_AJAX.documentReady = function ($) {
     $('[data-ajax-list-json]').each(function () {
@@ -11309,7 +11311,7 @@ var POST_LIST_AJAX = function (module, $, window, document) {
             } //Avoid using $( document ) to cause an asynchronous load without counting from 1
 
 
-            $(nextTrigger).on('click', function (e) {
+            $(nextTrigger).off('click').on('click', function (e) {
               e.preventDefault();
               var $button = $(this),
                   curPage = $button.parent().attr('data-cur-page'); //Add next page number to the button
@@ -11336,7 +11338,7 @@ var POST_LIST_AJAX = function (module, $, window, document) {
 
             $(prevTrigger).addClass('is-hide'); //Avoid using $( document ) to cause an asynchronous load without counting from 1
 
-            $(prevTrigger).on('click', function (e) {
+            $(prevTrigger).off('click').on('click', function (e) {
               e.preventDefault();
               var $button = $(this),
                   curPage = $button.parent().attr('data-cur-page'); //Add next page number to the button
@@ -11574,12 +11576,12 @@ function login_templates_js_classCallCheck(instance, Constructor) { if (!(instan
 var LOGIN_UI = function (module, $, window, document) {
   if (window.LOGIN_UI === null) return false;
   module.LOGIN_UI = module.LOGIN_UI || {};
-  module.LOGIN_UI.version = '0.0.1';
+  module.LOGIN_UI.version = '0.0.2';
 
   module.LOGIN_UI.documentReady = function ($) {
     var $loginToggle = $('.uix-special-login__toggle'),
         $loginForms = $('.uix-special-login__form');
-    $loginToggle.data('switched', true).on('click', function (e) {
+    $loginToggle.data('switched', true).off('click').on('click', function (e) {
       e.preventDefault();
       var $form1 = $loginForms.eq(0),
           $form2 = $loginForms.eq(1);
@@ -11871,7 +11873,7 @@ function multi_items_carousel_js_typeof(obj) { if (typeof Symbol === "function" 
 var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
   if (window.MULTI_ITEMS_CAROUSEL === null) return false;
   module.MULTI_ITEMS_CAROUSEL = module.MULTI_ITEMS_CAROUSEL || {};
-  module.MULTI_ITEMS_CAROUSEL.version = '0.0.3';
+  module.MULTI_ITEMS_CAROUSEL.version = '0.0.4';
 
   module.MULTI_ITEMS_CAROUSEL.documentReady = function ($) {
     $('.uix-multi-carousel').each(function () {
@@ -11983,7 +11985,7 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
        */
 
 
-      $(carouselNext).on('click', $carouselWrapper, function (e) {
+      $(carouselNext).off('click').on('click', $carouselWrapper, function (e) {
         e.preventDefault();
         var $btn = $(this),
             $curWrapper = $(e.data[0]),
@@ -12008,7 +12010,7 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
        ---------------------------
        */
 
-      $(carouselPrev).on('click', $carouselWrapper, function (e) {
+      $(carouselPrev).off('click').on('click', $carouselWrapper, function (e) {
         e.preventDefault();
         var $btn = $(this),
             $curWrapper = $(e.data[0]),
@@ -12301,7 +12303,7 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
 //			 Move left/up
 //			 ---------------------------
 //			 */ 
-//			$( carouselNext ).on( 'click', $carouselWrapper, function( e ) {
+//			$( carouselNext ).off( 'click' ).on( 'click', $carouselWrapper, function( e ) {
 //				e.preventDefault();
 //				
 //				
@@ -12324,7 +12326,7 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
 //			 Move right/down
 //			 ---------------------------
 //			 */ 
-//			$( carouselPrev ).on( 'click', $carouselWrapper, function( e ) {
+//			$( carouselPrev ).off( 'click' ).on( 'click', $carouselWrapper, function( e ) {
 //				e.preventDefault();
 //
 //				
@@ -13870,7 +13872,7 @@ function rotating_elements_js_typeof(obj) { if (typeof Symbol === "function" && 
 var ROTATING_EL = function (module, $, window, document) {
   if (window.ROTATING_EL === null) return false;
   module.ROTATING_EL = module.ROTATING_EL || {};
-  module.ROTATING_EL.version = '0.0.1';
+  module.ROTATING_EL.version = '0.0.2';
 
   module.ROTATING_EL.documentReady = function ($) {
     $('[data-pointer-to-deg]').each(function () {
@@ -13912,7 +13914,7 @@ var ROTATING_EL = function (module, $, window, document) {
           });
         }
 
-        $this.on('click', function (e) {
+        $this.off('click').on('click', function (e) {
           e.preventDefault();
           pointer.style.transform = 'rotate(' + config.deg + 'deg)';
         });
@@ -14210,7 +14212,7 @@ function show_more_less_js_classCallCheck(instance, Constructor) { if (!(instanc
 var SHOW_MORELESS = function (module, $, window, document) {
   if (window.SHOW_MORELESS === null) return false;
   module.SHOW_MORELESS = module.SHOW_MORELESS || {};
-  module.SHOW_MORELESS.version = '0.0.2';
+  module.SHOW_MORELESS.version = '0.0.3';
 
   module.SHOW_MORELESS.documentReady = function ($) {
     $('.uix-more-btn__link').each(function () {
@@ -14218,7 +14220,7 @@ var SHOW_MORELESS = function (module, $, window, document) {
           $con = $btn.parent().prev('.uix-more-btn'),
           $btnTxt = $btn.find('> span'),
           defaultHeight = $con.height();
-      $btn.on('click', function (e) {
+      $btn.off('click').on('click', function (e) {
         e.preventDefault();
         var expanded = $(this).attr('aria-expanded') == 'true' ? false : true;
 
@@ -14312,12 +14314,13 @@ function smooth_scrolling_anchor_link_js_classCallCheck(instance, Constructor) {
 var SMOOTH_SCROLLING_ANCHORLINK = function (module, $, window, document) {
   if (window.SMOOTH_SCROLLING_ANCHORLINK === null) return false;
   module.SMOOTH_SCROLLING_ANCHORLINK = module.SMOOTH_SCROLLING_ANCHORLINK || {};
-  module.SMOOTH_SCROLLING_ANCHORLINK.version = '0.0.5';
+  module.SMOOTH_SCROLLING_ANCHORLINK.version = '0.0.6';
 
   module.SMOOTH_SCROLLING_ANCHORLINK.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('body').hasClass('onepage')) return false;
     var browserURL = window.location.href; //Prevent anchor behaviour
+    //Do not add off() to this
 
     $('a').on('click', function (e) {
       if ($(this).data('smooth-scrolling') != false) {
@@ -14358,10 +14361,11 @@ var SMOOTH_SCROLLING_ANCHORLINK = function (module, $, window, document) {
         });
       }
     } //Hyperlink click event
+    //Do not add off() to this
 
 
     $('a[href*="#"]').on('click', function (e) {
-      if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname && $(this).attr('href') != '#') {
+      if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname && $(this).attr('href') != '#' & $(this).attr('href').indexOf('#?') < 0) {
         // Figure out element to scroll to
         var target = $(this.hash);
         target = target.length ? target : $('[name=' + this.hash.slice(1) + ']'); // Does a scroll target exist?
@@ -14568,8 +14572,9 @@ var SVG_MAP_CHINA = function (module, $, window, document) {
 
       svgMapActive(svgNameIndex, goText);
     }); //Restore all elements
+    //Do not add off() to this
 
-    $('body').on('click', function (e) {
+    $(document.body).on('click', function (e) {
       svgMapRestore(2);
     });
 
@@ -14661,8 +14666,9 @@ var SVG_MAP_WORLD = function (module, $, window, document) {
 
       svgMapActive(svgNameIndex, goText);
     }); //Restore all elements
+    //Do not add off() to this
 
-    $('body').on('click', function (e) {
+    $(document.body).on('click', function (e) {
       svgMapRestore(2);
     });
 
@@ -19013,7 +19019,7 @@ function sorter_classCallCheck(instance, Constructor) { if (!(instance instanceo
 var TABLE_SORTER = function (module, $, window, document) {
   if (window.TABLE_SORTER === null) return false;
   module.TABLE_SORTER = module.TABLE_SORTER || {};
-  module.TABLE_SORTER.version = '0.0.2';
+  module.TABLE_SORTER.version = '0.0.3';
 
   module.TABLE_SORTER.documentReady = function ($) {
     $('.js-uix-table-sorter').each(function () {
@@ -19028,7 +19034,7 @@ var TABLE_SORTER = function (module, $, window, document) {
             thIndex = $th.index(),
             thType = $th.data('sort-type'),
             inverse = false;
-        $th.on('click', function () {
+        $th.off('click').on('click', function () {
           $sortTable.find('tbody td').filter(function () {
             return $(this).index() === thIndex;
           }).sortElements(function (a, b) {
@@ -19097,7 +19103,7 @@ function tabs_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol
 var TABS = function (module, $, window, document) {
   if (window.TABS === null) return false;
   module.TABS = module.TABS || {};
-  module.TABS.version = '0.1.3';
+  module.TABS.version = '0.1.4';
 
   module.TABS.documentReady = function ($) {
     $('.uix-tabs').each(function (id) {
@@ -19172,7 +19178,7 @@ var TABS = function (module, $, window, document) {
           transitionDelay += 0.15; //Click on the rotation effect
           //----------------------- begin ----------------------
 
-          el.on('click', function (e) {
+          el.off('click').on('click', function (e) {
             var increase = Math.PI * 2 / rotationDisplay,
                 n = $(this).index(),
                 endAngle = n % rotationDisplay * increase;
@@ -19208,7 +19214,7 @@ var TABS = function (module, $, window, document) {
       } // Tab Fade Effect
 
 
-      $this.on('click', '.uix-tabs__nav ul > li', function (e) {
+      $this.off('click').on('click', '.uix-tabs__nav ul > li', function (e) {
         var tabID = $(this).attr('data-tab'),
             index = parseFloat($(this).index() - 1);
         $this.find('.uix-tabs__nav ul > li').removeClass('is-active');
@@ -19490,7 +19496,7 @@ function timeline_js_typeof(obj) { if (typeof Symbol === "function" && typeof Sy
 var TIMELINE = function (module, $, window, document) {
   if (window.TIMELINE === null) return false;
   module.TIMELINE = module.TIMELINE || {};
-  module.TIMELINE.version = '0.1.5';
+  module.TIMELINE.version = '0.1.6';
 
   module.TIMELINE.pageLoaded = function () {
     var $window = $(window),
@@ -19513,17 +19519,17 @@ var TIMELINE = function (module, $, window, document) {
           dateShowEle = '#timeline-number-show';
         }
 
-        $this.find('.uix-timeline__btn--prev').on('click', function (e) {
+        $this.find('.uix-timeline__btn--prev').off('click').on('click', function (e) {
           e.preventDefault();
           timelineUpdate($this, false, dateShowEle, true);
           return false;
         });
-        $this.find('.uix-timeline__btn--next').on('click', function (e) {
+        $this.find('.uix-timeline__btn--next').off('click').on('click', function (e) {
           e.preventDefault();
           timelineUpdate($this, false, dateShowEle, false);
           return false;
         });
-        $this.find('.uix-timeline__item .uix-timeline__item--img').on('click', function (e) {
+        $this.find('.uix-timeline__item .uix-timeline__item--img').off('click').on('click', function (e) {
           e.preventDefault();
           timelineUpdate($this, $(this).parent(), dateShowEle, false);
           return false;

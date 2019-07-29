@@ -25,7 +25,7 @@ export const LOGIN_UI = ( ( module, $, window, document ) => {
 	
 	
     module.LOGIN_UI               = module.LOGIN_UI || {};
-    module.LOGIN_UI.version       = '0.0.1';
+    module.LOGIN_UI.version       = '0.0.2';
     module.LOGIN_UI.documentReady = function( $ ) {
 
 		
@@ -33,7 +33,7 @@ export const LOGIN_UI = ( ( module, $, window, document ) => {
 		var $loginToggle = $( '.uix-special-login__toggle' ),
 			$loginForms  = $( '.uix-special-login__form' );
 
-		$loginToggle.data( 'switched', true ).on( 'click', function( e ) {
+		$loginToggle.data( 'switched', true ).off( 'click' ).on( 'click', function( e ) {
 			
 			e.preventDefault();
 

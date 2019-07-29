@@ -34,7 +34,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 	
 
     module.ADVANCED_SLIDER_FILTER               = module.ADVANCED_SLIDER_FILTER || {};
-    module.ADVANCED_SLIDER_FILTER.version       = '0.1.8';
+    module.ADVANCED_SLIDER_FILTER.version       = '0.2.0';
     module.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 		
@@ -1128,7 +1128,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 			if ( $( dataControlsPagination ).html() == '' ) $( dataControlsPagination ).html( _dot );
 
-			$( dataControlsPagination ).find( 'li a' ).on( 'click', function( e ) {
+			$( dataControlsPagination ).find( 'li a' ).off( 'click' ).on( 'click', function( e ) {
 				e.preventDefault();
 
 				if ( !$( this ).hasClass( 'is-active' ) ) {
@@ -1171,7 +1171,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 
 
-			_prev.on( 'click', function( e ) {
+			_prev.off( 'click' ).on( 'click', function( e ) {
 				e.preventDefault();
 
 				//Canvas Interactions
@@ -1185,7 +1185,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 			});
 
-			_next.on( 'click', function( e ) {
+			_next.off( 'click' ).on( 'click', function( e ) {
 				e.preventDefault();
 
 				//Canvas Interactions
