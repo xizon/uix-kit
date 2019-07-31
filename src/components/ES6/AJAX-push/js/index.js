@@ -22,7 +22,7 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 	
 	
     module.AJAX_PUSH_CONTENT               = module.AJAX_PUSH_CONTENT || {};
-    module.AJAX_PUSH_CONTENT.version       = '0.0.8';
+    module.AJAX_PUSH_CONTENT.version       = '0.0.9';
     module.AJAX_PUSH_CONTENT.documentReady = function( $ ) {
 
 		
@@ -165,17 +165,6 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 				dataType : 'html',
 				data     : {
 					action  : 'load_singlepages_ajax_content'
-				},	
-				success  : function( response ) {
-					
-					//A function to be called if the request succeeds
-					var pushContent = ( !target ) ? '' : $( response ).find( target ).html();
-					
-					ajaxSucceeds( container, pushContent, $( response ).filter( 'title' ).text(), btn );
-
-				},
-				error: function(){
-					window.location.href = url;
 				},
 				beforeSend: function() {
 
@@ -205,11 +194,17 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 
 
 				}
-			}).fail( function( jqXHR, textStatus ) {
-				if( textStatus === 'timeout' ) {
-					window.location.href = url;
-				}
-			});		
+            })
+            .done( function (response) { 
+                //A function to be called if the request succeeds
+                var pushContent = ( !target ) ? '' : $( response ).find( target ).html();
+
+                ajaxSucceeds( container, pushContent, $( response ).filter( 'title' ).text(), btn );
+
+            })
+            .fail( function (jqXHR, textStatus, errorThrown) { 
+                window.location.href = url;
+            });
 
 	
 			

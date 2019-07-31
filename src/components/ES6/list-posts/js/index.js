@@ -38,7 +38,7 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 	
 	
     module.POST_LIST_AJAX               = module.POST_LIST_AJAX || {};
-    module.POST_LIST_AJAX.version       = '0.1.0';
+    module.POST_LIST_AJAX.version       = '0.1.1';
     module.POST_LIST_AJAX.documentReady = function( $ ) {
 
 		$( '[data-ajax-list-json]' ).each( function() {
@@ -451,97 +451,93 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 				url      : jsonFile, //Be careful about the format of the JSON file
 				method   : method,
 				data     : defaultPostData,
-				dataType : 'json',
-				success  : function (data) { 
-					
-					
-					//If the data is empty
-					if ( data && ( data == null || Object.prototype.toString.call( data.items )=='[object String]' ) ) {
-						returnEmptyInfo();
-					}
-					
-					
-					//Check if a key exists inside a json object
-					if ( data && data.hasOwnProperty( 'items' ) && Object.prototype.toString.call( data.items )=='[object Array]' ) {
-						
-						
-						//Data overflow may occur when the total number of pages is not posted
-						try {
-
-							var thisData      = data,
-								html          = compiledTemplate( thisData ),
-								curHtml       = $divRoot.find( pushContainer ).html(),
-								result        = null,
-								htmlEl        = null;
+				dataType : 'json'
+            })
+            .done( function (data) { 
+                //If the data is empty
+                if ( data && ( data == null || Object.prototype.toString.call( data.items )=='[object String]' ) ) {
+                    returnEmptyInfo();
+                }
 
 
-							
-							
-							//--------- Do or not append to the original content
-							if ( render == 'before' ) {
-								result = curHtml + html;
-								htmlEl = $( result );
-								$divRoot.find( pushContainer ).before( htmlEl );	
-							}
-							
-							if ( render == 'html' ) {
-								result = html;
-								htmlEl = $( result );
-								$divRoot.find( pushContainer ).html( htmlEl );
-							}		
-							
-							if ( render == 'append' ) {
-								$divRoot.find( pushContainer ).append( html );
-								
-							}	
-							
-							
-							
-							//--------- Apply some asynchronism scripts
-							$( document ).UixApplyAsyncScripts({
-								ajaxPostList : false
-							});
+                //Check if a key exists inside a json object
+                if ( data && data.hasOwnProperty( 'items' ) && Object.prototype.toString.call( data.items )=='[object Array]' ) {
 
 
-							//--------- Remove this button
-							$button.removeClass( triggerActive );	
-	
-							//--------- Hidden button when the page total number is set and does not equal -1 or 9999
-							if ( 
-								curPage == totalPage && 
-								totalPage != 9999 && 
-								totalPage != -1 &&
-								totalPage != 1
-							) {
-								returnEmptyInfo();
-								
-							}		
-							
-							if ( curPage == 1 ) {
-								returnEmptyInfo();
-								
-							}			
-							
+                    //Data overflow may occur when the total number of pages is not posted
+                    try {
 
-						} catch ( err ) {
-							console.log( err.message );
-							returnDataError();
-							
-						}
-						
+                        var thisData      = data,
+                            html          = compiledTemplate( thisData ),
+                            curHtml       = $divRoot.find( pushContainer ).html(),
+                            result        = null,
+                            htmlEl        = null;
 
-						
-					} else {
-						//if not array
-						returnEmptyInfo();
-					}
 
-				 },
-				 error : function( XMLHttpRequest, textStatus, errorThrown ) {
-					 returnEmptyInfo();
-					 
-				 }
-			});
+
+
+                        //--------- Do or not append to the original content
+                        if ( render == 'before' ) {
+                            result = curHtml + html;
+                            htmlEl = $( result );
+                            $divRoot.find( pushContainer ).before( htmlEl );	
+                        }
+
+                        if ( render == 'html' ) {
+                            result = html;
+                            htmlEl = $( result );
+                            $divRoot.find( pushContainer ).html( htmlEl );
+                        }		
+
+                        if ( render == 'append' ) {
+                            $divRoot.find( pushContainer ).append( html );
+
+                        }	
+
+
+
+                        //--------- Apply some asynchronism scripts
+                        $( document ).UixApplyAsyncScripts({
+                            ajaxPostList : false
+                        });
+
+
+                        //--------- Remove this button
+                        $button.removeClass( triggerActive );	
+
+                        //--------- Hidden button when the page total number is set and does not equal -1 or 9999
+                        if ( 
+                            curPage == totalPage && 
+                            totalPage != 9999 && 
+                            totalPage != -1 &&
+                            totalPage != 1
+                        ) {
+                            returnEmptyInfo();
+
+                        }		
+
+                        if ( curPage == 1 ) {
+                            returnEmptyInfo();
+
+                        }			
+
+
+                    } catch ( err ) {
+                        console.log( err.message );
+                        returnDataError();
+
+                    }
+
+
+
+                } else {
+                    //if not array
+                    returnEmptyInfo();
+                }
+            })
+            .fail( function (jqXHR, textStatus, errorThrown) { 
+                returnEmptyInfo();
+            });
 
 		}
 

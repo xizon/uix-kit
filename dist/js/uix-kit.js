@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
- * ## Version             :  3.7.2
+ * ## Version             :  3.7.3
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  July 29, 2019
+ * ## Last Update         :  July 31, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "dd0e459019976579e51c";
+/******/ 	var hotCurrentHash = "c9e3931868ca60e6b8f0";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1249,43 +1249,43 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       $.ajax({
         url: settings.jsonFile,
         method: settings.method,
-        dataType: 'json',
-        success: function success(data) {
-          var newArr = []; //Convert JSON to an array
+        dataType: 'json'
+      }).done(function (data) {
+        var newArr = []; //Convert JSON to an array
 
-          var formatFromServer = function formatFromServer(data) {
-            var formatData = {};
+        var formatFromServer = function formatFromServer(data) {
+          var formatData = {};
 
-            for (var item in data) {
-              if ($(document).UixIsJsonObj({
-                string: data[item]
-              })) {
-                formatFromServer(data[item], formatData);
-              } else {
-                formatData[item] = data[item];
-              }
-            }
-
-            for (var item2 in formatData) {
-              //console.log( formatData[ item2 ] );
-              newArr.push(formatData[item2]);
-            }
-
-            return formatData;
-          };
-
-          formatFromServer(data); //search JSON key that contains specific string
-
-          for (var p = 0; p < newArr.length; p++) {
-            for (var n = 0; n < newArr[p].list.length; n++) {
-              if (Object.prototype.toString.call(newArr[p].list[n][settings.key]) == '[object Array]') {
-                // API: Callback
-                settings.callback(newArr[p].list[n][settings.key]);
-              }
+          for (var item in data) {
+            if ($(document).UixIsJsonObj({
+              string: data[item]
+            })) {
+              formatFromServer(data[item], formatData);
+            } else {
+              formatData[item] = data[item];
             }
           }
-        },
-        error: function error() {}
+
+          for (var item2 in formatData) {
+            //console.log( formatData[ item2 ] );
+            newArr.push(formatData[item2]);
+          }
+
+          return formatData;
+        };
+
+        formatFromServer(data); //search JSON key that contains specific string
+
+        for (var p = 0; p < newArr.length; p++) {
+          for (var n = 0; n < newArr[p].list.length; n++) {
+            if (Object.prototype.toString.call(newArr[p].list[n][settings.key]) == '[object Array]') {
+              // API: Callback
+              settings.callback(newArr[p].list[n][settings.key]);
+            }
+          }
+        }
+      }).fail(function (jqXHR, textStatus, errorThrown) {
+        console.log("Request failed: " + textStatus);
       });
     });
   };
@@ -6077,7 +6077,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
         });
         stage__filter = new PIXI.Container();
         container__items = new PIXI.Container();
-        displacementSprite = dataFilterTexture.indexOf('.mp4') >= 0 ? new PIXI.Sprite(PIXI.Texture.fromVideo(dataFilterTexture)) : new PIXI.Sprite.fromImage(dataFilterTexture);
+        displacementSprite = /^.*\.(avi|AVI|wmv|WMV|flv|FLV|mpg|MPG|mp4|MP4)/.test(dataFilterTexture) ? new PIXI.Sprite(PIXI.Texture.fromVideo(dataFilterTexture)) : new PIXI.Sprite.fromImage(dataFilterTexture);
         displacementFilter = new PIXI.filters.DisplacementFilter(displacementSprite); //----------------------------------------------------------------------------------
         //--------------------------------- Brightness Effect -------------------------------	
         //----------------------------------------------------------------------------------
@@ -7598,7 +7598,7 @@ function AJAX_push_js_typeof(obj) { if (typeof Symbol === "function" && typeof S
 var AJAX_PUSH_CONTENT = function (module, $, window, document) {
   if (window.AJAX_PUSH_CONTENT === null) return false;
   module.AJAX_PUSH_CONTENT = module.AJAX_PUSH_CONTENT || {};
-  module.AJAX_PUSH_CONTENT.version = '0.0.8';
+  module.AJAX_PUSH_CONTENT.version = '0.0.9';
 
   module.AJAX_PUSH_CONTENT.documentReady = function ($) {
     /* Need to set it as a global variable for history */
@@ -7697,14 +7697,6 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
         data: {
           action: 'load_singlepages_ajax_content'
         },
-        success: function success(response) {
-          //A function to be called if the request succeeds
-          var pushContent = !target ? '' : $(response).find(target).html();
-          ajaxSucceeds(container, pushContent, $(response).filter('title').text(), btn);
-        },
-        error: function error() {
-          window.location.href = url;
-        },
         beforeSend: function beforeSend() {
           TweenMax.to(container.find('.ajax-content-loader'), 0.3, {
             css: {
@@ -7725,10 +7717,12 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
             });
           });
         }
-      }).fail(function (jqXHR, textStatus) {
-        if (textStatus === 'timeout') {
-          window.location.href = url;
-        }
+      }).done(function (response) {
+        //A function to be called if the request succeeds
+        var pushContent = !target ? '' : $(response).find(target).html();
+        ajaxSucceeds(container, pushContent, $(response).filter('title').text(), btn);
+      }).fail(function (jqXHR, textStatus, errorThrown) {
+        window.location.href = url;
       });
     }
     /*
@@ -7800,7 +7794,7 @@ function AJAX_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol
 var AJAX_PAGE_LOADER = function (module, $, window, document) {
   if (window.AJAX_PAGE_LOADER === null) return false;
   module.AJAX_PAGE_LOADER = module.AJAX_PAGE_LOADER || {};
-  module.AJAX_PAGE_LOADER.version = '0.0.9';
+  module.AJAX_PAGE_LOADER.version = '0.1.0';
 
   module.AJAX_PAGE_LOADER.documentReady = function ($) {
     var $window = $(window),
@@ -8010,13 +8004,6 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
           data: {
             action: 'load_singlepages_ajax_content'
           },
-          success: function success(response) {
-            //A function to be called if the request succeeds
-            ajaxSucceeds(dir, container, $(response).find('.js-uix-ajax-load__container').html(), $(response).filter('title').text());
-          },
-          error: function error() {
-            window.location.href = url;
-          },
           beforeSend: function beforeSend() {
             TweenMax.set('.uix-ajax-load__loader', {
               css: {
@@ -8029,10 +8016,11 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
               }
             });
           }
-        }).fail(function (jqXHR, textStatus) {
-          if (textStatus === 'timeout') {
-            window.location.href = url;
-          }
+        }).done(function (response) {
+          //A function to be called if the request succeeds
+          ajaxSucceeds(dir, container, $(response).find('.js-uix-ajax-load__container').html(), $(response).filter('title').text());
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+          window.location.href = url;
         });
       }
     }
@@ -8542,7 +8530,7 @@ function dynamic_dropdown_list_json_js_typeof(obj) { if (typeof Symbol === "func
 var DYNAMIC_DD_LIST = function (module, $, window, document) {
   if (window.DYNAMIC_DD_LIST === null) return false;
   module.DYNAMIC_DD_LIST = module.DYNAMIC_DD_LIST || {};
-  module.DYNAMIC_DD_LIST.version = '0.0.6';
+  module.DYNAMIC_DD_LIST.version = '0.0.7';
 
   module.DYNAMIC_DD_LIST.documentReady = function ($) {
     $('[data-ajax-dynamic-dd-json]').each(function () {
@@ -8581,260 +8569,260 @@ var DYNAMIC_DD_LIST = function (module, $, window, document) {
             url: jsonFile,
             method: method,
             data: toData,
-            dataType: 'json',
-            success: function success(data) {
-              var _level1 = [],
-                  _level2 = [],
-                  _level3 = [],
-                  _level1IDs = [],
-                  _level2IDs = [],
-                  _level3IDs = [];
+            dataType: 'json'
+          }).done(function (data) {
+            var _level1 = [],
+                _level2 = [],
+                _level3 = [],
+                _level1IDs = [],
+                _level2IDs = [],
+                _level3IDs = [];
 
-              for (var m = 0; m < data.length; m++) {
-                _level1.push(data[m].name);
+            for (var m = 0; m < data.length; m++) {
+              _level1.push(data[m].name);
 
-                _level1IDs.push(data[m].id);
+              _level1IDs.push(data[m].id);
 
-                var level2_List;
+              var level2_List;
 
+              if (dynamic_dropdown_list_json_js_typeof(data[0].list) === ( true ? "undefined" : undefined)) {
+                //============ China cities dropdown list demo
+                //================================================
+                level2_List = data[m].city;
+              } else {
+                //============ Sort object then subsort further demo
+                //================================================
+                level2_List = data[m].list;
+              }
+
+              var _curLevel2Items = [],
+                  _curLevel3Items = [],
+                  _curLevel2IDs = [],
+                  _curLevel3IDs = [];
+
+              for (var i = 0; i < level2_List.length; i++) {
                 if (dynamic_dropdown_list_json_js_typeof(data[0].list) === ( true ? "undefined" : undefined)) {
                   //============ China cities dropdown list demo
                   //================================================
-                  level2_List = data[m].city;
+                  var city = level2_List[i].name,
+                      area = level2_List[i].area,
+                      areaIDs = level2_List[i].areaid,
+                      ids = level2_List[i].id;
+
+                  _curLevel2Items.push(city);
+
+                  _curLevel2IDs.push(ids);
+
+                  var _tempLevel3Items = [],
+                      _tempLevel3IDs = [];
+
+                  if (dynamic_dropdown_list_json_js_typeof(area) != ( true ? "undefined" : undefined)) {
+                    for (var k = 0; k < area.length; k++) {
+                      _tempLevel3Items.push(area[k]);
+                    }
+                  }
+
+                  if (dynamic_dropdown_list_json_js_typeof(areaIDs) != ( true ? "undefined" : undefined)) {
+                    for (var p = 0; p < areaIDs.length; p++) {
+                      _tempLevel3IDs.push(areaIDs[p]);
+                    }
+                  }
+
+                  _curLevel3Items.push(_tempLevel3Items);
+
+                  _curLevel3IDs.push(_tempLevel3IDs);
                 } else {
                   //============ Sort object then subsort further demo
                   //================================================
-                  level2_List = data[m].list;
+                  var sort1 = level2_List[i].name,
+                      sortID = level2_List[i].id;
+
+                  _curLevel2Items.push(sort1);
+
+                  _curLevel2IDs.push(sortID);
                 }
-
-                var _curLevel2Items = [],
-                    _curLevel3Items = [],
-                    _curLevel2IDs = [],
-                    _curLevel3IDs = [];
-
-                for (var i = 0; i < level2_List.length; i++) {
-                  if (dynamic_dropdown_list_json_js_typeof(data[0].list) === ( true ? "undefined" : undefined)) {
-                    //============ China cities dropdown list demo
-                    //================================================
-                    var city = level2_List[i].name,
-                        area = level2_List[i].area,
-                        areaIDs = level2_List[i].areaid,
-                        ids = level2_List[i].id;
-
-                    _curLevel2Items.push(city);
-
-                    _curLevel2IDs.push(ids);
-
-                    var _tempLevel3Items = [],
-                        _tempLevel3IDs = [];
-
-                    if (dynamic_dropdown_list_json_js_typeof(area) != ( true ? "undefined" : undefined)) {
-                      for (var k = 0; k < area.length; k++) {
-                        _tempLevel3Items.push(area[k]);
-                      }
-                    }
-
-                    if (dynamic_dropdown_list_json_js_typeof(areaIDs) != ( true ? "undefined" : undefined)) {
-                      for (var p = 0; p < areaIDs.length; p++) {
-                        _tempLevel3IDs.push(areaIDs[p]);
-                      }
-                    }
-
-                    _curLevel3Items.push(_tempLevel3Items);
-
-                    _curLevel3IDs.push(_tempLevel3IDs);
-                  } else {
-                    //============ Sort object then subsort further demo
-                    //================================================
-                    var sort1 = level2_List[i].name,
-                        sortID = level2_List[i].id;
-
-                    _curLevel2Items.push(sort1);
-
-                    _curLevel2IDs.push(sortID);
-                  }
-                } // end for
-
-
-                _level2.push(_curLevel2Items);
-
-                _level3.push(_curLevel3Items);
-
-                _level2IDs.push(_curLevel2IDs);
-
-                _level3IDs.push(_curLevel3IDs);
               } // end for
 
 
-              function initSelectControls() {
-                var allLevel1Items = _level1,
-                    allLevel2Items = _level2,
-                    allLevel3Items = _level3,
-                    allLevel1IDs = _level1IDs,
-                    allLevel2IDs = _level2IDs,
-                    allLevel3IDs = _level3IDs,
-                    $level1El = $this,
-                    $level2El = $(associated),
-                    $level3El = $(associated2),
-                    level1EmptyOption = '<option value="">' + emptyTxt1 + '</option>',
-                    level2EmptyOption = '<option value="">' + emptyTxt2 + '</option>',
-                    level3EmptyOption = '<option value="">' + emptyTxt3 + '</option>',
-                    defaultLevel1Val = $this.val(),
-                    defaultLevel2Val = $level2El.val(),
-                    defaultLevel3Val = $level3El.val(),
-                    isCustomSelLevel1 = $level1El.closest('.uix-controls').hasClass('uix-controls__select'),
-                    isCustomSelLevel2 = $level2El.closest('.uix-controls').hasClass('uix-controls__select'),
-                    isCustomSelLevel3 = $level3El.closest('.uix-controls').hasClass('uix-controls__select'),
-                    $level1Wrapper = isCustomSelLevel1 ? $level1El.closest('.uix-controls').parent('.uix-controls__select-wrapper') : $level1El.closest('.uix-controls'),
-                    $level2Wrapper = isCustomSelLevel2 ? $level2El.closest('.uix-controls').parent('.uix-controls__select-wrapper') : $level2El.closest('.uix-controls'),
-                    $level3Wrapper = isCustomSelLevel3 ? $level3El.closest('.uix-controls').parent('.uix-controls__select-wrapper') : $level3El.closest('.uix-controls'); //									console.log( allLevel1Items );
-                //									console.log( allLevel2Items );
-                //									console.log( allLevel3Items );
-                //									console.log( allLevel1IDs );
-                //									console.log( allLevel2IDs );
-                //									console.log( allLevel3IDs );								
-                //Clear all the drop-down list
+              _level2.push(_curLevel2Items);
 
-                $level1El.empty();
-                $level2El.empty();
-                $level3El.empty(); //Hide or display controls
+              _level3.push(_curLevel3Items);
 
-                if (autoExpand) $level2Wrapper.hide();
-                if (autoExpand) $level3Wrapper.hide(); //---------- Initialize the level 1
+              _level2IDs.push(_curLevel2IDs);
 
-                if (defaultLevel1Val != '' && defaultLevel1Val != null) {
-                  //Hide or display controls
-                  if (autoExpand) $level2Wrapper.show();
+              _level3IDs.push(_curLevel3IDs);
+            } // end for
+
+
+            function initSelectControls() {
+              var allLevel1Items = _level1,
+                  allLevel2Items = _level2,
+                  allLevel3Items = _level3,
+                  allLevel1IDs = _level1IDs,
+                  allLevel2IDs = _level2IDs,
+                  allLevel3IDs = _level3IDs,
+                  $level1El = $this,
+                  $level2El = $(associated),
+                  $level3El = $(associated2),
+                  level1EmptyOption = '<option value="">' + emptyTxt1 + '</option>',
+                  level2EmptyOption = '<option value="">' + emptyTxt2 + '</option>',
+                  level3EmptyOption = '<option value="">' + emptyTxt3 + '</option>',
+                  defaultLevel1Val = $this.val(),
+                  defaultLevel2Val = $level2El.val(),
+                  defaultLevel3Val = $level3El.val(),
+                  isCustomSelLevel1 = $level1El.closest('.uix-controls').hasClass('uix-controls__select'),
+                  isCustomSelLevel2 = $level2El.closest('.uix-controls').hasClass('uix-controls__select'),
+                  isCustomSelLevel3 = $level3El.closest('.uix-controls').hasClass('uix-controls__select'),
+                  $level1Wrapper = isCustomSelLevel1 ? $level1El.closest('.uix-controls').parent('.uix-controls__select-wrapper') : $level1El.closest('.uix-controls'),
+                  $level2Wrapper = isCustomSelLevel2 ? $level2El.closest('.uix-controls').parent('.uix-controls__select-wrapper') : $level2El.closest('.uix-controls'),
+                  $level3Wrapper = isCustomSelLevel3 ? $level3El.closest('.uix-controls').parent('.uix-controls__select-wrapper') : $level3El.closest('.uix-controls'); //									console.log( allLevel1Items );
+              //									console.log( allLevel2Items );
+              //									console.log( allLevel3Items );
+              //									console.log( allLevel1IDs );
+              //									console.log( allLevel2IDs );
+              //									console.log( allLevel3IDs );								
+              //Clear all the drop-down list
+
+              $level1El.empty();
+              $level2El.empty();
+              $level3El.empty(); //Hide or display controls
+
+              if (autoExpand) $level2Wrapper.hide();
+              if (autoExpand) $level3Wrapper.hide(); //---------- Initialize the level 1
+
+              if (defaultLevel1Val != '' && defaultLevel1Val != null) {
+                //Hide or display controls
+                if (autoExpand) $level2Wrapper.show();
+              }
+
+              $level1El.append(level1EmptyOption);
+
+              for (var i = 0; i < allLevel1Items.length; i++) {
+                var _v = allLevel1Items[i],
+                    _id = allLevel1IDs[i];
+
+                if (defaultLevel1Val == _v) {
+                  $level1El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "' selected>" + _v + "</option>");
+                } else {
+                  $level1El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
                 }
+              } //---------- Initialize the level 2
 
-                $level1El.append(level1EmptyOption);
 
-                for (var i = 0; i < allLevel1Items.length; i++) {
-                  var _v = allLevel1Items[i],
-                      _id = allLevel1IDs[i];
+              var curLevel1Index = $level1El.find('option:selected').data('index');
 
-                  if (defaultLevel1Val == _v) {
-                    $level1El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "' selected>" + _v + "</option>");
+              if (defaultLevel2Val != '' && defaultLevel2Val != null) {
+                //Hide or display controls
+                if (autoExpand) $level3Wrapper.show();
+              }
+
+              $level2El.append(level2EmptyOption);
+
+              if (dynamic_dropdown_list_json_js_typeof(curLevel1Index) != ( true ? "undefined" : undefined)) {
+                for (var i = 0; i < allLevel2Items[curLevel1Index - 1].length; i++) {
+                  var _v = allLevel2Items[curLevel1Index - 1][i],
+                      _id = allLevel2IDs[curLevel1Index - 1][i];
+
+                  if (defaultLevel2Val == _v) {
+                    $level2El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "' selected>" + _v + "</option>");
                   } else {
-                    $level1El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
+                    $level2El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
                   }
-                } //---------- Initialize the level 2
-
-
-                var curLevel1Index = $level1El.find('option:selected').data('index');
-
-                if (defaultLevel2Val != '' && defaultLevel2Val != null) {
-                  //Hide or display controls
-                  if (autoExpand) $level3Wrapper.show();
                 }
+              } //---------- Initialization level 3
+
+
+              var curLevel2Index = $level2El.find('option:selected').data('index');
+              $level3El.append(level3EmptyOption);
+
+              if (dynamic_dropdown_list_json_js_typeof(curLevel2Index) != ( true ? "undefined" : undefined)) {
+                //If the data exists, you need to determine if the array is empty.
+                if (allLevel3Items[curLevel1Index - 1].length > 0) {
+                  for (var i = 0; i < allLevel3Items[curLevel1Index - 1][curLevel2Index - 1].length; i++) {
+                    var _v = allLevel3Items[curLevel1Index - 1][curLevel2Index - 1][i],
+                        _id = allLevel3IDs[curLevel1Index - 1][curLevel2Index - 1][i];
+
+                    if (defaultLevel3Val == _v) {
+                      $level3El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "' selected>" + _v + "</option>");
+                    } else {
+                      $level3El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
+                    }
+                  }
+                }
+              } //---------- Render the custom select
+
+
+              $(document).UixRenderCustomSelect();
+              $level1El.attr('selected', 'selected').change();
+              $level2El.attr('selected', 'selected').change();
+              $level3El.attr('selected', 'selected').change(); //---------- Change event level 1
+
+              $level1El.on('change.DYNAMIC_DD_LIST', function () {
+                //Clear all the level 2 and level 3 items in the drop-down list
+                $level2El.empty();
+                $level3El.empty(); //Add a option with a value of 0
 
                 $level2El.append(level2EmptyOption);
+                $level3El.append(level3EmptyOption); //Hide or display controls
 
-                if (dynamic_dropdown_list_json_js_typeof(curLevel1Index) != ( true ? "undefined" : undefined)) {
-                  for (var i = 0; i < allLevel2Items[curLevel1Index - 1].length; i++) {
-                    var _v = allLevel2Items[curLevel1Index - 1][i],
-                        _id = allLevel2IDs[curLevel1Index - 1][i];
+                if (autoExpand) $level2Wrapper.show(); //Set the current subscript of the selected option and assign
 
-                    if (defaultLevel2Val == _v) {
-                      $level2El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "' selected>" + _v + "</option>");
-                    } else {
-                      $level2El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
-                    }
+                var level1Index = $(this).find('option:selected').data('index');
+                var level2Items = allLevel2Items[level1Index - 1];
+                var level2IDs = allLevel2IDs[level1Index - 1];
+
+                if (dynamic_dropdown_list_json_js_typeof(level2Items) != ( true ? "undefined" : undefined)) {
+                  for (var i = 0; i < level2Items.length; i++) {
+                    var _v = level2Items[i],
+                        _id = level2IDs[i];
+                    $level2El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
                   }
-                } //---------- Initialization level 3
-
-
-                var curLevel2Index = $level2El.find('option:selected').data('index');
-                $level3El.append(level3EmptyOption);
-
-                if (dynamic_dropdown_list_json_js_typeof(curLevel2Index) != ( true ? "undefined" : undefined)) {
-                  //If the data exists, you need to determine if the array is empty.
-                  if (allLevel3Items[curLevel1Index - 1].length > 0) {
-                    for (var i = 0; i < allLevel3Items[curLevel1Index - 1][curLevel2Index - 1].length; i++) {
-                      var _v = allLevel3Items[curLevel1Index - 1][curLevel2Index - 1][i],
-                          _id = allLevel3IDs[curLevel1Index - 1][curLevel2Index - 1][i];
-
-                      if (defaultLevel3Val == _v) {
-                        $level3El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "' selected>" + _v + "</option>");
-                      } else {
-                        $level3El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
-                      }
-                    }
-                  }
-                } //---------- Render the custom select
+                } else {
+                  //Hide or display controls
+                  if (autoExpand) $level2Wrapper.hide();
+                } //Render the custom select
 
 
                 $(document).UixRenderCustomSelect();
-                $level1El.attr('selected', 'selected').change();
                 $level2El.attr('selected', 'selected').change();
-                $level3El.attr('selected', 'selected').change(); //---------- Change event level 1
+              }); //---------- Change event level 2
 
-                $level1El.on('change.DYNAMIC_DD_LIST', function () {
-                  //Clear all the level 2 and level 3 items in the drop-down list
-                  $level2El.empty();
-                  $level3El.empty(); //Add a option with a value of 0
+              $level2El.on('change.DYNAMIC_DD_LIST', function () {
+                //Clear all the level 3 items in the drop-down list
+                $level3El.empty(); //Add a option with a value of 0
 
-                  $level2El.append(level2EmptyOption);
-                  $level3El.append(level3EmptyOption); //Hide or display controls
+                $level3El.append(level3EmptyOption); //Hide or display controls
 
-                  if (autoExpand) $level2Wrapper.show(); //Set the current subscript of the selected option and assign
+                if (autoExpand) $level3Wrapper.show(); //Get the subscript corresponding to the level 1 and level 2 at this time
 
-                  var level1Index = $(this).find('option:selected').data('index');
-                  var level2Items = allLevel2Items[level1Index - 1];
-                  var level2IDs = allLevel2IDs[level1Index - 1];
+                var level1Index = $level1El.find('option:selected').data('index');
+                var level2Index = $(this).find('option:selected').data('index');
 
-                  if (dynamic_dropdown_list_json_js_typeof(level2Items) != ( true ? "undefined" : undefined)) {
-                    for (var i = 0; i < level2Items.length; i++) {
-                      var _v = level2Items[i],
-                          _id = level2IDs[i];
-                      $level2El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
+                if (dynamic_dropdown_list_json_js_typeof(level1Index) != ( true ? "undefined" : undefined) && dynamic_dropdown_list_json_js_typeof(level2Index) != ( true ? "undefined" : undefined)) {
+                  var level3Items = allLevel3Items[level1Index - 1][level2Index - 1];
+                  var level3IDs = allLevel3IDs[level1Index - 1][level2Index - 1];
+
+                  if (dynamic_dropdown_list_json_js_typeof(level3Items) != ( true ? "undefined" : undefined)) {
+                    for (var i = 0; i < level3Items.length; i++) {
+                      var _v = level3Items[i],
+                          _id = level3IDs[i];
+                      $level3El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
                     }
-                  } else {
-                    //Hide or display controls
-                    if (autoExpand) $level2Wrapper.hide();
-                  } //Render the custom select
+                  }
+                } else {
+                  //Hide or display controls
+                  if (autoExpand) $level3Wrapper.hide();
+                } //Render the custom select
 
 
-                  $(document).UixRenderCustomSelect();
-                  $level2El.attr('selected', 'selected').change();
-                }); //---------- Change event level 2
+                $(document).UixRenderCustomSelect();
+                $level3El.attr('selected', 'selected').change();
+              });
+            }
 
-                $level2El.on('change.DYNAMIC_DD_LIST', function () {
-                  //Clear all the level 3 items in the drop-down list
-                  $level3El.empty(); //Add a option with a value of 0
-
-                  $level3El.append(level3EmptyOption); //Hide or display controls
-
-                  if (autoExpand) $level3Wrapper.show(); //Get the subscript corresponding to the level 1 and level 2 at this time
-
-                  var level1Index = $level1El.find('option:selected').data('index');
-                  var level2Index = $(this).find('option:selected').data('index');
-
-                  if (dynamic_dropdown_list_json_js_typeof(level1Index) != ( true ? "undefined" : undefined) && dynamic_dropdown_list_json_js_typeof(level2Index) != ( true ? "undefined" : undefined)) {
-                    var level3Items = allLevel3Items[level1Index - 1][level2Index - 1];
-                    var level3IDs = allLevel3IDs[level1Index - 1][level2Index - 1];
-
-                    if (dynamic_dropdown_list_json_js_typeof(level3Items) != ( true ? "undefined" : undefined)) {
-                      for (var i = 0; i < level3Items.length; i++) {
-                        var _v = level3Items[i],
-                            _id = level3IDs[i];
-                        $level3El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
-                      }
-                    }
-                  } else {
-                    //Hide or display controls
-                    if (autoExpand) $level3Wrapper.hide();
-                  } //Render the custom select
-
-
-                  $(document).UixRenderCustomSelect();
-                  $level3El.attr('selected', 'selected').change();
-                });
-              }
-
-              initSelectControls();
-            },
-            error: function error() {}
+            initSelectControls();
+          }).fail(function (jqXHR, textStatus, errorThrown) {
+            console.log("Request failed: " + textStatus);
           }); //Prevent the form from being initialized again
 
           $this.data('exist', 1);
@@ -10609,7 +10597,7 @@ function lightbox_js_typeof(obj) { if (typeof Symbol === "function" && typeof Sy
 var LIGHTBOX = function (module, $, window, document) {
   if (window.LIGHTBOX === null) return false;
   module.LIGHTBOX = module.LIGHTBOX || {};
-  module.LIGHTBOX.version = '0.1.5';
+  module.LIGHTBOX.version = '0.1.6';
 
   module.LIGHTBOX.pageLoaded = function () {
     if ($('.uix-lightbox__container').length == 0) {
@@ -10885,29 +10873,23 @@ var LIGHTBOX = function (module, $, window, document) {
             url: ajaxURL,
             method: ajaxConfig.method,
             dataType: 'html',
-            success: function success(response) {
-              $htmlAjaxContainer.html($(response).find(dataAjax.target).html()).promise().done(function () {
-                $content.html($('#' + dataHtmlID).html()).promise().done(function () {
-                  // Apply some asynchronism scripts
-                  $(document).UixApplyAsyncScripts({
-                    lightBox: false,
-                    ajaxPostList: false
-                  }); // show the content container
-
-                  showLightboxContent(); // Content pushing completed
-
-                  htmlContentLoaded();
-                });
-              });
-            },
-            error: function error() {
-              window.location.href = ajaxURL;
-            },
             beforeSend: function beforeSend() {}
-          }).fail(function (jqXHR, textStatus) {
-            if (textStatus === 'timeout') {
-              window.location.href = ajaxURL;
-            }
+          }).done(function (response) {
+            $htmlAjaxContainer.html($(response).find(dataAjax.target).html()).promise().done(function () {
+              $content.html($('#' + dataHtmlID).html()).promise().done(function () {
+                // Apply some asynchronism scripts
+                $(document).UixApplyAsyncScripts({
+                  lightBox: false,
+                  ajaxPostList: false
+                }); // show the content container
+
+                showLightboxContent(); // Content pushing completed
+
+                htmlContentLoaded();
+              });
+            });
+          }).fail(function (jqXHR, textStatus, errorThrown) {
+            window.location.href = ajaxURL;
           });
         } else {
           // show the content container
@@ -11136,7 +11118,7 @@ function list_posts_js_typeof(obj) { if (typeof Symbol === "function" && typeof 
 var POST_LIST_AJAX = function (module, $, window, document) {
   if (window.POST_LIST_AJAX === null) return false;
   module.POST_LIST_AJAX = module.POST_LIST_AJAX || {};
-  module.POST_LIST_AJAX.version = '0.1.0';
+  module.POST_LIST_AJAX.version = '0.1.1';
 
   module.POST_LIST_AJAX.documentReady = function ($) {
     $('[data-ajax-list-json]').each(function () {
@@ -11435,65 +11417,63 @@ var POST_LIST_AJAX = function (module, $, window, document) {
         //Be careful about the format of the JSON file
         method: method,
         data: defaultPostData,
-        dataType: 'json',
-        success: function success(data) {
-          //If the data is empty
-          if (data && (data == null || Object.prototype.toString.call(data.items) == '[object String]')) {
-            returnEmptyInfo();
-          } //Check if a key exists inside a json object
+        dataType: 'json'
+      }).done(function (data) {
+        //If the data is empty
+        if (data && (data == null || Object.prototype.toString.call(data.items) == '[object String]')) {
+          returnEmptyInfo();
+        } //Check if a key exists inside a json object
 
 
-          if (data && data.hasOwnProperty('items') && Object.prototype.toString.call(data.items) == '[object Array]') {
-            //Data overflow may occur when the total number of pages is not posted
-            try {
-              var thisData = data,
-                  html = compiledTemplate(thisData),
-                  curHtml = $divRoot.find(pushContainer).html(),
-                  result = null,
-                  htmlEl = null; //--------- Do or not append to the original content
+        if (data && data.hasOwnProperty('items') && Object.prototype.toString.call(data.items) == '[object Array]') {
+          //Data overflow may occur when the total number of pages is not posted
+          try {
+            var thisData = data,
+                html = compiledTemplate(thisData),
+                curHtml = $divRoot.find(pushContainer).html(),
+                result = null,
+                htmlEl = null; //--------- Do or not append to the original content
 
-              if (render == 'before') {
-                result = curHtml + html;
-                htmlEl = $(result);
-                $divRoot.find(pushContainer).before(htmlEl);
-              }
-
-              if (render == 'html') {
-                result = html;
-                htmlEl = $(result);
-                $divRoot.find(pushContainer).html(htmlEl);
-              }
-
-              if (render == 'append') {
-                $divRoot.find(pushContainer).append(html);
-              } //--------- Apply some asynchronism scripts
-
-
-              $(document).UixApplyAsyncScripts({
-                ajaxPostList: false
-              }); //--------- Remove this button
-
-              $button.removeClass(triggerActive); //--------- Hidden button when the page total number is set and does not equal -1 or 9999
-
-              if (curPage == totalPage && totalPage != 9999 && totalPage != -1 && totalPage != 1) {
-                returnEmptyInfo();
-              }
-
-              if (curPage == 1) {
-                returnEmptyInfo();
-              }
-            } catch (err) {
-              console.log(err.message);
-              returnDataError();
+            if (render == 'before') {
+              result = curHtml + html;
+              htmlEl = $(result);
+              $divRoot.find(pushContainer).before(htmlEl);
             }
-          } else {
-            //if not array
-            returnEmptyInfo();
+
+            if (render == 'html') {
+              result = html;
+              htmlEl = $(result);
+              $divRoot.find(pushContainer).html(htmlEl);
+            }
+
+            if (render == 'append') {
+              $divRoot.find(pushContainer).append(html);
+            } //--------- Apply some asynchronism scripts
+
+
+            $(document).UixApplyAsyncScripts({
+              ajaxPostList: false
+            }); //--------- Remove this button
+
+            $button.removeClass(triggerActive); //--------- Hidden button when the page total number is set and does not equal -1 or 9999
+
+            if (curPage == totalPage && totalPage != 9999 && totalPage != -1 && totalPage != 1) {
+              returnEmptyInfo();
+            }
+
+            if (curPage == 1) {
+              returnEmptyInfo();
+            }
+          } catch (err) {
+            console.log(err.message);
+            returnDataError();
           }
-        },
-        error: function error(XMLHttpRequest, textStatus, errorThrown) {
+        } else {
+          //if not array
           returnEmptyInfo();
         }
+      }).fail(function (jqXHR, textStatus, errorThrown) {
+        returnEmptyInfo();
       });
     }
   };

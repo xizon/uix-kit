@@ -35,7 +35,7 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 	
 	
     module.LIGHTBOX               = module.LIGHTBOX || {};
-    module.LIGHTBOX.version       = '0.1.5';
+    module.LIGHTBOX.version       = '0.1.6';
     module.LIGHTBOX.pageLoaded    = function() {
 
 		if ( $( '.uix-lightbox__container' ).length == 0 ) {
@@ -407,46 +407,38 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 						url      : ajaxURL,
 						method   : ajaxConfig.method,
 						dataType : 'html',
-						success  : function( response ) {
-
-							$htmlAjaxContainer.html( $( response ).find( dataAjax.target ).html() ).promise().done( function(){
-								
-
-								$content.html( $( '#' + dataHtmlID ).html() ).promise().done( function(){
-									
-									// Apply some asynchronism scripts
-									$( document ).UixApplyAsyncScripts({
-										lightBox : false,
-										ajaxPostList : false
-									});
-									
-									
-									// show the content container
-									showLightboxContent();	
-									
-									// Content pushing completed
-									htmlContentLoaded();
-								});	
-								
-
-							});
-
-
-							
-						},
-						error: function(){
-							window.location.href = ajaxURL;
-						},
 						beforeSend: function() {
 							
-						
 						}
-					}).fail( function( jqXHR, textStatus ) {
-						if( textStatus === 'timeout' ) {
-							window.location.href = ajaxURL;
-						}
-					});		
-					
+                    })
+                    .done( function (response) { 
+                        $htmlAjaxContainer.html( $( response ).find( dataAjax.target ).html() ).promise().done( function(){
+
+
+                            $content.html( $( '#' + dataHtmlID ).html() ).promise().done( function(){
+
+                                // Apply some asynchronism scripts
+                                $( document ).UixApplyAsyncScripts({
+                                    lightBox : false,
+                                    ajaxPostList : false
+                                });
+
+
+                                // show the content container
+                                showLightboxContent();	
+
+                                // Content pushing completed
+                                htmlContentLoaded();
+                            });	
+
+
+                        });
+
+                    })
+                    .fail( function (jqXHR, textStatus, errorThrown) { 
+						window.location.href = ajaxURL;
+                    });
+
 
 					
 				} else {

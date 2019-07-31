@@ -25,7 +25,7 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 	
 	
     module.AJAX_PAGE_LOADER               = module.AJAX_PAGE_LOADER || {};
-    module.AJAX_PAGE_LOADER.version       = '0.0.9';
+    module.AJAX_PAGE_LOADER.version       = '0.1.0';
     module.AJAX_PAGE_LOADER.documentReady = function( $ ) {
 
         var $window                  = $( window ),
@@ -299,15 +299,6 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 					dataType : 'html',
 					data     : {
 						action  : 'load_singlepages_ajax_content'
-					},	
-					success  : function( response ) {
-						
-						//A function to be called if the request succeeds
-						ajaxSucceeds( dir, container, $( response ).find( '.js-uix-ajax-load__container' ).html(), $( response ).filter( 'title' ).text() );
-
-					},
-					error: function(){
-						window.location.href = url;
 					},
 					beforeSend: function() {
 
@@ -322,14 +313,16 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 							}
 						});
 
-
-
 					}
-				}).fail( function( jqXHR, textStatus ) {
-					if( textStatus === 'timeout' ) {
-						window.location.href = url;
-					}
-				});		
+                })
+                .done( function (response) { 
+                    //A function to be called if the request succeeds
+                    ajaxSucceeds( dir, container, $( response ).find( '.js-uix-ajax-load__container' ).html(), $( response ).filter( 'title' ).text() );  
+                })
+                .fail( function (jqXHR, textStatus, errorThrown) { 
+					window.location.href = url;
+                });
+           	
 				
 				
 			}
