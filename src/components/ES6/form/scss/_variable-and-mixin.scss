@@ -1,0 +1,34 @@
+
+$control-text-color: #888;
+$control-sub-color: #dce4e8;
+$control-focus-color: $primary-text-color1;
+$control-focus-bordercolor: $primary-text-color1;
+$control-focus-bordercolor2: transparent;
+$control-padding-side: 0.546875rem;
+$control-padding-height: 0.546875rem;
+$control-icon-placeholder: 2rem;
+
+
+@mixin select-arrow( $top, $right ){
+	// @include select-arrow( -.875rem, 1rem );
+	border: 1px solid $control-sub-color;
+	border-right: 0;
+	border-top: 0;
+	content: " ";
+	display: block;
+	width: .35rem;
+	height: .35rem;
+	pointer-events: none;
+	position: absolute;
+	transform: rotate(-45deg);
+	margin-top: $top;
+	right: $right;
+	top: 50%;
+	z-index: 1;
+}
+
+@mixin control-label-text() {
+	font-weight: 500;
+	color: #999;
+}
+

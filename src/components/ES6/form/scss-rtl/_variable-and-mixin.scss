@@ -1,0 +1,10 @@
+$control-sub-color: #dce4e8;
+$control-padding-side: 0.546875rem;
+$control-padding-height: 0.546875rem;
+$control-icon-placeholder: 2rem;
+
+@mixin select-arrow-rtl( $top, $left ){
+	border-left: 0;
+	right: auto;
+	left: $left;
+}

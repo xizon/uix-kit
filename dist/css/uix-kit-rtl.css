@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
- * ## Version             :  3.7.3
+ * ## Version             :  3.7.5
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  July 31, 2019
+ * ## Last Update         :  August 8, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -34,20 +34,22 @@
     16.Dropdown Menu
     17.Flexslider
     18.Form
-    19.Cutom Light Box
-    20.Brands List
-    21.Bulleted List
-    22.Maintain Aspect Ratio List
-    23.Side by Side List
-    24.Login Templates
-    25.Modal Dialog
-    26.Ribbon
-    27.Comments
-    28.Striking
-    29.Table
-    30.ToolTip
-    31.Vertical Menu (RTL)
-    32.WordPress Core ( Do not use prefix "uix-" )
+    19.Form  ( Material Design Theme )
+    20.Form
+    21.Cutom Light Box
+    22.Brands List
+    23.Bulleted List
+    24.Maintain Aspect Ratio List
+    25.Side by Side List
+    26.Login Templates
+    27.Modal Dialog
+    28.Ribbon
+    29.Comments
+    30.Striking
+    31.Table
+    32.ToolTip
+    33.Vertical Menu (RTL)
+    34.WordPress Core ( Do not use prefix "uix-" )
 
 
 */
@@ -640,7 +642,6 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
  * 7. Multiple Selector
  * 8. Single Selector
  * 9. Search of Widget
- * 11. Date Picker ( 3rd Party Plugin )
 */
 /*
  ---------------------------
@@ -658,17 +659,6 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__side {
     margin-left: auto;
     margin-right: .2rem; }
-  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .uix-controls__bar {
-    left: auto;
-    right: -2px; }
-    .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .uix-controls__bar::before {
-      left: auto;
-      right: 51%; }
-    .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .uix-controls__bar::after {
-      right: auto;
-      left: 49%; }
-  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-fullwidth .uix-controls__bar {
-    right: -6px; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__short-s input:not([type="checkbox"]):not([type="radio"]) {
     margin-right: auto;
     margin-left: .5rem; }
@@ -680,9 +670,8 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
     margin-left: .5rem; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) label {
     left: auto;
-    right: 0.875rem; }
-    .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) label.is-active {
-      transform-origin: right top; }
+    right: 0.875rem;
+    transform-origin: right top; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .uix-controls__arrow {
     right: auto;
     left: 0.875rem; }
@@ -697,68 +686,41 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
       left: -1rem; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic label {
     left: auto;
-    right: 3rem; }
+    right: 2.54688rem; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic i {
     left: auto;
     right: 1rem; }
     .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic i::after {
       left: auto;
-      right: 1.4rem; }
+      right: 1.2rem; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic input:not([type="checkbox"]):not([type="radio"]) {
     padding-left: auto;
-    padding-right: calc(3.5rem - 0.546875rem); }
+    padding-right: 2.54688rem; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic textarea,
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic button:not(.uix-btn),
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic select {
     padding-left: auto;
-    padding-right: calc(3.5rem - 0.546875rem); }
+    padding-right: 2.54688rem; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed label {
     left: auto;
-    right: 0.546875rem; }
+    right: 0.54688rem; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed i {
     left: 1rem;
     right: auto; }
     .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed i::after {
-      left: 1.4rem;
+      left: 1.2rem;
       right: auto; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed input:not([type="checkbox"]):not([type="radio"]) {
-    padding-right: 0.546875rem;
-    padding-left: calc(3.5rem - 0.546875rem); }
+    padding-right: 0.54688rem;
+    padding-left: 2.54688rem; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed textarea,
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed button:not(.uix-btn),
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed select {
-    padding-right: 0.546875rem;
-    padding-left: calc(3.5rem - 0.546875rem); }
+    padding-right: 0.54688rem;
+    padding-left: 2.54688rem; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .req-icon {
     right: auto;
     left: 0.721875rem; }
-
-/* Create Line Effect on Click */
-.uix-controls.uix-controls--line {
-  /*-- Form With Icon --*/
-  /*-- Select --*/ }
-  .uix-controls.uix-controls--line label {
-    left: auto !important;
-    right: -0.75rem !important; }
-    .uix-controls.uix-controls--line label.is-active {
-      transform-origin: right top;
-      transform: translateX(1.75rem) scale(0.875); }
-  .uix-controls.uix-controls--line.is-iconic label {
-    left: auto !important;
-    right: 2.375rem !important; }
-    .uix-controls.uix-controls--line.is-iconic label.is-active {
-      transform: translateX(4.09375rem) scale(0.875); }
-  .uix-controls.uix-controls--line.is-iconic.is-reversed label {
-    left: auto !important;
-    right: -0.75rem !important; }
-    .uix-controls.uix-controls--line.is-iconic.is-reversed label.is-active {
-      transform: translateX(1.75rem) scale(0.875); }
-  .uix-controls.uix-controls--line.uix-controls__normal-select .uix-controls__arrow {
-    right: auto !important;
-    left: 0 !important; }
-  .uix-controls.uix-controls--line.uix-controls__normal-select select {
-    padding-left: auto !important;
-    padding-right: 0 !important; }
 
 /*
  ---------------------------
@@ -800,22 +762,22 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
     border-radius: 50px 0 0 50px; }
   .uix-controls__merge.is-iconic input {
     padding-left: auto;
-    padding-right: 3rem; }
+    padding-right: 2.54688rem; }
   .uix-controls__merge.is-iconic i {
     left: auto;
     right: 1rem; }
     .uix-controls__merge.is-iconic i::after {
       left: auto;
-      right: 1.4rem; }
+      right: 1.2rem; }
   .uix-controls__merge.is-iconic.is-reversed input {
     padding-left: auto;
-    padding-right: calc(3rem - 0.546875rem); }
+    padding-right: calc(3rem - 0.54688rem); }
   .uix-controls__merge.is-iconic.is-reversed i {
     right: auto;
     left: 1rem; }
     .uix-controls__merge.is-iconic.is-reversed i::after {
       right: auto;
-      left: 1.4rem; }
+      left: 1.2rem; }
 
 /*
  ---------------------------
@@ -835,33 +797,12 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
     left: auto;
     right: 0; }
 
-.uix-controls__select-wrapper.uix-controls--line.is-disabled {
-  /* Mask used to prohibit selection */ }
-  .uix-controls__select-wrapper.uix-controls--line.is-disabled::before {
-    left: auto;
-    right: 0; }
-
 .uix-controls__select-wrapper .uix-controls__select-trigger {
-  padding: 0.546875rem 1.5rem 0.546875rem 2.5rem; }
+  padding: 0.54688rem 0.54688rem 0.54688rem 2.04688rem; }
   .uix-controls__select-wrapper .uix-controls__select-trigger::after {
     border-left: 0;
     right: auto;
     left: 1rem; }
-
-.uix-controls__select-wrapper .uix-controls--line .uix-controls__bar {
-  left: auto;
-  right: -0.25rem;
-  transform: translateX(-2px); }
-  .uix-controls__select-wrapper .uix-controls--line .uix-controls__bar::before {
-    left: auto;
-    right: 51%; }
-  .uix-controls__select-wrapper .uix-controls--line .uix-controls__bar::after {
-    right: auto;
-    left: 49%; }
-
-.uix-controls__select-wrapper .uix-controls--line.is-fullwidth .uix-controls__bar {
-  left: auto;
-  right: -0.685rem; }
 
 .uix-controls__select-wrapper .uix-controls__select__option-container {
   left: auto;
@@ -928,7 +869,7 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
   /* Required */ }
 
 .uix-controls__checkbox .uix-controls__checkbox-trigger {
-  margin: 0.546875rem 0 0.546875rem .5rem; }
+  margin: 0.54688rem 0 0.54688rem 0.5rem; }
   .uix-controls__checkbox .uix-controls__checkbox-trigger::before, .uix-controls__checkbox .uix-controls__checkbox-trigger::after {
     left: auto;
     right: 4px; }
@@ -950,16 +891,13 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
  ---------------------------
  */
 .uix-controls__multi-sel {
-  float: right;
-  /* Create Line Effect on Click */ }
-  .uix-controls__multi-sel > span:not(.uix-controls__bar) {
+  float: right; }
+  .uix-controls__multi-sel > span {
     margin-right: auto;
     margin-left: 1rem; }
-    .uix-controls__multi-sel > span:not(.uix-controls__bar) i {
+    .uix-controls__multi-sel > span i {
       right: auto;
       left: -8px; }
-  .uix-controls__multi-sel.uix-controls--line > span:not(.uix-controls__bar) .uix-controls__bar {
-    right: 0 !important; }
 
 /*
  ---------------------------
@@ -967,13 +905,10 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
  ---------------------------
  */
 .uix-controls__single-sel {
-  float: right;
-  /* Create Line Effect on Click */ }
-  .uix-controls__single-sel > span:not(.uix-controls__bar) {
+  float: right; }
+  .uix-controls__single-sel > span {
     margin-right: auto;
     margin-left: 1rem; }
-  .uix-controls__single-sel.uix-controls--line > span:not(.uix-controls__bar) .uix-controls__bar {
-    right: 0 !important; }
 
 /*
  ---------------------------
@@ -984,9 +919,77 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
   right: auto;
   left: 0.875rem; }
 
+/* ======================================================
+    <!-- Form  ( Material Design Theme )-->
+/* ====================================================== */
+/*
+ * 1. Controls
+ * 4. Custom Select
+*/
 /*
  ---------------------------
- 11. Date Picker ( 3rd Party Plugin )
+ 1. Controls
+ ---------------------------
+ */
+/* Default Controls */
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .uix-controls__basic-bar,
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .uix-controls__bar {
+  left: auto;
+  right: 0; }
+
+/* Create Line Effect on Click */
+.uix-controls.uix-controls--line {
+  /*-- Form With Icon --*/
+  /*-- Select --*/ }
+  .uix-controls.uix-controls--line label {
+    left: auto !important;
+    right: -0.25rem !important; }
+    .uix-controls.uix-controls--line label.is-active {
+      transform-origin: right top;
+      transform: translateX(1.75rem) scale(0.875); }
+  .uix-controls.uix-controls--line.is-iconic label {
+    left: auto !important;
+    right: 2.54688rem !important; }
+    .uix-controls.uix-controls--line.is-iconic label.is-active {
+      transform: translateX(4.09375rem) scale(0.875); }
+  .uix-controls.uix-controls--line.is-iconic.is-reversed input:not([type="checkbox"]):not([type="radio"]) {
+    padding-right: 0 !important; }
+  .uix-controls.uix-controls--line.is-iconic.is-reversed textarea,
+  .uix-controls.uix-controls--line.is-iconic.is-reversed button:not(.uix-btn),
+  .uix-controls.uix-controls--line.is-iconic.is-reversed select {
+    padding-right: 0 !important; }
+  .uix-controls.uix-controls--line.is-iconic.is-reversed label {
+    left: auto !important;
+    right: -0.25rem !important; }
+    .uix-controls.uix-controls--line.is-iconic.is-reversed label.is-active {
+      transform: translateX(1.75rem) scale(0.875); }
+  .uix-controls.uix-controls--line.uix-controls__normal-select select {
+    padding-right: 0 !important;
+    padding-left: 1.54688rem !important; }
+
+/*
+ ---------------------------
+ 4. Custom Select
+ ---------------------------
+ */
+.uix-controls__select-wrapper.uix-controls--line.is-disabled {
+  /* Mask used to prohibit selection */ }
+  .uix-controls__select-wrapper.uix-controls--line.is-disabled::before {
+    left: auto;
+    right: 0; }
+
+.uix-controls__select-wrapper .uix-controls--line .uix-controls__select-trigger {
+  padding-right: 0; }
+
+/* ======================================================
+    <!-- Form -->
+/* ====================================================== */
+/*
+ * 1. Date Picker ( 3rd Party Plugin )
+*/
+/*
+ ---------------------------
+ 1. Date Picker ( 3rd Party Plugin )
  ---------------------------
  */
 .uix-controls__date::after {

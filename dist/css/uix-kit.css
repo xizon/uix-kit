@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
- * ## Version             :  3.7.3
+ * ## Version             :  3.7.5
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  July 31, 2019
+ * ## Last Update         :  August 8, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -52,70 +52,72 @@
     34.Floating Side Element
     35.Form Progress
     36.Form
-    37.Gallery
-    38.Image Shapes
-    39.Lava-Lamp Style Menu
-    40.Cutom Light Box
-    41.Bulleted List
-    42.List of Posts
-    43.List of Split Posts
-    44.Fullwidth List of Split
-    45.Login Templates
-    46.Modal Dialog
-    47.Multiple Items Carousel
-    48.Parallax
-    49.Periodical Scroll
-    50.Pricing
-    51.Progress Bar
-    52.Progress Line
-    53.Show More Less
-    54.Sticky Elements
-    55.SVG Map
-    56.3D Background
-    57.3D Carousel
-    58.3D Shatter Slider
-    59.3D Explosive Particle Slider
-    60.Table
-    61.Tabs
-    62.Team Focus
-    63.Text effect
-    64.Timeline
-    65.Vertical Menu
-    66.WordPress Core ( Do not use prefix "uix-" )
-    67.3rd Party Plugins
-    68.Badges
-    69.Blended Grid Layout
-    70.Breadcrumbs
-    71.Button
-    72.Cards
-    73.Badges
-    74.Content Placeholder Animated
-    75.Dividing Line
-    76.Dots
-    77.Dotted Line
-    78.Equal-width Columns
-    79.Features
-    80.Footer Templates
-    81.Heading
-    82.Image Animation
-    83.Brands List
-    84.Maintain Aspect Ratio List
-    85.Side by Side List
-    86.Side by Side List With Photo
-    87.Fullwidth List of Split 2
-    88.Mouse Animation Scroll
-    89.Overlay
-    90.Ribbon
-    91.Shape Animation
-    92.Comments ( Synchronize to WordPress's class name )
-    93.Editing Component
-    94.Striking
-    95.Team Fullwidth (Style using the Side by Side List With Photo module)
-    96.Team Gird
-    97.Testimonials Carousel
-    98.ToolTip
-    99.Vertical Separator
-    100.Wave Background
+    37.Form  ( Material Design Theme )
+    38.Form ( 3rd Party Plugin )
+    39.Gallery
+    40.Image Shapes
+    41.Lava-Lamp Style Menu
+    42.Cutom Light Box
+    43.Bulleted List
+    44.List of Posts
+    45.List of Split Posts
+    46.Fullwidth List of Split
+    47.Login Templates
+    48.Modal Dialog
+    49.Multiple Items Carousel
+    50.Parallax
+    51.Periodical Scroll
+    52.Pricing
+    53.Progress Bar
+    54.Progress Line
+    55.Show More Less
+    56.Sticky Elements
+    57.SVG Map
+    58.3D Background
+    59.3D Carousel
+    60.3D Shatter Slider
+    61.3D Explosive Particle Slider
+    62.Table
+    63.Tabs
+    64.Team Focus
+    65.Text effect
+    66.Timeline
+    67.Vertical Menu
+    68.WordPress Core ( Do not use prefix "uix-" )
+    69.3rd Party Plugins
+    70.Badges
+    71.Blended Grid Layout
+    72.Breadcrumbs
+    73.Button
+    74.Cards
+    75.Badges
+    76.Content Placeholder Animated
+    77.Dividing Line
+    78.Dots
+    79.Dotted Line
+    80.Equal-width Columns
+    81.Features
+    82.Footer Templates
+    83.Heading
+    84.Image Animation
+    85.Brands List
+    86.Maintain Aspect Ratio List
+    87.Side by Side List
+    88.Side by Side List With Photo
+    89.Fullwidth List of Split 2
+    90.Mouse Animation Scroll
+    91.Overlay
+    92.Ribbon
+    93.Shape Animation
+    94.Comments ( Synchronize to WordPress's class name )
+    95.Editing Component
+    96.Striking
+    97.Team Fullwidth (Style using the Side by Side List With Photo module)
+    98.Team Gird
+    99.Testimonials Carousel
+    100.ToolTip
+    101.Vertical Separator
+    102.Wave Background
 
 
 */
@@ -4868,7 +4870,6 @@ ol.uix-flexslider__control-paging {
  * 8. Single Selector
  * 9. Search of Widget
  * 10. Add / remove input field dynamically
- * 11. Date Picker  ( 3rd Party Plugin )
 */
 /*
  ---------------------------
@@ -4926,38 +4927,13 @@ select:-webkit-autofill:focus {
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-rounded button:not(.uix-btn),
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-rounded select {
     border-radius: 4px; }
-  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .uix-controls__bar {
-    position: absolute;
-    height: 2px;
-    left: -2px;
-    width: 100%;
-    bottom: 0.5px;
-    display: none; }
-    .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .uix-controls__bar::before, .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .uix-controls__bar::after {
-      content: '';
-      display: block;
-      height: 100%;
-      width: 0;
-      position: absolute;
-      background: #212121;
-      transition: all 0.3s ease; }
-    .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .uix-controls__bar::before {
-      left: 51%; }
-    .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .uix-controls__bar::after {
-      right: 49%; }
-    .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .uix-controls__bar.is-active::before, .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .uix-controls__bar.is-active::after {
-      width: 50%; }
-  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-fullwidth .uix-controls__bar {
-    left: -6px; }
-  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__textarea .uix-controls__bar {
-    transform: translateY(-6px); }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) input:not([type="checkbox"]):not([type="radio"]) {
     border-radius: 0;
     /* Remove inner shadow from inputs on mobile iOS */
     -webkit-appearance: none;
     transition: all 0.3s ease;
     font-size: 0.875rem;
-    padding: 0.546875rem;
+    padding: 0.54688rem 0.54688rem;
     margin: 0;
     box-sizing: content-box;
     background-color: #fff;
@@ -4970,23 +4946,15 @@ select:-webkit-autofill:focus {
     .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) input:not([type="checkbox"]):not([type="radio"]):focus {
       outline: none;
       border-color: #212121; }
-  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls--line input:not([type="checkbox"]):not([type="radio"]) {
-    padding-left: 0; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__short-s input:not([type="checkbox"]):not([type="radio"]) {
     width: 120px;
     margin-right: .5rem; }
-  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__short-s .uix-controls__bar {
-    width: calc( 120px + 1.09375rem + 2px); }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__short-m input:not([type="checkbox"]):not([type="radio"]) {
     width: 155px;
     margin-right: .5rem; }
-  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__short-m .uix-controls__bar {
-    width: calc( 155px + 1.09375rem + 2px); }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__short-l input:not([type="checkbox"]):not([type="radio"]) {
     width: 192px;
     margin-right: .5rem; }
-  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__short-l .uix-controls__bar {
-    width: calc( 192px + 1.09375rem + 2px); }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) textarea,
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) button:not(.uix-btn),
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) select {
@@ -4994,7 +4962,7 @@ select:-webkit-autofill:focus {
     /* Remove inner shadow from inputs on mobile iOS */
     -webkit-appearance: none;
     font-size: 0.875rem;
-    padding: 0.546875rem;
+    padding: 0.54688rem 0.54688rem;
     margin: 0;
     border: none;
     box-sizing: content-box;
@@ -5011,8 +4979,6 @@ select:-webkit-autofill:focus {
     .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) textarea:focus {
       outline: none;
       border-color: #212121; }
-  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls--line textarea {
-    padding-left: 0; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) button:not(.uix-btn) {
     cursor: pointer;
     padding: 0.75rem 0;
@@ -5033,23 +4999,23 @@ select:-webkit-autofill:focus {
     font-weight: 500;
     color: #999;
     position: absolute;
-    left: 0.875rem;
-    top: 0.5rem;
+    left: 0.29688rem;
+    top: 0.54688rem;
     display: inline-block;
-    padding: 0 0.875rem;
+    padding: 0 0.25rem;
     background-color: rgba(255, 255, 255, 0);
     pointer-events: none;
-    transition: all 0.3s ease; }
+    transition: all 0.3s ease;
+    transform-origin: left top; }
     .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) label.is-active {
       color: #555;
       background-color: white;
-      transform-origin: left top;
       transform: scale(0.875) translateY(-1.6rem); }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .uix-controls__arrow {
     display: inline-block;
     position: absolute;
     right: 0.875rem;
-    top: 1rem;
+    top: 1.04688rem;
     font-size: 0.625rem;
     font-weight: 500;
     color: #999; }
@@ -5061,25 +5027,29 @@ select:-webkit-autofill:focus {
     pointer-events: auto !important; }
     .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-radio label.is-active {
       top: auto !important; }
-  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-select {
-    margin-right: 1.65rem; }
-    .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-select label {
-      display: none; }
-    .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-select.is-fullwidth label {
-      display: inline-block; }
-    .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-select .uix-controls__arrow {
-      right: -1rem; }
-    .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-select select {
-      padding-right: 1.5rem;
-      padding-left: 1.5rem;
-      font-weight: 500;
-      font-size: 1rem; }
+  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-select:not(.is-fullwidth) {
+    margin-right: 1.5rem; }
+  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-select .uix-controls__arrow {
+    right: 0; }
+  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-select label {
+    display: none; }
+  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-select select {
+    padding-right: 1rem;
+    padding-left: 0.54688rem;
+    font-weight: 500;
+    font-size: 1rem; }
+  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-select.is-fullwidth .uix-controls__arrow {
+    right: 0.54688rem; }
+  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-select.is-fullwidth label {
+    display: inline-block; }
+  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-select.is-fullwidth select {
+    padding-right: 0.54688rem; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic label {
-    left: 3rem; }
+    left: 2.54688rem; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic i {
     position: absolute;
     left: 1rem;
-    top: 0.875rem;
+    top: 0.79688rem;
     color: #dce4e8; }
     .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic i::after {
       content: '';
@@ -5088,32 +5058,32 @@ select:-webkit-autofill:focus {
       width: 1px;
       background: #dce4e8;
       position: absolute;
-      left: 1.4rem;
+      left: 1.2rem;
       top: 0; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic input:not([type="checkbox"]):not([type="radio"]) {
-    padding-left: calc(3.5rem - 0.546875rem);
-    width: calc(100% - 1.09375rem - 2px - 2.5rem); }
+    padding-left: 2.54688rem;
+    width: calc(100% - 2.54688rem - 2px - 0.54688rem); }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic textarea,
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic button:not(.uix-btn),
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic select {
-    padding-left: calc(3.5rem - 0.546875rem);
-    width: calc(100% - 1.09375rem - 2px - 2.5rem); }
+    padding-left: 2.54688rem;
+    width: calc(100% - 2.54688rem - 2px - 0.54688rem); }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed label {
-    left: 0.546875rem; }
+    left: 0.54688rem; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed i {
     left: auto;
     right: 1rem; }
     .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed i::after {
       left: auto;
-      right: 1.4rem; }
+      right: 1.2rem; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed input:not([type="checkbox"]):not([type="radio"]) {
-    padding-left: 0.546875rem;
-    padding-right: calc(3.5rem - 0.546875rem); }
+    padding-left: 0.54688rem;
+    padding-right: 2.54688rem; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed textarea,
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed button:not(.uix-btn),
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed select {
-    padding-left: 0.546875rem;
-    padding-right: calc(3.5rem - 0.546875rem); }
+    padding-left: 0.54688rem;
+    padding-right: 2.54688rem; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-success input:not([type="checkbox"]):not([type="radio"]) {
     border-color: #4AB005; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-success textarea,
@@ -5122,8 +5092,6 @@ select:-webkit-autofill:focus {
     border-color: #4AB005; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-success label {
     color: #4AB005 !important; }
-  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-success .uix-controls__bar::before, .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-success .uix-controls__bar::after {
-    background: #4AB005; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-error input:not([type="checkbox"]):not([type="radio"]) {
     border-color: #f00; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-error textarea,
@@ -5132,8 +5100,6 @@ select:-webkit-autofill:focus {
     border-color: #f00; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-error label {
     color: #f00 !important; }
-  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-error .uix-controls__bar::before, .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-error .uix-controls__bar::after {
-    background: #f00; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select):not(.uix-controls--line).is-disabled input:not([type="checkbox"]):not([type="radio"]) {
     border-color: #E1E1E1;
     background: #EDEDED; }
@@ -5142,76 +5108,11 @@ select:-webkit-autofill:focus {
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select):not(.uix-controls--line).is-disabled select {
     border-color: #E1E1E1;
     background: #E1E1E1; }
-  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select):not(.uix-controls--line).is-disabled .uix-controls__bar::before, .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select):not(.uix-controls--line).is-disabled .uix-controls__bar::after {
-    background: #E1E1E1; }
   .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .req-icon {
     position: absolute;
     right: 0.721875rem;
     top: 0.721875rem;
     color: #EC5E79; }
-
-/* Create Line Effect on Click */
-.uix-controls.uix-controls--line {
-  /*-- Form With Icon --*/
-  /*-- Select --*/
-  /*-- Form Status: Disable --*/ }
-  .uix-controls.uix-controls--line.is-pill input:not([type="checkbox"]):not([type="radio"]),
-  .uix-controls.uix-controls--line.is-pill textarea,
-  .uix-controls.uix-controls--line.is-pill button:not(.uix-btn),
-  .uix-controls.uix-controls--line.is-pill select, .uix-controls.uix-controls--line.is-rounded input:not([type="checkbox"]):not([type="radio"]),
-  .uix-controls.uix-controls--line.is-rounded textarea,
-  .uix-controls.uix-controls--line.is-rounded button:not(.uix-btn),
-  .uix-controls.uix-controls--line.is-rounded select {
-    border-radius: 0 !important; }
-  .uix-controls.uix-controls--line .uix-controls__bar {
-    display: block !important; }
-  .uix-controls.uix-controls--line input:not([type="checkbox"]):not([type="radio"]) {
-    border-top-color: transparent !important;
-    border-left-color: transparent !important;
-    border-right-color: transparent !important; }
-    .uix-controls.uix-controls--line input:not([type="checkbox"]):not([type="radio"]):focus {
-      border-color: transparent !important; }
-  .uix-controls.uix-controls--line textarea,
-  .uix-controls.uix-controls--line button:not(.uix-btn),
-  .uix-controls.uix-controls--line select {
-    border-top-color: transparent !important;
-    border-left-color: transparent !important;
-    border-right-color: transparent !important; }
-  .uix-controls.uix-controls--line select:focus {
-    border-bottom-color: #dce4e8 !important; }
-  .uix-controls.uix-controls--line.is-fullwidth select:focus {
-    border-bottom-color: transparent !important; }
-  .uix-controls.uix-controls--line textarea:focus {
-    border-color: transparent !important; }
-  .uix-controls.uix-controls--line button:not(.uix-btn):focus {
-    border-color: transparent !important; }
-  .uix-controls.uix-controls--line label {
-    left: -0.75rem !important; }
-    .uix-controls.uix-controls--line label.is-active {
-      transform-origin: left top;
-      transform: translateX(-1.75rem) scale(0.875); }
-  .uix-controls.uix-controls--line.is-iconic label {
-    left: 2.375rem !important; }
-    .uix-controls.uix-controls--line.is-iconic label.is-active {
-      transform: translateX(-4.09375rem) scale(0.875); }
-  .uix-controls.uix-controls--line.is-iconic.is-reversed label {
-    left: -0.75rem !important; }
-    .uix-controls.uix-controls--line.is-iconic.is-reversed label.is-active {
-      transform: translateX(-1.75rem) scale(0.875); }
-  .uix-controls.uix-controls--line.uix-controls__normal-select .uix-controls__arrow {
-    right: 0 !important; }
-  .uix-controls.uix-controls--line.uix-controls__normal-select select {
-    padding-left: 0 !important; }
-  .uix-controls.uix-controls--line.is-disabled input:not([type="checkbox"]):not([type="radio"]) {
-    opacity: .7; }
-  .uix-controls.uix-controls--line.is-disabled textarea,
-  .uix-controls.uix-controls--line.is-disabled button:not(.uix-btn),
-  .uix-controls.uix-controls--line.is-disabled select {
-    opacity: .7; }
-  .uix-controls.uix-controls--line.is-disabled label {
-    opacity: .5; }
-  .uix-controls.uix-controls--line.is-disabled .uix-controls__bar::before, .uix-controls.uix-controls--line.is-disabled .uix-controls__bar::after {
-    opacity: .5; }
 
 /*
  ---------------------------
@@ -5227,7 +5128,7 @@ select:-webkit-autofill:focus {
   transition: all 0.3s ease; }
   .uix-controls__file-container .uix-controls__file-trigger i {
     margin-right: .5rem; }
-  .uix-controls__file-container:hover, .uix-controls__multi-sel > span.uix-controls__file-container.is-active:not(.uix-controls__bar) {
+  .uix-controls__file-container:hover, .uix-controls__multi-sel > span.uix-controls__file-container.is-active {
     color: #000; }
   .uix-controls__file-container input[type="file"] {
     position: absolute;
@@ -5322,7 +5223,8 @@ select:-webkit-autofill:focus {
     content: '';
     clear: both; }
   .uix-controls__merge i {
-    margin-right: .5rem;
+    margin-left: 0;
+    margin-right: 0;
     opacity: .7; }
   .uix-controls__merge textarea,
   .uix-controls__merge button,
@@ -5335,23 +5237,26 @@ select:-webkit-autofill:focus {
     transition: all 0.3s ease;
     font-size: 0.875rem;
     font-weight: 600;
-    padding: 0.546875rem;
+    padding: 0.54688rem 0.54688rem;
     box-sizing: content-box;
     color: #888;
     margin-bottom: 1.09375rem;
     border: 1px solid #dce4e8;
-    width: calc(80% - 1.09375rem - 1.09375rem); }
+    width: calc(80% - 1.09375rem - 2px);
+    /* Fixed the gap*/
+    float: left; }
     .uix-controls__merge input:focus {
       outline: none; }
   .uix-controls__merge button {
-    padding: 0.8125rem 0;
-    width: calc(20% + 5px);
+    padding: 0.82812rem 0;
+    width: 20%;
+    margin-left: -1px;
     min-width: 0;
-    margin-left: -5px;
     letter-spacing: .02rem;
     font-weight: 600;
     font-size: 0.875rem;
-    margin-top: -2px; }
+    /* Fixed the gap*/
+    float: left; }
     .uix-controls__merge button span {
       display: inline-block;
       padding-left: .3rem;
@@ -5370,12 +5275,12 @@ select:-webkit-autofill:focus {
   .uix-controls__merge.is-rounded button {
     border-radius: 0 4px 4px 0; }
   .uix-controls__merge.is-iconic input {
-    padding-left: 3rem;
-    width: calc(80% - 1.09375rem - 1.09375rem - 2.453125rem); }
+    padding-left: 2.54688rem;
+    width: calc(80% - 3.09375rem - 2px); }
   .uix-controls__merge.is-iconic i {
     position: absolute;
     left: 1rem;
-    top: 0.875rem;
+    top: 0.79688rem;
     color: #dce4e8; }
     .uix-controls__merge.is-iconic i::after {
       content: '';
@@ -5384,17 +5289,17 @@ select:-webkit-autofill:focus {
       width: 1px;
       background: #dce4e8;
       position: absolute;
-      left: 1.4rem;
+      left: 1.2rem;
       top: 0; }
   .uix-controls__merge.is-iconic.is-reversed input {
     padding-right: auto;
-    padding-left: calc(3rem - 0.546875rem); }
+    padding-left: calc(3rem - 0.54688rem); }
   .uix-controls__merge.is-iconic.is-reversed i {
     left: auto;
     right: 1rem; }
     .uix-controls__merge.is-iconic.is-reversed i::after {
       left: auto;
-      right: 1.4rem; }
+      right: 1.2rem; }
 
 /*
  ---------------------------
@@ -5414,7 +5319,8 @@ select:-webkit-autofill:focus {
   position: relative;
   display: inline-block;
   user-select: none;
-  min-height: 4.1rem; }
+  min-height: 4.1rem;
+  /* Shown above */ }
   .uix-controls__select-wrapper.is-fullwidth {
     width: 100%; }
     .uix-controls__select-wrapper.is-fullwidth .uix-controls__select-trigger {
@@ -5435,20 +5341,6 @@ select:-webkit-autofill:focus {
     .uix-controls__select-wrapper:not(.uix-controls--line).is-disabled .uix-controls__select-trigger {
       border-color: #E1E1E1 !important;
       background: #EDEDED !important; }
-  .uix-controls__select-wrapper.uix-controls--line.is-disabled {
-    opacity: .7;
-    /* Mask used to prohibit selection */ }
-    .uix-controls__select-wrapper.uix-controls--line.is-disabled::before {
-      content: '';
-      position: absolute;
-      display: block;
-      width: 100%;
-      height: 100%;
-      background: none;
-      top: 0;
-      left: 0;
-      z-index: 2;
-      user-select: none; }
   .uix-controls__select-wrapper select {
     display: none; }
   .uix-controls__select-wrapper .uix-controls__select-trigger {
@@ -5456,8 +5348,8 @@ select:-webkit-autofill:focus {
     color: #999;
     position: relative;
     display: inline-block;
-    min-width: 150px;
-    padding: 0.546875rem 2.5rem 0.546875rem 1.5rem;
+    min-width: 100px;
+    padding: 0.54688rem 2.04688rem 0.54688rem 0.54688rem;
     border: 1px solid #dce4e8;
     background: #fff;
     cursor: pointer;
@@ -5486,33 +5378,6 @@ select:-webkit-autofill:focus {
     border-radius: 50px; }
   .uix-controls__select-wrapper.is-rounded .uix-controls__select-trigger {
     border-radius: 4px; }
-  .uix-controls__select-wrapper .uix-controls--line .uix-controls__select-trigger {
-    text-indent: -1.6rem;
-    border-radius: 0;
-    border-top-color: transparent !important;
-    border-left-color: transparent !important;
-    border-right-color: transparent !important; }
-  .uix-controls__select-wrapper .uix-controls--line .uix-controls__bar {
-    position: absolute;
-    height: 2px;
-    left: -0.25rem;
-    width: 100%;
-    bottom: calc( 1.09375rem + 0.5px);
-    transform: translateX(2px); }
-    .uix-controls__select-wrapper .uix-controls--line .uix-controls__bar::before, .uix-controls__select-wrapper .uix-controls--line .uix-controls__bar::after {
-      content: '';
-      display: block;
-      height: 100%;
-      width: 0;
-      position: absolute;
-      background: #212121;
-      transition: all 0.3s ease; }
-    .uix-controls__select-wrapper .uix-controls--line .uix-controls__bar::before {
-      left: 51%; }
-    .uix-controls__select-wrapper .uix-controls--line .uix-controls__bar::after {
-      right: 49%; }
-  .uix-controls__select-wrapper .uix-controls--line.is-fullwidth .uix-controls__bar {
-    left: -0.685rem; }
   .uix-controls__select-wrapper .uix-controls__select-label {
     display: inline-block;
     margin-left: .3rem;
@@ -5526,7 +5391,7 @@ select:-webkit-autofill:focus {
     top: 100%;
     left: 0;
     right: 0;
-    min-width: 100%;
+    min-width: 150px;
     border: 1px solid #dce4e8;
     border-radius: 2px;
     box-sizing: border-box;
@@ -5554,6 +5419,36 @@ select:-webkit-autofill:focus {
       background: #fff;
       transform: rotate(45deg);
       transition: all 0.3s ease; }
+  .uix-controls__select-wrapper .uix-controls__select__option {
+    position: relative;
+    display: block;
+    padding: 0 1.5rem;
+    border-bottom: 1px solid #dce4e8;
+    font-size: 0.875rem;
+    color: #888;
+    line-height: 47px;
+    cursor: pointer;
+    transition: all 0.3s ease; }
+    .uix-controls__select-wrapper .uix-controls__select__option:first-of-type {
+      border-radius: 2px 2px 0 0; }
+    .uix-controls__select-wrapper .uix-controls__select__option:last-of-type {
+      border-bottom: 0;
+      border-radius: 0 0 2px 2px; }
+    .uix-controls__select-wrapper .uix-controls__select__option:hover, .uix-controls__select-wrapper .uix-controls__multi-sel > span.uix-controls__select__option.is-active, .uix-controls__select-wrapper .uix-controls__select__option.is-active {
+      background: #f9f9f9; }
+  .uix-controls__select-wrapper .uix-controls__select {
+    position: relative;
+    display: inline-block; }
+    .uix-controls__select-wrapper .uix-controls__select.is-opened .uix-controls__select-trigger::after {
+      transform: rotate(-135deg); }
+    .uix-controls__select-wrapper .uix-controls__select.is-opened .uix-controls__select__option-container {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: all;
+      transform: translateY(-0.54688rem); }
+    .uix-controls__select-wrapper .uix-controls__select.is-transparent .uix-controls__select-trigger {
+      background: none;
+      border-color: rgba(255, 255, 255, 0.1); }
   .uix-controls__select-wrapper .uix-controls__select--top {
     /* Shown from above */ }
     .uix-controls__select-wrapper .uix-controls__select--top .uix-controls__select__option-container {
@@ -5577,38 +5472,8 @@ select:-webkit-autofill:focus {
         z-index: 1; }
       .uix-controls__select-wrapper .uix-controls__select--top .uix-controls__select__option-container::before {
         display: none; }
-  .uix-controls__select-wrapper .uix-controls__select__option {
-    position: relative;
-    display: block;
-    padding: 0 1.5rem;
-    border-bottom: 1px solid #dce4e8;
-    font-size: 0.875rem;
-    color: #888;
-    line-height: 47px;
-    cursor: pointer;
-    transition: all 0.3s ease; }
-    .uix-controls__select-wrapper .uix-controls__select__option:first-of-type {
-      border-radius: 2px 2px 0 0; }
-    .uix-controls__select-wrapper .uix-controls__select__option:last-of-type {
-      border-bottom: 0;
-      border-radius: 0 0 2px 2px; }
-    .uix-controls__select-wrapper .uix-controls__select__option:hover, .uix-controls__select-wrapper .uix-controls__multi-sel > span.uix-controls__select__option.is-active:not(.uix-controls__bar), .uix-controls__select-wrapper .uix-controls__select__option.is-active {
-      background: #f9f9f9; }
-  .uix-controls__select-wrapper .uix-controls__select {
-    position: relative;
-    display: inline-block; }
-    .uix-controls__select-wrapper .uix-controls__select.is-opened .uix-controls__select-trigger::after {
-      transform: rotate(-135deg); }
-    .uix-controls__select-wrapper .uix-controls__select.is-opened .uix-controls__select__option-container {
-      opacity: 1;
-      visibility: visible;
-      pointer-events: all;
+    .uix-controls__select-wrapper .uix-controls__select--top.is-opened .uix-controls__select__option-container {
       transform: translateY(0); }
-    .uix-controls__select-wrapper .uix-controls__select.is-opened .uix-controls__bar::before, .uix-controls__select-wrapper .uix-controls__select.is-opened .uix-controls__bar::after {
-      width: 50%; }
-    .uix-controls__select-wrapper .uix-controls__select.is-transparent .uix-controls__select-trigger {
-      background: none;
-      border-color: rgba(255, 255, 255, 0.1); }
 
 /*
  ---------------------------
@@ -5618,7 +5483,7 @@ select:-webkit-autofill:focus {
 .uix-controls__radio {
   position: relative; }
   .uix-controls__radio label {
-    margin: 0.546875rem .5rem 0.546875rem 0;
+    margin: 0.54688rem 0.5rem 0.54688rem 0;
     position: relative;
     left: auto;
     top: auto;
@@ -5664,7 +5529,7 @@ select:-webkit-autofill:focus {
     overflow: hidden;
     cursor: pointer;
     margin-top: 0;
-    margin-bottom: .546875rem;
+    margin-bottom: 0.54688rem;
     text-align: left;
     /* Required */ }
   .uix-controls__toggle.is-pill label {
@@ -5723,7 +5588,7 @@ select:-webkit-autofill:focus {
     border: 1px solid #dce4e8;
     vertical-align: middle;
     position: relative;
-    margin: 0.546875rem .5rem 0.546875rem 0;
+    margin: 0.54688rem 0.5rem 0.54688rem 0;
     cursor: pointer;
     transition: all 0.3s ease; }
     .uix-controls__checkbox .uix-controls__checkbox-trigger::before, .uix-controls__checkbox .uix-controls__checkbox-trigger::after {
@@ -5767,12 +5632,12 @@ select:-webkit-autofill:focus {
   border-left: 1px solid #dce4e8;
   color: #dce4e8;
   text-align: center;
-  line-height: 1;
+  line-height: 1.04688rem;
   cursor: pointer;
   user-select: none;
   right: 1px;
   background-color: #fff; }
-  .uix-controls__number .uix-controls__number__btn:hover, .uix-controls__number .uix-controls__multi-sel > span.uix-controls__number__btn.is-active:not(.uix-controls__bar) {
+  .uix-controls__number .uix-controls__number__btn:hover, .uix-controls__number .uix-controls__multi-sel > span.uix-controls__number__btn.is-active {
     color: #333; }
   .uix-controls__number .uix-controls__number__btn.uix-controls__number__btn--add {
     top: 1px;
@@ -5782,112 +5647,86 @@ select:-webkit-autofill:focus {
     bottom: 1px;
     border-radius: 0 0 4px 0; }
 
-.uix-controls__number.uix-controls--line .uix-controls__number__btn {
-  border: none; }
-
 /*
  ---------------------------
  7. Multiple Selector
  ---------------------------
  */
-.uix-controls__multi-sel {
-  /* Create Line Effect on Click */ }
-  .uix-controls__multi-sel > span:not(.uix-controls__bar) {
-    position: relative;
-    display: inline-block;
-    border: 1px solid #dce4e8;
-    color: #888;
-    padding: .3rem .7rem;
-    text-decoration: none;
-    cursor: pointer;
-    font-size: 1rem;
-    background: #fff;
-    margin-bottom: 1rem;
-    margin-right: 1rem;
+.uix-controls__multi-sel > span {
+  position: relative;
+  display: inline-block;
+  border: 1px solid #dce4e8;
+  color: #888;
+  padding: .3rem .7rem;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 1rem;
+  background: #fff;
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+  transition: all 0.3s ease; }
+  .uix-controls__multi-sel > span i {
+    position: absolute;
+    top: -5px;
+    right: -8px;
+    background: #F1F1F1;
+    border: 1px solid #E0E0E0;
+    font-size: 0.75rem;
     transition: all 0.3s ease; }
-    .uix-controls__multi-sel > span:not(.uix-controls__bar) i {
-      position: absolute;
-      top: -5px;
-      right: -8px;
-      background: #F1F1F1;
-      border: 1px solid #E0E0E0;
-      font-size: 0.75rem;
-      transition: all 0.3s ease; }
-    .uix-controls__multi-sel > span:not(.uix-controls__bar):hover, .uix-controls__multi-sel > span.is-active:not(.uix-controls__bar) {
-      border-color: #d7d7d7;
-      background: #EEEEEE; }
-    .uix-controls__multi-sel > span:not(.uix-controls__bar).is-active i {
-      background: #EC5E79;
-      border-color: #EC5E79;
-      color: #fff; }
-  .uix-controls__multi-sel.is-pill > span:not(.uix-controls__bar) {
-    border-radius: 50px; }
-  .uix-controls__multi-sel.is-rounded > span:not(.uix-controls__bar) {
-    border-radius: 4px; }
-  .uix-controls__multi-sel.uix-controls--line > span:not(.uix-controls__bar) {
-    border-top-color: transparent !important;
-    border-left-color: transparent !important;
-    border-right-color: transparent !important;
-    background: #fff !important; }
-    .uix-controls__multi-sel.uix-controls--line > span:not(.uix-controls__bar) .uix-controls__bar {
-      left: 0 !important;
-      bottom: -1px !important; }
-    .uix-controls__multi-sel.uix-controls--line > span:not(.uix-controls__bar).is-active {
-      color: #888 !important; }
-      .uix-controls__multi-sel.uix-controls--line > span:not(.uix-controls__bar).is-active .uix-controls__bar::before, .uix-controls__multi-sel.uix-controls--line > span:not(.uix-controls__bar).is-active .uix-controls__bar::after {
-        width: 50% !important; }
+  .uix-controls__multi-sel > span:hover, .uix-controls__multi-sel > span.is-active {
+    border-color: #d7d7d7;
+    background: #EEEEEE; }
+  .uix-controls__multi-sel > span.is-active i {
+    background: #EC5E79;
+    border-color: #EC5E79;
+    color: #fff; }
+
+.uix-controls__multi-sel.is-pill > span {
+  border-radius: 50px; }
+
+.uix-controls__multi-sel.is-rounded > span {
+  border-radius: 4px; }
 
 /*
  ---------------------------
  8. Single Selector
  ---------------------------
  */
-.uix-controls__single-sel {
-  /* Create Line Effect on Click */ }
-  .uix-controls__single-sel > span:not(.uix-controls__bar) {
-    position: relative;
-    display: inline-block;
-    border: 1px solid #dce4e8;
-    color: #888;
-    padding: .3rem .7rem;
-    text-decoration: none;
-    cursor: pointer;
-    font-size: 1rem;
-    background: #fff;
-    float: left;
-    margin-bottom: 1rem;
-    transition: all 0.3s ease; }
-    .uix-controls__single-sel > span:not(.uix-controls__bar):not(:first-child) {
-      border-left: 0; }
-    .uix-controls__single-sel > span:not(.uix-controls__bar):hover, .uix-controls__multi-sel.uix-controls__single-sel > span.is-active:not(.uix-controls__bar) {
-      border-color: #EC5E79;
-      background: #EC5E79;
-      background: linear-gradient(to bottom, #EC5E79 0%, #E8588C 100%); }
-    .uix-controls__single-sel > span:not(.uix-controls__bar).is-active {
-      color: #fff;
-      border-color: #EC5E79;
-      background: #EC5E79; }
-  .uix-controls__single-sel.is-pill > span:not(.uix-controls__bar):first-child {
-    border-radius: 50px 0 0 50px; }
-  .uix-controls__single-sel.is-pill > span:not(.uix-controls__bar):last-child {
-    border-radius: 0 50px 50px 0; }
-  .uix-controls__single-sel.is-rounded > span:not(.uix-controls__bar):first-child {
-    border-radius: 4px 0 0 4px; }
-  .uix-controls__single-sel.is-rounded > span:not(.uix-controls__bar):last-child {
-    border-radius: 0 4px 4px 0; }
-  .uix-controls__single-sel.uix-controls--line > span:not(.uix-controls__bar) {
-    border-top-color: transparent !important;
-    border-left-color: transparent !important;
-    border-right-color: transparent !important;
-    background: #fff !important; }
-    .uix-controls__single-sel.uix-controls--line > span:not(.uix-controls__bar) .uix-controls__bar {
-      left: 0 !important;
-      bottom: -1px !important; }
-    .uix-controls__single-sel.uix-controls--line > span:not(.uix-controls__bar).is-active {
-      border-bottom-color: #dce4e8 !important;
-      color: #888 !important; }
-      .uix-controls__single-sel.uix-controls--line > span:not(.uix-controls__bar).is-active .uix-controls__bar::before, .uix-controls__single-sel.uix-controls--line > span:not(.uix-controls__bar).is-active .uix-controls__bar::after {
-        width: 50% !important; }
+.uix-controls__single-sel > span {
+  position: relative;
+  display: inline-block;
+  border: 1px solid #dce4e8;
+  color: #888;
+  padding: .3rem .7rem;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 1rem;
+  background: #fff;
+  float: left;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease; }
+  .uix-controls__single-sel > span:not(:first-child) {
+    border-left: 0; }
+  .uix-controls__single-sel > span:hover, .uix-controls__multi-sel.uix-controls__single-sel > span.is-active {
+    border-color: #EC5E79;
+    background: #EC5E79;
+    background: linear-gradient(to bottom, #EC5E79 0%, #E8588C 100%); }
+  .uix-controls__single-sel > span.is-active {
+    color: #fff;
+    border-color: #EC5E79;
+    background: #EC5E79; }
+
+.uix-controls__single-sel.is-pill > span:first-child {
+  border-radius: 50px 0 0 50px; }
+
+.uix-controls__single-sel.is-pill > span:last-child {
+  border-radius: 0 50px 50px 0; }
+
+.uix-controls__single-sel.is-rounded > span:first-child {
+  border-radius: 4px 0 0 4px; }
+
+.uix-controls__single-sel.is-rounded > span:last-child {
+  border-radius: 0 4px 4px 0; }
 
 /*
  ---------------------------
@@ -5916,13 +5755,13 @@ select:-webkit-autofill:focus {
       display: none; }
   .uix-search-box .uix-search-box__submit {
     position: absolute;
-    top: 0.546875rem;
+    top: 0.5rem;
     right: 0.875rem;
     cursor: pointer;
     font-size: 1rem;
     /* Icon */
     color: #CCC; }
-    .uix-search-box .uix-search-box__submit:hover, .uix-search-box .uix-controls__multi-sel > span.uix-search-box__submit.is-active:not(.uix-controls__bar) {
+    .uix-search-box .uix-search-box__submit:hover, .uix-search-box .uix-controls__multi-sel > span.uix-search-box__submit.is-active {
       color: #212121; }
 
 /*
@@ -5941,9 +5780,251 @@ select:-webkit-autofill:focus {
   .uix-controls__dynamic-fields-container .uix-controls__dynamic-fields__tmpl__wrapper:first-child .uix-controls__dynamic-fields__removebtn {
     display: none; }
 
+/* ======================================================
+    <!-- Form  ( Material Design Theme )-->
+/* ====================================================== */
+/*
+ * 1. Controls
+ * 4. Custom Select
+ * 6. Custom Input Number
+ * 7. Multiple Selector
+ * 8. Single Selector
+*/
 /*
  ---------------------------
- 11. Date Picker ( 3rd Party Plugin )
+ 1. Controls
+ ---------------------------
+ */
+/* Default Controls */
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) {
+  /*-- Form Status: Success --*/
+  /*-- Form Status: Error --*/
+  /*-- Form Status: Disable --*/ }
+  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .uix-controls__basic-bar,
+  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .uix-controls__bar {
+    position: absolute;
+    height: 2px;
+    left: 0;
+    width: 0;
+    bottom: 0;
+    z-index: 1;
+    display: none;
+    transform: translateX(0);
+    background: #212121;
+    transition: all 0.3s ease; }
+    .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .uix-controls__basic-bar.is-active,
+    .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .uix-controls__bar.is-active {
+      width: 100%; }
+  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .uix-controls__basic-bar {
+    z-index: 0;
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: #dce4e8; }
+  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-success .uix-controls__bar {
+    background: #4AB005;
+    width: 100%; }
+  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-error .uix-controls__bar {
+    background: #f00;
+    width: 100%; }
+  .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-disabled .uix-controls__bar {
+    background: #E1E1E1;
+    width: 100%; }
+
+/* Create Line Effect on Click */
+.uix-controls.uix-controls--line {
+  /*-- Form With Icon --*/
+  /*-- Select --*/
+  /*-- Form Status: Disable --*/ }
+  .uix-controls.uix-controls--line.is-pill input:not([type="checkbox"]):not([type="radio"]),
+  .uix-controls.uix-controls--line.is-pill textarea,
+  .uix-controls.uix-controls--line.is-pill button:not(.uix-btn),
+  .uix-controls.uix-controls--line.is-pill select, .uix-controls.uix-controls--line.is-rounded input:not([type="checkbox"]):not([type="radio"]),
+  .uix-controls.uix-controls--line.is-rounded textarea,
+  .uix-controls.uix-controls--line.is-rounded button:not(.uix-btn),
+  .uix-controls.uix-controls--line.is-rounded select {
+    border-radius: 0 !important; }
+  .uix-controls.uix-controls--line .uix-controls__bar {
+    display: block !important; }
+  .uix-controls.uix-controls--line input:not([type="checkbox"]):not([type="radio"]) {
+    border-top-color: transparent !important;
+    border-left-color: transparent !important;
+    border-right-color: transparent !important;
+    border-bottom-color: transparent !important; }
+  .uix-controls.uix-controls--line textarea,
+  .uix-controls.uix-controls--line button:not(.uix-btn),
+  .uix-controls.uix-controls--line select {
+    border-top-color: transparent !important;
+    border-left-color: transparent !important;
+    border-right-color: transparent !important;
+    border-bottom-color: transparent !important; }
+  .uix-controls.uix-controls--line:not(.is-iconic) input:not([type="checkbox"]):not([type="radio"]) {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100% !important; }
+  .uix-controls.uix-controls--line:not(.is-iconic) textarea,
+  .uix-controls.uix-controls--line:not(.is-iconic) button:not(.uix-btn),
+  .uix-controls.uix-controls--line:not(.is-iconic) select {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100% !important; }
+  .uix-controls.uix-controls--line.uix-controls__short-s input:not([type="checkbox"]):not([type="radio"]) {
+    width: 120px !important; }
+  .uix-controls.uix-controls--line.uix-controls__short-m input:not([type="checkbox"]):not([type="radio"]) {
+    width: 155px !important; }
+  .uix-controls.uix-controls--line.uix-controls__short-l input:not([type="checkbox"]):not([type="radio"]) {
+    width: 192px !important; }
+  .uix-controls.uix-controls--line.is-fullwidth select:focus {
+    border-bottom-color: transparent !important; }
+  .uix-controls.uix-controls--line textarea:focus {
+    border-color: transparent !important; }
+  .uix-controls.uix-controls--line button:not(.uix-btn):focus {
+    border-color: transparent !important; }
+  .uix-controls.uix-controls--line label {
+    left: -0.25rem !important; }
+    .uix-controls.uix-controls--line label.is-active {
+      transform: translateX(-1.75rem) scale(0.875); }
+  .uix-controls.uix-controls--line.is-iconic label {
+    left: 2.54688rem !important; }
+    .uix-controls.uix-controls--line.is-iconic label.is-active {
+      transform: translateX(-4.09375rem) scale(0.875); }
+  .uix-controls.uix-controls--line.is-iconic.is-reversed input:not([type="checkbox"]):not([type="radio"]) {
+    padding-left: 0 !important; }
+  .uix-controls.uix-controls--line.is-iconic.is-reversed textarea,
+  .uix-controls.uix-controls--line.is-iconic.is-reversed button:not(.uix-btn),
+  .uix-controls.uix-controls--line.is-iconic.is-reversed select {
+    padding-left: !important; }
+  .uix-controls.uix-controls--line.is-iconic.is-reversed label {
+    left: -0.25rem !important; }
+    .uix-controls.uix-controls--line.is-iconic.is-reversed label.is-active {
+      transform: translateX(-1.75rem) scale(0.875); }
+  .uix-controls.uix-controls--line.uix-controls__normal-select select {
+    padding-left: 0 !important;
+    padding-right: 1.54688rem !important; }
+  .uix-controls.uix-controls--line.is-disabled input:not([type="checkbox"]):not([type="radio"]) {
+    opacity: .7; }
+  .uix-controls.uix-controls--line.is-disabled textarea,
+  .uix-controls.uix-controls--line.is-disabled button:not(.uix-btn),
+  .uix-controls.uix-controls--line.is-disabled select {
+    opacity: .7; }
+  .uix-controls.uix-controls--line.is-disabled label {
+    opacity: .5; }
+
+/*
+ ---------------------------
+ 4. Custom Select
+ ---------------------------
+ */
+.uix-controls__select-wrapper.uix-controls--line.is-disabled {
+  opacity: .7;
+  /* Mask used to prohibit selection */ }
+  .uix-controls__select-wrapper.uix-controls--line.is-disabled::before {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: none;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    user-select: none; }
+
+.uix-controls__select-wrapper .uix-controls--line .uix-controls__select-trigger {
+  border-radius: 0;
+  padding-left: 0;
+  border-top-color: transparent !important;
+  border-left-color: transparent !important;
+  border-right-color: transparent !important;
+  border-bottom-color: transparent !important; }
+
+.uix-controls__select-wrapper .uix-controls--line .uix-controls__basic-bar,
+.uix-controls__select-wrapper .uix-controls--line .uix-controls__bar {
+  position: absolute;
+  height: 2px;
+  left: 0;
+  width: 0;
+  bottom: 0;
+  z-index: 1;
+  display: none;
+  transform: translateX(0);
+  background: #212121;
+  transition: all 0.3s ease; }
+  .uix-controls__select-wrapper .uix-controls--line .uix-controls__basic-bar.is-active,
+  .uix-controls__select-wrapper .uix-controls--line .uix-controls__bar.is-active {
+    width: 100%; }
+
+.uix-controls__select-wrapper .uix-controls--line .uix-controls__basic-bar {
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: #dce4e8; }
+
+.uix-controls__select-wrapper .uix-controls--line .uix-controls__basic-bar,
+.uix-controls__select-wrapper .uix-controls--line .uix-controls__bar {
+  bottom: 1.09375rem; }
+
+.uix-controls__select-wrapper .uix-controls__select.is-opened .uix-controls__bar {
+  width: 100%; }
+
+/*
+ ---------------------------
+ 6. Custom Input Number
+ ---------------------------
+ */
+.uix-controls__number.uix-controls--line .uix-controls__number__btn {
+  border: none; }
+
+/*
+ ---------------------------
+ 7. Multiple Selector
+ ---------------------------
+ */
+.uix-controls__multi-sel {
+  /* Create Line Effect on Click */ }
+  .uix-controls__multi-sel.uix-controls--line > span {
+    border-top-color: transparent !important;
+    border-left-color: transparent !important;
+    border-right-color: transparent !important;
+    background: #fff !important;
+    border-bottom-color: transparent !important; }
+    .uix-controls__multi-sel.uix-controls--line > span.is-active {
+      color: #888 !important; }
+    .uix-controls__multi-sel.uix-controls--line > span:hover .uix-controls__bar {
+      width: 100% !important;
+      bottom: -1px !important; }
+
+/*
+ ---------------------------
+ 8. Single Selector
+ ---------------------------
+ */
+.uix-controls__single-sel {
+  /* Create Line Effect on Click */ }
+  .uix-controls__single-sel.uix-controls--line > span {
+    border-top-color: transparent !important;
+    border-left-color: transparent !important;
+    border-right-color: transparent !important;
+    background: #fff !important;
+    border-bottom-color: transparent !important; }
+    .uix-controls__single-sel.uix-controls--line > span.is-active {
+      color: #888 !important; }
+      .uix-controls__single-sel.uix-controls--line > span.is-active .uix-controls__basic-bar {
+        background: #EC5E79 !important; }
+    .uix-controls__single-sel.uix-controls--line > span:hover .uix-controls__bar {
+      width: 100% !important;
+      bottom: -1px !important; }
+
+/* ======================================================
+    <!-- Form ( 3rd Party Plugin ) -->
+/* ====================================================== */
+/*
+ * 1. Date Picker  
+*/
+/*
+ ---------------------------
+ 1. Date Picker ( 3rd Party Plugin )
  ---------------------------
  */
 .uix-controls__date::after {
@@ -6145,11 +6226,9 @@ select:-webkit-autofill:focus {
 .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box > div > div:first-child {
   border-top-width: 0; }
 
-.xdsoft_datetimepicker .xdsoft_today_button:hover, .xdsoft_datetimepicker .uix-controls__multi-sel > span.xdsoft_today_button.is-active:not(.uix-controls__bar),
+.xdsoft_datetimepicker .xdsoft_today_button:hover,
 .xdsoft_datetimepicker .xdsoft_next:hover,
-.xdsoft_datetimepicker .uix-controls__multi-sel > span.xdsoft_next.is-active:not(.uix-controls__bar),
-.xdsoft_datetimepicker .xdsoft_prev:hover,
-.xdsoft_datetimepicker .uix-controls__multi-sel > span.xdsoft_prev.is-active:not(.uix-controls__bar) {
+.xdsoft_datetimepicker .xdsoft_prev:hover {
   opacity: 1;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"; }
 
@@ -6168,10 +6247,10 @@ select:-webkit-autofill:focus {
   text-align: center;
   cursor: pointer; }
 
-.xdsoft_datetimepicker .xdsoft_label:hover > span, .xdsoft_datetimepicker .uix-controls__multi-sel > span.xdsoft_label.is-active:not(.uix-controls__bar) > span {
+.xdsoft_datetimepicker .xdsoft_label:hover > span {
   text-decoration: underline; }
 
-.xdsoft_datetimepicker .xdsoft_label:hover i, .xdsoft_datetimepicker .uix-controls__multi-sel > span.xdsoft_label.is-active:not(.uix-controls__bar) i {
+.xdsoft_datetimepicker .xdsoft_label:hover i {
   opacity: 1.0; }
 
 .xdsoft_datetimepicker .xdsoft_label > .xdsoft_select {
@@ -6191,7 +6270,7 @@ select:-webkit-autofill:focus {
 .xdsoft_datetimepicker .xdsoft_label > .xdsoft_select.xdsoft_yearselect {
   right: 2px; }
 
-.xdsoft_datetimepicker .xdsoft_label > .xdsoft_select > div > .xdsoft_option:hover, .xdsoft_datetimepicker .xdsoft_label > .xdsoft_select > div.uix-controls__multi-sel > span.xdsoft_option.is-active:not(.uix-controls__bar) {
+.xdsoft_datetimepicker .xdsoft_label > .xdsoft_select > div > .xdsoft_option:hover {
   color: #fff;
   background: #ff8000; }
 
@@ -6362,7 +6441,7 @@ select:-webkit-autofill:focus {
   border: 1px solid #333;
   background: #000; }
 
-.xdsoft_datetimepicker.xdsoft_dark .xdsoft_label > .xdsoft_select > div > .xdsoft_option:hover, .xdsoft_datetimepicker.xdsoft_dark .xdsoft_label > .xdsoft_select > div.uix-controls__multi-sel > span.xdsoft_option.is-active:not(.uix-controls__bar) {
+.xdsoft_datetimepicker.xdsoft_dark .xdsoft_label > .xdsoft_select > div > .xdsoft_option:hover {
   color: #000;
   background: #007fff; }
 
@@ -6461,7 +6540,7 @@ select:-webkit-autofill:focus {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff', endColorstr='#f4f8fa',GradientType=0 );
   /* IE6-9 */ }
 
-.xdsoft_datetimepicker .blue-gradient-button:hover, .xdsoft_datetimepicker .uix-controls__multi-sel > span.blue-gradient-button.is-active:not(.uix-controls__bar), .xdsoft_datetimepicker .blue-gradient-button:focus, .xdsoft_datetimepicker .blue-gradient-button:hover span, .xdsoft_datetimepicker .uix-controls__multi-sel > span.blue-gradient-button.is-active:not(.uix-controls__bar) span, .xdsoft_datetimepicker .blue-gradient-button:focus span {
+.xdsoft_datetimepicker .blue-gradient-button:hover, .xdsoft_datetimepicker .blue-gradient-button:focus, .xdsoft_datetimepicker .blue-gradient-button:hover span, .xdsoft_datetimepicker .blue-gradient-button:focus span {
   color: #454551;
   background: -moz-linear-gradient(top, #f4f8fa 0%, #FFF 73%);
   /* FF3.6+ */

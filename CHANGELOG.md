@@ -1,5 +1,13 @@
 # Changelog
 
+#### = 3.7.5 (August 8, 2019) =
+
+* Tweak: (webpack) Provides a way to customize how progress is reported during a compilation.
+* Tweak: Improve the form components styles. 
+* Tweak: Increase the variable `$control-padding-side`, `$control-padding-height` and `$control-icon-placeholder` to custom the field margins in the form.
+* Tweak: Improve stability of scaffolding.
+
+
 
 #### = 3.7.3 (July 31, 2019) =
 

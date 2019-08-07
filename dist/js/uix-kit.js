@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
- * ## Version             :  3.7.3
+ * ## Version             :  3.7.5
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  July 31, 2019
+ * ## Last Update         :  August 8, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "c9e3931868ca60e6b8f0";
+/******/ 	var hotCurrentHash = "6a521c57f9f34122ea7a";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -810,7 +810,7 @@ window.$ = window.jQuery;
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return hotCreateRequire(123)(__webpack_require__.s = 123);
+/******/ 	return hotCreateRequire(127)(__webpack_require__.s = 127);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -930,7 +930,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
         if (_typeof(dataExist) === ( true ? "undefined" : undefined) && dataExist != 1) {
           template = '<div class="' + classes + ' js-uix-new">';
-          template += '<span class="uix-controls__select-trigger">' + $this.find('select').attr('placeholder') + '</span><span class="uix-controls__bar"></span>';
+          template += '<span class="uix-controls__select-trigger">' + $this.find('select').attr('placeholder') + '</span><ins class="uix-controls__bar"></ins><ins class="uix-controls__basic-bar"></ins>';
           template += '<div class="uix-controls__select__option-container">';
           $this.find('select option').each(function (index) {
             var selected = '';
@@ -1896,17 +1896,17 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         var dataExist = $(this).data('exist');
 
         if (_typeof(dataExist) === ( true ? "undefined" : undefined) && dataExist != 1) {
-          $('<span class="uix-controls__bar"></span>').insertAfter($(this).find('label')); //Multiple Selector or Single Selector
+          $('<ins class="uix-controls__bar"></ins><ins class="uix-controls__basic-bar"></ins>').insertAfter($(this).find('label')); //Multiple Selector or Single Selector
 
           if ($(this).hasClass('uix-controls__multi-sel') || $(this).hasClass('uix-controls__single-sel')) {
             $(this).find('> span').each(function () {
-              $(this).prepend('<span class="uix-controls__bar"></span>');
+              $(this).prepend('<ins class="uix-controls__bar"></ins><ins class="uix-controls__basic-bar"></ins>');
             });
           } //Custom Input Number
 
 
           if ($(this).hasClass('uix-controls__number')) {
-            $(this).prepend('<span class="uix-controls__bar"></span>');
+            $(this).prepend('<ins class="uix-controls__bar"></ins><ins class="uix-controls__basic-bar"></ins>');
           } //Prevent the form from being initialized again
 
 
@@ -2067,6 +2067,18 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 /* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 45 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 46 */
+/***/ (function(module, exports, __webpack_require__) {
+
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 /*
@@ -2187,7 +2199,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 })(jQuery);
 
 /***/ }),
-/* 45 */
+/* 47 */
 /***/ (function(module, exports) {
 
 /*
@@ -2221,18 +2233,6 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     });
   };
 })(jQuery);
-
-/***/ }),
-/* 46 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 47 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
 
 /***/ }),
 /* 48 */
@@ -2302,6 +2302,18 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 /***/ }),
 /* 59 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 61 */
 /***/ (function(module, exports) {
 
 /**
@@ -2360,19 +2372,19 @@ jQuery.fn.sortElements = function () {
 }();
 
 /***/ }),
-/* 60 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 61 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
 /* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 63 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -2495,18 +2507,6 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     });
   };
 })(jQuery);
-
-/***/ }),
-/* 63 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 64 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
 
 /***/ }),
 /* 65 */
@@ -2725,8 +2725,18 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 // extracted by mini-css-extract-plugin
 
 /***/ }),
-/* 101 */,
-/* 102 */,
+/* 101 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 102 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
 /* 103 */,
 /* 104 */,
 /* 105 */,
@@ -2747,7 +2757,11 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 /* 120 */,
 /* 121 */,
 /* 122 */,
-/* 123 */
+/* 123 */,
+/* 124 */,
+/* 125 */,
+/* 126 */,
+/* 127 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9842,8 +9856,14 @@ var controls_line = __webpack_require__(32);
 // EXTERNAL MODULE: ./src/components/ES6/form/js/fn/radio-and-checkbox.js
 var radio_and_checkbox = __webpack_require__(33);
 
-// EXTERNAL MODULE: ./src/components/ES6/form/scss/_style.scss
-var form_scss_style = __webpack_require__(34);
+// EXTERNAL MODULE: ./src/components/ES6/form/scss/_basic.scss
+var scss_basic = __webpack_require__(34);
+
+// EXTERNAL MODULE: ./src/components/ES6/form/scss/_theme_material.scss
+var _theme_material = __webpack_require__(35);
+
+// EXTERNAL MODULE: ./src/components/ES6/form/scss/_3rd_party_plugins.scss
+var _3rd_party_plugins = __webpack_require__(36);
 
 // CONCATENATED MODULE: ./src/components/ES6/form/js/index.js
 function form_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9896,10 +9916,12 @@ function form_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol
 
 
 
+
+
 var FORM = function (module, $, window, document) {
   if (window.FORM === null) return false;
   module.FORM = module.FORM || {};
-  module.FORM.version = '0.1.6';
+  module.FORM.version = '0.1.75';
 
   module.FORM.documentReady = function ($) {
     /*
@@ -10231,7 +10253,7 @@ var FORM = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/gallery/scss/_style.scss
-var gallery_scss_style = __webpack_require__(35);
+var gallery_scss_style = __webpack_require__(37);
 
 // CONCATENATED MODULE: ./src/components/ES6/gallery/js/index.js
 function gallery_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10411,7 +10433,7 @@ var HOVER_DELAY_INTERACTION = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/image-shapes/scss/_style.scss
-var image_shapes_scss_style = __webpack_require__(36);
+var image_shapes_scss_style = __webpack_require__(38);
 
 // CONCATENATED MODULE: ./src/components/ES6/image-shapes/js/index.js
 function image_shapes_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10506,7 +10528,7 @@ var IMAGE_SHAPES = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/lava-lamp-style-menu/scss/_style.scss
-var lava_lamp_style_menu_scss_style = __webpack_require__(37);
+var lava_lamp_style_menu_scss_style = __webpack_require__(39);
 
 // CONCATENATED MODULE: ./src/components/ES6/lava-lamp-style-menu/js/index.js
 function lava_lamp_style_menu_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10573,7 +10595,7 @@ var LAVA_LAMP_STYLE_MENU = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/lightbox/scss/_style.scss
-var lightbox_scss_style = __webpack_require__(38);
+var lightbox_scss_style = __webpack_require__(40);
 
 // CONCATENATED MODULE: ./src/components/ES6/lightbox/js/index.js
 function lightbox_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11055,7 +11077,7 @@ var LIGHTBOX = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/list-bulleted/scss/_style.scss
-var list_bulleted_scss_style = __webpack_require__(39);
+var list_bulleted_scss_style = __webpack_require__(41);
 
 // CONCATENATED MODULE: ./src/components/ES6/list-bulleted/js/index.js
 function list_bulleted_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11088,10 +11110,10 @@ var BULLETED_LIST = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/list-posts/scss/_basic.scss
-var scss_basic = __webpack_require__(40);
+var list_posts_scss_basic = __webpack_require__(42);
 
 // EXTERNAL MODULE: ./src/components/ES6/list-posts/scss/_split.scss
-var _split = __webpack_require__(41);
+var _split = __webpack_require__(43);
 
 // CONCATENATED MODULE: ./src/components/ES6/list-posts/js/index.js
 function list_posts_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11486,7 +11508,7 @@ var POST_LIST_AJAX = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/list-split-imagery/scss/_style.scss
-var list_split_imagery_scss_style = __webpack_require__(42);
+var list_split_imagery_scss_style = __webpack_require__(44);
 
 // CONCATENATED MODULE: ./src/components/ES6/list-split-imagery/js/index.js
 function list_split_imagery_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11541,7 +11563,7 @@ var POST_LIST_SPLIT_FULLWIDTH = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/login-templates/scss/_style.scss
-var login_templates_scss_style = __webpack_require__(43);
+var login_templates_scss_style = __webpack_require__(45);
 
 // CONCATENATED MODULE: ./src/components/ES6/login-templates/js/index.js
 function login_templates_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11606,13 +11628,13 @@ var LOGIN_UI = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/modal-dialog/js/fn/fire-modal-dialog.js
-var fire_modal_dialog = __webpack_require__(44);
+var fire_modal_dialog = __webpack_require__(46);
 
 // EXTERNAL MODULE: ./src/components/ES6/modal-dialog/js/fn/close-modal-dialog.js
-var close_modal_dialog = __webpack_require__(45);
+var close_modal_dialog = __webpack_require__(47);
 
 // EXTERNAL MODULE: ./src/components/ES6/modal-dialog/scss/_style.scss
-var modal_dialog_scss_style = __webpack_require__(46);
+var modal_dialog_scss_style = __webpack_require__(48);
 
 // CONCATENATED MODULE: ./src/components/ES6/modal-dialog/js/index.js
 function modal_dialog_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11830,7 +11852,7 @@ var MOUSEWHEEL_INTERACTION = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/multi-items-carousel/scss/_style.scss
-var multi_items_carousel_scss_style = __webpack_require__(47);
+var multi_items_carousel_scss_style = __webpack_require__(49);
 
 // CONCATENATED MODULE: ./src/components/ES6/multi-items-carousel/js/index.js
 function multi_items_carousel_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13319,7 +13341,7 @@ var ONEPAGE2 = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/parallax/scss/_style.scss
-var parallax_scss_style = __webpack_require__(48);
+var parallax_scss_style = __webpack_require__(50);
 
 // CONCATENATED MODULE: ./src/components/ES6/parallax/js/index.js
 function parallax_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13505,7 +13527,7 @@ var PARALLAX = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/periodical-scroll/scss/_style.scss
-var periodical_scroll_scss_style = __webpack_require__(49);
+var periodical_scroll_scss_style = __webpack_require__(51);
 
 // CONCATENATED MODULE: ./src/components/ES6/periodical-scroll/js/index.js
 function periodical_scroll_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13578,7 +13600,7 @@ var PERIODICAL_SCROLL = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/pricing/scss/_style.scss
-var pricing_scss_style = __webpack_require__(50);
+var pricing_scss_style = __webpack_require__(52);
 
 // CONCATENATED MODULE: ./src/components/ES6/pricing/js/index.js
 function pricing_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13665,7 +13687,7 @@ var PRICING = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/progress-bar/scss/_style.scss
-var progress_bar_scss_style = __webpack_require__(51);
+var progress_bar_scss_style = __webpack_require__(53);
 
 // CONCATENATED MODULE: ./src/components/ES6/progress-bar/js/index.js
 function progress_bar_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13727,7 +13749,7 @@ var PROGRESS_BAR = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/progress-line/scss/_style.scss
-var progress_line_scss_style = __webpack_require__(52);
+var progress_line_scss_style = __webpack_require__(54);
 
 // CONCATENATED MODULE: ./src/components/ES6/progress-line/js/index.js
 function progress_line_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14177,7 +14199,7 @@ var SCROLLSPY_ANIM = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/show-more-less/scss/_style.scss
-var show_more_less_scss_style = __webpack_require__(53);
+var show_more_less_scss_style = __webpack_require__(55);
 
 // CONCATENATED MODULE: ./src/components/ES6/show-more-less/js/index.js
 function show_more_less_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14388,7 +14410,7 @@ var SMOOTH_SCROLLING_ANCHORLINK = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/sticky-elements/scss/_style.scss
-var sticky_elements_scss_style = __webpack_require__(54);
+var sticky_elements_scss_style = __webpack_require__(56);
 
 // CONCATENATED MODULE: ./src/components/ES6/sticky-elements/js/index.js
 function sticky_elements_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -15229,7 +15251,7 @@ var THREE_BACKGROUND_THREE3 = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/simple-3D-background/scss/_style.scss
-var simple_3D_background_scss_style = __webpack_require__(55);
+var simple_3D_background_scss_style = __webpack_require__(57);
 
 // CONCATENATED MODULE: ./src/components/ES6/simple-3D-background/js/index.js
 function simple_3D_background_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -15395,7 +15417,7 @@ var THREE_BACKGROUND = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/simple-3D-carousel/scss/_style.scss
-var simple_3D_carousel_scss_style = __webpack_require__(56);
+var simple_3D_carousel_scss_style = __webpack_require__(58);
 
 // CONCATENATED MODULE: ./src/components/ES6/simple-3D-carousel/js/index.js
 function simple_3D_carousel_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -17642,7 +17664,7 @@ var THREE_MOUSE_INTERACTION2 = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/simple-3D-shatter-slider/scss/_style.scss
-var simple_3D_shatter_slider_scss_style = __webpack_require__(57);
+var simple_3D_shatter_slider_scss_style = __webpack_require__(59);
 
 // CONCATENATED MODULE: ./src/components/ES6/simple-3D-shatter-slider/js/index.js
 function simple_3D_shatter_slider_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -18276,7 +18298,7 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/simple-3D-explosive-particle-slider/scss/_style.scss
-var simple_3D_explosive_particle_slider_scss_style = __webpack_require__(58);
+var simple_3D_explosive_particle_slider_scss_style = __webpack_require__(60);
 
 // CONCATENATED MODULE: ./src/components/ES6/simple-3D-explosive-particle-slider/js/index.js
 function simple_3D_explosive_particle_slider_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -18983,7 +19005,7 @@ var TABLE = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/table/js/fn/sort-elements.js
-var sort_elements = __webpack_require__(59);
+var sort_elements = __webpack_require__(61);
 
 // CONCATENATED MODULE: ./src/components/ES6/table/js/sorter.js
 function sorter_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19066,7 +19088,7 @@ var TABLE_SORTER = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/tabs/scss/_style.scss
-var tabs_scss_style = __webpack_require__(60);
+var tabs_scss_style = __webpack_require__(62);
 
 // CONCATENATED MODULE: ./src/components/ES6/tabs/js/index.js
 function tabs_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19243,7 +19265,7 @@ var TABS = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/team-focus/scss/_style.scss
-var team_focus_scss_style = __webpack_require__(61);
+var team_focus_scss_style = __webpack_require__(63);
 
 // CONCATENATED MODULE: ./src/components/ES6/team-focus/js/index.js
 function team_focus_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19406,10 +19428,10 @@ var TEAM_FOCUS = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/text-effect/js/fn/text-anime.js
-var text_anime = __webpack_require__(62);
+var text_anime = __webpack_require__(64);
 
 // EXTERNAL MODULE: ./src/components/ES6/text-effect/scss/_style.scss
-var text_effect_scss_style = __webpack_require__(63);
+var text_effect_scss_style = __webpack_require__(65);
 
 // CONCATENATED MODULE: ./src/components/ES6/text-effect/js/index.js
 function text_effect_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19459,7 +19481,7 @@ var TEXT_EFFECT = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/timeline/scss/_style.scss
-var timeline_scss_style = __webpack_require__(64);
+var timeline_scss_style = __webpack_require__(66);
 
 // CONCATENATED MODULE: ./src/components/ES6/timeline/js/index.js
 function timeline_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19625,7 +19647,7 @@ var TIMELINE = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/vertical-menu/scss/_style.scss
-var vertical_menu_scss_style = __webpack_require__(65);
+var vertical_menu_scss_style = __webpack_require__(67);
 
 // CONCATENATED MODULE: ./src/components/ES6/vertical-menu/js/index.js
 function vertical_menu_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19774,10 +19796,10 @@ var VERTICAL_MENU = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/wordpress/scss/_wp_core.scss
-var _wp_core = __webpack_require__(66);
+var _wp_core = __webpack_require__(68);
 
 // EXTERNAL MODULE: ./src/components/ES6/wordpress/scss/_3rd_party_plugins.scss
-var _3rd_party_plugins = __webpack_require__(67);
+var scss_3rd_party_plugins = __webpack_require__(69);
 
 // CONCATENATED MODULE: ./src/components/ES6/wordpress/js/index.js
 function wordpress_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19829,103 +19851,103 @@ var WP_CORE = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/badges/scss/_style.scss
-var badges_scss_style = __webpack_require__(68);
+var badges_scss_style = __webpack_require__(70);
 
 // EXTERNAL MODULE: ./src/components/ES6/blended-grid-layout/scss/_style.scss
-var blended_grid_layout_scss_style = __webpack_require__(69);
+var blended_grid_layout_scss_style = __webpack_require__(71);
 
 // EXTERNAL MODULE: ./src/components/ES6/breadcrumbs/scss/_style.scss
-var breadcrumbs_scss_style = __webpack_require__(70);
+var breadcrumbs_scss_style = __webpack_require__(72);
 
 // EXTERNAL MODULE: ./src/components/ES6/button/scss/_style.scss
-var button_scss_style = __webpack_require__(71);
+var button_scss_style = __webpack_require__(73);
 
 // EXTERNAL MODULE: ./src/components/ES6/card/scss/_style.scss
-var card_scss_style = __webpack_require__(72);
+var card_scss_style = __webpack_require__(74);
 
 // EXTERNAL MODULE: ./src/components/ES6/circle-text/scss/_style.scss
-var circle_text_scss_style = __webpack_require__(73);
+var circle_text_scss_style = __webpack_require__(75);
 
 // EXTERNAL MODULE: ./src/components/ES6/content-placeholder-animated/scss/_style.scss
-var content_placeholder_animated_scss_style = __webpack_require__(74);
+var content_placeholder_animated_scss_style = __webpack_require__(76);
 
 // EXTERNAL MODULE: ./src/components/ES6/dividing-line/scss/_style.scss
-var dividing_line_scss_style = __webpack_require__(75);
+var dividing_line_scss_style = __webpack_require__(77);
 
 // EXTERNAL MODULE: ./src/components/ES6/dots/scss/_style.scss
-var dots_scss_style = __webpack_require__(76);
+var dots_scss_style = __webpack_require__(78);
 
 // EXTERNAL MODULE: ./src/components/ES6/dotted-line/scss/_style.scss
-var dotted_line_scss_style = __webpack_require__(77);
+var dotted_line_scss_style = __webpack_require__(79);
 
 // EXTERNAL MODULE: ./src/components/ES6/equal-width-columns/scss/_style.scss
-var equal_width_columns_scss_style = __webpack_require__(78);
+var equal_width_columns_scss_style = __webpack_require__(80);
 
 // EXTERNAL MODULE: ./src/components/ES6/features/scss/_style.scss
-var features_scss_style = __webpack_require__(79);
+var features_scss_style = __webpack_require__(81);
 
 // EXTERNAL MODULE: ./src/components/ES6/footer-templates/scss/_style.scss
-var footer_templates_scss_style = __webpack_require__(80);
+var footer_templates_scss_style = __webpack_require__(82);
 
 // EXTERNAL MODULE: ./src/components/ES6/heading/scss/_style.scss
-var heading_scss_style = __webpack_require__(81);
+var heading_scss_style = __webpack_require__(83);
 
 // EXTERNAL MODULE: ./src/components/ES6/image-animation/scss/_style.scss
-var image_animation_scss_style = __webpack_require__(82);
+var image_animation_scss_style = __webpack_require__(84);
 
 // EXTERNAL MODULE: ./src/components/ES6/list-brands/scss/_style.scss
-var list_brands_scss_style = __webpack_require__(83);
+var list_brands_scss_style = __webpack_require__(85);
 
 // EXTERNAL MODULE: ./src/components/ES6/list-maintain-aspect-ratio/scss/_style.scss
-var list_maintain_aspect_ratio_scss_style = __webpack_require__(84);
+var list_maintain_aspect_ratio_scss_style = __webpack_require__(86);
 
 // EXTERNAL MODULE: ./src/components/ES6/list-side-by-side/scss/_style.scss
-var list_side_by_side_scss_style = __webpack_require__(85);
+var list_side_by_side_scss_style = __webpack_require__(87);
 
 // EXTERNAL MODULE: ./src/components/ES6/list-side-by-side-img/scss/_style.scss
-var list_side_by_side_img_scss_style = __webpack_require__(86);
+var list_side_by_side_img_scss_style = __webpack_require__(88);
 
 // EXTERNAL MODULE: ./src/components/ES6/list-split-content/scss/_style.scss
-var list_split_content_scss_style = __webpack_require__(87);
+var list_split_content_scss_style = __webpack_require__(89);
 
 // EXTERNAL MODULE: ./src/components/ES6/mouse-animation-scroll/scss/_style.scss
-var mouse_animation_scroll_scss_style = __webpack_require__(88);
+var mouse_animation_scroll_scss_style = __webpack_require__(90);
 
 // EXTERNAL MODULE: ./src/components/ES6/overlay/scss/_style.scss
-var overlay_scss_style = __webpack_require__(89);
+var overlay_scss_style = __webpack_require__(91);
 
 // EXTERNAL MODULE: ./src/components/ES6/ribbon/scss/_style.scss
-var ribbon_scss_style = __webpack_require__(90);
+var ribbon_scss_style = __webpack_require__(92);
 
 // EXTERNAL MODULE: ./src/components/ES6/shape-animation/scss/_style.scss
-var shape_animation_scss_style = __webpack_require__(91);
+var shape_animation_scss_style = __webpack_require__(93);
 
 // EXTERNAL MODULE: ./src/components/ES6/single-post/scss/_comments.scss
-var _comments = __webpack_require__(92);
+var _comments = __webpack_require__(94);
 
 // EXTERNAL MODULE: ./src/components/ES6/single-post/scss/_editing.scss
-var _editing = __webpack_require__(93);
+var _editing = __webpack_require__(95);
 
 // EXTERNAL MODULE: ./src/components/ES6/striking/scss/_style.scss
-var striking_scss_style = __webpack_require__(94);
+var striking_scss_style = __webpack_require__(96);
 
 // EXTERNAL MODULE: ./src/components/ES6/team-fullwidth/scss/_style.scss
-var team_fullwidth_scss_style = __webpack_require__(95);
+var team_fullwidth_scss_style = __webpack_require__(97);
 
 // EXTERNAL MODULE: ./src/components/ES6/team-grid/scss/_style.scss
-var team_grid_scss_style = __webpack_require__(96);
+var team_grid_scss_style = __webpack_require__(98);
 
 // EXTERNAL MODULE: ./src/components/ES6/testimonials/scss/_style.scss
-var testimonials_scss_style = __webpack_require__(97);
+var testimonials_scss_style = __webpack_require__(99);
 
 // EXTERNAL MODULE: ./src/components/ES6/tooltip/scss/_style.scss
-var tooltip_scss_style = __webpack_require__(98);
+var tooltip_scss_style = __webpack_require__(100);
 
 // EXTERNAL MODULE: ./src/components/ES6/vertical-separator/scss/_style.scss
-var vertical_separator_scss_style = __webpack_require__(99);
+var vertical_separator_scss_style = __webpack_require__(101);
 
 // EXTERNAL MODULE: ./src/components/ES6/wave-background/scss/_style.scss
-var wave_background_scss_style = __webpack_require__(100);
+var wave_background_scss_style = __webpack_require__(102);
 
 // CONCATENATED MODULE: ./src/components/ES6/_app-load.js
 /*

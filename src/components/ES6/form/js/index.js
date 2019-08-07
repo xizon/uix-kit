@@ -57,7 +57,10 @@ import UixRenderCustomRadioCheckbox from '@uixkit/core/form/js/fn/radio-and-chec
 import UixRenderCustomSelect from '@uixkit/core/form/js/fn/select';
 
 
-import '../scss/_style.scss';
+import '../scss/_basic.scss';
+import '../scss/_theme_material.scss';
+import '../scss/_3rd_party_plugins.scss';
+
 
 
 export const FORM = ( ( module, $, window, document ) => {
@@ -66,7 +69,7 @@ export const FORM = ( ( module, $, window, document ) => {
 	
 	
     module.FORM               = module.FORM || {};
-    module.FORM.version       = '0.1.6';
+    module.FORM.version       = '0.1.75';
     module.FORM.documentReady = function( $ ) {
 
 		

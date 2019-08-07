@@ -484,6 +484,9 @@ const app = express();
 const instance = webpackDevMiddleware( compiler );
 app.use( instance );
 
+//Provides a way to customize how progress is reported during a compilation.
+new webpack.ProgressPlugin().apply(compiler);
+
 
 //Watch for Files Changes in Node.js
 require('log-timestamp');
@@ -591,7 +594,17 @@ compiler.hooks.done.tap( 'MyPlugin', ( compilation ) => {
 		
 		let oldContent = '';
 		let pureMergeJSDependenciesFileData = '';
+        let buildingFileTotal = 7;
+        
+        
+        
 		
+		// Determine if the rtl file exists
+		//---------------------------------------------------------------------
+        if ( ! fs.existsSync( './'+globs.dist+'/css/uix-kit-rtl.css' ) ) {
+            buildingFileTotal = 6;
+        }
+        
 		// Step 1 => read pureMergeJSFile
 		//---------------------------------------------------------------------
 		if ( fs.existsSync( pureMergeJSFile ) ) {
@@ -651,7 +664,7 @@ compiler.hooks.done.tap( 'MyPlugin', ( compilation ) => {
 						if ( data.indexOf( 'sourceMappingURL='+globs.concatES5_JSFile+'.map' ) < 0 ) {
 							
 							//file written successfully	
-							console.log(colors.fg.Green, `${targetJSFile} added common JavaScript on top successfully! (1/7)`, colors.Reset);
+							console.log(colors.fg.Green, `${targetJSFile} added common JavaScript on top successfully! (1/${buildingFileTotal})`, colors.Reset);
 
 
 							//Update the normal js file
@@ -661,7 +674,7 @@ compiler.hooks.done.tap( 'MyPlugin', ( compilation ) => {
 									return console.log(colors.fg.Red, err, colors.Reset);
 								}
 
-								console.log(colors.fg.Green, `${targetJSFile} written successfully! (2/7)`, colors.Reset);
+								console.log(colors.fg.Green, `${targetJSFile} written successfully! (2/${buildingFileTotal})`, colors.Reset);
 
 								
 								// Step 5 => copy targetJSFile
@@ -672,97 +685,100 @@ compiler.hooks.done.tap( 'MyPlugin', ( compilation ) => {
 										return console.log(colors.fg.Red, err, colors.Reset);
 									}
 
-									console.log(colors.fg.Green, `${targetJSMinFile} copied successfully! (3/7)`, colors.Reset);
+									console.log(colors.fg.Green, `${targetJSMinFile} copied successfully! (3/${buildingFileTotal})`, colors.Reset);
 
 									
 									
 									// Step 6 => minify targetJSFile
 									//---------------------------------------------------------------------	
 									//Update the compressed js file
-									minify({
-										compressor: uglifyJS,
-										input: targetJSMinFile,
-										output: targetJSMinFile,
-										callback: function(err, min) {
+                                    setTimeout ( () => {
+                                        minify({
+                                            compressor: uglifyJS,
+                                            input: targetJSMinFile,
+                                            output: targetJSMinFile,
+                                            callback: function(err, min) {
 
-											if ( err ) {
-												return console.log(colors.bg.Red, colors.fg.White, `===[ ERROR: ${err} ]=== Do not perform other operations after saving the <scss> or <js> file, please wait 10 seconds to rebuild.`, colors.Reset);
+                                                if ( err ) {
+                                                    return console.log(colors.bg.Red, colors.fg.White, `===[ ERROR: ${err} ]=== Do not perform other operations after saving the <scss> or <js> file, please wait 10 seconds to rebuild.`, colors.Reset);
 
-											} else {
-												console.log(colors.fg.Green, `${targetJSMinFile} compressed successfully! (4/7)`, colors.Reset);
-											}
-
-
-											// Step 7 => read all core css and js files and build a table of contents
-											//---------------------------------------------------------------------
-											// Build a table of contents (TOC)
-											var tocBuildedIndex = 5;
-											['./'+globs.dist+'/css/uix-kit.css', './'+globs.dist+'/css/uix-kit-rtl.css', targetJSFile ].map( ( filepath ) => {
-
-												if ( fs.existsSync( filepath ) ) {
-
-													fs.readFile( filepath, function( err, content ) {
-
-														if ( err ) throw err;
-
-														let curCon  = content.toString(),
-															newtext = curCon.match(/<\!\-\-.*?(?:>|\-\-\/>)/gi );
+                                                } else {
+                                                    console.log(colors.fg.Green, `${targetJSMinFile} compressed successfully! (4/${buildingFileTotal})`, colors.Reset);
+                                                }
 
 
-														//is the matched group if found
-														if ( newtext && newtext.length > 1 ) {  
+                                                // Step 7 => read all core css and js files and build a table of contents
+                                                //---------------------------------------------------------------------
+                                                // Build a table of contents (TOC)
+                                                var tocBuildedIndex = 5;
+                                                ['./'+globs.dist+'/css/uix-kit.css', './'+globs.dist+'/css/uix-kit-rtl.css', targetJSFile ].map( ( filepath ) => {
 
-															let curToc = '';
+                                                    if ( fs.existsSync( filepath ) ) {
 
-															for ( var p = 0; p < newtext.length; p++ ) {
+                                                        fs.readFile( filepath, function( err, content ) {
 
-																let curIndex = p + 1,
-																	newStr   = newtext[ p ].replace( '<!--', '' ).replace( '-->', '' ).replace(/^\s+|\s+$/g, '' );
+                                                            if ( err ) throw err;
 
-																if ( p > 0 ) {
-																	curToc += '    ' + curIndex + '.' + newStr + '\n';
-																} else {
-																	curToc +=  curIndex + '.' + newStr + '\n';
-																}
-
-															}
-
-															//Replace a string in a file with nodejs
-															var resultData = curCon.replace(/\$\{\{TOC\}\}/gi, curToc );
-
-															fs.writeFile( filepath, resultData, 'utf8', function (err) {
-
-																if ( err ) {
-																	console.log(colors.fg.Red, err, colors.Reset);
-																	return;
-																}
-																//file written successfully	
-																console.log(colors.fg.Green, `${filepath}'s table of contents generated successfully! (${tocBuildedIndex}/7)`, colors.Reset);
-																
-																tocBuildedIndex++;
+                                                            let curCon  = content.toString(),
+                                                                newtext = curCon.match(/<\!\-\-.*?(?:>|\-\-\/>)/gi );
 
 
-															});
+                                                            //is the matched group if found
+                                                            if ( newtext && newtext.length > 1 ) {  
+
+                                                                let curToc = '';
+
+                                                                for ( var p = 0; p < newtext.length; p++ ) {
+
+                                                                    let curIndex = p + 1,
+                                                                        newStr   = newtext[ p ].replace( '<!--', '' ).replace( '-->', '' ).replace(/^\s+|\s+$/g, '' );
+
+                                                                    if ( p > 0 ) {
+                                                                        curToc += '    ' + curIndex + '.' + newStr + '\n';
+                                                                    } else {
+                                                                        curToc +=  curIndex + '.' + newStr + '\n';
+                                                                    }
+
+                                                                }
+
+                                                                //Replace a string in a file with nodejs
+                                                                var resultData = curCon.replace(/\$\{\{TOC\}\}/gi, curToc );
+
+                                                                fs.writeFile( filepath, resultData, 'utf8', function (err) {
+
+                                                                    if ( err ) {
+                                                                        console.log(colors.fg.Red, err, colors.Reset);
+                                                                        return;
+                                                                    }
+                                                                    //file written successfully	
+                                                                    console.log(colors.fg.Green, `${filepath}'s table of contents generated successfully! (${tocBuildedIndex}/${buildingFileTotal})`, colors.Reset);
+
+                                                                    tocBuildedIndex++;
 
 
-														}
+                                                                });
 
 
-													});// fs.readFile( filepath ...
+                                                            }
 
 
-												}//endif fs.existsSync( filepath ) 
+                                                        });// fs.readFile( filepath ...
 
 
-											});	
+                                                    }//endif fs.existsSync( filepath ) 
+
+
+                                                });	
 
 
 
-										}
-										
-										
-									});	// minify
+                                            }
 
+
+                                        });	// minify
+
+      
+                                    }, 1000 );
 
 
 								});// fs.copyFile( targetJSFile ...

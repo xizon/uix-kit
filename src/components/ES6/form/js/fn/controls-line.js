@@ -23,21 +23,21 @@
 			$( customControls ).each( function() {
 				var dataExist = $( this ).data( 'exist' );
 				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
-					$( '<span class="uix-controls__bar"></span>' ).insertAfter( $( this ).find( 'label' ) );
+					$( '<ins class="uix-controls__bar"></ins><ins class="uix-controls__basic-bar"></ins>' ).insertAfter( $( this ).find( 'label' ) );
 					
 					
 					//Multiple Selector or Single Selector
 					if ( $( this ).hasClass( 'uix-controls__multi-sel' ) || $( this ).hasClass( 'uix-controls__single-sel' ) ) {
 						
 						$( this ).find( '> span' ).each( function()  {
-							$( this ).prepend( '<span class="uix-controls__bar"></span>' );
+							$( this ).prepend( '<ins class="uix-controls__bar"></ins><ins class="uix-controls__basic-bar"></ins>' );
 						});
 						
 					}
 					
 					//Custom Input Number
 					if ( $( this ).hasClass( 'uix-controls__number' ) ) {
-						$( this ).prepend( '<span class="uix-controls__bar"></span>' );
+						$( this ).prepend( '<ins class="uix-controls__bar"></ins><ins class="uix-controls__basic-bar"></ins>' );
 					}
 					
 			
