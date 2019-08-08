@@ -249,44 +249,44 @@ You can update the Placeholders in Templates by modifying the Site Info configur
 ```sh
 
 uix-kit/
-├── README.md
-├── CHANGELOG.md
-├── CONTRIBUTING.md
-├── LICENSE
-├── webpack.config.js
+├── README.md   --------------------------- # Main Documentation
+├── CHANGELOG.md   ------------------------ # Changelog
+├── CONTRIBUTING.md   --------------------- # External resource references
+├── LICENSE     --------------------------- # License
+├── webpack.config.js  -------------------- # Webpack scaffold configuration file
+├── package.json  ------------------------- # Project configuration file (site info can be modified here)
 ├── package-lock.json
-├── package.json
 ├── dist/
 │   ├── css/
-│   │   ├── uix-kit.css
+│   │   ├── uix-kit.css  ------------------ # Main css file
 │   │   ├── uix-kit.css.map
-│   │   ├── uix-kit.min.css
+│   │   ├── uix-kit.min.css  -------------- # Main css file which is used for production
 │   │   ├── uix-kit.min.css.map
-│   │   ├── uix-kit-rtl.css
+│   │   ├── uix-kit-rtl.css   ------------- # Main RTL css file
 │   │   ├── uix-kit-rtl.css.map
-│   │   ├── uix-kit-rtl.min.css
+│   │   ├── uix-kit-rtl.min.css   --------- # Main RTL css file which is used for production
 │   │   └── uix-kit-rtl.min.css.map
 │   └── js/
-│   │   ├── uix-kit.js
+│   │   ├── uix-kit.js   ------------------ # Main js file
 │   │   ├── uix-kit.js.map
-│   │   ├── uix-kit.min.js
+│   │   ├── uix-kit.min.js  --------------- # Main js file which is used for production
 │   │   ├── uix-kit.min.js.map
 │   │   ├── uix-kit-rtl.js
 │   │   ├── uix-kit-rtl.js.map
 │   │   ├── uix-kit-rtl.min.js
 │   │   └── uix-kit-rtl.min.js.map
-├── misc/
-│   ├── screenshots/
-│   └── grid/
+├── misc/                
+│   ├── screenshots/  --------------------- # Screenshots
+│   └── grid/ ----------------------------- # PSD grid system
 ├── src/
-│   ├── index.js
-│   ├── index-rtl.js
 │   ├── components/
-│   │   ├── ES5/  => Third-party plugins adopt pure file merger and do not import and export
-│   │   └── ES6/  => Core modules
-├── examples/
-│   ├── *.html
-│   ├── assets/
+│   │   ├── ES5/  ------------------------- # Third-party plugins adopt pure file merger and do not import and export
+│   │   ├── ES6/_global ------------------- # Generic modules
+│   │   ├── ES6/_main  -------------------- # Customization site file directory (for secondary or new website development)
+│   │   └── ES6/*  ------------------------ # Core functional modules
+├── examples/                                
+│   ├── *.html  --------------------------- # HTML templates
+│   └── assets/  -------------------------- # Static resource directory
 │   │       ├── css/
 │   │       ├── fonts/
 │   │       ├── images/
@@ -296,6 +296,7 @@ uix-kit/
 │   │       └── js/
 └──
 ```
+
 
 
 ### 3\. PSD Grid Templates
