@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/xizon/uix-kit">
-	  <img src="https://uiux.cc/uix-kit/assets/images/logo-colorful.png"  alt="Uix Kit"  width="180" >
+	  <img src="https://raw.githubusercontent.com/xizon/uix-kit/master/misc/screenshots/logo-colorful.png"  alt="Uix Kit"  width="180" >
   </a>
   <p align="center">Make over <strong>120+</strong> components to wear again and again!</p>
   <p align="center">
@@ -58,7 +58,7 @@ GitHub pages can only serve static content, and there is no way to run PHP or ge
 
 
 <p align = "left">
-	<a href="https://www.youtube.com/watch?v=aRDY9Cr-1-E"><img src="https://uiux.cc/uix-kit/_screenshots/video-cover.jpg" width="400"></a>
+	<a href="https://www.youtube.com/watch?v=aRDY9Cr-1-E"><img src="https://raw.githubusercontent.com/xizon/uix-kit/master/misc/screenshots/video-cover.jpg" width="400"></a>
 </p>
 
 
@@ -84,6 +84,10 @@ GitHub pages can only serve static content, and there is no way to run PHP or ge
 
 
 ## Installation And Test
+
+![quick overview 1](https://raw.githubusercontent.com/xizon/uix-kit/master/misc/screenshots/quick-overview-1.gif)
+
+![quick overview 2](https://raw.githubusercontent.com/xizon/uix-kit/master/misc/screenshots/quick-overview-2.gif)
 
 You will need to have [node](https://nodejs.org/) setup on your machine. That will output the built distributables to `./dist/*` and `./examples/*.html`.
 
@@ -115,7 +119,7 @@ $ sudo npm install --only=dev --unsafe-perm --production
 ```
 
 
-**Step 4.** Run the following code to enter development mode. The converted ES5 files will be created.
+**Step 4.** When you’re ready to deploy to production, create a minified bundle with:
 
 ```sh
 $ npm run build

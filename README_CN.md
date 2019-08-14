@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/xizon/uix-kit">
-	  <img src="https://uiux.cc/uix-kit/assets/images/logo-colorful.png"  alt="Uix Kit"  width="180" >
+	  <img src="https://raw.githubusercontent.com/xizon/uix-kit/master/misc/screenshots/logo-colorful.png"  alt="Uix Kit"  width="180" >
   </a>
 </p>
 
@@ -95,6 +95,11 @@ uix-kit/
 
 
 ## 命令使用方法:
+
+
+![quick overview 1](https://raw.githubusercontent.com/xizon/uix-kit/master/misc/screenshots/quick-overview-1.gif)
+
+![quick overview 2](https://raw.githubusercontent.com/xizon/uix-kit/master/misc/screenshots/quick-overview-2.gif)
 
 
 **Step 1.** 使用命令进入 `uix-kit/` 目录, {your_directory}换成你的目录路径
