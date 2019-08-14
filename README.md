@@ -5,7 +5,7 @@
   <p align="center">Make over <strong>120+</strong> components to wear again and again!</p>
   <p align="center">
       <a href="https://travis-ci.org/xizon/uix-kit/" title="Travis CI"><img src="https://api.travis-ci.org/xizon/uix-kit.svg?branch=master"/></a>
-	  <a href="https://www.npmjs.com/package/uix-kit" title="npm version"><img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=3.7.5&x2=0"/></a>
+	  <a href="https://www.npmjs.com/package/uix-kit" title="npm version"><img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=3.8.0&x2=0"/></a>
 	  <a href="https://github.com/xizon/uix-kit/blob/master/LICENSE" title="license"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg"/></a>
 	   
   </p>
@@ -42,7 +42,7 @@ GitHub pages can only serve static content, and there is no way to run PHP or ge
 ## Table of Contents
 
 
-* [Getting Started](#getting-started)
+* [Getting Started with Videos](#getting-started-with-videos)
 * [Description](#description)
 * [Installation And Test](#installation-and-test)
 * [How To Use？](#how-to-use)
@@ -54,12 +54,10 @@ GitHub pages can only serve static content, and there is no way to run PHP or ge
 
 
 
-## Getting Started
+## Getting Started with Videos
 
+[https://www.youtube.com/watch?v=aRDY9Cr-1-E](https://www.youtube.com/watch?v=aRDY9Cr-1-E)
 
-<p align = "left">
-	<a href="https://www.youtube.com/watch?v=aRDY9Cr-1-E"><img src="https://raw.githubusercontent.com/xizon/uix-kit/master/misc/screenshots/video-cover.jpg" width="400"></a>
-</p>
 
 
 

@@ -1,5 +1,13 @@
 # Changelog
 
+
+#### = 3.8.0 (August 15, 2019) =
+
+* Tweak: Upgrade dependencies for webpack.
+* Tweak: Improve the stability of the webpack configuration.
+
+
+
 #### = 3.7.5 (August 8, 2019) =
 
 * Tweak: (webpack) Provides a way to customize how progress is reported during a compilation.
