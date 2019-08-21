@@ -143,7 +143,14 @@ export const THREE_MODEL = ( ( module, $, window, document ) => {
 
 						if ( child instanceof THREE.Mesh ) {
 
-							child.material.map = texture;
+                            child.material = new THREE.MeshPhongMaterial( {
+                                                color: 0x2194CE,
+                                                wireframe: false,
+                                                map: texture,
+                                                side: THREE.DoubleSide
+
+                                            } );
+                            
 
 						}
 

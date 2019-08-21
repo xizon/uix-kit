@@ -6,23 +6,11 @@
 
 
 /* Do not use <a> tag */
-
 .uix-dropdown-menu {
 	display: inline-block;
 	cursor: pointer;
 	position: relative;
-
-	> input{
-		display: none;
-	}
-
-	> label {
-		cursor: pointer;
-		margin: 0;
-		padding: 0;
-		user-select: none;
-	}
-
+    
 	> ul {
 		position: absolute;
 		top: 100%;
@@ -31,8 +19,6 @@
 		min-width: 170px;
 		border-radius: 4px;
 		text-align: left;
-		display: none;
-		opacity: 0;
 		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 		@include transition-default();
 
@@ -83,15 +69,26 @@
 
 	}
 
-
-	&.is-opened {
-
+    &.is-opened {
 		> ul {
-			display: block;
-			opacity: 1;
+            animation: uix-cssAnim--dropdown-display 0.4s cubic-bezier(0.73, 0.005, 0.22, 1);
+			display: block !important;
 		}
+    }
+  
 
-	}
+}
 
 
+
+@keyframes uix-cssAnim--dropdown-display {
+    0%{
+        opacity: 0;
+        transform: scale(0.98) translateY(-0.6em);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
 }

@@ -1,5 +1,11 @@
 # Changelog
 
+#### = 3.8.1 (August 21, 2019) =
+
+* New: Add Helper Class `uix-details-reset`
+* Tweak: Modified the HTML structure of the dropdown menu module.
+* Tweak: Upgraded interactive demo of 3D modules.
+
 
 #### = 3.8.0 (August 15, 2019) =
 

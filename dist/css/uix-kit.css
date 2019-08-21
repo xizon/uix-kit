@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
- * ## Version             :  3.7.5
+ * ## Version             :  3.8.1
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  August 8, 2019
+ * ## Last Update         :  August 21, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -808,6 +808,7 @@ ul.uix-entry__meta {
  * 15. Element Hidden Style
  * 16. Border Radius
  * 17. Align Wide and Full Classes For Elements
+ * 18. HTML Disclosure Summary element 
 */
 /* 
  ---------------------------
@@ -1189,6 +1190,22 @@ img.uix-alignfull,
   max-width: 100vw;
   width: 100vw !important;
   height: auto; }
+
+/* 
+ ---------------------------
+ 18. HTML Disclosure Summary element 
+ ---------------------------
+ */
+details.uix-details-reset:not([open]) > *:not(summary) {
+  display: none !important; }
+
+details.uix-details-reset > summary {
+  cursor: pointer;
+  list-style: none; }
+  details.uix-details-reset > summary::before {
+    display: none; }
+  details.uix-details-reset > summary::-webkit-details-marker {
+    display: none; }
 
 /* ====================================================== 
    <!-- Basic Layout Styles -->                                        
@@ -4160,13 +4177,6 @@ h3[data-counter-number] {
   display: inline-block;
   cursor: pointer;
   position: relative; }
-  .uix-dropdown-menu > input {
-    display: none; }
-  .uix-dropdown-menu > label {
-    cursor: pointer;
-    margin: 0;
-    padding: 0;
-    user-select: none; }
   .uix-dropdown-menu > ul {
     position: absolute;
     top: 100%;
@@ -4175,8 +4185,6 @@ h3[data-counter-number] {
     min-width: 170px;
     border-radius: 4px;
     text-align: left;
-    display: none;
-    opacity: 0;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease; }
     .uix-dropdown-menu > ul::before {
@@ -4212,8 +4220,16 @@ h3[data-counter-number] {
         .uix-dropdown-menu > ul li:last-child a {
           border-bottom: 0; }
   .uix-dropdown-menu.is-opened > ul {
-    display: block;
-    opacity: 1; }
+    animation: uix-cssAnim--dropdown-display 0.4s cubic-bezier(0.73, 0.005, 0.22, 1);
+    display: block !important; }
+
+@keyframes uix-cssAnim--dropdown-display {
+  0% {
+    opacity: 0;
+    transform: scale(0.98) translateY(-0.6em); }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0); } }
 
 /* ======================================================
    <!-- Dropdown Menu 2 (Multi-level drop-down navigation) -->

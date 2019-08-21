@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
- * ## Version             :  3.7.5
+ * ## Version             :  3.8.1
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  August 8, 2019
+ * ## Last Update         :  August 21, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "6a521c57f9f34122ea7a";
+/******/ 	var hotCurrentHash = "7c3c3dbea132aef027b1";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -4249,7 +4249,7 @@ function videos_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.
 var VIDEOS = function (module, $, window, document) {
   if (window.VIDEOS === null) return false;
   module.VIDEOS = module.VIDEOS || {};
-  module.VIDEOS.version = '0.1.1';
+  module.VIDEOS.version = '0.1.2';
 
   module.VIDEOS.documentReady = function ($) {
     var $window = $(window),
@@ -4437,9 +4437,9 @@ var VIDEOS = function (module, $, window, document) {
           vogv = '<source src="' + videoSrcOgv + '" type="video/ogv">';
         }
 
-        v += '<div class="uix-modal-box is-fullscreen is-video" id="' + videoContainerMid + '">';
+        v += '<div class="uix-modal-box is-fullscreen is-video" tabindex="-1" role="dialog" aria-hidden="true" id="' + videoContainerMid + '">';
         v += '<a href="javascript:void(0)" class="uix-modal-box__close" data-modal-close-trigger="true"></a>';
-        v += '<div class="uix-modal-box__content">';
+        v += '<div class="uix-modal-box__content" role="document">';
         v += '<div class="uix-modal-box__video-waiting"></div><div class="uix-modal-box__video-container" data-video-player-init="0">';
 
         if ($this.find('[data-video-iframe]').length > 0 && videoSrcIfm != '') {
@@ -8396,12 +8396,12 @@ function dropdown_menu_js_typeof(obj) { if (typeof Symbol === "function" && type
 var DROPDOWN_MENU = function (module, $, window, document) {
   if (window.DROPDOWN_MENU === null) return false;
   module.DROPDOWN_MENU = module.DROPDOWN_MENU || {};
-  module.DROPDOWN_MENU.version = '0.0.4';
+  module.DROPDOWN_MENU.version = '0.0.5';
 
   module.DROPDOWN_MENU.documentReady = function ($) {
     //Create a trigger of Dropdown Menu on Click
     //Use $( document ) to support other click events for ajax
-    $(document).off('click.DROPDOWN_MENU').on('click.DROPDOWN_MENU', '.uix-dropdown-menu > label', function (e) {
+    $(document).off('click.DROPDOWN_MENU').on('click.DROPDOWN_MENU', '.uix-dropdown-menu > summary', function (e) {
       // stop propagation of this event, it will never reach body in bubbling phase.
       e.stopPropagation();
       var $this = $(this).parent('.uix-dropdown-menu');
@@ -8413,7 +8413,7 @@ var DROPDOWN_MENU = function (module, $, window, document) {
       var $this = $(this).closest('.uix-dropdown-menu');
 
       if ($this.hasClass('is-opened')) {
-        $this.removeClass('is-opened');
+        $this.removeAttr('open').removeClass('is-opened');
       }
 
       if (dropdown_menu_js_typeof($(this).data('value')) != ( true ? "undefined" : undefined) && $(this).data('value') != '') {
@@ -8421,7 +8421,7 @@ var DROPDOWN_MENU = function (module, $, window, document) {
       }
 
       if (dropdown_menu_js_typeof($(this).data('display-text')) != ( true ? "undefined" : undefined) && $(this).data('display-text') != '') {
-        $this.find('> label > span').html($(this).data('display-text'));
+        $this.find('> summary > span').html($(this).data('display-text'));
       }
     }); //Close the target
     //Do not add off() to this
@@ -8429,7 +8429,7 @@ var DROPDOWN_MENU = function (module, $, window, document) {
     $(document.body).on('click', function (e) {
       //Apply click method to outer div but not inner div
       if (!$(e.target.offsetParent).hasClass('uix-dropdown-menu')) {
-        $('.uix-dropdown-menu').removeClass('is-opened');
+        $('.uix-dropdown-menu').removeAttr('open').removeClass('is-opened');
       }
     });
   };
@@ -16164,7 +16164,12 @@ var THREE_MODEL = function (module, $, window, document) {
         loader.load(objURL, function (object) {
           object.traverse(function (child) {
             if (child instanceof THREE.Mesh) {
-              child.material.map = texture;
+              child.material = new THREE.MeshPhongMaterial({
+                color: 0x2194CE,
+                wireframe: false,
+                map: texture,
+                side: THREE.DoubleSide
+              });
             }
           });
           object.scale.set(165, 165, 165);
