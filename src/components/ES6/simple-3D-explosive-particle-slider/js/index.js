@@ -31,7 +31,7 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_EXP_PARTICLE_SLIDER               = module.THREE_EXP_PARTICLE_SLIDER || {};
-    module.THREE_EXP_PARTICLE_SLIDER.version       = '0.0.2';
+    module.THREE_EXP_PARTICLE_SLIDER.version       = '0.0.3';
     module.THREE_EXP_PARTICLE_SLIDER.documentReady = function( $ ) {
 
 		
@@ -39,6 +39,7 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 		if ( $( '.uix-3d-slider--expParticle' ).length == 0 || ! Modernizr.webgl ) return false;
 		
 		
+        var sceneSubjects = []; // Import objects and animations dynamically
 		var MainStage = function() {
 
 			var $window                   = $( window ),
@@ -541,7 +542,29 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 
 				//update camera and controls
 				controls.update();
+                
+                
+                //push objects
+                /*
+                @Usage: 
 
+                    function CustomObj( scene ) {
+
+                        var elements = new THREE...;
+                        scene.add( elements );
+
+                        this.update = function( time ) {
+                            elements.rotation.y = time*0.003;
+                        }
+                    }       
+
+                    sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+                */
+                for( var i = 0; i < sceneSubjects.length; i++ ) {
+                    sceneSubjects[i].update( clock.getElapsedTime()*1 );  
+                }
+
+                //render the scene to display our scene through the camera's eye.
 				renderer.render( scene, camera );
 
 
@@ -862,13 +885,14 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 			// 
 			//-------------------------------------	
 			return {
-				init              : init,
-				wrapperInit       : wrapperInit,
-				render            : render,
-				getScene          : function () { return scene; },
-				getCamera         : function () { return camera; } 
+				init                : init,
+				render              : render,
+                wrapperInit         : wrapperInit,
+				getRendererCanvasID : function () { return rendererCanvasID; },
+				getScene            : function () { return scene; },
+				getCamera           : function () { return camera; } 
 			};
-
+            
 
 		}();
 

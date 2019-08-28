@@ -29,7 +29,7 @@ export const THREE_MOUSE_INTERACTION2 = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_MOUSE_INTERACTION2               = module.THREE_MOUSE_INTERACTION2 || {};
-    module.THREE_MOUSE_INTERACTION2.version       = '0.0.1';
+    module.THREE_MOUSE_INTERACTION2.version       = '0.0.2';
     module.THREE_MOUSE_INTERACTION2.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -37,6 +37,7 @@ export const THREE_MOUSE_INTERACTION2 = ( ( module, $, window, document ) => {
 		
 
 	
+        var sceneSubjects = []; // Import objects and animations dynamically
 		var MainStage = function() {
 
 			var $window                   = $( window ),
@@ -159,9 +160,28 @@ export const THREE_MOUSE_INTERACTION2 = ( ( module, $, window, document ) => {
 
 				}
 
+                //push objects
+                /*
+                @Usage: 
+
+                    function CustomObj( scene ) {
+
+                        var elements = new THREE...;
+                        scene.add( elements );
+
+                        this.update = function( time ) {
+                            elements.rotation.y = time*0.003;
+                        }
+                    }       
+
+                    sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+                */
+                for( var i = 0; i < sceneSubjects.length; i++ ) {
+                    sceneSubjects[i].update( clock.getElapsedTime()*1 );  
+                }
+
+                //render the scene to display our scene through the camera's eye.
 				renderer.render( scene, camera );
-
-
 
 
 			}
@@ -393,11 +413,13 @@ export const THREE_MOUSE_INTERACTION2 = ( ( module, $, window, document ) => {
 			// 
 			//-------------------------------------	
 			return {
-				init      : init,
-				render    : render,
-				getScene  : function () { return scene; },
-				getCamera : function () { return camera; } 
+				init                : init,
+				render              : render,
+				getRendererCanvasID : function () { return rendererCanvasID; },
+				getScene            : function () { return scene; },
+				getCamera           : function () { return camera; } 
 			};
+
 
 
 		}();

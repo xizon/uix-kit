@@ -2,9 +2,9 @@
  * 
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
- * ## Version             :  3.8.1
+ * ## Version             :  3.8.2
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  August 21, 2019
+ * ## Last Update         :  August 28, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Released under the MIT license.
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "7c3c3dbea132aef027b1";
+/******/ 	var hotCurrentHash = "02369829234cb8d7c002";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -2780,7 +2780,8 @@ var UIXKIT_3RD_PARTY_PLUGINS_IMPORT = {
   "./src/components/ES5/_plugins-Miscellaneous/js/_dependencies.js", //Website ==> miscellaneous
   "./src/components/ES5/_plugins-Miscellaneous/js/scrollLock.js", "./src/components/ES5/_plugins-Miscellaneous/js/attrExt.js", "./src/components/ES5/_plugins-Miscellaneous/js/hashchange.js", "./src/components/ES5/_plugins-Miscellaneous/js/datepicker.js", "./src/components/ES5/_plugins-Miscellaneous/js/jquery.flexslider.js", "./src/components/ES5/_plugins-Miscellaneous/js/highlight.js", //GSAP plugins
   "./src/components/ES5/_plugins-GSAP/js/ColorPropsPlugin.js", "./src/components/ES5/_plugins-GSAP/js/CSSRulePlugin.js", "./src/components/ES5/_plugins-GSAP/js/EaselPlugin.js", "./src/components/ES5/_plugins-GSAP/js/EndArrayPlugin.js", "./src/components/ES5/_plugins-GSAP/js/ModifiersPlugin.js", "./src/components/ES5/_plugins-GSAP/js/PixiPlugin.js", "./src/components/ES5/_plugins-GSAP/js/RaphaelPlugin.js", "./src/components/ES5/_plugins-GSAP/js/ScrollToPlugin.js", "./src/components/ES5/_plugins-GSAP/js/TEMPLATE_Plugin.js", "./src/components/ES5/_plugins-GSAP/js/TextPlugin.js", //three.js plugins
-  "./src/components/ES5/_plugins-THREE/js/renderers/CSS3DRenderer.js", "./src/components/ES5/_plugins-THREE/js/controls/OrbitControls.js", "./src/components/ES5/_plugins-THREE/js/loaders/GLTFLoader.js", "./src/components/ES5/_plugins-THREE/js/loaders/MTLLoader.js", "./src/components/ES5/_plugins-THREE/js/loaders/OBJLoader.js", "./src/components/ES5/_plugins-THREE/js/shaders/CopyShader.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/EffectComposer.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/BloomPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/MaskPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/TexturePass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/ShaderPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/RenderPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/ClearPass.js", "./src/components/ES5/_plugins-THREE/js/modifiers/TessellateModifier.js", "./src/components/ES5/_plugins-THREE/js/modifiers/ExplodeModifier.js", "./src/components/ES5/_plugins-THREE/js/extensions/ShaderRuntime.custom.js", "./src/components/ES5/_plugins-THREE/js/extensions/d3-threeD.custom.js", "./src/components/ES5/_plugins-THREE/js/extensions/simplex-noise.js", "./src/components/ES5/_plugins-THREE/js/extensions/THREE.MeshLine.js"]
+  "./src/components/ES5/_plugins-THREE/js/renderers/CSS3DRenderer.js", "./src/components/ES5/_plugins-THREE/js/controls/OrbitControls.js", "./src/components/ES5/_plugins-THREE/js/loaders/GLTFLoader.js", "./src/components/ES5/_plugins-THREE/js/loaders/MTLLoader.js", "./src/components/ES5/_plugins-THREE/js/loaders/OBJLoader.js", "./src/components/ES5/_plugins-THREE/js/shaders/CopyShader.js", "./src/components/ES5/_plugins-THREE/js/shaders/ConvolutionShader.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/EffectComposer.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/BloomPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/MaskPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/TexturePass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/ShaderPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/RenderPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/ClearPass.js", "./src/components/ES5/_plugins-THREE/js/modifiers/TessellateModifier.js", "./src/components/ES5/_plugins-THREE/js/modifiers/ExplodeModifier.js", "./src/components/ES5/_plugins-THREE/js/extensions/ShaderRuntime.custom.js", "./src/components/ES5/_plugins-THREE/js/extensions/d3-threeD.custom.js", "./src/components/ES5/_plugins-THREE/js/extensions/simplex-noise.js", "./src/components/ES5/_plugins-THREE/js/extensions/THREE.MeshLine.js", //Extra filter -- film
+  "./src/components/ES5/_plugins-THREE/js/shaders/FilmShader.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/FilmPass.js"]
 };
 
 // EXTERNAL MODULE: ./src/components/ES6/_global/scss/_style.scss
@@ -2868,14 +2869,15 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     71.3D Mouse Interaction with three.js
     72.3D Shatter Slider
     73.3D Explosive Particle Slider
-    74.Responsive Table
-    75.Table Sorter
-    76.Tabs
-    77.Team Focus
-    78.Text effect
-    79.Timeline
-    80.Vertical Menu
-    81.WordPress Core Scripts
+    74.3D Filmic Effects
+    75.Responsive Table
+    76.Table Sorter
+    77.Tabs
+    78.Team Focus
+    79.Text effect
+    80.Timeline
+    81.Vertical Menu
+    82.WordPress Core Scripts
 
 
 */
@@ -14742,11 +14744,12 @@ function simple_3D_background_three_js_classCallCheck(instance, Constructor) { i
 var THREE_BACKGROUND_THREE = function (module, $, window, document) {
   if (window.THREE_BACKGROUND_THREE === null) return false;
   module.THREE_BACKGROUND_THREE = module.THREE_BACKGROUND_THREE || {};
-  module.THREE_BACKGROUND_THREE.version = '0.0.4';
+  module.THREE_BACKGROUND_THREE.version = '0.0.5';
 
   module.THREE_BACKGROUND_THREE.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('#3D-background-three-canvas').length == 0 || !Modernizr.webgl) return false;
+    var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
       var $window = $(window),
@@ -14846,7 +14849,25 @@ var THREE_BACKGROUND_THREE = function (module, $, window, document) {
         var z = Math.cos(angle * 1.5) * 35;
         var y = 130 * height + 0;
         camera.position.set(x, y, z);
-        camera.lookAt(target);
+        camera.lookAt(target); //push objects
+
+        /*
+        @Usage: 
+             function CustomObj( scene ) {
+                 var elements = new THREE...;
+                scene.add( elements );
+                 this.update = function( time ) {
+                    elements.rotation.y = time*0.003;
+                }
+            }       
+             sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+        */
+
+        for (var i = 0; i < sceneSubjects.length; i++) {
+          sceneSubjects[i].update(clock.getElapsedTime() * 1);
+        } //render the scene to display our scene through the camera's eye.
+
+
         renderer.render(scene, camera);
       }
 
@@ -14949,6 +14970,9 @@ var THREE_BACKGROUND_THREE = function (module, $, window, document) {
       return {
         init: init,
         render: render,
+        getRendererCanvasID: function getRendererCanvasID() {
+          return rendererCanvasID;
+        },
         getScene: function getScene() {
           return scene;
         },
@@ -14988,11 +15012,12 @@ function simple_3D_background_three2_js_classCallCheck(instance, Constructor) { 
 var THREE_BACKGROUND_THREE2 = function (module, $, window, document) {
   if (window.THREE_BACKGROUND_THREE2 === null) return false;
   module.THREE_BACKGROUND_THREE2 = module.THREE_BACKGROUND_THREE2 || {};
-  module.THREE_BACKGROUND_THREE2.version = '0.0.2';
+  module.THREE_BACKGROUND_THREE2.version = '0.0.3';
 
   module.THREE_BACKGROUND_THREE2.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('#3D-background-three-canvas2').length == 0 || !Modernizr.webgl) return false;
+    var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
       var $window = $(window),
@@ -15058,6 +15083,24 @@ var THREE_BACKGROUND_THREE2 = function (module, $, window, document) {
         renderer.setClearColor(0x000000);
         material.uniforms.time.value += delta * 5; //displacementSprite.rotation.y += delta * 0.5 * 1;
         //displacementSprite.rotation.x += delta * 0.5 * -1;
+        //push objects
+
+        /*
+        @Usage: 
+             function CustomObj( scene ) {
+                 var elements = new THREE...;
+                scene.add( elements );
+                 this.update = function( time ) {
+                    elements.rotation.y = time*0.003;
+                }
+            }       
+             sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+        */
+
+        for (var i = 0; i < sceneSubjects.length; i++) {
+          sceneSubjects[i].update(clock.getElapsedTime() * 1);
+        } //render the scene to display our scene through the camera's eye.
+
 
         renderer.render(scene, camera);
       }
@@ -15099,6 +15142,9 @@ var THREE_BACKGROUND_THREE2 = function (module, $, window, document) {
       return {
         init: init,
         render: render,
+        getRendererCanvasID: function getRendererCanvasID() {
+          return rendererCanvasID;
+        },
         getScene: function getScene() {
           return scene;
         },
@@ -15138,11 +15184,12 @@ function simple_3D_background_three3_js_classCallCheck(instance, Constructor) { 
 var THREE_BACKGROUND_THREE3 = function (module, $, window, document) {
   if (window.THREE_BACKGROUND_THREE3 === null) return false;
   module.THREE_BACKGROUND_THREE3 = module.THREE_BACKGROUND_THREE3 || {};
-  module.THREE_BACKGROUND_THREE3.version = '0.0.1';
+  module.THREE_BACKGROUND_THREE3.version = '0.0.2';
 
   module.THREE_BACKGROUND_THREE3.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('#3D-background-three-canvas3').length == 0 || !Modernizr.webgl) return false;
+    var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
       var $window = $(window),
@@ -15195,7 +15242,25 @@ var THREE_BACKGROUND_THREE3 = function (module, $, window, document) {
 
         renderer.setClearColor(0x000000);
         lerp(displacementSprite.rotation, 'x', sphereTarget.x);
-        lerp(displacementSprite.rotation, 'y', sphereTarget.y);
+        lerp(displacementSprite.rotation, 'y', sphereTarget.y); //push objects
+
+        /*
+        @Usage: 
+             function CustomObj( scene ) {
+                 var elements = new THREE...;
+                scene.add( elements );
+                 this.update = function( time ) {
+                    elements.rotation.y = time*0.003;
+                }
+            }       
+             sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+        */
+
+        for (var i = 0; i < sceneSubjects.length; i++) {
+          sceneSubjects[i].update(clock.getElapsedTime() * 1);
+        } //render the scene to display our scene through the camera's eye.
+
+
         renderer.render(scene, camera);
       }
 
@@ -15230,6 +15295,9 @@ var THREE_BACKGROUND_THREE3 = function (module, $, window, document) {
       return {
         init: init,
         render: render,
+        getRendererCanvasID: function getRendererCanvasID() {
+          return rendererCanvasID;
+        },
         getScene: function getScene() {
           return scene;
         },
@@ -15653,11 +15721,12 @@ function simple_3D_gallery_js_typeof(obj) { if (typeof Symbol === "function" && 
 var THREE_GALLERY = function (module, $, window, document) {
   if (window.THREE_GALLERY === null) return false;
   module.THREE_GALLERY = module.THREE_GALLERY || {};
-  module.THREE_GALLERY.version = '0.0.3';
+  module.THREE_GALLERY.version = '0.0.4';
 
   module.THREE_GALLERY.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('#3D-gallery-three-canvas').length == 0 || !Modernizr.webgl) return false;
+    var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
       var $window = $(window),
@@ -15771,7 +15840,25 @@ var THREE_GALLERY = function (module, $, window, document) {
         } //update camera and controls
 
 
-        controls.update();
+        controls.update(); //push objects
+
+        /*
+        @Usage: 
+             function CustomObj( scene ) {
+                 var elements = new THREE...;
+                scene.add( elements );
+                 this.update = function( time ) {
+                    elements.rotation.y = time*0.003;
+                }
+            }       
+             sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+        */
+
+        for (var i = 0; i < sceneSubjects.length; i++) {
+          sceneSubjects[i].update(clock.getElapsedTime() * 1);
+        } //render the scene to display our scene through the camera's eye.
+
+
         renderer.render(scene, camera);
       }
 
@@ -15845,6 +15932,9 @@ var THREE_GALLERY = function (module, $, window, document) {
       return {
         init: init,
         render: render,
+        getRendererCanvasID: function getRendererCanvasID() {
+          return rendererCanvasID;
+        },
         getScene: function getScene() {
           return scene;
         },
@@ -15884,11 +15974,12 @@ function simple_3D_image_transition_js_classCallCheck(instance, Constructor) { i
 var THREE_IMAGE_TRANSITION = function (module, $, window, document) {
   if (window.THREE_IMAGE_TRANSITION === null) return false;
   module.THREE_IMAGE_TRANSITION = module.THREE_IMAGE_TRANSITION || {};
-  module.THREE_IMAGE_TRANSITION.version = '0.0.1';
+  module.THREE_IMAGE_TRANSITION.version = '0.0.2';
 
   module.THREE_IMAGE_TRANSITION.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('#3D-imagetransition-three-canvas').length == 0 || !Modernizr.webgl) return false;
+    var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
       var $window = $(window),
@@ -16007,7 +16098,25 @@ var THREE_IMAGE_TRANSITION = function (module, $, window, document) {
         //renderer.setClearColor( 0x000000 );	
         //update camera and controls
 
-        controls.update();
+        controls.update(); //push objects
+
+        /*
+        @Usage: 
+             function CustomObj( scene ) {
+                 var elements = new THREE...;
+                scene.add( elements );
+                 this.update = function( time ) {
+                    elements.rotation.y = time*0.003;
+                }
+            }       
+             sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+        */
+
+        for (var i = 0; i < sceneSubjects.length; i++) {
+          sceneSubjects[i].update(clock.getElapsedTime() * 1);
+        } //render the scene to display our scene through the camera's eye.
+
+
         renderer.render(scene, camera);
       }
 
@@ -16036,6 +16145,9 @@ var THREE_IMAGE_TRANSITION = function (module, $, window, document) {
       return {
         init: init,
         render: render,
+        getRendererCanvasID: function getRendererCanvasID() {
+          return rendererCanvasID;
+        },
         getScene: function getScene() {
           return scene;
         },
@@ -16077,11 +16189,12 @@ function simple_3D_model_js_typeof(obj) { if (typeof Symbol === "function" && ty
 var THREE_MODEL = function (module, $, window, document) {
   if (window.THREE_MODEL === null) return false;
   module.THREE_MODEL = module.THREE_MODEL || {};
-  module.THREE_MODEL.version = '0.0.2';
+  module.THREE_MODEL.version = '0.0.3';
 
   module.THREE_MODEL.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('#3D-model-canvas').length == 0 || !Modernizr.webgl) return false;
+    var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
       var $window = $(window),
@@ -16207,7 +16320,25 @@ var THREE_MODEL = function (module, $, window, document) {
         } //update camera and controls
 
 
-        controls.update();
+        controls.update(); //push objects
+
+        /*
+        @Usage: 
+             function CustomObj( scene ) {
+                 var elements = new THREE...;
+                scene.add( elements );
+                 this.update = function( time ) {
+                    elements.rotation.y = time*0.003;
+                }
+            }       
+             sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+        */
+
+        for (var i = 0; i < sceneSubjects.length; i++) {
+          sceneSubjects[i].update(clock.getElapsedTime() * 1);
+        } //render the scene to display our scene through the camera's eye.
+
+
         renderer.render(scene, camera);
       }
 
@@ -16267,6 +16398,9 @@ var THREE_MODEL = function (module, $, window, document) {
       return {
         init: init,
         render: render,
+        getRendererCanvasID: function getRendererCanvasID() {
+          return rendererCanvasID;
+        },
         getScene: function getScene() {
           return scene;
         },
@@ -16306,11 +16440,12 @@ function simple_3D_pages_js_classCallCheck(instance, Constructor) { if (!(instan
 var THREE_PAGES = function (module, $, window, document) {
   if (window.THREE_PAGES === null) return false;
   module.THREE_PAGES = module.THREE_PAGES || {};
-  module.THREE_PAGES.version = '0.0.1';
+  module.THREE_PAGES.version = '0.0.2';
 
   module.THREE_PAGES.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('#3D-renderer').length == 0 || !Modernizr.webgl) return false;
+    var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
       var $window = $(window),
@@ -16384,7 +16519,25 @@ var THREE_PAGES = function (module, $, window, document) {
         requestAnimationFrame(render);
         var delta = clock.getDelta(); //update camera and controls
 
-        controls.update();
+        controls.update(); //push objects
+
+        /*
+        @Usage: 
+             function CustomObj( scene ) {
+                 var elements = new THREE...;
+                scene.add( elements );
+                 this.update = function( time ) {
+                    elements.rotation.y = time*0.003;
+                }
+            }       
+             sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+        */
+
+        for (var i = 0; i < sceneSubjects.length; i++) {
+          sceneSubjects[i].update(clock.getElapsedTime() * 1);
+        } //render the scene to display our scene through the camera's eye.
+
+
         renderer.render(scene, camera);
       }
 
@@ -16399,6 +16552,9 @@ var THREE_PAGES = function (module, $, window, document) {
       return {
         init: init,
         render: render,
+        getRendererCanvasID: function getRendererCanvasID() {
+          return rendererCanvasID;
+        },
         getScene: function getScene() {
           return scene;
         },
@@ -16440,11 +16596,12 @@ function simple_3D_particle_effect_js_typeof(obj) { if (typeof Symbol === "funct
 var THREE_PARTICLE = function (module, $, window, document) {
   if (window.THREE_PARTICLE === null) return false;
   module.THREE_PARTICLE = module.THREE_PARTICLE || {};
-  module.THREE_PARTICLE.version = '0.0.3';
+  module.THREE_PARTICLE.version = '0.0.4';
 
   module.THREE_PARTICLE.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('#3D-particle-effect-canvas').length == 0 || !Modernizr.webgl) return false;
+    var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
       var $window = $(window),
@@ -16615,7 +16772,25 @@ var THREE_PARTICLE = function (module, $, window, document) {
         camera.lookAt(centerVector); //particle rotation
 
         particleRotation.rotation.x += 0.0000;
-        particleRotation.rotation.y -= 0.0040;
+        particleRotation.rotation.y -= 0.0040; //push objects
+
+        /*
+        @Usage: 
+             function CustomObj( scene ) {
+                 var elements = new THREE...;
+                scene.add( elements );
+                 this.update = function( time ) {
+                    elements.rotation.y = time*0.003;
+                }
+            }       
+             sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+        */
+
+        for (var i = 0; i < sceneSubjects.length; i++) {
+          sceneSubjects[i].update(clock.getElapsedTime() * 1);
+        } //render the scene to display our scene through the camera's eye.
+
+
         renderer.render(scene, camera);
       }
 
@@ -16689,6 +16864,9 @@ var THREE_PARTICLE = function (module, $, window, document) {
       return {
         init: init,
         render: render,
+        getRendererCanvasID: function getRendererCanvasID() {
+          return rendererCanvasID;
+        },
         getScene: function getScene() {
           return scene;
         },
@@ -16728,11 +16906,12 @@ function simple_3D_sphere_three_js_classCallCheck(instance, Constructor) { if (!
 var THREE_SPHERE_THREE = function (module, $, window, document) {
   if (window.THREE_SPHERE_THREE === null) return false;
   module.THREE_SPHERE_THREE = module.THREE_SPHERE_THREE || {};
-  module.THREE_SPHERE_THREE.version = '0.0.1';
+  module.THREE_SPHERE_THREE.version = '0.0.2';
 
   module.THREE_SPHERE_THREE.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('#3D-sphere-three-canvas').length == 0 || !Modernizr.webgl) return false;
+    var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
       var $window = $(window),
@@ -16808,7 +16987,25 @@ var THREE_SPHERE_THREE = function (module, $, window, document) {
         requestAnimationFrame(render);
         displacementSprite.rotation.z += 0.01; //update camera and controls
 
-        controls.update();
+        controls.update(); //push objects
+
+        /*
+        @Usage: 
+             function CustomObj( scene ) {
+                 var elements = new THREE...;
+                scene.add( elements );
+                 this.update = function( time ) {
+                    elements.rotation.y = time*0.003;
+                }
+            }       
+             sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+        */
+
+        for (var i = 0; i < sceneSubjects.length; i++) {
+          sceneSubjects[i].update(clock.getElapsedTime() * 1);
+        } //render the scene to display our scene through the camera's eye.
+
+
         renderer.render(scene, camera);
       }
 
@@ -16823,6 +17020,9 @@ var THREE_SPHERE_THREE = function (module, $, window, document) {
       return {
         init: init,
         render: render,
+        getRendererCanvasID: function getRendererCanvasID() {
+          return rendererCanvasID;
+        },
         getScene: function getScene() {
           return scene;
         },
@@ -16862,11 +17062,12 @@ function simple_3D_obj_anim_interaction_js_classCallCheck(instance, Constructor)
 var THREE_OBJ_ANIM_INTERACTION = function (module, $, window, document) {
   if (window.THREE_OBJ_ANIM_INTERACTION === null) return false;
   module.THREE_OBJ_ANIM_INTERACTION = module.THREE_OBJ_ANIM_INTERACTION || {};
-  module.THREE_OBJ_ANIM_INTERACTION.version = '0.0.2';
+  module.THREE_OBJ_ANIM_INTERACTION.version = '0.0.3';
 
   module.THREE_OBJ_ANIM_INTERACTION.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('#3D-object-buttonevent-canvas').length == 0 || !Modernizr.webgl) return false;
+    var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
       var $window = $(window),
@@ -16958,7 +17159,25 @@ var THREE_OBJ_ANIM_INTERACTION = function (module, $, window, document) {
 
         targetObj.geometry.verticesNeedUpdate = true; //update camera and controls
 
-        controls.update();
+        controls.update(); //push objects
+
+        /*
+        @Usage: 
+             function CustomObj( scene ) {
+                 var elements = new THREE...;
+                scene.add( elements );
+                 this.update = function( time ) {
+                    elements.rotation.y = time*0.003;
+                }
+            }       
+             sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+        */
+
+        for (var i = 0; i < sceneSubjects.length; i++) {
+          sceneSubjects[i].update(clock.getElapsedTime() * 1);
+        } //render the scene to display our scene through the camera's eye.
+
+
         renderer.render(scene, camera);
       }
 
@@ -17015,6 +17234,9 @@ var THREE_OBJ_ANIM_INTERACTION = function (module, $, window, document) {
       return {
         init: init,
         render: render,
+        getRendererCanvasID: function getRendererCanvasID() {
+          return rendererCanvasID;
+        },
         getScene: function getScene() {
           return scene;
         },
@@ -17054,11 +17276,12 @@ function simple_3D_mouse_interaction_js_classCallCheck(instance, Constructor) { 
 var THREE_MOUSE_INTERACTION = function (module, $, window, document) {
   if (window.THREE_MOUSE_INTERACTION === null) return false;
   module.THREE_MOUSE_INTERACTION = module.THREE_MOUSE_INTERACTION || {};
-  module.THREE_MOUSE_INTERACTION.version = '0.0.1';
+  module.THREE_MOUSE_INTERACTION.version = '0.0.2';
 
   module.THREE_MOUSE_INTERACTION.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('#3D-mouseinteraction-three-canvas').length == 0 || !Modernizr.webgl) return false;
+    var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
       var $window = $(window),
@@ -17155,7 +17378,25 @@ var THREE_MOUSE_INTERACTION = function (module, $, window, document) {
         } //update camera and controls
 
 
-        controls.update();
+        controls.update(); //push objects
+
+        /*
+        @Usage: 
+             function CustomObj( scene ) {
+                 var elements = new THREE...;
+                scene.add( elements );
+                 this.update = function( time ) {
+                    elements.rotation.y = time*0.003;
+                }
+            }       
+             sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+        */
+
+        for (var i = 0; i < sceneSubjects.length; i++) {
+          sceneSubjects[i].update(clock.getElapsedTime() * 1);
+        } //render the scene to display our scene through the camera's eye.
+
+
         renderer.render(scene, camera);
       }
 
@@ -17308,6 +17549,9 @@ var THREE_MOUSE_INTERACTION = function (module, $, window, document) {
       return {
         init: init,
         render: render,
+        getRendererCanvasID: function getRendererCanvasID() {
+          return rendererCanvasID;
+        },
         getScene: function getScene() {
           return scene;
         },
@@ -17347,11 +17591,12 @@ function simple_3D_mouse_interaction2_js_classCallCheck(instance, Constructor) {
 var THREE_MOUSE_INTERACTION2 = function (module, $, window, document) {
   if (window.THREE_MOUSE_INTERACTION2 === null) return false;
   module.THREE_MOUSE_INTERACTION2 = module.THREE_MOUSE_INTERACTION2 || {};
-  module.THREE_MOUSE_INTERACTION2.version = '0.0.1';
+  module.THREE_MOUSE_INTERACTION2.version = '0.0.2';
 
   module.THREE_MOUSE_INTERACTION2.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('#3D-mouseinteraction2-three-canvas').length == 0 || !Modernizr.webgl) return false;
+    var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
       var $window = $(window),
@@ -17433,7 +17678,25 @@ var THREE_MOUSE_INTERACTION2 = function (module, $, window, document) {
           if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex); //by setting current intersection object to "nothing"
 
           INTERSECTED = null;
-        }
+        } //push objects
+
+        /*
+        @Usage: 
+             function CustomObj( scene ) {
+                 var elements = new THREE...;
+                scene.add( elements );
+                 this.update = function( time ) {
+                    elements.rotation.y = time*0.003;
+                }
+            }       
+             sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+        */
+
+
+        for (var i = 0; i < sceneSubjects.length; i++) {
+          sceneSubjects[i].update(clock.getElapsedTime() * 1);
+        } //render the scene to display our scene through the camera's eye.
+
 
         renderer.render(scene, camera);
       }
@@ -17648,6 +17911,9 @@ var THREE_MOUSE_INTERACTION2 = function (module, $, window, document) {
       return {
         init: init,
         render: render,
+        getRendererCanvasID: function getRendererCanvasID() {
+          return rendererCanvasID;
+        },
         getScene: function getScene() {
           return scene;
         },
@@ -17693,11 +17959,12 @@ function simple_3D_shatter_slider_js_typeof(obj) { if (typeof Symbol === "functi
 var THREE_SHATTER_SLIDER = function (module, $, window, document) {
   if (window.THREE_SHATTER_SLIDER === null) return false;
   module.THREE_SHATTER_SLIDER = module.THREE_SHATTER_SLIDER || {};
-  module.THREE_SHATTER_SLIDER.version = '0.0.2';
+  module.THREE_SHATTER_SLIDER.version = '0.0.3';
 
   module.THREE_SHATTER_SLIDER.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('.uix-3d-slider--shatter').length == 0 || !Modernizr.webgl) return false;
+    var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
       var $window = $(window),
@@ -18024,7 +18291,25 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
         } //update camera and controls
 
 
-        controls.update();
+        controls.update(); //push objects
+
+        /*
+        @Usage: 
+             function CustomObj( scene ) {
+                 var elements = new THREE...;
+                scene.add( elements );
+                 this.update = function( time ) {
+                    elements.rotation.y = time*0.003;
+                }
+            }       
+             sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+        */
+
+        for (var i = 0; i < sceneSubjects.length; i++) {
+          sceneSubjects[i].update(clock.getElapsedTime() * 1);
+        } //render the scene to display our scene through the camera's eye.
+
+
         renderer.render(scene, camera);
       }
 
@@ -18279,8 +18564,11 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
 
       return {
         init: init,
-        wrapperInit: wrapperInit,
         render: render,
+        wrapperInit: wrapperInit,
+        getRendererCanvasID: function getRendererCanvasID() {
+          return rendererCanvasID;
+        },
         getScene: function getScene() {
           return scene;
         },
@@ -18327,11 +18615,12 @@ function simple_3D_explosive_particle_slider_js_typeof(obj) { if (typeof Symbol 
 var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
   if (window.THREE_EXP_PARTICLE_SLIDER === null) return false;
   module.THREE_EXP_PARTICLE_SLIDER = module.THREE_EXP_PARTICLE_SLIDER || {};
-  module.THREE_EXP_PARTICLE_SLIDER.version = '0.0.2';
+  module.THREE_EXP_PARTICLE_SLIDER.version = '0.0.3';
 
   module.THREE_EXP_PARTICLE_SLIDER.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('.uix-3d-slider--expParticle').length == 0 || !Modernizr.webgl) return false;
+    var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
       var $window = $(window),
@@ -18660,7 +18949,25 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
         } //update camera and controls
 
 
-        controls.update();
+        controls.update(); //push objects
+
+        /*
+        @Usage: 
+             function CustomObj( scene ) {
+                 var elements = new THREE...;
+                scene.add( elements );
+                 this.update = function( time ) {
+                    elements.rotation.y = time*0.003;
+                }
+            }       
+             sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+        */
+
+        for (var i = 0; i < sceneSubjects.length; i++) {
+          sceneSubjects[i].update(clock.getElapsedTime() * 1);
+        } //render the scene to display our scene through the camera's eye.
+
+
         renderer.render(scene, camera);
       }
 
@@ -18890,8 +19197,11 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
 
       return {
         init: init,
-        wrapperInit: wrapperInit,
         render: render,
+        wrapperInit: wrapperInit,
+        getRendererCanvasID: function getRendererCanvasID() {
+          return rendererCanvasID;
+        },
         getScene: function getScene() {
           return scene;
         },
@@ -18909,6 +19219,217 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
   module.components.documentReady.push(module.THREE_EXP_PARTICLE_SLIDER.documentReady);
   return function THREE_EXP_PARTICLE_SLIDER() {
     simple_3D_explosive_particle_slider_js_classCallCheck(this, THREE_EXP_PARTICLE_SLIDER);
+
+    this.module = module;
+  };
+}(UixModuleInstance, jQuery, window, document);
+// CONCATENATED MODULE: ./src/components/ES6/simple-3D-filmic-effects/js/index.js
+function simple_3D_filmic_effects_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/* 
+ *************************************
+ * <!-- 3D Filmic Effects -->
+ *************************************
+ */
+
+/**
+ * module.THREE_FILMIC_EFF
+ * 
+ * @requires ./examples/assets/js/min/three.min.js
+ * @requires ./src/components/ES5/_plugins-THREE
+ */
+
+var THREE_FILMIC_EFF = function (module, $, window, document) {
+  if (window.THREE_FILMIC_EFF === null) return false;
+  module.THREE_FILMIC_EFF = module.THREE_FILMIC_EFF || {};
+  module.THREE_FILMIC_EFF.version = '0.0.1';
+
+  module.THREE_FILMIC_EFF.documentReady = function ($) {
+    //Prevent this module from loading in other pages
+    if ($('#3D-filmic-effects-canvas').length == 0 || !Modernizr.webgl) return false;
+    var sceneSubjects = []; // Import objects and animations dynamically
+
+    var MainStage = function () {
+      var $window = $(window),
+          windowWidth = window.innerWidth,
+          windowHeight = window.innerHeight,
+          rendererCanvasID = '3D-filmic-effects-canvas'; // Generate one plane geometries mesh to scene
+      //-------------------------------------	
+
+      var camera,
+          scene,
+          lights = [],
+          renderer,
+          clock = new THREE.Clock();
+      var intersectionPlane;
+      var composer, bloomPass, filmPass;
+
+      function init() {
+        //=================
+        //camera
+        camera = new THREE.PerspectiveCamera(60, windowWidth / windowHeight, 1, 10000);
+        camera.position.set(0, 0, 100);
+        camera.lookAt(new THREE.Vector3(0, 0, 0)); //=================
+        //Scene
+
+        scene = new THREE.Scene(); //=================
+        //Lights
+
+        lights[0] = new THREE.PointLight(0xffffff, 1, 0);
+        lights[1] = new THREE.PointLight(0xffffff, 1, 0);
+        lights[2] = new THREE.DirectionalLight(0xffffff);
+        lights[0].position.set(0, 200, 0);
+        lights[1].position.set(100, 200, 100);
+        lights[2].position.set(120, 200, 0);
+        lights[2].intensity = 0.6;
+        scene.add(lights[0]);
+        scene.add(lights[1]);
+        scene.add(lights[2]); //=================
+        //WebGL Renderer		
+
+        renderer = new THREE.WebGLRenderer({
+          canvas: document.getElementById(rendererCanvasID),
+          //canvas
+          alpha: true,
+          antialias: true
+        });
+        renderer.setSize(windowWidth, windowHeight);
+        renderer.shadowMap = true;
+        renderer.shadowMapSoft = true; //=================
+        //add bloom effect
+
+        bloomPass = new THREE.BloomPass(1, // strength
+        25, // kernel size
+        4, // sigma ?
+        256); //add film effect
+
+        filmPass = new THREE.FilmPass(0.35, // noise intensity
+        0.025, // scanline intensity
+        648, // scanline count
+        false); //-----
+
+        var renderPass = new THREE.RenderPass(scene, camera);
+        var effectCopy = new THREE.ShaderPass(THREE.CopyShader);
+        effectCopy.renderToScreen = true;
+        composer = new THREE.EffectComposer(renderer);
+        composer.addPass(renderPass);
+        composer.addPass(bloomPass);
+        composer.addPass(filmPass);
+        composer.addPass(effectCopy); //=================
+
+        var geo = new THREE.PlaneGeometry(100000, 100000);
+        var mat = new THREE.MeshNormalMaterial({
+          side: THREE.DoubleSide
+        });
+        intersectionPlane = new THREE.Mesh(geo, mat);
+        intersectionPlane.visible = false;
+        scene.add(intersectionPlane);
+        var hoverMaterial = new THREE.MeshNormalMaterial();
+        var neutralMaterial = new THREE.MeshLambertMaterial({
+          color: 0xffcccc
+        });
+        var selectedMaterial = new THREE.MeshBasicMaterial({
+          color: 0x55ff88
+        });
+        var geo = new THREE.IcosahedronGeometry(30, 1);
+        var mesh = new THREE.Mesh(geo, neutralMaterial);
+        mesh.position.x = 0;
+        mesh.position.y = 0;
+        mesh.position.z = 0;
+        scene.add(mesh); //=================
+        // Fires when the window changes
+
+        window.addEventListener('resize', onWindowResize, false);
+      }
+
+      function render() {
+        requestAnimationFrame(render); //To set a background color.
+
+        renderer.setClearColor(0x000000); //push objects
+
+        /*
+        @Usage: 
+             function CustomObj( scene ) {
+                 var elements = new THREE...;
+                scene.add( elements );
+                 this.update = function( time ) {
+                    elements.rotation.y = time*0.003;
+                }
+            }       
+             sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+        */
+
+        for (var i = 0; i < sceneSubjects.length; i++) {
+          sceneSubjects[i].update(clock.getElapsedTime() * 1);
+        } //render the scene with filter
+
+
+        composer.render();
+      }
+
+      function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      } // 
+      //-------------------------------------	
+
+
+      return {
+        init: init,
+        render: render,
+        getRendererCanvasID: function getRendererCanvasID() {
+          return rendererCanvasID;
+        },
+        getScene: function getScene() {
+          return scene;
+        },
+        getCamera: function getCamera() {
+          return camera;
+        }
+      };
+    }(); // 
+
+
+    MainStage.init();
+    MainStage.render(); // Add stars to scene
+    //-------------------------------------	
+
+    var starScene = MainStage.getScene();
+    var starCamera = MainStage.getCamera();
+
+    function Stars(scene, terrainSize) {
+      var starsGeometry = new THREE.IcosahedronGeometry(terrainSize, 4); // geometry deformation
+
+      for (var i = 0; i < starsGeometry.vertices.length; i += 1) {
+        var scalar = 1 + Math.random() + Math.random();
+        starsGeometry.vertices[i].multiplyScalar(scalar);
+      }
+
+      var textureLoader = new THREE.TextureLoader();
+      textureLoader.setCrossOrigin("anonymous");
+      var texture = textureLoader.load('data:image/png;base64,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');
+      var starMaterial = new THREE.PointsMaterial({
+        map: texture,
+        color: "#fff",
+        size: 20,
+        blending: THREE.AdditiveBlending,
+        transparent: false
+      });
+      var stars = new THREE.Points(starsGeometry, starMaterial);
+      scene.add(stars);
+
+      this.update = function (time) {
+        stars.rotation.y = time * 0.13;
+      };
+    }
+
+    sceneSubjects.push(new Stars(starScene, 150));
+  };
+
+  module.components.documentReady.push(module.THREE_FILMIC_EFF.documentReady);
+  return function THREE_FILMIC_EFF() {
+    simple_3D_filmic_effects_js_classCallCheck(this, THREE_FILMIC_EFF);
 
     this.module = module;
   };
@@ -19987,6 +20508,7 @@ var wave_background_scss_style = __webpack_require__(102);
 /******/
 
 /* pages */
+
 
 
 
@@ -33599,6 +34121,108 @@ THREE.CopyShader = {
 
 /**
  * @author alteredq / http://alteredqualia.com/
+ *
+ * Convolution shader
+ * ported from o3d sample to WebGL / GLSL
+ * http://o3d.googlecode.com/svn/trunk/samples/convolution.html
+ */
+
+THREE.ConvolutionShader = {
+
+	defines: {
+
+		"KERNEL_SIZE_FLOAT": "25.0",
+		"KERNEL_SIZE_INT": "25"
+
+	},
+
+	uniforms: {
+
+		"tDiffuse": { value: null },
+		"uImageIncrement": { value: new THREE.Vector2( 0.001953125, 0.0 ) },
+		"cKernel": { value: [] }
+
+	},
+
+	vertexShader: [
+
+		"uniform vec2 uImageIncrement;",
+
+		"varying vec2 vUv;",
+
+		"void main() {",
+
+			"vUv = uv - ( ( KERNEL_SIZE_FLOAT - 1.0 ) / 2.0 ) * uImageIncrement;",
+			"gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );",
+
+		"}"
+
+	].join( "\n" ),
+
+	fragmentShader: [
+
+		"uniform float cKernel[ KERNEL_SIZE_INT ];",
+
+		"uniform sampler2D tDiffuse;",
+		"uniform vec2 uImageIncrement;",
+
+		"varying vec2 vUv;",
+
+		"void main() {",
+
+			"vec2 imageCoord = vUv;",
+			"vec4 sum = vec4( 0.0, 0.0, 0.0, 0.0 );",
+
+			"for( int i = 0; i < KERNEL_SIZE_INT; i ++ ) {",
+
+				"sum += texture2D( tDiffuse, imageCoord ) * cKernel[ i ];",
+				"imageCoord += uImageIncrement;",
+
+			"}",
+
+			"gl_FragColor = sum;",
+
+		"}"
+
+
+	].join( "\n" ),
+
+	buildKernel: function ( sigma ) {
+
+		// We lop off the sqrt(2 * pi) * sigma term, since we're going to normalize anyway.
+
+		function gauss( x, sigma ) {
+
+			return Math.exp( - ( x * x ) / ( 2.0 * sigma * sigma ) );
+
+		}
+
+		var i, values, sum, halfWidth, kMaxKernelSize = 25, kernelSize = 2 * Math.ceil( sigma * 3.0 ) + 1;
+
+		if ( kernelSize > kMaxKernelSize ) kernelSize = kMaxKernelSize;
+		halfWidth = ( kernelSize - 1 ) * 0.5;
+
+		values = new Array( kernelSize );
+		sum = 0.0;
+		for ( i = 0; i < kernelSize; ++ i ) {
+
+			values[ i ] = gauss( i - halfWidth, sigma );
+			sum += values[ i ];
+
+		}
+
+		// normalize the kernel
+
+		for ( i = 0; i < kernelSize; ++ i ) values[ i ] /= sum;
+
+		return values;
+
+	}
+
+};
+
+/**
+ * @author alteredq / http://alteredqualia.com/
  */
 
 THREE.EffectComposer = function ( renderer, renderTarget ) {
@@ -33870,6 +34494,8 @@ THREE.Pass.FullScreenQuad = ( function () {
 
 THREE.BloomPass = function ( strength, kernelSize, sigma, resolution ) {
 
+	THREE.Pass.call( this );
+
 	strength = ( strength !== undefined ) ? strength : 1;
 	kernelSize = ( kernelSize !== undefined ) ? kernelSize : 25;
 	sigma = ( sigma !== undefined ) ? sigma : 4.0;
@@ -33877,10 +34503,12 @@ THREE.BloomPass = function ( strength, kernelSize, sigma, resolution ) {
 
 	// render targets
 
-	var pars = { minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, format: THREE.RGBFormat };
+	var pars = { minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, format: THREE.RGBAFormat };
 
 	this.renderTargetX = new THREE.WebGLRenderTarget( resolution, resolution, pars );
+	this.renderTargetX.texture.name = "BloomPass.x";
 	this.renderTargetY = new THREE.WebGLRenderTarget( resolution, resolution, pars );
+	this.renderTargetY.texture.name = "BloomPass.y";
 
 	// copy material
 
@@ -33912,13 +34540,13 @@ THREE.BloomPass = function ( strength, kernelSize, sigma, resolution ) {
 
 	this.convolutionUniforms = THREE.UniformsUtils.clone( convolutionShader.uniforms );
 
-	this.convolutionUniforms[ "uImageIncrement" ].value = THREE.BloomPass.blurx;
+	this.convolutionUniforms[ "uImageIncrement" ].value = THREE.BloomPass.blurX;
 	this.convolutionUniforms[ "cKernel" ].value = THREE.ConvolutionShader.buildKernel( sigma );
 
 	this.materialConvolution = new THREE.ShaderMaterial( {
 
 		uniforms: this.convolutionUniforms,
-		vertexShader:  convolutionShader.vertexShader,
+		vertexShader: convolutionShader.vertexShader,
 		fragmentShader: convolutionShader.fragmentShader,
 		defines: {
 			"KERNEL_SIZE_FLOAT": kernelSize.toFixed( 1 ),
@@ -33927,48 +34555,56 @@ THREE.BloomPass = function ( strength, kernelSize, sigma, resolution ) {
 
 	} );
 
-	this.enabled = true;
 	this.needsSwap = false;
-	this.clear = false;
+
+	this.fsQuad = new THREE.Pass.FullScreenQuad( null );
 
 };
 
-THREE.BloomPass.prototype = {
+THREE.BloomPass.prototype = Object.assign( Object.create( THREE.Pass.prototype ), {
 
-	render: function ( renderer, writeBuffer, readBuffer, delta, maskActive ) {
+	constructor: THREE.BloomPass,
+
+	render: function ( renderer, writeBuffer, readBuffer, deltaTime, maskActive ) {
 
 		if ( maskActive ) renderer.context.disable( renderer.context.STENCIL_TEST );
 
 		// Render quad with blured scene into texture (convolution pass 1)
 
-		THREE.EffectComposer.quad.material = this.materialConvolution;
+		this.fsQuad.material = this.materialConvolution;
 
-		this.convolutionUniforms[ "tDiffuse" ].value = readBuffer;
+		this.convolutionUniforms[ "tDiffuse" ].value = readBuffer.texture;
 		this.convolutionUniforms[ "uImageIncrement" ].value = THREE.BloomPass.blurX;
 
-		renderer.render( THREE.EffectComposer.scene, THREE.EffectComposer.camera, this.renderTargetX, true );
+		renderer.setRenderTarget( this.renderTargetX );
+		renderer.clear();
+		this.fsQuad.render( renderer );
 
 
 		// Render quad with blured scene into texture (convolution pass 2)
 
-		this.convolutionUniforms[ "tDiffuse" ].value = this.renderTargetX;
+		this.convolutionUniforms[ "tDiffuse" ].value = this.renderTargetX.texture;
 		this.convolutionUniforms[ "uImageIncrement" ].value = THREE.BloomPass.blurY;
 
-		renderer.render( THREE.EffectComposer.scene, THREE.EffectComposer.camera, this.renderTargetY, true );
+		renderer.setRenderTarget( this.renderTargetY );
+		renderer.clear();
+		this.fsQuad.render( renderer );
 
 		// Render original scene with superimposed blur to texture
 
-		THREE.EffectComposer.quad.material = this.materialCopy;
+		this.fsQuad.material = this.materialCopy;
 
-		this.copyUniforms[ "tDiffuse" ].value = this.renderTargetY;
+		this.copyUniforms[ "tDiffuse" ].value = this.renderTargetY.texture;
 
 		if ( maskActive ) renderer.context.enable( renderer.context.STENCIL_TEST );
 
-		renderer.render( THREE.EffectComposer.scene, THREE.EffectComposer.camera, readBuffer, this.clear );
+		renderer.setRenderTarget( readBuffer );
+		if ( this.clear ) renderer.clear();
+		this.fsQuad.render( renderer );
 
 	}
 
-};
+} );
 
 THREE.BloomPass.blurX = new THREE.Vector2( 0.001953125, 0.0 );
 THREE.BloomPass.blurY = new THREE.Vector2( 0.0, 0.001953125 );
@@ -36226,4 +36862,167 @@ else {
 }
 
 }).call(this);
+
+/**
+ * @author alteredq / http://alteredqualia.com/
+ *
+ * Film grain & scanlines shader
+ *
+ * - ported from HLSL to WebGL / GLSL
+ * http://www.truevision3d.com/forums/showcase/staticnoise_colorblackwhite_scanline_shaders-t18698.0.html
+ *
+ * Screen Space Static Postprocessor
+ *
+ * Produces an analogue noise overlay similar to a film grain / TV static
+ *
+ * Original implementation and noise algorithm
+ * Pat 'Hawthorne' Shearon
+ *
+ * Optimized scanlines + noise version with intensity scaling
+ * Georg 'Leviathan' Steinrohder
+ *
+ * This version is provided under a Creative Commons Attribution 3.0 License
+ * http://creativecommons.org/licenses/by/3.0/
+ */
+
+THREE.FilmShader = {
+
+	uniforms: {
+
+		"tDiffuse": { value: null },
+		"time": { value: 0.0 },
+		"nIntensity": { value: 0.5 },
+		"sIntensity": { value: 0.05 },
+		"sCount": { value: 4096 },
+		"grayscale": { value: 1 }
+
+	},
+
+	vertexShader: [
+
+		"varying vec2 vUv;",
+
+		"void main() {",
+
+			"vUv = uv;",
+			"gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );",
+
+		"}"
+
+	].join( "\n" ),
+
+	fragmentShader: [
+
+		"#include <common>",
+
+		// control parameter
+		"uniform float time;",
+
+		"uniform bool grayscale;",
+
+		// noise effect intensity value (0 = no effect, 1 = full effect)
+		"uniform float nIntensity;",
+
+		// scanlines effect intensity value (0 = no effect, 1 = full effect)
+		"uniform float sIntensity;",
+
+		// scanlines effect count value (0 = no effect, 4096 = full effect)
+		"uniform float sCount;",
+
+		"uniform sampler2D tDiffuse;",
+
+		"varying vec2 vUv;",
+
+		"void main() {",
+
+			// sample the source
+			"vec4 cTextureScreen = texture2D( tDiffuse, vUv );",
+
+			// make some noise
+			"float dx = rand( vUv + time );",
+
+			// add noise
+			"vec3 cResult = cTextureScreen.rgb + cTextureScreen.rgb * clamp( 0.1 + dx, 0.0, 1.0 );",
+
+			// get us a sine and cosine
+			"vec2 sc = vec2( sin( vUv.y * sCount ), cos( vUv.y * sCount ) );",
+
+			// add scanlines
+			"cResult += cTextureScreen.rgb * vec3( sc.x, sc.y, sc.x ) * sIntensity;",
+
+			// interpolate between source and result by intensity
+			"cResult = cTextureScreen.rgb + clamp( nIntensity, 0.0,1.0 ) * ( cResult - cTextureScreen.rgb );",
+
+			// convert to grayscale if desired
+			"if( grayscale ) {",
+
+				"cResult = vec3( cResult.r * 0.3 + cResult.g * 0.59 + cResult.b * 0.11 );",
+
+			"}",
+
+			"gl_FragColor =  vec4( cResult, cTextureScreen.a );",
+
+		"}"
+
+	].join( "\n" )
+
+};
+
+/**
+ * @author alteredq / http://alteredqualia.com/
+ */
+
+THREE.FilmPass = function ( noiseIntensity, scanlinesIntensity, scanlinesCount, grayscale ) {
+
+	THREE.Pass.call( this );
+
+	if ( THREE.FilmShader === undefined )
+		console.error( "THREE.FilmPass relies on THREE.FilmShader" );
+
+	var shader = THREE.FilmShader;
+
+	this.uniforms = THREE.UniformsUtils.clone( shader.uniforms );
+
+	this.material = new THREE.ShaderMaterial( {
+
+		uniforms: this.uniforms,
+		vertexShader: shader.vertexShader,
+		fragmentShader: shader.fragmentShader
+
+	} );
+
+	if ( grayscale !== undefined )	this.uniforms.grayscale.value = grayscale;
+	if ( noiseIntensity !== undefined ) this.uniforms.nIntensity.value = noiseIntensity;
+	if ( scanlinesIntensity !== undefined ) this.uniforms.sIntensity.value = scanlinesIntensity;
+	if ( scanlinesCount !== undefined ) this.uniforms.sCount.value = scanlinesCount;
+
+	this.fsQuad = new THREE.Pass.FullScreenQuad( this.material );
+
+};
+
+THREE.FilmPass.prototype = Object.assign( Object.create( THREE.Pass.prototype ), {
+
+	constructor: THREE.FilmPass,
+
+	render: function ( renderer, writeBuffer, readBuffer, deltaTime /*, maskActive */ ) {
+
+		this.uniforms[ "tDiffuse" ].value = readBuffer.texture;
+		this.uniforms[ "time" ].value += deltaTime;
+
+		if ( this.renderToScreen ) {
+
+			renderer.setRenderTarget( null );
+			this.fsQuad.render( renderer );
+
+		} else {
+
+			renderer.setRenderTarget( writeBuffer );
+			if ( this.clear ) renderer.clear();
+			this.fsQuad.render( renderer );
+
+		}
+
+	}
+
+} );
 //# sourceMappingURL=uix-kit.concat.es5.3rd-party-plugins.js.map

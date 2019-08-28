@@ -606,16 +606,16 @@ compiler.hooks.done.tap( 'MyPlugin', ( compilation ) => {
 		//---------------------------------------------------------------------
 		if ( fs.existsSync( pureMergeJSFile ) ) {
 			
-			fs.readFile( pureMergeJSFile, function(err, data ){
+			fs.readFile( pureMergeJSFile, 'utf8', function(err, data ){
 
 				if (err) throw err;
 				
 				oldContent = data;
-				
+      
 				
 				//get pureMergeJSDependenciesFile content
 				if ( fs.existsSync( pureMergeJSDependenciesFile ) ) {
-					fs.readFile( pureMergeJSDependenciesFile, function( err, content ) {
+					fs.readFile( pureMergeJSDependenciesFile, 'utf8', function( err, content ) {
 						if ( ! err ) {
 							pureMergeJSDependenciesFileData = content;
                             
@@ -625,7 +625,7 @@ compiler.hooks.done.tap( 'MyPlugin', ( compilation ) => {
                             //Prevent JS from adding code repeatedly
                             //Check if the uix-kit.concat.es5.3rd-party-plugins.js file has been 
                             //merged into the uix-kit.js file?
-                            fs.readFile( targetJSFile, function(err, data ){
+                            fs.readFile( targetJSFile, 'utf8', function(err, data ){
                                 
                                 
                                 if (err) throw err;
@@ -644,8 +644,8 @@ compiler.hooks.done.tap( 'MyPlugin', ( compilation ) => {
                                     resultData = data.join("\n");	
                                 }
 
+                                                             
 
-                                    
                                 if ( data.indexOf( 'sourceMappingURL='+globs.concatES5_JSFile+'.map' ) < 0 ) {
 
                                     resultData = resultData + oldContent;
@@ -653,7 +653,7 @@ compiler.hooks.done.tap( 'MyPlugin', ( compilation ) => {
                                     let compressedresultData = UglifyJS.minify( resultData, { warnings: true } );
                                     
                                     
-                                    if ( typeof compressedresultData.code != typeof undefined ) {
+                                    if ( typeof compressedresultData.code != typeof undefined && oldContent.length > 0 ) {
                                         
 
                                         // Step 3 => write targetJSFile
@@ -693,7 +693,7 @@ compiler.hooks.done.tap( 'MyPlugin', ( compilation ) => {
 
                                                 if ( fs.existsSync( filepath ) ) {
 
-                                                    fs.readFile( filepath, function( err, content ) {
+                                                    fs.readFile( filepath, 'utf8', function( err, content ) {
 
                                                         if ( err ) throw err;
 

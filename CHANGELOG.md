@@ -1,5 +1,13 @@
 # Changelog
 
+
+#### = 3.8.2 (August 27, 2019) =
+
+* New: Added hook of instance for threejs modules.
+* New: Add a new module "3D Filmic Effects".
+* Tweak: Improve the stability of the webpack configuration.
+
+
 #### = 3.8.1 (August 21, 2019) =
 
 * New: Add Helper Class `uix-details-reset`

@@ -28,13 +28,14 @@ export const THREE_IMAGE_TRANSITION = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_IMAGE_TRANSITION               = module.THREE_IMAGE_TRANSITION || {};
-    module.THREE_IMAGE_TRANSITION.version       = '0.0.1';
+    module.THREE_IMAGE_TRANSITION.version       = '0.0.2';
     module.THREE_IMAGE_TRANSITION.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
 		if ( $( '#3D-imagetransition-three-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
 		
 
+        var sceneSubjects = []; // Import objects and animations dynamically
 		var MainStage = function() {
 
 
@@ -191,7 +192,29 @@ export const THREE_IMAGE_TRANSITION = ( ( module, $, window, document ) => {
 
 				//update camera and controls
 				controls.update();
+                
+                
+                //push objects
+                /*
+                @Usage: 
 
+                    function CustomObj( scene ) {
+
+                        var elements = new THREE...;
+                        scene.add( elements );
+
+                        this.update = function( time ) {
+                            elements.rotation.y = time*0.003;
+                        }
+                    }       
+
+                    sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+                */
+                for( var i = 0; i < sceneSubjects.length; i++ ) {
+                    sceneSubjects[i].update( clock.getElapsedTime()*1 );  
+                }
+
+                //render the scene to display our scene through the camera's eye.
 				renderer.render( scene, camera );
 
 
@@ -223,11 +246,13 @@ export const THREE_IMAGE_TRANSITION = ( ( module, $, window, document ) => {
 			// 
 			//-------------------------------------	
 			return {
-				init      : init,
-				render    : render,
-				getScene  : function () { return scene; },
-				getCamera : function () { return camera; } 
+				init                : init,
+				render              : render,
+				getRendererCanvasID : function () { return rendererCanvasID; },
+				getScene            : function () { return scene; },
+				getCamera           : function () { return camera; } 
 			};
+
 
 
 		}();
