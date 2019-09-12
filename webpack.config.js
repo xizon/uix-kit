@@ -73,17 +73,16 @@ let customWebsiteVersion     = json.version,
 	customWebsiteAuthor      = ( Object.prototype.toString.call( json.author ) == '[object Object]' ) ? json.author.name : json.author,
 	customWebsiteTitle       = json.projectName,
 	customWebsiteDesc        = json.description,
-	customWebsiteCanonical   = '<link rel="canonical" href="'+json.projectURL+'" />',
 	customWebsiteGenerator   = 'Uix Kit',
 	customWebsiteHash        = randomString({length: 20}),
 	customWebsiteComment     = `
 ## Project Name        :  ` + customWebsiteTitle + `
 ## Project Description :  ` + customWebsiteDesc + `
+## Project URL         :  ` + json.projectURL + `
 ## Version             :  ` + customWebsiteVersion + `
 ## Based on            :  Uix Kit (` + json.homepage + `)
 ## Last Update         :  ` + moment().format( "MMMM D, YYYY" ) + `
-## Created by          :  ` + json.createdInfo + `
-## Contact Us          :  ` + json.email + `
+## Created by          :  ` + json.createdInfo + ( json.email != '' ? ' (' + json.email + ')' : '' ) + `
 ## Released under the ` + json.license + ` license.
 	`;
 
@@ -181,7 +180,6 @@ class ReplacePlaceholderForFile {
 					if ( data.length > 0 && data.indexOf( '</html>' ) >= 0 ) {
 						data = data.replace(/\@\@\{website_title\}/g, customWebsiteTitle )
 									.replace(/\@\@\{website_desc\}/g, customWebsiteDesc )
-									.replace(/\@\@\{website_canonical\}/g, customWebsiteCanonical )
 									.replace(/\@\@\{website_author\}/g, customWebsiteAuthor )
 									.replace(/\@\@\{website_generator\}/g, customWebsiteGenerator )
 									.replace(/\@\@\{website_version\}/g, customWebsiteVersion )

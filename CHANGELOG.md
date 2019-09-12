@@ -1,6 +1,12 @@
 # Changelog
 
 
+#### = 3.8.3 (September 12, 2019) =
+
+* Tweak: Remove the canonical URLs (HTML link tags with the attribute rel=canonical) from HTML files.
+
+
+
 #### = 3.8.2 (August 27, 2019) =
 
 * New: Added hook of instance for threejs modules.
