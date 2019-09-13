@@ -58,6 +58,7 @@ import UixRenderCustomSelect from '@uixkit/core/form/js/fn/select';
 
 
 import '../scss/_basic.scss';
+import '../scss/_layout.scss';
 import '../scss/_theme_material.scss';
 import '../scss/_3rd_party_plugins.scss';
 

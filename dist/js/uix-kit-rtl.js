@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  3.8.3
+ * ## Version             :  3.8.5
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  September 12, 2019
+ * ## Last Update         :  September 13, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -75,7 +75,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "02369829234cb8d7c002";
+/******/ 	var hotCurrentHash = "5aa933772abfe4876486";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -803,17 +803,10 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return hotCreateRequire(128)(__webpack_require__.s = 128);
+/******/ 	return hotCreateRequire(130)(__webpack_require__.s = 130);
 /******/ })
 /************************************************************************/
 /******/ ({
-
-/***/ 103:
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
 
 /***/ 104:
 /***/ (function(module, exports, __webpack_require__) {
@@ -976,83 +969,100 @@
 
 /***/ }),
 
+/***/ 127:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ 128:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ 130:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 
 // EXTERNAL MODULE: ./src/components/ES6/_global/scss-rtl/_style.scss
-var _style = __webpack_require__(103);
+var _style = __webpack_require__(104);
 
 // EXTERNAL MODULE: ./src/components/ES6/advanced-slider/scss-rtl/_basic.scss
-var _basic = __webpack_require__(104);
+var _basic = __webpack_require__(105);
 
 // EXTERNAL MODULE: ./src/components/ES6/advanced-slider/scss-rtl/_special.scss
-var _special = __webpack_require__(105);
+var _special = __webpack_require__(106);
 
 // EXTERNAL MODULE: ./src/components/ES6/card/scss-rtl/_style.scss
-var scss_rtl_style = __webpack_require__(106);
+var scss_rtl_style = __webpack_require__(107);
 
 // EXTERNAL MODULE: ./src/components/ES6/content-placeholder-animated/scss-rtl/_style.scss
-var content_placeholder_animated_scss_rtl_style = __webpack_require__(107);
+var content_placeholder_animated_scss_rtl_style = __webpack_require__(108);
 
 // EXTERNAL MODULE: ./src/components/ES6/dropdown-menu/scss-rtl/_style.scss
-var dropdown_menu_scss_rtl_style = __webpack_require__(108);
+var dropdown_menu_scss_rtl_style = __webpack_require__(109);
 
 // EXTERNAL MODULE: ./src/components/ES6/flexslider/scss-rtl/_style.scss
-var flexslider_scss_rtl_style = __webpack_require__(109);
+var flexslider_scss_rtl_style = __webpack_require__(110);
 
 // EXTERNAL MODULE: ./src/components/ES6/form/scss-rtl/_basic.scss
-var scss_rtl_basic = __webpack_require__(110);
+var scss_rtl_basic = __webpack_require__(111);
+
+// EXTERNAL MODULE: ./src/components/ES6/form/scss-rtl/_layout.scss
+var _layout = __webpack_require__(112);
 
 // EXTERNAL MODULE: ./src/components/ES6/form/scss-rtl/_theme_material.scss
-var _theme_material = __webpack_require__(111);
+var _theme_material = __webpack_require__(113);
 
 // EXTERNAL MODULE: ./src/components/ES6/form/scss-rtl/_3rd_party_plugins.scss
-var _3rd_party_plugins = __webpack_require__(112);
+var _3rd_party_plugins = __webpack_require__(114);
 
 // EXTERNAL MODULE: ./src/components/ES6/lightbox/scss-rtl/_style.scss
-var lightbox_scss_rtl_style = __webpack_require__(113);
+var lightbox_scss_rtl_style = __webpack_require__(115);
 
 // EXTERNAL MODULE: ./src/components/ES6/list-brands/scss-rtl/_style.scss
-var list_brands_scss_rtl_style = __webpack_require__(114);
+var list_brands_scss_rtl_style = __webpack_require__(116);
 
 // EXTERNAL MODULE: ./src/components/ES6/list-bulleted/scss-rtl/_style.scss
-var list_bulleted_scss_rtl_style = __webpack_require__(115);
+var list_bulleted_scss_rtl_style = __webpack_require__(117);
 
 // EXTERNAL MODULE: ./src/components/ES6/list-maintain-aspect-ratio/scss-rtl/_style.scss
-var list_maintain_aspect_ratio_scss_rtl_style = __webpack_require__(116);
+var list_maintain_aspect_ratio_scss_rtl_style = __webpack_require__(118);
 
 // EXTERNAL MODULE: ./src/components/ES6/list-side-by-side/scss-rtl/_style.scss
-var list_side_by_side_scss_rtl_style = __webpack_require__(117);
+var list_side_by_side_scss_rtl_style = __webpack_require__(119);
 
 // EXTERNAL MODULE: ./src/components/ES6/login-templates/scss-rtl/_style.scss
-var login_templates_scss_rtl_style = __webpack_require__(118);
+var login_templates_scss_rtl_style = __webpack_require__(120);
 
 // EXTERNAL MODULE: ./src/components/ES6/modal-dialog/scss-rtl/_style.scss
-var modal_dialog_scss_rtl_style = __webpack_require__(119);
+var modal_dialog_scss_rtl_style = __webpack_require__(121);
 
 // EXTERNAL MODULE: ./src/components/ES6/ribbon/scss-rtl/_style.scss
-var ribbon_scss_rtl_style = __webpack_require__(120);
+var ribbon_scss_rtl_style = __webpack_require__(122);
 
 // EXTERNAL MODULE: ./src/components/ES6/single-post/scss-rtl/_style.scss
-var single_post_scss_rtl_style = __webpack_require__(121);
+var single_post_scss_rtl_style = __webpack_require__(123);
 
 // EXTERNAL MODULE: ./src/components/ES6/striking/scss-rtl/_style.scss
-var striking_scss_rtl_style = __webpack_require__(122);
+var striking_scss_rtl_style = __webpack_require__(124);
 
 // EXTERNAL MODULE: ./src/components/ES6/table/scss-rtl/_style.scss
-var table_scss_rtl_style = __webpack_require__(123);
+var table_scss_rtl_style = __webpack_require__(125);
 
 // EXTERNAL MODULE: ./src/components/ES6/tooltip/scss-rtl/_style.scss
-var tooltip_scss_rtl_style = __webpack_require__(124);
+var tooltip_scss_rtl_style = __webpack_require__(126);
 
 // EXTERNAL MODULE: ./src/components/ES6/vertical-menu/scss-rtl/_style.scss
-var vertical_menu_scss_rtl_style = __webpack_require__(125);
+var vertical_menu_scss_rtl_style = __webpack_require__(127);
 
 // EXTERNAL MODULE: ./src/components/ES6/wordpress/scss-rtl/_wp_core.scss
-var _wp_core = __webpack_require__(126);
+var _wp_core = __webpack_require__(128);
 
 // CONCATENATED MODULE: ./src/components/ES6/_app-load-rtl.js
 /*
@@ -1074,6 +1084,7 @@ var _wp_core = __webpack_require__(126);
 /******/
 
 /* pages */
+
 
 
 

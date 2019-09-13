@@ -1,5 +1,10 @@
 # Changelog
 
+#### = 3.8.5 (September 13, 2019) =
+
+* Tweak: Added left and right separate layout with Flex for form.
+* New: Add a new module "Form Layout".
+
 
 #### = 3.8.3 (September 12, 2019) =
 

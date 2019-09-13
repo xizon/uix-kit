@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  3.8.3
+ * ## Version             :  3.8.5
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  September 12, 2019
+ * ## Last Update         :  September 13, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -16,109 +16,7 @@
 	---------------------------
 	
 	
-	1.Basic
-    2.Brand
-    3.Bullet List
-    4.Entry
-    5.Footer
-    6.Header Area
-    7.Helper Classes
-    8.Basic Layout Styles
-    9.Loader
-    10.Mobile Menu
-    11.Navigation
-    12.Navs
-    13.Onepage Menu
-    14.Pagination
-    15.Sidebar
-    16.Social Media Icons
-    17.Spacing
-    18.Tags
-    19.Typography
-    20.Video
-    21.Custom Core Scripts & Stylesheets
-    22.Accordion Background Images
-    23.Accordion
-    24.Advanced Content Slider
-    25.Advanced Slider (Basic)
-    26.Advanced Slider (Special Effects)
-    27.Ajax Page Loader (Loading A Page via Ajax Into Div)
-    28.Back to Top
-    29.Circle Layout
-    30.Counter
-    31.Dropdown Menu
-    32.Dropdown Menu 2 (Multi-level drop-down navigation)
-    33.Flexslider
-    34.Floating Side Element
-    35.Form Progress
-    36.Form
-    37.Form  ( Material Design Theme )
-    38.Form ( 3rd Party Plugin )
-    39.Gallery
-    40.Image Shapes
-    41.Lava-Lamp Style Menu
-    42.Cutom Light Box
-    43.Bulleted List
-    44.List of Posts
-    45.List of Split Posts
-    46.Fullwidth List of Split
-    47.Login Templates
-    48.Modal Dialog
-    49.Multiple Items Carousel
-    50.Parallax
-    51.Periodical Scroll
-    52.Pricing
-    53.Progress Bar
-    54.Progress Line
-    55.Show More Less
-    56.Sticky Elements
-    57.SVG Map
-    58.3D Background
-    59.3D Carousel
-    60.3D Shatter Slider
-    61.3D Explosive Particle Slider
-    62.Table
-    63.Tabs
-    64.Team Focus
-    65.Text effect
-    66.Timeline
-    67.Vertical Menu
-    68.WordPress Core ( Do not use prefix "uix-" )
-    69.3rd Party Plugins
-    70.Badges
-    71.Blended Grid Layout
-    72.Breadcrumbs
-    73.Button
-    74.Cards
-    75.Badges
-    76.Content Placeholder Animated
-    77.Dividing Line
-    78.Dots
-    79.Dotted Line
-    80.Equal-width Columns
-    81.Features
-    82.Footer Templates
-    83.Heading
-    84.Image Animation
-    85.Brands List
-    86.Maintain Aspect Ratio List
-    87.Side by Side List
-    88.Side by Side List With Photo
-    89.Fullwidth List of Split 2
-    90.Mouse Animation Scroll
-    91.Overlay
-    92.Ribbon
-    93.Shape Animation
-    94.Comments ( Synchronize to WordPress's class name )
-    95.Editing Component
-    96.Striking
-    97.Team Fullwidth (Style using the Side by Side List With Photo module)
-    98.Team Gird
-    99.Testimonials Carousel
-    100.ToolTip
-    101.Vertical Separator
-    102.Wave Background
-
+	${{TOC}}
 
 */
 /******/
@@ -5795,6 +5693,33 @@ select:-webkit-autofill:focus {
     display: none; }
   .uix-controls__dynamic-fields-container .uix-controls__dynamic-fields__tmpl__wrapper:first-child .uix-controls__dynamic-fields__removebtn {
     display: none; }
+
+/* ======================================================
+    <!-- Form ( Layout )- -->
+/* ====================================================== */
+.uix-controls-layout {
+  align-items: center;
+  display: flex;
+  padding: 0.54688rem 0; }
+  .uix-controls-layout .uix-controls-layout__content {
+    flex-grow: 1; }
+    .uix-controls-layout .uix-controls-layout__content .uix-controls-layout__content__inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center; }
+      .uix-controls-layout .uix-controls-layout__content .uix-controls-layout__content__inner > div:first-child {
+        margin-right: 1.5rem;
+        width: 150px; }
+      .uix-controls-layout .uix-controls-layout__content .uix-controls-layout__content__inner > div:last-child {
+        flex-grow: 1; }
+  .uix-controls-layout .uix-controls-layout__icon {
+    flex-grow: 0;
+    margin-left: 1rem; }
+
+@media all and (max-width: 768px) {
+  .uix-controls-layout .uix-controls-layout__content .uix-controls-layout__content__inner > div:first-child {
+    margin-right: 0;
+    width: 100%; } }
 
 /* ======================================================
     <!-- Form  ( Material Design Theme )-->

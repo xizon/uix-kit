@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  3.8.3
+ * ## Version             :  3.8.5
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  September 12, 2019
+ * ## Last Update         :  September 13, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -16,41 +16,7 @@
 	---------------------------
 	
 	
-	1.Basic
-    2.Brand
-    3.Bullet List
-    4.Header Area
-    5.Helper Classes
-    6.Basic Layout Styles
-    7.Mobile Menu
-    8.Navigation
-    9.Navs
-    10.Sidebar
-    11.Typography
-    12.Advanced Slider (Basic)
-    13.Advanced Slider (Special Effects)
-    14.Cards
-    15.Content Placeholder Animated
-    16.Dropdown Menu
-    17.Flexslider
-    18.Form
-    19.Form  ( Material Design Theme )
-    20.Form
-    21.Cutom Light Box
-    22.Brands List
-    23.Bulleted List
-    24.Maintain Aspect Ratio List
-    25.Side by Side List
-    26.Login Templates
-    27.Modal Dialog
-    28.Ribbon
-    29.Comments
-    30.Striking
-    31.Table
-    32.ToolTip
-    33.Vertical Menu (RTL)
-    34.WordPress Core ( Do not use prefix "uix-" )
-
+	${{TOC}}
 
 */
 /**
@@ -918,6 +884,21 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
 .uix-search-box .uix-search-box__submit {
   right: auto;
   left: 0.875rem; }
+
+/* ======================================================
+    <!-- Form ( Layout )- -->
+/* ====================================================== */
+.uix-controls-layout .uix-controls-layout__content .uix-controls-layout__content__inner > div:first-child {
+  margin-right: auto;
+  margin-left: 1.5rem; }
+
+.uix-controls-layout .uix-controls-layout__icon {
+  margin-left: auto;
+  margin-right: 1rem; }
+
+@media all and (max-width: 768px) {
+  .uix-controls-layout .uix-controls-layout__content .uix-controls-layout__content__inner > div:first-child {
+    margin-left: 0; } }
 
 /* ======================================================
     <!-- Form  ( Material Design Theme )-->
