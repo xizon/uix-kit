@@ -28,7 +28,7 @@
         z-index: 1;
 		display: none;
         transform: translateX(0);
-        background: $primary-text-color1;
+        background: $primary-text-color;
         @include transition-default();
         
 		&.is-active {

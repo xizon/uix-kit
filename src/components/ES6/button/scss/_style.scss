@@ -60,7 +60,7 @@ $button-class-margin-b: 1rem;
 		box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.05) !important;
 		pointer-events: none !important;
 		user-select: none !important;
-		color: $primary-text-color2 !important;
+		color: $primary-link-color !important;
 	}
 
 
@@ -352,44 +352,64 @@ $button-class-margin-b: 1rem;
 		box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.05);
 
 		&:hover {
-			background-color: $btn-gradient-color1;
-			background-image: linear-gradient(to right, $btn-gradient-color1 0%, $btn-gradient-color2 20%, $btn-gradient-color3 100%);
-			color: #fff;
+			background-color: #F8F8F8;
+            background-image: linear-gradient(to right, #F8F8F8 0%, #F8F8F8 20%, #F8F8F8 100%);
+            color: $btn-gradient-color1;
 		}
 	}
 }
 
 
-
 .uix-btn__bg--secondary {
 
 	&:not(.is-fill-white) {
-		border-color: #fff;
+		border-color: #DADCDF;
 		background-color: transparent;
-		box-shadow: 0 4px 15px 0 rgba(255, 255, 255, 0.2);
+		box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.05);
 		color: #fff;
 	}
 
 	&.is-fill-white {
-		border-color: #fff;
+		border-color: #DADCDF;
 		background-color: #fff;
-		box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.2);
-		color: $primary-text-color2;
+		color: $primary-link-color;
 	}
 
 	&:hover {
-		background-color: #fff;
-		color: $primary-text-color2;
+		background-color: #F8F8F8;
+		color: $primary-link-color;
 	}
 
-
-	&.is-fill-white:hover {
-		box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.6);
-	}
 
 }
 
 
+
+.uix-btn__bg--hyperlink {
+    border-color: transparent;
+    background-color: transparent;
+    box-shadow: none;
+    color: $btn-gradient-color1;
+
+	
+	&:hover {
+		background-color: #F8F8F8;
+        color: $btn-gradient-color1;
+	}
+}
+
+.uix-btn__bg--hyperlink2 {
+    border-color: transparent;
+    background-color: transparent;
+    box-shadow: none;
+    color: $primary-link-color;
+
+	
+	&:hover {
+		background-color: #F8F8F8;
+        color: $primary-link-color;
+	}
+}
 
 /*
  ---------------------------

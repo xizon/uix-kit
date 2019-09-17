@@ -1,5 +1,12 @@
 # Changelog
 
+#### = 3.8.6 (September 17, 2019) =
+
+* New: Added a hyperlink style to Button. 
+* New: Added RTL style of Button component.
+* Tweak: Change the file name of parallax "parallax.js" to "UixParallax.js".
+
+
 #### = 3.8.5 (September 13, 2019) =
 
 * Tweak: Added left and right separate layout with Flex for form.

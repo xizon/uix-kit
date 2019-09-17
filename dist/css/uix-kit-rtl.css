@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  3.8.55
+ * ## Version             :  3.8.6
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  September 13, 2019
+ * ## Last Update         :  September 17, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -29,28 +29,29 @@
     11.Typography
     12.Advanced Slider (Basic)
     13.Advanced Slider (Special Effects)
-    14.Cards
-    15.Content Placeholder Animated
-    16.Dropdown Menu
-    17.Flexslider
-    18.Form
-    19.Form ( Layout )-
-    20.Form  ( Material Design Theme )
-    21.Form
-    22.Cutom Light Box
-    23.Brands List
-    24.Bulleted List
-    25.Maintain Aspect Ratio List
-    26.Side by Side List
-    27.Login Templates
-    28.Modal Dialog
-    29.Ribbon
-    30.Comments
-    31.Striking
-    32.Table
-    33.ToolTip
-    34.Vertical Menu (RTL)
-    35.WordPress Core ( Do not use prefix "uix-" )
+    14.Button
+    15.Cards
+    16.Content Placeholder Animated
+    17.Dropdown Menu
+    18.Flexslider
+    19.Form
+    20.Form ( Layout )-
+    21.Form  ( Material Design Theme )
+    22.Form
+    23.Cutom Light Box
+    24.Brands List
+    25.Bulleted List
+    26.Maintain Aspect Ratio List
+    27.Side by Side List
+    28.Login Templates
+    29.Modal Dialog
+    30.Ribbon
+    31.Comments
+    32.Striking
+    33.Table
+    34.ToolTip
+    35.Vertical Menu (RTL)
+    36.WordPress Core ( Do not use prefix "uix-" )
 
 
 */
@@ -597,6 +598,82 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
   right: auto;
   left: 15px;
   text-align: left; }
+
+/* ======================================================
+   <!-- Button -->
+/* ====================================================== */
+/*
+ * 4. Icons
+ * 5. Group
+ * 7. Margin
+*/
+/*
+ ---------------------------
+ 4. Icons
+ ---------------------------
+ */
+.uix-btn__icon {
+  padding-left: auto;
+  padding-right: 3.6rem; }
+  .uix-btn__icon.uix-btn__icon--right {
+    padding-left: 3.6rem;
+    padding-right: 2.5rem; }
+    .uix-btn__icon.uix-btn__icon--right > span {
+      left: 0;
+      right: auto; }
+  .uix-btn__icon > span {
+    left: auto;
+    right: 0; }
+  .uix-btn__icon.uix-btn__icon--left > span {
+    right: 0; }
+  .uix-btn__icon.is-transparent.uix-btn__icon--left > span {
+    border-right: none;
+    border-left: 1px solid rgba(0, 0, 0, 0.1); }
+  .uix-btn__icon.is-transparent.uix-btn__icon--right > span {
+    border-left: none;
+    border-right: 1px solid rgba(0, 0, 0, 0.1); }
+  .uix-btn__icon.is-pill.uix-btn__icon--left span {
+    border-radius: 35px 35px 0 0; }
+  .uix-btn__icon.is-pill.uix-btn__icon--right span {
+    border-radius: 0 0 50px 50px; }
+  .uix-btn__icon.is-rounded.uix-btn__icon--left span {
+    border-radius: 4px 4px 0 0; }
+  .uix-btn__icon.is-rounded.uix-btn__icon--right span {
+    border-radius: 0 0 4px 4px; }
+
+/*
+ ---------------------------
+ 5. Group
+ ---------------------------
+ */
+.uix-btn__group > .uix-btn {
+  float: right; }
+  .uix-btn__group > .uix-btn.is-rounded:first-child {
+    border-radius: 4px 4px 0 0; }
+  .uix-btn__group > .uix-btn.is-rounded:last-child {
+    border-radius: 0 0 4px 4px; }
+  .uix-btn__group > .uix-btn.uix-btn__border--thin:not(:first-child) {
+    margin-left: auto;
+    margin-right: -1px; }
+  .uix-btn__group > .uix-btn.uix-btn__border--medium:not(:first-child) {
+    margin-left: auto;
+    margin-right: -2px; }
+  .uix-btn__group > .uix-btn.uix-btn__border--thick:not(:first-child) {
+    margin-left: auto;
+    margin-right: -3px; }
+
+/*
+ ---------------------------
+ 7. Margin
+ ---------------------------
+ */
+.uix-btn__margin--l {
+  margin-left: auto;
+  margin-right: 1rem; }
+
+.uix-btn__margin--r {
+  margin-right: auto;
+  margin-left: 1rem; }
 
 /* ======================================================
     <!-- Cards -->

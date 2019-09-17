@@ -1,0 +1,149 @@
+/* ======================================================
+   <!-- Button -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+/*
+ * 4. Icons
+ * 5. Group
+ * 7. Margin
+*/
+
+$button-class-margin-lr: 1rem;
+$button-class-margin-b: 1rem;
+
+
+
+/*
+ ---------------------------
+ 4. Icons
+ ---------------------------
+ */
+
+.uix-btn__icon {
+    padding-left: auto;
+    padding-right: 3.6rem;
+
+
+	&.uix-btn__icon--right {
+		padding-left: 3.6rem;
+		padding-right: 2.5rem;
+
+		> span {
+			left: 0;
+			right: auto;
+		}
+	}
+
+	> span {
+		left: auto;
+        right: 0;
+	}
+
+
+	&.uix-btn__icon--left {
+
+		> span {
+			right: 0;
+		}
+
+	}
+
+	&.is-transparent.uix-btn__icon--left {
+		> span {
+			border-right: none;
+            border-left: 1px solid rgba(0,0,0,.1);
+		}
+	}
+	&.is-transparent.uix-btn__icon--right {
+		> span {
+			border-left: none;
+            border-right: 1px solid rgba(0,0,0,.1);
+		}
+	}
+
+
+	&.is-pill.uix-btn__icon--left span {
+		border-radius: 35px 35px 0 0;
+	}
+
+	&.is-pill.uix-btn__icon--right span {
+		border-radius: 0 0 50px 50px;
+	}
+
+	&.is-rounded.uix-btn__icon--left span {
+		border-radius: 4px 4px 0 0;
+	}
+
+	&.is-rounded.uix-btn__icon--right span {
+		border-radius: 0 0 4px 4px;
+	}
+
+
+
+}
+
+
+/*
+ ---------------------------
+ 5. Group
+ ---------------------------
+ */
+.uix-btn__group {
+
+	> .uix-btn {
+		float: right;
+		
+
+		&.is-rounded {
+
+			&:first-child {
+				border-radius: 4px 4px 0 0;
+			}
+
+			&:last-child {
+				border-radius: 0 0 4px 4px;
+			}
+
+		}
+
+		&.uix-btn__border--thin:not(:first-child) {
+			margin-left: auto;
+            margin-right: -1px;
+		}
+
+		&.uix-btn__border--medium:not(:first-child) {
+			margin-left: auto;
+            margin-right: -2px;
+		}
+
+		&.uix-btn__border--thick:not(:first-child) {
+			margin-left: auto;
+            margin-right: -3px;
+		}
+
+
+
+	}
+
+	
+
+}
+
+
+
+/*
+ ---------------------------
+ 7. Margin
+ ---------------------------
+ */
+
+.uix-btn__margin--l {
+	margin-left: auto;
+    margin-right: #{$button-class-margin-lr};
+}
+
+.uix-btn__margin--r {
+	margin-right: auto;
+    margin-left: #{$button-class-margin-lr};
+}

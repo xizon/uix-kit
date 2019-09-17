@@ -85,7 +85,7 @@ $line-bar-w: 45px;
 		font-weight: bold;
 		display: block;
 		padding-top: 1.5rem;
-		color: $primary-text-color1;
+		color: $primary-text-color;
 		@include ellipsis();
 		@include transition-default();
 	}

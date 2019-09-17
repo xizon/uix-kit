@@ -39,7 +39,7 @@ h6,
  ---------------------------
  */ 
 a {
-	color: $primary-text-color2;
+	color: $primary-link-color;
 	text-decoration: none;
 	
 	&:hover{
@@ -237,7 +237,7 @@ h6 {
 }
 
 .uix-typo--color-primary {
-	color: $primary-text-color1 !important;
+	color: $primary-text-color !important;
 	
 	p,
 	h1, 
@@ -252,7 +252,7 @@ h6 {
 	.uix-typo--h4, 
 	.uix-typo--h5, 
 	.uix-typo--h6 {
-	    color: $primary-text-color1;
+	    color: $primary-text-color;
 	}
 }
 

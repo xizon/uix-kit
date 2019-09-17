@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  3.8.55
+ * ## Version             :  3.8.6
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  September 13, 2019
+ * ## Last Update         :  September 17, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -12046,28 +12046,42 @@ ul.edd_purchase_receipt_files li {
     color: #EC5E79;
     box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.05); }
     .uix-btn__bg--primary.is-transparent:hover {
-      background-color: #EC5E79;
-      background-image: linear-gradient(to right, #EC5E79 0%, #f60 20%, #d83ba0 100%);
-      color: #fff; }
+      background-color: #F8F8F8;
+      background-image: linear-gradient(to right, #F8F8F8 0%, #F8F8F8 20%, #F8F8F8 100%);
+      color: #EC5E79; }
 
 .uix-btn__bg--secondary:not(.is-fill-white) {
-  border-color: #fff;
+  border-color: #DADCDF;
   background-color: transparent;
-  box-shadow: 0 4px 15px 0 rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.05);
   color: #fff; }
 
 .uix-btn__bg--secondary.is-fill-white {
-  border-color: #fff;
+  border-color: #DADCDF;
   background-color: #fff;
-  box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.2);
   color: #474747; }
 
 .uix-btn__bg--secondary:hover {
-  background-color: #fff;
+  background-color: #F8F8F8;
   color: #474747; }
 
-.uix-btn__bg--secondary.is-fill-white:hover {
-  box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.6); }
+.uix-btn__bg--hyperlink {
+  border-color: transparent;
+  background-color: transparent;
+  box-shadow: none;
+  color: #EC5E79; }
+  .uix-btn__bg--hyperlink:hover {
+    background-color: #F8F8F8;
+    color: #EC5E79; }
+
+.uix-btn__bg--hyperlink2 {
+  border-color: transparent;
+  background-color: transparent;
+  box-shadow: none;
+  color: #474747; }
+  .uix-btn__bg--hyperlink2:hover {
+    background-color: #F8F8F8;
+    color: #474747; }
 
 /*
  ---------------------------

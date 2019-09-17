@@ -45,7 +45,7 @@
 				text-align: center;
 				background: none;
 				border: none;
-				color: $primary-text-color1;
+				color: $primary-text-color;
 				font-variant-ligatures: common-ligatures;
 				border-radius: 4px;
 				/*Ligatures and contextual forms are ways of combining glyphs to produce more harmonized forms.*/
@@ -121,7 +121,7 @@
 		font-style: italic;
 
 		> span {
-			color: $primary-text-color1;
+			color: $primary-text-color;
 			background: #F9F9F9;
 			padding: 0 0.2625rem;
 			border: 1px solid #DDDDDD;

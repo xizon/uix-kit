@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  3.8.55
+ * ## Version             :  3.8.6
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  September 13, 2019
+ * ## Last Update         :  September 17, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "67aac3a1c5864d9bab9a";
+/******/ 	var hotCurrentHash = "5ce3ec14c73252fdcf40";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -4127,8 +4127,8 @@ var NAVIGATION = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/_global/js/fn/parallax.js
-var parallax = __webpack_require__(0);
+// EXTERNAL MODULE: ./src/components/ES6/_global/js/fn/UixParallax.js
+var UixParallax = __webpack_require__(0);
 
 // CONCATENATED MODULE: ./src/components/ES6/_global/js/modules/set-background.js
 function set_background_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }

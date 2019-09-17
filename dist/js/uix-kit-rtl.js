@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  3.8.55
+ * ## Version             :  3.8.6
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  September 13, 2019
+ * ## Last Update         :  September 17, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -75,7 +75,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "67aac3a1c5864d9bab9a";
+/******/ 	var hotCurrentHash = "5ce3ec14c73252fdcf40";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -998,8 +998,11 @@ var _basic = __webpack_require__(105);
 // EXTERNAL MODULE: ./src/components/ES6/advanced-slider/scss-rtl/_special.scss
 var _special = __webpack_require__(106);
 
+// EXTERNAL MODULE: ./src/components/ES6/button/scss-rtl/_style.scss
+var scss_rtl_style = __webpack_require__(131);
+
 // EXTERNAL MODULE: ./src/components/ES6/card/scss-rtl/_style.scss
-var scss_rtl_style = __webpack_require__(107);
+var card_scss_rtl_style = __webpack_require__(107);
 
 // EXTERNAL MODULE: ./src/components/ES6/content-placeholder-animated/scss-rtl/_style.scss
 var content_placeholder_animated_scss_rtl_style = __webpack_require__(108);
@@ -1109,6 +1112,7 @@ var _wp_core = __webpack_require__(128);
 
 
 
+
 // CONCATENATED MODULE: ./src/index-rtl.js
 /*
  * Import RTL modules from components of ES6
@@ -1116,6 +1120,13 @@ var _wp_core = __webpack_require__(128);
  *        
  */
 
+
+/***/ }),
+
+/***/ 131:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ })
 

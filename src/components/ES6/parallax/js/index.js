@@ -15,7 +15,7 @@ import {
     UixMath,
     UixCssProperty
 } from '@uixkit/core/_global/js';
-import UixParallax from '@uixkit/core/_global/js/fn/parallax';
+import UixParallax from '@uixkit/core/_global/js/fn/UixParallax';
 
 import '../scss/_style.scss';
 

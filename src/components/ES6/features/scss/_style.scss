@@ -22,7 +22,7 @@ $features-icon-size: 1.5rem;
 		}
 
 		&.is-bordered {
-			border: 1px $primary-text-color1 solid;
+			border: 1px $primary-text-color solid;
 
 
 			i {
@@ -31,8 +31,8 @@ $features-icon-size: 1.5rem;
 		}
 
 		&:hover {
-			background: $primary-text-color1;
-			border-color: $primary-text-color1;
+			background: $primary-text-color;
+			border-color: $primary-text-color;
 
 
 			i {
@@ -94,7 +94,7 @@ $features-icon-size: 1.5rem;
 				z-index: 0;
 				left: 0;
 				top: 0;
-				border: 1px $primary-text-color1 solid;
+				border: 1px $primary-text-color solid;
 				text-align: center;
 				margin-right: 1rem;
 

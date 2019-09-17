@@ -18,6 +18,7 @@ import '@uixkit/core/_global/scss-rtl/_style.scss';
 /* pages */
 import '@uixkit/core/advanced-slider/scss-rtl/_basic.scss';
 import '@uixkit/core/advanced-slider/scss-rtl/_special.scss';
+import '@uixkit/core/button/scss-rtl/_style.scss';
 import '@uixkit/core/card/scss-rtl/_style.scss';
 import '@uixkit/core/content-placeholder-animated/scss-rtl/_style.scss';
 import '@uixkit/core/dropdown-menu/scss-rtl/_style.scss';

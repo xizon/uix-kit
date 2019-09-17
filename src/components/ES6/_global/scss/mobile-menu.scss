@@ -126,7 +126,7 @@
     font-family: $font-mobile-stack;
     font-size: 15px;
     background: #f8f8f8;
-    color: $primary-text-color1;
+    color: $primary-text-color;
     box-shadow: 0px 0px 37px 0px rgba(0, 0, 0, 0.1);
 
 	
@@ -150,13 +150,13 @@
 			
 			/* Social button for white color */
 			.uix-social-btn--white {
-				border-color: $primary-text-color1;
-				color: $primary-text-color1;
+				border-color: $primary-text-color;
+				color: $primary-text-color;
 
 				&:hover {
 
 					i {
-						color: $primary-text-color1;
+						color: $primary-text-color;
 					}
 
 					&::after {
@@ -178,7 +178,7 @@
         font-weight: normal;
         padding: 0 15px;
         margin: 0 0 5px;
-        color: $primary-text-color1;
+        color: $primary-text-color;
         line-height: 24px;
         box-shadow: 0 5px 5px 3px rgba(0, 0, 0, 0.2);
     }
@@ -217,7 +217,7 @@
                 padding: 0 15px;
                 display: block;
                 text-decoration: none;
-                color: $primary-text-color1;
+                color: $primary-text-color;
             }
 			
             a:hover {
@@ -378,7 +378,7 @@
 		  &[type="button"], 
 	      &[type="submit"] {
 		      color: #f8f8f8;
-		      background: $primary-text-color1;
+		      background: $primary-text-color;
 		  }
 		  &[type="button"]:hover, 
 		  &[type="submit"]:hover {
